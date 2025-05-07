@@ -1335,7 +1335,7 @@ TSTacticalMissileDamage:
 		ValidTargets: Air
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@Reveal: RevealShroud
-		Duration: 150
+		Duration: 160
 		Radius: 7c0
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
@@ -1375,25 +1375,46 @@ TSMissileBomblet:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
 
-TSChemTacticalMissile:
+
+TSTacticalChemMissile:
+	Inherits: TSTacticalMissile
+	Projectile: Missile
+		Palette: windows256
+		TrailPalette: windows256
+	Warhead@1Dam: FireFragment
+		Weapon: TSTacticalChemMissileDamage
+
+TSTacticalChemMissileDamage:
+	Inherits: TSTacticalMissileDamage
+	Warhead@Cluster2: FireRadius
+		Weapon: TSChemBomblet
+		ImpactActors: false
+		Amount: 8
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		AirThreshold: 8c0
+
+TSChemBomblet:
+	Inherits: TSMissileBomblet
+	Projectile: GravityBomb
+		Velocity: 36, 0, 280
+		Acceleration: 0, 0, -12
+		Shadow: true
+		Image: tsbomb
+		Sequences: idle
+		Palette: tseffect
 	Warhead@1Dam: SpreadDamage
-		Spread: 3c0
-		Damage: 47000
-		Versus:
-			None: 50
 		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
-	Warhead@2Eff: CreateEffect
-		Explosions: verylarge_twlt
-		ExplosionPalette: tseffect
-		ImpactSounds: expnew06.aud
-	Warhead@3Smu: LeaveSmudge
-		SmudgeType: Scorch
-	Warhead@4Res: CreateResource
-		AddsResourceType: Tiberium
-		Size: 2,2
-	Warhead@6Cloud: SpawnActor
-		Actors: tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1
-		Range: 4
+	Warhead@5cloud: SpawnSmokeParticle
+		Count: 2
+		Weapon: TSCloud
+		Duration: 400
+		Speed: 30
+		TurnRate: 16
+		Image: tscloud1
+		Sequences: idle
+		EndSequences: die
+		Palette: tseffect
+		AirThreshold: 8c0
 
 TSHSeekerBomb:
 	Range: 0c128

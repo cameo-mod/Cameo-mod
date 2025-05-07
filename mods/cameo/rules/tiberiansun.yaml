@@ -2191,21 +2191,35 @@ tsntmisl:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
 	AttackFollow:
+	GrantConditionOnPrerequisite@chem:
+		Condition: tsntwast
+		Prerequisites: tsntwast
 	Armament@superweapon1:
-	 	Name: superweapon1
-	 	Weapon: TSTacticalMissile
+		Name: superweapon
+		Weapon: TSTacticalMissile
+		RequiresCondition: !tsntwast
+	Armament@superweapon2:
+		Name: superweapon
+		Weapon: TSTacticalChemMissile
+		RequiresCondition: tsntwast
 	FireArmamentPower:
 		AllowMultiple: true
-		ArmamentName: superweapon1
+		ArmamentName: superweapon
+		Prerequisites:
+			1: ~techlevel.superweapons
+			2: tsntwast
 		Cursor: nuke
 		Icons:
-			1: abomb #multimiss
+			1: multimiss
+			2: chemicalmiss
 		TargetCircleRange: 5c0
 		ChargeInterval: 6000
 		Names:
 			1: power-nuke.raname
+			2: power-nuke.raname
 		Descriptions:
 			1: power-nuke.description
+			2: power-nuke.description
 		SelectTargetSpeechNotification: SelectTarget
 		SelectTargetTextNotification: Select target.
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -2215,14 +2229,13 @@ tsntmisl:
 		LaunchTextNotification: Warning: Nuclear Missile launched.
 		IncomingSpeechNotification: NuclearWarheadApproaching
 		IncomingTextNotification: Warning: Nuclear Missile launched.
-		Prerequisites:
-			1: ~techlevel.superweapons
 		OrderName: NukePowerInfoOrder
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 		PauseOnCondition: empdisable || disabled
 		CameraRange: 5c0
 		CameraSpawnAdvance: 25
 		CameraRemoveDelay: 350
+	
 	# NukePower@tactmiss:
 	# 	AllowMultiple: true
 	# 	OrderName: TSClusterMissile
