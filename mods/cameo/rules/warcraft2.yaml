@@ -199,6 +199,9 @@ Player:
 	GrantConditionOnPowerState@supply:
 		Condition: lowpower
 		ValidPowerStates: Low, Critical
+	ProvidesPrerequisite@supplylimit:
+		Prerequisite: supplylimit
+		RequiresCondition: lowpower
 	Production@NORMAL:
 		PauseOnCondition: lowpower || disabled
 	Production@CLASSICPRODUCTIONQUEUES:
@@ -1018,11 +1021,11 @@ WC2 SPELL/STATUS EFFECT INHERITABLES
 		PipCount: 5
 
 ^wc2_barracks:
-	Inherits@barr: ^IsBarrack
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@barr: ^IsBarrack
 	Buildable:
 		BuildPaletteOrder: 12
 	Building:
@@ -1039,6 +1042,12 @@ WC2 SPELL/STATUS EFFECT INHERITABLES
 		Prerequisite: barracks
 	ParallelProductionQueue@INFANTRY:
 		LowPowerModifier: 10000
+	ProductionCostMultiplier@wc2:
+		Multiplier: 150
+	ProductionTimeMultiplier@wc2:
+		Multiplier: 150
+	DamageMultiplier@wc2:
+		Modifier: 75
 
 ^wc2_lumber_mill:
 	Inherits@ref: ^Refinery
@@ -1114,11 +1123,11 @@ WC2 SPELL/STATUS EFFECT INHERITABLES
 		Prerequisite: wc_blacksmith
 
 ^wc2_inventor:
-	Inherits@weap: ^IsWeaponFactory
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@weap: ^IsWeaponFactory
 	Buildable:
 		BuildPaletteOrder: 16
 	Building:
@@ -1134,6 +1143,12 @@ WC2 SPELL/STATUS EFFECT INHERITABLES
 		Condition: produced
 	ParallelProductionQueue@VEHICLE:
 		LowPowerModifier: 10000
+	ProductionCostMultiplier@wc2:
+		Multiplier: 150
+	ProductionTimeMultiplier@wc2:
+		Multiplier: 150
+	DamageMultiplier@wc2:
+		Modifier: 75
 
 ^wc2_stables:
 	Inherits@shape: ^3x3Shape
@@ -1228,11 +1243,11 @@ WC2 SPELL/STATUS EFFECT INHERITABLES
 		LowPowerModifier: 10000
 
 ^wc2_nest:
-	Inherits@hpad: ^IsAircraftFactory
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
 		BuildPaletteOrder: 19
 	Building:
@@ -1247,6 +1262,12 @@ WC2 SPELL/STATUS EFFECT INHERITABLES
 		Condition: produced
 	ParallelProductionQueue@AIRCRAFT:
 		LowPowerModifier: 10000
+	ProductionCostMultiplier@wc2:
+		Multiplier: 150
+	ProductionTimeMultiplier@wc2:
+		Multiplier: 150
+	DamageMultiplier@wc2:
+		Modifier: 75
 
 ^wc2_shipyard:
 	Inherits@shipyard: ^IsShipyard
@@ -2070,17 +2091,20 @@ wc2_human_townhall:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@aicash: ^AIConyardCash
 	Inherits@bot: ^BotMicromanageable
-	Inherits@breedfaster: ^SCBREEDFASTER
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Town Hall
-		RequiresCondition: !wc2_human_townhall && !wc2_human_castle
+		RequiresCondition: !wc2_human_keep && !wc2_human_castle
 	Tooltip@2:
 		Name: Keep
 		RequiresCondition: wc2_human_keep && !wc2_human_castle
 	Tooltip@3:
 		Name: Castle
 		RequiresCondition: wc2_human_castle
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
 	Selectable:
 		Bounds: 3072, 2048
 		DecorationBounds: 3300, 2448, 0, 0
@@ -2173,11 +2197,11 @@ wc2_human_keep:
 	Tooltip:
 		Name: Keep
 	Valued:
-		Cost: 1400
+		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Defence, RADefence
-		Prerequisites:  ~wc2_human_townhall, keepupgradeavailable
+		Prerequisites:  ~wc2_human_townhall, keepupgradeavailable, wc2_human_blacksmith
 		Description: Unlocks more advanced buildings.
 	Plug:
 		Type: wc2_human_townhall
@@ -2187,11 +2211,11 @@ wc2_human_castle:
 	Tooltip:
 		Name: Castle
 	Valued:
-		Cost: 2000
+		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Defence, RADefence
-		Prerequisites: ~wc2_human_keep, castleupgradeavailable
+		Prerequisites: ~wc2_human_keep, castleupgradeavailable, wc2_human_gnomish_inventor, wc2_human_stables
 		Description: Unlocks more advanced buildings.
 	Plug:
 		Type: wc2_human_keep
@@ -2322,7 +2346,6 @@ wc2_human_barracks:
 		Queue: Building, RABuilding
 		Description: Warriors of the Alliance live and train here.\nProduces many Human units.
 		Prerequisites: ~wc2_human_farm
-
 	SpawnActorsOnSell:
 		ActorTypes: wc2_human_footman
 	Voiced:
@@ -2965,7 +2988,7 @@ wc2_human_peasant:
 	Tooltip:
 		Name: Peasant
 	Buildable:
-		Prerequisites: ~wc2_human_townhall
+		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill
 		Queue: Defence, RADefence
 		Description: Harvester.
 	Armament:
@@ -3834,6 +3857,10 @@ wc2_orc_greathall:
 	Tooltip@3:
 		Name: Fortress
 		RequiresCondition: wc2_orc_fortress
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
 	Selectable:
 		Bounds: 3072, 2048
 		DecorationBounds: 3300, 2448, 0, 0
@@ -3926,11 +3953,11 @@ wc2_orc_stronghold:
 	Tooltip:
 		Name: Stronghold
 	Valued:
-		Cost: 1400
+		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Defence, RADefence
-		Prerequisites:  ~wc2_orc_greathall, strongholdupgradeavailable
+		Prerequisites:  ~wc2_orc_greathall, strongholdupgradeavailable, wc2_orc_blacksmith
 		Description: Unlocks more advanced buildings.
 	Plug:
 		Type: wc2_orc_greathall
@@ -3940,11 +3967,11 @@ wc2_orc_fortress:
 	Tooltip:
 		Name: Fortress
 	Valued:
-		Cost: 2000
+		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Defence, RADefence
-		Prerequisites: ~wc2_orc_stronghold, fortressupgradeavailable
+		Prerequisites: ~wc2_orc_stronghold, fortressupgradeavailable, wc2_orc_goblin_alchemist, wc2_orc_ogre_mound
 		Description: Unlocks more advanced buildings.
 	Plug:
 		Type: wc2_orc_stronghold
@@ -4650,7 +4677,7 @@ wc2_orc_peon:
 	Tooltip:
 		Name: Peon
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill
 		Queue: Defence, RADefence
 		Description: Harvester. Zug zug!
 	Armament:

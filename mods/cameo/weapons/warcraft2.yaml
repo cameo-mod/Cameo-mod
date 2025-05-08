@@ -1093,10 +1093,23 @@ wc2catapultFire:
 
 # Death Knight basic attack
 wc2deathknightFire:
+	Inherits: ^HeavyFlameWeapon
 	Inherits: wc2mageFire
 	Report: wc2_touchdrk.aud
 	Projectile:
 		Image: wc2_effect_death_knight_attack
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect:
 		Image: wc2_effect_death_knight_attack
 
@@ -1229,15 +1242,15 @@ wc2deathknightDeathAndDecay_Hit:
 		Sequences: idle1, idle2
 	Warhead@LightFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Damage: 4000
+		Damage: 40000
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
+		Damage: 20000
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2
+		Damage: 20
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@Effect: CreateEffect
 		Image: wc2_effect_death_and_decay

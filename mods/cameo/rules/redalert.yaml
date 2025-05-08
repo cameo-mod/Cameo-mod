@@ -743,7 +743,6 @@ DOG:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
 		Prerequisites: ~barr, ~!upcyberdog
-		BuildAtProductionType: Dog
 		Description: actor-dog.description
 	Valued:
 		Cost: 200
@@ -5607,7 +5606,7 @@ KENN:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 175
-		Prerequisites: ~rafact.soviet, rabarracks, ~disabled
+		Prerequisites: ~rafact.soviet, barr, ~disabled
 		Description: Trains Attack Dogs.
 	Valued:
 		Cost: 200
@@ -9348,7 +9347,6 @@ cyberdog:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
 		Prerequisites: ~upcyberdog, ~barr
-		BuildAtProductionType: Dog
 		Description: Cybernetically modified dog that is far more durable and can attack vehicles.
 	Valued:
 		Cost: 1000

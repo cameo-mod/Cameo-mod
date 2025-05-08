@@ -1940,6 +1940,7 @@ outpost.ordos:
 		SquadSizes:
 			1: 3
 		SquadOffset: 1792,1792,0
+
 ixian_launchpad:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
@@ -1961,14 +1962,17 @@ ixian_launchpad:
 	RallyPoint:
 	RenderSprites:
 		PlayerPalette: player_rgba
-		Image: hightech.atreides
-	WithProductionOverlay@WELDING:
-		RequiresCondition: !build-incomplete
-		Queues: Aircraft
-		Sequence: production-welding
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@high_tech_factory:
+		Prerequisite: high_tech_factory
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Condition: upgrade_hightech
+		Prerequisites: upgrade_hightech
+	DamageMultiplier@upgrade_hightech:
+		RequiresCondition: upgrade_hightech
+		Modifier: 75
 	ActorStatValues:
-		Upgrades: upgrade.hightech
+		Upgrades: upgrade_hightech
 	-WithDeathAnimation:
 	FireProjectilesOnDeath:
 		Weapons: Debris2, Debris3
@@ -1982,6 +1986,7 @@ ixian_launchpad:
 		Actor: light_inf
 	SpawnActorOnDeath@death4:
 		Actor: trooper
+
 high_tech_factory.ordos:
 	Inherits: high_tech_factory.ixian
 	Buildable:
@@ -2113,6 +2118,7 @@ high_tech_factory.ixian:
 	ProvidesPrerequisite@high_tech_factory:
 		Prerequisite: high_tech_factory
 	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Condition: upgrade_hightech
 		Prerequisites: upgrade_hightech
 	DamageMultiplier@upgrade_hightech:
 		RequiresCondition: upgrade_hightech
@@ -10347,6 +10353,7 @@ upgrade_hightech:
 		Cost: 1250
 	RenderSprites:
 		Image: hightech.atreides
+
 d2k_wind_trap_upgrade:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
