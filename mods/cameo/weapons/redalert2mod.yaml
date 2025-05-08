@@ -1887,6 +1887,10 @@ bfg10kCannonDummy:
 	Warhead: TargetDamage
 		ValidTargets: Ground, Water, Trees, Air
 
+superbfg10kCannonDummy:
+	Inherits: bfg10kCannonDummy
+	Range: 9999c0
+
 bfg10kCannon:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: ^MagicWeapon
@@ -1956,6 +1960,10 @@ bfg10kCannon:
 		Explosions: ra2radbang
 		ExplosionPalette: ra2effect
 		ImpactSounds: makoexplose.wav
+
+superbfg10kCannon:
+	Inherits: bfg10kCannon
+	Range: 9999c0
 
 SteelMakoGun:
 	Inherits: ^MediumFlameWeapon
