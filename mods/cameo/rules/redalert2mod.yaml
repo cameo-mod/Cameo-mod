@@ -7911,13 +7911,62 @@ steel_bfg10k:
 		LocalOffset: 2500,0,1500
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		ReloadingCondition: reload4
+		PauseOnCondition: empdisable || disabled || reload1 || reload2 || reload3 || reload4 
 	Armament@Weapon:
 		Weapon: bfg10kCannon
 		LocalOffset: 2500,0,1500
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+		ReloadingCondition: reload3
+		PauseOnCondition: empdisable || disabled || reload || reload2 || reload3 || reload4 
 		FireDelay: 10
+	Armament@SuperDummy:
+		Name: superweapon
+		Weapon: superbfg10kCannonDummy
+		LocalOffset: 2500,0,1500
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		ReloadingCondition: reload2
+		PauseOnCondition: empdisable || disabled || reload || reload2 || reload3 || reload4 
+	Armament@SuperWeapon:
+		Name: superweapon
+		Weapon: superbfg10kCannon
+		LocalOffset: 2500,0,1500
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		FireDelay: 10
+		ReloadingCondition: reload1
+		PauseOnCondition: empdisable || disabled || reload || reload2 || reload3 || reload4 
 	ReloadArmamentsBar:
+		Armaments: primary, superweapon
+		ShowMaxReloadTime: true
+	FireArmamentPower:
+		AllowMultiple: true
+		PauseOnCondition: empdisable || disabled || reload1 || reload2 || reload3 || reload4 
+		ArmamentName: superweapon
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Cursor: nuke
+		IconImage: steel_bfg10k
+		Icons:
+			1: icon
+		TargetCircleRange: 4c0
+		ChargeInterval: 7500
+		Names:
+			1: power-ioncannon.name
+		Descriptions:
+			1: power-ioncannon.description
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: IonCannonCharging
+		EndChargeTextNotification: Ion Cannon ready.
+		OrderName: ArtilleryPowerInfoOrder
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRange: 5c0
+		CameraSpawnAdvance: 25
+		CameraRemoveDelay: 350
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	WithMuzzleOverlay:
