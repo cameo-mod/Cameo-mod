@@ -2767,22 +2767,21 @@ rafix:
 		Filename: rafixicon.png
 rafixj:
 	Defaults:
-		Filename: rafixj.shp
+		Filename: rafixj.png
 	idle:
+		Length: 1
 		Offset: 0,2
 		ZOffset: -1c511
 	damaged-idle:
-		Start: 7
+		Length: 1
 		Offset: 0,2
 		ZOffset: -1c511
 	active:
-		Start: 1
-		Length: 6
+		Length: 1
 		Offset: 0,2
 		ZOffset: -1c511
 	damaged-active:
-		Start: 8
-		Length: 6
+		Length: 1
 		Offset: 0,2
 		ZOffset: -1c511
 	make:
