@@ -2191,21 +2191,35 @@ tsntmisl:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
 	AttackFollow:
+	GrantConditionOnPrerequisite@chem:
+		Condition: tsntwast
+		Prerequisites: tsntwast
 	Armament@superweapon1:
-	 	Name: superweapon1
-	 	Weapon: TSTacticalMissile
+		Name: superweapon
+		Weapon: TSTacticalMissile
+		RequiresCondition: !tsntwast
+	Armament@superweapon2:
+		Name: superweapon
+		Weapon: TSTacticalChemMissile
+		RequiresCondition: tsntwast
 	FireArmamentPower:
 		AllowMultiple: true
-		ArmamentName: superweapon1
+		ArmamentName: superweapon
+		Prerequisites:
+			1: ~techlevel.superweapons
+			2: tsntwast
 		Cursor: nuke
 		Icons:
-			1: abomb #multimiss
+			1: multimiss
+			2: chemicalmiss
 		TargetCircleRange: 5c0
 		ChargeInterval: 6000
 		Names:
 			1: power-nuke.raname
+			2: power-nuke.raname
 		Descriptions:
 			1: power-nuke.description
+			2: power-nuke.description
 		SelectTargetSpeechNotification: SelectTarget
 		SelectTargetTextNotification: Select target.
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -2215,8 +2229,6 @@ tsntmisl:
 		LaunchTextNotification: Warning: Nuclear Missile launched.
 		IncomingSpeechNotification: NuclearWarheadApproaching
 		IncomingTextNotification: Warning: Nuclear Missile launched.
-		Prerequisites:
-			1: ~techlevel.superweapons
 		OrderName: NukePowerInfoOrder
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 		PauseOnCondition: empdisable || disabled
@@ -8160,3 +8172,106 @@ TSARND:
 	RenderSprites:
 		PlayerPalette: playerra2
 
+TSKODK:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Tooltip:
+		Name: Kodiak Command Ship
+	Valued:
+		Cost: 4000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgthpad, tsgtplug
+		Queue: Aircraft, RAAircraft
+		Description: GDI command ship.\n Strong vs Everything and a support power
+		BuildLimit: 1
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 12
+		Speed: 30
+		RepulsionSpeed: 24
+		IdealSeparation: 2500
+	Health:
+		HP: 500000
+	Repairable:
+		HpPerStep: 25000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament:
+		Name: primary
+		Weapon: BCLaser
+		LocalOffset: 800,0,200
+		PauseOnCondition: tacticaljump
+		AmmoUsage: 0
+		MuzzleSequence: muzzle
+	AttackAircraft:
+		FacingTolerance: 20
+		AttackType: Hover
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	#EjectOnDeath:
+	#	PilotActor: scghost
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Voiced:
+		VoiceSet: SCBattleCruiserVoice
+	SpawnActorOnDeath:
+		Actor: TSKODK.Husk
+	DeathSounds:
+	-ReloadAmmoDelayMultiplier@RANK-1:
+	-ReloadAmmoDelayMultiplier@RANK-2:
+	-ReloadAmmoDelayMultiplier@RANK-3:
+	-ReloadAmmoDelayMultiplier@RANK-ELITE:
+	RenderSprites:
+		PlayerPalette: playerra2
+	IonCannonPower:
+		AllowMultiple: True
+		OrderName: GDIDropDod
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1:droppod
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		WeaponDelay: 0
+		Weapon: TSDroppodSpawner
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names: 
+			1: Drop Pods
+		Descriptions:
+			1: Deploys elite infantry from orbit.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		SelectTargetSpeechNotification: SelectTarget
+		LaunchSpeechNotification: ReinforcementsArrived
+		SelectTargetTextNotification: Select target.
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 5000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20
+		TargetCircleRanges:
+			1: 5000
+		TargetCircleColor: ff000080
+
+TSKODK.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Kodiak Command Ship
+	Aircraft:
+		TurnSpeed: 15
+		Speed: 30
+	RenderSprites:
+		Image: tskodk
+		PlayerPalette: playerra2
+	FallsToEarth:
+		Explosion: KirovExplode

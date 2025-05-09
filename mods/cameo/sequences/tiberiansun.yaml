@@ -693,6 +693,16 @@ tsharv:
 		Filename: tsharvestericon.shp
 		AddExtension: False
 
+tskodk:
+	Defaults:
+		Filename: tskodk.shp
+		Offset: 0,0,64
+		ZRamp: 1
+	idle:
+		Facings: -32
+	icon:
+		Filename: tskodkicon.shp
+		AddExtension: False
 
 dtruck:
 	Defaults:
@@ -3597,6 +3607,24 @@ flameall:
 		Tick: 160
 		ZOffset: 1023
 
+tsdroppod:
+ 	idle:
+		Filename: ra2_pod.shp
+ 		Length: 1
+		Facing: 2
+	fade1:
+		Filename: ra2_droppod2.shp
+ 		Length: *
+ 		Tick: 200
+	fade2:
+		Filename: ra2_droppod.shp
+ 		Length: *
+ 		Tick: 200
+	ring:
+		Filename: ra2_podring.shp
+ 		Length: *
+ 		ZOffset: 256
+
 # tsdroppod:
 # 	idle:
 # 		Length: *
@@ -3943,3 +3971,11 @@ tibdrill:
 		Filename: ra2caoildicon.shp
 		Offset: 0, 0
 		UseTilesetCode: false
+
+tsbomb:
+	idle:
+		Filename: tsbomb.shp
+		Facings: 2
+		Frames: 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,14,13,12,11,10,9,8,7,6,5,4,3,2,1,0
+ 		Length: 14
+ 		ZOffset: 256
