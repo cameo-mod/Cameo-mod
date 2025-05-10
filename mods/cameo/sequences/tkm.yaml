@@ -220,6 +220,10 @@ tkmrifleman:
 	die4:
 		Filename: frag3.shp
 		Length: *
+	die6:
+		Start: 209
+		Length: 20
+		ShadowStart: 456
 	die-crushed:
 		Filename: blue_frag3.shp
 		Length: *
@@ -280,6 +284,10 @@ tkmrocketeer:
 	die4:
 		Filename: frag3.shp
 		Length: *
+	die6:
+		Start: 209
+		Length: 20
+		ShadowStart: 696
 	die-crushed:
 		Filename: blue_frag3.shp
 		Length: *
@@ -317,7 +325,7 @@ tkmjug:
 		ShadowStart: 263
 	shoot:
 		Start: 103
-		Length: 16
+		Length: 15
 		Facings: 8
 		Tick: 80
 		ShadowStart: 358
@@ -334,6 +342,10 @@ tkmjug:
 		Length: 15
 		ShadowStart: 478
 	die3:
+		Start: 223
+		Length: 15
+		ShadowStart: 478
+	die6:
 		Start: 223
 		Length: 15
 		ShadowStart: 478
@@ -388,6 +400,11 @@ tkmengineer:
 	die4:
 		Filename: frag3.shp
 		Length: *
+	die6:
+		Start: 88
+		Facings: 1
+		Length: 20
+		ShadowStart: 277
 	die-crushed:
 		Filename: blue_frag3.shp
 		Length: *
@@ -416,6 +433,15 @@ tkmmcv:
 		Facings: 32
 		ShadowStart: 32
 		Tick: 150
+	icon:
+		Filename: tssmcvicon.shp
+
+tkmsupplytruck:
+	Defaults:
+		Filename: tkmsupplytruck.png
+	idle:
+		Filename: tkmsupplytruck.png
+		Facings: -32
 	icon:
 		Filename: tssmcvicon.shp
 
@@ -451,3 +477,17 @@ tkmtechnicaltruck:
 	icon:
 		Filename: bggyicnh.shp
 		AddExtension: False
+
+####################################################################################################
+#		TKM Upgrade Icons
+####################################################################################################
+
+berezkaupgradeicon:
+	icon:
+		Filename: berezkacamoupgradeicon.png
+		Length: 1
+
+titanplatingupgradeicon:
+	icon:
+		Filename: titanplatingupgradeicon.png
+		Length: 1

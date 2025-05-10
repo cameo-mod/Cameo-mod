@@ -9,7 +9,7 @@ World:
 		InternalName: tkm
 		Game: Red Alert 2
 		Side: RA2 Mod
-		Description: Highly customizable force.
+		Description: Hybridized paramilitary faction forged from the remnants of fragmented armies, known for its modular combat doctrine.
 		
 ####################################################################################################
 #		MPSTARTUNITS
@@ -47,6 +47,64 @@ World:
 		LightDiffuseColor: 0.4, 0.4, 0.4
 		LightPitch: 142
 		LightYaw: 682
+
+
+####################################################################################################
+#		TKM Upgrade and Inherits
+####################################################################################################
+
+upberezkacloak:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berezka Camo Infantry Upgrade
+	Valued:
+		Cost: 2400
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Addons
+		Description: Enables cloak for Basic Infantry Units and increase their movespeed.
+		Prerequisites: ~tkmradar, ~!upberezkacloak, ~!uptitanarsenal
+	RenderSprites:
+		Image: berezkaupgradeicon
+	ProvidesPrerequisite:
+		Prerequisite: upberezkacloak
+
+^upberezkacloakupgrade:
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: upberezkacloak
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+		RequiresCondition: upspeed
+	ActorStatValues:
+		Upgrades: upberezkacloak
+
+uptitanarsenal:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Titan Arsenal Infantry Upgrade
+	Valued:
+		Cost: 2400
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Addons
+		Description: Changes Basic Infantry Units to have Lightweight ballistic plating.
+		Prerequisites: ~tkmradar, ~!uptitanarsenal, ~!upberezkacloak
+	RenderSprites:
+		Image: titanplatingupgradeicon
+
+^uptitanarsenalupgrade:
+	GrantConditionOnPrerequisite@titanplating:
+		Condition: upspeed
+		Prerequisites: uptitanarsenal
+	DamageMultiplier@titanplatinghealth:
+		Modifier: 150
+		RequiresCondition: upspeed
+	SpeedMultiplier@titanplatingspeed:
+		Modifier: 70
+		RequiresCondition: upspeed
+	ActorStatValues:
+		Upgrades: uptitanarsenal
 
 #######################################
 # TKM MCV and Construction Yard
@@ -280,6 +338,10 @@ tkmradar:
 		BuildPaletteOrder: 140
 		Prerequisites: ~tkmcommandcenter, tkmfactory
 		Description: Provides TKM technologies.
+	Production@Addons:
+		Produces: Addons
+	ProductionBar@Addons:
+		ProductionType: Addons
 	Tooltip:
 		Name: TKM Observation Van
 	Selectable:
@@ -288,6 +350,7 @@ tkmradar:
 		Footprint: xx
 		Dimensions: 2,1
 		LocalCenterOffset: 0,0,0
+	ProvidesPrerequisite:
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -311,6 +374,10 @@ tkmtechcenter:
 		BuildPaletteOrder: 140
 		Prerequisites: ~tkmcommandcenter, tkmradar
 		Description: Provides advanced TKM technologies.
+	Production@Addons:
+		Produces: Addons
+	ProductionBar@Addons:
+		ProductionType: Addons
 	Tooltip:
 		Name: TKM Tech Center
 	Selectable:
@@ -319,6 +386,7 @@ tkmtechcenter:
 		Footprint: xx
 		Dimensions: 2,1
 		LocalCenterOffset: 0,0,0
+	ProvidesPrerequisite:
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -342,6 +410,7 @@ tkmrifleman:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@speed: ^upberezkacloakupgrade
 	Valued:
 		Cost: 120
 	Tooltip:
@@ -350,7 +419,7 @@ tkmrifleman:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tkmbarracks
+		Prerequisites: ~tkmbarracks, ~!uptitanarsenal, ~!upberezkacloak
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -373,12 +442,19 @@ tkmrifleman:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: NaxiRifle
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upberezkacloak
+		Prerequisites: upberezkacloak
+	Cloak:
+		RequiresCondition: upberezkacloak
 	# Selectable:
 	# 	Bounds: 256, 512
 	# 	DecorationBounds: 256, 512
 	# Inherits@EXT: ^ExternalConditions ##########
 	# AcceptsDeliveredExperience: ##########
 	# 	ValidTypes: infantry ##########
+	ActorStatValues:
+		Upgrades: upberezkacloak, uptitanarsenal
 	Voiced:
 		VoiceSet: TSInfantry
 	RenderSprites:
@@ -387,76 +463,16 @@ tkmrifleman:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-tkmrocketeer:
-	Inherits: ^Soldier
-	Inherits@Template: ^ScoutInfantryTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@anim: ^TSInfantry
-	Inherits@vo: ^AttackFrontalVoice
-	Inherits@AntiInf: ^PrioritizeInfantry
-	Valued:
-		Cost: 120
+tkmriflemancamo:
+	Inherits: tkmrifleman
+	Inherits@speed: ^upberezkacloakupgrade
+	Buildable:
+		Prerequisites: ~tkmbarracks, ~upberezkacloak
 	Tooltip:
-		Name: Rocketeer
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildPaletteOrder: 10
-		Prerequisites: ~tkmbarracks
-		Queue: Infantry, RAInfantry
-		IconPalette: ra2
-		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
-	Mobile:
-		Speed: 60
-	Health:
-		HP: 16000
-	ChangesHealth@SelfHealing:
-		Step: 16
-	AutoTarget:
-		ScanRadius: 4
-	Armament@PRIMARY:
-		Weapon: Rockets
-		RequiresCondition: !rank-elite
-		LocalOffset: 500,0,400
-	Armament@ELITE:
-		Weapon: Rockets
-		RequiresCondition: rank-elite
-		LocalOffset: 500,0,400
-	Armament@GARRISONED: ##########
-		Name: garrisoned
-		Weapon: Rockets
-	# Selectable:
-	# 	Bounds: 256, 512
-	# 	DecorationBounds: 256, 512
-	# Inherits@EXT: ^ExternalConditions ##########
-	# AcceptsDeliveredExperience: ##########
-	# 	ValidTypes: infantry ##########
-	Voiced:
-		VoiceSet: TSInfantry
+		Name: Rifleman (Camo)
 	RenderSprites:
 		PlayerPalette: playerra2
-	WithDeathAnimation:
-		DeathSequencePalette: ra2player
-		CrushedSequencePalette: ra2effect
-
-tkmengineer:
-	Inherits: E6
-	Buildable:
-		Prerequisites: ~tkmbarracks
-		Queue: Infantry, RAInfantry
-	Voiced:
-		VoiceSet: TSEngineer
-	DeliversCash:
-		Payload: 250
-	RenderSprites:
-		PlayerPalette: playerra2
-	WithDeathAnimation:
-		DeathSequencePalette: ra2player
-		CrushedSequencePalette: ra2effect
-	RenderSprites:
-		PlayerPalette: playerra2
+		Image: tkmrifleman
 
 tkmjug:
 	Inherits: ^Soldier
@@ -468,21 +484,21 @@ tkmjug:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Valued:
-		Cost: 120
+		Cost: 300
 	Tooltip:
-		Name: Jug
+		Name: Juggernaut (Titan Plating)
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tkmbarracks
+		Prerequisites: ~tkmbarracks, ~uptitanarsenal
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
 	Mobile:
 		Speed: 60
 	Health:
-		HP: 16000
+		HP: 35000
 	ChangesHealth@SelfHealing:
 		Step: 16
 	AutoTarget:
@@ -540,6 +556,8 @@ tkmjug:
 	# Inherits@EXT: ^ExternalConditions ##########
 	# AcceptsDeliveredExperience: ##########
 	# 	ValidTypes: infantry ##########
+	ActorStatValues:
+		Upgrades: uptitanarsenal
 	Voiced:
 		VoiceSet: TSInfantry
 	RenderSprites:
@@ -548,13 +566,154 @@ tkmjug:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
+tkmrocketeer:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@speed: ^upberezkacloakupgrade
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Rocketeer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 11
+		Prerequisites: ~tkmbarracks, ~!uptitanarsenal, ~!upberezkacloak
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 9000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	AutoTarget:
+		ScanRadius: 4
+	Armament@PRIMARY:
+		Weapon: Rockets
+		RequiresCondition: !rank-elite
+		LocalOffset: 500,0,400
+	Armament@ELITE:
+		Weapon: Rockets
+		RequiresCondition: rank-elite
+		LocalOffset: 500,0,400
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: Rockets
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upberezkacloak
+		Prerequisites: upberezkacloak
+	Cloak:
+		RequiresCondition: upberezkacloak
+	# Selectable:
+	# 	Bounds: 256, 512
+	# 	DecorationBounds: 256, 512
+	# Inherits@EXT: ^ExternalConditions ##########
+	# AcceptsDeliveredExperience: ##########
+	# 	ValidTypes: infantry ##########
+	ActorStatValues:
+		Upgrades: upberezkacloak, uptitanarsenal
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tkmrocketeercamo:
+	Inherits: tkmrocketeer
+	Inherits@speed: ^upberezkacloakupgrade
+	Tooltip:
+		Name: Rocketeer (Camo)
+	Buildable:
+		Prerequisites: ~tkmbarracks, ~upberezkacloak
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tkmrocketeer
+
+tkmrocketeertitan:
+	Inherits: tkmrocketeer
+	Inherits@speed: ^uptitanarsenalupgrade
+	Buildable:
+		Prerequisites: ~tkmbarracks, ~uptitanarsenal
+	Tooltip:
+		Name: Rocketeer (Titan Plating)
+	Health:
+		HP: 20000
+	Mobile:
+		Speed: 50
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tkmrocketeer
+
+tkmengineer:
+	Inherits: E6
+	Inherits@speed: ^upberezkacloakupgrade
+	Buildable:
+		Prerequisites: ~tkmbarracks, ~!uptitanarsenal, ~!upberezkacloak
+		Queue: Infantry, RAInfantry
+	Tooltip:
+		Name: Engineer
+	Voiced:
+		VoiceSet: TSEngineer
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: upberezkacloak,  uptitanarsenal
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upberezkacloak
+		Prerequisites: upberezkacloak
+	Cloak:
+		RequiresCondition: upberezkacloak
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tkmengineercamo:
+	Inherits: tkmengineer
+	Inherits@speed: ^upberezkacloakupgrade
+	Tooltip:
+		Name: Engineer (Camo)
+	Buildable:
+		Prerequisites: ~tkmbarracks, ~upberezkacloak
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tkmengineer
+
+tkmengineertitan:
+	Inherits: tkmengineer
+	Inherits@speed: ^uptitanarsenalupgrade
+	Buildable:
+		Prerequisites: ~tkmbarracks, ~uptitanarsenal
+	Tooltip:
+		Name: Engineer (Titan Plating)
+	Health:
+		HP: 15000
+	Mobile:
+		Speed: 50
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tkmengineer
+
 #######################################
 # TKM Vehicles
 #######################################
 
 tkmharv:
 	Inherits: ^TDHARV
-	Inherits@Voxel: ^TKMRenderVoxel
+	# Inherits@Voxel: ^TKMRenderVoxel
 	Health:
 		HP: 150000
 	Harvester:
@@ -564,16 +723,15 @@ tkmharv:
 		Prerequisites: ~tkmfactory, tkmrefinery
 		Queue: Vehicle, RAVehicle
 		Description: Harvests Tiberium for processing
-	WithVoxelBody:
-	WithDockingAnimation:
+	-WithDockingAnimation:
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
 		Payload: 500
+	# RenderSprites:
+	# 	Image: tsharv
 	RenderSprites:
-		Image: tsharv
-	RenderVoxels:
-		Image: stk
+		Image: tkmsupplytruck
 
 tkmbuggy:
 	Inherits: ^Vehicle
@@ -620,7 +778,7 @@ tkmbuggy:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: 
 	RenderSprites:
 		Image: tkmbuggy
 	RenderVoxels:
@@ -676,9 +834,9 @@ tkmtechnical:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: 
 	RenderSprites:
-		Image: tkmmcv
+		Image: tkmtechnicaltruck
 	RenderVoxels:
 		Image: techni
 		Scale: 12
@@ -728,7 +886,7 @@ tkmquadtruck:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: 
 	WithSpriteTurret:
 		Scale: 0.15
 	RenderSprites:
@@ -784,12 +942,71 @@ tkmzaza:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: 
 	RenderSprites:
-		Image: tkmtechnicaltruck
+		Image: tkmbuggy
 	RenderVoxels:
 		Image: shilka
 		Scale: 1
+
+technicaltank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TKMRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Technical Tank
+	Buildable:
+		BuildPaletteOrder: 190
+		Prerequisites: ~tkmfactory
+		Queue: Vehicle, RAVehicle
+		Description: TKM Russian heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
+		BuildDuration: 550
+		BuildDurationModifier: 100
+	Mobile:
+		Locomotor: tracked
+		Speed: 71
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 20 #3
+		Offset: -275,0,25
+	Armament:
+		Weapon: 120mmDual
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	WithVoxelTurret:
+	WithVoxelBarrel:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	RenderSprites:
+		Image: tkmbuggy
+	RenderVoxels:
+		Image: technicaltank
+		Scale: 10
 
 tkmabrams:
 	Inherits: ^Tank
@@ -807,7 +1024,7 @@ tkmabrams:
 		BuildPaletteOrder: 190
 		Prerequisites: ~tkmfactory
 		Queue: Vehicle, RAVehicle
-		Description: TKM nato heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
+		Description: TKM NATO heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
 		BuildDuration: 550
 		BuildDurationModifier: 100
 	Mobile:
@@ -843,7 +1060,64 @@ tkmabrams:
 	DeliversCash:
 		Payload: 400
 	RenderSprites:
-		Image: tkmtechnicaltruck
+		Image: tkmbuggy
 	RenderVoxels:
 		Image: m1a2
+		Scale: 1
+
+t72:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TKMRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: T-72M
+	Buildable:
+		BuildPaletteOrder: 190
+		Prerequisites: ~tkmfactory
+		Queue: Vehicle, RAVehicle
+		Description: TKM Russian heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
+		BuildDuration: 550
+		BuildDurationModifier: 100
+	Mobile:
+		Locomotor: tracked
+		Speed: 71
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Weapon: 120mmDual
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	WithVoxelTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	RenderSprites:
+		Image: tkmbuggy
+	RenderVoxels:
+		Image: t72
 		Scale: 1
