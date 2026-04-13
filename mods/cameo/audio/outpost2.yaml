@@ -59,6 +59,7 @@ factoryStructure:
 	DefaultVariant: .wav
 	Voices:
 		Select: fac_sel
+		Action: fac_sel
 
 tokamak:
 	DefaultVariant: .wav
@@ -100,6 +101,24 @@ dirt:
 	Voices:
 		Select: dirt
 
+<<<<<<< Updated upstream
+=======
+garage:
+	DefaultVariant: .wav
+	Voices:
+		Select: gar_sel
+
+rcc:
+	DefaultVariant: .wav
+	Voices:
+		Select: robosel
+
+factoryConsumer:
+	DefaultVariant: .wav
+	Voices:
+		Select: fac_cons
+
+>>>>>>> Stashed changes
 factoryArachnid:
 	DefaultVariant: .wav
 	Voices:

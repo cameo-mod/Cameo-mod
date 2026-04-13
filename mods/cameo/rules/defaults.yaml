@@ -5623,11 +5623,19 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
+<<<<<<< Updated upstream
 		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, aa_cgdept, latin_cgdept, repair_pad.ixian, ra2_ctoutp
 
 ^RearmAtServiceDepot:
 	Rearmable:
 		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, aa_cgdept, latin_cgdept, repair_pad.ixian, ra2_ctoutp
+=======
+		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, aa_cgdept, latin_cgdept, repair_pad.ixian, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal, plymouth_garage, eden_garage
+
+^RearmAtServiceDepot:
+	Rearmable:
+		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, aa_cgdept, latin_cgdept, repair_pad.ixian, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal,  plymouth_garage, eden_garage
+>>>>>>> Stashed changes
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
