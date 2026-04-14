@@ -1,23 +1,23 @@
 ####################################################################################################
 #		MISC
 ####################################################################################################
-rallyflag:
-	idle: op2_rally_flag.png
-		Length: 8
-		AddExtension: False
-	icon: gtwricnh.tem
-		AddExtension: False
+# rallyflag:
+# 	idle: op2_rally_flag.png
+# 		Length:8
+# 		AddExtension: False
+# 	icon: gtwricnh.tem
+# 		AddExtension: False
 
 ^OP2Building:
-	Defaults:
-		Scale: 0.7
-	statusgreen: op2_status_green
-		Start: 0
+	statusgreen: 
+		Filename: op2_status_green.shp
+        Start: 0
 		ZOffset: 512
 		Offset: 0, -9
 		AddExtension: True
-	statusred: op2_status_red
-		Start: 0
+	statusred: 
+		Filename: op2_status_red.shp
+        Start: 0
 		Length: 9
 		ZOffset: 512
 		Offset: 0, -9
@@ -27,425 +27,600 @@ supernova_missile_super:
 	Defaults:
 		Length: *
 		ZOffset: 2048
-	up: plymouth_missile_up
-	down: plymouth_missile_down
+	up: 
+		Filename: plymouth_missile_up.shp
+	down: 
+		Filename: plymouth_missile_down.shp
 
 explosion:
 	Defaults:
 		Length: *
 		ZOffset: 2047
-	supernova_missile_explosion: op2_supernova
-	op2_stickyfoam_goo: op2_stickyfoam_goo
-	op2_emp_static: op2_emp_static
+	supernova_missile_explosion: 
+		Filename: op2_supernova.shp
+	op2_stickyfoam_goo: 
+		Filename: op2_stickyfoam_goo.shp
+	op2_emp_static: 
+		Filename: op2_emp_static.shp
 	
-icon:
-	supernova_missile_super_icon: cameo_plymouth_supernova_missile.shp
+# icon:
+# 	supernova_missile_super_icon: cameo_plymouth_supernova_missile.shp
 
+op2_rareore_beacon_3bar:
+	idle:
+		ZOffset: -512
+		Length: *
+op2_commonore_beacon_3bar:
+	idle:
+		ZOffset: -512
+		Length: *
 
 ####################################################################################################
-#		BUILDINGS PLYMOUTH
+#		BUILDINGS EDEN
 ####################################################################################################
-####Plymouth Command Center
-pcc:
+eden_factory_structure:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -72, -48
-	statusred:
+	statusred: 
 		Offset: -72, -48
 	Defaults:
+		Filename: eden_factory_structure.shp
 		AddExtension: False
 	build:
-		Start: 4
-		Length: 20
+		Start: 0
+		Length: 1
 		Tick: 50
-		AddExtension: True
-	idle: plymouth_factory_structure
-		Length: 92
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+	idle:
+		Length: 50
 		Tick: 100
-		AddExtension: True
-	damaged-idle: plymouth_factory_structure
-		Length: 92
+	damaged-idle:
+		Length: 50
 		Tick: 100
-		AddExtension: True
 	damaged-build:
-		Start: 28
-		Length: 20
+		Start: 0
+		Length: 50
 		Tick: 100
-		AddExtension: True
-	dead: plymouth_factory_structure
-		Start: 1
-		Length: 1
-		AddExtension: True
-	make: edenConstruction_2_3.png
-		Length: *
-		Tick: 80
-		AddExtension: False
-	icon: facticnh
-		AddExtension: True
-		
-plymouth_tokamak:
-	Inherits: ^OP2Building
-	statusgreen:
-		Offset: -24, -36
-	statusred:
-		Offset: -24, -36
-	idle:
-		Length: 157
-		Tick: 50
-		Frames: 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
 	dead:
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	icon: 
+		Filename: edenUITokamak.png
+		AddExtension: False
+
+eden_tokamak:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -36
+	statusred: 
+		Offset: -24, -36
+	Defaults:
+		Filename: eden_tokamak.shp
+	idle:
+		Length: 61
+		Tick: 50
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib3
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_tokamak
-	
-plymouth_smelter_common:
+	icon: 
+		Filename: edenUITokamak.png
+		AddExtension: False
+
+eden_smelter_common:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -72, -48
-	statusred:
+	statusred: 
 		Offset: -72, -48
+	Defaults:
+		Filename: eden_smelter_common.shp
 	idle:
-		Length: 88
+		Length: 89
 		Tick: 50
-		Frames: 20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,1,2,3,4,5,6,7,8,9,10,11,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
-	icon: cameo_plymouth_building_smeltercommonore
+	icon: 
+		Filename: edenUISmelterCommonOre.png
+		AddExtension: False
+	idle-anim2: 
+		Filename: glstructuresmoke.shp
+		Start: 49
+		Length: 42
+		Offset: -1, -56
+		Tick: 175
 
-plymouth_agridome:
+eden_agridome:
 	Inherits: ^OP2Building
-	statusgreen:
-		Offset: -36, -36
-	statusred:
-		Offset: -36, -36
+	statusgreen: 
+		Offset: -44, -36
+	statusred: 
+		Offset: -44, -36
+	Defaults:
+		Filename: eden_agridome.shp
 	idle:
-		Length: 112
+		Length: 34
 		Tick: 50
-		Frames: 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,11,12,13,14,15,16,17,19,19,20,21,22,23,24,25,26,27,28,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_agridome
+	icon: 
+		Filename: edenUIAgridome.png
+		AddExtension: False
 
-plymouth_residence:
+eden_residence:
 	Inherits: ^OP2Building
-	statusgreen:
-		Offset: -36, -36
-	statusred:
-		Offset: -36, -36
+	statusgreen: 
+		Offset: -32, -36
+	statusred: 
+		Offset: -32, -36
+	Defaults:
+		Filename: eden_residence.shp
 	idle:
-		Length: 135
+		Length: 42
 		Tick: 50
-		Frames: 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib3
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_residence
+	icon: 
+		Filename: edenUIResidence.png
+		AddExtension: False
 
-plymouth_nursery:
+eden_lab_basic:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -36, -36
-	statusred:
+	statusred: 
 		Offset: -36, -36
+	Defaults:
+		Filename: eden_lab_basic.shp
 	idle:
-		Length: 125
+		Length: 29
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: edenUILabBasic.png
+		AddExtension: False
+
+eden_factory_vehicle:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -72, -48
+	statusred: 
+		Offset: -72, -48
+	Defaults:
+		Filename: eden_factory_vehicle.shp
+	idle:
+		Length: 27
+		Tick: 50
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	icon: 
+		Filename: edenUIFactoryVehicle.png
+		AddExtension: False
+
+eden_garage:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: eden_garage.shp
+	dead: 
+		Start: 0
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	idle: 
+		Start: 0
+	damaged-idle: 
+		Start: 0
+	active: 
+		Start: 0
+	damaged-active: 
+		Start: 0
+	icon: 
+		Filename: edenUIGarage.png
+		AddExtension: False
+
+eden_nursery:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: eden_nursery.shp
+	idle:
+		Length: 109
+		Tick: 50
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_nursery
+	icon: 
+		Filename: edenUINursery.png
+		AddExtension: False
 
-plymouth_university:
+eden_university:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -36, -36
-	statusred:
+	statusred: 
 		Offset: -36, -36
+	Defaults:
+		Filename: eden_university.shp
 	idle:
-		Length: 235
+		Length: 165
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_university
+	icon: 
+		Filename: edenUIUniversity.png
+		AddExtension: False
 
-plymouth_lab_standard:
+eden_lab_standard:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -36, -36
-	statusred:
+	statusred: 
 		Offset: -36, -36
+	Defaults:
+		Filename: eden_lab_standard.shp
 	idle:
-		Length: 155
+		Length: 50
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_labstandard
+	icon: 
+		Filename: edenUILabStandard.png
+		AddExtension: False
 
-plymouth_dirt:
+eden_dirt:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -48, -36
-	statusred:
+	statusred: 
 		Offset: -48, -36
+	Defaults:
+		Filename: eden_dirt.shp
 	idle:
-		Length: 133
+		Length: 43
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_dirt
+	icon: 
+		Filename: edenUIDIRT.png
+		AddExtension: False
 
-plymouth_gorf:
+eden_rcc:
 	Inherits: ^OP2Building
-	statusgreen:
-		Offset: -48, -36
-	statusred:
-		Offset: -48, -36
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: eden_rcc.shp
 	idle:
-		Length: 185
+		Length: 67
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: edenUIRobotCommandCenter.png
+		AddExtension: False
+
+eden_factory_consumer:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: eden_factory_consumer.shp
+	idle:
+		Length: 1
+		Tick: 50
+	dead: 
+		Start: 0
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: edenUIConsumerFactory.png
+		AddExtension: False
+	idle-anim2: 
+		Filename: glstructuresmoke.shp
+		Start: 49
+		Length: 42
+		Offset: 23, -41
+		Tick: 175
+	idle-anim3: 
+		Filename: glstructuresmoke.shp
+		Start: 49
+		Length: 42
+		Offset: 23, -21
+		Tick: 175
+	idle-anim4: 
+		Filename: glstructuresmoke.shp
+		Start: 49
+		Length: 42
+		Offset: 23, -1
+		Tick: 175
+
+eden_gorf:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -48, -36
+	statusred: 
+		Offset: -48, -36
+	Defaults:
+		Filename: eden_gorf.shp
+	idle:
+		Length: 94
+		Tick: 50
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_gorf
+	icon: 
+		Filename: edenUIGorf.png
+		AddExtension: False
 
-plymouth_lab_advanced:
+eden_lab_advanced:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -48, -48
-	statusred:
+	statusred: 
 		Offset: -48, -48
+	Defaults:
+		Filename: eden_lab_advanced.shp
 	idle:
-		Length: 152
-		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33
-	dead:
-		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+		Tick: 50
+	dead: 
+		Start: 0
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_labadvanced
+	icon: 
+		Filename: edenUILabAdvanced.png
+		AddExtension: False
 
-plymouth_spaceport:
+eden_spaceport:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -84, -60
-	statusred:
+	statusred: 
 		Offset: -84, -60
+	Defaults:
+		Filename: eden_spaceport.shp
 	idle:
-		Length: 192
+		Length: 124
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	active:
 		Start: 1
 		Length: 1
-	icon: cameo_plymouth_building_spaceport
+	icon: 
+		Filename: edenUISpacePort.png
+		AddExtension: False
 
-plymouth_solararray:
+eden_solar_array:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -48, -36
-	statusred:
+	statusred: 
 		Offset: -48, -36
+	Defaults:
+		Filename: eden_solar_array.shp
 	idle:
-		Length: 360
+		Length: 40
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242
-	dead:
+	dead: 
 		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
+	make: 
+		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
 		AddExtension: False
 	bib: bib2
 		UseTilesetExtension: true
 		Length: *
-	icon: cameo_plymouth_building_solarpowerarray
-
-plymouth_smelter_rare:
-	Inherits: ^OP2Building
-	statusgreen:
-		Offset: -72, -48
-	statusred:
-		Offset: -72, -48
-	idle:
-		Length: 148
-		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29
-	dead:
-		Start: 1
-		Length: 1
-	make: edenConstruction_2_3.png
-		Length: *
-		Tick: 80
+	icon: 
+		Filename: edenUISolarPowerArray.png
 		AddExtension: False
-	icon: cameo_plymouth_building_smelterrareore
 
-plymouth_factory_vehicle:
+eden_smelter_rare:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -72, -48
-	statusred:
+	statusred: 
 		Offset: -72, -48
+	Defaults:
+		Filename: eden_smelter_rare.shp
 	idle:
-		Length: 109
-		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
-	dead:
-		Start: 1
 		Length: 1
-	make: edenConstruction_2_3.png
-		Length: *
-		Tick: 80
-		AddExtension: False
-	icon: cameo_plymouth_building_factoryvehicle
-	
-plymouth_factory_arachnid:
-	Inherits: ^OP2Building
-	statusgreen:
-		Offset: -24, -36
-	statusred:
-		Offset: -24, -36
-	idle:
-		Length: 165
 		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74
-	dead:
-		Start: 1
-		Length: 1
-	make: edenConstruction_2_3.png
-		Length: *
-		Tick: 80
-		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
-	icon: cameo_plymouth_building_factoryarachnid
-
-plymouth_esg_mine:
-	idle:
-		ZOffset: -512
-		Length: *
-	icon: jmin
-####################################################################################################
-#		DEFENCE PLYMOUTH
-####################################################################################################
-plymouth_mine_common:
-	Inherits: ^OP2Building
-	statusgreen:
-		Offset: -24, -24
-	statusred:
-		Offset: -24, -24
-	idle:
-		Length: 131
-		Tick: 50
-		Frames: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,4,5,6,7,8,9
-	dead:
-		Start: 1
-		Length: 1
-	make: edenConstruction_2_3.png
-		Length: *
-		Tick: 80
-		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
-	icon: cameo_plymouth_mine_common
-
-plymouth_storage_common:
-	idle:
-		Length: 92
-		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
-	damaged-idle:
-		Length: 92
-		Tick: 50
-		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
-	dead:
+	dead: 
 		Start: 0
-	make:
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	icon: 
+		Filename: edenUISmelterRareOre.png
+		AddExtension: False
+####################################################################################################
+#		DEFENCE EDEN
+####################################################################################################
+eden_mine_common:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -24
+	statusred: 
+		Offset: -24, -24
+	Defaults:
+		Filename: eden_mine_common.shp
+	idle:
+		Length: 41
+		Tick: 50
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: ui_eden_mine.png
+		AddExtension: False
+
+eden_storage_common:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -24
+	statusred: 
+		Offset: -24, -24
+	Defaults:
+		Filename: eden_storage_common.shp
+	idle: 
+		Length: 27
+		Tick: 50
+	damaged-idle: 
+		Length: 27
+		Tick: 50
+	dead: 
+		Start: 0
+	make: 
 		Start: 0
 	bib: mbSILO
 		UseTilesetExtension: true
@@ -455,126 +630,1166 @@ plymouth_storage_common:
 			SNOW: TEMPERAT
 		Length: *
 		Offset: 0,1
-	icon: cameo_plymouth_storage_common
+	icon: 
+		Filename: edenUICommonStorage.png
+		AddExtension: False
+
+eden_gp_laser:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -12, -24
+	statusred: 
+		Offset: -12, -24
+	Defaults:
+		Filename: eden_gp_laser.shp
+	idle:
+		Facings: 16
+	recoil:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Facings: 16
+	damaged-recoil:
+		Filename: invisibleitem.shp
+	make: 
+		Length: 1
+		Tick: 80
+	muzzle: 		
+		Filename: invisibleitem.shp
+	icon: 
+		Filename: edenUIGuardPostLaser.png
+		AddExtension: False
+
+eden_gp_emp:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -12, -24
+	statusred: 
+		Offset: -12, -24
+	Defaults:
+		Filename: eden_gp_emp.shp
+	idle:
+		Facings: 16
+	recoil:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Facings: 16
+	damaged-recoil:
+		Filename: invisibleitem.shp
+	make: 
+		Length: 1
+		Tick: 80
+	muzzle: 		
+		Filename: invisibleitem.shp
+	icon: 
+		Filename: edenUIGuardPostEMP.png
+		AddExtension: False
+
+eden_gp_railgun:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -12, -24
+	statusred: 
+		Offset: -12, -24
+	Defaults:
+		Filename: eden_gp_railgun.shp
+	idle:
+		Facings: 16
+	recoil:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Facings: 16
+	damaged-recoil:
+		Filename: invisibleitem.shp
+	make: 
+		Length: 1
+		Tick: 80
+	muzzle: 		
+		Filename: invisibleitem.shp
+	icon: 
+		Filename: edenUIGuardPostRailgun.png
+		AddExtension: False
+
+####################################################################################################
+#		WARES EDEN
+####################################################################################################
+
+consumer_items_impulse:
+	Defaults:
+		Filename: consumer_items.shp
+	idle: 
+	move: 
+	die: 
+	icon: 
+		Filename: consumer_items_impulse.shp
+
+consumer_items_wares:
+	Defaults:
+		Filename: consumer_items.shp
+	idle: 
+	move: 
+	die: 
+	icon: 
+		Filename: consumer_items_wares.shp
+
+consumer_items_luxury_wares:
+	Defaults:
+		Filename: consumer_items.shp
+	idle: 
+	move: 
+	die: 
+	icon: 
+		Filename: consumer_items_luxury_wares.shp
+
+####################################################################################################
+#		UNITS EDEN
+####################################################################################################
+####Eden Convec Structure Factory
+eden_convec:
+	Defaults:
+		Filename: eden_convec.shp
+	idle:
+		Start: 0
+		Length: 1
+		Facings: -8
+		Frames: 0,3,6,9,12,15,18,21
+	move:
+		Start: 0
+		Length: 3
+		Facings: -8
+		Tick: 100
+	die:
+		Start: 1
+		Length: 1
+		Tick: 100
+	icon: 
+		Filename: edenUIConvec.png
+		AddExtension: False
+
+eden_cargotruck_empty:
+	Defaults:
+		Filename: eden_cargotruck_empty.shp
+	idle:
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,3,6,9,12,15,18,21
+	move:
+		Facings: 8
+		Length: 3
+	harvest:
+		Facings: 8
+		Length: 3
+	dock: eden_cargotruck_commonore
+		Start: 17
+		Length: 1
+	dock-loop: eden_cargotruck_commonore
+		Start: 17
+		Length: 1
+	icon: 
+		Filename: edenUICargoTruck.png
+		AddExtension: False
+	
+eden_cargotruck_commonore:
+	Defaults:
+		Filename: eden_cargotruck_empty.shp
+	Inherits: eden_cargotruck_empty
+	idle: 
+		Filename: eden_cargotruck_commonore.shp
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,3,6,9,12,15,18,21
+	move:
+		Facings: 8
+		Length: 3
+	die: 
+		Start: 0
+		Length: 1
+
+eden_scout:
+	Defaults:
+		Filename: eden_scout.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,18,36,54,72,90,108,126
+	move: 
+		Start: 0
+		Length: 18
+		Facings: 8
+		Tick: 100
+	die: 
+		Start: 1
+		Length: 1
+		Tick: 100
+	icon: 
+		Filename: edenUIScout.png
+		AddExtension: False
+
+eden_lynx_laser: 
+	Defaults:
+		Filename: eden_chassis_lynx.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: -8
+		Frames: 0,6,12,18,24,30,36,42
+	move: 
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_laser.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUILynxLaser.png
+		AddExtension: False
+
+eden_tiger_microwave: 
+	Defaults:
+		Filename: eden_chassis_tiger.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,4,8,12,16,20,24,28
+	move: 
+		Start: 0
+		Length: 4
+		Facings: 8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_laser_tiger.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUITigerLaser.png
+		AddExtension: False
+
+eden_lynx_railgun: 
+	Defaults:
+		Filename: eden_chassis_lynx.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: -8
+		Frames: 0,6,12,18,24,30,36,42
+	move: 
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_railgun.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUILynxRailgun.png
+		AddExtension: False
+
+eden_tiger_railgun: 
+	Defaults:
+		Filename: eden_chassis_tiger.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,4,8,12,16,20,24,28
+	move: 
+		Start: 0
+		Length: 4
+		Facings: 8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_railgun_tiger.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUITigerRailgun.png
+		AddExtension: False
+
+eden_lynx_emp: 
+	Defaults:
+		Filename: eden_chassis_lynx.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: -8
+		Frames: 0,6,12,18,24,30,36,42
+	move: 
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_emp.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUILynxEmp.png
+		AddExtension: False
+
+eden_tiger_emp: 
+	Defaults:
+		Filename: eden_chassis_tiger.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,4,8,12,16,20,24,28
+	move: 
+		Start: 0
+		Length: 4
+		Facings: 8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_emp_tiger.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUITigerEmp.png
+		AddExtension: False
+
+eden_lynx_acidcloud: 
+	Defaults:
+		Filename: eden_chassis_lynx.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: -8
+		Frames: 0,6,12,18,24,30,36,42
+	move: 
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_acidcloud.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUILynxAcidCloud.png
+		AddExtension: False
+
+eden_tiger_acidcloud: 
+	Defaults:
+		Filename: eden_chassis_tiger.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,4,8,12,16,20,24,28
+	move: 
+		Start: 0
+		Length: 4
+		Facings: 8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_acidcloud_tiger.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUITigerAcidCloud.png
+		AddExtension: False
+
+eden_lynx_starflare: 
+	Defaults:
+		Filename: eden_chassis_lynx.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: -8
+		Frames: 0,6,12,18,24,30,36,42
+	move: 
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_starflare.shp
+		Start: 0
+		Facings: 1
+	icon: 
+		Filename: edenUILynxStarflare.png
+		AddExtension: False
+
+eden_tiger_starflare: 
+	Defaults:
+		Filename: eden_chassis_tiger.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,4,8,12,16,20,24,28
+	move: 
+		Start: 0
+		Length: 4
+		Facings: 8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_starflare_tiger.shp
+		Start: 0
+		Facings: 1
+	icon: 
+		Filename: edenUITigerStarflare.png
+		AddExtension: False
+
+eden_lynx_thorshammer: 
+	Defaults:
+		Filename: eden_chassis_lynx.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: -8
+		Frames: 0,6,12,18,24,30,36,42
+	move: 
+		Start: 0
+		Length: 6
+		Facings: -8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_thorshammer.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUILynxThorsHammer.png
+		AddExtension: False
+
+eden_tiger_thorshammer: 
+	Defaults:
+		Filename: eden_chassis_tiger.shp
+	idle: 
+		Start: 0
+		Length: 1
+		Facings: 8
+		Frames: 0,4,8,12,16,20,24,28
+	move: 
+		Start: 0
+		Length: 4
+		Facings: 8
+		Tick: 100
+	turret: 
+		Filename: eden_mobile_thorshammer_tiger.shp
+		Start: 0
+		Facings: 16
+	icon: 
+		Filename: edenUITigerThorsHammer.png
+		AddExtension: False
+
+####################################################################################################
+#		BUILDINGS PLYMOUTH
+####################################################################################################
+####Plymouth Structure Factory
+pcc: 
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -72, -48
+	statusred: 
+		Offset: -72, -48
+	Defaults:
+		Filename: plymouth_factory_structure.shp
+		AddExtension: False
+	build:
+		Start: 4
+		Length: 20
+		Tick: 50
+		AddExtension: True
+	idle: 
+		Length: 92
+		Tick: 100
+		AddExtension: True
+	damaged-idle: 
+		Length: 92
+		Tick: 100
+		AddExtension: True
+	damaged-build:
+		Start: 28
+		Length: 20
+		Tick: 100
+		AddExtension: True
+	dead: 
+		Start: 1
+		Length: 1
+		AddExtension: True
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	icon: 
+		Filename: edenUITokamak.png
+		AddExtension: False
+		
+plymouth_tokamak:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -36
+	statusred: 
+		Offset: -24, -36
+	Defaults:
+		Filename: plymouth_tokamak.shp
+	idle:
+		Length: 157
+		Tick: 50
+		Frames: 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_tokamak.shp
+	
+plymouth_smelter_common:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -72, -48
+	statusred: 
+		Offset: -72, -48
+	Defaults:
+		Filename: plymouth_smelter_common.shp
+	idle:
+		Length: 88
+		Tick: 50
+		Frames: 20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,1,2,3,4,5,6,7,8,9,10,11,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20,20
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	icon: 
+		Filename: cameo_plymouth_building_smeltercommonore.shp
+
+plymouth_agridome:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_agridome.shp
+	idle:
+		Length: 112
+		Tick: 50
+		Frames: 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,11,12,13,14,15,16,17,19,19,20,21,22,23,24,25,26,27,28,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_agridome.shp
+
+plymouth_residence:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_residence.shp
+	idle:
+		Length: 135
+		Tick: 50
+		Frames: 5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_residence.shp
+
+plymouth_basic_lab:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_basic_lab.shp
+	idle:
+		Length: 118
+		Tick: 50
+		Frames: 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_basic_lab.shp
+
+plymouth_nursery:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_nursery.shp
+	idle:
+		Length: 125
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_nursery.shp
+
+plymouth_university:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_university.shp
+	idle:
+		Length: 235
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_university.shp
+
+plymouth_lab_standard:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_lab_standard.shp
+	idle:
+		Length: 155
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_labstandard.shp
+
+plymouth_dirt:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -48, -36
+	statusred: 
+		Offset: -48, -36
+	Defaults:
+		Filename: plymouth_dirt.shp
+	idle:
+		Length: 133
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_dirt.shp
+
+plymouth_gorf:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -48, -36
+	statusred: 
+		Offset: -48, -36
+	Defaults:
+		Filename: plymouth_gorf.shp
+	idle:
+		Length: 185
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_gorf.shp
+
+plymouth_lab_advanced:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -48, -48
+	statusred: 
+		Offset: -48, -48
+	Defaults:
+		Filename: plymouth_lab_advanced.shp
+	idle:
+		Length: 152
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_labadvanced.shp
+
+plymouth_spaceport:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -84, -60
+	statusred: 
+		Offset: -84, -60
+	Defaults:
+		Filename: plymouth_spaceport.shp
+	idle:
+		Length: 192
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	active:
+		Start: 1
+		Length: 1
+	icon: 
+		Filename: cameo_plymouth_building_spaceport.shp
+
+plymouth_solararray:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -48, -36
+	statusred: 
+		Offset: -48, -36
+	Defaults:
+		Filename: plymouth_solararray.shp
+	idle:
+		Length: 360
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110,111,112,113,114,115,116,117,118,119,120,121,122,123,124,125,126,127,128,129,130,131,132,133,134,135,136,137,138,139,140,141,142,143,144,145,146,147,148,149,150,151,152,153,154,155,156,157,158,159,160,161,162,163,164,165,166,167,168,169,170,171,172,173,174,175,176,177,178,179,180,181,182,183,184,185,186,187,188,189,190,191,192,193,194,195,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,215,216,217,218,219,220,221,222,223,224,225,226,227,228,229,230,231,232,233,234,235,236,237,238,239,240,241,242
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib2
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_solarpowerarray.shp
+
+plymouth_smelter_rare:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -72, -48
+	statusred: 
+		Offset: -72, -48
+	Defaults:
+		Filename: plymouth_smelter_rare.shp
+	idle:
+		Length: 148
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	icon: 
+		Filename: cameo_plymouth_building_smelterrareore.shp
+
+plymouth_factory_vehicle:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -72, -48
+	statusred: 
+		Offset: -72, -48
+	Defaults:
+		Filename: plymouth_factory_vehicle.shp
+	idle:
+		Length: 109
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	icon: 
+		Filename: cameo_plymouth_building_factoryvehicle.shp
+
+plymouth_garage:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_garage.shp
+	dead: 
+		Start: 0
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	idle: 
+		Start: 0
+	damaged-idle: 
+		Start: 0
+	active: 
+		Start: 0
+	damaged-active: 
+		Start: 0
+	icon: 
+		Filename: cameo_plymouth_garage.shp
+
+plymouth_rcc:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -36, -36
+	statusred: 
+		Offset: -36, -36
+	Defaults:
+		Filename: plymouth_rcc.shp
+	idle:
+		Length: 110
+		Tick: 50
+		Frames: 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_rcc.shp
+
+plymouth_factory_arachnid:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -36
+	statusred: 
+		Offset: -24, -36
+	Defaults:
+		Filename: plymouth_factory_arachnid.shp
+	idle:
+		Length: 165
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_building_factoryarachnid.shp
+
+plymouth_esg_mine:
+	idle:
+		Filename: plymouth_esg_mine.shp
+		ZOffset: -512
+		Length: *
+	icon: 
+		Filename: jmin.shp
+####################################################################################################
+#		DEFENCE PLYMOUTH
+####################################################################################################
+plymouth_mine_common:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -24
+	statusred: 
+		Offset: -24, -24
+	Defaults:
+		Filename: plymouth_mine_common.shp
+	idle:
+		Length: 131
+		Tick: 50
+		Frames: 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,2,3,4,5,6,7,8,9
+	dead: 
+		Start: 1
+		Length: 1
+	make: 
+		Filename: op2_construction.shp
+		Length: *
+		Tick: 80
+		AddExtension: False
+	bib: bib3
+		UseTilesetExtension: true
+		Length: *
+	icon: 
+		Filename: cameo_plymouth_mine_common.shp
+
+plymouth_light_tower:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -24
+	statusred: 
+		Offset: -24, -24
+	Defaults:
+		Filename: plymouth_light_tower.shp
+	idle: 
+	damaged-idle: 
+	dead: 
+	make: 
+	icon: 
+		Filename: cameo_plymouth_storage_common.shp
+
+plymouth_storage_common:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -24
+	statusred: 
+		Offset: -24, -24
+	Defaults:
+		Filename: plymouth_storage_common.shp
+	idle: 
+		Length: 92
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+	damaged-idle: 
+		Length: 92
+		Tick: 50
+		Frames: 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18
+	dead: 
+		Start: 0
+	make: 
+		Start: 0
+	bib: mbSILO
+		UseTilesetExtension: true
+		TilesetOverrides:
+			WINTER: TEMPERAT
+			JUNGLE: TEMPERAT
+			SNOW: TEMPERAT
+		Length: *
+		Offset: 0,1
+	icon: 
+		Filename: cameo_plymouth_storage_common.shp
 
 plymouth_gp_microwave:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -12, -24
-	statusred:
+	statusred: 
 		Offset: -12, -24
+	Defaults:
+		Filename: plymouth_gp_microwave.shp
 	idle:
 		Facings: 16
 	recoil:
-		Facings: 16
+		Filename: invisibleitem.shp
 	damaged-idle:
 		Facings: 16
 	damaged-recoil:
-		Facings: 16
-	make:
+		Filename: invisibleitem.shp
+	make: 
 		Length: 1
 		Tick: 80
-	muzzle: gunfire2
-		Length: *
-	icon: cameo_plymouth_guardpost_microwave
+	muzzle: 		
+		Filename: invisibleitem.shp
+	icon: 
+		Filename: cameo_plymouth_guardpost_microwave.shp
 
 plymouth_gp_stickyfoam:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -12, -24
-	statusred:
+	statusred: 
 		Offset: -12, -24
+	Defaults:
+		Filename: plymouth_gp_stickyfoam.shp
 	idle:
 		Facings: 16
 	recoil:
-		Facings: 16
+		Filename: invisibleitem.shp
 	damaged-idle:
 		Facings: 16
 	damaged-recoil:
-		Facings: 16
-	make:
+		Filename: invisibleitem.shp
+	make: 
 		Length: 1
 		Tick: 80
-	muzzle: gunfire2
-		Length: *
-	icon: cameo_plymouth_guardpost_stickyfoam
+	muzzle: 		
+		Filename: invisibleitem.shp
+	icon: 
+		Filename: cameo_plymouth_guardpost_stickyfoam.shp
 
 plymouth_gp_rpg:
 	Inherits: ^OP2Building
-	statusgreen:
+	statusgreen: 
 		Offset: -12, -24
-	statusred:
+	statusred: 
 		Offset: -12, -24
+	Defaults:
+		Filename: plymouth_gp_rpg.shp
 	idle:
 		Facings: 16
 	recoil:
-		Facings: 16
+		Filename: invisibleitem.shp
 	damaged-idle:
 		Facings: 16
 	damaged-recoil:
-		Facings: 16
-	make:
+		Filename: invisibleitem.shp
+	make: 
 		Length: 1
 		Tick: 80
-	muzzle: gunfire2
-		Length: *
-	icon: cameo_plymouth_guardpost_rpg
-
-
+	muzzle: 		
+		Filename: invisibleitem.shp
+	icon: 
+		Filename: cameo_plymouth_guardpost_rpg.shp
 
 ####################################################################################################
 #		UNITS PLYMOUTH
 ####################################################################################################
 ####Plymouth Convec Command Center
 pconveccommandcenter:
-	idle: plymouth_convec
+	Defaults:
+		Filename: plymouth_convec.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,3,6,9,12,15,18,21
-   	Scale: 0.9
-	move: plymouth_convec
+	move: 
 		Start: 0
 		Length: 3
 		Facings: -8
 		Tick: 100
-   	Scale: 0.9
-	die: plymouth_convec
+	die: 
 		Start: 1
 		Length: 1
 		Tick: 100
- 	  Scale: 0.9
-	icon: cameo_plymouth_convec
+	icon: 
+		Filename: cameo_plymouth_convec.shp
 	
 plymouth_cargotruck_empty:
+	Defaults:
+		Filename: plymouth_cargotruck_empty.shp
 	idle:
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,3,6,9,12,15,18,21
-    Scale: 0.75
 	move:
 		Facings: -8
 		Length: 3
-    Scale: 0.75
-	harvest:
+	harvesting:
 		Facings: -8
 		Length: 3
-    Scale: 0.75
-	dock: plymouth_cargotruck_commonore
+	dock: 
+		Filename: plymouth_cargotruck_commonore.shp
 		Start: 17
 		Length: 1
-    Scale: 0.75
-	dock-loop: plymouth_cargotruck_commonore
+	dock-loop: 
+		Filename: plymouth_cargotruck_commonore.shp
 		Start: 17
 		Length: 1
-    Scale: 0.75
-	icon: cameo_plymouth_cargotruck
+	icon: 
+		Filename: cameo_plymouth_cargotruck.shp
 	
 plymouth_cargotruck_commonore:
 	Defaults: plymouth_cargotruck_empty
 	Inherits: plymouth_cargotruck_empty
-	idle: plymouth_cargotruck_commonore
+	idle: 
+		Filename: plymouth_cargotruck_commonore.shp
 		Start: 0
 		Length: 1
 		Facings: -8
@@ -582,491 +1797,522 @@ plymouth_cargotruck_commonore:
 	move:
 		Facings: -8
 		Length: 3
-	die: plymouth_cargotruck_commonore
+	die: 
+		Filename: plymouth_cargotruck_commonore.shp
 		Start: 0
 		Length: 1
 
 plymouth_spider:
-	idle:
+	Defaults:
+		Filename: plymouth_spider.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42
-	move:
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-	die:
+	die: 
 		Start: 1
 		Length: 1
 		Tick: 100
-	icon: cameo_plymouth_spider
+	icon: 
+		Filename: cameo_plymouth_spider.shp
 
 plymouth_scorpion:
-	idle:
+	Defaults:
+		Filename: plymouth_scorpion.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42
-	move:
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-	die:
+	die: 
 		Start: 1
 		Length: 1
 		Tick: 100
-	icon: cameo_plymouth_scorpion
+	icon: 
+		Filename: cameo_plymouth_scorpion.shp
 
 plymouth_scout:
-	idle:
+	Defaults:
+		Filename: plymouth_scout.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,18,36,54,72,90,108,126
-    Scale: 0.75
-	move:
+	move: 
 		Start: 0
 		Length: 18
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	die:
+	die: 
 		Start: 1
 		Length: 1
 		Tick: 100
-    Scale: 0.75
-	icon: cameo_plymouth_scout
+	icon: 
+		Filename: cameo_plymouth_scout.shp
 
-ee2_ship:
-	idle:
-		Start: 0
-		Length: 1
-		Facings: -32
-	move:
-		Start: 0
-		Length: 1
-		Facings: -32
-	die:
-		Start: 1
-		Length: 1
-		Tick: 100
-	icon: cameo_plymouth_scout
+# plymouth_tech_platform:
+# 	stand: 
+# 		Start: 0
+# 		Length: 1
+# 		Facings: -8
+# 		Frames: 0,18,36,54,72,90,108,126
+# 	run:
+# 		Start: 0
+# 		Length: 18
+# 		Facings: -8
+# 		Tick: 100
+# 	shoot:
+# 		Start: 0	
+# 	die: 
+# 		Start: 0
+# 	die-crushed: 
+# 		Start: 0
+# 	icon: cameo_plymouth_tech_platform
+
+# plymouth_cash_platform:
+# 	stand: 
+# 		Start: 0
+# 		Length: 1
+# 		Facings: -8
+# 		Frames: 0,18,36,54,72,90,108,126
+# 	run:
+# 		Start: 0
+# 		Length: 18
+# 		Facings: -8
+# 		Tick: 100
+# 	shoot:
+# 		Start: 0	
+# 	die: 
+# 		Start: 0
+# 	die-crushed: 
+# 		Start: 0
+# 	icon: cameo_plymouth_cash_platform
+
+# ee2_ship:
+# 	idle: 
+# 		Start: 0
+# 		Length: 1
+# 		Facings: -32
+# 	move: 
+# 		Start: 0
+# 		Length: 1
+# 		Facings: -32
+# 	die: 
+# 		Start: 1
+# 		Length: 1
+# 		Tick: 100
+# 	icon: cameo_plymouth_scout
 
 ####Plymouth Lynx Microwave
-plmicrowave:
-	idle: plymouth_chassis_lynx
+plmicrowave: 
+	Defaults:
+		Filename: plymouth_chassis_lynx.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42
-    Scale: 0.75
-	move: plymouth_chassis_lynx
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_microwave
+	turret: 
+		Filename: plymouth_mobile_microwave.shp
 		Start: 0
 		Facings: -16
-    Scale: 0.75
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
-	icon: cameo_plymouth_lynx_microwave
+	icon: 
+		Filename: cameo_plymouth_lynx_microwave.shp
 	
-plymouth_tiger_microwave:
-	idle: plymouth_chassis_tiger
+plymouth_tiger_microwave: 
+	Defaults:
+		Filename: plymouth_chassis_tiger.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,4,8,12,16,20,24,28
-    Scale: 0.75
-	move: plymouth_chassis_tiger
+	move: 
 		Start: 0
 		Length: 4
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_tiger_microwave
+	turret: 
+		Filename: plymouth_mobile_tiger_microwave.shp
 		Start: 0
 		Facings: 16
-    Scale: 0.75
-	icon: cameo_plymouth_tiger_microwave
+	icon: 
+		Filename: cameo_plymouth_tiger_microwave.shp
 
-plymouth_lynx_rpg:
-	idle: plymouth_chassis_lynx
+plymouth_lynx_rpg: 
+	Defaults:
+		Filename: plymouth_chassis_lynx.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42,47
-    Scale: 0.75
-	move: plymouth_chassis_lynx
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_rpg
+	turret:
+		Filename: plymouth_mobile_rpg.shp
 		Start: 0
 		Facings: -16
 		Offset: 0,2
-    Scale: 0.75
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
-	icon: cameo_plymouth_lynx_rpg
+	icon: 
+		Filename: cameo_plymouth_lynx_rpg.shp
 	
-plymouth_tiger_rpg:
-	idle: plymouth_chassis_tiger
+plymouth_tiger_rpg: 
+	Defaults:
+		Filename: plymouth_chassis_tiger.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,4,8,12,16,20,24,28
-    Scale: 0.75
-	move: plymouth_chassis_tiger
+	move: 
 		Start: 0
 		Length: 4
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_tiger_rpg
+	turret: 
+		Filename: plymouth_mobile_tiger_rpg.shp
 		Start: 0
 		Facings: 16
-    Scale: 0.75
-	icon: cameo_plymouth_tiger_rpg
+	icon: 
+		Filename: cameo_plymouth_tiger_rpg.shp
 
-plymouth_lynx_emp:
-	idle: plymouth_chassis_lynx
+plymouth_lynx_emp: 
+	Defaults:
+		Filename: plymouth_chassis_lynx.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42,47
-    Scale: 0.75
-	move: plymouth_chassis_lynx
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_emp
+	turret: 
+		Filename: plymouth_mobile_emp.shp
 		Start: 0
 		Facings: -16
 		Offset: 0,2
-    Scale: 0.75
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
-	icon: cameo_plymouth_lynx_emp
+	icon: 
+		Filename: cameo_plymouth_lynx_emp.shp
 
-plymouth_tiger_emp:
-	idle: plymouth_chassis_tiger
+plymouth_tiger_emp: 
+	Defaults:
+		Filename: plymouth_chassis_tiger.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,4,8,12,16,20,24,28
-    Scale: 0.75
-	move: plymouth_chassis_tiger
+	move: 
 		Start: 0
 		Length: 4
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_tiger_emp
+	turret: 
+		Filename: plymouth_mobile_tiger_emp.shp
 		Start: 0
 		Facings: 16
-    Scale: 0.75
-	icon: cameo_plymouth_tiger_emp
+	icon: 
+		Filename: cameo_plymouth_tiger_emp.shp
 
-plymouth_lynx_stickyfoam:
-	idle: plymouth_chassis_lynx
+plymouth_lynx_stickyfoam: 
+	Defaults:
+		Filename: plymouth_chassis_lynx.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42,47
-    Scale: 0.75
-	move: plymouth_chassis_lynx
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_stickyfoam
+	turret: 
+		Filename: plymouth_mobile_stickyfoam.shp
 		Start: 0
 		Facings: 16
 		Offset: 0,2
-    Scale: 0.75
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
-	icon: cameo_plymouth_lynx_stickyfoam
+	icon: 
+		Filename: cameo_plymouth_lynx_stickyfoam.shp
 
-plymouth_tiger_stickyfoam:
-	idle: plymouth_chassis_tiger
+plymouth_tiger_stickyfoam: 
+	Defaults:
+		Filename: plymouth_chassis_tiger.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,4,8,12,16,20,24,28
-    Scale: 0.75
-	move: plymouth_chassis_tiger
+	move: 
 		Start: 0
 		Length: 4
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_tiger_stickyfoam
+	turret: 
+		Filename: plymouth_mobile_tiger_stickyfoam.shp
 		Start: 0
 		Facings: 16
-    Scale: 0.75
-	icon: cameo_plymouth_tiger_stickyfoam
+	icon: 
+		Filename: cameo_plymouth_tiger_stickyfoam.shp
 
-plymouth_lynx_esg:
-	idle: plymouth_chassis_lynx
+plymouth_lynx_esg: 
+	Defaults:
+		Filename: plymouth_chassis_lynx.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42,47
-    Scale: 0.75
-	move: plymouth_chassis_lynx
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_esg
+	turret: 
+		Filename: plymouth_mobile_esg.shp
 		Start: 0
 		Facings: 16
 		Offset: 0,2
-    Scale: 0.75
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
-	icon: cameo_plymouth_lynx_esg
+	icon: 
+		Filename: cameo_plymouth_lynx_esg.shp
 
-plymouth_tiger_esg:
-	idle: plymouth_chassis_tiger
+plymouth_tiger_esg: 
+	Defaults:
+		Filename: plymouth_chassis_tiger.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,4,8,12,16,20,24,28
-    Scale: 0.75
-	move: plymouth_chassis_tiger
+	move: 
 		Start: 0
 		Length: 4
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_tiger_esg
+	turret: 
+		Filename: plymouth_mobile_tiger_esg.shp
 		Start: 0
 		Facings: 16
-    Scale: 0.75
-	icon: cameo_plymouth_tiger_esg
+	icon: 
+		Filename: cameo_plymouth_tiger_esg.shp
 
-plymouth_lynx_starflare:
-	idle: plymouth_chassis_lynx
+plymouth_lynx_starflare: 
+	Defaults:
+		Filename: plymouth_chassis_lynx.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42,47
-    Scale: 0.75
-	move: plymouth_chassis_lynx
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_starflare
+	turret:
+		Filename: plymouth_mobile_starflare.shp
 		Start: 0
 		Facings: 1
-    Scale: 0.75
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
-	icon: cameo_plymouth_lynx_starflare
+	icon: 
+		Filename: cameo_plymouth_lynx_starflare.shp
 
-plymouth_tiger_starflare:
-	idle: plymouth_chassis_tiger
+plymouth_tiger_starflare: 
+	Defaults:
+		Filename: plymouth_chassis_tiger.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,4,8,12,16,20,24,28
-    Scale: 0.75
-	move: plymouth_chassis_tiger
+	move: 
 		Start: 0
 		Length: 4
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_starflare
+	turret: 
+		Filename: plymouth_mobile_starflare.shp
 		Start: 0
 		Facings: 1
-    Scale: 0.75
-	icon: cameo_plymouth_tiger_starflare
+	icon: 
+		Filename: cameo_plymouth_tiger_starflare.shp
 
-plymouth_lynx_supernova:
-	idle: plymouth_chassis_lynx
+plymouth_lynx_supernova: 
+	Defaults:
+		Filename: plymouth_chassis_lynx.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,6,12,18,24,30,36,42,47
-    Scale: 0.75
-	move: plymouth_chassis_lynx
+	move: 
 		Start: 0
 		Length: 6
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_supernova
+	turret: 
+		Filename: plymouth_mobile_supernova.shp
 		Start: 0
 		Facings: -16
-    Scale: 0.75
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
-	icon: cameo_plymouth_lynx_supernova
+	icon: 
+		Filename: cameo_plymouth_lynx_supernova.shp
 
-plymouth_tiger_supernova:
-	idle: plymouth_chassis_tiger
+plymouth_tiger_supernova: 
+	Defaults:
+		Filename: plymouth_chassis_tiger.shp
+	idle: 
 		Start: 0
 		Length: 1
 		Facings: -8
 		Frames: 0,4,8,12,16,20,24,28
-    Scale: 0.75
-	move: plymouth_chassis_tiger
+	move: 
 		Start: 0
 		Length: 4
 		Facings: -8
 		Tick: 100
-    Scale: 0.75
-	turret: plymouth_mobile_supernova
+	turret: 
+		Filename: plymouth_mobile_supernova.shp
 		Start: 0
 		Facings: 16
-    Scale: 0.75
-	icon: cameo_plymouth_tiger_supernova
+	icon: 
+		Filename: cameo_plymouth_tiger_supernova.shp
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-
-
-
-
-
-
 ####################################################################################################
-#		BUILDINGS EDEN
+#		DEPRECATED
 ####################################################################################################
-
 ####Eden Command Center
-ecc:
-	Defaults:
-		AddExtension: False
-	build:
-		Start: 4
-		Length: 20
-		Tick: 100
-		AddExtension: True
-	idle: edenCommandCenter.png
-		Length: 1
-	damaged-idle: edenCommandCenter.png
-		Start: 1
-		Length: 1
-	damaged-build:
-		Start: 28
-		Length: 20
-		Tick: 100
-		AddExtension: True
-	dead: edenCommandCenter.png
-		Start: 1
-		Length: 1
-	make: edenConstruction_2_3.png
-		Length: *
-		Tick: 80
-		AddExtension: False
-	icon: facticnh
-		AddExtension: True
+# ecc: 
+# 	Defaults:
+# 		AddExtension: False
+# 	build:
+# 		Start: 4
+# 		Length: 20
+# 		Tick: 100
+# 		AddExtension: True
+# 	idle: edenCommandCenter.png
+# 		Length: 1
+# 	damaged-idle: edenCommandCenter.png
+# 		Start: 1
+# 		Length: 1
+# 	damaged-build:
+# 		Start: 28
+# 		Length: 20
+# 		Tick: 100
+# 		AddExtension: True
+# 	dead: edenCommandCenter.png
+# 		Start: 1
+# 		Length: 1
+# 	make: edenConstruction_2_3.png
+# 		Length: *
+# 		Tick: 80
+# 		AddExtension: False
+# 	icon: facticnh
+# 		AddExtension: True
 
-####Eden Tokamak
-etoka:
-	Defaults:
-		AddExtension: False
-	idle: bits/nuke.png
-		Length: 1
-	damaged-idle: bits/nuke.png
-		Start: 1
-		Length: 1
-	dead: bits/collapseSmall.png
-		Length: *
-		Tick: 80
-	dead: bits/edenTokamakCollapse.png
-		Length: *
-		Tick: 80
-	make: bits/edenTokamakBuild.png
-		Length: *
-		Tick: 80
-	bib: bib3
-		AddExtension: True
-		UseTilesetExtension: true
-		Length: *
-	icon: iconTokamak.png
-		AddExtension: False
-	
-
-####################################################################################################
-#		UNITS EDEN
-####################################################################################################
-####Eden Convec Command Center
-econveccommandcenter:
-	idle: econveccommandcenter.png
-		Start: 0
-		Facings: -8
-		AddExtension: False
-	move: econveccommandcenter.png
-		Start: 8
-		Length: 3
-		Facings: -8
-		Tick: 100
-		AddExtension: False
-	die: econveccommandcenter.png
-		Start: 32
-		Length: 3
-		Tick: 100
-		AddExtension: False
-	icon: edenUIConvec.png
-		AddExtension: False
-####Eden Lynx Laser
-ellaser:
-	idle: echassislynx.png
-		Start: 0
-		Facings: -8
-		AddExtension: False
-	move: echassislynx.png
-		Start: 8
-		Length: 6
-		Facings: -8
-		Tick: 100
-		AddExtension: False
-	turret: edenLaser.png
-		Start: 0
-		Facings: 8
-		AddExtension: False
-	#muzzle: minigun
-	#	Length: 6
-	#	Facings: 8
-	icon: edenUILynxLaser.png
-		AddExtension: False
+# ####Eden Tokamak
+# etoka:
+# 	Defaults:
+# 		AddExtension: False
+# 	idle: bits/nuke.png
+# 		Length: 1
+# 	damaged-idle: bits/nuke.png
+# 		Start: 1
+# 		Length: 1
+# 	dead: bits/collapseSmall.png
+# 		Length: *
+# 		Tick: 80
+# 	dead: bits/edenTokamakCollapse.png
+# 		Length: *
+# 		Tick: 80
+# 	make: bits/edenTokamakBuild.png
+# 		Length: *
+# 		Tick: 80
+# 	bib: bib3
+# 		AddExtension: True	
+# 		UseTilesetExtension: true
+# 		Length: *
+# 	icon: iconTokamak.png
+# 		AddExtension: False
+# econveccommandcenter:
+# 	idle: econveccommandcenter.png
+# 		Start: 0
+# 		Facings: -8
+# 		AddExtension: False
+# 	move: econveccommandcenter.png
+# 		Start: 8
+# 		Length: 3
+# 		Facings: -8
+# 		Tick: 100
+# 		AddExtension: False
+# 	die: econveccommandcenter.png
+# 		Start: 32
+# 		Length: 3
+# 		Tick: 100
+# 		AddExtension: False
+# 	icon: edenUIConvec.png
+# 		AddExtension: False
+# ####Eden Lynx Laser
+# ellaser: 
+# 	idle: echassislynx.png
+# 		Start: 0
+# 		Facings: -8
+# 		AddExtension: False
+# 	move: echassislynx.png
+# 		Start: 8
+# 		Length: 6
+# 		Facings: -8
+# 		Tick: 100
+# 		AddExtension: False
+# 	turret: edenLaser.png
+# 		Start: 0
+# 		Facings: 8
+# 		AddExtension: False
+# 	#muzzle: minigun
+# 	#	Length: 6
+# 	#	Facings: 8
+# 	icon: edenUILynxLaser.png
+# 		AddExtension: False

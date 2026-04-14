@@ -91,6 +91,11 @@ university:
 	Voices:
 		Select: uni_sel
 
+basic_lab:
+	DefaultVariant: .wav
+	Voices:
+		Select: lab_1
+
 standard_lab:
 	DefaultVariant: .wav
 	Voices:
@@ -101,8 +106,6 @@ dirt:
 	Voices:
 		Select: dirt
 
-<<<<<<< Updated upstream
-=======
 garage:
 	DefaultVariant: .wav
 	Voices:
@@ -118,7 +121,6 @@ factoryConsumer:
 	Voices:
 		Select: fac_cons
 
->>>>>>> Stashed changes
 factoryArachnid:
 	DefaultVariant: .wav
 	Voices:
@@ -161,13 +163,9 @@ guardPost:
 		Move: beepAction
 		Action: beepAction
 
-
 ####################################################################################################
 #		Announcements
 ####################################################################################################		
-
-
-
 OP2Speech:
 	DefaultVariant: .wav
 	Notifications:
