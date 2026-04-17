@@ -18,14 +18,14 @@ World:
 		ClassName: Light Support
 		Factions: plymouthl
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
-		SupportActors: PLYMOUTH_SCOUT,PLMICROWAVE,PLMICROWAVE,PLMICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
+		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
 	StartingUnits@heavyplymouthl:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: plymouthl
 		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
-		SupportActors: PLYMOUTH_SCOUT,PLMICROWAVE,PLMICROWAVE,PLMICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
+		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
 	FactionCA@edenl:
 		Name: Eden
@@ -618,6 +618,12 @@ op2_commonore_beacon_3bar:
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	Inherits@SW: ^PrimarySuperweapon
+	Selectable:
+		Bounds: 4096,4096
+	HitShape:
+		Type: Rectangle
+			TopLeft: -2560,-2048
+			BottomRight: 2560,2048
 	Valued:
 		Cost: 3000
 	Building:
@@ -667,6 +673,10 @@ op2_commonore_beacon_3bar:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 2048,2048
+	HitShape:
+		TargetableOffsets: 630,299,0
 	Valued:
 		Cost: 1000
 	Building:
@@ -708,6 +718,9 @@ op2_commonore_beacon_3bar:
 ^op2base_light_tower:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^1x1Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
 	Valued:
 		Cost: 50
 	Tooltip:
@@ -735,15 +748,14 @@ op2_commonore_beacon_3bar:
 		RequiredForShortGame: false
 	SelectionDecorations:
 	-AcceptsDeliveredCash:
-	Selectable:
-		Bounds: 24,24
-		DecorationBounds: 30,30
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_mine_common:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 2048,2048
 	Valued:
 		Cost: 800
 	Building:
@@ -771,6 +783,7 @@ op2_commonore_beacon_3bar:
 ^op2base_storage_common:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^1x1Shape
+	Inherits@STATUS: ^OP2Building
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -800,8 +813,7 @@ op2_commonore_beacon_3bar:
 	SelectionDecorations:
 	-AcceptsDeliveredCash:
 	Selectable:
-		Bounds: 24,24
-		DecorationBounds: 30,30
+		Bounds: 1024,1024
 	ProvidesPrerequisite@buildingname:
 
 ####################################################################################################
@@ -1954,11 +1966,11 @@ PLYMOUTH_STRUCTURE_FACTORY:
 	Tooltip:
 		Name: Plymouth Structure Factory
 	Transforms:
-		IntoActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
+		IntoActor: plymouth_convec_structure_factory
 	ProvidesPrerequisite:
 		Prerequisite: PLYMOUTH_STRUCTURE_FACTORY
 	RenderSprites:
-		Image: PLYMOUTH_STRUCTURE_FACTORY
+		Image: plymouth_structure_factory
 
 PLYMOUTH_TOKAMAK:
 	Inherits: ^op2base_tokamak
@@ -1976,6 +1988,8 @@ PLYMOUTH_SMELTER_COMMON:
 	Inherits: ^op2base_smelter_common
 	Tooltip:
 		Name: Plymouth Common Ore Smelter
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_SMELTER_COMMON
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
@@ -2284,151 +2298,151 @@ PLYMOUTH_MINE_COMMON:
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
 		Description: Provides passive income.\n spawns common ore
 
-# PLYMOUTH_STORAGE_COMMON:
-# 	Inherits: ^op2base_storage_common
-# 	Buildable:
-# 		BuildPaletteOrder: 5
-# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SMELTER_COMMON
-# 		Queue: Defence, RADefence
-# 		Description: Stores processed Tiberium
+PLYMOUTH_STORAGE_COMMON:
+	Inherits: ^op2base_storage_common
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SMELTER_COMMON
+		Queue: Defence, RADefence
+		Description: Stores processed Tiberium
 
-# PLYMOUTH_GP_MICROWAVE:
-# 	Inherits: ^Defense
-# 	Inherits@AUTOTARGET: ^AutoTargetGround
-# 	Inherits@STATUS: ^OP2Building
-# 	Selectable:
-# 		Bounds: 24,24
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: Microwave Guard Post
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
-# 		Queue: Defence, RADefence
-# 		BuildDuration: 600
-# 		BuildDurationModifier: 40
-# 		Description: Microwave defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
-# 	Building:
-# 	Health:
-# 		HP: 41000
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 6c0
-# 	Turreted:
-# 		TurnSpeed: 12
-# 		InitialFacing: 56
-# 	-WithSpriteBody:
-# 	WithEmbeddedTurretSpriteBody:
-# 	Armament:
-# 		Weapon: plymouthMobileDefenceMicrowave
-# 		LocalOffset: 512,0,112
-# 		MuzzleSequence: muzzle
-# 	AttackTurreted:
-# 		RequiresCondition: !build-incomplete
-# 	WithMuzzleOverlay:
-# 	-WithDeathAnimation:
-# 	DetectCloaked:
-# 		Range: 3c0
-# 	Power:
-# 		Amount: -10
-# 	Voiced:
-# 		VoiceSet: guardPost
-# 	BodyOrientation:
-# 		UseClassicFacingFudge: True
+PLYMOUTH_GP_MICROWAVE:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Microwave Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: Microwave defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: plymouthMobileDefenceMicrowave
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
 
-# PLYMOUTH_GP_STICKYFOAM:
-# 	Inherits: ^Defense
-# 	Inherits@AUTOTARGET: ^AutoTargetGround
-# 	Inherits@STATUS: ^OP2Building
-# 	Selectable:
-# 		Bounds: 24,24
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: Stickyfoam Guard Post
-# 	Buildable:
-# 		BuildPaletteOrder: 40
-# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
-# 		Queue: Defence, RADefence
-# 		BuildDuration: 600
-# 		BuildDurationModifier: 40
-# 		Description: Stickyfoam defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
-# 	Building:
-# 	Health:
-# 		HP: 41000
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 6c0
-# 	Turreted:
-# 		TurnSpeed: 12
-# 		InitialFacing: 56
-# 	-WithSpriteBody:
-# 	WithEmbeddedTurretSpriteBody:
-# 	Armament:
-# 		Weapon: plymouthStickyDefence
-# 		LocalOffset: 512,0,112
-# 		MuzzleSequence: muzzle
-# 	AttackTurreted:
-# 		RequiresCondition: !build-incomplete
-# 	WithMuzzleOverlay:
-# 	-WithDeathAnimation:
-# 	DetectCloaked:
-# 		Range: 3c0
-# 	Power:
-# 		Amount: -10
-# 	Voiced:
-# 		VoiceSet: guardPost
-# 	BodyOrientation:
-# 		UseClassicFacingFudge: True
+PLYMOUTH_GP_STICKYFOAM:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Stickyfoam Guard Post
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: Stickyfoam defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: plymouthStickyDefence
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
 
-# PLYMOUTH_GP_RPG:
-# 	Inherits: ^Defense
-# 	Inherits@AUTOTARGET: ^AutoTargetAll
-# 	Inherits@STATUS: ^OP2Building
-# 	Selectable:
-# 		Bounds: 24,24
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: RPG Guard Post
-# 	Buildable:
-# 		BuildPaletteOrder: 60
-# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
-# 		Queue: Defence, RADefence
-# 		BuildDuration: 600
-# 		BuildDurationModifier: 40
-# 		Description: RPG defense.\n  Strong vs Tanks, vehicles\n  Doubles as Anti-air
-# 	Building:
-# 	Health:
-# 		HP: 41000
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 6c0
-# 	Turreted:
-# 		TurnSpeed: 12
-# 		InitialFacing: 56
-# 	-WithSpriteBody:
-# 	WithEmbeddedTurretSpriteBody:
-# 	Armament:
-# 		Weapon: plymouthDefenceRPG
-# 		LocalOffset: 512,0,112
-# 		MuzzleSequence: muzzle
-# 	AttackTurreted:
-# 		RequiresCondition: !build-incomplete
-# 	WithMuzzleOverlay:
-# 	-WithDeathAnimation:
-# 	DetectCloaked:
-# 		Range: 3c0
-# 	Power:
-# 		Amount: -10
-# 	Voiced:
-# 		VoiceSet: guardPost
-# 	BodyOrientation:
-# 		UseClassicFacingFudge: True
+PLYMOUTH_GP_RPG:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: RPG Guard Post
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: RPG defense.\n  Strong vs Tanks, vehicles\n  Doubles as Anti-air
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: plymouthDefenceRPG
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
 
 ####################################################################################################
 #		UNITS PLYMOUTH
@@ -2437,24 +2451,26 @@ PLYMOUTH_MINE_COMMON:
 PLYMOUTH_CONVEC_STRUCTURE_FACTORY:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
-	# Inherits@mcv: ^MCV
-	# Inherits@conyard: ^Conyard
+	Inherits@mcv: ^MCV
+	#Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Plymouth Convec - Structure Factory
 	Buildable:
 		Prerequisites: ~plymouth_university
 		Queue: Vehicle, RAVehicle
-		Description: Deploys into another Command Center.\n  Unarmed
+		Description: Deploys into a Structure Factory.\n  Unarmed
 	Selectable:
 		Bounds: 1024,1024
 	Voiced:
 		VoiceSet: edenConvecVoice
 	Transforms:
-		IntoActor: PLYMOUTH_STRUCTURE_FACTORY
+		IntoActor: plymouth_structure_factory
 		Offset: -1,-1
 		Facing: 108
 		TransformSounds: constru2.aud, hvydoor1.aud
 		NoTransformNotification: BuildingCannotPlaceAudio
+	RenderSprites:
+		Image: plymouth_convec_structure_factory
 
 PLYMOUTH_CARGOTRUCK_EMPTY:
 	Inherits: ^Vehicle
@@ -2690,7 +2706,7 @@ PLYMOUTH_SCORPION:
 # 		Range: 10c0
 # 	SelectionDecorations:
 
-PLMICROWAVE:
+PLYMOUTH_LYNX_MICROWAVE:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
@@ -2734,7 +2750,7 @@ PLMICROWAVE:
 		Scale: 0.75
 
 PLYMOUTH_TIGER_MICROWAVE:
-	Inherits: PLMICROWAVE
+	Inherits: PLYMOUTH_LYNX_MICROWAVE
 	Valued:
 		Cost: 1300
 	Tooltip:
@@ -2760,76 +2776,76 @@ PLYMOUTH_TIGER_MICROWAVE:
 	RenderSprites:
 		Scale: 0.75
 
-# PLYMOUTH_LYNX_RPG:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: Plymouth RPG Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 60
-# 		Prerequisites:
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast rpg vehcile
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: plymouthRPG
-# 		LocalOffset: 256,43,341
-# 		FireDelay: 5
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+PLYMOUTH_LYNX_RPG:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Plymouth RPG Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 60
+		Prerequisites:
+		Queue: Vehicle, RAVehicle
+		Description: Fast rpg vehcile
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: plymouthRPG
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# PLYMOUTH_TIGER_RPG:
-# 	Inherits: PLYMOUTH_LYNX_RPG
-# 	Valued:
-# 		Cost: 1300
-# 	Tooltip:
-# 		Name: Plymouth RPG Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 110
-# 		Prerequisites: PLYMOUTH_SMELTER_RARE
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong RPG vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 60000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: plymouthTigerRPG
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+PLYMOUTH_TIGER_RPG:
+	Inherits: PLYMOUTH_LYNX_RPG
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Plymouth RPG Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 110
+		Prerequisites: PLYMOUTH_SMELTER_RARE
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong RPG vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 60000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: plymouthTigerRPG
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
 # PLYMOUTH_LYNX_EMP:
 # 	Inherits: ^Vehicle

@@ -776,7 +776,7 @@ eden_cargotruck_empty:
 	move:
 		Facings: 8
 		Length: 3
-	harvest:
+	harvesting:
 		Facings: 8
 		Length: 3
 	dock: eden_cargotruck_commonore
@@ -1083,14 +1083,14 @@ eden_tiger_thorshammer:
 #		BUILDINGS PLYMOUTH
 ####################################################################################################
 ####Plymouth Structure Factory
-pcc: 
+plymouth_structure_factory: 
 	Inherits: ^OP2Building
 	statusgreen: 
 		Offset: -72, -48
 	statusred: 
 		Offset: -72, -48
 	Defaults:
-		Filename: plymouth_factory_structure.shp
+		Filename: plymouth_structure_factory.shp
 		AddExtension: False
 	build:
 		Start: 4
@@ -1740,7 +1740,7 @@ plymouth_gp_rpg:
 #		UNITS PLYMOUTH
 ####################################################################################################
 ####Plymouth Convec Command Center
-pconveccommandcenter:
+plymouth_convec_structure_factory:
 	Defaults:
 		Filename: plymouth_convec.shp
 	idle: 
@@ -1916,7 +1916,7 @@ plymouth_scout:
 # 	icon: cameo_plymouth_scout
 
 ####Plymouth Lynx Microwave
-plmicrowave: 
+plymouth_lynx_microwave: 
 	Defaults:
 		Filename: plymouth_chassis_lynx.shp
 	idle: 
