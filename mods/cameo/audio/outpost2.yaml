@@ -170,6 +170,13 @@ guardPost:
 		Move: beepAction
 		Action: beepAction
 
+lightTower:
+	DefaultVariant: .wav
+	Voices:
+		Select: light
+		Move: beepAction
+		Action: beepAction
+
 ####################################################################################################
 #		Announcements
 ####################################################################################################		

@@ -593,6 +593,12 @@ op2_commonore_beacon_3bar:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 3072,3072
+	HitShape:
+		Type: Rectangle
+			TopLeft: -2560,-2048
+			BottomRight: 2560,2048
 	Valued:
 		Cost: 1800
 	Building:
@@ -699,6 +705,10 @@ op2_commonore_beacon_3bar:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
+	HitShape:
+		Type: Rectangle
+			TopLeft: -2560,-2048
+			BottomRight: 2560,2048
 	Valued:
 		Cost: 2500
 	Building:
@@ -743,7 +753,7 @@ op2_commonore_beacon_3bar:
 	Power:
 		Amount: -5
 	Voiced:
-		VoiceSet: storage_common
+		VoiceSet: lightTower
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	SelectionDecorations:
@@ -1002,9 +1012,11 @@ EDEN_FACTORY_CONSUMER:
 	Inherits@shape: ^2x2Shape
 	Inherits@STATUS: ^OP2Building
 	Selectable:
-		Bounds: 64,64
+		Bounds: 2048,2048
 	HitShape:
-		TargetableOffsets: 3000,3000,0
+		Type: Rectangle
+			TopLeft: -2560,-2048
+			BottomRight: 2560,2048
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1072,304 +1084,304 @@ EDEN_FACTORY_CONSUMER:
 		Sequence: idle-anim4
 		Palette: placelinesegment
 
-# EDEN_GORF:
-# 	Inherits: ^op2base_gorf
-# 	Tooltip:
-# 		Name: Eden GORF
-# 	ProvidesPrerequisite:
-# 		Prerequisite: EDEN_GORF
-# 	Buildable:
-# 		BuildPaletteOrder: 110
-# 		Queue: Building, RABuilding
-# 		Prerequisites: EDEN_LAB_STANDARD
-# 		Description: Increases income from Common Ore Smelter
+EDEN_GORF:
+	Inherits: ^op2base_gorf
+	Tooltip:
+		Name: Eden GORF
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_GORF
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
+		Description: Increases income from Common Ore Smelter
 
-# EDEN_LAB_ADVANCED:
-# 	Inherits: ^op2base_lab_advanced
-# 	#1800
-# 	Tooltip:
-# 		Name: Eden Advanced Lab
-# 	ProvidesPrerequisite:
-# 		Prerequisite: EDEN_LAB_ADVANCED
-# 	Buildable:
-# 		BuildPaletteOrder: 120
-# 		Queue: Building, RABuilding
-# 		Prerequisites: EDEN_LAB_STANDARD
-# 		Description: Needed for Space Port, Rare Ore Smelter
+EDEN_LAB_ADVANCED:
+	Inherits: ^op2base_lab_advanced
+	#1800
+	Tooltip:
+		Name: Eden Advanced Lab
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_LAB_ADVANCED
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
+		Description: Needed for Space Port, Rare Ore Smelter
 
-# EDEN_SPACEPORT:
-# 	Inherits: ^op2base_spaceport
-# 	#1800
-# 	Tooltip:
-# 		Name: Eden Space Port
-# 	ProvidesPrerequisite:
-# 		Prerequisite: EDEN_SPACEPORT
-# 	Buildable:
-# 		BuildPaletteOrder: 130
-# 		Queue: Building, RABuilding
-# 		Prerequisites: EDEN_LAB_ADVANCED
-# 		Description: Needed for Solar Power Array\nLaunches Supernova Missiles.
+EDEN_SPACEPORT:
+	Inherits: ^op2base_spaceport
+	#1800
+	Tooltip:
+		Name: Eden Space Port
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_SPACEPORT
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
+		Description: Needed for Solar Power Array\nLaunches Supernova Missiles.
 
-# EDEN_SOLAR_ARRAY:
-# 	Inherits: ^op2base_solararray
-# 	Tooltip:
-# 		Name: Eden Solar Array
-# 	ProvidesPrerequisite:
-# 		Prerequisite:
-# 	Buildable:
-# 		BuildPaletteOrder: 140
-# 		Queue: Building, RABuilding
-# 		Prerequisites: EDEN_SPACEPORT
-# 		Description: Generates power\nReleases Emp Shockwave on\nDeath
+EDEN_SOLAR_ARRAY:
+	Inherits: ^op2base_solararray
+	Tooltip:
+		Name: Eden Solar Array
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 140
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_SPACEPORT
+		Description: Generates power\nReleases Emp Shockwave on\nDeath
 
-# EDEN_SMELTER_RARE:
-# 	Inherits: ^op2base_smelter_rare
-# 	#1800
-# 	Tooltip:
-# 		Name: Eden Rare Ore Smelter
-# 	ProvidesPrerequisite:
-# 		Prerequisite: EDEN_SMELTER_RARE
-# 	Buildable:
-# 		BuildPaletteOrder: 150
-# 		Queue: Building, RABuilding
-# 		Prerequisites: EDEN_LAB_ADVANCED
-# 		Description: Needed for Tigers
+EDEN_SMELTER_RARE:
+	Inherits: ^op2base_smelter_rare
+	#1800
+	Tooltip:
+		Name: Eden Rare Ore Smelter
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_SMELTER_RARE
+	Buildable:
+		BuildPaletteOrder: 150
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
+		Description: Needed for Tigers
 # ####################################################################################################
 # #		DEFENCE EDEN
 # ####################################################################################################
-# EDEN_MINE_COMMON:
-# 	Inherits: ^op2base_mine_common
-# 	Tooltip:
-# 		Name: Eden Common Ore Mine
-# 	ProvidesPrerequisite:
-# 		Prerequisite:
-# 	Buildable:
-# 		BuildPaletteOrder: 110
-# 		Queue: Defence, RADefence
-# 		Prerequisites: EDEN_TOKAMAK
-# 		Description: Provides passive income.\n spawns common ore
+EDEN_MINE_COMMON:
+	Inherits: ^op2base_mine_common
+	Tooltip:
+		Name: Eden Common Ore Mine
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Defence, RADefence
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Description: Provides passive income.\n spawns common ore
 
-# EDEN_STORAGE_COMMON:
-# 	Inherits: ^op2base_storage_common
-# 	Buildable:
-# 		BuildPaletteOrder: 5
-# 		Prerequisites: EDEN_SMELTER_COMMON
-# 		Queue: Defence, RADefence
-# 		Description: Stores processed Tiberium
+EDEN_STORAGE_COMMON:
+	Inherits: ^op2base_storage_common
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites: ~eden_factory_structure, EDEN_SMELTER_COMMON
+		Queue: Defence, RADefence
+		Description: Stores processed Tiberium
 
-# EDEN_GP_LASER:
-# 	Inherits: ^Defense
-# 	Inherits@AUTOTARGET: ^AutoTargetGround
-# 	Inherits@STATUS: ^OP2Building
-# 	Selectable:
-# 		Bounds: 24,24
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: Eden Laser Guard Post
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites: EDEN_TOKAMAK
-# 		Queue: Defence, RADefence
-# 		BuildDuration: 600
-# 		BuildDurationModifier: 40
-# 		Description: Laser defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
-# 	Building:
-# 	Health:
-# 		HP: 41000
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 6c0
-# 	Turreted:
-# 		TurnSpeed: 12
-# 		InitialFacing: 56
-# 	-WithSpriteBody:
-# 	WithEmbeddedTurretSpriteBody:
-# 	Armament:
-# 		Weapon: edenMobileDefenceLaser
-# 		LocalOffset: 512,0,112
-# 		MuzzleSequence: muzzle
-# 	AttackTurreted:
-# 		RequiresCondition: !build-incomplete
-# 	WithMuzzleOverlay:
-# 	-WithDeathAnimation:
-# 	DetectCloaked:
-# 		Range: 3c0
-# 	Power:
-# 		Amount: -10
-# 	Voiced:
-# 		VoiceSet: guardPost
-# 	BodyOrientation:
-# 		UseClassicFacingFudge: True
+EDEN_GP_LASER:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Eden Laser Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: Laser defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: edenMobileDefenceLaser
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
 
-# EDEN_GP_EMP:
-# 	Inherits: ^Defense
-# 	Inherits@AUTOTARGET: ^AutoTargetGround
-# 	Inherits@STATUS: ^OP2Building
-# 	Selectable:
-# 		Bounds: 24,24
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: Eden EMP Guard Post
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites: EDEN_TOKAMAK
-# 		Queue: Defence, RADefence
-# 		BuildDuration: 600
-# 		BuildDurationModifier: 40
-# 		Description: EMP defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
-# 	Building:
-# 	Health:
-# 		HP: 41000
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 6c0
-# 	Turreted:
-# 		TurnSpeed: 12
-# 		InitialFacing: 56
-# 	-WithSpriteBody:
-# 	WithEmbeddedTurretSpriteBody:
-# 	Armament:
-# 		Weapon: edenEMPGP
-# 		LocalOffset: 512,0,112
-# 		MuzzleSequence: muzzle
-# 	AttackTurreted:
-# 		RequiresCondition: !build-incomplete
-# 	WithMuzzleOverlay:
-# 	-WithDeathAnimation:
-# 	DetectCloaked:
-# 		Range: 3c0
-# 	Power:
-# 		Amount: -10
-# 	Voiced:
-# 		VoiceSet: guardPost
-# 	BodyOrientation:
-# 		UseClassicFacingFudge: True
+EDEN_GP_EMP:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Eden EMP Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: EMP defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: edenEMPGP
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
 
-# EDEN_GP_RAILGUN:
-# 	Inherits: ^Defense
-# 	Inherits@AUTOTARGET: ^AutoTargetGround
-# 	Inherits@STATUS: ^OP2Building
-# 	Selectable:
-# 		Bounds: 24,24
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: Eden Railgun Guard Post
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites: EDEN_TOKAMAK
-# 		Queue: Defence, RADefence
-# 		BuildDuration: 600
-# 		BuildDurationModifier: 40
-# 		Description: Railgun defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
-# 	Building:
-# 	Health:
-# 		HP: 41000
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 6c0
-# 	Turreted:
-# 		TurnSpeed: 12
-# 		InitialFacing: 56
-# 	-WithSpriteBody:
-# 	WithEmbeddedTurretSpriteBody:
-# 	Armament:
-# 		Weapon: plymouthDefenceRPG
-# 		LocalOffset: 512,0,112
-# 		MuzzleSequence: muzzle
-# 	AttackTurreted:
-# 		RequiresCondition: !build-incomplete
-# 	WithMuzzleOverlay:
-# 	-WithDeathAnimation:
-# 	DetectCloaked:
-# 		Range: 3c0
-# 	Power:
-# 		Amount: -10
-# 	Voiced:
-# 		VoiceSet: guardPost
-# 	BodyOrientation:
-# 		UseClassicFacingFudge: True
+EDEN_GP_RAILGUN:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Eden Railgun Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: Railgun defense.\n  Strong vs Tanks, vehicles\n  Weak vs Infantry
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: edenDefenceRailgun
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
 
 # ####################################################################################################
 # #		WARES EDEN
 # ####################################################################################################
 
-# CONSUMER_ITEMS_IMPULSE:
-# 	Inherits: ^Vehicle
-# 	Inherits@selection: ^SelectableSupportUnit
-# 	Valued:
-# 		Cost: 300
-# 	Tooltip:
-# 		Name: Impulse Items
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites:
-# 		Queue: Infantry, RAInfantry
-# 		BuildDuration: 500
-# 		BuildDurationModifier: 40
-# 		Description: Cheap Items - Returns $600
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 1
-# 	CashTrickler:
-# 		Interval: 3
-# 		Amount: 600
-# 	KillsSelf:
-# 		Delay: 3
-# 		RemoveInstead: true
+CONSUMER_ITEMS_IMPULSE:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Impulse Items
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~EDEN_FACTORY_CONSUMER
+		Queue: Infantry, RAInfantry
+		BuildDuration: 500
+		BuildDurationModifier: 40
+		Description: Cheap Items - Returns $600
+	WithMoveAnimation:
+	Health:
+		HP: 1
+	CashTrickler:
+		Interval: 3
+		Amount: 600
+	KillsSelf:
+		Delay: 3
+		RemoveInstead: true
 
-# CONSUMER_ITEMS_WARES:
-# 	Inherits: ^Vehicle
-# 	Inherits@selection: ^SelectableSupportUnit
-# 	Valued:
-# 		Cost: 500
-# 	Tooltip:
-# 		Name: Impulse Items
-# 	Buildable:
-# 		BuildPaletteOrder: 20
-# 		Prerequisites:
-# 		Queue: Infantry, RAInfantry
-# 		BuildDuration: 800
-# 		BuildDurationModifier: 40
-# 		Description: Basic Items - Returns $1100
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 1
-# 	CashTrickler:
-# 		Interval: 3
-# 		Amount: 1100
-# 	KillsSelf:
-# 		Delay: 3
-# 		RemoveInstead: true
+CONSUMER_ITEMS_WARES:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Impulse Items
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~EDEN_FACTORY_CONSUMER
+		Queue: Infantry, RAInfantry
+		BuildDuration: 800
+		BuildDurationModifier: 40
+		Description: Basic Items - Returns $1100
+	WithMoveAnimation:
+	Health:
+		HP: 1
+	CashTrickler:
+		Interval: 3
+		Amount: 1100
+	KillsSelf:
+		Delay: 3
+		RemoveInstead: true
 
-# CONSUMER_ITEMS_LUXURY_WARES:
-# 	Inherits: ^Vehicle
-# 	Inherits@selection: ^SelectableSupportUnit
-# 	Valued:
-# 		Cost: 1000
-# 	Tooltip:
-# 		Name: Impulse Items
-# 	Buildable:
-# 		BuildPaletteOrder: 30
-# 		Prerequisites:
-# 		Queue: Infantry, RAInfantry
-# 		BuildDuration: 1000
-# 		BuildDurationModifier: 40
-# 		Description: Luxury Items - Returns $2300
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 1
-# 	CashTrickler:
-# 		Interval: 3
-# 		Amount: 2300
-# 	KillsSelf:
-# 		Delay: 3
-# 		RemoveInstead: true
+CONSUMER_ITEMS_LUXURY_WARES:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Impulse Items
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~EDEN_FACTORY_CONSUMER
+		Queue: Infantry, RAInfantry
+		BuildDuration: 1000
+		BuildDurationModifier: 40
+		Description: Luxury Items - Returns $2300
+	WithMoveAnimation:
+	Health:
+		HP: 1
+	CashTrickler:
+		Interval: 3
+		Amount: 2300
+	KillsSelf:
+		Delay: 3
+		RemoveInstead: true
 
 # ####################################################################################################
 # #		UNITS EDEN
@@ -1407,7 +1419,7 @@ EDEN_CARGOTRUCK_EMPTY:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~eden_smelter_common
+		Prerequisites: ~eden_factory_vehicle, eden_smelter_common
 		Queue: Vehicle, RAVehicle
 		Description: template-harvester.description
 	Harvester:
@@ -1445,476 +1457,476 @@ EDEN_CARGOTRUCK_EMPTY:
 	Voiced:
 		VoiceSet: cargoTruckVoice
 
-# EDEN_SCOUT:
-# 	Inherits: ^Vehicle
-# 	Inherits@selection: ^SelectableSupportUnit
-# 	Valued:
-# 		Cost: 300
-# 	Tooltip:
-# 		Name: Eden Scout
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites:
-# 		Queue: Vehicle, RAVehicle
-# 		BuildDuration: 500
-# 		BuildDurationModifier: 40
-# 		Description: Unarmed scout
-# 	Selectable:
-# 		DecorationBounds: 36,36
-# 	Mobile:
-# 		Speed: 140
-# 		Locomotor: heavywheeled
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 10000
-# 	Voiced:
-# 		VoiceSet: scoutVoice
-# 	Repairable:
-# 		HpPerStep: 2182
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 10c0
-# 	SelectionDecorations:
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_SCOUT:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Eden Scout
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~eden_factory_vehicle
+		Queue: Vehicle, RAVehicle
+		BuildDuration: 500
+		BuildDurationModifier: 40
+		Description: Unarmed scout
+	Selectable:
+		Bounds: 1024,1024
+	Mobile:
+		Speed: 140
+		Locomotor: heavywheeled
+	WithMoveAnimation:
+	Health:
+		HP: 10000
+	Voiced:
+		VoiceSet: scoutVoice
+	Repairable:
+		HpPerStep: 2182
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 10c0
+	SelectionDecorations:
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_LYNX_LASER:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-# 	Valued:
-# 		Cost: 500
-# 	Tooltip:
-# 		Name: Eden Laser Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 50
-# 		Prerequisites:
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast laser vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: edenMobileLaser
-# 		LocalOffset: 171,0,85
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_LYNX_LASER:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Eden Laser Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 50
+		Prerequisites: ~eden_factory_vehicle
+		Queue: Vehicle, RAVehicle
+		Description: Fast laser vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: edenMobileLaser
+		LocalOffset: 171,0,85
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_TIGER_MICROWAVE:
-# 	Inherits: EDEN_LYNX_LASER
-# 	Valued:
-# 		Cost: 1300
-# 	Tooltip:
-# 		Name: Eden Laser Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 100
-# 		Prerequisites: EDEN_SMELTER_RARE
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong laser vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 60000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: edenMobileLaserTiger
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_TIGER_MICROWAVE:
+	Inherits: EDEN_LYNX_LASER
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Eden Laser Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 100
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong laser vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 60000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: edenMobileLaserTiger
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_LYNX_RAILGUN:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-# 	Valued:
-# 		Cost: 600
-# 	Tooltip:
-# 		Name: Eden Railgun Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 60
-# 		Prerequisites:
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast railgun vehcile
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: plymouthRPG
-# 		LocalOffset: 256,43,341
-# 		FireDelay: 5
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_LYNX_RAILGUN:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Eden Railgun Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 60
+		Prerequisites: ~eden_factory_vehicle
+		Queue: Vehicle, RAVehicle
+		Description: Fast railgun vehcile
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: edenRailgun
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_TIGER_RAILGUN:
-# 	Inherits: EDEN_LYNX_RAILGUN
-# 	Valued:
-# 		Cost: 1300
-# 	Tooltip:
-# 		Name: Eden Railgun Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 110
-# 		Prerequisites: EDEN_SMELTER_RARE
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong railgun vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 60000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: plymouthTigerRPG
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_TIGER_RAILGUN:
+	Inherits: EDEN_LYNX_RAILGUN
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Eden Railgun Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 110
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong railgun vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 60000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: edenTigerRailgun
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_LYNX_EMP:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-# 	Valued:
-# 		Cost: 700
-# 	Tooltip:
-# 		Name: Eden EMP Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 60
-# 		Prerequisites: EDEN_LAB_STANDARD
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast EMP vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: plymouthEMP
-# 		LocalOffset: 256,43,341
-# 		FireDelay: 5
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_LYNX_EMP:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Eden EMP Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 60
+		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_STANDARD
+		Queue: Vehicle, RAVehicle
+		Description: Fast EMP vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: plymouthEMP
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_TIGER_EMP:
-# 	Inherits: EDEN_LYNX_EMP
-# 	Valued:
-# 		Cost: 1500
-# 	Tooltip:
-# 		Name: Eden EMP Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 120
-# 		Prerequisites: EDEN_SMELTER_RARE, EDEN_LAB_STANDARD
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong EMP vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 60000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: plymouthEMPTiger
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_TIGER_EMP:
+	Inherits: EDEN_LYNX_EMP
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Eden EMP Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 120
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_STANDARD
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong EMP vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 60000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: plymouthEMPTiger
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_LYNX_ACIDCLOUD:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-# 	Valued:
-# 		Cost: 1100
-# 	Tooltip:
-# 		Name: Eden AcidCloud Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 60
-# 		Prerequisites: EDEN_LAB_ADVANCED
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast AcidCloud vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: plymouthRPGMines
-# 		LocalOffset: 256,43,341
-# 		FireDelay: 5
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_LYNX_ACIDCLOUD:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Eden AcidCloud Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 60
+		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
+		Queue: Vehicle, RAVehicle
+		Description: Fast AcidCloud vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: plymouthRPGMines
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_TIGER_ACIDCLOUD:
-# 	Inherits: EDEN_LYNX_ACIDCLOUD
-# 	Valued:
-# 		Cost: 2200
-# 	Tooltip:
-# 		Name: Eden AcidCloud Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 140
-# 		Prerequisites: EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong AcidCloud vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 60000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: plymouthTigerRPGMines
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_TIGER_ACIDCLOUD:
+	Inherits: EDEN_LYNX_ACIDCLOUD
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Eden AcidCloud Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 140
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong AcidCloud vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 60000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: plymouthTigerRPGMines
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_LYNX_STARFLARE:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-# 	Valued:
-# 		Cost: 400
-# 	Tooltip:
-# 		Name: Eden Starflare Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 80
-# 		Prerequisites: EDEN_GORF
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast starflare vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: DemoTruckTargeting
-# 		LocalOffset: 256,43,341
-# 		FireDelay: 5
-# 	GrantConditionOnAttack:
-# 		Condition: triggered
-# 	GrantConditionOnDeploy:
-# 		DeployedCondition: triggered
-# 		PauseOnCondition: disabled
-# 	FireWarheadsOnDeath@bomb:
-# 		Weapon: GLBarrelExplode
-# 		EmptyWeapon: GLBarrelExplode
-# 		DamageSource: Killer
-# 		RequiresCondition: !disabled
-# 	KillsSelf:
-# 		RequiresCondition: !disabled && (invulnerability || triggered)
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_LYNX_STARFLARE:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Eden Starflare Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 80
+		Prerequisites: ~eden_factory_vehicle, EDEN_GORF
+		Queue: Vehicle, RAVehicle
+		Description: Fast starflare vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: DemoTruckTargeting
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+	FireWarheadsOnDeath@bomb:
+		Weapon: GLBarrelExplode
+		EmptyWeapon: GLBarrelExplode
+		DamageSource: Killer
+		RequiresCondition: !disabled
+	KillsSelf:
+		RequiresCondition: !disabled && (invulnerability || triggered)
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_TIGER_STARFLARE:
-# 	Inherits: EDEN_LYNX_STARFLARE
-# 	Valued:
-# 		Cost: 800
-# 	Tooltip:
-# 		Name: Eden Starflare Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 150
-# 		Prerequisites: EDEN_SMELTER_RARE, EDEN_GORF
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong Starflare vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 90000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: DemoTruckTargeting
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_TIGER_STARFLARE:
+	Inherits: EDEN_LYNX_STARFLARE
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Eden Starflare Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 150
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_GORF
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong Starflare vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 90000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: DemoTruckTargeting
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_LYNX_THORSHAMMER:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-# 	Valued:
-# 		Cost: 1100
-# 	Tooltip:
-# 		Name: Eden ThorsHammer Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 60
-# 		Prerequisites: EDEN_LAB_ADVANCED
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast ThorsHammer vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: edenMobileThorsHammer
-# 		LocalOffset: 256,43,341
-# 		FireDelay: 5
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_LYNX_THORSHAMMER:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Eden ThorsHammer Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 60
+		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
+		Queue: Vehicle, RAVehicle
+		Description: Fast ThorsHammer vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: edenMobileThorsHammer
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# EDEN_TIGER_THORSHAMMER:
-# 	Inherits: EDEN_LYNX_THORSHAMMER
-# 	Valued:
-# 		Cost: 2200
-# 	Tooltip:
-# 		Name: Eden ThorsHammer Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 140
-# 		Prerequisites: EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong ThorsHammer vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 60000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: edenMobileThorsHammerTiger
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+EDEN_TIGER_THORSHAMMER:
+	Inherits: EDEN_LYNX_THORSHAMMER
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Eden ThorsHammer Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 140
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong ThorsHammer vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 60000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: edenMobileThorsHammerTiger
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
 # #OLD
 # ELLASER:
@@ -2160,8 +2172,8 @@ PLYMOUTH_FACTORY_ARACHNID:
 		Cost: 1200
 	Tooltip:
 		Name: Plymouth Arachnid Factory
-	#ProvidesPrerequisite:
-	#	Prerequisite:
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_FACTORY_ARACHNID
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Building, RABuilding
@@ -2530,7 +2542,7 @@ PLYMOUTH_SCOUT:
 		Name: Plymouth Scout
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites:
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 500
 		BuildDurationModifier: 40
@@ -2601,7 +2613,7 @@ PLYMOUTH_SPIDER:
 		Name: Plymouth Spider
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites:
+		Prerequisites: ~PLYMOUTH_FACTORY_ARACHNID
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
@@ -2648,7 +2660,7 @@ PLYMOUTH_SCORPION:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: PLYMOUTH_LAB_ADVANCED
+		Prerequisites: ~PLYMOUTH_FACTORY_ARACHNID,PLYMOUTH_LAB_ADVANCED
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
@@ -2720,7 +2732,7 @@ PLYMOUTH_LYNX_MICROWAVE:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 50
-		Prerequisites:
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
 		Description: Fast microwave vehicle
 	Mobile:
@@ -2758,7 +2770,7 @@ PLYMOUTH_TIGER_MICROWAVE:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 100
-		Prerequisites: PLYMOUTH_SMELTER_RARE
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE,PLYMOUTH_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
 		Description: Slow and strong microwave vehicle
 	Mobile:
@@ -2790,7 +2802,7 @@ PLYMOUTH_LYNX_RPG:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 60
-		Prerequisites:
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
 		Description: Fast rpg vehcile
 	Mobile:
@@ -2829,7 +2841,7 @@ PLYMOUTH_TIGER_RPG:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 110
-		Prerequisites: PLYMOUTH_SMELTER_RARE
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE,PLYMOUTH_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
 		Description: Slow and strong RPG vehicle
 	Mobile:
