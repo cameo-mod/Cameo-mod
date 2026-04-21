@@ -2900,7 +2900,7 @@ PLYMOUTH_LYNX_EMP:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 60
-		Prerequisites: PLYMOUTH_LAB_STANDARD
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_STANDARD
 		Queue: Vehicle, RAVehicle
 		Description: Fast EMP vehcile
 	Mobile:
@@ -2939,7 +2939,7 @@ PLYMOUTH_TIGER_EMP:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 120
-		Prerequisites: PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_STANDARD
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_STANDARD
 		Queue: Vehicle, RAVehicle
 		Description: Slow and strong EMP vehicle
 	Mobile:
@@ -2971,7 +2971,7 @@ PLYMOUTH_LYNX_STICKYFOAM:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 60
-		Prerequisites: PLYMOUTH_RESIDENCE
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_RESIDENCE
 		Queue: Vehicle, RAVehicle
 		Description: Fast EMP vehcile
 	Mobile:
@@ -3010,7 +3010,7 @@ PLYMOUTH_TIGER_STICKYFOAM:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 130
-		Prerequisites: PLYMOUTH_SMELTER_RARE, PLYMOUTH_RESIDENCE
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_RESIDENCE
 		Queue: Vehicle, RAVehicle
 		Description: Slow and strong Stickyfoam vehicle
 	Mobile:
@@ -3042,7 +3042,7 @@ PLYMOUTH_LYNX_ESG:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 60
-		Prerequisites: PLYMOUTH_LAB_ADVANCED
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: Fast EMP vehcile
 	Mobile:
@@ -3081,7 +3081,7 @@ PLYMOUTH_TIGER_ESG:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 140
-		Prerequisites: PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: Slow and strong ESG vehicle
 	Mobile:
@@ -3113,7 +3113,7 @@ PLYMOUTH_LYNX_STARFLARE:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 80
-		Prerequisites: PLYMOUTH_GORF
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_GORF
 		Queue: Vehicle, RAVehicle
 		Description: Fast starflare vehicle
 	Mobile:
@@ -3164,7 +3164,7 @@ PLYMOUTH_TIGER_STARFLARE:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 150
-		Prerequisites: PLYMOUTH_SMELTER_RARE, PLYMOUTH_GORF
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_GORF
 		Queue: Vehicle, RAVehicle
 		Description: Slow and strong Starflare vehicle
 	Mobile:
@@ -3196,7 +3196,7 @@ PLYMOUTH_LYNX_SUPERNOVA:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 90
-		Prerequisites: PLYMOUTH_LAB_ADVANCED
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: Fast supernova vehicle
 	Mobile:
@@ -3246,7 +3246,7 @@ PLYMOUTH_TIGER_SUPERNOVA:
 	Buildable:
 		BuildDuration: 300
 		BuildPaletteOrder: 160
-		Prerequisites: PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: Slow and strong Supernova vehicle
 	Mobile:
