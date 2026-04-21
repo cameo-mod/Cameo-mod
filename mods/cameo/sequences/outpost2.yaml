@@ -89,7 +89,7 @@ eden_factory_structure:
 		Start: 1
 		Length: 1
 	icon: 
-		Filename: edenUITokamak.png
+		Filename: edenUIfactorystructure.png
 		AddExtension: False
 
 eden_tokamak:
@@ -602,6 +602,23 @@ eden_mine_common:
 		Length: *
 	icon: 
 		Filename: ui_eden_mine.png
+		AddExtension: False
+
+eden_light_tower:
+	Inherits: ^OP2Building
+	statusgreen: 
+		Offset: -24, -24
+	statusred: 
+		Offset: -24, -24
+	Defaults:
+		Filename: edenLightTower.shp
+	idle: 
+		Length: *
+	damaged-idle: 
+	dead: 
+	make: 
+	icon: 
+		Filename: edenUIlighttower.png
 		AddExtension: False
 
 eden_storage_common:
@@ -1120,7 +1137,7 @@ plymouth_structure_factory:
 		Tick: 80
 		AddExtension: False
 	icon: 
-		Filename: edenUITokamak.png
+		Filename: plymouthUIfactorystructure.png
 		AddExtension: False
 		
 plymouth_tokamak:
@@ -1631,7 +1648,8 @@ plymouth_light_tower:
 	dead: 
 	make: 
 	icon: 
-		Filename: cameo_plymouth_storage_common.shp
+		Filename: plymouthUIlighttower.png
+		AddExtension: False
 
 plymouth_storage_common:
 	Inherits: ^OP2Building
