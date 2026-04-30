@@ -3371,6 +3371,8 @@ latin_monkey:
 steel_qabarr:
 	Defaults:
 		Offset: 16,-10
+		Tick: 50
+		Scale: 1.0
 	idle:
 		Filename: steel_qabarr.shp
 	damaged-idle:
@@ -3395,7 +3397,8 @@ steel_qabarr:
 
 steel_qapowr:
 	Defaults:
-		Offset: 0,-2
+		Offset: 0,-4
+		Tick: 50
 	idle:
 		Filename: steel_qapowr.shp
 		ShadowStart: 2
@@ -3431,6 +3434,7 @@ steel_qapowr:
 steel_qref:
 	Defaults:
 		Offset: 1,-12
+		Tick: 50
 	idle:
 		Filename: steel_qref.shp
 		ShadowStart: 2
@@ -3480,6 +3484,7 @@ steel_qref:
 steel_qtradr:
 	Defaults:
 		Offset: 0,-8
+		Tick: 50
 	idle:
 		Filename: steel_qtradr.shp
 		ShadowStart: 2
@@ -3494,13 +3499,13 @@ steel_qtradr:
 		Filename: steel_qtradr_a.shp
 		ShadowStart: 20
 		Length: 10
-		Tick: 150
+		Tick: 100
 	damaged-idle-dish:
 		Filename: steel_qtradr_a.shp
 		Start: 10
 		ShadowStart: 30
 		Length: 10
-		Tick: 150
+		Tick: 100
 	make:
 		Filename: steel_qtradr_make.shp
 		Length: 25
@@ -3517,7 +3522,8 @@ steel_qtradr:
 
 steel_qaclone:
 	Defaults:
-		Offset: -2,2
+		Offset: -16,-20
+		Tick: 50
 	idle:
 		Filename: steel_qaclone.shp
 		ShadowStart: 2
@@ -3591,6 +3597,7 @@ steel_qacst:
 steel_qaweap:
 	Defaults:
 		Offset: -20,-26
+		Tick: 50
 	idle:
 		Filename: steel_qaweap.shp
 		ZOffset: -1536
@@ -3676,7 +3683,8 @@ steel_qaweap:
 
 steel_qatech:
 	Defaults:
-		Offset: -8,-14
+		Offset: -8,-8
+		Tick: 50
 	idle:
 		Filename: steel_qatech.shp
 		ShadowStart: 2
@@ -3688,10 +3696,12 @@ steel_qatech:
 		Filename: steel_qatech_a.shp
 		Length: 11
 		ShadowStart: 22
-	damaged-idle-ights:
+		Tick: 100
+	damaged-idle-lights:
 		Filename: steel_qatech_a.shp
 		Length: 11
 		ShadowStart: 33
+		Tick: 100
 	make:
 		Filename: steel_qatech_make.shp
 		Length: 31
@@ -3711,7 +3721,9 @@ steel_qatech:
 
 steel_qaorbit:
 	Defaults:
-		Offset: 8,-14
+		Offset: -8,-20
+		Scale: 1
+		Tick: 50
 	idle:
 		Filename: steel_qaorbit.shp
 		ShadowStart: 2
@@ -3723,11 +3735,13 @@ steel_qaorbit:
 		Filename: steel_qaorbit_a.shp
 		Length: 10
 		ShadowStart: 20
-	damaged-idle-ights:
+		Tick: 100
+	damaged-idle-lights:
 		Filename: steel_qaorbit_a.shp
 		Start: 10
 		Length: 10
 		ShadowStart: 30
+		Tick: 100
 	make:
 		Filename: steel_qaorbit_make.shp
 		Length: 18
@@ -3748,7 +3762,7 @@ steel_qaorbit:
 steel_fedturret:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Offset: 0,0
+		Offset: 0,-4
 	idle:
 		Filename: steel_fedturret.shp
 	damaged-idle:
@@ -3773,7 +3787,7 @@ steel_fedturret:
 
 steel_fedaa:
 	Defaults:
-		Offset: 0,2
+		Offset: 0,-6
 	idle:
 		Filename: steel_fedaa.shp
 	damaged-idle:
@@ -3802,7 +3816,8 @@ steel_fedaa:
 
 steel_qcannon:
 	Defaults:
-		Offset: 0,-16
+		Offset: -4,-20
+		Scale: 1.25
 	idle:
 		Filename: steel_qcannon.shp
 		ShadowStart: 2
@@ -3859,7 +3874,7 @@ steel_bfg10k:
 steel_conpad:
 	Defaults:
 		Offset: 2,-10 #12
-		Scale: 2
+		Scale: 1.5
 	idle:
 		Filename: steel_conpad.shp
 		Length: 1
@@ -3911,7 +3926,7 @@ steel_qoil:
 	Defaults:
 		Filename: steel_qoil.shp
 		Offset: -5, 5
-		Scale: 2
+		Scale: 1.0
 	idle:
 		Filename: invisibleitem.shp
 	damaged-idle:

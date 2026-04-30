@@ -8262,8 +8262,13 @@ team_upgrade.uplatin_cashrecover:
 steel_qacst:
 	Inherits: ra2gacnst
 	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@shape: ^4x3Shape
 	Tooltip:
 		Name: Consortium Construction Yard
+	Building:
+		Footprint: xxxx xxxx ====
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-1024,0
 	Transforms:
 		IntoActor: steel_qmcv
 	RenderSprites:
@@ -8336,8 +8341,9 @@ steel_qref:
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qapowr
 	Building:
-		Footprint: xxx= xxx= xxx=
+		Footprint: xxx= xxxx =xx=
 		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
 	Refinery:
 	DockHost:
 		Type: Unload
@@ -8362,7 +8368,7 @@ steel_qref:
 
 steel_qabarr:
 	Inherits: ^RA2Building
-	Inherits@shape: ^3x2Shape
+	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
 	SelectionDecorations:
@@ -8371,9 +8377,9 @@ steel_qabarr:
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qapowr
 	Building:
-		Footprint: xxx xxx ===
-		Dimensions: 3,3
-		LocalCenterOffset: 0,-512,0
+		Footprint: xx ==
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-1024,0
 	RallyPoint:
 		Path: 1,2
 	Exit@1:
@@ -8505,7 +8511,7 @@ steel_qaweap:
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qref
 	Building:
-		Footprint: xxxx xxxx xxxx
+		Footprint: =x== xxxx =xxx
 		Dimensions: 4,3
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
@@ -8991,7 +8997,7 @@ steel_conpad:
 	Tooltip:
 		Name: Consortium Airpad
 	Building:
-		Footprint: xxx xxx xxx
+		Footprint: === xxx xxx
 		Dimensions: 3,3
 	Exit@1:
 		ExitCell: 1,1
@@ -9019,7 +9025,7 @@ steel_qoil:
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@shape: ^4x4Shape
+	Inherits@shape: ^3x3Shape
 	Inherits@water: ^SteelUnderwaterStructure
 	Tooltip:
 		Name: Geothermal Reactor
@@ -9032,8 +9038,8 @@ steel_qoil:
 		Prerequisites: ~steel_qacst, steel_qatech, derricklimit
 		Description: Super Income Building. Produces 3x the income of an oil derrick.
 	Building:
-		Footprint: xxx xxx xxx
-		Dimensions: 3,3
+		Footprint: xx xx
+		Dimensions: 2,2
 	Valued:
 		Cost: 7500
 	Health:
