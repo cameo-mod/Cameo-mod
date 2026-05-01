@@ -8262,8 +8262,13 @@ team_upgrade.uplatin_cashrecover:
 steel_qacst:
 	Inherits: ra2gacnst
 	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@shape: ^4x3Shape
 	Tooltip:
 		Name: Consortium Construction Yard
+	Building:
+		Footprint: xxxx xxxx ====
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-1024,0
 	Transforms:
 		IntoActor: steel_qmcv
 	RenderSprites:
@@ -8304,7 +8309,7 @@ steel_qapowr:
 		Description: template-power.description
 		Prerequisites: ~steel_qacst
 	Building:
-		Footprint: xx xx
+		Footprint: == xx
 		Dimensions: 2,2
 	Health:
 		HP: 250000
@@ -8336,8 +8341,9 @@ steel_qref:
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qapowr
 	Building:
-		Footprint: xxx= xxx= xxx=
+		Footprint: xxx= xxxx =xx=
 		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
 	Refinery:
 	DockHost:
 		Type: Unload
@@ -8362,7 +8368,7 @@ steel_qref:
 
 steel_qabarr:
 	Inherits: ^RA2Building
-	Inherits@shape: ^3x2Shape
+	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
 	SelectionDecorations:
@@ -8371,9 +8377,9 @@ steel_qabarr:
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qapowr
 	Building:
-		Footprint: xxx xxx ===
-		Dimensions: 3,3
-		LocalCenterOffset: 0,-512,0
+		Footprint: xx ==
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-1024,0
 	RallyPoint:
 		Path: 1,2
 	Exit@1:
@@ -8399,7 +8405,7 @@ steel_qtradr:
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qref
 	Building:
-		Footprint: xxx xxx xxx
+		Footprint: === xxx xxx
 		Dimensions: 3,3
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -8470,8 +8476,8 @@ steel_qaclone:
 		Description: Clones produced infantry.
 		BuildLimit: 1
 	Building:
-		Footprint: xxx xxx xxx
-		Dimensions: 3,3
+		Footprint: xxx xxx
+		Dimensions: 3,2
 	Health:
 		HP: 110000
 	RevealsShroud:
@@ -8504,6 +8510,9 @@ steel_qaweap:
 		Name: Consortium War Factory
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qref
+	Building:
+		Footprint: =x== xxxx =xxx
+		Dimensions: 4,3
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
@@ -8532,8 +8541,8 @@ steel_qatech:
 	Tooltip:
 		Name: Consortium Battle Lab
 	Building:
-		Footprint: xx xx xx
-		Dimensions: 3,2
+		Footprint: === xxx xxx
+		Dimensions: 3,3
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
@@ -8588,8 +8597,8 @@ steel_qaorbit:
 	Tooltip:
 		Name: Orbital Cannon Activator
 	Building:
-		Footprint: xxx xxx xxx
-		Dimensions: 3,3
+		Footprint: xxx xxx
+		Dimensions: 3,2
 	IonCannonPower:
 		AllowMultiple: True
 		PauseOnCondition: disabled
@@ -8988,7 +8997,7 @@ steel_conpad:
 	Tooltip:
 		Name: Consortium Airpad
 	Building:
-		Footprint: xxx xxx xxx
+		Footprint: === xxx xxx
 		Dimensions: 3,3
 	Exit@1:
 		ExitCell: 1,1
@@ -9016,7 +9025,7 @@ steel_qoil:
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Inherits@IDISABLE: ^DisabledOverlay
-	Inherits@shape: ^4x4Shape
+	Inherits@shape: ^3x3Shape
 	Inherits@water: ^SteelUnderwaterStructure
 	Tooltip:
 		Name: Geothermal Reactor
@@ -9029,8 +9038,8 @@ steel_qoil:
 		Prerequisites: ~steel_qacst, steel_qatech, derricklimit
 		Description: Super Income Building. Produces 3x the income of an oil derrick.
 	Building:
-		Footprint: xxxx xxxx xxxx xxxx
-		Dimensions: 4,4
+		Footprint: xx xx
+		Dimensions: 2,2
 	Valued:
 		Cost: 7500
 	Health:
