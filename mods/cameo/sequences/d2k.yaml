@@ -156,11 +156,19 @@ storm_lasher:
 		Filename: DATA.R16
 		Scale: 1.5
 		Remap: 54F94B
-		Start: 4518
-		Length: 9
-		Offset: -48,64
+		Start: 4440
+		Length: 8
+		Offset: -32,64
 		Tick: 100
 		AddExtension: false
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4448
+		Length: 9
+		Offset: -32,64
+		Tick: 100
 	idle-overlay:
 		Filename: d2k_storm_lasher.shp
 		Scale: 1.5
@@ -177,12 +185,12 @@ storm_lasher:
 		Filename: d2k_storm_lasher_icon.shp
 		Offset: 0,-1
 
-storm_lasher_big:
+supercomputer:
 	Inherits: ^WithBuildingBib1
 	Defaults:
 		Filename: ixiansuperweapon.shp
 		Scale: 1
-		#Offset: -48,64
+		Offset: 0,-48
 	active:
 		Start: 64
 		Length: 33
@@ -1138,31 +1146,47 @@ hightech.atreides:
 ixian_launchpad:
 	Defaults:
 		Filename: IxHoverpad.png
-		Offset: 0,-4
+		Offset: 0,16
 	idle:
-		Start: 9
+		Length: 10
 		ZOffset: -1023
+		Tick: 100
 	damaged-idle:
-		Start: 9
+		Filename: IxHoverpadDamaged.png
+		Length: 10
 		ZOffset: -1023
+		Tick: 100
 	active:
 		Start: 10
-		Length: 7
-		Tick: 70
+		Length: 6
+		Tick: 100
 		ZOffset: -1023
 	damaged-active:
+		Filename: IxHoverpadDamaged.png
 		Start: 10
-		Length: 7
-		Tick: 70
+		Length: 6
+		Tick: 100
 		ZOffset: -1023
 	dead:
 		Start: 9
 		Length: 1
 		ZOffset: -1023
 	make:
-		Filename: IxHoverpad.png
-		Length: 10
-		Tick: 80
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4477
+		Length: 8
+		Offset: -32,64
+		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4485
+		Length: 9
+		Offset: -32,64
+		Tick: 100
 	icon:
 		Filename: d2k_ixianlaunchpadicon.png
 		Offset: 0,0
@@ -1383,6 +1407,7 @@ research.gold:
 		Filename: d2k_research_center_gold_icon.shp
 		Start: 0
 		Offset: 0,0
+
 palace.atreides:
 	Defaults:
 		AddExtension: false
@@ -3582,19 +3607,28 @@ d2k_munitions.atreides:
 	idle:
 		Filename: d2k_munitions.shp
 		Start: 2
-		Scale: 1.875
+		Scale: 1.5
 	damaged-idle:
 		Filename: d2k_munitions.shp
 		Start: 3
-		Scale: 1.875
+		Scale: 1.5
 	make:
 		Filename: DATA.R16
-		Scale: 1.875
+		Scale: 1.5
 		Remap: 54F94B
 		Start: 4577
 		Length: 7
 		Offset: -16,16
 		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4584
+		Length: 7
+		Offset: -16,16
+		Tick: 200
+		ZOffset: 1024
 	icon:
 		Filename: d2k_munitions_icon.shp
 		Start: 2
@@ -3624,7 +3658,7 @@ d2k_munitions.ordos:
 		Start: 1
 
 ####################################################
-#           MISC
+#		   MISC
 ####################################################
 
 large_trail:
@@ -4431,6 +4465,131 @@ trooper:
 		Start: 4273
 		Offset: -30,-24
 
+twinrockettrooper:
+	Inherits: vordel_effect
+	Defaults:
+		AddExtension: false
+	stand:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 458
+		Facings: -8
+		Transpose: true
+	idle1:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 639, 646, 653, 660, 667, 674, 681, 688
+		Length: 8
+		Tick: 80
+	idle2:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 640, 647, 654, 661, 668, 675, 682, 689
+		Length: 8
+		Tick: 80
+	run:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 466
+		Length: 6
+		Facings: -8
+		Tick: 120
+		Transpose: true
+	shoot:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 506
+		Length: 6
+		Facings: -8
+		Transpose: true
+	prone-stand:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 562
+		Facings: -8
+		Transpose: true
+	prone-run:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 570
+		Length: 3
+		Facings: -8
+		Transpose: true
+		Tick: 120
+	standup:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 554
+		Facings: -8
+		Transpose: true
+	prone-shoot:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 586
+		Length: 6
+		Facings: -8
+		Transpose: true
+	die1:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 634, 641, 648, 655, 662, 669, 676, 683, 690, 691, 692, 693
+		Length: 12
+		Tick: 80
+	die2:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 635, 642, 649, 656, 663, 670, 677, 684
+		Length: 8
+		Tick: 80
+	die3:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 636, 643, 650, 657, 664, 671, 678, 685
+		Length: 8
+		Tick: 80
+	die4:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 637, 644, 651, 658, 665, 672, 679, 686
+		Length: 8
+		Tick: 80
+	die5:
+		Filename: e1.shp
+		Start: 324
+		Length: 18
+		Tick: 80
+	die6:
+		Filename: e1.shp
+		Start: 366
+		Length: 11
+		Tick: 80
+	die7:
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Frames: 638, 645, 652, 659, 666, 673, 680, 687
+		Length: 8
+		Tick: 800
+		ZOffset: -511
+	icon:
+		Filename: twinrockettroopericon.png
+
 engineer:
 	Defaults:
 		AddExtension: false
@@ -5233,6 +5392,15 @@ chemtrooper:
 		Start: 256
 		Length: 16
 		Facings: 8
+	garrison-muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+		AddExtension: false
 	icon:
 		Filename: chemtroopericon.shp
 		Offset: 0,-1
@@ -5508,28 +5676,28 @@ saboteur:
 		AddExtension: false
 	stand:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Start: 2149
 		Facings: -8
 		Transpose: true
 	idle1:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Frames: 2330, 2337, 2344, 2351, 2358, 2365, 2372, 2379
 		Length: 8
 		Tick: 80
 	idle2:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Frames: 2331, 2338, 2345, 2352, 2359, 2366, 2373, 2380
 		Length: 8
 		Tick: 80
 	run:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Start: 2157
 		Length: 6
@@ -5538,14 +5706,14 @@ saboteur:
 		Tick: 120
 	prone-stand:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Start: 2253
 		Facings: -8
 		Transpose: true
 	prone-run:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Start: 2261
 		Length: 3
@@ -5554,7 +5722,7 @@ saboteur:
 		Tick: 120
 	standup:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Start: 2245
 		Facings: -8
@@ -5562,28 +5730,28 @@ saboteur:
 		Tick: 120
 	die1:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Frames: 2325, 2332, 2339, 2346, 2353, 2360, 2367, 2374, 2381, 2383, 2385, 2387
 		Length: 12
 		Tick: 80
 	die2:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Frames: 2326, 2333, 2340, 2347, 2354, 2361, 2368, 2375, 2382, 2384, 2386, 2388
 		Length: 12
 		Tick: 80
 	die3:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Frames: 2327, 2334, 2341, 2348, 2355, 2362, 2369, 2376
 		Length: 8
 		Tick: 80
 	die4:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Frames: 2328, 2335, 2342, 2349, 2356, 2363, 2370, 2377
 		Length: 8
@@ -5603,7 +5771,7 @@ saboteur:
 		Length: *
 	die-crushed:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 2
 		Remap: 54F94B
 		Frames: 2329, 2336, 2343, 2350, 2357, 2364, 2371, 2378
 		Length: 8
@@ -5611,7 +5779,6 @@ saboteur:
 		ZOffset: -511
 	icon:
 		Filename: DATA.R16
-		Scale: 1.5
 		Remap: 54F94B
 		Start: 4295
 		Offset: -30,-24
@@ -6188,7 +6355,7 @@ d2k_leech:
 		Filename: tleilax_leech.png
 		Length: 8
 		Facings: 8
-		Tick: 45
+		# Tick: 45
 		Scale: 0.6
 	shoot:
 		Filename: tleilax_leech.png
@@ -6213,54 +6380,64 @@ d2k_leech:
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die1:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die2:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die3:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die4:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die5:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die6:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die7:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die4:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	die-crushed:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
+		Scale: 0.6
 	icon:
 		Filename: leechicon.shp
-		Offset: 0,-1
+		Offset: 0,0
 
 d2k_leech_s:
 	stand:
@@ -6558,57 +6735,57 @@ facedancer:
 		AddExtension: false
 	invisible:
 		Filename: DATA.R16
-		Scale: 1.5
+		Scale: 1.4
 		Remap: 54F94B
 		Start: 38
 		AddExtension: false
 	idle:
 		Facings: 8
-		Scale: 0.7
+		Scale: 1.4
 	stand:
 		Facings: 8
-		Scale: 0.7
+		Scale: 1.4
 	run:
 		Start: 16
 		Length: 6
 		Facings: 8
-		Scale: 0.7
+		Scale: 1.4
 	bite:
 		Start: 64
 		Length: 4
 		Facings: 8
-		Scale: 0.7
+		Scale: 1.4
 	harvest:
 		Start: 64
 		Length: 4
 		Facings: 8
-		Scale: 0.7
+		Scale: 1.4
 	dock:
 		Start: 64
 		Length: 4
 		Facings: 8
-		Scale: 0.7
+		Scale: 1.4
 	dock-loop:
 		Start: 64
 		Length: 4
 		Facings: 8
-		Scale: 0.7
+		Scale: 1.4
 	die1:
 		Start: 106
 		Length: 7
-		Scale: 0.7
+		Scale: 1.4
 	die2:
 		Start: 106
 		Length: 7
-		Scale: 0.7
+		Scale: 1.4
 	die3:
 		Start: 106
 		Length: 7
-		Scale: 0.7
+		Scale: 1.4
 	die4:
 		Start: 106
 		Length: 7
-		Scale: 0.7
+		Scale: 1.4
 	die5:
 		Filename: e1.shp
 		Start: 324
@@ -7373,10 +7550,10 @@ ordos_wraith:
 		Filename: ordos_wraith.png
 	idle:
 		Length: 64
-		Tick: 20
+		Tick: 64
 	move:
 		Length: 64
-		Tick: 10
+		Tick: 64
 	muzzle:
 		Filename: diskray.shp
 		Scale: 0.9
@@ -7538,11 +7715,14 @@ sandworm:
 d2k_spice_sifter:
 	idle:
 		Filename: d2k_spice_sifter.shp
+		Scale: 1.5
 	damaged-idle:
 		Filename: d2k_spice_sifter.shp
+		Scale: 1.5
 		Start: 1
 	idle-overlay:
 		Filename: d2k_spice_sifter.shp
+		Scale: 1.5
 		Start: 2
 		Length: 5
 		Tick: 80
@@ -7562,8 +7742,18 @@ d2k_spice_sifter:
 		AddExtension: false
 		ZOffset: 50
 		Tick: 100
+	crumble-overlay:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4427
+		Length: 12
+		Offset: -32,64
+		ZOffset: 100
+		Tick: 100
 	icon:
 		Filename: d2k_spice_sifter_icon.shp
+
 d2k_mcv:
 	Defaults:
 		AddExtension: false
@@ -7653,15 +7843,14 @@ ordos_harv:
 	dock:
 		Filename: ordos_harv.png
 		Scale: 0.8
-		Start: 128
-		Facings: 8
-		Length: 8
+		Start: 168
+		Facings: 1
+		Length: 6
 	dock-loop:
 		Filename: ordos_harv.png
 		Scale: 0.8
-		Start: 128
-		Facings: 8
-		Length: 8
+		Start: 170
+		Facings: 1
 	icon:
 		Filename: ordos_harv_icon.png
 
@@ -8202,6 +8391,33 @@ combat_tank_a.husk:
 		Facings: -32
 		ZOffset: -512
 
+mongoose_d2k_a:
+	Defaults:
+	idle:
+		Filename: AtrMongooseSpritesheet-256.png
+		Start: 0
+		Facings: 32
+		Remap: 54F94B
+	run:
+		Filename: AtrMongooseSpritesheet-256.png
+		Start: 32
+		Facings: 32
+		Length: 7
+		Tick: 140
+	turret:
+		Filename: AtrMongooseMissileSpritesheet-32.png
+		Facings: 32
+		Remap: 54F94B
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: d2kmongoosecameo.png
+
 duelist_tank:
 	Defaults:
 		AddExtension: false
@@ -8490,7 +8706,16 @@ combat_siege_tank:
 d2k_ordos_stealth_tank:
 	idle:
 		Filename: ordos_tnkd.png
+		Scale: 1.25
 		Facings: 64
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.25
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
 	icon:
 		Filename: ordos_tnkd_icon.png
 
@@ -8718,7 +8943,7 @@ d2k_autogun_tank:
 		BlendMode: Additive
 		AddExtension: false
 	icon:
-		Filename: d2k_autogun_tank_icon.shp
+		Filename: d2k_heavyautoguntankicon.png
 
 d2k_autogun_tank.husk:
 	idle:
@@ -9155,8 +9380,7 @@ d2k_defender:
 d2k_ixbomber:
 	Defaults:
 		Filename: IxHeavyDrone.png
-		Offset: 0, 16
-		Scale: 1.5
+		Offset: 0, 32
 	idle:
 		Facings: 64
 	icon:
@@ -9179,6 +9403,25 @@ d2k_resonancedrone:
 		Filename: d2k_resonancedroneicon.png
 		Offset: 0,0
 
+d2k_ordos_heavycombattank:
+	Defaults:
+		Filename: d2k_ordos_heavycombattank_chassis.png
+		Facings: -32
+		InterpolatedFacings: 64
+	idle:
+	turret:
+		Filename: d2k_ordos_heavycombattank_turret.png
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: d2k_ordos_heavycombattank_icon.png
+
 ordos_upgrade_toxin:
 	icon:
 		Filename: ordos_upgrade_toxin.png
@@ -9193,3 +9436,12 @@ ordos_upgrade_para:
 	icon:
 		Filename: ordos_upgrade_para.png
 		Offset: 0,0
+
+d2k_upgrade_twinrockettrooper:
+	icon:
+		Filename: twinbazookaicon.png
+
+d2k_upgrade_needleguns:
+	icon:
+		Filename: needlegunsicon.png
+

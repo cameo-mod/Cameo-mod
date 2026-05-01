@@ -1,0 +1,272 @@
+^CoreActor:
+	AppearsOnRadar:
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	CombatDebugOverlay:
+	RenderDebugState:
+	ScriptTriggers:
+	GivesExperience:
+		PlayerExperienceModifier: 100
+	GivesExperienceToMasterOrTransport:
+		ActorExperienceModifierOnTransport: 10000
+	GrantConditionOnPrerequisite@global_bounty:
+		Condition: global_bounty
+		Prerequisites: global_bounty
+	GivesBounty:
+		RequiresCondition: global_bounty
+	TakesBounty:
+		RequiresCondition: global_bounty
+	Selectable:
+		Bounds: 1024, 1024
+	RevealsShroud@base_reveal:
+		Range: 2c0
+		ValidRelationships: Enemy
+		RequiresCondition: base_reveal
+		Type: CenterPosition
+	GrantConditionOnPrerequisite@base_builder:
+		Prerequisites: base_reveal, !base_builder
+		Condition: base_reveal
+	OwnerLostAction:
+		Action: ChangeOwner
+	DrawLineToTarget:
+	WithSpriteControlGroupDecoration:
+	SelectionDecorations:
+		MinimumZoom: 0.5
+	MustBeDestroyed:
+	Health:
+	HitShape:
+	ActorLostNotification:
+	RevealsShroud:
+		Range: 5c0
+	RevealOnFire:
+		Duration: 50
+	RevealOnDeath:
+	GrantConditionOnDamageState@Critical:
+		Condition: damage_state_critical
+		ValidDamageStates: Critical
+	GrantConditionOnDamageState@Heavy:
+		Condition: damage_state_heavy
+		ValidDamageStates: Heavy
+	GrantConditionOnDamageState@Medium:
+		Condition: damage_state_medium
+		ValidDamageStates: Medium
+	GrantConditionOnDamageState@Light:
+		Condition: damage_state_light
+		ValidDamageStates: Light
+	GrantConditionOnDamageState@Undamaged:
+		Condition: damage_state_undamaged
+		ValidDamageStates: Undamaged
+	TemporaryOwnerManager:
+	GrantConditionOnTerrain@OnGroundTerrain:
+		Condition: OnGroundTerrain
+		TerrainTypes: Ground
+	GrantConditionOnTerrain@OnWaterTerrain:
+		Condition: OnWaterTerrain
+		TerrainTypes: Water
+	GrantConditionOnAltitude@InAir:
+		Condition: InAir
+		MinAltitude: 11
+	GrantConditionOnAltitude@OnGround:
+		Condition: OnGround
+		MaxAltitude: 10
+		MinAltitude: -10
+		RequiresCondition: OnGroundTerrain
+	GrantConditionOnAltitude@OnWater:
+		Condition: OnWater
+		MaxAltitude: 10
+		MinAltitude: -10
+		RequiresCondition: OnWaterTerrain
+	GrantConditionOnAltitude@UnderWater:
+		Condition: UnderWater
+		MaxAltitude: -11
+		MinAltitude: -20
+		RequiresCondition: OnWaterTerrain
+	GrantConditionOnAltitude@UnderGround:
+		Condition: UnderGround
+		MaxAltitude: -21
+	Cloak@UnderWater:
+		DetectionTypes: UnderWater
+		InitialDelay: 0
+		CloakDelay: 0
+		PauseOnCondition: disabled
+		IsPlayerPalette: true
+		RequiresCondition: UnderWater
+	Cloak@UnderGround:
+		DetectionTypes: UnderGround
+		InitialDelay: 0
+		CloakDelay: 0
+		PauseOnCondition: disabled
+		IsPlayerPalette: true
+		RequiresCondition: UnderGround
+	Targetable@Air:
+		TargetTypes: Air
+		RequiresCondition: InAir
+	Targetable@Ground:
+		TargetTypes: Ground
+		RequiresCondition: OnGround
+	Targetable@Water:
+		TargetTypes: Water
+		RequiresCondition: OnWater
+	Targetable@UnderWater:
+		TargetTypes: UnderWater
+		RequiresCondition: UnderWater
+	Targetable@UnderGround:
+		TargetTypes: UnderGround
+		RequiresCondition: UnderGround
+
+^CoreUnit:
+	Inherits: ^CoreActor
+	Selectable:
+		Priority: 13
+	Huntable:
+	Guard:
+	Guardable:
+	HiddenUnderFog:
+
+^CoreInfantry:
+	Inherits: ^CoreUnit
+
+^CoreVehicle:
+	Inherits: ^CoreUnit
+
+^CoreBuilding:
+	Inherits: ^CoreActor
+	Selectable:
+		Priority: 11
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	FrozenUnderFog:
+
+^CoreDefense:
+	Inherits: ^CoreBuilding
+	Selectable:
+		Priority: 12
+
+#######
+
+^CanBeOnGround:
+
+^CanBeOnWater:
+
+^CanBeUnderWater:
+
+^CanBeUnderGround:
+
+^CanBeInAir:
+
+#######
+
+^CombatActor:
+	Selectable:
+		Priority: 15
+
+^SupportActor:
+	Selectable:
+		Priority: 14
+
+^BaseBuilderActor:
+	ProvidesPrerequisite@base_builder:
+		Prerequisite: base_builder
+	MustBeDestroyed:
+		RequiredForShortGame: true
+
+^SpriteActor:
+	RenderSprites:
+
+^FacingSpriteActor:
+	Inherits: ^SpriteActor
+	BodyOrientation:
+	WithFacingSpriteBody:
+	QuantizeFacingsFromSequence:
+
+TiberianDawn_GDI_MTNK:
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@MissileTargeting: ^AdvancedMissileTargeting
+	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
+	Inherits@HighVelocityCannons: ^HighVelocityCannons
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@decoration: ^GDIRankDecoration
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: GDI Battle Tank
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~weap, ~!upgdipredator
+		Queue: Vehicle, RAVehicle
+		Description: actor-mtnk.description
+	Mobile:
+		Speed: 80
+		TurnSpeed: 16
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 16
+	Armament:
+		Weapons:
+			120mm:
+			120mmHV: td_gdi_HVC
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_highvelocitycannons
+	Armament@HV:
+		Weapon: 120mmHV
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle
+		RequiresCondition: up_highvelocitycannons
+	Armament@Missile:
+		Weapon: M1A1Missiles
+		Recoil: 64
+		RecoilRecovery: 32
+		LocalOffset: 512,256,128
+		MuzzleSequence: muzzle
+		FireDelay: 10
+		RequiresCondition: !up_advancedmissiletargeting
+	Armament@AdvancedMissileTargeting:
+		Weapon: M1A1MissilesAMT
+		Recoil: 64
+		RecoilRecovery: 32
+		LocalOffset: 512,256,128
+		MuzzleSequence: muzzle
+		FireDelay: 10
+		RequiresCondition: up_advancedmissiletargeting
+	Armament@MachineGun:
+		Weapon: M1A1MachineGun
+		LocalOffset: 512,-128,128
+		MuzzleSequence: muzzle2
+		FireDelay: 4
+		RequiresCondition: up_armorpiercingbullets
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: MTNK.Husk
+	#	OwnerType: InternalName
+	#	EffectiveOwnerFromOwner: true
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RangeMultiplier@up_advancedmissiletargeting:
+		Modifier: 105
+	FirepowerMultiplier@up_armorpiercingbullets:
+		Modifier: 105
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_advancedmissiletargeting, up_highvelocitycannons, up_lightweightarmorplating

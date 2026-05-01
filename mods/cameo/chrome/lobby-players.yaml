@@ -36,21 +36,21 @@ Container@LOBBY_PLAYER_BIN:
 					Align: Center
 					Font: Bold
 				Label@LABEL_LOBBY_TEAM:
-					X: 505
+					X: 555
 					Width: 48
 					Height: 25
 					Text: Team
 					Align: Center
 					Font: Bold
 				Label@LABEL_LOBBY_SPAWN:
-					X: 560
+					X: 610
 					Width: 48
 					Height: 25
 					Text: Spawn
 					Align: Center
 					Font: Bold
 				Label@LABEL_LOBBY_STATUS:
-					X: 610
+					X: 660
 					Width: 20
 					Height: 25
 					Text: Ready
@@ -142,7 +142,7 @@ Container@LOBBY_PLAYER_BIN:
 									Text: Game
 						DropDownButton@FACTION:
 							X: 345
-							Width: 150
+							Width: 200
 							Height: 25
 							IgnoreChildMouseOver: true
 							TooltipContainer: TOOLTIP_CONTAINER
@@ -159,23 +159,23 @@ Container@LOBBY_PLAYER_BIN:
 									Height: 25
 									Text: Faction
 						DropDownButton@TEAM_DROPDOWN:
-							X: 505
+							X: 555
 							Width: 48
 							Height: 25
 							Text: Team
 						DropDownButton@SPAWN_DROPDOWN:
-							X: 563
+							X: 613
 							Width: 48
 							Height: 25
 							Text: Spawn
 						Checkbox@STATUS_CHECKBOX:
-							X: 619
+							X: 669
 							Y: 2
 							Width: 20
 							Height: 20
 							Visible: false
 						Image@STATUS_IMAGE:
-							X: 631
+							X: 671
 							Y: 4
 							Width: 20
 							Height: 20
@@ -264,7 +264,7 @@ Container@LOBBY_PLAYER_BIN:
 									Text: Game
 						Container@FACTION:
 							X: 345
-							Width: 150
+							Width: 200
 							Height: 25
 							Children:
 								Image@FACTIONFLAG:
@@ -278,28 +278,28 @@ Container@LOBBY_PLAYER_BIN:
 									Height: 25
 									Text: Faction
 						Label@TEAM:
-							X: 505
+							X: 555
 							Width: 23
 							Height: 25
 							Text: Team
 							Align: Center
 						DropDownButton@TEAM_DROPDOWN:
-							X: 505
+							X: 555
 							Width: 48
 							Height: 25
 							Visible: false
 						Label@SPAWN:
-							X: 563
+							X: 613
 							Width: 23
 							Height: 25
 							Align: Center
 						DropDownButton@SPAWN_DROPDOWN:
-							X: 563
+							X: 613
 							Width: 48
 							Height: 25
 							Visible: false
 						Image@STATUS_IMAGE:
-							X: 631
+							X: 671
 							Y: 4
 							Width: 20
 							Height: 20
@@ -326,7 +326,7 @@ Container@LOBBY_PLAYER_BIN:
 						Button@JOIN:
 							X: 190
 							Text: Play in this slot
-							Width: 421
+							Width: 471
 							Height: 25
 				Container@TEMPLATE_EDITABLE_SPECTATOR:
 					X: 5
@@ -371,20 +371,20 @@ Container@LOBBY_PLAYER_BIN:
 									TooltipContainer: TOOLTIP_CONTAINER
 									Template: ANONYMOUS_PLAYER_TOOLTIP
 						Label@SPECTATOR:
-							X: 190
-							Width: 326
+							X: 240
+							Width: 376
 							Height: 25
 							Text: Spectator
 							Align: Center
 							Font: Bold
 						Checkbox@STATUS_CHECKBOX:
-							X: 525
+							X: 669
 							Y: 2
 							Width: 20
 							Height: 20
 							Visible: false
 						Image@STATUS_IMAGE:
-							X: 527
+							X: 671
 							Y: 4
 							Width: 20
 							Height: 20
@@ -452,14 +452,14 @@ Container@LOBBY_PLAYER_BIN:
 									TooltipContainer: TOOLTIP_CONTAINER
 									Template: ANONYMOUS_PLAYER_TOOLTIP
 						Label@SPECTATOR:
-							X: 190
-							Width: 326
+							X: 240
+							Width: 376
 							Height: 25
 							Text: Spectator
 							Align: Center
 							Font: Bold
 						Image@STATUS_IMAGE:
-							X: 527
+							X: 671
 							Y: 4
 							Width: 20
 							Height: 20
@@ -480,7 +480,7 @@ Container@LOBBY_PLAYER_BIN:
 							Text: Allow Spectators?
 						Button@SPECTATE:
 							X: 190
-							Width: 421
+							Width: 471
 							Height: 25
 							Text: Spectate
 							Font: Regular

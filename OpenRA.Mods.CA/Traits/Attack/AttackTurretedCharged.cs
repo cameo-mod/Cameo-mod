@@ -9,7 +9,6 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -148,9 +147,6 @@ namespace OpenRA.Mods.CA.Traits
 		void INotifyAttack.Attacking(Actor self, in Target target, Armament a, Barrel barrel)
 		{
 			if (IsTraitDisabled || IsTraitPaused)
-				return;
-
-			if (!Info.Armaments.Contains(a.Info.Name))
 				return;
 
 			shotsFired++;

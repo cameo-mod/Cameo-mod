@@ -69,12 +69,12 @@
 		Tileset: CARIBIC
 		Filename: caribic.pal
 		ShadowIndex: 4
-	PaletteFromFile@terrain-ra_temperatt:
+	PaletteFromFile@terrain-ra_temperat:
 		Name: terrain
 		Tileset: RA_TEMPERAT
 		Filename: ra_temperat.pal
 		ShadowIndex: 4
-	PaletteFromFile@terrain-ra2_temperatt:
+	PaletteFromFile@terrain-ra2_temperat:
 		Name: terrain
 		Tileset: RA2_TEMPERAT
 		Filename: ra_temperat.pal
@@ -298,14 +298,14 @@
 	RotationPaletteEffect@water:
 		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, windows256
 		RotationBase: 32
-		ExcludeTilesets: RA_SNOW, RA_TEMPERAT, RA_DESERT, ARRAKIS, BARREN, TEMPERAT, SNOW, WINTER, DESERT ##########
+		ExcludeTilesets: RA_SNOW, RA_TEMPERAT, RA_DESERT, ARRAKIS, BARREN, TEMPERAT, SNOW, WINTER, DESERT, RA_PLAINS ##########
 	RotationPaletteEffect@actorswater:
 		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, ra, player, terrain, staticterrain, windows256
 		RotationBase: 32
 		ExcludeTilesets: ARRAKIS, BARREN
 	RotationPaletteEffect@rawater:
 		ExcludePalettes: effect, chrome, d2k, d2kunit, playerd2k, d2kcloak, deviatorgas, ra2, cnc, player, terrain, staticterrain, td_temperat, windows256
-		Tilesets: RA_SNOW, RA_TEMPERAT, BARREN, TEMPERAT, SNOW, WINTER, JUNGLE, CAMEO
+		Tilesets: RA_SNOW, RA_TEMPERAT, BARREN, TEMPERAT, SNOW, WINTER, JUNGLE, RA_PLAINS, RA_INHOSP, CAMEO
 	PaletteFromPaletteWithAlpha@placelinesegment:
 		Name: placelinesegment
 		BasePalette: terrain

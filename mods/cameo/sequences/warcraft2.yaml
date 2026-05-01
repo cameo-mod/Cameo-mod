@@ -735,6 +735,14 @@ wc2_human_scout_tower:
 	Defaults:
 		Filename: wc2_human_scout_tower.shp
 	Inherits: ^WC2HumanBuilding
+	idle:
+		Length: *
+		Tick: 160
+		Facings: 1
+	turret:
+		Filename: sentinelturretidle.png
+		Facings: -16
+		Scale: 0
 	icon:
 		Start: 5
 	guard:
@@ -747,7 +755,7 @@ wc2_human_scout_tower:
 wc2_human_guard_tower:
 	Defaults:
 		Filename: wc2_human_guard_tower.shp
-	Inherits: ^WC2HumanBuilding
+	Inherits: wc2_human_scout_tower
 	Defaults:
 	icon:
 		Start: 6
@@ -755,7 +763,7 @@ wc2_human_guard_tower:
 wc2_human_cannon_tower:
 	Defaults:
 		Filename: wc2_human_cannon_tower.shp
-	Inherits: ^WC2HumanBuilding
+	Inherits: wc2_human_scout_tower
 	Defaults:
 	icon:
 		Start: 7
@@ -795,6 +803,40 @@ wc2_human_goldmine:
 	icon:
 		Start: 20
 
+wc2_human_sunwell:
+	Defaults:
+		Filename: AllianceSunwell2.png
+		Scale: 0.5
+	# Inherits: ^WC2HumanBuilding
+	icon:
+		Filename: wc2_sunwell_icon.png
+	make:
+		Filename: AllianceSunwell2mk.png
+		Scale: 0.5
+		Length: *
+		Tick: 110
+	idle:
+		Length: 4
+		Tick: 200
+	damaged-idle:
+		Length: 4
+		Tick: 200
+	critical-idle:
+		Length: 4
+		Tick: 200
+	water:
+		Length: 4
+		Tick: 200
+	damaged-water:
+		Length: 4
+		Tick: 200
+	critical-water:
+		Length: 4
+		Tick: 200
+	dead:
+		Length: *
+		Tick: 5
+
 ####################################################################################################
 #		UNITS human2
 ####################################################################################################
@@ -803,7 +845,7 @@ wc2_human_mcv:
 	Defaults:
 		Filename: wc2_human_peasant.shp
 		Scale: 3
-	Inherits: ^WC2OrcInfantry
+	Inherits: ^WC2HumanInfantry
 	stand:
 		Offset: 0,0
 	idle:
@@ -877,6 +919,7 @@ wc2_human_peasant:
 	run:
 		Start: 8
 		Length: 4
+		Tick: 80
 	harvest:
 		Start: 40
 		Length: 5
@@ -892,6 +935,15 @@ wc2_human_peasant:
 		Start: 80
 	die-crushed:
 		Start: 80
+	idle1:
+		Start: 8
+		Length: 4
+		Tick: 800
+	idle2:
+		Start: 40
+		Length: 5
+		Facings: -8
+		Tick: 800
 	icon:
 		Start: 0
 	townhall_icon:
@@ -903,6 +955,11 @@ wc2_human_peasantgold:
 	idle:
 		Filename: wc2_human_peasantgold.shp
 		Facings: -8
+	run:
+		Filename: wc2_human_peasantgold.shp
+		Start: 8
+		Length: 4
+		Tick: 160
 
 wc2_human_peasantlumber:
 	Defaults:
@@ -1062,6 +1119,66 @@ wc2_human_footman:
 	icon:
 		Start: 1
 
+wc2_human_footman2:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_footman2_icon.png
+	Defaults:
+		Filename: AllianceFootman2.png
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 10
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
+wc2_human_militia2:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_Millitia_icon.png
+	Defaults:
+		Filename: AllianceMilitiaFinal2.png
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	idle2:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 8
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+	harvest:
+		Start: 56
+		Length: 8
+		Facings: 8
+		Tick: 80
+	dock:
+		Start: 0
+		Facings: 8
+	dock-loop:
+		Start: 0
+		Facings: 8
+
 wc2_human_elven_archer:
 	Defaults:
 		Filename: wc2_human_elven_archer.shp
@@ -1210,6 +1327,53 @@ wc2_human_elven_ranger:
 		Start: 56
 	icon:
 		Start: 3
+
+wc2_human_high_elf_archer:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_high_elf_archer_icon.png
+	Defaults:
+		Filename: AllianceHighElfArcher2.png
+		Scale: 1
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 6
+	die:
+		Start: 126
+		Length: 9
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
+wc2_human_rifleman:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_Rifleman_icon.png
+	Defaults:
+		Filename: AllianceRifleman2.png
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 8
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
 
 wc2_human_knight:
 	Defaults:
@@ -1414,6 +1578,31 @@ wc2_human_paladin:
 	icon:
 		Start: 5
 
+wc2_human_knight2:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_knight2_icon.png
+	Defaults:
+		Filename: AllianceKnight2.png
+	stand:
+		Start: 0
+		Length: 1
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 10
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
 wc2_human_demolitionsquad:
 	Defaults:
 		Filename: wc2_human_demolitionsquad.shp
@@ -1464,6 +1653,29 @@ wc2_human_demolitionsquad:
 	icon:
 		Start: 7
 
+wc2_human_mortarteam2:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_mortar_team_icon.png
+	Defaults:
+		Filename: AllianceMortarTeam2.png
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 6
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
 wc2_human_mage:
 	Defaults:
 		Filename: wc2_human_mage.shp
@@ -1510,6 +1722,77 @@ wc2_human_mage:
 	icon:
 		Start: 8
 
+wc2_human_high_elf_priest:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_high_elf_priest_icon.png
+	Defaults:
+		Filename: AlliancePriest2.png
+		Scale: 0.8
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 10
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
+wc2_human_high_elf_sorceress:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_high_elf_sorceres_icon.png
+	Defaults:
+		Filename: AllianceSorceress2.png
+		Scale: 0.8
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 112
+		Length: 7
+	die:
+		Start: 119
+		Length: 8
+	shoot:
+		Start: 56
+		Length: 7
+		Facings: 8
+
+wc2_human_archmage:
+	Inherits: ^WC2HumanInfantry
+	icon:
+		Filename: wc2_archmage_icon.png
+	Defaults:
+		Filename: ArchWizard2.png
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 13
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
 wc2_human_ballista:
 	Defaults:
 		Filename: wc2_human_ballista.shp
@@ -1521,6 +1804,35 @@ wc2_human_ballista:
 		Tick: 800
 	icon:
 		Start: 6
+
+wc2_human_siege_engine:
+	Inherits: ^wc2_status_icons
+	Defaults:
+		Filename: wc2_siege_engine.png
+	stand:
+		Facings: 8
+	idle:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 60
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+		Tick: 80
+	die:
+		Start: 120
+		Length: 10
+		Tick: 100
+	die-crushed:
+		Start: 120
+		Length: 10
+		Tick: 100
+	icon:
+		Filename: wc2_siege_engine_icon.png
 
 ####################################################################################################
 #		NAVAL human2
@@ -1629,6 +1941,29 @@ wc2_human_gnomish_flying_machine:
 		Tick: 80
 	icon:
 		Start: 9
+
+wc2_human_gyrocopter2:
+	Defaults:
+		Filename: AllianceGyrocopter2.png
+	Inherits: ^WC2HumanAirUnit
+	icon:
+		Filename: tse3icon.png
+	run:
+		Start: 6
+		Facings: 8
+		Length: 6
+	shoot:
+		Start: 54
+		Facings: 8
+		Length: 6
+	idle:
+		Start: 0
+		Length: 6
+		Tick: 40
+	die:
+		Start: 102
+		Length: 7
+		Tick: 80
 
 wc2_human_gryphon_rider:
 	Defaults:
@@ -1827,6 +2162,14 @@ wc2_orc_watch_tower:
 	Defaults:
 		Filename: wc2_orc_watch_tower.shp
 	Inherits: ^WC2OrcBuilding
+	idle:
+		Length: *
+		Tick: 160
+		Facings: 1
+	turret:
+		Filename: sentinelturretidle.png
+		Facings: -16
+		Scale: 0
 	icon:
 		Start: 5
 	guard:
@@ -1839,14 +2182,14 @@ wc2_orc_watch_tower:
 wc2_orc_guard_tower:
 	Defaults:
 		Filename: wc2_orc_guard_tower.shp
-	Inherits: ^WC2OrcBuilding
+	Inherits: wc2_orc_watch_tower
 	icon:
 		Start: 6
 
 wc2_orc_cannon_tower:
 	Defaults:
 		Filename: wc2_orc_cannon_tower.shp
-	Inherits: ^WC2OrcBuilding
+	Inherits: wc2_orc_watch_tower
 	icon:
 		Filename: wc2_cameos_orc_buildings.png
 		Start: 7
@@ -1969,6 +2312,7 @@ wc2_orc_peon:
 	run:
 		Start: 8
 		Length: 4
+		Tick: 80
 	harvest:
 		Start: 40
 		Length: 5
@@ -1984,6 +2328,15 @@ wc2_orc_peon:
 		Start: 80
 	die-crushed:
 		Start: 80
+	idle1:
+		Start: 8
+		Length: 4
+		Tick: 800
+	idle2:
+		Start: 40
+		Length: 5
+		Facings: -8
+		Tick: 800
 	icon:
 		Start: 0
 	greathall_icon:
@@ -1995,6 +2348,11 @@ wc2_orc_peon_full:
 	idle:
 		Filename: wc2_orc_peon_full.shp
 		Facings: -8
+	run:
+		Filename: wc2_orc_peon_full.shp
+		Start: 8
+		Length: 4
+		Tick: 160
 
 wc2_orc_peonlumber:
 	Defaults:
@@ -2152,6 +2510,29 @@ wc2_orc_grunt:
 	icon:
 		Start: 1
 
+wc2_orc_grunt2:
+	Inherits: ^WC2OrcInfantry
+	icon:
+		Filename: HordeGruntIcon.png
+	Defaults:
+		Filename: HordePromoGrunt-135.png
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 8
+	die:
+		Start: 128
+		Length: 7
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
 wc2_orc_troll_axethrower:
 	Defaults:
 		Filename: wc2_orc_troll_axethrower.shp
@@ -2286,6 +2667,59 @@ wc2_orc_troll_berserker:
 				Frames: 36, 37, 7, 38, 39, 7
 	icon:
 		Start: 3
+
+wc2_orc_troll_spearthrower:
+	Inherits: ^WC2OrcInfantry
+	icon:
+		Filename: HordeHeadhunterIcon.png
+	Defaults:
+		Filename: HordeHeadhunter-136.png
+		Scale: 1
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 120
+		Length: 10
+	die:
+		Start: 130
+		Length: 6
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+
+wc2_orc_kodo_beast:
+	Inherits: ^wc2_status_icons
+	Defaults:
+		Filename: HordeKodoBeast.png
+	stand:
+		Facings: 8
+	idle:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 120
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+		Tick: 80
+	die:
+		Start: 120
+		Length: 16
+		Tick: 160
+	die-crushed:
+		Start: 120
+		Length: 16
+		Tick: 160
+	icon:
+		Filename: HordeKodoBeastIcon.png
 
 wc2_orc_ogre:
 	Defaults:
@@ -2586,6 +3020,35 @@ wc2_orc_catapult:
 		Tick: 800
 	icon:
 		Start: 6
+
+wc2_orc_siege_engine:
+	Inherits: ^wc2_status_icons
+	Defaults:
+		Filename: wc2_siege_engine.png
+	stand:
+		Facings: 8
+	idle:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 60
+	shoot:
+		Start: 56
+		Length: 8
+		Facings: 8
+		Tick: 80
+	die:
+		Start: 120
+		Length: 10
+		Tick: 100
+	die-crushed:
+		Start: 120
+		Length: 10
+		Tick: 100
+	icon:
+		Filename: wc2_siege_engine_icon.png
 
 wc2_orc_goblin_sappers:
 	Defaults:

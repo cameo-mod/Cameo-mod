@@ -144,7 +144,7 @@ chmod 0755 "${APPDIR}/usr/bin/openra-${MOD_ID}-utility"
 install -m 0755 "${TEMPLATE_ROOT}/${ENGINE_DIRECTORY}/packaging/linux/gtk-dialog.py" "${APPDIR}/usr/bin/gtk-dialog.py"
 
 chmod a+x appimagetool-x86_64.AppImage
-ARCH=x86_64 ./appimagetool-x86_64.AppImage "${APPDIR}" "${OUTPUTDIR}/${PACKAGING_INSTALLER_NAME}-${TAG}-x86_64.AppImage"
+ARCH=x86_64 ./appimagetool-x86_64.AppImage "${APPDIR}" -u "gh-releases-zsync|cameo-mod|Cameo-mod|latest|CameoMod-playtest-*-x86_64.AppImage.zsync" "${OUTPUTDIR}/${PACKAGING_INSTALLER_NAME}-${TAG}-x86_64.AppImage"
 
 # Clean up
 rm -rf appimagetool-x86_64.AppImage "${PACKAGING_APPIMAGE_DEPENDENCIES_TEMP_ARCHIVE_NAME}" "${APPDIR}"

@@ -46,7 +46,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, BulletDeath
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Spread: 100
+		Spread: 50
 		Damage: 1
 		Versus:
 			Shield: 17
@@ -86,7 +86,6 @@
 
 ^SniperWeapon:
 	ValidTargets: Infantry, Monster, Garrisoned
-	InvalidTargets: Vehicle, Water
 	ReloadDelay: 25
 	Range: 5c0
 	Report: ramgun2.aud
@@ -153,7 +152,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Infantry, Monster, Garrisoned
-		Spread: 10
+		Spread: 5
 		Damage: 1
 		Falloff: 100, 75, 50, 25, 0
 		Versus:
@@ -241,7 +240,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, RippedApartDeath
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Spread: 200
+		Spread: 100
 		Damage: 1
 		Versus:
 			Shield: 25
@@ -322,7 +321,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Spread: 250
+		Spread: 125
 		Damage: 1
 		Versus:
 			Shield: 25
@@ -367,6 +366,92 @@
 		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
 		ValidTargets: Shielded
 
+^HeavyAAWeapon:
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 25
+	Range: 5c0
+	Report: aacanon3.aud
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		#ContrailWidth: 100
+		ContrailLength: 10
+		Speed: 7500
+		Inaccuracy: 500
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Spread: 500
+		Damage: 1000
+		Versus:
+			Shield: 140
+			Spaceship: 100
+			Helicopter: 96
+			Bomber: 92
+			Fighter: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Plate: 64
+			Flak: 60
+			None: 56
+			Heroic: 52
+			Steel: 48
+			Concrete: 44
+			Wood: 40
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Spread: 250
+		Damage: 1
+		Versus:
+			Shield: 35
+			Spaceship: 25
+			Helicopter: 24
+			Bomber: 23
+			Fighter: 22
+			Superheavy: 21
+			Heavy: 20
+			Medium: 19
+			Light: 18
+			Scout: 17
+			Plate: 16
+			Flak: 15
+			None: 14
+			Heroic: 13
+			Steel: 12
+			Concrete: 11
+			Wood: 10
+		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
+		UpdatesUnitStatistics: false
+	Warhead@Effect: CreateEffect
+		Explosions: flak_explosion_ground
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Ship, Trees
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_explosion_air
+		ValidTargets: Air
+		ImpactSounds: xplos.aud
+	Warhead@ShieldHit: GrantExternalCondition
+		Condition: shieldhit
+		Duration: 6
+		Range: 1250
+		ValidTargets: Shielded
+	Warhead@Concrete: DamagesConcrete
+		Damage: 25
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+		ValidTargets: Shielded
+
 ^LightMissile:
 	ValidTargets: Ground, Water, Trees, Air
 	ReloadDelay: 25
@@ -376,24 +461,25 @@
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
-		Inaccuracy: 100
+		Inaccuracy: 50
 		Image: DRAGON
 		Shadow: true
-		HorizontalRateOfTurn: 35
-		VerticalRateOfTurn: 35
+		HorizontalRateOfTurn: 40
+		VerticalRateOfTurn: 40
 		TrailImage: smokey
 		TrailInterval: 1
 		ContrailLength: 0
-		MaximumLaunchSpeed: 250
-		MinimumLaunchSpeed: 250
+		MaximumLaunchSpeed: 300
+		MinimumLaunchSpeed: 300
 		Speed: 600
+		CloseEnough: 600
 		Acceleration: 4
 		HomingActivationDelay: 1
 		RangeLimit: 20000
 		PointDefenseTypes: Missile
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Spread: 100
+		Spread: 200
 		Damage: 1000
 		Versus:
 			Shield: 110
@@ -479,7 +565,7 @@
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
-		Inaccuracy: 200
+		Inaccuracy: 100
 		Image: DRAGON
 		Shadow: true
 		HorizontalRateOfTurn: 30
@@ -487,16 +573,17 @@
 		TrailImage: smokey
 		TrailInterval: 1
 		ContrailLength: 0
-		MaximumLaunchSpeed: 200
-		MinimumLaunchSpeed: 200
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
 		Speed: 500
+		CloseEnough: 500
 		Acceleration: 3
 		HomingActivationDelay: 2
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Spread: 200
+		Spread: 400
 		Damage: 1000
 		Versus:
 			Shield: 125
@@ -582,24 +669,25 @@
 		Arm: 0
 		Blockable: false
 		AllowSnapping: true
-		Inaccuracy: 300
+		Inaccuracy: 150
 		Image: MISSILE
 		Shadow: true
-		HorizontalRateOfTurn: 25
-		VerticalRateOfTurn: 25
+		HorizontalRateOfTurn: 20
+		VerticalRateOfTurn: 20
 		TrailImage: smokey
 		TrailInterval: 1
 		ContrailLength: 0
-		MaximumLaunchSpeed: 150
-		MinimumLaunchSpeed: 150
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
 		Speed: 400
+		CloseEnough: 400
 		Acceleration: 2
 		HomingActivationDelay: 3
 		RangeLimit: 30000
 		PointDefenseTypes: Missile
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Spread: 300
+		Spread: 600
 		Damage: 1000
 		Versus:
 			Shield: 140
@@ -673,7 +761,7 @@
 	Warhead@Concrete: DamagesConcrete
 		Damage: 200
 	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit4.wav
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
 ^TankDestroyerCannon:
@@ -711,7 +799,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 150
+		Spread: 75
 		Damage: 1
 		Versus:
 			Shield: 17
@@ -767,7 +855,7 @@
 	Warhead@Concrete: DamagesConcrete
 		Damage: 100
 	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit4.wav
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
 ^MediumCannon:
@@ -778,11 +866,11 @@
 	Projectile: Bullet
 		Image: 120MM
 		Speed: 500
-		Inaccuracy: 200
+		Inaccuracy: 300
 		Shadow: true
 	Warhead@MediumCannon: SpreadDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 200
+		Spread: 300
 		Damage: 1000
 		Versus:
 			Shield: 125
@@ -805,7 +893,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 200
+		Spread: 150
 		Damage: 1
 		Versus:
 			Shield: 25
@@ -872,11 +960,11 @@
 	Projectile: Bullet
 		Image: 120MM
 		Speed: 500
-		Inaccuracy: 300
+		Inaccuracy: 450
 		Shadow: true
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 300
+		Spread: 450
 		Damage: 1000
 		Versus:
 			Shield: 140
@@ -899,7 +987,7 @@
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 300
+		Spread: 225
 		Damage: 1
 		Versus:
 			Scout: 25
@@ -954,7 +1042,7 @@
 	Warhead@Concrete: DamagesConcrete
 		Damage: 200
 	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit4.wav
+		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
 ^LaserWeapon:
@@ -965,11 +1053,13 @@
 		Width: 100
 		HitAnim: laserfire
 		ZOffset: 3000
+		Blockable: false
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 150
 		Damage: 1000
 		Versus:
+			REFLECTOR: 50
 			Shield: 140
 			Superheavy: 100
 			Spaceship: 96
@@ -990,9 +1080,10 @@
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 300
+		Spread: 75
 		Damage: 1
 		Versus:
+			REFLECTOR: 50
 			Shield: 35
 			Superheavy: 25
 			Spaceship: 24
@@ -1015,9 +1106,10 @@
 	Warhead@LaserExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Spread: 300
-		Damage: 3000
+		Damage: 600
 		Versus:
-			Shield: 10000
+			REFLECTOR: 50
+			Shield: 100
 			None: 1
 			Flak: 1
 			Plate: 1
@@ -1035,6 +1127,7 @@
 			Helicopter: 1
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
@@ -1052,108 +1145,7 @@
 		ValidTargets: Air
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
-		Duration: 5
-		Range: 1250
-		ValidTargets: Shielded
-	Warhead@Concrete: DamagesConcrete
-		Damage: 25
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
-		ValidTargets: Shielded
-^FrostRay:
-	ReloadDelay: 25
-	Range: 5c0
-	Report: obelray1.aud
-	Projectile: LaserZap
-		Width: 100
-		HitAnim: laserfire
-		ZOffset: 3000
-	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 1000
-		Versus:
-			Shield: 140
-			Superheavy: 100
-			Spaceship: 96
-			Steel: 92
-			Heroic: 88
-			Heavy: 84
-			Helicopter: 80
-			Concrete: 76
-			Plate: 72
-			Medium: 68
-			Bomber: 64
-			Wood: 60
-			Flak: 56
-			Light: 52
-			Fighter: 48
-			None: 44
-			Scout: 40
-		DamageTypes: Prone75Percent, TriggerProne
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 1
-		Versus:
-			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
-		DamageTypes: Prone75Percent, TriggerProne
-		UpdatesUnitStatistics: false
-	Warhead@LaserExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Spread: 300
-		Damage: 3000
-		Versus:
-			Shield: 10000
-			None: 1
-			Flak: 1
-			Plate: 1
-			Heroic: 1
-			Superheavy: 1
-			Heavy: 1
-			Medium: 1
-			Light: 1
-			Scout: 1
-			Steel: 1
-			Concrete: 1
-			Wood: 1
-			Fighter: 1
-			Bomber: 1
-			Helicopter: 1
-			Spaceship: 1
-		DamageTypes: Prone75Percent, TriggerProne
-	Warhead@CryoFreeze: GrantExternalCondition
-		Condition: CryoFreeze
-		Duration: 125
-		Range: 1250
-		ValidRelationships: Enemy, Neutral, Ally
-		ValidTargets: Ground, Water, Air
-	Warhead@Effect: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectWater: CreateEffect
-		Explosions: cryo_blast
-	Warhead@EffectAir: CreateEffect
-		Explosions: cryo_blast
-	Warhead@Validation: TargetDamage
-	Warhead@ShieldHit: GrantExternalCondition
-		Condition: shieldhit
-		Duration: 5
+		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
@@ -1168,15 +1160,17 @@
 	Report: bigggun1.aud
 	Projectile: Railgun
 		Duration: 16
-		Blockable: true
 		Inaccuracy: 100
 		BeamColor: 0080FFC8
 		HelixPlayerColor: true
+		Blockable: false
+		ZOffset: 2048
 	Warhead@RailgunWeapon: SpreadDamage
 		AffectsParent: false
+		Spread: 250
 		Damage: 1000
-		Spread: 100
 		Versus:
+			REFLECTOR: 50
 			Shield: 140
 			Superheavy: 100
 			Heavy: 96
@@ -1197,9 +1191,10 @@
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath, Incendiary
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		AffectsParent: false
+		Spread: 125
 		Damage: 1
-		Spread: 100
 		Versus:
+			REFLECTOR: 50
 			Shield: 35
 			Superheavy: 25
 			Heavy: 24
@@ -1221,10 +1216,11 @@
 		UpdatesUnitStatistics: false
 	Warhead@RailgunExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 100
+		Spread: 500
 		Damage: 1000
 		Versus:
-			Shield: 10000
+			REFLECTOR: 50
+			Shield: 100
 			None: 1
 			Flak: 1
 			Plate: 1
@@ -1242,6 +1238,7 @@
 			Helicopter: 1
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@Effect: CreateEffect
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
@@ -1269,6 +1266,7 @@
 		Spread: 100
 		Damage: 2000
 		Versus:
+			REFLECTOR: 50
 			Shield: 150
 			Heroic: 100
 			Plate: 96
@@ -1290,9 +1288,10 @@
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Falloff: 100, 75, 50, 25
-		Spread: 250
+		Spread: 200
 		Damage: 1000
 		Versus:
+			REFLECTOR: 50
 			Shield: 300
 			Heroic: 200
 			Plate: 175
@@ -1313,9 +1312,10 @@
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 100
+		Spread: 50
 		Damage: 1
 		Versus:
+			REFLECTOR: 50
 			Shield: 35
 			Heroic: 25
 			Plate: 24
@@ -1360,6 +1360,7 @@
 		Spread: 200
 		Damage: 2000
 		Versus:
+			REFLECTOR: 50
 			Shield: 200
 			Heroic: 100
 			Plate: 97
@@ -1381,9 +1382,10 @@
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Falloff: 100, 75, 50, 25
-		Spread: 500
+		Spread: 400
 		Damage: 1000
 		Versus:
+			REFLECTOR: 50
 			Shield: 400
 			Heroic: 300
 			Plate: 275
@@ -1404,9 +1406,10 @@
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
-		Spread: 200
+		Spread: 100
 		Damage: 1
 		Versus:
+			REFLECTOR: 50
 			Shield: 50
 			Heroic: 30
 			Plate: 29
@@ -1442,15 +1445,19 @@
 	ReloadDelay: 25
 	Range: 5c0
 	InvalidTargets: Wall
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 3333
+		Speed: 3000
 	Warhead@LightFlameWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
 		Spread: 500
 		Damage: 1000
+		Range: 500
+		Falloff: 111, 33, 11, 3
 		Versus:
+			HAZMAT: 50
 			Shield: 110
 			None: 100
 			Flak: 94
@@ -1473,9 +1480,11 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 500
+		Spread: 250
 		Damage: 1000
+		Falloff: 111, 33, 11, 3
 		Versus:
+			HAZMAT: 25
 			Shield: 110
 			None: 100
 			Flak: 94
@@ -1497,8 +1506,9 @@
 		UpdatesUnitStatistics: false
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 500
+		Spread: 250
 		Damage: 1
+		Falloff: 111, 33, 11, 3
 		Versus:
 			Shield: 17
 			None: 16
@@ -1536,21 +1546,37 @@
 		Duration: 6
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		ValidRelationships: Neutral, Enemy
+		Amount: 800
+		Range: 800
+	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		ValidRelationships: Ally
+		Amount: 400
+		Range: 400
 
 ^MediumFlameWeapon:
 	ValidTargets: Ground, Water, Trees
 	ReloadDelay: 25
 	Range: 5c0
 	InvalidTargets: Wall
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 3333
+		Speed: 3000
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
 		Spread: 750
 		Damage: 1000
+		Falloff: 111, 33, 11, 3
 		Versus:
+			HAZMAT: 50
 			Shield: 125
 			None: 100
 			Flak: 95
@@ -1573,9 +1599,11 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 750
+		Spread: 375
 		Damage: 1000
+		Falloff: 111, 33, 11, 3
 		Versus:
+			HAZMAT: 25
 			Shield: 125
 			None: 100
 			Flak: 95
@@ -1597,8 +1625,9 @@
 		UpdatesUnitStatistics: false
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 750
+		Spread: 375
 		Damage: 1
+		Falloff: 111, 33, 11, 3
 		Versus:
 			Shield: 25
 			None: 20
@@ -1634,20 +1663,35 @@
 		Duration: 8
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		ValidRelationships: Neutral, Enemy
+		Amount: 1200
+		Range: 1200
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		ValidRelationships: Ally
+		Amount: 600
+		Range: 600
 
 ^HeavyFlameWeapon:
 	ValidTargets: Ground, Water, Trees
 	ReloadDelay: 25
 	Range: 5c0
 	InvalidTargets: Wall
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 3333
+		Speed: 3000
 	Warhead@HeavyFlameWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
 		Spread: 1000
 		Damage: 1000
+		Falloff: 111, 33, 11, 3
 		Versus:
 			Shield: 140
 			None: 100
@@ -1671,9 +1715,11 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 1000
+		Spread: 500
 		Damage: 1000
+		Falloff: 111, 33, 11, 3
 		Versus:
+			HAZMAT: 50
 			Shield: 140
 			None: 100
 			Flak: 96
@@ -1695,9 +1741,11 @@
 		UpdatesUnitStatistics: false
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 1000
+		Spread: 500
 		Damage: 1
+		Falloff: 111, 33, 11, 3
 		Versus:
+			HAZMAT: 25
 			Shield: 35
 			None: 25
 			Flak: 24
@@ -1732,6 +1780,19 @@
 		Duration: 10
 		Range: 1250
 		ValidTargets: Shielded
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
+	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		ValidRelationships: Neutral, Enemy
+		Amount: 1600
+		Range: 1600
+	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
+		PhysicalStateName: Temperature
+		ValidRelationships: Ally
+		Amount: 800
+		Range: 800
 
 ^LightChemicalWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -1739,15 +1800,18 @@
 	Range: 5c0
 	InvalidTargets: Wall
 	Report: flamer2.aud
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 3333
+		Speed: 3500
 	Warhead@LightChemicalWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 333
+		Spread: 350
 		Damage: 1000
+		Falloff: 99, 66, 33
 		Versus:
+			HAZMAT: 50
 			Shield: 110
 			Superheavy: 100
 			Plate: 94
@@ -1770,9 +1834,11 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 333
+		Spread: 175
 		Damage: 1000
+		Falloff: 99, 66, 33
 		Versus:
+			HAZMAT: 25
 			Shield: 110
 			Superheavy: 100
 			Plate: 94
@@ -1794,8 +1860,9 @@
 		UpdatesUnitStatistics: false
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 333
+		Spread: 175
 		Damage: 1
+		Falloff: 99, 66, 33
 		Versus:
 			Shield: 17
 			Superheavy: 16
@@ -1829,6 +1896,9 @@
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 100
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 
 ^MediumChemicalWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -1836,15 +1906,18 @@
 	Range: 5c0
 	InvalidTargets: Wall
 	Report: flamer2.aud
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 3333
+		Speed: 3500
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 666
+		Spread: 700
 		Damage: 1000
+		Falloff: 99, 66, 33
 		Versus:
+			HAZMAT: 50
 			Shield: 125
 			Superheavy: 100
 			Plate: 95
@@ -1867,9 +1940,11 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 666
+		Spread: 350
 		Damage: 1000
+		Falloff: 99, 66, 33
 		Versus:
+			HAZMAT: 25
 			Shield: 125
 			Superheavy: 100
 			Plate: 95
@@ -1891,8 +1966,9 @@
 		UpdatesUnitStatistics: false
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 666
+		Spread: 350
 		Damage: 1
+		Falloff: 99, 66, 33
 		Versus:
 			Shield: 25
 			Superheavy: 20
@@ -1926,6 +2002,9 @@
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 150
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 
 ^HeavyChemicalWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -1933,15 +2012,18 @@
 	Range: 5c0
 	InvalidTargets: Wall
 	Report: flamer2.aud
+	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 3333
+		Speed: 3500
 	Warhead@HeavyChemicalWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 999
+		Spread: 1050
 		Damage: 1000
+		Falloff: 99, 66, 33
 		Versus:
+			HAZMAT: 50
 			Shield: 140
 			Superheavy: 100
 			Plate: 96
@@ -1964,9 +2046,11 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
 		InvalidTargets: Wall
-		Spread: 999
+		Spread: 525
 		Damage: 1000
+		Falloff: 99, 66, 33
 		Versus:
+			HAZMAT: 25
 			Shield: 140
 			Superheavy: 100
 			Plate: 96
@@ -1988,8 +2072,9 @@
 		UpdatesUnitStatistics: false
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 999
+		Spread: 525
 		Damage: 1
+		Falloff: 99, 66, 33
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -2023,13 +2108,16 @@
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 200
+	Warhead@ShieldHitEffect: CreateEffect
+		ImpactSounds: shielded_bullet_hit1.wav, shielded_bullet_hit2.wav, shielded_bullet_hit3.wav, shielded_bullet_hit4.wav
+		ValidTargets: Shielded
 
 ^Grenade:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
 	Range: 5c0
 	Report: M203.aud
-	#TargetActorCenter: true
+	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 150
 		Blockable: false
@@ -2041,7 +2129,9 @@
 		ValidTargets: Ground, Water, Trees
 		Spread: 400
 		Damage: 1000
+		Falloff: 100, 50, 33, 25, 20
 		Versus:
+			HAZMAT: 50
 			Shield: 110
 			None: 100
 			Wood: 94
@@ -2063,9 +2153,11 @@
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
-		Spread: 400
+		Spread: 200
 		Damage: 1000
+		Falloff: 100, 50, 33, 25, 20
 		Versus:
+			HAZMAT: 25
 			Shield: 110
 			None: 100
 			Wood: 94
@@ -2087,8 +2179,9 @@
 		UpdatesUnitStatistics: false
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 400
+		Spread: 200
 		Damage: 1
+		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			Shield: 17
 			Scout: 16
@@ -2144,14 +2237,15 @@
 	ReloadDelay: 25
 	Range: 5c0
 	Report: M203.aud
-	#TargetActorCenter: true
+	TargetActorCenter: true
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		Spread: 600
 		Damage: 1000
-		Falloff: 100, 75, 50, 25, 0
+		Falloff: 100, 75, 50, 25
 		Versus:
+			HAZMAT: 50
 			Shield: 125
 			Scout: 100
 			None: 95
@@ -2173,10 +2267,11 @@
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
-		Spread: 600
+		Spread: 300
 		Damage: 1000
-		Falloff: 100, 75, 50, 25, 0
+		Falloff: 100, 75, 50, 25
 		Versus:
+			HAZMAT: 25
 			Shield: 125
 			Scout: 100
 			None: 95
@@ -2198,9 +2293,9 @@
 		UpdatesUnitStatistics: false
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
-		Spread: 600
+		Spread: 300
 		Damage: 1
-		Falloff: 100, 75, 50, 25, 0
+		Falloff: 100, 75, 50, 25
 		Versus:
 			Shield: 25
 			Scout: 20
@@ -2255,12 +2350,14 @@
 	ValidTargets: Ground, Water, Trees
 	ReloadDelay: 25
 	Range: 5c0
+	TargetActorCenter: true
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Ship, Trees
-		Spread: 500
+		Spread: 800
 		Damage: 1000
-		Falloff: 100, 50, 25, 12, 6, 3, 1, 0
+		Falloff: 100, 50, 25, 10, 5
 		Versus:
+			HAZMAT: 50
 			Shield: 140
 			Wood: 100
 			Concrete: 96
@@ -2281,9 +2378,9 @@
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Ship, Trees
-		Spread: 500
+		Spread: 400
 		Damage: 1
-		Falloff: 100, 50, 25, 12, 6, 3, 1, 0
+		Falloff: 100, 50, 25, 10, 5
 		Versus:
 			Shield: 35
 			Wood: 25
@@ -2355,8 +2452,9 @@
 		AffectsParent: True
 		Spread: 1000
 		Damage: 1000
-		Falloff: 100, 50, 25, 12, 6, 3, 1, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Versus:
+			HAZMAT: 50
 			Shield: 140
 			Superheavy: 100
 			Plate: 96
@@ -2378,9 +2476,9 @@
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Trees
 		AffectsParent: True
-		Spread: 1000
+		Spread: 500
 		Damage: 1
-		Falloff: 100, 50, 25, 12, 6, 3, 1, 0
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Versus:
 			Shield: 35
 			Superheavy: 25
@@ -2425,8 +2523,8 @@
 		Duration: 25
 		Range: 1250
 		ValidTargets: Shielded
-	Warhead@ShieldHitEffect: CreateEffect
-		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
+	Warhead@ShieldHitEffectNuclear: CreateEffect
+		ImpactSounds: shielded_nuclear_hit.wav
 		ValidTargets: Shielded
 	Warhead@Concrete: DamagesConcrete
 		Damage: 1000
@@ -2440,7 +2538,7 @@
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water, Trees
 		Falloff: 100, 50
-		Spread: 333
+		Spread: 320
 		Damage: 1000
 		Versus:
 			Shield: 125
@@ -2465,7 +2563,7 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water, Trees
 		Falloff: 100, 50
-		Spread: 333
+		Spread: 160
 		Damage: 1000
 		Versus:
 			Shield: 125
@@ -2490,7 +2588,7 @@
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
 		Falloff: 100, 50
-		Spread: 333
+		Spread: 160
 		Damage: 1
 		Versus:
 			Shield: 25
@@ -2530,14 +2628,16 @@
 	InvalidTargets: Wall
 	Report: dune2smalllaser.aud
 	Projectile: Missile
+		Inaccuracy: 0
 		HorizontalRateOfTurn: 40
 		VerticalRateOfTurn: 40
 		PointDefenseTypes: Missile
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Wall
-		Spread: 125
+		Spread: 70
 		Damage: 1000
+		Falloff: 100, 85, 70, 55, 40, 25, 10
 		Versus:
 			Shield: 110
 			None: 100
@@ -2560,8 +2660,9 @@
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Wall
-		Spread: 125
+		Spread: 35
 		Damage: 1
+		Falloff: 100, 85, 70, 55, 40, 25, 10
 		Versus:
 			Shield: 17
 			None: 16
@@ -2623,11 +2724,14 @@
 		ContrailStartColor: 77CCFF
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
+		Blockable: false
 	Warhead@MagicWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 333
-		Damage: 1000
+		Spread: 222
+		Damage: 1111
+		Falloff: 111, 88, 44, 22, 11
 		Versus:
+			REFLECTOR: 50
 			Shield: 140
 			Superheavy: 100
 			Heroic: 96
@@ -2648,9 +2752,11 @@
 		DamageTypes: Prone75Percent, TriggerProne, PsychicDeath, Incendiary
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 333
+		Spread: 111
 		Damage: 1
+		Falloff: 111, 88, 44, 22, 11
 		Versus:
+			REFLECTOR: 50
 			Shield: 35
 			Superheavy: 25
 			Heroic: 24
@@ -2672,10 +2778,12 @@
 		UpdatesUnitStatistics: false
 	Warhead@MagicExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Spread: 333
-		Damage: 3333
+		Spread: 444
+		Damage: 888
+		Falloff: 111, 88, 44, 22, 11
 		Versus:
-			Shield: 10000
+			REFLECTOR: 50
+			Shield: 100
 			None: 1
 			Flak: 1
 			Plate: 1
@@ -2693,6 +2801,7 @@
 			Helicopter: 1
 			Spaceship: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		UpdatesUnitStatistics: false
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
@@ -2725,6 +2834,7 @@
 		Spread: 333
 		Damage: 1111
 		Versus:
+			HAZMAT: 50
 			Shield: 17
 			None: 16
 			Flak: 15
@@ -2749,9 +2859,10 @@
 		InvalidTargets: Wall, Mine, ToxinImmune
 		AffectsParent: True
 		Falloff: 111, 33, 11, 3
-		Spread: 333
+		Spread: 111
 		Damage: 333
 		Versus:
+			HAZMAT: 25
 			Shield: 17
 			None: 16
 			Flak: 15
@@ -2775,7 +2886,7 @@
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: Wall, Mine, ToxinImmune
 		AffectsParent: True
-		Spread: 333
+		Spread: 222
 		Damage: 1
 		Versus:
 			Shield: 17
@@ -2816,53 +2927,53 @@
 	Warhead@HealingWeapon: SpreadDamage
 		ValidTargets: Heal
 		ValidRelationships: Ally
-		Spread: 250
-		Falloff: 100, 50
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
 		Damage: -2000
 		Versus:
 			Shield: 140
-			Superheavy: 100
-			Spaceship: 96
-			Steel: 92
-			Heroic: 88
-			Heavy: 84
-			Helicopter: 80
-			Concrete: 76
-			Plate: 72
+			Heroic: 100
+			Plate: 96
+			Flak: 92
+			None: 88
+			Superheavy: 84
+			Spaceship: 80
+			Heavy: 76
+			Helicopter: 72
 			Medium: 68
 			Bomber: 64
-			Wood: 60
-			Flak: 56
-			Light: 52
-			Fighter: 48
-			None: 44
-			Scout: 40
+			Light: 60
+			Fighter: 56
+			Scout: 52
+			Steel: 48
+			Concrete: 44
+			Wood: 40
 		DamageTypes: KillsDrone
 		DebugOverlayColor: 00FF00
 	Warhead@ExtraHealing: SpreadDamage
 		ValidTargets: Heal
 		ValidRelationships: Ally
-		Spread: 500
-		Falloff: 100, 50
+		Spread: 100
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Damage: -1000
 		Versus:
 			Shield: 100
-			None: 100
-			Flak: 100
-			Plate: 100
 			Heroic: 100
+			Plate: 100
+			Flak: 100
+			None: 100
 			Superheavy: 100
+			Spaceship: 100
 			Heavy: 100
+			Helicopter: 100
 			Medium: 100
+			Bomber: 100
 			Light: 100
+			Fighter: 100
 			Scout: 100
 			Steel: 100
 			Concrete: 100
 			Wood: 100
-			Fighter: 100
-			Bomber: 100
-			Helicopter: 100
-			Spaceship: 100
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -2870,26 +2981,26 @@
 		ValidTargets: Heal
 		ValidRelationships: Ally
 		Spread: 1000
-		Falloff: 100, 50
+		Falloff: 100
 		Damage: -1
 		Versus:
 			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
+			Wood: 25
+			Concrete: 24
 			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
+			Scout: 22
+			Fighter: 21
+			Light: 20
+			Bomber: 19
+			Medium: 18
+			Helicopter: 17
+			Heavy: 16
+			Spaceship: 15
+			Superheavy: 14
+			None: 13
+			Flak: 12
+			Plate: 11
+			Heroic: 10
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -2942,8 +3053,8 @@
 	Warhead@RepairWeapon: SpreadDamage
 		ValidTargets: Repairing, Repair, SpecialRepair
 		ValidRelationships: Ally
-		Spread: 250
-		Falloff: 100, 50
+		Spread: 200
+		Falloff: 100, 50, 33, 25, 20
 		Damage: -2000
 		Versus:
 			Shield: 140
@@ -2968,27 +3079,27 @@
 	Warhead@ExtraRepair: SpreadDamage
 		ValidTargets: Repairing, Repair, SpecialRepair
 		ValidRelationships: Ally
-		Spread: 500
-		Falloff: 100, 50
+		Spread: 100
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
 		Damage: -1000
 		Versus:
 			Shield: 100
-			None: 100
-			Flak: 100
-			Plate: 100
-			Heroic: 100
 			Superheavy: 100
-			Heavy: 100
-			Medium: 100
-			Light: 100
-			Scout: 100
-			Steel: 100
-			Concrete: 100
-			Wood: 100
-			Fighter: 100
-			Bomber: 100
-			Helicopter: 100
 			Spaceship: 100
+			Steel: 100
+			Heroic: 100
+			Heavy: 100
+			Helicopter: 100
+			Concrete: 100
+			Plate: 100
+			Medium: 100
+			Bomber: 100
+			Wood: 100
+			Flak: 100
+			Light: 100
+			Fighter: 100
+			None: 100
+			Scout: 100
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -2996,26 +3107,26 @@
 		ValidTargets: Repairing, Repair, SpecialRepair
 		ValidRelationships: Ally
 		Spread: 1000
-		Falloff: 100, 50
+		Falloff: 100
 		Damage: -1
 		Versus:
 			Shield: 35
-			Superheavy: 25
-			Spaceship: 24
-			Steel: 23
-			Heroic: 22
-			Heavy: 21
-			Helicopter: 20
-			Concrete: 19
-			Plate: 18
-			Medium: 17
-			Bomber: 16
-			Wood: 15
-			Flak: 14
-			Light: 13
-			Fighter: 12
-			None: 11
-			Scout: 10
+			Scout: 25
+			None: 24
+			Fighter: 23
+			Light: 22
+			Flak: 21
+			Wood: 20
+			Bomber: 19
+			Medium: 18
+			Plate: 17
+			Concrete: 16
+			Helicopter: 15
+			Heavy: 14
+			Heroic: 13
+			Steel: 12
+			Spaceship: 11
+			Superheavy: 10
 		DamageTypes: KillsDrone
 		UpdatesUnitStatistics: false
 		DebugOverlayColor: 00FF00
@@ -4495,7 +4606,7 @@ TSEMPulseCannon:
 CHFlameRadiation:
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1, 3
-		Duration: 5
+		Duration: 66
 		Speed: 8, 24
 		TurnRate: 4
 		Image: burn-l
@@ -4507,16 +4618,19 @@ CHFlameRadiation:
 CHFlame:
 	Inherits: ^MediumFlameWeapon
 	Projectile: InstantExplode
-	ReloadDelay: 25
+	ReloadDelay: 11
 	Warhead@MediumFlameWeapon: SpreadDamage
+		Spread: 250
 		Falloff: 100, 75, 50, 25
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Spread: 250
 		Falloff: 100, 75, 50, 25
-		Damage: 2000
+		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Spread: 250
 		Falloff: 100, 75, 50, 25
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary

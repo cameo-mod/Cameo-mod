@@ -1066,6 +1066,209 @@ shok:
 	icon:
 		Filename: shokicon.shp
 
+ra_conscript_ak:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra_cons_ak.png
+		AddExtension: false
+		#Scale: 0.75
+	run:
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: ra_conscript_ak_icon.png
+		AddExtension: False
+
+ra_cons_molo:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra_cons_molo.png
+		AddExtension: false
+		#Scale: 0.75
+	run:
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: ra_conscript_molotov_icon.png
+		AddExtension: False
+
+ra_dragunov:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra_dragunov.png
+		AddExtension: false
+		#Scale: 0.75
+	run:
+		Tick: 96
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 96
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: ra_dragunovicon.png
+		AddExtension: False
+
+ra_commissar:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra_commissar.png
+		AddExtension: false
+	run:
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: commissaricon.png
+		AddExtension: False
+
+ra_zapper:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: ra_zapper.png
+		AddExtension: false
+	run:
+		Tick: 96
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 96
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: ra_zappericon.png
+		AddExtension: False
+
 raspy:
 	Defaults:
 		Filename: raspy.shp
@@ -1589,6 +1792,28 @@ raharvhalf:
 		Filename: raharvhalf.shp
 	Inherits: raharv
 
+ra_industrialminer:
+	Defaults:
+		Filename: SovietHeavyOreTruckSpritesheet.png
+		Scale: 1.25
+	idle:
+		Facings: 32
+	harvest:
+		Start: 32
+		Length: 7
+		Facings: 32
+	dock:
+		Start: 256
+		Length: 7
+		Tick: 105
+	dock-loop:
+		Start: 256
+		Length: 7
+		Tick: 105
+	icon:
+		Start: 0
+		Filename: ra_industrialminericon.png
+
 hhusk:
 	Defaults:
 		Filename: hhusk.shp
@@ -1734,6 +1959,26 @@ hhusk2:
 		Length: 5
 	icon:
 		Filename: 5tnkicon.png
+
+ra_grad:
+	idle:
+		Facings: 64
+		Combine:
+			ra_grad-l:
+				Filename: ra_gradchassis.png
+				Length: 33
+			ra_grad-r:
+				Filename: ra_gradchassis.png
+				FlipX: True
+				Frames: 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+	turret:
+		Filename: ra_gradturret.png
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: ra_gradicon.png
 
 v2rl:
 	Defaults:
@@ -1956,6 +2201,15 @@ ttnk2:
 	icon:
 		Filename: heavyteslaicon.png
 
+ra_heatraytank:
+	Defaults:
+		Filename: SovietLaserTankSpritesheet.png
+	idle:
+		Facings: 32
+		#Offset: -2,8
+	icon:
+		Filename: ra_heatraytankicon.png
+
 ftrk:
 	Defaults:
 		Filename: ftrk.shp
@@ -2129,35 +2383,6 @@ modbggy:
 		Facings: 8
 	icon:
 		Filename: jbuggyicon.shp
-
-modhip:
-	Defaults:
-		Filename: modhip.shp
-		Scale: 2
-	idle:
-		Facings: -32
-	idle2:
-		Start: 32
-		Facings: -32
-	rotor:
-		Filename: usapavelowrotor.shp
-		Length: 4
-	slow-rotor:
-		Filename: usapavelowrotor.shp
-		Start: 4
-		Length: 8
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: hipicon.png
-	pscchhip1:
-		Filename: glhipmissx2.shp
-	pscchhip2:
-		Filename: glhipmissx4.shp
-	pscchhip3:
-		Filename: glhipmissx8.shp
 
 modhover:
 	Defaults:
@@ -2348,6 +2573,7 @@ rafact:
 			INTERIOR: TEMPERAT
 	icon:
 		Filename: rafacticon.png
+
 rafactj:
 	Inherits: ^WithBuildingBib2
 	Defaults:
@@ -2375,6 +2601,13 @@ rafactj:
 			INTERIOR: TEMPERAT
 	icon:
 		Filename: rafactjicon.shp
+
+rafactcolor:
+	Defaults:
+		Filename: rafactcolor.shp
+	idle:
+	icon:
+		Filename: rafacticon.png
 
 raproc:
 	Inherits: ^WithBuildingBib2
@@ -2661,6 +2894,44 @@ raweap:
 	icon:
 		Filename: raweapicon.png
 
+ra_gigafactory:
+	Inherits: ^WithBuildingBib1
+	Defaults:
+		Filename: raweap.shp
+		Scale: 1.333
+	idle:
+	damaged-idle:
+		Start: 1
+	make:
+		Filename: raweapmake.shp
+		Length: *
+	build-top:
+		Filename: raweap3.shp
+		Length: 10
+	damaged-build-top:
+		Filename: raweap2.shp
+		Start: 4
+		Length: 4
+	customhack:
+		Filename: raweap3.shp
+		Length: 1
+	damaged-customhack:
+		Filename: raweap2.shp
+		Start: 4
+		Length: 1
+	smoke:
+		Filename: raweapsmoke.png
+		Length: *
+		Tick: 100
+		ZOffset: 100
+	dead:
+	bib:
+		Scale: 1
+		TilesetOverrides:
+			INTERIOR: TEMPERAT
+	icon:
+		Filename: ra_gigafactoryicon.png
+
 rahpad:
 	Inherits: ^WithBuildingBib3
 	Defaults:
@@ -2723,6 +2994,51 @@ raafld:
 	icon:
 		Filename: raafldicon.png
 
+ra_largeairfield:
+	Defaults:
+		Scale: 2
+	idle:
+		Filename: ra_largeairfield.shp
+		Length: 1
+		ZOffset: -1023
+		Offset: 0,-6
+	damaged-idle:
+		Filename: ra_largeairfield.shp
+		Start: 1
+		Length: 1
+		ZOffset: -1023
+		Offset: 0,-6
+	active:
+		Filename: ra_largeairfield_light.shp
+		Length: 8
+		Tick: 160
+		ZOffset: -1023
+		Offset: 0,-6
+	damaged-active:
+		Filename: ra_largeairfield_light.shp
+		Start: 8
+		Length: 8
+		Tick: 160
+		ZOffset: -1023
+		Offset: 0,-6
+	flag:
+		Filename: ra_largeairfield_flag.shp
+		Length: 8
+		ShadowStart: 8
+		Tick: 160
+		ZOffset: -1023
+		Offset: 0,-6
+	make:
+		Filename: ra_largeairfield_make.shp
+		Length: *
+		Offset: 0,-6
+	dead:
+		Filename: ra_largeairfield.shp
+		Start: 1
+		Length: 1
+	icon:
+		Filename: ra_largeairfieldicon.png
+
 rafix:
 	Defaults:
 		Filename: rafix.shp
@@ -2765,48 +3081,21 @@ rafix:
 		Offset: 0,-2
 	icon:
 		Filename: rafixicon.png
+
+rafixa:
+	Inherits: rafix
+	Defaults:
+		Filename: rafixa.shp
+
+rafixs:
+	Inherits: rafix
+	Defaults:
+		Filename: rafixs.shp
+
 rafixj:
+	Inherits: rafix
 	Defaults:
 		Filename: rafixj.shp
-	idle:
-		Offset: 0,2
-		ZOffset: -1c511
-	damaged-idle:
-		Start: 7
-		Offset: 0,2
-		ZOffset: -1c511
-	active:
-		Start: 1
-		Length: 6
-		Offset: 0,2
-		ZOffset: -1c511
-	damaged-active:
-		Start: 8
-		Length: 6
-		Offset: 0,2
-		ZOffset: -1c511
-	make:
-		Filename: rafixmake.shp
-		Length: *
-		Offset: 0,2
-	dead:
-	bib:
-		Filename: mbFIX.tem
-		TilesetFilenames:
-			DESERT: mbFIX.des
-			WINTER: mbFIX.win
-			SNOW: mbFIX.sno
-			BARREN: mbFIX.bar
-			JUNGLE: mbFIX.jun
-			RA_SNOW: mbFIX.sno
-			RA_DESERT: mbFIX.des
-			RA_INTERIOR: mbFIX.int
-			ARRAKIS: mbFIX.des
-			ARRAKIS2: mbFIX.des
-		Length: *
-		Offset: 0,-2
-	icon:
-		Filename: rafixjicon.shp
 
 ragun:
 	Defaults:
@@ -3671,6 +3960,47 @@ oilb:
 	icon:
 		Filename: oilbicon.shp
 
+oilb2:
+	Defaults:
+		Filename: oilb2.png
+		Offset: 0,0
+	idle:
+		Length: *
+		Tick: 100
+	dead:
+		Filename: oilb2_broken.png
+		Length: 1
+		Tick: 100
+	damaged-idle:
+		Filename: oilb2_broken.png
+		Length: *
+		Tick: 100
+	make:
+	bib:
+		Filename: bib3.tem
+		TilesetFilenames:
+			DESERT: bib3.des
+			WINTER: bib3.win
+			SNOW: bib3.sno
+			TEMPERAT: bib3.tem
+			JUNGLE: bib3.jun
+			BARREN: bib3.bar
+			RA_SNOW: bib3.sno
+			RA_TEMPERAT: bib3.tem
+			RA_DESERT: bib3.des
+			RA_INTERIOR: bib3.int
+			ARRAKIS: bib3.des
+			ARRAKIS2: bib3.des
+			CARIBIC: bib3.jun
+			WC2SUNSET: bib3.tem
+			WC2SUMMER: bib3.tem
+			OUTPOST2: bib3.tem
+		Length: *
+		Offset: 0,0
+		UseTilesetExtension: true
+	icon:
+		Filename: oilb2_icon.png
+
 oilb.husk:
 	Inherits: oilb
 	Defaults:
@@ -3717,6 +4047,47 @@ yak:
 	icon:
 		Filename: yakicon.png
 
+yaktesla:
+	Defaults:
+		Filename: ra1_soviets_yaktesla.png
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: ra_teslayakicon.png
+
+yakarmored:
+	Defaults:
+		Filename: ra1_soviets_yakarmored.png
+	idle:
+		Facings: 16
+		Length: 3
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: ra_armoredyakicon.png
+
+yaknuclear:
+	Defaults:
+		Filename: yak.shp
+		Scale: 1.25
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: ra_nuclearyakicon.png
+
 raheli:
 	Defaults:
 		Filename: raheli.shp
@@ -3759,6 +4130,74 @@ hind:
 		Facings: 8
 	icon:
 		Filename: hindicon.png
+
+ra_kamov:
+	Defaults:
+		Filename: ra_kamov.png
+		#Scale: 1.25
+	idle:
+		Facings: 64
+		# InterpolatedFacings: 64
+	rotor:
+		Filename: kamovrotor.shp
+		Frames: 0,1,2,3
+		Scale: 1.5
+		Length: 4
+	rotor2:
+		Filename: kamovrotor.shp
+		Frames: 3,2,1,0
+		Scale: 1.5
+		Length: 4
+		FlipX: True
+		FlipY: True
+	slow-rotor:
+		Filename: kamovrotor.shp
+		Frames: 4,5,6,7,8,9,10
+		Scale: 1.5
+		# Start: 4
+		Length: 7
+	slow-rotor2:
+		Filename: kamovrotor.shp
+		Frames: 10,9,8,7,6,5,4
+		Scale: 1.5
+		# Start: 4
+		Length: 7
+		FlipX: True
+		FlipY: True
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+		Scale: 1.5
+	icon:
+		Filename: kamovicon.png
+
+modhip:
+	Defaults:
+		Filename: ra_hip.png
+	idle:
+		Facings: 64
+	rotor:
+		Filename: hindrotor.shp
+		Length: 4
+		Scale: 1.75
+	slow-rotor:
+		Filename: hindrotor.shp
+		Start: 4
+		Length: 8
+		Scale: 1.75
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: hipicon.png
+	pscchhip1:
+		Filename: glhipmissx2.shp
+	pscchhip2:
+		Filename: glhipmissx4.shp
+	pscchhip3:
+		Filename: glhipmissx8.shp
 
 jhind:
 	Defaults:
@@ -4772,6 +5211,25 @@ alliedtiger:
 	icon:
 		Filename: TigerCameo.shp
 
+alliedcybertank:
+	Defaults:
+		Scale: 0.60
+	idle:
+		Filename: CyberTankChassis.png
+		Facings: 64
+		#Offset: 0,0,-2048
+	turret:
+		Filename: CyberTankTurret.png
+		Facings: 64
+		#Offset: 0,0,-4098
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+		#Offset: 0,0,-4098
+		Scale: 1
+	icon:
+		Filename: CyberTankIcon.png
+
 heavyaatank:
 	Defaults:
 		Scale: 1
@@ -4863,9 +5321,25 @@ je4:
 	icon:
 		Filename: je4icon.shp
 
+hammertank:
+	Defaults:
+		Scale: 0.5
+	idle:
+		Filename: SovietHammerTankChassis.png
+		Facings: 32
+	turret:
+		Filename: SovietHammerTankTurret.png
+		Facings: 32
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+		Scale: 1.25
+	icon:
+		Filename: SovietHammerTankIcon.png
+
 kotin:
 	Defaults:
-		Scale: .9
+		Scale: 0.9
 	idle:
 		Filename: KotinChassisSpritesheet.png
 		Facings: 64
@@ -4875,8 +5349,9 @@ kotin:
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
+		Scale: 1.25
 	icon:
-		Filename: KotinIcon.shp
+		Filename: KotinIcon.png
 
 jmgnest:
 	Defaults:
@@ -5438,10 +5913,6 @@ nuclearenginesicon:
 	icon:
 		Filename: nuclearenginesicon.png
 
-afterburnersicon:
-	icon:
-		Filename: afterburnersicon.png
-
 rocketenhancementsicon:
 	icon:
 		Filename: rocketenhancementsicon.png
@@ -5493,3 +5964,117 @@ superiorwarenginesicon:
 nanotechrepairsicon:
 	icon:
 		Filename: nanotechrepairsicon.png
+
+#############################
+#	Doctrines and Upgrades	#
+#############################
+
+ra_doctrine_conscription:
+	icon:
+		Filename: conscriptiondoctrineicon.png
+
+ra_doctrine_industrialefficiency:
+	icon:
+		Filename: industrialefficiencydoctrineicon.png
+
+ra_doctrine_inferno:
+	icon:
+		Filename: infernodoctrineicon.png
+
+ra_doctrine_teslatech:
+	icon:
+		Filename: teslatechdoctrineicon.png
+
+ra_doctrine_heavyarmor:
+	icon:
+		Filename: heavyarmordoctrineicon.png
+
+ra_doctrine_nuclearwar:
+	icon:
+		Filename: nuclearwaricon.png
+
+#############################
+
+ra_upgrade_vengeance:
+	icon:
+		Filename: vengeanceicon.png
+
+ra_upgrade_menofsteel:
+	icon:
+		Filename: menofsteelicon.png
+
+ra_upgrade_massproduction:
+	icon:
+		Filename: massproductionicon.png
+
+ra_upgrade_wareconomy:
+	icon:
+		Filename: wareconomyicon.png
+
+ra_upgrade_incendiarybullets:
+	icon:
+		Filename: incendiarybulletsicon.png
+
+ra_upgrade_scorchedearth:
+	icon:
+		Filename: scorchedearthicon.png
+
+ra_upgrade_teslaarcing:
+	icon:
+		Filename: teslaarcingicon.png
+
+ra_upgrade_teslarockets:
+	icon:
+		Filename: teslarocketsicon.png
+
+ra_upgrade_reactoroverload:
+	icon:
+		Filename: reactoroverloadicon.png
+
+ra_upgrade_autoloaders:
+	icon:
+		Filename: autoloadersicon.png
+
+ra_upgrade_highexplosiverockets:
+	icon:
+		Filename: highexplosiverocketsicon.png
+
+ra_upgrade_stalinium:
+	icon:
+		Filename: staliniumicon.png
+
+ra_upgrade_unstableisotopes:
+	icon:
+		Filename: unstableisotopesicon.png
+
+ra_upgrade_nuclearrockets:
+	icon:
+		Filename: nuclearrocketsicon.png
+
+ra_upgrade_nuclearshells:
+	icon:
+		Filename: nuclearshellsicon.png
+
+ra_upgrade_shtoradefensesystem:
+	icon:
+		Filename: shtoradefensesystemicon.png
+
+ra_upgrade_hazmatsuits:
+	icon:
+		Filename: hazmatsuitsicon.png
+
+ra_upgrade_afterburners:
+	icon:
+		Filename: afterburnersicon.png
+
+ra_promotion_superoptics:
+	icon:
+		Filename: superopticsicon.png
+
+ra_promotion_targetingcomputer:
+	icon:
+		Filename: targetingcomputericon.png
+
+ra_promotion_hurricanerocketpod:
+	icon:
+		Filename: hurricanerocketpodicon.png

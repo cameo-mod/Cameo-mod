@@ -3,13 +3,18 @@ V19:
 	Inherits@2: ^CashTricklerMultipliers
 	Inherits@shape: ^1x1Shape
 	CashTrickler:
+		Interval: 100
+		Amount: 25
+	CashTricklerBar:
+	GivesCashOnCapture:
+		Amount: 250
 	Building:
 		Footprint: x
 		Dimensions: 1,1
 	Health:
-		HP: 80000
+		HP: 100000
 	Tooltip:
-		Name: Oil Derrick
+		Name: Small Oil Derrick
 	TooltipDescription@ally:
 		Description: Provides additional funds.
 		ValidRelationships: Ally
@@ -27,6 +32,7 @@ V19:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Image: ra2caairp
+
 V19.Husk:
 	Inherits: ^TechBuildingHusk
 	Inherits@shape: ^1x1Shape
@@ -38,7 +44,7 @@ V19.Husk:
 		Footprint: x
 		Dimensions: 1,1
 	Tooltip:
-		Name: Oil Derrick (Destroyed)
+		Name: Small Oil Derrick (Destroyed)
 	TransformOnCapture:
 		IntoActor: V19
 	GpsDot:
@@ -359,7 +365,7 @@ OILB:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Health:
-		HP: 80000
+		HP: 200000
 	RevealsShroud:
 		Range: 4c0
 	CaptureManager:
@@ -367,10 +373,13 @@ OILB:
 		Types: building
 	InstantlyRepairable:
 	CashTrickler:
-		Interval: 375
-		Amount: 100
+		Interval: 250
+		Amount: 125
+	CashTricklerBar:
+	GivesCashOnCapture:
+		Amount: 500
 	Tooltip:
-		Name: Oil Derrick
+		Name: Large Oil Derrick
 	TooltipDescription@ally:
 		Description: Provides additional funds.
 		ValidRelationships: Ally
@@ -381,8 +390,6 @@ OILB:
 		Weapon: BarrelExplode
 	GpsDot:
 		String: Oil
-	GivesCashOnCapture:
-		Amount: 100
 	UpdatesDerrickCount:
 	SpawnActorOnDeath:
 		Actor: OILB.Husk
@@ -392,6 +399,7 @@ OILB:
 		Palette: playerra2
 		IsPlayerPalette: true
 		Image: ra2caoild
+
 OILB.Husk:
 	Inherits: ^TechBuildingHusk
 	Inherits@shape: ^2x2Shape
@@ -399,7 +407,7 @@ OILB.Husk:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Tooltip:
-		Name: Oil Derrick (Destroyed)
+		Name: Large Oil Derrick (Destroyed)
 	TransformOnCapture:
 		IntoActor: OILB
 	GpsDot:

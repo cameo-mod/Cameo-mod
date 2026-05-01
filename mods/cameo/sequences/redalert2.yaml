@@ -13,7 +13,7 @@ ra2psiatomic:
 
 yrgarobo:
 	Defaults:
-		Offset: 0,10
+		Offset: -6,-10
 	idle:
 		Filename: yr_ggrobo_a.shp
 		Length: 20
@@ -32,7 +32,7 @@ yrgarobo:
 		Length: 20
 		Start: 20
 	icon:
-		Filename: ra2robconicon.shp
+		Filename: ra2robconicon.png
 		Offset: 0,0
 	muzzle:
 		Filename: gunfire2.shp
@@ -220,7 +220,7 @@ ra2nacnst:
 		ShadowStart: 25
 		Tick: 75
 	icon:
-		Filename: ra2radaricon.shp
+		Filename: ra2_sovietconstructionyardicon.png
 		Offset: 0,0
 
 ra2napowr:
@@ -380,7 +380,7 @@ ra2gacnst:
 		ShadowStart: 30
 		Tick: 90
 	icon:
-		Filename: ra2ayardicon.shp
+		Filename: ra2_alliedconstructionyardicon.png
 		Offset: 0,0
 
 ra2gapile:
@@ -507,7 +507,7 @@ ra2gaairc:
 		Filename: ra2_ggaircbb.shp
 		Length: 1
 		ZOffset: -1c512
-	damage-idle-bottom:
+	damaged-idle-bottom:
 		Filename: ra2_ggaircbb.shp
 		Start: 1
 		Length: 1
@@ -528,7 +528,7 @@ ra2gaairc:
 		Length: 6
 		Tick: 120
 		ZOffset: -1c512
-	damage-idle-mid:
+	damaged-idle-mid:
 		Filename: ra2_ggairc_b.shp
 		Start: 7
 		Length: 6
@@ -603,7 +603,7 @@ yrnacnst:
 		Length: 18
 		Tick: 150
 	icon:
-		Filename: ra2ayardicon.shp
+		Filename: ra2_yuriconstructionyardicon.png
 		Offset: 0,0
 
 yryapowr:
@@ -5473,6 +5473,7 @@ ra2flameguy:
 		Tick: 100
 
 ^RA2Infantry:
+	Inherits: ^InfantryOverlays
 	Inherits@1: ^RA2BasicInfantry
 	Inherits@2: ^RA2ProneInfantry
 
@@ -5598,7 +5599,6 @@ ra2e1dep:
 		Length: 15
 	icon:
 		Filename: ra2e1icon.shp
-
 
 yrggi:
 	Inherits: ^RA2ArmedInfantry
@@ -5847,61 +5847,6 @@ ra2tany:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: ra2_tany.shp
-	run:
-		Tick: 120
-	swim-stand:
-		Start: 410
-		Facings: 8
-		Length: 6
-		Tick: 160
-	swim-idle1:
-		Start: 292
-		Length: 15
-		Tick: 160
-	swim-idle2:
-		Start: 307
-		Length: 15
-		Tick: 160
-	swim-run:
-		Start: 506
-		Facings: 8
-		Length: 6
-		Tick: 120
-	swim-die1:
-		Start: 323
-		Length: 19
-	swim-die2:
-		Start: 342
-		Length: 20
-	swim-shoot:
-		Start: 554
-		Length: 6
-		Facings: 8
-		Tick: 80
-	cheer:
-		Start: 603
-	swim-cheer:
-		Start: 611
-		Length: 8
-		Tick: 120
-	paradrop:
-		Start: 602
-	die:
-		Start: 134
-		Length: 15
-	icon_gun:
-		Filename: tanyamodes.shp
-		Start: 0
-	icon_c4:
-		Filename: tanyamodes.shp
-		Start: 1
-	icon:
-		Filename: ra2tanyaicon.shp
-	iconchrono: ra2htanyaicon.shp
-ra2tany.black:
-	Inherits: ^RA2ArmedInfantry
-	Defaults:
-		Filename: ra2_tany_black.shp
 	run:
 		Tick: 120
 	swim-stand:
@@ -6900,25 +6845,6 @@ yrpcv:
 
 yrpcv.Bot:
 	Inherits: yrpcv
-
-yrrobo:
-	Inherits: ^RA2CannonMuzzle
-	Defaults:
-		Filename: yr_robo.shp
-	idle:
-		Facings: 64
-		Offset: 0,20
-	turret:
-		Start: 64
-		Facings: 64
-		Offset: 0,20
-	muzzle:
-		Offset: 0,20
-	muzzle-2:
-		Offset: 0,20
-	icon:
-		Filename: ra2roboticon.shp
-		AddExtension: False
 
 ra2sqd:
 	Defaults:
@@ -8250,3 +8176,352 @@ ra2_chronosk:
 		Length: 13
 		Offset: 0,24
 		ZOffset: 1023
+
+ra2_initfire:
+	Defaults:
+		Filename: ra2_fire01.shp
+	idle:
+		Length: *
+		ZOffset: 1023
+
+ra2uniontank:
+	Defaults:
+		Filename: UnionTankBody.png
+	idle:
+		Facings: 32
+		Scale: 0.4
+	turret:
+		Filename: UnionTankTurret.png
+		Facings: 32
+		Scale: 0.25
+	icon:
+		Filename: ra2apocicon.shp
+		AddExtension: False
+	muzzle:
+		Filename: ra2_apmuzzle.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2superapocalypse:
+	Defaults:
+		Filename: superapocalypsebody.png
+	idle:
+		Facings: 32
+		Scale: 0.4
+	turret:
+		Filename: superapocalypsetur.png
+		Facings: 32
+		Scale: 0.25
+	icon:
+		Filename: ra2apocicon.shp
+		AddExtension: False
+	muzzle:
+		Filename: ra2_apmuzzle.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ra2katyusha:
+	Inherits: ^RA2GatlingMuzzle
+	Defaults:
+		Filename: ra2katyusha.png
+		Scale: 0.2
+	idle:
+		Facings: 32
+		Offset: 0,20
+	icon:
+		Filename: tkmkatyushaicon.png
+		AddExtension: False
+
+ra2shilka:
+	idle:
+		Filename: ra2shilkabody.png
+		Facings: 32
+		Scale: 0.25
+	turret:
+		Filename: ra2shilkaturret.png
+		Facings: 32
+		Scale: 0.25
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: tkmzazaicon.png
+
+ra2advanceteslatank:
+	Defaults:
+		Filename: ra2advanceteslatankbody.png
+	idle:
+		Filename: ra2advanceteslatankbody.png
+		Facings: 32
+		Scale: 0.25
+	turret:
+		Filename: ra2advanceteslatanktur.png
+		Facings: -32
+		Scale: 0.25
+	icon:
+		Filename: ra2ttnkicon.shp
+
+ra2mig:
+	Defaults:
+		Filename: ra2mig.png
+		Scale: 0.15
+	idle:
+		Facings: -32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: tkmvipericon.png
+
+### Soviets Upgrades
+
+ra2_soviets_upgrade_conscription:
+	icon:
+		Filename: ra2_soviets_upgrade_conscription_icon.png
+
+ra2_soviets_upgrade_infantryconditioning:
+	icon:
+		Filename: ra2_soviets_upgrade_infantryconditioning_icon.png
+
+ra2_soviets_upgrade_shocktroopertraining:
+	icon:
+		Filename: ra2_soviets_upgrade_shocktroopertraining_icon.png
+
+ra2_soviets_upgrade_heavyarmorplatings:
+	icon:
+		Filename: ra2_soviets_upgrade_heavyarmorplatings_icon.png
+
+ra2_soviets_upgrade_reactivearmor:
+	icon:
+		Filename: ra2_soviets_upgrade_reactivearmor_icon.png
+
+ra2_soviets_upgrade_tesladischargearmor:
+	icon:
+		Filename: ra2_soviets_upgrade_tesladischargearmor_icon.png
+
+ra2_soviets_upgrade_fireshells:
+	icon:
+		Filename: ra2_soviets_upgrade_fireshells_icon.png
+
+ra2_soviets_upgrade_radiationshells:
+	icon:
+		Filename: ra2_soviets_upgrade_radiationshells_icon.png
+
+ra2_soviets_upgrade_teslashells:
+	icon:
+		Filename: ra2_soviets_upgrade_teslashells_icon.png
+
+ra2_soviets_upgrade_teslaoverload:
+	icon:
+		Filename: ra2_soviets_upgrade_teslaoverload_icon.png
+
+ra2_soviets_upgrade_heavycannons:
+	icon:
+		Filename: ra2_soviets_upgrade_heavycannons_icon.png
+
+ra2_soviets_upgrade_grindertanktreads:
+	icon:
+		Filename: ra2_soviets_upgrade_grindertanktreads_icon.png
+
+ra2_soviets_upgrade_kirovarmorplatings:
+	icon:
+		Filename: ra2_soviets_upgrade_kirovarmorplatings_icon.png
+
+ra2_soviets_upgrade_kirovgastroburners:
+	icon:
+		Filename: ra2_soviets_upgrade_kirovgastroburners_icon.png
+
+ra2_soviets_upgrade_kirovnuclearshells:
+	icon:
+		Filename: ra2_soviets_upgrade_kirovnuclearshells_icon.png
+
+### Allies Upgrades
+
+ra2_allies_upgrade_assaultsquadtraining:
+	icon:
+		Filename: ra2_allies_upgrade_assaultsquadtraining_icon.png
+
+ra2_allies_upgrade_vanguardtraining:
+	icon:
+		Filename: ra2_allies_upgrade_vanguardtraining_icon.png
+
+ra2_allies_upgrade_infiltratorstraining:
+	icon:
+		Filename: ra2_allies_upgrade_infiltratorstraining_icon.png
+
+ra2_allies_upgrade_compositearmorplating:
+	icon:
+		Filename: ra2_allies_upgrade_compositearmorplating_icon.png
+
+ra2_allies_upgrade_reflectivearmorplating:
+	icon:
+		Filename: ra2_allies_upgrade_reflectivearmorplating_icon.png
+
+ra2_allies_upgrade_ionpulseplating:
+	icon:
+		Filename: ra2_allies_upgrade_ionpulseplating_icon.png
+
+ra2_allies_upgrade_elitegi:
+	icon:
+		Filename: ra2_allies_upgrade_elitegi_icon.png
+
+ra2_allies_upgrade_eliterocketeer:
+	icon:
+		Filename: ra2_allies_upgrade_eliterocketeer_icon.png
+
+ra2_allies_upgrade_prismlinking:
+	icon:
+		Filename: ra2_allies_upgrade_prismlinking_icon.png
+
+ra2_allies_upgrade_advancedaeronautics:
+	icon:
+		Filename: ra2_allies_upgrade_advancedaeronautics_icon.png
+
+ra2_allies_upgrade_thunderboltmissiles:
+	icon:
+		Filename: ra2_allies_upgrade_thunderboltmissiles_icon.png
+
+ra2_allies_upgrade_tanklasertargeting:
+	icon:
+		Filename: ra2_allies_upgrade_tanklasertargeting_icon.png
+
+ra2_allies_upgrade_intensifiedprismbeams:
+	icon:
+		Filename: ra2_allies_upgrade_intensifiedprismbeams_icon.png
+
+ra2_allies_upgrade_prismaticbarrier:
+	icon:
+		Filename: ra2_allies_upgrade_prismaticbarrier_icon.png
+
+ra2_allies_upgrade_chronoengine:
+	icon:
+		Filename: ra2_allies_upgrade_chronoengine_icon.png
+
+### Yuri Upgrades
+
+ra2_yuri_upgrade_psioniclegion:
+	icon:
+		Filename: ra2_yuri_upgrade_psioniclegion_icon.png
+
+ra2_yuri_upgrade_psionicfanatics:
+	icon:
+		Filename: ra2_yuri_upgrade_psionicfanatics_icon.png
+
+ra2_yuri_upgrade_psionicelite:
+	icon:
+		Filename: ra2_yuri_upgrade_psionicelite_icon.png
+
+ra2_yuri_upgrade_lashercannon:
+	icon:
+		Filename: ra2_yuri_upgrade_lashercannon_icon.png
+
+ra2_yuri_upgrade_lashertoxic:
+	icon:
+		Filename: ra2_yuri_upgrade_lashertoxic_icon.png
+
+ra2_yuri_upgrade_lasherlaser:
+	icon:
+		Filename: ra2_yuri_upgrade_lasherlaser_icon.png
+
+ra2_yuri_upgrade_scraparmor:
+	icon:
+		Filename: ra2_yuri_upgrade_scraparmor_icon.png
+
+ra2_yuri_upgrade_chaosgasemitters:
+	icon:
+		Filename: ra2_yuri_upgrade_chaosgasemitters_icon.png
+
+ra2_yuri_upgrade_psionicshields:
+	icon:
+		Filename: ra2_yuri_upgrade_psionicshields_icon.png
+
+ra2_yuri_upgrade_initiatepower:
+	icon:
+		Filename: ra2_yuri_upgrade_initiatepower_icon.png
+
+ra2_yuri_upgrade_brutestrength:
+	icon:
+		Filename: ra2_yuri_upgrade_brutestrength_icon.png
+
+ra2_yuri_upgrade_lasherarmor:
+	icon:
+		Filename: ra2_yuri_upgrade_lasherarmor_icon.png
+
+ra2_yuri_upgrade_gatlingpower:
+	icon:
+		Filename: ra2_yuri_upgrade_gatlingpower_icon.png
+
+ra2_yuri_upgrade_meltingvirus:
+	icon:
+		Filename: ra2_yuri_upgrade_meltingvirus_icon.png
+
+ra2_yuri_upgrade_domination:
+	icon:
+		Filename: ra2_yuri_upgrade_domination_icon.png
+
+ra2_yuri_upgrade_gatlingspeed:
+	icon:
+		Filename: ra2_yuri_upgrade_gatlingspeed_icon.png
+
+ra2_yuri_upgrade_corrosiveammo:
+	icon:
+		Filename: ra2_yuri_upgrade_corrosiveammo_icon.png
+
+ra2_yuri_upgrade_supermagnets:
+	icon:
+		Filename: ra2_yuri_upgrade_supermagnets_icon.png
+
+ra2_yuri_upgrade_bioreactorefficiency:
+	icon:
+		Filename: ra2_yuri_upgrade_bioreactorefficiency_icon.png
+
+ra2_yuri_upgrade_bioengineering:
+	icon:
+		Filename: ra2_yuri_upgrade_bioengineering_icon.png
+
+ra2_yuri_upgrade_psychicrange:
+	icon:
+		Filename: ra2_yuri_upgrade_psychicrange_icon.png
+
+ra2_yuri_upgrade_psionicarmor:
+	icon:
+		Filename: ra2_yuri_upgrade_psionicarmor_icon.png
+
+ra2_yuri_upgrade_toxicengines:
+	icon:
+		Filename: ra2_yuri_upgrade_toxicengines_icon.png
+
+ra2_yuri_upgrade_psionicplasmabeams:
+	icon:
+		Filename: ra2_yuri_upgrade_psionicplasmabeams_icon.png
+
+ra2_yuri_upgrade_gravitondrive:
+	icon:
+		Filename: ra2_yuri_upgrade_gravitondrive_icon.png
+
+ra2_yuri_upgrade_siphonattack:
+	icon:
+		Filename: ra2_yuri_upgrade_siphonattack_icon.png
+
+ra2_yuri_upgrade_disklasers:
+	icon:
+		Filename: ra2_yuri_upgrade_disklasers_icon.png
+
+ra2_yuri_upgrade_stealthsuits:
+	icon:
+		Filename: ra2_yuri_upgrade_stealthsuits_icon.png
+
+ra2_yuri_upgrade_geneticboost:
+	icon:
+		Filename: ra2_yuri_upgrade_geneticboost_icon.png
+
+ra2_yuri_upgrade_psychicvision:
+	icon:
+		Filename: ra2_yuri_upgrade_psychicvision_icon.png

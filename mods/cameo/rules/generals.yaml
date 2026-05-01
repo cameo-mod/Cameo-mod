@@ -6346,13 +6346,14 @@ chpropaganda:
 		Amount: -40
 	Voiced:
 		VoiceSet: CHPropagandaCenterVoice
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
-		RequiresCondition: !disabled
-	WithRangeCircle:
-		Range: 6c0
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
 		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: !disabled
 
 chpropagandatower:
@@ -6382,13 +6383,14 @@ chpropagandatower:
 	Selectable:
 		Bounds: 1024, 1024
 		DecorationBounds: 1024, 2048, 0, -512
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
-		RequiresCondition: !disabled && !lowpower
-	WithRangeCircle:
-		Range: 6c0
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
 		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: !disabled
 	Voiced:
 		VoiceSet: CHSpeakerTowerVoice
@@ -7604,9 +7606,15 @@ choverlord:
 		LocalOffset: -85,120,340, -85,-120,340
 		MuzzleSequence: muzzle
 		RequiresCondition: addonbunker && loaded >= 5
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
 		RequiresCondition: addonpropaganda
 	WithSpriteTurret:
 		RequiresCondition: !addonpropaganda && !addonbunker && !addongattling
@@ -8083,13 +8091,14 @@ choutpost2:
 		MaxWeight: 8
 		EjectOnDeath: false #desync
 		InitialUnits: che3, che3, che3
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
-		RequiresCondition: !disabled
-	WithRangeCircle:
-		Range: 6c0
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
 		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: !disabled
 	RenderSprites:
 		Image: choutpost
@@ -9197,9 +9206,14 @@ chhelix:
 	GrantConditionOnProduction@speaker:
 		Condition: speakeraddon
 		Actors: pscchhelix4
-	ProximityExternalCondition@PROPAGANDA:
-		Range: 6c0
-		Condition: propaganda
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 6000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 6000
+		Type: propaganda
+		Color: 55BBFF
 		RequiresCondition: speakeraddon && !disabled
 	DetectCloaked:
 		RequiresCondition: !disabled && gattlingaddon

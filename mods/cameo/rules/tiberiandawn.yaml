@@ -260,21 +260,21 @@ World:
 		Upgrades: up_elementalwarfare
 
 ^EliteCapacitors:
-	RangeMultiplier@up_elitecapacitors:
-		RequiresCondition: up_elitecapacitors
-		Modifier: 110
 	FirepowerMultiplier@up_elitecapacitors:
 		RequiresCondition: up_elitecapacitors
-		Modifier: 110
+		Modifier: 130
 	ReloadDelayMultiplier@up_elitecapacitors:
 		RequiresCondition: up_elitecapacitors
-		Modifier: 90
+		Modifier: 70
+	RangeMultiplier@up_elitecapacitors:
+		RequiresCondition: up_elitecapacitors
+		Modifier: 115
 	RevealsShroudMultiplier@up_elitecapacitors:
 		RequiresCondition: up_elitecapacitors
-		Modifier: 110
+		Modifier: 115
 	DetectCloakedMultiplier@up_elitecapacitors:
 		RequiresCondition: up_elitecapacitors
-		Modifier: 110
+		Modifier: 115
 	GrantConditionOnPrerequisite@up_elitecapacitors:
 		Condition: up_elitecapacitors
 		Prerequisites: up_elitecapacitors
@@ -282,6 +282,9 @@ World:
 		Upgrades: up_elitecapacitors
 
 ^ImprovedArtilleries:
+	FirepowerMultiplier@up_improvedartilleries:
+		RequiresCondition: up_improvedartilleries
+		Modifier: 125
 	RangeMultiplier@up_improvedartilleries:
 		RequiresCondition: up_improvedartilleries
 		Modifier: 125
@@ -295,13 +298,13 @@ World:
 		Upgrades: up_improvedartilleries
 
 ^GuerillaTactics:
+	FirepowerMultiplier@up_guerillatactics:
+		RequiresCondition: up_guerillatactics
+		Modifier: 115
 	SpeedMultiplier@up_guerillatactics:
 		RequiresCondition: up_guerillatactics
-		Modifier: 105
+		Modifier: 110
 	RangeMultiplier@up_guerillatactics:
-		RequiresCondition: up_guerillatactics
-		Modifier: 105
-	FirepowerMultiplier@up_guerillatactics:
 		RequiresCondition: up_guerillatactics
 		Modifier: 105
 	RevealsShroudMultiplier@up_guerillatactics:
@@ -317,13 +320,13 @@ World:
 		Upgrades: up_guerillatactics
 
 ^AdvancedGuerillaTactics:
+	FirepowerMultiplier@up_advancedguerillatactics:
+		RequiresCondition: up_advancedguerillatactics
+		Modifier: 115
 	SpeedMultiplier@up_advancedguerillatactics:
 		RequiresCondition: up_advancedguerillatactics
-		Modifier: 105
+		Modifier: 110
 	RangeMultiplier@up_advancedguerillatactics:
-		RequiresCondition: up_advancedguerillatactics
-		Modifier: 105
-	FirepowerMultiplier@up_advancedguerillatactics:
 		RequiresCondition: up_advancedguerillatactics
 		Modifier: 105
 	RevealsShroudMultiplier@up_advancedguerillatactics:
@@ -351,13 +354,13 @@ World:
 		PercentageStep: 1
 		Delay: 10
 		StartIfBelow: 100
-		DamageCooldown: 10
+		DamageCooldown: 1
 		RequiresCondition: up_tiberiuminfusion
 	ChangesHealth@up_tiberiuminfusion2:
 		Step: 10
 		Delay: 1
 		StartIfBelow: 100
-		DamageCooldown: 10
+		DamageCooldown: 1
 		RequiresCondition: up_tiberiuminfusion
 	ReloadDelayMultiplier@up_tiberiuminfusion:
 		RequiresCondition: up_tiberiuminfusion
@@ -411,8 +414,6 @@ World:
 		Cost: 100
 	Tooltip:
 		Name: Minigunner
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Mobile:
 		Speed: 60
 	Health:
@@ -518,7 +519,6 @@ E2:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^GrenadierInfantryTemplate
-	Inherits@explode: ^ExplodingInfantry
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -531,8 +531,6 @@ E2:
 		Cost: 200
 	Tooltip:
 		Name: GDI Grenadier
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~pyle, ~!upgdiempgrenadier
@@ -560,7 +558,7 @@ E2:
 		StandSequences: parachute
 		RequiresCondition: parachute
 	FireWarheadsOnDeath:
-		Weapon: Grenade
+		Weapon: GrenadeExplode
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	RenderSprites:
@@ -584,8 +582,6 @@ E2:
 		Cost: 200
 	Tooltip:
 		Name: TD Rocket Soldier
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
@@ -671,7 +667,7 @@ E4:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@explode: ^ExplodingInfantry
+	Inherits@FireInfantry: ^FireInfantry
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -686,8 +682,6 @@ E4:
 		Cost: 200
 	Tooltip:
 		Name: Nod Flamethrower
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~hq.nod, ~!upblackhandflamer
@@ -709,7 +703,7 @@ E4:
 		Weapon: Flamethrower
 		MuzzleSequence: muzzle
 	FireWarheadsOnDeath:
-		Weapon: Flamethrower
+		Weapon: FlamethrowerExplode
 	TakeCover:
 		ProneOffset: 190,0,-198
 	WithMuzzleOverlay:
@@ -725,14 +719,11 @@ E4:
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_tiberiuminfusion, up_cyberneticmodifications
-	GrantExternalConditionToTransport:
-		Condition: ifv-fire
 
 E5:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@explode: ^ExplodingInfantry
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -746,8 +737,6 @@ E5:
 		Cost: 500
 	Tooltip:
 		Name: Chemical Warrior
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~tmpl
@@ -805,8 +794,6 @@ E6:
 		Cost: 500
 	Tooltip:
 		Name: Engineer
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cncbarracks
@@ -889,8 +876,6 @@ E6:
 		Cost: 3000
 	Tooltip:
 		Name: Commando
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
@@ -1112,8 +1097,6 @@ APC:
 		Cost: 1200
 	Tooltip:
 		Name: GDI APC
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 		OverrideActor: apc
 	Buildable:
 		BuildPaletteOrder: 30
@@ -1179,8 +1162,6 @@ ARTY:
 		Cost: 400
 	Tooltip:
 		Name: Nod Artillery
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~hq.nod, ~!upnodspecter
@@ -1215,10 +1196,6 @@ ARTY:
 	#	Actor: ARTY.Husk
 	#	OwnerType: InternalName
 	#	EffectiveOwnerFromOwner: true
-	RangeMultiplier@up_improvedartilleries:
-		Modifier: 110
-	RevealsShroudMultiplier@up_improvedartilleries:
-		Modifier: 120
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryShell
 		RequiresCondition: !up_blackmarketupgrades
@@ -1231,6 +1208,7 @@ ARTY:
 FTNK:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
+	Inherits@FireActor: ^FireActor
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
@@ -1244,8 +1222,6 @@ FTNK:
 		Cost: 800
 	Tooltip:
 		Name: Nod Flame Tank
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hq.nod, ~!upnodftnk2
@@ -1253,7 +1229,7 @@ FTNK:
 		Description: actor-ftnk.description
 	Mobile:
 		Speed: 80
-		TurnSpeed: 16
+		TurnSpeed: 32
 		Locomotor: tracked
 	Health:
 		HP: 100000
@@ -1279,7 +1255,7 @@ BGGY:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@GuerillaTactics: ^GuerillaTactics
@@ -1290,8 +1266,6 @@ BGGY:
 		Cost: 300
 	Tooltip:
 		Name: Nod Buggy
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~afld, ~!upnodbuggy2
@@ -1330,7 +1304,7 @@ JEEP:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@LongRangeSensors: ^LongRangeSensors
@@ -1342,8 +1316,6 @@ JEEP:
 		Cost: 400
 	Tooltip:
 		Name: GDI Humvee
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~weap, ~!upgdihumvee
@@ -1381,22 +1353,21 @@ JEEP:
 
 BIKE:
 	Inherits: ^Vehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 500
 	Tooltip:
 		Name: Recon Bike
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~afld, ~!upchemicalbike
@@ -1404,27 +1375,39 @@ BIKE:
 		Description: actor-bike.description
 	Mobile:
 		Speed: 200
-		TurnSpeed: 40
+		TurnSpeed: 80
 	Health:
-		HP: 7500
+		HP: 17500
 	Repairable:
-		HpPerStep: 375
+		HpPerStep: 875
 	ChangesHealth@SelfHealing:
-		Step: 3
-	Armor:
-		Type: Light
+		Step: 7
 	Armament:
 		Weapon: BikeRockets
-		LocalOffset: -128, -170, 170, -128, 170, 170
+		LocalOffset: -125, -175, 175, -125, 175, 175
 		LocalYaw: 100, -100
 		MuzzleSequence: muzzle
-	AttackFrontal:
-		FacingTolerance: 0
+	AmmoPool@pld:
+		RequiresCondition: up_blackmarketupgrades
+	WithAmmoPipsDecoration:
+		RequiresCondition: up_blackmarketupgrades
+	Armament@pointdefense:
+		Weapon: PDLaserBike
+		Turret: pointdefense
+		RequiresCondition: up_blackmarketupgrades
+	Turreted:
+		Turret: pointdefense
+		TurnSpeed: 80
+	AttackTurreted:
+		PauseOnCondition: disabled
+	AttackFollowFrontal:
+		FacingTolerance: 512
+		PauseOnCondition: disabled
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics
+		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
 
 LTNK:
 	Inherits: ^Tank
@@ -1441,8 +1424,6 @@ LTNK:
 		Cost: 600
 	Tooltip:
 		Name: Nod Light Tank
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~afld, ~!upnodltnk2
@@ -1507,8 +1488,6 @@ MTNK:
 		Cost: 900
 	Tooltip:
 		Name: GDI Battle Tank
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~weap, ~!upgdipredator
@@ -1600,8 +1579,6 @@ HTNK:
 		Cost: 1600
 	Tooltip:
 		Name: GDI Mammoth Tank
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~eye, ~!upgdimammoth3
@@ -1692,8 +1669,6 @@ MLRS:
 		Cost: 1000
 	Tooltip:
 		Name: GDI MLRS
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hq.gdi
@@ -1742,6 +1717,9 @@ MLRS:
 	TurnSpeedMultiplier@firing:
 		RequiresCondition: firing
 		Modifier: 50
+	TurretTurnSpeedMultiplier@firing:
+		RequiresCondition: firing
+		Modifier: 50
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
 
@@ -1759,8 +1737,6 @@ gdiarcher:
 		Cost: 750
 	Tooltip:
 		Name: Archer Artillery
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~eye
@@ -1802,6 +1778,9 @@ gdiarcher:
 	TurnSpeedMultiplier@firing:
 		RequiresCondition: firing
 		Modifier: 50
+	TurretTurnSpeedMultiplier@firing:
+		RequiresCondition: firing
+		Modifier: 50
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_highvelocitycannons, up_cuttingedgeequipment
 
@@ -1811,6 +1790,7 @@ MSSM:
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^TurretEMP
+	Inherits@ImprovedArtilleries: ^ImprovedArtilleries
 	Inherits@ElementalWarfare: ^ElementalWarfare
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
@@ -1819,8 +1799,6 @@ MSSM:
 		Cost: 800
 	Tooltip:
 		Name: SSM Launcher
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: ~tmpl, ~!upchemicalssmlauncher
@@ -1871,8 +1849,12 @@ MSSM:
 		RangeCircleType: vehicle
 	KeepsDistance:
 		Distance: 8
+	RangeMultiplier@up_improvedartilleries:
+		Modifier: 110
+	RevealsShroudMultiplier@up_improvedartilleries:
+		Modifier: 120
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare
+		Upgrades: up_guerillatactics, up_improvedartilleries, up_advancedguerillatactics, up_elementalwarfare
 
 STNK:
 	Inherits: ^Vehicle
@@ -1886,13 +1868,12 @@ STNK:
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
 	Valued:
 		Cost: 900
 	Tooltip:
 		Name: Stealth Tank
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 90
 		Prerequisites: ~tmpl, ~!upchemicalstealthtank
@@ -1901,7 +1882,7 @@ STNK:
 	Mobile:
 		Locomotor: heavywheeled
 		Speed: 150
-		TurnSpeed: 30
+		TurnSpeed: 60
 	Health:
 		HP: 25000
 	Repairable:
@@ -1919,6 +1900,12 @@ STNK:
 		Weapon: StealthTankMissiles
 		LocalOffset: 213,43,128, 213,-43,128
 		MuzzleSequence: muzzle
+		RequiresCondition: !up_blackmarketupgrades
+	Armament@Upgrade:
+		Weapon: StealthTankMissilesBlackMarket
+		LocalOffset: 213,43,128, 213,-43,128
+		MuzzleSequence: muzzle
+		RequiresCondition: up_blackmarketupgrades
 	AttackFrontal:
 	# 	FacingTolerance: 0
 	# AutoTarget:
@@ -1932,28 +1919,28 @@ STNK:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	-MustBeDestroyed:
-	SpeedMultiplier@up_guerillatactics:
-		Modifier: 110
-	RangeMultiplier@up_guerillatactics:
-		Modifier: 110
 	FirepowerMultiplier@up_guerillatactics:
+		Modifier: 130
+	SpeedMultiplier@up_guerillatactics:
+		Modifier: 120
+	RangeMultiplier@up_guerillatactics:
 		Modifier: 110
 	RevealsShroudMultiplier@up_guerillatactics:
 		Modifier: 110
 	DetectCloakedMultiplier@up_guerillatactics:
 		Modifier: 110
-	SpeedMultiplier@up_advancedguerillatactics:
-		Modifier: 110
-	RangeMultiplier@up_advancedguerillatactics:
-		Modifier: 110
 	FirepowerMultiplier@up_advancedguerillatactics:
+		Modifier: 130
+	SpeedMultiplier@up_advancedguerillatactics:
+		Modifier: 120
+	RangeMultiplier@up_advancedguerillatactics:
 		Modifier: 110
 	RevealsShroudMultiplier@up_advancedguerillatactics:
 		Modifier: 110
 	DetectCloakedMultiplier@up_advancedguerillatactics:
 		Modifier: 110
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics
+		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
 
 TRAN:
 	Inherits: ^Helicopter
@@ -1965,8 +1952,6 @@ TRAN:
 		Cost: 1500
 	Tooltip:
 		Name: Chinook Transport
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 		OverrideActor: tran
 	-Buildable:
 	Aircraft:
@@ -2047,7 +2032,7 @@ tran.nod:
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Valued:
-		Cost: 3200
+		Cost: 3100
 	Tooltip:
 		Name: Nod Chinook Transport
 	Buildable:
@@ -2082,8 +2067,6 @@ HELI:
 		Cost: 1600
 	Tooltip:
 		Name: Apache Attack Helicopter
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~hpad.nod
@@ -2111,7 +2094,7 @@ HELI:
 		PauseOnCondition: !ammo
 		RequiresCondition: up_blackmarketupgrades
 	AttackAircraft:
-		FacingTolerance: 20
+		FacingTolerance: 10
 		AttackType: Hover
 	WithIdleOverlay@ROTORAIR:
 		Offset: 0,0,85
@@ -2167,8 +2150,6 @@ ORCA:
 		Cost: 1700
 	Tooltip:
 		Name: Orca
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~hpad.gdi
@@ -2197,12 +2178,12 @@ ORCA:
 		PauseOnCondition: !ammo
 		RequiresCondition: up_advancedmissiletargeting
 	AttackAircraft:
-		FacingTolerance: 20
+		FacingTolerance: 10
 		AttackType: Hover
 	SpawnActorOnDeath:
 		Actor: ORCA.Husk
 	EjectOnDeath:
-		PilotActor: gdimissilesoldier
+		PilotActor: gdishotgunner
 	WithMoveAnimation:
 		MoveSequence: move
 	WithMuzzleOverlay:
@@ -2350,10 +2331,33 @@ ORCA.Husk:
 	RenderSprites:
 		Image: orca
 
-FACT:
+^TDBuilding:
 	Inherits: ^BaseBuilding
+	Building:
+		BuildSounds: constru2.aud, hvydoor1.aud
+	SoundOnDamageTransition:
+		DamagedSounds: xplobig4.aud
+		DestroyedSounds: crumble.aud, xplobig4.aud
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: TDBuildingExplode
+		EmptyWeapon: TDBuildingExplode
+
+^TDDefense:
+	Inherits: ^Defense
+	Building:
+		BuildSounds: constru2.aud, hvydoor1.aud
+	SoundOnDamageTransition:
+		DamagedSounds: xplobig4.aud
+		DestroyedSounds: crumble.aud, xplobig4.aud
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: TDBuildingExplode
+		EmptyWeapon: TDBuildingExplode
+
+^FACT:
+	Inherits: ^TDBuilding
 	Inherits@shape: ^3x2Shape
-	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Tooltip:
@@ -2370,9 +2374,11 @@ FACT:
 		Prerequisite: concretebarrier
 	ProvidesPrerequisite@oilderrick:
 		Prerequisite: oilderrick
+	RenderSprites:
+		Image: fact
 
 FACT.GDI:
-	Inherits: FACT
+	Inherits: ^FACT
 	Tooltip:
 		Name: GDI Construction Yard
 	Transforms:
@@ -2387,7 +2393,7 @@ FACT.GDI:
 		Image: gdifact
 
 FACT.NOD:
-	Inherits: FACT
+	Inherits: ^FACT
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Tooltip:
 		Name: Nod Construction Yard
@@ -2403,7 +2409,7 @@ FACT.NOD:
 		Image: nodfact
 
 NUKE:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -2435,7 +2441,7 @@ NUKE:
 	ProvidesPrerequisite@buildingname:
 
 NUK2:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -2468,7 +2474,7 @@ NUK2:
 		Prerequisite: nuke
 
 ^TDPROC:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@ref: ^Refinery
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
@@ -2542,7 +2548,7 @@ PROC.NOD:
 		RequiresCondition: stealthharvester
 
 SILO:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^2x1Shape
 	Inherits@storage: ^StoresResources
 	Valued:
@@ -2577,8 +2583,7 @@ SILO:
 		PipCount: 10
 
 PYLE:
-	Inherits: ^BaseBuilding
-	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits: ^TDBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
 	Inherits@shape: ^2x2Shape
@@ -2604,11 +2609,9 @@ PYLE:
 	ProvidesPrerequisite:
 		Prerequisite: cncbarracks
 
-
 HAND:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
-	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
 	Tooltip:
@@ -2632,10 +2635,10 @@ HAND:
 		Prerequisite: cncbarracks
 
 AFLD:
-	Inherits: ^BaseBuilding
-	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits: ^TDBuilding
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@weap: ^IsWeaponFactory
+	# Inherits@weap: ^IsVehicleDropzone
 	Inherits@shape: ^4x2Shape
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
@@ -2643,7 +2646,7 @@ AFLD:
 			TopLeft: -2048, -1024
 			BottomRight: 2048, 1024
 	Valued:
-		Cost: 1000
+		Cost: 1500
 	Tooltip:
 		Name: Nod Airstrip
 	ProvidesPrerequisite:
@@ -2698,9 +2701,8 @@ AFLD:
 		RequiresCondition: !build-incomplete
 
 WEAP:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^3x3Shape
-	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@weap: ^IsWeaponFactory
 	HitShape:
@@ -2735,9 +2737,8 @@ WEAP:
 		Sequence: place
 
 HPAD.GDI:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
-	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Tooltip:
@@ -2761,9 +2762,8 @@ HPAD.GDI:
 		Image: hpad
 
 HPAD.NOD:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
-	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Inherits@repair: ^RepairsUnits
@@ -2792,7 +2792,7 @@ HPAD.NOD:
 		Image: hpad
 
 HQ.GDI:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@spy: ^InfiltrateForSupportPowerReset
@@ -2851,7 +2851,7 @@ HQ.GDI:
 	SupportPowerChargeBar:
 
 HQ.Nod:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@spy: ^InfiltrateForSupportPowerReset
@@ -2875,7 +2875,7 @@ HQ.Nod:
 		Prerequisites: ~fact.nod, proc.nod
 
 FIX.GDI:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
@@ -2906,7 +2906,7 @@ FIX.GDI:
 		Prerequisite: fix.gdi
 
 FIX.Nod:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
@@ -2937,17 +2937,19 @@ FIX.Nod:
 		Prerequisite: fix.nod
 
 EYE:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
 	Inherits@tech: ^IsTechnoBuilding
+	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Advanced Communications Center
 	ProvidesPrerequisite:
 		Prerequisite: anytdhq
 	Buildable:
+		-BuildLimit:
 		BuildPaletteOrder: 100
 		Prerequisites: ~fact.gdi, hq.gdi
 		Queue: Building, RABuilding
@@ -3025,7 +3027,7 @@ eye.ionc:
 	Valued:
 		Cost: 5000
 	Buildable:
-		Queue: Defence, RADefence
+		Queue: BuildingAddons
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -3039,17 +3041,19 @@ eye.ionc:
 		Image: eye.ionc
 
 TMPL:
-	Inherits: ^BaseBuilding
+	Inherits: ^TDBuilding
 	Inherits@shape: ^3x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
 	Inherits@tech: ^IsTechnoBuilding
+	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Temple of Nod
 	ProvidesPrerequisite:
 		Prerequisite: anytdhq
 	Buildable:
+		-BuildLimit:
 		BuildPaletteOrder: 100
 		Prerequisites: ~fact.nod, hq.nod
 		Queue: Building, RABuilding
@@ -3146,7 +3150,7 @@ tmpl.nuke:
 	Valued:
 		Cost: 5000
 	Buildable:
-		Queue: Defence, RADefence
+		Queue: BuildingAddons
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -3159,8 +3163,44 @@ tmpl.nuke:
 	RenderSprites:
 		Image: tmpl.nuke
 
+td_nod_templeprime:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Tooltip:
+		Name: Temple Prime
+	-Production@Addons:
+	-ProductionBar@Addons:
+	ProvidesPrerequisite:
+		Prerequisite: anytdhq
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 100
+		Prerequisites: ~fact.nod, tmpl
+		Queue: Building, RABuilding
+		Description: actor-tmpl.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 3072, 0, -512
+	SelectionDecorations:
+	RenderDetectionCircle:
+	WithBuildingBib:
+	WithIdleOverlay@idle:
+		RequiresCondition: !build-incomplete
+		Sequence: idle
+	RenderSprites:
+		PlayerPalette: player_rgba
+
 GUN:
-	Inherits: ^Defense
+	Inherits: ^TDDefense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -3216,7 +3256,7 @@ GUN:
 		Upgrades: up_improvedartilleries, up_blackmarketupgrades
 
 NodLaserTurret:
-	Inherits: ^Defense
+	Inherits: ^TDDefense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@DisabledOverlay: ^DisableOnLowPowerOrPowerDown
@@ -3262,7 +3302,7 @@ NodLaserTurret:
 		Range: 6800
 
 SAM:
-	Inherits: ^Defense
+	Inherits: ^TDDefense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetAir
@@ -3313,7 +3353,7 @@ SAM:
 		Upgrades: up_guerillatactics, up_advancedguerillatactics
 
 OBLI:
-	Inherits: ^Defense
+	Inherits: ^TDDefense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -3352,16 +3392,16 @@ OBLI:
 		RequiresCondition: charging
 		SoundFiles: obelpowr.aud
 		Interval: 30, 40
-	RangeMultiplier@up_elitecapacitors:
-		Modifier: 115
 	FirepowerMultiplier@up_elitecapacitors:
-		Modifier: 115
+		Modifier: 160
 	ReloadDelayMultiplier@up_elitecapacitors:
-		Modifier: 85
+		Modifier: 40
+	RangeMultiplier@up_elitecapacitors:
+		Modifier: 130
 	RevealsShroudMultiplier@up_elitecapacitors:
-		Modifier: 115
+		Modifier: 130
 	DetectCloakedMultiplier@up_elitecapacitors:
-		Modifier: 115
+		Modifier: 130
 	Power:
 		Amount: -90
 	RevealsShroud:
@@ -3370,7 +3410,7 @@ OBLI:
 		Range: 4800
 
 GTWR:
-	Inherits: ^Defense
+	Inherits: ^TDDefense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -3420,7 +3460,7 @@ GTWR:
 		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
 
 ATWR:
-	Inherits: ^Defense
+	Inherits: ^TDDefense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -3434,7 +3474,7 @@ ATWR:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Valued:
-		Cost: 1000
+		Cost: 1600
 	Tooltip:
 		Name: Advanced Guard Tower
 	Buildable:
@@ -3446,7 +3486,7 @@ ATWR:
 		Bounds: 1024, 2048, 0, -512
 	SelectionDecorations:
 	Health:
-		HP: 132500
+		HP: 140000
 	WithBuildingBib:
 		HasMinibib: true
 	Turreted:
@@ -3471,11 +3511,11 @@ ATWR:
 		QuantizedFacings: 8
 	WithMuzzleOverlay:
 	Power:
-		Amount: -50
+		Amount: -80
 	RevealsShroud:
-		Range: 7764
+		Range: 8772
 	DetectCloaked:
-		Range: 3882
+		Range: 4386
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
 
@@ -3627,8 +3667,6 @@ CNCPT:
 		Cost: 1600
 	Tooltip:
 		Name: Missile Boat
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncsyrd
@@ -3690,8 +3728,6 @@ CNCCA:
 		Cost: 2600
 	Tooltip:
 		Name: Railgun Battleship
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hq.gdi
@@ -3784,8 +3820,6 @@ gdicarrier:
 		Cost: 4000
 	Tooltip:
 		Name: GDI Super Carrier
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~eye
@@ -3924,8 +3958,6 @@ CNCSS:
 		Cost: 1600
 	Tooltip:
 		Name: Nod Attack Submarine
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncspen
@@ -3933,7 +3965,7 @@ CNCSS:
 		Description: actor-ss.description
 	Mobile:
 		Speed: 80
-		TurnSpeed: 16
+		TurnSpeed: 32
 	Health:
 		HP: 160000
 	ChangesHealth@SelfHealing:
@@ -3985,8 +4017,6 @@ ssmsub:
 		Cost: 2800
 	Tooltip:
 		Name: Ballistic Missile Submarine
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hq.nod
@@ -3994,7 +4024,7 @@ ssmsub:
 		Description: actor-msub.description
 	Mobile:
 		Speed: 60
-		TurnSpeed: 12
+		TurnSpeed: 24
 	Health:
 		HP: 200000
 	ChangesHealth@SelfHealing:
@@ -4053,8 +4083,6 @@ nodlasercorvette:
 		Cost: 2300
 	Tooltip:
 		Name: Nod Laser Corvette
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~tmpl
@@ -4123,8 +4151,6 @@ CNCRSS:
 		Cost: 500
 	Tooltip:
 		Name: Transport Submarine
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncspen
@@ -4167,8 +4193,6 @@ LST:
 		Cost: 500
 	Tooltip:
 		Name: Landing Craft
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		Prerequisites: ~cncsyrd
 		BuildPaletteOrder: 10
@@ -4246,36 +4270,6 @@ up_improvedartilleries:
 		Image: improvedartilleriesicon
 	ProvidesPrerequisite:
 
-up_elitecapacitors:
-	Inherits: ^researched_upgrade.template
-	Tooltip:
-		Name: Elite Capacitors
-	Valued:
-		Cost: 7500
-	Buildable:
-		BuildPaletteOrder: 80
-		Queue: Upgrades
-		Description: upgrade-elitecapacitors.description
-		Prerequisites: ~tmpl, !up_elitecapacitors
-	RenderSprites:
-		Image: elitecapacitorsicon
-	ProvidesPrerequisite:
-
-up_cyberneticmodifications:
-	Inherits: ^researched_upgrade.template
-	Tooltip:
-		Name: Cybernetic Modifications
-	Valued:
-		Cost: 7500
-	Buildable:
-		BuildPaletteOrder: 80
-		Queue: Upgrades
-		Description: upgrade-cyberneticmodifications.description
-		Prerequisites: ~tmpl, !up_cyberneticmodifications
-	RenderSprites:
-		Image: cyberneticmodificationsicon
-	ProvidesPrerequisite:
-
 up_blackmarketupgrades:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
@@ -4296,7 +4290,7 @@ up_elementalwarfare:
 	Tooltip:
 		Name: Elemental Warfare
 	Valued:
-		Cost: 10000
+		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
@@ -4304,6 +4298,36 @@ up_elementalwarfare:
 		Prerequisites: ~tmpl, !up_elementalwarfare
 	RenderSprites:
 		Image: elementalwarfareicon
+	ProvidesPrerequisite:
+
+up_elitecapacitors:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Elite Capacitors
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade-elitecapacitors.description
+		Prerequisites: ~tmpl, td_nod_templeprime, !up_elitecapacitors
+	RenderSprites:
+		Image: elitecapacitorsicon
+	ProvidesPrerequisite:
+
+up_cyberneticmodifications:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cybernetic Modifications
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade-cyberneticmodifications.description
+		Prerequisites: ~tmpl, td_nod_templeprime, !up_cyberneticmodifications
+	RenderSprites:
+		Image: cyberneticmodificationsicon
 	ProvidesPrerequisite:
 
 up_advancedguerillatactics:
@@ -4316,7 +4340,7 @@ up_advancedguerillatactics:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-advancedguerillatactics.description
-		Prerequisites: ~tmpl, up_guerillatactics, !up_advancedguerillatactics
+		Prerequisites: ~tmpl, td_nod_templeprime, up_guerillatactics, !up_advancedguerillatactics
 	RenderSprites:
 		Image: advancedguerillatacticsicon
 	#ProvidesPrerequisite:
@@ -4515,7 +4539,6 @@ cheme3:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
-	Inherits@explode: ^ExplodingInfantry
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -4529,12 +4552,10 @@ cheme3:
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 400
 	Tooltip:
 		Name: Chemical Rocket Soldier
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 400
 	Health:
 		HP: 18000
 	ChangesHealth@SelfHealing:
@@ -4576,25 +4597,24 @@ cheme3:
 
 chembike:
 	Inherits: ^Vehicle
-	Inherits@Template: ^FireSupportTemplate
+	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EMP: ^FrontalEMP
 	Inherits: ^GenericGroundDetector
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@PLD: ^PointLaserDefenseSystem
 	Inherits@ElementalWarfare: ^ElementalWarfare
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 750
 	Tooltip:
 		Name: Chemical Attack Bike
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~upchemicalbike
@@ -4602,20 +4622,34 @@ chembike:
 		Description: actor-bike.description
 	Mobile:
 		Speed: 175
-		TurnSpeed: 35
+		TurnSpeed: 70
 	Health:
-		HP: 12500
+		HP: 22500
 	Repairable:
-		HpPerStep: 625
+		HpPerStep: 1125
 	ChangesHealth@SelfHealing:
-		Step: 5
-	Armor:
-		Type: Light
+		Step: 9
 	Armament:
 		Weapon: ChemicalBikeRockets
-		LocalOffset: -128, -170, 170, -128, 170, 170
+		LocalOffset: -125, -175, 175, -125, 175, 175
 		LocalYaw: 100, -100
 		MuzzleSequence: muzzle
+	AmmoPool@pld:
+		RequiresCondition: up_blackmarketupgrades
+	WithAmmoPipsDecoration:
+		RequiresCondition: up_blackmarketupgrades
+	Armament@pointdefense:
+		Weapon: PDLaserBike
+		Turret: pointdefense
+		RequiresCondition: up_blackmarketupgrades
+	Turreted:
+		Turret: pointdefense
+		TurnSpeed: 70
+	AttackTurreted:
+		PauseOnCondition: disabled
+	AttackFollowFrontal:
+		FacingTolerance: 512
+		PauseOnCondition: disabled
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -4626,11 +4660,10 @@ chembike:
 	FireWarheadsOnDeath:
 		Weapon: ChemicalBikeRocketsExplosion
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare
+		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_blackmarketupgrades
 
 chemstnk:
 	Inherits: ^Vehicle
-	Inherits@Template: ^FireSupportTemplate
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4644,24 +4677,22 @@ chemstnk:
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 1200
-	Mobile:
-		Locomotor: heavywheeled
-		Speed: 125
-		TurnSpeed: 25
-	Health:
-		HP: 40000
-	Repairable:
-		HpPerStep: 2000
-	ChangesHealth@SelfHealing:
-		Step: 16
-	Armor:
-		Type: Medium
 	Tooltip:
 		Name: Chemical Stealth Tank
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 1800
+	Mobile:
+		Locomotor: heavywheeled
+		Speed: 120
+		TurnSpeed: 24
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armor:
+		Type: Medium
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: tmpl, ~upchemicalstealthtank
@@ -4708,13 +4739,11 @@ chemssm:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
 		Description: actor-mssm.description
-		Prerequisites: tmpl, ~upchemicalssmlauncher
+		Prerequisites: td_nod_templeprime, ~upchemicalssmlauncher
 	Valued:
 		Cost: 1200
 	Tooltip:
 		Name: Chemical SSM Launcher
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Health:
 		HP: 32500
 	Repairable:
@@ -4744,10 +4773,6 @@ chemssm:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
 		Image: chemssm
-	RangeMultiplier@up_improvedartilleries:
-		Modifier: 120
-	RevealsShroudMultiplier@up_improvedartilleries:
-		Modifier: 140
 	FireWarheadsOnDeath:
 		Weapon: BigTiberiumExplosion
 		EmptyWeapon: TiberiumExplosion
@@ -4859,9 +4884,6 @@ nodltnk2:
 		Cost: 800
 	Tooltip:
 		Name: Light Tank Mk. II
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
@@ -4878,9 +4900,6 @@ nodltnk2:
 		Step: 32
 	Armor:
 		Type: Medium
-	RenderRangeCircle:
-		RangeCircleType: pointdefense
-		Color: FF000088
 	Turreted:
 		TurnSpeed: 20
 	AttackTurreted:
@@ -4908,18 +4927,6 @@ nodltnk2:
 	#	Actor: LTNK.Husk
 	#	OwnerType: InternalName
 	#	EffectiveOwnerFromOwner: true
-	ReloadAmmoDelayMultiplier@RANK-1:
-		RequiresCondition: rank-veteran == 1
-		Modifier: 85
-	ReloadAmmoDelayMultiplier@RANK-2:
-		RequiresCondition: rank-veteran == 2
-		Modifier: 70
-	ReloadAmmoDelayMultiplier@RANK-3:
-		RequiresCondition: rank-veteran == 3
-		Modifier: 55
-	ReloadAmmoDelayMultiplier@RANK-ELITE:
-		RequiresCondition: rank-elite
-		Modifier: 40
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	ActorStatValues:
@@ -4928,6 +4935,7 @@ nodltnk2:
 nodftnk2:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
+	Inherits@FireActor: ^FireActor
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -4940,8 +4948,6 @@ nodftnk2:
 	Inherits@decoration: ^NodRankDecoration
 	Valued:
 		Cost: 1300
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Tooltip:
 		Name: Flame Tank Mk. II
 	Buildable:
@@ -4998,14 +5004,12 @@ tsblackhandlaser:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: tmpl, ~upblackhandlaser
+		Prerequisites: td_nod_templeprime, ~upblackhandlaser
 		Description: actor-blackhandlaser.description
 	Valued:
-		Cost: 800
+		Cost: 700
 	Tooltip:
 		Name: Laser Trooper
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Health:
 		HP: 60000
 	ChangesHealth@SelfHealing:
@@ -5034,6 +5038,7 @@ tsblackhandflamer:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -5055,8 +5060,6 @@ tsblackhandflamer:
 		Cost: 600
 	Tooltip:
 		Name: Black Hand Flamer
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Health:
 		HP: 36000
 	ChangesHealth@SelfHealing:
@@ -5064,12 +5067,12 @@ tsblackhandflamer:
 	Mobile:
 		Speed: 66
 	Armament@PRIMARY:
-		Weapon: TSFireballLauncher
+		Weapon: BlackHandFlamer
 		LocalOffset: 384,0,256
 		FireDelay: 5
 	Armament@Garrison:
 		Name: garrisoned
-		Weapon: TSFireballLauncher
+		Weapon: BlackHandFlamer
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 	AttackFrontal:
@@ -5081,6 +5084,8 @@ tsblackhandflamer:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
+	FireWarheadsOnDeath:
+		Weapon: BlackHandFlamerExplode
 	Cloak:
 		UncloakOn: Attack, Damage
 		CloakSound: trans1.aud
@@ -5109,11 +5114,9 @@ tsstealthsoldier:
 		Prerequisites: tmpl, ~upstealthsoldier
 		Description: actor-stealthsoldier.description
 	Valued:
-		Cost: 400
+		Cost: 500
 	Tooltip:
 		Name: Stealth Soldier
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -5127,6 +5130,7 @@ tsstealthsoldier:
 	Armament@Garrison:
 		Name: garrisoned
 		Weapon: BHRedDarts
+	-Targetable@ParachuteAir:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 	AttackFrontal:
@@ -5188,12 +5192,11 @@ nodspecter:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Valued:
 		Cost: 900
 	Tooltip:
 		Name: Specter Artillery
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		Prerequisites: hq.nod, ~upnodspecter
 		BuildPaletteOrder: 60
@@ -5223,16 +5226,29 @@ nodspecter:
 	WithMuzzleOverlay:
 	AutoTarget:
 		InitialStanceAI: Defend
-	RangeMultiplier@up_improvedartilleries:
-		Modifier: 115
-	RevealsShroudMultiplier@up_improvedartilleries:
-		Modifier: 130
 	FireWarheadsOnDeath:
 		Weapon: SpecterArtilleryShell
 		RequiresCondition: !up_blackmarketupgrades
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: SpecterArtilleryShellUpgrade
 		RequiresCondition: up_blackmarketupgrades
+	GrantCondition@gatling:
+		Condition: cloak-force-disabled
+		RequiresCondition: gatling
+	GrantConditionOnAttack@gatling:
+		RevokeDelay: 80
+	GrantConditionOnAttack@elitegatling:
+		MaximumInstances: 40
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 160
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
 	RenderSprites:
 		Image: nodspecter
 	Voiced:
@@ -5258,15 +5274,14 @@ nodvenom:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@decoration: ^NodRankDecoration
 	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Valued:
 		Cost: 900
 	Tooltip:
 		Name: Venom
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: tmpl, ~upnodvenom
+		Prerequisites: td_nod_templeprime, ~upnodvenom
 		Queue: Aircraft, RAAircraft
 		Description: actor-venom.description
 	Aircraft:
@@ -5287,28 +5302,31 @@ nodvenom:
 		OpportunityFire: false
 		PersistentTargeting: false
 		AttackType: Hover
-	AmmoPool:
-		Ammo: 4
-		AmmoCondition: ammo
 	SpawnActorOnDeath:
 		Actor: nodvenom.husk
 	EjectOnDeath:
 		PilotActor: tsstealthsoldier
 	SelectionDecorations:
-	ReloadAmmoPool:
-		Delay: 32
-		Count: 1
 	ReloadAmmoDelayMultiplier@up_elitecapacitors:
-		Modifier: 70
+		Modifier: 85
 		RequiresCondition: up_elitecapacitors
+	GrantCondition@gatling:
+		Condition: cloak-force-disabled
+		RequiresCondition: gatling
 	Selectable:
 		DecorationBounds: 1280, 1024
 	RenderSprites:
 		Image: nodvenom
+	AmmoPool:
+		Ammo: 7
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 36
+		Count: 1
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
-		PipCount: 4
+		PipCount: 7
 	Cloak:
 		UncloakOn: Attack, Damage
 	ActorStatValues:
@@ -5347,29 +5365,28 @@ nodlasercommando:
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Valued:
 		Cost: 5000
 	Tooltip:
 		Name: Laser Commando
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: tmpl, ~upnodvenom
+		Prerequisites: td_nod_templeprime, ~upnodvenom
 		Queue: Infantry, RAInfantry
 		Description: actor-lasercommando.description
 	RenderSprites:
 		PlayerPalette: playerra2
 	Mobile:
-		Speed: 80
+		Speed: 79
 		Voice: Move
 	Guard:
 		Voice: Move
 	Health:
-		HP: 50000
+		HP: 57000
 	ChangesHealth@SelfHealing:
-		Step: 50
+		Step: 57
 	Passenger:
 		Voice: Move
 	AttackMove:
@@ -5398,10 +5415,10 @@ nodlasercommando:
 	Armament@pointdefense:
 		Weapon: NodCommandoLaser
 	AmmoPool@pld:
-		Ammo: 25
+		Ammo: 24
 		Armaments: primary, pointdefense
 	ReloadAmmoPool@pld:
-		Delay: 10
+		Delay: 16
 		Count: 1
 	AttackFrontal:
 		Voice: Attack
@@ -5417,22 +5434,13 @@ nodlasercommando:
 		Position: BottomLeft
 		RequiresSelection: true
 		FullSequence: pip-red
-		PipCount: 5
+		PipCount: 8
 	ReloadAmmoDelayMultiplier@up_elitecapacitors:
-		Modifier: 80
+		Modifier: 85
 		RequiresCondition: up_elitecapacitors
-	ReloadAmmoDelayMultiplier@RANK-1:
-		RequiresCondition: rank-veteran == 1
-		Modifier: 90
-	ReloadAmmoDelayMultiplier@RANK-2:
-		RequiresCondition: rank-veteran == 2
-		Modifier: 80
-	ReloadAmmoDelayMultiplier@RANK-3:
-		RequiresCondition: rank-veteran == 3
-		Modifier: 70
-	ReloadAmmoDelayMultiplier@RANK-ELITE:
-		RequiresCondition: rank-elite
-		Modifier: 60
+	GrantCondition@gatling:
+		Condition: cloak-force-disabled
+		RequiresCondition: gatling
 	ActorStatValues:
 		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elitecapacitors, up_tiberiuminfusion, up_cyberneticmodifications
 
@@ -5676,19 +5684,19 @@ upgdimammoth3:
 	ProvidesPrerequisite:
 		Prerequisite: upgdimammoth3
 
-upgdiexosuit:
+upgdidefenserig:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Experimental Exosuit
+		Name: Unlock GDI Defense Rig
 	Buildable:
 		BuildPaletteOrder: 23
 		Queue: Promotions
-		Description: Allows construction of the Experimental Exosuit.
-		Prerequisites: ~fact.gdi, !upgdiexosuit, upgdimammoth3, rank1
+		Description: Allows construction of the GDI Defense Rig.
+		Prerequisites: ~fact.gdi, !upgdidefenserig, upgdimammoth3, rank1
 	RenderSprites:
-		Image: gdiexosuit
+		Image: gdirig
 	ProvidesPrerequisite:
-		Prerequisite: upgdiexosuit
+		Prerequisite: upgdidefenserig
 
 upgdishotgunner:
 	Inherits: ^promotion_upgrade.template
@@ -5721,14 +5729,14 @@ upgdiofficer:
 upgdihavoc:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Havoc
+		Name: Unlock Havoc and Exosuit
 	Buildable:
 		BuildPaletteOrder: 21
 		Queue: Promotions
-		Description: Allows training of Havoc.
+		Description: Allows training of Havoc and construction of the Exosuit.
 		Prerequisites: ~fact.gdi, !upgdihavoc, upgdiofficer, rank1
 	RenderSprites:
-		Image: gdihavoc
+		Image: havocexosuit
 	ProvidesPrerequisite:
 		Prerequisite: upgdihavoc
 
@@ -5754,7 +5762,6 @@ gdiempgrenadier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^GrenadierInfantryTemplate
-	Inherits@explode: ^ExplodingInfantry
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -5765,11 +5772,9 @@ gdiempgrenadier:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Valued:
-		Cost: 400
+		Cost: 500
 	Tooltip:
 		Name: EMP Grenadier
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~upgdiempgrenadier
@@ -5800,7 +5805,7 @@ gdiempgrenadier:
 	WithInfantryBody:
 		DefaultAttackSequence: throw
 	FireWarheadsOnDeath:
-		Weapon: EMPGrenade
+		Weapon: EMPGrenadeExplode
 	Voiced:
 		VoiceSet: TSInfantry
 	ActorStatValues:
@@ -5824,11 +5829,9 @@ gdimissilesoldier:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Valued:
-		Cost: 500
+		Cost: 400
 	Tooltip:
 		Name: Sonic Missile Soldier
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~upgdimissilesoldier
@@ -5873,8 +5876,6 @@ gdisniper:
 		Cost: 700
 	Tooltip:
 		Name: GDI Heavy Sniper
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: hq.gdi, ~upgdisniper
@@ -5927,11 +5928,11 @@ gdiassaultapc:
 		Speed: 100
 		TurnSpeed: 20
 	Health:
-		HP: 100000
+		HP: 250000
 	Repairable:
-		HpPerStep: 5000
+		HpPerStep: 12500
 	ChangesHealth@SelfHealing:
-		Step: 40
+		Step: 100
 	Armor:
 		Type: Heavy
 	RenderSprites:
@@ -6095,8 +6096,6 @@ gdipredator:
 		Cost: 1250
 	Tooltip:
 		Name: Predator Tank
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~upgdipredator
@@ -6197,8 +6196,6 @@ gdimammoth3:
 		Cost: 3000
 	Tooltip:
 		Name: Mammoth Tank Mk. III
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: eye, ~upgdimammoth3
@@ -6269,7 +6266,7 @@ gdimammoth3:
 
 gdiexosuit:
 	Inherits: ^Vehicle
-	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6283,27 +6280,24 @@ gdiexosuit:
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
 	Valued:
-		Cost: 7000
+		Cost: 1200
 	Tooltip:
-		Name: Experimental Exosuit
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+		Name: Exosuit
 	Buildable:
-		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: eye, ~upgdiexosuit
+		Prerequisites: eye, ~upgdihavoc
 		Description: actor-exosuit.description
 	Mobile:
-		TurnSpeed: 20
+		TurnSpeed: 40
 		Speed: 100
 		Locomotor: wheeled
 	Health:
-		HP: 200000
+		HP: 50000
 	Repairable:
-		HpPerStep: 10000
+		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
-		Step: 80
+		Step: 20
 	Armor:
 		Type: Medium
 	AttackFrontal:
@@ -6361,8 +6355,6 @@ gdishotgunner:
 		Cost: 200
 	Tooltip:
 		Name: Shotgunner
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~upgdishotgunner
@@ -6404,7 +6396,7 @@ gdiofficer:
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
-	-ExternalCondition@GDIOfficerLeadership:
+	-ExternalCondition@PropagandaEffect:
 	Tooltip:
 		Name: GDI Officer
 	Valued:
@@ -6438,24 +6430,23 @@ gdiofficer:
 		RequiresCondition: up_armorpiercingbullets
 	ProducibleWithLevel:
 		InitialLevels: 1
-	ProximityExternalCondition@Leadership:
+	ProximityExternalCondition@PropagandaEffect:
 		Range: 3333
 		ValidRelationships: Ally
-		Condition: GDIOfficerLeadership
-	ProximityExternalCondition@propaganda:
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
 		Range: 3333
-		ValidRelationships: Ally
-		Condition: propaganda
-	WithRangeCircle:
-		Range: 3333
-	WithInfantryBody:
-		IdleSequences: idle1,idle2,idle3,idle4
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
 	WithDecoration@CARRYALL:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
 	GrantExternalConditionToTransport:
@@ -6485,8 +6476,6 @@ gdihavoc:
 		Cost: 4000
 	Tooltip:
 		Name: Havoc
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
@@ -6570,18 +6559,6 @@ gdihavoc:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
-	ReloadAmmoDelayMultiplier@RANK-1:
-		RequiresCondition: rank-veteran == 1
-		Modifier: 90
-	ReloadAmmoDelayMultiplier@RANK-2:
-		RequiresCondition: rank-veteran == 2
-		Modifier: 80
-	ReloadAmmoDelayMultiplier@RANK-3:
-		RequiresCondition: rank-veteran == 3
-		Modifier: 65
-	ReloadAmmoDelayMultiplier@RANK-ELITE:
-		RequiresCondition: rank-elite
-		Modifier: 50
 	RangeMultiplier@up_advancedmissiletargeting:
 		Modifier: 105
 	FirepowerMultiplier@up_cuttingedgeequipment:
@@ -6619,14 +6596,12 @@ gdifirehawk:
 		Cost: 2000
 	Tooltip:
 		Name: Firehawk
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
 	Health:
-		HP: 150000
+		HP: 180000
 	Repairable:
-		HpPerStep: 7500
+		HpPerStep: 9000
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 72
 	Armament:
 		Weapon: FirehawkMissiles
 		LocalOffset: 0,-960,0, 0,960,0, 0,-480,0, 0,480,0
@@ -6654,8 +6629,8 @@ gdifirehawk:
 		FacingTolerance: 80
 		StrafeRunLength: 2500
 	Aircraft:
-		TurnSpeed: 13
-		Speed: 197
+		TurnSpeed: 12
+		Speed: 180
 		IdealSeparation: 2500
 	Selectable:
 		Bounds: 1280, 1280, 0, 64
@@ -6690,6 +6665,8 @@ gdifirehawk:
 		PipCount: 4
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
+	DamageMultiplier@up_heavyaircraftarmorplating:
+		Modifier: 75
 	FirepowerMultiplier@up_cuttingedgeequipment:
 		Modifier: 120
 	ReloadDelayMultiplier@up_cuttingedgeequipment:
@@ -6722,3 +6699,637 @@ gdifirehawk.Husk:
 		Type: CenterPosition
 	RenderSprites:
 		Image: gdifirehawk
+
+gdirig:
+	Inherits: ^Tank
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@PLD: ^PointLaserDefenseSystem
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@MissileTargeting: ^AdvancedMissileTargeting
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
+	Inherits@HighVelocityCannons: ^HighVelocityCannons
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Tooltip:
+		Name: GDI Defense Rig
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 60
+		Prerequisites: eye, ~upgdidefenserig
+		Queue: Vehicle, RAVehicle
+		Description: actor-htnk.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+		RequireForceMoveCondition: !undeployed
+		ImmovableCondition: !undeployed
+	Crushable:
+		CrushClasses: hugevehicle
+	Health:
+		HP: 400000
+	Repairable:
+		HpPerStep: 20000
+	ChangesHealth@SelfHealing:
+		Step: 160
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armor:
+		Type: Superheavy
+		RequiresCondition: !shielded && undeployed
+	Armor@deployed:
+		Type: Steel
+		RequiresCondition: !shielded && !undeployed
+	AutoTargetPriority@Repair:
+		Priority: 0
+	Turreted@pointdefense:
+		Turret: pointdefense
+		TurnSpeed: 128
+		Offset: -800,0,480
+		RealignDelay: -1
+		RequiresCondition: undeployed
+	Turreted@pointdefensedeployed:
+		Turret: pointdefensedeployed
+		TurnSpeed: 128
+		#Offset: -800,0,480
+		RealignDelay: -1
+		RequiresCondition: deployed
+	Turreted@targeting:
+		Turret: targeting
+		TurnSpeed: 128
+		Offset: -800,0,480
+		RealignDelay: -1
+		RequiresCondition: undeployed
+	Turreted@targetingdeployed:
+		Turret: targetingdeployed
+		TurnSpeed: 128
+		#Offset: -800,0,480
+		RealignDelay: -1
+		RequiresCondition: deployed
+	Turreted@mobile:
+		TurnSpeed: 24
+		Offset: -800,0,480
+		RequiresCondition: undeployed
+	Turreted@Phalanx:
+		Turret: tower
+		# Offset: -128,128,1800
+		TurnSpeed: 24
+		RealignDelay: -1
+		RequiresCondition: deployed
+	Turreted@Railgun:
+		Turret: railgun
+		Offset: -480,800,1280
+		TurnSpeed: 24
+		RealignDelay: -1
+		RequiresCondition: deployed
+	Turreted@MissilePod:
+		Turret: missilepod
+		Offset: 480,-640,1280
+		TurnSpeed: 24
+		RealignDelay: -1
+		RequiresCondition: deployed
+	Armament@pointdefense:
+		Weapon: GDIRigPDLaser
+		Turret: pointdefense
+		LocalOffset: 640,0,480
+		ForceTargetRelationships: Enemy, Neutral
+		RequiresCondition: undeployed
+	Armament@pointdefensedeployed:
+		Weapon: GDIRigPDLaserTower
+		Turret: pointdefensedeployed
+		LocalOffset: 512,128,2280
+		ForceTargetRelationships: Enemy, Neutral
+		RequiresCondition: deployed
+	Armament@DroneTargeting:
+		Name: targeting
+		Turret: targeting
+		Weapon: GDIRigDroneTargeting
+		LocalOffset: 640,0,480
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		RequiresCondition: undeployed
+	Armament@DroneTargetingDeployed:
+		Name: targetingdeployed
+		Turret: targetingdeployed
+		Weapon: GDIRigDroneTargetingTower
+		LocalOffset: 512,128,2280
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		RequiresCondition: deployed
+	Armament@mobile:
+		Weapon: GDIRigPhalanx
+		LocalOffset: 640,0,480
+		Recoil: 64
+		RecoilRecovery: 32
+		MuzzleSequence: muzzle
+		ForceTargetRelationships: Enemy, Neutral
+		RequiresCondition: undeployed
+	Armament@Phalanx:
+		Name: deployed
+		Turret: tower
+		Weapon: GDIRigPhalanxTower
+		# LocalOffset: 640,0,480
+		LocalOffset: 512,128,2280
+		# Recoil: 64
+		# RecoilRecovery: 32
+		MuzzleSequence: muzzle
+		ForceTargetRelationships: Enemy, Neutral
+		RequiresCondition: deployed
+	Armament@Railgun:
+		Name: deployed
+		Turret: railgun
+		Weapon: GDIRigRailgun
+		LocalOffset: 512,0,0
+		Recoil: 64
+		RecoilRecovery: 32
+		MuzzleSequence: muzzle
+		ForceTargetRelationships: Enemy, Neutral
+		RequiresCondition: deployed
+	Armament@MissilePod:
+		Name: deployed
+		Turret: missilepod
+		Weapon: GDIRigMissilePod
+		LocalOffset: 640,0,480
+		Recoil: 64
+		RecoilRecovery: 32
+		MuzzleSequence: muzzle
+		ForceTargetRelationships: Enemy, Neutral
+		RequiresCondition: !up_advancedmissiletargeting && deployed
+	Armament@AdvancedMissileTargeting:
+		Turret: missilepod
+		Weapon: GDIRigMissilePodAMT
+		LocalOffset: 640,0,480
+		Recoil: 64
+		RecoilRecovery: 32
+		MuzzleSequence: muzzle
+		ForceTargetRelationships: Enemy, Neutral
+		RequiresCondition: up_advancedmissiletargeting && deployed
+	FirepowerMultiplier@deployed:
+		Modifier: 33
+		RequiresCondition: deployed
+	RevealsShroudMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	AttackTurreted:
+		Turrets: primary, tower, railgun, missilepod, pointdefense, pointdefensedeployed, targeting, targetingdeployed
+		Armaments: primary, deployed, pointdefense, pointdefensedeployed, targeting, targetingdeployed
+	WithMuzzleOverlay:
+	WithSpriteTurret@pointdefense:
+		Turret: pointdefense
+		Sequence: pointdefense
+	WithSpriteTurret@pointdefensedeployed:
+		Turret: pointdefensedeployed
+		Sequence: pointdefense
+	WithSpriteTurret@targeting:
+		Turret: targeting
+		Sequence: targeting
+	WithSpriteTurret@targetingdeployed:
+		Turret: targetingdeployed
+		Sequence: targeting
+	WithSpriteTurret:
+		Turret: primary
+		Sequence: turret
+		RequiresCondition: undeployed
+	WithFacingSpriteBody:
+		RequiresCondition: undeployed
+		# PauseOnCondition: deployed
+	WithSpriteTurret@deployed:
+		Sequence: deployed
+		Turret: tower
+		RequiresCondition: deployed
+	# WithEmbeddedTurretSpriteBody@deployed:
+	# 	Sequence: deployed
+	# 	Turret: deployed
+	# 	RequiresCondition: deployed
+		# PauseOnCondition: undeployed
+	# -WithSpriteBody:
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	WithMakeAnimation:
+		BodyNames: dot
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+		RequiresCondition: deployed
+	RejectsOrders@deployment:
+		Reject: AttackMove, AssaultMove
+		RequiresCondition: !botmicro && deployed
+	GrantConditionOnDeploy:
+		PauseOnCondition: disabled
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		DeploySounds: TankSiege.aud
+		UndeploySounds: TankSiege.aud
+		UndeployOnMove: true
+		SmartDeploy: True
+		Facing: 0
+	DamageMultiplier@deployed:
+		Modifier: 70
+		RequiresCondition: deployed
+	RejectsOrders@deployment:
+		Reject: AttackMove, AssaultMove
+		RequiresCondition: !(botmicro && !attacking) && deployed
+	RejectsMoveToAttack:
+		RequiresCondition: !(botmicro && !attacking) && deployed
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+		RequireForceMoveCondition: !undeployed
+	Carryable:
+		RequiresCondition: !deployed
+	AutoDeployer:
+		DeployTrigger: Attack, Damage, Periodically, BecomingIdle
+		DeployChance: 100
+		DeployTicks: 100
+		UndeployTicks: 100
+		RequiresCondition: undeployed && !attacking
+	GrantConditionOnAttack:
+		ArmamentNames: primary, deployed, pointdefense, pointdefensedeployed, targeting, targetingdeployed
+		Condition: attacking
+		RevokeDelay: 100
+	Voiced:
+		VoiceSet: SCSiegeTankVoice
+	DeathSounds:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1536, 1536
+		DecorationBounds: 2048, 2048
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	DroneSpawnerMaster@steel_scalpel:
+		Actors: gdirigdrone, gdirigdrone, gdirigdrone
+		ArmamentNames: pointdefense, pointdefensedeployed, targeting, targetingdeployed
+		RespawnTicks: 250
+		ShouldSpawnInitialLoad: false
+	AmmoPool@pld:
+		Ammo: 20
+	WithAmmoPipsDecoration:
+		PipCount: 20
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_advancedmissiletargeting, up_lightweightarmorplating
+
+# gdirig:
+# 	Inherits: ^Tank
+# 	Inherits@Template: ^EpicVehicleTemplate
+# 	Inherits@exp: ^GainsExperienceTDBuilding
+# 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@AntiInf: ^PrioritizeInfantry
+# 	Inherits@AntiAir: ^PrioritizeAir
+# 	Inherits@AutoRepair: ^PrioritizeRepair
+# 	Inherits@PLD: ^PointLaserDefenseSystem
+# 	Inherits@LongRangeSensors: ^LongRangeSensors
+# 	Inherits@MissileTargeting: ^AdvancedMissileTargeting
+# 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+# 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
+# 	Inherits@HighVelocityCannons: ^HighVelocityCannons
+# 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+# 	Inherits@decoration: ^GDIRankDecoration
+# 	Valued:
+# 		Cost: 5000
+# 	Tooltip:
+# 		Name: GDI Defense Rig (Mobile)
+# 	Buildable:
+# 		BuildLimit: 1
+# 		BuildPaletteOrder: 60
+# 		Prerequisites: #eye, ~upgdidefenserig
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor-htnk.description
+# 	Mobile:
+# 		Locomotor: heavytracked
+# 		Speed: 60
+# 		TurnSpeed: 12
+# 	Passenger:
+# 		Weight: 4
+# 	Health:
+# 		HP: 400000
+# 	Repairable:
+# 		HpPerStep: 20000
+# 	ChangesHealth@SelfHealing:
+# 		Step: 160
+# 	Armor:
+# 		Type: Heavy
+# 	AutoTargetPriority@Repair:
+# 		Priority: 0
+# 	WithSpriteTurret:
+# 		Turret: primary
+# 		Sequence: turret
+# 	Turreted:
+# 		TurnSpeed: 24
+# 		Offset: -800,0,480
+# 	Armament@PRIMARY:
+# 		Weapon: GDIRigPhalanx
+# 		LocalOffset: 640,0,480
+# 		Recoil: 64
+# 		RecoilRecovery: 32
+# 		MuzzleSequence: muzzle
+# 		ForceTargetRelationships: Enemy, Neutral
+# 	AutoDeployer:
+# 		DeployTrigger: Attack
+# 		DeployChance: 50
+# 		DeployTicks: 500
+# 		UndeployTicks: 1500
+# 	AttackTurreted:
+# 	WithMuzzleOverlay:
+# 	FireWarheadsOnDeath:
+# 		Weapon: UnitExplodeBig
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 1536, 1536
+# 	RenderSprites:
+# 		Image: gdirig
+# 		PlayerPalette: player_rgba
+# 	Voiced:
+# 		VoiceSet: TSVehicle
+# 	Transforms:
+# 		IntoActor: gdirigtower
+# 		Offset: -1,-1
+# 		Facing: 384
+# 		TransformSounds: uplace.wav
+# 		NoTransformNotification: BuildingCannotPlaceAudio
+# 		PauseOnCondition: disabled || terrordroned
+# 	TransferTimedExternalConditionOnTransform:
+# 		Condition: invulnerability
+# 	TransferTimedExternalConditionOnTransform@ammo:
+# 		Condition: ammo
+# 	# AmmoPool:
+# 	# 	Armaments: secondary
+# 	# 	Ammo: 25
+# 	# 	AmmoCondition: ammo
+# 	# ReloadAmmoPool:
+# 	# 	Delay: 50
+# 	# 	Count: 25
+# 	# WithAmmoPipsDecoration:
+# 	# 	Position: BottomLeft
+# 	# 	RequiresSelection: True
+# 	# 	PipCount: 10
+# 	Armament@DroneTargeting:
+# 		Name: secondary
+# 		Weapon: GDIRigDroneTargeting
+# 		TargetRelationships: Ally
+# 		ForceTargetRelationships: Ally
+# 		# PauseOnCondition: !ammo
+# 		# RequiresCondition: ammo
+# 	DroneSpawnerMaster@steel_scalpel:
+# 		Actors: gdirigdrone, gdirigdrone, gdirigdrone
+# 		ArmamentNames: secondary, pointdefense
+# 		RespawnTicks: 250
+# 		#FollowAfterAttackDelay: 25
+# 		ShouldSpawnInitialLoad: false
+# 	AmmoPool@pld:
+# 		Ammo: 20
+# 	WithAmmoPipsDecoration:
+# 		PipCount: 20
+# 	Armament@pointdefense:
+# 		Weapon: GDIRigPDLaser
+# 		Turret: pointdefense
+# 		ForceTargetRelationships: Enemy, Neutral
+# 	WithSpriteTurret@pointdefense:
+# 		Turret: pointdefense
+# 		Sequence: pointdefense
+# 	Turreted@pointdefense:
+# 		Turret: pointdefense
+# 		TurnSpeed: 128
+# 	ActorStatValues:
+# 		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_advancedmissiletargeting, up_lightweightarmorplating
+
+# gdirigtower:
+# 	Inherits: ^TDDefense
+# 	Inherits@Template: ^SuperDefenseTemplate
+# 	Inherits@exp: ^GainsExperienceTDBuilding
+# 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+# 	Inherits@AUTOTARGET: ^AutoTargetAll
+# 	Inherits@detect: ^GenericAllDetector
+# 	Inherits@AutoRepair: ^PrioritizeRepair
+# 	Inherits@shape: ^3x3Shape
+# 	Inherits@PLD: ^PointLaserDefenseSystem
+# 	Inherits@LongRangeSensors: ^LongRangeSensors
+# 	Inherits@MissileTargeting: ^AdvancedMissileTargeting
+# 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+# 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
+# 	Inherits@HighVelocityCannons: ^HighVelocityCannons
+# 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+# 	Inherits@decoration: ^GDIRankDecoration
+# 	Inherits@COMMANDOSKULL: ^CommandoSkull
+# 	Valued:
+# 		Cost: 5000
+# 	Tooltip:
+# 		Name: GDI Defense Rig (Deployed)
+# 	Building:
+# 		Footprint: xxx xxx xxx
+# 		Dimensions: 3, 3
+# 	-Buildable:
+# 	Selectable:
+# 		Bounds: 3072, 3072, 0, -512
+# 		DecorationBounds: 3072, 3072, 0, -512
+# 	SelectionDecorations:
+# 	Health:
+# 		HP: 400000
+# 	ChangesHealth@SelfHealing:
+# 		Step: 160
+# 	AutoTargetPriority@Repair:
+# 		Priority: 0
+# 	-WithSpriteBody:
+# 	WithEmbeddedTurretSpriteBody:
+# 	# WithSpriteTurret@Phalanx:
+# 	# 	Turret: main
+# 	# 	Sequence: turret
+# 	Turreted@Phalanx:
+# 		Turret: main
+# 		Offset: -128,128,1800
+# 		TurnSpeed: 24
+# 		RealignDelay: -1
+# 	Armament@Phalanx:
+# 		Turret: main
+# 		Weapon: GDIRigPhalanxTower
+# 		LocalOffset: 640,0,480
+# 		Recoil: 64
+# 		RecoilRecovery: 32
+# 		MuzzleSequence: muzzle
+# 		ForceTargetRelationships: Enemy, Neutral
+# 	# WithSpriteTurret@Railgun:
+# 	# 	Turret: railgun
+# 	# 	Sequence: railgun
+# 	Turreted@Railgun:
+# 		Turret: railgun
+# 		Offset: -480,800,1280
+# 		TurnSpeed: 24
+# 		RealignDelay: -1
+# 	Armament@Railgun:
+# 		Turret: railgun
+# 		Weapon: GDIRigRailgun
+# 		LocalOffset: 512,0,0
+# 		Recoil: 64
+# 		RecoilRecovery: 32
+# 		MuzzleSequence: muzzle
+# 		ForceTargetRelationships: Enemy, Neutral
+# 	# WithSpriteTurret@MissilePod:
+# 	# 	Turret: missilepod
+# 	# 	Sequence: missilepod
+# 	Turreted@MissilePod:
+# 		Turret: missilepod
+# 		Offset: 480,-640,1280
+# 		TurnSpeed: 24
+# 		RealignDelay: -1
+# 	Armament@MissilePod:
+# 		Turret: missilepod
+# 		Weapon: GDIRigMissilePod
+# 		LocalOffset: 640,0,480
+# 		Recoil: 64
+# 		RecoilRecovery: 32
+# 		MuzzleSequence: muzzle
+# 		RequiresCondition: !up_advancedmissiletargeting
+# 		ForceTargetRelationships: Enemy, Neutral
+# 	Armament@AdvancedMissileTargeting:
+# 		Turret: missilepod
+# 		Weapon: GDIRigMissilePodAMT
+# 		LocalOffset: 640,0,480
+# 		Recoil: 64
+# 		RecoilRecovery: 32
+# 		MuzzleSequence: muzzle
+# 		RequiresCondition: up_advancedmissiletargeting
+# 		ForceTargetRelationships: Enemy, Neutral
+# 	FirepowerMultiplier@TripleWeapon:
+# 		Modifier: 33
+# 	AttackTurreted:
+# 		Turrets: main, railgun, missilepod
+# 		RequiresCondition: !build-incomplete
+# 		PauseOnCondition: lowpower || disabled
+# 	RenderSprites:
+# 		Image: gdirigtower
+# 		PlayerPalette: player_rgba
+# 	WithDeathAnimation:
+# 		DeathSequencePalette: player_rgba
+# 	WithMuzzleOverlay:
+# 	DamageMultiplier@3x3Shape:
+# 		Modifier: 25
+# 	RevealsShroud:
+# 		Range: 10000
+# 	DetectCloaked:
+# 		Range: 5000
+# 	Transforms:
+# 		IntoActor: gdirig
+# 		Offset: 1,1
+# 		Facing: 432
+# 		TransformSounds: uplace.wav
+# 		PauseOnCondition: being-demolished || build-incomplete || disabled
+# 	TransferTimedExternalConditionOnTransform:
+# 		Condition: invulnerability
+# 	TransferTimedExternalConditionOnTransform@ammo:
+# 		Condition: ammo
+# 	# AmmoPool:
+# 	# 	Armaments: secondary
+# 	# 	Ammo: 10
+# 	# 	AmmoCondition: ammo
+# 	# ReloadAmmoPool:
+# 	# 	Delay: 100
+# 	# 	Count: 10
+# 	# WithAmmoPipsDecoration:
+# 	# 	Position: BottomLeft
+# 	# 	RequiresSelection: True
+# 	# 	PipCount: 10
+# 	Armament@DroneTargeting:
+# 		Name: secondary
+# 		Weapon: GDIRigTowerDroneTargeting
+# 		TargetRelationships: Ally
+# 		ForceTargetRelationships: Ally
+# 		# PauseOnCondition: !ammo
+# 		# RequiresCondition: ammo
+# 	DroneSpawnerMaster@steel_scalpel:
+# 		Actors: gdirigdrone, gdirigdrone, gdirigdrone
+# 		ArmamentNames: secondary, pointdefense
+# 		RespawnTicks: 250
+# 		#FollowAfterAttackDelay: 25
+# 		ShouldSpawnInitialLoad: false
+# 	AmmoPool@pld:
+# 		Ammo: 20
+# 	WithAmmoPipsDecoration:
+# 		PipCount: 20
+# 	Armament@pointdefense:
+# 		Weapon: GDIRigPDLaserTower
+# 		Turret: pointdefense
+# 		ForceTargetRelationships: Enemy, Neutral
+# 	Turreted@pointdefense:
+# 		Turret: pointdefense
+# 		TurnSpeed: 128
+# 	ActorStatValues:
+# 		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_advancedmissiletargeting, up_lightweightarmorplating
+
+gdirigdrone:
+	Inherits: ^RANeutralPlane
+	Inherits@PLD: ^PointLaserDefenseSystem
+	Inherits@Template: ^FighterTemplate
+	Selectable:
+	Tooltip:
+		Name: Scalpel
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Valued:
+		Cost: 500
+	Aircraft:
+		CruiseAltitude: 1200
+		InitialFacing: 192
+		IdleTurnSpeed: 8
+		TurnSpeed: 48
+		Speed: 120
+		RepulsionSpeed: 48
+		MaximumPitch: 40
+		CanForceLand: false
+		VTOL: true
+	RevealsShroud:
+		Range: 10000
+		Type: CenterPosition
+	AttackAircraft:
+		AttackType: Hover
+		PersistentTargeting: false
+		FacingTolerance: 10
+	-Targetable@SpecialRepair:
+	-SpawnActorOnDeath:
+	-ActorLostNotification:
+	-UpdatesPlayerStatistics:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 6000
+		MovingCallBackCellDistance: 6
+		GrantConditionWhenMasterIsDisabled: notenabled
+		GrantConditionWhenMasterIsPaused: paused
+	# KillsSelf@masterdisabled:
+	# 	RequiresCondition: paused
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: gdirigdrone
+		PlayerPalette: player_rgba
+	Armament@PRIMARY:
+		Weapon: GDIRigDroneRepair
+		LocalOffset: 200,0,0
+		MuzzleSequence: muzzle
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+	Armament@pointdefense:
+		Weapon: GDIRigPDLaser
+		Turret: pointdefense
+		ForceTargetRelationships: Enemy, Neutral
+	Turreted:
+		Turret: pointdefense
+		TurnSpeed: 80
+	WithMuzzleOverlay:
+	AttackAircraft:
+		Armaments: primary, pointdefense
+	ActorStatValues:
+		Upgrades: upsteel_shielresistance

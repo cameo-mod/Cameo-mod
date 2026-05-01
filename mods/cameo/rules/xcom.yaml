@@ -1,5 +1,6 @@
 World:
 	FactionCA@xcom:
+		Selectable: false
 		Name: (WIP)XCOM #faction-xcom.name
 		InternalName: xcom
 		Game: XCOM
@@ -644,7 +645,6 @@ XCOMHQ:
 		Condition: SoldierCap
 	Production@Vehicle:
 		Produces: Vehicle
-		RequiresCondition: !classicproductionqueues
 		PauseOnCondition: disabled
 	Production@Infantry:
 		Produces: Infantry
@@ -852,7 +852,6 @@ XCOMHQ:
 		Type: Unload
 		DockAngle: 512
 		DockOffset: 0,1280,0
-		MaxQueueLength: 10
 	StoresPlayerResources:
 		Capacity: 10000
 	WithResourceStoragePipsDecoration:
@@ -1253,7 +1252,7 @@ xcom_scalpel_aa:
 	Tooltip:
 		Name: AA Scalpel
 	Armament@PRIMARY:
-		Weapon: SteelInfRailgunAAEMPE
+		Weapon: SteelScalpelRailgunEMPAA
 		LocalOffset: 200,0,0
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:

@@ -53,6 +53,10 @@
 			Ford: 80
 			Ore: 80
 			Gems: 80
+			RA2Copper: 80
+			RA2Silver: 80
+			RA2Ore: 80
+			RA2Gems: 80
 			SCMinerals: 40
 			Veins: 70
 			Spice: 80
@@ -77,6 +81,7 @@
 			ClearDune: 90
 			Dune: 80 ##########
 			Rough: 80
+			RoughDune: 70
 			Road: 100
 			Bridge: 100
 			Tiberium: 70
@@ -91,6 +96,10 @@
 			Ford: 80
 			Ore: 80
 			Gems: 80
+			RA2Copper: 80
+			RA2Silver: 80
+			RA2Ore: 80
+			RA2Gems: 80
 			SCMinerals: 40
 			Veins: 70
 			Water: 80
@@ -116,6 +125,7 @@
 			ClearDune: 90
 			Dune: 80
 			Rough: 80
+			RoughDune: 70
 			Road: 100
 			Bridge: 100
 			Tiberium: 90
@@ -126,6 +136,10 @@
 			Ford: 80
 			Ore: 80
 			Gems: 80
+			RA2Copper: 80
+			RA2Silver: 80
+			RA2Ore: 80
+			RA2Gems: 80
 			SCMinerals: 40
 			Veins: 70
 			Concrete: 100
@@ -159,6 +173,10 @@
 			Ford: 50
 			Ore: 70
 			Gems: 70
+			RA2Copper: 70
+			RA2Silver: 70
+			RA2Ore: 70
+			RA2Gems: 70
 			SCMinerals: 40
 			Veins: 70
 			Concrete: 100
@@ -192,6 +210,10 @@
 			Ford: 50
 			Ore: 70
 			Gems: 70
+			RA2Copper: 70
+			RA2Silver: 70
+			RA2Ore: 70
+			RA2Gems: 70
 			SCMinerals: 40
 			Veins: 70
 			Concrete: 100
@@ -219,6 +241,10 @@
 			Bridge: 100
 			Ore: 70
 			Gems: 70
+			RA2Copper: 70
+			RA2Silver: 70
+			RA2Ore: 70
+			RA2Gems: 70
 			Beach: 70
 			Ford: 70
 			Tiberium: 70
@@ -258,6 +284,10 @@
 			Ford: 70
 			Ore: 70
 			Gems: 70
+			RA2Copper: 70
+			RA2Silver: 70
+			RA2Ore: 70
+			RA2Gems: 70
 			SCMinerals: 40
 			Veins: 70
 			Concrete: 100
@@ -291,6 +321,10 @@
 			Ford: 70
 			Ore: 70
 			Gems: 70
+			RA2Copper: 70
+			RA2Silver: 70
+			RA2Ore: 70
+			RA2Gems: 70
 			SCMinerals: 40
 			Veins: 70
 			Concrete: 100
@@ -335,6 +369,10 @@
 			River: 100
 			Ore: 100
 			Gems: 100
+			RA2Copper: 100
+			RA2Silver: 100
+			RA2Ore: 100
+			RA2Gems: 100
 			SCMinerals: 40
 			Veins: 70
 			Concrete: 100
@@ -365,14 +403,18 @@
 			Road: 98
 			Bridge: 98
 			Tunnel: 98
-			Tiberium: 60
-			BlueTiberium: 60
-			RedTiberium: 60
-			GoldTiberium: 60
+			Tiberium: 90
+			BlueTiberium: 90
+			RedTiberium: 90
+			GoldTiberium: 90
 			Beach: 80
 			Ford: 80
-			Ore: 60
-			Gems: 60
+			Ore: 90
+			Gems: 90
+			RA2Copper: 90
+			RA2Silver: 90
+			RA2Ore: 90
+			RA2Gems: 90
 			River: 60
 			Water: 99
 			SCMinerals: 40
@@ -381,11 +423,12 @@
 			Sand: 90 ##########
 			SpiceSand: 90 ##########
 			Transition: 80
-			Spice: 60
+			Spice: 90
 			ZergSoil: 90
 			Rails: 90
 	Locomotor@FAKEAIRCRAFT:
 		Name: fakeaircraft
+		Crushes: crate, mine
 		SharesCell: true
 		TerrainSpeeds:
 			Clear: 100
@@ -415,6 +458,10 @@
 			Ford: 100
 			Ore: 100
 			Gems: 100
+			RA2Copper: 100
+			RA2Silver: 100
+			RA2Ore: 100
+			RA2Gems: 100
 			River: 100
 			Water: 100
 			Rock: 100
@@ -451,6 +498,10 @@
 			Ford: 70
 			Ore: 70
 			Gems: 70
+			RA2Copper: 70
+			RA2Silver: 70
+			RA2Ore: 70
+			RA2Gems: 70
 			SCMinerals: 40
 			River: 30
 			Water: 50
@@ -496,6 +547,14 @@
 				PathingCost: 150
 			Gems: 70
 				PathingCost: 150
+			RA2Copper: 70
+				PathingCost: 150
+			RA2Silver: 70
+				PathingCost: 150
+			RA2Ore: 70
+				PathingCost: 150
+			RA2Gems: 70
+				PathingCost: 150
 			Beach: 70
 				PathingCost: 150
 			Ford: 70
@@ -527,7 +586,7 @@
 				PathingCost: 150
 			Rails: 80
 				PathingCost: 150
-		SubterraneanTransitionTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, SCMinerals, Concrete, SpiceSand, Sand
+		SubterraneanTransitionTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, RA2Copper, RA2Silver, RA2Ore, RA2Gems, SCMinerals, Concrete, SpiceSand, Sand
 		SubterraneanTransitionCost: 5
 	SubterraneanLocomotor@WORMSUB:
 		Name: sandwormsub
@@ -543,6 +602,10 @@
 			Bridge: 100
 			Ore: 100
 			Gems: 100
+			RA2Copper: 100
+			RA2Silver: 100
+			RA2Ore: 100
+			RA2Gems: 100
 			Beach: 100
 			Ford: 100
 			Tiberium: 100
@@ -594,6 +657,14 @@
 				PathingCost: 200
 			Gems: 70
 				PathingCost: 200
+			RA2Copper: 70
+				PathingCost: 200
+			RA2Silver: 70
+				PathingCost: 200
+			RA2Ore: 70
+				PathingCost: 200
+			RA2Gems: 70
+				PathingCost: 200
 			Beach: 70
 				PathingCost: 200
 			Ford: 70
@@ -631,7 +702,7 @@
 	FactionCA@Random:
 		Name: Random #faction-random.name
 		InternalName: Random
-		RandomFactionMembers: gdi, nod, allies, soviet, modjapan, ra2america, ra2russia, yuri, asianalliance, consortium, syndicate, naxis, lnaxis, ixian, terran, zerg #Randomcnc, Randomra, Randomra2 #RandomSpecial, RandomBoss, Randomcnc&ra, RandomAW, RandomDR, RandomDT, RandomDOW, RandomDU, RandomD2, Randomcncg, RandomGSW, Randomra2, RandomCity, RandomSC, RandomSW, RandomTA, RandomTS, RandomWC, RandomWC2, RandomWZ
+		RandomFactionMembers: gdi, nod, allies, soviet, modjapan, tsgdi, tsnod, ra2america, ra2russia, yuri, asianalliance, consortium, syndicate, naxis, lnaxis, futuretech, ixian, ordos, terran, zerg, protoss, human2, orc2, tkm #Randomcnc, Randomra, Randomra2 #RandomSpecial, RandomBoss, Randomcnc&ra, RandomAW, RandomDR, RandomDT, RandomDOW, RandomDU, RandomD2, Randomcncg, RandomGSW, Randomra2, RandomCity, RandomSC, RandomSW, RandomTA, RandomTS, RandomWC, RandomWC2, RandomWZ
 		Game: Generic
 		Side: Random
 		Description: Randomly selects one from all available factions #faction-random.description
@@ -691,11 +762,27 @@
 			Ore:
 				Sequences: gold01,gold02,gold03,gold04
 				Palette: ra_temperat #player
-				Name: Valuable Minerals
+				Name: Ore
 			Gems:
 				Sequences: gem01,gem02,gem03,gem04
 				Palette: ra_temperat #player
 				Name: Valuable Minerals
+			RA2Gems:
+				Sequences: ra2gems01,ra2gems02,ra2gems03,ra2gems04,ra2gems05,ra2gems06,ra2gems07,ra2gems08,ra2gems09,ra2gems10,ra2gems11,ra2gems12,ra2gems01_off1,ra2gems01_off2,ra2gems01_off3,ra2gems01_off4,ra2gems02_off1,ra2gems02_off2,ra2gems02_off3,ra2gems02_off4,ra2gems03_off1,ra2gems03_off2,ra2gems03_off3,ra2gems03_off4,ra2gems04_off1,ra2gems04_off2,ra2gems04_off3,ra2gems04_off4,ra2gems05_off1,ra2gems05_off2,ra2gems05_off3,ra2gems05_off4,ra2gems06_off1,ra2gems06_off2,ra2gems06_off3,ra2gems06_off4
+				Palette: ra2temperat #player
+				Name: Gems
+			RA2Ore:
+				Sequences: ra2gold01,ra2gold02,ra2gold03,ra2gold04,ra2gold05,ra2gold06,ra2gold07,ra2gold08,ra2gold09,ra2gold10,ra2gold11,ra2gold12,ra2gold13,ra2gold14,ra2gold15,ra2gold16,ra2gold17,ra2gold18,ra2gold19,ra2gold20,ra2gold01_off1,ra2gold01_off2,ra2gold01_off3,ra2gold01_off4,ra2gold02_off1,ra2gold02_off2,ra2gold02_off3,ra2gold02_off4,ra2gold03_off1,ra2gold03_off2,ra2gold03_off3,ra2gold03_off4,ra2gold04_off1,ra2gold04_off2,ra2gold04_off3,ra2gold04_off4,ra2gold05_off1,ra2gold05_off2,ra2gold05_off3,ra2gold05_off4,ra2gold06_off1,ra2gold06_off2,ra2gold06_off3,ra2gold06_off4,ra2gold07_off1,ra2gold07_off2,ra2gold07_off3,ra2gold07_off4,ra2gold08_off1,ra2gold08_off2,ra2gold08_off3,ra2gold08_off4,ra2gold09_off1,ra2gold09_off2,ra2gold09_off3,ra2gold09_off4,ra2gold10_off1,ra2gold10_off2,ra2gold10_off3,ra2gold10_off4
+				Palette: ra2temperat #player
+				Name: Gold
+			RA2Silver:
+				Sequences: ra2gold01,ra2gold02,ra2gold03,ra2gold04,ra2gold05,ra2gold06,ra2gold07,ra2gold08,ra2gold09,ra2gold10,ra2gold11,ra2gold12,ra2gold13,ra2gold14,ra2gold15,ra2gold16,ra2gold17,ra2gold18,ra2gold19,ra2gold20,ra2gold01_off1,ra2gold01_off2,ra2gold01_off3,ra2gold01_off4,ra2gold02_off1,ra2gold02_off2,ra2gold02_off3,ra2gold02_off4,ra2gold03_off1,ra2gold03_off2,ra2gold03_off3,ra2gold03_off4,ra2gold04_off1,ra2gold04_off2,ra2gold04_off3,ra2gold04_off4,ra2gold05_off1,ra2gold05_off2,ra2gold05_off3,ra2gold05_off4,ra2gold06_off1,ra2gold06_off2,ra2gold06_off3,ra2gold06_off4,ra2gold07_off1,ra2gold07_off2,ra2gold07_off3,ra2gold07_off4,ra2gold08_off1,ra2gold08_off2,ra2gold08_off3,ra2gold08_off4,ra2gold09_off1,ra2gold09_off2,ra2gold09_off3,ra2gold09_off4,ra2gold10_off1,ra2gold10_off2,ra2gold10_off3,ra2gold10_off4
+				Palette: ra2silvermineral #player
+				Name: Silver
+			RA2Copper:
+				Sequences: ra2gold01,ra2gold02,ra2gold03,ra2gold04,ra2gold05,ra2gold06,ra2gold07,ra2gold08,ra2gold09,ra2gold10,ra2gold11,ra2gold12,ra2gold13,ra2gold14,ra2gold15,ra2gold16,ra2gold17,ra2gold18,ra2gold19,ra2gold20,ra2gold01_off1,ra2gold01_off2,ra2gold01_off3,ra2gold01_off4,ra2gold02_off1,ra2gold02_off2,ra2gold02_off3,ra2gold02_off4,ra2gold03_off1,ra2gold03_off2,ra2gold03_off3,ra2gold03_off4,ra2gold04_off1,ra2gold04_off2,ra2gold04_off3,ra2gold04_off4,ra2gold05_off1,ra2gold05_off2,ra2gold05_off3,ra2gold05_off4,ra2gold06_off1,ra2gold06_off2,ra2gold06_off3,ra2gold06_off4,ra2gold07_off1,ra2gold07_off2,ra2gold07_off3,ra2gold07_off4,ra2gold08_off1,ra2gold08_off2,ra2gold08_off3,ra2gold08_off4,ra2gold09_off1,ra2gold09_off2,ra2gold09_off3,ra2gold09_off4,ra2gold10_off1,ra2gold10_off2,ra2gold10_off3,ra2gold10_off4
+				Palette: ra2coppermineral #player
+				Name: Copper
 			SCMinerals:
 				Sequences: scmin01,scmin03,scmin02,scmin01_off1,scmin01_off2,scmin01_off3,scmin01_off4,scmin02_off1,scmin02_off2,scmin02_off3,scmin02_off4,scmin03_off1,scmin03_off2,scmin03_off3,scmin03_off4
 				Palette: greyscale_rotation #player
@@ -788,22 +875,6 @@
 				Sequences: op2minerals2
 				Palette: terrain #player
 				Name: Rare Ore
-			RA2Ore:
-				Sequences: ra2gold01,ra2gold02,ra2gold03,ra2gold04,ra2gold05,ra2gold06,ra2gold07,ra2gold08,ra2gold09,ra2gold10,ra2gold11,ra2gold12,ra2gold13,ra2gold14,ra2gold15,ra2gold16,ra2gold17,ra2gold18,ra2gold19,ra2gold20,ra2gold01_off1,ra2gold01_off2,ra2gold01_off3,ra2gold01_off4,ra2gold02_off1,ra2gold02_off2,ra2gold02_off3,ra2gold02_off4,ra2gold03_off1,ra2gold03_off2,ra2gold03_off3,ra2gold03_off4,ra2gold04_off1,ra2gold04_off2,ra2gold04_off3,ra2gold04_off4,ra2gold05_off1,ra2gold05_off2,ra2gold05_off3,ra2gold05_off4,ra2gold06_off1,ra2gold06_off2,ra2gold06_off3,ra2gold06_off4,ra2gold07_off1,ra2gold07_off2,ra2gold07_off3,ra2gold07_off4,ra2gold08_off1,ra2gold08_off2,ra2gold08_off3,ra2gold08_off4,ra2gold09_off1,ra2gold09_off2,ra2gold09_off3,ra2gold09_off4,ra2gold10_off1,ra2gold10_off2,ra2gold10_off3,ra2gold10_off4
-				Palette: ra2temperat #player
-				Name: Gold
-			RA2Gems:
-				Sequences: ra2gems01,ra2gems02,ra2gems03,ra2gems04,ra2gems05,ra2gems06,ra2gems07,ra2gems08,ra2gems09,ra2gems10,ra2gems11,ra2gems12,ra2gems01_off1,ra2gems01_off2,ra2gems01_off3,ra2gems01_off4,ra2gems02_off1,ra2gems02_off2,ra2gems02_off3,ra2gems02_off4,ra2gems03_off1,ra2gems03_off2,ra2gems03_off3,ra2gems03_off4,ra2gems04_off1,ra2gems04_off2,ra2gems04_off3,ra2gems04_off4,ra2gems05_off1,ra2gems05_off2,ra2gems05_off3,ra2gems05_off4,ra2gems06_off1,ra2gems06_off2,ra2gems06_off3,ra2gems06_off4
-				Palette: ra2temperat #player
-				Name: Gems
-			RA2Silver:
-				Sequences: ra2gold01,ra2gold02,ra2gold03,ra2gold04,ra2gold05,ra2gold06,ra2gold07,ra2gold08,ra2gold09,ra2gold10,ra2gold11,ra2gold12,ra2gold13,ra2gold14,ra2gold15,ra2gold16,ra2gold17,ra2gold18,ra2gold19,ra2gold20,ra2gold01_off1,ra2gold01_off2,ra2gold01_off3,ra2gold01_off4,ra2gold02_off1,ra2gold02_off2,ra2gold02_off3,ra2gold02_off4,ra2gold03_off1,ra2gold03_off2,ra2gold03_off3,ra2gold03_off4,ra2gold04_off1,ra2gold04_off2,ra2gold04_off3,ra2gold04_off4,ra2gold05_off1,ra2gold05_off2,ra2gold05_off3,ra2gold05_off4,ra2gold06_off1,ra2gold06_off2,ra2gold06_off3,ra2gold06_off4,ra2gold07_off1,ra2gold07_off2,ra2gold07_off3,ra2gold07_off4,ra2gold08_off1,ra2gold08_off2,ra2gold08_off3,ra2gold08_off4,ra2gold09_off1,ra2gold09_off2,ra2gold09_off3,ra2gold09_off4,ra2gold10_off1,ra2gold10_off2,ra2gold10_off3,ra2gold10_off4
-				Palette: ra2silvermineral #player
-				Name: Silver
-			RA2Copper:
-				Sequences: ra2gold01,ra2gold02,ra2gold03,ra2gold04,ra2gold05,ra2gold06,ra2gold07,ra2gold08,ra2gold09,ra2gold10,ra2gold11,ra2gold12,ra2gold13,ra2gold14,ra2gold15,ra2gold16,ra2gold17,ra2gold18,ra2gold19,ra2gold20,ra2gold01_off1,ra2gold01_off2,ra2gold01_off3,ra2gold01_off4,ra2gold02_off1,ra2gold02_off2,ra2gold02_off3,ra2gold02_off4,ra2gold03_off1,ra2gold03_off2,ra2gold03_off3,ra2gold03_off4,ra2gold04_off1,ra2gold04_off2,ra2gold04_off3,ra2gold04_off4,ra2gold05_off1,ra2gold05_off2,ra2gold05_off3,ra2gold05_off4,ra2gold06_off1,ra2gold06_off2,ra2gold06_off3,ra2gold06_off4,ra2gold07_off1,ra2gold07_off2,ra2gold07_off3,ra2gold07_off4,ra2gold08_off1,ra2gold08_off2,ra2gold08_off3,ra2gold08_off4,ra2gold09_off1,ra2gold09_off2,ra2gold09_off3,ra2gold09_off4,ra2gold10_off1,ra2gold10_off2,ra2gold10_off3,ra2gold10_off4
-				Palette: ra2coppermineral #player
-				Name: Copper
 World:
 	Inherits: ^BaseWorld
 	ChatCommands:
@@ -824,7 +895,7 @@ World:
 		CheckboxLabel: Creeps
 		CheckboxDescription: Some Maps may contain hostile entities
 		CheckboxDisplayOrder: 21
-		CheckboxEnabled: False
+		CheckboxEnabled: True
 	SmudgeLayer@SCORCH:
 		Type: Scorch
 		Sequence: scorches
@@ -892,8 +963,15 @@ World:
 		Brightest: 80
 		FadeoutDelay: 300
 		Name: anthraxpurple
+	TintedCellsLayer@cryo:
+		Color: 88BBFF
+		ZOffset: 0
+		Brightest: 64
+		FadeoutDelay: 30
+		Name: cryo
 	WeaponTriggerCells@Inferno:
 		Name: InfernoLayer
+		RestorePerTick: 1
 		#ShowDebugOverlay: true
 	SubterraneanActorLayer:
 	JumpjetActorLayer:
@@ -948,6 +1026,26 @@ World:
 				TerrainType: Gems
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
 				MaxDensity: 15
+			RA2Gems:
+				ResourceIndex: 36
+				TerrainType: RA2Gems
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 20
+			RA2Ore:
+				ResourceIndex: 35
+				TerrainType: RA2Ore
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 30
+			RA2Silver:
+				ResourceIndex: 37
+				TerrainType: RA2Silver
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 40
+			RA2Copper:
+				ResourceIndex: 38
+				TerrainType: RA2Copper
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 50
 			SCMinerals:
 				ResourceIndex: 7
 				TerrainType: SCMinerals
@@ -1032,12 +1130,12 @@ World:
 				ResourceIndex: 26
 				TerrainType: SCMinerals
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 9999
+				MaxDensity: 255
 			DRTaelon:
 				ResourceIndex: 27
 				TerrainType: Tiberium
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,ClearInterior,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 9999
+				MaxDensity: 255
 			D2Spice:
 				ResourceIndex: 30
 				TerrainType: Spice
@@ -1063,26 +1161,6 @@ World:
 				TerrainType: Ore
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
 				MaxDensity: 67
-			RA2Ore:
-				ResourceIndex: 35
-				TerrainType: Ore
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 40
-			RA2Gems:
-				ResourceIndex: 36
-				TerrainType: Gems
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 15
-			RA2Silver:
-				ResourceIndex: 37
-				TerrainType: Ore
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 40
-			RA2Copper:
-				ResourceIndex: 38
-				TerrainType: Ore
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 40
 	LuaScript:
 		Scripts:
 	####################################################################################################
@@ -1116,6 +1194,7 @@ World:
 	RadarPings:
 	ScriptTriggers:
 	CellTriggerOverlay:
+	AutoSave:
 	TimeLimitManager:
 		TimeLimitDisplayOrder: 2
 		TimeLimitWarnings:
@@ -1130,7 +1209,14 @@ World:
 			1: WarningOneMinuteRemaining
 	ColorPickerManager:
 		PreviewActor: fact.colorpicker
+		FactionPreviewActors:
+			soviet: rafact.colorpicker
+			allies: rafact.colorpicker
+			modjapan: rafactj.colorpicker
 		PresetColors: 391D1D, 98331F, F57606, F50606, DDB8FF, ACF218, 06F739, F2BC18, 200738, 280DF6, 79F2AA, 34BA93, F861A4, C718F2, 79CEF2, 2F86F2
+		HsvSaturationRange: 0.0, 1.0
+		HsvValueRange: 0.0, 1.0
+		SimilarityThreshold: 40
 	PathFinderOverlay:
 	HierarchicalPathFinderOverlay:
 	OrderEffects:
@@ -1174,6 +1260,26 @@ EditorWorld:
 				TerrainType: Gems
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
 				MaxDensity: 15
+			RA2Gems:
+				ResourceIndex: 36
+				TerrainType: RA2Gems
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 20
+			RA2Ore:
+				ResourceIndex: 35
+				TerrainType: RA2Ore
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 30
+			RA2Silver:
+				ResourceIndex: 37
+				TerrainType: RA2Silver
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 40
+			RA2Copper:
+				ResourceIndex: 38
+				TerrainType: RA2Copper
+				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
+				MaxDensity: 50
 			SCMinerals:
 				ResourceIndex: 7
 				TerrainType: SCMinerals
@@ -1258,12 +1364,12 @@ EditorWorld:
 				ResourceIndex: 26
 				TerrainType: SCMinerals
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 9999
+				MaxDensity: 255
 			DRTaelon:
 				ResourceIndex: 27
 				TerrainType: Tiberium
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,ClearInterior,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 9999
+				MaxDensity: 255
 			D2Spice:
 				ResourceIndex: 30
 				TerrainType: Spice
@@ -1289,26 +1395,6 @@ EditorWorld:
 				TerrainType: Ore
 				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
 				MaxDensity: 67
-			RA2Ore:
-				ResourceIndex: 35
-				TerrainType: Ore
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 40
-			RA2Gems:
-				ResourceIndex: 36
-				TerrainType: Gems
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 15
-			RA2Silver:
-				ResourceIndex: 37
-				TerrainType: Ore
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 40
-			RA2Copper:
-				ResourceIndex: 38
-				TerrainType: Ore
-				AllowedTerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Sand,SpiceSand,ClearDune,ZergSoil ##########
-				MaxDensity: 40
 	EditorActionManager:
 	BuildableTerrainOverlay:
 		AllowedTerrainTypes: Clear, Road

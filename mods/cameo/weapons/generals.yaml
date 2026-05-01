@@ -1405,7 +1405,7 @@ CHBarrageSpawner:
 
 CHBarrageSpawner2:
 	Inherits: CHBarrageSpawner
-	Warhead@2: FireShrapnel
+	Warhead@FireShrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: BarrageCloud
 		Amount: 12

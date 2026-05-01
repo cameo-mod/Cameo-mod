@@ -1,6 +1,7 @@
 General:
 	Name: ra_Interior
 	Id: RA_INTERIOR
+	TileSize: 48,48
 	EditorTemplateOrder: Floor, Wall
 	HeightDebugColors: 880000
 
@@ -15,6 +16,26 @@ Terrain:
 		Type: ClearNoSmudges
 		TargetTypes: Ground
 		Color: 000000
+	TerrainType@RA2Copper:
+		Type: RA2Copper
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 804020
+	TerrainType@RA2Silver:
+		Type: RA2Silver
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: C0C0C0
+	TerrainType@RA2Ore:
+		Type: RA2Ore
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 808000
+	TerrainType@RA2Gems:
+		Type: RA2Gems
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 8040C0
 	TerrainType@Gems:
 		Type: Gems
 		TargetTypes: Ground

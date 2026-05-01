@@ -1,6 +1,7 @@
 General:
 	Name: Cameo
 	Id: CAMEO
+	TileSize: 48,48
 	SheetSize: 4096
 	EditorTemplateOrder: Terrain, Act Terrain, Act Water, Har Terrain, Har Cliffs, Har Buildings, Ze3 Terrain, Ze3 Cliffs, Ze3 Kakariko, Ze3 Decoration, Ze3 Water & Bridge, Terrain, T&W Debris, T&W Road, T&W Cliffs, T&W Beach, T&W River, T&W Bridge, T&W RA Debris, T&W RA Water Cliffs, T&W RA Bridge, J&S&D Debris, J&S&D Road, J&S&D Cliffs, J&S&D Beach, J&S&D River, J&S&D Bridge, J&S&D RA Debris, J&S&D RA Water Cliffs, J&S&D RA Bridge, Int Floor, Int Wall, Zeruel87 Urban
 	HeightDebugColors: AA0000
@@ -97,6 +98,26 @@ Terrain:
 		Type: Water
 		TargetTypes: Water
 		Color: 5C74C6 #5C74A4
+	TerrainType@RA2Copper:
+		Type: RA2Copper
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 804020
+	TerrainType@RA2Silver:
+		Type: RA2Silver
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: C0C0C0
+	TerrainType@RA2Ore:
+		Type: RA2Ore
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 808000
+	TerrainType@RA2Gems:
+		Type: RA2Gems
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 8040C0
 	TerrainType@Ore:
 		Type: Ore
 		TargetTypes: Ground

@@ -17,11 +17,6 @@ namespace OpenRA.Mods.Cameo.Traits
 {
 	public class DeployOnConditionInfo : ConditionalTraitInfo
 	{
-		[ActorReference]
-		public readonly string IntoActor = null;
-		public readonly int ForceHealthPercentage = 0;
-		public readonly bool SkipMakeAnims = true;
-
 		public override object Create(ActorInitializer init) { return new DeployOnCondition(init, this); }
 	}
 

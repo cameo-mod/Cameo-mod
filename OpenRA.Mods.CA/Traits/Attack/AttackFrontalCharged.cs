@@ -9,6 +9,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.CA.Activities;
 using OpenRA.Mods.Common.Activities;
@@ -22,8 +23,8 @@ namespace OpenRA.Mods.CA.Traits
 		"Note: All armaments will share the charge, so its best suited for units with a single weapon.")]
 	public class AttackFrontalChargedInfo : AttackFrontalInfo, Requires<IFacingInfo>
 	{
-		[Desc("Amount of charge required to attack.")]
-		public readonly int ChargeLevel = 25;
+		[Desc("Amount of charge required to attack. Use two numbers to represent a random number in a range (lower value included, upper excluded).")]
+		public readonly int[] ChargeLevel = { 25 };
 
 		[Desc("Amount to increase the charge level each tick with a valid target.")]
 		public readonly int ChargeRate = 1;
@@ -41,6 +42,12 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Number of shots that can be fired after charging.")]
 		public readonly int ShotsPerCharge = 1;
 
+		[Desc("Armaments that count towards shots per charge. Leave empty for all.")]
+		public readonly string[] ChargeConsumingArmaments = default;
+
+		[Desc("If true, charge will be lost while turning.")]
+		public readonly bool LosesChargeWhileTurning = false;
+
 		public readonly bool ShowSelectionBar = false;
 		public readonly Color SelectionBarColor = Color.FromArgb(128, 200, 255);
 
@@ -55,6 +62,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		bool charging;
 		int shotsFired;
+		int requiredChargeLevel;
 
 		public int ChargeLevel { get; private set; }
 
@@ -81,7 +89,7 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			get
 			{
-				return ChargeLevel >= Info.ChargeLevel;
+				return ChargeLevel >= requiredChargeLevel;
 			}
 		}
 
@@ -99,6 +107,7 @@ namespace OpenRA.Mods.CA.Traits
 			Info = info;
 			shotsFired = 0;
 			movement = self.TraitOrDefault<IMove>();
+			requiredChargeLevel = Common.Util.RandomInRange(self.World.SharedRandom, info.ChargeLevel);
 		}
 
 		protected override void TraitEnabled(Actor self)
@@ -112,6 +121,9 @@ namespace OpenRA.Mods.CA.Traits
 			if (IsTraitDisabled || IsTraitPaused)
 				return;
 
+			if (!IsAiming && ChargeLevel == 0)
+				return;
+
 			var reloading = false;
 			foreach (var armament in Armaments)
 			{
@@ -123,10 +135,16 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Stop charging when we lose our target
-			charging = (self.CurrentActivity is AttackCharged || self.CurrentActivity is AttackMoveActivity) && !reloading && IsAiming && (ChargeLevel > 0 || !IsTurning);
+			bool isTurning = IsTurning;
+
+			charging =
+				(self.CurrentActivity is AttackCharged || self.CurrentActivity is AttackMoveActivity || self.CurrentActivity is Hunt || self.CurrentActivity is HuntCA)
+				&& !reloading
+				&& IsAiming
+				&& (!isTurning || (isTurning && ChargeLevel > 0 && !Info.LosesChargeWhileTurning));
 
 			var delta = charging ? Info.ChargeRate : -Info.DischargeRate;
-			ChargeLevel = (ChargeLevel + delta).Clamp(0, Info.ChargeLevel);
+			ChargeLevel = (ChargeLevel + delta).Clamp(0, requiredChargeLevel);
 
 			if (!charging)
 				shotsFired = 0;
@@ -158,11 +176,15 @@ namespace OpenRA.Mods.CA.Traits
 			if (IsTraitDisabled || IsTraitPaused)
 				return;
 
+			if (Info.ChargeConsumingArmaments != null && !Info.ChargeConsumingArmaments.Contains(a.Info.Name))
+				return;
+
 			shotsFired++;
 			if (shotsFired >= Info.ShotsPerCharge)
 			{
 				shotsFired = 0;
 				ChargeLevel = 0;
+				requiredChargeLevel = Common.Util.RandomInRange(self.World.SharedRandom, Info.ChargeLevel);
 			}
 		}
 
@@ -172,10 +194,10 @@ namespace OpenRA.Mods.CA.Traits
 
 		float ISelectionBar.GetValue()
 		{
-			if (!Info.ShowSelectionBar || ChargeLevel == Info.ChargeLevel)
+			if (!Info.ShowSelectionBar || ChargeLevel == requiredChargeLevel)
 				return 0;
 
-			return (float)ChargeLevel / Info.ChargeLevel;
+			return (float)ChargeLevel / requiredChargeLevel;
 		}
 
 		bool ISelectionBar.DisplayWhenEmpty { get { return false; } }

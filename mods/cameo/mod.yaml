@@ -12,6 +12,7 @@ FileSystem: DefaultFileSystem
 		~^SupportDir|Content/cameo/: game
 		^EngineDir
 		$cameo: cameo
+		cameo|ContentPacks: ContentPacks
 		cameo|uibits
 		^EngineDir|mods/common: common
 		~^SupportDir|Content/cameo/music
@@ -34,11 +35,11 @@ FileSystem: DefaultFileSystem
 		~cameo|bits/ra
 		~cameo|bits/sw
 		~cameo|bits/sow
-		~cameo|bits/worms
+		# ~cameo|bits/worms
 		~cameo|bits/warcraft1
 		~cameo|bits/warcraft2
 		~cameo|bits/shockwave
-		~cameo|bits/sc2k
+		# ~cameo|bits/sc2k
 		~cameo|bits/shared
 		#~cameo|bits/ee1
 		~cameo|bits/ra/ra_audio.mix
@@ -49,21 +50,21 @@ FileSystem: DefaultFileSystem
 		~cameo|bits/zerg/zerg_audio.mix
 		~cameo|bits/city
 		~cameo|bits/lua
-		~cameo|bits/heroes
+		# ~cameo|bits/heroes
 		~cameo|bits/misc
-		~cameo|bits/scavenger
+		# ~cameo|bits/scavenger
 		~cameo|bits/ants
 		~cameo|bits/test
 		~cameo|bits/tech
 		~cameo|bits/cameo_tileset
 		~cameo|bits/cameo_tileset/trees
 		~cameo|bits/d2k
-		~cameo|bits/gta
-		~cameo|bits/iok
+		# ~cameo|bits/gta
+		# ~cameo|bits/iok
 		~cameo|bits/ep315
 		~cameo|bits/aw
 		~cameo|bits/tomorrow
-		~cameo|bits/classicdoom
+		# ~cameo|bits/classicdoom
 		~cameo|bits/dune2
 		~cameo|bits/td
 		~cameo|bits/ra2/audio.bag
@@ -77,14 +78,14 @@ FileSystem: DefaultFileSystem
 		##########
 		~cameo|bits/generals
 		~cameo|bits/gla
-		~cameo|bits/caribic
+		# ~cameo|bits/caribic
 		~cameo|bits/notifications
-		~cameo|bits/wh40k
-		~cameo|bits/memes
-		~cameo|bits/pvz
+		# ~cameo|bits/wh40k
+		# ~cameo|bits/memes
+		# ~cameo|bits/pvz
 		~cameo|bits/outpost2						#########
-		~cameo|bits/halloween
-		~cameo|bits/z
+		# ~cameo|bits/halloween
+		# ~cameo|bits/z
 		~cameo|bits/tkm
 		#~cameo|bits/mindustry
 		~common|/mods/cnc/bits
@@ -101,6 +102,7 @@ Rules:
 	cameo|rules/misc.yaml
 	cameo|rules/player.yaml
 	cameo|rules/world.yaml
+	cameo|rules/music.yaml
 	cameo|rules/palettes.yaml
 	cameo|rules/defaults.yaml
 	cameo|rules/shared.yaml
@@ -113,12 +115,13 @@ Rules:
 	cameo|ai/ai.yaml
 	cameo|rules/tiberiandawn.yaml
 	cameo|rules/redalert.yaml
+	cameo|rules/tiberiansun.yaml
 	cameo|rules/redalert2.yaml
 	cameo|rules/redalert2mod.yaml
 	cameo|rules/d2k.yaml
 	cameo|rules/starcraft.yaml
 	cameo|rules/warcraft2.yaml
-	cameo|rules/xcom.yaml
+	# cameo|rules/xcom.yaml
 	# cameo|rules/advancewars.yaml
 	# cameo|rules/camea.yaml
 	# cameo|rules/casino.yaml
@@ -137,7 +140,6 @@ Rules:
 	# cameo|rules/tiberiaalliances.yaml
 	# cameo|rules/iok.yaml
 	# cameo|rules/n64.yaml
-	cameo|rules/tiberiansun.yaml
 	# cameo|rules/warcraft1.yaml
 	# cameo|rules/wz2100.yaml
 	# cameo|rules/worms.yaml
@@ -175,7 +177,7 @@ Sequences:
 	cameo|sequences/warcraft2.yaml
 	# cameo|sequences/dune2.yaml
 	# cameo|sequences/iok.yaml
-	cameo|sequences/xcom.yaml
+	# cameo|sequences/xcom.yaml
 	# cameo|sequences/n64.yaml
 	# cameo|sequences/sow.yaml
 	# cameo|sequences/worms.yaml
@@ -218,15 +220,15 @@ TileSets:
 	cameo|tilesets/ra_snow.yaml
 	cameo|tilesets/ra_interior.yaml
 	cameo|tilesets/ra_temperat.yaml
-	cameo|tilesets/ra2_temperat.yaml
+	# cameo|tilesets/ra2_temperat.yaml
 	cameo|tilesets/ra_desert.yaml
 	cameo|tilesets/arrakis.yaml
-	cameo|tilesets/arrakis2.yaml
-	cameo|tilesets/wc2_sunset.yaml
-	cameo|tilesets/wc2_summer.yaml
-	cameo|tilesets/caribic.yaml
+	# cameo|tilesets/arrakis2.yaml
+	# cameo|tilesets/wc2_sunset.yaml
+	# cameo|tilesets/wc2_summer.yaml
+	# cameo|tilesets/caribic.yaml
 	cameo|tilesets/barren.yaml
-	cameo|tilesets/outpost2.yaml
+	# cameo|tilesets/outpost2.yaml
 
 Weapons:
 	cameo|weapons/weapons.yaml
@@ -239,7 +241,7 @@ Weapons:
 	cameo|weapons/starcraft.yaml
 	cameo|weapons/warcraft2.yaml
 	# cameo|weapons/iok.yaml
-	cameo|weapons/xcom.yaml
+	# cameo|weapons/xcom.yaml
 	# cameo|weapons/n64.yaml
 	# cameo|weapons/dune2.yaml
 	# cameo|weapons/lostunits.yaml
@@ -309,7 +311,7 @@ ChromeLayout:
 	cameo|chrome/lobby.yaml
 	common|chrome/lobby-kickdialogs.yaml
 	common|chrome/lobby-mappreview.yaml
-	common|chrome/lobby-music.yaml
+	cameo|chrome/lobby-music.yaml
 	cameo|chrome/lobby-options.yaml
 	cameo|chrome/lobby-players.yaml
 	common|chrome/lobby-servers.yaml
@@ -321,14 +323,15 @@ ChromeLayout:
 	common|chrome/multiplayer-browserpanels.yaml
 	common|chrome/multiplayer-createserver.yaml
 	common|chrome/multiplayer-directconnect.yaml
-	common|chrome/musicplayer.yaml
+	cameo|chrome/musicplayer.yaml
 	common|chrome/playerprofile.yaml
 	common|chrome/replaybrowser.yaml
 	common|chrome/settings.yaml
 	common|chrome/settings-advanced.yaml
 	common|chrome/settings-audio.yaml
-	common|chrome/settings-display.yaml
+	cameo|chrome/settings-display.yaml
 	common|chrome/settings-hotkeys.yaml
+	common|chrome/settings-gameplay.yaml
 	common|chrome/settings-input.yaml
 	common|chrome/text-notifications.yaml
 	cameo|chrome/tooltips.yaml
@@ -370,6 +373,7 @@ Notifications:
 Music:
 	cameo|music.yaml
 
+
 FluentMessages:
 	common|fluent/common.ftl
 	common|fluent/chrome.ftl
@@ -377,6 +381,7 @@ FluentMessages:
 	common|fluent/rules.ftl
 	cameo|fluent/en.ftl
 	cameo|fluent/rules/en.ftl
+    cameo|fluent/rules/ftech_en.ftl
 
 AllowUnusedFluentMessagesInExternalPackages: true
 
@@ -392,7 +397,7 @@ Hotkeys:
 	cameo|hotkeys.yaml
 
 LoadScreen: FitImageLoadScreen
-	Image: cameo|uibits/loadscreen2.png,cameo|uibits/loadscreen3.png,cameo|uibits/loadscreen4.png,cameo|uibits/loadscreen5.png,cameo|uibits/loadscreen6.png,cameo|uibits/loadscreen7.png,cameo|uibits/loadscreen8.png,cameo|uibits/loadscreen9.png,cameo|uibits/loadscreen10.png,cameo|uibits/loadscreen11.png,cameo|uibits/loadscreen12.png,cameo|uibits/loadscreen13.png,cameo|uibits/loadscreen14.png,cameo|uibits/loadscreen15.png,cameo|uibits/loadscreen16.png,cameo|uibits/loadscreen17.png,cameo|uibits/loadscreen18.png,cameo|uibits/loadscreen19.png,cameo|uibits/loadscreen20.png,cameo|uibits/loadscreen21.png
+	Image: cameo|uibits/loadscreen2.png,cameo|uibits/loadscreen3.png,cameo|uibits/loadscreen4.png,cameo|uibits/loadscreen5.png,cameo|uibits/loadscreen6.png,cameo|uibits/loadscreen7.png,cameo|uibits/loadscreen8.png,cameo|uibits/loadscreen9.png,cameo|uibits/loadscreen10.png,cameo|uibits/loadscreen11.png,cameo|uibits/loadscreen12.png,cameo|uibits/loadscreen13.png,cameo|uibits/loadscreen14.png,cameo|uibits/loadscreen15.png,cameo|uibits/loadscreen16.png,cameo|uibits/loadscreen17.png,cameo|uibits/loadscreen18.png,cameo|uibits/loadscreen19.png,cameo|uibits/loadscreen20.png,cameo|uibits/loadscreen21.png,cameo|uibits/loadscreen22.png
 
 ServerTraits:
 	LobbyCommands
@@ -451,7 +456,6 @@ Fonts:
 Missions:
 	cameo|missions.yaml
 MapGrid:
-	TileSize: 48,48
 	Type: Rectangular
 
 WorldViewportSizes:
@@ -519,3 +523,5 @@ ModCredits:
 
 DiscordService:
 	ApplicationId: 1269927383994077296
+
+#Include: ContentPacks|TiberianDawn/GDI/mod.yaml

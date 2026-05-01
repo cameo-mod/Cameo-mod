@@ -263,8 +263,8 @@ namespace OpenRA.Mods.CA.Traits
 			var map = self.World.Map;
 			var dangerRadius = Info.DangerScanRadius;
 
-			var columnCount = (map.MapSize.X + dangerRadius - 1) / dangerRadius;
-			var rowCount = (map.MapSize.Y + dangerRadius - 1) / dangerRadius;
+			var columnCount = (map.MapSize.Width + dangerRadius - 1) / dangerRadius;
+			var rowCount = (map.MapSize.Height + dangerRadius - 1) / dangerRadius;
 
 			var checkIndices = Exts.MakeArray(columnCount * rowCount, i => new MPos((i % columnCount) * dangerRadius + dangerRadius / 2, (i / columnCount) * dangerRadius + dangerRadius / 2).ToCPos(map));
 

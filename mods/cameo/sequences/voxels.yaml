@@ -71,7 +71,7 @@ ra2nasam:
 #
 # Yuri's Revenge
 #
-  
+
 yrbsub:
 	idle:
 
@@ -80,32 +80,32 @@ yrbsubmisl:
 
 yrcaos:
 	idle:
-    
+
 yrschd:
 	idle:
 	turret: yrschdtur
-    
+
 yrschp:
 	idle:
 	deployed: yrschd
 	turret: yrschdtur
-    
+
 yrspyp:
 	idle:
-    
+
 yrygggun:
 	idle: yryaggun
 	turret: yryaggun
-    
+
 #ycab:
 #	idle:
-#    
+#
 yrhovr:
 	idle:
 
 yryhvr:
 	idle:
-    
+
 yrbpln:
 	idle:
 
@@ -173,7 +173,7 @@ tshvr:
 
 tsstnk:
 	idle:
-	
+
 tsorca:
 	idle:
 
@@ -312,10 +312,10 @@ ts3tnk: # TODO: unused
 tsftnk: # TODO: unused
 	idle:
 
-tkmmcv:
+charv2:
 	idle:
 
-stk:
+gharv:
 	idle:
 
 #tire: # TODO: unused debris
@@ -344,3 +344,17 @@ tsprobe:
 
 tsm_emp:
 	idle:
+
+##FutureTech##
+
+futu_mbt:
+	idle: futu_mbt
+	turret: futu_mbttur
+
+futu_orion:
+	idle: futu_orion
+	turret: futu_oriontur
+
+futu_landcarr:
+	idle: futu_landcarr
+	turret:

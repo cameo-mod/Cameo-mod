@@ -1115,6 +1115,31 @@ tmpl.nuke:
 		AddExtension: False
 		Offset: 0,0
 
+td_nod_templeprime:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: td_nod_templeprime_idle.png
+		#Scale: 0.5
+		Offset: 0,0
+	idle:
+		Tick: 128
+		Length: 1
+		#Length: *
+	damaged-idle:
+		Start: 0
+	dead:
+		Start: 0
+		Tick: 512
+	make:
+		Filename: td_nod_templeprime_buildup.png
+		Length: *
+		Tick: 256
+	bib:
+		Offset: 0,-24
+	icon:
+		Filename: td_nod_templeprime_icon.png
+		Offset: 0,0
+
 obli:
 	Defaults:
 		Filename: obli.shp
@@ -2367,16 +2392,6 @@ rmbo:
 		Length: 6
 		Facings: 8
 		Scale: 2.0
-
-tsflameall:
-	idle:
-		Filename: tsflameall.shp
-		Scale: 0.5
-		Length: 19
-		#ShadowStart: 76
-		Facings: -8
-		Tick: 106
-		ZOffset: 1023
 
 bhreddragon:
 	idle:
@@ -4340,6 +4355,127 @@ cncsyrd:
 	icon:
 		Filename: gdishipyardicon.png
 
+gdirig:
+	Defaults:
+		Filename: GDIRigMobile.png
+		# Scale: 1.25
+		# Offset: 0,8
+	idle:
+		Facings: 64
+	deployed:
+		Filename: GDIRigTower.png
+		Facings: 64
+	damaged-deployed:
+		Filename: GDIRigTower.png
+		Facings: 64
+	turret:
+		Filename: GDIRigPhalanx.png
+		Facings: 64
+		Offset: 0,32
+		Scale: 1.5
+	make:
+		Filename: GDIRigMobile.png
+		Start: 64
+		Length: 11
+		Tick: 110
+	dead:
+		Filename: GDIRigMobile.png
+		Start: 70
+		Tick: 800
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	pointdefense:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	targeting:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: gdirigicon.png
+
+gdirigtower:
+	Defaults:
+		Filename: GDIRigTower.png
+		# Scale: 1.25
+		# Offset: 0,8
+	idle:
+		Facings: 64
+		# Start: 71
+		# Length: 4
+	damaged-idle:
+		Facings: 64
+		# Start: 71
+		# Length: 4
+	dead:
+		Filename: GDIRigMobile.png
+		Start: 70
+		Tick: 800
+	make:
+		Filename: GDIRigMobile.png
+		Start: 64
+		Length: 11
+		Tick: 110
+	# turret:
+	# 	Filename: GDIRigPhalanx.png
+	# 	Facings: 64
+	# 	Scale: 1.25
+	# 	Offset: 0,32
+	# railgun:
+	# 	Filename: GDIRigRailgun.png
+	# 	Facings: 64
+	# 	Scale: 1.25
+	# 	Offset: -16,32
+	# missilepod:
+	# 	Filename: GDIRigMissilePod.png
+	# 	Facings: 64
+	# 	Scale: 1.25
+	# 	Offset: 16,32
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: atwricnh.shp
+		AddExtension: False
+		Offset: 0,0
+
+gdirigdrone:
+	Defaults:
+		Filename: gdirigdrone.png
+		Offset: 0,24
+	idle:
+		Start: 8
+		Facings: 8
+		InterpolatedFacings: 32
+		Length: 8
+		Tick: 64
+	move:
+		Start: 8
+		Facings: 8
+		InterpolatedFacings: 32
+		Length: 8
+		Tick: 64
+	icon:
+		Filename: steel_scalpel_icon.shp
+	muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	muzzle2:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+		Offset: 0,0
+
 guerillatacticsicon:
 	icon:
 		Filename: guerillatacticsicon.png
@@ -4399,3 +4535,7 @@ highvelocitycannonsicon:
 lightweightarmorplatingicon:
 	icon:
 		Filename: lightweightarmorplatingicon.png
+
+havocexosuit:
+	icon:
+		Filename: havocexosuit.png

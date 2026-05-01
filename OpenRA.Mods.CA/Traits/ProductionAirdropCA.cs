@@ -187,7 +187,7 @@ namespace OpenRA.Mods.CA.Traits
 					foreach (var cargo in self.TraitsImplementing<INotifyDelivery>())
 						cargo.Delivered(self);
 
-					self.World.AddFrameEndTask(ww => DoProduction(self, producee, exit, productionType, inits));
+					self.World.AddFrameEndTask(ww => ProduceActors(self, producee, productionType, inits, exit));
 					if (info.ReadyAudio != null)
 					Game.Sound.PlayNotification(self.World.Map.Rules, self.Owner, "Speech", info.ReadyAudio, self.Owner.Faction.InternalName);
 				}));

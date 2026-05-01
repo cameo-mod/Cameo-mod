@@ -1,6 +1,7 @@
 General:
 	Name: Arrakis
 	Id: ARRAKIS
+	TileSize: 48,48
 	SheetSize: 2048
 	EditorTemplateOrder: Basic, Dune, Sand-Detail, Rock-Detail, Ice-Detail, Rock-Sand-Smooth, Sand-Sand-Cliff, Sand-Rock-Cliff, Sand-Ice-Cliff, Rock-Rock-Cliff, Rock-Sand-Cliff, Cliff-Type-Changer, Cliff-Ends, Sand-Platform, Bridge, Rotten-Base, Dead-Worm, Unidentified
 	IgnoreTileSpriteOffsets: True
@@ -58,6 +59,26 @@ Terrain:
 		TargetTypes: Ground
 		AcceptsSmudgeType: SandCrater, Scorch
 		Color: D0C0A0
+	TerrainType@RA2Copper:
+		Type: RA2Copper
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 804020
+	TerrainType@RA2Silver:
+		Type: RA2Silver
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: C0C0C0
+	TerrainType@RA2Ore:
+		Type: RA2Ore
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 808000
+	TerrainType@RA2Gems:
+		Type: RA2Gems
+		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
+		Color: 8040C0
 	TerrainType@Ore:
 		Type: Ore
 		TargetTypes: Ground

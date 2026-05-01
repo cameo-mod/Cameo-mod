@@ -689,6 +689,7 @@ zergsoilmaker2:
 		Length: *
 	icon:
 		Filename: sccreepcolonyicon.shp
+
 sccreepcolony:
 	Defaults:
 		Filename: sccreepcolony.png
@@ -722,6 +723,14 @@ scsunkencolony:
 	shoot:
 		Length: *
 		Filename: scsunkencolonyshoot.png
+	sunken:
+		Filename: scsunkencolonyidle.png
+		Length: *
+		Tick: 160
+	spore:
+		Filename: scsporecolony.png
+		Length: *
+		Tick: 160
 	dead:
 	make:
 		Filename: zergbuildingmakesmall.png
@@ -733,6 +742,14 @@ scsporecolony:
 	Defaults:
 		Filename: scsporecolony.png
 	idle:
+		Length: *
+		Tick: 160
+	sunken:
+		Filename: scsunkencolonyidle.png
+		Length: *
+		Tick: 160
+	spore:
+		Filename: scsporecolony.png
 		Length: *
 		Tick: 160
 	dead:
@@ -1597,7 +1614,7 @@ scmatador:
 		Filename: scmatadormake.png
 		Facings: -16
 		Length: 7
-		Tick: 110
+		Tick: 35
 	deployed:
 		Filename: scmatadordeployed.png
 		Facings: -32
@@ -2386,6 +2403,7 @@ scepigraph:
 sclanifect:
 	Defaults:
 		Filename: sclanifect.png
+		Scale: 1.25
 	idle:
 		Facings: -32
 	icon:
@@ -2432,6 +2450,9 @@ scidol:
 	shoot:
 		Facings: -32
 		Length: 1
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
 	icon:
 		Filename: scidolicon.png
 
@@ -2458,6 +2479,9 @@ scstarshipsovereign:
 		Filename: scstarsovereignidle.png
 	idle:
 		Facings: -32
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		Length: 14
 	icon:
 		Filename: scstarsovereignicon.png
 
@@ -3422,7 +3446,7 @@ scinfestedcommandcenter:
 	make:
 		Filename: zergbuildingmakelarge.png
 		Length: *
-	die:
+	dead:
 		Filename: scdeath.png
 		Start: 0
 		Tick: 70

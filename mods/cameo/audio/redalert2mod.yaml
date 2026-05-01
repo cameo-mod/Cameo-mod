@@ -130,7 +130,7 @@ AsianTsunamiVoice:
 AsianShipVoice:
 	DefaultVariant: .wav
 	Voices:
-		Select: , aa_ship_s1, , aa_ship_s2, , aa_ship_s3
+		Select: aa_ship_s1, , aa_ship_s2, , aa_ship_s3
 		Move: aa_ship_m1, aa_ship_m2, aa_ship_m3, aa_ship_m4, aa_ship_m6, aa_ship_m5
 		Action: aa_ship_m1, aa_ship_m2, aa_ship_m3, aa_ship_m4, aa_ship_m6, aa_ship_m5
 		Attack: aa_ship_a1, aa_ship_a2, aa_ship_a3, aa_ship_a4, aa_ship_a5
@@ -181,6 +181,18 @@ SteelEngVoice:
 		Capture: FEngiCapturea, FEngiCaptureb
 		Feedback: FEngiRetreata ,FEngiRetreatb
 		Die: FEngiDiea, FEngiDieb
+
+SteelStalkerVoice:
+	Inherits: ^InfantryDeath
+	DefaultVariant: .wav
+	VolumeModifier: 5
+	Voices:
+		Build: StalkerReporting
+		Select: StalkerSel1, StalkerSel2
+		Move: StalkerMov1, StalkerMov2
+		Action: StalkerMov1, StalkerMov2
+		Attack: StalkerAttack1, StalkerAttack2, StalkerAttack3
+		Die: StalkerDeath1, StalkerDeath2
 
 SteelAircraftVoice:
 	DefaultVariant: .wav
@@ -455,12 +467,15 @@ NaxiZombieTank:
 NaxiUbermenVoice:
 	Inherits: ^InfantryDeath
 	Voices:
-		Select: nax_gvextal3, nax_gvextsl1, nax_gvextsl2
+		Select: nax_gvextsl0, nax_gvextsl1, nax_gvextsl2
 		Move: nax_gvextsl0, nax_gvextsl1, nax_gvextsl2
 		Action: nax_gvextsl0, nax_gvextsl1, nax_gvextsl2
 		Attack: nax_gvextsl0, nax_gvextsl1, nax_gvextsl2
 		Deploy: nax_gvextsl0, nax_gvextsl1, nax_gvextsl2
+		Build: nax_gvextsl2
+		Kill: nax_gvextal3
 		Die: FEngiDiea, FEngiDieb
+
 NaxiLunarTroopVoice:
 	Inherits: ^InfantryDeath
 	Voices:
@@ -666,3 +681,65 @@ FutureCoilerVoice:
 		Action: JUStrik_movStartc
 		Attack: JUStrik_movStartc
 		Build: JUStrik_selecta
+
+FutureHarbVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: AUHarbi_voiSelecta,AUHarbi_voiSelectb,AUHarbi_voiSelectc,AUHarbi_voiSelectd,AUHarbi_voiSelecte,AUHarbi_voiSelectf,AUHarbi_voiSelectg,AUHarbi_voiSelecth
+		Move: AUHarbi_voiMovea,AUHarbi_voiMoveb,AUHarbi_voiMovec,AUHarbi_voiMoved,AUHarbi_voiMovee,AUHarbi_voiMovef,AUHarbi_voiMoveg,AUHarbi_voiMoveh,AUHarbi_voiMovei,AUHarbi_voiMovej
+		Attack: AUHarbi_voiAttacka,AUHarbi_voiAttackb,AUHarbi_voiAttackc,AUHarbi_voiAttackd,AUHarbi_voiAttacke,AUHarbi_voiAttackf
+		Action: AUHarbi_voiMvAtta,AUHarbi_voiMvAttb,AUHarbi_voiMvAttc,AUHarbi_voiMvAttd,AUHarbi_voiMvAtte,AUHarbi_voiMvAttf
+		Build: AUHarbi_voiCreatea,AUHarbi_voiCreateb
+		Die: aa_kami_die1, aa_kami_die2
+
+FutureTankVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: AUFutur_voiSelecta,AUFutur_voiSelectb,AUFutur_voiSelectc,AUFutur_voiSelectd,AUFutur_voiSelecte,AUFutur_voiSelectf
+		Move: AUFutur_voiMovea,AUFutur_voiMoveb,AUFutur_voiMovec,AUFutur_voiMoved,AUFutur_voiMovee,AUFutur_voiMovef,AUFutur_voiMoveg,AUFutur_voiMoveh
+		Attack: AUFutur_voiAttacka,AUFutur_voiAttackb,AUFutur_voiAttackc,AUFutur_voiAttackd,AUFutur_voiAttacke,AUFutur_voiAttackf
+		Action: AUFutur_voiMvAtta,AUFutur_voiMvAttb,AUFutur_voiMvAttc,AUFutur_voiMvAttd,AUFutur_voiMvAtte
+		Build: AUFutur_voiCreatea,AUFutur_voiCreateb
+
+CryoLegionnaireVoice:
+	Inherits: ^InfantryDeath
+	DefaultVariant: .wav
+	Voices:
+		Build: AUCryoL_voiCreatea, AUCryoL_voiCreateb, AUCryoL_voiCreatec
+		Select: AUCryoL_voiSelecta, AUCryoL_voiSelectb, AUCryoL_voiSelectc, AUCryoL_voiSelectd, AUCryoL_voiSelecte, AUCryoL_voiSelectf, AUCryoL_voiSelectg
+		Move: AUCryoL_voiMovea, AUCryoL_voiMoveb, AUCryoL_voiMovec, AUCryoL_voiMoved, AUCryoL_voiMovee, AUCryoL_voiMovef, AUCryoL_voiMoveg, AUCryoL_voiMoveh, AUCryoL_voiMovei, AUCryoL_voiMovej
+		Action: AUCryoL_voiMovea, AUCryoL_voiMoveb, AUCryoL_voiMovec, AUCryoL_voiMoved, AUCryoL_voiMovee, AUCryoL_voiMovef, AUCryoL_voiMoveg, AUCryoL_voiMoveh, AUCryoL_voiMovei, AUCryoL_voiMovej
+		Attack: AUCryoL_voiAttacka, AUCryoL_voiAttackb, AUCryoL_voiAttackc, AUCryoL_voiAttackd, AUCryoL_voiAttacke, AUCryoL_voiAttackf, AUCryoL_voiAttackg, AUCryoL_voiAttackh, AUCryoL_voiAttacki, AUCryoL_voiMvAtta, AUCryoL_voiMvAttb, AUCryoL_voiMvAttc, AUCryoL_voiMvAttd, AUCryoL_voiMvAtte, AUCryoL_voiMvAttf
+		Feedback: AUCryoL_voiSelUnda, AUCryoL_voiSelUndb, AUCryoL_voiSelUndc, AUCryoL_voiSelUndd
+		Die: AUCryoL_voiDiea, AUCryoL_voiDieb, AUCryoL_voiDiec, AUCryoL_voiDied, AUCryoL_voiDiee, AUCryoL_voiDief, AUCryoL_voiDieg, AUCryoL_voiDieh, AUCryoL_voiDiei
+
+BlackWidowVoice:
+	Inherits: ^InfantryDeath
+	DefaultVariant: .wav
+	Voices:
+		Build: AUTanya_VoiCreb, AUTanya_VoiCrec
+		Select: AUTanya_VoiSela, AUTanya_VoiSelc, AUTanya_VoiSeld, AUTanya_VoiSele, AUTanya_VoiSelf, AUTanya_VoiSelg, AUTanya_VoiSelh
+		Move: AUTanya_VoiMova, AUTanya_VoiMovb, AUTanya_VoiMovc, AUTanya_VoiMovd, AUTanya_VoiMove, AUTanya_VoiMovf, AUTanya_VoiMovg, AUTanya_VoiMovh, AUTanya_VoiMovi
+		Action: AUTanya_VoiMova, AUTanya_VoiMovb, AUTanya_VoiMovc, AUTanya_VoiMovd, AUTanya_VoiMove, AUTanya_VoiMovf, AUTanya_VoiMovg, AUTanya_VoiMovh, AUTanya_VoiMovi
+		Attack: AUTanya_VoiAtka, AUTanya_VoiAtkb, AUTanya_VoiAtkc, AUTanya_VoiAtkd, AUTanya_VoiAtke, AUTanya_VoiAtkf, AUTanya_VoiAtkg, AUTanya_VoiMovAtka, AUTanya_VoiMovAtkb, AUTanya_VoiMovAtkc, AUTanya_VoiMovAtkd, AUTanya_VoiMovAtke, AUTanya_VoiMovAtkf, AUTanya_VoiMovAtkg, AUTanya_VoiMovAtkh
+		Demolish: AUTanya_VoiAtkC4Ba, AUTanya_VoiAtkC4Bb, AUTanya_VoiAtkC4Bc, AUTanya_VoiAtkC4Va, AUTanya_VoiAtkC4Vb, AUTanya_VoiAtkC4Vc
+		Feedback: AUTanya_VoiHlpMea, AUTanya_VoiHlpMeb, AUTanya_VoiHlpMec, AUTanya_VoiHlpMed, AUTanya_VoiHlpMee
+		Die: AUTanya_VoiDiea, AUTanya_VoiDieb, AUTanya_VoiDiec, AUTanya_VoiDied, AUTanya_VoiDiee, AUTanya_VoiDief, AUTanya_VoiDieg, AUTanya_VoiDieh
+
+OrionTankVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: vgrasea, vgraseb, vgrasec, vgrased, vgrasee
+		Move: vgramoa, vgramob, vgramoc, vgramod, vgramoe, vgramof
+		Action: vgramoa, vgramob, vgramoc, vgramod, vgramoe, vgramof
+		Attack: vgraata, vgraatb, vgraatc, vgraatd, vgraate
+		Build: vgrasea, vgraseb, vgrasec, vgrased, vgrasee
+
+BeehiveCarrierVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: vgrasea, vgraseb, vgrasec, vgrased, vgrasee
+		Move: vgramoa, vgramob, vgramoc, vgramod, vgramoe, vgramof
+		Action: vgramoa, vgramob, vgramoc, vgramod, vgramoe, vgramof
+		Attack: vgraata, vgraatb, vgraatc, vgraatd, vgraate
+		Build: vgrasea, vgraseb, vgrasec, vgrased, vgrasee

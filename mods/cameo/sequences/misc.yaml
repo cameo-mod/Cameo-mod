@@ -408,7 +408,7 @@ resources:
 			RA_DESERT: rtib12.des
 			BARREN: rtib12.des
 	gold01:
-		Filename: gold01.shp
+		Filename: gold01.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold01.tem
@@ -430,7 +430,7 @@ resources:
 			OUTPOST2: gold01.tem
 			RA2_TEMPERAT: gold01.tem
 	gold02:
-		Filename: gold02.shp
+		Filename: gold02.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold02.tem
@@ -452,7 +452,7 @@ resources:
 			OUTPOST2: gold02.tem
 			RA2_TEMPERAT: gold02.tem
 	gold03:
-		Filename: gold03.shp
+		Filename: gold03.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold03.tem
@@ -474,7 +474,7 @@ resources:
 			OUTPOST2: gold03.tem
 			RA2_TEMPERAT: gold03.tem
 	gold04:
-		Filename: gold04.shp
+		Filename: gold04.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gold04.tem
@@ -496,7 +496,7 @@ resources:
 			OUTPOST2: gold04.tem
 			RA2_TEMPERAT: gold04.tem
 	gem01:
-		Filename: gem01.shp
+		Filename: gem01.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem01.tem
@@ -518,7 +518,7 @@ resources:
 			OUTPOST2: gem01.tem
 			RA2_TEMPERAT: gem01.tem
 	gem02:
-		Filename: gem02.shp
+		Filename: gem02.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem02.tem
@@ -540,7 +540,7 @@ resources:
 			OUTPOST2: gem02.tem
 			RA2_TEMPERAT: gem02.tem
 	gem03:
-		Filename: gem03.shp
+		Filename: gem03.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem03.tem
@@ -562,7 +562,7 @@ resources:
 			OUTPOST2: gem03.tem
 			RA2_TEMPERAT: gem03.tem
 	gem04:
-		Filename: gem04.shp
+		Filename: gem04.tem
 		Scale: 1
 		TilesetFilenames:
 			TEMPERAT: gem04.tem
@@ -2345,8 +2345,10 @@ explosion:
 		Filename: tspulsefx2.shp
 		Scale: 2
 	pulse_explosion_small:
-		Filename: genemp.shp
-		Scale: 2
+		Filename: tspulsefx2.shp
+	mobileemp_small:
+		Filename: tsmempfx.shp
+		Tick: 60
 	mobileemp:
 		Filename: tsmempfx.shp
 		Scale: 2
@@ -2629,6 +2631,9 @@ explosion:
 		Scale: 2
 	ra2nuke:
 		Filename: ra2_nukeanim.shp
+	ra2nukesmall:
+		Filename: ra2_nukeanim.shp
+		Scale: 0.5
 	ra2_nuke_ball:
 		Filename: ra2_nukeball.shp
 	demotruck_explosion:
@@ -2683,7 +2688,7 @@ explosion:
 		Scale: 0.4
 	scsiegetanksiegeexplosion:
 		Filename: scsiegetanksiegeexplosion.png
-		Frames: 0, 1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11		
+		Frames: 0, 1, 2, 3, 4, 4, 5, 5, 5, 6, 6, 6, 7, 7, 7, 8, 8, 8, 9, 9, 10, 10, 11, 11
 	scblueexplosion:
 		Filename: scblueexplosion.png
 		Length: *
@@ -2923,23 +2928,27 @@ ts_crate:
 
 xcratea:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		ZOffset: -511
 
 xcrateb:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		Start: 1
 		ZOffset: -511
 
 xcratec:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		Start: 2
 		ZOffset: -511
 
 xcrated:
 	idle:
+		Scale: 2
 		Filename: xcrate.shp
 		Start: 3
 		ZOffset: -511
@@ -3033,7 +3042,7 @@ ionsfx:
 		Offset: 0, 0
 		Start: 10
 		Alpha: 0.2
-		Length: *		
+		Length: *
 
 bomblet:
 	idle:
@@ -3093,7 +3102,10 @@ pips:
 		Offset: 9, 5
 		Frames: 1, 2, 3, 4, 5, 6, 7, 8, 9, 0
 	pip-hazmat:
-		Filename: pip-hazmat.shp
+		Filename: pip-hazmat.png
+		Offset: -3, 0
+	pip-reflectivearmor:
+		Filename: pip-reflectivearmor.png
 		Offset: -3, 0
 	tag-primary:
 		Filename: rapips.shp
@@ -3351,6 +3363,8 @@ icon:
 		Filename: invisibleitem.shp
 	xxicon:
 		Filename: invisibleitem.shp
+	supernova_missile_super_icon:
+		Filename: cameo_plymouth_supernova_missile.shp
 
 moveflsh:
 	idle:
@@ -3727,6 +3741,9 @@ litning:
 		Start: 4
 		Length: 4
 		ZOffset: 1023
+	idle:
+		Length: *
+		ZOffset: 1023
 
 litning2:
 	Defaults:
@@ -3841,6 +3858,12 @@ purple_fb3:
 purple_fb4:
 	idle:
 		Filename: purple_fb4.shp
+		Length: *
+		ZOffset: 1023
+
+blue_small_napalm:
+	idle:
+		Filename: blue_napalm1.shp
 		Length: *
 		ZOffset: 1023
 
@@ -4042,6 +4065,18 @@ hakureiring:
 	idle2:
 		Filename: hakureiring2.shp
 
+hakureiringspecial:
+	Defaults:
+		ZOffset: 1023
+		Length: *
+		IgnoreWorldTint: True
+		Filename: ra_japan_exorcistspecialattack.png
+	bullet:
+		Frames: 0, 1
+	trail:
+		Frames: 2, 3, 4, 5, 6
+		Alpha: 1, 0.85, 0.7, 0.55, 0.4
+
 hakurei_tailsman:
 	Defaults:
 		ZOffset: 1023
@@ -4072,7 +4107,7 @@ hakurei_giphy:
 		IgnoreWorldTint: True
 	idle:
 	fades:
-		Alpha: 0.1		
+		Alpha: 0.1
 
 scorch_flames:
 	large_flame:

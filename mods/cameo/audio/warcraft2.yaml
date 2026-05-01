@@ -158,6 +158,32 @@ wc2voicehumanflyingmachine:
 		Zapped: explode
 		Poisoned: explode
 
+wc2voicehighelfarcher:
+	DefaultVariant: .wav
+	VolumeModifier: 1.41
+	Voices:
+		Select: ArcherWhat1,ArcherWhat2,ArcherWhat3,ArcherWhat4,ArcherPissed2,ArcherPissed5,ArcherPissed7
+		Attack: ArcherYesAttack1,ArcherYesAttack2,ArcherYesAttack3,ArcherYesAttack4
+		Action: ArcherYes1,ArcherYes2,ArcherYes3,ArcherYes4
+		Move: ArcherYes1,ArcherYes2,ArcherYes3,ArcherYes4
+		Die: ArcherDeath1
+		Build: ArcherReady1
+		Burned: ArcherDeath1
+		Zapped: ArcherDeath1
+		Poisoned: ArcherDeath1
+
+wc2voicehumanfootman2:
+	DefaultVariant: .wav  
+	Voices:
+		Select: FootmanWhat1,FootmanWhat2,FootmanWhat3,FootmanWhat4,FootmanWarcry1
+		Attack: FootmanYesAttack1,FootmanYesAttack2,FootmanYesAttack3
+		Action: FootmanYes1,FootmanYes2,FootmanYes3,FootmanYes4
+		Move: FootmanYes1,FootmanYes2,FootmanYes3,FootmanYes4
+		Die: FootmanDeath
+		Build: FootmanReady1
+		Burned: FootmanDeath
+		Zapped: FootmanDeath
+		Poisoned: FootmanDeath
 
 ####################################################################################################
 #		ORC2 UNITS

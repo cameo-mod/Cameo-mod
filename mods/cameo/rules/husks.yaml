@@ -337,6 +337,18 @@ YAK.Husk:
 		Image: yak
 		PlayerPalette: raplayer
 
+yaktesla.Husk:
+	Inherits: YAK.Husk
+	RenderSprites:
+		Image: yaktesla
+		PlayerPalette: player_rgba
+
+yakarmored.Husk:
+	Inherits: YAK.Husk
+	RenderSprites:
+		Image: yakarmored
+		PlayerPalette: player_rgba
+
 modkami.Husk:
 	Inherits: YAK.Husk
 	RenderSprites:
@@ -421,6 +433,27 @@ HIND.Husk:
 	RenderSprites:
 		Image: hind
 		PlayerPalette: raplayer
+
+ra_kamov.Husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Hind
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 112
+	WithIdleOverlay:
+		Sequence: rotor
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra_kamov
+		PlayerPalette: player_rgba
 
 JHIND.Husk:
 	Inherits: ^LargeHelicopterHusk

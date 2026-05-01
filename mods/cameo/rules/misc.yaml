@@ -2,7 +2,6 @@
 	DuplicateUnitCrateAction:
 		ExcludedActorTypes: yrslav, angrymob1, angrymob2, angrymob3, sow_advancer, wc_o_skeleton, CITYSWAT1, CITYSWAT2, awangrymob1, awangrymob2, awangrymob3, CHITZKOI, schofficer, SCHE2, SCHE3,svsmalien1, svsmalien2, svsmalien3, svsmalien4, svsmalien5, sglaangrymob1, sglaangrymob2, dunee1mobslave, dunee3mobslave, dunee4mobslave, dunee5mobslave, sglfundamentalist1, sglfundamentalist2
 
-
 CRATE.plain:
 	Inherits: ^Crate
 	ScriptTriggers:
@@ -123,16 +122,16 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: aa_acv
 		ValidFactions: asianalliance
-	GiveBaseBuilderCrateAction@consortium:
-		SelectionShares: 0
-		NoBaseSelectionShares: 10000
-		Units: steel_qmcv
-		ValidFactions: consortium
 	GiveBaseBuilderCrateAction@syndicate:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
 		Units: latin_mcv
 		ValidFactions: syndicate
+	GiveBaseBuilderCrateAction@consortium:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: steel_qmcv
+		ValidFactions: consortium
 	GiveBaseBuilderCrateAction@naxis:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -143,6 +142,11 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: nax2_mcv
 		ValidFactions: lnaxis
+	GiveBaseBuilderCrateAction@futuretech:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: futu_mcv
+		ValidFactions: futuretech
 	GiveBaseBuilderCrateAction@ix:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
@@ -173,6 +177,11 @@ CRATE:
 		NoBaseSelectionShares: 10000
 		Units: wc2_orc_mcv
 		ValidFactions: orc2
+	GiveBaseBuilderCrateAction@tkm:
+		SelectionShares: 0
+		NoBaseSelectionShares: 10000
+		Units: tkmmcv
+		ValidFactions: tkm
 
 WWCRATE:
 	Inherits: CRATE
@@ -336,11 +345,24 @@ waypoint:
 		Categories: System
 
 fact.colorpicker:
-	Inherits: FACT.GDI
-	-Buildable:
+	Inherits: ^BaseBuilding
 	-MapEditorData:
 	RenderSprites:
 		Image: fact
+		Palette: colorpicker
+
+rafact.colorpicker:
+	Inherits: ^BaseBuilding
+	-MapEditorData:
+	RenderSprites:
+		Image: rafactcolor
+		Palette: colorpicker
+
+rafactj.colorpicker:
+	Inherits: ^BaseBuilding
+	-MapEditorData:
+	RenderSprites:
+		Image: rafactj
 		Palette: colorpicker
 
 CAMERA:
@@ -398,6 +420,12 @@ BLASTRADIUS.ioncannon:
 	WithRangeCircle:
 		Type: blast-radius
 		Range: 6000
+
+BLASTRADIUS.super:
+	Inherits: ^BlastRadiusIndicator
+	WithRangeCircle:
+		Type: blast-radius
+		Range: 12345
 
 FLARE:
 	Immobile:
@@ -581,6 +609,118 @@ MINV:
 	FireWarheadsOnDeath:
 		Weapon: ATMine
 
+ra2gmine:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Gem Driller
+	SeedsResource:
+		ResourceType: RA2Gems
+		Interval: 70
+		MaxRange: 125
+	RenderSprites:
+		Palette: ra2temperat
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: RA2Gems
+	AppearsOnMapPreview:
+		Terrain: RA2Gems
+	TerrainLightSource:
+		Range: 10000
+		Intensity: 0.1
+		RedTint: 0.2
+		GreenTint: 0.2
+		BlueTint: 0.0
+
+ra2mine:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Ore Driller
+	SeedsResource:
+		ResourceType: RA2Ore
+		Interval: 80
+		MaxRange: 150
+	RenderSprites:
+		Palette: ra2infantry
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: RA2Ore
+	AppearsOnMapPreview:
+		Terrain: RA2Ore
+	TerrainLightSource:
+		Range: 10000
+		Intensity: 0.1
+		RedTint: 0.0
+		GreenTint: 0.125
+		BlueTint: 0.25
+
+ra2smine:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Silver Driller
+	SeedsResource:
+		ResourceType: RA2Silver
+		Interval: 90
+		MaxRange: 175
+	RenderSprites:
+		Palette: ra2silverdrill
+		Image: ra2rmine
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: RA2Silver
+	AppearsOnMapPreview:
+		Terrain: RA2Silver
+	TerrainLightSource:
+		Range: 10000
+		Intensity: 0.1
+		RedTint: 0.1
+		GreenTint: 0.1
+		BlueTint: 0.1
+
+ra2cmine:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Copper Driller
+	SeedsResource:
+		ResourceType: RA2Copper
+		Interval: 100
+		MaxRange: 200
+	RenderSprites:
+		Palette: racopperdrill
+		Image: ra2rmine
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: RA2Copper
+	AppearsOnMapPreview:
+		Terrain: RA2Copper
+	TerrainLightSource:
+		Range: 10000
+		Intensity: 0.1
+		RedTint: 0.25
+		GreenTint: 0.125
+		BlueTint: 0.0
+
+MINE:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Ore Mine
+	SeedsResource:
+		ResourceType: Ore
+		Interval: 100
+		MaxRange: 200
+	RenderSprites:
+		Palette: ra_temperat
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: Ore
+	AppearsOnMapPreview:
+		Terrain: Ore
+	TerrainLightSource:
+		Range: 10000
+		Intensity: 0.1
+		RedTint: 0.2
+		GreenTint: 0.1
+		BlueTint: 0.05
+
 SPLIT2:
 	Inherits: ^TibTree
 	SeedsResource:
@@ -588,6 +728,10 @@ SPLIT2:
 		Interval: 95
 		MaxRange: 180
 	WithIdleAnimation:
+	RadarColorFromTerrain:
+		Terrain: Tiberium
+	AppearsOnMapPreview:
+		Terrain: Tiberium
 	TerrainLightSource:
 		Range: 12345
 		Intensity: 0.12345
@@ -604,6 +748,10 @@ SPLIT3:
 		Interval: 95
 		MaxRange: 180
 	WithIdleAnimation:
+	RadarColorFromTerrain:
+		Terrain: Tiberium
+	AppearsOnMapPreview:
+		Terrain: Tiberium
 	TerrainLightSource:
 		Range: 12345
 		Intensity: 0.12345
@@ -673,6 +821,28 @@ SPLITGOLD:
 		GreenTint: 0.33
 		BlueTint: 0.0
 
+GMINE:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Gem Mine
+	SeedsResource:
+		ResourceType: Gems
+		Interval: 75
+		MaxRange: 100
+	RenderSprites:
+		Palette: ra_temperat
+	-WithMakeAnimation:
+	RadarColorFromTerrain:
+		Terrain: Gems
+	AppearsOnMapPreview:
+		Terrain: Gems
+	TerrainLightSource:
+		Range: 10000
+		Intensity: 0.1
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.2
+
 SPLIT2SMALL:
 	Inherits: ^TibTree
 	RenderSprites:
@@ -684,6 +854,10 @@ SPLIT2SMALL:
 	WithIdleAnimation:
 	Tooltip:
 		Name: Small Blossom Tree
+	RadarColorFromTerrain:
+		Terrain: Tiberium
+	AppearsOnMapPreview:
+		Terrain: Tiberium
 
 SPLITBLUESMALL:
 	Inherits: ^TibTree
@@ -732,50 +906,6 @@ SPLITGOLDSMALL:
 		Terrain: GoldTiberium
 	AppearsOnMapPreview:
 		Terrain: GoldTiberium
-
-MINE:
-	Inherits@1: ^TibTree
-	Tooltip:
-		Name: Ore Mine
-	RadarColorFromTerrain:
-		Terrain: Ore
-	SeedsResource:
-		ResourceType: Ore
-		Interval: 100
-		MaxRange: 200
-	RenderSprites:
-		Palette: ra_temperat
-	-WithMakeAnimation:
-	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
-
-GMINE:
-	Inherits@1: ^TibTree
-	Tooltip:
-		Name: Gem Mine
-	RadarColorFromTerrain:
-		Terrain: Gems
-	SeedsResource:
-		ResourceType: Gems
-		Interval: 75
-		MaxRange: 100
-	RenderSprites:
-		Palette: ra_temperat
-	-WithMakeAnimation:
-	RadarColorFromTerrain:
-		Terrain: Gems
-	AppearsOnMapPreview:
-		Terrain: Gems
-	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.1
-		GreenTint: 0.05
-		BlueTint: 0.2
 
 op2_commonore_beacon_3bar:
 	Inherits@1: ^TibTree

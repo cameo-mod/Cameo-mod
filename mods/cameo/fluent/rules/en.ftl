@@ -69,6 +69,8 @@ actor-jeep =
         Strong vs Infantry
    .description2 = Scout vehicle armed with a recoilless gun.
         Strong vs Infantry, Light Vehicles, Aircraft
+   .description3 = Scout vehicle armed with a rocket launcher.
+        Strong vs Vehicles, Aircraft
    .name = Humvee
    .raname = Ranger
    .recon = Recon Ranger
@@ -168,6 +170,16 @@ power-ioncannon =
    .description = Initiate an Ion Cannon strike.
       Applies instant damage to a small area.
 
+power-clustermissile =
+   .name = Cluster Missile
+   .description = Tactical cluster missile.
+   Deals heavy damage in an area.
+
+power-chemicalmissile =
+   .name = Chemical Missile
+   .description = Tactical cluster missile with additional Tiberium-based warheads.
+   Deals heavy damage in an area and leaves harmful corrosive clouds.
+
 actor-tmpl =
    .description = Provides advanced Nod technologies.
       Can be upgraded with a missile silo.
@@ -181,8 +193,11 @@ actor-tmpl =
 power-nuke =
    .tdname = Nuclear Strike
    .raname = Atomic Bomb
+   .d2kname = Nuclear Weapon
    .description = Launches a nuclear missile.
       Applies heavy damage over a large area.
+   .d2kdescription = Launches a missile which payload releases a shockwave that devastates a large area,
+   while electro-magnetic pulse disables buildings around the target for some time.
 
 actor-gun =
    .tdname = Nod Gun Turret
@@ -1251,6 +1266,74 @@ actor-yagntc =
    .description = Provides Genetic Mutator power.
       Requires power to operate.
 
+actor-tsntwast =
+   .name = Tiberium Waste Facility
+   .description = Increases income from minerals by 25%.
+   Unlocks Chemical Missile for the Missile Silo.
+
+actor-tsntpowr =
+   .name = Power Plant
+   .description = Provides power for other structures.
+
+actor-tsntradr =
+   .name = Radar
+   .description = Provides radar.
+   Unlocks higher-tech units and buildings.
+   Requires power to operate.
+
+actor-tsgtradr =
+   .name = Radar
+   .description = Provides radar.
+   Unlocks higher-tech units and buildings.
+   Requires power to operate.
+
+actor-tscabaltech =
+   .name = Radar
+   .description = Provides CABAL advanced technologies.
+   Only one may be built at a time.
+
+actor-tscore =
+   .name = Radar
+   .description = Provides CABAL advanced technologies.
+   Provides Hunter-Seeker support power.
+
+actor-tsntmisl =
+   .name = Missile Silo
+   .description = Constructs and launches long-range missiles as support power.
+
+actor-tsgtplug =
+   .name = Upgrade Center
+   .description = Provides Hunter-Seeker and Ion Cannon support powers.
+
+actor-tsntlasr =
+   .name = Laser Turret
+   .description = Basic base defense.
+   Strong vs Ground units.
+   Cannot attack Aircraft.
+
+actor-tsntsam =
+   .name = SAM Site
+   .description = Anti-aircraft missile battery.
+   Requires power to operate.
+   Strong vs Aircraft.
+   Cannot attack Ground units.
+
+actor-tsntstlh =
+   .name = Stealth Generator
+   .description = Generates a cloaking field to hide your forces from the enemy.
+   Only one can be built at a time.
+
+actor-tsntpulsgdi =
+   .name = E.M. Pulse Cannon
+   .description = Launches electro-magnetic pulse that disables mechanical units in an area.
+   Requires power to operate.
+
+actor-tsntobel =
+   .description = Advanced base defense.
+   Requires power to operate.
+   Strong vs Ground units.
+   Cannot attack Aircraft.
+
 power-ra2spysat =
    .name = Spy Satellite
    .description = Periodically reveals the entire map.
@@ -1621,10 +1704,10 @@ actor-farasha =
 
 actor-ixprojector =
    .description =  Ultimate Ixian unit for causing chaos and distraction among enemy forces
-   Jams enemy radars and disables enemy units and buildings with an EMP beam.
-   Can make fake projections giving impression there is a larger army present.
-   Projections disappears when too far away from Projector
-   Special Abilities: Invisibility, Projections, Detector
+      Jams enemy radars and disables enemy units and buildings with an EMP beam.
+      Can make fake projections giving impression there is a larger army present.
+      Projections disappears when too far away from Projector
+      Special Abilities: Invisibility, Projections, Detector
 
 actor-d2k_munitions =
    .description = Increases firing speed of nearby units.
@@ -1653,86 +1736,84 @@ actor-oilb =
 
 upgrade-a10airstrike =
    .description = Enables the A10 Airstrike Support Power
-    Increases damage of all GDI Aircraft by 15%.
+      Increases damage of all GDI Aircraft by 15%.
 
 upgrade-longrangesensors =
    .description = Increases vision, stealth detection range
-    and accuracy of all units and defenses by 25%.
-    Increases range and damage by 5%.
+      and accuracy of all units and defenses by 25%.
+      Increases range and damage by 5%.
 
 upgrade-armorpiercingbullets =
    .description = Increases damage of all bullet based weapons by 33%.
-    while also making them more effective against tank armor.
-    Increases Minigunner and Shotgunner damage by 100%.
-    Increases GDI Sniper and A10 damage by 10%.
-    Also adds a machine gun to the Battle and Predator Tank and increases damage by 5%.
+      while also making them more effective against tank armor.
+      Increases Minigunner and Shotgunner damage by 100%.
+      Increases GDI Sniper and A10 damage by 10%.
+      Also adds a machine gun to the Battle and Predator Tank and increases damage by 5%.
 
 upgrade-heavyaircraftarmorplating =
    .description = Increases armor of Orcas, Firehawks, Chinooks and A10s by 50%.
 
 upgrade-advancedmissiletargeting =
    .description = Increases missile damage, speed and Acceleration.
-   Increases damange and range of all missile weapons by 15%.
-   Tanks increase range by 5%
-   Firehawks shoot twice the amount of missiles.
+      Increases damange and range of all missile weapons by 15%.
+      Tanks increase range by 5%
+      Firehawks shoot twice the amount of missiles.
 
 upgrade-cuttingedgeequipment =
    .description = Increases armor, damage and fire rate of all units and defenses by 10%.
-   Doubles the effect for EMP Grenadiers, Experimental Exosuits, Firehawks and Havoc.
+      Doubles the effect for EMP Grenadiers, Experimental Exosuits, Firehawks and Havoc.
 
 upgrade-highvelocitycannons =
    .description = Increases damage and range of cannons and railguns by 15%.
-   Replaces tank cannons with high velocity cannons that deal 100% more damage
-   and travel 100% faster.
+      Replaces tank cannons with high velocity cannons that deal 100% more damage
+      and travel 100% faster.
 
 upgrade-lightweightarmorplating =
    .description = TEAM UPGRADE
-   Increases armor by 20% and speed by 10% of all tanks, scout and support vehicles in your team.
+      Increases armor by 20% and speed by 10% of all tanks, scout and support vehicles in your team.
 
 upgrade-guerillatactics =
-   .description = Increases speed, range, damage and vision of all infantry,
-   scout vehicles, support vehicles, tanks, helicopters, fire support and stealth units by 5%.
-   The effect is doubled for the Stealth Tank.
+   .description = Increases Firepower of all infantry, scout vehicles, support vehicles,
+      tanks, helicopters, fire support and stealth units by 15%, Speed by 10% and Range by 5%.
+      The effect is doubled for the Stealth Tank.
 
 upgrade-tiberiuminfusion =
    .description = Gives infantry rapid regeneration and 10% more speed, fire rate and armor.
 
 upgrade-improvedartilleries =
-   .description = Increases weapon and vision range of all artillery weapons.
-      Artillery and Gun Turret: 10%
-      Specter: 15%
-      Chemical SSM Launcher: 20%
-      Ballistic Missile Submarine: 25%
+   .description = Increases Firepower and Range of all Artilleries by 25%.
+      Increases Range of Gun Turrets and the SSM by 10%.
 
 upgrade-elementalwarfare =
    .description = Increases damage of all flame and chemical weapons by 25%.
-   Increases armor of elemental warfare units by 20%
+      Increases armor of elemental warfare units by 20%
 
 upgrade-elitecapacitors =
-   .description = Increases range, damage, fire rate and vision of all laser weapons by 10%
-   Obelisks of Light increase range, damage, fire rate and vision by 15%.
+   .description = Increases fire power and fire rate of all laser weapons by 30% and range and vision by 15%.
+      Obelisks of Light increase fire power and fire rate by 60% and range and vision by 30%.
 
 upgrade-cyberneticmodifications =
    .description = Gives all infantry heavy armor platings that reduce incoming damage.
-   While the armor is active, the infantry armor type is heavy which makes them take less damage from
-   most anti infantry weapons but increased damage from anti tank weapons instead.
-   Increases Movement Speed by 20%.
+      While the armor is active, the infantry armor type is heavy which makes them take less damage from
+      most anti infantry weapons but increased damage from anti tank weapons instead.
+      Increases Movement Speed by 20%.
 
 upgrade-blackmarketupgrades =
    .description = Gives certain units new or additional weapons:
-   Minigunner: Gets a Laser Rifle.
-   Buggy Mk1 and Mk2: Adds a Flamethrower.
-   Light Tank Mk1 and Mk2: Adds a Missile Launcher.
-   Apache: Adds addtional Missile Launchers.
-   Artillery and Specter: Increases damage and spread of the warhead makes it more effective against vehicles.
-   Gun Turret and Attack Submarine: Increases damage and spread of the warhead.
+      Minigunner: Gets a Laser Rifle.
+      Buggy Mk1 and Mk2: Adds a Flamethrower.
+      Recon Bike: Adds a Point Defense Laser.
+      Light Tank Mk1 and Mk2: Adds a Missile Launcher.
+      Apache: Adds Missile Launchers.
+      Artillery and Specter: Increases damage and spread of the warhead makes it more effective against vehicles.
+      Gun Turret and Attack Submarine: Increases damage and spread of the warhead.
 
 upgrade-advancedguerillatactics =
    .description = TEAM UPGRADE
-   Increases speed, range and damage of all infantry, scouts, support vehicles and fire supports in your team
-   by 5% and gives the units higher vision.
-   For Nod it also doubles the effect for all units affected by the guerilla tactics upgrade.
-   The effect is doubled once more for the Stealth Tank.
+      Increases Firepower of all infantry, scouts, support vehicles and fire supports in your team
+      by 15%, Speed by 10% and Range by 5%
+      For Nod it also doubles the effect for all units affected by the guerilla tactics upgrade.
+      The effect is doubled once more for the Stealth Tank.
 
 upgrade-conscription =
    .description = Decreases cost and training time for all infantry Flak Tracks, BTRs and Hip Transports by 25%.
@@ -1763,11 +1844,6 @@ upgrade-experimentalteslaweaponry =
    and adds an EMP effect that will stun vehicles and buildings after several hits.
    Unlocks the "Parabombs" Support power from the Soviet Airfield.
 
-upgrade-afterburners =
-   .description = Increases damage, range and speed of Migs, Su-57s and Nuclear Bombers by 15%.
-   Unlocks the "Spyplane" Support power from the Soviet Airfield.
-   Jets also take 15% less damage.
-
 upgrade-sovietautoloaders =
    .description = Reduces the Reload Delay of Tanks, Hinds and Volkov by 40%.
 
@@ -1791,15 +1867,16 @@ upgrade-reinforcedstructures =
 
 upgrade-cryomissiles =
    .description = Adds cryo warheads to all missiles and bombs that freezes enemy units and buildings.
+   Reduces Firepower by 25%
    Each hit slows down the enemy target by 10%, increases damage taken by 10% and stacks 10 times.
    Each stack lasts 5 seconds and on 10 stacks the unit is completely disabled.
    Artillery, Bastion and Rapier Jumpjet get cryo bombs with double the cryo effect radius of effect.
 
 upgrade-lasertargetingsystems =
-   .description = Increases damage of all units and defenses by 35%
+   .description = Increases damage of all units and defenses by 25%
 
 upgrade-airsuperioritydoctrine =
-   .description = Increases damage, firerate, armor, speed, range and accuracy of aircraft and the Heavy AA Tank by 15%.
+   .description = Increases damage, rate of fire, armor, speed, range and accuracy of aircraft and the Heavy AA Tank by 15%.
 
 upgrade-chronoarmor =
    .description = After taking damage, tanks will activate a chrono field
@@ -1812,14 +1889,14 @@ upgrade-gpssatellitesupport =
    Increases accuracy, vision, detection and weapon range of all units and defenses by 10%.
 
 upgrade-bushidodiscipline =
-   .description = Increases damage, firerate, armor, speed, range and accuracy by 10% and gives self healing.
+   .description = Increases damage, rate of fire, armor, speed, range and accuracy by 10% and gives self healing.
    When wounded the effect is tripled.
 
 upgrade-waveforcebullets =
    .description = Increases range and damage of all bullets by 10% and makes them more effective against armor.
 
 upgrade-divinewindprotocol =
-   .description = Increases damage, firerate, armor, speed, range and vision of all air units by 10%
+   .description = Increases damage, rate of fire, armor and speed, of all air units by 10%
 
 upgrade-stealthsuitintegration =
    .description = All Infantry come equipped with a stealth suit, that makes them invisible when not attacking or moving.
@@ -1841,13 +1918,13 @@ upgrade-nanotechrepairs =
    Increases armor of all vehicles in your team by 10% and makes them regnerate faster.
    For Japan the effect is also applied to all aircrafts and buildings.
    Japanese Fire Support Vehicles and Tanks also get a nanodrone shield
-   for 0.2 seconds after taking damage that increases armor by 50%.
+   for 0.2 seconds after taking damage that increases armor by 20%.
 
 upgrade-wind_trap =
    .description = Increases power output of Wind Traps by 100%.
    Additionally, Wind Traps have their cost and build time reduced by 50%.
 
-upgrade-d2k_needle_guns =
+upgrade-d2k_upgrade_needleguns =
    .description = Increases damage of machine guns by 25% and range by 10%.
    Tungsten Needles are more effective against vehicles and buildings and can hit air units.
 
@@ -1861,8 +1938,8 @@ upgrade-personal_shield =
 upgrade-d2k_siege_range_upgrade =
    .description = All Tanks, Gun Turrets and Artillery gain increased range and damage.
    Gun Turret, Ix Combat Tanks and Duelist Tanks: 10% higher range and 25% more damage.
-   Ix Combat Siege: 25% higher range and 50% more damage.
-   Ix Siege Tank: 50% higher range and 100% more damage.
+   Ix Siege Tank: 25% higher range and 50% more damage.
+   Ix Combat Siege: 50% higher range and 100% more damage.
 
 upgrade-d2k_heavy_missile_upgrade =
    .description = All missile based weapons deal 20% more damage and have 20% more range.
@@ -1874,46 +1951,84 @@ upgrade-spice_sifter =
 
 upgrade-d2k_advanced_ixian_technology =
    .description = TEAM UPGRADE
-   Gives Stealth Generators to all Harvesters in your team and increases artillery damage by 25% and range by 10%.
-   For Ixians:
-   Gives shields to all vehicles and aircraft and doubles shock and storm weapon damage.
-   Stealth Generators are also given to Ix Missile Tanks and Ix Siege Tanks.
-   Infantry with Personal Shield Generators also have 50% more shield armor.
+      Gives Stealth Generators to all Harvesters in your team and increases artillery damage by 25% and range by 10%.
+      For Ixians:
+      Gives shields to all vehicles and aircraft and doubles shock and storm weapon damage.
+      Stealth Generators are also given to Ix Missile Tanks and Ix Siege Tanks.
+      Infantry with Personal Shield Generators also have 50% more shield armor.
 
 upgrade-uplatin_mili =
    .description =  Equips Militias with Molotovs.
-   Increases Militia armor by 50% and gives self healing.
-   Increases firepower and armor of all other Infantry by 25%.
+      Increases Firepower and Damage Resistance of all Infantry by 25% and gives Self Healing.
+      Doubles the effect for the Militia and gives Molotovs.
+
+upgrade-uplatin_cartelrockets =
+   .description =  Upgrades all rockets with Black Market Cartel Rockets.
+      Increases Firepower and Range of all Rocket Artilleries by 25%.
+      Gives Rusher Tanks, Smoker Tanks and APCs additional Rocket Launchers.
 
 upgrade-uplatin_ngbunk2 =
    .description = Increases garrisoned buildings range, vision and armor by 30%.
 
-upgrade-uplatin_up_tech1 =
-   .description = Enables the production of drive by cars from the Recycle Center.
-   Unlocks stolen tech upgrades in the Spy Center.
-
 upgrade-latin_up_chaingun =
    .description = Stolen Tech from Yuri:
-       Equips Militia, Buggies and Sentries with Chainguns.
-       Increases fire rate of Diablos, APCs and AA Defenders.
+      Equips different units and defenses with Chainguns.
+      Increases Rate of Fire with each shot!
+      Diablos gain 25% more Range, 25% faster Reload Delay and 50% more Firepower.
 
 upgrade-latin_up_industrial =
    .description = Stolen Tech from Soviets:
-       Reduces cost of vehicles by 20%.
-       Increases armor and speed of all vehicles by 20%
+      Reduces Cost of Vehicles by 20%.
+      Increases Damage Resistance of all Vehicles by 20%.
 
 upgrade-uplatin_alliedstolentech =
    .description = Stolen Tech from Allies:
-       Equips tanks, APCs and Narco vehicles with additional rocket launchers.
-       Freedom Fighters and Diablos disguise as trees and gain 25% higher range.
+      Increases Speed of all Vehicles by 25% and Range by 5%.
+      Freedom Fighters and Diablos disguise as trees.
 
 upgrade-latin_up_hotfire =
    .description =  Stolen Tech from Asian Alliance:
-       Increases damage, range and fire rate of Missile Trucks and Burritos by 25%.
-       Suicide Units and Flame Troopers have their damage increased by 100%.
+      Increases Firepower and Rate of Fire of all Fire Weapons by 25%.
+      Terrorists, Demo Trucks, Flame Troopers and Mortar Bikes have their Firepower increased by 100% instead.
+      Flame Troopers and Mortar Bikes also gain 10% more Range and 20% more Speed.
 
 upgrade-uplatin_cashrecover =
-   .description = Recycles lost vehicles for a cashback of 10%.
+   .description = Recycles lost vehicles for a cashback of 20%.
+
+asian_upgrade_infantryspec =
+   .description = Equips Infantry with new or additional weapons.
+      All Infantry have 5% more Damage Resistance, Fire Power and Range.
+
+asian_upgrade_pulverizer =
+   .description = Doubles the amount of bullets fired at 75% damage per shot.
+      Increases Range by 15%.
+
+asian_upgrade_phalanx =
+   .description = Increases Damage Resistance of Asian Alliance Units by 10%.
+      Increases Damage Resistance of Asian Alliance Units next to Lynx Tanks by 5% but slows them also down by 5%.
+      Stacks up to 5 times.
+      Lynx Tanks and Pelicans get an additional Machine Gun.
+
+asian_upgrade_dragonfire =
+   .description = Increases Flame and Plasma Weapon Damage by 50%.
+
+asian_upgrade_celestialpower =
+   .description = Increases Firepower and Range of Quasar Weapons and Railguns by 25%.
+      Increases EMP Effect of Quasar Weapons by 100%
+
+asian_upgrade_banzai =
+   .description = Infantry enter Banzai Mode on low health:
+      Stacks 2 Times for Heavy and Critical Damage.
+      Reduces Range by 25% but incrases Speed by 25%.
+      Increases Damage Resistance and Firepower and Rate of Fire by 25%.
+      Increases Health Regeneration.
+
+asian_team_upgrade_dragonway =
+   .description = Increases Speed, Firepower and Damage Resistance of all Units in your team by 5%.
+      Doubles the effect for 1 second after taking damage.
+
+asian_team_upgrade_diplomacy =
+   .description = Through clever diplomacy all the units in your team are 10% cheaper.
 
 upgrade-infweapon =
    .description = Increases firepower of all Terran infantry by 25%
@@ -1932,6 +2047,229 @@ upgrade-shipweapon =
 
 upgrade-shiparmor =
    .description = Increases armor of all Terran aircraft by 20%
+
+ra_doctrine_conscription =
+   .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
+      Focuses on Mass Produced Infantry:
+      All Infantry are 25% cheaper and faster to train
+      All Infantry have 10% more Firepower, Speed and Damage Resistance
+      Replaces Rifle Soldiers and Grenadiers with AK47 and Molotov Conscripts
+      Replaces Rocket Soldiers with Dragunov Anti Material Snipers
+      Replaces Flak Trucks with BTR-80s
+      Unlocks Commissar
+      Unlocks Vengeance and Men of Steel Upgrades
+
+ra_doctrine_industrialefficiency =
+   .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
+      Focuses on strong Economy and Mass Produced Vehicles and Aircraft
+      Replaces Ore Trucks with Industrial Miners
+      Replaces War Factories with Large Ore Factories (100% faster production)
+      Replaces Airfields with Large Airfields (100% faster production)
+      Unlocks Mass Production and War Economy Upgrades
+
+ra_doctrine_inferno =
+   .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
+      Focuses on Flame and Artillery Weapons
+      All Grenadiers, Mortars, Flame Weapons and Artilleries have 25% more firepower
+      and take 20% less damage
+      Replaces Rocket Soldiers with Fire Rocket Soldiers
+      Unlocks Heatray Tank
+      Unlocks Incendiary Bullets and Scorched Earth Upgrades
+
+ra_doctrine_teslatech =
+   .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
+      Focuses on Experimental Tesla Technology
+      All Tesla Weapons deal additional EMP Damage.
+      Replaces Shock Troopers with Zappers
+      Replaces Hind with Kamov
+      Unlocks Heavy Tesla Tank
+      Unlocks Tesla Arcing, Tesla Rockets and Reactor Overload Upgrades
+
+ra_doctrine_heavyarmor =
+   .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
+      Focuses on Heavy Armor and Powerful Tanks
+      All Vehicles and Aircraft have 10% additional Damage Resistance
+      Replaces Mammoth Tanks with Siege Mammoth Tanks
+      Replaces V1 Rocket Trucks with Grads
+      Replaces Replaces Migs with Su-57s
+      Unlocks Shtora Defense System Upgrade
+      Unlocks Auto Loaders, High Explosive Rockets and Stalinium Upgrades
+
+ra_doctrine_nuclearwar =
+   .description = DOCTRINE (Only One Doctrine For Each Tier Can Be Researched)
+      Focuses on High Damage and Speed.
+      All Vehicles have 10% higher Firepower and Speed
+      Replaces V2 Rocket Launcher with Nuclear V2 Rocket Launcher
+      Unlocks Kotin Nuclear Tank
+      Unlocks Unstable Isotopes, Thermonuclear Rockets and Nuclear Tank Shells Upgrades
+
+ra_upgrade_hazmatsuits =
+   .description = Infantry Armor Upgrade
+      Increases Infantry Damage Resistance by Tiberium, Radiation,
+      High Explosives, Fire, Chemicals and Nuclear Weapons by 100%.
+
+ra_upgrade_afterburners =
+   .description = Increases damage, range and speed of Migs, Su-57s and Nuclear Bombers by 15%.
+      Unlocks the "Paratroopers" Support Power from the Soviet Airfield.
+      Upgrades the "Parabombs" Support Power from the Soviet Airfield.
+      Jets also take 15% less damage.
+
+ra_upgrade_afterburners =
+   .description = Increases damage, range and speed of Migs, Su-57s and Nuclear Bombers by 15%.
+      Unlocks the "Paratroopers" Support Power from the Soviet Airfield.
+      Upgrades the "Parabombs" Support Power from the Soviet Airfield.
+      Jets also take 15% less damage.
+
+ra_upgrade_vengeance =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Doubles moral boost effect to nearby units by fallen Conscripts and Commissars.
+      Commissars gives this double effect now permanently to nearby units.
+
+ra_upgrade_menofsteel =
+   .description = Team Upgrade (Also affects units of your teammates)
+      Increases Infantry Firepower and Damage Resistance by 10%
+
+ra_upgrade_massproduction =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Reduces Cost of all Vehicles and Aircraft by 20%
+
+ra_upgrade_wareconomy =
+   .description = Team Upgrade (Also affects units of your teammates)
+      Reduces Production Cost and Time of Refineries and Harvesters by 10%.
+      Increases Income from Refineries by 10%.
+      Increases Speed of Harvesters by 10%.
+
+ra_upgrade_incendiarybullets =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Adds an additional fire warhead to all bullet based weapons.
+      Increases Firepower by 100% and gives higher area of effect.
+
+ra_upgrade_scorchedearth =
+   .description = Team Upgrade (Also affects units of your teammates)
+      Increases Firepower of all Grenadiers, Mortars, Flame Weapons and Artilleries by 25%.
+      Equips the V1 Rocket Truck and the Grad with Fire Rockets.
+
+ra_upgrade_teslaarcing =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Adds arcing effects to all Tesla Weapons.
+      Can arc up to 2 extra times for extra damage.
+      Reduces recharge delay for the Heavy Tesla Tank by 25%
+      Equips Volkov with arcing Tesla Bombs.
+
+ra_upgrade_teslarockets =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Heavy Rockets such as of the Mammoth Tank, Kamov, Mig and V2 Launcher
+      are replaced with Tesla Rockets that can arc over to other targets on explosion.
+
+ra_upgrade_reactoroverload =
+   .description = Team Upgrade (Also affects units of your teammates)
+      Doubles the Power Output of all Power Plants in your team.
+      Also doubles Power Consumption and Firepower of Soviet Tesla Coils.
+
+ra_upgrade_autoloaders =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Reduces Reload Delay of all Tanks by 40%.
+
+ra_upgrade_highexplosiverockets =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Heavy Rockets such as of the Siege Mammoth Tank, Hind, Su-57, Grad and V2 Launcher
+      are replaced with High Explosive Rockets that deal 20% more damage and have higher area of effect.
+
+ra_upgrade_stalinium =
+   .description = Team Upgrade (Also affects units of your teammates)
+      Reduces Incoming Damage of all Tanks in your team by 20%.
+
+ra_upgrade_unstableisotopes =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases Speed of all Vehicles by 20%.
+      Increases Speed of Kotin Nuclear Tanks by 40%.
+
+ra_upgrade_nuclearrockets =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Heavy Rockets such as of the Mammoth Tank, Hind, Mig and Nuclear V2 Launcher
+      are replaced with Thermonuclear Rockets that deal increased damage to heavier armor types
+      and have massively higher area of effect.
+
+ra_upgrade_nuclearshells =
+   .description = Team Upgrade (Also affects units of your teammates)
+      Increases Firepower of all Tanks in your team by 20%.
+      Equips Soviet Tanks with special shells that explode in a higher radius.
+      Equips Volkov with a Nuclear Cannon.
+      Increases Spread and Radiation Damage of the Kotin Nuclear Tank.
+
+ra_promotion_superoptics =
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Increases Infantry Vision and Stealth Detection by 20%.
+      Increases Infantry Weapon Range by 10%.
+
+ra_promotion_targetingcomputer =
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows Mammoth Tanks to use both Cannons and Missiles for all Ground and Water Targets.
+
+ra_promotion_hurricanerocketpod =
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Doubles the amount of Missiles that Hind and Kamov can fire.
+
+ordos_upgrade_shield =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Equips all vehicles and aircraft with shields.
+
+ordos_upgrade_toxin =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Infuses Infantry with powerful chemicals that permanently boost combat effectiveness.
+      Increases Rate Of Fire, Speed and Damage Resistance by 10%.
+      Chemical Weapons deal an additional 50% more damage.
+
+ordos_upgrade_contraband =
+   .description = Tech Upgrade (Only affects units of own faction)
+      Upgrades any non biological weapons with new contraband versions.
+      Increases Firepower by 25%.
+
+upgrade-seretraining =
+   .name = SERE Training
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases Damage Resistance of infantry by 25%
+      Increases Speed by 20%.
+
+upgrade-sonicweaponry =
+   .name = Sonic Weaponry
+   .description = Tech Upgrade (Only affects units of own faction)
+      Greately increases Disruptor damage
+      Equips Orcas, Vulcan Towers, Disc Throwers and the Kodiak with Sonic weapons.
+
+upgrade-tsprojectileimprovements =
+   .name = Projectile Improvements
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases Damage and Range of Enforcers, Pitbulls, Hover MLRS and SAM Towers by 20%
+
+upgrade-mechengineering =
+   .name = Mech Engineering
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases Damage Resistance of walkers by 20%.
+      Increases Speed by 25%.
+
+upgrade-railgunweaponry =
+   .name = Railgun Weaponry
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases damage for Railgun Commando and Mammoth Prototype.
+      Equips Enforcer, Titan and RPG Tower with Railgun weapons.
+
+upgrade-mechanicalreliability =
+   .name = Mechanical Reliability
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases Damage Resistance and Speed of all vehicles, tanks and aircraft by 10%.
+      Also gives them additional health regeneration of 1% per second.
+
+upgrade-ceramicarmor =
+   .name = Ceramic Armor
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases Damage Resistance of aircraft by 25%.
+      Increases Speed by 10%.
+
+upgrade-modernfirecontrolsystems =
+   .description = Team Upgrade (Also affects units of your teammates)
+      Increases Accuracy and Rate Of Fire of all vehicles in your team by 10%
+      Increases Vision, Detection and Weapon Range by 5%.
 
 template-mcv =
    .description = Deploys into another Construction Yard.
@@ -1959,6 +2297,9 @@ template-silo =
 
 template-power =
    .description = Generates power.
+
+template-advpower =
+   .description = Generates more power compared to the standard power generator.
 
 template-barracks =
    .description = Trains infantry.
@@ -2123,7 +2464,7 @@ faction-ra-random =
 faction-ra-allies =
    .name = Allies RA
    .description = Allies from Red Alert
-      Support powers: GPS, Chronosphere, Atomic Bomb
+      Support powers: GPS, Chronosphere, Chrono Vortex
 
 faction-ra-soviets =
    .name = Soviets RA
@@ -2132,8 +2473,33 @@ faction-ra-soviets =
 
 faction-ra-japan =
    .name = Japan RA
-   .description = Japan
-      Support powers: Super Bomber Airstrike
+   .description = Japan custom faction in Red Alert 1 style.
+      Support powers: Super Bomber Airstrike, Magic Orb Hailstorm
+
+faction-ts-random =
+   .name = Any
+   .description = Random faction
+      A random faction from Tiberian Sun will be chosen when the game starts.
+
+faction-ts-gdi =
+   .name = GDI TS
+   .description = GDI from Tiberian Sun
+      Support powers: Drop Pods, Ion Cannon
+
+faction-ts-nod =
+   .name = Nod TS
+   .description = Nod from Tiberian Sun
+      Support powers: Chemical Missile
+
+faction-ts-forgotten =
+   .name = Forgotten
+   .description = Forgotten from Tiberian Sun
+      Support powers: Tiberian Wildlife Rampage
+
+faction-ts-cabal =
+   .name = CABAL
+   .description = CABAL from Tiberian Sun
+      Support powers:
 
 faction-ra2-random =
    .name = Any
@@ -2159,3 +2525,144 @@ faction-ra2-modded-random =
    .name = Any
    .description = Random faction
       A random faction from Red Alert 2 Mods will be chosen when the game starts.
+
+faction-ra2-asianalliance =
+   .name = Asian Alliance
+   .description = Asian Alliance from Eagle Red Mod
+      Asian Alliance is a massive high-tech coalition of China, Japan, and Korea.
+      Acting as a unified East Asian front that has decided to pursue its own
+      technological path, independent of the Allied and Soviet blocs. They focus on
+      pulverizer, fire and high-energy plasma weaponry and Mass Infantry Deployment
+
+      Support powers: Chaos Storm, Ion Cannon
+
+faction-ra2-syndicate =
+   .name = Latin Syndicate
+   .description = Latin American Crime Syndicate with old Soviet Technology
+      The Latin Syndicate is a ruthless, criminal-industrial war machine that weaponizes attrition,
+      area denial, and the enemy's own technology. Operating from fortified bunker networks,
+      they combine "black market" Soviet surplus with ingenious scrap-based engineering to overwhelm
+      opponents through constant pressure and tactical disruption.
+
+      Support powers: Topol Strike
+
+faction-ra2-consortium =
+   .name = Steel Consortium
+   .description = Steel Consortium from Reign of Steel Mod
+      Support powers: Ion Cannon
+
+faction-ra2-naxis =
+   .name = Naxis
+   .description = Naxis custom faction in Red Alert 2 style.
+      A satirical fusion of 1940s aesthetics and over-the-top "secret weapon" tropes,
+      Naxis serves as a parody of World War II-era Germany, incorporating anachronistic
+      units from across the WWII gaming genre. They trade elegance for raw, clanking
+      industrial power and occult experimentation.
+
+      Difficulty: ©©©©
+      Early Game: ©©©©©
+      Mid Game: ©©
+      Late Game: ©©©©
+      Playstyle: Turtle
+      Strength: Bunkers, Heavy Tanks and Artillery
+      Weakness: Aircraft
+      Countered by: Heavy Armor, Map Control
+      Special Units: Ratte, Nokana
+      Special Buildings: Sausage Factory, Beer Factory
+      Team Upgrades: Blitzkrieg
+      Support powers: Revive the Undead Warriors, V1 Rocket
+
+faction-ra2-lnaxis =
+   .name = Schwarzer Mond
+   .description = Schwarzer Mond custom faction in Red Alert 2 style.
+      The Schwarzer Mond (Black Moon) is the elite, space-faring branch of the Naxis,
+      operating from secret bases on the lunar surface. They have abandoned the
+      traditional warfare of Earth for "crazy science" and the manipulation of
+      planetary forces, making them one of the most unpredictable factions in the field.
+
+      Difficulty: ©©©
+      Early Game: ©©
+      Mid Game: ©©©©©
+      Late Game: ©©©©
+      Playstyle: Timing Attack
+      Strength: Mid to Lategame Tanks and Artillery
+      Weakness: Aircraft
+      Countered by: Early Game Rush, Aircraft
+      Special Units: Parzival, Dalek, Die Glocke
+      Special Buildings: Moon Dairy Farm
+      Team Upgrades: WIP
+      Support powers: Gravity Core, Meteor Traction Beam
+
+faction-ra2-futuretech =
+   .name = FutureTech
+   .description = FutureTech: High-End Robotics and Experimental Weaponry
+
+      The secretive European defense conglomerate FutureTech pushes the boundaries of
+      ethical science to secure Allied dominance. Operating from high-security labs in
+      the Netherlands, they field an arsenal of cutting-edge robotics and experimental
+      energy weapons that excel at overwhelming the enemy at a steep cost.
+
+      Heavy investment in infrastructure is required before FutureTech's most advanced
+      units can be deployed. Their technology is among the most powerful on the battlefield,
+      but their base defenses are sparse, offering little protection without a standing army.
+
+      Difficulty: ©©©©©
+      Early Game: ©©
+      Mid Game: ©©©
+      Late Game: ©©©©©
+      Playstyle: Tech Rush
+      Strength: Late Game Offense, Robotic Units
+      Weakness: Early Game, Base Defense
+      Countered by: Early Aggression, Air Raids
+      Special Units: Future Tank, Harbinger Gunship, Cryocopter
+      Special Buildings: Hypercore, Robot Control Center
+      Support powers: Paradrop (Planned: Sigma Harmonizer, Robot Energize)
+
+faction-d2k-random =
+   .name = Any
+   .description = Random faction
+      A random faction from the Dune Universe will be chosen when the game starts.
+
+faction-d2k-ixian =
+   .name = Ixians
+   .description = Ixians from the Dune Universe
+      The enigmatic Ixians of the industrial world Ix
+      are known for their innovation, cold logic, and mastery
+      of the machine. Bending the rules of the Great Convention,
+      they often deploy experimental weaponry and mechanical
+      monstrosities that others fear to touch.
+
+      Difficulty: ©©©©
+      Early Game: ©©©
+      Mid Game: ©©©©
+      Late Game: ©©©©©
+      Playstyle: Turtle
+      Strength: Late Game Units
+      Weakness: Mobility
+      Countered by: Early Game Pressure
+      Special Units: Ixian Projector, Farasha
+      Special Buildings: Starport, Spice Sifter
+      Team Upgrades: Advanced Ixian Technology
+      Support powers: Pulse Missile
+
+faction-d2k-ordos =
+   .name = House Ordos
+   .description = House Ordos from the Dune Universe
+      The insidious Ordos of the icy planet Sigma Draconis IV
+      are known for their wealth, greed and treachery.
+      Relying heavily on mercenaries they often resort
+      to sabotage and forbidden Ixian technologies.
+      Their Strength lies in Stealth and quick hit and run tactics
+
+      Difficulty: ©©©
+      Early Game: ©©
+      Mid Game: ©©©
+      Late Game: ©©©©©
+      Playstyle: Mobility / Steamrolling
+      Strength: Late Game Units
+      Weakness: Early Game Tanks
+      Countered by: Artillery
+      Special Units: Wraith, Face Dancer
+      Special Buildings: Starport, Spice Sifter
+      Team Upgrades: WIP
+      Support powers: Saboteur, Chaos Lightning

@@ -1,0 +1,86 @@
+^1x1B:
+	Building:
+		Footprint: x
+		Dimensions: 1, 1
+	RequiresBuildableArea:
+		AreaTypes: building
+	RadarColorFromTerrain:
+		Terrain: Rock
+
+^1x2B:
+	Building:
+		Footprint: x x
+		Dimensions: 1, 2
+	RequiresBuildableArea:
+		AreaTypes: building
+	RadarColorFromTerrain:
+		Terrain: Rock
+
+^2x1B:
+	Building:
+		Footprint: xx
+		Dimensions: 2, 1
+	RequiresBuildableArea:
+		AreaTypes: building
+	RadarColorFromTerrain:
+		Terrain: Rock
+
+^2x2B:
+	Building:
+		Footprint: xx xx
+		Dimensions: 2, 2
+	RequiresBuildableArea:
+		AreaTypes: building
+	RadarColorFromTerrain:
+		Terrain: Rock
+
+^2x3B:
+	Building:
+		Footprint: xx xx xx
+		Dimensions: 2, 3
+	RequiresBuildableArea:
+		AreaTypes: building
+	RadarColorFromTerrain:
+		Terrain: Rock
+
+^3x2B:
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3, 2
+	RequiresBuildableArea:
+		AreaTypes: building
+	RadarColorFromTerrain:
+		Terrain: Rock
+
+^3x3B:
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3, 3
+	RequiresBuildableArea:
+		AreaTypes: building
+	RadarColorFromTerrain:
+		Terrain: Rock
+
+^CustomMapDebris:
+	Inherits@1: ^SpriteActor
+	RenderSprites:
+		Palette: terrain
+	WithSpriteBody:
+	AppearsOnRadar:
+	RadarColorFromTerrain:
+		Terrain: Tree
+	AlwaysVisible:
+	ScriptTriggers:
+	MapEditorData:
+		Categories: Decoration
+	Interactable:
+
+#Tools
+kinahmi:
+	Inherits@CMT: ^CustomMapDebris
+	Inherits@Size: ^2x2B
+	Building:
+		Footprint: xxxx xxxx xxxx xxxx xxxx
+		Dimensions: 4, 5
+	RadarColorFromTerrain:
+		Terrain: Rock

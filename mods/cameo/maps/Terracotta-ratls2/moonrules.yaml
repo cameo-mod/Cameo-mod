@@ -1,0 +1,66 @@
+^Palettes:
+	PaletteFromFile@terrain-desert:
+		Name: terrain
+		Tileset: desert
+		Filename: moon.pal
+		ShadowIndex: 3, 4
+	PaletteFromFile@player:
+		Name: player
+		Filename: temperat.pal
+		ShadowIndex: 4
+	PaletteFromFile@chrome:
+		Name: chrome
+		Filename: temperat.pal
+		ShadowIndex: 3
+		AllowModifiers: false
+	PaletteFromFile@cursor:
+		Name: cursor
+		Filename: temperat.pal
+		AllowModifiers: false
+		CursorPalette: true
+	PaletteFromFile@effect:
+		Name: effect
+		Filename: temperat.pal
+		ShadowIndex: 4
+	PaletteFromFile@moon:
+		Name: moon
+		Filename: moon.pal
+		ShadowIndex: 4
+	PaletteFromFile@moon2:
+		Name: moon2
+		Filename: moon2.pal
+		ShadowIndex: 4
+
+^CustomTerrain:
+	Inherits@1: ^SpriteActor
+	RenderSprites:
+		Palette: moon2
+	WithSpriteBody:
+	AppearsOnRadar:
+	RadarColorFromTerrain:
+		Terrain: Rock
+	AppearsOnMapPreview:
+		Terrain: Rock
+	AlwaysVisible:
+	ScriptTriggers:
+	MapEditorData:
+		Categories: Decoration
+	RequiresSpecificOwners:
+		ValidOwnerNames: Neutral
+
+^CustomTerrainC:
+	Inherits@1: ^SpriteActor
+	RenderSprites:
+		Palette: moon2
+	WithSpriteBody:
+	AppearsOnRadar:
+	RadarColorFromTerrain:
+		Terrain: Tree
+	AppearsOnMapPreview:
+		Terrain: Tree
+	AlwaysVisible:
+	ScriptTriggers:
+	MapEditorData:
+		Categories: Decoration
+	RequiresSpecificOwners:
+		ValidOwnerNames: Neutral

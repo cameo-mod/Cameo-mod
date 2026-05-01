@@ -166,20 +166,48 @@ Debris4:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 55
 
-80mm_O:
+OrdosCombatTankCannon:
 	Inherits: ^D2K_Cannon
-	ReloadDelay: 45
-
-80mm_OUP:
-	Inherits: ^D2K_Cannon
-	Range: 6327
-	ReloadDelay: 33
+	Range: 5783
+	ReloadDelay: 35
 	Projectile: Bullet
-		Speed: 632
+		Speed: 578
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+
+HeavyOrdosCombatTankCannon:
+	Inherits: ^D2K_Cannon
+	Range: 6000
+	ReloadDelay: 40
+	Projectile: Bullet
+		Speed: 600
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 10000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
+
+IxianCombatTankCannon:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^HeavyCannon
+	Inherits: ^D2K_Cannon
+	Range: 5555
+	ReloadDelay: 35
+	Projectile: Bullet
+		Speed: 555
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
 
 DuelistTankCannon:
 	Inherits: ^MediumFlameWeapon
@@ -189,7 +217,7 @@ DuelistTankCannon:
 	Inherits: ^HeavyCannon
 	Inherits: ^D2K_Cannon
 	Range: 7000
-	MinRange: 700
+	MinRange: 1400
 	ReloadDelay: 140
 	Report: d2khc.wav
 	Projectile: Bullet
@@ -239,76 +267,93 @@ DuelistTankCannon:
 		ExplosionPalette: effect75alpha
 
 120mm_td:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^LightChemicalWeapon
 	Inherits: ^D2K_Cannon
 	Inherits: ^TankDestroyerCannon
-	Range: 10c0
+	ReloadDelay: 72
+	Range: 8500
 	Report: d2ktd.wav
-	ReloadDelay: 85
-	Warhead@1Dam: SpreadDamage
-		Damage: 25000
+	Projectile: Bullet
+		Speed: 1700
+		Inaccuracy: 17
+		InaccuracyType: PerCellIncrement
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 14000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 7000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 14000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 7000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 14000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 7
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 14000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
 		Damage: 7
+
 120mm_cobra:
-	Inherits: ^D2K_Cannon
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
 	Inherits: ^TankDestroyerCannon
-	Range: 7c0
+	Inherits: ^D2K_Cannon
+	ReloadDelay: 80
+	Range: 7640
 	Report: KobraAttack.wav
-	ReloadDelay: 85
-	Warhead@1Dam: SpreadDamage
-		Damage: 17500
 	Projectile: Bullet
-		Speed: 260
+		Speed: 382
+		LaunchAngle: 25
 		ContrailLength: 35
 		ContrailStartWidth: 100
 		ContrailEndWidth: 25
 		ContrailStartColor: FFFF88FF
 		ContrailEndColor: FF884422
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 30000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 15
 	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 7000
+		Damage: 30000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 7
+		Damage: 15
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@Grenade: SpreadDamage
+		Damage: 30000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 15
+
 120mm_cobra_deploy:
-	Inherits@Gren: ^Grenade
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^D2K_Cannon
-	Range: 7c0
-	Report: KobraAttack.wav
-	ReloadDelay: 85
+	Inherits: 120mm_cobra
 	Projectile: Bullet
 		Speed: 225
-		Inaccuracy: 250
+		Inaccuracy: 25
 		LaunchAngle: 75
-		ContrailLength: 35
-		ContrailStartWidth: 100
-		ContrailEndWidth: 25
-		ContrailStartColor: FFFF88FF
-		ContrailEndColor: FF884422
-	Warhead@1Dam: SpreadDamage
-		Damage: 15000
-	Warhead@Grenade: SpreadDamage
-		Damage: 32000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 16000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 16
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 7000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 7
 
 120mm_python:
 	Inherits: 120mm_cobra
-	ReloadDelay: 75
-	Range: 8c0
+	ReloadDelay: 123
+	Range: 9380
 	Burst: 2
 	BurstDelays: 0
 	Projectile: Bullet
-		Speed: 285
+		Speed: 469
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
-		Duration: 35
+		Duration: 50
 		Speed: 1, 3
 		TurnRate: 1
 		Image: explosion
@@ -316,57 +361,69 @@ DuelistTankCannon:
 		Palette: alpha25
 		Weapon: AnthraxCloud
 		InvalidTargets: Water, Structure
+
 120mm_python_deploy:
-	Inherits@Gren: 120mm_cobra_deploy
-	ReloadDelay: 75
-	Range: 8c0
-	Burst: 2
-	BurstDelays: 0
+	Inherits: 120mm_python
 	Projectile: Bullet
-		Speed: 260
-		Inaccuracy: 125
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 2
-		Duration: 35
-		Speed: 1, 3
-		TurnRate: 1
-		Image: explosion
-		Sequences: green_toxins_small
-		Palette: alpha25
-		Weapon: AnthraxCloud
-		InvalidTargets: Water, Structure
+		Speed: 275
+		Inaccuracy: 25
+		LaunchAngle: 75
+
 eye_bomberguy:
-	Inherits@Gren: ^Grenade
-	Inherits: ^D2K_Cannon
-	Range: 3c0
+	Inherits: ^Grenade
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 125
+	Range: 3905
 	Report: 15-UA05.wav, 15-UA00.wav, 15-UA01.wav
-	ReloadDelay: 85
 	Projectile: Bullet
-		Speed: 100
+		Speed: 125
 		Inaccuracy: 250
 		LaunchAngle: 75
-		ContrailLength: 35
-		ContrailStartWidth: 70
+		ContrailLength: 25
+		ContrailStartWidth: 75
 		ContrailEndWidth: 25
 		ContrailStartColor: ff1b1b22
 		ContrailEndColor: ff1b1b11
 		Image: ordos_eye_bombs
 		Palette: d2keffect
-	Warhead@1Dam: SpreadDamage
-		Damage: 20000
 	Warhead@Grenade: SpreadDamage
-		Damage: 32000
+		Damage: 20000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 16000
+		Damage: 10000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 16
-	Warhead@2Smu: LeaveSmudge
-		SmudgeType: SandCrater, RockCrater
-	Warhead@3Eff: CreateEffect
+		Damage: 10
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 20000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 10
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_building
 		ImpactSounds: EXPLSML4.WAV
-		ImpactActors: false
 		ExplosionPalette: effect75alpha
+		ImpactActors: false
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 1875
 D2K70mm:
@@ -464,8 +521,8 @@ D2K_155mm:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^HeavyBomb
 	Inherits: ^D2K_Cannon
-	ReloadDelay: 75
-	Range: 9c0
+	ReloadDelay: 74
+	Range: 10000
 	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 192
@@ -475,17 +532,6 @@ D2K_155mm:
 		ContrailLength: 20
 		Image: d2k_155mm
 		Palette: d2keffect
-	Warhead@1Dam: SpreadDamage
-		Damage: 7500
-		Spread: 1c0
-		Versus:
-			None: 120
-			Wood: 140
-			Light: 110
-			Medium: 100
-			Heavy: 40
-			Concrete: 110
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@Grenade: SpreadDamage
 		Damage: 12000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -501,6 +547,10 @@ D2K_155mm:
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 12000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 6
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 5625
@@ -518,10 +568,47 @@ D2K_SiegeQuad:
 		Speed: 228
 
 D2K_155mm_turret:
-	Inherits: D2K_155mm
-	ReloadDelay: 70
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^D2K_Cannon
+	ReloadDelay: 74
+	Range: 10000
+	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 228
+		Blockable: false
+		Shadow: true
+		LaunchAngle: 62
+		ContrailLength: 20
+		Image: d2k_155mm
+		Palette: d2keffect
+	Warhead@Grenade: SpreadDamage
+		Damage: 12000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 12000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@4Concrete: DamagesConcrete
+		Damage: 5625
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_med_explosion
+		ImpactSounds: EXPLMD2.WAV
+		ExplosionPalette: effect75alpha
 
 D2K_155mm2:
 	Inherits: ^Grenade
@@ -577,6 +664,7 @@ D2K_155mm2:
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ExplosionPalette: effect75alpha
+		ImpactActors: false
 
 D2K_155mm3:
 	Inherits: ^Grenade
@@ -628,49 +716,48 @@ Dune_SiegeMortar:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^Grenade
 	Inherits: ^D2K_Cannon
-	ReloadDelay: 88
-	Range: 10828
-	MinRange: 2707
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 80
+	Range: 9920
+	MinRange: 1984
 	Report: MORTAR1.WAV
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 175
-		Inaccuracy: 750
+		Inaccuracy: 75
 		LaunchAngle: 125
 		ContrailLength: 30
 		ContrailStartWidth: 60
 		ContrailEndWidth: 15
 		ContrailStartColor: FEDCBA98
 		ContrailEndColor: 87654321
+		InaccuracyType: PerCellIncrement
+		Image: d2k_155mm
+		Palette: effect
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 10000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
+		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 5
 	Warhead@Grenade: SpreadDamage
-		Damage: 6000
+		Damage: 10000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 4000
+		Damage: 5000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 5
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 10000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLMD2.WAV
 		ExplosionPalette: effect75alpha
-80mm_O_Banshee:
-	Inherits: ^D2K_Cannon
-	ReloadDelay: 25
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1
-		Duration: 35
-		Speed: 0, 2
-		TurnRate: 1
-		Image: explosion
-		Sequences: green_toxins_small
-		Palette: alpha25
-		Weapon: AnthraxCloud
-		InvalidTargets: Water, Structure
 #############################
 #       MISSILES
 #############################
@@ -682,7 +769,7 @@ Dune_SiegeMortar:
 	Projectile: Bullet
 		Blockable: false
 		Speed: 500
-		Inaccuracy: 125
+		Inaccuracy: 25
 		InaccuracyType: PerCellIncrement
 		Image: d2k_RPG
 		Palette: d2keffect
@@ -703,8 +790,8 @@ Dune_SiegeMortar:
 ^D2KMissile:
 	Inherits: ^D2KRocket
 	ReloadDelay: 60
-	Range: 5c512
-	MinRange: 0c512
+	Range: 5500
+	MinRange: 1100
 	Projectile: Missile
 		Shadow: true
 		HorizontalRateOfTurn: 80
@@ -791,10 +878,10 @@ D2K_Rocket_Buggy:
 
 D2K_Rocket_Trooper:
 	Inherits: ^LightMissile
-	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
 	Inherits: D2K_Rocket
 	ReloadDelay: 64
-	Range: 6502
+	Range: 6185
 	Projectile: Missile
 		Acceleration: 6
 		Speed: 666
@@ -808,10 +895,10 @@ D2K_Rocket_Trooper:
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 4
-	Warhead@FlakWeapon: SpreadDamage
+	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 8000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 4
 	Warhead@HeavyMissile: SpreadDamage
@@ -860,6 +947,147 @@ D2K_Rocket_Trooper2:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 4
+
+D2K_Rocket_Trooper1:
+	Inherits: ^LightMissile
+	Inherits: ^FlakWeapon
+	Inherits: D2K_Rocket
+	ReloadDelay: 64
+	Range: 6502
+	Projectile: Missile
+		Acceleration: 6
+		Speed: 666
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+
+D2K_Rocket_Trooper_AGOnly:
+	Inherits: ^Grenade
+	Inherits: ^RailgunWeapon
+	Inherits: ^D2K_Cannon
+	ReloadDelay: 50
+	Range: 6252
+	Report: ROCKET1.WAV
+	ValidTargets: Ground, Water
+	Projectile: Missile
+		Blockable: false
+		Speed: 333
+		Inaccuracy: 11
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 5000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+
+D2K_Rocket_Trooper_AAPowered:
+	Inherits: ^LightMissile
+	Inherits: ^FlakWeapon
+	Inherits: D2K_Rocket
+	ReloadDelay: 75
+	Range: 9716
+	ValidTargets: Air
+	Projectile: Missile
+		Acceleration: 8
+		Speed: 888
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Air
+		Damage: 10000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 5
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+		Damage: 10000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 5
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Air
+		Damage: 10000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 5
+
+D2K_APC_Rocket:
+	Inherits: ^LightMissile
+	Inherits: ^MediumMissile
+	Inherits: D2K_Rocket
+	ReloadDelay: 42
+	Range: 6500
+	Projectile: Missile
+		Acceleration: 6
+		Speed: 666
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+
+D2K_APC_Rocket_AA:
+	Inherits: D2K_APC_Rocket
+	ValidTargets: Air
 
 D2K_Combat_Fleet:
 	Inherits: D2K_Rocket
@@ -995,8 +1223,8 @@ IxRailgunDroneBullet:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^RailgunWeapon
 	Inherits: ^D2K_Cannon
-	ReloadDelay: 64
-	Range: 7046
+	ReloadDelay: 24
+	Range: 6034
 	Report: bigggun1.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
@@ -1039,9 +1267,8 @@ IxRailgunDroneBullet:
 ResonanceDroneRepair:
 	Inherits: ^RepairWeapon
 	ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
-	ReloadDelay: 10
+	ReloadDelay: 5
 	Range: 4500
-	Burst: 1
 
 IxianEmpBomb:
 	Inherits: ^MediumFlameWeapon
@@ -1058,47 +1285,50 @@ IxianEmpBomb:
 		Shadow: True
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 20000
+		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 10000
+		Damage: 15000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
-		Damage: 10
+		Damage: 15
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 20000
+		Damage: 30000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
-		Damage: 10
+		Damage: 15
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 20000
-		Spread: 2000
+		Damage: 30000
+		Spread: 1500
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		InvalidTargets: Infantry
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 10000
-		Spread: 4000
+		Damage: 15000
+		Spread: 3000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		InvalidTargets: Infantry
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 10
-		Spread: 1000
+		Damage: 15
+		Spread: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+		InvalidTargets: Infantry
 	Warhead@EMPUnit: AffectsIntegrity
 		ValidTargets: Ground, Water
 		Falloff: 100, 75, 50, 25
-		Damage: 100000
-		Spread: 10000
+		Damage: 120000
+		Spread: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: mobileemp
 		ExplosionPalette: ra2unit
@@ -1130,98 +1360,124 @@ d2k_tyrant:
 			Concrete: 30
 
 DeviatorMissile:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyCannon
+	Inherits: ^MediumMissile
 	Inherits: ^D2KMissile
-	ReloadDelay: 160
-	Range: 6c512
+	ReloadDelay: 98
+	Range: 7070
 	Report: MISSLE1.WAV
-	ValidTargets: Ground
-	InvalidTargets: Structure, MCImmune
+	ValidTargets: Ground, Water, Trees, Air
+	# InvalidTargets: Structure, MCImmune
 	Projectile: Missile
-		RangeLimit: 6c0
-		Inaccuracy: 96
+		Inaccuracy: 16
 		Image: d2k_missile
 		Palette: d2keffect
 		TrailImage: deviator_trail
 		TrailPalette: deviatorgas
 		TrailUsePlayerPalette: true
-	Warhead@1Dam: SpreadDamage
-		Damage: 1000
-		Spread: 0c512
-	Warhead@3Eff: CreateEffect
-		Explosions: deviator
-		ExplosionPalette: deviatorgas
-		UsePlayerPalette: true
-	Warhead@5OwnerChange: ChangeOwner
-		Range: 512
-		Duration: 375
-		ValidTargets: Ground
-		InvalidTargets: Structure, MCImmune
-		AirThreshold: 0c0
-	Warhead@4Concrete: DamagesConcrete
-		Damage: 1000
-
-DeviatorMissile_Artillery:
-	Inherits: DeviatorMissile
-	ReloadDelay: 160
-	Burst: 3
-	BurstDelays: 25
-	Range: 9c512
-	Projectile: Missile
-		RangeLimit: 14c0
-	Warhead@5OwnerChange: ChangeOwner
-		Range: 1024
-
-Laboratory_Bioball:
-	Inherits: d2k_grenade
-	Inherits: ^LightChemicalWeapon
-	ReloadDelay: 40
-	Burst: 4
-	BurstDelays: 12
-	Range: 7000
-	MinRange: 600
-	Report: bioball_shoot.wav
-	Projectile: Bullet
-		Speed: 256
-		Blockable: false
-		LaunchAngle: 128
-		Inaccuracy: 128
-		InaccuracyType: PerCellIncrement
-		Image: d2k_grenade
-		Shadow: true
-		ContrailStartColor: 88FF4488
-		ContrailEndColor: FFFFFF44
-		ContrailStartWidth: 120
-		ContrailEndWidth: 24
-	Warhead@Grenade: SpreadDamage
+	Warhead@MediumChemicalWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
-		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@LightChemicalWeapon: SpreadDamage
-		Damage: 4000
-		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
-		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 10000
-		DamageCalculationType: ClosestTargetablePosition
-		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: deviator
 		ExplosionPalette: deviatorgas
 		UsePlayerPalette: true
 		ImpactSounds: bioball_impact.wav
 		ImpactActors: false
-	Warhead@4Concrete: DamagesConcrete
-		Damage: 1875
+	Warhead@OwnerChange: ChangeOwner
+		Range: 750
+		Duration: 75
+		AirThreshold: 0c0
+		ValidTargets: Ground, Water, Air
+		InvalidTargets: Structure, MCImmune
+		ChangeOwnerValidStances: Neutral, Enemy
+	Warhead@Concrete: DamagesConcrete
+		Damage: 1000
+
+DeviatorMissile_Artillery:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyFlameWeapon
+	Inherits: DeviatorMissile
+	ReloadDelay: 150
+	Burst: 3
+	BurstDelays: 25
+	Range: 10025
+	ValidTargets: Ground, Water
+	Projectile: Missile
+		RangeLimit: 12500
+		Inaccuracy: 125
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+	Warhead@OwnerChange: ChangeOwner
+		Range: 1250
+
+Wraith_ToxinMissiles:
+	Inherits: DeviatorMissile_Artillery
+	Range: 8370
+	ReloadDelay: 125
+	Burst: 4
+	ValidTargets: Ground, Water, Trees, Air
+	# InvalidTargets: MCImmune
+	Projectile: Missile
+		Blockable: false
+		Inaccuracy: 33
+		InaccuracyType: PerCellIncrement
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+		ContrailLength: 30
+		ContrailStartWidth: 60
+		ContrailEndWidth: 15
+		ContrailStartColor: FEDCBA98
+		ContrailEndColor: 87654321
+		TrailUsePlayerPalette: false
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
-		Duration: 25
-		Speed: 0, 2
+		Duration: 75
+		Speed: 1, 2
 		TurnRate: 1
 		Image: explosion
 		Sequences: green_toxins_small
@@ -1246,8 +1502,8 @@ Rocket.stealthAA:
 	Burst: 2
 	BurstDelays: 15
 	Report: d2k_buggy_rocket.wav
-	Range: 11c0
-	MinRange: 0c512
+	Range: 11000
+	MinRange: 2200
 	ValidTargets: Air
 	-Projectile:
 	Projectile: Missile
@@ -1292,65 +1548,6 @@ d2k_APCo.AA:
 	ReloadDelay: 175
 	Warhead@1Dam: SpreadDamage
 		Damage: 4500
-
-
-
-D2K_Rocket_Trooper_AAPowered:
-	Inherits: D2K_Rocket_Trooper
-	Range: 9999
-	ReloadDelay: 32
-	ValidTargets: Air
-	Projectile: Missile
-		Acceleration: 7
-		Speed: 888
-	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Air
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Air
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Air
-	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Air
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Air
-D2K_Rocket_Trooper_AGOnly:
-	Inherits: D2K_Rocket_Trooper2
-	ValidTargets: Ground, Water
-Wraith_ToxinMissiles:
-	Inherits: ^D2KMissile
-	Range: 8400
-	ReloadDelay: 10
-	ValidTargets: Ground, Water, Trees, Air
-	Projectile: Missile
-		Blockable: false
-		Inaccuracy: 33
-		InaccuracyType: PerCellIncrement
-		Image: d2k_RPG
-		Palette: d2keffect
-		TrailImage: bazooka_trail2
-		TrailPalette: effect75alpha
-		TrailInterval: 1
-		ContrailLength: 30
-		ContrailStartWidth: 60
-		ContrailEndWidth: 15
-		ContrailStartColor: FEDCBA98
-		ContrailEndColor: 87654321
-	Warhead@HeavyMissile: SpreadDamage
-		Damage: 12000
-	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@Cloud: SpawnSmokeParticle
-		Count: 1
-		Duration: 35
-		Speed: 0, 2
-		TurnRate: 1
-		Image: explosion
-		Sequences: green_toxins_small
-		Palette: alpha25
-		Weapon: AnthraxCloud
-		InvalidTargets: Water, Structure
 ############################
 #       OTHER
 ############################
@@ -1566,34 +1763,20 @@ facedancer_attack:
 
 contaminator_attack:
 	Inherits: ^SwordWeapon
-	ReloadDelay: 37
+	ReloadDelay: 20
 	Report: contaminator_attack_2.wav
 	Range: 2000
 	Projectile: InstantHit
 	Warhead@SwordWeapon: SpreadDamage
-		Falloff: 100, 100
-		Damage: 17500
-		Versus:
-			Shield: 125
-			None: 150
-			Flak: 120
-			Plate: 110
-			Heroic: 100
-			Scout: 60
-			Light: 55
-			Medium: 50
-			Heavy: 45
-			Superheavy: 40
-			Steel: 45
-			Concrete: 40
-			Wood: 35
+		Damage: 10000
 		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Falloff: 100, 100
-		Damage: 8500
+		Damage: 5000
+		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
-		Falloff: 100, 100
-		Damage: 10
+		Damage: 5
+		DamageTypes: Prone50Percent, TriggerProne, ContaminatorMutate
+
 LeechSpit:
 	Inherits: ^LightChemicalWeapon
 	Inherits: ^LightMissile
@@ -1648,6 +1831,20 @@ LeechSpit:
 		Explosions: sczhsplash
 	Warhead@EffectAir: CreateEffect
 		Explosions: sczhsplash
+
+LeechJump:
+	ValidTargets: TerrorDronable
+	InvalidTargets: Air
+	ReloadDelay: 30
+	Range: 3000
+	Report: vteratta.wav
+	TargetActorCenter: true
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 100000
+		ValidTargets: Infantry
+		DamageTypes: DefaultDeath, DroneInfection
+
 WormJaw:
 	ReloadDelay: 10
 	InvalidTargets: Structure
@@ -1853,7 +2050,7 @@ DeathHandCluster:
 # 		Weapon: SardaukarEliteDroppod1
 # 		Amount: 5
 # 		Delay: 75
-# 	Warhead@2: FireShrapnel
+# 	Warhead@FireShrapnel: FireShrapnel
 # 		InvalidTargets: FireImmune
 # 		Weapon: SardaukarChiefDropPod1
 # 		Amount: 1
@@ -2048,6 +2245,8 @@ D2kBuildingExplode:
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
+	Warhead@Effect: CreateEffect
+		ImpactSounds: EXPLHG1.WAV
 
 D2kBuildingExplodeH:
 	Inherits: D2kBuildingExplode
@@ -2070,16 +2269,21 @@ d2k_grenade:
 	Inherits: ^HeavyCannon
 	ReloadDelay: 60
 	Range: 6000
-	MinRange: 600
+	MinRange: 1200
 	Report: grenadepin.wav
 	Projectile: Bullet
-		Speed: 256
+		Speed: 240
 		Blockable: false
-		LaunchAngle: 128
-		Inaccuracy: 128
+		LaunchAngle: 120
+		Inaccuracy: 120
 		InaccuracyType: PerCellIncrement
 		Image: d2k_grenade
 		Shadow: true
+		ContrailLength: 12
+		ContrailStartColor: 99887766
+		ContrailEndColor: 33221100
+		ContrailStartWidth: 24
+		ContrailEndWidth: 12
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 10000
@@ -2123,29 +2327,224 @@ d2k_grenade:
 	Warhead@4Concrete: DamagesConcrete
 		Damage: 1875
 
-facedancer_grenade:
+Laboratory_Bioball:
 	Inherits: d2k_grenade
-	ReloadDelay: 100
-	MinRange: 2c0
-	Range: 6c0
-	ValidTargets: Ground, Infantry, Structure, Air, Vehicle
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 42
+	Range: 6500
+	MinRange: 1300
+	Report: bioball_shoot.wav
 	Projectile: Bullet
-		Speed: 240
-	Warhead@3Eff: CreateEffect
+		Speed: 260
+		Blockable: false
+		LaunchAngle: 130
+		Inaccuracy: 130
+		InaccuracyType: PerCellIncrement
+		Image: d2k_grenade
+		Shadow: true
+		ContrailLength: 13
+		ContrailStartColor: AACC8866
+		ContrailEndColor: 33442211
+		ContrailStartWidth: 52
+		ContrailEndWidth: 13
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: -5000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: -5000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: -5000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 6
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@MediumFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: -5000
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
+	Warhead@Effect: CreateEffect
+		Explosions: deviator
+		ExplosionPalette: deviatorgas
+		UsePlayerPalette: true
+		ImpactSounds: bioball_impact.wav
+		ImpactActors: false
+	Warhead@4Concrete: DamagesConcrete
+		Damage: 1875
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1, 2
+		Duration: 50
+		Speed: 0, 2
+		TurnRate: 1
+		Image: explosion
+		Sequences: green_toxins_small
+		Palette: alpha25
+		Weapon: AnthraxCloud
+		InvalidTargets: Water, Structure
+
+facedancer_grenade:
+	Inherits: ^LightFlameWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyCannon
+	Inherits: ^LightMissile
+	Inherits: ^MediumMissile
+	Inherits: ^D2KMissile
+	ReloadDelay: 90
+	Range: 7250
+	MinRange: 1450
+	Report: missile7.aud
+	ValidTargets: Ground, Water, Trees, Air
+	Projectile: Missile
+		Image: d2k_RPG
+		TrailImage: bazooka_trail2
+		Palette: effect
+		TrailPalette: effect
+		Speed: 250
+		Blockable: false
+		LaunchAngle: 125
+		Inaccuracy: 5
+		InaccuracyType: PerCellIncrement
+		Shadow: true
+	Warhead@LightFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+		DamageCalculationType: ClosestTargetablePosition
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: SandCrater
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLSML4.WAV
 		ImpactActors: false
-	Warhead@1Dam: SpreadDamage
-		Damage: 6500
-		Falloff: 100, 0
-		ValidTargets: Ground, Infantry, Structure, Air, Vehicle
-		Versus:
-			None: 100
-			Wood: 45
-			Light: 85
-			Medium: 75
-			Heavy: 55
-			Concrete: 30
+
 GrenDeath:
 	Warhead@EnemyDam: SpreadDamage
 		Damage: 10000
@@ -2606,10 +3005,50 @@ HMG_fremen:
 	Report: FREMODD1.WAV
 
 HMGo:
-	Inherits: HMG
-	Report: hmgo1.wav, hmgo2.wav
-	ValidTargets: Ground
-	ReloadDelay: 18
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 47
+	Burst: 4
+	BurstDelays: 2
+	Range: 4835
+	-Report:
+	StartBurstReport: hmgo1.wav, hmgo2.wav
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+
+HMGstealth:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 33
+	Burst: 4
+	BurstDelays: 2
+	Range: 4857
+	-Report:
+	StartBurstReport: hmgo1.wav, hmgo2.wav
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
 
 HMG_tleilaxu:
 	Inherits: HMG
@@ -2644,7 +3083,6 @@ RaiderGuns:
 	Burst: 4
 	BurstDelays: 2
 	Range: 6400
-	MinRange: 640
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Trees, Air
@@ -2694,7 +3132,6 @@ HMG_turret:
 	Burst: 4
 	BurstDelays: 2
 	Range: 7394
-	MinRange: 739
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Trees
@@ -2752,7 +3189,7 @@ HMG_Duelist:
 	Burst: 4
 	BurstDelays: 2
 	Range: 7000
-	MinRange: 700
+	MinRange: 1400
 	-Report:
 	Projectile: Bullet
 		-LaunchAngle:
@@ -2825,58 +3262,94 @@ HMG_Duelist_upgrade:
 		Damage: 1
 
 autogun_turret:
-	Inherits: HMG_turret
-	Range: 7c256
-	Burst: 2
-	BurstDelays: 3
-	ReloadDelay: 6
-	Report: autoguntrt.wav
-	Warhead@1Dam: SpreadDamage
-		Damage: 1250
-		Versus:
-			Wood: 50
-			Light: 60
-			Medium: 30
-			Heavy: 15
-			Concrete: 30
-
-autogun_turret_aa:
-	Inherits: autogun_turret
-	Range: 7c256
-	ValidTargets: Air
+	Inherits: ^HeavyCannon
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 22
+	Burst: 4
+	BurstDelays: 2
+	Range: 7700
+	-Report:
+	StartBurstReport: autoguntrt.wav
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Air
-		Damage: 1250
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
 
 autogun_tank:
-	Inherits: autogun_turret
-	Range: 6c0
-	Warhead@1Dam: SpreadDamage
-		Damage: 850
-		Versus:
-			Wood: 45
-			Light: 45
-			Medium: 15
-			Heavy: 5
+	Inherits: ^D2KMissile
+	Inherits: ^HeavyCannon
+	Inherits: ^HeavyAAWeapon
+	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^Chaingun
+	ReloadDelay: 24
+	Burst: 4
+	BurstDelays: 2
+	Range: 7480
+	-Report:
+	StartBurstReport: 20MMGUN1.WAV
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: effect
+		Explosions: poof
+		ImpactSounds: xplos.aud
+		ValidTargets: Ground, Water
 
 autogun_tank_small:
-	Inherits: autogun_turret
-	Range: 5c0
-	Warhead@1Dam: SpreadDamage
-		Damage: 700
-		Versus:
-			Wood: 45
-			Light: 45
-			Medium: 15
-			Heavy: 5
-
-autogun_tank_small_aa:
-	Inherits: autogun_tank_small
-	Range: 6750
-	ValidTargets: Air
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Air
-		Damage: 750
+	Inherits: autogun_tank
+	Range: 6220
 
 d2k_sardaukar_elite:
 	Inherits: autogun_turret
@@ -2930,8 +3403,8 @@ OrniGun:
 
 OrniGunC:
 	Inherits: OrniGun
-	MinRange: 2c512
-	Range: 6c0
+	Range: 6000
+	MinRange: 1200
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
@@ -3512,32 +3985,28 @@ D2K_RocketsCymek:
 
 d2kChainGun:
 	Inherits: ^Chaingun
-	Inherits: ^SmallArms
-	ReloadDelay: 3
+	ReloadDelay: 60
+	Burst: 5
+	BurstDelays: 2
+	Range: 6184
+	Report: MGUN2.WAV
+	StartBurstReport: MGUN2.WAV
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+
+d2kCarryallChainGun:
+	Inherits: ^Chaingun
+	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 1
-	Range: 4c0
+	Range: 4000
 	StartBurstReport: MGUN2.WAV
-	MinRange: 3c0
-	ValidTargets: Infantry, Vehicle, Tank, Air, Structure
-	Projectile: InstantHit
-		Blockable: false
-	Warhead@1Dam: SpreadDamage
-		Spread: 0c256
-		Damage: 1000
-		ValidTargets: Infantry, Vehicle, Tank, Air, Structure
-		Versus:
-			None: 300
-			Wood: 55
-			Light: 200
-			Medium: 75
-			Heavy: 40
-			Concrete: 30
-		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
-	Warhead@2Eff: CreateEffect
-		Explosions: piffs
-	Warhead@3Concrete: DamagesConcrete
-		Damage: 500
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
 
 PhoenixRocket:
 	Inherits: ^D2KMissile
@@ -3607,7 +4076,7 @@ d2k_air_drone:
 	Inherits: ^HeavyBomb
 	Inherits: ^D2KMissile
 	ReloadDelay: 132
-	Range: 7385
+	Range: 6500
 	Burst: 4
 	BurstDelays: 5
 	Projectile: Missile
@@ -3695,8 +4164,7 @@ d2k_air_drone_guns:
 	ReloadDelay: 28
 	Burst: 4
 	BurstDelays: 2
-	Range: 7385
-	MinRange: 738
+	Range: 6500
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
 	ValidTargets: Ground, Water, Trees, Air
@@ -3820,31 +4288,52 @@ d2k_laser_aa:
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
+
 d2k_laser_tank:
+	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^RailgunWeapon
 	Inherits: ^LaserWeapon
-	ReloadDelay: 25
-	Range: 7500
-	Burst: 5
-	BurstDelays: 0
-	StartBurstReport: LaserTankAttack.wav
-	ValidTargets: Ground
+	ReloadDelay: 55
+	Range: 7275
+	Report: LaserTankAttack.wav
+	ValidTargets: Ground, Water, Trees, Air
 	Projectile: LaserZap
-		Width: 50
+		Width: 55
 		ZOffset: 2047
-		Color: 00ffb9
+		Color: 00ffbb
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-
-d2k_laser_aa_tank:
-	Inherits: d2k_laser_tank
-	Range: 8c0
-	ValidTargets: Air
-	Warhead@1Dam: SpreadDamage
-		ValidTargets: Air
 
 d2k_laser_qafza:
 	Inherits: d2k_laser
@@ -4111,32 +4600,19 @@ d2k_basq_AA:
 
 d2k_chemgun:
 	Inherits: ^LightChemicalWeapon
-	InvalidTargets: Structure, Water
-	ReloadDelay: 60
-	Range: 5c0
+	ReloadDelay: 75
+	Range: 5177
 	Report: chemtrooper_att.wav
 	Projectile: RadBeam
-		Amplitude: 120
-		WaveLength: 360
-		Color: 8FFF00
-	Warhead@1Dam: SpreadDamage
-		Spread: 384
-		Damage: 4000
-		InvalidTargets: Structure, Wall, Husk, ToxinImmune
-		Versus:
-			None: 130
-			Light: 50
-			Medium: 25
-			Heavy: 15
-			Wood: 50
-			Concrete: 0
-		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
-	Warhead@Clear: SpreadDamage
-		Spread: 0c512
-		Damage: 5000
-		Amount: 1
-		ValidTargets: Garrisoned
-		DamageTypes: Prone100Percent, TriggerProne, DefaultDeath
+		Amplitude: 150
+		WaveLength: 300
+		Color: 88FF00
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 15
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 25
@@ -4155,7 +4631,7 @@ d2k_chemgun:
 # 		InvalidTargets: FireImmune
 # 		Weapon: DesertPhantoms
 # 		Amount: 1
-# 	Warhead@2: FireShrapnel
+# 	Warhead@FireShrapnel: FireShrapnel
 # 		InvalidTargets: FireImmune
 # 		Weapon: DesertPhantoms
 # 		Amount: 1
@@ -4517,8 +4993,8 @@ o155mm:
 ^oMissile:
 	Inherits: ^oRocket
 	ReloadDelay: 60
-	Range: 5c512
-	MinRange: 0c512
+	Range: 5500
+	MinRange: 1100
 	Projectile: Missile
 		Shadow: true
 		HorizontalRateOfTurn: 12
@@ -4632,8 +5108,8 @@ oDeviatorMissile:
 		UsePlayerPalette: true
 		-ImpactSounds:
 	Warhead@4OwnerChange: ChangeOwner
-		Range: 512
-		Duration: 375
+		Range: 750
+		Duration: 250
 		InvalidTargets: Infantry, Structure
 	Warhead@5Concrete: DamagesConcrete
 		Damage: 1000
@@ -5632,3 +6108,81 @@ PulseMissile:
 	Warhead@FlashEffect: FlashEffect
 		Duration: 20
 		FlashType: PulseWeapon
+
+MongooseRocket:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Chaingun
+	Inherits: ^FlakWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^RailgunWeapon
+	Inherits: ^MediumMissile
+	Inherits: D2K_Rocket
+	ReloadDelay: 64
+	Range: 6183
+	Report: d2k_buggy_rocket.wav
+	ValidTargets: Ground, Water, Air, Trees
+	Projectile: Missile
+		Acceleration: 6
+		Speed: 666
+		MaximumLaunchSpeed: 222
+		MinimumLaunchSpeed: 222
+		HorizontalRateOfTurn: 22
+		VerticalRateOfTurn: 22
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_rocket_explosion
+		ExplosionPalette: effect75alpha

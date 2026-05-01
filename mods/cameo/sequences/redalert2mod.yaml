@@ -832,6 +832,8 @@ aa_tankmine:
 		ZOffset: -512
 	icon:
 		Filename: aa_tankmine_icon.shp
+	icon2:
+		Filename: aa_chaomine_icon.shp
 
 aa_cgyard:
 	Defaults:
@@ -1266,6 +1268,15 @@ aa_asdf:
 	icon:
 		Filename: asdficon.png
 
+aa_commando:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: ra2_snipe.shp
+	paradrop:
+		Start: 292
+	icon:
+		Filename: asian_commando_icon.png
+
 aa_banzai:
 	Defaults:
 		Filename: aa_banzai.shp
@@ -1407,7 +1418,7 @@ aa_lynx:
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: aa_lynxicon.shp
+		Filename: asian_lynxtank_icon.png
 		AddExtension: False
 	muzzle-mg:
 		Offset: 0,0
@@ -1752,6 +1763,33 @@ aa_pelican:
 		Length: 64
 		Tick: 24
 		Start: 64
+	muzzle-mg:
+		Offset: 0,0
+		Combine:
+			0:
+				Filename: ra2_mgun-n.shp
+				Length: 6
+			1:
+				Filename: ra2_mgun-nw.shp
+				Length: 6
+			2:
+				Filename: ra2_mgun-w.shp
+				Length: 6
+			3:
+				Filename: ra2_mgun-sw.shp
+				Length: 3
+			4:
+				Filename: ra2_mgun-s.shp
+				Length: 6
+			5:
+				Filename: ra2_mgun-se.shp
+				Length: 6
+			6:
+				Filename: ra2_mgun-e.shp
+				Length: 6
+			7:
+				Filename: ra2_mgun-ne.shp
+				Length: 6
 	icon:
 		Filename: aa_pelicanicon.shp
 
@@ -1884,6 +1922,38 @@ aa_mlrs:
 		Filename: aa_mlrs_icon.shp
 		AddExtension: False
 
+asian_upgrade_infantryspec:
+	icon:
+		Filename: asian_upgrade_infantryspec_icon.png
+
+asian_upgrade_pulverizer:
+	icon:
+		Filename: asian_upgrade_pulverizer_icon.png
+
+asian_upgrade_phalanx:
+	icon:
+		Filename: asian_upgrade_phalanx_icon.png
+
+asian_upgrade_dragonfire:
+	icon:
+		Filename: asian_upgrade_dragonfire_icon.png
+
+asian_upgrade_celestialpower:
+	icon:
+		Filename: asian_upgrade_celestialpower_icon.png
+
+asian_upgrade_banzai:
+	icon:
+		Filename: asian_upgrade_banzai_icon.png
+
+asian_team_upgrade_dragonway:
+	icon:
+		Filename: asian_team_upgrade_dragonway_icon.png
+
+asian_team_upgrade_diplomacy:
+	icon:
+		Filename: asian_team_upgrade_diplomacy_icon.png
+
 ##############################################
 #   Red Alert 2 Latin Buildings
 ##############################################
@@ -1939,7 +2009,7 @@ latin_cgcnst:
 	dead:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: ra2radaricon.shp
+		Filename: latinconyardicon.png
 		Offset: 0,0
 
 latin_cgpow:
@@ -2627,7 +2697,7 @@ latin_aatur:
 		Facings: 32
 		ShadowStart: 32
 	icon:
-		Filename: latin_sentrygun2_icon.shp
+		Filename: latinaadefendericon.png
 		Offset: 0,0
 
 latin_cgyard:
@@ -2706,6 +2776,28 @@ latin_ltnk:
 		Offset: 0,5
 	icon:
 		Filename: latin_ltnk_icon.shp
+		AddExtension: False
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+latin_tortuga:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Scale: 0.8
+	idle:
+		Filename: latin_tortuga.png
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Filename: latin_tortuga.png
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: latin_tortuga_icon.png
 		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -3201,6 +3293,20 @@ latin_sub:
 		Length: *
 	icon:
 		Filename: latin_sub_icon.shp
+latin_rammax:
+	idle:
+		Filename: latin_rammax.png
+		Scale: 0.5
+		Facings: 64
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	icon:
+		Filename: latin_rammax_icon.png
+
+uplatin_cartelrockets:
+	icon:
+		Filename: latin_cartelrockets_icon.png
 
 latin_up_tech1:
 	icon:
@@ -3265,6 +3371,8 @@ latin_monkey:
 steel_qabarr:
 	Defaults:
 		Offset: 16,-10
+		Tick: 50
+		Scale: 1.0
 	idle:
 		Filename: steel_qabarr.shp
 	damaged-idle:
@@ -3289,7 +3397,8 @@ steel_qabarr:
 
 steel_qapowr:
 	Defaults:
-		Offset: 0,-2
+		Offset: 0,-4
+		Tick: 50
 	idle:
 		Filename: steel_qapowr.shp
 		ShadowStart: 2
@@ -3325,6 +3434,7 @@ steel_qapowr:
 steel_qref:
 	Defaults:
 		Offset: 1,-12
+		Tick: 50
 	idle:
 		Filename: steel_qref.shp
 		ShadowStart: 2
@@ -3374,6 +3484,7 @@ steel_qref:
 steel_qtradr:
 	Defaults:
 		Offset: 0,-8
+		Tick: 50
 	idle:
 		Filename: steel_qtradr.shp
 		ShadowStart: 2
@@ -3388,13 +3499,13 @@ steel_qtradr:
 		Filename: steel_qtradr_a.shp
 		ShadowStart: 20
 		Length: 10
-		Tick: 150
+		Tick: 100
 	damaged-idle-dish:
 		Filename: steel_qtradr_a.shp
 		Start: 10
 		ShadowStart: 30
 		Length: 10
-		Tick: 150
+		Tick: 100
 	make:
 		Filename: steel_qtradr_make.shp
 		Length: 25
@@ -3411,7 +3522,8 @@ steel_qtradr:
 
 steel_qaclone:
 	Defaults:
-		Offset: -2,2
+		Offset: -16,-20
+		Tick: 50
 	idle:
 		Filename: steel_qaclone.shp
 		ShadowStart: 2
@@ -3476,15 +3588,16 @@ steel_qacst:
 	dead:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: ra2radaricon.shp
+		Filename: steelconyardicon.png
 		Offset: 0,0
 	iconw:
-		Filename: ra2radaricon.shp
+		Filename: steelconyardicon.png
 		Offset: 0,0
 
 steel_qaweap:
 	Defaults:
 		Offset: -20,-26
+		Tick: 50
 	idle:
 		Filename: steel_qaweap.shp
 		ZOffset: -1536
@@ -3570,7 +3683,8 @@ steel_qaweap:
 
 steel_qatech:
 	Defaults:
-		Offset: -8,-14
+		Offset: -8,-8
+		Tick: 50
 	idle:
 		Filename: steel_qatech.shp
 		ShadowStart: 2
@@ -3582,10 +3696,12 @@ steel_qatech:
 		Filename: steel_qatech_a.shp
 		Length: 11
 		ShadowStart: 22
-	damaged-idle-ights:
+		Tick: 100
+	damaged-idle-lights:
 		Filename: steel_qatech_a.shp
 		Length: 11
 		ShadowStart: 33
+		Tick: 100
 	make:
 		Filename: steel_qatech_make.shp
 		Length: 31
@@ -3605,7 +3721,9 @@ steel_qatech:
 
 steel_qaorbit:
 	Defaults:
-		Offset: 8,-14
+		Offset: -8,-20
+		Scale: 1
+		Tick: 50
 	idle:
 		Filename: steel_qaorbit.shp
 		ShadowStart: 2
@@ -3617,11 +3735,13 @@ steel_qaorbit:
 		Filename: steel_qaorbit_a.shp
 		Length: 10
 		ShadowStart: 20
-	damaged-idle-ights:
+		Tick: 100
+	damaged-idle-lights:
 		Filename: steel_qaorbit_a.shp
 		Start: 10
 		Length: 10
 		ShadowStart: 30
+		Tick: 100
 	make:
 		Filename: steel_qaorbit_make.shp
 		Length: 18
@@ -3642,7 +3762,7 @@ steel_qaorbit:
 steel_fedturret:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Offset: 0,0
+		Offset: 0,-4
 	idle:
 		Filename: steel_fedturret.shp
 	damaged-idle:
@@ -3667,7 +3787,7 @@ steel_fedturret:
 
 steel_fedaa:
 	Defaults:
-		Offset: 0,2
+		Offset: 0,-6
 	idle:
 		Filename: steel_fedaa.shp
 	damaged-idle:
@@ -3696,7 +3816,8 @@ steel_fedaa:
 
 steel_qcannon:
 	Defaults:
-		Offset: 0,-16
+		Offset: -4,-20
+		Scale: 1.25
 	idle:
 		Filename: steel_qcannon.shp
 		ShadowStart: 2
@@ -3753,7 +3874,7 @@ steel_bfg10k:
 steel_conpad:
 	Defaults:
 		Offset: 2,-10 #12
-		Scale: 2
+		Scale: 1.5
 	idle:
 		Filename: steel_conpad.shp
 		Length: 1
@@ -3805,7 +3926,7 @@ steel_qoil:
 	Defaults:
 		Filename: steel_qoil.shp
 		Offset: -5, 5
-		Scale: 2
+		Scale: 1.0
 	idle:
 		Filename: invisibleitem.shp
 	damaged-idle:
@@ -3879,6 +4000,9 @@ explosion:
 		ZOffset: 2046
 	steel_ionexplosionsmall:
 		Filename: steel_ionexplosionsmall.shp
+	steel_empressstationbeam:
+		Filename: EmpressStationBeam.png
+		Tick: 24
 	nax_corr_ex:
 		Filename: nax_corr_ex.shp
 	nax_corr_frag:
@@ -4233,9 +4357,6 @@ steel_mako:
 	muzzle:
 		Filename: steel_energymuzzle.shp
 		Length: 14
-	muzzle-2:
-		Filename: steel_energymuzzle.shp
-		Length: 14
 
 steel_manta:
 	Defaults:
@@ -4445,6 +4566,28 @@ steel_mega:
 		Filename: steel_mega_icon.shp
 		Offset: 0,0
 
+steel_stalker:
+	Defaults:
+		Filename: steel_stalker.png
+		Offset: 0,4
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 7
+		Facings: 8
+		Tick: 70
+	shoot:
+		Start: 64
+		Length: 7
+		Facings: 8
+		Tick: 70
+	icon:
+		Filename: steel_stalker_icon.png
+		Offset: 0,0
+
 steel_beholder:
 	Defaults:
 		Filename: steel_beholder.shp
@@ -4473,6 +4616,55 @@ steel_beholder:
 		ShadowStart: 680
 	icon:
 		Filename: steel_beholder_icon.shp
+		Offset: 0,0
+
+white_rabbit:
+	Defaults:
+		Filename: white_rabbit.shp
+		Offset: 0,36
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Facings: 16
+	run:
+		Start: 16
+		Length: 10
+		Facings: 8
+		Tick: 80
+	shoot:
+		Start: 256
+		Length: 10
+		Facings: 16
+		Tick: 32
+	idle1:
+		Start: 96
+		Length: 20
+		Tick: 120
+	idle2:
+		Start: 116
+		Length: 20
+		Tick: 120
+	idle3:
+		Start: 136
+		Length: 20
+		Tick: 120
+	die1:
+		Start: 156
+		Length: 20
+	die2:
+		Start: 176
+		Length: 20
+	die3:
+		Start: 196
+		Length: 20
+	die4:
+		Start: 216
+		Length: 20
+	die5:
+		Start: 236
+		Length: 20
+	icon:
+		Filename: white_rabbit_icon.png
 		Offset: 0,0
 
 steel_potnk:
@@ -4508,6 +4700,9 @@ steel_inspect:
 		Length: 32
 	move:
 		Length: 32
+	muzzle:
+		Filename: EmpressStationMuzzle.png
+		Length: *
 	icon:
 		Filename: steel_inspect_icon.shp
 		AddExtension: False
@@ -4798,7 +4993,7 @@ nax2_conyard:
 		Filename: nax2_conyard.shp
 		Start: 63
 	icon:
-		Filename: nax_conyard_icon.png
+		Filename: lunarnaxisconyard.png
 		Offset: 0,0
 
 nax_weap:
@@ -5708,6 +5903,15 @@ nax2_parv:
 	icon:
 		Filename: nax_parzival_icon.png
 
+nax2_dalek:
+	Defaults:
+		Filename: nax2_dalek.png
+	idle:
+		Facings: 64
+		Offset: 0, 24
+	icon:
+		Filename: naxdalekicon.png
+
 nax_mcv:
 	Defaults:
 		Filename: nax_mcv.shp
@@ -6091,15 +6295,15 @@ nax2_crystal:
 		Filename: invisibleitem.shp
 	turret:
 		Facings: 64
-	icon:
-		Filename: nax_jagdpanzer_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
 	muzzle-2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
+	icon:
+		Filename: naxcrystaltankicon.png
+		AddExtension: False
 
 nax_gravity:
 	Inherits: ^RA2CannonMuzzle
@@ -6365,6 +6569,7 @@ nax_eng:
 	icon:
 		Filename: nax_engitruk_icon.png
 		AddExtension: False
+		Offset: 0, 0
 
 nax_me262:
 	Defaults:
@@ -6431,7 +6636,7 @@ nax2_zep:
 		Facings: 64
 		Offset: 0,0
 	icon:
-		Filename: nax_zep_icon.png
+		Filename: naxspacezeppelinicon.png
 		AddExtension: False
 
 nax_horten:
@@ -6440,12 +6645,12 @@ nax_horten:
 		Scale: 1
 	idle:
 		Facings: 64
-		Offset: 0,32
+		Offset: 0,0
 	move:
 		Facings: 64
-		Offset: 0,32
+		Offset: 0,0
 	icon:
-		Filename: nax_zep_icon.png
+		Filename: nax_horten_icon.png
 		AddExtension: False
 
 nax_cplane:
@@ -7149,7 +7354,7 @@ nax2_lasert:
 		Start: 64
 		Facings: 64
 	icon:
-		Filename: nax2_beetle_icon.png
+		Filename: naxlasertankicon.png
 		AddExtension: False
 		Offset: 0,0
 
@@ -7354,9 +7559,108 @@ nax2_bbomb:
 		Filename: nax_piercer_icon.png
 		AddExtension: False
 
+nax_conehead:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_conehead.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: nax_conehead_icon.png
+nax_conehead2:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_conehead2.png
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: nax_conehead2_icon.png
+
 ##############################################
 #   Red Alert 2 Upgrades
 ##############################################
+
+ostfrontexperienceicon:
+	icon:
+		Filename: ostfrontexperienceicon.png
+
+atlantikwallicon:
+	icon:
+		Filename: atlantikwallicon.png
+
+tankarsenalrenovationicon:
+	icon:
+		Filename: tankarsenalrenovationicon.png
+
+massopticsintegrationicon:
+	icon:
+		Filename: massopticsintegrationicon.png
+
+wunderwaffeicon:
+	icon:
+		Filename: wunderwaffeicon.png
+
+blitzkriegicon:
+	icon:
+		Filename: blitzkriegicon.png
 
 upnax2_ylaser:
 	icon:
@@ -7375,23 +7679,15 @@ futu_mcv:
 	idle:
 		Facings: 64
 	icon:
-		Filename: ra2amcvicon.shp
+		Filename: futu_mcvicon.png
 		AddExtension: False
 
 futu_egcnst:
 	Defaults:
-		Offset: 2,-26
+		Offset: 2,-40
 	idle:
 		Filename: futu_egcnst.shp
 		ShadowStart: 2
-	make:
-		Filename: futu_egcnstmk.shp
-		Length: 31
-		ShadowStart: 31
-	dead:
-		Filename: futu_egcnst.shp
-	build:
-		Filename: invisibleitem.shp
 	damaged-idle:
 		Filename: futu_egcnst.shp
 		Start: 1
@@ -7412,18 +7708,22 @@ futu_egcnst:
 		Filename: futu_egcnst_working.shp
 		Length: 42
 		Tick: 100
+	make:
+		Filename: futu_egcnstmk.shp
+		Length: 41
+		ShadowStart: 41
+	build:
+		Filename: invisibleitem.shp
 	dead:
 		Filename: futu_egcnst.shp
-		Length: 1
 		ShadowStart: 3
-		Tick: 90
 	icon:
-		Filename: ra2ayardicon.shp
+		Filename: futu_conyardicon.png
 		Offset: 0,0
 
 futu_ggpowr:
 	Defaults:
-		Offset: 0,-2
+		Offset: 0,-16
 	idle:
 		Filename: futu_ggpowr.shp
 		ShadowStart: 3
@@ -7450,13 +7750,12 @@ futu_ggpowr:
 		Filename: futu_ggpowr.shp
 		Start: 1
 	icon:
-		Filename: futu_powricon.shp
-		AddExtension: False
+		Filename: futu_reactoricon.png
 		Offset: 0,0
 
 futu_egpile:
 	Defaults:
-		Offset: -15,10
+		Offset: 10,-10
 	build:
 		Filename: invisibleitem.shp
 	idle:
@@ -7505,11 +7804,12 @@ futu_egpile:
 		Start: 1
 		ShadowStart: 3
 	icon:
-		Filename: ra2abrk.shp
+		Filename: futu_troopgateicon.png
 		Offset: 0,0
+
 futu_egweap2:
 	Defaults:
-		Offset: -18,-28
+		Offset: -24,-36
 	idle:
 		Filename: futu_egweap2.shp
 		ShadowStart: 2
@@ -7566,7 +7866,8 @@ futu_egweap2:
 	overlay-fan:
 		Filename: futu_egweap2_c.shp
 		Length: 24
-		ZOffset: -512
+		ZOffset: 0
+		ShadowStart: -1
 	make:
 		Filename: futu_egweap2mk.shp
 		Length: 58
@@ -7575,9 +7876,6 @@ futu_egweap2:
 		Filename: futu_egweap2.shp
 		Start: 1
 		ZOffset: -1024
-	icon:
-		Filename: ra2afacticon.shp
-		Offset: 0,0
 	idle-tele:
 		Combine:
 			0:
@@ -7602,10 +7900,73 @@ futu_egweap2:
 				Filename: invisibleitem.shp
 				Length: 1
 		Length: 34
+	icon:
+		Filename: futu_warpgateicon.png
+		Offset: 0,0
+
+futu_launchpad:
+	Defaults:
+		Offset: -32,-48 #12
+	idle:
+		Filename: futu_ggairc.shp
+		Length: 1
+		ShadowStart: 2
+	damaged-idle:
+		Filename: futu_ggairc.shp
+		Start: 1
+		Length: 1
+		ShadowStart: 3
+	# idle-top:
+	# 	Filename: futu_ggairc_c.shp
+	# 	Length: 16
+	# 	ShadowStart: 16
+	# 	Tick: 150
+	idle-bottom:
+		Filename: futu_ggaircbb.shp
+		Length: 1
+		ShadowStart: 2
+		ZOffset: -1c512
+	damaged-idle-bottom:
+		Filename: futu_ggaircbb.shp
+		Start: 1
+		Length: 1
+		ShadowStart: 3
+		ZOffset: -1c512
+	idle-dish:
+		Filename: futu_ggairc_a.shp
+		Length: *
+		Tick: 34
+	damaged-idle-dish:
+		Filename: futu_ggairc_a.shp
+		Length: 1
+	idle-mid:
+		Filename: futu_ggairc_b.shp
+		Length: *
+		Tick: 62
+		ZOffset: -1c512
+	damaged-idle-mid:
+		Filename: futu_ggairc_b.shp
+		Length: 1
+		ZOffset: -1c512
+	make:
+		Filename: futu_gtaircmk.shp
+		Length: 62
+		ShadowStart: 62
+	dead:
+		Filename: futu_ggairc.shp
+		Start: 1
+		Length: 1
+		ShadowStart: 3
+	icon:
+		Filename: futu_launchpadicon.png
+		Offset: 0,0
+	icon2:
+		Filename: ra2_p_airborne.shp
+		Offset: 0,0
 
 futu_egtf:
 	Defaults:
-		Offset: -15,10
+		Offset: -4,16
 	build:
 		Filename: invisibleitem.shp
 	idle:
@@ -7648,7 +8009,7 @@ futu_egtf:
 		Start: 1
 		ShadowStart: 3
 	icon:
-		Filename: ra2abrk.shp
+		Filename: futu_transmissioncentericon.png
 		Offset: 0,0
 
 futu_egrefn:
@@ -7690,12 +8051,12 @@ futu_egrefn:
 	docking-overlay:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: ra2areficon.shp
+		Filename: futu_refineryicon.png
 		Offset: 0,0
 
 futu_egtech:
 	Defaults:
-		Offset: -8,-14
+		Offset: -12,4
 	idle:
 		Filename: futu_egtech.shp
 		ShadowStart: 2
@@ -7723,14 +8084,12 @@ futu_egtech:
 		Filename: futu_egtech.shp
 		Start: 1
 	icon:
-		Filename: ra2atekicon.shp
+		Filename: futu_battlelabicon.png
 		Offset: 0,0
-
-
 
 futu_egshock:
 	Defaults:
-		Offset: -10,-15
+		Offset: -8,-32
 	idle:
 		Filename: futu_egshock.shp
 		ShadowStart: 2
@@ -7771,13 +8130,13 @@ futu_egshock:
 		Start: 1
 		ShadowStart: 3
 	icon:
-		Filename: ra2nanrcticon.shp
+		Filename: futu_shockcentericon.png
 		Offset: 0,0
 
 futu_gggun:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Offset: 0,2
+		Offset: 0,-4
 	idle:
 		Filename: futu_GGGUN.shp
 		ShadowStart: 3
@@ -7800,29 +8159,165 @@ futu_gggun:
 	icon:
 		Filename: futu_gggun_icon.png
 		Offset: 0,0
+
 futu_ggmlt:
-	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Offset: 0,2
+		Offset: 0,-4
 	idle:
-		Filename: invisibleitem.shp
+		Filename: futu_ggmltgtur.shp
+		Facings: 32
+		ShadowStart: 32
 	damaged-idle:
-		Filename: invisibleitem.shp
-	critical-idle:
-		Filename: invisibleitem.shp
+		Filename: futu_ggmltgtur_d.shp
+		Facings: 32
+		ShadowStart: 32
 	make:
 		Filename: futu_ggmltgmk.shp
 		Length: 22
+		ShadowStart: 22
 	dead:
-		Filename: invisibleitem.shp
-	turret:
-		Filename: futu_ggmltgtur.shp
+		Filename: futu_ggmltgtur_d.shp
 		Facings: 32
+		ShadowStart: 32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 3
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+		Offset: 0,0
 	icon:
-		Filename: futu_gggun_icon.png
+		Filename: futu_multigunnerturreticon.png
 		Offset: 0,0
 
 #   Red Alert 2 Future Tech Tank
+
+futu_enforcer:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: futu_enforcer.shp
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	run:
+		Tick: 120
+	shoot:
+		Start: 204
+		Length: 6
+		Facings: 8
+	prone-shoot:
+		Start: 252
+		Length: 6
+		Facings: 8
+	deployed:
+		Start: 315
+		Facings: 8
+	deploy:
+		Start: 300
+		Length: 15
+	shoot-deployed:
+		Start: 323
+		Length: 6
+		Facings: 8
+	undeploy:
+		Start: 180
+		Length: 2
+		Facings: 2
+	paradrop:
+		Start: 371
+	cheer:
+		Start: 196
+	icon:
+		Filename: futu_enforcericon.png
+
+futu_javelinsoldier:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: futu_javelinsoldier.shp
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	stand:
+		ShadowStart: 432
+	run:
+		Tick: 120
+		ShadowStart: 440
+	liedown:
+		Start: 196
+		ShadowStart: 628
+	standup:
+		Start: 212
+		ShadowStart: 644
+	prone-stand:
+		Frames: 94, 100, 106, 112, 118, 124, 130, 136
+	prone-run:
+		Start: 94
+		ShadowStart: 526
+	idle1:
+		Start: 64
+		ShadowStart: 496
+	idle2:
+		Start: 79
+		ShadowStart: 511
+	shoot:
+		Start: 278
+		Length: 6
+		Facings: 8
+		ShadowStart: 710
+	prone-shoot:
+		Start: 326
+		Length: 6
+		Facings: 8
+		ShadowStart: 758
+	deployed:
+		Start: 375
+		Facings: 8
+		ShadowStart: 807
+	deploy:
+		Start: 431
+		Length: 1
+		ShadowStart: 863
+	shoot-deployed:
+		Start: 383
+		Length: 6
+		Facings: 8
+		ShadowStart: 815
+	undeploy:
+		Start: 431
+		Length: 1
+		ShadowStart: 863
+	paradrop:
+		Start: 374
+		Length: 1
+		ShadowStart: 806
+	cheer:
+		Start: 228
+		Length: 49
+		ShadowStart: 660
+	die1:
+		Start: 142
+		Length: 28
+		ShadowStart: 574
+	die2:
+		Start: 171
+		Length: 26
+		ShadowStart: 603
+	icon:
+		Filename: futu_javelinsoldiericon.png
+
+futu_fedeng:
+	Inherits: steel_fedeng
+	icon:
+		Filename: futu_engiicon.png
+		Scale: 1
+		Offset: 0,0
+
+futu_engi:
+	Inherits: nax2_engi
+	icon:
+		Filename: futu_repairdroidicon.png
+
 futu_wheel:
 	Defaults:
 		Filename: futu_wheel.shp
@@ -7844,7 +8339,7 @@ futu_wheel:
 		Facings: 8
 		Tick: 80
 	icon:
-		Filename: aa_mecha_icon.shp
+		Filename: futu_scoutroboticon.png
 		Offset: 0,0
 
 future_robot_cannon:
@@ -7867,8 +8362,16 @@ future_robot_cannon:
 		Length: 8
 		Facings: 8
 		Tick: 80
+	muzzle:
+		Filename: DATA.R16
+		Scale: 3
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+		Offset: 0,0
 	icon:
-		Filename: aa_mecha_icon.shp
+		Filename: futu_cannonroboticon.png
 		Offset: 0,0
 
 future_robot_missiles:
@@ -7891,8 +8394,16 @@ future_robot_missiles:
 		Length: 8
 		Facings: 8
 		Tick: 80
+	muzzle:
+		Filename: DATA.R16
+		Scale: 3
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
+		Offset: 0,0
 	icon:
-		Filename: aa_mecha_icon.shp
+		Filename: futu_missileroboticon.png
 		Offset: 0,0
 
 future_robot_shotgun:
@@ -7915,9 +8426,119 @@ future_robot_shotgun:
 		Length: 8
 		Facings: 8
 		Tick: 80
-	icon:
-		Filename: aa_mecha_icon.shp
+	muzzle:
+		Filename: DATA.R16
+		Scale: 3
+		Remap: 54F94B
+		Start: 3671
+		Length: 3
+		BlendMode: Additive
 		Offset: 0,0
+	icon:
+		Filename: futu_shotgunroboticon.png
+		Offset: 0,0
+
+futu_cryoleg:
+	Defaults:
+		Filename: crleg.shp
+		ShadowStart: -1
+		HasShadow: false
+	stand:
+		Start: 0
+		Length: 1
+		Facings: 8
+	walk:
+		Start: 247
+		Length: 16
+		Facings: 8
+	run:
+		Start: 247
+		Length: 16
+		Facings: 8
+	idle1:
+		Start: 102
+		Length: 32
+	idle2:
+		Start: 102
+		Length: 32
+	cheer:
+		Start: 72
+		Length: 30
+	attack:
+		Start: 134
+		Length: 8
+		Facings: 8
+	shoot:
+		Start: 134
+		Length: 8
+		Facings: 8
+	die1:
+		Start: 198
+		Length: 23
+	die2:
+		Start: 221
+		Length: 26
+	paradrop:
+		Start: 3
+		Length: 2
+	die-crushed:
+		Filename: invisibleitem.shp
+		ShadowStart: -1
+	die3:
+		Filename: invisibleitem.shp
+		ShadowStart: -1
+	die4:
+		Filename: ra2_nukedie.shp
+		ShadowStart: -1
+		Length: *
+		Tick: 50
+	die5:
+		Filename: ra2_yuridie.shp
+		ShadowStart: -1
+		Length: *
+		Tick: 80
+	die6:
+		Filename: ra2_electro.shp
+		ShadowStart: -1
+		Length: *
+		Tick: 80
+	die7:
+		Filename: yr_virusd.shp
+		ShadowStart: -1
+		Length: *
+		Tick: 80
+	die8:
+		Filename: yr_brutdie.shp
+		ShadowStart: -1
+		Length: *
+		Tick: 80
+	liedown:
+		Start: 0
+		Length: 1
+		Facings: 8
+	standup:
+		Start: 0
+		Length: 1
+		Facings: 8
+	prone-stand:
+		Start: 0
+		Length: 1
+		Facings: 8
+	prone-run:
+		Start: 247
+		Length: 16
+		Facings: 8
+	prone-shoot:
+		Start: 134
+		Length: 8
+		Facings: 8
+	icon:
+		Filename: futu_cryolegionnaireicon.png
+		Offset: 0,0
+		ShadowStart: -1
+	muzzle:
+		Filename: steel_energymuzzle.shp
+		ShadowStart: -1
 
 future_mech_machinegun:
 	Defaults:
@@ -7940,7 +8561,7 @@ future_mech_machinegun:
 		Facings: 8
 		Tick: 80
 	icon:
-		Filename: aa_mecha_icon.shp
+		Filename: futu_chaingunmechicon.png
 		Offset: 0,0
 
 future_mech_plasma:
@@ -7964,72 +8585,23 @@ future_mech_plasma:
 		Facings: 8
 		Tick: 80
 	icon:
-		Filename: aa_mecha_icon.shp
+		Filename: futu_plasmamechicon.png
 		Offset: 0,0
 
 futu_landcarr:
-	Defaults:
-		Filename: futu_landcarr.shp
-		Scale: 1
-	idle1:
-		Length: 12
-		Facings: 8
-		Tick: 9999
-		FlipX: True
-	idle2:
-		Length: 12
-		Facings: 8
-		Tick: 9999
-		FlipX: True
-	stand:
-		Length: 12
-		Facings: 8
-		Tick: 9999
-		FlipX: True
-	run:
-		Length: 12
-		Facings: 8
-		Tick: 110
-		FlipX: True
-	turret:
-		Start: 96
-		Facings: 32
-		FlipX: True
+	Inherits: ^RA2CannonMuzzle
 	icon:
-		Filename: aa_mecha_icon.shp
-		Offset: 0,0
+		Filename: futu_beehiveicon.png
+
+futu_landcarr_drone:
+	Inherits: ra2hornet
+	Defaults:
+		Scale: 0.5
 
 futu_orion:
-	Defaults:
-		Filename: futu_orion.shp
-		Scale: 1
-	idle1:
-		Length: 12
-		Facings: 8
-		Tick: 9999
-		FlipX: True
-	idle2:
-		Length: 12
-		Facings: 8
-		Tick: 9999
-		FlipX: True
-	stand:
-		Length: 12
-		Facings: 8
-		Tick: 9999
-		FlipX: True
-	run:
-		Length: 12
-		Facings: 8
-		Tick: 110
-		FlipX: True
-	turret:
-		Start: 96
-		Facings: 32
-		FlipX: True
+	Inherits: ^RA2CannonMuzzle
 	icon:
-		Filename: aa_mecha_icon.shp
-		Offset: 0,0
+		Filename: futu_oriontankicon.png
 
 futu_manticore:
 	Defaults:
@@ -8156,31 +8728,13 @@ futu_ifv:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: ra2ifvicon.shp
+		Filename: futu_salamanderifvicon.png
 		AddExtension: False
 
 futu_mbt:
 	Inherits: ^RA2CannonMuzzle
-	Defaults:
-		Filename: futu_mbt.png
-	idle:
-		Filename: futu_mbt.png
-		Scale: 1
-		Facings: 64
-		Offset: 0,5
-	turret:
-		Scale: 1
-		Start: 64
-		Facings: 64
-		Offset: 0,5
-	turret-laser:
-		Scale: 1
-		Start: 128
-		Facings: 64
-		Offset: 0,5
 	icon:
-		Filename: ra2mtnkicon.shp
-		AddExtension: False
+		Filename: futu_guardiantankicon.png
 
 futu_hvrt:
 	Inherits: ^RA2MachineGunMuzzle
@@ -8195,7 +8749,7 @@ futu_hvrt:
 		Facings: 64
 		Offset: 0,36
 	icon:
-		Filename: ra2mtnkicon.shp
+		Filename: futu_riptideacvicon.png
 		AddExtension: False
 
 futu_cryo:
@@ -8214,7 +8768,7 @@ futu_cryo:
 		Tick: 160
 		Scale: 0.9
 	icon:
-		Filename: aa_pelicanicon.shp
+		Filename: future_cryocopter_icon.png
 
 futu_harv:
 	Defaults:
@@ -8233,7 +8787,7 @@ futu_harv:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: ra2cminicon.shp
+		Filename: futu_harvicon.png
 		AddExtension: False
 futu_harv2:
 	Defaults:
@@ -8252,7 +8806,7 @@ futu_harv2:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: ra2cminicon.shp
+		Filename: futu_harv2icon.png
 		AddExtension: False
 
 futu_phal:
@@ -8265,7 +8819,7 @@ futu_phal:
 	turret:
 		Facings: 64
 	icon:
-		Filename: nax_jagdpanzer_icon.png
+		Filename: futu_phalanxicon.png
 		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -8273,7 +8827,8 @@ futu_phal:
 	muzzle-2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
-futu_antena:
+
+futu_athena:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: futu_antena.png
@@ -8283,7 +8838,7 @@ futu_antena:
 		Facings: 64
 		Offset: 0,5
 	icon:
-		Filename: ra2mtnkicon.shp
+		Filename: futu_athenacannonicon.png
 		AddExtension: False
 
 futu_coiler:
@@ -8293,7 +8848,8 @@ futu_coiler:
 	idle:
 		Facings: 64
 	icon:
-		Filename: ttnkicon.shp
+		Filename: futu_coilericon.png
+
 futu_futu:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
@@ -8309,14 +8865,29 @@ futu_futu:
 		Facings: 64
 		Offset: 0,5
 	icon:
-		Filename: ra2mtnkicon.shp
+		Filename: futu_futuretankicon.png
 		AddExtension: False
 
-##############################################
-#   Red Alert 2 European Rebels
-##############################################
+yrrobo:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: yr_robo.shp
+	idle:
+		Facings: 64
+		Offset: 0,20
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,20
+	muzzle:
+		Offset: 0,20
+	muzzle-2:
+		Offset: 0,20
+	icon:
+		Filename: yrroboicon.png
+		AddExtension: False
 
-eur_spy:
+futu_spy:
 	Inherits: ^RA2Infantry
 	Defaults:
 		Filename: ra2_spy.shp
@@ -8327,4 +8898,94 @@ eur_spy:
 	cheer:
 		Start: 196
 	icon:
-		Filename: ra2spyicon.shp
+		Filename: futu_infiltratoricon.png
+
+futu_blackwidow:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: ra2_tany_black.shp
+	run:
+		Tick: 120
+	swim-stand:
+		Start: 410
+		Facings: 8
+		Length: 6
+		Tick: 160
+	swim-idle1:
+		Start: 292
+		Length: 15
+		Tick: 160
+	swim-idle2:
+		Start: 307
+		Length: 15
+		Tick: 160
+	swim-run:
+		Start: 506
+		Facings: 8
+		Length: 6
+		Tick: 120
+	swim-die1:
+		Start: 323
+		Length: 19
+	swim-die2:
+		Start: 342
+		Length: 20
+	swim-shoot:
+		Start: 554
+		Length: 6
+		Facings: 8
+		Tick: 80
+	cheer:
+		Start: 603
+	swim-cheer:
+		Start: 611
+		Length: 8
+		Tick: 120
+	paradrop:
+		Start: 602
+	die:
+		Start: 134
+		Length: 15
+	icon_gun:
+		Filename: tanyamodes.shp
+		Start: 0
+	icon_c4:
+		Filename: tanyamodes.shp
+		Start: 1
+	icon:
+		Filename: futu_blackwidowicon.png
+	iconchrono: futu_blackwidowicon.png
+
+future_twister:
+	idle:
+		Filename: steel_twister.shp
+		Facings: -8
+		#InterpolatedFacings: 16
+		Length: 12
+	move:
+		Filename: steel_twister.shp
+		Facings: -8
+		#InterpolatedFacings: 16
+		Length: 12
+	icon:
+		Filename: steel_twister_icon.shp
+
+future_harbinger:
+	Defaults:
+		Filename: future_harbinger.png
+	idle:
+		Facings: 64
+	icon:
+		Filename: future_harbinger_icon.png
+
+future_upgrade_equalizer_x1:
+	icon:
+		Filename: future_equalizer_x1_icon.png
+
+future_upgrade_equalizer_x2:
+	icon:
+		Filename: future_equalizer_x2_icon.png
+
+future_upgrade_equalizer_x3:
+	icon:
+		Filename: future_equalizer_x3_icon.png

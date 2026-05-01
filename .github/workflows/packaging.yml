@@ -28,7 +28,7 @@ jobs:
         run: |
           make engine
           mkdir -p build/linux
-          sudo apt install libfuse2
+          sudo apt install libfuse2 zsync
           ./packaging/linux/buildpackage.sh "${GIT_TAG}" "${PWD}/build/linux"
 
       - name: Upload Packages

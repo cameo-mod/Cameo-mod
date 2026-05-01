@@ -2,6 +2,14 @@
 	AlwaysVisible:
 	Shroud:
 
+# Inherits@AlwaysShow: ^AlwaysShowForFactionsList
+^AlwaysShowForFactionsList:
+	AlwaysShowForFactions: gdi, nod, allies, soviet, modjapan, tsgdi, tsnod, forgotten, cabal, ra2america, ra2russia, yuri, asianalliance, consortium, syndicate, naxis, lnaxis, futuretech, atreides, harkonnen, ordos, corrino, ixian, terran, protoss, zerg, human2, orc2, tkm
+
+# Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
+^StandardBuildTimeSpeedReduction:
+	BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+
 EditorPlayer:
 	Inherits: ^BasePlayer
 
@@ -68,6 +76,10 @@ Player:
 			GoldTiberium: 45
 			Ore: 25
 			Gems: 50
+			RA2Copper: 20
+			RA2Silver: 30
+			RA2Ore: 40
+			RA2Gems: 50
 			SCMinerals: 25
 			Veins: 15
 			GESupplies: 50
@@ -91,15 +103,17 @@ Player:
 			SWFarms: 25
 			OP2Ore: 33
 			OP2Ore2: 67
-			RA2Ore: 40
-			RA2Gems: 50
-			RA2Silver: 30
-			RA2Copper: 20
 	DeveloperMode:
 		CheckboxDisplayOrder: 20
-	BaseAttackNotifier:
+	DamageNotifier:
+		ValidTargets: Structure
+		Notification: BaseAttack
+		TextNotification: notification-base-under-attack
 		AllyNotification: OurAllyIsUnderAttack
+		AllyTextNotification: notification-ally-under-attack
 	HarvesterAttackNotifier:
+		ExcludeDamageTypes: SpiceExplosion
+		TextNotification: notification-harvester-under-attack
 	EnemyWatcher:
 	Shroud:
 		FogCheckboxDisplayOrder: 3
@@ -130,11 +144,12 @@ Player:
 		Label: Queue Type
 		Description: Type of queue used
 		DisplayOrder: 4
-		Default: multipleproductionqueues
+		Default: hybridproductionqueues
 		Values:
 			classicproductionqueues: Single
 			multipleproductionqueues: Multi
-			scaledproductionqueues: Competitive
+			hybridproductionqueues: Hybrid
+			scaledproductionqueues: Scaled
 	LobbyPrerequisiteDropdown@derricklimit_is:
 		ID: derricklimit_is
 		Label: Passive Income Limit
@@ -299,6 +314,7 @@ Player:
 	#		ClassicProductionQueue
 	####################################################################################################
 	ClassicProductionQueue@BUILDING:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RABuilding
 		DisplayOrder: 0
 		Group: Building
@@ -306,12 +322,13 @@ Player:
 		ReadyAudio: ConstructionComplete
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
+		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@DEFENCE:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RADefence
 		DisplayOrder: 1
 		Group: Defence
@@ -319,12 +336,13 @@ Player:
 		ReadyAudio: ConstructionComplete
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
-		QueuedAudio: Training
+		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@INFANTRY:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RAInfantry
 		DisplayOrder: 2
 		Group: Infantry
@@ -336,8 +354,9 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@VEHICLE:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RAVehicle
 		DisplayOrder: 3
 		Group: Vehicle
@@ -349,8 +368,9 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@AIRCRAFT:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RAAircraft
 		DisplayOrder: 4
 		Group: Aircraft
@@ -362,8 +382,9 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
 	ClassicProductionQueue@NAVAL:
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: RANaval
 		DisplayOrder: 5
 		Group: Ship
@@ -375,20 +396,49 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 		SpeedUp: True
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		InfiniteBuildLimit: 10
+	# ClassicParallelProductionQueue@ADDON:
 	ClassicProductionQueue@ADDON:
+		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
 		Type: Addons
 		DisplayOrder: 10
 		Group: Addon
-		SpeedUp: False
-		LowPowerModifier: 100
+		SpeedUp: True
+		LowPowerModifier: 200
+		BuildTimeSpeedReduction: 125, 100, 80, 66, 50, 40, 33, 25
+		BuildingCountBuildTimeMultipliers: 125, 100, 80, 66, 50, 40, 33, 25
+		ParallelPenaltyBuildTimeMultipliers: 100, 63, 50, 44, 40, 38, 36, 34, 33, 32
+		ReadyAudio: NewOptions
+		ReadyTextNotification: notification-new-construction-options
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@BuildingAddons:
+		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
+		Type: BuildingAddons
+		DisplayOrder: 11
+		Group: Addon
+		SpeedUp: True
+		LowPowerModifier: 400
+		ReadyAudio: NewOptions
+		ReadyTextNotification: notification-new-construction-options
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
 	ClassicProductionQueue@UPGRADE:
+		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: Upgrades
-		DisplayOrder: 10
+		DisplayOrder: 12
 		Group: Upgrade
 		SpeedUp: True
 		LowPowerModifier: 400
-		BuildTimeSpeedReduction: 100, 50, 33, 25, 20, 17, 14, 12, 11, 10, 9, 8, 8, 7, 7, 6, 6, 6, 5, 5
+		ReadyAudio: NewOptions
+		ReadyTextNotification: notification-new-construction-options
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
 	ExternalCondition@barr:
 		Condition: ownsbarr
 	ExternalCondition@weap:

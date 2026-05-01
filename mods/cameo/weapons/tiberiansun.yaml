@@ -2,6 +2,22 @@
 #		Tiberian Sun Ballisitc
 ####################################################################################################
 
+^TSSonicGrenade:
+	Report: 120mmf.aud
+	Projectile: Bullet
+		Speed: 896
+		Image: BOMB
+		ContrailLength: 12
+		ContrailStartWidth: 128
+		ContrailEndWidth: 44
+		ContrailStartColor: 8888FFFF
+		ContrailEndColor: FFFFFF22
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship, Trees
+
 ^TSCannon:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
@@ -28,18 +44,166 @@
 		ImpactSounds: expnew14.aud
 		ValidTargets: Ground, Air
 
-TS90mm:
-	Inherits: ^TSCannon
-
-TS120mm:
-	Inherits: ^TSCannon
-	ReloadDelay: 80
+^TSCannonEffect:
+	Inherits: ^BallisticWeapon
+	ReloadDelay: 50
+	Range: 6c0
+	Report: 120mmf.aud
 	Projectile: Bullet
-		Speed: 1c512
+		Speed: 682
+		Image: 120MM
+		Shadow: true
+		LaunchAngle: 75
+		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
+	Warhead@3Eff: CreateEffect
+		ImpactSounds: expnew14.aud
+		ValidTargets: Ground, Air
+
+TS25mmDep:
+	Inherits: ^FlakWeapon
+	ReloadDelay: 8
+	Range: 6679
+	Report: chaingn1.aud
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees, Air
+
+TSLaser25mmDep:
+	Inherits: ^FlakWeapon
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 8
+	Range: 6679
+	Report: chaingn1.aud
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees, Air
+
+TS30mm:
+	Inherits: ^MediumMissile
+	Inherits: ^FlakWeapon
+	ReloadDelay: 26
+	Burst: 3
+	Range: 5873
+	BurstDelays: 2
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+TS30mmRail:
+	Inherits: ^MediumMissile
+	Inherits: ^FlakWeapon
+	Inherits: ^RailgunWeapon
+	ReloadDelay: 26
+	Burst: 3
+	Range: 5873
+	BurstDelays: 2
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+TS90mm:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumCannon
+	ReloadDelay: 26
+	Range: 5319
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 3
+
+TS90mmDep:
+	Inherits: TS90mm
+	ReloadDelay: 22
+	Range: 6679
+	Projectile: Bullet
+		Speed: 850
 		Blockable: false
 		LaunchAngle: 0
-	Warhead@1Dam: SpreadDamage
-		Damage: 7000
+
+TSLaser90mm:
+	Inherits: ^MediumCannon
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Projectile: LaserZap
+		Width: 72
+		SecondaryBeamWidth: 36
+	ReloadDelay: 32
+	Range: 5423
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+
+TSLaser90mmDep:
+	Inherits: TSLaser90mm
+	ReloadDelay: 26
+	Range: 6754
+
+TS120mm:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumCannon
+	ReloadDelay: 44
+	Range: 6201
+	Projectile: Bullet
+		Speed: 850
+		Blockable: false
+		LaunchAngle: 0
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 6
+
+TS120mmRail:
+	# Inherits: ^TSCannon
+	Inherits: ^MediumCannon
+	Inherits: ^RailgunWeapon
+	ReloadDelay: 44
+	Range: 6201
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 4
 
 TS120mmx:
 	Inherits: ^TSCannon
@@ -75,11 +239,9 @@ TS120mmx:
 
 TSRPGTower:
 	Inherits: ^ShrapnelWeapon
-	Inherits: ^Grenade
-	Inherits: ^MediumCannon
-	Inherits: ^TankDestroyerCannon
-	ReloadDelay: 80
-	Range: 7711
+	Inherits: ^HeavyCannon
+	ReloadDelay: 46
+	Range: 8544
 	Report: glnch4.aud
 	Projectile: Bullet
 		Speed: 384
@@ -87,25 +249,36 @@ TSRPGTower:
 		Image: 120MM
 		Palette: player
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 6000
+		Damage: 16000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
+		Damage: 8000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@Grenade: SpreadDamage
-		Damage: 6000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 3000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 6000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 6000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 8
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 8
+
+TSRPGTowerRail:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyCannon
+	Inherits: ^RailgunWeapon
+	ReloadDelay: 46
+	Range: 8544
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@HRailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 8
 
 ^TSArtilleryWeapon:
 	Inherits: ^TSCannon
@@ -125,28 +298,63 @@ TSRPGTower:
 		Explosions: artillery_explosion
 
 TS155mm:
-	Inherits: ^TSArtilleryWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
 	ReloadDelay: 135
-	Range: 14c0
+	Range: 13083
+	MinRange: 2616
 	TargetActorCenter: true
 	Projectile: Bullet
-		Speed: 384
+		Speed: 512
 		LaunchAngle: 165
 		ContrailLength: 30
 		ContrailWidth: 0c32
-	MinRange: 5c0
-	Warhead@1Dam: SpreadDamage
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		Damage: 15000
-	Warhead@3Eff: CreateEffect
-		ImpactSounds: expnew06.aud
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 30000
+	Warhead@HeavyBombFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 15
+	# Warhead@3Eff: CreateEffect
+	# 	Explosions: artillery_explosion
+	# Warhead@3Eff: CreateEffect
+	# 	ImpactSounds: expnew06.aud
+
+TSAux155mm:
+	Inherits: TS155mm
+	Warhead@3: FireShrapnel
+		Weapon: TS155mmFrag
+		Amount: 2
+
+TS155mmFrag:
+	Inherits: ^ShrapnelWeapon
+	Projectile: Bullet
+		Speed: 128
+		LaunchAngle: 175
+		ContrailLength: 3
+		ContrailWidth: 0c16
+	Range: 3500
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	-Report:
 
 TSJugg90mm:
-	Inherits: ^TSArtilleryWeapon
-	ReloadDelay: 180
-	Range: 14c0
-	MinRange: 5c0
+	Inherits: ^ShrapnelWeapon
+	ReloadDelay: 69
+	Range: 12834
+	MinRange: 2566
 	Burst: 3
-	BurstDelays: 3, 5
+	BurstDelays: 3
 	Report: jugger1.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -155,17 +363,62 @@ TSJugg90mm:
 		Inaccuracy: 1c0
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@1Dam: SpreadDamage
-		Damage: 7500
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@3Eff: CreateEffect
+		ImpactSounds: expnew13.aud
+	# Warhead@3Eff: CreateEffect
+	# 	Explosions: artillery_explosion
+
+TSCadreGrenade:
+	Inherits: ^ShrapnelWeapon
+	ReloadDelay: 124
+	Range: 6623
+	Report: M203.aud
+	Projectile: Bullet
+		Speed: 226
+		LaunchAngle: 66
+		ContrailLength: 10
+		ContrailWidth: 0c32
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 36000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 18000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 18
+	Warhead@3Eff: CreateEffect
+		ImpactSounds: expnew13.aud
+
+TSRaiderGrenade:
+	Inherits: ^ShrapnelWeapon
+	ReloadDelay: 52
+	Range: 4787
+	Report: M203.aud
+	Projectile: Bullet
+		Speed: 226
+		LaunchAngle: 66
+		ContrailLength: 10
+		ContrailWidth: 0c32
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 36000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 18000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 18
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 
 TSGrenade:
-	Inherits: ^Grenade
-	Inherits: ^LightFlameWeapon
-	ReloadDelay: 60
-	Range: 5791
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumCannon
+	ReloadDelay: 50
+	Range: 6151
 	Report: toss1.aud
+	ValidTargets: Ground, Water, Trees
 	Projectile: Bullet
 		Speed: 226
 		LaunchAngle: 66
@@ -176,20 +429,80 @@ TSGrenade:
 		ContrailEndWidth: 22
 		ContrailStartColor: FF8888FF
 		ContrailEndColor: FFFFFF22
-	Warhead@Grenade: SpreadDamage
-		Damage: 4000
-	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 4000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 12000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 12000
+	Warhead@MediumCannonFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
+
+TSGrenadeSonic:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumCannon
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^TSSonicGrenade
+	ReloadDelay: 50
+	Range: 6151
+	Report: toss1.aud
+	ValidTargets: Ground, Water, Trees
+	Projectile: Bullet
+		Speed: 226
+		LaunchAngle: 66
+		Image: BOMB
+		BounceCount: 2
+		ContrailLength: 11
+		ContrailStartWidth: 128
+		ContrailEndWidth: 44
+		ContrailStartColor: 8888FFFF
+		ContrailEndColor: FFFFFF22
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 12000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 12000
+	Warhead@MediumCannonFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 3000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 3
+	Warhead@MagicWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 6000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 3
 
 TSGrenadeAA:
 	Inherits: TSGrenade
@@ -211,7 +524,7 @@ TSGrenadeAA:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 		Damage: 5000
-		
+
 TSGrenadeG:
 	Inherits: TSGrenade
 	ReloadDelay: 45
@@ -284,6 +597,118 @@ MammothTankCannon:
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 6
 
+KodiakCannon:
+	Inherits: ^HeavyChemicalWeapon
+	Inherits: ^RailgunWeapon
+	Inherits: ^HeavyMissile
+	Inherits: ^HeavyCannon
+	Inherits: ^HeavyBomb
+	Range: 9165
+	ReloadDelay: 92
+	Burst: 3
+	BurstDelays: 4
+	Report: tnkfire4.aud
+	ValidTargets: Ground, Water, Trees
+	Projectile: Bullet
+		Speed: 850
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+
+KodiakCannonSonic:
+	Inherits: ^HeavyChemicalWeapon
+	Inherits: ^RailgunWeapon
+	Inherits: ^HeavyMissile
+	Inherits: ^HeavyCannon
+	Inherits: ^HeavyBomb
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^TSSonicGrenade
+	Range: 9165
+	ReloadDelay: 86
+	Burst: 3
+	BurstDelays: 4
+	Report: tnkfire4.aud
+	ValidTargets: Ground, Water, Trees
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+	Warhead@MagicWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 8000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4
+
 TS227mm:
 	Inherits: ^TSArtilleryWeapon
 	ReloadDelay: 100
@@ -313,35 +738,221 @@ TS227mm:
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 
+TS120mmxChem:
+	Inherits: TS120mmx
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+TSJuggerFlakAA:
+	Inherits: ^FlakWeapon
+	Report: jugger1.aud
+	ReloadDelay: 14
+	Burst: 3
+	BurstDelays: 3
+	Range: 11412
+	ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: expnew13.aud
 ####################################################################################################
 #		Tiberian Sun Energy Weapons
 ####################################################################################################
 
+^TSLaserEffect:
+	Projectile: LaserZap
+		Width: 96
+		Duration: 15
+		ZOffset: 2047
+		Color: FF000080
+		SecondaryBeam: true
+		SecondaryBeamWidth: 45
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
+
+TSSonicWeaponEffect:
+	ReloadDelay: 60
+	Range: 6c0
+	Report: sonic4.aud
+	Projectile: AreaBeam
+		Speed: 0c256
+		Duration: 45
+		DamageInterval: 5
+		Width: 384
+		Shape: Flat
+		ZOffset: 2047
+		BeyondTargetRange: 0c256
+		Blockable: true
+		TrackTarget: true
+		Color: 50F5FF45
+
+TSSonicZapWeapon:
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: TSSonicWeaponEffect
+	ReloadDelay: 60
+	Range: 4050
+	Projectile: AreaBeam
+		Speed: 0c256
+		Duration: 60
+		DamageInterval: 4
+		Width: 384
+		Shape: Flat
+		ZOffset: 2047
+		BeyondTargetRange: 0c256
+		Blockable: true
+		TrackTarget: true
+		Color: 50F5FF45
+	Warhead@MagicWeapon: SpreadDamage
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 1000
+		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	-Warhead@Effect: CreateEffect
+
+TSSonicZapWeaponSonic:
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: TSSonicWeaponEffect
+	ReloadDelay: 60
+	Range: 4050
+	Projectile: AreaBeam
+		Speed: 0c256
+		Duration: 60
+		DamageInterval: 4
+		Width: 384
+		Shape: Flat
+		ZOffset: 2047
+		BeyondTargetRange: 0c256
+		Blockable: true
+		TrackTarget: true
+		Color: B4A7D645
+	Warhead@MagicWeapon: SpreadDamage
+		Damage: 4000
+		ValidRelationships: Neutral, Enemy
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 4000
+		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidRelationships: Neutral, Enemy
+	-Warhead@Effect: CreateEffect
+
+TSEMPZapWeapon:
+	Inherits: ^TeslaWeapon
+	Inherits: TSSonicWeaponEffect
+	ReloadDelay: 60
+	Range: 10205
+	Report: plsecan2.aud
+	ValidTargets: Ground, Water
+	Projectile: AreaBeam
+		Speed: 0c512
+		Duration: 60
+		DamageInterval: 2
+		Width: 512
+		Shape: Flat
+		ZOffset: 2047
+		BeyondTargetRange: 0c512
+		Blockable: false
+		TrackTarget: true
+		Color: F5F5F545
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 1000
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 10000
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+
 TSMechRailgun:
-	Inherits: ^TSRailgun
-	Range: 10000
-	ReloadDelay: 50
+	Inherits: ^RailgunWeapon
+	Range: 8409
+	ReloadDelay: 92
+	Burst: 2
+	BurstDelays: 8
 	Report: railuse5.aud
 	Projectile: Railgun
 		BeamColor: 00FFFF88
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 12000
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 16
+	Warhead@RailgunPercentage: HealthPercentageDamage
+		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-	Warhead@3: FireShrapnel
-		Weapon: PrismScatter
-		Amount: 4
-		AimChance: 50
-		AimTargetStances: Enemy, Neutral
-			
-TSMechRailgun_elite:
+
+TSMechRailgunRail:
 	Inherits: TSMechRailgun
-	Range: 9c0
+	ReloadDelay: 58
 	Projectile: Railgun
 		BeamColor: FFFF44
-		
+
+# TSMechRailgun_elite:
+# 	Inherits: TSMechRailgun
+# 	Range: 9c0
+# 	Projectile: Railgun
+# 		BeamColor: FFFF44
+
+TSCommandoRailgun:
+	Inherits: ^RailgunWeapon
+	Range: 7563
+	ReloadDelay: 52
+	Burst: 3
+	BurstDelays: 4
+	Report: railuse5.aud
+	ValidTargets: Ground, Water, Trees, Air
+	Projectile: Railgun
+		BeamColor: 00FFFF88
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 40000
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@RailgunPercentage: HealthPercentageDamage
+		Damage: 20
+		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
+		ValidTargets: Ground, Water, Trees, Air
+
+TSCommandoRailgunRail:
+	Inherits: TSCommandoRailgun
+	ReloadDelay: 52
+	Burst: 5
+	BurstDelays: 4
+	Projectile: Railgun
+		BeamColor: FFFF44
 
 ^TSEnergyBlast:
 	ReloadDelay: 50
@@ -372,7 +983,7 @@ TSCyCannon:
 		Blockable: false
 		HorizontalRateOfTurn: 8
 		Shadow: true
-		Image: 
+		Image:
 		MinimumLaunchSpeed: 75
 		Speed: 384
 		RangeLimit: 8c0
@@ -406,55 +1017,179 @@ TSCyCannon:
 
 TSProton:
 	Inherits: ^TSEnergyBlast
-	Range: 5c0
-	Burst: 5
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^LaserWeapon
+	Range: 5414
+	Burst: 4
 	BurstDelays: 3
+	ReloadDelay: 50
 	ValidTargets: Ground, Water, Air
 	Projectile: Missile
-		Speed: 341
+		Speed: 512
 		HorizontalRateOfTurn: 8
 		Blockable: false
-		Shadow: true
-		Image: drplasma2
+		Shadow: false
+		Image: tstorpedo
 		RangeLimit: 12c0
-	Warhead@1Dam: SpreadDamage
-		Spread: 128
-		Damage: 5000
-		Versus:
-			None: 25
-			Wood: 65
-			Light: 75
-			Medium: 85
-			Heavy: 100
-			Concrete: 60
-		ValidTargets: Ground, Water, Air
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 15
 	Warhead@2Eff: CreateEffect
 		Explosions: small_frag
 
-TSObeliskLaserFire:
-	Inherits: ^TSLaser
-	ReloadDelay: 75
-	Range: 10c0
-	Report: obelray1.aud
-	Warhead@1Dam: SpreadDamage
-		Damage: 50000
-		Spread: 500
-	Warhead@2Dam: HealthPercentageDamage
+TSTurretLaser:
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	ReloadDelay: 25
+	Range: 6487
+	Report: lastur1.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+	Warhead@Chaingun: SpreadDamage
+		Damage: 10000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 5
-		Spread: 500
-		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+
+TSLaserTurretLaser:
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	ReloadDelay: 20
+	Range: 6992
+	Report: lastur1.aud
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		Color: FFFF0080
+		SecondaryBeam: true
+		SecondaryBeamWidth: 18
+		SecondaryBeamColor: FF000080
+	Warhead@Chaingun: SpreadDamage
+		Damage: 16000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@3: FireShrapnel
+		Weapon: TurretLaserFragment
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+
+TurretLaserFragment:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Range: 2500
+	Projectile: LaserZap
+		Width: 24
+		Duration: 8
+		Color: FFFF0080
+		SecondaryBeam: true
+		SecondaryBeamWidth: 12
+		SecondaryBeamColor: FF000080
+		-HitAnim:
+	Warhead@Chaingun: SpreadDamage
+		Damage: 8000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+
+TSObeliskLaserFire:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	ReloadDelay: 60
+	Range: 10199
+	Report: obelray1.aud
+	ValidTargets: Ground, Water
+	Projectile:
+		Duration: 38
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 52000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 26
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 52000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 26
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		ImpactSounds: flamer2.aud
+
+TSLaserObeliskLaserFire:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	ReloadDelay: 32
+	Projectile: LaserZap
+		Color: FFFF0080
+		Duration: 38
+		SecondaryBeamWidth: 48
+		SecondaryBeamColor: FF000080
+	Range: 10435
+	Report: obelray1.aud
+	ValidTargets: Ground, Water
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 80000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 40
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 80000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 40
+	Warhead@2Eff: CreateEffect
+		Explosions: med_napalm
+		ImpactSounds: flamer2.aud
+	Warhead@LaserArc: FireShrapnel
+		Weapon: ObeliskLaserFragment
+		Amount: 2
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+
+ObeliskLaserFragment:
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Range: 4000
+	Projectile: LaserZap
+		Width: 48
+		Color: FFFF0080
+		Duration: 38
+		SecondaryBeamWidth: 24
+		SecondaryBeamColor: FF000080
+		-HitAnim:
+	Warhead@Chaingun: SpreadDamage
+		Damage: 40000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 20
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 40000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 20
 
 DarkObeliskLaser:
 	Inherits: ^TSLaser
@@ -465,6 +1200,7 @@ DarkObeliskLaser:
 	Projectile: LaserZap
 		Width: 125
 		Color: 445577
+		Duration: 38
 	Warhead@1Dam: SpreadDamage
 		Damage: 25000
 		Spread: 250
@@ -539,7 +1275,7 @@ TSCoreLaser:
 		Damage: 5000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-		
+
 ####################################################################################################
 #		Tiberian Sun Heal Weapons
 ####################################################################################################
@@ -560,19 +1296,19 @@ TSHeal:
 	Inherits: ^TSHealWeapon
 
 TSRepair:
-	Inherits: ^TSHealWeapon
-	Range: 2c0
-	ReloadDelay: 40
+	Inherits: RA2IFVRepair
+	# Range: 2c0
+	# ReloadDelay: 40
 	Report: repair11.aud
-	ValidTargets: Repair
-	Warhead@1Dam: TargetDamage
-		ValidTargets: Repair
-		Versus:
-			None: 200
-	Warhead@2Defuse: DetachDelayedWeapon
-		Types: ivanbomb
-		ValidTargets: ivanattached
-		ValidRelationships: Ally
+	# ValidTargets: Repair
+	# Warhead@1Dam: TargetDamage
+	# 	ValidTargets: Repair
+	# 	Versus:
+	# 		None: 200
+	# Warhead@2Defuse: DetachDelayedWeapon
+	# 	Types: ivanbomb
+	# 	ValidTargets: ivanattached
+	# 	ValidRelationships: Ally
 
 ####################################################################################################
 #		Tiberian Sun Missile
@@ -594,22 +1330,50 @@ TSRepair:
 		Damage: 5
 
 TSBazooka:
-	Inherits: ^TSDefaultMissile
+	Inherits: ^LightMissile
 	Report: rketinf1.aud
-	Range: 6643
+	ReloadDelay: 52
+	Range: 6694
 	Projectile: Missile
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 5
 	Warhead@LightMissile: SpreadDamage
-		Damage: 10000
+		Damage: 24000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 5
-		
+		Damage: 12
+
 TSBazookaG:
 	Inherits: TSBazooka
 	Range: 9c0
+
+TSTibBazooka:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^LightMissile
+	Report: rketinf1.aud
+	ReloadDelay: 52
+	Range: 6694
+	Projectile: Missile
+		TrailImage: spittrail
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LightMissile: SpreadDamage
+		Damage: 24000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 12
+
+PitbullRockets:
+	Inherits: ^LightMissile
+	ReloadDelay: 55
+	Burst: 2
+	BurstDelays: 5
+	Range: 6379
+	Report: rketinf1.aud
+	Warhead@LightMissile: SpreadDamage
+		Damage: 20000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 10
 
 TSReaperTusk:
 	Inherits: ^TSDefaultMissile
@@ -653,18 +1417,38 @@ TSReaperTusk:
 		ValidTargets: Ground
 
 TSHoverMissile:
-	Inherits: ^TSDefaultMissile
-	ReloadDelay: 68
+	Inherits: ^MediumMissile
+	Inherits: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Trees, Air
+	Report: missile6.aud
+	ReloadDelay: 60
 	Burst: 2
-	Range: 8c0
+	BurstDelays: 8
+	Range: 8159
 	Report: hovrmis1.aud
 	Projectile: Missile
 		RangeLimit: 22c512
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 20
-	Warhead@1Dam: SpreadDamage
+	Warhead@MediumMissile: SpreadDamage
 		Damage: 6000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissileFriendlyFire: SpreadDamage
+		Damage: 3000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 3
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 6000
+		ValidTargets: Ground, Water, Trees, Air
+	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+		ValidTargets: Ground, Water, Trees, Air
 
 TSAegisMissile:
 	Inherits: ^TSDefaultMissile
@@ -734,27 +1518,92 @@ TSMammothTusk:
 		ImpactActors: false
 
 TSMammothTusk2:
-	Inherits: TSMammothTusk
-	Range: 7c512
-	ReloadDelay: 50
-	BurstDelays: 5
+	Inherits: Dragon
+	Report: misl1.aud
+	Range: 9332
+	ReloadDelay: 92
+	Burst: 2
+	BurstDelays: 8
 	Projectile: Missile
 		TrailImage: large_trail
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 42000
+		Spread: 500
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 21
+		Spread: 500
 
 TSMammothTusk_elite:
 	Inherits: TSMammothTusk2
 	Burst: 8
 	Range: 9c0
-		
+
 TSBikeMissile:
-	Inherits: ^TSDefaultMissile
-	Range: 5c0
+	Inherits: ^LightMissile
+	Inherits: ^MediumMissile
+	Range: 6554
 	Burst: 2
+	BurstDelays: 5
+	ReloadDelay: 40
 	Report: misl1.aud
 	Projectile: Missile
-		RangeLimit: 15c50
-	Warhead@1Dam: SpreadDamage
+		LaunchAngle: 75
+	Warhead@LightMissile: SpreadDamage
+		Damage: 6000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 3
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 6000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 3
+		ValidTargets: Ground, Water, Trees, Air
+
+TSBikeTibMissile:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^LightMissile
+	Inherits: ^MediumMissile
+	Range: 6554
+	Burst: 2
+	BurstDelays: 5
+	ReloadDelay: 40
+	Report: misl1.aud
+	Projectile: Missile
+		LaunchAngle: 75
+		TrailImage: spittrail
+	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 4000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightMissile: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 42
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Trees, Air
 
 TSDragon:
 	Inherits: ^TSDefaultMissile
@@ -764,30 +1613,185 @@ TSDragon:
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
 
-TSHellfire:
-	Inherits: ^TSDefaultMissile
-	ReloadDelay: 50
-	Report: orcamis1.aud
+TSStankTusk:
+	Inherits: ^MediumCannon
+	Inherits: ^MediumMissile
+	Range: 6385
 	Burst: 2
-	Warhead@1Dam: SpreadDamage
-		Spread: 72
-		Damage: 3000
-		Versus:
-			None: 30
-			Wood: 65
-			Light: 150
-			Medium: 125
-			Heavy: 100
-			Concrete: 30
+	BurstDelays: 2
+	ReloadDelay: 60
+	Report: misl1.aud
+	Projectile: Missile
+		LaunchAngle: 75
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 10000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissileFriendlyFire: SpreadDamage
+		Damage: 5000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 10000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumCannonFriendlyFire: SpreadDamage
+		Damage: 5000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Ground, Water, Trees, Air
+
+TSStankTibTusk:
+	Inherits: ^MediumCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumMissile
+	Range: 6385
+	Burst: 2
+	BurstDelays: 2
+	ReloadDelay: 60
+	Report: misl1.aud
+	Projectile: Missile
+		LaunchAngle: 75
+		TrailImage: spittrail
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 10000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissileFriendlyFire: SpreadDamage
+		Damage: 5000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 10000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 10000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumCannonFriendlyFire: SpreadDamage
+		Damage: 5000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Ground, Water, Trees, Air
+
+TSHellfire:
+	Inherits: ^HeavyCannon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 32
+	Range: 5740
+	Report: orcamis1.aud
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+
+TSHellfireSonic:
+	Inherits: TSHellfire
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^TSSonicGrenade
+	Projectile: Missile
+		Arm: 0
+		Blockable: false
+		AllowSnapping: true
+		Inaccuracy: 200
+	# 	Image: DRAGON
+		Shadow: true
+		HorizontalRateOfTurn: 30
+		VerticalRateOfTurn: 30
+	# 	TrailImage: smokey
+	# 	TrailInterval: 1
+	# 	ContrailLength: 0
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Speed: 500
+		Acceleration: 3
+		HomingActivationDelay: 2
+		RangeLimit: 25000
+		PointDefenseTypes: Missile
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MagicWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
 
 TSRedEye2:
+	Inherits: Dragon
+	Report: rocket2.aud
+	ValidTargets: Air
+	Warhead@2Eff: CreateEffect
+		ImpactSounds: expnew13.aud
+		ImpactActors: false
+
+TSGDIRedEye:
 	Inherits: ^HeavyMissile
-	ReloadDelay: 35
-	Range: 12588
+	ReloadDelay: 30
+	Range: 12440
 	Report: rocket2.aud
 	ValidTargets: Air
 	Burst: 2
-	BurstDelays: 7
+	BurstDelays: 4
 	Projectile: Missile
 		Speed: 500
 		HorizontalRateOfTurn: 25
@@ -797,84 +1801,256 @@ TSRedEye2:
 		AllowSnapping: true
 		CloseEnough: 500
 	Warhead@HeavyMissile: SpreadDamage
-		Damage: 10000
+		Damage: 8000
 		Spread: 500
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		Damage: 5
+		Damage: 4
 		Spread: 500
 	Warhead@2Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 		ImpactActors: false
 
+TSNODRedEye:
+	Inherits: ^HeavyMissile
+	ReloadDelay: 50
+	Range: 13176
+	Report: rocket2.aud
+	ValidTargets: Air
+	Burst: 3
+	BurstDelays: 2
+	Projectile: Missile
+		Speed: 500
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 25
+		MinimumLaunchAngle: 75
+		Acceleration: 5
+		AllowSnapping: true
+		CloseEnough: 500
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 12000
+		Spread: 500
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 6
+		Spread: 500
+	Warhead@2Eff: CreateEffect
+		ImpactSounds: expnew13.aud
+		ImpactActors: false
+
+TSNODTibRedEye:
+	Inherits: TSNODRedEye
+	Projectile: Missile
+		TrailImage: spittrail
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 18000
+		Spread: 500
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 9
+		Spread: 500
+
+
+TSAdatsMissile:
+	Inherits: ^LightMissile
+	Inherits: ^MediumMissile
+	Range: 6392
+	Burst: 8
+	BurstDelays: 2
+	ReloadDelay: 70
+	Report: misl1.aud
+	Warhead@LightMissile: SpreadDamage
+		Damage: 16000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightMissileFriendlyFire: SpreadDamage
+		Damage: 8000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 8
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 16000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissileFriendlyFire: SpreadDamage
+		Damage: 8000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 8
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+TSMammothTuskChem:
+	Inherits: TSMammothTusk
+	Burst: 2
+	BurstDelays: 8
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 3
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
 ####################################################################################################
 #		Tiberian Sun Other
 ####################################################################################################
 
 TSFireballLauncher:
-	Inherits: Flamer
-	ReloadDelay: 50
-	Range: 4c256
+	Inherits: ^MediumFlameWeapon
+	ReloadDelay: 52
+	Range: 4250
+	Burst: 5
+	BurstDelays: 2
 	Report: flamtnk1.aud
 	Projectile: Bullet
 		Speed: 180
-		Image: flameall
-		-TrailImage:
+		Image: tsflameall
 		Palette: tseffect
 		Inaccuracy: 384
 		LaunchAngle: 0
-	Burst: 5
-	BurstDelays: 5
-	Warhead@1Dam: SpreadDamage
-		Spread: 288
-		Falloff: 100, 50, 25, 12, 6, 3, 0
-		Damage: 2500
-		Versus:
-			None: 600
-			Wood: 148
-			Light: 59
-			Medium: 35
-			Heavy: 10
-			Concrete: 2
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath
-	Warhead@3Eff: CreateEffect
-		Explosions: small_napalm
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 8000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 4000
 
 TSBomb:
-	ReloadDelay: 40
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 38
 	Burst: 5
 	BurstDelays: 3
-	Range: 2c512
+	Range: 1500
 	TargetActorCenter: true
 	Projectile: GravityBomb
-		Velocity: 72, 0, -90
-		Acceleration: 0, 0, -8
+		Velocity: 100, 0, -100
+		Acceleration: 0, 0, -10
 		Image: 120mm
 		Shadow: true
-	Warhead@1Dam: SpreadDamage
-		Spread: 350
-		Falloff: 100, 75, 50, 33, 25, 12, 3
-		Damage: 12500
-		Versus:
-			None: 200
-			Wood: 90
-			Light: 75
-			Medium: 50
-			Heavy: 32
-			Concrete: 100
-		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
-	Warhead@2Eff: CreateEffect
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 10000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 10000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5
+	Warhead@Effect: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: expnew09.aud
 		ValidTargets: Ground, Air
-	Warhead@3EffWater: CreateEffect
+	Warhead@EffectWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: ssplash3.aud
 		ValidTargets: Water
 		InvalidTargets: Vehicle
-	Warhead@4Smu: LeaveSmudge
-		SmudgeType: Crater
+
+TSBombSonic:
+	Inherits: ^HeavyBomb
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^TSSonicGrenade
+	ReloadDelay: 38
+	Burst: 5
+	BurstDelays: 3
+	Range: 1500
+	TargetActorCenter: true
+	# Projectile: GravityBomb
+	# 	Velocity: 100, 0, -100
+	# 	Acceleration: 0, 0, -10
+	# 	Image: 120mm
+	# 	Shadow: true
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 10000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 10000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5
+	Warhead@MagicWeapon: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 10000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@EffectWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
 
 TSFiendShard:
+	ReloadDelay: 33
+	Burst: 3
+	BurstDelays: 3
+	Range: 5555
+	Report: fiend2.aud
+	ValidTargets: Ground, Air
+	Projectile: Missile
+		Speed: 333
+		RangeLimit: 33333
+		Image: ra2txgasg
+		TrailImage: green_smokey
+	Warhead@1Dam: SpreadDamage
+		Damage: 1234
+		Spread: 123
+		HorizontalRateOfTurn: 12
+		ContrailColor: 33FF33
+		ContrailLength: 12
+		ValidTargets: Ground, Air
+		Versus:
+			None: 88
+			Wood: 77
+			Light: 123
+			Medium: 111
+			Heavy: 99
+			Concrete: 66
+		DamageTypes: Prone100Percent, TriggerProne, BulletDeath
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+	Warhead@3Eff: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ValidTargets: Ground, Air
+TSFiendShardBlue:
+	Inherits: ^HeavyBomb
 	ReloadDelay: 33
 	Burst: 3
 	BurstDelays: 3
@@ -924,6 +2100,21 @@ TSSlimeAttack:
 	InvalidTargets: Wall, Bridge
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
+		InvalidTargets: Wall, Bridge
+		Versus:
+			Light: 60
+			Medium: 50
+			Heavy: 40
+			Concrete: 20
+		DamageTypes: Prone100Percent, TriggerProne, SmallExplosionDeath
+TSZombieAttack:
+	ReloadDelay: 80
+	Range: 1c384
+	Report: vicer1.aud
+	Projectile: InstantHit
+	InvalidTargets: Wall, Bridge
+	Warhead@1Dam: SpreadDamage
+		Damage: 6000
 		InvalidTargets: Wall, Bridge
 		Versus:
 			Light: 60
@@ -1034,27 +2225,96 @@ TSEMPLimpetBomb:
 		Range: 1c512
 
 TSMobileEMP:
+	Inherits: ^TeslaWeapon
 	Report: mobemp1.aud
-	Range: 4c512
-	ReloadDelay: 300
-	ValidTargets: Vehicle, Defense, Cyborg
+	Range: 1512
+	ReloadDelay: 200
 	Projectile: InstantExplode
-	Warhead@1: TargetDamage
-	Warhead@2Con: GrantExternalCondition
-		Condition: empdisable
-		Duration: 240
-		Range: 4c512
-		ValidTargets: Vehicle, Defense, Cyborg
-		ValidRelationships: Neutral, Enemy
-	Warhead@3Eff: CreateEffect
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 64000
+		Spread: 813
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 32000
+		Spread: 813
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 32
+		Spread: 813
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water
+		Falloff: 100, 75, 50, 25
+		Damage: 250000
+		Spread: 813
+	# Warhead@1: TargetDamage
+	# Warhead@2Con: GrantExternalCondition
+	# 	Condition: empdisable
+	# 	Duration: 240
+	# 	Range: 4c512
+	# 	ValidTargets: Vehicle, Defense, Cyborg
+	# 	ValidRelationships: Neutral, Enemy
+	Warhead@Effect: CreateEffect
+		ValidTargets: Ground, Water
 		Explosions: mobileemp
 		ExplosionPalette: ra2unit
+		ImpactSounds: mobemp1.aud
 		ImpactActors: false
 		AffectsParent: true
 
+TSLocustBomb:
+	Inherits: ^HeavyBomb
+	ReloadDelay: 38
+	Burst: 5
+	BurstDelays: 3
+	Range: 1250
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 72, 0, -90
+		Acceleration: 0, 0, -8
+		Image: 120mm
+		Shadow: true
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 10000
+		Spread: 2000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 5
+		Spread: 2000
+	Warhead@2Eff: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: expnew09.aud
+		ValidTargets: Ground, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: Crater
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 3
+		Duration: 100
+		Speed: 12, 25
+		TurnRate: 12
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
 ####################################################################################################
 #		Tiberian Sun MGS
 ####################################################################################################
+
+# ^TSMGEffect:
+# 	Report: gun8.aud
+# 	Projectile: Bullet
+# 		Speed: 2000
+# 		Inaccuracy: 200
 
 ^TSMG:
 	Inherits: ^SmallArms
@@ -1065,16 +2325,119 @@ TSMobileEMP:
 		Speed: 2000
 		Inaccuracy: 200
 	Warhead@SmallArms: SpreadDamage
-		Damage: 1500
+		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
 
 TSMinigun:
-	Inherits: ^TSMG
-	ReloadDelay: 21
+	Inherits: ^SmallArms
+	ReloadDelay: 12
+	Range: 4062
 	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
-	Warhead@1Dam: SpreadDamage
-		Damage: 1200
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+
+TSLasergun:
+	Inherits: ^SmallArms
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Projectile: LaserZap
+		Width: 12
+		Duration: 8
+		SecondaryBeamWidth: 6
+	ReloadDelay: 18
+	Range: 4062
+	Report: infgun3.aud, gostgun1.aud, slvkgun1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+TSShotgun:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 46
+	Range: 4002
+	Report: DSDSHTGN.wav
+	ValidTargets: Ground, Water, Trees
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+
+TSCommandoShotgun:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 20
+	Range: 4146
+	Report: DSDSHTGN.wav
+	ValidTargets: Ground, Water, Trees
+	Warhead@Grenade: SpreadDamage
+		Damage: 8000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 8000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@SmallArms: SpreadDamage
+		Damage: 8000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@Chaingun: SpreadDamage
+		Damage: 8000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 4
 
 TSM1Carbine:
 	Inherits: ^TSMG
@@ -1104,17 +2467,65 @@ TSVulcan3:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1200
 
-elitecadre:
-	Inherits: ^TSMG
-	ReloadDelay: 25
-	Burst: 3
+elitecadregun:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 52
+	Burst: 5
+	BurstDelays: 2
 	Report: cygun1.aud
-	Range: 7000
+	Range: 6591
 	ValidTargets: Ground, Air
-	Warhead@1Dam: SpreadDamage
-		Damage: 1500
-		ValidTargets: Ground, Air
-			
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+laserelitecadregun:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+	ReloadDelay: 50
+	Burst: 5
+	BurstDelays: 2
+	Report: cygun1.aud
+	Range: 6677
+	ValidTargets: Ground, Air
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+ChamBlade:
+	Inherits: ^SniperWeapon
+	Projectile: InstantHit
+	Report: pzehit00.aud
+	ReloadDelay: 52
+	Range: 1538
+	Warhead@SniperWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		Damage: 50000
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+
 TSVulcanTower:
 	Inherits: ^TSMG
 	ReloadDelay: 26
@@ -1124,32 +2535,26 @@ TSVulcanTower:
 		Damage: 1800
 
 TSJumpCannon:
-	Inherits: ^TSMG
-	Inherits: ^RA2SmallArms
 	Inherits: ^RA2FlakWeapon
 	Inherits: ^RA2Chaingun
-	ReloadDelay: 40
-	Burst: 2
-	Range: 4500
+	ReloadDelay: 25
+	Range: 5132
 	Report: jumpjet1.aud
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 2000
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 6000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 1
+		Damage: 3
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 2000
+		Damage: 6000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 1
+		Damage: 3
 	-Warhead@EffectAir:
 
 TSJumpCannonAA:
@@ -1160,46 +2565,281 @@ TSJumpCannonAA:
 		ValidTargets: Air
 
 TSAssaultCannon:
-	Inherits: ^TSMG
-	ReloadDelay: 36
-	Range: 5000
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	ReloadDelay: 33
+	Burst: 2
+	BurstDelays: 2
+	Range: 6305
 	Report: tsgun4.aud
 	Projectile: Bullet
 		Speed: 2000
 		Inaccuracy: 200
-	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 9000
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 9000
+		ValidTargets: Ground, Water
+		Damage: 2000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Air, Water
-		Damage: 9000
+		ValidTargets: Ground, Water
+		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Air, Water
+		ValidTargets: Ground, Water
 		Damage: 1
 
-TSRaiderCannon:
-	Inherits: ^TSMG
-	ReloadDelay: 30
-	Range: 4c0
-	Report: chaingn1.aud
-	Warhead@1Dam: SpreadDamage
+TSAssaultCannonSonic:
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^TSSonicGrenade
+	ReloadDelay: 45
+	Burst: 2
+	BurstDelays: 2
+	Range: 6305
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 1000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+	Warhead@MagicWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 2000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 1
+
+TSVulcanGun:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ValidTargets: Ground, Water, Trees
+	ReloadDelay: 48
+	Burst: 4
+	BurstDelays: 2
+	Range: 6809
+	-Report:
+	StartBurstReport: tsgun4.aud
+	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+
+TSVulcanGunSonic:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^TeslaWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^TSSonicGrenade
+	ValidTargets: Ground, Water, Trees
+	ReloadDelay: 66
+	Burst: 4
+	BurstDelays: 2
+	Range: 6809
+	-Report:
+	StartBurstReport: tsgun4.aud
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2
+	Warhead@MagicWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 4000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2
+
+KodiakAAGuns:
+	Inherits: ^FlakWeapon
+	ValidTargets: Air
+	ReloadDelay: 4
+	Range: 8450
+	Report: tsgun4.aud
+	Projectile: Bullet
+		Speed: 2000
+		Inaccuracy: 200
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+		Damage: 6000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 3
+
+TSRaiderCannon:
+	Inherits: ^SmallArms
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 20
+	Burst: 4
+	BurstDelays: 2
+	Range: 4787
+	Report: chaingn1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 6000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 3
+
+TSLaserRaiderCannon:
+	Inherits: ^SmallArms
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 20
+	Burst: 3
+	BurstDelays: 2
+	Range: 4964
+	Report: chaingn1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 6000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 3
 
 TSHarpyClaw:
-	Inherits: ^TSMG
-	ReloadDelay: 36
-	Range: 5c0
+	Inherits: ^Chaingun
+	ReloadDelay: 24
+	Burst: 5
+	BurstDelays: 0
+	Range: 4882
 	Report: cygun1.aud
+	SoundVolume: 0.25
 	ValidTargets: Ground, Air
-	Warhead@1Dam: SpreadDamage
-		Damage: 6000
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
 		ValidTargets: Ground, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Air
+
+TSHarpyMultiClaw:
+	Inherits: TSHarpyClaw
+	Burst: 4
+	BurstDelays: 0
+	TargetActorCenter: true
+	Projectile: Bullet
+		Inaccuracy: 1024
+	Warhead@Chaingun: SpreadDamage
+		Damage: 0
+		ValidTargets: Ground, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 0
+		ValidTargets: Ground, Air
+
+TSHarpyAOEClaw:
+	Inherits: TSHarpyClaw
+	Warhead@Chaingun: SpreadDamage
+		Spread: 300
+		Falloff: 100, 50, 25
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Spread: 300
+		Falloff: 100, 50, 25
+
+TSLaserHarpyClaw:
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+	ReloadDelay: 25
+	Burst: 4
+	BurstDelays: 0
+	Range: 4969
+	Report: cygun1.aud
+	SoundVolume: 0.25
+	ValidTargets: Ground, Air
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Air
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Air
+
+TSLaserHarpyMultiClaw:
+	Inherits: TSLaserHarpyClaw
+	Burst: 4
+	BurstDelays: 0
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Inaccuracy: 1024
+		TrackTarget: false
+	Warhead@Chaingun: SpreadDamage
+		Damage: 0
+		ValidTargets: Ground, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 0
+		ValidTargets: Ground, Air
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 0
+		ValidTargets: Ground, Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 0
+		ValidTargets: Ground, Air
+
+TSLaserHarpyAOEClaw:
+	Inherits: TSLaserHarpyClaw
+	Warhead@Chaingun: SpreadDamage
+		Spread: 300
+		Falloff: 100, 50, 25
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Spread: 300
+		Falloff: 100, 50, 25
+	Warhead@LaserWeapon: SpreadDamage
+		Spread: 300
+		Falloff: 100, 50, 25
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Spread: 300
+		Falloff: 100, 50, 25
 
 TSPistola:
 	Inherits: ^TSMG
@@ -1211,6 +2851,47 @@ TSPistola:
 		Explosions: piff
 	Warhead@3EffWater: CreateEffect
 		Explosions: water_piff
+
+TSEngineerPistol:
+	Inherits: ^SniperWeapon
+	ReloadDelay: 60
+	Report: silencer.aud
+	ReloadDelay: 25
+	Range: 4303
+	Warhead@SniperWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		Damage: 20000
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+
+TSToxinRifle:
+	Inherits: ^LightChemicalWeapon
+	ReloadDelay: 54
+	Burst: 3
+	BurstDelays: 3
+	Report: silencer.aud
+	Range: 10293
+	ValidTargets: Ground, Water, Trees
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: 339933
+		ContrailEndColor: 00000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 25
+		ContrailEndWidth: 50
+		ContrailLength: 50
+		Width: 100
+		Speed: 10000
+		Inaccuracy: 0
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@LightChemicalWeaponFriendlyFire: OpenToppedDamage
+		Damage: 8000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	-Warhead@Effect:
 
 TSSniper:
 	Inherits: ^TSMG
@@ -1282,70 +2963,70 @@ MutAPRifleE:
 #		Tiberian Sun Superweapon
 ####################################################################################################
 
-# TSTacticalMissile:
-# 	Inherits: ^TSDefaultMissile
-# 	Report: samshot1.aud
-# 	ValidTargets: Ground, Water, Air
-# 	Range: 9999c0
-# 	AirThreshold: 11c0
-# 	Projectile: Missile
-# 		RangeLimit: -1
-# 		MinimumLaunchAngle: 250
-# 		MaximumLaunchAngle: 250
-# 		MinimumLaunchSpeed: 400
-# 		MaximumLaunchSpeed: 400
-# 		Jammable: false
-# 		-PointDefenseTypes:
-# 		HomingActivationDelay: 8
-# 		CruiseAltitude: 4000
-# 		AirburstAltitude: 3096
-# 		Image: tsnodmmsil
-# 		Sequences: idle
-# 		Palette: ra2unit
-# 		Speed: 1024
-# 		TrailWhenDeactivated: true
-# 		TrailInterval: 0
-# 		Gravity: 0
-# 	-Warhead@MediumMissile:
-# 	-Warhead@MediumMissilePercentage:
-# 	-Warhead@LightMissile:
-# 	-Warhead@LightMissilePercentage:
-# 	Warhead@1Dam: FireFragment
-# 		Weapon: TSTacticalMissileDamage
-# 		ValidTargets: Ground, Water, Air
-# 		AirThreshold: 11c0
-# 		ImpactActors: false
-# 	Warhead@2Eff: CreateEffect
-# 		Explosions: large_twlt
-# 		ExplosionPalette: tseffect
-# 		ImpactSounds: expnew19.aud
-# 		ImpactActors: false
-# 		AirThreshold: 11c0
-# 		ValidTargets: Ground, Water, Air
+TSTacticalMissile:
+	Inherits: ^TSDefaultMissile
+	Report: samshot1.aud
+	ValidTargets: Ground, Water, Air
+	Range: 9999c0
+	AirThreshold: 11c0
+	Projectile: Missile
+		RangeLimit: -1
+		MinimumLaunchAngle: 250
+		MaximumLaunchAngle: 250
+		MinimumLaunchSpeed: 400
+		MaximumLaunchSpeed: 400
+		Jammable: false
+		-PointDefenseTypes:
+		HomingActivationDelay: 8
+		CruiseAltitude: 4000
+		AirburstAltitude: 3096
+		Image: tsnodmmsil
+		Sequences: idle
+		Palette: ra2unit
+		Speed: 1024
+		TrailWhenDeactivated: true
+		TrailInterval: 0
+		Gravity: 0
+	-Warhead@MediumMissile:
+	-Warhead@MediumMissilePercentage:
+	-Warhead@LightMissile:
+	-Warhead@LightMissilePercentage:
+	Warhead@1Dam: FireFragment
+		Weapon: TSTacticalMissileDamage
+		ValidTargets: Ground, Water, Air
+		AirThreshold: 11c0
+		ImpactActors: false
+	Warhead@2Eff: CreateEffect
+		Explosions: large_twlt
+		ExplosionPalette: tseffect
+		ImpactSounds: expnew19.aud
+		ImpactActors: false
+		AirThreshold: 11c0
+		ValidTargets: Ground, Water, Air
 
-# TSTacticalMissileDamage:
-# 	Inherits: ^TSDefaultMissile
-# 	AirThreshold: 11c0
-# 	Projectile: SupportPowerInstantExplode
-# 	Warhead@AirPercentage: HealthPercentageDamage
-# 		AirThreshold: 11c0
-# 		Spread: 512
-# 		Falloff: 100, 100, 100
-# 		Damage: 70
-# 		ValidTargets: Air
-# 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-# 	Warhead@Reveal: RevealShroud
-# 		Duration: 150
-# 		Radius: 7c0
-# 		ImpactActors: false
-# 		ValidTargets: Ground, Water, Air
-# 		AirThreshold: 11c0
-# 		RevealGeneratedShroud: true
-# 	Warhead@Cluster: FireCluster
-# 		Weapon: TSMissileBomblet
-# 		AirThreshold: 11c0
-# 		Dimensions: 7,7
-# 		Footprint: __xxx__ _xxxxx_ xxxxxxx xxxxxxx xxxxxxx _xxxxx_ __xxx__
+TSTacticalMissileDamage:
+	Inherits: ^TSDefaultMissile
+	AirThreshold: 11c0
+	Projectile: SupportPowerInstantExplode
+	Warhead@AirPercentage: HealthPercentageDamage
+		AirThreshold: 11c0
+		Spread: 512
+		Falloff: 100, 100, 100
+		Damage: 70
+		ValidTargets: Air
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@Reveal: RevealShroud
+		Duration: 160
+		Radius: 7c0
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+		AirThreshold: 11c0
+		RevealGeneratedShroud: true
+	Warhead@Cluster: FireCluster
+		Weapon: TSMissileBomblet
+		AirThreshold: 11c0
+		Dimensions: 7,7
+		Footprint: __xxx__ _xxxxx_ xxxxxxx xxxxxxx xxxxxxx _xxxxx_ __xxx__
 
 TSMissileBomblet:
 	AirThreshold: 11c0
@@ -1375,25 +3056,46 @@ TSMissileBomblet:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
 
-TSChemTacticalMissile:
+
+TSTacticalChemMissile:
+	Inherits: TSTacticalMissile
+	Projectile: Missile
+		Palette: windows256
+		TrailPalette: windows256
+	Warhead@1Dam: FireFragment
+		Weapon: TSTacticalChemMissileDamage
+
+TSTacticalChemMissileDamage:
+	Inherits: TSTacticalMissileDamage
+	Warhead@Cluster2: FireRadius
+		Weapon: TSChemBomblet
+		ImpactActors: false
+		Amount: 8
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		AirThreshold: 8c0
+
+TSChemBomblet:
+	Inherits: TSMissileBomblet
+	Projectile: GravityBomb
+		Velocity: 36, 0, 280
+		Acceleration: 0, 0, -12
+		Shadow: true
+		Image: tsbomb
+		Sequences: idle
+		Palette: tseffect
 	Warhead@1Dam: SpreadDamage
-		Spread: 3c0
-		Damage: 47000
-		Versus:
-			None: 50
 		DamageTypes: Prone50Percent, TriggerProne, TiberiumDeath
-	Warhead@2Eff: CreateEffect
-		Explosions: verylarge_twlt
-		ExplosionPalette: tseffect
-		ImpactSounds: expnew06.aud
-	Warhead@3Smu: LeaveSmudge
-		SmudgeType: Scorch
-	Warhead@4Res: CreateResource
-		AddsResourceType: Tiberium
-		Size: 2,2
-	Warhead@6Cloud: SpawnActor
-		Actors: tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1,tscloud1
-		Range: 4
+	Warhead@5cloud: SpawnSmokeParticle
+		Count: 2
+		Weapon: TSCloud
+		Duration: 400
+		Speed: 30
+		TurnRate: 16
+		Image: tscloud1
+		Sequences: idle
+		EndSequences: die
+		Palette: tseffect
+		AirThreshold: 8c0
 
 TSHSeekerBomb:
 	Range: 0c128
@@ -1600,20 +3302,27 @@ TSCloud:
 
 TSDroppodSpawner:
 	Projectile: InstantExplode
+	ValidTargets: Ground, Water, Air
 	Range: 4c0
 	Warhead@1: FireShrapnel
 		InvalidTargets: FireImmune
+		ValidTargets: Ground, Water, Air
 		Weapon: TSDroppod1
 		Amount: 4
+		ImpactActors: false
+		AirThreshold: 8c0
 	Warhead@2: FireShrapnel
 		InvalidTargets: FireImmune
+		ValidTargets: Ground, Water, Air
 		Weapon: TSDroppod2
 		Amount: 2
+		ImpactActors: false
+		AirThreshold: 8c0
 
 TSDroppod1:
 	Range: 1c0
 	Projectile: AthenaProjectile
-		Altitude: 8000
+		Altitude: 25460
 	Warhead@Dam: TargetDamage
 	Warhead@1: FireCluster
 		Weapon: E2Droppod
@@ -1635,29 +3344,32 @@ E1Droppod:
 		Speed: 300
 		Image: tsdroppod
 		TrailImage: smokey
-		Palette: tseffect
+		Palette: ra2
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-	Warhead@3Eff: CreateEffect
-		Explosions: small_frag
+	Warhead@4Eff: CreateEffect
+		Image: tsdroppod
+		Explosions: ring
+		ExplosionPalette: tseffect
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
-	Warhead@4Eff: CreateEffect
-		Image: tspodring
-		Explosions: idle
-		ExplosionPalette: tseffect
-		ValidTargets: Ground, Air, Water
+		ImpactActors: false
+		AirThreshold: 8c0
 	Warhead@5Eff: CreateEffect
 		Image: tsdroppod
-		Explosions: idle
+		Explosions: fade1, fade2
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
+		ImpactActors: false
+		AirThreshold: 8c0
 	Warhead@6: SpawnActor
 		Actors: TSE1PARA
 		Range: 2
+		ImpactActors: false
+		AirThreshold: 8c0
 
 E2Droppod:
 	Inherits: E1Droppod
@@ -1747,7 +3459,7 @@ NODMutantSpawner:
 		InvalidTargets: FireImmune
 		Weapon: NODMutant4
 		Amount: 1
-		
+
 NODMutant:
 	InvalidTargets: Vehicle, Structure
 	Projectile: InstantHit
@@ -1790,7 +3502,7 @@ NODMutant4:
 		Actors: tsmutant3
 		Range: 3
 		Delay: 10
-		
+
 FloaterSpawner:
 	Range: 3c0
 	Projectile: InstantHit
@@ -1822,7 +3534,7 @@ TunnelDisappear:
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud
 		ImpactActors: false
-		
+
 TSDissolver:
 	ReloadDelay: 16
 	Burst: 4

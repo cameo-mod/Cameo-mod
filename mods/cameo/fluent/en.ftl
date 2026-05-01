@@ -218,3 +218,17 @@ button-production-types-upgrade-tooltip = Upgrades
 button-production-types-promotion-tooltip = Promotions
 button-production-types-scroll-up-tooltip = Scroll up
 button-production-types-scroll-down-tooltip = Scroll down
+
+bot-ai =
+   .easiest = Easiest AI
+   .veryeasy = Very Easy AI
+   .easy = Easy AI
+   .medium = Medium AI
+   .hard = Hard AI
+   .veryhard = Very Hard AI
+   .brutal = Brutal AI
+   .challenger = Challenger AI
+   .unbeatable = Unbeatable AI
+   .cameogod = Cameo God AI
+
+support-power-timer = { $player }'s { $support-power }: { $time }
