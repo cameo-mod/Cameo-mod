@@ -1,7 +1,6 @@
 World:
 	FactionCA@plymouthl:
-		Selectable: false
-		Name: Plymouth (WIP)
+		Name: Plymouth
 		InternalName: plymouthl
 		Game: Outpost 2
 		Side: Outpost 2
@@ -12,25 +11,24 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: plymouthl
-		BaseActor: PCONVECCOMMANDCENTER
+		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 
 	StartingUnits@defaultplymouthl:
 		Class: light
 		ClassName: Light Support
 		Factions: plymouthl
-		BaseActor: PCONVECCOMMANDCENTER
+		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 		SupportActors: PLYMOUTH_SCOUT,PLMICROWAVE,PLMICROWAVE,PLMICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
 	StartingUnits@heavyplymouthl:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: plymouthl
-		BaseActor: PCONVECCOMMANDCENTER
+		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 		SupportActors: PLYMOUTH_SCOUT,PLMICROWAVE,PLMICROWAVE,PLMICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
 
 	FactionCA@edenl:
-		Selectable: false
-		Name: Eden (WIP)
+		Name: Eden
 		InternalName: edenl
 		Game: Outpost 2
 		Side: Outpost 2
@@ -60,18 +58,18 @@ World:
 ####################################################################################################
 #		MISC
 ####################################################################################################
-RALLYFLAG:
-	Selectable:
-		Bounds: 24,24
-	Valued:
-		Cost: 600
-	Tooltip:
-		Name: Rally Flag
-	#Building:
-	#Health:
-	#	HP: 40000
-	RevealsShroud:
-		Range: 7c0
+# RALLYFLAG:
+# 	Selectable:
+# 		Bounds: 24,24
+# 	Valued:
+# 		Cost: 600
+# 	Tooltip:
+# 		Name: Rally Flag
+# 	#Building:
+# 	#Health:
+# 	#	HP: 40000
+# 	RevealsShroud:
+# 		Range: 7c0
 
 ^OP2Building:
 	GrantConditionOnDamageState:
@@ -93,7 +91,7 @@ PLYMOUTH_MINV:
 	RenderSprites:
 		Image: plymouth_esg_mine
 	FireWarheadsOnDeath:
-		Weapon: OutpostMineExplosive
+		Weapon: PLYMineExplosive
 	Mine:
 		AvoidFriendly: true
 		BlockFriendly: false
@@ -362,10 +360,12 @@ op2_commonore_beacon_3bar:
 	Inherits@shape: ^2x2Shape
 	Inherits@weap: ^IsWeaponFactory
 	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 4096,3072
 	Valued:
 		Cost: 2000
 	Building:
-		Footprint: xxxx xxxx xxxx ====
+		Footprint: xxx+ xxx+ xxx+ ====
 		Dimensions: 4,4
 		LocalCenterOffset: 0,-512,0
 	Health:
@@ -386,9 +386,11 @@ op2_commonore_beacon_3bar:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_garage:
+	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
+	Inherits@repairing: ^RepairFacility
 	#Inherits@repair2: ^FIX
 	Inherits@STATUS: ^OP2Building
 	Valued:
@@ -410,8 +412,8 @@ op2_commonore_beacon_3bar:
 		Range: 3c768
 	#-WithBuildingBib:
 	Selectable:
-		Bounds: 64,34,0,3
-		DecorationBounds: 72,48
+		Bounds: 2048,1024,0,3
+		# DecorationBounds: 128,96
 	SelectionDecorations:
 	WithResupplyAnimation:
 		RequiresCondition: !build-incomplete
@@ -422,6 +424,8 @@ op2_commonore_beacon_3bar:
 		StartRepairingNotification: Repairing
 		FinishRepairingNotification: Repaired
 		PlayerExperience: 15
+	Voiced:
+		VoiceSet: garage
 	RallyPoint:
 	Power:
 		Amount: -50
@@ -511,6 +515,36 @@ op2_commonore_beacon_3bar:
 		VoiceSet: dirt
 	#WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
+	GrantExternalConditionPower@forceshield:
+		OrderName: ForceShield
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: upforceshield
+		Icons:
+			1: forceshield
+		ChargeInterval: 4500
+		Names:
+			1: power-forceshield.name
+		Descriptions:
+			1: power-forceshield.description
+		Durations:
+			1: 375
+		Conditions:
+			1: forceshield
+		Dimensions:
+			1: 7,7
+		Footprints:
+			1: ___x___ __xxx__ _xxxxx_ xxxxxxx _xxxxx_ __xxx__ ___x___
+		OnFireSound: sforceon.wav
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		EndChargeSpeechNotification:
+		EndChargeTextNotification: Force shield ready.
+		LaunchSpeechNotification:
+		LaunchTextNotification: Warning: Force shield activated.
+		IncomingSpeechNotification:
+		IncomingTextNotification: Warning: Force shield activated.
+		BlockedCursor: move-blocked
 
 ^op2base_rcc:
 	Inherits: ^BaseBuilding
@@ -1915,26 +1949,27 @@ EDEN_CARGOTRUCK_EMPTY:
 ####################################################################################################
 #		BUILDINGS PLYMOUTH
 ####################################################################################################
-
-PCC:
+PLYMOUTH_STRUCTURE_FACTORY:
 	Inherits: ^OP2BaseFactoryStructure
 	Tooltip:
 		Name: Plymouth Structure Factory
 	Transforms:
-		IntoActor: pconveccommandcenter
+		IntoActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
 	ProvidesPrerequisite:
-		Prerequisite: pcc
+		Prerequisite: PLYMOUTH_STRUCTURE_FACTORY
 	RenderSprites:
-		Image: pcc
+		Image: PLYMOUTH_STRUCTURE_FACTORY
 
 PLYMOUTH_TOKAMAK:
 	Inherits: ^op2base_tokamak
 	Tooltip:
 		Name: Plymouth Tokamak
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_TOKAMAK
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Prerequisites: ~pcc
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY
 		Description: Generates power\nReleases Emp Shockwave on\nDeath
 
 PLYMOUTH_SMELTER_COMMON:
@@ -1944,7 +1979,7 @@ PLYMOUTH_SMELTER_COMMON:
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
-		Prerequisites: ~pcc, plymouth_tokamak
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, plymouth_tokamak
 		Description: Processes resources
 	FreeActor:
 		Actor: plymouth_cargotruck_empty
@@ -1960,300 +1995,300 @@ PLYMOUTH_AGRIDOME:
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: Building, RABuilding
-		Prerequisites: ~pcc, PLYMOUTH_TOKAMAK
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
 		BuildDuration: 100
 		Description: Needed with Residence for Vehicle Factory
 
-# PLYMOUTH_RESIDENCE:
-# 	Inherits: ^op2base_residence
-# 	Tooltip:
-# 		Name: Plymouth Residence
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_RESIDENCE
-# 	Buildable:
-# 		BuildPaletteOrder: 40
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_TOKAMAK
-# 		BuildDuration: 100
-# 		Description: Needed with Agridome for Vehicle Factory\nProvides Radar
+PLYMOUTH_RESIDENCE:
+	Inherits: ^op2base_residence
+	Tooltip:
+		Name: Plymouth Residence
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_RESIDENCE
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		BuildDuration: 100
+		Description: Needed with Agridome for Vehicle Factory\nProvides Radar
 
-# PLYMOUTH_BASIC_LAB:
-# 	Inherits: ^op2base_basic_lab
-# 	Tooltip:
-# 		Name: Plymouth Basic Lab
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_BASIC_LAB
-# 	Buildable:
-# 		BuildPaletteOrder: 45
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_TOKAMAK
-# 		BuildDuration: 25
-# 		Description: Needed with Nursery and University for Standard Lab
+PLYMOUTH_BASIC_LAB:
+	Inherits: ^op2base_basic_lab
+	Tooltip:
+		Name: Plymouth Basic Lab
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_BASIC_LAB
+	Buildable:
+		BuildPaletteOrder: 45
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
+		BuildDuration: 25
+		Description: Needed with Nursery and University for Standard Lab
 
-# PLYMOUTH_FACTORY_VEHICLE:
-# 	Inherits: ^op2base_factory_vehicle
-# 	Tooltip:
-# 		Name: Plymouth Vehicle Factory
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_FACTORY_VEHICLE
-# 	Buildable:
-# 		BuildPaletteOrder: 50
-# 		BuildDuration: 600
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_RESIDENCE, PLYMOUTH_AGRIDOME
-# 		Description: Constructs Vehicles
-# 	Production@NORMAL:
-# 		Produces: Vehicle
-# 		RequiresCondition: !classicproductionqueues
-# 	Production@CLASSICPRODUCTIONQUEUES:
-# 		Produces: RAVehicle
-# 		RequiresCondition: classicproductionqueues
-# 	ProductionQueue:
-# 		Type: Vehicle
-# 		DisplayOrder: 3
-# 		Group: Vehicle
-# 		LowPowerModifier: 300
-# 		ReadyAudio: UnitReady
-# 		BlockedAudio: NoBuild
-# 		LimitedAudio: BuildingInProgress
-# 		QueuedAudio: Training
-# 		OnHoldAudio: OnHold
-# 		CancelledAudio: Cancelled
-# 	ProductionBar@VEHICLEPLYMOUTHL:
-# 		ProductionType: Vehicle
-# 		RequiresCondition: !classicproductionqueues
-# 	ProductionBar@RAVEHICLEPLYMOUTHL:
-# 		ProductionType: RAVehicle
-# 		RequiresCondition: classicproductionqueues
+PLYMOUTH_FACTORY_VEHICLE:
+	Inherits: ^op2base_factory_vehicle
+	Tooltip:
+		Name: Plymouth Vehicle Factory
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_FACTORY_VEHICLE
+	Buildable:
+		BuildPaletteOrder: 50
+		BuildDuration: 600
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE, PLYMOUTH_AGRIDOME
+		Description: Constructs Vehicles
+	Production@NORMAL:
+		Produces: Vehicle
+		RequiresCondition: !classicproductionqueues
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAVehicle
+		RequiresCondition: classicproductionqueues
+	ProductionQueue:
+		Type: Vehicle
+		DisplayOrder: 3
+		Group: Vehicle
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@VEHICLEPLYMOUTHL:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEPLYMOUTHL:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
 
-# plymouth_garage:
-# 	Inherits: ^op2base_garage
-# 	Buildable:
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_FACTORY_VEHICLE
-# 		BuildPaletteOrder: 55
-# 		BuildDuration: 375
-# 		Description: Repairs vehicles.\n Allows construction of MCVs
+PLYMOUTH_GARAGE:
+	Inherits: ^op2base_garage
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_FACTORY_VEHICLE
+		BuildPaletteOrder: 55
+		BuildDuration: 375
+		Description: Repairs vehicles.\n Allows construction of MCVs
 
-# PLYMOUTH_NURSERY:
-# 	Inherits: ^op2base_nursery
-# 	Tooltip:
-# 		Name: Plymouth Nursery
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_NURSERY
-# 	Buildable:
-# 		BuildPaletteOrder: 60
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_RESIDENCE
-# 		BuildDuration: 200
-# 		Description: Needed with University and Basic Lab for Standard Lab
+PLYMOUTH_NURSERY:
+	Inherits: ^op2base_nursery
+	Tooltip:
+		Name: Plymouth Nursery
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_NURSERY
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
+		BuildDuration: 200
+		Description: Needed with University and Basic Lab for Standard Lab
 
-# PLYMOUTH_UNIVERSITY:
-# 	Inherits: ^op2base_university
-# 	Tooltip:
-# 		Name: Plymouth University
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_UNIVERSITY
-# 	Buildable:
-# 		BuildPaletteOrder: 70
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_RESIDENCE
-# 		BuildDuration: 200
-# 		Description: Needed with Nursery and Basic Lab for Standard Lab
+PLYMOUTH_UNIVERSITY:
+	Inherits: ^op2base_university
+	Tooltip:
+		Name: Plymouth University
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_UNIVERSITY
+	Buildable:
+		BuildPaletteOrder: 70
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
+		BuildDuration: 200
+		Description: Needed with Nursery and Basic Lab for Standard Lab
 
-# PLYMOUTH_LAB_STANDARD:
-# 	Inherits: ^op2base_lab_standard
-# 	Tooltip:
-# 		Name: Plymouth Standard Lab
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_LAB_STANDARD
-# 	Buildable:
-# 		BuildPaletteOrder: 80
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_BASIC_LAB,PLYMOUTH_NURSERY,PLYMOUTH_UNIVERSITY
-# 		Description: Needed for DIRT, Arachnid Factory, GORF, and Advanced Lab
+PLYMOUTH_LAB_STANDARD:
+	Inherits: ^op2base_lab_standard
+	Tooltip:
+		Name: Plymouth Standard Lab
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_LAB_STANDARD
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_BASIC_LAB,PLYMOUTH_NURSERY,PLYMOUTH_UNIVERSITY
+		Description: Needed for DIRT, Arachnid Factory, GORF, and Advanced Lab
 
-# PLYMOUTH_DIRT:
-# 	Inherits: ^op2base_dirt
-# 	Tooltip:
-# 		Name: Plymouth Dirt
-# 	ProvidesPrerequisite:
-# 		Prerequisite:
-# 	Buildable:
-# 		BuildPaletteOrder: 90
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_LAB_STANDARD
-# 		Description: Provides Force Shield
+PLYMOUTH_DIRT:
+	Inherits: ^op2base_dirt
+	Tooltip:
+		Name: Plymouth Dirt
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		Description: Provides Force Shield
 
-# PLYMOUTH_RCC:
-# 	Inherits: ^op2base_rcc
-# 	Tooltip:
-# 		Name: Plymouth Robot Command Center
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_RCC
-# 	Buildable:
-# 		BuildPaletteOrder: 95
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_LAB_STANDARD
-# 		BuildDuration: 125
-# 		Description: Needed for Arachnid Factory
+PLYMOUTH_RCC:
+	Inherits: ^op2base_rcc
+	Tooltip:
+		Name: Plymouth Robot Command Center
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_RCC
+	Buildable:
+		BuildPaletteOrder: 95
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		BuildDuration: 125
+		Description: Needed for Arachnid Factory
 
-# PLYMOUTH_FACTORY_ARACHNID:
-# 	Inherits: ^BaseBuilding
-# 	Inherits@CPQWP: ^CPQConditionWithPrimary
-# 	Inherits@shape: ^2x2Shape
-# 	Inherits@STATUS: ^OP2Building
-# 	Selectable:
-# 		Bounds: 64,64
-# 	HitShape:
-# 		TargetableOffsets: 630,299,0
-# 	Valued:
-# 		Cost: 1200
-# 	Tooltip:
-# 		Name: Plymouth Arachnid Factory
-# 	#ProvidesPrerequisite:
-# 	#	Prerequisite:
-# 	Buildable:
-# 		BuildPaletteOrder: 100
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_RCC
-# 		Description: Constructs Arachnids
-# 	Building:
-# 		Footprint: xx xx ==
-# 		Dimensions: 2,3
-# 		LocalCenterOffset: 0,-512,0
-# 	Health:
-# 		HP: 55000
-# 	RevealsShroud:
-# 		Range: 4c0
-# 	Power:
-# 		Amount: -20
-# 	Voiced:
-# 		VoiceSet: factoryArachnid
-# 	#WithBuildingBib:
-# 	RallyPoint:
-# 	Exit@1:
-# 		SpawnOffset: -426,85,0
-# 		ExitCell: 1,2
-# 	Exit@2:
-# 		SpawnOffset: 298,298,0
-# 		ExitCell: 2,2
-# 	Production@NORMAL:
-# 		Produces: Infantry
-# 		RequiresCondition: !classicproductionqueues
-# 	Production@CLASSICPRODUCTIONQUEUES:
-# 		Produces: RAInfantry
-# 		RequiresCondition: classicproductionqueues
-# 	ProductionQueue:
-# 		Type: Infantry
-# 		DisplayOrder: 2
-# 		Group: Infantry
-# 		LowPowerModifier: 300
-# 		ReadyAudio: UnitReady
-# 		BlockedAudio: NoBuild
-# 		LimitedAudio: BuildingInProgress
-# 		QueuedAudio: Training
-# 		OnHoldAudio: OnHold
-# 		CancelledAudio: Cancelled
-# 	ProductionBar@INFANTRYPLYMOUTHL:
-# 		ProductionType: Infantry
-# 		RequiresCondition: !classicproductionqueues
-# 	ProductionBar@RAINFANTRYPLYMOUTHL:
-# 		ProductionType: RAInfantry
-# 		RequiresCondition: classicproductionqueues
+PLYMOUTH_FACTORY_ARACHNID:
+	Inherits: ^BaseBuilding
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 2048,2048
+	HitShape:
+		TargetableOffsets: 630,299,0
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Plymouth Arachnid Factory
+	#ProvidesPrerequisite:
+	#	Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_RCC
+		Description: Constructs Arachnids
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 55000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: factoryArachnid
+	#WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 2,2
+	Production@NORMAL:
+		Produces: Infantry
+		RequiresCondition: !classicproductionqueues
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAInfantry
+		RequiresCondition: classicproductionqueues
+	ProductionQueue:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@INFANTRYPLYMOUTHL:
+		ProductionType: Infantry
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAINFANTRYPLYMOUTHL:
+		ProductionType: RAInfantry
+		RequiresCondition: classicproductionqueues
 
-# PLYMOUTH_GORF:
-# 	Inherits: ^op2base_gorf
-# 	Tooltip:
-# 		Name: Plymouth GORF
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_GORF
-# 	Buildable:
-# 		BuildPaletteOrder: 110
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_LAB_STANDARD
-# 		Description: Increases income from Common Ore Smelter
+PLYMOUTH_GORF:
+	Inherits: ^op2base_gorf
+	Tooltip:
+		Name: Plymouth GORF
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_GORF
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		Description: Increases income from Common Ore Smelter
 
-# PLYMOUTH_LAB_ADVANCED:
-# 	Inherits: ^op2base_lab_advanced
-# 	#1800
-# 	Tooltip:
-# 		Name: Plymouth Advanced Lab
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_LAB_ADVANCED
-# 	Buildable:
-# 		BuildPaletteOrder: 120
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_LAB_STANDARD
-# 		Description: Needed for Space Port, Rare Ore Smelter
+PLYMOUTH_LAB_ADVANCED:
+	Inherits: ^op2base_lab_advanced
+	#1800
+	Tooltip:
+		Name: Plymouth Advanced Lab
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_LAB_ADVANCED
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		Description: Needed for Space Port, Rare Ore Smelter
 
-# PLYMOUTH_SPACEPORT:
-# 	Inherits: ^op2base_spaceport
-# 	#1800
-# 	Tooltip:
-# 		Name: Plymouth Space Port
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_SPACEPORT
-# 	Buildable:
-# 		BuildPaletteOrder: 130
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_LAB_ADVANCED
-# 		Description: Needed for Solar Power Array\nLaunches Supernova Missiles.
+PLYMOUTH_SPACEPORT:
+	Inherits: ^op2base_spaceport
+	#1800
+	Tooltip:
+		Name: Plymouth Space Port
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_SPACEPORT
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
+		Description: Needed for Solar Power Array\nLaunches Supernova Missiles.
 
-# PLYMOUTH_SOLARARRAY:
-# 	Inherits: ^op2base_solararray
-# 	Tooltip:
-# 		Name: Plymouth Solar Array
-# 	ProvidesPrerequisite:
-# 		Prerequisite:
-# 	Buildable:
-# 		BuildPaletteOrder: 140
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_SPACEPORT
-# 		Description: Generates power\nReleases Emp Shockwave on\nDeath
+PLYMOUTH_SOLARARRAY:
+	Inherits: ^op2base_solararray
+	Tooltip:
+		Name: Plymouth Solar Array
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 140
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SPACEPORT
+		Description: Generates power\nReleases Emp Shockwave on\nDeath
 
-# PLYMOUTH_SMELTER_RARE:
-# 	Inherits: ^op2base_smelter_rare
-# 	#1800
-# 	Tooltip:
-# 		Name: Plymouth Rare Ore Smelter
-# 	ProvidesPrerequisite:
-# 		Prerequisite: PLYMOUTH_SMELTER_RARE
-# 	Buildable:
-# 		BuildPaletteOrder: 150
-# 		Queue: Building, RABuilding
-# 		Prerequisites: PLYMOUTH_LAB_ADVANCED
-# 		Description: Needed for Tigers
+PLYMOUTH_SMELTER_RARE:
+	Inherits: ^op2base_smelter_rare
+	#1800
+	Tooltip:
+		Name: Plymouth Rare Ore Smelter
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_SMELTER_RARE
+	Buildable:
+		BuildPaletteOrder: 150
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
+		Description: Needed for Tigers
 
 
 # ####################################################################################################
 # #		DEFENCE PLYMOUTH
 # ####################################################################################################
-# PLYMOUTH_LIGHT_TOWER:
-# 	Inherits: ^op2base_light_tower
-# 	Buildable:
-# 		BuildPaletteOrder: 5
-# 		Prerequisites:
-# 		Queue: Defence, RADefence
-# 		Description: Provides sight and detection.
+PLYMOUTH_LIGHT_TOWER:
+	Inherits: ^op2base_light_tower
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites:
+		Queue: Defence, RADefence
+		Description: Provides sight and detection.
 
-# PLYMOUTH_MINE_COMMON:
-# 	Inherits: ^op2base_mine_common
-# 	Tooltip:
-# 		Name: Plymouth Common Ore Mine
-# 	ProvidesPrerequisite:
-# 		Prerequisite:
-# 	Buildable:
-# 		BuildPaletteOrder: 110
-# 		Queue: Defence, RADefence
-# 		Prerequisites: PLYMOUTH_TOKAMAK
-# 		Description: Provides passive income.\n spawns common ore
+PLYMOUTH_MINE_COMMON:
+	Inherits: ^op2base_mine_common
+	Tooltip:
+		Name: Plymouth Common Ore Mine
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Defence, RADefence
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Description: Provides passive income.\n spawns common ore
 
 # PLYMOUTH_STORAGE_COMMON:
 # 	Inherits: ^op2base_storage_common
 # 	Buildable:
 # 		BuildPaletteOrder: 5
-# 		Prerequisites: PLYMOUTH_SMELTER_COMMON
+# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SMELTER_COMMON
 # 		Queue: Defence, RADefence
 # 		Description: Stores processed Tiberium
 
@@ -2269,7 +2304,7 @@ PLYMOUTH_AGRIDOME:
 # 		Name: Microwave Guard Post
 # 	Buildable:
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: PLYMOUTH_TOKAMAK
+# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
 # 		Queue: Defence, RADefence
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 40
@@ -2315,7 +2350,7 @@ PLYMOUTH_AGRIDOME:
 # 		Name: Stickyfoam Guard Post
 # 	Buildable:
 # 		BuildPaletteOrder: 40
-# 		Prerequisites: PLYMOUTH_TOKAMAK
+# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
 # 		Queue: Defence, RADefence
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 40
@@ -2361,7 +2396,7 @@ PLYMOUTH_AGRIDOME:
 # 		Name: RPG Guard Post
 # 	Buildable:
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: PLYMOUTH_TOKAMAK
+# 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
 # 		Queue: Defence, RADefence
 # 		BuildDuration: 600
 # 		BuildDurationModifier: 40
@@ -2399,23 +2434,23 @@ PLYMOUTH_AGRIDOME:
 #		UNITS PLYMOUTH
 ####################################################################################################
 
-PCONVECCOMMANDCENTER:
+PLYMOUTH_CONVEC_STRUCTURE_FACTORY:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
-	Inherits@mcv: ^MCV
-	Inherits@conyard: ^Conyard
+	# Inherits@mcv: ^MCV
+	# Inherits@conyard: ^Conyard
 	Tooltip:
-		Name: Plymouth Convec - Command Center
+		Name: Plymouth Convec - Structure Factory
 	Buildable:
 		Prerequisites: ~plymouth_university
 		Queue: Vehicle, RAVehicle
 		Description: Deploys into another Command Center.\n  Unarmed
 	Selectable:
-		DecorationBounds: 36,36
+		Bounds: 1024,1024
 	Voiced:
 		VoiceSet: edenConvecVoice
 	Transforms:
-		IntoActor: pcc
+		IntoActor: PLYMOUTH_STRUCTURE_FACTORY
 		Offset: -1,-1
 		Facing: 108
 		TransformSounds: constru2.aud, hvydoor1.aud
@@ -2470,39 +2505,39 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 	Voiced:
 		VoiceSet: cargoTruckVoice
 
-# PLYMOUTH_SCOUT:
-# 	Inherits: ^Vehicle
-# 	Inherits@selection: ^SelectableSupportUnit
-# 	Valued:
-# 		Cost: 300
-# 	Tooltip:
-# 		Name: Plymouth Scout
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites:
-# 		Queue: Vehicle, RAVehicle
-# 		BuildDuration: 500
-# 		BuildDurationModifier: 40
-# 		Description: Unarmed scout
-# 	Selectable:
-# 		DecorationBounds: 36,36
-# 	Mobile:
-# 		Speed: 140
-# 		Locomotor: heavywheeled
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 10000
-# 	Voiced:
-# 		VoiceSet: scoutVoice
-# 	Repairable:
-# 		HpPerStep: 2182
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 10c0
-# 	SelectionDecorations:
-# 	RenderSprites:
-# 		Scale: 0.75
+PLYMOUTH_SCOUT:
+	Inherits: ^Vehicle
+	Inherits@selection: ^SelectableSupportUnit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Plymouth Scout
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites:
+		Queue: Vehicle, RAVehicle
+		BuildDuration: 500
+		BuildDurationModifier: 40
+		Description: Unarmed scout
+	Selectable:
+		DecorationBounds: 1024,1024
+	Mobile:
+		Speed: 140
+		Locomotor: heavywheeled
+	WithMoveAnimation:
+	Health:
+		HP: 10000
+	Voiced:
+		VoiceSet: scoutVoice
+	Repairable:
+		HpPerStep: 2182
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 10c0
+	SelectionDecorations:
+	RenderSprites:
+		Scale: 0.75
 
 # PLYMOUTH_TECH_PLATFORM:
 # 	Inherits: ^Soldier
@@ -2542,85 +2577,85 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 # 	RenderSprites:
 # 		Scale: 0.75
 
-# PLYMOUTH_SPIDER:
-# 	Inherits: ^Vehicle
-# 	Valued:
-# 		Cost: 300
-# 	Tooltip:
-# 		Name: Plymouth Spider
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites:
-# 		Queue: Infantry, RAInfantry
-# 		BuildDuration: 500
-# 		BuildDurationModifier: 40
-# 		Description: Arachnid capable of repair and capturing vehicles
-# 	Selectable:
-# 		DecorationBounds: 24,24
-# 	Mobile:
-# 		Speed: 140
-# 		Locomotor: heavywheeled
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 10000
-# 	Voiced:
-# 		VoiceSet: spiderVoice
-# 	Repairable:
-# 		HpPerStep: 2182
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 10c0
-# 	SelectionDecorations:
-# 	Armament:
-# 		Weapon: TSRepair
-# 		TargetStances: Ally
-# 		ForceTargetStances: None
-# 	AttackFrontal:
-# 	AutoTarget:
-# 		ScanRadius: 6
-# 		InitialStance: AttackAnything
-# 	CaptureManager:
-# 	Captures@CAPTURES:
-# 		CaptureTypes: vehicle
-# 		PlayerExperience: 50
-# 		ConsumedByCapture: true
+PLYMOUTH_SPIDER:
+	Inherits: ^Vehicle
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Plymouth Spider
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites:
+		Queue: Infantry, RAInfantry
+		BuildDuration: 500
+		BuildDurationModifier: 40
+		Description: Arachnid capable of repair and capturing vehicles
+	Selectable:
+		Bounds: 512,512
+	Mobile:
+		Speed: 140
+		Locomotor: heavywheeled
+	WithMoveAnimation:
+	Health:
+		HP: 10000
+	Voiced:
+		VoiceSet: spiderVoice
+	Repairable:
+		HpPerStep: 2182
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 10c0
+	SelectionDecorations:
+	Armament:
+		Weapon: TSRepair
+		TargetStances: Ally
+		ForceTargetStances: None
+	AttackFrontal:
+	AutoTarget:
+		ScanRadius: 6
+		InitialStance: AttackAnything
+	CaptureManager:
+	Captures@CAPTURES:
+		CaptureTypes: vehicle
+		PlayerExperience: 50
+		ConsumedByCapture: true
 
-# PLYMOUTH_SCORPION:
-# 	Inherits: ^Vehicle
-# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-# 	Valued:
-# 		Cost: 300
-# 	Tooltip:
-# 		Name: Plymouth Scorpion
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildPaletteOrder: 10
-# 		Prerequisites: PLYMOUTH_LAB_ADVANCED
-# 		Queue: Infantry, RAInfantry
-# 		BuildDuration: 500
-# 		BuildDurationModifier: 40
-# 		Description: Arachnid armed with laser
-# 	Selectable:
-# 		DecorationBounds: 24,24
-# 	Mobile:
-# 		Speed: 140
-# 		Locomotor: heavywheeled
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 10000
-# 	Voiced:
-# 		VoiceSet: scorpionVoice
-# 	Armor:
-# 		Type: Heavy
-# 	RevealsShroud:
-# 		Range: 10c0
-# 	SelectionDecorations:
-# 	AttackFrontal:
-# 	Armament:
-# 		Weapon: plymouthScorpion
-# 		LocalOffset: 171,0,85
+PLYMOUTH_SCORPION:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Plymouth Scorpion
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: PLYMOUTH_LAB_ADVANCED
+		Queue: Infantry, RAInfantry
+		BuildDuration: 500
+		BuildDurationModifier: 40
+		Description: Arachnid armed with laser
+	Selectable:
+		Bounds: 512,512
+	Mobile:
+		Speed: 140
+		Locomotor: heavywheeled
+	WithMoveAnimation:
+	Health:
+		HP: 10000
+	Voiced:
+		VoiceSet: scorpionVoice
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 10c0
+	SelectionDecorations:
+	AttackFrontal:
+	Armament:
+		Weapon: plymouthScorpion
+		LocalOffset: 171,0,85
 
 # #OLD
 # EE2_SHIP:
@@ -2655,75 +2690,75 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 # 		Range: 10c0
 # 	SelectionDecorations:
 
-# PLMICROWAVE:
-# 	Inherits: ^Vehicle
-# 	Inherits@EXPERIENCE: ^GainsExperience
-# 	Inherits@CLOAK: ^AcceptsCloakCrate
-# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-# 	Valued:
-# 		Cost: 500
-# 	Tooltip:
-# 		Name: Plymouth Microwave Lynx
-# 	UpdatesPlayerStatistics:
-# 		AddToArmyValue: true
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 50
-# 		Prerequisites:
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Fast microwave vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 90
-# 	WithMoveAnimation:
-# 	Health:
-# 		HP: 25000
-# 	Voiced:
-# 		VoiceSet: lynxVoice
-# 	Repairable:
-# 		HpPerStep: 1819
-# 	Armor:
-# 		Type: Light
-# 	RevealsShroud:
-# 		Range: 8c0
-# 	Turreted:
-# 		TurnSpeed: 10
-# 		Offset: -85,0,128
-# 	Armament:
-# 		Weapon: plymouthMobileMicrowave
-# 		LocalOffset: 171,0,85
-# 	AttackTurreted:
-# 	WithMuzzleOverlay:
-# 	WithSpriteTurret:
-# 	RenderSprites:
-# 		Scale: 0.75
+PLMICROWAVE:
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Plymouth Microwave Lynx
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 50
+		Prerequisites:
+		Queue: Vehicle, RAVehicle
+		Description: Fast microwave vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 90
+	WithMoveAnimation:
+	Health:
+		HP: 25000
+	Voiced:
+		VoiceSet: lynxVoice
+	Repairable:
+		HpPerStep: 1819
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 8c0
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
+	Armament:
+		Weapon: plymouthMobileMicrowave
+		LocalOffset: 171,0,85
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Scale: 0.75
 
-# PLYMOUTH_TIGER_MICROWAVE:
-# 	Inherits: PLMICROWAVE
-# 	Valued:
-# 		Cost: 1300
-# 	Tooltip:
-# 		Name: Plymouth Microwave Tiger
-# 	Buildable:
-# 		BuildDuration: 300
-# 		BuildPaletteOrder: 100
-# 		Prerequisites: PLYMOUTH_SMELTER_RARE
-# 		Queue: Vehicle, RAVehicle
-# 		Description: Slow and strong microwave vehicle
-# 	Mobile:
-# 		TurnSpeed: 10
-# 		Speed: 45
-# 	Health:
-# 		HP: 60000
-# 	Voiced:
-# 		VoiceSet: op2tigerVoice
-# 	Armor:
-# 		Type: Heavy
-# 	Armament:
-# 		Weapon: plymouthMobileTigerMicrowave
-# 		LocalOffset: 171,0,85
-# 	RenderSprites:
-# 		Scale: 0.75
+PLYMOUTH_TIGER_MICROWAVE:
+	Inherits: PLMICROWAVE
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Plymouth Microwave Tiger
+	Buildable:
+		BuildDuration: 300
+		BuildPaletteOrder: 100
+		Prerequisites: PLYMOUTH_SMELTER_RARE
+		Queue: Vehicle, RAVehicle
+		Description: Slow and strong microwave vehicle
+	Mobile:
+		TurnSpeed: 10
+		Speed: 45
+	Health:
+		HP: 60000
+	Voiced:
+		VoiceSet: op2tigerVoice
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: plymouthMobileTigerMicrowave
+		LocalOffset: 171,0,85
+	RenderSprites:
+		Scale: 0.75
 
 # PLYMOUTH_LYNX_RPG:
 # 	Inherits: ^Vehicle
