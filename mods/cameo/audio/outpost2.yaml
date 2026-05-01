@@ -14,6 +14,13 @@ edenConvecVoice:
 		Select: whatConvec
 		Move: beepAction
 		Action: beepAction
+
+cargoTruckVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: truk_sel
+		Move: beepAction
+		Action: beepAction
 	
 lynxVoice:
 	DefaultVariant: .wav
@@ -59,6 +66,7 @@ factoryStructure:
 	DefaultVariant: .wav
 	Voices:
 		Select: fac_sel
+		Action: fac_sel
 
 tokamak:
 	DefaultVariant: .wav
@@ -90,6 +98,11 @@ university:
 	Voices:
 		Select: uni_sel
 
+basic_lab:
+	DefaultVariant: .wav
+	Voices:
+		Select: lab_1
+
 standard_lab:
 	DefaultVariant: .wav
 	Voices:
@@ -99,6 +112,21 @@ dirt:
 	DefaultVariant: .wav
 	Voices:
 		Select: dirt
+
+garage:
+	DefaultVariant: .wav
+	Voices:
+		Select: gar_sel
+
+rcc:
+	DefaultVariant: .wav
+	Voices:
+		Select: robosel
+
+factoryConsumer:
+	DefaultVariant: .wav
+	Voices:
+		Select: fac_cons
 
 factoryArachnid:
 	DefaultVariant: .wav
@@ -142,13 +170,16 @@ guardPost:
 		Move: beepAction
 		Action: beepAction
 
+lightTower:
+	DefaultVariant: .wav
+	Voices:
+		Select: light
+		Move: beepAction
+		Action: beepAction
 
 ####################################################################################################
 #		Announcements
 ####################################################################################################		
-
-
-
 OP2Speech:
 	DefaultVariant: .wav
 	Notifications:

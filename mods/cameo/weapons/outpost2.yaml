@@ -1,4 +1,14 @@
 ####################################################################################################
+#		WEAPONS SHARED
+####################################################################################################
+
+OP2bombchassisTargeting:
+	ValidTargets: Structure, Infantry, Vehicle
+	Range: 2c0
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+
+####################################################################################################
 #		WEAPONS EDEN
 ####################################################################################################
 edenMobileLaser:
@@ -18,6 +28,62 @@ edenMobileLaser:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+
+edenMobileLaserTiger:
+	Inherits: edenMobileLaser
+	ReloadDelay: 15
+
+edenMobileDefenceLaser:
+	Inherits: edenMobileLaser
+	ReloadDelay: 10
+	Range: 6c512
+
+edenRailgun:
+	Inherits: plymouthRPG
+	Projectile: Missile
+		ContrailStartColor: 0080FF
+		ContrailEndColor: 0080FF
+		TrailImage: edenrailguncloud
+		ContrailLength: 8
+		TrailInterval: 1
+
+edenTigerRailgun:
+	Inherits: edenRailgun
+	ReloadDelay: 40
+
+edenDefenceRailgun:
+	Inherits: edenRailgun
+	Range: 7c0
+	ReloadDelay: 50
+
+edenEMPGP:
+	Inherits: plymouthEMP
+	ReloadDelay: 30
+	Warhead@2Ext: GrantExternalCondition
+		Condition: empdisable
+		Duration: 150
+		Range: 0c768
+		ValidTargets: Vehicle
+
+edenMobileThorsHammer:
+	Inherits: ^TeslaWeapon
+	ReloadDelay: 30
+	Report: thor.wav
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 3000
+		Versus:
+			None: 100
+			Wood: 150
+			Light: 200
+			Medium: 125
+			Heavy: 100
+			Concrete: 50
+
+edenMobileThorsHammerTiger:
+	Inherits: edenMobileThorsHammer
+	ReloadDelay: 15
 		
 ####################################################################################################
 #		WEAPONS PLYMOUTH
@@ -81,7 +147,7 @@ plymouthRPG:
 		Inaccuracy: 128
 		Image: DRAGON
 		Shadow: true
-		HorizontalRateOfTurn: 60
+		HorizontalRateOfTurn: 15
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
@@ -140,7 +206,7 @@ plymouthSticky:
 		Duration: 95
 		Range: 1c0
 		ValidTargets: Infantry, Vehicle
-		ValidRelationships: Enemy
+		ValidStances: Enemy
 	Warhead@3Eff: CreateEffect
 		Explosions: op2_stickyfoam_goo
 plymouthStickyTiger:
@@ -176,7 +242,7 @@ plymouthMineSpawner:
 	ReloadDelay: 30
 	InvalidTargets: plymouth_minv
 	Projectile: Bullet
-		Image: chminv
+		Image: plymouth_esg_mine
 		Sequences: idle
 		Blockable: false
 		Speed: 250
@@ -185,6 +251,28 @@ plymouthMineSpawner:
 		Range: 0
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: plymouth_minv
+
+PLYMineExplosive:
+	ReloadDelay: 350
+	Projectile: InstantExplode
+	Range: 1c512
+	Warhead@1Dam: SpreadDamage
+		Spread: 512
+		Damage: 30000
+		InvalidTargets: Infantry
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@2Dam: SpreadDamage
+		Spread: 0c512
+		Damage: 10000
+		ValidTargets: Infantry
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@3Eff: CreateEffect
+		Explosions: artillery_explosion
+		ImpactSounds: gexpmina.wav, gexpminb.wav
+
+#Also used by Eden
 plymouthEMP:
 	ReloadDelay: 80
 	Range: 6c0
@@ -197,7 +285,7 @@ plymouthEMP:
 		Inaccuracy: 128
 		Image: DRAGON
 		Shadow: true
-		HorizontalRateOfTurn: 60
+		HorizontalRateOfTurn: 15
 		TrailImage: smokey
 		ContrailLength: 8
 		Speed: 298
@@ -220,6 +308,7 @@ plymouthEMP:
 		Range: 0c768
 		ValidTargets: Vehicle
 
+#Also used by Eden
 plymouthEMPTiger:
 	Inherits: plymouthEMP
 	ReloadDelay: 40
@@ -228,6 +317,7 @@ plymouthEMPTiger:
 		Duration: 150
 		Range: 0c768
 		ValidTargets: Vehicle
+
 MiniNova:
 	Inherits: MiniNuke
 	Warhead@3Eff_impact: CreateEffect
