@@ -1761,6 +1761,11 @@ ra2_smokey:
 		Length: *
 		ZOffset: 1023
 
+edenrailguncloud:
+	idle:
+		Filename: edenRailgunCloud.shp
+		Length: *
+
 smokey:
 	idle:
 		Filename: smokey.shp
@@ -3172,6 +3177,8 @@ poweroff:
 icon:
 	Defaults:
 		AddExtension: False
+	supernova_missile_super_icon: 
+		Filename: cameo_plymouth_supernova_missile.shp
 	hunterseeker:
 		Filename: tshunterseekersicon.shp
 	chemicalmiss:
