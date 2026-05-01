@@ -1328,8 +1328,12 @@ SCTerranMSLO:
 #		BUILDING PROTOSS
 ####################################################################################################
 
-SCNEXUS:
+^BaseBuildingProtoss:
 	Inherits: ^BaseBuilding
+	-ChangesShield@shielddischarge:
+
+SCNEXUS:
+	Inherits: ^BaseBuildingProtoss
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
@@ -1391,7 +1395,7 @@ SCNEXUS:
 		RequiresCondition: !jammed
 	Refinery:
 	DockHost:
-		DockAngle: 256
+		DockAngle: 0
 		DockOffset: 0, 1c512, 0
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
@@ -1411,7 +1415,7 @@ SCNEXUS:
 		PlayerPalette: player_rgba
 
 SCPYLON:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
 	Inherits@storage: ^StoresResources
@@ -1460,7 +1464,7 @@ SCPYLON:
 		Upgrades: uppylon1, uppylon2
 
 SCASSIMILATOR:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^Refinery
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -1540,7 +1544,7 @@ scpvespenegascollector:
 		Image: upscrefinery2
 
 SCGATEWAY:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
 	Inherits@barr: ^IsBarrack
@@ -1583,7 +1587,7 @@ SCGATEWAY:
 		PlayerPalette: player_rgba
 
 SCFORGE:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
@@ -1678,7 +1682,7 @@ SCPHOTONCANNON:
 		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
 
 SCCYBERNETICSCORE:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
@@ -1717,7 +1721,7 @@ SCCYBERNETICSCORE:
 		PlayerPalette: player_rgba
 
 SCSHIELDBATTERY:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@EMP: ^TurretEMP
 	Inherits@shape: ^3x2Shape
@@ -1783,7 +1787,7 @@ SCSHIELDBATTERY:
 		PlayerPalette: player_rgba
 
 SCROBOTICSFACILITY:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
 	Inherits@weap: ^IsWeaponFactory
@@ -1826,7 +1830,7 @@ SCROBOTICSFACILITY:
 		PlayerPalette: player_rgba
 
 SCSTARGATE:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
 	Inherits@hpad: ^IsAircraftFactory
@@ -1862,7 +1866,7 @@ SCSTARGATE:
 		PlayerPalette: player_rgba
 
 SCCITADELOFADUN:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
@@ -1901,7 +1905,7 @@ SCCITADELOFADUN:
 		PlayerPalette: player_rgba
 
 SCROBOTICSSUPPORTBAY:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
@@ -1940,7 +1944,7 @@ SCROBOTICSSUPPORTBAY:
 		PlayerPalette: player_rgba
 
 SCFLEETBEACON:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@SW: ^PrimarySuperweapon
@@ -1999,7 +2003,7 @@ SCFLEETBEACON:
 		PlayerPalette: player_rgba
 
 SCTEMPLARARCHIVES:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
@@ -2038,7 +2042,7 @@ SCTEMPLARARCHIVES:
 		PlayerPalette: player_rgba
 
 SCOBSERVATORY:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@radar: ^RadarBuilding
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -2078,7 +2082,7 @@ SCOBSERVATORY:
 		PlayerPalette: player_rgba
 
 SCARBITERTRIBUNAL:
-	Inherits: ^BaseBuilding
+	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
@@ -6212,6 +6216,7 @@ upbehemoth:
 		Condition: shieldpermanent
 	DamageMultiplier@shieldpermanent:
 		Modifier: 150
+		Condition: shieldpermanent
 	ChangesShield@personal_shield:
 		Step: 40
 		Delay: 1
@@ -6238,6 +6243,7 @@ upbehemoth:
 ^BasicProtoss: #ONLY USE FOR UNITS THAT INHERIT ^SOLDIER
 	Inherits: ^DefaultSoldier
 	Inherits@ProtossPersonalShield: ^ProtossPersonalShield
+	-ChangesShield@shielddischarge:
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
 		CrushedSequence: die
@@ -6246,6 +6252,10 @@ upbehemoth:
 	Crushable:
 		CrushClasses: vehicle
 		-CrushSound:
+
+^ProtossVehicle:
+	Inherits: ^Vehicle
+	-ChangesShield@shielddischarge:
 
 ^LargeProtoss:
 	Inherits: ^BasicProtoss
@@ -6275,6 +6285,7 @@ upbehemoth:
 ^AirProtoss:
 	Inherits: ^Helicopter
 	Inherits@ProtossPersonalShield: ^ProtossPersonalShield
+	-ChangesShield@shielddischarge:
 
 ^BuildingExplodeProtoss:
 	FireWarheadsOnDeath:
@@ -6293,7 +6304,7 @@ upbehemoth:
 		EmptyWeapon: UnitExplodeSmallProtoss
 
 SCPROBE:
-	Inherits: ^Vehicle
+	Inherits: ^ProtossVehicle
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@explode: ^UnitExplodeSmallProtoss
 	Inherits@selection: ^SelectableEconomicUnit
@@ -6307,7 +6318,7 @@ SCPROBE:
 		Name: Probe
 	Buildable:
 		Prerequisites: ~scassimilator
-		Description: Collects resources.\nCan repair mechanical units and buildings.
+		Description: Collects resources. Can repair mechanical units and buildings. Can capture buildings.
 	Armament:
 		Weapon: ProbeAttack
 	AutoTarget:
@@ -7797,7 +7808,7 @@ SCARBITER:
 		PlayerPalette: player_rgba
 
 SCPMCV:
-	Inherits: ^Vehicle
+	Inherits: ^ProtossVehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
@@ -7807,9 +7818,9 @@ SCPMCV:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~scroboticsfacility
-		Description: Builds structures and provides radar.
+		Description: Transforms into a Nexus. Builds structures and provides radar.
 	Tooltip:
-		Name: Mobile Construction Vehicle (Protoss)
+		Name: Protoss Mobile Nexus
 	Transforms:
 		IntoActor: scnexus
 		Offset: -1,-1
