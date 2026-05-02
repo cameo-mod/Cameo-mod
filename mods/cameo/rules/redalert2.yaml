@@ -4983,7 +4983,7 @@ YRYURI:
 		Name: Yuri Clone
 	Buildable:
 		BuildPaletteOrder: 45
-		Prerequisites: ~yrygtech
+		Prerequisites: ~ra2napsis
 		Queue: Infantry, RAInfantry
 		Description: actor-yuri.description
 	Mobile:
@@ -5239,12 +5239,12 @@ YRGTRP:
 	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
 	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
 	Valued:
-		Cost: 400
+		Cost: 300
 	Tooltip:
 		Name: Gatling Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2napsis
+		Prerequisites: ~yrygtech
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2cameo
 		Description: actor-gtrp.description
@@ -5331,7 +5331,7 @@ yrbiot:
 		Prerequisites: ~ra2yclon
 		Description: actor-biot.description
 	Valued:
-		Cost: 600
+		Cost: 400
 	Tooltip:
 		Name: Bio Trooper
 	UpdatesPlayerStatistics:
@@ -14481,7 +14481,7 @@ ra2_yuri_upgrade_psychicrange:
 		Name: Psychic Range
 	Buildable:
 		Description: Increases Mind Control Range of all Psychic Units by 15%. Pyshic Towers gain 30% more Range.
-		Prerequisites: ~ra2napsis, !ra2_yuri_upgrade_psychicrange
+		Prerequisites: ~ra2napsis, yrygtech, yrygcomd, !ra2_yuri_upgrade_psychicrange
 	RenderSprites:
 		Image: ra2_yuri_upgrade_psychicrange
 

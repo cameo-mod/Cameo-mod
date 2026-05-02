@@ -9506,16 +9506,16 @@ combat_tank_o:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Tooltip:
+		Name: Ordos Combat Tank
+	Valued:
+		Cost: 650
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
 		Description: template-mbt.description
 		IconPalette: d2kunit
 		Prerequisites: ~heavy_factory.ordos, ~!d2k_autogun_tank_upgrade
-	Valued:
-		Cost: 650
-	Tooltip:
-		Name: Ordos Combat Tank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -9534,7 +9534,67 @@ combat_tank_o:
 	Turreted:
 		TurnSpeed: 17
 	Armament:
-		Weapon: 80mm_O
+		Weapon: OrdosCombatTankCannon
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 256,0,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	Selectable:
+		Class: combat
+	AttractsWorms:
+		Intensity: 520
+	Voiced:
+		VoiceSet: D2KCombatTank
+	ActorStatValues:
+		Upgrades: ordos_upgrade_shield, ordos_upgrade_contraband
+
+d2k_ordos_heavycombattank:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Tooltip:
+		Name: Ordos Heavy Combat Tank
+	Valued:
+		Cost: 950
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 40
+		Description: template-mbt.description
+		IconPalette: d2kunit
+		Prerequisites: ~d2k_autogun_tank_upgrade
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 115000
+	Repairable:
+		HpPerStep: 5750
+	ChangesHealth@SelfHealing:
+		Step: 46
+	Shielded:
+		RegenAmount: 92
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Turreted:
+		TurnSpeed: 15
+	Armament:
+		Weapon: HeavyOrdosCombatTankCannon
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 256,0,0
@@ -9558,7 +9618,6 @@ combat_tank_o:
 d2k_autogun_tank_small:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -9573,7 +9632,7 @@ d2k_autogun_tank_small:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~d2k_autogun_tank_upgrade, ~!d2k_heavy_autogun_tank_upgrade
+		Prerequisites: ~outpost.ordos, ~!d2k_heavy_autogun_tank_upgrade
 		Description: Combat Anti-Infantry and Anti-Air Vehicle
 		IconPalette: ra2
 	Armament:
@@ -9582,7 +9641,7 @@ d2k_autogun_tank_small:
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
 	FirepowerMultiplier@MultiWeapon:
-		Modifier: 50
+		Modifier: 25
 	Health:
 		HP: 95000
 	Repairable:
@@ -9773,7 +9832,7 @@ combat_tank_ixian:
 	Turreted:
 		TurnSpeed: 13
 	Armament:
-		Weapon: 80mm_OUP
+		Weapon: IxianCombatTankCannon
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 256,0,0

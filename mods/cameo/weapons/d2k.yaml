@@ -166,7 +166,7 @@ Debris4:
 	Inherits: ^D2K_Cannon
 	ReloadDelay: 55
 
-80mm_O:
+OrdosCombatTankCannon:
 	Inherits: ^D2K_Cannon
 	Range: 5783
 	ReloadDelay: 35
@@ -177,16 +177,37 @@ Debris4:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 4
 
-80mm_OUP:
+HeavyOrdosCombatTankCannon:
 	Inherits: ^D2K_Cannon
-	Range: 6327
-	ReloadDelay: 33
+	Range: 6000
+	ReloadDelay: 40
 	Projectile: Bullet
-		Speed: 632
+		Speed: 600
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 10000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
+
+IxianCombatTankCannon:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^HeavyCannon
+	Inherits: ^D2K_Cannon
+	Range: 5555
+	ReloadDelay: 35
+	Projectile: Bullet
+		Speed: 555
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
 
 DuelistTankCannon:
 	Inherits: ^MediumFlameWeapon
@@ -3327,32 +3348,8 @@ autogun_tank:
 		ValidTargets: Ground, Water
 
 autogun_tank_small:
-	Inherits: ^FlakWeapon
-	Inherits: ^MediumMissile
-	Inherits: ^Chaingun
-	ReloadDelay: 24
-	Burst: 4
-	BurstDelays: 2
+	Inherits: autogun_tank
 	Range: 6220
-	-Report:
-	StartBurstReport: 20MMGUN1.WAV
-	ValidTargets: Ground, Water, Trees, Air
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 2000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Effect: CreateEffect
-		Explosions: poof
-		ImpactSounds: xplos.aud
-		ValidTargets: Ground, Water
 
 d2k_sardaukar_elite:
 	Inherits: autogun_turret

@@ -1,4 +1,14 @@
 ####################################################################################################
+#		WEAPONS SHARED
+####################################################################################################
+
+OP2bombchassisTargeting:
+	ValidTargets: Structure, Infantry, Vehicle
+	Range: 2c0
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+
+####################################################################################################
 #		WEAPONS EDEN
 ####################################################################################################
 edenMobileLaser:
@@ -28,6 +38,24 @@ edenMobileDefenceLaser:
 	ReloadDelay: 10
 	Range: 6c512
 
+edenRailgun:
+	Inherits: plymouthRPG
+	Projectile: Missile
+		ContrailStartColor: 0080FF
+		ContrailEndColor: 0080FF
+		TrailImage: edenrailguncloud
+		ContrailLength: 8
+		TrailInterval: 1
+
+edenTigerRailgun:
+	Inherits: edenRailgun
+	ReloadDelay: 40
+
+edenDefenceRailgun:
+	Inherits: edenRailgun
+	Range: 7c0
+	ReloadDelay: 50
+
 edenEMPGP:
 	Inherits: plymouthEMP
 	ReloadDelay: 30
@@ -41,11 +69,14 @@ edenMobileThorsHammer:
 	Inherits: ^TeslaWeapon
 	ReloadDelay: 30
 	Report: thor.wav
-	Warhead@1Dam: SpreadDamage
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Spread: 100
+		Damage: 3000
 		Versus:
-			None: 1000
-			Wood: 75
-			Light: 150
+			None: 100
+			Wood: 150
+			Light: 200
 			Medium: 125
 			Heavy: 100
 			Concrete: 50
@@ -53,7 +84,7 @@ edenMobileThorsHammer:
 edenMobileThorsHammerTiger:
 	Inherits: edenMobileThorsHammer
 	ReloadDelay: 15
-
+		
 ####################################################################################################
 #		WEAPONS PLYMOUTH
 ####################################################################################################
@@ -79,7 +110,7 @@ plymouthMobileMicrowave:
 plymouthMobileTigerMicrowave:
 	Inherits: plymouthMobileMicrowave
 	ReloadDelay: 10
-
+		
 plymouthMobileDefenceMicrowave:
 	Inherits: plymouthMobileMicrowave
 	ReloadDelay: 10
@@ -103,7 +134,7 @@ plymouthScorpion:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
-
+		
 plymouthRPG:
 	ReloadDelay: 80
 	Range: 6c0
@@ -211,7 +242,7 @@ plymouthMineSpawner:
 	ReloadDelay: 30
 	InvalidTargets: plymouth_minv
 	Projectile: Bullet
-		Image: chminv
+		Image: plymouth_esg_mine
 		Sequences: idle
 		Blockable: false
 		Speed: 250
@@ -220,6 +251,27 @@ plymouthMineSpawner:
 		Range: 0
 		ValidTargets: Ground, Water, Air
 		InvalidTargets: plymouth_minv
+
+PLYMineExplosive:
+	ReloadDelay: 350
+	Projectile: InstantExplode
+	Range: 1c512
+	Warhead@1Dam: SpreadDamage
+		Spread: 512
+		Damage: 30000
+		InvalidTargets: Infantry
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@2Dam: SpreadDamage
+		Spread: 0c512
+		Damage: 10000
+		ValidTargets: Infantry
+		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@3Eff: CreateEffect
+		Explosions: artillery_explosion
+		ImpactSounds: gexpmina.wav, gexpminb.wav
+
 #Also used by Eden
 plymouthEMP:
 	ReloadDelay: 80
@@ -361,23 +413,3 @@ supernova_missile_super:
 		Duration: 20
 		Intensity: 5
 		Multiplier: 1,1
-
-OutpostMineExplosive:
-	ReloadDelay: 350
-	Projectile: InstantExplode
-	Range: 1c512
-	Warhead@1Dam: SpreadDamage
-		Spread: 512
-		Damage: 30000
-		InvalidTargets: Infantry
-		ValidRelationships: Neutral, Enemy
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@2Dam: SpreadDamage
-		Spread: 0c512
-		Damage: 10000
-		ValidTargets: Infantry
-		ValidRelationships: Neutral, Enemy
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@3Eff: CreateEffect
-		Explosions: artillery_explosion
-		ImpactSounds: gexpmina.wav, gexpminb.wav

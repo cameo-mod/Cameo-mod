@@ -9403,6 +9403,25 @@ d2k_resonancedrone:
 		Filename: d2k_resonancedroneicon.png
 		Offset: 0,0
 
+d2k_ordos_heavycombattank:
+	Defaults:
+		Filename: d2k_ordos_heavycombattank_chassis.png
+		Facings: -32
+		InterpolatedFacings: 64
+	idle:
+	turret:
+		Filename: d2k_ordos_heavycombattank_turret.png
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4028
+		Tick: 60
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: d2k_ordos_heavycombattank_icon.png
+
 ordos_upgrade_toxin:
 	icon:
 		Filename: ordos_upgrade_toxin.png

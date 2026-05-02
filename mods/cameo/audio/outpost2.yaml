@@ -7,7 +7,7 @@ edenCommandCenterVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: whatCommandCenter
-
+		
 edenConvecVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -21,7 +21,7 @@ cargoTruckVoice:
 		Select: truk_sel
 		Move: beepAction
 		Action: beepAction
-
+	
 lynxVoice:
 	DefaultVariant: .wav
 	Voices:
@@ -40,7 +40,6 @@ scoutVoice:
 	DefaultVariant: .wav
 	Voices:
 		Select: scout
-		Build: scout
 		Move: beepAction
 		Action: beepAction
 
@@ -67,6 +66,7 @@ factoryStructure:
 	DefaultVariant: .wav
 	Voices:
 		Select: fac_sel
+		Action: fac_sel
 
 tokamak:
 	DefaultVariant: .wav
@@ -87,7 +87,7 @@ residence:
 	DefaultVariant: .wav
 	Voices:
 		Select: res1_sel
-
+		
 nursery:
 	DefaultVariant: .wav
 	Voices:
@@ -113,6 +113,11 @@ dirt:
 	Voices:
 		Select: dirt
 
+garage:
+	DefaultVariant: .wav
+	Voices:
+		Select: gar_sel
+
 rcc:
 	DefaultVariant: .wav
 	Voices:
@@ -132,12 +137,12 @@ gorf:
 	DefaultVariant: .wav
 	Voices:
 		Select: gorf
-
+		
 mine_common:
 	DefaultVariant: .wav
 	Voices:
 		Select: mine_1
-
+		
 storage_common:
 	DefaultVariant: .wav
 	Voices:
@@ -152,7 +157,7 @@ spacePort:
 	DefaultVariant: .wav
 	Voices:
 		Select: spaceprt
-
+		
 smelterRare:
 	DefaultVariant: .wav
 	Voices:
@@ -165,11 +170,16 @@ guardPost:
 		Move: beepAction
 		Action: beepAction
 
+lightTower:
+	DefaultVariant: .wav
+	Voices:
+		Select: light
+		Move: beepAction
+		Action: beepAction
 
 ####################################################################################################
 #		Announcements
-####################################################################################################
-
+####################################################################################################		
 OP2Speech:
 	DefaultVariant: .wav
 	Notifications:
