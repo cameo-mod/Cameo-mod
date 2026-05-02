@@ -9612,6 +9612,8 @@ d2k_ordos_heavycombattank:
 		Intensity: 520
 	Voiced:
 		VoiceSet: D2KCombatTank
+	RenderSprites:
+		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: ordos_upgrade_shield, ordos_upgrade_contraband
 
@@ -10753,13 +10755,13 @@ d2k_aatrooper_upgrade:
 d2k_autogun_tank_upgrade:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
-		Name: Autogun Tank Upgrade
+		Name: Heavy Combat Tank Upgrade
 	Buildable:
 		Description: Upgrades the Ordos Combat Tank to the Autogun Tank
 		Prerequisites: ~outpost.ordos, ~!d2k_autogun_tank_upgrade
 		IconPalette: ra2
 	RenderSprites:
-		Image: d2k_autogun_tank_small
+		Image: d2k_ordos_heavycombattank
 
 d2k_heavy_autogun_tank_upgrade:
 	Inherits: ^unit_upgrade_template

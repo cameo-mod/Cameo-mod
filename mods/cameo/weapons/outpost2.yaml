@@ -84,7 +84,7 @@ edenMobileThorsHammer:
 edenMobileThorsHammerTiger:
 	Inherits: edenMobileThorsHammer
 	ReloadDelay: 15
-		
+
 ####################################################################################################
 #		WEAPONS PLYMOUTH
 ####################################################################################################
@@ -110,7 +110,7 @@ plymouthMobileMicrowave:
 plymouthMobileTigerMicrowave:
 	Inherits: plymouthMobileMicrowave
 	ReloadDelay: 10
-		
+
 plymouthMobileDefenceMicrowave:
 	Inherits: plymouthMobileMicrowave
 	ReloadDelay: 10
@@ -125,6 +125,10 @@ plymouthScorpion:
 		Width: 40
 		HitAnim: laserfire
 		ZOffset: 2047
+		SecondaryBeam: true
+		SecondaryBeamWidth: 80
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: FFFFFF
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
 		Damage: 500
@@ -134,7 +138,7 @@ plymouthScorpion:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
-		
+
 plymouthRPG:
 	ReloadDelay: 80
 	Range: 6c0
@@ -209,6 +213,18 @@ plymouthSticky:
 		ValidStances: Enemy
 	Warhead@3Eff: CreateEffect
 		Explosions: op2_stickyfoam_goo
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: snared
+		Duration: 100
+		ValidTargets: snareable
+		ValidRelationships: Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ImpactSounds: zquhit00.aud,zquhit01.aud
+		ValidTargets: Ground, Water, Air
+
 plymouthStickyTiger:
 	Inherits: plymouthSticky
 	ReloadDelay: 45
@@ -274,11 +290,18 @@ PLYMineExplosive:
 
 #Also used by Eden
 plymouthEMP:
+	Inherits: ^TeslaChargedWeapon
+	Inherits: ^TeslaWeapon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyCannon
+	Inherits: ^MediumCannon
+	Inherits: ^MediumMissile
+	Inherits: ^HeavyMissile
 	ReloadDelay: 80
-	Range: 6c0
-	MinRange: 0c512
+	Range: 6000
+	MinRange: 1200
 	Report: bazook1.aud
-	ValidTargets: Vehicle
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -286,27 +309,77 @@ plymouthEMP:
 		Image: DRAGON
 		Shadow: true
 		HorizontalRateOfTurn: 15
-		TrailImage: smokey
 		ContrailLength: 8
-		Speed: 298
-		RangeLimit: 7c204
-	Warhead@1Dam: SpreadDamage
-		Spread: 128
-		Damage: 100
-		ValidTargets: Ground, Air
-		Versus:
-			None: 28
-			Wood: 116
-			Light: 140
-			Heavy: 140
-		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
-	Warhead@3Eff: CreateEffect
+		Speed: 256
+		TrailImage: blue_smokey
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 32000
+		Spread: 1600
+	Warhead@Effect: CreateEffect
 		Explosions: op2_emp_static
-	Warhead@2Ext: GrantExternalCondition
-		Condition: empdisable
-		Duration: 100
-		Range: 0c768
-		ValidTargets: Vehicle
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship, Trees
 
 #Also used by Eden
 plymouthEMPTiger:
