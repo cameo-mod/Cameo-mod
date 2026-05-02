@@ -1553,6 +1553,20 @@ actor-latin_ca12hit =
    .description = Provides Topol Storm support power.
       Requires power to operate.
 
+actor-latin_radar =
+   .description = Provides radar, unlocks technologies,
+      and provides EMP capabilities.
+      Requires power to operate.
+
+      Only one may be constructed per player.
+
+actor-latin_cgte =
+   .description = Provides steady flow of cash.
+      Produces scrap cars to bolster the army.
+      Requires power to operate.
+
+      Only one may be constructed per player.
+
 actor-nax_merc =
    .description = Sniper Infantry with long range.
 
@@ -2323,7 +2337,7 @@ template-factory =
    .ra2-yuri = Yuri War Factory
 
 template-radar =
-   .description = Provides radar and advanced technologies.
+   .description = Provides radar and unlocks technologies.
       Requires power to operate.
    .td-nod = Nod Communications Center
    .ra-allies = Allied Radar Dome
