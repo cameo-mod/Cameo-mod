@@ -9405,12 +9405,17 @@ d2k_resonancedrone:
 
 d2k_ordos_heavycombattank:
 	Defaults:
+		Scale: 1.5
+	idle:
 		Filename: d2k_ordos_heavycombattank_chassis.png
 		Facings: -32
 		InterpolatedFacings: 64
-	idle:
+		Offset: 0, 4
 	turret:
 		Filename: d2k_ordos_heavycombattank_turret.png
+		Facings: -32
+		InterpolatedFacings: 64
+		Offset: 0, -2
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
