@@ -1018,7 +1018,7 @@ halloween_skeleton:
 		VoiceSet: voiceskeleton
 	Armament:
 		Weapon: RA2SKELETON
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	ProducibleWithLevel:
 		Prerequisites: barracks.upgraded
 	GrantConditionOnPrerequisite@ghost:
@@ -1784,7 +1784,7 @@ halloween_blob:
 		Name: Hungry Blob
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	Inherits@EXT: ^ExternalConditions ##########
 	-Armament:
 	ReloadDelayMultiplier@cow:

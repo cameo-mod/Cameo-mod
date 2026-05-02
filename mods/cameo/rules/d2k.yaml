@@ -318,7 +318,7 @@ Player:
 		CustomPipType: green
 		Weight: 1
 	HiddenUnderFog:
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	Crushable:
 		CrushSound: CRUSH1.WAV
 		WarnProbability: 75
@@ -398,7 +398,7 @@ Player:
 		ActorTypes: light_inf
 	MustBeDestroyed:
 		RequiredForShortGame: true
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: BuildingLost
 	ShakeOnDeath:
 	Demolishable:
@@ -498,7 +498,7 @@ Player:
 	AttackMove:
 	DrawLineToTarget:
 	HiddenUnderFog:
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	Guard:
 	Guardable:
 	WithFacingSpriteBody:
@@ -10034,7 +10034,7 @@ combat_tank_ixian:
 # 		Modifier: 0
 # 	RenderSprites:
 # 		Image: combat_tank_ixian
-# 	-ActorLostNotification:
+# 	-ActorLostNotificationCameo:
 # 	ExternalCondition@projectionrange:
 # 		Condition: projectionrange
 # 	KillsSelf@projectionrange:
@@ -14276,7 +14276,7 @@ d2k_farasha_drone:
 	Voiced:
 		VoiceSet: D2KVehicleVoice
 	RejectsOrders:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	HitShape:
 	-MapEditorData:

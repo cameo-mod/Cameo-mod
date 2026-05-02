@@ -210,7 +210,7 @@ PVICE:
 		HP: 50000
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	Inherits@EXT: ^ExternalConditions ##########
 
 
@@ -447,7 +447,7 @@ RA2SKELETON:
 		VoiceSet: voiceskeleton
 	Armament:
 		Weapon: RA2SKELETON
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	ProducibleWithLevel:
 		Prerequisites: barracks.upgraded
 RA2SPIDER:

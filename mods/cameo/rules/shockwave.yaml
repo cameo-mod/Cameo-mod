@@ -3493,7 +3493,7 @@ susapopupturret.para:
 	RenderSprites:
 		Image: susapopupturret.para
 	-Explodes:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 
 susapopupturret:
 	Inherits: susapopuppatriot
@@ -7275,7 +7275,7 @@ susaamdggrenade.para:
 		Image: susaamdggrenade.para
 	Explodes:
 		Weapon: SUSAAMDGrenadeExplode
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 
 upsusaamdggrenadebarrage:
 	Inherits: ^upgrade.template

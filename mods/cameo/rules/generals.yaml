@@ -2686,7 +2686,7 @@ glsite.soldier:
 	Voiced:
 		VoiceSet: RPGTrooperVoice
 	-MapEditorData:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 
 glsite.hole:
 	Inherits: GLAHole2x2Defense
@@ -2933,7 +2933,7 @@ glamob:
 	-Captures@CAPTURES:
 	-Captures@DRIVER_KILL:
 	-TakeCover:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	RejectsOrders:
 	Valued:
@@ -10314,7 +10314,7 @@ pscdrones3:
 		PersistentTargeting: false
 		FacingTolerance: 20
 	-SpawnActorOnDeath:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	GrantConditionOnPrerequisite@usaupdronearmor:
 		Condition: usaupdronearmor
@@ -13497,7 +13497,7 @@ usaraptorcarrier:
 	DeathSounds:
 	Power:
 		Amount: 0
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	HitShape:
 	RenderSprites:

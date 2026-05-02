@@ -7,8 +7,8 @@ World:
 		Description: United Federation of Seven Continents\nFeatures:\n- Generated Income\n- Use Advancer to Upgrade and Repair Buildings\nSupport Powers: Asteroids, Fighter, Bomber, Tripler
 	####################################################################################################
 	#		State of War
-	####################################################################################################  
-	
+	####################################################################################################
+
 	StartingUnits@mcvonlysow:
 		Class: none
 		ClassName: MCV Only
@@ -63,14 +63,14 @@ Player:
 		Prerequisite: numberofgoldmines10
 		RequiresCondition: (GoldminesOwned >= 10)
 
-###############            
+###############
 #   BUILDINGS #
 ###############
 
 ^sowprodupgrade:
 	Interactable:
 	AlwaysVisible:
-	
+
 ^sow_upgradeable:
 	Targetable@sowupgrade:
 		TargetTypes: sowupgrade
@@ -142,7 +142,7 @@ Player:
 	Armor@upgrade3:
 		Type: Concrete
 		RequiresCondition: sowupgrade_3
-		
+
 ^sow_unit_lowpower:
 	Inherits@lowpower: ^DisabledOverlay
 	DamageMultiplier@lowpower:
@@ -157,7 +157,7 @@ Player:
 	FirepowerMultiplier@lowpower:
 		Modifier: 50
 		RequiresCondition: lowpower
-		
+
 ^sowgeneric:
 	Inherits@AIDifficulties: ^AIDifficulties
 	Inherits@disabledoverlay: ^DisabledOverlay
@@ -184,7 +184,7 @@ Player:
 	RenderSprites:
 ^sowresize_walker:
 	RenderSprites:
-		
+
 ^sow_power_boost:
 	ProductionTimeMultiplier@power1:
 		Multiplier: 90
@@ -204,7 +204,7 @@ Player:
 	ProductionTimeMultiplier@power5:
 		Multiplier: 66
 		Prerequisites: sowovercharge, sowpower
-		
+
 ^sow_no_cd:
 	ProductionTimeMultiplier@powersow:
 		Multiplier: 0
@@ -248,7 +248,7 @@ Player:
 		Weapon: satelliteprotection_mk2
 		LocalOffset: 1000, 0, 100000
 		RequiresCondition: SatelliteUpgrade_mk2 && !lowpower
-		
+
 sowheadquarters:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
@@ -349,7 +349,7 @@ sowheadquarters:
 	GrantConditionOnPrerequisite@satelliteprotection:
 		Prerequisites: sowheadquarters
 		Condition: SatelliteUpgrade_mk2
-		
+
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -477,16 +477,16 @@ factory_sowupgrade:
 factory_sowupgrade_1:
 	Tooltip:
 		Name: Any Tier 3 Factory
-		
+
 factory_sowupgrade_2:
 	Tooltip:
 		Name: Any Tier 4 Factory
-		
+
 factory_sowupgrade_3:
 	Tooltip:
 		Name: Any Tier 5 Factory
-		
-		
+
+
 sowmediumfactory:
 	Inherits: ^BaseBuilding
 	Inherits@resize: ^sowresize
@@ -607,7 +607,7 @@ sowmediumfactory:
 	Targetable@sowupgrade3:
 		TargetTypes: sowupgrade_3
 		RequiresCondition: sowupgrade && sowupgrade_1 && sowupgrade_2 && !sowupgrade_3 && !factory_sowupgrade_3
-		
+
 sowheavyfactory:
 	Inherits: ^BaseBuilding
 	Inherits@resize: ^sowresize
@@ -728,7 +728,7 @@ sowheavyfactory:
 	Targetable@sowupgrade3:
 		TargetTypes: sowupgrade_3
 		RequiresCondition: sowupgrade && sowupgrade_1 && sowupgrade_2 && !sowupgrade_3 && !factory_sowupgrade_3
-		
+
 sowabcfactory:
 	Inherits: ^BaseBuilding
 	Inherits@resize: ^sowresize
@@ -758,7 +758,7 @@ sowabcfactory:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-512,0
 	Health:
-		HP: 150000 #60000      
+		HP: 150000 #60000
 	ProvidesPrerequisite@buildingname:
 	RevealsShroud:
 		Range: 12c0
@@ -954,7 +954,7 @@ sowradar:
 		SupportPowerPaletteOrder: 20
 		Prerequisites: advancedairstrikes, sowresearch, ~techlevel.high
 		PauseOnCondition: lowpower
-		
+
 sowgoldmine:
 	GrantExternalConditionToOwner@GoldminesOwned:
 		Condition: GoldminesOwned
@@ -1135,7 +1135,7 @@ sowgoldmine.bot:
 		Prerequisites: sowresearch, ~botplayer
 	RenderSprites:
 		Image: sowgoldmine
-		
+
 sowpower:
 	Inherits: ^BaseBuilding
 	Inherits@resize: ^sowresize
@@ -1217,7 +1217,7 @@ sowpower:
 		EmptyWeapon: sow_abc_nuke_pp
 		DamageSource: Self
 		RequiresCondition: sowovercharge
-		
+
 sowresearch:
 	Inherits: ^BaseBuilding
 	Inherits@resize: ^sowresize
@@ -1327,7 +1327,7 @@ sowresearch.bot:
 		Prerequisites: ~botplayer
 	RenderSprites:
 		Image: sowresearch
-		
+
 sowmechfactory:
 	Inherits: ^BaseBuilding
 	Inherits@resize: ^sowresize
@@ -1501,11 +1501,11 @@ sowasteroidstation:
 		Condition: SatelliteUpgrade_mk2
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: swasteroid
-		
+
 	################
 	#   TURRETS    #
 	################
-	
+
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -1565,9 +1565,9 @@ sow_gun_tower:
 		Amount: -25
 	BodyOrientation:
 		QuantizedFacings: 8
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: sowturretlost
-	
+
 sow_antiair_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
@@ -1619,11 +1619,11 @@ sow_antiair_tower:
 		Amount: -50
 	BodyOrientation:
 		QuantizedFacings: 8
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: sowturretlost
 	DeathSounds:
 		Voice:
-	
+
 sow_plasma_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
@@ -1677,9 +1677,9 @@ sow_plasma_tower:
 		Amount: -100
 	BodyOrientation:
 		QuantizedFacings: 8
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: sowturretlost
-	
+
 sow_minigun_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
@@ -1737,9 +1737,9 @@ sow_minigun_tower:
 		Amount: -200
 	BodyOrientation:
 		QuantizedFacings: 8
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: sowturretlost
-	
+
 sow_defragmenter_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
@@ -1796,9 +1796,9 @@ sow_defragmenter_tower:
 		Amount: -300
 	BodyOrientation:
 		QuantizedFacings: 8
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: sowturretlost
-	
+
 sow_vulcano_tower:
 	Inherits: ^Defense
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
@@ -1853,7 +1853,7 @@ sow_vulcano_tower:
 		Amount: -150
 	BodyOrientation:
 		QuantizedFacings: 8
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: sowturretlost
 	################
 	#     UNITS    #
@@ -1912,10 +1912,10 @@ sow_lt_cannon:
 		Voice: Attack
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	Inherits@EXT: ^ExternalConditions ########## 
+	Inherits@EXT: ^ExternalConditions ##########
 	DeathSounds:
 		Voice: Death
-	
+
 sow_lt_flame:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
@@ -1972,7 +1972,7 @@ sow_lt_flame:
 	Inherits@EXT: ^ExternalConditions ##########
 	DeathSounds:
 		Voice: Death
-	
+
 sow_lt_siege:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2085,7 +2085,7 @@ sow_lt_special:
 	Inherits@EXT: ^ExternalConditions
 	DeathSounds:
 		Voice: Death
-	
+
 sow_lt_antiair:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2145,7 +2145,7 @@ sow_lt_antiair:
 	Inherits@EXT: ^ExternalConditions
 	DeathSounds:
 		Voice: Death
-		
+
 sow_mt_cannon:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2201,7 +2201,7 @@ sow_mt_cannon:
 	Inherits@EXT: ^ExternalConditions
 	DeathSounds:
 		Voice: Death
-	
+
 sow_mt_flame:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
@@ -2257,7 +2257,7 @@ sow_mt_flame:
 	Inherits@EXT: ^ExternalConditions
 	DeathSounds:
 		Voice: Death
-	
+
 sow_mt_siege:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2313,7 +2313,7 @@ sow_mt_siege:
 	Inherits@EXT: ^ExternalConditions
 	DeathSounds:
 		Voice: Death
-	
+
 sow_mt_special:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2430,7 +2430,7 @@ sow_mt_antiair:
 	Inherits@EXT: ^ExternalConditions
 	DeathSounds:
 		Voice: Death
-		
+
 sow_ht_cannon:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2490,7 +2490,7 @@ sow_ht_cannon:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_ht_flame:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
@@ -2550,7 +2550,7 @@ sow_ht_flame:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_ht_siege:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2610,7 +2610,7 @@ sow_ht_siege:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_ht_special:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2669,7 +2669,7 @@ sow_ht_special:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_ht_antiair:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -2735,7 +2735,7 @@ sow_ht_antiair:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-	
+
 ############
 #  SPECIAL #
 ############
@@ -2816,7 +2816,7 @@ sow_abc:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_advancer:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -3020,7 +3020,7 @@ sow_advancer:
 	Inherits@EXT: ^ExternalConditions
 	Passenger:
 		Weight: 20
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: sowadvancerlost
 	DeathSounds:
 		Voice: Death
@@ -3037,7 +3037,7 @@ sow_advancer_husk:
 		GenericName: Destroyed Advancer
 	FallsToEarth:
 		Velocity: 0c150
-	
+
 sow_mech_avenger:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -3109,7 +3109,7 @@ sow_mech_avenger:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_mech_avenger_mk2:
 	Inherits: sow_mech_avenger
 	Inherits@MC: ^MCImmune
@@ -3158,7 +3158,7 @@ sow_mech_avenger_mk2:
 	-WithDecoration@MC:
 	-MindControllable:
 	-WithMindControlArc:
-	
+
 sow_mech_kodiak:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -3227,7 +3227,7 @@ sow_mech_kodiak:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_mech_kodiak_mk2:
 	Inherits: sow_mech_kodiak
 	Inherits@MC: ^MCImmune
@@ -3270,7 +3270,7 @@ sow_mech_kodiak_mk2:
 		TargetTypes: Repairing
 	DamageMultiplier:
 		Modifier: 70
-	
+
 sow_mech_gatling:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -3341,7 +3341,7 @@ sow_mech_gatling:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_mech_gatling_mk2:
 	Inherits: sow_mech_gatling
 	Inherits@BotMicro: ^BotMicromanageable
@@ -3392,7 +3392,7 @@ sow_mech_gatling_mk2:
 	-WithDecoration@MC:
 	-MindControllable:
 	-WithMindControlArc:
-	
+
 sow_mech_jaguar:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -3461,7 +3461,7 @@ sow_mech_jaguar:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_mech_jaguar_mk2:
 	Inherits: sow_mech_jaguar
 	Inherits@BotMicro: ^BotMicromanageable
@@ -3517,7 +3517,7 @@ sow_mech_jaguar_mk2:
 	-WithDecoration@MC:
 	-MindControllable:
 	-WithMindControlArc:
-	
+
 sow_mech_achilles:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
@@ -3587,7 +3587,7 @@ sow_mech_achilles:
 	Explodes:
 		Weapon: UnitExplodeMech
 		EmptyWeapon: UnitExplodeMech
-		
+
 sow_mech_achilles_mk2:
 	Inherits: sow_mech_achilles
 	Inherits@MC: ^MCImmune
@@ -3638,7 +3638,7 @@ sow_mech_achilles_mk2:
 	-WithDecoration@MC:
 	-MindControllable:
 	-WithMindControlArc:
-		
+
 sow_mcv:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
@@ -3687,7 +3687,7 @@ sow_mcv:
 	SelectionDecorations:
 	DeathSounds:
 		Voice: Death
-		
+
 sow_mcv.bot:
 	Inherits: sow_mcv
 	Buildable:
@@ -3718,7 +3718,7 @@ satelliteprotection_mk1:
 	RenderSprites:
 		Image: satelliteprotection_icon
 	ProvidesPrerequisite@upgradename:
-		
+
 satelliteprotection_mk2:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3738,7 +3738,7 @@ satelliteprotection_mk2:
 	RenderSprites:
 		Image: satelliteprotection_mk2_icon
 	ProvidesPrerequisite@upgradename:
-		
+
 heavyunits:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3798,7 +3798,7 @@ sow_invader_mk2:
 	RenderSprites:
 		Image: sow_invader_mk2
 	ProvidesPrerequisite@upgradename:
-	
+
 sowovercharge:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3818,7 +3818,7 @@ sowovercharge:
 	RenderSprites:
 		Image: sowovercharge_icon
 	ProvidesPrerequisite@upgradename:
-		
+
 advancedairstrikes:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3865,7 +3865,7 @@ goldmineupgrade:
 	GrantConditionOnPrerequisite@power:
 		Condition: nopower
 		Prerequisites: sowgoldmine
-		
+
 goldmineupgrade2:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3908,7 +3908,7 @@ researchupgrade:
 	RenderSprites:
 		Image: sowresearch_upg
 	ProvidesPrerequisite@upgradename:
-		
+
 researchupgrade2:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3928,7 +3928,7 @@ researchupgrade2:
 	RenderSprites:
 		Image: sowresearch_upg2
 	ProvidesPrerequisite@upgradename:
-		
+
 stateofwar:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3948,7 +3948,7 @@ stateofwar:
 	RenderSprites:
 		Image: sowstateofwar
 	ProvidesPrerequisite@upgradename:
-		
+
 mta_unlock:
 	Inherits: ^upgrade.template
 	Inherits@fasterprodb: ^sow_power_boost
@@ -3977,7 +3977,7 @@ mtb_unlock:
 		Name: Medium Flame Unlock
 	RenderSprites:
 		Image: sow_mt_flame
-	
+
 mtc_unlock:
 	Inherits: mta_unlock
 	Buildable:
@@ -4052,7 +4052,7 @@ hte_unlock:
 		Name: Heavy Anti-Air Unlock
 	RenderSprites:
 		Image: sow_ht_antiair
-		
+
 sowfighter:
 	Inherits: ^RANeutralPlane
 	Inherits: ^sowresize
@@ -4119,8 +4119,8 @@ sowfighter:
 	-ExternalCondition@STASIS:
 	-DelayedWeaponAttachable@lockdown:
 	-ExternalCondition@EMP:
-	ActorLostNotification:
-		Notification: sowairforcelost	
+	ActorLostNotificationCameo:
+		Notification: sowairforcelost
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -4172,7 +4172,7 @@ sowasteroid:
 	KillsSelf:
 		RemoveInstead: true
 		Delay: 600
-		
+
 sowtripler:
 	Inherits: ^RANeutralPlane
 	Inherits: ^sowresize
@@ -4231,8 +4231,8 @@ sowtripler:
 	-ExternalCondition@STASIS:
 	-DelayedWeaponAttachable@lockdown:
 	-ExternalCondition@EMP:
-	ActorLostNotification:
-		Notification: sowairforcelost	
+	ActorLostNotificationCameo:
+		Notification: sowairforcelost
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -4250,7 +4250,7 @@ sowtripler_husk:
 		Velocity: 0c200
 	Explodes:
 		Weapon: sow_aircraft_husk
-		
+
 sowbomber:
 	Inherits: BADR.Bomber
 	Inherits: ^sowresize
@@ -4307,8 +4307,8 @@ sowbomber:
 	RejectsOrders:
 	RenderSprites:
 		Image: sowbomber
-	ActorLostNotification:
-		Notification: sowairforcelost	
+	ActorLostNotificationCameo:
+		Notification: sowairforcelost
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -4330,7 +4330,7 @@ sowfighter_husk:
 	-MapEditorData:
 	Explodes:
 		Weapon: sow_fighter_husk
-		
+
 sowbomber_husk:
 	Inherits: ^PlaneHusk
 	Inherits: ^sowresize

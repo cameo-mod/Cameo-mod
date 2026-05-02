@@ -4175,7 +4175,7 @@ TSWEEDGUY:
 # 	Inherits@2: ^MutSWCreature
 # 	-Buildable:
 # 	-UpdatesPlayerStatistics:
-# 	-ActorLostNotification:
+# 	-ActorLostNotificationCameo:
 # 	RenderSprites:
 # 		Image: tsdoggie
 # 	AttackWander:
@@ -4191,7 +4191,7 @@ TSWEEDGUY:
 # 	Inherits: ^Viceroid
 # 	Inherits@2: ^MutSWCreature
 # 	-UpdatesPlayerStatistics:
-# 	-ActorLostNotification:
+# 	-ActorLostNotificationCameo:
 # 	Tooltip:
 # 		Name: Floater
 # 	AttackWander:
@@ -4211,7 +4211,7 @@ TSWEEDGUY:
 # 	Inherits: ^Viceroid
 # 	Inherits@2: ^MutSWCreature
 # 	-UpdatesPlayerStatistics:
-# 	-ActorLostNotification:
+# 	-ActorLostNotificationCameo:
 # 	Tooltip:
 # 		Name: Baby Visceroid
 # 	Health:
@@ -4234,7 +4234,7 @@ TSWEEDGUY:
 # 	Inherits: ^Viceroid
 # 	Inherits@2: ^MutSWCreature
 # 	-UpdatesPlayerStatistics:
-# 	-ActorLostNotification:
+# 	-ActorLostNotificationCameo:
 # 	Tooltip:
 # 		Name: Big Visceroid
 # 	Armor:
@@ -4535,7 +4535,7 @@ tsprobe:
 	# 	EmptyWeapon: TSHSeekerExplode
 	# 	RequiresCondition: triggered
 	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 
 #######################################
 # TS GDI Vehicles

@@ -1887,7 +1887,8 @@
 	Health:
 	HitShape:
 	HiddenUnderFog:
-	ActorLostNotification:
+	ActorLostNotificationCameo:
+		NotifyInterval: 10000
 	RevealsShroud:
 		Range: 5c0
 		RevealGeneratedShroud: False
@@ -3125,7 +3126,7 @@
 		DefaultAttackSequence: shoot
 	HiddenUnderFog:
 	DrawLineToTarget:
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	CombatDebugOverlay:
 	Guard:
 	Guardable:
@@ -3342,8 +3343,9 @@
 	CaptureNotification:
 		Notification: BuildingCaptured
 		LoseNotification: BuildingLost
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: BuildingLost
+		NotifyInterval: 10000
 	ShakeOnDeath:
 	Guardable:
 		Range: 3c0

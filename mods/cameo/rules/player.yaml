@@ -56,6 +56,7 @@ Player:
 	SupportPowerManager:
 	ScriptTriggers:
 	MissionObjectives:
+	ActorLostNotificationCameoManager:
 		WinNotification: Win
 		LoseNotification: Lose
 		LeaveNotification: Leave
@@ -110,7 +111,8 @@ Player:
 		Notification: BaseAttack
 		TextNotification: notification-base-under-attack
 		AllyNotification: OurAllyIsUnderAttack
-		AllyTextNotification: notification-ally-under-attack
+		AllyTextNotification: Ally under attack.
+		NotifyInterval: 30000
 	HarvesterAttackNotifier:
 		ExcludeDamageTypes: SpiceExplosion
 		TextNotification: notification-harvester-under-attack

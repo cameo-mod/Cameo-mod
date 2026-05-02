@@ -56,7 +56,7 @@ World:
 		ActorTypes: wormuzi
 	MustBeDestroyed:
 		RequiredForShortGame: true
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 		Notification: BuildingLost
 	ShakeOnDeath:
 	Demolishable:
@@ -161,7 +161,7 @@ WCON:
 	#RotationPaletteEffect:
 	#	ExcludePalettes: WC1Player
 	#LightPaletteRotator:
-	#	ExcludePalettes: WC1Player	
+	#	ExcludePalettes: WC1Player
 	ProvidesPrerequisite@factiongdi:
 		Prerequisite: mmworms
 WNUKE:
@@ -296,7 +296,7 @@ WREF:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	SelectionDecorations:
-	
+
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -443,7 +443,7 @@ WWEAP:
 		Sequence: crate-overlay
 	WithIdleOverlay@CRATE2:
 		Sequence: crate-overlay2
-		
+
 WSHEEPSTATUE:
 	Inherits: ^WormsBuilding
 	Inherits@shape: ^2x2Shape
@@ -592,7 +592,7 @@ WSHEEPSTRIKECOMMAND:
 	SupportPowerChargeBar:
 	Power:
 		Amount: -50
-		
+
 WTIMEMACHINE:
 	Inherits: ^WormsBuilding
 	Inherits@IDISABLE: ^DisabledOverlay
@@ -1928,7 +1928,7 @@ WORMS_UFO:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	Voiced:
-		VoiceSet: voiceWorm	
+		VoiceSet: voiceWorm
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -2001,7 +2001,7 @@ WORMS_APACHE:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	Voiced:
-		VoiceSet: voiceWorm	
+		VoiceSet: voiceWorm
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True

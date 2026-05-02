@@ -3914,7 +3914,7 @@ A10Carrier:
 		InitialStance: AttackAnything
 	HasParent:
 	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-WithShadow:
 	-MapEditorData:
 	RejectsOrders:
@@ -7301,7 +7301,7 @@ gdirigdrone:
 		FacingTolerance: 10
 	-Targetable@SpecialRepair:
 	-SpawnActorOnDeath:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	DroneSpawnerSlave:
 		AttackCallBackDistance: 6000

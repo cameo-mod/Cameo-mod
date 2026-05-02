@@ -3,7 +3,7 @@ Player:
 		Condition: AntHillsOwned
 	ProvidesPrerequisite@AntHillsOwned:
 		Prerequisite: allowsQueenAnts
-		RequiresCondition: AntHillsOwned < 7		
+		RequiresCondition: AntHillsOwned < 7
 
 World:
 	FactionCA@modants:
@@ -771,7 +771,7 @@ defenseant:
 	RenderSprites:
 		Image: tinyant
 	-MapEditorData:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	AutoTarget:
 		AllowMovement: false
 		InitialStanceAI: Defend
@@ -842,7 +842,7 @@ flyant:
 		DecorationBounds: 1280, 1024
 	RenderSprites:
 	Power:
-		Amount: -50	
+		Amount: -50
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -934,4 +934,4 @@ TEVO:
 		RequiresCondition: !jammed && !lowpower
 	InfiltrateForExploration:
 		Types: SpyInfiltrate
-		
+

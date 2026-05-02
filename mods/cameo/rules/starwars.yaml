@@ -4234,7 +4234,7 @@ swsite.soldier:
 	Voiced:
 		VoiceSet: SWTuskVoice
 	-MapEditorData:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 swsite.bantha:
 	Inherits: ^Soldier
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4268,7 +4268,7 @@ swsite.bantha:
 	Voiced:
 		VoiceSet: SWTuskVoice
 	-MapEditorData:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 
 swntpuls:
 	Inherits: tsntpuls
@@ -4961,7 +4961,7 @@ swvice:
 		Description: Small recon droid.\n  Strong vs Infantry\n  Weak vs Aircraft
 	Tooltip:
 		Name: Probot
-	ActorLostNotification:
+	ActorLostNotificationCameo:
 	Armament:
 		Weapon: SWLaser
 		LocalOffset: 384,0,0
@@ -7278,7 +7278,7 @@ swinterceptor:
 		Amount: 0
 	Voiced:
 		VoiceSet: SCCarrierVoice
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	HitShape:
 	RenderSprites:
@@ -7325,7 +7325,7 @@ swintercepto2:
 		Amount: 0
 	Voiced:
 		VoiceSet: SCCarrierVoice
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	HitShape:
 	RenderSprites:
@@ -7372,7 +7372,7 @@ swintercepto3:
 		Amount: 0
 	Voiced:
 		VoiceSet: SCCarrierVoice
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	HitShape:
 	RenderSprites:

@@ -2388,7 +2388,7 @@ sc2kcityfirefighter.defense:
 	-CaptureManager:
 	-Captures@CAPTURES:
 	-Captures@DRIVER_KILL:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	RejectsOrders:
 	Valued:
@@ -2412,7 +2412,7 @@ sc2kcitypoliceofficer.defense:
 	-CaptureManager:
 	-Captures@CAPTURES:
 	-Captures@DRIVER_KILL:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	RejectsOrders:
 	Valued:
@@ -2434,7 +2434,7 @@ sc2kpolicecar.defense:
 	-GrantConditionOnDamageState@UNCLOAK:
 	-UpdatesPlayerStatistics:
 	-Buildable:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	RejectsOrders:
 	Valued:
@@ -2487,7 +2487,7 @@ sc2kglsite.defense:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	-MapEditorData:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 sc2ktank.defense:
 	Inherits: MTNK
 	Inherits@MC: ^MCImmune
@@ -2496,7 +2496,7 @@ sc2ktank.defense:
 	-GrantConditionOnDamageState@UNCLOAK:
 	-UpdatesPlayerStatistics:
 	-Buildable:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	RejectsOrders:
 	Valued:

@@ -2414,7 +2414,7 @@ sc_zerg_larva:
 	-DamagedByTerrain:
 	-Crushable:
 	-TakeCover:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	DroneSpawnerSlave:
 	-MapEditorData:
 	HitShape:
@@ -7605,6 +7605,7 @@ SCINTERCEPTOR:
 		InitialStance: AttackAnything
 	HasParent:
 	RejectsOrders:
+	-ActorLostNotificationCameo:
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
@@ -10143,7 +10144,7 @@ SCBROODLING:
 		Step: -30
 		Delay: 1
 		StartIfBelow: 150
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-SpawnActorOnDeath@SCSWARMLING:
 	RenderSprites:
 		PlayerPalette: player_rgba

@@ -3744,7 +3744,7 @@ aa_kami:
 		InitialStance: AttackAnything
 	HasParent:
 	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
@@ -9117,7 +9117,7 @@ steel_qoil:
 		PersistentTargeting: false
 		FacingTolerance: 10
 	-SpawnActorOnDeath:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-UpdatesPlayerStatistics:
 	DroneSpawnerSlave:
 		AttackCallBackDistance: 15000
@@ -11477,7 +11477,7 @@ steel_cruiser_f:
 		InitialStance: AttackAnything
 	HasParent:
 	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-WithShadow:
 	-MapEditorData:
 	RejectsOrders:
@@ -11799,7 +11799,7 @@ nax_hole:
 	Voiced:
 		VoiceSet: DinoVoice
 	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 
 nax_hole_small:
@@ -12198,7 +12198,7 @@ nax_interceptor:
 		InitialStance: AttackAnything
 	HasParent:
 	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	RejectsOrders:
 	RenderSprites:
@@ -12913,7 +12913,7 @@ nax_drone:
 		InitialStance: AttackAnything
 	HasParent:
 	-UpdatesPlayerStatistics:
-	-ActorLostNotification:
+	-ActorLostNotificationCameo:
 	-MapEditorData:
 	RejectsOrders:
 	WithAmmoPipsDecoration:
