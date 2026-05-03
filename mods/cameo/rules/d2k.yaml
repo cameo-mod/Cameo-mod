@@ -9515,7 +9515,7 @@ combat_tank_o:
 		BuildPaletteOrder: 40
 		Description: template-mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~heavy_factory.ordos, ~!d2k_autogun_tank_upgrade
+		Prerequisites: ~heavy_factory.ordos, ~!d2k_ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -9560,7 +9560,7 @@ d2k_ordos_heavycombattank:
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
@@ -9575,7 +9575,7 @@ d2k_ordos_heavycombattank:
 		BuildPaletteOrder: 40
 		Description: template-mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_autogun_tank_upgrade
+		Prerequisites: ~d2k_ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -9600,6 +9600,14 @@ d2k_ordos_heavycombattank:
 		LocalOffset: 256,0,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
+	Armament@Rockets:
+		Weapon: HeavyOrdosCombatTankRockets
+		LocalOffset: 200,-200,200, 200,200,200
+		LocalYaw: 40, -40
+		RequiresCondition: d2k_ordos_upgrade_heavycombattank_rockets
+	GrantConditionOnPrerequisite@d2k_ordos_upgrade_heavycombattank_rockets:
+		Condition: d2k_ordos_upgrade_heavycombattank_rockets
+		Prerequisites: d2k_ordos_upgrade_heavycombattank_rockets
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -10752,16 +10760,26 @@ d2k_aatrooper_upgrade:
 	RenderSprites:
 		Image: ordos_aatrooper
 
-d2k_autogun_tank_upgrade:
+d2k_ordos_upgrade_heavycombattank:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Heavy Combat Tank Upgrade
 	Buildable:
-		Description: Upgrades the Ordos Combat Tank to the Autogun Tank
-		Prerequisites: ~outpost.ordos, ~!d2k_autogun_tank_upgrade
+		Description: Upgrades the Ordos Combat Tank to the Heavy Combat Tank
+		Prerequisites: ~outpost.ordos, !d2k_ordos_upgrade_heavycombattank
 		IconPalette: ra2
 	RenderSprites:
 		Image: d2k_ordos_heavycombattank
+
+d2k_ordos_upgrade_heavycombattank_rockets:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Heavy Combat Tank Rockets Upgrade
+	Buildable:
+		Description: Upgrades the Heavy Combat Tank with Rocket Launchers.
+		Prerequisites: ~outpost.ordos, research_centre.ordos, d2k_ordos_upgrade_heavycombattank, !d2k_ordos_upgrade_heavycombattank_rockets
+	RenderSprites:
+		Image: d2k_ordos_upgrade_heavycombattank_rockets
 
 d2k_heavy_autogun_tank_upgrade:
 	Inherits: ^unit_upgrade_template
@@ -10769,7 +10787,7 @@ d2k_heavy_autogun_tank_upgrade:
 		Name: Heavy Autogun Tank Upgrade
 	Buildable:
 		Description: Upgrades the Autogun Tank to the Heavy Autogun Tank
-		Prerequisites: ~research_centre.ordos, ~d2k_autogun_tank_upgrade, !d2k_heavy_autogun_tank_upgrade
+		Prerequisites: ~research_centre.ordos, ~d2k_ordos_upgrade_heavycombattank, !d2k_heavy_autogun_tank_upgrade
 	RenderSprites:
 		Image: d2k_autogun_tank
 

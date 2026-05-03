@@ -2596,14 +2596,16 @@ BroodweaverLeech:
 	InvalidTargets: Broodling
 
 SwarmlingShoot:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumFlameWeapon
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^HeavyBomb
 	Inherits: ^MediumMissile
 	Inherits: ^Chaingun
 	Inherits: ^FlakWeapon
-	ReloadDelay: 60
-	Range: 7426
+	ReloadDelay: 80
+	Range: 8561
 	Report: zlufir00.aud
 	ValidTargets: Ground, Water, Trees, Air
 	Projectile: Missile
@@ -2620,6 +2622,30 @@ SwarmlingShoot:
 		AllowSnapping: true
 		CloseEnough: 600
 		TrailImage: sczhsplash
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
+	Warhead@MediumFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, SwarmlingSpawn
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 2000

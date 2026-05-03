@@ -188,6 +188,49 @@ HeavyOrdosCombatTankCannon:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
 
+HeavyOrdosCombatTankRockets:
+	Inherits: ^Chaingun
+	Inherits: ^FlakWeapon
+	Inherits: ^LightMissile
+	Inherits: ^MediumMissile
+	Inherits: ^D2KRocket
+	ReloadDelay: 70
+	Range: 6000
+	Burst: 2
+	BurstDelays: 10
+	ValidTargets: Ground, Water, Trees, Air
+	Projectile: Missile
+		Blockable: false
+		MaximumLaunchSpeed: 250
+		MinimumLaunchSpeed: 250
+		RangeLimit: 25000
+		Speed: 500
+		Inaccuracy: 25
+		Acceleration: 5
+		LaunchAngle: 75
+		CloseEnough: 500
+		AllowSnapping: true
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LightMissile: SpreadDamage
+		Damage: 2000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 2000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 1
+
 IxianCombatTankCannon:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^HeavyCannon

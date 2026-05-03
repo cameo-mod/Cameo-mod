@@ -8778,11 +8778,11 @@ SCTALON:
 	Tooltip:
 		Name: Talon
 	Valued:
-		Cost: 200
+		Cost: 300
 	ProductionCostMultiplier@dualproduction:
 		Multiplier: 200
 	Power:
-		Amount: -10
+		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scspawningpool, ~uptalon
@@ -9111,14 +9111,14 @@ SCSWARMLING:
 		Queue: Infantry, RAInfantry
 		Description: Airborne Zerg creature.\n Strong vs Everything in group
 	Aircraft:
-		Speed: 50
-		TurnSpeed: 10
-		RepulsionSpeed: 10
+		Speed: 80
+		TurnSpeed: 16
+		RepulsionSpeed: 16
 		IdealSeparation: 640
 	Health:
-		HP: 20000
+		HP: 40000
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 16
 	Armament:
 		Weapon: SwarmlingShoot
 		LocalOffset: 0,0,0
@@ -9126,7 +9126,7 @@ SCSWARMLING:
 	# 	Weapon: MutaliskAA
 	# 	LocalOffset: 0,0,0
 	AttackAircraft:
-		FacingTolerance: 10
+		FacingTolerance: 16
 		AttackType: Hover
 	# -RenderRangeCircle:
 	#-RenderDetectionCircle:
