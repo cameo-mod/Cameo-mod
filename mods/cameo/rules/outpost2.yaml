@@ -1488,11 +1488,15 @@ EDEN_CARGOTRUCK_EMPTY:
 
 EDEN_SCOUT:
 	Inherits: ^Vehicle
-	Inherits@selection: ^SelectableSupportUnit
-	Valued:
-		Cost: 300
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
 		Name: Eden Scout
+	Valued:
+		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~eden_factory_vehicle
@@ -1504,55 +1508,58 @@ EDEN_SCOUT:
 		Bounds: 1024,1024
 	Mobile:
 		Speed: 140
+		TurnSpeed: 28
 		Locomotor: heavywheeled
-	WithMoveAnimation:
 	Health:
-		HP: 10000
+		HP: 32500
+	Repairable:
+		HpPerStep: 1625
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Turreted:
+		TurnSpeed: 28
+		Offset: -43,0,128
+	Armament:
+		Weapon: edenMachineGun
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+	WithMoveAnimation:
 	Voiced:
 		VoiceSet: scoutVoice
-	Repairable:
-		HpPerStep: 2182
-	Armor:
-		Type: Heavy
-	RevealsShroud:
-		Range: 10c0
 	SelectionDecorations:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_LYNX_LASER:
 	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CLOAK: ^AcceptsCloakCrate
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 500
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Laser Lynx
+	Valued:
+		Cost: 750
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 50
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
 		Description: eden-lynx-laser.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 90
+		Speed: 75
+		TurnSpeed: 15
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
-		Type: Light
-	RevealsShroud:
-		Range: 8c0
+		Type: Medium
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 15
 		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileLaser
@@ -1560,69 +1567,77 @@ EDEN_LYNX_LASER:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
-EDEN_TIGER_MICROWAVE:
-	Inherits: EDEN_LYNX_LASER
-	Valued:
-		Cost: 1300
+EDEN_TIGER_LASER:
+	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Laser Tiger
+	Valued:
+		Cost: 1500
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 100
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
 		Description: eden-tiger-microwave.description
 	Mobile:
+		Speed: 50
 		TurnSpeed: 10
-		Speed: 45
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 150000
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
 		Type: Heavy
+	Turreted:
+		TurnSpeed: 10
+		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileLaserTiger
 		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 EDEN_LYNX_RAILGUN:
 	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CLOAK: ^AcceptsCloakCrate
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Valued:
-		Cost: 600
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Railgun Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 900
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
 		Description: eden-lynx-railgun.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 90
+		Speed: 80
+		TurnSpeed: 16
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 8c0
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 16
 		Offset: -85,0,128
 	Armament:
 		Weapon: edenRailgun
@@ -1631,109 +1646,135 @@ EDEN_LYNX_RAILGUN:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_TIGER_RAILGUN:
-	Inherits: EDEN_LYNX_RAILGUN
-	Valued:
-		Cost: 1300
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden Railgun Tiger
+	Valued:
+		Cost: 1600
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 110
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
 		Description: eden-tiger-railgun.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 45
+		Speed: 60
+		TurnSpeed: 12
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
-		Type: Heavy
-	Armament:
-		Weapon: edenTigerRailgun
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
-
-EDEN_LYNX_EMP:
-	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
-	Inherits@CLOAK: ^AcceptsCloakCrate
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 700
-	Tooltip:
-		Name: Eden EMP Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
-		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_STANDARD
-		Queue: Vehicle, RAVehicle
-		Description: eden-lynx-emp.description
-	Mobile:
-		TurnSpeed: 10
-		Speed: 90
-	WithMoveAnimation:
-	Health:
-		HP: 25000
-	Voiced:
-		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
-	Armor:
-		Type: Light
-	RevealsShroud:
-		Range: 8c0
+		Type: Medium
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 12
 		Offset: -85,0,128
 	Armament:
-		Weapon: plymouthEMP
+		Weapon: edenTigerRailgun
 		LocalOffset: 256,43,341
 		FireDelay: 5
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
+
+EDEN_LYNX_EMP:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Tooltip:
+		Name: Eden EMP Lynx
+	Valued:
+		Cost: 1050
+	Buildable:
+		Prerequisites: ~eden_factory_vehicle
+		Queue: Vehicle, RAVehicle
+		Description: eden-lynx-emp.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	WithMoveAnimation:
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Voiced:
+		VoiceSet: lynxVoice
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 17
+		Offset: -85,0,128
+	Armament@AG:
+		Weapon: edenEMP
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@AA:
+		Weapon: edenEMPAA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 EDEN_TIGER_EMP:
-	Inherits: EDEN_LYNX_EMP
-	Valued:
-		Cost: 1500
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
 	Tooltip:
 		Name: Eden EMP Tiger
+	Valued:
+		Cost: 1700
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 120
-		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_STANDARD
+		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
 		Description: eden-tiger-emp.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 45
+		Speed: 70
+		TurnSpeed: 14
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
-		Type: Heavy
-	Armament:
-		Weapon: plymouthEMPTiger
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
+		Type: Medium
+	Turreted:
+		TurnSpeed: 14
+		Offset: -85,0,128
+	Armament@AG:
+		Weapon: edenTigerEMP
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@AA:
+		Weapon: edenTigerEMPAA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 EDEN_LYNX_ACIDCLOUD:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -1744,8 +1785,6 @@ EDEN_LYNX_ACIDCLOUD:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
 		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: eden-lynx-acidcloud.description
@@ -1757,8 +1796,6 @@ EDEN_LYNX_ACIDCLOUD:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -1783,8 +1820,6 @@ EDEN_TIGER_ACIDCLOUD:
 	Tooltip:
 		Name: Eden AcidCloud Tiger
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 140
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: eden-tiger-acidcloud.description
@@ -1805,37 +1840,34 @@ EDEN_TIGER_ACIDCLOUD:
 
 EDEN_LYNX_STARFLARE:
 	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 400
 	Tooltip:
 		Name: Eden Starflare Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 400
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 80
 		Prerequisites: ~eden_factory_vehicle, EDEN_GORF
 		Queue: Vehicle, RAVehicle
 		Description: eden-lynx-starflare.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 90
+		Speed: 100
+		TurnSpeed: 20
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 8c0
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Offset: -85,0,128
 	Armament:
 		Weapon: DemoTruckTargeting
@@ -1846,79 +1878,101 @@ EDEN_LYNX_STARFLARE:
 	GrantConditionOnDeploy:
 		DeployedCondition: triggered
 		PauseOnCondition: disabled
-	FireWarheadsOnDeath@bomb:
-		Weapon: GLBarrelExplode
-		EmptyWeapon: GLBarrelExplode
-		DamageSource: Killer
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2Terrorist
+		EmptyWeapon: RA2Terrorist
 		RequiresCondition: !disabled
+	FirepowerMultiplier@bomb:
+		Modifier: 200
 	KillsSelf:
 		RequiresCondition: !disabled && (invulnerability || triggered)
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_TIGER_STARFLARE:
-	Inherits: EDEN_LYNX_STARFLARE
-	Valued:
-		Cost: 800
+	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
 		Name: Eden Starflare Tiger
+	Valued:
+		Cost: 800
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 150
+		BuildPaletteOrder: 80
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_GORF
 		Queue: Vehicle, RAVehicle
 		Description: eden-tiger-starflare.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 45
+		Speed: 75
+		TurnSpeed: 15
+	WithMoveAnimation:
 	Health:
-		HP: 90000
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
-		Type: Heavy
+		Type: Medium
+	Turreted:
+		TurnSpeed: 15
+		Offset: -85,0,128
 	Armament:
 		Weapon: DemoTruckTargeting
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2Terrorist
+		EmptyWeapon: RA2Terrorist
+		RequiresCondition: !disabled
+	FirepowerMultiplier@bomb:
+		Modifier: 400
+	KillsSelf:
+		RequiresCondition: !disabled && (invulnerability || triggered)
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 EDEN_LYNX_THORSHAMMER:
 	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Valued:
-		Cost: 1100
 	Tooltip:
 		Name: Eden ThorsHammer Lynx
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
+	Valued:
+		Cost: 1100
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 60
 		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: eden-lynx-thorshammer.description
 	Mobile:
-		TurnSpeed: 10
 		Speed: 90
+		TurnSpeed: 18
 	WithMoveAnimation:
 	Health:
-		HP: 25000
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
-		Type: Light
-	RevealsShroud:
-		Range: 8c0
+		Type: Medium
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 18
 		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileThorsHammer
@@ -1927,35 +1981,45 @@ EDEN_LYNX_THORSHAMMER:
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
-	RenderSprites:
-		Scale: 0.75
 
 EDEN_TIGER_THORSHAMMER:
-	Inherits: EDEN_LYNX_THORSHAMMER
-	Valued:
-		Cost: 2200
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@CLOAK: ^AcceptsCloakCrate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
 		Name: Eden ThorsHammer Tiger
+	Valued:
+		Cost: 2200
 	Buildable:
-		BuildDuration: 300
-		BuildPaletteOrder: 140
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
 		Description: eden-tiger-thorshammer.description
 	Mobile:
-		TurnSpeed: 10
-		Speed: 45
+		Speed: 80
+		TurnSpeed: 16
+	WithMoveAnimation:
 	Health:
-		HP: 60000
+		HP: 160000
+	Repairable:
+		HpPerStep: 8000
+	ChangesHealth@SelfHealing:
+		Step: 64
 	Voiced:
 		VoiceSet: op2tigerVoice
 	Armor:
 		Type: Heavy
+	Turreted:
+		TurnSpeed: 18
+		Offset: -85,0,128
 	Armament:
 		Weapon: edenMobileThorsHammerTiger
-		LocalOffset: 171,0,85
-	RenderSprites:
-		Scale: 0.75
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
 
 # #OLD
 # ELLASER:
@@ -2526,11 +2590,15 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 
 PLYMOUTH_SCOUT:
 	Inherits: ^Vehicle
-	Inherits@selection: ^SelectableSupportUnit
-	Valued:
-		Cost: 300
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
 	Tooltip:
 		Name: Plymouth Scout
+	Valued:
+		Cost: 350
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
@@ -2539,24 +2607,28 @@ PLYMOUTH_SCOUT:
 		BuildDurationModifier: 40
 		Description: plymouth-scout.description
 	Selectable:
-		DecorationBounds: 1024,1024
+		Bounds: 1024,1024
 	Mobile:
-		Speed: 140
+		Speed: 135
+		TurnSpeed: 27
 		Locomotor: heavywheeled
-	WithMoveAnimation:
 	Health:
-		HP: 10000
+		HP: 35000
+	Repairable:
+		HpPerStep: 1750
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Turreted:
+		TurnSpeed: 27
+		Offset: -43,0,128
+	Armament:
+		Weapon: plymouthMachineGun
+		LocalOffset: 171,0,43
+		MuzzleSequence: muzzle
+	WithMoveAnimation:
 	Voiced:
 		VoiceSet: scoutVoice
-	Repairable:
-		HpPerStep: 2182
-	Armor:
-		Type: Heavy
-	RevealsShroud:
-		Range: 10c0
 	SelectionDecorations:
-	RenderSprites:
-		Scale: 0.75
 
 # PLYMOUTH_TECH_PLATFORM:
 # 	Inherits: ^Soldier
@@ -2598,6 +2670,7 @@ PLYMOUTH_SCOUT:
 
 PLYMOUTH_SPIDER:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MechanicTemplate
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -2642,6 +2715,7 @@ PLYMOUTH_SPIDER:
 
 PLYMOUTH_SCORPION:
 	Inherits: ^Vehicle
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Valued:
 		Cost: 300
@@ -2711,6 +2785,7 @@ PLYMOUTH_SCORPION:
 
 PLYMOUTH_LYNX_MICROWAVE:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -2734,8 +2809,6 @@ PLYMOUTH_LYNX_MICROWAVE:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2781,6 +2854,7 @@ PLYMOUTH_TIGER_MICROWAVE:
 
 PLYMOUTH_LYNX_RPG:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -2804,8 +2878,6 @@ PLYMOUTH_LYNX_RPG:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2852,6 +2924,7 @@ PLYMOUTH_TIGER_RPG:
 
 PLYMOUTH_LYNX_EMP:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -2875,8 +2948,6 @@ PLYMOUTH_LYNX_EMP:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2923,6 +2994,7 @@ PLYMOUTH_TIGER_EMP:
 
 PLYMOUTH_LYNX_STICKYFOAM:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -2946,8 +3018,6 @@ PLYMOUTH_LYNX_STICKYFOAM:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -2994,6 +3064,7 @@ PLYMOUTH_TIGER_STICKYFOAM:
 
 PLYMOUTH_LYNX_ESG:
 	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3017,8 +3088,6 @@ PLYMOUTH_LYNX_ESG:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -3065,6 +3134,7 @@ PLYMOUTH_TIGER_ESG:
 
 PLYMOUTH_LYNX_STARFLARE:
 	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3088,8 +3158,6 @@ PLYMOUTH_LYNX_STARFLARE:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -3148,6 +3216,7 @@ PLYMOUTH_TIGER_STARFLARE:
 
 PLYMOUTH_LYNX_SUPERNOVA:
 	Inherits: ^Vehicle
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@CLOAK: ^AcceptsCloakCrate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3171,8 +3240,6 @@ PLYMOUTH_LYNX_SUPERNOVA:
 		HP: 25000
 	Voiced:
 		VoiceSet: lynxVoice
-	Repairable:
-		HpPerStep: 1819
 	Armor:
 		Type: Light
 	RevealsShroud:
