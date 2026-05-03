@@ -2680,3 +2680,21 @@ faction-d2k-ordos =
       Special Buildings: Starport, Spice Sifter
       Team Upgrades: WIP
       Support powers: Saboteur, Chaos Lightning
+
+faction-outpost2-plymouth =
+   .description = Features:
+   - Splinter Colony
+   - High tech faction from NewTerra
+   - Must build a colony in order to operate
+   - Has fast Lynx vehicles and strong Tiger verhicles
+
+   Support powers: Supernova Missile
+
+faction-outpost2-eden =
+   .description = Features:
+   - Primary Colony
+   - High tech faction from NewTerra
+   - Must build a colony in order to operate
+   - Has fast Lynx vehicles and strong Tiger verhicles
+
+   Support powers: Supernova Missile
