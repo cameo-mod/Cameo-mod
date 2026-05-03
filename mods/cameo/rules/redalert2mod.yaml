@@ -4662,6 +4662,7 @@ latin_radar:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		BuildLimit: 1
+		Description: actor-latin_radar.description
 		Prerequisites: ~latin_cgcnst, latin_cgauto
 	Tooltip:
 		Name: Latin EMP Radar
@@ -4908,6 +4909,7 @@ latin_cgte:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		BuildLimit: 1
+		Description: actor-latin_cgte.description
 		Prerequisites: ~latin_cgcnst, latin_cgup, derricklimit
 	Tooltip:
 		Name: Recycling Center
