@@ -17,6 +17,8 @@ Player:
 	Inherits: ^BasePlayer
 	PlaceBuilding:
 		NewOptionsNotification: NewOptions
+		NewOptionsNotificationDelay: 25
+		NewOptionsTextNotification: New construction option(s) are now available.
 		CannotPlaceNotification: BuildingCannotPlaceAudio
 		ToggleVariantKey: V
 	CustomFormationsModOptions:
@@ -62,12 +64,16 @@ Player:
 	ConquestVictoryConditions:
 	PowerManager:
 		SpeechNotification: LowPower
+		AdviceInterval: 30000
 	AutoDeployManager:
 	AllyRepair:
 	PlayerResources:
 		DefaultCash: 12345
 		CashTickUpNotification: CashTickUp
 		CashTickDownNotification: CashTickDown
+		InsufficientFundsNotification: InsufficientFunds
+		InsufficientFundsTextNotification: Not enough funds to continue.
+		InsufficientFundsNotificationInterval: 300000
 		SelectableCash: 5000, 6666, 9001, 10000, 12345, 15000, 20000, 25000, 33333, 50000, 100000
 		ResourceValues:
 			Tiberium: 30
@@ -110,10 +116,10 @@ Player:
 		Notification: BaseAttack
 		TextNotification: notification-base-under-attack
 		AllyNotification: OurAllyIsUnderAttack
-		AllyTextNotification: notification-ally-under-attack
+		AllyTextNotification: Ally under attack.
 	HarvesterAttackNotifier:
 		ExcludeDamageTypes: SpiceExplosion
-		TextNotification: notification-harvester-under-attack
+		TextNotification: Resource collector is under attack.
 	EnemyWatcher:
 	Shroud:
 		FogCheckboxDisplayOrder: 3
@@ -244,6 +250,8 @@ Player:
 		Id: unrestricted
 	GrantConditionOnPrerequisiteManager:
 	ResourceStorageWarning:
+		AdviceInterval: 30000
+		TextNotification: Resource storage is reaching its capacity.
 	PlayerExperience:
 	GameSaveViewportManager:
 	PlayerRadarTerrain:
@@ -409,7 +417,7 @@ Player:
 		BuildingCountBuildTimeMultipliers: 125, 100, 80, 66, 50, 40, 33, 25
 		ParallelPenaltyBuildTimeMultipliers: 100, 63, 50, 44, 40, 38, 36, 34, 33, 32
 		ReadyAudio: NewOptions
-		ReadyTextNotification: notification-new-construction-options
+		ReadyTextNotification: New upgrade has been deployed.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -422,7 +430,7 @@ Player:
 		SpeedUp: True
 		LowPowerModifier: 400
 		ReadyAudio: NewOptions
-		ReadyTextNotification: notification-new-construction-options
+		ReadyTextNotification: New upgrade is now ready.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
@@ -435,7 +443,7 @@ Player:
 		SpeedUp: True
 		LowPowerModifier: 400
 		ReadyAudio: NewOptions
-		ReadyTextNotification: notification-new-construction-options
+		ReadyTextNotification: New technology is now available.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
