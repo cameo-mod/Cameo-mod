@@ -257,9 +257,9 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 750
 	Building:
-		Footprint: xX xx
-		Dimensions: 2,2
-		# LocalCenterOffset: 0,-512,0
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 225000
 	RevealsShroud:
@@ -606,16 +606,12 @@ op2_commonore_beacon_3bar:
 	Inherits@STATUS: ^OP2Building
 	Selectable:
 		Bounds: 3072,3072
-	HitShape:
-		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
 	Valued:
 		Cost: 1800
 	Building:
 		BuildLimit: 1
-		Footprint: xxx xxx xxx xxx ===
-		Dimensions: 3,5
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 140000
@@ -721,14 +717,14 @@ op2_commonore_beacon_3bar:
 	Inherits@STATUS: ^OP2Building
 	HitShape:
 		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
+			TopLeft: -2048,-1536
+			BottomRight: 2048,1536
 	Valued:
 		Cost: 2500
 	Building:
 		BuildLimit: 1
-		Footprint: xxxx xxxx xxxx xxxx ====
-		Dimensions: 4,5
+		Footprint: xxx xxx xxx ===
+		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 140000
@@ -874,9 +870,9 @@ EDEN_TOKAMAK:
 		Prerequisites: ~eden_factory_structure
 		Description: actor-tokamak.description
 	Building:
-		Footprint: xX xx
-		Dimensions: 2,2
-		# LocalCenterOffset: 0,-512,0
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
 
 EDEN_SMELTER_COMMON:
 	Inherits: ^op2base_smelter_common

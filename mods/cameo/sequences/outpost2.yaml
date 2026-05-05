@@ -97,9 +97,9 @@ eden_tokamak:
 	Inherits: ^OP2Building
 	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
-		Offset: -24, -36
+		Offset: -36, -36
 	statusred:
-		Offset: -24, -36
+		Offset: -36, -36
 	Defaults:
 		Filename: eden_tokamak.shp
 	idle:
@@ -533,11 +533,11 @@ eden_solar_array:
 
 eden_smelter_rare:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib1
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
-		Offset: -72, -48
+		Offset: -48, -48
 	statusred:
-		Offset: -72, -48
+		Offset: -48, -48
 	Defaults:
 		Filename: eden_smelter_rare.shp
 	idle:
@@ -1123,9 +1123,9 @@ plymouth_tokamak:
 	Inherits: ^OP2Building
 	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
-		Offset: -24, -36
+		Offset: -36, -36
 	statusred:
-		Offset: -24, -36
+		Offset: -36, -36
 	Defaults:
 		Filename: plymouth_tokamak.shp
 	idle:
@@ -1436,11 +1436,11 @@ plymouth_solararray:
 
 plymouth_smelter_rare:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib1
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
-		Offset: -72, -48
+		Offset: -48, -48
 	statusred:
-		Offset: -72, -48
+		Offset: -48, -48
 	Defaults:
 		Filename: plymouth_smelter_rare.shp
 	idle:
