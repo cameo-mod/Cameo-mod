@@ -149,11 +149,11 @@ eden_smelter_common:
 
 eden_agridome:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib2
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
-		Offset: -44, -36
+		Offset: -36, -36
 	statusred:
-		Offset: -44, -36
+		Offset: -36, -36
 	Defaults:
 		Filename: eden_agridome.shp
 	idle:
@@ -1169,7 +1169,7 @@ plymouth_smelter_common:
 
 plymouth_agridome:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib2
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
