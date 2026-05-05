@@ -60,6 +60,7 @@ op2_commonore_beacon_3bar:
 ####################################################################################################
 eden_factory_structure:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -94,6 +95,7 @@ eden_factory_structure:
 
 eden_tokamak:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -24, -36
 	statusred:
@@ -111,15 +113,13 @@ eden_tokamak:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUITokamak.png
 		AddExtension: False
 
 eden_smelter_common:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -149,6 +149,7 @@ eden_smelter_common:
 
 eden_agridome:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -44, -36
 	statusred:
@@ -166,15 +167,13 @@ eden_agridome:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUIAgridome.png
 		AddExtension: False
 
 eden_residence:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -32, -36
 	statusred:
@@ -192,15 +191,13 @@ eden_residence:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUIResidence.png
 		AddExtension: False
 
 eden_lab_basic:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -218,15 +215,13 @@ eden_lab_basic:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUILabBasic.png
 		AddExtension: False
 
 eden_factory_vehicle:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib1
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -277,6 +272,7 @@ eden_garage:
 
 eden_nursery:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -294,15 +290,13 @@ eden_nursery:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUINursery.png
 		AddExtension: False
 
 eden_university:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -320,15 +314,13 @@ eden_university:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUIUniversity.png
 		AddExtension: False
 
 eden_lab_standard:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -346,15 +338,13 @@ eden_lab_standard:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUILabStandard.png
 		AddExtension: False
 
 eden_dirt:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -36
 	statusred:
@@ -372,15 +362,13 @@ eden_dirt:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUIDIRT.png
 		AddExtension: False
 
 eden_rcc:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -398,15 +386,13 @@ eden_rcc:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUIRobotCommandCenter.png
 		AddExtension: False
 
 eden_factory_consumer:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -424,9 +410,6 @@ eden_factory_consumer:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUIConsumerFactory.png
 		AddExtension: False
@@ -451,6 +434,7 @@ eden_factory_consumer:
 
 eden_gorf:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -36
 	statusred:
@@ -468,15 +452,13 @@ eden_gorf:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUIGorf.png
 		AddExtension: False
 
 eden_lab_advanced:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -48
 	statusred:
@@ -494,19 +476,17 @@ eden_lab_advanced:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUILabAdvanced.png
 		AddExtension: False
 
 eden_spaceport:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib1
 	statusgreen:
-		Offset: -84, -60
+		Offset: -72, -48
 	statusred:
-		Offset: -84, -60
+		Offset: -72, -48
 	Defaults:
 		Filename: eden_spaceport.shp
 	idle:
@@ -529,6 +509,7 @@ eden_spaceport:
 
 eden_solar_array:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -36
 	statusred:
@@ -546,15 +527,13 @@ eden_solar_array:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: edenUISolarPowerArray.png
 		AddExtension: False
 
 eden_smelter_rare:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib1
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -580,6 +559,7 @@ eden_smelter_rare:
 ####################################################################################################
 eden_mine_common:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -24, -24
 	statusred:
@@ -597,15 +577,13 @@ eden_mine_common:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: ui_eden_mine.png
 		AddExtension: False
 
 eden_light_tower:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -24, -24
 	statusred:
@@ -1102,6 +1080,7 @@ eden_tiger_thorshammer:
 ####Plymouth Structure Factory
 plymouth_structure_factory:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -1142,6 +1121,7 @@ plymouth_structure_factory:
 
 plymouth_tokamak:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -24, -36
 	statusred:
@@ -1160,14 +1140,12 @@ plymouth_tokamak:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_tokamak.shp
 
 plymouth_smelter_common:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -1191,6 +1169,7 @@ plymouth_smelter_common:
 
 plymouth_agridome:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1209,14 +1188,12 @@ plymouth_agridome:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_agridome.shp
 
 plymouth_residence:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1235,14 +1212,12 @@ plymouth_residence:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_residence.shp
 
 plymouth_basic_lab:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1261,14 +1236,12 @@ plymouth_basic_lab:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_basic_lab.shp
 
 plymouth_nursery:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1287,14 +1260,12 @@ plymouth_nursery:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_nursery.shp
 
 plymouth_university:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1313,14 +1284,12 @@ plymouth_university:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_university.shp
 
 plymouth_lab_standard:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1339,14 +1308,12 @@ plymouth_lab_standard:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_labstandard.shp
 
 plymouth_dirt:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -36
 	statusred:
@@ -1365,14 +1332,12 @@ plymouth_dirt:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_dirt.shp
 
 plymouth_gorf:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -36
 	statusred:
@@ -1391,14 +1356,12 @@ plymouth_gorf:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_gorf.shp
 
 plymouth_lab_advanced:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -48
 	statusred:
@@ -1417,18 +1380,16 @@ plymouth_lab_advanced:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_labadvanced.shp
 
 plymouth_spaceport:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib1
 	statusgreen:
-		Offset: -84, -60
+		Offset: -72, -48
 	statusred:
-		Offset: -84, -60
+		Offset: -72, -48
 	Defaults:
 		Filename: plymouth_spaceport.shp
 	idle:
@@ -1451,6 +1412,7 @@ plymouth_spaceport:
 
 plymouth_solararray:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib2
 	statusgreen:
 		Offset: -48, -36
 	statusred:
@@ -1469,14 +1431,12 @@ plymouth_solararray:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib2
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_solarpowerarray.shp
 
 plymouth_smelter_rare:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib1
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -1500,6 +1460,7 @@ plymouth_smelter_rare:
 
 plymouth_factory_vehicle:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib1
 	statusgreen:
 		Offset: -72, -48
 	statusred:
@@ -1549,6 +1510,7 @@ plymouth_garage:
 
 plymouth_rcc:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1567,14 +1529,12 @@ plymouth_rcc:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_rcc.shp
 
 plymouth_factory_arachnid:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -24, -36
 	statusred:
@@ -1593,9 +1553,6 @@ plymouth_factory_arachnid:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_building_factoryarachnid.shp
 
@@ -1611,6 +1568,7 @@ plymouth_esg_mine:
 ####################################################################################################
 plymouth_mine_common:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -24, -24
 	statusred:
@@ -1629,14 +1587,12 @@ plymouth_mine_common:
 		Length: *
 		Tick: 80
 		AddExtension: False
-	bib: bib3
-		UseTilesetExtension: true
-		Length: *
 	icon:
 		Filename: cameo_plymouth_mine_common.shp
 
 plymouth_light_tower:
 	Inherits: ^OP2Building
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -24, -24
 	statusred:
