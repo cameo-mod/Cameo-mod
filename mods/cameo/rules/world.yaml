@@ -823,10 +823,10 @@
 				Sequences: swmin1,swmin2,swmin3,swmin4,swmin5,swmin6,swmin7,swmin8,swmin9,swmin10
 				Palette: greyscale
 				Name: Minerals
-			Spice:
-				Sequences: spicea, spiceb, spicec, spiced
-				Palette: d2k
-				Name: Spice
+			# Spice:
+			# 	Sequences: spicea, spiceb, spicec, spiced
+			# 	Palette: d2k
+			# 	Name: Spice
 			SCGas:
 				Sequences: scgas1, scgas1_off1, scgas1_off2, scgas1_off3, scgas1_off4
 				Palette: greyscale
@@ -869,12 +869,19 @@
 				Name: Farm
 			OP2Ore:
 				Sequences: op2minerals
-				Palette: terrain #player
+				Palette: player
 				Name: Common Ore
 			OP2Ore2:
 				Sequences: op2minerals2
-				Palette: terrain #player
+				Palette: player
 				Name: Rare Ore
+	D2kResourceRenderer:
+		ResourceTypes:
+			Spice:
+				Sequences: spicea, spiceb, spicec, spiced
+				Palette: d2k
+				Name: Spice Melange
+
 World:
 	Inherits: ^BaseWorld
 	ChatCommands:
