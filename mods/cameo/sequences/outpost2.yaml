@@ -320,7 +320,7 @@ eden_university:
 
 eden_lab_standard:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib2
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -509,11 +509,11 @@ eden_spaceport:
 
 eden_solar_array:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib2
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
-		Offset: -48, -36
+		Offset: -36, -36
 	statusred:
-		Offset: -48, -36
+		Offset: -36, -36
 	Defaults:
 		Filename: eden_solar_array.shp
 	idle:
@@ -1289,7 +1289,7 @@ plymouth_university:
 
 plymouth_lab_standard:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib2
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
 		Offset: -36, -36
 	statusred:
@@ -1412,11 +1412,11 @@ plymouth_spaceport:
 
 plymouth_solararray:
 	Inherits: ^OP2Building
-	Inherits@bib: ^WithBuildingBib2
+	Inherits@bib: ^WithBuildingBib3
 	statusgreen:
-		Offset: -48, -36
+		Offset: -36, -36
 	statusred:
-		Offset: -48, -36
+		Offset: -36, -36
 	Defaults:
 		Filename: plymouth_solararray.shp
 	idle:
