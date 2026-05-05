@@ -363,17 +363,17 @@ op2_commonore_beacon_3bar:
 
 ^op2base_factory_vehicle:
 	Inherits: ^BaseBuilding
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^3x3Shape
 	Inherits@weap: ^IsWeaponFactory
 	Inherits@STATUS: ^OP2Building
-	Selectable:
-		Bounds: 4096,3072
+	# Selectable:
+	# 	Bounds: 4096,3072
 	Valued:
 		Cost: 2000
 	Building:
-		Footprint: xxx+ xxx+ xxx+ ====
+		Footprint: xxx= xxx= xxx= ====
 		Dimensions: 4,4
-		LocalCenterOffset: 0,-512,0
+		LocalCenterOffset: -512,-512,0
 	Health:
 		HP: 150000
 	RevealsShroud:
@@ -383,12 +383,13 @@ op2_commonore_beacon_3bar:
 	Voiced:
 		VoiceSet: factoryVehicle
 	RallyPoint:
+		Path: 0,3
 	Exit@1:
 		SpawnOffset: 1500,85,0
-		ExitCell: 3,4
-	Exit@2:
-		SpawnOffset: 1500,298,0
-		ExitCell: 4,4
+		ExitCell: 3,1
+	# Exit@2:
+	# 	SpawnOffset: 1500,298,0
+	# 	ExitCell: 4,1
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
