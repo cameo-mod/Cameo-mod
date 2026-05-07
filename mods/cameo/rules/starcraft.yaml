@@ -2210,7 +2210,7 @@ zergsoilkiller4:
 	ProductionTimeMultiplier@fasterbreed:
 		Prerequisites: SCFASTERBREED
 		Multiplier: 75
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 
 SCHATCHERY:
 	Inherits: ^BaseBuildingZerg
@@ -2281,6 +2281,33 @@ SCHATCHERY:
 		RequiresCondition: schive
 	RallyPoint: ##########
 		Path: 0,2
+	PrimaryBuilding:
+		PrimaryCondition: primary
+		SelectionNotification: PrimaryBuildingSelected
+	WithDecoration@primary:
+		RequiresSelection: true
+		Image: rapips
+		Sequence: tag-primary
+		Position: Top
+		RequiresCondition: primary
+	LarvaProductionQueue@ZINFANTRY:
+		Type: SCZergInfantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 100
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+		MaxParallel: 3
+	ProductionBar@ZINFANTRY:
+		ProductionType: SCZergInfantry
+	LarvaConsumingProduction:
+		Produces: SCZergInfantry
+		EggCondition: sc_zerg_egg
 	Exit@1:
 		SpawnOffset: -1024,1024,0 #-1323,1280,0
 		ExitCell: 0,2
@@ -2380,8 +2407,6 @@ schive:
 
 sc_zerg_larva:
 	Inherits: ^Soldier
-	Inherits@supply: ^ProducesUnits
-	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Tooltip:
 		Name: Larvae
 	Valued:
@@ -2405,6 +2430,14 @@ sc_zerg_larva:
 	WithInfantryBody:
 		IdleSequences: idle
 		DefaultAttackSequence: idle
+		RequiresCondition: !sc_zerg_egg
+	WithSpriteBody@egg:
+		Name: egg
+		Sequence: makeunit
+		IsPlayerPalette: True
+		RequiresCondition: sc_zerg_egg
+	ExternalCondition@EGG:
+		Condition: sc_zerg_egg
 	WithDeathAnimation:
 		UseDeathTypeSuffix: False
 	Voiced:
@@ -2422,30 +2455,19 @@ sc_zerg_larva:
 			Radius: 512
 	RejectsOrders:
 	RejectsMoveToAttack:
-	WithProductionOverlay@egg:
-		Queues: RAInfantry
-		Sequence: makeunit
-		IsPlayerPalette: True
-		Offset: 0,0,0
-	ProductionBar@INFANTRY:
-		ProductionType: RAInfantry
-	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAInfantry
-	FreeActor@CPQDEBUGDUMMY:
-		Actor: CPQDEBUGDUMMY
-	Exit@1:
-		SpawnOffset: 0,1024,0 #-1323,1280,0
-		ExitCell: 0,1
-		Facing: 540
 	SpeedMultiplier@static:
 		Modifier: 0
 		RequiresCondition: stopmove
+	SpeedMultiplier@egg:
+		Modifier: 0
+		RequiresCondition: sc_zerg_egg
 	GrantConditionOnMovement@static:
 		ValidMovementTypes: Horizontal, Vertical, Turn
 		Condition: stopmove
 	Wanders:
 		MinMoveDelay: 150
 		MaxMoveDelay: 750
+		PauseOnCondition: sc_zerg_egg
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -8402,11 +8424,11 @@ upidol:
 	ProductionTimeMultiplier@supplylimit:
 		Multiplier: 1000
 		Prerequisites: supplylimit
-		Queue: RAInfantry
+		Queue: SCZergInfantry
 	ProductionTimeMultiplier@scovermind:
 		Multiplier: 50
 		Prerequisites: scovermind
-		Queue: RAInfantry
+		Queue: SCZergInfantry
 	Mobile:
 		Locomotor: chem
 	Targetable@Zerg:
@@ -8458,11 +8480,11 @@ upidol:
 	ProductionTimeMultiplier@supplylimit:
 		Multiplier: 1000
 		Prerequisites: supplylimit
-		Queue: RAInfantry
+		Queue: SCZergInfantry
 	ProductionTimeMultiplier@scovermind:
 		Multiplier: 50
 		Prerequisites: scovermind
-		Queue: RAInfantry
+		Queue: SCZergInfantry
 
 SCDRONE:
 	Inherits: ^Vehicle
@@ -8479,6 +8501,7 @@ SCDRONE:
 	Tooltip:
 		Name: Drone
 	Buildable:
+		Queue: SCZergInfantry
 		Prerequisites: ~scextractor
 		Description: Collects resources.
 	WithDeathAnimation:
@@ -8533,7 +8556,7 @@ SCOVERLORD:
 	Buildable:
 		BuildPaletteOrder: 0
 		Prerequisites: ~schatchery
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Provides supply and stores resources\nCan transport 8 units
 	Aircraft:
 		TurnSpeed: 6
@@ -8629,7 +8652,7 @@ SCBROODWEAVER:
 	Buildable:
 		BuildPaletteOrder: 0
 		Prerequisites: ~schatchery, ~upbroodweaver
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Heals nearby units.
 	Aircraft:
 		TurnSpeed: 9
@@ -8735,7 +8758,7 @@ SCZERGLING:
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scspawningpool, ~!uptalon
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		AdditionalActors: sczergling
 		Description: Fast Zerg basic assault strain.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
 	Mobile:
@@ -8786,7 +8809,7 @@ SCTALON:
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scspawningpool, ~uptalon
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		AdditionalActors: sczergling, sczergling
 		Description: Fast Zerg basic assault strain.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
 	Mobile:
@@ -8834,7 +8857,7 @@ SCSPOREMAW:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~sclair, ~upsporemaw
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Zerg artillery strain.\n Strong vs Infantry, Vehicles\n Weak vs Aircraft
 	Mobile:
 		Speed: 80
@@ -8892,7 +8915,7 @@ SCHYDRALISK:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~schydraliskden
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Zerg armored assault strain.\n Strong vs Infantry, Vehicles, Aircraft\n Weak vs Siege
 	Mobile:
 		Speed: 75
@@ -8949,7 +8972,7 @@ SCSPITHID:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~schydraliskden, ~upspithid
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Zerg armored assault strain.\n Strong vs Infantry, Vehicles, Aircraft\n Weak vs Siege
 	Mobile:
 		Speed: 110
@@ -9004,7 +9027,7 @@ SCDREADSHROUD:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scspire,, ~updreadshroud
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Airborne Zerg creature.\n Strong vs Infantry, Aircraft
 	Aircraft:
 		Speed: 120
@@ -9053,7 +9076,7 @@ SCCORRUPTOR:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scgreaterspire, ~upcorruptor
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Airborne Zerg creature can snare enemy units.
 	Aircraft:
 		Speed: 100
@@ -9108,7 +9131,7 @@ SCSWARMLING:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scgreaterspire, ~schive, ~upswarmling
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Airborne Zerg creature.\n Strong vs Everything in group
 	Aircraft:
 		Speed: 80
@@ -9297,7 +9320,7 @@ SCSHRIEK:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scspire, ~upshriek
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Airborne melee Zerg creature.\n Strong vs Infantry, Aircraft
 	Aircraft:
 		Speed: 160
@@ -9352,7 +9375,7 @@ SCMUTALISK:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scspire
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Airborne Zerg creature.\n Strong vs Infantry, Aircraft
 	Aircraft:
 		Speed: 160
@@ -9415,7 +9438,7 @@ SCDEVOURER:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scgreaterspire
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Airborne Zerg creature.\n Strong vs Aircraft
 	Aircraft:
 		Speed: 90
@@ -9466,7 +9489,7 @@ SCSCOURGE:
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~scspire
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Aerial suicide bomber.\n Strong vs Aircraft
 	Aircraft:
 		InitialFacing: 896
@@ -9517,7 +9540,7 @@ SCQUEEN:
 	Buildable:
 		BuildPaletteOrder: 70
 		Prerequisites: ~scqueensnest
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Defensive Air Unit\nCan breed Broodlings\nCan attack air and ground\nDetector
 	Aircraft:
 		Speed: 100
@@ -9590,7 +9613,7 @@ SCGUARDIAN:
 		AddToArmyValue: true
 	Buildable:
 		Prerequisites: ~scgreaterspire
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Heavy Zerg bomber.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 	Aircraft:
 		Speed: 50
@@ -9636,7 +9659,7 @@ SCULTRALISK:
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~scultraliskcavern
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Heavy Zerg assault strain.\n Strong vs Vehicles\n Weak vs Aircraft
 	Mobile:
 		Speed: 80
@@ -9691,7 +9714,7 @@ SCGOREKRAKEN:
 		AddToArmyValue: true
 	Buildable:
 		Prerequisites: ~scgreaterspire, ~upgorekraken
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Heavy Zerg bomber.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
 	Aircraft:
 		Speed: 70
@@ -9747,7 +9770,7 @@ SCHERMIT:
 		BuildLimit: 1
 		BuildPaletteOrder: 80
 		Prerequisites: ~scultraliskcavern, ~uphermit
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Heavy Zerg assault strain.\n Strong vs Vehicles\n Weak vs Aircraft
 	Mobile:
 		Speed: 50
@@ -9811,7 +9834,7 @@ SCGOREMAW:
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~scultraliskcavern, ~schive, ~upgoremaw
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Heavy Zerg assault strain.\n Strong vs Vehicles\n Weak vs Aircraft
 	Mobile:
 		Speed: 150
@@ -9873,7 +9896,7 @@ SCLURKER:
 	Buildable:
 		BuildPaletteOrder: 90
 		Prerequisites: ~schydraliskden, ~scevolutionchamber, ~sclair
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Zerg ambush strain.\nNeeds to deploy to attack\n Strong vs Infantry
 	Mobile:
 		Speed: 90
@@ -10030,7 +10053,7 @@ SCDEFILER:
 	Buildable:
 		BuildPaletteOrder: 8020
 		Prerequisites: ~scdefilermound
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Zerg support strain.\nAttack reduces targets' health over time\n Strong vs clustered units\n Special Ability: Dark Swarm
 	Mobile:
 		Speed: 50
@@ -10167,7 +10190,7 @@ SCKERRIGANZERG:
 	Buildable:
 		BuildPaletteOrder: 8040
 		Prerequisites: ~scqueensnest
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Queen Of Blades\nPowerful melee attack\nCan Breed Zergs
 		BuildLimit: 1
 		IconPalette: windows256
@@ -10232,7 +10255,7 @@ SCZMCV:
 	Inherits@mcv: ^MCV
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Buildable:
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: Builds structures and provides radar.
 		Prerequisites: ~scevolutionchamber
 	Tooltip:
@@ -10282,7 +10305,7 @@ SCBEHEMOTH:
 		BuildLimit: 1
 		BuildPaletteOrder: 20
 		Prerequisites: ~sclair, ~upbehemoth
-		Queue: Infantry, RAInfantry
+		Queue: SCZergInfantry
 		Description: A slow moving garrison transport for all ground units.\nExtremely Durable\n Strong vs Everything
 	Aircraft:
 		Speed: 30
