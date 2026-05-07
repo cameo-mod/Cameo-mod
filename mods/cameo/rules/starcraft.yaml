@@ -2196,6 +2196,9 @@ zergsoilkiller4:
 ^BaseBuildingZerg:
 	Inherits: ^BaseBuilding
 	#Inherits@zergai: ^ZergAIProductionBoost
+	RequiresBuildableArea:
+		AreaTypes: creep
+		Adjacent: 3
 	Building:
 		# TerrainTypes: ZergSoil ##########
 	# FireWarheadsOnDeath@remover:
@@ -2325,7 +2328,7 @@ SCHATCHERY:
 	ExternalCondition@JAMMED:
 		Condition: jammed
 	GivesBuildableArea: ##########
-		AreaTypes: building, cityi, hatchery
+		AreaTypes: building, cityi, hatchery, creep
 	WithMakeAnimation:
 	-WithDeathAnimation:
 	Refinery:
@@ -2509,7 +2512,10 @@ SCCREEPCOLONY:
 		Multiplier: 50
 	ProvidesPrerequisite@buildingname:
 	GivesBuildableArea:
-		AreaTypes: building
+		AreaTypes: building, creep
+	RequiresBuildableArea:
+		AreaTypes: creep
+		Adjacent: 3
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~schatchery
