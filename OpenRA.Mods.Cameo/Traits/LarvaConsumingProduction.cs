@@ -4,6 +4,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.AS.Traits;
@@ -44,6 +45,9 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		readonly List<EggSlot> eggSlots = new();
 
+		/// <summary>Number of larva egg-slots currently committed (used by LarvaProductionQueue.TickInner).</summary>
+		public int AssignedSlotCount => eggSlots.Count;
+
 		public LarvaConsumingProduction(ActorInitializer init, LarvaConsumingProductionInfo info)
 			: base(init, info)
 		{
@@ -62,10 +66,11 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (spawnerMaster == null || queue == null)
 				return;
 
-			// Count items that have started and aren't cancelled/paused – including Done items
-			// that are waiting for Produce() to succeed. The egg slot must stay alive until
-			// the unit actually spawns.
-			var activeCount = queue.AllQueued().Count(i => i.Started && !i.Paused);
+			// Slot target: every non-paused item in the queue needs a larva, capped at MaxParallel.
+			// This includes Done items (slot kept until Produce() consumes it) AND unstarted items
+			// (slot must be assigned BEFORE their timer starts, so the timer only runs when a
+			// larva is physically available).
+			var activeCount = Math.Min(queue.Info.MaxParallel, queue.AllQueued().Count(i => !i.Paused));
 
 			// Purge slots whose larva died (e.g. killed in combat).
 			for (var i = eggSlots.Count - 1; i >= 0; i--)
