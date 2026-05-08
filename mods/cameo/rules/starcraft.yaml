@@ -2437,7 +2437,7 @@ sc_zerg_larva:
 	Armor:
 		Type: Light
 	RevealsShroud:
-		Range: 4c0
+		Range: 1c0
 	GrantConditionAfterDelay:
 		Condition: disable_movement
 		ShowSelectionBar: false
@@ -2467,7 +2467,7 @@ sc_zerg_larva:
 	-MapEditorData:
 	HitShape:
 		Type: Circle
-			Radius: 512
+			Radius: 256
 	RejectsOrders:
 	RejectsMoveToAttack:
 	-Selectable:
