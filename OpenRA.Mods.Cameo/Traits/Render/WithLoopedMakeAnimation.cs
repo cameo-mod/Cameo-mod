@@ -17,6 +17,11 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 	public class WithLoopedMakeAnimationInfo : TraitInfo, Requires<WithSpriteBodyInfo>
 	{
 		[SequenceReference]
+		[Desc("Sequence to play backwards on placement for a fade-in effect before the loop begins.",
+			"Uses AlphaFade on the sequence definition. Set to null to skip.")]
+		public readonly string FadeInSequence = "make-start";
+
+		[SequenceReference]
 		[Desc("Sequence to loop during construction.")]
 		public readonly string LoopSequence = "make-loop";
 
@@ -71,7 +76,23 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			// Defer by one frame so the condition system can evaluate RequiresCondition
 			// on any WithSpriteBody traits before we try to play the animation.
 			// (Conditional WSBs start with IsTraitDisabled = true until the first UpdateEnabled fires.)
-			self.World.AddFrameEndTask(_ => PlayLoop(self));
+			if (info.FadeInSequence != null)
+				self.World.AddFrameEndTask(_ => PlayFadeIn(self));
+			else
+				self.World.AddFrameEndTask(_ => PlayLoop(self));
+		}
+
+		void PlayFadeIn(Actor self)
+		{
+			var wsb = wsbs.FirstEnabledConditionalTraitOrDefault();
+			if (wsb == null)
+			{
+				PlayLoop(self);
+				return;
+			}
+
+			// AlphaFade goes opaque→transparent; playing it backwards gives transparent→opaque (fade in).
+			wsb.PlayCustomAnimationBackwards(self, info.FadeInSequence, () => PlayLoop(self));
 		}
 
 		void PlayLoop(Actor self)
