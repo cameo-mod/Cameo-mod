@@ -2198,7 +2198,8 @@ zergsoilkiller4:
 	#Inherits@zergai: ^ZergAIProductionBoost
 	RequiresBuildableArea:
 		AreaTypes: creep
-		Adjacent: 3
+		Adjacent: 4
+		IsCircular: true
 	Building:
 		# TerrainTypes: ZergSoil ##########
 	# FireWarheadsOnDeath@remover:
@@ -2518,7 +2519,8 @@ SCCREEPCOLONY:
 		AreaTypes: building, creep
 	RequiresBuildableArea:
 		AreaTypes: creep
-		Adjacent: 3
+		Adjacent: 4
+		IsCircular: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~schatchery
