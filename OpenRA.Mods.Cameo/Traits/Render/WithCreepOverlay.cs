@@ -9,7 +9,6 @@
  */
 #endregion
 
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Graphics;
@@ -163,15 +162,27 @@ namespace OpenRA.Mods.Cameo.Traits
 			var scanStart = map.Clamp(location - new CVec(adjacent, adjacent));
 			var scanEnd = map.Clamp(location + bi.Dimensions + new CVec(adjacent, adjacent));
 
+			var radiusSq = adjacent * adjacent;
 			var result = new List<CPos>();
 			for (var y = scanStart.Y; y < scanEnd.Y; y++)
 			{
 				for (var x = scanStart.X; x < scanEnd.X; x++)
 				{
 					var cell = new CPos(x, y);
+
+					// Skip cells that Zerg buildings cannot be placed on.
+					if (map.Ramp[cell] != 0)
+						continue;
+
+					var terrainType = map.GetTerrainInfo(cell).Type;
+					if (!bi.TerrainTypes.Contains(terrainType))
+						continue;
+
 					foreach (var ft in footprintTiles)
 					{
-						if (Math.Abs(cell.X - ft.X) <= adjacent && Math.Abs(cell.Y - ft.Y) <= adjacent)
+						var dx = cell.X - ft.X;
+						var dy = cell.Y - ft.Y;
+						if (dx * dx + dy * dy <= radiusSq)
 						{
 							result.Add(cell);
 							break;

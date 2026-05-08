@@ -671,6 +671,7 @@ zergsoilmaker:
 		Length: *
 	icon:
 		Filename: sccreepcolonyicon.png
+
 zergsoilmaker2:
 	Defaults:
 		Filename: zergsoilmaker2.shp
@@ -718,6 +719,16 @@ sccreepcolony:
 	make:
 		Filename: zergbuildingmakesmall.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
 	icon:
 		Filename: sccreepcolonyicon.png
 
@@ -742,6 +753,16 @@ scsunkencolony:
 	make:
 		Filename: zergbuildingmakesmall.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
 	icon:
 		Filename: scsunkencolonyicon.png
 
@@ -763,6 +784,16 @@ scsporecolony:
 	make:
 		Filename: zergbuildingmakesmall.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
 	icon:
 		Filename: scsporecolonyicon.png
 
@@ -803,6 +834,16 @@ scspawningpool:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
 	icon:
 		Filename: scspawningpoolicon.png
 

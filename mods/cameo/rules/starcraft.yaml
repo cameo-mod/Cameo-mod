@@ -2382,7 +2382,7 @@ SCHATCHERY:
 	Transforms:
 		IntoActor: sczmcv
 	WithCreepOverlay:
-		Adjacent: 3
+		Adjacent: 4
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -2574,6 +2574,9 @@ SCCREEPCOLONY:
 		Name: spore
 		RequiresCondition: spore && !sunken
 	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
+		BodyNames: body, sunken, spore
 	AttackOmni:
 		Armaments: primary, spore
 		PauseOnCondition: disabled
@@ -2619,7 +2622,7 @@ SCCREEPCOLONY:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	WithCreepOverlay:
-		Adjacent: 3
+		Adjacent: 4
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -2776,6 +2779,9 @@ sczvespenegascollector:
 SCSPAWNINGPOOL:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	Tooltip:
 		Name: Spawning Pool
 	Valued:
