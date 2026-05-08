@@ -47,6 +47,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly World world;
 		readonly Dictionary<CPos, int> refCount = new();
 		readonly Dictionary<CPos, bool> dirty = new();
+		readonly Queue<CPos> cleanDirty = new();
 
 		TerrainSpriteLayer render;
 		Sprite creepSprite;
@@ -106,13 +107,19 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			foreach (var kv in dirty)
 			{
+				if (world.FogObscures(kv.Key))
+					continue;
+
 				if (kv.Value)
 					render.Update(kv.Key, creepSprite, paletteReference, creepScale);
 				else
 					render.Clear(kv.Key);
+
+				cleanDirty.Enqueue(kv.Key);
 			}
 
-			dirty.Clear();
+			while (cleanDirty.Count > 0)
+				dirty.Remove(cleanDirty.Dequeue());
 
 			render.Draw(wr.Viewport);
 		}
