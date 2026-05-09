@@ -2338,7 +2338,19 @@ SCHATCHERY:
 	Refinery:
 	DockHost:
 		DockAngle: 0
-		DockOffset: 0, 2c512, 0
+		DockOffset: 0, 1c0, 0
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 512
+		DockOffset: 0, -2c0, 0
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 256
+		DockOffset: 2c0, 0, 0
+	DockHost@DOCK4:
+		Type: Unload
+		DockAngle: 768
+		DockOffset: -2c0, 0, 0
 	##########
 	Sellable:
 	##########
