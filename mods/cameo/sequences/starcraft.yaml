@@ -529,18 +529,19 @@ scarbitertribunal:
 	icon:
 		Filename: scarbitertribunalicon.png
 
-scxelnagatemple:
-	Defaults:
-		Filename: scxelnagatemple.shp
-	build:
-	idle:
-	dead:
-	make:
-		Filename: protossbuild.png
-		Length: *
-		Tick: 80
-	icon:
-		Filename: scnexusicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# scxelnagatemple:
+# 	Defaults:
+# 		Filename: scxelnagatemple.shp
+# 	build:
+# 	idle:
+# 	dead:
+# 	make:
+# 		Filename: protossbuild.png
+# 		Length: *
+# 		Tick: 80
+# 	icon:
+# 		Filename: scnexusicon.shp
 
 ####################################################################################################
 #		BUILDING ZERG
@@ -899,9 +900,10 @@ scovermind:
 	icon:
 		Filename: scovermindicon.png
 
-scliftoff:
-	icon:
-		Filename: scliftoff.shp
+# --- COMMENTED OUT (no matching actor) ---
+# scliftoff:
+# 	icon:
+# 		Filename: scliftoff.shp
 
 ####################################################################################################
 #		UNIT TERRAN
@@ -989,32 +991,33 @@ scscv:
 		Filename: scscvicon.png
 		Offset: 0,0
 
-scscvfull:
-	Inherits: scscv
-	Defaults:
-		Filename: scscvfull.png
-	idle:
-		Length: 1
-		Facings: -16
-		Combine:
-			scscv-l:
-				Filename: scscvfull.png
-				Length: 9
-			scscv-r:
-				Filename: scscvfull.png
-				FlipX: True
-				Frames: 7, 6, 5, 4, 3, 2, 1, 0
-	move:
-		Length: 1
-		Facings: -16
-		Combine:
-			scscvrun-l:
-				Filename: scscvwalkfull.png
-				Length: 9
-			scscvrun-r:
-				Filename: scscvwalkfull.png
-				FlipX: True
-				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+# --- COMMENTED OUT (no matching actor) ---
+# scscvfull:
+# 	Inherits: scscv
+# 	Defaults:
+# 		Filename: scscvfull.png
+# 	idle:
+# 		Length: 1
+# 		Facings: -16
+# 		Combine:
+# 			scscv-l:
+# 				Filename: scscvfull.png
+# 				Length: 9
+# 			scscv-r:
+# 				Filename: scscvfull.png
+# 				FlipX: True
+# 				Frames: 7, 6, 5, 4, 3, 2, 1, 0
+# 	move:
+# 		Length: 1
+# 		Facings: -16
+# 		Combine:
+# 			scscvrun-l:
+# 				Filename: scscvwalkfull.png
+# 				Length: 9
+# 			scscvrun-r:
+# 				Filename: scscvwalkfull.png
+# 				FlipX: True
+# 				Frames: 7, 6, 5, 4, 3, 2, 1, 0
 
 scmarine:
 	Inherits: ^SCSmallShadow
@@ -1688,13 +1691,14 @@ scgoliath2:
 	icon:
 		Filename: scgoliathmk2icon.png
 
-scttruck:
-	idle:
-		Filename: truck.shp
-		Facings: 32
-		UseClassicFacings: True
-	icon:
-		Filename: sctruckicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# scttruck:
+# 	idle:
+# 		Filename: truck.shp
+# 		Facings: 32
+# 		UseClassicFacings: True
+# 	icon:
+# 		Filename: sctruckicon.shp
 
 scwraith:
 	idle:
@@ -1918,8 +1922,9 @@ sctmcv:
 		Start: 9
 		AddExtension: False
 
-sctmcv.bot:
-	Inherits: sctmcv
+# --- COMMENTED OUT (no matching actor) ---
+# sctmcv.bot:
+# 	Inherits: sctmcv
 
 ####################################################################################################
 #		UNIT PROTOSS
@@ -1941,13 +1946,14 @@ scprobe:
 		Filename: scprobeicon.png
 		Offset: 0,0
 
-scprobefull:
-	Inherits: scprobe
-	Defaults:
-		Filename: scprobeidle.png
-		Offset: 0,0
-	idle:
-		Facings: -8
+# --- COMMENTED OUT (no matching actor) ---
+# scprobefull:
+# 	Inherits: scprobe
+# 	Defaults:
+# 		Filename: scprobeidle.png
+# 		Offset: 0,0
+# 	idle:
+# 		Facings: -8
 
 sczealot:
 	Inherits: ^SCSmallShadow
@@ -2235,8 +2241,9 @@ scpmcv:
 		Start: 10
 		AddExtension: False
 
-scpmcv.bot:
-	Inherits: scpmcv
+# --- COMMENTED OUT (no matching actor) ---
+# scpmcv.bot:
+# 	Inherits: scpmcv
 
 sczeratul:
 	Defaults:
@@ -2533,20 +2540,22 @@ scdrone:
 		Filename: scdroneicon.png
 		Offset: 0,0
 
-scdronefull:
-	Inherits: scdrone
-	Defaults:
-		Filename: scdronefull.png
-	idle:
-		Facings: -8
+# --- COMMENTED OUT (no matching actor) ---
+# scdronefull:
+# 	Inherits: scdrone
+# 	Defaults:
+# 		Filename: scdronefull.png
+# 	idle:
+# 		Facings: -8
 
-scdroneburrow:
-	Inherits: scdrone
-	idle:
-		Filename: scdroneburrowed.png
-		Start: 4
-		Facings: 1
-		Tick: 100
+# --- COMMENTED OUT (no matching actor) ---
+# scdroneburrow:
+# 	Inherits: scdrone
+# 	idle:
+# 		Filename: scdroneburrowed.png
+# 		Start: 4
+# 		Facings: 1
+# 		Tick: 100
 
 sczergling:
 	Inherits: ^SCSmallShadow
@@ -3019,11 +3028,12 @@ scsporemaw:
 		Filename: scsporemawicon.png
 		Offset: 0,0
 
-sczhsplash:
-	idle:
-		Filename: sczhsplash.shp
-		Length: *
-		ZOffset: 1023
+# --- COMMENTED OUT (no matching actor) ---
+# sczhsplash:
+# 	idle:
+# 		Filename: sczhsplash.shp
+# 		Length: *
+# 		ZOffset: 1023
 
 scmutalisk:
 	Defaults:
@@ -3381,18 +3391,20 @@ sczmcv:
 		Filename: schatcheryicon.png
 		Offset: 0,0
 
-sczmcv.bot:
-	Inherits: sczmcv
+# --- COMMENTED OUT (no matching actor) ---
+# sczmcv.bot:
+# 	Inherits: sczmcv
 
-scztruck:
-	Defaults:
-		Filename: scztruck.shp
-	idle:
-		Filename: truck.shp
-		Facings: 32
-		UseClassicFacings: True
-	icon:
-		Filename: sctruckicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# scztruck:
+# 	Defaults:
+# 		Filename: scztruck.shp
+# 	idle:
+# 		Filename: truck.shp
+# 		Facings: 32
+# 		UseClassicFacings: True
+# 	icon:
+# 		Filename: sctruckicon.shp
 
 sc_zerg_larva:
 	Defaults:
@@ -3469,10 +3481,11 @@ scphotonbullet:
 		Filename: scphotonbullet.shp
 		Length: 5
 
-scscoutspark:
-	idle:
-		Filename: scscoutspark.shp
-		Length: 8
+# --- COMMENTED OUT (no matching actor) ---
+# scscoutspark:
+# 	idle:
+# 		Filename: scscoutspark.shp
+# 		Length: 8
 
 scinterceptorbullet:
 	idle:
@@ -3564,10 +3577,11 @@ upreavercapacity:
 		Filename: screavercapacityicon.png
 		AddExtension: false
 
-upreaverdamage:
-	icon:
-		Filename: upreaverdamage.png
-		AddExtension: false
+# --- COMMENTED OUT (no matching actor) ---
+# upreaverdamage:
+# 	icon:
+# 		Filename: upreaverdamage.png
+# 		AddExtension: false
 
 upairspeed:
 	icon:
@@ -3631,7 +3645,9 @@ scdragoonprojectile:
 		Filename: scdragoonprojectile.png
 		Length: 31
 
-disabledicon:
-	icon:
-		Filename: disabledicon.png
-		Length: 1
+# --- COMMENTED OUT (no matching actor) ---
+# disabledicon:
+# 	icon:
+# 		Filename: disabledicon.png
+# 		Length: 1
+

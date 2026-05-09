@@ -5401,76 +5401,89 @@ modernfirecontrolsystemsicon:
 
 # Civilian Cars
 
-ts_sedan:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ts_sedan.png
-		Scale: 0.5
-	idle:
-		Facings: 64
-	icon:
-		Filename: invisibleitem.shp
-		AddExtension: False
-ts_trucka:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ts_trucka.png
-		Scale: 0.64
-	idle:
-		Facings: 64
-	icon:
-		Filename: invisibleitem.shp
-		AddExtension: False
-ts_truckb:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ts_truckb.png
-		Scale: 0.64
-	idle:
-		Facings: 64
-	icon:
-		Filename: invisibleitem.shp
-		AddExtension: False
-ts_bus:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ts_bus.png
-		Scale: 0.64
-	idle:
-		Facings: 64
-	icon:
-		Filename: invisibleitem.shp
-		AddExtension: False
-ts_pickup:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ts_pickup.png
-		Scale: 0.64
-	idle:
-		Facings: 64
-	icon:
-		Filename: invisibleitem.shp
-		AddExtension: False
-ts_pickupb:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ts_pickupb.png
-		Scale: 0.64
-	idle:
-		Facings: 64
-	icon:
-		Filename: invisibleitem.shp
-		AddExtension: False
-ts_wini:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ts_wini.png
-		Scale: 0.64
-	idle:
-		Facings: 64
-	icon:
-		Filename: invisibleitem.shp
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# ts_sedan:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ts_sedan.png
+# 		Scale: 0.5
+# 	idle:
+# 		Facings: 64
+# 	icon:
+# 		Filename: invisibleitem.shp
+# 		AddExtension: False
+
+# --- COMMENTED OUT (no matching actor) ---
+# ts_trucka:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ts_trucka.png
+# 		Scale: 0.64
+# 	idle:
+# 		Facings: 64
+# 	icon:
+# 		Filename: invisibleitem.shp
+# 		AddExtension: False
+
+# --- COMMENTED OUT (no matching actor) ---
+# ts_truckb:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ts_truckb.png
+# 		Scale: 0.64
+# 	idle:
+# 		Facings: 64
+# 	icon:
+# 		Filename: invisibleitem.shp
+# 		AddExtension: False
+
+# --- COMMENTED OUT (no matching actor) ---
+# ts_bus:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ts_bus.png
+# 		Scale: 0.64
+# 	idle:
+# 		Facings: 64
+# 	icon:
+# 		Filename: invisibleitem.shp
+# 		AddExtension: False
+
+# --- COMMENTED OUT (no matching actor) ---
+# ts_pickup:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ts_pickup.png
+# 		Scale: 0.64
+# 	idle:
+# 		Facings: 64
+# 	icon:
+# 		Filename: invisibleitem.shp
+# 		AddExtension: False
+
+# --- COMMENTED OUT (no matching actor) ---
+# ts_pickupb:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ts_pickupb.png
+# 		Scale: 0.64
+# 	idle:
+# 		Facings: 64
+# 	icon:
+# 		Filename: invisibleitem.shp
+# 		AddExtension: False
+
+# --- COMMENTED OUT (no matching actor) ---
+# ts_wini:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ts_wini.png
+# 		Scale: 0.64
+# 	idle:
+# 		Facings: 64
+# 	icon:
+# 		Filename: invisibleitem.shp
+# 		AddExtension: False
 
 mobilityspecializationicon:
 	icon:

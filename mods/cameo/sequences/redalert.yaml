@@ -2,105 +2,106 @@
 #		INFANTRY
 ####################################################################################################
 
-redguard:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: redguard.shp
-		Scale: 1.6
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 64
-		Length: 16
-		Facings: 8
-	prone-stand:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 208
-		Length: 4
-		Facings: 8
-		Tick: 100
-	liedown:
-		Start: 192
-		Length: 2
-		Facings: 8
-	standup:
-		Start: 240
-		Length: 2
-		Facings: 8
-	prone-shoot:
-		Start: 256
-		Length: 16
-		Facings: 8
-	idle1:
-		Start: 384
-		Length: 14
-		Tick: 120
-	idle2:
-		Start: 399
-		Length: 16
-		Tick: 120
-	idle3:
-		Start: 384
-		Length: 14
-		Tick: 120
-	idle4:
-		Start: 399
-		Length: 16
-		Tick: 120
-	die1:
-		Start: 416
-		Length: 8
-	die2:
-		Start: 424
-		Length: 8
-	die3:
-		Start: 432
-		Length: 8
-	die4:
-		Start: 440
-		Length: 12
-	die5:
-		Start: 452
-		Length: 18
-	die6:
-		Filename: e1.shp
-		Scale: 1
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Scale: 1
-		Length: *
-	die-crushed:
-		Filename: corpse1.shp
-		Scale: 1
-		Length: 6
-		Tick: 1600
-		ZOffset: -511
-	garrison-muzzle:
-		Filename: minigun.shp
-		Scale: 1
-		Length: 3
-		Stride: 6
-		Facings: 8
-	icon:
-		Filename: che1icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# redguard:
+# 	Inherits: ^InfantryOverlays
+# 	Defaults:
+# 		Filename: redguard.shp
+# 		Scale: 1.6
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Facings: 8
+# 	run:
+# 		Start: 16
+# 		Length: 6
+# 		Facings: 8
+# 		Tick: 100
+# 	shoot:
+# 		Start: 64
+# 		Length: 16
+# 		Facings: 8
+# 	prone-stand:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-stand2:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-run:
+# 		Start: 208
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 100
+# 	liedown:
+# 		Start: 192
+# 		Length: 2
+# 		Facings: 8
+# 	standup:
+# 		Start: 240
+# 		Length: 2
+# 		Facings: 8
+# 	prone-shoot:
+# 		Start: 256
+# 		Length: 16
+# 		Facings: 8
+# 	idle1:
+# 		Start: 384
+# 		Length: 14
+# 		Tick: 120
+# 	idle2:
+# 		Start: 399
+# 		Length: 16
+# 		Tick: 120
+# 	idle3:
+# 		Start: 384
+# 		Length: 14
+# 		Tick: 120
+# 	idle4:
+# 		Start: 399
+# 		Length: 16
+# 		Tick: 120
+# 	die1:
+# 		Start: 416
+# 		Length: 8
+# 	die2:
+# 		Start: 424
+# 		Length: 8
+# 	die3:
+# 		Start: 432
+# 		Length: 8
+# 	die4:
+# 		Start: 440
+# 		Length: 12
+# 	die5:
+# 		Start: 452
+# 		Length: 18
+# 	die6:
+# 		Filename: e1.shp
+# 		Scale: 1
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Scale: 1
+# 		Length: *
+# 	die-crushed:
+# 		Filename: corpse1.shp
+# 		Scale: 1
+# 		Length: 6
+# 		Tick: 1600
+# 		ZOffset: -511
+# 	garrison-muzzle:
+# 		Filename: minigun.shp
+# 		Scale: 1
+# 		Length: 3
+# 		Stride: 6
+# 		Facings: 8
+# 	icon:
+# 		Filename: che1icon.shp
 
 japanesesoldier:
 	Inherits: ^InfantryOverlays
@@ -2040,23 +2041,24 @@ rajeep:
 	icon:
 		Filename: rajeepicon.shp
 
-rajeep2:
-	Defaults:
-		Filename: RocketRanger.png
-	idle:
-		Filename: rajeep.shp
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Filename: RangerLauncherFx.png
-		Scale: 0.5
-		Facings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: rajeepicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# rajeep2:
+# 	Defaults:
+# 		Filename: RocketRanger.png
+# 	idle:
+# 		Filename: rajeep.shp
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 	turret:
+# 		Filename: RangerLauncherFx.png
+# 		Scale: 0.5
+# 		Facings: 64
+# 	muzzle:
+# 		Filename: minigun.shp
+# 		Length: 6
+# 		Facings: 8
+# 	icon:
+# 		Filename: rajeepicon.shp
 
 mnly:
 	Defaults:
@@ -2303,21 +2305,22 @@ modtnkd2:
 		AddExtension: False
 		Filename: Ra1TankDestroyerIcon.shp
 
-modflak88:
-	idle:
-		Filename: ramgg.shp
-		Facings: 32
-		InterpolatedFacings: 64
-	turret:
-		Filename: ftrk.shp
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: modflak88icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# modflak88:
+# 	idle:
+# 		Filename: ramgg.shp
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 	turret:
+# 		Filename: ftrk.shp
+# 		Start: 32
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: *
+# 	icon:
+# 		Filename: modflak88icon.shp
 
 modbtr:
 	Defaults:
@@ -4678,39 +4681,40 @@ sant:
 	icon:
 		Filename: santicon.shp
 
-mant:
-	Defaults:
-		Filename: ant1.shp
-	Inherits: ^InfantryOverlays
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Length: 8
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-	bite:
-		Start: 72
-		Length: 4
-		Facings: 8
-	die:
-		Start: 104
-		Length: 8
-		Tick: 300
-	die-crushed:
-		Start: 104
-		Length: 8
-		Tick: 400
-		ZOffset: -511
-	turret:
-		Filename: sapc.shp
-		Start: 38
-		Facings: 32
-		InterpolatedFacings: 64
-	icon:
-		Filename: manticon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# mant:
+# 	Defaults:
+# 		Filename: ant1.shp
+# 	Inherits: ^InfantryOverlays
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Length: 8
+# 	run:
+# 		Start: 8
+# 		Length: 8
+# 		Facings: 8
+# 	bite:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 	die:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 300
+# 	die-crushed:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 400
+# 		ZOffset: -511
+# 	turret:
+# 		Filename: sapc.shp
+# 		Start: 38
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 	icon:
+# 		Filename: manticon.shp
 
 chant:
 	Defaults:
@@ -4754,164 +4758,168 @@ chant:
 	icon:
 		Filename: anticon.shp
 
-tant:
-	Defaults:
-		Filename: ant1.shp
-	Inherits: ^InfantryOverlays
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Length: 8
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-	bite:
-		Start: 72
-		Length: 4
-		Facings: 8
-	die:
-		Start: 104
-		Length: 8
-		Tick: 300
-	die-crushed:
-		Start: 104
-		Length: 8
-		Tick: 400
-		ZOffset: -511
-	turret:
-		Filename: 2tnk.shp
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	icon:
-		Filename: tanticon.shp
-	muzzle:
-		Length: 5
-		Filename: gunfire2.shp
+# --- COMMENTED OUT (no matching actor) ---
+# tant:
+# 	Defaults:
+# 		Filename: ant1.shp
+# 	Inherits: ^InfantryOverlays
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Length: 8
+# 	run:
+# 		Start: 8
+# 		Length: 8
+# 		Facings: 8
+# 	bite:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 	die:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 300
+# 	die-crushed:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 400
+# 		ZOffset: -511
+# 	turret:
+# 		Filename: 2tnk.shp
+# 		Start: 32
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 	icon:
+# 		Filename: tanticon.shp
+# 	muzzle:
+# 		Length: 5
+# 		Filename: gunfire2.shp
 
-2tant:
-	Defaults:
-		Filename: ant1.shp
-	Inherits: ^InfantryOverlays
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Length: 8
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-	bite:
-		Start: 72
-		Length: 4
-		Facings: 8
-	die:
-		Start: 104
-		Length: 8
-		Tick: 300
-	die-crushed:
-		Start: 104
-		Length: 8
-		Tick: 400
-		ZOffset: -511
-	turret:
-		Filename: 3tnk.shp
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-	icon:
-		Filename: 2tanticon.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# 2tant:
+# 	Defaults:
+# 		Filename: ant1.shp
+# 	Inherits: ^InfantryOverlays
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Length: 8
+# 	run:
+# 		Start: 8
+# 		Length: 8
+# 		Facings: 8
+# 	bite:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 	die:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 300
+# 	die-crushed:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 400
+# 		ZOffset: -511
+# 	turret:
+# 		Filename: 3tnk.shp
+# 		Start: 32
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 	icon:
+# 		Filename: 2tanticon.shp
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
-htant:
-	Defaults:
-		Filename: sant.shp
-	Inherits: ^InfantryOverlays
-	stand:
-		Facings: 8
-		Scale: 1.15
-	stand2:
-		Start: 8
-		Length: 8
-		Scale: 1.15
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-		Scale: 1.15
-	bite:
-		Start: 72
-		Length: 4
-		Facings: 8
-		Scale: 1.15
-	die:
-		Filename: ant1.shp
-		Start: 104
-		Length: 8
-		Tick: 300
-		Scale: 1.15
-	die-crushed:
-		Filename: ant1.shp
-		Start: 104
-		Length: 8
-		Tick: 400
-		ZOffset: -511
-		Scale: 1.15
-	turret:
-		Filename: 4tnk.shp
-		Start: 32
-		Facings: 32
-		InterpolatedFacings: 64
-		Scale: 1.15
-	icon:
-		Filename: htanticon.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-		Scale: 1.15
+# --- COMMENTED OUT (no matching actor) ---
+# htant:
+# 	Defaults:
+# 		Filename: sant.shp
+# 	Inherits: ^InfantryOverlays
+# 	stand:
+# 		Facings: 8
+# 		Scale: 1.15
+# 	stand2:
+# 		Start: 8
+# 		Length: 8
+# 		Scale: 1.15
+# 	run:
+# 		Start: 8
+# 		Length: 8
+# 		Facings: 8
+# 		Scale: 1.15
+# 	bite:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 		Scale: 1.15
+# 	die:
+# 		Filename: ant1.shp
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 300
+# 		Scale: 1.15
+# 	die-crushed:
+# 		Filename: ant1.shp
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 400
+# 		ZOffset: -511
+# 		Scale: 1.15
+# 	turret:
+# 		Filename: 4tnk.shp
+# 		Start: 32
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 		Scale: 1.15
+# 	icon:
+# 		Filename: htanticon.shp
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
+# 		Scale: 1.15
 
-testant:
-	Defaults:
-		Filename: hant.shp
-	Inherits: ^InfantryOverlays
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Length: 8
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-	bite:
-		Start: 72
-		Length: 4
-		Facings: 8
-	die:
-		Filename: ant1.shp
-		Start: 104
-		Length: 8
-		Tick: 300
-	die-crushed:
-		Filename: ant1.shp
-		Start: 104
-		Length: 8
-		Tick: 400
-		ZOffset: -511
-	spinner:
-		Filename: ttnk.shp
-		Start: 32
-		Length: 32
-	icon:
-		Filename: anticon.shp
-	muzzle:
-		Length: 5
-		Filename: gunfire2.shp
+# --- COMMENTED OUT (no matching actor) ---
+# testant:
+# 	Defaults:
+# 		Filename: hant.shp
+# 	Inherits: ^InfantryOverlays
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Length: 8
+# 	run:
+# 		Start: 8
+# 		Length: 8
+# 		Facings: 8
+# 	bite:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 	die:
+# 		Filename: ant1.shp
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 300
+# 	die-crushed:
+# 		Filename: ant1.shp
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 400
+# 		ZOffset: -511
+# 	spinner:
+# 		Filename: ttnk.shp
+# 		Start: 32
+# 		Length: 32
+# 	icon:
+# 		Filename: anticon.shp
+# 	muzzle:
+# 		Length: 5
+# 		Filename: gunfire2.shp
 
 crab:
 	Defaults:
@@ -5905,33 +5913,40 @@ gpssatellitesupporticon:
 	icon:
 		Filename: gpssicon.shp
 
-conscriptionicon:
-	icon:
-		Filename: conscriptionicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# conscriptionicon:
+# 	icon:
+# 		Filename: conscriptionicon.png
 
-nuclearenginesicon:
-	icon:
-		Filename: nuclearenginesicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# nuclearenginesicon:
+# 	icon:
+# 		Filename: nuclearenginesicon.png
 
-rocketenhancementsicon:
-	icon:
-		Filename: rocketenhancementsicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# rocketenhancementsicon:
+# 	icon:
+# 		Filename: rocketenhancementsicon.png
 
-advancedthermobaricsicon:
-	icon:
-		Filename: advancedthermobaricsicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# advancedthermobaricsicon:
+# 	icon:
+# 		Filename: advancedthermobaricsicon.png
 
-experimentalteslaweaponsicon:
-	icon:
-		Filename: experimentalteslaweaponsicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# experimentalteslaweaponsicon:
+# 	icon:
+# 		Filename: experimentalteslaweaponsicon.png
 
-sovietautoloadersicon:
-	icon:
-		Filename: sovietautoloadersicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# sovietautoloadersicon:
+# 	icon:
+# 		Filename: sovietautoloadersicon.png
 
-staliniumsteelicon:
-	icon:
-		Filename: staliniumsteelicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# staliniumsteelicon:
+# 	icon:
+# 		Filename: staliniumsteelicon.png
 
 bushidodisciplineicon:
 	icon:

@@ -806,22 +806,23 @@ eden_cargotruck_empty:
 		Filename: edenUICargoTruck.png
 		AddExtension: False
 
-eden_cargotruck_commonore:
-	Defaults:
-		Filename: eden_cargotruck_empty.shp
-	Inherits: eden_cargotruck_empty
-	idle:
-		Filename: eden_cargotruck_commonore.shp
-		Start: 0
-		Length: 1
-		Facings: 8
-		Frames: 0,3,6,9,12,15,18,21
-	move:
-		Facings: 8
-		Length: 3
-	die:
-		Start: 0
-		Length: 1
+# --- COMMENTED OUT (no matching actor) ---
+# eden_cargotruck_commonore:
+# 	Defaults:
+# 		Filename: eden_cargotruck_empty.shp
+# 	Inherits: eden_cargotruck_empty
+# 	idle:
+# 		Filename: eden_cargotruck_commonore.shp
+# 		Start: 0
+# 		Length: 1
+# 		Facings: 8
+# 		Frames: 0,3,6,9,12,15,18,21
+# 	move:
+# 		Facings: 8
+# 		Length: 3
+# 	die:
+# 		Start: 0
+# 		Length: 1
 
 eden_scout:
 	Defaults:
@@ -1803,22 +1804,23 @@ plymouth_cargotruck_empty:
 	icon:
 		Filename: cameo_plymouth_cargotruck.shp
 
-plymouth_cargotruck_commonore:
-	Defaults: plymouth_cargotruck_empty
-	Inherits: plymouth_cargotruck_empty
-	idle:
-		Filename: plymouth_cargotruck_commonore.shp
-		Start: 0
-		Length: 1
-		Facings: -8
-		Frames: 0,3,6,9,12,15,18,21
-	move:
-		Facings: -8
-		Length: 3
-	die:
-		Filename: plymouth_cargotruck_commonore.shp
-		Start: 0
-		Length: 1
+# --- COMMENTED OUT (no matching actor) ---
+# plymouth_cargotruck_commonore:
+# 	Defaults: plymouth_cargotruck_empty
+# 	Inherits: plymouth_cargotruck_empty
+# 	idle:
+# 		Filename: plymouth_cargotruck_commonore.shp
+# 		Start: 0
+# 		Length: 1
+# 		Facings: -8
+# 		Frames: 0,3,6,9,12,15,18,21
+# 	move:
+# 		Facings: -8
+# 		Length: 3
+# 	die:
+# 		Filename: plymouth_cargotruck_commonore.shp
+# 		Start: 0
+# 		Length: 1
 
 plymouth_spider:
 	Defaults:

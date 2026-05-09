@@ -1529,18 +1529,19 @@ aa_drmn:
 		Length: 15
 		Facings: 8
 
-caa_drmn: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
-	Defaults:
-		Filename: aa_drmn.shp
-	idle:
-		Filename: invisibleitem.shp
-	dock:
-		Filename: invisibleitem.shp
-	dock-loop:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: aa_drmnicon.shp
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# caa_drmn: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
+# 	Defaults:
+# 		Filename: aa_drmn.shp
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	dock:
+# 		Filename: invisibleitem.shp
+# 	dock-loop:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: aa_drmnicon.shp
+# 		AddExtension: False
 
 aa_pulv:
 	Inherits: ^RA2GatlingMuzzle
@@ -1589,21 +1590,23 @@ aa_plasblue:
 		Filename: aa_plasblue.shp
 		ZOffset: 1023
 
-aa_plasblue_small:
-	idle:
-		Filename: aa_plasblue.shp
-		ZOffset: 1023
-		Scale: 0.5
+# --- COMMENTED OUT (no matching actor) ---
+# aa_plasblue_small:
+# 	idle:
+# 		Filename: aa_plasblue.shp
+# 		ZOffset: 1023
+# 		Scale: 0.5
 
 aa_plasgree:
 	idle:
 		Filename: aa_plasgree.shp
 		ZOffset: 1023
 
-aa_plasgold:
-	idle:
-		Filename: aa_plasgold.shp
-		ZOffset: 1023
+# --- COMMENTED OUT (no matching actor) ---
+# aa_plasgold:
+# 	idle:
+# 		Filename: aa_plasgold.shp
+# 		ZOffset: 1023
 
 aa_mecha:
 	Defaults:
@@ -3261,17 +3264,18 @@ latin_12_miss:
 	down:
 		Length: 2
 
-latin_witch:
-	Inherits: ^RA2ArmedInfantry
-	Inherits@2: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: latin_witch.shp
-	run:
-		Tick: 120
-	paradrop:
-		Start: 292
-	icon:
-		Filename: ra2e2icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# latin_witch:
+# 	Inherits: ^RA2ArmedInfantry
+# 	Inherits@2: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: latin_witch.shp
+# 	run:
+# 		Tick: 120
+# 	paradrop:
+# 		Start: 292
+# 	icon:
+# 		Filename: ra2e2icon.shp
 
 latin_triton:
 	idle:
@@ -3308,9 +3312,10 @@ uplatin_cartelrockets:
 	icon:
 		Filename: latin_cartelrockets_icon.png
 
-latin_up_tech1:
-	icon:
-		Filename: latin_up_tech1.shp
+# --- COMMENTED OUT (no matching actor) ---
+# latin_up_tech1:
+# 	icon:
+# 		Filename: latin_up_tech1.shp
 
 latin_up_tech2:
 	icon:
@@ -4008,10 +4013,11 @@ explosion:
 	nax_corr_frag:
 		Filename: nax_corr_frag.shp
 
-steel_blasterball:
-	idle:
-		Filename: steel_blasterball.shp
-		ZOffset: 1023
+# --- COMMENTED OUT (no matching actor) ---
+# steel_blasterball:
+# 	idle:
+# 		Filename: steel_blasterball.shp
+# 		ZOffset: 1023
 
 steel_qmcv:
 	Defaults:
@@ -5427,26 +5433,27 @@ nax_tek:
 		Filename: nax_acade_icon.png
 		Offset: 0,0
 
-nax2_chrono:
-	Defaults:
-		Offset: -2,48
-	idle:
-		Filename: nax2_chrono.shp
-		Start: 32
-		Length: 32
-	damaged-idle:
-		Filename: nax2_chrono.shp
-		Start: 32
-		Length: 32
-	make:
-		Filename: nax2_chrono.shp
-		Length: 32
-	dead:
-		Filename: nax2_chrono.shp
-		Start: 32
-	icon:
-		Filename: nax2_chrono_icon.png
-		Offset: 0,0
+# --- COMMENTED OUT (no matching actor) ---
+# nax2_chrono:
+# 	Defaults:
+# 		Offset: -2,48
+# 	idle:
+# 		Filename: nax2_chrono.shp
+# 		Start: 32
+# 		Length: 32
+# 	damaged-idle:
+# 		Filename: nax2_chrono.shp
+# 		Start: 32
+# 		Length: 32
+# 	make:
+# 		Filename: nax2_chrono.shp
+# 		Length: 32
+# 	dead:
+# 		Filename: nax2_chrono.shp
+# 		Start: 32
+# 	icon:
+# 		Filename: nax2_chrono_icon.png
+# 		Offset: 0,0
 
 nax2_gcore:
 	Defaults:
@@ -6396,20 +6403,21 @@ nax_halftrack:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_hole_shoot:
-	Defaults:
-		Filename: nax_hole.shp
-		Tick: 80
-		IgnoreWorldTint: true
-		Scale: 0.75
-	idle:
-		Length: 64
-	stand:
-		Length: 64
-	run:
-		Length: 64
-	die:
-		Length: 64
+# --- COMMENTED OUT (no matching actor) ---
+# nax_hole_shoot:
+# 	Defaults:
+# 		Filename: nax_hole.shp
+# 		Tick: 80
+# 		IgnoreWorldTint: true
+# 		Scale: 0.75
+# 	idle:
+# 		Length: 64
+# 	stand:
+# 		Length: 64
+# 	run:
+# 		Length: 64
+# 	die:
+# 		Length: 64
 
 nax_hole_small:
 	Defaults:
@@ -8603,29 +8611,30 @@ futu_orion:
 	icon:
 		Filename: futu_oriontankicon.png
 
-futu_manticore:
-	Defaults:
-		Filename: future_mech_plasma.shp
-		Scale: 0.8
-	idle1:
-		Facings: 32
-	idle2:
-		Facings: 32
-	stand:
-		Facings: 32
-	run:
-		Start: 33
-		Length: 8
-		Facings: 8
-		Tick: 110
-	shoot:
-		Start: 98
-		Length: 8
-		Facings: 8
-		Tick: 80
-	icon:
-		Filename: aa_mecha_icon.shp
-		Offset: 0,0
+# --- COMMENTED OUT (no matching actor) ---
+# futu_manticore:
+# 	Defaults:
+# 		Filename: future_mech_plasma.shp
+# 		Scale: 0.8
+# 	idle1:
+# 		Facings: 32
+# 	idle2:
+# 		Facings: 32
+# 	stand:
+# 		Facings: 32
+# 	run:
+# 		Start: 33
+# 		Length: 8
+# 		Facings: 8
+# 		Tick: 110
+# 	shoot:
+# 		Start: 98
+# 		Length: 8
+# 		Facings: 8
+# 		Tick: 80
+# 	icon:
+# 		Filename: aa_mecha_icon.shp
+# 		Offset: 0,0
 
 futu_ifv:
 	Defaults:

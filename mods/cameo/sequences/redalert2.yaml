@@ -1203,8 +1203,9 @@ ra2tesla:
 		Filename: ra2teslaturicon.shp
 		Offset: 0,0
 
-ra2tesla.bot:
-	Inherits: ra2tesla
+# --- COMMENTED OUT (no matching actor) ---
+# ra2tesla.bot:
+# 	Inherits: ra2tesla
 
 yrngbnkr:
 	Defaults:
@@ -2654,56 +2655,57 @@ ra2_cgcloa.husk:
 
 
 
-ra2_cgtbnk:
-	Defaults:
-		Offset: 0,-28
-	idle:
-		Filename: ra2_cgtbnkbb.shp
-		Length: 1
-		ShadowStart: 3
-	damaged-idle:
-		Filename: ra2_cgtbnkbb.shp
-		Start: 1
-		Length: 1
-		ShadowStart: 4
-	idle-bunkered:
-		Filename: ra2_cgtbnk_b.shp
-		Start: 6
-		Length: 1
-		ShadowStart: 14
-	damaged-idle-bunkered:
-		Filename: ra2_cgtbnk_b.shp
-		Start: 13
-		Length: 1
-		ShadowStart: 14
-	idle-bunkered-front:
-		Filename: yr_ngtbnk_a.shp
-		Start: 6
-		Length: 1
-		ZOffset: 128
-	damaged-idle-bunkered-front:
-		Filename: yr_ngtbnk_a.shp
-		Start: 13
-		Length: 1
-		ZOffset: 128
-	build:
-		Filename: ra2_cgtbnk_b.shp
-		Length: 7
-		ShadowStart: 14
-	damaged-build:
-		Filename: ra2_cgtbnk_b.shp
-		Start: 7
-		Length: 7
-		ShadowStart: 14
-	make:
-		Filename: invisibleitem.shp
-	dead:
-		Filename: ra2_cgtbnkbb.shp
-		Start: 1
-		Length: 1
-	icon:
-		Filename: ra2tnkbnkricon.shp
-		Offset: 0,0
+# --- COMMENTED OUT (no matching actor) ---
+# ra2_cgtbnk:
+# 	Defaults:
+# 		Offset: 0,-28
+# 	idle:
+# 		Filename: ra2_cgtbnkbb.shp
+# 		Length: 1
+# 		ShadowStart: 3
+# 	damaged-idle:
+# 		Filename: ra2_cgtbnkbb.shp
+# 		Start: 1
+# 		Length: 1
+# 		ShadowStart: 4
+# 	idle-bunkered:
+# 		Filename: ra2_cgtbnk_b.shp
+# 		Start: 6
+# 		Length: 1
+# 		ShadowStart: 14
+# 	damaged-idle-bunkered:
+# 		Filename: ra2_cgtbnk_b.shp
+# 		Start: 13
+# 		Length: 1
+# 		ShadowStart: 14
+# 	idle-bunkered-front:
+# 		Filename: yr_ngtbnk_a.shp
+# 		Start: 6
+# 		Length: 1
+# 		ZOffset: 128
+# 	damaged-idle-bunkered-front:
+# 		Filename: yr_ngtbnk_a.shp
+# 		Start: 13
+# 		Length: 1
+# 		ZOffset: 128
+# 	build:
+# 		Filename: ra2_cgtbnk_b.shp
+# 		Length: 7
+# 		ShadowStart: 14
+# 	damaged-build:
+# 		Filename: ra2_cgtbnk_b.shp
+# 		Start: 7
+# 		Length: 7
+# 		ShadowStart: 14
+# 	make:
+# 		Filename: invisibleitem.shp
+# 	dead:
+# 		Filename: ra2_cgtbnkbb.shp
+# 		Start: 1
+# 		Length: 1
+# 	icon:
+# 		Filename: ra2tnkbnkricon.shp
+# 		Offset: 0,0
 
 ra2_ctoutp:
 	Defaults:
@@ -3715,23 +3717,24 @@ ra2_ctnwy25: # new york skycrapter HUGE
 	make:
 	dead:
 
-ra2_ctnwy26: # new york skycrapter HUGE
-	Inherits@1: ra2ctfarm01
-	Defaults:
-		Filename: ra2_ctnwy26.shp
-	idle:
-		ShadowStart: 4
-	damaged-idle:
-		Start: 1
-		ShadowStart: 5
-	idle-bunkered:
-		Start: 2
-		ShadowStart: 6
-	damaged-idle-bunkered:
-		Start: 2
-		ShadowStart: 6
-	make:
-	dead:
+# --- COMMENTED OUT (no matching actor) ---
+# ra2_ctnwy26: # new york skycrapter HUGE
+# 	Inherits@1: ra2ctfarm01
+# 	Defaults:
+# 		Filename: ra2_ctnwy26.shp
+# 	idle:
+# 		ShadowStart: 4
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 5
+# 	idle-bunkered:
+# 		Start: 2
+# 		ShadowStart: 6
+# 	damaged-idle-bunkered:
+# 		Start: 2
+# 		ShadowStart: 6
+# 	make:
+# 	dead:
 
 ra2ctwt01: #water tower (2x2)
 	Defaults:
@@ -5099,24 +5102,25 @@ ra2_ctmsc13: #wrecked grizzly (1x1)
 		ShadowStart: 3
 
 
-ra2_ctsanf15: # san francisco water tower (3x3)
-	Inherits@1: ra2ctfarm01
-	Defaults:
-		Filename: ra2_ctsanf15.shp
-		Offset: -8,0
-	idle:
-		ShadowStart: 4
-	damaged-idle:
-		Start: 1
-		ShadowStart: 5
-	idle-bunkered:
-		Start: 2
-		ShadowStart: 6
-	damaged-idle-bunkered:
-		Start: 2
-		ShadowStart: 6
-	make:
-	dead:
+# --- COMMENTED OUT (no matching actor) ---
+# ra2_ctsanf15: # san francisco water tower (3x3)
+# 	Inherits@1: ra2ctfarm01
+# 	Defaults:
+# 		Filename: ra2_ctsanf15.shp
+# 		Offset: -8,0
+# 	idle:
+# 		ShadowStart: 4
+# 	damaged-idle:
+# 		Start: 1
+# 		ShadowStart: 5
+# 	idle-bunkered:
+# 		Start: 2
+# 		ShadowStart: 6
+# 	damaged-idle-bunkered:
+# 		Start: 2
+# 		ShadowStart: 6
+# 	make:
+# 	dead:
 
 ##############################################
 #   Red Alert 2 Decoration Trees
@@ -5576,29 +5580,30 @@ ra2e1:
 	icon:
 		Filename: ra2e1icon.shp
 
-ra2e1dep:
-	Inherits: ^RA2MachineGunMuzzle
-	Defaults:
-		Filename: ra2_gi.shp
-	idle:
-		Start: 292
-		Facings: 8
-	recoil:
-		Start: 315
-		Length: 6
-		Facings: 8
-	damaged-idle:
-		Start: 292
-		Facings: 8
-	damaged-recoil:
-		Start: 315
-		Length: 6
-		Facings: 8
-	make:
-		Start: 300
-		Length: 15
-	icon:
-		Filename: ra2e1icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# ra2e1dep:
+# 	Inherits: ^RA2MachineGunMuzzle
+# 	Defaults:
+# 		Filename: ra2_gi.shp
+# 	idle:
+# 		Start: 292
+# 		Facings: 8
+# 	recoil:
+# 		Start: 315
+# 		Length: 6
+# 		Facings: 8
+# 	damaged-idle:
+# 		Start: 292
+# 		Facings: 8
+# 	damaged-recoil:
+# 		Start: 315
+# 		Length: 6
+# 		Facings: 8
+# 	make:
+# 		Start: 300
+# 		Length: 15
+# 	icon:
+# 		Filename: ra2e1icon.shp
 
 yrggi:
 	Inherits: ^RA2ArmedInfantry
@@ -5638,31 +5643,32 @@ yrggi:
 	icon:
 		Filename: ra2ggicon.shp
 
-yrggidep:
-	Defaults:
-		Filename: yr_ggi.shp
-	idle:
-		Start: 315
-		Facings: 8
-	recoil:
-		Start: 323
-		Length: 6
-		Facings: 8
-	damaged-idle:
-		Start: 315
-		Facings: 8
-	damaged-recoil:
-		Start: 323
-		Length: 6
-		Facings: 8
-	make:
-		Start: 300
-		Length: 15
-	muzzle:
-		Filename: invisibleitem.shp
-		Length: *
-	icon:
-		Filename: ra2ggicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# yrggidep:
+# 	Defaults:
+# 		Filename: yr_ggi.shp
+# 	idle:
+# 		Start: 315
+# 		Facings: 8
+# 	recoil:
+# 		Start: 323
+# 		Length: 6
+# 		Facings: 8
+# 	damaged-idle:
+# 		Start: 315
+# 		Facings: 8
+# 	damaged-recoil:
+# 		Start: 323
+# 		Length: 6
+# 		Facings: 8
+# 	make:
+# 		Start: 300
+# 		Length: 15
+# 	muzzle:
+# 		Filename: invisibleitem.shp
+# 		Length: *
+# 	icon:
+# 		Filename: ra2ggicon.shp
 
 ra2snipe:
 	Inherits: ^RA2ArmedInfantry
@@ -6459,25 +6465,27 @@ ra2cmin:
 		Filename: ra2cminicon.shp
 		AddExtension: False
 
-cra2cmin: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
-	Defaults:
-		Filename: cra2cmin.shp
-	idle:
-		Filename: invisibleitem.shp
-	dock:
-		Filename: invisibleitem.shp
-	dock-loop:
-		Filename: invisibleitem.shp
-	warpout:
-		Filename: warpout.shp
-		Length: *
-	icon:
-		Filename: ra2cminicon.shp
-		AddExtension: False
-	harvesting:
-		Filename: ra2_oregath.shp
-		Length: 15
-		Facings: 8
+# --- COMMENTED OUT (no matching actor) ---
+# cra2cmin: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
+# 	Defaults:
+# 		Filename: cra2cmin.shp
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	dock:
+# 		Filename: invisibleitem.shp
+# 	dock-loop:
+# 		Filename: invisibleitem.shp
+# 	warpout:
+# 		Filename: warpout.shp
+# 		Length: *
+# 	icon:
+# 		Filename: ra2cminicon.shp
+# 		AddExtension: False
+# 	harvesting:
+# 		Filename: ra2_oregath.shp
+# 		Length: 15
+# 		Facings: 8
+
 ra2mtnk:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
@@ -6495,17 +6503,18 @@ ra2mtnk:
 		Filename: ra2mtnkicon.shp
 		AddExtension: False
 
-ra2ltnk:
-	Inherits: ^RA2CannonMuzzle
-	Defaults:
-		Filename: ra2ltnk.shp
-	idle:
-		Filename: invisibleitem.shp
-	turret:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2mtnkicon.shp
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# ra2ltnk:
+# 	Inherits: ^RA2CannonMuzzle
+# 	Defaults:
+# 		Filename: ra2ltnk.shp
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	turret:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2mtnkicon.shp
+# 		AddExtension: False
 
 ra2tnkd:
 	Defaults:
@@ -6520,33 +6529,35 @@ ra2tnkd:
 		Filename: gunfire2.shp
 		Length: 5
 
-ra2howi:
-	Defaults:
-		Filename: ra2howi.shp
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2tnkdesicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2howi:
+# 	Defaults:
+# 		Filename: ra2howi.shp
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	muzzle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2tnkdesicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
-ra2arty:
-	Defaults:
-		Filename: ra2arty.shp
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2tnkdesicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2arty:
+# 	Defaults:
+# 		Filename: ra2arty.shp
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	muzzle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2tnkdesicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
 ra2fv:
 	Defaults:
@@ -6805,8 +6816,9 @@ ra2amcv:
 		Filename: ra2amcvicon.shp
 		AddExtension: False
 
-ra2amcv.Bot:
-	Inherits: ra2amcv
+# --- COMMENTED OUT (no matching actor) ---
+# ra2amcv.Bot:
+# 	Inherits: ra2amcv
 
 yrsmin:
 	Inherits: ^RA2MachineGunMuzzle
@@ -6830,8 +6842,9 @@ ra2smcv:
 		Filename: ra2smcvicon.shp
 		AddExtension: False
 
-ra2smcv.Bot:
-	Inherits: ra2smcv
+# --- COMMENTED OUT (no matching actor) ---
+# ra2smcv.Bot:
+# 	Inherits: ra2smcv
 
 yrpcv:
 	Defaults:
@@ -6843,8 +6856,9 @@ yrpcv:
 		Filename: ra2ymcvicon.shp
 		AddExtension: False
 
-yrpcv.Bot:
-	Inherits: yrpcv
+# --- COMMENTED OUT (no matching actor) ---
+# yrpcv.Bot:
+# 	Inherits: yrpcv
 
 ra2sqd:
 	Defaults:
@@ -6944,12 +6958,13 @@ ra2dmisl:
 		ZOffset: 1023
 		Scale: 0.75
 
-ra2vlad:
-	idle:
-		Filename: ra2_dread.shp
-		Facings: 64
-	icon:
-		Filename: ra2dredicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# ra2vlad:
+# 	idle:
+# 		Filename: ra2_dread.shp
+# 		Facings: 64
+# 	icon:
+# 		Filename: ra2dredicon.shp
 
 ra2carrier:
 	idle:
@@ -7622,56 +7637,75 @@ yrbpln:
 	icon:
 		Filename: ra2migicon.shp
 
-britishicon:
-	Defaults:
-		Filename: britishicon.shp
-	icon:
-	idle:
-cubaicon:
-	Defaults:
-		Filename: cubaicon.shp
-	icon:
-	idle:
-franceicon:
-	Defaults:
-		Filename: franceicon.shp
-	icon:
-	idle:
-gemanyicon:
-	Defaults:
-		Filename: gemanyicon.shp
-	icon:
-	idle:
-iraqicon:
-	Defaults:
-		Filename: iraqicon.shp
-	icon:
-	idle:
-koreaicon:
-	Defaults:
-		Filename: koreaicon.shp
-	icon:
-	idle:
-libyaicon:
-	Defaults:
-		Filename: libyaicon.shp
-	icon:
-	idle:
-russiaicon:
-	Defaults:
-		Filename: russiaicon.shp
-	icon:
-	idle:
-ukraniaicon:
-	Defaults:
-		Filename: ukraniaicon.shp
-	icon:
-	idle:
-usaicon:
-	Defaults:
-		Filename: usaicon.shp
-	icon:
-	idle:
+# --- COMMENTED OUT (no matching actor) ---
+# britishicon:
+# 	Defaults:
+# 		Filename: britishicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# cubaicon:
+# 	Defaults:
+# 		Filename: cubaicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# franceicon:
+# 	Defaults:
+# 		Filename: franceicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# gemanyicon:
+# 	Defaults:
+# 		Filename: gemanyicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# iraqicon:
+# 	Defaults:
+# 		Filename: iraqicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# koreaicon:
+# 	Defaults:
+# 		Filename: koreaicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# libyaicon:
+# 	Defaults:
+# 		Filename: libyaicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# russiaicon:
+# 	Defaults:
+# 		Filename: russiaicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# ukraniaicon:
+# 	Defaults:
+# 		Filename: ukraniaicon.shp
+# 	icon:
+# 	idle:
+
+# --- COMMENTED OUT (no matching actor) ---
+# usaicon:
+# 	Defaults:
+# 		Filename: usaicon.shp
+# 	icon:
+# 	idle:
 
 yrarnd:
 	Inherits: ^RA2ArmedInfantry
@@ -7687,18 +7721,19 @@ yrarnd:
 	icon:
 		Filename: gtrpicon.shp
 
-yrstln:
-	Inherits: ^RA2ArmedInfantry
-	Defaults:
-		Filename: yrstln.shp
-	run:
-		Tick: 120
-	paradrop:
-		Start: 363
-	cheer:
-		Start: 364
-	icon:
-		Filename: ra2e1icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# yrstln:
+# 	Inherits: ^RA2ArmedInfantry
+# 	Defaults:
+# 		Filename: yrstln.shp
+# 	run:
+# 		Tick: 120
+# 	paradrop:
+# 		Start: 363
+# 	cheer:
+# 		Start: 364
+# 	icon:
+# 		Filename: ra2e1icon.shp
 
 ra2car:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7765,9 +7800,10 @@ ra2ptruck:
 		Filename: invisibleitem.shp
 		AddExtension: False
 
-ra2propa:
-	idle:
-		Filename: invisibleitem.shp
+# --- COMMENTED OUT (no matching actor) ---
+# ra2propa:
+# 	idle:
+# 		Filename: invisibleitem.shp
 
 ra2stang:
 	Defaults:
@@ -7829,13 +7865,15 @@ ra2truckb:
 		Filename: invisibleitem.shp
 		AddExtension: False
 
-ra2tug:
-	idle:
-		Filename: invisibleitem.shp #Civilian Boat
+# --- COMMENTED OUT (no matching actor) ---
+# ra2tug:
+# 	idle:
+# 		Filename: invisibleitem.shp #Civilian Boat
 
-yrdoly:
-	idle:
-		Filename: invisibleitem.shp
+# --- COMMENTED OUT (no matching actor) ---
+# yrdoly:
+# 	idle:
+# 		Filename: invisibleitem.shp
 
 yrjeep:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7857,9 +7895,10 @@ ra2tractor:
 		Filename: invisibleitem.shp
 		AddExtension: False
 
-ra2flata:
-	idle:
-		Filename: invisibleitem.shp
+# --- COMMENTED OUT (no matching actor) ---
+# ra2flata:
+# 	idle:
+# 		Filename: invisibleitem.shp
 
 ra2ambu:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7917,112 +7956,123 @@ ra2_tzep:
 #		Red Alert 2 Addons
 ####################################################################################################
 
-ra2modfv:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: ra2ifvicon.shp
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modfv:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	muzzle:
+# 		Filename: minigun.shp
+# 		Length: 6
+# 		Facings: 8
+# 	icon:
+# 		Filename: ra2ifvicon.shp
+# 		AddExtension: False
 
-ra2modhtk:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2ftrkicon.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 2
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modhtk:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2ftrkicon.shp
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 2
 
-ra2modhtnk:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2htnkicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modhtnk:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2htnkicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
-ra2modsltnk:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2ltnkicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modsltnk:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2ltnkicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
-ra2modysref:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2prismtankicon.shp
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modysref:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2prismtankicon.shp
+# 		AddExtension: False
 
-ra2modoapoc:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2apocicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modoapoc:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2apocicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
-ra2modmammo:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2apocicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modmammo:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2apocicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
-ra2modyhtk:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2ftrkicon.shp
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 2
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modyhtk:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2ftrkicon.shp
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 2
 
-ra2modyhtnk:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2htnkicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modyhtnk:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2htnkicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
-ra2modvulk:
-	idle:
-		Filename: invisibleitem.shp
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: ra2ytnkicon.shp
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modvulk:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	muzzle:
+# 		Filename: minigun.shp
+# 		Length: 6
+# 		Facings: 8
+# 	icon:
+# 		Filename: ra2ytnkicon.shp
+# 		AddExtension: False
 
-ra2modrobo:
-	idle:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: ra2roboticon.shp
-		AddExtension: False
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
+# --- COMMENTED OUT (no matching actor) ---
+# ra2modrobo:
+# 	idle:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: ra2roboticon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: 5
 
 yuriinvisibleplane:
 	idle:
@@ -8045,11 +8095,12 @@ yuricntl:
 		Length: *
 		Offset: 0, -24, 24
 
-ra2doomicon:
-	Defaults:
-		Filename: ra2doomicon.shp
-	idle:
-	icon:
+# --- COMMENTED OUT (no matching actor) ---
+# ra2doomicon:
+# 	Defaults:
+# 		Filename: ra2doomicon.shp
+# 	idle:
+# 	icon:
 
 ra2doomskeleton:
 	Inherits: wc_o_skeleton
@@ -8141,28 +8192,31 @@ ra2debris:
 	flyingbody:
 		Filename: ra2_dbrs10sm.shp
 
-chronoshift:
-	Defaults:
-		Filename: ra2_chronoar.shp
-		ZOffset: 1536
-		IgnoreWorldTint: true
-	start:
-		Length: 10
-	loop:
-		Start: 11
-		Length: 7
-	end:
-		Start: 18
-		Length: 4
-	warpin:
-		Length: *
-	target:
-		Filename: ra2_chronotg.shp
-		Length: *
+# --- COMMENTED OUT (no matching actor) ---
+# chronoshift:
+# 	Defaults:
+# 		Filename: ra2_chronoar.shp
+# 		ZOffset: 1536
+# 		IgnoreWorldTint: true
+# 	start:
+# 		Length: 10
+# 	loop:
+# 		Start: 11
+# 		Length: 7
+# 	end:
+# 		Start: 18
+# 		Length: 4
+# 	warpin:
+# 		Length: *
+# 	target:
+# 		Filename: ra2_chronotg.shp
+# 		Length: *
 
-upradshells:
-	icon:
-		Filename: churaniumshellicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# upradshells:
+# 	icon:
+# 		Filename: churaniumshellicon.shp
+
 ra2zbomb:
 	idle:
 		Filename: ra2zbomb.shp
@@ -8184,101 +8238,107 @@ ra2_initfire:
 		Length: *
 		ZOffset: 1023
 
-ra2uniontank:
-	Defaults:
-		Filename: UnionTankBody.png
-	idle:
-		Facings: 32
-		Scale: 0.4
-	turret:
-		Filename: UnionTankTurret.png
-		Facings: 32
-		Scale: 0.25
-	icon:
-		Filename: ra2apocicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: ra2_apmuzzle.shp
-		Length: *
-	muzzle-2:
-		Filename: ra2_vtmuzzle.shp
-		Length: *
+# --- COMMENTED OUT (no matching actor) ---
+# ra2uniontank:
+# 	Defaults:
+# 		Filename: UnionTankBody.png
+# 	idle:
+# 		Facings: 32
+# 		Scale: 0.4
+# 	turret:
+# 		Filename: UnionTankTurret.png
+# 		Facings: 32
+# 		Scale: 0.25
+# 	icon:
+# 		Filename: ra2apocicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: ra2_apmuzzle.shp
+# 		Length: *
+# 	muzzle-2:
+# 		Filename: ra2_vtmuzzle.shp
+# 		Length: *
 
-ra2superapocalypse:
-	Defaults:
-		Filename: superapocalypsebody.png
-	idle:
-		Facings: 32
-		Scale: 0.4
-	turret:
-		Filename: superapocalypsetur.png
-		Facings: 32
-		Scale: 0.25
-	icon:
-		Filename: ra2apocicon.shp
-		AddExtension: False
-	muzzle:
-		Filename: ra2_apmuzzle.shp
-		Length: *
-	muzzle-2:
-		Filename: ra2_vtmuzzle.shp
-		Length: *
+# --- COMMENTED OUT (no matching actor) ---
+# ra2superapocalypse:
+# 	Defaults:
+# 		Filename: superapocalypsebody.png
+# 	idle:
+# 		Facings: 32
+# 		Scale: 0.4
+# 	turret:
+# 		Filename: superapocalypsetur.png
+# 		Facings: 32
+# 		Scale: 0.25
+# 	icon:
+# 		Filename: ra2apocicon.shp
+# 		AddExtension: False
+# 	muzzle:
+# 		Filename: ra2_apmuzzle.shp
+# 		Length: *
+# 	muzzle-2:
+# 		Filename: ra2_vtmuzzle.shp
+# 		Length: *
 
-ra2katyusha:
-	Inherits: ^RA2GatlingMuzzle
-	Defaults:
-		Filename: ra2katyusha.png
-		Scale: 0.2
-	idle:
-		Facings: 32
-		Offset: 0,20
-	icon:
-		Filename: tkmkatyushaicon.png
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# ra2katyusha:
+# 	Inherits: ^RA2GatlingMuzzle
+# 	Defaults:
+# 		Filename: ra2katyusha.png
+# 		Scale: 0.2
+# 	idle:
+# 		Facings: 32
+# 		Offset: 0,20
+# 	icon:
+# 		Filename: tkmkatyushaicon.png
+# 		AddExtension: False
 
-ra2shilka:
-	idle:
-		Filename: ra2shilkabody.png
-		Facings: 32
-		Scale: 0.25
-	turret:
-		Filename: ra2shilkaturret.png
-		Facings: 32
-		Scale: 0.25
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: tkmzazaicon.png
+# --- COMMENTED OUT (no matching actor) ---
+# ra2shilka:
+# 	idle:
+# 		Filename: ra2shilkabody.png
+# 		Facings: 32
+# 		Scale: 0.25
+# 	turret:
+# 		Filename: ra2shilkaturret.png
+# 		Facings: 32
+# 		Scale: 0.25
+# 	muzzle:
+# 		Filename: minigun.shp
+# 		Length: 6
+# 		Facings: 8
+# 	icon:
+# 		Filename: tkmzazaicon.png
 
-ra2advanceteslatank:
-	Defaults:
-		Filename: ra2advanceteslatankbody.png
-	idle:
-		Filename: ra2advanceteslatankbody.png
-		Facings: 32
-		Scale: 0.25
-	turret:
-		Filename: ra2advanceteslatanktur.png
-		Facings: -32
-		Scale: 0.25
-	icon:
-		Filename: ra2ttnkicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# ra2advanceteslatank:
+# 	Defaults:
+# 		Filename: ra2advanceteslatankbody.png
+# 	idle:
+# 		Filename: ra2advanceteslatankbody.png
+# 		Facings: 32
+# 		Scale: 0.25
+# 	turret:
+# 		Filename: ra2advanceteslatanktur.png
+# 		Facings: -32
+# 		Scale: 0.25
+# 	icon:
+# 		Filename: ra2ttnkicon.shp
 
-ra2mig:
-	Defaults:
-		Filename: ra2mig.png
-		Scale: 0.15
-	idle:
-		Facings: -32
-		InterpolatedFacings: 64
-	muzzle:
-		Filename: minigun.shp
-		Length: 6
-		Facings: 8
-	icon:
-		Filename: tkmvipericon.png
+# --- COMMENTED OUT (no matching actor) ---
+# ra2mig:
+# 	Defaults:
+# 		Filename: ra2mig.png
+# 		Scale: 0.15
+# 	idle:
+# 		Facings: -32
+# 		InterpolatedFacings: 64
+# 	muzzle:
+# 		Filename: minigun.shp
+# 		Length: 6
+# 		Facings: 8
+# 	icon:
+# 		Filename: tkmvipericon.png
 
 ### Soviets Upgrades
 

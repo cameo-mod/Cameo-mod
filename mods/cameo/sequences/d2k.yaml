@@ -260,47 +260,48 @@ autogun_turret:
 	icon:
 		Filename: d2k_autogun_turret_icon.shp
 
-flame_turret:
-	Defaults:
-		AddExtension: false
-	invisible:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 38
-	idle:
-		Filename: flame_tower.shp
-		Frames: 0, 3, 1, 11, 4, 5, 15, 8, 2, 12, 6, 7, 13, 9, 10, 14
-		Length: 16
-	damaged-idle:
-		Filename: flame_tower.shp
-		Frames: 0, 3, 1, 11, 4, 5, 15, 8, 2, 12, 6, 7, 13, 9, 10, 14
-		Length: 16
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4577
-		Length: 8
-		Offset: -16,16
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4585
-		Length: 7
-		Offset: -16,16
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3671
-		Length: 3
-		BlendMode: Additive
-	icon:
-		Filename: flame_towericon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# flame_turret:
+# 	Defaults:
+# 		AddExtension: false
+# 	invisible:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 38
+# 	idle:
+# 		Filename: flame_tower.shp
+# 		Frames: 0, 3, 1, 11, 4, 5, 15, 8, 2, 12, 6, 7, 13, 9, 10, 14
+# 		Length: 16
+# 	damaged-idle:
+# 		Filename: flame_tower.shp
+# 		Frames: 0, 3, 1, 11, 4, 5, 15, 8, 2, 12, 6, 7, 13, 9, 10, 14
+# 		Length: 16
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4577
+# 		Length: 8
+# 		Offset: -16,16
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4585
+# 		Length: 7
+# 		Offset: -16,16
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3671
+# 		Length: 3
+# 		BlendMode: Additive
+# 	icon:
+# 		Filename: flame_towericon.shp
+# 		Offset: 0,-1
 
 medium_gun_turret:
 	Defaults:
@@ -485,62 +486,63 @@ conyard.atreides:
 		Start: 4310
 		Offset: -30,-24
 
-repair_pad.atreides:
-	Defaults:
-		AddExtension: false
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4634
-		Length: 10
-		Offset: -48,48
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4644
-		Length: 10
-		Offset: -48,48
-		Tick: 100
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2819
-		Offset: -48,48
-		ZOffset: -1c511
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2820
-		Offset: -48,48
-		ZOffset: -1c511
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5010
-		Length: 14
-		Offset: -48,48
-		ZOffset: -1c511
-	damaged-active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5010
-		Length: 14
-		Tick: 60
-		Offset: -48,48
-		ZOffset: -1c511
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4360
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# repair_pad.atreides:
+# 	Defaults:
+# 		AddExtension: false
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4634
+# 		Length: 10
+# 		Offset: -48,48
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4644
+# 		Length: 10
+# 		Offset: -48,48
+# 		Tick: 100
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2819
+# 		Offset: -48,48
+# 		ZOffset: -1c511
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2820
+# 		Offset: -48,48
+# 		ZOffset: -1c511
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5010
+# 		Length: 14
+# 		Offset: -48,48
+# 		ZOffset: -1c511
+# 	damaged-active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5010
+# 		Length: 14
+# 		Tick: 60
+# 		Offset: -48,48
+# 		ZOffset: -1c511
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4360
+# 		Offset: -30,-24
 
 repair_pad.harkonnen:
 	Defaults:
@@ -682,75 +684,76 @@ repair_pad.gold:
 		Start: 0
 		Offset: 0,0
 
-starport.atreides:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2919
-		ZOffset: -1c511
-		Offset: -48,48
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2920
-		ZOffset: -1c511
-		Offset: -48,48
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4986
-		Length: 7
-		ZOffset: -1c511
-		Offset: -48,48
-		BlendMode: Additive
-		Tick: 200
-	damaged-active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4986
-		Length: 7
-		ZOffset: -1c511
-		Offset: -48,48
-		BlendMode: Additive
-		Tick: 200
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4611
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4622
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4356
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# starport.atreides:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2919
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2920
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4986
+# 		Length: 7
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 		BlendMode: Additive
+# 		Tick: 200
+# 	damaged-active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4986
+# 		Length: 7
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 		BlendMode: Additive
+# 		Tick: 200
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4611
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4622
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4356
+# 		Offset: -30,-24
 
 power.atreides:
 	Defaults:
@@ -816,53 +819,54 @@ power.atreides:
 		Start: 4320
 		Offset: -30,-24
 
-barracks.atreides:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2773
-		Offset: -32,64
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4440
-		Length: 8
-		Offset: -32,64
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4448
-		Length: 9
-		Offset: -32,64
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2774
-		Offset: -32,64
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 617, 618, 637, 638
-		Length: 4
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 649, 650, 669, 670
-		Length: 4
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4323
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# barracks.atreides:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2773
+# 		Offset: -32,64
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4440
+# 		Length: 8
+# 		Offset: -32,64
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4448
+# 		Length: 9
+# 		Offset: -32,64
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2774
+# 		Offset: -32,64
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 617, 618, 637, 638
+# 		Length: 4
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 649, 650, 669, 670
+# 		Length: 4
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4323
+# 		Offset: -30,-24
 
 barracks.ixian:
 	Defaults:
@@ -1191,142 +1195,146 @@ ixian_launchpad:
 		Filename: d2k_ixianlaunchpadicon.png
 		Offset: 0,0
 
-research.atreides:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2917
-		Offset: -48,80
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4655
-		Length: 10
-		Offset: -48,80
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4665
-		Length: 11
-		Offset: -48,80
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2918
-		Offset: -48,80
-	idle-lights:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5024
-		Length: 60
-		Tick: 80
-		Offset: -48,80
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4363
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# research.atreides:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2917
+# 		Offset: -48,80
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4655
+# 		Length: 10
+# 		Offset: -48,80
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4665
+# 		Length: 11
+# 		Offset: -48,80
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2918
+# 		Offset: -48,80
+# 	idle-lights:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5024
+# 		Length: 60
+# 		Tick: 80
+# 		Offset: -48,80
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4363
+# 		Offset: -30,-24
 
-research.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3077
-		Offset: -48,80
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4655
-		Length: 10
-		Offset: -48,80
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4665
-		Length: 11
-		Offset: -48,80
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3078
-		Offset: -48,80
-	idle-lights:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5024
-		Length: 60
-		Tick: 80
-		Offset: -48,80
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4364
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# research.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3077
+# 		Offset: -48,80
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4655
+# 		Length: 10
+# 		Offset: -48,80
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4665
+# 		Length: 11
+# 		Offset: -48,80
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3078
+# 		Offset: -48,80
+# 	idle-lights:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5024
+# 		Length: 60
+# 		Tick: 80
+# 		Offset: -48,80
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4364
+# 		Offset: -30,-24
 
-research.corrino:
-	Inherits: research.harkonnen
-	idle:
-		Filename: d2k_research_center_corrino.shp
-		Start: 0
-		Offset: 0,0
-	damaged-idle:
-		Filename: d2k_research_center_corrino.shp
-		Start: 1
-		Offset: 0,0
-	idle-lights:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Offset: -50,84
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Offset: -50,84
-	icon:
-		Filename: d2k_dark_research_center_icon.shp
-		Start: 0
-		Offset: 0,0
+# --- COMMENTED OUT (no matching actor) ---
+# research.corrino:
+# 	Inherits: research.harkonnen
+# 	idle:
+# 		Filename: d2k_research_center_corrino.shp
+# 		Start: 0
+# 		Offset: 0,0
+# 	damaged-idle:
+# 		Filename: d2k_research_center_corrino.shp
+# 		Start: 1
+# 		Offset: 0,0
+# 	idle-lights:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Offset: -50,84
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Offset: -50,84
+# 	icon:
+# 		Filename: d2k_dark_research_center_icon.shp
+# 		Start: 0
+# 		Offset: 0,0
+
 research.ordos:
 	Defaults:
 		AddExtension: false
@@ -1408,59 +1416,60 @@ research.gold:
 		Start: 0
 		Offset: 0,0
 
-palace.atreides:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2924
-		Offset: -48,48
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2924
-		Offset: -48,48
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4677
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4688
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2925
-		Offset: -48,48
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 631, 632, 633
-		Length: 3
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 663, 664, 665
-		Length: 3
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4366
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# palace.atreides:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2924
+# 		Offset: -48,48
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2924
+# 		Offset: -48,48
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4677
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4688
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2925
+# 		Offset: -48,48
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 631, 632, 633
+# 		Length: 3
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 663, 664, 665
+# 		Length: 3
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4366
+# 		Offset: -30,-24
 
 light.atreides:
 	Defaults:
@@ -1737,630 +1746,641 @@ conyard.corrino:
 	icon:
 		Filename: conyard_corrino_icon.shp
 
-starport.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3079
-		ZOffset: -1c511
-		Offset: -48,48
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3080
-		Offset: -48,48
-		ZOffset: -1c511
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4993
-		Length: 7
-		ZOffset: -1c511
-		Offset: -48,48
-		BlendMode: Additive
-		Tick: 200
-	damaged-active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4993
-		Length: 7
-		ZOffset: -1c511
-		Offset: -48,48
-		BlendMode: Additive
-		Tick: 200
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4611
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4622
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4357
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# starport.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3079
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3080
+# 		Offset: -48,48
+# 		ZOffset: -1c511
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4993
+# 		Length: 7
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 		BlendMode: Additive
+# 		Tick: 200
+# 	damaged-active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4993
+# 		Length: 7
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 		BlendMode: Additive
+# 		Tick: 200
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4611
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4622
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4357
+# 		Offset: -30,-24
 
-power.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2931
-		Offset: -32,64
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4415
-		Length: 12
-		Offset: -32,64
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4427
-		Length: 12
-		Offset: -32,64
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2932
-		Offset: -32,64
-	idle-zaps:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4766
-		Length: 10
-		Offset: -32,64
-		Tick: 200
-	damaged-idle-zaps:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4771
-		Length: 5
-		Offset: -32,64
-		Tick: 200
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 617, 618, 637, 638
-		Length: 4
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 649, 650, 669, 670
-		Length: 4
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4321
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# power.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2931
+# 		Offset: -32,64
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4415
+# 		Length: 12
+# 		Offset: -32,64
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4427
+# 		Length: 12
+# 		Offset: -32,64
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2932
+# 		Offset: -32,64
+# 	idle-zaps:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4766
+# 		Length: 10
+# 		Offset: -32,64
+# 		Tick: 200
+# 	damaged-idle-zaps:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4771
+# 		Length: 5
+# 		Offset: -32,64
+# 		Tick: 200
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 617, 618, 637, 638
+# 		Length: 4
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 649, 650, 669, 670
+# 		Length: 4
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4321
+# 		Offset: -30,-24
 
-barracks.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2933
-		Offset: -32,64
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4477
-		Length: 8
-		Offset: -32,64
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4485
-		Length: 9
-		Offset: -32,64
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2934
-		Offset: -32,64
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 617, 618, 637, 638
-		Length: 4
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 649, 650, 669, 670
-		Length: 4
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4324
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# barracks.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2933
+# 		Offset: -32,64
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4477
+# 		Length: 8
+# 		Offset: -32,64
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4485
+# 		Length: 9
+# 		Offset: -32,64
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2934
+# 		Offset: -32,64
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 617, 618, 637, 638
+# 		Length: 4
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 649, 650, 669, 670
+# 		Length: 4
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4324
+# 		Offset: -30,-24
 
-outpost.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2929
-		Offset: -48,64
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4518
-		Length: 9
-		Offset: -48,64
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4527
-		Length: 10
-		Offset: -48,64
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2930
-		Offset: -48,64
-	idle-dish:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4817
-		Length: 30
-		Offset: -48,64
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4337
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# outpost.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2929
+# 		Offset: -48,64
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4518
+# 		Length: 9
+# 		Offset: -48,64
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4527
+# 		Length: 10
+# 		Offset: -48,64
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2930
+# 		Offset: -48,64
+# 	idle-dish:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4817
+# 		Length: 30
+# 		Offset: -48,64
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4337
+# 		Offset: -30,-24
 
-refinery.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2969
-		Offset: -48,64
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4495
-		Length: 11
-		Offset: -48,64
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4505
-		Length: 12
-		Offset: -48,64
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2969
-		Offset: -48,64
-	idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2970
-		Offset: -48,64
-	damaged-idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2971
-		Offset: -48,64
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4331
-		Offset: -30,-24
-	smoke:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4138
-		Length: 14
-		Offset: 13,-16
-		Tick: 100
-		BlendMode: Additive
-	stages:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4138
-silo.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2974
-		Offset: -16,16
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2978
-		Offset: -16,16
-	stages:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2974
-		Length: 4
-		Offset: -16,16
-	damaged-stages:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2978
-		Offset: -16,16
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4577
-		Length: 7
-		Offset: -16,16
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4584
-		Length: 7
-		Offset: -16,16
-		Tick: 200
-		ZOffset: 1024
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4349
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# refinery.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2969
+# 		Offset: -48,64
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4495
+# 		Length: 11
+# 		Offset: -48,64
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4505
+# 		Length: 12
+# 		Offset: -48,64
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2969
+# 		Offset: -48,64
+# 	idle-top:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2970
+# 		Offset: -48,64
+# 	damaged-idle-top:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2971
+# 		Offset: -48,64
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4331
+# 		Offset: -30,-24
+# 	smoke:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4138
+# 		Length: 14
+# 		Offset: 13,-16
+# 		Tick: 100
+# 		BlendMode: Additive
+# 	stages:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4138
 
-hightech.harkonnen:
-	Defaults:
-		AddExtension: false
-	Defaults:
-		Offset: -48,80
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2972
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4538
-		Length: 10
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4548
-		Length: 10
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2973
-	production-welding:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4888
-		Length: 10
-		Tick: 200
-		BlendMode: Additive
-		ZOffset: 1024
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4343
-		Offset: -30,-24
-	active:
-		Filename: invisibleitem.shp
+# --- COMMENTED OUT (no matching actor) ---
+# silo.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2974
+# 		Offset: -16,16
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2978
+# 		Offset: -16,16
+# 	stages:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2974
+# 		Length: 4
+# 		Offset: -16,16
+# 	damaged-stages:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2978
+# 		Offset: -16,16
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4577
+# 		Length: 7
+# 		Offset: -16,16
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4584
+# 		Length: 7
+# 		Offset: -16,16
+# 		Tick: 200
+# 		ZOffset: 1024
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4349
+# 		Offset: -30,-24
 
-palace.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3084
-		Offset: -48,48
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4677
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4688
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3085
-		Offset: -48,48
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5084
-		Length: 20
-		Offset: -48,48
-	damaged-active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5084
-		Length: 20
-		Offset: -48,48
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 631, 632, 633
-		Length: 3
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 663, 664, 665
-		Length: 3
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4367
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# hightech.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	Defaults:
+# 		Offset: -48,80
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2972
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4538
+# 		Length: 10
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4548
+# 		Length: 10
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2973
+# 	production-welding:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4888
+# 		Length: 10
+# 		Tick: 200
+# 		BlendMode: Additive
+# 		ZOffset: 1024
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4343
+# 		Offset: -30,-24
+# 	active:
+# 		Filename: invisibleitem.shp
 
-light.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3081
-		Offset: -48,64
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4559
-		Length: 8
-		Offset: -48,64
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4567
-		Length: 9
-		Offset: -48,64
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3081
-		Offset: -48,64
-	idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3082
-		Offset: -48,64
-		ZOffset: 896
-	damaged-idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3083
-		Offset: -48,64
-		ZOffset: 896
-	production-welding:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4918
-		Length: 10
-		Offset: -48,64
-		Tick: 200
-		BlendMode: Additive
-		ZOffset: 1024
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4346
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# palace.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3084
+# 		Offset: -48,48
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4677
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4688
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3085
+# 		Offset: -48,48
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5084
+# 		Length: 20
+# 		Offset: -48,48
+# 	damaged-active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5084
+# 		Length: 20
+# 		Offset: -48,48
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 631, 632, 633
+# 		Length: 3
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 663, 664, 665
+# 		Length: 3
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4367
+# 		Offset: -30,-24
 
-heavy.harkonnen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2926
-		Offset: -48,80
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4592
-		Length: 9
-		Offset: -48,80
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4601
-		Length: 9
-		Offset: -48,80
-		Tick: 100
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2926
-		Offset: -48,80
-	idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2927
-		Offset: -48,80
-		ZOffset: 896
-	damaged-idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2928
-		Offset: -48,80
-		ZOffset: 896
-	production-welding:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4948
-		Length: 10
-		Offset: -48,80
-		Tick: 200
-		BlendMode: Additive
-		ZOffset: 1024
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4352
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# light.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3081
+# 		Offset: -48,64
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4559
+# 		Length: 8
+# 		Offset: -48,64
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4567
+# 		Length: 9
+# 		Offset: -48,64
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3081
+# 		Offset: -48,64
+# 	idle-top:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3082
+# 		Offset: -48,64
+# 		ZOffset: 896
+# 	damaged-idle-top:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3083
+# 		Offset: -48,64
+# 		ZOffset: 896
+# 	production-welding:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4918
+# 		Length: 10
+# 		Offset: -48,64
+# 		Tick: 200
+# 		BlendMode: Additive
+# 		ZOffset: 1024
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4346
+# 		Offset: -30,-24
+
+# --- COMMENTED OUT (no matching actor) ---
+# heavy.harkonnen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2926
+# 		Offset: -48,80
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4592
+# 		Length: 9
+# 		Offset: -48,80
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4601
+# 		Length: 9
+# 		Offset: -48,80
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2926
+# 		Offset: -48,80
+# 	idle-top:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2927
+# 		Offset: -48,80
+# 		ZOffset: 896
+# 	damaged-idle-top:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2928
+# 		Offset: -48,80
+# 		ZOffset: 896
+# 	production-welding:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4948
+# 		Length: 10
+# 		Offset: -48,80
+# 		Tick: 200
+# 		BlendMode: Additive
+# 		ZOffset: 1024
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4352
+# 		Offset: -30,-24
 
 conyard.ordos:
 	Defaults:
@@ -2562,58 +2582,61 @@ power.ordos:
 		Start: 4322
 		Offset: -30,-24
 
-minipower.atreides:
-	idle:
-		Filename: d2k_mini_windtrap.shp
-		Start: 4
-		Scale: 1.2
-	damaged-idle:
-		Filename: d2k_mini_windtrap.shp
-		Start: 5
-		Scale: 1.2
-	icon:
-		Filename: d2k_mini_windtrap_icon.shp
-		Start: 2
-		Scale: 1.2
-	make:
-		Filename: DATA.R16
-		Scale: 1.2
-		Remap: 54F94B
-		Start: 4577
-		Length: 7
-		Offset: -16,16
-		Tick: 100
-		AddExtension: false
-	idle-zaps:
-		Filename: d2k_mini_windtrap.shp
-		Start: 6
-		Length: 8
-		Tick: 150
-		Scale: 1.2
+# --- COMMENTED OUT (no matching actor) ---
+# minipower.atreides:
+# 	idle:
+# 		Filename: d2k_mini_windtrap.shp
+# 		Start: 4
+# 		Scale: 1.2
+# 	damaged-idle:
+# 		Filename: d2k_mini_windtrap.shp
+# 		Start: 5
+# 		Scale: 1.2
+# 	icon:
+# 		Filename: d2k_mini_windtrap_icon.shp
+# 		Start: 2
+# 		Scale: 1.2
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.2
+# 		Remap: 54F94B
+# 		Start: 4577
+# 		Length: 7
+# 		Offset: -16,16
+# 		Tick: 100
+# 		AddExtension: false
+# 	idle-zaps:
+# 		Filename: d2k_mini_windtrap.shp
+# 		Start: 6
+# 		Length: 8
+# 		Tick: 150
+# 		Scale: 1.2
 
-minipower.harkonnen:
-	Inherits: minipower.atreides
-	idle:
-		Filename: d2k_mini_windtrap.shp
-		Start: 0
-	damaged-idle:
-		Filename: d2k_mini_windtrap.shp
-		Start: 1
-	icon:
-		Filename: d2k_mini_windtrap_icon.shp
-		Start: 0
+# --- COMMENTED OUT (no matching actor) ---
+# minipower.harkonnen:
+# 	Inherits: minipower.atreides
+# 	idle:
+# 		Filename: d2k_mini_windtrap.shp
+# 		Start: 0
+# 	damaged-idle:
+# 		Filename: d2k_mini_windtrap.shp
+# 		Start: 1
+# 	icon:
+# 		Filename: d2k_mini_windtrap_icon.shp
+# 		Start: 0
 
-minipower.ordos:
-	Inherits: minipower.atreides
-	idle:
-		Filename: d2k_mini_windtrap.shp
-		Start: 2
-	damaged-idle:
-		Filename: d2k_mini_windtrap.shp
-		Start: 3
-	icon:
-		Filename: d2k_mini_windtrap_icon.shp
-		Start: 1
+# --- COMMENTED OUT (no matching actor) ---
+# minipower.ordos:
+# 	Inherits: minipower.atreides
+# 	idle:
+# 		Filename: d2k_mini_windtrap.shp
+# 		Start: 2
+# 	damaged-idle:
+# 		Filename: d2k_mini_windtrap.shp
+# 		Start: 3
+# 	icon:
+# 		Filename: d2k_mini_windtrap_icon.shp
+# 		Start: 1
 
 barracks.ordos:
 	Defaults:
@@ -2663,104 +2686,113 @@ barracks.ordos:
 		Start: 4325
 		Offset: -30,-24
 
-barracks.merc:
-	Defaults:
-		AddExtension: false
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4477
-		Length: 8
-		Offset: -32,64
-		Tick: 100
-	idle:
-		Filename: d2k_barracks_merc.shp
-	damaged-idle:
-		Filename: d2k_barracks_merc.shp
-		Start: 1
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 617, 618, 637, 638
-		Length: 4
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 649, 650, 669, 670
-		Length: 4
-		Offset: -16,-16
-	icon:
-		Filename: d2k_barracks_merc_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# barracks.merc:
+# 	Defaults:
+# 		AddExtension: false
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4477
+# 		Length: 8
+# 		Offset: -32,64
+# 		Tick: 100
+# 	idle:
+# 		Filename: d2k_barracks_merc.shp
+# 	damaged-idle:
+# 		Filename: d2k_barracks_merc.shp
+# 		Start: 1
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 617, 618, 637, 638
+# 		Length: 4
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 649, 650, 669, 670
+# 		Length: 4
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: d2k_barracks_merc_icon.shp
 
-barracks.corrino:
-	Defaults:
-		AddExtension: false
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4477
-		Length: 8
-		Offset: -32,64
-		Tick: 100
-	idle:
-		Filename: d2k_barracks_corrino.shp
-	damaged-idle:
-		Filename: d2k_barracks_corrino.shp
-		Start: 1
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 617, 618, 637, 638
-		Length: 4
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 649, 650, 669, 670
-		Length: 4
-		Offset: -16,-16
-	icon:
-		Filename: d2k_barracks_corrino_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# barracks.corrino:
+# 	Defaults:
+# 		AddExtension: false
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4477
+# 		Length: 8
+# 		Offset: -32,64
+# 		Tick: 100
+# 	idle:
+# 		Filename: d2k_barracks_corrino.shp
+# 	damaged-idle:
+# 		Filename: d2k_barracks_corrino.shp
+# 		Start: 1
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 617, 618, 637, 638
+# 		Length: 4
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 649, 650, 669, 670
+# 		Length: 4
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: d2k_barracks_corrino_icon.shp
 
-d2k_flesh_vat:
-	idle:
-		Filename: d2k_flesh_vat.shp
-	icon:
-		Filename: d2k_flesh_vat_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_flesh_vat:
+# 	idle:
+# 		Filename: d2k_flesh_vat.shp
+# 	icon:
+# 		Filename: d2k_flesh_vat_icon.shp
 
-d2k_tleilaxu_tech:
-	idle:
-		Filename: d2k_tleilaxu_tech.shp
-	icon:
-		Filename: d2k_tleilaxu_tech_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_tleilaxu_tech:
+# 	idle:
+# 		Filename: d2k_tleilaxu_tech.shp
+# 	icon:
+# 		Filename: d2k_tleilaxu_tech_icon.shp
 
-upgrade.gholas:
-	icon:
-		Filename: d2k_tleilaxu_ghola_icon.shp
-upgrade.tleilaxueyes:
-	icon:
-		Filename: d2k_tleilaxueyes.shp
+# --- COMMENTED OUT (no matching actor) ---
+# upgrade.gholas:
+# 	icon:
+# 		Filename: d2k_tleilaxu_ghola_icon.shp
 
-d2k_resource_center:
-	idle:
-		Filename: d2k_resource_center.shp
-	eat:
-		Filename: d2k_resource_center.shp
-		Start: 1
-		Length: 5
-		Tick: 80
-	icon:
-		Filename: d2k_resource_center_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# upgrade.tleilaxueyes:
+# 	icon:
+# 		Filename: d2k_tleilaxueyes.shp
 
-d2k_sandworm_tower:
-	idle:
-		Filename: d2k_sandworm_tower.shp
-		Start: 32
-	turret:
-		Filename: d2k_sandworm_tower.shp
-		Start: 0
-		Facings: -32
-	icon:
-		Filename: d2k_sandworm_tower_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_resource_center:
+# 	idle:
+# 		Filename: d2k_resource_center.shp
+# 	eat:
+# 		Filename: d2k_resource_center.shp
+# 		Start: 1
+# 		Length: 5
+# 		Tick: 80
+# 	icon:
+# 		Filename: d2k_resource_center_icon.shp
+
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_sandworm_tower:
+# 	idle:
+# 		Filename: d2k_sandworm_tower.shp
+# 		Start: 32
+# 	turret:
+# 		Filename: d2k_sandworm_tower.shp
+# 		Start: 0
+# 		Facings: -32
+# 	icon:
+# 		Filename: d2k_sandworm_tower_icon.shp
 
 outpost.ordos:
 	Defaults:
@@ -3197,101 +3229,103 @@ heavy.ordos:
 		Start: 4353
 		Offset: -30,-24
 
-palace.corrino:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3252
-		Offset: -48,48
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3252
-		Offset: -48,48
-	damaged-idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3253
-		Offset: -48,48
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 631, 632, 633
-		Length: 3
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 663, 664, 665
-		Length: 3
-		Offset: -16,-16
-	icon:
-		Filename: palacecicon.shp
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4677
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4688
-		Length: 11
-		Offset: -48,48
-		Tick: 100
+# --- COMMENTED OUT (no matching actor) ---
+# palace.corrino:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3252
+# 		Offset: -48,48
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3252
+# 		Offset: -48,48
+# 	damaged-idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3253
+# 		Offset: -48,48
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 631, 632, 633
+# 		Length: 3
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 663, 664, 665
+# 		Length: 3
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: palacecicon.shp
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4677
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4688
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
 
-golden_lion_throne:
-	idle:
-		Filename: d2k_golden_lion_throne.shp
-	damaged-idle:
-		Filename: d2k_golden_lion_throne.shp
-		Start: 1
-		Scale: 1.875
-	active:
-		Filename: DATA.R16
-		Scale: 1.875
-		Remap: 54F94B
-		Start: 3252
-		Offset: -48,48
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 631, 632, 633
-		Length: 3
-		Offset: -16,-16
-		AddExtension: false
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 663, 664, 665
-		Length: 3
-		Offset: -16,-16
-		AddExtension: false
-	make:
-		Filename: DATA.R16
-		Scale: 1.875
-		Remap: 54F94B
-		Start: 4677
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-		AddExtension: false
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.875
-		Remap: 54F94B
-		Start: 4688
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-		AddExtension: false
-	icon:
-		Filename: d2k_golden_lion_throne_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# golden_lion_throne:
+# 	idle:
+# 		Filename: d2k_golden_lion_throne.shp
+# 	damaged-idle:
+# 		Filename: d2k_golden_lion_throne.shp
+# 		Start: 1
+# 		Scale: 1.875
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.875
+# 		Remap: 54F94B
+# 		Start: 3252
+# 		Offset: -48,48
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 631, 632, 633
+# 		Length: 3
+# 		Offset: -16,-16
+# 		AddExtension: false
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 663, 664, 665
+# 		Length: 3
+# 		Offset: -16,-16
+# 		AddExtension: false
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.875
+# 		Remap: 54F94B
+# 		Start: 4677
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 		AddExtension: false
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.875
+# 		Remap: 54F94B
+# 		Start: 4688
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 		AddExtension: false
+# 	icon:
+# 		Filename: d2k_golden_lion_throne_icon.shp
 
 starport.smuggler:
 	Defaults:
@@ -3359,64 +3393,65 @@ starport.smuggler:
 	icon:
 		Filename: d2k_starport_smuggler_icon.png
 
-starport.corrino:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: d2k_starport_emperor.shp
-		ZOffset: -1c511
-	damaged-idle:
-		Filename: d2k_starport_emperor.shp
-		Start: 1
-		ZOffset: -1c511
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5002
-		Length: 7
-		ZOffset: -1c511
-		Offset: -48,48
-		BlendMode: Additive
-		Tick: 200
-	damaged-active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 5002
-		Length: 7
-		ZOffset: -1c511
-		Offset: -48,48
-		BlendMode: Additive
-		Tick: 200
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4611
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4622
-		Length: 11
-		Offset: -48,48
-		Tick: 100
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: d2k_starport_emperor_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# starport.corrino:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: d2k_starport_emperor.shp
+# 		ZOffset: -1c511
+# 	damaged-idle:
+# 		Filename: d2k_starport_emperor.shp
+# 		Start: 1
+# 		ZOffset: -1c511
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5002
+# 		Length: 7
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 		BlendMode: Additive
+# 		Tick: 200
+# 	damaged-active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 5002
+# 		Length: 7
+# 		ZOffset: -1c511
+# 		Offset: -48,48
+# 		BlendMode: Additive
+# 		Tick: 200
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4611
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4622
+# 		Length: 11
+# 		Offset: -48,48
+# 		Tick: 100
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: d2k_starport_emperor_icon.shp
 
 heavy.mercenary:
 	Defaults:
@@ -3496,110 +3531,113 @@ heavy.mercenary:
 	icon:
 		Filename: d2k_heavy_factory_merc_icon.shp
 
-heavy.corrino:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: heavyfactory_corrino.shp
-		Start: 2
-		Offset: 0,11
-	make:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4592
-		Length: 9
-		Offset: -48,80
-		Tick: 100
-	crumble-overlay:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4601
-		Length: 9
-		Offset: -48,80
-		Tick: 100
-	damaged-idle:
-		Filename: heavyfactory_corrino.shp
-		Start: 1
-	idle-top:
-		Filename: heavyfactory_corrino.shp
-		ZOffset: 896
-	damaged-idle-top:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2928
-		Offset: -48,80
-		ZOffset: 896
-	production-welding:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4948
-		Length: 10
-		Offset: -48,80
-		Tick: 200
-		BlendMode: Additive
-		ZOffset: 1024
-	bib:
-		Filename: BLOXBASE.R8
-		Frames: 611, 612, 613, 631, 632, 633
-		Length: 6
-		Offset: -16,-16
-	bib-Concrete:
-		Filename: BLOXBASE.R8
-		Frames: 643, 644, 645, 663, 664, 665
-		Length: 6
-		Offset: -16,-16
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4352
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# heavy.corrino:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: heavyfactory_corrino.shp
+# 		Start: 2
+# 		Offset: 0,11
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4592
+# 		Length: 9
+# 		Offset: -48,80
+# 		Tick: 100
+# 	crumble-overlay:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4601
+# 		Length: 9
+# 		Offset: -48,80
+# 		Tick: 100
+# 	damaged-idle:
+# 		Filename: heavyfactory_corrino.shp
+# 		Start: 1
+# 	idle-top:
+# 		Filename: heavyfactory_corrino.shp
+# 		ZOffset: 896
+# 	damaged-idle-top:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2928
+# 		Offset: -48,80
+# 		ZOffset: 896
+# 	production-welding:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4948
+# 		Length: 10
+# 		Offset: -48,80
+# 		Tick: 200
+# 		BlendMode: Additive
+# 		ZOffset: 1024
+# 	bib:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 611, 612, 613, 631, 632, 633
+# 		Length: 6
+# 		Offset: -16,-16
+# 	bib-Concrete:
+# 		Filename: BLOXBASE.R8
+# 		Frames: 643, 644, 645, 663, 664, 665
+# 		Length: 6
+# 		Offset: -16,-16
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4352
+# 		Offset: -30,-24
 
-d2k_command_center:
-	idle:
-		Filename: d2k_command_center.shp
-		Scale: 1.875
-	damage-idle:
-		Filename: d2k_command_center.shp
-		Start: 1
-		Scale: 1.875
-	make:
-		Filename: DATA.R16
-		Scale: 1.875
-		Remap: 54F94B
-		Start: 4518
-		Length: 9
-		Offset: -48,64
-		Tick: 100
-		AddExtension: false
-	icon:
-		Filename: d2k_command_center_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_command_center:
+# 	idle:
+# 		Filename: d2k_command_center.shp
+# 		Scale: 1.875
+# 	damage-idle:
+# 		Filename: d2k_command_center.shp
+# 		Start: 1
+# 		Scale: 1.875
+# 	make:
+# 		Filename: DATA.R16
+# 		Scale: 1.875
+# 		Remap: 54F94B
+# 		Start: 4518
+# 		Length: 9
+# 		Offset: -48,64
+# 		Tick: 100
+# 		AddExtension: false
+# 	icon:
+# 		Filename: d2k_command_center_icon.shp
 
-plates: # TODO: unused
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3256
-		Length: 6
-	4-plates-icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4314
-		Offset: -30,-24
-	6-plates-icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4317
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# plates: # TODO: unused
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3256
+# 		Length: 6
+# 	4-plates-icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4314
+# 		Offset: -30,-24
+# 	6-plates-icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4317
+# 		Offset: -30,-24
 
 d2k_munitions.atreides:
 	Defaults:
@@ -3633,29 +3671,31 @@ d2k_munitions.atreides:
 		Filename: d2k_munitions_icon.shp
 		Start: 2
 
-d2k_munitions.harkonnen:
-	Inherits: d2k_munitions.atreides
-	idle:
-		Filename: d2k_munitions.shp
-		Start: 0
-	damaged-idle:
-		Filename: d2k_munitions.shp
-		Start: 1
-	icon:
-		Filename: d2k_munitions_icon.shp
-		Start: 0
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_munitions.harkonnen:
+# 	Inherits: d2k_munitions.atreides
+# 	idle:
+# 		Filename: d2k_munitions.shp
+# 		Start: 0
+# 	damaged-idle:
+# 		Filename: d2k_munitions.shp
+# 		Start: 1
+# 	icon:
+# 		Filename: d2k_munitions_icon.shp
+# 		Start: 0
 
-d2k_munitions.ordos:
-	Inherits: d2k_munitions.atreides
-	idle:
-		Filename: d2k_munitions.shp
-		Start: 4
-	damaged-idle:
-		Filename: d2k_munitions.shp
-		Start: 5
-	icon:
-		Filename: d2k_munitions_icon.shp
-		Start: 1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_munitions.ordos:
+# 	Inherits: d2k_munitions.atreides
+# 	idle:
+# 		Filename: d2k_munitions.shp
+# 		Start: 4
+# 	damaged-idle:
+# 		Filename: d2k_munitions.shp
+# 		Start: 5
+# 	icon:
+# 		Filename: d2k_munitions_icon.shp
+# 		Start: 1
 
 ####################################################
 #		   MISC
@@ -3697,16 +3737,17 @@ small_trail2:
 		BlendMode: Additive
 		ZOffset: 1023
 
-bazooka_trail:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 3634
-		Length: 4
-		Tick: 80
-		ZOffset: 1023
+# --- COMMENTED OUT (no matching actor) ---
+# bazooka_trail:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Start: 3634
+# 		Length: 4
+# 		Tick: 80
+# 		ZOffset: 1023
 
 bazooka_trail2:
 	Defaults:
@@ -3730,18 +3771,19 @@ deviator_trail:
 		Tick: 80
 		ZOffset: 1023
 
-d2k_laserfire:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3639
-		Length: 4
-		Tick: 80
-		BlendMode: Additive
-		ZOffset: 511
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_laserfire:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3639
+# 		Length: 4
+# 		Tick: 80
+# 		BlendMode: Additive
+# 		ZOffset: 511
 
 sandtrail:
 	Defaults:
@@ -3799,17 +3841,18 @@ powerdown:
 		Start: 3
 		ZOffset: 2047
 
-d2k_editor-overlay:
-	Defaults:
-		AddExtension: false
-	Defaults:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Offset: -16,-16
-	copy:
-	paste:
-		Start: 1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_editor-overlay:
+# 	Defaults:
+# 		AddExtension: false
+# 	Defaults:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Offset: -16,-16
+# 	copy:
+# 	paste:
+# 		Start: 1
 
 d2k_rpg:
 	Defaults:
@@ -3843,51 +3886,53 @@ d2k_155mm:
 		Start: 3329
 		ZOffset: 1023
 
-d2k_crate-effects:
-	Defaults:
-		AddExtension: false
-		ZOffset: 2047
-	dollar:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3932
-		Length: 8
-	reveal-map:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4200
-		Length: 18
-	hide-map:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 4218, 4217, 4216, 4215, 4214, 4213, 4212, 4211, 4210, 4209, 4208, 4207, 4206, 4205, 4204, 4203, 4202, 4201
-		Length: 18
-	levelup:
-		Filename: levelup.shp
-		Length: *
-		Tick: 200
-	cloak:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4164
-		Length: 36
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_crate-effects:
+# 	Defaults:
+# 		AddExtension: false
+# 		ZOffset: 2047
+# 	dollar:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3932
+# 		Length: 8
+# 	reveal-map:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4200
+# 		Length: 18
+# 	hide-map:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 4218, 4217, 4216, 4215, 4214, 4213, 4212, 4211, 4210, 4209, 4208, 4207, 4206, 4205, 4204, 4203, 4202, 4201
+# 		Length: 18
+# 	levelup:
+# 		Filename: levelup.shp
+# 		Length: *
+# 		Tick: 200
+# 	cloak:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4164
+# 		Length: 36
 
-d2k_allyrepair:
-	Defaults:
-		AddExtension: false
-	repair:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 3, 39
-		Length: 2
-		Tick: 300
-		Offset: -11,-10
-		ZOffset: 2047
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_allyrepair:
+# 	Defaults:
+# 		AddExtension: false
+# 	repair:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 3, 39
+# 		Length: 2
+# 		Tick: 300
+# 		Offset: -11,-10
+# 		ZOffset: 2047
 
 d2k_missile:
 	Defaults:
@@ -3931,31 +3976,32 @@ deathhand:
 odeathhand:
 	Inherits: deathhand
 
-d2k_smoke_m:
-	Defaults:
-		AddExtension: false
-		ZOffset: 511
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3671
-		Length: 2
-		BlendMode: Additive
-	loop:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3671
-		Length: 2
-		BlendMode: Additive
-	end:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3671
-		Length: 3
-		BlendMode: Additive
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_smoke_m:
+# 	Defaults:
+# 		AddExtension: false
+# 		ZOffset: 511
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3671
+# 		Length: 2
+# 		BlendMode: Additive
+# 	loop:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3671
+# 		Length: 2
+# 		BlendMode: Additive
+# 	end:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3671
+# 		Length: 3
+# 		BlendMode: Additive
 
 d2k_bombs:
 	Defaults:
@@ -4034,46 +4080,50 @@ sietch:
 		Start: 3246
 		Offset: -32,32
 
-d2k_tent_a:
-	idle:
-		Filename: d2k_tents.shp
-	damaged-idle:
-		Filename: d2k_tents.shp
-		Start: 1
-	icon:
-		Filename: d2k_tents_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_tent_a:
+# 	idle:
+# 		Filename: d2k_tents.shp
+# 	damaged-idle:
+# 		Filename: d2k_tents.shp
+# 		Start: 1
+# 	icon:
+# 		Filename: d2k_tents_icon.shp
 
-d2k_tent_b:
-	idle:
-		Filename: d2k_tents.shp
-		Start: 2
-	damaged-idle:
-		Filename: d2k_tents.shp
-		Start: 3
-	icon:
-		Filename: d2k_tents_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_tent_b:
+# 	idle:
+# 		Filename: d2k_tents.shp
+# 		Start: 2
+# 	damaged-idle:
+# 		Filename: d2k_tents.shp
+# 		Start: 3
+# 	icon:
+# 		Filename: d2k_tents_icon.shp
 
-d2k_tent_c:
-	idle:
-		Filename: d2k_tents.shp
-		Start: 4
-	damaged-idle:
-		Filename: d2k_tents.shp
-		Start: 5
-	icon:
-		Filename: d2k_tents_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_tent_c:
+# 	idle:
+# 		Filename: d2k_tents.shp
+# 		Start: 4
+# 	damaged-idle:
+# 		Filename: d2k_tents.shp
+# 		Start: 5
+# 	icon:
+# 		Filename: d2k_tents_icon.shp
 
-doubleblast:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3527
-		Facings: -16
-		BlendMode: Additive
-		ZOffset: 511
+# --- COMMENTED OUT (no matching actor) ---
+# doubleblast:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3527
+# 		Facings: -16
+# 		BlendMode: Additive
+# 		ZOffset: 511
 
 doubleblastbullet:
 	Defaults:
@@ -4087,16 +4137,17 @@ doubleblastbullet:
 		BlendMode: Additive
 		ZOffset: 1023
 
-d2k_crate:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 102
-		ZOffset: -511
-		Offset: -16,-16
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_crate:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 102
+# 		ZOffset: -511
+# 		Offset: -16,-16
 
 spicebloom:
 	Defaults:
@@ -4179,71 +4230,72 @@ d2k_resources:
 		Length: *
 		Offset: -16,-16
 
-d2k_shroud:
-	Defaults:
-		AddExtension: false
-	Defaults:
-		BlendMode: Subtractive
-		Offset: -16,-16
-		Length: 14
-	palette:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 38
-	shrouda:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 40
-	shroudb:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 56
-	shroudc:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 72
-	shroudd:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 88
-	shroudfull:
-		Filename: fullshroud.shp
-		Offset: 0,0
-		Length: 1
-	foga:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		BlendMode: Multiply
-		Start: 40
-	fogb:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		BlendMode: Multiply
-		Start: 56
-	fogc:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		BlendMode: Multiply
-		Start: 72
-	fogd:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		BlendMode: Multiply
-		Start: 88
-	fogfull:
-		Filename: fullshroud.shp
-		BlendMode: Multiply
-		Offset: 0,0
-		Length: 1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_shroud:
+# 	Defaults:
+# 		AddExtension: false
+# 	Defaults:
+# 		BlendMode: Subtractive
+# 		Offset: -16,-16
+# 		Length: 14
+# 	palette:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 38
+# 	shrouda:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 40
+# 	shroudb:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 56
+# 	shroudc:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 72
+# 	shroudd:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 88
+# 	shroudfull:
+# 		Filename: fullshroud.shp
+# 		Offset: 0,0
+# 		Length: 1
+# 	foga:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		BlendMode: Multiply
+# 		Start: 40
+# 	fogb:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		BlendMode: Multiply
+# 		Start: 56
+# 	fogc:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		BlendMode: Multiply
+# 		Start: 72
+# 	fogd:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		BlendMode: Multiply
+# 		Start: 88
+# 	fogfull:
+# 		Filename: fullshroud.shp
+# 		BlendMode: Multiply
+# 		Offset: 0,0
+# 		Length: 1
 
 rockcraters:
 	Defaults:
@@ -4281,56 +4333,60 @@ sandcraters:
 		Length: 16
 		Offset: -16,-16
 
-null:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3552
+# --- COMMENTED OUT (no matching actor) ---
+# null:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3552
 
-d2k_mine_ap:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: mine_ap.shp
-		ZOffset: -512
-		Scale: 0.6
-	icon:
-		Filename: mine_apicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_mine_ap:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: mine_ap.shp
+# 		ZOffset: -512
+# 		Scale: 0.6
+# 	icon:
+# 		Filename: mine_apicon.shp
+# 		Offset: 0,-1
 
-d2k_mine_at:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: mine_at.shp
-		ZOffset: -512
-		Scale: 1.2
-	icon:
-		Filename: mine_aticon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_mine_at:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: mine_at.shp
+# 		ZOffset: -512
+# 		Scale: 1.2
+# 	icon:
+# 		Filename: mine_aticon.shp
+# 		Offset: 0,-1
 
-d2k_tleilaxu_power:
-	Defaults:
-		Offset: 0,-2
-	idle:
-		Filename: d2k_tleilaxu_power.shp
-		Length: 1
-		ShadowStart: 3
-	damaged-idle:
-		Filename: d2k_tleilaxu_power.shp
-		Start: 1
-		Length: 1
-		ShadowStart: 4
-	make:
-		Filename: invisibleitem.shp
-	dead:
-		Filename: invisibleitem.shp
-	icon:
-		Filename: d2k_tleilaxu_power_icon.shp
-		Offset: 0,0
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_tleilaxu_power:
+# 	Defaults:
+# 		Offset: 0,-2
+# 	idle:
+# 		Filename: d2k_tleilaxu_power.shp
+# 		Length: 1
+# 		ShadowStart: 3
+# 	damaged-idle:
+# 		Filename: d2k_tleilaxu_power.shp
+# 		Start: 1
+# 		Length: 1
+# 		ShadowStart: 4
+# 	make:
+# 		Filename: invisibleitem.shp
+# 	dead:
+# 		Filename: invisibleitem.shp
+# 	icon:
+# 		Filename: d2k_tleilaxu_power_icon.shp
+# 		Offset: 0,0
 
 ##########################################
 #       UNITS
@@ -4974,108 +5030,109 @@ heavy_inf:
 		BlendMode: Additive
 		AddExtension: false
 
-shotgunner:
-	Defaults:
-		AddExtension: false
-	stand:
-		Filename: d2k_shotgunner.shp
-		Start: 0
-		Facings: -8
-		Offset: 8,-5
-	run:
-		Filename: d2k_shotgunner.shp
-		Start: 8
-		Length: 6
-		Facings: -8
-		Offset: 8,-5
-		Tick: 100
-	shoot:
-		Filename: d2k_shotgunner.shp
-		Start: 56
-		Length: 5
-		Facings: -8
-		Offset: 8,-5
-		Tick: 80
-	prone-stand:
-		Filename: d2k_shotgunner.shp
-		Start: 96
-		Facings: -8
-		Offset: 8,-5
-	prone-run:
-		Filename: d2k_shotgunner.shp
-		Start: 104
-		Length: 3
-		Facings: -8
-		Offset: 8,-5
-		Tick: 100
-	prone-shoot:
-		Filename: d2k_shotgunner.shp
-		Start: 128
-		Length: 5
-		Facings: -8
-		Offset: 8,-5
-		Tick: 80
-	die1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 382, 389, 396, 403, 410, 417, 424, 431, 438, 443, 448, 453
-		Length: 12
-		Tick: 80
-	die2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 383, 390, 397, 404, 411, 418, 425, 432, 439, 444, 449, 454
-		Length: 12
-		Tick: 80
-	die3:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 384, 391, 398, 405, 412, 419, 426, 433, 440, 445, 450, 455
-		Length: 12
-		Tick: 80
-	die4:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 385, 392, 399, 406, 413, 420, 427, 434, 441, 446, 451, 456
-		Length: 12
-		Tick: 80
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 386, 393, 400, 407, 414, 421, 428, 435, 442, 447, 452, 457
-		Length: 12
-		Tick: 800
-		ZOffset: -511
-	icon:
-		Filename: d2k_shotgunner_icon.shp
-		Start: 0
-	garrison-muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive
-		AddExtension: false
+# --- COMMENTED OUT (no matching actor) ---
+# shotgunner:
+# 	Defaults:
+# 		AddExtension: false
+# 	stand:
+# 		Filename: d2k_shotgunner.shp
+# 		Start: 0
+# 		Facings: -8
+# 		Offset: 8,-5
+# 	run:
+# 		Filename: d2k_shotgunner.shp
+# 		Start: 8
+# 		Length: 6
+# 		Facings: -8
+# 		Offset: 8,-5
+# 		Tick: 100
+# 	shoot:
+# 		Filename: d2k_shotgunner.shp
+# 		Start: 56
+# 		Length: 5
+# 		Facings: -8
+# 		Offset: 8,-5
+# 		Tick: 80
+# 	prone-stand:
+# 		Filename: d2k_shotgunner.shp
+# 		Start: 96
+# 		Facings: -8
+# 		Offset: 8,-5
+# 	prone-run:
+# 		Filename: d2k_shotgunner.shp
+# 		Start: 104
+# 		Length: 3
+# 		Facings: -8
+# 		Offset: 8,-5
+# 		Tick: 100
+# 	prone-shoot:
+# 		Filename: d2k_shotgunner.shp
+# 		Start: 128
+# 		Length: 5
+# 		Facings: -8
+# 		Offset: 8,-5
+# 		Tick: 80
+# 	die1:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 382, 389, 396, 403, 410, 417, 424, 431, 438, 443, 448, 453
+# 		Length: 12
+# 		Tick: 80
+# 	die2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 383, 390, 397, 404, 411, 418, 425, 432, 439, 444, 449, 454
+# 		Length: 12
+# 		Tick: 80
+# 	die3:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 384, 391, 398, 405, 412, 419, 426, 433, 440, 445, 450, 455
+# 		Length: 12
+# 		Tick: 80
+# 	die4:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 385, 392, 399, 406, 413, 420, 427, 434, 441, 446, 451, 456
+# 		Length: 12
+# 		Tick: 80
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 386, 393, 400, 407, 414, 421, 428, 435, 442, 447, 452, 457
+# 		Length: 12
+# 		Tick: 800
+# 		ZOffset: -511
+# 	icon:
+# 		Filename: d2k_shotgunner_icon.shp
+# 		Start: 0
+# 	garrison-muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4028
+# 		Tick: 60
+# 		Facings: -32
+# 		BlendMode: Additive
+# 		AddExtension: false
 
 shockgunner:
 	Defaults:
@@ -5405,139 +5462,140 @@ chemtrooper:
 		Filename: chemtroopericon.shp
 		Offset: 0,-1
 
-thumper:
-	Defaults:
-		AddExtension: false
-	stand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1402
-		Facings: -8
-		Transpose: true
-	idle1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1548, 1555, 1562, 1569, 1576, 1583, 1590, 1597
-		Length: 8
-		Tick: 80
-	idle2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1549, 1556, 1563, 1570, 1577, 1584, 1591, 1598
-		Length: 8
-		Tick: 80
-	run:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1410
-		Length: 6
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	standup:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1462
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	prone-stand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1470
-		Facings: -8
-		Transpose: true
-	prone-run:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1478
-		Length: 3
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	deploy:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1458
-		Length: 5
-	thump:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1458
-		Length: 5
-		Tick: 480
-	thump-sand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 3882, 3883, 3879, 3880, 3881
-		Length: 5
-		Tick: 480
-		BlendMode: Multiply
-	die1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1543, 1550, 1557, 1564, 1571, 1578, 1585, 1592, 1599, 1600, 1601, 1602
-		Length: 12
-		Tick: 80
-	die2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1544, 1551, 1558, 1565, 1572, 1579, 1586, 1593
-		Length: 8
-		Tick: 80
-	die3:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1546, 1552, 1559, 1566, 1573, 1580, 1587, 1594
-		Length: 8
-		Tick: 80
-	die4:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1547, 1553, 1560, 1567, 1574, 1581, 1588, 1595
-		Length: 8
-		Tick: 80
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1548, 1554, 1561, 1568, 1575, 1582, 1589, 1596
-		Length: 8
-		Tick: 800
-		ZOffset: -511
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4275
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# thumper:
+# 	Defaults:
+# 		AddExtension: false
+# 	stand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1402
+# 		Facings: -8
+# 		Transpose: true
+# 	idle1:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1548, 1555, 1562, 1569, 1576, 1583, 1590, 1597
+# 		Length: 8
+# 		Tick: 80
+# 	idle2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1549, 1556, 1563, 1570, 1577, 1584, 1591, 1598
+# 		Length: 8
+# 		Tick: 80
+# 	run:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1410
+# 		Length: 6
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	standup:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1462
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	prone-stand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1470
+# 		Facings: -8
+# 		Transpose: true
+# 	prone-run:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1478
+# 		Length: 3
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	deploy:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1458
+# 		Length: 5
+# 	thump:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1458
+# 		Length: 5
+# 		Tick: 480
+# 	thump-sand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 3882, 3883, 3879, 3880, 3881
+# 		Length: 5
+# 		Tick: 480
+# 		BlendMode: Multiply
+# 	die1:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1543, 1550, 1557, 1564, 1571, 1578, 1585, 1592, 1599, 1600, 1601, 1602
+# 		Length: 12
+# 		Tick: 80
+# 	die2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1544, 1551, 1558, 1565, 1572, 1579, 1586, 1593
+# 		Length: 8
+# 		Tick: 80
+# 	die3:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1546, 1552, 1559, 1566, 1573, 1580, 1587, 1594
+# 		Length: 8
+# 		Tick: 80
+# 	die4:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1547, 1553, 1560, 1567, 1574, 1581, 1588, 1595
+# 		Length: 8
+# 		Tick: 80
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1548, 1554, 1561, 1568, 1575, 1582, 1589, 1596
+# 		Length: 8
+# 		Tick: 800
+# 		ZOffset: -511
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4275
+# 		Offset: -30,-24
 
 fremen:
 	Defaults:
@@ -5783,146 +5841,148 @@ saboteur:
 		Start: 4295
 		Offset: -30,-24
 
-sardaukar:
-	Defaults:
-		AddExtension: false
-	stand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 930
-		Facings: -8
-		Transpose: true
-	idle1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1111, 1118, 1125, 1132, 1139, 1146, 1153, 1160
-		Length: 8
-		Tick: 80
-		Offset: -1,0
-	idle2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1112, 1119, 1126, 1133, 1140, 1147, 1154, 1161
-		Length: 8
-		Tick: 80
-		Offset: -1,0
-	run:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 938
-		Length: 6
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	shoot:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 978
-		Length: 6
-		Facings: -8
-		Transpose: true
-	prone-stand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1034
-		Facings: -8
-		Transpose: true
-	prone-run:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1042
-		Length: 3
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	standup:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1026
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	prone-shoot:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1058
-		Length: 6
-		Facings: -8
-		Transpose: true
-	die1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1106, 1113, 1120, 1127, 1134, 1141, 1148, 1155, 1162, 1163, 1164, 1165
-		Length: 12
-		Tick: 80
-	die2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1107, 1114, 1121, 1128, 1135, 1142, 1149, 1156
-		Length: 8
-		Tick: 80
-	die3:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1108, 1115, 1122, 1129, 1136, 1143, 1150, 1157
-		Length: 8
-		Tick: 80
-	die4:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1109, 1116, 1123, 1130, 1137, 1144, 1151, 1158
-		Length: 8
-		Tick: 80
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1110, 1117, 1124, 1131, 1138, 1145, 1152, 1159
-		Length: 8
-		Tick: 800
-		ZOffset: -511
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4276
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# sardaukar:
+# 	Defaults:
+# 		AddExtension: false
+# 	stand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 930
+# 		Facings: -8
+# 		Transpose: true
+# 	idle1:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1111, 1118, 1125, 1132, 1139, 1146, 1153, 1160
+# 		Length: 8
+# 		Tick: 80
+# 		Offset: -1,0
+# 	idle2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1112, 1119, 1126, 1133, 1140, 1147, 1154, 1161
+# 		Length: 8
+# 		Tick: 80
+# 		Offset: -1,0
+# 	run:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 938
+# 		Length: 6
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	shoot:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 978
+# 		Length: 6
+# 		Facings: -8
+# 		Transpose: true
+# 	prone-stand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1034
+# 		Facings: -8
+# 		Transpose: true
+# 	prone-run:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1042
+# 		Length: 3
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	standup:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1026
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	prone-shoot:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1058
+# 		Length: 6
+# 		Facings: -8
+# 		Transpose: true
+# 	die1:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1106, 1113, 1120, 1127, 1134, 1141, 1148, 1155, 1162, 1163, 1164, 1165
+# 		Length: 12
+# 		Tick: 80
+# 	die2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1107, 1114, 1121, 1128, 1135, 1142, 1149, 1156
+# 		Length: 8
+# 		Tick: 80
+# 	die3:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1108, 1115, 1122, 1129, 1136, 1143, 1150, 1157
+# 		Length: 8
+# 		Tick: 80
+# 	die4:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1109, 1116, 1123, 1130, 1137, 1144, 1151, 1158
+# 		Length: 8
+# 		Tick: 80
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1110, 1117, 1124, 1131, 1138, 1145, 1152, 1159
+# 		Length: 8
+# 		Tick: 800
+# 		ZOffset: -511
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4276
+# 		Offset: -30,-24
 
-sardaukaricon:
-	Defaults:
-		AddExtension: false
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4276
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# sardaukaricon:
+# 	Defaults:
+# 		AddExtension: false
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4276
+# 		Offset: -30,-24
 
 d2k_sardaukar_elite:
 	stand:
@@ -5961,239 +6021,242 @@ d2k_sardaukar_elite:
 		ZOffset: -511
 		AddExtension: false
 
-d2k_sardaukar_assassin:
-	stand:
-		Filename: d2k_sardaukar_assassin.shp
-		Facings: -8
-	run:
-		Filename: d2k_sardaukar_assassin.shp
-		Start: 8
-		Length: 7
-		Facings: -8
-		Tick: 90
-	shoot:
-		Filename: d2k_sardaukar_assassin.shp
-		Start: 64
-		Length: 5
-		Facings: -8
-		Tick: 140
-	slice:
-		Filename: d2k_sardaukar_assassin.shp
-		Start: 104
-		Length: 10
-		Facings: -8
-		Tick: 90
-	die:
-		Filename: d2k_sardaukar_assassin.shp
-		Start: 184
-		Length: 15
-		Tick: 105
-	icon:
-		Filename: d2k_sardaukar_assassin_icon.shp
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 1110, 1117, 1124, 1131, 1138, 1145, 1152, 1159
-		Length: 8
-		Tick: 800
-		ZOffset: -511
-		AddExtension: false
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_sardaukar_assassin:
+# 	stand:
+# 		Filename: d2k_sardaukar_assassin.shp
+# 		Facings: -8
+# 	run:
+# 		Filename: d2k_sardaukar_assassin.shp
+# 		Start: 8
+# 		Length: 7
+# 		Facings: -8
+# 		Tick: 90
+# 	shoot:
+# 		Filename: d2k_sardaukar_assassin.shp
+# 		Start: 64
+# 		Length: 5
+# 		Facings: -8
+# 		Tick: 140
+# 	slice:
+# 		Filename: d2k_sardaukar_assassin.shp
+# 		Start: 104
+# 		Length: 10
+# 		Facings: -8
+# 		Tick: 90
+# 	die:
+# 		Filename: d2k_sardaukar_assassin.shp
+# 		Start: 184
+# 		Length: 15
+# 		Tick: 105
+# 	icon:
+# 		Filename: d2k_sardaukar_assassin_icon.shp
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 1110, 1117, 1124, 1131, 1138, 1145, 1152, 1159
+# 		Length: 8
+# 		Tick: 800
+# 		ZOffset: -511
+# 		AddExtension: false
 
-grenadier:
-	Defaults:
-		AddExtension: false
-	stand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2606
-		Facings: -8
-		Transpose: true
-	idle1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2700, 2707, 2714, 2721, 2728, 2735, 2742, 2749
-		Length: 8
-	idle2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2699, 2706, 2713, 2720, 2727, 2734, 2741, 2748
-		Length: 8
-	run:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2526
-		Length: 6
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	throw:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2574
-		Length: 5
-		Facings: -8
-		Transpose: true
-		Tick: 120
-	die1:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2694, 2701, 2708, 2715, 2722, 2729, 2736, 2743
-		Length: 8
-	die2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2695, 2702, 2709, 2716, 2723, 2730, 2737, 2744
-		Length: 8
-	die3:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2696, 2703, 2710, 2717, 2724, 2731, 2738, 2745
-		Length: 8
-	die4:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2697, 2704, 2711, 2718, 2725, 2732, 2738, 2746
-		Length: 8
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
-		Tick: 800
-		ZOffset: -511
-	prone-stand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2622
-		Facings: -8
-		Transpose: true
-	prone-run:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2622
-		Length: 4
-		Facings: -8
-		Tick: 120
-		Transpose: true
-	prone-throw:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2654
-		Length: 5
-		Facings: -8
-		Tick: 120
-		Transpose: true
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4297
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# grenadier:
+# 	Defaults:
+# 		AddExtension: false
+# 	stand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2606
+# 		Facings: -8
+# 		Transpose: true
+# 	idle1:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2700, 2707, 2714, 2721, 2728, 2735, 2742, 2749
+# 		Length: 8
+# 	idle2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2699, 2706, 2713, 2720, 2727, 2734, 2741, 2748
+# 		Length: 8
+# 	run:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2526
+# 		Length: 6
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	throw:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2574
+# 		Length: 5
+# 		Facings: -8
+# 		Transpose: true
+# 		Tick: 120
+# 	die1:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2694, 2701, 2708, 2715, 2722, 2729, 2736, 2743
+# 		Length: 8
+# 	die2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2695, 2702, 2709, 2716, 2723, 2730, 2737, 2744
+# 		Length: 8
+# 	die3:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2696, 2703, 2710, 2717, 2724, 2731, 2738, 2745
+# 		Length: 8
+# 	die4:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2697, 2704, 2711, 2718, 2725, 2732, 2738, 2746
+# 		Length: 8
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
+# 		Tick: 800
+# 		ZOffset: -511
+# 	prone-stand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2622
+# 		Facings: -8
+# 		Transpose: true
+# 	prone-run:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2622
+# 		Length: 4
+# 		Facings: -8
+# 		Tick: 120
+# 		Transpose: true
+# 	prone-throw:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2654
+# 		Length: 5
+# 		Facings: -8
+# 		Tick: 120
+# 		Transpose: true
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4297
+# 		Offset: -30,-24
 
-plasma_infantry:
-	Defaults:
-		Filename: plasma_infantry.shp
-		AddExtension: false
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 120
-	shoot:
-		Start: 64
-		Length: 16
-		Facings: 8
-	idle1:
-		Start: 384
-		Length: 14
-		Tick: 120
-	idle2:
-		Start: 399
-		Length: 16
-		Tick: 120
-	die1:
-		Start: 416
-		Length: 8
-	die2:
-		Start: 424
-		Length: 8
-	die3:
-		Start: 432
-		Length: 8
-	die4:
-		Start: 440
-		Length: 12
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
-		Tick: 800
-		ZOffset: -511
-	prone-stand:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 208
-		Length: 4
-		Facings: 8
-		Tick: 120
-	prone-shoot:
-		Start: 256
-		Length: 16
-		Facings: 8
-	icon:
-		Filename: plasma_infantryicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# plasma_infantry:
+# 	Defaults:
+# 		Filename: plasma_infantry.shp
+# 		AddExtension: false
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Facings: 8
+# 	run:
+# 		Start: 16
+# 		Length: 6
+# 		Facings: 8
+# 		Tick: 120
+# 	shoot:
+# 		Start: 64
+# 		Length: 16
+# 		Facings: 8
+# 	idle1:
+# 		Start: 384
+# 		Length: 14
+# 		Tick: 120
+# 	idle2:
+# 		Start: 399
+# 		Length: 16
+# 		Tick: 120
+# 	die1:
+# 		Start: 416
+# 		Length: 8
+# 	die2:
+# 		Start: 424
+# 		Length: 8
+# 	die3:
+# 		Start: 432
+# 		Length: 8
+# 	die4:
+# 		Start: 440
+# 		Length: 12
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
+# 		Tick: 800
+# 		ZOffset: -511
+# 	prone-stand:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-stand2:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-run:
+# 		Start: 208
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 120
+# 	prone-shoot:
+# 		Start: 256
+# 		Length: 16
+# 		Facings: 8
+# 	icon:
+# 		Filename: plasma_infantryicon.shp
+# 		Offset: 0,-1
 
 oneblastbullet:
 	idle:
@@ -6202,117 +6265,119 @@ oneblastbullet:
 		AddExtension: false
 		ZOffset: 1023
 
-fedaykin:
-	Defaults:
-		Filename: fedaykin.shp
-		AddExtension: false
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 120
-	shoot:
-		Start: 64
-		Length: 16
-		Facings: 8
-	idle1:
-		Start: 384
-		Length: 14
-		Tick: 120
-	idle2:
-		Start: 399
-		Length: 16
-		Tick: 120
-	die1:
-		Start: 416
-		Length: 8
-	die2:
-		Start: 424
-		Length: 8
-	die3:
-		Start: 432
-		Length: 8
-	die4:
-		Start: 440
-		Length: 12
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
-		Tick: 800
-		ZOffset: -511
-	prone-stand:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 208
-		Length: 4
-		Facings: 8
-		Tick: 120
-	prone-shoot:
-		Start: 256
-		Length: 16
-		Facings: 8
-	icon:
-		Filename: fedaykinicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# fedaykin:
+# 	Defaults:
+# 		Filename: fedaykin.shp
+# 		AddExtension: false
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Facings: 8
+# 	run:
+# 		Start: 16
+# 		Length: 6
+# 		Facings: 8
+# 		Tick: 120
+# 	shoot:
+# 		Start: 64
+# 		Length: 16
+# 		Facings: 8
+# 	idle1:
+# 		Start: 384
+# 		Length: 14
+# 		Tick: 120
+# 	idle2:
+# 		Start: 399
+# 		Length: 16
+# 		Tick: 120
+# 	die1:
+# 		Start: 416
+# 		Length: 8
+# 	die2:
+# 		Start: 424
+# 		Length: 8
+# 	die3:
+# 		Start: 432
+# 		Length: 8
+# 	die4:
+# 		Start: 440
+# 		Length: 12
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
+# 		Tick: 800
+# 		ZOffset: -511
+# 	prone-stand:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-stand2:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-run:
+# 		Start: 208
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 120
+# 	prone-shoot:
+# 		Start: 256
+# 		Length: 16
+# 		Facings: 8
+# 	icon:
+# 		Filename: fedaykinicon.shp
+# 		Offset: 0,-1
 
-d2k_drone:
-	Defaults:
-		AddExtension: false
-	stand:
-		Filename: drone.shp
-		Start: 48
-		ShadowStart: 138
-		Facings: -8
-		Scale: 0.7
-	run:
-		Filename: drone.shp
-		Start: 0
-		Length: 6
-		ShadowStart: 88
-		Facings: -8
-		Tick: 80
-		Scale: 0.7
-	jump:
-		Filename: drone.shp
-		Start: 56
-		Length: 4
-		ShadowStart: 144
-		Facings: -8
-		Scale: 0.7
-	shoot:
-		Filename: dronejump.shp
-		Facings: 8
-		ShadowStart: 8
-		Scale: 0.7
-	icon:
-		Filename: droneicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_drone:
+# 	Defaults:
+# 		AddExtension: false
+# 	stand:
+# 		Filename: drone.shp
+# 		Start: 48
+# 		ShadowStart: 138
+# 		Facings: -8
+# 		Scale: 0.7
+# 	run:
+# 		Filename: drone.shp
+# 		Start: 0
+# 		Length: 6
+# 		ShadowStart: 88
+# 		Facings: -8
+# 		Tick: 80
+# 		Scale: 0.7
+# 	jump:
+# 		Filename: drone.shp
+# 		Start: 56
+# 		Length: 4
+# 		ShadowStart: 144
+# 		Facings: -8
+# 		Scale: 0.7
+# 	shoot:
+# 		Filename: dronejump.shp
+# 		Facings: 8
+# 		ShadowStart: 8
+# 		Scale: 0.7
+# 	icon:
+# 		Filename: droneicon.shp
+# 		Offset: 0,-1
 
 d2k_ixdrone:
 	Defaults:
@@ -6439,32 +6504,32 @@ d2k_leech:
 		Filename: leechicon.shp
 		Offset: 0,0
 
-d2k_leech_s:
-	stand:
-		Filename: d2k_leech.shp
-		Start: 32
-		Facings: -32
-		Scale: 0.64
-	run:
-		Filename: d2k_leech.shp
-		Length: 4
-		Facings: 8
-		Tick: 45
-		Scale: 0.64
-	jump:
-		Filename: d2k_leech.shp
-		Start: 32
-		Facings: -32
-		Scale: 0.64
-	shoot:
-		Filename: d2k_leech.shp
-		Start: 32
-		Facings: -32
-		Scale: 0.64
-	icon:
-		Filename: leechicon.shp
-		Offset: 0,-1
-
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_leech_s:
+# 	stand:
+# 		Filename: d2k_leech.shp
+# 		Start: 32
+# 		Facings: -32
+# 		Scale: 0.64
+# 	run:
+# 		Filename: d2k_leech.shp
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 45
+# 		Scale: 0.64
+# 	jump:
+# 		Filename: d2k_leech.shp
+# 		Start: 32
+# 		Facings: -32
+# 		Scale: 0.64
+# 	shoot:
+# 		Filename: d2k_leech.shp
+# 		Start: 32
+# 		Facings: -32
+# 		Scale: 0.64
+# 	icon:
+# 		Filename: leechicon.shp
+# 		Offset: 0,-1
 
 rocketeer:
 	Defaults:
@@ -6557,18 +6622,19 @@ rocketeer:
 		Facings: 1
 		Offset: 0,-1
 
-rocketeer.husk:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: rocketeer.shp
-		Start: 340
-		Length: 16
-		Facings: 2
-		Tick: 80
-	shadow:
-		Filename: infshdw.shp
-		Start: 1
+# --- COMMENTED OUT (no matching actor) ---
+# rocketeer.husk:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: rocketeer.shp
+# 		Start: 340
+# 		Length: 16
+# 		Facings: 2
+# 		Tick: 80
+# 	shadow:
+# 		Filename: infshdw.shp
+# 		Start: 1
 
 flamethrower:
 	Defaults:
@@ -6663,70 +6729,71 @@ flamethrower:
 		Filename: flamethrowericon.shp
 		Offset: 0,-1
 
-d2k_hijacker:
-	Defaults:
-		Filename: hijacker.shp
-		AddExtension: false
-	stand:
-		Facings: 8
-		Scale: 1.875
-	run:
-		Start: 8
-		Length: 6
-		Facings: 8
-		Tick: 100
-		Scale: 1.875
-	die1:
-		Start: 139
-		Length: 8
-		Scale: 1.875
-	die2:
-		Start: 147
-		Length: 8
-		Scale: 1.875
-	die3:
-		Start: 155
-		Length: 8
-		Scale: 1.875
-	die4:
-		Start: 163
-		Length: 12
-		Scale: 1.875
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.875
-		Remap: 54F94B
-		Frames: 386, 393, 400, 407, 414, 421, 428, 435
-		Length: 8
-		Tick: 800
-		ZOffset: -511
-	prone-stand:
-		Start: 72
-		Stride: 4
-		Facings: 8
-		Scale: 1.875
-	prone-run:
-		Start: 72
-		Length: 4
-		Facings: 8
-		Tick: 80
-		Scale: 1.875
-	icon:
-		Filename: hijackericon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_hijacker:
+# 	Defaults:
+# 		Filename: hijacker.shp
+# 		AddExtension: false
+# 	stand:
+# 		Facings: 8
+# 		Scale: 1.875
+# 	run:
+# 		Start: 8
+# 		Length: 6
+# 		Facings: 8
+# 		Tick: 100
+# 		Scale: 1.875
+# 	die1:
+# 		Start: 139
+# 		Length: 8
+# 		Scale: 1.875
+# 	die2:
+# 		Start: 147
+# 		Length: 8
+# 		Scale: 1.875
+# 	die3:
+# 		Start: 155
+# 		Length: 8
+# 		Scale: 1.875
+# 	die4:
+# 		Start: 163
+# 		Length: 12
+# 		Scale: 1.875
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.875
+# 		Remap: 54F94B
+# 		Frames: 386, 393, 400, 407, 414, 421, 428, 435
+# 		Length: 8
+# 		Tick: 800
+# 		ZOffset: -511
+# 	prone-stand:
+# 		Start: 72
+# 		Stride: 4
+# 		Facings: 8
+# 		Scale: 1.875
+# 	prone-run:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 80
+# 		Scale: 1.875
+# 	icon:
+# 		Filename: hijackericon.shp
+# 		Offset: 0,-1
 
 facedancer:
 	Inherits: ^InfantryOverlays
@@ -6806,10 +6873,11 @@ facedancer:
 	icon:
 		Filename: facedancericon.shp
 
-facedancer_harv:
-	Inherits: facedancer
-	icon:
-		Filename: facedancerworkericon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# facedancer_harv:
+# 	Inherits: facedancer
+# 	icon:
+# 		Filename: facedancerworkericon.shp
 
 contaminator:
 	Inherits: ^RA2ArmedInfantry
@@ -6929,443 +6997,461 @@ ordos_mortar:
 	icon:
 		Filename: ordos_mortar_icon.png
 		AddExtension: False
-bene_gesserit:
-	Defaults:
-		Filename: bene_gesserit.shp
-		AddExtension: false
-	idle:
-		Facings: -8
-		Scale: 1.875
-	stand:
-		Facings: -8
-		Scale: 1.875
-	run:
-		Start: 8
-		Facings: -8
-		Length: 4
-		Tick: 160
-		Scale: 1.875
-	shoot:
-		Start: 40
-		Facings: -8
-		Length: 4
-		Tick: 150
-		Scale: 1.875
-	die:
-		Start: 72
-		Length: 12
-		Tick: 160
-		Scale: 1.875
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	icon:
-		Filename: bene_gesserit_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# bene_gesserit:
+# 	Defaults:
+# 		Filename: bene_gesserit.shp
+# 		AddExtension: false
+# 	idle:
+# 		Facings: -8
+# 		Scale: 1.875
+# 	stand:
+# 		Facings: -8
+# 		Scale: 1.875
+# 	run:
+# 		Start: 8
+# 		Facings: -8
+# 		Length: 4
+# 		Tick: 160
+# 		Scale: 1.875
+# 	shoot:
+# 		Start: 40
+# 		Facings: -8
+# 		Length: 4
+# 		Tick: 150
+# 		Scale: 1.875
+# 	die:
+# 		Start: 72
+# 		Length: 12
+# 		Tick: 160
+# 		Scale: 1.875
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	icon:
+# 		Filename: bene_gesserit_icon.shp
 
-faction.ordos:
-	idle:
-		Filename: ordosicon.shp
-	icon:
-		Filename: ordosicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.ordos:
+# 	idle:
+# 		Filename: ordosicon.shp
+# 	icon:
+# 		Filename: ordosicon.shp
 
-faction.smugglers:
-	idle:
-		Filename: smugglericon.shp
-	icon:
-		Filename: smugglericon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.smugglers:
+# 	idle:
+# 		Filename: smugglericon.shp
+# 	icon:
+# 		Filename: smugglericon.shp
 
-faction.mercenary:
-	idle:
-		Filename: mercenaryicon.shp
-	icon:
-		Filename: mercenaryicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.mercenary:
+# 	idle:
+# 		Filename: mercenaryicon.shp
+# 	icon:
+# 		Filename: mercenaryicon.shp
 
-faction.tleilaxu:
-	idle:
-		Filename: tleilaxicon.shp
-	icon:
-		Filename: tleilaxicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.tleilaxu:
+# 	idle:
+# 		Filename: tleilaxicon.shp
+# 	icon:
+# 		Filename: tleilaxicon.shp
 
-faction.harkonnen:
-	idle:
-		Filename: harkonnenicon.shp
-	icon:
-		Filename: harkonnenicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.harkonnen:
+# 	idle:
+# 		Filename: harkonnenicon.shp
+# 	icon:
+# 		Filename: harkonnenicon.shp
 
-faction.atreides:
-	idle:
-		Filename: atreidesicon.shp
-	icon:
-		Filename: atreidesicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.atreides:
+# 	idle:
+# 		Filename: atreidesicon.shp
+# 	icon:
+# 		Filename: atreidesicon.shp
 
-faction.fremen:
-	idle:
-		Filename: fremenicon.shp
-	icon:
-		Filename: fremenicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.fremen:
+# 	idle:
+# 		Filename: fremenicon.shp
+# 	icon:
+# 		Filename: fremenicon.shp
 
-faction.corrino:
-	idle:
-		Filename: corrinoicon.shp
-	icon:
-		Filename: corrinoicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.corrino:
+# 	idle:
+# 		Filename: corrinoicon.shp
+# 	icon:
+# 		Filename: corrinoicon.shp
 
-faction.ixian:
-	idle:
-		Filename: ixianicon.shp
-	icon:
-		Filename: ixianicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.ixian:
+# 	idle:
+# 		Filename: ixianicon.shp
+# 	icon:
+# 		Filename: ixianicon.shp
 
-faction.guild:
-	idle:
-		Filename: spacingguildicon.shp
-	icon:
-		Filename: spacingguildicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# faction.guild:
+# 	idle:
+# 		Filename: spacingguildicon.shp
+# 	icon:
+# 		Filename: spacingguildicon.shp
 
-d2k_mechanic:
-	Defaults:
-		Filename: mechanic.shp
-		AddExtension: false
-	stand:
-		Facings: 8
-		Scale: 1.875
-	run:
-		Start: 8
-		Length: 6
-		Facings: 8
-		Tick: 100
-		Scale: 1.875
-	repair:
-		Start: 56
-		Length: 58
-		Tick: 120
-		Scale: 1.875
-	standup:
-		Start: 114
-		Length: 2
-		Facings: 8
-		Scale: 1.875
-	idle1:
-		Start: 163
-		Length: 14
-		Tick: 120
-		Scale: 1.875
-	idle2:
-		Start: 178
-		Length: 14
-		Tick: 120
-		Scale: 1.875
-	die1:
-		Start: 193
-		Length: 7
-		Scale: 1.875
-	die2:
-		Start: 201
-		Length: 8
-		Scale: 1.875
-	die3:
-		Start: 209
-		Length: 8
-		Scale: 1.875
-	die4:
-		Start: 217
-		Length: 12
-		Scale: 1.875
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.875
-		Remap: 54F94B
-		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
-		Tick: 800
-		ZOffset: -511
-	prone-stand:
-		Start: 130
-		Stride: 4
-		Facings: 8
-		Scale: 1.875
-	prone-run:
-		Start: 130
-		Length: 4
-		Facings: 8
-		Tick: 100
-		Scale: 1.875
-	icon:
-		Filename: mechanicicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_mechanic:
+# 	Defaults:
+# 		Filename: mechanic.shp
+# 		AddExtension: false
+# 	stand:
+# 		Facings: 8
+# 		Scale: 1.875
+# 	run:
+# 		Start: 8
+# 		Length: 6
+# 		Facings: 8
+# 		Tick: 100
+# 		Scale: 1.875
+# 	repair:
+# 		Start: 56
+# 		Length: 58
+# 		Tick: 120
+# 		Scale: 1.875
+# 	standup:
+# 		Start: 114
+# 		Length: 2
+# 		Facings: 8
+# 		Scale: 1.875
+# 	idle1:
+# 		Start: 163
+# 		Length: 14
+# 		Tick: 120
+# 		Scale: 1.875
+# 	idle2:
+# 		Start: 178
+# 		Length: 14
+# 		Tick: 120
+# 		Scale: 1.875
+# 	die1:
+# 		Start: 193
+# 		Length: 7
+# 		Scale: 1.875
+# 	die2:
+# 		Start: 201
+# 		Length: 8
+# 		Scale: 1.875
+# 	die3:
+# 		Start: 209
+# 		Length: 8
+# 		Scale: 1.875
+# 	die4:
+# 		Start: 217
+# 		Length: 12
+# 		Scale: 1.875
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.875
+# 		Remap: 54F94B
+# 		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
+# 		Tick: 800
+# 		ZOffset: -511
+# 	prone-stand:
+# 		Start: 130
+# 		Stride: 4
+# 		Facings: 8
+# 		Scale: 1.875
+# 	prone-run:
+# 		Start: 130
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 100
+# 		Scale: 1.875
+# 	icon:
+# 		Filename: mechanicicon.shp
+# 		Offset: 0,-1
 
-d2k_sniper:
-	Defaults:
-		Filename: d2ksniper.shp
-		AddExtension: false
-	stand:
-		Facings: 8
-		Scale: 1.2
-	stand2:
-		Start: 8
-		Facings: 8
-		Scale: 1.2
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-		Scale: 1.2
-	shoot:
-		Start: 64
-		Length: 16
-		Facings: 8
-		Scale: 1.2
-	stand3:
-		Start: 192
-		Length: 16
-		Scale: 1.2
-	prone-stand:
-		Start: 208
-		Stride: 4
-		Facings: 8
-		Scale: 1.2
-	prone-stand2:
-		Start: 208
-		Stride: 4
-		Facings: 8
-		Scale: 1.2
-	prone-run:
-		Start: 208
-		Length: 4
-		Facings: 8
-		Tick: 100
-		Scale: 1.2
-	standup-0:
-		Start: 240
-		Length: 2
-		Facings: 8
-		Scale: 1.2
-	prone-shoot:
-		Start: 256
-		Length: 16
-		Facings: 8
-		Scale: 1.2
-	idle1:
-		Start: 384
-		Length: 14
-		Tick: 120
-		Scale: 1.2
-	idle2:
-		Start: 399
-		Length: 16
-		Tick: 120
-		Scale: 1.2
-	die1:
-		Start: 416
-		Length: 8
-		Scale: 1.2
-	die2:
-		Start: 424
-		Length: 8
-		Scale: 1.2
-	die3:
-		Start: 432
-		Length: 8
-		Scale: 1.2
-	die4:
-		Start: 440
-		Length: 12
-		Scale: 1.2
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.2
-		Remap: 54F94B
-		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
-		Tick: 800
-		ZOffset: -511
-	icon:
-		Filename: d2ksnipericon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_sniper:
+# 	Defaults:
+# 		Filename: d2ksniper.shp
+# 		AddExtension: false
+# 	stand:
+# 		Facings: 8
+# 		Scale: 1.2
+# 	stand2:
+# 		Start: 8
+# 		Facings: 8
+# 		Scale: 1.2
+# 	run:
+# 		Start: 16
+# 		Length: 6
+# 		Facings: 8
+# 		Tick: 100
+# 		Scale: 1.2
+# 	shoot:
+# 		Start: 64
+# 		Length: 16
+# 		Facings: 8
+# 		Scale: 1.2
+# 	stand3:
+# 		Start: 192
+# 		Length: 16
+# 		Scale: 1.2
+# 	prone-stand:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 		Scale: 1.2
+# 	prone-stand2:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 		Scale: 1.2
+# 	prone-run:
+# 		Start: 208
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 100
+# 		Scale: 1.2
+# 	standup-0:
+# 		Start: 240
+# 		Length: 2
+# 		Facings: 8
+# 		Scale: 1.2
+# 	prone-shoot:
+# 		Start: 256
+# 		Length: 16
+# 		Facings: 8
+# 		Scale: 1.2
+# 	idle1:
+# 		Start: 384
+# 		Length: 14
+# 		Tick: 120
+# 		Scale: 1.2
+# 	idle2:
+# 		Start: 399
+# 		Length: 16
+# 		Tick: 120
+# 		Scale: 1.2
+# 	die1:
+# 		Start: 416
+# 		Length: 8
+# 		Scale: 1.2
+# 	die2:
+# 		Start: 424
+# 		Length: 8
+# 		Scale: 1.2
+# 	die3:
+# 		Start: 432
+# 		Length: 8
+# 		Scale: 1.2
+# 	die4:
+# 		Start: 440
+# 		Length: 12
+# 		Scale: 1.2
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.2
+# 		Remap: 54F94B
+# 		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
+# 		Tick: 800
+# 		ZOffset: -511
+# 	icon:
+# 		Filename: d2ksnipericon.shp
+# 		Offset: 0,-1
 
-d2k_marksman:
-	Defaults:
-		Filename: d2kmarksman.shp
-		AddExtension: false
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Facings: 8
-	run:
-		Start: 16
-		Length: 6
-		Facings: 8
-		Tick: 100
-	shoot:
-		Start: 64
-		Length: 16
-		Facings: 8
-	stand3:
-		Start: 192
-		Length: 16
-	prone-stand:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-stand2:
-		Start: 208
-		Stride: 4
-		Facings: 8
-	prone-run:
-		Start: 208
-		Length: 4
-		Facings: 8
-		Tick: 100
-	standup-0:
-		Start: 240
-		Length: 2
-		Facings: 8
-	prone-shoot:
-		Start: 256
-		Length: 16
-		Facings: 8
-	idle1:
-		Start: 384
-		Length: 14
-		Tick: 120
-	idle2:
-		Start: 399
-		Length: 16
-		Tick: 120
-	die1:
-		Start: 416
-		Length: 8
-	die2:
-		Start: 424
-		Length: 8
-	die3:
-		Start: 432
-		Length: 8
-	die4:
-		Start: 440
-		Length: 12
-	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
-		Tick: 80
-	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
-		Tick: 80
-	die7:
-		Filename: electro.shp
-		Length: *
-	die-crushed:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
-		Tick: 800
-		ZOffset: -511
-	icon:
-		Filename: d2kmarksmanicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_marksman:
+# 	Defaults:
+# 		Filename: d2kmarksman.shp
+# 		AddExtension: false
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Facings: 8
+# 	run:
+# 		Start: 16
+# 		Length: 6
+# 		Facings: 8
+# 		Tick: 100
+# 	shoot:
+# 		Start: 64
+# 		Length: 16
+# 		Facings: 8
+# 	stand3:
+# 		Start: 192
+# 		Length: 16
+# 	prone-stand:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-stand2:
+# 		Start: 208
+# 		Stride: 4
+# 		Facings: 8
+# 	prone-run:
+# 		Start: 208
+# 		Length: 4
+# 		Facings: 8
+# 		Tick: 100
+# 	standup-0:
+# 		Start: 240
+# 		Length: 2
+# 		Facings: 8
+# 	prone-shoot:
+# 		Start: 256
+# 		Length: 16
+# 		Facings: 8
+# 	idle1:
+# 		Start: 384
+# 		Length: 14
+# 		Tick: 120
+# 	idle2:
+# 		Start: 399
+# 		Length: 16
+# 		Tick: 120
+# 	die1:
+# 		Start: 416
+# 		Length: 8
+# 	die2:
+# 		Start: 424
+# 		Length: 8
+# 	die3:
+# 		Start: 432
+# 		Length: 8
+# 	die4:
+# 		Start: 440
+# 		Length: 12
+# 	die5:
+# 		Filename: e1.shp
+# 		Start: 324
+# 		Length: 18
+# 		Tick: 80
+# 	die6:
+# 		Filename: e1.shp
+# 		Start: 366
+# 		Length: 11
+# 		Tick: 80
+# 	die7:
+# 		Filename: electro.shp
+# 		Length: *
+# 	die-crushed:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Frames: 2698, 2705, 2712, 2719, 2726, 2733, 2740, 2747
+# 		Tick: 800
+# 		ZOffset: -511
+# 	icon:
+# 		Filename: d2kmarksmanicon.shp
+# 		Offset: 0,-1
 
-d2k_light_tank:
-	idle:
-		Filename: d2k_light_apc.shp
-		Facings: -32
-	turret:
-		Filename: d2k_light_apc.shp
-		Start: 32
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive
-		AddExtension: false
-	icon:
-		Filename: light_tankicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_light_tank:
+# 	idle:
+# 		Filename: d2k_light_apc.shp
+# 		Facings: -32
+# 	turret:
+# 		Filename: d2k_light_apc.shp
+# 		Start: 32
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4028
+# 		Tick: 60
+# 		Facings: -32
+# 		BlendMode: Additive
+# 		AddExtension: false
+# 	icon:
+# 		Filename: light_tankicon.shp
+# 		Offset: 0,-1
 
-d2k_lion_king:
-	idle:
-		Filename: d2k_lion_king.shp
-		Facings: -32
-	turret:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1859
-		Facings: -32
-		AddExtension: false
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive
-		AddExtension: false
-	icon:
-		Filename: light_tankicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_lion_king:
+# 	idle:
+# 		Filename: d2k_lion_king.shp
+# 		Facings: -32
+# 	turret:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1859
+# 		Facings: -32
+# 		AddExtension: false
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4028
+# 		Tick: 60
+# 		Facings: -32
+# 		BlendMode: Additive
+# 		AddExtension: false
+# 	icon:
+# 		Filename: light_tankicon.shp
+# 		Offset: 0,-1
 
-d2k_stealth_tank:
-	idle:
-		Filename: d2k_alshabah.shp
-		Facings: -32
-	turret:
-		Filename: d2k_alshabah.shp
-		Start: 32
-		Facings: -32
-	icon:
-		Filename: stealth_tankicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_stealth_tank:
+# 	idle:
+# 		Filename: d2k_alshabah.shp
+# 		Facings: -32
+# 	turret:
+# 		Filename: d2k_alshabah.shp
+# 		Start: 32
+# 		Facings: -32
+# 	icon:
+# 		Filename: stealth_tankicon.shp
+# 		Offset: 0,-1
 
-d2k_stealth_tank.husk:
-	idle:
-		Filename: d2k_alshabah.shp
-		Facings: -32
-		ZOffset: -512
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_stealth_tank.husk:
+# 	idle:
+# 		Filename: d2k_alshabah.shp
+# 		Facings: -32
+# 		ZOffset: -512
 
 d2k_basq:
 	idle:
@@ -7376,60 +7462,64 @@ d2k_basq:
 		Filename: d2k_basq_icon.shp
 		Offset: 0,-1
 
-bomb_buggy:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: d2k_bomb_buggy.shp
-		Facings: -32
-		UseClassicFacings: True
-		Scale: 1.2
-	icon:
-		Filename: bomb_buggyicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# bomb_buggy:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: d2k_bomb_buggy.shp
+# 		Facings: -32
+# 		UseClassicFacings: True
+# 		Scale: 1.2
+# 	icon:
+# 		Filename: bomb_buggyicon.shp
+# 		Offset: 0,-1
 
-quake_tank:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: quake_tank.shp
-		Facings: 32
-		UseClassicFacings: True
-		Scale: 2.2
-	piston:
-		Filename: quake_tank.shp
-		Start: 32
-		Facings: 8
-		Length: 8
-		Scale: 2.2
-	icon:
-		Filename: quake_tankicon.shp
-		Offset: 0,-1
+# --- COMMENTED OUT (no matching actor) ---
+# quake_tank:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: quake_tank.shp
+# 		Facings: 32
+# 		UseClassicFacings: True
+# 		Scale: 2.2
+# 	piston:
+# 		Filename: quake_tank.shp
+# 		Start: 32
+# 		Facings: 8
+# 		Length: 8
+# 		Scale: 2.2
+# 	icon:
+# 		Filename: quake_tankicon.shp
+# 		Offset: 0,-1
 
-quake_tank.husk:
-	Defaults:
-		Scale: 2
-		AddExtension: false
-	idle:
-		Filename: quake_tank.shp
-		Facings: 32
-		ZOffset: -512
-		UseClassicFacings: True
-		Scale: 2.2
+# --- COMMENTED OUT (no matching actor) ---
+# quake_tank.husk:
+# 	Defaults:
+# 		Scale: 2
+# 		AddExtension: false
+# 	idle:
+# 		Filename: quake_tank.shp
+# 		Facings: 32
+# 		ZOffset: -512
+# 		UseClassicFacings: True
+# 		Scale: 2.2
 
-quake_tank_deployed.husk:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: quake_tank.shp
-		Facings: 32
-		ZOffset: -512
-		UseClassicFacings: True
-	piston:
-		Filename: quake_tank.shp
-		Start: 32
-		Facings: 8
-		Length: 8
+# --- COMMENTED OUT (no matching actor) ---
+# quake_tank_deployed.husk:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: quake_tank.shp
+# 		Facings: 32
+# 		ZOffset: -512
+# 		UseClassicFacings: True
+# 	piston:
+# 		Filename: quake_tank.shp
+# 		Start: 32
+# 		Facings: 8
+# 		Length: 8
 
 d2k_flame_tank:
 	idle:
@@ -7439,63 +7529,67 @@ d2k_flame_tank:
 	icon:
 		Filename: d2k_flame_tank_icon.shp
 
-d2k_apc:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: d2kifv.shp
-		Facings: 32
-	turret-tank:
-		Filename: ifv_turret_h.shp
-		Start: 0
-		Facings: 32
-	icon:
-		Filename: d2kifvicon.shp
-		Offset: 0,-2
-	icon_stealth:
-		Filename: d2kifvsicon.shp
-		Offset: 0,-2
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_apc:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: d2kifv.shp
+# 		Facings: 32
+# 	turret-tank:
+# 		Filename: ifv_turret_h.shp
+# 		Start: 0
+# 		Facings: 32
+# 	icon:
+# 		Filename: d2kifvicon.shp
+# 		Offset: 0,-2
+# 	icon_stealth:
+# 		Filename: d2kifvsicon.shp
+# 		Offset: 0,-2
 
-d2k_atreides_apc:
-	idle:
-		Filename: d2k_atreides_apc.shp
-		Facings: -32
-	turret:
-		Filename: d2k_atreides_apc_turret.shp
-		Start: 0
-		Facings: -32
-	icon:
-		Filename: d2k_atreides_apc_icon.shp
-		Offset: 0,-2
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive
-		AddExtension: false
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_atreides_apc:
+# 	idle:
+# 		Filename: d2k_atreides_apc.shp
+# 		Facings: -32
+# 	turret:
+# 		Filename: d2k_atreides_apc_turret.shp
+# 		Start: 0
+# 		Facings: -32
+# 	icon:
+# 		Filename: d2k_atreides_apc_icon.shp
+# 		Offset: 0,-2
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4028
+# 		Tick: 60
+# 		Facings: -32
+# 		BlendMode: Additive
+# 		AddExtension: false
 
-d2k_apc.husk:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: d2kifv.shp
-		Facings: 32
-		ZOffset: -512
-	turret:
-		Filename: ifv_turret_h.shp
-		Start: 0
-		Facings: 32
-		ZOffset: -512
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_apc.husk:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: d2kifv.shp
+# 		Facings: 32
+# 		ZOffset: -512
+# 	turret:
+# 		Filename: ifv_turret_h.shp
+# 		Start: 0
+# 		Facings: 32
+# 		ZOffset: -512
 
-d2k_gunship:
-	idle:
-		Filename: d2k_gunship.shp
-		Facings: -32
-	icon:
-		Filename: phoenixicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_gunship:
+# 	idle:
+# 		Filename: d2k_gunship.shp
+# 		Facings: -32
+# 	icon:
+# 		Filename: phoenixicon.shp
 
 d2k_combat_fleet:
 	idle:
@@ -7504,12 +7598,13 @@ d2k_combat_fleet:
 	icon:
 		Filename: d2k_combat_fleet_icon.shp
 
-d2k_combat_fleet.husk:
-	idle:
-		Filename: d2k_combat_fleet.shp
-		ZOffset: -512
-		Facings: -32
-		Scale: 1.875
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_combat_fleet.husk:
+# 	idle:
+# 		Filename: d2k_combat_fleet.shp
+# 		ZOffset: -512
+# 		Facings: -32
+# 		Scale: 1.875
 
 swarmer:
 	Defaults:
@@ -7588,11 +7683,12 @@ ordos_eye_bombs:
 		Transpose: true
 		ZOffset: 1023
 
-d2k_gunship.husk:
-	idle:
-		Filename: d2k_gunship.shp
-		ZOffset: -512
-		Facings: -32
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_gunship.husk:
+# 	idle:
+# 		Filename: d2k_gunship.shp
+# 		ZOffset: -512
+# 		Facings: -32
 
 d2k_air_drone:
 	idle:
@@ -7865,55 +7961,57 @@ harvester.husk:
 		Facings: -32
 		ZOffset: -512
 
-trike:
-	Inherits: vordel_effect
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1635
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4092
-		Tick: 50
-		Facings: -32
-		BlendMode: Additive
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4305
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# trike:
+# 	Inherits: vordel_effect
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1635
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4092
+# 		Tick: 50
+# 		Facings: -32
+# 		BlendMode: Additive
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4305
+# 		Offset: -30,-24
 
-quad:
-	Inherits: vordel_effect
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1667
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4092
-		Tick: 50
-		Facings: -32
-		BlendMode: Additive
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4279
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# quad:
+# 	Inherits: vordel_effect
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1667
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4092
+# 		Tick: 50
+# 		Facings: -32
+# 		BlendMode: Additive
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4279
+# 		Offset: -30,-24
 
 siege_tank:
 	Inherits: vordel_effect
@@ -7945,31 +8043,32 @@ siege_tank:
 		Start: 4287
 		Offset: -30,-24
 
-siege_quad:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1667
-		Facings: -32
-	turret:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1891
-		ZOffset: -1
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3671
-		Length: 3
-		BlendMode: Additive
-	icon:
-		Filename: d2k_siege_quad_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# siege_quad:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1667
+# 		Facings: -32
+# 	turret:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1891
+# 		ZOffset: -1
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3671
+# 		Length: 3
+# 		BlendMode: Additive
+# 	icon:
+# 		Filename: d2k_siege_quad_icon.shp
 
 ordos_cobra:
 	Defaults:
@@ -8049,37 +8148,39 @@ d2k_rocket_buggy:
 	icon:
 		Filename: d2k_rocket_buggy_icon.shp
 
-d2k_transport_buggy:
-	idle:
-		Filename: d2k_transport_buggy.shp
-		Start: 0
-		Facings: -32
-	icon:
-		Filename: d2k_transport_buggy_icon.shp
-	icon_sard:
-		Filename: d2k_transport_buggy_icon.shp
-		Start: 1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_transport_buggy:
+# 	idle:
+# 		Filename: d2k_transport_buggy.shp
+# 		Start: 0
+# 		Facings: -32
+# 	icon:
+# 		Filename: d2k_transport_buggy_icon.shp
+# 	icon_sard:
+# 		Filename: d2k_transport_buggy_icon.shp
+# 		Start: 1
 
-d2k_combat_buggy:
-	idle:
-		Filename: d2k_buggy.shp
-		Facings: -32
-		Scale: 1.875
-	turret:
-		Filename: d2k_buggy.shp
-		Start: 32
-		Facings: -32
-		Scale: 1.875
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.875
-		Remap: 54F94B
-		Start: 3671
-		Length: 3
-		BlendMode: Additive
-		AddExtension: false
-	icon:
-		Filename: d2k_combat_buggy_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_combat_buggy:
+# 	idle:
+# 		Filename: d2k_buggy.shp
+# 		Facings: -32
+# 		Scale: 1.875
+# 	turret:
+# 		Filename: d2k_buggy.shp
+# 		Start: 32
+# 		Facings: -32
+# 		Scale: 1.875
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.875
+# 		Remap: 54F94B
+# 		Start: 3671
+# 		Length: 3
+# 		BlendMode: Additive
+# 		AddExtension: false
+# 	icon:
+# 		Filename: d2k_combat_buggy_icon.shp
 
 d2k_buzzsaw:
 	idle:
@@ -8120,22 +8221,23 @@ siege_tank.husk:
 		Facings: -32
 		ZOffset: -512
 
-missile_tank:
-	Inherits: vordel_effect
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1603
-		Facings: -32
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4285
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# missile_tank:
+# 	Inherits: vordel_effect
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1603
+# 		Facings: -32
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4285
+# 		Offset: -30,-24
 
 ix_missile_tank:
 	idle:
@@ -8232,13 +8334,14 @@ tleilax_labcrawl:
 	icon:
 		Filename: tleilax_labcrawl_icon.png
 
-d2k_qafza:
-	idle:
-		Filename: d2k_qafza.shp
-		Start: 0
-		Facings: -32
-	icon:
-		Filename: d2k_qafza_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_qafza:
+# 	idle:
+# 		Filename: d2k_qafza.shp
+# 		Start: 0
+# 		Facings: -32
+# 	icon:
+# 		Filename: d2k_qafza_icon.shp
 
 d2k_aa_mine:
 	idle:
@@ -8256,11 +8359,12 @@ d2k_kwny_fighter:
 	icon:
 		Filename: d2k_kwny_fighter_icon.shp
 
-d2k_kwny_fighter.husk:
-	idle:
-		Filename: d2k_kwny_fighter.shp
-		ZOffset: -512
-		Facings: -32
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_kwny_fighter.husk:
+# 	idle:
+# 		Filename: d2k_kwny_fighter.shp
+# 		ZOffset: -512
+# 		Facings: -32
 
 d2k_farasha:
 	idle:
@@ -8316,21 +8420,22 @@ d2k_annihilator:
 	icon:
 		Filename: d2k_annihilator_icon.shp
 
-sonic_tank:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1827
-		Facings: -32
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4288
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# sonic_tank:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1827
+# 		Facings: -32
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4288
+# 		Offset: -30,-24
 
 sonic_tank.husk:
 	Defaults:
@@ -8578,65 +8683,67 @@ combat_tank_ixian:
 		Start: 4283
 		Offset: -30,-24
 
-combat_tank_corrino:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: d2k_ct_striped.shp
-		Facings: -32
-	turret:
-		Filename: d2k_lion_king.shp
-		Start: 32
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4282
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# combat_tank_corrino:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: d2k_ct_striped.shp
+# 		Facings: -32
+# 	turret:
+# 		Filename: d2k_lion_king.shp
+# 		Start: 32
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4028
+# 		Tick: 60
+# 		Facings: -32
+# 		BlendMode: Additive
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4282
+# 		Offset: -30,-24
 
-combat_tank_fremen:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: d2k_ct_striped.shp
-		Facings: -32
-	turret:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 1859
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4028
-		Tick: 60
-		Facings: -32
-		BlendMode: Additive
-	muzzle2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4092
-		Tick: 50
-		Facings: -32
-		BlendMode: Additive
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4281
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# combat_tank_fremen:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: d2k_ct_striped.shp
+# 		Facings: -32
+# 	turret:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 1859
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4028
+# 		Tick: 60
+# 		Facings: -32
+# 		BlendMode: Additive
+# 	muzzle2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4092
+# 		Tick: 50
+# 		Facings: -32
+# 		BlendMode: Additive
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4281
+# 		Offset: -30,-24
 
 d2k_autogun_tank_small:
 	idle:
@@ -8719,45 +8826,46 @@ d2k_ordos_stealth_tank:
 	icon:
 		Filename: ordos_tnkd_icon.png
 
-devastator:
-	Defaults:
-		AddExtension: false
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2083
-		Facings: -32
-	muzzle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4060
-		Tick: 80
-		Facings: -32
-		BlendMode: Additive
-	active:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3839
-		Length: 14
-		Tick: 130
-		BlendMode: Additive
-	active-2:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4152
-		Length: 12
-		Tick: 100
-		BlendMode: Additive
-	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4289
-		Offset: -30,-24
+# --- COMMENTED OUT (no matching actor) ---
+# devastator:
+# 	Defaults:
+# 		AddExtension: false
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 2083
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4060
+# 		Tick: 80
+# 		Facings: -32
+# 		BlendMode: Additive
+# 	active:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3839
+# 		Length: 14
+# 		Tick: 130
+# 		BlendMode: Additive
+# 	active-2:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4152
+# 		Length: 12
+# 		Tick: 100
+# 		BlendMode: Additive
+# 	icon:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 4289
+# 		Offset: -30,-24
 
 devastator.husk:
 	Defaults:
@@ -8945,10 +9053,11 @@ d2k_autogun_tank:
 	icon:
 		Filename: d2k_heavyautoguntankicon.png
 
-d2k_autogun_tank.husk:
-	idle:
-		Filename: d2k_autogun_tank.shp
-		Facings: -32
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_autogun_tank.husk:
+# 	idle:
+# 		Filename: d2k_autogun_tank.shp
+# 		Facings: -32
 
 deviator:
 	Defaults:
@@ -9040,13 +9149,14 @@ ornithopter:
 		Length: 1
 		Tick: 120
 
-oornithopter:
-	Inherits: ornithopter
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Tick: 120
+# --- COMMENTED OUT (no matching actor) ---
+# oornithopter:
+# 	Inherits: ornithopter
+# 	idle:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Tick: 120
 
 frigate:
 	Defaults:
@@ -9070,9 +9180,10 @@ sietch:
 	destroyed:
 		Filename: d2k_sietch_destroyed.shp
 
-deployed-icon:
-	deployed:
-		Filename: deployed-icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# deployed-icon:
+# 	deployed:
+# 		Filename: deployed-icon.shp
 
 d2k_chaos_effect:
 	idle:
@@ -9106,210 +9217,217 @@ d2k_siege_tank_higher_range:
 	icon:
 		Filename: d2k_siege_tank_higher_range.shp
 
-d2k_ornithopter_upgrade:
-	icon:
-		Filename: d2k_ornithopter_upgrade.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_ornithopter_upgrade:
+# 	icon:
+# 		Filename: d2k_ornithopter_upgrade.shp
 
-d2k_emperor_worm:
-	Defaults:
-		AddExtension: false
-	stand:
-		Filename: d2k_emperor_worm.shp
-		Facings: -64
-	stand2:
-		Filename: d2k_emperor_worm.shp
-		Facings: -64
-	run:
-		Filename: d2k_emperor_worm.shp
-		Facings: -64
-	attack:
-		Filename: d2k_emperor_worm.shp
-		Facings: -64
-	die:
-		Filename: scultralisk.shp
-		Start: 240
-		Length: 10
-	icon:
-		Filename: d2k_emperor_worm_icon.shp
-	sand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3818
-		Length: 20
-		Tick: 100
-	lightninga:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3844
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningb:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3849
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningc:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3854
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningd:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3859
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightninge:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3864
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningf:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3869
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	traila:
-		Filename: sandtrail.shp
-	trailb:
-		Filename: sandtrail.shp
-		Frames: 2, 6, 4, 5, 0, 1, 3, 7
-	trailc:
-		Filename: sandtrail.shp
-		Frames: 7, 4, 6, 5, 2, 0, 3, 1
-d2k_rider_worm:
-	Defaults:
-		AddExtension: false
-	stand:
-		Filename: d2k_rider_worm.shp
-		Facings: -32
-	stand2:
-		Filename: d2k_rider_worm.shp
-		Facings: -32
-	run:
-		Filename: d2k_rider_worm.shp
-		Facings: -32
-	attack:
-		Filename: d2k_rider_worm.shp
-		Facings: -32
-	die:
-		Filename: scultralisk.shp
-		Start: 240
-		Length: 10
-	icon:
-		Filename: d2k_rider_worm_icon.shp
-	sand:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3818
-		Length: 20
-		Tick: 100
-	lightninga:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3844
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningb:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3849
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningc:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3854
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningd:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3859
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightninge:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3864
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	lightningf:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3869
-		Length: 5
-		Tick: 80
-		BlendMode: Additive
-	traila:
-		Filename: sandtrail.shp
-	trailb:
-		Filename: sandtrail.shp
-		Frames: 2, 6, 4, 5, 0, 1, 3, 7
-	trailc:
-		Filename: sandtrail.shp
-		Frames: 7, 4, 6, 5, 2, 0, 3, 1
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_emperor_worm:
+# 	Defaults:
+# 		AddExtension: false
+# 	stand:
+# 		Filename: d2k_emperor_worm.shp
+# 		Facings: -64
+# 	stand2:
+# 		Filename: d2k_emperor_worm.shp
+# 		Facings: -64
+# 	run:
+# 		Filename: d2k_emperor_worm.shp
+# 		Facings: -64
+# 	attack:
+# 		Filename: d2k_emperor_worm.shp
+# 		Facings: -64
+# 	die:
+# 		Filename: scultralisk.shp
+# 		Start: 240
+# 		Length: 10
+# 	icon:
+# 		Filename: d2k_emperor_worm_icon.shp
+# 	sand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3818
+# 		Length: 20
+# 		Tick: 100
+# 	lightninga:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3844
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningb:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3849
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningc:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3854
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningd:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3859
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightninge:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3864
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningf:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3869
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	traila:
+# 		Filename: sandtrail.shp
+# 	trailb:
+# 		Filename: sandtrail.shp
+# 		Frames: 2, 6, 4, 5, 0, 1, 3, 7
+# 	trailc:
+# 		Filename: sandtrail.shp
+# 		Frames: 7, 4, 6, 5, 2, 0, 3, 1
+
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_rider_worm:
+# 	Defaults:
+# 		AddExtension: false
+# 	stand:
+# 		Filename: d2k_rider_worm.shp
+# 		Facings: -32
+# 	stand2:
+# 		Filename: d2k_rider_worm.shp
+# 		Facings: -32
+# 	run:
+# 		Filename: d2k_rider_worm.shp
+# 		Facings: -32
+# 	attack:
+# 		Filename: d2k_rider_worm.shp
+# 		Facings: -32
+# 	die:
+# 		Filename: scultralisk.shp
+# 		Start: 240
+# 		Length: 10
+# 	icon:
+# 		Filename: d2k_rider_worm_icon.shp
+# 	sand:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3818
+# 		Length: 20
+# 		Tick: 100
+# 	lightninga:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3844
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningb:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3849
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningc:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3854
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningd:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3859
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightninge:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3864
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	lightningf:
+# 		Filename: DATA.R16
+# 		Scale: 1.5
+# 		Remap: 54F94B
+# 		Start: 3869
+# 		Length: 5
+# 		Tick: 80
+# 		BlendMode: Additive
+# 	traila:
+# 		Filename: sandtrail.shp
+# 	trailb:
+# 		Filename: sandtrail.shp
+# 		Frames: 2, 6, 4, 5, 0, 1, 3, 7
+# 	trailc:
+# 		Filename: sandtrail.shp
+# 		Frames: 7, 4, 6, 5, 2, 0, 3, 1
+
 ##########################################
 #       VORDEL
 ##########################################
 
-vordel_projection_outpost:
-	Defaults:
-		Filename: vordel_projection_outpost.shp
-		AddExtension: false
-	idle:
-		Facings: -32
-	idle-deployed:
-		Start: 42
-	make:
-		Start: 32
-		Length: 10
-	unmake:
-		Frames: 41, 40, 39, 38, 37, 36, 35, 34, 33, 32
-		Length: 10
-	idle-overlay:
-		Start: 43
-		Length: 32
-		Tick: 120
-	icon:
-		Filename: vordel_projection_outpost_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# vordel_projection_outpost:
+# 	Defaults:
+# 		Filename: vordel_projection_outpost.shp
+# 		AddExtension: false
+# 	idle:
+# 		Facings: -32
+# 	idle-deployed:
+# 		Start: 42
+# 	make:
+# 		Start: 32
+# 		Length: 10
+# 	unmake:
+# 		Frames: 41, 40, 39, 38, 37, 36, 35, 34, 33, 32
+# 		Length: 10
+# 	idle-overlay:
+# 		Start: 43
+# 		Length: 32
+# 		Tick: 120
+# 	icon:
+# 		Filename: vordel_projection_outpost_icon.shp
 
-vordel_effect_1:
-	vordel_effect_1:
-		Filename: vordel_effect_1.png
-		AddExtension: false
-		Length: *
-		Tick: 125
-		ZOffset: -256
+# --- COMMENTED OUT (no matching actor) ---
+# vordel_effect_1:
+# 	vordel_effect_1:
+# 		Filename: vordel_effect_1.png
+# 		AddExtension: false
+# 		Length: *
+# 		Tick: 125
+# 		ZOffset: -256
 
 vordel_effect_2:
 	vordel_effect_2:
@@ -9367,15 +9485,16 @@ d2k_aircraft_eater:
 	icon:
 		Filename: d2k_aircraft_eater_icon.shp
 
-d2k_defender:
-	Inherits: vordel_effect
-	Defaults:
-		Filename: d2k_defender.shp
-		AddExtension: false
-	idle:
-		Facings: -32
-	icon:
-		Filename: d2k_defender_icon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# d2k_defender:
+# 	Inherits: vordel_effect
+# 	Defaults:
+# 		Filename: d2k_defender.shp
+# 		AddExtension: false
+# 	idle:
+# 		Facings: -32
+# 	icon:
+# 		Filename: d2k_defender_icon.shp
 
 d2k_ixbomber:
 	Defaults:

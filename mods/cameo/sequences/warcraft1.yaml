@@ -572,26 +572,28 @@ wc_h_peasant_engineer:
 		Start: 0
 		Filename: wc_h_engineericon.shp
 
-wc_h_peasant_full:
-	Defaults: wc_h_peasant
-	Inherits: wc_h_peasant
-	idle:
-		Facings: -8
-		AddExtension: False
-		Filename: wc_h_peasant_full.shp
-	die:
-		Start: 48
-		Length: 3
-		Tick: 80
-		AddExtension: False
-		Filename: wc_h_peasant_full.shp
-	die-crushed:
-		Start: 48
-		Length: 3
-		Tick: 80
-		AddExtension: False
-		Filename: wc_h_peasant_full.shp
-		
+# --- COMMENTED OUT (no matching actor) ---
+# wc_h_peasant_full:
+# 	Defaults: wc_h_peasant
+# 	Inherits: wc_h_peasant
+# 	idle:
+# 		Facings: -8
+# 		AddExtension: False
+# 		Filename: wc_h_peasant_full.shp
+# 	die:
+# 		Start: 48
+# 		Length: 3
+# 		Tick: 80
+# 		AddExtension: False
+# 		Filename: wc_h_peasant_full.shp
+# 	die-crushed:
+# 		Start: 48
+# 		Length: 3
+# 		Tick: 80
+# 		AddExtension: False
+# 		Filename: wc_h_peasant_full.shp
+# 		
+
 wc_h_footman:
 	Defaults:
 		Filename: wc_h_footman.shp
@@ -963,35 +965,37 @@ wc_o_peon_engineer:
 		Start: 0
 		Filename: wc_o_engineericon.shp
 
-wc_o_peon_full:
-	Inherits: wc_o_peon
-	Defaults: wc_o_peon
-	dock:
-		Start: 0
-		Facings: -8
-		AddExtension: False
-		Filename: wc_o_peon_full.shp
-	dock-loop:
-		Start: 0
-		Facings: -8
-		AddExtension: False
-		Filename: wc_o_peon_full.shp
-	idle:
-		Facings: -8
-		Filename: wc_o_peon_full.shp
-	die:
-		Start: 48
-		Length: 3
-		Tick: 80
-		AddExtension: False
-		Filename: wc_o_peon_full.shp
-	die-crushed:
-		Start: 48
-		Length: 3
-		Tick: 80
-		AddExtension: False
-		Filename: wc_o_peon_full.shp
-		
+# --- COMMENTED OUT (no matching actor) ---
+# wc_o_peon_full:
+# 	Inherits: wc_o_peon
+# 	Defaults: wc_o_peon
+# 	dock:
+# 		Start: 0
+# 		Facings: -8
+# 		AddExtension: False
+# 		Filename: wc_o_peon_full.shp
+# 	dock-loop:
+# 		Start: 0
+# 		Facings: -8
+# 		AddExtension: False
+# 		Filename: wc_o_peon_full.shp
+# 	idle:
+# 		Facings: -8
+# 		Filename: wc_o_peon_full.shp
+# 	die:
+# 		Start: 48
+# 		Length: 3
+# 		Tick: 80
+# 		AddExtension: False
+# 		Filename: wc_o_peon_full.shp
+# 	die-crushed:
+# 		Start: 48
+# 		Length: 3
+# 		Tick: 80
+# 		AddExtension: False
+# 		Filename: wc_o_peon_full.shp
+# 		
+
 wc_o_grunt:
 	Defaults:
 		Filename: wc_o_grunt.shp

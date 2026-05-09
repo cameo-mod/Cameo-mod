@@ -910,14 +910,15 @@ tkmharv:
 	icon:
 		Filename: tkmsupplytruckicon.png
 
-tkmharvfull:
-	Defaults:
-		Scale: 0.3
-		Filename: tkmsupplytruckfull.png
-	idle:
-		Facings: -32
-	icon:
-		Filename: chinasupplytruck.png
+# --- COMMENTED OUT (no matching actor) ---
+# tkmharvfull:
+# 	Defaults:
+# 		Scale: 0.3
+# 		Filename: tkmsupplytruckfull.png
+# 	idle:
+# 		Facings: -32
+# 	icon:
+# 		Filename: chinasupplytruck.png
 
 tkmt72:
 	idle:
@@ -1205,14 +1206,15 @@ tkmbigshiee:
 		Filename: tkmbigshieeicon.png
 		AddExtension: False
 
-tkmdiglarge:
-	idle:
-		Scale: 4.0
-		Filename: tsdig.shp
-		Length: *
-		Tick: 74
-		ZOffset: -1200
-		Offset: 0, 0, 256
+# --- COMMENTED OUT (no matching actor) ---
+# tkmdiglarge:
+# 	idle:
+# 		Scale: 4.0
+# 		Filename: tsdig.shp
+# 		Length: *
+# 		Tick: 74
+# 		ZOffset: -1200
+# 		Offset: 0, 0, 256
 
 tkmdronepodtruck:
 	Defaults:

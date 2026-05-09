@@ -2407,13 +2407,15 @@ bhreddragonemp:
 		InterpolatedFacings: 64
 		ZOffset: 1023
 
-tsblackhandlaser2:
-	Inherits: ^BasicInfantryTibsun
-	Inherits@attack: ^BasicInfantryAttackTibsun
-	Defaults:
-		Filename: tsblackhandlaser.shp
-	icon:
-		Filename: tsblackhandlasericon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# tsblackhandlaser2:
+# 	Inherits: ^BasicInfantryTibsun
+# 	Inherits@attack: ^BasicInfantryAttackTibsun
+# 	Defaults:
+# 		Filename: tsblackhandlaser.shp
+# 	icon:
+# 		Filename: tsblackhandlasericon.shp
+
 tsblackhandflamer:
 	Inherits: ^BasicInfantryTibsun
 	Inherits: ^InfantryOverlays
@@ -2423,13 +2425,14 @@ tsblackhandflamer:
 		Scale: 1.333
 	icon:
 		Filename: tsblackhandflamericon.shp
-tsstealthsoldier2:
-	Inherits: ^BasicInfantryTibsun
-	Inherits@attack: ^BasicInfantryAttackTibsun
-	Defaults:
-		Filename: tsstealthsoldier.shp
-	icon:
-		Filename: tsstealthsoldiericon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# tsstealthsoldier2:
+# 	Inherits: ^BasicInfantryTibsun
+# 	Inherits@attack: ^BasicInfantryAttackTibsun
+# 	Defaults:
+# 		Filename: tsstealthsoldier.shp
+# 	icon:
+# 		Filename: tsstealthsoldiericon.shp
 
 stealthtech:
 	icon:
@@ -2917,65 +2920,67 @@ ant:
 	icon:
 		Filename: anticon.shp
 
-fireant:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: ant2.shp
-		Scale: 2
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Length: 8
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-	bite:
-		Start: 72
-		Length: 4
-		Facings: 8
-	die:
-		Start: 104
-		Length: 8
-		Tick: 300
-	die-crushed:
-		Start: 104
-		Length: 8
-		Tick: 400
-		ZOffset: -511
-	icon:
-		Filename: anticon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# fireant:
+# 	Inherits: ^InfantryOverlays
+# 	Defaults:
+# 		Filename: ant2.shp
+# 		Scale: 2
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Length: 8
+# 	run:
+# 		Start: 8
+# 		Length: 8
+# 		Facings: 8
+# 	bite:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 	die:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 300
+# 	die-crushed:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 400
+# 		ZOffset: -511
+# 	icon:
+# 		Filename: anticon.shp
 
-scoutant:
-	Inherits: ^InfantryOverlays
-	Defaults:
-		Filename: ant3.shp
-		Scale: 2
-	stand:
-		Facings: 8
-	stand2:
-		Start: 8
-		Length: 8
-	run:
-		Start: 8
-		Length: 8
-		Facings: 8
-	bite:
-		Start: 72
-		Length: 4
-		Facings: 8
-	die:
-		Start: 104
-		Length: 8
-		Tick: 300
-	die-crushed:
-		Start: 104
-		Length: 8
-		Tick: 400
-		ZOffset: -511
-	icon:
-		Filename: anticon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# scoutant:
+# 	Inherits: ^InfantryOverlays
+# 	Defaults:
+# 		Filename: ant3.shp
+# 		Scale: 2
+# 	stand:
+# 		Facings: 8
+# 	stand2:
+# 		Start: 8
+# 		Length: 8
+# 	run:
+# 		Start: 8
+# 		Length: 8
+# 		Facings: 8
+# 	bite:
+# 		Start: 72
+# 		Length: 4
+# 		Facings: 8
+# 	die:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 300
+# 	die-crushed:
+# 		Start: 104
+# 		Length: 8
+# 		Tick: 400
+# 		ZOffset: -511
+# 	icon:
+# 		Filename: anticon.shp
 
 spitter:
 	Inherits: ^InfantryOverlays
@@ -3196,51 +3201,59 @@ gdiexosuit:
 		AddExtension: False
 		Offset: 0,0
 
-modegg:
-	Defaults:
-		Filename: modegg.shp
-	stand:
-		Facings: 8
-	idle:
-		Facings: 8
-	run:
-		Start: 8
-		Length: 4
-		Facings: 8
-	icon:
-		Filename: modeggicon.shp
-modegg2:
-	Defaults:
-		Filename: modegg2.shp
-	idle:
-		Facings: -32
-	move:
-		Facings: -32
-	icon:
-		Filename: modegg2icon.shp
-newarty:
-	Defaults:
-		Filename: newarty.shp
-	idle:
-		Facings: -32
-	turret:
-		Filename: newartytur.shp
-		Facings: -32
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: newartyicon.shp
-hdtruck:
-	Defaults:
-		Filename: hdtruck.shp
-	idle:
-		Facings: 32
-		InterpolatedFacings: 64
-		ShadowStart: 32
-		Scale: 0.4
-	icon:
-		Filename: truckicon.shp
+# --- COMMENTED OUT (no matching actor) ---
+# modegg:
+# 	Defaults:
+# 		Filename: modegg.shp
+# 	stand:
+# 		Facings: 8
+# 	idle:
+# 		Facings: 8
+# 	run:
+# 		Start: 8
+# 		Length: 4
+# 		Facings: 8
+# 	icon:
+# 		Filename: modeggicon.shp
+
+# --- COMMENTED OUT (no matching actor) ---
+# modegg2:
+# 	Defaults:
+# 		Filename: modegg2.shp
+# 	idle:
+# 		Facings: -32
+# 	move:
+# 		Facings: -32
+# 	icon:
+# 		Filename: modegg2icon.shp
+
+# --- COMMENTED OUT (no matching actor) ---
+# newarty:
+# 	Defaults:
+# 		Filename: newarty.shp
+# 	idle:
+# 		Facings: -32
+# 	turret:
+# 		Filename: newartytur.shp
+# 		Facings: -32
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: *
+# 	icon:
+# 		Filename: newartyicon.shp
+
+# --- COMMENTED OUT (no matching actor) ---
+# hdtruck:
+# 	Defaults:
+# 		Filename: hdtruck.shp
+# 	idle:
+# 		Facings: 32
+# 		InterpolatedFacings: 64
+# 		ShadowStart: 32
+# 		Scale: 0.4
+# 	icon:
+# 		Filename: truckicon.shp
+
 newhumvee:
 	Defaults:
 		Filename: newhumvee.shp
@@ -3377,80 +3390,92 @@ gdiofficer:
 		Filename: gdiofficericon.shp
 		AddExtension: False
 
-modntech1:
-	Inherits: c1
-	Defaults: tech1
-		Filename: tech1.shp
-	icon:
-		Filename: modntech1icon.shp
-		AddExtension: False
+# --- COMMENTED OUT (no matching actor) ---
+# modntech1:
+# 	Inherits: c1
+# 	Defaults: tech1
+# 		Filename: tech1.shp
+# 	icon:
+# 		Filename: modntech1icon.shp
+# 		AddExtension: False
 
-deadsixrmbo:
-	Inherits: rmbo
-	Defaults: rmbo
-		Filename: rmbo.shp
-	icon:
-		Filename: deadsixicon.shp
-		AddExtension: False
-	dot:
-		Filename: invisibleitem.shp
-	idle:
-		Facings: 8
-moddeadeye:
-	Inherits: rmbo
-	Defaults: moddeadeye
-		Filename: moddeadeye.shp
-	icon:
-		Filename: deadsixicon.shp
-		AddExtension: False
-	dot:
-		Filename: invisibleitem.shp
-	idle:
-		Facings: 8
-modgunner:
-	Inherits: rmbo
-	Defaults: modgunner
-		Filename: modgunner.shp
-	icon:
-		Filename: deadsixicon.shp
-		AddExtension: False
-	dot:
-		Filename: invisibleitem.shp
-	idle:
-		Facings: 8
-modhotwire:
-	Inherits: rmbo
-	Defaults: modhotwire
-		Filename: modhotwire.shp
-	icon:
-		Filename: deadsixicon.shp
-		AddExtension: False
-	dot:
-		Filename: invisibleitem.shp
-	idle:
-		Facings: 8
-modrpatch:
-	Inherits: rmbo
-	Defaults: modrpatch
-		Filename: modrpatch.shp
-	icon:
-		Filename: deadsixicon.shp
-		AddExtension: False
-	dot:
-		Filename: invisibleitem.shp
-	idle:
-		Facings: 8
-modsakura:
-	Inherits: rmbo
-	Defaults: modsakura
-		Filename: modsakura.shp
-	icon:
-		Filename: deadsixicon.shp
-		AddExtension: False
-	dot:
-		Filename: invisibleitem.shp
-	idle:
-		Facings: 8
+# --- COMMENTED OUT (no matching actor) ---
+# deadsixrmbo:
+# 	Inherits: rmbo
+# 	Defaults: rmbo
+# 		Filename: rmbo.shp
+# 	icon:
+# 		Filename: deadsixicon.shp
+# 		AddExtension: False
+# 	dot:
+# 		Filename: invisibleitem.shp
+# 	idle:
+# 		Facings: 8
+
+# --- COMMENTED OUT (no matching actor) ---
+# moddeadeye:
+# 	Inherits: rmbo
+# 	Defaults: moddeadeye
+# 		Filename: moddeadeye.shp
+# 	icon:
+# 		Filename: deadsixicon.shp
+# 		AddExtension: False
+# 	dot:
+# 		Filename: invisibleitem.shp
+# 	idle:
+# 		Facings: 8
+
+# --- COMMENTED OUT (no matching actor) ---
+# modgunner:
+# 	Inherits: rmbo
+# 	Defaults: modgunner
+# 		Filename: modgunner.shp
+# 	icon:
+# 		Filename: deadsixicon.shp
+# 		AddExtension: False
+# 	dot:
+# 		Filename: invisibleitem.shp
+# 	idle:
+# 		Facings: 8
+
+# --- COMMENTED OUT (no matching actor) ---
+# modhotwire:
+# 	Inherits: rmbo
+# 	Defaults: modhotwire
+# 		Filename: modhotwire.shp
+# 	icon:
+# 		Filename: deadsixicon.shp
+# 		AddExtension: False
+# 	dot:
+# 		Filename: invisibleitem.shp
+# 	idle:
+# 		Facings: 8
+
+# --- COMMENTED OUT (no matching actor) ---
+# modrpatch:
+# 	Inherits: rmbo
+# 	Defaults: modrpatch
+# 		Filename: modrpatch.shp
+# 	icon:
+# 		Filename: deadsixicon.shp
+# 		AddExtension: False
+# 	dot:
+# 		Filename: invisibleitem.shp
+# 	idle:
+# 		Facings: 8
+
+# --- COMMENTED OUT (no matching actor) ---
+# modsakura:
+# 	Inherits: rmbo
+# 	Defaults: modsakura
+# 		Filename: modsakura.shp
+# 	icon:
+# 		Filename: deadsixicon.shp
+# 		AddExtension: False
+# 	dot:
+# 		Filename: invisibleitem.shp
+# 	idle:
+# 		Facings: 8
 
 explosion:
 	Defaults:
@@ -4397,53 +4422,54 @@ gdirig:
 	icon:
 		Filename: gdirigicon.png
 
-gdirigtower:
-	Defaults:
-		Filename: GDIRigTower.png
-		# Scale: 1.25
-		# Offset: 0,8
-	idle:
-		Facings: 64
-		# Start: 71
-		# Length: 4
-	damaged-idle:
-		Facings: 64
-		# Start: 71
-		# Length: 4
-	dead:
-		Filename: GDIRigMobile.png
-		Start: 70
-		Tick: 800
-	make:
-		Filename: GDIRigMobile.png
-		Start: 64
-		Length: 11
-		Tick: 110
-	# turret:
-	# 	Filename: GDIRigPhalanx.png
-	# 	Facings: 64
-	# 	Scale: 1.25
-	# 	Offset: 0,32
-	# railgun:
-	# 	Filename: GDIRigRailgun.png
-	# 	Facings: 64
-	# 	Scale: 1.25
-	# 	Offset: -16,32
-	# missilepod:
-	# 	Filename: GDIRigMissilePod.png
-	# 	Facings: 64
-	# 	Scale: 1.25
-	# 	Offset: 16,32
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	muzzle:
-		Filename: gunfire2.shp
-		Length: *
-	icon:
-		Filename: atwricnh.shp
-		AddExtension: False
-		Offset: 0,0
+# --- COMMENTED OUT (no matching actor) ---
+# gdirigtower:
+# 	Defaults:
+# 		Filename: GDIRigTower.png
+# 		# Scale: 1.25
+# 		# Offset: 0,8
+# 	idle:
+# 		Facings: 64
+# 		# Start: 71
+# 		# Length: 4
+# 	damaged-idle:
+# 		Facings: 64
+# 		# Start: 71
+# 		# Length: 4
+# 	dead:
+# 		Filename: GDIRigMobile.png
+# 		Start: 70
+# 		Tick: 800
+# 	make:
+# 		Filename: GDIRigMobile.png
+# 		Start: 64
+# 		Length: 11
+# 		Tick: 110
+# 	# turret:
+# 	# 	Filename: GDIRigPhalanx.png
+# 	# 	Facings: 64
+# 	# 	Scale: 1.25
+# 	# 	Offset: 0,32
+# 	# railgun:
+# 	# 	Filename: GDIRigRailgun.png
+# 	# 	Facings: 64
+# 	# 	Scale: 1.25
+# 	# 	Offset: -16,32
+# 	# missilepod:
+# 	# 	Filename: GDIRigMissilePod.png
+# 	# 	Facings: 64
+# 	# 	Scale: 1.25
+# 	# 	Offset: 16,32
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: *
+# 	muzzle:
+# 		Filename: gunfire2.shp
+# 		Length: *
+# 	icon:
+# 		Filename: atwricnh.shp
+# 		AddExtension: False
+# 		Offset: 0,0
 
 gdirigdrone:
 	Defaults:
