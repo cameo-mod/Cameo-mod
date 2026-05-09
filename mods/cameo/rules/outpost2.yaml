@@ -246,6 +246,7 @@ op2_commonore_beacon_3bar:
 		VoiceSet: factoryStructure
 	RenderSprites:
 		Image: rafact
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_tokamak:
@@ -256,9 +257,9 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 750
 	Building:
-		Footprint: xX xx
-		Dimensions: 2,2
-		# LocalCenterOffset: 0,-512,0
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 225000
 	RevealsShroud:
@@ -267,7 +268,7 @@ op2_commonore_beacon_3bar:
 		Amount: 175
 	Voiced:
 		VoiceSet: tokamak
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_smelter_common:
@@ -289,6 +290,7 @@ op2_commonore_beacon_3bar:
 		DragLength: 12
 	Voiced:
 		VoiceSet: smelterCommon
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_agridome:
@@ -299,8 +301,8 @@ op2_commonore_beacon_3bar:
 		Cost: 300
 	Building:
 		BuildLimit: 1
-		Footprint: xxx xxx ===
-		Dimensions: 3,3
+		Footprint: xx xx ==
+		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 120000
@@ -310,7 +312,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: agridome
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_residence:
@@ -334,7 +336,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: residence
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_basic_lab:
@@ -356,21 +358,22 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: basic_lab
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_factory_vehicle:
 	Inherits: ^BaseBuilding
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^3x3Shape
 	Inherits@weap: ^IsWeaponFactory
 	Inherits@STATUS: ^OP2Building
-	Selectable:
-		Bounds: 4096,3072
+	# Selectable:
+	# 	Bounds: 4096,3072
 	Valued:
 		Cost: 2000
 	Building:
-		Footprint: xxx+ xxx+ xxx+ ====
-		Dimensions: 4,4
-		LocalCenterOffset: 0,-512,0
+		Footprint: xxx= xxx= ====
+		Dimensions: 4,3
+		LocalCenterOffset: -512,-512,0
 	Health:
 		HP: 150000
 	RevealsShroud:
@@ -380,12 +383,14 @@ op2_commonore_beacon_3bar:
 	Voiced:
 		VoiceSet: factoryVehicle
 	RallyPoint:
+		Path: 0,3
 	Exit@1:
 		SpawnOffset: 1500,85,0
-		ExitCell: 3,4
-	Exit@2:
-		SpawnOffset: 1500,298,0
-		ExitCell: 4,4
+		ExitCell: 3,1
+	# Exit@2:
+	# 	SpawnOffset: 1500,298,0
+	# 	ExitCell: 4,1
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_garage:
@@ -413,7 +418,6 @@ op2_commonore_beacon_3bar:
 		Type: Wood
 	RevealsShroud:
 		Range: 3c768
-	#-WithBuildingBib:
 	Selectable:
 		Bounds: 2048,1024,0,3
 		# DecorationBounds: 128,96
@@ -453,7 +457,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: nursery
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_university:
@@ -475,7 +479,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: university
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_lab_standard:
@@ -486,8 +490,8 @@ op2_commonore_beacon_3bar:
 		Cost: 500
 	Building:
 		BuildLimit: 1
-		Footprint: xxx xxx ===
-		Dimensions: 3,3
+		Footprint: xx xx ==
+		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 120000
@@ -497,7 +501,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: standard_lab
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_dirt:
@@ -520,7 +524,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: dirt
-	#WithBuildingBib:
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 	GrantExternalConditionPower@forceshield:
 		OrderName: ForceShield
@@ -571,6 +575,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: rcc
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_gorf:
@@ -591,7 +596,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: gorf
-	#WithBuildingBib:
+	WithBuildingBib:
 	ResourcePurifier:
 		Modifier: 25
 	ProvidesPrerequisite@buildingname:
@@ -602,16 +607,12 @@ op2_commonore_beacon_3bar:
 	Inherits@STATUS: ^OP2Building
 	Selectable:
 		Bounds: 3072,3072
-	HitShape:
-		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
 	Valued:
 		Cost: 1800
 	Building:
 		BuildLimit: 1
-		Footprint: xxx xxx xxx xxx ===
-		Dimensions: 3,5
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 140000
@@ -621,7 +622,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: advanced_lab
-	#WithBuildingBib:
+	WithBuildingBib:
 	FireWarheadsOnDeath@1:
 		Weapon: ReactorNuke
 		RequiresCondition: !chronobeamed
@@ -629,21 +630,21 @@ op2_commonore_beacon_3bar:
 
 ^op2base_spaceport:
 	Inherits: ^BaseBuilding
-	Inherits@shape: ^2x2Shape
+	Inherits@shape: ^4x4Shape
 	Inherits@STATUS: ^OP2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Selectable:
-		Bounds: 4096,4096
+		Bounds: 3072,3072
 	HitShape:
 		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
+			TopLeft: -2048,-1536
+			BottomRight: 2048,1536
 	Valued:
 		Cost: 3000
 	Building:
 		BuildLimit: 1
-		Footprint: xxxxx xxxxx xxxxx xxxxx =====
-		Dimensions: 5,5
+		Footprint: xxxx xxxx xxxx ====
+		Dimensions: 4,4
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 200000
@@ -682,6 +683,7 @@ op2_commonore_beacon_3bar:
 	#	RequiresCondition: !build-incomplete
 	#WithNukeLaunchOverlay:
 	#	RequiresCondition: !build-incomplete
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_solararray:
@@ -695,8 +697,8 @@ op2_commonore_beacon_3bar:
 	Valued:
 		Cost: 1000
 	Building:
-		Footprint: xxx xxx xxx ===
-		Dimensions: 3,4
+		Footprint: xx xx ==
+		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 100000
@@ -706,7 +708,7 @@ op2_commonore_beacon_3bar:
 		Amount: 300
 	Voiced:
 		VoiceSet: tokamak
-	#WithBuildingBib:
+	WithBuildingBib:
 	ScalePowerWithHealth:
 	ProvidesPrerequisite@buildingname:
 
@@ -716,14 +718,14 @@ op2_commonore_beacon_3bar:
 	Inherits@STATUS: ^OP2Building
 	HitShape:
 		Type: Rectangle
-			TopLeft: -2560,-2048
-			BottomRight: 2560,2048
+			TopLeft: -2048,-1536
+			BottomRight: 2048,1536
 	Valued:
 		Cost: 2500
 	Building:
 		BuildLimit: 1
-		Footprint: xxxx xxxx xxxx xxxx ====
-		Dimensions: 4,5
+		Footprint: xxx xxx xxx ===
+		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 140000
@@ -733,6 +735,7 @@ op2_commonore_beacon_3bar:
 		Amount: -20
 	Voiced:
 		VoiceSet: smelterRare
+	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
 
 ^op2base_light_tower:
@@ -756,7 +759,6 @@ op2_commonore_beacon_3bar:
 	DetectCloaked:
 		Range: 12c0
 		RequiresCondition: !lowpower
-	#WithBuildingBib:
 	WithSpriteBody:
 	#WithResourceLevelSpriteBody:
 	#	Sequence: stages
@@ -794,7 +796,7 @@ op2_commonore_beacon_3bar:
 		Amount: -50
 	Voiced:
 		VoiceSet: mine_common
-	#WithBuildingBib:
+	WithBuildingBib:
 	SeedsResource:
 		Interval: 55	#110
 		ResourceType: OP2Ore
@@ -817,7 +819,6 @@ op2_commonore_beacon_3bar:
 		HP: 25000
 	RevealsShroud:
 		Range: 4c0
-	#WithBuildingBib:
 	WithSpriteBody:
 	#WithResourceLevelSpriteBody:
 	#	Sequence: stages
@@ -870,9 +871,9 @@ EDEN_TOKAMAK:
 		Prerequisites: ~eden_factory_structure
 		Description: actor-tokamak.description
 	Building:
-		Footprint: xX xx
-		Dimensions: 2,2
-		# LocalCenterOffset: 0,-512,0
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
 
 EDEN_SMELTER_COMMON:
 	Inherits: ^op2base_smelter_common
@@ -1059,7 +1060,7 @@ EDEN_FACTORY_CONSUMER:
 		Amount: -20
 	Voiced:
 		VoiceSet: factoryConsumer
-	#WithBuildingBib:
+	WithBuildingBib:
 	RallyPoint:
 	Exit@1:
 		SpawnOffset: -426,85,0
@@ -2266,7 +2267,7 @@ PLYMOUTH_FACTORY_ARACHNID:
 		Amount: -20
 	Voiced:
 		VoiceSet: factoryArachnid
-	#WithBuildingBib:
+	WithBuildingBib:
 	RallyPoint:
 	Exit@1:
 		SpawnOffset: -426,85,0

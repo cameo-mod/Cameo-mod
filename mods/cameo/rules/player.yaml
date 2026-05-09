@@ -17,7 +17,7 @@ Player:
 	Inherits: ^BasePlayer
 	PlaceBuilding:
 		NewOptionsNotification: NewOptions
-		NewOptionsNotificationDelay: 25
+		NewOptionsNotificationDelay: 10
 		NewOptionsTextNotification: New construction option(s) are now available.
 		CannotPlaceNotification: BuildingCannotPlaceAudio
 		ToggleVariantKey: V

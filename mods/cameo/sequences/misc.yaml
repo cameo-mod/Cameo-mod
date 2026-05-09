@@ -19,6 +19,7 @@
 			WC2SUNSET: bib1.tem
 			WC2SUMMER: bib1.tem
 			OUTPOST2: bib1.tem
+			INTERIOR: bib3.tem
 		Length: *
 
 ^WithBuildingBib2:
@@ -42,6 +43,7 @@
 			WC2SUNSET: bib2.tem
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
+			INTERIOR: bib3.tem
 		Length: *
 
 ^WithBuildingBib3:
@@ -65,6 +67,7 @@
 			WC2SUNSET: bib3.tem
 			WC2SUMMER: bib3.tem
 			OUTPOST2: bib3.tem
+			INTERIOR: bib3.tem
 		Length: *
 
 resources:
@@ -978,21 +981,25 @@ resources:
 		UseTilesetExtension: false
 		Scale: 0.7
 	spicea:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 748, 300, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 300
 		Length: *
 		Offset: -16,-16
 	spiceb:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 749, 301, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 301
 		Length: *
 		Offset: -16,-16
 	spicec:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 793, 320, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 320
 		Length: *
 		Offset: -16,-16
 	spiced:
+		Scale: 1.5 # Spice
 		Filename: BLOXBASE.R8
 		Frames: 748, 321, 750, 751, 752, 753, 754, 755, 756, 757, 760, 761, 762, 763, 764, 765, 766, 767, 768, 769, 770, 771, 772, 773, 774, 775, 776, 777, 778, 779, 780, 781, 782, 783, 784, 785, 786, 787, 788, 789, 790, 791, 792, 793, 794, 795, 796, 797, 798, 799, 321
 		Length: *
@@ -1168,11 +1175,13 @@ resources:
 		Filename: swfarm01.shp
 		UseTilesetExtension: false
 	op2minerals:
+		Scale: 1.5
 		Filename: op2minerals.shp
 		Frames: 0, 1, 2, 3
 		Length: 4
 		UseTilesetExtension: false
 	op2minerals2:
+		Scale: 1.5
 		Filename: op2minerals.shp
 		Frames: 4, 5, 6, 7
 		Length: 4
