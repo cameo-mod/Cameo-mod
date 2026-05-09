@@ -181,8 +181,11 @@ namespace OpenRA.Mods.Cameo.Traits
 					if (map.Ramp[cell] != 0)
 						continue;
 
-					var terrainType = map.GetTerrainInfo(cell).Type;
-					if (!bi.TerrainTypes.Contains(terrainType))
+					// Use the raw tile terrain type, ignoring CustomTerrain (set by resources like ore/gems).
+					// Resources are temporary and should not block creep; cliffs/water are permanent and should.
+					var tileInfo = map.Rules.TerrainInfo.GetTerrainInfo(map.Tiles[cell.ToMPos(map)]);
+					var rawTerrainType = map.Rules.TerrainInfo.TerrainTypes[tileInfo.TerrainType].Type;
+					if (!bi.TerrainTypes.Contains(rawTerrainType))
 						continue;
 
 					foreach (var ft in footprintTiles)
