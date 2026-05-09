@@ -2198,7 +2198,8 @@ zergsoilkiller4:
 	#Inherits@zergai: ^ZergAIProductionBoost
 	RequiresBuildableArea:
 		AreaTypes: creep
-		Adjacent: 3
+		Adjacent: 4
+		IsCircular: true
 	Building:
 		# TerrainTypes: ZergSoil ##########
 	# FireWarheadsOnDeath@remover:
@@ -2311,25 +2312,28 @@ SCHATCHERY:
 	LarvaConsumingProduction:
 		Produces: SCZergInfantry
 		EggCondition: sc_zerg_egg
-	# Exit@0:
-	# 	SpawnOffset: -1024,1024,0 #-1323,1280,0
-	# 	ExitCell: 0,2
-	# 	Facing: 540
+	Exit@0:
+		SpawnOffset: 0,0,0
+		ExitCell: 0,2
+		Facing: 540
 	Exit@1:
-		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		SpawnOffset: 0,0,0 #-1323,1280,0
 		ExitCell: 1,2
 		Facing: 540
-	# Exit@2:
-	# 	SpawnOffset: -1024,1024,0 #-1323,1280,0
-	# 	ExitCell: 2,2
-	# 	Facing: 540
+	Exit@2:
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		Facing: 540
 	ProvidesRadar:
 		RequiresCondition: !jammed
 	ExternalCondition@JAMMED:
 		Condition: jammed
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi, hatchery, creep
-	WithMakeAnimation:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
+		BodyNames: body, lair, hive
 	-WithDeathAnimation:
 	Refinery:
 	DockHost:
@@ -2357,8 +2361,6 @@ SCHATCHERY:
 		Actor: SCBROODLING
 	SpawnActorOnDeath@death5:
 		Actor: SCBROODLING
-	Refinery:
-		DockOffset: 0,2
 	StoresResources:
 		Capacity: 1000
 	FreeActor@soil:
@@ -2366,7 +2368,7 @@ SCHATCHERY:
 		SpawnOffset: -3,-3
 	DroneSpawnerMaster:
 		Actors: sc_zerg_larva, sc_zerg_larva, sc_zerg_larva
-		SpawnOffset: 0,0,0, 1024,0,0, 2048,0,0
+		SpawnOffset: -1024,1024,0, 0,1024,0, 1024,1024,0
 		RespawnTicks: 125
 		InitialActorCount: 0
 	SpawnActorOnDeath@zergsoilkilled:
@@ -2381,6 +2383,8 @@ SCHATCHERY:
 		FullSequence: pip-yellow
 	Transforms:
 		IntoActor: sczmcv
+	WithCreepOverlay:
+		Adjacent: 5
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -2433,7 +2437,7 @@ sc_zerg_larva:
 	Armor:
 		Type: Light
 	RevealsShroud:
-		Range: 4c0
+		Range: 1c0
 	GrantConditionAfterDelay:
 		Condition: disable_movement
 		ShowSelectionBar: false
@@ -2453,6 +2457,7 @@ sc_zerg_larva:
 		UseDeathTypeSuffix: False
 	Voiced:
 		VoiceSet: SCBroodlingVoice
+	-DeathSounds@NORMAL:
 	-SpawnActorOnDeath@SCSWARMLING:
 	-WithDeathAnimation:
 	-DamagedByTerrain:
@@ -2463,7 +2468,7 @@ sc_zerg_larva:
 	-MapEditorData:
 	HitShape:
 		Type: Circle
-			Radius: 512
+			Radius: 256
 	RejectsOrders:
 	RejectsMoveToAttack:
 	-Selectable:
@@ -2515,7 +2520,8 @@ SCCREEPCOLONY:
 		AreaTypes: building, creep
 	RequiresBuildableArea:
 		AreaTypes: creep
-		Adjacent: 3
+		Adjacent: 4
+		IsCircular: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~schatchery
@@ -2572,6 +2578,9 @@ SCCREEPCOLONY:
 		Name: spore
 		RequiresCondition: spore && !sunken
 	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
+		BodyNames: body, sunken, spore
 	AttackOmni:
 		Armaments: primary, spore
 		PauseOnCondition: disabled
@@ -2616,6 +2625,8 @@ SCCREEPCOLONY:
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
+	WithCreepOverlay:
+		Adjacent: 4
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -2719,6 +2730,9 @@ SCEXTRACTOR:
 	DockHost:
 		DockAngle: 448
 		DockOffset: -1c0, 1c0, 0
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2772,6 +2786,9 @@ sczvespenegascollector:
 SCSPAWNINGPOOL:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	Tooltip:
 		Name: Spawning Pool
 	Valued:
@@ -2847,6 +2864,9 @@ SCEVOLUTIONCHAMBER:
 		Produces: Addons
 	ProductionBar@Addons:
 		ProductionType: Addons
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2895,6 +2915,9 @@ SCHYDRALISKDEN:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2942,6 +2965,9 @@ SCQUEENSNEST:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -3000,7 +3026,9 @@ SCSPIRE:
 	GivesBuildableArea:
 		AreaTypes: building, spire
 	-WithDeathAnimation:
-	WithMakeAnimation:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 		BodyNames: body, greaterspire
 	WithSpriteBody:
 		RequiresCondition: !scgreaterspire
@@ -3103,6 +3131,9 @@ SCULTRALISKCAVERN:
 	#	DisallowPaused: true
 	#ProductionBar@Upgrades:
 	#	ProductionType: UltraCave
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -3152,6 +3183,9 @@ SCDEFILERMOUND:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@zergsoilkilled:
 		Actor: zergsoilkiller
@@ -3237,6 +3271,9 @@ SCOVERMIND:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 10000
 	-WithDeathAnimation:
 	-ToggleConditionOnOrder:
 	SpawnActorOnDeath@death1:
