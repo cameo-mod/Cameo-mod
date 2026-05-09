@@ -4,6 +4,8 @@
  */
 #endregion
 
+using System.Linq;
+using OpenRA;
 using OpenRA.Graphics;
 using OpenRA.Mods.CA.Widgets;
 using OpenRA.Mods.Cameo.Traits;
@@ -26,6 +28,50 @@ namespace OpenRA.Mods.Cameo.Widgets
 		{
 			base.Initialize(args);
 			quotaFont = Game.Renderer.Fonts[OverlayFont];
+		}
+
+		public override bool HandleMouseInput(MouseInput mi)
+		{
+			var quotaManager = World.WorldActor.TraitOrDefault<QuotaProductionManager>();
+			if (quotaManager == null || !quotaManager.Enabled || CurrentQueue == null)
+				return base.HandleMouseInput(mi);
+
+			if (mi.Event == MouseInputEvent.Move || mi.Event == MouseInputEvent.Scroll)
+				return base.HandleMouseInput(mi);
+
+			var icon = icons.Where(i => i.Key.Contains(mi.Location))
+				.Select(i => i.Value).FirstOrDefault();
+
+			if (icon == null)
+				return false;
+
+			if (mi.Event != MouseInputEvent.Down)
+				return true;
+
+			var buildable = CurrentQueue.BuildableItems().FirstOrDefault<ActorInfo>(a => a.Name == icon.Name);
+			if (buildable == null)
+			{
+				Game.Sound.PlayNotification(World.Map.Rules, World.LocalPlayer, "Sounds", ClickDisabledSound, null);
+				return true;
+			}
+
+			var count = mi.Modifiers.HasModifier(Modifiers.Shift) ? 5 : 1;
+
+			if (mi.Button == MouseButton.Left)
+			{
+				quotaManager.AdjustQuota(CurrentQueue.Actor.ActorID, icon.Name, count);
+				Game.Sound.PlayNotification(World.Map.Rules, World.LocalPlayer, "Sounds", ClickSound, null);
+				return true;
+			}
+
+			if (mi.Button == MouseButton.Right)
+			{
+				quotaManager.AdjustQuota(CurrentQueue.Actor.ActorID, icon.Name, -count);
+				Game.Sound.PlayNotification(World.Map.Rules, World.LocalPlayer, "Sounds", ClickSound, null);
+				return true;
+			}
+
+			return base.HandleMouseInput(mi);
 		}
 
 		public override void Draw()

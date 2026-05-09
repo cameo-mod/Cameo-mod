@@ -276,6 +276,16 @@ namespace OpenRA.Mods.Cameo.Traits
 			credits[type] = Math.Max(0, credits.GetValueOrDefault(type, 0) - amount);
 		}
 
+		public void AdjustQuota(uint buildingId, string unitType, int delta)
+		{
+			var quotas = GetOrAdd(buildingQuotas, buildingId);
+			var newVal = Math.Max(0, quotas.GetValueOrDefault(unitType, 0) + delta);
+			if (newVal == 0)
+				quotas.Remove(unitType);
+			else
+				quotas[unitType] = newVal;
+		}
+
 		public int GetQuota(uint buildingId, string unitType)
 		{
 			if (!buildingQuotas.TryGetValue(buildingId, out var quotas)) return 0;
