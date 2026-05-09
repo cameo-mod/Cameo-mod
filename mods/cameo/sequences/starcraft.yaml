@@ -566,6 +566,23 @@ schatchery:
 	make:
 		Filename: zergbuildingmakelarge.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakelarge.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	make2:
 		Filename: zergbuildingmakelarge.png
 		Length: *
@@ -629,6 +646,23 @@ scextractor:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	smoke:
 		Filename: geysersmoke.png
 		Scale: 3
@@ -638,6 +672,13 @@ scextractor:
 		ZOffset: 2048
 	icon:
 		Filename: scextractoricon.png
+
+sczergsoil:
+	Defaults:
+		Filename: sczergsoil.shp
+		Scale: 2.0
+	idle:
+		Length: 1
 
 zergsoilmaker:
 	Defaults:
@@ -664,6 +705,7 @@ zergsoilmaker:
 		Length: *
 	icon:
 		Filename: sccreepcolonyicon.png
+
 zergsoilmaker2:
 	Defaults:
 		Filename: zergsoilmaker2.shp
@@ -711,6 +753,23 @@ sccreepcolony:
 	make:
 		Filename: zergbuildingmakesmall.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: sccreepcolonyicon.png
 
@@ -735,6 +794,23 @@ scsunkencolony:
 	make:
 		Filename: zergbuildingmakesmall.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scsunkencolonyicon.png
 
@@ -756,6 +832,23 @@ scsporecolony:
 	make:
 		Filename: zergbuildingmakesmall.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scsporecolonyicon.png
 
@@ -769,6 +862,23 @@ scevolutionchamber:
 	make:
 		Filename: zergbuildingmakesmall.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakesmall.png
+		Start: 2
+		Length: 6
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakesmall.png
+		Start: 8
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakesmall.png
+		Start: 0
+		Length: 3
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scevolutionchambericon.png
 
@@ -783,6 +893,23 @@ schydraliskden:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: schydraliskdenicon.png
 
@@ -796,6 +923,23 @@ scspawningpool:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scspawningpoolicon.png
 
@@ -815,6 +959,23 @@ scspire:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scspireicon.png
 		Offset: 0,0
@@ -844,6 +1005,23 @@ scqueensnest:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scqueensnesticon.png
 
@@ -857,6 +1035,23 @@ scdefilermound:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scdefilermoundicon.png
 
@@ -870,6 +1065,23 @@ scultraliskcavern:
 	make:
 		Filename: zergbuildingmakemedium.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakemedium.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakemedium.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scultraliskcavernicon.png
 
@@ -896,6 +1108,23 @@ scovermind:
 	make:
 		Filename: zergbuildingmakelarge.png
 		Length: *
+	make-loop:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 5
+		Tick: 125
+		Reverses: True
+	make-finish:
+		Filename: zergbuildingmakelarge.png
+		Start: 5
+		Length: 4
+		Tick: 125
+	make-start:
+		Filename: zergbuildingmakelarge.png
+		Start: 0
+		Length: 4
+		Tick: 80
+		AlphaFade: True
 	icon:
 		Filename: scovermindicon.png
 
@@ -3397,6 +3626,7 @@ scztruck:
 sc_zerg_larva:
 	Defaults:
 		Filename: sclarva.png
+		Tick: 125
 	idle:
 		Filename: sclarva.png
 		Length: 5
@@ -3635,3 +3865,5 @@ disabledicon:
 	icon:
 		Filename: disabledicon.png
 		Length: 1
+
+

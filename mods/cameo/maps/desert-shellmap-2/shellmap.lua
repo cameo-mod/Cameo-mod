@@ -77,11 +77,11 @@ NodConvoyMove = function ()
 end
 
 AlliesProduction = function ()
-	if not AlliesFact.IsProducing("1tnk") then
+	if not AlliesFact.IsDead and not AlliesFact.IsProducing("1tnk") then
 		AlliesFact.Build(AlliesVehicles, UnitHunt)
 	end
 
-	if not AlliesBar.IsProducing("rae1") then
+	if not AlliesBar.IsDead and not AlliesBar.IsProducing("rae1") then
 		AlliesBar.Build(InfantryAllies, UnitHunt)
 	end
 
@@ -95,11 +95,11 @@ AlliesProduction = function ()
 end
 
 SovietsProduction = function ()
-	if not SovietsFact.IsProducing("3tnk") then
+	if not SovietsFact.IsDead and not SovietsFact.IsProducing("3tnk") then
 		SovietsFact.Build(SovietVehicles, UnitHunt)
 	end
 
-	if not SovietsBar.IsProducing("rare1") then
+	if not SovietsBar.IsDead and not SovietsBar.IsProducing("rare1") then
 		SovietsBar.Build(InfantrySoviets, UnitHunt)
 	end
 
@@ -113,11 +113,11 @@ SovietsProduction = function ()
 end
 
 JapanProduction = function ()
-	if not JapanFact.IsProducing("modkubel") then
+	if not JapanFact.IsDead and not JapanFact.IsProducing("modkubel") then
 		JapanFact.Build(JapanVehicles, UnitHunt)
 	end
 
-	if not JapanBar.IsProducing("rare1") then
+	if not JapanBar.IsDead and not JapanBar.IsProducing("rare1") then
 		JapanBar.Build(InfantryJapan, UnitHunt)
 	end
 
