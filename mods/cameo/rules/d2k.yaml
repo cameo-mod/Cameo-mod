@@ -1830,6 +1830,7 @@ repair_pad.ordos:
 		Actor: light_inf
 	ProvidesPrerequisite@repair_pad:
 		Prerequisite: repair_pad.ordos
+
 outpost.ixian:
 	Inherits: ^D2KBuilding
 	Inherits@radar: ^RadarBuilding
@@ -1850,7 +1851,7 @@ outpost.ixian:
 		RequiresCondition: !build-incomplete && !severe-damaged
 		Sequence: idle-dish
 		PauseOnCondition: disabled
-		Offset: -30,-60,0
+		# Offset: -30,-60,0
 	GrantConditionOnDamageState@STOPDISH:
 		Condition: severe-damaged
 	-WithDeathAnimation:
@@ -1864,6 +1865,7 @@ outpost.ixian:
 		Actor: light_inf
 	ProvidesPrerequisite@outpost:
 		Prerequisite: outpost.d2k
+		
 outpost.ordos:
 	Inherits: ^D2KBuilding
 	Inherits@radar: ^RadarBuilding
@@ -1875,7 +1877,7 @@ outpost.ordos:
 	Tooltip:
 		Name: Ordos Outpost
 	Building:
-		Footprint: xxx xxx xxx
+		Footprint: xxx xxx ===
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
@@ -1884,7 +1886,7 @@ outpost.ordos:
 		RequiresCondition: !build-incomplete && !severe-damaged
 		Sequence: idle-dish
 		PauseOnCondition: disabled
-		Offset: -30,-60,0
+		# Offset: -30,-60,0
 	GrantConditionOnDamageState@STOPDISH:
 		Condition: severe-damaged
 	-WithDeathAnimation:

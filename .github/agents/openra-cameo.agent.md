@@ -47,15 +47,6 @@ Both located in `OpenRA.Mods.Cameo/Traits/`.
 
 ---
 
-## Spawner Hierarchy (Zerg Hatchery)
-
-- `SCHATCHERY` uses `DroneSpawnerMaster` (engine AS, **not** `DroneSpawnerMasterCA`) to maintain a pool of 3 `sc_zerg_larva` slave actors with a `RespawnTicks: 125` timer.
-- `LarvaConsumingProduction` reads the slave pool from `BaseSpawnerMaster.SlaveEntries` to claim free larvae as egg slots.
-- `DroneSpawnerMasterCA` (CA mod) is a **different class** not used by the Zerg hatchery.
-- Always check the YAML to confirm which C# class a trait maps to before editing.
-
----
-
 ## YAML Ruleset Conventions
 
 - Actor names are lowercase (`sczergling`, `scdrone`, `sc_zerg_larva`).
@@ -88,31 +79,6 @@ Cameo includes `common|chrome/ingame.yaml` in `mod.yaml` so this is active.
 
 ---
 
-## Common Pitfalls
-
-| Symptom | Likely Cause |
-|---|---|
-| Clicking unit icon does nothing | `RejectsOrders` on the actor blocking `StartProduction`; add `Except: StartProduction, PauseProduction, CancelProduction` |
-| Unit missing from larva palette | `Buildable:` block missing `Queue: SCZergInfantry` |
-| Larva timer never starts | No free larva in `DroneSpawnerMaster` slave pool; `LarvaConsumingProduction` waits until a slot is available |
-| Edit to `DroneSpawnerMasterCA` has no effect on larvae | Hatchery uses `DroneSpawnerMaster` (engine AS), not `DroneSpawnerMasterCA` (CA mod) |
-| Building upgraded via `Pluggable` cannot attack after construction | `WithLoopedMakeAnimation` defaults to `BodyNames: ["body"]`. If the actor grants a condition on creation that disables the "body" `WithSpriteBody` (e.g. `sunken`/`spore`), `FirstEnabledConditionalTraitOrDefault()` returns null, the callback chain breaks, and `build-incomplete` is never revoked. Fix: add all conditionally-active WSB names to `BodyNames` (e.g. `BodyNames: body, sunken, spore`) |
-| Creep overlay appears on cliffs, water, or sand | `WithCreepOverlay.ComputeCells` must filter by `bi.TerrainTypes.Contains(map.GetTerrainInfo(cell).Type)` and `map.Ramp[cell] == 0` |
-
----
-
-## Zerg Build Area (Creep Placement Restriction)
-
-Zerg buildings must be placed near a Hatchery or Creep Colony. This uses `RequiresBuildableArea` / `GivesBuildableArea` with a dedicated `creep` area type — **always active**, independent of the "Limit Build Area" lobby toggle.
-
-- `^BaseBuildingZerg`: `RequiresBuildableArea: AreaTypes: creep, Adjacent: 3`
-- `SCHATCHERY`: `GivesBuildableArea: AreaTypes: building, cityi, hatchery, creep`
-- `SCCREEPCOLONY`: gives `building, creep`; requires `creep, Adjacent: 3` (must be near a hatchery or another colony)
-
-**Note**: placement uses Chebyshev (square) distance; the visual creep overlay uses Euclidean (circular). The `TerrainTypes: ZergSoil` restriction on `^BaseBuildingZerg` is currently commented out — uncomment when ZergSoil terrain is re-enabled.
-
----
-
 ## Creep Overlay (`WithCreepOverlay`)
 
 `OpenRA.Mods.Cameo/Traits/Render/WithCreepOverlay.cs` contains two cooperating classes:
@@ -121,3 +87,19 @@ Zerg buildings must be placed near a Hatchery or Creep Colony. This uses `Requir
 - **`WithCreepOverlay`** (building trait) — computes a circular cell list using Euclidean distance (`dx²+dy²≤r²`, `Adjacent` = radius), filtered to valid terrain types and non-ramp cells, then adds/removes them from `CreepLayer`.
 
 Current `Adjacent: 5` on `SCHATCHERY` (updated from 4). Palette uses `TileSet.TerrainPaletteInternalName` — do **not** switch to `player_rgba`. Sequence `sczergsoil:` defined in `mods/cameo/sequences/starcraft.yaml`.
+
+---
+
+## engine ↔ OpenRA Synchronisation
+The `Cameo-mod/engine/` directory is a git submodule that tracks a fork of this OpenRA repo. Engine-side C# fixes must be applied to **both** locations:
+1. `Cameo-mod/engine/<path>` — the submodule (built when running the Cameo mod).
+2. `OpenRA/<path>` — this standalone repo (used for OpenRA's own builds and tests).
+
+After editing engine files in either location, verify the change compiles in both:
+```powershell
+# From Cameo-mod root
+dotnet build engine/OpenRA.Mods.Common/OpenRA.Mods.Common.csproj --configuration Release --verbosity minimal
+# From OpenRA root
+dotnet build OpenRA.Mods.Common/OpenRA.Mods.Common.csproj --configuration Release --verbosity minimal
+```
+Do not rely on the submodule and the standalone repo staying in sync automatically — always propagate changes manually to both.
