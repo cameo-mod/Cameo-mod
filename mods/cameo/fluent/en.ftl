@@ -44,9 +44,9 @@ label-minimal-stats-points-header = Points
 label-minimal-stats-harvesters-header = Harv.
 
 promotion-counter =
-    .rank = Current Rank: 
+    .rank = Current Rank:
     .points = Promotion Points:
-    .progress = Progress to next rank: 
+    .progress = Progress to next rank:
 
 actor-stats-label-prefix =
     .armor = Armor:
@@ -232,3 +232,7 @@ bot-ai =
    .cameogod = Cameo God AI
 
 support-power-timer = { $player }'s { $support-power }: { $time }
+
+## settings-gameplay.yaml
+label-experimental-section-header = Experimental Features
+checkbox-quota-mode = Quota Mode for Build Orders
