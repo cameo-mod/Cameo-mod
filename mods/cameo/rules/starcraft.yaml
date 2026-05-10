@@ -1437,6 +1437,7 @@ SCPYLON:
 		Amount: 250
 	ProvidesPrerequisite@buildingname:
 	Buildable:
+		BuildPaletteOrder: 10
 		Prerequisites: ~scnexus
 		Queue: Building, RABuilding
 		Description: Provides supply and stores resources
@@ -1649,7 +1650,7 @@ SCPHOTONCANNON:
 	Power:
 		Amount: -100
 	Buildable:
-		BuildPaletteOrder: 30
+		BuildPaletteOrder: 10
 		Prerequisites: ~scnexus, scforge
 		Queue: Defence, RADefence
 		Description: Basic Base defense. Can detect cloaked units.
@@ -1704,7 +1705,7 @@ SCCYBERNETICSCORE:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 50
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scgateway
@@ -1741,7 +1742,7 @@ SCSHIELDBATTERY:
 		Dimensions: 3,2
 		BuildSounds: pshbld03.aud
 	Buildable:
-		BuildPaletteOrder: 70
+		BuildPaletteOrder: 140
 		Prerequisites: ~scnexus, scgateway
 		Queue: Building, RABuilding
 		Description: Automatically heals nearby units.
@@ -1804,7 +1805,7 @@ SCROBOTICSFACILITY:
 	Power:
 		Amount: 0
 	Buildable:
-		BuildPaletteOrder: 30
+		BuildPaletteOrder: 60
 		Prerequisites: ~scnexus, sccyberneticscore
 		Queue: Building, RABuilding
 		Description: Produces vehicles
@@ -1847,7 +1848,7 @@ SCSTARGATE:
 	Power:
 		Amount: 0
 	Buildable:
-		BuildPaletteOrder: 80
+		BuildPaletteOrder: 70
 		Prerequisites: ~scnexus, sccyberneticscore
 		Queue: Building, RABuilding
 		Description: Produces aircraft
@@ -1888,7 +1889,7 @@ SCCITADELOFADUN:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 80
 		BuildDuration: 625
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, sccyberneticscore
@@ -1927,7 +1928,7 @@ SCROBOTICSSUPPORTBAY:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 90
 		BuildDuration: 625
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scroboticsfacility
@@ -1959,7 +1960,7 @@ SCFLEETBEACON:
 		Name: Fleet Beacon
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 130
 		Prerequisites: ~scnexus, scstargate
 		Queue: Building, RABuilding
 		Description: Unlocks Carrier and Purifier Beam support power.
@@ -2025,7 +2026,7 @@ SCTEMPLARARCHIVES:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 110
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, sccitadelofadun, scgateway
@@ -2065,7 +2066,7 @@ SCOBSERVATORY:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scroboticsfacility
@@ -2104,7 +2105,7 @@ SCARBITERTRIBUNAL:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 120
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scstargate, sctemplararchives
