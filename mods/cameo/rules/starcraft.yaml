@@ -138,6 +138,24 @@ World:
 	WithHarvestAnimation:
 	WithDockingAnimation:
 
+^SCRefineryCommon:
+	Inherits: ^Refinery
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+
 ^SCUnitProduction:
 	Inherits@prod: ^ProducesUnits
 	GrantConditionOnPowerState@supply:
@@ -507,7 +525,7 @@ World:
 
 SCCOMMANDCENTER:
 	Inherits: ^BaseBuilding
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
 	Inherits@conyard: ^Conyard
@@ -567,21 +585,6 @@ SCCOMMANDCENTER:
 	ProvidesRadar:
 		RequiresCondition: !jammed
 	Refinery:
-	DockHost:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: 0, 1c0, 0
-		MaxQueueLength: 10
-	DockHost@DOCK2:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: -1c0, 1c0, 0
-		MaxQueueLength: 10
-	DockHost@DOCK3:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: 1c0, 1c0, 0
-		MaxQueueLength: 10
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
 		DecorationBounds: 3072, 2560, 0, 0
@@ -692,7 +695,7 @@ supplydepotexpand:
 SCREFINERY:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Refinery
@@ -718,9 +721,6 @@ SCREFINERY:
 		Facing: 540
 	SelectionDecorations:
 	Refinery:
-	DockHost:
-		DockAngle: 0
-		DockOffset: 0, 1c0, 0
 	DamageMultiplier@refineryupg:
 		RequiresCondition: refineryupg
 		Modifier: 50
@@ -1346,7 +1346,7 @@ SCTerranMSLO:
 
 SCNEXUS:
 	Inherits: ^BaseBuildingProtoss
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
 	Inherits@conyard: ^Conyard
@@ -1406,21 +1406,6 @@ SCNEXUS:
 	ProvidesRadar:
 		RequiresCondition: !jammed
 	Refinery:
-	DockHost:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: 0, 1c0, 0
-		MaxQueueLength: 10
-	DockHost@DOCK2:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: -1c0, 1c0, 0
-		MaxQueueLength: 10
-	DockHost@DOCK3:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: 1c0, 1c0, 0
-		MaxQueueLength: 10
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
 		DecorationBounds: 3072, 2560, 0, 0
@@ -1490,7 +1475,7 @@ SCPYLON:
 SCASSIMILATOR:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Inherits: ^BuildingPlugProducer
@@ -1517,9 +1502,6 @@ SCASSIMILATOR:
 		Facing: 540
 	SelectionDecorations:
 	Refinery:
-	DockHost:
-		DockAngle: 0
-		DockOffset: 0, 1c0, 0
 	DamageMultiplier@assimilatorupg:
 		RequiresCondition: assimilatorupg
 		Modifier: 50
@@ -2242,7 +2224,7 @@ zergsoilkiller4:
 
 SCHATCHERY:
 	Inherits: ^BaseBuildingZerg
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@bot: ^BotMicromanageable
 	Inherits@breedfaster: ^SCBREEDFASTER
@@ -2360,21 +2342,6 @@ SCHATCHERY:
 		BodyNames: body, lair, hive
 	-WithDeathAnimation:
 	Refinery:
-	DockHost:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: 0, 1c0, 0
-		MaxQueueLength: 10
-	DockHost@DOCK2:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: -1c0, 1c0, 0
-		MaxQueueLength: 10
-	DockHost@DOCK3:
-		Type: Unload
-		DockAngle: 0
-		DockOffset: 1c0, 1c0, 0
-		MaxQueueLength: 10
 	##########
 	Sellable:
 	##########
@@ -2737,7 +2704,7 @@ scsporecolony:
 SCEXTRACTOR:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^3x2Shape
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Extractor
@@ -2763,9 +2730,6 @@ SCEXTRACTOR:
 		Facing: 540
 	SelectionDecorations:
 	Refinery:
-	DockHost:
-		DockAngle: 0
-		DockOffset: -1c0, 1c0, 0
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
 		Duration: 10000
