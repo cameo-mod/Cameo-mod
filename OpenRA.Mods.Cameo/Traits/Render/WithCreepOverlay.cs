@@ -39,12 +39,6 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Palette to render the creep in.")]
 		public readonly string Palette = TileSet.TerrainPaletteInternalName;
 
-		[Desc("Ticks for a newly covered tile to fade in.")]
-		public readonly int FadeInDuration = 5;
-
-		[Desc("Ticks for a tile to fade out after its last building is removed.")]
-		public readonly int FadeOutDuration = 20;
-
 		public override object Create(ActorInitializer init) { return new CreepLayer(init.Self, this); }
 	}
 
@@ -56,19 +50,12 @@ namespace OpenRA.Mods.Cameo.Traits
 		// How many buildings cover each cell.
 		readonly Dictionary<CPos, int> refCount = new();
 
-		// Current render alpha per active cell (0–1). Absent means fully gone.
-		readonly Dictionary<CPos, float> cellAlpha = new();
-
-		// Cells whose alpha is currently animating.
-		readonly HashSet<CPos> fadingIn = new();
-		readonly HashSet<CPos> fadingOut = new();
-
-		// Ring-removal events scheduled for a future tick by RemovedFromWorld.
-		readonly List<(IEnumerable<CPos> Cells, long StartTick)> pendingRemovals = new();
-
 		// Sprite layer dirty tracking (true = draw, false = clear).
 		readonly Dictionary<CPos, bool> dirty = new();
 		readonly Queue<CPos> cleanDirty = new();
+
+		// Ring-removal events scheduled for a future tick by RemovedFromWorld.
+		readonly List<(IEnumerable<CPos> Cells, long StartTick)> pendingRemovals = new();
 
 		long currentTick;
 		TerrainSpriteLayer render;
@@ -103,16 +90,8 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				refCount.TryGetValue(cell, out var count);
 				refCount[cell] = count + 1;
-
 				if (count == 0)
-				{
-					// Cell was absent — start fading in from wherever it currently is.
-					fadingOut.Remove(cell);
-					fadingIn.Add(cell);
-					if (!cellAlpha.ContainsKey(cell))
-						cellAlpha[cell] = 0f;
 					dirty[cell] = true;
-				}
 			}
 		}
 
@@ -126,15 +105,7 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (count <= 1)
 				{
 					refCount.Remove(cell);
-					fadingIn.Remove(cell);
-
-					// Only start a new fade-out if the cell isn't already fading out.
-					if (fadingOut.Add(cell))
-					{
-						if (!cellAlpha.ContainsKey(cell))
-							cellAlpha[cell] = 1f;
-						dirty[cell] = true;
-					}
+					dirty[cell] = false;
 				}
 				else
 					refCount[cell] = count - 1;
@@ -153,7 +124,6 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			currentTick++;
 
-			// Fire any pending ring removals whose start tick has arrived.
 			for (var i = pendingRemovals.Count - 1; i >= 0; i--)
 			{
 				if (pendingRemovals[i].StartTick <= currentTick)
@@ -161,42 +131,6 @@ namespace OpenRA.Mods.Cameo.Traits
 					RemoveCells(pendingRemovals[i].Cells);
 					pendingRemovals.RemoveAt(i);
 				}
-			}
-
-			var fadeInStep = info.FadeInDuration > 0 ? 1f / info.FadeInDuration : 1f;
-			var fadeOutStep = info.FadeOutDuration > 0 ? 1f / info.FadeOutDuration : 1f;
-
-			var finished = new List<CPos>();
-
-			foreach (var cell in fadingIn)
-			{
-				var alpha = Math.Min(1f, cellAlpha[cell] + fadeInStep);
-				cellAlpha[cell] = alpha;
-				dirty[cell] = true;
-				if (alpha >= 1f)
-					finished.Add(cell);
-			}
-			foreach (var cell in finished)
-				fadingIn.Remove(cell);
-
-			finished.Clear();
-
-			foreach (var cell in fadingOut)
-			{
-				var alpha = Math.Max(0f, cellAlpha[cell] - fadeOutStep);
-				cellAlpha[cell] = alpha;
-				if (alpha <= 0f)
-				{
-					dirty[cell] = false;
-					finished.Add(cell);
-				}
-				else
-					dirty[cell] = true;
-			}
-			foreach (var cell in finished)
-			{
-				fadingOut.Remove(cell);
-				cellAlpha.Remove(cell);
 			}
 		}
 
@@ -207,8 +141,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (world.FogObscures(kv.Key))
 					continue;
 
-				if (kv.Value && cellAlpha.TryGetValue(kv.Key, out var alpha) && alpha > 0f)
-					render.Update(kv.Key, creepSprite, paletteReference, creepScale, alpha);
+				if (kv.Value)
+					render.Update(kv.Key, creepSprite, paletteReference, creepScale);
 				else
 					render.Clear(kv.Key);
 
