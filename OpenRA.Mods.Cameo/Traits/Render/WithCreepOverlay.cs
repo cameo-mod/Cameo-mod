@@ -9,6 +9,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Graphics;
@@ -38,17 +39,38 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Palette to render the creep in.")]
 		public readonly string Palette = TileSet.TerrainPaletteInternalName;
 
+		[Desc("Ticks for a newly covered tile to fade in.")]
+		public readonly int FadeInDuration = 5;
+
+		[Desc("Ticks for a tile to fade out after its last building is removed.")]
+		public readonly int FadeOutDuration = 20;
+
 		public override object Create(ActorInitializer init) { return new CreepLayer(init.Self, this); }
 	}
 
-	public class CreepLayer : IRenderOverlay, IWorldLoaded, INotifyActorDisposing
+	public class CreepLayer : IRenderOverlay, IWorldLoaded, INotifyActorDisposing, ITick
 	{
 		readonly CreepLayerInfo info;
 		readonly World world;
+
+		// How many buildings cover each cell.
 		readonly Dictionary<CPos, int> refCount = new();
+
+		// Current render alpha per active cell (0–1). Absent means fully gone.
+		readonly Dictionary<CPos, float> cellAlpha = new();
+
+		// Cells whose alpha is currently animating.
+		readonly HashSet<CPos> fadingIn = new();
+		readonly HashSet<CPos> fadingOut = new();
+
+		// Ring-removal events scheduled for a future tick by RemovedFromWorld.
+		readonly List<(IEnumerable<CPos> Cells, long StartTick)> pendingRemovals = new();
+
+		// Sprite layer dirty tracking (true = draw, false = clear).
 		readonly Dictionary<CPos, bool> dirty = new();
 		readonly Queue<CPos> cleanDirty = new();
 
+		long currentTick;
 		TerrainSpriteLayer render;
 		Sprite creepSprite;
 		float creepScale;
@@ -81,8 +103,16 @@ namespace OpenRA.Mods.Cameo.Traits
 
 				refCount.TryGetValue(cell, out var count);
 				refCount[cell] = count + 1;
+
 				if (count == 0)
+				{
+					// Cell was absent — start fading in from wherever it currently is.
+					fadingOut.Remove(cell);
+					fadingIn.Add(cell);
+					if (!cellAlpha.ContainsKey(cell))
+						cellAlpha[cell] = 0f;
 					dirty[cell] = true;
+				}
 			}
 		}
 
@@ -96,10 +126,77 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (count <= 1)
 				{
 					refCount.Remove(cell);
-					dirty[cell] = false;
+					fadingIn.Remove(cell);
+
+					// Only start a new fade-out if the cell isn't already fading out.
+					if (fadingOut.Add(cell))
+					{
+						if (!cellAlpha.ContainsKey(cell))
+							cellAlpha[cell] = 1f;
+						dirty[cell] = true;
+					}
 				}
 				else
 					refCount[cell] = count - 1;
+			}
+		}
+
+		// Called by WithCreepOverlay.RemovedFromWorld to peel rings off over time.
+		// rings should already be ordered outermost-first for reverse-spread.
+		public void ScheduleRemoveRings(List<List<CPos>> rings, int ticksBetweenRings)
+		{
+			for (var i = 0; i < rings.Count; i++)
+				pendingRemovals.Add((rings[i], currentTick + (long)(i * ticksBetweenRings)));
+		}
+
+		void ITick.Tick(Actor self)
+		{
+			currentTick++;
+
+			// Fire any pending ring removals whose start tick has arrived.
+			for (var i = pendingRemovals.Count - 1; i >= 0; i--)
+			{
+				if (pendingRemovals[i].StartTick <= currentTick)
+				{
+					RemoveCells(pendingRemovals[i].Cells);
+					pendingRemovals.RemoveAt(i);
+				}
+			}
+
+			var fadeInStep = info.FadeInDuration > 0 ? 1f / info.FadeInDuration : 1f;
+			var fadeOutStep = info.FadeOutDuration > 0 ? 1f / info.FadeOutDuration : 1f;
+
+			var finished = new List<CPos>();
+
+			foreach (var cell in fadingIn)
+			{
+				var alpha = Math.Min(1f, cellAlpha[cell] + fadeInStep);
+				cellAlpha[cell] = alpha;
+				dirty[cell] = true;
+				if (alpha >= 1f)
+					finished.Add(cell);
+			}
+			foreach (var cell in finished)
+				fadingIn.Remove(cell);
+
+			finished.Clear();
+
+			foreach (var cell in fadingOut)
+			{
+				var alpha = Math.Max(0f, cellAlpha[cell] - fadeOutStep);
+				cellAlpha[cell] = alpha;
+				if (alpha <= 0f)
+				{
+					dirty[cell] = false;
+					finished.Add(cell);
+				}
+				else
+					dirty[cell] = true;
+			}
+			foreach (var cell in finished)
+			{
+				fadingOut.Remove(cell);
+				cellAlpha.Remove(cell);
 			}
 		}
 
@@ -110,8 +207,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (world.FogObscures(kv.Key))
 					continue;
 
-				if (kv.Value)
-					render.Update(kv.Key, creepSprite, paletteReference, creepScale);
+				if (kv.Value && cellAlpha.TryGetValue(kv.Key, out var alpha) && alpha > 0f)
+					render.Update(kv.Key, creepSprite, paletteReference, creepScale, alpha);
 				else
 					render.Clear(kv.Key);
 
@@ -135,7 +232,7 @@ namespace OpenRA.Mods.Cameo.Traits
 	}
 
 	// ---------------------------------------------------------------------------
-	// Per-building trait: registers cells with CreepLayer
+	// Per-building trait: registers cells with CreepLayer ring by ring
 	// ---------------------------------------------------------------------------
 
 	[Desc("Registers creep overlay tiles with the CreepLayer world trait.",
@@ -145,13 +242,22 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Radius in cells around the building footprint to cover with creep.")]
 		public readonly int Adjacent = 3;
 
+		[Desc("Minimum ticks to wait before adding each successive ring. 0 = all rings added at once.")]
+		public readonly int MinSpreadInterval = 10;
+
+		[Desc("Maximum ticks to wait before adding each successive ring.")]
+		public readonly int MaxSpreadInterval = 50;
+
 		public override object Create(ActorInitializer init) { return new WithCreepOverlay(init.Self, this); }
 	}
 
-	public class WithCreepOverlay : ConditionalTrait<WithCreepOverlayInfo>, INotifyAddedToWorld, INotifyRemovedFromWorld
+	public class WithCreepOverlay : ConditionalTrait<WithCreepOverlayInfo>, INotifyAddedToWorld, INotifyRemovedFromWorld, ITick
 	{
 		readonly BuildingInfo bi;
-		List<CPos> cells;
+		readonly Random random = new();
+		List<List<CPos>> rings;
+		int ringsAdded;
+		int nextRingIn;
 
 		public WithCreepOverlay(Actor self, WithCreepOverlayInfo info)
 			: base(info)
@@ -159,7 +265,8 @@ namespace OpenRA.Mods.Cameo.Traits
 			bi = self.Info.TraitInfo<BuildingInfo>();
 		}
 
-		List<CPos> ComputeCells(Actor self)
+		// Groups eligible cells into concentric rings by integer distance from the footprint.
+		List<List<CPos>> ComputeRings(Actor self)
 		{
 			var adjacent = Info.Adjacent;
 			var location = self.Location;
@@ -170,14 +277,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			var scanEnd = map.Clamp(location + bi.Dimensions + new CVec(adjacent, adjacent));
 
 			var radiusSq = adjacent * adjacent;
-			var result = new List<CPos>();
+			var cellsByRing = new Dictionary<int, List<CPos>>();
+
 			for (var y = scanStart.Y; y < scanEnd.Y; y++)
 			{
 				for (var x = scanStart.X; x < scanEnd.X; x++)
 				{
 					var cell = new CPos(x, y);
 
-					// Skip cells that Zerg buildings cannot be placed on.
 					if (map.Ramp[cell] != 0)
 						continue;
 
@@ -188,32 +295,73 @@ namespace OpenRA.Mods.Cameo.Traits
 					if (!bi.TerrainTypes.Contains(rawTerrainType))
 						continue;
 
+					var minDistSq = int.MaxValue;
 					foreach (var ft in footprintTiles)
 					{
 						var dx = cell.X - ft.X;
 						var dy = cell.Y - ft.Y;
-						if (dx * dx + dy * dy <= radiusSq)
-						{
-							result.Add(cell);
-							break;
-						}
+						var dSq = dx * dx + dy * dy;
+						if (dSq < minDistSq)
+							minDistSq = dSq;
 					}
+
+					if (minDistSq > radiusSq)
+						continue;
+
+					var ring = (int)Math.Sqrt(minDistSq);
+					if (!cellsByRing.TryGetValue(ring, out var list))
+						cellsByRing[ring] = list = new List<CPos>();
+					list.Add(cell);
 				}
 			}
 
-			return result;
+			return cellsByRing.OrderBy(kv => kv.Key).Select(kv => kv.Value).ToList();
 		}
 
 		void INotifyAddedToWorld.AddedToWorld(Actor self)
 		{
-			cells = ComputeCells(self);
-			self.World.WorldActor.Trait<CreepLayer>().AddCells(cells);
+			rings = ComputeRings(self);
+			ringsAdded = 0;
+			nextRingIn = 0;
+
+			var creepLayer = self.World.WorldActor.Trait<CreepLayer>();
+
+			if (Info.MinSpreadInterval <= 0)
+			{
+				foreach (var ring in rings)
+					creepLayer.AddCells(ring);
+				ringsAdded = rings.Count;
+			}
+			else if (rings.Count > 0)
+			{
+				// The innermost ring (footprint + immediate neighbours) appears right away.
+				creepLayer.AddCells(rings[0]);
+				ringsAdded = 1;
+				nextRingIn = random.Next(Info.MinSpreadInterval, Info.MaxSpreadInterval + 1);
+			}
 		}
 
 		void INotifyRemovedFromWorld.RemovedFromWorld(Actor self)
 		{
-			if (cells != null)
-				self.World.WorldActor.Trait<CreepLayer>().RemoveCells(cells);
-	}
+			if (rings == null || ringsAdded == 0)
+				return;
+
+			// Reverse the rings so the outermost disappears first.
+			var addedRings = rings.Take(ringsAdded).Reverse().ToList();
+			self.World.WorldActor.Trait<CreepLayer>().ScheduleRemoveRings(addedRings, Info.MinSpreadInterval);
+		}
+
+		void ITick.Tick(Actor self)
+		{
+			if (IsTraitDisabled || rings == null || ringsAdded >= rings.Count || Info.MinSpreadInterval <= 0)
+				return;
+
+			if (--nextRingIn > 0)
+				return;
+
+			self.World.WorldActor.Trait<CreepLayer>().AddCells(rings[ringsAdded++]);
+			if (ringsAdded < rings.Count)
+				nextRingIn = random.Next(Info.MinSpreadInterval, Info.MaxSpreadInterval + 1);
+		}
 	}
 }
