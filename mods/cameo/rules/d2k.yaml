@@ -1766,14 +1766,14 @@ repair_pad.ixian:
 	Building:
 		Footprint: +++ +++ +++
 		Dimensions: 3,3
-	HitShape:
-		Type: Rectangle
-			TopLeft: -1536, -512
-			BottomRight: 1536, 512
-	HitShape@TOPANDBOTTOM:
-		Type: Rectangle
-			TopLeft: -512, -1536
-			BottomRight: 512, 1536
+	# HitShape:
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -512
+	# 		BottomRight: 1536, 512
+	# HitShape@TOPANDBOTTOM:
+	# 	Type: Rectangle
+	# 		TopLeft: -512, -1536
+	# 		BottomRight: 512, 1536
 	Reservable:
 	RallyPoint:
 	RenderSprites:
@@ -1790,6 +1790,7 @@ repair_pad.ixian:
 		Actor: light_inf
 	SpawnActorOnDeath@death2:
 		Actor: light_inf
+
 repair_pad.ordos:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1804,14 +1805,14 @@ repair_pad.ordos:
 	Building:
 		Footprint: +++ +++ +++
 		Dimensions: 3,3
-	HitShape:
-		Type: Rectangle
-			TopLeft: -1536, -512
-			BottomRight: 1536, 512
-	HitShape@TOPANDBOTTOM:
-		Type: Rectangle
-			TopLeft: -512, -1536
-			BottomRight: 512, 1536
+	# HitShape:
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -512
+	# 		BottomRight: 1536, 512
+	# HitShape@TOPANDBOTTOM:
+	# 	Type: Rectangle
+	# 		TopLeft: -512, -1536
+	# 		BottomRight: 512, 1536
 	Reservable:
 	RallyPoint:
 	RenderSprites:
@@ -1865,7 +1866,7 @@ outpost.ixian:
 		Actor: light_inf
 	ProvidesPrerequisite@outpost:
 		Prerequisite: outpost.d2k
-		
+
 outpost.ordos:
 	Inherits: ^D2KBuilding
 	Inherits@radar: ^RadarBuilding
