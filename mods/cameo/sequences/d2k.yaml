@@ -925,6 +925,7 @@ outpost.atreides:
 		Length: 10
 		Offset: -48,64
 		Tick: 100
+		ZOffset: 1024
 	damaged-idle:
 		Filename: DATA.R16
 		Remap: 54F94B
@@ -932,7 +933,6 @@ outpost.atreides:
 		Offset: -48,64
 	idle-dish:
 		Filename: DATA.R16
-		Remap: 54F94B
 		Start: 4786
 		Length: 30
 		Offset: -46,64
@@ -948,7 +948,6 @@ outpost.atreides:
 		Offset: -16,-16
 	icon:
 		Filename: DATA.R16
-		Remap: 54F94B
 		Start: 4336
 		Offset: -30,-24
 
@@ -2765,15 +2764,14 @@ d2k_sandworm_tower:
 outpost.ordos:
 	Defaults:
 		AddExtension: false
+		Scale: 1.5
 	idle:
 		Filename: DATA.R16
-		Scale: 1.5
 		Remap: 54F94B
 		Start: 3089
 		Offset: -48,64
 	make:
 		Filename: DATA.R16
-		Scale: 1.5
 		Remap: 54F94B
 		Start: 4518
 		Length: 9
@@ -2781,21 +2779,19 @@ outpost.ordos:
 		Tick: 100
 	crumble-overlay:
 		Filename: DATA.R16
-		Scale: 1.5
 		Remap: 54F94B
 		Start: 4527
 		Length: 10
 		Offset: -48,64
 		Tick: 100
+		ZOffset: 1024
 	damaged-idle:
 		Filename: DATA.R16
-		Scale: 1.5
 		Remap: 54F94B
 		Start: 3090
 		Offset: -48,64
 	idle-dish:
 		Filename: DATA.R16
-		Scale: 1.5
 		Remap: 54F94B
 		Start: 4847
 		Length: 30
@@ -2812,7 +2808,6 @@ outpost.ordos:
 		Offset: -16,-16
 	icon:
 		Filename: DATA.R16
-		Scale: 1.5
 		Remap: 54F94B
 		Start: 4338
 		Offset: -30,-24

@@ -138,6 +138,24 @@ World:
 	WithHarvestAnimation:
 	WithDockingAnimation:
 
+^SCRefineryCommon:
+	Inherits: ^Refinery
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+
 ^SCUnitProduction:
 	Inherits@prod: ^ProducesUnits
 	GrantConditionOnPowerState@supply:
@@ -507,7 +525,7 @@ World:
 
 SCCOMMANDCENTER:
 	Inherits: ^BaseBuilding
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
 	Inherits@conyard: ^Conyard
@@ -567,9 +585,6 @@ SCCOMMANDCENTER:
 	ProvidesRadar:
 		RequiresCondition: !jammed
 	Refinery:
-	DockHost:
-		DockAngle: 256
-		DockOffset: 0, 1c512, 0
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
 		DecorationBounds: 3072, 2560, 0, 0
@@ -680,7 +695,7 @@ supplydepotexpand:
 SCREFINERY:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Refinery
@@ -706,9 +721,6 @@ SCREFINERY:
 		Facing: 540
 	SelectionDecorations:
 	Refinery:
-	DockHost:
-		DockAngle: 448
-		DockOffset: -1c0, 1c0, 0
 	DamageMultiplier@refineryupg:
 		RequiresCondition: refineryupg
 		Modifier: 50
@@ -1334,7 +1346,7 @@ SCTerranMSLO:
 
 SCNEXUS:
 	Inherits: ^BaseBuildingProtoss
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
 	Inherits@conyard: ^Conyard
@@ -1394,9 +1406,6 @@ SCNEXUS:
 	ProvidesRadar:
 		RequiresCondition: !jammed
 	Refinery:
-	DockHost:
-		DockAngle: 0
-		DockOffset: 0, 1c512, 0
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
 		DecorationBounds: 3072, 2560, 0, 0
@@ -1428,6 +1437,7 @@ SCPYLON:
 		Amount: 250
 	ProvidesPrerequisite@buildingname:
 	Buildable:
+		BuildPaletteOrder: 10
 		Prerequisites: ~scnexus
 		Queue: Building, RABuilding
 		Description: Provides supply and stores resources
@@ -1466,7 +1476,7 @@ SCPYLON:
 SCASSIMILATOR:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Inherits: ^BuildingPlugProducer
@@ -1493,9 +1503,6 @@ SCASSIMILATOR:
 		Facing: 540
 	SelectionDecorations:
 	Refinery:
-	DockHost:
-		DockAngle: 448
-		DockOffset: -1c0, 1c0, 0
 	DamageMultiplier@assimilatorupg:
 		RequiresCondition: assimilatorupg
 		Modifier: 50
@@ -1643,7 +1650,7 @@ SCPHOTONCANNON:
 	Power:
 		Amount: -100
 	Buildable:
-		BuildPaletteOrder: 30
+		BuildPaletteOrder: 10
 		Prerequisites: ~scnexus, scforge
 		Queue: Defence, RADefence
 		Description: Basic Base defense. Can detect cloaked units.
@@ -1698,7 +1705,7 @@ SCCYBERNETICSCORE:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 50
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scgateway
@@ -1735,7 +1742,7 @@ SCSHIELDBATTERY:
 		Dimensions: 3,2
 		BuildSounds: pshbld03.aud
 	Buildable:
-		BuildPaletteOrder: 70
+		BuildPaletteOrder: 140
 		Prerequisites: ~scnexus, scgateway
 		Queue: Building, RABuilding
 		Description: Automatically heals nearby units.
@@ -1798,7 +1805,7 @@ SCROBOTICSFACILITY:
 	Power:
 		Amount: 0
 	Buildable:
-		BuildPaletteOrder: 30
+		BuildPaletteOrder: 60
 		Prerequisites: ~scnexus, sccyberneticscore
 		Queue: Building, RABuilding
 		Description: Produces vehicles
@@ -1841,7 +1848,7 @@ SCSTARGATE:
 	Power:
 		Amount: 0
 	Buildable:
-		BuildPaletteOrder: 80
+		BuildPaletteOrder: 70
 		Prerequisites: ~scnexus, sccyberneticscore
 		Queue: Building, RABuilding
 		Description: Produces aircraft
@@ -1882,7 +1889,7 @@ SCCITADELOFADUN:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 80
 		BuildDuration: 625
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, sccyberneticscore
@@ -1921,7 +1928,7 @@ SCROBOTICSSUPPORTBAY:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 90
 		BuildDuration: 625
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scroboticsfacility
@@ -1953,7 +1960,7 @@ SCFLEETBEACON:
 		Name: Fleet Beacon
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 130
 		Prerequisites: ~scnexus, scstargate
 		Queue: Building, RABuilding
 		Description: Unlocks Carrier and Purifier Beam support power.
@@ -2019,7 +2026,7 @@ SCTEMPLARARCHIVES:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 110
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, sccitadelofadun, scgateway
@@ -2059,7 +2066,7 @@ SCOBSERVATORY:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scroboticsfacility
@@ -2098,7 +2105,7 @@ SCARBITERTRIBUNAL:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 120
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scstargate, sctemplararchives
@@ -2218,7 +2225,7 @@ zergsoilkiller4:
 
 SCHATCHERY:
 	Inherits: ^BaseBuildingZerg
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@bot: ^BotMicromanageable
 	Inherits@breedfaster: ^SCBREEDFASTER
@@ -2336,21 +2343,6 @@ SCHATCHERY:
 		BodyNames: body, lair, hive
 	-WithDeathAnimation:
 	Refinery:
-	DockHost:
-		DockAngle: 0
-		DockOffset: 0, 1c0, 0
-	DockHost@DOCK2:
-		Type: Unload
-		DockAngle: 512
-		DockOffset: 0, -2c0, 0
-	DockHost@DOCK3:
-		Type: Unload
-		DockAngle: 256
-		DockOffset: 2c0, 0, 0
-	DockHost@DOCK4:
-		Type: Unload
-		DockAngle: 768
-		DockOffset: -2c0, 0, 0
 	##########
 	Sellable:
 	##########
@@ -2713,7 +2705,7 @@ scsporecolony:
 SCEXTRACTOR:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^3x2Shape
-	Inherits@ref: ^Refinery
+	Inherits@ref: ^SCRefineryCommon
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Extractor
@@ -2739,9 +2731,6 @@ SCEXTRACTOR:
 		Facing: 540
 	SelectionDecorations:
 	Refinery:
-	DockHost:
-		DockAngle: 448
-		DockOffset: -1c0, 1c0, 0
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
 		Duration: 10000
@@ -6402,7 +6391,7 @@ SCPROBE:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Tooltip:
-		Name: Probe
+		Name: Protoss Probe
 	Buildable:
 		Prerequisites: ~scassimilator
 		Description: Collects resources. Can repair mechanical units and buildings. Can capture buildings.
@@ -8564,7 +8553,7 @@ SCDRONE:
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Tooltip:
-		Name: Drone
+		Name: Zerg Drone
 	Buildable:
 		Queue: SCZergInfantry
 		Prerequisites: ~scextractor
@@ -8614,7 +8603,7 @@ SCOVERLORD:
 	Inherits@eject: ^AircraftEjectOnDeath
 	Inherits@armor: ^ZergFlyerArmorUpgrades
 	Tooltip:
-		Name: Overlord
+		Name: Zerg Overlord
 	Valued:
 		Cost: 500
 	ProvidesPrerequisite@buildingname:
