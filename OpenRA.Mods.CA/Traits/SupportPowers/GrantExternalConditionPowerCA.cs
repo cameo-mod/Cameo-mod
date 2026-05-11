@@ -49,7 +49,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		[CursorReference]
 		[Desc("Cursor to display when there are no units to apply the condition in range.")]
-		public readonly string BlockedCursor = "move-blocked";
+		public new readonly string BlockedCursor = "move-blocked";
 
 		[Desc("If true, targets must not be under shroud/fog.")]
 		public readonly bool TargetMustBeVisible = true;
