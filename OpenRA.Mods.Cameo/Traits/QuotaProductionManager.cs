@@ -199,9 +199,14 @@ namespace OpenRA.Mods.Cameo.Traits
 				var inflight = dynamicInflight.GetValueOrDefault(type, 0);
 				var total = globalAlive + inQueue + inflight;
 
-				if (total >= target) continue;
+				var buildableInfo = actorInfo.TraitInfoOrDefault<BuildableInfo>();
+				var effectiveTarget = buildableInfo != null && buildableInfo.BuildLimit > 0
+					? Math.Min(target, buildableInfo.BuildLimit)
+					: target;
 
-				var ratio = (float)globalAlive / target;
+				if (total >= effectiveTarget) continue;
+
+				var ratio = (float)globalAlive / effectiveTarget;
 				if (ratio < bestRatio)
 				{
 					bestRatio = ratio;
@@ -247,6 +252,14 @@ namespace OpenRA.Mods.Cameo.Traits
 		public void AdjustQuota(string unitType, int delta)
 		{
 			var newVal = Math.Max(0, globalQuotas.GetValueOrDefault(unitType, 0) + delta);
+
+			if (world.Map.Rules.Actors.TryGetValue(unitType, out var actorInfo))
+			{
+				var buildableInfo = actorInfo.TraitInfoOrDefault<BuildableInfo>();
+				if (buildableInfo != null && buildableInfo.BuildLimit > 0)
+					newVal = Math.Min(newVal, buildableInfo.BuildLimit);
+			}
+
 			if (newVal == 0)
 				globalQuotas.Remove(unitType);
 			else
