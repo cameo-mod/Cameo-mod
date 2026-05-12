@@ -3878,6 +3878,8 @@ TSENGINEER:
 		Speed: 55
 	Health:
 		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
 	Voiced:
 		VoiceSet: TSEngineer
 	Armament@PRIMARY:
@@ -3963,7 +3965,7 @@ TSE2:
 	Health:
 		HP: 12000
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 12
 	Armament@PRIMARY:
 		Weapon: TSGrenade
 		LocalOffset: 0,0,427
@@ -4042,7 +4044,7 @@ TSENFORCER:
 	Health:
 		HP: 45000
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 45
 	Armament@PRIMARY:
 		Weapon: TS30mm
 		LocalOffset: 0,0,427
@@ -4098,7 +4100,7 @@ TSRIOTT:
 	Health:
 		HP: 54000
 	ChangesHealth@SelfHealing:
-		Step: 8
+		Step: 54
 	Armament@PRIMARY:
 		Weapon: TSShotgun
 		LocalOffset: 0,0,427
@@ -4127,7 +4129,7 @@ tsjumpjet2:
 	Inherits@detect: ^GenericAirDetector
 	Inherits@SERETraining: ^SERETraining
 	Valued:
-		Cost: 600
+		Cost: 700
 	Tooltip:
 		Name: Jumpjet Infantry
 	UpdatesPlayerStatistics:
@@ -4138,13 +4140,13 @@ tsjumpjet2:
 		Queue: Infantry, RAInfantry
 		Description: Airborne soldier.\nCan attack aircraft.\n  Strong vs Infantry, Light armor\n  Weak vs AA
 	Aircraft:
-		TurnSpeed: 16
-		Speed: 80
+		TurnSpeed: 22
+		Speed: 110
 		Voice: Move
 	Health:
-		HP: 20000
+		HP: 34000
 	ChangesHealth@SelfHealing:
-		Step: 80
+		Step: 34
 	Armament@PRIMARY:
 		Weapon: TSJumpCannon
 	AttackAircraft:
@@ -4173,8 +4175,6 @@ tsjumpjet2:
 		Sequence: stand
 	Selectable:
 		Bounds: 512, 768
-	FirepowerMultiplier@FirerateCompensation:
-		Modifier: 40
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -4231,8 +4231,8 @@ TSE3:
 		Speed: 50
 	Health:
 		HP: 12000
-	# ChangesHealth@SelfHealing:
-	# 	Step: 10
+	ChangesHealth@SelfHealing:
+		Step: 12
 	Armament@PRIMARY: ##########
 		Weapon: TSBazooka
 		LocalOffset: 256,43,341
@@ -4773,8 +4773,6 @@ TSREAPER:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
-	Health:
-		HP: 75000
 	Armor:
 		Type: Medium #Wood
 	Valued:
@@ -4788,6 +4786,10 @@ TSREAPER:
 		BuildDurationModifier: 100
 	RevealsShroud:
 		Range: 6c0
+	Health:
+		HP: 75000
+	ChangesHealth@SelfHealing:
+		Step: 75
 	Mobile:
 		TurnSpeed: 200
 		Speed: 75
@@ -4848,6 +4850,8 @@ TSCYC2:
 		Speed: 52
 	Health:
 		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 200
 	Armament@PRIMARY:
 		Weapon: TSCyCannon
 	Voiced:
@@ -4881,7 +4885,9 @@ TSDissolver:
 		Speed: 70
 		Locomotor: foot
 	Health:
-		HP: 27500
+		HP: 28000
+	ChangesHealth@SelfHealing:
+		Step: 28
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -4931,6 +4937,8 @@ TSUMAGON:
 		Speed: 71
 	Health:
 		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
 	Armament@PRIMARY:
 		Weapon: TSSniper
 	Armament@ELITE:
@@ -4997,6 +5005,8 @@ TSGHOST:
 		Type: Light
 	Health:
 		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 200
 	Armament@PRIMARY:
 		Weapon: TSMechRailgun
 		LocalOffset: 256,43,256
@@ -5049,6 +5059,8 @@ TSRAILCOM:
 		Speed: 60
 	Health:
 		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
 	Armament@PRIMARY:
 		Weapon: TSCommandoRailgun
 		LocalOffset: 256,43,256

@@ -5378,19 +5378,29 @@ NaxQuadCannonAAE:
 
 SkyMageCannon:
 	Inherits: NaxQuadCannon
-	Range: 5317
+	Range: 5000
+	ReloadDelay: 26
+	Burst: 6
+	BurstDelays: 4
 
 SkyMageCannonE:
-	Inherits: NaxQuadCannonE
-	Range: 6317
+	Inherits: SkyMageCannon
+	Range: 6000
+	Burst: 8
+	BurstDelays: 3
 
 SkyMageCannonAA:
 	Inherits: NaxQuadCannonAA
-	Range: 7975
+	Range: 7500
+	ReloadDelay: 26
+	Burst: 6
+	BurstDelays: 4
 
 SkyMageCannonAAE:
-	Inherits: NaxQuadCannonAAE
-	Range: 8975
+	Inherits: SkyMageCannonAA
+	Range: 8500
+	Burst: 8
+	BurstDelays: 3
 
 NaxQuadCannonTargeting:
 	Inherits: ^aadeploytargeting

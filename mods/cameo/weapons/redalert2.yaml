@@ -4878,7 +4878,7 @@ ra2roktgun:
 	Inherits: ^FlakWeapon
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 14
-	Range: 5180
+	Range: 5000
 	Report: irocatta.wav
 	ValidTargets: Ground, Water, Air
 	Warhead@LightMissile: SpreadDamage
@@ -4913,7 +4913,7 @@ RA2CosmonautLaser:
 	Inherits: ra2roktgun
 	Report: ilasatta.wav
 	ReloadDelay: 11
-	Range: 4204
+	Range: 4750
 	Projectile: LaserZap
 		HitAnim: laserfire
 		Width: 40

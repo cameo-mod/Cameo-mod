@@ -13359,14 +13359,14 @@ ROCKETANGEL:
 		Queue: Infantry, RAInfantry, Aircraft, RAAircraft
 		Description: actor-rocketangel.description
 	Aircraft:
-		TurnSpeed: 32
-		Speed: 160
+		TurnSpeed: 28
+		Speed: 140
 		VTOL: true
 		Voice: Move
 	Health:
-		HP: 25000
+		HP: 24000
 	ChangesHealth@SelfHealing:
-		Step: 10
+		Step: 24
 	Armament@PRIMARY:
 		Weapon: RocketAngelRockets
 		LocalOffset: 512,-512,512, 512,512,512, 512,-512,512, 512,512,512
@@ -13374,6 +13374,54 @@ ROCKETANGEL:
 		FireDelay: 10
 	FirepowerMultiplier@rocketangel:
 		Modifier: 50
+	GrantConditionOnAttack@firing1:
+		Condition: firing1
+		RevokeDelay: 44
+	GrantConditionOnAttack@firing2:
+		Condition: firing2
+		RevokeDelay: 33
+	GrantConditionOnAttack@firing3:
+		Condition: firing3
+		RevokeDelay: 22
+	GrantConditionOnAttack@firing4:
+		Condition: firing4
+		RevokeDelay: 11
+	DamageMultiplier@firing1:
+		Modifier: 111
+		RequiresCondition: firing1
+	DamageMultiplier@firing2:
+		Modifier: 111
+		RequiresCondition: firing2
+	DamageMultiplier@firing3:
+		Modifier: 111
+		RequiresCondition: firing3
+	DamageMultiplier@firing4:
+		Modifier: 111
+		RequiresCondition: firing4
+	SpeedMultiplier@firing1:
+		Modifier: 77
+		RequiresCondition: firing1
+	TurnSpeedMultiplier@firing1:
+		Modifier: 77
+		RequiresCondition: firing1
+	SpeedMultiplier@firing2:
+		Modifier: 77
+		RequiresCondition: firing2
+	TurnSpeedMultiplier@firing2:
+		Modifier: 77
+		RequiresCondition: firing2
+	SpeedMultiplier@firing3:
+		Modifier: 77
+		RequiresCondition: firing3
+	TurnSpeedMultiplier@firing3:
+		Modifier: 77
+		RequiresCondition: firing3
+	SpeedMultiplier@firing4:
+		Modifier: 77
+		RequiresCondition: firing4
+	TurnSpeedMultiplier@firing4:
+		Modifier: 77
+		RequiresCondition: firing4
 	AttackAircraft:
 		Voice: Attack
 		FacingTolerance: 10

@@ -9552,9 +9552,9 @@ ra2rock:
 		Speed: 180
 		Voice: Move
 	Health:
-		HP: 17500
+		HP: 18000
 	ChangesHealth@SelfHealing:
-		Step: 7
+		Step: 18
 	Armament@PRIMARY:
 		Weapon: ra2roktgun
 	AttackAircraft:
@@ -9654,7 +9654,7 @@ yrlunr:
 	Tooltip:
 		Name: Cosmonaut
 	Valued:
-		Cost: 900
+		Cost: 1100
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -9663,13 +9663,13 @@ yrlunr:
 		Prerequisites: ~yrygcomd
 		Description: actor-ra2rock.description
 	Aircraft:
-		TurnSpeed: 36
-		Speed: 180
+		TurnSpeed: 33
+		Speed: 165
 		Voice: Move
 	Health:
-		HP: 17500
+		HP: 28000
 	ChangesHealth@SelfHealing:
-		Step: 7
+		Step: 28
 	Armament@PRIMARY:
 		Weapon: RA2CosmonautLaser
 		LocalOffset: 128,196,128, 128,-196,128

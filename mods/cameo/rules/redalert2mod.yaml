@@ -13812,7 +13812,7 @@ nax_litt:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Valued:
-		Cost: 1100
+		Cost: 1200
 	Tooltip:
 		Name: Sky Mage
 	UpdatesPlayerStatistics:
@@ -13823,13 +13823,13 @@ nax_litt:
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_litt.description
 	Aircraft:
-		TurnSpeed: 36
-		Speed: 180
+		TurnSpeed: 32
+		Speed: 160
 		Voice: Move
 	Health:
-		HP: 47500
+		HP: 48000
 	ChangesHealth@SelfHealing:
-		Step: 19
+		Step: 48
 	Armament@PRIMARY:
 		Weapon: SkyMageCannon
 		RequiresCondition: !rank-elite
@@ -13871,20 +13871,9 @@ nax_litt:
 		ForceToGround: true
 		RequiresCondition: airborne
 	FirepowerMultiplier@FirerateCompensation:
-		Modifier: 40
+		Modifier: 50
 	RenderSprites:
 		PlayerPalette: playerra2
-	ReloadDelayMultiplier@upgrade:
-		Modifier: 66
-		RequiresCondition: upra2rock
-	DamageMultiplier@upgrade:
-		Modifier: 75
-		RequiresCondition: upra2rock
-	GrantConditionOnPrerequisite@Upgrade:
-		Condition: upra2rock
-		Prerequisites: upra2rock
-	ProducibleWithLevel@spyinfantry:
-		Prerequisites: infantry.upgraded
 	ActorStatValues:
 		Upgrades: up_ostfrontexperience
 

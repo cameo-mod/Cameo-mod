@@ -2538,31 +2538,20 @@ TSJumpCannon:
 	Inherits: ^RA2FlakWeapon
 	Inherits: ^RA2Chaingun
 	ReloadDelay: 25
-	Range: 5132
+	Range: 5090
 	Report: jumpjet1.aud
-	Projectile: Bullet
-		Speed: 2000
-		Inaccuracy: 200
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 6000
+		Damage: 4000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 3
+		Damage: 2
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 6000
+		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
-		Damage: 3
-	-Warhead@EffectAir:
-
-TSJumpCannonAA:
-	Inherits: TSJumpCannon
-	ValidTargets: Air
-	Warhead@1Dam: SpreadDamage
-		Damage: 1000
-		ValidTargets: Air
+		Damage: 2
 
 TSAssaultCannon:
 	Inherits: ^FlakWeapon

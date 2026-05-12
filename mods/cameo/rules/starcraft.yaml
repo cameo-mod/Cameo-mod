@@ -9195,7 +9195,7 @@ SCSWARMLING:
 	Health:
 		HP: 40000
 	ChangesHealth@SelfHealing:
-		Step: 16
+		Step: 40
 	Armament:
 		Weapon: SwarmlingShoot
 		LocalOffset: 0,0,0
@@ -9225,95 +9225,155 @@ SCSWARMLING:
 		Condition: Swarmling
 	ExternalCondition@Swarmling:
 		Condition: Swarmling
+	DamageMultiplier@Swarmling1:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 6
+	DamageMultiplier@Swarmling2:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 9
+	DamageMultiplier@Swarmling3:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 12
+	DamageMultiplier@Swarmling4:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 15
+	DamageMultiplier@Swarmling5:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 18
+	DamageMultiplier@Swarmling6:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 21
+	DamageMultiplier@Swarmling7:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 24
+	DamageMultiplier@Swarmling8:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 27
+	DamageMultiplier@Swarmling9:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 30
+	DamageMultiplier@Swarmling10:
+		Modifier: 95
+		RequiresCondition: Swarmling >= 33
 	SpeedMultiplier@Swarmling1:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 6
 	SpeedMultiplier@Swarmling2:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 9
 	SpeedMultiplier@Swarmling3:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 12
 	SpeedMultiplier@Swarmling4:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 15
 	SpeedMultiplier@Swarmling5:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 18
 	SpeedMultiplier@Swarmling6:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 21
 	SpeedMultiplier@Swarmling7:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 24
 	SpeedMultiplier@Swarmling8:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 27
 	SpeedMultiplier@Swarmling9:
-		Modifier: 90
+		Modifier: 95
 		RequiresCondition: Swarmling >= 30
 	SpeedMultiplier@Swarmling10:
-		Modifier: 90
+		Modifier: 95
+		RequiresCondition: Swarmling >= 33
+	FirepowerMultiplier@Swarmling1:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 6
+	FirepowerMultiplier@Swarmling2:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 9
+	FirepowerMultiplier@Swarmling3:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 12
+	FirepowerMultiplier@Swarmling4:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 15
+	FirepowerMultiplier@Swarmling5:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 18
+	FirepowerMultiplier@Swarmling6:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 21
+	FirepowerMultiplier@Swarmling7:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 24
+	FirepowerMultiplier@Swarmling8:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 27
+	FirepowerMultiplier@Swarmling9:
+		Modifier: 110
+		RequiresCondition: Swarmling >= 30
+	FirepowerMultiplier@Swarmling10:
+		Modifier: 110
 		RequiresCondition: Swarmling >= 33
 	ReloadDelayMultiplier@Swarmling1:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 6
 	ReloadDelayMultiplier@Swarmling2:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 9
 	ReloadDelayMultiplier@Swarmling3:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 12
 	ReloadDelayMultiplier@Swarmling4:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 15
 	ReloadDelayMultiplier@Swarmling5:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 18
 	ReloadDelayMultiplier@Swarmling6:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 21
 	ReloadDelayMultiplier@Swarmling7:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 24
 	ReloadDelayMultiplier@Swarmling8:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 27
 	ReloadDelayMultiplier@Swarmling9:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 30
 	ReloadDelayMultiplier@Swarmling10:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 33
 	RangeMultiplier@Swarmling1:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 6
 	RangeMultiplier@Swarmling2:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 9
 	RangeMultiplier@Swarmling3:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 12
 	RangeMultiplier@Swarmling4:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 15
 	RangeMultiplier@Swarmling5:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 18
 	RangeMultiplier@Swarmling6:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 21
 	RangeMultiplier@Swarmling7:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 24
 	RangeMultiplier@Swarmling8:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 27
 	RangeMultiplier@Swarmling9:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 30
 	RangeMultiplier@Swarmling10:
-		Modifier: 110
+		Modifier: 105
 		RequiresCondition: Swarmling >= 33
 	WithColoredOverlay@Swarmling1:
 		Color: 6688FF11
@@ -9377,14 +9437,14 @@ SCSHRIEK:
 		Queue: SCZergInfantry
 		Description: Airborne melee Zerg creature.\n Strong vs Infantry, Aircraft
 	Aircraft:
-		Speed: 160
-		TurnSpeed: 32
-		RepulsionSpeed: 32
+		Speed: 195
+		TurnSpeed: 39
+		RepulsionSpeed: 39
 		IdealSeparation: 640
 	Health:
-		HP: 17500
+		HP: 14000
 	ChangesHealth@SelfHealing:
-		Step: 7
+		Step: 14
 	Armament:
 		Weapon: ShriekStinger
 		LocalOffset: 0,0,0

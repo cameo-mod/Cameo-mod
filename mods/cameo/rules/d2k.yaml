@@ -9626,7 +9626,7 @@ d2k_ordos_heavycombattank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ordos_upgrade_shield, ordos_upgrade_contraband
+		Upgrades: ordos_upgrade_shield, ordos_upgrade_contraband, d2k_ordos_upgrade_heavycombattank_rockets
 
 d2k_autogun_tank_small:
 	Inherits@D2KT: ^D2KTank
