@@ -291,31 +291,32 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				slotsButton.OnMouseDown = _ =>
 				{
-					var botTypes = map.PlayerActorInfo.TraitInfos<IBotInfo>().Select(t => t.Type);
+					var allBots = map.PlayerActorInfo.TraitInfos<IBotInfo>().ToArray();
 					var options = new Dictionary<string, IEnumerable<DropDownOption>>();
 
 					var botController = orderManager.LobbyInfo.Clients.FirstOrDefault(c => c.IsAdmin);
 					if (orderManager.LobbyInfo.Slots.Values.Any(s => s.AllowBots))
 					{
-						var botOptions = new List<DropDownOption>()
+						var botOptions = new List<DropDownOption>();
+						foreach (var botInfo in allBots)
 						{
-							new()
+							var capturedBot = botInfo;
+							botOptions.Add(new DropDownOption()
 							{
-								Title = FluentProvider.GetMessage(Add),
+								Title = $"{FluentProvider.GetMessage(Add)} — {map.GetMessage(capturedBot.Name)}",
 								IsSelected = () => false,
 								OnClick = () =>
 								{
 									foreach (var slot in orderManager.LobbyInfo.Slots)
 									{
-										var bot = botTypes.Random(Game.CosmeticRandom);
 										var c = orderManager.LobbyInfo.ClientInSlot(slot.Key);
 										if (slot.Value.AllowBots && (c == null || c.Bot != null))
 											orderManager.IssueOrder(
-												Order.Command($"slot_bot {slot.Key} {botController.Index} {bot}"));
+												Order.Command($"slot_bot {slot.Key} {botController.Index} {capturedBot.Type}"));
 									}
 								}
-							}
-						};
+							});
+						}
 
 						if (orderManager.LobbyInfo.Clients.Any(c => c.Bot != null))
 						{
