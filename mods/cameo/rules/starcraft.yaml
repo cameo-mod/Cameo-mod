@@ -2640,6 +2640,9 @@ SCCREEPCOLONYDEFENSE:
 	Inherits: SCCREEPCOLONY
 	Buildable:
 		Queue: Defence, RADefence
+	RenderSprites:
+		Image: SCCREEPCOLONY
+		PlayerPalette: player_rgba
 
 scsporecolonyupgrade:
 	Inherits: ^BuildingPlug
