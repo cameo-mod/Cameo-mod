@@ -5,6 +5,7 @@
 #endregion
 
 using System;
+using System.Linq;
 using OpenRA.Graphics;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common.Widgets;
@@ -52,10 +53,15 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			autoSaveNoDropDown.GetText = () => FluentProvider.GetMessage(AutoSaveMaxFileNumber, "saves", Game.Settings.SinglePlayerSettings.AutoSaveMaxFileCount);
 			autoSaveNoDropDown.IsDisabled = () => Game.Settings.SinglePlayerSettings.AutoSaveInterval <= 0;
 
+			var isMultiplayer = worldRenderer?.World != null &&
+				worldRenderer.World.Players.Count(p => !p.IsBot && p.Playable) > 1;
+
 			var quotaCheckbox = panel.Get<CheckboxWidget>("QUOTA_MODE_CHECKBOX");
-			quotaCheckbox.IsChecked = () => Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
+			quotaCheckbox.IsChecked = () => !isMultiplayer && Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
+			quotaCheckbox.IsDisabled = () => isMultiplayer;
 			quotaCheckbox.OnClick = () =>
 			{
+				if (isMultiplayer) return;
 				Game.Settings.SinglePlayerSettings.QuotaModeEnabled ^= true;
 				Game.Settings.Save();
 
