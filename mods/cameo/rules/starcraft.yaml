@@ -2529,8 +2529,8 @@ SCCREEPCOLONY:
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~schatchery
-		Queue: Building, RABuilding, Defence, RADefence
-		Description: Can be upgraded to Sunken or Spore Colonies.
+		Queue: Building, RABuilding
+		Description: Expands Zerg buildable area. Can be upgraded to Sunken or Spore Colonies.
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2636,6 +2636,11 @@ SCCREEPCOLONY:
 	ActorStatValues:
 		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
 
+SCCREEPCOLONYDEFENSE:
+	Inherits: SCCREEPCOLONY
+	Buildable:
+		Queue: Defence, RADefence
+
 scsporecolonyupgrade:
 	Inherits: ^BuildingPlug
 	Tooltip:
@@ -2714,7 +2719,7 @@ SCEXTRACTOR:
 	ProvidesPrerequisite@buildingname:
 	RequiresBuildableArea:
 		AreaTypes: building
-		Adjacent: 3
+		Adjacent: 4
 		IsCircular: true
 	Buildable:
 		BuildPaletteOrder: 30
@@ -2769,7 +2774,7 @@ SCEXTRACTOR:
 		Requirements:
 			scextractor: !build-incomplete && !extractorupg
 	WithCreepOverlay:
-		Adjacent: 1
+		Adjacent: 0
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
