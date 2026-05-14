@@ -2712,6 +2712,10 @@ SCEXTRACTOR:
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 3
+		IsCircular: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~schatchery
@@ -2764,6 +2768,8 @@ SCEXTRACTOR:
 			scextractor: extractorupg
 		Requirements:
 			scextractor: !build-incomplete && !extractorupg
+	WithCreepOverlay:
+		Adjacent: 1
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
