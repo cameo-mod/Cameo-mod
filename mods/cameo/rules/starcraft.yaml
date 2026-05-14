@@ -2529,7 +2529,7 @@ SCCREEPCOLONY:
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~schatchery
-		Queue: Building, RABuilding
+		Queue: Building, RABuilding, Defence, RADefence
 		Description: Can be upgraded to Sunken or Spore Colonies.
 	Building:
 		Footprint: xx xx
