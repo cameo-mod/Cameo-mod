@@ -2339,7 +2339,7 @@ SCHATCHERY:
 		AreaTypes: building, cityi, hatchery, creep
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 3000
 		BodyNames: body, lair, hive
 	-WithDeathAnimation:
 	Refinery:
@@ -2583,7 +2583,7 @@ SCCREEPCOLONY:
 		RequiresCondition: spore && !sunken
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 		BodyNames: body, sunken, spore
 	AttackOmni:
 		Armaments: primary, spore
@@ -2733,7 +2733,7 @@ SCEXTRACTOR:
 	Refinery:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2789,7 +2789,7 @@ SCSPAWNINGPOOL:
 	Inherits@shape: ^2x2Shape
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	Tooltip:
 		Name: Spawning Pool
 	Valued:
@@ -2867,7 +2867,7 @@ SCEVOLUTIONCHAMBER:
 		ProductionType: Addons
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2918,7 +2918,7 @@ SCHYDRALISKDEN:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2968,7 +2968,7 @@ SCQUEENSNEST:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -3029,7 +3029,7 @@ SCSPIRE:
 	-WithDeathAnimation:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 		BodyNames: body, greaterspire
 	WithSpriteBody:
 		RequiresCondition: !scgreaterspire
@@ -3134,7 +3134,7 @@ SCULTRALISKCAVERN:
 	#	ProductionType: UltraCave
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -3186,7 +3186,7 @@ SCDEFILERMOUND:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@zergsoilkilled:
 		Actor: zergsoilkiller
@@ -3274,7 +3274,7 @@ SCOVERMIND:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 3000
 	-WithDeathAnimation:
 	-ToggleConditionOnOrder:
 	SpawnActorOnDeath@death1:
