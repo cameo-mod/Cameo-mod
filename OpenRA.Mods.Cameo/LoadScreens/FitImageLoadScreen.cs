@@ -40,7 +40,7 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		{
 			base.Init(modData, info);
 
-			messages = FluentProvider.GetMessage(Loading).Split(',').Select(x => x.Trim()).ToArray();
+			messages = FluentProvider.GetMessage(Loading).Split('$').Select(x => x.Trim()).ToArray();
 
 			text = messages.Random(Game.CosmeticRandom);
 		}
