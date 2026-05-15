@@ -92,33 +92,33 @@ label-armor-class =
 
 loadscreen-loading = Drag to set a formation for units when attack-moving$
    Access your Promotions tab through the star button on the sidebar$
-   The promotions counter at the top edge of the screen displays your points and progress to earning them$
+   The promotions counter at the top edge of the screen displays your points and progress toward earning them$
    Multiple production buildings can be cycled through using their categories' respective hotkeys$
-   Radiation will damage affected units regardless of player and resulting deaths do not count toward kills$
-   Using Ctrl when issuing build order will insert to the front of the build queue$
-   Using Alt when issuing build order will trigger infinite build queue for that unit$
-   (Ctrl+)Middle clicking when issuing build order will cancel the order without On-Hold$
-   Having multiple Construction Yards (or equivalent) will speed up construction process greatly$
-   Dune 2000 factions are able to construct concrete foundations, increasing armor and enables self-repair for structures above it$
-   Starcraft factions treat the game's "power" resource the same as "supply" resource in the original game$
-   Starcraft factions do not have limit on how many units they can have, as long as their supply can handle them$
-   Some upgrades are team upgrades, meaning your allies got to receive the effect of the upgrade$
-   Try selecting Construction Yard (or equivalent) and then issuing move order while holding Alt$
-   Some Red Alert 1/2 factions employs cryo weaponry, which will be able to freeze their opponent's unit over time$
-   Some weapon gives burning effect, indicated by the red stripe below the health bar. Burning units will receive damage over time$
-   All Protoss units and structures are shielded, which can regenerate over time when not in combat$
-   Ixian faction has a team upgrade that would give personal shield to their allies' units$
-   Consortium faction is able to construct their buildings under water, hiding them in plain sight$
-   A lot of air units are equipped with stealth detecting sensors, which range indicated by the green dashed circle$
-   Garrisonable buildings usually heal over time, but they can be permanently destroyed with large enough instant damage$
-   Resource tiers: Ore (25) < Tiberium (30) < Blue tiberium (35) < Red tiberium (40) < Gold tiberium (45) < Gems (50)$
-   Small blossom trees replenish resources at noticably slower rate compared to normal ones$
+   Radiation will damage affected units regardless of player allegiance, and resulting deaths do not count as kills$
+   Using Ctrl when issuing a build order will insert it at the front of the build queue$
+   Using Alt when issuing a build order will enable an infinite build queue for that unit$
+   (Ctrl+)Middle-clicking when issuing a build order will cancel the order without On-Hold$
+   Having multiple Construction Yards (or equivalent) will greatly speed up the construction process$
+   Dune 2000 factions are able to construct concrete foundations, increasing armor and enabling self-repair for structures above them$
+   Starcraft factions treat the game's "power" resource the same as the "supply" resource in the original game$
+   Starcraft factions do not have a limit on how many units they can have, as long as their supply can support them$
+   Some upgrades are team upgrades, meaning your allies also receive the effect of the upgrade$
+   Try selecting a Construction Yard (or equivalent) and then issuing a move order while holding Alt$
+   Some Red Alert 1/2 factions employ cryo weaponry, which can freeze enemy units over time$
+   Some weapons apply a burning effect, indicated by the red stripe below the health bar. Burning units will take damage over time$
+   All Protoss units and structures are shielded; shields can regenerate over time when not in combat$
+   The Ixian faction has a team upgrade that gives a personal shield to their allies' units$
+   The Consortium faction is able to construct their buildings underwater, hiding them from view$
+   Many air units are equipped with stealth-detecting sensors, whose range is indicated by the green dashed circle$
+   Garrisonable buildings usually heal over time, but they can be permanently destroyed with a large enough burst of instant damage$
+   Resource tiers: Ore (25) < Tiberium (30) < Blue Tiberium (35) < Red Tiberium (40) < Gold Tiberium (45) < Gems (50)$
+   Small blossom trees replenish resources at a noticeably slower rate compared to normal ones$
    Refineries have a limit on how many harvesters can be queued to dock at a time$
    Air units are generally immune to mind control effects$
-   Issuing deploy order (defaults to F key) on rearmable aircrafts will tell them to return to base$
-   If the game's graphics are too bright (especially on snow theater) or too dim, you can adjust it in the settings$
-   The information panel at the bottom-left of the screen contains useful stats, including what upgrades a unit currently have or could have$
-   When a team upgrade has finished researching, a small icon of the upgrade will be displayed at the top-left corner of the screen
+   Issuing a deploy order (defaults to F key) on rearmable aircraft will tell them to return to base$
+   If the game's graphics are too bright (especially on snow theater) or too dim, you can adjust this in the settings$
+   The information panel at the bottom-left of the screen contains useful stats, including what upgrades a unit currently has or could have$
+   When a team upgrade has been researched, a small icon of the upgrade will be displayed at the top-left corner of the screen
 
 # Double-tapping Q to select all of your combat units on the map$
 # Q followed with F is the quickest way to deploy the MCV at the start of the game
