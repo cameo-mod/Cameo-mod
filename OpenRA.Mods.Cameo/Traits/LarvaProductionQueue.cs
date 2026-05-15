@@ -4,6 +4,7 @@
  */
 #endregion
 
+using System;
 using System.Linq;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
@@ -49,7 +50,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			// we know how many in-progress (non-Done) items may tick.
 			var assignedSlots = larvaProduction?.AssignedSlotCount ?? 0;
 			var doneCount = Queue.Count(i => i.Done);
-			var tickableNonDone = System.Math.Max(0, assignedSlots - doneCount);
+			var tickableNonDone = Math.Max(0, assignedSlots - doneCount);
 
 			// Use a snapshot of the queue so that EndProduction (called inside
 			// OnComplete -> BuildUnit) can safely remove items mid-iteration.
@@ -72,6 +73,52 @@ namespace OpenRA.Mods.Cameo.Traits
 				item.Tick(playerResources);
 				ticked++;
 			}
+		}
+
+		protected override void BeginProduction(ProductionItem item, bool hasPriority)
+		{
+			base.BeginProduction(item, hasPriority);
+
+			if (Info.InfiniteBuildLimit < 0)
+				return;
+
+			// After base runs, check if infinite mode just triggered.
+			// If so, the base collapsed the queue to 1 item. Re-populate up to
+			// MaxParallel so all larvae can build simultaneously.
+			var infiniteCount = Queue.Count(i => i.Item == item.Item && i.Infinite);
+			if (infiniteCount == 0)
+				return;
+
+			var totalOfType = Queue.Count(i => i.Item == item.Item);
+			for (var i = totalOfType; i < Info.MaxParallel; i++)
+				Queue.Add(new ProductionItem(this, item.Item, item.TotalCost, playerPower, item.OnComplete) { Infinite = true });
+		}
+
+		protected override void CancelProduction(string itemName, uint numberToCancel)
+		{
+			// If there are multiple infinite items (our parallel slots), clear them all
+			// atomically so none self-replicates via EndProductionParallel after cancel.
+			var infiniteItems = Queue.Where(i => i.Item == itemName && i.Infinite).ToList();
+			if (infiniteItems.Count > 0)
+			{
+				foreach (var inf in infiniteItems)
+					inf.Infinite = false;
+
+				// Remove and refund all but the first; base CancelProduction handles the first.
+				foreach (var extra in infiniteItems.Skip(1))
+				{
+					if (extra.ResourcesPaid > 0)
+					{
+						playerResources.GiveResources(extra.ResourcesPaid);
+						extra.RemainingCost += extra.ResourcesPaid;
+					}
+
+					playerResources.GiveCash(extra.TotalCost - extra.RemainingCost);
+					Queue.Remove(extra);
+				}
+			}
+
+			base.CancelProduction(itemName, numberToCancel);
 		}
 
 		protected override bool BuildUnit(ActorInfo unit)
@@ -100,11 +147,29 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			if (!mostLikelyProducerTrait.IsTraitPaused && mostLikelyProducerTrait.Produce(Actor, unit, type, inits, item.TotalCost))
 			{
-				EndProduction(item);
+				EndProductionParallel(item);
 				return true;
 			}
 
 			return false;
+		}
+
+		// Used instead of EndProduction for the normal (non-cancellation) completion path.
+		// Re-fills the queue to MaxParallel infinite items after each unit spawns so all
+		// larvae remain occupied throughout an infinite build loop.
+		void EndProductionParallel(ProductionItem item)
+		{
+			var wasInfinite = item.Infinite;
+			var itemName = item.Item;
+			Queue.Remove(item);
+
+			if (!wasInfinite)
+				return;
+
+			// How many of this type are still queued (may be building in parallel).
+			var existing = Queue.Count(i => i.Item == itemName);
+			for (var i = existing; i < Info.MaxParallel; i++)
+				Queue.Add(new ProductionItem(this, itemName, item.TotalCost, playerPower, item.OnComplete) { Infinite = true });
 		}
 	}
 }
