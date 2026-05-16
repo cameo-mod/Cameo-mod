@@ -7073,6 +7073,7 @@ CPQDEBUGDUMMY:
 ^MCV:
 	Inherits@MC: ^MCImmune
 	Inherits@snipe: ^DriverKillImmune
+	CriticalUnit:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
