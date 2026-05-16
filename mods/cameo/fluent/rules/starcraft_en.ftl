@@ -1,7 +1,9 @@
 ## starcraft.yaml
 
 faction-terran =
-   .description = The "Terrans" are humans living in the Koprulu Sector of the Milky Way.
+   .description = The Terrans from the StarCraft universe
+
+   The Terrans are humans living in the Koprulu Sector of the Milky Way.
 
    Features:
    - Units consume power (supply game mechanics)
@@ -12,7 +14,9 @@ faction-terran =
    - Can deploy the Nuclear Strike.
 
 faction-protoss =
-   .description = The Protoss are sapient humanoid species native to the Koprulu Sector of the Milky Way.
+   .description = The Protoss from the StarCraft universe
+
+   The Protoss are sapient humanoid species native to the Koprulu Sector of the Milky Way.
 
    Features:
    - Units consume power (supply game mechanics)
@@ -23,7 +27,9 @@ faction-protoss =
    - Can deploy the Purifier Beam.
 
 faction-zerg =
-   .description = The Zerg are sapient, biologically advanced, arthropodal aliens native to the Koprulu Sector of the Milky Way.
+   .description = The Zerg from the StarCraft universe
+
+   The Zerg are sapient, biologically advanced, arthropodal aliens native to the Koprulu Sector of the Milky Way.
 
    Features:
    - Units consume power (supply game mechanics)
