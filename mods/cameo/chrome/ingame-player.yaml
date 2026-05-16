@@ -1,4 +1,4 @@
-Container@PERF_WIDGETS:
+﻿Container@PERF_WIDGETS:
 	Logic: PerfDebugLogic
 	Children:
 		Label@PERF_TEXT:
@@ -33,6 +33,8 @@ Container@PLAYER_WIDGETS:
 			AddToGroupKeyPrefix: ControlGroupAddTo
 			CombineWithGroupKeyPrefix: ControlGroupCombineWith
 			JumpToGroupKeyPrefix: ControlGroupJumpTo
+		AutoControlGroups@AUTO_CONTROL_GROUPS:
+			RegisterTypesForGroupKeyPrefix: ControlGroupRegisterTypes
 		LogicTicker@SIDEBAR_TICKER:
 		Container@SUPPORT_POWERS:
 			Logic: SupportPowerBinLogic

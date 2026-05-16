@@ -1,3 +1,53 @@
+ControlGroupRegisterTypes01: NUMBER_1 Ctrl, Alt
+	Description: Auto-assign control group 1 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes02: NUMBER_2 Ctrl, Alt
+	Description: Auto-assign control group 2 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes03: NUMBER_3 Ctrl, Alt
+	Description: Auto-assign control group 3 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes04: NUMBER_4 Ctrl, Alt
+	Description: Auto-assign control group 4 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes05: NUMBER_5 Ctrl, Alt
+	Description: Auto-assign control group 5 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes06: NUMBER_6 Ctrl, Alt
+	Description: Auto-assign control group 6 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes07: NUMBER_7 Ctrl, Alt
+	Description: Auto-assign control group 7 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes08: NUMBER_8 Ctrl, Alt
+	Description: Auto-assign control group 8 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes09: NUMBER_9 Ctrl, Alt
+	Description: Auto-assign control group 9 by unit type
+	Types: ControlGroups
+	Contexts: player
+
+ControlGroupRegisterTypes10: NUMBER_0 Ctrl, Alt
+	Description: Auto-assign control group 10 by unit type
+	Types: ControlGroups
+	Contexts: player
+
 ProductionTypeBuilding: E
 	Description: Building Tab
 	Types: Production, Player
@@ -22,13 +72,27 @@ ProductionTypeNaval: I
 	Description: Naval Tab
 	Types: Production, Player
 
-ProductionTypeUpgrade: O
+ProductionTypeAddon: E Shift
+	Description: Addon Tab
+	Types: Production, Player
+
+ProductionTypeUpgrade: R Shift
 	Description: Upgrade Tab
 	Types: Production, Player
 
 ProductionTypePromotion: P
 	Description: Promotion Tab
 	Types: Production, Player
+
+CycleProductionBuildings: TAB
+	Description: hotkey-description-cycleproductionbuildings
+	Types: Production
+	Contexts: player, spectator
+
+SelectProductionBuilding: TAB Ctrl
+	Description: hotkey-description-selectproductionbuilding
+	Types: Production
+	Contexts: player
 
 PowerDown: X
 	Description: Power-down mode
