@@ -120,6 +120,9 @@ Player:
 	HarvesterAttackNotifier:
 		ExcludeDamageTypes: SpiceExplosion
 		TextNotification: Resource collector is under attack.
+	CriticalUnitAttackNotifier:
+		NotifyInterval: 3000
+		TextNotification: Our MCV unit is under attack.
 	EnemyWatcher:
 	Shroud:
 		FogCheckboxDisplayOrder: 3
