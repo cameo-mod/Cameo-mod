@@ -33,7 +33,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 		public override bool HandleMouseInput(MouseInput mi)
 		{
-			var quotaManager = World.WorldActor.TraitOrDefault<QuotaProductionManager>();
+			var quotaManager = World.LocalPlayer?.PlayerActor?.TraitOrDefault<QuotaProductionManager>();
 			if (quotaManager == null || !quotaManager.Enabled || CurrentQueue == null)
 				return base.HandleMouseInput(mi);
 
@@ -82,7 +82,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 		{
 			base.Draw();
 
-			var quotaManager = World.WorldActor.TraitOrDefault<QuotaProductionManager>();
+			var quotaManager = World.LocalPlayer?.PlayerActor?.TraitOrDefault<QuotaProductionManager>();
 			if (quotaManager == null || !quotaManager.Enabled || CurrentQueue == null)
 				return;
 

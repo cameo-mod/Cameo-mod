@@ -15,6 +15,7 @@ EditorPlayer:
 
 Player:
 	Inherits: ^BasePlayer
+	QuotaProductionManager:
 	PlaceBuilding:
 		NewOptionsNotification: NewOptions
 		NewOptionsNotificationDelay: 10

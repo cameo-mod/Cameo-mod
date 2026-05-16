@@ -7,64 +7,117 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Graphics;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
-	[TraitLocation(SystemActors.World)]
-	[Desc("Enables Quota Mode: production buildings automatically re-queue units to maintain",
-		"global alive-count targets. When Quota Mode is on, left-clicking a unit in the",
-		"production panel increments its global quota; right-clicking decrements it.",
-		"All buildings contribute to and draw from the same quota pool.",
+	[Desc("Per-player trait. Enables Quota Mode for the owning player: production buildings",
+		"automatically re-queue units to maintain alive-count targets per unit type.",
+		"Left-clicking a unit in the production panel increments the target; right-clicking decrements it.",
+		"All buildings owned by the player contribute to and draw from the same per-type pool.",
 		"The unit type with the worst alive/target ratio is prioritised across all buildings.",
-		"Designed for single-player use. Behaviour in multiplayer is experimental.")]
+		"State is synchronised across clients via orders, making it multiplayer-safe.")]
 	public class QuotaProductionManagerInfo : TraitInfo
 	{
-		public override object Create(ActorInitializer init) => new QuotaProductionManager(this);
+		public override object Create(ActorInitializer init) => new QuotaProductionManager(init.Self, this);
 	}
 
-	public class QuotaProductionManager : INotifyCreated, ITick, INotifyOtherProduction
+	public class QuotaProductionManager : IResolveOrder, INotifyCreated, IWorldLoaded, ITick, INotifyOtherProduction
 	{
 		World world;
+		OpenRA.Player owner;
 
-		public bool Enabled { get; set; }
-
-		// Global quota targets: unit-type name → target alive count.
+		// Synced state — only mutated via IResolveOrder so all clients agree.
+		bool enabled;
 		readonly Dictionary<string, int> globalQuotas = new();
 
-		// Alive actors per building (for tracking individual actor lifetimes).
-		// Key: building ActorID → unit-type name → actor list.
+		// Local-only bookkeeping; meaningful only on the owning player's client (gated below).
 		readonly Dictionary<uint, Dictionary<string, List<Actor>>> buildingAlive = new();
-
-		// Queue depth snapshots for credit consumption.
-		// Key: (building ActorID, ProductionQueue.Info.Type) → unit-type name → count in queue.
 		readonly Dictionary<(uint, string), Dictionary<string, int>> queueSnapshots = new();
-
-		// Credits for auto-queue orders issued but not yet visible in AllQueued().
-		// Key: building ActorID → unit-type name → pending count.
 		readonly Dictionary<uint, Dictionary<string, int>> autoQueueCredits = new();
+		readonly Dictionary<(uint, string), int> completedPrevFrame = new();
+		readonly Dictionary<(uint, string), int> completedThisFrame = new();
 
-		// Production completions from the previous frame (needed for credit consumption math).
-		// INotifyOtherProduction fires inside AddFrameEndTask, so completions are one frame behind.
-		readonly Dictionary<(uint buildingId, string type), int> completedPrevFrame = new();
-		readonly Dictionary<(uint buildingId, string type), int> completedThisFrame = new();
+		public QuotaProductionManager(Actor self, QuotaProductionManagerInfo info) { }
 
-		public QuotaProductionManager(QuotaProductionManagerInfo info) { }
+		public bool Enabled => enabled;
 
 		void INotifyCreated.Created(Actor self)
 		{
 			world = self.World;
-			var isMultiplayer = world.Players.Count(p => !p.IsBot && p.Playable) > 1;
-			Enabled = !isMultiplayer && Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
+			owner = self.Owner;
+		}
+
+		void IWorldLoaded.WorldLoaded(World w, WorldRenderer wr)
+		{
+			if (owner == w.LocalPlayer && !owner.NonCombatant &&
+				Game.Settings.SinglePlayerSettings.QuotaModeEnabled)
+			{
+				SetEnabled(true);
+			}
+		}
+
+		public void SetEnabled(bool enable)
+		{
+			if (world?.LocalPlayer == null || owner != world.LocalPlayer) return;
+			world.IssueOrder(new Order("SetQuotaEnabled", owner.PlayerActor, false)
+			{
+				ExtraData = enable ? 1u : 0u
+			});
+		}
+
+		public void AdjustQuota(string unitType, int delta)
+		{
+			if (world?.LocalPlayer == null || owner != world.LocalPlayer || string.IsNullOrEmpty(unitType)) return;
+			world.IssueOrder(new Order("AdjustQuota", owner.PlayerActor, false)
+			{
+				TargetString = unitType,
+				ExtraData = unchecked((uint)delta)
+			});
+		}
+
+		void IResolveOrder.ResolveOrder(Actor self, Order order)
+		{
+			switch (order.OrderString)
+			{
+				case "SetQuotaEnabled":
+					enabled = order.ExtraData != 0;
+					break;
+
+				case "AdjustQuota":
+					ApplyQuotaAdjustment(order.TargetString, unchecked((int)order.ExtraData));
+					break;
+			}
+		}
+
+		void ApplyQuotaAdjustment(string unitType, int delta)
+		{
+			if (string.IsNullOrEmpty(unitType)) return;
+
+			var newVal = Math.Max(0, globalQuotas.GetValueOrDefault(unitType, 0) + delta);
+
+			if (world.Map.Rules.Actors.TryGetValue(unitType, out var actorInfo))
+			{
+				var buildableInfo = actorInfo.TraitInfoOrDefault<BuildableInfo>();
+				if (buildableInfo != null && buildableInfo.BuildLimit > 0)
+					newVal = Math.Min(newVal, buildableInfo.BuildLimit);
+			}
+
+			if (newVal == 0)
+				globalQuotas.Remove(unitType);
+			else
+				globalQuotas[unitType] = newVal;
 		}
 
 		void INotifyOtherProduction.UnitProducedByOther(
 			Actor self, Actor producer, Actor produced, string productionType, TypeDictionary init)
 		{
-			if (!Enabled) return;
-			if (world.LocalPlayer == null || producer.Owner != world.LocalPlayer) return;
+			if (owner != world.LocalPlayer) return;
+			if (!enabled) return;
+			if (producer.Owner != owner) return;
 
 			var key = (producer.ActorID, produced.Info.Name);
 			completedThisFrame[key] = completedThisFrame.GetValueOrDefault(key, 0) + 1;
@@ -75,22 +128,22 @@ namespace OpenRA.Mods.Cameo.Traits
 
 		void ITick.Tick(Actor self)
 		{
-			if (!Enabled || world.LocalPlayer == null) return;
+			if (!enabled) return;
+			if (owner != world.LocalPlayer) return;
 
-			// Promote this-frame completions (they fire after all actor ticks, so they lag one frame).
 			completedPrevFrame.Clear();
 			foreach (var kvp in completedThisFrame)
 				completedPrevFrame[kvp.Key] = kvp.Value;
 			completedThisFrame.Clear();
 
-			// Pass 1: clean dead actors, suppress infinite mode, consume credits from resolved orders,
+			// Pass 1: clean dead actors, consume credits from resolved orders,
 			// and accumulate the current global queue counts.
 			var globalQueued = new Dictionary<string, int>();
 
 			foreach (var building in world.ActorsHavingTrait<ProductionQueue>())
 			{
 				if (building.IsDead || !building.IsInWorld) continue;
-				if (building.Owner != world.LocalPlayer) continue;
+				if (building.Owner != owner) continue;
 
 				CleanDeadActors(building.ActorID);
 
@@ -118,7 +171,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			foreach (var building in world.ActorsHavingTrait<ProductionQueue>())
 			{
 				if (building.IsDead || !building.IsInWorld) continue;
-				if (building.Owner != world.LocalPlayer) continue;
+				if (building.Owner != owner) continue;
 
 				AutoQueueDeficit(building, globalQueued, dynamicInflight);
 			}
@@ -172,10 +225,10 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			// Only queue one unit at a time per building; re-evaluate when the slot is free.
 			if (queues.Any(q => q.AllQueued().Any())) return;
-			if (autoQueueCredits.TryGetValue(building.ActorID, out var existingCredits) && existingCredits.Values.Any(c => c > 0)) return;
+			if (autoQueueCredits.TryGetValue(building.ActorID, out var existingCredits) &&
+				existingCredits.Values.Any(c => c > 0)) return;
 
 			string bestType = null;
-			ProductionQueue bestQueue = null;
 			var bestRatio = float.MaxValue;
 
 			foreach (var (type, target) in globalQuotas)
@@ -206,7 +259,6 @@ namespace OpenRA.Mods.Cameo.Traits
 				{
 					bestRatio = ratio;
 					bestType = type;
-					bestQueue = queue;
 				}
 			}
 
@@ -218,8 +270,8 @@ namespace OpenRA.Mods.Cameo.Traits
 				ExtraData = 1
 			});
 
-			GetOrAdd(autoQueueCredits, building.ActorID)[bestType] =
-				GetOrAdd(autoQueueCredits, building.ActorID).GetValueOrDefault(bestType, 0) + 1;
+			var bc = GetOrAdd(autoQueueCredits, building.ActorID);
+			bc[bestType] = bc.GetValueOrDefault(bestType, 0) + 1;
 
 			// Update dynamicInflight so later buildings in this tick see this order.
 			dynamicInflight[bestType] = dynamicInflight.GetValueOrDefault(bestType, 0) + 1;
@@ -232,36 +284,17 @@ namespace OpenRA.Mods.Cameo.Traits
 				list.RemoveAll(a => a.IsDead || !a.IsInWorld);
 		}
 
-		int GetCredit(uint buildingId, string type)
-		{
-			if (!autoQueueCredits.TryGetValue(buildingId, out var credits)) return 0;
-			return credits.GetValueOrDefault(type, 0);
-		}
-
 		void ConsumeCredit(uint buildingId, string type, int amount)
 		{
-			if (amount <= 0 || !autoQueueCredits.TryGetValue(buildingId, out var credits)) return;
+			if (amount <= 0) return;
+			if (!autoQueueCredits.TryGetValue(buildingId, out var credits)) return;
 			credits[type] = Math.Max(0, credits.GetValueOrDefault(type, 0) - amount);
 		}
 
-		public void AdjustQuota(string unitType, int delta)
+		public int GetQuota(string unitType)
 		{
-			var newVal = Math.Max(0, globalQuotas.GetValueOrDefault(unitType, 0) + delta);
-
-			if (world.Map.Rules.Actors.TryGetValue(unitType, out var actorInfo))
-			{
-				var buildableInfo = actorInfo.TraitInfoOrDefault<BuildableInfo>();
-				if (buildableInfo != null && buildableInfo.BuildLimit > 0)
-					newVal = Math.Min(newVal, buildableInfo.BuildLimit);
-			}
-
-			if (newVal == 0)
-				globalQuotas.Remove(unitType);
-			else
-				globalQuotas[unitType] = newVal;
+			return globalQuotas.GetValueOrDefault(unitType, 0);
 		}
-
-		public int GetQuota(string unitType) => globalQuotas.GetValueOrDefault(unitType, 0);
 
 		public int GetAliveCount(string unitType)
 		{
