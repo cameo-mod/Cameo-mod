@@ -80,4 +80,6 @@ Container@GAMEPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
-									Text: checkbox-quota-mode
+									Text: checkbox-quota-mode.label
+									TooltipText: checkbox-quota-mode.tooltip
+									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER

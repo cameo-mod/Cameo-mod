@@ -2339,7 +2339,7 @@ SCHATCHERY:
 		AreaTypes: building, cityi, hatchery, creep
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 3000
 		BodyNames: body, lair, hive
 	-WithDeathAnimation:
 	Refinery:
@@ -2530,7 +2530,7 @@ SCCREEPCOLONY:
 		BuildPaletteOrder: 20
 		Prerequisites: ~schatchery
 		Queue: Building, RABuilding
-		Description: Can be upgraded to Sunken or Spore Colonies.
+		Description: Expands Zerg buildable area. Can be upgraded to Sunken or Spore Colonies.
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2583,7 +2583,7 @@ SCCREEPCOLONY:
 		RequiresCondition: spore && !sunken
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 		BodyNames: body, sunken, spore
 	AttackOmni:
 		Armaments: primary, spore
@@ -2630,11 +2630,19 @@ SCCREEPCOLONY:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	WithCreepOverlay:
-		Adjacent: 4
+		Adjacent: 5
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+
+SCCREEPCOLONYDEFENSE:
+	Inherits: SCCREEPCOLONY
+	Buildable:
+		Queue: Defence, RADefence
+	RenderSprites:
+		Image: SCCREEPCOLONY
+		PlayerPalette: player_rgba
 
 scsporecolonyupgrade:
 	Inherits: ^BuildingPlug
@@ -2712,6 +2720,10 @@ SCEXTRACTOR:
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 4
+		IsCircular: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~schatchery
@@ -2733,7 +2745,7 @@ SCEXTRACTOR:
 	Refinery:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2764,6 +2776,8 @@ SCEXTRACTOR:
 			scextractor: extractorupg
 		Requirements:
 			scextractor: !build-incomplete && !extractorupg
+	WithCreepOverlay:
+		Adjacent: 0
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -2789,7 +2803,7 @@ SCSPAWNINGPOOL:
 	Inherits@shape: ^2x2Shape
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	Tooltip:
 		Name: Spawning Pool
 	Valued:
@@ -2867,7 +2881,7 @@ SCEVOLUTIONCHAMBER:
 		ProductionType: Addons
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2918,7 +2932,7 @@ SCHYDRALISKDEN:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -2968,7 +2982,7 @@ SCQUEENSNEST:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -3029,7 +3043,7 @@ SCSPIRE:
 	-WithDeathAnimation:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 		BodyNames: body, greaterspire
 	WithSpriteBody:
 		RequiresCondition: !scgreaterspire
@@ -3134,7 +3148,7 @@ SCULTRALISKCAVERN:
 	#	ProductionType: UltraCave
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
@@ -3186,7 +3200,7 @@ SCDEFILERMOUND:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 2000
 	-WithDeathAnimation:
 	SpawnActorOnDeath@zergsoilkilled:
 		Actor: zergsoilkiller
@@ -3274,7 +3288,7 @@ SCOVERMIND:
 	SelectionDecorations:
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
-		Duration: 10000
+		Duration: 3000
 	-WithDeathAnimation:
 	-ToggleConditionOnOrder:
 	SpawnActorOnDeath@death1:

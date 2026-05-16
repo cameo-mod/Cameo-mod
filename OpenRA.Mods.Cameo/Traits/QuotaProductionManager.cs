@@ -56,7 +56,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		void INotifyCreated.Created(Actor self)
 		{
 			world = self.World;
-			Enabled = Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
+			var isMultiplayer = world.Players.Count(p => !p.IsBot && p.Playable) > 1;
+			Enabled = !isMultiplayer && Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
 		}
 
 		void INotifyOtherProduction.UnitProducedByOther(
@@ -98,13 +99,7 @@ namespace OpenRA.Mods.Cameo.Traits
 					if (!queue.Enabled) continue;
 
 					foreach (var item in queue.AllQueued())
-					{
-						// Infinite mode conflicts with quota — suppress it.
-						if (item.Infinite)
-							item.Infinite = false;
-
 						globalQueued[item.Item] = globalQueued.GetValueOrDefault(item.Item, 0) + 1;
-					}
 
 					ConsumeCreditsFromSnapshot(building.ActorID, queue);
 				}

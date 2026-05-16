@@ -13,6 +13,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.LoadScreens;
@@ -22,7 +23,6 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 {
 	public sealed class FitImageLoadScreen : SheetLoadScreen
 	{
-		// Rectangle stripeRect;
 		float2 scale;
 		float2 logoPos;
 		Sprite logo;
@@ -30,6 +30,8 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		Sheet lastSheet;
 		int lastDensity;
 		Size lastResolution;
+
+		Stopwatch timeSinceLastDisplay;
 
 		[FluentReference]
 		const string Loading = "loadscreen-loading";
@@ -40,56 +42,46 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		{
 			base.Init(modData, info);
 
-			messages = FluentProvider.GetMessage(Loading).Split(',').Select(x => x.Trim()).ToArray();
-
-			text = messages.Random(Game.CosmeticRandom);
-		}
-
-		public override void Display()
-		{
-			if (Info["Image"].Contains(","))
+			if (info.TryGetValue("Image", out var images) && images.Contains(","))
 			{
-				var images = Info["Image"].Split(',');
-				Info["Image"] = images[new Random().Next(images.Length)];
+				var imageList = images.Split(',');
+				info["Image"] = imageList[new Random().Next(imageList.Length)].Trim();
 			}
 
-			base.Display();
+			messages = FluentProvider.GetMessage(Loading).Split('$').Select(x => x.Trim()).ToArray();
 		}
 
 		public override void DisplayInner(Renderer r, Sheet s, int density)
 		{
+			// Detect a new loading session by the gap in Display() calls while the game runs normally between loads.
+			var isNewSession = timeSinceLastDisplay == null || timeSinceLastDisplay.Elapsed.TotalSeconds > 2.0;
+			timeSinceLastDisplay ??= new Stopwatch();
+			timeSinceLastDisplay.Restart();
+
+			if (isNewSession && messages.Length > 0)
+				text = messages.Random(Game.CosmeticRandom);
+
 			if (s != lastSheet || density != lastDensity)
 			{
 				lastSheet = s;
-				Rectangle rect = new Rectangle(0, 0, s.Size.Width, s.Size.Height);
-
 				lastDensity = density;
 
+				var rect = new Rectangle(0, 0, s.Size.Width, s.Size.Height);
 				scale = new float2(r.Resolution.Width / (float)s.Size.Width,
 					(float)r.Resolution.Height / (float)s.Size.Height);
 
-				if (scale.X > scale.Y)
-				{
-					logo = new Sprite(s, rect, TextureChannel.RGBA, scale.Y * 1f);
-				}
-				else
-				{
-					logo = new Sprite(s, rect, TextureChannel.RGBA, scale.X * 1f);
-				}
+				logo = scale.X > scale.Y
+					? new Sprite(s, rect, TextureChannel.RGBA, scale.Y)
+					: new Sprite(s, rect, TextureChannel.RGBA, scale.X);
 			}
 
 			if (r.Resolution != lastResolution)
 			{
 				lastResolution = r.Resolution;
 
-				if (scale.X > scale.Y)
-				{
-					logoPos = new float2((r.Resolution.Width - s.Size.Width * scale.Y) / 2, 0);
-				}
-				else
-				{
-					logoPos = new float2(0, (-s.Size.Height * scale.X + r.Resolution.Height) / 2);
-				}
+				logoPos = scale.X > scale.Y
+					? new float2((r.Resolution.Width - s.Size.Width * scale.Y) / 2, 0)
+					: new float2(0, (-s.Size.Height * scale.X + r.Resolution.Height) / 2);
 			}
 
 			if (logo != null)
