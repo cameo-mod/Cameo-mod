@@ -114,7 +114,7 @@ Player:
 	DamageNotifier:
 		ValidTargets: Structure
 		Notification: BaseAttack
-		TextNotification: notification-base-under-attack
+		TextNotification: Structure under attack.
 		AllyNotification: OurAllyIsUnderAttack
 		AllyTextNotification: Ally under attack.
 	HarvesterAttackNotifier:
@@ -250,7 +250,7 @@ Player:
 		Id: unrestricted
 	GrantConditionOnPrerequisiteManager:
 	ResourceStorageWarning:
-		AdviceInterval: 30000
+		AdviceInterval: 60000
 		TextNotification: Resource storage is reaching its capacity.
 	PlayerExperience:
 	GameSaveViewportManager:
@@ -430,7 +430,7 @@ Player:
 		SpeedUp: True
 		LowPowerModifier: 400
 		ReadyAudio: NewOptions
-		ReadyTextNotification: New upgrade is now ready.
+		ReadyTextNotification: Addon is ready for placement.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled

@@ -72,13 +72,27 @@ ProductionTypeNaval: I
 	Description: Naval Tab
 	Types: Production, Player
 
-ProductionTypeUpgrade: O
+ProductionTypeAddon: E Shift
+	Description: Addon Tab
+	Types: Production, Player
+
+ProductionTypeUpgrade: R Shift
 	Description: Upgrade Tab
 	Types: Production, Player
 
 ProductionTypePromotion: P
 	Description: Promotion Tab
 	Types: Production, Player
+
+CycleProductionBuildings: TAB
+	Description: hotkey-description-cycleproductionbuildings
+	Types: Production
+	Contexts: player, spectator
+
+SelectProductionBuilding: TAB Ctrl
+	Description: hotkey-description-selectproductionbuilding
+	Types: Production
+	Contexts: player
 
 PowerDown: X
 	Description: Power-down mode
