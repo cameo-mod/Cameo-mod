@@ -55,15 +55,33 @@ namespace OpenRA.Mods.Cameo.Traits
 				return;
 
 			var ownedActors = world.Selection.Actors.Where(a => a.Owner == world.LocalPlayer).ToArray();
-			autoAssignTypes[group] = ownedActors.Select(a => a.Info.Name).ToHashSet();
+			if (ownedActors.Length == 0)
+				return;
 
-			var registeredTypes = autoAssignTypes[group];
-			var selectedSet = world.Selection.Actors.ToHashSet();
+			var newTypes = ownedActors.Select(a => a.Info.Name).ToHashSet();
+
+			// Strip these types from any other autogroup registration so each type maps to at most one autogroup.
+			foreach (var otherGroup in autoAssignTypes.Keys.ToArray())
+			{
+				if (otherGroup == group)
+					continue;
+				autoAssignTypes[otherGroup].ExceptWith(newTypes);
+				if (autoAssignTypes[otherGroup].Count == 0)
+					autoAssignTypes.Remove(otherGroup);
+			}
+
+			autoAssignTypes[group] = newTypes;
+
+			// Move every owned actor of these types into this control group (removing from any prior group first).
 			foreach (var a in world.Actors)
 			{
-				if (a.Owner == world.LocalPlayer && a.IsInWorld && !a.IsDead &&
-					registeredTypes.Contains(a.Info.Name) && !selectedSet.Contains(a))
-					world.ControlGroups.AddToControlGroup(a, group);
+				if (a.Owner != world.LocalPlayer || !a.IsInWorld || a.IsDead)
+					continue;
+				if (!newTypes.Contains(a.Info.Name))
+					continue;
+
+				world.ControlGroups.RemoveFromControlGroup(a);
+				world.ControlGroups.AddToControlGroup(a, group);
 			}
 
 			var displayNames = ownedActors
