@@ -5,7 +5,6 @@
 #endregion
 
 using System;
-using System.Linq;
 using OpenRA.Graphics;
 using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common.Widgets;
@@ -53,21 +52,15 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			autoSaveNoDropDown.GetText = () => FluentProvider.GetMessage(AutoSaveMaxFileNumber, "saves", Game.Settings.SinglePlayerSettings.AutoSaveMaxFileCount);
 			autoSaveNoDropDown.IsDisabled = () => Game.Settings.SinglePlayerSettings.AutoSaveInterval <= 0;
 
-			var isMultiplayer = worldRenderer?.World != null &&
-				worldRenderer.World.Players.Count(p => !p.IsBot && p.Playable) > 1;
-
 			var quotaCheckbox = panel.Get<CheckboxWidget>("QUOTA_MODE_CHECKBOX");
-			quotaCheckbox.IsChecked = () => !isMultiplayer && Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
-			quotaCheckbox.IsDisabled = () => isMultiplayer;
+			quotaCheckbox.IsChecked = () => Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
 			quotaCheckbox.OnClick = () =>
 			{
-				if (isMultiplayer) return;
 				Game.Settings.SinglePlayerSettings.QuotaModeEnabled ^= true;
 				Game.Settings.Save();
 
-				var quotaManager = worldRenderer?.World?.WorldActor?.TraitOrDefault<QuotaProductionManager>();
-				if (quotaManager != null)
-					quotaManager.Enabled = Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
+				var quotaManager = worldRenderer?.World?.LocalPlayer?.PlayerActor?.TraitOrDefault<QuotaProductionManager>();
+				quotaManager?.SetEnabled(Game.Settings.SinglePlayerSettings.QuotaModeEnabled);
 			};
 
 			return () => false;
