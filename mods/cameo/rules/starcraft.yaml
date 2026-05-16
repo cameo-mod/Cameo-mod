@@ -4,26 +4,26 @@ World:
 		InternalName: terran
 		Game: StarCraft
 		Side: StarCraft
-		Description: Terran wield powerful units that consume power for production, can lift buildings, and deploy Nuclear Strikes, while defenses remain operational.
+		Description: faction-terran.description
 	FactionCA@protoss:
 		Name: Protoss SC
 		InternalName: protoss
 		Game: StarCraft
 		Side: StarCraft
-		Description: Protoss\nFeatures:\n- Units consume power (supply)\n- Unit production pauses on low power\n- Buildings and defenses do not require power to operate\n- Relatively resilient and powerful units\nSupport powers: Purifier Beam
+		Description: faction-protoss.description
 	FactionCA@zerg:
 		Name: Zerg SC
 		InternalName: zerg
 		Game: StarCraft
 		Side: StarCraft
-		Description: Zerg\nFeatures:\n- Units consume power (supply)\n- Unit production pauses on low power\n- Buildings and defenses do not require power to operate\n- Relatively powerful units\nSupport powers: Nuclear Strike
+		Description: faction-zerg.description
 	FactionCA@RandomSC:
 		Name: Random StarCraft
 		InternalName: RandomSC
 		RandomFactionMembers: terran, protoss, zerg
 		Game: StarCraft
 		Side: Random
-		Description: Random Faction\nA random faction from StarCraft will be chosen when the game starts.
+		Description: faction-randomsc.description
 	####################################################################################################
 	#		SC TERRAN
 	####################################################################################################
@@ -618,7 +618,7 @@ SCSUPPLYDEPOT:
 	Buildable:
 		Prerequisites: ~sccommandcenter
 		Queue: Building, RABuilding
-		Description: Provides supply and stores resources
+		Description: actor-scsupplydepot.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -686,7 +686,7 @@ supplydepotexpand:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
 		Prerequisites: ~sccommandcenter, supplydepotupgradeavailable
-		Description: Increase the size of the supply depot by 100%
+		Description: actor-supplydepotexpand.description
 	Plug:
 		Type: scsupplydepot
 	RenderSprites:
@@ -705,7 +705,7 @@ SCREFINERY:
 		Prerequisites: ~sccommandcenter
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
-		Description: Processes raw Tiberium\ninto useable resources
+		Description: actor-screfinery.description
 	Building:
 		Footprint: _x_ xxx ===
 		BuildSounds: tscupd00.aud
@@ -762,7 +762,7 @@ sctvespenegascollector:
 	Buildable:
 		Queue: BuildingAddons
 		Prerequisites: ~sccommandcenter, sctrefineryupgradeavailable
-		Description: The Refinery generates Vespene gas Capsules and passive income.
+		Description: actor-sctvespenegascollector.description
 	Plug:
 		Type: screfinery
 	RenderSprites:
@@ -781,7 +781,7 @@ SCBARRACKS:
 		BuildPaletteOrder: 30
 		Prerequisites: ~sccommandcenter
 		Queue: Building, RABuilding
-		Description: Produces infantry
+		Description: actor-scbarracks.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -835,7 +835,7 @@ SCACADEMY:
 		BuildDurationModifier: 100
 		Prerequisites: ~sccommandcenter, scbarracks
 		Queue: Building, RABuilding
-		Description: Unlocks Jim Raynor, Firebat and Medic. Researches infantry upgrades.
+		Description: actor-scacademy.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -873,7 +873,7 @@ SCENGINEERINGBAY:
 		Queue: Building, RABuilding
 		BuildDuration: 625
 		BuildDurationModifier: 100
-		Description: Unlocks Siege Tanks, Missile Turret and Infantry Upgrades.
+		Description: actor-scengineeringbay.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -920,7 +920,7 @@ SCBUNKER:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~sccommandcenter, scbarracks
-		Description: Static defense with fireports for up to 4 garrisoned soldiers.
+		Description: actor-scbunker.description
 	Valued:
 		Cost: 1200
 	Health:
@@ -975,7 +975,7 @@ SCMISSILETURRET:
 		BuildPaletteOrder: 30
 		Prerequisites: ~sccommandcenter, scengineeringbay
 		Queue: Defence, RADefence
-		Description: Anti-aircraft base defense. Can detect cloaked units.
+		Description: actor-scmissileturret.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1114,7 +1114,7 @@ SCFACTORY:
 		BuildPaletteOrder: 60
 		Prerequisites: ~sccommandcenter, scbarracks
 		Queue: Building, RABuilding
-		Description: Produces vehicles
+		Description: actor-scfactory.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -1167,7 +1167,7 @@ SCARMORY:
 		BuildPaletteOrder: 70
 		Prerequisites: ~sccommandcenter, scfactory
 		Queue: Building, RABuilding
-		Description: Unlocks Goliath and Vehicle and Ship Upgrades.
+		Description: actor-scarmory.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1200,7 +1200,7 @@ SCSTARPORT:
 		BuildPaletteOrder: 80
 		Prerequisites: ~sccommandcenter, scfactory
 		Queue: Building, RABuilding
-		Description: Produces aircraft
+		Description: actor-scstarport.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -1241,7 +1241,7 @@ SCSCIENCEFACILITY:
 		BuildPaletteOrder: 90
 		Prerequisites: ~sccommandcenter, scfactory, scstarport
 		Queue: Building, RABuilding
-		Description: Unlocks Battlecruiser, Ghost and Jim Raynor.
+		Description: actor-scsciencefacility.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -1440,7 +1440,7 @@ SCPYLON:
 		BuildPaletteOrder: 10
 		Prerequisites: ~scnexus
 		Queue: Building, RABuilding
-		Description: Provides supply and stores resources
+		Description: actor-scpylon.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1488,7 +1488,7 @@ SCASSIMILATOR:
 		Prerequisites: ~scnexus
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
-		Description: Processes raw Tiberium\ninto useable resources
+		Description: actor-scassimilator.description
 	Building:
 		Footprint: _x_ xxx ===
 		BuildSounds: pshbld03.aud
@@ -1544,7 +1544,7 @@ scpvespenegascollector:
 	Buildable:
 		Queue: BuildingAddons
 		Prerequisites: ~scnexus, scprefineryupgradeavailable
-		Description: The Assimilator generates Vespene gas Capsules and passive income.
+		Description: actor-scpvespenegascollector.description
 	Plug:
 		Type: scassimilator
 	RenderSprites:
@@ -1565,7 +1565,7 @@ SCGATEWAY:
 		BuildPaletteOrder: 30
 		Prerequisites: ~scnexus
 		Queue: Building, RABuilding
-		Description: Produces infantry
+		Description: actor-scgateway.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -1615,7 +1615,7 @@ SCFORGE:
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus
 		Queue: Building, RABuilding
-		Description: Unlocks Photon Cannon. Researches infantry upgrades.
+		Description: actor-scforge.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1653,7 +1653,7 @@ SCPHOTONCANNON:
 		BuildPaletteOrder: 10
 		Prerequisites: ~scnexus, scforge
 		Queue: Defence, RADefence
-		Description: Basic Base defense. Can detect cloaked units.
+		Description: actor-scphotoncannon.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1710,7 +1710,7 @@ SCCYBERNETICSCORE:
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scgateway
 		Queue: Building, RABuilding
-		Description: Unlocks Dragoon.
+		Description: actor-sccyberneticscore.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1745,7 +1745,7 @@ SCSHIELDBATTERY:
 		BuildPaletteOrder: 140
 		Prerequisites: ~scnexus, scgateway
 		Queue: Building, RABuilding
-		Description: Automatically heals nearby units.
+		Description: actor-scshieldbattery.description
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -1808,7 +1808,7 @@ SCROBOTICSFACILITY:
 		BuildPaletteOrder: 60
 		Prerequisites: ~scnexus, sccyberneticscore
 		Queue: Building, RABuilding
-		Description: Produces vehicles
+		Description: actor-scroboticsfacility.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -1851,7 +1851,7 @@ SCSTARGATE:
 		BuildPaletteOrder: 70
 		Prerequisites: ~scnexus, sccyberneticscore
 		Queue: Building, RABuilding
-		Description: Produces aircraft
+		Description: actor-scstargate.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -1894,7 +1894,7 @@ SCCITADELOFADUN:
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, sccyberneticscore
 		Queue: Building, RABuilding
-		Description: Unlocks Zeratul and Dark Templar.
+		Description: actor-sccitadelofadun.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1933,7 +1933,7 @@ SCROBOTICSSUPPORTBAY:
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scroboticsfacility
 		Queue: Building, RABuilding
-		Description: Unlocks Reaver.
+		Description: actor-scroboticssupportbay.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1963,7 +1963,7 @@ SCFLEETBEACON:
 		BuildPaletteOrder: 130
 		Prerequisites: ~scnexus, scstargate
 		Queue: Building, RABuilding
-		Description: Unlocks Carrier and Purifier Beam support power.
+		Description: actor-scfleetbeacon.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2031,7 +2031,7 @@ SCTEMPLARARCHIVES:
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, sccitadelofadun, scgateway
 		Queue: Building, RABuilding
-		Description: Unlocks High Templar & Archon.
+		Description: actor-sctemplararchives.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2071,7 +2071,7 @@ SCOBSERVATORY:
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scroboticsfacility
 		Queue: Building, RABuilding
-		Description: Unlocks Observer.
+		Description: actor-scobservatory.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2110,7 +2110,7 @@ SCARBITERTRIBUNAL:
 		BuildDurationModifier: 100
 		Prerequisites: ~scnexus, scstargate, sctemplararchives
 		Queue: Building, RABuilding
-		Description: Unlocks Arbiter.
+		Description: actor-scarbitertribunal.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2402,7 +2402,7 @@ sclair:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
 		Prerequisites: ~schatchery, scspawningpool, lairupgradeavailable
-		Description: Unlocks Spire and Queen's Nest
+		Description: actor-sclair.description
 	Plug:
 		Type: schatchery
 	RenderSprites:
@@ -2418,7 +2418,7 @@ schive:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
 		Prerequisites: ~schatchery, sclair, hiveupgradeavailable
-		Description: Unlocks Ultralisk Cavern and Defiler Mound
+		Description: actor-schive.description
 	Plug:
 		Type: sclair
 	RenderSprites:
@@ -2530,7 +2530,7 @@ SCCREEPCOLONY:
 		BuildPaletteOrder: 20
 		Prerequisites: ~schatchery
 		Queue: Building, RABuilding
-		Description: Expands Zerg buildable area. Can be upgraded to Sunken or Spore Colonies.
+		Description: actor-sccreepcolony.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2653,7 +2653,7 @@ scsporecolonyupgrade:
 	Buildable:
 		Queue: BuildingAddons
 		Prerequisites: ~schatchery, creepcolonyupgradeavailable
-		Description: Zerg Ground Base Defense.
+		Description: actor-scsporecolonyupgrade.description
 	Plug:
 		Type: sccreepcolony
 	RenderSprites:
@@ -2668,7 +2668,7 @@ scsunkencolonyupgrade:
 	Buildable:
 		Queue: BuildingAddons
 		Prerequisites: ~schatchery, creepcolonyupgradeavailable
-		Description: Zerg Anti Air Base Defense.
+		Description: actor-scsunkencolonyupgrade.description
 	Plug:
 		Type: sccreepcolony2
 	RenderSprites:
@@ -2684,7 +2684,7 @@ scsunkencolony:
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: ~schatchery
-		Description: Zerg Ground Base Defense.
+		Description: actor-scsunkencolony.description
 	GrantCondition:
 		Condition: sunken
 	Selectable:
@@ -2702,7 +2702,7 @@ scsporecolony:
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: ~schatchery
-		Description: Zerg Anti Air Base Defense.
+		Description: actor-scsporecolony.description
 	GrantCondition:
 		Condition: spore
 	Selectable:
@@ -2728,7 +2728,7 @@ SCEXTRACTOR:
 		BuildPaletteOrder: 30
 		Prerequisites: ~schatchery
 		Queue: Building, RABuilding
-		Description: Processes raw Tiberium\ninto useable resources
+		Description: actor-scextractor.description
 	Building:
 		Footprint: _x_ xxx ===
 		Dimensions: 3,3
@@ -2792,7 +2792,7 @@ sczvespenegascollector:
 	Buildable:
 		Queue: BuildingAddons
 		Prerequisites: ~schatchery, sczrefineryupgradeavailable
-		Description: The Extractor generates Vespene gas Capsules and passive income.
+		Description: actor-sczvespenegascollector.description
 	Plug:
 		Type: scextractor
 	RenderSprites:
@@ -2821,7 +2821,7 @@ SCSPAWNINGPOOL:
 		BuildDurationModifier: 100
 		Prerequisites: ~schatchery
 		Queue: Building, RABuilding
-		Description: Unlocks Zergling.
+		Description: actor-scspawningpool.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2866,7 +2866,7 @@ SCEVOLUTIONCHAMBER:
 		BuildDurationModifier: 100
 		Prerequisites: ~schatchery
 		Queue: Building, RABuilding
-		Description: Unlocks Spore Colony and Lurker.
+		Description: actor-scevolutionchamber.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2917,7 +2917,7 @@ SCHYDRALISKDEN:
 		BuildDurationModifier: 100
 		Prerequisites: ~schatchery, scspawningpool
 		Queue: Building, RABuilding
-		Description: Unlocks Hydralisk.
+		Description: actor-schydraliskden.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2967,7 +2967,7 @@ SCQUEENSNEST:
 		BuildDurationModifier: 100
 		Prerequisites: ~schatchery, sclair
 		Queue: Building, RABuilding
-		Description: Unlocks Queen and Kerrigan.
+		Description: actor-scqueensnest.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -3029,7 +3029,7 @@ SCSPIRE:
 		BuildDurationModifier: 100
 		Prerequisites: ~schatchery, sclair
 		Queue: Building, RABuilding
-		Description: Unlocks Mutalisk.
+		Description: actor-scspire.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -3097,7 +3097,7 @@ SCGREATERSPIRE:
 		BuildDurationModifier: 100
 		Queue: BuildingAddons
 		Prerequisites: ~schatchery, sclair, greaterspireupgradeavailable
-		Description: Unlocks multiple zerg air units.
+		Description: actor-scgreaterspire.description
 	Plug:
 		Type: scspire
 	RenderSprites:
@@ -3123,7 +3123,7 @@ SCULTRALISKCAVERN:
 		BuildDurationModifier: 100
 		Prerequisites: ~schatchery, schive
 		Queue: Building, RABuilding
-		Description: Unlocks Ultralisk.
+		Description: actor-scultraliskcavern.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -3185,7 +3185,7 @@ SCDEFILERMOUND:
 		BuildDurationModifier: 100
 		Prerequisites: ~schatchery, schive
 		Queue: Building, RABuilding
-		Description: Unlocks Defiler.
+		Description: actor-scdefilermound.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -3222,7 +3222,7 @@ SCNYDUSCANAL:
 		BuildPaletteOrder: 8010
 		Prerequisites: ~wip-content
 		Queue: Building, RABuilding
-		Description: Instantaneously transports units to another exit.
+		Description: actor-scnyduscanal.description
 	Building:
 		Footprint: ++ ++
 		Dimensions: 2,2
@@ -3271,7 +3271,7 @@ SCOVERMIND:
 	Buildable:
 		Prerequisites: ~schatchery, schive, derricklimit
 		Queue: Building, RABuilding
-		Description: Doubles Supply Limit. All Zerg cost half and produce twice as fast. Gives passive income.
+		Description: actor-scovermind.description
 		IconPalette: windows256
 		BuildLimit: 1
 	Building:
@@ -3321,7 +3321,7 @@ SCINFESTEDCOMMANDCENTER:
 		BuildPaletteOrder: 8020
 		Prerequisites: ~schatchery, scovermind
 		Queue: Building, RABuilding
-		Description: Unlocks Siege Tanks.
+		Description: actor-scinfestedcommandcenter.description
 		IconPalette: windows256
 	WithBuildingBib:
 	ProductionQueue@VEHICLE:
@@ -3389,7 +3389,7 @@ SCSCV:
 		Name: SCV
 	Buildable:
 		Prerequisites: ~screfinery
-		Description: Collects resources.\nCan repair mechanical units and buildings.
+		Description: actor-scscv.description
 	Armament:
 		Weapon: SCVAttack
 		ForceTargetRelationships: Enemy, Neutral
@@ -3447,7 +3447,7 @@ SCMARINE:
 	Buildable:
 		Prerequisites: ~scbarracks, ~!upmadcap
 		Queue: Infantry, RAInfantry
-		Description: Basic Terran infantry.\n Strong vs Infantry\n Weak vs Vehicles\n Can attack aircraft\n Uncrushable
+		Description: actor-scmarine.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -3499,7 +3499,7 @@ SCREAPER:
 	Buildable:
 		Prerequisites: ~scbarracks
 		Queue: Infantry, RAInfantry
-		Description: Basic Terran infantry.\n Strong vs Infantry\n Weak vs Vehicles\n Can attack aircraft\n Uncrushable
+		Description: actor-screaper.description
 	Mobile:
 		Speed: 120
 		Locomotor: fakeaircraft
@@ -3573,7 +3573,7 @@ SCMADCAP:
 	Buildable:
 		Prerequisites: ~scbarracks, ~upmadcap
 		Queue: Infantry, RAInfantry
-		Description: Basic Terran infantry.\n Strong vs Infantry\n Weak vs Vehicles\n Can attack aircraft\n Uncrushable
+		Description: actor-scmadcap.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -3624,7 +3624,7 @@ SCFIREBAT:
 	Buildable:
 		Prerequisites: ~scacademy, ~!upharakan
 		Queue: Infantry, RAInfantry
-		Description: Terran flamethrower infantry.\n Strong vs Infantry, Buildings\n Weak vs Vehicles\n Uncrushable
+		Description: actor-scfirebat.description
 	Mobile:
 		Speed: 52
 	Health:
@@ -3689,7 +3689,7 @@ SCHARAKAN:
 	Buildable:
 		Prerequisites: ~scacademy, ~upharakan
 		Queue: Infantry, RAInfantry
-		Description: Terran flamethrower infantry.\n Strong vs Infantry, Buildings\n Weak vs Vehicles\n Uncrushable
+		Description: actor-scharakan.description
 	Mobile:
 		Speed: 56
 	Health:
@@ -3752,7 +3752,7 @@ scmarauder:
 	Buildable:
 		Prerequisites: ~scacademy
 		Queue: Infantry, RAInfantry
-		Description: Terran tankbuster infantry.\n Strong vs Vehicles, Buildings\n Weak vs Infantry\n Uncrushable
+		Description: actor-scmarauder.description
 	Mobile:
 		Speed: 45
 	Health:
@@ -3803,7 +3803,7 @@ SCGHOST:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~scsciencefacility, ~!upsilvertongue
-		Description: Terran stealth assassin.\n Strong vs Infantry, Vehicles\n Can attack aircraft\n Can temporarily disable vehicles\n Uncrushable
+		Description: actor-scghost.description
 	Mobile:
 		Speed: 75
 	Health:
@@ -3873,7 +3873,7 @@ SCSILVERTONGUE:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~scsciencefacility, ~upsilvertongue
-		Description: Terran stealth assassin.\n Strong vs Infantry, Vehicles\n Can attack aircraft\n Can temporarily disable vehicles\n Uncrushable
+		Description: actor-scsilvertongue.description
 	Mobile:
 		Speed: 80
 	Health:
@@ -3935,7 +3935,7 @@ SCMEDIC:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~scacademy
-		Description: Heals nearby infantry.\n Unarmed\n Uncrushable
+		Description: actor-scmedic.description
 	Tooltip:
 		Name: Medic
 	Valued:
@@ -4006,7 +4006,7 @@ SCJIMRAYNOR:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Infantry, RAInfantry
-		Description: Heroic Terran Unit\nCan Stimpack\nExtremely Durable\n Strong vs Everything
+		Description: actor-scjimraynor.description
 		IconPalette: ra2
 		BuildLimit: 1
 		Prerequisites: ~scsciencefacility
@@ -4066,7 +4066,7 @@ SCVULTURE:
 		Amount: -45
 	Buildable:
 		Prerequisites: ~scfactory
-		Description: Fast scout vehicle, armed with\ngrenades.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft\n Can cross water
+		Description: actor-scvulture.description
 	Mobile:
 		Speed: 125
 		TurnSpeed: 50
@@ -4121,7 +4121,7 @@ SCSIEGETANK:
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~scengineeringbay
-		Description: Terran mobile artillery.\n Strong vs Infantry, Buildings\n Weak vs Vehicles, Aircraft\nCan deploy for increased range and splash damage
+		Description: actor-scsiegetank.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -4261,7 +4261,7 @@ SCMATADOR:
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~scfactory, ~upmatador
-		Description: Terran mobile artillery.\n Strong vs Infantry, Buildings\n Weak vs Vehicles, Aircraft\nCan deploy for increased range and splash damage
+		Description: actor-scmatador.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -4388,7 +4388,7 @@ SCCYCLONE:
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~scengineeringbay, ~upsccyclone
-		Description: Terran mobile artillery.\n Strong vs Infantry, Buildings\n Weak vs Vehicles, Aircraft\nCan deploy for increased range and splash damage
+		Description: actor-sccyclone.description
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
@@ -4468,7 +4468,7 @@ SCGOLIATH:
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scarmory, ~!upgoliathmk2
-		Description: Versatile Terran combat walker, armed with\nautocannons and AA missiles.\n Strong vs Infantry, Aircraft\n Weak vs Vehicles
+		Description: actor-scgoliath.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 18
@@ -4541,7 +4541,7 @@ SCGOLIATH2:
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scarmory, ~upgoliathmk2
-		Description: Versatile Terran combat walker, armed with\nautocannons and AA missiles.\n Strong vs Infantry, Aircraft\n Weak vs Vehicles
+		Description: actor-scgoliath2.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -4611,7 +4611,7 @@ scwarhound:
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scsciencefacility, ~upwarhound
-		Description: Colossal Terran Mech.\n Strong vs Everything, Buildings\n Weak vs Air\n Uncrushable
+		Description: actor-scwarhound.description
 	Mobile:
 		Speed: 45
 		TurnSpeed: 18
@@ -4740,7 +4740,7 @@ SCWRAITH:
 	Buildable:
 		Prerequisites: ~scstarport, ~!upsundog
 		Queue: Aircraft, RAAircraft
-		Description: Light Terran attack aircraft, armed\nwith lasers and AA missiles.\n Strong vs Infantry, Aircraft\n Weak vs Buildings, Vehicles
+		Description: actor-scwraith.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 24
@@ -4824,7 +4824,7 @@ SCSUNDOG:
 	Buildable:
 		Prerequisites: ~scstarport, ~upsundog
 		Queue: Aircraft, RAAircraft
-		Description: Light Terran attack aircraft, armed\nwith lasers and AA missiles.\n Strong vs Infantry, Aircraft\n Weak vs Buildings, Vehicles
+		Description: actor-scsundog.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 24
@@ -4905,7 +4905,7 @@ SCVALKYRIE:
 	Buildable:
 		Prerequisites: ~scstarport, scarmory, ~!upwyvern
 		Queue: Aircraft, RAAircraft
-		Description: Air Superiority Fighter that fires a burst of 8 missiles. Can only attack air.
+		Description: actor-scvalkyrie.description
 	Aircraft:
 		InitialFacing: 896
 		Speed: 140
@@ -4966,7 +4966,7 @@ SCWYVERN:
 	Buildable:
 		Prerequisites: ~scstarport, scarmory, ~upwyvern
 		Queue: Aircraft, RAAircraft
-		Description: Air Superiority Fighter that fires a burst of 8 missiles. Can only attack air.
+		Description: actor-scwyvern.description
 	Aircraft:
 		InitialFacing: 896
 		Speed: 70
@@ -5026,7 +5026,7 @@ SCRAVEN:
 	Buildable:
 		Prerequisites: ~scstarport, ~upraven
 		Queue: Aircraft, RAAircraft
-		Description: Light Terran attack aircraft, armed\nwith lasers and AA missiles.\n Strong vs Infantry, Aircraft\n Weak vs Buildings, Vehicles
+		Description: actor-scraven.description
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 100
@@ -5105,7 +5105,7 @@ SCDROPSHIP:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstarport, ~!upsilvertongue
 		Queue: Aircraft, RAAircraft
-		Description: Fast transport for all ground units.\n Unarmed
+		Description: actor-scdropship.description
 	Aircraft:
 		TurnSpeed: 25
 		Speed: 125
@@ -5178,7 +5178,7 @@ SCPYTHEAN:
 		Prerequisites: ~scstarport, ~uppythean
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
-		Description: A slow moving garrison transport for all ground units.\nExtremely Durable\n Strong vs Everything
+		Description: actor-scpythean.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 16
@@ -5288,7 +5288,7 @@ SCMEDIVAC:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstarport, ~upsilvertongue
 		Queue: Aircraft, RAAircraft
-		Description: Fast transport for all ground units.\n Unarmed
+		Description: actor-scmedivac.description
 	Aircraft:
 		TurnSpeed: 25
 		Speed: 125
@@ -5362,7 +5362,7 @@ SCBATTLECRUISER:
 		BuildPaletteOrder: 40
 		Prerequisites: ~scstarport, ~scsciencefacility
 		Queue: Aircraft, RAAircraft
-		Description: Terran capital ship.\n Strong vs Everything
+		Description: actor-scbattlecruiser.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 12
@@ -5520,7 +5520,7 @@ SCPHOBOS:
 		BuildPaletteOrder: 40
 		Prerequisites: ~scstarport, ~scsciencefacility, ~upphobos
 		Queue: Aircraft, RAAircraft
-		Description: Terran capital ship.\n Strong vs Everything
+		Description: actor-scphobos.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 10
@@ -5739,7 +5739,7 @@ SCSCIENCEVESSEL:
 		BuildPaletteOrder: 40
 		Prerequisites: ~scsciencefacility
 		Queue: Aircraft, RAAircraft
-		Description: Terran capital ship.\n Strong vs Everything
+		Description: actor-scsciencevessel.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 28
@@ -5940,9 +5940,9 @@ SCTMCV:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~scengineeringbay
-		Description: Builds structures and provides radar.
+		Description: actor-sctmcv.description
 	Tooltip:
-		Name: Mobile Construction Vehicle (Terran)
+		Name: Terran Mobile Command Center
 	Transforms:
 		IntoActor: sccommandcenter
 		Offset: -1,-1
@@ -5970,7 +5970,7 @@ upmadcap:
 	Buildable:
 		BuildPaletteOrder: 8033
 		Queue: Promotions
-		Description: An upgrade to the marine.
+		Description: actor-upmadcap.description
 		Prerequisites: ~sccommandcenter, !upmadcap, rank1
 	RenderSprites:
 		Image: scmadcap
@@ -5983,7 +5983,7 @@ upharakan:
 	Buildable:
 		BuildPaletteOrder: 8036
 		Queue: Promotions
-		Description: Allows construction of the Harakan and the Matador.
+		Description: actor-upharakan.description
 		Prerequisites: ~sccommandcenter, upmadcap, !upharakan, rank1
 	RenderSprites:
 		Image: scharakan
@@ -5996,7 +5996,7 @@ upsilvertongue:
 	Buildable:
 		BuildPaletteOrder: 8039
 		Queue: Promotions
-		Description: Unlocks the Spectre and Medivac.
+		Description: actor-upsilvertongue.description
 		Prerequisites: ~sccommandcenter, upharakan, !upsilvertongue, rank1
 	RenderSprites:
 		Image: scsilvertongue
@@ -6009,7 +6009,7 @@ uppythean:
 	Buildable:
 		BuildPaletteOrder: 8042
 		Queue: Promotions
-		Description: Allows construction of the Pythean, a colossal transport.
+		Description: actor-uppythean.description
 		Prerequisites: ~sccommandcenter, upsilvertongue, !uppythean, rank1
 	RenderSprites:
 		Image: scpythean
@@ -6024,7 +6024,7 @@ upmatador:
 	Buildable:
 		BuildPaletteOrder: 8034
 		Queue: Promotions
-		Description: Unlocks a Flamethrower Siege Tank.
+		Description: actor-upmatador.description
 		Prerequisites: ~sccommandcenter, !upmatador, rank1
 	RenderSprites:
 		Image: scmatador
@@ -6037,7 +6037,7 @@ upsccyclone:
 	Buildable:
 		BuildPaletteOrder: 8037
 		Queue: Promotions
-		Description: Allows construction of the Cyclone.
+		Description: actor-upsccyclone.description
 		Prerequisites: ~sccommandcenter, upmatador, !upsccyclone, rank1
 	RenderSprites:
 		Image: sccyclone
@@ -6050,7 +6050,7 @@ upgoliathmk2:
 	Buildable:
 		BuildPaletteOrder: 8040
 		Queue: Promotions
-		Description: Unlocks the Goliath Mk2.
+		Description: actor-upgoliathmk2.description
 		Prerequisites: ~sccommandcenter, upsccyclone, !upgoliathmk2, rank1
 	RenderSprites:
 		Image: scgoliath2
@@ -6063,7 +6063,7 @@ upwarhound:
 	Buildable:
 		BuildPaletteOrder: 8043
 		Queue: Promotions
-		Description: Unlocks the Warhound.
+		Description: actor-upwarhound.description
 		Prerequisites: ~sccommandcenter, upgoliathmk2, !upwarhound, rank1
 	RenderSprites:
 		Image: scwarhound
@@ -6078,7 +6078,7 @@ upsundog:
 	Buildable:
 		BuildPaletteOrder: 8035
 		Queue: Promotions
-		Description: Allows training of the Sundog.
+		Description: actor-upsundog.description
 		Prerequisites: ~sccommandcenter, !upsundog, rank1
 	RenderSprites:
 		Image: scsundog
@@ -6091,7 +6091,7 @@ upraven:
 	Buildable:
 		BuildPaletteOrder: 8038
 		Queue: Promotions
-		Description: Allows construction of the Raven.
+		Description: actor-upraven.description
 		Prerequisites: ~sccommandcenter, upsundog, !upraven, rank1
 	RenderSprites:
 		Image: scraven
@@ -6104,7 +6104,7 @@ upwyvern:
 	Buildable:
 		BuildPaletteOrder: 8041
 		Queue: Promotions
-		Description: Allows training of the Desolator. Infantry becomes immune to radiation.
+		Description: actor-upwyvern.description
 		Prerequisites: ~sccommandcenter, upraven, !upwyvern, rank1
 	RenderSprites:
 		Image: scwyvern
@@ -6117,7 +6117,7 @@ upphobos:
 	Buildable:
 		BuildPaletteOrder: 8044
 		Queue: Promotions
-		Description: Allows construction of the Phobos.
+		Description: actor-upphobos.description
 		Prerequisites: ~sccommandcenter, upwyvern, !upphobos, rank1
 	RenderSprites:
 		Image: scphobos
@@ -6136,7 +6136,7 @@ uptalon:
 	Buildable:
 		BuildPaletteOrder: 8045
 		Queue: Promotions
-		Description: Unlocks an upgrade for the zergling.
+		Description: actor-uptalon.description
 		Prerequisites: ~schatchery, !uptalon, rank1
 	RenderSprites:
 		Image: sctalon
@@ -6149,7 +6149,7 @@ upspithid:
 	Buildable:
 		BuildPaletteOrder: 8048
 		Queue: Promotions
-		Description: Unlocks Spithids.
+		Description: actor-upspithid.description
 		Prerequisites: ~schatchery, uptalon, !upspithid, rank1
 	RenderSprites:
 		Image: scspithid
@@ -6162,7 +6162,7 @@ upshriek:
 	Buildable:
 		BuildPaletteOrder: 8051
 		Queue: Promotions
-		Description: Unlocks the shriek, a flying swarming zerg.
+		Description: actor-upshriek.description
 		Prerequisites: ~schatchery, upspithid, !upshriek, rank1
 	RenderSprites:
 		Image: scshriek
@@ -6175,7 +6175,7 @@ upswarmling:
 	Buildable:
 		BuildPaletteOrder: 8054
 		Queue: Promotions
-		Description: Unlocks the Swarmling, a swarming artillery type flying unit.
+		Description: actor-upswarmling.description
 		Prerequisites: ~schatchery, upshriek, !upswarmling, rank1
 	RenderSprites:
 		Image: scswarmling
@@ -6190,7 +6190,7 @@ upsporemaw:
 	Buildable:
 		BuildPaletteOrder: 8046
 		Queue: Promotions
-		Description: Unlocks the Sporemaw.
+		Description: actor-upsporemaw.description
 		Prerequisites: ~schatchery, !upsporemaw, rank1
 	RenderSprites:
 		Image: scsporemaw
@@ -6203,7 +6203,7 @@ upgoremaw:
 	Buildable:
 		BuildPaletteOrder: 8049
 		Queue: Promotions
-		Description: Unlocks the Goremaw.
+		Description: actor-upgoremaw.description
 		Prerequisites: ~schatchery, upsporemaw, !upgoremaw, rank1
 	RenderSprites:
 		Image: scgoremaw
@@ -6216,7 +6216,7 @@ upgorekraken:
 	Buildable:
 		BuildPaletteOrder: 8052
 		Queue: Promotions
-		Description: Unlocks the Gorekraken.
+		Description: actor-upgorekraken.description
 		Prerequisites: ~schatchery, upgoremaw, !upgorekraken, rank1
 	RenderSprites:
 		Image: scgorekraken
@@ -6229,7 +6229,7 @@ uphermit:
 	Buildable:
 		BuildPaletteOrder: 8055
 		Queue: Promotions
-		Description: Allows spawning of the Hermit.
+		Description: actor-uphermit.description
 		Prerequisites: ~schatchery, upgorekraken, !uphermit, rank1
 	RenderSprites:
 		Image: schermit
@@ -6244,7 +6244,7 @@ upbroodweaver:
 	Buildable:
 		BuildPaletteOrder: 8047
 		Queue: Promotions
-		Description: Allows spawning of the Broodweaver.
+		Description: actor-upbroodweaver.description
 		Prerequisites: ~schatchery, !upbroodweaver, rank1
 	RenderSprites:
 		Image: scbroodweaver
@@ -6257,7 +6257,7 @@ upcorruptor:
 	Buildable:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
-		Description: Unlocks the Corruptor.
+		Description: actor-upcorruptor.description
 		Prerequisites: ~schatchery, upbroodweaver, !upcorruptor, rank1
 	RenderSprites:
 		Image: sccorruptor
@@ -6270,7 +6270,7 @@ updreadshroud:
 	Buildable:
 		BuildPaletteOrder: 8053
 		Queue: Promotions
-		Description: Allows spawning of the Dreadshroud.
+		Description: actor-updreadshroud.description
 		Prerequisites: ~schatchery, upcorruptor, !updreadshroud, rank1
 	RenderSprites:
 		Image: scdreadshroud
@@ -6283,7 +6283,7 @@ upbehemoth:
 	Buildable:
 		BuildPaletteOrder: 8056
 		Queue: Promotions
-		Description: Allows spawning of the Behemoth.
+		Description: actor-upbehemoth.description
 		Prerequisites: ~schatchery, updreadshroud, !upbehemoth, rank1
 	RenderSprites:
 		Image: scbehemoth
@@ -6408,7 +6408,7 @@ SCPROBE:
 		Name: Protoss Probe
 	Buildable:
 		Prerequisites: ~scassimilator
-		Description: Collects resources. Can repair mechanical units and buildings. Can capture buildings.
+		Description: actor-scprobe.description
 	Armament:
 		Weapon: ProbeAttack
 	AutoTarget:
@@ -6448,7 +6448,7 @@ SCZEALOT:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scgateway, ~!uplegionnaire
 		Queue: Infantry, RAInfantry
-		Description: Protoss infantry, attacks in close combat.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft\n Uncrushable
+		Description: actor-sczealot.description
 	Mobile:
 		Speed: 70
 	Health:
@@ -6490,7 +6490,7 @@ SCDRAGOON:
 	Buildable:
 		Prerequisites: ~sccyberneticscore, ~!upatreus
 		Queue: Infantry, RAInfantry
-		Description: Protoss assault walker. Can attack air.
+		Description: actor-scdragoon.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 1023
@@ -6551,7 +6551,7 @@ SCMANIFOLD:
 	Buildable:
 		Prerequisites: ~sccyberneticscore, ~upmanifold
 		Queue: Vehicle, RAVehicle
-		Description: Protoss anti air support vehicle. Can lockon enemy units.
+		Description: actor-scmanifold.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -6626,7 +6626,7 @@ SCANALOGUE:
 	Buildable:
 		Prerequisites: ~sccyberneticscore, ~upanalogue
 		Queue: Vehicle, RAVehicle
-		Description: Protoss mobile shield generator. Can repair vehicles and buildings.
+		Description: actor-scanalogue.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -6708,7 +6708,7 @@ SCIDOL:
 		Prerequisites: ~sccyberneticscore, ~upidol
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
-		Description: Protoss support vehicle.
+		Description: actor-scidol.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -6801,7 +6801,7 @@ SCHIGHTEMPLAR:
 		BuildPaletteOrder: 20
 		Prerequisites: ~sctemplararchives
 		Queue: Infantry, RAInfantry
-		Description: Protoss psionic warrior.\nCasts psionic storm for massive splash damage\n Strong vs clustered units\n Uncrushable
+		Description: actor-schightemplar.description
 	Mobile:
 		Speed: 70
 		Locomotor: hover
@@ -6905,7 +6905,7 @@ SCDARKTEMPLAR:
 		BuildPaletteOrder: 20
 		Prerequisites: ~sccitadelofadun, ~!upamaranth
 		Queue: Infantry, RAInfantry
-		Description: Protoss stealth warrior, attacks in close combat.\n Strong vs ground targets\n Uncrushable
+		Description: actor-scdarktemplar.description
 	Mobile:
 		Speed: 75
 	Health:
@@ -6951,7 +6951,7 @@ SCSHUTTLE:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scroboticsfacility
 		Queue: Vehicle, RAVehicle
-		Description: Fast transport for all ground units.\n Unarmed
+		Description: actor-scshuttle.description
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 150
@@ -7017,7 +7017,7 @@ SCREAVER:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scroboticssupportbay
 		Queue: Vehicle, RAVehicle
-		Description: Long-range rocket artillery.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
+		Description: actor-screaver.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -7100,7 +7100,7 @@ SCOBSERVER:
 		BuildPaletteOrder: 30
 		Prerequisites: ~scobservatory
 		Queue: Vehicle, RAVehicle
-		Description: Stealth scout.\n Unarmed
+		Description: actor-scobserver.description
 	Aircraft:
 		Speed: 60
 		TurnSpeed: 12
@@ -7165,7 +7165,7 @@ SCARCHON:
 		BuildPaletteOrder: 40
 		Prerequisites: ~sctemplararchives
 		Queue: Vehicle, RAVehicle
-		Description: Powerful heavy protoss warrior.\n Strong vs Everything
+		Description: actor-scarchon.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -7242,7 +7242,7 @@ SCSCOUT:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstargate, ~!upepigraph
 		Queue: Aircraft, RAAircraft
-		Description: Protoss fighter aircraft.\n Strong vs Aircraft
+		Description: actor-scscout.description
 	Aircraft:
 		Speed: 150
 		TurnSpeed: 30
@@ -7327,7 +7327,7 @@ SCEPIGRAPH:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstargate, ~upepigraph
 		Queue: Aircraft, RAAircraft
-		Description: Protoss fighter aircraft.\n Strong vs Aircraft
+		Description: actor-scepigraph.description
 	Aircraft:
 		Speed: 100
 		TurnSpeed: 20
@@ -7404,7 +7404,7 @@ SCLANIFECT:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstargate, ~uplanifect
 		Queue: Aircraft, RAAircraft
-		Description: Protoss fighter aircraft that can blind enemies.
+		Description: actor-sclanifect.description
 	Aircraft:
 		Speed: 140
 		TurnSpeed: 28
@@ -7477,7 +7477,7 @@ SCGLADIUS:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstargate, ~upgladius
 		Queue: Aircraft, RAAircraft
-		Description: Protoss artillery aircraft.\n Strong vs everything
+		Description: actor-scgladius.description
 	Aircraft:
 		Speed: 50
 		TurnSpeed: 10
@@ -7535,7 +7535,7 @@ SCCORSAIR:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstargate
 		Queue: Aircraft, RAAircraft
-		Description: Protoss fighter aircraft.\n Strong vs Aircraft
+		Description: actor-sccorsair.description
 	Aircraft:
 		Speed: 125
 		TurnSpeed: 25
@@ -7599,7 +7599,7 @@ SCCARRIER:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scfleetbeacon
 		Queue: Aircraft, RAAircraft
-		Description: Heavy protoss warship, deploys\n5 interceptor craft.\n Strong vs Vehicles, Aircraft
+		Description: actor-sccarrier.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 18
@@ -7753,7 +7753,7 @@ SCSTARSHIPSOVEREIGN:
 		BuildLimit: 1
 		Prerequisites: ~scfleetbeacon, ~upstarsovereign
 		Queue: Aircraft, RAAircraft
-		Description: Heavy protoss warship, deploys\n5 interceptor craft.\n Strong vs Vehicles, Aircraft
+		Description: actor-scstarshipsovereign.description
 	Aircraft:
 		Speed: 40
 		TurnSpeed: 16
@@ -7850,7 +7850,7 @@ SCARBITER:
 		BuildPaletteOrder: 30
 		Prerequisites: ~scarbitertribunal
 		Queue: Aircraft, RAAircraft
-		Description: Protoss support vessel.\n Cloaks nearby friendly units\n Can cast a stasis field to freeze units
+		Description: actor-scarbiter.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 28
@@ -7908,7 +7908,7 @@ SCPMCV:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~scroboticsfacility
-		Description: Transforms into a Nexus. Builds structures and provides radar.
+		Description: actor-scpmcv.description
 	Tooltip:
 		Name: Protoss Mobile Nexus
 	Transforms:
@@ -7946,7 +7946,7 @@ SCZERATUL:
 		BuildPaletteOrder: 50
 		Prerequisites: ~sccitadelofadun
 		Queue: Infantry, RAInfantry
-		Description: Protoss Hero. Is pretty mobile, durable and has powerful splash melee attack\n Strong vs Ground\n Weak vs Air
+		Description: actor-sczeratul.description
 		BuildLimit: 1
 		IconPalette: ra2
 	Mobile:
@@ -7998,7 +7998,7 @@ SCAMARANTH:
 		BuildPaletteOrder: 40
 		Prerequisites: ~sccitadelofadun, ~upamaranth
 		Queue: Infantry, RAInfantry
-		Description: Protoss stealth warrior, attacks in close combat.\n Strong vs ground targets\n Uncrushable
+		Description: actor-scamaranth.description
 	Mobile:
 		Speed: 70
 	Health:
@@ -8055,7 +8055,7 @@ SCATREUS:
 		BuildPaletteOrder: 20
 		Prerequisites: ~sccyberneticscore, ~upatreus
 		Queue: Infantry, RAInfantry
-		Description: Protoss assault walker.\n Strong vs Vehicles\n Weak vs Infantry
+		Description: actor-scatreus.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -8118,7 +8118,7 @@ SCPOSITRON:
 	Buildable:
 		Prerequisites: ~sccyberneticscore, ~uppositron
 		Queue: Vehicle, RAVehicle
-		Description: Fast scout vehicle, armed with\ngrenades.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft\n Can cross water
+		Description: actor-scpositron.description
 	Mobile:
 		Speed: 120
 		TurnSpeed: 48
@@ -8183,7 +8183,7 @@ SCLEGIONNAIRE:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scgateway, ~uplegionnaire
 		Queue: Infantry, RAInfantry
-		Description: Protoss infantry, attacks in close combat.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft\n Uncrushable
+		Description: actor-sclegionnaire.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -8225,7 +8225,7 @@ SCPATRIARCH:
 		BuildPaletteOrder: 30
 		Prerequisites: ~sctemplararchives, ~uppatriarch
 		Queue: Infantry, RAInfantry
-		Description: Protoss psionic warrior.\nShoots psionic storm for massive splash damage\n Strong vs clustered units\n Uncrushable
+		Description: actor-scpatriarch.description
 		BuildLimit: 1
 	Mobile:
 		Speed: 75
@@ -8272,7 +8272,7 @@ uplegionnaire:
 	Buildable:
 		BuildPaletteOrder: 8045
 		Queue: Promotions
-		Description: Unlocks the Legionnaire.
+		Description: actor-uplegionnaire.description
 		Prerequisites: ~scnexus, !uplegionnaire, rank1
 	RenderSprites:
 		Image: sclegionnaire
@@ -8285,7 +8285,7 @@ upatreus:
 	Buildable:
 		BuildPaletteOrder: 8048
 		Queue: Promotions
-		Description: Unlocks the Atreus.
+		Description: actor-upatreus.description
 		Prerequisites: ~scnexus, uplegionnaire, !upatreus, rank1
 	RenderSprites:
 		Image: scatreus
@@ -8298,7 +8298,7 @@ upamaranth:
 	Buildable:
 		BuildPaletteOrder: 8051
 		Queue: Promotions
-		Description: Unlocks the Amaranth.
+		Description: actor-upamaranth.description
 		Prerequisites: ~scnexus, upatreus, !upamaranth, rank1
 	RenderSprites:
 		Image: scamaranth
@@ -8311,7 +8311,7 @@ uppatriarch:
 	Buildable:
 		BuildPaletteOrder: 8054
 		Queue: Promotions
-		Description: Unlocks the Patriarch.
+		Description: actor-uppatriarch.description
 		Prerequisites: ~scnexus, upamaranth, !uppatriarch, rank1
 	RenderSprites:
 		Image: scpatriarch
@@ -8326,7 +8326,7 @@ upepigraph:
 	Buildable:
 		BuildPaletteOrder: 8047
 		Queue: Promotions
-		Description: Unlocks the Epigraph.
+		Description: actor-upepigraph.description
 		Prerequisites: ~scnexus, !upepigraph, rank1
 	RenderSprites:
 		Image: scepigraph
@@ -8339,7 +8339,7 @@ uplanifect:
 	Buildable:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
-		Description: Unlocks the Lanifect.
+		Description: actor-uplanifect.description
 		Prerequisites: ~scnexus, upepigraph, !upgladius, rank1
 	RenderSprites:
 		Image: sclanifect
@@ -8352,7 +8352,7 @@ upgladius:
 	Buildable:
 		BuildPaletteOrder: 8053
 		Queue: Promotions
-		Description: Unlocks the Gladius.
+		Description: actor-upgladius.description
 		Prerequisites: ~scnexus, uplanifect, !upgladius, rank1
 	RenderSprites:
 		Image: scgladius
@@ -8365,7 +8365,7 @@ upstarsovereign:
 	Buildable:
 		BuildPaletteOrder: 8056
 		Queue: Promotions
-		Description: Unlocks the Star Sovereign.
+		Description: actor-upstarsovereign.description
 		Prerequisites: ~scnexus, upgladius, !upstarsovereign, rank1
 	RenderSprites:
 		Image: scstarshipsovereign
@@ -8380,7 +8380,7 @@ uppositron:
 	Buildable:
 		BuildPaletteOrder: 8046
 		Queue: Promotions
-		Description:  nlocks the Positron.
+		Description: actor-uppositron.description
 		Prerequisites: ~scnexus, !uppositron, rank1
 	RenderSprites:
 		Image: scpositron
@@ -8393,7 +8393,7 @@ upanalogue:
 	Buildable:
 		BuildPaletteOrder: 8049
 		Queue: Promotions
-		Description: Unlocks the Analogue.
+		Description: actor-upanalogue.description
 		Prerequisites: ~scnexus, uppositron , !upanalogue, rank1
 	RenderSprites:
 		Image: scanalogue
@@ -8406,7 +8406,7 @@ upmanifold:
 	Buildable:
 		BuildPaletteOrder: 8052
 		Queue: Promotions
-		Description: Unlocks the Manifold.
+		Description: actor-upmanifold.description
 		Prerequisites: ~scnexus, upanalogue, !upmanifold, rank1
 	RenderSprites:
 		Image: scmanifold
@@ -8419,7 +8419,7 @@ upidol:
 	Buildable:
 		BuildPaletteOrder: 8055
 		Queue: Promotions
-		Description: Unlocks the Idol.
+		Description: actor-upidol.description
 		Prerequisites: ~scnexus, upmanifold, !upidol, rank1
 	RenderSprites:
 		Image: scidol
@@ -8571,7 +8571,7 @@ SCDRONE:
 	Buildable:
 		Queue: SCZergInfantry
 		Prerequisites: ~scextractor
-		Description: Collects resources.
+		Description: actor-scdrone.description
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
 	Armament:
@@ -8625,7 +8625,7 @@ SCOVERLORD:
 		BuildPaletteOrder: 0
 		Prerequisites: ~schatchery
 		Queue: SCZergInfantry
-		Description: Provides supply and stores resources\nCan transport 8 units
+		Description: actor-scoverlord.description
 	Aircraft:
 		TurnSpeed: 6
 		Speed: 30
@@ -8721,7 +8721,7 @@ SCBROODWEAVER:
 		BuildPaletteOrder: 0
 		Prerequisites: ~schatchery, ~upbroodweaver
 		Queue: SCZergInfantry
-		Description: Heals nearby units.
+		Description: actor-scbroodweaver.description
 	Aircraft:
 		TurnSpeed: 9
 		Speed: 45
@@ -8828,7 +8828,7 @@ SCZERGLING:
 		Prerequisites: ~scspawningpool, ~!uptalon
 		Queue: SCZergInfantry
 		AdditionalActors: sczergling
-		Description: Fast Zerg basic assault strain.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
+		Description: actor-sczergling.description
 	Mobile:
 		Speed: 110
 	Health:
@@ -8879,7 +8879,7 @@ SCTALON:
 		Prerequisites: ~scspawningpool, ~uptalon
 		Queue: SCZergInfantry
 		AdditionalActors: sczergling, sczergling
-		Description: Fast Zerg basic assault strain.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
+		Description: actor-sctalon.description
 	Mobile:
 		Speed: 160
 		Locomotor: fakeaircraft
@@ -8926,7 +8926,7 @@ SCSPOREMAW:
 		BuildPaletteOrder: 40
 		Prerequisites: ~sclair, ~upsporemaw
 		Queue: SCZergInfantry
-		Description: Zerg artillery strain.\n Strong vs Infantry, Vehicles\n Weak vs Aircraft
+		Description: actor-scsporemaw.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -8984,7 +8984,7 @@ SCHYDRALISK:
 		BuildPaletteOrder: 40
 		Prerequisites: ~schydraliskden
 		Queue: SCZergInfantry
-		Description: Zerg armored assault strain.\n Strong vs Infantry, Vehicles, Aircraft\n Weak vs Siege
+		Description: actor-schydralisk.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -9041,7 +9041,7 @@ SCSPITHID:
 		BuildPaletteOrder: 40
 		Prerequisites: ~schydraliskden, ~upspithid
 		Queue: SCZergInfantry
-		Description: Zerg armored assault strain.\n Strong vs Infantry, Vehicles, Aircraft\n Weak vs Siege
+		Description: actor-scspithid.description
 	Mobile:
 		Speed: 110
 	Health:
@@ -9096,7 +9096,7 @@ SCDREADSHROUD:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scspire,, ~updreadshroud
 		Queue: SCZergInfantry
-		Description: Airborne Zerg creature.\n Strong vs Infantry, Aircraft
+		Description: actor-scdreadshroud.description
 	Aircraft:
 		Speed: 120
 		TurnSpeed: 24
@@ -9145,7 +9145,7 @@ SCCORRUPTOR:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scgreaterspire, ~upcorruptor
 		Queue: SCZergInfantry
-		Description: Airborne Zerg creature can snare enemy units.
+		Description: actor-sccorruptor.description
 	Aircraft:
 		Speed: 100
 		TurnSpeed: 20
@@ -9200,7 +9200,7 @@ SCSWARMLING:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scgreaterspire, ~schive, ~upswarmling
 		Queue: SCZergInfantry
-		Description: Airborne Zerg creature.\n Strong vs Everything in group
+		Description: actor-scswarmling.description
 	Aircraft:
 		Speed: 80
 		TurnSpeed: 16
@@ -9449,7 +9449,7 @@ SCSHRIEK:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scspire, ~upshriek
 		Queue: SCZergInfantry
-		Description: Airborne melee Zerg creature.\n Strong vs Infantry, Aircraft
+		Description: actor-scshriek.description
 	Aircraft:
 		Speed: 195
 		TurnSpeed: 39
@@ -9504,7 +9504,7 @@ SCMUTALISK:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scspire
 		Queue: SCZergInfantry
-		Description: Airborne Zerg creature.\n Strong vs Infantry, Aircraft
+		Description: actor-scmutalisk.description
 	Aircraft:
 		Speed: 160
 		TurnSpeed: 32
@@ -9567,7 +9567,7 @@ SCDEVOURER:
 		BuildPaletteOrder: 50
 		Prerequisites: ~scgreaterspire
 		Queue: SCZergInfantry
-		Description: Airborne Zerg creature.\n Strong vs Aircraft
+		Description: actor-scdevourer.description
 	Aircraft:
 		Speed: 90
 		TurnSpeed: 18
@@ -9618,7 +9618,7 @@ SCSCOURGE:
 		BuildPaletteOrder: 60
 		Prerequisites: ~scspire
 		Queue: SCZergInfantry
-		Description: Aerial suicide bomber.\n Strong vs Aircraft
+		Description: actor-scscourge.description
 	Aircraft:
 		InitialFacing: 896
 		AltitudeVelocity: 128
@@ -9669,7 +9669,7 @@ SCQUEEN:
 		BuildPaletteOrder: 70
 		Prerequisites: ~scqueensnest
 		Queue: SCZergInfantry
-		Description: Defensive Air Unit\nCan breed Broodlings\nCan attack air and ground\nDetector
+		Description: actor-scqueen.description
 	Aircraft:
 		Speed: 100
 		TurnSpeed: 20
@@ -9742,7 +9742,7 @@ SCGUARDIAN:
 	Buildable:
 		Prerequisites: ~scgreaterspire
 		Queue: SCZergInfantry
-		Description: Heavy Zerg bomber.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
+		Description: actor-scguardian.description
 	Aircraft:
 		Speed: 50
 		TurnSpeed: 10
@@ -9788,7 +9788,7 @@ SCULTRALISK:
 		BuildPaletteOrder: 80
 		Prerequisites: ~scultraliskcavern
 		Queue: SCZergInfantry
-		Description: Heavy Zerg assault strain.\n Strong vs Vehicles\n Weak vs Aircraft
+		Description: actor-scultralisk.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -9843,7 +9843,7 @@ SCGOREKRAKEN:
 	Buildable:
 		Prerequisites: ~scgreaterspire, ~upgorekraken
 		Queue: SCZergInfantry
-		Description: Heavy Zerg bomber.\n Strong vs Vehicles, Buildings\n Weak vs Aircraft
+		Description: actor-scgorekraken.description
 	Aircraft:
 		Speed: 70
 		TurnSpeed: 14
@@ -9899,7 +9899,7 @@ SCHERMIT:
 		BuildPaletteOrder: 80
 		Prerequisites: ~scultraliskcavern, ~uphermit
 		Queue: SCZergInfantry
-		Description: Heavy Zerg assault strain.\n Strong vs Vehicles\n Weak vs Aircraft
+		Description: actor-schermit.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 20
@@ -9963,7 +9963,7 @@ SCGOREMAW:
 		BuildPaletteOrder: 80
 		Prerequisites: ~scultraliskcavern, ~schive, ~upgoremaw
 		Queue: SCZergInfantry
-		Description: Heavy Zerg assault strain.\n Strong vs Vehicles\n Weak vs Aircraft
+		Description: actor-scgoremaw.description
 	Mobile:
 		Speed: 150
 		TurnSpeed: 60
@@ -10025,7 +10025,7 @@ SCLURKER:
 		BuildPaletteOrder: 90
 		Prerequisites: ~schydraliskden, ~scevolutionchamber, ~sclair
 		Queue: SCZergInfantry
-		Description: Zerg ambush strain.\nNeeds to deploy to attack\n Strong vs Infantry
+		Description: actor-sclurker.description
 	Mobile:
 		Speed: 90
 		Locomotor: wheeled
@@ -10129,7 +10129,7 @@ SCINFESTEDTERRAN:
 		BuildPaletteOrder: 8010
 		Prerequisites: ~scinfestedcommandcenter
 		Queue: Vehicle, RAVehicle
-		Description: Suicide bomber infantry.\n Strong vs clustered units\n Does no damage if killed
+		Description: actor-scinfestedterran.description
 	Mobile:
 		Speed: 90
 	Health:
@@ -10182,7 +10182,7 @@ SCDEFILER:
 		BuildPaletteOrder: 8020
 		Prerequisites: ~scdefilermound
 		Queue: SCZergInfantry
-		Description: Zerg support strain.\nAttack reduces targets' health over time\n Strong vs clustered units\n Special Ability: Dark Swarm
+		Description: actor-scdefiler.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 20
@@ -10319,7 +10319,7 @@ SCKERRIGANZERG:
 		BuildPaletteOrder: 8040
 		Prerequisites: ~scqueensnest
 		Queue: SCZergInfantry
-		Description: Queen Of Blades\nPowerful melee attack\nCan Breed Zergs
+		Description: actor-sckerriganzerg.description
 		BuildLimit: 1
 		IconPalette: windows256
 	Mobile:
@@ -10384,10 +10384,10 @@ SCZMCV:
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Buildable:
 		Queue: SCZergInfantry
-		Description: Builds structures and provides radar.
+		Description: actor-sczmcv.description
 		Prerequisites: ~scevolutionchamber
 	Tooltip:
-		Name: Mobile Construction Vehicle (Zerg)
+		Name: Zerg Hatchery Drone
 	Selectable:
 		Priority: 4
 		DecorationBounds: 1536, 1536
@@ -10434,7 +10434,7 @@ SCBEHEMOTH:
 		BuildPaletteOrder: 20
 		Prerequisites: ~sclair, ~upbehemoth
 		Queue: SCZergInfantry
-		Description: A slow moving garrison transport for all ground units.\nExtremely Durable\n Strong vs Everything
+		Description: actor-scbehemoth.description
 	Aircraft:
 		Speed: 30
 		TurnSpeed: 12
@@ -10560,7 +10560,7 @@ updragoonrange:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Range of Photon Cannons, Dragoons, Atreuses, Positrons, Manifolds, Analogues and Idols by 20%.
+		Description: actor-updragoonrange.description
 		Prerequisites: ~sccyberneticscore, ~!updragoonrange
 	Valued:
 		Cost: 2500
@@ -10578,7 +10578,7 @@ uppylon1:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Energy of Pylons by 100%.
+		Description: actor-uppylon1.description
 		Prerequisites: ~scforge, ~!uppylon1
 	RenderSprites:
 		Image: scpylon
@@ -10593,7 +10593,7 @@ uppylon2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Energy of Pylons by 100%.
+		Description: actor-uppylon2.description
 		Prerequisites: ~sccyberneticscore, ~uppylon1, ~!uppylon2
 	RenderSprites:
 		Image: scpylon
@@ -10606,7 +10606,7 @@ upplasmashield:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Shield Strength and Regeneration by 20%.
+		Description: actor-upplasmashield.description
 		Prerequisites: ~sccyberneticscore, ~!upplasmashield
 	Valued:
 		Cost: 5000
@@ -10622,7 +10622,7 @@ upreavercapacity:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Doubles Reaver capacity.
+		Description: actor-upreavercapacity.description
 		Prerequisites: ~scroboticssupportbay
 	Valued:
 		Cost: 2500
@@ -10638,7 +10638,7 @@ upairspeed:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Speed of flying Protoss Units by 20%.
+		Description: actor-upairspeed.description
 		Prerequisites: ~scroboticssupportbay, ~!upairspeed
 	Valued:
 		Cost: 2500
@@ -10654,7 +10654,7 @@ upgroundweapons:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Protoss ground units by 15%.
+		Description: actor-upgroundweapons.description
 		Prerequisites: ~scforge, ~!upgroundweapons
 	Valued:
 		Cost: 2500
@@ -10670,7 +10670,7 @@ upgroundweapons2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Protoss ground units by 35%.
+		Description: actor-upgroundweapons2.description
 		Prerequisites: ~sctemplararchives, ~upgroundweapons, ~!upgroundweapons2
 	Valued:
 		Cost: 5000
@@ -10686,7 +10686,7 @@ upgroundarmor:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Protoss ground units by 10%.
+		Description: actor-upgroundarmor.description
 		Prerequisites: ~scforge, ~!upgroundarmor
 	Valued:
 		Cost: 2500
@@ -10702,7 +10702,7 @@ upgroundarmor2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Protoss ground units by 20%.
+		Description: actor-upgroundarmor2.description
 		Prerequisites: ~sctemplararchives, ~upgroundarmor, ~!upgroundarmor2
 	Valued:
 		Cost: 5000
@@ -10718,7 +10718,7 @@ upairweapons:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Protoss air units by 15%.
+		Description: actor-upairweapons.description
 		Prerequisites: ~sccyberneticscore, ~!upairweapons
 	Valued:
 		Cost: 2500
@@ -10734,7 +10734,7 @@ upairweapons2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Protoss air units by 35%.
+		Description: actor-upairweapons2.description
 		Prerequisites: ~scfleetbeacon, ~upairweapons, ~!upairweapons2
 	Valued:
 		Cost: 5000
@@ -10750,7 +10750,7 @@ upairarmor:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Protoss air units by 10%.
+		Description: actor-upairarmor.description
 		Prerequisites: ~sccyberneticscore, ~!upairarmor
 	Valued:
 		Cost: 2500
@@ -10766,7 +10766,7 @@ upairarmor2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Protoss air units by 20%.
+		Description: actor-upairarmor2.description
 		Prerequisites: ~scfleetbeacon, ~upairarmor, ~!upairarmor2
 	Valued:
 		Cost: 5000
@@ -10788,7 +10788,7 @@ upstimpack:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Marines and Firebats can use the Stim Pack ability.
+		Description: actor-upstimpack.description
 		Prerequisites: ~scacademy, ~!upstimpack
 	RenderSprites:
 		Image: upstimpack
@@ -10803,7 +10803,7 @@ upmarinerange:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases range of Marines, Mad Caps and Jim Raynor by 20%.
+		Description: actor-upmarinerange.description
 		Prerequisites: ~scacademy, ~!upmarinerange
 	RenderSprites:
 		Image: upmarinerange
@@ -10818,7 +10818,7 @@ upsupplydepot1:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Energy of Supply Depots by 100%.
+		Description: actor-upsupplydepot1.description
 		Prerequisites: ~scengineeringbay, ~!upsupplydepot1
 	RenderSprites:
 		Image: scsupplydepot
@@ -10833,7 +10833,7 @@ upsupplydepot2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Energy of Supply Depots by 100%.
+		Description: actor-upsupplydepot2.description
 		Prerequisites: ~scarmory, ~upsupplydepot1, ~!upsupplydepot2
 	RenderSprites:
 		Image: scsupplydepot
@@ -10848,7 +10848,7 @@ upghostcloak:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Enables Cloak for Ghosts, Spectres, Wraiths, Sundogs and the Pythean.
+		Description: actor-upghostcloak.description
 		Prerequisites: ~scsciencefacility, ~!upghostcloak
 	RenderSprites:
 		Image: sccloak
@@ -10863,7 +10863,7 @@ upsiegemode:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Siege Mode Range by 10% and Vision by 20%
+		Description: actor-upsiegemode.description
 		Prerequisites: ~scsciencefacility, ~!upsiegemode
 	RenderSprites:
 		Image: scsiegemode
@@ -10878,7 +10878,7 @@ upyamatocannon:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Allows the use of the Yamato Cannon and Tactical Jump for the Battle Cruiser and Phobos. Increases Battlecruiser Range by 15%.
+		Description: actor-upyamatocannon.description
 		Prerequisites: ~scsciencefacility, ~!upyamatocannon
 	RenderSprites:
 		Image: scyamatocannon
@@ -10893,7 +10893,7 @@ upinfweapon:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Terran Infantry by 15%.
+		Description: actor-upinfweapon.description
 		Prerequisites: ~scengineeringbay, ~!upinfweapon
 	RenderSprites:
 		Image: upinfweapon
@@ -10909,7 +10909,7 @@ upinfweapon2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Terran Infantry by 35%.
+		Description: actor-upinfweapon2.description
 		Prerequisites: ~scsciencefacility, ~upinfweapon, ~!upinfweapon2
 	RenderSprites:
 		Image: upinfweapon
@@ -10925,7 +10925,7 @@ upinfarmor:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Terran Infantry by 10%.
+		Description: actor-upinfarmor.description
 		Prerequisites: ~scengineeringbay, ~!upinfarmor
 	RenderSprites:
 		Image: upinfarmor
@@ -10941,7 +10941,7 @@ upinfarmor2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Terran Infantry by 20%.
+		Description: actor-upinfarmor2.description
 		Prerequisites: ~scsciencefacility, ~upinfarmor, ~!upinfarmor2
 	RenderSprites:
 		Image: upinfarmor
@@ -10957,7 +10957,7 @@ upmechweapon:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Terran Vehicles by 15%.
+		Description: actor-upmechweapon.description
 		Prerequisites: ~scarmory, ~!upmechweapon
 	RenderSprites:
 		Image: upmechweapon
@@ -10972,7 +10972,7 @@ upmechweapon2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Terran Vehicles by 35%.
+		Description: actor-upmechweapon2.description
 		Prerequisites: ~scsciencefacility, ~upmechweapon, ~!upmechweapon2
 	RenderSprites:
 		Image: upmechweapon
@@ -10987,7 +10987,7 @@ upmecharmor:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Terran Vehicles by 10%.
+		Description: actor-upmecharmor.description
 		Prerequisites: ~scarmory, ~!upmecharmor
 	RenderSprites:
 		Image: upmecharmor
@@ -11002,7 +11002,7 @@ upmecharmor2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Terran Vehicles by 20%.
+		Description: actor-upmecharmor2.description
 		Prerequisites: ~scsciencefacility, ~upmecharmor, ~!upmecharmor2
 	RenderSprites:
 		Image: upmecharmor
@@ -11017,7 +11017,7 @@ upshipweapon:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Terran Aircraft by 15%.
+		Description: actor-upshipweapon.description
 		Prerequisites: ~scarmory, ~!upshipweapon
 	RenderSprites:
 		Image: upshipweapon
@@ -11032,7 +11032,7 @@ upshipweapon2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Firepower of all Terran Aircraft by 35%.
+		Description: actor-upshipweapon2.description
 		Prerequisites: ~scsciencefacility, ~upshipweapon, ~!upshipweapon2
 	RenderSprites:
 		Image: upshipweapon
@@ -11047,7 +11047,7 @@ upshiparmor:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Terran Aircraft by 10%.
+		Description: actor-upshiparmor.description
 		Prerequisites: ~scarmory, ~!upshiparmor
 	RenderSprites:
 		Image: upshiparmor
@@ -11062,7 +11062,7 @@ upshiparmor2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Terran Aircraft by 20%.
+		Description: actor-upshiparmor2.description
 		Prerequisites: ~scsciencefacility, ~upshiparmor, ~!upshiparmor2
 	RenderSprites:
 		Image: upshiparmor
@@ -11081,7 +11081,7 @@ upoverlordspeed:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Speed of Overlords and Broodweavers by 50%.
+		Description: actor-upoverlordspeed.description
 		Prerequisites: ~schatchery, ~!upoverlordspeed
 	RenderSprites:
 		Image: upoverlordspeed
@@ -11096,7 +11096,7 @@ uplingspeed:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Speed of Zerglings, Talons, Shrieks and Kerrigan by 33%.
+		Description: actor-uplingspeed.description
 		Prerequisites: ~scspawningpool, ~scevolutionchamber, ~!uplingspeed
 	RenderSprites:
 		Image: uplingspeed
@@ -11111,7 +11111,7 @@ uplingattack:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Attack Speed of Zerglings, Talons, Shrieks and Kerrigan by 33%.
+		Description: actor-uplingattack.description
 		Prerequisites: ~scevolutionchamber, ~!uplingattack
 	RenderSprites:
 		Image: uplingattack
@@ -11126,7 +11126,7 @@ upzergrange:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Range of Hydralisks, Lurkers, and Spithids by 20%.
+		Description: actor-upzergrange.description
 		Prerequisites: ~schydraliskden, ~!upzergrange
 	RenderSprites:
 		Image: upzergrange
@@ -11141,7 +11141,7 @@ upzergmelee:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Attack Damage of all melee Zerg units by 15%.
+		Description: actor-upzergmelee.description
 		Prerequisites: ~scevolutionchamber, ~!upzergmelee
 	RenderSprites:
 		Image: upzergmelee
@@ -11156,7 +11156,7 @@ upzergmelee2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Attack Damage of all melee Zerg units by 35%.
+		Description: actor-upzergmelee2.description
 		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmelee, ~!upzergmelee2
 	RenderSprites:
 		Image: upzergmelee
@@ -11171,7 +11171,7 @@ upzergmissile:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Attack Damage of all ranged Zerg ground units by 15%.
+		Description: actor-upzergmissile.description
 		Prerequisites: ~scevolutionchamber, ~!upzergmissile
 	RenderSprites:
 		Image: upzergmissile
@@ -11186,7 +11186,7 @@ upzergmissile2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Attack Damage of all ranged Zerg ground units by 35%.
+		Description: actor-upzergmissile2.description
 		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmissile, ~!upzergmissile2
 	RenderSprites:
 		Image: upzergmissile
@@ -11201,7 +11201,7 @@ upcarapace:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Zerg ground units by 10%.
+		Description: actor-upcarapace.description
 		Prerequisites: ~scevolutionchamber, ~!upcarapace
 	RenderSprites:
 		Image: upcarapace
@@ -11216,7 +11216,7 @@ upcarapace2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Zerg ground units by 20%.
+		Description: actor-upcarapace2.description
 		Prerequisites: ~scevolutionchamber, ~schive, ~upcarapace, ~!upcarapace2
 	RenderSprites:
 		Image: upcarapace
@@ -11231,7 +11231,7 @@ upflyerattack:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Attack Damage of all Ranged Flying Zerg units by 15%.
+		Description: actor-upflyerattack.description
 		Prerequisites: ~scspire, ~!upflyerattack
 	RenderSprites:
 		Image: upflyerattack
@@ -11246,7 +11246,7 @@ upflyerattack2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Attack Damage of all Ranged Flying Zerg units by 35%.
+		Description: actor-upflyerattack2.description
 		Prerequisites: ~scspire, ~schive, ~upflyerattack, ~!upflyerattack2
 	RenderSprites:
 		Image: upflyerattack
@@ -11261,7 +11261,7 @@ upflyerarmor:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Flying Zerg units by 10%.
+		Description: actor-upflyerarmor.description
 		Prerequisites: ~scspire, ~!upflyerarmor
 	RenderSprites:
 		Image: upflyerarmor
@@ -11276,7 +11276,7 @@ upflyerarmor2:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Addons
-		Description: Increases Armor of all Flying Zerg units by 20%.
+		Description: actor-upflyerarmor2.description
 		Prerequisites: ~scspire, ~schive, ~upflyerarmor, ~!upflyerarmor2
 	RenderSprites:
 		Image: upflyerarmor
