@@ -23,7 +23,7 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 {
 	public sealed class FitImageLoadScreen : SheetLoadScreen
 	{
-		const double NewSessionGapSeconds = 2.0;
+		const double NewSessionGapSeconds = 15.0;
 
 		float2 scale;
 		float2 logoPos;
@@ -57,15 +57,22 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 
 				// Prevent the base class from loading + caching its own sheet; we manage one ourselves.
 				info.Remove("Image");
+
+				currentImage = images[Game.CosmeticRandom.Next(images.Length)];
 			}
 
 			messages = FluentProvider.GetMessage(Loading).Split('$').Select(x => x.Trim()).ToArray();
+
+			if (messages.Length > 0)
+				text = messages.Random(Game.CosmeticRandom);
 		}
 
 		public override void DisplayInner(Renderer r, Sheet s, int density)
 		{
-			// First DisplayInner of a new session is identified by the gap that opens up while the game runs normally between loads.
-			var isNewSession = !timeSinceLastDisplay.IsRunning || timeSinceLastDisplay.Elapsed.TotalSeconds > NewSessionGapSeconds;
+			// Re-randomize when DisplayInner hasn't fired for a while — i.e. the player was at the menu between loads.
+			// On the very first call Elapsed is zero (stopwatch never started), so this correctly evaluates to false
+			// and leaves the values Init() already chose untouched.
+			var isNewSession = timeSinceLastDisplay.Elapsed.TotalSeconds > NewSessionGapSeconds;
 			timeSinceLastDisplay.Restart();
 
 			if (isNewSession)
