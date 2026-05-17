@@ -23,6 +23,8 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 {
 	public sealed class FitImageLoadScreen : SheetLoadScreen
 	{
+		const double NewSessionGapSeconds = 2.0;
+
 		float2 scale;
 		float2 logoPos;
 		Sprite logo;
@@ -31,7 +33,12 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		int lastDensity;
 		Size lastResolution;
 
-		Stopwatch timeSinceLastDisplay;
+		// Owned sheet — we bypass the base class's private sheet cache so we can swap images per session.
+		string[] images;
+		string currentImage;
+		Sheet ownSheet;
+
+		readonly Stopwatch timeSinceLastDisplay = new Stopwatch();
 
 		[FluentReference]
 		const string Loading = "loadscreen-loading";
@@ -42,10 +49,14 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		{
 			base.Init(modData, info);
 
-			if (info.TryGetValue("Image", out var images) && images.Contains(","))
+			if (info.TryGetValue("Image", out var raw))
 			{
-				var imageList = images.Split(',');
-				info["Image"] = imageList[new Random().Next(imageList.Length)].Trim();
+				images = raw.Contains(',')
+					? raw.Split(',').Select(x => x.Trim()).ToArray()
+					: new[] { raw };
+
+				// Prevent the base class from loading + caching its own sheet; we manage one ourselves.
+				info.Remove("Image");
 			}
 
 			messages = FluentProvider.GetMessage(Loading).Split('$').Select(x => x.Trim()).ToArray();
@@ -53,26 +64,58 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 
 		public override void DisplayInner(Renderer r, Sheet s, int density)
 		{
-			// Detect a new loading session by the gap in Display() calls while the game runs normally between loads.
-			var isNewSession = timeSinceLastDisplay == null || timeSinceLastDisplay.Elapsed.TotalSeconds > 2.0;
-			timeSinceLastDisplay ??= new Stopwatch();
+			// First DisplayInner of a new session is identified by the gap that opens up while the game runs normally between loads.
+			var isNewSession = !timeSinceLastDisplay.IsRunning || timeSinceLastDisplay.Elapsed.TotalSeconds > NewSessionGapSeconds;
 			timeSinceLastDisplay.Restart();
 
-			if (isNewSession && messages.Length > 0)
-				text = messages.Random(Game.CosmeticRandom);
-
-			if (s != lastSheet || density != lastDensity)
+			if (isNewSession)
 			{
-				lastSheet = s;
+				if (messages.Length > 0)
+					text = messages.Random(Game.CosmeticRandom);
+
+				if (images != null && images.Length > 0)
+				{
+					var pick = images[Game.CosmeticRandom.Next(images.Length)];
+
+					// Only churn the sheet when the pick actually changes — same image = zero I/O, zero GPU upload.
+					if (pick != currentImage)
+					{
+						// Dispose first to keep peak GPU memory at exactly 1 sheet (no brief 2-sheet overlap).
+						ownSheet?.Dispose();
+						ownSheet = null;
+						currentImage = pick;
+					}
+				}
+			}
+
+			if (ownSheet == null && currentImage != null)
+			{
+				using (var stream = ModData.DefaultFileSystem.Open(Platform.ResolvePath(currentImage)))
+				{
+					ownSheet = new Sheet(SheetType.BGRA, stream);
+					ownSheet.GetTexture().ScaleFilter = TextureScaleFilter.Linear;
+				}
+			}
+
+			var sheet = ownSheet ?? s;
+			if (sheet == null)
+				return;
+
+			if (sheet != lastSheet || density != lastDensity)
+			{
+				lastSheet = sheet;
 				lastDensity = density;
 
-				var rect = new Rectangle(0, 0, s.Size.Width, s.Size.Height);
-				scale = new float2(r.Resolution.Width / (float)s.Size.Width,
-					(float)r.Resolution.Height / (float)s.Size.Height);
+				var rect = new Rectangle(0, 0, sheet.Size.Width, sheet.Size.Height);
+				scale = new float2(r.Resolution.Width / (float)sheet.Size.Width,
+					(float)r.Resolution.Height / (float)sheet.Size.Height);
 
 				logo = scale.X > scale.Y
-					? new Sprite(s, rect, TextureChannel.RGBA, scale.Y)
-					: new Sprite(s, rect, TextureChannel.RGBA, scale.X);
+					? new Sprite(sheet, rect, TextureChannel.RGBA, scale.Y)
+					: new Sprite(sheet, rect, TextureChannel.RGBA, scale.X);
+
+				// Force logo position recompute now that the sheet (and therefore size) may have changed.
+				lastResolution = default;
 			}
 
 			if (r.Resolution != lastResolution)
@@ -80,8 +123,8 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 				lastResolution = r.Resolution;
 
 				logoPos = scale.X > scale.Y
-					? new float2((r.Resolution.Width - s.Size.Width * scale.Y) / 2, 0)
-					: new float2(0, (-s.Size.Height * scale.X + r.Resolution.Height) / 2);
+					? new float2((r.Resolution.Width - sheet.Size.Width * scale.Y) / 2, 0)
+					: new float2(0, (-sheet.Size.Height * scale.X + r.Resolution.Height) / 2);
 			}
 
 			if (logo != null)
@@ -94,6 +137,14 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 					new float2(r.Resolution.Width - textSize.X - 20, r.Resolution.Height - textSize.Y - 20),
 					Color.White, Color.Black, 2);
 			}
+		}
+
+		protected override void Dispose(bool disposing)
+		{
+			if (disposing)
+				ownSheet?.Dispose();
+
+			base.Dispose(disposing);
 		}
 	}
 }
