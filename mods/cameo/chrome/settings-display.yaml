@@ -342,6 +342,19 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-frame-limit-gamespeed-container
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
+					Height: 30
+					Children:
+						Container@CROSSMAPSPRITECACHE_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@CROSSMAPSPRITECACHE_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-cross-map-sprite-cache-container
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
 					Height: 50
 					Children:
 						Container@GL_PROFILE_DROPDOWN_CONTAINER:
