@@ -264,6 +264,9 @@ bot-ai =
 
 support-power-timer = { $player }'s { $support-power }: { $time }
 
+## settings-display.yaml
+checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
+
 ## settings-gameplay.yaml
 label-experimental-section-header = Experimental Features
 checkbox-quota-mode =
