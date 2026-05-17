@@ -12043,8 +12043,11 @@ nax_airfield:
 	Turreted:
 		TurnSpeed: 1023
 	Exit@1:
-		ExitCell: 1,1
-		Facing: 384
+		ExitCell: 2,2
+		Facing: 640
+	Exit@2:
+		ExitCell: 0,0
+		Facing: 128
 	ProvidesPrerequisite@buildingname:
 	AttackTurreted:
 	CarrierMaster:
@@ -12054,6 +12057,7 @@ nax_airfield:
 		InstaRepair: true
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
+		UseArmamentTurretFacing: true
 	ProductionQueue@AIRCRAFT:
 		BuildDurationModifier: 50
 	Armament@PRIMARY:
@@ -12150,14 +12154,14 @@ nax_interceptor:
 	Tooltip:
 		Name: Interceptor
 	Aircraft:
-		AltitudeVelocity: 160
+		AltitudeVelocity: 3000
 		InitialFacing: 768
-		TurnSpeed: 16
+		TurnSpeed: 25
+		IdleTurnSpeed: 25
 		Speed: 160
 		Repulsable: false
 		MaximumPitch: 48
 		TakeUpCellWhenLand: false
-		VTOL: true
 	Health:
 		HP: 10000
 	ChangesHealth@SelfHealing:
@@ -12186,7 +12190,7 @@ nax_interceptor:
 		RequiresSelection: true
 		PipCount: 6
 	SpawnActorOnDeath:
-		Actor: nax_drone.Husk
+		Actor: nax_interceptor.Husk
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
@@ -12227,6 +12231,7 @@ nax_interceptor:
 		Offset: -500,0,250
 		TrailLength: 15
 	-Voiced:
+
 nax_interceptor.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -12949,10 +12954,10 @@ nax_drone:
 nax_drone.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Me 262
+		Name: Drone
 	Aircraft:
 		TurnSpeed: 20
-		Speed: 55
+		Speed: 150
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 1
