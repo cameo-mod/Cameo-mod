@@ -12046,7 +12046,7 @@ nax_airfield:
 		ExitCell: 2,2
 		Facing: 640
 	Exit@2:
-		ExitCell: 0,1
+		ExitCell: 0,0
 		Facing: 128
 	ProvidesPrerequisite@buildingname:
 	AttackTurreted:
@@ -12057,6 +12057,7 @@ nax_airfield:
 		InstaRepair: true
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
+		UseArmamentTurretFacing: true
 	ProductionQueue@AIRCRAFT:
 		BuildDurationModifier: 50
 	Armament@PRIMARY:
