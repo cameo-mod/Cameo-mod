@@ -287,6 +287,16 @@
 		BaseName: cloak
 		BasePalette: player
 		Alpha: 0.5
+	PaletteFromFile@greenspark:
+		Name: greenspark
+		Filename: greenspark.pal
+		AllowModifiers: false
+	PaletteFromPlayerPaletteWithAlpha@cloak_stealth:
+		BaseName: cloak_stealth
+		BasePalette: player
+		Alpha: 0.12
+		AllowModifiers: true
+		Premultiply: false
 	MenuPostProcessEffect:
 		MenuEffect: Desaturated
 	CloakPaletteEffect:

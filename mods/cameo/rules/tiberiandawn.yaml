@@ -1896,6 +1896,13 @@ STNK:
 		CloakDelay: 50
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
+		CloakStyle: Palette
+		CloakedPalette: cloak_stealth
+		EffectImage: stealthfade
+		EffectPalette: greenspark
+		CloakEffectSequence: reversed
+		UncloakEffectSequence: idle
+		EffectTracksActor: True
 	Armament:
 		Weapon: StealthTankMissiles
 		LocalOffset: 213,43,128, 213,-43,128

@@ -4328,6 +4328,19 @@ scorch_flames:
 				Offset: 2, -5
 				Scale: 0.2
 
+stealthfade:
+	Defaults:
+		Filename: stealthfade.shp
+		Scale: 0.4
+		Length: *
+		Tick: 40
+		Offset: 0, 0, 30
+		ZOffset: 3c128
+		BlendMode: Additive
+	idle:
+	reversed:
+		Frames: 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
+
 cftilemarkers:
 	Defaults:
 		Filename: cftilemarkers.shp
