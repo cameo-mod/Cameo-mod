@@ -4857,6 +4857,8 @@ d2k_leech:
 		VoiceSet: EBFDLeecher
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
+	Cloak:
+		CloakStyle: Alpha
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Targetable@vehicleexplodedamage:
@@ -13028,6 +13030,7 @@ storm_raider:
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, Unload
+		CloakStyle: Alpha
 	Voiced:
 		VoiceSet: D2KShockRaider
 	RenderSprites:
@@ -13190,6 +13193,7 @@ heavy_rocket_raider_ixian:
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, Unload
+		CloakStyle: Alpha
 	Armament@damage:
 		Weapon: D2K_Bazooka2
 		LocalOffset: 256,-32,256, 16,32,256
@@ -13791,6 +13795,7 @@ d2k_ixdrone:
 		RequiresSelection: True
 	Cloak:
 		UncloakOn: Attack, Damage
+		CloakStyle: Alpha
 	ActorStatValues:
 		Upgrades: d2k_siege_range_upgrade, d2k_upgrade_needleguns, d2k_general_purpose_armor, d2k_advanced_ixian_technology
 	WithAttackAnimation:
@@ -14003,6 +14008,7 @@ d2k_ixbomber:
 		DecorationBounds: 1280, 1024
 	Cloak:
 		UncloakOn: Attack, Damage
+		CloakStyle: Alpha
 	ActorStatValues:
 		Upgrades: d2k_general_purpose_armor, d2k_advanced_ixian_technology
 	RenderSprites:
@@ -14105,6 +14111,7 @@ d2k_resonancedrone:
 		DecorationBounds: 1280, 1024
 	Cloak:
 		UncloakOn: Attack, Damage
+		CloakStyle: Alpha
 	ActorStatValues:
 		Upgrades: d2k_siege_range_upgrade, d2k_upgrade_needleguns, d2k_general_purpose_armor, d2k_advanced_ixian_technology
 	WithAttackAnimation:
