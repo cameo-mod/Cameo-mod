@@ -3703,6 +3703,7 @@ SCGHOST:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	WithMuzzleOverlay:
 	GrantConditionOnDamageState@UNCLOAK:
 		Condition: cloak-force-disabled
@@ -3773,6 +3774,7 @@ SCSILVERTONGUE:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	WithMuzzleOverlay:
 	GrantConditionOnDamageState@UNCLOAK:
 		Condition: cloak-force-disabled
@@ -4636,6 +4638,7 @@ SCWRAITH:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
@@ -4732,6 +4735,7 @@ SCSUNDOG:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
@@ -4930,6 +4934,7 @@ SCRAVEN:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
@@ -5078,6 +5083,7 @@ SCPYTHEAN:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
@@ -5565,6 +5571,7 @@ SCWRAITHDRONE:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode

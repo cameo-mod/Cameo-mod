@@ -297,6 +297,11 @@
 		Alpha: 0.12
 		AllowModifiers: true
 		Premultiply: false
+	TAStealthTankCloakPaletteEffect@cloak_stealth:
+		AffectedPalette: cloak_stealth
+		UseBaseColors: true
+		BaseAlpha: 0.4
+		BasePremultiply: true
 	MenuPostProcessEffect:
 		MenuEffect: Desaturated
 	CloakPaletteEffect:
