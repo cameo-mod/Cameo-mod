@@ -6793,6 +6793,8 @@ SCDARKTEMPLAR:
 	WithInfantryBody:
 	Voiced:
 		VoiceSet: SCDarkTemplarVoice
+	Cloak:
+		CloakStyle: Alpha
 	ActorStatValues:
 		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
 	RenderSprites:
@@ -7010,6 +7012,8 @@ SCOBSERVER:
 		MinMoveDelay: 20
 		MaxMoveDelay: 80
 		RequiresCondition: botmicro
+	Cloak:
+		CloakStyle: Alpha
 	ActorStatValues:
 		Upgrades: upairarmor, upairarmor2, upplasmashield, upairspeed
 	RenderSprites:
@@ -7892,6 +7896,7 @@ SCAMARANTH:
 		UncloakOn: None
 		IsPlayerPalette: true
 		PauseOnCondition: cloak-force-disabled || base-reveal
+		CloakStyle: Alpha
 	-Crushable:
 	Passenger:
 		Weight: 2

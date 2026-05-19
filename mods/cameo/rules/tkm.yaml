@@ -2943,6 +2943,7 @@ tkmsuicidedrone:
 		Prerequisites: upghostcloak
 	Cloak:
 		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
