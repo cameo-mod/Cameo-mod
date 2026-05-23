@@ -265,6 +265,7 @@ bot-ai =
 support-power-timer = { $player }'s { $support-power }: { $time }
 
 ## settings-display.yaml
+checkbox-laser-glow = Weapon Glow Effects
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
 
 ## settings-gameplay.yaml
