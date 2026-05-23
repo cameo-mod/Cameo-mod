@@ -1136,7 +1136,7 @@
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
-		ImpactSounds: flamer2.aud
+		# ImpactSounds: flamer2.aud
 		ImpactActors: false
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_explosion_air
@@ -3033,17 +3033,17 @@
 		ImpactActors: true
 
 ^RepairWeapon:
-	ReloadDelay: 25
+	ReloadDelay: 7
 	Range: 5c0
 	Burst: 10
-	BurstDelays: 1
+	BurstDelays: 3
 	StartBurstReport: vifvrepa.wav
 	ValidTargets: Repairing, Repair, lockdowned, plagued, ivanattached
 	ValidRelationships: Ally
 	TargetActorCenter: true
 	Projectile: LaserZap
 		Width: 128
-		Duration: 12
+		Duration: 3
 		ZOffset: 2047
 		Color: 8888FFFF
 		SecondaryBeam: true
@@ -4955,6 +4955,7 @@ TSTurretLaserFire:
 		Width: 36
 		Duration: 8
 		SecondaryBeamWidth: 15
+		-HitAnim:
 	Warhead@SmallArms: SpreadDamage
 		Damage: 1000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage

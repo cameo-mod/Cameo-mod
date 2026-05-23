@@ -1056,6 +1056,7 @@ TSTurretLaser:
 		Width: 36
 		Duration: 8
 		SecondaryBeamWidth: 18
+		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 10000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
@@ -1076,10 +1077,9 @@ TSLaserTurretLaser:
 	Projectile: LaserZap
 		Width: 36
 		Duration: 8
-		Color: FFFF0080
 		SecondaryBeam: true
 		SecondaryBeamWidth: 18
-		SecondaryBeamColor: FF000080
+		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 16000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
@@ -1099,14 +1099,13 @@ TurretLaserFragment:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^LaserWeapon
 	Inherits: ^TSLaserEffect
+	-Report:
 	Range: 2500
 	Projectile: LaserZap
 		Width: 24
 		Duration: 8
-		Color: FFFF0080
 		SecondaryBeam: true
 		SecondaryBeamWidth: 12
-		SecondaryBeamColor: FF000080
 		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 8000
@@ -1125,8 +1124,11 @@ TSObeliskLaserFire:
 	Range: 10199
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
+	-Warhead@Effect:
+	-Warhead@EffectAir:
 	Projectile:
 		Duration: 38
+		-HitAnim:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 52000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
@@ -1137,18 +1139,19 @@ TSObeliskLaserFire:
 		Damage: 26
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
-		ImpactSounds: flamer2.aud
+		ImpactActors: false
 
 TSLaserObeliskLaserFire:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^LaserWeapon
 	Inherits: ^TSLaserEffect
 	ReloadDelay: 32
+	-Warhead@Effect:
+	-Warhead@EffectAir:
 	Projectile: LaserZap
-		Color: FFFF0080
 		Duration: 38
 		SecondaryBeamWidth: 48
-		SecondaryBeamColor: FF000080
+		-HitAnim:
 	Range: 10435
 	Report: obelray1.aud
 	ValidTargets: Ground, Water
@@ -1162,7 +1165,7 @@ TSLaserObeliskLaserFire:
 		Damage: 40
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
-		ImpactSounds: flamer2.aud
+		ImpactActors: false
 	Warhead@LaserArc: FireShrapnel
 		Weapon: ObeliskLaserFragment
 		Amount: 2
@@ -1175,12 +1178,12 @@ ObeliskLaserFragment:
 	Inherits: ^LaserWeapon
 	Inherits: ^TSLaserEffect
 	Range: 4000
+	-Warhead@Effect:
+	-Warhead@EffectAir:
 	Projectile: LaserZap
 		Width: 48
-		Color: FFFF0080
 		Duration: 38
 		SecondaryBeamWidth: 24
-		SecondaryBeamColor: FF000080
 		-HitAnim:
 	Warhead@Chaingun: SpreadDamage
 		Damage: 40000
@@ -1199,7 +1202,6 @@ DarkObeliskLaser:
 	ValidTargets: Air
 	Projectile: LaserZap
 		Width: 125
-		Color: 445577
 		Duration: 38
 	Warhead@1Dam: SpreadDamage
 		Damage: 25000
@@ -1244,7 +1246,7 @@ TSCoreLaser:
 		Width: 125
 		Duration: 9
 		ZOffset: 2047
-		Color: 3377FF
+		Color: FF000080
 		SecondaryBeam: true
 		SecondaryBeamWidth: 75
 		SecondaryBeamZOffset: 2047

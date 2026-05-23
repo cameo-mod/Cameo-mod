@@ -3323,12 +3323,16 @@ PsionicShockwave:
 
 SCVRepair:
 	Inherits: ^RepairWeapon
-	ReloadDelay: 5
+	Burst: 1
+	ReloadDelay: 12
 	Range: 2000
+	Warhead@RepairWeapon:
+		Damage: -17000
 
 RavenRepair:
 	Inherits: ^RepairWeapon
 	ValidTargets: SpecialRepair, Repairing, Repair, lockdowned, plagued, ivanattached
+	BurstDelays: 1
 	ReloadDelay: 5
 	Range: 5000
 
