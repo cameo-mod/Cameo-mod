@@ -192,6 +192,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		List<List<CPos>> rings;
 		int ringsAdded;
 		int nextRingIn;
+		bool worldAdded;
 
 		public WithCreepOverlay(Actor self, WithCreepOverlayInfo info)
 			: base(info)
@@ -257,7 +258,14 @@ namespace OpenRA.Mods.Cameo.Traits
 			rings = ComputeRings(self);
 			ringsAdded = 0;
 			nextRingIn = 0;
+			worldAdded = true;
 
+			if (!IsTraitDisabled)
+				StartSpreading(self);
+		}
+
+		void StartSpreading(Actor self)
+		{
 			var creepLayer = self.World.WorldActor.Trait<CreepLayer>();
 
 			if (Info.MinSpreadInterval <= 0)
@@ -273,6 +281,12 @@ namespace OpenRA.Mods.Cameo.Traits
 				ringsAdded = 1;
 				nextRingIn = random.Next(Info.MinSpreadInterval, Info.MaxSpreadInterval + 1);
 			}
+		}
+
+		protected override void TraitEnabled(Actor self)
+		{
+			if (worldAdded && ringsAdded == 0)
+				StartSpreading(self);
 		}
 
 		void INotifyRemovedFromWorld.RemovedFromWorld(Actor self)
