@@ -1023,7 +1023,7 @@ Player:
 		Modifier: 80
 
 ^wc2_lumber_mill:
-	Inherits@ref: ^Refinery
+	Inherits@refinery: ^WCRefineryCommon
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQCondition
 	Buildable:
@@ -1295,7 +1295,7 @@ Player:
 	ProvidesPrerequisite@buildingname:
 
 ^wc2_oil_refinery:
-	Inherits@ref: ^Refinery
+	Inherits@refinery: ^WCRefineryCommon
 	Inherits@shape: ^3x3Shape
 	Buildable:
 		BuildPaletteOrder: 50
@@ -1534,6 +1534,24 @@ Player:
 		RequiresSelection: true
 	ActorStatValues:
 		Stats: Armor, Sight, CashTrickler, Power, Experience
+
+^WCRefineryCommon:
+	Inherits: ^Refinery
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
 
 ####################################################################################################
 # WC2 UNIT TEMPLATES
@@ -1916,7 +1934,7 @@ Player:
 
 wc2_human_townhall:
 	Inherits: ^BaseBuilding
-	Inherits@ref: ^Refinery
+	Inherits@refinery: ^WCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@bot: ^BotMicromanageable
 	Inherits@conyard: ^Conyard
@@ -2030,9 +2048,6 @@ wc2_human_townhall:
 	WithMakeAnimation:
 	-WithDeathAnimation:
 	Refinery:
-	DockHost:
-		DockAngle: 256
-		DockOffset: 0, 1c512, 0
 	Sellable:
 	Refinery:
 		DockOffset: 0,2
@@ -2208,6 +2223,7 @@ wc2_human_barracks:
 wc2_human_elven_lumber_mill:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
+	Inherits@refinery: ^WCRefineryCommon
 	Tooltip:
 		Name: Elven Lumber Mill
 	Buildable:
@@ -2221,9 +2237,6 @@ wc2_human_elven_lumber_mill:
 	SpawnActorsOnSell:
 		ActorTypes: wc2_human_elven_archer
 	Refinery:
-	DockHost:
-		DockAngle: 448
-		DockOffset: -1c0, 1c0, 0
 	Voiced:
 		VoiceSet: wc2humanlumbermillvoice
 
@@ -4488,7 +4501,7 @@ wc2_human_gryphon_rider:
 
 wc2_orc_greathall:
 	Inherits: ^BaseBuilding
-	Inherits@ref: ^Refinery
+	Inherits@refinery: ^WCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@bot: ^BotMicromanageable
 	Inherits@conyard: ^Conyard
@@ -4602,9 +4615,6 @@ wc2_orc_greathall:
 	WithMakeAnimation:
 	-WithDeathAnimation:
 	Refinery:
-	DockHost:
-		DockAngle: 256
-		DockOffset: 0, 1c512, 0
 	Sellable:
 	Refinery:
 		DockOffset: 0,2
@@ -4763,9 +4773,6 @@ wc2_orc_troll_lumber_mill:
 	SpawnActorsOnSell:
 		ActorTypes: wc2_orc_troll_axethrower
 	Refinery:
-	DockHost:
-		DockAngle: 448
-		DockOffset: -1c0, 1c0, 0
 	Voiced:
 		VoiceSet: wc2orclumbermillvoice
 
