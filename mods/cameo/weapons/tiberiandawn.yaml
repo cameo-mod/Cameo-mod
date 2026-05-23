@@ -470,6 +470,11 @@ BigFlamer:
 		Amount: 14000
 	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 7000
+	Warhead@Glow: GlowImpact
+		Color: FF6600
+		Scale: 1.5
+		FadeFrames: 90
+		FadeInFrames: 12
 
 FlametankExplode:
 	Inherits: ^MediumFlameWeapon
@@ -1208,6 +1213,15 @@ LaserObelisk:
 	Inherits: ^LaserWeapon
 	ReloadDelay: 96
 	Range: 9600
+	Projectile: LaserZap
+		Width: 100
+		HitAnim: laserfire
+		ZOffset: 3000
+		Blockable: false
+		SecondaryBeam: true
+		SecondaryBeamWidth: 40
+		SecondaryBeamZOffset: 3000
+		SecondaryBeamColor: FFFFFF88
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 96000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
@@ -1797,6 +1811,11 @@ BigFlamer2:
 		Amount: 20000
 	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 10000
+	Warhead@Glow: GlowImpact
+		Color: FF6600
+		Scale: 2.0
+		FadeFrames: 90
+		FadeInFrames: 12
 
 FlametankExplode2:
 	Inherits: ^HeavyFlameWeapon

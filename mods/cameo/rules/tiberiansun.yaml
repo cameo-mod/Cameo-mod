@@ -3610,12 +3610,12 @@ tsntobel:
 	Armament@PRIMARY:
 		Weapon: TSObeliskLaserFire
 		# LocalOffset: 0,180,1600
-		LocalOffset: 0,320,1480
+		LocalOffset: 0,320,1280
 		RequiresCondition: !up_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserObeliskLaserFire
 		# LocalOffset: 0,180,1600
-		LocalOffset: 0,320,1480
+		LocalOffset: 0,320,1280
 		RequiresCondition: up_tiberiumlenses
 	AttackCharges:
 		RequiresCondition: !build-incomplete
