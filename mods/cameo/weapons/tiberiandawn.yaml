@@ -197,6 +197,10 @@ NodTurretLaser:
 		Damage: 2000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 1
+	# Warhead@Effect: CreateEffect
+	# 	-ImpactSounds:
+	# Warhead@EffectAir: CreateEffect
+	# 	-ImpactSounds:
 
 Chemspray:
 	Inherits: ^LightChemicalWeapon
@@ -1208,6 +1212,10 @@ LaserObelisk:
 		Damage: 96000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 48
+	# Warhead@Effect: CreateEffect
+	# 	-ImpactSounds:
+	# Warhead@EffectAir: CreateEffect
+	# 	-ImpactSounds:
 
 HighV:
 	Inherits: ^SmallArms
