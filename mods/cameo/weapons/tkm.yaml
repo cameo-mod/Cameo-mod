@@ -1076,6 +1076,9 @@ TKMDroneExplosion:
 		Image: tkmdrone
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ValidTargets: Ground, Water
 		ImpactSounds: bazook1.aud
 

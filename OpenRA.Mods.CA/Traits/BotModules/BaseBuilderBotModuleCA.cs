@@ -468,9 +468,12 @@ namespace OpenRA.Mods.CA.Traits
 				if (refineryLimit != 0 && refineryLimit < desiredAmount)
 					desiredAmount = refineryLimit;
 
-				// Require at least one refinery, unless we can't build it.
+				// Require at least one refinery, unless there is no construction yard to build from.
+				// Note: we intentionally do NOT skip this check when powerBuildings == 0, because
+				// factions like Zerg have no power buildings (supply comes from units) and would
+				// incorrectly be considered "adequate" forever. Power-before-refinery ordering is
+				// handled in ChooseBuildingToBuild via HasSufficientPowerForActor.
 				return AIUtils.CountActorByCommonName(refineryBuildings) >= desiredAmount ||
-					AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
 					AIUtils.CountActorByCommonName(constructionYardBuildings) == 0;
 			}
 		}

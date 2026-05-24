@@ -3925,6 +3925,9 @@ Atomic:
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
+		GlowScale: 15.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 15
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 2000
 		Damage: 17500
@@ -4425,6 +4428,10 @@ IonCannon:
 		Volume: 5
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
+		GlowColor: 32C8FF
+		GlowScale: 7.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 5
 
 ###############################################
 #           TARGETTING

@@ -3748,6 +3748,9 @@ d2k_flame_tank:
 		InvalidTargets: Vehicle, Structure, Wall
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactActors: false
 
 D2K_ShockGun:
@@ -4076,6 +4079,9 @@ PhoenixRocket:
 			Concrete: 40
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		ExplosionPalette: effect
 	Warhead@4Concrete: DamagesConcrete
@@ -5696,6 +5702,10 @@ PulseMissile:
 		Explosions: pulse_missile_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
+		GlowColor: 32C8FF
+		GlowScale: 15.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 15
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 2000
 		Damage: 17500

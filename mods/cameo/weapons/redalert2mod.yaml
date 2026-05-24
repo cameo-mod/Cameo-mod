@@ -1477,6 +1477,10 @@ AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 8c0
+		GlowColor: FF2000
+		GlowScale: 7.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 5
 	Warhead@Shake: ShakeScreen
 		Duration: 15
 		Intensity: 8
@@ -3347,6 +3351,10 @@ SteelIonCannon:
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 11c0
+		GlowColor: 32C8FF
+		GlowScale: 7.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 5
 		Delay: 25
 	Warhead@5BeamDam: FireFragment
 		Delay: 25
@@ -6345,6 +6353,9 @@ NaxiV1Rocket:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
+		GlowScale: 15.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 15
 
 NaxiMeteorBlitzkriegActivate:
 	Warhead@1Dam: FireFragment
@@ -6492,6 +6503,9 @@ NaxiMeteor:
 		Explosions: ra2_large_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpbara.wav, gexpbarb.wav, gexpbarc.wav
+		GlowScale: 9.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 12
 	Warhead@MeteorFlameFragment: FireShrapnel
 		Weapon: MeteorFlameFragment
 		Range: 4
@@ -6644,6 +6658,9 @@ NaxisBlackBombSmaller:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
+		GlowScale: 9.0
+		GlowFadeFrames: 120
+		GlowFadeInFrames: 12
 	Warhead@Radiation: CreateTintedCells
 		Spread: 2000
 		Falloff: 100, 80, 60, 40, 20
@@ -8266,6 +8283,9 @@ LatinAADefenderCannon:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
+		GlowScale: 12.0
+		GlowFadeFrames: 200
+		GlowFadeInFrames: 12
 	Warhead@Radiation: CreateTintedCells
 		Spread: 1000
 		Falloff: 100, 66, 33
@@ -8371,6 +8391,9 @@ RA2TOPOLCuba:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
+		GlowScale: 15.0
+		GlowFadeFrames: 300
+		GlowFadeInFrames: 15
 	Warhead@Radiation: CreateTintedCells
 		Spread: 1000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
