@@ -178,30 +178,45 @@ namespace OpenRA.Mods.CA.Traits
 
 		void BuildUnit(IBot bot, string category, bool buildRandom, bool excludeLimited)
 		{
-			// Pick a free queue
-			var queue = AIUtils.FindQueues(player, category).FirstOrDefault(q => !q.AllQueued().Any());
+			// For queues that support parallel production (e.g. Zerg hatchery), find one with a free slot.
+			// For standard queues, require the queue to be completely empty.
+			var queue = AIUtils.FindQueues(player, category).FirstOrDefault(q =>
+			{
+				if (q is IHasParallelQueueSlots p)
+					return p.AvailableSlots > 0;
+				return !q.AllQueued().Any();
+			});
+
 			if (queue == null)
 				return;
 
-			var unit = buildRandom ?
-				ChooseRandomUnitToBuild(queue, excludeLimited) :
-				ChooseUnitToBuild(queue, excludeLimited);
+			// Fill all available parallel slots in one pass so that every larva stays occupied.
+			var slotsToFill = (queue is IHasParallelQueueSlots parallelQueue)
+				? parallelQueue.AvailableSlots
+				: 1;
 
-			if (unit == null)
-				return;
-
-			var name = unit.Name;
-
-			if (!ShouldBuild(name, false))
+			for (var slot = 0; slot < slotsToFill; slot++)
 			{
-				if (!excludeLimited)
-					BuildUnit(bot, category, buildRandom, true);
+				var unit = buildRandom ?
+					ChooseRandomUnitToBuild(queue, excludeLimited) :
+					ChooseUnitToBuild(queue, excludeLimited);
 
-				return;
+				if (unit == null)
+					return;
+
+				var name = unit.Name;
+
+				if (!ShouldBuild(name, false))
+				{
+					if (!excludeLimited)
+						BuildUnit(bot, category, buildRandom, true);
+
+					return;
+				}
+
+				SetUnitInterval(name);
+				bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 			}
-
-			SetUnitInterval(name);
-			bot.QueueOrder(Order.StartProduction(queue.Actor, name, 1));
 		}
 
 		// In cases where we want to build a specific unit but don't know the queue name (because there's more than one possibility)
