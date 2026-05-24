@@ -305,6 +305,56 @@ tsenforcer:
 		Facings: 8
 		ShadowStart: 552
 
+tszonetrooper:
+	Defaults:
+		Filename: tszonetrooper.png
+		Scale: 0.6
+		Offset: 0,-24
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 8
+		Facings: 8
+		Tick: 80
+	idle1:
+		Start: 120
+		Length: 44
+	idle2:
+		Start: 164
+		Length: 44
+	die1:
+		Start: 208
+		Length: 28
+	die2:
+		Start: 236
+		Length: 24
+	die6:
+		Start: 236
+		Length: 24
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 208
+		Length: 1
+	cheer:
+		Start: 120
+		Length: 44
+	die7: electro
+		Length: *
+	die5: flameguy
+		Start: 44
+		Length: 104
+		Tick: 50
+	shoot:
+		Start: 72
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: tszonetroopericon.png
+		Offset: 0, 0
+
 tsriott:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
@@ -925,6 +975,57 @@ tsmmch:
 		Facings: -32
 		Offset: 0, 0, 12
 
+tstaltitan:
+	idle:
+		Filename: tstaltitan.png
+		Facings: 32
+		Scale: 0.8
+	icon:
+		Filename: tstaltitanicon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: tstaltitan.png
+		Facings: 32
+		Scale: 0.8
+	walk:
+		Filename: tstaltitanrun.png
+		Length: 14
+		Facings: 32
+		Tick: 60
+		Scale: 0.8
+	turret:
+		Filename: tstaltitantur.png
+		Facings: 32
+		Scale: 0.8
+
+tsjugg2:
+	idle:
+		Filename: tsjugg2.shp
+		Facings: -8
+		Scale: 0.8
+	icon:
+		Filename: tsjugg2icon.png
+		AddExtension: False
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: tsjugg2.shp
+		Facings: -8
+	walk:
+		Filename: tsjugg2.shp
+		Length: 17
+		Start: 8
+		Facings: -8
+		# Tick: 60
+	shoot:
+		Filename: tsjugg2.shp
+		Facings: -8
+		Start: 144
+		Length: 7
+
 tsharv:
 	Defaults:
 		Scale: 1.25
@@ -1104,9 +1205,6 @@ tspitbull:
 		Filename: tspitbull.png
 		Facings: 64
 		Scale: 0.5
-	# run:
-	# 	Filename: pitbull.png
-	# 	Facings: 64
 	turret:
 		Filename: tspitbulltur.png
 		Facings: 64
@@ -1402,12 +1500,53 @@ tssmech:
 		Filename: tswolverineicon.shp
 		AddExtension: False
 
+tstalwolv:
+	idle:
+		Filename: invisibleitem.shp
+	Defaults:
+		Filename: tstalwolv.png
+	stand:
+		Filename: tstalwolv.png
+		Facings: 64
+	walk:
+		Filename: tstalwolvrun.png
+		Facings: 64
+		Length: 8
+	shoot:
+		Filename: tstalwolv.png
+		Facings: 64
+	icon:
+		Filename: tstalwolvicon.png
+
 tshmec:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tsmammothmk2icon.shp
 		AddExtension: False
+	muzzle2:
+		Filename: lightbluelasermuzzle.shp
+		Length: 3
+	muzzle1:
+		Filename: gunfire2.shp
+		Length: 5
+
+tsmkii:
+	Defaults:
+		Filename: invisibleitem.shp
+	idle:
+		Filename: tsmkiiidle.png
+		Facings: -32
+	walk:
+		Filename: tsmkiiwalk.png
+		Length: 20
+		Facings: -8
+	shoot:
+		Filename: tsmkiiatk.png
+		Length: 3
+		Facings: -32
+	icon:
+		Filename: tsmkiiicon.png
 	muzzle2:
 		Filename: lightbluelasermuzzle.shp
 		Length: 3
@@ -4074,6 +4213,34 @@ tsorca:
 	icon:
 		Filename: tsorcaicon.png
 
+tszoneorca:
+	idle:
+		Filename: tszoneorca.png
+		Facings: 64
+	icon:
+		Filename: tszoneorcaicon.png
+
+tshammerhead:
+	idle:
+		Filename: tshammerhead.png
+		Facings: 64
+	lrotor: lrotor
+		Filename: lrotor.shp
+		Length: 4
+	slow-lrotor:
+		Filename: lrotor.shp
+		Start: 4
+		Length: 8
+	rrotor: rrotor
+		Filename: rrotor.shp
+		Length: 4
+	slow-rrotor:
+		Filename: rrotor.shp
+		Start: 4
+		Length: 8
+	icon:
+		Filename: tshammerheadicon.png
+
 tsorcab:
 	idle:
 		Filename: invisibleitem.shp
@@ -5503,3 +5670,7 @@ advancedtiberiumrefinementicon:
 willofkaneicon:
 	icon:
 		Filename: willofkaneicon.png
+
+tsgdidummyicon:
+	icon:
+		Filename: tsgdidummyicon.png

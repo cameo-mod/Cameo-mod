@@ -442,6 +442,8 @@ TSGTCNSTGDI:
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@fact.tsgdi:
+		Prerequisite: fact.tsgdi
 	RenderSprites:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
@@ -513,6 +515,8 @@ TSGTCNSTNOD:
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@fact.tsnod:
+		Prerequisite: fact.tsnod
 	RenderSprites:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
@@ -4120,6 +4124,82 @@ TSRIOTT:
 	ActorStatValues:
 		Upgrades: up_seretraining
 
+TSZONETROOPER:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Zone Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~tsgtpile, tsgttech, ~upzonetrooper
+		Queue: Infantry, RAInfantry
+		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 80000
+	ChangesHealth@PowerPacks:
+		PercentageStep: 2
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+	ChangesHealth@PowerPacks2:
+		Step: 100
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+	RevealsShroud:
+		Range: 8000
+	DetectCloaked:
+		Range: 4000
+	RenderDetectionCircle:
+	Armament@PRIMARY:
+		Weapon: TSZoneRailgun
+		LocalOffset: 256,43,256
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSZoneRailgunRail
+		LocalOffset: 256,43,256
+		RequiresCondition: up_railgunweaponry
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSZoneRailgun
+		RequiresCondition: !up_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSZoneRailgunRail
+		RequiresCondition: up_railgunweaponry
+	-DamagedByTerrain:
+	-TakeCover:
+	WithInfantryBody:
+		-StandSequences:
+	Selectable:
+		Class: tsghost
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_seretraining, up_railgunweaponry
+
 tsjumpjet2:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
@@ -6331,7 +6411,7 @@ TSMMCH:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap
+		Prerequisites: ~tsgtweap, ~!uptitanmkii
 		BuildDurationModifier: 100
 		BuildDuration: 375
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
@@ -6397,6 +6477,153 @@ TSMMCH:
 	ActorStatValues:
 		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
 
+TSTALTITAN:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Titan MK II
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsgtweap, ~uptitanmkii
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 15 #3
+		Offset: -45,0,392
+	Armament@PRIMARY:
+		Weapon: TS120mmTal
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TS120mmTalRail
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: up_railgunweaponry
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	WithSpriteTurret:
+		Recoils: true
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+
+TSJUGG2:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	# Inherits@EMP: ^TurretEMP
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	# Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@EXT: ^ExternalConditions
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Juggernaut MK II
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsgtweap, tsgttech, ~upjuggmkii
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 70
+		TurnSpeed: 14
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 9c0
+	# Turreted:
+	# 	TurnSpeed: 14 #3
+	# 	Offset: -45,0,392
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSJugg120mm
+		# Recoil: 128
+		# RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+	# AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	# WithSpriteTurret:
+	# 	Recoils: true
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	WithAttackAnimation@Primary:
+		Sequence: shoot
+		Armament: primary
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering
+
 TSJUGG:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
@@ -6421,7 +6648,7 @@ TSJUGG:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtweap, tsgttech
+		Prerequisites: ~tsgtweap, tsgttech, ~!upjuggmkii
 		Queue: Vehicle, RAVehicle
 		Description: Mobile artillery mech.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
 	Health:
@@ -6597,7 +6824,7 @@ TSSMECH:
 	Inherits@EXT: ^ExternalConditions
 	Inherits@MechanicalReliability: ^MechanicalReliability
 	Inherits@MechEngineering: ^MechEngineering
-	# Inherits@SonicWeaponry: ^SonicWeaponry
+	Inherits@SonicWeaponry: ^SonicWeaponry
 	Valued:
 		Cost: 550
 	Tooltip:
@@ -6609,7 +6836,7 @@ TSSMECH:
 		BuildPaletteOrder: 25
 		BuildDuration: 250
 		BuildDurationModifier: 100
-		Prerequisites: ~tsgtweap
+		Prerequisites: ~tsgtweap, ~!upwolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 32
@@ -6628,19 +6855,25 @@ TSSMECH:
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
+		Name: primary
 		Weapon: TSAssaultCannon
 		LocalOffset: 25,121,171, 0,-121,171
-	# 	RequiresCondition: !up_sonicweaponry
-	# Armament@Upgrade:
-	# 	Weapon: TSAssaultCannonSonic
-	# 	LocalOffset: 25,121,171, 0,-121,171
-	# 	RequiresCondition: up_sonicweaponry
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Name: secondary
+		Weapon: TSAssaultCannonSonic
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: up_sonicweaponry
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	WithFacingSpriteBody:
 		Sequence: stand
-	WithAttackAnimation:
+	WithAttackAnimation@PRIMARY:
 		Sequence: shoot
+		Armament: primary
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: secondary
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
@@ -6649,7 +6882,78 @@ TSSMECH:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering #, up_sonicweaponry
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_sonicweaponry
+
+TSTALWOLV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EXT: ^ExternalConditions
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Wolverine MK II
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 25
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		Prerequisites: ~tsgtweap, ~upwolverinemkii
+		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		TurnSpeed: 32
+		Speed: 80
+		Locomotor: wheeled
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c0
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSAssaultCannonTal
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Name: secondary
+		Weapon: TSAssaultCannonTalSonic
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: up_sonicweaponry
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: primary
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: secondary
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	Voiced:
+		VoiceSet: TSMech
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_sonicweaponry
 
 TSHMEC:
 	Inherits: ^Tank
@@ -6675,7 +6979,7 @@ TSHMEC:
 	# Mammoth MK. II
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtweap, tsgttech
+		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~!upmammothmkii
 		Queue: Vehicle, RAVehicle
 		BuildDuration: 1250
 		BuildDurationModifier: 100
@@ -6697,7 +7001,7 @@ TSHMEC:
 	#	StartIfBelow: 100
 	#	DamageCooldown: 25
 	Repairable:
-		HpPerStep: 1500
+		HpPerStep: 40000
 	ChangesHealth@SelfHealing:
 		Step: 320
 	Armor:
@@ -6768,6 +7072,121 @@ TSHMEC:
 		Types: thiefproof
 	RenderSprites:
 		PlayerPalette: playerra2
+	ProvidesPrerequisite@mkii:
+		Prerequisite: existingmkii
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+
+TSMKII:
+	Inherits: ^Tank
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@crush: ^VehicleCrusher
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@ND: ^NotDevourable
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 8000
+	Tooltip:
+		Name: Mammoth MK. II
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~upmammothmkii
+		Queue: Vehicle, RAVehicle
+		BuildLimit: 1
+		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
+	Mobile:
+		TurnSpeed: 20
+		Speed: 50
+	Health:
+		HP: 1200000
+	Repairable:
+		HpPerStep: 60000
+	ChangesHealth@SelfHealing:
+		Step: 480
+	Armor:
+		Type: Superheavy
+	RevealsShroud:
+		Range: 7c0
+	Armament@RAILGUN:
+		Name: railgun
+		Weapon: TSMechRailgunII
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: !up_railgunweaponry
+	Armament@MISSILES:
+		Name: missiles
+		Weapon: TSMammothTusk2II
+		LocalOffset: -420,-300,600, -420,300,600
+		LocalYaw: -100,100
+	Armament@UpgradeRAILGUN:
+		Name: railgun2
+		Weapon: TSMechRailgunRailII
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: up_railgunweaponry
+	Armament@MG:
+		Name: mg
+		Weapon: TSMechMGII
+		LocalOffset: 600,0,350
+	AttackFrontal@primary:
+		Armaments: railgun
+		FacingTolerance: 0
+	AttackFrontal@secondary:
+		Armaments: mg
+		FacingTolerance: 256
+	AttackFrontal@upgrade:
+		Armaments: railgun2
+		FacingTolerance: 0
+	AttackFollow:
+		Armaments: missiles
+		PauseOnCondition: disabled
+		Voice: Attack
+	Crushable:
+		CrushClasses: hugevehicle
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 1500
+	Passenger:
+		Weight: 10
+	Capturable:
+		Types: thiefproof
+	WithFacingSpriteBody:
+		Sequence: idle
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: railgun
+	WithAttackAnimation@SECONDARY:
+		Sequence: idle
+		Armament: mg
+	WithAttackAnimation@MISSILES:
+		Sequence: idle
+		Armament: missiles
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: railgun2
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	ProvidesPrerequisite@mkii:
+		Prerequisite: existingmkii
+	RenderSprites:
+		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
 
@@ -7766,6 +8185,7 @@ TSWINI2:
 		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
+
 TSCAR2:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
@@ -9175,7 +9595,7 @@ TSORCA:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~tsgthpad
+		Prerequisites: ~tsgthpad, ~!upzoneorca
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
 		Speed: 145
@@ -9229,7 +9649,6 @@ TSORCA:
 	ActorStatValues:
 		Upgrades: up_tsprojectileimprovements, up_ceramicarmor, up_mechanicalreliability, up_sonicweaponry
 
-
 TSORCA.Husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
@@ -9245,6 +9664,176 @@ TSORCA.Husk:
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
+
+TSZONEORCA:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Zone Orca Fighter
+	Valued:
+		Cost: 3000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Aircraft, RAAircraft
+		Prerequisites: ~tsgthpad, ~upzoneorca
+		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
+	Aircraft:
+		Speed: 165
+		TurnSpeed: 33
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
+	Health:
+		HP: 70000
+	Repairable:
+		HpPerStep: 3500
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armament@PRIMARY:
+		Weapon: TSZoneHellfire
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSZoneHellfireSonic
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: up_sonicweaponry
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 64
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: TSORCA.Husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	ActorStatValues:
+		Upgrades: up_tsprojectileimprovements, up_ceramicarmor, up_mechanicalreliability, up_sonicweaponry
+
+TSHAMMERHEAD:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@CeramicArmor: ^CeramicArmor
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@cargo: ^CargoAircraft
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Hammerhead
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgthpad, ~uphammerhead
+		Queue: Aircraft, RAAircraft
+		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
+	Aircraft:
+		Speed: 140
+		TurnSpeed: 28
+		RepulsionSpeed: 28
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Cargo:
+		ExclusiveDeploy: true
+		DeployType: opentopped
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 2
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+		LoadedCondition: loaded
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 156,-213,-85, 156,213,-85
+		PauseOnCondition: chronobeamed
+	Armament@PRIMARY:
+		Weapon: TSHammerheadGun
+		LocalOffset: 156,-400,-85, 156,400,-85
+		# MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 52
+		AttackType: Hover
+	WithIdleOverlay@RROTORAIR:
+		Offset: 0,130,45
+		Sequence: rrotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@LROTORAIR:
+		Offset: 0,-130,45
+		Sequence: lrotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@RROTORGROUND:
+		Offset: 0,130,45
+		Sequence: slow-rrotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@LROTORGROUND:
+		Offset: 0,-130,45
+		Sequence: slow-lrotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Selectable:
+		DecorationBounds: 1280, 1280
+	AmmoPool:
+		Ammo: 20
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 2
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithCargoPipsDecoration:
+		Position: BottomRight
+		RequiresSelection: true
+	SpawnActorOnDeath:
+		Actor: TSORCA.Husk
+	ActorStatValues:
+		Upgrades: up_ceramicarmor, up_mechanicalreliability
 
 TSORCAB:
 	Inherits: ^Helicopter
@@ -10503,7 +11092,7 @@ TSKODK:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgthpad, tsgtplug
+		Prerequisites: ~tsgthpad, tsgtplug, upkodiak
 		Queue: Aircraft, RAAircraft
 		Description: GDI command ship. Strong vs Everything
 		BuildLimit: 1
@@ -11123,3 +11712,168 @@ up_willofkane:
 	ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
 		Actor: team_upgrade.up_willofkane
+
+
+##########################
+# Promotions #############
+##########################
+
+upwolverinemkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Wolverine MKII
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Promotions
+		Description: Allows construction of Wolverines MKII.
+		Prerequisites: ~fact.tsgdi, !upwolverinemkii, rank1
+	RenderSprites:
+		Image: tstalwolv
+	ProvidesPrerequisite:
+		Prerequisite: upwolverinemkii
+
+uptitanmkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Titan MKII
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Promotions
+		Description: Allows construction of Titans MKII.
+		Prerequisites: ~fact.tsgdi, !uptitanmkii, upwolverinemkii, rank1
+	RenderSprites:
+		Image: tstaltitan
+	ProvidesPrerequisite:
+		Prerequisite: uptitanmkii
+
+upzonetrooper:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Zone Trooper
+	Buildable:
+		BuildPaletteOrder: 7
+		Queue: Promotions
+		Description: Allows training of Zone Troopers.
+		Prerequisites: ~fact.tsgdi, !upzonetrooper, uptitanmkii, rank1
+	RenderSprites:
+		Image: tszonetrooper
+	ProvidesPrerequisite:
+		Prerequisite: zonetrooper
+
+upmammothmkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mammoth MKII
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Promotions
+		Description: Allows construction of Mammoth MKII.
+		Prerequisites: ~fact.tsgdi, !upmammothmkii, upzonetrooper, rank1
+	RenderSprites:
+		Image: tsmkii
+	ProvidesPrerequisite:
+		Prerequisite: upmammothmkii
+
+upzoneorca:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Zone Orca
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Promotions
+		Description: Allows construction of Zone Orcas.
+		Prerequisites: ~fact.tsgdi, !upzoneorca, rank1
+	RenderSprites:
+		Image: tszoneorca
+	ProvidesPrerequisite:
+		Prerequisite: uupzoneorca
+
+uphammerhead:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Hammerhead
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Promotions
+		Description: Allows construction of Hammerhead.
+		Prerequisites: ~fact.tsgdi, !uphammerhead, upzoneorca, rank1
+	RenderSprites:
+		Image: tshammerhead
+	ProvidesPrerequisite:
+		Prerequisite: uphammerhead
+
+upjuggmkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Juggernaut MKII
+	Buildable:
+		BuildPaletteOrder: 8
+		Queue: Promotions
+		Description: Allows construction of Juggernauts MKII.
+		Prerequisites: ~fact.tsgdi, !upjuggmkii, uphammerhead, rank1
+	RenderSprites:
+		Image: tsjugg2
+	ProvidesPrerequisite:
+		Prerequisite: upjuggmkii
+
+upkodiak:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Kodiak
+	Buildable:
+		BuildPaletteOrder: 11
+		Queue: Promotions
+		Description: Allows construction of Kodiak.
+		Prerequisites: ~fact.tsgdi, !upkodiak, upjuggmkii, rank1
+	RenderSprites:
+		Image: tskodk
+	ProvidesPrerequisite:
+		Prerequisite: upkodiak
+
+uptsdummy1:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
+
+uptsdummy2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 6
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
+
+uptsdummy3:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 9
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
+
+uptsdummy4:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 12
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
