@@ -2031,8 +2031,20 @@ wc2_human_townhall:
 	-WithDeathAnimation:
 	Refinery:
 	DockHost:
-		DockAngle: 256
+		Type: Unload
+		DockAngle: 0
 		DockOffset: 0, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c512, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c512, 1c512, 0
+		MaxQueueLength: 10
 	Sellable:
 	Refinery:
 		DockOffset: 0,2
@@ -2222,8 +2234,20 @@ wc2_human_elven_lumber_mill:
 		ActorTypes: wc2_human_elven_archer
 	Refinery:
 	DockHost:
-		DockAngle: 448
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
 		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
 	Voiced:
 		VoiceSet: wc2humanlumbermillvoice
 
@@ -4603,8 +4627,20 @@ wc2_orc_greathall:
 	-WithDeathAnimation:
 	Refinery:
 	DockHost:
-		DockAngle: 256
+		Type: Unload
+		DockAngle: 0
 		DockOffset: 0, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c512, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c512, 1c512, 0
+		MaxQueueLength: 10
 	Sellable:
 	Refinery:
 		DockOffset: 0,2
@@ -4764,8 +4800,20 @@ wc2_orc_troll_lumber_mill:
 		ActorTypes: wc2_orc_troll_axethrower
 	Refinery:
 	DockHost:
-		DockAngle: 448
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
 		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
 	Voiced:
 		VoiceSet: wc2orclumbermillvoice
 

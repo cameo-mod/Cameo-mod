@@ -317,6 +317,7 @@ aa_cgrefn:
 		Type: Unload
 		DockAngle: 640
 		DockOffset: 1086,1086,0
+		MaxQueueLength: 15
 	DrawLineToTarget:
 	FreeActor@1:
 		Actor: aa_drmn
@@ -11931,6 +11932,7 @@ nax_refin:
 		Type: Unload
 		DockAngle: 640
 		DockOffset: 1086,1086,0
+		MaxQueueLength: 15
 	DrawLineToTarget:
 	SlaveMinerSpawnerMaster:
 		Actors: nax_slav, nax_slav, nax_slav, nax_slav, nax_slav
@@ -12786,6 +12788,7 @@ nax2_refin:
 		Type: Unload
 		DockAngle: 640
 		DockOffset: 1086,1086,0
+		MaxQueueLength: 15
 	DrawLineToTarget:
 	FreeActor@1:
 		Actor: nax2_armor_harv
