@@ -9333,7 +9333,7 @@ Future_MultiMissile_Javelin:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^ShrapnelWeapon
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 32
 	Burst: 3
 	BurstDelays: 4
@@ -9585,7 +9585,7 @@ FutureJavelinRockets:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^ShrapnelWeapon
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 25
 	Range: 6000
 	Projectile: Missile

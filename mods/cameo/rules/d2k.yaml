@@ -3811,7 +3811,7 @@ trooper:
 		Name: garrisoned
 		Weapon: D2K_Rocket_Trooper
 	TakeCover:
-		ProneOffset: 324,0,-204
+		ProneOffset: 320,0,-128
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	ActorStatValues:
@@ -3858,7 +3858,7 @@ twinrockettrooper:
 		Name: garrisoned
 		Weapon: D2K_Rocket_Trooper2
 	TakeCover:
-		ProneOffset: 324,0,-204
+		ProneOffset: 320,0,-128
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	ActorStatValues:
@@ -12905,7 +12905,7 @@ heavy_inf:
 		IdleSequences: idle1,idle2,idle3,idle4,idle5,idle6,idle7,idle8
 		DefaultAttackSequence: shoot
 	TakeCover:
-		ProneOffset: 300,0,-227
+		ProneOffset: 300,0,-200
 	Parachutable:
 	RenderSprites:
 		PlayerPalette: player_rgba

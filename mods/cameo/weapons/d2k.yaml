@@ -819,6 +819,8 @@ Dune_SiegeMortar:
 		TrailImage: bazooka_trail2
 		TrailPalette: effect75alpha
 		TrailInterval: 1
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
 		InvalidTargets: Vehicle, Structure
@@ -913,7 +915,7 @@ D2K_Rocket_AA:
 		Damage: 3750
 
 D2K_Rocket_Buggy:
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 28
 	Report: d2k_buggy_rocket.wav
 	Warhead@1Dam: SpreadDamage
@@ -922,7 +924,7 @@ D2K_Rocket_Buggy:
 D2K_Rocket_Trooper:
 	Inherits: ^LightMissile
 	Inherits: ^MediumMissile
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6185
 	Projectile: Missile
@@ -994,7 +996,7 @@ D2K_Rocket_Trooper2:
 D2K_Rocket_Trooper1:
 	Inherits: ^LightMissile
 	Inherits: ^FlakWeapon
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6502
 	Projectile: Missile
@@ -1066,7 +1068,7 @@ D2K_Rocket_Trooper_AGOnly:
 D2K_Rocket_Trooper_AAPowered:
 	Inherits: ^LightMissile
 	Inherits: ^FlakWeapon
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 75
 	Range: 9716
 	ValidTargets: Air
@@ -1099,7 +1101,7 @@ D2K_Rocket_Trooper_AAPowered:
 D2K_APC_Rocket:
 	Inherits: ^LightMissile
 	Inherits: ^MediumMissile
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 42
 	Range: 6500
 	Projectile: Missile
@@ -1133,7 +1135,7 @@ D2K_APC_Rocket_AA:
 	ValidTargets: Air
 
 D2K_Combat_Fleet:
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	Range: 10c0
 	Burst: 10
 	BurstDelays: 2
@@ -1148,7 +1150,7 @@ D2K_Rocket_ultimate:
 		Damage: 3000
 
 D2K_Rocket_Fremen:
-	Inherits: D2K_Rocket_ultimate
+	Inherits: ^D2KRocket_ultimate
 	InvalidTargets: Infantry
 
 D2K_TowerMissile:
@@ -6161,7 +6163,7 @@ MongooseRocket:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^RailgunWeapon
 	Inherits: ^MediumMissile
-	Inherits: D2K_Rocket
+	Inherits: ^D2KRocket
 	ReloadDelay: 64
 	Range: 6183
 	Report: d2k_buggy_rocket.wav
