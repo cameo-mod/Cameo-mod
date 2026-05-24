@@ -35,8 +35,11 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 
 		// Owned sheet — we bypass the base class's private sheet cache so we can swap images per session.
 		string[] images;
+		string splashImage;
 		string currentImage;
 		Sheet ownSheet;
+
+		static bool splashShown;
 
 		readonly Stopwatch timeSinceLastDisplay = new Stopwatch();
 
@@ -49,6 +52,9 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		{
 			base.Init(modData, info);
 
+			if (info.TryGetValue("SplashImage", out var splash))
+				splashImage = splash.Trim();
+
 			if (info.TryGetValue("Image", out var raw))
 			{
 				images = raw.Contains(',')
@@ -58,7 +64,14 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 				// Prevent the base class from loading + caching its own sheet; we manage one ourselves.
 				info.Remove("Image");
 
-				currentImage = images[Game.CosmeticRandom.Next(images.Length)];
+				// Show splash on the very first load ever; fall back to random if none defined or already shown.
+				if (!splashShown && splashImage != null)
+				{
+					currentImage = splashImage;
+					splashShown = true;
+				}
+				else
+					currentImage = images[Game.CosmeticRandom.Next(images.Length)];
 			}
 
 			messages = FluentProvider.GetMessage(Loading).Split('$').Select(x => x.Trim()).ToArray();
