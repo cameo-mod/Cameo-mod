@@ -6,6 +6,7 @@
 
 using System;
 using System.Linq;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
@@ -23,9 +24,11 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) { return new LarvaProductionQueue(init, this); }
 	}
 
-	public class LarvaProductionQueue : ProductionQueue
+	public class LarvaProductionQueue : ProductionQueue, IHasParallelQueueSlots
 	{
 		public new LarvaProductionQueueInfo Info { get; }
+
+		public int AvailableSlots => Math.Max(0, Info.MaxParallel - AllQueued().Count());
 
 		LarvaConsumingProduction larvaProduction;
 
