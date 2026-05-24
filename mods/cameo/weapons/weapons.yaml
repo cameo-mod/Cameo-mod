@@ -1656,9 +1656,6 @@
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -1776,9 +1773,6 @@
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
-		GlowScale: 2.0
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 	Warhead@ShieldHit: GrantExternalCondition
@@ -2000,9 +1994,6 @@
 	#	InvalidTargets: Vehicle, Structure, Wall
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 		ImpactSounds: xplobig6.aud
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -2109,9 +2100,6 @@
 	#	InvalidTargets: Vehicle, Structure, Wall
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
-		GlowScale: 2.0
-		GlowFadeFrames: 60
-		GlowFadeInFrames: 12
 		ImpactSounds: xplobig6.aud
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
@@ -2437,9 +2425,6 @@
 	Warhead@Effect2: CreateEffect
 		Delay: 6
 		Explosions: napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 		ImpactSounds: gexp14a.wav
 		ValidTargets: Ground, Ship, Trees
 	Warhead@EffectWater: CreateEffect
@@ -3596,9 +3581,6 @@ Napalm.Crate:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 		ImpactSounds: flamer2.aud
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
@@ -3683,9 +3665,6 @@ Patriot:
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 
@@ -4910,9 +4889,6 @@ GiantArtilleryTurret:
 		Damage: 12345
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
-		GlowScale: 1.5
-		GlowFadeFrames: 30
-		GlowFadeInFrames: 12
 		ImpactSounds: boomfireworks.wav
 
 GiantBowlingTurret:
