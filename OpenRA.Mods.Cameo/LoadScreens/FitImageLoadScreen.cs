@@ -23,7 +23,7 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 {
 	public sealed class FitImageLoadScreen : SheetLoadScreen
 	{
-		const double NewSessionGapSeconds = 15.0;
+		const double NewSessionGapSeconds = 5.0;
 
 		float2 scale;
 		float2 logoPos;
