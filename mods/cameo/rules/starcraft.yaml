@@ -1979,7 +1979,10 @@ SCFLEETBEACON:
 		Cursor: ioncannon
 		ChargeInterval: 7500
 		WeaponDelay: 0
-		Weapon: IonCannon
+		Weapon: SteelIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
 		Names:
 			1: power-ioncannon.name
 		Descriptions:

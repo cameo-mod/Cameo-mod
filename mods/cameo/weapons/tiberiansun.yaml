@@ -1139,6 +1139,9 @@ TSObeliskLaserFire:
 		Damage: 26
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactActors: false
 
 TSLaserObeliskLaserFire:
@@ -1165,6 +1168,9 @@ TSLaserObeliskLaserFire:
 		Damage: 40
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactActors: false
 	Warhead@LaserArc: FireShrapnel
 		Weapon: ObeliskLaserFragment
