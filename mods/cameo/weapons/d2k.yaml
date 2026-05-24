@@ -1150,7 +1150,7 @@ D2K_Rocket_ultimate:
 		Damage: 3000
 
 D2K_Rocket_Fremen:
-	Inherits: ^D2KRocket_ultimate
+	Inherits: D2K_Rocket_ultimate
 	InvalidTargets: Infantry
 
 D2K_TowerMissile:
