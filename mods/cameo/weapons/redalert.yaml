@@ -691,9 +691,15 @@ FireRocketsThermobaric:
 		InvalidTargets: Vehicle, Structure, Wall
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
 FireRocketsThermobaricExplode:
@@ -762,6 +768,9 @@ FireballLauncher:
 		Amount: 9000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 FireballLauncherThermobaric:
 	Inherits: ^HeavyFlameWeapon
@@ -797,6 +806,9 @@ FireballLauncherThermobaric:
 		Amount: 5000
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 FireballGun:
 	Inherits: ^MediumFlameWeapon
@@ -821,6 +833,9 @@ FireballGun:
 		Amount: 4000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 FireballGunExplode:
 	Inherits: FireballGun
@@ -869,6 +884,9 @@ FireballGunThermobaric:
 		Amount: 2000
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 FireballGunThermobaricExplode:
 	Inherits: FireballGunThermobaric
@@ -981,6 +999,9 @@ HeavyFlamer:
 		Amount: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 HeavyPlasmaFlamer:
 	Inherits: ^HeavyChemicalWeapon
@@ -1156,6 +1177,9 @@ SiegeMortarThermobaric:
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 
@@ -3428,6 +3452,9 @@ HindMissilesThermobaric:
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
 
@@ -3855,6 +3882,9 @@ YakNapalm:
 	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: med_napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 YakTeslaBomb:
 	Inherits: ^TeslaWeapon
@@ -4520,6 +4550,9 @@ ThermobaricNuclearMaverick:
 	Warhead@Effect2: CreateEffect
 		ValidTargets: Ground, Water, Air
 		Explosions: large_napalm
+		GlowScale: 2.5
+		GlowFadeFrames: 90
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		Delay: 5
 		ImpactActors: false
@@ -5773,6 +5806,9 @@ OIHakureiring2:
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
 HammerTankCannon:
@@ -5820,6 +5856,9 @@ HammerTankCannonThermobaric:
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
 ShtoraLaser:
@@ -6145,9 +6184,15 @@ MammothTuskThermobaric:
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
 MammothTuskThermobaricTargetingComputer:
@@ -6466,9 +6511,15 @@ MammothTusk2Thermobaric:
 		Damage: 8
 	Warhead@Effect: CreateEffect
 		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 	Warhead@EffectAir: CreateEffect
 		Explosions: big_napalm
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 
 MammothTusk2ThermobaricTargetingComputer:
@@ -7699,6 +7750,9 @@ BarrelExplode:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, Incendiary
 	Warhead@2Eff: CreateEffect
 		Explosions: napalm
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 		ImpactSounds: firebl3.aud
 		Delay: 5
 	Warhead@Smu: LeaveSmudge
@@ -7729,6 +7783,9 @@ UnitExplodePlane:
 	Inherits: UnitExplode
 	Warhead@2Eff: CreateEffect
 		Explosions: large_napalm
+		GlowScale: 2.5
+		GlowFadeFrames: 90
+		GlowFadeInFrames: 12
 		ImpactSounds: kaboom22.aud
 
 CrateNuke:

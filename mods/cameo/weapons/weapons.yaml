@@ -1658,6 +1658,9 @@
 		Explosions: med_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
@@ -1775,6 +1778,9 @@
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
@@ -1995,6 +2001,9 @@
 	Warhead@Effect: CreateEffect
 		Explosions: med_tibnapalm
 		ImpactSounds: xplobig6.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
@@ -2101,6 +2110,9 @@
 	Warhead@Effect: CreateEffect
 		Explosions: big_tibnapalm
 		ImpactSounds: xplobig6.aud
+		GlowScale: 2.0
+		GlowFadeFrames: 60
+		GlowFadeInFrames: 12
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
@@ -2427,6 +2439,9 @@
 		Explosions: napalm
 		ImpactSounds: gexp14a.wav
 		ValidTargets: Ground, Ship, Trees
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
@@ -3582,6 +3597,9 @@ Napalm.Crate:
 	Warhead@2Eff: CreateEffect
 		Explosions: med_napalm
 		ImpactSounds: flamer2.aud
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 
@@ -3667,6 +3685,9 @@ Patriot:
 		Explosions: napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 PDLaser:
 	ReloadDelay: 25
@@ -4890,6 +4911,9 @@ GiantArtilleryTurret:
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
 		ImpactSounds: boomfireworks.wav
+		GlowScale: 1.5
+		GlowFadeFrames: 30
+		GlowFadeInFrames: 12
 
 GiantBowlingTurret:
 	Inherits: GiantArtilleryTurret
