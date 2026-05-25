@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Graphics;
+using OpenRA.Mods.CA.Traits;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Primitives;
 using OpenRA.Traits;
@@ -223,10 +224,20 @@ namespace OpenRA.Mods.Cameo.Traits
 				.Where(q => q.Enabled)
 				.ToArray();
 
-			// Only queue one unit at a time per building; re-evaluate when the slot is free.
-			if (queues.Any(q => q.AllQueued().Any())) return;
-			if (autoQueueCredits.TryGetValue(building.ActorID, out var existingCredits) &&
-				existingCredits.Values.Any(c => c > 0)) return;
+			if (queues.Length == 0) return;
+
+			// Parallel-queue capacity (e.g. Zerg hatchery: MaxParallel larvae).
+			// Normal queues fall back to 1 — preserves "one at a time per building".
+			var buildingCapacity = queues.Max(q => q is IHasParallelQueueSlots p
+				? p.AvailableSlots + q.AllQueued().Count()
+				: 1);
+
+			var queuedCount = queues.Sum(q => q.AllQueued().Count());
+			var pendingCredits = autoQueueCredits.TryGetValue(building.ActorID, out var existingCredits)
+				? existingCredits.Values.Sum()
+				: 0;
+
+			if (queuedCount + pendingCredits >= buildingCapacity) return;
 
 			string bestType = null;
 			var bestRatio = float.MaxValue;
