@@ -1,0 +1,314 @@
+FACT.GDI:
+	Inherits: ^FACT
+	Tooltip:
+		Name: GDI Construction Yard
+	Transforms:
+		IntoActor: mcv.gdi
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: fact
+	ProvidesPrerequisite@fact.gdi:
+		Prerequisite: fact.gdi
+	ProvidesPrerequisite@sandbagbarrier:
+		Prerequisite: sandbagbarrier
+	RenderSprites:
+		Image: gdifact
+
+PROC.GDI:
+	Inherits: ^TDPROC
+	Tooltip:
+		Name: GDI Tiberium Refinery
+	Buildable:
+		Prerequisites: ~fact.gdi, nuke
+	FreeActor@Normal:
+		Actor: HARV.GDI
+		SpawnOffset: 1,2
+		Facing: 256
+
+PYLE:
+	Inherits: ^TDBuilding
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@barr: ^IsBarrack
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: GDI Barracks
+	ProvidesPrerequisite:
+		Prerequisite: barracks
+	Buildable:
+		Prerequisites: ~fact.gdi, nuke
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 300,333,0
+		ExitCell: 1,1
+	ProvidesPrerequisite:
+		Prerequisite: cncbarracks
+
+WEAP:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@weap: ^IsWeaponFactory
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+		Type: Rectangle
+			TopLeft: -1536, -1536
+			BottomRight: 1536, 512
+	Selectable:
+		Bounds: 3072, 3072, 0, -512
+	Tooltip:
+		Name: GDI Weapons Factory
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	Buildable:
+		Prerequisites: ~fact.gdi, proc.gdi
+	Building:
+		Footprint: xxx === ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	SelectionDecorations:
+	WithBuildingBib:
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: build-top
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -512,-512,0
+		ExitCell: 0,1
+		ExitDelay: 3
+	-ActorPreviewPlaceBuildingPreview:
+	SequencePlaceBuildingPreview:
+		Sequence: place
+
+HPAD.GDI:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Tooltip:
+		Name: GDI Helipad
+	Buildable:
+		Prerequisites: ~fact.gdi, hq.gdi
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	RallyPoint:
+	ProvidesPrerequisite@hpad:
+		Prerequisite: hpad
+	RenderSprites:
+		Image: hpad
+
+HQ.GDI:
+	Inherits: ^TDBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@shape: ^2x2Shape
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	WithBuildingBib:
+	RenderSprites:
+		Image: HQ
+	Tooltip:
+		Name: GDI Communications Center
+	Buildable:
+		Prerequisites: ~fact.gdi, proc.gdi
+		Description: actor-hq-gdi.description
+	ProvidesPrerequisite@anytdhq:
+		Prerequisite: anytdhq
+		RequiresCondition: !(powerdown || infiltrated)
+	AirstrikePower:
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: up_a10airstrike
+		Icons:
+			1: airstrike
+		ChargeInterval: 7500
+		SquadSizes:
+			1: 3
+		QuantizedFacings: 32
+		Names:
+			1: power-td-airstrike.name
+		Descriptions:
+			1: power-td-airstrike.description
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyPlanesApproaching
+		UnitTypes:
+			1: a10
+		DisplayBeacon: True
+		BeaconPosters:
+			1: airstrike
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		CameraActor: camera
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 10
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	SupportPowerChargeBar:
+
+FIX.GDI:
+	Inherits: ^TDBuilding
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	HitShape:
+		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+		Type: Polygon
+			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Buildable:
+		Prerequisites: ~fact.gdi, weap
+	Building:
+		Footprint: _+_ +++ _+_
+		Dimensions: 3,3
+	SelectionDecorations:
+	WithBuildingBib:
+		HasMinibib: true
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	Reservable:
+	RallyPoint:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: FIX
+	Tooltip:
+		Name: GDI Repair Facility
+	ProvidesPrerequisite:
+		Prerequisite: fix.gdi
+
+GTWR:
+	Inherits: ^TDDefense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: GDI Guard Tower
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~fact.gdi, pyle
+		Queue: Defence, RADefence
+		Description: template-anti-infantry-defense.description
+	Building:
+	Health:
+		HP: 60000
+	WithBuildingBib:
+		HasMinibib: true
+	Armament:
+		Weapon: HighV
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_armorpiercingbullets
+	Armament@Upgrade:
+		Weapon: HighVAP
+		LocalOffset: 256,0,256
+		MuzzleSequence: muzzle
+		RequiresCondition: up_armorpiercingbullets
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 1023
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 6720
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+
+ATWR:
+	Inherits: ^TDDefense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiTank: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@shape: ^1x1Shape
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@MissileTargeting: ^AdvancedMissileTargeting
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Advanced Guard Tower
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~fact.gdi, hq.gdi
+		Queue: Defence, RADefence
+		Description: actor-atwr.description
+	Selectable:
+		Bounds: 1024, 2048, 0, -512
+	SelectionDecorations:
+	Health:
+		HP: 140000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 1023
+		Offset: 128,128,384
+	Armament@PRIMARY:
+		Weapon: TowerMissile
+		LocalOffset: 256,128,0, 256,-128,0
+		LocalYaw: -100,100
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_advancedmissiletargeting
+	Armament@AdvancedMissileTargeting:
+		Weapon: TowerMissileAMT
+		LocalOffset: 256,128,0, 256,-128,0
+		LocalYaw: -50,50
+		MuzzleSequence: muzzle
+		RequiresCondition: up_advancedmissiletargeting
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+	BodyOrientation:
+		QuantizedFacings: 8
+	WithMuzzleOverlay:
+	Power:
+		Amount: -80
+	RevealsShroud:
+		Range: 8772
+	DetectCloaked:
+		Range: 4386
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment

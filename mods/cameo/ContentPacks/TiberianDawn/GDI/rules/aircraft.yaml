@@ -1,0 +1,483 @@
+tran.gdi:
+	Inherits: TRAN
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@HeavyAircraftArmorPlating: ^HeavyAircraftArmorPlating
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: GDI Chinook Transport
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~hpad.gdi
+		Queue: Aircraft, RAAircraft
+		Description: actor-tran.description
+	Buildable:
+		Prerequisites: ~hpad.gdi
+		Queue: Aircraft, RAAircraft
+	EjectOnDeath:
+		PilotActor: e1.gdi
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 8
+		InitialUnits: e1.gdi, e2, e3.gdi, gdimissilesoldier, gdiempgrenadier, gdishotgunner, gdiofficer, gdisniper
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_heavyaircraftarmorplating
+
+ORCA:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@MissileTargeting: ^AdvancedMissileTargeting
+	Inherits@HeavyAircraftArmorPlating: ^HeavyAircraftArmorPlating
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@eject: ^AircraftEjectOnDeath
+	Valued:
+		Cost: 1700
+	Tooltip:
+		Name: Orca
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~hpad.gdi
+		Queue: Aircraft, RAAircraft
+		Description: actor-orca.description
+	Aircraft:
+		Speed: 175
+		TurnSpeed: 35
+		RepulsionSpeed: 35
+	Health:
+		HP: 32500
+	Repairable:
+		HpPerStep: 1625
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Armament@PRIMARY:
+		Weapon: OrcaMissiles
+		LocalOffset: 427,-171,-213, 427,171,-213
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !up_advancedmissiletargeting
+	Armament@AdvancedMissileTargeting:
+		Weapon: OrcaMissilesAMT
+		LocalOffset: 427,-171,-213, 427,171,-213
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: up_advancedmissiletargeting
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ORCA.Husk
+	EjectOnDeath:
+		PilotActor: gdishotgunner
+	WithMoveAnimation:
+		MoveSequence: move
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	AmmoPool:
+		Ammo: 8
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 32
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 8
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_advancedmissiletargeting, up_cuttingedgeequipment
+
+ORCA.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Orca
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 186
+	RenderSprites:
+		Image: orca
+
+A10:
+	Inherits: ^AirstrikePlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@HeavyAircraftArmorPlating: ^HeavyAircraftArmorPlating
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Tooltip:
+		Name: A10 Bomber
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 50000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		TurnSpeed: 25
+		Speed: 250
+		Repulsable: False
+	AttackBomber:
+		Armaments: gun, bombs
+		FacingTolerance: 32
+	Armament@GUNS:
+		Name: gun
+		Weapon: Vulcan
+		LocalOffset: 1024,0,-85
+	WithMuzzleOverlay:
+	Armament@BOMBS:
+		Name: bombs
+		Weapon: Napalm
+		LocalOffset: 0,-256,-43, 0,256,-43
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: A10.Husk
+	GivesExperience:
+		Experience: 2500
+	RejectsOrders:
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_armorpiercingbullets
+
+gdicarrier:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
+	Inherits@decoration: ^GDIRankDecoration
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: GDI Super Carrier
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~eye
+		Queue: Naval, RANaval
+		Description: actor-japancarrier.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 50
+		TurnSpeed: 10
+	Health:
+		HP: 300000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Armor:
+		Type: Superheavy
+	AttackFollowFrontal:
+		PauseOnCondition: disabled
+	DeliversCash:
+		Payload: 450
+	CarrierMaster:
+		Actors: A10Carrier, A10Carrier, A10Carrier
+		RearmTicks: 125
+		RespawnTicks: 250
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Armament@PRIMARY:
+		Weapon: JapanCarrierTarget
+		Damage: 1500
+		ReloadDelay: 125
+	Voiced:
+		VoiceSet: VehicleVoice
+	RenderSprites:
+		PlayerPalette: player
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_cuttingedgeequipment, up_lightweightarmorplating
+
+A10Carrier:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@HeavyAircraftArmorPlating: ^HeavyAircraftArmorPlating
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: A10 Bomber
+	Aircraft:
+		AltitudeVelocity: 120
+		InitialFacing: 768
+		TurnSpeed: 12
+		Speed: 200
+		Repulsable: false
+		TakeoffSounds: vhortaka.wav, vhortakb.wav
+		LandingSounds: vhorlana.wav, vhorlanb.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	Armament@GUNS:
+		Name: primary
+		Weapon: VulcanA10Carrier
+		LocalOffset: 1024,0,-85
+	Armament@BOMBS:
+		Name: secondary
+		Weapon: NapalmA10Carrier
+		LocalOffset: 0,-256,-43, 0,256,-43
+	Armament@AA:
+		Name: secondary
+		Weapon: A10CarrierMissiles
+		LocalOffset: 0,-300,0, 0,300,0
+	AmmoPool:
+		Ammo: 16
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	Voiced:
+		VoiceSet: VehicleVoice
+	AttackAircraft:
+		# FacingTolerance: 40
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: A10Carrier.Husk
+	LeavesTrails:
+		Offsets: -500,0,125
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		PlayerPalette: player
+		Image: a10carrier
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_armorpiercingbullets, up_cuttingedgeequipment
+
+gdifirehawk:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@HeavyAircraftArmorPlating: ^HeavyAircraftArmorPlating
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 50
+		Prerequisites: eye, ~upgdifirehawk
+		Description: actor-firehawk.description
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Firehawk
+	Health:
+		HP: 180000
+	Repairable:
+		HpPerStep: 9000
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armament:
+		Weapon: FirehawkMissiles
+		LocalOffset: 0,-960,0, 0,960,0, 0,-480,0, 0,480,0
+		LocalYaw: 50, -50, 25, -25
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+	Armament@up_advancedmissiletargeting:
+		Weapon: FirehawkMissiles
+		LocalOffset: 0,960,0, 0,-960,0, 0,480,0, 0,-480,0
+		LocalYaw: 50, -50, 25, -25
+		MuzzleSequence: muzzle
+		AmmoUsage: 0
+		PauseOnCondition: !ammo
+		RequiresCondition: up_cuttingedgeequipment
+	Armament@BOMBS:
+		Weapon: FirehawkBomb
+		LocalOffset: 0,-256,-64, 0,256,-64
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+	GrantConditionOnPrerequisite@up_advancedmissiletargeting:
+		Condition: up_advancedmissiletargeting
+		Prerequisites: up_advancedmissiletargeting
+	AttackAircraft:
+		FacingTolerance: 80
+		StrafeRunLength: 2500
+	Aircraft:
+		TurnSpeed: 12
+		Speed: 180
+		IdealSeparation: 2500
+	Selectable:
+		Bounds: 1280, 1280, 0, 64
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	SpawnActorOnDeath:
+		Actor: gdifirehawk.Husk
+	EjectOnDeath:
+		PilotActor: gdiofficer
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Voiced:
+		VoiceSet: TSVehicle
+	AmmoPool:
+		Ammo: 4
+		ReloadDelay: 50
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	DamageMultiplier@up_heavyaircraftarmorplating:
+		Modifier: 75
+	FirepowerMultiplier@up_cuttingedgeequipment:
+		Modifier: 120
+	ReloadDelayMultiplier@up_cuttingedgeequipment:
+		Modifier: 80
+	ReloadAmmoDelayMultiplier@up_cuttingedgeequipment:
+		Modifier: 80
+	DamageMultiplier@up_cuttingedgeequipment:
+		Modifier: 80
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_advancedmissiletargeting, up_cuttingedgeequipment
+
+gdifirehawk.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Firehawk
+	Contrail@1:
+		Offset: -598,-683,0
+	Contrail@2:
+		Offset: -598,683,0
+	Aircraft:
+		TurnSpeed: 22
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: gdifirehawk
+
+gdirigdrone:
+	Inherits: ^RANeutralPlane
+	Inherits@PLD: ^PointLaserDefenseSystem
+	Inherits@Template: ^FighterTemplate
+	Selectable:
+	Tooltip:
+		Name: Scalpel
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Valued:
+		Cost: 500
+	Aircraft:
+		CruiseAltitude: 1200
+		InitialFacing: 192
+		IdleTurnSpeed: 8
+		TurnSpeed: 48
+		Speed: 120
+		RepulsionSpeed: 48
+		MaximumPitch: 40
+		CanForceLand: false
+		VTOL: true
+	RevealsShroud:
+		Range: 10000
+		Type: CenterPosition
+	AttackAircraft:
+		AttackType: Hover
+		PersistentTargeting: false
+		FacingTolerance: 10
+	-Targetable@SpecialRepair:
+	-SpawnActorOnDeath:
+	-ActorLostNotification:
+	-UpdatesPlayerStatistics:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 6000
+		MovingCallBackCellDistance: 6
+		GrantConditionWhenMasterIsDisabled: notenabled
+		GrantConditionWhenMasterIsPaused: paused
+	# KillsSelf@masterdisabled:
+	# 	RequiresCondition: paused
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: gdirigdrone
+		PlayerPalette: player_rgba
+	Armament@PRIMARY:
+		Weapon: GDIRigDroneRepair
+		LocalOffset: 200,0,0
+		MuzzleSequence: muzzle
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+	Armament@pointdefense:
+		Weapon: GDIRigPDLaser
+		Turret: pointdefense
+		ForceTargetRelationships: Enemy, Neutral
+	Turreted:
+		Turret: pointdefense
+		TurnSpeed: 80
+	WithMuzzleOverlay:
+	AttackAircraft:
+		Armaments: primary, pointdefense
+	ActorStatValues:
+		Upgrades: upsteel_shielresistance

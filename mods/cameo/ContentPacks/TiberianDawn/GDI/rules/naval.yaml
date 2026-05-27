@@ -1,0 +1,110 @@
+CNCSYRD:
+	Inherits: RA1SYRD
+	Tooltip:
+		Name: GDI Naval Yard
+	Buildable:
+		Prerequisites: ~fact.gdi, proc.gdi, ~globalnaval
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: cncsyrd
+		PlayerPalette: player_rgba
+
+CNCPT:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@MissileTargeting: ^AdvancedMissileTargeting
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
+	Inherits@decoration: ^GDIRankDecoration
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Missile Boat
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cncsyrd
+		Queue: Naval, RANaval
+		Description: actor-pt.description
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 75000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 20
+		Offset: 384,0,64
+	Armament@Ground:
+		Weapon: GunboatMissile
+		LocalOffset: 100,-100,0, 100,100,0
+		RequiresCondition: !up_advancedmissiletargeting
+	Armament@AdvancedMissileTargeting:
+		Weapon: GunboatMissileAMT
+		LocalOffset: 100,-100,0, 100,100,0
+		RequiresCondition: up_advancedmissiletargeting
+	Armament@DC1:
+		Weapon: DepthCharge
+		LocalOffset: 100,-100,0, 100,100,0
+		LocalYaw: 80, -80
+		MuzzleSequence: muzzle
+	Armament@DC2:
+		Weapon: DepthCharge
+		LocalOffset: 100,100,0, 100,-100,0
+		LocalYaw: 80, -80
+		FireDelay: 5
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithSpriteTurret:
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment, up_lightweightarmorplating
+
+LST:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^UnarmedCargoVehicle
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Landing Craft
+	Buildable:
+		Prerequisites: ~cncsyrd
+		BuildPaletteOrder: 10
+		Queue: Naval, RANaval
+	Mobile:
+		Speed: 125
+		RequiresCondition: !notmobile && !disabled
+		Locomotor: lcraft
+	Health:
+		HP: 75000
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 10
+		PassengerFacing: 0
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	RenderSprites:
+		Image: lst
