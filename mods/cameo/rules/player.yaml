@@ -411,7 +411,6 @@ Player:
 		InfiniteBuildLimit: 10
 	# ClassicParallelProductionQueue@ADDON:
 	ClassicProductionQueue@ADDON:
-		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
 		Type: Addons
 		DisplayOrder: 10
 		Group: Addon
@@ -426,7 +425,6 @@ Player:
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
 	ClassicProductionQueue@BuildingAddons:
-		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
 		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: BuildingAddons
 		DisplayOrder: 11
@@ -438,10 +436,23 @@ Player:
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ClassicProductionQueue@UPGRADE:
+	ClassicProductionQueue@UPGRADES:
 		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
 		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
 		Type: Upgrades
+		DisplayOrder: 11
+		Group: Upgrade
+		SpeedUp: True
+		LowPowerModifier: 400
+		ReadyAudio: NewOptions
+		ReadyTextNotification: New technology is now available.
+		QueuedAudio: Upgrading
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ClassicProductionQueue@RESEARCH:
+		Inherits@AlwaysShow: ^AlwaysShowForFactionsList
+		Inherits@BuildTime: ^StandardBuildTimeSpeedReduction
+		Type: Research
 		DisplayOrder: 12
 		Group: Upgrade
 		SpeedUp: True

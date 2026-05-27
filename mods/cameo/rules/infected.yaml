@@ -359,10 +359,10 @@ zombie.squad:
 		AggregateHealth: false
 		InitialActorCount: 0
 		RequiresCondition: upzmsquad3
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	AttackTurreted:
 		PersistentTargeting: false
 	Turreted:
@@ -629,7 +629,7 @@ upzombiemutate1:
 		Name: Mutate DNA
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +20% more hp.
 		Prerequisites: ~!upzombiemutate1
 		BuildDuration: 500
@@ -646,7 +646,7 @@ upzombiemutate2:
 		Name: Mutate DNA 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +20% more hp.
 		Prerequisites: ~!upzombiemutate2, upzombiemutate1
 		BuildDuration: 1000
@@ -663,7 +663,7 @@ upzombiemutate3:
 		Name: Mutate DNA 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +20% more hp.
 		Prerequisites: ~!upzombiemutate3, upzombiemutate2
 		BuildDuration: 1500
@@ -680,7 +680,7 @@ upzombiemutate4:
 		Name: Super Mutate 1
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more hp.
 		Prerequisites: ~!upzombiemutate4, upzintelligence3, upzombiemutate3
 		BuildDuration: 2000
@@ -697,7 +697,7 @@ upzombiemutate5:
 		Name: Super Mutate 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more hp.
 		Prerequisites: ~!upzombiemutate5, upzombiemutate4
 		BuildDuration: 2500
@@ -714,7 +714,7 @@ upzombiemutate6:
 		Name: Super Mutate 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more hp.
 		Prerequisites: ~!upzombiemutate6, upzombiemutate5
 		BuildDuration: 3000
@@ -731,7 +731,7 @@ upzintelligence1:
 		Name: Mutate Intelligence
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more speed.
 		Prerequisites: ~!upzintelligence1, upzombiemutate1
 		BuildDuration: 1500
@@ -748,7 +748,7 @@ upzintelligence2:
 		Name: Mutate Intelligence 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more speed.
 		Prerequisites: ~!upzintelligence2, upzintelligence1
 		BuildDuration: 1500
@@ -765,7 +765,7 @@ upzintelligence3:
 		Name: Mutate Intelligence 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: zombies have +10% more speed.
 		Prerequisites: ~!upzintelligence3, upzintelligence2
 		BuildDuration: 1500
@@ -783,7 +783,7 @@ upzmsquad1:
 		Name: Bigger Horde 1
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gain Squad Nembers.
 		Prerequisites: ~!upzmsquad1, upzintelligence1, upzombiemutate2
 		BuildDuration: 1500
@@ -803,7 +803,7 @@ upzmsquad2:
 		Name: Bigger Horde 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gain Squad Nembers.
 		Prerequisites: ~!upzmsquad2, upzmsquad1, upzintelligence2, upzombiemutate4
 		BuildDuration: 3000
@@ -821,7 +821,7 @@ upzmsquad3:
 		Name: Bigger Horde 3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gain Squad Nembers.
 		Prerequisites: ~!upzmsquad3, upzmsquad2, upzintelligence3, upzombiemutate6
 		BuildDuration: 4500

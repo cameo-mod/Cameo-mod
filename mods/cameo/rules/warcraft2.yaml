@@ -1,4 +1,4 @@
-# Warcraft 2 rules
+﻿# Warcraft 2 rules
 
 # HP, Armor, and Cost values taken directly from ingame, since every wiki and website has discrepancies/errors.
 
@@ -1032,10 +1032,10 @@ Player:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
 		LocalCenterOffset: 0,0,0
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	FreeActor@CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	Power:
@@ -1081,10 +1081,10 @@ Player:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
 		LocalCenterOffset: 0,0,0
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	FreeActor@CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	Power:
@@ -1139,10 +1139,10 @@ Player:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
 		LocalCenterOffset: 0,0,0
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	FreeActor@CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	Health:
@@ -1172,10 +1172,10 @@ Player:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
 		LocalCenterOffset: 0,0,0
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	FreeActor@CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	Power:
@@ -1194,10 +1194,10 @@ Player:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
 		LocalCenterOffset: 0,0,0
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	FreeActor@CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	RallyPoint:
@@ -2182,7 +2182,7 @@ wc2_human_betterfarm:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~!wc2_human_betterfarm, ~wc2_human_farm, wc2_human_keep
-		Queue: Addons
+		Queue: Research
 		Description: Gives Farms +50% Supply and HP (150% total)
 		Icon: icon
 	RenderSprites:
@@ -2197,7 +2197,7 @@ wc2_human_bestfarm:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~wc2_human_betterfarm, ~wc2_human_farm, wc2_human_castle
-		Queue: Addons
+		Queue: Research
 		Description: Gives Farms +100% Supply and HP (200% total)
 		Icon: icon
 	RenderSprites:
@@ -4748,7 +4748,7 @@ wc2_orc_betterfarm:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~!wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_stronghold
-		Queue: Addons
+		Queue: Research
 		Description: Gives Farms +50% Supply and HP (150% total)
 		Icon: icon
 	RenderSprites:
@@ -4763,7 +4763,7 @@ wc2_orc_bestfarm:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_fortress
-		Queue: Addons
+		Queue: Research
 		Description: Gives Farms +100% Supply and HP (200% total)
 		Icon: icon
 	RenderSprites:
@@ -6703,7 +6703,7 @@ wc2_h_str_sword:
 		Name: Sword Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases melee damage by 15%. Double Effect for Footmen.
 		Prerequisites: ~!wc2_h_str_sword, ~wc2_human_blacksmith
 	Valued:
@@ -6718,7 +6718,7 @@ wc2_h_str_sword2:
 		Name: Sword Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases melee damage by 35%. Double Effect for Footmen.
 		Prerequisites: !wc2_h_str_sword2, ~wc2_h_str_sword, ~wc2_human_blacksmith, wc2_human_castle
 	Valued:
@@ -6733,7 +6733,7 @@ wc2_h_str_shield:
 		Name: Armor Strength
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all land units by 10%. Footmen have 15% damage resistance instead.
 		Prerequisites: ~!wc2_h_str_shield, ~wc2_human_blacksmith
 	Valued:
@@ -6748,7 +6748,7 @@ wc2_h_str_shield2:
 		Name: Armor Strength II
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all land units by 20%. Footmen have 30% damage resistance instead.
 		Prerequisites: !wc2_h_str_shield2, ~wc2_h_str_shield, ~wc2_human_blacksmith, wc2_human_castle
 	Valued:
@@ -6763,7 +6763,7 @@ wc2_h_str_arrow:
 		Name: Arrow Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases arrow damage dealt by Archers and Guard Towers by 15%.
 		Prerequisites: ~!wc2_h_str_arrow, ~wc2_human_blacksmith
 	Valued:
@@ -6778,7 +6778,7 @@ wc2_h_str_arrow2:
 		Name: Arrow Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases arrow damage by Archers and Guard Towers by 35%.
 		Prerequisites: !wc2_h_str_arrow2, ~wc2_h_str_arrow, ~wc2_human_blacksmith, wc2_human_castle
 	Valued:
@@ -6803,7 +6803,7 @@ wc2_h_rangerupg:
 		Name: Ranger
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Intense training is given to Elven Archers.\nIncreases damage resistance by 20% and unlocks upgrades for the Ranger.
 		Prerequisites: ~!wc2_h_rangerupg, ~wc2_human_blacksmith ## when keep/castle are fixed, will require Castle
 	Valued:
@@ -6828,7 +6828,7 @@ wc2_h_ranger_longbow:
 		Name: Ranger Longbow
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Increases range of Rangers by 20%.
 		Prerequisites: ~!wc2_h_ranger_longbow, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_castle
 	Valued:
@@ -6843,7 +6843,7 @@ wc2_h_ranger_scouting:
 		Name: Ranger Scouting
 	Buildable:
 		BuildPaletteOrder: 3
-		Queue: Addons
+		Queue: Research
 		Description: Increases vision range of Rangers by 20%.
 		Prerequisites: ~!wc2_h_ranger_scouting, ~wc2_h_rangerupg, ~wc2_human_blacksmith
 	Valued:
@@ -6858,7 +6858,7 @@ wc2_h_ranger_marksman:
 		Name: Ranger Marksman
 	Buildable:
 		BuildPaletteOrder: 4
-		Queue: Addons
+		Queue: Research
 		Description: Increases arrow damage of Rangers by 25%.
 		Prerequisites: ~!wc2_h_ranger_marksman, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_keep
 	Valued:
@@ -6873,7 +6873,7 @@ wc2_h_str_ballista:
 		Name: Ballista Strength
 	Buildable:
 		BuildPaletteOrder: 3
-		Queue: Addons
+		Queue: Research
 		Description: Increases ballista damage dealt by Ballista by 15%
 		Prerequisites: ~!wc2_h_str_ballista, ~wc2_human_blacksmith
 	Valued:
@@ -6888,7 +6888,7 @@ wc2_h_str_ballista2:
 		Name: Ballista Strength II
 	Buildable:
 		BuildPaletteOrder: 3
-		Queue: Addons
+		Queue: Research
 		Description: Increases ballista damage dealt by Ballista by 35%
 		Prerequisites: !wc2_h_str_ballista2, ~wc2_h_str_ballista, ~wc2_human_blacksmith, wc2_human_castle
 	Valued:
@@ -6903,7 +6903,7 @@ wc2_h_str_cannon:
 		Name: Cannon Damage
 	Buildable:
 		BuildPaletteOrder: 4
-		Queue: Addons
+		Queue: Research
 		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 15%
 		Prerequisites: ~!wc2_h_str_cannon, ~wc2_human_blacksmith
 	Valued:
@@ -6918,7 +6918,7 @@ wc2_h_str_cannon2:
 		Name: Cannon Damage II
 	Buildable:
 		BuildPaletteOrder: 4
-		Queue: Addons
+		Queue: Research
 		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 35%
 		Prerequisites: !wc2_h_str_cannon2, ~wc2_h_str_cannon, ~wc2_human_blacksmith, wc2_human_castle
 	Valued:
@@ -6933,7 +6933,7 @@ wc2_h_str_navyshield:
 		Name: Naval Armor
 	Buildable:
 		BuildPaletteOrder: 5
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 10%
 		Prerequisites: ~!wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard
 	Valued:
@@ -6948,7 +6948,7 @@ wc2_h_str_navyshield2:
 		Name: Naval Armor II
 	Buildable:
 		BuildPaletteOrder: 5
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 20%
 		Prerequisites: !wc2_h_str_navyshield2, ~wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard, wc2_human_castle
 	Valued:
@@ -6963,7 +6963,7 @@ wc2_h_paladinupg:
 		Name: Paladin
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Perform holy rituals to turn your noble Knights into righteous Paladins!\nPaladins are more powerful and can cast Heal.\nIncreases damage resistance, melee damage and speed by 25%.
 		Prerequisites: ~!wc2_h_paladinupg, ~wc2_human_blacksmith, wc2_human_church
 	Valued:
@@ -6988,7 +6988,7 @@ wc2_h_healingupg:
 		Name: Healing
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Paladins can now heal.\nToggle Paladin's modes by deploying them.\nHealing uses mana.
 		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_healingupg, ~wc2_human_blacksmith, wc2_human_church
 	Valued:
@@ -7003,7 +7003,7 @@ wc2_h_exorcismupg:
 		Name: Exorcism
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Paladins can now exorcise.\nToggle Paladin's modes by deploying them.\nExorcism only affects undead units.\nGood vs Orc Death Knight and Skeleton.
 		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_exorcismupg, ~wc2_human_blacksmith, wc2_human_church
 	Valued:
@@ -7018,7 +7018,7 @@ wc2_h_slowupg:
 		Name: Slow
 	Buildable:
 		BuildPaletteOrder: 20
-		Queue: Addons
+		Queue: Research
 		Description: Allows Mages to cast Slow.\nToggle Mage's modes by deploying them.\nSlows down affected target.\nAffects movement and attack speed.\nUses 50 mana.
 		Prerequisites: ~!wc2_h_slowupg, ~wc2_human_blacksmith, wc2_human_mage_tower
 	Valued:
@@ -7033,7 +7033,7 @@ wc2_h_polymorphupg:
 		Name: Polymorph
 	Buildable:
 		BuildPaletteOrder: 30
-		Queue: Addons
+		Queue: Research
 		Description: Allows Mages to cast Polymorph.\nToggle Mage's modes by deploying them.\nTurns target into a\nharmless critter.\nUses 200 mana.
 		Prerequisites: ~!wc2_h_polymorphupg, ~wc2_human_blacksmith, wc2_human_mage_tower
 	Valued:
@@ -7048,7 +7048,7 @@ wc2_h_blizzardupg:
 		Name: Blizzard
 	Buildable:
 		BuildPaletteOrder: 40
-		Queue: Addons
+		Queue: Research
 		Description: Allows Mages to cast Blizzard.\nToggle Mage's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
 		Prerequisites: ~!wc2_h_blizzardupg, ~wc2_human_blacksmith, wc2_human_mage_tower
 	Valued:
@@ -7067,7 +7067,7 @@ wc2_o_str_axe:
 		Name: Axe Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases melee damage by 15%. Double Effect for Grunts.
 		Prerequisites: ~!wc2_o_str_axe, ~wc2_orc_blacksmith
 	Valued:
@@ -7082,7 +7082,7 @@ wc2_o_str_axe2:
 		Name: Axe Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases melee damage by 35%. Double Effect for Grunts.
 		Prerequisites: !wc2_o_str_axe2, ~wc2_o_str_axe, ~wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
@@ -7097,7 +7097,7 @@ wc2_o_str_shield:
 		Name: Armor Strength
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all land units by 10%. Grunts have 15% damage resistance instead.
 		Prerequisites: ~!wc2_o_str_shield, ~wc2_orc_blacksmith
 	Valued:
@@ -7112,7 +7112,7 @@ wc2_o_str_shield2:
 		Name: Armor Strength II
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all land units by 20%. Grunts have 30% damage resistance instead.
 		Prerequisites: !wc2_o_str_shield2, ~wc2_o_str_shield, ~wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
@@ -7127,7 +7127,7 @@ wc2_o_str_throwaxe:
 		Name: Throwing Axe Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases ranged damage dealt by Axethrowers and Guard Towers by 15%.
 		Prerequisites: ~!wc2_o_str_throwaxe, ~wc2_orc_blacksmith
 	Valued:
@@ -7142,7 +7142,7 @@ wc2_o_str_throwaxe2:
 		Name: Throwing Axe Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases ranged damage by Axethrowers and Guard Towers by 35%
 		Prerequisites: !wc2_o_str_throwaxe2, ~wc2_o_str_throwaxe, ~wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
@@ -7167,7 +7167,7 @@ wc2_o_berserkerupg:
 		Name: Berserker
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Troll Axethrowers are driven into a mad frenzy.\nIncreases damage resistance by 20% and unlocks upgrades for the Berserker.
 		Prerequisites: ~!wc2_o_berserkerupg, ~wc2_orc_blacksmith
 	Valued:
@@ -7192,7 +7192,7 @@ wc2_o_berserker_lighteraxes:
 		Name: Berserker Light Axes
 	Buildable:
 		BuildPaletteOrder: 2
-		Queue: Addons
+		Queue: Research
 		Description: Increases throwing range of Berserker axes by 20%.
 		Prerequisites: ~!wc2_o_berserker_lighteraxes, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
@@ -7207,7 +7207,7 @@ wc2_o_berserker_scouting:
 		Name: Berserker Scouting
 	Buildable:
 		BuildPaletteOrder: 3
-		Queue: Addons
+		Queue: Research
 		Description: Increases vision range of Berserkers by 20%.
 		Prerequisites: ~!wc2_o_berserker_scouting, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith
 	Valued:
@@ -7222,7 +7222,7 @@ wc2_o_berserker_regen:
 		Name: Berserker Regeneration
 	Buildable:
 		BuildPaletteOrder: 4
-		Queue: Addons
+		Queue: Research
 		Description: Berserkers heal over time (5% HP each second) and take 20% less damage.
 		Prerequisites: ~!wc2_o_berserker_regen, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_stronghold
 	Valued:
@@ -7237,7 +7237,7 @@ wc2_o_str_catapult:
 		Name: Catapult Strength
 	Buildable:
 		BuildPaletteOrder: 3
-		Queue: Addons
+		Queue: Research
 		Description: Increases Catapult damage by 15%
 		Prerequisites: ~!wc2_o_str_catapult, ~wc2_orc_blacksmith
 	Valued:
@@ -7252,7 +7252,7 @@ wc2_o_str_catapult2:
 		Name: Catapult Strength II
 	Buildable:
 		BuildPaletteOrder: 3
-		Queue: Addons
+		Queue: Research
 		Description: Increases Catapult damage by 35%
 		Prerequisites: !wc2_o_str_catapult2, ~wc2_o_str_catapult, ~wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
@@ -7268,7 +7268,7 @@ wc2_o_str_cannon:
 	Buildable:
 		BuildPaletteOrder: 4
 		BuildLimit: 1
-		Queue: Addons
+		Queue: Research
 		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 15%
 		Prerequisites: ~!wc2_o_str_cannon, ~wc2_orc_blacksmith
 	Valued:
@@ -7283,7 +7283,7 @@ wc2_o_str_cannon2:
 		Name: Cannon Damage II
 	Buildable:
 		BuildPaletteOrder: 4
-		Queue: Addons
+		Queue: Research
 		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 35%
 		Prerequisites: !wc2_o_str_cannon2, ~wc2_o_str_cannon, ~wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
@@ -7298,7 +7298,7 @@ wc2_o_str_navyshield:
 		Name: Naval Armor
 	Buildable:
 		BuildPaletteOrder: 5
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 10%.
 		Prerequisites: ~!wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard
 	Valued:
@@ -7313,7 +7313,7 @@ wc2_o_str_navyshield2:
 		Name: Naval Armor II
 	Buildable:
 		BuildPaletteOrder: 5
-		Queue: Addons
+		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 20%.
 		Prerequisites: !wc2_o_str_navyshield2, ~wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard, wc2_orc_fortress
 	Valued:
@@ -7328,7 +7328,7 @@ wc2_o_ogremageupg:
 		Name: Ogre-Mage
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Perform mysterious rituals to transform your Ogres into Ogre-Magi!\nOgre-Magi are more powerful and can cast Bloodlust.\nBloodlust makes your units hit harder for a short time.\nIncreases damage resistance by 20%.\nIncreases melee damage by 25%.
 		Prerequisites: ~!wc2_o_ogremageupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
 	Valued:
@@ -7343,7 +7343,7 @@ wc2_o_bloodlustupg:
 		Name: Bloodlust
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Allows Ogre-Magi to cast bloodlust.\nToggle Oger-Mage's modes by deploying them.\nTriples damage output of affected unit.\nUses 50 mana.
 		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_bloodlustupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
 	Valued:
@@ -7358,7 +7358,7 @@ wc2_o_runesupg:
 		Name: Runes
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Allows Ogre-Magi to cast runes.\nToggle Oger-Mage's modes by deploying them.\nDeploys five land mines in a + shape.\nUses 200 mana.
 		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_runesupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
 	Valued:
@@ -7373,7 +7373,7 @@ wc2_o_hasteupg:
 		Name: Haste
 	Buildable:
 		BuildPaletteOrder: 20
-		Queue: Addons
+		Queue: Research
 		Description: Allows Death Knights to cast haste.\nToggle Death Knight's modes by deploying them.\nSpeeds up affected target.\nAffects movement and attack speed.\nUses 50 mana.
 		Prerequisites: ~!wc2_o_hasteupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
 	Valued:
@@ -7388,7 +7388,7 @@ wc2_o_deathanddecayupg:
 		Name: Death and Decay
 	Buildable:
 		BuildPaletteOrder: 30
-		Queue: Addons
+		Queue: Research
 		Description: Allows Death Knights to cast death and decay.\nToggle Death Knight's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
 		Prerequisites: ~!wc2_o_deathanddecayupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
 	Valued:
@@ -7403,7 +7403,7 @@ wc2_o_raisedeadupg:
 		Name: Raise Dead
 	Buildable:
 		BuildPaletteOrder: 40
-		Queue: Addons
+		Queue: Research
 		Description: Allows Death Knights to cast raise dead.\nToggle Death Knight's modes by deploying them.\nSummons a skeleton.\nUses 50 mana.
 		Prerequisites: ~!wc2_o_raisedeadupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
 	Valued:

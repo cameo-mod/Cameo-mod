@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@terran:
 		Name: Terran SC
 		InternalName: terran
@@ -841,10 +841,14 @@ SCACADEMY:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: tscupd00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -879,10 +883,14 @@ SCENGINEERINGBAY:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: tscupd00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 3072, 2048
 		DecorationBounds: 3300, 2448, 0, 0
@@ -1173,10 +1181,14 @@ SCARMORY:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: tscupd00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -1247,10 +1259,6 @@ SCSCIENCEFACILITY:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: tscupd00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
 	Selectable:
 		Bounds: 3072, 2048
 		DecorationBounds: 3300, 2448, 0, 0
@@ -1621,10 +1629,14 @@ SCFORGE:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -1716,10 +1728,14 @@ SCCYBERNETICSCORE:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -1900,10 +1916,14 @@ SCCITADELOFADUN:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -1939,10 +1959,14 @@ SCROBOTICSSUPPORTBAY:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -2001,10 +2025,14 @@ SCFLEETBEACON:
 		CameraActor: CAMERA.small
 		SupportPowerPaletteOrder: 20
 	SupportPowerChargeBar:
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -2040,10 +2068,14 @@ SCTEMPLARARCHIVES:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -2080,10 +2112,14 @@ SCOBSERVATORY:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -2119,10 +2155,14 @@ SCARBITERTRIBUNAL:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 		BuildSounds: pshbld03.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -2741,10 +2781,14 @@ SCSPAWNINGPOOL:
 		Footprint: xx xx
 		Dimensions: 2,2
 		BuildSounds: zchrdy00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -2788,10 +2832,14 @@ SCEVOLUTIONCHAMBER:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	SelectionDecorations:
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
 		Duration: 2000
@@ -2830,10 +2878,14 @@ SCHYDRALISKDEN:
 		Footprint: xx xx
 		Dimensions: 2,2
 		BuildSounds: zchrdy00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -2875,10 +2927,14 @@ SCQUEENSNEST:
 		Footprint: xx xx
 		Dimensions: 2,2
 		BuildSounds: zchrdy00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -3015,23 +3071,27 @@ SCULTRALISKCAVERN:
 		Footprint: xx xx
 		Dimensions: 2,2
 		BuildSounds: zchrdy00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	SelectionDecorations:
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: UltraCave
-	#ProductionQueue@Upgrades:
+	#ProductionQueue@Research:
 	#	Type: UltraCave
 	#	DisplayOrder: 10
 	#	Group: Upgrade
 	#	ItemLimit: 1
 	#	DisallowPaused: true
-	#ProductionBar@Upgrades:
+	#ProductionBar@Research:
 	#	ProductionType: UltraCave
 	-WithMakeAnimation:
 	WithLoopedMakeAnimation:
@@ -3072,10 +3132,14 @@ SCDEFILERMOUND:
 		Footprint: xx xx
 		Dimensions: 2,2
 		BuildSounds: zchrdy00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -3150,10 +3214,14 @@ SCOVERMIND:
 		Footprint: xx xx
 		Dimensions: 2,2
 		BuildSounds: zchrdy00.aud
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Selectable:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
@@ -10438,7 +10506,7 @@ updragoonrange:
 		Name: Singularity Charge
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-updragoonrange.description
 		Prerequisites: ~sccyberneticscore, ~!updragoonrange
 	Valued:
@@ -10456,7 +10524,7 @@ uppylon1:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-uppylon1.description
 		Prerequisites: ~scforge, ~!uppylon1
 	RenderSprites:
@@ -10471,7 +10539,7 @@ uppylon2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-uppylon2.description
 		Prerequisites: ~sccyberneticscore, ~uppylon1, ~!uppylon2
 	RenderSprites:
@@ -10484,7 +10552,7 @@ upplasmashield:
 		Name: Plasma Shields
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upplasmashield.description
 		Prerequisites: ~sccyberneticscore, ~!upplasmashield
 	Valued:
@@ -10500,7 +10568,7 @@ upreavercapacity:
 		Name: Reaver Capacity
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upreavercapacity.description
 		Prerequisites: ~scroboticssupportbay
 	Valued:
@@ -10516,7 +10584,7 @@ upairspeed:
 		Name: Gravitic Propulsion
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upairspeed.description
 		Prerequisites: ~scroboticssupportbay, ~!upairspeed
 	Valued:
@@ -10532,7 +10600,7 @@ upgroundweapons:
 		Name: Ground Weapons Level 1
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upgroundweapons.description
 		Prerequisites: ~scforge, ~!upgroundweapons
 	Valued:
@@ -10548,7 +10616,7 @@ upgroundweapons2:
 		Name: Ground Weapons Level 2
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upgroundweapons2.description
 		Prerequisites: ~sctemplararchives, ~upgroundweapons, ~!upgroundweapons2
 	Valued:
@@ -10564,7 +10632,7 @@ upgroundarmor:
 		Name: Ground Armor Level 1
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upgroundarmor.description
 		Prerequisites: ~scforge, ~!upgroundarmor
 	Valued:
@@ -10580,7 +10648,7 @@ upgroundarmor2:
 		Name: Ground Armor Level 2
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upgroundarmor2.description
 		Prerequisites: ~sctemplararchives, ~upgroundarmor, ~!upgroundarmor2
 	Valued:
@@ -10596,7 +10664,7 @@ upairweapons:
 		Name: Air Weapons Level 1
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upairweapons.description
 		Prerequisites: ~sccyberneticscore, ~!upairweapons
 	Valued:
@@ -10612,7 +10680,7 @@ upairweapons2:
 		Name: Air Weapons Level 2
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upairweapons2.description
 		Prerequisites: ~scfleetbeacon, ~upairweapons, ~!upairweapons2
 	Valued:
@@ -10628,7 +10696,7 @@ upairarmor:
 		Name: Air Armor Level 1
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upairarmor.description
 		Prerequisites: ~sccyberneticscore, ~!upairarmor
 	Valued:
@@ -10644,7 +10712,7 @@ upairarmor2:
 		Name: Air Armor Level 2
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upairarmor2.description
 		Prerequisites: ~scfleetbeacon, ~upairarmor, ~!upairarmor2
 	Valued:
@@ -10666,7 +10734,7 @@ upstimpack:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upstimpack.description
 		Prerequisites: ~scacademy, ~!upstimpack
 	RenderSprites:
@@ -10681,7 +10749,7 @@ upmarinerange:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upmarinerange.description
 		Prerequisites: ~scacademy, ~!upmarinerange
 	RenderSprites:
@@ -10696,7 +10764,7 @@ upsupplydepot1:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upsupplydepot1.description
 		Prerequisites: ~scengineeringbay, ~!upsupplydepot1
 	RenderSprites:
@@ -10711,7 +10779,7 @@ upsupplydepot2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upsupplydepot2.description
 		Prerequisites: ~scarmory, ~upsupplydepot1, ~!upsupplydepot2
 	RenderSprites:
@@ -10726,7 +10794,7 @@ upghostcloak:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upghostcloak.description
 		Prerequisites: ~scsciencefacility, ~!upghostcloak
 	RenderSprites:
@@ -10741,7 +10809,7 @@ upsiegemode:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upsiegemode.description
 		Prerequisites: ~scsciencefacility, ~!upsiegemode
 	RenderSprites:
@@ -10756,7 +10824,7 @@ upyamatocannon:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upyamatocannon.description
 		Prerequisites: ~scsciencefacility, ~!upyamatocannon
 	RenderSprites:
@@ -10771,7 +10839,7 @@ upinfweapon:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upinfweapon.description
 		Prerequisites: ~scengineeringbay, ~!upinfweapon
 	RenderSprites:
@@ -10787,7 +10855,7 @@ upinfweapon2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upinfweapon2.description
 		Prerequisites: ~scsciencefacility, ~upinfweapon, ~!upinfweapon2
 	RenderSprites:
@@ -10803,7 +10871,7 @@ upinfarmor:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upinfarmor.description
 		Prerequisites: ~scengineeringbay, ~!upinfarmor
 	RenderSprites:
@@ -10819,7 +10887,7 @@ upinfarmor2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upinfarmor2.description
 		Prerequisites: ~scsciencefacility, ~upinfarmor, ~!upinfarmor2
 	RenderSprites:
@@ -10835,7 +10903,7 @@ upmechweapon:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upmechweapon.description
 		Prerequisites: ~scarmory, ~!upmechweapon
 	RenderSprites:
@@ -10850,7 +10918,7 @@ upmechweapon2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upmechweapon2.description
 		Prerequisites: ~scsciencefacility, ~upmechweapon, ~!upmechweapon2
 	RenderSprites:
@@ -10865,7 +10933,7 @@ upmecharmor:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upmecharmor.description
 		Prerequisites: ~scarmory, ~!upmecharmor
 	RenderSprites:
@@ -10880,7 +10948,7 @@ upmecharmor2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upmecharmor2.description
 		Prerequisites: ~scsciencefacility, ~upmecharmor, ~!upmecharmor2
 	RenderSprites:
@@ -10895,7 +10963,7 @@ upshipweapon:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upshipweapon.description
 		Prerequisites: ~scarmory, ~!upshipweapon
 	RenderSprites:
@@ -10910,7 +10978,7 @@ upshipweapon2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upshipweapon2.description
 		Prerequisites: ~scsciencefacility, ~upshipweapon, ~!upshipweapon2
 	RenderSprites:
@@ -10925,7 +10993,7 @@ upshiparmor:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upshiparmor.description
 		Prerequisites: ~scarmory, ~!upshiparmor
 	RenderSprites:
@@ -10940,7 +11008,7 @@ upshiparmor2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upshiparmor2.description
 		Prerequisites: ~scsciencefacility, ~upshiparmor, ~!upshiparmor2
 	RenderSprites:
@@ -10959,7 +11027,7 @@ upoverlordspeed:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upoverlordspeed.description
 		Prerequisites: ~schatchery, ~!upoverlordspeed
 	RenderSprites:
@@ -10974,7 +11042,7 @@ uplingspeed:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-uplingspeed.description
 		Prerequisites: ~scspawningpool, ~scevolutionchamber, ~!uplingspeed
 	RenderSprites:
@@ -10989,7 +11057,7 @@ uplingattack:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-uplingattack.description
 		Prerequisites: ~scevolutionchamber, ~!uplingattack
 	RenderSprites:
@@ -11004,7 +11072,7 @@ upzergrange:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upzergrange.description
 		Prerequisites: ~schydraliskden, ~!upzergrange
 	RenderSprites:
@@ -11019,7 +11087,7 @@ upzergmelee:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upzergmelee.description
 		Prerequisites: ~scevolutionchamber, ~!upzergmelee
 	RenderSprites:
@@ -11034,7 +11102,7 @@ upzergmelee2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upzergmelee2.description
 		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmelee, ~!upzergmelee2
 	RenderSprites:
@@ -11049,7 +11117,7 @@ upzergmissile:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upzergmissile.description
 		Prerequisites: ~scevolutionchamber, ~!upzergmissile
 	RenderSprites:
@@ -11064,7 +11132,7 @@ upzergmissile2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upzergmissile2.description
 		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmissile, ~!upzergmissile2
 	RenderSprites:
@@ -11079,7 +11147,7 @@ upcarapace:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upcarapace.description
 		Prerequisites: ~scevolutionchamber, ~!upcarapace
 	RenderSprites:
@@ -11094,7 +11162,7 @@ upcarapace2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upcarapace2.description
 		Prerequisites: ~scevolutionchamber, ~schive, ~upcarapace, ~!upcarapace2
 	RenderSprites:
@@ -11109,7 +11177,7 @@ upflyerattack:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upflyerattack.description
 		Prerequisites: ~scspire, ~!upflyerattack
 	RenderSprites:
@@ -11124,7 +11192,7 @@ upflyerattack2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upflyerattack2.description
 		Prerequisites: ~scspire, ~schive, ~upflyerattack, ~!upflyerattack2
 	RenderSprites:
@@ -11139,7 +11207,7 @@ upflyerarmor:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: actor-upflyerarmor.description
 		Prerequisites: ~scspire, ~!upflyerarmor
 	RenderSprites:
@@ -11154,7 +11222,7 @@ upflyerarmor2:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: actor-upflyerarmor2.description
 		Prerequisites: ~scspire, ~schive, ~upflyerarmor, ~!upflyerarmor2
 	RenderSprites:

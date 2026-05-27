@@ -1,4 +1,4 @@
-
+﻿
 ####################################################################################################
 #		MCV
 ####################################################################################################
@@ -58,7 +58,7 @@ upberezkacloak:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Commits to the Berezka Upgrade Tree, which focuses on cloak and hit and run units. Enables cloak for Basic Infantry Units and increase their movespeed.
 		Prerequisites: ~tkmcommandcenter, ~!upberezkacloak, ~!uptitanarsenal, ~!upnatoarsenal
 	RenderSprites:
@@ -81,7 +81,7 @@ uptitanarsenal:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Commits to the Titan Arsenal Upgrade Tree, which utilizes heavy duty arsenal. Enables Basic Infantry Units to have Lightweight ballistic plating.
 		Prerequisites: ~tkmcommandcenter, ~!uptitanarsenal, ~!upberezkacloak, ~!upnatoarsenal
 	ProvidesPrerequisite:
@@ -107,7 +107,7 @@ upnatoarsenal:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Commits to the NATO Arsenal Upgrade Tree, which utilizes specialized units to defeat enemies.
 		Prerequisites: ~tkmcommandcenter, ~!uptitanarsenal, ~!upberezkacloak, ~!upnatoarsenal
 	ProvidesPrerequisite:
@@ -122,7 +122,7 @@ upm16m203:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Gives the troopers grenade launchers.
 		Prerequisites: ~tkmradar, ~upnatoarsenal, ~!upm16m203
 	ProvidesPrerequisite:
@@ -137,7 +137,7 @@ upsemiautorifles:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Changes Riflemen Arsenal to SKS Rifles.
 		Prerequisites: ~tkmradar, ~!upsemiautorifles, ~upberezkacloak
 	ProvidesPrerequisite:
@@ -156,7 +156,7 @@ uptwinrockets:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: ChangesRocket Arsenals to modified dual RPGs.
 		Prerequisites: ~tkmradar, ~!uptwinrockets, ~upberezkacloak
 	ProvidesPrerequisite:
@@ -175,7 +175,7 @@ uptkmapbullets:
 		Cost: 2400
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Changes Bullets to APFSDS Armor Piercing Rounds which deals extra damage to armored units.
 		Prerequisites: ~tkmradar, ~!uptkmapbullets, ~uptitanarsenal
 	ProvidesPrerequisite:
@@ -194,7 +194,7 @@ upincendiaryrockets:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Changes Rocket Arsenals to incendiary rockets.
 		Prerequisites: ~tkmradar, ~!upincendiaryrockets, ~uptitanarsenal
 	ProvidesPrerequisite:
@@ -213,7 +213,7 @@ upcryorockets:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Changes Rocket Arsenals to Cryo Rockets.
 		Prerequisites: ~tkmradar, ~!upcryorockets, ~upnatoarsenal
 	ProvidesPrerequisite:
@@ -228,7 +228,7 @@ tkmrocketaddon:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: Upgrades Technical Tank to shoot twin rockets.
 		Prerequisites: ~tkmtechcenter, ~!tkmrocketaddon, ~upberezkacloak, ~uptwinrockets
 	ProvidesPrerequisite:
@@ -243,7 +243,7 @@ uppointdefensesystem:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: Commits to the NATO Arsenal Upgrade Tree, which utilizes specialized units to defeat enemies.
 		Prerequisites: ~tkmradar, ~!uppointdefensesystem, ~upnatoarsenal, ~tkmtechcenter
 	ProvidesPrerequisite:
@@ -258,7 +258,7 @@ tkmheavydutyarmor:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: Gives Vehicles heavier armors.
 		Prerequisites: ~tkmtechcenter, ~!tkmheavydutyarmor, ~uptitanarsenal
 	ProvidesPrerequisite:
@@ -273,7 +273,7 @@ tkminfantryupgrade:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: Upgrades TKM Infantry Damage and Armor.
 		Prerequisites: ~tkmcommandcenter, ~tkmtechcenter, ~!tkminfantryupgrade
 	RenderSprites:
@@ -341,10 +341,10 @@ tkmcommandcenter:
 	Transforms:
 		IntoActor: tkmmcv
 	ProvidesPrerequisite@buildingname:
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	ActorStatValues:
@@ -608,10 +608,10 @@ tkmradar:
 		BuildPaletteOrder: 15
 		Prerequisites: ~tkmcommandcenter, tkmfactory
 		Description: Provides TKM technologies.
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	Tooltip:
 		Name: TKM Observation Van
 	Selectable:
@@ -644,10 +644,6 @@ tkmtechcenter:
 		BuildPaletteOrder: 17
 		Prerequisites: ~tkmcommandcenter, tkmradar
 		Description: Provides advanced TKM technologies.
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
 	Tooltip:
 		Name: TKM Tech Center
 	Selectable:

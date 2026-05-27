@@ -771,10 +771,10 @@ swhqe:
 		SupportPowerPaletteOrder: 10
 		StartFullyCharged: false
 	SupportPowerChargeBar:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 swweap:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
@@ -1609,10 +1609,10 @@ swhqre:
 		SupportPowerPaletteOrder: 10
 		StartFullyCharged: false
 	SupportPowerChargeBar:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 swreproc:
 	Inherits: sweproc
 	Inherits@sell: ^SWSpawnActorsOnSell
@@ -2070,10 +2070,10 @@ swhqr:
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: false
 	SupportPowerChargeBar:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 
 swnurser:
 	Inherits: swnurse
@@ -2459,10 +2459,10 @@ swhqs:
 		SupportPowerPaletteOrder: 10
 		StartFullyCharged: false
 	SupportPowerChargeBar:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 swdproc:
 	Inherits: sweproc
 	Inherits@sell: ^SWSpawnActorsOnSellDroid
@@ -3379,10 +3379,10 @@ swhqh:
 		SupportPowerPaletteOrder: 10
 		StartFullyCharged: false
 	SupportPowerChargeBar:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 SWFIX:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -8745,7 +8745,7 @@ swupinfarmor1:
 		Name: Infantry Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of all troopers.
 		Prerequisites: ~!swupinfarmor1
 	Valued:
@@ -8761,7 +8761,7 @@ swupveharmor1:
 		Name: Vehicle Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of all vehicles.
 		Prerequisites: ~!swupveharmor1
 	Valued:
@@ -8777,7 +8777,7 @@ swupvehspeed1:
 		Name: Vehicle Speed
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases speed of all vehicles.
 		Prerequisites: ~!swupvehspeed1
 	Valued:
@@ -8793,7 +8793,7 @@ swuplaser1:
 		Name: Laser Weapons Upgrade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases damage of all laser weapons.
 		Prerequisites: ~!swuplaser1
 	Valued:
@@ -8809,7 +8809,7 @@ swupphase2clone:
 		Name: Laser Weapons Upgrade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases veterancy of all Clones, upgrades clones arsenal.
 		Prerequisites: ~!swupphase2clone, sweye
 	Valued:
@@ -8824,7 +8824,7 @@ swupdroidarmor1:
 		Name: Droid Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of all droids infantry, include R2 units.
 		Prerequisites: ~!swupdroidarmor1
 	Valued:
@@ -8840,7 +8840,7 @@ swupstimulant:
 		Name: Stimulants
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases passive income from Banthas, and Nerfs by 10% in the Nursery.
 		Prerequisites: ~!swupstimulant, swnurse
 	Valued:
@@ -8856,7 +8856,7 @@ swupgenetics:
 		Name: Genetics
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases passive income from Banthas, and Nerfs by 25% in the Nursery.
 		Prerequisites: ~!swupgenetics, swupstimulant, swnurse
 	Valued:
@@ -8872,7 +8872,7 @@ swupcloning:
 		Name: Cloning
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases passive income from Banthas, and Nerfs by 50%  in the Nursery.
 		Prerequisites: ~!swupcloning, swupgenetics, swnurse
 	Valued:
@@ -8888,7 +8888,7 @@ swupirrigation:
 		Name: Irrigation
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Food Proc Center can make more farms.
 		Prerequisites: ~!swupirrigation, swfood
 	Valued:

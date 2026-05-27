@@ -741,9 +741,9 @@ Player:
 		Range: 5c0
 	-WithDeathAnimation:
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	ProvidesPrerequisite@alpha:
 		Prerequisite: bodies.alpha
 		Factions: alpha
@@ -2509,9 +2509,9 @@ psc2100factory2:
 	StoresResources:
 		Capacity: 3750
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -8420,7 +8420,7 @@ up2100uplmg1:
 		Name: Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100uplmg1
 	Valued:
@@ -8435,7 +8435,7 @@ up2100uptwinmg1:
 		Name: Twin Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100uptwinmg1, ~up2100uplmg3
 	Valued:
@@ -8450,7 +8450,7 @@ up2100uphurricane1:
 		Name: Hurricane AA Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hurricane AA Weapon
 		Prerequisites: ~!2100uphurricane, ~up2100uptwinmg1
 	Valued:
@@ -8465,7 +8465,7 @@ up2100upheavymg1:
 		Name: Heavy Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upheavymg1, ~up2100uplmg4, ~up2100uptwinmg1
 	Valued:
@@ -8480,7 +8480,7 @@ up2100upassaultmg1:
 		Name: Assault Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upassaultmg1, ~up2100uplmg7, ~up2100upheavymg1
 	Valued:
@@ -8495,7 +8495,7 @@ up2100uptwinassaultmg1:
 		Name: Twin Assault Machinegun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100uptwinassaultmg1, ~up2100upsypnaticdata4, ~up2100upassaultmg1
 	Valued:
@@ -8510,7 +8510,7 @@ up2100upflamer1:
 		Name: Flamer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer1
 	Valued:
@@ -8526,7 +8526,7 @@ up2100upflamer2:
 		Name: High Temeperature Gel
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer2, ~up2100upflamer1
 	Valued:
@@ -8541,7 +8541,7 @@ up2100upflamer3:
 		Name: High Temeperature Gel MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer3, ~up2100upflamer2
 	Valued:
@@ -8556,7 +8556,7 @@ up2100upflamer4:
 		Name: Flamer Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer4, ~up2100upflamer3
 	Valued:
@@ -8571,7 +8571,7 @@ up2100upflamer5:
 		Name: High Temeperature Gel MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer5, ~up2100upflamer3
 	Valued:
@@ -8586,7 +8586,7 @@ up2100upflamer6:
 		Name: SuperHot Gel
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upflamer6, ~up2100upflamer5
 	Valued:
@@ -8601,7 +8601,7 @@ up2100upinferno1:
 		Name: Inferno Flamer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Inferno Flamer Weapon
 		Prerequisites: ~!up2100upinferno1, ~up2100upflamer6
 	Valued:
@@ -8616,7 +8616,7 @@ up2100upinferno2:
 		Name: SuperHot Gel MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upinferno2, ~up2100upinferno1
 	Valued:
@@ -8632,7 +8632,7 @@ up2100upinferno3:
 		Name: SuperHot Gel MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Machinegun Weapon
 		Prerequisites: ~!up2100upinferno3, ~up2100upinferno2
 	Valued:
@@ -8647,7 +8647,7 @@ up2100uplmg2:
 		Name: Hardened MG Bullets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more damage
 		Prerequisites: ~!up2100uplmg2, ~up2100uplmg1
 	Valued:
@@ -8662,7 +8662,7 @@ up2100uplmg3:
 		Name: APDSB MG Bullets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more damage
 		Prerequisites: ~!up2100uplmg3, ~up2100uplmg2
 	Valued:
@@ -8677,7 +8677,7 @@ up2100uplmg4:
 		Name: APDSB MG Bullets MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more damage
 		Prerequisites: ~!up2100uplmg4, ~up2100uplmg3, ~up2100uptwinmg1
 	Valued:
@@ -8692,7 +8692,7 @@ up2100uplmg5:
 		Name: Chaingun Upgrade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more reload
 		Prerequisites: ~!up2100uplmg5, ~up2100uplmg4, ~up2100upengine1
 	Valued:
@@ -8707,7 +8707,7 @@ up2100uplmg6:
 		Name: Rapid Fire Chaingun
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more reload
 		Prerequisites: ~!up2100uplmg6, ~up2100uplmg5
 	Valued:
@@ -8722,7 +8722,7 @@ up2100uplmg7:
 		Name: Hiper Fire Chaingun
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: MG Weapons make 20% more reload
 		Prerequisites: ~!up2100uplmg7, ~up2100uplmg6
 	Valued:
@@ -8737,7 +8737,7 @@ up2100upengine1:
 		Name: Fuel Injection Engine
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine1
 	Valued:
@@ -8752,7 +8752,7 @@ up2100upengine2:
 		Name: Fuel Injection Engine MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine2, ~up2100upengine1
 	Valued:
@@ -8767,7 +8767,7 @@ up2100upengine3:
 		Name: Fuel Injection Engine MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine3, ~up2100upengine2
 	Valued:
@@ -8782,7 +8782,7 @@ up2100upengine4:
 		Name: Turbo Charger Engine
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100upengine4, ~up2100upengine3
 	Valued:
@@ -8798,7 +8798,7 @@ up2100uplrk1:
 		Name: Mini-Rocket Pod Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk1, ~up2100upengine1
 	Valued:
@@ -8814,7 +8814,7 @@ up2100uplrk2:
 		Name: HE Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk2, ~up2100uplrk1
 	Valued:
@@ -8829,7 +8829,7 @@ up2100uplrk3:
 		Name: HE Rockets MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk3, ~up2100uplrk2
 	Valued:
@@ -8844,7 +8844,7 @@ up2100uplrk4:
 		Name: HE Rockets MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplrk4, ~up2100uplrk3
 	Valued:
@@ -8859,7 +8859,7 @@ up2100uplrk5:
 		Name: Stabilized Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades the Target of Rockets
 		Prerequisites: ~!up2100uplrk5, ~up2100uplrk3
 	Valued:
@@ -8874,7 +8874,7 @@ up2100uplancer1:
 		Name: Lancer AT Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Lancer Weapons
 		Prerequisites: ~!up2100uplancer1, ~up2100uplrk4, ~up2100uplrk5
 	Valued:
@@ -8889,7 +8889,7 @@ up2100uplancer2:
 		Name: HEAT Rocket Warhead
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer2, ~up2100uplancer1
 	Valued:
@@ -8904,7 +8904,7 @@ up2100uplancer3:
 		Name: Improved Rocket Wire Guidance
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer3, ~up2100uplancer2
 	Valued:
@@ -8919,7 +8919,7 @@ up2100uplancer4:
 		Name: HEAT Rocket Warhead MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer4, ~up2100uplancer2
 	Valued:
@@ -8934,7 +8934,7 @@ up2100uplancer5:
 		Name: HEAT Rocket Warhead MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %5 more speed
 		Prerequisites: ~!up2100uplancer5, ~up2100uplancer4
 	Valued:
@@ -8949,7 +8949,7 @@ up2100upbunkerbuster1:
 		Name: Lancer AT Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Lancer Weapons
 		Prerequisites: ~!up2100upbunkerbuster1, ~up2100uplancer1
 	Valued:
@@ -8964,7 +8964,7 @@ up2100uptankkiller1:
 		Name: Tank Killer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Tank Killer Unlock
 		Prerequisites: ~!up2100uptankkiller1, ~up2100uplancer5
 	Valued:
@@ -8979,7 +8979,7 @@ up2100rkarray1:
 		Name: Mini-Rockets Array Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Rockets Mini-Rockets Array
 		Prerequisites: ~!up2100rkarray1, ~up2100uplrk3
 	Valued:
@@ -8995,7 +8995,7 @@ up2100uparmor1:
 		Name: Composite Alloys
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor1
 	Valued:
@@ -9010,7 +9010,7 @@ up2100uparmor2:
 		Name: Composite Alloys MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor2, ~up2100uparmor1, ~up2100upfactorymodule1
 	Valued:
@@ -9025,7 +9025,7 @@ up2100uparmor3:
 		Name: Composite Alloys MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor3, ~up2100uparmor2
 	Valued:
@@ -9040,7 +9040,7 @@ up2100uparmor4:
 		Name: Dense Composite Alloys
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor4, ~up2100uparmor3, ~up2100upsypnaticdata1
 	Valued:
@@ -9055,7 +9055,7 @@ up2100uparmor5:
 		Name: Super Dense Composite Alloys
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor5, ~up2100uparmor4, ~up2100upsypnaticdata4
 	Valued:
@@ -9070,7 +9070,7 @@ up2100uparmor6:
 		Name: Super Dense Composite Alloys MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor6, ~up2100uparmor5
 	Valued:
@@ -9085,7 +9085,7 @@ up2100uparmor7:
 		Name: Super Dense Composite Alloys MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Vehicles gains %10 more HP
 		Prerequisites: ~!up2100uparmor7, ~up2100uparmor6
 	Valued:
@@ -9100,7 +9100,7 @@ up2100upengineer1:
 		Name: Improved Engineering
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Repairs Vehicles
 		Prerequisites: ~!up2100upengineer1, ~up2100upmortar4
 	Valued:
@@ -9115,7 +9115,7 @@ up2100upengineer2:
 		Name: Advanced Engineering
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Repairs Vehicles
 		Prerequisites: ~!up2100upengineer2, ~up2100upengineer1
 	Valued:
@@ -9130,7 +9130,7 @@ up2100upwall1:
 		Name: Wall Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Walls
 		Prerequisites: ~!up2100upwall1
 	Valued:
@@ -9145,7 +9145,7 @@ up2100upwall2:
 		Name: Improved Hardcrete
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall2, ~up2100upwall1
 	Valued:
@@ -9160,7 +9160,7 @@ up2100upwall3:
 		Name: Improved Hardcrete MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall3, ~up2100upwall2
 	Valued:
@@ -9175,7 +9175,7 @@ up2100upwall4:
 		Name: Improved Hardcrete MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall4, ~up2100upwall3
 	Valued:
@@ -9190,7 +9190,7 @@ up2100upwall5:
 		Name: Supercrete
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall5, ~up2100upwall4, ~up2100upengineer1
 	Valued:
@@ -9206,7 +9206,7 @@ up2100upwall6:
 		Name: Supercrete MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall6, ~up2100upwall5
 	Valued:
@@ -9222,7 +9222,7 @@ up2100upwall7:
 		Name: Supercrete MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Defences gains %10 more HP
 		Prerequisites: ~!up2100upwall6, ~up2100upwall7
 	Valued:
@@ -9237,7 +9237,7 @@ up2100upstructure1:
 		Name: Reinforced Base Structure Materials
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Structures gains %10 more HP
 		Prerequisites: ~!up2100upstructure1, ~up2100upwall2
 	Valued:
@@ -9252,7 +9252,7 @@ up2100upstructure2:
 		Name: Reinforced Base Structure Materials MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Structures gains %10 more HP
 		Prerequisites: ~!up2100upstructure2, ~up2100upstructure1
 	Valued:
@@ -9267,7 +9267,7 @@ up2100upstructure3:
 		Name: Reinforced Base Structure Materials MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Structures gains %10 more HP
 		Prerequisites: ~!up2100upstructure3, ~up2100upstructure2
 	Valued:
@@ -9282,7 +9282,7 @@ up2100uplcannon1:
 		Name: Light Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Light Cannon Weapon
 		Prerequisites: ~!2100uplcannon1, ~up2100uplmg2
 	Valued:
@@ -9297,7 +9297,7 @@ up2100uplcannon2:
 		Name: HEAT Cannon Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: UUpgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon2, ~up2100uplcannon1
 	Valued:
@@ -9312,7 +9312,7 @@ up2100uplcannon3:
 		Name: HEAT Cannon Shells MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon3, ~up2100uplcannon2
 	Valued:
@@ -9327,7 +9327,7 @@ up2100uplcannon4:
 		Name: HEAT Cannon Shells MK3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon4, ~up2100uplcannon3
 	Valued:
@@ -9342,7 +9342,7 @@ up2100uplcannon5:
 		Name: APFSDS Cannon Rounds
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon5, ~up2100uplcannon4
 	Valued:
@@ -9357,7 +9357,7 @@ up2100uplcannon6:
 		Name: APFSDS Cannon Rounds MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon6, ~up2100uplcannon5
 	Valued:
@@ -9372,7 +9372,7 @@ up2100uplcannon7:
 		Name: Cannon Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Cannons Weapons Firepower
 		Prerequisites: ~!up2100uplcannon7, ~up2100uplcannon5
 	Valued:
@@ -9387,7 +9387,7 @@ up2100upmcannon1:
 		Name: Medium Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Medium Cannon Weapon
 		Prerequisites: ~!up2100upmcannon1, ~up2100uplcannon2, ~up2100upfactorymodule1
 	Valued:
@@ -9402,7 +9402,7 @@ up2100uphcannon1:
 		Name: Heavy Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Heavy Cannon Weapon
 		Prerequisites: ~!up2100uphcannon1, ~up2100upmcannon1, ~up2100uparmor3
 	Valued:
@@ -9417,7 +9417,7 @@ up2100upacannon1:
 		Name: Assault Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Assault Cannon Weapon
 		Prerequisites: ~!up2100upacannon1, ~up2100uplcannon7, ~up2100upsypnaticdata3
 	Valued:
@@ -9433,7 +9433,7 @@ up2100uphycannon:
 		Name: Hyper Velocity Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hyper Velocity Cannon Weapon
 		Prerequisites: ~!up2100uphycannon, ~up2100uplcannon3, ~up2100upsypnaticdata1
 	Valued:
@@ -9448,7 +9448,7 @@ up2100upneedle:
 		Name: Needle Gun Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Needle Gun Weapon
 		Prerequisites: ~!up2100upneedle, ~up2100uplcannon6, ~up2100upsypnaticdata4
 	Valued:
@@ -9463,7 +9463,7 @@ up2100upflak1:
 		Name: AA Flak Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock AA Flak Weapon
 		Prerequisites: ~!up2100upflak, ~up2100uphycannon
 	Valued:
@@ -9478,7 +9478,7 @@ up2100upa2cannon1:
 		Name: Twin Assault Cannon Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Twin Assault Cannon Weapon
 		Prerequisites: ~!up2100upa2cannon1, ~up2100upacannon1
 	Valued:
@@ -9493,7 +9493,7 @@ up2100upmortar1:
 		Name: Mortar Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Mortar Weapon
 		Prerequisites: ~!up2100upmortar1, ~up2100uplcannon2, ~up2100upfactorymodule1
 	Valued:
@@ -9508,7 +9508,7 @@ up2100upmortar2:
 		Name: HE Mortar Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar2, ~up2100upmortar1
 	Valued:
@@ -9524,7 +9524,7 @@ up2100upmortar3:
 		Name: HE Mortar Research MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar3, ~up2100upmortar2
 	Valued:
@@ -9540,7 +9540,7 @@ up2100upmortar4:
 		Name: Mortar Targeting Computer
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Target
 		Prerequisites: ~!up2100upmortar4, ~up2100upmortar2
 	Valued:
@@ -9556,7 +9556,7 @@ up2100upmortar5:
 		Name: HE Mortar Research MK2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar5, ~up2100upmortar3
 	Valued:
@@ -9571,7 +9571,7 @@ up2100upmortar6:
 		Name: Mortar Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar6, ~up2100upmortar5
 	Valued:
@@ -9586,7 +9586,7 @@ up2100upmortar7:
 		Name: HEAP Mortar Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Mortar Firepower
 		Prerequisites: ~!up2100upmortar7, ~up2100upmortar5
 	Valued:
@@ -9601,7 +9601,7 @@ up2100upbombard1:
 		Name: Bombard Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bombard Weapon
 		Prerequisites: ~!up2100upbombard1, ~up2100upmortar3, ~up2100uparmor1
 	Valued:
@@ -9616,7 +9616,7 @@ up2100uppepper1:
 		Name: Pepperpot Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bombard Weapon
 		Prerequisites: ~!up2100uppepper1, ~up2100upmortar2, ~up2100uparmor1
 	Valued:
@@ -9631,7 +9631,7 @@ up2100uppepper1:
 		Name: Hotwizer Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bombard Weapon
 		Prerequisites: ~!2100uphotwizer1, ~up2100upmortar3, ~up2100uparmor1
 	Valued:
@@ -9646,7 +9646,7 @@ up2100uptracks1:
 		Name: Tracks Propulsion Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Heavy Tracked Vehicles
 		Prerequisites: ~!up2100uptracks1, ~up2100upfactorymodule1, ~up2100uparmor2
 	Valued:
@@ -9661,7 +9661,7 @@ up2100uphover1:
 		Name: Hover Propulsion Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hovercraft Vehicles
 		Prerequisites: ~!up2100uphover1, ~up2100upfactorymodule1, ~up2100upengine2
 	Valued:
@@ -9676,7 +9676,7 @@ up2100upvtols1:
 		Name: Vtol Propulsion Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Vtols Vehicles
 		Prerequisites: ~!up2100upvtols1, ~up2100upfactorymodule1, ~up2100upengine3
 	Valued:
@@ -9691,7 +9691,7 @@ up2100upviper1:
 		Name: Viper Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Viper Vehicles
 		Prerequisites: ~!up2100upviper1, ~bodies.alpha
 	Valued:
@@ -9706,7 +9706,7 @@ up2100upbug1:
 		Name: Bug Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Bug Vehicles
 		Prerequisites: ~!up2100upbug1, ~bodies.paradigm, ~up2100uparmor1
 	Valued:
@@ -9721,7 +9721,7 @@ up2100upcobra1:
 		Name: Cobra Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Cobra Vehicles
 		Prerequisites: ~!up2100upcobra1, ~up2100upviper1, ~bodies.alpha, ~up2100upfactorymodule1
 	Valued:
@@ -9736,7 +9736,7 @@ up2100uppython1:
 		Name: Python Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Python Vehicles
 		Prerequisites: ~!up2100uppython1, ~up2100upcobra1, ~bodies.alpha
 	Valued:
@@ -9751,7 +9751,7 @@ up2100upscorpion1:
 		Name: Scorpion Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Scorpion Vehicles
 		Prerequisites: ~!up2100upscorpion1, ~up2100upbug1, ~bodies.paradigm, ~up2100uparmor2
 	Valued:
@@ -9766,7 +9766,7 @@ up2100upmantis1:
 		Name: Mantis Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Mantis Vehicles
 		Prerequisites: ~!up2100upmantis1, ~up2100upscorpion1, ~bodies.paradigm, ~up2100upengine4, ~up2100upresearchmodule1
 	Valued:
@@ -9781,7 +9781,7 @@ up2100upleopard1:
 		Name: Leopard Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Leopard Vehicles
 		Prerequisites: ~!up2100upleopard1, ~bodies.collective, ~up2100uparmor4
 	Valued:
@@ -9796,7 +9796,7 @@ up2100uppanther1:
 		Name: Panther Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Panther Vehicles
 		Prerequisites: ~!up2100uppanther1, ~up2100upleopard1, ~bodies.collective
 	Valued:
@@ -9811,7 +9811,7 @@ up2100uptiger1:
 		Name: Tiger Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Tiger Vehicles
 		Prerequisites: ~!up2100uptiger1, ~up2100uppanther1, ~bodies.collective
 	Valued:
@@ -9827,7 +9827,7 @@ up2100upretaliaton1:
 		Name: Retaliation Light Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Retaliation Vehicles
 		Prerequisites: ~!up2100upretaliaton1, ~bodies.nexus, ~up2100uparmor5
 	Valued:
@@ -9842,7 +9842,7 @@ up2100upretribution1:
 		Name: Retribution Medium Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Panther Vehicles
 		Prerequisites: ~!up2100upretribution1, ~up2100upretaliaton1, ~bodies.nexus, ~up2100uparmor6
 	Valued:
@@ -9857,7 +9857,7 @@ up2100upvengeance1:
 		Name: Vengeance Heavy Body Research
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Tiger Vehicles
 		Prerequisites: ~!up2100upvengeance1, ~up2100upretribution1, ~bodies.nexus, ~up2100uparmor7
 	Valued:
@@ -9872,7 +9872,7 @@ up2100uppowermodule1:
 		Name: Power Module Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Power Modules
 		Prerequisites: ~!up2100uppowermodule1, ~up2100upengine1
 	Valued:
@@ -9887,7 +9887,7 @@ up2100upfactorymodule1:
 		Name: Factory Module Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Factory Modules
 		Prerequisites: ~!up2100upfactorymodule1, ~up2100uppowermodule1
 	Valued:
@@ -9902,7 +9902,7 @@ up2100upresearchmodule1:
 		Name: Research Center Module Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Research Center Modules
 		Prerequisites: ~!up2100upresearchmodule1, ~up2100uppowermodule1
 	Valued:
@@ -9917,7 +9917,7 @@ up2100upsypnaticdata1:
 		Name: Synaptic Link Data Analysis
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata1, ~up2100upresearchmodule1
 	Valued:
@@ -9932,7 +9932,7 @@ up2100upsypnaticdata2:
 		Name: Synaptic Link Data Analysis Mk2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata2, ~up2100upsypnaticdata1
 	Valued:
@@ -9948,7 +9948,7 @@ up2100upsypnaticdata3:
 		Name: Synaptic Link Data Analysis Mk3
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata3, ~up2100upsypnaticdata2
 	Valued:
@@ -9964,7 +9964,7 @@ up2100upsypnaticdata4:
 		Name: Neural Synapse Research Brain
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade Research Speed
 		Prerequisites: ~!up2100upsypnaticdata4, ~up2100upsypnaticdata3
 	Valued:

@@ -2386,13 +2386,13 @@ hq.orange:
 		QueuedAudio: Building
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	ProvidesRadar:
 	BaseBuilding:
 	ProductionBar@BuildingGDI:
@@ -11996,7 +11996,7 @@ awupduster:
 		Name: Duster Bombs
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: The Duster will drop mini bombs.
 		Prerequisites: ~!awupduster, awlab
 	Valued:
@@ -12011,7 +12011,7 @@ awupcapture:
 		Name: Capture Building
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow anti-personnel infantry to capture base buildings.\nAlt-click to capture enemy base buildings.
 		Prerequisites: ~!upgecapture
 	Valued:
@@ -12027,7 +12027,7 @@ awupsystem1:
 		Name: Software Update 1
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock new units.
 		Prerequisites: ~!awupsystem1
 	Valued:
@@ -12042,7 +12042,7 @@ awupsystem2:
 		Name: Software Update 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock new units.
 		Prerequisites: ~!awupsystem2, awupsystem1
 	Valued:
@@ -12057,7 +12057,7 @@ awuptiberium:
 		Name: Tiberium Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: The Black Hole Investigates Tiberium weaponry.
 		Prerequisites: ~!awuptiberium, awlab, ~disabled
 	Valued:
@@ -12073,7 +12073,7 @@ awupwall:
 		Name: Durable Wall Research
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Improves walls durability
 		Prerequisites: ~!awupwall
 	Valued:

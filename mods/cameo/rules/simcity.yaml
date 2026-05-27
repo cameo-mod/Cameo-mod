@@ -886,7 +886,7 @@ CITYPD:
 		Produces: RAVehicle
 		RequiresCondition: classicproductionqueues
 	Production@UPGRADEPOLICECITY:
-		Produces: Upgrades
+		Produces: Research
 	ProductionQueue:
 		Type: Vehicle
 		DisplayOrder: 3
@@ -905,7 +905,7 @@ CITYPD:
 		ProductionType: RAVehicle
 		RequiresCondition: classicproductionqueues
 	ProductionBar@UPGRADEPOLICECITY:
-		ProductionType: Upgrades
+		ProductionType: Research
 	ProvidesPrerequisite:
 		Prerequisite: Police Department
 	WithIdleOverlay@HQ:
@@ -2197,7 +2197,7 @@ simcity_smg:
 		Name: Submachine Guns
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 100
 		Description: Law Enforcements gets Low Accurate Submachine Guns instead of Handguns\nIncreases damage against Vehicles but decreases damage against Infantry
@@ -2214,7 +2214,7 @@ simcity_bpv:
 		Name: Bulletproof vests
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: All units produced at Police Departments gets Bulletproof vests reducing damage taken
@@ -2231,7 +2231,7 @@ simcity_gl:
 		Name: Grenade Launcher
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 100
 		Description: S.W.A.T Specialists will get Grenade Launcher that can Siege Buildings and other static targets
@@ -2248,7 +2248,7 @@ simcity_taser:
 		Name: Taser Speed
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 4500
 		BuildDurationModifier: 100
 		Description: Police Cars and SWAT Vans will shoot their tasers 50% faster
