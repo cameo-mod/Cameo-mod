@@ -689,8 +689,8 @@ WOLFSTEK:
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite:
 		Prerequisite: tek
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 
 WOLFSTATUE:
 	Inherits: ^WolfBuildingBig
@@ -1884,7 +1884,7 @@ wolfupdogfood:
 		Name: Dog Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dogs HP.
 		Prerequisites: ~!wolfupdogfood
 	Valued:
@@ -1899,7 +1899,7 @@ wolfupfood:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry HP.
 		Prerequisites: ~!wolfupfood
 	Valued:
@@ -1914,7 +1914,7 @@ wolfupmedikit:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry HP.
 		Prerequisites: ~!wolfupmedikit
 	Valued:
@@ -1929,7 +1929,7 @@ wolfupmonition:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry Reload.
 		Prerequisites: ~!wolfupmonition
 	Valued:
@@ -1944,7 +1944,7 @@ wolfupguns:
 		Name: Food
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Infantry Damage.
 		Prerequisites: ~!wolfupguns
 	Valued:
@@ -1959,7 +1959,7 @@ wolfuptreasure1:
 		Name: Valuable Treasures 1
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure1
 	Valued:
@@ -1975,7 +1975,7 @@ wolfuptreasure2:
 		Name: Valuable Treasures 2
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure2, wolfuptreasure1
 	Valued:
@@ -1991,7 +1991,7 @@ wolfuptreasure3:
 		Name: Valuable Treasures 3
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure3, wolfuptreasure2
 	Valued:
@@ -2007,7 +2007,7 @@ wolfuptreasure4:
 		Name: Valuable Treasures 4
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Treasure Vaults generate money.
 		Prerequisites: ~!wolfuptreasure4, wolfuptreasure3
 	Valued:

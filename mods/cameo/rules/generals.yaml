@@ -2367,10 +2367,10 @@ glpalace:
 		QuantizedFacings: 8
 	RangeMultiplier@Extrarange:
 		Modifier: 175
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	DetectCloaked:
 		Range: 2c0
 	-RenderDetectionCircle:
@@ -2552,10 +2552,10 @@ glblackmarket:
 		Interval: 25
 		Amount: 25
 	UpdatesDerrickCount:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Voiced:
 		VoiceSet: GLBlackMarketVoice
 	SpawnActorOnDeath@hole:
@@ -4991,7 +4991,7 @@ upscorpionrocket:
 		Name: Scorpion Rocket
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allows Scorpion Tanks to launch rockets.
 		Prerequisites: ~!upscorpionrocket, ~!selectglacamo
 	Valued:
@@ -5007,7 +5007,7 @@ uparmthemob:
 		Name: Arm the Mob
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Arm Angry Mob members with assault rifles and molotovs.
 		Prerequisites: ~!uparmthemob
 	Valued:
@@ -5023,7 +5023,7 @@ uprebelcamo:
 		Name: Camouflage
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Rebels to cloak when stationary.
 		Prerequisites: ~!uprebelcamo, ~!selectglatoxin, ~!selectglademo, ~!selectglacamo, ~!sgla
 	Valued:
@@ -5039,7 +5039,7 @@ upcamonetting:
 		Name: Camo Netting
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cloaks defensive structures.
 		Prerequisites: ~!upcamonetting, ~upcamonettingprereq
 	Valued:
@@ -5055,7 +5055,7 @@ upcamonetting2:
 		Name: Camo Netting
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cloaks all structures.
 		Prerequisites: ~!upcamonetting2, ~selectglacamo
 	Valued:
@@ -5073,7 +5073,7 @@ upglfort:
 		Name: Fortified Structure
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of all buildings.
 		Prerequisites: ~!upglfort
 	Valued:
@@ -5089,7 +5089,7 @@ uparmorpiercingrocket:
 		Name: Armor-Piercing Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All GLA rocket units attack with 25% more damage.
 		Prerequisites: ~!uparmorpiercingrocket
 	Valued:
@@ -5105,7 +5105,7 @@ uparmorpiercingbullet:
 		Name: Armor-Piercing Bullets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All GLA MG units attack with 25% more damage.
 		Prerequisites: ~!uparmorpiercingbullet
 	Valued:
@@ -5121,7 +5121,7 @@ upjunkrepair:
 		Name: Junk Repair
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow all GLA vehicles to self-repair.
 		Prerequisites: ~!upjunkrepair
 	Valued:
@@ -5137,7 +5137,7 @@ uptoxinshells:
 		Name: Toxin Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow tanks to fire toxin shells.
 		Prerequisites: ~!uptoxinshells, ~!selectglacamo, ~!sgla_camo, ~!sgla_toxin, ~!sgla_demo
 	Valued:
@@ -5153,7 +5153,7 @@ upantraxbeta:
 		Name: Anthrax Beta
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of toxin weapons.
 		Prerequisites: ~!upantraxbeta
 	Valued:
@@ -5169,7 +5169,7 @@ updemolition:
 		Name: Demolition
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All GLA units and defenses explode on death.
 		Prerequisites: ~!updemolition, ~selectglademo
 	Valued:
@@ -5185,7 +5185,7 @@ upnewshoes:
 		Name: Worker Shoes
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases speed of Workers.
 		Prerequisites: ~!upnewshoes
 	Valued:
@@ -5201,7 +5201,7 @@ upbuggyammo:
 		Name: Buggy Ammo
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Doubles rockets fired by Rocket Buggies.
 		Prerequisites: ~!upbuggyammo
 	Valued:
@@ -5217,7 +5217,7 @@ upantraxgamma:
 		Name: Anthrax Gamma
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of toxin weapons.
 		Prerequisites: ~upantraxbeta, ~!upantraxgamma, ~selectglatoxin
 	Valued:
@@ -5233,7 +5233,7 @@ upradarvanscan:
 		Name: Radar Van Scan
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Radar Vans to reveal areas of the map.
 		Prerequisites: ~!upradarvanscan
 		Icon: radarvan
@@ -6338,10 +6338,10 @@ chpropaganda:
 	LaysMinefield@minefield:
 		Locations: 0,-1, 1,-1, 2,-1, 3,-1, -1,0, -1,1, 4,0, 4,1, 0,2, 1,2, 2,2, 3,2
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -40
 	Voiced:
@@ -6428,10 +6428,10 @@ chinternetcenter:
 	LaysMinefield@minefield:
 		Locations: 0,0, 1,0, 2,0, 3,0, -1,1, -1,2, 4,1, 4,2, 0,3, 1,3, 2,3, 3,3
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -80
 	Cargo:
@@ -6685,10 +6685,10 @@ chsilo:
 	DetectCloaked:
 		Range: 5c0
 		RequiresCondition: !lowpower
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	NukePower@unlimited:
 		AllowMultiple: True
 		Prerequisites: ~techlevel.superweapons
@@ -8584,7 +8584,7 @@ upchaingun:
 		Name: Chainguns
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases firing rate of units using Gattling weapons.
 		Prerequisites: ~!upchaingun
 	Valued:
@@ -8603,7 +8603,7 @@ upnationalism:
 		Name: Nationalism
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effect of the Horde Bonus.
 		Prerequisites: ~!upnationalism, ~gennationalismprereq
 	Valued:
@@ -8622,7 +8622,7 @@ upuraniumshell:
 		Name: Uranium Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Battlemaster and Overlord damage.
 		Prerequisites: ~!upuraniumshell, ~gennationalismprereq
 	Valued:
@@ -8638,7 +8638,7 @@ upatomictank:
 		Name: Nuclear Tanks
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Battlemaster and Overlord speed.
 		Prerequisites: ~!upatomictank, ~genatomictanksprereq
 	Valued:
@@ -8654,7 +8654,7 @@ upisotopestability:
 		Name: Isotope Stability
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Nuclear tank explosions do not damage friendly units\nor leave radiation.
 		Prerequisites: ~!upisotopestability, ~selectchatomic
 	Valued:
@@ -8670,7 +8670,7 @@ upbluefire:
 		Name: Black Napalm
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of incendiary weapons.
 		Prerequisites: ~!upbluefire
 	Valued:
@@ -8689,7 +8689,7 @@ upneutronshell:
 		Name: Neutron Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Gives Nuke Cannons neutron munitions.\nCan kill vehicle passengers and drivers, allowing them\nto be captured.
 		Prerequisites: upnukecann, ~!upneutronshell, ~genneutronshellsprereq
 	Valued:
@@ -8705,7 +8705,7 @@ upmigarmor:
 		Name: MiG Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of MiGs.
 		Prerequisites: ~!upmigarmor, ~!schina_tank, ~!schina_nuke
 	Valued:
@@ -8721,7 +8721,7 @@ upautoload:
 		Name: Auto Loader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases firing rate of Battlemasters.
 		Prerequisites: ~!upautoload, ~selectchtanks
 	Valued:
@@ -8737,7 +8737,7 @@ upsubliminal:
 		Name: Subliminal Messaging
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of propaganda.
 		Prerequisites: ~!upsubliminal
 	Valued:
@@ -8757,7 +8757,7 @@ upmignuke:
 		Name: Tactical Nuke MiG
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allows MiGs to use nuclear missiles.
 		Prerequisites: ~!upmignuke, ~selectchatomic
 	Valued:
@@ -8773,7 +8773,7 @@ upsathack:
 		Name: Satellite Hack 1
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Reveals all command centers.
 		Prerequisites: ~!upsathack
 	Valued:
@@ -8789,7 +8789,7 @@ upsathack2:
 		Name: Satellite Hack 2
 	Buildable:
 		BuildPaletteOrder: 250
-		Queue: Upgrades
+		Queue: Research
 		Description: Reveals all buildings and troop movements.
 		Prerequisites: ~!upsathack2, upsathack
 	Valued:
@@ -9533,7 +9533,7 @@ uplandmines:
 		Name: Land Mines
 	Buildable:
 		BuildPaletteOrder: 190
-		Queue: Upgrades
+		Queue: Research
 		Description: Protects buildings with landmines.
 		Prerequisites: ~!uplandmines
 	Valued:
@@ -9549,7 +9549,7 @@ upneutronmines:
 		Name: Neutron Mines
 	Buildable:
 		BuildPaletteOrder: 190
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades landmines to Neutron Mines.\nKills infantry and vehicle passengers.
 		Prerequisites: uplandmines, ~!upneutronmines, chsilo
 	Valued:
@@ -11789,10 +11789,10 @@ usastrategy:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -50
 	Voiced:
@@ -12977,7 +12977,7 @@ usaupgrenade:
 		Name: Flash-bang grenades
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Rangers to use flashbangs.\nFlashbangs stuns infantry and damages garrisoned soldiers
 		Prerequisites: ~!usaupgrenade, ~!susa_armor
 	Valued:
@@ -12993,7 +12993,7 @@ usauptowmiss:
 		Name: TOW Missile
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Equips Humvees with TOW missiles.
 		Prerequisites: ~!usauptowmiss, ~!susa_super, ~!susa_laser, ~!susa_armor
 	Valued:
@@ -13009,7 +13009,7 @@ usaupdronegun:
 		Name: Sentry Drone Gun
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Arms the Sentry Drone with a machine gun.
 		Prerequisites: ~!usaupdronegun, ~!susa_armor
 	Valued:
@@ -13025,7 +13025,7 @@ usaupchemsuit:
 		Name: Chemical Suit
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Makes infantry immune to lingering toxin weapons.
 		Prerequisites: ~!usaupchemsuit
 	Valued:
@@ -13041,7 +13041,7 @@ usauparmor:
 		Name: Composite Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of all ground vehicles.
 		Prerequisites: ~!usauparmor, ~!susa_laser, ~!susa_air
 	Valued:
@@ -13057,7 +13057,7 @@ usauplasmiss:
 		Name: Laser-Guided Missiles
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases damage done by aircraft by 25%.
 		Prerequisites: ~!usauplasmiss, ~!susa_laser
 	Valued:
@@ -13073,7 +13073,7 @@ usaupsupplylines:
 		Name: Supply lines
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases income from Supply Drops and Chinooks.
 		Prerequisites: ~!usaupsupplylines
 	Valued:
@@ -13089,7 +13089,7 @@ usabombardament:
 		Name: Bombardment (Battle Plan)
 	Buildable:
 		BuildPaletteOrder: 10
-		Queue: Upgrades
+		Queue: Research
 		Description: All units deal 25% more damage\nAllows Strategy Centers to use bombardment\n\nUpgrading this will disable other Battle Plans
 		Prerequisites: ~!usabombardmentc, ~!usasearchndestroyc, ~!usaholdthelinec
 		BuildDuration: 250
@@ -13107,7 +13107,7 @@ usasearchndestroy:
 		BuildPaletteOrder: 10
 		BuildDuration: 250
 		BuildDurationModifier: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: All units have 25% more range\n\nUpgrading this will disable other Battle Plans
 		Prerequisites: ~!usabombardmentc, ~!usasearchndestroyc, ~!usaholdthelinec
 	RenderSprites:
@@ -13121,7 +13121,7 @@ usaholdtheline:
 		Name: Hold the Line (Battle Plan)
 	Buildable:
 		BuildPaletteOrder: 10
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		Description: All units take 20% less damage\n\nUpgrading this will disable other Battle Plans
@@ -13137,7 +13137,7 @@ usaupbunkerbuster:
 		Name: Bunker Busters
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allow Stealth Fighters to clear out garrisons.
 		Prerequisites: ~!usaupbunkerbuster
 	Valued:
@@ -13151,7 +13151,7 @@ usaupcounter:
 		Name: Countermeasures
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of aircraft.
 		Prerequisites: ~!usaupcounter, ~!susa_laser, !susa_air
 	Valued:
@@ -13167,7 +13167,7 @@ usauptraining:
 		Name: Advanced Training
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All ground units gain experience faster.
 		Prerequisites: ~!usauptraining
 	Valued:
@@ -13183,7 +13183,7 @@ usaupdronearmor:
 		Name: Drone Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases durability of drones.
 		Prerequisites: ~!usaupdronearmor
 	Valued:
@@ -13202,7 +13202,7 @@ upstealthcomanche:
 		Name: Stealth Comanche
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cloaks Comanches.
 		Prerequisites: ~!upstealthcomanche, ~selectusaairforce
 		BuildDuration: 1500
@@ -13733,7 +13733,7 @@ upusamotherbomb:
 		Name: Mother Of All Bombs
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Allows use of MOAB strikes.
 		Prerequisites: ~upusafuelbomb, ~!upusamotherbomb
 	Valued:
@@ -14032,10 +14032,10 @@ leangbunker:
 
 leangstorm:
 	Inherits: glstorm
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: chairport, leangweap, ~techlevel.superweapons, !scudstorm
@@ -14047,10 +14047,10 @@ leangstorm:
 
 leangsilo:
 	Inherits: chsilo
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: chairport, leangweap, ~techlevel.high, !chinanuke
@@ -14060,10 +14060,10 @@ leangsilo:
 
 leangcannon:
 	Inherits: usacannon
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: chairport, leangweap, ~techlevel.superweapons, !particlecannon

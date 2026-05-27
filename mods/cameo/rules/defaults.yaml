@@ -1774,7 +1774,7 @@
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 0
-		Queue: Addons
+		Queue: Research
 		Description: Doctrine Description
 		Prerequisites: ~disabled
 	RenderSprites:
@@ -1791,7 +1791,7 @@
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Addons
+		Queue: Research
 		Description: Unit Upgrade Description
 		Prerequisites: ~disabled
 	RenderSprites:
@@ -1808,7 +1808,7 @@
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 0
-		Queue: Upgrades
+		Queue: Research
 		Description: Tech Upgrade Description
 		Prerequisites: ~disabled
 	RenderSprites:
@@ -1825,7 +1825,7 @@
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		Description: Team Upgrade Description
 		Prerequisites: ~disabled
 	RenderSprites:
@@ -7219,10 +7219,6 @@ CPQDEBUGDUMMY:
 	ProductionBar@RADEFENCE:
 		ProductionType: RADefence
 		RequiresCondition: classicproductionqueues || hybridproductionqueues
-	Production@Addons:
-		Produces: Addons
-	Production@BuildingAddons:
-		Produces: BuildingAddons
 	Inherits@susaintelligence: ^susaintelligence
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@conyard:
@@ -7800,10 +7796,6 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !jammed && !disabled
 	ExternalCondition@JAMMED:
 		Condition: jammed
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
 	FreeActor@CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	ProvidesPrerequisite@buildingname:
@@ -7837,10 +7829,10 @@ CPQDEBUGDUMMY:
 		DetectionTypes: Cloak, AirCloak, GroundCloak, Underwater, Hijacker
 		RequiresCondition: !disabled
 	RenderDetectionCircle:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	FreeActor@CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	ProvidesPrerequisite@buildingname:

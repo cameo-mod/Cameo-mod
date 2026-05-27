@@ -1597,7 +1597,7 @@ taupsmokegrenades:
 		Name: Smoke Grenade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Smoke grenade for GDI Rifleman \n Disables buildings
 		Prerequisites: ~!taupsmokegrenades, barracks
 	Valued:
@@ -1613,7 +1613,7 @@ taupmissilestorm:
 		Name: Missile Storm
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: GDI missile soldies fire faster
 		Prerequisites: ~!taupmissilestorm, barracks
 	Valued:
@@ -1629,7 +1629,7 @@ taupcharge:
 		Name: Zone Trooper Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Zone Trooper Speed
 		Prerequisites: ~!taupcharge, barracks
 	Valued:
@@ -1645,7 +1645,7 @@ taupcharge2:
 		Name: Commando Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Commando Speed
 		Prerequisites: ~!taupcharge2, barracks, taupcharge
 	Valued:
@@ -1661,7 +1661,7 @@ tauplaserscope:
 		Name: Laser Scope
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Sniper Shoot Range
 		Prerequisites: ~!tauplaserscope, barracks
 	Valued:
@@ -1677,7 +1677,7 @@ taupflashbang:
 		Name: Flashbang
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Bulldog Unlocks Flashbang grenades \n Efective vs Infantry
 		Prerequisites: ~!taupflashbang, vehicleproduction
 	Valued:
@@ -1693,7 +1693,7 @@ taupheatcannon:
 		Name: HEAT-MP-T
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Predator Firepower
 		Prerequisites: ~!taupheatcannon, vehicleproduction
 	Valued:
@@ -1709,7 +1709,7 @@ taupbarrage:
 		Name: Barrage
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Juggernaut munition
 		Prerequisites: ~!taupbarrage, vehicleproduction
 	Valued:
@@ -1725,7 +1725,7 @@ taupbatteringram:
 		Name: Battering Ram
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Mammoth Firepower and Speed
 		Prerequisites: ~!taupbatteringram, vehicleproduction
 	Valued:
@@ -1741,7 +1741,7 @@ taupstealth1:
 		Name: Stealth Militant
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Stealth Ability for Nod Militants
 		Prerequisites: ~!taupstealth1, barracks
 	Valued:
@@ -1757,7 +1757,7 @@ taupdefence1:
 		Name: Defense Matrix Rocket Militants
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Armot of Rocket Militants
 		Prerequisites: ~!taupdefence1, barracks
 	Valued:
@@ -1773,7 +1773,7 @@ taupflamer1:
 		Name: Conflagration
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Blackhand causes more Damage
 		Prerequisites: ~!taupflamer1, barracks
 	Valued:
@@ -1788,7 +1788,7 @@ taupstealth2:
 		Name: Stealth Commando
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Stealth Ability for Nod Commandos
 		Prerequisites: ~!taupstealth2, taupstealth1, barracks
 	Valued:
@@ -1804,7 +1804,7 @@ taupdefence2:
 		Name: Defense Matrix Confessor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Armot of Confessor
 		Prerequisites: ~!taupdefence2, barracks, taupdefence1
 	Valued:
@@ -1820,7 +1820,7 @@ taupshield1:
 		Name: Shields
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Armor of Attack Bike
 		Prerequisites: ~!taupshield1, vehicleproduction
 	Valued:
@@ -1836,7 +1836,7 @@ tauplasercut1:
 		Name: Laser Cutter
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Adds a frontal Bumper with Laser fence /n Attack nearby Infantry
 		Prerequisites: ~!tauplasercut1, vehicleproduction
 	Valued:
@@ -1851,7 +1851,7 @@ taupstealth3:
 		Name: Stealth Specter
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Stealth Ability for Specter
 		Prerequisites: ~!taupstealth2, taupstealth1, vehicleproduction
 	Valued:
@@ -1867,7 +1867,7 @@ tauptrade1:
 		Name: Tiberium Trade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Trade center Income
 		Prerequisites: ~!tauptrade1, vehicleproduction
 	Valued:
@@ -1882,7 +1882,7 @@ tauptrade2:
 		Name: Crystal Trade
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Trade center Income
 		Prerequisites: ~!tauptrade2, tauptrade1
 	Valued:
@@ -1897,7 +1897,7 @@ taupenergy1:
 		Name: Buy Energy
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Energy Plants Power
 		Prerequisites: ~!taupenergy1, tauptrade1
 	Valued:
@@ -1913,7 +1913,7 @@ taupbarbaric2:
 		Name: Barbaric Blow
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Reload Speed of Mutant Soldiers
 		Prerequisites: ~!taupbarbaric2, barracks
 	Valued:
@@ -1930,7 +1930,7 @@ taupbarbaric:
 		Name: Barbaric Blow
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrade the Reload Speed of Mutant Commando
 		Prerequisites: ~!taupbarbaric, taupbarbaric2
 	Valued:
@@ -1946,7 +1946,7 @@ taupchemical1:
 		Name: Chemical Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Adds Chemical Rockets to Mutant Missiles
 		Prerequisites: ~!taupchemical1, barracks
 	Valued:
@@ -1962,7 +1962,7 @@ taupchemical2:
 		Name: Big Chemical Rockets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Adds Chemical Rockets to Iron Fist
 		Prerequisites: ~!taupchemical2, taupchemical1
 	Valued:
@@ -1981,7 +1981,7 @@ taupguidedmiss:
 		Name: Guided Missiles
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: GDI Flak Bunker, adds a little SAM Launcher
 		Prerequisites: ~!taupguidedmiss, tagdihq2
 	Valued:
@@ -1997,7 +1997,7 @@ taupsrarms1:
 		Name: Short-Range Arms
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Nod Obelisk Artillery, adds a little short range laser
 		Prerequisites: ~!taupsrarms1, tanodhq2
 	Valued:
@@ -4460,9 +4460,9 @@ tagdihq:
 		Prerequisite: anyhq
 	ProvidesPrerequisite@buildingname:
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	GrantConditionOnPrerequisite@levelupgrade1:
 		Condition: levelupgrade1
 		Prerequisites: Addonshq1
@@ -4481,9 +4481,9 @@ tanodhq:
 		BuildPaletteOrder: 110
 		Prerequisites: tanodref, ~techlevel.medium
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	GrantConditionOnPrerequisite@levelupgrade1:
 		Condition: levelupgrade1
 		Prerequisites: Addonshq1
@@ -4500,9 +4500,9 @@ tamuthq:
 		BuildPaletteOrder: 110
 		Prerequisites: tamutref, ~techlevel.medium
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 tagdihq2:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
@@ -5220,9 +5220,9 @@ taelechq:
 		BuildPaletteOrder: 110
 		Prerequisites: tagdiref, ~techlevel.medium
 	Production:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar:
-		ProductionType: Upgrades
+		ProductionType: Research
 	RenderSprites:
 		Image: tagdihq
 	ProvidesPrerequisite@tagdihq:

@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@gdi:
 		Name: GDI TD #faction-td-gdi.name
 		InternalName: gdi
@@ -2794,6 +2794,7 @@ HPAD.NOD:
 HQ.GDI:
 	Inherits: ^TDBuilding
 	Inherits@radar: ^RadarBuilding
+	Inherits@tech: ^IsTechnoBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@spy: ^InfiltrateForSupportPowerReset
 	Inherits@shape: ^2x2Shape
@@ -2853,6 +2854,7 @@ HQ.GDI:
 HQ.Nod:
 	Inherits: ^TDBuilding
 	Inherits@radar: ^RadarBuilding
+	Inherits@tech: ^IsTechnoBuilding
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@spy: ^InfiltrateForSupportPowerReset
 	Inherits@shape: ^2x2Shape
@@ -2996,8 +2998,6 @@ EYE:
 	RevealsShroud@SWReveal:
 		RequiresCondition: swreveal && ionc
 	SupportPowerChargeBar:
-	-Production@Addons:
-	-ProductionBar@Addons:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: ionc
 		RequiresCondition: ionc
@@ -3119,8 +3119,6 @@ TMPL:
 	RevealsShroud@SWReveal:
 		RequiresCondition: swreveal && nuke
 	SupportPowerChargeBar:
-	-Production@Addons:
-	-ProductionBar@Addons:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: nodnuke
 		RequiresCondition: nuke
@@ -3174,8 +3172,6 @@ td_nod_templeprime:
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Tooltip:
 		Name: Temple Prime
-	-Production@Addons:
-	-ProductionBar@Addons:
 	ProvidesPrerequisite:
 		Prerequisite: anytdhq
 	Buildable:
@@ -4233,7 +4229,7 @@ up_guerillatactics:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: upgrade-guerillatactics.description
 		Prerequisites: ~hq.nod, !up_guerillatactics
 	RenderSprites:
@@ -4248,7 +4244,7 @@ up_tiberiuminfusion:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: upgrade-tiberiuminfusion.description
 		Prerequisites: ~hq.nod, !up_tiberiuminfusion
 	RenderSprites:
@@ -4263,7 +4259,7 @@ up_improvedartilleries:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: upgrade-improvedartilleries.description
 		Prerequisites: ~hq.nod, !up_improvedartilleries
 	RenderSprites:
@@ -4278,7 +4274,7 @@ up_blackmarketupgrades:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-blackmarketupgrades.description
 		Prerequisites: ~tmpl, !up_blackmarketupgrades
 	RenderSprites:
@@ -4293,7 +4289,7 @@ up_elementalwarfare:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-elementalwarfare.description
 		Prerequisites: ~tmpl, !up_elementalwarfare
 	RenderSprites:
@@ -4308,7 +4304,7 @@ up_elitecapacitors:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-elitecapacitors.description
 		Prerequisites: ~tmpl, td_nod_templeprime, !up_elitecapacitors
 	RenderSprites:
@@ -4323,7 +4319,7 @@ up_cyberneticmodifications:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-cyberneticmodifications.description
 		Prerequisites: ~tmpl, td_nod_templeprime, !up_cyberneticmodifications
 	RenderSprites:
@@ -4338,7 +4334,7 @@ up_advancedguerillatactics:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-advancedguerillatactics.description
 		Prerequisites: ~tmpl, td_nod_templeprime, up_guerillatactics, !up_advancedguerillatactics
 	RenderSprites:
@@ -5456,7 +5452,7 @@ up_longrangesensors:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: upgrade-longrangesensors.description
 		Prerequisites: ~hq.gdi, !up_longrangesensors
 	RenderSprites:
@@ -5471,7 +5467,7 @@ up_armorpiercingbullets:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: upgrade-armorpiercingbullets.description
 		Prerequisites: ~hq.gdi, !up_armorpiercingbullets
 	RenderSprites:
@@ -5486,7 +5482,7 @@ up_a10airstrike:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Research
 		Description: upgrade-a10airstrike.description
 		Prerequisites: ~hq.gdi, !up_a10airstrike
 	RenderSprites:
@@ -5501,7 +5497,7 @@ up_heavyaircraftarmorplating:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-heavyaircraftarmorplating.description
 		Prerequisites: ~eye, !up_heavyaircraftarmorplating
 	RenderSprites:
@@ -5516,7 +5512,7 @@ up_advancedmissiletargeting:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-advancedmissiletargeting.description
 		Prerequisites: ~eye, !up_advancedmissiletargeting
 	RenderSprites:
@@ -5531,7 +5527,7 @@ up_cuttingedgeequipment:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-cuttingedgeequipment.description
 		Prerequisites: ~eye, !up_cuttingedgeequipment
 	RenderSprites:
@@ -5546,7 +5542,7 @@ up_highvelocitycannons:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-highvelocitycannons.description
 		Prerequisites: ~eye, !up_highvelocitycannons
 	RenderSprites:
@@ -5561,7 +5557,7 @@ up_lightweightarmorplating:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-lightweightarmorplating.description
 		Prerequisites: ~eye, !up_lightweightarmorplating
 	RenderSprites:

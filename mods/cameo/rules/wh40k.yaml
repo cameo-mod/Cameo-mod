@@ -1635,8 +1635,8 @@ wh40karmory:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -1677,7 +1677,7 @@ wh40kweap:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades
 	Production@NORMAL:
 		Produces: Vehicle
@@ -1920,7 +1920,7 @@ wh40kmars:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades
 	Production@NORMAL:
 		Produces: Vehicle
@@ -2145,7 +2145,7 @@ wh40kuphonor:
 		Name: Death before Dishonor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmen health by 10%.
 		Prerequisites: ~!wh40kuphonor
 	Valued:
@@ -2161,7 +2161,7 @@ wh40kupguardarmor:
 		Name: Battle Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmens to 15% of health.
 		Prerequisites: ~!wh40kupguardarmor
 	Valued:
@@ -2177,7 +2177,7 @@ wh40kupguardemperor:
 		Name: Will of the Emperor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmens to 15% of health.
 		Prerequisites: ~!wh40kupguardemperor, wh40kupbattlecommand
 	Valued:
@@ -2193,7 +2193,7 @@ wh40kupsateliterange:
 		Name: Satellite Targeting Resolution
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Guardsmens to 20% of shoot range.
 		Prerequisites: ~!wh40kupsateliterange, wh40kupbattlecommand
 	Valued:
@@ -2209,7 +2209,7 @@ wh40kupweapspecialization:
 		Name: Weapon Specialization
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Infantry firepower by 15%.
 		Prerequisites: ~!wh40kupweapspecialization, wh40kupsateliterange
 	Valued:
@@ -2224,7 +2224,7 @@ wh40kuppoweredbayonets:
 		Name: Powered Bayonets
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Ogryn firepower by 15%.
 		Prerequisites: ~!wh40kuppoweredbayonets, wh40kupogrynquarters
 	Valued:
@@ -2240,7 +2240,7 @@ wh40kupbattlecommand:
 		Name: Battle Command
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Field Command to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupbattlecommand, barracks
 	Valued:
@@ -2255,7 +2255,7 @@ wh40kupregimentalcommand:
 		Name: Regimental Command
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Field Command to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupregimentalcommand, wh40kupbattlecommand, vehicleproduction
 	Valued:
@@ -2271,7 +2271,7 @@ wh40kupogrynquarters:
 		Name: Ogryn Quarters
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Ogryns.
 		Prerequisites: ~!wh40kupogrynquarters, wh40kupregimentalcommand
 	Valued:
@@ -2286,7 +2286,7 @@ wh40kupkasrkinquarters:
 		Name: Kasrkin Quarters
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Ogryns.
 		Prerequisites: ~!wh40kupkasrkinquarters, wh40kupregimentalcommand
 	Valued:
@@ -2301,7 +2301,7 @@ wh40kupsentineldepot:
 		Name: Sentinel Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Sentinels.
 		Prerequisites: ~!wh40kupsentineldepot, wh40kupbattlecommand
 	Valued:
@@ -2316,7 +2316,7 @@ wh40kuphellhounddepot:
 		Name: Hellhound Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Hellhounds.
 		Prerequisites: ~!wh40kuphellhounddepot, wh40kupbattlecommand
 	Valued:
@@ -2331,7 +2331,7 @@ wh40kupbasiliskdepot:
 		Name: Basilisk Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Basilisks.
 		Prerequisites: ~!wh40kupbasiliskdepot, wh40kupbattlecommand
 	Valued:
@@ -2346,7 +2346,7 @@ wh40kupmarauderdepot:
 		Name: Marauder Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Marauder Bombers.
 		Prerequisites: ~!wh40kupmarauderdepot, wh40kupbattlecommand
 	Valued:
@@ -2362,7 +2362,7 @@ wh40kuplemanrussdepot:
 		Name: Leman Russ Depot
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Leman Russ.
 		Prerequisites: ~!wh40kuplemanrussdepot, wh40kupregimentalcommand, wh40kupfullscalewar
 	Valued:
@@ -2377,7 +2377,7 @@ wh40kupfullscalewar:
 		Name: Full Scale War
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlock Leman Russ.
 		Prerequisites: ~!wh40kupfullscalewar, wh40kupregimentalcommand
 	Valued:
@@ -2392,7 +2392,7 @@ wh40kupenergy1:
 		Name: Energy Upgrade 1
 	Buildable:
 		BuildPaletteOrder: 210
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Energy of Generators.
 		Prerequisites: ~!wh40kupenergy1
 	Valued:
@@ -2407,7 +2407,7 @@ wh40kupenergy2:
 		Name: Energy Upgrade 2
 	Buildable:
 		BuildPaletteOrder: 210
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Energy of Generators.
 		Prerequisites: ~!wh40kupenergy2, wh40kupenergy1
 	Valued:
@@ -2423,7 +2423,7 @@ wh40kupgenenhancement:
 		Name: Genetic Enhancement
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Kasrkin to 33% of speed.
 		Prerequisites: ~!wh40kupgenenhancement, wh40kupkasrkinquarters
 	Valued:
@@ -2438,7 +2438,7 @@ wh40kupkasrkinarmor:
 		Name: Kasrkin Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Kasrkin to 25% of health.
 		Prerequisites: ~!wh40kupkasrkinarmor, wh40kupkasrkinquarters
 	Valued:
@@ -4907,8 +4907,8 @@ wh40karmorym:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -5291,7 +5291,7 @@ wh40kmachinecult:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.SpaceMarines
 	ProductionQueue:
 		Type: Vehicle
@@ -7430,7 +7430,7 @@ wh40kupbionics:
 		Name: Bionics
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Health
 		Prerequisites: ~!wh40kupbionics, barracks
 	Valued:
@@ -7445,7 +7445,7 @@ wh40kupbionics2:
 		Name: Bionics Level 2
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Health
 		Prerequisites: ~!wh40kupbionics2, wh40kupbionics
 	Valued:
@@ -7460,7 +7460,7 @@ wh40ktargetfinder1:
 		Name: Target Finders
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Firepower and Range
 		Prerequisites: ~!wh40ktargetfinder1, barracks
 	Valued:
@@ -7475,7 +7475,7 @@ wh40ktargetfinder2:
 		Name: Enhanced Target Finders
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Firepower and Range
 		Prerequisites: ~!wh40ktargetfinder2, wh40ktargetfinder1
 	Valued:
@@ -7490,7 +7490,7 @@ wh40kpowerswords:
 		Name: Power Swords
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Sargent, Force Commander, Chaptain and Librarian Damage
 		Prerequisites: ~!wh40kpowerswords, barracks
 	Valued:
@@ -7505,7 +7505,7 @@ wh40kpowerfists:
 		Name: Power Fist
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Sargent, Force Commander, Chaptain and Librarian Damage
 		Prerequisites: ~!wh40kpowerfists, wh40kpowerswords
 	Valued:
@@ -7520,7 +7520,7 @@ wh40kscoutinfiltration:
 		Name: Scout Infiltration
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Scouts are Stealth
 		Prerequisites: ~!wh40kscoutinfiltration, wh40karmorym
 	Valued:
@@ -7535,7 +7535,7 @@ wh40kskullprobestealth:
 		Name: Scout Infiltration
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Skull Probes are Stealth
 		Prerequisites: ~!wh40kskullprobestealth, wh40karmorym
 	Valued:
@@ -7550,7 +7550,7 @@ wh40kveteranupgrade1:
 		Name: Commander Veteran
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade1, barracks
 	Valued:
@@ -7565,7 +7565,7 @@ wh40kveteranupgrade2:
 		Name: Commander Hero
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade2, wh40kveteranupgrade1
 	Valued:
@@ -7580,7 +7580,7 @@ wh40kupmachineculticon:
 		Name: Heavy Armor Deployment
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Field Command to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupmachineculticon, wh40kupmonastery2
 	Valued:
@@ -7595,7 +7595,7 @@ wh40kupfraggrenade:
 		Name: Frag Grenades
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the use of Grenades to Sargents
 		Prerequisites: ~!wh40kupfraggrenade, barracks
 	Valued:
@@ -7610,7 +7610,7 @@ wh40kfuriuscharge:
 		Name: Furious Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Speed of Gray Knights
 		Prerequisites: ~!wh40kfuriuscharge, barracks
 	Valued:
@@ -7626,7 +7626,7 @@ wh40kpsyinquisition:
 		Name: Psychic Inquisition
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable a Superweapon
 		Prerequisites: ~!wh40kpsyinquisition, wh40kfuriuscharge, wh40kupmonastery, ~techlevel.superweapons
 	Valued:
@@ -8441,8 +8441,8 @@ wh40karmoryo:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -8497,7 +8497,7 @@ wh40kweapo:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Orkz
 	Production@NORMAL:
 		Produces: Vehicle
@@ -9825,7 +9825,7 @@ wh40kuptankbusta:
 		Name: Tankbusta Ztealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Tankbusta kan Ztealth
 		Prerequisites: ~!wh40kuptankbusta, wh40karmoryo
 	Valued:
@@ -9841,7 +9841,7 @@ wh40kupgretchin:
 		Name: Gretchin Ztealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Now Gretchin kan Ztealth
 		Prerequisites: ~!wh40kupgretchin
 	Valued:
@@ -9856,7 +9856,7 @@ wh40kupblastier:
 		Name: Blastier
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dakka Boyz in 15%
 		Prerequisites: ~!wh40kupblastier
 	Valued:
@@ -9872,7 +9872,7 @@ wh40kupdakka1:
 		Name: More Dakka
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dakka Gunz in 15%
 		Prerequisites: ~!wh40kupdakka1, wh40kupblastier
 	Valued:
@@ -9888,7 +9888,7 @@ wh40kupdakka2:
 		Name: Even More Dakka
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Dakka Gunz in 15%
 		Prerequisites: ~!wh40kupdakka2, wh40kupdakka1, wh40kuporkyfort
 	Valued:
@@ -9904,7 +9904,7 @@ wh40kupchoppy1:
 		Name: More Choppy
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Melee Damage in 15%
 		Prerequisites: ~!wh40kupchoppy1
 	Valued:
@@ -9920,7 +9920,7 @@ wh40kupchoppy2:
 		Name: Even More Choppy
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Melee Damage in 15%
 		Prerequisites: ~!wh40kupchoppy2, wh40kupchoppy1, wh40kuporkyfort
 	Valued:
@@ -9935,7 +9935,7 @@ wh40kupburny1:
 		Name: More Burny
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Burna Damage in 15%
 		Prerequisites: ~!wh40kupburny1
 	Valued:
@@ -9951,7 +9951,7 @@ wh40kupburny2:
 		Name: Even More Burny
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Burna Damage in 15%
 		Prerequisites: ~!wh40kupburny2, wh40kupburny1, wh40kuporkyfort
 	Valued:
@@ -9966,7 +9966,7 @@ wh40kupvboost:
 		Name: Vehicle Speed Boost
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Vehicle Speed Boost in 30%
 		Prerequisites: ~!wh40kupvboost
 	Valued:
@@ -9982,7 +9982,7 @@ wh40kupvextraarmor:
 		Name: Extra Vehicle Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Vehicle Armor in 15%
 		Prerequisites: ~!wh40kupvextraarmor, wh40kuporkyfort
 	Valued:
@@ -9998,7 +9998,7 @@ wh40kmoresluggas:
 		Name: More Sluggas
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Make Sluggas more cheaper
 		Prerequisites: ~!wh40kmoresluggas, wh40kupvextraarmor
 	Valued:
@@ -10013,7 +10013,7 @@ wh40kuporkyfort:
 		Name: Orky Fort
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Make Sluggas more cheaper
 		Prerequisites: ~!wh40kuporkyfort, wh40karmoryo, whaaag3
 	Valued:
@@ -10028,7 +10028,7 @@ wh40kuporkarmor1:
 		Name: 'Eavy Boy Armour
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Boyz Armor in 15%
 		Prerequisites: ~!wh40kuporkarmor1
 	Valued:
@@ -10044,7 +10044,7 @@ wh40kuporkarmor2:
 		Name: Super 'Eavy Boy Armour
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Boyz Armor in 15%
 		Prerequisites: ~!wh40kuporkarmor2, wh40kuporkarmor1, wh40kuporkyfort
 	Valued:
@@ -10059,7 +10059,7 @@ wh40kupbigshooty1:
 		Name: Big Shooty Boss Weapons
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Bosses Damage in 15%
 		Prerequisites: ~!wh40kupbigshooty1, wh40kupblastier
 	Valued:
@@ -10075,7 +10075,7 @@ wh40kuporkboss1:
 		Name: Tougher Bosses
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Bosses Armor in 15%
 		Prerequisites: ~!wh40kuporkboss1, wh40kuporkarmor1
 	Valued:
@@ -10091,7 +10091,7 @@ wh40kuporkboss2:
 		Name: Even Tougher Bosses
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Bosses Armor in 15%
 		Prerequisites: ~!wh40kuporkboss2, wh40kuporkarmor1, wh40kuporkyfort
 	Valued:
@@ -10106,7 +10106,7 @@ wh40kupburnabomb:
 		Name: Burna Bombs
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Mad Doks adkire the Ability to Plaze Bom to Enemys
 		Prerequisites: ~!wh40kupburnabomb, wh40kupburny1, wh40kuporkyfort
 	Valued:
@@ -10121,7 +10121,7 @@ wh40kupcombatjuice:
 		Name: Combat Juice
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Da boyz can attack fasta with this
 		Prerequisites: ~!wh40kupcombatjuice, wh40kuporkyfort
 	Valued:
@@ -12324,7 +12324,7 @@ wh40kcultiststealth:
 		Name: Cultist Stealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the stealth to Cultists
 		Prerequisites: ~!wh40kcultiststealth
 	Valued:
@@ -12339,7 +12339,7 @@ wh40kunholysight:
 		Name: Unholy Sight
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Cultist has more view range
 		Prerequisites: ~!wh40kunholysight
 	Valued:
@@ -12354,7 +12354,7 @@ wh40kchaosmarinestealth:
 		Name: Chaos Marine Stealth
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the stealth to Cultists
 		Prerequisites: ~!wh40kchaosmarinestealth
 	Valued:
@@ -12369,7 +12369,7 @@ wh40kfuriuschargechaos:
 		Name: Furius Charge
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Speed and Attack of Cultists and Marines
 		Prerequisites: ~!wh40kfuriuschargechaos
 	Valued:
@@ -12384,7 +12384,7 @@ wh40kjetpackbooster:
 		Name: Jetpack Booster
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Speed of Raptors
 		Prerequisites: ~!wh40kjetpackbooster
 	Valued:
@@ -12399,7 +12399,7 @@ wh40kdaemonfire:
 		Name: Daemonfire
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Demons firepower /n Replaces Possessed Claws with Demon Fire
 		Prerequisites: ~!wh40kdaemonfire
 	Valued:
@@ -12414,7 +12414,7 @@ wh40kupmonasteryc:
 		Name: Decreased Monastery
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Monastery to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupmonastery, barracks
 	Valued:
@@ -12429,7 +12429,7 @@ wh40kupmonastery2c:
 		Name: Unholy Monastery
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Monastery to 25% of health, Unlock new Tech
 		Prerequisites: ~!wh40kupmonastery2, wh40kupmonastery, vehicleproduction
 	Valued:
@@ -12445,7 +12445,7 @@ wh40kupcapincreasec:
 		Name: Squad Cap Increase
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Marine Production
 		Prerequisites: ~!wh40kupcapincrease, barracks
 	Valued:
@@ -12460,7 +12460,7 @@ wh40kupcapincrease2c:
 		Name: Squad Cap Increase
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase Vehicle Production
 		Prerequisites: ~!wh40kupcapincrease2, vehicleproduction
 	Valued:
@@ -12476,7 +12476,7 @@ wh40kchaosenergies:
 		Name: Chaos Energies
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Vehicle Armor in 15%
 		Prerequisites: ~!wh40kchaosenergies, wh40kupmonastery2
 	Valued:
@@ -12492,7 +12492,7 @@ wh40kfraggrenadesc:
 		Name: Frag Grenades
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Enable the use of Grenades to Sargents
 		Prerequisites: ~!wh40kupfraggrenade, barracks
 	Valued:
@@ -12507,7 +12507,7 @@ wh40kveteranupgrade1c:
 		Name: Commander Veteran
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade1, barracks
 	Valued:
@@ -12522,7 +12522,7 @@ wh40kveteranupgrade2c:
 		Name: Commander Hero
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Add +1 veteran rank to Leaders, and add more Health
 		Prerequisites: ~!wh40kveteranupgrade2, wh40kveteranupgrade1
 	Valued:
@@ -12537,7 +12537,7 @@ wh40kdemonstrength:
 		Name: Demon Strength
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Upgrades Chaos Lord Damage
 		Prerequisites: ~!wh40kdemonstrength
 	Valued:
@@ -12868,8 +12868,8 @@ wh40karmoryc:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -12958,7 +12958,7 @@ wh40kmachinepit:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Chaos
 	ProductionQueue:
 		Type: Vehicle
@@ -13213,7 +13213,7 @@ wh40kdaemonpit:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Chaos
 	Production@NORMAL:
 		Produces: Vehicle
@@ -13917,8 +13917,8 @@ wh40karmoryt:
 		Range: 5c0
 	WithBuildingBib:
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Power:
 		Amount: -25
 	RenderSprites:
@@ -13958,7 +13958,7 @@ wh40kvehiclebeacon:
 	Exit@2:
 		ExitCell: 2,1
 		ExitDelay: 3
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: VehicleUpgrades.Tau
 	ProductionQueue:
 		Type: Vehicle

@@ -1262,10 +1262,10 @@ sowresearch:
 		RequiresCondition: !disable-overlay && !build-incomplete
 		sequence: idle-overlay
 	Production@research:
-		Produces: Upgrades
+		Produces: Research
 		PauseOnCondition: lowpower
 	ProductionBar@research:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Production@upgrade:
 		Produces: Addons
 		PauseOnCondition: lowpower
@@ -3706,7 +3706,7 @@ satelliteprotection_mk1:
 		Name: Satellite Protection
 	Buildable:
 		BuildPaletteOrder: 0
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 50
 		Prerequisites: sowresearch, ~!satelliteprotection_mk1
@@ -3726,7 +3726,7 @@ satelliteprotection_mk2:
 		Name: Satellite Protection Mk.2
 	Buildable:
 		BuildPaletteOrder: 0
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 50
 		Prerequisites: sowresearch, ~satelliteprotection_mk1, ~!satelliteprotection_mk2, stateofwar
@@ -3746,7 +3746,7 @@ heavyunits:
 		Name: Heavy Units
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 50
 		Description: Unlocks Heavy Units to be researched inside Heavy Factories.
@@ -3766,7 +3766,7 @@ sow_invader:
 		Name: Invader
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 50
 		Description: Upgrades Advancers into Invaders\nGives ability to attack buildings and units\nEnhances Durability and Speed
@@ -3786,7 +3786,7 @@ sow_invader_mk2:
 		Name: Invader Mk.2
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 50
 		Description: Upgrades Invaders into Mk.2 Invaders\nMakes these units an effective predators\nGreatly Enhances Durability and Speed
@@ -3806,7 +3806,7 @@ sowovercharge:
 		Name: Overcharge
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 50
 		Prerequisites: ~!sowovercharge, sowpower
@@ -3826,7 +3826,7 @@ advancedairstrikes:
 		Name: Advanced Air Support
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 50
 		Description: Unlocks Bomber and Tripler support powers for Radar.
@@ -3849,7 +3849,7 @@ goldmineupgrade:
 		Name: Gold Processing
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 50
 		Description: Increases the generated Income from all Gold Mines by 30%
@@ -3876,7 +3876,7 @@ goldmineupgrade2:
 		RequiresCondition: nopower
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 50
 		Description: Increases the generated Income from Maxed Gold Mines by 60%
@@ -3896,7 +3896,7 @@ researchupgrade:
 		Name: Advanced Science
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 50
 		Description: Increases the Research points provided by all Research Centers by 20%
@@ -3916,7 +3916,7 @@ researchupgrade2:
 		Name: Advanced Science Mk.2
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 50
 		Description: Increases the Research points provided by Maxed Research Centers by 35%
@@ -3936,7 +3936,7 @@ stateofwar:
 		Name: State Of War
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 3000
 		BuildDurationModifier: 50
 		Description: Removes Build Time From Turrets but increases their cost by 50%\nUnlocks late game technologies
