@@ -8021,6 +8021,10 @@ DOME.Soviet:
 		Name: Soviet Radar Dome
 	Buildable:
 		Prerequisites: ~rafact.soviet, raproc.soviet
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 DOME.Japan:
 	Inherits: ^BaseBuilding
@@ -11868,6 +11872,7 @@ ra_upgrade_heavyteslatank:
 	Tooltip:
 		Name: Heavy Tesla Tank Upgrade
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Hammer Tank to the Heavy Tesla Tank
 		Prerequisites: ~stek, ~ra_doctrine_teslatech, ra_upgrade_hammertank, !ra_upgrade_heavyteslatank
 	RenderSprites:
@@ -11878,6 +11883,7 @@ ra_upgrade_shtoradefensesystem:
 	Tooltip:
 		Name: Shtora Defense System Upgrade
 	Buildable:
+		Queue: Research
 		Description: ra_upgrade_shtoradefensesystem.description
 		Prerequisites: ~stek, ~ra_doctrine_heavyarmor, ra_upgrade_hammertank, !ra_upgrade_shtoradefensesystem
 	RenderSprites:
@@ -11888,6 +11894,7 @@ ra_upgrade_kotintank:
 	Tooltip:
 		Name: Kotin Nuclear Tank Upgrade
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Hammer Tank to the Kotin Nuclear Tank
 		Prerequisites: ~stek, ~ra_doctrine_nuclearwar, ra_upgrade_hammertank, !ra_upgrade_kotintank
 	RenderSprites:
