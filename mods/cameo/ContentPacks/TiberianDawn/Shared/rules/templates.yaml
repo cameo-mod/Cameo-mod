@@ -1,1 +1,310 @@
+^GainsExperienceTD:
+	GainsExperience:
+		LevelUpNotification: LevelUp
+		Conditions:
+			200: rank-veteran
+			400: rank-veteran
+			600: rank-veteran
+			800: rank-veteran
 
+^GainsExperienceTDBuilding:
+	GainsExperience:
+		LevelUpNotification: LevelUp
+		Conditions:
+			250: rank-veteran
+			500: rank-veteran
+			750: rank-veteran
+			1000: rank-veteran
+
+^TDBuilding:
+	Inherits: ^BaseBuilding
+	Building:
+		BuildSounds: constru2.aud, hvydoor1.aud
+	SoundOnDamageTransition:
+		DamagedSounds: xplobig4.aud
+		DestroyedSounds: crumble.aud, xplobig4.aud
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: TDBuildingExplode
+		EmptyWeapon: TDBuildingExplode
+
+^TDDefense:
+	Inherits: ^Defense
+	Building:
+		BuildSounds: constru2.aud, hvydoor1.aud
+	SoundOnDamageTransition:
+		DamagedSounds: xplobig4.aud
+		DestroyedSounds: crumble.aud, xplobig4.aud
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: TDBuildingExplode
+		EmptyWeapon: TDBuildingExplode
+
+^FACT:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@conyard: ^Conyard
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Tooltip:
+		Name: Construction Yard
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	WithBuildingPlacedAnimation:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@concretebarrier:
+		Prerequisite: concretebarrier
+	ProvidesPrerequisite@oilderrick:
+		Prerequisite: oilderrick
+	RenderSprites:
+		Image: fact
+
+^TDPROC:
+	Inherits: ^TDBuilding
+	Inherits@ref: ^Refinery
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Tooltip:
+		Name: Tiberium Refinery
+	Buildable:
+		Prerequisites: ~fact, nuke
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Refinery:
+	DockHost:
+		DockAngle: 448
+		DockOffset: -1c0, 1c0, 0
+		IsDragRequired: True
+		DragOffset: -554,512,0
+		DragLength: 12
+	WithBuildingBib:
+	WithResourceLevelOverlay:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@proc:
+		Prerequisite: proc
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: proc
+
+^TDMCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Transforms:
+		IntoActor: fact
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds: constru2.aud, hvydoor1.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+
+^TDHARV:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: template-harvester.tdname
+	Harvester:
+		BaleLoadDelay: 4
+		BaleUnloadDelay: 1
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 45
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armor:
+		Type: Heavy
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	FireWarheadsOnDeath:
+		RequiresCondition: !no-tiberium
+		Weapon: TiberiumExplosion
+	FireWarheadsOnDeath@empty:
+		RequiresCondition: no-tiberium
+		Weapon: UnitExplodeHarvEmpty
+	SelectionDecorations:
+	RenderSprites:
+		Image: harv
+
+^E1:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Minigunner
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 16000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@PRIMARY: ##########
+		Weapon: M16
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: M16
+		MuzzleSequence: garrison-muzzle
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	RenderSprites:
+		Image: e1
+		PlayerPalette: raplayer
+
+^E3:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: TD Rocket Soldier
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry, RAInfantry
+		Description: actor-e3.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 9000
+	ChangesHealth@SelfHealing:
+		Step: 9
+	Armament@PRIMARY: ##########
+		Weapon: Rockets
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: Rockets
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithInfantryBody:
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	RenderSprites:
+		Image: e3
+		PlayerPalette: raplayer
+
+^RMBO:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Commando
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 50
+		Queue: Infantry, RAInfantry
+		Description: template-commando.description
+	Mobile:
+		Speed: 65
+		Voice: Move
+	Guard:
+		Voice: Move
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Passenger:
+		Voice: Move
+	Armament:
+		Weapon: Sniper
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Sniper
+	Armament@c4:
+		Weapon: TanyaAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	Armament@c4building:
+		Weapon: GenericC4
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		IdleSequences: idle1,idle2,idle3
+	AnnounceOnKill:
+	ProvidesPrerequisite@rmbo:
+	Voiced:
+		VoiceSet: CommandoVoice
+	RenderSprites:
+		Image: rmbo
+
+^TDSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: e6,e1.gdi,e1.gdi,e1.gdi
+
+^TDNodSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: e6,e1.nod,e1.nod,e1.nod

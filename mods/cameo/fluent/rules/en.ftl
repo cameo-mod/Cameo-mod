@@ -1,170 +1,3 @@
-actor-e1 =
-   .description = General-purpose infantry.
-        Strong vs Infantry
-        Weak vs Vehicles, Aircraft
-   .description-jp = JGSDF infantryman from Gate armed
-      with a battle rifle.
-        Strong vs Infantry
-        Weak vs Vehicles, Aircraft
-   .raname = Rifle Infantry
-   .tdname = Minigunner
-   .jpname = Imperial Scoutsman
-
-actor-e2 =
-   .description = Fast infantry armed with grenades.
-        Strong vs Buildings, slow-moving targets
-   .name = Grenadier
-
-actor-e3 =
-   .description = Anti-tank/Anti-aircraft infantry.
-        Strong vs Tanks, Aircraft
-        Weak vs Infantry
-   .raname = RA Rocket Soldier
-   .tdname = TD Rocket Soldier
-
-actor-e4 =
-   .description = Advanced anti-structure unit.
-        Strong vs Infantry, Buildings
-        Weak vs Vehicles, Aircraft
-   .raname = Soviet Flamethrower
-   .tdname = Nod Flamethrower
-   .jpname = Japanese Flamethrower
-
-actor-e5 =
-   .description = Advanced general-purpose infantry.
-        Strong vs all Ground units
-   .name = Chemical Warrior
-
-actor-e6 =
-   .description = Infiltrates and captures enemy structures.
-      Removes attached explosives from units.
-        Unarmed
-   .name = Engineer
-
-actor-apc =
-   .description = Armed infantry transport.
-        Can attack Aircraft.
-   .tdname = GDI APC
-   .raname = Allied APC
-
-actor-arty =
-   .description = Long-range artillery.
-        Strong vs Buildings
-        Weak vs Air
-   .tdname = Nod Artillery
-   .raname = Allied Artillery
-
-actor-ftnk =
-   .description = Heavily armored flame-throwing vehicle.
-        Strong vs Infantry, Buildings
-   .name = Flame Tank
-
-actor-bggy =
-   .description = Scout vehicle armed with a machine gun.
-        Strong vs Infantry
-   .name = Nod Buggy
-
-actor-jeep =
-   .description = Scout vehicle armed with a machine gun.
-        Strong vs Infantry
-   .description2 = Scout vehicle armed with a recoilless gun.
-        Strong vs Infantry, Light Vehicles, Aircraft
-   .description3 = Scout vehicle armed with a rocket launcher.
-        Strong vs Vehicles, Aircraft
-   .name = Humvee
-   .raname = Ranger
-   .recon = Recon Ranger
-
-actor-bike =
-   .description = Scout vehicle armed with rockets.
-      Can attack aircraft.
-        Strong vs Vehicles
-   .name = Recon Bike
-
-actor-ltnk =
-   .description = Fast, light tank.
-        Strong vs Vehicles
-        Weak vs Infantry
-   .tdname = Nod Light Tank
-   .raname = Allied Light Tank
-
-actor-mtnk =
-   .description = Main battle tank.
-      Can attack aircraft with a missile launcher.
-        Strong vs Vehicles
-   .name = GDI Battle Tank
-
-actor-htnk =
-   .description = Heavily armored tank.
-      Can attack aircraft.
-        Strong vs Everything
-   .name = GDI Mammoth Tank
-   .raname = Soviet Mammoth Tank
-
-actor-mlrs =
-   .description = Long range rocket artillery.
-        Can attack aircraft.
-   .name = Rocket Launcher
-
-actor-mssm =
-   .description = Long range rocket artillery.
-        Strong vs Buildings
-   .name = SSM Launcher
-
-actor-stnk =
-   .description = Cloaked tank armed with missiles.
-        Can attack aircraft.
-   .name = Stealth Tank
-
-actor-tran =
-   .description = Infantry transport helicopter.
-        Unarmed
-   .name = Chinook Transport
-
-actor-heli =
-   .description = Helicopter armed with chainguns.
-        Strong vs Infantry, Light Vehicles, Aircraft
-   .name = Apache
-
-actor-orca =
-   .description = Aircraft armed with missiles.
-      Strong vs Buildings, Vehicles
-   .name = Orca
-
-actor-nuke =
-   .description = Generates power.
-   .name = Power Plant
-
-actor-nuk2 =
-   .description = Generates more power than
-      a standard power plant.
-   .name = Advanced Power Plant
-
-actor-afld =
-   .description = Provides a drop zone for vehicle reinforcements.
-      Produces Nod vehicles.
-   .name = Airstrip
-
-actor-hq-gdi =
-   .description = Provides radar, advanced technologies,
-      and Air Strike support power.
-      Requires power to operate.
-   .name = GDI Communications Center
-
-power-td-airstrike =
-   .description = A-10 planes strafe and bomb the target.
-   .name = Air Strike
-
-actor-eye =
-   .description = Provides advanced GDI technologies.
-      Can be upgraded with an ion cannon uplink.
-   .name = Advanced Communications Center
-   .ionc-description = Upgrades the Advanced Communications Center
-      with an Ion Cannon Uplink.
-      Provides access to Ion Cannon strikes.
-      Increases durability of the building.
-   .ionc-name = Ion Cannon Uplink
-
 power-ioncannon =
    .name = Ion Cannon
    .description = Initiate an Ion Cannon strike.
@@ -180,16 +13,6 @@ power-chemicalmissile =
    .description = Tactical cluster missile with additional Tiberium-based warheads.
    Deals heavy damage in an area and leaves harmful corrosive clouds.
 
-actor-tmpl =
-   .description = Provides advanced Nod technologies.
-      Can be upgraded with a missile silo.
-   .name = Temple of Nod
-   .nuke-description = Upgrades the Temple of Nod with a
-      nuclear missile silo.
-      Provides access to Nuclear Strikes.
-      Increases durability of the building.
-   .nuke-name = Nuclear Missile Silo
-
 power-nuke =
    .tdname = Nuclear Strike
    .raname = Atomic Bomb
@@ -199,156 +22,8 @@ power-nuke =
    .d2kdescription = Launches a missile which payload releases a shockwave that devastates a large area,
    while electro-magnetic pulse disables buildings around the target for some time.
 
-actor-gun =
-   .tdname = Nod Gun Turret
-   .raname = Allied Gun Turret
-   .description = Anti-tank base defense.
-        Strong vs Vehicles
-
-actor-nalasr =
-   .name = Nod Laser Turret
-   .description = Anti-infantry defense.
-      Requires power to operate.
-        Strong vs Infantry
-
-actor-sam =
-   .tdname = Nod SAM Site
-   .raname = Soviet SAM Site
-   .ra2name = Patriot Missile System
-   .description = Anti-aircraft defense.
-      Requires power to operate.
-
-actor-obli =
-   .name = Obelisk of Light
-   .description = Advanced anti-ground defense.
-      Requires power to operate.
-        Strong vs Ground targets
-
 actor-gtwr =
    .name = Guard Tower
-
-actor-atwr =
-   .name = Advanced Guard Tower
-   .description = All-purpose defensive structure.
-      Can attack aircraft.
-      Requires power to operate.
-        Strong vs Aircraft, Tanks
-        Weak vs Infantry
-
-actor-sbag =
-   .name = Sandbag Barrier
-   .description = Stops infantry and light vehicles.
-      Can be crushed by tanks.
-
-actor-cycl =
-   .name = Chain Link Barrier
-   .description = Stops infantry and light vehicles.
-      Can be crushed by tanks.
-
-actor-brik =
-   .name = Concrete Barrier
-   .description = Stops infantry and most tanks.
-      Blocks some projectiles.
-
-upgrade-upnodstealth =
-   .name = Unlock Stealth Technology
-   .description = Allows training of Stealth Soldiers
-      and construction of Stealth Harvesters.
-
-upgrade-upnodvenom =
-   .name = Unlock Venom and Laser Commando
-   .description = Allows construction of the Venom Gunship
-      and training of Laser Commando.
-
-actor-cheme3 =
-   .name = Chemical Rocket Soldier
-   .description = Soldier armed with volatile Tiberium rockets.
-      Can walk over Tiberium unharmed.
-        Strong vs Vehicles, Aircraft
-
-actor-ltnk2 =
-   .name = Light Tank Mk. II
-   .description = Light tank with point defense lasers.
-        Strong vs Infantry, Vehicles
-
-actor-blackhandlaser =
-   .name = Laser Trooper
-   .description = Elite infantry armed with lasers.
-        Strong vs ground targets
-
-actor-blackhandflamer =
-   .name = Black Hand Flamer
-   .description = Elite stealth flamethrower.
-        Strong vs Infantry, Buildings
-
-actor-stealthsoldier =
-   .name = Stealth Soldier
-   .description = Cloaked infantry armed with EMP missiles.
-        Strong vs Vehicles
-
-actor-specter =
-   .name = Specter
-   .description = Long-range stealth artillery.
-        Strong vs Buildings
-        Weak vs Air
-
-actor-venom =
-   .name = Venom
-   .description = Gunship armed with lasers.
-        Strong vs Infantry, Air
-
-actor-lasercommando =
-   .name = Laser Commando
-   .description = Stealth commando armed with lasers.
-      Can shoot down missiles.
-      Can demolish buildings.
-        Strong vs Everything
-
-actor-empgrenadier =
-   .name = EMP Grenadier
-   .description = Can throw grenades that disable vehicles.
-        Strong vs Ground
-
-actor-gdisniper =
-   .name = GDI Sniper
-   .description = Sniper armed with an anti-materiel rifle.
-      Can attack air.
-        Strong vs Infantry, Air
-
-actor-gdipredator =
-   .name = Predator Tank
-   .description = Tank that can paint enemies with a targeting laser,
-      making them take increased damage.
-      Can attack air.
-        Strong vs Everything
-
-actor-exosuit =
-   .name = Experimental Exosuit
-   .description = Walker armed with railguns.
-        Strong vs Ground
-
-actor-gdiofficer =
-   .name = GDI Officer
-   .description = Officer with a heavy machine gun.
-      Gives morale boost to nearby units to increase
-      movement speed and fire-rate by 20%.
-        Can attack air
-
-actor-havoc =
-   .name = Havoc
-   .description = Commando armed with numerous weapons.
-      Strong vs Everything
-
-actor-firehawk =
-   .name = Firehawk
-   .description = Advanced fighter-bomber aircraft.
-      Strong vs Everything
-
-actor-nodlasercorvette =
-   .description = Multi-role heavy warship.
-      Can attack air.
-        Strong vs Everything
-   .name = Nod Laser Corvette
 
 actor-dog =
    .name = Attack Dog
@@ -807,22 +482,6 @@ actor-oitank =
    an onboard exorcist.
         Strong vs Everything
 
-actor-ss =
-   .description = Submerged anti-ship unit
-    armed with torpedoes.
-    Can detect other submarines.
-      Strong vs Naval units
-      Weak vs Ground units, Aircraft
-   .name = Soviet Submarine
-
-actor-msub =
-   .description = Submerged anti-ground siege unit
-    with anti-air capabilities.
-    Can detect other submarines.
-      Strong vs Buildings, Ground units, Aircraft
-      Weak vs Naval units
-   .name = Missile Submarine
-
 actor-dd =
    .description = Fast multi-role ship.
     Can detect submarines.
@@ -842,13 +501,6 @@ actor-lst =
       Unarmed
    .name = Transport
 
-actor-pt =
-   .description = Light scout & support ship.
-    Can detect submarines.
-      Strong vs Naval units
-      Weak vs Ground units, Aircraft
-   .name = Gunboat
-
 actor-jpspeedboat =
    .description = Fast attack craft armed with
       gatling cannons.
@@ -856,13 +508,6 @@ actor-jpspeedboat =
         Strong vs Aircraft
         Weak vs Ships
    .name = Japanese Speedboat
-
-actor-japancarrier =
-   .description = Very slow long-range ship.
-      Can attack air.
-        Strong vs Buildings, Ground units
-        Weak vs Naval units, Aircraft
-   .name = Japanese Aircraft Carrier
 
 actor-yamatobattleship =
    .description = Very slow long-range ship.
@@ -1748,87 +1393,6 @@ actor-oilb =
       Levels up over time.
       Build limit: 3
 
-upgrade-a10airstrike =
-   .description = Enables the A10 Airstrike Support Power
-      Increases damage of all GDI Aircraft by 15%.
-
-upgrade-longrangesensors =
-   .description = Increases vision, stealth detection range
-      and accuracy of all units and defenses by 25%.
-      Increases range and damage by 5%.
-
-upgrade-armorpiercingbullets =
-   .description = Increases damage of all bullet based weapons by 33%.
-      while also making them more effective against tank armor.
-      Increases Minigunner and Shotgunner damage by 100%.
-      Increases GDI Sniper and A10 damage by 10%.
-      Also adds a machine gun to the Battle and Predator Tank and increases damage by 5%.
-
-upgrade-heavyaircraftarmorplating =
-   .description = Increases armor of Orcas, Firehawks, Chinooks and A10s by 50%.
-
-upgrade-advancedmissiletargeting =
-   .description = Increases missile damage, speed and Acceleration.
-      Increases damange and range of all missile weapons by 15%.
-      Tanks increase range by 5%
-      Firehawks shoot twice the amount of missiles.
-
-upgrade-cuttingedgeequipment =
-   .description = Increases armor, damage and fire rate of all units and defenses by 10%.
-      Doubles the effect for EMP Grenadiers, Experimental Exosuits, Firehawks and Havoc.
-
-upgrade-highvelocitycannons =
-   .description = Increases damage and range of cannons and railguns by 15%.
-      Replaces tank cannons with high velocity cannons that deal 100% more damage
-      and travel 100% faster.
-
-upgrade-lightweightarmorplating =
-   .description = TEAM UPGRADE
-      Increases armor by 20% and speed by 10% of all tanks, scout and support vehicles in your team.
-
-upgrade-guerillatactics =
-   .description = Increases Firepower of all infantry, scout vehicles, support vehicles,
-      tanks, helicopters, fire support and stealth units by 15%, Speed by 10% and Range by 5%.
-      The effect is doubled for the Stealth Tank.
-
-upgrade-tiberiuminfusion =
-   .description = Gives infantry rapid regeneration and 10% more speed, fire rate and armor.
-
-upgrade-improvedartilleries =
-   .description = Increases Firepower and Range of all Artilleries by 25%.
-      Increases Range of Gun Turrets and the SSM by 10%.
-
-upgrade-elementalwarfare =
-   .description = Increases damage of all flame and chemical weapons by 25%.
-      Increases armor of elemental warfare units by 20%
-
-upgrade-elitecapacitors =
-   .description = Increases fire power and fire rate of all laser weapons by 30% and range and vision by 15%.
-      Obelisks of Light increase fire power and fire rate by 60% and range and vision by 30%.
-
-upgrade-cyberneticmodifications =
-   .description = Gives all infantry heavy armor platings that reduce incoming damage.
-      While the armor is active, the infantry armor type is heavy which makes them take less damage from
-      most anti infantry weapons but increased damage from anti tank weapons instead.
-      Increases Movement Speed by 20%.
-
-upgrade-blackmarketupgrades =
-   .description = Gives certain units new or additional weapons:
-      Minigunner: Gets a Laser Rifle.
-      Buggy Mk1 and Mk2: Adds a Flamethrower.
-      Recon Bike: Adds a Point Defense Laser.
-      Light Tank Mk1 and Mk2: Adds a Missile Launcher.
-      Apache: Adds Missile Launchers.
-      Artillery and Specter: Increases damage and spread of the warhead makes it more effective against vehicles.
-      Gun Turret and Attack Submarine: Increases damage and spread of the warhead.
-
-upgrade-advancedguerillatactics =
-   .description = TEAM UPGRADE
-      Increases Firepower of all infantry, scouts, support vehicles and fire supports in your team
-      by 15%, Speed by 10% and Range by 5%
-      For Nod it also doubles the effect for all units affected by the guerilla tactics upgrade.
-      The effect is doubled once more for the Stealth Tank.
-
 upgrade-conscription =
    .description = Decreases cost and training time for all infantry Flak Tracks, BTRs and Hip Transports by 25%.
    Unlocks the "Paratroopers" Support power from the Soviet Airfield.
@@ -2290,12 +1854,6 @@ template-mcv =
       Unarmed
    .name = Mobile Construction Vehicle
 
-template-harvester =
-   .description = Collects resources for processing.
-      Unarmed
-   .tdname = Harvester
-   .raname = Ore Truck
-
 template-refinery =
    .description = Processes resources into cash.
    .tdname = Tiberium Refinery
@@ -2303,11 +1861,6 @@ template-refinery =
    .ra-japan = Japanese Ore Refinery
    .ra2-allies = Allied Ore Refinery
    .ra2-soviet = Soviet Ore Refinery
-
-template-silo =
-   .description = Stores excess resources.
-   .tdname = Tiberium Silo
-   .raname = Silo
 
 template-power =
    .description = Generates power.
@@ -2381,11 +1934,6 @@ template-tech-center =
    .ra2-soviet = Soviet Battle Lab
    .ra2-yuri = Yuri Battle Lab
 
-template-anti-infantry-defense =
-   .description = Anti-infantry defense.
-      Strong vs Infantry
-      Weak vs Tanks
-
 template-anti-vehicle-defense =
    .description = Anti-vehicle defense.
 
@@ -2422,10 +1970,6 @@ template-commando =
       Strong vs Infantry, Buildings
       Weak vs Vehicles, Aircraft
 
-template-opentopped =
-   .description = Transport with fireports for passengers.
-      Comes already loaded with infantry inside.
-
 template-unarmed-transport =
    .description = Unarmed troop transport.
 
@@ -2454,21 +1998,6 @@ faction-random =
    .name = Any
    .description = Random faction
       A random faction from any game will be chosen when the game starts.
-
-faction-td-random =
-   .name = Any
-   .description = Random faction
-      A random faction from Tiberian Dawn will be chosen when the game starts.
-
-faction-td-gdi =
-   .name = GDI TD
-   .description = GDI from Tiberian Dawn
-      Support powers: Airstrike, Ion Cannon
-
-faction-td-nod =
-   .name = Nod TD
-   .description = Nod from Tiberian Dawn
-      Support powers: Nuclear Strike
 
 faction-ra-random =
    .name = Any

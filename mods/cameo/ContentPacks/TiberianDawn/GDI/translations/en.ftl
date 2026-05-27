@@ -24,6 +24,7 @@ actor-gdiofficer =
    .description = Officer with a heavy machine gun.
       Gives morale boost to nearby units to increase
       movement speed and fire-rate by 20%.
+        Can attack air
 
 actor-havoc =
    .name = Havoc

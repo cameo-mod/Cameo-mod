@@ -113,7 +113,6 @@ Rules:
 	cameo|rules/husks.yaml
 	cameo|rules/promotions.yaml
 	cameo|ai/ai.yaml
-	cameo|rules/tiberiandawn.yaml
 	cameo|rules/redalert.yaml
 	cameo|rules/tiberiansun.yaml
 	cameo|rules/redalert2.yaml
@@ -527,6 +526,6 @@ ModCredits:
 DiscordService:
 	ApplicationId: 1269927383994077296
 
-#Include: ContentPacks|TiberianDawn/Shared/content.yaml
-#Include: ContentPacks|TiberianDawn/GDI/content.yaml
-#Include: ContentPacks|TiberianDawn/Nod/content.yaml
+Include: ContentPacks/TiberianDawn/Shared/content.yaml
+Include: ContentPacks/TiberianDawn/GDI/content.yaml
+Include: ContentPacks/TiberianDawn/Nod/content.yaml

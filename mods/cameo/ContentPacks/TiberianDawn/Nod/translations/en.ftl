@@ -9,6 +9,7 @@ actor-e4 =
         Weak vs Vehicles, Aircraft
    .raname = Soviet Flamethrower
    .tdname = Nod Flamethrower
+   .jpname = Japanese Flamethrower
 
 actor-e5 =
    .description = Advanced general-purpose infantry.
