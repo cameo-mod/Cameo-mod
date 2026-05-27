@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@allies:
 		Name: Allies RA1 #faction-ra-allies.name
 		InternalName: allies
@@ -8011,6 +8011,10 @@ DOME.Allies:
 		RequiresCondition: !disabled && up_advancedradarsystems
 	ActorStatValues:
 		Upgrades: up_advancedradarsystems, up_reinforcedstructures
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 DOME.Soviet:
 	Inherits: ^BaseBuilding
@@ -8041,6 +8045,10 @@ DOME.Japan:
 		PlayerPalette: player_rgba
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 RAHPAD:
 	Inherits: ^BaseBuilding
@@ -8615,8 +8623,8 @@ ATEK:
 		Prerequisite: tek
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -8644,8 +8652,8 @@ STEK:
 		Prerequisite: tek
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -9748,7 +9756,7 @@ up_advancedradarsystems:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-advancedradarsystems.description
 		Prerequisites: ~dome.allies, !up_advancedradarsystems
 	RenderSprites:
@@ -9763,7 +9771,7 @@ up_infantryarmorplating:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-infantryarmorplating.description
 		Prerequisites: ~dome.allies, !up_infantryarmorplating
 	RenderSprites:
@@ -9778,7 +9786,7 @@ up_reinforcedstructures:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-reinforcedstructures.description
 		Prerequisites: ~dome.allies, !up_reinforcedstructures
 	RenderSprites:
@@ -9793,7 +9801,7 @@ up_airsuperioritydoctrine:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-airsuperioritydoctrine.description
 		Prerequisites: ~atek, !up_airsuperioritydoctrine
 	RenderSprites:
@@ -9808,7 +9816,7 @@ up_lasertargetingsystems:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-lasertargetingsystems.description
 		Prerequisites: ~atek, !up_lasertargetingsystems
 	RenderSprites:
@@ -9823,7 +9831,7 @@ up_chronoarmor:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-chronoarmor.description
 		Prerequisites: ~atek, !up_chronoarmor
 	RenderSprites:
@@ -9838,7 +9846,7 @@ up_cryomissiles:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-cryomissiles.description
 		Prerequisites: ~atek, !up_cryomissiles
 	RenderSprites:
@@ -9853,7 +9861,7 @@ up_gpssatellitesupport:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-gpssatellitesupport.description
 		Prerequisites: ~atek, up_advancedradarsystems, !up_gpssatellitesupport
 	RenderSprites:
@@ -12005,7 +12013,7 @@ ra_upgrade_yaknuclear:
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 80
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		Description: upgrade-sovietautoloaders.description
 # 		Prerequisites: ~stek, !ra_upgrade_autoloaders
 # 	RenderSprites:
@@ -12020,7 +12028,7 @@ ra_upgrade_yaknuclear:
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 80
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		Description: upgrade-experimentalteslaweaponry.description
 # 		Prerequisites: ~stek, !ra_doctrine_teslatech
 # 	RenderSprites:
@@ -12035,7 +12043,7 @@ ra_upgrade_yaknuclear:
 # 		Cost: 10000
 # 	Buildable:
 # 		BuildPaletteOrder: 80
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		Description: upgrade-advancedthermobarics.description
 # 		Prerequisites: ~stek, !ra_doctrine_inferno
 # 	RenderSprites:
@@ -12050,7 +12058,7 @@ ra_upgrade_yaknuclear:
 # 		Cost: 12500
 # 	Buildable:
 # 		BuildPaletteOrder: 80
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		Description: upgrade-sovietsteel.description
 # 		Prerequisites: ~stek, !ra_upgrade_stalinium
 # 	RenderSprites:
@@ -12835,7 +12843,7 @@ up_bushidodiscipline:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-bushidodiscipline.description
 		Prerequisites: ~dome.japan, !up_bushidodiscipline
 	RenderSprites:
@@ -12850,7 +12858,7 @@ up_waveforcebullets:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-waveforcebullets.description
 		Prerequisites: ~dome.japan, !up_waveforcebullets
 	RenderSprites:
@@ -12865,7 +12873,7 @@ up_divinewindprotocol:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-divinewindprotocol.description
 		Prerequisites: ~dome.japan, !up_divinewindprotocol
 	RenderSprites:
@@ -12880,7 +12888,7 @@ up_stealthsuitintegration:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-stealthsuitintegration.description
 		Prerequisites: ~modjtek, !up_stealthsuitintegration
 	RenderSprites:
@@ -12895,7 +12903,7 @@ up_energizedarrows:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-energizedarrows.description
 		Prerequisites: ~modjtek, !up_energizedarrows
 	RenderSprites:
@@ -12910,7 +12918,7 @@ up_superiorwarengines:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-superiorwarengines.description
 		Prerequisites: ~modjtek, !up_superiorwarengines
 	RenderSprites:
@@ -12925,7 +12933,7 @@ up_advancedplasmaweapons:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-advancedplasmaweapons.description
 		Prerequisites: ~modjtek, !up_advancedplasmaweapons
 	RenderSprites:
@@ -12940,7 +12948,7 @@ up_nanotechrepairs:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-nanotechrepairs.description
 		Prerequisites: ~modjtek, !up_nanotechrepairs
 	RenderSprites:

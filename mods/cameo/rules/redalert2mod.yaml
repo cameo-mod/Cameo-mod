@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@asianalliance:
 		Name: Asian Alliance
 		InternalName: asianalliance
@@ -452,8 +452,8 @@ aa_cgtech:
 		Prerequisite: ra2tek
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 
 aa_cgmiac:
 	Inherits: ^RA2Building
@@ -8125,7 +8125,7 @@ latin_up_chaingun:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-latin_up_chaingun.description
 		Prerequisites: ~latin_cgspy, !latin_up_chaingun
 	RenderSprites:
@@ -8140,7 +8140,7 @@ latin_up_industrial:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-latin_up_industrial.description
 		Prerequisites: ~latin_cgspy, !latin_up_industrial
 	RenderSprites:
@@ -8155,7 +8155,7 @@ uplatin_alliedstolentech:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-uplatin_alliedstolentech.description
 		Prerequisites: ~latin_cgspy, !uplatin_alliedstolentech
 	RenderSprites:
@@ -8170,7 +8170,7 @@ latin_up_hotfire:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-latin_up_hotfire.description
 		Prerequisites: ~latin_cgspy, !latin_up_hotfire
 	RenderSprites:
@@ -8198,7 +8198,7 @@ uplatin_cashrecover:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-uplatin_cashrecover.description
 		Prerequisites: ~latin_cgspy, !uplatin_cashrecover
 	RenderSprites:
@@ -11698,7 +11698,7 @@ upsteel_emp:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Icon: icon2
 		Description: Allows the use of the EMP cannon support power from the Consortium Battle Lab.
 		Prerequisites: ~steel_qatech, !upsteel_emp
@@ -11714,7 +11714,7 @@ upsteel_empquantumweapons:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases damage and adds a powerful EMP effect to all Quantum Weapons. Effective against armored vehicles and aircraft.
 		Prerequisites: ~steel_qatech, !upsteel_empquantumweapons
 	RenderSprites:
@@ -11729,7 +11729,7 @@ upsteel_scalpel:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: Spawns Scalpel defense drones for your defensive structures.
 		Prerequisites: ~steel_qatech, !upsteel_scalpel
 	RenderSprites:
@@ -11744,7 +11744,7 @@ upsteel_shielresistance:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases the amount of damage shields can take.
 		Prerequisites: ~steel_qatech, !upsteel_shielresistance
 	RenderSprites:
@@ -11867,7 +11867,7 @@ upnax_resurrection:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Infantry killed by small arms leave corpses that can resurrect as zombies.
 		Prerequisites: ~nax_tech, ~disabled
 	RenderSprites:
@@ -12020,6 +12020,10 @@ nax_radar:
 		Dimensions: 4,3
 	ProvidesPrerequisite:
 		Prerequisite: anyrahq
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 nax_airfield:
 	Inherits: ^RA2Defense
@@ -12277,8 +12281,8 @@ nax_tek:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	Valued:
 		Cost: 2000
 
@@ -12295,8 +12299,8 @@ nax_tech:
 	Building:
 		Footprint: =xxx xxxx xxx=
 		Dimensions: 4,3
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 	DetonateWeaponPower@NaxiSupportZombies:
 		OrderName: NaxiSupportZombies
 		Prerequisites:
@@ -12828,6 +12832,10 @@ nax2_radar:
 		Dimensions: 4,3
 	ProvidesPrerequisite:
 		Prerequisite: anyrahq
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 nax2_airfield:
 	Inherits: ^RA2Defense
@@ -13108,8 +13116,8 @@ nax2_tech:
 	Building:
 		Footprint: =xxx xxxx xxx=
 		Dimensions: 4,3
-	Production@Upgrades:
-		Produces: Upgrades
+	Production@Research:
+		Produces: Research
 
 nax2_weap:
 	Inherits: ^RA2DefaultWeap
@@ -15999,7 +16007,7 @@ up_ostfrontexperience:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: Infantry gets 15% to range, damage and armor
 		Prerequisites: ~nax_radar, !up_ostfrontexperience
 	RenderSprites:
@@ -16036,7 +16044,7 @@ up_atlantikwall:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Addons
+		Queue: Upgrades
 		Description: Defenses get 20% armor and automatic repair.
 		Prerequisites: ~nax_radar, !up_atlantikwall
 	RenderSprites:
@@ -16070,7 +16078,7 @@ up_tankarsenalrenovation:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Upgrades
+		Queue: Research
 		Description: Tier I-II gain 15% to speed, damage, reload speed and armor
 		Prerequisites: ~nax_tech, !up_tankarsenalrenovation
 	RenderSprites:
@@ -16104,7 +16112,7 @@ up_massopticsintegration:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Increase accuracy, vision, detection and attack range of scouts, artillery and AA by 25%
 		Prerequisites: ~nax_tech, !up_massopticsintegration
 	RenderSprites:
@@ -16135,7 +16143,7 @@ up_wunderwaffe:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 120
-		Queue: Upgrades
+		Queue: Research
 		Description: High Tier vehicles get 20% to attack speed, damage and armor
 		Prerequisites: ~nax_tech, !up_wunderwaffe
 	RenderSprites:
@@ -16150,7 +16158,7 @@ up_blitzkrieg:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 130
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-blitzkrieg.description
 		Prerequisites: ~nax_tech, !up_blitzkrieg
 	RenderSprites:
@@ -16198,7 +16206,7 @@ upnax2_ylaser:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Addons
+		Queue: Upgrades
 		Description: Yellow lasers upgrades shooting range and burst
 		Prerequisites: ~nax2_radar, !upnax2_ylaser
 	RenderSprites:
@@ -16221,7 +16229,7 @@ upnax2_gplasma:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 50
-		Queue: Addons
+		Queue: Upgrades
 		Description: Tanks deals more damage and Tesla type damage
 		Prerequisites: ~nax2_radar, !upnax2_gplasma
 	RenderSprites:

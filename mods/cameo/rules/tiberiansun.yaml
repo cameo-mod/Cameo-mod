@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@tsgdi:
 		Name: GDI TS
 		InternalName: tsgdi
@@ -1710,6 +1710,10 @@ tsntradr:
 	# 	AllowMultiple: True
 	RenderSprites:
 		PlayerPalette: playerra2
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 tsntradrcabal:
 	Inherits: tsntradr
@@ -1785,6 +1789,10 @@ tsgtradr:
 	# SupportPowerChargeBar:
 	RenderSprites:
 		PlayerPalette: playerra2
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 tsnttech:
 	Inherits: ^BaseBuilding
@@ -11209,7 +11217,7 @@ up_seretraining:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-seretraining.description
 		Prerequisites: ~tsgtradr, !up_seretraining
 	RenderSprites:
@@ -11237,7 +11245,7 @@ up_tsprojectileimprovements:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-tsprojectileimprovements.description
 		Prerequisites: ~tsgtradr, !up_tsprojectileimprovements
 	RenderSprites:
@@ -11265,7 +11273,7 @@ up_mechanicalreliability:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-mechanicalreliability.description
 		Prerequisites: ~tsgtradr, !up_mechanicalreliability
 	RenderSprites:
@@ -11307,7 +11315,7 @@ up_ceramicarmor:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 110
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-ceramicarmor.description
 		Prerequisites: ~tsgttech, !up_ceramicarmor
 	RenderSprites:
@@ -11335,7 +11343,7 @@ up_mechengineering:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-mechengineering.description
 		Prerequisites: ~tsgttech, !up_mechengineering
 	RenderSprites:
@@ -11363,7 +11371,7 @@ up_sonicweaponry:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-sonicweaponry.description
 		Prerequisites: ~tsgttech, !up_sonicweaponry
 	RenderSprites:
@@ -11385,7 +11393,7 @@ up_railgunweaponry:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-railgunweaponry.description
 		Prerequisites: ~tsgttech, !up_railgunweaponry
 	RenderSprites:
@@ -11416,7 +11424,7 @@ up_modernfirecontrolsystems:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 120
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-modernfirecontrolsystems.description
 		Prerequisites: ~tsgttech, !up_modernfirecontrolsystems
 	RenderSprites:
@@ -11472,7 +11480,7 @@ up_infiltrationkit:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Addons
+		Queue: Upgrades
 		Description: Procure personal stealth suit to Light Infantry and Shotgun Commando. Allows Chameleon Spies to infiltrate buildings.
 		Prerequisites: ~tsntradr, !up_infiltrationkit
 	RenderSprites:
@@ -11497,7 +11505,7 @@ up_mobilityspecialization:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Addons
+		Queue: Upgrades
 		Description: Increases armor, accuracy, speed, vision, detection and attack range for the Brotherhood's light vehicles and aircraft.
 		Prerequisites: ~tsntradr, !up_mobilityspecialization
 	RenderSprites:
@@ -11537,7 +11545,7 @@ up_auxiliaryweapon:
 		Cost: 4000
 	Buildable:
 		BuildPaletteOrder: 110
-		Queue: Addons
+		Queue: Upgrades
 		Description: Adds secondary weapons or improves existing ones in most of Brotherhood's arsenal.
 		Prerequisites: ~tsntradr, !up_auxiliaryweapon
 	RenderSprites:
@@ -11567,7 +11575,7 @@ up_stealthfieldsimprovements:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases effectiveness of Stealth Generators and Stealth Tanks, and upgrades Harvesters with portable stealth generator.
 		Prerequisites: ~tsnttech, !up_stealthfieldsimprovements
 	RenderSprites:
@@ -11592,7 +11600,7 @@ up_tiberiumlenses:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Upgrades
+		Queue: Research
 		Description: Procure laser weaponries for the Brotherhood's combatants. Improve effectiveness of existing laser-based weapons.
 		Prerequisites: ~tsnttech, !up_tiberiumlenses
 	RenderSprites:
@@ -11614,7 +11622,7 @@ up_tiberiumcoremissiles:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 100
-		Queue: Upgrades
+		Queue: Research
 		Description: Procure tiberium core missile technology to Rocket Soldier, SAM Site, Attack Cycle and Stealth Tank, increasing their firepower.
 		Prerequisites: ~tsnttech, !up_tiberiumcoremissiles
 	RenderSprites:
@@ -11636,7 +11644,7 @@ up_advancedtiberiumrefinement:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 110
-		Queue: Upgrades
+		Queue: Research
 		Description: Allows construction of the Waste Facility. Increases all vehicles speed by 25%, and twice the improvement for Harvesters.
 		Prerequisites: ~tsnttech, !up_advancedtiberiumrefinement
 	RenderSprites:
@@ -11704,7 +11712,7 @@ up_willofkane:
 		Cost: 8000
 	Buildable:
 		BuildPaletteOrder: 120
-		Queue: Upgrades
+		Queue: Research
 		Description: One vision. One purpose. Peace through power. All infantry get firepower bonus based on missing health.
 		Prerequisites: ~tsnttech, !up_willofkane
 	RenderSprites:

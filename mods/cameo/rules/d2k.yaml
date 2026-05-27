@@ -1081,10 +1081,6 @@ d2k_barracks.ixian:
 		Weapons: Debris2, Debris3
 		Pieces: 1, 2
 		Range: 1c512, 2c768
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
 
 d2k_barracks.ordos:
 	Inherits: ^D2KBuilding
@@ -1128,10 +1124,6 @@ d2k_barracks.ordos:
 		Weapons: Debris2, Debris3
 		Pieces: 1, 2
 		Range: 1c512, 2c768
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
 
 # d2k_flesh_vat:
 # 	Inherits: ^D2KBuilding
@@ -1633,7 +1625,7 @@ heavy_factory:
 	ProvidesPrerequisite@heavy_factory:
 		Prerequisite: heavy_factory
 	ProductionBar@upgrade:
-		ProductionType: Addons
+		ProductionType: Upgrades
 	GrantConditionOnPrerequisite@UPGRADEABLE:
 		Condition: upgrade_heavy
 		Prerequisites: upgrade_heavy
@@ -1866,6 +1858,10 @@ outpost.ixian:
 		Actor: light_inf
 	ProvidesPrerequisite@outpost:
 		Prerequisite: outpost.d2k
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 outpost.ordos:
 	Inherits: ^D2KBuilding
@@ -1901,6 +1897,10 @@ outpost.ordos:
 		Actor: light_inf
 	ProvidesPrerequisite@outpost:
 		Prerequisite: outpost.d2k
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	ParatroopersPower@paratroopers:
 		OrderName: OrdosSmugglers
 		Prerequisites:
@@ -2136,10 +2136,6 @@ high_tech_factory.ixian:
 		Actor: light_inf
 	SpawnActorOnDeath@death4:
 		Actor: trooper
-	Production@Addons:
-		Produces: Addons
-	ProductionBar@Addons:
-		ProductionType: Addons
 
 starport.ixian:
 	Inherits: ^D2KBuilding
@@ -10524,7 +10520,7 @@ upgrade_conyard:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~d2k_construction_yard, research_centre, !upgrade_conyard
-		Queue: Addons
+		Queue: Upgrades
 		BuildLimit: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -10542,7 +10538,7 @@ upgrade_barracks:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~d2k_barracks, research_centre, !upgrade_barracks
-		Queue: Addons
+		Queue: Upgrades
 		BuildLimit: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -10560,7 +10556,7 @@ upgrade_light:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~light_factory, research_centre, !upgrade_light
-		Queue: Addons
+		Queue: Upgrades
 		BuildLimit: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -10578,7 +10574,7 @@ upgrade_heavy:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~heavy_factory, research_centre, !upgrade_heavy
-		Queue: Addons
+		Queue: Upgrades
 		BuildLimit: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -10596,7 +10592,7 @@ upgrade_hightech:
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~high_tech_factory, research_centre, !upgrade_hightech
-		Queue: Addons
+		Queue: Upgrades
 		BuildLimit: 1
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -10616,7 +10612,7 @@ d2k_wind_trap_upgrade:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: ~outpost.d2k, !d2k_wind_trap_upgrade
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-wind_trap.description
 		IconPalette: d2kunit
 	RenderSprites:
@@ -10632,7 +10628,7 @@ d2k_spice_sifter_upgrade:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: ~research_centre, !d2k_spice_sifter_upgrade
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-spice_sifter.description
 		IconPalette: d2kunit
 	RenderSprites:
@@ -10645,6 +10641,7 @@ d2k_upgrade_twinrockettrooper:
 	Tooltip:
 		Name: Twin Bazooka Upgrade
 	Buildable:
+		Queue: Upgrades
 		Description: Upgrades Rocket Troopers with Twin Rocket Troopers
 		Prerequisites: ~outpost.ixian, !d2k_upgrade_twinrockettrooper
 		# Prerequisites: ~outpost.d2k, !d2k_upgrade_twinrockettrooper
@@ -10660,7 +10657,7 @@ d2k_upgrade_needleguns:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: ~outpost.ixian, !d2k_upgrade_needleguns
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-d2k_upgrade_needleguns.description
 		IconPalette: d2kunit
 	RenderSprites:
@@ -10674,7 +10671,7 @@ d2k_personal_shield:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Addons
+		Queue: Upgrades
 		Description: upgrade-personal_shield.description
 		Prerequisites: ~outpost.ixian, !d2k_personal_shield
 		IconPalette: ra2
@@ -10690,7 +10687,7 @@ d2k_general_purpose_armor:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: ~research_centre.ixian, !d2k_general_purpose_armor
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-d2k_general_purpose_armor.description
 		IconPalette: d2kunit
 	RenderSprites:
@@ -10705,7 +10702,7 @@ d2k_siege_range_upgrade:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: ~research_centre.ixian, !d2k_siege_range_upgrade
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-d2k_siege_range_upgrade.description
 	RenderSprites:
 		Image: d2k_siege_tank_higher_range
@@ -10719,7 +10716,7 @@ d2k_heavy_missile_upgrade:
 	Buildable:
 		BuildPaletteOrder: 200
 		Prerequisites: ~research_centre.ixian, !d2k_heavy_missile_upgrade
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-d2k_heavy_missile_upgrade.description
 	RenderSprites:
 		Image: ix_missile_tank
@@ -10732,7 +10729,7 @@ d2k_advanced_ixian_technology:
 		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: upgrade-d2k_advanced_ixian_technology.description
 		Prerequisites: ~research_centre.ixian, d2k_personal_shield, !d2k_advanced_ixian_technology
 	RenderSprites:
@@ -10760,6 +10757,7 @@ d2k_aatrooper_upgrade:
 	Tooltip:
 		Name: Anti Air Trooper Upgrade
 	Buildable:
+		Queue: Upgrades
 		Description: Upgrades the Rocket Trooper to the Anti Air Trooper
 		Prerequisites: ~outpost.ordos, !d2k_aatrooper_upgrade
 	RenderSprites:
@@ -10770,6 +10768,7 @@ d2k_ordos_upgrade_heavycombattank:
 	Tooltip:
 		Name: Heavy Combat Tank Upgrade
 	Buildable:
+		Queue: Upgrades
 		Description: Upgrades the Ordos Combat Tank to the Heavy Combat Tank
 		Prerequisites: ~outpost.ordos, !d2k_ordos_upgrade_heavycombattank
 		IconPalette: ra2
@@ -10781,6 +10780,7 @@ d2k_ordos_upgrade_heavycombattank_rockets:
 	Tooltip:
 		Name: Heavy Combat Tank Rockets Upgrade
 	Buildable:
+		Queue: Upgrades
 		Description: Upgrades the Heavy Combat Tank with Rocket Launchers.
 		Prerequisites: ~outpost.ordos, research_centre.ordos, d2k_ordos_upgrade_heavycombattank, !d2k_ordos_upgrade_heavycombattank_rockets
 	RenderSprites:
@@ -10791,6 +10791,7 @@ d2k_heavy_autogun_tank_upgrade:
 	Tooltip:
 		Name: Heavy Autogun Tank Upgrade
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Autogun Tank to the Heavy Autogun Tank
 		Prerequisites: ~research_centre.ordos, ~d2k_ordos_upgrade_heavycombattank, !d2k_heavy_autogun_tank_upgrade
 	RenderSprites:
@@ -10884,7 +10885,7 @@ ordos_upgrade_contraband:
 # 	Buildable:
 # 		BuildPaletteOrder: 200
 # 		Prerequisites: ~du_ornithopter, ~!d2k_ornithopter_upgrade
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		BuildDuration: 1500
 # 		BuildDurationModifier: 100
 # 		Description: Ornithopters will have bombs replaced by guided missiles
@@ -11854,7 +11855,7 @@ combat_tank_o.husk:
 # 	Buildable:
 # 		BuildPaletteOrder: 200
 # 		Prerequisites: ~!research.missile_tank_vordel
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		BuildDuration: 1500
 # 		BuildDurationModifier: 100
 # 		Description: Unlocks Missile Tank
@@ -11872,7 +11873,7 @@ combat_tank_o.husk:
 # 	Buildable:
 # 		BuildPaletteOrder: 200
 # 		Prerequisites: ~!Upgrades_apparition, ~research.missile_tank_vordel
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		BuildDuration: 2250
 # 		BuildDurationModifier: 100
 # 		Description: Unlocks Apparition
@@ -11890,7 +11891,7 @@ combat_tank_o.husk:
 # 	Buildable:
 # 		BuildPaletteOrder: 200
 # 		Prerequisites: ~!Upgrades_aircraft_eater, ~Upgrades_defender
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		BuildDuration: 3500
 # 		BuildDurationModifier: 100
 # 		Description: Unlocks Aircraft Eater
@@ -11908,7 +11909,7 @@ combat_tank_o.husk:
 # 	Buildable:
 # 		BuildPaletteOrder: 200
 # 		Prerequisites: ~!Upgrades_defender, ~Upgrades_apparition
-# 		Queue: Upgrades
+# 		Queue: Research
 # 		BuildDuration: 2500
 # 		BuildDurationModifier: 100
 # 		Description: Unlocks Defender

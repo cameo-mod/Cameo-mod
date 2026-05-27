@@ -2286,7 +2286,7 @@ susastrategy:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~anysusa, usaweaporairport
-	Production@Upgrades:
+	Production@Research:
 		Produces: StrategyUpgrades.USA
 	Production@intelligence:
 		Produces: SpySatellite
@@ -5312,7 +5312,7 @@ susahangar:
 	RallyPoint:
 	WithIdleOverlay@blink:
 		Sequence: landing-pad
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: AirUpgrades.USA
 	Production@NORMAL:
 		Produces: Aircraft
@@ -7842,7 +7842,7 @@ sglairpad:
 		Facing: 768
 	-WithDeathAnimation:
 	RallyPoint:
-	#Production@Upgrades:
+	#Production@Research:
 	#	Produces: AirUpgrades.GLA
 	Production@NORMAL:
 		Produces: Aircraft
@@ -14519,10 +14519,10 @@ schindustrialplant:
 		Palette: placelinesegment
 		Offset: -2000,-1000,0
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 
 upschreactivearmor:
 	Inherits: ^upgrade.template
@@ -14530,7 +14530,7 @@ upschreactivearmor:
 		Name: Reactive Armor
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Installs Explosive reactive armor panels on tanks increasing their armors by 25%\nInstalled on Battlemaster, Warmaster, Reaper and Emperor Overlord
 		Prerequisites: ~!upschreactivearmor, ~schina_tank
 		IconPalette: ra2
@@ -14547,7 +14547,7 @@ upschadvancedautoloader:
 		Name: Advanced Autoloader
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Unlocks 3-fire bursts for Battlemasters
 		Prerequisites: ~!upschadvancedautoloader, ~schina_tank
 		IconPalette: ra2
@@ -15850,10 +15850,10 @@ schnuclearresearchplant:
 	LaysMinefield@minefield:
 		Locations: 0,-1, 1,-1, 2,-1, 3,-1, -1,0, -1,1, 4,0, 4,1, 0,2, 1,2, 2,2, 3,2
 	ProvidesPrerequisite@buildingname:
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionBar@Upgrades:
-		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
 	Power:
 		Amount: -50
 	Voiced:
@@ -15866,7 +15866,7 @@ upschradiationsuits:
 		Name: Radiation Suits
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Protects infantry from radiation, toxins and flames
 		Prerequisites: ~!upschradiationsuits
 		IconPalette: ra2
@@ -15883,7 +15883,7 @@ upschradiationwarheads:
 		Name: Radiation Warheads
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: All Infantry gets radiation tipped weapons
 		Prerequisites: ~!upschradiationwarheads
 		IconPalette: ra2
@@ -15900,7 +15900,7 @@ upschweapongradeuraniumshells:
 		Name: Weapons Grade Uranium Shells
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: 25% Bonus damage for Battlemasters, Devastators, Overlords and Siege Cannons
 		Prerequisites: ~!upschweapongradeuraniumshells
 		IconPalette: ra2
@@ -15917,7 +15917,7 @@ upschisotopestability:
 		Name: Isotope Stability
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: Tanks gain fail-safe reactors which prevents nuclear engines from exploding violently
 		Prerequisites: ~!upschisotopestability
 	Valued:
@@ -15933,7 +15933,7 @@ upschfusionreactor:
 		Name: Fusion Reactors
 	Buildable:
 		BuildPaletteOrder: 200
-		Queue: Upgrades
+		Queue: Research
 		Description: 25% Movement speed for Gattling Tanks, R.A.D. Tanks, Battlemasters, Devastators, Overlords and Siege Cannons.
 		Prerequisites: ~!upschfusionreactor
 	Valued:

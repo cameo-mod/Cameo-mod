@@ -584,9 +584,9 @@ wc_h_lumbermill:
 	RevealsShroud:
 		Range: 6c0
 	Production@NORMAL:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Refinery:
 		DockAngle: 448
 		DockOffset: 0,2
@@ -636,9 +636,9 @@ wc_h_blacksmith:
 		Name: Blacksmith
 	ProvidesPrerequisite:
 	Production@NORMAL:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Buildable:
 		BuildPaletteOrder: 14
 		Prerequisites: wc_h_barracks
@@ -756,9 +756,9 @@ wc_h_stable:
 	Tooltip:
 		Name: Stable
 	Production@NORMAL:
-		Produces: Upgrades
+		Produces: Research
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	ProvidesPrerequisite:
 	Buildable:
 		BuildPaletteOrder: 16
@@ -1054,13 +1054,13 @@ wc_o_lumbermill:
 		Prerequisites: wc_o_farm
 		Queue: Building, RABuilding
 		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resource\nProduces spears enabling Spearmen\nProvides spear upgrades for spearmen and Guard towers
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	FreeActor:
 		Actor: wc_o_peon
 	SpawnActorsOnSell:
@@ -1070,13 +1070,13 @@ wc_o_lumbermill:
 
 wc_o_blacksmith:
 	Inherits@wc_h_blacksmith: wc_h_blacksmith
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Buildable:
 		Prerequisites: wc_o_barracks
 		Queue: Building, RABuilding
@@ -1114,13 +1114,13 @@ wc_o_kennel:
 	Inherits@wc_h_stable: wc_h_stable
 	Tooltip:
 		Name: Kennels
-	Production@Upgrades:
-		Produces: Upgrades
-	ProductionQueue@Upgrades:
+	Production@Research:
+		Produces: Research
+	ProductionQueue@Research:
 		Type: Upgrades
 		Group: Upgrade
 	ProductionBar@NORMAL:
-		ProductionType: Upgrades
+		ProductionType: Research
 	Buildable:
 		Prerequisites: wc_o_barracks
 		Queue: Building, RABuilding
@@ -2652,7 +2652,7 @@ wc_h_str_arrow:
 		Name: Arrow Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Arrow Damage dealt by Archers and Guard Towers by 40%
@@ -2669,7 +2669,7 @@ wc_h_str_arrow2:
 		Name: Arrow Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Arrow Damage by Archers and Guard Towers by further 40%
@@ -2686,7 +2686,7 @@ wc_h_str_sword:
 		Name: Sword Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Sword Damage by 30%
@@ -2703,7 +2703,7 @@ wc_h_str_sword2:
 		Name: Sword Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Sword Damage by further 30%
@@ -2720,7 +2720,7 @@ wc_h_str_shield:
 		Name: Shield Strength
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Shield Resistance of all units by 25%
@@ -2737,7 +2737,7 @@ wc_h_str_shield2:
 		Name: Shield Strength II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Shield Resistance of all units by further 25%
@@ -2754,7 +2754,7 @@ wc_h_horses:
 		Name: Breed Faster Horses
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Horses speed by 20%
@@ -2771,7 +2771,7 @@ wc_h_horses2:
 		Name: Breed Faster Horses II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Description: Increases Horses speed by further 20%
@@ -2787,7 +2787,7 @@ wc_o_str_spear:
 	Tooltip:
 		Name: Spear Strength
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Spear Damage dealt by Spearmen and Guard Towers by 35%
 		Prerequisites: ~!wc_o_str_spear
 	RenderSprites:
@@ -2798,7 +2798,7 @@ wc_o_str_spear2:
 	Tooltip:
 		Name: Spear Strength II
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Spear Damage dealt by Spearmen and Guard Towers by further 35%
 		Prerequisites: ~!wc_o_str_spear2, ~wc_o_str_spear
 	RenderSprites:
@@ -2809,7 +2809,7 @@ wc_o_str_axe:
 	Tooltip:
 		Name: Axe Strength
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Axe Damage by 30%
 		Prerequisites: ~!wc_o_str_axe2
 	Valued:
@@ -2822,7 +2822,7 @@ wc_o_str_axe2:
 	Tooltip:
 		Name: Axe Strength II
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Axe Damage by further 30%
 		Prerequisites: ~!wc_o_str_axe2, ~wc_o_str_axe
 	RenderSprites:
@@ -2831,7 +2831,7 @@ wc_o_str_axe2:
 wc_o_str_shield:
 	Inherits@shld: wc_h_str_shield
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Prerequisites: ~!wc_o_str_shield
 	RenderSprites:
 		Image: wc_o_str_shield
@@ -2839,7 +2839,7 @@ wc_o_str_shield:
 wc_o_str_shield2:
 	Inherits@shld: wc_h_str_shield2
 	Buildable:
-		Queue: Upgrades
+		Queue: Research
 		Prerequisites: ~!wc_o_str_shield2, ~wc_o_str_shield
 	RenderSprites:
 		Image: wc_o_str_shield2
@@ -2850,7 +2850,7 @@ wc_o_wolves:
 		Name: Breed Faster Wolves
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Wolves speed by 20%
 		Prerequisites: ~!wc_o_wolves
 	RenderSprites:
@@ -2862,7 +2862,7 @@ wc_o_wolves2:
 		Name: Breed Faster Wolves II
 	Buildable:
 		BuildPaletteOrder: 1
-		Queue: Upgrades
+		Queue: Research
 		Description: Increases Wolves speed by further 20%
 		Prerequisites: ~!wc_o_wolves2, ~wc_o_wolves
 	RenderSprites:
