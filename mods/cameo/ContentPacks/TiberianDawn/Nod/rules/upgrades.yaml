@@ -1,1 +1,479 @@
+^NodRankDecoration:
+	WithDecoration@RANK-1:
+		Image: nodrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: nodrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: nodrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: nodrank
+		Sequence: rank-elite
+		Palette: greyscale
 
+^ElementalWarfare:
+	FirepowerMultiplier@up_elementalwarfare:
+		RequiresCondition: up_elementalwarfare
+		Modifier: 125
+	DamageMultiplier@up_elementalwarfare:
+		RequiresCondition: up_elementalwarfare
+		Modifier: 80
+	GrantConditionOnPrerequisite@up_elementalwarfare:
+		Condition: up_elementalwarfare
+		Prerequisites: up_elementalwarfare
+	ActorStatValues:
+		Upgrades: up_elementalwarfare
+
+^EliteCapacitors:
+	FirepowerMultiplier@up_elitecapacitors:
+		RequiresCondition: up_elitecapacitors
+		Modifier: 130
+	ReloadDelayMultiplier@up_elitecapacitors:
+		RequiresCondition: up_elitecapacitors
+		Modifier: 70
+	RangeMultiplier@up_elitecapacitors:
+		RequiresCondition: up_elitecapacitors
+		Modifier: 115
+	RevealsShroudMultiplier@up_elitecapacitors:
+		RequiresCondition: up_elitecapacitors
+		Modifier: 115
+	DetectCloakedMultiplier@up_elitecapacitors:
+		RequiresCondition: up_elitecapacitors
+		Modifier: 115
+	GrantConditionOnPrerequisite@up_elitecapacitors:
+		Condition: up_elitecapacitors
+		Prerequisites: up_elitecapacitors
+	ActorStatValues:
+		Upgrades: up_elitecapacitors
+
+^ImprovedArtilleries:
+	FirepowerMultiplier@up_improvedartilleries:
+		RequiresCondition: up_improvedartilleries
+		Modifier: 125
+	RangeMultiplier@up_improvedartilleries:
+		RequiresCondition: up_improvedartilleries
+		Modifier: 125
+	RevealsShroudMultiplier@up_improvedartilleries:
+		RequiresCondition: up_improvedartilleries
+		Modifier: 150
+	GrantConditionOnPrerequisite@up_improvedartilleries:
+		Condition: up_improvedartilleries
+		Prerequisites: up_improvedartilleries
+	ActorStatValues:
+		Upgrades: up_improvedartilleries
+
+^GuerillaTactics:
+	FirepowerMultiplier@up_guerillatactics:
+		RequiresCondition: up_guerillatactics
+		Modifier: 115
+	SpeedMultiplier@up_guerillatactics:
+		RequiresCondition: up_guerillatactics
+		Modifier: 110
+	RangeMultiplier@up_guerillatactics:
+		RequiresCondition: up_guerillatactics
+		Modifier: 105
+	RevealsShroudMultiplier@up_guerillatactics:
+		RequiresCondition: up_guerillatactics
+		Modifier: 105
+	DetectCloakedMultiplier@up_guerillatactics:
+		RequiresCondition: up_guerillatactics
+		Modifier: 105
+	GrantConditionOnPrerequisite@up_guerillatactics:
+		Condition: up_guerillatactics
+		Prerequisites: up_guerillatactics
+	ActorStatValues:
+		Upgrades: up_guerillatactics
+
+^AdvancedGuerillaTactics:
+	FirepowerMultiplier@up_advancedguerillatactics:
+		RequiresCondition: up_advancedguerillatactics
+		Modifier: 115
+	SpeedMultiplier@up_advancedguerillatactics:
+		RequiresCondition: up_advancedguerillatactics
+		Modifier: 110
+	RangeMultiplier@up_advancedguerillatactics:
+		RequiresCondition: up_advancedguerillatactics
+		Modifier: 105
+	RevealsShroudMultiplier@up_advancedguerillatactics:
+		RequiresCondition: up_advancedguerillatactics
+		Modifier: 105
+	DetectCloakedMultiplier@up_advancedguerillatactics:
+		RequiresCondition: up_advancedguerillatactics
+		Modifier: 105
+	GrantConditionOnPrerequisite@up_advancedguerillatactics:
+		Condition: up_advancedguerillatactics
+		Prerequisites: up_advancedguerillatactics
+
+^BlackMarketUpgrades:
+	GrantConditionOnPrerequisite@up_blackmarketupgrades:
+		Condition: up_blackmarketupgrades
+		Prerequisites: up_blackmarketupgrades
+	ActorStatValues:
+		Upgrades: up_blackmarketupgrades
+
+^TiberiumInfusion:
+	GrantConditionOnPrerequisite@up_tiberiuminfusion:
+		Condition: up_tiberiuminfusion
+		Prerequisites: up_tiberiuminfusion
+	ChangesHealth@up_tiberiuminfusion1:
+		PercentageStep: 1
+		Delay: 10
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_tiberiuminfusion
+	ChangesHealth@up_tiberiuminfusion2:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_tiberiuminfusion
+	ReloadDelayMultiplier@up_tiberiuminfusion:
+		RequiresCondition: up_tiberiuminfusion
+		Modifier: 90
+	SpeedMultiplier@up_tiberiuminfusion:
+		RequiresCondition: up_tiberiuminfusion
+		Modifier: 110
+	DamageMultiplier@up_tiberiuminfusion:
+		RequiresCondition: up_tiberiuminfusion
+		Modifier: 90
+	ActorStatValues:
+		Upgrades: up_tiberiuminfusion
+
+^CyberneticModifications:
+	GrantConditionOnPrerequisite@up_cyberneticmodifications:
+		Condition: up_cyberneticmodifications
+		Prerequisites: up_cyberneticmodifications
+	Shielded:
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenAmount: 25
+		RegenInterval: 1
+		ShieldsUpCondition: armored
+		RequiresCondition: (up_cyberneticmodifications || shieldgen)
+		SelectionBarColor: FFFF88FF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: up_cyberneticmodifications
+	Armor@up_cyberneticmodifications:
+		Type: Medium
+		RequiresCondition: armored
+	DamageMultiplier@up_cyberneticmodifications:
+		RequiresCondition: up_cyberneticmodifications
+		Modifier: 200
+	SpeedMultiplier@up_cyberneticmodifications:
+		RequiresCondition: up_cyberneticmodifications
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: up_cyberneticmodifications
+
+up_guerillatactics:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Guerilla Tactics
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-guerillatactics.description
+		Prerequisites: ~hq.nod, !up_guerillatactics
+	RenderSprites:
+		Image: guerillatacticsicon
+	ProvidesPrerequisite:
+
+up_tiberiuminfusion:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tiberium Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-tiberiuminfusion.description
+		Prerequisites: ~hq.nod, !up_tiberiuminfusion
+	RenderSprites:
+		Image: tiberiuminfusionicon
+	ProvidesPrerequisite:
+
+up_improvedartilleries:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Improved Artilleries
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-improvedartilleries.description
+		Prerequisites: ~hq.nod, !up_improvedartilleries
+	RenderSprites:
+		Image: improvedartilleriesicon
+	ProvidesPrerequisite:
+
+up_blackmarketupgrades:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Black Market Upgrades
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-blackmarketupgrades.description
+		Prerequisites: ~tmpl, !up_blackmarketupgrades
+	RenderSprites:
+		Image: blackmarketupgradesicon
+	ProvidesPrerequisite:
+
+up_elementalwarfare:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Elemental Warfare
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-elementalwarfare.description
+		Prerequisites: ~tmpl, !up_elementalwarfare
+	RenderSprites:
+		Image: elementalwarfareicon
+	ProvidesPrerequisite:
+
+up_elitecapacitors:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Elite Capacitors
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-elitecapacitors.description
+		Prerequisites: ~tmpl, td_nod_templeprime, !up_elitecapacitors
+	RenderSprites:
+		Image: elitecapacitorsicon
+	ProvidesPrerequisite:
+
+up_cyberneticmodifications:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cybernetic Modifications
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-cyberneticmodifications.description
+		Prerequisites: ~tmpl, td_nod_templeprime, !up_cyberneticmodifications
+	RenderSprites:
+		Image: cyberneticmodificationsicon
+	ProvidesPrerequisite:
+
+up_advancedguerillatactics:
+	Inherits: ^upgrade.template
+	Tooltip:
+		Name: Advanced Guerilla Tactics
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-advancedguerillatactics.description
+		Prerequisites: ~tmpl, td_nod_templeprime, up_guerillatactics, !up_advancedguerillatactics
+	RenderSprites:
+		Image: advancedguerillatacticsicon
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.up_advancedguerillatactics
+
+team_upgrade.up_advancedguerillatactics:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: up_advancedguerillatactics
+	RenderSprites:
+		Image: advancedguerillatacticsicon
+	Tooltip:
+		Name: Advanced Guerrilla Tactics
+	Buildable:
+		Description: upgrade-advancedguerillatactics.description
+	PlayerDisplayUpgrade:
+
+	####################################################################################################
+	#		Promotions Nod
+	####################################################################################################
+
+upchemicalrocket:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Chemical Rocket Soldier
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Promotions
+		Description: Allows training of Chemical Rocket Soldiers.
+		Prerequisites: ~fact.nod, !upchemicalrocket, rank1
+	RenderSprites:
+		Image: e3chem
+	ProvidesPrerequisite:
+		Prerequisite: upchemicalrocket
+
+upchemicalbike:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Chemical Attack Bike
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Promotions
+		Description: Allows construction of Chemical Rocket Bikes.
+		Prerequisites: ~fact.nod, !upchemicalbike, upchemicalrocket, rank1
+	RenderSprites:
+		Image: chembike
+	ProvidesPrerequisite:
+		Prerequisite: upchemicalbike
+
+upchemicalstealthtank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Chemical Stealth Tank
+	Buildable:
+		BuildPaletteOrder: 7
+		Queue: Promotions
+		Description: Allows construction of Chemical Stealth Tanks.
+		Prerequisites: ~fact.nod, !upchemicalstealthtank, upchemicalbike, rank1
+	RenderSprites:
+		Image: chemstnk
+	ProvidesPrerequisite:
+		Prerequisite: upchemicalstealthtank
+
+upchemicalssmlauncher:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Chemical SSM Launcher
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Promotions
+		Description: Allows construction of Chemical SSM Launchers.
+		Prerequisites: ~fact.nod, !upchemicalssmlauncher, upchemicalstealthtank, rank1
+	RenderSprites:
+		Image: chemssm
+	ProvidesPrerequisite:
+		Prerequisite: upchemicalssmlauncher
+
+upnodbuggy2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Buggy Mk. II
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Promotions
+		Description: Allows construction of the Buggy Mk. II.
+		Prerequisites: ~fact.nod, !upnodbuggy2, rank1
+	RenderSprites:
+		Image: nodbuggy2
+	ProvidesPrerequisite:
+		Prerequisite: upnodbuggy2
+
+upnodltnk2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Light Tank Mk. II
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Promotions
+		Description: Allows construction of the Light Tank Mk. II.
+		Prerequisites: ~fact.nod, !upnodltnk2, upnodbuggy2, rank1
+	RenderSprites:
+		Image: nodltnk2
+	ProvidesPrerequisite:
+		Prerequisite: upnodltnk2
+
+upnodftnk2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Flame Tank Mk. II
+	Buildable:
+		BuildPaletteOrder: 8
+		Queue: Promotions
+		Description: Allows construction of the Flame Tank Mk. II.
+		Prerequisites: ~fact.nod, !upnodftnk2, upnodltnk2, rank1
+	RenderSprites:
+		Image: nodftnk2
+	ProvidesPrerequisite:
+		Prerequisite: upnodftnk2
+
+upblackhandlaser:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Laser Trooper
+	Buildable:
+		BuildPaletteOrder: 11
+		Queue: Promotions
+		Description: Allows training of Laser Troopers.
+		Prerequisites: ~fact.nod, !upblackhandlaser, upnodftnk2, rank1
+	RenderSprites:
+		Image: tsblackhandlaser
+	ProvidesPrerequisite:
+		Prerequisite: upblackhandlaser
+
+upblackhandflamer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Black Hand Flamer
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Promotions
+		Description: Allows training of Black Hand Flamers.
+		Prerequisites: ~fact.nod, !upblackhandflamer, rank1
+	RenderSprites:
+		Image: tsblackhandflamer
+	ProvidesPrerequisite:
+		Prerequisite: upblackhandflamer
+
+upstealthsoldier:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: upgrade-upnodstealth.name
+	Buildable:
+		BuildPaletteOrder: 6
+		Queue: Promotions
+		Description: upgrade-upnodstealth.description
+		Prerequisites: ~fact.nod, !upstealthsoldier, upblackhandflamer, rank1
+	RenderSprites:
+		Image: stealthtech
+	ProvidesPrerequisite:
+		Prerequisite: upstealthsoldier
+
+upnodspecter:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Specter
+	Buildable:
+		BuildPaletteOrder: 9
+		Queue: Promotions
+		Description: Allows construction of the Specter Stealth Artillery.
+		Prerequisites: ~fact.nod, !upnodspecter, upstealthsoldier, rank1
+	RenderSprites:
+		Image: nodspecter
+	ProvidesPrerequisite:
+		Prerequisite: upnodspecter
+
+upnodvenom:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: upgrade-upnodvenom.name
+	Buildable:
+		BuildPaletteOrder: 12
+		Queue: Promotions
+		Description: upgrade-upnodvenom.description
+		Prerequisites: ~fact.nod, !upnodvenom, upnodspecter, rank1
+	RenderSprites:
+		Image: nodvenomlaser
+	ProvidesPrerequisite:
+		Prerequisite: upnodvenom
