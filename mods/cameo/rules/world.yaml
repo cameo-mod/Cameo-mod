@@ -745,6 +745,52 @@
 	ControlGroups:
 	CreepLayer:
 		Palette: chrome
+	ResourceSparkleEffect:
+		ResourceTypes:
+			Ore:
+				Image: sparkle
+				Sequences: plus, cross
+				Palette: effect
+				MinInterval: 12
+				MaxInterval: 37
+				SparklesPerInterval: 1
+				MinDensityFraction: 0
+			Tiberium:
+				Image: sparkle
+				Sequences: plus, cross
+				Palette: effect
+				MinInterval: 12
+				MaxInterval: 37
+				SparklesPerInterval: 1
+				MinDensityFraction: 50
+				TintColor: 4CFF4C
+			BlueTiberium:
+				Image: sparkle
+				Sequences: plus, cross
+				Palette: effect
+				MinInterval: 12
+				MaxInterval: 37
+				SparklesPerInterval: 1
+				MinDensityFraction: 50
+				TintColor: 4CB8FF
+			RedTiberium:
+				Image: sparkle
+				Sequences: plus, cross
+				Palette: effect
+				MinInterval: 12
+				MaxInterval: 37
+				SparklesPerInterval: 1
+				MinDensityFraction: 50
+				TintColor: FF4C4C
+			GoldTiberium:
+				Image: sparkle
+				Sequences: plus, cross
+				Palette: effect
+				MinInterval: 12
+				MaxInterval: 37
+				SparklesPerInterval: 1
+				MinDensityFraction: 50
+				TintColor: FFD24C
 	ResourceRenderer:
 		ResourceTypes:
 			Tiberium:
