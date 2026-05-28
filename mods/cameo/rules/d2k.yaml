@@ -1292,20 +1292,16 @@ refinery.atreides:
 	DockHost:
 		DockAngle: 640
 		DockOffset: 1c5,0c5,0
-	FreeActor:
+	FreeActorWithDelivery@0:
 		Actor: harvester
-		SpawnOffset: 0,2
+		DeliveryOffset: 0,2
+		DeliveringActor: carryall.reinforce
 		Facing: 160
 	FreeActorWithDelivery@1:
 		Actor: harvester
 		DeliveryOffset: 2,2
 		DeliveringActor: carryall.reinforce
 		Facing: 160
-	# FreeActorWithDelivery@2:
-	# 	Actor: harvester
-	# 	DeliveryOffset: 0,2
-	# 	DeliveringActor: carryall.reinforce
-	# 	Facing: 160
 	GrantConditionOnPrerequisite@d2k_spice_sifter_upgrade:
 		Condition: d2k_spice_sifter_upgrade
 		Prerequisites: d2k_spice_sifter_upgrade
@@ -1342,20 +1338,16 @@ refinery.ordos:
 	Buildable:
 		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
 		IconPalette: d2kunit
-	FreeActor:
+	FreeActorWithDelivery@0:
 		Actor: ordos_harv
-		SpawnOffset: 0,2
+		DeliveryOffset: 0,2
+		DeliveringActor: ordos_carryall.reinforce
 		Facing: 160
 	FreeActorWithDelivery@1:
 		Actor: ordos_harv
 		DeliveryOffset: 2,2
 		DeliveringActor: ordos_carryall.reinforce
 		Facing: 160
-	# FreeActorWithDelivery@2:
-	# 	Actor: ordos_harv
-	# 	DeliveryOffset: 0,2
-	# 	DeliveringActor: ordos_carryall.reinforce
-	# 	Facing: 160
 	RenderSprites:
 		Image: refinery.ordos
 
