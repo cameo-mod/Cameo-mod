@@ -2794,7 +2794,7 @@ HPAD.NOD:
 HQ.GDI:
 	Inherits: ^TDBuilding
 	Inherits@radar: ^RadarBuilding
-	Inherits@tech: ^IsTechnoBuilding
+	# Inherits@tech: ^IsTechnoBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@spy: ^InfiltrateForSupportPowerReset
 	Inherits@shape: ^2x2Shape
@@ -2858,7 +2858,7 @@ HQ.GDI:
 HQ.Nod:
 	Inherits: ^TDBuilding
 	Inherits@radar: ^RadarBuilding
-	Inherits@tech: ^IsTechnoBuilding
+	# Inherits@tech: ^IsTechnoBuilding
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@spy: ^InfiltrateForSupportPowerReset
 	Inherits@shape: ^2x2Shape
