@@ -344,7 +344,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				largeHealthBars[index].GetScale = () =>
 				{
-					if (cachedAlive.Count >= index + 1)
+					if (cachedAlive.Count >= index + 1 && cachedAlive[index].IsInWorld)
 					{
 						var usv = cachedAlive[index].Trait<ActorStatValues>();
 						if (usv.Disguised)
@@ -358,7 +358,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				largeHealthBars[index].GetHealth = () =>
 				{
-					if (cachedAlive.Count >= index + 1)
+					if (cachedAlive.Count >= index + 1 && cachedAlive[index].IsInWorld)
 						return cachedAlive[index].Trait<ActorStatValues>().Health;
 
 					return null;
@@ -375,7 +375,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				smallHealthBars[index].GetHealth = () =>
 				{
-					if (cachedAlive.Count >= index + 1)
+					if (cachedAlive.Count >= index + 1 && cachedAlive[index].IsInWorld)
 						return cachedAlive[index].Trait<ActorStatValues>().Health;
 					else
 						return null;
@@ -392,7 +392,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 						return "";
 
 					var unit = cachedAlive[0];
-					if (unit != null)
+					if (unit != null && unit.IsInWorld)
 					{
 						var usv = unit.Trait<ActorStatValues>();
 						var labelText = "";
@@ -418,7 +418,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 						return false;
 
 					var unit = cachedAlive[0];
-					if (unit != null)
+					if (unit != null && unit.IsInWorld)
 					{
 						var usv = unit.Trait<ActorStatValues>();
 						if (usv.Disguised)
@@ -431,7 +431,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				};
 				statIcon.GetImageName = () =>
 				{
-					var unit = cachedValid.FirstOrDefault(a => !a.IsDead);
+					var unit = cachedValid.FirstOrDefault(a => !a.IsDead && a.IsInWorld);
 					if (unit != null)
 					{
 						var usv = unit.Trait<ActorStatValues>();
@@ -464,7 +464,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			lastSelectionHash = hash;
 			lastUpdateTime = now;
 			cachedValid = selection.Actors.Where(a => a.Info.HasTraitInfo<ActorStatValuesInfo>()).ToList();
-			cachedAlive = cachedValid.Where(a => !a.IsDead).ToList();
+			cachedAlive = cachedValid.Where(a => !a.IsDead && a.IsInWorld).ToList();
 		}
 	}
 }
