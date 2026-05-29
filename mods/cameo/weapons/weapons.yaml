@@ -3959,11 +3959,11 @@ Atomic:
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
 		GlowScale: 15.0
-		GlowFadeFrames: 300
+		GlowFadeFrames: 600
 		GlowFadeInFrames: 15
 	Warhead@Distort: HeatDistortion
 		Scale: 2.0
-		FadeFrames: 480
+		FadeFrames: 420
 		FadeInFrames: 15
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 2000
@@ -4460,10 +4460,6 @@ IonCannon:
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
 		Size: 2,1
 		Delay: 6
-	Warhead@Distort: HeatDistortion
-		Scale: 1.0
-		FadeFrames: 30
-		FadeInFrames: 0
 	Warhead@Effect: CreateEffect
 		ImpactSounds: ion1.aud
 		Volume: 5
@@ -4471,8 +4467,12 @@ IonCannon:
 		ValidTargets: Ground, Water, Air
 		GlowColor: 32C8FF
 		GlowScale: 7.0
-		GlowFadeFrames: 300
+		GlowFadeFrames: 600
 		GlowFadeInFrames: 5
+	Warhead@Distort: HeatDistortion
+		Scale: 1.0
+		FadeFrames: 420
+		FadeInFrames: 0
 
 ###############################################
 #           TARGETTING
