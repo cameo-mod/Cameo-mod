@@ -402,6 +402,19 @@ Container@DISPLAY_PANEL:
 					Width: PARENT_WIDTH - 24
 					Height: 30
 					Children:
+						Container@HEAT_DISTORTION_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@HEAT_DISTORTION_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-heat-distortion
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 30
+					Children:
 						Container@RESTART_REQUIRED_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20

@@ -5551,6 +5551,10 @@ ChronoshiftImpact:
 		ImpactSounds: schrmov.wav
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
+	Warhead@Distort: HeatDistortion
+		Scale: 1.2
+		FadeFrames: 20
+		FadeInFrames: 0
 
 PortableChronoTeleport:
 	Warhead@1: CreateEffect
