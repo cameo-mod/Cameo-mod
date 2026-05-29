@@ -307,6 +307,9 @@
 	GlowRenderer:
 		GlowRadius: 25
 		GlowIntensity: 0.2
+	HeatDistortionRenderer:
+		DistortionRadius: 300
+		DistortionStrength: 8
 	CloakPaletteEffect:
 	FlashPostProcessEffect@Nuke:
 		Type: Nuke

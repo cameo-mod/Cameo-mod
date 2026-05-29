@@ -20,8 +20,11 @@ namespace OpenRA.Mods.Cameo.Warheads
 	[Desc("Registers a screen-space glow flash at the impact position. Purely visual, no damage.")]
 	public class GlowImpactWarhead : Warhead
 	{
-		[Desc("Color of the glow.")]
+		[Desc("Color of the glow. Ignored when UsePlayerColor is true.")]
 		public readonly Color Color = Color.FromArgb(255, 255, 102, 0);
+
+		[Desc("Use the firing player's color instead of Color.")]
+		public readonly bool UsePlayerColor = false;
 
 		[Desc("Scale multiplier on the renderer's GlowRadius and GlowIntensity.")]
 		public readonly float Scale = 1f;
@@ -39,8 +42,14 @@ namespace OpenRA.Mods.Cameo.Warheads
 			if (!Game.Settings.Graphics.LaserGlow)
 				return;
 
+			// args.ImpactPosition is (0,0,0) for projectile-less superweapon detonations (chronoshift,
+			// nukes); fall back to the target centre in that case, like HeatDistortionWarhead does.
+			var pos = args.ImpactPosition != WPos.Zero ? args.ImpactPosition : target.CenterPosition;
+
+			var color = UsePlayerColor && args.SourceActor != null ? args.SourceActor.Owner.Color : Color;
+
 			args.SourceActor.World.WorldActor.TraitOrDefault<GlowRenderer>()
-				?.RegisterGlow(args.ImpactPosition, args.ImpactPosition, Color, Scale, FadeFrames, FadeInFrames);
+				?.RegisterGlow(pos, pos, color, Scale, FadeFrames, FadeInFrames);
 		}
 	}
 }
