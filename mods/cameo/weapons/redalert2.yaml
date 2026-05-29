@@ -5553,8 +5553,18 @@ ChronoshiftImpact:
 		ValidTargets: Ground, Water, Air
 	Warhead@Distort: HeatDistortion
 		Scale: 1.2
-		FadeFrames: 20
+		FadeFrames: 90
 		FadeInFrames: 0
+	Warhead@GlowPlayer: GlowImpact
+		UsePlayerColor: true
+		Scale: 2.0
+		FadeFrames: 90
+		FadeInFrames: 5
+	Warhead@GlowWhite: GlowImpact
+		Color: FFFFFF
+		Scale: 1.0
+		FadeFrames: 90
+		FadeInFrames: 5
 
 PortableChronoTeleport:
 	Warhead@1: CreateEffect

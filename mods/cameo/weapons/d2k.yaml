@@ -5704,8 +5704,12 @@ PulseMissile:
 		ImpactActors: false
 		GlowColor: 32C8FF
 		GlowScale: 15.0
-		GlowFadeFrames: 300
+		GlowFadeFrames: 600
 		GlowFadeInFrames: 15
+	Warhead@Distort: HeatDistortion
+		Scale: 2.0
+		FadeFrames: 420
+		FadeInFrames: 15
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 2000
 		Damage: 17500
