@@ -268,6 +268,7 @@ support-power-timer = { $player }'s { $support-power }: { $time }
 checkbox-laser-glow = Weapon Glow Effects (Experimental)
 checkbox-heat-distortion = Heat Distortion Effects (Experimental)
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
+label-renderer-backend-dropdown-container = Renderer Backend:
 
 ## settings-gameplay.yaml
 label-experimental-section-header = Experimental Features
