@@ -47,6 +47,12 @@ promotion-counter =
     .rank = Current Rank:
     .points = Promotion Points:
     .progress = Progress to next rank:
+    .progress-max = Max rank achieved
+
+commander-tree =
+    .title = Promotions
+    .points-label = Available Points
+    .close = Close
 
 actor-stats-label-prefix =
     .armor = Armor:
@@ -246,7 +252,7 @@ button-production-types-aircraft-tooltip = Aircraft
 button-production-types-naval-tooltip = Naval
 button-production-types-addon-tooltip = Building Addons
 button-production-types-upgrade-tooltip = Upgrades
-button-production-types-promotion-tooltip = Promotions
+button-production-types-promotion-tooltip = Open Promotions
 button-production-types-scroll-up-tooltip = Scroll up
 button-production-types-scroll-down-tooltip = Scroll down
 

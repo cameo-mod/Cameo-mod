@@ -1,0 +1,104 @@
+#region Copyright & License Information
+/*
+ * Copyright (c) The OpenRA Developers and Contributors
+ * This file is part of OpenRA, which is free software. It is made
+ * available to you under the terms of the GNU General Public License
+ * as published by the Free Software Foundation, either version 3 of
+ * the License, or (at your option) any later version. For more
+ * information, see COPYING.
+ */
+#endregion
+
+using System;
+using System.Linq;
+using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Common.Widgets;
+using OpenRA.Widgets;
+
+namespace OpenRA.Mods.Cameo.Widgets.Logic
+{
+	// Runs after ClassicProductionLogic on the production sidebar and repurposes the
+	// "Promotion" production-type button so that it opens the promotion tree window
+	// instead of selecting a palette tab.
+	public class PromotionTreeButtonLogic : ChromeLogic
+	{
+		const string PromotionGroupName = "Promotion";
+		const string CommanderTreeOverlayId = "COMMANDER_TREE_OVERLAY";
+
+		readonly World world;
+
+		[ObjectCreator.UseCtor]
+		public PromotionTreeButtonLogic(Widget widget, World world)
+		{
+			this.world = world;
+
+			var typesContainer = widget.GetOrNull("PRODUCTION_TYPES");
+			if (typesContainer == null)
+				return;
+
+			foreach (var child in typesContainer.Children)
+			{
+				if (child is ProductionTypeButtonWidget button &&
+					string.Equals(button.ProductionGroup, PromotionGroupName, StringComparison.OrdinalIgnoreCase))
+				{
+					SetupPromotionButton(button);
+					break;
+				}
+			}
+		}
+
+		void SetupPromotionButton(ProductionTypeButtonWidget button)
+		{
+			var queues = world?.LocalPlayer?.PlayerActor?
+				.TraitsImplementing<ProductionQueue>()
+				.Where(q => (q.Info.Group ?? q.Info.Type) == button.ProductionGroup)
+				.ToArray() ?? Array.Empty<ProductionQueue>();
+
+			button.IsDisabled = () => !queues.Any(q => q.Enabled);
+
+			button.OnMouseDown = mi =>
+			{
+				if (mi.Button == MouseButton.Left && !button.IsDisabled())
+					OpenCommanderTree();
+			};
+			button.OnMouseUp = _ => { };
+			button.OnClick = () => { };
+			button.OnKeyPress = e =>
+			{
+				if (e.Event != KeyInputEvent.Down || button.IsDisabled())
+					return;
+
+				OpenCommanderTree();
+			};
+			button.IsHighlighted = () =>
+			{
+				var current = Ui.CurrentWindow();
+				return current != null && current.Id == CommanderTreeOverlayId;
+			};
+
+			var chromeName = button.ProductionGroup.ToLowerInvariant();
+			var icon = button.GetOrNull<ImageWidget>("ICON");
+			if (icon != null)
+				icon.GetImageName = () =>
+				{
+					if (button.IsDisabled())
+						return chromeName + "-disabled";
+
+					return queues.Any(q => q.AllQueued().Any(i => i.Done)) ? chromeName + "-alert" : chromeName;
+				};
+		}
+
+		void OpenCommanderTree()
+		{
+			var current = Ui.CurrentWindow();
+			if (current != null && current.Id == CommanderTreeOverlayId)
+			{
+				Ui.CloseWindow();
+				return;
+			}
+
+			Game.OpenWindow(world, CommanderTreeOverlayId);
+			Ui.ResetTooltips();
+		}
+	}
+}
