@@ -1,0 +1,96 @@
+Container@COMMANDER_TREE_OVERLAY:
+	Width: WINDOW_WIDTH
+	Height: WINDOW_HEIGHT
+	Logic: CommanderTreeWindowLogic
+	Children:
+		LogicKeyListener@HOTKEYS:
+		CommanderTreeDismiss@DISMISS_AREA:
+			Width: WINDOW_WIDTH
+			Height: WINDOW_HEIGHT
+			Color: 000000A0
+		Background@COMMANDER_TREE_WINDOW:
+			Width: WINDOW_WIDTH * 4 / 5
+			Height: WINDOW_HEIGHT * 4 / 5
+			X: (WINDOW_WIDTH - WIDTH) / 2
+			Y: (WINDOW_HEIGHT - HEIGHT) / 2
+			Background: dialog4
+			Children:
+				Label@TITLE:
+					X: 24
+					Y: 18
+					Font: Bold
+					Text: commander-tree.title
+				Container@HEADER_STATS:
+					X: 24
+					Y: 56
+					Width: PARENT_WIDTH - 48
+					Height: 72
+					Children:
+						Label@RANK_LABEL:
+							Width: 220
+							Font: Bold
+							Text: promotion-counter.rank
+						Label@RANK_VALUE:
+							X: 220
+							Width: PARENT_WIDTH - 220
+							Font: Bold
+						Label@POINTS_LABEL:
+							Y: 24
+							Width: 220
+							Font: Bold
+							Text: commander-tree.points-label
+						Label@POINTS_VALUE:
+							Y: 24
+							X: 220
+							Width: PARENT_WIDTH - 220
+							Font: Bold
+						Label@PROGRESS_LABEL:
+							Y: 48
+							Width: 220
+							Font: Bold
+							Text: promotion-counter.progress
+						Label@PROGRESS_VALUE:
+							Y: 48
+							X: 220
+							Width: PARENT_WIDTH - 220
+							Font: Bold
+				Button@CLOSE_BUTTON:
+					X: PARENT_WIDTH - WIDTH - 24
+					Y: 18
+					Width: 32
+					Height: 32
+					Background: button
+					TooltipText: commander-tree.close
+					Children:
+						Label@TEXT:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Align: Center
+							VAlign: Middle
+							Font: Bold
+							Text: X
+				ScrollPanel@TREE_SCROLL:
+					X: 24
+					Y: 148
+					Width: PARENT_WIDTH - 48
+					Height: PARENT_HEIGHT - 224
+					ScrollBar: Right
+					Children:
+						CommanderTree@COMMANDER_TREE:
+							TooltipContainer: COMMANDER_TREE_TOOLTIP
+							IconWidth: 62
+							IconHeight: 46
+							HorizontalSpacing: 220
+							VerticalSpacing: 110
+							ContentPadding: 40
+				Slider@TREE_HSCROLL:
+					X: 24
+					Y: PARENT_HEIGHT - 64
+					Width: PARENT_WIDTH - 48
+					Height: 24
+					Visible: False
+				TooltipContainer@COMMANDER_TREE_TOOLTIP:
+					X: 0
+					Y: 0
+					Width: PARENT_WIDTH
+					Height: PARENT_HEIGHT
