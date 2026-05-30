@@ -310,6 +310,10 @@
 	HeatDistortionRenderer:
 		DistortionRadius: 300
 		DistortionStrength: 8
+	ShockwaveDistortionRenderer:
+		MaxRadius: 500
+		RingThickness: 30
+		Strength: 20
 	CloakPaletteEffect:
 	FlashPostProcessEffect@Nuke:
 		Type: Nuke
