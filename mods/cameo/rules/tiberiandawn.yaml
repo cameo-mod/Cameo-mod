@@ -410,10 +410,10 @@
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Valued:
-		Cost: 100
 	Tooltip:
 		Name: Minigunner
+	Valued:
+		Cost: 100
 	Mobile:
 		Speed: 60
 	Health:
@@ -527,10 +527,10 @@ E2:
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 200
 	Tooltip:
 		Name: GDI Grenadier
+	Valued:
+		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~pyle, ~!upgdiempgrenadier
@@ -578,10 +578,10 @@ E2:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir
-	Valued:
-		Cost: 200
 	Tooltip:
 		Name: TD Rocket Soldier
+	Valued:
+		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
@@ -678,10 +678,10 @@ E4:
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 200
 	Tooltip:
 		Name: Nod Flamethrower
+	Valued:
+		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~hq.nod, ~!upblackhandflamer
@@ -733,10 +733,10 @@ E5:
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 500
 	Tooltip:
 		Name: Chemical Warrior
+	Valued:
+		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~tmpl
@@ -790,10 +790,10 @@ E6:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@TiberiumInfusion: ^TiberiumInfusion
 	Inherits@CyberneticModifications: ^CyberneticModifications
-	Valued:
-		Cost: 500
 	Tooltip:
 		Name: Engineer
+	Valued:
+		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cncbarracks
@@ -872,10 +872,10 @@ E6:
 	Inherits@MC: ^MCImmune
 	Inherits@COMMANDOSKULL: ^CommandoSkull
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Valued:
-		Cost: 3000
 	Tooltip:
 		Name: Commando
+	Valued:
+		Cost: 3000
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
@@ -1019,10 +1019,10 @@ MCV.NOD:
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
 	Inherits@harv: ^Harvester
+	Tooltip:
+		Name: Tiberium Harvester
 	Valued:
 		Cost: 1000
-	Tooltip:
-		Name: template-harvester.tdname
 	Harvester:
 		BaleLoadDelay: 4
 		BaleUnloadDelay: 1
@@ -1093,11 +1093,11 @@ APC:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 1200
 	Tooltip:
 		Name: GDI APC
 		OverrideActor: apc
+	Valued:
+		Cost: 1200
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~pyle, ~!upgdiassaultapc
@@ -1158,10 +1158,10 @@ ARTY:
 	Inherits@ImprovedArtilleries: ^ImprovedArtilleries
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 400
 	Tooltip:
 		Name: Nod Artillery
+	Valued:
+		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~hq.nod, ~!upnodspecter
@@ -1218,10 +1218,10 @@ FTNK:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@ElementalWarfare: ^ElementalWarfare
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 800
 	Tooltip:
 		Name: Nod Flame Tank
+	Valued:
+		Cost: 800
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hq.nod, ~!upnodftnk2
@@ -1262,10 +1262,10 @@ BGGY:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 300
 	Tooltip:
 		Name: Nod Buggy
+	Valued:
+		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~afld, ~!upnodbuggy2
@@ -1312,10 +1312,10 @@ JEEP:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 400
 	Tooltip:
 		Name: GDI Humvee
+	Valued:
+		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~weap, ~!upgdihumvee
@@ -1420,10 +1420,10 @@ LTNK:
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
-	Valued:
-		Cost: 600
 	Tooltip:
 		Name: Nod Light Tank
+	Valued:
+		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~afld, ~!upnodltnk2
@@ -1484,10 +1484,10 @@ MTNK:
 	Inherits@HighVelocityCannons: ^HighVelocityCannons
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
 	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 900
 	Tooltip:
 		Name: GDI Battle Tank
+	Valued:
+		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~weap, ~!upgdipredator
@@ -1575,10 +1575,10 @@ HTNK:
 	Inherits@HighVelocityCannons: ^HighVelocityCannons
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 1600
 	Tooltip:
 		Name: GDI Mammoth Tank
+	Valued:
+		Cost: 1600
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~eye, ~!upgdimammoth3
@@ -1665,10 +1665,10 @@ MLRS:
 	Inherits@MissileTargeting: ^AdvancedMissileTargeting
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 1000
 	Tooltip:
 		Name: GDI MLRS
+	Valued:
+		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hq.gdi
@@ -1723,6 +1723,72 @@ MLRS:
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
 
+td_gdi_boxer:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Tooltip:
+		Name: Boxer
+	Valued:
+		Cost: 1100
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~hq.gdi
+		Queue: Vehicle, RAVehicle
+		Description: actor-heavyaatank.description
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 110000
+	Repairable:
+		HpPerStep: 5500
+	ChangesHealth@SelfHealing:
+		Step: 44
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 80
+		TurnSpeed: 16
+	Turreted:
+		TurnSpeed: 32
+		Offset: -128,0,0
+	Armament@AG:
+		Weapon: BoxerCannonAG
+		Recoil: 85
+		LocalOffset: 800,80,360, 800,-80,360
+		MuzzleSequence: muzzle
+	Armament@AA:
+		Weapon: BoxerCannonAA
+		Recoil: 85
+		LocalOffset: 800,80,360, 800,-80,360
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@heavyaatank:
+		Modifier: 50
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	KeepsDistance:
+	RenderRangeCircle:
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_cuttingedgeequipment
+
 gdiarcher:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
@@ -1733,10 +1799,10 @@ gdiarcher:
 	Inherits@HighVelocityCannons: ^HighVelocityCannons
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 750
 	Tooltip:
 		Name: Archer Artillery
+	Valued:
+		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~eye

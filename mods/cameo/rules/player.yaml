@@ -207,13 +207,6 @@ Player:
 		Enabled: True
 		DisplayOrder: 16
 		Prerequisites: global-swreveal
-	LobbyPrerequisiteCheckbox@REGENTURRETS:
-		ID: regenturrets
-		Label: Regular Maintenance
-		Enabled: False
-		Description: Damaged turrets are slowly regenerated
-		DisplayOrder: 18
-		Prerequisites: regen-turrets
 	LobbyPrerequisiteCheckbox@WIPCONTENT:
 		ID: wipcontent
 		Label: WIP Content

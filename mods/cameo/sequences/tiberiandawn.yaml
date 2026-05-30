@@ -305,6 +305,23 @@ msam:
 		Filename: msamicnh.shp
 		AddExtension: False
 
+td_gdi_boxer:
+	Defaults:
+		Filename: td_gdi_boxer.png
+		Scale: 0.75
+	idle:
+		Facings: 64
+		Offset: 0,12
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,12
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: td_gdi_boxer_icon.png
+
 gdiarcher:
 	Defaults:
 		Filename: gdiarcherchassis.png
@@ -319,7 +336,6 @@ gdiarcher:
 		Length: *
 	icon:
 		Filename: gdiarchericon.png
-		AddExtension: False
 
 mlrs:
 	Defaults:
