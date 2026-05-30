@@ -2630,6 +2630,10 @@ tsgtradrmutant:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
 	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
 		Type: Rectangle
