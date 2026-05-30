@@ -1969,9 +1969,6 @@
 	Targetable@ParachuteAir:
 		RequiresCondition: parachute
 		TargetTypes: Air
-	DamageMultiplier@parachute:
-		Modifier: 75
-		RequiresCondition: parachute
 	Targetable@chrono:
 		RequiresCondition: !invulnerability
 	Passenger:
@@ -4202,15 +4199,6 @@
 		Categories: Defense
 	Capturable:
 		Types: defense
-	GrantConditionOnPrerequisite@regen-turrets:
-		Prerequisites: regen-turrets
-		Condition: regen-turrets
-	ChangesHealth@regen-turrets:
-		PercentageStep: 1
-		Delay: 30
-		DamageCooldown: 375
-		StartIfBelow: 101
-		RequiresCondition: regen-turrets
 	AutoTarget:
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
