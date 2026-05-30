@@ -25,21 +25,41 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 	{
 		const double NewSessionGapSeconds = 5.0;
 
-		// Fade the splash in from the initially black screen on the very first load.
-		// Wall-clock based, and deliberately long: at startup the OS/compositor shows the freshly-created
-		// window as black for the first ~1-2.5s before it presents our composited frames. A short fade is
-		// entirely consumed inside that invisible cold-start window, so the splash appears to "pop" to full.
-		// Making the fade comfortably longer than the cold-start period means its tail is still ramping once
-		// the window actually becomes visible. This is spec-robust: cold-start latency is roughly OS-fixed
-		// (not CPU-scaled), and slower machines load longer => the splash is shown longer => more fade time.
+		// On the very first load the splash plays a short intro, then hands off to the normal randomized
+		// loading screen for the rest of the load: FadingIn -> Holding -> FadingOut -> (swap image) ->
+		// FadingInRandom -> Done. After Done the screen behaves like any normal loadscreen (full alpha,
+		// isNewSession re-randomization). For non-splash loads we start at Done so none of this runs.
+		enum IntroPhase { FadingIn, Holding, FadingOut, FadingInRandom, Done }
+
+		// Fade-IN is wall-clock based and deliberately long: at startup the OS/compositor shows the freshly-
+		// created window as black for the first ~1-2.5s before it presents our composited frames. A short fade
+		// is entirely consumed inside that invisible cold-start window, so the splash appears to "pop" to full.
+		// A longer fade keeps the tail ramping once the window is actually visible. Spec-robust: cold-start
+		// latency is roughly OS-fixed (not CPU-scaled), and slower machines load longer => more fade time.
+		// NOTE: this is ~2s longer than the *visible* fade-in. The first ~2s is spent inside the cold-start black,
+		// so 4.0 here yields a ~2s visible ramp. For a literal 2s fade-in, set this to 2.0 (it will mostly pop).
 		const double SplashFadeSeconds = 4.0;
 
+		// Hold the fully-lit splash for a beat before retiring it.
+		const double SplashHoldSeconds = 4.0;
+
+		// Fade-OUT and the random screen's fade-IN happen after the window is already visible (no cold-start to
+		// out-wait), so these are their true durations — a quick 0.5s each.
+		const double TransitionFadeSeconds = 0.5;
+
 		// Cap how much alpha can advance per painted frame so a single long blocking load between paints
-		// can't skip the whole ramp in one step — keeps the fade visibly stepping even if checkpoints are sparse.
+		// can't skip a ramp in one step — keeps fades visibly stepping even if checkpoints are sparse.
 		const float MaxAlphaStepPerFrame = 0.06f;
 
-		readonly Stopwatch splashFadeTimer = new Stopwatch();
-		float splashAlpha;
+		readonly Stopwatch phaseTimer = new Stopwatch();
+		IntroPhase phase = IntroPhase.Done;
+		float introAlpha;
+
+		// After the intro hands off to a random screen, the next >5s gap is the cold sprite-decode
+		// (PrepareMap.LoadSprites, ~16s) within this SAME load — not a new session. Skip re-randomizing on it
+		// so the just-faded-in screen rides through to the menu. Cleared after that one gap; genuine later
+		// menu->game sessions (warm, fast) re-randomize normally.
+		bool suppressNextReRandomize;
 
 		float2 scale;
 		float2 logoPos;
@@ -86,6 +106,9 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 				{
 					currentImage = splashImage;
 					splashShown = true;
+
+					// Kick off the splash intro state machine. Non-splash loads stay at Done (no intro).
+					phase = IntroPhase.FadingIn;
 				}
 				else
 					currentImage = images[Game.CosmeticRandom.Next(images.Length)];
@@ -103,11 +126,11 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 				return;
 
 			// The base SheetLoadScreen caps load-screen repaints at 5 FPS to avoid stealing CPU from loading,
-			// which makes the fade visibly step ~once per 200ms. While the splash is still fading in, repaint as
-			// fast as loading checkpoints allow (up to 60 FPS) so the ramp is smooth; once it reaches full alpha
-			// (or this isn't the splash) fall back to the lazy 5 FPS. We reimplement rather than call base because
-			// this screen manages its own sheet and ignores the base's cached one.
-			var fading = splashImage != null && currentImage == splashImage && splashAlpha < 1f;
+			// which makes a fade visibly step ~once per 200ms. While any intro fade is in progress, repaint as
+			// fast as loading checkpoints allow (up to 60 FPS) so the ramp is smooth; during the static hold and
+			// once the intro is Done (or this isn't the splash) fall back to the lazy 5 FPS. We reimplement rather
+			// than call base because this screen manages its own sheet and ignores the base's cached one.
+			var fading = phase == IntroPhase.FadingIn || phase == IntroPhase.FadingOut || phase == IntroPhase.FadingInRandom;
 			var minInterval = fading ? 1 / 60.0 : 0.2;
 			if (sinceLastPaint.IsRunning && sinceLastPaint.Elapsed.TotalSeconds < minInterval)
 				return;
@@ -123,26 +146,36 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		{
 			// Re-randomize when DisplayInner hasn't fired for a while — i.e. the player was at the menu between loads.
 			// On the very first call Elapsed is zero (stopwatch never started), so this correctly evaluates to false
-			// and leaves the values Init() already chose untouched.
-			var isNewSession = timeSinceLastDisplay.Elapsed.TotalSeconds > NewSessionGapSeconds;
+			// and leaves the values Init() already chose untouched. Gated to Done so a long blocking load mid-intro
+			// can't trip the gap check and yank the splash out from under the running transition.
+			var isNewSession = phase == IntroPhase.Done && timeSinceLastDisplay.Elapsed.TotalSeconds > NewSessionGapSeconds;
 			timeSinceLastDisplay.Restart();
 
 			if (isNewSession)
 			{
-				if (messages.Length > 0)
-					text = messages.Random(Game.CosmeticRandom);
-
-				if (images != null && images.Length > 0)
+				if (suppressNextReRandomize)
 				{
-					var pick = images[Game.CosmeticRandom.Next(images.Length)];
+					// The first big gap after the intro is the cold sprite-decode in this same load, not a new
+					// session — leave the just-faded-in screen alone. Clear so genuine later sessions re-randomize.
+					suppressNextReRandomize = false;
+				}
+				else
+				{
+					if (messages.Length > 0)
+						text = messages.Random(Game.CosmeticRandom);
 
-					// Only churn the sheet when the pick actually changes — same image = zero I/O, zero GPU upload.
-					if (pick != currentImage)
+					if (images != null && images.Length > 0)
 					{
-						// Dispose first to keep peak GPU memory at exactly 1 sheet (no brief 2-sheet overlap).
-						ownSheet?.Dispose();
-						ownSheet = null;
-						currentImage = pick;
+						var pick = images[Game.CosmeticRandom.Next(images.Length)];
+
+						// Only churn the sheet when the pick actually changes — same image = zero I/O, zero GPU upload.
+						if (pick != currentImage)
+						{
+							// Dispose first to keep peak GPU memory at exactly 1 sheet (no brief 2-sheet overlap).
+							ownSheet?.Dispose();
+							ownSheet = null;
+							currentImage = pick;
+						}
 					}
 				}
 			}
@@ -186,18 +219,57 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 					: new float2(0, (-sheet.Size.Height * scale.X + r.Resolution.Height) / 2);
 			}
 
-			// While the splash is the current image, ramp alpha from 0 to 1 so it fades up from the black screen.
-			// Wall-clock target gives a consistent fade duration across machines; the per-frame cap prevents a
-			// long blocking load between paints from jumping straight to full (see field comments above).
+			// Drive the splash intro. Each fade uses a wall-clock target (consistent duration across machines)
+			// clamped by a per-frame cap (so a long blocking load between paints can't jump the ramp). Phases
+			// advance on the alpha reaching its target; the timer restarts on each transition. Done => full alpha.
 			var alpha = 1f;
-			if (splashImage != null && currentImage == splashImage)
+			switch (phase)
 			{
-				if (!splashFadeTimer.IsRunning)
-					splashFadeTimer.Start();
+				case IntroPhase.FadingIn:
+					if (!phaseTimer.IsRunning)
+						phaseTimer.Start();
 
-				var target = (float)Math.Min(1.0, splashFadeTimer.Elapsed.TotalSeconds / SplashFadeSeconds);
-				splashAlpha = Math.Min(target, splashAlpha + MaxAlphaStepPerFrame);
-				alpha = splashAlpha;
+					introAlpha = Math.Min(RampTarget(SplashFadeSeconds), introAlpha + MaxAlphaStepPerFrame);
+					alpha = introAlpha;
+					if (introAlpha >= 1f)
+						Advance(IntroPhase.Holding);
+					break;
+
+				case IntroPhase.Holding:
+					alpha = 1f;
+					if (phaseTimer.Elapsed.TotalSeconds >= SplashHoldSeconds)
+						Advance(IntroPhase.FadingOut);
+					break;
+
+				case IntroPhase.FadingOut:
+					introAlpha = Math.Max(1f - RampTarget(TransitionFadeSeconds), introAlpha - MaxAlphaStepPerFrame);
+					alpha = introAlpha;
+					if (introAlpha <= 0f)
+					{
+						// Splash is now black — retire it and swap to a random loading screen. The new sheet loads
+						// on the next paint (ownSheet == null), which is fine since this frame draws at alpha 0.
+						if (images != null && images.Length > 0)
+						{
+							ownSheet?.Dispose();
+							ownSheet = null;
+							currentImage = images[Game.CosmeticRandom.Next(images.Length)];
+						}
+
+						Advance(IntroPhase.FadingInRandom);
+					}
+
+					break;
+
+				case IntroPhase.FadingInRandom:
+					introAlpha = Math.Min(RampTarget(TransitionFadeSeconds), introAlpha + MaxAlphaStepPerFrame);
+					alpha = introAlpha;
+					if (introAlpha >= 1f)
+					{
+						phase = IntroPhase.Done;
+						suppressNextReRandomize = true;
+					}
+
+					break;
 			}
 
 			// Fade by scaling the tint RGB (darkening toward black), NOT the tint alpha. The sprite shader uses
@@ -206,7 +278,11 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 			if (logo != null)
 				r.RgbaSpriteRenderer.DrawSprite(logo, logoPos, 1f, new float3(alpha, alpha, alpha), 1f);
 
-			if (r.Fonts != null && messages.Length > 0)
+			// Tips belong to the loading screen, not the branding splash. Only draw them from the random screen
+			// onward (FadingInRandom + Done) so the tip fades in exactly once with that screen — rather than
+			// appearing over the splash, fading out with it, then fading the same tip back in.
+			var showTips = phase == IntroPhase.FadingInRandom || phase == IntroPhase.Done;
+			if (r.Fonts != null && messages.Length > 0 && showTips)
 			{
 				// Same reasoning for text: scale the colour toward black rather than dropping its alpha.
 				var lit = (int)(255 * alpha);
@@ -215,6 +291,19 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 					new float2(r.Resolution.Width - textSize.X - 20, r.Resolution.Height - textSize.Y - 20),
 					Color.FromArgb(lit, lit, lit), Color.Black, 2);
 			}
+		}
+
+		// Wall-clock ramp [0,1] for the current phase, based on time since the phase began.
+		float RampTarget(double seconds)
+		{
+			return (float)Math.Min(1.0, phaseTimer.Elapsed.TotalSeconds / seconds);
+		}
+
+		// Move to the next intro phase and restart the phase clock; introAlpha carries over as the ramp's start.
+		void Advance(IntroPhase next)
+		{
+			phase = next;
+			phaseTimer.Restart();
 		}
 
 		protected override void Dispose(bool disposing)

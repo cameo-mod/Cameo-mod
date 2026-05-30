@@ -103,28 +103,32 @@ loadscreen-loading = Drag to set a formation for units when attack-moving$
    Radiation will damage affected units regardless of player allegiance, and resulting deaths do not count as kills$
    Using Ctrl when issuing a build order will insert it at the front of the build queue$
    Using Alt when issuing a build order will enable an infinite build queue for that unit$
-   (Ctrl+)Middle-clicking when issuing a build order will cancel the order without On-Hold$
+   (Ctrl+)Middle-clicking when issuing a build order will cancel the order instead of placing it On-Hold$
    Having multiple Construction Yards (or equivalent) will greatly speed up the construction process$
    Dune 2000 factions are able to construct concrete foundations, increasing armor and enabling self-repair for structures above them$
-   Starcraft factions treat the game's "power" resource the same as the "supply" resource in the original game$
-   Starcraft factions do not have a limit on how many units they can have, as long as their supply can support them$
+   Starcraft and Warcraft factions treat the game's "power" resource the same as the "supply" resource in the original game$
+   Starcraft and Warcraft factions do not have a limit on how many units they can have, as long as their supply can support them$
    Some upgrades are team upgrades, meaning your allies also receive the effect of the upgrade$
    Try selecting a Construction Yard (or equivalent) and then issuing a move order while holding Alt$
    Some Red Alert 1/2 factions employ cryo weaponry, which can freeze enemy units over time$
    Some weapons apply a burning effect, indicated by the red stripe below the health bar. Burning units will take damage over time$
    All Protoss units and structures are shielded; shields can regenerate over time when not in combat$
-   The Ixian faction has a team upgrade that gives a personal shield to their allies' units$
-   The Consortium faction is able to construct their buildings underwater, hiding them from view$
+   The Ixian faction has a team upgrade that gives a personal shield to its allies' units$
+   The Consortium faction is able to construct its buildings underwater, hiding them from view$
    Many air units are equipped with stealth-detecting sensors, whose range is indicated by the green dashed circle$
    Garrisonable buildings usually heal over time, but they can be permanently destroyed with a large enough burst of instant damage$
    Resource tiers: Ore (25) < Tiberium (30) < Blue Tiberium (35) < Red Tiberium (40) < Gold Tiberium (45) < Gems (50)$
-   Small blossom trees replenish resources at a noticeably slower rate compared to normal ones$
+   Small blossom trees replenish resources at a noticeably slower rate than normal ones$
    Refineries have a limit on how many harvesters can be queued to dock at a time$
    Air units are generally immune to mind control effects$
-   Issuing a deploy order (defaults to F key) on rearmable aircraft will tell them to return to base$
-   If the game's graphics are too bright (especially on snow theater) or too dim, you can adjust this in the settings$
+   Issuing a deploy order (default key: F) on rearmable aircraft will tell them to return to base$
+   If the game's graphics are too bright (especially on snow theater) or too dim, you can adjust the brightness in the settings$
    The information panel at the bottom-left of the screen contains useful stats, including what upgrades a unit currently has or could have$
-   When a team upgrade has been researched, a small icon of the upgrade will be displayed at the top-left corner of the screen
+   When a team upgrade has been researched, a small icon of the upgrade will be displayed in the top-left corner of the screen$
+   Cameo has tailored weapon visual effects that you can enable in the settings$
+   Enable Quota Mode in the gameplay settings to have production buildings automatically maintain a target count of each unit type$
+   Press Ctrl+Alt+1 through 0 to register the selected units' types to a control group; units of those types built afterward will join it automatically$
+   The star button on the sidebar opens a full Promotions tree, showing every promotion and its prerequisites
 
 # Double-tapping Q to select all of your combat units on the map$
 # Q followed with F is the quickest way to deploy the MCV at the start of the game
