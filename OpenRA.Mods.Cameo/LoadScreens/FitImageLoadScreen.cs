@@ -53,11 +53,12 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		IntroPhase phase = IntroPhase.Done;
 		float introAlpha;
 
-		// After the intro hands off to a random screen, the next >5s gap is the cold sprite-decode
-		// (PrepareMap.LoadSprites, ~16s) within this SAME load — not a new session. Skip re-randomizing on it
-		// so the screen we just cut to rides through to the menu. Cleared after that one gap; genuine later
-		// menu->game sessions (warm, fast) re-randomize normally.
-		bool suppressNextReRandomize;
+		// True once the initial shellmap (menu background) has finished loading — i.e. the first, cold load is
+		// over. Re-randomization is suppressed entirely until then, because that cold load has several
+		// multi-second blocking gaps (LoadSequences, LoadSprites) that the gap heuristic would otherwise mistake
+		// for new sessions and flip the screen mid-load (the "two loading screens on startup" bug). Set from
+		// Game.OnShellmapLoaded, which fires right after the shellmap load completes. Warm later loads re-randomize.
+		bool shellmapLoaded;
 
 		float2 scale;
 		float2 logoPos;
@@ -116,6 +117,14 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 
 			if (messages.Length > 0)
 				text = messages.Random(Game.CosmeticRandom);
+
+			// Fires once the initial shellmap finishes loading; until then we keep one loading screen (see field).
+			Game.OnShellmapLoaded += MarkShellmapLoaded;
+		}
+
+		void MarkShellmapLoaded()
+		{
+			shellmapLoaded = true;
 		}
 
 		public override void Display()
@@ -143,37 +152,29 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		public override void DisplayInner(Renderer r, Sheet s, int density)
 		{
 			// Re-randomize when DisplayInner hasn't fired for a while — i.e. the player was at the menu between loads.
-			// On the very first call Elapsed is zero (stopwatch never started), so this correctly evaluates to false
-			// and leaves the values Init() already chose untouched. Gated to Done so a long blocking load mid-intro
-			// can't trip the gap check and yank the splash out from under the running intro.
-			var isNewSession = phase == IntroPhase.Done && timeSinceLastDisplay.Elapsed.TotalSeconds > NewSessionGapSeconds;
+			// Gated to Done AND shellmapLoaded: the first (cold) load has several multi-second blocking gaps
+			// (LoadSequences, LoadSprites) that would otherwise look like new sessions and flip the screen mid-load,
+			// so we suppress re-randomization entirely until the initial shellmap has loaded (see shellmapLoaded).
+			// Warm later loads re-randomize normally.
+			var isNewSession = phase == IntroPhase.Done && shellmapLoaded && timeSinceLastDisplay.Elapsed.TotalSeconds > NewSessionGapSeconds;
 			timeSinceLastDisplay.Restart();
 
 			if (isNewSession)
 			{
-				if (suppressNextReRandomize)
-				{
-					// The first big gap after the intro is the cold sprite-decode in this same load, not a new
-					// session — leave the just-faded-in screen alone. Clear so genuine later sessions re-randomize.
-					suppressNextReRandomize = false;
-				}
-				else
-				{
-					if (messages.Length > 0)
-						text = messages.Random(Game.CosmeticRandom);
+				if (messages.Length > 0)
+					text = messages.Random(Game.CosmeticRandom);
 
-					if (images != null && images.Length > 0)
+				if (images != null && images.Length > 0)
+				{
+					var pick = images[Game.CosmeticRandom.Next(images.Length)];
+
+					// Only churn the sheet when the pick actually changes — same image = zero I/O, zero GPU upload.
+					if (pick != currentImage)
 					{
-						var pick = images[Game.CosmeticRandom.Next(images.Length)];
-
-						// Only churn the sheet when the pick actually changes — same image = zero I/O, zero GPU upload.
-						if (pick != currentImage)
-						{
-							// Dispose first to keep peak GPU memory at exactly 1 sheet (no brief 2-sheet overlap).
-							ownSheet?.Dispose();
-							ownSheet = null;
-							currentImage = pick;
-						}
+						// Dispose first to keep peak GPU memory at exactly 1 sheet (no brief 2-sheet overlap).
+						ownSheet?.Dispose();
+						ownSheet = null;
+						currentImage = pick;
 					}
 				}
 			}
@@ -216,7 +217,6 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 							currentImage = images[Game.CosmeticRandom.Next(images.Length)];
 
 						phase = IntroPhase.Done;
-						suppressNextReRandomize = true;
 					}
 
 					break;
@@ -284,7 +284,10 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		protected override void Dispose(bool disposing)
 		{
 			if (disposing)
+			{
+				Game.OnShellmapLoaded -= MarkShellmapLoaded;
 				ownSheet?.Dispose();
+			}
 
 			base.Dispose(disposing);
 		}
