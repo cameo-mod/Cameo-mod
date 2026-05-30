@@ -8407,6 +8407,10 @@ steel_qtradr:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@radar: ^RadarBuilding
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	Inherits@water: ^SteelUnderwaterStructure
 	Selectable:
 		Bounds: 2048, 2560, 0, -256
@@ -19325,6 +19329,10 @@ yrgarobo:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^2x2Shape
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
 	Tooltip:
 		Name: Robot Control Center
