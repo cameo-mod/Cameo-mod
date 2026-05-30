@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Traits;
@@ -109,6 +110,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		int kickStuck = 0;
 
 		UnitWposWrapper leader = new(null);
+
+		// Indirect/harass routing state
+		List<CPos> currentRoute;
+		int currentWaypointIndex;
+		int lastWaypointUpdateTick;
+		Actor lastRoutingTarget;
 
 		public void Activate(SquadCA owner) { }
 
@@ -289,6 +296,62 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				kickStuck = KickStuckTicks;
 			}
 
+			// Compute indirect/harass route when target changes
+			if (owner.TargetActor != lastRoutingTarget)
+			{
+				lastRoutingTarget = owner.TargetActor;
+				currentRoute = null;
+
+				var locomotor = leader.Actor.TraitOrDefault<Mobile>()?.Locomotor;
+				if (locomotor != null)
+				{
+					var maxRoutes = 2;
+					var useIndirectRoutes = false;
+
+					if (owner.Type == SquadCAType.Harass)
+						maxRoutes = 12;
+					else if (owner.SquadManager.Info.IndirectRouteChance > 0 && owner.World.LocalRandom.Next(100) < owner.SquadManager.Info.IndirectRouteChance)
+					{
+						useIndirectRoutes = true;
+						maxRoutes = 7;
+					}
+
+					if (maxRoutes > 2 || useIndirectRoutes)
+					{
+						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.TargetActor.Location, maxRoutes);
+
+						if (owner.Type == SquadCAType.Harass)
+							routes = routes.Skip(Math.Max(0, routes.Count - 2)).Take(2).ToList();
+						else if (useIndirectRoutes)
+							routes = routes.Skip(1).ToList();
+
+						if (routes.Count > 0)
+						{
+							var chosen = routes.Random(owner.World.LocalRandom);
+							currentRoute = chosen.Skip(1).ToList();
+							currentWaypointIndex = 0;
+							lastWaypointUpdateTick = owner.World.WorldTick;
+						}
+					}
+				}
+			}
+
+			// Advance through route waypoints
+			if (currentRoute != null && currentWaypointIndex < currentRoute.Count - 1)
+			{
+				if ((leader.Actor.Location - currentRoute[currentWaypointIndex]).LengthSquared < 16
+					|| owner.World.WorldTick > lastWaypointUpdateTick + 625)
+				{
+					currentWaypointIndex++;
+					lastWaypointUpdateTick = owner.World.WorldTick;
+				}
+			}
+
+			// Determine move target (waypoint or direct)
+			var routeTarget = currentRoute != null && currentRoute.Count > 1 && currentWaypointIndex < currentRoute.Count
+				? Target.FromCell(owner.World, currentRoute[currentWaypointIndex])
+				: Target.FromCell(owner.World, owner.TargetActor.Location);
+
 			// Record current position of the squad leader
 			leader.WPos = leader.Actor.CenterPosition;
 
@@ -297,7 +360,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (leaderWaitCheck && kickStuck <= 0)
 				owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
 			else
-				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromCell(owner.World, owner.TargetActor.Location), false));
+				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, routeTarget, false));
 
 			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToArray();
 			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: unitsHurryUp));
@@ -372,5 +435,43 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 
 		public void Deactivate(SquadCA owner) { owner.SquadManager.DismissSquad(owner); }
+	}
+
+	class HarasserUnitsIdleStateCA : GroundStateBaseCA, IState
+	{
+		public void Activate(SquadCA owner) { }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			if (!ShouldHarass(owner))
+				return;
+
+			if (!owner.IsTargetValid && !FindNewTarget(owner, true))
+				return;
+
+			owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), true);
+		}
+
+		bool ShouldHarass(SquadCA owner)
+		{
+			switch (owner.Units.Count)
+			{
+				case 0:
+				case 1:
+				case 2:
+					return false;
+				case 3:
+					return owner.World.LocalRandom.Next(100) < 5;
+				case 4:
+					return owner.World.LocalRandom.Next(100) < 10;
+				default:
+					return true;
+			}
+		}
+
+		public void Deactivate(SquadCA owner) { }
 	}
 }
