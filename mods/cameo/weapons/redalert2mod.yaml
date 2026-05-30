@@ -9260,6 +9260,16 @@ AthenaLaser:
 		ImpactSounds: ion1.aud
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
+	Warhead@GlowPlayer: GlowImpact
+		UsePlayerColor: true
+		Scale: 3.2
+		FadeFrames: 45
+		FadeInFrames: 3
+	Warhead@GlowCore: GlowImpact
+		Color: FFFFFF
+		Scale: 1.8
+		FadeFrames: 45
+		FadeInFrames: 3
 
 AthenaVisualLaser:
 	ReloadDelay: 4
