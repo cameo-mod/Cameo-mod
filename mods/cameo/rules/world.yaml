@@ -935,6 +935,7 @@
 
 World:
 	Inherits: ^BaseWorld
+	Inherits@MapGenerators: ^MapGenerators
 	ChatCommands:
 	DevCommands:
 	DebugVisualizationCommands:
