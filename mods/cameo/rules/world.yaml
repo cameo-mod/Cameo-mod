@@ -958,6 +958,7 @@ World:
 		Type: Scorch
 		Sequence: scorches
 		SmokeChance: 50
+		MaxSmokeOffsetDistance: 341
 		#SmokeImage: smoke_m
 		#SmokeSequences: idle
 		SmokeImage: scorch_flames
@@ -966,6 +967,7 @@ World:
 		Type: Crater
 		Sequence: craters
 		SmokeChance: 25
+		MaxSmokeOffsetDistance: 341
 		SmokeImage: smoke_m
 		SmokeSequences: idle
 	SmudgeLayer@Rock:

@@ -17,8 +17,9 @@ using OpenRA.Widgets;
 
 namespace OpenRA.Mods.Cameo.Widgets.Logic
 {
-	// Runs after ClassicProductionLogic on the production sidebar and repurposes the
-	// "Promotion" production-type button so that it opens the promotion tree window
+	// Must run AFTER ProductionTabsLogicCA (which also binds the production-type
+	// buttons), so it is attached last on the PRODUCTION_TABS widget. It repurposes
+	// the "Promotion" production-type button to open the promotion tree window
 	// instead of selecting a palette tab.
 	public class PromotionTreeButtonLogic : ChromeLogic
 	{
@@ -32,7 +33,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		{
 			this.world = world;
 
-			var typesContainer = widget.GetOrNull("PRODUCTION_TYPES");
+			// PRODUCTION_TYPES is not a child of this widget, so resolve it from the root.
+			var typesContainer = Ui.Root.GetOrNull("PRODUCTION_TYPES");
 			if (typesContainer == null)
 				return;
 

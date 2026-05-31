@@ -922,6 +922,8 @@ ra2gaspysat:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^2x2Shape
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Tooltip:
 		Name: Spy Satellite Uplink
