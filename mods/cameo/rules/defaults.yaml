@@ -2725,6 +2725,7 @@
 			scbehemoth: battlefortresspassenger
 			tsm113: battlefortresspassenger
 			tkmbattlebus: battlefortresspassenger
+	MassEntersCargo:
 	SharedPassenger:
 		CargoType: Infantry
 	Garrisoner:
@@ -8260,6 +8261,7 @@ CPQDEBUGDUMMY:
 	PromotionUpgrade:
 
 ^Cargo:
+	MassEnterableCargo:
 	Targetable@garrisoned:
 		TargetTypes: LoadedVehicle
 		RequiresCondition: loaded
