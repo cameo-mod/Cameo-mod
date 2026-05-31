@@ -637,7 +637,7 @@ Container@PLAYER_WIDGETS:
 							Height: 220
 							Skippable: false
 		Container@SIDEBAR_PRODUCTION:
-			Logic: ClassicProductionLogic, PromotionTreeButtonLogic
+			Logic: ClassicProductionLogic
 			X: WINDOW_WIDTH - 250
 			Y: 300
 			Width: 238
@@ -887,7 +887,7 @@ Container@PLAYER_WIDGETS:
 			TabWidth: 31
 			TabSpacing: 0
 			ArrowWidth: 17
-			Logic: AddFactionSuffixLogicCA, ProductionTabsLogicCA
+			Logic: AddFactionSuffixLogicCA, ProductionTabsLogicCA, PromotionTreeButtonLogic
 			PaletteWidget: PRODUCTION_PALETTE
 			TypesContainer: PRODUCTION_TYPES
 			BackgroundContainer: PRODUCTION_BACKGROUND
