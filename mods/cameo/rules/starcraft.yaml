@@ -528,6 +528,8 @@ SCCOMMANDCENTER:
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
 	Inherits@conyard: ^Conyard
 	Inherits@POWERDOWN: ^DisableOnPowerDown
 	Tooltip:
@@ -1357,6 +1359,8 @@ SCNEXUS:
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
 	Inherits@conyard: ^Conyard
 	Inherits@POWERDOWN: ^DisableOnPowerDown
 	Inherits@explode: ^BuildingExplodeProtoss

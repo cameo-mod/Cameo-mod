@@ -7788,6 +7788,18 @@ CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	ProvidesPrerequisite@buildingname:
 		RequiresCondition: !(powerdown || infiltrated)
+	# Radar buildings are each faction's producer for the mid-tier "Upgrades" queue
+	# (mirrors ^IsTechnoBuilding providing the "Research" queue for tech centers).
+	# IMPORTANT: build-time scales with the NUMBER of buildings producing a queue
+	# (ClassicProductionQueue.BuildTimeSpeedReduction), so a faction must have exactly
+	# ONE Upgrades producer. Buildings that also inherit ^RadarBuilding but would be a
+	# 2nd producer (tech centers, main bases, secondary radars) must remove it via
+	# -Production@Upgrades: / -ProductionBar@Upgrades: — see EYE, TMPL,
+	# td_nod_templeprime, SCCOMMANDCENTER, SCNEXUS, ra2gaspysat.
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 ^IsTechnoBuilding:
 	Inherits@IDISABLE: ^DisableOnPowerDown
