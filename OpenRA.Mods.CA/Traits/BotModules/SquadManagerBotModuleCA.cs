@@ -132,6 +132,13 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Locomotor used by pathfinding leader for squads")]
 		public readonly HashSet<string> SuggestedNavyLeaderLocomotor = new();
 
+		[ActorReference]
+		[Desc("Unit types assigned to the harassment squad. These units will take indirect flanking routes to attack the enemy.")]
+		public readonly HashSet<string> HarasserTypes = new();
+
+		[Desc("Percent chance that a regular assault squad will take an indirect (flanking) route instead of the most direct path. 0 to disable.")]
+		public readonly int IndirectRouteChance = 0;
+
 		public override void RulesetLoaded(Ruleset rules, ActorInfo ai)
 		{
 			base.RulesetLoaded(rules, ai);
@@ -473,6 +480,12 @@ namespace OpenRA.Mods.CA.Traits
 						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
+				}
+				else if (Info.HarasserTypes.Count > 0 && Info.HarasserTypes.Contains(a.Info.Name))
+				{
+					var harassSquad = GetSquadOfType(SquadCAType.Harass) ?? RegisterNewSquad(bot, SquadCAType.Harass);
+					harassSquad.Units.Add(new UnitWposWrapper(a));
+					AIUtils.BotDebug("AI ({0}): Added {1} to harass squad", Player.ClientIndex, a);
 				}
 				else
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));

@@ -11,6 +11,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using OpenRA.Graphics;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Activities;
 using OpenRA.Mods.Common.Traits;
@@ -38,6 +39,9 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Interval (in ticks) between giving out orders to idle harvesters.")]
 		public readonly int ScanForIdleHarvestersInterval = 75;
 
+		[Desc("When an idle harvester cannot find resources, increase the wait to this many scan intervals.")]
+		public readonly int ScanIntervalMultiplerWhenNoResources = 5;
+
 		[Desc("Interval (in ticks) between checking whether to produce new harvesters.")]
 		public readonly int ProduceHarvestersInterval = 375;
 
@@ -50,7 +54,7 @@ namespace OpenRA.Mods.CA.Traits
 		public override object Create(ActorInitializer init) { return new HarvesterBotModuleCA(init.Self, this); }
 	}
 
-	public class HarvesterBotModuleCA : ConditionalTrait<HarvesterBotModuleCAInfo>, IBotTick, INotifyActorDisposing
+	public class HarvesterBotModuleCA : ConditionalTrait<HarvesterBotModuleCAInfo>, IBotTick, INotifyActorDisposing, IWorldLoaded
 	{
 		class HarvesterTraitWrapper
 		{
@@ -58,6 +62,7 @@ namespace OpenRA.Mods.CA.Traits
 			public readonly Harvester Harvester;
 			public readonly Parachutable Parachutable;
 			public readonly Mobile Mobile;
+			public int NoResourcesCooldown { get; set; }
 
 			public HarvesterTraitWrapper(Actor actor)
 			{
@@ -75,6 +80,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		readonly ActorIndex.OwnerAndNamesAndTrait<BuildingInfo> refineries;
 		readonly ActorIndex.OwnerAndNamesAndTrait<HarvesterInfo> harvestersIndex;
+		readonly Dictionary<CPos, string> resourceTypesByCell = new();
 
 		IResourceLayer resourceLayer;
 		ResourceClaimLayer claimLayer;
@@ -115,6 +121,29 @@ namespace OpenRA.Mods.CA.Traits
 			scanForIdleHarvestersTicks = world.LocalRandom.Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);
 
 			scanForEnoughHarvestersTicks = Info.ProduceHarvestersInterval;
+		}
+
+		public void WorldLoaded(World w, WorldRenderer wr)
+		{
+			if (resourceLayer != null)
+			{
+				foreach (var cell in w.Map.AllCells)
+				{
+					var resource = resourceLayer.GetResource(cell);
+					if (resource.Type != null)
+						resourceTypesByCell[cell] = resource.Type;
+				}
+
+				resourceLayer.CellChanged += ResourceCellChanged;
+			}
+		}
+
+		void ResourceCellChanged(CPos cell, string resourceType)
+		{
+			if (resourceType == null)
+				resourceTypesByCell.Remove(cell);
+			else
+				resourceTypesByCell[cell] = resourceType;
 		}
 
 		void IBotTick.BotTick(IBot bot)
@@ -162,10 +191,19 @@ namespace OpenRA.Mods.CA.Traits
 				if (h.Value.Parachutable != null && h.Value.Parachutable.IsInAir)
 					continue;
 
+				if (h.Value.NoResourcesCooldown > 0)
+				{
+					h.Value.NoResourcesCooldown--;
+					continue;
+				}
+
 				// Tell the idle harvester to quit slacking:
 				var newSafeResourcePatch = FindNextResource(h.Key, h.Value);
 				AIUtils.BotDebug($"AI: Harvester {h.Key} is idle. Ordering to {newSafeResourcePatch} in search for new resources.");
-				bot.QueueOrder(new Order("Harvest", h.Key, newSafeResourcePatch, false));
+				if (newSafeResourcePatch.Type != TargetType.Invalid)
+					bot.QueueOrder(new Order("Harvest", h.Key, newSafeResourcePatch, false));
+				else
+					h.Value.NoResourcesCooldown = Info.ScanIntervalMultiplerWhenNoResources;
 			}
 		}
 
@@ -190,7 +228,8 @@ namespace OpenRA.Mods.CA.Traits
 		Target FindNextResource(Actor actor, HarvesterTraitWrapper harv)
 		{
 			Func<CPos, bool> isValidResource = cell =>
-				harv.Harvester.CanHarvestCell(cell) &&
+				resourceTypesByCell.TryGetValue(cell, out var resourceType) &&
+				harv.Harvester.Info.Resources.Contains(resourceType) &&
 				claimLayer.CanClaimCell(actor, cell);
 
 			var path = harv.Mobile.PathFinder.FindPathToTargetCellByPredicate(
@@ -209,6 +248,9 @@ namespace OpenRA.Mods.CA.Traits
 		{
 			refineries.Dispose();
 			harvestersIndex.Dispose();
+
+			if (resourceLayer != null)
+				resourceLayer.CellChanged -= ResourceCellChanged;
 		}
 	}
 }
