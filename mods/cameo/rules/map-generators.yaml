@@ -61,6 +61,10 @@
 						ResourceSpawnSeeds:
 							mine: Ore
 							gmine: Gems
+							split2: Tiberium
+							splitblue: BlueTiberium
+							splitred: RedTiberium
+							splitgold: GoldTiberium
 						ClearTerrain: Clear
 						PlayableTerrain: Beach,Bridge,Clear,Gems,Ore,Road,Rough,Wall,Water
 						DominantTerrain: River,Rock,Tree,Water
@@ -307,6 +311,7 @@
 						SpawnResourceSpawns: 0
 						ResourcesPerPlayer: 0
 						ResourceSpawnWeights:
+						ExpansionResourceSpawnWeights:
 						MaximumExpansionResourceSpawns: 0
 						MaximumResourceSpawnsPerExpansion: 1
 				Choice@Low:
@@ -315,7 +320,13 @@
 						SpawnResourceSpawns: 2
 						ResourcesPerPlayer: 18750
 						ResourceSpawnWeights:
-							mine: 1
+							mine: 50
+							split2: 50
+						ExpansionResourceSpawnWeights:
+							splitblue: 40
+							splitred: 30
+							splitgold: 20
+							gmine: 10
 						MaximumExpansionResourceSpawns: 3
 						MaximumResourceSpawnsPerExpansion: 1
 				Choice@Medium:
@@ -324,8 +335,13 @@
 						SpawnResourceSpawns: 3
 						ResourcesPerPlayer: 37500
 						ResourceSpawnWeights:
-							mine: 95
-							gmine: 5
+							mine: 50
+							split2: 50
+						ExpansionResourceSpawnWeights:
+							splitblue: 40
+							splitred: 30
+							splitgold: 20
+							gmine: 10
 						MaximumExpansionResourceSpawns: 5
 						MaximumResourceSpawnsPerExpansion: 2
 				Choice@High:
@@ -334,8 +350,13 @@
 						SpawnResourceSpawns: 3
 						ResourcesPerPlayer: 56250
 						ResourceSpawnWeights:
-							mine: 9
-							gmine: 1
+							mine: 40
+							split2: 60
+						ExpansionResourceSpawnWeights:
+							splitblue: 35
+							splitred: 25
+							splitgold: 20
+							gmine: 20
 						MaximumExpansionResourceSpawns: 8
 						MaximumResourceSpawnsPerExpansion: 3
 				Choice@VeryHigh:
@@ -344,8 +365,13 @@
 						SpawnResourceSpawns: 4
 						ResourcesPerPlayer: 75000
 						ResourceSpawnWeights:
-							mine: 8
-							gmine: 2
+							mine: 40
+							split2: 60
+						ExpansionResourceSpawnWeights:
+							splitblue: 35
+							splitred: 25
+							splitgold: 20
+							gmine: 20
 						MaximumExpansionResourceSpawns: 10
 						MaximumResourceSpawnsPerExpansion: 3
 				Choice@Full:
@@ -354,6 +380,7 @@
 						SpawnResourceSpawns: 0
 						ResourcesPerPlayer: 1000000000
 						ResourceSpawnWeights:
+						ExpansionResourceSpawnWeights:
 						MaximumExpansionResourceSpawns: 0
 						MaximumResourceSpawnsPerExpansion: 1
 			MultiChoiceOption@Buildings:
