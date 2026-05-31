@@ -1,6 +1,9 @@
 mod-title = Cameo
 mod-windowtitle = OpenRA - Cameo
 
+map-generator-classic = Map Generator
+map-generator-clear = Clear Terrain
+
 button-tab-container-asengine = Attacque Supérior
 
 ## ingame-observer.yaml
@@ -287,3 +290,172 @@ checkbox-quota-mode =
     .tooltip = Production buildings automatically re-queue units to maintain target alive counts per type.
         Left-click a unit in the production panel to set its target; right-click to lower it.
         Due to its instability, this feature is currently single-player only, and disabled in multiplayer.
+
+
+## Map Generator (from OpenRA RA)
+## map-generators.yaml
+label-random-map = Random Map
+label-clear-map-generator-option-tile = Tile
+label-clear-map-generator-choice-tile-clear =
+   .label = Clear
+label-clear-map-generator-choice-tile-water =
+   .label = Water
+label-clear-map-generator-choice-tile-empty =
+   .label = Empty space
+
+label-ra-map-generator-option-seed = Seed
+
+label-ra-map-generator-option-terrain-type = Terrain Type
+label-ra-map-generator-choice-terrain-type-lakes =
+   .label = Lakes
+   .description = Open spaces with moderately sized lakes
+label-ra-map-generator-choice-terrain-type-puddles =
+   .label = Puddles
+   .description = Open spaces with small ponds
+label-ra-map-generator-choice-terrain-type-gardens =
+   .label = Gardens
+   .description = Densely-packed terrain with ponds, cliffs, and forests
+label-ra-map-generator-choice-terrain-type-plots =
+   .label = Plots
+   .description = Loosely-packed terrain with ponds, cliffs, and forests
+label-ra-map-generator-choice-terrain-type-plains =
+   .label = Plains
+   .description = Open spaces with sparse trees and cliffs
+label-ra-map-generator-choice-terrain-type-parks =
+   .label = Parks
+   .description = Open spaces with light forestry and occasional cliffs
+label-ra-map-generator-choice-terrain-type-woodlands =
+   .label = Woodlands
+   .description = Moderate forestry with occasional cliffs
+label-ra-map-generator-choice-terrain-type-overgrown =
+   .label = Overgrown
+   .description = Narrow passages, dense forestry and moderate cliffs
+label-ra-map-generator-choice-terrain-type-rocky =
+   .label = Rocky
+   .description = Moderate cliffs with light forestry
+label-ra-map-generator-choice-terrain-type-mountains =
+   .label = Mountains
+   .description = Many long cliffs
+label-ra-map-generator-choice-terrain-type-mountain-lakes =
+   .label = Mountain Lakes
+   .description = Lakes and many long cliffs
+label-ra-map-generator-choice-terrain-type-oceanic =
+   .label = Oceanic
+   .description = Small islands separated by an ocean
+label-ra-map-generator-choice-terrain-type-large-islands =
+   .label = Large Islands
+   .description = Large islands separated by an ocean
+label-ra-map-generator-choice-terrain-type-continents =
+   .label = Continents
+   .description = Large bodies of land and water
+label-ra-map-generator-choice-terrain-type-wetlands =
+   .label = Wetlands
+   .description = Loose mixtures of land and water
+label-ra-map-generator-choice-terrain-type-narrow-wetlands =
+   .label = Narrow Wetlands
+   .description = Tight mixtures of land and water
+
+label-ra-map-generator-option-symmetry = Symmetry
+label-ra-map-generator-choice-mirror-none =
+   .label = None
+label-ra-map-generator-choice-symmetry-mirror-horizontal =
+   .label = Mirror Horizontal
+label-ra-map-generator-choice-symmetry-mirror-vertical =
+   .label = Mirror Vertical
+label-ra-map-generator-choice-symmetry-mirror-diagonal-tl =
+   .label = Mirror Diagonal (Top-Left)
+label-ra-map-generator-choice-symmetry-mirror-diagonal-tr =
+   .label = Mirror Diagonal (Top-Right)
+label-ra-map-generator-choice-symmetry-mirror-2-rotations =
+   .label = 2 Rotations
+label-ra-map-generator-choice-symmetry-mirror-3-rotations =
+   .label = 3 Rotations
+label-ra-map-generator-choice-symmetry-mirror-4-rotations =
+   .label = 4 Rotations
+label-ra-map-generator-choice-symmetry-mirror-5-rotations =
+   .label = 5 Rotations
+label-ra-map-generator-choice-symmetry-mirror-6-rotations =
+   .label = 6 Rotations
+label-ra-map-generator-choice-symmetry-mirror-7-rotations =
+   .label = 7 Rotations
+label-ra-map-generator-choice-symmetry-mirror-8-rotations =
+   .label = 8 Rotations
+
+label-ra-map-generator-option-shape = Boundary Shape
+label-ra-map-generator-choice-shape-square =
+   .label = Rectangle
+   .description = Playable area is the full map
+label-ra-map-generator-choice-shape-circle-mountain =
+   .label = Circle in mountains
+   .description = Playable area is contained within a circular mountain range
+label-ra-map-generator-choice-shape-circle-water =
+   .label = Circle in water
+   .description = Playable area is a circular island
+
+label-ra-map-generator-option-players = Players
+
+label-ra-map-generator-option-resources = Resources
+label-ra-map-generator-choice-resources-none =
+   .label = None
+label-ra-map-generator-choice-resources-low =
+   .label = Low
+label-ra-map-generator-choice-resources-medium =
+   .label = Medium
+label-ra-map-generator-choice-resources-high =
+   .label = High
+label-ra-map-generator-choice-resources-very-high =
+   .label = Very High
+label-ra-map-generator-choice-resources-full =
+   .label = Oreful
+
+label-ra-map-generator-option-buildings = Tech Structures
+label-ra-map-generator-choice-buildings-none =
+   .label = None
+   .description = No tech structures
+label-ra-map-generator-choice-buildings-standard =
+   .label = Standard
+   .description = Oil Derricks, Hospitals, and Communication Centers
+label-ra-map-generator-choice-buildings-extra =
+   .label = Extra
+   .description = Oil Derricks, Hospitals, Communication Centers, Forward Command Posts
+label-ra-map-generator-choice-buildings-oil-only =
+   .label = Oil Only
+   .description = Oil Derricks only
+label-ra-map-generator-choice-buildings-oil-rush =
+   .label = Oil Rush
+   .description = Lots of Oil Derricks
+
+label-ra-map-generator-option-density = Expansion Opportunities
+label-ra-map-generator-choice-density-players =
+   .label = Scale with players
+label-ra-map-generator-choice-density-area-and-players =
+   .label = Scale with size and players
+label-ra-map-generator-choice-density-area-very-low =
+   .label = Very Low
+label-ra-map-generator-choice-density-area-low =
+   .label = Low
+label-ra-map-generator-choice-density-area-medium =
+   .label = Medium
+label-ra-map-generator-choice-density-area-high =
+   .label = High
+label-ra-map-generator-choice-density-area-very-high =
+   .label = Very High
+
+label-ra-map-generator-option-roads = Roads
+label-ra-map-generator-option-deny-walled-areas = Obstruct walled areas
+
+label-ra-map-generator-option-civilian-density = Civilian Density
+label-ra-map-generator-choice-civilian-density-default =
+   .label = Default
+label-ra-map-generator-choice-civilian-density-none =
+   .label = None
+label-ra-map-generator-choice-civilian-density-low =
+   .label = Low
+label-ra-map-generator-choice-civilian-density-medium =
+   .label = Medium
+label-ra-map-generator-choice-civilian-density-high =
+   .label = High
+label-ra-map-generator-choice-civilian-density-very-high =
+   .label = Very High
+label-ra-map-generator-choice-civilian-density-max =
+   .label = Maximum
