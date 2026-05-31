@@ -76,20 +76,20 @@
 						Mirror: None
 						Rotations: 1
 			MultiChoiceOption@hidden_tileset_overrides:
-				Choice@desert:
-					Tileset: DESERT
+				Choice@ra_desert:
+					Tileset: RA_DESERT
 					Settings:
 						MinimumBeachLength: 15
 						MinimumCoastStraight: 3
 						LandTile: 255
 						WaterTile: 256
-				Choice@temperat:
-					Tileset: TEMPERAT
+				Choice@ra_temperat:
+					Tileset: RA_TEMPERAT
 					Settings:
 						LandTile: 255
 						WaterTile: 1
-				Choice@snow:
-					Tileset: SNOW
+				Choice@ra_snow:
+					Tileset: RA_SNOW
 					Settings:
 						LandTile: 255
 						WaterTile: 1
@@ -476,7 +476,7 @@
 			BooleanOption@Roads:
 				Label: label-ra-map-generator-option-roads
 				Parameter: Roads
-				Default: True
+				Default: False
 				Priority: 1
 	ClearMapGenerator@clear:
 		Type: clear
@@ -487,41 +487,41 @@
 				Label: label-clear-map-generator-option-tile
 				Choice@DesertClear:
 					Label: label-clear-map-generator-choice-tile-clear
-					Tileset: DESERT
+					Tileset: RA_DESERT
 					Settings:
 						Tile: 255
 				Choice@DesertWater:
 					Label: label-clear-map-generator-choice-tile-water
-					Tileset: DESERT
+					Tileset: RA_DESERT
 					Settings:
 						Tile: 256
 				Choice@SnowClear:
 					Label: label-clear-map-generator-choice-tile-clear
-					Tileset: SNOW
+					Tileset: RA_SNOW
 					Settings:
 						Tile: 255
 				Choice@SnowWater:
 					Label: label-clear-map-generator-choice-tile-water
-					Tileset: SNOW
+					Tileset: RA_SNOW
 					Settings:
 						Tile: 1
 				Choice@TemperatClear:
 					Label: label-clear-map-generator-choice-tile-clear
-					Tileset: TEMPERAT
+					Tileset: RA_TEMPERAT
 					Settings:
 						Tile: 255
 				Choice@TemperatWater:
 					Label: label-clear-map-generator-choice-tile-water
-					Tileset: TEMPERAT
+					Tileset: RA_TEMPERAT
 					Settings:
 						Tile: 1
 				Choice@InteriorClear:
 					Label: label-clear-map-generator-choice-tile-clear
-					Tileset: INTERIOR
+					Tileset: RA_INTERIOR
 					Settings:
 						Tile: 275
 				Choice@InteriorEmpty:
 					Label: label-clear-map-generator-choice-tile-empty
-					Tileset: INTERIOR
+					Tileset: RA_INTERIOR
 					Settings:
 						Tile: 255

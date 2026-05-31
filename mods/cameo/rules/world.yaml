@@ -1286,6 +1286,7 @@ World:
 		TerrainFlashPalette: moveflash
 EditorWorld:
 	Inherits: ^BaseWorld
+	Inherits@MapGenerators: ^MapGenerators
 	EditorActorLayer:
 	EditorCursorLayer:
 	EditorResourceLayer:
