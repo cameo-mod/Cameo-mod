@@ -417,7 +417,7 @@ namespace OpenRA.Mods.CA.Projectiles
 		readonly WAngle facing;
 		readonly List<ProjectileAnimationState> projectileAnimations = new();
 
-		[Sync]
+		[VerifySync]
 		WPos pos, target, source;
 		int ticks;
 		int totalDistanceTravelled;

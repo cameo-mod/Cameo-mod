@@ -51,10 +51,10 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		readonly IHealth health;
 
-		[Sync]
+		[VerifySync]
 		int ticks;
 
-		[Sync]
+		[VerifySync]
 		int damageTicks;
 
 		public ChangesHealthVersus(Actor self, ChangesHealthVersusInfo info)

@@ -73,6 +73,8 @@ namespace OpenRA.Mods.Cameo.Orders
 		public virtual bool IsValidCommandLine => ((CurrentMode == ECustomFormationsMode.CommandLine) && (CurrentMarkedCells.Count > 1));
 		public virtual bool IsValidCommandCircle => ((CurrentMode == ECustomFormationsMode.CommandCircle) && ((DragStartMousePosition - CurrentMousePosition).Length > Game.Settings.Game.SelectionDeadzone));
 		public virtual bool ClearSelectionOnLeftClick => true;
+		protected virtual MouseActionType ActionType => MouseActionType.Contextual;
+		public MouseButton ActionButton => Game.Settings.Game.ResolveActionButton(ActionType);
 
 		protected Color CurrentCircleColor = Color.White;
 		protected Color HostileCircleColor = Color.OrangeRed;
@@ -907,7 +909,7 @@ namespace OpenRA.Mods.Cameo.Orders
 		/// </summary>
 		public static UnitOrderResult OrderForUnit(Actor self, Target target, CPos xy, MouseInput mi)
 		{
-			if (mi.Button != Game.Settings.Game.MouseButtonPreference.Action)
+			if (mi.Button != Game.Settings.Game.ResolveActionButton(MouseActionType.Contextual))
 				return null;
 
 			if (self.Owner != self.World.LocalPlayer)

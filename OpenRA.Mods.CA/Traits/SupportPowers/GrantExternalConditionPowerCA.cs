@@ -144,7 +144,7 @@ namespace OpenRA.Mods.CA.Traits
 		readonly char[] footprint;
 		TechTree techTree;
 
-		[Sync]
+		[VerifySync]
 		public int Ticks { get; private set; }
 
 		public GrantExternalConditionPowerCA(Actor self, GrantExternalConditionPowerCAInfo info)
@@ -322,6 +322,8 @@ namespace OpenRA.Mods.CA.Traits
 
 		class SelectConditionTarget : OrderGenerator
 		{
+			protected override MouseActionType ActionType => MouseActionType.SupportPower;
+
 			readonly GrantExternalConditionPowerCA power;
 			readonly char[] footprint;
 			readonly CVec dimensions;
@@ -331,11 +333,8 @@ namespace OpenRA.Mods.CA.Traits
 			readonly string order;
 
 			public SelectConditionTarget(World world, string order, SupportPowerManager manager, GrantExternalConditionPowerCA power)
+				: base(world)
 			{
-				// Clear selection if using Left-Click Orders
-				if (Game.Settings.Game.UseClassicMouseStyle)
-					manager.Self.World.Selection.Clear();
-
 				this.manager = manager;
 				this.order = order;
 				this.power = power;

@@ -16,6 +16,7 @@ using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Traits;
 using OpenRA.Mods.Common;
 using System.Linq;
+using System.Collections.Immutable;
 
 namespace OpenRA.Mods.Cameo.Warheads
 {
@@ -32,7 +33,7 @@ namespace OpenRA.Mods.Cameo.Warheads
 
 			var debugVis = firedBy.World.WorldActor.TraitOrDefault<DebugVisualizations>();
 			if (debugVis != null && debugVis.CombatGeometry)
-				firedBy.World.WorldActor.Trait<WarheadDebugOverlay>().AddImpact(pos, new[] { WDist.Zero, Spread }, DebugOverlayColor);
+				firedBy.World.WorldActor.Trait<WarheadDebugOverlay>().AddImpact(pos, ImmutableArray.Create(WDist.Zero, Spread), DebugOverlayColor);
 
 			foreach (var victim in firedBy.World.FindActorsOnCircle(pos, Spread))
 			{

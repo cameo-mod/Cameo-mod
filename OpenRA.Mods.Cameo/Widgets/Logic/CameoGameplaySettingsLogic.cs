@@ -7,6 +7,7 @@
 using System;
 using OpenRA.Graphics;
 using OpenRA.Mods.Cameo.Traits;
+using OpenRA.Mods.Common.Traits;
 using OpenRA.Mods.Common.Widgets;
 using OpenRA.Mods.Common.Widgets.Logic;
 using OpenRA.Widgets;
@@ -16,6 +17,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 	public class CameoGameplaySettingsLogic : ChromeLogic
 	{
 		readonly WorldRenderer worldRenderer;
+		readonly AutoSaveSettings autoSaveSettings;
+		readonly CameoSettings cameoSettings;
+
 		[FluentReference]
 		const string AutoSaveIntervalOptions = "auto-save-interval.options";
 
@@ -35,6 +39,8 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		public CameoGameplaySettingsLogic(Action<string, string, Func<Widget, Func<bool>>, Func<Widget, Action>> registerPanel, string panelID, string label, WorldRenderer worldRenderer)
 		{
 			this.worldRenderer = worldRenderer;
+			autoSaveSettings = Game.ModData.GetSettings<AutoSaveSettings>();
+			cameoSettings = Game.ModData.GetSettings<CameoSettings>();
 			registerPanel(panelID, label, InitPanel, ResetPanel);
 		}
 
@@ -45,22 +51,22 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 			var autoSaveIntervalDropDown = panel.Get<DropDownButtonWidget>("AUTO_SAVE_INTERVAL_DROP_DOWN");
 			autoSaveIntervalDropDown.OnClick = () => ShowAutoSaveIntervalDropdown(autoSaveIntervalDropDown, autoSaveSeconds);
-			autoSaveIntervalDropDown.GetText = () => GetMessageForAutoSaveInterval(Game.Settings.SinglePlayerSettings.AutoSaveInterval);
+			autoSaveIntervalDropDown.GetText = () => GetMessageForAutoSaveInterval(autoSaveSettings.AutoSaveInterval);
 
 			var autoSaveNoDropDown = panel.Get<DropDownButtonWidget>("AUTO_SAVE_FILE_NUMBER_DROP_DOWN");
 			autoSaveNoDropDown.OnMouseDown = _ => ShowAutoSaveFileNumberDropdown(autoSaveNoDropDown, autoSaveFileNumbers);
-			autoSaveNoDropDown.GetText = () => FluentProvider.GetMessage(AutoSaveMaxFileNumber, "saves", Game.Settings.SinglePlayerSettings.AutoSaveMaxFileCount);
-			autoSaveNoDropDown.IsDisabled = () => Game.Settings.SinglePlayerSettings.AutoSaveInterval <= 0;
+			autoSaveNoDropDown.GetText = () => FluentProvider.GetMessage(AutoSaveMaxFileNumber, "saves", autoSaveSettings.AutoSaveMaxFileCount);
+			autoSaveNoDropDown.IsDisabled = () => autoSaveSettings.AutoSaveInterval <= 0;
 
 			var quotaCheckbox = panel.Get<CheckboxWidget>("QUOTA_MODE_CHECKBOX");
-			quotaCheckbox.IsChecked = () => Game.Settings.SinglePlayerSettings.QuotaModeEnabled;
+			quotaCheckbox.IsChecked = () => cameoSettings.QuotaModeEnabled;
 			quotaCheckbox.OnClick = () =>
 			{
-				Game.Settings.SinglePlayerSettings.QuotaModeEnabled ^= true;
-				Game.Settings.Save();
+				cameoSettings.QuotaModeEnabled ^= true;
+				cameoSettings.Save();
 
 				var quotaManager = worldRenderer?.World?.LocalPlayer?.PlayerActor?.TraitOrDefault<QuotaProductionManager>();
-				quotaManager?.SetEnabled(Game.Settings.SinglePlayerSettings.QuotaModeEnabled);
+				quotaManager?.SetEnabled(cameoSettings.QuotaModeEnabled);
 			};
 
 			return () => false;
@@ -73,13 +79,11 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 		void ShowAutoSaveIntervalDropdown(DropDownButtonWidget dropdown, int[] options)
 		{
-			var gsp = Game.Settings.SinglePlayerSettings;
-
 			ScrollItemWidget SetupItem(int o, ScrollItemWidget itemTemplate)
 			{
 				var item = ScrollItemWidget.Setup(itemTemplate,
-					() => gsp.AutoSaveInterval == o,
-					() => { gsp.AutoSaveInterval = o; Game.Settings.Save(); });
+					() => autoSaveSettings.AutoSaveInterval == o,
+					() => { autoSaveSettings.AutoSaveInterval = o; autoSaveSettings.Save(); });
 
 				item.Get<LabelWidget>("LABEL").GetText = () => GetMessageForAutoSaveInterval(o);
 				return item;
@@ -90,13 +94,11 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 		void ShowAutoSaveFileNumberDropdown(DropDownButtonWidget dropdown, int[] options)
 		{
-			var gsp = Game.Settings.SinglePlayerSettings;
-
 			ScrollItemWidget SetupItem(int o, ScrollItemWidget itemTemplate)
 			{
 				var item = ScrollItemWidget.Setup(itemTemplate,
-					() => gsp.AutoSaveMaxFileCount == o,
-					() => { gsp.AutoSaveMaxFileCount = o; Game.Settings.Save(); });
+					() => autoSaveSettings.AutoSaveMaxFileCount == o,
+					() => { autoSaveSettings.AutoSaveMaxFileCount = o; autoSaveSettings.Save(); });
 
 				item.Get<LabelWidget>("LABEL").GetText = () => FluentProvider.GetMessage(AutoSaveMaxFileNumber, "saves", o);
 				return item;

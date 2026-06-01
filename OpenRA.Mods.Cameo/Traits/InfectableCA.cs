@@ -71,7 +71,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		public bool killInfectorOnDeath = false;
 
-		[Sync]
+		[VerifySync]
 		public int Ticks;
 
 		public InfectorCA(Actor actor, AttackInfectCA infection, AttackInfectCAInfo info)

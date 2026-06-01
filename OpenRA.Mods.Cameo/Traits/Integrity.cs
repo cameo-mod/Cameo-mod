@@ -69,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		int conditionToken = Actor.InvalidConditionToken;
 		readonly Actor self;
 
-		[Sync]
+		[VerifySync]
 		public int Strength;
 		public int MaxStrength;
 		int ticks;

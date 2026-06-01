@@ -1,4 +1,4 @@
-﻿#region Copyright & License Information
+#region Copyright & License Information
 /*
  * Copyright 2015- OpenRA.Mods.AS Developers (see AUTHORS)
  * This file is a part of a third-party plugin for OpenRA, which is
@@ -31,9 +31,9 @@ namespace OpenRA.Mods.CA.Effects
 		readonly string trailPalette;
 		readonly World world;
 
-		[Sync]
+		[VerifySync]
 		readonly WPos targetpos, source;
-		[Sync]
+		[VerifySync]
 		readonly WAngle facing;
 
 		readonly int lifespan, estimatedlifespan;
@@ -41,7 +41,7 @@ namespace OpenRA.Mods.CA.Effects
 
 		readonly ContrailRenderable contrail;
 
-		[Sync]
+		[VerifySync]
 		WPos projectilepos, lastPos;
 
 		int ticks, smokeTicks;

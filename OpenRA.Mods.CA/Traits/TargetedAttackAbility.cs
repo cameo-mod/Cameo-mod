@@ -193,12 +193,15 @@ namespace OpenRA.Mods.CA.Traits
 
 	class TargetedAttackAbilityOrderGenerator : OrderGenerator
 	{
+		protected override MouseActionType ActionType => MouseActionType.SupportPower;
+
 		readonly Actor self;
 		readonly TargetedAttackAbility ability;
 		readonly TargetedAttackAbilityInfo info;
 		readonly IEnumerable<TraitPair<TargetedAttackAbility>> selectedWithAbility;
 
 		public TargetedAttackAbilityOrderGenerator(Actor self, TargetedAttackAbility ability)
+			: base(self.World)
 		{
 			this.self = self;
 			this.ability = ability;
@@ -212,7 +215,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		protected override IEnumerable<Order> OrderInner(World world, CPos cell, int2 worldPixel, MouseInput mi)
 		{
-			if (mi.Button == MouseButton.Right)
+			if (mi.Button == Game.Settings.Game.ResolveCancelButton(MouseActionType.SupportPower))
 			{
 				world.CancelInputMode();
 				yield break;

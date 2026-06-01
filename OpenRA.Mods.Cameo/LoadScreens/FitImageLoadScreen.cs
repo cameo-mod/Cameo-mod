@@ -15,6 +15,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using OpenRA.FileSystem;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.LoadScreens;
 using OpenRA.Primitives;
@@ -84,9 +85,10 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		string[] messages = Array.Empty<string>();
 		string text;
 
-		public override void Init(ModData modData, Dictionary<string, string> info)
+		public override void Init(Manifest manifest, IReadOnlyFileSystem fileSystem)
 		{
-			base.Init(modData, info);
+			base.Init(manifest, fileSystem);
+			var info = Info;
 
 			if (info.TryGetValue("SplashImage", out var splash))
 				splashImage = splash.Trim();
@@ -224,7 +226,7 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 
 			if (ownSheet == null && currentImage != null)
 			{
-				using (var stream = ModData.DefaultFileSystem.Open(Platform.ResolvePath(currentImage)))
+				using (var stream = fileSystem.Open(Platform.ResolvePath(currentImage)))
 				{
 					ownSheet = new Sheet(SheetType.BGRA, stream);
 					ownSheet.GetTexture().ScaleFilter = TextureScaleFilter.Linear;

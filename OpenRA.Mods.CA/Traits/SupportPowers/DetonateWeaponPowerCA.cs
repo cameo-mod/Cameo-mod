@@ -205,16 +205,15 @@ namespace OpenRA.Mods.CA.Traits
 
 	public class SelectDetonateWeaponPowerTarget : OrderGenerator
 	{
+		protected override MouseActionType ActionType => MouseActionType.SupportPower;
+
 		readonly SupportPowerManager manager;
 		readonly string order;
 		readonly DetonateWeaponPowerCA power;
 
 		public SelectDetonateWeaponPowerTarget(string order, SupportPowerManager manager, DetonateWeaponPowerCA power)
+			: base(manager.Self.World)
 		{
-			// Clear selection if using Left-Click Orders
-			if (Game.Settings.Game.UseClassicMouseStyle)
-				manager.Self.World.Selection.Clear();
-
 			this.manager = manager;
 			this.order = order;
 			this.power = power;

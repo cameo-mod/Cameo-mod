@@ -1,4 +1,4 @@
-﻿#region Copyright & License Information
+#region Copyright & License Information
 /**
  * Copyright (c) The OpenRA Combined Arms Developers (see CREDITS).
  * This file is part of OpenRA Combined Arms, which is free software.
@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.Common;
@@ -42,7 +43,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly Color TargetLineColor = Color.Crimson;
 
 		[Desc("Sounds to play when the actor is taking off.")]
-		public readonly string[] LaunchSounds = Array.Empty<string>();
+		public readonly ImmutableArray<string> LaunchSounds = ImmutableArray<string>.Empty;
 
 		[Desc("Do the launching sounds play under shroud or fog.")]
 		public readonly bool AudibleThroughFog = false;
@@ -79,7 +80,7 @@ namespace OpenRA.Mods.CA.Traits
 		INotifyCenterPositionChanged[] notifyCenterPositionChanged;
 		bool requiresVisibilityChecks = false;
 
-		[Sync]
+		[VerifySync]
 		public WAngle Facing
 		{
 			get { return Orientation.Yaw; }
@@ -94,7 +95,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		public WRot Orientation { get; private set; }
 
-		[Sync]
+		[VerifySync]
 		public WPos CenterPosition { get; private set; }
 
 		public CPos TopLeft { get { return self.World.Map.CellContaining(CenterPosition); } }

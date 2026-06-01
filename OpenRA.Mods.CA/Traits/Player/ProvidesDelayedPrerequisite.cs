@@ -55,7 +55,7 @@ namespace OpenRA.Mods.CA.Traits
 	{
 		readonly string prerequisite;
 
-		[Sync]
+		[VerifySync]
 		int remainingDelay;
 
 		bool enabled;
