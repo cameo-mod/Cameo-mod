@@ -282,6 +282,7 @@ support-power-timer = { $player }'s { $support-power }: { $time }
 checkbox-laser-glow = Weapon Glow Effects (Experimental)
 checkbox-heat-distortion = Heat Distortion Effects (Experimental)
 checkbox-shockwave = Shockwave Distortion Effects (Experimental)
+checkbox-screen-shake = Screen Shake Effects
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
 
 ## settings-gameplay.yaml
