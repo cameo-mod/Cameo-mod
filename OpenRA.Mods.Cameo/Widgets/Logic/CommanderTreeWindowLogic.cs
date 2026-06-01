@@ -21,7 +21,15 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 {
 	public class CommanderTreeWindowLogic : ChromeLogic
 	{
+		const int HeaderHeight = 148;
+		const int FooterHeight = 24;
+		const int SidePadding = 16;
+		const int MinWindowWidth = 260;
+		const int MinWindowHeight = 350;
+
 		readonly World world;
+		readonly Widget overlay;
+		readonly Widget windowWidget;
 		readonly LabelWidget pointsValue;
 		readonly LabelWidget rankValue;
 		readonly LabelWidget progressValue;
@@ -29,12 +37,30 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly ColorBlockWidget dismissArea;
 		readonly LogicKeyListenerWidget hotkeys;
 		readonly CommanderTreeWidget commanderTree;
-		readonly SliderWidget horizontalScroll;
+		readonly Widget hscrollContainer;
+		readonly DragHandleWidget hscrollThumb;
+		readonly DragHandleWidget dragHandle;
+		readonly ScrollPanelWidget treeScrollPanel;
+		readonly Widget windowBgWidget;
+		readonly Widget headerStatsWidget;
+		readonly Widget treeTooltipWidget;
+
+		bool isDragging;
+		int2 dragStartMouse;
+		int2 dragStartWindowPos;
+		bool hasBeenDragged;
+		int lastContentWidth;
+		int lastContentHeight;
+
+		bool isDraggingHScroll;
+		int hscrollDragStartX;
+		float hscrollDragStartFraction;
 
 		[ObjectCreator.UseCtor]
 		public CommanderTreeWindowLogic(Widget widget, World world)
 		{
 			this.world = world;
+			overlay = widget;
 
 			var titleLabel = widget.GetOrNull<LabelWidget>("TITLE");
 			var pointsLabel = widget.GetOrNull<LabelWidget>("POINTS_LABEL");
@@ -48,7 +74,14 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			dismissArea = widget.GetOrNull<ColorBlockWidget>("DISMISS_AREA");
 			hotkeys = widget.GetOrNull<LogicKeyListenerWidget>("HOTKEYS");
 			commanderTree = widget.GetOrNull<CommanderTreeWidget>("COMMANDER_TREE");
-			horizontalScroll = widget.GetOrNull<SliderWidget>("TREE_HSCROLL");
+			hscrollContainer = widget.GetOrNull<Widget>("TREE_HSCROLL");
+			hscrollThumb = widget.GetOrNull<DragHandleWidget>("HSCROLL_THUMB");
+			dragHandle = widget.GetOrNull<DragHandleWidget>("DRAG_HANDLE");
+			treeScrollPanel = widget.GetOrNull<ScrollPanelWidget>("TREE_SCROLL");
+			windowWidget = widget.GetOrNull<Widget>("COMMANDER_TREE_WINDOW");
+			windowBgWidget = widget.GetOrNull<Widget>("WINDOW_BG");
+			headerStatsWidget = widget.GetOrNull<Widget>("HEADER_STATS");
+			treeTooltipWidget = widget.GetOrNull<Widget>("COMMANDER_TREE_TOOLTIP");
 
 			if (titleLabel != null)
 				titleLabel.GetText = () => GetLocalizedString("commander-tree.title", "Promotions");
@@ -70,11 +103,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 			if (dismissArea != null)
 			{
-				dismissArea.OnMouseDown = mi =>
-				{
-					if (mi.Button != MouseButton.None)
-						Close();
-				};
+				dismissArea.OnMouseDown = _ => { };
 				dismissArea.OnMouseUp = _ => { };
 			}
 
@@ -96,16 +125,59 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			if (progressValue != null)
 				progressValue.GetText = GetCommanderProgress;
 
-			if (horizontalScroll != null)
+			if (hscrollThumb != null && hscrollContainer != null)
 			{
-				horizontalScroll.Visible = false;
-				horizontalScroll.Disabled = true;
-				horizontalScroll.GetValue = () => commanderTree?.HorizontalScrollFraction ?? 0f;
-				horizontalScroll.OnChange += value =>
+				hscrollThumb.OnMouseDown = mi =>
 				{
-					commanderTree?.SetHorizontalScrollFraction(value);
+					isDraggingHScroll = true;
+					hscrollDragStartX = mi.Location.X;
+					hscrollDragStartFraction = commanderTree?.HorizontalScrollFraction ?? 0f;
 				};
+
+				hscrollThumb.OnMouseMove = mi =>
+				{
+					if (!isDraggingHScroll || commanderTree == null)
+						return;
+					var thumbW = GetHScrollThumbWidth();
+					var trackAvail = hscrollContainer.Bounds.Width - thumbW;
+					if (trackAvail <= 0)
+						return;
+					var delta = mi.Location.X - hscrollDragStartX;
+					commanderTree.SetHorizontalScrollFraction(Math.Clamp(hscrollDragStartFraction + delta / (float)trackAvail, 0f, 1f));
+				};
+
+				hscrollThumb.OnMouseUp = _ => isDraggingHScroll = false;
 			}
+
+			if (dragHandle != null && windowWidget != null)
+			{
+				dragHandle.OnMouseDown = mi =>
+				{
+					isDragging = true;
+					dragStartMouse = mi.Location;
+					dragStartWindowPos = new int2(windowWidget.Bounds.X, windowWidget.Bounds.Y);
+				};
+
+				dragHandle.OnMouseMove = mi =>
+				{
+					if (!isDragging)
+						return;
+
+					hasBeenDragged = true;
+					var delta = mi.Location - dragStartMouse;
+					var screenW = overlay.Bounds.Width;
+					var screenH = overlay.Bounds.Height;
+					var newX = Math.Clamp(dragStartWindowPos.X + delta.X, 0, Math.Max(0, screenW - windowWidget.Bounds.Width));
+					var newY = Math.Clamp(dragStartWindowPos.Y + delta.Y, 0, Math.Max(0, screenH - windowWidget.Bounds.Height));
+					var b = windowWidget.Bounds;
+					b.X = newX;
+					b.Y = newY;
+					windowWidget.Bounds = b;
+				};
+
+				dragHandle.OnMouseUp = _ => isDragging = false;
+			}
+
 		}
 
 		ISync GetPromotionsTrait()
@@ -192,15 +264,146 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		{
 			base.Tick();
 
-			if (commanderTree == null || horizontalScroll == null)
+			if (commanderTree != null && windowWidget != null)
+			{
+				var cw = commanderTree.ContentWidth;
+				var ch = commanderTree.ContentHeight;
+				if (cw > 0 && ch > 0 && (cw != lastContentWidth || ch != lastContentHeight))
+				{
+					lastContentWidth = cw;
+					lastContentHeight = ch;
+					AutoSizeWindow(cw, ch);
+				}
+			}
+
+			if (commanderTree == null || hscrollContainer == null)
 				return;
 
 			var needsScroll = commanderTree.HasHorizontalOverflow;
-			horizontalScroll.Visible = needsScroll;
-			horizontalScroll.Disabled = !needsScroll;
+			hscrollContainer.Visible = needsScroll;
 
 			if (!needsScroll && commanderTree.HorizontalScrollFraction > 0f)
 				commanderTree.SetHorizontalScrollFraction(0f);
+			else if (needsScroll)
+				UpdateHScrollThumb();
+		}
+
+		void AutoSizeWindow(int treeContentWidth, int treeContentHeight)
+		{
+			if (windowWidget == null)
+				return;
+
+			var screenW = overlay.Bounds.Width;
+			var screenH = overlay.Bounds.Height;
+			var maxW = screenW * 9 / 10;
+			var maxH = screenH * 9 / 10;
+
+			var targetW = Math.Clamp(treeContentWidth + SidePadding, MinWindowWidth, maxW);
+			var targetH = Math.Clamp(treeContentHeight + HeaderHeight + FooterHeight, MinWindowHeight, maxH);
+
+			var current = windowWidget.Bounds;
+			if (current.Width == targetW && current.Height == targetH)
+				return;
+
+			int newX, newY;
+			if (hasBeenDragged)
+			{
+				newX = Math.Clamp(current.X, 0, Math.Max(0, screenW - targetW));
+				newY = Math.Clamp(current.Y, 0, Math.Max(0, screenH - targetH));
+			}
+			else
+			{
+				newX = Math.Clamp(screenW * 82 / 100 - targetW, 0, Math.Max(0, screenW - targetW));
+				newY = Math.Clamp(screenH / 5, 0, Math.Max(0, screenH - targetH));
+			}
+
+			var b = windowWidget.Bounds;
+			b.X = newX;
+			b.Y = newY;
+			b.Width = targetW;
+			b.Height = targetH;
+			windowWidget.Bounds = b;
+
+			ResizeChildren(targetW, targetH);
+		}
+
+		void ResizeChildren(int w, int h)
+		{
+			SetSize(windowBgWidget, w, h);
+
+			if (dragHandle != null)
+			{
+				var db = dragHandle.Bounds;
+				db.Width = w;
+				dragHandle.Bounds = db;
+			}
+
+			if (headerStatsWidget != null)
+			{
+				var hb = headerStatsWidget.Bounds;
+				hb.Width = w - SidePadding;
+				headerStatsWidget.Bounds = hb;
+			}
+
+			if (closeButton != null)
+			{
+				var cb = closeButton.Bounds;
+				cb.X = w - cb.Width - 4;
+				closeButton.Bounds = cb;
+			}
+
+			if (treeScrollPanel != null)
+			{
+				var sb = treeScrollPanel.Bounds;
+				sb.Width = w - SidePadding;
+				sb.Height = h - (HeaderHeight + FooterHeight);
+				treeScrollPanel.Bounds = sb;
+			}
+
+			if (hscrollContainer != null)
+			{
+				var hb = hscrollContainer.Bounds;
+				hb.Y = h - FooterHeight;
+				hb.Width = w - SidePadding;
+				hscrollContainer.Bounds = hb;
+			}
+
+			SetSize(treeTooltipWidget, w, h);
+		}
+
+		static void SetSize(Widget w, int width, int height)
+		{
+			if (w == null)
+				return;
+			var b = w.Bounds;
+			b.Width = width;
+			b.Height = height;
+			w.Bounds = b;
+		}
+
+		int GetHScrollThumbWidth()
+		{
+			var contentW = commanderTree?.ContentWidth ?? 0;
+			var barW = hscrollContainer?.Bounds.Width ?? 0;
+			if (contentW <= 0 || barW <= 0)
+				return 40;
+			var viewportW = treeScrollPanel?.Bounds.Width ?? barW;
+			var fraction = Math.Clamp((float)viewportW / contentW, 0.05f, 1f);
+			return Math.Max(24, (int)(fraction * barW));
+		}
+
+		void UpdateHScrollThumb()
+		{
+			if (hscrollThumb == null || hscrollContainer == null)
+				return;
+			var barW = hscrollContainer.Bounds.Width;
+			var thumbW = GetHScrollThumbWidth();
+			var scrollFraction = commanderTree?.HorizontalScrollFraction ?? 0f;
+			var thumbX = (int)(scrollFraction * Math.Max(0, barW - thumbW));
+			var b = hscrollThumb.Bounds;
+			b.X = thumbX;
+			b.Width = thumbW;
+			hscrollThumb.Bounds = b;
 		}
 
 		string GetLocalizedString(string key, string fallback)

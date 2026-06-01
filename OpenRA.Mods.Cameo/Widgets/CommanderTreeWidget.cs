@@ -82,6 +82,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 		CommanderNode hoverNode;
 		CommanderNode lastTooltipNode;
+		readonly HashSet<CommanderNode> hoverAncestors = new();
 		int currentTooltipToken;
 		bool commanderTooltipDirty;
 		ProductionTooltipCameoLogic commanderTooltipLogic;
@@ -116,10 +117,13 @@ namespace OpenRA.Mods.Cameo.Widgets
 		public int GroupPadding = 12;
 		public float GroupBorderWidth = 2f;
 		public Color GroupBorderColor = Color.FromArgb(192, 180, 180, 180);
+		public Color AncestorHighlightColor = Color.FromArgb(200, 255, 140, 30);
 
 		public Func<ProductionIcon> GetTooltipIcon;
 		public bool HasHorizontalOverflow => GetMaxHorizontalScroll() > 0;
 		public float HorizontalScrollFraction => HasHorizontalOverflow ? horizontalScroll / Math.Max(1, (float)GetMaxHorizontalScroll()) : 0f;
+		public int ContentWidth => contentWidth;
+		public int ContentHeight => contentHeight;
 
 		[ObjectCreator.UseCtor]
 		public CommanderTreeWidget(World world, WorldRenderer worldRenderer)
@@ -155,6 +159,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 			HoverBorderColor = other.HoverBorderColor;
 			BackgroundColor = other.BackgroundColor;
 			EdgeColor = other.EdgeColor;
+			AncestorHighlightColor = other.AncestorHighlightColor;
 
 			GetTooltipIcon = () => tooltipIcon;
 			tooltipContainer = Exts.Lazy(() => Ui.Root.Get<TooltipContainerWidget>(TooltipContainer));
@@ -223,6 +228,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 			tooltipIcon = null;
 
 			hoverNode = null;
+			hoverAncestors.Clear();
 			lastTooltipNode = null;
 		}
 
@@ -235,7 +241,15 @@ namespace OpenRA.Mods.Cameo.Widgets
 				UpdateHover(mi.Location);
 
 			if (mi.Event == MouseInputEvent.Scroll)
+			{
+				if (HasHorizontalOverflow && (mi.Modifiers & Modifiers.Shift) != 0)
+				{
+					SetHorizontalScroll(horizontalScroll - (int)(mi.Delta.Y * Game.Settings.Game.UIScrollSpeed));
+					return true;
+				}
+
 				return false;
+			}
 
 			if (mi.Button != MouseButton.Left && mi.Button != MouseButton.Right && mi.Button != MouseButton.Middle)
 				return false;
@@ -823,6 +837,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 				scrollPanel.ContentHeight = contentHeight;
 
 			layoutDirty = false;
+			RebuildHoverAncestors();
 			UpdateHorizontalScrollLayout();
 		}
 
@@ -891,10 +906,35 @@ namespace OpenRA.Mods.Cameo.Widgets
 			});
 		}
 
+		void RebuildHoverAncestors()
+		{
+			hoverAncestors.Clear();
+			if (hoverNode == null)
+				return;
+
+			var queue = new Queue<CommanderNode>();
+			queue.Enqueue(hoverNode);
+			while (queue.Count > 0)
+			{
+				var current = queue.Dequeue();
+				foreach (var edge in edges)
+				{
+					if (edge.To == current && hoverAncestors.Add(edge.From))
+						queue.Enqueue(edge.From);
+				}
+			}
+		}
+
 		void UpdateHover(int2 mouseLocation)
 		{
 			var local = mouseLocation - RenderOrigin;
-			hoverNode = nodes.Values.FirstOrDefault(n => n.Bounds.Contains(local));
+			var newHover = nodes.Values.FirstOrDefault(n => n.Bounds.Contains(local));
+			if (newHover != hoverNode)
+			{
+				hoverNode = newHover;
+				RebuildHoverAncestors();
+			}
+
 			tooltipIcon = hoverNode?.Icon;
 
 			if (TooltipContainer != null && hoverNode != lastTooltipNode)
@@ -1167,7 +1207,15 @@ namespace OpenRA.Mods.Cameo.Widgets
 				if (!renderedKeys.Add(dedupKey))
 					continue;
 
-				var edgeColor = (!from.Revealed || !to.Revealed) ? Color.FromArgb(EdgeColor.A / 2, EdgeColor.R, EdgeColor.G, EdgeColor.B) : EdgeColor;
+				var isAncestorEdge = hoverNode != null && hoverAncestors.Contains(from) &&
+					(to == hoverNode || hoverAncestors.Contains(to));
+				Color edgeColor;
+				if (isAncestorEdge)
+					edgeColor = AncestorHighlightColor;
+				else if (!from.Revealed || !to.Revealed)
+					edgeColor = Color.FromArgb(EdgeColor.A / 2, EdgeColor.R, EdgeColor.G, EdgeColor.B);
+				else
+					edgeColor = EdgeColor;
 				var start = RenderOrigin.ToFloat2() + GetEdgeStartAnchor(from, useGroupStart);
 				var end = RenderOrigin.ToFloat2() + GetEdgeEndAnchor(to, useGroupEnd);
 				var dir = end - start;
@@ -1321,7 +1369,16 @@ namespace OpenRA.Mods.Cameo.Widgets
 		void DrawNodeBorder(CommanderNode node, float2 topLeft)
 		{
 			var isHover = node == hoverNode;
-			var borderColor = node.Owned ? OwnedBorderColor : isHover ? HoverBorderColor : Color.FromArgb(0, 0, 0, 0);
+			var isAncestor = hoverNode != null && !isHover && hoverAncestors.Contains(node);
+			Color borderColor;
+			if (node.Owned)
+				borderColor = OwnedBorderColor;
+			else if (isHover)
+				borderColor = HoverBorderColor;
+			else if (isAncestor)
+				borderColor = AncestorHighlightColor;
+			else
+				borderColor = Color.FromArgb(0, 0, 0, 0);
 			if (borderColor.A == 0)
 				return;
 

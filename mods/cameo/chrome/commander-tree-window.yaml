@@ -4,58 +4,61 @@ Container@COMMANDER_TREE_OVERLAY:
 	Logic: CommanderTreeWindowLogic
 	Children:
 		LogicKeyListener@HOTKEYS:
-		CommanderTreeDismiss@DISMISS_AREA:
-			Width: WINDOW_WIDTH
-			Height: WINDOW_HEIGHT
-			Color: 000000A0
-		Background@COMMANDER_TREE_WINDOW:
-			Width: WINDOW_WIDTH * 4 / 5
-			Height: WINDOW_HEIGHT * 4 / 5
-			X: (WINDOW_WIDTH - WIDTH) / 2
-			Y: (WINDOW_HEIGHT - HEIGHT) / 2
-			Background: dialog4
+		Container@COMMANDER_TREE_WINDOW:
+			Width: 400
+			Height: 350
+			X: -9999
+			Y: -9999
 			Children:
+				ColorBlock@WINDOW_BG:
+					Width: PARENT_WIDTH
+					Height: PARENT_HEIGHT
+					Color: 101520CC
+				DragHandle@DRAG_HANDLE:
+					Width: PARENT_WIDTH
+					Height: 148
+					Color: 00000000
 				Label@TITLE:
-					X: 24
+					X: 4
 					Y: 18
 					Font: Bold
 					Text: commander-tree.title
 				Container@HEADER_STATS:
-					X: 24
+					X: 4
 					Y: 56
-					Width: PARENT_WIDTH - 48
+					Width: PARENT_WIDTH - 8
 					Height: 72
 					Children:
 						Label@RANK_LABEL:
-							Width: 220
+							Width: 165
 							Font: Bold
 							Text: promotion-counter.rank
 						Label@RANK_VALUE:
-							X: 220
-							Width: PARENT_WIDTH - 220
+							X: 165
+							Width: PARENT_WIDTH - 165
 							Font: Bold
 						Label@POINTS_LABEL:
 							Y: 24
-							Width: 220
+							Width: 165
 							Font: Bold
 							Text: commander-tree.points-label
 						Label@POINTS_VALUE:
 							Y: 24
-							X: 220
-							Width: PARENT_WIDTH - 220
+							X: 165
+							Width: PARENT_WIDTH - 165
 							Font: Bold
 						Label@PROGRESS_LABEL:
 							Y: 48
-							Width: 220
+							Width: 165
 							Font: Bold
 							Text: promotion-counter.progress
 						Label@PROGRESS_VALUE:
 							Y: 48
-							X: 220
-							Width: PARENT_WIDTH - 220
+							X: 165
+							Width: PARENT_WIDTH - 165
 							Font: Bold
 				Button@CLOSE_BUTTON:
-					X: PARENT_WIDTH - WIDTH - 24
+					X: PARENT_WIDTH - WIDTH - 4
 					Y: 18
 					Width: 32
 					Height: 32
@@ -70,25 +73,42 @@ Container@COMMANDER_TREE_OVERLAY:
 							Font: Bold
 							Text: X
 				ScrollPanel@TREE_SCROLL:
-					X: 24
+					X: 4
 					Y: 148
-					Width: PARENT_WIDTH - 48
-					Height: PARENT_HEIGHT - 224
-					ScrollBar: Right
+					Width: PARENT_WIDTH - 16
+					Height: PARENT_HEIGHT - 172
+					ScrollBar: Hidden
+					BorderWidth: 0
 					Children:
 						CommanderTree@COMMANDER_TREE:
 							TooltipContainer: COMMANDER_TREE_TOOLTIP
 							IconWidth: 62
 							IconHeight: 46
-							HorizontalSpacing: 220
-							VerticalSpacing: 110
-							ContentPadding: 40
-				Slider@TREE_HSCROLL:
-					X: 24
-					Y: PARENT_HEIGHT - 64
-					Width: PARENT_WIDTH - 48
-					Height: 24
+							HorizontalSpacing: 62
+							VerticalSpacing: 46
+							ContentPadding: 8
+							EdgeColor: FFFFFFFF
+							ArrowWidth: 2
+							ArrowHeadLength: 5
+							ArrowHeadWidth: 3
+							ArrowNodePadding: 4
+							OwnedBorderColor: 00CC44FF
+				Container@TREE_HSCROLL:
+					X: 4
+					Y: PARENT_HEIGHT - 24
+					Width: PARENT_WIDTH - 16
+					Height: 20
 					Visible: False
+					Children:
+						CommanderTreeDismiss@HSCROLL_TRACK:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Color: 12161AFF
+						DragHandle@HSCROLL_THUMB:
+							Y: 2
+							Width: 60
+							Height: PARENT_HEIGHT - 4
+							Color: 505866FF
 				TooltipContainer@COMMANDER_TREE_TOOLTIP:
 					X: 0
 					Y: 0
