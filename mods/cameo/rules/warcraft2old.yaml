@@ -2467,7 +2467,6 @@ wc2_human_guard_tower:
 	Valued:
 		Cost: 800
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -2485,7 +2484,6 @@ wc2_human_cannon_tower:
 	Valued:
 		Cost: 1600
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -3778,7 +3776,6 @@ wc2_orc_guard_tower:
 	Valued:
 		Cost: 800
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -3796,7 +3793,6 @@ wc2_orc_cannon_tower:
 	Valued:
 		Cost: 1600
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -4797,7 +4793,6 @@ wc2_neutral_daemon:
 ####################################################################################################
 
 ^Upgrade:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Buildable:

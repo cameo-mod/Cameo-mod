@@ -44,13 +44,11 @@ Player:
 	UsePointsOnProduction:
 
 hack.has_points:
-	AlwaysVisible:
 	Interactable:
 	ProvidesPrerequisite@has_points:
 		Prerequisite: rank1
 
 hack.rank_3:
-	AlwaysVisible:
 	Interactable:
 	ProvidesPrerequisite@rank_3:
 		Prerequisite: rank3
@@ -60,13 +58,11 @@ hack.rank_3:
 		Prerequisite: canselectrepair
 
 hack.rank_5:
-	AlwaysVisible:
 	Interactable:
 	ProvidesPrerequisite@rank_5:
 		Prerequisite: rank5
 
 rank1:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: 1 Promotion Point
@@ -74,7 +70,6 @@ rank1:
 		Description: 1 Promotion Point
 
 rank3:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: OF-3 or higher rank
@@ -82,7 +77,6 @@ rank3:
 		Description: OF-3 or higher rank
 
 rank5:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: OF-5 or higher rank
@@ -90,13 +84,11 @@ rank5:
 		Description: OF-5 or higher rank
 
 canselectfrenzy:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: OF-3 or Infantry General
 
 canselectrepair:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: OF-3 or Stealth, Nuclear, Tank Generals

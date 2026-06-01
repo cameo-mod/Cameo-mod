@@ -285,6 +285,19 @@ checkbox-screen-shake = Screen Shake Effects
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
 
 ## settings-gameplay.yaml
+label-game-play-section-header = Gameplay
+auto-save-interval-label = Auto-save interval
+auto-save-nr-label = Auto-save files
+auto-save-interval.disabled = Disabled
+auto-save-interval.options = { $seconds } seconds
+auto-save-interval.minute-options = { $minutes ->
+    [one] 1 minute
+   *[other] { $minutes } minutes
+}
+auto-save-max-file-number = { $saves ->
+    [one] 1 save
+   *[other] { $saves } saves
+}
 label-experimental-section-header = Experimental Features
 checkbox-quota-mode =
     .label = Quota Mode (Experimental)

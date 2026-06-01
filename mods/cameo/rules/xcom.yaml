@@ -171,7 +171,6 @@ ShotgunUpgrade:
 	RenderSprites:
 		Image: gdishotgunner
 	Interactable:
-	AlwaysVisible:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: ShotgunUpgrade
 		OneShot: true
@@ -209,7 +208,6 @@ ShardgunUpgrade:
 	RenderSprites:
 		Image: upscrefinery1
 	Interactable:
-	AlwaysVisible:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: ShardgunUpgrade
 		OneShot: true
@@ -247,7 +245,6 @@ GrenadeUpgrade:
 	RenderSprites:
 		Image: e2
 	Interactable:
-	AlwaysVisible:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: GrenadeUpgrade
 		OneShot: true
@@ -285,7 +282,6 @@ CarapaceArmorUpgrade:
 	RenderSprites:
 		Image: tsblackhandlaser
 	Interactable:
-	AlwaysVisible:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: CarapaceArmorUpgrade
 		OneShot: true
@@ -418,7 +414,6 @@ RocketLauncherUpgrade:
 	RenderSprites:
 		Image: gdimissilesoldier
 	Interactable:
-	AlwaysVisible:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: RocketLauncherUpgrade
 		OneShot: true
@@ -565,7 +560,6 @@ AutoSniperUpgrade:
 	RenderSprites:
 		Image: ra2snipe
 	Interactable:
-	AlwaysVisible:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: AutoSniperUpgrade
 		OneShot: true

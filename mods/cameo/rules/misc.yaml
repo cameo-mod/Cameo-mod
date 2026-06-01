@@ -318,7 +318,6 @@ mpspawn:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (multiplayer player starting point)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	WithSpriteBody:
@@ -334,7 +333,6 @@ waypoint:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (waypoint for scripted behavior)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	WithSpriteBody:
@@ -369,7 +367,6 @@ CAMERA:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals area to owner)
-	AlwaysVisible:
 	WithSpriteBody:
 	RenderSpritesEditorOnly:
 	BodyOrientation:
@@ -386,7 +383,6 @@ CAMERA.small:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals small area to owner)
-	AlwaysVisible:
 	WithSpriteBody:
 	RenderSpritesEditorOnly:
 		Image: camera
@@ -487,7 +483,6 @@ RACAMERA:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals area to owner)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RevealsShroud:
@@ -562,7 +557,6 @@ camera.gpssat:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals map to owner)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	BodyOrientation:
@@ -933,7 +927,6 @@ wormspawner:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (worm spawning location)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RenderSpritesEditorOnly:
@@ -992,7 +985,6 @@ spicebloom.spawnpoint:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: Spice Bloom spawnpoint
-	AlwaysVisible:
 	RenderSpritesEditorOnly:
 		Image: spicebloom
 		Palette: effect50alpha
@@ -1055,7 +1047,6 @@ CTFLAG:
 
 
 powerproxy.parabombs:
-	AlwaysVisible:
 	AirstrikePower:
 		Icons:
 			1: parabombs
@@ -1082,7 +1073,6 @@ powerproxy.parabombs:
 
 
 powerproxy.sonarpulse:
-	AlwaysVisible:
 	SpawnActorPower:
 		Icons:
 			1: sonar
@@ -1105,7 +1095,6 @@ powerproxy.sonarpulse:
 
 
 powerproxy.paratroopers:
-	AlwaysVisible:
 	ParatroopersPower:
 		Icons:
 			1: paratroopers
@@ -1132,7 +1121,6 @@ powerproxy.paratroopers:
 
 
 powerproxy.emp:
-	AlwaysVisible:
 	DetonateWeaponPower:
 		OrderName: crateemp
 		Icons:
@@ -1161,7 +1149,6 @@ ambiance_wind:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (Periodic Wind Sounds)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RenderSpritesEditorOnly:
@@ -1221,31 +1208,26 @@ ambiance_rumbling:
 		Interval: 500,4500
 
 anytdhq:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: TD Tech Center
 
 techcenter:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA/TD Tech Center
 
 tdtechcenter:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: TD Tech Center
 
 tek:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA Tech Center
 
 ra2tek:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA2 Tech Center
