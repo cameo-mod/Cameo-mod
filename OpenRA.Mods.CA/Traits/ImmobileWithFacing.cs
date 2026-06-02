@@ -37,17 +37,17 @@ namespace OpenRA.Mods.CA.Traits
 
 	class ImmobileWithFacing : IOccupySpace, ISync, INotifyAddedToWorld, INotifyRemovedFromWorld, IFacing, IDeathActorInitModifier
 	{
-		[Sync]
+		[VerifySync]
 		readonly CPos location;
 
-		[Sync]
+		[VerifySync]
 		readonly WPos position;
 
 		readonly (CPos, SubCell)[] occupied;
 
 		WRot orientation;
 
-		[Sync]
+		[VerifySync]
 		public WAngle Facing
 		{
 			get { return orientation.Yaw; }

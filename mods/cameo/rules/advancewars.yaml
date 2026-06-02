@@ -4821,7 +4821,6 @@ awupgradecity:
 	RenderSprites:
 		Image: awcity
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: True
 		
@@ -5919,7 +5918,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	AirstrikePower@A10NRA:
@@ -5944,7 +5943,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	AirstrikePower@TheOwl:
@@ -5966,7 +5965,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 	ClassicAirstrikePower@Duster:
@@ -6015,7 +6014,7 @@ awlab:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 4
 		CircleDelay: 20

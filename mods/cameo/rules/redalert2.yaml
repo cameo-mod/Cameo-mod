@@ -805,7 +805,6 @@ ra2gaairc:
 
 dummy_dock:
 	Interactable:
-	AlwaysVisible:
 	Reservable:
 	GrantCondition:
 		Condition: dontmove
@@ -2343,7 +2342,6 @@ ra2teslaupgrade:
 	RenderSprites:
 		Image: ra2shk
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 

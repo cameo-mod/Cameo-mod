@@ -291,6 +291,7 @@ ChromeLayout:
 	common|chrome/dropdowns.yaml
 	common|chrome/editor.yaml
 	common|chrome/gamesave-browser.yaml
+	common|chrome/load-game-browser.yaml
 	common|chrome/gamesave-loading.yaml
 	common|chrome/ingame.yaml
 	cameo|chrome/ingame-chat.yaml
@@ -410,7 +411,6 @@ ServerTraits:
 	PlayerPinger:
 		ConnTimeout: 500000
 	MasterServerPinger
-	LobbySettingsNotification
 
 ChromeMetrics:
 	common|metrics.yaml

@@ -318,7 +318,6 @@ mpspawn:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (multiplayer player starting point)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	WithSpriteBody:
@@ -334,7 +333,6 @@ waypoint:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (waypoint for scripted behavior)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	WithSpriteBody:
@@ -369,7 +367,6 @@ CAMERA:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals area to owner)
-	AlwaysVisible:
 	WithSpriteBody:
 	RenderSpritesEditorOnly:
 	BodyOrientation:
@@ -386,7 +383,6 @@ CAMERA.small:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals small area to owner)
-	AlwaysVisible:
 	WithSpriteBody:
 	RenderSpritesEditorOnly:
 		Image: camera
@@ -487,7 +483,6 @@ RACAMERA:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals area to owner)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RevealsShroud:
@@ -562,7 +557,6 @@ camera.gpssat:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (reveals map to owner)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	BodyOrientation:
@@ -625,10 +619,10 @@ ra2gmine:
 	AppearsOnMapPreview:
 		Terrain: RA2Gems
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.2
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 ra2mine:
@@ -647,11 +641,11 @@ ra2mine:
 	AppearsOnMapPreview:
 		Terrain: RA2Ore
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
+		Range: 3072
+		Intensity: 0.05
 		RedTint: 0.0
-		GreenTint: 0.125
-		BlueTint: 0.25
+		GreenTint: 0.05
+		BlueTint: 0.1
 
 ra2smine:
 	Inherits@1: ^TibTree
@@ -670,8 +664,8 @@ ra2smine:
 	AppearsOnMapPreview:
 		Terrain: RA2Silver
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
+		Range: 3072
+		Intensity: 0.05
 		RedTint: 0.1
 		GreenTint: 0.1
 		BlueTint: 0.1
@@ -693,10 +687,10 @@ ra2cmine:
 	AppearsOnMapPreview:
 		Terrain: RA2Copper
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.25
-		GreenTint: 0.125
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
 		BlueTint: 0.0
 
 MINE:
@@ -715,11 +709,11 @@ MINE:
 	AppearsOnMapPreview:
 		Terrain: Ore
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 
 SPLIT2:
 	Inherits: ^TibTree
@@ -733,10 +727,10 @@ SPLIT2:
 	AppearsOnMapPreview:
 		Terrain: Tiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
+		Range: 3072
+		Intensity: 0.06
 		RedTint: 0.0
-		GreenTint: 0.33
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 SPLIT3:
@@ -753,10 +747,10 @@ SPLIT3:
 	AppearsOnMapPreview:
 		Terrain: Tiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
+		Range: 3072
+		Intensity: 0.06
 		RedTint: 0.0
-		GreenTint: 0.33
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 SPLITBLUE:
@@ -775,11 +769,11 @@ SPLITBLUE:
 	AppearsOnMapPreview:
 		Terrain: BlueTiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
+		Range: 3072
+		Intensity: 0.06
 		RedTint: 0.0
 		GreenTint: 0.0
-		BlueTint: 0.33
+		BlueTint: 0.1
 
 SPLITRED:
 	Inherits: ^TibTree
@@ -795,9 +789,9 @@ SPLITRED:
 	AppearsOnMapPreview:
 		Terrain: RedTiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.33
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.1
 		GreenTint: 0.0
 		BlueTint: 0.0
 
@@ -815,10 +809,10 @@ SPLITGOLD:
 	AppearsOnMapPreview:
 		Terrain: GoldTiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.33
-		GreenTint: 0.33
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.1
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 GMINE:
@@ -837,11 +831,11 @@ GMINE:
 	AppearsOnMapPreview:
 		Terrain: Gems
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.1
-		GreenTint: 0.05
-		BlueTint: 0.2
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.05
+		GreenTint: 0.025
+		BlueTint: 0.1
 
 SPLIT2SMALL:
 	Inherits: ^TibTree
@@ -933,7 +927,6 @@ wormspawner:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (worm spawning location)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RenderSpritesEditorOnly:
@@ -992,7 +985,6 @@ spicebloom.spawnpoint:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: Spice Bloom spawnpoint
-	AlwaysVisible:
 	RenderSpritesEditorOnly:
 		Image: spicebloom
 		Palette: effect50alpha
@@ -1055,7 +1047,6 @@ CTFLAG:
 
 
 powerproxy.parabombs:
-	AlwaysVisible:
 	AirstrikePower:
 		Icons:
 			1: parabombs
@@ -1082,7 +1073,6 @@ powerproxy.parabombs:
 
 
 powerproxy.sonarpulse:
-	AlwaysVisible:
 	SpawnActorPower:
 		Icons:
 			1: sonar
@@ -1105,7 +1095,6 @@ powerproxy.sonarpulse:
 
 
 powerproxy.paratroopers:
-	AlwaysVisible:
 	ParatroopersPower:
 		Icons:
 			1: paratroopers
@@ -1132,7 +1121,6 @@ powerproxy.paratroopers:
 
 
 powerproxy.emp:
-	AlwaysVisible:
 	DetonateWeaponPower:
 		OrderName: crateemp
 		Icons:
@@ -1161,7 +1149,6 @@ ambiance_wind:
 	Interactable:
 	EditorOnlyTooltip:
 		Name: (Periodic Wind Sounds)
-	AlwaysVisible:
 	Immobile:
 		OccupiesSpace: false
 	RenderSpritesEditorOnly:
@@ -1221,31 +1208,26 @@ ambiance_rumbling:
 		Interval: 500,4500
 
 anytdhq:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: TD Tech Center
 
 techcenter:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA/TD Tech Center
 
 tdtechcenter:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: TD Tech Center
 
 tek:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA Tech Center
 
 ra2tek:
-	AlwaysVisible:
 	Interactable:
 	Tooltip:
 		Name: RA2 Tech Center

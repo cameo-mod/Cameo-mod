@@ -56,7 +56,7 @@ namespace OpenRA.Mods.CA.Traits
 		int chargeDelay;
 		bool forceCharging = false;
 
-		[Sync]
+		[VerifySync]
 		int charge;
 
 		public GrantChargingCondition(ActorInitializer init, GrantChargingConditionInfo info)

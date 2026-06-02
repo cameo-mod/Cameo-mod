@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Graphics;
 using OpenRA.Mods.Common.Graphics;
@@ -21,9 +22,6 @@ namespace OpenRA.Mods.Cameo.Graphics
 {
 	public class CameoSpriteSequenceLoader : DefaultSpriteSequenceLoader
 	{
-		public CameoSpriteSequenceLoader(ModData modData)
-			: base(modData) { }
-
 		public override ISpriteSequence CreateSequence(ModData modData, string tileSet, SpriteCache cache, string image, string sequence, MiniYaml data, MiniYaml defaults)
 		{
 			return new CameoSpriteSequence(cache, this, image, sequence, data, defaults);
@@ -174,22 +172,25 @@ namespace OpenRA.Mods.Cameo.Graphics
 			if (alpha != null)
 			{
 				if (alpha.Length == 1)
-					alpha = Exts.MakeArray(length.Value, _ => alpha[0]);
+					alpha = Exts.MakeArray(length.Value, _ => alpha[0]).ToImmutableArray();
 				else if (alpha.Length != length.Value)
 					throw new YamlException($"Sequence {image}.{Name} must define either 1 or {length.Value} Alpha values.");
 			}
 			else if (alphaFade)
-				alpha = Exts.MakeArray(length.Value, i => float2.Lerp(1f, 0f, i / (length.Value - 1f)));
+				alpha = Exts.MakeArray(length.Value, i => float2.Lerp(1f, 0f, i / (length.Value - 1f))).ToImmutableArray();
 
 			// Reindex sprites to order facings anti-clockwise and remove unused frames
-			var index = CalculateFrameIndices(start, length.Value, stride ?? length.Value, facings, null, transpose, reverseFacings, -1);
+			var index = CalculateFrameIndices(start, length.Value, stride ?? length.Value, facings, default, transpose, reverseFacings, -1);
 			if (reverses)
 			{
-				index.AddRange(index.Skip(1).Take(length.Value - 2).Reverse());
+				index = index.AddRange(index.Skip(1).Take(length.Value - 2).Reverse());
+				if (alpha != null)
+					alpha = alpha.AddRange(alpha.Skip(1).Take(length.Value - 2).Reverse());
+
 				length = 2 * length - 2;
 			}
 
-			if (index.Count == 0)
+			if (index.Length == 0)
 				throw new YamlException($"Sequence {image}.{Name} does not define any frames.");
 
 			var minIndex = index.Min();
@@ -204,7 +205,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 			bounds = sprites.Concat(shadowSprites ?? Enumerable.Empty<Sprite>()).Select(OffsetSpriteBounds).Union();
 		}
 
-		protected override IEnumerable<ReservationInfo> ParseFilenames(ModData modData, string tileset, int[] frames, MiniYaml data, MiniYaml defaults)
+		protected override IEnumerable<ReservationInfo> ParseFilenames(ModData modData, string tileset, ImmutableArray<int> frames, MiniYaml data, MiniYaml defaults)
 		{
 			var tilesetFilenamesPatternNode = data.NodeWithKeyOrDefault(TilesetFilenamesPattern.Key) ?? defaults.NodeWithKeyOrDefault(TilesetFilenamesPattern.Key);
 			if (tilesetFilenamesPatternNode != null)
@@ -227,14 +228,14 @@ namespace OpenRA.Mods.Cameo.Graphics
 				if (tilesetNode != null)
 				{
 					var loadFrames = CalculateFrameIndices(start, length, stride ?? length ?? 0, facings, frames, transpose, reverseFacings, shadowStart);
-					return new[] { new ReservationInfo(tilesetNode.Value.Value, loadFrames, frames, tilesetNode.Location) };
+					return [new ReservationInfo(tilesetNode.Value.Value, loadFrames, frames, tilesetNode.Location)];
 				}
 			}
 
 			return base.ParseFilenames(modData, tileset, frames, data, defaults);
 		}
 
-		protected override IEnumerable<ReservationInfo> ParseCombineFilenames(ModData modData, string tileset, int[] frames, MiniYaml data)
+		protected override IEnumerable<ReservationInfo> ParseCombineFilenames(ModData modData, string tileset, ImmutableArray<int> frames, MiniYaml data)
 		{
 			var node = data.NodeWithKeyOrDefault(TilesetFilenames.Key);
 			if (node != null)
@@ -246,10 +247,10 @@ namespace OpenRA.Mods.Cameo.Graphics
 					{
 						var subStart = LoadField("Start", 0, data);
 						var subLength = LoadField("Length", 1, data);
-						frames = Exts.MakeArray(subLength, i => subStart + i);
+						frames = Exts.MakeArray(subLength, i => subStart + i).ToImmutableArray();
 					}
 
-					return new[] { new ReservationInfo(tilesetNode.Value.Value, frames, frames, tilesetNode.Location) };
+					return [new ReservationInfo(tilesetNode.Value.Value, frames, frames, tilesetNode.Location)];
 				}
 			}
 

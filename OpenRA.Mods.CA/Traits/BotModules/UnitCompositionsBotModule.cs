@@ -112,7 +112,7 @@ namespace OpenRA.Mods.CA.Traits
 					continue;
 
 				UnitQueues[unit] = buildable.Queue.ToArray();
-				UnitPrerequisites[unit] = buildable.Prerequisites;
+				UnitPrerequisites[unit] = buildable.Prerequisites.ToArray();
 				var valued = unitInfo.TraitInfoOrDefault<ValuedInfo>();
 				UnitCosts[unit] = valued?.Cost ?? 0;
 			}

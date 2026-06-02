@@ -556,7 +556,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 			foreach (var node in nodes.Values)
 			{
-				var prereqs = node.BuildableInfo.Prerequisites ?? Array.Empty<string>();
+				var prereqs = node.BuildableInfo.Prerequisites;
 				foreach (var raw in prereqs)
 				{
 					var token = raw;
@@ -1008,7 +1008,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 			{
 				DisposeCommanderTooltipLogic();
 				commanderTooltipWidget = tooltipWidget;
-				commanderTooltipLogic = tooltipWidget.LogicObjects?.OfType<ProductionTooltipCameoLogic>().FirstOrDefault();
+				commanderTooltipLogic = tooltipWidget.LogicObjects.OfType<ProductionTooltipCameoLogic>().FirstOrDefault();
 			}
 
 			if (commanderTooltipLogic == null)

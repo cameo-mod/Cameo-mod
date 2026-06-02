@@ -71,7 +71,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 							world.CancelInputMode();
 					}
 					else
-						world.OrderGenerator = new CustomFormationsAttackMoveOrderGenerator(selectedActors, Game.Settings.Game.MouseButtonPreference.Action);
+						world.OrderGenerator = new CustomFormationsAttackMoveOrderGenerator(selectedActors, Game.Settings.Game.ResolveActionButton(MouseActionType.ConfirmOrder));
 				}
 
 				attackMoveButton.OnClick = () => Toggle(true);
@@ -90,7 +90,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 					if (forceMoveButton.IsHighlighted())
 						world.CancelInputMode();
 					else
-						world.OrderGenerator = new ForceModifiersOrderGenerator(Modifiers.Alt, true);
+						world.OrderGenerator = new ForceModifiersOrderGenerator(world, Modifiers.Alt, true);
 				};
 			}
 
@@ -108,7 +108,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 					if (forceAttackButton.IsHighlighted())
 						world.CancelInputMode();
 					else
-						world.OrderGenerator = new ForceModifiersOrderGenerator(Modifiers.Ctrl, true);
+						world.OrderGenerator = new ForceModifiersOrderGenerator(world, Modifiers.Ctrl, true);
 				};
 			}
 
@@ -128,8 +128,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 							world.CancelInputMode();
 					}
 					else
-						world.OrderGenerator = new GuardOrderGenerator(selectedActors,
-							"Guard", "guard", Game.Settings.Game.MouseButtonPreference.Action);
+						world.OrderGenerator = new GuardOrderGenerator(world, selectedActors, "Guard", "guard");
 				}
 
 				guardButton.OnClick = () => Toggle(true);
@@ -210,7 +209,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 					if (queueOrdersButton.IsHighlighted())
 						world.CancelInputMode();
 					else
-						world.OrderGenerator = new ForceModifiersOrderGenerator(Modifiers.Shift, false);
+						world.OrderGenerator = new ForceModifiersOrderGenerator(world, Modifiers.Shift, false);
 				};
 			}
 

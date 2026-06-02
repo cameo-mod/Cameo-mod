@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -19,7 +20,7 @@ namespace OpenRA.Mods.CA.Traits.Sound
 	public class AttackSoundsCAInfo : ConditionalTraitInfo
 	{
 		[Desc("Play a randomly selected sound from this list when preparing for an attack or attacking.")]
-		public readonly string[] Sounds = System.Array.Empty<string>();
+		public readonly ImmutableArray<string> Sounds = ImmutableArray<string>.Empty;
 
 		[Desc("Delay in ticks before sound starts, either relative to attack preparation or attack.")]
 		public readonly int Delay = 0;

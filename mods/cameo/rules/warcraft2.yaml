@@ -2254,6 +2254,7 @@ wc2_human_elven_lumber_mill:
 wc2_human_blacksmith:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
 	Buildable:
@@ -4820,6 +4821,7 @@ wc2_orc_troll_lumber_mill:
 wc2_orc_blacksmith:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
 	Buildable:
@@ -4895,7 +4897,7 @@ wc2_orc_altar_of_storms:
 		ArrowSequence: wc2_arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: wc2_airstrikedirection
 		SupportPowerPaletteOrder: 10
 	# Bloodlust support power.

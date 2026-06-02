@@ -804,7 +804,7 @@ GENE6:
 		UnitType: usabomber
 		SquadSize: 4
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ClassicAirstrikePower@Spectre:
@@ -832,7 +832,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 4
 		CircleDelay: 20
@@ -857,7 +857,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusafuelbomb
@@ -903,7 +903,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaleaflet
@@ -926,7 +926,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaa101, !upusaa102, !upusaa103
@@ -949,7 +949,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaa101, upusaa102, !upusaa103
@@ -972,7 +972,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upusaa101, upusaa102, upusaa103
@@ -997,7 +997,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upanthraxbomb
@@ -1184,7 +1184,7 @@ GENE6:
 		UnitType: usabomber
 		SquadSize: 1
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	ParatroopersPower@minigunnerdrop:
@@ -1209,7 +1209,7 @@ GENE6:
 		UnitType: usabomber
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		StartFullyCharged: true
 	# DetonateWeaponPower@ArtilleryBarrage:
@@ -1327,7 +1327,7 @@ GENE6:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 		Prerequisites: upchminebomb, !upschneutronclustermine
@@ -4868,7 +4868,6 @@ pscglbtruck2:
 	RenderSprites:
 		Image: glbombtruck
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -4885,7 +4884,6 @@ pscglbtruck3:
 	RenderSprites:
 		Image: glbombtruck
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -5561,7 +5559,6 @@ pscglgunboat1:
 	RenderSprites:
 		Image: gle1toxin
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -5578,7 +5575,6 @@ pscglgunboat2:
 	RenderSprites:
 		Image: glbggy
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7701,7 +7697,6 @@ pscchoverlord1:
 	RenderSprites:
 		Image: choverlordaddon1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7718,7 +7713,6 @@ pscchoverlord2:
 	RenderSprites:
 		Image: choverlordaddon2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -7735,7 +7729,6 @@ pscchoverlord3:
 	RenderSprites:
 		Image: choverlordaddon3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9244,7 +9237,6 @@ pscchhelix1:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9261,7 +9253,6 @@ pscchhelix2:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9278,7 +9269,6 @@ pscchhelix3:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -9295,7 +9285,6 @@ pscchhelix4:
 	RenderSprites:
 		Image: chhelix
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -10250,7 +10239,6 @@ pscdrones1:
 	RenderSprites:
 		Image: usadrone
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -10267,7 +10255,6 @@ pscdrones2:
 	RenderSprites:
 		Image: usahellfire
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -10284,7 +10271,6 @@ pscdrones3:
 	RenderSprites:
 		Image: usaspydrone
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -11196,7 +11182,6 @@ pscusapower:
 	RenderSprites:
 		Image: usacontrolrodicon
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -11213,7 +11198,6 @@ pscusapower2:
 	RenderSprites:
 		Image: usacontrolrodicon2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -13885,7 +13869,7 @@ leangcommand:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		Strikes: 4
 		CircleDelay: 20

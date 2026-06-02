@@ -9,6 +9,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -30,11 +31,11 @@ namespace OpenRA.Mods.CA.Traits.Sound
 
 		[Desc("Initial delay (in ticks) before playing the sound for the first time.",
 			"Two values indicate a random delay range.")]
-		public readonly int[] Delay = { 0 };
+		public readonly ImmutableArray<int> Delay = ImmutableArray.Create(0);
 
 		[Desc("Interval between playing the sound (in ticks).",
 			"Two values indicate a random delay range.")]
-		public readonly int[] Interval = { 0 };
+		public readonly ImmutableArray<int> Interval = ImmutableArray.Create(0);
 
 		[Desc("Ticks before main loop starts. Set to null to base on sound completion.")]
 		public readonly int InitialSoundLength = 0;

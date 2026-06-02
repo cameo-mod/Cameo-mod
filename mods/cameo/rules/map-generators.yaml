@@ -803,7 +803,7 @@
 	ClearMapGenerator@clear:
 		Type: clear
 		Name: map-generator-clear
-		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, RA_INTERIOR, ARRAKIS
+		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, RA_INTERIOR, ARRAKIS, TEMPERAT, DESERT
 		Settings:
 			MultiChoiceOption@Tile:
 				Label: label-clear-map-generator-option-tile
@@ -847,6 +847,26 @@
 					Tileset: RA_INTERIOR
 					Settings:
 						Tile: 255
+				Choice@TemperatTDClear:
+					Label: label-clear-map-generator-choice-tile-clear
+					Tileset: TEMPERAT
+					Settings:
+						Tile: 255
+				Choice@TemperatTDWater:
+					Label: label-clear-map-generator-choice-tile-water
+					Tileset: TEMPERAT
+					Settings:
+						Tile: 1
+				Choice@DesertTDClear:
+					Label: label-clear-map-generator-choice-tile-clear
+					Tileset: DESERT
+					Settings:
+						Tile: 255
+				Choice@DesertTDWater:
+					Label: label-clear-map-generator-choice-tile-water
+					Tileset: DESERT
+					Settings:
+						Tile: 1
 				Choice@ArrakisSand:
 					Label: label-clear-map-generator-choice-tile-sand
 					Tileset: ARRAKIS

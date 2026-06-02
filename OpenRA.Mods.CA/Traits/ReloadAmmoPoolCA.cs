@@ -64,7 +64,7 @@ namespace OpenRA.Mods.CA.Traits
 		AmmoPool ammoPool;
 		IReloadAmmoModifier[] modifiers;
 
-		[Sync]
+		[VerifySync]
 		int remainingTicks;
 		int remainingDelay;
 

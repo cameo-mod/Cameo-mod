@@ -48,7 +48,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		readonly PhysicalState physicalState;
 		int relaxedValue;
 
-		[Sync]
+		[VerifySync]
 		int ticks;
 
 		int amount;

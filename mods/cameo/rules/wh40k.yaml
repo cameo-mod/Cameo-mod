@@ -343,7 +343,6 @@ pscwh40kstrategy1:
 	RenderSprites:
 		Image: pscwh40kstrategy1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -360,7 +359,6 @@ pscwh40kstrategy2:
 	RenderSprites:
 		Image: pscwh40kstrategy2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -377,7 +375,6 @@ pscwh40kstrategy3:
 	RenderSprites:
 		Image: pscwh40kstrategy3
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kstrategy.neutral:
@@ -1425,7 +1422,7 @@ wh40kfieldcommand:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	FreeActor@wh40krankguards:
@@ -6501,7 +6498,6 @@ pscwh40kpredator1:
 	RenderSprites:
 		Image: pscwh40kpredator1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40kpredator2:
@@ -6517,7 +6513,6 @@ pscwh40kpredator2:
 	RenderSprites:
 		Image: pscwh40kpredator2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40krhino:
@@ -6818,7 +6813,6 @@ pscwh40klandspeed1:
 	RenderSprites:
 		Image: pscwh40klandspeed1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40klandspeed2:
@@ -6834,7 +6828,6 @@ pscwh40klandspeed2:
 	RenderSprites:
 		Image: pscwh40klandspeed2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kdread:
@@ -6960,7 +6953,6 @@ pscwh40kdread1:
 	RenderSprites:
 		Image: pscwh40kdread1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40kdread2:
@@ -6976,7 +6968,6 @@ pscwh40kdread2:
 	RenderSprites:
 		Image: pscwh40kdread2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kdreadh:
@@ -8301,7 +8292,6 @@ pscwh40kwhaaag1:
 	RenderSprites:
 		Image: pscwh40kwhaaag1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 pscwh40kwhaaag2:
@@ -8317,7 +8307,6 @@ pscwh40kwhaaag2:
 	RenderSprites:
 		Image: pscwh40kwhaaag2
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40kproco:
@@ -10297,7 +10286,6 @@ pscwh40kwartrakk1:
 	RenderSprites:
 		Image: pscwh40kwartrakk1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40korcleman:
@@ -10462,7 +10450,6 @@ pscwh40kkillakan1:
 	RenderSprites:
 		Image: pscwh40kwartrakk1
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 wh40ksquiggoth:
@@ -12680,7 +12667,7 @@ wh40kstrongholdc:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 

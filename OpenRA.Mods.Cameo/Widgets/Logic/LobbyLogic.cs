@@ -161,7 +161,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			// TODO: This needs to be reworked to support per-map tech levels, bots, etc.
 			modRules = modData.DefaultRules;
 
-			services = modData.Manifest.Get<WebServices>();
+			services = modData.GetOrCreate<WebServices>();
 
 			Game.LobbyInfoChanged += UpdateCurrentMap;
 			Game.LobbyInfoChanged += UpdatePlayerList;
@@ -256,7 +256,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 							return;
 
 						lastGeneratedMap = args;
-						orderManager.IssueOrder(Order.FromTargetString("GenerateMap", args.Serialize(), true));
+						orderManager.IssueOrder(Order.FromTargetString("GenerateMap", args.Serialize().WriteToString(), true));
 						orderManager.IssueOrder(Order.Command("map " + args.Uid));
 						Game.Settings.Server.Map = args.Uid;
 						Game.Settings.Save();
