@@ -156,7 +156,7 @@ camea_conyard:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 60
 
@@ -373,7 +373,7 @@ HQ.camea:
 		UnitType: C17.Paradrop
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 	AirstrikePower@air:
 		PauseOnCondition: lowpower
@@ -397,7 +397,7 @@ HQ.camea:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	Power:
