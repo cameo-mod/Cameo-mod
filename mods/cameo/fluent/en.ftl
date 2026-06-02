@@ -3,6 +3,7 @@ mod-windowtitle = OpenRA - Cameo
 
 map-generator-classic = Map Generator
 map-generator-clear = Clear Terrain
+map-generator-d2k = Map Generator
 
 button-tab-container-asengine = Attacque Supérior
 
