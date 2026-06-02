@@ -4000,8 +4000,15 @@
 	Tooltip:
 		Name: Tree (Burnt)
 		ShowOwnerRow: false
+	Health:
+		HP: 50000
+	Armor:
+		Type: Wood
+	Targetable:
+		TargetTypes: Trees
 	HiddenUnderShroud:
 	ScriptTriggers:
+	HitShape:
 	MapEditorData:
 		Categories: Tree
 	RequiresSpecificOwners:
@@ -4048,6 +4055,21 @@
 		Terrain: Tree
 	AppearsOnMapPreview:
 		Terrain: Tree
+	Health:
+		HP: 50000
+	Armor:
+		Type: Concrete
+	Targetable:
+		TargetTypes: Ground, Trees
+	HitShape:
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: RockExplode
+		EmptyWeapon: RockExplode
+	FireProjectilesOnDeath:
+		Weapons: RockDebris, RockDebris2, RockDebris3, RockDebris4
+		Pieces: 5, 10
+		Range: 1500, 2500
 	HiddenUnderShroud:
 	ScriptTriggers:
 	MapEditorData:
@@ -5386,6 +5408,10 @@
 		Palette: ra_temperat
 	Tooltip:
 		Name: Boxes
+	Health:
+		HP: 10000
+	Targetable:
+		TargetTypes: Ground, Trees
 	MapEditorData:
 		Categories: Decoration
 

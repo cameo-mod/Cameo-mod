@@ -3500,6 +3500,66 @@ DefuseKit:
 		Damage: 30
 	Warhead@Effect: CreateEffect
 
+RockExplode:
+	Inherits: ^DamagingExplosionHE
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@GrenadePercentage:
+	Warhead@1Eff: CreateEffect
+		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Warhead@Effect: CreateEffect
+		ImpactSounds: EXPLHG1.WAV
+
+RockDebris:
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 2c768
+	Report: d2khc.wav
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 32, 64
+		Blockable: false
+		LaunchAngle: 128, 192
+		Inaccuracy: 1c256
+		Image: shrapnel
+		Palette: d2keffect
+		Shadow: true
+		BounceCount: 3
+		BounceRangeModifier: 20
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+
+RockDebris2:
+	Inherits: RockDebris
+	Projectile: Bullet
+		Image: shrapnel2
+		Palette: d2keffect
+		TrailImage: small_trail
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ExplosionPalette: effect75alpha
+
+RockDebris3:
+	Inherits: RockDebris2
+	Projectile: Bullet
+		Image: shrapnel3
+		TrailImage: small_trail2
+
+RockDebris4:
+	Inherits: RockDebris2
+	Projectile: Bullet
+		Image: shrapnel4
+		TrailImage: large_trail
+
 SmallHeliCrash:
 	Inherits: ^Explosion
 	Warhead@Effect: CreateEffect
