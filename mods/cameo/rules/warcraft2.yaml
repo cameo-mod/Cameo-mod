@@ -4878,8 +4878,16 @@ wc2_orc_altar_of_storms:
 	# Spy of Kilrogg support power.
 	AirstrikePower@SPYOFKILROGG:
 		OrderName: wc2_spy_of_kilrogg
+		# Prerequisites:
+		# 	1: wc2_orc_altar_of_storms
+		# Icons:
+		# 	1: kilrogg
 		Icon: kilrogg
 		ChargeInterval: 3750
+		# Names:
+		# 	1: Spy of Kilrogg
+		# Descriptions:
+		# 	1: Reveals an area of the map\nand cloaked enemy units.
 		Name: Spy of Kilrogg
 		Description: Reveals an area of the map\nand cloaked enemy units.
 		SelectTargetSpeechNotification: SelectTarget
@@ -4904,8 +4912,16 @@ wc2_orc_altar_of_storms:
 	GrantExternalConditionPower@BLOODLUST:
 		OrderName: wc2_bloodlust
 		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orc_altar_of_storms
+		# Icons:
+		# 	1: bloodlust
 		Icon: bloodlust
 		ChargeInterval: 3000
+		# Names:
+		# 	1: Bloodlust
+		# Descriptions:
+		# 	1: Triples damage output of units.
 		Name: Bloodlust
 		Description: Triples damage output of units.
 		Durations:
@@ -4928,10 +4944,18 @@ wc2_orc_altar_of_storms:
 	IonCannonPower@RUNES:
 		OrderName: wc2_runes
 		PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: ~techlevel.superweapons
 		Prerequisites: ~techlevel.superweapons
+		# Icons:
+		# 	1: runes
 		Icon: runes
 		Cursor: ability
 		ChargeInterval: 4500
+		# Names:
+		# 	1: Runes
+		# Descriptions:
+		# 	1: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
 		Name: Runes
 		Description: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
 		EndChargeSpeechNotification: AirstrikeReady
@@ -4965,8 +4989,16 @@ wc2_orc_temple_of_the_damned:
 	GrantExternalConditionPower@HASTE:
 		OrderName: wc2_haste
 		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orc_temple_of_the_damned
+		# Icons:
+		# 	1: haste
 		Icon: haste
 		ChargeInterval: 3000
+		# Names:
+		# 	1: Haste
+		# Descriptions:
+		# 	1: Increases movement speed and attack rate.
 		Name: Haste
 		Description: Increases movement speed and attack rate.
 		Durations:
