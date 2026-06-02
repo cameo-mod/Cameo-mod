@@ -619,10 +619,10 @@ ra2gmine:
 	AppearsOnMapPreview:
 		Terrain: RA2Gems
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.2
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 ra2mine:
@@ -641,11 +641,11 @@ ra2mine:
 	AppearsOnMapPreview:
 		Terrain: RA2Ore
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
+		Range: 3072
+		Intensity: 0.05
 		RedTint: 0.0
-		GreenTint: 0.125
-		BlueTint: 0.25
+		GreenTint: 0.05
+		BlueTint: 0.1
 
 ra2smine:
 	Inherits@1: ^TibTree
@@ -664,8 +664,8 @@ ra2smine:
 	AppearsOnMapPreview:
 		Terrain: RA2Silver
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
+		Range: 3072
+		Intensity: 0.05
 		RedTint: 0.1
 		GreenTint: 0.1
 		BlueTint: 0.1
@@ -687,10 +687,10 @@ ra2cmine:
 	AppearsOnMapPreview:
 		Terrain: RA2Copper
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.25
-		GreenTint: 0.125
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
 		BlueTint: 0.0
 
 MINE:
@@ -709,11 +709,11 @@ MINE:
 	AppearsOnMapPreview:
 		Terrain: Ore
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 
 SPLIT2:
 	Inherits: ^TibTree
@@ -727,10 +727,10 @@ SPLIT2:
 	AppearsOnMapPreview:
 		Terrain: Tiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
+		Range: 3072
+		Intensity: 0.06
 		RedTint: 0.0
-		GreenTint: 0.33
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 SPLIT3:
@@ -747,10 +747,10 @@ SPLIT3:
 	AppearsOnMapPreview:
 		Terrain: Tiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
+		Range: 3072
+		Intensity: 0.06
 		RedTint: 0.0
-		GreenTint: 0.33
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 SPLITBLUE:
@@ -769,11 +769,11 @@ SPLITBLUE:
 	AppearsOnMapPreview:
 		Terrain: BlueTiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
+		Range: 3072
+		Intensity: 0.06
 		RedTint: 0.0
 		GreenTint: 0.0
-		BlueTint: 0.33
+		BlueTint: 0.1
 
 SPLITRED:
 	Inherits: ^TibTree
@@ -789,9 +789,9 @@ SPLITRED:
 	AppearsOnMapPreview:
 		Terrain: RedTiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.33
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.1
 		GreenTint: 0.0
 		BlueTint: 0.0
 
@@ -809,10 +809,10 @@ SPLITGOLD:
 	AppearsOnMapPreview:
 		Terrain: GoldTiberium
 	TerrainLightSource:
-		Range: 12345
-		Intensity: 0.12345
-		RedTint: 0.33
-		GreenTint: 0.33
+		Range: 3072
+		Intensity: 0.06
+		RedTint: 0.1
+		GreenTint: 0.1
 		BlueTint: 0.0
 
 GMINE:
@@ -831,11 +831,11 @@ GMINE:
 	AppearsOnMapPreview:
 		Terrain: Gems
 	TerrainLightSource:
-		Range: 10000
-		Intensity: 0.1
-		RedTint: 0.1
-		GreenTint: 0.05
-		BlueTint: 0.2
+		Range: 3072
+		Intensity: 0.05
+		RedTint: 0.05
+		GreenTint: 0.025
+		BlueTint: 0.1
 
 SPLIT2SMALL:
 	Inherits: ^TibTree

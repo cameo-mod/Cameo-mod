@@ -3623,11 +3623,11 @@
 	RenderSprites:
 		Palette: ra_temperat
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 	Targetable:
 		RequiresCondition: !damaged && !untargetable
 	Targetable@destroyed:
@@ -3654,11 +3654,11 @@
 	RenderSprites:
 		Palette: ra_temperat
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 	CaptureManager:
 	Capturable:
 		Types: none #tech
@@ -3712,11 +3712,11 @@
 		PlayerPalette: playerra
 	WithSpriteBody:
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 
 ^TechBuildingGarrisonable:
 	Inherits: ^TechBuilding
@@ -3778,11 +3778,11 @@
 	RenderSprites:
 		Palette: ra_temperat
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 
 ^CivFieldHusk:
 	Inherits@1: ^SpriteActor
