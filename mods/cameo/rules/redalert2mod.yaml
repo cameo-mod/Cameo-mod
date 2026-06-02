@@ -19410,6 +19410,10 @@ futu_launchpad:
 		Facing: 768
 		SpawnOffset: 0,0,4000
 		ProductionTypes: future_harbinger
+	Production@NORMAL:
+		Produces: Aircraft, future_harbinger
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAAircraft, future_harbinger
 	Reservable:
 	SpawnNeighboringActors:
 		ActorTypes: dummy_dock
