@@ -18,6 +18,21 @@ Container@COMMANDER_TREE_OVERLAY:
 					Width: PARENT_WIDTH
 					Height: 148
 					Color: 00000000
+				Container@FACTION_INSIGNIA_FRAME:
+					X: -112
+					Y: 18
+					Width: 112
+					Height: 112
+					Children:
+						RoundedImage@FACTION_INSIGNIA:
+							Width: 112
+							Height: 112
+							CornerRadius: 22
+							RoundTopLeft: True
+							RoundBottomLeft: True
+							ImageCollection: sidebar
+							ImageName: insignia
+							Logic: AddFactionSuffixLogic
 				Label@TITLE:
 					X: 4
 					Y: 18

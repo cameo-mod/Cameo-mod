@@ -11,6 +11,7 @@
 
 using System;
 using System.Linq;
+using OpenRA.Graphics;
 using OpenRA.Mods.Cameo.Widgets;
 using OpenRA.Mods.Common.Widgets;
 using OpenRA.Support;
@@ -44,6 +45,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 		readonly Widget windowBgWidget;
 		readonly Widget headerStatsWidget;
 		readonly Widget treeTooltipWidget;
+		readonly Widget insigniaFrameWidget;
 
 		bool isDragging;
 		int2 dragStartMouse;
@@ -82,6 +84,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			windowBgWidget = widget.GetOrNull<Widget>("WINDOW_BG");
 			headerStatsWidget = widget.GetOrNull<Widget>("HEADER_STATS");
 			treeTooltipWidget = widget.GetOrNull<Widget>("COMMANDER_TREE_TOOLTIP");
+			insigniaFrameWidget = widget.GetOrNull<Widget>("FACTION_INSIGNIA_FRAME");
+
+			if (insigniaFrameWidget != null)
+				insigniaFrameWidget.Visible = HasFactionInsignia();
 
 			if (titleLabel != null)
 				titleLabel.GetText = () => GetLocalizedString("commander-tree.title", "Promotions");
@@ -178,6 +184,24 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				dragHandle.OnMouseUp = _ => isDragging = false;
 			}
 
+		}
+
+		bool HasFactionInsignia()
+		{
+			var player = world.LocalPlayer;
+			if (player == null || player.Spectating)
+				return false;
+
+			// Mirror AddFactionSuffixLogic: the frame's child ImageWidget resolves its
+			// collection to "sidebar-<faction>" (honoring the FactionSuffix-* metric remap).
+			var faction = player.Faction.InternalName;
+			if (ChromeMetrics.TryGet("FactionSuffix-" + faction, out string mapped))
+				faction = mapped;
+
+			// Only show the frame when that collection actually defines an `insignia` region.
+			// ImageWidget.Draw uses the throwing ChromeProvider.GetImage, so a missing region
+			// would otherwise crash the Promotions window on open.
+			return ChromeProvider.TryGetImage("sidebar-" + faction, "insignia") != null;
 		}
 
 		ISync GetPromotionsTrait()
