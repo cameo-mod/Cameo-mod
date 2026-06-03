@@ -4592,7 +4592,7 @@
 		Condition: lockedon
 		RequiresCondition: lockon && !untargetable
 	WithDecoration@lockon:
-		Image: advancedtargeting_icon
+		Image: lockon_icon
 		Sequence: idle
 		Position: Center
 		RequiresCondition: lockon
