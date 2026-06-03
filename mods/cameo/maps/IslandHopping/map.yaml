@@ -1,0 +1,199 @@
+MapFormat: 12
+
+RequiresMod: cameo
+
+Title: Island Hopping
+
+Author: AedisToru
+
+Tileset: RA_TEMPERAT
+
+MapSize: 100,100
+
+Bounds: 1,1,98,98
+
+Visibility: Lobby
+
+Categories: Conquest
+
+Players:
+	PlayerReference@Neutral:
+		Name: Neutral
+		OwnsWorld: True
+		NonCombatant: True
+		Faction: Random
+	PlayerReference@Creeps:
+		Name: Creeps
+		NonCombatant: True
+		Faction: Random
+		Enemies: Multi0, Multi1, Multi2, Multi3, Multi4, Multi5
+	PlayerReference@Multi0:
+		Name: Multi0
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi1:
+		Name: Multi1
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi2:
+		Name: Multi2
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi3:
+		Name: Multi3
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi4:
+		Name: Multi4
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi5:
+		Name: Multi5
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+
+Actors:
+	Actor0: mine
+		Owner: Neutral
+		Location: 5,23
+	Actor1: mine
+		Owner: Neutral
+		Location: 94,76
+	Actor2: mine
+		Owner: Neutral
+		Location: 13,14
+	Actor3: mine
+		Owner: Neutral
+		Location: 86,85
+	Actor4: split2
+		Owner: Neutral
+		Location: 25,18
+	Actor5: split2
+		Owner: Neutral
+		Location: 74,81
+	Actor6: split2
+		Owner: Neutral
+		Location: 2,67
+	Actor7: split2
+		Owner: Neutral
+		Location: 97,32
+	Actor8: mine
+		Owner: Neutral
+		Location: 5,45
+	Actor9: mine
+		Owner: Neutral
+		Location: 94,54
+	Actor10: mine
+		Owner: Neutral
+		Location: 2,47
+	Actor11: mine
+		Owner: Neutral
+		Location: 97,52
+	Actor12: mine
+		Owner: Neutral
+		Location: 41,63
+	Actor13: mine
+		Owner: Neutral
+		Location: 58,36
+	Actor16: mine
+		Owner: Neutral
+		Location: 42,65
+	Actor17: mine
+		Owner: Neutral
+		Location: 57,34
+	Actor22: splitred
+		Owner: Neutral
+		Location: 50,44
+	Actor23: splitred
+		Owner: Neutral
+		Location: 49,55
+	Actor24: splitgold
+		Owner: Neutral
+		Location: 47,46
+	Actor25: splitgold
+		Owner: Neutral
+		Location: 52,53
+	Actor26: splitred
+		Owner: Neutral
+		Location: 68,8
+	Actor27: splitred
+		Owner: Neutral
+		Location: 31,91
+	Actor28: splitred
+		Owner: Neutral
+		Location: 66,10
+	Actor29: splitred
+		Owner: Neutral
+		Location: 33,89
+	Actor36: gmine
+		Owner: Neutral
+		Location: 96,95
+	Actor37: gmine
+		Owner: Neutral
+		Location: 3,4
+	Actor38: gmine
+		Owner: Neutral
+		Location: 94,93
+	Actor39: gmine
+		Owner: Neutral
+		Location: 5,6
+	Actor40: splitgold
+		Owner: Neutral
+		Location: 58,77
+	Actor41: splitgold
+		Owner: Neutral
+		Location: 41,22
+	Actor42: mpspawn
+		Owner: Neutral
+		Location: 32,69
+	Actor43: mpspawn
+		Owner: Neutral
+		Location: 5,57
+	Actor44: mpspawn
+		Owner: Neutral
+		Location: 16,24
+	Actor45: mpspawn
+		Owner: Neutral
+		Location: 67,30
+	Actor46: mpspawn
+		Owner: Neutral
+		Location: 94,42
+	Actor47: mpspawn
+		Owner: Neutral
+		Location: 83,75
+	Actor48: split2
+		Owner: Neutral
+		Location: 32,44
+	Actor49: split2
+		Owner: Neutral
+		Location: 67,55
+	Actor50: splitblue
+		Owner: Neutral
+		Location: 49,10
+	Actor51: splitblue
+		Owner: Neutral
+		Location: 50,89
+	Actor54: splitblue
+		Owner: Neutral
+		Location: 48,7
+	Actor55: splitblue
+		Owner: Neutral
+		Location: 51,92
+	Actor57: gmine
+		Owner: Neutral
+		Location: 92,12
+	Actor58: gmine
+		Owner: Neutral
+		Location: 10,93
+	Actor59: gmine
+		Owner: Neutral
+		Location: 5,85
+	Actor60: gmine
+		Owner: Neutral
+		Location: 90,6

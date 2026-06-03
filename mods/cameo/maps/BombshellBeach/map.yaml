@@ -1,0 +1,268 @@
+MapFormat: 12
+
+RequiresMod: cameo
+
+Title: Bombshell Beach
+
+Author: Map Generator
+
+Tileset: RA_TEMPERAT
+
+MapSize: 100,100
+
+Bounds: 1,1,98,98
+
+Visibility: Lobby
+
+Categories: Conquest
+
+Players:
+	PlayerReference@Neutral:
+		Name: Neutral
+		OwnsWorld: True
+		NonCombatant: True
+		Faction: Random
+	PlayerReference@Creeps:
+		Name: Creeps
+		NonCombatant: True
+		Faction: Random
+		Enemies: Multi0, Multi1
+	PlayerReference@Multi0:
+		Name: Multi0
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+	PlayerReference@Multi1:
+		Name: Multi1
+		Playable: True
+		Faction: Random
+		Enemies: Creeps
+
+Actors:
+	Actor0: tc03
+		Owner: Neutral
+		Location: 94,96
+	Actor1: t10
+		Owner: Neutral
+		Location: 92,97
+	Actor2: t15
+		Owner: Neutral
+		Location: 97,95
+	Actor3: tc01
+		Owner: Neutral
+		Location: 73,46
+	Actor4: t03
+		Owner: Neutral
+		Location: 50,10
+	Actor5: t16
+		Owner: Neutral
+		Location: 98,93
+	Actor6: t08
+		Owner: Neutral
+		Location: 98,93
+	Actor7: t01
+		Owner: Neutral
+		Location: 91,96
+	Actor8: t17
+		Owner: Neutral
+		Location: 93,96
+	Actor9: t06
+		Owner: Neutral
+		Location: 48,73
+	Actor10: t12
+		Owner: Neutral
+		Location: 96,94
+	Actor11: t08
+		Owner: Neutral
+		Location: 94,98
+	Actor12: t16
+		Owner: Neutral
+		Location: 97,93
+	Actor13: t06
+		Owner: Neutral
+		Location: 46,72
+	Actor14: t16
+		Owner: Neutral
+		Location: 92,96
+	Actor15: t05
+		Owner: Neutral
+		Location: 73,45
+	Actor16: t02
+		Owner: Neutral
+		Location: 90,97
+	Actor17: t07.husk
+		Owner: Neutral
+		Location: 74,47
+	Actor18: t07
+		Owner: Neutral
+		Location: 97,97
+	Actor19: t01
+		Owner: Neutral
+		Location: 98,90
+	Actor20: t14.husk
+		Owner: Neutral
+		Location: 98,89
+	Actor21: t13
+		Owner: Neutral
+		Location: 49,68
+	Actor22: t06
+		Owner: Neutral
+		Location: 97,90
+	Actor23: t08
+		Owner: Neutral
+		Location: 97,92
+	Actor24: t14
+		Owner: Neutral
+		Location: 97,92
+	Actor25: t17
+		Owner: Neutral
+		Location: 97,96
+	Actor26: t03
+		Owner: Neutral
+		Location: 95,97
+	Actor27: t14
+		Owner: Neutral
+		Location: 96,97
+	Actor28: t05
+		Owner: Neutral
+		Location: 98,97
+	Actor29: t05.husk
+		Owner: Neutral
+		Location: 47,72
+	Actor30: t08
+		Owner: Neutral
+		Location: 73,48
+	Actor31: t12
+		Owner: Neutral
+		Location: 11,49
+	Actor32: t07
+		Owner: Neutral
+		Location: 96,96
+	Actor33: t06
+		Owner: Neutral
+		Location: 98,94
+	Actor34: t01
+		Owner: Neutral
+		Location: 97,94
+	Actor35: t05
+		Owner: Neutral
+		Location: 47,73
+	Actor36: t02
+		Owner: Neutral
+		Location: 96,95
+	Actor37: t16
+		Owner: Neutral
+		Location: 91,97
+	Actor38: t12
+		Owner: Neutral
+		Location: 98,91
+	Actor39: t01
+		Owner: Neutral
+		Location: 48,72
+	Actor40: t17
+		Owner: Neutral
+		Location: 98,96
+	Actor41: mine
+		Owner: Neutral
+		Location: 4,48
+	Actor42: mine
+		Owner: Neutral
+		Location: 48,4
+	Actor43: mine
+		Owner: Neutral
+		Location: 12,48
+	Actor44: mine
+		Owner: Neutral
+		Location: 48,12
+	Actor45: split2
+		Owner: Neutral
+		Location: 17,64
+	Actor46: split2
+		Owner: Neutral
+		Location: 64,17
+	Actor47: splitred
+		Owner: Neutral
+		Location: 64,46
+	Actor48: splitred
+		Owner: Neutral
+		Location: 46,64
+	Actor49: splitgold
+		Owner: Neutral
+		Location: 66,40
+	Actor50: splitgold
+		Owner: Neutral
+		Location: 40,66
+	Actor51: splitred
+		Owner: Neutral
+		Location: 41,28
+	Actor52: splitred
+		Owner: Neutral
+		Location: 28,41
+	Actor53: splitgold
+		Owner: Neutral
+		Location: 40,25
+	Actor54: splitgold
+		Owner: Neutral
+		Location: 25,40
+	Actor55: splitred
+		Owner: Neutral
+		Location: 49,39
+	Actor56: splitred
+		Owner: Neutral
+		Location: 39,49
+	Actor57: splitred
+		Owner: Neutral
+		Location: 54,39
+	Actor58: splitred
+		Owner: Neutral
+		Location: 39,54
+	Actor59: splitblue
+		Owner: Neutral
+		Location: 51,41
+	Actor60: splitblue
+		Owner: Neutral
+		Location: 41,51
+	Actor61: miss
+		Owner: Neutral
+		Location: 57,67
+	Actor62: miss
+		Owner: Neutral
+		Location: 67,58
+	Actor63: hosp
+		Owner: Neutral
+		Location: 82,96
+	Actor64: hosp
+		Owner: Neutral
+		Location: 96,82
+	Actor65: oilb
+		Owner: Neutral
+		Location: 27,55
+	Actor66: oilb
+		Owner: Neutral
+		Location: 55,27
+	Actor67: fcom
+		Owner: Neutral
+		Location: 14,35
+	Actor68: fcom
+		Owner: Neutral
+		Location: 36,14
+	Actor69: v07
+		Owner: Neutral
+		Location: 50,53
+	Actor70: v10
+		Owner: Neutral
+		Location: 53,50
+	Actor71: asianhut
+		Owner: Neutral
+		Location: 51,51
+	Actor72: asianhut
+		Owner: Neutral
+		Location: 53,51
+	Actor73: mpspawn
+		Owner: Neutral
+		Location: 8,58
+	Actor74: mpspawn
+		Owner: Neutral
+		Location: 58,8
+
+Rules:
