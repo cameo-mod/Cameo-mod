@@ -120,12 +120,6 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			muzzleArmament = armaments.FirstOrDefault(a => a.Barrels.Length > 0);
 			muzzleBarrel = muzzleArmament?.Barrels[0];
 
-			if (turret != null)
-			{
-				searchlightYaw = turret.WorldOrientation.Yaw;
-				initializedYaw = true;
-			}
-
 			// Treat freshly-built towers as already idle (no cooldown) so they sweep without a 60s wait.
 			lastEngagedTick = self.World.WorldTick - Info.IdleScanCooldown;
 			ScheduleNextScan(self);
@@ -219,18 +213,25 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			return ranges.Select(a => a.MaxRange().Length).DefaultIfEmpty(Info.Range.Length).Max();
 		}
 
-		int SearchlightLength(Actor self, WPos source)
+		WPos SearchlightTarget(Actor self, WPos source, WRot orientation)
 		{
 			var maxLength = MaxSearchlightLength();
 			var target = CurrentAttackTarget(self);
 			if (!target.IsValidFor(self))
-				return maxLength;
+				return source + new WVec(0, -maxLength, 0).Rotate(orientation);
 
 			var targetOffset = attack.GetTargetPosition(source, target) - source;
-			if (targetOffset.HorizontalLengthSquared > 0 && targetOffset.HorizontalLength < maxLength)
-				return targetOffset.HorizontalLength;
+			var targetHorizontalLength = targetOffset.HorizontalLength;
+			if (targetHorizontalLength == 0)
+				return source + targetOffset;
 
-			return maxLength;
+			var horizontalLength = System.Math.Min(targetHorizontalLength, maxLength);
+			var horizontalTarget = new WVec(0, -horizontalLength, 0).Rotate(orientation);
+
+			// Weapons range against aircraft is horizontal, but the light should aim at aircraft
+			// height rather than the ground projection under the target.
+			var z = (int)((long)targetOffset.Z * horizontalLength / targetHorizontalLength);
+			return source + new WVec(horizontalTarget.X, horizontalTarget.Y, z);
 		}
 
 		// Screen-px margin for glow bleed beyond the bare source/target segment.
@@ -249,7 +250,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			if (Info.UseWeaponHeight && muzzleArmament != null)
 				source = new WPos(source.X, source.Y, self.CenterPosition.Z + muzzleArmament.MuzzleOffset(self, muzzleBarrel).Z);
 
-			var target = source + new WVec(0, -SearchlightLength(self, source), 0).Rotate(orientation);
+			var target = SearchlightTarget(self, source, orientation);
 
 			// Per-frame, direction-aware cull: skip registering a glow whose cone falls entirely
 			// off-screen (it would cost a post-process slot with no visible pixels). The square
