@@ -1016,6 +1016,11 @@ World:
 		ParticleColors: FFFFFFCC, ECECECBB, D8E6F0AA, C8D8E888
 		LineTailAlphaValue: 110
 		ParticleSize: 1, 2
+	AmbientSound@WEATHER_RAIN:
+		RequiresCondition: weather-rain
+		SoundFiles: ambiance_rain.wav
+		AudibleThroughFog: true
+		Volume: 2.0
 	AmbientSound@WEATHER_THUNDER:
 		RequiresCondition: weather-rain
 		SoundFiles: thunder1.aud, thunder2.aud, thunder3.aud, thunder4.aud, thunder5.aud
