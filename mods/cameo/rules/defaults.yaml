@@ -1708,6 +1708,7 @@
 		Type: Concrete
 	Buildable:
 		BuildDurationModifier: 100
+	WithTurretSearchlight:
 
 ^BunkerTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1724,6 +1725,7 @@
 		Type: Concrete
 	Buildable:
 		BuildDurationModifier: 50
+	WithTurretSearchlight:
 
 ^AdvancedDefenseTemplate:
 	Inherits@DisabledOverlay: ^DisableOnLowPowerOrPowerDown
@@ -1733,6 +1735,7 @@
 	Buildable:
 		BuildDurationModifier: 75
 	IgnoresDisguise:
+	WithTurretSearchlight:
 
 ^SuperDefenseTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1741,6 +1744,7 @@
 	Buildable:
 		BuildDurationModifier: 50
 	IgnoresDisguise:
+	WithTurretSearchlight:
 
 ^PromotionUnitBuff:
 	FirepowerMultiplier@PromotionUnit:
