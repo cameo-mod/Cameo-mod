@@ -764,6 +764,12 @@
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
+^ImpactGlow:
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 1.2
+		FadeFrames: 30
+
 ^TankDestroyerCannon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -847,10 +853,7 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 30
+	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
@@ -945,10 +948,7 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 30
+	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
@@ -1042,10 +1042,7 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 30
+	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
@@ -3709,6 +3706,7 @@ RocketsG:
 
 BoatMissile:
 	Inherits: ^MissileWeapon
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 33
 	Range: 8c0
 	Burst: 2

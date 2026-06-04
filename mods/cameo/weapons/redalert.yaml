@@ -4668,6 +4668,7 @@ RapierBombsCryo:
 
 Aphid:
 	Inherits: ^ShrapnelWeapon
+	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
 	ReloadDelay: 62
 	Range: 7000
@@ -8924,6 +8925,7 @@ DepthCharge:
 
 Stinger:
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 27
 	Range: 8000
 	Report: missile6.aud
