@@ -3368,13 +3368,12 @@
 		ValidDamageStates: Light, Medium, Heavy, Critical
 	GrantConditionOnDamageState@ONFIRE:
 		Condition: critical-fire-trigger
-		ValidDamageStates: Critical
+		ValidDamageStates: Heavy, Critical
 	GrantTimedCondition@CriticalFire:
 		RequiresCondition: critical-fire-trigger
 		Condition: critical-fire
-		# Match groundfire's 15-20s lifetime as a fixed 20s burst. GrantTimedCondition only
-		# supports a single duration value.
-		Duration: 500
+		# Below-half-health fire/smoke burst. GrantTimedCondition only supports a single duration value.
+		Duration: 750
 	WithIdleOverlay@CriticalFire:
 		Image: fire_building
 		Sequence: 1
@@ -3385,7 +3384,7 @@
 		Palette: effect
 		RequiresCondition: critical-fire && !build-incomplete
 	SmokeParticleEmitter@CriticalFire:
-		Image: smoke_building
+		Image: smoke_building_fire_glow
 		Sequences: idle
 		Palette: effect
 		SpawnFrequency: 6, 10

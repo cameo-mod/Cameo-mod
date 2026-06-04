@@ -432,7 +432,7 @@ groundfire:
 	# false). See OpenRA.Mods.Cameo/Traits/OneActorPerCell.cs.
 	OneActorPerCell:
 	DeterministicOffsetSmokeParticleEmitter@GroundFireSmoke:
-		Image: smoke_dark
+		Image: smoke_fire_glow
 		Sequences: idle
 		Palette: effect
 		SpawnFrequency: 6, 10
