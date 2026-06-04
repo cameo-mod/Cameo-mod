@@ -6051,6 +6051,7 @@ MammothTusk:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 91
 	Burst: 2
@@ -6427,6 +6428,7 @@ MammothTusk2:
 	Inherits: ^LightFlameWeapon
 	Inherits: ^MediumChemicalWeapon
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ValidTargets: Ground, Water, Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 2
@@ -7036,6 +7038,7 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 ParaBomb:
 	Inherits: ^HeavyBomb
 	Inherits: ^HeavyFlameWeapon
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 8
 	Range: 5000
 	Report: chute1.aud
@@ -7461,6 +7464,7 @@ BuggyPlasmaGrenade:
 
 JapaneseHeavyBomb:
 	Inherits: ^HeavyBomb
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 3

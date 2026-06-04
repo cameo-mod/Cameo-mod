@@ -2053,6 +2053,7 @@ BHRedDarts:
 SpecterArtilleryShell:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 78
 	Range: 12640
 	MinRange: 2528

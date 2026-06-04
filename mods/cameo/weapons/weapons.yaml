@@ -767,8 +767,8 @@
 ^ImpactGlow:
 	Warhead@Glow: GlowImpact
 		Color: FFB84D
-		Scale: 1.2
-		FadeFrames: 30
+		Scale: 0.8
+		FadeFrames: 15
 
 ^TankDestroyerCannon:
 	ValidTargets: Ground, Water
@@ -3316,6 +3316,7 @@ DefuseKit:
 
 ^Artillery:
 	Inherits: ^Cannon
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 75
 	Range: 12c5
 	Projectile: Bullet
