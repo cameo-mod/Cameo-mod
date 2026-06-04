@@ -6410,6 +6410,7 @@ NaxiMeteorSpawner2:
 		ValidTargets: Ground, Water, Air
 		Weapon: NaxiMeteorSpreader
 		AimChance: 13
+		ImpactActors: false
 		TargetActorCenter: false
 
 NaxiMeteorSpreader:
@@ -6423,6 +6424,7 @@ NaxiMeteorSpreader:
 		ValidTargets: Ground, Water, Air
 		Weapon: NaxiMeteor
 		Delay: 23
+		ImpactActors: false
 
 NaxiMeteor:
 	Inherits: ^Grenade
@@ -8391,9 +8393,16 @@ RA2TOPOLCuba:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
-		GlowScale: 15.0
+		GlowScale: 10
 		GlowFadeFrames: 300
 		GlowFadeInFrames: 15
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 4
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
 	Warhead@Radiation: CreateTintedCells
 		Spread: 1000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
