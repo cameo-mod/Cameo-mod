@@ -3362,6 +3362,33 @@
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
+	GrantConditionOnDamageState@ONFIRE:
+		Condition: critical-fire-trigger
+		ValidDamageStates: Critical
+	GrantTimedCondition@CriticalFire:
+		RequiresCondition: critical-fire-trigger
+		Condition: critical-fire
+		# Match groundfire's 15-20s lifetime as a fixed 20s burst. GrantTimedCondition only
+		# supports a single duration value.
+		Duration: 500
+	WithIdleOverlay@CriticalFire:
+		Image: fire
+		Sequence: 1
+		IsDecoration: True
+		RequiresCondition: critical-fire && !build-incomplete
+	SmokeParticleEmitter@CriticalFire:
+		Image: smoke_dark
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 6, 10
+		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks); a longer Duration
+		# loops the one-shot sprite and pops a fresh puff back in. See groundfire in misc.yaml.
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
+		RequiresCondition: critical-fire && !build-incomplete
 	GrantConditionOnPrerequisite@CEMENTFACTORY:
 		Condition: techcementffact
 		Prerequisites: techcementffact
@@ -4119,6 +4146,20 @@
 		Image: fire
 		Sequence: 1
 		IsDecoration: True
+	# Burning wreckage billows rising dark smoke (our RGBA smoke_dark sprite). Stops when the
+	# husk decays and dies. Tune density via SpawnFrequency, rise via Gravity. See tools/gen_smoke.py.
+	SmokeParticleEmitter@GroundFireSmoke:
+		Image: smoke_dark
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 10, 16
+		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks); a longer Duration
+		# loops the one-shot sprite and pops a fresh puff back in. See groundfire in misc.yaml.
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
 	ChangesHealth:
 		Step: -100
 		StartIfBelow: 101
