@@ -1020,17 +1020,17 @@ World:
 		Delay: 400, 1400
 		Interval: 1600, 3600
 		AudibleThroughFog: true
-		Volume: 1.0
+		Volume: 2.0
 	AmbientSound@SANDSTORM:
 		RequiresCondition: weather-sandstorm
-		SoundFiles: ambiance_wind_1.wav, ambiance_wind_2.wav
+		SoundFiles: ambiance_wind_2.wav
 		AudibleThroughFog: true
-		Volume: 1.0
+		Volume: 2.0
 	AmbientSound@BLIZZARD:
 		RequiresCondition: weather-blizzard
-		SoundFiles: ambiance_wind_1.wav, ambiance_wind_2.wav
+		SoundFiles: ambiance_wind_2.wav
 		AudibleThroughFog: true
-		Volume: 1.0
+		Volume: 2.0
 	LegacyBridgeLayer:
 		Bridges: bridge1, bridge2, bridge3, bridge4
 	ActorSpawnManager:
