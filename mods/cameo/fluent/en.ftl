@@ -5,6 +5,12 @@ map-generator-classic = Map Generator
 map-generator-clear = Clear Terrain
 map-generator-d2k = Map Generator
 
+dropdown-weather =
+   .label = Weather
+   .description = Adds a tileset-appropriate weather overlay and ambient sounds.
+   .choice-none = None
+   .choice-weather = Enabled
+
 button-tab-container-asengine = Attacque Supérior
 
 ## ingame-observer.yaml

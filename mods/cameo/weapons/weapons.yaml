@@ -1571,6 +1571,15 @@
 		ValidRelationships: Ally
 		Amount: 400
 		Range: 400
+	# Persistent ground-fire entity (fire visual + rising black smoke). Shared by all flame weapons
+	# inheriting this base; the groundfire actor self-removes after its lifetime. Scorch already
+	# handled by Warhead@Smudge above. (No per-burst limit yet - bursts spawn clusters.)
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 
 ^MediumFlameWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -1691,6 +1700,13 @@
 		ValidRelationships: Ally
 		Amount: 600
 		Range: 600
+	# Persistent ground-fire entity (fire visual + rising black smoke). See ^LightFlameWeapon.
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 
 ^HeavyFlameWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -1811,6 +1827,13 @@
 		ValidRelationships: Ally
 		Amount: 800
 		Range: 800
+	# Persistent ground-fire entity (fire visual + rising black smoke). See ^LightFlameWeapon.
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 
 ^LightChemicalWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -4730,6 +4753,17 @@ CHFlameRadiation:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
+	# Leave a persistent ground-fire entity (fire visual + rising dark smoke) at the impact,
+	# plus a scorch smudge. Fires once per flame impact. Spawned actor self-removes after ~90-150t.
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Scorch: LeaveSmudge
+		SmudgeType: Scorch
+		Size: 1
 
 CHFlame:
 	Inherits: ^MediumFlameWeapon

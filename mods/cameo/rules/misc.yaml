@@ -405,6 +405,50 @@ CAMERA.sw:
 		RemoveInstead: true
 		Delay: 240
 
+# Persistent ground-fire entity dropped by flame weapons (via SpawnActorWarhead). Shows the
+# fire visual, continuously emits dark smoke, then removes itself after its lifetime. Immobile
+# with OccupiesSpace:false so it never blocks units and many can overlap. No new C# - all stock
+# traits (SmokeParticleEmitter is Mods.AS). Scorch smudge is left by the spawning weapon impact.
+groundfire:
+	Interactable:
+	Tooltip:
+		Name: Fire
+	RenderSprites:
+		Image: groundfire_flame
+	BodyOrientation:
+		QuantizedFacings: 1
+	DeterministicCellOffset:
+		MinOffset: -384,-384,0
+		MaxOffset: 384,384,0
+		Salt: 197
+	WithDeterministicOffsetIdleOverlay:
+		Image: groundfire_flame
+		Sequence: 1
+		IsDecoration: True
+	Immobile:
+		OccupiesSpace: false
+	# Cap to one fire per tile (FPS): burst weapons spawn many groundfire on/near the same cell;
+	# duplicates on an occupied cell remove themselves. Doesn't block movement (OccupiesSpace stays
+	# false). See OpenRA.Mods.Cameo/Traits/OneActorPerCell.cs.
+	OneActorPerCell:
+	DeterministicOffsetSmokeParticleEmitter@GroundFireSmoke:
+		Image: smoke_dark
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 6, 10
+		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks). The engine plays
+		# the sprite with PlayRepeating; a longer Duration loops it and pops a fresh puff back in.
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
+	KillsSelf:
+		RemoveInstead: true
+		# Lifetime in ticks (25/sec): 375-500 = 15-20s. The fire visual loops and the smoke emitter
+		# runs for the whole lifetime.
+		Delay: 375, 500
+
 BLASTRADIUS.atomic:
 	Inherits: ^BlastRadiusIndicator
 	WithRangeCircle:
