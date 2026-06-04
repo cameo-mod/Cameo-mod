@@ -3372,12 +3372,16 @@
 		# supports a single duration value.
 		Duration: 500
 	WithIdleOverlay@CriticalFire:
-		Image: fire
+		Image: fire_building
 		Sequence: 1
 		IsDecoration: True
+		# Force the effect palette: the paletted fire SHP renders black on RGBA-palette buildings
+		# (PlayerPalette: player_rgba, e.g. Tesla Coil / Nod Laser Turret / Chronosphere) if it
+		# inherits the actor's palette. See fancy-stealth RGBA palette gotcha.
+		Palette: effect
 		RequiresCondition: critical-fire && !build-incomplete
 	SmokeParticleEmitter@CriticalFire:
-		Image: smoke_dark
+		Image: smoke_building
 		Sequences: idle
 		Palette: effect
 		SpawnFrequency: 6, 10

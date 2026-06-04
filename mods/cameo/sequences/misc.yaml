@@ -1688,6 +1688,34 @@ groundfire_flame:
 		Length: *
 		Offset: 0,-3
 
+# Same art as `fire` but scaled 1.5x for building critical-fire (a bigger, more engulfing blaze).
+# Kept separate so husk/ground fire stay native size. SHP scales blocky past ~2x, so don't push higher.
+fire_building:
+	1:
+		Filename: fire1.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+	2:
+		Filename: fire2.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+	3:
+		Filename: fire3.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+	4:
+		Filename: fire4.shp
+		Length: *
+		Offset: 0,-3
+		ZOffset: 1023
+		Scale: 1.5
+
 burn-l:
 	Defaults:
 		Filename: burn-l.shp
@@ -1819,6 +1847,15 @@ black_smokey:
 smoke_dark:
 	idle:
 		Filename: smoke_dark.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+
+# Procedural RGBA black smoke puff (tools/gen_smoke.py): 1.5x size (96px), same alpha as the grey
+# variant (opacity 0.55 + top-fade), so it reads as a rising plume not an opaque blob. Buildings only.
+smoke_building:
+	idle:
+		Filename: smoke_building.png
 		Length: *
 		Tick: 80
 		ZOffset: 1023
