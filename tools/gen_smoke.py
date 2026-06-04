@@ -106,7 +106,12 @@ def build(args) -> Image.Image:
         # Life envelope: quick fade-in, long dissipating fade-out.
         env = smoothstep(life / args.fade_in) if args.fade_in > 0 else 1.0
         env = np.minimum(env, smoothstep((1.0 - life) / args.fade_out))
-        alpha = np.clip(density * env * args.opacity, 0.0, 1.0)
+
+        # Vertical alpha ramp: opaque at the base, more transparent toward the crown.
+        # (ys / fs) is 0 at the top, 1 at the bottom; top_fade=0 leaves alpha uniform.
+        topfade = (1.0 - args.top_fade) + args.top_fade * (ys / fs)
+
+        alpha = np.clip(density * env * topfade * args.opacity, 0.0, 1.0)
 
         # Mostly dark; a touch of lift only at the very thin fraying edge for form.
         t = density[..., None]
@@ -142,12 +147,14 @@ def main():
     p.add_argument("--cutoff", type=float, default=0.42, help="metaball boundary threshold")
     p.add_argument("--edge-soft", type=float, default=0.4, help="edge feather width")
     p.add_argument("--contrast", type=float, default=1.0)
-    p.add_argument("--opacity", type=float, default=1.0)
+    p.add_argument("--opacity", type=float, default=0.7)
     # Gradual fade-in over the first ~third of life so puffs bloom in rather than popping.
     p.add_argument("--fade-in", type=float, default=0.32)
-    p.add_argument("--fade-out", type=float, default=0.6)
-    p.add_argument("--core-rgb", type=int, nargs=3, default=(20, 20, 23))
-    p.add_argument("--edge-rgb", type=int, nargs=3, default=(58, 58, 64))
+    p.add_argument("--fade-out", type=float, default=0.8)
+    p.add_argument("--top-fade", type=float, default=0.6,
+                   help="vertical alpha ramp: 0=uniform, 1=fully transparent at the crown (black at base, thin on top)")
+    p.add_argument("--core-rgb", type=int, nargs=3, default=(64, 64, 70))
+    p.add_argument("--edge-rgb", type=int, nargs=3, default=(100, 100, 108))
     args = p.parse_args()
 
     img = build(args)
