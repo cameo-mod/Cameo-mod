@@ -445,9 +445,9 @@ groundfire:
 		Offset: 0,0,128
 	KillsSelf:
 		RemoveInstead: true
-		# Lifetime in ticks (25/sec): 375-500 = 15-20s. The fire visual loops and the smoke emitter
+		# Lifetime in ticks (25/sec): 250-375 = 10-15s. The fire visual loops and the smoke emitter
 		# runs for the whole lifetime.
-		Delay: 375, 500
+		Delay: 250, 375
 
 BLASTRADIUS.atomic:
 	Inherits: ^BlastRadiusIndicator

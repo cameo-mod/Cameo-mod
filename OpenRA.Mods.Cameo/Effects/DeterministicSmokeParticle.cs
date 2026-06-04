@@ -139,6 +139,11 @@ namespace OpenRA.Mods.Cameo.Effects
 
 		public IEnumerable<IRenderable> Render(WorldRenderer wr)
 		{
+			// Client-side visual toggle. The particle still ticks identically on every client
+			// (it consumes World.SharedRandom), so skipping only the render stays MP-safe.
+			if (!Game.Settings.Graphics.GroundFireSmoke)
+				return SpriteRenderable.None;
+
 			if (world.FogObscures(pos) && !visibleThroughFog)
 				return SpriteRenderable.None;
 
