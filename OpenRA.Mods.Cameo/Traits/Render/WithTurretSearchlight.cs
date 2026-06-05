@@ -49,7 +49,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		public readonly float GlowScale = 0.75f;
 
 		[Desc("Extra brightness multiplier, independent of glow radius.")]
-		public readonly float Intensity = 0.8f;
+		public readonly float Intensity = 1.0f;
 
 		[Desc("Searchlight rendering shape. Cone tapers narrow-to-wide with an endpoint pool; Beam is a uniform-width beam.")]
 		public readonly SearchlightShape Shape = SearchlightShape.Cone;
