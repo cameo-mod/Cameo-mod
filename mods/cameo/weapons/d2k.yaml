@@ -5706,6 +5706,13 @@ PulseMissile:
 		GlowScale: 15.0
 		GlowFadeFrames: 600
 		GlowFadeInFrames: 15
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 5
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
 	Warhead@Distort: HeatDistortion
 		Scale: 2.0
 		FadeFrames: 420

@@ -755,6 +755,7 @@ M1A1MachineGun:
 
 MammothMissiles:
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 68
 	Burst: 2
 	BurstDelays: 12
@@ -1162,6 +1163,7 @@ NapalmA10Carrier:
 
 A10CarrierMissiles:
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 100
 	Range: 5000
@@ -1246,6 +1248,7 @@ TurretGunBlackMarket:
 
 Dragon:
 	Inherits: ^HeavyAAWeapon
+	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
 	ReloadDelay: 40
 	Range: 12193
@@ -2050,6 +2053,7 @@ BHRedDarts:
 SpecterArtilleryShell:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 78
 	Range: 12640
 	MinRange: 2528
@@ -2721,6 +2725,7 @@ MammothTank3CannonsHV:
 
 MammothTank3Missiles:
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 98
 	Burst: 2
 	BurstDelays: 12
@@ -3101,6 +3106,7 @@ CommandoM16:
 
 FirehawkMissiles:
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ValidTargets: Air
 	ReloadDelay: 50
 	Range: 12500
@@ -3379,6 +3385,7 @@ CorvetteLaserObelisk:
 
 CorvetteDragon:
 	Inherits: ^HeavyMissile
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 35
 	Range: 9550
 	Report: rocket2.aud
