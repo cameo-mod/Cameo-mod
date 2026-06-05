@@ -1347,6 +1347,7 @@ Player:
 ^wc2_watch_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@detect: ^GenericAllDetector
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -2599,6 +2600,7 @@ wc2_human_oil_platform:
 wc2_human_scout_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -5078,6 +5080,7 @@ wc2_orc_oil_platform:
 wc2_orc_watch_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll

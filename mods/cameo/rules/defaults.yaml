@@ -1712,6 +1712,8 @@
 		Type: Concrete
 	Buildable:
 		BuildDurationModifier: 100
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^BunkerTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1728,6 +1730,8 @@
 		Type: Concrete
 	Buildable:
 		BuildDurationModifier: 50
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^AdvancedDefenseTemplate:
 	Inherits@DisabledOverlay: ^DisableOnLowPowerOrPowerDown
@@ -1737,6 +1741,8 @@
 	Buildable:
 		BuildDurationModifier: 75
 	IgnoresDisguise:
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^SuperDefenseTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1745,6 +1751,8 @@
 	Buildable:
 		BuildDurationModifier: 50
 	IgnoresDisguise:
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^PromotionUnitBuff:
 	FirepowerMultiplier@PromotionUnit:
@@ -3368,6 +3376,36 @@
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
+	GrantConditionOnDamageState@ONFIRE:
+		Condition: critical-fire-trigger
+		ValidDamageStates: Heavy, Critical
+	GrantTimedCondition@CriticalFire:
+		RequiresCondition: critical-fire-trigger
+		Condition: critical-fire
+		# Below-half-health fire/smoke burst. GrantTimedCondition only supports a single duration value.
+		Duration: 750
+	WithIdleOverlay@CriticalFire:
+		Image: fire_building
+		Sequence: 1
+		IsDecoration: True
+		# Force the effect palette: the paletted fire SHP renders black on RGBA-palette buildings
+		# (PlayerPalette: player_rgba, e.g. Tesla Coil / Nod Laser Turret / Chronosphere) if it
+		# inherits the actor's palette. See fancy-stealth RGBA palette gotcha.
+		Palette: effect
+		RequiresCondition: critical-fire && !build-incomplete
+	SmokeParticleEmitter@CriticalFire:
+		Image: smoke_building_fire_glow
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 6, 10
+		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks); a longer Duration
+		# loops the one-shot sprite and pops a fresh puff back in. See groundfire in misc.yaml.
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
+		RequiresCondition: critical-fire && !build-incomplete
 	GrantConditionOnPrerequisite@CEMENTFACTORY:
 		Condition: techcementffact
 		Prerequisites: techcementffact

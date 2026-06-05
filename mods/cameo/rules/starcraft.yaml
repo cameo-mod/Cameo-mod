@@ -969,6 +969,7 @@ SCBUNKER:
 SCMISSILETURRET:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@shape: ^2x2Shape
@@ -1655,6 +1656,7 @@ SCPHOTONCANNON:
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Photon Cannon
 	Valued:
@@ -2473,6 +2475,7 @@ SCCREEPCOLONY:
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
 	Inherits: ^BuildingPlugProducer
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Creep Colony
 		RequiresCondition: !sunken && !spore
