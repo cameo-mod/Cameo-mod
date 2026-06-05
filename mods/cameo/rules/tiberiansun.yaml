@@ -1080,7 +1080,7 @@ TSGTSILOCABAL:
 	Buildable:
 		Prerequisites: ~tsgtcnstcabal, tsproccabal
 	RenderSprites:
-		Image: tsgtsilo.nod
+		Image: tsgtsilo.cabal
 
 TSGTPILE:
 	Inherits: ^BaseBuilding
@@ -1635,7 +1635,7 @@ TSNTHPAD2:
 	ProductionBar@RAAIRCRAFTNOD:
 		ProductionType: RAAircraft
 	RenderSprites:
-		Image: tsnthpad
+		Image: tsnthpadcabal
 
 tsntradr:
 	Inherits: ^BaseBuilding
@@ -2626,7 +2626,7 @@ tsgthpadmutant:
 	ProductionBar@RAAIRCRAFTGDI:
 		ProductionType: RAAircraft
 	RenderSprites:
-		Image: tsnthpad
+		Image: tsnthpadmut
 
 tsgtradrmutant:
 	Inherits: ^BaseBuilding
@@ -3481,7 +3481,7 @@ tsntstlhcabal:
 		Prerequisites: ~tsgtcnstcabal, tscabaltech
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntstlh
+		Image: tsntstlhcabal
 
 tsntpulsgdi:
 	Inherits: ^Defense

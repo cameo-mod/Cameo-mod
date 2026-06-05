@@ -3872,18 +3872,18 @@ tsntobel:
 
 tsntobelcabal:
 	Defaults:
-		Filename: tsobl1.shp
+		Filename: tsctobel.shp
 		Scale: 1.25
 		Offset: 0, -24, 24
 	idle:
-		Filename: tsobl1.shp
+		Filename: tsctobel.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: tsobl1.shp
+		Filename: tsctobel.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: tsobl1.shp
+		Filename: tsctobel.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
@@ -4072,6 +4072,37 @@ tsntstlh:
 		Filename: clckicon.shp
 		Offset: 0, 0
 		UseTilesetCode: false
+tsntstlhcabal:
+	Defaults:
+		Filename: cnastlh.shp
+		Scale: 1.25
+		Offset: -16, -16, 1
+	idle:
+		Filename: cnastlh.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: cnastlh.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: cnastlh.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	pulse:
+		Filename: cnastlh_a.shp
+		Length: 10
+		Tick: 240
+	damaged-pulse:
+		Filename: cnastlh_ad.shp
+		Length: 10
+		Tick: 240
+	make:
+		Filename: cnastlhmk.shp
+	icon:
+		Filename: cabalstealth_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
 
 tsgthpad:
 	Defaults:
@@ -4208,7 +4239,122 @@ tsnthpad:
 		Filename: tshpad2icon.shp
 		Offset: 0, 0
 		UseTilesetCode: false
+tsnthpadmut:
+	Defaults:
+		Filename: tscgpad.shp
+		Scale: 1
+		Offset: 0, -24, 0
+	idle:
+		Filename: tscgpad.shp
+		ShadowStart: 2
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	damaged-idle:
+		Filename: tscgpad.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	dead:
+		Filename: tscgpad.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1c511
+		Tick: 400
+		# Offset: 0, -24, 3
+	idle-platform:
+		Filename: tsnthpadbb.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+	damaged-idle-platform:
+		Filename: invisibleitem.shp
+	dead-platform:
+		Filename: invisibleitem.shp
+	idle-lights:
+		Filename: tscgpad_b.shp
+		Start: 8
+		Tick: 100
+		ZOffset: -1c511
+	active:
+		Filename: tscgpad_a.shp
+		Length: 28
+		ZOffset: -1c511
+		Tick: 100
+	damaged-active:
+		Filename: tscgpad_a.shp
+		Length: 28
+		ZOffset: -1c511
+		Tick: 100
+	damaged-idle-lights:
+		Filename: tscgpad_b.shp
+		Start: 8
+		Tick: 100
+		ZOffset: -1c511
+	make:
+		Filename: tsnthpadmk.shp
+	icon:
+		Filename: forgot_hpad_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
 
+tsnthpadcabal:
+	Defaults:
+		Filename: tscabalhpad.shp
+		Scale: 1.25
+		Offset: 0, -24, 0
+	idle:
+		Filename: tscabalhpad.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	damaged-idle:
+		Filename: tscabalhpad.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	dead:
+		Filename: tscabalhpad.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+		# Offset: 0, -24, 3
+	idle-platform:
+		Filename: tscabalhpadbb.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+	damaged-idle-platform:
+		Filename: tscabalhpadbb.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+	dead-platform:
+		Filename: tscabalhpadbb.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+	idle-lights:
+		Filename: invisibleitem.shp
+	active:
+		Filename: tscabalhpadact.shp
+		Length: 6
+		ZOffset: -1c511
+		Tick: 200
+	damaged-active:
+		Filename: tscabalhpadact.shp
+		Length: 6
+		ZOffset: -1c511
+		Tick: 200
+	damaged-idle-lights:
+		Filename: invisibleitem.shp
+	make:
+		Filename: tsnthpadmk.shp
+	icon:
+		Filename: cabal_hpad_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
 tsprocgdi:
 	Inherits: ^WithBuildingBib2
 	Defaults:
@@ -4422,10 +4568,68 @@ tsgtsilo.gdi:
 		Offset: 0, 0
 		UseTilesetCode: false
 
+#Alternative Silo for Nod, Pyramid
+
 tsgtsilo.nod:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: tsgtsilo.shp
+		Scale: 1.25
+		Offset: 4, -24, 24
+	idle:
+		Filename: tsnsilo.shp
+	damaged-idle:
+		Filename: tsnsilo.shp
+		Start: 1
+	stages:
+		Filename: tsnsilo_s.shp
+		Length: 4
+	damaged-stages:
+		Filename: tsnsilo_sd.shp
+		Length: 4
+	idle-underlay:
+		Filename: tsnsilo_b.shp
+		Length: 20
+		ZOffset: -512
+	damaged-idle-underlay:
+		Filename: tsnsilo_b.shp
+		Length: 20
+		ZOffset: -512
+	dead:
+		Filename: tsnsilo.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -512
+		Tick: 400
+	idle-lights:
+		Filename: tsnsilo_a.shp
+		Length: 20
+		Tick: 120
+	damaged-idle-lights:
+		Filename: tsnsilo_ad.shp
+		Length: 20
+		Tick: 120
+	idle-window:
+		Filename: tsnsilo_w.shp
+		Length: 3
+		Tick: 120
+	damaged-idle-window:
+		Filename: tsnsilo_wd.shp
+		Length: 3
+		Tick: 120
+	make:
+		Filename: tsnsilomk.shp
+	icon:
+		Filename: tssilonodicon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+#Classic Silo of Nod fits better in CABAL, because no logo
+
+tsgtsilo.cabal:
 	Inherits: tsgtsilo.gdi
 	icon:
-		Filename: tssiloicon.png
+		Filename: tssilocabalicon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -4761,7 +4965,7 @@ tscarrycabal:
 		Facings: 64
 		Scale: 0.9
 	icon:
-		Filename: cabal_overkill_gunship.png
+		Filename: cabal_overkill_icon.png
 
 tsheli:
 	idle:
