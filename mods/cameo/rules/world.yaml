@@ -1020,7 +1020,7 @@ World:
 		RequiresCondition: weather-rain
 		SoundFiles: ambiance_rain.wav
 		AudibleThroughFog: true
-		Volume: 2.0
+		Volume: 1.0
 	AmbientSound@WEATHER_THUNDER:
 		RequiresCondition: weather-rain
 		SoundFiles: thunder1.aud, thunder2.aud, thunder3.aud, thunder4.aud, thunder5.aud
@@ -1032,12 +1032,12 @@ World:
 		RequiresCondition: weather-sandstorm
 		SoundFiles: ambiance_wind_2.wav
 		AudibleThroughFog: true
-		Volume: 2.0
+		Volume: 1.0
 	AmbientSound@BLIZZARD:
 		RequiresCondition: weather-blizzard
 		SoundFiles: ambiance_wind_2.wav
 		AudibleThroughFog: true
-		Volume: 2.0
+		Volume: 1.0
 	LegacyBridgeLayer:
 		Bridges: bridge1, bridge2, bridge3, bridge4
 	ActorSpawnManager:
