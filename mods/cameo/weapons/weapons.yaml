@@ -764,12 +764,6 @@
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
-^ImpactGlow:
-	Warhead@Glow: GlowImpact
-		Color: FFB84D
-		Scale: 0.8
-		FadeFrames: 15
-
 ^TankDestroyerCannon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -853,7 +847,6 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
@@ -948,7 +941,6 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
@@ -1042,7 +1034,6 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
-	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
@@ -3293,7 +3284,6 @@ DefuseKit:
 
 ^Artillery:
 	Inherits: ^Cannon
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 75
 	Range: 12c5
 	Projectile: Bullet
@@ -3624,7 +3614,6 @@ RocketsG:
 
 BoatMissile:
 	Inherits: ^MissileWeapon
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 33
 	Range: 8c0
 	Burst: 2
@@ -3960,21 +3949,6 @@ Atomic:
 		GlowScale: 15.0
 		GlowFadeFrames: 300
 		GlowFadeInFrames: 15
-	Warhead@GroundFireArea: SpawnActorInArea
-		Actor: groundfire
-		Range: 5
-		Chance: 50
-		ImpactActors: false
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@Distort: HeatDistortion
-		Scale: 2.0
-		FadeFrames: 420
-		FadeInFrames: 15
-	Warhead@Shock: Shockwave
-		Scale: 2.0
-		FadeFrames: 120
-		FadeInFrames: 0
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 2000
 		Damage: 17500
@@ -4479,21 +4453,6 @@ IonCannon:
 		GlowScale: 7.0
 		GlowFadeFrames: 300
 		GlowFadeInFrames: 5
-	Warhead@GroundFireArea: SpawnActorInArea
-		Actor: groundfire
-		Range: 3
-		Chance: 50
-		ImpactActors: false
-		OwnerType: InternalName
-		InternalOwner: Neutral
-	Warhead@Distort: HeatDistortion
-		Scale: 1.0
-		FadeFrames: 420
-		FadeInFrames: 0
-	Warhead@Shock: Shockwave
-		Scale: 1.5
-		FadeFrames: 120
-		FadeInFrames: 0
 
 ###############################################
 #           TARGETTING

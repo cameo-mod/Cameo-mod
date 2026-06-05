@@ -1667,55 +1667,6 @@ fire:
 		Offset: 0,-3
 		ZOffset: 1023
 
-# Same art as `fire` but ZOffset 0, so ground fire sorts by position and mobile units draw over it
-# when passing. The shared `fire` keeps ZOffset 1023 for husk/building burns (must sit on top of
-# their own body sprite). Used by the groundfire actor.
-groundfire_flame:
-	1:
-		Filename: fire1.shp
-		Length: *
-		Offset: 0,-3
-	2:
-		Filename: fire2.shp
-		Length: *
-		Offset: 0,-3
-	3:
-		Filename: fire3.shp
-		Length: *
-		Offset: 0,-3
-	4:
-		Filename: fire4.shp
-		Length: *
-		Offset: 0,-3
-
-# Same art as `fire` but scaled 1.5x for building critical-fire (a bigger, more engulfing blaze).
-# Kept separate so husk/ground fire stay native size. SHP scales blocky past ~2x, so don't push higher.
-fire_building:
-	1:
-		Filename: fire1.shp
-		Length: *
-		Offset: 0,-3
-		ZOffset: 1023
-		Scale: 1.5
-	2:
-		Filename: fire2.shp
-		Length: *
-		Offset: 0,-3
-		ZOffset: 1023
-		Scale: 1.5
-	3:
-		Filename: fire3.shp
-		Length: *
-		Offset: 0,-3
-		ZOffset: 1023
-		Scale: 1.5
-	4:
-		Filename: fire4.shp
-		Length: *
-		Offset: 0,-3
-		ZOffset: 1023
-		Scale: 1.5
-
 burn-l:
 	Defaults:
 		Filename: burn-l.shp
@@ -1840,42 +1791,6 @@ black_smokey:
 	idle:
 		Filename: black_smokey.shp
 		Length: *
-		ZOffset: 1023
-
-# Procedural RGBA dark-smoke puff (tools/gen_smoke.py). 32-frame birth->grow->dissipate
-# lifecycle; per-pixel alpha. Played once over the particle's lifetime (Tick * 32 ~= Duration).
-smoke_dark:
-	idle:
-		Filename: smoke_dark.png
-		Length: *
-		Tick: 80
-		ZOffset: 1023
-
-# Procedural RGBA fire-lit smoke puff (tools/gen_fire_smoke_glow.py). Same 32-frame
-# timing as smoke_dark, but with a subtle baked amber glow at the base for groundfire.
-smoke_fire_glow:
-	idle:
-		Filename: smoke_fire_glow.png
-		Length: *
-		Tick: 80
-		ZOffset: 1023
-
-# Procedural RGBA black smoke puff (tools/gen_smoke.py): 1.5x size (96px), same alpha as the grey
-# variant (opacity 0.55 + top-fade), so it reads as a rising plume not an opaque blob. Buildings only.
-smoke_building:
-	idle:
-		Filename: smoke_building.png
-		Length: *
-		Tick: 80
-		ZOffset: 1023
-
-# Procedural RGBA black building-smoke puff with an early baked fire-lit base
-# (tools/gen_fire_smoke_glow.py, 96px frames). Buildings only.
-smoke_building_fire_glow:
-	idle:
-		Filename: smoke_building_fire_glow.png
-		Length: *
-		Tick: 80
 		ZOffset: 1023
 
 green_smokey:

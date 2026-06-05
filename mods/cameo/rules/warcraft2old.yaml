@@ -1272,7 +1272,6 @@ Player:
 ^wc2_watch_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
-	-WithTurretSearchlight:
 	Inherits@detect: ^GenericAllDetector
 	Inherits@shape: ^2x2Shape
 	Valued:

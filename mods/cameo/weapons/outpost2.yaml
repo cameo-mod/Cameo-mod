@@ -596,7 +596,6 @@ plymouthMineSpawner:
 		InvalidTargets: plymouth_minv
 
 PLYMineExplosive:
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 350
 	Projectile: InstantExplode
 	Range: 1c512

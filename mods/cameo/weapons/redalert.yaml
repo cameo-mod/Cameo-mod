@@ -4668,7 +4668,6 @@ RapierBombsCryo:
 
 Aphid:
 	Inherits: ^ShrapnelWeapon
-	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
 	ReloadDelay: 62
 	Range: 7000
@@ -6051,8 +6050,7 @@ MammothTusk:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^HeavyMissile
-	Inherits@glow: ^ImpactGlow
-	ValidTargets: Ground, Water, Infantry, Monster, Air
+	ValidTargets: Infantry, Monster, Air
 	ReloadDelay: 91
 	Burst: 2
 	BurstDelays: 12
@@ -6428,8 +6426,7 @@ MammothTusk2:
 	Inherits: ^LightFlameWeapon
 	Inherits: ^MediumChemicalWeapon
 	Inherits: ^HeavyMissile
-	Inherits@glow: ^ImpactGlow
-	ValidTargets: Ground, Water, Infantry, Monster, Air
+	ValidTargets: Infantry, Monster, Air
 	ReloadDelay: 125
 	Burst: 2
 	BurstDelays: 10
@@ -7038,7 +7035,6 @@ VolkovMagneticWeaponIncendiaryNuclearShells:
 ParaBomb:
 	Inherits: ^HeavyBomb
 	Inherits: ^HeavyFlameWeapon
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 8
 	Range: 5000
 	Report: chute1.aud
@@ -7464,7 +7460,6 @@ BuggyPlasmaGrenade:
 
 JapaneseHeavyBomb:
 	Inherits: ^HeavyBomb
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 100
 	Burst: 4
 	BurstDelays: 3
@@ -8929,7 +8924,6 @@ DepthCharge:
 
 Stinger:
 	Inherits: ^HeavyMissile
-	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 27
 	Range: 8000
 	Report: missile6.aud

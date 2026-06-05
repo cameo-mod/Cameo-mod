@@ -45,55 +45,67 @@ Terrain:
 	TerrainType@SpiceSand:
 		Type: SpiceSand
 		TargetTypes: Ground
-		AcceptsSmudgeType: SandCrater
+		AcceptsSmudgeType: Crater, Scorch
 		Color: D0C0A0
 	TerrainType@RA2Copper:
 		Type: RA2Copper
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 804020
 	TerrainType@RA2Silver:
 		Type: RA2Silver
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: C0C0C0
 	TerrainType@RA2Ore:
 		Type: RA2Ore
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 808000
 	TerrainType@RA2Gems:
 		Type: RA2Gems
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 8040C0
 	TerrainType@Ore:
 		Type: Ore
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 948060
 	TerrainType@Gems:
 		Type: Gems
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 8470FF
 	TerrainType@Tiberium:
 		Type: Tiberium
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: A1E21C
 	TerrainType@BlueTiberium:
 		Type: BlueTiberium
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 54FCFC
 	TerrainType@RedTiberium:
 		Type: RedTiberium
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: FF4343
 	TerrainType@GoldTiberium:
 		Type: GoldTiberium
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: FFE810
 	TerrainType@SCMinerals:
 		Type: SCMinerals
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 6495ED
 	TerrainType@Veins:
 		Type: Veins
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: FF8300
 	TerrainType@Subterranean:
 		Type: Subterranean
@@ -104,10 +116,12 @@ Terrain:
 	TerrainType@Wall:
 		Type: Wall
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: D0C0A0
 	TerrainType@ZergSoil:
 		Type: ZergSoil
 		TargetTypes: Ground
+		AcceptsSmudgeType: Crater, Scorch
 		Color: 685062
 Templates:
 	Template@0:
