@@ -1709,6 +1709,7 @@
 	Buildable:
 		BuildDurationModifier: 100
 	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^BunkerTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1726,6 +1727,7 @@
 	Buildable:
 		BuildDurationModifier: 50
 	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^AdvancedDefenseTemplate:
 	Inherits@DisabledOverlay: ^DisableOnLowPowerOrPowerDown
@@ -1736,6 +1738,7 @@
 		BuildDurationModifier: 75
 	IgnoresDisguise:
 	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^SuperDefenseTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1745,6 +1748,7 @@
 		BuildDurationModifier: 50
 	IgnoresDisguise:
 	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^PromotionUnitBuff:
 	FirepowerMultiplier@PromotionUnit:

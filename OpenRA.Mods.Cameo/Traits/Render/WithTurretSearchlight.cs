@@ -49,7 +49,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		public readonly float GlowScale = 0.75f;
 
 		[Desc("Extra brightness multiplier, independent of glow radius.")]
-		public readonly float Intensity = 1.2f;
+		public readonly float Intensity = 0.8f;
 
 		[Desc("Searchlight rendering shape. Cone tapers narrow-to-wide with an endpoint pool; Beam is a uniform-width beam.")]
 		public readonly SearchlightShape Shape = SearchlightShape.Cone;
@@ -69,6 +69,9 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		[Desc("Lobby option value that enables weather searchlights.")]
 		public readonly string WeatherValue = "weather";
 
+		[Desc("Disable the searchlight while the owning player is in Low or Critical power.")]
+		public readonly bool DisableOnLowPower = true;
+
 		[Desc("Maximum random idle sweep nudge (clockwise or counter-clockwise) applied while idle.")]
 		public readonly WAngle IdleScanRange = WAngle.FromDegrees(45);
 
@@ -79,21 +82,37 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		public readonly int IdleScanMaxDelay = 250;
 
 		[Desc("Ticks after last engaging an enemy before idle sweeping resumes.")]
-		public readonly int IdleScanCooldown = 750;
+		public readonly int IdleScanCooldown = 200;
 
 		[Desc("Turn speed used to slew toward the idle sweep target (gentler than tracking TurnSpeed; default 3x slower).")]
 		public readonly WAngle IdleTurnSpeed = new(4);
 
+		[Desc("Damage states where the searchlight flickers.")]
+		public readonly DamageState FlickerDamageStates = DamageState.Critical;
+
+		[Desc("How many render frames each flicker sample lasts.")]
+		public readonly int FlickerSampleFrames = 3;
+
+		[Desc("Chance per flicker sample that the searchlight turns fully off.")]
+		public readonly int FlickerOffChance = 12;
+
+		[Desc("Chance per flicker sample that the searchlight dims instead of rendering normally.")]
+		public readonly int FlickerDimChance = 28;
+
+		[Desc("Brightness multiplier used for dim flicker samples.")]
+		public readonly float FlickerDimIntensity = 0.45f;
+
 		public override object Create(ActorInitializer init) { return new WithTurretSearchlight(init.Self, this); }
 	}
 
-	public class WithTurretSearchlight : ConditionalTrait<WithTurretSearchlightInfo>, ITick, IRender
+	public class WithTurretSearchlight : ConditionalTrait<WithTurretSearchlightInfo>, ITick, IRender, INotifyOwnerChanged
 	{
 		Turreted turret;
 		AttackFollow attack;
 		Armament[] armaments;
 		Armament muzzleArmament;
 		Barrel muzzleBarrel;
+		PowerManager playerPower;
 		bool weatherEnabled;
 		WAngle searchlightYaw;
 		bool initializedYaw;
@@ -119,6 +138,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			// Cache the first barrel-bearing armament so the source height can track the real muzzle.
 			muzzleArmament = armaments.FirstOrDefault(a => a.Barrels.Length > 0);
 			muzzleBarrel = muzzleArmament?.Barrels[0];
+			playerPower = self.Owner.PlayerActor.TraitOrDefault<PowerManager>();
 
 			// Treat freshly-built towers as already idle (no cooldown) so they sweep without a 60s wait.
 			lastEngagedTick = self.World.WorldTick - Info.IdleScanCooldown;
@@ -130,7 +150,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 
 		void ITick.Tick(Actor self)
 		{
-			if (IsTraitDisabled || !weatherEnabled || turret == null)
+			if (IsTraitDisabled || !weatherEnabled || !HasSearchlightPower() || turret == null)
 				return;
 
 			var target = CurrentAttackTarget(self);
@@ -189,6 +209,16 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			return idleTargetYaw;
 		}
 
+		bool HasSearchlightPower()
+		{
+			return !Info.DisableOnLowPower || playerPower == null || playerPower.PowerState == PowerState.Normal;
+		}
+
+		void INotifyOwnerChanged.OnOwnerChanged(Actor self, OpenRA.Player oldOwner, OpenRA.Player newOwner)
+		{
+			playerPower = newOwner.PlayerActor.TraitOrDefault<PowerManager>();
+		}
+
 		void ScheduleNextScan(Actor self)
 		{
 			var max = System.Math.Max(Info.IdleScanMinDelay + 1, Info.IdleScanMaxDelay);
@@ -239,7 +269,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 
 		IEnumerable<IRenderable> IRender.Render(Actor self, WorldRenderer wr)
 		{
-			if (IsTraitDisabled || !weatherEnabled || turret == null)
+			if (IsTraitDisabled || !weatherEnabled || !HasSearchlightPower() || turret == null)
 				yield break;
 
 			var orientation = WRot.FromYaw(searchlightYaw);
@@ -258,7 +288,40 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			if (!ConeIntersectsViewport(wr, source, target))
 				yield break;
 
-			yield return EmitSearchlight(source, target);
+			var flickerIntensity = FlickerIntensity(self);
+			if (flickerIntensity <= 0f)
+				yield break;
+
+			yield return EmitSearchlight(source, target, flickerIntensity);
+		}
+
+		float FlickerIntensity(Actor self)
+		{
+			if (!Info.FlickerDamageStates.HasFlag(self.GetDamageState()))
+				return 1f;
+
+			var sampleFrames = System.Math.Max(1, Info.FlickerSampleFrames);
+			var sample = Game.RenderFrame / sampleFrames;
+			var roll = FlickerHash(self.ActorID, sample) % 100;
+			if (roll < Info.FlickerOffChance)
+				return 0f;
+
+			if (roll < Info.FlickerOffChance + Info.FlickerDimChance)
+				return Info.FlickerDimIntensity;
+
+			return 1f;
+		}
+
+		static int FlickerHash(uint actorId, int sample)
+		{
+			unchecked
+			{
+				var x = (int)actorId * 1103515245 + sample * 12345;
+				x ^= x >> 16;
+				x *= 0x45d9f3b;
+				x ^= x >> 16;
+				return x & 0x7fffffff;
+			}
 		}
 
 		static bool ConeIntersectsViewport(WorldRenderer wr, WPos source, WPos target)
@@ -275,19 +338,19 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 				&& bottom >= vp.TopLeft.Y && top <= vp.BottomRight.Y;
 		}
 
-		IRenderable EmitSearchlight(WPos source, WPos target)
+		IRenderable EmitSearchlight(WPos source, WPos target, float intensityScale)
 		{
 			// Cone tapers the glow radius from narrow (turret) to wide (far pool) in a single
 			// GlowRenderer registration; Beam keeps a uniform radius with no endpoint pool.
 			if (Info.Shape == SearchlightShape.Cone)
 				return new TurretSearchlightRenderable(new[]
 				{
-					new SearchlightGlow(source, target, Info.Color, Info.ConeStartScale, Info.ConeEndScale, Info.Intensity, Info.EndpointBoost)
+					new SearchlightGlow(source, target, Info.Color, Info.ConeStartScale, Info.ConeEndScale, Info.Intensity * intensityScale, Info.EndpointBoost)
 				});
 
 			return new TurretSearchlightRenderable(new[]
 			{
-				new SearchlightGlow(source, target, Info.Color, Info.GlowScale, Info.GlowScale, Info.Intensity, 0f)
+				new SearchlightGlow(source, target, Info.Color, Info.GlowScale, Info.GlowScale, Info.Intensity * intensityScale, 0f)
 			});
 		}
 
