@@ -1315,15 +1315,15 @@ ObeliskLaserFragment:
 
 DarkObeliskLaser:
 	Inherits: ^TSLaser
-	Report: obelray1.aud
-	Range: 10c0
+	Report: obelmod1.aud
+	Range: 12c0
 	ReloadDelay: 50
 	ValidTargets: Air
 	Projectile: LaserZap
 		Width: 125
 		Duration: 38
 	Warhead@1Dam: SpreadDamage
-		Damage: 25000
+		Damage: 35000
 		Spread: 250
 		ValidTargets: Air
 	Warhead@2Dam: HealthPercentageDamage
@@ -1397,6 +1397,65 @@ TSCoreLaser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 
+TSCobraLasers:
+	Inherits: ^SmallArms
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Report: obelray1.aud
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 20
+	Burst: 3
+	BurstDelays: 2
+	Range: 4964
+	Report: chaingn1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 6000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+TSSuperCyCannon:
+	Inherits: TSCyCannon
+	Burst: 3
+	BurstDelays: 2
+TSCABALObeliskLaserFire:
+	Inherits: TSObeliskLaserFire
+	Report: obelcor3.aud
+
+TSHunterKillerLasers:
+	Inherits: ^Chaingun
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	ReloadDelay: 24
+	Burst: 5
+	BurstDelays: 5
+	Range: 4882
+	Report: lastur1.aud
+	SoundVolume: 0.25
+	ValidTargets: Ground, Air
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+		-HitAnim:
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Air
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Ground, Air
 ####################################################################################################
 #		Tiberian Sun Heal Weapons
 ####################################################################################################
@@ -2045,6 +2104,23 @@ TSMammothTuskChem:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+TSTwinBazooka:
+	Inherits: ^LightMissile
+	Burst: 2
+	BurstDelays: 8
+	Report: rketinf1.aud
+	ReloadDelay: 52
+	Range: 6694
+	Projectile: Missile
+	Warhead@LightMissile: SpreadDamage
+		Damage: 24000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 12
+
+TSHellfireTwin:
+	Inherits: TSHellfire
+	Burst: 2
+	BurstDelays: 8
 ####################################################################################################
 #		Tiberian Sun Other
 ####################################################################################################
@@ -2453,6 +2529,27 @@ TSLocustBomb:
 		Palette: ra2effect
 		Weapon: RA2Cloud
 		InvalidTargets: Water
+TSRobotHackingControl:
+	ReloadDelay: 50
+	Report: tsrobothacking.wav
+	Range: 9500
+	TargetActorCenter: true
+	ValidTargets: HackableRobot, Cyborg
+	InvalidTargets: Hero
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
+
+TSMechanicalHackingControl:
+	ReloadDelay: 50
+	Report: tsrobothacking.wav
+	Range: 9500
+	TargetActorCenter: true
+	ValidTargets: Vehicle
+	InvalidTargets: Hero, MCImmune
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		Damage: 0
 ####################################################################################################
 #		Tiberian Sun MGS
 ####################################################################################################
@@ -3195,6 +3292,25 @@ MutAPRifleE:
 	Inherits: MutAPRifle
 	ReloadDelay: 30
 	Range: 6c0
+
+
+TSDevoutChainguns:
+	Inherits: ^TSMG
+	ReloadDelay: 40
+	Burst: 6
+	Report: cygun1.aud
+	Range: 4512
+	Warhead@1Dam: SpreadDamage
+		Damage: 1200
+
+TSVulcanTowerTwin:
+	Inherits: ^TSMG
+	ReloadDelay: 26
+	Burst: 2
+	Range: 6c0
+	Report: chaingn1.aud
+	Warhead@1Dam: SpreadDamage
+		Damage: 1800
 
 ####################################################################################################
 #		Tiberian Sun Superweapon

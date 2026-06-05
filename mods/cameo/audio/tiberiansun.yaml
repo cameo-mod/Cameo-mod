@@ -205,3 +205,21 @@ TSReaper:
 		Die: spiddie1
 		Burned: 22-n104, 22-n106, 22-n108
 		Zapped: electro1
+
+TSCobra:
+	DefaultVariant: .wav
+	Voices:
+		Select: tscobrasel1, tscobrasel2
+		Move: tscobramov1, tscobramov2
+		Action: tscobramov1, tscobramov2
+		Attack: tscobraatk1, tscobraatk2, tscobraatk3
+		Unload: tscobramov1, tscobramov2
+
+TSCABALVehicles:
+	DefaultVariant: .wav
+	Voices:
+		Select: tscavalveh-04, tscavalveh-02
+		Move: tscavalveh-03, tscavalveh-06, tscavalveh-07
+		Action: tscavalveh-03, tscavalveh-06, tscavalveh-07
+		Attack: tscavalveh-05, tscavalveh-01
+		Unload: tscavalveh-03, tscavalveh-06, tscavalveh-07

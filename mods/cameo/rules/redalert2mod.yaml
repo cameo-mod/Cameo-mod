@@ -2842,6 +2842,7 @@ aa_mecha:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Inherits@UpGat: ^GatlingSpeedUpUnitBehavior
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
 	Inherits@PulverizerUpgrades: ^PulverizerUpgrades
@@ -14892,6 +14893,7 @@ nax2_armor_mg:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
 	Selectable:
 		Bounds: 600, 600, 0, -125
@@ -15035,6 +15037,7 @@ nax2_engi:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Valued:
@@ -15500,6 +15503,7 @@ nax2_giant_rk:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Valued:
@@ -19753,6 +19757,7 @@ futu_ggmlt:
 
 ^RobotControllable:
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Mobile:
 		PauseOnCondition: !robotcontrol || disabled
 	Capturable:

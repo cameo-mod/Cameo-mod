@@ -1220,6 +1220,10 @@
 	GrantExternalConditionToTransport:
 		Condition: ifv-sniper
 
+^HackableRobot:
+	Targetable@HackableRobot:
+		TargetTypes: HackableRobot
+
 ^HeroInfantryTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceInfantry
 	Inherits@EXT: ^ExternalConditions

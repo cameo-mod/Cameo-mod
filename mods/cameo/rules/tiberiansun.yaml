@@ -1721,7 +1721,10 @@ tsntradrcabal:
 		Prerequisites: ~tsgtcnstcabal, tsproccabal
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntradr
+		Image: tsntradrcabal
+	ProvidesPrerequisite@robotcontrol:
+		Prerequisite: robotcontrol
+		RequiresCondition: !disabled
 
 tsgtradr:
 	Inherits: ^BaseBuilding
@@ -1881,7 +1884,7 @@ tscabaltech:
 		Description: actor-tscabaltech.description
 		BuildLimit: 1
 	RenderSprites:
-		Image: tsnttech
+		Image: tscabaltech
 		PlayerPalette: playerra2
 
 # tsnttmpl:
@@ -2944,7 +2947,7 @@ tsntlasr:
 tsntlasrcabal:
 	Inherits: tsntlasr
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsnthand2
+		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disable
 	RenderVoxels:
 		Image: tsntlasr
 	RenderSprites:
@@ -3413,7 +3416,7 @@ tsntsam:
 tsntsamcabal:
 	Inherits: tsntsam
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsnthand2
+		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsntsam
@@ -3662,7 +3665,20 @@ tsntobelcabal:
 		Prerequisites: ~tsgtcnstcabal, tscabaltech
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntobel
+		Image: tsntobelcabal
+	Tooltip:
+		Name: Heavy Cabal Obelisk
+	Valued:
+		Cost: 2600
+	Health:
+		HP: 300000
+	Armament@PRIMARY:
+		Weapon: TSCABALObeliskLaserFire
+		LocalOffset: 0,0,1956
+	WithChargeOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: playerra2
+		IsPlayerPalette: true
 
 tsobl2:
 	Inherits: ^Defense
@@ -3673,12 +3689,12 @@ tsobl2:
 		Cost: 1350
 	Tooltip:
 		Name: Obelisk of Darkness
-	# Buildable:
-	# 	BuildPaletteOrder: 60
-	# 	Prerequisites: ~tsgtcnstnod, tsnttech
-	# 	Queue: Defence, RADefence
-	# 	BuildDurationModifier: 40
-	# 	Description: Advanced air defense.\nRequires power to operate.\n  Strong vs aircraft\n  Weak vs ground units
+	 Buildable:
+	 	BuildPaletteOrder: 60
+	 	Prerequisites: ~tsgtcnstcabal, tsnthand2
+	 	Queue: Defence, RADefence
+	 	BuildDurationModifier: 40
+	 	Description: Advanced air defense.\nRequires power to operate.\n  Strong vs aircraft\n  Weak vs ground units
 	Building:
 		Footprint: x
 	Selectable:
@@ -3709,8 +3725,8 @@ tsobl2:
 		RequiresCondition: !lowpower && !disabled
 	WithChargeOverlay:
 		RequiresCondition: !build-incomplete
-		Palette: player
-		IsPlayerPalette: false
+		Palette: playerra2
+		IsPlayerPalette: true
 	WithIdleOverlay:
 		Sequence: idle-overlay
 	WithIdleOverlay@LIGHTS:
@@ -3724,10 +3740,59 @@ tsobl2:
 tsntobel2cabal:
 	Inherits: tsobl2
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tscabaltech
+		Prerequisites: ~tsgtcnstcabal, tscabaltech, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsobl2
+
+tscbunk:
+	Inherits: ^RA2Defense
+	Inherits@cargo: ^ClearableGarrisonNeutronOnly
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Selectable:
+		Bounds: 1024, 1024
+	Tooltip:
+		Name: Pillbox
+	Building:
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtcnstcabal, tsnthand2
+		Description: actor-pbox.description
+	Valued:
+		Cost: 600
+	Health:
+		HP: 110000
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		InitialUnits: tscyborg
+	AttackGarrisoned:
+		RequiresCondition: !build-incomplete
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: disabled
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 6583
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Damage: 120
+		ReloadDelay: 24
+		Range: 6583
 
 #######################################
 # TS Infantry Reporting!
@@ -4554,7 +4619,7 @@ TSCYBORG:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@anim: ^TSInfantry
+	Inherits@HackableRobot: ^HackableRobot
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
@@ -4575,7 +4640,7 @@ TSCYBORG:
 		Speed: 56
 		PauseOnCondition: disabled
 	Armor:
-		Type: Light
+		Type: Flak
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -4640,6 +4705,7 @@ tscyborgb:
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
@@ -4662,7 +4728,7 @@ tscyborgb:
 		Speed: 46
 		PauseOnCondition: disabled
 	Armor:
-		Type: Light
+		Type: Plate
 	Health:
 		HP: 50000
 	ChangesHealth@SelfHealing:
@@ -4720,6 +4786,290 @@ tscyborgb:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
+
+tsdevout:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Devout
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 56
+		PauseOnCondition: disabled
+	Armor:
+		Type: Plate
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSDevoutChainguns
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcanTowerTwin
+	Selectable:
+		Class: tscyborg
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tsascended:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Ascended
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 56
+		PauseOnCondition: disabled
+	Armor:
+		Type: Plate
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSTwinBazooka
+		LocalOffset: 0,0,90
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSTwinBazooka
+	Selectable:
+		Class: tscyborg
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tshacker:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Hacker Cyborg
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 500
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 56
+		PauseOnCondition: disabled
+	Armor:
+		Type: Plate
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSRobotHackingControl
+		LocalOffset: 0,0,90
+	Armament@Vehicle:
+		Weapon: TSMechanicalHackingControl
+		LocalOffset: 0,0,90
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSRobotHackingControl
+	Selectable:
+		Class: tshacker
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 120
+		TicksToRevoke: 25
+		Capacity: 8
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	WithRangeCircle@MC:
+		Range: 9500
+		Type: mindcontrol
+		Color: 663399b0
 
 TSCHAMSPY:
 	Inherits: ^Soldier
@@ -4857,6 +5207,7 @@ TSREAPER:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Inherits@EXT: ^ExternalConditions
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
@@ -4949,13 +5300,50 @@ TSCYC2:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-
+	Armor:
+		Type: Heroic
+tsccommando:
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits: TSCYBORG
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 8000
+	Tooltip:
+		Name: Cyborg Commando V2
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~tsnthand2, tscabaltech
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+	Mobile:
+		Speed: 58
+	Health:
+		HP: 400000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament@PRIMARY:
+		Weapon: TSSuperCyCannon
+	Voiced:
+		VoiceSet: TSCyborgCommando
+	Selectable:
+		Class: tscyc2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Armor:
+		Type: Heroic
 TSDissolver:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXT: ^ExternalConditions
 	Inherits@EMP: ^TurretEMP
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@HackableRobot: ^HackableRobot
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -4977,7 +5365,7 @@ TSDissolver:
 	ChangesHealth@SelfHealing:
 		Step: 28
 	Armor:
-		Type: Light
+		Type: Plate
 	RevealsShroud:
 		Range: 7c0
 	Turreted:
@@ -6016,6 +6404,7 @@ tsldrone:
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@EMP: ^TurretEMP
 	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@snipe: ^DriverKillAndNeutronImmune
 	Inherits@MechanicalReliability: ^MechanicalReliability
@@ -7505,7 +7894,7 @@ TSBIKE:
 TSBIKECABAL:
 	Inherits: TSBIKE
 	Buildable:
-		Prerequisites: ~tsntweapcabal
+		Prerequisites: ~tsntweapcabal, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsbike
@@ -7601,7 +7990,7 @@ TSSTNK:
 TSSTNKCABAL:
 	Inherits: TSSTNK
 	Buildable:
-		Prerequisites: ~tsntweapcabal, tscabaltech
+		Prerequisites: ~tsntweapcabal, tscabaltech, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsstnk
@@ -7971,7 +8360,7 @@ TSSUBTANK:
 TSSUBTANKCABAL:
 	Inherits: TSSUBTANK
 	Buildable:
-		Prerequisites: ~tsntweapcabal, tscabaltech
+		Prerequisites: ~tsntweapcabal, tscabaltech, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tssubtank
@@ -8047,7 +8436,7 @@ tssgen:
 tssgencabal:
 	Inherits: tssgen
 	Buildable:
-		Prerequisites: ~tsntweapcabal, tsntstlhcabal
+		Prerequisites: ~tsntweapcabal, tsntstlhcabal, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tssgen
@@ -8097,7 +8486,7 @@ tslpst:
 tslpstcabal:
 	Inherits: tslpst
 	Buildable:
-		Prerequisites: ~tsntweapcabal, tsntradrcabal
+		Prerequisites: ~tsntweapcabal, tsntradrcabal, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tslpst
@@ -9135,7 +9524,7 @@ TSLASSPID:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Voiced:
-		VoiceSet: TSVehicle
+		VoiceSet: TSCobra
 	DeliversCash:
 		Payload: 250
 	RenderSprites:
@@ -9175,7 +9564,7 @@ tscabalcobra:
 	ChangesHealth@SelfHealing:
 		Step: 12
 	Armament@PRIMARY:
-		Weapon: TSLaserRaiderCannon
+		Weapon: TSCobraLasers
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -9189,7 +9578,7 @@ tscabalcobra:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Voiced:
-		VoiceSet: TSVehicle
+		VoiceSet: TSCobra
 	DeliversCash:
 		Payload: 250
 	RenderSprites:
@@ -9213,7 +9602,7 @@ tsspddrone:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Spider Drone
+		Name: Spider Tank Drone
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~tsntweapcabal
@@ -9230,11 +9619,13 @@ tsspddrone:
 	ChangesHealth@SelfHealing:
 		Step: 12
 	Armament@PRIMARY:
-		Weapon: TSLaserRaiderCannon
+		Weapon: TS90mm
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
+	Armor:
+		Type: Heavy
 	WithMuzzleOverlay:
 	AttackFollowFrontal:
 		FacingTolerance: 512
@@ -9244,7 +9635,66 @@ tsspddrone:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Voiced:
-		VoiceSet: TSVehicle
+		VoiceSet: TSCobra
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+tscheavyspider:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Heavy Spider
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 64
+		Speed: 80
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSAssaultCannon
+		LocalOffset: 350,-90,250, 350,90,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: TSReaperTusk
+		LocalOffset: -350,90,340, -350,-90,340
+		LocalYaw: -100, 100
+		Recoil: 10
+	WithMuzzleOverlay:
+	AttackFollowFrontal:
+		FacingTolerance: 512
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSCABALVehicles
 	DeliversCash:
 		Payload: 250
 	RenderSprites:
@@ -9298,7 +9748,7 @@ TSART2CABAL:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Voiced:
-		VoiceSet: TSVehicle
+		VoiceSet: TSCABALVehicles
 	DeliversCash:
 		Payload: 250
 	RenderSprites:
@@ -9361,7 +9811,7 @@ TSTTNKCABAL:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Voiced:
-		VoiceSet: TSVehicle
+		VoiceSet: TSCABALVehicles
 	DeliversCash:
 		Payload: 400
 	WithSpriteTurret:
@@ -10012,6 +10462,79 @@ TSTRNSPORT.Husk:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
+tscarrycabal:
+	Inherits: ^Helicopter
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@reload: ^RearmableAircraft
+	Valued:
+		Cost: 1750
+	Tooltip:
+		Name: Overkill Carryall
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsnthpad2
+		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
+	Aircraft:
+		TurnSpeed: 29
+		Speed: 149
+		InitialFacing: 0
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+		TakeOffOnResupply: true
+		CanSlide: false
+	Carryall:
+		Voice: Move
+		LocalOffset: 0,0,-317
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 10
+	Health:
+		HP: 47500
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+		Type: CenterPosition
+	RenderSprites:
+	SpawnActorOnDeath:
+		Actor: tscarrycabal.Husk
+	Voiced:
+		VoiceSet: TSHeli
+	RenderSprites:
+		Image: tscarrycabal
+		PlayerPalette: player_rgba
+	Armament@PRIMARY:
+		Weapon: TSHunterKillerLasers
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+
+tscarrycabal.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Overkill Carryall
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 149
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: tscarrycabal
+		PlayerPalette: player_rgba
+
 TSTRNSPORTMUTANT:
 	Inherits: ^Helicopter
 	Inherits@Voxel: ^TSRenderVoxel
@@ -10133,14 +10656,89 @@ TSSCRIN:
 		Upgrades: up_mobilityspecialization, up_advancedtiberiumrefinement
 
 TSSCRINCABAL:
-	Inherits: TSSCRIN
+	Inherits: ^Helicopter
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Hunter Killer MK2
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~tsnthpad2, tsntradrcabal, tscabaltech
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsnthpad2, tscabaltech
+		Queue: Aircraft, RAAircraft
+		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
+	Aircraft:
+		Speed: 145
+		TurnSpeed: 29
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Weapon: TSHunterKillerLasers
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	Armament@PRIMARY2:
+		Weapon: TSHellfireTwin
+		LocalOffset: 25,-100,0, 25,100,0
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+		PersistentTargeting: false
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSScrin
+	AmmoPool:
+		Ammo: 24
+		ReloadCount: 4
+		AmmoCondition: ammo
+	DeathSounds:
+		VolumeMultiplier: 2
+	SpawnActorOnDeath:
+		Actor: TSSCRINCABAL.Husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	ActorStatValues:
+		Upgrades: up_mobilityspecialization, up_advancedtiberiumrefinement
 	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tsscrin
-	RenderVoxels:
-		Image: tsscrin
+		Image: tsscrincabal
+		PlayerPalette: player_rgba
+
+TSSCRINCABAL.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Hunter Killer MK2
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 168
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: tsscrincabal
+		PlayerPalette: player_rgba
 
 TSSCRIN.Husk:
 	Inherits: ^PlaneHusk
@@ -10372,12 +10970,11 @@ TSAPACHECABAL:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@reload: ^RearmableAircraft
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Harpy
+		Name: Hunter Killer MK1
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -10386,8 +10983,13 @@ TSAPACHECABAL:
 		Queue: Aircraft, RAAircraft
 		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Aircraft:
-		TurnSpeed: 80
-		Speed: 150
+		Speed: 145
+		TurnSpeed: 29
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
 	Health:
 		HP: 22500
 	Armor:
@@ -10396,7 +10998,7 @@ TSAPACHECABAL:
 		Range: 7c0
 		Type: GroundPosition
 	Armament@PRIMARY:
-		Weapon: TSHarpyClaw
+		Weapon: TSHunterKillerLasers
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 	AttackAircraft:
@@ -10405,11 +11007,9 @@ TSAPACHECABAL:
 		Voice: Attack
 		PauseOnCondition: disabled
 		AttackType: Hover
-	-WithShadow:
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1536, 1536
-	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSScrin
 	AmmoPool:
@@ -10420,26 +11020,27 @@ TSAPACHECABAL:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSAPACHE.Husk
-	WithIdleOverlay@ROTORAIR:
-		Offset: 42,0,300
-		Sequence: rotor
-		RequiresCondition: airborne
-		PauseOnCondition: disabled
-	WithIdleOverlay@ROTORGROUND:
-		Offset: 42,0,300
-		Sequence: slow-rotor
-		RequiresCondition: !airborne
-		PauseOnCondition: disabled
-	RenderVoxels:
-		Scale: 15
-		Image: tsapache
+		Actor: TSAPACHECABAL.Husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	RenderSprites:
-		Image: tsapache
+		Image: tsapachecabal
+		PlayerPalette: player_rgba
+
+TSAPACHECABAL.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Harpy
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: tsapachecabal
 
 TSAPACHE.Husk:
 	Inherits: ^HelicopterHusk
