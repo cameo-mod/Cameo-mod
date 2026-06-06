@@ -12827,7 +12827,6 @@ ra2_soviets_upgrade_heavyarmorplatings:
 	Tooltip:
 		Name: Heavy Armor Platings
 	Buildable:
-		Queue: Research
 		Description: All Soviet Vehicles and Aircraft have 25% more Damage Resistance but move 10% slower.
 		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
@@ -12853,7 +12852,6 @@ ra2_soviets_upgrade_reactivearmor:
 	Tooltip:
 		Name: Reactive Armor
 	Buildable:
-		Queue: Research
 		Description: Tanks gain gain 50% Damage Resistance to Area of Effect weapons and 10% Damage Resistance against everything else but move 5% slower.
 		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
@@ -12893,7 +12891,6 @@ ra2_soviets_upgrade_tesladischargearmor:
 	Tooltip:
 		Name: Tesla Discharge Armor
 	Buildable:
-		Queue: Research
 		Description: Causes Armor to slowly charge up once enemies are nearby. When fully charged Tesla Arcs discharge upon taking damage. Gives 15% more Damage Resistance. While Tesla Armor is charging up Speed is reduced by 15% but increased by 15% if out of combat.
 		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
@@ -12946,7 +12943,6 @@ ra2_soviets_upgrade_fireshells:
 	Tooltip:
 		Name: Fire Munitions
 	Buildable:
-		Queue: Research
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons spread fire and deal 25% more damage.
 		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
@@ -12966,7 +12962,6 @@ ra2_soviets_upgrade_radiationshells:
 	Tooltip:
 		Name: Nuclear Munitions
 	Buildable:
-		Queue: Research
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons leave radiation and deal 25% more damage.
 		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
@@ -12989,7 +12984,6 @@ ra2_soviets_upgrade_teslashells:
 	Tooltip:
 		Name: Tesla Munitions
 	Buildable:
-		Queue: Research
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons zap nearby targets on impact and deal 25% more damage.
 		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
@@ -13486,7 +13480,6 @@ ra2_allies_upgrade_compositearmorplating:
 	Tooltip:
 		Name: Composite Armor Plating
 	Buildable:
-		Queue: Research
 		Description: All Allied Vehicles and Aircraft take 20% less damage.
 		Prerequisites: ~ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
@@ -13509,7 +13502,6 @@ ra2_allies_upgrade_reflectivearmorplating:
 	Tooltip:
 		Name: Reflective Armor Plating
 	Buildable:
-		Queue: Research
 		Description: Tanks gain gain 50% Damage Resistance to Energy weapons and take 5% less damage overall.
 		Prerequisites: ~ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
@@ -13540,7 +13532,6 @@ ra2_allies_upgrade_ionpulseplating:
 	Tooltip:
 		Name: Chromium Ion Pulse Plating
 	Buildable:
-		Queue: Research
 		Description: Causes Ion Discharges everytime a Vehicle takes damage with a 5 second cooldown. Gives 10% more Damage Resistance. Ion Discharges mark enemy units in a small radius for additional damage.
 		Prerequisites: ~ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
@@ -14118,7 +14109,6 @@ ra2_yuri_upgrade_lashercannon:
 	Tooltip:
 		Name: Lasher HE Cannon
 	Buildable:
-		Queue: Research
 		Description: Increases Lasher Cannon Firepower by 100%.
 		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
@@ -14131,7 +14121,6 @@ ra2_yuri_upgrade_lashertoxic:
 	Tooltip:
 		Name: Lasher Toxic Gas Shells
 	Buildable:
-		Queue: Research
 		Description: Replaces the Lasher Cannon with a Toxic Gas Mortar.
 		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
@@ -14144,7 +14133,6 @@ ra2_yuri_upgrade_lasherlaser:
 	Tooltip:
 		Name: Lasher Laser Cannon
 	Buildable:
-		Queue: Research
 		Description: Replaces the Lasher Cannon with a powerful Laser Cannon.
 		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
@@ -14157,7 +14145,6 @@ ra2_yuri_upgrade_scraparmor:
 	Tooltip:
 		Name: Scrap Vehicle Armor
 	Buildable:
-		Queue: Research
 		Description: Yuri Vehicles gain 15% more Damage Resistance and Speed.
 		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
@@ -14183,7 +14170,6 @@ ra2_yuri_upgrade_chaosgasemitters:
 	Tooltip:
 		Name: Chaos Gas Emitters
 	Buildable:
-		Queue: Research
 		Description: Yuri Vehicles periodically emit Chaos Gas in a small radius after taking damage. Increases Damage Resistance and Speed by 5% and doubles if enemies are nearby.
 		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
@@ -14239,7 +14225,6 @@ ra2_yuri_upgrade_psionicshields:
 	Tooltip:
 		Name: Psionic Vehicle Shields
 	Buildable:
-		Queue: Research
 		Description: Yuri vehicles charge with psionic shields when enemies are nearby. Psionic shields are also provided to allied units in a small radius. After taking damage the shield quickly charges up.
 		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
