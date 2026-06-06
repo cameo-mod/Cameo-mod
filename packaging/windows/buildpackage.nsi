@@ -105,6 +105,9 @@ Section "Game" GAME
 	File "${SRCDIR}\COPYING"
 	File /r "${SRCDIR}\mods"
 
+	; Prefer the dedicated GPU on hybrid-graphics systems.
+	WriteRegStr HKCU "Software\Microsoft\DirectX\UserGpuPreferences" "$INSTDIR\${PACKAGING_WINDOWS_LAUNCHER_NAME}.exe" "GpuPreference=2;"
+
 	!insertmacro MUI_STARTMENU_WRITE_BEGIN Application
 		CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
 		CreateShortCut "$SMPROGRAMS\$StartMenuFolder\${PACKAGING_DISPLAY_NAME}.lnk" "$OUTDIR\${PACKAGING_WINDOWS_LAUNCHER_NAME}.exe" "" \
@@ -179,6 +182,7 @@ Function ${UN}Clean
 
 	DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PACKAGING_WINDOWS_REGISTRY_KEY}"
 	DeleteRegKey HKLM "Software\Classes\openra-${MOD_ID}-${TAG}"
+	DeleteRegValue HKCU "Software\Microsoft\DirectX\UserGpuPreferences" "$INSTDIR\${PACKAGING_WINDOWS_LAUNCHER_NAME}.exe"
 
 	!ifdef USE_DISCORDID
 		DeleteRegKey HKLM "Software\Classes\discord-${USE_DISCORDID}"
