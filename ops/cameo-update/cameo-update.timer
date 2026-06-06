@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodically update Cameo-mod dedicated server
+
+[Timer]
+OnCalendar=hourly
+RandomizedDelaySec=5min
+Persistent=true
+
+[Install]
+WantedBy=timers.target
