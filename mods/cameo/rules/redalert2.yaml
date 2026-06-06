@@ -4444,7 +4444,8 @@ ra2shk:
 
 ra2shk.bot:
 	Inherits: ra2shk
-	-Buildable:
+	Buildable:
+		-Queue:
 	-MapEditorData:
 	-UpdatesPlayerStatistics:
 	Tooltip:
@@ -8057,6 +8058,8 @@ ra2asw:
 		Cost: 1000
 	Tooltip:
 		Name: Osprey
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 240
 		InitialFacing: 768
@@ -8218,6 +8221,8 @@ ra2hornet:
 		Cost: 1250
 	Tooltip:
 		Name: Hornet
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 250
 		InitialFacing: 768
@@ -8824,6 +8829,8 @@ yrbpln:
 	Selectable:
 	Tooltip:
 		Name: MiG Bomber
+	Buildable:
+		Description: template-airstrike-slave.description
 	Valued:
 		Cost: 5000
 	Health:

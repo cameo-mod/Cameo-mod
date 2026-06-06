@@ -419,7 +419,7 @@ namespace OpenRA.Mods.CA.Traits
 			var newUnits = World.ActorsHavingTrait<IPositionable>()
 				.Where(a => a.Owner == Player &&
 					!Info.ExcludeFromSquadsTypes.Contains(a.Info.Name) &&
-					!activeUnits.Contains(a));
+					!activeUnits.Contains(a) && a.IsInWorld);
 
 			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
 			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) >= Info.JoinGuerrilla));

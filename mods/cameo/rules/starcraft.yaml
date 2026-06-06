@@ -5614,6 +5614,8 @@ SCWRAITHDRONE:
 	Inherits@weapon: ^TerranShipArmorUpgrades
 	Tooltip:
 		Name: Wraith Drone
+	Buildable:
+		Description: template-carrier-slave.description
 	Valued:
 		Cost: 1000
 	Hovers:
@@ -7628,6 +7630,8 @@ SCINTERCEPTOR:
 	Inherits@speed: ^GraviticUpgrade
 	Tooltip:
 		Name: Interceptor
+	Buildable:
+		Description: template-carrier-slave.description
 	Valued:
 		Cost: 500
 	Aircraft:
@@ -10487,7 +10491,9 @@ SCSCOURGEDRONE:
 		Name: Scourge Drone
 	Power:
 		Amount: 0
-	-Buildable:
+	Buildable:
+		-Queue:
+		Description: template-carrier-slave.description
 	Aircraft:
 		VTOL: false
 		Repulsable: false

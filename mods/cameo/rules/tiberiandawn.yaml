@@ -406,6 +406,7 @@
 	Cloak:
 		CloakStyle: Palette
 		CloakedPalette: cloak_stealth
+		IsPlayerPalette: true
 		EffectImage: stealthfade
 		EffectPalette: greenspark
 		CloakEffectSequence: reversed
@@ -3958,6 +3959,8 @@ A10Carrier:
 		Cost: 2000
 	Tooltip:
 		Name: A10 Bomber
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 120
 		InitialFacing: 768
