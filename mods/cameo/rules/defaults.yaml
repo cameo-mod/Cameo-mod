@@ -7187,6 +7187,7 @@ CPQDEBUGDUMMY:
 		ValidRelationships: Ally, Enemy, Neutral
 	Transforms:
 		PauseOnCondition: disabled || terrordroned
+		TransformTextNotification: New base hub has been deployed.
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
 	Tooltip:

@@ -26,7 +26,7 @@ harv:
 		Filename: harv.shp
 	idle:
 		Facings: 32
-		InterpolatedFacings: 64
+		UseClassicFacings: True
 	harvest:
 		Start: 32
 		Length: 4
@@ -46,7 +46,7 @@ harv.destroyed:
 	idle:
 		Filename: harv.shp
 		Facings: 32
-		InterpolatedFacings: 64
+		UseClassicFacings: True
 		ZOffset: -512
 
 bggy:

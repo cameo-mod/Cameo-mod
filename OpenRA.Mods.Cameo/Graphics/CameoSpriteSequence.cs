@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Graphics;
+using OpenRA.Mods.Cnc.Graphics;
 using OpenRA.Mods.Common.Graphics;
 using OpenRA.Mods.D2k.SpriteLoaders;
 using OpenRA.Primitives;
@@ -29,7 +30,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 	}
 
 	[Desc("A sprite sequence that can have tileset-specific variants.")]
-	public class CameoSpriteSequence : DefaultSpriteSequence
+	public class CameoSpriteSequence : ClassicSpriteSequence
 	{
 		[Desc("Sets the player remap reference colour.")]
 		static readonly SpriteSequenceField<Color> Remap = new(nameof(Remap), default);

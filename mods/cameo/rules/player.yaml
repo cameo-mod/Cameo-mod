@@ -64,6 +64,7 @@ Player:
 	ConquestVictoryConditions:
 	PowerManager:
 		SpeechNotification: LowPower
+		TextNotification: The base is low on power.
 		AdviceInterval: 30000
 	AutoDeployManager:
 	AllyRepair:
@@ -324,6 +325,7 @@ Player:
 		Group: Building
 		LowPowerModifier: 200
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: Construction complete.
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
 		QueuedAudio: Building
@@ -338,6 +340,7 @@ Player:
 		Group: Defence
 		LowPowerModifier: 300
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: Defense construction complete.
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
 		QueuedAudio: Building
@@ -437,7 +440,7 @@ Player:
 		SpeedUp: True
 		LowPowerModifier: 400
 		ReadyAudio: NewOptions
-		ReadyTextNotification: New technology is now available.
+		ReadyTextNotification: New upgrade is now available.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
