@@ -3712,6 +3712,8 @@ aa_kami:
 		Cost: 800
 	Tooltip:
 		Name: Kamikaze
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 160
 		InitialFacing: 768
@@ -3805,6 +3807,8 @@ aa_kami.asdf:
 		Cost: 500
 	Tooltip:
 		Name: Airstrike Kamikaze
+	Buildable:
+		Description: template-airstrike-slave.description
 	-CarrierSlave:
 	-AutoTarget:
 	-AmmoPool:
@@ -9110,6 +9114,8 @@ steel_qoil:
 	Inherits@Template: ^FighterTemplate
 	Selectable:
 	#Interactable:
+	Buildable:
+		Description: template-drone-slave.description
 	RevealsShroud:
 		Range: 5000
 		Type: CenterPosition
@@ -11442,6 +11448,8 @@ steel_cruiser_f:
 		Cost: 500
 	Tooltip:
 		Name: Cruiser Fighter
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 250
 		InitialFacing: 768
@@ -12171,6 +12179,8 @@ nax_interceptor:
 		Cost: 1000
 	Tooltip:
 		Name: Interceptor
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 3000
 		InitialFacing: 768
@@ -12898,6 +12908,8 @@ nax_drone:
 		Cost: 750
 	Tooltip:
 		Name: Drone
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 150
 		InitialFacing: 768
