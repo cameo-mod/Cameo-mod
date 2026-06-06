@@ -402,6 +402,16 @@
 	ActorStatValues:
 		Upgrades: up_cyberneticmodifications
 
+^TiberiumCloakAnimation:
+	Cloak:
+		CloakStyle: Palette
+		CloakedPalette: cloak_stealth
+		EffectImage: stealthfade
+		EffectPalette: greenspark
+		CloakEffectSequence: reversed
+		UncloakEffectSequence: idle
+		EffectTracksActor: True
+
 ^E1:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
@@ -1932,6 +1942,7 @@ STNK:
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
@@ -4745,6 +4756,7 @@ chemstnk:
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
@@ -5226,6 +5238,7 @@ tsstealthsoldier:
 tanodharv:
 	Inherits: ^TDHARV
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Tooltip:
@@ -5264,6 +5277,7 @@ nodspecter:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@ImprovedArtilleries: ^ImprovedArtilleries
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics

@@ -8115,6 +8115,7 @@ siege_tank_ixian:
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@SHADOWS: ^Shadows
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@Barrel: ^D2K_ReinforcedBarrel
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
@@ -9119,6 +9120,7 @@ rocket_raider_ixian:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
@@ -9215,6 +9217,7 @@ shock_raider:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -12973,6 +12976,7 @@ storm_raider:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -13134,6 +13138,7 @@ heavy_rocket_raider_ixian:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir

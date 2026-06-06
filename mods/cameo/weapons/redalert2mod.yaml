@@ -8929,6 +8929,7 @@ Future_Cryocopter_Cryo:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
+		-HitAnim:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -8997,6 +8998,13 @@ Future_Cryocopter_Cryo:
 		ImpactSounds: phohit00.wav
 		ValidTargets: Ground, Water, Air
 		Volume: 0.25
+	Warhead@EffectAir: CreateEffect
+		ExplosionPalette: effect
+		Explosions: cryo_blast
+		ImpactSounds: phohit00.wav
+		Volume: 0.25
+	-Warhead@Smudge:
+	-Warhead@RA2Scorch:
 
 Future_Turret_Cryo:
 	Inherits: Future_Cryocopter_Cryo

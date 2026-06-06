@@ -3425,6 +3425,7 @@ tsntstlh:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@SHAPE: ^3x2Shape
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
 	Valued:
 		Cost: 2500
@@ -7527,6 +7528,7 @@ TSSTNK:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
 	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
 	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements

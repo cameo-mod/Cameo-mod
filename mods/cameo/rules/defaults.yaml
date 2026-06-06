@@ -652,6 +652,13 @@
 		CloakDelay: 90
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
+		CloakStyle: Palette
+		CloakedPalette: cloak_stealth
+		EffectImage: stealthfade
+		EffectPalette: greenspark
+		CloakEffectSequence: reversed
+		UncloakEffectSequence: idle
+		EffectTracksActor: True
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		RequiresCondition: cloak-crate-collected
 	ExternalCondition@CLOAK:
@@ -6592,6 +6599,8 @@ CPQDEBUGDUMMY:
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		RequiresCondition: tscloak
 		IsPlayerPalette: true
+		# CloakStyle: Palette
+		# CloakedPalette: cloak_stealth
 		EffectImage: stealthfade
 		EffectPalette: greenspark
 		CloakEffectSequence: reversed
@@ -9010,13 +9019,7 @@ CPQDEBUGDUMMY:
 		CloakDelay: 75
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
-		CloakStyle: Palette
-		CloakedPalette: cloak_stealth
-		EffectImage: stealthfade
-		EffectPalette: greenspark
-		CloakEffectSequence: reversed
-		UncloakEffectSequence: idle
-		EffectTracksActor: True
+		CloakStyle: Alpha
 	WithColoredSelectionBox:
 		ColorSource: Player
 		ValidRelationships: Ally
@@ -9036,6 +9039,7 @@ CPQDEBUGDUMMY:
 	Inherits: ^CloakedVehicle
 	Cloak:
 		DetectionTypes: AirCloak
+
 ####################################################################################################
 #		Civilian Cars
 ####################################################################################################
