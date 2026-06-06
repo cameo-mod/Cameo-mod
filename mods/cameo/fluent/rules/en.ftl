@@ -2433,7 +2433,13 @@ template-carrier-slave =
    .description = Deployed by an aircraft carrier.
 
 template-airstrike-slave =
-   .description = Summoned to conduct an airstrike.
+   .description = Called in to conduct an airstrike.
+
+template-drone-slave =
+   .description = Deployed as an escort drone.
+
+template-mob-slave =
+   .description = Member of a mob or squad unit.
 
 promotions =
    .lobby-label = Promotion Points per Rank

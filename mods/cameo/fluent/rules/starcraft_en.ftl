@@ -585,6 +585,9 @@ actor-upidol =
 actor-scdrone =
    .description = Collects resources.
 
+actor-sc_zerg_larva =
+   .description = Spawns Zerg units.
+
 actor-scoverlord =
    .description = Provides supply and stores resources
         Can transport 8 units
