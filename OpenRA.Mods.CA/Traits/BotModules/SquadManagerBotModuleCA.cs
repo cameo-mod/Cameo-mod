@@ -132,10 +132,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Locomotor used by pathfinding leader for squads")]
 		public readonly HashSet<string> SuggestedNavyLeaderLocomotor = new();
 
-		[ActorReference]
-		[Desc("Unit types assigned to the harassment squad. These units will take indirect flanking routes to attack the enemy.")]
-		public readonly HashSet<string> HarasserTypes = new();
-
 		[Desc("Percent chance that a regular assault squad will take an indirect (flanking) route instead of the most direct path. 0 to disable.")]
 		public readonly int IndirectRouteChance = 0;
 
@@ -425,14 +421,14 @@ namespace OpenRA.Mods.CA.Traits
 					!Info.ExcludeFromSquadsTypes.Contains(a.Info.Name) &&
 					!activeUnits.Contains(a));
 
-			var guerrillaForce = GetSquadOfType(SquadCAType.Assault);
+			var guerrillaForce = GetSquadOfType(SquadCAType.Guerrilla);
 			var guerrillaUpdate = guerrillaForce == null || (guerrillaForce.Units.Count <= Info.MaxGuerrillaSize && (World.LocalRandom.Next(100) >= Info.JoinGuerrilla));
 
 			foreach (var a in newUnits)
 			{
 				if (Info.GuerrillaTypes.Contains(a.Info.Name) && guerrillaUpdate)
 				{
-					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Assault);
+					guerrillaForce ??= RegisterNewSquad(bot, SquadCAType.Guerrilla);
 
 					guerrillaForce.Units.Add(new UnitWposWrapper(a));
 					AIUtils.BotDebug("AI ({0}): Added {1} to squad {2}", Player.ClientIndex, a, guerrillaForce.Type);
@@ -480,12 +476,6 @@ namespace OpenRA.Mods.CA.Traits
 						var newNavalSquad = RegisterNewSquad(bot, SquadCAType.Naval);
 						newNavalSquad.Units.Add(new UnitWposWrapper(a));
 					}
-				}
-				else if (Info.HarasserTypes.Count > 0 && Info.HarasserTypes.Contains(a.Info.Name))
-				{
-					var harassSquad = GetSquadOfType(SquadCAType.Harass) ?? RegisterNewSquad(bot, SquadCAType.Harass);
-					harassSquad.Units.Add(new UnitWposWrapper(a));
-					AIUtils.BotDebug("AI ({0}): Added {1} to harass squad", Player.ClientIndex, a);
 				}
 				else
 					unitsHangingAroundTheBase.Add(new UnitWposWrapper(a));
