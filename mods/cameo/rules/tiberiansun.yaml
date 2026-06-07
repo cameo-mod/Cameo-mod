@@ -743,17 +743,61 @@ tsprocnod:
 		Image: tsprocnod
 
 tsproccabal:
-	Inherits: tsprocgdi
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: CABAL Refinery
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~tsgtcnstcabal, tsntpowrcabal
 		Queue: Building, RABuilding
+		Description: Processes raw Tiberium\ninto useable resources
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 6c0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	CustomSellValue:
+		Value: 500
 	FreeActor:
 		Actor: TSHARVCABAL
-		SpawnOffset: 2,2
+		SpawnOffset: 1,2
 		Facing: 256
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
 	RenderSprites:
-		Image: tsprocnod
+		Image: tsproccabal
+		PlayerPalette: player_rgba
+
 
 tsntwast:
 	Inherits: ^BaseBuilding
@@ -1622,7 +1666,7 @@ tsnthpad:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSNTHPAD2:
+tsnthpad2:
 	Inherits: tsnthpad
 	Tooltip:
 		Name: CABAL Helipad
@@ -3989,31 +4033,6 @@ TSENGINEER2:
 		PlayerPalette: playerra2
 		Image: altengi
 
-TSENGINEERMUTANT:
-	Inherits: TSENGINEER
-	Inherits@MC: ^MCImmune
-	Buildable:
-		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile2
-	Voiced:
-		VoiceSet: TSInfantry
-	-TemporaryOwnerManager:
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tsengineer
-
-TSENGINEECABAL:
-	Inherits: TSENGINEER
-	Inherits@MC: ^MCImmune
-	Buildable:
-		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsnthand2
-	Voiced:
-		VoiceSet: TSCyborg
-	-TemporaryOwnerManager:
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: altengi
 
 TSE2:
 	Inherits: ^Soldier
@@ -4422,14 +4441,6 @@ TSE3:
 	ActorStatValues:
 		Upgrades: up_tiberiumcoremissiles
 
-tse3.mutant:
-	Inherits: TSE3
-	Buildable:
-		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile2
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tse3mut
 
 elitcadre:
 	Inherits: ^Soldier
@@ -4611,6 +4622,299 @@ TSSHOTGUNCOM:
 	ActorStatValues:
 		Upgrades: up_infiltrationkit
 
+
+TSCHAMSPY:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^TSInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 90
+		Prerequisites: ~tsnthand, tsntradr
+		Description: Cloaked spy that can infiltrate structures.
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Chameleon Spy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	-Guard:
+	Health:
+		HP: 30000
+	Mobile:
+		Speed: 90
+		Voice: Move
+	RevealsShroud:
+		Range: 8000
+	DetectCloaked:
+		Range: 4000
+	RenderDetectionCircle:
+	Armament@PRIMARY:
+		Weapon: ChamBlade
+	Passenger:
+		CustomPipType: blue
+		Voice: Move
+	# Cloak:
+	# 	InitialDelay: 60
+	# 	CloakDelay: 60
+	# 	UncloakOn: Unload
+	# 	PauseOnCondition: disabled || base-reveal
+	# 	IsPlayerPalette: true
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+		RequiresCondition: up_infiltrationkit
+	IgnoresDisguise:
+	AttackMove:
+		Voice: Move
+	Voiced:
+		VoiceSet: TSSpy
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: up_infiltrationkit
+
+TSMHIJACK:
+	Inherits: ^Soldier
+	Inherits@EXT: ^ExternalConditions
+	Inherits@anim: ^TSInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Mutant Hijacker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~tsnthand, tsntweap, tsntradr, disabled
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: Hijacks vehicles.
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 6000
+	Passenger:
+		CustomPipType: blue
+	Mirage:
+		RequiresCondition: !disabled
+		InitialDelay: 100
+		RevealDelay: 20
+		RevealOn: Attack, Infiltrate, Damage
+		MirageCondition: disguise
+		DefaultTargetTypes: t08, t18, t10, t03, t02
+	CaptureManager:
+	Captures@CAPTURES:
+		CaptureTypes: vehicle
+		PlayerExperience: 50
+		ConsumedByCapture: true
+	Crushable:
+		WarnProbability: 95
+	Cloak:
+		InitialDelay: 250
+		CloakDelay: 120
+		UncloakOn: Attack, Unload, Infiltrate, Demolish, Move
+		DetectionTypes: Cloak, Thief
+		PauseOnCondition: cloak-force-disabled || base-reveal
+		IsPlayerPalette: true
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Voiced:
+		VoiceSet: TSHijacker
+	-DamagedByTerrain:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+
+TSRAILCOM:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	# Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Railgun Commando
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~tsgtpile, tsgttech
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Weapon: TSCommandoRailgun
+		LocalOffset: 256,43,256
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSCommandoRailgunRail
+		LocalOffset: 256,43,256
+		RequiresCondition: up_railgunweaponry
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSCommandoRailgun
+		RequiresCondition: !up_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSCommandoRailgunRail
+		RequiresCondition: up_railgunweaponry
+	-DamagedByTerrain:
+	Selectable:
+		Class: tsghost
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: up_seretraining, up_railgunweaponry
+
+
+#The following are used for the mutant wildlife spawner superweapon
+
+^MutSWCreature:
+	RejectsOrders:
+	AutoTarget:
+		InitialStance: AttackAnything
+	KillsSelf:
+		Delay: 600
+		RemoveInstead: true
+	PeriodicExplosion@disappear:
+		Weapon: TunnelDisappear
+		InitialDelay: 595
+	GivesExperience:
+		PlayerExperienceModifier: 0
+
+TSDOGGIEW:
+	Inherits: ^TSInfantry
+	Inherits@2: ^MutSWCreature
+	RenderSprites:
+		Image: tsdoggie
+	AttackWander:
+
+TSMUTANTW:
+	Inherits: TSMUTANT
+	Buildable:
+		Prerequisites: ~TSMUTANTW
+	RenderSprites:
+		Image: tsmutant
+	AttackWander:
+
+tsfloater:
+	Inherits: ^Viceroid
+	Inherits@2: ^MutSWCreature
+	Tooltip:
+		Name: Floater
+	AttackWander:
+	Mobile:
+		Voice: Move
+		Speed: 71
+		Locomotor: hover
+	Armor:
+		Type: None
+	Armament:
+		Weapon: PortaTesla
+		LocalOffset: 384,0,0
+		-MuzzleSequence:
+	-WithMuzzleOverlay:
+
+# tsvissml:
+# 	Inherits: ^Viceroid
+# 	Inherits@2: ^MutSWCreature
+# 	Tooltip:
+# 		Name: Baby Visceroid
+# 	Health:
+# 		HP: 15000
+# 	Valued:
+# 		Cost: 500
+# 	Armor:
+# 		Type: None
+# 	AttackWander:
+# 	ScaredyCat:
+# 	Mobile:
+# 		Speed: 120
+# 	Armament:
+# 		Weapon: ZClaw1
+# 		LocalOffset: 384,0,0
+# 		-MuzzleSequence: muzzle
+# 	-WithMuzzleOverlay:
+
+tsvislrg:
+	Inherits: ^Viceroid
+	Inherits@2: ^MutSWCreature
+	Tooltip:
+		Name: Big Visceroid
+	Armor:
+		Type: None
+	AttackWander:
+	Armament:
+		Weapon: ZClaw3
+		LocalOffset: 384,0,0
+		-MuzzleSequence: muzzle
+	-WithMuzzleOverlay:
+	SpawnActorOnDeath@Division1:
+		Actor: tsvissml
+		OwnerType: Victim
+	SpawnActorOnDeath@Division2:
+		Actor: tsvissml
+		OwnerType: Victim
+
+
+#######################################
+# TS Infantry CABAL
+#######################################
+
+TSENGINEECABAL:
+	Inherits: TSENGINEER
+	Inherits@MC: ^MCImmune
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsnthand2
+	Voiced:
+		VoiceSet: TSCyborg
+	-TemporaryOwnerManager:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: altengi
+
 TSCYBORG:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -4623,6 +4927,7 @@ TSCYBORG:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -4711,6 +5016,7 @@ tscyborgb:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -4735,6 +5041,9 @@ tscyborgb:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSVulcan3
+	Armament@GRENADE:
+		Weapon: TSGrenade
+		RequiresCondition: cabaldarkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -4800,6 +5109,7 @@ tsdevout:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -4824,6 +5134,12 @@ tsdevout:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
+		LocalOffset: 0,-20,90, 0,20,90
+		RequiresCondition: !cabaldarkarmament
+	Armament@Upgraded:
+		Weapon: TSDevoutChaingunsUpgraded
+		LocalOffset: 0,-20,90, 0,20,90
+		RequiresCondition: cabaldarkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -4889,6 +5205,7 @@ tsascended:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -4913,7 +5230,12 @@ tsascended:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSTwinBazooka
-		LocalOffset: 0,0,90
+		LocalOffset: 0,20,90, 0,-20,90
+		RequiresCondition: !cabaldarkarmament
+	Armament@Upgraded:
+		Weapon: TSQuadBazooka
+		LocalOffset: 0,-20,90, 0,20,90
+		RequiresCondition: cabaldarkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -5070,135 +5392,6 @@ tshacker:
 		Range: 9500
 		Type: mindcontrol
 		Color: 663399b0
-
-TSCHAMSPY:
-	Inherits: ^Soldier
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@anim: ^TSInfantry
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
-	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@cloak: ^CloakedVehicle
-	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@InfiltrationKit: ^InfiltrationKit
-	Buildable:
-		Queue: Infantry, RAInfantry
-		BuildPaletteOrder: 90
-		Prerequisites: ~tsnthand, tsntradr
-		Description: Cloaked spy that can infiltrate structures.
-	Valued:
-		Cost: 500
-	Tooltip:
-		Name: Chameleon Spy
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	-Guard:
-	Health:
-		HP: 30000
-	Mobile:
-		Speed: 90
-		Voice: Move
-	RevealsShroud:
-		Range: 8000
-	DetectCloaked:
-		Range: 4000
-	RenderDetectionCircle:
-	Armament@PRIMARY:
-		Weapon: ChamBlade
-	Passenger:
-		CustomPipType: blue
-		Voice: Move
-	# Cloak:
-	# 	InitialDelay: 60
-	# 	CloakDelay: 60
-	# 	UncloakOn: Unload
-	# 	PauseOnCondition: disabled || base-reveal
-	# 	IsPlayerPalette: true
-	Infiltrates:
-		Types: SpyInfiltrate
-		Notification: BuildingInfiltrated
-		PlayerExperience: 50
-		RequiresCondition: up_infiltrationkit
-	IgnoresDisguise:
-	AttackMove:
-		Voice: Move
-	Voiced:
-		VoiceSet: TSSpy
-	RenderSprites:
-		PlayerPalette: playerra2
-	WithDeathAnimation:
-		DeathSequencePalette: ra2player
-		CrushedSequencePalette: ra2effect
-	ActorStatValues:
-		Upgrades: up_infiltrationkit
-
-TSMHIJACK:
-	Inherits: ^Soldier
-	Inherits@EXT: ^ExternalConditions
-	Inherits@anim: ^TSInfantry
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
-	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@tibheal: ^TibHealable
-	Valued:
-		Cost: 500
-	Tooltip:
-		Name: Mutant Hijacker
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildPaletteOrder: 100
-		Prerequisites: ~tsnthand, tsntweap, tsntradr, disabled
-		Queue: Infantry, RAInfantry
-		BuildLimit: 1
-		Description: Hijacks vehicles.
-	Mobile:
-		Speed: 71
-	Health:
-		HP: 6000
-	Passenger:
-		CustomPipType: blue
-	Mirage:
-		RequiresCondition: !disabled
-		InitialDelay: 100
-		RevealDelay: 20
-		RevealOn: Attack, Infiltrate, Damage
-		MirageCondition: disguise
-		DefaultTargetTypes: t08, t18, t10, t03, t02
-	CaptureManager:
-	Captures@CAPTURES:
-		CaptureTypes: vehicle
-		PlayerExperience: 50
-		ConsumedByCapture: true
-	Crushable:
-		WarnProbability: 95
-	Cloak:
-		InitialDelay: 250
-		CloakDelay: 120
-		UncloakOn: Attack, Unload, Infiltrate, Demolish, Move
-		DetectionTypes: Cloak, Thief
-		PauseOnCondition: cloak-force-disabled || base-reveal
-		IsPlayerPalette: true
-	GrantConditionOnDamageState@UNCLOAK:
-		Condition: cloak-force-disabled
-		ValidDamageStates: Critical
-	Voiced:
-		VoiceSet: TSHijacker
-	-DamagedByTerrain:
-	RenderSprites:
-		PlayerPalette: playerra2
-	WithDeathAnimation:
-		DeathSequencePalette: ra2player
-		CrushedSequencePalette: ra2effect
-
-TSMHIJACKMUTANT:
-	Inherits: TSMHIJACK
-	Buildable:
-		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile2, tsgtweapmutant, tsgtradrmutant
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tsmhijack
 
 TSREAPER:
 	Inherits: ^Walker
@@ -5394,6 +5587,42 @@ TSDissolver:
 	Voiced:
 		VoiceSet: TSCyborg
 
+#######################################
+# TS Infantry Forgotten
+#######################################
+TSENGINEERMUTANT:
+	Inherits: TSENGINEER
+	Inherits@MC: ^MCImmune
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile2
+	Voiced:
+		VoiceSet: TSInfantry
+	-TemporaryOwnerManager:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsengineer
+
+tse3.mutant:
+	Inherits: TSE3
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile2
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tse3mut
+
+
+
+TSMHIJACKMUTANT:
+	Inherits: TSMHIJACK
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile2, tsgtweapmutant, tsgtradrmutant
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsmhijack
+
 TSUMAGON:
 	Inherits: TSMUTANT
 	Inherits@Template: ^SniperInfantryTemplate
@@ -5505,69 +5734,6 @@ TSGHOST:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-
-TSRAILCOM:
-	Inherits: ^Soldier
-	Inherits@Template: ^HeroInfantryTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@COMMANDOSKULL: ^CommandoSkull
-	# Inherits@announce: ^AnnounceGlobal
-	Inherits@anim: ^TSInfantry
-	Inherits@vo: ^AttackFrontalVoice
-	Inherits@SERETraining: ^SERETraining
-	Inherits@RailgunWeaponry: ^RailgunWeaponry
-	Valued:
-		Cost: 5000
-	Tooltip:
-		Name: Railgun Commando
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildPaletteOrder: 90
-		Prerequisites: ~tsgtpile, tsgttech
-		Queue: Infantry, RAInfantry
-		BuildLimit: 1
-		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
-	Mobile:
-		Speed: 60
-	Health:
-		HP: 100000
-	ChangesHealth@SelfHealing:
-		Step: 100
-	Armament@PRIMARY:
-		Weapon: TSCommandoRailgun
-		LocalOffset: 256,43,256
-		RequiresCondition: !up_railgunweaponry
-	Armament@Upgrade:
-		Weapon: TSCommandoRailgunRail
-		LocalOffset: 256,43,256
-		RequiresCondition: up_railgunweaponry
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
-	Voiced:
-		VoiceSet: TSGhost
-	Armament@GARRISONED: ##########
-		Name: garrisoned
-		Weapon: TSCommandoRailgun
-		RequiresCondition: !up_railgunweaponry
-	Armament@UpgradeGARRISONED: ##########
-		Name: garrisoned
-		Weapon: TSCommandoRailgunRail
-		RequiresCondition: up_railgunweaponry
-	-DamagedByTerrain:
-	Selectable:
-		Class: tsghost
-	RenderSprites:
-		PlayerPalette: playerra2
-	WithDeathAnimation:
-		DeathSequencePalette: ra2player
-		CrushedSequencePalette: ra2effect
-	ActorStatValues:
-		Upgrades: up_seretraining, up_railgunweaponry
 
 TSGHOSTMUTANT:
 	Inherits: TSGHOST
@@ -6050,95 +6216,6 @@ tsdoggieblue:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-
-#The following are used for the mutant wildlife spawner superweapon
-
-^MutSWCreature:
-	RejectsOrders:
-	AutoTarget:
-		InitialStance: AttackAnything
-	KillsSelf:
-		Delay: 600
-		RemoveInstead: true
-	PeriodicExplosion@disappear:
-		Weapon: TunnelDisappear
-		InitialDelay: 595
-	GivesExperience:
-		PlayerExperienceModifier: 0
-
-TSDOGGIEW:
-	Inherits: ^TSInfantry
-	Inherits@2: ^MutSWCreature
-	RenderSprites:
-		Image: tsdoggie
-	AttackWander:
-
-TSMUTANTW:
-	Inherits: TSMUTANT
-	Buildable:
-		Prerequisites: ~TSMUTANTW
-	RenderSprites:
-		Image: tsmutant
-	AttackWander:
-
-tsfloater:
-	Inherits: ^Viceroid
-	Inherits@2: ^MutSWCreature
-	Tooltip:
-		Name: Floater
-	AttackWander:
-	Mobile:
-		Voice: Move
-		Speed: 71
-		Locomotor: hover
-	Armor:
-		Type: None
-	Armament:
-		Weapon: PortaTesla
-		LocalOffset: 384,0,0
-		-MuzzleSequence:
-	-WithMuzzleOverlay:
-
-# tsvissml:
-# 	Inherits: ^Viceroid
-# 	Inherits@2: ^MutSWCreature
-# 	Tooltip:
-# 		Name: Baby Visceroid
-# 	Health:
-# 		HP: 15000
-# 	Valued:
-# 		Cost: 500
-# 	Armor:
-# 		Type: None
-# 	AttackWander:
-# 	ScaredyCat:
-# 	Mobile:
-# 		Speed: 120
-# 	Armament:
-# 		Weapon: ZClaw1
-# 		LocalOffset: 384,0,0
-# 		-MuzzleSequence: muzzle
-# 	-WithMuzzleOverlay:
-
-tsvislrg:
-	Inherits: ^Viceroid
-	Inherits@2: ^MutSWCreature
-	Tooltip:
-		Name: Big Visceroid
-	Armor:
-		Type: None
-	AttackWander:
-	Armament:
-		Weapon: ZClaw3
-		LocalOffset: 384,0,0
-		-MuzzleSequence: muzzle
-	-WithMuzzleOverlay:
-	SpawnActorOnDeath@Division1:
-		Actor: tsvissml
-		OwnerType: Victim
-	SpawnActorOnDeath@Division2:
-		Actor: tsvissml
-		OwnerType: Victim
 
 #######################################
 # TS Infantry End
@@ -9490,6 +9567,7 @@ TSLASSPID:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -9544,6 +9622,7 @@ tscabalcobra:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -9599,6 +9678,8 @@ tsspddrone:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@CATALYST: ^cabaltibcatalysticon
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -9624,6 +9705,14 @@ tsspddrone:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
+		RequiresCondition: !cabaltibcatalysticon
+	Armament@UPGRADED:
+		Weapon: TS90mm_bluenuke
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: cabaltibcatalysticon
 	Armor:
 		Type: Heavy
 	WithMuzzleOverlay:
@@ -9654,6 +9743,8 @@ tscheavyspider:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@BACKUP: ^cabalbackupsystemicon
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -9704,6 +9795,59 @@ tscheavyspider:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+ 	SpawnActorOnDeath@backup:
+ 		Actor: tscheavyspider_backup
+		RequiresCondition: cabalbackupsystemicon
+
+tscheavyspider_backup:
+	Inherits: ^Vehicle
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Heavy Spider (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 160000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tscheavyspider
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1200
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: tscheavyspider
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+
+
 
 TSART2CABAL:
 	Inherits: ^Vehicle
@@ -9714,8 +9858,11 @@ TSART2CABAL:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@CATALYST: ^cabaltibcatalysticon
+	Inherits@BACKUP: ^cabalbackupsystemicon
 	Valued:
-		Cost: 1500
+		Cost: 1600
 	Tooltip:
 		Name: Artillery Spider
 	Buildable:
@@ -9728,7 +9875,7 @@ TSART2CABAL:
 		Speed: 60
 		TurnSpeed: 24
 	Health:
-		HP: 100000
+		HP: 200000
 	Repairable:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
@@ -9739,9 +9886,17 @@ TSART2CABAL:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
+		RequiresCondition: !cabaltibcatalysticon
+	Armament@Upgraded:
+		Weapon: TS155mm_bluenuke
+		LocalOffset: -125,1,250, -125,1,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: cabaltibcatalysticon
 	WithMuzzleOverlay:
 	AttackFollowFrontal:
-		FacingTolerance: 512
+		FacingTolerance: 45
 	SelectionDecorations:
 	Selectable:
 	Inherits@EXT: ^ExternalConditions ##########
@@ -9759,6 +9914,53 @@ TSART2CABAL:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+ 	SpawnActorOnDeath@backup:
+ 		Actor: tsart2cabal_backup
+		RequiresCondition: cabalbackupsystemicon
+
+tsart2cabal_backup:
+	Inherits: ^Vehicle
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Artillery Spider (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: tracked
+		Speed: 0
+		TurnSpeed: 0
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tsartspid
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1600
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: tsart2cabal
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
 
 TSTTNKCABAL:
 	Inherits: ^Tank
@@ -9769,6 +9971,9 @@ TSTTNKCABAL:
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^EliteDetector
 	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@CATALYST: ^cabaltibcatalysticon
+	Inherits@BACKUP: ^cabalbackupsystemicon
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -9803,6 +10008,14 @@ TSTTNKCABAL:
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
+		RequiresCondition: !cabaltibcatalysticon
+	Armament@Upgraded:
+		Weapon: TS120mm_bluenuke
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: cabaltibcatalysticon
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -9829,6 +10042,65 @@ TSTTNKCABAL:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: tstnkspid
+ 	SpawnActorOnDeath@backup:
+ 		Actor: tsttnkcabal_backup
+		RequiresCondition: cabalbackupsystemicon
+
+tsttnkcabal_backup:
+	Inherits: ^Tank
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tarantula
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsntweapcabal, ~disabled
+		Queue: Disabled
+		BuildDurationModifier: 100
+		BuildDuration: 375
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 0
+		TurnSpeed: 0
+	Health:
+		HP: 500000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	BodyOrientation:
+		QuantizedFacings: 32
+		UseClassicPerspectiveFudge: False
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderVoxels:
+		Scale: 10
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tstnkspid
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1500
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: tsttnkcabal
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
 
 TSSAPCCABAL:
 	Inherits: TSSAPC
@@ -9943,6 +10215,7 @@ TSDEFENDER:
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@ND: ^NotDevourable
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Valued:
 		Cost: 10000
 	UpdatesPlayerStatistics:
@@ -11804,6 +12077,7 @@ TSKODK.Husk:
 		Explosion: KirovExplode
 
 
+
 ###############################################
 # TS Upgrades
 ###############################################
@@ -12321,6 +12595,155 @@ up_willofkane:
 	ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
 		Actor: team_upgrade.up_willofkane
+
+
+################## CABAL #########################
+
+############ Radar
+cabalmobilitymatrix:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mobility Matrix
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Walkers moves 25% faster, and ads 10% of armor.
+		Prerequisites: ~tsntradrcabal, !cabalmobilitymatrix
+	RenderSprites:
+		Image: cabalmobilitymatrix
+	ProvidesPrerequisite:
+
+^cabalmobilitymatrix:
+	GrantConditionOnPrerequisite@cabalmobilitymatrix:
+		Condition: cabalmobilitymatrix
+		Prerequisites: cabalmobilitymatrix
+	SpeedMultiplier@cabalmobilitymatrix:
+		RequiresCondition: cabalmobilitymatrix
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: cabalmobilitymatrix
+
+cabaldarkarmament:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Dark Armament
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Infantry Unlocks extra weapons, 10% reload faster.
+		Prerequisites: ~tsntradrcabal, !cabaldarkarmament
+	RenderSprites:
+		Image: cabaldarkarmament
+	ProvidesPrerequisite:
+
+^cabaldarkarmament:
+	GrantConditionOnPrerequisite@cabaldarkarmament:
+		Condition: cabaldarkarmament
+		Prerequisites: cabaldarkarmament
+	ActorStatValues:
+		Upgrades: cabaldarkarmament
+	ReloadDelayMultiplier@cabalmobilitymatrix:
+		RequiresCondition: cabalmobilitymatrix
+		Modifier: 110
+cabaltibcatalysticon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Neutron Nuclear Catalyst
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Artillery and Tarantula Unlocks neutron shells.
+		Prerequisites: ~tsntradrcabal, !cabaltibcatalysticon
+	RenderSprites:
+		Image: cabaltibcatalysticon
+	ProvidesPrerequisite:
+
+^cabaltibcatalysticon:
+	GrantConditionOnPrerequisite@cabaltibcatalysticon:
+		Condition: cabaltibcatalysticon
+		Prerequisites: cabaltibcatalysticon
+	ActorStatValues:
+		Upgrades: cabaltibcatalysticon
+
+cabalradarhack:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Radar Hack
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Unlocks Radar Hack Support Power, reveals map location.
+		Prerequisites: ~tsntradrcabal, !cabalradarhack
+	RenderSprites:
+		Image: cabalradarhack
+	ProvidesPrerequisite:
+
+^cabalradarhack:
+	GrantConditionOnPrerequisite@cabalradarhack:
+		Condition: cabalradarhack
+		Prerequisites: cabalradarhack
+	ActorStatValues:
+		Upgrades: cabalradarhack
+############### Lab
+
+cabalbackupsystemicon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Backup Systems
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Heavy Vehicles turns in Husks when dies, if Husk arent destroyed, it wakes up again.
+		Prerequisites: ~tscabaltech, !cabalbackupsystemicon
+	RenderSprites:
+		Image: cabalbackupsystemicon
+	ProvidesPrerequisite:
+
+^cabalbackupsystemicon:
+	GrantConditionOnPrerequisite@cabalbackupsystemicon:
+		Condition: cabalbackupsystemicon
+		Prerequisites: cabalbackupsystemicon
+	ActorStatValues:
+		Upgrades: cabalbackupsystemicon
+cabalhandoflegion:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Hand of CABAL
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Spawns free Hackers from Tech Center.
+		Prerequisites: ~tscabaltech, !cabalhandoflegion
+	RenderSprites:
+		Image: cabalhandoflegion
+	ProvidesPrerequisite:
+
+cabaldataworm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Data Worm
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Unlocks a support power at CABAL Core, can hack and turn enemy vehicles or robots in your side.
+		Prerequisites: ~tscabaltech, !cabaldataworm
+	RenderSprites:
+		Image: cabaldataworm
+	ProvidesPrerequisite:
 
 
 ##########################

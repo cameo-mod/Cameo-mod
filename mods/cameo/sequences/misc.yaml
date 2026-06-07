@@ -2701,6 +2701,30 @@ explosion:
 	scblueexplosion:
 		Filename: scblueexplosion.png
 		Length: *
+	magicnuke:
+		Filename: magicnuke.png
+		Scale: 1
+		Length: 64
+		AddExtension: false
+		Tick: 80
+	magicnuke_med:
+		Filename: magicnuke.png
+		Scale: 0.5
+		Length: 64
+		AddExtension: false
+		Tick: 80
+	magicnuke_small:
+		Filename: magicnuke.png
+		Scale: 0.25
+		Length: 64
+		AddExtension: false
+		Tick: 80
+	magicnuke_micro:
+		Filename: magicnuke.png
+		Scale: 0.15
+		Length: 64
+		AddExtension: false
+		Tick: 80
 
 rank:
 	Defaults:

@@ -148,6 +148,16 @@ TS90mm:
 		Damage: 6000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 3
+TS90mm_bluenuke:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumCannon
+	Range: 5319
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@3Eff: CreateEffect
+		Explosions: magicnuke_micro
 
 TS90mmDep:
 	Inherits: TS90mm
@@ -272,6 +282,22 @@ TS120mmx:
 			Concrete: 50
 		ValidTargets: Ground
 
+TS120mm_bluenuke:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumCannon
+	ReloadDelay: 44
+	Range: 6201
+	Projectile: Bullet
+		Speed: 850
+		Blockable: false
+		LaunchAngle: 0
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 24000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@3Eff: CreateEffect
+		Explosions: magicnuke_small
+
 TSRPGTower:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^HeavyCannon
@@ -360,6 +386,27 @@ TS155mm:
 	# 	Explosions: artillery_explosion
 	# Warhead@3Eff: CreateEffect
 	# 	ImpactSounds: expnew06.aud
+
+TS155mm_bluenuke:
+	Inherits: TS155mm
+	ReloadDelay: 135
+	Projectile: Bullet
+		Speed: 280
+		LaunchAngle: 165
+		ContrailLength: 30
+		ContrailWidth: 0c32
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 60000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 39000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 60000
+	Warhead@HeavyBombFriendlyFire: SpreadDamage
+		Damage: 30000
+	Warhead@3Eff: CreateEffect
+		Explosions: magicnuke_med
 
 TSAux155mm:
 	Inherits: TS155mm
@@ -2116,6 +2163,10 @@ TSTwinBazooka:
 		Damage: 24000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 12
+TSQuadBazooka:
+	Inherits: TSTwinBazooka
+	Burst: 4
+	BurstDelays: 8
 
 TSHellfireTwin:
 	Inherits: TSHellfire
@@ -3302,7 +3353,24 @@ TSDevoutChainguns:
 	Range: 4512
 	Warhead@1Dam: SpreadDamage
 		Damage: 1200
-
+TSDevoutChaingunsUpgraded:
+	Inherits: ^TSMG
+	Inherits: ^LaserWeapon
+	Inherits: ^TSLaserEffect
+	Projectile: LaserZap
+		Width: 36
+		Duration: 8
+		SecondaryBeamWidth: 18
+	ReloadDelay: 40
+	Burst: 12
+	Report: cygun1.aud
+	Range: 4512
+	Warhead@1Dam: SpreadDamage
+		Damage: 1200
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 1200
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 3
 TSVulcanTowerTwin:
 	Inherits: ^TSMG
 	ReloadDelay: 26

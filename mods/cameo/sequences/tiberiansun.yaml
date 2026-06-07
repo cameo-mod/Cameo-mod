@@ -1323,6 +1323,25 @@ tsharv:
 		Filename: tsharvestericon.shp
 		AddExtension: False
 
+tsharvcabal:
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	dock:
+		Filename: invisibleitem.shp
+	dock-loop:
+		Filename: invisibleitem.shp
+	warpout:
+		Filename: invisibleitem.shp
+	harvesting:
+		Filename: ra2_oregath.shp
+		Length: 15
+		Facings: 8
+	icon:
+		Filename: tsharvcabalicon.png
+		AddExtension: False
+
 dtruck:
 	Defaults:
 		Scale: 1.25
@@ -4461,6 +4480,29 @@ tsprocmutant:
 	icon:
 		Filename: tsrefineryicon.shp
 		Offset: 0, 0
+tsproccabal:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+	idle:
+		Filename: cabal_refinery.png
+		Start: 32
+		Length: 16
+	damaged-idle:
+		Filename: cabal_refinery.png
+		Start: 48
+		Length: 16
+	dead:
+		Filename: cabal_refinery.png
+		Start: 48
+		Length: 16
+	make:
+		Filename: cabal_refinery.png
+		Length: 16
+	icon:
+		Filename: cabalrefin_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
 
 tsntwast:
 	Inherits: ^WithBuildingBib2
