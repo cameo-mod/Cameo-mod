@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Traits;
@@ -110,6 +111,12 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 
 		UnitWposWrapper leader = new(null);
 
+		// Indirect/harass routing state
+		List<CPos> currentRoute;
+		int currentWaypointIndex;
+		int lastWaypointUpdateTick;
+		Actor lastRoutingTarget;
+
 		public void Activate(SquadCA owner) { }
 
 		public void Tick(SquadCA owner)
@@ -141,7 +148,10 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (enemyActor != null)
 			{
 				owner.TargetActor = enemyActor;
-				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
+				if (owner.Type == SquadCAType.Guerrilla)
+					owner.FuzzyStateMachine.ChangeState(owner, new GuerrillaUnitsHitState(), false);
+				else
+					owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackState(), false);
 				return;
 			}
 
@@ -289,6 +299,62 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 				kickStuck = KickStuckTicks;
 			}
 
+			// Compute indirect/harass route when target changes
+			if (owner.TargetActor != lastRoutingTarget)
+			{
+				lastRoutingTarget = owner.TargetActor;
+				currentRoute = null;
+
+				var locomotor = leader.Actor.TraitOrDefault<Mobile>()?.Locomotor;
+				if (locomotor != null)
+				{
+					var maxRoutes = 2;
+					var useIndirectRoutes = false;
+
+					if (owner.Type == SquadCAType.Guerrilla)
+						maxRoutes = 3;
+					else if (owner.SquadManager.Info.IndirectRouteChance > 0 && owner.World.LocalRandom.Next(100) < owner.SquadManager.Info.IndirectRouteChance)
+					{
+						useIndirectRoutes = true;
+						maxRoutes = 7;
+					}
+
+					if (maxRoutes > 2 || useIndirectRoutes)
+					{
+						var routes = AIUtils.FindDistinctRoutes(owner.World, locomotor, leader.Actor.Location, owner.TargetActor.Location, maxRoutes);
+
+						if (owner.Type == SquadCAType.Guerrilla)
+							routes = routes.Skip(Math.Max(0, routes.Count - 2)).Take(2).ToList();
+						else if (useIndirectRoutes)
+							routes = routes.Skip(1).ToList();
+
+						if (routes.Count > 0)
+						{
+							var chosen = routes.Random(owner.World.LocalRandom);
+							currentRoute = chosen.Skip(1).ToList();
+							currentWaypointIndex = 0;
+							lastWaypointUpdateTick = owner.World.WorldTick;
+						}
+					}
+				}
+			}
+
+			// Advance through route waypoints
+			if (currentRoute != null && currentWaypointIndex < currentRoute.Count - 1)
+			{
+				if ((leader.Actor.Location - currentRoute[currentWaypointIndex]).LengthSquared < 16
+					|| owner.World.WorldTick > lastWaypointUpdateTick + 625)
+				{
+					currentWaypointIndex++;
+					lastWaypointUpdateTick = owner.World.WorldTick;
+				}
+			}
+
+			// Determine move target (waypoint or direct)
+			var routeTarget = currentRoute != null && currentRoute.Count > 1 && currentWaypointIndex < currentRoute.Count
+				? Target.FromCell(owner.World, currentRoute[currentWaypointIndex])
+				: Target.FromCell(owner.World, owner.TargetActor.Location);
+
 			// Record current position of the squad leader
 			leader.WPos = leader.Actor.CenterPosition;
 
@@ -297,7 +363,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 			if (leaderWaitCheck && kickStuck <= 0)
 				owner.Bot.QueueOrder(new Order("Stop", leader.Actor, false));
 			else
-				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, Target.FromCell(owner.World, owner.TargetActor.Location), false));
+				owner.Bot.QueueOrder(new Order("AttackMove", leader.Actor, routeTarget, false));
 
 			var unitsHurryUp = owner.Units.Where(u => (u.Actor.CenterPosition - leader.Actor.CenterPosition).HorizontalLengthSquared >= occupiedArea * 2).Select(u => u.Actor).ToArray();
 			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Actor.Location), false, groupedActors: unitsHurryUp));
@@ -372,5 +438,175 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 		}
 
 		public void Deactivate(SquadCA owner) { owner.SquadManager.DismissSquad(owner); }
+	}
+
+	class GuerrillaUnitsHitState : GroundStateBaseCA, IState
+	{
+		// Use it to find if entire squad cannot reach the attack position
+		int tryAttackTick;
+
+		Actor leader;
+		int tryAttack = 0;
+		bool isFirstTick = true; // Only record HP and do not retreat at first tick
+		int squadsize = 0;
+
+		public void Activate(SquadCA owner)
+		{
+			tryAttackTick = owner.SquadManager.Info.AttackScanRadius;
+		}
+
+		public void Tick(SquadCA owner)
+		{
+			// Basic check
+			if (!owner.IsValid)
+				return;
+
+			if (owner.SquadManager.unitCannotBeOrdered(leader))
+				leader = owner.Units[0].Actor;
+
+			owner.SquadManager.SetAirStrikeTarget(owner.TargetActor);
+			var isDefaultLeader = true;
+
+			// Rescan target to prevent being ambushed and die without fight
+			// If there is no threat around, return to AttackMove state for formation
+			var attackScanRadius = WDist.FromCells(owner.SquadManager.Info.AttackScanRadius);
+			var closestEnemy = owner.SquadManager.FindClosestEnemy(leader, attackScanRadius);
+
+			var healthChange = false;
+			var cannotRetaliate = true;
+			var followingUnits = new List<Actor>();
+			var attackingUnits = new List<Actor>();
+
+			if (closestEnemy == null)
+			{
+				owner.TargetActor = owner.SquadManager.FindClosestEnemy(leader);
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsAttackMoveStateCA(), false);
+				return;
+			}
+			else
+			{
+				if (owner.TargetActor != closestEnemy)
+				{
+					// Refresh tryAttack when target switched
+					tryAttack = 0;
+					owner.TargetActor = closestEnemy;
+				}
+
+				for (var i = 0; i < owner.Units.Count; i++)
+				{
+					var u = owner.Units[i];
+					var (isFiring, tryAttacking) = IsAttackingAndTryAttack(u.Actor);
+
+					var health = u.Actor.TraitOrDefault<IHealth>();
+
+					if (health != null)
+					{
+						var healthWPos = new WPos(0, 0, (int)health.DamageState); // HACK: use WPos.Z storage HP
+						if (u.WPos.Z != healthWPos.Z)
+						{
+							if (u.WPos.Z < healthWPos.Z)
+								healthChange = true;
+							u.WPos = healthWPos;
+						}
+					}
+
+					if ((tryAttacking || isFiring) &&
+						(u.Actor.CenterPosition - owner.TargetActor.CenterPosition).HorizontalLengthSquared <
+						(leader.CenterPosition - owner.TargetActor.CenterPosition).HorizontalLengthSquared)
+					{
+						isDefaultLeader = false;
+						leader = u.Actor;
+					}
+
+					if (isFiring && tryAttack != 0)
+					{
+						// Make there is at least one follow and attack target, AFTER first trying on attack
+						if (isDefaultLeader)
+						{
+							leader = u.Actor;
+							isDefaultLeader = false;
+						}
+
+						cannotRetaliate = false;
+					}
+					else if (CanAttackTarget(u.Actor, owner.TargetActor))
+					{
+						if (tryAttack > tryAttackTick && tryAttacking)
+						{
+							// Make there is at least one follow and attack target even when approach max tryAttackTick
+							if (isDefaultLeader)
+							{
+								leader = u.Actor;
+								isDefaultLeader = false;
+								attackingUnits.Add(u.Actor);
+								continue;
+							}
+
+							followingUnits.Add(u.Actor);
+							continue;
+						}
+
+						attackingUnits.Add(u.Actor);
+						cannotRetaliate = false;
+					}
+					else
+						followingUnits.Add(u.Actor);
+				}
+			}
+
+			// Because ShouldFlee(owner) cannot retreat units while they cannot even fight
+			// a unit that they cannot target. Therefore, use `cannotRetaliate` here to solve this bug.
+			if (cannotRetaliate)
+				owner.FuzzyStateMachine.ChangeState(owner, new GroundUnitsFleeStateCA(), true);
+
+			tryAttack++;
+
+			var unitlost = squadsize > owner.Units.Count;
+			squadsize = owner.Units.Count;
+
+			if ((healthChange || unitlost) && !isFirstTick)
+			{
+				var friendlyUnits = owner.World.FindActorsInCircle(owner.TargetActor.CenterPosition, WDist.FromCells(owner.SquadManager.Info.AttackScanRadius)).Where(owner.SquadManager.IsValidAllyUnit);
+				if (friendlyUnits.Count() < squadsize + owner.SquadManager.Info.SquadSize)
+					owner.FuzzyStateMachine.ChangeState(owner, new GuerrillaUnitsRunState(), true);
+			}
+
+			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromCell(owner.World, leader.Location), false, groupedActors: followingUnits.ToArray()));
+			owner.Bot.QueueOrder(new Order("AttackMove", null, Target.FromActor(owner.TargetActor), false, groupedActors: attackingUnits.ToArray()));
+
+			isFirstTick = false;
+		}
+
+		public void Deactivate(SquadCA owner) { }
+	}
+
+	class GuerrillaUnitsRunState : GroundStateBaseCA, IState
+	{
+		public const int HitTicks = 2;
+		internal int Hit = HitTicks;
+		bool ordered;
+
+		public void Activate(SquadCA owner) { ordered = false; }
+
+		public void Tick(SquadCA owner)
+		{
+			if (!owner.IsValid)
+				return;
+
+			if (Hit-- <= 0)
+			{
+				Hit = HitTicks;
+				owner.FuzzyStateMachine.ChangeState(owner, new GuerrillaUnitsHitState(), true);
+				return;
+			}
+
+			if (!ordered)
+			{
+				owner.Bot.QueueOrder(new Order("Move", null, Target.FromCell(owner.World, RandomBuildingLocation(owner)), false, groupedActors: owner.Units.Select(u => u.Actor).ToArray()));
+				ordered = true;
+			}
+		}
+
+		public void Deactivate(SquadCA owner) { }
 	}
 }

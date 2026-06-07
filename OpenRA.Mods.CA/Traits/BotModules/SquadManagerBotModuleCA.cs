@@ -305,7 +305,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		internal Actor FindClosestEnemy(Actor sourceActor)
 		{
-			var units = World.Actors.Where(IsPreferredEnemyUnit);
+			var units = World.Actors.Where(IsPreferredEnemyUnit).ToList();
 			return units.Where(IsNotHiddenUnit).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.Where(IsPreferredEnemyBuilding).ClosestToIgnoringPath(sourceActor.CenterPosition) ?? units.ClosestToIgnoringPath(sourceActor.CenterPosition);
 		}
 
