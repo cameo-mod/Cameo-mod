@@ -1660,6 +1660,73 @@ HTNK:
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_highvelocitycannons, up_cuttingedgeequipment, up_lightweightarmorplating
 
+td_gdi_boxer:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Tooltip:
+		Name: Boxer
+	Valued:
+		Cost: 1100
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~hq.gdi
+		Queue: Vehicle, RAVehicle
+		Description: actor-heavyaatank.description
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 110000
+	Repairable:
+		HpPerStep: 5500
+	ChangesHealth@SelfHealing:
+		Step: 44
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 80
+		TurnSpeed: 16
+	Turreted:
+		TurnSpeed: 32
+		Offset: -128,0,0
+	Armament@AG:
+		Weapon: BoxerCannonAG
+		Recoil: 85
+		LocalOffset: 800,80,400, 800,-80,400
+		MuzzleSequence: muzzle
+	Armament@AA:
+		Weapon: BoxerCannonAA
+		Recoil: 85
+		LocalOffset: 800,80,400, 800,-80,400
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@heavyaatank:
+		Modifier: 50
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	KeepsDistance:
+	RenderRangeCircle:
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+
 MLRS:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
@@ -1733,72 +1800,6 @@ MLRS:
 		Modifier: 50
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
-
-td_gdi_boxer:
-	Inherits: ^Vehicle
-	Inherits@Template: ^SupportVehicleTemplate
-	Inherits@EXP: ^GainsExperienceTD
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EMP: ^TurretEMP
-	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@AntiAir: ^PrioritizeAir
-	Inherits@LongRangeSensors: ^LongRangeSensors
-	Inherits@CuttingEdge: ^CuttingEdgeEquipment
-	Inherits@decoration: ^GDIRankDecoration
-	Inherits@gat: ^GatlingSpeedUpUnitBehavior
-	Tooltip:
-		Name: Boxer
-	Valued:
-		Cost: 1100
-	Buildable:
-		BuildPaletteOrder: 50
-		Prerequisites: ~hq.gdi
-		Queue: Vehicle, RAVehicle
-		Description: actor-heavyaatank.description
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Health:
-		HP: 110000
-	Repairable:
-		HpPerStep: 5500
-	ChangesHealth@SelfHealing:
-		Step: 44
-	Armor:
-		Type: Medium
-	Mobile:
-		Speed: 80
-		TurnSpeed: 16
-	Turreted:
-		TurnSpeed: 32
-		Offset: -128,0,0
-	Armament@AG:
-		Weapon: BoxerCannonAG
-		Recoil: 85
-		LocalOffset: 800,80,360, 800,-80,360
-		MuzzleSequence: muzzle
-	Armament@AA:
-		Weapon: BoxerCannonAA
-		Recoil: 85
-		LocalOffset: 800,80,360, 800,-80,360
-		MuzzleSequence: muzzle
-	FirepowerMultiplier@heavyaatank:
-		Modifier: 50
-	AttackTurreted:
-	WithMuzzleOverlay:
-	WithSpriteTurret:
-	SelectionDecorations:
-	Selectable:
-		DecorationBounds: 1280, 1280
-	Voiced:
-		VoiceSet: RAVehicleVoice
-	RenderSprites:
-		PlayerPalette: player_rgba
-	FireWarheadsOnDeath:
-		Weapon: UnitExplode
-	KeepsDistance:
-	RenderRangeCircle:
-	ActorStatValues:
-		Upgrades: up_longrangesensors, up_cuttingedgeequipment
 
 gdiarcher:
 	Inherits: ^Tank
@@ -3548,6 +3549,61 @@ GTWR:
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
 
+td_gdi_skyshield:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@LongRangeSensors: ^LongRangeSensors
+	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@CuttingEdge: ^CuttingEdgeEquipment
+	Inherits@decoration: ^GDIRankDecoration
+	Tooltip:
+		Name: Skyshield
+	Valued:
+		Cost: 900
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 50
+		Prerequisites: ~fact.gdi, hq.gdi
+		Description: actor-agun.description
+	Selectable:
+		Bounds: 1280, 1440, 0, -240
+	SelectionDecorations:
+	Health:
+		HP: 93000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 30
+		InitialFacing: 384
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: BoxerCannonAA
+		LocalOffset: 850,80,750, 800,-80,750
+		MuzzleSequence: muzzle
+	RangeMultiplier@Skyshield:
+		Modifier: 200
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Power:
+		Amount: -45
+	RevealsShroud:
+		Range: 13800
+	DetectCloaked:
+		Range: 6900
+	ActorStatValues:
+		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+
 ATWR:
 	Inherits: ^TDDefense
 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -3568,7 +3624,7 @@ ATWR:
 		Name: Advanced Guard Tower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~fact.gdi, hq.gdi
+		Prerequisites: ~fact.gdi, eye
 		Queue: Defence, RADefence
 		Description: actor-atwr.description
 	Selectable:
@@ -6681,15 +6737,15 @@ gdifirehawk:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@eject: ^AircraftEjectOnDeath
+	Tooltip:
+		Name: Firehawk
+	Valued:
+		Cost: 2000
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
 		Prerequisites: eye, ~upgdifirehawk
 		Description: actor-firehawk.description
-	Valued:
-		Cost: 2000
-	Tooltip:
-		Name: Firehawk
 	Health:
 		HP: 180000
 	Repairable:
