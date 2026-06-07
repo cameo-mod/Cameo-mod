@@ -4521,7 +4521,7 @@ wc2_orc_greathall:
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Great Hall
-		RequiresCondition: !wc2_orc_greathall && !wc2_orc_fortress
+		RequiresCondition: !wc2_orc_stronghold && !wc2_orc_fortress
 	Tooltip@2:
 		Name: Stronghold
 		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress

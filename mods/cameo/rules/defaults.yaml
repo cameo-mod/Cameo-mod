@@ -648,8 +648,8 @@
 ^AcceptsCloakCrate:
 	Cloak@TDcloak:
 		DetectionTypes: GroundCloak
-		InitialDelay: 15
-		CloakDelay: 90
+		InitialDelay: 125
+		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
 		CloakStyle: Palette
@@ -7247,6 +7247,8 @@ CPQDEBUGDUMMY:
 	BaseBuilding:
 	BaseProvider:
 		Range: 15000
+	ProvidesRadar:
+		RequiresCondition: !jammed && !disabled
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete || disabled
