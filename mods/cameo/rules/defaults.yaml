@@ -4303,7 +4303,8 @@
 ^DisabledOverlay:
 	WithColoredOverlay@IDISABLE:
 		RequiresCondition: disabled && !superfreeze && !chronobeamed && !build-incomplete
-		Color: 000000b4
+		Color: 00000080
+		Multiply: true
 	GrantCondition@disable:
 		Condition: disabled
 		RequiresCondition: ((empdisable || superfreeze || chronobeamed || diskdrain || being-captured) && !invulnerability) || build-incomplete
