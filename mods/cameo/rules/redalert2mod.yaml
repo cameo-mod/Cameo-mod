@@ -12045,6 +12045,7 @@ nax_airfield:
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Naxis Airfield
 	Buildable:
@@ -12859,6 +12860,7 @@ nax2_airfield:
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Schwarzer Mond Airfield
 	Buildable:

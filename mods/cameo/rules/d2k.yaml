@@ -2569,6 +2569,7 @@ artillery_platform:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@shape: ^1x1Shape
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Artillery Platform
 	Valued:
