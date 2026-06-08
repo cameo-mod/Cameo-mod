@@ -7188,25 +7188,6 @@ CPQDEBUGDUMMY:
 		Prerequisites: ~wip-content
 		Description: Builds structures
 	#CashTransferToAllies:
-	# TransferCashSupportPower is disabled pending a diplomacy-widget redesign
-	#TransferCashSupportPower:
-	#	ChargeInterval: 0
-	#	StartFullyCharged: true
-	#	Amount: 2000
-	#	MinimumReserve: 500
-	#	OrderName: TransferCashSupportPowerOrder
-	#	SupportPowerPaletteOrder: 5
-	#	Cursor: ability
-	#	BlockedCursor: generic-blocked
-	#	IconImage: icon
-	#	Icons:
-	#		1: chrono
-	#	Names:
-	#		1: Transfer Cash
-	#	Descriptions:
-	#		1: Click then target an allied building to send $2000 to its owner.
-	#	Prerequisites:
-	#		1: conyard
 	Valued:
 		Cost: 5000
 	Health:
