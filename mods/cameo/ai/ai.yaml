@@ -4791,6 +4791,13 @@ Player:
 			tkmbunker: 15
 			tkmbunkerquadturret: 15
 			tkmbunkertankturret: 15
+	BotGlobalUnitBudget:
+		# Total combat-unit budget shared across all LIVING bots (cap per bot = budget / living bots).
+		# Keeps total actor count - and the single-thread sim tick - bounded in big AI games, while
+		# survivors get bigger armies as opponents die. MaxUnitsPerBot stops a last-bot finale from
+		# consuming the whole budget. Only pauses unit production; base construction is unaffected.
+		GlobalUnitBudget: 800
+		MaxUnitsPerBot: 400
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot
 		IdleBaseUnitsMaximum: 50
