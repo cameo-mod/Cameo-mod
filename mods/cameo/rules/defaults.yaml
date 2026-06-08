@@ -6474,10 +6474,10 @@ CPQDEBUGDUMMY:
 	RejectsOrders@chaos:
 		RequiresCondition: chaosgas && !untargetable
 	WithColoredOverlay@chaos:
-		Color: 880088BB
+		Color: 4488FFBB
 		RequiresCondition: chaosgas && !untargetable
 	TimedConditionBar@chaos:
-		Color: 880088
+		Color: 4488FF
 		Condition: chaosgas && !untargetable
 	FirepowerMultiplier@chaos:
 		Modifier: 150
