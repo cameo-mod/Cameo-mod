@@ -107,23 +107,15 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			foreach (var a in r)
 			{
-				var isVoxel = a.GetType().Name == "ModelRenderable";
-
 				if (!a.IsDecoration && a is IModifyableRenderable ma)
 				{
-					if (isVoxel)
-					{
-						// For voxels: replace original with additively tinted version, no shadow copy
-						var voxelStrength = currentAlpha;
-						var scaledTint = new float3(currentTint.X * voxelStrength, currentTint.Y * voxelStrength, currentTint.Z * voxelStrength);
-						yield return ma.WithTint(scaledTint, TintModifiers.OverlayTint).WithAlpha(2f);
-					}
-					else
-					{
-						// For sprites: yield original + tinted overlay copy
-						yield return a;
-						yield return ma.WithTint(currentTint, ma.TintModifiers | TintModifiers.ReplaceColor).WithAlpha(currentAlpha);
-					}
+					// Additive "glow": add the tint colour on top of the sprite/model, scaled by the
+					// current alpha (i.e. temperature intensity). This preserves the underlying detail and
+					// can brighten — giving a fiery glow when hot and an icy sheen when cold — instead of
+					// pasting an opaque flat colour over the unit. The shader treats alpha=2 as the
+					// additive-overlay sentinel (vTint.a > 1.0), adding vTint.rgb * (alpha - 1).
+					var scaledTint = currentAlpha * currentTint;
+					yield return ma.WithTint(scaledTint, TintModifiers.OverlayTint).WithAlpha(2f);
 				}
 				else
 				{

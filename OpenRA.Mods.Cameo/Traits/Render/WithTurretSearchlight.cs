@@ -88,7 +88,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		public readonly WAngle IdleTurnSpeed = new(4);
 
 		[Desc("Damage states where the searchlight flickers.")]
-		public readonly DamageState FlickerDamageStates = DamageState.Critical;
+		public readonly DamageState FlickerDamageStates = DamageState.Heavy | DamageState.Critical;
 
 		[Desc("How many render frames each flicker sample lasts.")]
 		public readonly int FlickerSampleFrames = 3;
@@ -270,6 +270,13 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		IEnumerable<IRenderable> IRender.Render(Actor self, WorldRenderer wr)
 		{
 			if (IsTraitDisabled || !weatherEnabled || !HasSearchlightPower() || turret == null)
+				yield break;
+
+			// The screen-space glow geometry breaks down at the extreme zoom-out that only observers can
+			// reach (below the player zoom floor, where WorldDownscaleFactor climbs above 1), producing
+			// oversized, detached beams. Skip the cosmetic searchlight there — no player in a match sees
+			// this zoom level, so there is nothing to fix visually, only to hide.
+			if (wr.Viewport.Zoom < wr.Viewport.MinZoom)
 				yield break;
 
 			var orientation = WRot.FromYaw(searchlightYaw);

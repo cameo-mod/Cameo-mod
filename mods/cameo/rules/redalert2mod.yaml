@@ -12045,6 +12045,7 @@ nax_airfield:
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Naxis Airfield
 	Buildable:
@@ -12445,6 +12446,7 @@ nax_flak88:
 	Inherits@Atlantikwall: ^Atlantikwall
 	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	-WithTurretSearchlight:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -12859,6 +12861,7 @@ nax2_airfield:
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Schwarzer Mond Airfield
 	Buildable:
@@ -13072,6 +13075,7 @@ nax2_sturmcann:
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Inherits@EMP: ^TurretEMP
 	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	-WithTurretSearchlight:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20

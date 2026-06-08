@@ -592,37 +592,13 @@
 		SubterraneanTransitionCost: 5
 	SubterraneanLocomotor@WORMSUB:
 		Name: sandwormsub
+		# Sand only: worms must stay on open desert and cannot travel onto
+		# Rock (ClearDune)/Concrete/Clear, i.e. they cannot enter player areas.
 		TerrainSpeeds:
-			Clear: 100
-			ClearTemperat: 100 ##########
-			ClearWinter: 100 ##########
-			ClearJungle: 100 ##########
-			ClearSnow: 100 ##########
-			ClearDesert: 100 ##########
-			ClearInterior: 100 ##########
-			Rough: 100
-			Bridge: 100
-			Ore: 100
-			Gems: 100
-			RA2Copper: 100
-			RA2Silver: 100
-			RA2Ore: 100
-			RA2Gems: 100
-			Beach: 100
-			Ford: 100
-			Tiberium: 100
-			BlueTiberium: 100
-			RedTiberium: 100
-			GoldTiberium: 100
-			SCMinerals: 100
-			Veins: 100
-			Sand: 80 ##########
-			SpiceSand: 80 ##########
+			Sand: 100
+			SpiceSand: 100
 			Spice: 100
-			ClearDune: 100
 			Dune: 100
-			Concrete: 100
-			ZergSoil: 50
 	JumpjetLocomotor@JUMPJET:
 		Name: jumpjet
 		Crushes: crate
