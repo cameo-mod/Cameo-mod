@@ -60,7 +60,7 @@ namespace OpenRA.Mods.CA.Traits
 		int delay;
 		bool forceCooling;
 
-		[Sync]
+		[VerifySync]
 		int temp;
 
 		public GrantThermalCondition(ActorInitializer init, GrantThermalConditionInfo info)

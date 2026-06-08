@@ -9,6 +9,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Activities;
 using OpenRA.Mods.CA.Activities;
@@ -24,7 +25,7 @@ namespace OpenRA.Mods.CA.Traits
 	public class AttackFrontalChargedInfo : AttackFrontalInfo, Requires<IFacingInfo>
 	{
 		[Desc("Amount of charge required to attack. Use two numbers to represent a random number in a range (lower value included, upper excluded).")]
-		public readonly int[] ChargeLevel = { 25 };
+		public readonly ImmutableArray<int> ChargeLevel = ImmutableArray.Create(25);
 
 		[Desc("Amount to increase the charge level each tick with a valid target.")]
 		public readonly int ChargeRate = 1;

@@ -45,8 +45,6 @@ T01:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T01.Husk
 
 T01.Husk:
 	Inherits: ^TreeHusk
@@ -58,8 +56,6 @@ T02:
 	Inherits@2: ^MirageTarget
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T02.Husk
 
 T02.Husk:
 	Inherits: ^TreeHusk
@@ -71,8 +67,6 @@ T03:
 	Inherits@2: ^MirageTarget
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T03.Husk
 
 T03.Husk:
 	Inherits: ^TreeHusk
@@ -83,8 +77,6 @@ T04:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T04.Husk
 	RenderSprites:
 		Palette: terrain
 
@@ -99,8 +91,6 @@ T05:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T05.Husk
 
 T05.Husk:
 	Inherits: ^TreeHusk
@@ -111,8 +101,6 @@ T06:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T06.Husk
 
 T06.Husk:
 	Inherits: ^TreeHusk
@@ -123,8 +111,6 @@ T07:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T07.Husk
 
 T07.Husk:
 	Inherits: ^TreeHusk
@@ -137,8 +123,6 @@ T08:
 	Building:
 		Footprint: x_
 		Dimensions: 2,1
-	SpawnActorOnDeath:
-		Actor: T08.Husk
 
 T08.Husk:
 	Inherits: ^TreeHusk
@@ -153,8 +137,6 @@ T09:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T09.Husk
 	RenderSprites:
 		Palette: terrain
 
@@ -175,8 +157,6 @@ T10:
 		Footprint: __ xx
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T10.Husk
 
 T10.Husk:
 	Inherits: ^TreeHusk
@@ -191,8 +171,6 @@ T11:
 		Footprint: __ xx
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T11.Husk
 
 T11.Husk:
 	Inherits: ^TreeHusk
@@ -205,8 +183,6 @@ T12:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T12.Husk
 
 T12.Husk:
 	Inherits: ^TreeHusk
@@ -218,8 +194,6 @@ T13:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T13.Husk
 
 T13.Husk:
 	Inherits: ^TreeHusk
@@ -231,8 +205,6 @@ T14:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T14.Husk
 
 T14.Husk:
 	Inherits: ^TreeHusk
@@ -246,8 +218,6 @@ T15:
 		Dimensions: 3,2
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T15.Husk
 
 T15.Husk:
 	Inherits: ^TreeHusk
@@ -261,8 +231,6 @@ T16:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T16.Husk
 
 T16.Husk:
 	Inherits: ^TreeHusk
@@ -273,8 +241,6 @@ T17:
 	Inherits: ^Tree
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: T17.Husk
 
 T17.Husk:
 	Inherits: ^TreeHusk
@@ -287,8 +253,6 @@ T18:
 		RequireTilesets: DESERT
 	RenderSprites:
 		Palette: terrain
-	SpawnActorOnDeath:
-		Actor: T18.Husk
 
 T18.Husk:
 	Inherits: ^TreeHusk
@@ -304,8 +268,6 @@ TC01:
 		Dimensions: 3,2
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: TC01.Husk
 
 TC01.Husk:
 	Inherits: ^TreeHusk
@@ -322,8 +284,6 @@ TC02:
 		Dimensions: 3,2
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: TC02.Husk
 
 TC02.Husk:
 	Inherits: ^TreeHusk
@@ -340,8 +300,6 @@ TC03:
 		Dimensions: 3,2
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	SpawnActorOnDeath:
-		Actor: TC03.Husk
 
 TC03.Husk:
 	Inherits: ^TreeHusk
@@ -354,17 +312,17 @@ TC03.Husk:
 TC04:
 	Inherits: ^Tree
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: ____ xxx_ x___
 		Dimensions: 4,3
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	# SpawnActorOnDeath:
-	# 	Actor: TC04.Husk
 
 TC04.Husk:
 	Inherits: ^TreeHusk
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: ____ xxx_ x___
 		Dimensions: 4,3
@@ -374,17 +332,17 @@ TC04.Husk:
 TC05:
 	Inherits: ^Tree
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: __x_ xxx_ _xx_
 		Dimensions: 4,3
 	MapEditorData:
 		ExcludeTilesets: DESERT
-	# SpawnActorOnDeath:
-	# 	Actor: TC05.Husk
 
 TC05.Husk:
 	Inherits: ^TreeHusk
 	Inherits@shape: ^4x3Shape
+	-Selectable:
 	Building:
 		Footprint: __x_ xxx_ _xx_
 		Dimensions: 4,3
@@ -487,6 +445,8 @@ UTILPOL1:
 		Palette: ra_snow
 	Tooltip:
 		Name: Utility Pole
+	Targetable:
+		TargetTypes: Ground, Trees
 	MapEditorData:
 		Categories: Decoration
 
@@ -496,6 +456,8 @@ UTILPOL2:
 		Palette: ra_snow
 	Tooltip:
 		Name: Utility Pole
+	Targetable:
+		TargetTypes: Ground, Trees
 	MapEditorData:
 		Categories: Decoration
 
@@ -604,8 +566,6 @@ T01TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T01TEM.Husk
 
 T01TEM.Husk:
 	Inherits: ^TreeHusk
@@ -616,8 +576,6 @@ T02TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T02TEM.Husk
 
 T02TEM.Husk:
 	Inherits: ^TreeHusk
@@ -628,8 +586,6 @@ T03TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T03TEM.Husk
 
 T03TEM.Husk:
 	Inherits: ^TreeHusk
@@ -640,8 +596,6 @@ T05TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T05TEM.Husk
 
 T05TEM.Husk:
 	Inherits: ^TreeHusk
@@ -652,8 +606,6 @@ T06TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T06TEM.Husk
 
 T06TEM.Husk:
 	Inherits: ^TreeHusk
@@ -664,8 +616,6 @@ T07TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T07TEM.Husk
 
 T07TEM.Husk:
 	Inherits: ^TreeHusk
@@ -679,8 +629,6 @@ T08TEM:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08TEM.Husk
 
 T08TEM.Husk:
 	Inherits: ^TreeHusk
@@ -696,8 +644,6 @@ T10TEM:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T10TEM.Husk
 
 T10TEM.Husk:
 	Inherits: ^TreeHusk
@@ -712,8 +658,6 @@ T11TEM:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T11TEM.Husk
 
 T11TEM.Husk:
 	Inherits: ^TreeHusk
@@ -726,8 +670,6 @@ T12TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T12TEM.Husk
 
 T12TEM.Husk:
 	Inherits: ^TreeHusk
@@ -739,8 +681,6 @@ T13TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T13TEM.Husk
 
 T13TEM.Husk:
 	Inherits: ^TreeHusk
@@ -752,8 +692,6 @@ T14TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T14TEM.Husk
 
 T14TEM.Husk:
 	Inherits: ^TreeHusk
@@ -767,8 +705,6 @@ T15TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T15TEM.Husk
 
 T15TEM.Husk:
 	Inherits: ^TreeHusk
@@ -782,8 +718,6 @@ T16TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T16TEM.Husk
 
 T16TEM.Husk:
 	Inherits: ^TreeHusk
@@ -794,8 +728,6 @@ T17TEM:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T17TEM.Husk
 
 T17TEM.Husk:
 	Inherits: ^TreeHusk
@@ -809,8 +741,6 @@ TC01TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC01TEM.Husk
 
 TC01TEM.Husk:
 	Inherits: ^TreeHusk
@@ -827,8 +757,6 @@ TC02TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC02TEM.Husk
 
 TC02TEM.Husk:
 	Inherits: ^TreeHusk
@@ -845,8 +773,6 @@ TC03TEM:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC03TEM.Husk
 
 TC03TEM.Husk:
 	Inherits: ^TreeHusk
@@ -863,8 +789,6 @@ TC04TEM:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC04TEM.Husk
 
 TC04TEM.Husk:
 	Inherits: ^TreeHusk
@@ -881,8 +805,6 @@ TC05TEM:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC05TEM.Husk
 
 TC05TEM.Husk:
 	Inherits: ^TreeHusk
@@ -896,8 +818,6 @@ T01JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T01JUN.Husk
 
 T01JUN.Husk:
 	Inherits: ^TreeHusk
@@ -908,8 +828,6 @@ T02JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T02JUN.Husk
 
 T02JUN.Husk:
 	Inherits: ^TreeHusk
@@ -920,8 +838,6 @@ T03JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T03JUN.Husk
 
 T03JUN.Husk:
 	Inherits: ^TreeHusk
@@ -932,8 +848,6 @@ T05JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T05JUN.Husk
 
 T05JUN.Husk:
 	Inherits: ^TreeHusk
@@ -944,8 +858,6 @@ T06JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T06JUN.Husk
 
 T06JUN.Husk:
 	Inherits: ^TreeHusk
@@ -956,8 +868,6 @@ T07JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T07JUN.Husk
 
 T07JUN.Husk:
 	Inherits: ^TreeHusk
@@ -971,8 +881,6 @@ T08JUN:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08JUN.Husk
 
 T08JUN.Husk:
 	Inherits: ^TreeHusk
@@ -988,8 +896,6 @@ T10JUN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T10JUN.Husk
 
 T10JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1004,8 +910,6 @@ T11JUN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T11JUN.Husk
 
 T11JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1018,8 +922,6 @@ T12JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T12JUN.Husk
 
 T12JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1031,8 +933,6 @@ T13JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T13JUN.Husk
 
 T13JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1044,8 +944,6 @@ T14JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T14JUN.Husk
 
 T14JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1059,8 +957,6 @@ T15JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T15JUN.Husk
 
 T15JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1074,8 +970,6 @@ T16JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T16JUN.Husk
 
 T16JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1086,8 +980,6 @@ T17JUN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T17JUN.Husk
 
 T17JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1101,8 +993,6 @@ TC01JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC01JUN.Husk
 
 TC01JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1119,8 +1009,6 @@ TC02JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC02JUN.Husk
 
 TC02JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1137,8 +1025,6 @@ TC03JUN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC03JUN.Husk
 
 TC03JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1155,8 +1041,6 @@ TC04JUN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC04JUN.Husk
 
 TC04JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1173,8 +1057,6 @@ TC05JUN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC05JUN.Husk
 
 TC05JUN.Husk:
 	Inherits: ^TreeHusk
@@ -1188,8 +1070,6 @@ T01WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T01WIN.Husk
 
 T01WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1200,8 +1080,6 @@ T02WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T02WIN.Husk
 
 T02WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1212,8 +1090,6 @@ T03WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T03WIN.Husk
 
 T03WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1224,8 +1100,6 @@ T05WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T05WIN.Husk
 
 T05WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1236,8 +1110,6 @@ T06WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T06WIN.Husk
 
 T06WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1248,8 +1120,6 @@ T07WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T07WIN.Husk
 
 T07WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1263,8 +1133,6 @@ T08WIN:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08WIN.Husk
 
 T08WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1280,8 +1148,6 @@ T10WIN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T10WIN.Husk
 
 T10WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1296,8 +1162,6 @@ T11WIN:
 		Footprint: __ xx
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T11WIN.Husk
 
 T11WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1310,8 +1174,6 @@ T12WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T12WIN.Husk
 
 T12WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1323,8 +1185,6 @@ T13WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T13WIN.Husk
 
 T13WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1336,8 +1196,6 @@ T14WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T14WIN.Husk
 
 T14WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1351,8 +1209,6 @@ T15WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T15WIN.Husk
 
 T15WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1366,8 +1222,6 @@ T16WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T16WIN.Husk
 
 T16WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1378,8 +1232,6 @@ T17WIN:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T17WIN.Husk
 
 T17WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1393,8 +1245,6 @@ TC01WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC01WIN.Husk
 
 TC01WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1411,8 +1261,6 @@ TC02WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC02WIN.Husk
 
 TC02WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1429,8 +1277,6 @@ TC03WIN:
 		Dimensions: 3,2
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC03WIN.Husk
 
 TC03WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1447,8 +1293,6 @@ TC04WIN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC04WIN.Husk
 
 TC04WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1465,8 +1309,6 @@ TC05WIN:
 		Dimensions: 4,3
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: TC05WIN.Husk
 
 TC05WIN.Husk:
 	Inherits: ^TreeHusk
@@ -1480,8 +1322,6 @@ T04DES:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T04DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 
@@ -1499,8 +1339,6 @@ T08DES:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T08DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 
@@ -1521,8 +1359,6 @@ T09DES:
 		Dimensions: 2,1
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T09DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 
@@ -1540,8 +1376,6 @@ T18DES:
 	Inherits: ^Tree
 	MapEditorData:
 		RequireTilesets: CAMEO
-	SpawnActorOnDeath:
-		Actor: T18DES.Husk
 	RenderSprites:
 		Palette: cameo-desert
 

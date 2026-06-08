@@ -712,7 +712,6 @@ Player:
 ###########################################
 
 ^concrete:
-	AlwaysVisible:
 	Interactable:
 	D2kBuilding:
 		ConcreteTemplate: 856
@@ -6154,7 +6153,7 @@ d2k_mcv.ixian:
 		IntoActor: construction_yard.ixian
 		Offset: -1,-1
 		TransformSounds: BUILD1.WAV
-		Facing: 256
+		Facing: 64
 		NoTransformNotification: BuildingCannotPlaceAudio
 	-RevealOnFire:
 	Voiced:
@@ -6180,7 +6179,7 @@ d2k_mcv.ordos:
 		IntoActor: construction_yard.ordos
 		Offset: -1,-1
 		TransformSounds: BUILD1.WAV
-		Facing: 256
+		Facing: 64
 		NoTransformNotification: BuildingCannotPlaceAudio
 	-RevealOnFire:
 	Voiced:
@@ -8116,6 +8115,7 @@ siege_tank_ixian:
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@SHADOWS: ^Shadows
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@Barrel: ^D2K_ReinforcedBarrel
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
@@ -9120,6 +9120,7 @@ rocket_raider_ixian:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
@@ -9216,6 +9217,7 @@ shock_raider:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -10055,6 +10057,7 @@ combat_tank_ixian:
 carryall.reinforce:
 	Inherits: ^AirstrikePlane
 	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@selection: ^SelectableEconomicUnit
 	Tooltip:
 		Name: Autonomous Carryall
 	Valued:
@@ -10063,8 +10066,6 @@ carryall.reinforce:
 		HP: 500000
 	Armor:
 		Type: Bomber
-	-Selectable:
-	Interactable:
 	Aircraft:
 		CruiseAltitude: 2160
 		CruisingCondition: cruising
@@ -10205,6 +10206,7 @@ ordos_carryall:
 frigate:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits: ^AirstrikePlane
+	Inherits@selection: ^SelectableEconomicUnit
 	ParaDrop:
 		DropRange: 1c0
 	Tooltip:
@@ -12974,6 +12976,7 @@ storm_raider:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -13135,6 +13138,7 @@ heavy_rocket_raider_ixian:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CARGO: ^CargoVehicle
 	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiAir: ^PrioritizeAir
@@ -14277,6 +14281,8 @@ d2k_farasha_drone:
 		Cost: 1000
 	Tooltip:
 		Name: Alfayrus
+	Buildable:
+		Description: template-carrier-slave.description
 	Hovers:
 	Aircraft:
 		InitialFacing: 896

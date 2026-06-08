@@ -10,6 +10,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using System.Xml.Linq;
 using OpenRA.Mods.Common;
@@ -439,7 +440,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Check the number of this structure and its variants
 				var actorInfo = world.Map.Rules.Actors[name];
 				var buildingVariantInfo = actorInfo.TraitInfoOrDefault<PlaceBuildingVariantsInfo>();
-				var variants = buildingVariantInfo?.Actors ?? Array.Empty<string>();
+				var variants = buildingVariantInfo != null ? buildingVariantInfo.Actors : ImmutableArray<string>.Empty;
 
 				var count = playerBuildings.Count(a => a.Info.Name == name || variants.Contains(a.Info.Name)) + (baseBuilder.BuildingsBeingProduced != null ? (baseBuilder.BuildingsBeingProduced.ContainsKey(name) ? baseBuilder.BuildingsBeingProduced[name] : 0) : 0);
 

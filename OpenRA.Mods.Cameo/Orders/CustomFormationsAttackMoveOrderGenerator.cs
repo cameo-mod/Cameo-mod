@@ -17,6 +17,7 @@ namespace OpenRA.Mods.Cameo.Orders
 	public class CustomFormationsAttackMoveOrderGenerator : CustomFormationsOrderGeneratorBase
 	{
 		TraitPair<AttackMove>[] subjects;
+		protected override MouseActionType ActionType => MouseActionType.ConfirmOrder;
 
 		readonly MouseButton expectedButton;
 

@@ -2429,6 +2429,18 @@ template-opentopped =
 template-unarmed-transport =
    .description = Unarmed troop transport.
 
+template-carrier-slave =
+   .description = Deployed by an aircraft carrier.
+
+template-airstrike-slave =
+   .description = Called in to conduct an airstrike.
+
+template-drone-slave =
+   .description = Deployed as an escort drone.
+
+template-mob-slave =
+   .description = Member of a mob or squad unit.
+
 promotions =
    .lobby-label = Promotion Points per Rank
    .lobby-description = Promotion points earned for each rank through destroying enemies can be used to purchase upgrades and new technologies

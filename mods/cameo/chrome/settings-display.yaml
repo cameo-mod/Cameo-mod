@@ -402,6 +402,58 @@ Container@DISPLAY_PANEL:
 					Width: PARENT_WIDTH - 24
 					Height: 30
 					Children:
+						Container@HEAT_DISTORTION_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@HEAT_DISTORTION_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-heat-distortion
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 30
+					Children:
+						Container@SHOCKWAVE_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@SHOCKWAVE_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-shockwave
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 30
+					Children:
+						Container@SCREEN_SHAKE_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@SCREEN_SHAKE_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-screen-shake
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 30
+					Children:
+						Container@GROUND_FIRE_SMOKE_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@GROUND_FIRE_SMOKE_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-ground-fire-smoke
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 30
+					Children:
 						Container@RESTART_REQUIRED_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20

@@ -2,7 +2,7 @@
 	FactionCA@asianalliance:
 		Name: Asian Alliance
 		InternalName: asianalliance
-		Game: Red Alert 2
+		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction-ra2-asianalliance.description
 	StartingUnits@mcvasianalliance:
@@ -26,7 +26,7 @@
 	FactionCA@syndicate:
 		Name: Latin Syndicate
 		InternalName: syndicate
-		Game: Red Alert 2
+		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction-ra2-syndicate.description
 	StartingUnits@mcvsyndicate:
@@ -50,7 +50,7 @@
 	FactionCA@consortium:
 		Name: Steel Consortium
 		InternalName: consortium
-		Game: Red Alert 2
+		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction-ra2-consortium.description
 	StartingUnits@mcvconsortium:
@@ -74,7 +74,7 @@
 	FactionCA@naxis:
 		Name: Naxis
 		InternalName: naxis
-		Game: Red Alert 2
+		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction-ra2-naxis.description
 	StartingUnits@mcvnaxis:
@@ -98,7 +98,7 @@
 	FactionCA@lnaxis:
 		Name: Schwarzer Mond
 		InternalName: lnaxis
-		Game: Red Alert 2
+		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction-ra2-lnaxis.description
 	StartingUnits@mcvlnaxis:
@@ -120,9 +120,9 @@
 		SupportActors: nax_lunar,nax_lunar,nax_lunar2,nax_lunar2,nax_lunar2,nax2_beetle,nax2_tiger,nax2_panzer,nax2_panzer,nax2_beetle,nax2_beetle
 
 	FactionCA@futuretech:
-		Name: (WIP)FutureTech
+		Name: FutureTech
 		InternalName: futuretech
-		Game: Red Alert 2
+		Game: RA2 expanded
 		Side: RA2 Mod
 		Description: faction-ra2-futuretech.description
 	StartingUnits@mcvfuturetech:
@@ -146,7 +146,7 @@
 		Name: Random RA2 Mods #faction-ra2-random.name
 		InternalName: Randomra2mod
 		RandomFactionMembers: asianalliance, syndicate, consortium, naxis, lnaxis, futuretech
-		Game: Red Alert 2
+		Game: RA2 expanded
 		Side: Random
 		Description: faction-ra2-modded-random.description
 
@@ -3713,6 +3713,8 @@ aa_kami:
 		Cost: 800
 	Tooltip:
 		Name: Kamikaze
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 160
 		InitialFacing: 768
@@ -3806,6 +3808,8 @@ aa_kami.asdf:
 		Cost: 500
 	Tooltip:
 		Name: Airstrike Kamikaze
+	Buildable:
+		Description: template-airstrike-slave.description
 	-CarrierSlave:
 	-AutoTarget:
 	-AmmoPool:
@@ -8408,6 +8412,10 @@ steel_qtradr:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@radar: ^RadarBuilding
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	Inherits@water: ^SteelUnderwaterStructure
 	Selectable:
 		Bounds: 2048, 2560, 0, -256
@@ -9107,6 +9115,8 @@ steel_qoil:
 	Inherits@Template: ^FighterTemplate
 	Selectable:
 	#Interactable:
+	Buildable:
+		Description: template-drone-slave.description
 	RevealsShroud:
 		Range: 5000
 		Type: CenterPosition
@@ -11439,6 +11449,8 @@ steel_cruiser_f:
 		Cost: 500
 	Tooltip:
 		Name: Cruiser Fighter
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 250
 		InitialFacing: 768
@@ -12168,6 +12180,8 @@ nax_interceptor:
 		Cost: 1000
 	Tooltip:
 		Name: Interceptor
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 3000
 		InitialFacing: 768
@@ -12895,6 +12909,8 @@ nax_drone:
 		Cost: 750
 	Tooltip:
 		Name: Drone
+	Buildable:
+		Description: template-carrier-slave.description
 	Aircraft:
 		AltitudeVelocity: 150
 		InitialFacing: 768
@@ -19329,6 +19345,10 @@ yrgarobo:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^2x2Shape
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
 	Tooltip:
 		Name: Robot Control Center
@@ -19406,6 +19426,10 @@ futu_launchpad:
 		Facing: 768
 		SpawnOffset: 0,0,4000
 		ProductionTypes: future_harbinger
+	Production@NORMAL:
+		Produces: Aircraft, future_harbinger
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAAircraft, future_harbinger
 	Reservable:
 	SpawnNeighboringActors:
 		ActorTypes: dummy_dock
@@ -21172,7 +21196,7 @@ futu_orion:
 	Armor:
 		Type: Heavy
 	Turreted:
-		TurnSpeed: 60
+		TurnSpeed: 12
 		Offset: -40,0,0
 	BodyOrientation:
 		QuantizedFacings: 32
@@ -21850,7 +21874,6 @@ future_upgrade_equalizer_x2:
 	Tooltip:
 		Name: Equalizer X2
 	Buildable:
-		Queue: Research
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
 		Prerequisites: ~futu_egtf, futu_egtech, future_upgrade_equalizer_x1, !future_upgrade_equalizer_x2
 	RenderSprites:
@@ -21862,7 +21885,6 @@ future_upgrade_equalizer_x3:
 	Tooltip:
 		Name: Equalizer X3
 	Buildable:
-		Queue: Research
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
 		Prerequisites: ~futu_egtf, futu_egtech, futu_egshock, future_upgrade_equalizer_x2, !future_upgrade_equalizer_x3
 	RenderSprites:

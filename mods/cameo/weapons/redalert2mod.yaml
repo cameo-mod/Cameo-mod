@@ -6410,6 +6410,7 @@ NaxiMeteorSpawner2:
 		ValidTargets: Ground, Water, Air
 		Weapon: NaxiMeteorSpreader
 		AimChance: 13
+		ImpactActors: false
 		TargetActorCenter: false
 
 NaxiMeteorSpreader:
@@ -6423,6 +6424,7 @@ NaxiMeteorSpreader:
 		ValidTargets: Ground, Water, Air
 		Weapon: NaxiMeteor
 		Delay: 23
+		ImpactActors: false
 
 NaxiMeteor:
 	Inherits: ^Grenade
@@ -8391,9 +8393,16 @@ RA2TOPOLCuba:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
-		GlowScale: 15.0
+		GlowScale: 10
 		GlowFadeFrames: 300
 		GlowFadeInFrames: 15
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 4
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
 	Warhead@Radiation: CreateTintedCells
 		Spread: 1000
 		Falloff: 100, 85, 70, 55, 40, 25, 10
@@ -8920,6 +8929,7 @@ Future_Cryocopter_Cryo:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFFFF
 		SecondaryBeamUsePlayerColor: false
+		-HitAnim:
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -8988,6 +8998,13 @@ Future_Cryocopter_Cryo:
 		ImpactSounds: phohit00.wav
 		ValidTargets: Ground, Water, Air
 		Volume: 0.25
+	Warhead@EffectAir: CreateEffect
+		ExplosionPalette: effect
+		Explosions: cryo_blast
+		ImpactSounds: phohit00.wav
+		Volume: 0.25
+	-Warhead@Smudge:
+	-Warhead@RA2Scorch:
 
 Future_Turret_Cryo:
 	Inherits: Future_Cryocopter_Cryo
@@ -9260,6 +9277,16 @@ AthenaLaser:
 		ImpactSounds: ion1.aud
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
+	Warhead@GlowPlayer: GlowImpact
+		UsePlayerColor: true
+		Scale: 3.2
+		FadeFrames: 45
+		FadeInFrames: 3
+	Warhead@GlowCore: GlowImpact
+		Color: FFFFFF
+		Scale: 1.8
+		FadeFrames: 45
+		FadeInFrames: 3
 
 AthenaVisualLaser:
 	ReloadDelay: 4

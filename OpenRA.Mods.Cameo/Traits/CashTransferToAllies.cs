@@ -1,4 +1,4 @@
-﻿#region Copyright & License Information
+#region Copyright & License Information
 /*
  * Copyright 2007-2018 The OpenRA Developers (see AUTHORS)
  * This file is part of OpenRA, which is free software. It is made
@@ -69,7 +69,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		int addedticks;
 		public bool Enabled { get; private set; }
 
-		[Sync]
+		[VerifySync]
 		int ticks;
 
 		Dictionary<int, List<PlayerResources>> teams;

@@ -1095,7 +1095,7 @@ CITYAIRPORT:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 	AirstrikePower@greenbombs:
@@ -1116,7 +1116,7 @@ CITYAIRPORT:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 20
 	AirstrikePower@bluebombs:
@@ -1137,7 +1137,7 @@ CITYAIRPORT:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 30
 	AirstrikePower@mininuke:
@@ -1165,7 +1165,7 @@ CITYAIRPORT:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 40
 	ParatroopersPower@SWAT:
@@ -1188,7 +1188,7 @@ CITYAIRPORT:
 		UnitType: C17.Paradrop
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: cityair
@@ -1527,7 +1527,7 @@ CITYCASINO:
 		ArrowSequence: arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 50
 	
@@ -1634,7 +1634,7 @@ CITYZOO:
 		UnitType: C17.Paradrop
 		SquadSize: 3
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		
 ####################################################################################################

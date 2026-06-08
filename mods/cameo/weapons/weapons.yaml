@@ -764,6 +764,12 @@
 		ImpactSounds: shielded_shell_hit1.wav, shielded_shell_hit2.wav, shielded_shell_hit3.wav, shielded_shell_hit4.wav
 		ValidTargets: Shielded
 
+^ImpactGlow:
+	Warhead@Glow: GlowImpact
+		Color: FFB84D
+		Scale: 0.8
+		FadeFrames: 15
+
 ^TankDestroyerCannon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
@@ -847,6 +853,7 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
+	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 12
@@ -941,6 +948,7 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
+	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 8
@@ -1034,6 +1042,7 @@
 		ImpactSounds: kaboom25.aud
 		ImpactActors: false
 		ValidTargets: Air
+	Inherits@glow: ^ImpactGlow
 	Warhead@ShieldHit: GrantExternalCondition
 		Condition: shieldhit
 		Duration: 10
@@ -1559,6 +1568,15 @@
 		ValidRelationships: Ally
 		Amount: 400
 		Range: 400
+	# Persistent ground-fire entity (fire visual + rising black smoke). Shared by all flame weapons
+	# inheriting this base; the groundfire actor self-removes after its lifetime. Scorch already
+	# handled by Warhead@Smudge above. (No per-burst limit yet - bursts spawn clusters.)
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 
 ^MediumFlameWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -1679,6 +1697,13 @@
 		ValidRelationships: Ally
 		Amount: 600
 		Range: 600
+	# Persistent ground-fire entity (fire visual + rising black smoke). See ^LightFlameWeapon.
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 
 ^HeavyFlameWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -1799,6 +1824,13 @@
 		ValidRelationships: Ally
 		Amount: 800
 		Range: 800
+	# Persistent ground-fire entity (fire visual + rising black smoke). See ^LightFlameWeapon.
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
 
 ^LightChemicalWeapon:
 	ValidTargets: Ground, Water, Trees
@@ -3284,6 +3316,7 @@ DefuseKit:
 
 ^Artillery:
 	Inherits: ^Cannon
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 75
 	Range: 12c5
 	Projectile: Bullet
@@ -3488,6 +3521,66 @@ DefuseKit:
 		Damage: 30
 	Warhead@Effect: CreateEffect
 
+RockExplode:
+	Inherits: ^DamagingExplosionHE
+	-Warhead@Grenade:
+	-Warhead@GrenadeFriendlyFire:
+	-Warhead@GrenadePercentage:
+	Warhead@1Eff: CreateEffect
+		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+	Warhead@Effect: CreateEffect
+		ImpactSounds: EXPLHG1.WAV
+
+RockDebris:
+	ValidTargets: Ground, Water
+	ReloadDelay: 60
+	Range: 2c768
+	Report: d2khc.wav
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 32, 64
+		Blockable: false
+		LaunchAngle: 128, 192
+		Inaccuracy: 1c256
+		Image: shrapnel
+		Palette: d2keffect
+		Shadow: true
+		BounceCount: 3
+		BounceRangeModifier: 20
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_tiny_explosion
+		ImpactActors: false
+		ExplosionPalette: effect75alpha
+
+RockDebris2:
+	Inherits: RockDebris
+	Projectile: Bullet
+		Image: shrapnel2
+		Palette: d2keffect
+		TrailImage: small_trail
+		TrailPalette: effect75alpha
+		TrailInterval: 1
+	Warhead@Effect: CreateEffect
+		Explosions: d2k_small_napalm
+		ExplosionPalette: effect75alpha
+
+RockDebris3:
+	Inherits: RockDebris2
+	Projectile: Bullet
+		Image: shrapnel3
+		TrailImage: small_trail2
+
+RockDebris4:
+	Inherits: RockDebris2
+	Projectile: Bullet
+		Image: shrapnel4
+		TrailImage: large_trail
+
 SmallHeliCrash:
 	Inherits: ^Explosion
 	Warhead@Effect: CreateEffect
@@ -3614,6 +3707,7 @@ RocketsG:
 
 BoatMissile:
 	Inherits: ^MissileWeapon
+	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 33
 	Range: 8c0
 	Burst: 2
@@ -3947,8 +4041,23 @@ Atomic:
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
 		GlowScale: 15.0
-		GlowFadeFrames: 300
+		GlowFadeFrames: 600
 		GlowFadeInFrames: 15
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 5
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 2.0
+		FadeFrames: 420
+		FadeInFrames: 15
+	Warhead@Shock: Shockwave
+		Scale: 2.0
+		FadeFrames: 120
+		FadeInFrames: 0
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 2000
 		Damage: 17500
@@ -4451,8 +4560,23 @@ IonCannon:
 		ValidTargets: Ground, Water, Air
 		GlowColor: 32C8FF
 		GlowScale: 7.0
-		GlowFadeFrames: 300
+		GlowFadeFrames: 600
 		GlowFadeInFrames: 5
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 3
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 1.0
+		FadeFrames: 420
+		FadeInFrames: 0
+	Warhead@Shock: Shockwave
+		Scale: 1.5
+		FadeFrames: 120
+		FadeInFrames: 0
 
 ###############################################
 #           TARGETTING
@@ -4642,6 +4766,17 @@ CHFlameRadiation:
 		Palette: ra_temperat
 		Weapon: CHFlame
 		InvalidTargets: Water
+	# Leave a persistent ground-fire entity (fire visual + rising dark smoke) at the impact,
+	# plus a scorch smudge. Fires once per flame impact. Spawned actor self-removes after ~90-150t.
+	Warhead@GroundFire: SpawnActor
+		Actors: groundfire
+		Range: 1
+		ForceGround: true
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Scorch: LeaveSmudge
+		SmudgeType: Scorch
+		Size: 1
 
 CHFlame:
 	Inherits: ^MediumFlameWeapon

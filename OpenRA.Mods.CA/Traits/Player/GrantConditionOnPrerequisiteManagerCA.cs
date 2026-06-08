@@ -9,6 +9,7 @@
 #endregion
 
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Linq;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -44,7 +45,7 @@ namespace OpenRA.Mods.CA.Traits
 			if (!upgradables.ContainsKey(key))
 			{
 				upgradables.Add(key, new List<(Actor, GrantConditionOnPrerequisiteCA)>());
-				techTree.Add(key, prerequisites, 0, this);
+				techTree.Add(key, prerequisites.ToImmutableArray(), 0, this);
 			}
 
 			upgradables[key].Add((actor, u));

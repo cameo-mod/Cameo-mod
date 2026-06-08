@@ -1347,6 +1347,7 @@ Player:
 ^wc2_watch_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@detect: ^GenericAllDetector
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -2254,6 +2255,7 @@ wc2_human_elven_lumber_mill:
 wc2_human_blacksmith:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
 	Buildable:
@@ -2599,6 +2601,7 @@ wc2_human_oil_platform:
 wc2_human_scout_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -4518,7 +4521,7 @@ wc2_orc_greathall:
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Great Hall
-		RequiresCondition: !wc2_orc_greathall && !wc2_orc_fortress
+		RequiresCondition: !wc2_orc_stronghold && !wc2_orc_fortress
 	Tooltip@2:
 		Name: Stronghold
 		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress
@@ -4820,6 +4823,7 @@ wc2_orc_troll_lumber_mill:
 wc2_orc_blacksmith:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
 	Buildable:
@@ -4876,8 +4880,16 @@ wc2_orc_altar_of_storms:
 	# Spy of Kilrogg support power.
 	AirstrikePower@SPYOFKILROGG:
 		OrderName: wc2_spy_of_kilrogg
+		# Prerequisites:
+		# 	1: wc2_orc_altar_of_storms
+		# Icons:
+		# 	1: kilrogg
 		Icon: kilrogg
 		ChargeInterval: 3750
+		# Names:
+		# 	1: Spy of Kilrogg
+		# Descriptions:
+		# 	1: Reveals an area of the map\nand cloaked enemy units.
 		Name: Spy of Kilrogg
 		Description: Reveals an area of the map\nand cloaked enemy units.
 		SelectTargetSpeechNotification: SelectTarget
@@ -4895,15 +4907,23 @@ wc2_orc_altar_of_storms:
 		ArrowSequence: wc2_arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: wc2_airstrikedirection
 		SupportPowerPaletteOrder: 10
 	# Bloodlust support power.
 	GrantExternalConditionPower@BLOODLUST:
 		OrderName: wc2_bloodlust
 		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orc_altar_of_storms
+		# Icons:
+		# 	1: bloodlust
 		Icon: bloodlust
 		ChargeInterval: 3000
+		# Names:
+		# 	1: Bloodlust
+		# Descriptions:
+		# 	1: Triples damage output of units.
 		Name: Bloodlust
 		Description: Triples damage output of units.
 		Durations:
@@ -4926,10 +4946,18 @@ wc2_orc_altar_of_storms:
 	IonCannonPower@RUNES:
 		OrderName: wc2_runes
 		PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: ~techlevel.superweapons
 		Prerequisites: ~techlevel.superweapons
+		# Icons:
+		# 	1: runes
 		Icon: runes
 		Cursor: ability
 		ChargeInterval: 4500
+		# Names:
+		# 	1: Runes
+		# Descriptions:
+		# 	1: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
 		Name: Runes
 		Description: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
 		EndChargeSpeechNotification: AirstrikeReady
@@ -4963,8 +4991,16 @@ wc2_orc_temple_of_the_damned:
 	GrantExternalConditionPower@HASTE:
 		OrderName: wc2_haste
 		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orc_temple_of_the_damned
+		# Icons:
+		# 	1: haste
 		Icon: haste
 		ChargeInterval: 3000
+		# Names:
+		# 	1: Haste
+		# Descriptions:
+		# 	1: Increases movement speed and attack rate.
 		Name: Haste
 		Description: Increases movement speed and attack rate.
 		Durations:
@@ -5078,6 +5114,7 @@ wc2_orc_oil_platform:
 wc2_orc_watch_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll

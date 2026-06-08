@@ -5704,8 +5704,23 @@ PulseMissile:
 		ImpactActors: false
 		GlowColor: 32C8FF
 		GlowScale: 15.0
-		GlowFadeFrames: 300
+		GlowFadeFrames: 600
 		GlowFadeInFrames: 15
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 5
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 2.0
+		FadeFrames: 420
+		FadeInFrames: 15
+	Warhead@Shock: Shockwave
+		Scale: 2.0
+		FadeFrames: 120
+		FadeInFrames: 0
 	Warhead@4Dam_areanuke1: SpreadDamage
 		Spread: 2000
 		Damage: 17500

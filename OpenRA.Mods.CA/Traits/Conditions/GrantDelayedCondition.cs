@@ -8,6 +8,7 @@
  */
 #endregion
 
+using System.Collections.Immutable;
 using OpenRA.Mods.Common;
 using OpenRA.Mods.Common.Traits;
 using OpenRA.Traits;
@@ -24,7 +25,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		[Desc("Number of ticks to wait before granting the condition.",
 			"Two values indicate a random delay range.")]
-		public readonly int[] Delay = { 50 };
+		public readonly ImmutableArray<int> Delay = ImmutableArray.Create(50);
 
 		[Desc("If the trait is disabled, revoke the condition and reset the delay.")]
 		public readonly bool RevokeOnDisabled = false;

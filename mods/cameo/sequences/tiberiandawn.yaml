@@ -26,7 +26,7 @@ harv:
 		Filename: harv.shp
 	idle:
 		Facings: 32
-		InterpolatedFacings: 64
+		UseClassicFacings: True
 	harvest:
 		Start: 32
 		Length: 4
@@ -46,7 +46,7 @@ harv.destroyed:
 	idle:
 		Filename: harv.shp
 		Facings: 32
-		InterpolatedFacings: 64
+		UseClassicFacings: True
 		ZOffset: -512
 
 bggy:
@@ -305,6 +305,23 @@ msam:
 		Filename: msamicnh.shp
 		AddExtension: False
 
+td_gdi_boxer:
+	Defaults:
+		Filename: td_gdi_boxer.png
+		Scale: 0.75
+	idle:
+		Facings: 64
+		Offset: 0,12
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,12
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: td_gdi_boxer_icon.png
+
 gdiarcher:
 	Defaults:
 		Filename: gdiarcherchassis.png
@@ -319,7 +336,6 @@ gdiarcher:
 		Length: *
 	icon:
 		Filename: gdiarchericon.png
-		AddExtension: False
 
 mlrs:
 	Defaults:
@@ -1340,6 +1356,41 @@ gtwr:
 	icon:
 		Filename: gtwricnh.shp
 		AddExtension: False
+
+td_gdi_skyshield:
+	Defaults:
+		Filename: td_gdi_skyshield.png
+		Offset: 0,-2
+	idle:
+		Facings: 64
+	make:
+		Filename: td_gdi_skyshield_make.png
+		Length: *
+	damaged-idle:
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	dead:
+	bib:
+		Filename: mbGUN.tem
+		TilesetFilenames:
+			DESERT: mbGUN.des
+			WINTER: mbGUN.win
+			SNOW: mbGUN.sno
+			BARREN: mbGUN.bar
+			JUNGLE: mbGUN.jun
+			RA_SNOW: mbGUN.sno
+			RA_DESERT: mbGUN.des
+			RA_INTERIOR: mbGUN.int
+			ARRAKIS: mbGUN.des
+			ARRAKIS2: mbGUN.des
+		Length: *
+		UseTilesetExtension: false
+		Offset: 0,0
+	icon:
+		Filename: td_gdi_skyshield_icon.png
+		Offset: 0,0
 
 atwr:
 	Defaults:

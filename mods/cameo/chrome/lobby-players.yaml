@@ -519,7 +519,7 @@ ScrollPanel@GAME_DROPDOWN_TEMPLATE:
 					Height: 25
 
 ScrollPanel@FACTION_DROPDOWN_TEMPLATE:
-	Width: 200
+	Width: 400
 	Children:
 		ScrollItem@HEADER:
 			Background: scrollheader
@@ -549,5 +549,5 @@ ScrollPanel@FACTION_DROPDOWN_TEMPLATE:
 					Height: 15
 				Label@LABEL:
 					X: 40
-					Width: 150
+					Width: 330
 					Height: 25

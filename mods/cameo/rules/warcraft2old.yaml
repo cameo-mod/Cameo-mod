@@ -1272,6 +1272,7 @@ Player:
 ^wc2_watch_tower:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@detect: ^GenericAllDetector
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -2467,7 +2468,6 @@ wc2_human_guard_tower:
 	Valued:
 		Cost: 800
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -2485,7 +2485,6 @@ wc2_human_cannon_tower:
 	Valued:
 		Cost: 1600
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -3531,7 +3530,7 @@ wc2_orc_altar_of_storms:
 		ArrowSequence: wc2_arrow
 		ClockSequence: clock
 		CircleSequence: circles
-		UseDirectionalTarget: True
+		#UseDirectionalTarget: True
 		DirectionArrowAnimation: wc2_airstrikedirection
 		SupportPowerPaletteOrder: 10
 	# Bloodlust support power.
@@ -3778,7 +3777,6 @@ wc2_orc_guard_tower:
 	Valued:
 		Cost: 800
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -3796,7 +3794,6 @@ wc2_orc_cannon_tower:
 	Valued:
 		Cost: 1600
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -4797,7 +4794,6 @@ wc2_neutral_daemon:
 ####################################################################################################
 
 ^Upgrade:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Buildable:

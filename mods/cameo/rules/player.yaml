@@ -1,5 +1,4 @@
 ^BasePlayer:
-	AlwaysVisible:
 	Shroud:
 
 # Inherits@AlwaysShow: ^AlwaysShowForFactionsList
@@ -65,6 +64,7 @@ Player:
 	ConquestVictoryConditions:
 	PowerManager:
 		SpeechNotification: LowPower
+		TextNotification: The base is low on power.
 		AdviceInterval: 30000
 	AutoDeployManager:
 	AllyRepair:
@@ -180,7 +180,7 @@ Player:
 		ID: freeradar
 		Label: Free Minimap
 		Description: Minimap is always available for all players. Disables some game specific features like radar jamming.
-		Enabled: true
+		Enabled: false
 		DisplayOrder: 5
 		Prerequisites: global-freeminimap
 	GrantConditionOnPrerequisite@FREEMINIMAP:
@@ -207,13 +207,6 @@ Player:
 		Enabled: True
 		DisplayOrder: 16
 		Prerequisites: global-swreveal
-	LobbyPrerequisiteCheckbox@REGENTURRETS:
-		ID: regenturrets
-		Label: Regular Maintenance
-		Enabled: False
-		Description: Damaged turrets are slowly regenerated
-		DisplayOrder: 18
-		Prerequisites: regen-turrets
 	LobbyPrerequisiteCheckbox@WIPCONTENT:
 		ID: wipcontent
 		Label: WIP Content
@@ -332,6 +325,7 @@ Player:
 		Group: Building
 		LowPowerModifier: 200
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: Construction complete.
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
 		QueuedAudio: Building
@@ -346,6 +340,7 @@ Player:
 		Group: Defence
 		LowPowerModifier: 300
 		ReadyAudio: ConstructionComplete
+		ReadyTextNotification: Defense construction complete.
 		BlockedAudio: NoBuild
 		LimitedAudio: BuildingInProgress
 		QueuedAudio: Building
@@ -445,7 +440,7 @@ Player:
 		SpeedUp: True
 		LowPowerModifier: 400
 		ReadyAudio: NewOptions
-		ReadyTextNotification: New technology is now available.
+		ReadyTextNotification: New upgrade is now available.
 		QueuedAudio: Upgrading
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled

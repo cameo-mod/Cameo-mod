@@ -1,18 +1,31 @@
 GenericVoice:
+	Variants:
+		gdi: v01.aud,v03.aud
+		nod: v01.aud,v03.aud
 	Voices:
-		Select: await1v01,readyv01,report1v01,yessir1v01,await1v03,readyv03,report1v03,yessir1v03
-		Action: acknov01,acknov03,affirm1v01,affirm1v03,noprobv01,noprobv03,ritawayv01,ritawayv03,rogerv01,rogerv03,ugotitv01,ugotitv03
+		Select: await1,ready,report1,yessir1
+		Action: ackno,affirm1,noprob,ritaway,roger,ugotit
 		Die: nuyell1,nuyell4,nuyell5,nuyell6
 		Burned: yell1
 		Zapped: nuyell3
 		Poisoned: nuyell12
+	DisableVariants: Die, Burned, Zapped, Poisoned
 
 VehicleVoice:
+	Variants:
+		gdi: v00.aud,v02.aud
+		nod: v00.aud,v02.aud
+		asianalliance: v00.aud,v02.aud
+		syndicate: v00.aud,v02.aud
+		consortium: v00.aud,v02.aud
+		naxis: v00.aud,v02.aud
+		lnaxis: v00.aud,v02.aud
+		futuretech: v00.aud,v02.aud
 	Voices:
-		Select: vehic1v00,vehic1v02,yessir1v00,yessir1v02,report1v00,report1v02,await1v00,await1v02,unit1v00,unit1v02
-		Action: acknov00,acknov02,affirm1v00,affirm1v02,movout1v00,movout1v02
-		Attack: acknov00,acknov02,affirm1v00,affirm1v02,movout1v00,movout1v02
-		Unload: movout1v00,movout1v02
+		Select: vehic1,yessir1,report1,await1,unit1
+		Action: ackno,affirm1,movout1
+		Attack: ackno,affirm1,movout1
+		Unload: movout1
 
 CivilianMaleVoice:
 	Voices:
@@ -140,18 +153,26 @@ DinoVoice:
 ####################################################################################################
 
 RAGenericVoice:
+	Variants:
+		allies: a01.aud,a03.aud
+		modjapan: a01.aud,a03.aud
 	Voices:
-		Select: await1a01,readya01,report1a01,yessir1a01,await1a03,readya03,report1a03,yessir1a03
-		Action: acknoa01,affirm1a01,noproba01,overouta01,ritawaya01,rogera01,ugotita01,acknoa03,affirm1a03,noproba03,overouta03,ritawaya03,rogera03,ugotita03
+		Select: await1,ready,report1,yessir1
+		Action: ackno,affirm1,noprob,overout,ritaway,roger,ugotit
 		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 		Burned: dedman10
 		Zapped: dedman6
 		Poisoned: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
+	DisableVariants: Die, Burned, Zapped, Poisoned
 
 RAVehicleVoice:
+	Variants:
+		allies: a00.aud,a02.aud
+		modjapan: a00.aud,a02.aud
+		tkm: a00.aud,a02.aud
 	Voices:
-		Select: vehic1a00,yessir1a00,report1a00,await1a00,vehic1a02,yessir1a02,report1a02,await1a02
-		Action: acknoa00,affirm1a00,acknoa02,affirm1a02
+		Select: vehic1,yessir1,report1,await1
+		Action: ackno,affirm1
 
 RussianVoice:
 	Voices:
@@ -163,9 +184,11 @@ RussianVoice:
 		Poisoned: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 
 RussianVehicleVoice:
+	Variants:
+		soviet: r00.aud,r02.aud
 	Voices:
-		Select: vehic1r00,yessir1r00,report1r00,await1r00,vehic1r02,yessir1r02,report1r02,await1r02
-		Action: acknor00,affirm1r00,acknor02,affirm1r02
+		Select: vehic1,yessir1,report1,await1
+		Action: ackno,affirm1
 
 RussianConscriptVoice:
 	DefaultVariant: .wav
@@ -1261,7 +1284,7 @@ PowerPlantVoice:
 
 JapaneseVoice:
 	Voices:
-		Select: jawait1v01,jreadyv01,jreport1v01,jyessir1v01,jawait1v03,jreadyv03,jreport1v03,jyessir1v03
+		Select: jawait1v01,jreport1v01,jyessir1v01,jawait1v03,jreport1v03,jyessir1v03
 		Action: jacknov01,jacknov03,jaffirm1v01,jaffirm1v03,jnoprobv01,jnoprobv03,jritawayv01,jritawayv03,jrogerv01,jrogerv03,jugotitv01,jugotitv03
 		Die: dedman1,dedman2,dedman3,dedman4,dedman5,dedman7,dedman8
 		Burned: dedman10

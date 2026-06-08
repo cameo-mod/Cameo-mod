@@ -648,10 +648,18 @@
 ^AcceptsCloakCrate:
 	Cloak@TDcloak:
 		DetectionTypes: GroundCloak
-		InitialDelay: 15
-		CloakDelay: 90
+		InitialDelay: 125
+		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
+		CloakStyle: Palette
+		CloakedPalette: cloak_stealth
+		IsPlayerPalette: true
+		EffectImage: stealthfade
+		EffectPalette: greenspark
+		CloakEffectSequence: reversed
+		UncloakEffectSequence: idle
+		EffectTracksActor: True
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		RequiresCondition: cloak-crate-collected
 	ExternalCondition@CLOAK:
@@ -1637,7 +1645,7 @@
 	-RenderDetectionCircle:
 	Buildable:
 		BuildPaletteOrder: 20
-		BuildDurationModifier: 50
+		BuildDurationModifier: 100
 	TooltipExtras@FlyingInfantryTemplate:
 		Description: Flying Infantry
 
@@ -1712,6 +1720,8 @@
 		Type: Concrete
 	Buildable:
 		BuildDurationModifier: 100
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^BunkerTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1728,6 +1738,8 @@
 		Type: Concrete
 	Buildable:
 		BuildDurationModifier: 50
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^AdvancedDefenseTemplate:
 	Inherits@DisabledOverlay: ^DisableOnLowPowerOrPowerDown
@@ -1737,6 +1749,8 @@
 	Buildable:
 		BuildDurationModifier: 75
 	IgnoresDisguise:
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^SuperDefenseTemplate:
 	Inherits@DefenseBuffs: ^DefenseBuffs
@@ -1745,6 +1759,8 @@
 	Buildable:
 		BuildDurationModifier: 50
 	IgnoresDisguise:
+	WithTurretSearchlight:
+		RequiresCondition: !disabled
 
 ^PromotionUnitBuff:
 	FirepowerMultiplier@PromotionUnit:
@@ -1973,9 +1989,6 @@
 	Targetable@ParachuteAir:
 		RequiresCondition: parachute
 		TargetTypes: Air
-	DamageMultiplier@parachute:
-		Modifier: 75
-		RequiresCondition: parachute
 	Targetable@chrono:
 		RequiresCondition: !invulnerability
 	Passenger:
@@ -2732,6 +2745,7 @@
 			scbehemoth: battlefortresspassenger
 			tsm113: battlefortresspassenger
 			tkmbattlebus: battlefortresspassenger
+	MassEntersCargo:
 	SharedPassenger:
 		CargoType: Infantry
 	Garrisoner:
@@ -3368,6 +3382,36 @@
 	GrantConditionOnDamageState@DAMAGED:
 		Condition: damaged
 		ValidDamageStates: Light, Medium, Heavy, Critical
+	GrantConditionOnDamageState@ONFIRE:
+		Condition: critical-fire-trigger
+		ValidDamageStates: Heavy, Critical
+	GrantTimedCondition@CriticalFire:
+		RequiresCondition: critical-fire-trigger
+		Condition: critical-fire
+		# Below-half-health fire/smoke burst. GrantTimedCondition only supports a single duration value.
+		Duration: 750
+	WithIdleOverlay@CriticalFire:
+		Image: fire_building
+		Sequence: 1
+		IsDecoration: True
+		# Force the effect palette: the paletted fire SHP renders black on RGBA-palette buildings
+		# (PlayerPalette: player_rgba, e.g. Tesla Coil / Nod Laser Turret / Chronosphere) if it
+		# inherits the actor's palette. See fancy-stealth RGBA palette gotcha.
+		Palette: effect
+		RequiresCondition: critical-fire && !build-incomplete
+	SmokeParticleEmitter@CriticalFire:
+		Image: smoke_building_fire_glow
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 6, 10
+		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks); a longer Duration
+		# loops the one-shot sprite and pops a fresh puff back in. See groundfire in misc.yaml.
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
+		RequiresCondition: critical-fire && !build-incomplete
 	GrantConditionOnPrerequisite@CEMENTFACTORY:
 		Condition: techcementffact
 		Prerequisites: techcementffact
@@ -3629,11 +3673,11 @@
 	RenderSprites:
 		Palette: ra_temperat
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 	Targetable:
 		RequiresCondition: !damaged && !untargetable
 	Targetable@destroyed:
@@ -3660,11 +3704,11 @@
 	RenderSprites:
 		Palette: ra_temperat
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 	CaptureManager:
 	Capturable:
 		Types: none #tech
@@ -3718,11 +3762,11 @@
 		PlayerPalette: playerra
 	WithSpriteBody:
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 
 ^TechBuildingGarrisonable:
 	Inherits: ^TechBuilding
@@ -3784,11 +3828,11 @@
 	RenderSprites:
 		Palette: ra_temperat
 	TerrainLightSource:
-		Range: 3333
-		Intensity: 0.1
-		RedTint: 0.2
-		GreenTint: 0.1
-		BlueTint: 0.05
+		Range: 2048
+		Intensity: 0.05
+		RedTint: 0.1
+		GreenTint: 0.05
+		BlueTint: 0.025
 
 ^CivFieldHusk:
 	Inherits@1: ^SpriteActor
@@ -3961,7 +4005,7 @@
 	AppearsOnMapPreview:
 		Terrain: Tree
 	Health:
-		HP: 50000
+		HP: 20000
 	Armor:
 		Type: Wood
 	Targetable:
@@ -4006,8 +4050,15 @@
 	Tooltip:
 		Name: Tree (Burnt)
 		ShowOwnerRow: false
+	Health:
+		HP: 50000
+	Armor:
+		Type: Wood
+	Targetable:
+		TargetTypes: Trees
 	HiddenUnderShroud:
 	ScriptTriggers:
+	HitShape:
 	MapEditorData:
 		Categories: Tree
 	RequiresSpecificOwners:
@@ -4054,6 +4105,21 @@
 		Terrain: Tree
 	AppearsOnMapPreview:
 		Terrain: Tree
+	Health:
+		HP: 50000
+	Armor:
+		Type: Concrete
+	Targetable:
+		TargetTypes: Ground, Trees
+	HitShape:
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: RockExplode
+		EmptyWeapon: RockExplode
+	FireProjectilesOnDeath:
+		Weapons: RockDebris, RockDebris2, RockDebris3, RockDebris4
+		Pieces: 5, 10
+		Range: 1500, 2500
 	HiddenUnderShroud:
 	ScriptTriggers:
 	MapEditorData:
@@ -4103,6 +4169,20 @@
 		Image: fire
 		Sequence: 1
 		IsDecoration: True
+	# Burning wreckage billows rising dark smoke (our RGBA smoke_dark sprite). Stops when the
+	# husk decays and dies. Tune density via SpawnFrequency, rise via Gravity. See tools/gen_smoke.py.
+	SmokeParticleEmitter@GroundFireSmoke:
+		Image: smoke_dark
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 10, 16
+		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks); a longer Duration
+		# loops the one-shot sprite and pops a fresh puff back in. See groundfire in misc.yaml.
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
 	ChangesHealth:
 		Step: -100
 		StartIfBelow: 101
@@ -4145,7 +4225,6 @@
 
 ^Bridge:
 	Inherits@shape: ^1x1Shape
-	AlwaysVisible:
 	Tooltip:
 		Name: Bridge
 		ShowOwnerRow: false
@@ -4206,15 +4285,6 @@
 		Categories: Defense
 	Capturable:
 		Types: defense
-	GrantConditionOnPrerequisite@regen-turrets:
-		Prerequisites: regen-turrets
-		Condition: regen-turrets
-	ChangesHealth@regen-turrets:
-		PercentageStep: 1
-		Delay: 30
-		DamageCooldown: 375
-		StartIfBelow: 101
-		RequiresCondition: regen-turrets
 	AutoTarget:
 		InitialStance: AttackAnything
 		InitialStanceAI: AttackAnything
@@ -4586,7 +4656,7 @@
 		Condition: lockedon
 		RequiresCondition: lockon && !untargetable
 	WithDecoration@lockon:
-		Image: advancedtargeting_icon
+		Image: lockon_icon
 		Sequence: idle
 		Position: Center
 		RequiresCondition: lockon
@@ -5402,6 +5472,10 @@
 		Palette: ra_temperat
 	Tooltip:
 		Name: Boxes
+	Health:
+		HP: 10000
+	Targetable:
+		TargetTypes: Ground, Trees
 	MapEditorData:
 		Categories: Decoration
 
@@ -6056,7 +6130,6 @@
 		Condition: produced
 
 CPQDEBUGDUMMY:
-	AlwaysVisible:
 	Immobile:
 	ProductionQueue:
 		Type: Debug
@@ -6531,6 +6604,8 @@ CPQDEBUGDUMMY:
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		RequiresCondition: tscloak
 		IsPlayerPalette: true
+		# CloakStyle: Palette
+		# CloakedPalette: cloak_stealth
 		EffectImage: stealthfade
 		EffectPalette: greenspark
 		CloakEffectSequence: reversed
@@ -7116,6 +7191,7 @@ CPQDEBUGDUMMY:
 		ValidRelationships: Ally, Enemy, Neutral
 	Transforms:
 		PauseOnCondition: disabled || terrordroned
+		TransformTextNotification: New base hub has been deployed.
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
 	Tooltip:
@@ -7175,6 +7251,8 @@ CPQDEBUGDUMMY:
 	BaseBuilding:
 	BaseProvider:
 		Range: 15000
+	ProvidesRadar:
+		RequiresCondition: !jammed && !disabled
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete || disabled
@@ -7823,6 +7901,18 @@ CPQDEBUGDUMMY:
 		Actor: CPQDEBUGDUMMY
 	ProvidesPrerequisite@buildingname:
 		RequiresCondition: !(powerdown || infiltrated)
+	# Radar buildings are each faction's producer for the mid-tier "Upgrades" queue
+	# (mirrors ^IsTechnoBuilding providing the "Research" queue for tech centers).
+	# IMPORTANT: build-time scales with the NUMBER of buildings producing a queue
+	# (ClassicProductionQueue.BuildTimeSpeedReduction), so a faction must have exactly
+	# ONE Upgrades producer. Buildings that also inherit ^RadarBuilding but would be a
+	# 2nd producer (tech centers, main bases, secondary radars) must remove it via
+	# -Production@Upgrades: / -ProductionBar@Upgrades: — see EYE, TMPL,
+	# td_nod_templeprime, SCCOMMANDCENTER, SCNEXUS, ra2gaspysat.
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 
 ^IsTechnoBuilding:
 	Inherits@IDISABLE: ^DisableOnPowerDown
@@ -8275,7 +8365,6 @@ CPQDEBUGDUMMY:
 	Buildable:
 		BuildLimit: 1
 	Interactable:
-	AlwaysVisible:
 	ProvidesPrerequisite:
 	#PopControlled:
 	#	Limit: 1
@@ -8295,6 +8384,7 @@ CPQDEBUGDUMMY:
 	PromotionUpgrade:
 
 ^Cargo:
+	MassEnterableCargo:
 	Targetable@garrisoned:
 		TargetTypes: LoadedVehicle
 		RequiresCondition: loaded
@@ -8907,7 +8997,6 @@ CPQDEBUGDUMMY:
 
 ^BuildingPlug:
 	Interactable:
-	AlwaysVisible:
 	Building:
 	FootprintPlaceBuildingPreview:
 	KillsSelf:
@@ -8926,7 +9015,6 @@ CPQDEBUGDUMMY:
 
 ^BlastRadiusIndicator:
 	Interactable:
-	AlwaysVisible:
 	WithSpriteBody:
 	RenderSpritesEditorOnly:
 		Image: camera
@@ -8958,13 +9046,7 @@ CPQDEBUGDUMMY:
 		CloakDelay: 75
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
-		CloakStyle: Palette
-		CloakedPalette: cloak_stealth
-		EffectImage: stealthfade
-		EffectPalette: greenspark
-		CloakEffectSequence: reversed
-		UncloakEffectSequence: idle
-		EffectTracksActor: True
+		CloakStyle: Alpha
 	WithColoredSelectionBox:
 		ColorSource: Player
 		ValidRelationships: Ally
@@ -8984,6 +9066,7 @@ CPQDEBUGDUMMY:
 	Inherits: ^CloakedVehicle
 	Cloak:
 		DetectionTypes: AirCloak
+
 ####################################################################################################
 #		Civilian Cars
 ####################################################################################################

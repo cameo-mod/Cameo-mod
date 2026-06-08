@@ -304,9 +304,34 @@
 		BasePremultiply: true
 	MenuPostProcessEffect:
 		MenuEffect: Desaturated
+	ConditionalTintPostProcessEffect@RAIN:
+		RequiresCondition: weather-rain
+		Red: 0.78
+		Green: 0.86
+		Blue: 1.05
+		Ambient: 0.78
+	ConditionalTintPostProcessEffect@SANDSTORM:
+		RequiresCondition: weather-sandstorm
+		Red: 1.05
+		Green: 0.94
+		Blue: 0.72
+		Ambient: 0.82
+	ConditionalTintPostProcessEffect@BLIZZARD:
+		RequiresCondition: weather-blizzard
+		Red: 0.86
+		Green: 0.94
+		Blue: 1.08
+		Ambient: 0.80
 	GlowRenderer:
 		GlowRadius: 25
 		GlowIntensity: 0.2
+	HeatDistortionRenderer:
+		DistortionRadius: 300
+		DistortionStrength: 8
+	ShockwaveDistortionRenderer:
+		MaxRadius: 500
+		RingThickness: 30
+		Strength: 20
 	CloakPaletteEffect:
 	FlashPostProcessEffect@Nuke:
 		Type: Nuke

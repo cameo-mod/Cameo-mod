@@ -28,7 +28,8 @@ jobs:
         run: |
           make engine
           mkdir -p build/linux
-          sudo apt install libfuse2 zsync
+          sudo apt-get update
+          sudo apt-get install -y libfuse2 zsync
           ./packaging/linux/buildpackage.sh "${GIT_TAG}" "${PWD}/build/linux"
 
       - name: Upload Packages
@@ -92,13 +93,27 @@ jobs:
         run: |
           echo "GIT_TAG=${GITHUB_REF#refs/tags/}" >> ${GITHUB_ENV}
           sudo apt-get update
-          sudo apt-get install nsis wine64
+          sudo apt-get install -y nsis wine64 zsync
 
       - name: Package Installers
         run: |
           make engine
           mkdir -p build/windows
           ./packaging/windows/buildpackage.sh "${GIT_TAG}" "${PWD}/build/windows"
+          shopt -s nullglob
+          zips=(build/windows/*-winportable.zip)
+          if [ "${#zips[@]}" -eq 0 ]; then
+            echo "::error::No Windows winportable zip was produced."
+            exit 1
+          fi
+          for zip in "${zips[@]}"; do
+            asset_name="$(basename "${zip}")"
+            echo "Generating zsync metadata for ${asset_name}"
+            zsyncmake -e \
+              -u "https://github.com/${GITHUB_REPOSITORY}/releases/download/${GIT_TAG}/${asset_name}" \
+              -o "${zip}.zsync" \
+              "${zip}"
+          done
 
       - name: Upload Packages
         uses: svenstaro/upload-release-action@v2

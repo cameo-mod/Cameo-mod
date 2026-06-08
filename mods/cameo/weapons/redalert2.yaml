@@ -5551,6 +5551,20 @@ ChronoshiftImpact:
 		ImpactSounds: schrmov.wav
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
+	Warhead@Distort: HeatDistortion
+		Scale: 1.2
+		FadeFrames: 90
+		FadeInFrames: 0
+	Warhead@GlowPlayer: GlowImpact
+		UsePlayerColor: true
+		Scale: 3.5
+		FadeFrames: 90
+		FadeInFrames: 5
+	Warhead@GlowWhite: GlowImpact
+		Color: FFFFFF
+		Scale: 2.0
+		FadeFrames: 90
+		FadeInFrames: 5
 
 PortableChronoTeleport:
 	Warhead@1: CreateEffect

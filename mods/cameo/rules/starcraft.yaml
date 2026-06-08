@@ -528,6 +528,8 @@ SCCOMMANDCENTER:
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
 	Inherits@conyard: ^Conyard
 	Inherits@POWERDOWN: ^DisableOnPowerDown
 	Tooltip:
@@ -969,6 +971,7 @@ SCBUNKER:
 SCMISSILETURRET:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
+	-WithTurretSearchlight:
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@shape: ^2x2Shape
@@ -1357,6 +1360,8 @@ SCNEXUS:
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
 	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
 	Inherits@conyard: ^Conyard
 	Inherits@POWERDOWN: ^DisableOnPowerDown
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -1655,6 +1660,7 @@ SCPHOTONCANNON:
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@range: ^SingularityChargeUpgrade
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Photon Cannon
 	Valued:
@@ -2397,6 +2403,8 @@ sc_zerg_larva:
 	Inherits: ^Soldier
 	Tooltip:
 		Name: Zerg Larva
+	Buildable:
+		Description: actor-sc_zerg_larva.description
 	Valued:
 		Cost: 50
 	Mobile:
@@ -2473,6 +2481,7 @@ SCCREEPCOLONY:
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
 	Inherits: ^BuildingPlugProducer
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Creep Colony
 		RequiresCondition: !sunken && !spore
@@ -5607,6 +5616,8 @@ SCWRAITHDRONE:
 	Inherits@weapon: ^TerranShipArmorUpgrades
 	Tooltip:
 		Name: Wraith Drone
+	Buildable:
+		Description: template-carrier-slave.description
 	Valued:
 		Cost: 1000
 	Hovers:
@@ -6430,7 +6441,7 @@ SCDRAGOON:
 	Power:
 		Amount: -60
 	Buildable:
-		Prerequisites: ~sccyberneticscore, ~!upatreus
+		Prerequisites: ~sccyberneticscore
 		Queue: Infantry, RAInfantry
 		Description: actor-scdragoon.description
 	Mobile:
@@ -7621,6 +7632,8 @@ SCINTERCEPTOR:
 	Inherits@speed: ^GraviticUpgrade
 	Tooltip:
 		Name: Interceptor
+	Buildable:
+		Description: template-carrier-slave.description
 	Valued:
 		Cost: 500
 	Aircraft:
@@ -8416,6 +8429,7 @@ upidol:
 		InitialDelay: 50
 		CloakDelay: 50
 		RequiresCondition: deployed
+		CloakStyle: Alpha
 		IsPlayerPalette: true
 		PauseOnCondition: cloak-force-disabled || base-reveal
 
@@ -10479,7 +10493,9 @@ SCSCOURGEDRONE:
 		Name: Scourge Drone
 	Power:
 		Amount: 0
-	-Buildable:
+	Buildable:
+		-Queue:
+		Description: template-carrier-slave.description
 	Aircraft:
 		VTOL: false
 		Repulsable: false

@@ -398,7 +398,6 @@ halloween_graveyard.turbine:
 	RenderSprites:
 		Image: halloween_graveyard
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 
@@ -1893,7 +1892,6 @@ halloween_blob:
 		StartIfBelow: 100
 		DamageCooldown: 1
 halloween_upgrade.ghost:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1912,7 +1910,6 @@ halloween_upgrade.ghost:
 		Image: halloween_upgrade.ghost
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.boiling:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1931,7 +1928,6 @@ halloween_upgrade.boiling:
 		Image: halloween_upgrade.boiling
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.axe:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1950,7 +1946,6 @@ halloween_upgrade.axe:
 		Image: halloween_upgrade.axe
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.sword:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1969,7 +1964,6 @@ halloween_upgrade.sword:
 		Image: halloween_upgrade.sword
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.bows:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
@@ -1988,7 +1982,6 @@ halloween_upgrade.bows:
 		Image: halloween_upgrade.bows
 	ProvidesPrerequisite@upgradename:
 halloween_upgrade.mana:
-	AlwaysVisible:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:

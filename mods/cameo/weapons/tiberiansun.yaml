@@ -343,6 +343,7 @@ TSRPGTowerRail:
 
 ^TSArtilleryWeapon:
 	Inherits: ^TSCannon
+	Inherits@glow: ^ImpactGlow
 	Projectile: Bullet
 		Blockable: false
 	Warhead@1Dam: SpreadDamage

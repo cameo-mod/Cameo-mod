@@ -95,13 +95,13 @@ FileSystem: DefaultFileSystem
 
 MapFolders:
 	cameo|maps: System
-	cameo|mappack: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
 
 Rules:
 	cameo|rules/misc.yaml
 	cameo|rules/player.yaml
 	cameo|rules/world.yaml
+	cameo|rules/map-generators.yaml
 	cameo|rules/music.yaml
 	cameo|rules/palettes.yaml
 	cameo|rules/defaults.yaml
@@ -290,6 +290,7 @@ ChromeLayout:
 	common|chrome/dropdowns.yaml
 	common|chrome/editor.yaml
 	common|chrome/gamesave-browser.yaml
+	common|chrome/load-game-browser.yaml
 	common|chrome/gamesave-loading.yaml
 	common|chrome/ingame.yaml
 	cameo|chrome/ingame-chat.yaml
@@ -308,6 +309,7 @@ ChromeLayout:
 	cameo|chrome/ingame-observer.yaml
 	cameo|chrome/ingame-player.yaml
 	cameo|chrome/ingame-transients.yaml
+	cameo|chrome/commander-tree-window.yaml
 	cameo|chrome/lobby.yaml
 	common|chrome/lobby-kickdialogs.yaml
 	common|chrome/lobby-mappreview.yaml
@@ -379,6 +381,7 @@ FluentMessages:
 	common|fluent/chrome.ftl
 	common|fluent/hotkeys.ftl
 	common|fluent/rules.ftl
+	common|fluent/ingame-debug.ftl
 	cameo|fluent/en.ftl
 	cameo|fluent/rules/en.ftl
 	cameo|fluent/rules/ftech_en.ftl
@@ -400,7 +403,7 @@ Hotkeys:
 
 LoadScreen: FitImageLoadScreen
 	SplashImage: cameo|uibits/splash-screen.png
-	Image: cameo|uibits/loadscreen2.png,cameo|uibits/loadscreen3.png,cameo|uibits/loadscreen4.png,cameo|uibits/loadscreen5.png,cameo|uibits/loadscreen6.png,cameo|uibits/loadscreen7.png,cameo|uibits/loadscreen8.png,cameo|uibits/loadscreen9.png,cameo|uibits/loadscreen10.png,cameo|uibits/loadscreen11.png,cameo|uibits/loadscreen12.png,cameo|uibits/loadscreen13.png,cameo|uibits/loadscreen14.png,cameo|uibits/loadscreen15.png,cameo|uibits/loadscreen16.png,cameo|uibits/loadscreen17.png,cameo|uibits/loadscreen18.png,cameo|uibits/loadscreen19.png,cameo|uibits/loadscreen20.png,cameo|uibits/loadscreen21.png,cameo|uibits/loadscreen22.png
+	Image: cameo|uibits/loadscreen2.png,cameo|uibits/loadscreen3.png,cameo|uibits/loadscreen4.png,cameo|uibits/loadscreen5.png,cameo|uibits/loadscreen6.png,cameo|uibits/loadscreen7.png,cameo|uibits/loadscreen8.png,cameo|uibits/loadscreen9.png,cameo|uibits/loadscreen10.png,cameo|uibits/loadscreen11.png,cameo|uibits/loadscreen12.png,cameo|uibits/loadscreen13.png,cameo|uibits/loadscreen14.png,cameo|uibits/loadscreen15.png,cameo|uibits/loadscreen16.png,cameo|uibits/loadscreen17.png,cameo|uibits/loadscreen18.png,cameo|uibits/loadscreen19.png,cameo|uibits/loadscreen20.png,cameo|uibits/loadscreen21.png,cameo|uibits/loadscreen22.png,cameo|uibits/loadscreen23.png,cameo|uibits/loadscreen24.png
 
 ServerTraits:
 	LobbyCommands
@@ -408,7 +411,6 @@ ServerTraits:
 	PlayerPinger:
 		ConnTimeout: 500000
 	MasterServerPinger
-	LobbySettingsNotification
 
 ChromeMetrics:
 	common|metrics.yaml

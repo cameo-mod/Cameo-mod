@@ -1,4 +1,4 @@
-﻿World:
+World:
 	FactionCA@tsgdi:
 		Name: GDI TS
 		InternalName: tsgdi
@@ -2311,7 +2311,6 @@ tsgtplug2:
 		Cost: 1500
 	RenderSprites:
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -2327,7 +2326,6 @@ tsgtplug3:
 		Cost: 1000
 	RenderSprites:
 	Interactable:
-	AlwaysVisible:
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
@@ -2677,6 +2675,10 @@ tsgtradrmutant:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
 	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
 		Type: Rectangle
@@ -3470,6 +3472,7 @@ tsntstlh:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@SHAPE: ^3x2Shape
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
 	Valued:
 		Cost: 2500
@@ -7991,6 +7994,7 @@ TSSTNK:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
 	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
 	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
 	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
