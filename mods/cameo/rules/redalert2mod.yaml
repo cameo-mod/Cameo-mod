@@ -12446,6 +12446,7 @@ nax_flak88:
 	Inherits@Atlantikwall: ^Atlantikwall
 	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
 	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	-WithTurretSearchlight:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -13074,6 +13075,7 @@ nax2_sturmcann:
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Inherits@EMP: ^TurretEMP
 	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	-WithTurretSearchlight:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
