@@ -5,9 +5,9 @@ Metadata:
 	WebIcon32: https://raw.githubusercontent.com/Zeruel87/Cameo-mod/master/packaging/artwork/icon_32x32.png
 	WindowTitle: mod-windowtitle
 
-PackageFormats: Mix, AudioBag, D2kSoundResources
+PackageFormats: Mix, AudioBag, D2kSoundResources, MegV3
 
-FileSystem: DefaultFileSystem
+FileSystem: CameoRemasterFileSystem
 	Packages:
 		~^SupportDir|Content/cameo/: game
 		^EngineDir
@@ -474,9 +474,9 @@ SupportsMapsFrom: cnc, ra, cameo
 
 SoundFormats: Aud, Wav, Mp3, Ogg
 
-SpriteFormats: ShpTD, TmpTD, ShpTS, TmpRA, PngSheet, R8
+SpriteFormats: ShpTD, TmpTD, ShpTS, TmpRA, PngSheet, R8, ShpRemastered, Tga, Dds
 
-TerrainFormat: DefaultTerrain
+TerrainFormat: CameoRemasterTerrain
 
 SpriteSequenceFormat: CameoSpriteSequence
 	IndexedSheetSize: 2048

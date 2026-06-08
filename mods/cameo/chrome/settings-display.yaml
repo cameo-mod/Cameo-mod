@@ -1,5 +1,5 @@
 Container@DISPLAY_PANEL:
-	Logic: DisplaySettingsLogic
+	Logic: DisplaySettingsLogic, CameoRemasterDisplaySettingsLogic
 	Width: PARENT_WIDTH
 	Height: PARENT_HEIGHT
 	Children:
@@ -223,6 +223,21 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: Selected Unit Tooltip
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 20
+					Children:
+						Container@REMASTER_ART_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@REMASTER_ART_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-remaster-art-container.label
+									TooltipText: checkbox-remaster-art-container.tooltip
+									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
 				Container@SPACER:
 				Background@VIDEO_SECTION_HEADER:
 					X: 5
