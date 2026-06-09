@@ -31,8 +31,13 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("How often (in ticks) to recompute the cap. Larger = cheaper, slightly less responsive.")]
 		public readonly int RecalculationInterval = 25;
 
+		[Desc("Exclude resource collectors (any actor with the Harvester trait) from the per-bot count,",
+			"so lowering the budget never starves the bot economy. Faction-agnostic across all rulesets.")]
+		public readonly bool IgnoreHarvesters = true;
+
 		[ActorReference]
-		[Desc("Actor types excluded from the per-bot unit count (e.g. harvesters, MCVs).")]
+		[Desc("Additional actor types excluded from the per-bot unit count by name (e.g. MCVs).",
+			"Harvesters are already covered by IgnoreHarvesters.")]
 		public readonly HashSet<string> IgnoredActorTypes = new();
 
 		public override object Create(ActorInitializer init) => new BotGlobalUnitBudget(init.Self, this);
@@ -92,13 +97,18 @@ namespace OpenRA.Mods.Cameo.Traits
 			// Count this bot's live mobile units (IPositionable excludes buildings) - same notion of
 			// "army" the unit builders use. Stop as soon as we reach the cap; no need to count further.
 			var count = 0;
-			var ignore = Info.IgnoredActorTypes.Count > 0;
+			var ignoreNames = Info.IgnoredActorTypes.Count > 0;
 			foreach (var a in world.ActorsHavingTrait<IPositionable>())
 			{
 				if (a.Owner != player || a.IsDead)
 					continue;
 
-				if (ignore && Info.IgnoredActorTypes.Contains(a.Info.Name))
+				// Resource collectors don't count against the combat budget, so a lower budget
+				// never starves the economy.
+				if (Info.IgnoreHarvesters && a.Info.HasTraitInfo<HarvesterInfo>())
+					continue;
+
+				if (ignoreNames && Info.IgnoredActorTypes.Contains(a.Info.Name))
 					continue;
 
 				if (++count >= cap)
