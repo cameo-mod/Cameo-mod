@@ -229,20 +229,36 @@ namespace OpenRA.Mods.Cameo.Terrain
 				return null;
 
 			// The HD file prefix is always the full classic filename, e.g. "clear1.win" -> "CLEAR1.WIN".
-			// The containing folder name is INCONSISTENT across tilesets in the Remastered meg: TEMPERATE
-			// strips the extension (CLEAR1\CLEAR1.TEM-0000.DDS) while DESERT/WINTER keep it
-			// (CLEAR1.WIN\CLEAR1.WIN-0000.DDS). Probe the with-extension form first, then the stripped
-			// form, and use whichever resolves tile 0.
 			var image = templateInfo.Images[0];
 			var prefix = Path.GetFileName(image).ToUpperInvariant();
 			var folderWithExt = prefix;
 			var folderNoExt = Path.GetFileNameWithoutExtension(image).ToUpperInvariant();
 			var fileSystem = Game.ModData.DefaultFileSystem;
 
+			// Only the tile indices the template actually defines have HD art in the meg. Cells implied
+			// by Size but absent from Tiles (common in irregular cliff/shore templates, e.g. desert s14
+			// is 2x2 but only defines tiles 0-2) are never exported, so requiring them would wrongly drop
+			// the whole template to classic - the visible cause of HD cliffs not blending with neighbours.
+			var firstDefined = -1;
+			for (var i = 0; i < tileCount; i++)
+			{
+				if (templateInfo.Contains(i))
+				{
+					firstDefined = i;
+					break;
+				}
+			}
+
+			if (firstDefined < 0)
+				return null;
+
+			// The containing folder name is INCONSISTENT across tilesets in the Remastered meg: TEMPERATE
+			// strips the extension (CLEAR1\CLEAR1.TEM-0000.DDS) while DESERT/WINTER/RA keep it
+			// (CLEAR1.WIN\CLEAR1.WIN-0000.DDS). Probe both forms using the first defined tile.
 			string folder = null;
 			foreach (var candidate in new[] { folderWithExt, folderNoExt })
 			{
-				if (fileSystem.Exists($"{terrainInfo.RemasteredFolder}\\{candidate}\\{prefix}-0000.DDS"))
+				if (fileSystem.Exists($"{terrainInfo.RemasteredFolder}\\{candidate}\\{prefix}-{firstDefined:0000}.DDS"))
 				{
 					folder = candidate;
 					break;
@@ -254,9 +270,15 @@ namespace OpenRA.Mods.Cameo.Terrain
 
 			for (var i = 0; i < tileCount; i++)
 			{
+				// Skip cells the template doesn't use - they have no HD frame and are never placed
+				// (TileSprite returns MissingTile for the null slot).
+				if (!templateInfo.Contains(i))
+					continue;
+
 				var path = $"{terrainInfo.RemasteredFolder}\\{folder}\\{prefix}-{i:0000}.DDS";
 
-				// Any missing tile -> keep the whole template classic, avoiding holes in animated/custom templates.
+				// A defined tile missing its HD art -> keep the whole template classic, avoiding
+				// mismatched tiles within one template (e.g. animated water or partial custom SHPs).
 				if (!fileSystem.Exists(path))
 					return null;
 
