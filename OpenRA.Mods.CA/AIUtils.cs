@@ -36,11 +36,26 @@ namespace OpenRA.Mods.CA
 							.Any(availableCells => availableCells > 0);
 		}
 
+		// PERF: FindQueues was doing a whole-world player.World.ActorsWithTrait<ProductionQueue>()
+		// scan (every player's queues) on every call — ~tens of times per tick across all bots, each
+		// allocating a LINQ chain. Cache the global production-queue list once per WorldTick (the
+		// actor set is stable within a tick, and identical on every client, so this is deterministic
+		// and behaviour-preserving) and just filter the cached array per call.
+		static int findQueuesCacheTick = -1;
+		static TraitPair<ProductionQueue>[] findQueuesCache;
+
 		public static IEnumerable<ProductionQueue> FindQueues(Player player, string category)
 		{
-			return player.World.ActorsWithTrait<ProductionQueue>()
-				.Where(a => a.Actor.Owner == player && a.Trait.Info.Type == category && a.Trait.Enabled)
-				.Select(a => a.Trait);
+			var world = player.World;
+			if (findQueuesCacheTick != world.WorldTick || findQueuesCache == null)
+			{
+				findQueuesCache = world.ActorsWithTrait<ProductionQueue>().ToArray();
+				findQueuesCacheTick = world.WorldTick;
+			}
+
+			foreach (var a in findQueuesCache)
+				if (a.Actor.Owner == player && a.Trait.Info.Type == category && a.Trait.Enabled)
+					yield return a.Trait;
 		}
 
 		public static IEnumerable<Actor> GetActorsWithTrait<T>(World world)
