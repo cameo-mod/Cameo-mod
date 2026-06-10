@@ -842,80 +842,19 @@ wc2_human_sunwell:
 ####################################################################################################
 
 wc2_human_mcv:
+	Inherits: wc2_human_engineer
 	Defaults:
-		Filename: wc2_human_peasant.shp
-		Scale: 3
-	Inherits: ^WC2HumanInfantry
-	stand:
-		Offset: 0,0
-	idle:
-		Offset: 0,0
-	idle-n:
-		Offset: 0,0
-	idle-ne:
-		Offset: 0,0
-	idle-e:
-		Offset: 0,0
-	idle-se:
-		Offset: 0,0
-	idle-s:
-		Offset: 0,0
-	idle-sw:
-		Offset: 0,0
-	idle-w:
-		Offset: 0,0
-	idle-nw:
-		Offset: 0,0
-	run:
-		Combine:
-			wc2_human_peasant@1:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 8, 9, 0, 10, 11, 0
-			wc2_human_peasant@2:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 12, 13, 1, 14, 15, 1
-			wc2_human_peasant@3:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 16, 17, 2, 18, 19, 2
-			wc2_human_peasant@4:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 20, 21, 3, 22, 23, 3
-			wc2_human_peasant@5:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 24, 25, 4, 26, 27, 4
-			wc2_human_peasant@6:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 28, 29, 5, 30, 31, 5
-			wc2_human_peasant@7:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 32, 33, 6, 34, 35, 6
-			wc2_human_peasant@8:
-				Filename: wc2_human_peasant.shp
-				Length: 6
-				Frames: 36, 37, 7, 38, 39, 7
-		Length: 6
-		Offset: 0,0
-	die:
-		Start: 80
-		Offset: 0,0
-	die-crushed:
-		Start: 80
-		Offset: 0,0
+		Filename: wc2_human_engineer.shp
+		Scale: 0.9
 	icon:
 		Filename: wc2_cameos_human_buildings.png
 		Start: 1
 
 wc2_human_peasant:
-	Defaults:
-		Filename: wc2_human_peasant.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.9
+		Filename: wc2_human_peasant.shp
 	run:
 		Start: 8
 		Length: 4
@@ -962,9 +901,10 @@ wc2_human_peasantgold:
 		Tick: 160
 
 wc2_human_peasantlumber:
-	Defaults:
-		Filename: wc2_human_peasantlumber.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.9
+		Filename: wc2_human_peasantlumber.shp
 	stand:
 		Stride: 5
 	idle:
@@ -1031,9 +971,10 @@ wc2_human_peasantlumber:
 		Start: 16
 
 wc2_human_engineer:
-	Defaults:
-		Filename: wc2_human_engineer.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.9
+		Filename: wc2_human_engineer.shp
 	run:
 		Length: 6
 		Combine:
@@ -1078,9 +1019,10 @@ wc2_human_engineer:
 		Start: 17
 
 wc2_human_footman:
-	Defaults:
-		Filename: wc2_human_footman.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_footman.shp
 	run:
 		Length: 6
 		Combine:
@@ -1124,6 +1066,7 @@ wc2_human_footman2:
 	icon:
 		Filename: wc2_footman2_icon.png
 	Defaults:
+		Scale: 0.8
 		Filename: AllianceFootman2.png
 	stand:
 		Facings: 8
@@ -1147,6 +1090,7 @@ wc2_human_militia2:
 	icon:
 		Filename: wc2_Millitia_icon.png
 	Defaults:
+		Scale: 0.8
 		Filename: AllianceMilitiaFinal2.png
 	stand:
 		Facings: 8
@@ -1180,9 +1124,10 @@ wc2_human_militia2:
 		Facings: 8
 
 wc2_human_elven_archer:
-	Defaults:
-		Filename: wc2_human_elven_archer.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_elven_archer.shp
 	run:
 		Length: 6
 		Combine:
@@ -1280,9 +1225,10 @@ wc2_human_elven_archer:
 		Start: 2
 
 wc2_human_elven_ranger:
-	Defaults:
-		Filename: wc2_human_elven_ranger.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_elven_ranger.shp
 	run:
 		Length: 6
 		Combine:
@@ -1334,7 +1280,7 @@ wc2_human_high_elf_archer:
 		Filename: wc2_high_elf_archer_icon.png
 	Defaults:
 		Filename: AllianceHighElfArcher2.png
-		Scale: 1
+		Scale: 0.8
 	stand:
 		Facings: 8
 	run:
@@ -1357,6 +1303,7 @@ wc2_human_rifleman:
 	icon:
 		Filename: wc2_Rifleman_icon.png
 	Defaults:
+		Scale: 0.8
 		Filename: AllianceRifleman2.png
 	stand:
 		Facings: 8
@@ -1376,9 +1323,10 @@ wc2_human_rifleman:
 		Facings: 8
 
 wc2_human_knight:
-	Defaults:
-		Filename: wc2_human_knight.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_knight.shp
 	stand:
 		Offset: 0,0
 	idle:
@@ -1533,9 +1481,10 @@ wc2_human_knight:
 		Start: 4
 
 wc2_human_paladin:
-	Defaults:
-		Filename: wc2_human_paladin.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_paladin.shp
 	run:
 		Length: 5
 		Combine:
@@ -1583,6 +1532,7 @@ wc2_human_knight2:
 	icon:
 		Filename: wc2_knight2_icon.png
 	Defaults:
+		Scale: 0.8
 		Filename: AllianceKnight2.png
 	stand:
 		Start: 0
@@ -1604,9 +1554,10 @@ wc2_human_knight2:
 		Facings: 8
 
 wc2_human_demolitionsquad:
-	Defaults:
-		Filename: wc2_human_demolitionsquad.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_demolitionsquad.shp
 	run:
 		Length: 5
 		Combine:
@@ -1658,6 +1609,7 @@ wc2_human_mortarteam2:
 	icon:
 		Filename: wc2_mortar_team_icon.png
 	Defaults:
+		Scale: 0.8
 		Filename: AllianceMortarTeam2.png
 	stand:
 		Facings: 8
@@ -1677,9 +1629,10 @@ wc2_human_mortarteam2:
 		Facings: 8
 
 wc2_human_mage:
-	Defaults:
-		Filename: wc2_human_mage.shp
 	Inherits: ^WC2HumanInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_mage.shp
 	run:
 		Length: 6
 		Combine:
@@ -1728,7 +1681,7 @@ wc2_human_high_elf_priest:
 		Filename: wc2_high_elf_priest_icon.png
 	Defaults:
 		Filename: AlliancePriest2.png
-		Scale: 0.8
+		Scale: 0.7
 	stand:
 		Facings: 8
 	run:
@@ -1752,7 +1705,7 @@ wc2_human_high_elf_sorceress:
 		Filename: wc2_high_elf_sorceres_icon.png
 	Defaults:
 		Filename: AllianceSorceress2.png
-		Scale: 0.8
+		Scale: 0.7
 	stand:
 		Facings: 8
 	run:
@@ -1775,6 +1728,7 @@ wc2_human_archmage:
 	icon:
 		Filename: wc2_archmage_icon.png
 	Defaults:
+		Scale: 1
 		Filename: ArchWizard2.png
 	stand:
 		Facings: 8
@@ -1794,9 +1748,10 @@ wc2_human_archmage:
 		Facings: 8
 
 wc2_human_ballista:
-	Defaults:
-		Filename: wc2_human_ballista.shp
 	Inherits: ^WC2HumanCatapult
+	Defaults:
+		Scale: 1
+		Filename: wc2_human_ballista.shp
 	shoot:
 		Start: 16
 		Length: 2
@@ -1808,6 +1763,7 @@ wc2_human_ballista:
 wc2_human_siege_engine:
 	Inherits: ^wc2_status_icons
 	Defaults:
+		Scale: 1
 		Filename: wc2_siege_engine.png
 	stand:
 		Facings: 8
@@ -1839,25 +1795,28 @@ wc2_human_siege_engine:
 ####################################################################################################
 
 wc2_human_oil_tanker:
-	Defaults:
-		Filename: wc2_human_oil_tanker.shp
 	Inherits: ^WC2HumanShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_human_oil_tanker.shp
 	die:
 		Start: 16
 	icon:
 		Start: 11
 
 wc2_human_transport:
-	Defaults:
-		Filename: wc2_human_transport.shp
 	Inherits: ^WC2HumanShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_human_transport.shp
 	icon:
 		Start: 12
 
 wc2_human_elven_destroyer:
-	Defaults:
-		Filename: wc2_human_elven_destroyer.shp
 	Inherits: ^WC2HumanShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_human_elven_destroyer.shp
 	turret:
 		Filename: mgun.shp
 		Facings: 32
@@ -1868,9 +1827,10 @@ wc2_human_elven_destroyer:
 		Start: 13
 
 wc2_human_battleship:
-	Defaults:
-		Filename: wc2_human_battleship.shp
 	Inherits: ^WC2HumanShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_human_battleship.shp
 	turret:
 		Filename: mgun.shp
 		Facings: 32
@@ -1881,9 +1841,10 @@ wc2_human_battleship:
 		Start: 14
 
 wc2_human_gnomish_submarine:
-	Defaults:
-		Filename: wc2_human_gnomish_submarine.shp
 	Inherits: ^WC2HumanShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_human_gnomish_submarine.shp
 	shoot:
 		Combine:
 			wc2_human_gnomish_submarine@1:
@@ -1929,9 +1890,10 @@ wc2_human_gnomish_submarine:
 ####################################################################################################
 
 wc2_human_gnomish_flying_machine:
-	Defaults:
-		Filename: wc2_human_gnomish_flying_machine.shp
 	Inherits: ^WC2HumanAirUnit
+	Defaults:
+		Scale: 1
+		Filename: wc2_human_gnomish_flying_machine.shp
 	idle:
 		Length: 2
 		Tick: 40
@@ -1943,9 +1905,10 @@ wc2_human_gnomish_flying_machine:
 		Start: 9
 
 wc2_human_gyrocopter2:
-	Defaults:
-		Filename: AllianceGyrocopter2.png
 	Inherits: ^WC2HumanAirUnit
+	Defaults:
+		Scale: 1
+		Filename: AllianceGyrocopter2.png
 	icon:
 		Filename: tse3icon.png
 	run:
@@ -1966,9 +1929,10 @@ wc2_human_gyrocopter2:
 		Tick: 80
 
 wc2_human_gryphon_rider:
-	Defaults:
-		Filename: wc2_human_gryphon_rider.shp
 	Inherits: ^WC2HumanAirUnit
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_human_gryphon_rider.shp
 	idle:
 		Length: 4
 		Tick: 180
@@ -2235,80 +2199,19 @@ wc2_orc_goldmine:
 ####################################################################################################
 
 wc2_orc_mcv:
+	Inherits: wc2_orc_engineer
 	Defaults:
-		Filename: wc2_orc_peon.shp
-		Scale: 3
-	Inherits: ^WC2OrcInfantry
-	stand:
-		Offset: 0,0
-	idle:
-		Offset: 0,0
-	idle-n:
-		Offset: 0,0
-	idle-ne:
-		Offset: 0,0
-	idle-e:
-		Offset: 0,0
-	idle-se:
-		Offset: 0,0
-	idle-s:
-		Offset: 0,0
-	idle-sw:
-		Offset: 0,0
-	idle-w:
-		Offset: 0,0
-	idle-nw:
-		Offset: 0,0
-	run:
-		Combine:
-			wc2_orc_peon@1:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 8, 9, 0, 10, 11, 0
-			wc2_orc_peon@2:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 12, 13, 1, 14, 15, 1
-			wc2_orc_peon@3:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 16, 17, 2, 18, 19, 2
-			wc2_orc_peon@4:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 20, 21, 3, 22, 23, 3
-			wc2_orc_peon@5:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 24, 25, 4, 26, 27, 4
-			wc2_orc_peon@6:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 28, 29, 5, 30, 31, 5
-			wc2_orc_peon@7:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 32, 33, 6, 34, 35, 6
-			wc2_orc_peon@8:
-				Filename: wc2_orc_peon.shp
-				Length: 6
-				Frames: 36, 37, 7, 38, 39, 7
-		Length: 6
-		Offset: 0,0
-	die:
-		Start: 80
-		Offset: 0,0
-	die-crushed:
-		Start: 80
-		Offset: 0,0
+		Filename: wc2_orc_engineer.shp
+		Scale: 1
 	icon:
 		Filename: wc2_cameos_orc_buildings.png
 		Start: 1
 
 wc2_orc_peon:
-	Defaults:
-		Filename: wc2_orc_peon.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_peon.shp
 	run:
 		Start: 8
 		Length: 4
@@ -2355,9 +2258,10 @@ wc2_orc_peon_full:
 		Tick: 160
 
 wc2_orc_peonlumber:
-	Defaults:
-		Filename: wc2_orc_peon.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_peon.shp
 	stand:
 		Stride: 5
 	idle:
@@ -2422,9 +2326,10 @@ wc2_orc_peonlumber:
 		Start: 18
 
 wc2_orc_engineer:
-	Defaults:
-		Filename: wc2_orc_engineer.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_engineer.shp
 	run:
 		Length: 6
 		Combine:
@@ -2469,9 +2374,10 @@ wc2_orc_engineer:
 		Start: 19
 
 wc2_orc_grunt:
-	Defaults:
-		Filename: wc2_orc_grunt.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_grunt.shp
 	run:
 		Length: 6
 		Combine:
@@ -2515,6 +2421,7 @@ wc2_orc_grunt2:
 	icon:
 		Filename: HordeGruntIcon.png
 	Defaults:
+		Scale: 0.8
 		Filename: HordePromoGrunt-135.png
 	stand:
 		Facings: 8
@@ -2534,9 +2441,10 @@ wc2_orc_grunt2:
 		Facings: 8
 
 wc2_orc_troll_axethrower:
-	Defaults:
-		Filename: wc2_orc_troll_axethrower.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_troll_axethrower.shp
 	run:
 		Length: 6
 		Combine:
@@ -2627,9 +2535,10 @@ wc2_orc_troll_axethrower:
 		Start: 2
 
 wc2_orc_troll_berserker:
-	Defaults:
-		Filename: wc2_orc_troll_berserker.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_troll_berserker.shp
 	run:
 		Length: 6
 		Combine:
@@ -2695,6 +2604,7 @@ wc2_orc_troll_spearthrower:
 wc2_orc_kodo_beast:
 	Inherits: ^wc2_status_icons
 	Defaults:
+		Scale: 1
 		Filename: HordeKodoBeast.png
 	stand:
 		Facings: 8
@@ -2722,9 +2632,10 @@ wc2_orc_kodo_beast:
 		Filename: HordeKodoBeastIcon.png
 
 wc2_orc_ogre:
-	Defaults:
-		Filename: wc2_orc_ogre.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_ogre.shp
 	stand:
 		Offset: 0,0
 	idle:
@@ -2893,9 +2804,10 @@ wc2_orc_ogre:
 		Start: 4
 
 wc2_orc_ogremage:
-	Defaults:
-		Filename: wc2_orc_ogremage.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_ogremage.shp
 	run:
 		Length: 6
 		Combine:
@@ -2939,9 +2851,10 @@ wc2_orc_ogremage:
 		Start: 5
 
 wc2_orc_catapult:
-	Defaults:
-		Filename: wc2_orc_catapult.shp
 	Inherits: ^WC2OrcCatapult
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_catapult.shp
 	# This makes the spoon wiggle just after firing.
 	shoot:
 		Combine:
@@ -3024,6 +2937,7 @@ wc2_orc_catapult:
 wc2_orc_siege_engine:
 	Inherits: ^wc2_status_icons
 	Defaults:
+		Scale: 1
 		Filename: wc2_siege_engine.png
 	stand:
 		Facings: 8
@@ -3051,9 +2965,10 @@ wc2_orc_siege_engine:
 		Filename: wc2_siege_engine_icon.png
 
 wc2_orc_goblin_sappers:
-	Defaults:
-		Filename: wc2_orc_goblin_sappers.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_goblin_sappers.shp
 	run:
 		Length: 6
 		Combine:
@@ -3100,9 +3015,10 @@ wc2_orc_goblin_sappers:
 		Start: 7
 
 wc2_orc_deathknight:
-	Defaults:
-		Filename: wc2_orc_deathknight.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_deathknight.shp
 	run:
 		Length: 5
 		Combine:
@@ -3146,9 +3062,10 @@ wc2_orc_deathknight:
 		Start: 8
 
 wc2_orc_skeleton:
-	Defaults:
-		Filename: wc2_orc_skeleton.shp
 	Inherits: ^WC2OrcInfantry
+	Defaults:
+		Scale: 0.8
+		Filename: wc2_orc_skeleton.shp
 	run:
 		Length: 6
 		Combine:
@@ -3196,25 +3113,28 @@ wc2_orc_skeleton:
 ####################################################################################################
 
 wc2_orc_oil_tanker:
-	Defaults:
-		Filename: wc2_orc_oil_tanker.shp
 	Inherits: ^WC2OrcShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_oil_tanker.shp
 	die:
 		Start: 16
 	icon:
 		Start: 11
 
 wc2_orc_transport:
-	Defaults:
-		Filename: wc2_orc_transport.shp
 	Inherits: ^WC2OrcShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_transport.shp
 	icon:
 		Start: 12
 
 wc2_orc_trolldestroyer:
-	Defaults:
-		Filename: wc2_orc_trolldestroyer.shp
 	Inherits: ^WC2OrcShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_trolldestroyer.shp
 	turret:
 		Filename: mgun.shp
 		Facings: 32
@@ -3224,9 +3144,10 @@ wc2_orc_trolldestroyer:
 		Start: 13
 
 wc2_orc_ogre_juggernaught:
-	Defaults:
-		Filename: wc2_orc_ogre_juggernaught.shp
 	Inherits: ^WC2OrcShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_ogre_juggernaught.shp
 	turret:
 		Filename: mgun.shp
 		Facings: 32
@@ -3236,9 +3157,10 @@ wc2_orc_ogre_juggernaught:
 		Start: 14
 
 wc2_orc_giant_turtle:
-	Defaults:
-		Filename: wc2_orc_giant_turtle.shp
 	Inherits: ^WC2OrcShip
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_giant_turtle.shp
 	shoot:
 		Combine:
 			wc2_orc_giant_turtle@1:
@@ -3284,9 +3206,10 @@ wc2_orc_giant_turtle:
 ####################################################################################################
 
 wc2_orc_goblin_zeppelin:
-	Defaults:
-		Filename: wc2_orc_goblin_zeppelin.shp
 	Inherits: ^WC2OrcAirUnit
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_goblin_zeppelin.shp
 	die:
 		Filename: wc2_building_collapse.shp
 		Start: 0
@@ -3296,9 +3219,10 @@ wc2_orc_goblin_zeppelin:
 		Start: 9
 
 wc2_orc_dragon:
-	Defaults:
-		Filename: wc2_orc_dragon.shp
 	Inherits: ^WC2OrcAirUnit
+	Defaults:
+		Scale: 1
+		Filename: wc2_orc_dragon.shp
 	idle:
 		Length: 4
 		Tick: 180

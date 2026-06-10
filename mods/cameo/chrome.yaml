@@ -2894,6 +2894,37 @@ sidebar-button-naxis-highlighted-disabled:
 	Inherits: sidebar-button-naxis-disabled
 
 
+# Latin Syndicate
+
+
+^SidebarSyndicate:
+	Image: sidebar-syndicate.png
+sidebar-syndicate:
+	Inherits: sidebar
+	Inherits@2: ^SidebarSyndicate
+sidebar-button-syndicate:
+	Inherits: sidebar-button
+	Inherits@2: ^SidebarSyndicate
+sidebar-button-syndicate-hover:
+	Inherits: sidebar-button-hover
+	Inherits@2: ^SidebarSyndicate
+sidebar-button-syndicate-pressed:
+	Inherits: sidebar-button-syndicate
+sidebar-button-syndicate-highlighted:
+	Inherits: sidebar-button-highlighted
+	Inherits@2: ^SidebarSyndicate
+sidebar-button-syndicate-highlighted-hover:
+	Inherits: sidebar-button-highlighted-hover
+	Inherits@2: ^SidebarSyndicate
+sidebar-button-syndicate-highlighted-pressed:
+	Inherits: sidebar-button-syndicate-highlighted
+sidebar-button-syndicate-disabled:
+	Inherits: sidebar-button-disabled
+	Inherits@2: ^SidebarSyndicate
+sidebar-button-syndicate-highlighted-disabled:
+	Inherits: sidebar-button-syndicate-disabled
+
+
 # ---- Main Menu External Resources
 
 discord-icon:
