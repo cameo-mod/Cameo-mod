@@ -4510,10 +4510,11 @@
 		BlinkPattern: On, Off
 	WithColoredOverlay@PropagandaEffect:
 		RequiresCondition: PropagandaEffect && !upsubliminal
-		Color: FF880044
+		Color: FF880033
+		Multiply: true
 	WithColoredOverlay@upsubliminal:
 		RequiresCondition: PropagandaEffect && upsubliminal
-		Color: FF444444
+		Color: FF444433
 
 ^AdvancedTargeting:
 	ExternalCondition@AdvancedTargeting:
