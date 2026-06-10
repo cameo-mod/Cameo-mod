@@ -3080,17 +3080,17 @@
 		ImpactActors: true
 
 ^RepairWeapon:
-	ReloadDelay: 7
+	ReloadDelay: 25
 	Range: 5c0
 	Burst: 10
-	BurstDelays: 3
+	BurstDelays: 1
 	StartBurstReport: vifvrepa.wav
 	ValidTargets: Repairing, Repair, lockdowned, plagued, ivanattached
 	ValidRelationships: Ally
 	TargetActorCenter: true
 	Projectile: LaserZap
 		Width: 128
-		Duration: 3
+		Duration: 12
 		ZOffset: 2047
 		Color: 8888FFFF
 		SecondaryBeam: true
@@ -3198,6 +3198,8 @@
 		Radius: 250
 		ValidRelationships: Ally
 		ValidTargets: Repairing, Repair
+		ActorFlashOverlayAlpha: 0.15
+		ActorFlashCount: 1
 	Warhead@EffectWeld: CreateEffect
 		Explosions: repair_weld
 		ExplosionPalette: ra2effect
