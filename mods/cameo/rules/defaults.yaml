@@ -1561,7 +1561,7 @@
 	RenderRangeCircle:
 	Buildable:
 		BuildPaletteOrder: 20
-		BuildDurationModifier: 50
+		BuildDurationModifier: 75
 	TooltipExtras@Helicopter:
 		Description: Helicopter
 
@@ -2865,16 +2865,9 @@
 		DamageInterval: 1
 		DamageTypes: FireDeath
 		RequiresCondition: Overheating && hazmatsuits
-	PhysicalStateAura@EnemyProximity1:
-		AmountPerTick: 1
-	PhysicalStateAura@EnemyProximity2:
-		AmountPerTick: 2
-	PhysicalStateAura@EnemyProximity3:
-		AmountPerTick: 3
-	PhysicalStateAura@EnemyProximity4:
-		AmountPerTick: 4
-	PhysicalStateAura@EnemyProximity5:
-		AmountPerTick: 5
+	# Infantry feel the gradient at a quarter strength: step gradient 1 / 3 / 6 / 10 / 15.
+	PhysicalStateAura@EnemyProximity:
+		FalloffAmounts: 1, 2, 3, 4, 5
 	EdibleByLeap:
 	DeliversCash:
 		Payload: 25
@@ -4314,7 +4307,8 @@
 ^DisabledOverlay:
 	WithColoredOverlay@IDISABLE:
 		RequiresCondition: disabled && !superfreeze && !chronobeamed && !build-incomplete
-		Color: 000000b4
+		Color: 00000080
+		Multiply: true
 	GrantCondition@disable:
 		Condition: disabled
 		RequiresCondition: ((empdisable || superfreeze || chronobeamed || diskdrain || being-captured) && !invulnerability) || build-incomplete
@@ -4520,10 +4514,11 @@
 		BlinkPattern: On, Off
 	WithColoredOverlay@PropagandaEffect:
 		RequiresCondition: PropagandaEffect && !upsubliminal
-		Color: FF880044
+		Color: FF880033
+		Multiply: true
 	WithColoredOverlay@upsubliminal:
 		RequiresCondition: PropagandaEffect && upsubliminal
-		Color: FF444444
+		Color: FF444433
 
 ^AdvancedTargeting:
 	ExternalCondition@AdvancedTargeting:
@@ -4813,42 +4808,22 @@
 		UpperValue: 10000
 		LowerValue: 10
 		RequiresCondition: EnemyProximityEnabled
-	PhysicalStateAura@EnemyProximity1:
+	# A single distance-falloff aura reproduces the old five stacked tiers exactly: an enemy at
+	# horizontal distance d receives the sum of FalloffAmounts whose FalloffRanges >= d, i.e. the
+	# step gradient 4 / 12 / 24 / 40 / 60 at decreasing distance. One proximity trigger per actor
+	# instead of five -> ~80% fewer ActorMap re-scans (the late-game tick bottleneck).
+	PhysicalStateAura@EnemyProximity:
 		PhysicalStateName: EnemyProximity
-		Range: 10000
-		AmountPerTick: 4
-		Interval: 1
-		ValidRelationships: Enemy
-	PhysicalStateAura@EnemyProximity2:
-		PhysicalStateName: EnemyProximity
-		Range: 8000
-		AmountPerTick: 8
-		Interval: 1
-		ValidRelationships: Enemy
-	PhysicalStateAura@EnemyProximity3:
-		PhysicalStateName: EnemyProximity
-		Range: 6000
-		AmountPerTick: 12
-		Interval: 1
-		ValidRelationships: Enemy
-	PhysicalStateAura@EnemyProximity4:
-		PhysicalStateName: EnemyProximity
-		Range: 4000
-		AmountPerTick: 16
-		Interval: 1
-		ValidRelationships: Enemy
-	PhysicalStateAura@EnemyProximity5:
-		PhysicalStateName: EnemyProximity
-		Range: 2000
-		AmountPerTick: 20
+		FalloffRanges: 10000, 8000, 6000, 4000, 2000
+		FalloffAmounts: 4, 8, 12, 16, 20
 		Interval: 1
 		ValidRelationships: Enemy
 
 ^CryoFreezable:
 	PhysicalState@Temperature:
 		Name: Temperature
-		MaxValue: 15000
-		MinValue: -15000
+		MaxValue: 20000
+		MinValue: -20000
 		RelaxedValue: 0
 		RelativeToHealth: true
 		RelaxationLinear: 5
@@ -4906,34 +4881,34 @@
 	GrantConditionOnPhysicalState@TemperatureDeadzone:
 		PhysicalStateName: Temperature
 		Condition: TemperatureDeadzone
-		UpperValue: 100
-		LowerValue: -100
+		UpperValue: 200
+		LowerValue: -200
 	GrantConditionOnPhysicalState@Overheating:
 		PhysicalStateName: Temperature
 		Condition: Overheating
-		UpperValue: 15000
-		LowerValue: 100
+		UpperValue: 20000
+		LowerValue: 200
 	GrantConditionOnPhysicalState@superhot:
 		PhysicalStateName: Temperature
 		Condition: superhot
-		UpperValue: 15000
-		LowerValue: 15000
+		UpperValue: 20000
+		LowerValue: 20000
 	GrantConditionOnPhysicalState@CryoFreeze:
 		PhysicalStateName: Temperature
 		Condition: CryoFreeze
-		UpperValue: -100
-		LowerValue: -15000
+		UpperValue: -200
+		LowerValue: -20000
 	GrantConditionOnPhysicalState@superfreeze:
 		PhysicalStateName: Temperature
 		Condition: superfreeze
-		UpperValue: -15000
-		LowerValue: -15000
+		UpperValue: -20000
+		LowerValue: -20000
 	WithPhysicalStateColoredOverlay@CryoFreeze:
 		PhysicalStateName: Temperature
-		MinColor: DDDDFF96
+		MinColor: 88BBFF78
 		MaxColor: 4488FF08
-		UpperValue: -10
-		LowerValue: -15000
+		UpperValue: -200
+		LowerValue: -20000
 	WithIdleOverlay@frostspark:
 		RequiresCondition: superfreeze
 		Image: ra2_chronosk
@@ -4945,8 +4920,8 @@
 		PhysicalStateName: Temperature
 		MinColor: FF884408
 		MaxColor: FF402096
-		UpperValue: 15000
-		LowerValue: 10
+		UpperValue: 20000
+		LowerValue: 200
 	WithIdleOverlay@overheat:
 		RequiresCondition: Overheating
 		Image: ra2_initfire
@@ -6972,7 +6947,7 @@ CPQDEBUGDUMMY:
 	ReceivesShieldFromProvider:
 		PhysicalStateName: AlliedShield
 		ShieldedCondition: alliedshielded
-		StatusCheckInterval: 1
+		StatusCheckInterval: 12
 	GrantCondition@alliedshielded:
 		Condition: shielded
 		RequiresCondition: alliedshielded

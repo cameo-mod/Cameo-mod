@@ -103,7 +103,8 @@ Speech:
 		ra2russia: ra2s_
 		ra2doom: ra2s_
 		ra2cuba: ra2s_
-		syndicate: ra2s_
+		syndicate: ls_
+		lnaxis: sm_
 		ra2libyan: ra2s_
 		ra2iraq: ra2s_
 		ra2psicorps: ra2s_
@@ -182,8 +183,8 @@ Speech:
 	Notifications:
 		AirstrikeReady: airredy1
 		BaseAttack: baseatk1
-		Building: abldgin1
-		BuildingCannotPlaceAudio: nodeply1
+		Building: abldgin1, abldgin2
+		BuildingCannotPlaceAudio: nodeply1, nodeply2
 		BuildingCaptured: strucap1
 		BuildingInProgress: bldg1
 		BuildingLost: strclst1
@@ -191,7 +192,7 @@ Speech:
 		Cancelled: cancld1
 		CivilianBuildingCaptured: strucap1
 		CivilianKilled: civdead1
-		ConstructionComplete: conscmp1
+		ConstructionComplete: conscmp1, conscmp2
 		EnemyUnitsApproaching: enmyapp1
 		EnemyPlanesApproaching: enemya
 		EnemySWApproaching: alaunch2

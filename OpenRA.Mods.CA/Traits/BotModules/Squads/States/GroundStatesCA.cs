@@ -312,7 +312,7 @@ namespace OpenRA.Mods.CA.Traits.BotModules.Squads
 					var useIndirectRoutes = false;
 
 					if (owner.Type == SquadCAType.Guerrilla)
-						maxRoutes = 12;
+						maxRoutes = 3;
 					else if (owner.SquadManager.Info.IndirectRouteChance > 0 && owner.World.LocalRandom.Next(100) < owner.SquadManager.Info.IndirectRouteChance)
 					{
 						useIndirectRoutes = true;
