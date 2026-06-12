@@ -1024,6 +1024,78 @@ tshacker:
 	icon:
 		Filename: cabalhackericon.png
 		AddExtension: False
+
+tscabalengi:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: tscabalengi.shp
+		Scale: 1
+	stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 256
+	standup:
+		Start: 0
+		Facings: 8
+		ShadowStart: 256
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 264
+	idle1:
+		Start: 88
+		Length: 20
+		ShadowStart: 344
+	idle2:
+		Start: 108
+		Length: 20
+		ShadowStart: 364
+	crippled-run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 264
+	crippled-stand:
+		Start: 0
+		Facings: 8
+		ShadowStart: 256
+	attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 404
+	crippled-attack:
+		Start: 128
+		Length: 10
+		Facings: 8
+		ShadowStart: 404
+	die1:
+		Start: 208
+		Length: 20
+		ShadowStart: 464
+	die2:
+		Start: 228
+		Length: 20
+		ShadowStart: 484
+	die6:
+		Start: 208
+		Length: 20
+		ShadowStart: 464
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 228
+		Length: 20
+		ShadowStart: 484
+		ZOffset: -511
+	icon:
+		Filename: cabalhackericon.png
+		AddExtension: False
+
 tstoxintroop:
 	Inherits: ^TSBasicInfantry
 	Defaults:
@@ -2393,6 +2465,17 @@ tstnkspid:
 		Start: 128
 		Facings: 64
 		Offset: 0, 0, 12
+tssapccabal:
+	idle:
+		Filename: cabal_scarab_hover.png
+		Facings: 64
+	icon:
+		Filename: cabal_scarab_hover_icon.png
+		AddExtension: False
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
 
 tsgtcnst:
 	Inherits: ^WithBuildingBib2
@@ -4483,6 +4566,7 @@ tsprocmutant:
 tsproccabal:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Offset: 0,-12
 	idle:
 		Filename: cabal_refinery.png
 		Start: 32
@@ -5287,6 +5371,7 @@ forgot_barracks:
 forgot_refin:
 	Inherits: ^WithBuildingBib3
 	Defaults:
+		Offset: 0,-12
 	idle:
 		Filename: forgot_refin.png
 		Start: 32
