@@ -574,3 +574,7 @@ label-d2k-map-generator-choice-density-area-high =
    .label = High
 label-d2k-map-generator-choice-density-area-very-high =
    .label = Very High
+
+checkbox-remaster-art-container =
+    .label = C&C Remastered HD Art (requires restart)
+    .tooltip = Render Tiberian Dawn terrain with C&C Remastered Collection HD artwork. Requires the Collection installed via Steam. Toggle this, then restart the game for it to take effect.
