@@ -170,6 +170,40 @@ World:
 	# Production@HunterSeeker:
 	# 	Produces: Vehicle.HunterSeeker
 
+^CABALRankDecoration:
+	WithDecoration@RANK-1:
+		Image: cabalrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: cabalrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: cabalrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: cabalrank
+		Sequence: rank-elite
+		Palette: greyscale
+^ForgottenRankDecoration:
+	WithDecoration@RANK-1:
+		Image: forgotrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: forgotrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: forgotrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: forgotrank
+		Sequence: rank-elite
+		Palette: greyscale
 INVISIBLEPLANE:
 	Inherits: BADR
 	ParaDrop:
@@ -5019,7 +5053,7 @@ TSCYBORG:
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@vo: ^AttackFrontalVoice
@@ -5074,7 +5108,7 @@ tscyborgb:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
@@ -5148,7 +5182,7 @@ tscyborgb:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: TSCyborgHeavy
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -5165,7 +5199,7 @@ tsdevout:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
@@ -5242,7 +5276,7 @@ tsdevout:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: TSNewCyborgVoice
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -5259,7 +5293,7 @@ tsascended:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
@@ -5336,7 +5370,7 @@ tsascended:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: TSNewCyborgVoice
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -5353,7 +5387,7 @@ tshacker:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
@@ -5428,7 +5462,7 @@ tshacker:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: TSNewCyborgVoice
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -5462,7 +5496,7 @@ TSREAPER:
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
 	Inherits@EXT: ^ExternalConditions
@@ -5651,6 +5685,116 @@ TSDissolver:
 	Voiced:
 		VoiceSet: TSCyborg
 
+TSARND:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Eliminator 800
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+	Health:
+		HP: 16000
+	Mobile:
+		Speed: 71
+		Voice: Move
+	Guard:
+		Voice: Move
+	RevealsShroud:
+		Range: 6c0
+	Passenger:
+		CustomPipType: red
+		Voice: Move
+	AmmoPool:
+		Ammo: 96
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 15
+		Count: 1
+	Armament@1:
+		Weapon: RA2GattlingMG1
+		PauseOnCondition: ammo <= 64
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: RA2GattlingMG2
+		PauseOnCondition: ammo <= 8 && ammo >= 65
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@3:
+		Weapon: RA2GattlingMG3
+		PauseOnCondition: ammo >= 9
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@1AA:
+		Weapon: RA2GattlingMG1AA
+		PauseOnCondition: ammo <= 64
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@2AA:
+		Weapon: RA2GattlingMG2AA
+		PauseOnCondition: ammo <= 8 && ammo >= 65
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@3AA:
+		Weapon: RA2GattlingMG3AA
+		PauseOnCondition: ammo >= 9
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2DoublePistols
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		StandSequences: stand
+	DetectCloaked:
+		DetectionTypes: Cloak, Hijacker
+	Voiced:
+		VoiceSet: TSE800
+	Inherits@EXPERIENCE: ^GainsExperienceRA2 ##########
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
+	DeliversCash:
+		Payload: 600
+	GainsExperience:
+		LevelUpNotification: LevelUpRA2
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	RenderSprites:
+		PlayerPalette: playerra2
+
+
 #######################################
 # TS Infantry Forgotten
 #######################################
@@ -5669,6 +5813,7 @@ TSENGINEERMUTANT:
 
 tse3.mutant:
 	Inherits: TSE3
+	Inherits@decoration: ^ForgottenRankDecoration
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~tsgtpile2
@@ -5680,6 +5825,7 @@ tse3.mutant:
 
 TSMHIJACKMUTANT:
 	Inherits: TSMHIJACK
+	Inherits@decoration: ^ForgottenRankDecoration
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~tsgtpile2, tsgtweapmutant, tsgtradrmutant
@@ -5750,7 +5896,7 @@ TSGHOST:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^TSInfantry
@@ -5849,7 +5995,7 @@ TSMUTANT:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^TSInfantry
@@ -5977,7 +6123,7 @@ TSMUTANT3:
 	Inherits: TSMUTANT
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Valued:
@@ -6036,7 +6182,7 @@ TSMUTANT4:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^TSInfantry
@@ -6129,7 +6275,7 @@ TSWEEDGUY:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^TSInfantry
@@ -8678,7 +8824,8 @@ tssapc.mut:
 TSWINI2:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^GenericGroundDetector
@@ -8728,7 +8875,8 @@ TSWINI2:
 TSCAR2:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -8779,7 +8927,8 @@ TSCAR2:
 tsbowler:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -8830,7 +8979,8 @@ tsbowler:
 tsruiner:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -8882,7 +9032,8 @@ tsruiner:
 TS1TNK:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -8934,7 +9085,8 @@ TS1TNK:
 TS2TNK:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -8987,7 +9139,8 @@ TS2TNK:
 TS3TNK:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -9040,7 +9193,8 @@ TS3TNK:
 TSFTNK:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
@@ -9090,7 +9244,8 @@ TS4TNK:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@Template: ^EpicVehicleTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -9158,7 +9313,8 @@ TS4TNK2:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@Template: ^EpicVehicleTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -9225,7 +9381,8 @@ TS4TNK2:
 TSARTY:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
@@ -9271,7 +9428,8 @@ TSARTY:
 tsarty_bus:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
@@ -9336,7 +9494,8 @@ tsnomad:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@Template: ^EpicVehicleTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
@@ -9411,7 +9570,8 @@ tsnomad:
 tsmlrs:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -9465,7 +9625,8 @@ tsmlrs:
 
 tsm113:
 	Inherits: ^Tank
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@EXT: ^ExternalConditions
@@ -9518,7 +9679,8 @@ tsm113:
 		RequiresSelection: true
 tsapctruck:
 	Inherits: ^Tank
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@EXT: ^ExternalConditions
@@ -9573,7 +9735,8 @@ tsapctruck:
 tsclosh:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackTurretedVoice
@@ -9627,7 +9790,7 @@ TSLASSPID:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -9677,12 +9840,13 @@ TSLASSPID:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+	DeathSounds:
 
 tscabalcobra:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -9733,12 +9897,13 @@ tscabalcobra:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
 
+	DeathSounds:
 
 tsspddrone:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -9799,11 +9964,13 @@ tsspddrone:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+	DeathSounds:
+
 tscheavyspider:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -9916,7 +10083,7 @@ TSART2CABAL:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -10024,7 +10191,7 @@ TSTTNKCABAL:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^EliteDetector
@@ -10154,7 +10321,7 @@ tsttnkcabal_backup:
 TSSAPCCABAL:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@cargo: ^CargoVehicle
 	Valued:
 		Cost: 2600
@@ -10210,7 +10377,7 @@ TST1000:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MC: ^MCImmune
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -10300,8 +10467,9 @@ TSDEFENDER:
 	Inherits: ^Tank
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@MC: ^MCImmune
 	Inherits@EMP: ^FrontalEMP
@@ -10338,7 +10506,7 @@ TSDEFENDER:
 	AttackFrontal:
 		FacingTolerance: 12
 	Voiced:
-		VoiceSet: TSCyborgCommando
+		VoiceSet: TSCABALCore
 	VoiceAnnouncement:
 		Voice: CoreDefenderBuild
 	Tooltip:
@@ -10395,6 +10563,7 @@ TSDEFENDER:
 		Types: thiefproof
 	RenderSprites:
 		PlayerPalette: playerra2
+	DeathSounds:
 
 #######################################
 # TS Aircraft
@@ -10832,9 +11001,8 @@ TSTRNSPORT.Husk:
 tscarrycabal:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@reload: ^RearmableAircraft
 	Valued:
 		Cost: 1750
 	Tooltip:
@@ -10880,7 +11048,6 @@ tscarrycabal:
 	Armament@PRIMARY:
 		Weapon: TSHunterKillerLasers
 		LocalOffset: 0,0,0
-		PauseOnCondition: !ammo
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
@@ -11027,7 +11194,7 @@ TSSCRINCABAL:
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Valued:
 		Cost: 2400
@@ -11246,7 +11413,7 @@ TSAPACHEMUTANT:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
 	Valued:
@@ -11335,7 +11502,7 @@ TSAPACHEMUTANT.Husk:
 TSAPACHECABAL:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
 	Valued:
@@ -11432,7 +11599,7 @@ TSAPACHE.Husk:
 TSHELI:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@reload: ^RearmableAircraft
@@ -11531,7 +11698,7 @@ TSHIND:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@eject: ^AircraftEjectOnDeath
 	Valued:
@@ -11613,7 +11780,7 @@ tscropplane:
 	Inherits: ^Helicopter
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@reload: ^RearmableAircraft
 	Inherits@MechanicalReliability: ^MechanicalReliability
@@ -11695,7 +11862,7 @@ tsflocust:
 	Inherits: ^Helicopter
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^GDIRankDecoration
+	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@reload: ^RearmableAircraft
 	Inherits@MechanicalReliability: ^MechanicalReliability
@@ -11940,113 +12107,6 @@ TSTRAN.Husk:
 	RenderVoxels:
 		Image: tstran
 		Scale: 15
-
-TSARND:
-	Inherits: ^Soldier
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EMPfrontal: ^FrontalEMP
-	Inherits@EMP: ^UnitDisable
-	Valued:
-		Cost: 1000
-	Tooltip:
-		Name: Eliminator 800
-	Buildable:
-		BuildPaletteOrder: 10
-		Prerequisites: ~tsnthand2
-		BuildDurationModifier: 100
-		BuildDuration: 250
-		Queue: Infantry, RAInfantry
-		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
-	Health:
-		HP: 16000
-	Mobile:
-		Speed: 71
-		Voice: Move
-	Guard:
-		Voice: Move
-	RevealsShroud:
-		Range: 6c0
-	Passenger:
-		CustomPipType: red
-		Voice: Move
-	AmmoPool:
-		Ammo: 96
-		AmmoCondition: ammo
-	ReloadAmmoPool:
-		Delay: 15
-		Count: 1
-	Armament@1:
-		Weapon: RA2GattlingMG1
-		PauseOnCondition: ammo <= 64
-		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
-	Armament@2:
-		Weapon: RA2GattlingMG2
-		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
-	Armament@3:
-		Weapon: RA2GattlingMG3
-		PauseOnCondition: ammo >= 9
-		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
-	Armament@1AA:
-		Weapon: RA2GattlingMG1AA
-		PauseOnCondition: ammo <= 64
-		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
-	Armament@2AA:
-		Weapon: RA2GattlingMG2AA
-		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
-	Armament@3AA:
-		Weapon: RA2GattlingMG3AA
-		PauseOnCondition: ammo >= 9
-		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
-	Armament@GARRISONED:
-		Name: garrisoned
-		Weapon: RA2DoublePistols
-	AttackFrontal:
-		FacingTolerance: 0
-	WithInfantryBody:
-		DefaultAttackSequence: shoot
-		StandSequences: stand
-	DetectCloaked:
-		DetectionTypes: Cloak, Hijacker
-	Voiced:
-		VoiceSet: TSCyborgCommando
-	Inherits@EXPERIENCE: ^GainsExperienceRA2 ##########
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
-	DeliversCash:
-		Payload: 600
-	GainsExperience:
-		LevelUpNotification: LevelUpRA2
-	ExternalCondition@EMP:
-		TotalCap: 1
-		Condition: empdisable
-	TimedConditionBar@EMP:
-		Condition: empdisable
-		Color: FFFFFF
-	GrantCondition@disable:
-		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
-	WithColoredOverlay@leaflet:
-		RequiresCondition: leaflet || empdisable
-	Targetable@HEAL:
-		TargetTypes: Heal, Repair, Healing
-	Targetable:
-		TargetTypes: Ground, Infantry, Cyborg
-	GrantConditionOnPrerequisite@MACHINESHOP:
-		Condition: hospital
-		Prerequisites: machshop
-	WithDeathAnimation:
-		UseDeathTypeSuffix: false
-	RenderSprites:
-		PlayerPalette: playerra2
 
 TSKODK:
 	Inherits: ^Helicopter

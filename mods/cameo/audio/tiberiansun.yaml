@@ -214,6 +214,10 @@ TSCobra:
 		Action: tscobramov1, tscobramov2
 		Attack: tscobraatk1, tscobraatk2, tscobraatk3
 		Unload: tscobramov1, tscobramov2
+		Die: ts_spider_dead
+		Burned: ts_spider_dead
+		Zapped: ts_spider_dead
+		Poisoned: ts_spider_dead
 
 TSCABALVehicles:
 	DefaultVariant: .wav
@@ -223,3 +227,62 @@ TSCABALVehicles:
 		Action: tscavalveh-03, tscavalveh-06, tscavalveh-07
 		Attack: tscavalveh-05, tscavalveh-01
 		Unload: tscavalveh-03, tscavalveh-06, tscavalveh-07
+
+TSE800:
+	Inherits: ^TSDeath
+	DefaultVariant: .wav
+	Voices:
+		Select: ts_e800-01, ts_e800-02
+		Move: ts_e800-01, ts_e800-02, ts_e800-03
+		Action: ts_e800-01, ts_e800-02, ts_e800-03
+		Attack: ts_e800-01, ts_e800-02, ts_e800-03
+		Die: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Burned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Poisoned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+
+TSCABALCore:
+	DefaultVariant: .wav
+	Voices:
+		Select: core_defender_sel-01, core_defender_sel-02
+		Move: core_defender_mov-01, core_defender_mov-02
+		Action: core_defender_mov-01, core_defender_mov-02
+		Attack: core_defender_atk-01, core_defender_atk-02, core_defender_atk-03
+		Unload: core_defender_mov-01, core_defender_mov-02
+		Die: core_defender_die-01, core_defender_die-02, core_defender_die-03
+		Burned: core_defender_die-01, core_defender_die-02, core_defender_die-03
+		Zapped: core_defender_die-01, core_defender_die-02, core_defender_die-03
+		Poisoned: core_defender_die-01, core_defender_die-02, core_defender_die-03
+		Feedback: core_defender_feed-01, core_defender_feed-02
+		CoreDefenderBuild: 99-n464
+
+TSCABALCoreOld:
+	DefaultVariant: .wav
+	Voices:
+		Select: tscoresel1, tscoresel2
+		Move: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		Action: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		Attack: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		Unload: tscore1, tscore2, tscore3, tscore4, tscore5, tscore6, tscore7
+		CoreDefenderBuild: 99-n464
+
+TSNewCyborgVoice:
+	DefaultVariant: .wav
+	Voices:
+		Select: tsnewcybsel2, tsnewcybsel3, tsnewcybsel4
+		Move: tsnewcybmov1, tsnewcybmov2, tsnewcybmov3, tsnewcybmov4, tsnewcybmov5
+		Action: tsnewcybmov1, tsnewcybmov2, tsnewcybmov3, tsnewcybmov4, tsnewcybmov5
+		Attack: tsnewcybatk1, tsnewcybatk2, tsnewcybatk3, tsnewcybatk4
+		Die: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Burned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+		Poisoned: tsnewcybdie, tsnewcybdie2, tsnewcybdie3, tsnewcybdie4, tsnewcybdie5
+
+TSCyborgHeavy:
+	Inherits: ^TSDeath
+	Voices:
+		Select: cybass_sel1, cybass_sel2, cybass_sel3
+		Move: cybass_mov1, cybass_mov2, cybass_mov3, cybass_mov4, cybass_mov5
+		Action: cybass_mov1, cybass_mov2, cybass_mov3, cybass_mov4, cybass_mov5
+		Attack: cybass_atck1, cybass_atck2
+		Die: cybass_die1, cybass_die2, cybass_die3
+		Burned: cybass_die1, cybass_die2, cybass_die3
+		Poisoned: cybass_die1, cybass_die2, cybass_die3

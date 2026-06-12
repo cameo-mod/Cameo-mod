@@ -2870,6 +2870,32 @@ nodrank:
 		Start: 3
 		Offset: 1, 3
 
+cabalrank:
+	Defaults:
+		Filename: cabalranks.png
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-elite:
+		Start: 3
+		Offset: 1, 3
+
+forgotrank:
+	Defaults:
+		Filename: forgotranks.png
+		Offset: 0, 3
+	rank-veteran-1:
+	rank-veteran-2:
+		Start: 1
+	rank-veteran-3:
+		Start: 2
+	rank-elite:
+		Start: 3
+		Offset: 1, 3
+
 alienrank:
 	Defaults:
 		Filename: alienranks.png
