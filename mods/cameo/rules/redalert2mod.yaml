@@ -9058,8 +9058,8 @@ steel_qoil:
 		Prerequisites: ~steel_qacst, steel_qatech, derricklimit
 		Description: Super Income Building. Produces 3x the income of an oil derrick.
 	Building:
-		Footprint: xx xx
-		Dimensions: 2,2
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
 	Valued:
 		Cost: 7500
 	Health:
@@ -9072,7 +9072,7 @@ steel_qoil:
 		Amount: 750
 	RenderSprites:
 		Image: steel_qoil
-		PlayerPalette: playerra2cons
+		PlayerPalette: player_rgba
 	-WithDeathAnimation:
 	-ToggleConditionOnOrder:
 	WithIdleOverlay@idle-water:

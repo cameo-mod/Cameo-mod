@@ -6829,6 +6829,7 @@ wc2_upgrade_footman:
 	Tooltip:
 		Name:  Warcraft 3 Footman
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Footman into the Warcraft 3 Footman
 		Prerequisites: ~!wc2_upgrade_footman, ~wc2_human_blacksmith, wc2_human_castle
 	RenderSprites:
@@ -6854,6 +6855,7 @@ wc2_upgrade_high_elf_archer:
 	Tooltip:
 		Name: High Elven Archer
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Elven Ranger into the High Elven Archer
 		Prerequisites: ~!wc2_upgrade_high_elf_archer, ~wc2_human_blacksmith, wc2_h_rangerupg, wc2_human_castle
 	RenderSprites:
@@ -7014,6 +7016,7 @@ wc2_upgrade_paladin2:
 	Tooltip:
 		Name: Warcraft 3 Knight (WIP)
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Paladin into the Warcraft 3 Knight (WIP)
 		Prerequisites: ~!wc2_upgrade_paladin2, ~wc2_human_blacksmith, wc2_h_paladinupg, wc2_human_church
 	RenderSprites:
@@ -7193,6 +7196,7 @@ wc2_upgrade_grunt:
 	Tooltip:
 		Name:  Warcraft 3 Grunt
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Grunt into the Warcraft 3 Grunt
 		Prerequisites: ~!wc2_upgrade_grunt, ~wc2_orc_blacksmith, wc2_orc_fortress
 	RenderSprites:
@@ -7218,6 +7222,7 @@ wc2_upgrade_troll_spearthrower:
 	Tooltip:
 		Name: Troll Headhunter
 	Buildable:
+		Queue: Research
 		Description: Upgrades the Troll Berserker into the Troll Headhunter
 		Prerequisites: ~!wc2_upgrade_troll_spearthrower, ~wc2_orc_blacksmith, wc2_o_berserkerupg, wc2_orc_fortress
 	RenderSprites:
