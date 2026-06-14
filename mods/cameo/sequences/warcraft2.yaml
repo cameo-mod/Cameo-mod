@@ -20,7 +20,6 @@
 		Length: 6
 		ZOffset: 512
 		Offset: 0, -9
-		AddExtension: True
 	# Large fire for heavy damage.
 	burn2:
 		Filename: wc2_fire_large.shp
@@ -28,7 +27,6 @@
 		Length: 10
 		ZOffset: 512
 		Offset: 0, -9
-		AddExtension: True
 
 ^WC2HumanBuilding:
 	Inherits: ^WC2Building
@@ -616,13 +614,11 @@ wc2_human_elven_lumber_mill:
 		Filename: proctwr.shp
 		Length: 6
 		Offset: -30,-17
-		AddExtension: True
 	damaged-resources:
 		Filename: proctwr.shp
 		Start: 6
 		Length: 6
 		Offset: -30,-17
-		AddExtension: True
 	icon:
 		Start: 3
 
@@ -2007,13 +2003,11 @@ wc2_orc_troll_lumber_mill:
 		Filename: proctwr.shp
 		Length: 6
 		Offset: -30,-17
-		AddExtension: True
 	damaged-resources:
 		Filename: proctwr.shp
 		Start: 6
 		Length: 6
 		Offset: -30,-17
-		AddExtension: True
 	icon:
 		Start: 3
 

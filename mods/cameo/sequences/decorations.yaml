@@ -59,7 +59,6 @@ splitred:
 	Defaults:
 		Filename: splitred.shp
 		Offset: 11, -15
-		UseTilesetExtension: false
 	make:
 		Length: 30
 	active:
@@ -72,7 +71,6 @@ splitgold:
 	Defaults:
 		Filename: splitgold.shp
 		Offset: 7, -13
-		UseTilesetExtension: false
 	make:
 		Length: 30
 	active:
@@ -2178,7 +2176,6 @@ boxes09:
 tc04jun:
 	Defaults:
 		Filename: tc04jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 2
@@ -2186,7 +2183,6 @@ tc04jun:
 tc04jun.husk:
 	Defaults:
 		Filename: tc04jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 2
 	dead:
@@ -2197,7 +2193,6 @@ tc04jun.husk:
 tc04tem:
 	Defaults:
 		Filename: tc04tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 2
@@ -2205,7 +2200,6 @@ tc04tem:
 tc04tem.husk:
 	Defaults:
 		Filename: tc04tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 2
 	dead:
@@ -2216,7 +2210,6 @@ tc04tem.husk:
 tc04win:
 	Defaults:
 		Filename: tc04win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 2
@@ -2224,7 +2217,6 @@ tc04win:
 tc04win.husk:
 	Defaults:
 		Filename: tc04win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 2
 	dead:
@@ -2235,7 +2227,6 @@ tc04win.husk:
 tc05jun:
 	Defaults:
 		Filename: tc05jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 2
@@ -2243,7 +2234,6 @@ tc05jun:
 tc05jun.husk:
 	Defaults:
 		Filename: tc05jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 2
 	dead:
@@ -2254,7 +2244,6 @@ tc05jun.husk:
 tc05tem:
 	Defaults:
 		Filename: tc05tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 2
@@ -2262,7 +2251,6 @@ tc05tem:
 tc05tem.husk:
 	Defaults:
 		Filename: tc05tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 2
 	dead:
@@ -2273,7 +2261,6 @@ tc05tem.husk:
 tc05win:
 	Defaults:
 		Filename: tc05win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 2
@@ -2281,7 +2268,6 @@ tc05win:
 tc05win.husk:
 	Defaults:
 		Filename: tc05win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 2
 	dead:
@@ -2292,7 +2278,6 @@ tc05win.husk:
 tc03jun:
 	Defaults:
 		Filename: tc03jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2300,7 +2285,6 @@ tc03jun:
 tc03jun.husk:
 	Defaults:
 		Filename: tc03jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2311,7 +2295,6 @@ tc03jun.husk:
 tc03tem:
 	Defaults:
 		Filename: tc03tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2319,7 +2302,6 @@ tc03tem:
 tc03tem.husk:
 	Defaults:
 		Filename: tc03tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2330,7 +2312,6 @@ tc03tem.husk:
 tc03win:
 	Defaults:
 		Filename: tc03win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2338,7 +2319,6 @@ tc03win:
 tc03win.husk:
 	Defaults:
 		Filename: tc03win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2349,7 +2329,6 @@ tc03win.husk:
 tc02jun:
 	Defaults:
 		Filename: tc02jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2357,7 +2336,6 @@ tc02jun:
 tc02jun.husk:
 	Defaults:
 		Filename: tc02jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2368,7 +2346,6 @@ tc02jun.husk:
 tc02tem:
 	Defaults:
 		Filename: tc02tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2376,7 +2353,6 @@ tc02tem:
 tc02tem.husk:
 	Defaults:
 		Filename: tc02tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2387,7 +2363,6 @@ tc02tem.husk:
 tc02win:
 	Defaults:
 		Filename: tc02win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2395,7 +2370,6 @@ tc02win:
 tc02win.husk:
 	Defaults:
 		Filename: tc02win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2406,7 +2380,6 @@ tc02win.husk:
 tc01jun:
 	Defaults:
 		Filename: tc01jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2414,7 +2387,6 @@ tc01jun:
 tc01jun.husk:
 	Defaults:
 		Filename: tc01jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2425,7 +2397,6 @@ tc01jun.husk:
 tc01tem:
 	Defaults:
 		Filename: tc01tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2433,7 +2404,6 @@ tc01tem:
 tc01tem.husk:
 	Defaults:
 		Filename: tc01tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2444,7 +2414,6 @@ tc01tem.husk:
 tc01win:
 	Defaults:
 		Filename: tc01win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2452,7 +2421,6 @@ tc01win:
 tc01win.husk:
 	Defaults:
 		Filename: tc01win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2463,7 +2431,6 @@ tc01win.husk:
 t18des:
 	Defaults:
 		Filename: t18des.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2471,7 +2438,6 @@ t18des:
 t18des.husk:
 	Defaults:
 		Filename: t18des.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2482,7 +2448,6 @@ t18des.husk:
 t17jun:
 	Defaults:
 		Filename: t17jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2490,7 +2455,6 @@ t17jun:
 t17jun.husk:
 	Defaults:
 		Filename: t17jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2501,7 +2465,6 @@ t17jun.husk:
 t17tem:
 	Defaults:
 		Filename: t17tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2509,7 +2472,6 @@ t17tem:
 t17tem.husk:
 	Defaults:
 		Filename: t17tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2520,7 +2482,6 @@ t17tem.husk:
 t17win:
 	Defaults:
 		Filename: t17win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2528,7 +2489,6 @@ t17win:
 t17win.husk:
 	Defaults:
 		Filename: t17win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2539,7 +2499,6 @@ t17win.husk:
 t16jun:
 	Defaults:
 		Filename: t16jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2547,7 +2506,6 @@ t16jun:
 t16jun.husk:
 	Defaults:
 		Filename: t16jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2558,7 +2516,6 @@ t16jun.husk:
 t16tem:
 	Defaults:
 		Filename: t16tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2566,7 +2523,6 @@ t16tem:
 t16tem.husk:
 	Defaults:
 		Filename: t16tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2577,7 +2533,6 @@ t16tem.husk:
 t16win:
 	Defaults:
 		Filename: t16win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2585,7 +2540,6 @@ t16win:
 t16win.husk:
 	Defaults:
 		Filename: t16win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2596,7 +2550,6 @@ t16win.husk:
 t15jun:
 	Defaults:
 		Filename: t15jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2604,7 +2557,6 @@ t15jun:
 t15jun.husk:
 	Defaults:
 		Filename: t15jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2615,7 +2567,6 @@ t15jun.husk:
 t15tem:
 	Defaults:
 		Filename: t15tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2623,7 +2574,6 @@ t15tem:
 t15tem.husk:
 	Defaults:
 		Filename: t15tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2634,7 +2584,6 @@ t15tem.husk:
 t15win:
 	Defaults:
 		Filename: t15win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2642,7 +2591,6 @@ t15win:
 t15win.husk:
 	Defaults:
 		Filename: t15win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2653,7 +2601,6 @@ t15win.husk:
 t14jun:
 	Defaults:
 		Filename: t14jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2661,7 +2608,6 @@ t14jun:
 t14jun.husk:
 	Defaults:
 		Filename: t14jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2672,7 +2618,6 @@ t14jun.husk:
 t14tem:
 	Defaults:
 		Filename: t14tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2680,7 +2625,6 @@ t14tem:
 t14tem.husk:
 	Defaults:
 		Filename: t14tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2691,7 +2635,6 @@ t14tem.husk:
 t14win:
 	Defaults:
 		Filename: t14win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2699,7 +2642,6 @@ t14win:
 t14win.husk:
 	Defaults:
 		Filename: t14win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2710,7 +2652,6 @@ t14win.husk:
 t13jun:
 	Defaults:
 		Filename: t13jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2718,7 +2659,6 @@ t13jun:
 t13jun.husk:
 	Defaults:
 		Filename: t13jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2729,7 +2669,6 @@ t13jun.husk:
 t13tem:
 	Defaults:
 		Filename: t13tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2737,7 +2676,6 @@ t13tem:
 t13tem.husk:
 	Defaults:
 		Filename: t13tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2748,7 +2686,6 @@ t13tem.husk:
 t13win:
 	Defaults:
 		Filename: t13win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2756,7 +2693,6 @@ t13win:
 t13win.husk:
 	Defaults:
 		Filename: t13win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2767,7 +2703,6 @@ t13win.husk:
 t12jun:
 	Defaults:
 		Filename: t12jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2775,7 +2710,6 @@ t12jun:
 t12jun.husk:
 	Defaults:
 		Filename: t12jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2786,7 +2720,6 @@ t12jun.husk:
 t12tem:
 	Defaults:
 		Filename: t12tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2794,7 +2727,6 @@ t12tem:
 t12tem.husk:
 	Defaults:
 		Filename: t12tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2805,7 +2737,6 @@ t12tem.husk:
 t12win:
 	Defaults:
 		Filename: t12win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2813,7 +2744,6 @@ t12win:
 t12win.husk:
 	Defaults:
 		Filename: t12win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2824,7 +2754,6 @@ t12win.husk:
 t11jun:
 	Defaults:
 		Filename: t11jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2832,7 +2761,6 @@ t11jun:
 t11jun.husk:
 	Defaults:
 		Filename: t11jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2843,7 +2771,6 @@ t11jun.husk:
 t11tem:
 	Defaults:
 		Filename: t11tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2851,7 +2778,6 @@ t11tem:
 t11tem.husk:
 	Defaults:
 		Filename: t11tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2862,7 +2788,6 @@ t11tem.husk:
 t11win:
 	Defaults:
 		Filename: t11win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2870,7 +2795,6 @@ t11win:
 t11win.husk:
 	Defaults:
 		Filename: t11win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2881,7 +2805,6 @@ t11win.husk:
 t10jun:
 	Defaults:
 		Filename: t10jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2889,7 +2812,6 @@ t10jun:
 t10jun.husk:
 	Defaults:
 		Filename: t10jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2900,7 +2822,6 @@ t10jun.husk:
 t10tem:
 	Defaults:
 		Filename: t10tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2908,7 +2829,6 @@ t10tem:
 t10tem.husk:
 	Defaults:
 		Filename: t10tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2919,7 +2839,6 @@ t10tem.husk:
 t10win:
 	Defaults:
 		Filename: t10win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2927,7 +2846,6 @@ t10win:
 t10win.husk:
 	Defaults:
 		Filename: t10win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2938,7 +2856,6 @@ t10win.husk:
 t09des:
 	Defaults:
 		Filename: t09des.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2946,7 +2863,6 @@ t09des:
 t09des.husk:
 	Defaults:
 		Filename: t09des.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2957,7 +2873,6 @@ t09des.husk:
 t08des:
 	Defaults:
 		Filename: t08des.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2965,7 +2880,6 @@ t08des:
 t08des.husk:
 	Defaults:
 		Filename: t08des.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2976,7 +2890,6 @@ t08des.husk:
 t08jun:
 	Defaults:
 		Filename: t08jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -2984,7 +2897,6 @@ t08jun:
 t08jun.husk:
 	Defaults:
 		Filename: t08jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -2995,7 +2907,6 @@ t08jun.husk:
 t08tem:
 	Defaults:
 		Filename: t08tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3003,7 +2914,6 @@ t08tem:
 t08tem.husk:
 	Defaults:
 		Filename: t08tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3014,7 +2924,6 @@ t08tem.husk:
 t08win:
 	Defaults:
 		Filename: t08win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3022,7 +2931,6 @@ t08win:
 t08win.husk:
 	Defaults:
 		Filename: t08win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3033,7 +2941,6 @@ t08win.husk:
 t07jun:
 	Defaults:
 		Filename: t07jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3041,7 +2948,6 @@ t07jun:
 t07jun.husk:
 	Defaults:
 		Filename: t07jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3052,7 +2958,6 @@ t07jun.husk:
 t07tem:
 	Defaults:
 		Filename: t07tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3060,7 +2965,6 @@ t07tem:
 t07tem.husk:
 	Defaults:
 		Filename: t07tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3071,7 +2975,6 @@ t07tem.husk:
 t07win:
 	Defaults:
 		Filename: t07win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3079,7 +2982,6 @@ t07win:
 t07win.husk:
 	Defaults:
 		Filename: t07win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3090,7 +2992,6 @@ t07win.husk:
 t06jun:
 	Defaults:
 		Filename: t06jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3098,7 +2999,6 @@ t06jun:
 t06jun.husk:
 	Defaults:
 		Filename: t06jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3109,7 +3009,6 @@ t06jun.husk:
 t06tem:
 	Defaults:
 		Filename: t06tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3117,7 +3016,6 @@ t06tem:
 t06tem.husk:
 	Defaults:
 		Filename: t06tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3128,7 +3026,6 @@ t06tem.husk:
 t06win:
 	Defaults:
 		Filename: t06win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3136,7 +3033,6 @@ t06win:
 t06win.husk:
 	Defaults:
 		Filename: t06win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3147,7 +3043,6 @@ t06win.husk:
 t05jun:
 	Defaults:
 		Filename: t05jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3155,7 +3050,6 @@ t05jun:
 t05jun.husk:
 	Defaults:
 		Filename: t05jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3166,7 +3060,6 @@ t05jun.husk:
 t05tem:
 	Defaults:
 		Filename: t05tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3174,7 +3067,6 @@ t05tem:
 t05tem.husk:
 	Defaults:
 		Filename: t05tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3185,7 +3077,6 @@ t05tem.husk:
 t05win:
 	Defaults:
 		Filename: t05win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3193,7 +3084,6 @@ t05win:
 t05win.husk:
 	Defaults:
 		Filename: t05win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3204,7 +3094,6 @@ t05win.husk:
 t04des:
 	Defaults:
 		Filename: t04des.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3212,7 +3101,6 @@ t04des:
 t04des.husk:
 	Defaults:
 		Filename: t04des.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3223,7 +3111,6 @@ t04des.husk:
 t03jun:
 	Defaults:
 		Filename: t03jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3231,7 +3118,6 @@ t03jun:
 t03jun.husk:
 	Defaults:
 		Filename: t03jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3242,7 +3128,6 @@ t03jun.husk:
 t03tem:
 	Defaults:
 		Filename: t03tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3250,7 +3135,6 @@ t03tem:
 t03tem.husk:
 	Defaults:
 		Filename: t03tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3261,7 +3145,6 @@ t03tem.husk:
 t03win:
 	Defaults:
 		Filename: t03win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3269,7 +3152,6 @@ t03win:
 t03win.husk:
 	Defaults:
 		Filename: t03win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3280,7 +3162,6 @@ t03win.husk:
 t02jun:
 	Defaults:
 		Filename: t02jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3288,7 +3169,6 @@ t02jun:
 t02jun.husk:
 	Defaults:
 		Filename: t02jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3299,7 +3179,6 @@ t02jun.husk:
 t02tem:
 	Defaults:
 		Filename: t02tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3307,7 +3186,6 @@ t02tem:
 t02tem.husk:
 	Defaults:
 		Filename: t02tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3318,7 +3196,6 @@ t02tem.husk:
 t02win:
 	Defaults:
 		Filename: t02win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3326,7 +3203,6 @@ t02win:
 t02win.husk:
 	Defaults:
 		Filename: t02win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3337,7 +3213,6 @@ t02win.husk:
 t01jun:
 	Defaults:
 		Filename: t01jun.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3345,7 +3220,6 @@ t01jun:
 t01jun.husk:
 	Defaults:
 		Filename: t01jun.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3356,7 +3230,6 @@ t01jun.husk:
 t01tem:
 	Defaults:
 		Filename: t01tem.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3364,7 +3237,6 @@ t01tem:
 t01tem.husk:
 	Defaults:
 		Filename: t01tem.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3375,7 +3247,6 @@ t01tem.husk:
 t01win:
 	Defaults:
 		Filename: t01win.cam
-		UseTilesetExtension: true
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3383,7 +3254,6 @@ t01win:
 t01win.husk:
 	Defaults:
 		Filename: t01win.cam
-		UseTilesetExtension: true
 	idle:
 		Start: 1
 	dead:
@@ -3397,7 +3267,6 @@ t01win.husk:
 temv01:
 	Defaults:
 		Filename: v01.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3406,13 +3275,11 @@ temv01.husk:
 	Defaults:
 		Filename: v01.tem
 	idle:
-		AddExtension: false
 		Start: 1
 
 temv02:
 	Defaults:
 		Filename: v02.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3420,13 +3287,11 @@ temv02:
 temv02.husk:
 	idle:
 		Filename: v02.tem
-		AddExtension: false
 		Start: 1
 
 temv03:
 	Defaults:
 		Filename: v03.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3435,13 +3300,11 @@ temv03:
 temv03.husk:
 	idle:
 		Filename: v03.tem
-		AddExtension: false
 		Start: 1
 
 temv04:
 	Defaults:
 		Filename: v04.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3449,13 +3312,11 @@ temv04:
 temv04.husk:
 	idle:
 		Filename: v04.tem
-		AddExtension: false
 		Start: 1
 
 temv05:
 	Defaults:
 		Filename: v05.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3463,13 +3324,11 @@ temv05:
 temv05.husk:
 	idle:
 		Filename: v05.tem
-		AddExtension: false
 		Start: 1
 
 temv06:
 	Defaults:
 		Filename: v06.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3477,13 +3336,11 @@ temv06:
 temv06.husk:
 	idle:
 		Filename: v06.tem
-		AddExtension: false
 		Start: 1
 
 temv07:
 	Defaults:
 		Filename: v07.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3491,13 +3348,11 @@ temv07:
 temv07.husk:
 	idle:
 		Filename: v07.tem
-		AddExtension: false
 		Start: 1
 
 temv08:
 	Defaults:
 		Filename: v08.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3505,13 +3360,11 @@ temv08:
 temv08.husk:
 	idle:
 		Filename: v08.tem
-		AddExtension: false
 		Start: 1
 
 temv09:
 	Defaults:
 		Filename: v09.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3519,13 +3372,11 @@ temv09:
 temv09.husk:
 	idle:
 		Filename: v09.tem
-		AddExtension: false
 		Start: 1
 
 temv10:
 	Defaults:
 		Filename: v10.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3533,13 +3384,11 @@ temv10:
 temv10.husk:
 	idle:
 		Filename: v10.tem
-		AddExtension: false
 		Start: 1
 
 temv11:
 	Defaults:
 		Filename: v11.tem
-		AddExtension: false
 	idle:
 	damaged-idle:
 		Start: 1
@@ -3547,13 +3396,11 @@ temv11:
 temv11.husk:
 	idle:
 		Filename: v11.tem
-		AddExtension: false
 		Start: 1
 
 temv12:
 	Defaults:
 		Filename: v12.tem
-		AddExtension: false
 		ZOffset: -512
 	idle:
 	damaged-idle:
@@ -3563,13 +3410,11 @@ temv12:
 temv12.husk:
 	idle:
 		Filename: v12.tem
-		AddExtension: false
 		Start: 1
 		ZOffset: -512
 temv13:
 	Defaults:
 		Filename: v13.tem
-		AddExtension: false
 		ZOffset: -512
 	idle:
 	damaged-idle:
@@ -3578,13 +3423,11 @@ temv13:
 temv13.husk:
 	idle:
 		Filename: v13.tem
-		AddExtension: false
 		Start: 1
 		ZOffset: -512
 temv14:
 	Defaults:
 		Filename: v14.tem
-		AddExtension: false
 		ZOffset: -512
 	idle:
 	damaged-idle:
@@ -3593,13 +3436,11 @@ temv14:
 temv14.husk:
 	idle:
 		Filename: v14.tem
-		AddExtension: false
 		Start: 1
 		ZOffset: -512
 temv15:
 	Defaults:
 		Filename: v15.tem
-		AddExtension: false
 		ZOffset: -512
 	idle:
 	damaged-idle:
@@ -3608,13 +3449,11 @@ temv15:
 temv15.husk:
 	idle:
 		Filename: v15.tem
-		AddExtension: false
 		Start: 1
 		ZOffset: -512
 temv16:
 	Defaults:
 		Filename: v16.tem
-		AddExtension: false
 		ZOffset: -512
 	idle:
 	damaged-idle:
@@ -3623,13 +3462,11 @@ temv16:
 temv16.husk:
 	idle:
 		Filename: v16.tem
-		AddExtension: false
 		Start: 1
 		ZOffset: -512
 temv17:
 	Defaults:
 		Filename: v17.tem
-		AddExtension: false
 		ZOffset: -512
 	idle:
 	damaged-idle:
@@ -3638,13 +3475,11 @@ temv17:
 temv17.husk:
 	idle:
 		Filename: v17.tem
-		AddExtension: false
 		Start: 1
 		ZOffset: -512
 temv18:
 	Defaults:
 		Filename: v18.tem
-		AddExtension: false
 		ZOffset: -512
 	idle:
 	damaged-idle:
@@ -3653,6 +3488,5 @@ temv18:
 temv18.husk:
 	idle:
 		Filename: v18.tem
-		AddExtension: false
 		Start: 1
 		ZOffset: -512

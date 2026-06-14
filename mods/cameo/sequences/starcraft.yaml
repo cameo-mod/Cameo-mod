@@ -2145,7 +2145,6 @@ sctmcv:
 	mmicon:
 		Filename: customicon.shp
 		Start: 9
-		AddExtension: False
 
 sctmcv.bot:
 	Inherits: sctmcv
@@ -2462,7 +2461,6 @@ scpmcv:
 	mmicon:
 		Filename: customicon.shp
 		Start: 10
-		AddExtension: False
 
 scpmcv.bot:
 	Inherits: scpmcv
@@ -3062,7 +3060,6 @@ scgorekraken:
 upoverlordspeed:
 	icon:
 		Filename: scpneumatizedcarapaceicon.png
-		AddExtension: false
 
 scoverlord:
 	Defaults:
@@ -3422,7 +3419,6 @@ scdefiler:
 darkswarm:
 	Defaults:
 		Filename: darkswarm.png
-		AddExtension: false
 		ZOffset: 2048
 	idle:
 		Length: 4
@@ -3434,7 +3430,6 @@ darkswarm:
 plagueunit:
 	overlay:
 		Filename: plagueoverlay.png
-		AddExtension: false
 		Length: *
 		Tick: 150
 		ZOffset: 1024
@@ -3485,7 +3480,6 @@ scguardian:
 	die:
 		Filename: guardiandie.png
 		Length: *
-		AddExtension: False
 	icon:
 		Filename: scguardianicon.png
 
@@ -3663,7 +3657,6 @@ scbehemoth:
 upzergrange:
 	icon:
 		Filename: scgroovedspinesicon.png
-		AddExtension: false
 
 scinfestedcommandcenter:
 	Inherits: ^WithBuildingBib2
@@ -3727,122 +3720,98 @@ scspore:
 uplingspeed:
 	icon:
 		Filename: scadrenalglandsicon.png
-		AddExtension: false
 
 uplingattack:
 	icon:
 		Filename: scmetabolicboosticon.png
-		AddExtension: false
 
 upcarapace:
 	icon:
 		Filename: scgroundcarapaceicon.png
-		AddExtension: false
 
 upzergmelee:
 	icon:
 		Filename: scmeleeattacksicon.png
-		AddExtension: false
 
 upzergmissile:
 	icon:
 		Filename: scmissileattacksicon.png
-		AddExtension: false
 
 upflyerattack:
 	icon:
 		Filename: scflyerattacksicon.png
-		AddExtension: false
 
 upflyerarmor:
 	icon:
 		Filename: scflyercarapaceicon.png
-		AddExtension: false
 
 updragoonrange:
 	icon:
 		Filename: scsingularitychargeicon.png
-		AddExtension: false
 
 upgroundweapons:
 	icon:
 		Filename: sclandweaponsicon.png
-		AddExtension: false
 
 upgroundarmor:
 	icon:
 		Filename: sclandarmoricon.png
-		AddExtension: false
 
 upairweapons:
 	icon:
 		Filename: scairweaponsicon.png
-		AddExtension: false
 
 upairarmor:
 	icon:
 		Filename: scairarmoricon.png
-		AddExtension: false
 
 upplasmashield:
 	icon:
 		Filename: scplasmashieldsicon.png
-		AddExtension: false
 
 upreavercapacity:
 	icon:
 		Filename: screavercapacityicon.png
-		AddExtension: false
 
 upreaverdamage:
 	icon:
 		Filename: upreaverdamage.png
-		AddExtension: false
 
 upairspeed:
 	icon:
 		Filename: upairspeed.png
-		AddExtension: false
 
 upstimpack:
 	icon:
 		Filename: upstimpackicon.png
-		AddExtension: false
 
 upmarinerange:
 	icon:
 		Filename: upmarinerangeicon.png
-		AddExtension: false
 
 upinfweapon:
 	icon:
 		Filename: scinfantryweaponsicon.png
-		AddExtension: false
 
 upmechweapon:
 	icon:
 		Filename: upmechweaponicon.png
-		AddExtension: false
 
 upinfarmor:
 	icon:
 		Filename: scinfantryarmoricon.png
-		AddExtension: false
 
 upmecharmor:
 	icon:
 		Filename: upmecharmoricon.png
-		AddExtension: false
 
 upshipweapon:
 	icon:
 		Filename: upshipweaponicon.png
-		AddExtension: false
 
 upshiparmor:
 	icon:
 		Filename: upshiparmoricon.png
-		AddExtension: false
 
 upscrefinery1:
 	icon:

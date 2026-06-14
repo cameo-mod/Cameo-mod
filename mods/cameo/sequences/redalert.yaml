@@ -689,7 +689,6 @@ medi:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 	prone-stand:
 		Start: 130
 		Stride: 4
@@ -751,7 +750,6 @@ mech:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 	prone-stand:
 		Start: 130
 		Stride: 4
@@ -820,7 +818,6 @@ dog:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 	shoot:
 		Filename: dogbullt.shp
 		Length: 4
@@ -885,7 +882,6 @@ e7:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 	prone-stand:
 		Start: 128
 		Stride: 4
@@ -972,7 +968,6 @@ gnrl:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 		TilesetOverrides:
 			DESERT: TEMPERAT
 			INTERIOR: TEMPERAT
@@ -1062,7 +1057,6 @@ shok:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 	icon:
 		Filename: shokicon.shp
 
@@ -1071,7 +1065,6 @@ ra_conscript_ak:
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: ra_cons_ak.png
-		AddExtension: false
 		#Scale: 0.75
 	run:
 		Tick: 48
@@ -1105,14 +1098,12 @@ ra_conscript_ak:
 		Start: 324
 	icon:
 		Filename: ra_conscript_ak_icon.png
-		AddExtension: False
 
 ra_cons_molo:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: ra_cons_molo.png
-		AddExtension: false
 		#Scale: 0.75
 	run:
 		Tick: 48
@@ -1146,14 +1137,12 @@ ra_cons_molo:
 		Start: 324
 	icon:
 		Filename: ra_conscript_molotov_icon.png
-		AddExtension: False
 
 ra_dragunov:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: ra_dragunov.png
-		AddExtension: false
 		#Scale: 0.75
 	run:
 		Tick: 96
@@ -1187,14 +1176,12 @@ ra_dragunov:
 		Start: 324
 	icon:
 		Filename: ra_dragunovicon.png
-		AddExtension: False
 
 ra_commissar:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: ra_commissar.png
-		AddExtension: false
 	run:
 		Tick: 48
 		Start: 8
@@ -1227,14 +1214,12 @@ ra_commissar:
 		Start: 324
 	icon:
 		Filename: commissaricon.png
-		AddExtension: False
 
 ra_zapper:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: ra_zapper.png
-		AddExtension: false
 	run:
 		Tick: 96
 		Start: 8
@@ -1267,7 +1252,6 @@ ra_zapper:
 		Start: 324
 	icon:
 		Filename: ra_zappericon.png
-		AddExtension: False
 
 raspy:
 	Defaults:
@@ -1321,7 +1305,6 @@ raspy:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 	prone-stand:
 		Start: 144
 		Stride: 4
@@ -1385,7 +1368,6 @@ einstein:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 		TilesetOverrides:
 			DESERT: TEMPERAT
 			INTERIOR: TEMPERAT
@@ -1432,7 +1414,6 @@ delphi:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 		TilesetOverrides:
 			DESERT: TEMPERAT
 			INTERIOR: TEMPERAT
@@ -1481,7 +1462,6 @@ rachan:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		UseTilesetExtension: false
 		TilesetOverrides:
 			DESERT: TEMPERAT
 			INTERIOR: TEMPERAT
@@ -2091,7 +2071,6 @@ raapc:
 		Start: 32
 	icon:
 		Filename: raapcicon.png
-		AddExtension: False
 
 mrj:
 	Defaults:
@@ -2300,7 +2279,6 @@ modtnkd2:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		AddExtension: False
 		Filename: Ra1TankDestroyerIcon.shp
 
 modflak88:
@@ -2670,7 +2648,6 @@ rasilo:
 			ARRAKIS: mbRASILO.des
 			ARRAKIS2: mbRASILO.des
 		Length: *
-		UseTilesetExtension: false
 	icon:
 		Filename: rasiloicon.shp
 
@@ -2801,7 +2778,6 @@ kenn:
 			ARRAKIS: mbRASILO.des
 			ARRAKIS2: mbRASILO.des
 		Length: *
-		UseTilesetExtension: false
 	icon:
 		Filename: kennicon.png
 
@@ -3174,7 +3150,6 @@ agun:
 			ARRAKIS: mbGUN.des
 			ARRAKIS2: mbGUN.des
 		Length: *
-		UseTilesetExtension: false
 		Offset: 0,0
 	icon:
 		Filename: agunicon.png
@@ -3212,7 +3187,6 @@ rasam:
 			ARRAKIS: mbSAM.des
 			ARRAKIS2: mbSAM.des
 		Length: *
-		UseTilesetExtension: false
 		Offset: 0,0
 	icon:
 		Filename: samicon.png
@@ -3245,7 +3219,6 @@ ftur:
 			ARRAKIS: mbFTUR.des
 			ARRAKIS2: mbFTUR.des
 		Length: *
-		UseTilesetExtension: false
 	icon:
 		Filename: fturicon.png
 
@@ -3282,7 +3255,6 @@ tsla:
 			ARRAKIS: mbTSLA.des
 			ARRAKIS2: mbTSLA.des
 		Length: *
-		UseTilesetExtension: false
 		Offset: 0,0
 	icon:
 		Filename: tslaicon.png
@@ -3316,7 +3288,6 @@ pbox:
 			ARRAKIS: mbPBOX.des
 			ARRAKIS2: mbPBOX.des
 		Length: *
-		UseTilesetExtension: false
 		Offset: 0,-1
 	icon:
 		Filename: pboxicon.png
@@ -3367,10 +3338,8 @@ hbox:
 		Filename: minigun.shp
 		Length: 6
 		Facings: 8
-		UseTilesetExtension: false
 	icon:
 		Filename: hboxicon.png
-		UseTilesetExtension: false
 
 gap:
 	Defaults:
@@ -3409,7 +3378,6 @@ gap:
 			ARRAKIS: mbGAP.des
 			ARRAKIS2: mbGAP.des
 		Length: *
-		UseTilesetExtension: false
 	icon:
 		Filename: gapicon.png
 
@@ -3447,7 +3415,6 @@ iron:
 			ARRAKIS: mbIRON.des
 			ARRAKIS2: mbIRON.des
 		Length: *
-		UseTilesetExtension: false
 	icon:
 		Filename: ironicon.png
 
@@ -3480,7 +3447,6 @@ pdox:
 			ARRAKIS: mbPDOX.des
 			ARRAKIS2: mbPDOX.des
 		Length: *
-		UseTilesetExtension: false
 	icon:
 		Filename: pdoxicon.png
 	chronovortex:
@@ -3731,7 +3697,6 @@ jdome:
 			WC2SUMMER: bib3.tem
 			OUTPOST2: bib3.tem
 		Length: *
-		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
 	icon:
@@ -3776,7 +3741,6 @@ modjtek:
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 		Length: *
-		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
 	icon:
@@ -3821,7 +3785,6 @@ jshrine:
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 		Length: *
-		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
 	icon:
@@ -3861,7 +3824,6 @@ fcom:
 			WC2SUMMER: bib3.tem
 			OUTPOST2: bib3.tem
 		Length: *
-		UseTilesetExtension: true
 
 fcom.husk:
 	Inherits: fcom
@@ -3910,7 +3872,6 @@ ramiss:
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 		Length: *
-		UseTilesetExtension: true
 
 rabio:
 	Defaults:
@@ -3956,7 +3917,6 @@ oilb:
 			OUTPOST2: bib3.tem
 		Length: *
 		Offset: 0,0
-		UseTilesetExtension: true
 	icon:
 		Filename: oilbicon.shp
 
@@ -3997,7 +3957,6 @@ oilb2:
 			OUTPOST2: bib3.tem
 		Length: *
 		Offset: 0,0
-		UseTilesetExtension: true
 	icon:
 		Filename: oilb2_icon.png
 
@@ -4333,7 +4292,6 @@ qnest:
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 		Length: *
-		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
 		Offset: 0,24
@@ -4371,7 +4329,6 @@ breednest:
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 		Length: *
-		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
 		Offset: 0,24
@@ -4409,7 +4366,6 @@ tinynest:
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 		Length: *
-		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
 		Offset: 0,24
@@ -4447,7 +4403,6 @@ tinynest2:
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
 		Length: *
-		UseTilesetExtension: true
 		TilesetOverrides:
 			INTERIOR: TEMPERAT
 		Offset: 0,24
@@ -5190,7 +5145,6 @@ v1truck:
 		Length: *
 	icon:
 		Filename: v1truckicon.shp
-		AddExtension: False
 
 alliedtiger:
 	Defaults:
@@ -5382,7 +5336,6 @@ jmgnest:
 			ARRAKIS: mbFTUR.des
 			ARRAKIS2: mbFTUR.des
 		Length: *
-		UseTilesetExtension: false
 		Offset: 0,-5
 	icon:
 		Filename: jmgnesticon.shp
@@ -5417,7 +5370,6 @@ jballistat:
 			ARRAKIS: mbFTUR.des
 			ARRAKIS2: mbFTUR.des
 		Length: *
-		UseTilesetExtension: false
 		Offset: 0,-5
 	icon:
 		Filename: jballistaticon.shp
@@ -5694,7 +5646,6 @@ hakurei:
 		Scale: 1
 	icon:
 		Filename: hakureiicon.shp
-		AddExtension: False
 
 modtypej:
 	Defaults:

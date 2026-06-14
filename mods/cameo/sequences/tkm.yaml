@@ -101,7 +101,6 @@ tkmrefinery:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: glasupplycentericon.png
-		AddExtension: False
 		Offset: 0,0
 
 tkmworker:
@@ -151,7 +150,6 @@ tkmworker:
 		Facings: 8
 	icon:
 		Filename: workericon.png
-		AddExtension: false
 
 tkmfactory:
 	Defaults:
@@ -184,7 +182,6 @@ tkmfactory:
 	icon:
 		Filename: glaarmsdealericon.png
 		Offset: 0, 0
-		UseTilesetCode: false
 
 tkmradar:
 	Defaults:
@@ -269,7 +266,6 @@ tkmbunker:
 		Offset: -1,-2
 	icon:
 		Filename: tkmbunkericon.png
-		AddExtension: False
 
 tkmairpad:
 	Defaults:
@@ -285,7 +281,6 @@ tkmairpad:
 		Tick: 800
 	icon:
 		Filename: tkmairpadicon.png
-		AddExtension: False
 
 tkmbunkerquadturret:
 	Defaults:
@@ -328,7 +323,6 @@ tkmbunkerquadturret:
 		Scale: 0.5
 	icon:
 		Filename: tkmquadturreticon.png
-		AddExtension: False
 
 tkmbunkertankturret:
 	Defaults:
@@ -371,7 +365,6 @@ tkmbunkertankturret:
 		Scale: 0.8
 	icon:
 		Filename: tkmtankturreticon.png
-		AddExtension: False
 
 #######################################
 # TKM Infantry Reporting!
@@ -454,7 +447,6 @@ tkmrifleman:
 		Offset: 0,0
 	icon:
 		Filename: tkmriflemanicon.png
-		AddExtension: False
 
 tkmtrooper:
 	Inherits: tkmrifleman
@@ -527,7 +519,6 @@ tkmtrooper:
 		Offset: 0,0
 	icon:
 		Filename: tkmtroopericon.png
-		AddExtension: False
 
 tkmspetsnaz:
 	Defaults:
@@ -607,7 +598,6 @@ tkmspetsnaz:
 		Offset: 0,0
 	icon:
 		Filename: tkmspetsnazicon.png
-		AddExtension: False
 
 tkmrocketeer:
 	Defaults:
@@ -686,7 +676,6 @@ tkmrocketeer:
 		Offset: 0,0
 	icon:
 		Filename: tkmrocketeericon.png
-		AddExtension: False
 
 tkmjug:
 	Defaults:
@@ -765,7 +754,6 @@ tkmjug:
 		Offset: 0,0
 	icon:
 		Filename: tkmjuggernauticon.png
-		AddExtension: False
 
 tkmthermonaut:
 	Inherits: tkmjug
@@ -807,7 +795,6 @@ tkmthermonaut:
 		Length: 13
 	icon:
 		Filename: tsblackhandflamericon.shp
-		AddExtension: False
 
 tkmengineer:
 	Defaults:
@@ -875,7 +862,6 @@ tkmengineer:
 		ShadowStart: 189
 	icon:
 		Filename: tkmengineericon.png
-		AddExtension: False
 
 tkmvon:
 	Inherits: ^RA2ArmedInfantry
@@ -934,7 +920,6 @@ tkmt72:
 		Facings: 8
 	icon:
 		Filename: tkmt72icon.png
-		AddExtension: False
 
 tkmt30:
 	idle:
@@ -951,7 +936,6 @@ tkmt30:
 		Facings: 8
 	icon:
 		Filename: tkmt30icon.png
-		AddExtension: False
 
 tkmabrams:
 	idle:
@@ -968,7 +952,6 @@ tkmabrams:
 		Facings: 8
 	icon:
 		Filename: tkmabramsicon.png
-		AddExtension: False
 
 tkmtechnicaltruck:
 	Defaults:
@@ -985,7 +968,6 @@ tkmtechnicaltruck:
 		Facings: 8
 	icon:
 		Filename: tkmquadcannonicon.png
-		AddExtension: False
 
 tkmstryker:
 	Defaults:
@@ -1003,7 +985,6 @@ tkmstryker:
 		Facings: 8
 	icon:
 		Filename: tkmstrykericon.png
-		AddExtension: False
 
 tkmzaza:
 	idle:
@@ -1033,7 +1014,6 @@ tkmas42:
 		Facings: 8
 	icon:
 		Filename: tkmas42icon.png
-		AddExtension: False
 
 tkmkatyushalauncher:
 	Inherits: ^RA2GatlingMuzzle
@@ -1045,7 +1025,6 @@ tkmkatyushalauncher:
 		Offset: 0,20
 	icon:
 		Filename: tkmtornadogicon.png
-		AddExtension: False
 
 tkmtechnical:
 	idle:
@@ -1087,7 +1066,6 @@ tkmradartruck:
 		Facings: 32
 	icon:
 		Filename: tkmradartruckicon.png
-		AddExtension: False
 
 tkmratflak:
 	Defaults:
@@ -1097,7 +1075,6 @@ tkmratflak:
 		Facings: -32
 	icon:
 		Filename: tkmflakbusicon.png
-		AddExtension: False
 
 tkmratflakdeployed:
 	Defaults:
@@ -1140,7 +1117,6 @@ tkmratflakdeployed:
 		Scale: 0.2
 	icon:
 		Filename: tkmflakbusicon.png
-		AddExtension: False
 
 tkmrepairtruck:
 	Defaults:
@@ -1150,7 +1126,6 @@ tkmrepairtruck:
 		Facings: -32
 	icon:
 		Filename: tkmrepairtruckicon.png
-		AddExtension: False
 
 tkmbattlebus:
 	Defaults:
@@ -1164,7 +1139,6 @@ tkmbattlebus:
 		Facings: 8
 	icon:
 		Filename: tkmbattlebusicon.png
-		AddExtension: False
 
 tkmmedictruck:
 	Defaults:
@@ -1177,7 +1151,6 @@ tkmmedictruck:
 		Facings: -32
 	icon:
 		Filename: tkmmedictruckicon.png
-		AddExtension: False
 
 tkmsandmarine:
 	Defaults:
@@ -1190,7 +1163,6 @@ tkmsandmarine:
 		Length: *
 	icon:
 		Filename: tkmsandmarineicon.png
-		AddExtension: False
 
 tkmbigshiee:
 	Defaults:
@@ -1203,7 +1175,6 @@ tkmbigshiee:
 		Length: *
 	icon:
 		Filename: tkmbigshieeicon.png
-		AddExtension: False
 
 tkmdiglarge:
 	idle:
@@ -1222,7 +1193,6 @@ tkmdronepodtruck:
 		Facings: -32
 	icon:
 		Filename: tkmdronepodtruckicon.png
-		AddExtension: False
 
 tkmtrenchtank:
 	idle:
@@ -1281,7 +1251,6 @@ tkmtrenchtankdeployed:
 		Scale: 0.6
 	icon:
 		Filename: tkmtrenchtankicon.png
-		AddExtension: False
 
 ####################################################################################################
 #		TKM Upgrade Icons

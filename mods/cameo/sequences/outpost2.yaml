@@ -4,9 +4,7 @@
 # rallyflag:
 # 	idle: op2_rally_flag.png
 # 		Length:8
-# 		AddExtension: False
 # 	icon: gtwricnh.tem
-# 		AddExtension: False
 
 ^OP2Building:
 	statusgreen:
@@ -14,14 +12,12 @@
         Start: 0
 		ZOffset: 512
 		Offset: 0, -9
-		AddExtension: True
 	statusred:
 		Filename: op2_status_red.shp
         Start: 0
 		Length: 9
 		ZOffset: 512
 		Offset: 0, -9
-		AddExtension: True
 
 supernova_missile_super:
 	Defaults:
@@ -67,7 +63,6 @@ eden_factory_structure:
 		Offset: -72, -48
 	Defaults:
 		Filename: eden_factory_structure.shp
-		AddExtension: False
 	build:
 		Start: 0
 		Length: 1
@@ -91,7 +86,6 @@ eden_factory_structure:
 		Length: 1
 	icon:
 		Filename: edenUIfactorystructure.png
-		AddExtension: False
 
 eden_tokamak:
 	Inherits: ^OP2Building
@@ -112,10 +106,8 @@ eden_tokamak:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUITokamak.png
-		AddExtension: False
 
 eden_smelter_common:
 	Inherits: ^OP2Building
@@ -136,10 +128,8 @@ eden_smelter_common:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUISmelterCommonOre.png
-		AddExtension: False
 	idle-anim2:
 		Filename: glstructuresmoke.shp
 		Start: 49
@@ -166,10 +156,8 @@ eden_agridome:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIAgridome.png
-		AddExtension: False
 
 eden_residence:
 	Inherits: ^OP2Building
@@ -190,10 +178,8 @@ eden_residence:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIResidence.png
-		AddExtension: False
 
 eden_lab_basic:
 	Inherits: ^OP2Building
@@ -214,10 +200,8 @@ eden_lab_basic:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUILabBasic.png
-		AddExtension: False
 
 eden_factory_vehicle:
 	Inherits: ^OP2Building
@@ -238,10 +222,8 @@ eden_factory_vehicle:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIFactoryVehicle.png
-		AddExtension: False
 
 eden_garage:
 	Inherits: ^OP2Building
@@ -257,7 +239,6 @@ eden_garage:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	idle:
 		Start: 0
 	damaged-idle:
@@ -268,7 +249,6 @@ eden_garage:
 		Start: 0
 	icon:
 		Filename: edenUIGarage.png
-		AddExtension: False
 
 eden_nursery:
 	Inherits: ^OP2Building
@@ -289,10 +269,8 @@ eden_nursery:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUINursery.png
-		AddExtension: False
 
 eden_university:
 	Inherits: ^OP2Building
@@ -313,10 +291,8 @@ eden_university:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIUniversity.png
-		AddExtension: False
 
 eden_lab_standard:
 	Inherits: ^OP2Building
@@ -337,10 +313,8 @@ eden_lab_standard:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUILabStandard.png
-		AddExtension: False
 
 eden_dirt:
 	Inherits: ^OP2Building
@@ -361,10 +335,8 @@ eden_dirt:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIDIRT.png
-		AddExtension: False
 
 eden_rcc:
 	Inherits: ^OP2Building
@@ -385,10 +357,8 @@ eden_rcc:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIRobotCommandCenter.png
-		AddExtension: False
 
 eden_factory_consumer:
 	Inherits: ^OP2Building
@@ -409,10 +379,8 @@ eden_factory_consumer:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIConsumerFactory.png
-		AddExtension: False
 	idle-anim2:
 		Filename: glstructuresmoke.shp
 		Start: 49
@@ -451,10 +419,8 @@ eden_gorf:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUIGorf.png
-		AddExtension: False
 
 eden_lab_advanced:
 	Inherits: ^OP2Building
@@ -475,10 +441,8 @@ eden_lab_advanced:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUILabAdvanced.png
-		AddExtension: False
 
 eden_spaceport:
 	Inherits: ^OP2Building
@@ -499,13 +463,11 @@ eden_spaceport:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	active:
 		Start: 1
 		Length: 1
 	icon:
 		Filename: edenUISpacePort.png
-		AddExtension: False
 
 eden_solar_array:
 	Inherits: ^OP2Building
@@ -526,10 +488,8 @@ eden_solar_array:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUISolarPowerArray.png
-		AddExtension: False
 
 eden_smelter_rare:
 	Inherits: ^OP2Building
@@ -550,10 +510,8 @@ eden_smelter_rare:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: edenUISmelterRareOre.png
-		AddExtension: False
 ####################################################################################################
 #		DEFENCE EDEN
 ####################################################################################################
@@ -576,10 +534,8 @@ eden_mine_common:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: ui_eden_mine.png
-		AddExtension: False
 
 eden_light_tower:
 	Inherits: ^OP2Building
@@ -597,7 +553,6 @@ eden_light_tower:
 	make:
 	icon:
 		Filename: edenUIlighttower.png
-		AddExtension: False
 
 eden_storage_common:
 	Inherits: ^OP2Building
@@ -618,7 +573,6 @@ eden_storage_common:
 	make:
 		Start: 0
 	bib: mbSILO
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -627,7 +581,6 @@ eden_storage_common:
 		Offset: 0,1
 	icon:
 		Filename: edenUICommonStorage.png
-		AddExtension: False
 
 eden_gp_laser:
 	Inherits: ^OP2Building
@@ -652,7 +605,6 @@ eden_gp_laser:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: edenUIGuardPostLaser.png
-		AddExtension: False
 
 eden_gp_emp:
 	Inherits: ^OP2Building
@@ -677,7 +629,6 @@ eden_gp_emp:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: edenUIGuardPostEMP.png
-		AddExtension: False
 
 eden_gp_railgun:
 	Inherits: ^OP2Building
@@ -702,7 +653,6 @@ eden_gp_railgun:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: edenUIGuardPostRailgun.png
-		AddExtension: False
 
 ####################################################################################################
 #		WARES EDEN
@@ -758,7 +708,6 @@ eden_convec:
 		Tick: 100
 	icon:
 		Filename: edenUIConvec.png
-		AddExtension: False
 
 eden_cargotruck_empty:
 	Defaults:
@@ -782,7 +731,6 @@ eden_cargotruck_empty:
 		Length: 1
 	icon:
 		Filename: edenUICargoTruck.png
-		AddExtension: False
 
 eden_cargotruck_commonore:
 	Defaults:
@@ -820,7 +768,6 @@ eden_scout:
 		Tick: 100
 	icon:
 		Filename: edenUIScout.png
-		AddExtension: False
 
 eden_lynx_laser:
 	Defaults:
@@ -841,7 +788,6 @@ eden_lynx_laser:
 		Facings: 16
 	icon:
 		Filename: edenUILynxLaser.png
-		AddExtension: False
 
 eden_tiger_laser:
 	Defaults:
@@ -862,7 +808,6 @@ eden_tiger_laser:
 		Facings: 16
 	icon:
 		Filename: edenUITigerLaser.png
-		AddExtension: False
 
 eden_lynx_railgun:
 	Defaults:
@@ -883,7 +828,6 @@ eden_lynx_railgun:
 		Facings: 16
 	icon:
 		Filename: edenUILynxRailgun.png
-		AddExtension: False
 
 eden_tiger_railgun:
 	Defaults:
@@ -904,7 +848,6 @@ eden_tiger_railgun:
 		Facings: 16
 	icon:
 		Filename: edenUITigerRailgun.png
-		AddExtension: False
 
 eden_lynx_emp:
 	Defaults:
@@ -925,7 +868,6 @@ eden_lynx_emp:
 		Facings: 16
 	icon:
 		Filename: edenUILynxEMP.png
-		AddExtension: False
 
 eden_tiger_emp:
 	Defaults:
@@ -946,7 +888,6 @@ eden_tiger_emp:
 		Facings: 16
 	icon:
 		Filename: edenUITigerEMP.png
-		AddExtension: False
 
 eden_lynx_acidcloud:
 	Defaults:
@@ -967,7 +908,6 @@ eden_lynx_acidcloud:
 		Facings: 16
 	icon:
 		Filename: edenUILynxAcidCloud.png
-		AddExtension: False
 
 eden_tiger_acidcloud:
 	Defaults:
@@ -988,7 +928,6 @@ eden_tiger_acidcloud:
 		Facings: 16
 	icon:
 		Filename: edenUITigerAcidCloud.png
-		AddExtension: False
 
 eden_lynx_starflare:
 	Defaults:
@@ -1009,7 +948,6 @@ eden_lynx_starflare:
 		Facings: 1
 	icon:
 		Filename: edenUILynxStarflare.png
-		AddExtension: False
 
 eden_tiger_starflare:
 	Defaults:
@@ -1030,7 +968,6 @@ eden_tiger_starflare:
 		Facings: 1
 	icon:
 		Filename: edenUITigerStarflare.png
-		AddExtension: False
 
 eden_lynx_thorshammer:
 	Defaults:
@@ -1051,7 +988,6 @@ eden_lynx_thorshammer:
 		Facings: 16
 	icon:
 		Filename: edenUILynxThorsHammer.png
-		AddExtension: False
 
 eden_tiger_thorshammer:
 	Defaults:
@@ -1072,7 +1008,6 @@ eden_tiger_thorshammer:
 		Facings: 16
 	icon:
 		Filename: edenUITigerThorsHammer.png
-		AddExtension: False
 
 ####################################################################################################
 #		BUILDINGS PLYMOUTH
@@ -1087,37 +1022,29 @@ plymouth_structure_factory:
 		Offset: -72, -48
 	Defaults:
 		Filename: plymouth_structure_factory.shp
-		AddExtension: False
 	build:
 		Start: 4
 		Length: 20
 		Tick: 50
-		AddExtension: True
 	idle:
 		Length: 92
 		Tick: 100
-		AddExtension: True
 	damaged-idle:
 		Length: 92
 		Tick: 100
-		AddExtension: True
 	damaged-build:
 		Start: 28
 		Length: 20
 		Tick: 100
-		AddExtension: True
 	dead:
 		Start: 1
 		Length: 1
-		AddExtension: True
 	make:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: plymouthUIfactorystructure.png
-		AddExtension: False
 
 plymouth_tokamak:
 	Inherits: ^OP2Building
@@ -1139,7 +1066,6 @@ plymouth_tokamak:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_tokamak.shp
 
@@ -1163,7 +1089,6 @@ plymouth_smelter_common:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_smeltercommonore.shp
 
@@ -1187,7 +1112,6 @@ plymouth_agridome:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_agridome.shp
 
@@ -1211,7 +1135,6 @@ plymouth_residence:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_residence.shp
 
@@ -1235,7 +1158,6 @@ plymouth_basic_lab:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_basic_lab.shp
 
@@ -1259,7 +1181,6 @@ plymouth_nursery:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_nursery.shp
 
@@ -1283,7 +1204,6 @@ plymouth_university:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_university.shp
 
@@ -1307,7 +1227,6 @@ plymouth_lab_standard:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_labstandard.shp
 
@@ -1331,7 +1250,6 @@ plymouth_dirt:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_dirt.shp
 
@@ -1355,7 +1273,6 @@ plymouth_gorf:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_gorf.shp
 
@@ -1379,7 +1296,6 @@ plymouth_lab_advanced:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_labadvanced.shp
 
@@ -1403,7 +1319,6 @@ plymouth_spaceport:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	active:
 		Start: 1
 		Length: 1
@@ -1430,7 +1345,6 @@ plymouth_solararray:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_solarpowerarray.shp
 
@@ -1454,7 +1368,6 @@ plymouth_smelter_rare:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_smelterrareore.shp
 
@@ -1478,7 +1391,6 @@ plymouth_factory_vehicle:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_factoryvehicle.shp
 
@@ -1496,7 +1408,6 @@ plymouth_garage:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	idle:
 		Start: 0
 	damaged-idle:
@@ -1528,7 +1439,6 @@ plymouth_rcc:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_rcc.shp
 
@@ -1552,7 +1462,6 @@ plymouth_factory_arachnid:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_building_factoryarachnid.shp
 
@@ -1586,7 +1495,6 @@ plymouth_mine_common:
 		Filename: op2_construction.shp
 		Length: *
 		Tick: 80
-		AddExtension: False
 	icon:
 		Filename: cameo_plymouth_mine_common.shp
 
@@ -1605,7 +1513,6 @@ plymouth_light_tower:
 	make:
 	icon:
 		Filename: plymouthUIlighttower.png
-		AddExtension: False
 
 plymouth_storage_common:
 	Inherits: ^OP2Building
@@ -1628,7 +1535,6 @@ plymouth_storage_common:
 	make:
 		Start: 0
 	bib: mbSILO
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -2201,12 +2107,10 @@ plymouth_tiger_supernova:
 ####Eden Command Center
 # ecc:
 # 	Defaults:
-# 		AddExtension: False
 # 	build:
 # 		Start: 4
 # 		Length: 20
 # 		Tick: 100
-# 		AddExtension: True
 # 	idle: edenCommandCenter.png
 # 		Length: 1
 # 	damaged-idle: edenCommandCenter.png
@@ -2216,21 +2120,17 @@ plymouth_tiger_supernova:
 # 		Start: 28
 # 		Length: 20
 # 		Tick: 100
-# 		AddExtension: True
 # 	dead: edenCommandCenter.png
 # 		Start: 1
 # 		Length: 1
 # 	make: edenConstruction_2_3.png
 # 		Length: *
 # 		Tick: 80
-# 		AddExtension: False
 # 	icon: facticnh
-# 		AddExtension: True
 
 # ####Eden Tokamak
 # etoka:
 # 	Defaults:
-# 		AddExtension: False
 # 	idle: bits/nuke.png
 # 		Length: 1
 # 	damaged-idle: bits/nuke.png
@@ -2246,47 +2146,36 @@ plymouth_tiger_supernova:
 # 		Length: *
 # 		Tick: 80
 # 	bib: bib3
-# 		AddExtension: True
-# 		UseTilesetExtension: true
 # 		Length: *
 # 	icon: iconTokamak.png
-# 		AddExtension: False
 # econveccommandcenter:
 # 	idle: econveccommandcenter.png
 # 		Start: 0
 # 		Facings: -8
-# 		AddExtension: False
 # 	move: econveccommandcenter.png
 # 		Start: 8
 # 		Length: 3
 # 		Facings: -8
 # 		Tick: 100
-# 		AddExtension: False
 # 	die: econveccommandcenter.png
 # 		Start: 32
 # 		Length: 3
 # 		Tick: 100
-# 		AddExtension: False
 # 	icon: edenUIConvec.png
-# 		AddExtension: False
 # ####Eden Lynx Laser
 # ellaser:
 # 	idle: echassislynx.png
 # 		Start: 0
 # 		Facings: -8
-# 		AddExtension: False
 # 	move: echassislynx.png
 # 		Start: 8
 # 		Length: 6
 # 		Facings: -8
 # 		Tick: 100
-# 		AddExtension: False
 # 	turret: edenLaser.png
 # 		Start: 0
 # 		Facings: 8
-# 		AddExtension: False
 # 	#muzzle: minigun
 # 	#	Length: 6
 # 	#	Facings: 8
 # 	icon: edenUILynxLaser.png
-# 		AddExtension: False

@@ -134,7 +134,6 @@ aa_cgapwr:
 		Start: 1
 	icon:
 		Filename: aa_apwricon.shp
-		AddExtension: False
 		Offset: 0,0
 
 aa_cgbrck:
@@ -199,7 +198,6 @@ aa_cgrefn:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: aa_refinery.shp
-		AddExtension: False
 		Offset: 0,0
 
 aa_cgweap:
@@ -898,7 +896,6 @@ aa_awall:
 		Length: 16
 	icon:
 		Filename: aa_awallicon.png
-		AddExtension: False
 
 ####################################################################################################
 #		Red Alert 2 Asian Alliance Troops
@@ -1419,7 +1416,6 @@ aa_lynx:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: asian_lynxtank_icon.png
-		AddExtension: False
 	muzzle-mg:
 		Offset: 0,0
 		Combine:
@@ -1467,7 +1463,6 @@ aa_hotwi:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: aa_hotwiicon.shp
-		AddExtension: False
 
 aa_panth:
 	Inherits: ^RA2CannonMuzzle
@@ -1485,7 +1480,6 @@ aa_panth:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: aa_enforcericon.shp
-		AddExtension: False
 
 aa_oilt:
 	Defaults:
@@ -1503,7 +1497,6 @@ aa_acv:
 		Facings: 64
 	icon:
 		Filename: aa_acvicon.shp
-		AddExtension: False
 
 aa_drmn:
 	Defaults:
@@ -1523,7 +1516,6 @@ aa_drmn:
 		Length: 4
 	icon:
 		Filename: aa_drmnicon.shp
-		AddExtension: False
 	harvesting:
 		Filename: ra2_oregath.shp
 		Length: 15
@@ -1540,7 +1532,6 @@ caa_drmn: #chrono resource delivery is bugged, this is needed to prevent crash o
 		Filename: invisibleitem.shp
 	icon:
 		Filename: aa_drmnicon.shp
-		AddExtension: False
 
 aa_pulv:
 	Inherits: ^RA2GatlingMuzzle
@@ -1558,7 +1549,6 @@ aa_pulv:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: aa_pulvicon.shp
-		AddExtension: False
 
 aa_ptnk:
 	Inherits: ^RA2GatlingMuzzle
@@ -1576,7 +1566,6 @@ aa_ptnk:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: aa_ptnkicon.shp
-		AddExtension: False
 
 aa_plasred:
 	idle:
@@ -1920,7 +1909,6 @@ aa_mlrs:
 		Length: *
 	icon:
 		Filename: aa_mlrs_icon.shp
-		AddExtension: False
 
 asian_upgrade_infantryspec:
 	icon:
@@ -2220,7 +2208,6 @@ latin_cgauto:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: latin_autoicon.shp
-		AddExtension: False
 		Offset: 0,0
 	idle-lights:
 		Filename: latin_cgauto_b.shp
@@ -2291,7 +2278,6 @@ latin_cgup:
 			OUTPOST2: bib3.tem
 		Length: *
 		Offset: 0,20
-		UseTilesetExtension: true
 	dead:
 		Start: 1
 	icon:
@@ -2776,7 +2762,6 @@ latin_ltnk:
 		Offset: 0,5
 	icon:
 		Filename: latin_ltnk_icon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -2798,7 +2783,6 @@ latin_tortuga:
 		Offset: 0,5
 	icon:
 		Filename: latin_tortuga_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -2818,7 +2802,6 @@ latin_mtnk:
 		Facings: 64
 	icon:
 		Filename: latin_mtnk_icon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -2840,7 +2823,6 @@ latin_diablo:
 		Offset: 0,6
 	icon:
 		Filename: latin_diablo_icon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -2862,7 +2844,6 @@ latin_buggy:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: latin_buggy_icon.shp
-		AddExtension: False
 
 latinscrapcar:
 	Inherits: ^RA2GatlingMuzzle
@@ -2878,7 +2859,6 @@ latinscrapcar:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: latin_buggy_icon.shp
-		AddExtension: False
 
 latinscrapcar2:
 	Inherits: ^RA2GatlingMuzzle
@@ -2894,7 +2874,6 @@ latinscrapcar2:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: latin_buggy_icon.shp
-		AddExtension: False
 
 latin_apc:
 	Inherits: ^RA2GatlingMuzzle
@@ -2916,7 +2895,6 @@ latin_apc:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: latin_apc_icon.shp
-		AddExtension: False
 
 latin_humvee:
 	Inherits: ^RA2GatlingMuzzle
@@ -2931,7 +2909,6 @@ latin_humvee:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: latin_humvee_icon.shp
-		AddExtension: False
 
 latin_cartel:
 	Inherits: ^RA2GatlingMuzzle
@@ -2946,7 +2923,6 @@ latin_cartel:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: latin_cartel_icon.shp
-		AddExtension: False
 
 latin_nuketruk:
 	Defaults:
@@ -2972,7 +2948,6 @@ latin_rtruck:
 		Offset: 0,20
 	icon:
 		Filename: latin_missiletruck_icon.shp
-		AddExtension: False
 
 latin_burrito:
 	Inherits: ^RA2GatlingMuzzle
@@ -2988,7 +2963,6 @@ latin_burrito:
 		Offset: 0,20
 	icon:
 		Filename: latin_burrito_icon.shp
-		AddExtension: False
 
 latin_mortarbike:
 	Inherits: ^RA2GatlingMuzzle
@@ -3000,7 +2974,6 @@ latin_mortarbike:
 		InterpolatedFacings: 32
 	icon:
 		Filename: latin_quad_icon.shp
-		AddExtension: False
 
 latin_topol:
 	Inherits: ^RA2GatlingMuzzle
@@ -3026,7 +2999,6 @@ latin_topol:
 		Facings: 64
 	icon:
 		Filename: latin_topol_icon.shp
-		AddExtension: False
 
 latin_lars:
 	Inherits: ^RA2GatlingMuzzle
@@ -3042,7 +3014,6 @@ latin_lars:
 		Offset: 0,20
 	icon:
 		Filename: latin_lars_icon.shp
-		AddExtension: False
 
 latin_harv:
 	Inherits: ^RA2MachineGunMuzzle
@@ -3057,7 +3028,6 @@ latin_harv:
 		Facings: 64
 	icon:
 		Filename: latin_harv_icon.shp
-		AddExtension: False
 	harvesting:
 		Filename: ra2_oregath.shp
 		Length: 15
@@ -3424,11 +3394,9 @@ steel_qapowr:
 		Start: 1
 	icon:
 		Filename: steel_qapowr_icon.shp
-		AddExtension: False
 		Offset: 0,0
 	iconw:
 		Filename: steel_qapowr_icon.shp
-		AddExtension: False
 		Offset: 0,0
 
 steel_qref:
@@ -3474,11 +3442,9 @@ steel_qref:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: steel_qref_icon.shp
-		AddExtension: False
 		Offset: 0,0
 	iconw:
 		Filename: steel_qref_icon.shp
-		AddExtension: False
 		Offset: 0,0
 
 steel_qtradr:
@@ -3969,7 +3935,6 @@ steel_qoil:
 			OUTPOST2: bib3.tem
 		Length: *
 		Offset: 0,20
-		UseTilesetExtension: true
 	dead:
 		Start: 61
 		Length: 1
@@ -4062,7 +4027,6 @@ steel_qmin:
 		Facings: 8
 	icon:
 		Filename: steel_qmin_icon.shp
-		AddExtension: False
 		Offset: 0,0
 
 steel_fedinf:
@@ -4396,7 +4360,6 @@ steel_manta_hunt:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: steel_manta_hunt_icon.shp
-		AddExtension: False
 		Offset: 0,0
 	muzzle:
 		Combine:
@@ -4518,7 +4481,6 @@ steel_quantumtank:
 		Offset: 0,0
 	icon:
 		Filename: steel_qutnk_icon.shp
-		AddExtension: False
 		Offset: 0,0
 
 steel_katy:
@@ -4538,7 +4500,6 @@ steel_katy:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: steel_katy_icon.shp
-		AddExtension: False
 		Offset: 0,0
 
 steel_mega:
@@ -4705,7 +4666,6 @@ steel_inspect:
 		Length: *
 	icon:
 		Filename: steel_inspect_icon.shp
-		AddExtension: False
 		Offset: 0,0
 
 steel_hummer:
@@ -4734,7 +4694,6 @@ steel_oldqtnk:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: steel_oldqtnk_icon.shp
-		AddExtension: False
 
 steel_cougar:
 	Inherits: ^RA2CannonMuzzle
@@ -4751,7 +4710,6 @@ steel_cougar:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: steel_cougar_icon.shp
-		AddExtension: False
 
 steel_cobra:
 	Inherits: ^RA2CannonMuzzle
@@ -4832,7 +4790,6 @@ steel_grun:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: steel_grun_icon.shp
-		AddExtension: False
 	muzzle:
 		Filename: steel_energymuzzle.shp
 		Length: 14
@@ -5167,7 +5124,6 @@ nax_powr:
 		Start: 33
 	icon:
 		Filename: nax_power_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax2_powr:
@@ -5187,7 +5143,6 @@ nax2_powr:
 		Start: 33
 	icon:
 		Filename: nax2_powr_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax_barr:
@@ -5251,7 +5206,6 @@ nax_refin:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: nax_refin_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax2_refin:
@@ -5277,7 +5231,6 @@ nax2_refin:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: nax2_refin_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax_radar:
@@ -5486,7 +5439,6 @@ nax_beer:
 		Start: 33
 	icon:
 		Filename: nax_beer_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax_sausage:
@@ -5508,7 +5460,6 @@ nax_sausage:
 		Start: 33
 	icon:
 		Filename: nax_sausage_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax2_dairy:
@@ -5530,7 +5481,6 @@ nax2_dairy:
 		Start: 33
 	icon:
 		Filename: nax2_dairy_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax_rocket:
@@ -5921,7 +5871,7 @@ nax_mcv:
 		Facings: 64
 	icon:
 		Filename: nax_mcv_icon.png
-		AddExtension: False
+		Offset: 0, 0
 
 nax2_mcv:
 	Defaults:
@@ -5931,7 +5881,6 @@ nax2_mcv:
 		Facings: 64
 	icon:
 		Filename: nax2_mcv_icon.png
-		AddExtension: False
 
 nax_panzer:
 	Inherits: ^RA2CannonMuzzle
@@ -5945,7 +5894,6 @@ nax_panzer:
 		Facings: 64
 	icon:
 		Filename: nax_panzer_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -5966,7 +5914,6 @@ nax2_panzer:
 		Facings: 64
 	icon:
 		Filename: nax2_panzer_icon.png
-		AddExtension: False
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -5989,7 +5936,6 @@ nax_tiger:
 		Offset: 0,5
 	icon:
 		Filename: nax_tiger_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6006,7 +5952,6 @@ nax_zombietank:
 		Facings: 64
 	icon:
 		Filename: ra2bficon.shp
-		AddExtension: False
 
 nax2_tiger:
 	Inherits: ^RA2CannonMuzzle
@@ -6021,7 +5966,6 @@ nax2_tiger:
 		Facings: 64
 	icon:
 		Filename: nax2_tiger_icon.png
-		AddExtension: False
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -6044,7 +5988,6 @@ nax_wirbelwind:
 		Offset: 0,5
 	icon:
 		Filename: nax_wirbelwind_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6066,7 +6009,6 @@ nax_car:
 		Offset: 0,5
 	icon:
 		Filename: nax_car_icon.png
-		AddExtension: False
 
 nax_kingtiger:
 	Inherits: ^RA2CannonMuzzle
@@ -6082,7 +6024,6 @@ nax_kingtiger:
 		Offset: 0,5
 	icon:
 		Filename: nax_kingtiger_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6104,7 +6045,6 @@ nax_assault:
 		Offset: 0,5
 	icon:
 		Filename: nax_assault_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6122,7 +6062,6 @@ nax_imperial:
 		Offset: 0,5
 	icon:
 		Filename: nax_imperial_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6144,7 +6083,6 @@ nax_maus:
 		Offset: 0,5
 	icon:
 		Filename: nax_maus_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6166,7 +6104,6 @@ nax_ratte:
 		Offset: 0,5
 	icon:
 		Filename: nax_ratte_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6184,7 +6121,6 @@ nax_grille:
 		Offset: 0,5
 	icon:
 		Filename: nax_grille_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6204,7 +6140,6 @@ nax2_grille:
 		Facings: 64
 	icon:
 		Filename: nax2_grille_icon.png
-		AddExtension: False
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -6223,7 +6158,6 @@ nax_hetzer:
 		Offset: 0,5
 	icon:
 		Filename: nax_hetzer_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6241,7 +6175,6 @@ nax_atankcann:
 		Offset: 0,5
 	icon:
 		Filename: nax_atankcann_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6259,7 +6192,6 @@ nax_jagdpanzer:
 		Offset: 0,5
 	icon:
 		Filename: nax_jagdpanzer_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6278,7 +6210,6 @@ nax2_jager:
 		Facings: 64
 	icon:
 		Filename: nax2_jager_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6303,7 +6234,6 @@ nax2_crystal:
 		Length: *
 	icon:
 		Filename: naxcrystaltankicon.png
-		AddExtension: False
 
 nax_gravity:
 	Inherits: ^RA2CannonMuzzle
@@ -6315,7 +6245,6 @@ nax_gravity:
 		Facings: 64
 	icon:
 		Filename: nax_jagdpanzer_icon.png
-		AddExtension: False
 		Offset: 0,0
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -6334,7 +6263,6 @@ nax_brummbar:
 		Offset: 0,5
 	icon:
 		Filename: nax_brummbar_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6352,7 +6280,6 @@ nax_sturmtiger:
 		Offset: 0,5
 	icon:
 		Filename: nax_sturmtiger_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6370,7 +6297,6 @@ nax_nokana:
 		Offset: 0,5
 	icon:
 		Filename: nax_nokana_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6388,7 +6314,6 @@ nax_halftrack:
 		Offset: 0,5
 	icon:
 		Filename: nax_halftrack_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6495,7 +6420,6 @@ nax_slav:
 		Start: 276
 	icon:
 		Filename: workericon.png
-		AddExtension: false
 
 nax_haunebu:
 	Defaults:
@@ -6568,7 +6492,6 @@ nax_eng:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: nax_engitruk_icon.png
-		AddExtension: False
 		Offset: 0, 0
 
 nax_me262:
@@ -6590,7 +6513,6 @@ nax_me262:
 		Start: 128
 	icon:
 		Filename: nax_me262_icon.png
-		AddExtension: False
 
 nax_bf109:
 	Defaults:
@@ -6609,7 +6531,6 @@ nax_bf109:
 		Facings: 64
 	icon:
 		Filename: nax_bf109_icon.png
-		AddExtension: False
 
 nax_zep:
 	Defaults:
@@ -6623,7 +6544,6 @@ nax_zep:
 		Offset: 0,9
 	icon:
 		Filename: nax_zep_icon.png
-		AddExtension: False
 
 nax2_zep:
 	Defaults:
@@ -6637,7 +6557,6 @@ nax2_zep:
 		Offset: 0,0
 	icon:
 		Filename: naxspacezeppelinicon.png
-		AddExtension: False
 
 nax_horten:
 	Defaults:
@@ -6651,7 +6570,6 @@ nax_horten:
 		Offset: 0,0
 	icon:
 		Filename: nax_horten_icon.png
-		AddExtension: False
 
 nax_cplane:
 	Defaults:
@@ -6665,7 +6583,6 @@ nax_cplane:
 		Offset: 0,32
 	icon:
 		Filename: nax_zep_icon.png
-		AddExtension: False+
 
 nax_drone:
 	Defaults:
@@ -6686,7 +6603,6 @@ nax_drone:
 		Start: 128
 	icon:
 		Filename: nax_drone_icon.png
-		AddExtension: False
 
 nax_interceptor:
 	Defaults:
@@ -6708,7 +6624,6 @@ nax_interceptor:
 		Start: 128
 	icon:
 		Filename: nax_drone_icon.png
-		AddExtension: False
 
 nax_piercer:
 	Defaults:
@@ -6729,7 +6644,6 @@ nax_piercer:
 		Start: 128
 	icon:
 		Filename: nax_piercer_icon.png
-		AddExtension: False
 
 nax_brad:
 	Inherits: ^RA2GatlingMuzzle
@@ -6745,7 +6659,6 @@ nax_brad:
 		Offset: 0,20
 	icon:
 		Filename: nax_brad_icon.png
-		AddExtension: False
 
 nax2_bradley:
 	Inherits: ^RA2GatlingMuzzle
@@ -6764,7 +6677,6 @@ nax2_bradley:
 		Offset: 0,20
 	icon:
 		Filename: nax_brad_icon.png
-		AddExtension: False
 
 nax2_aatank:
 	Inherits: ^RA2GatlingMuzzle
@@ -6782,7 +6694,6 @@ nax2_aatank:
 		Offset: 0,20
 	icon:
 		Filename: nax_brad_icon.png
-		AddExtension: False
 
 nax_sarubia:
 	Inherits: ^RA2CannonMuzzle
@@ -6794,7 +6705,6 @@ nax_sarubia:
 		Offset: 0,1
 	icon:
 		Filename: nax_sarubia_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6830,7 +6740,6 @@ nax_shoe:
 		Offset: 0,5
 	icon:
 		Filename: nax_shoe_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -7140,7 +7049,6 @@ nax_kubel:
 		Offset: 0,5
 	icon:
 		Filename: nax_kubel_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -7158,7 +7066,6 @@ nax_bmwbike:
 		Offset: 0,5
 	icon:
 		Filename: nax_bmw_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -7340,7 +7247,6 @@ nax2_beetle:
 		Offset: 0,5
 	icon:
 		Filename: nax2_beetle_icon.png
-		AddExtension: False
 
 nax2_lasert:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7355,7 +7261,6 @@ nax2_lasert:
 		Facings: 64
 	icon:
 		Filename: naxlasertankicon.png
-		AddExtension: False
 		Offset: 0,0
 
 nax_lunar:
@@ -7557,7 +7462,6 @@ nax2_bbomb:
 		Facings: 64
 	icon:
 		Filename: nax_piercer_icon.png
-		AddExtension: False
 
 nax_conehead:
 	Inherits: ^RA2ArmedInfantry
@@ -7680,7 +7584,6 @@ futu_mcv:
 		Facings: 64
 	icon:
 		Filename: futu_mcvicon.png
-		AddExtension: False
 
 futu_egcnst:
 	Defaults:
@@ -8729,7 +8632,6 @@ futu_ifv:
 		Length: 13
 	icon:
 		Filename: futu_salamanderifvicon.png
-		AddExtension: False
 
 futu_mbt:
 	Inherits: ^RA2CannonMuzzle
@@ -8750,7 +8652,6 @@ futu_hvrt:
 		Offset: 0,36
 	icon:
 		Filename: futu_riptideacvicon.png
-		AddExtension: False
 
 futu_cryo:
 	Inherits: ^RA2CannonMuzzle
@@ -8788,7 +8689,6 @@ futu_harv:
 		Facings: 8
 	icon:
 		Filename: futu_harvicon.png
-		AddExtension: False
 futu_harv2:
 	Defaults:
 		Filename: futu_harv2.png
@@ -8807,7 +8707,6 @@ futu_harv2:
 		Facings: 8
 	icon:
 		Filename: futu_harv2icon.png
-		AddExtension: False
 
 futu_phal:
 	Inherits: ^RA2CannonMuzzle
@@ -8820,7 +8719,6 @@ futu_phal:
 		Facings: 64
 	icon:
 		Filename: futu_phalanxicon.png
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -8839,7 +8737,6 @@ futu_athena:
 		Offset: 0,5
 	icon:
 		Filename: futu_athenacannonicon.png
-		AddExtension: False
 
 futu_coiler:
 	Defaults:
@@ -8866,7 +8763,6 @@ futu_futu:
 		Offset: 0,5
 	icon:
 		Filename: futu_futuretankicon.png
-		AddExtension: False
 
 yrrobo:
 	Inherits: ^RA2CannonMuzzle
@@ -8885,7 +8781,6 @@ yrrobo:
 		Offset: 0,20
 	icon:
 		Filename: yrroboicon.png
-		AddExtension: False
 
 futu_spy:
 	Inherits: ^RA2Infantry

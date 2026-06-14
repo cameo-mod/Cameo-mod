@@ -21,7 +21,6 @@ fact:
 		Length: *
 		Tick: 80
 	bib: bib2
-		UseTilesetExtension: true
 		Length: *
 	icon: facticnh
 	idle-overlay: customoverlay
@@ -41,10 +40,8 @@ nuke:
 		Length: *
 		Tick: 80
 	bib: bib3
-		UseTilesetExtension: true
 		Length: *
 	icon: nukeicnh.tem
-		AddExtension: False
 
 proc:
 	idle:
@@ -72,10 +69,8 @@ proc:
 		Length: 6
 		Offset: -30,-17
 	bib: bib2
-		UseTilesetExtension: true
 		Length: *
 	icon: procicnh.tem
-		AddExtension: False
 
 silo:
 	idle:
@@ -99,7 +94,6 @@ silo:
 		Tick: 80
 		Offset: 0,-1
 	bib: mbSILO
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -109,7 +103,6 @@ silo:
 		Length: *
 		Offset: 0,1
 	icon: siloicnh.tem
-		AddExtension: False
 
 hand:
 	Defaults:
@@ -124,11 +117,9 @@ hand:
 		Length: *
 		Tick: 80
 	bib: bib3
-		UseTilesetExtension: true
 		Length: *
 		Offset: 0,0
 	icon: handicnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 pyle:
@@ -146,10 +137,8 @@ pyle:
 		Length: *
 		Tick: 80
 	bib: bib3
-		UseTilesetExtension: true
 		Length: *
 	icon: pyleicnh.tem
-		AddExtension: False
 
 weap:
 	Defaults:
@@ -180,11 +169,9 @@ weap:
 		Length: *
 		Tick: 80
 	bib: bib2
-		UseTilesetExtension: true
 		Length: *
 		Offset: 0,0
 	icon: weapicnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 afld:
@@ -219,10 +206,8 @@ afld:
 		Length: *
 		Tick: 80
 	bib: bib1
-		UseTilesetExtension: true
 		Length: *
 	icon: afldicnh.tem
-		AddExtension: False
 
 hq:
 	idle:
@@ -239,10 +224,8 @@ hq:
 		Length: *
 		Tick: 80
 	bib: bib3
-		UseTilesetExtension: true
 		Length: *
 	icon: hqicnh.tem
-		AddExtension: False
 
 nuk2:
 	idle:
@@ -259,10 +242,8 @@ nuk2:
 		Length: *
 		Tick: 80
 	bib: bib3
-		UseTilesetExtension: true
 		Length: *
 	icon: nuk2icnh.tem
-		AddExtension: False
 
 hpad:
 	idle:
@@ -288,7 +269,6 @@ hpad:
 		Length: *
 		Tick: 80
 	icon: hpadicnh.tem
-		AddExtension: False
 
 fix:
 	idle:
@@ -311,7 +291,6 @@ fix:
 		Length: 14
 		Tick: 60
 	bib: mbFIX
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -321,7 +300,6 @@ fix:
 		Length: *
 		Offset: 0,-9
 	icon: fixicnh.tem
-		AddExtension: False
 
 eye:
 	idle:
@@ -338,10 +316,8 @@ eye:
 		Length: *
 		Tick: 80
 	bib: bib3
-		UseTilesetExtension: true
 		Length: *
 	icon: eyeicnh.tem
-		AddExtension: False
 
 tmpl:
 	Defaults:
@@ -365,11 +341,9 @@ tmpl:
 		Length: *
 		Tick: 60
 	bib: bib2
-		UseTilesetExtension: true
 		Length: *
 		Offset: 0,0
 	icon: tmplicnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 obli:
@@ -392,7 +366,6 @@ obli:
 		Length: 13
 		Tick: 80
 	bib: mbOBLI
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -402,7 +375,6 @@ obli:
 		Length: *
 		Offset: -1,-3
 	icon: obliicnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 brik:
@@ -415,13 +387,11 @@ brik:
 		Start: 32
 		Length: 16
 	icon: brikicnh.tem
-		AddExtension: False
 
 sbag:
 	idle:
 		Length: 16
 	icon: sbagicnh.tem
-		AddExtension: False
 
 cycl:
 	idle:
@@ -430,7 +400,6 @@ cycl:
 		Start: 16
 		Length: 16
 	icon: cyclicnh.tem
-		AddExtension: False
 
 barb:
 	idle:
@@ -468,7 +437,6 @@ gun:
 	muzzle: gunfire2
 		Length: *
 	bib: mbGUN
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -478,7 +446,6 @@ gun:
 		Length: *
 		Offset: -1,-1
 	icon: gunicnh.tem
-		AddExtension: False
 	chemicon: modchemturreticon
 sam:
 	closed-idle:
@@ -521,7 +488,6 @@ sam:
 		Length: 18
 		Facings: 8
 	icon: samicnh.tem
-		AddExtension: False
 
 gtwr:
 	idle:
@@ -542,7 +508,6 @@ gtwr:
 		Length: 6
 		Facings: 8
 	bib: mbGTWR
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -552,7 +517,6 @@ gtwr:
 		Length: *
 		Offset: 0,-2
 	icon: gtwricnh.tem
-		AddExtension: False
 
 atwr:
 	Defaults:
@@ -569,7 +533,6 @@ atwr:
 	muzzle: gunfire2
 		Length: *
 	bib: mbGTWR
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -579,7 +542,6 @@ atwr:
 		Length: *
 		Offset: -3,0
 	icon: atwricnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 hosp:
@@ -596,7 +558,6 @@ hosp:
 		Tick: 80
 		Offset: 0,-2
 	bib: mbHOSP
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -610,7 +571,6 @@ hosp.husk:
 	idle: hosp
 		Start: 8
 	bib: mbHOSP
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -647,7 +607,6 @@ miss:
 		Tick: 80
 		Offset: 0,-1
 	bib: mbMISS
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -662,7 +621,6 @@ miss.husk:
 	idle: miss
 		Start: 2
 	bib: mbMISS
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -689,7 +647,6 @@ xfact:
 	build:
 	dead:
 	bib: mbMISS
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -732,10 +689,8 @@ xpyle:
 		Length: *
 		Tick: 80
 	bib: bib3
-		UseTilesetExtension: true
 		Length: *
 	icon: pyleicnh.tem
-		AddExtension: False
 
 xweap:
 	Defaults:
@@ -759,12 +714,10 @@ xweap:
 		Length: *
 		Tick: 80
 	bib: bib2
-		UseTilesetExtension: true
 		Length: *
 		Offset: 0,0
 	place:
 	icon: weapicnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 xhpad:
@@ -791,7 +744,6 @@ xhpad:
 		Length: *
 		Tick: 80
 	icon: hpadicnh.tem
-		AddExtension: False
 
 xhosp:
 	idle:
@@ -808,7 +760,6 @@ xhosp:
 		Tick: 80
 		Offset: 0,-2
 	bib: mbHOSP
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -818,7 +769,6 @@ xhosp:
 		Length: *
 		Offset: 0,1
 	icon: xhosp.shp
-		AddExtension: False
 
 xbio:
 	idle:
@@ -829,7 +779,6 @@ xbio:
 		Length: *
 		Tick: 80
 	bib: mbHOSP
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -839,7 +788,6 @@ xbio:
 		Length: *
 		Offset: 0,1
 	icon: xbio.shp
-		AddExtension: False
 
 xgun:
 	Defaults:
@@ -865,7 +813,6 @@ xgun:
 	muzzle: gunfire2
 		Length: *
 	bib: mbGUN
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -875,7 +822,6 @@ xgun:
 		Length: *
 		Offset: -1,-1
 	icon: gunicnh.tem
-		AddExtension: False
 
 xftur:
 	Defaults:
@@ -891,7 +837,6 @@ xftur:
 	dead: ftur
 	bib: mbFTUR
 		Length: *
-		UseTilesetExtension: false
 	icon: fturicon
 
 xgtwr:
@@ -907,7 +852,6 @@ xgtwr:
 		Length: 6
 		Facings: 8
 	icon: gtwricnh.tem
-		AddExtension: False
 
 x2100scavrt:
 	Defaults:
@@ -941,7 +885,6 @@ xatwr:
 	muzzle: gunfire2
 		Length: *
 	bib: mbGTWR
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -951,7 +894,6 @@ xatwr:
 		Length: *
 		Offset: -3,0
 	icon: atwricnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 xobli:
@@ -975,7 +917,6 @@ xobli:
 		Length: 13
 		Tick: 80
 	bib: mbOBLI
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -985,7 +926,6 @@ xobli:
 		Length: *
 		Offset: -1,-3
 	icon: obliicnh.tem
-		AddExtension: False
 		Offset: 0,0
 
 xtsla:
@@ -1012,7 +952,6 @@ xtsla:
 	dead: tsla
 	bib: mbTSLA
 		Length: *
-		UseTilesetExtension: false
 	icon: tslaicon
 
 
@@ -1026,7 +965,6 @@ x2100pp:
 	muzzle: gunfire2
 		Length: *
 	icon: 2100ppicon.shp
-		AddExtension: False
 
 ####################################################################################################
 #		CAMEO
@@ -1059,7 +997,6 @@ c2knuke:
 ### evo chamber
 factsplit2:
 	Defaults: split2.tem
-		AddExtension: False
 		Offset: 11, -15
 	build:
 		Start: 30
@@ -1079,8 +1016,6 @@ factsplit2:
 	make:
 		Length: 30
 	bib: mbGTWR
-		AddExtension: True
-		UseTilesetExtension: true
 		TilesetOverrides:
 			WINTER: TEMPERAT
 			JUNGLE: TEMPERAT
@@ -1090,7 +1025,6 @@ factsplit2:
 		Length: *
 		Offset: 0,-2
 	icon: facticnh
-		AddExtension: True
 		Offset: 0, 0
 	idle-overlay:
 		Start: 54
@@ -1101,7 +1035,6 @@ techrpad:
 	damaged-idle:
 	make:
 	bib: bib2
-		UseTilesetExtension: true
 		Length: *
     icon: oilbicon
 modchemftur:
@@ -1116,5 +1049,4 @@ modchemftur:
 	dead:
 	bib: mbFTUR
 		Length: *
-		UseTilesetExtension: false
 	icon: fturicon

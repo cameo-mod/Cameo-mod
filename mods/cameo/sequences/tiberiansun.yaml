@@ -92,7 +92,6 @@ tse1.gdi:
 		Filename: tse1.shp
 	icon:
 		Filename: tse1gicon.png
-		AddExtension: False
 
 tse1.nod:
 	Inherits: ^TSBasicInfantry
@@ -101,7 +100,6 @@ tse1.nod:
 		Filename: altnode1.shp
 	icon:
 		Filename: tse1gicon.png
-		AddExtension: False
 
 tsmedic:
 	Defaults:
@@ -203,7 +201,6 @@ tse2:
 		Filename: alte2.shp
 	icon:
 		Filename: tse2icon.png
-		AddExtension: False
 
 tse3:
 	Inherits: ^TSBasicInfantry
@@ -212,12 +209,10 @@ tse3:
 		Filename: alte3.shp
 	icon:
 		Filename: tse3icon.png
-		AddExtension: False
 
 tsenforcer:
 	icon:
 		Filename: tsenforcericon.png
-		AddExtension: False
 	Defaults:
 		Tick: 80
 		Offset: 0, 0, 16
@@ -370,7 +365,6 @@ tsumagon:
 		Filename: tsumagon.shp
 	icon:
 		Filename: tsumagonicon.shp
-		AddExtension: False
 
 tsghost:
 	Inherits: ^TSBasicInfantry
@@ -649,7 +643,6 @@ tse3mut:
 		Filename: alte3.shp
 	icon:
 		Filename: forgot_missiletroop_icon.png
-		AddExtension: False
 
 tsfloater:
 	idle:
@@ -722,7 +715,6 @@ tscyborg:
 		ShadowStart: 582
 	icon:
 		Filename: tscyborbgicon.png
-		AddExtension: False
 tsdevout:
 	Inherits: ^TSBasicInfantry
 	Defaults:
@@ -791,7 +783,6 @@ tsdevout:
 		ZOffset: -511
 	icon:
 		Filename: cabaldevouticon.png
-		AddExtension: False
 tsascended:
 	Inherits: ^TSBasicInfantry
 	Defaults:
@@ -861,7 +852,6 @@ tsascended:
 		ZOffset: -511
 	icon:
 		Filename: cabalascendedicon.png
-		AddExtension: False
 tscyborgb:
 	Inherits: ^TSBasicInfantry
 	Defaults:
@@ -906,7 +896,6 @@ tscyborgb:
 		ShadowStart: 582
 	icon:
 		Filename: tscyborbg2icon.png
-		AddExtension: False
 
 elitcadre:
 	Inherits: ^TSBasicInfantry
@@ -952,7 +941,6 @@ elitcadre:
 		ShadowStart: 504
 	icon:
 		Filename: elitcadreicon.shp
-		AddExtension: False
 
 tshacker:
 	Inherits: ^TSBasicInfantry
@@ -1023,7 +1011,6 @@ tshacker:
 		ZOffset: -511
 	icon:
 		Filename: cabalhackericon.png
-		AddExtension: False
 
 tscabalengi:
 	Inherits: ^TSBasicInfantry
@@ -1094,7 +1081,6 @@ tscabalengi:
 		ZOffset: -511
 	icon:
 		Filename: cabalhackericon.png
-		AddExtension: False
 
 tstoxintroop:
 	Inherits: ^TSBasicInfantry
@@ -1102,7 +1088,6 @@ tstoxintroop:
 		Filename: tstoxintroop.shp
 	icon:
 		Filename: tstoxintroopicon.png
-		AddExtension: False
 
 tsshotguncom:
 	Inherits: ^TSBasicInfantry
@@ -1111,7 +1096,6 @@ tsshotguncom:
 		Scale: 1.1
 	icon:
 		Filename: tsshotguncomicon.png
-		AddExtension: False
 
 tscyc2:
 	Inherits: ^TSBasicInfantry
@@ -1302,7 +1286,6 @@ tsmmch:
 		Offset: 0, 0, 12
 	icon:
 		Filename: tstitanicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1357,7 +1340,6 @@ tsjugg2:
 		Scale: 0.8
 	icon:
 		Filename: tsjugg2icon.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1393,7 +1375,6 @@ tsharv:
 		Facings: 8
 	icon:
 		Filename: tsharvestericon.shp
-		AddExtension: False
 
 tsharvcabal:
 	Defaults:
@@ -1412,7 +1393,6 @@ tsharvcabal:
 		Facings: 8
 	icon:
 		Filename: tsharvcabalicon.png
-		AddExtension: False
 
 dtruck:
 	Defaults:
@@ -1431,7 +1411,6 @@ dtruck:
 		Facings: 8
 	icon:
 		Filename: tsharvestericon.shp
-		AddExtension: False
 
 tskodk:
 	Defaults:
@@ -1555,14 +1534,12 @@ tsshotmut:
 # 	dock-loop: invisibleitem
 # 	warpout: invisibleitem
 # 	icon: tsweedeatericon.shp
-# 		AddExtension: False
 
 tsapc:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tsaphapcicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1580,7 +1557,6 @@ tspitbull:
 		Scale: 0.6
 	icon:
 		Filename: tspitbullicon.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1817,7 +1793,6 @@ tshvr:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tshvricon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1867,7 +1842,6 @@ tssmech:
 		Tick: 100
 	icon:
 		Filename: tswolverineicon.shp
-		AddExtension: False
 
 tstalwolv:
 	idle:
@@ -1892,7 +1866,6 @@ tshmec:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tsmammothmk2icon.shp
-		AddExtension: False
 	muzzle2:
 		Filename: lightbluelasermuzzle.shp
 		Length: 3
@@ -1980,7 +1953,6 @@ tssonic:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tsdisruptoricon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1995,7 +1967,6 @@ tsbggy:
 		UseClassicFacings: True
 	icon:
 		Filename: tsbuggyicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2010,7 +1981,6 @@ tsbike:
 		UseClassicFacings: True
 	icon:
 		Filename: tsbikeicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2135,7 +2105,6 @@ tsrepair:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tsmovrepairicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2145,7 +2114,6 @@ tsart2:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tsmartyicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2191,7 +2159,6 @@ tssubtank:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tsdeviltongueicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2261,7 +2228,6 @@ tsmlrs:
 		Length: 5
 	icon:
 		Filename: forgot_mlrs_icon.png
-		AddExtension: False
 tsm113:
 	Defaults:
 		Filename: forgot_adats.png
@@ -2277,7 +2243,6 @@ tsm113:
 		Length: 5
 	icon:
 		Filename: forgot_adats_icon.png
-		AddExtension: False
 tsapctruck:
 	Defaults:
 		Filename: forgot_truck.png
@@ -2294,7 +2259,6 @@ tsapctruck:
 		Length: 5
 	icon:
 		Filename: forgot_truck_icon.png
-		AddExtension: False
 
 tslasspid:
 	idle:
@@ -2304,7 +2268,6 @@ tslasspid:
 		Scale: 0.6
 	icon:
 		Filename: tslasspidicon.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2328,7 +2291,6 @@ tscabalcobra:
 		Scale: 1
 	icon:
 		Filename: tscabalcobra.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2361,7 +2323,6 @@ tsspddrone:
 		ShadowStart: 258
 	icon:
 		Filename: tscabalspider.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2395,7 +2356,6 @@ tscheavyspider:
 		ShadowStart: 680
 	icon:
 		Filename: tscheavyspidericon.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2426,7 +2386,6 @@ tsartspid:
 		Start: 64
 	icon:
 		Filename: tsartspidicon.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2447,7 +2406,6 @@ tstnkspid:
 		Start: 64
 	icon:
 		Filename: tstnkspidicon.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2471,7 +2429,6 @@ tssapccabal:
 		Facings: 64
 	icon:
 		Filename: cabal_scarab_hover_icon.png
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -3969,7 +3926,6 @@ tsntobel:
 		Filename: tsntobelmk.shp
 	icon:
 		Filename: tsntobelicon.png
-		AddExtension: False
 		Offset: 0,0
 
 tsntobelcabal:
@@ -4013,7 +3969,6 @@ tsntobelcabal:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: tscabalobelicon.png
-		AddExtension: False
 		Offset: 0,0
 
 # ntlasr:
@@ -6233,19 +6188,16 @@ tsioncannon:
 # 		Length: 6
 # 		Facings: 8
 # 	circle: c12_circle.png
-# 		AddExtension: false
 # 		Frames: 0,0,0,0,0,0,0,0,0,1
 # 		Tick: 12
 # 		Length: 10
 # 	circle_buffed: c12_circle.png
-# 		AddExtension: false
 # 		Frames: 0,0,0,0,0,0,0,1,2,3,4,5,4,3,2,1
 # 		Length: 16
 # 		Tick: 10
 # 	icon: c12_icon
 # icon:
 # 	Defaults:
-# 		AddExtension: False
 
 tibpump:
 	Defaults:
@@ -6362,7 +6314,6 @@ railgunweaponryicon:
 mechengineeringicon:
 	icon:
 		Filename: tstitanicon.shp
-		AddExtension: False
 
 ceramicarmoricon:
 	icon:
@@ -6414,7 +6365,6 @@ ts_sedan:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ts_trucka:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6424,7 +6374,6 @@ ts_trucka:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ts_truckb:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6434,7 +6383,6 @@ ts_truckb:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ts_bus:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6444,7 +6392,6 @@ ts_bus:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ts_pickup:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6454,7 +6401,6 @@ ts_pickup:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ts_pickupb:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6464,7 +6410,6 @@ ts_pickupb:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ts_wini:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6474,7 +6419,6 @@ ts_wini:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 mobilityspecializationicon:
 	icon:

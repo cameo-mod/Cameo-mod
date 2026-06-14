@@ -10,7 +10,6 @@ mcv:
 		InterpolatedFacings: 64
 	icon:
 		Filename: mcvicnh.shp
-		AddExtension: False
 	idle-overlay:
 		Filename: customoverlay.shp
 
@@ -40,7 +39,6 @@ harv:
 		Start: 7
 	icon:
 		Filename: harvicnh.shp
-		AddExtension: False
 
 harv.destroyed:
 	idle:
@@ -65,7 +63,6 @@ bggy:
 		Facings: 8
 	icon:
 		Filename: bggyicnh.shp
-		AddExtension: False
 
 bggy.destroyed:
 	Defaults:
@@ -99,7 +96,6 @@ mtnk:
 		Facings: 8
 	icon:
 		Filename: mtnkicnh.shp
-		AddExtension: False
 
 mtnk.destroyed:
 	Defaults:
@@ -129,7 +125,6 @@ ltnk:
 		Length: *
 	icon:
 		Filename: ltnkicnh.shp
-		AddExtension: False
 
 ltnk.destroyed:
 	Defaults:
@@ -159,7 +154,6 @@ htnk:
 		Length: *
 	icon:
 		Filename: htnkicnh.shp
-		AddExtension: False
 
 htnk.destroyed:
 	Defaults:
@@ -190,7 +184,6 @@ jeep:
 		Facings: 8
 	icon:
 		Filename: jeepicnh.shp
-		AddExtension: False
 
 jeep.destroyed:
 	Defaults:
@@ -216,7 +209,6 @@ bike:
 		Length: *
 	icon:
 		Filename: bikeicnh.shp
-		AddExtension: False
 
 bike.destroyed:
 	Defaults:
@@ -270,7 +262,6 @@ ftnk:
 		Length: 13
 	icon:
 		Filename: ftnkicnh.shp
-		AddExtension: False
 
 ftnk.destroyed:
 	Defaults:
@@ -303,7 +294,6 @@ msam:
 		Length: *
 	icon:
 		Filename: msamicnh.shp
-		AddExtension: False
 
 td_gdi_boxer:
 	Defaults:
@@ -360,7 +350,6 @@ mlrs:
 		Length: *
 	icon:
 		Filename: mlrsicnh.shp
-		AddExtension: False
 
 mlrs.destroyed:
 	Defaults:
@@ -386,7 +375,6 @@ stnk:
 		Length: *
 	icon:
 		Filename: stnkicnh.shp
-		AddExtension: False
 
 stnk.destroyed:
 	Defaults:
@@ -407,7 +395,6 @@ arty:
 		Length: *
 	icon:
 		Filename: artyicnh.shp
-		AddExtension: False
 
 arty.destroyed:
 	Defaults:
@@ -441,7 +428,6 @@ apc:
 		Start: 32
 	icon:
 		Filename: apcicnh.shp
-		AddExtension: False
 
 apc.destroyed:
 	Defaults:
@@ -514,7 +500,6 @@ tran:
 		Start: 35
 	icon:
 		Filename: tranicnh.shp
-		AddExtension: False
 
 heli:
 	Defaults:
@@ -537,7 +522,6 @@ heli:
 		Facings: 8
 	icon:
 		Filename: heliicnh.shp
-		AddExtension: False
 
 orca:
 	Defaults:
@@ -554,7 +538,6 @@ orca:
 		Length: *
 	icon:
 		Filename: orcaicnh.shp
-		AddExtension: False
 
 a10:
 	Defaults:
@@ -568,7 +551,6 @@ a10:
 		Facings: 8
 	icon:
 		Filename: a10icnh.shp
-		AddExtension: False
 
 a10carrier:
 	Defaults:
@@ -583,7 +565,6 @@ a10carrier:
 		Facings: 8
 	icon:
 		Filename: a10icnh.shp
-		AddExtension: False
 
 fact:
 	Inherits: ^WithBuildingBib2
@@ -700,7 +681,6 @@ nuke:
 		Tick: 80
 	icon:
 		Filename: nukeicnh.tem
-		AddExtension: False
 
 proc:
 	Inherits: ^WithBuildingBib2
@@ -735,7 +715,6 @@ proc:
 		Offset: -60,-34
 	icon:
 		Filename: procicnh.shp
-		AddExtension: False
 
 silo:
 	Defaults:
@@ -763,7 +742,6 @@ silo:
 		Offset: 0,-1
 	bib:
 		Filename: mbIRON.tem
-		UseTilesetExtension: true
 		TilesetFilenames:
 			DESERT: mbIRON.des
 			WINTER: mbIRON.win
@@ -779,7 +757,6 @@ silo:
 		Offset: -1,6
 	icon:
 		Filename: siloicnh.shp
-		AddExtension: False
 
 hand:
 	Inherits: ^WithBuildingBib3
@@ -798,7 +775,6 @@ hand:
 		Tick: 80
 	icon:
 		Filename: handicnh.shp
-		AddExtension: False
 		Offset: 0,0
 
 pyle:
@@ -821,7 +797,6 @@ pyle:
 		Tick: 80
 	icon:
 		Filename: pyleicnh.shp
-		AddExtension: False
 
 weap:
 	Inherits: ^WithBuildingBib2
@@ -863,7 +838,6 @@ weap:
 		Offset: 0,0
 	icon:
 		Filename: weapicnh.shp
-		AddExtension: False
 		Offset: 0,0
 
 afld:
@@ -905,7 +879,6 @@ afld:
 		Tick: 80
 	icon:
 		Filename: afldicnh.shp
-		AddExtension: False
 
 hq:
 	Inherits: ^WithBuildingBib3
@@ -927,7 +900,6 @@ hq:
 		Tick: 80
 	icon:
 		Filename: hqicnh.shp
-		AddExtension: False
 
 nuk2:
 	Defaults:
@@ -965,11 +937,9 @@ nuk2:
 			WC2SUNSET: bib3.tem
 			WC2SUMMER: bib3.tem
 			OUTPOST2: bib3.tem
-		UseTilesetExtension: true
 		Length: *
 	icon:
 		Filename: nuk2icnh.shp
-		AddExtension: False
 
 hpad:
 	Defaults:
@@ -1016,11 +986,9 @@ hpad:
 			WC2SUNSET: bib3.tem
 			WC2SUMMER: bib3.tem
 			OUTPOST2: bib3.tem
-		UseTilesetExtension: true
 		Length: *
 	icon:
 		Filename: hpadicnh.shp
-		AddExtension: False
 
 fix:
 	Defaults:
@@ -1062,7 +1030,6 @@ fix:
 		Offset: 0,-10
 	icon:
 		Filename: fixicnh.shp
-		AddExtension: False
 
 eye:
 	Inherits: ^WithBuildingBib3
@@ -1084,12 +1051,10 @@ eye:
 		Tick: 80
 	icon:
 		Filename: eyeicnh.shp
-		AddExtension: False
 
 eye.ionc:
 	icon:
 		Filename: addon_ioncannon_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 tmpl:
@@ -1122,13 +1087,11 @@ tmpl:
 		Offset: 0,0
 	icon:
 		Filename: tmplicnh.shp
-		AddExtension: False
 		Offset: 0,0
 
 tmpl.nuke:
 	icon:
 		Filename: addon_nuketemple_icon.png
-		AddExtension: False
 		Offset: 0,0
 
 td_nod_templeprime:
@@ -1194,7 +1157,6 @@ obli:
 		Offset: -5,-10
 	icon:
 		Filename: obliicnh.shp
-		AddExtension: False
 		Offset: 0,0
 
 gun:
@@ -1235,7 +1197,6 @@ gun:
 		Offset: -1,-1
 	icon:
 		Filename: gunicnh.shp
-		AddExtension: False
 
 nodlaserturret:
 	Defaults:
@@ -1269,7 +1230,6 @@ nodlaserturret:
 		Offset: -1,-1
 	icon:
 		Filename: NodLaserTurretIcon.png
-		AddExtension: False
 
 sam:
 	Defaults:
@@ -1316,7 +1276,6 @@ sam:
 		Offset: 0,14
 	icon:
 		Filename: samicon.png
-		AddExtension: False
 
 gtwr:
 	Defaults:
@@ -1355,7 +1314,6 @@ gtwr:
 		Offset: -1,-2
 	icon:
 		Filename: gtwricnh.shp
-		AddExtension: False
 
 td_gdi_skyshield:
 	Defaults:
@@ -1386,7 +1344,6 @@ td_gdi_skyshield:
 			ARRAKIS: mbGUN.des
 			ARRAKIS2: mbGUN.des
 		Length: *
-		UseTilesetExtension: false
 		Offset: 0,0
 	icon:
 		Filename: td_gdi_skyshield_icon.png
@@ -1430,7 +1387,6 @@ atwr:
 		Length: *
 	icon:
 		Filename: atwricnh.shp
-		AddExtension: False
 		Offset: 0,0
 
 brik:
@@ -1446,7 +1402,6 @@ brik:
 		Length: 16
 	icon:
 		Filename: brikicon.png
-		AddExtension: False
 
 sbag:
 	Defaults:
@@ -1455,7 +1410,6 @@ sbag:
 		Length: 16
 	icon:
 		Filename: sbagicon.png
-		AddExtension: False
 
 cycl:
 	Defaults:
@@ -1467,7 +1421,6 @@ cycl:
 		Length: 16
 	icon:
 		Filename: cyclicon.png
-		AddExtension: False
 
 barb:
 	Defaults:
@@ -1661,7 +1614,6 @@ e1:
 		Facings: 8
 	icon:
 		Filename: e1icnh.shp
-		AddExtension: False
 
 e2:
 	Inherits: ^InfantryOverlays
@@ -1754,7 +1706,6 @@ e2:
 		ZOffset: -511
 	icon:
 		Filename: e2icnh.shp
-		AddExtension: False
 
 e3:
 	Inherits: ^InfantryOverlays
@@ -1853,7 +1804,6 @@ e3:
 		ZOffset: -511
 	icon:
 		Filename: e3icnh.shp
-		AddExtension: False
 
 e4:
 	Inherits: ^InfantryOverlays
@@ -1988,7 +1938,6 @@ e4:
 		Length: 13
 	icon:
 		Filename: e4icnh.shp
-		AddExtension: False
 
 e5:
 	Defaults:
@@ -2220,7 +2169,6 @@ e6:
 		ZOffset: -511
 	icon:
 		Filename: e6icnh.shp
-		AddExtension: False
 	scicon:
 		Filename: sce6icon.shp
 	2100icon:
@@ -2329,7 +2277,6 @@ rmbo:
 		ZOffset: -511
 	icon:
 		Filename: rmboicnh.shp
-		AddExtension: False
 
 ^BasicInfantryTibsun:
 	Defaults:
@@ -2600,7 +2547,6 @@ tsstealthsoldier:
 		Scale: 1.0
 	icon:
 		Filename: tsstealthsoldiericon.shp
-		AddExtension: False
 
 tsblackhandlaser:
 	Defaults:
@@ -2808,7 +2754,6 @@ techrpad:
 			WC2SUNSET: bib2.tem
 			WC2SUMMER: bib2.tem
 			OUTPOST2: bib2.tem
-		UseTilesetExtension: true
 		Length: *
 	icon:
 		Filename: oilbicon.shp
@@ -2876,7 +2821,6 @@ ssmsub:
 		Length: *
 	icon:
 		Filename: ssmsubIcon.png
-		AddExtension: False
 
 ####################################################################################################
 #		MONSTERS
@@ -2931,7 +2875,6 @@ zombie:
 	#	Length: 6
 	#	Tick: 1600
 	#	ZOffset: -511
-	#	UseTilesetExtension: true
 	#	TilesetOverrides:
 	#		DESERT: TEMPERAT
 	#		INTERIOR: TEMPERAT
@@ -3050,7 +2993,6 @@ brik:
 		Length: 16
 	icon:
 		Filename: brikicnh.tem
-		AddExtension: False
 
 sbag:
 	Defaults:
@@ -3059,7 +3001,6 @@ sbag:
 		Length: 16
 	icon:
 		Filename: sbagicnh.tem
-		AddExtension: False
 
 cycl:
 	Defaults:
@@ -3071,7 +3012,6 @@ cycl:
 		Length: 16
 	icon:
 		Filename: cyclicnh.tem
-		AddExtension: False
 
 barb:
 	Defaults:
@@ -3244,7 +3184,6 @@ gdiexosuit:
 		Tick: 100
 	icon:
 		Filename: exosuit_icon.shp
-		AddExtension: False
 		Offset: 0,0
 
 modegg:
@@ -3426,7 +3365,6 @@ gdiofficer:
 		Facings: 8
 	icon:
 		Filename: gdiofficericon.shp
-		AddExtension: False
 
 modntech1:
 	Inherits: c1
@@ -3434,7 +3372,6 @@ modntech1:
 		Filename: tech1.shp
 	icon:
 		Filename: modntech1icon.shp
-		AddExtension: False
 
 deadsixrmbo:
 	Inherits: rmbo
@@ -3442,7 +3379,6 @@ deadsixrmbo:
 		Filename: rmbo.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -3453,7 +3389,6 @@ moddeadeye:
 		Filename: moddeadeye.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -3464,7 +3399,6 @@ modgunner:
 		Filename: modgunner.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -3475,7 +3409,6 @@ modhotwire:
 		Filename: modhotwire.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -3486,7 +3419,6 @@ modrpatch:
 		Filename: modrpatch.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -3497,7 +3429,6 @@ modsakura:
 		Filename: modsakura.shp
 	icon:
 		Filename: deadsixicon.shp
-		AddExtension: False
 	dot:
 		Filename: invisibleitem.shp
 	idle:
@@ -3718,7 +3649,6 @@ gdimissilesoldier:
 		Filename: missile_soldier.shp
 	icon:
 		Filename: missile_soldier_icon.shp
-		AddExtension: False
 
 gdiempgrenadier:
 	Inherits: ^InfantryOverlays
@@ -4060,7 +3990,6 @@ gdisniper:
 		Scale: 1.0
 	icon:
 		Filename: gdisnipericon.shp
-		AddExtension: False
 
 gdiassaultapc:
 	Defaults:
@@ -4231,7 +4160,6 @@ gdihavoc:
 		ZOffset: -511
 	icon:
 		Filename: havoc_icon.shp
-		AddExtension: False
 
 nodlasercommando:
 	Inherits: ^InfantryOverlays
@@ -4346,7 +4274,6 @@ nodlasercommando:
 		ZOffset: -511
 	icon:
 		Filename: tanodcommandoicon.shp
-		AddExtension: False
 
 cncss:
 	Defaults:
@@ -4493,7 +4420,6 @@ gdirigtower:
 		Length: *
 	icon:
 		Filename: atwricnh.shp
-		AddExtension: False
 		Offset: 0,0
 
 gdirigdrone:

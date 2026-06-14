@@ -259,7 +259,6 @@ ra2napowr:
 		Start: 1
 	icon:
 		Filename: ra2spowricon.shp
-		AddExtension: False
 		Offset: 0,0
 
 ra2nahand:
@@ -291,12 +290,10 @@ ra2nahand:
 			TEMPERAT: bib3.tem
 			JUNGLE: bib3.jun
 			BARREN: bib3.bar
-		UseTilesetExtension: true
 		Length: *
 		Offset: 0,0
 	icon:
 		Filename: ra2sbrkicon.shp
-		AddExtension: False
 		Offset: 0,0
 
 ra2narefn:
@@ -335,7 +332,6 @@ ra2narefn:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2sreficon.shp
-		AddExtension: False
 		Offset: 0,0
 
 ra2gacnst:
@@ -447,7 +443,6 @@ ra2gapowr:
 		Start: 1
 	icon:
 		Filename: ra2powricon.shp
-		AddExtension: False
 		Offset: 0,0
 
 ra2garefn:
@@ -2221,7 +2216,6 @@ ra2_awall:
 		Length: 16
 	icon:
 		Filename: ra2_awallicon.png
-		AddExtension: False
 
 ra2_swall:
 	Defaults:
@@ -2236,7 +2230,6 @@ ra2_swall:
 		Length: 16
 	icon:
 		Filename: ra2_swallicon.png
-		AddExtension: False
 
 ra2_ywall:
 	Defaults:
@@ -2251,7 +2244,6 @@ ra2_ywall:
 		Length: 16
 	icon:
 		Filename: ra2_ywallicon.png
-		AddExtension: False
 ####################################################################################################
 #		RA2 Civilian
 ####################################################################################################
@@ -2338,7 +2330,6 @@ ra2caoild:
 			OUTPOST2: bib3.tem
 		Length: *
 		Offset: 0,20
-		UseTilesetExtension: true
 	dead:
 		Start: 1
 	icon:
@@ -2393,7 +2384,6 @@ ra2caoild.husk:
 			OUTPOST2: bib3.tem
 		Length: *
 		Offset: 0,20
-		UseTilesetExtension: true
 	dead:
 		Start: 1
 	icon:
@@ -5969,7 +5959,6 @@ yrslav:
 		Start: 276
 	icon:
 		Filename: workericon.png
-		AddExtension: false
 
 yrbrute:
 	Inherits: ^RA2BasicInfantry
@@ -5991,7 +5980,6 @@ yrbrute:
 		Start: 101
 	icon:
 		Filename: ra2bruteicon.shp
-		AddExtension: False
 
 yrvirus:
 	Inherits: ^RA2ArmedInfantry
@@ -6013,7 +6001,6 @@ yrvirus:
 		Start: 149
 	icon:
 		Filename: ra2virusicon.shp
-		AddExtension: False
 
 ra2yuri:
 	Inherits: ^RA2ArmedInfantry
@@ -6046,7 +6033,6 @@ ra2engineer:
 		Start: 244
 	icon:
 		Filename: ra2engicon.shp
-		AddExtension: False
 
 ra2adog:
 	Inherits: ^RA2BasicInfantry
@@ -6169,7 +6155,6 @@ ra2seal: # TODO: seala on SNOW
 		Start: 602
 	icon:
 		Filename: ra2sealicon.shp
-		AddExtension: False
 
 ra2cleg:
 	Inherits: ^RA2BasicInfantry
@@ -6338,7 +6323,6 @@ ra2htnk:
 		Offset: 0,5
 	icon:
 		Filename: ra2htnkicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -6370,7 +6354,6 @@ ra2apoc:
 		Facings: 64
 	icon:
 		Filename: ra2apocicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_apmuzzle.shp
 		Length: *
@@ -6391,7 +6374,6 @@ ra2v3:
 		Offset: 0,20
 	icon:
 		Filename: ra2v3icon.shp
-		AddExtension: False
 
 ra2v3rocket:
 	idle:
@@ -6412,7 +6394,6 @@ ra2ttnk:
 		Facings: 64
 	icon:
 		Filename: ra2ttnkicon.shp
-		AddExtension: False
 
 ra2harv:
 	Inherits: ^RA2MachineGunMuzzle
@@ -6432,7 +6413,6 @@ ra2harv:
 		Facings: 64
 	icon:
 		Filename: ra2harvicon.shp
-		AddExtension: False
 	harvesting:
 		Filename: ra2_oregath.shp
 		Length: 15
@@ -6457,7 +6437,6 @@ ra2cmin:
 		Facings: 8
 	icon:
 		Filename: ra2cminicon.shp
-		AddExtension: False
 
 cra2cmin: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
 	Defaults:
@@ -6473,7 +6452,6 @@ cra2cmin: #chrono resource delivery is bugged, this is needed to prevent crash o
 		Length: *
 	icon:
 		Filename: ra2cminicon.shp
-		AddExtension: False
 	harvesting:
 		Filename: ra2_oregath.shp
 		Length: 15
@@ -6493,7 +6471,6 @@ ra2mtnk:
 		Offset: 0,5
 	icon:
 		Filename: ra2mtnkicon.shp
-		AddExtension: False
 
 ra2ltnk:
 	Inherits: ^RA2CannonMuzzle
@@ -6505,7 +6482,6 @@ ra2ltnk:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2mtnkicon.shp
-		AddExtension: False
 
 ra2tnkd:
 	Defaults:
@@ -6515,7 +6491,6 @@ ra2tnkd:
 		Facings: 64
 	icon:
 		Filename: ra2tnkdesicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -6529,7 +6504,6 @@ ra2howi:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2tnkdesicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -6543,7 +6517,6 @@ ra2arty:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2tnkdesicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -6648,7 +6621,6 @@ ra2fv:
 		Length: 13
 	icon:
 		Filename: ra2ifvicon.shp
-		AddExtension: False
 
 ra2mgtk:
 	Defaults:
@@ -6662,7 +6634,6 @@ ra2mgtk:
 		Facings: 64
 	icon:
 		Filename: ra2mirageicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
@@ -6692,7 +6663,6 @@ ra2sref:
 		Facings: 64
 	icon:
 		Filename: ra2prismtankicon.shp
-		AddExtension: False
 
 ra2dron:
 	Defaults:
@@ -6718,7 +6688,6 @@ ra2dron:
 		Facings: 32
 	icon:
 		Filename: ra2tdroneicon.shp
-		AddExtension: False
 		Scale: 1
 
 yrbfrt:
@@ -6729,7 +6698,6 @@ yrbfrt:
 		Facings: 64
 	icon:
 		Filename: ra2bficon.shp
-		AddExtension: False
 
 yrytnk:
 	Inherits: ^RA2GatlingMuzzle
@@ -6745,7 +6713,6 @@ yrytnk:
 		Offset: 0,10
 	icon:
 		Filename: ra2ytnkicon.shp
-		AddExtension: False
 
 yrltnk:
 	Inherits: ^RA2CannonMuzzle
@@ -6761,7 +6728,6 @@ yrltnk:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2ltnkicon.shp
-		AddExtension: False
 
 yrtele:
 	Defaults:
@@ -6776,7 +6742,6 @@ yrtele:
 		Offset: 0,15
 	icon:
 		Filename: ra2magneticon.shp
-		AddExtension: False
 
 yrcaos:
 	Defaults:
@@ -6785,7 +6750,6 @@ yrcaos:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2cdroneicon.shp
-		AddExtension: False
 
 yrmind:
 	Defaults:
@@ -6803,7 +6767,6 @@ ra2amcv:
 		Facings: 64
 	icon:
 		Filename: ra2amcvicon.shp
-		AddExtension: False
 
 ra2amcv.Bot:
 	Inherits: ra2amcv
@@ -6828,7 +6791,6 @@ ra2smcv:
 		Facings: 64
 	icon:
 		Filename: ra2smcvicon.shp
-		AddExtension: False
 
 ra2smcv.Bot:
 	Inherits: ra2smcv
@@ -6841,7 +6803,6 @@ yrpcv:
 		Facings: 64
 	icon:
 		Filename: ra2ymcvicon.shp
-		AddExtension: False
 
 yrpcv.Bot:
 	Inherits: yrpcv
@@ -7052,7 +7013,6 @@ ra2leopard:
 		Offset: 0,5
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -7103,7 +7063,6 @@ ra2_c_ifv:
 		Offset: 0,5
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 	muzzle:
 		Offset: 0,0
 		Combine:
@@ -7152,7 +7111,6 @@ ra2_c_hum:
 		Scale: 0.5
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 	muzzle:
 		Offset: 0,0
 		Combine:
@@ -7201,7 +7159,6 @@ ra2_c_hum2:
 		Scale: 0.5
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 	muzzle:
 		Offset: 0,0
 		Combine:
@@ -7248,7 +7205,6 @@ ra2_c_abram:
 		Offset: 0,5
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -7301,7 +7257,6 @@ ra2zep:
 		Offset: 0,32
 	icon:
 		Filename: ra2kirovicon.shp
-		AddExtension: False
 
 yrschp:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7708,7 +7663,6 @@ ra2car:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2bus:
 	Defaults:
@@ -7717,7 +7671,6 @@ ra2bus:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2cop:
 	Defaults:
@@ -7726,7 +7679,6 @@ ra2cop:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2euroc:
 	Defaults:
@@ -7735,7 +7687,6 @@ ra2euroc:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2limo:
 	Defaults:
@@ -7744,7 +7695,6 @@ ra2limo:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ra2cona:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7753,7 +7703,6 @@ ra2cona:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2ptruck:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7763,7 +7712,6 @@ ra2ptruck:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2propa:
 	idle:
@@ -7776,7 +7724,6 @@ ra2stang:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2suvb:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7786,7 +7733,6 @@ ra2suvb:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2suvw:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7796,7 +7742,6 @@ ra2suvw:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2taxi:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7806,7 +7751,6 @@ ra2taxi:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2trucka:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7817,7 +7761,6 @@ ra2trucka:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2truckb:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7827,7 +7770,6 @@ ra2truckb:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2tug:
 	idle:
@@ -7845,7 +7787,6 @@ yrjeep:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2tractor:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7855,7 +7796,6 @@ ra2tractor:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2flata:
 	idle:
@@ -7869,7 +7809,6 @@ ra2ambu:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ra2bcab:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7878,7 +7817,6 @@ ra2bcab:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ra2ycab:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7887,7 +7825,6 @@ ra2ycab:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 ra2ddbx:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7896,7 +7833,6 @@ ra2ddbx:
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
-		AddExtension: False
 
 ra2_tzep:
 	Inherits: ^RA2MachineGunMuzzle
@@ -7911,7 +7847,6 @@ ra2_tzep:
 		Offset: 0,32
 	icon:
 		Filename: ra2_tzepicon.shp
-		AddExtension: False
 
 ####################################################################################################
 #		Red Alert 2 Addons
@@ -7926,7 +7861,6 @@ ra2modfv:
 		Facings: 8
 	icon:
 		Filename: ra2ifvicon.shp
-		AddExtension: False
 
 ra2modhtk:
 	idle:
@@ -7942,7 +7876,6 @@ ra2modhtnk:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2htnkicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -7952,7 +7885,6 @@ ra2modsltnk:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2ltnkicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -7962,14 +7894,12 @@ ra2modysref:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2prismtankicon.shp
-		AddExtension: False
 
 ra2modoapoc:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2apocicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -7979,7 +7909,6 @@ ra2modmammo:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2apocicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -7998,7 +7927,6 @@ ra2modyhtnk:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2htnkicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -8012,14 +7940,12 @@ ra2modvulk:
 		Facings: 8
 	icon:
 		Filename: ra2ytnkicon.shp
-		AddExtension: False
 
 ra2modrobo:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
 		Filename: ra2roboticon.shp
-		AddExtension: False
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -8056,7 +7982,6 @@ ra2doomskeleton:
 	icon:
 		Filename: ra2doomskeletonicon.shp
 		Start: 0
-		AddExtension: true
 
 ra2corpse:
 	death_a:
@@ -8196,7 +8121,6 @@ ra2uniontank:
 		Scale: 0.25
 	icon:
 		Filename: ra2apocicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_apmuzzle.shp
 		Length: *
@@ -8216,7 +8140,6 @@ ra2superapocalypse:
 		Scale: 0.25
 	icon:
 		Filename: ra2apocicon.shp
-		AddExtension: False
 	muzzle:
 		Filename: ra2_apmuzzle.shp
 		Length: *
@@ -8234,7 +8157,6 @@ ra2katyusha:
 		Offset: 0,20
 	icon:
 		Filename: tkmkatyushaicon.png
-		AddExtension: False
 
 ra2shilka:
 	idle:
