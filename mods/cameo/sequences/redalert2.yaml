@@ -2283,6 +2283,7 @@ ra2rmine:
 		Length: 11
 
 ra2caoild:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: ra2_ctoild.shp
 		Offset: 0, 0
@@ -2310,25 +2311,6 @@ ra2caoild:
 		Length: 14
 		ShadowStart: 14
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,20
 	dead:
 		Start: 1
@@ -2336,6 +2318,7 @@ ra2caoild:
 		Filename: ra2caoildicon.shp
 		Offset: 0, 0
 ra2caoild.husk:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: ra2_ctoild.shp
 		Offset: 0, 0
@@ -2364,25 +2347,6 @@ ra2caoild.husk:
 		Length: 14
 		ShadowStart: 14
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,20
 	dead:
 		Start: 1

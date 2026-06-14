@@ -968,9 +968,6 @@ gnrl:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		TilesetOverrides:
-			DESERT: TEMPERAT
-			INTERIOR: TEMPERAT
 volkov:
 	Inherits: gnrl
 	Defaults:
@@ -1368,9 +1365,6 @@ einstein:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		TilesetOverrides:
-			DESERT: TEMPERAT
-			INTERIOR: TEMPERAT
 
 delphi:
 	Defaults:
@@ -1414,9 +1408,6 @@ delphi:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		TilesetOverrides:
-			DESERT: TEMPERAT
-			INTERIOR: TEMPERAT
 
 rachan:
 	Defaults:
@@ -1462,9 +1453,6 @@ rachan:
 		Length: 6
 		Tick: 1600
 		ZOffset: -511
-		TilesetOverrides:
-			DESERT: TEMPERAT
-			INTERIOR: TEMPERAT
 
 rasamurai:
 	Defaults:
@@ -2547,8 +2535,6 @@ rafact:
 		Filename: rafactdead.shp
 		Tick: 800
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: rafacticon.png
 
@@ -2575,8 +2561,6 @@ rafactj:
 		Start: 48
 		Tick: 800
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: rafactjicon.shp
 
@@ -2609,12 +2593,11 @@ raproc:
 		Filename: raprocdead.shp
 		Tick: 800
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: raprocicon.png
 
 rasilo:
+	Inherits: ^WithBuildingBibSilo
 	Defaults:
 		Filename: rasilo.shp
 	idle:
@@ -2635,19 +2618,6 @@ rasilo:
 		Offset: 0,-2
 	dead:
 	bib:
-		Filename: mbRASILO.tem
-		TilesetFilenames:
-			DESERT: mbRASILO.des
-			WINTER: mbRASILO.win
-			SNOW: mbRASILO.sno
-			BARREN: mbRASILO.bar
-			JUNGLE: mbRASILO.jun
-			RA_SNOW: mbRASILO.sno
-			RA_DESERT: mbRASILO.des
-			RA_INTERIOR: mbRASILO.int
-			ARRAKIS: mbRASILO.des
-			ARRAKIS2: mbRASILO.des
-		Length: *
 	icon:
 		Filename: rasiloicon.shp
 
@@ -2665,8 +2635,6 @@ powr:
 		Filename: powrdead.shp
 		Tick: 800
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: powricon.png
 
@@ -2688,8 +2656,6 @@ apwr:
 		Tick: 800
 		Offset: 0,-20
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 		Offset: 0,-10
 	icon:
 		Filename: apwricon.png
@@ -2711,8 +2677,6 @@ barr:
 		Offset: 0,-12
 	dead:
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: barricon.png
 
@@ -2748,13 +2712,12 @@ tent:
 		Length: *
 	dead:
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: tenticon.png
 		TilesetFilenames:
 
 kenn:
+	Inherits: ^WithBuildingBibSilo
 	Defaults:
 		Filename: kenn.shp
 	idle:
@@ -2765,19 +2728,6 @@ kenn:
 		Length: *
 	dead:
 	bib:
-		Filename: mbRASILO.tem
-		TilesetFilenames:
-			DESERT: mbRASILO.des
-			WINTER: mbRASILO.win
-			SNOW: mbRASILO.sno
-			BARREN: mbRASILO.bar
-			JUNGLE: mbRASILO.jun
-			RA_SNOW: mbRASILO.sno
-			RA_DESERT: mbRASILO.des
-			RA_INTERIOR: mbRASILO.int
-			ARRAKIS: mbRASILO.des
-			ARRAKIS2: mbRASILO.des
-		Length: *
 	icon:
 		Filename: kennicon.png
 
@@ -2796,8 +2746,6 @@ dome:
 		Offset: 0,-8
 	dead:
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: domeicon.png
 
@@ -2817,8 +2765,6 @@ atek:
 		Offset: -8,0
 	dead:
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: atekicon.png
 
@@ -2834,8 +2780,6 @@ stek:
 		Length: *
 	dead:
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: stekicon.png
 
@@ -2865,8 +2809,6 @@ raweap:
 		Length: 1
 	dead:
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: raweapicon.png
 
@@ -2903,8 +2845,6 @@ ra_gigafactory:
 	dead:
 	bib:
 		Scale: 1
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: ra_gigafactoryicon.png
 
@@ -2930,8 +2870,6 @@ rahpad:
 		Length: *
 	dead:
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: rahpadicon.png
 
@@ -3016,6 +2954,7 @@ ra_largeairfield:
 		Filename: ra_largeairfieldicon.png
 
 rafix:
+	Inherits: ^WithBuildingBibFix
 	Defaults:
 		Filename: rafix.shp
 	idle:
@@ -3041,19 +2980,6 @@ rafix:
 		Offset: 0,2
 	dead:
 	bib:
-		Filename: mbFIX.tem
-		TilesetFilenames:
-			DESERT: mbFIX.des
-			WINTER: mbFIX.win
-			SNOW: mbFIX.sno
-			BARREN: mbFIX.bar
-			JUNGLE: mbFIX.jun
-			RA_SNOW: mbFIX.sno
-			RA_DESERT: mbFIX.des
-			RA_INTERIOR: mbFIX.int
-			ARRAKIS: mbFIX.des
-			ARRAKIS2: mbFIX.des
-		Length: *
 		Offset: 0,-2
 	icon:
 		Filename: rafixicon.png
@@ -3074,6 +3000,7 @@ rafixj:
 		Filename: rafixj.shp
 
 ragun:
+	Inherits: ^WithBuildingBibGun
 	Defaults:
 		Filename: ragun.shp
 	idle:
@@ -3095,24 +3022,12 @@ ragun:
 		Length: 5
 	dead:
 	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
 		Offset: -1,-1
 	icon:
 		Filename: ragunicon.png
 
 agun:
+	Inherits: ^WithBuildingBibGun
 	Defaults:
 		Filename: agun.shp
 		Offset: 0,-26
@@ -3137,25 +3052,13 @@ agun:
 		Offset: 0,-4
 	dead:
 	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
 		Offset: 0,0
 	icon:
 		Filename: agunicon.png
 		Offset: 0,0
 
 rasam:
+	Inherits: ^WithBuildingBibSam
 	Defaults:
 		Filename: rasam.shp
 		Offset: -2,-4
@@ -3174,25 +3077,13 @@ rasam:
 		Offset: -2,12
 	dead:
 	bib:
-		Filename: mbSAM.tem
-		TilesetFilenames:
-			DESERT: mbSAM.des
-			WINTER: mbSAM.win
-			SNOW: mbSAM.sno
-			BARREN: mbSAM.bar
-			JUNGLE: mbSAM.jun
-			RA_SNOW: mbSAM.sno
-			RA_DESERT: mbSAM.des
-			RA_INTERIOR: mbSAM.int
-			ARRAKIS: mbSAM.des
-			ARRAKIS2: mbSAM.des
-		Length: *
 		Offset: 0,0
 	icon:
 		Filename: samicon.png
 		Offset: 0,0
 
 ftur:
+	Inherits: ^WithBuildingBibFtur
 	Defaults:
 		Filename: ftur.shp
 	idle:
@@ -3206,23 +3097,12 @@ ftur:
 		Offset: 0,-2
 	dead:
 	bib:
-		Filename: mbFTUR.tem
-		TilesetFilenames:
-			DESERT: mbFTUR.des
-			WINTER: mbFTUR.win
-			SNOW: mbFTUR.sno
-			BARREN: mbFTUR.bar
-			JUNGLE: mbFTUR.jun
-			RA_SNOW: mbFTUR.sno
-			RA_DESERT: mbFTUR.des
-			RA_INTERIOR: mbFTUR.int
-			ARRAKIS: mbFTUR.des
-			ARRAKIS2: mbFTUR.des
 		Length: *
 	icon:
 		Filename: fturicon.png
 
 tsla:
+	Inherits: ^WithBuildingBibTsla
 	Defaults:
 		Filename: tsla.shp
 		Offset: 0,-26
@@ -3242,25 +3122,13 @@ tsla:
 		Tick: 100
 	dead:
 	bib:
-		Filename: mbTSLA.tem
-		TilesetFilenames:
-			DESERT: mbTSLA.des
-			WINTER: mbTSLA.win
-			SNOW: mbTSLA.sno
-			BARREN: mbTSLA.bar
-			JUNGLE: mbTSLA.jun
-			RA_SNOW: mbTSLA.sno
-			RA_DESERT: mbTSLA.des
-			RA_INTERIOR: mbTSLA.int
-			ARRAKIS: mbTSLA.des
-			ARRAKIS2: mbTSLA.des
-		Length: *
 		Offset: 0,0
 	icon:
 		Filename: tslaicon.png
 		Offset: 0,0
 
 pbox:
+	Inherits: ^WithBuildingBibPbox
 	Defaults:
 		Filename: pbox.shp
 	idle:
@@ -3275,19 +3143,6 @@ pbox:
 		Length: 6
 		Facings: 8
 	bib:
-		Filename: mbPBOX.tem
-		TilesetFilenames:
-			DESERT: mbPBOX.des
-			WINTER: mbPBOX.win
-			SNOW: mbPBOX.sno
-			BARREN: mbPBOX.bar
-			JUNGLE: mbPBOX.jun
-			RA_SNOW: mbPBOX.sno
-			RA_DESERT: mbPBOX.des
-			RA_INTERIOR: mbPBOX.int
-			ARRAKIS: mbPBOX.des
-			ARRAKIS2: mbPBOX.des
-		Length: *
 		Offset: 0,-1
 	icon:
 		Filename: pboxicon.png
@@ -3342,6 +3197,7 @@ hbox:
 		Filename: hboxicon.png
 
 gap:
+	Inherits: ^WithBuildingBibGap
 	Defaults:
 		Filename: gap.shp
 	idle:
@@ -3365,23 +3221,11 @@ gap:
 		Scale: 2.25
 		Tick: 32
 	bib:
-		Filename: mbGAP.tem
-		TilesetFilenames:
-			DESERT: mbGAP.des
-			WINTER: mbGAP.win
-			SNOW: mbGAP.sno
-			BARREN: mbGAP.bar
-			JUNGLE: mbGAP.jun
-			RA_SNOW: mbGAP.sno
-			RA_DESERT: mbGAP.des
-			RA_INTERIOR: mbGAP.int
-			ARRAKIS: mbGAP.des
-			ARRAKIS2: mbGAP.des
-		Length: *
 	icon:
 		Filename: gapicon.png
 
 iron:
+	Inherits: ^WithBuildingBibIron
 	Defaults:
 		Filename: iron.shp
 	idle:
@@ -3402,23 +3246,11 @@ iron:
 		Length: *
 		Offset: 0,-0
 	bib:
-		Filename: mbIRON.tem
-		TilesetFilenames:
-			DESERT: mbIRON.des
-			WINTER: mbIRON.win
-			SNOW: mbIRON.sno
-			BARREN: mbIRON.bar
-			JUNGLE: mbIRON.jun
-			RA_SNOW: mbIRON.sno
-			RA_DESERT: mbIRON.des
-			RA_INTERIOR: mbIRON.int
-			ARRAKIS: mbIRON.des
-			ARRAKIS2: mbIRON.des
-		Length: *
 	icon:
 		Filename: ironicon.png
 
 pdox:
+	Inherits: ^WithBuildingBibPdox
 	Defaults:
 		Filename: pdox.shp
 	idle:
@@ -3434,19 +3266,6 @@ pdox:
 		Filename: pdoxmake.shp
 		Length: *
 	bib:
-		Filename: mbPDOX.tem
-		TilesetFilenames:
-			DESERT: mbPDOX.des
-			WINTER: mbPDOX.win
-			SNOW: mbPDOX.sno
-			BARREN: mbPDOX.bar
-			JUNGLE: mbPDOX.jun
-			RA_SNOW: mbPDOX.sno
-			RA_DESERT: mbPDOX.des
-			RA_INTERIOR: mbPDOX.int
-			ARRAKIS: mbPDOX.des
-			ARRAKIS2: mbPDOX.des
-		Length: *
 	icon:
 		Filename: pdoxicon.png
 	chronovortex:
@@ -3549,8 +3368,6 @@ jpwr:
 		Tick: 13
 		Scale: 0.9
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: JapPowerplanIcon.shp
 
@@ -3572,8 +3389,6 @@ jproc:
 		Filename: jproc.shp
 		Start: 1
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 		ZOffset: -1c512
 	icon:
 		Filename: raprocicon.png
@@ -3598,8 +3413,6 @@ modjbarr:
 	dead:
 		Start: 48
 	bib:
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: modjbarricon.shp
 
@@ -3631,8 +3444,6 @@ jweap:
 	dead:
 	bib:
 		Scale: 1
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 		Offset: 0,0
 	icon:
 		Filename: jweapicon.shp
@@ -3661,6 +3472,7 @@ jraafld:
 		Filename: JapFlagAirfieldIcon.shp
 
 jdome:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: jradardome.png
 	idle:
@@ -3678,31 +3490,11 @@ jdome:
 	dead:
 		Scale: 2
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: jradardomeicon.png
 
 modjtek:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: modjtek2.shp
 		Scale: 1
@@ -3721,32 +3513,12 @@ modjtek:
 	dead:
 		Start: 48
 	bib:
-		Filename: bib2.tem
 		Scale: 1
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: modjtekicon.shp
 
 jshrine:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: modjtek.shp
 		Scale: 3
@@ -3765,28 +3537,7 @@ jshrine:
 	dead:
 		Start: 2
 	bib:
-		Filename: bib2.tem
 		Scale: 1
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 	icon:
 		Filename: jshrineicon.png
 	japanspellcard:
@@ -3797,6 +3548,7 @@ jshrine:
 ####################################################################################################
 
 fcom:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: fcom.shp
 	idle:
@@ -3805,25 +3557,6 @@ fcom:
 	make:
 		Length: *
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 
 fcom.husk:
 	Inherits: fcom
@@ -3841,6 +3574,7 @@ brl3:
 		Filename: brl3.shp
 
 ramiss:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: ramiss.shp
 	idle:
@@ -3853,25 +3587,6 @@ ramiss:
 		Filename: missmake.shp
 		Length: *
 	bib:
-		Filename: bib2.tem
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
 
 rabio:
 	Defaults:
@@ -3887,6 +3602,7 @@ rabio:
 		Length: *
 
 oilb:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: oilb.shp
 		Offset: 0,-6
@@ -3897,30 +3613,12 @@ oilb:
 		Length: *
 	make:
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,0
 	icon:
 		Filename: oilbicon.shp
 
 oilb2:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: oilb2.png
 		Offset: 0,0
@@ -3937,25 +3635,6 @@ oilb2:
 		Tick: 100
 	make:
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,0
 	icon:
 		Filename: oilb2_icon.png
@@ -4262,6 +3941,7 @@ su57:
 #		Ants
 ####################################################################################################
 qnest:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: qnest.shp
 	idle:
@@ -4273,32 +3953,12 @@ qnest:
 	damaged-build:
 	dead:
 	bib:
-		Filename: bib2.tem
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 		Offset: 0,24
 	icon:
 		Filename: qanticon.shp
 
 breednest:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: breednest.shp
 	idle:
@@ -4310,32 +3970,12 @@ breednest:
 	damaged-build:
 	dead:
 	bib:
-		Filename: bib2.tem
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 		Offset: 0,24
 	icon:
 		Filename: breednesticon.shp
 
 tinynest:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: tinynest.shp
 	idle:
@@ -4347,32 +3987,12 @@ tinynest:
 	damaged-build:
 	dead:
 	bib:
-		Filename: bib2.tem
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 		Offset: 0,24
 	icon:
 		Filename: tinynesticon.shp
 
 tinynest2:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: tinynest2.shp
 	idle:
@@ -4384,27 +4004,6 @@ tinynest2:
 	damaged-build:
 	dead:
 	bib:
-		Filename: bib2.tem
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
-		TilesetOverrides:
-			INTERIOR: TEMPERAT
 		Offset: 0,24
 	icon:
 		Filename: tinynest2icon.shp
@@ -5308,6 +4907,7 @@ kotin:
 		Filename: KotinIcon.png
 
 jmgnest:
+	Inherits: ^WithBuildingBibFtur
 	Defaults:
 		Filename: jmgnest_idle.shp
 	idle:
@@ -5323,23 +4923,12 @@ jmgnest:
 		Facings: 8
 	dead:
 	bib:
-		Filename: mbFTUR.tem
-		TilesetFilenames:
-			DESERT: mbFTUR.des
-			WINTER: mbFTUR.win
-			SNOW: mbFTUR.sno
-			BARREN: mbFTUR.bar
-			JUNGLE: mbFTUR.jun
-			RA_SNOW: mbFTUR.sno
-			RA_DESERT: mbFTUR.des
-			RA_INTERIOR: mbFTUR.int
-			ARRAKIS: mbFTUR.des
-			ARRAKIS2: mbFTUR.des
-		Length: *
 		Offset: 0,-5
 	icon:
 		Filename: jmgnesticon.shp
+
 jballistat:
+	Inherits: ^WithBuildingBibFtur
 	Defaults:
 		Filename: jballistat.shp
 		Scale: 0.8
@@ -5357,19 +4946,6 @@ jballistat:
 		Facings: 8
 	dead:
 	bib:
-		Filename: mbFTUR.tem
-		TilesetFilenames:
-			DESERT: mbFTUR.des
-			WINTER: mbFTUR.win
-			SNOW: mbFTUR.sno
-			BARREN: mbFTUR.bar
-			JUNGLE: mbFTUR.jun
-			RA_SNOW: mbFTUR.sno
-			RA_DESERT: mbFTUR.des
-			RA_INTERIOR: mbFTUR.int
-			ARRAKIS: mbFTUR.des
-			ARRAKIS2: mbFTUR.des
-		Length: *
 		Offset: 0,-5
 	icon:
 		Filename: jballistaticon.shp
@@ -5406,6 +4982,7 @@ modartyturret:
 		Filename: AlliedBastionIcon.shp
 
 modpillboxfort:
+	Inherits: ^WithBuildingBibIron
 	Defaults:
 		Filename: waveturret.shp
 		Offset: 0, 30
@@ -5423,19 +5000,6 @@ modpillboxfort:
 		Length: *
 		Offset: 0, 0
 	bib:
-		Filename: mbIRON.tem
-		TilesetFilenames:
-			DESERT: mbIRON.des
-			WINTER: mbIRON.win
-			SNOW: mbIRON.sno
-			BARREN: mbIRON.des
-			JUNGLE: mbIRON.jun
-			RA_SNOW: mbIRON.sno
-			RA_DESERT: mbIRON.des
-			RA_INTERIOR: mbIRON.int
-			ARRAKIS: mbIRON.des
-			ARRAKIS2: mbIRON.des
-		Length: *
 		Offset: 0, 25
 	icon:
 		Filename: modwaveforticon.shp

@@ -69,6 +69,166 @@
 			OUTPOST2: bib3.tem
 			INTERIOR: bib3.tem
 		Length: *
+        
+^WithBuildingBibGun:
+	bib:
+		Filename: mbGUN.tem
+		TilesetFilenames:
+			DESERT: mbGUN.des
+			WINTER: mbGUN.win
+			SNOW: mbGUN.sno
+			BARREN: mbGUN.bar
+			JUNGLE: mbGUN.jun
+			RA_SNOW: mbGUN.sno
+			RA_DESERT: mbGUN.des
+			RA_INTERIOR: mbGUN.int
+			ARRAKIS: mbGUN.des
+			ARRAKIS2: mbGUN.des
+		Length: *
+        
+^WithBuildingBibFix:
+	bib:
+		Filename: mbFIX.tem
+		TilesetFilenames:
+			DESERT: mbFIX.des
+			WINTER: mbFIX.win
+			SNOW: mbFIX.sno
+			BARREN: mbFIX.bar
+			JUNGLE: mbFIX.jun
+			RA_SNOW: mbFIX.sno
+			RA_DESERT: mbFIX.des
+			RA_INTERIOR: mbFIX.int
+			ARRAKIS: mbFIX.des
+			ARRAKIS2: mbFIX.des
+		Length: *
+
+^WithBuildingBibSilo:
+	bib:
+		Filename: mbRASILO.tem
+		TilesetFilenames:
+			DESERT: mbRASILO.des
+			WINTER: mbRASILO.win
+			SNOW: mbRASILO.sno
+			BARREN: mbRASILO.bar
+			JUNGLE: mbRASILO.jun
+			RA_SNOW: mbRASILO.sno
+			RA_DESERT: mbRASILO.des
+			RA_INTERIOR: mbRASILO.int
+			ARRAKIS: mbRASILO.des
+			ARRAKIS2: mbRASILO.des
+		Length: *
+
+^WithBuildingBibIron:
+	bib:
+		Filename: mbIRON.tem
+		TilesetFilenames:
+			DESERT: mbIRON.des
+			WINTER: mbIRON.win
+			SNOW: mbIRON.sno
+			BARREN: mbIRON.des
+			JUNGLE: mbIRON.jun
+			RA_SNOW: mbIRON.sno
+			RA_DESERT: mbIRON.des
+			RA_INTERIOR: mbIRON.int
+			ARRAKIS: mbIRON.des
+			ARRAKIS2: mbIRON.des
+		Length: *
+
+^WithBuildingBibFtur:
+	bib:
+		Filename: mbFTUR.tem
+		TilesetFilenames:
+			DESERT: mbFTUR.des
+			WINTER: mbFTUR.win
+			SNOW: mbFTUR.sno
+			BARREN: mbFTUR.bar
+			JUNGLE: mbFTUR.jun
+			RA_SNOW: mbFTUR.sno
+			RA_DESERT: mbFTUR.des
+			RA_INTERIOR: mbFTUR.int
+			ARRAKIS: mbFTUR.des
+			ARRAKIS2: mbFTUR.des
+		Length: *
+
+^WithBuildingBibTsla:
+	bib:
+		Filename: mbTSLA.tem
+		TilesetFilenames:
+			DESERT: mbTSLA.des
+			WINTER: mbTSLA.win
+			SNOW: mbTSLA.sno
+			BARREN: mbTSLA.bar
+			JUNGLE: mbTSLA.jun
+			RA_SNOW: mbTSLA.sno
+			RA_DESERT: mbTSLA.des
+			RA_INTERIOR: mbTSLA.int
+			ARRAKIS: mbTSLA.des
+			ARRAKIS2: mbTSLA.des
+		Length: *
+
+^WithBuildingBibSam:
+	bib:
+		Filename: mbSAM.tem
+		TilesetFilenames:
+			DESERT: mbSAM.des
+			WINTER: mbSAM.win
+			SNOW: mbSAM.sno
+			BARREN: mbSAM.bar
+			JUNGLE: mbSAM.jun
+			RA_SNOW: mbSAM.sno
+			RA_DESERT: mbSAM.des
+			RA_INTERIOR: mbSAM.int
+			ARRAKIS: mbSAM.des
+			ARRAKIS2: mbSAM.des
+		Length: *
+
+^WithBuildingBibPbox:
+	bib:
+		Filename: mbPBOX.tem
+		TilesetFilenames:
+			DESERT: mbPBOX.des
+			WINTER: mbPBOX.win
+			SNOW: mbPBOX.sno
+			BARREN: mbPBOX.bar
+			JUNGLE: mbPBOX.jun
+			RA_SNOW: mbPBOX.sno
+			RA_DESERT: mbPBOX.des
+			RA_INTERIOR: mbPBOX.int
+			ARRAKIS: mbPBOX.des
+			ARRAKIS2: mbPBOX.des
+		Length: *
+
+^WithBuildingBibGap:
+	bib:
+		Filename: mbGAP.tem
+		TilesetFilenames:
+			DESERT: mbGAP.des
+			WINTER: mbGAP.win
+			SNOW: mbGAP.sno
+			BARREN: mbGAP.bar
+			JUNGLE: mbGAP.jun
+			RA_SNOW: mbGAP.sno
+			RA_DESERT: mbGAP.des
+			RA_INTERIOR: mbGAP.int
+			ARRAKIS: mbGAP.des
+			ARRAKIS2: mbGAP.des
+		Length: *
+
+^WithBuildingBibPdox:
+	bib:
+		Filename: mbPDOX.tem
+		TilesetFilenames:
+			DESERT: mbPDOX.des
+			WINTER: mbPDOX.win
+			SNOW: mbPDOX.sno
+			BARREN: mbPDOX.bar
+			JUNGLE: mbPDOX.jun
+			RA_SNOW: mbPDOX.sno
+			RA_DESERT: mbPDOX.des
+			RA_INTERIOR: mbPDOX.int
+			ARRAKIS: mbPDOX.des
+			ARRAKIS2: mbPDOX.des
+		Length: *
 
 resources:
 	Defaults:

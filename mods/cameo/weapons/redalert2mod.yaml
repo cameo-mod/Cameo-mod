@@ -8247,7 +8247,7 @@ LatinAADefenderCannon:
 		Spread: 4000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 8
 		Spread: 4000
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -8259,7 +8259,7 @@ LatinAADefenderCannon:
 		Spread: 8000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 8
 		Spread: 8000
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -8271,7 +8271,7 @@ LatinAADefenderCannon:
 		Spread: 2000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 8
 		Spread: 2000
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -8279,7 +8279,7 @@ LatinAADefenderCannon:
 		Spread: 1000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4
+		Damage: 8
 		Spread: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke

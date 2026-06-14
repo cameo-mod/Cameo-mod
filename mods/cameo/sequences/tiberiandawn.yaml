@@ -717,6 +717,7 @@ proc:
 		Filename: procicnh.shp
 
 silo:
+	Inherits: ^WithBuildingBibIron
 	Defaults:
 		Filename: silo.shp
 	idle:
@@ -741,19 +742,6 @@ silo:
 		Tick: 80
 		Offset: 0,-1
 	bib:
-		Filename: mbIRON.tem
-		TilesetFilenames:
-			DESERT: mbIRON.des
-			WINTER: mbIRON.win
-			SNOW: mbIRON.sno
-			BARREN: mbIRON.des
-			JUNGLE: mbIRON.jun
-			RA_SNOW: mbIRON.sno
-			RA_DESERT: mbIRON.des
-			RA_INTERIOR: mbIRON.int
-			ARRAKIS: mbIRON.des
-			ARRAKIS2: mbIRON.des
-		Length: *
 		Offset: -1,6
 	icon:
 		Filename: siloicnh.shp
@@ -902,6 +890,7 @@ hq:
 		Filename: hqicnh.shp
 
 nuk2:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: nuk2.shp
 	idle:
@@ -919,29 +908,11 @@ nuk2:
 		Length: *
 		Tick: 80
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 	icon:
 		Filename: nuk2icnh.shp
 
 hpad:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: hpad.shp
 	idle:
@@ -968,29 +939,11 @@ hpad:
 		Length: *
 		Tick: 80
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 	icon:
 		Filename: hpadicnh.shp
 
 fix:
+	Inherits: ^WithBuildingBibFix
 	Defaults:
 		Filename: fix.shp
 	idle:
@@ -1014,19 +967,6 @@ fix:
 		Length: 14
 		Tick: 60
 	bib:
-		Filename: mbFIX.tem
-		TilesetFilenames:
-			DESERT: mbFIX.des
-			WINTER: mbFIX.win
-			SNOW: mbFIX.sno
-			BARREN: mbFIX.bar
-			JUNGLE: mbFIX.jun
-			RA_SNOW: mbFIX.sno
-			RA_DESERT: mbFIX.des
-			RA_INTERIOR: mbFIX.int
-			ARRAKIS: mbFIX.des
-			ARRAKIS2: mbFIX.des
-		Length: *
 		Offset: 0,-10
 	icon:
 		Filename: fixicnh.shp
@@ -1120,6 +1060,7 @@ td_nod_templeprime:
 		Offset: 0,0
 
 obli:
+	Inherits: ^WithBuildingBibTsla
 	Defaults:
 		Filename: obli.shp
 		Offset: 0,-24
@@ -1141,25 +1082,13 @@ obli:
 		Length: 13
 		Tick: 80
 	bib:
-		Filename: mbTSLA.tem
-		TilesetFilenames:
-			DESERT: mbTSLA.des
-			WINTER: mbTSLA.win
-			SNOW: mbTSLA.sno
-			BARREN: mbTSLA.bar
-			JUNGLE: mbTSLA.jun
-			RA_SNOW: mbTSLA.sno
-			RA_DESERT: mbTSLA.des
-			RA_INTERIOR: mbTSLA.int
-			ARRAKIS: mbTSLA.des
-			ARRAKIS2: mbTSLA.des
-		Length: *
 		Offset: -5,-10
 	icon:
 		Filename: obliicnh.shp
 		Offset: 0,0
 
 gun:
+	Inherits: ^WithBuildingBibGun
 	Defaults:
 		Filename: gun.shp
 	idle:
@@ -1181,24 +1110,12 @@ gun:
 		Filename: gunfire2.shp
 		Length: *
 	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
 		Offset: -1,-1
 	icon:
 		Filename: gunicnh.shp
 
 nodlaserturret:
+	Inherits: ^WithBuildingBibGun
 	Defaults:
 		Filename: NodTurretBuildupFiring.png
 	idle:
@@ -1214,19 +1131,6 @@ nodlaserturret:
 		Filename: gunfire2.shp
 		Length: *
 	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
 		Offset: -1,-1
 	icon:
 		Filename: NodLaserTurretIcon.png
@@ -1278,6 +1182,7 @@ sam:
 		Filename: samicon.png
 
 gtwr:
+	Inherits: ^WithBuildingBibGun
 	Defaults:
 		Filename: gtwr.shp
 	idle:
@@ -1298,24 +1203,12 @@ gtwr:
 		Length: 6
 		Facings: 8
 	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
 		Offset: -1,-2
 	icon:
 		Filename: gtwricnh.shp
 
 td_gdi_skyshield:
+	Inherits: ^WithBuildingBibGun
 	Defaults:
 		Filename: td_gdi_skyshield.png
 		Offset: 0,-2
@@ -1331,25 +1224,13 @@ td_gdi_skyshield:
 		Length: *
 	dead:
 	bib:
-		Filename: mbGUN.tem
-		TilesetFilenames:
-			DESERT: mbGUN.des
-			WINTER: mbGUN.win
-			SNOW: mbGUN.sno
-			BARREN: mbGUN.bar
-			JUNGLE: mbGUN.jun
-			RA_SNOW: mbGUN.sno
-			RA_DESERT: mbGUN.des
-			RA_INTERIOR: mbGUN.int
-			ARRAKIS: mbGUN.des
-			ARRAKIS2: mbGUN.des
-		Length: *
 		Offset: 0,0
 	icon:
 		Filename: td_gdi_skyshield_icon.png
 		Offset: 0,0
 
 atwr:
+	Inherits: ^WithBuildingBibSilo
 	Defaults:
 		Filename: atwr.shp
 		Offset: 0,-26
@@ -1368,19 +1249,6 @@ atwr:
 		Length: *
 		Offset: 0,0
 	bib:
-		Filename: mbRASILO.tem
-		TilesetFilenames:
-			DESERT: mbRASILO.des
-			WINTER: mbRASILO.win
-			SNOW: mbRASILO.sno
-			BARREN: mbRASILO.bar
-			JUNGLE: mbRASILO.jun
-			RA_SNOW: mbRASILO.sno
-			RA_DESERT: mbRASILO.des
-			RA_INTERIOR: mbRASILO.int
-			ARRAKIS: mbRASILO.des
-			ARRAKIS2: mbRASILO.des
-		Length: *
 		Offset: -3,0
 	muzzle:
 		Filename: gunfire2.shp
@@ -2728,6 +2596,7 @@ c2knuke:
 	idle:
 
 techrpad:
+	Inherits: ^WithBuildingBib2
 	Defaults:
 		Offset: 0,-6
 		Filename: techrpad.shp
@@ -2736,25 +2605,6 @@ techrpad:
 	damaged-idle:
 	make:
 	bib:
-		Filename: bib2.tem
-		TilesetFilenames:
-			DESERT: bib2.des
-			WINTER: bib2.win
-			SNOW: bib2.sno
-			TEMPERAT: bib2.tem
-			JUNGLE: bib2.jun
-			BARREN: bib2.bar
-			RA_SNOW: bib2.sno
-			RA_TEMPERAT: bib2.tem
-			RA_DESERT: bib2.des
-			RA_INTERIOR: bib2.int
-			ARRAKIS: bib2.des
-			ARRAKIS2: bib2.des
-			CARIBIC: bib2.jun
-			WC2SUNSET: bib2.tem
-			WC2SUMMER: bib2.tem
-			OUTPOST2: bib2.tem
-		Length: *
 	icon:
 		Filename: oilbicon.shp
 
@@ -2875,9 +2725,6 @@ zombie:
 	#	Length: 6
 	#	Tick: 1600
 	#	ZOffset: -511
-	#	TilesetOverrides:
-	#		DESERT: TEMPERAT
-	#		INTERIOR: TEMPERAT
 	icon:
 		Filename: zombicon.shp
 
@@ -3032,6 +2879,7 @@ wood:
 		Length: 16
 
 hosp:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: hosp.shp
 	idle:
@@ -3048,54 +2896,17 @@ hosp:
 		Tick: 80
 		Offset: 0,-2
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,2
 	icon:
 		Filename: hospicon.shp
 
 hosp.husk:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: hosp.shp
 	idle:
 		Start: 8
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,2
 
 miss:

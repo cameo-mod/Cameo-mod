@@ -2221,6 +2221,7 @@ latin_cgauto:
 		ZOffset: -511
 
 latin_cgup:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: latin_cgup.shp
 		Offset: 0, 0
@@ -2258,25 +2259,6 @@ latin_cgup:
 		Length: 42
 		ShadowStart: 42
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,20
 	dead:
 		Start: 1
@@ -3889,6 +3871,7 @@ steel_conpad:
 		Offset: 0,0
 
 steel_qoil:
+	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: steel_qoil.shp
 		Offset: -5, 5
@@ -3915,25 +3898,6 @@ steel_qoil:
 		Filename: steel_qoil.shp
 		Length: 21
 	bib:
-		Filename: bib3.tem
-		TilesetFilenames:
-			DESERT: bib3.des
-			WINTER: bib3.win
-			SNOW: bib3.sno
-			TEMPERAT: bib3.tem
-			JUNGLE: bib3.jun
-			BARREN: bib3.bar
-			RA_SNOW: bib3.sno
-			RA_TEMPERAT: bib3.tem
-			RA_DESERT: bib3.des
-			RA_INTERIOR: bib3.int
-			ARRAKIS: bib3.des
-			ARRAKIS2: bib3.des
-			CARIBIC: bib3.jun
-			WC2SUNSET: bib3.tem
-			WC2SUMMER: bib3.tem
-			OUTPOST2: bib3.tem
-		Length: *
 		Offset: 0,20
 	dead:
 		Start: 61
