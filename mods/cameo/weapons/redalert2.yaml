@@ -5262,12 +5262,12 @@ LightningBolt:
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		Spread: 1000
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 12000
+		Damage: 24000
 		ValidTargets: Air, Ground, Water
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
 		Spread: 2000
 		Falloff: 100, 75, 50, 25, 0
-		Damage: 6000
+		Damage: 24000
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air, Ground, Water
 		Damage: 6
@@ -5275,7 +5275,7 @@ LightningBolt:
 		ValidTargets: Shielded
 		Falloff: 100, 67, 33, 0
 		Spread: 3333
-		Damage: 33333
+		Damage: 66666
 	Warhead@4Eff: CreateEffect
 		Explosions: wclbolt1,wclbolt2,wclbolt3
 		ExplosionPalette: ra2effect

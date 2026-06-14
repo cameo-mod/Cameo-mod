@@ -2552,7 +2552,7 @@ MagicOrb:
 		ContrailLength: 0
 	Warhead@TeslaWeapon: SpreadDamage
 		Spread: 1200
-		Damage: 8000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		Spread: 1600
@@ -2564,7 +2564,7 @@ MagicOrb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MagicWeapon: SpreadDamage
 		Spread: 1200
-		Damage: 8000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
 		Spread: 800
@@ -2572,7 +2572,7 @@ MagicOrb:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Spread: 2000
-		Damage: 8000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		ImpactSounds: thgun.wav

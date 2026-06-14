@@ -6449,12 +6449,12 @@ NaxiMeteor:
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Falloff: 100, 50
-		Damage: 10000
+		Damage: 20000
 		Spread: 5000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Falloff: 100, 50
-		Damage: 10000
+		Damage: 20000
 		Spread: 5000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -6463,11 +6463,11 @@ NaxiMeteor:
 		Spread: 5000
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		Spread: 4000
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		Spread: 4000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -6475,11 +6475,11 @@ NaxiMeteor:
 		Spread: 4000
 	Warhead@ShrapnelWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		Spread: 3000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		Spread: 3000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -6487,7 +6487,7 @@ NaxiMeteor:
 		Spread: 3000
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		Spread: 2000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -6495,7 +6495,7 @@ NaxiMeteor:
 		Spread: 2000
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 10000
+		Damage: 20000
 		Spread: 1000
 	Warhead@NuclearWarheadPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
@@ -8243,43 +8243,43 @@ LatinAADefenderCannon:
 		SkipAscent: true
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 24000
 		Spread: 4000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 4
 		Spread: 4000
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 24000
 		Spread: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 24000
 		Spread: 8000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 4
 		Spread: 8000
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 24000
 		Spread: 2000
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 24000
 		Spread: 2000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 4
 		Spread: 2000
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 16000
+		Damage: 24000
 		Spread: 1000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 8
+		Damage: 4
 		Spread: 1000
 	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
