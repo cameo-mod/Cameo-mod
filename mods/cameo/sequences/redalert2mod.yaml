@@ -3890,8 +3890,8 @@ steel_conpad:
 
 steel_qoil:
 	Defaults:
-		Filename: steel_qoil.shp
-		Offset: -5, 5
+		Filename: cons_thermo_ground.png
+		Offset: 0,-48
 		Scale: 1.0
 	idle:
 		Filename: invisibleitem.shp
@@ -3906,13 +3906,13 @@ steel_qoil:
 	idle-water:
 		Start: 21
 		Length: 40
-		Filename: steel_qoil_water.shp
+		Filename: cons_thermo_water.png
 	damaged-idle-water:
 		Start: 61
 		Length: 40
-		Filename: steel_qoil_water.shp
+		Filename: cons_thermo_water.png
 	make:
-		Filename: steel_qoil.shp
+		Filename: cons_thermo_ground.png
 		Length: 21
 	bib:
 		Filename: bib3.tem
