@@ -4,6 +4,7 @@
  */
 #endregion
 
+using System.Collections.Generic;
 using System.Linq;
 using OpenRA;
 using OpenRA.Graphics;
@@ -78,25 +79,44 @@ namespace OpenRA.Mods.Cameo.Widgets
 			return base.HandleMouseInput(mi);
 		}
 
+		// Decoupled rendering: GetQuota/GetAliveCount read dictionaries the sim thread mutates
+		// (ResolveOrder/Tick). Refresh this overlay snapshot under the world read lock; when the sim is
+		// mid-tick, draw last frame's overlays instead of reading live state.
+		readonly List<(float2 Pos, string Text)> cachedQuotaOverlays = [];
+
 		public override void Draw()
 		{
 			base.Draw();
 
-			var quotaManager = World.LocalPlayer?.PlayerActor?.TraitOrDefault<QuotaProductionManager>();
-			if (quotaManager == null || !quotaManager.Enabled || CurrentQueue == null)
-				return;
-
-			foreach (var icon in icons.Values)
+			if (Game.TryEnterWorldReadLock())
 			{
-				var quota = quotaManager.GetQuota(icon.Name);
-				if (quota <= 0) continue;
+				try
+				{
+					cachedQuotaOverlays.Clear();
 
-				var alive = quotaManager.GetAliveCount(icon.Name);
-				var text = $"{alive}/{quota}";
-				var textSize = quotaFont.Measure(text);
-				var pos = icon.Pos + new float2(IconSize.X - textSize.X - 1, IconSize.Y - textSize.Y - 1);
-				quotaFont.DrawTextWithContrast(text, pos, Color.Cyan, Color.Black, 1);
+					var quotaManager = World.LocalPlayer?.PlayerActor?.TraitOrDefault<QuotaProductionManager>();
+					if (quotaManager != null && quotaManager.Enabled && CurrentQueue != null)
+					{
+						foreach (var icon in icons.Values)
+						{
+							var quota = quotaManager.GetQuota(icon.Name);
+							if (quota <= 0) continue;
+
+							var alive = quotaManager.GetAliveCount(icon.Name);
+							var text = $"{alive}/{quota}";
+							var textSize = quotaFont.Measure(text);
+							cachedQuotaOverlays.Add((icon.Pos + new float2(IconSize.X - textSize.X - 1, IconSize.Y - textSize.Y - 1), text));
+						}
+					}
+				}
+				finally
+				{
+					Game.ExitWorldReadLock();
+				}
 			}
+
+			foreach (var (pos, text) in cachedQuotaOverlays)
+				quotaFont.DrawTextWithContrast(text, pos, Color.Cyan, Color.Black, 1);
 		}
 	}
 }

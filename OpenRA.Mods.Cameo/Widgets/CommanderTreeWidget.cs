@@ -68,6 +68,11 @@ namespace OpenRA.Mods.Cameo.Widgets
 		ProductionQueue promotionsQueue;
 
 		readonly List<ProductionItem> sharedQueuedItems = new();
+
+		// Decoupled rendering: queue head cached in Tick under the world read lock; Draw must not
+		// index the live queue.
+		readonly HashSet<ProductionItem> cachedProducingItems = [];
+		readonly Dictionary<string, int> cachedHeadRemainingTime = [];
 		readonly HashSet<ActorInfo> visibleActors = new();
 		Player cachedQueueOwner;
 		IProductionIconOverlay[] iconOverlays = Array.Empty<IProductionIconOverlay>();
@@ -270,17 +275,27 @@ namespace OpenRA.Mods.Cameo.Widgets
 			if (node == null)
 				return false;
 
-			switch (mi.Button)
+			// Decoupled rendering: the click handlers read live queue state (CanQueue) - wait out any
+			// in-flight sim tick (one-shot input; matches original single-threaded timing).
+			Game.EnterWorldReadLock();
+			try
 			{
-				case MouseButton.Left:
-					HandleLeftClick(node, mi.Modifiers);
-					break;
-				case MouseButton.Right:
-					HandleRightClick(node, mi.Modifiers);
-					break;
-				case MouseButton.Middle:
-					HandleMiddleClick(node, mi.Modifiers);
-					break;
+				switch (mi.Button)
+				{
+					case MouseButton.Left:
+						HandleLeftClick(node, mi.Modifiers);
+						break;
+					case MouseButton.Right:
+						HandleRightClick(node, mi.Modifiers);
+						break;
+					case MouseButton.Middle:
+						HandleMiddleClick(node, mi.Modifiers);
+						break;
+				}
+			}
+			finally
+			{
+				Game.ExitWorldReadLock();
 			}
 
 			return true;
@@ -293,20 +308,60 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 			if (e.Key == Keycode.RETURN || e.Key == Keycode.KP_ENTER || e.Key == Keycode.SPACE)
 			{
-				HandleLeftClick(hoverNode, e.Modifiers);
+				Game.EnterWorldReadLock();
+				try
+				{
+					HandleLeftClick(hoverNode, e.Modifiers);
+				}
+				finally
+				{
+					Game.ExitWorldReadLock();
+				}
+
 				return true;
 			}
 
 			return false;
 		}
 
+		// Decoupled rendering: set once the first UpdateNodes has run, so we only BLOCK for the world
+		// lock on the initial populate (see Tick).
+		bool hasPopulated;
+
 		public override void Tick()
 		{
-			if (!EnsureQueue())
+			// Decoupled rendering: EnsureQueue/UpdateNodes enumerate the live queue state (AllQueued,
+			// Producible). Per-frame refreshes use TryEnter so a busy sim thread never stalls the UI - a skipped
+			// frame just shows last frame's cached tree.
+			//
+			// The FIRST populate is special: the window loads offscreen (X/Y -9999) and CommanderTreeWindowLogic
+			// only moves it onscreen once ContentWidth/Height are set by UpdateNodes. In late game the sim holds
+			// the world lock most of each frame, so a non-blocking TryEnter can fail for many consecutive frames,
+			// leaving the just-opened window invisible (looks like the Promotions click did nothing - the user
+			// has to click repeatedly until a frame happens to win the lock race). The populate-on-open is a
+			// one-shot, like an input handler, so block for the lock that first time; this guarantees the window
+			// appears promptly without stalling the UI thread every subsequent frame.
+			var firstPopulate = !hasPopulated;
+			if (firstPopulate)
+				Game.EnterWorldReadLock();
+			else if (!Game.TryEnterWorldReadLock())
 				return;
 
-			EnsureCommanderTooltipInitialized();
-			UpdateNodes();
+			try
+			{
+				// We hold the lock now; only ever block once even if EnsureQueue is not ready yet.
+				hasPopulated = true;
+
+				if (!EnsureQueue())
+					return;
+
+				EnsureCommanderTooltipInitialized();
+				UpdateNodes();
+			}
+			finally
+			{
+				Game.ExitWorldReadLock();
+			}
 		}
 
 		void HandleLeftClick(CommanderNode node, Modifiers modifiers)
@@ -411,6 +466,9 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 			sharedQueuedItems.AddRange(promotionsQueue.AllQueued());
 
+			cachedProducingItems.Clear();
+			cachedHeadRemainingTime.Clear();
+
 			foreach (var kv in promotionsQueue.Producible)
 			{
 				var actor = kv.Key;
@@ -447,6 +505,21 @@ namespace OpenRA.Mods.Cameo.Widgets
 				RebuildEdgesAndLayout();
 
 			UpdateHorizontalScrollLayout();
+
+			// Decoupled rendering: Draw must not call into the live queue. IsProducing and RemainingTimeActual
+			// are polymorphic (parallel queues produce every queued item and their RemainingTimeActual enumerates the
+			// sim-mutated Queue), so evaluate them here under the world read lock and cache what Draw needs.
+			foreach (var node in nodes.Values)
+			{
+				if (node.Icon.Queued.Count == 0)
+					continue;
+
+				var head = node.Icon.Queued[0];
+				if (promotionsQueue.IsProducing(head))
+					cachedProducingItems.Add(head);
+
+				cachedHeadRemainingTime[node.Actor.Name] = head.Queue.RemainingTimeActual(head);
+			}
 		}
 
 		CommanderNode CreateNode(ActorInfo actor)
@@ -1323,7 +1396,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 			if (totalQueued > 0)
 			{
 				var first = node.Icon.Queued[0];
-				var waiting = !promotionsQueue.IsProducing(first) && !first.Done;
+				var waiting = !cachedProducingItems.Contains(first) && !first.Done;
 
 				if (first.Done)
 					overlayFont.DrawTextWithContrast(readyText, iconPos + readyOffset, overlayTextColor, Color.Black, 1);
@@ -1331,7 +1404,7 @@ namespace OpenRA.Mods.Cameo.Widgets
 					overlayFont.DrawTextWithContrast(holdText, iconPos + holdOffset, overlayTextColor, Color.Black, 1);
 				else if (!waiting)
 				{
-					var timeText = WidgetUtils.FormatTime(first.Queue.RemainingTimeActual(first), world.Timestep);
+					var timeText = WidgetUtils.FormatTime(cachedHeadRemainingTime.GetValueOrDefault(node.Actor.Name), world.Timestep);
 					var timeOffset = iconOffset - overlayFont.Measure(timeText).ToFloat2() / 2f;
 					overlayFont.DrawTextWithContrast(timeText, iconPos + timeOffset, overlayTextColor, Color.Black, 1);
 				}
