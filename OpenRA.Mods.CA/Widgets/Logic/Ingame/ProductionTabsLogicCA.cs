@@ -27,15 +27,28 @@ namespace OpenRA.Mods.CA.Widgets.Logic
 
 			Action<bool> selectTab = reverse =>
 			{
-				if (tabs.QueueGroup == button.ProductionGroup)
-					tabs.SelectNextTab(reverse);
-				else
-					tabs.QueueGroup = button.ProductionGroup;
+				// Stage B (DecoupledRendering): switching tabs/groups refreshes the palette icons from live queue
+				// state, and picking up a completed building reads the live queue head - wait out any in-flight
+				// sim tick (one-shot input; matches original single-threaded timing).
+				Game.EnterWorldReadLock();
+				try
+				{
+					if (tabs.QueueGroup == button.ProductionGroup)
+						tabs.SelectNextTab(reverse);
+					else
+						tabs.QueueGroup = button.ProductionGroup;
 
-				tabs.PickUpCompletedBuilding();
+					tabs.PickUpCompletedBuilding();
+				}
+				finally
+				{
+					Game.ExitWorldReadLock();
+				}
 			};
 
-			button.IsDisabled = () => !tabs.Groups[button.ProductionGroup].Tabs.Any(t => t.Queue.BuildableItems().Any() || t.Queue.AlwaysVisible);
+			// Per-frame render read: use the tab state cached under the world read lock (see ProductionTabCA),
+			// not the live sim-mutated queue lists.
+			button.IsDisabled = () => !tabs.Groups[button.ProductionGroup].Tabs.Any(t => t.CachedVisible);
 			button.OnMouseUp = mi => selectTab(mi.Modifiers.HasModifier(Modifiers.Shift));
 			button.OnKeyPress = e => selectTab(e.Modifiers.HasModifier(Modifiers.Shift));
 			button.IsHighlighted = () => tabs.QueueGroup == button.ProductionGroup;

@@ -44,6 +44,10 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 		readonly CachedTransform<Player, PlayerStatistics> stats = new(player => player.PlayerActor.TraitOrDefault<PlayerStatistics>());
 
+		// Stage B (DecoupledRendering): PlayerStatistics.Units is mutated by the sim thread; enumerate it only
+		// under the world read lock, render from this snapshot (kept from last frame when the sim is mid-tick).
+		readonly List<ArmyUnit> cachedUnits = [];
+
 		int lastIconIdx;
 		int currentTooltipToken;
 
@@ -90,17 +94,28 @@ namespace OpenRA.Mods.Cameo.Widgets
 			if (player == null)
 				return;
 
-			var playerStatistics = stats.Update(player);
+			if (Game.TryEnterWorldReadLock())
+			{
+				try
+				{
+					var playerStatistics = stats.Update(player);
 
-			var items = playerStatistics.Units.Values
-				.Where(u => u.Count > 0 && u.Icon != null && u.ActorInfo.HasTraitInfo<PlayerDisplayUpgradeInfo>())
-				.OrderBy(u => u.ProductionQueueOrder)
-				.ThenBy(u => u.BuildPaletteOrder);
+					cachedUnits.Clear();
+					cachedUnits.AddRange(playerStatistics.Units.Values
+						.Where(u => u.Count > 0 && u.Icon != null && u.ActorInfo.HasTraitInfo<PlayerDisplayUpgradeInfo>())
+						.OrderBy(u => u.ProductionQueueOrder)
+						.ThenBy(u => u.BuildPaletteOrder));
+				}
+				finally
+				{
+					Game.ExitWorldReadLock();
+				}
+			}
 
 			Game.Renderer.EnableAntialiasingFilter();
 
 			var queueCol = 0;
-			foreach (var unit in items)
+			foreach (var unit in cachedUnits)
 			{
 				var icon = unit.Icon;
 				var topLeftOffset = new int2(queueCol * (IconWidth + IconSpacing), 0);

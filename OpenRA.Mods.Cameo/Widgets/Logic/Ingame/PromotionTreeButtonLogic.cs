@@ -81,13 +81,31 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			var chromeName = button.ProductionGroup.ToLowerInvariant();
 			var icon = button.GetOrNull<ImageWidget>("ICON");
 			if (icon != null)
+			{
+				// Stage B (DecoupledRendering): AllQueued() is the live, sim-mutated queue list. Re-evaluate the
+				// alert state only when the sim thread is not mid-tick; otherwise reuse the last value (this lambda
+				// runs every frame, so it is at worst one frame stale).
+				var cachedAlert = false;
 				icon.GetImageName = () =>
 				{
 					if (button.IsDisabled())
 						return chromeName + "-disabled";
 
-					return queues.Any(q => q.AllQueued().Any(i => i.Done)) ? chromeName + "-alert" : chromeName;
+					if (Game.TryEnterWorldReadLock())
+					{
+						try
+						{
+							cachedAlert = queues.Any(q => q.AllQueued().Any(i => i.Done));
+						}
+						finally
+						{
+							Game.ExitWorldReadLock();
+						}
+					}
+
+					return cachedAlert ? chromeName + "-alert" : chromeName;
 				};
+			}
 		}
 
 		void OpenCommanderTree()
