@@ -69,6 +69,16 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				quotaManager?.SetEnabled(cameoSettings.QuotaModeEnabled);
 			};
 
+			var adaptiveGameSpeedCheckbox = panel.Get<CheckboxWidget>("ADAPTIVE_GAMESPEED_CHECKBOX");
+			adaptiveGameSpeedCheckbox.IsChecked = () => cameoSettings.AdaptiveGameSpeedEnabled;
+			adaptiveGameSpeedCheckbox.OnClick = () =>
+			{
+				// The AdaptiveGameSpeed world trait reads this setting live each tick, so toggling here
+				// takes effect immediately mid-game (no manager poke needed, unlike Quota Mode).
+				cameoSettings.AdaptiveGameSpeedEnabled ^= true;
+				cameoSettings.Save();
+			};
+
 			return () => false;
 		}
 

@@ -26,13 +26,6 @@ namespace OpenRA.Mods.Cameo.Traits
 		public override object Create(ActorInitializer init) => new QuotaProductionManager(init.Self, this);
 	}
 
-	[SettingsModule.YamlNode("Cameo", shared: true)]
-	public class CameoSettings : SettingsModule
-	{
-		[Desc("Enables Quota Mode: production buildings auto-requeue units to maintain alive count targets.")]
-		public bool QuotaModeEnabled = false;
-	}
-
 	public class QuotaProductionManager : IResolveOrder, INotifyCreated, IWorldLoaded, ITick, INotifyOtherProduction
 	{
 		World world;
