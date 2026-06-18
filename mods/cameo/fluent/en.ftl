@@ -285,11 +285,11 @@ bot-ai =
 support-power-timer = { $player }'s { $support-power }: { $time }
 
 ## settings-display.yaml
-checkbox-laser-glow = Weapon Glow Effects (Experimental)
-checkbox-heat-distortion = Heat Distortion Effects (Experimental)
-checkbox-shockwave = Shockwave Distortion Effects (Experimental)
+checkbox-laser-glow = Weapon Glow Effects
+checkbox-heat-distortion = Heat Distortion Effects
+checkbox-shockwave = Shockwave Distortion Effects
 checkbox-screen-shake = Screen Shake Effects
-checkbox-ground-fire-smoke = Ground Fire Smoke Effects (Experimental)
+checkbox-ground-fire-smoke = Ground Fire Smoke Effects
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
 
 ## settings-gameplay.yaml
@@ -307,9 +307,8 @@ auto-save-max-file-number = { $saves ->
     [one] 1 save
    *[other] { $saves } saves
 }
-label-experimental-section-header = Experimental Features
 checkbox-quota-mode =
-    .label = Quota Mode (Experimental)
+    .label = Quota Mode
     .tooltip = Production buildings automatically re-queue units to maintain target alive counts per type.
         Left-click a unit in the production panel to set its target; right-click to lower it.
         Due to its instability, this feature is currently single-player only, and disabled in multiplayer.

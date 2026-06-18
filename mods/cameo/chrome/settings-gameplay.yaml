@@ -55,19 +55,6 @@ Container@GAMEPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 25
 									Font: Regular
-				Background@EXPERIMENTAL_SECTION_HEADER:
-					X: 5
-					Width: PARENT_WIDTH - 24 - 10
-					Height: 13
-					Background: separator
-					ClickThrough: True
-					Children:
-						Label@LABEL:
-							Width: PARENT_WIDTH
-							Height: PARENT_HEIGHT
-							Font: TinyBold
-							Align: Center
-							Text: label-experimental-section-header
 				Container@QUOTA_ROW:
 					Width: PARENT_WIDTH - 24
 					Height: 25
