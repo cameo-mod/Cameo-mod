@@ -85,7 +85,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			}
 
 			var displayNames = ownedActors
-				.Select(a => a.Info.TraitInfoOrDefault<TooltipInfo>())
+				.Select(a => a.Info.TraitInfos<TooltipInfo>().FirstOrDefault(t => t.EnabledByDefault))
 				.Where(t => t != null)
 				.Select(t => FluentProvider.GetMessage(t.Name))
 				.Distinct();
