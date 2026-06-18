@@ -387,7 +387,7 @@ Container@DISPLAY_PANEL:
 									Ticks: 10
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
-					Height: 30
+					Height: 25
 					Children:
 						Container@LASER_GLOW_CHECKBOX_CONTAINER:
 							X: 10
@@ -400,7 +400,7 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-laser-glow
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
-					Height: 30
+					Height: 25
 					Children:
 						Container@HEAT_DISTORTION_CHECKBOX_CONTAINER:
 							X: 10
@@ -413,7 +413,7 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-heat-distortion
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
-					Height: 30
+					Height: 25
 					Children:
 						Container@SHOCKWAVE_CHECKBOX_CONTAINER:
 							X: 10
@@ -426,7 +426,7 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-shockwave
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
-					Height: 30
+					Height: 25
 					Children:
 						Container@SCREEN_SHAKE_CHECKBOX_CONTAINER:
 							X: 10
@@ -439,7 +439,7 @@ Container@DISPLAY_PANEL:
 									Text: checkbox-screen-shake
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
-					Height: 30
+					Height: 25
 					Children:
 						Container@GROUND_FIRE_SMOKE_CHECKBOX_CONTAINER:
 							X: 10
