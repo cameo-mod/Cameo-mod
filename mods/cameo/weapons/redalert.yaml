@@ -9154,3 +9154,7 @@ ChronoVortex:
 	-Warhead@Effect: CreateEffect
 	-Warhead@Effect1:
 	-Warhead@Effect2:
+	# The Scorch smudge layer spawns animated flames (scorch_flames); strip the inherited
+	# Scorch smudges so this cryo superweapon doesn't leave a patch of fire on impact.
+	-Warhead@Smudge:
+	-Warhead@Smudge2:
