@@ -4799,7 +4799,7 @@ Player:
 		# Resource collectors (Harvester trait) are excluded by IgnoreHarvesters (default true), so the
 		# economy is never starved by a lower budget; buildings/walls were never counted (mobile units only).
 		GlobalUnitBudget: 600
-		MaxUnitsPerBot: 300
+		MaxUnitsPerBot: 150
 	UnitBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot
 		IdleBaseUnitsMaximum: 50

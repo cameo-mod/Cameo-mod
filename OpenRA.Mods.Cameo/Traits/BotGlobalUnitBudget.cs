@@ -35,6 +35,10 @@ namespace OpenRA.Mods.Cameo.Traits
 			"so lowering the budget never starves the bot economy. Faction-agnostic across all rulesets.")]
 		public readonly bool IgnoreHarvesters = true;
 
+		[Desc("Log per-bot budget state (living bots, cap, current unit count, paused) to the",
+			"debug log on each recompute. For tuning/verification only; leave off in normal play.")]
+		public readonly bool Debug = false;
+
 		[ActorReference]
 		[Desc("Additional actor types excluded from the per-bot unit count by name (e.g. MCVs).",
 			"Harvesters are already covered by IgnoreHarvesters.")]
@@ -111,11 +115,18 @@ namespace OpenRA.Mods.Cameo.Traits
 				if (ignoreNames && Info.IgnoredActorTypes.Contains(a.Info.Name))
 					continue;
 
-				if (++count >= cap)
+				// When not logging, stop as soon as we reach the cap - no need to count further.
+				// With Debug on we count every unit so the log shows the true army size vs the cap.
+				count++;
+				if (!Info.Debug && count >= cap)
 					return true;
 			}
 
-			return false;
+			if (Info.Debug)
+				Log.Write("debug", $"BotBudget {player.InternalName}: livingBots={livingBots} " +
+					$"cap={cap} units={count} paused={count >= cap}");
+
+			return count >= cap;
 		}
 	}
 }

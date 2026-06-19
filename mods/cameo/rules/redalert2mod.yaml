@@ -5573,7 +5573,6 @@ latin_tkiller:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@EliteGuerillas: ^LatinEliteGuerillas
 	Tooltip:
 		Name: Latin Tank Killer
@@ -5611,7 +5610,7 @@ latin_tkiller:
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
-		VoiceSet: TankHunterVoice
+		VoiceSet: LatinSoldierVoice
 	RenderSprites:
 		Image: aa_tkiller
 
@@ -5706,7 +5705,6 @@ latin_fthrow:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@flamerup: ^LatinFlameUpgrades
 	Inherits@EliteGuerillas: ^LatinEliteGuerillas
 	Tooltip:
@@ -5760,7 +5758,7 @@ latin_fthrow:
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
-		VoiceSet: ConscriptVoice
+		VoiceSet: LatinSoldierVoice
 
 latin_narco:
 	Inherits: ^Soldier
