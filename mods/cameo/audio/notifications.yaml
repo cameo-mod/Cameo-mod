@@ -195,6 +195,7 @@ Speech:
 		BuildingLost: strclst1
 		BuildingInfiltrated: bldginf1
 		Cancelled: cancld1
+			Priority: true
 		CivilianBuildingCaptured: strucap1
 		CivilianKilled: civdead1
 		ConstructionComplete: conscmp1, conscmp2
@@ -225,6 +226,7 @@ Speech:
 		NuclearWeaponLaunched: alaunch1
 			Priority: true
 		OnHold: onhold1
+			Priority: true
 		PrimaryBuildingSelected: pribldg1
 		Reinforce: reinfor1
 		Repairing: repair1
