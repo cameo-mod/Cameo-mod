@@ -1,4 +1,6 @@
 Speech:
+	QueueDelay: 500
+	QueueExpiry: 8000
 	Prefixes:
 		#ADVANCE WARS
 		orangestar: r_
@@ -184,8 +186,10 @@ Speech:
 	Notifications:
 		AirstrikeReady: airredy1
 		BaseAttack: baseatk1
+			Priority: true
 		Building: abldgin1, abldgin2
 		BuildingCannotPlaceAudio: nodeply1, nodeply2
+			Priority: true
 		BuildingCaptured: strucap1
 		BuildingInProgress: bldg1
 		BuildingLost: strclst1
@@ -197,21 +201,29 @@ Speech:
 		EnemyUnitsApproaching: enmyapp1
 		EnemyPlanesApproaching: enemya
 		EnemySWApproaching: alaunch2
+			Priority: true
 		HarvesterAttack: harvat
 		InsufficientPower: lopower1
 		InsufficientFunds: nofunds1
 		IonCannonCharging: ionchrg1
 		IonCannonReady: ionredy1
+			Priority: true
 		SWIonCannonCharging: swionchrg1
 		SWIonCannonReady: swionredy1
+			Priority: true
 		Leave: bct1
+			Priority: true
 		Lose: fail1
+			Priority: true
 		LowPower: lopower1
 		NewOptions: newopt1
 		NoBuild: nobuild1
 		NuclearWarheadApproaching: income1
+			Priority: true
 		NuclearWeaponAvailable: aready1
+			Priority: true
 		NuclearWeaponLaunched: alaunch1
+			Priority: true
 		OnHold: onhold1
 		PrimaryBuildingSelected: pribldg1
 		Reinforce: reinfor1
@@ -220,12 +232,17 @@ Speech:
 		SelectTarget: select1
 		SilosNeeded: silond1
 		StartGame: bctrinit
+			Priority: true
 		GameLoaded: load1
+			Priority: true
 		GameSaved: save1
+			Priority: true
 		Training: train1
 		UnitLost: unitlst1
+			Cooldown: 8000
 		UnitReady: unitrdy1
 		Win: misnwon1
+			Priority: true
 		WormSign: wsign
 		WormAttack: watk
 		Upgrading: upg
@@ -253,6 +270,7 @@ Speech:
 
 		AbombAvailable: aavail1
 		AbombLaunchDetected: alaunch1
+			Priority: true
 		AbombPrepping: aprep1
 		AbombReady: aready1
 		AirUnitLost: aunitl1
@@ -278,6 +296,7 @@ Speech:
 		EnemyUnitStolen: enmyunitsto1
 		ExplosiveChargePlaced: xploplc1
 		FirstObjectiveMet: 1objmet1
+			Priority: true
 		FourtyMinutesRemaining: 40minr
 		IronCurtainCharging: ironchg1
 		IronCurtainReady: ironrdy1
@@ -286,13 +305,18 @@ Speech:
 		MercenaryFreed: mercf1
 		MercenaryRescued: mercr1
 		MissionAccomplished: misnwon1
+			Priority: true
 		MissionFailed: misnlst1
+			Priority: true
 		MissionLoaded: load1
+			Priority: true
 		MissionSaved: save1
+			Priority: true
 		MissionTimerInitialised: mtimein1
 		MothershipDeployed: mshpd1
 		NavalUnitLost: navylst1
 		ObjectiveMet: objmet1
+			Priority: true
 		ObjectiveNotMet: objnmet1
 		ObjectiveNotReached: objnrch1
 		ObjectiveReached: objrch1
@@ -302,6 +326,7 @@ Speech:
 		OurTechnologyStolen: ourtechsto1
 		SatelliteLaunched: satlnch1
 		SecondObjectiveMet: 2objmet1
+			Priority: true
 		SignalFlare: flare1
 		SignalFlareEast: flaree1
 		SignalFlareNorth: flaren1
@@ -325,6 +350,7 @@ Speech:
 		TechnologyLocked: techlckd1
 		TenMinutesRemaining: 10minr
 		ThirdObjectiveMet: 3objmet1
+			Priority: true
 		ThirtyMinutesRemaining: 30minr
 		TimerStarted: timergo1
 		TimerStopped: timerno1

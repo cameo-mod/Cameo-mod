@@ -1884,6 +1884,24 @@ smoke_dark:
 		Tick: 80
 		ZOffset: 1023
 
+# Procedural RGBA cryo "chill fog" puff (tools/gen_cryo_fog.py). Same 32-frame play-once
+# timing as smoke_dark; light cyan, lightly transparent. Drifts sideways via CryoFogEmitter.
+smoke_cryo:
+	idle:
+		Filename: smoke_cryo.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+
+# Procedural light-cyan snowflake particle (tools/gen_snowflake.py). 32-frame rotate + fade,
+# played once over the particle's lifetime (same emitter mechanism as the chill fog).
+snowflake:
+	idle:
+		Filename: snowflake.png
+		Length: *
+		Tick: 80
+		ZOffset: 1023
+
 # Procedural RGBA fire-lit smoke puff (tools/gen_fire_smoke_glow.py). Same 32-frame
 # timing as smoke_dark, but with a subtle baked amber glow at the base for groundfire.
 smoke_fire_glow:

@@ -914,6 +914,8 @@
 World:
 	Inherits: ^BaseWorld
 	Inherits@MapGenerators: ^MapGenerators
+	CryoFogLimiter:
+		Max: 24
 	ChatCommands:
 	DevCommands:
 	DebugVisualizationCommands:

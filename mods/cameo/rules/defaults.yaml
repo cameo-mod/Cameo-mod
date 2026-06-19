@@ -3391,7 +3391,7 @@
 		# (PlayerPalette: player_rgba, e.g. Tesla Coil / Nod Laser Turret / Chronosphere) if it
 		# inherits the actor's palette. See fancy-stealth RGBA palette gotcha.
 		Palette: effect
-		RequiresCondition: critical-fire && !build-incomplete
+		RequiresCondition: critical-fire && !build-incomplete && !CryoFreeze
 	SmokeParticleEmitter@CriticalFire:
 		Image: smoke_building_fire_glow
 		Sequences: idle
@@ -3404,7 +3404,7 @@
 		Gravity: 30, 70
 		TurnRate: 2
 		Offset: 0,0,128
-		RequiresCondition: critical-fire && !build-incomplete
+		RequiresCondition: critical-fire && !build-incomplete && !CryoFreeze
 	GrantConditionOnPrerequisite@CEMENTFACTORY:
 		Condition: techcementffact
 		Prerequisites: techcementffact
@@ -4820,6 +4820,35 @@
 		ValidRelationships: Enemy
 
 ^CryoFreezable:
+	# Light cyan "chill fog" creeping off the actor while it is cryo-frozen. Each puff drifts
+	# sideways in a random direction (RandomFacing) with almost no vertical motion, so it spreads
+	# out low rather than rising. Globally capped (with the snow below) by CryoFogLimiter (World
+	# actor) so a mass-freeze never fogs the screen.
+	CryoFogEmitter@CryoFog:
+		RequiresCondition: CryoFreeze
+		Image: smoke_cryo
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 12, 20
+		Duration: 64
+		Speed: 8, 20
+		Gravity: -2, 2
+		TurnRate: 1
+		Offset: 0,0,96
+	# Snowflakes drifting down off the actor while frozen - same emitter mechanism as the fog.
+	# Gentle fall (small negative Gravity) with lateral flutter (Speed in a wandering direction)
+	# so they sway rather than dropping straight.
+	CryoFogEmitter@CryoSnow:
+		RequiresCondition: CryoFreeze
+		Image: snowflake
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 16, 28
+		Duration: 64
+		Speed: 4, 11
+		Gravity: -15, -5
+		TurnRate: 6
+		Offset: 0,0,320
 	PhysicalState@Temperature:
 		Name: Temperature
 		MaxValue: 20000
