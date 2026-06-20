@@ -406,6 +406,10 @@ LoadScreen: FitImageLoadScreen
 	SplashImage: cameo|uibits/splash-screen.png
 	Image: cameo|uibits/loadscreen2.png,cameo|uibits/loadscreen3.png,cameo|uibits/loadscreen4.png,cameo|uibits/loadscreen5.png,cameo|uibits/loadscreen6.png,cameo|uibits/loadscreen7.png,cameo|uibits/loadscreen8.png,cameo|uibits/loadscreen9.png,cameo|uibits/loadscreen10.png,cameo|uibits/loadscreen11.png,cameo|uibits/loadscreen12.png,cameo|uibits/loadscreen13.png,cameo|uibits/loadscreen14.png,cameo|uibits/loadscreen15.png,cameo|uibits/loadscreen16.png,cameo|uibits/loadscreen17.png,cameo|uibits/loadscreen18.png,cameo|uibits/loadscreen19.png,cameo|uibits/loadscreen20.png,cameo|uibits/loadscreen21.png,cameo|uibits/loadscreen22.png,cameo|uibits/loadscreen23.png,cameo|uibits/loadscreen24.png,cameo|uibits/loadscreen25.png,cameo|uibits/loadscreen26.png,cameo|uibits/loadscreen27.png
 
+WebServices:
+	GameNews: https://api.github.com/repos/cameo-mod/Cameo-mod/releases
+	GameNewsFromGitHubReleases: true
+
 ServerTraits:
 	LobbyCommands
 	SkirmishLogic
