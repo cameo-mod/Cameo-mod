@@ -64,6 +64,22 @@ commander-tree =
     .points-label = Available Points
     .close = Close
 
+statistics =
+    .title = Statistics
+    .games-played = Games played:
+    .games-won = Games won:
+    .games-lost = Games lost:
+    .factions-played = Factions played:
+    .enemies-killed = Enemies killed:
+    .buildings-destroyed = Buildings destroyed:
+    .resources-collected = Resources collected:
+    .resources-spent = Resources spent:
+    .col-faction = Faction
+    .col-games = Games
+    .col-wins = Wins
+    .col-kills = Kills
+    .col-destroyed = Destroyed
+
 actor-stats-label-prefix =
     .armor = Armor:
     .sight = Sight:
