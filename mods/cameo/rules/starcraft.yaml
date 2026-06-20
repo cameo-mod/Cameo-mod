@@ -6422,6 +6422,47 @@ SCZEALOT:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
+SCADEPT:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Adept
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scgateway, ~!uplegionnaire
+		Queue: Infantry, RAInfantry
+		Description: actor-sczealot.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Shielded:
+		RegenAmount: 80
+	Armament:
+		Weapon: Psi-blades
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
 SCDRAGOON:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
