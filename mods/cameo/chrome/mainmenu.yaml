@@ -1,5 +1,5 @@
 Container@MAINMENU:
-	Logic: MainMenuLogic
+	Logic: MainMenuLogic, CameoMainMenuLogic
 	Children:
 		LogicKeyListener@GLOBAL_KEYHANDLER:
 			Logic: MusicHotkeyLogic, ScreenshotHotkeyLogic, MuteHotkeyLogic
@@ -277,3 +277,13 @@ Container@MAINMENU:
 			Logic: LoadLocalPlayerProfileLogic
 			X: 25
 			Y: 25
+		# Detached top-right shortcut, mirroring the top-left player-profile card. Statistics
+		# are player-career data, so they get a persistent shell button rather than being buried
+		# in Extras. Sits clear of the centred news bar and above the right-hand logo.
+		Button@STATISTICS_BUTTON:
+			X: WINDOW_WIDTH - WIDTH - 25
+			Y: 25
+			Width: 150
+			Height: 28
+			Text: Statistics (WIP)
+			Font: Bold
