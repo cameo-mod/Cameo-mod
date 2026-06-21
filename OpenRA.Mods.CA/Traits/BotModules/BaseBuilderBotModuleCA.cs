@@ -632,9 +632,7 @@ namespace OpenRA.Mods.CA.Traits
 						currentRefineryCount += BuildingsBeingProduced[r];
 				}
 
-				var currentConstructionYardCount = AIUtils.CountActorByCommonName(ConstructionYardBuildings);
-
-				return currentRefineryCount >= currentConstructionYardCount * Info.RefineriesPerBase + Info.MaxExtraRefineries;
+				return currentRefineryCount >= AIUtils.CountActorByCommonName(ConstructionYardBuildings) * Info.RefineriesPerBase + Info.MaxExtraRefineries;
 			}
 		}
 
@@ -647,7 +645,7 @@ namespace OpenRA.Mods.CA.Traits
 
 		int OptimalRefineryCount() =>
 			AIUtils.CountActorByCommonName(ProductionBuildings) > 0
-			? Info.InititalMinimumRefineryCount + Info.AdditionalMinimumRefineryCount
+			? Info.InititalMinimumRefineryCount + Info.AdditionalMinimumRefineryCount + (AIUtils.CountActorByCommonName(ConstructionYardBuildings) - 1) * Info.RefineriesPerBase
 			: Info.InititalMinimumRefineryCount;
 
 		bool HasMinimalRefineryCount() =>

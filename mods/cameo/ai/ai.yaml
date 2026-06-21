@@ -3446,9 +3446,9 @@ Player:
 	BaseBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot
 		InititalMinimumRefineryCount: 1
-		AdditionalMinimumRefineryCount: 1
+		AdditionalMinimumRefineryCount: 2
 		RefineriesPerBase: 3
-		MaxExtraRefineries: 2
+		MaxExtraRefineries: 3
 		ExpansionTolerate: 1,2
 		ForceExpansionTolerate: 5,6
 		MinimumExcessPower: 100
