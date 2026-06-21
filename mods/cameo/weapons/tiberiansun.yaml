@@ -1645,6 +1645,7 @@ TSReaperTusk:
 		ValidTargets: Ground
 
 TSHoverMissile:
+	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^ShrapnelWeapon
 	ValidTargets: Ground, Water, Trees, Air
@@ -1659,24 +1660,27 @@ TSHoverMissile:
 		HorizontalRateOfTurn: 20
 		Inaccuracy: 32
 		VerticalRateOfTurn: 20
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 6000
 		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumMissileFriendlyFire: SpreadDamage
-		Damage: 3000
-		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 3
 		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 6000
 		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
 	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 3000
 		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 3
 		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
 
 TSAegisMissile:
 	Inherits: ^TSDefaultMissile
@@ -1870,9 +1874,6 @@ TSStankTusk:
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 10000
 		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumMissileFriendlyFire: SpreadDamage
-		Damage: 5000
-		ValidTargets: Ground, Water, Trees, Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Ground, Water, Trees, Air
@@ -1900,9 +1901,6 @@ TSStankTibTusk:
 		TrailImage: spittrail
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumMissileFriendlyFire: SpreadDamage
-		Damage: 5000
 		ValidTargets: Ground, Water, Trees, Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 5
@@ -2113,17 +2111,11 @@ TSAdatsMissile:
 	Warhead@LightMissile: SpreadDamage
 		Damage: 16000
 		ValidTargets: Ground, Water, Trees, Air
-	Warhead@LightMissileFriendlyFire: SpreadDamage
-		Damage: 8000
-		ValidTargets: Ground, Water, Trees, Air
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 8
 		ValidTargets: Ground, Water, Trees, Air
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 16000
-		ValidTargets: Ground, Water, Trees, Air
-	Warhead@MediumMissileFriendlyFire: SpreadDamage
-		Damage: 8000
 		ValidTargets: Ground, Water, Trees, Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 8

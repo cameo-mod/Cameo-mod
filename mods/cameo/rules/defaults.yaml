@@ -888,6 +888,10 @@
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
 	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	DamageMultiplier@InfantryBuff:
+		Modifier: 90
+	FirepowerMultiplier@InfantryBuff:
+		Modifier: 110
 	ChangesHealth@SelfHealing:
 		Step: 10
 		Delay: 2
@@ -1058,6 +1062,8 @@
 		Type: None
 	DamageMultiplier@ScoutInfantryBuff:
 		Modifier: 60
+	FirepowerMultiplier@ScoutInfantryBuff:
+		Modifier: 110
 	RevealsShroud:
 		Range: 8000
 	DetectCloaked:
@@ -1076,6 +1082,8 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
+	FirepowerMultiplier@GrenadierInfantryBuff:
+		Modifier: 120
 	Armor:
 		Type: None
 	RevealsShroud:
@@ -1112,6 +1120,8 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@InfantryBuffs: ^InfantryBuffs
 	Inherits@RA2YuriStealthSuits: ^RA2YuriStealthSuits
+	FirepowerMultiplier@AntiTankAntiAirInfantryBuff:
+		Modifier: 110
 	Armor:
 		Type: Flak
 	RevealsShroud:
@@ -1209,6 +1219,8 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@InfantryBuffs: ^InfantryBuffs
+	FirepowerMultiplier@SniperInfantryBuff:
+		Modifier: 120
 	RenderRangeCircle:
 		RangeCircleType: infantry
 	Armor:
@@ -1299,6 +1311,10 @@
 	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@upgrade: ^LightWeightArmorPlating
 	Inherits@upgrade: ^AdvancedGuerillaTactics
+	DamageMultiplier@SupportVehicleBuff:
+		Modifier: 90
+	FirepowerMultiplier@SupportVehicleBuff:
+		Modifier: 110
 	Armor:
 		Type: Light
 	RevealsShroud:
@@ -1634,8 +1650,14 @@
 		AltitudeVelocity: 150
 	Armor:
 		Type: Scout
-	DamageMultiplier@FlyingInfantryBuff:
-		Modifier: 80
+	Armor@Secondary:
+		Type: Fighter
+	DamageMultiplier@FlyingInfantry:
+		Modifier: 200
+	FirepowerMultiplier@FlyingInfantry:
+		Modifier: 50
+	RangeMultiplier@FlyingInfantry:
+		Modifier: 75
 	RevealsShroud:
 		Range: 7000
 		Type: GroundPosition
@@ -2766,6 +2788,9 @@
 	GrantCondition@biggarrisoned:
 		Condition: garrisoned
 		RequiresCondition: biggarrisoned
+	RangeMultiplier@battlefortresspassenger:
+		Modifier: 90
+		RequiresCondition: battlefortresspassenger
 	FirepowerMultiplier@battlefortresspassenger:
 		Modifier: 50
 		RequiresCondition: battlefortresspassenger

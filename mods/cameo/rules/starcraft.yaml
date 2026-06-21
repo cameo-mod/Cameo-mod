@@ -5168,6 +5168,8 @@ SCPYTHEAN:
 		Weapon: JimRaynorMachineGun
 		LocalOffset: 400,0,0, 200,200,0, 200,-200,0, 300,300,0, 300,-300,0
 		MuzzleSequence: muzzle
+	RangeMultiplier@Pythean:
+		Modifier: 80
 	GrantConditionOnPrerequisite@cloakon:
 		Condition: upghostcloak
 		Prerequisites: upghostcloak
@@ -9284,34 +9286,34 @@ SCSWARMLING:
 	ExternalCondition@Swarmling:
 		Condition: Swarmling
 	DamageMultiplier@Swarmling1:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 6
 	DamageMultiplier@Swarmling2:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 9
 	DamageMultiplier@Swarmling3:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 12
 	DamageMultiplier@Swarmling4:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 15
 	DamageMultiplier@Swarmling5:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 18
 	DamageMultiplier@Swarmling6:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 21
 	DamageMultiplier@Swarmling7:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 24
 	DamageMultiplier@Swarmling8:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 27
 	DamageMultiplier@Swarmling9:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 30
 	DamageMultiplier@Swarmling10:
-		Modifier: 95
+		Modifier: 105
 		RequiresCondition: Swarmling >= 33
 	SpeedMultiplier@Swarmling1:
 		Modifier: 95
