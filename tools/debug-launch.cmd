@@ -34,7 +34,7 @@ if not exist "%MAPPATH%" (
 )
 
 REM --- compute that file's UID so we target it unambiguously ---
-set "MOD_SEARCH_PATHS=%~dp0mods,./mods"
+set "MOD_SEARCH_PATHS=%~dp0..\mods,./mods"
 set "ENGINE_DIR=.."
 set MAPUID=
 pushd "%ENGINE_DIRECTORY%"
