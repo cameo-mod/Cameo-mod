@@ -210,8 +210,7 @@ namespace OpenRA.Mods.CA.Traits
 				// Check if we've hit the limit for this building already, if so cancel it
 				if (baseBuilder.Info.BuildingLimits.ContainsKey(currentBuilding.Item))
 				{
-					if ((AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player) >= baseBuilder.Info.BuildingLimits[currentBuilding.Item])
-						|| (baseBuilder.Info.RefineryTypes.Contains(currentBuilding.Item) && baseBuilder.HasMaxRefineries))
+					if ((AIUtils.CountBuildingByCommonName(new HashSet<string> { currentBuilding.Item }, player) >= baseBuilder.Info.BuildingLimits[currentBuilding.Item]))
 					{
 						AIUtils.BotDebug($"{player} has already has enough {currentBuilding.Item}; cancelling production");
 						bot.QueueOrder(Order.CancelProduction(queue.Actor, currentBuilding.Item, 1));
@@ -365,7 +364,7 @@ namespace OpenRA.Mods.CA.Traits
 			}
 
 			// Next is to build up a strong economy
-			if (!baseBuilder.HasAdequateRefineryCount())
+			if (!baseBuilder.HasAdequateRefineryCount() && !baseBuilder.HasMaxRefineries)
 			{
 				var refinery = GetProducibleBuilding(baseBuilder.Info.RefineryTypes, buildableThings);
 				if (refinery != null && HasSufficientPowerForActor(refinery))
@@ -420,7 +419,7 @@ namespace OpenRA.Mods.CA.Traits
 			{
 				var production = GetProducibleBuilding(baseBuilder.Info.ProductionTypes, buildableThings);
 
-				if (production != null && (productionTypeLimit <= 0 || playerBuildings.Count(a => a.Info.Name == production.Name) > productionTypeLimit))
+				if (production != null && (productionTypeLimit <= 0 || playerBuildings.Count(a => a.Info.Name == production.Name) < productionTypeLimit))
 				{
 					if (HasSufficientPowerForActor(production))
 					{

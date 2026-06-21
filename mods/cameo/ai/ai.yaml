@@ -3137,8 +3137,9 @@ Player:
 		McvTypes: mcv.gdi, mcv.nod, ramcv.allies, ramcv.soviet, ramcv.japan, ra2amcv, ra2smcv, yrpcv, yrsmin, modcore, modcore1, modcore2, modcore3, modcore4, modcore5, modcore6, modcore7, aa_acv, d2k_mcv.ixian, d2k_mcv.ordos, steel_qmcv, latin_mcv, nax_mcv, nax2_mcv, futu_mcv, sctmcv, scpmcv, sczmcv, wc2_human_mcv, wc2_orc_mcv, tsmcvgdi, tsmcvnod, tsmcvmutant, tsmcvcabal, tkmmcv
 		ConstructionYardTypes: fact.gdi, fact.nod, rafact.allies, rafact.soviet, rafact.japan, ra2nacnst, ra2gacnst, yrnacnst, tsgtcnstgdi, tsgtcnstnod, tsgtcnstmutant, tsgtcnstcabalb, sccommandcenter, scnexus, schatchery, sclair, schive, glcommand, chcommand, usacommand, construction_yard.ixian, construction_yard.ordos, wc2_human_townhall, wc2_orc_greathall, aa_cgcnst, steel_qacst, latin_cgcnst, nax_conyard, nax2_conyard, futu_egcnst, tkmcommandcenter, gdirig
 		McvFactoryTypes: weap, afld, raweap, ra_gigafactory, raweapa, modraweapj, ra2gaweap, ra2naweap, yrygweap, aa_cgweap, tsgtweap, tsgtweapmutant, tsntweap, tsntweapcabal, schatchery, scnexus, sccommandcenter, scfactory, scroboticsfacility, glcommand, chcommand, usacommand, heavy_factory.ixian, heavy_factory.ordos, starport.ixian, starport.ordos, sc_zerg_larva, wc2_human_townhall, wc2_orc_greathall, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, steel_qaweap, latin_cgweap, nax_weap, nax2_weap, futu_egweap2, tkmcommandcenter
-		MinimumConstructionYardCount: 1
+		MinimumConstructionYardCount: 2
 		AdditionalConstructionYardCount: 2
+		BuildAdditionalMCVCashAmount: 1500
 	CaptureManagerBotModuleCA:
 		RequiresCondition: genericbot && !easiestbot
 		CapturingActorTypes: e6, rae6, ra2engineer, ra2engineer.soviet, ra2engineer.yuri, ra2engineer.asian, ra2engineer.syndicate, steel_fedeng, nax_eng, futu_fedeng, futu_engi, tsengineer, tsengineer2, engineer, d2k_hijacker, d2k_mechanic, scscv, tkmengineer
@@ -3449,6 +3450,7 @@ Player:
 		RefineriesPerBase: 3
 		MaxExtraRefineries: 2
 		ExpansionTolerate: 1,2
+		ForceExpansionTolerate: 5,6
 		MinimumExcessPower: 100
 		MaximumExcessPower: 1000
 		ExcessPowerIncrement: 10
@@ -3460,10 +3462,9 @@ Player:
 		MaxBaseRadius: 25
 		MinimumDefenseRadius: 10
 		MaximumDefenseRadius: 50
-		MaximumRefineryRadius: 15
 		MaxResourceCellsToCheck: 5
-		NewProductionCashThreshold: 5000
-		BuildingProductionMinCashRequirement: 1250
+		NewProductionCashThreshold: 10000
+		BuildingProductionMinCashRequirement: 1000
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons
 		DefenseQueues: Defence, RADefence, BuildingAddons

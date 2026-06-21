@@ -136,9 +136,6 @@ namespace OpenRA.Mods.CA.Traits
 		[Desc("Maximum range at which to build defensive structures near a combat hotspot.")]
 		public readonly int MaximumDefenseRadius = 20;
 
-		[Desc("Maximum range at which to build refineries from a resource patch.")]
-		public readonly int MaximumRefineryRadius = 12;
-
 		[Desc("Try to build another production building if there is too much cash.")]
 		public readonly int NewProductionCashThreshold = 10000;
 
