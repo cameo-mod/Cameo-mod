@@ -260,7 +260,7 @@ Player:
 	TeleportNetworkManager:
 		Type: nydus
 	GrantConditionOnPrerequisite@enable-secondaryinsurance:
-		Condition: enablesecondaryinsurance
+		Condition: nobase
 		Prerequisites: !conyard
 	BotInsurance@secondaryinsurance:
 		Condition: secondaryinsurance
@@ -270,7 +270,7 @@ Player:
 		Interval: 1
 		Amount: 1
 		ShowTicks: False
-		RequiresCondition: secondaryinsurance && enablesecondaryinsurance
+		RequiresCondition: secondaryinsurance && nobase
 	GrantConditionOnPlayerTotalCash:
 		Condition: nocomeback
 		Threshold: 999
