@@ -3120,7 +3120,7 @@ BTRTeslaMachineGun:
 	BurstDelays: 4
 	Range: 5454
 	Report: shktrop1.aud
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: DRAGON
 		-TrailImage: smokey
 	Warhead@LightMissile: SpreadDamage
@@ -3613,7 +3613,7 @@ KamovTesla:
 	ReloadDelay: 32
 	Range: 5528
 	Report: shktrop1.aud
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: DRAGON
 		-TrailImage: smokey
 	Warhead@LightMissile: SpreadDamage
@@ -3760,7 +3760,7 @@ YakTeslaGun:
 	Burst: 8
 	BurstDelays: 3
 	Report: shktrop1.aud
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: DRAGON
 		-TrailImage: smokey
 	Warhead@LightMissile: SpreadDamage
@@ -4368,7 +4368,7 @@ TeslaMaverickFragment1:
 	ValidTargets: Ground, Water, Air
 	Range: 2950
 	Report: shktrop1.aud
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: d2k_RPG
 		-TrailImage: litning
 	Warhead@TeslaWeapon: SpreadDamage
@@ -6286,7 +6286,7 @@ MammothTuskTeslaFragment1:
 	ValidTargets: Ground, Water, Air
 	Range: 3206
 	Report: shktrop1.aud
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: MISSILE
 		-TrailImage: litning
 	Warhead@Grenade: SpreadDamage
@@ -6634,7 +6634,7 @@ VolkovMagneticWeaponTesla:
 	Range: 5660
 	Burst: 2
 	Burstdelays: 9
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: 50CAL
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
@@ -6827,7 +6827,7 @@ VolkovMagneticWeaponIncendiaryTesla:
 	Range: 5660
 	Burst: 2
 	Burstdelays: 9
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: 50CAL
 	Warhead@HeavyCannon: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air

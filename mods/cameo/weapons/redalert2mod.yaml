@@ -9325,8 +9325,13 @@ Future_CoilerFriend:
 	ReloadDelay: 125
 	ValidTargets: RobotEnergizable
 	Projectile: InstantHit
-	Report: itesatta.wav
-	Projectile: TeslaZap
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
 	Warhead@Condition: GrantExternalCondition
 		Range: 1000
 		Condition: RobotEnergizable

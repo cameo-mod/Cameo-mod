@@ -2774,9 +2774,14 @@ TeslaFragmentLarge:
 RA2TeslaCoilCharge:
 	ReloadDelay: 25
 	Range: 3333
-	Report: iteschaa.wav
 	ValidTargets: TeslaCoil
-	Projectile: TeslaZap
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
 	Warhead@Con: GrantExternalCondition
 		Condition: TeslaCoilCharge
 		Duration: 75
@@ -2791,9 +2796,14 @@ RA2TeslaCoilCharge:
 RA2TeslaCoilCharge_cosmetic:
 	ReloadDelay: 100
 	Range: 3333
-	Report: iteschaa.wav
 	ValidTargets: TeslaCoil
-	Projectile: TeslaZap
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
 
 TeslaArmorDischargeDummy:
 	Inherits: ^LightMissile
@@ -2802,7 +2812,7 @@ TeslaArmorDischargeDummy:
 	ReloadDelay: 1
 	Range: 6666
 	-Report:
-	Projectile: TeslaZap
+	Projectile: LightningZap
 		-Image: DRAGON
 		-TrailImage: smokey
 	Warhead@LightMissile: SpreadDamage
