@@ -3183,7 +3183,7 @@ Player:
 		HighValueTargetTypes: fact.gdi, fact.nod, proc.gdi, proc.nod, weap, afld, hq.gdi, hq.nod, eye, tmpl, td_nod_templeprime, rafact.allies, rafact.soviet, rafact.japan, raproc.allies, raproc.soviet, jproc, raweap, ra_gigafactory, raweapa, modraweapj, dome.allies, dome.soviet, dome.japan, atek, stek, modjtek, gap, mslo, iron, pdox, jshrine, ra2gacnst, ra2nacnst, yrnacnst, ra2garefn, ra2narefn, yryarefn, ra2gaweap, ra2naweap, yrygweap, ra2gaairc, ra2naradr, ra2napsis, ra2gatech, ra2natech, yrygtech, yrygcomd, ra2gaweat, ra2gacsph, ra2namisl, ra2nairon, yrygppet, yryggntc, aa_cgcnst, aa_cgrefn, aa_cgweap, aa_cgradr, aa_cgtech, aa_cgionc, aa_cgchao, steel_qacst, steel_qref, steel_qaweap, steel_qatech, steel_qaorbit, latin_cgcnst, latin_cgauto, latin_cgweap, latin_cgspy, latin_ca12hit, nax_conyard, nax_refin, nax_weap, nax_radar, nax_tek, nax_tech, nax_rocket, nax2_conyard, nax2_refin; nax2_weap, nax2_radar, nax2_tech, nax2_meteorray, nax2_gcore, futu_egcnst, futu_egrefn, futu_egweap2, futu_egtf, futu_egtech, construction_yard.ixian, refinery.atreides, heavy_factory.ixian, outpost.ixian research_centre.ixian, starport.ixian, supercomputer, construction_yard.ordos, refinery.ordos, heavy_factory.ordos, outpost.ordos research_centre.ordos, starport.ordos, tsntmisl, tsntmislcabal, tsgtplug
 		HighValueTargetPriority: 50
 		AirToAirPriority: 25
-		BigAirThreats: gdifirehawk, mignuke, modbomber, rapierjumpjet, ra2beag, yrbpln1, ra2zep, yrdisk, aa_phoenix, steel_inspect, steel_cruiser, latin_mig, d2k_farasha, d2k_ixbomber, ordos_eye, ordos_wraith, scbattlecruiser, scwyvern, sccarrier, scgladius, scguardian, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign
+		BigAirThreats: gdifirehawk, mignuke, modbomber, rapierjumpjet, ra2beag, yrbpln1, ra2zep, yrdisk, aa_phoenix, steel_inspect, steel_cruiser, latin_mig, nax_zep, nax2_zep, nax_haunebu, nax_haunebu2, nax_dieglocke, nax_piercer, futu_cryo, future_harbinger, d2k_farasha, d2k_ixbomber, ordos_eye, ordos_wraith, scbattlecruiser, scwyvern, sccarrier, scgladius, scguardian, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
 		AirSquadTargetTypes:
 			heli: Aircraft, Ground, Naval
 			orca: Aircraft, Ground, Naval
@@ -4813,8 +4813,8 @@ Player:
 		MaxAircraft: 25
 		MaintainAirSuperiority: true
 		MaxAirSuperiority: 25
-		AirToAirUnits: heli, orca, nodvenom, gdifirehawk, yak, yaktesla, yakarmored, yaknuclear, mig, su57, raheli, rapierjumpjet, modkami, ra2falc, yrschp, yrbpln1, ra2hind, yrdisk, ra2shad, aa_phoenix, aa_pelican, d2k_air_drone, d2k_heavy_air_drone, d2k_farasha, steel_inspect, steel_twister, steel_grun, steel_cruiser, latin_yakolev, latin_mig, nax_haunebu, nax_haunebu2, nax_me262, nax_piercer, nax_dieglocke, nax_bf109
-		AirThreatUnits: heli, orca, nodvenom, gdifirehawk, tran.gdi, tran.nod, yak, yaktesla, yakarmored, yaknuclear, mig, su57, mignuke, hind, raheli, MH60, rapierjumpjet, modkami, modbomber, modhip, ratran, ra2falc, ra2beag, yrschp, yrbpln1, ra2hind, ra2zep, yrdisk, ra2shad, aa_phoenix, aa_pelican, d2k_air_drone, d2k_heavy_air_drone, d2k_farasha, steel_inspect, steel_twister, steel_grun, steel_cargoship, steel_cruiser, latin_yakolev, latin_mig, nax_haunebu, nax_haunebu2, nax_me262, nax_bf109, nax_piercer, nax_dieglocke
+		AirToAirUnits: heli, orca, nodvenom, gdifirehawk, yak, yaktesla, yakarmored, yaknuclear, mig, su57, raheli, rapierjumpjet, modkami, ra2falc, yrschp, yrbpln1, ra2hind, yrdisk, ra2shad, aa_phoenix, aa_pelican, d2k_air_drone, d2k_heavy_air_drone, d2k_farasha, steel_twister, steel_grun, steel_cruiser, latin_yakolev, latin_mig, nax_haunebu, nax_haunebu2, nax_me262, nax_bf109, nax_piercer, nax_haunebu, nax_haunebu2, nax_me262, nax_piercer, nax_dieglocke, nax_bf109, future_twister, futu_cryo, future_harbinger, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
+		AirThreatUnits: heli, orca, nodvenom, gdifirehawk, tran.gdi, tran.nod, yak, yaktesla, yakarmored, yaknuclear, mig, su57, mignuke, hind, raheli, MH60, rapierjumpjet, modkami, modbomber, modhip, ratran, ra2falc, ra2beag, yrschp, yrbpln1, ra2hind, ra2zep, yrdisk, ra2shad, aa_phoenix, aa_pelican, d2k_air_drone, d2k_heavy_air_drone, d2k_farasha, steel_inspect, steel_twister, steel_grun, steel_cargoship, steel_cruiser, latin_yakolev, latin_mig, nax_zep, nax2_zep, nax_haunebu, nax_haunebu2, nax_me262, nax_bf109, nax_piercer, nax_dieglocke, future_twister, futu_cryo, future_harbinger, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragonwc2_orc_dragon
 		#UnitBuilderMinCredits: 0
 		UnitQueues: Infantry, RAInfantry, SCZergInfantry, Vehicle, RAVehicle, Aircraft, RAAircraft, Naval, RANaval, Addons, Upgrades, Research, Promotions
 		UnitDelays:
@@ -6012,6 +6012,7 @@ Player:
 			#################### UnitsToBuild PROTOSS
 			scprobe: 10
 			sczealot: 3
+			scadept: 3
 			scdragoon: 5
 			scmanifold: 1
 			scanalogue: 3

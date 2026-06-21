@@ -1,0 +1,229 @@
+Container@STATISTICS_PANEL:
+	Width: WINDOW_WIDTH
+	Height: WINDOW_HEIGHT
+	Logic: StatisticsWindowLogic
+	Children:
+		ClickMask@MASK:
+			Width: WINDOW_WIDTH
+			Height: WINDOW_HEIGHT
+			Color: 00000099
+		Container@WINDOW:
+			X: (WINDOW_WIDTH - WIDTH) / 2
+			Y: (WINDOW_HEIGHT - HEIGHT) / 2
+			Width: 600
+			Height: 520
+			Children:
+				ColorBlock@WINDOW_BG:
+					Width: PARENT_WIDTH
+					Height: PARENT_HEIGHT
+					Color: 101520F2
+				Label@TITLE:
+					Y: 14
+					Width: PARENT_WIDTH
+					Height: 26
+					Align: Center
+					Font: Bold
+					Text: statistics.title
+				Button@CLOSE_BUTTON:
+					X: PARENT_WIDTH - 38
+					Y: 12
+					Width: 28
+					Height: 28
+					Key: escape
+					Background: button
+					Children:
+						Label@TEXT:
+							Width: PARENT_WIDTH
+							Height: PARENT_HEIGHT
+							Align: Center
+							VAlign: Middle
+							Font: Bold
+							Text: X
+				# Left summary column
+				Label@GAMES_PLAYED:
+					X: 24
+					Y: 50
+					Width: 150
+					Height: 22
+					Text: statistics.games-played
+				Label@GAMES_PLAYED_VALUE:
+					X: 178
+					Y: 50
+					Width: 110
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@GAMES_WON:
+					X: 24
+					Y: 76
+					Width: 150
+					Height: 22
+					Text: statistics.games-won
+				Label@GAMES_WON_VALUE:
+					X: 178
+					Y: 76
+					Width: 110
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@GAMES_LOST:
+					X: 24
+					Y: 102
+					Width: 150
+					Height: 22
+					Text: statistics.games-lost
+				Label@GAMES_LOST_VALUE:
+					X: 178
+					Y: 102
+					Width: 110
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@FACTIONS_PLAYED:
+					X: 24
+					Y: 128
+					Width: 150
+					Height: 22
+					Text: statistics.factions-played
+				Label@FACTIONS_PLAYED_VALUE:
+					X: 178
+					Y: 128
+					Width: 110
+					Height: 22
+					Align: Right
+					Font: Bold
+				# Right summary column
+				Label@ENEMIES_KILLED:
+					X: 312
+					Y: 50
+					Width: 160
+					Height: 22
+					Text: statistics.enemies-killed
+				Label@ENEMIES_KILLED_VALUE:
+					X: 476
+					Y: 50
+					Width: 100
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@BUILDINGS_DESTROYED:
+					X: 312
+					Y: 76
+					Width: 160
+					Height: 22
+					Text: statistics.buildings-destroyed
+				Label@BUILDINGS_DESTROYED_VALUE:
+					X: 476
+					Y: 76
+					Width: 100
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@RESOURCES_COLLECTED:
+					X: 312
+					Y: 102
+					Width: 160
+					Height: 22
+					Text: statistics.resources-collected
+				Label@RESOURCES_COLLECTED_VALUE:
+					X: 476
+					Y: 102
+					Width: 100
+					Height: 22
+					Align: Right
+					Font: Bold
+				Label@RESOURCES_SPENT:
+					X: 312
+					Y: 128
+					Width: 160
+					Height: 22
+					Text: statistics.resources-spent
+				Label@RESOURCES_SPENT_VALUE:
+					X: 476
+					Y: 128
+					Width: 100
+					Height: 22
+					Align: Right
+					Font: Bold
+				# Per-faction list column headers
+				Label@COL_FACTION:
+					X: 26
+					Y: 170
+					Width: 170
+					Height: 20
+					Font: Bold
+					Text: statistics.col-faction
+				Label@COL_GAMES:
+					X: 208
+					Y: 170
+					Width: 70
+					Height: 20
+					Align: Center
+					Font: Bold
+					Text: statistics.col-games
+				Label@COL_WINS:
+					X: 278
+					Y: 170
+					Width: 70
+					Height: 20
+					Align: Center
+					Font: Bold
+					Text: statistics.col-wins
+				Label@COL_KILLS:
+					X: 348
+					Y: 170
+					Width: 100
+					Height: 20
+					Align: Center
+					Font: Bold
+					Text: statistics.col-kills
+				Label@COL_DESTROYED:
+					X: 448
+					Y: 170
+					Width: 110
+					Height: 20
+					Align: Center
+					Font: Bold
+					Text: statistics.col-destroyed
+				ScrollPanel@FACTION_LIST:
+					X: 16
+					Y: 192
+					Width: PARENT_WIDTH - 32
+					Height: 312
+					Children:
+						ScrollItem@ROW_TEMPLATE:
+							Width: PARENT_WIDTH - 27
+							Height: 24
+							X: 2
+							Visible: false
+							EnableChildMouseOver: True
+							Children:
+								Label@NAME:
+									X: 8
+									Width: 170
+									Height: 24
+									VAlign: Middle
+								Label@GAMES:
+									X: 190
+									Width: 70
+									Height: 24
+									Align: Center
+									VAlign: Middle
+								Label@WINS:
+									X: 260
+									Width: 70
+									Height: 24
+									Align: Center
+									VAlign: Middle
+								Label@KILLS:
+									X: 330
+									Width: 100
+									Height: 24
+									Align: Center
+									VAlign: Middle
+								Label@DESTROYED:
+									X: 430
+									Width: 110
+									Height: 24
+									Align: Center
+									VAlign: Middle

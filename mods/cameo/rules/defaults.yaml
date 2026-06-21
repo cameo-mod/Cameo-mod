@@ -1483,9 +1483,9 @@
 		StartIfBelow: 100
 		DamageCooldown: 20
 	DamageMultiplier@FighterBuff:
-		Modifier: 90
+		Modifier: 85
 	FirepowerMultiplier@FighterBuff:
-		Modifier: 110
+		Modifier: 115
 	Aircraft:
 		CruiseAltitude: 4000
 		RepulsionSpeed: 40
@@ -1541,6 +1541,10 @@
 	Inherits@EXT: ^ExternalConditions
 	Inherits@detect: ^GenericAllDetector
 	Inherits@AircraftBuffs: ^AircraftBuffs
+	DamageMultiplier@HelicopterBuff:
+		Modifier: 95
+	FirepowerMultiplier@HelicopterBuff:
+		Modifier: 105
 	Aircraft:
 		CruiseAltitude: 2000
 		RepulsionSpeed: 40
@@ -1631,7 +1635,7 @@
 	Armor:
 		Type: Scout
 	DamageMultiplier@FlyingInfantryBuff:
-		Modifier: 75
+		Modifier: 80
 	RevealsShroud:
 		Range: 7000
 		Type: GroundPosition
@@ -1718,6 +1722,8 @@
 	Inherits@DefenseBuffs: ^DefenseBuffs
 	Armor:
 		Type: Concrete
+	DamageMultiplier@BunkerBuff:
+		Modifier: 90
 	Buildable:
 		BuildDurationModifier: 100
 	WithTurretSearchlight:
@@ -1727,6 +1733,8 @@
 	Inherits@DefenseBuffs: ^DefenseBuffs
 	Armor:
 		Type: Steel
+	DamageMultiplier@BunkerBuff:
+		Modifier: 95
 	Buildable:
 		BuildDurationModifier: 75
 
@@ -1736,6 +1744,8 @@
 	Inherits@DefenseBuffs: ^DefenseBuffs
 	Armor:
 		Type: Concrete
+	DamageMultiplier@AntiAirDefenseBuff:
+		Modifier: 80
 	Buildable:
 		BuildDurationModifier: 50
 	WithTurretSearchlight:
@@ -1748,6 +1758,8 @@
 		Type: Steel
 	Buildable:
 		BuildDurationModifier: 75
+	DamageMultiplier@BunkerBuff:
+		Modifier: 85
 	IgnoresDisguise:
 	WithTurretSearchlight:
 		RequiresCondition: !disabled
@@ -4934,7 +4946,7 @@
 		LowerValue: -20000
 	WithPhysicalStateColoredOverlay@CryoFreeze:
 		PhysicalStateName: Temperature
-		MinColor: 88BBFF78
+		MinColor: 88BBFF64
 		MaxColor: 4488FF08
 		UpperValue: -200
 		LowerValue: -20000
@@ -4948,7 +4960,7 @@
 	WithPhysicalStateColoredOverlay@Overheating:
 		PhysicalStateName: Temperature
 		MinColor: FF884408
-		MaxColor: FF402096
+		MaxColor: FF40207B
 		UpperValue: 20000
 		LowerValue: 200
 	WithIdleOverlay@overheat:

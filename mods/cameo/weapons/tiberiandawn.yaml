@@ -318,11 +318,13 @@ APCGunAA:
 BoxerCannonAG:
 	Inherits: ^SmallArms
 	Inherits: ^LightMissile
+	Inherits: ^Grenade
+	Inherits: ^MediumCannon
 	Inherits: ^Chaingun
 	Inherits: ^FlakWeapon
 	ValidTargets: Ground, Water, Trees
 	ReloadDelay: 11
-	Range: 4600
+	Range: 4860
 	#Report: gun13.aud
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Trees
@@ -334,6 +336,21 @@ BoxerCannonAG:
 		ValidTargets: Ground, Water, Trees
 		Damage: 2000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
@@ -351,7 +368,7 @@ BoxerCannonAG:
 
 BoxerCannonAA:
 	Inherits: BoxerCannonAG
-	Range: 6900
+	Range: 7290
 	ValidTargets: Air
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Air
@@ -361,6 +378,16 @@ BoxerCannonAA:
 		ValidTargets: Air
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		ValidTargets: Air
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Air
 	Warhead@Chaingun: SpreadDamage
 		ValidTargets: Air
 	Warhead@ChaingunPercentage: HealthPercentageDamage
@@ -369,6 +396,40 @@ BoxerCannonAA:
 		ValidTargets: Air
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
+
+SkyshieldCannon:
+	Inherits: ^SmallArms
+	Inherits: ^LightMissile
+	Inherits: ^Chaingun
+	Inherits: ^FlakWeapon
+	ValidTargets: Air
+	ReloadDelay: 11
+	Range: 13800
+	#Report: gun13.aud
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 1
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Air
+		Damage: 2000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 1
 
 ArtilleryShell:
 	Inherits: ^Grenade
