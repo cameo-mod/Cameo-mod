@@ -9,6 +9,7 @@
 #endregion
 
 using System;
+using System.Collections.Frozen;
 using System.Collections.Generic;
 using System.Linq;
 using OpenRA.Mods.Common;
@@ -24,7 +25,7 @@ namespace OpenRA.Mods.CA
 
 	public static class AIUtils
 	{
-		public static bool IsAreaAvailable<T>(World world, Player player, Map map, int radius, HashSet<string> terrainTypes)
+		public static bool IsAreaAvailable<T>(World world, Player player, Map map, int radius, FrozenSet<string> terrainTypes)
 		{
 			var cells = world.ActorsHavingTrait<T>().Where(a => a.Owner == player);
 

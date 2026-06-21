@@ -695,7 +695,7 @@ E4:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~hq.nod, ~!upblackhandflamer
+		Prerequisites: ~hand, hq.nod, ~!upblackhandflamer
 		Queue: Infantry, RAInfantry
 		Description: actor-e4.description
 	Mobile:
@@ -750,7 +750,7 @@ E5:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tmpl
+		Prerequisites: ~hand, tmpl
 		Queue: Infantry, RAInfantry
 		Description: actor-e5.description
 	Mobile:
@@ -947,7 +947,7 @@ RMBO.GDI:
 	Tooltip:
 		Name: GDI Commando
 	Buildable:
-		Prerequisites: ~eye, ~!upgdihavoc
+		Prerequisites: ~pyle, eye, ~!upgdihavoc
 	Armament:
 		Weapon: Sniper
 		LocalOffset: 128,0,256
@@ -977,7 +977,7 @@ RMBO.NOD:
 	Tooltip:
 		Name: Nod Commando
 	Buildable:
-		Prerequisites: ~tmpl, ~!upnodvenom
+		Prerequisites: ~hand, tmpl, ~!upnodvenom
 	ActorStatValues:
 		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_tiberiuminfusion, up_cyberneticmodifications
 
@@ -1002,7 +1002,7 @@ MCV.GDI:
 	Tooltip:
 		Name: GDI Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~fix.gdi
+		Prerequisites: ~weap, fix.gdi
 	Transforms:
 		IntoActor: fact.gdi
 	RenderSprites:
@@ -1017,7 +1017,7 @@ MCV.NOD:
 	Tooltip:
 		Name: Nod Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~fix.nod
+		Prerequisites: ~afld, fix.nod
 	Transforms:
 		IntoActor: fact.nod
 	RenderSprites:
@@ -1068,7 +1068,7 @@ HARV.GDI:
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Buildable:
-		Prerequisites: ~proc.gdi
+		Prerequisites: ~weap, proc.gdi
 		Queue: Vehicle, RAVehicle
 		Description: template-harvester.description
 	Tooltip:
@@ -1081,7 +1081,7 @@ HARV.NOD:
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Buildable:
-		Prerequisites: ~proc.nod, ~!upstealthsoldier
+		Prerequisites: ~afld, proc.nod, ~!upstealthsoldier
 		Queue: Vehicle, RAVehicle
 		Description: template-harvester.description
 	Tooltip:
@@ -1111,7 +1111,7 @@ APC:
 		Cost: 1200
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~pyle, ~!upgdiassaultapc
+		Prerequisites: ~weap, pyle, ~!upgdiassaultapc
 		Queue: Vehicle, RAVehicle
 		Description: actor-apc.description
 	Mobile:
@@ -1175,7 +1175,7 @@ ARTY:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~hq.nod, ~!upnodspecter
+		Prerequisites: ~afld, hq.nod, ~!upnodspecter
 		Queue: Vehicle, RAVehicle
 		Description: actor-arty.description
 	Mobile:
@@ -1235,7 +1235,7 @@ FTNK:
 		Cost: 800
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~hq.nod, ~!upnodftnk2
+		Prerequisites: ~afld, hq.nod, ~!upnodftnk2
 		Queue: Vehicle, RAVehicle
 		Description: actor-ftnk.description
 	Mobile:
@@ -1592,7 +1592,7 @@ HTNK:
 		Cost: 1600
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~eye, ~!upgdimammoth3
+		Prerequisites: ~weap, eye, ~!upgdimammoth3
 		Queue: Vehicle, RAVehicle
 		Description: actor-htnk.description
 	Mobile:
@@ -1670,16 +1670,17 @@ td_gdi_boxer:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@HighVelocityCannons: ^HighVelocityCannons
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Tooltip:
 		Name: Boxer
 	Valued:
-		Cost: 1100
+		Cost: 1550
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~hq.gdi
+		Prerequisites: ~weap, hq.gdi
 		Queue: Vehicle, RAVehicle
 		Description: actor-heavyaatank.description
 	UpdatesPlayerStatistics:
@@ -1725,7 +1726,7 @@ td_gdi_boxer:
 	KeepsDistance:
 	RenderRangeCircle:
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_cuttingedgeequipment
 
 MLRS:
 	Inherits: ^Tank
@@ -1749,7 +1750,7 @@ MLRS:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~hq.gdi
+		Prerequisites: ~weap, hq.gdi
 		Queue: Vehicle, RAVehicle
 		Description: actor-mlrs.description
 	Mobile:
@@ -1817,7 +1818,7 @@ gdiarcher:
 		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~eye
+		Prerequisites: ~weap, eye
 		Queue: Vehicle, RAVehicle
 		Description: actor-mlrs.description
 	Mobile:
@@ -1879,7 +1880,7 @@ MSSM:
 		Name: SSM Launcher
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~tmpl, ~!upchemicalssmlauncher
+		Prerequisites: ~afld, tmpl, ~!upchemicalssmlauncher
 		Queue: Vehicle, RAVehicle
 		Description: actor-mssm.description
 		Icon: icon
@@ -1955,7 +1956,7 @@ STNK:
 		Name: Stealth Tank
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~tmpl, ~!upchemicalstealthtank
+		Prerequisites: ~afld, tmpl, ~!upchemicalstealthtank
 		Queue: Vehicle, RAVehicle
 		Description: actor-stnk.description
 	Mobile:
@@ -2731,7 +2732,7 @@ AFLD:
 	ProvidesPrerequisite:
 		Prerequisite: vehicleproduction
 	Buildable:
-		BuildDuration: 250
+		BuildDuration: 375
 		BuildDurationModifier: 100
 		Prerequisites: ~fact.nod, proc.nod
 		Description: actor-afld.description
@@ -3557,6 +3558,7 @@ td_gdi_skyshield:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
+	Inherits@HighVelocityCannons: ^HighVelocityCannons
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Tooltip:
@@ -3582,11 +3584,9 @@ td_gdi_skyshield:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	Armament:
-		Weapon: BoxerCannonAA
+		Weapon: SkyshieldCannon
 		LocalOffset: 850,80,750, 800,-80,750
 		MuzzleSequence: muzzle
-	RangeMultiplier@Skyshield:
-		Modifier: 200
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -3602,7 +3602,7 @@ td_gdi_skyshield:
 	DetectCloaked:
 		Range: 6900
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_cuttingedgeequipment
 
 ATWR:
 	Inherits: ^TDDefense
@@ -3875,7 +3875,7 @@ CNCCA:
 		Name: Railgun Battleship
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~hq.gdi
+		Prerequisites: ~cncsyrd, hq.gdi
 		Queue: Naval, RANaval
 		Description: actor-ca.description
 	Mobile:
@@ -3967,7 +3967,7 @@ gdicarrier:
 		Name: GDI Super Carrier
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~eye
+		Prerequisites: ~cncsyrd, eye
 		Queue: Naval, RANaval
 		Description: actor-japancarrier.description
 	Selectable:
@@ -4166,7 +4166,7 @@ ssmsub:
 		Name: Ballistic Missile Submarine
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~hq.nod
+		Prerequisites: ~cncspen, hq.nod
 		Queue: Naval, RANaval
 		Description: actor-msub.description
 	Mobile:
@@ -4232,7 +4232,7 @@ nodlasercorvette:
 		Name: Nod Laser Corvette
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tmpl
+		Prerequisites: ~cncspen, tmpl
 		Queue: Naval, RANaval
 		Description: actor-nodlasercorvette.description
 	Mobile:

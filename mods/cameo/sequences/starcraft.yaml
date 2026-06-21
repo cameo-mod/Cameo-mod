@@ -2205,6 +2205,33 @@ sczealot:
 		Filename: sczealoticon.png
 		Offset: 0,0
 
+scadept:
+	Inherits: ^SCSmallShadow
+	Defaults:
+		Filename: AdeptSpritesheet.png
+		Offset: 0,-8
+	idle:
+		Start: 0
+		Facings: 8
+	stand:
+		Facings: 8
+	run:
+		Start: 8
+		Facings: 8
+		Length: 8
+	shoot:
+		Start: 112
+		Facings: 8
+		Length: 9
+		Tick: 20
+	die:
+		Filename: sczealotdeath.png
+		Length: 7
+		Tick: 80
+	icon:
+		Filename: scadepticon.png
+		Offset: 0,0
+
 scdragoon:
 	Defaults:
 		Filename: scdragoonidle.png
@@ -3748,6 +3775,10 @@ upflyerarmor:
 updragoonrange:
 	icon:
 		Filename: scsingularitychargeicon.png
+
+upglaves:
+	icon:
+		Filename: scupglavesicon.png
 
 upgroundweapons:
 	icon:
