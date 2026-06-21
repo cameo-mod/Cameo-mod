@@ -47,4 +47,4 @@ if "%MAPUID%"=="" (
 )
 
 echo [debug-launch] Loading %MAPNAME%  (uid !MAPUID!)
-call "%~dp0launch-game.cmd" Launch.Map=!MAPUID!
+call "%~dp0..\launch-game.cmd" Launch.Map=!MAPUID!
