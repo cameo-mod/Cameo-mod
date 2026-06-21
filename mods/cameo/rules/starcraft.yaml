@@ -339,6 +339,16 @@
 	ActorStatValues:
 		Upgrades: updragoonrange
 
+^ResonatingGlaves:
+	ReloadDelayMultiplier@upglaves:
+		RequiresCondition: upglaves
+		Modifier: 60
+	GrantConditionOnPrerequisite@upglaves:
+		Condition: upglaves
+		Prerequisites: upglaves
+	ActorStatValues:
+		Upgrades: upglaves
+
 ^ProtossGroundWeaponUpgrades:
 	FirepowerMultiplier@upgroundweapons:
 		Modifier: 115
@@ -6425,41 +6435,73 @@ SCZEALOT:
 SCADEPT:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
-	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@ResonatingGlaves: ^ResonatingGlaves
 	Tooltip:
 		Name: Adept
 	Valued:
-		Cost: 300
+		Cost: 500
 	Power:
-		Amount: -15
+		Amount: -25
 	Buildable:
-		BuildPaletteOrder: 20
-		Prerequisites: ~scgateway, ~!uplegionnaire
+		BuildPaletteOrder: 25
+		Prerequisites: ~scgateway
 		Queue: Infantry, RAInfantry
 		Description: actor-sczealot.description
 	Mobile:
 		Speed: 70
 	Health:
-		HP: 40000
+		HP: 36000
 	ChangesHealth@SelfHealing:
-		Step: 40
+		Step: 36
 	Shielded:
-		RegenAmount: 80
+		RegenAmount: 72
 	Armament:
-		Weapon: Psi-blades
+		Weapon: GlaveCanon
 	AttackFrontal:
 		FacingTolerance: 0
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 100
+		CooldownTicks: 400
+		DeployedCondition: phase
+		DeployingCondition: deploying
+		ShowSelectionBar: true
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+	RangeMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	DamageMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	FirepowerMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	DamageMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	SpeedMultiplier@Phase:
+		Modifier: 200
+		RequiresCondition: phase
+	WithColoredOverlay@Phase:
+		Color: FFFFFF22
+		RequiresCondition: phase
+	GrantCondition@untargetable:
+		Condition: untargetable
+		RequiresCondition: phase
 	WithInfantryBody:
 	Voiced:
 		VoiceSet: SCZealotVoice
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, upglaves
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -10572,6 +10614,22 @@ updragoonrange:
 		Image: updragoonrange
 	ProvidesPrerequisite:
 		Prerequisite: updragoonrange
+
+upglaves:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Resonating Glaves
+	Buildable:
+		BuildPaletteOrder: 85
+		Queue: Upgrades
+		Description: actor-updragoonrange.description
+		Prerequisites: ~sccitadelofadun, ~!upglaves
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upglaves
+	ProvidesPrerequisite:
+		Prerequisite: upglaves
 
 uppylon1:
 	Inherits: ^researched_upgrade.template

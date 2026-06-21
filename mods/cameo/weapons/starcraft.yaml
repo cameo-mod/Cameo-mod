@@ -3231,6 +3231,36 @@ ArbiterCannon:
 		CloseEnough: 485
 		AllowSnapping: true
 
+GlaveCanon:
+	Inherits: ^Grenade
+	Inherits: ^RailgunWeapon
+	ReloadDelay: 40
+	Range: 5472
+	Report: tphfi201.wav, tgofi200.wav
+	ValidTargets: Ground, Water, Trees
+	Projectile: Missile
+		ContrailLength: 0
+		Image: scdragoonprojectile
+		Speed: 822
+		Inaccuracy: 0
+		CloseEnough: 822
+		AllowSnapping: true
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 5000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 10000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 5
+
 Psi-blades:
 	Inherits: ^SwordWeapon
 	Report: pzehit00.aud
