@@ -3784,6 +3784,7 @@ RA2SNIPE:
 
 RA2ENGINEER:
 	Inherits: E6
+	-WithDeathAnimation: # yaml needs restructuring in the future
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackVoice
 	Inherits@VOICES: ^WithFeedbackVoiceLines

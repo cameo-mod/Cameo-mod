@@ -3037,10 +3037,14 @@
 			TiberiumDeath: 6
 			RadiationDeath: 6
 			#RA2VirusDeath: 6
-			ElectricityDeath: 7
 			ContaminatorMutate: 1
 			QuestionMutate: 1
 		CrushedSequence: die-crushed
+	WithDeathAnimation@effect:
+		DeathSequencePalette: player
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			ElectricityDeath: 7
 	DeathSounds@NORMAL:
 		DeathTypes: DefaultDeath, BulletDeath, SmallExplosionDeath, ExplosionDeath, RippedApartDeath
 		RequiresCondition: !chronobeamed

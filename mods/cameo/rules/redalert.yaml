@@ -13249,6 +13249,9 @@ RAMAID:
 		PlayerPalette: player
 	WithDeathAnimation:
 		DeathSequencePalette: player
+	WithDeathAnimation@effect:
+		DeathSequencePalette: player
+		DeathPaletteIsPlayerPalette: true
 	ActorStatValues:
 		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_energizedarrows
 

@@ -78,11 +78,8 @@ redguard:
 		Start: 452
 		Length: 18
 	die6:
-		Filename: e1.shp
-		Scale: 1
-		Start: 366
-		Length: 11
-		Tick: 80
+		Start: 452
+		Length: 18
 	die7:
 		Filename: electro.shp
 		Scale: 1
@@ -178,11 +175,8 @@ japanesesoldier:
 		Start: 452
 		Length: 18
 	die6:
-		Filename: e1.shp
-		Scale: 1
-		Start: 366
-		Length: 11
-		Tick: 80
+		Start: 452
+		Length: 18
 	die7:
 		Filename: electro.shp
 		Scale: 1
@@ -282,11 +276,8 @@ e1sniper:
 		Start: 324
 		Length: 18
 	die6:
-		Filename: e1.shp
-		Scale: 1
-		Start: 366
-		Length: 11
-		Tick: 80
+		Start: 324
+		Length: 18
 	die7:
 		Filename: electro.shp
 		Scale: 1
@@ -381,11 +372,8 @@ mortarsoldier:
 		Start: 452
 		Length: 18
 	die6:
-		Filename: e1.shp
-		Scale: 1
-		Start: 366
-		Length: 11
-		Tick: 80
+		Start: 452
+		Length: 18
 	die7:
 		Filename: electro.shp
 		Scale: 1
@@ -488,11 +476,8 @@ alliedmachinegunner:
 		Start: 324
 		Length: 18
 	die6:
-		Filename: e1.shp
-		Scale: 1
-		Start: 366
-		Length: 11
-		Tick: 80
+		Start: 324
+		Length: 18
 	die7:
 		Filename: electro.shp
 		Scale: 1
@@ -528,7 +513,7 @@ rae3:
 		Filename: e3icon.png
 
 raje3:
-	Inherits: ^InfantryOverlays
+	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: scybgm.shp
 		Scale: 1
@@ -589,26 +574,6 @@ raje3:
 	die3:
 		Start: 304
 		Length: 8
-	die4:
-		Filename: ra2_nukedie.shp
-		Length: *
-		Tick: 50
-	die5:
-		Filename: ra2_yuridie.shp
-		Length: *
-		Tick: 80
-	die6:
-		Filename: ra2_electro.shp
-		Length: *
-		Tick: 80
-	die7:
-		Filename: yr_virusd.shp
-		Length: *
-		Tick: 80
-	die8:
-		Filename: yr_brutdie.shp
-		Length: *
-		Tick: 80
 	die-crushed:
 		Filename: corpse1.shp
 		Scale: 1
@@ -1538,19 +1503,18 @@ rasamurai:
 		Tick: 80
 	# Burn
 	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
+		Start: 305
+		Length: 12
 		Tick: 80
 	# Tib
 	die6:
-		Filename: e1.shp
-		Start: 296
-		Length: 8
+		Start: 305
+		Length: 12
 		Tick: 80
 	# Electro
 	die7: ##########
 		Filename: electro.shp
+		Scale: 1
 		Length: *
 	die-crushed:
 		Filename: e1rot.shp
@@ -1650,19 +1614,18 @@ ramaid:
 		Tick: 80
 	# Burn
 	die5:
-		Filename: e1.shp
-		Start: 324
-		Length: 18
+		Start: 305
+		Length: 12
 		Tick: 80
 	# Tib
 	die6:
-		Filename: e1.shp
-		Start: 296
-		Length: 8
+		Start: 305
+		Length: 12
 		Tick: 80
 	# Electro
 	die7: ##########
 		Filename: electro.shp
+		Scale: 1
 		Length: *
 	die-crushed:
 		Filename: e1rot.shp
@@ -5178,18 +5141,14 @@ hakurei:
 		Tick: 80
 	# Burn
 	die5:
-		Filename: e1.shp
-		Start: 418
-		Length: 18
+		Start: 331
+		Length: 8
 		Tick: 80
-		Scale: 1
 	# Tib
 	die6:
-		Filename: e1.shp
-		Start: 366
-		Length: 11
+		Start: 331
+		Length: 8
 		Tick: 80
-		Scale: 1
 	# Electro
 	die7: ##########
 		Filename: electro.shp
@@ -5351,15 +5310,16 @@ rocketangel:
 	# Burn
 	die5:
 		Filename: e1.shp
-		Start: 418
+		Scale: 1
+		Start: 324
 		Length: 18
 		Tick: 80
 	# Tib
 	die6:
 		Filename: e1.shp
 		Scale: 1
-		Start: 366
-		Length: 11
+		Start: 324
+		Length: 18
 		Tick: 80
 	die7:
 		Filename: electro.shp
