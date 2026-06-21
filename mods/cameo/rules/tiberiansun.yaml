@@ -8105,7 +8105,7 @@ TSBGGY:
 		MuzzleSequence: muzzle
 		RequiresCondition: up_auxiliaryweapon
 	WithMuzzleOverlay:
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:
@@ -8162,7 +8162,7 @@ TSBIKE:
 		Weapon: TSBikeTibMissile
 		RequiresCondition: up_tiberiumcoremissiles
 		LocalOffset: -153,-204,509, -153,204,509
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:
@@ -9822,7 +9822,7 @@ TSLASSPID:
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:
@@ -9878,7 +9878,7 @@ tscabalcobra:
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:
@@ -9946,7 +9946,7 @@ tsspddrone:
 	Armor:
 		Type: Heavy
 	WithMuzzleOverlay:
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:
@@ -10009,7 +10009,7 @@ tscheavyspider:
 		LocalYaw: -100, 100
 		Recoil: 10
 	WithMuzzleOverlay:
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:

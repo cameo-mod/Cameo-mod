@@ -1411,7 +1411,7 @@ BIKE:
 		TurnSpeed: 80
 	AttackTurreted:
 		PauseOnCondition: disabled
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 		PauseOnCondition: disabled
 	WithMuzzleOverlay:
@@ -3981,7 +3981,7 @@ gdicarrier:
 		Step: 120
 	Armor:
 		Type: Superheavy
-	AttackFollowFrontal:
+	AttackFollow:
 		PauseOnCondition: disabled
 	DeliversCash:
 		Payload: 450
@@ -4794,12 +4794,10 @@ chembike:
 		TurnSpeed: 70
 	AttackTurreted:
 		PauseOnCondition: disabled
-	AttackFollowFrontal:
+	AttackFollow:
 		FacingTolerance: 512
 		PauseOnCondition: disabled
 	WithMuzzleOverlay:
-	AttackFrontal:
-		FacingTolerance: 0
 	RenderSprites:
 		Image: chembike
 	Voiced:
