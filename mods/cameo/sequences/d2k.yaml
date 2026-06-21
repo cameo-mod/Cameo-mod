@@ -767,12 +767,10 @@ power.atreides:
 		Start: 2772
 		Offset: -32,64
 	idle-zaps:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4756
+		Filename: power_atreides_zaps.png
 		Length: 10
-		Offset: -32,64
+		Scale: 1
+		Offset: 7,-2
 		Tick: 200
 	damaged-idle-zaps:
 		Filename: DATA.R16
@@ -912,10 +910,10 @@ outpost.atreides:
 		Start: 2770
 		Offset: -48,64
 	idle-dish:
-		Filename: DATA.R16
-		Start: 4786
+		Filename: outpost_atreides_dish.png
 		Length: 30
-		Offset: -46,64
+		Scale: 1
+		Offset: 15,-4
 	bib:
 		Filename: BLOXBASE.R8
 		Frames: 611, 612, 613, 631, 632, 633
@@ -1805,12 +1803,10 @@ power.harkonnen:
 		Start: 2932
 		Offset: -32,64
 	idle-zaps:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4766
+		Filename: power_harkonnen_zaps.png
 		Length: 10
-		Offset: -32,64
+		Scale: 1
+		Offset: 4,-6
 		Tick: 200
 	damaged-idle-zaps:
 		Filename: DATA.R16
@@ -2485,12 +2481,10 @@ power.ordos:
 		Start: 3092
 		Offset: -32,64
 	idle-zaps:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4776
+		Filename: power_ordos_zaps.png
 		Length: 10
-		Offset: -32,64
+		Scale: 1
+		Offset: 6,-5
 		Tick: 200
 	damaged-idle-zaps:
 		Filename: DATA.R16
