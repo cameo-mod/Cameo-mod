@@ -1,21 +1,24 @@
 #!/usr/bin/env python3
 """Procedural horizontal lightning-bolt sprite generator for Cameo-mod tesla zaps.
 
-Generates a realistic *slithering* plasma arc running left->right: a smooth sinuous
-channel (summed low-frequency waves + a touch of high-frequency wobble) with a
-white-hot core, layered electric-blue bloom, and occasional tapering branches.
-RGBA sprite sheet, one independent flicker per frame. License-clean procedural art
-(numpy + Pillow).
+Generates a realistic *fractal* plasma arc running left->right via recursive midpoint
+displacement (the same algorithm as the in-game LightningZap projectile): the channel
+starts straight, then each generation splits every segment at its midpoint and nudges it
+perpendicular to that local segment, with the nudge shrinking each pass, so every wiggle
+sprouts smaller self-similar sub-wiggles. White-hot core, layered electric-blue bloom and
+occasional tapering branches. RGBA sprite sheet, one independent flicker per frame.
+License-clean procedural art (numpy + Pillow).
 
-This is the look prototype / building block for a more realistic tesla zap.
+This mirrors the in-engine look so it can be eyeballed as a still without a rebuild.
 
 Usage:
     python tools/gen_lightning.py
-    python tools/gen_lightning.py --frames 4 --amp 0.22 --branches 2
+    python tools/gen_lightning.py --frames 4 --amp 0.22 --generations 6 --roughness 0.55
 """
 from __future__ import annotations
 
 import argparse
+import math
 import os
 import random
 
@@ -24,38 +27,28 @@ from PIL import Image, ImageDraw, ImageFilter
 from PIL.PngImagePlugin import PngInfo
 
 
-def _lerp(a, b, t):
-    return (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
-
-
-def bolt_path(x0, x1, yc, segments, amp, soft_prob, round_frac, rng, h):
-    """Main channel: random-height anchors connected by a MIX of hard (sharp) and
-    soft (rounded) turns, like real lightning. Each interior anchor is either kept as
-    a sharp corner or rounded into a short quadratic arc through its neighbours."""
-    n = max(3, segments)
-    axs = np.linspace(x0, x1, n + 1)
-    for i in range(1, n):                                    # jitter interior anchors along x
-        axs[i] += rng.uniform(-0.4, 0.4) * (x1 - x0) / n
-    ays = [yc + rng.uniform(-0.1, 0.1) * amp * h]            # endpoints stay near centre
-    ays += [yc + rng.uniform(-amp, amp) * h for _ in range(n - 1)]
-    ays += [yc + rng.uniform(-0.1, 0.1) * amp * h]
-    anchors = list(zip(axs.tolist(), ays))
-
-    pts = [anchors[0]]
-    for i in range(1, n):
-        prv, p, nxt = anchors[i - 1], anchors[i], anchors[i + 1]
-        if rng.random() < soft_prob:                         # soft turn: rounded arc
-            a = _lerp(p, prv, round_frac)
-            b = _lerp(p, nxt, round_frac)
-            steps = 8
-            for s in range(steps + 1):
-                t = s / steps
-                mt = 1.0 - t
-                pts.append((mt * mt * a[0] + 2 * mt * t * p[0] + t * t * b[0],
-                            mt * mt * a[1] + 2 * mt * t * p[1] + t * t * b[1]))
-        else:                                                # hard turn: sharp corner
-            pts.append(p)
-    pts.append(anchors[n])
+def bolt_path(x0, x1, yc, generations, roughness, amp, rng, h):
+    """Main channel via fractal midpoint displacement. Start with the straight x0->x1 segment,
+    then each generation split every segment at its midpoint and nudge it perpendicular to that
+    LOCAL segment (so sub-wiggles follow their parent wiggle = self-similar fractal detail). The
+    displacement shrinks by `roughness` each pass; the endpoints are never moved."""
+    pts = [(x0, yc), (x1, yc)]
+    offset = amp * h
+    for _ in range(max(1, generations)):
+        new = [pts[0]]
+        for (ax, ay), (bx, by) in zip(pts[:-1], pts[1:]):
+            mx, my = (ax + bx) / 2.0, (ay + by) / 2.0
+            sx, sy = bx - ax, by - ay
+            slen = math.hypot(sx, sy)
+            if slen > 1e-3:
+                px, py = -sy / slen, sx / slen
+                disp = rng.uniform(-1.0, 1.0) * offset
+                mx += px * disp
+                my += py * disp
+            new.append((mx, my))
+            new.append((bx, by))
+        pts = new
+        offset *= roughness
     return pts
 
 
@@ -101,7 +94,7 @@ def build_core(args, rng):
     d = ImageDraw.Draw(img)
 
     yc = h / 2 + rng.uniform(-h * 0.06, h * 0.06)
-    pts = bolt_path(2 * ss, w - 2 * ss, yc, args.segments, args.amp, args.soft, args.round_frac, rng, h)
+    pts = bolt_path(2 * ss, w - 2 * ss, yc, args.generations, args.roughness, args.amp, rng, h)
     draw_polyline(d, pts, int(round(args.core_width * ss)), 255)
 
     for _ in range(args.branches):
@@ -152,14 +145,13 @@ def build(args):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument("--out", default="tools/lightning_preview.png")
+    p.add_argument("--out", default="docs/lightning/preview.png")
     p.add_argument("--frames", type=int, default=4)
     p.add_argument("--width", type=int, default=256)
     p.add_argument("--height", type=int, default=64)
-    p.add_argument("--amp", type=float, default=0.22, help="turn amplitude (frac of height)")
-    p.add_argument("--segments", type=int, default=10, help="number of turns along the channel")
-    p.add_argument("--soft", type=float, default=0.3, help="probability a turn is soft/rounded vs hard/sharp (0=all sharp, 1=all rounded)")
-    p.add_argument("--round-frac", type=float, default=0.42, dest="round_frac", help="how rounded a soft turn is")
+    p.add_argument("--amp", type=float, default=0.22, help="largest (first-pass) wiggle, frac of height")
+    p.add_argument("--generations", type=int, default=6, help="fractal subdivision passes (segments = 2^generations)")
+    p.add_argument("--roughness", type=float, default=0.55, help="how fast the wiggle shrinks each pass (0..1); higher=jaggier")
     p.add_argument("--branches", type=int, default=2)
     p.add_argument("--core-width", type=float, default=2.0, dest="core_width")
     p.add_argument("--glow-radius", type=float, default=1.6, dest="glow_radius")
@@ -169,9 +161,15 @@ def main():
     p.add_argument("--rgb-core", type=int, nargs=3, default=(255, 255, 255), dest="rgb_core")
     p.add_argument("--rgb-glow", type=int, nargs=3, default=(110, 170, 255), dest="rgb_glow")
     p.add_argument("--seed", type=int, default=1)
+    p.add_argument("--bg", type=int, nargs=3, default=None, dest="bg",
+                   help="composite over this solid RGB background (e.g. 18 22 32) instead of transparent; "
+                        "the additive glow only reads against a dark scene like the game terrain")
     args = p.parse_args()
 
     img = build(args)
+    if args.bg is not None:
+        back = Image.new("RGBA", img.size, tuple(args.bg) + (255,))
+        img = Image.alpha_composite(back, img)
     os.makedirs(os.path.dirname(args.out) or ".", exist_ok=True)
     meta = PngInfo()
     meta.add_text("FrameSize", f"{args.width},{args.height}")

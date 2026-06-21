@@ -18,22 +18,18 @@ using OpenRA.Support;
 
 namespace OpenRA.Mods.Cameo.Graphics
 {
-	// Draws an instant electric bolt as a procedural plasma arc: a jagged channel with a mix of
-	// sharp and soft turns, a white-hot additive core, an additive blue glow, and a few tapering
-	// branches. The geometry is built in screen space each frame (cosmetic, CosmeticRandom-driven,
-	// so it flickers and is not part of the simulation), oriented from the emitter to the target.
-	//
-	// All sizes (swing amplitude, branch length, kink spacing) are FIXED world distances rather than
-	// fractions of the bolt's length, so the bolt reads at a consistent size whether it reaches a
-	// close or a distant target. The turn count scales with length to keep the kink spacing constant.
+	// Draws an instant electric bolt as a procedural fractal arc: the channel is built by recursive
+	// midpoint displacement (each segment splits at its midpoint, nudged perpendicular, with the nudge
+	// shrinking each generation) so every wiggle sprouts smaller self-similar sub-wiggles, like real
+	// lightning. A white-hot additive core, an additive blue glow, tapering branches and glowing plasma
+	// orbs (with radiating spark hairs) at both ends complete it. The geometry is built in screen space
+	// each frame (cosmetic, CosmeticRandom-driven, so it flickers and is not part of the simulation).
 	public sealed class LightningRenderable : IRenderable, IFinalizedRenderable
 	{
 		readonly WVec length;
-		readonly int segments;
-		readonly WDist segmentLength;
+		readonly int generations;
+		readonly float roughness;
 		readonly WDist amplitude;
-		readonly float softness;
-		readonly float roundFraction;
 		readonly int branches;
 		readonly WDist branchLength;
 		readonly WDist nodeRadius;
@@ -48,7 +44,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 		readonly float glowIntensity;
 
 		public LightningRenderable(WPos pos, int zOffset, in WVec length,
-			int segments, WDist segmentLength, WDist amplitude, float softness, float roundFraction,
+			int generations, float roughness, WDist amplitude,
 			int branches, WDist branchLength, WDist nodeRadius, int nodeHairs, WDist nodeHairLength,
 			Color coreColor, Color glowColor, WDist coreWidth,
 			WDist glowWidth, int glowAlpha, float glowScale, float glowIntensity)
@@ -56,11 +52,9 @@ namespace OpenRA.Mods.Cameo.Graphics
 			Pos = pos;
 			ZOffset = zOffset;
 			this.length = length;
-			this.segments = segments;
-			this.segmentLength = segmentLength;
+			this.generations = generations;
+			this.roughness = roughness;
 			this.amplitude = amplitude;
-			this.softness = softness;
-			this.roundFraction = roundFraction;
 			this.branches = branches;
 			this.branchLength = branchLength;
 			this.nodeRadius = nodeRadius;
@@ -80,7 +74,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 		public bool IsDecoration => true;
 
 		LightningRenderable With(WPos pos, int zOffset) =>
-			new(pos, zOffset, length, segments, segmentLength, amplitude, softness, roundFraction,
+			new(pos, zOffset, length, generations, roughness, amplitude,
 				branches, branchLength, nodeRadius, nodeHairs, nodeHairLength,
 				coreColor, glowColor, coreWidth, glowWidth, glowAlpha, glowScale, glowIntensity);
 
@@ -100,10 +94,6 @@ namespace OpenRA.Mods.Cameo.Graphics
 			if (wr.World.FogObscures(Pos) && wr.World.FogObscures(Pos + length))
 				return;
 
-			if (Game.Settings.Graphics.LaserGlow && glowScale > 0f)
-				wr.World.WorldActor.TraitOrDefault<GlowRenderer>()
-					?.RegisterGlow(Pos, Pos + length, glowColor, glowScale, intensity: glowIntensity);
-
 			var cr = Game.Renderer.WorldRgbaColorRenderer;
 			var src = wr.Screen3DPosition(Pos);
 			var tgt = wr.Screen3DPosition(Pos + length);
@@ -115,28 +105,52 @@ namespace OpenRA.Mods.Cameo.Graphics
 			var ampScreen = Math.Abs(wr.ScreenVector(new WVec(amplitude, WDist.Zero, WDist.Zero))[0]);
 			var branchScreen = Math.Abs(wr.ScreenVector(new WVec(branchLength, WDist.Zero, WDist.Zero))[0]);
 
-			// Turn count scales with world length so the spacing between kinks stays constant.
-			var segLenWorld = Math.Max(1, segmentLength.Length);
-			var n = Math.Clamp((int)Math.Round(length.Length / (double)segLenWorld), 3, Math.Max(3, segments));
-
 			var dx = tgt.X - src.X;
 			var dy = tgt.Y - src.Y;
 			var screenLen = (float)Math.Sqrt(dx * dx + dy * dy);
 
-			// For very short bolts the fixed swing could exceed the bolt's own on-screen length and
-			// tangle it; clamp the swing so it never dominates a near-point-blank shot.
+			// The largest (first-generation) displacement; capped so a near-point-blank bolt doesn't
+			// swing wider than it is long.
 			var maxDev = Math.Min(ampScreen, 0.45f * screenLen);
 
 			var rnd = Game.CosmeticRandom;
-			var main = BuildPath(src, tgt, maxDev, n, rnd);
+			var main = LightningGeometry.MidpointPath(src, tgt, maxDev, generations, roughness, rnd);
 
-			// Additive glow passes (wide+faint, then narrower+brighter) build a plasma-like bloom
-			// where the channel overlaps itself, then a hot near-white core on top.
+			// Soft gaussian bloom that FOLLOWS the bolt: the GlowRenderer only glows straight segments,
+			// so we approximate the jagged path with a few short beams chained along it (instead of one
+			// straight muzzle-to-target capsule). Gated by the "Weapon Glow Effects" setting; the segment
+			// count is capped per bolt so the post-process batch count stays bounded no matter how many
+			// bolts fire at once. Screen points are projected back to ground positions because the
+			// GlowRenderer batches in world space.
+			if (Game.Settings.Graphics.LaserGlow && glowScale > 0f && main.Count > 1)
+			{
+				var glow = wr.World.WorldActor.TraitOrDefault<GlowRenderer>();
+				if (glow != null)
+				{
+					const int MaxGlowSegments = 8;
+					var stepN = Math.Max(1, (main.Count - 1) / MaxGlowSegments);
+					var prev = wr.ProjectedPosition(main[0].XY.ToInt2());
+					for (var i = stepN; i < main.Count; i += stepN)
+					{
+						var cur = wr.ProjectedPosition(main[i].XY.ToInt2());
+						glow.RegisterGlow(prev, cur, glowColor, glowScale, intensity: glowIntensity);
+						prev = cur;
+					}
+
+					var end = wr.ProjectedPosition(main[^1].XY.ToInt2());
+					if (end != prev)
+						glow.RegisterGlow(prev, end, glowColor, glowScale, intensity: glowIntensity);
+				}
+			}
+
+			// Thin additive bolt drawn FROM the path: a tight inner glow and a hot near-white core. This
+			// is the always-on baseline (kept thin so it doesn't fatten the bolt); the soft wide halo is
+			// the gaussian GlowRenderer bloom above, which only kicks in with the Weapon Glow setting.
 			// NOTE: segments are drawn DISCONNECTED (no miter joins). RgbaColorRenderer's connected-line
 			// path mitres corners via a line intersection that "behaves badly" for near-parallel segments;
-			// our deliberately sharp turns occasionally double back, which blew the mitre vertex out to
-			// near-infinity and streaked a giant quad across the screen. Independent butt-capped segments
-			// avoid that entirely, and the joints are invisible on a thin additive bolt.
+			// the sharp fractal kinks would blow that mitre vertex out to near-infinity and streak a giant
+			// quad across the screen. Independent butt-capped segments avoid that, and the joints are
+			// invisible on a thin additive bolt.
 			var glowOuter = Color.FromArgb(glowAlpha, glowColor);
 			var glowInner = Color.FromArgb(Math.Min(255, glowAlpha + 50), glowColor);
 			cr.DrawLine(main, glowScreen, glowOuter, false, BlendMode.Additive);
@@ -163,94 +177,6 @@ namespace OpenRA.Mods.Cameo.Graphics
 				DrawNode(cr, src, nodeScreen, hairLenScreen, hairDev, coreScreen, glowScreen, rnd);
 				DrawNode(cr, tgt, nodeScreen, hairLenScreen, hairDev, coreScreen, glowScreen, rnd);
 			}
-		}
-
-		void DrawNode(RgbaColorRenderer cr, in float3 c, float radius, float hairLen, float hairDev,
-			float coreScreen, float glowScreen, MersenneTwister rnd)
-		{
-			// Soft additive orb: a faint wide halo, a brighter mid, then a hot near-white centre.
-			DrawDisc(cr, c, radius, Color.FromArgb(45, glowColor));
-			DrawDisc(cr, c, radius * 0.6f, Color.FromArgb(95, glowColor));
-			DrawDisc(cr, c, radius * 0.32f, Color.FromArgb(230, coreColor));
-
-			// Short jagged filaments radiating evenly around the orb (each slot jittered so it flickers).
-			for (var i = 0; i < nodeHairs; i++)
-			{
-				var ang = (i + (rnd.NextFloat() - 0.5f)) / nodeHairs * 2f * (float)Math.PI;
-				var len = hairLen * (0.6f + 0.7f * rnd.NextFloat());
-				DrawBranch(cr, BuildBranch(c, ang, len, hairDev, rnd), coreScreen, glowScreen);
-			}
-		}
-
-		static void DrawDisc(RgbaColorRenderer cr, in float3 c, float radius, Color color)
-		{
-			if (radius < 0.5f)
-				return;
-
-			cr.FillEllipse(
-				new float3(c.X - radius, c.Y - radius, c.Z),
-				new float3(c.X + radius, c.Y + radius, c.Z),
-				color, BlendMode.Additive);
-		}
-
-		List<float3> BuildPath(in float3 src, in float3 tgt, float maxDev, int n, MersenneTwister rnd)
-		{
-			var dx = tgt.X - src.X;
-			var dy = tgt.Y - src.Y;
-			var len = (float)Math.Sqrt(dx * dx + dy * dy);
-			if (len < 1f)
-				return new List<float3> { src, tgt };
-
-			var perpX = -dy / len;
-			var perpY = dx / len;
-
-			var ax = new float[n + 1];
-			var ay = new float[n + 1];
-			var az = new float[n + 1];
-			for (var i = 0; i <= n; i++)
-			{
-				var t = i / (float)n;
-				if (i > 0 && i < n)
-					t += (rnd.NextFloat() * 2f - 1f) * 0.4f / n;     // jitter interior anchors along the axis
-
-				var bx = src.X + dx * t;
-				var by = src.Y + dy * t;
-				var bz = src.Z + (tgt.Z - src.Z) * t;
-				var dev = (i == 0 || i == n ? 0.1f : 1f) * (rnd.NextFloat() * 2f - 1f) * maxDev;
-				ax[i] = bx + perpX * dev;
-				ay[i] = by + perpY * dev;
-				az[i] = bz;
-			}
-
-			var pts = new List<float3> { new(ax[0], ay[0], az[0]) };
-			for (var i = 1; i < n; i++)
-			{
-				if (rnd.NextFloat() < softness)
-				{
-					// Soft turn: a short quadratic arc through the anchor, rounding the corner.
-					var aX = ax[i] + (ax[i - 1] - ax[i]) * roundFraction;
-					var aY = ay[i] + (ay[i - 1] - ay[i]) * roundFraction;
-					var aZ = az[i] + (az[i - 1] - az[i]) * roundFraction;
-					var bX = ax[i] + (ax[i + 1] - ax[i]) * roundFraction;
-					var bY = ay[i] + (ay[i + 1] - ay[i]) * roundFraction;
-					var bZ = az[i] + (az[i + 1] - az[i]) * roundFraction;
-					const int steps = 6;
-					for (var s = 0; s <= steps; s++)
-					{
-						var tq = s / (float)steps;
-						var mt = 1f - tq;
-						pts.Add(new float3(
-							mt * mt * aX + 2f * mt * tq * ax[i] + tq * tq * bX,
-							mt * mt * aY + 2f * mt * tq * ay[i] + tq * tq * bY,
-							mt * mt * aZ + 2f * mt * tq * az[i] + tq * tq * bZ));
-					}
-				}
-				else
-					pts.Add(new float3(ax[i], ay[i], az[i]));        // hard turn: sharp corner
-			}
-
-			pts.Add(new float3(ax[n], ay[n], az[n]));
-			return pts;
 		}
 
 		static List<float3> BuildBranch(in float3 root, float ang, float length, float devScreen, MersenneTwister rnd)
@@ -288,6 +214,34 @@ namespace OpenRA.Mods.Cameo.Graphics
 				if (ca > 0)
 					cr.DrawLine(pts[i], pts[i + 1], coreScreen * 0.7f, Color.FromArgb(ca, coreColor), BlendMode.Additive);
 			}
+		}
+
+		void DrawNode(RgbaColorRenderer cr, in float3 c, float radius, float hairLen, float hairDev,
+			float coreScreen, float glowScreen, MersenneTwister rnd)
+		{
+			// Soft additive orb: a faint wide halo, a brighter mid, then a hot near-white centre.
+			DrawDisc(cr, c, radius, Color.FromArgb(45, glowColor));
+			DrawDisc(cr, c, radius * 0.6f, Color.FromArgb(95, glowColor));
+			DrawDisc(cr, c, radius * 0.32f, Color.FromArgb(230, coreColor));
+
+			// Short jagged filaments radiating evenly around the orb (each slot jittered so it flickers).
+			for (var i = 0; i < nodeHairs; i++)
+			{
+				var ang = (i + (rnd.NextFloat() - 0.5f)) / nodeHairs * 2f * (float)Math.PI;
+				var len = hairLen * (0.6f + 0.7f * rnd.NextFloat());
+				DrawBranch(cr, BuildBranch(c, ang, len, hairDev, rnd), coreScreen, glowScreen);
+			}
+		}
+
+		static void DrawDisc(RgbaColorRenderer cr, in float3 c, float radius, Color color)
+		{
+			if (radius < 0.5f)
+				return;
+
+			cr.FillEllipse(
+				new float3(c.X - radius, c.Y - radius, c.Z),
+				new float3(c.X + radius, c.Y + radius, c.Z),
+				color, BlendMode.Additive);
 		}
 	}
 }

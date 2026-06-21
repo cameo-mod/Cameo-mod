@@ -22,24 +22,19 @@ namespace OpenRA.Mods.Cameo.Projectiles
 		"a hot core, additive glow and occasional branches). A more realistic alternative to TeslaZap.")]
 	public class LightningZapInfo : IProjectileInfo
 	{
-		[Desc("Upper cap on the number of turns along the main channel (the actual count scales with",
-			"reach via " + nameof(SegmentLength) + " so the jaggedness looks the same at any range).")]
-		public readonly int Segments = 12;
+		[Desc("Number of fractal subdivision passes. The channel starts as a straight line and each pass",
+			"splits every segment at its midpoint, so the segment count is 2^Generations. More = finer",
+			"self-similar detail (and more vertices). Clamped to 1..8.")]
+		public readonly int Generations = 6;
 
-		[Desc("World distance between successive turns. The turn count is derived from the bolt's",
-			"reach divided by this, so a close and a distant bolt have the same kink density.",
-			"Larger = fewer, broader swings.")]
-		public readonly WDist SegmentLength = new(512);
+		[Desc("How quickly the wiggle shrinks each subdivision pass (0..1). The first pass displaces by",
+			"`" + nameof(Amplitude) + "`, the next by Amplitude*Roughness, and so on. Higher = jaggier",
+			"at small scales, lower = smoother.")]
+		public readonly float Roughness = 0.55f;
 
-		[Desc("Perpendicular swing of the channel as a fixed world distance, so the bolt reads at a",
-			"consistent size whether it reaches a close or a distant target. Larger = wider arcs.")]
-		public readonly WDist Amplitude = new(256);
-
-		[Desc("Probability (0..1) that a turn is a soft rounded bend rather than a sharp corner.")]
-		public readonly float Softness = 0.3f;
-
-		[Desc("How rounded a soft turn is (0..1).")]
-		public readonly float RoundFraction = 0.42f;
+		[Desc("Size of the largest (first-pass) wiggle, as a fixed world distance, so the bolt reads at a",
+			"consistent size whether it reaches a close or a distant target. Larger = wider swings.")]
+		public readonly WDist Amplitude = new(640);
 
 		[Desc("Number of branching offshoots.")]
 		public readonly int Branches = 2;
@@ -54,13 +49,13 @@ namespace OpenRA.Mods.Cameo.Projectiles
 		public readonly Color GlowColor = Color.FromArgb(110, 170, 255);
 
 		[Desc("Width of the bright core.")]
-		public readonly WDist CoreWidth = new(40);
+		public readonly WDist CoreWidth = new(36);
 
 		[Desc("Width of the glow halo around the core.")]
-		public readonly WDist GlowWidth = new(160);
+		public readonly WDist GlowWidth = new(90);
 
 		[Desc("Additive alpha of the glow pass (0-255). Higher = brighter bolt.")]
-		public readonly int GlowAlpha = 105;
+		public readonly int GlowAlpha = 185;
 
 		[Desc("Radius of the glowing plasma ball drawn at the firing point and impact point.",
 			"Set to 0 to disable the endpoint nodes.")]
@@ -72,9 +67,9 @@ namespace OpenRA.Mods.Cameo.Projectiles
 		[Desc("Length of each endpoint spark filament, as a fixed world distance.")]
 		public readonly WDist NodeHairLength = new(384);
 
-		[Desc("How long (in ticks) to draw the bolt. ~40ms per tick, so 2 = an ~80ms electric crack.",
-			"The geometry re-randomises every render frame, so the bolt still flickers within this window.")]
-		public readonly int Duration = 2;
+		[Desc("How long (in ticks) to draw the bolt. ~40ms per tick. The geometry re-randomises every",
+			"render frame, so the bolt still flickers within this window.")]
+		public readonly int Duration = 3;
 
 		[Desc("How long (in ticks) until applying damage. Can't be longer than `" + nameof(Duration) + "`.")]
 		public readonly int DamageDuration = 1;
@@ -86,11 +81,13 @@ namespace OpenRA.Mods.Cameo.Projectiles
 			"crosses (the world render sorts by Pos.Y + Pos.Z + ZOffset) instead of being occluded.")]
 		public readonly int ZOffset = 8192;
 
-		[Desc("Scale of the screen-space glow halo (only with the Weapon Glow Effects setting). 0 disables it.")]
+		[Desc("Radius scale of the soft screen-space gaussian bloom that follows the bolt (chained",
+			"GlowRenderer segments, only with the Weapon Glow Effects setting). 0 disables it.")]
 		public readonly float GlowScale = 1f;
 
-		[Desc("Brightness multiplier for the screen-space glow halo.")]
-		public readonly float GlowIntensity = 2.1f;
+		[Desc("Brightness multiplier for the screen-space gaussian bloom. Kept modest because the bloom",
+			"is built from several overlapping segments along the path that accumulate.")]
+		public readonly float GlowIntensity = 0.8f;
 
 		public IProjectile Create(ProjectileArgs args) { return new LightningZap(this, args); }
 	}
@@ -149,7 +146,7 @@ namespace OpenRA.Mods.Cameo.Projectiles
 				yield break;
 
 			yield return new LightningRenderable(args.Source, info.ZOffset, length,
-				info.Segments, info.SegmentLength, info.Amplitude, info.Softness, info.RoundFraction,
+				info.Generations, info.Roughness, info.Amplitude,
 				info.Branches, info.BranchLength, info.NodeRadius, info.NodeHairs, info.NodeHairLength,
 				info.CoreColor, info.GlowColor, info.CoreWidth,
 				info.GlowWidth, info.GlowAlpha, info.GlowScale, info.GlowIntensity);
