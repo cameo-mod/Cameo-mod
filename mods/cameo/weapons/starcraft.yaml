@@ -4033,7 +4033,13 @@ DroneAttack:
 
 ProbeAttack:
 	Inherits: ^WorkerAttack
-	Projectile: TeslaZap
+	Projectile: LightningZap
+		CoreWidth: 16
+		GlowWidth: 32
+		GlowAlpha: 80
+		GlowScale: 0
+		Branches: 0
+		NodeRadius: 0
 
 DarkSwarmSpawn:
 	ReloadDelay: 100
