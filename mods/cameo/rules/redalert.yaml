@@ -8483,6 +8483,10 @@ ra_largeairfield:
 		Amount: -50
 	RevealsShroud:
 		Range: 10000
+		# Footprint is all-passable (==== for the aircraft landing pads), so the default
+		# footprint-based reveal has no occupied cells to project from and gives no vision.
+		# Reveal from the building center instead, like the Soviet War Factory.
+		Type: CenterPosition
 	Buildable:
 		Prerequisites: ~rafact.soviet, dome.soviet, ~ra_doctrine_industrialefficiency
 		BuildDuration: 625
