@@ -1,0 +1,26 @@
+[Unit]
+Description=Cameo-mod Dedicated Server (port %i) by Blackrobe
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=cameo
+WorkingDirectory=/etc/Cameo-mod
+
+# Instance name (%i) is the listen port; per-realm display name comes from the env file.
+EnvironmentFile=/etc/cameo-realms/%i.env
+Environment=ListenPort=%i
+Environment=AdvertiseOnline=True
+
+ExecStart=/etc/Cameo-mod/launch-dedicated.sh
+# The script already loops internally; only restart if it crashes out entirely
+Restart=on-failure
+RestartSec=10
+
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=cameo-dedicated
+
+[Install]
+WantedBy=multi-user.target

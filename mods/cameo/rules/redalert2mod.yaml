@@ -12047,6 +12047,10 @@ nax_airfield:
 	-WithTurretSearchlight:
 	Tooltip:
 		Name: Naxis Airfield
+	# ^RA2Defense strips GivesBuildableArea; re-add it so this production building
+	# expands the buildable area like the other RA2 production structures.
+	GivesBuildableArea:
+		AreaTypes: building
 	Buildable:
 		BuildDuration: 750
 		BuildDurationModifier: 100
@@ -12863,6 +12867,10 @@ nax2_airfield:
 	-WithTurretSearchlight:
 	Tooltip:
 		Name: Schwarzer Mond Airfield
+	# ^RA2Defense strips GivesBuildableArea; re-add it so this production building
+	# expands the buildable area like the other RA2 production structures.
+	GivesBuildableArea:
+		AreaTypes: building
 	Buildable:
 		BuildDuration: 750
 		BuildDurationModifier: 100
