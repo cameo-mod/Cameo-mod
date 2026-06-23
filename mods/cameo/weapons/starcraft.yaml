@@ -3315,6 +3315,7 @@ PsiStorm:
 		Spread: 400
 		Damage: 4000
 		AffectsParent: True
+		ValidRelationships: Enemy, Neutral
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Delay: 6
