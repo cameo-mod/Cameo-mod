@@ -138,16 +138,13 @@ Player:
 
 ^D2KPersonalShield:
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
-	Shielded:
-		DamageRegenDelay: 125
-		RegenInterval: 1
-		ShieldsUpCondition: shielded
-		RequiresCondition: !disabled && (d2k_personal_shield || shieldgen || shielded)
-		SelectionBarColor: 8888FFFF
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
 		RequiresCondition: d2k_personal_shield
-	ChangesShield@personal_shield:
+	# Charges the shared Ixian shield layer (defined in ^D2K_AdvancedIxianTechnology) quickly when
+	# the researched Personal Shield upgrade is owned.
+	ChangesDamageLayer@personal_shield:
+		Layer: ixshield
 		Step: 40
 		Delay: 1
 		StartIfBelow: 100
@@ -235,15 +232,22 @@ Player:
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
 		RequiresCondition: d2k_advanced_ixian_technology
-	Shielded:
+	# Ixian shield as its own damage layer with a dedicated pool, drained via DamageLayerManager.
+	# Keeping it separate from the generic shieldgen/allied-bubble shield (^ShieldedShieldable) means
+	# it no longer collides with other factions' personal shields on shared units, and shields can stack.
+	DamageLayer@ixshield:
+		Name: ixshield
+		Priority: 10
+		MaxStrength: 0
+		MaxPercentageStrength: 100
+		InitialStrength: 0
 		DamageRegenDelay: 125
 		RegenAmount: 10
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
 		SelectionBarColor: 8888FFFF
-		RequiresCondition: !disabled && (d2k_advanced_ixian_technology || shieldgen || shielded)
-	ChangesShield@shielddischarge:
-		Delay: 10
+		RequiresCondition: !disabled && (d2k_advanced_ixian_technology || d2k_personal_shield)
+	DamageLayerManager:
 	ActorStatValues:
 		Upgrades: d2k_advanced_ixian_technology
 	Armor@shielded:
@@ -6768,7 +6772,7 @@ d2k_air_drone:
 		HpPerStep: 3125
 	ChangesHealth@SelfHealing:
 		Step: 25
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 50
 	AmmoPool:
 		Name: primary
@@ -8155,7 +8159,7 @@ siege_tank_ixian:
 		AddToArmyValue: true
 	Armor:
 		Type: Medium
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 48
 	Armament:
 		Weapon: D2K_155mm2
@@ -8240,7 +8244,7 @@ duelist_tank:
 		Step: 96
 	Armor:
 		Type: Heavy
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 158
 	Mobile:
 		Speed: 45
@@ -8325,7 +8329,7 @@ missile_tank_ixian:
 		Step: 20
 	Armor:
 		Type: Light
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 40
 	Armament:
 		Weapon: mtank_pri2
@@ -9161,7 +9165,7 @@ rocket_raider_ixian:
 		Step: 10
 	Armor:
 		Type: Medium
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 20
 	AmmoPool:
 		Ammo: 8
@@ -9254,7 +9258,7 @@ shock_raider:
 		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
 		Step: 16
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 32
 	Armor:
 		Type: Medium
@@ -9850,7 +9854,7 @@ combat_tank_ixian:
 		Step: 26
 	Armor:
 		Type: Medium
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 52
 	Mobile:
 		Speed: 65
@@ -13015,7 +13019,7 @@ storm_raider:
 		Step: 24
 	Armor:
 		Type: Medium
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 48
 	Mobile:
 		Locomotor: hover
@@ -13083,7 +13087,7 @@ storm_lasher:
 		Dimensions: 2,2
 	Health:
 		HP: 200000
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 160
 	FirepowerMultiplier@d2k_advanced_ixian_technology:
 		Modifier: 200
@@ -13180,7 +13184,7 @@ heavy_rocket_raider_ixian:
 		Step: 34
 	Armor:
 		Type: Heavy
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 68
 	AmmoPool:
 		Ammo: 8
@@ -13289,7 +13293,7 @@ combat_siege_tank:
 		Step: 32
 	Armor:
 		Type: Medium
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 64
 	Mobile:
 		Speed: 80
@@ -13361,7 +13365,7 @@ d2k_neocymek:
 		Step: 120
 	Armor:
 		Type: Heavy
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 240
 	Armament@Cannon:
 		Name: primary
@@ -13452,7 +13456,7 @@ d2k_jammer:
 		Step: 40
 	Armor:
 		Type: Medium
-	Shielded:
+	DamageLayer@ixshield:
 		InitialPercentageStrength: 100
 		MaxPercentageStrength: 100
 		RegenAmount: 80
@@ -13784,7 +13788,7 @@ d2k_ixdrone:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 24
 	Armament@PRIMARY:
 		Weapon: IxRailgunDroneBullet
@@ -14000,7 +14004,7 @@ d2k_ixbomber:
 		HpPerStep: 5555
 	ChangesHealth@SelfHealing:
 		Step: 44
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 76
 	Armament@PRIMARY:
 		Weapon: IxianEmpBomb
@@ -14094,7 +14098,7 @@ d2k_resonancedrone:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral
-	Shielded:
+	DamageLayer@ixshield:
 		RegenAmount: 20
 	AutoTarget:
 		ScanRadius: 10
@@ -14195,7 +14199,7 @@ d2k_farasha:
 		HpPerStep: 12500
 	ChangesHealth@SelfHealing:
 		Step: 100
-	Shielded:
+	DamageLayer@ixshield:
 		InitialPercentageStrength: 100
 		MaxPercentageStrength: 100
 		RegenAmount: 200
@@ -14314,7 +14318,7 @@ d2k_farasha_drone:
 		HP: 25000
 	ChangesHealth@SelfHealing:
 		Step: 10
-	Shielded:
+	DamageLayer@ixshield:
 		InitialPercentageStrength: 100
 		MaxPercentageStrength: 100
 		RegenAmount: 20

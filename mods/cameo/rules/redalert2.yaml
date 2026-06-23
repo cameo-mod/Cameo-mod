@@ -14254,15 +14254,21 @@ ra2_yuri_upgrade_psionicshields:
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
 		RequiresCondition: ra2_yuri_upgrade_psionicshields
-	Shielded:
+	# Personal psionic shield as its own damage layer, active only with the upgrade and an enemy
+	# nearby. The generic shieldgen/allied-bubble path stays on ^ShieldedShieldable's base pool.
+	DamageLayer@yuripsishield:
+		Name: yuripsishield
+		Priority: 10
+		MaxStrength: 0
+		MaxPercentageStrength: 100
+		InitialStrength: 0
 		DamageRegenDelay: 125
 		RegenAmount: 10
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
 		SelectionBarColor: 8888FFFF
-		RequiresCondition: !disabled && ((ra2_yuri_upgrade_psionicshields && EnemyInProximity) || shieldgen || shielded)
-	ChangesShield@shielddischarge:
-		Delay: 10
+		RequiresCondition: !disabled && ra2_yuri_upgrade_psionicshields && EnemyInProximity
+	DamageLayerManager:
 	GrantTimedCondition@supershielded:
 		Condition: supershielded
 		Duration: 40
@@ -14692,16 +14698,26 @@ ra2_yuri_upgrade_stealthsuits_proxy_actor:
 	DamageMultiplier@ra2_yuri_upgrade_stealthsuits:
 		RequiresCondition: ra2_yuri_upgrade_stealthsuits
 		Modifier: 90
-	Shielded:
+	# Yuri stealth-suit shield as its own damage layer (separate pool from the generic
+	# shieldgen/allied-bubble shield), so it stacks instead of colliding with other shields
+	# on units that inherit this template alongside another personal shield.
+	DamageLayer@yurishield:
+		Name: yurishield
+		Priority: 10
+		MaxStrength: 0
+		MaxPercentageStrength: 100
+		InitialStrength: 0
 		DamageRegenDelay: 125
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
-		RequiresCondition: !disabled && (ra2_yuri_upgrade_stealthsuits || shieldgen || shielded)
 		SelectionBarColor: 8888FFFF
+		RequiresCondition: !disabled && ra2_yuri_upgrade_stealthsuits
+	DamageLayerManager:
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
 		RequiresCondition: ra2_yuri_upgrade_stealthsuits
-	ChangesShield@personal_shield:
+	ChangesDamageLayer@yurishield:
+		Layer: yurishield
 		Step: 30
 		Delay: 1
 		StartIfBelow: 100
@@ -14715,8 +14731,6 @@ ra2_yuri_upgrade_stealthsuits_proxy_actor:
 	DamageMultiplier@shielded:
 		RequiresCondition: shielded
 		Modifier: 90
-	ChangesShield@shielddischarge:
-		Delay: 10
 	GrantConditionOnPrerequisite@ra2_yuri_upgrade_stealthsuits:
 		Condition: ra2_yuri_upgrade_stealthsuits
 		Prerequisites: ra2_yuri_upgrade_stealthsuits
