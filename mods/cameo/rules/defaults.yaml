@@ -1357,7 +1357,7 @@
 	FirepowerMultiplier@MainBattleTankBuff:
 		Modifier: 115
 	DamageMultiplier@MainBattleTankBuff:
-		Modifier: 90
+		Modifier: 85
 	Armor:
 		Type: Medium
 	RevealsShroud:
@@ -1374,7 +1374,7 @@
 	Inherits@TankBuffs: ^TankBuffs
 	Inherits@Crushes: ^VehicleCrusher
 	DamageMultiplier@HighTechTankBuff:
-		Modifier: 80
+		Modifier: 75
 	Armor:
 		Type: Medium
 	RevealsShroud:
@@ -1393,9 +1393,9 @@
 	ProducibleWithLevel@spyvehicles:
 		Prerequisites: vehicles.upgraded
 	DamageMultiplier@LineBreakerBuff:
-		Modifier: 75
+		Modifier: 70
 	FirepowerMultiplier@LineBreakerBuff:
-		Modifier: 150
+		Modifier: 140
 	Armor:
 		Type: Heavy
 	RevealsShroud:

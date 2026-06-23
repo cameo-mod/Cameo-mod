@@ -30,7 +30,7 @@ namespace OpenRA.Mods.Cameo.Projectiles
 		[Desc("How quickly the wiggle shrinks each subdivision pass (0..1). The first pass displaces by",
 			"`" + nameof(Amplitude) + "`, the next by Amplitude*Roughness, and so on. Higher = jaggier",
 			"at small scales, lower = smoother.")]
-		public readonly float Roughness = 0.55f;
+		public readonly float Roughness = 0.7f;
 
 		[Desc("Size of the largest (first-pass) wiggle, as a fixed world distance, so the bolt reads at a",
 			"consistent size whether it reaches a close or a distant target. Larger = wider swings.")]
@@ -41,6 +41,15 @@ namespace OpenRA.Mods.Cameo.Projectiles
 
 		[Desc("Length of a branching offshoot, as a fixed world distance.")]
 		public readonly WDist BranchLength = new(1024);
+
+		[Desc("Fractal subdivision passes for each branch, so a branch is a jagged mini-bolt rather",
+			"than a smooth curve. Kept lower than the main bolt's `" + nameof(Generations) + "` so forks",
+			"stay cheap. Clamped to 1..8.")]
+		public readonly int BranchGenerations = 3;
+
+		[Desc("Chance (0..1) that a branch spawns a smaller sub-fork, recursively up to a small depth cap,",
+			"so branches fork like real lightning. 0 disables sub-forks.")]
+		public readonly float SubBranchChance = 0.25f;
 
 		[Desc("Colour of the hot core.")]
 		public readonly Color CoreColor = Color.FromArgb(255, 255, 255);
@@ -55,7 +64,7 @@ namespace OpenRA.Mods.Cameo.Projectiles
 		public readonly WDist GlowWidth = new(90);
 
 		[Desc("Additive alpha of the glow pass (0-255). Higher = brighter bolt.")]
-		public readonly int GlowAlpha = 185;
+		public readonly int GlowAlpha = 255;
 
 		[Desc("Radius of the glowing plasma ball drawn at the firing point and impact point.",
 			"Set to 0 to disable the endpoint nodes.")]
@@ -87,7 +96,7 @@ namespace OpenRA.Mods.Cameo.Projectiles
 
 		[Desc("Brightness multiplier for the screen-space gaussian bloom. Kept modest because the bloom",
 			"is built from several overlapping segments along the path that accumulate.")]
-		public readonly float GlowIntensity = 0.8f;
+		public readonly float GlowIntensity = 1.2f;
 
 		public IProjectile Create(ProjectileArgs args) { return new LightningZap(this, args); }
 	}
@@ -147,7 +156,8 @@ namespace OpenRA.Mods.Cameo.Projectiles
 
 			yield return new LightningRenderable(args.Source, info.ZOffset, length,
 				info.Generations, info.Roughness, info.Amplitude,
-				info.Branches, info.BranchLength, info.NodeRadius, info.NodeHairs, info.NodeHairLength,
+				info.Branches, info.BranchLength, info.BranchGenerations, info.SubBranchChance,
+				info.NodeRadius, info.NodeHairs, info.NodeHairLength,
 				info.CoreColor, info.GlowColor, info.CoreWidth,
 				info.GlowWidth, info.GlowAlpha, info.GlowScale, info.GlowIntensity);
 		}
