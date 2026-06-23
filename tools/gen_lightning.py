@@ -86,6 +86,50 @@ def draw_tapered(draw, pts, w0):
         draw.line([a, b], fill=int(40 + 160 * frac), width=max(1, int(round(w0 * frac))))
 
 
+def fractal_segment(p0, p1, generations, roughness, amp, rng):
+    """Midpoint-displacement channel between two arbitrary points (same algorithm as the main bolt,
+    but free-floating instead of horizontal). Endpoints pinned; each pass splits every segment and
+    nudges the midpoint perpendicular to its LOCAL direction, shrinking by roughness."""
+    pts = [p0, p1]
+    offset = amp
+    for _ in range(max(1, generations)):
+        new = [pts[0]]
+        for (ax, ay), (bx, by) in zip(pts[:-1], pts[1:]):
+            mx, my = (ax + bx) / 2.0, (ay + by) / 2.0
+            sx, sy = bx - ax, by - ay
+            slen = math.hypot(sx, sy)
+            if slen > 1e-3:
+                px, py = -sy / slen, sx / slen
+                disp = rng.uniform(-1.0, 1.0) * offset
+                mx += px * disp
+                my += py * disp
+            new.append((mx, my))
+            new.append((bx, by))
+        pts = new
+        offset *= roughness
+    return pts
+
+
+def draw_fractal_branch(draw, p0, ang, length, generations, roughness, chance, w0, rng, depth=0):
+    """Jagged mini-bolt fork (mirrors the engine DrawFractalBranch): a fractal channel from p0 along
+    `ang`, drawn crisp with width+brightness tapering to the tip, optionally spawning a shorter, thinner
+    sub-fork from its first half. The wiggle scales with the branch's own length so short forks don't
+    thrash; the same `roughness` as the main bolt gives matching self-similar character."""
+    p1 = (p0[0] + math.cos(ang) * length, p0[1] + math.sin(ang) * length)
+    pts = fractal_segment(p0, p1, generations, roughness, length * 0.18, rng)
+    n = len(pts)
+    for i, (a, b) in enumerate(zip(pts[:-1], pts[1:])):
+        frac = 1.0 - i / max(1, n - 1)
+        w = max(1, int(round(w0 * (0.35 + 0.65 * frac))))
+        draw.line([a, b], fill=int(120 + 135 * frac), width=w)     # stays bright, only fades near the tip
+
+    if depth < 2 and length > 12 and chance > 0 and rng.random() < chance:
+        j = max(1, min(n - 1, n // 4 + int(rng.random() * n / 4)))
+        sub_ang = ang + rng.choice([-1, 1]) * rng.uniform(0.4, 0.9)
+        draw_fractal_branch(draw, pts[j], sub_ang, length * rng.uniform(0.4, 0.6),
+                            generations, roughness, chance, max(1, int(w0 * 0.7)), rng, depth + 1)
+
+
 def build_core(args, rng):
     """Bright channel (+ branches) of one bolt, rendered supersampled then downscaled."""
     ss = args.supersample
@@ -100,10 +144,14 @@ def build_core(args, rng):
     for _ in range(args.branches):
         i = rng.randint(len(pts) // 6, len(pts) * 5 // 6)
         sx, sy = pts[i]
-        ang = rng.choice([-1, 1]) * rng.uniform(0.5, 1.15)
-        length = rng.uniform(0.12, 0.30) * w
-        bx, by = slither_branch(sx, sy, ang, length, args.amp, rng, h)
-        draw_tapered(d, list(zip(bx, by)), int(round(args.core_width * ss * 0.7)))
+        # Root on a real path vertex and fork relative to the LOCAL bolt direction there, so the branch
+        # stays attached to the visible channel (matching the engine, which roots on main[idx]).
+        nx, ny = pts[min(i + 1, len(pts) - 1)]
+        base = math.atan2(ny - sy, nx - sx)
+        ang = base + rng.choice([-1, 1]) * rng.uniform(0.45, 1.0)
+        length = rng.uniform(0.14, 0.30) * w
+        draw_fractal_branch(d, (sx, sy), ang, length, args.branch_generations, args.roughness,
+                            args.sub_branch_chance, int(round(args.core_width * ss * 0.8)), rng)
 
     return img.resize((args.width, args.height), Image.LANCZOS)
 
@@ -151,8 +199,12 @@ def main():
     p.add_argument("--height", type=int, default=64)
     p.add_argument("--amp", type=float, default=0.22, help="largest (first-pass) wiggle, frac of height")
     p.add_argument("--generations", type=int, default=6, help="fractal subdivision passes (segments = 2^generations)")
-    p.add_argument("--roughness", type=float, default=0.55, help="how fast the wiggle shrinks each pass (0..1); higher=jaggier")
+    p.add_argument("--roughness", type=float, default=0.7, help="how fast the wiggle shrinks each pass (0..1); higher=jaggier")
     p.add_argument("--branches", type=int, default=2)
+    p.add_argument("--branch-generations", type=int, default=3, dest="branch_generations",
+                   help="fractal subdivision passes per branch (mirrors LightningZap BranchGenerations)")
+    p.add_argument("--sub-branch-chance", type=float, default=0.25, dest="sub_branch_chance",
+                   help="chance a branch spawns a sub-fork (mirrors LightningZap SubBranchChance); 0 disables")
     p.add_argument("--core-width", type=float, default=2.0, dest="core_width")
     p.add_argument("--glow-radius", type=float, default=1.6, dest="glow_radius")
     p.add_argument("--glow-gain", type=float, default=1.0, dest="glow_gain")

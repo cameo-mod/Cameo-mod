@@ -17,7 +17,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 {
 	public static class LightningGeometry
 	{
-		// Fractal midpoint displacement shared by the live bolt and its afterimage ghost. Start with the
+		// Fractal midpoint displacement shared by the main bolt and its forking branches. Start with the
 		// straight src->tgt segment, then each generation split every segment at its midpoint and nudge it
 		// perpendicular to that LOCAL segment (so sub-wiggles follow the orientation of their parent wiggle
 		// = self-similar fractal detail). The displacement shrinks by 'roughness' each generation; the

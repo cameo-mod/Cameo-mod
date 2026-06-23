@@ -21,8 +21,9 @@ namespace OpenRA.Mods.Cameo.Graphics
 	// Draws an instant electric bolt as a procedural fractal arc: the channel is built by recursive
 	// midpoint displacement (each segment splits at its midpoint, nudged perpendicular, with the nudge
 	// shrinking each generation) so every wiggle sprouts smaller self-similar sub-wiggles, like real
-	// lightning. A white-hot additive core, an additive blue glow, tapering branches and glowing plasma
-	// orbs (with radiating spark hairs) at both ends complete it. The geometry is built in screen space
+	// lightning. A white-hot additive core, an additive blue glow, fractal forking branches (each a jagged
+	// mini-bolt that can sub-fork) and glowing plasma orbs (with radiating spark hairs) at both ends
+	// complete it. The geometry is built in screen space
 	// each frame (cosmetic, CosmeticRandom-driven, so it flickers and is not part of the simulation).
 	public sealed class LightningRenderable : IRenderable, IFinalizedRenderable
 	{
@@ -32,6 +33,8 @@ namespace OpenRA.Mods.Cameo.Graphics
 		readonly WDist amplitude;
 		readonly int branches;
 		readonly WDist branchLength;
+		readonly int branchGenerations;
+		readonly float subBranchChance;
 		readonly WDist nodeRadius;
 		readonly int nodeHairs;
 		readonly WDist nodeHairLength;
@@ -45,7 +48,8 @@ namespace OpenRA.Mods.Cameo.Graphics
 
 		public LightningRenderable(WPos pos, int zOffset, in WVec length,
 			int generations, float roughness, WDist amplitude,
-			int branches, WDist branchLength, WDist nodeRadius, int nodeHairs, WDist nodeHairLength,
+			int branches, WDist branchLength, int branchGenerations, float subBranchChance,
+			WDist nodeRadius, int nodeHairs, WDist nodeHairLength,
 			Color coreColor, Color glowColor, WDist coreWidth,
 			WDist glowWidth, int glowAlpha, float glowScale, float glowIntensity)
 		{
@@ -57,6 +61,8 @@ namespace OpenRA.Mods.Cameo.Graphics
 			this.amplitude = amplitude;
 			this.branches = branches;
 			this.branchLength = branchLength;
+			this.branchGenerations = branchGenerations;
+			this.subBranchChance = subBranchChance;
 			this.nodeRadius = nodeRadius;
 			this.nodeHairs = nodeHairs;
 			this.nodeHairLength = nodeHairLength;
@@ -75,7 +81,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 
 		LightningRenderable With(WPos pos, int zOffset) =>
 			new(pos, zOffset, length, generations, roughness, amplitude,
-				branches, branchLength, nodeRadius, nodeHairs, nodeHairLength,
+				branches, branchLength, branchGenerations, subBranchChance, nodeRadius, nodeHairs, nodeHairLength,
 				coreColor, glowColor, coreWidth, glowWidth, glowAlpha, glowScale, glowIntensity);
 
 		public IRenderable WithZOffset(int newOffset) => With(Pos, newOffset);
@@ -157,14 +163,20 @@ namespace OpenRA.Mods.Cameo.Graphics
 			cr.DrawLine(main, glowScreen * 0.5f, glowInner, false, BlendMode.Additive);
 			cr.DrawLine(main, coreScreen, coreColor, false, BlendMode.Additive);
 
-			var branchDev = maxDev * 0.6f;
 			for (var b = 0; b < branches; b++)
 			{
-				var t = 0.2f + 0.6f * rnd.NextFloat();
-				var root = new float3(src.X + dx * t, src.Y + dy * t, src.Z + (tgt.Z - src.Z) * t);
-				var ang = (float)Math.Atan2(dy, dx) + (rnd.NextFloat() < 0.5f ? -1f : 1f) * (0.4f + 0.7f * rnd.NextFloat());
+				// Root each branch on an ACTUAL vertex of the jagged path, not the straight muzzle->target
+				// chord. The visible bolt has wandered up to maxDev off that chord, so a chord-rooted branch
+				// starts in empty space beside the bolt (detached) or stabs across it (crossed). Sprouting
+				// from a real path vertex keeps every fork attached, and forking relative to the LOCAL bolt
+				// direction there looks more natural than relative to the overall chord.
+				var idx = Math.Clamp((int)((0.2f + 0.6f * rnd.NextFloat()) * (main.Count - 1)), 0, main.Count - 2);
+				var root = main[idx];
+				var nb = main[idx + 1];
+				var localAng = (float)Math.Atan2(nb.Y - root.Y, nb.X - root.X);
+				var ang = localAng + (rnd.NextFloat() < 0.5f ? -1f : 1f) * (0.4f + 0.7f * rnd.NextFloat());
 				var blen = branchScreen * (0.7f + 0.6f * rnd.NextFloat());
-				DrawBranch(cr, BuildBranch(root, ang, blen, branchDev, rnd), coreScreen, glowScreen);
+				DrawFractalBranch(cr, root, ang, blen, 0, coreScreen, glowScreen, rnd);
 			}
 
 			// Glowing plasma "balls" with radiating spark hairs where the bolt grounds: one at the
@@ -199,6 +211,39 @@ namespace OpenRA.Mods.Cameo.Graphics
 			}
 
 			return pts;
+		}
+
+		// A branch as a jagged mini-bolt: the same fractal midpoint-displacement channel as the main bolt
+		// (so it looks like real forked lightning, not a smooth whisker), drawn from `root` along `ang`.
+		// It may recursively spawn a shorter, thinner sub-fork from a point on its first half, depth-capped
+		// and probability-gated so the per-frame segment count stays bounded.
+		void DrawFractalBranch(RgbaColorRenderer cr, in float3 root, float ang, float length,
+			int depth, float coreScreen, float glowScreen, MersenneTwister rnd)
+		{
+			const int MaxDepth = 2;
+			const float MinSubLengthScreen = 6f;
+
+			var tip = new float3(
+				root.X + (float)Math.Cos(ang) * length,
+				root.Y + (float)Math.Sin(ang) * length,
+				root.Z);
+
+			// Wiggle scales with the branch's own length so short forks don't thrash; reuse the main
+			// bolt's roughness for matching self-similar character.
+			var dev = length * 0.18f;
+			var gens = Math.Clamp(branchGenerations, 1, 8);
+			var pts = LightningGeometry.MidpointPath(root, tip, dev, gens, roughness, rnd);
+			DrawBranch(cr, pts, coreScreen, glowScreen);
+
+			if (depth < MaxDepth && length > MinSubLengthScreen
+				&& subBranchChance > 0f && rnd.NextFloat() < subBranchChance)
+			{
+				// Sub-fork off a point in the first half of this branch.
+				var j = Math.Clamp(pts.Count / 4 + (int)(rnd.NextFloat() * pts.Count / 4f), 1, pts.Count - 1);
+				var subAng = ang + (rnd.NextFloat() < 0.5f ? -1f : 1f) * (0.4f + 0.5f * rnd.NextFloat());
+				DrawFractalBranch(cr, pts[j], subAng, length * (0.4f + 0.2f * rnd.NextFloat()),
+					depth + 1, coreScreen, glowScreen, rnd);
+			}
 		}
 
 		void DrawBranch(RgbaColorRenderer cr, List<float3> pts, float coreScreen, float glowScreen)
