@@ -6466,6 +6466,9 @@ SCADEPT:
 		RegenAmount: 72
 	Armament:
 		Weapon: GlaveCanon
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: GlaveCanon
 	AttackFrontal:
 		FacingTolerance: 0
 	GrantTimedConditionOnDeploy:
@@ -6494,7 +6497,7 @@ SCADEPT:
 		Modifier: 200
 		RequiresCondition: phase
 	WithColoredOverlay@Phase:
-		Color: FFFFFF22
+		Color: 4488FF44
 		RequiresCondition: phase
 	GrantCondition@untargetable:
 		Condition: untargetable
