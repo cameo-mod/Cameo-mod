@@ -3660,6 +3660,10 @@ light_inf:
 	Inherits@NeedleGuns: ^D2K_NeedleGuns
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	# Re-inherit last: the Scout/Anti-Tank templates pull in ^RA2YuriStealthSuits,
+	# which redefines the shield traits keyed to its own upgrade and overwrites the
+	# Personal Shield condition. Re-applying ^D2KPersonalShield here restores it.
+	Inherits@personalshield: ^D2KPersonalShield
 	Tooltip:
 		Name: Light Infantry
 	Valued:
@@ -3782,6 +3786,10 @@ trooper:
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	# Re-inherit last: ^AntiTankAntiAirInfantryTemplate pulls in ^RA2YuriStealthSuits,
+	# which overwrites the shield traits with its own upgrade condition. Re-applying
+	# ^D2KPersonalShield here restores the Personal Shield condition.
+	Inherits@personalshield: ^D2KPersonalShield
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
@@ -3823,6 +3831,10 @@ twinrockettrooper:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	# Re-inherit last: ^AntiTankAntiAirInfantryTemplate pulls in ^RA2YuriStealthSuits,
+	# which overwrites the shield traits with its own upgrade condition. Re-applying
+	# ^D2KPersonalShield here restores the Personal Shield condition.
+	Inherits@personalshield: ^D2KPersonalShield
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
