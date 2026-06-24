@@ -2,8 +2,8 @@
 Description=Periodically update Cameo-mod dedicated server
 
 [Timer]
-OnCalendar=hourly
-RandomizedDelaySec=5min
+OnCalendar=*:0/20
+RandomizedDelaySec=2min
 Persistent=true
 
 [Install]
