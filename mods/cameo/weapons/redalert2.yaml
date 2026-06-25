@@ -2810,7 +2810,7 @@ TeslaArmorDischargeDummy:
 	Inherits: ^TeslaWeapon
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 1
-	Range: 6666
+	Range: 4500
 	-Report:
 	Projectile: LightningZap
 		-Image: DRAGON
@@ -2855,62 +2855,62 @@ TeslaArmorDischargeArc:
 	Inherits: TeslaArmorDischargeDummy
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 12
+		Damage: 6
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 24000
+		Damage: 12000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 12000
+		Damage: 6000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 12
+		Damage: 6
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 24000
+		Damage: 12000
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaArmorDischargeFragment1
 
 TeslaArmorDischargeFragment1:
 	Inherits: TeslaArmorDischargeArc
-	Range: 3333
+	Range: 2250
 	Warhead@LightMissile: SpreadDamage
-		Damage: 12000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 6
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 12000
-	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 6000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 3000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 6
+		Damage: 3
 	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 12000
+		Damage: 6000
 	Warhead@TeslaArc: FireShrapnel
 		Weapon: TeslaArmorDischargeFragment2
 
 TeslaArmorDischargeFragment2:
 	Inherits: TeslaArmorDischargeFragment1
-	Range: 2222
+	Range: 1500
 	Warhead@LightMissile: SpreadDamage
-		Damage: 8000
+		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 8000
-	Warhead@TeslaExtraDamage: SpreadDamage
 		Damage: 4000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 4
 	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 8000
+		Damage: 4000
 	-Warhead@TeslaArc: FireShrapnel
 
 RA2PortaTesla:
@@ -3148,12 +3148,34 @@ IonPulseDischarge:
 		ImpactActors: false
 		AffectsParent: true
 		ValidTargets: Ground, Water, Air
-	Warhead@Condition: GrantExternalCondition
+	Warhead@Condition1: GrantExternalCondition
+		Condition: CommandoDebuff
+		Range: 10000
+		Duration: 10
+		Delay: 1
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, Wall
+	Warhead@Condition2: GrantExternalCondition
+		Condition: CommandoDebuff
+		Range: 8000
+		Duration: 20
+		Delay: 2
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, Wall
+	Warhead@Condition3: GrantExternalCondition
+		Condition: CommandoDebuff
+		Range: 6000
+		Duration: 30
+		Delay: 3
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, Wall
+	Warhead@Condition4: GrantExternalCondition
+		Condition: CommandoDebuff
 		Range: 4000
 		Duration: 40
-		Condition: lockon
-		ValidTargets: lockable
-		ValidRelationships: Enemy
+		Delay: 4
+		ValidRelationships: Enemy, Neutral
+		ValidTargets: Ground, Water, Structure, Wall
 
 
 ####################################################################################################
