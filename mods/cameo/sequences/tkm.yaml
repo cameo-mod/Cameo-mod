@@ -758,6 +758,7 @@ tkmjug:
 tkmthermonaut:
 	Inherits: tkmjug
 	muzzle:
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp

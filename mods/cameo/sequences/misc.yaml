@@ -1679,6 +1679,9 @@ fb4:
 		ZOffset: 1023
 
 fire:
+	# Flames must read as fire regardless of terrain brightness or weather tint, so ignore world tint.
+	Defaults:
+		IgnoreWorldTint: true
 	1:
 		Filename: fire1.shp
 		Length: *
@@ -1704,6 +1707,8 @@ fire:
 # when passing. The shared `fire` keeps ZOffset 1023 for husk/building burns (must sit on top of
 # their own body sprite). Used by the groundfire actor.
 groundfire_flame:
+	Defaults:
+		IgnoreWorldTint: true
 	1:
 		Filename: fire1.shp
 		Length: *
@@ -1724,6 +1729,8 @@ groundfire_flame:
 # Same art as `fire` but scaled 1.5x for building critical-fire (a bigger, more engulfing blaze).
 # Kept separate so husk/ground fire stay native size. SHP scales blocky past ~2x, so don't push higher.
 fire_building:
+	Defaults:
+		IgnoreWorldTint: true
 	1:
 		Filename: fire1.shp
 		Length: *
@@ -1752,6 +1759,7 @@ fire_building:
 burn-l:
 	Defaults:
 		Filename: burn-l.shp
+		IgnoreWorldTint: true
 	idle:
 		Length: *
 		ZOffset: 512
@@ -1767,6 +1775,7 @@ burn-l:
 burn-m:
 	Defaults:
 		Filename: burn-m.shp
+		IgnoreWorldTint: true
 	idle:
 		Length: *
 		ZOffset: 512
@@ -1782,6 +1791,7 @@ burn-m:
 burn-s:
 	Defaults:
 		Filename: burn-s.shp
+		IgnoreWorldTint: true
 	idle:
 		Length: *
 		ZOffset: 512
@@ -2050,9 +2060,13 @@ nanodrone_overlay_big:
 		BlendMode: Subtractive
 
 explosion:
+	# Weapon explosions/impacts/napalm should read at full brightness regardless of terrain
+	# brightness or weather tint. The Defaults flag covers every sub-sequence below, including
+	# any added later, so new explosion effects stay untinted automatically.
 	Defaults:
 		Length: *
 		ZOffset: 2047
+		IgnoreWorldTint: true
 	nuke_explosion:
 		Filename: atomsfx.shp
 	dt_nuke_explosion:

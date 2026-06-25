@@ -1752,6 +1752,7 @@ tsftnk:
 		Facings: 64
 		Scale: 0.5
 	muzzle:
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp
@@ -5910,6 +5911,8 @@ tscloud1:
 # 	die: tscloud2d
 
 tsflameall:
+	# Flamethrower projectile trail (nozzle-to-target flame) must read as fire regardless of
+	# terrain brightness or weather tint.
 	idle:
 		Filename: tsflameall.shp
 		Scale: 0.5
@@ -5917,6 +5920,7 @@ tsflameall:
 		Facings: -8
 		Tick: 114
 		ZOffset: 1023
+		IgnoreWorldTint: true
 
 tsdroppod:
  	idle:

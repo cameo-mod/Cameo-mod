@@ -304,19 +304,22 @@
 		BasePremultiply: true
 	MenuPostProcessEffect:
 		MenuEffect: Desaturated
-	ConditionalTintPostProcessEffect@RAIN:
+	# Weather tints the world (terrain + units) via the terrain lighting rather than a fullscreen
+	# post-process, so weapon/flame visuals that set IgnoreWorldTint (and non-sprite visuals like
+	# beams and zaps) stay untinted by the weather.
+	ConditionalWorldTint@RAIN:
 		RequiresCondition: weather-rain
 		Red: 0.78
 		Green: 0.86
 		Blue: 1.05
 		Ambient: 0.78
-	ConditionalTintPostProcessEffect@SANDSTORM:
+	ConditionalWorldTint@SANDSTORM:
 		RequiresCondition: weather-sandstorm
 		Red: 1.05
 		Green: 0.94
 		Blue: 0.72
 		Ambient: 0.82
-	ConditionalTintPostProcessEffect@BLIZZARD:
+	ConditionalWorldTint@BLIZZARD:
 		RequiresCondition: weather-blizzard
 		Red: 0.82
 		Green: 0.90

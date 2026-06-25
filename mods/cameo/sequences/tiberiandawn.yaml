@@ -225,6 +225,7 @@ ftnk:
 		Facings: 32
 		InterpolatedFacings: 64
 	muzzle:
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp
@@ -1769,6 +1770,7 @@ e4:
 		Tick: 1600
 		ZOffset: -511
 	muzzle:
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp
@@ -3378,6 +3380,7 @@ nodftnk2:
 		Facings: 64
 	muzzle:
 		Scale: 1.25
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp
