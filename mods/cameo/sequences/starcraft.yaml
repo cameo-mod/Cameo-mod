@@ -1356,6 +1356,7 @@ scfirebat:
 		Facings: -8
 		Tick: 80
 	muzzle:
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp
@@ -1419,6 +1420,7 @@ scharakan:
 		Facings: -8
 		Tick: 80
 	muzzle:
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp
@@ -1804,6 +1806,7 @@ scmatador:
 		Filename: gunfire2.shp
 		Length: *
 	muzzleflame:
+		IgnoreWorldTint: true
 		Combine:
 			flame-n:
 				Filename: flame-n.shp
