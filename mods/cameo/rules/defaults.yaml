@@ -7310,6 +7310,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: factundeploy
 		Locomotor: heavywheeled
 		RequiresForceMove: true
+		RedeployAfterMove: true
 	TransformsIntoPassenger:
 		RequiresCondition: factundeploy
 		CargoType: Vehicle
