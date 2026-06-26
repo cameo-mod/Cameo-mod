@@ -51,6 +51,33 @@ def smoothstep(t):
     return t * t * (3.0 - 2.0 * t)
 
 
+def vtile_billow(fs: int, octaves: int, rng: np.random.Generator) -> np.ndarray:
+    """Billow (turbulence) noise that wraps vertically, in [0, 1].
+
+    Billow = sum of |signed noise| octaves. Unlike plain value noise (smooth
+    gradients), the absolute value creates rounded, overlapping cauliflower-style
+    lobes -- the signature voluminous structure of real fire/cloud art (this is
+    what the smooth-cone `cluster`/`tongue` styles lack vs the Factorio reference).
+
+    The coarse grid's bottom row is forced equal to its top row before upsampling,
+    so the field tiles seamlessly top-to-bottom. Scrolling it upward over the loop
+    (see `build`) then reads as turbulence rising and never breaks the loop.
+    """
+    out = np.zeros((fs, fs), dtype=np.float32)
+    amp = 1.0
+    amp_total = 0.0
+    for o in range(octaves):
+        g = max(2, 2 * (2 ** o))
+        grid = (rng.random((g + 1, g)).astype(np.float32) * 2.0 - 1.0)
+        grid[-1, :] = grid[0, :]                 # wrap vertically (seamless scroll)
+        up = Image.fromarray(grid, mode="F").resize((fs, fs), Image.BICUBIC)
+        out += amp * np.abs(np.asarray(up, dtype=np.float32))
+        amp_total += amp
+        amp *= 0.5
+    out /= amp_total
+    return np.clip(out, 0.0, 1.0)
+
+
 def streak_noise(fs: int, vfreq: int, hfreq: int, octaves: int,
                  rng: np.random.Generator) -> np.ndarray:
     """Vertically-stretched value noise: smooth in y, detailed in x, so thresholding
@@ -116,6 +143,235 @@ def color_ramp(temp: np.ndarray, stops) -> np.ndarray:
     return np.stack([r, g, b], axis=-1)
 
 
+def build_puff_frames(args, rng, fs, stops):
+    """Metaball/puff fire: the body is composited from many discrete rounded puffs that
+    rise, grow, cool and fade in a column -- the structure real/Factorio fire actually
+    has (a cauliflower of 3D-lit lobes), which a single shaped noise field can't make.
+
+    Each puff is a soft Gaussian disc with its own hot-centre/cool-rim temperature. Heat
+    accumulates where puffs overlap, so dense regions (the base, and lobe overlaps) go
+    white-hot while the sparse crown stays deep red -- the bright-lobe look. The loop is
+    seamless because every puff's life `t = (phase + offset) mod 1` wraps, and the life
+    envelope fades each puff to zero alpha at both ends so the wrap is invisible.
+    """
+    k = args.puff_count
+    ys, xs = np.mgrid[0:fs, 0:fs].astype(np.float32)
+    cx = fs * 0.5
+
+    # Per-puff constants (seeded once, reused every frame). Integer wander frequencies
+    # keep the horizontal wander periodic in t so the loop stays seamless.
+    offs = ((np.arange(k) + 0.5) / k).astype(np.float32)        # even phases -> full column
+    rng.shuffle(offs)
+    x0 = (rng.random(k).astype(np.float32) * 2 - 1)             # base column offset [-1,1]
+    rad0 = (0.6 + 0.7 * rng.random(k)).astype(np.float32)       # radius variation
+    wamp = (0.10 + 0.18 * rng.random(k)).astype(np.float32)     # wander amplitude (frame frac)
+    wfreq = rng.integers(1, 3, k).astype(np.float32)            # wander freq (integer -> periodic)
+    wphase = (rng.random(k) * 2 * np.pi).astype(np.float32)
+    heatk = (0.8 + 0.5 * rng.random(k)).astype(np.float32)      # per-puff heat jitter
+
+    base_px = args.base_y * fs                                   # foot height (pixels from top)
+    rise_px = args.tip_height * fs                              # how far a puff climbs
+    rad_px = args.puff_radius * fs                              # base puff radius (frame frac)
+
+    frames = []
+    n = args.frames
+    for f in range(n):
+        phase = f / n
+        heat = np.zeros((fs, fs), dtype=np.float32)
+        cover = np.zeros((fs, fs), dtype=np.float32)
+        hot = np.zeros((fs, fs), dtype=np.float32)      # per-puff lit highlights
+        for i in range(k):
+            t = (phase + offs[i]) % 1.0                         # this puff's life 0..1
+            # Eased rise: puffs climb slower early, so they linger low and pack the hot
+            # base into a dense bright bed (Factorio's solid white-hot foot).
+            trise = t ** args.puff_rise_ease
+            cyp = base_px - trise * rise_px
+            spread = args.width * fs * (1.0 - 0.35 * trise)
+            wander = wamp[i] * fs * np.sin(2 * np.pi * wfreq[i] * t + wphase[i])
+            cxp = cx + x0[i] * spread + wander
+            # Grows as it rises; fades in at birth and out at death so the wrap is unseen.
+            r = rad_px * rad0[i] * (0.55 + 0.8 * trise)
+            life = smoothstep(t / args.puff_fadein) * smoothstep((1.0 - t) / args.puff_fadeout)
+            # Flat-topped, crisp-rimmed profile (exponent > 1 on the normalised radius):
+            # a soft gaussian reads as a fuzzy orb; this keeps each lobe solid in the middle
+            # with a defined edge so they stack into a mass, like the painted Factorio puffs.
+            d2 = ((xs - cxp) ** 2 + (ys - cyp) ** 2) / (r * r)
+            disc = np.exp(-(d2 ** args.puff_sharp))
+            # A small bright highlight on the UPPER side of each puff: the fire's own glow
+            # catches the top of each lobe, giving it 3D roundness (the painted Factorio
+            # cue). Offset up by part of the radius, tighter than the puff itself.
+            hlr = (args.puff_hl_size * r) ** 2
+            hot += np.exp(-(((xs - cxp) ** 2 + (ys - (cyp - 0.35 * r)) ** 2) / hlr)) * life
+            # Temperature is driven by SCREEN HEIGHT (white-hot at the dense foot, cooling
+            # to deep red at the crown) -- this is the vertical gradient that reads as fire.
+            # Per-puff jitter keeps adjacent lobes at slightly different heats so the body
+            # boils instead of banding.
+            height_t = np.clip((base_px - cyp) / max(rise_px, 1.0), 0.0, 1.0)
+            ptemp = (args.heat_base - (args.heat_base - args.puff_tip_temp) * height_t) * heatk[i]
+            heat += disc * life * ptemp
+            cover += disc * life
+        # Coverage-weighted average temperature (NOT additive -- additive blows the whole
+        # mass to white). Overlaps stay as hot as their hottest puff, the foot reads white,
+        # the crown red. Alpha is a soft saturating union of coverage (solid heart, soft
+        # lobed edges). A small extra brightening where coverage is very high gives the
+        # white-hot dense cores without washing out the rest.
+        temp = heat / np.maximum(cover, 1e-3)
+        temp = (temp + 0.10 * np.clip(cover - 1.0, 0.0, None)
+                + args.puff_hl_strength * np.clip(hot, 0.0, 1.5))
+        temp = np.clip(temp * args.puff_gain, 0.0, 1.0)
+        rgb = color_ramp(temp, stops)
+        alpha = (1.0 - np.exp(-cover * args.puff_alpha)) * args.opacity
+        alpha = np.clip(alpha * smoothstep(np.clip(temp, 0.0, 1.0) / args.temp_floor), 0.0, 1.0)
+        out = np.zeros((fs, fs, 4), dtype=np.float32)
+        out[..., :3] = rgb * (alpha[..., None] > 0)
+        out[..., 3] = alpha * 255.0
+        frames.append(np.clip(out, 0, 255).astype(np.uint8))
+    return frames
+
+
+def _billow_column(args, fs, xs, ys, up, foot, cx_px, height, bill_lo, bill_hi, frac):
+    """One slim billow flame column (the `billow`/b6 look) centred at cx_px with its own
+    height and scroll phase `frac`. Returns (temp, alpha) arrays. Factored out so the
+    `campfire` style can forge several of these into one fire."""
+    def scroll(field, speed):
+        shift = (frac % 1.0) * fs * speed
+        i0 = int(np.floor(shift))
+        fr = shift - i0
+        return (1.0 - fr) * np.roll(field, -i0, axis=0) + fr * np.roll(field, -(i0 + 1), axis=0)
+
+    turb = 0.42 * scroll(bill_lo, 1.0) + 0.58 * scroll(bill_hi, 1.8)
+    turb = np.clip(turb, 0.0, 1.0) ** args.billow_gamma
+    up_pos = np.clip(up, 0.0, 1.0)
+    swayb = args.sway * fs * (turb - 0.5) * (0.3 + 0.9 * up_pos)
+    xcb = (xs - cx_px - swayb) / fs
+    prof = np.clip(1.0 - up_pos / np.maximum(height, 1e-3), 0.0, 1.0)
+    half = np.clip(args.width * (0.45 + 0.75 * prof), 1e-3, None)
+    rx = xcb / half
+    widthmod = 0.70 + 0.65 * turb
+    body = np.exp(-(rx * rx) / widthmod) * (0.45 + 1.15 * turb)
+    thr = args.tongue_thr + args.tongue_rise * up_pos
+    dens = smoothstep((body - thr) / args.tongue_soft)
+    tip = height + 0.14 * (turb - 0.5)
+    dens *= smoothstep((tip - up) / args.tip_soft)
+    dens = np.clip(dens * foot, 0.0, 1.0)
+    core = np.exp(-(rx * rx) / args.core_width) * np.clip(1.0 - up_pos / args.core_top, 0.0, 1.0)
+    mott = (1.0 - args.billow_mottle) + 2.0 * args.billow_mottle * turb
+    temp = np.clip((args.heat_base * dens + args.heat_core * core) * mott - args.heat_tip * up_pos, 0.0, 1.0)
+    alpha = np.clip(dens * args.opacity, 0.0, 1.0)
+    alpha = np.clip(alpha + core * dens * args.core_alpha, 0.0, 1.0) * smoothstep(dens / args.temp_floor)
+    return temp, np.clip(alpha, 0.0, 1.0)
+
+
+def build_campfire_frames(args, rng, fs, stops):
+    """Campfire: forge `--campfire-count` slim billow flames side by side, feet overlapping,
+    centre tongues tallest and outer ones shorter (a tent profile), so they merge into one
+    multi-tongued blaze. Each column has its own turbulence fields and scroll phase, so they
+    flicker independently. Max-merged (hottest/most-opaque column wins each pixel) so overlaps
+    stay bright with no dark seams. Loops seamlessly (every column's scroll wraps)."""
+    n = args.campfire_count
+    ys, xs = np.mgrid[0:fs, 0:fs].astype(np.float32)
+    base_y = max(args.base_y, 1e-3)
+    yn = ys / (fs - 1)
+    spread = args.campfire_spread * fs
+
+    # Rounded base: the foot follows a DOME (curving up toward the edges) instead of a flat
+    # horizontal line, so the bottom of the campfire reads as a rounded mound rather than a
+    # cut-off bar (the centre tongues reach the ground, the outer ones stop higher). xnorm is
+    # ~ -1..1 across the tongue spread.
+    half_spread = max(args.campfire_spread * 0.5, 1e-3)
+    xnorm = np.clip(np.abs(xs / (fs - 1) - 0.5) / half_spread, 0.0, 1.0)
+    # Raised-cosine base: a GENTLE rounded curve that is flat at the centre AND levels off at the
+    # edges (zero slope at both ends), so the base reads as a soft mound -- not a circle arc, which
+    # has near-vertical walls at its edges that looked like a cut-off half-pipe.
+    arc = 0.5 * (1.0 - np.cos(np.pi * xnorm))
+    base_y_x = np.clip(base_y - args.campfire_dome * arc, 0.05, 1.0)
+    up = (base_y_x - yn) / np.maximum(base_y_x, 1e-3)
+    foot = smoothstep(up / args.foot_soft)
+
+    subs = []
+    for j in range(n):
+        fx = (j / (n - 1) - 0.5) if n > 1 else 0.0          # -0.5 (left) .. +0.5 (right)
+        cxj = fs * 0.5 + fx * spread + (rng.random() - 0.5) * args.campfire_jitter * fs
+        tent = 1.0 - (abs(fx) * 2.0) * (1.0 - args.campfire_min_h)   # centre tall, edges short
+        hj = args.tip_height * tent
+        lo = vtile_billow(fs, args.octaves, rng)
+        hi = vtile_billow(fs, args.octaves + 2, rng)
+        subs.append((cxj, hj, lo, hi, rng.random()))
+
+    # Unified base bed: one wide, short, soft-edged hot ellipse at the foot. The separate
+    # tongues all rise out of it, so their individual bottoms merge into a single smooth
+    # CONVEX rounded base (the ellipse bulges gently down) instead of a scalloped/winged edge
+    # or a concave valley. This is what gives the "shallow arc" base without a cut or half-pipe.
+    bed_cx = fs * 0.5
+    bed_cy = base_y * (fs - 1)
+    bed_rx = max(args.campfire_bed_w * fs, 1.0)
+    bed_ry = max(args.campfire_bed_h * fs, 1.0)
+    bed = np.exp(-(((xs - bed_cx) / bed_rx) ** 2 + ((ys - bed_cy) / bed_ry) ** 2))
+    bed_temp = np.clip(args.campfire_bed_heat * bed, 0.0, 1.0)
+    bed_alpha = np.clip(bed * args.opacity, 0.0, 1.0)
+
+    # Ragged downward-licking fringe at the base (Factorio's signature): many thin tapering
+    # flame fingers hang below the mass with dark gaps between them, instead of a smooth edge.
+    # Two high-frequency vertical-streak fields define the finger pattern; blending them with a
+    # periodic phase makes the fingers flicker/dance over the loop. xnorm_signed limits the
+    # fringe to the flame's width.
+    fr_a = streak_noise(fs, 1, args.fringe_fingers, 3, rng)
+    fr_b = streak_noise(fs, 1, args.fringe_fingers, 3, rng)
+    xc_frame = xs / (fs - 1) - 0.5
+    fringe_xmask = np.exp(-((xc_frame / max(args.campfire_spread * 0.6, 1e-3)) ** 2))
+    yb = (yn - base_y) / max(args.fringe_len, 1e-3)          # 0 at foot, 1 at fringe bottom
+
+    frames = []
+    nf = args.frames
+    for f in range(nf):
+        ph = 2.0 * np.pi * f / nf
+        # Gentle breathing so the coals bed isn't dead-static against the flickering tongues.
+        flick = 0.9 + 0.1 * np.cos(ph)
+        temp_acc = bed_temp * flick
+        alpha_acc = bed_alpha * flick
+        for (cxj, hj, lo, hi, po) in subs:
+            tj, aj = _billow_column(args, fs, xs, ys, up, foot, cxj, hj, lo, hi, (f / nf) + po)
+            temp_acc = np.maximum(temp_acc, tj)
+            alpha_acc = np.maximum(alpha_acc, aj)
+
+        # Downward fringe: threshold rises with depth so each finger tapers to a point and the
+        # gaps widen lower down (the licking, ragged bottom). Flickers via the periodic blend.
+        fringe = np.clip(0.5 + np.cos(ph) * (fr_a - 0.5) + np.sin(ph) * (fr_b - 0.5), 0.0, 1.0)
+        below = np.clip(yb, 0.0, 1.0)
+        inband = ((yb >= -0.05) & (yb <= 1.0)).astype(np.float32)
+        # Sharper threshold (crisper fingers, clear dark gaps) that rises steeply with depth so
+        # each lick tapers to a point. finger_temp stays in the ORANGE band (not white) so the
+        # licks read as flame, not a pale smudge; they cool toward their tips.
+        finger = smoothstep((fringe - (0.40 + 0.55 * below)) / 0.07) * inband * fringe_xmask
+        finger_temp = np.clip(0.72 - 0.45 * below, 0.0, 1.0)
+        finger_alpha = np.clip(finger * args.opacity, 0.0, 1.0)
+        temp_acc = np.where(finger_alpha > alpha_acc, finger_temp, temp_acc)
+        alpha_acc = np.maximum(alpha_acc, finger_alpha)
+
+        rgb = color_ramp(temp_acc, stops)
+        out = np.zeros((fs, fs, 4), dtype=np.float32)
+        out[..., :3] = rgb * (alpha_acc[..., None] > 0)
+        out[..., 3] = alpha_acc * 255.0
+        frames.append(np.clip(out, 0, 255).astype(np.uint8))
+    return frames
+
+
+def downsample_frame(frame, ofs, ss):
+    """Premultiplied LANCZOS downsample for soft, anti-aliased edges (premultiply so
+    transparent pixels don't bleed dark colour into the flame edge)."""
+    if ss <= 1:
+        return frame
+    fim = Image.fromarray(frame, mode="RGBA")
+    pm = np.asarray(fim, dtype=np.float32)
+    pm[..., :3] *= pm[..., 3:4] / 255.0
+    small = Image.fromarray(np.clip(pm, 0, 255).astype(np.uint8), "RGBA").resize(
+        (ofs, ofs), Image.LANCZOS)
+    arr = np.asarray(small, dtype=np.float32)
+    a8 = arr[..., 3:4]
+    arr[..., :3] = np.where(a8 > 0, np.clip(arr[..., :3] * 255.0 / np.maximum(a8, 1e-3), 0, 255), 0)
+    return np.clip(arr, 0, 255).astype(np.uint8)
+
+
 def build(args) -> Image.Image:
     rng = np.random.default_rng(args.seed)
     n = args.frames
@@ -135,6 +391,11 @@ def build(args) -> Image.Image:
     # Fine high-frequency fields add Factorio-like granular flecks to the body.
     a_f = fractal_noise(fs, fs, args.octaves + 3, rng) - 0.5
     b_f = fractal_noise(fs, fs, args.octaves + 3, rng) - 0.5
+    # Billow turbulence fields for the `billow` style (rounded lobed structure).
+    # Two layers scrolling at different rates so the body churns instead of rigidly
+    # sliding; both wrap vertically for a seamless loop.
+    bill_lo = vtile_billow(fs, args.octaves, rng)
+    bill_hi = vtile_billow(fs, args.octaves + 2, rng)
 
     ys, xs = np.mgrid[0:fs, 0:fs].astype(np.float32)
     yn = ys / (fs - 1)          # 0 at top, 1 at bottom
@@ -146,6 +407,17 @@ def build(args) -> Image.Image:
     foot = smoothstep(up / args.foot_soft)  # gate everything below the foot
 
     stops = PALETTES[args.palette]
+
+    if args.style in ("puff", "campfire"):
+        builders = {
+            "puff": build_puff_frames,
+            "campfire": build_campfire_frames,
+        }
+        builder = builders[args.style]
+        raw = builder(args, rng, fs, stops)
+        frames = [downsample_frame(fr, ofs, ss) for fr in raw]
+        fs = ofs
+        return _assemble(frames, args, fs, n)
 
     frames = []
     for f in range(n):
@@ -162,7 +434,63 @@ def build(args) -> Image.Image:
         sway = args.sway * fs * flick * (0.25 + 0.75 * up)
         xc = (xs - cx - sway) / fs
 
-        if args.style == "cluster":
+        if args.style == "billow":
+            # Factorio-matched look: the body is BILLOW TURBULENCE (rounded overlapping
+            # lobes), not a smooth cone. Animated by a seamless upward scroll of the
+            # vertically-tiling billow fields, so the turbulence reads as rising fire and
+            # loops perfectly. Two layers scroll at different speeds so the mass churns.
+            def scroll(field, speed):
+                shift = (f / n) * fs * speed
+                i0 = int(np.floor(shift))
+                frac = shift - i0
+                return ((1.0 - frac) * np.roll(field, -i0, axis=0)
+                        + frac * np.roll(field, -(i0 + 1), axis=0))
+
+            turb = 0.42 * scroll(bill_lo, 1.0) + 0.58 * scroll(bill_hi, 1.8)
+            # Deepen the valleys between lobes: a gamma > 1 pushes low turbulence toward 0
+            # so dark gaps open up between the rounded lobes (Factorio reads as distinct
+            # overlapping puffs, not one filled blob).
+            turb = np.clip(turb, 0.0, 1.0) ** args.billow_gamma
+
+            up_pos = np.clip(up, 0.0, 1.0)
+            # Horizontal sway: lean the column left/right, more near the crown.
+            swayb = args.sway * fs * (turb - 0.5) * (0.3 + 0.9 * up_pos)
+            xcb = (xs - cx - swayb) / fs
+
+            # Column width envelope: wide dense foot tapering toward the tip.
+            prof = np.clip(1.0 - up_pos / np.maximum(args.tip_height, 1e-3), 0.0, 1.0)
+            half = np.clip(args.width * (0.45 + 0.75 * prof), 1e-3, None)
+            rx = xcb / half
+
+            # Lobed silhouette: turbulence locally WIDENS or PINCHES the column (it scales
+            # the Gaussian's falloff rate, not just the brightness), so the outline bulges
+            # outward into rounded lobes where turbulence is high and necks in where it is
+            # low -- the cauliflower edge. The central peak stays solid (heart never holed);
+            # thr rises with height so the base is a bright bed and the crown shreds into
+            # separate licks.
+            widthmod = 0.70 + 0.65 * turb
+            body = np.exp(-(rx * rx) / widthmod) * (0.45 + 1.15 * turb)
+            thr = args.tongue_thr + args.tongue_rise * up_pos
+            dens = smoothstep((body - thr) / args.tongue_soft)
+            tip = args.tip_height + 0.14 * (turb - 0.5)
+            dens *= smoothstep((tip - up) / args.tip_soft)      # soft tip cap
+            dens = np.clip(dens * foot, 0.0, 1.0)
+
+            # Temperature: white-hot dense base, cooling and darkening toward the tip;
+            # turbulence mottles the heart strongly so the core boils into clearly bright
+            # and dim lobes (Factorio's adjacent white-hot vs deep-orange puffs) instead of
+            # one flat gradient. `billow_mottle` sets how hard that bright/dim swing is.
+            core = np.exp(-(rx * rx) / args.core_width) * np.clip(1.0 - up_pos / args.core_top, 0.0, 1.0)
+            mott = (1.0 - args.billow_mottle) + 2.0 * args.billow_mottle * turb
+            temp = np.clip(
+                (args.heat_base * dens + args.heat_core * core) * mott
+                - args.heat_tip * up_pos,
+                0.0, 1.0)
+            rgb = color_ramp(temp, stops)
+            alpha = np.clip(dens * args.opacity, 0.0, 1.0)
+            alpha = np.clip(alpha + core * dens * args.core_alpha, 0.0, 1.0)
+            alpha *= smoothstep(dens / args.temp_floor)
+        elif args.style == "cluster":
             # Factorio-style bonfire: a squat, wide, DENSE body that only breaks into
             # separate wispy licks near the crown. One continuous "fire field" (cone +
             # streaks + fine turbulence) is cut by a height-rising threshold, so the base
@@ -237,21 +565,14 @@ def build(args) -> Image.Image:
         out[..., :3] = rgb * (alpha[..., None] > 0)
         out[..., 3] = alpha * 255.0
         frame = np.clip(out, 0, 255).astype(np.uint8)
-        if ss > 1:
-            # Downsample for soft, anti-aliased edges (premultiply so transparent
-            # pixels don't bleed dark color into the flame edge).
-            fim = Image.fromarray(frame, mode="RGBA")
-            pm = np.asarray(fim, dtype=np.float32)
-            pm[..., :3] *= pm[..., 3:4] / 255.0
-            small = Image.fromarray(np.clip(pm, 0, 255).astype(np.uint8), "RGBA").resize(
-                (ofs, ofs), Image.LANCZOS)
-            arr = np.asarray(small, dtype=np.float32)
-            a8 = arr[..., 3:4]
-            arr[..., :3] = np.where(a8 > 0, np.clip(arr[..., :3] * 255.0 / np.maximum(a8, 1e-3), 0, 255), 0)
-            frame = np.clip(arr, 0, 255).astype(np.uint8)
+        frame = downsample_frame(frame, ofs, ss)
         frames.append(frame)
-    fs = ofs
 
+    return _assemble(frames, args, ofs, n)
+
+
+def _assemble(frames, args, fs, n) -> Image.Image:
+    """Lay the finished frames out as a contact strip (--contact) or a packed grid sheet."""
     if args.contact:
         strip = np.zeros((fs, n * fs, 4), dtype=np.uint8)
         for i, fr in enumerate(frames):
@@ -275,11 +596,36 @@ def main():
     p.add_argument("--frame-size", type=int, default=48)
     p.add_argument("--supersample", type=int, default=2, help="internal render scale, downsampled for soft edges")
     p.add_argument("--grain", type=float, default=0.4, help="cluster: fine granular fleck strength")
+    p.add_argument("--billow-gamma", type=float, default=1.6, help="billow: lobe contrast (>1 deepens dark gaps between lobes)")
+    p.add_argument("--billow-mottle", type=float, default=0.5, help="billow: internal bright/dim lobe swing (0=flat, 1=strong)")
     p.add_argument("--seed", type=int, default=7)
     p.add_argument("--octaves", type=int, default=5)
     p.add_argument("--contact", action="store_true", help="emit a flat 1-row strip instead of a sheet")
-    p.add_argument("--style", choices=("tongue", "cluster"), default="cluster",
-                   help="cluster = Factorio-style multi-tongue (production); tongue = single soft flame")
+    p.add_argument("--style", choices=("tongue", "cluster", "billow", "puff", "campfire"), default="cluster",
+                   help="campfire = several slim billow tongues forged together; puff = Factorio metaball lobes; billow = turbulence lobes; cluster = streak-carved cone; tongue = single soft flame")
+    # Campfire style (forge N slim billow columns)
+    p.add_argument("--campfire-count", type=int, default=6, help="campfire: number of slim flame tongues forged together")
+    p.add_argument("--campfire-spread", type=float, default=0.46, help="campfire: how far the tongue feet spread (frame frac)")
+    p.add_argument("--campfire-min-h", type=float, default=0.5, help="campfire: outer-tongue height as a fraction of the centre tongue")
+    p.add_argument("--campfire-jitter", type=float, default=0.04, help="campfire: random horizontal jitter of each tongue foot")
+    p.add_argument("--campfire-dome", type=float, default=0.0, help="campfire: curves the foot line up at the edges; 0 = flat (the base bed does the rounding instead)")
+    p.add_argument("--campfire-bed-w", type=float, default=0.15, help="campfire: base-bed half-width (frame frac) unifying the tongue feet into one rounded base")
+    p.add_argument("--campfire-bed-h", type=float, default=0.05, help="campfire: base-bed half-height (frame frac); small = shallow convex bottom")
+    p.add_argument("--campfire-bed-heat", type=float, default=1.0, help="campfire: base-bed temperature (1 = white-hot)")
+    p.add_argument("--fringe-fingers", type=int, default=11, help="campfire: number of downward-licking base flame fingers (Factorio ragged base)")
+    p.add_argument("--fringe-len", type=float, default=0.16, help="campfire: how far the base fingers lick downward (frame frac); 0 disables")
+    # Puff (metaball) style
+    p.add_argument("--puff-count", type=int, default=34, help="puff: number of rising puffs (more = denser cauliflower)")
+    p.add_argument("--puff-radius", type=float, default=0.16, help="puff: base puff radius (frame frac)")
+    p.add_argument("--puff-gain", type=float, default=1.0, help="puff: heat->white-hot gain (higher = brighter cores)")
+    p.add_argument("--puff-alpha", type=float, default=2.2, help="puff: coverage->alpha steepness (higher = more solid)")
+    p.add_argument("--puff-fadein", type=float, default=0.18, help="puff: birth fade-in fraction of life")
+    p.add_argument("--puff-fadeout", type=float, default=0.45, help="puff: death fade-out fraction of life")
+    p.add_argument("--puff-tip-temp", type=float, default=0.28, help="puff: temperature at the crown (lower = redder/darker top)")
+    p.add_argument("--puff-sharp", type=float, default=1.5, help="puff: lobe edge sharpness (1=soft gaussian, >1=flat-top crisp rim)")
+    p.add_argument("--puff-rise-ease", type=float, default=1.3, help="puff: >1 makes puffs linger low (denser hot base)")
+    p.add_argument("--puff-hl-size", type=float, default=0.5, help="puff: highlight size relative to puff radius")
+    p.add_argument("--puff-hl-strength", type=float, default=0.35, help="puff: highlight brightness boost (3D lit-lobe cue)")
     # Cluster style
     p.add_argument("--tongues", type=int, default=9, help="cluster: horizontal streak count (tongue density)")
     p.add_argument("--streak-v", type=int, default=2, help="cluster: vertical streak coherence (lower = taller licks)")

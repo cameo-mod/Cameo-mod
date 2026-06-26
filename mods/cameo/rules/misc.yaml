@@ -435,7 +435,8 @@ groundfire:
 		Image: smoke_fire_glow
 		Sequences: idle
 		Palette: effect
-		SpawnFrequency: 6, 10
+		# Interval (ticks) between smoke puffs, lower = more smoke. Optimal is 6, 10.
+		SpawnFrequency: 4, 8
 		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks). The engine plays
 		# the sprite with PlayRepeating; a longer Duration loops it and pops a fresh puff back in.
 		Duration: 64
@@ -443,11 +444,14 @@ groundfire:
 		Gravity: 30, 70
 		TurnRate: 2
 		Offset: 0,0,128
-	KillsSelf:
-		RemoveInstead: true
-		# Lifetime in ticks (25/sec): 125-250 = 5-10s. The fire visual loops and the smoke emitter
-		# runs for the whole lifetime.
-		Delay: 125, 250
+	# Lifetime 125-250 ticks (5-10s @ 25/sec), then removes itself. Fades the fire in (10 ticks,
+	# ~400ms) at spawn and out before removal so it doesn't pop. Replaces KillsSelf (the lifetime
+	# is owned here so the fade-out can be timed against it). The fire visual loops and the smoke
+	# emitter runs for the whole lifetime.
+	WithLifetimeFade:
+		Duration: 125, 250
+		FadeInTicks: 10
+		FadeOutTicks: 10
 
 BLASTRADIUS.atomic:
 	Inherits: ^BlastRadiusIndicator

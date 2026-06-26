@@ -3437,7 +3437,8 @@
 		Image: smoke_building_fire_glow
 		Sequences: idle
 		Palette: effect
-		SpawnFrequency: 6, 10
+		# Interval (ticks) between smoke puffs, lower = more smoke.
+		SpawnFrequency: 4, 8
 		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks); a longer Duration
 		# loops the one-shot sprite and pops a fresh puff back in. See groundfire in misc.yaml.
 		Duration: 64
