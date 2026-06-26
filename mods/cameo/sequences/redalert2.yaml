@@ -8069,8 +8069,11 @@ ra2_chronosk:
 		ZOffset: 1023
 
 ra2_initfire:
+	# Burning-actor flame overlay (PhysicalState Overheating) must read as fire regardless of
+	# terrain brightness or weather tint.
 	Defaults:
 		Filename: ra2_fire01.shp
+		IgnoreWorldTint: true
 	idle:
 		Length: *
 		ZOffset: 1023
