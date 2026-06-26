@@ -1915,11 +1915,14 @@ snowflake:
 # Procedural RGBA fire-lit smoke puff (tools/gen_fire_smoke_glow.py). Same 32-frame
 # timing as smoke_dark, but with a subtle baked amber glow at the base for groundfire.
 smoke_fire_glow:
+	# Fire-lit glow puff of ground fire — emissive, must read as fire regardless of terrain
+	# brightness or weather tint.
 	idle:
 		Filename: smoke_fire_glow.png
 		Length: *
 		Tick: 80
 		ZOffset: 1023
+		IgnoreWorldTint: true
 
 # Procedural RGBA black smoke puff (tools/gen_smoke.py): 1.5x size (96px), same alpha as the grey
 # variant (opacity 0.55 + top-fade), so it reads as a rising plume not an opaque blob. Buildings only.
@@ -1933,11 +1936,13 @@ smoke_building:
 # Procedural RGBA black building-smoke puff with an early baked fire-lit base
 # (tools/gen_fire_smoke_glow.py, 96px frames). Buildings only.
 smoke_building_fire_glow:
+	# Fire-lit base of burning-building smoke — emissive glow, ignore terrain/weather tint.
 	idle:
 		Filename: smoke_building_fire_glow.png
 		Length: *
 		Tick: 80
 		ZOffset: 1023
+		IgnoreWorldTint: true
 
 green_smokey:
 	idle:
@@ -4289,6 +4294,10 @@ hakurei_giphy:
 		Alpha: 0.1
 
 scorch_flames:
+	# Animated flames spawned on Scorch smudges by flame weapons — must read as fire regardless
+	# of terrain brightness or weather tint.
+	Defaults:
+		IgnoreWorldTint: true
 	large_flame:
 		Length: *
 		Combine:
