@@ -330,62 +330,77 @@ HarrierMissiles:
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyAAWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@FlakWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air, Trees
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 
 HarrierMissiles_elite:
 	Inherits: HarrierMissiles

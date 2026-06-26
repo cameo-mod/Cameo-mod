@@ -184,13 +184,6 @@
 		BaseName: playerra2future2
 		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
 
-^QuantumWeaponsEMP:
-	GrantConditionOnPrerequisite@upsteel_empquantumweapons:
-		Condition: upsteel_empquantumweapons
-		Prerequisites: upsteel_empquantumweapons
-	ActorStatValues:
-		Upgrades: upsteel_empquantumweapons
-
 ##############################################
 #   Red Alert 2 Asian Structures
 ##############################################
@@ -8277,6 +8270,8 @@ steel_qacst:
 	Inherits: ra2gacnst
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@shape: ^4x3Shape
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
 		Name: Consortium Construction Yard
 	Building:
@@ -8295,6 +8290,8 @@ steel_qacst:
 		Proxy: steel_qacst.infiltrated
 		Types: TechStealerInfiltrate
 	-ProvidesPrerequisite@ra2oilderrick:
+	ActorStatValues:
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qacst.infiltrated:
 	Inherits: ^researched_upgrade.template
@@ -8313,6 +8310,8 @@ steel_qapowr:
 	Inherits@shape: ^2x2Shape
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@power: ^PowerPlant
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -8343,13 +8342,15 @@ steel_qapowr:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qref:
 	Inherits: ^RA2Building
 	Inherits@ref: ^Refinery
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@shape: ^4x3Shape
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
 		Name: Consortium Refinery
 	Buildable:
@@ -8378,13 +8379,15 @@ steel_qref:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qabarr:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	SelectionDecorations:
 	Tooltip:
 		Name: Steel Barracks
@@ -8404,12 +8407,14 @@ steel_qabarr:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qtradr:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@radar: ^RadarBuilding
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Production@Upgrades:
 		Produces: Upgrades
 	ProductionBar@Upgrades:
@@ -8476,13 +8481,15 @@ steel_qtradr:
 		LaunchSound: schrmov.wav
 		IncomingSound: schrmov.wav
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qaclone:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
 	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -8519,11 +8526,13 @@ steel_qaclone:
 	WithIdleOverlay@top:
 		Sequence: idle-top
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qaweap:
 	Inherits: ^RA2DefaultWeap
 	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
 		Name: Consortium War Factory
 	Buildable:
@@ -8545,13 +8554,15 @@ steel_qaweap:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qatech:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Selectable:
 		Bounds: 3072, 2048, 0, 0
 	Buildable:
@@ -8602,13 +8613,15 @@ steel_qatech:
 		IncomingSound:
 	SupportPowerChargeBar:
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance, upsteel_emp
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance, upsteel_emp
 
 steel_qaorbit:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
 	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qatech, !steel_qaorbit
 		Description: actor-cgionc.description
@@ -8662,7 +8675,7 @@ steel_qaorbit:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 ^ScalpelDrones:
 	Armament@DroneTargeting:
@@ -8695,6 +8708,9 @@ steel_fedturret:
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@EMP: ^TurretEMP
 	Inherits@drones: ^ScalpelDrones
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -8723,6 +8739,22 @@ steel_fedturret:
 		LocalOffset: 400,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+	Armament@Upgrade:
+		Name: primary
+		Weapon: SteelVulcanResonance
+		LocalOffset: 400,0,100
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
+	FirepowerMultiplier@upsteel_pulserifles:
+		RequiresCondition: upsteel_pulserifles
+		Modifier: 130
+	RangeMultiplier@upsteel_pulserifles:
+		RequiresCondition: upsteel_pulserifles
+		Modifier: 115
+	GrantConditionOnPrerequisite@upsteel_pulserifles:
+		Condition: upsteel_pulserifles
+		Prerequisites: upsteel_pulserifles
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -8738,7 +8770,7 @@ steel_fedturret:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: upsteel_scalpel, upsteel_shielresistance
+		Upgrades: upsteel_scalpel, upsteel_pulserifles, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_resonanceammo, upsteel_shielresistance
 
 steel_fedaa:
 	Inherits: ^RA2Defense
@@ -8749,6 +8781,8 @@ steel_fedaa:
 	Inherits@EMP: ^TurretEMP
 	Inherits@drones: ^ScalpelDrones
 	Inherits@quantum: ^QuantumWeaponsEMP
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
@@ -8804,7 +8838,7 @@ steel_fedaa:
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: steel_scalpelAA
 	ActorStatValues:
-		Upgrades: upsteel_scalpel, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: upsteel_scalpel, upsteel_empquantumweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qcannon:
 	Inherits: ^RA2Defense
@@ -8817,6 +8851,8 @@ steel_qcannon:
 	Inherits@EMP: ^TurretEMP
 	Inherits@drones: ^ScalpelDrones
 	Inherits@quantum: ^QuantumWeaponsEMP
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
@@ -8888,7 +8924,7 @@ steel_qcannon:
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: steel_scalpelQuantumCannon
 	ActorStatValues:
-		Upgrades: upsteel_scalpel, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: upsteel_scalpel, upsteel_empquantumweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_bfg10k:
 	Inherits: ^Defense
@@ -8899,6 +8935,8 @@ steel_bfg10k:
 	Inherits@AntiTank: ^PrioritizeVehicle
 	Inherits@detect: ^GenericAllDetector
 	Inherits@shape: ^4x4Shape
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
@@ -9002,7 +9040,7 @@ steel_bfg10k:
 	DetectCloaked:
 		Range: 12500
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_conpad:
 	Inherits: ^RA2Building
@@ -9010,6 +9048,8 @@ steel_conpad:
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Prerequisites: ~steel_qacst, steel_qtradr
 	Tooltip:
@@ -9035,7 +9075,7 @@ steel_conpad:
 		Sequence: idle-dish
 		PauseOnCondition: lowpower
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qoil:
 	Inherits: ^RA2Building
@@ -9045,6 +9085,8 @@ steel_qoil:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^3x3Shape
 	Inherits@water: ^SteelUnderwaterStructure
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
 		Name: Geothermal Reactor
 	Buildable:
@@ -9082,7 +9124,7 @@ steel_qoil:
 		#PauseOnCondition: lowpower
 		RequiresCondition: !build-incomplete && !in_water
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 ##############################################
 #   Red Alert 2 Underwater Structure
@@ -9111,6 +9153,8 @@ steel_qoil:
 ^SteelDefensiveDrones:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Selectable:
 	#Interactable:
 	Buildable:
@@ -9151,6 +9195,8 @@ steel_qoil:
 	RenderSprites:
 		PlayerPalette: playerra2rot
 		Image: steel_scalpel
+	ActorStatValues:
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_scalpelMG:
 	Inherits: ^SteelDefensiveDrones
@@ -9224,6 +9270,8 @@ steel_qmcv:
 	Inherits@anim: ^RA2Vehicle
 	Inherits@mcv: ^MCV
 	Inherits@underwater: ^SteelUnderwaterTransit
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
 		Name: Consortium Mobile Construction Vehicle
 	Buildable:
@@ -9254,7 +9302,7 @@ steel_qmcv:
 		PlayerPalette: playerra2cons
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_qmin:
 	Inherits: ^Tank
@@ -9263,6 +9311,8 @@ steel_qmin:
 	Inherits@harv: ^Harvester
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -9307,13 +9357,13 @@ steel_qmin:
 	Targetable@Hover:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
-	ActorStatValues:
-		Upgrades: upsteel_shielresistance
 	StoresResources:
 	DockClientManager:
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
+	ActorStatValues:
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_fedinf:
 	Inherits: ^Soldier
@@ -9324,6 +9374,8 @@ steel_fedinf:
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
 	Valued:
 		Cost: 200
 	Tooltip:
@@ -9347,7 +9399,7 @@ steel_fedinf:
 		RequiresCondition: rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: SteelGarrison
+		Weapon: SteelCloneGun
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: !rank-elite
@@ -9357,6 +9409,33 @@ steel_fedinf:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
+	Armament@UpgradePRIMARY:
+		Weapon: SteelCloneGunResonance
+		RequiresCondition: !rank-elite && upsteel_resonanceammo
+	Armament@UpgradeELITE:
+		Weapon: SteelCloneGunEResonance
+		RequiresCondition: rank-elite && upsteel_resonanceammo
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: SteelCloneGunResonance
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && upsteel_resonanceammo
+	Armament@UpgradeGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelCloneGunEResonance
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && upsteel_resonanceammo
+	FirepowerMultiplier@upsteel_pulserifles:
+		RequiresCondition: upsteel_pulserifles
+		Modifier: 160
+	RangeMultiplier@upsteel_pulserifles:
+		RequiresCondition: upsteel_pulserifles
+		Modifier: 130
+	GrantConditionOnPrerequisite@upsteel_pulserifles:
+		Condition: upsteel_pulserifles
+		Prerequisites: upsteel_pulserifles
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
@@ -9364,7 +9443,7 @@ steel_fedinf:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_pulserifles, upsteel_naniteinfusion, upsteel_resonanceammo, upsteel_shielresistance
 
 steel_board_inf:
 	Inherits: ^Soldier
@@ -9374,6 +9453,8 @@ steel_board_inf:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^RA2Infantry
 	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@quantum: ^QuantumWeaponsEMP
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -9396,23 +9477,43 @@ steel_board_inf:
 	Armament@PRIMARY:
 		Weapon: SteelMakoGun
 		LocalOffset: 300,200,800
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !upsteel_empquantumweapons
 	Armament@ELITE:
 		Weapon: SteelMakoGunE
 		LocalOffset: 300,200,800
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !upsteel_empquantumweapons
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: SteelMakoGun
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !upsteel_empquantumweapons
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelMakoGunE
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !upsteel_empquantumweapons
+	Armament@UpgradePRIMARY:
+		Weapon: SteelMakoGun
+		LocalOffset: 300,200,800
+		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+	Armament@UpgradeELITE:
+		Weapon: SteelMakoGunE
+		LocalOffset: 300,200,800
+		RequiresCondition: rank-elite && upsteel_empquantumweapons
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: SteelMakoGun
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+	Armament@UpgradeGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SteelMakoGunE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && upsteel_empquantumweapons
 	FirepowerMultiplier@Freed:
 		Modifier: 550
 	ReloadDelayMultiplier@Freed:
@@ -9427,7 +9528,7 @@ steel_board_inf:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_empquantumweapons, upsteel_shielresistance
 
 steel_qinf:
 	Inherits: ^Soldier
@@ -9442,6 +9543,7 @@ steel_qinf:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@quantum: ^QuantumWeaponsEMP
 	Valued:
 		Cost: 1150
@@ -9602,10 +9704,11 @@ steel_qinf:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_empquantumweapons, upsteel_shielresistance
 
 steel_fedeng:
 	Inherits: RA2ENGINEER
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Buildable:
 		Prerequisites: ~steel_qabarr
 		Queue: Infantry, RAInfantry
@@ -9615,7 +9718,7 @@ steel_fedeng:
 	Voiced:
 		VoiceSet: SteelEngVoice
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_shielresistance
 
 steel_mako:
 	Inherits: ^Tank
@@ -9625,6 +9728,9 @@ steel_mako:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@quantum: ^QuantumWeaponsEMP
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -9651,13 +9757,25 @@ steel_mako:
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite
+		RequiresCondition: !rank-elite && !upsteel_empquantumweapons
 	Armament@ELITE:
 		Weapon: SteelMakoGunE
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite
+		RequiresCondition: rank-elite && !upsteel_empquantumweapons
+	Armament@UpgradePRIMARY:
+		Weapon: SteelMakoGunEMP
+		LocalOffset: 500,200,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+	Armament@UpgradeELITE:
+		Weapon: SteelMakoGunEMPE
+		LocalOffset: 500,200,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && upsteel_empquantumweapons
 	AttackFrontal:
 	WithMuzzleOverlay:
 	Selectable:
@@ -9674,7 +9792,7 @@ steel_mako:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
 
 steel_quantumtank:
 	Inherits: ^Tank
@@ -9689,6 +9807,8 @@ steel_quantumtank:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Inherits@quantum: ^QuantumWeaponsEMP
 	Valued:
 		Cost: 1600
@@ -9710,7 +9830,7 @@ steel_quantumtank:
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Armor:
-		Type: Medium
+		Type: Heavy
 	Turreted:
 		TurnSpeed: 20
 	Armament:
@@ -9757,7 +9877,7 @@ steel_quantumtank:
 		PlayerPalette: playerra2cons
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
 
 steel_manta:
 	Inherits: ^Tank
@@ -9769,6 +9889,9 @@ steel_manta:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
 	Valued:
 		Cost: 850
 	Tooltip:
@@ -9810,6 +9933,30 @@ steel_manta:
 		LocalOffset: 300,-100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+	Armament@UpgradeAG1:
+		Weapon: SteelMantaAGResonance
+		LocalOffset: 300,100,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
+	Armament@UpgradeAG2:
+		Weapon: SteelMantaAGResonance
+		LocalOffset: 300,-100,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
+	Armament@UpgradeAA1:
+		Weapon: SteelMantaAAResonance
+		LocalOffset: 300,100,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
+	Armament@UpgradeAA2:
+		Weapon: SteelMantaAAResonance
+		LocalOffset: 300,-100,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	ReloadDelayMultiplier@ELITE:
@@ -9831,7 +9978,7 @@ steel_manta:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_resonanceammo, upsteel_shielresistance
 
 steel_manta_hunt:
 	Inherits: ^Tank
@@ -9844,6 +9991,9 @@ steel_manta_hunt:
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@SteelConsortiumResonanceAmmo: ^SteelConsortiumResonanceAmmo
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -9864,7 +10014,7 @@ steel_manta_hunt:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	Armor:
-		Type: Heavy
+		Type: Medium
 	Turreted:
 		TurnSpeed: 12
 	Armament@AG1:
@@ -9899,6 +10049,42 @@ steel_manta_hunt:
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+	Armament@UpgradeAG1:
+		Name: primary
+		Weapon: SteelMantaHunterCannonsResonance
+		Recoil: 125
+		RecoilRecovery: 25
+		LocalOffset: 500,200,-150
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
+	Armament@UpgradeAG2:
+		Name: primary
+		Weapon: SteelMantaHunterCannonsResonance
+		Recoil: 125
+		RecoilRecovery: 25
+		LocalOffset: 500,-200,-150
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
+	Armament@UpgradeAA1:
+		Name: primary
+		Weapon: SteelMantaHunterCannonsAAResonance
+		Recoil: 125
+		RecoilRecovery: 25
+		LocalOffset: 500,200,-150
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
+	Armament@UpgradeAA2:
+		Name: primary
+		Weapon: SteelMantaHunterCannonsAAResonance
+		Recoil: 125
+		RecoilRecovery: 25
+		LocalOffset: 500,-200,-150
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: upsteel_resonanceammo
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	ReloadDelayMultiplier@ELITE:
@@ -9921,7 +10107,7 @@ steel_manta_hunt:
 		BobDistance: -64
 		InitialHeight: 384
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_resonanceammo, upsteel_shielresistance
 
 steel_mega:
 	Inherits: ^Tank
@@ -9933,6 +10119,8 @@ steel_mega:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
 	Inherits@underwater: ^SteelUnderwaterTransit
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Selectable:
 		Bounds: 1250, 1750, 0, -250
 	Valued:
@@ -9979,7 +10167,7 @@ steel_mega:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_arty:
 	Inherits: ^Tank
@@ -9990,6 +10178,8 @@ steel_arty:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -10080,7 +10270,7 @@ steel_arty:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_katy:
 	Inherits: ^Tank
@@ -10096,6 +10286,8 @@ steel_katy:
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Inherits@quantum: ^QuantumWeaponsEMP
 	Valued:
 		Cost: 3800
@@ -10181,7 +10373,7 @@ steel_katy:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
 
 steel_potnk:
 	Inherits: ^Tank
@@ -10195,6 +10387,8 @@ steel_potnk:
 	Inherits@cargo: ^OpenToppedVehicle
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@underwater: ^SteelUnderwaterTransit
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Selectable:
 		Bounds: 1250, 1250
 		DecorationBounds: 1250, 1250
@@ -10256,7 +10450,7 @@ steel_potnk:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_dagger:
 	Inherits: ^Tank
@@ -10267,6 +10461,8 @@ steel_dagger:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^ChargedFrontalEMP
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 1300
 	Tooltip:
@@ -10286,6 +10482,8 @@ steel_dagger:
 		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
 		Step: 10
+	Armor:
+		Type: Light
 	Armament@PRIMARY:
 		Weapon: SteelDaggerCannon
 		LocalOffset: 450,0,150
@@ -10309,7 +10507,7 @@ steel_dagger:
 	Voiced:
 		VoiceSet: SteelConsortiumTankVoice
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_defender:
 	Inherits: ^Tank
@@ -10323,6 +10521,8 @@ steel_defender:
 	Inherits@MC: ^MCImmune
 	Inherits@underwater: ^SteelUnderwaterTransit
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Inherits@quantum: ^QuantumWeaponsEMP
 	Selectable:
 		Bounds: 1250, 2000, 0, -500
@@ -10405,7 +10605,7 @@ steel_defender:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
 
 steel_beholder:
 	Inherits: ^Tank
@@ -10417,6 +10617,8 @@ steel_beholder:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -10477,7 +10679,7 @@ steel_beholder:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_stalker:
 	Inherits: ^Tank
@@ -10491,6 +10693,8 @@ steel_stalker:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@MC: ^MCImmune
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -10554,7 +10758,7 @@ steel_stalker:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 white_rabbit:
 	Inherits: ^Tank
@@ -10568,6 +10772,8 @@ white_rabbit:
 	Inherits@MC: ^MCImmune
 	Inherits@UpGat: ^GatlingSpeedUpUnitBehavior
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 4500
 	Tooltip:
@@ -10628,7 +10834,7 @@ white_rabbit:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_inspect:
 	Inherits: ^Helicopter
@@ -10640,6 +10846,8 @@ steel_inspect:
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@COMMANDOSKULL: ^CommandoSkull
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -10700,7 +10908,7 @@ steel_inspect:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_inspect.Husk:
 	Inherits: ^PlaneHusk
@@ -10733,6 +10941,8 @@ steel_twister:
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Tooltip:
 		Name: Twister
 	Valued:
@@ -10805,6 +11015,8 @@ steel_twister:
 		PipCount: 10
 	RenderSprites:
 		PlayerPalette: playerra2cons
+	ActorStatValues:
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_twister.Husk:
 	Inherits: ^PlaneHusk
@@ -10825,8 +11037,6 @@ steel_twister.Husk:
 		Image: steel_twister
 	RenderSprites:
 		PlayerPalette: playerra2cons
-	ActorStatValues:
-		Upgrades: upsteel_shielresistance
 
 steel_grun:
 	Inherits: ^Helicopter
@@ -10835,6 +11045,8 @@ steel_grun:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 110
@@ -10916,7 +11128,8 @@ steel_grun:
 		TurnSpeed: 24
 	WithSpriteTurret:
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+
 steel_grun.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
@@ -10940,6 +11153,8 @@ steel_cougar:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -10987,7 +11202,7 @@ steel_cougar:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_hummer:
 	Inherits: ^Tank
@@ -10999,6 +11214,8 @@ steel_hummer:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -11043,7 +11260,7 @@ steel_hummer:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_oldqtnk:
 	Inherits: ^Tank
@@ -11058,6 +11275,8 @@ steel_oldqtnk:
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 2400
 	Tooltip:
@@ -11109,7 +11328,7 @@ steel_oldqtnk:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_cobra:
 	Inherits: ^Tank
@@ -11121,6 +11340,8 @@ steel_cobra:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 3600
 	Tooltip:
@@ -11169,7 +11390,7 @@ steel_cobra:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_savi:
 	Inherits: ^Tank
@@ -11180,6 +11401,8 @@ steel_savi:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -11230,7 +11453,7 @@ steel_savi:
 		Color: 8888FF88
 		RequiresCondition: !disabled
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
 
 steel_cargoship:
 	Inherits: ^Helicopter
@@ -11239,6 +11462,8 @@ steel_cargoship:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -11289,7 +11514,8 @@ steel_cargoship:
 	Voiced:
 		VoiceSet: SteelConsortiumTankVoice
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+
 steel_cargoship.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -11323,6 +11549,8 @@ steel_cruiser:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Inherits@quantum: ^QuantumWeaponsEMP
 	Valued:
 		Cost: 4000
@@ -11407,7 +11635,7 @@ steel_cruiser:
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
 	ActorStatValues:
-		Upgrades: upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
 
 steel_cruiser.Husk:
 	Inherits: ^PlaneHusk
@@ -11440,6 +11668,8 @@ steel_cruiser_f:
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@shield: ^HasShieldGenerator
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Inherits@quantum: ^QuantumWeaponsEMP
 	-Selectable:
 	Interactable:
@@ -11485,7 +11715,7 @@ steel_cruiser_f:
 		Ammo: 12
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
-		Actor: ra2hornet.Husk
+		Actor: steel_cruiser_f.Husk
 	Voiced:
 		VoiceSet: SteelEmpressVoice
 	AttackAircraft:
@@ -11509,6 +11739,9 @@ steel_cruiser_f:
 		PipCount: 6
 	RenderSprites:
 		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+
 steel_cruiser_f.Husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -11528,8 +11761,6 @@ steel_cruiser_f.Husk:
 		Image: steel_cruiser_f
 	RenderSprites:
 		PlayerPalette: playerra2
-	ActorStatValues:
-		Upgrades: upsteel_empquantumweapons, upsteel_shielresistance
 
 #######################################
 # Steel Consortium Promotion Tree
@@ -11647,7 +11878,7 @@ upsteel_bfg10k:
 upsteel_manta_hunt:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Manta Hunter
+		Name: Unlock Barracuda
 	Buildable:
 		BuildPaletteOrder: 111
 		Queue: Promotions
@@ -11701,6 +11932,80 @@ upsteel_cruiser:
 #		Upgrades Consortium
 ####################################################################################################
 
+upsteel_pulserifles:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Pulse Rifles
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases Firepower of Clone Troopers by 60% and Range by 30% and half of that for the Sentry Turret.
+		Prerequisites: ~steel_qtradr, !upsteel_pulserifles
+	RenderSprites:
+		Image: upsteel_pulserifles
+	ProvidesPrerequisite:
+
+upsteel_naniteinfusion:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Nanite Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Infuses all Units and Buildings with nanites that regenerate them faster.
+		Prerequisites: ~steel_qtradr, !upsteel_naniteinfusion
+	RenderSprites:
+		Image: upsteel_naniteinfusion
+	ProvidesPrerequisite:
+
+^SteelConsortiumNaniteInfusion:
+	ChangesHealth@upsteel_naniteinfusion:
+		PercentageStep: 1
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: upsteel_naniteinfusion
+	ChangesHealth@upsteel_naniteinfusion:
+		Step: 50
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: upsteel_naniteinfusion
+	GrantConditionOnPrerequisite@upsteel_naniteinfusion:
+		Condition: upsteel_naniteinfusion
+		Prerequisites: upsteel_naniteinfusion
+	ActorStatValues:
+		Upgrades: upsteel_naniteinfusion
+
+upsteel_ferrocrete:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Unlock Ferrocrate Curtain
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases Damage Resistance of all Vehicles and Buildings by 15%.
+		Prerequisites: ~steel_qtradr, !upsteel_ferrocrete
+	RenderSprites:
+		Image: upsteel_ferrocrete
+	ProvidesPrerequisite:
+
+^SteelConsortiumFerrocrete:
+	DamageMultiplier@upsteel_ferrocrete:
+		RequiresCondition: upsteel_ferrocrete
+		Modifier: 85
+	GrantConditionOnPrerequisite@upsteel_ferrocrete:
+		Condition: upsteel_ferrocrete
+		Prerequisites: upsteel_ferrocrete
+	ActorStatValues:
+		Upgrades: upsteel_ferrocrete
+
 upsteel_emp:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
@@ -11717,27 +12022,12 @@ upsteel_emp:
 		Image: steel_qatech
 	ProvidesPrerequisite:
 
-upsteel_empquantumweapons:
-	Inherits: ^researched_upgrade.template
-	Tooltip:
-		Name: Advanced Quantum Weapons
-	Valued:
-		Cost: 7500
-	Buildable:
-		BuildPaletteOrder: 50
-		Queue: Research
-		Description: Increases damage and adds a powerful EMP effect to all Quantum Weapons. Effective against armored vehicles and aircraft.
-		Prerequisites: ~steel_qatech, !upsteel_empquantumweapons
-	RenderSprites:
-		Image: steel_qcannon
-	ProvidesPrerequisite:
-
 upsteel_scalpel:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Scalpel Defenders
 	Valued:
-		Cost: 10000
+		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
@@ -11746,6 +12036,56 @@ upsteel_scalpel:
 	RenderSprites:
 		Image: steel_scalpel
 	ProvidesPrerequisite:
+
+upsteel_resonanceammo:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Resonance Ammo
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: All Bullets ricochet between targets, dealing additional damage! Increases Range by all bullets by 10%.
+		Prerequisites: ~steel_qatech, !upsteel_resonanceammo
+	RenderSprites:
+		Image: upsteel_resonanceammo
+	ProvidesPrerequisite:
+
+^SteelConsortiumResonanceAmmo:
+	FirepowerMultiplier@upsteel_resonanceammo:
+		RequiresCondition: upsteel_resonanceammo
+		Modifier: 50
+	RangeMultiplier@upsteel_resonanceammo:
+		RequiresCondition: upsteel_resonanceammo
+		Modifier: 110
+	GrantConditionOnPrerequisite@upsteel_resonanceammo:
+		Condition: upsteel_resonanceammo
+		Prerequisites: upsteel_resonanceammo
+	ActorStatValues:
+		Upgrades: upsteel_resonanceammo
+
+upsteel_empquantumweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Quantum Weapon Power
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Increases damage and adds a powerful EMP effect to all Quantum Weapons. Effective against armored vehicles and aircraft.
+		Prerequisites: ~steel_qatech, !upsteel_empquantumweapons
+	RenderSprites:
+		Image: upsteel_empquantumweapons
+	ProvidesPrerequisite:
+
+^QuantumWeaponsEMP:
+	GrantConditionOnPrerequisite@upsteel_empquantumweapons:
+		Condition: upsteel_empquantumweapons
+		Prerequisites: upsteel_empquantumweapons
+	ActorStatValues:
+		Upgrades: upsteel_empquantumweapons
 
 upsteel_shielresistance:
 	Inherits: ^upgrade.template
@@ -11756,10 +12096,10 @@ upsteel_shielresistance:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: Increases the amount of damage shields can take.
+		Description: Increases the amount of damage shields can take by 25%.
 		Prerequisites: ~steel_qatech, !upsteel_shielresistance
 	RenderSprites:
-		Image: steel_savi
+		Image: upsteel_shielresistance
 	ProvidesTeamProxyActor:
 		Actor: team_upgrade.upsteel_shielresistance
 
@@ -11768,7 +12108,7 @@ team_upgrade.upsteel_shielresistance:
 	ProvidesPrerequisite:
 		Prerequisite: upsteel_shielresistance
 	RenderSprites:
-		Image: steel_savi
+		Image: upsteel_shielresistance
 	Tooltip:
 		Name: Shield Resistance
 	Buildable:
@@ -15770,7 +16110,7 @@ nax2_bradley:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: M-200B Bradley
+		Name: MARS
 	Health:
 		HP: 35000
 	Repairable:
@@ -17987,11 +18327,11 @@ upnax_sarubia:
 upnax_brad:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Bradley Model and other advanced Missiles
+		Name: Donnerschlag Model and other advanced Missiles
 	Buildable:
 		BuildPaletteOrder: 113
 		Queue: Promotions
-		Description: Enables construction of the M-15A Bradley.
+		Description: Enables construction of the Donnerschlag.
 		Prerequisites: ~nax_conyard, upnax_sarubia, !upnax_brad, rank1
 	RenderSprites:
 		Image: nax_brad

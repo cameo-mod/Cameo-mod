@@ -6963,7 +6963,7 @@ CPQDEBUGDUMMY:
 		Modifier: 150
 	DamageMultiplier@upsteel_shielresistance:
 		RequiresCondition: upsteel_shielresistance && shielded
-		Modifier: 80
+		Modifier: 75
 	GrantConditionOnPrerequisite@upsteel_shielresistance:
 		Condition: upsteel_shielresistance
 		Prerequisites: upsteel_shielresistance

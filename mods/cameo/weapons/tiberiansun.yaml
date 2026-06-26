@@ -484,7 +484,7 @@ TSJugg120mm:
 	# 	Explosions: artillery_explosion
 
 TSCadreGrenade:
-	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
 	ReloadDelay: 124
 	Range: 6623
 	Report: M203.aud
@@ -493,17 +493,17 @@ TSCadreGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Grenade: SpreadDamage
 		Damage: 36000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 18000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud
 
 TSRaiderGrenade:
-	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
 	ReloadDelay: 52
 	Range: 4787
 	Report: M203.aud
@@ -512,11 +512,11 @@ TSRaiderGrenade:
 		LaunchAngle: 66
 		ContrailLength: 10
 		ContrailWidth: 0c32
-	Warhead@ShrapnelWeapon: SpreadDamage
+	Warhead@Grenade: SpreadDamage
 		Damage: 36000
-	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+	Warhead@GrenadeFriendlyFire: SpreadDamage
 		Damage: 18000
-	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 18
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew13.aud

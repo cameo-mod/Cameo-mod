@@ -2371,7 +2371,7 @@ AsianMLRS:
 ####################################################################################################
 SteelCloneGun:
 	Inherits: ^SteelHeavyCannon
-	Inherits: ^SteelChaingun
+	Inherits: ^SteelMediumMissile
 	Inherits: ^SteelSmallArms
 	ReloadDelay: 25
 	Range: 5000
@@ -2379,10 +2379,13 @@ SteelCloneGun:
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@Chaingun: SpreadDamage
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyCannon: SpreadDamage
@@ -2398,11 +2401,47 @@ SteelCloneGunE:
 	Burst: 2
 	BurstDelays: 3
 
-SteelGarrison:
-	Inherits: RA2vulcan2
-	Report: steel_chaingunfire.wav
-	Warhead@Effect: CreateEffect
-		Explosions: steel_bluepiffs
+SteelCloneGunResonance:
+	Inherits: SteelCloneGun
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelCloneGunResonanceBounce1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+SteelCloneGunResonanceBounce1:
+	Inherits: SteelCloneGunResonance
+	Range: 2500
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelCloneGunResonanceBounce2
+
+SteelCloneGunResonanceBounce2:
+	Inherits: SteelCloneGunResonance
+	Range: 1250
+	-Warhead@shrapnel: FireShrapnel
+
+SteelCloneGunEResonance:
+	Inherits: SteelCloneGunE
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelCloneGunEResonanceBounce1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+SteelCloneGunEResonanceBounce1:
+	Inherits: SteelCloneGunEResonance
+	Range: 3000
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelCloneGunEResonanceBounce2
+
+SteelCloneGunEResonanceBounce2:
+	Inherits: SteelCloneGunEResonance
+	Range: 2000
+	-Warhead@shrapnel: FireShrapnel
 
 SteelVulcan:
 	Inherits: ^SteelHeavyCannon
@@ -2427,6 +2466,27 @@ SteelVulcan:
 	Report: pulseturretfire.wav
 	Warhead@Effect: CreateEffect
 		Explosions: steel_bluepiffs
+
+SteelVulcanResonance:
+	Inherits: SteelVulcan
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelVulcanResonanceBounce1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+SteelVulcanResonanceBounce1:
+	Inherits: SteelVulcanResonance
+	Range: 3333
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelVulcanResonanceBounce2
+
+SteelVulcanResonanceBounce2:
+	Inherits: SteelVulcanResonance
+	Range: 2222
+	-Warhead@shrapnel: FireShrapnel
 
 ConsortiumMissileSystem:
 	Inherits: ^TeslaWeapon
@@ -2686,6 +2746,68 @@ SteelMakoGunE:
 	Burst: 2
 	BurstDelays: 3
 
+SteelMakoGunEMP:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^TeslaWeapon
+	Inherits: SteelMakoGun
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Grenade: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 1000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+
+SteelMakoGunEMPE:
+	Inherits: SteelMakoGunEMP
+	Range: 6600
+	Burst: 2
+	BurstDelays: 3
+
 SteelMantaAG:
 	Inherits: ^SteelLightMissile
 	Inherits: ^SteelSmallArms
@@ -2739,6 +2861,48 @@ SteelMantaAA:
 		ExplosionPalette: ra2effect
 		ValidTargets: Air
 
+SteelMantaAGResonance:
+	Inherits: SteelMantaAG
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaAGResonanceBounce1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+SteelMantaAGResonanceBounce1:
+	Inherits: SteelMantaAGResonance
+	Range: 3333
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaAGResonanceBounce2
+
+SteelMantaAGResonanceBounce2:
+	Inherits: SteelMantaAGResonance
+	Range: 2222
+	-Warhead@shrapnel: FireShrapnel
+
+SteelMantaAAResonance:
+	Inherits: SteelMantaAA
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaAAResonanceBounce1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+SteelMantaAAResonanceBounce1:
+	Inherits: SteelMantaAAResonance
+	Range: 3333
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaAAResonanceBounce2
+
+SteelMantaAAResonanceBounce2:
+	Inherits: SteelMantaAAResonance
+	Range: 2222
+	-Warhead@shrapnel: FireShrapnel
+
 SteelMantaHunterCannons:
 	Inherits: ^RA2FlakWeapon
 	Inherits: ^SteelChaingun
@@ -2782,6 +2946,48 @@ SteelMantaHunterCannonsAA:
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
+
+SteelMantaHunterCannonsResonance:
+	Inherits: SteelMantaHunterCannons
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaHunterCannonsResonanceBounce1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+SteelMantaHunterCannonsResonanceBounce1:
+	Inherits: SteelMantaHunterCannonsResonance
+	Range: 3333
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaHunterCannonsResonanceBounce2
+
+SteelMantaHunterCannonsResonanceBounce2:
+	Inherits: SteelMantaHunterCannonsResonance
+	Range: 2222
+	-Warhead@shrapnel: FireShrapnel
+
+SteelMantaHunterCannonsAAResonance:
+	Inherits: SteelMantaHunterCannonsAA
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaHunterCannonsAAResonanceBounce1
+		Amount: 1
+		AimChance: 100
+		AllowDirectHit: true
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water, Air
+
+SteelMantaHunterCannonsAAResonanceBounce1:
+	Inherits: SteelMantaHunterCannonsAAResonance
+	Range: 3333
+	Warhead@shrapnel: FireShrapnel
+		Weapon: SteelMantaHunterCannonsAAResonanceBounce2
+
+SteelMantaHunterCannonsAAResonanceBounce2:
+	Inherits: SteelMantaHunterCannonsAAResonance
+	Range: 2222
+	-Warhead@shrapnel: FireShrapnel
 
 SteelInfRailgun:
 	Inherits: ^RA2RailgunWeapon

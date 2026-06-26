@@ -6274,7 +6274,6 @@ swarmer:
 	SpawnActorOnDeath:
 		Actor: swarmer.husk
 	Selectable:
-		Class: swarmer
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
 	Voiced:
@@ -6350,7 +6349,6 @@ d2k_aa_mine:
 	Targetable:
 		TargetTypes: Air, Plane, Mine
 	Selectable:
-		Class: d2k_aa_mine
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
 	Voiced:
@@ -6415,7 +6413,6 @@ ordos_eye:
 	SpawnActorOnDeath:
 		Actor: ordos_eye.husk
 	Selectable:
-		Class: ordos_eye
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
 	Voiced:
@@ -6488,7 +6485,6 @@ ordos_banshee:
 	SpawnActorOnDeath:
 		Actor: ordos_banshee.husk
 	Selectable:
-		Class: banshee
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
 	Voiced:
@@ -6811,7 +6807,6 @@ d2k_air_drone:
 		TurnSpeed: 11
 	WithFacingSpriteBody:
 	Selectable:
-		Class: d2k_air_drone
 		Bounds: 1536, 1280, 0, 0
 	SpawnActorOnDeath:
 		Actor: d2k_air_drone.husk
@@ -7182,7 +7177,6 @@ harvester:
 	Tooltip:
 		Name: Ixian Spice Harvester
 	Selectable:
-		Class: harvester
 		DecorationBounds: 1536, 1536
 	Harvester:
 		BuildDuration: 250
@@ -7243,7 +7237,6 @@ ordos_harv:
 	Tooltip:
 		Name: Ordos Spice Harvester
 	Selectable:
-		Class: harvester
 		DecorationBounds: 1536, 1536
 	Harvester:
 		BuildDuration: 250
@@ -7880,8 +7873,6 @@ siege_tank:
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
 		InitialStanceAI: Defend
-	Selectable:
-		Class: siegetank
 	SpawnActorOnDeath:
 		Actor: siege_tank.husk
 		OwnerType: InternalName
@@ -7969,7 +7960,6 @@ ordos_cobra:
 		PauseOnCondition: disabled
 		Voice: Attack
 	SelectionDecorations:
-	Selectable:
 	WithSpriteBody@deployed:
 		RequiresCondition: deployed
 		Sequence: deploy-idle
@@ -8080,7 +8070,6 @@ ordos_python:
 		PauseOnCondition: disabled
 		Voice: Attack
 	SelectionDecorations:
-	Selectable:
 	WithSpriteBody@deployed:
 		RequiresCondition: deployed
 		Sequence: deploy-idle
@@ -8173,8 +8162,6 @@ siege_tank_ixian:
 		EmptyWeapon: D2KUnitExplodeMed
 	AutoTarget:
 		InitialStanceAI: Defend
-	Selectable:
-		Class: siegetank
 	AmmoPool:
 		Ammo: 3
 		AmmoCondition: ammo
@@ -8277,8 +8264,6 @@ duelist_tank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: combat
 	AttractsWorms:
 		Intensity: 520
 	Cloak@TDcloak:
@@ -8338,8 +8323,6 @@ missile_tank_ixian:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: missiletank
 	AttractsWorms:
 		Intensity: 600
 	Cloak@TDcloak:
@@ -9392,8 +9375,6 @@ deviator:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: combat
 	AttractsWorms:
 		Intensity: 520
 	Cloak@TDcloak:
@@ -9503,8 +9484,6 @@ combat_tank_h:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: combat
 	AttractsWorms:
 		Intensity: 520
 	Cloak@TDcloak:
@@ -9562,8 +9541,6 @@ combat_tank_o:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: combat
 	AttractsWorms:
 		Intensity: 520
 	Voiced:
@@ -9630,8 +9607,6 @@ d2k_ordos_heavycombattank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: combat
 	AttractsWorms:
 		Intensity: 520
 	Voiced:
@@ -9747,8 +9722,6 @@ d2k_autogun_tank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
-	Selectable:
-		Class: d2k_autogun_tank
 	AttractsWorms:
 		Intensity: 600
 	Cloak@TDcloak:
@@ -9870,8 +9843,6 @@ combat_tank_ixian:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: combat
 	AttractsWorms:
 		Intensity: 520
 	Voiced:
@@ -13319,8 +13290,6 @@ combat_siege_tank:
 	FireWarheadsOnDeath:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
-	Selectable:
-		Class: combat
 	AttractsWorms:
 		Intensity: 520
 	Voiced:
@@ -13650,8 +13619,6 @@ d2k_apparition:
 		FacingTolerance: 0
 	FireWarheadsOnDeath:
 		Weapon: d2k_basq
-	Selectable:
-		Class: d2k_apparition
 	AttractsWorms:
 		Intensity: 500
 	RenderSprites:
