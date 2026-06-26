@@ -435,8 +435,8 @@ groundfire:
 		Image: smoke_fire_glow
 		Sequences: idle
 		Palette: effect
-		# Interval (ticks) between smoke puffs, lower = more smoke. Optimal is 6, 10.
-		SpawnFrequency: 4, 8
+		# Interval (ticks) between smoke puffs, lower = more smoke.
+		SpawnFrequency: 6, 12
 		# Must equal the animation length (32 frames * 80ms Tick = 64 sim ticks). The engine plays
 		# the sprite with PlayRepeating; a longer Duration loops it and pops a fresh puff back in.
 		Duration: 64
