@@ -373,6 +373,7 @@ TSGTCNST:
 		RequiresCondition: factundeploy
 		Locomotor: heavywheeled
 		RequiresForceMove: true
+		RedeployAfterMove: true
 	TransformsIntoPassenger:
 		RequiresCondition: factundeploy
 		CargoType: Vehicle
@@ -438,6 +439,7 @@ TSGTCNSTGDI:
 		RequiresCondition: factundeploy
 		Locomotor: heavywheeled
 		RequiresForceMove: true
+		RedeployAfterMove: true
 	TransformsIntoPassenger:
 		RequiresCondition: factundeploy
 		CargoType: Vehicle
@@ -511,6 +513,7 @@ TSGTCNSTNOD:
 		RequiresCondition: factundeploy
 		Locomotor: heavywheeled
 		RequiresForceMove: true
+		RedeployAfterMove: true
 	TransformsIntoPassenger:
 		RequiresCondition: factundeploy
 		CargoType: Vehicle
@@ -588,6 +591,7 @@ TSGTCNSTCABAL:
 		RequiresCondition: factundeploy
 		Locomotor: heavywheeled
 		RequiresForceMove: true
+		RedeployAfterMove: true
 	TransformsIntoPassenger:
 		RequiresCondition: factundeploy
 		CargoType: Vehicle
@@ -2460,6 +2464,7 @@ TSGTCNSTMUTANT:
 		RequiresCondition: factundeploy
 		Locomotor: heavywheeled
 		RequiresForceMove: true
+		RedeployAfterMove: true
 	TransformsIntoPassenger:
 		RequiresCondition: factundeploy
 		CargoType: Vehicle
