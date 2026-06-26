@@ -20,7 +20,7 @@ Player:
 		Notification: NewOptions
 	PlaceBuilding:
 		NewOptionsNotification: NewOptions
-		NewOptionsNotificationDelay: 10
+		NewOptionsNotificationDelay: 5 # in game ticks
 		NewOptionsTextNotification: New construction option(s) are now available.
 		CannotPlaceNotification: BuildingCannotPlaceAudio
 		ToggleVariantKey: V
