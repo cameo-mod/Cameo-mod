@@ -10,15 +10,15 @@ using OpenRA.Traits;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
-	[Desc("Multiplayer host-side driver for adaptive game-speed (Stage C Prong C). On the game host ONLY,",
+	[Desc("Multiplayer host-side driver for adaptive game-speed. On the game host ONLY,",
 		"measures the host's per-tick simulation compute and submits an absolute pacing scale to the server",
 		"(an immediate 'AdaptivePacingScale' order). The server validates admin + sanitizes it and folds it",
 		"into the authoritative TickScale broadcast (max with the per-player relative scale), so every client",
 		"slows UNIFORMLY to the host's sustainable pace. Pacing-only — it never touches World.Timestep / the",
 		"simulated dt and the host applies the value the SERVER rebroadcasts (like every client), not its local",
 		"one — so it is deterministic by construction. Inert unless this client is the host, more than one human",
-		"is connected (single-human games use the local AdaptiveGameSpeed path), and the Cameo",
-		"'AdaptiveGameSpeedEnabled' setting is on. Attach to the world actor.")]
+		"is connected (single-human games use the local AdaptiveGameSpeed path), and the default-on",
+		"'Adaptive Game Speed' lobby option is enabled. Attach to the world actor.")]
 	public class AdaptiveGameSpeedHostInfo : TraitInfo
 	{
 		[Desc("Slowest the game may run, as a percentage of normal speed. 25 = quarter speed (timestep x4).",
@@ -52,6 +52,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			"comfortably below the server's expiry window.")]
 		public readonly int HeartbeatMs = 1000;
 
+		[Desc("Opt-in diagnostic (default off): on the host, write a once-per-second line to",
+			"Logs/adaptivespeed-host.log with the measured sim-compute, the computed scale, and the scale last",
+			"sent to the server. Only logs while the host driver is active. Useful for confirming the driver",
+			"engages and for re-tuning.")]
+		public readonly bool EnableDiagnosticLog = false;
+
 		public override object Create(ActorInitializer init) => new AdaptiveGameSpeedHost(this);
 	}
 
@@ -69,9 +75,16 @@ namespace OpenRA.Mods.Cameo.Traits
 		long lastSendTime;
 		bool wasActive;
 
+		// Diagnostic accumulators (opt-in — see EnableDiagnosticLog). Per ~1s window.
+		readonly bool diag;
+		long lastLogTime = -1;
+		int winTicks, winSends;
+		float winSumC, winMinC, winMaxC, winSumScale, winMaxScale;
+
 		public AdaptiveGameSpeedHost(AdaptiveGameSpeedHostInfo info)
 		{
 			this.info = info;
+			diag = info.EnableDiagnosticLog;
 			controller = new AdaptiveSpeedController(info.MinimumSpeedPercent, info.OverloadMargin,
 				info.Smoothing, info.RecoveryStep, info.RecoveryRate, info.OverloadHoldTicks);
 		}
@@ -79,6 +92,8 @@ namespace OpenRA.Mods.Cameo.Traits
 		void INotifyCreated.Created(Actor self)
 		{
 			world = self.World;
+			if (diag)
+				Log.AddChannel("adaptivespeed-host", "adaptivespeed-host.log");   // idempotent
 		}
 
 		bool Active()
@@ -96,7 +111,7 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (!OpenRA.Game.IsHost || world.LobbyInfo.NonBotClients.Count() <= 1)
 				return false;
 
-			return world.GetSettings<CameoSettings>().AdaptiveGameSpeedEnabled;
+			return world.LobbyInfo.GlobalSettings.OptionOrDefault("adaptivegamespeed", true);
 		}
 
 		void ITick.Tick(Actor self)
@@ -111,10 +126,16 @@ namespace OpenRA.Mods.Cameo.Traits
 						Send(1f, OpenRA.Game.RunTime);
 
 					wasActive = false;
+					ResetDiagWindow();
+					lastLogTime = -1;
 				}
 
 				return;
 			}
+
+			if (diag && !wasActive)
+				Log.Write("adaptivespeed-host", FormattableString.Invariant(
+					$"activated: host={OpenRA.Game.IsHost} nonBotClients={world.LobbyInfo.NonBotClients.Count()}"));
 
 			wasActive = true;
 
@@ -137,8 +158,12 @@ namespace OpenRA.Mods.Cameo.Traits
 			var changed = Math.Abs(scale - lastSentScale) >= info.SendThreshold;
 			var settled = scale == 1f && lastSentScale != 1f;
 			var heartbeat = scale > 1f && now - lastSendTime >= info.HeartbeatMs;
-			if (changed || settled || heartbeat)
+			var sent = changed || settled || heartbeat;
+			if (sent)
 				Send(scale, now);
+
+			if (diag)
+				LogDiag(now, compute, scale, sent);
 		}
 
 		void Send(float scale, long now)
@@ -149,6 +174,57 @@ namespace OpenRA.Mods.Cameo.Traits
 			OpenRA.Network.HostPacing.SendScale(scale);
 			lastSentScale = scale;
 			lastSendTime = now;
+		}
+
+		// Diagnostic. Accumulate this tick into the current ~1s window and flush a summary line once a second.
+		// Key signals: the host sim compute (the bottleneck), the scale the controller asks for, and the scale
+		// actually sent to the server. A rising scale + nonzero sends while compute exceeds budget = the host is
+		// driving the global slowdown.
+		void LogDiag(long now, long compute, float scale, bool sent)
+		{
+			if (lastLogTime < 0)
+				lastLogTime = now;
+
+			if (winTicks == 0)
+			{
+				winMinC = compute;
+				winMaxC = compute;
+			}
+			else
+			{
+				winMinC = Math.Min(winMinC, compute);
+				winMaxC = Math.Max(winMaxC, compute);
+			}
+
+			winTicks++;
+			winSumC += compute;
+			winSumScale += scale;
+			winMaxScale = Math.Max(winMaxScale, scale);
+			if (sent)
+				winSends++;
+
+			if (now - lastLogTime < 1000)
+				return;
+
+			var avgC = winSumC / winTicks;
+			var avgScale = winSumScale / winTicks;
+			var speedPct = (int)Math.Round(100f / avgScale);
+			var line = FormattableString.Invariant(
+					$"t={now / 1000}s ticks={winTicks} compute_ms[min={winMinC:F0} avg={avgC:F0} max={winMaxC:F0}] ")
+				+ FormattableString.Invariant(
+					$"scale[avg={avgScale:F2} max={winMaxScale:F2}] sent={lastSentScale:F2} sends={winSends} ")
+				+ FormattableString.Invariant(
+					$"speed={speedPct}% budget={world.Timestep}");
+			Log.Write("adaptivespeed-host", line);
+
+			lastLogTime = now;
+			ResetDiagWindow();
+		}
+
+		void ResetDiagWindow()
+		{
+			winTicks = 0; winSends = 0;
+			winSumC = 0; winMinC = 0; winMaxC = 0; winSumScale = 0; winMaxScale = 0;
 		}
 	}
 }

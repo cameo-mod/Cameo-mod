@@ -70,18 +70,3 @@ Container@GAMEPLAY_PANEL:
 									Text: checkbox-quota-mode.label
 									TooltipText: checkbox-quota-mode.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
-				Container@ADAPTIVE_GAMESPEED_ROW:
-					Width: PARENT_WIDTH - 24
-					Height: 25
-					Children:
-						Container@ADAPTIVE_GAMESPEED_CHECKBOX_CONTAINER:
-							X: 10
-							Width: PARENT_WIDTH - 20
-							Children:
-								Checkbox@ADAPTIVE_GAMESPEED_CHECKBOX:
-									Width: PARENT_WIDTH
-									Height: 20
-									Font: Regular
-									Text: checkbox-adaptive-gamespeed.label
-									TooltipText: checkbox-adaptive-gamespeed.tooltip
-									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER

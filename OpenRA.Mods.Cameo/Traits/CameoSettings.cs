@@ -14,9 +14,5 @@ namespace OpenRA.Mods.Cameo.Traits
 	{
 		[Desc("Enables Quota Mode: production buildings auto-requeue units to maintain alive count targets.")]
 		public bool QuotaModeEnabled = false;
-
-		[Desc("Single-player only: gracefully slow the game when the simulation can't keep up (instead of",
-			"render-frame-drop / teleport-stutter). No effect in multiplayer or replays.")]
-		public bool AdaptiveGameSpeedEnabled = false;
 	}
 }
