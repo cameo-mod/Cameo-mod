@@ -2,7 +2,7 @@
 	ClassicMapGenerator@classic:
 		Type: classic
 		Name: map-generator-classic
-		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT
+		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, JUNGLE
 		Settings:
 			MultiChoiceOption@hidden_defaults:
 				Choice@hidden_defaults:
@@ -94,6 +94,11 @@
 						WaterTile: 1
 				Choice@ra_snow:
 					Tileset: RA_SNOW
+					Settings:
+						LandTile: 255
+						WaterTile: 1
+				Choice@jungle:
+					Tileset: JUNGLE
 					Settings:
 						LandTile: 255
 						WaterTile: 1

@@ -3,7 +3,7 @@ General:
 	Id: JUNGLE
 	TileSize: 48,48
 	SheetSize: 1024
-	EditorTemplateOrder: Terrain, Debris, Road, Cliffs, Beach, River, Bridge, Zeruel87 Urban
+	EditorTemplateOrder: Terrain, Debris, Road, Cliffs, Water Cliffs, Beach, River, Bridge, Zeruel87 Urban
 	HeightDebugColors: AA0000
 
 Terrain:
@@ -2046,3 +2046,2785 @@ Templates:
 		Categories: Road
 		Tiles:
 			0: Clear
+	# --- map-generator support: recolored temperate beach/water-cliff/debris tiles (art = bits/jungle/*.jun) ---
+	Template@900:
+		Id: 900
+		Images: sh01.jun
+		Palette: ra_temperat
+		Size: 4,5
+		Categories: Beach
+		Tiles:
+			3: Rock
+			5: Clear
+			6: Clear
+			7: Beach
+			8: Beach
+			9: Water
+			10: Water
+			11: River
+			12: Water
+			13: Water
+			16: Water
+	Template@901:
+		Id: 901
+		Images: sh02.jun
+		Palette: ra_temperat
+		Size: 5,5
+		Categories: Beach
+		Tiles:
+			4: Clear
+			8: Beach
+			9: Beach
+			10: Beach
+			11: Clear
+			12: Beach
+			13: Beach
+			14: Beach
+			15: Beach
+			16: Rough
+			17: Rough
+			18: River
+			20: Water
+			21: Water
+			22: Rock
+	Template@902:
+		Id: 902
+		Images: sh03.jun
+		Palette: ra_temperat
+		Size: 3,5
+		Categories: Beach
+		Tiles:
+			2: Clear
+			4: Beach
+			5: Beach
+			6: Beach
+			7: Beach
+			8: Beach
+			9: Water
+			10: Water
+			12: Water
+	Template@903:
+		Id: 903
+		Images: sh04.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+			2: Beach
+			3: Beach
+			4: Beach
+			5: Beach
+			6: Water
+			7: Water
+			8: Water
+	Template@904:
+		Id: 904
+		Images: sh05.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Rock
+			2: Beach
+			3: Beach
+			4: Rock
+			5: Rock
+			6: Rock
+			7: River
+			8: River
+	Template@905:
+		Id: 905
+		Images: sh06.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+			2: Beach
+			3: Beach
+			4: Beach
+			5: Beach
+			6: Water
+			7: Water
+			8: Water
+	Template@906:
+		Id: 906
+		Images: sh07.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+			2: Beach
+			3: Beach
+			4: Beach
+			5: Beach
+			6: Water
+			7: Water
+			8: Water
+	Template@907:
+		Id: 907
+		Images: sh08.jun
+		Palette: ra_temperat
+		Size: 1,2
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+	Template@908:
+		Id: 908
+		Images: sh10.jun
+		Palette: ra_temperat
+		Size: 5,6
+		Categories: Beach
+		Tiles:
+			0: Clear
+			5: Beach
+			6: Clear
+			10: Water
+			11: Beach
+			12: Beach
+			13: Water
+			17: Water
+			18: Beach
+			19: Beach
+			22: Rock
+			23: Rock
+			24: Rock
+			28: Water
+			29: Water
+	Template@909:
+		Id: 909
+		Images: sh11.jun
+		Palette: ra_temperat
+		Size: 4,5
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Clear
+			4: Beach
+			5: Water
+			6: Beach
+			8: Water
+			9: Water
+			10: Beach
+			11: Beach
+			14: Beach
+			15: Beach
+			18: Water
+			19: Beach
+	Template@910:
+		Id: 910
+		Images: sh12.jun
+		Palette: ra_temperat
+		Size: 3,5
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Clear
+			3: Beach
+			4: Beach
+			5: Beach
+			6: Water
+			7: Beach
+			8: Beach
+			10: Water
+			11: Beach
+			14: Water
+	Template@911:
+		Id: 911
+		Images: sh13.jun
+		Palette: ra_temperat
+		Size: 6,5
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Rock
+			2: Beach
+			7: Beach
+			8: Beach
+			9: Beach
+			13: Water
+			14: Beach
+			15: Beach
+			16: Clear
+			19: Water
+			20: Water
+			21: Rough
+			22: Beach
+			23: Clear
+			27: Beach
+			28: Beach
+			29: Beach
+	Template@912:
+		Id: 912
+		Images: sh14.jun
+		Palette: ra_temperat
+		Size: 4,4
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+			2: Clear
+			4: River
+			5: Beach
+			6: Beach
+			8: Rough
+			9: Beach
+			10: Beach
+			13: Water
+			14: Beach
+			15: Beach
+	Template@913:
+		Id: 913
+		Images: sh15.jun
+		Palette: ra_temperat
+		Size: 5,3
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Water
+			2: Beach
+			3: Clear
+			6: Water
+			7: Beach
+			8: Beach
+			12: Water
+			13: Beach
+			14: Beach
+	Template@914:
+		Id: 914
+		Images: sh16.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Beach
+			2: Clear
+			3: Water
+			4: Beach
+			5: Clear
+			6: Water
+			7: Beach
+			8: Clear
+	Template@915:
+		Id: 915
+		Images: sh17.jun
+		Palette: ra_temperat
+		Size: 2,1
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Clear
+	Template@916:
+		Id: 916
+		Images: sh19.jun
+		Palette: ra_temperat
+		Size: 4,5
+		Categories: Beach
+		Tiles:
+			1: Water
+			2: Beach
+			3: Clear
+			5: Beach
+			6: Beach
+			7: Clear
+			8: Water
+			9: Beach
+			10: Beach
+			12: Water
+			13: Beach
+			14: Beach
+			16: Water
+			17: Beach
+			18: Clear
+	Template@917:
+		Id: 917
+		Images: sh20.jun
+		Palette: ra_temperat
+		Size: 5,4
+		Categories: Beach
+		Tiles:
+			2: Water
+			3: Beach
+			4: Beach
+			5: Water
+			6: Beach
+			7: Beach
+			8: Beach
+			10: Water
+			11: Beach
+			12: Beach
+			15: Water
+			16: Beach
+			17: Beach
+	Template@918:
+		Id: 918
+		Images: sh21.jun
+		Palette: ra_temperat
+		Size: 5,3
+		Categories: Beach
+		Tiles:
+			1: Water
+			2: Beach
+			3: Beach
+			4: Clear
+			5: Water
+			6: Beach
+			7: Beach
+			8: Clear
+			10: Water
+			11: Beach
+			12: Beach
+	Template@919:
+		Id: 919
+		Images: sh22.jun
+		Palette: ra_temperat
+		Size: 6,5
+		Categories: Beach
+		Tiles:
+			0: Water
+			6: Water
+			7: Water
+			12: Beach
+			13: Beach
+			14: Water
+			15: Water
+			16: Water
+			17: Water
+			19: Clear
+			20: Beach
+			21: Beach
+			22: Water
+			23: Beach
+			27: Beach
+			28: Beach
+			29: Beach
+	Template@920:
+		Id: 920
+		Images: sh23.jun
+		Palette: ra_temperat
+		Size: 5,5
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Water
+			2: Water
+			5: Beach
+			6: Beach
+			7: Water
+			8: Water
+			9: Water
+			11: Clear
+			12: Beach
+			13: River
+			14: Water
+			17: Clear
+			18: Beach
+			19: Beach
+			22: Beach
+			23: Beach
+			24: Beach
+	Template@921:
+		Id: 921
+		Images: sh24.jun
+		Palette: ra_temperat
+		Size: 3,4
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Water
+			3: Beach
+			4: Water
+			5: Water
+			7: Clear
+			8: Beach
+			11: Clear
+	Template@922:
+		Id: 922
+		Images: sh25.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Water
+			2: Water
+			3: Rock
+			4: Rock
+			5: Beach
+			6: Rock
+			7: Rock
+			8: Beach
+	Template@923:
+		Id: 923
+		Images: sh26.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Water
+			2: Water
+			3: Beach
+			4: Beach
+			5: Rough
+			6: Beach
+			7: Beach
+			8: Beach
+	Template@924:
+		Id: 924
+		Images: sh27.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Beach
+			4: Beach
+			5: Beach
+			6: Beach
+			7: Beach
+			8: Rough
+	Template@925:
+		Id: 925
+		Images: sh28.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			1: Rock
+			2: Rock
+			3: Beach
+			4: Rock
+			5: Rock
+			6: Beach
+			7: Rough
+			8: Rough
+	Template@926:
+		Id: 926
+		Images: sh29.jun
+		Palette: ra_temperat
+		Size: 1,2
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Clear
+	Template@927:
+		Id: 927
+		Images: sh31.jun
+		Palette: ra_temperat
+		Size: 6,5
+		Categories: Beach
+		Tiles:
+			3: Water
+			4: Water
+			5: Beach
+			8: Water
+			9: Water
+			10: Beach
+			11: Beach
+			12: Water
+			13: Water
+			14: Water
+			15: Beach
+			16: Clear
+			18: Beach
+			19: Beach
+			20: Water
+			21: Beach
+			22: Clear
+			24: Clear
+			25: Clear
+			26: Beach
+			27: Beach
+			28: Clear
+	Template@928:
+		Id: 928
+		Images: sh32.jun
+		Palette: ra_temperat
+		Size: 4,4
+		Categories: Beach
+		Tiles:
+			2: Water
+			3: Water
+			4: Water
+			5: Water
+			6: Beach
+			7: Beach
+			8: Beach
+			9: Beach
+			10: Beach
+			12: Clear
+			13: Clear
+	Template@929:
+		Id: 929
+		Images: sh33.jun
+		Palette: ra_temperat
+		Size: 3,4
+		Categories: Beach
+		Tiles:
+			1: Water
+			2: Beach
+			3: Water
+			4: Beach
+			5: Clear
+			6: Beach
+			7: Rough
+			9: Beach
+			10: Beach
+	Template@930:
+		Id: 930
+		Images: sh34.jun
+		Palette: ra_temperat
+		Size: 6,5
+		Categories: Beach
+		Tiles:
+			3: Clear
+			4: Beach
+			5: Water
+			7: Beach
+			8: Beach
+			9: Beach
+			10: Beach
+			13: Beach
+			14: Beach
+			15: Water
+			19: Beach
+			20: Beach
+			21: Water
+			24: Beach
+			25: Beach
+			26: Water
+	Template@931:
+		Id: 931
+		Images: sh35.jun
+		Palette: ra_temperat
+		Size: 4,4
+		Categories: Beach
+		Tiles:
+			2: Beach
+			3: Water
+			5: Clear
+			6: Beach
+			7: Rough
+			9: Beach
+			10: Beach
+			11: Water
+			12: Clear
+			13: Beach
+			14: Water
+	Template@932:
+		Id: 932
+		Images: sh36.jun
+		Palette: ra_temperat
+		Size: 4,3
+		Categories: Beach
+		Tiles:
+			1: Beach
+			2: Beach
+			3: Water
+			4: Beach
+			5: Beach
+			6: Water
+			8: Beach
+			9: Water
+			10: Water
+	Template@933:
+		Id: 933
+		Images: sh37.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			1: Beach
+			2: Water
+			3: Clear
+			4: Beach
+			5: Water
+			6: Rough
+			7: Beach
+			8: Water
+	Template@934:
+		Id: 934
+		Images: sh38.jun
+		Palette: ra_temperat
+		Size: 2,1
+		Categories: Beach
+		Tiles:
+			0: Clear
+			1: Beach
+	Template@935:
+		Id: 935
+		Images: sh40.jun
+		Palette: ra_temperat
+		Size: 5,5
+		Categories: Beach
+		Tiles:
+			0: Clear
+			1: Beach
+			2: Water
+			6: Beach
+			7: Water
+			11: Beach
+			12: Water
+			13: Water
+			16: Clear
+			17: Beach
+			18: Beach
+			19: Water
+			22: Beach
+			23: Beach
+			24: Water
+	Template@936:
+		Id: 936
+		Images: sh41.jun
+		Palette: ra_temperat
+		Size: 4,4
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Water
+			4: Beach
+			5: Beach
+			6: Water
+			8: Beach
+			9: Beach
+			10: Water
+			11: Water
+			13: Clear
+			14: Beach
+			15: Water
+	Template@937:
+		Id: 937
+		Images: sh42.jun
+		Palette: ra_temperat
+		Size: 4,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+			2: Water
+			5: Beach
+			6: Beach
+			7: River
+			9: Clear
+			10: Beach
+			11: Water
+	Template@938:
+		Id: 938
+		Images: sh43.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+			2: Beach
+			3: Beach
+			4: Beach
+			5: Beach
+			6: Beach
+			7: Water
+			8: Water
+	Template@939:
+		Id: 939
+		Images: sh44.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Beach
+			2: River
+			3: Water
+	Template@940:
+		Id: 940
+		Images: sh45.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Beach
+			2: Water
+			3: Water
+			4: Rough
+			5: Beach
+			6: Water
+			7: River
+			8: Beach
+	Template@941:
+		Id: 941
+		Images: sh46.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: River
+			2: River
+			3: Beach
+	Template@942:
+		Id: 942
+		Images: sh47.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Water
+			3: Beach
+			4: Water
+			6: Beach
+			7: Beach
+			8: Water
+	Template@943:
+		Id: 943
+		Images: sh48.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Water
+			2: Clear
+			3: Beach
+	Template@944:
+		Id: 944
+		Images: sh49.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Water
+			2: Water
+			3: Rock
+			4: Rock
+			5: River
+			6: River
+			7: Rock
+			8: Rock
+	Template@945:
+		Id: 945
+		Images: sh50.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Beach
+			2: Beach
+			3: Water
+	Template@946:
+		Id: 946
+		Images: sh51.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Clear
+			1: Beach
+			2: Beach
+			4: Beach
+			5: Beach
+			7: Rough
+			8: Clear
+	Template@947:
+		Id: 947
+		Images: sh52.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			1: Clear
+			2: Clear
+			3: Clear
+			4: Beach
+			5: Beach
+			7: Beach
+			8: Water
+	Template@948:
+		Id: 948
+		Images: sh53.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Beach
+			1: Clear
+			3: Beach
+			4: Beach
+			5: Clear
+			6: Water
+			7: Beach
+			8: Clear
+	Template@949:
+		Id: 949
+		Images: sh54.jun
+		Palette: ra_temperat
+		Size: 3,3
+		Categories: Beach
+		Tiles:
+			0: Water
+			1: Beach
+			2: Clear
+			3: Beach
+			4: Beach
+			6: Clear
+	Template@950:
+		Id: 950
+		Images: wc01.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@951:
+		Id: 951
+		Images: wc02.jun
+		Palette: ra_temperat
+		Size: 2,3
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rough
+			2: Rock
+			3: Rock
+			4: Rock
+			5: Rock
+	Template@952:
+		Id: 952
+		Images: wc03.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@953:
+		Id: 953
+		Images: wc04.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@954:
+		Id: 954
+		Images: wc05.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@955:
+		Id: 955
+		Images: wc06.jun
+		Palette: ra_temperat
+		Frames: 0, 1, 2, 3, 4, 4
+		Size: 2,3
+		Categories: Water Cliffs
+		Tiles:
+			0: Rough
+			1: Rock
+			2: Rock
+			3: Rock
+			4: Rock
+	Template@956:
+		Id: 956
+		Images: wc07.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@957:
+		Id: 957
+		Images: wc08.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@958:
+		Id: 958
+		Images: wc09.jun
+		Palette: ra_temperat
+		Size: 3,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: River
+			4: Rock
+			5: Rock
+	Template@959:
+		Id: 959
+		Images: wc10.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@960:
+		Id: 960
+		Images: wc11.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@961:
+		Id: 961
+		Images: wc12.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@962:
+		Id: 962
+		Images: wc13.jun
+		Palette: ra_temperat
+		Size: 3,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rough
+			3: Rock
+			4: Rock
+			5: Clear
+	Template@963:
+		Id: 963
+		Images: wc14.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Beach
+			2: Beach
+			3: Beach
+	Template@964:
+		Id: 964
+		Images: wc15.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@965:
+		Id: 965
+		Images: wc16.jun
+		Palette: ra_temperat
+		Size: 2,3
+		Categories: Water Cliffs
+		Tiles:
+			0: Water
+			2: Rock
+			3: Rock
+			5: Rock
+	Template@966:
+		Id: 966
+		Images: wc17.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@967:
+		Id: 967
+		Images: wc18.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@968:
+		Id: 968
+		Images: wc19.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@969:
+		Id: 969
+		Images: wc20.jun
+		Palette: ra_temperat
+		Size: 2,3
+		Categories: Water Cliffs
+		Tiles:
+			1: River
+			2: Rock
+			3: Rock
+			4: Rock
+			5: Rough
+	Template@970:
+		Id: 970
+		Images: wc21.jun
+		Palette: ra_temperat
+		Size: 1,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+	Template@971:
+		Id: 971
+		Images: wc22.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@972:
+		Id: 972
+		Images: wc23.jun
+		Palette: ra_temperat
+		Size: 3,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: River
+			3: Rock
+			4: Rock
+			5: Water
+	Template@973:
+		Id: 973
+		Images: wc24.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@974:
+		Id: 974
+		Images: wc25.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@975:
+		Id: 975
+		Images: wc26.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@976:
+		Id: 976
+		Images: wc27.jun
+		Palette: ra_temperat
+		Size: 3,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Water
+			3: Clear
+			4: Rock
+			5: Rock
+	Template@977:
+		Id: 977
+		Images: wc28.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			3: Rock
+	Template@978:
+		Id: 978
+		Images: wc29.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@979:
+		Id: 979
+		Images: wc30.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@980:
+		Id: 980
+		Images: wc31.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: River
+			2: Rock
+			3: Rock
+	Template@981:
+		Id: 981
+		Images: wc32.jun
+		Palette: ra_temperat
+		Frames: 0, 1, 2, 2
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Water
+	Template@982:
+		Id: 982
+		Images: wc33.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@983:
+		Id: 983
+		Images: wc34.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@984:
+		Id: 984
+		Images: wc35.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@985:
+		Id: 985
+		Images: wc36.jun
+		Palette: ra_temperat
+		Size: 2,2
+		Categories: Water Cliffs
+		Tiles:
+			0: Rock
+			1: Rock
+			2: Rock
+			3: Rock
+	Template@986:
+		Id: 986
+		Images: rf02.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Debris
+		Tiles:
+			0: Rock
+	Template@987:
+		Id: 987
+		Images: rf03.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Debris
+		Tiles:
+			0: Rock
+	Template@988:
+		Id: 988
+		Images: rf04.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Debris
+		Tiles:
+			0: Rock
+	Template@989:
+		Id: 989
+		Images: rf05.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Debris
+		Tiles:
+			0: Rock
+	Template@990:
+		Id: 990
+		Images: rf06.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Debris
+		Tiles:
+			0: Rock
+	Template@991:
+		Id: 991
+		Images: rf07.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Debris
+		Tiles:
+			0: Rock
+	Template@992:
+		Id: 992
+		Images: rf08.jun
+		Palette: ra_temperat
+		Size: 1,2
+		Categories: Debris
+		Tiles:
+			0: Rock
+			1: Rock
+	Template@993:
+		Id: 993
+		Images: rf09.jun
+		Palette: ra_temperat
+		Size: 1,2
+		Categories: Debris
+		Tiles:
+			0: Rock
+			1: Rock
+	Template@994:
+		Id: 994
+		Images: rf10.jun
+		Palette: ra_temperat
+		Size: 2,1
+		Categories: Debris
+		Tiles:
+			0: Rough
+			1: Rough
+	Template@995:
+		Id: 995
+		Images: rf11.jun
+		Palette: ra_temperat
+		Size: 2,1
+		Categories: Debris
+		Tiles:
+			0: Rock
+			1: Rock
+	Template@996:
+		Id: 996
+		Images: d44.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Road
+		Tiles:
+			0: Road
+	Template@997:
+		Id: 997
+		Images: d45.jun
+		Palette: ra_temperat
+		Size: 1,1
+		Categories: Road
+		Tiles:
+			0: Road
+	Template@998:
+		Id: 998
+		Images: rv14.jun
+		Palette: ra_temperat
+		Size: 1,2
+		Categories: River
+		Tiles:
+			0: Rock
+			1: River
+	Template@999:
+		Id: 999
+		Images: rv15.jun
+		Palette: ra_temperat
+		Size: 2,1
+		Categories: River
+		Tiles:
+			0: Rock
+			1: River
+MultiBrushCollections:
+	Segmented:
+		MultiBrush@401:
+			Template: 189
+			Segment:
+				End: Cliff.L
+				Points: 1,1, 0,1
+				Start: Cliff.L
+		MultiBrush@402:
+			Template: 190
+			Segment:
+				End: Cliff.R
+				Points: 0,1, 1,1
+				Start: Cliff.R
+		MultiBrush@403:
+			Template: 191
+			Segment:
+				End: Cliff.U
+				Points: 1,1, 1,0
+				Start: Cliff.U
+		MultiBrush@404:
+			Template: 192
+			Segment:
+				End: Cliff.D
+				Points: 1,0, 1,1
+				Start: Cliff.D
+		MultiBrush@3:
+			Template: 900
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 4,1, 4,2, 3,2, 2,2, 1,2, 1,3, 0,3
+		MultiBrush@4:
+			Template: 901
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 5,1, 5,2, 4,2, 4,3, 3,3, 3,4, 2,4, 1,4, 1,3, 0,3
+		MultiBrush@5:
+			Template: 902
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 3,1, 3,2, 2,2, 1,2, 1,3, 0,3
+		MultiBrush@6:
+			Template: 903
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 3,1, 2,1, 1,1, 0,1
+		MultiBrush@7:
+			Template: 904
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 3,1, 2,1, 1,1, 0,1
+		MultiBrush@8:
+			Template: 905
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 3,1, 2,1, 1,1, 0,1
+		MultiBrush@9:
+			Template: 906
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 3,1, 2,1, 1,1, 0,1
+		MultiBrush@10:
+			Template: 907
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 1,1, 0,1
+		MultiBrush@12:
+			Template: 908
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 5,4, 4,4, 4,3, 3,3, 2,3, 1,3, 1,2, 0,2, 0,1
+		MultiBrush@13:
+			Template: 909
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 4,3, 4,4, 3,4, 3,3, 2,3, 2,2, 1,2, 1,1, 0,1
+		MultiBrush@14:
+			Template: 910
+			Segment:
+				Start: Beach.L
+				End: Beach.L
+				Points: 3,3, 2,3, 2,2, 1,2, 1,1, 0,1
+		MultiBrush@15:
+			Template: 911
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 5,5, 5,4, 4,4, 4,3, 3,3, 3,2, 2,2, 2,1, 2,0
+		MultiBrush@16:
+			Template: 912
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 3,4, 3,3, 2,3, 2,2, 2,1, 1,1, 1,0
+		MultiBrush@17:
+			Template: 913
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 4,3, 4,2, 3,2, 3,1, 2,1, 2,0
+		MultiBrush@18:
+			Template: 914
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 2,3, 2,2, 2,1, 2,0
+		MultiBrush@19:
+			Template: 915
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 1,1, 1,0
+		MultiBrush@21:
+			Template: 916
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 1,5, 2,5, 2,4, 2,3, 2,2, 2,1, 3,1, 3,0
+		MultiBrush@22:
+			Template: 917
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 2,4, 2,3, 1,3, 1,2, 2,2, 3,2, 3,1, 4,1, 4,0
+		MultiBrush@23:
+			Template: 918
+			Segment:
+				Start: Beach.U
+				End: Beach.U
+				Points: 2,3, 2,2, 2,1, 3,1, 4,1, 4,0
+		MultiBrush@24:
+			Template: 919
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,2, 1,2, 2,2, 2,3, 3,3, 4,3, 4,4, 5,4, 6,4
+		MultiBrush@25:
+			Template: 920
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,1, 1,1, 2,1, 2,2, 3,2, 3,3, 4,3, 5,3, 5,4
+		MultiBrush@26:
+			Template: 921
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,1, 1,1, 1,2, 2,2, 3,2, 3,3
+		MultiBrush@27:
+			Template: 922
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,2, 1,2, 2,2, 3,2
+		MultiBrush@28:
+			Template: 923
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,2, 1,2, 2,2, 3,2
+		MultiBrush@29:
+			Template: 924
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,2, 1,2, 2,2, 3,2
+		MultiBrush@30:
+			Template: 925
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,2, 1,2, 2,2, 3,2
+		MultiBrush@31:
+			Template: 926
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,1, 1,1
+		MultiBrush@33:
+			Template: 927
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,4, 1,4, 2,4, 3,4, 3,3, 3,2, 4,2, 4,1, 5,1, 6,1
+		MultiBrush@34:
+			Template: 928
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,3, 1,3, 1,2, 2,2, 2,1, 3,1, 4,1
+		MultiBrush@35:
+			Template: 929
+			Segment:
+				Start: Beach.R
+				End: Beach.R
+				Points: 0,3, 0,2, 1,2, 1,1, 2,1, 3,1
+		MultiBrush@36:
+			Template: 930
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 4,0, 4,1, 4,2, 3,2, 3,3, 2,3, 2,4, 1,4, 1,5
+		MultiBrush@37:
+			Template: 931
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 2,0, 2,1, 2,2, 2,3, 1,3, 1,4
+		MultiBrush@38:
+			Template: 932
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 2,0, 2,1, 2,2, 1,2, 1,3, 0,3
+		MultiBrush@39:
+			Template: 933
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 1,0, 1,1, 1,2, 1,3
+		MultiBrush@40:
+			Template: 934
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 1,0, 1,1
+		MultiBrush@42:
+			Template: 935
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 1,0, 1,1, 1,2, 1,3, 2,3, 2,4, 3,4, 3,5
+		MultiBrush@43:
+			Template: 936
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 0,0, 0,1, 0,2, 1,2, 1,3, 2,3, 2,4
+		MultiBrush@44:
+			Template: 937
+			Segment:
+				Start: Beach.D
+				End: Beach.D
+				Points: 0,0, 0,1, 1,1, 2,1, 2,2, 2,3
+		MultiBrush@45:
+			Template: 938
+			Segment:
+				Start: Beach.L
+				End: Beach.U
+				Points: 3,1, 2,1, 1,1, 1,0, 2,0
+		MultiBrush@46:
+			Template: 939
+			Segment:
+				Start: Beach.L
+				End: Beach.U
+				Points: 2,1, 1,1, 1,0
+		MultiBrush@47:
+			Template: 940
+			Segment:
+				Start: Beach.U
+				End: Beach.R
+				Points: 2,3, 2,2, 3,2
+		MultiBrush@48:
+			Template: 941
+			Segment:
+				Start: Beach.U
+				End: Beach.R
+				Points: 1,2, 1,1, 2,1
+		MultiBrush@49:
+			Template: 942
+			Segment:
+				Start: Beach.R
+				End: Beach.D
+				Points: 0,2, 1,2, 1,3
+		MultiBrush@50:
+			Template: 943
+			Segment:
+				Start: Beach.R
+				End: Beach.D
+				Points: 0,1, 1,1, 1,2
+		MultiBrush@51:
+			Template: 944
+			Segment:
+				Start: Beach.D
+				End: Beach.L
+				Points: 1,0, 1,1, 0,1
+		MultiBrush@52:
+			Template: 945
+			Segment:
+				Start: Beach.D
+				End: Beach.L
+				Points: 1,0, 1,1, 0,1
+		MultiBrush@53:
+			Template: 946
+			Segment:
+				Start: Beach.D
+				End: Beach.R
+				Points: 1,0, 1,1, 2,1, 2,2, 3,2
+		MultiBrush@54:
+			Template: 947
+			Segment:
+				Start: Beach.L
+				End: Beach.D
+				Points: 3,1, 2,1, 2,2, 1,2, 1,3
+		MultiBrush@55:
+			Template: 948
+			Segment:
+				Start: Beach.U
+				End: Beach.L
+				Points: 2,3, 2,2, 1,2, 1,1, 0,1
+		MultiBrush@56:
+			Template: 949
+			Segment:
+				Start: Beach.R
+				End: Beach.U
+				Points: 0,2, 1,2, 1,1, 2,1, 2,0
+		MultiBrush@59:
+			Template: 950
+			Segment:
+				Start: WaterCliff.L
+				End: Beach.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@60:
+			Template: 951
+			Segment:
+				Start: WaterCliff.L
+				End: WaterCliff.L
+				Points: 2,2, 1,2, 1,1, 0,1
+		MultiBrush@61:
+			Template: 952
+			Segment:
+				Start: WaterCliff.L
+				End: WaterCliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@62:
+			Template: 953
+			Segment:
+				Start: WaterCliff.L
+				End: WaterCliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@63:
+			Template: 954
+			Segment:
+				Start: WaterCliff.L
+				End: WaterCliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@64:
+			Template: 955
+			Segment:
+				Start: WaterCliff.L
+				End: WaterCliff.L
+				Points: 2,1, 1,1, 1,2, 0,2
+		MultiBrush@65:
+			Template: 956
+			Segment:
+				Start: Beach.L
+				End: WaterCliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@66:
+			Template: 957
+			Segment:
+				Start: WaterCliff.U
+				End: Beach.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@67:
+			Template: 958
+			Segment:
+				Start: WaterCliff.U
+				End: WaterCliff.U
+				Points: 2,2, 2,1, 1,1, 1,0
+		MultiBrush@68:
+			Template: 959
+			Segment:
+				Start: WaterCliff.U
+				End: WaterCliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@69:
+			Template: 960
+			Segment:
+				Start: WaterCliff.U
+				End: WaterCliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@70:
+			Template: 961
+			Segment:
+				Start: WaterCliff.U
+				End: WaterCliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@71:
+			Template: 962
+			Segment:
+				Start: WaterCliff.U
+				End: WaterCliff.U
+				Points: 1,2, 1,1, 2,1, 2,0
+		MultiBrush@72:
+			Template: 963
+			Segment:
+				Start: Beach.U
+				End: WaterCliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@73:
+			Template: 964
+			Segment:
+				Start: Beach.R
+				End: WaterCliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@74:
+			Template: 965
+			Segment:
+				Start: WaterCliff.R
+				End: WaterCliff.R
+				Points: 0,1, 1,1, 1,2, 2,2
+		MultiBrush@75:
+			Template: 966
+			Segment:
+				Start: WaterCliff.R
+				End: WaterCliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@76:
+			Template: 967
+			Segment:
+				Start: WaterCliff.R
+				End: WaterCliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@77:
+			Template: 968
+			Segment:
+				Start: WaterCliff.R
+				End: WaterCliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@78:
+			Template: 969
+			Segment:
+				Start: WaterCliff.R
+				End: WaterCliff.R
+				Points: 0,2, 1,2, 1,1, 2,1
+		MultiBrush@79:
+			Template: 970
+			Segment:
+				Start: WaterCliff.R
+				End: Beach.R
+				Points: 0,1, 1,1
+		MultiBrush@80:
+			Template: 971
+			Segment:
+				Start: Beach.D
+				End: WaterCliff.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@81:
+			Template: 972
+			Segment:
+				Start: WaterCliff.D
+				End: WaterCliff.D
+				Points: 2,0, 2,1, 1,1, 1,2
+		MultiBrush@82:
+			Template: 973
+			Segment:
+				Start: WaterCliff.D
+				End: WaterCliff.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@83:
+			Template: 974
+			Segment:
+				Start: WaterCliff.D
+				End: WaterCliff.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@84:
+			Template: 975
+			Segment:
+				Start: WaterCliff.D
+				End: WaterCliff.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@85:
+			Template: 976
+			Segment:
+				Start: WaterCliff.D
+				End: WaterCliff.D
+				Points: 1,0, 1,1, 2,1, 2,2
+		MultiBrush@86:
+			Template: 977
+			Segment:
+				Start: WaterCliff.D
+				End: Beach.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@87:
+			Template: 978
+			Segment:
+				Start: WaterCliff.L
+				End: WaterCliff.U
+				Points: 2,1, 1,1, 1,0
+		MultiBrush@88:
+			Template: 979
+			Segment:
+				Start: WaterCliff.U
+				End: WaterCliff.R
+				Points: 1,2, 1,1, 2,1
+		MultiBrush@89:
+			Template: 980
+			Segment:
+				Start: WaterCliff.R
+				End: WaterCliff.D
+				Points: 0,1, 1,1, 1,2
+		MultiBrush@90:
+			Template: 981
+			Segment:
+				Start: WaterCliff.D
+				End: WaterCliff.L
+				Points: 1,0, 1,1, 0,1
+		MultiBrush@91:
+			Template: 982
+			Segment:
+				Start: WaterCliff.D
+				End: WaterCliff.R
+				Points: 1,0, 1,1, 2,1
+		MultiBrush@92:
+			Template: 983
+			Segment:
+				Start: WaterCliff.L
+				End: WaterCliff.D
+				Points: 2,1, 1,1, 1,2
+		MultiBrush@93:
+			Template: 984
+			Segment:
+				Start: WaterCliff.U
+				End: WaterCliff.L
+				Points: 1,2, 1,1, 0,1
+		MultiBrush@94:
+			Template: 985
+			Segment:
+				Start: WaterCliff.R
+				End: WaterCliff.U
+				Points: 0,1, 1,1, 1,0
+		MultiBrush@112:
+			Template: 136
+			Segment:
+				Start: River.R
+				End: River.R
+				Points: 0,2, 1,2, 2,2, 3,2, 4,2, 5,2
+		MultiBrush@112reverse:
+			Template: 136
+			Segment:
+				Start: River.L
+				End: River.L
+				Points: 5,2, 4,2, 3,2, 2,2, 1,2, 0,2
+		MultiBrush@113:
+			Template: 137
+			Segment:
+				Start: River.R
+				End: River.R
+				Points: 0,2, 1,2, 2,2, 2,1, 3,1, 4,1, 5,1
+		MultiBrush@113reverse:
+			Template: 137
+			Segment:
+				Start: River.L
+				End: River.L
+				Points: 5,1, 4,1, 3,1, 2,1, 2,2, 1,2, 0,2
+		MultiBrush@114:
+			Template: 138
+			Segment:
+				Start: River.R
+				End: River.R
+				Points: 0,1, 1,1, 1,2, 2,2, 3,2, 3,3, 4,3
+		MultiBrush@114reverse:
+			Template: 138
+			Segment:
+				Start: River.L
+				End: River.L
+				Points: 4,3, 3,3, 3,2, 2,2, 1,2, 1,1, 0,1
+		MultiBrush@115:
+			Template: 139
+			Segment:
+				Start: River.R
+				End: River.R
+				Points: 0,3, 1,3, 1,2, 2,2, 3,2, 3,1, 4,1
+		MultiBrush@115reverse:
+			Template: 139
+			Segment:
+				Start: River.L
+				End: River.L
+				Points: 4,1, 3,1, 3,2, 2,2, 1,2, 1,3, 0,3
+		MultiBrush@116:
+			Template: 140
+			Segment:
+				Start: River.D
+				End: River.D
+				Points: 2,0, 2,1, 2,2, 2,3
+		MultiBrush@116reverse:
+			Template: 140
+			Segment:
+				Start: River.U
+				End: River.U
+				Points: 2,3, 2,2, 2,1, 2,0
+		MultiBrush@117:
+			Template: 141
+			Segment:
+				Start: River.D
+				End: River.D
+				Points: 2,0, 2,1, 2,2
+		MultiBrush@117reverse:
+			Template: 141
+			Segment:
+				Start: River.U
+				End: River.U
+				Points: 2,2, 2,1, 2,0
+		MultiBrush@118:
+			Template: 142
+			Segment:
+				Start: River.D
+				End: River.D
+				Points: 2,0, 2,1, 2,2
+		MultiBrush@118reverse:
+			Template: 142
+			Segment:
+				Start: River.U
+				End: River.U
+				Points: 2,2, 2,1, 2,0
+		MultiBrush@119:
+			Template: 143
+			Segment:
+				Start: River.U
+				End: River.R
+				Points: 1,2, 1,1, 2,1
+		MultiBrush@119reverse:
+			Template: 143
+			Segment:
+				Start: River.L
+				End: River.D
+				Points: 2,1, 1,1, 1,2
+		MultiBrush@120:
+			Template: 144
+			Segment:
+				Start: River.R
+				End: River.D
+				Points: 0,1, 1,1, 1,2
+		MultiBrush@120reverse:
+			Template: 144
+			Segment:
+				Start: River.U
+				End: River.L
+				Points: 1,2, 1,1, 0,1
+		MultiBrush@121:
+			Template: 145
+			Segment:
+				Start: River.L
+				End: River.U
+				Points: 2,1, 1,1, 1,0
+		MultiBrush@121reverse:
+			Template: 145
+			Segment:
+				Start: River.D
+				End: River.R
+				Points: 1,0, 1,1, 2,1
+		MultiBrush@122:
+			Template: 146
+			Segment:
+				Start: River.D
+				End: River.L
+				Points: 1,0, 1,1, 0,1
+		MultiBrush@122reverse:
+			Template: 146
+			Segment:
+				Start: River.R
+				End: River.U
+				Points: 0,1, 1,1, 1,0
+		MultiBrush@135:
+			Template: 13
+			Segment:
+				Start: Cliff.L
+				Inner: Cliff
+				End: Clear.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@136:
+			Template: 14
+			Segment:
+				Start: Cliff.L
+				End: Cliff.L
+				Points: 2,2, 1,2, 1,1, 0,1
+		MultiBrush@137:
+			Template: 15
+			Segment:
+				Start: Cliff.L
+				End: Cliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@138:
+			Template: 16
+			Segment:
+				Start: Cliff.L
+				End: Cliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@139:
+			Template: 17
+			Segment:
+				Start: Cliff.L
+				End: Cliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@140:
+			Template: 18
+			Segment:
+				Start: Cliff.L
+				End: Cliff.L
+				Points: 2,1, 1,1, 1,2, 0,2
+		MultiBrush@141:
+			Template: 19
+			Segment:
+				Start: Clear.L
+				Inner: Cliff
+				End: Cliff.L
+				Points: 2,1, 1,1, 0,1
+		MultiBrush@142:
+			Template: 20
+			Segment:
+				Start: Cliff.U
+				Inner: Cliff
+				End: Clear.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@143:
+			Template: 21
+			Segment:
+				Start: Cliff.U
+				End: Cliff.U
+				Points: 2,2, 2,1, 1,1, 1,0
+		MultiBrush@144:
+			Template: 22
+			Segment:
+				Start: Cliff.U
+				End: Cliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@145:
+			Template: 23
+			Segment:
+				Start: Cliff.U
+				End: Cliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@146:
+			Template: 24
+			Segment:
+				Start: Cliff.U
+				End: Cliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@147:
+			Template: 25
+			Segment:
+				Start: Cliff.U
+				End: Cliff.U
+				Points: 1,2, 1,1, 2,1, 2,0
+		MultiBrush@148:
+			Template: 26
+			Segment:
+				Start: Clear.U
+				Inner: Cliff
+				End: Cliff.U
+				Points: 1,2, 1,1, 1,0
+		MultiBrush@149:
+			Template: 27
+			Segment:
+				Start: Clear.R
+				Inner: Cliff
+				End: Cliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@150:
+			Template: 28
+			Segment:
+				Start: Cliff.R
+				End: Cliff.R
+				Points: 0,1, 1,1, 1,2, 2,2
+		MultiBrush@151:
+			Template: 29
+			Segment:
+				Start: Cliff.R
+				End: Cliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@152:
+			Template: 30
+			Segment:
+				Start: Cliff.R
+				End: Cliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@153:
+			Template: 31
+			Segment:
+				Start: Cliff.R
+				End: Cliff.R
+				Points: 0,1, 1,1, 2,1
+		MultiBrush@154:
+			Template: 32
+			Segment:
+				Start: Cliff.R
+				End: Cliff.R
+				Points: 0,2, 1,2, 1,1, 2,1
+		MultiBrush@155:
+			Template: 33
+			Segment:
+				Start: Cliff.R
+				Inner: Cliff
+				End: Clear.R
+				Points: 0,1, 1,1
+		MultiBrush@156:
+			Template: 34
+			Segment:
+				Start: Clear.D
+				Inner: Cliff
+				End: Cliff.D
+				Points: 1,0, 1,1
+		MultiBrush@157:
+			Template: 35
+			Segment:
+				Start: Cliff.D
+				End: Cliff.D
+				Points: 2,0, 2,1, 1,1, 1,2
+		MultiBrush@158:
+			Template: 36
+			Segment:
+				Start: Cliff.D
+				End: Cliff.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@159:
+			Template: 37
+			Segment:
+				Start: Cliff.D
+				End: Cliff.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@160:
+			Template: 38
+			Segment:
+				Start: Cliff.D
+				End: Cliff.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@161:
+			Template: 39
+			Segment:
+				Start: Cliff.D
+				End: Cliff.D
+				Points: 1,0, 1,1, 2,1, 2,2
+		MultiBrush@162:
+			Template: 40
+			Segment:
+				Start: Cliff.D
+				Inner: Cliff
+				End: Clear.D
+				Points: 1,0, 1,1, 1,2
+		MultiBrush@163:
+			Template: 41
+			Segment:
+				Start: Cliff.L
+				End: Cliff.U
+				Points: 2,1, 1,1, 1,0
+		MultiBrush@164:
+			Template: 42
+			Segment:
+				Start: Cliff.U
+				End: Cliff.R
+				Points: 1,2, 1,1, 2,1
+		MultiBrush@165:
+			Template: 43
+			Segment:
+				Start: Cliff.R
+				End: Cliff.D
+				Points: 0,1, 1,1, 1,2
+		MultiBrush@166:
+			Template: 44
+			Segment:
+				Start: Cliff.D
+				End: Cliff.L
+				Points: 1,0, 1,1, 0,1
+		MultiBrush@167:
+			Template: 45
+			Segment:
+				Start: Cliff.D
+				End: Cliff.R
+				Points: 1,0, 1,1, 2,1
+		MultiBrush@168:
+			Template: 46
+			Segment:
+				Start: Cliff.L
+				End: Cliff.D
+				Points: 2,1, 1,1, 1,2
+		MultiBrush@169:
+			Template: 47
+			Segment:
+				Start: Cliff.U
+				End: Cliff.L
+				Points: 1,2, 1,1, 0,1
+		MultiBrush@170:
+			Template: 48
+			Segment:
+				Start: Cliff.R
+				End: Cliff.U
+				Points: 0,1, 1,1, 1,0
+		MultiBrush@173:
+			Template: 93
+			Segment:
+				End: Clear.D
+				Inner: Road
+				Points: 1,0, 1,1
+				Start: Road.Main.D
+		MultiBrush@173reverse:
+			Template: 93
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 2,1, 2,0
+				Start: Clear.U
+		MultiBrush@174:
+			Template: 94
+			Segment:
+				End: Clear.L
+				Inner: Road
+				Points: 2,0, 1,0
+				Start: Road.Main.L
+		MultiBrush@174reverse:
+			Template: 94
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 1,1, 2,1
+				Start: Clear.R
+		MultiBrush@175:
+			Template: 95
+			Segment:
+				End: Clear.U
+				Inner: Road
+				Points: 1,2, 1,1
+				Start: Road.Main.U
+		MultiBrush@175reverse:
+			Template: 95
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 0,1, 0,2
+				Start: Clear.D
+		MultiBrush@176:
+			Template: 96
+			Segment:
+				End: Clear.R
+				Inner: Road
+				Points: 0,2, 1,2
+				Start: Road.Main.R
+		MultiBrush@176reverse:
+			Template: 96
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 1,1, 0,1
+				Start: Clear.L
+		MultiBrush@177:
+			Template: 97
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 1,0, 1,1, 0,1, 0,2, 0,3, 0,4, 1,4
+				Start: Road.Main.D
+		MultiBrush@177reverse:
+			Template: 97
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 2,4, 2,3, 1,3, 1,2, 2,2, 2,1, 2,0
+				Start: Road.Main.U
+		MultiBrush@178:
+			Template: 98
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 0,0, 0,1, 0,2, 0,3
+				Start: Road.Main.D
+		MultiBrush@178reverse:
+			Template: 98
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 1,3, 1,2, 1,1, 1,0
+				Start: Road.Main.U
+		MultiBrush@179:
+			Template: 99
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 1,0, 1,1, 1,2
+				Start: Road.Main.D
+		MultiBrush@179reverse:
+			Template: 99
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 2,2, 2,1, 2,0
+				Start: Road.Main.U
+		MultiBrush@180:
+			Template: 100
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 1,0, 1,1, 1,2
+				Start: Road.Main.D
+		MultiBrush@180reverse:
+			Template: 100
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 2,2, 2,1, 2,0
+				Start: Road.Main.U
+		MultiBrush@181:
+			Template: 101
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,2, 1,2, 2,2, 3,2, 4,2
+				Start: Road.Main.R
+		MultiBrush@181reverse:
+			Template: 101
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 4,1, 3,1, 2,1, 1,1, 0,1
+				Start: Road.Main.L
+		MultiBrush@182:
+			Template: 102
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,2, 1,2, 2,2, 3,2, 4,2
+				Start: Road.Main.R
+		MultiBrush@182reverse:
+			Template: 102
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 4,1, 3,1, 2,1, 1,1, 0,1
+				Start: Road.Main.L
+		MultiBrush@183:
+			Template: 103
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,2, 1,2, 2,2
+				Start: Road.Main.R
+		MultiBrush@183reverse:
+			Template: 103
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 2,1, 1,1, 0,1
+				Start: Road.Main.L
+		MultiBrush@184:
+			Template: 104
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,2, 1,2, 2,2
+				Start: Road.Main.R
+		MultiBrush@184reverse:
+			Template: 104
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 2,1, 1,1, 0,1
+				Start: Road.Main.L
+		MultiBrush@185:
+			Template: 105
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,1, 1,1, 1,2, 2,2, 2,3, 3,3, 4,3
+				Start: Road.Main.R
+		MultiBrush@185reverse:
+			Template: 105
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 4,2, 3,2, 3,1, 2,1, 2,0, 1,0, 0,0
+				Start: Road.Main.L
+		MultiBrush@192:
+			Template: 112
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,0, 0,1, 0,2, 1,2, 1,3, 2,3, 3,3
+				Start: Road.Main.D
+		MultiBrush@192reverse:
+			Template: 112
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 3,2, 2,2, 2,1, 1,1, 1,0
+				Start: Road.Main.L
+		MultiBrush@193:
+			Template: 113
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 2,2, 2,1, 3,1
+				Start: Road.Main.U
+		MultiBrush@193reverse:
+			Template: 113
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 3,0, 2,0, 1,0, 1,1, 1,2
+				Start: Road.Main.L
+		MultiBrush@194:
+			Template: 114
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 0,2, 1,2, 1,3
+				Start: Road.Main.R
+		MultiBrush@194reverse:
+			Template: 114
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 2,3, 2,2, 2,1, 1,1, 0,1
+				Start: Road.Main.U
+		MultiBrush@195:
+			Template: 115
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 0,3, 1,3, 2,3, 2,2, 2,1, 2,0
+				Start: Road.Main.R
+		MultiBrush@195reverse:
+			Template: 115
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 1,0, 1,1, 1,2, 0,2
+				Start: Road.Main.D
+		MultiBrush@196:
+			Template: 116
+			Segment:
+				End: Road.Out.RD
+				Inner: Road
+				Points: 0,1, 0,2, 1,2, 1,3, 2,3
+				Start: Road.In.RD
+		MultiBrush@196reverse:
+			Template: 116
+			Segment:
+				End: Road.Out.LU
+				Inner: Road
+				Points: 3,2, 3,1, 2,1, 2,0, 1,0
+				Start: Road.In.LU
+		MultiBrush@197:
+			Template: 117
+			Segment:
+				End: Road.Out.RD
+				Inner: Road
+				Points: 0,1, 0,2, 1,2, 1,3, 2,3
+				Start: Road.In.RD
+		MultiBrush@197reverse:
+			Template: 117
+			Segment:
+				End: Road.Out.LU
+				Inner: Road
+				Points: 3,2, 3,1, 2,1, 2,0, 1,0
+				Start: Road.In.LU
+		MultiBrush@198:
+			Template: 118
+			Segment:
+				End: Road.In.RD
+				Inner: Road
+				Points: 0,1, 0,2, 1,2
+				Start: Road.Out.RD
+		MultiBrush@198reverse:
+			Template: 118
+			Segment:
+				End: Road.In.LU
+				Inner: Road
+				Points: 2,1, 2,0, 1,0
+				Start: Road.Out.LU
+		MultiBrush@199:
+			Template: 119
+			Segment:
+				End: Road.In.RD
+				Inner: Road
+				Points: 0,1, 0,2, 1,2
+				Start: Road.Out.RD
+		MultiBrush@199reverse:
+			Template: 119
+			Segment:
+				End: Road.In.LU
+				Inner: Road
+				Points: 2,1, 2,0, 1,0
+				Start: Road.Out.LU
+		MultiBrush@200:
+			Template: 120
+			Segment:
+				End: Road.In.RD
+				Inner: Road
+				Points: 0,1, 1,1, 1,2
+				Start: Road.Main.R
+		MultiBrush@200reverse:
+			Template: 120
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 2,1, 2,0, 1,0, 0,0
+				Start: Road.Out.LU
+		MultiBrush@201:
+			Template: 121
+			Segment:
+				End: Road.In.RD
+				Inner: Road
+				Points: 0,0, 0,1, 0,2, 1,2
+				Start: Road.Main.D
+		MultiBrush@201reverse:
+			Template: 121
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 2,1, 1,1, 1,0
+				Start: Road.Out.LU
+		MultiBrush@203:
+			Template: 123
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,1, 0,2, 1,2, 2,2
+				Start: Road.Out.RD
+		MultiBrush@203reverse:
+			Template: 123
+			Segment:
+				End: Road.In.LU
+				Inner: Road
+				Points: 2,1, 1,1, 1,0
+				Start: Road.Main.L
+		MultiBrush@204:
+			Template: 124
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 0,1, 0,2
+				Start: Road.Out.RD
+		MultiBrush@204reverse:
+			Template: 124
+			Segment:
+				End: Road.In.LU
+				Inner: Road
+				Points: 1,2, 1,1, 1,0
+				Start: Road.Main.U
+		MultiBrush@206:
+			Template: 126
+			Segment:
+				End: Road.Out.RU
+				Inner: Road
+				Points: 1,3, 2,3, 2,2, 3,2, 3,1
+				Start: Road.In.RU
+		MultiBrush@206reverse:
+			Template: 126
+			Segment:
+				End: Road.Out.LD
+				Inner: Road
+				Points: 2,0, 1,0, 1,1, 0,1, 0,2
+				Start: Road.In.LD
+		MultiBrush@207:
+			Template: 127
+			Segment:
+				End: Road.Out.RU
+				Inner: Road
+				Points: 1,3, 2,3, 2,2, 3,2, 3,1
+				Start: Road.In.RU
+		MultiBrush@207reverse:
+			Template: 127
+			Segment:
+				End: Road.Out.LD
+				Inner: Road
+				Points: 2,0, 1,0, 1,1, 0,1, 0,2
+				Start: Road.In.LD
+		MultiBrush@208:
+			Template: 128
+			Segment:
+				End: Road.In.RU
+				Inner: Road
+				Points: 1,2, 2,2, 2,1
+				Start: Road.Out.RU
+		MultiBrush@208reverse:
+			Template: 128
+			Segment:
+				End: Road.In.LD
+				Inner: Road
+				Points: 1,0, 0,0, 0,1
+				Start: Road.Out.LD
+		MultiBrush@209:
+			Template: 129
+			Segment:
+				End: Road.In.RU
+				Inner: Road
+				Points: 1,2, 2,2, 2,1
+				Start: Road.Out.RU
+		MultiBrush@209reverse:
+			Template: 129
+			Segment:
+				End: Road.In.LD
+				Inner: Road
+				Points: 1,0, 0,0, 0,1
+				Start: Road.Out.LD
+		MultiBrush@210:
+			Template: 130
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 1,2, 1,1, 2,1
+				Start: Road.Out.RU
+		MultiBrush@210reverse:
+			Template: 130
+			Segment:
+				End: Road.In.LD
+				Inner: Road
+				Points: 2,0, 1,0, 0,0, 0,1
+				Start: Road.Main.L
+		MultiBrush@211:
+			Template: 131
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 1,2, 2,2, 2,1, 2,0
+				Start: Road.Out.RU
+		MultiBrush@211reverse:
+			Template: 131
+			Segment:
+				End: Road.In.LD
+				Inner: Road
+				Points: 1,0, 1,1, 0,1
+				Start: Road.Main.D
+		MultiBrush@213:
+			Template: 133
+			Segment:
+				End: Road.In.RU
+				Inner: Road
+				Points: 0,2, 1,2, 2,2, 2,1
+				Start: Road.Main.R
+		MultiBrush@213reverse:
+			Template: 133
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 1,0, 1,1, 0,1
+				Start: Road.Out.LD
+		MultiBrush@214:
+			Template: 134
+			Segment:
+				End: Road.In.RU
+				Inner: Road
+				Points: 1,2, 1,1, 2,1
+				Start: Road.Main.U
+		MultiBrush@214reverse:
+			Template: 134
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 1,0, 0,0, 0,1, 0,2
+				Start: Road.Out.LD
+		MultiBrush@227:
+			Template: 996
+			Segment:
+				End: Road.Main.D
+				Inner: Road
+				Points: 0,0, 0,1
+				Start: Road.Main.D
+		MultiBrush@227reverse:
+			Template: 996
+			Segment:
+				End: Road.Main.U
+				Inner: Road
+				Points: 1,1, 1,0
+				Start: Road.Main.U
+		MultiBrush@228:
+			Template: 997
+			Segment:
+				End: Road.Main.R
+				Inner: Road
+				Points: 0,1, 1,1
+				Start: Road.Main.R
+		MultiBrush@228reverse:
+			Template: 997
+			Segment:
+				End: Road.Main.L
+				Inner: Road
+				Points: 1,0, 0,0
+				Start: Road.Main.L
+		MultiBrush@229:
+			Template: 998
+			Segment:
+				Start: River.R
+				End: River.R
+				Points: 0,1, 1,1
+		MultiBrush@229reverse:
+			Template: 998
+			Segment:
+				Start: River.L
+				End: River.L
+				Points: 1,1, 0,1
+		MultiBrush@230:
+			Template: 999
+			Segment:
+				Start: River.D
+				End: River.D
+				Points: 1,0, 1,1
+		MultiBrush@230reverse:
+			Template: 999
+			Segment:
+				Start: River.U
+				End: River.U
+				Points: 1,1, 1,0
+	Trees:
+		FromActors@1: t01,t02,t03,t05,t06,t07,t08,t10,t11,t12,t13,t14,t15,t16,t17,tc01,tc02,tc03,tc04,tc05
+	Obstructions:
+		FromTemplates@1: 82,83,84,986,987,988,989,990,991,992,993,994,995,67,68,79,80
+		FromTemplates@2: 69,70
+			Weight: 50
+		FromActors@3: t01,t02,t03,t05,t06,t07,t08,t10,t11,t12,t13,t14,t15,t16,t17
+			BackingTile: 255,0
+			Weight: 100
+	CivilianBuildings:
+		FromActors@1: v01,v02,v03,v04,v05,v06,v07,v08,v09,v10,v11,asianhut
+
