@@ -8,7 +8,7 @@ using System;
 
 namespace OpenRA.Mods.Cameo.Traits
 {
-	// Pure, source- and sink-agnostic core of Stage C adaptive game-speed.
+	// Pure, source- and sink-agnostic core of the adaptive game-speed controller.
 	//
 	// Feed it the measured wall-clock period between sim ticks — which the game loop makes equal to
 	// max(pacedTimestep, actual compute) — plus the unscaled base timestep; it returns the pacing

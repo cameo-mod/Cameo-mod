@@ -5,6 +5,7 @@
 #endregion
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using OpenRA.Network;
@@ -16,9 +17,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		"time, instead of dropping render frames (the late-game teleport-stutter). Feeds the existing",
 		"server-authoritative TickScale pacing path — it never touches World.Timestep / the simulated dt,",
 		"so it is deterministic by construction and a hard no-op in replays, while loading saves, and in",
-		"networked (more than one human) games. Toggle via the Cameo 'AdaptiveGameSpeedEnabled' setting",
-		"(default off). Attach to the world actor.")]
-	public class AdaptiveGameSpeedInfo : TraitInfo
+		"networked (more than one human) games. Enabled by the default-on 'Adaptive Game Speed' lobby",
+		"option (shared with the multiplayer host driver AdaptiveGameSpeedHost). Attach to the world actor.")]
+	public class AdaptiveGameSpeedInfo : TraitInfo, ILobbyOptions
 	{
 		[Desc("Slowest the game may run, as a percentage of normal speed. 25 = quarter speed (timestep x4).",
 			"Must be deep enough that the stretched timestep can exceed peak late-game tick compute, or the",
@@ -66,6 +67,25 @@ namespace OpenRA.Mods.Cameo.Traits
 			"feature is active. The log file completes when you quit the game. Useful for re-tuning.")]
 		public readonly bool EnableDiagnosticLog = false;
 
+		[Desc("Default state of the Adaptive Game Speed lobby option (governs both this single-player path",
+			"and the multiplayer host driver).")]
+		public readonly bool CheckboxEnabled = true;
+
+		[Desc("Prevent the Adaptive Game Speed lobby option from being changed in the lobby.")]
+		public readonly bool CheckboxLocked = false;
+
+		[Desc("Display order for the Adaptive Game Speed lobby option.")]
+		public readonly int CheckboxDisplayOrder = 0;
+
+		IEnumerable<LobbyOption> ILobbyOptions.LobbyOptions(MapPreview map)
+		{
+			yield return new LobbyBooleanOption(map, "adaptivegamespeed",
+				"Adaptive Game Speed",
+				"Smoothly slow game-time under heavy late-game load instead of dropping frames (teleport-stutter), "
+					+ "then speed back up as it clears.",
+				true, CheckboxDisplayOrder, CheckboxEnabled, CheckboxLocked);
+		}
+
 		public override object Create(ActorInitializer init) => new AdaptiveGameSpeed(this);
 	}
 
@@ -108,17 +128,17 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (world == null || world.Type != WorldType.Regular)
 				return false;
 
-			// Determinism guard (SC-04/SC-05): never engage for replays or save-load catch-up — those
+			// Determinism guard: never engage for replays or save-load catch-up — those
 			// paths bypass tickScale in SuggestedTimestep, and we must not re-introduce it there.
 			if (world.IsReplay || world.IsLoadingGameSave)
 				return false;
 
 			// Single-player / skirmish only. Any game with more than one human keeps stock pacing — a
-			// locally-derived scale must never leak into networked wall-clock flow control (SC-04).
+			// locally-derived scale must never leak into networked wall-clock flow control.
 			if (world.LobbyInfo.NonBotClients.Count() > 1)
 				return false;
 
-			return world.GetSettings<CameoSettings>().AdaptiveGameSpeedEnabled;
+			return world.LobbyInfo.GlobalSettings.OptionOrDefault("adaptivegamespeed", info.CheckboxEnabled);
 		}
 
 		void ITick.Tick(Actor self)

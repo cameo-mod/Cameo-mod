@@ -5,6 +5,10 @@
 	Selection:
 	AutoControlGroupsManager:
 	AdaptiveGameSpeed:
+	# Multiplayer host-driven counterpart to AdaptiveGameSpeed; inert unless this client is the host
+	# of a game with more than one human (single-human games use AdaptiveGameSpeed instead).
+	AdaptiveGameSpeedHost:
+		EnableDiagnosticLog: true
 	BackstabGameMode:
 		BackstabCheckboxDisplayOrder: 22
 	VoxelCache:

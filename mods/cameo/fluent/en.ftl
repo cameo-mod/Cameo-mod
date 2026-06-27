@@ -329,11 +329,6 @@ checkbox-quota-mode =
     .tooltip = Production buildings automatically re-queue units to maintain target alive counts per type.
         Left-click a unit in the production panel to set its target; right-click to lower it.
         Due to its instability, this feature is currently single-player only, and disabled in multiplayer.
-checkbox-adaptive-gamespeed =
-    .label = Adaptive Game Speed
-    .tooltip = When the simulation can't keep up in big late-game battles, smoothly slow game-time instead of dropping frames (teleport-stutter), then speed back up as the battle clears.
-        Single-player and skirmish only; has no effect in multiplayer or replays.
-
 
 ## Map Generator (from OpenRA RA)
 ## map-generators.yaml
