@@ -144,7 +144,6 @@ loadscreen-loading = Drag to set a formation for units when attack-moving$
    Many air units are equipped with stealth-detecting sensors, whose range is indicated by the green dashed circle$
    Garrisonable buildings usually heal over time, but they can be permanently destroyed with a large enough burst of instant damage$
    Resource tiers: Ore (25) < Tiberium (30) < Blue Tiberium (35) < Red Tiberium (40) < Gold Tiberium (45) < Gems (50)$
-   Small blossom trees replenish resources at a noticeably slower rate than normal ones$
    Refineries have a limit on how many harvesters can be queued to dock at a time$
    Air units are generally immune to mind control effects$
    Issuing a deploy order (default key: F) on rearmable aircraft will tell them to return to base$
