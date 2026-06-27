@@ -107,7 +107,7 @@ tkmworker:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
 		Filename: modwor.shp
-		Scale: 0.6
+		Scale: 0.51
 	idle:
 		Filename: invisibleitem.shp
 	run:
@@ -867,6 +867,7 @@ tkmengineer:
 tkmvon:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.81
 		Filename: ra2_snipe.shp
 	paradrop:
 		Start: 292

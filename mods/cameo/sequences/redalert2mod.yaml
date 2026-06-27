@@ -912,6 +912,7 @@ aa_awall:
 aa_gren:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: aa_gren.shp
 	run:
 		Tick: 120
@@ -961,7 +962,7 @@ aa_japrif:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_japrif.shp
-		Scale: 0.75
+		Scale: 0.52
 		Offset: 0,-16
 	stand:
 		ShadowStart: 253
@@ -1030,7 +1031,7 @@ aa_samurai:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_samurai.shp
-		Scale: 0.9
+		Scale: 0.8
 	stand:
 		ShadowStart: 429
 	run:
@@ -1162,7 +1163,7 @@ aa_shinobi:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_shinobi.shp
-		Scale: 0.9
+		Scale: 0.79
 	stand:
 		ShadowStart: 829
 	run:
@@ -1227,6 +1228,7 @@ aa_shinobi:
 aa_asdf:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
+		Scale: 0.79
 		Filename: aa_asdf.shp
 	stand:
 		ShadowStart: 188
@@ -1268,6 +1270,7 @@ aa_asdf:
 aa_commando:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.81
 		Filename: ra2_snipe.shp
 	paradrop:
 		Start: 292
@@ -1293,6 +1296,7 @@ aa_banzai2:
 aa_tkiller:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
+		Scale: 0.69
 		Filename: aa_tkiller.shp
 	run:
 		Tick: 120
@@ -1311,6 +1315,7 @@ aa_tkiller:
 aa_plast:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
+		Scale: 0.73
 		Filename: aa_plast.shp
 	run:
 		Tick: 120
@@ -1335,6 +1340,7 @@ aa_plast:
 aa_flam:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
+		Scale: 0.73
 		Filename: aa_flam.shp
 	idle:
 	shoot:
@@ -3054,6 +3060,7 @@ latin_mili:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.79
 		Filename: latin_mili.shp
 	run:
 		Tick: 120
@@ -3085,6 +3092,7 @@ latin_fftr:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.88
 		Filename: latin_fftr.shp
 	run:
 		Tick: 120
@@ -3132,6 +3140,7 @@ latin_narco:
 	Inherits: ^RA2ArmedCivilian
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.76
 		Filename: latin_narco.shp
 	idle2:
 		Start: 56
@@ -3166,6 +3175,7 @@ latin_fthrow:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.76
 		Filename: latin_fthrow.shp
 	run:
 		Tick: 120
@@ -3216,6 +3226,7 @@ latin_witch:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.59
 		Filename: latin_witch.shp
 	run:
 		Tick: 120
@@ -3997,7 +4008,7 @@ steel_fedinf:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: steel_fedinf.shp
-		Scale: 1.0
+		Scale: 0.67
 		Offset: 0,-4
 	stand:
 		ShadowStart: 281
@@ -4070,7 +4081,7 @@ steel_qinf:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: steel_qinf.shp
-		Scale: 1.0
+		Scale: 0.76
 		Offset: 0,-4
 	stand:
 		ShadowStart: 332
@@ -4161,7 +4172,7 @@ steel_fedeng:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: steel_fedeng.shp
-		Scale: 1.0
+		Scale: 1.1
 		Offset: 0,-4
 	stand:
 		ShadowStart: 338
@@ -4200,7 +4211,7 @@ steel_board_inf:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: steel_board_inf.shp
-		Scale: 1.0
+		Scale: 0.6
 		Offset: 0,-4
 	stand:
 		ShadowStart: 303
@@ -5688,7 +5699,7 @@ nax_rifle:
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: nax_rifle.shp
-		Scale: 0.9
+		Scale: 0.65
 	run:
 		Tick: 120
 	paradrop:
@@ -5700,6 +5711,7 @@ nax_mp40:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.61
 		Filename: nax_mp40.shp
 	run:
 		Tick: 120
@@ -5712,6 +5724,7 @@ nax_shrek:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.6
 		Filename: nax_shrek.shp
 	run:
 		Tick: 120
@@ -5807,6 +5820,7 @@ nax2_parv:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.7
 		Filename: nax2_parzi.shp
 	run:
 		Tick: 100
@@ -6359,6 +6373,7 @@ nax_slavemaster:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.76
 		Filename: nax_litt.shp
 	run:
 		Tick: 120
@@ -6370,6 +6385,7 @@ nax_slavemaster:
 nax_slav:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
+		Scale: 0.8
 		Filename: yr_slav.shp
 	idle:
 		Filename: invisibleitem.shp
@@ -6762,6 +6778,7 @@ nax_tuboat:
 nax_frank:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
+		Scale: 0.76
 		Filename: nax_frank.shp
 	stand:
 		#ShadowStart: 164
@@ -6797,7 +6814,7 @@ nax_merc:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_merc.shp
-		Scale: 0.75
+		Scale: 0.52
 		Offset: 0,0
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -6816,7 +6833,7 @@ nax_cons:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_cons.shp
-		Scale: 0.75
+		Scale: 0.54
 		Offset: 0,0
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -6835,7 +6852,7 @@ nax_tcons:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_tcons.shp
-		Scale: 0.75
+		Scale: 0.52
 		Offset: 0,-16
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -6854,7 +6871,7 @@ nax_fcons:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_fcons.shp
-		Scale: 0.75
+		Scale: 0.51
 		Offset: 0,-16
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -6873,7 +6890,7 @@ nax_hmg:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: nax_hmg.shp
-		Scale: 0.75
+		Scale: 0.5
 		Offset: 0,-4
 	stand:
 		ShadowStart: 271
@@ -6955,7 +6972,7 @@ nax_quadflak:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: nax_quadflak.shp
-		Scale: 0.75
+		Scale: 0.6
 		Offset: 0,-4
 		FlipX: True
 	stand:
@@ -7066,7 +7083,7 @@ nax_alien:
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: nax_alien.shp
-		Scale: 0.75
+		Scale: 0.79
 		Offset: 0,-16
 	stand:
 	run:
@@ -7255,6 +7272,7 @@ nax_lunar:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.8
 		Filename: nax_lunar.shp
 	run:
 		Tick: 100
@@ -7293,6 +7311,7 @@ nax_lunar2:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.8
 		Filename: nax_lunar2.shp
 	run:
 		Tick: 100
@@ -7331,6 +7350,7 @@ nax2_uber:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.7
 		Filename: nax2_uber.shp
 	run:
 		Tick: 100
@@ -7369,6 +7389,7 @@ nax_undead:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.69
 		Filename: nax_undead.shp
 	run:
 		Tick: 100
@@ -7455,6 +7476,7 @@ nax_conehead:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.56
 		Filename: nax_conehead.png
 	run:
 		Tick: 100
@@ -7492,6 +7514,7 @@ nax_conehead2:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.56
 		Filename: nax_conehead2.png
 	run:
 		Tick: 100
@@ -8087,6 +8110,7 @@ futu_ggmlt:
 futu_enforcer:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: futu_enforcer.shp
 	dot:
 		Filename: invisibleitem.shp
@@ -8125,6 +8149,7 @@ futu_enforcer:
 futu_javelinsoldier:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.7
 		Filename: futu_javelinsoldier.shp
 	dot:
 		Filename: invisibleitem.shp
@@ -8774,6 +8799,7 @@ yrrobo:
 futu_spy:
 	Inherits: ^RA2Infantry
 	Defaults:
+		Scale: 0.88
 		Filename: ra2_spy.shp
 	liedown:
 		Start: 164
@@ -8787,6 +8813,7 @@ futu_spy:
 futu_blackwidow:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_tany_black.shp
 	run:
 		Tick: 120

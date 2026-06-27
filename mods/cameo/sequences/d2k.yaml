@@ -6583,6 +6583,7 @@ d2k_hijacker:
 facedancer:
 	Inherits: ^InfantryOverlays
 	Defaults:
+		Scale: 1.47
 		Filename: facedancer.shp
 	invisible:
 		Filename: DATA.R16
@@ -6702,6 +6703,7 @@ ordos_aatrooper:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.76
 		Filename: ordos_aatrooper.png
 	run:
 		Tick: 100
@@ -6740,6 +6742,7 @@ ordos_mortar:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.71
 		Filename: ordos_mortar.png
 	run:
 		Tick: 100
