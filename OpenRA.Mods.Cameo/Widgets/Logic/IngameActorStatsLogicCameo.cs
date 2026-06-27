@@ -139,9 +139,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 							return null;
 
 						var unit = cachedValid[0];
-						if (unit != null && !unit.IsDead)
+						var usv = LiveStats(unit);
+						if (usv != null)
 						{
-							var usv = unit.Trait<ActorStatValues>();
 							if (usv.Disguised)
 							{
 								if (usv.DisguiseUpgrades.Count >= index)
@@ -162,9 +162,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 							return false;
 
 						var unit = cachedValid[0];
-						if (unit != null && !unit.IsDead)
+						var usv = LiveStats(unit);
+						if (usv != null)
 						{
-							var usv = unit.Trait<ActorStatValues>();
 							if (usv.Disguised)
 							{
 								if (usv.DisguiseUpgrades.Count >= index)
@@ -219,9 +219,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 							return null;
 
 						var unit = cachedValid[0];
-						if (unit != null && !unit.IsDead)
+						var usv = LiveStats(unit);
+						if (usv != null)
 						{
-							var usv = unit.Trait<ActorStatValues>();
 							var passengers = usv.GetPassengers();
 							if (passengers != null && passengers.Count >= index)
 								return passengers[index - 1].Info;
@@ -257,9 +257,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					return "";
 
 				var unit = cachedValid[0];
-				if (unit != null && !unit.IsDead)
+				var usv = LiveStats(unit);
+				if (usv != null)
 				{
-					var usv = unit.Trait<ActorStatValues>();
 					if (usv.Tooltips.Length > 0)
 					{
 						var stance = world.RenderPlayer == null ? PlayerRelationship.None : unit.Owner.RelationshipWith(world.RenderPlayer);
@@ -317,9 +317,10 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					if (cachedValid.Count == 1)
 					{
 						var unit = cachedValid[0];
-						if (unit == null || unit.IsDead) return "";
+						var usv = LiveStats(unit);
+						if (usv == null) return "";
 
-						var passengers = unit.Trait<ActorStatValues>().GetPassengers();
+						var passengers = usv.GetPassengers();
 						if (passengers != null && passengers.Count > passengerIconCount)
 							return "+" + (passengers.Count - passengerIconCount).ToString(NumberFormatInfo.CurrentInfo);
 						else return "";
@@ -344,9 +345,12 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				largeHealthBars[index].GetScale = () =>
 				{
-					if (cachedAlive.Count >= index + 1 && cachedAlive[index].IsInWorld)
+					if (cachedAlive.Count >= index + 1)
 					{
-						var usv = cachedAlive[index].Trait<ActorStatValues>();
+						var usv = LiveStats(cachedAlive[index]);
+						if (usv == null)
+							return 1f;
+
 						if (usv.Disguised)
 							return (float)usv.DisguiseMaxHealth / usv.Health.MaxHP;
 
@@ -358,8 +362,12 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				largeHealthBars[index].GetHealth = () =>
 				{
-					if (cachedAlive.Count >= index + 1 && cachedAlive[index].IsInWorld)
-						return cachedAlive[index].Trait<ActorStatValues>().Health;
+					if (cachedAlive.Count >= index + 1)
+					{
+						var usv = LiveStats(cachedAlive[index]);
+						if (usv != null)
+							return usv.Health;
+					}
 
 					return null;
 				};
@@ -375,10 +383,14 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 
 				smallHealthBars[index].GetHealth = () =>
 				{
-					if (cachedAlive.Count >= index + 1 && cachedAlive[index].IsInWorld)
-						return cachedAlive[index].Trait<ActorStatValues>().Health;
-					else
-						return null;
+					if (cachedAlive.Count >= index + 1)
+					{
+						var usv = LiveStats(cachedAlive[index]);
+						if (usv != null)
+							return usv.Health;
+					}
+
+					return null;
 				};
 			}
 
@@ -392,9 +404,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 						return "";
 
 					var unit = cachedAlive[0];
-					if (unit != null && unit.IsInWorld)
+					var usv = LiveStats(unit);
+					if (usv != null)
 					{
-						var usv = unit.Trait<ActorStatValues>();
 						var labelText = "";
 						if (usv.Disguised)
 							labelText = usv.DisguiseStats[index];
@@ -418,9 +430,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 						return false;
 
 					var unit = cachedAlive[0];
-					if (unit != null && unit.IsInWorld)
+					var usv = LiveStats(unit);
+					if (usv != null)
 					{
-						var usv = unit.Trait<ActorStatValues>();
 						if (usv.Disguised)
 							return usv.DisguiseStatIcons[index] != null;
 
@@ -432,9 +444,9 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				statIcon.GetImageName = () =>
 				{
 					var unit = cachedValid.FirstOrDefault(a => !a.IsDead && a.IsInWorld);
-					if (unit != null)
+					var usv = LiveStats(unit);
+					if (usv != null)
 					{
-						var usv = unit.Trait<ActorStatValues>();
 						var iconName = "";
 						if (usv.Disguised)
 							iconName = usv.DisguiseStatIcons[index];
@@ -447,6 +459,19 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 					return statIcon.ImageName;
 				};
 			}
+		}
+
+		// Resolves a selected actor's live ActorStatValues, or null if the actor is gone or
+		// mid-transform. During a Transforms (e.g. Construction Yard <-> MCV) the actor leaves
+		// the world and the trait dictionary drops the trait before IsDead flips, so a plain
+		// Trait<>() throws "does not have trait". TraitOrDefault returns null in that window
+		// instead, which the draw-time closures tolerate.
+		static ActorStatValues LiveStats(Actor unit)
+		{
+			if (unit == null || unit.IsDead || !unit.IsInWorld)
+				return null;
+
+			return unit.TraitOrDefault<ActorStatValues>();
 		}
 
 		public override void Tick()
