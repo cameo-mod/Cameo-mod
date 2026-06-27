@@ -7241,6 +7241,7 @@ TSJUGG:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@MechanicalReliability: ^MechanicalReliability
 	Inherits@MechEngineering: ^MechEngineering
+	Inherits@bot: ^SiegeModeVehicle
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -7266,8 +7267,6 @@ TSJUGG:
 		Locomotor: tracked
 		Speed: 71
 		TurnSpeed: 20
-		ImmovableCondition: !undeployed
-		RequireForceMoveCondition: !undeployed
 	RevealsShroud:
 		RequiresCondition: !inside-tunnel
 		Range: 9c0
@@ -7277,18 +7276,11 @@ TSJUGG:
 	WithMakeAnimation:
 		BodyNames: body, deployedbody
 	GrantConditionOnDeploy:
-		PauseOnCondition: empdisable || being-captured
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		UndeployOnMove: true
-		UndeployOnPickup: true
 		Facing: 384
 		DeploySounds: place2.aud
 		UndeploySounds: clicky1.aud
 		Voice: Move
 	Repairable:
-		RequireForceMoveCondition: !undeployed
-	Passenger:
 		RequireForceMoveCondition: !undeployed
 	GrantCondition@PREVIEWWORKAROUND:
 		Condition: real-actor
@@ -7349,9 +7341,6 @@ TSJUGG:
 		RequiresCondition: !deployed
 	Voiced:
 		VoiceSet: TSVehicle
-	RejectsMoveToAttack:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
 	DeployOnAttack:
 		ArmamentNames: dummy
 	RenderSprites:
@@ -8292,7 +8281,7 @@ TSTTNK:
 	Inherits@TiberiumLenses: ^TiberiumLenses
 	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
 	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
-	Inherits@bot: ^BotAutoDeploySwitchMode50
+	Inherits@bot: ^SiegeModeVehicle
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -8308,8 +8297,6 @@ TSTTNK:
 		Locomotor: tracked
 		TurnSpeed: 32
 		Speed: 90
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
 	Health:
 		HP: 100000
 	Repairable:
@@ -8405,22 +8392,10 @@ TSTTNK:
 		RequiresCondition: !deployed
 	WithMakeAnimation:
 	GrantConditionOnDeploy:
-		PauseOnCondition: disabled
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		UndeployOnMove: true
-		UndeployOnPickup: true
 		Facing: 640
 		DeploySounds: place2.aud
 		UndeploySounds: place2.aud
 		Voice: Move
-	Passenger:
-		RequireForceMoveCondition: !undeployed
-	Carryable:
-		RequiresCondition: !deployed
-	RejectsMoveToAttack:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
