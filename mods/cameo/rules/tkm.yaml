@@ -1298,10 +1298,13 @@ tkmengineer:
 		Modifier: 75
 		RequiresCondition: uptitanarsenal
 	GrantConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 5
+		CooldownTicks: 100
 		DeployedCondition: summon
-		SkipMakeAnimation: true
-		UndeployOnMove: true
-		UndeployOnPickup: true
+		ShowSelectionBar: false
+		ExclusiveDeploy: true
+		DeployType: Summon
 		PauseOnCondition: disabled
 		RequiresCondition: upnatoarsenal
 	AmmoPool:
@@ -1322,10 +1325,6 @@ tkmengineer:
 		Weapon: tkmdronesummon
 		RequiresCondition: summon
 		AmmoPoolName: summon
-	AutoDeployer:
-		DeployChance: 100
-		Position: BottomLeft
-		RequiresSelection: True
 	Selectable:
 		Class: tkmengineer
 	RenderSprites:

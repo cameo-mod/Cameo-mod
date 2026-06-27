@@ -457,6 +457,13 @@ TSJugg90mm:
 	# Warhead@3Eff: CreateEffect
 	# 	Explosions: artillery_explosion
 
+TSJuggTargeting:
+	Range: 12834
+	ReloadDelay: 33
+	ValidTargets: Ground
+	Projectile: InstantHit
+	Warhead@Dummy: Dummy
+
 TSJugg120mm:
 	Inherits: ^ShrapnelWeapon
 	ReloadDelay: 64

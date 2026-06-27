@@ -178,6 +178,7 @@
 ####################################################################################################
 
 ^Stimpackable:
+	Inherits@bot: ^BotAutoDeployTimedAbility
 	GrantTimedConditionOnDeploy@stim:
 		DeployedCondition: stimmed
 		CooldownTicks: 550
@@ -207,12 +208,11 @@
 	GrantConditionOnDamageState@disablestim:
 		Condition: nostim
 		ValidDamageStates: Critical
-	AutoDeployer:
-		DeployTrigger: Attack
-		DeployChance: 50
-		DeployTicks: 550
-		UndeployTicks: 550
-		RequiresCondition: upstimpack && !nostim
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 50
+		OrderInterval: 550
+		RequiresCondition: upstimpack && !nostim && botmicro
 	GrantConditionOnPrerequisite@stim:
 		Condition: upstimpack
 		Prerequisites: upstimpack
@@ -4068,6 +4068,7 @@ SCSIEGETANK:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^BotAutoDeploySwitchMode50
 	Tooltip:
 		Name: Siege Tank
 	Valued:
@@ -4176,11 +4177,10 @@ SCSIEGETANK:
 		RequireForceMoveCondition: !undeployed
 	Carryable:
 		RequiresCondition: !deployed
-	AutoDeployer:
-		DeployTrigger: Attack
-		DeployChance: 75
-		DeployTicks: 1000
-		UndeployTicks: 3000
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 75
+		OrderInterval: 1000
 	Voiced:
 		VoiceSet: SCSiegeTankVoice
 	DeathSounds:
@@ -4208,6 +4208,7 @@ SCMATADOR:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^BotAutoDeploySwitchMode50
 	Tooltip:
 		Name: Matador
 	Valued:
@@ -4307,11 +4308,10 @@ SCMATADOR:
 		RequireForceMoveCondition: !undeployed
 	Carryable:
 		RequiresCondition: !deployed
-	AutoDeployer:
-		DeployTrigger: Attack
-		DeployChance: 75
-		DeployTicks: 1000
-		UndeployTicks: 3000
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 75
+		OrderInterval: 1000
 	Voiced:
 		VoiceSet: SCSiegeTankVoice
 	DeathSounds:
@@ -6441,7 +6441,7 @@ SCADEPT:
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^BotAutoDeploySwitchMode50
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@ResonatingGlaves: ^ResonatingGlaves
@@ -9708,6 +9708,7 @@ SCQUEEN:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@weapon: ^ZergFlyerWeaponUpgrades
 	Inherits@armor: ^ZergFlyerArmorUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
 	Tooltip:
 		Name: Queen
 	Valued:
@@ -9740,33 +9741,18 @@ SCQUEEN:
 		DecorationBounds: 1280, 1024
 	Voiced:
 		VoiceSet: SCQueenVoice
-	GrantConditionOnDeploy:
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 10
+		CooldownTicks: 620
 		DeployedCondition: summon
-		SkipMakeAnimation: true
-		UndeployOnMove: true
-		UndeployOnPickup: true
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
 		PauseOnCondition: disabled
-	AmmoPool:
-		Name: summon
-		Ammo: 5
-		Armaments: SCQUEENSUMMON
-	ReloadAmmoPool:
-		AmmoPool: summon
-		Delay: 125
-		Count: 1
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: True
-		PipCount: 5
-		AmmoPool: summon
 	PeriodicExplosion@projections:
 		Weapon: SCQUEENSUMMON
 		RequiresCondition: summon
-		AmmoPoolName: summon
-	AutoDeployer:
-		DeployChance: 100
-		Position: BottomLeft
-		RequiresSelection: True
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
@@ -10125,7 +10111,7 @@ SCLURKER:
 	Armament@Dummy:
 		Name: dummy
 		Weapon: LurkerTargeting
-		RequiresCondition: undeployed
+		RequiresCondition: !deployed
 	-AttackFrontal:
 	Turreted:
 	AttackTurreted:
@@ -10137,12 +10123,6 @@ SCLURKER:
 	Passenger:
 		Weight: 4
 		CustomPipType: blue
-	AutoDeployer:
-		# DeployTrigger: Attack, Damage, Periodically, BecomingIdle
-		DeployChance: 100
-		DeployTicks: 250
-		UndeployTicks: 500
-		RequiresCondition: botmicro
 	DeployOnAttack:
 		ArmamentNames: dummy
 	Voiced:
@@ -10221,6 +10201,7 @@ SCDEFILER:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
 	Tooltip:
 		Name: Defiler
 	Valued:
@@ -10248,6 +10229,7 @@ SCDEFILER:
 		FacingTolerance: 0
 	WithInfantryBody:
 	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
 		DeployedCondition: darkswarm
 		CooldownTicks: 1000
 		DeployedTicks: 1
@@ -10256,11 +10238,6 @@ SCDEFILER:
 		Weapon: DarkSwarmSpawn
 		RequiresCondition: darkswarm
 	-ExternalCondition@DarkSwarm:
-	AutoDeployer:
-		DeployTrigger: Damage
-		DeployChance: 33
-		DeployTicks: 333
-		UndeployTicks: 0
 	Voiced:
 		VoiceSet: SCDefilerVoice ##########
 	WithShadow:
@@ -10280,14 +10257,12 @@ DARKSWARM:
 	Interactable:
 	HiddenUnderFog:
 		AlwaysVisibleRelationships: None
-		Type: GroundPosition
+		Type: CenterPosition
 	Health:
 		HP: 250
 	HitShape:
-	Aircraft:
-		Repulsable: false
-		CruiseAltitude: 1
-		Speed: 25
+	Immobile:
+		OccupiesSpace: false
 	WithSpriteBody:
 	WithMakeAnimation:
 	BodyOrientation:
@@ -10358,6 +10333,7 @@ SCKERRIGANZERG:
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
 	Tooltip:
 		Name: Kerrigan
 	Valued:
@@ -10395,31 +10371,18 @@ SCKERRIGANZERG:
 	RenderSprites:
 	Voiced:
 		VoiceSet: SCKerriganZergVoice
-	GrantConditionOnDeploy:
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 50
+		CooldownTicks: 600
 		DeployedCondition: summon
-		SkipMakeAnimation: true
-		UndeployOnMove: true
-		UndeployOnPickup: true
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
 		PauseOnCondition: disabled
-	AmmoPool:
-		Name: summon
-		Ammo: 25
-		Armaments:
-	ReloadAmmoPool:
-		AmmoPool: summon
-		Delay: 25
-		Count: 1
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: True
-		PipCount: 5
-		AmmoPool: summon
 	PeriodicExplosion@projections:
 		Weapon: SCKERRIGANSUMMON
 		RequiresCondition: summon
-		AmmoPoolName: summon
-	AutoDeployer:
-		DeployChance: 100
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:

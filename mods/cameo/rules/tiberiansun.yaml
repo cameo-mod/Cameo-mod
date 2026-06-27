@@ -3979,12 +3979,6 @@ TSE1:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSMinigun
-	# Selectable:
-	# 	Bounds: 256, 512
-	# 	DecorationBounds: 256, 512
-	# Inherits@EXT: ^ExternalConditions ##########
-	# AcceptsDeliveredExperience: ##########
-	# 	ValidTypes: infantry ##########
 	RenderSprites:
 		Image: tse1.gdi
 	Voiced:
@@ -4367,9 +4361,6 @@ TSZONETROOPER:
 		Weapon: TSZoneRailgunRail
 		LocalOffset: 256,43,256
 		RequiresCondition: up_railgunweaponry
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
@@ -4526,9 +4517,6 @@ TSE3:
 		RequiresCondition: up_tiberiumcoremissiles
 	TakeCover:
 		ProneOffset: 180,0,-200
-	# Inherits@EXT: ^ExternalConditions ##########
-	# AcceptsDeliveredExperience: ##########
-	# 	ValidTypes: infantry ##########
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
@@ -4597,9 +4585,6 @@ elitcadre:
 		RequiresCondition: up_auxiliaryweapon
 	TakeCover:
 		ProneOffset: 180,0,-200
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSRocket
 	WithInfantryBody:
@@ -4657,9 +4642,6 @@ TSTOXINTROOP:
 		Weapon: TSToxinRifle
 	TakeCover:
 		ProneOffset: 180,0,-200
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSRocket
 	RenderSprites:
@@ -4704,9 +4686,6 @@ TSSHOTGUNCOM:
 		Weapon: TSCommandoShotgun
 	TakeCover:
 		ProneOffset: 180,0,-200
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSRocket
 	Cloak@up_infiltrationkit:
@@ -4884,9 +4863,6 @@ TSRAILCOM:
 		Weapon: TSCommandoRailgunRail
 		LocalOffset: 256,43,256
 		RequiresCondition: up_railgunweaponry
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
@@ -5095,9 +5071,6 @@ TSCYBORG:
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSCyborg
 	-TakeCover:
@@ -5183,9 +5156,6 @@ tscyborgb:
 	GrantConditionOnPrerequisite@MACHINESHOP:
 		Condition: hospital
 		Prerequisites: machshop
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSCyborgHeavy
 	-TakeCover:
@@ -5277,9 +5247,6 @@ tsdevout:
 	GrantConditionOnPrerequisite@MACHINESHOP:
 		Condition: hospital
 		Prerequisites: machshop
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSNewCyborgVoice
 	-TakeCover:
@@ -5371,9 +5338,6 @@ tsascended:
 	GrantConditionOnPrerequisite@MACHINESHOP:
 		Condition: hospital
 		Prerequisites: machshop
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSNewCyborgVoice
 	-TakeCover:
@@ -5463,9 +5427,6 @@ tshacker:
 	GrantConditionOnPrerequisite@MACHINESHOP:
 		Condition: hospital
 		Prerequisites: machshop
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSNewCyborgVoice
 	-TakeCover:
@@ -5504,7 +5465,6 @@ TSREAPER:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
-	Inherits@EXT: ^ExternalConditions
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
@@ -5636,7 +5596,6 @@ tsccommando:
 TSDissolver:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
-	Inherits@EXT: ^ExternalConditions
 	Inherits@EMP: ^TurretEMP
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@HackableRobot: ^HackableRobot
@@ -5698,6 +5657,7 @@ TSARND:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -5769,10 +5729,6 @@ TSARND:
 		DetectionTypes: Cloak, Hijacker
 	Voiced:
 		VoiceSet: TSE800
-	Inherits@EXPERIENCE: ^GainsExperienceRA2 ##########
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	DeliversCash:
 		Payload: 600
 	GainsExperience:
@@ -5865,9 +5821,6 @@ TSUMAGON:
 		Weapon: TSSniperE
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
@@ -5930,9 +5883,6 @@ TSGHOST:
 	Armament@PRIMARY:
 		Weapon: TSMechRailgun
 		LocalOffset: 256,43,256
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@c4:
@@ -6031,9 +5981,6 @@ TSMUTANT:
 	Armament@ELITE:
 		Weapon: MutDualWieldE
 		RequiresCondition: rank-elite
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSInfantry
 	-DamagedByTerrain:
@@ -6094,9 +6041,6 @@ TSMWMN:
 	Armament@ELITE:
 		Weapon: MutAPRifleE
 		RequiresCondition: rank-elite
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
@@ -6218,9 +6162,6 @@ TSMUTANT4:
 	Armament@ELITE:
 		Weapon: TSZombieAttack
 		RequiresCondition: rank-elite
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSInfantry
 	-DamagedByTerrain:
@@ -6262,9 +6203,6 @@ tsshotmut:
 	Armament@ELITE:
 		Weapon: TSShotgun
 		RequiresCondition: rank-elite
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
@@ -6310,9 +6248,6 @@ TSWEEDGUY:
 		MuzzleSequence: muzzle
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSWeed
 	-DamagedByTerrain:
@@ -6721,7 +6656,6 @@ tsldrone:
 		Type: Light
 	RevealsShroud:
 		Range: 7c0
-	Inherits@EXT: ^ExternalConditions ##########
 	Voiced:
 		VoiceSet: RobotTankVoice
 	DeliversCash:
@@ -6995,9 +6929,6 @@ TSAPC:
 	SelectionDecorations:
 	Selectable:
 		Class: tsapc
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -7017,9 +6948,6 @@ TSAPC:
 		Image: tsapc
 	RenderSprites:
 		Image: tsapc
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 0
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -7066,7 +6994,6 @@ tsmemp:
 		Weapon: TSMobileEMP
 		MuzzleSequence: muzzle
 #	ReloadArmamentsBar:
-#	Inherits@EXT: ^ExternalConditions
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -7136,11 +7063,6 @@ TSMMCH:
 		RequiresCondition: up_railgunweaponry
 	AttackTurreted:
 	WithMuzzleOverlay:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	RenderVoxels:
 	-WithVoxelBody:
 	WithVoxelBarrel:
@@ -7220,11 +7142,6 @@ TSTALTITAN:
 		RequiresCondition: up_railgunweaponry
 	AttackTurreted:
 	WithMuzzleOverlay:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -7252,7 +7169,6 @@ TSJUGG2:
 	# Inherits@vo: ^AttackTurretedVoice
 	Inherits@MechanicalReliability: ^MechanicalReliability
 	Inherits@MechEngineering: ^MechEngineering
-	Inherits@EXT: ^ExternalConditions
 	Valued:
 		Cost: 2200
 	Tooltip:
@@ -7389,6 +7305,8 @@ TSJUGG:
 		InitialFacing: 384
 		Offset: 0,0,256
 		RealignDelay: -1
+	Turreted@dummy:
+		Turret: dummy
 	WithSpriteTurret@barrel:
 		Turret: deployed
 		RequiresCondition: deployed && !engage-air
@@ -7402,8 +7320,8 @@ TSJUGG:
 		RequiresCondition: deployed
 	AttackTurreted@deployed:
 		Voice: Attack
-		Armaments: deployed
-		Turrets: deployed
+		Armaments: deployed, dummy
+		Turrets: deployed, dummy
 		PauseOnCondition: empdisable
 		TargetFrozenActors: True
 		ForceFireIgnoresActors: True
@@ -7416,6 +7334,11 @@ TSJUGG:
 		MuzzleSequence: muzzle
 		ReloadingCondition: engage-air
 		RequiresCondition: deployed
+	Armament@Dummy:
+		Name: dummy
+		Turret: dummy
+		Weapon: TSJuggTargeting
+		RequiresCondition: !deployed
 	WithMuzzleOverlay:
 	RevealOnFire:
 		ArmamentNames: deployed
@@ -7429,12 +7352,8 @@ TSJUGG:
 	RejectsMoveToAttack:
 		Reject: AttackMove, AssaultMove
 		RequiresCondition: !botmicro && deployed
-	AutoDeployer:
-		DeployChance: 85
-		DeployTicks: 100
-		UndeployTicks: 2500
-		DeployTriggers:
-			Attack: 50
+	DeployOnAttack:
+		ArmamentNames: dummy
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -8373,6 +8292,7 @@ TSTTNK:
 	Inherits@TiberiumLenses: ^TiberiumLenses
 	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
 	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@bot: ^BotAutoDeploySwitchMode50
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -8469,11 +8389,6 @@ TSTTNK:
 		Turrets: deployed
 		PauseOnCondition: disabled
 		Voice: Attack
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithVoxelBody:
 		RequiresCondition: undeployed
 	WithSpriteBody@deployed:
@@ -8503,10 +8418,6 @@ TSTTNK:
 		RequireForceMoveCondition: !undeployed
 	Carryable:
 		RequiresCondition: !deployed
-	AutoDeployer:
-		DeployChance: 75
-		DeployTicks: 300
-		UndeployTicks: 1000
 	RejectsMoveToAttack:
 		Reject: AttackMove, AssaultMove
 		RequiresCondition: !botmicro && deployed
@@ -8820,9 +8731,6 @@ tssapc.mut:
 		Prerequisites: ~tsgtweapmutant
 	Cargo:
 		InitialUnits: tsmutant, tsmutant, tsmutant, tsmutant, tsmutant3
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 0
 	UpdatesPlayerStatistics:
 		OverrideActor: tssapc
 
@@ -8864,11 +8772,6 @@ TSWINI2:
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -8917,11 +8820,6 @@ TSCAR2:
 	AttackTurreted:
 	Cargo:
 		InitialUnits: tsmutant, tsmutant
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -8969,11 +8867,6 @@ tsbowler:
 	AttackTurreted:
 	Cargo:
 		InitialUnits: tsmutant, tsmutant, tsmutant
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -9022,11 +8915,6 @@ tsruiner:
 		FacingTolerance: 0
 	Cargo:
 		InitialUnits: tsmutant, tse3.mutant
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9073,11 +8961,6 @@ TS1TNK:
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
 	AttackTurreted:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -9127,11 +9010,6 @@ TS2TNK:
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
 	AttackTurreted:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -9181,11 +9059,6 @@ TS3TNK:
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
 	AttackTurreted:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -9233,11 +9106,6 @@ TSFTNK:
 		Weapon: FlametankExplode
 	AttackFrontal:
 		FacingTolerance: 0
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9296,12 +9164,6 @@ TS4TNK:
 		Recoil: 10
 	WithMuzzleOverlay:
 	AttackTurreted:
-	SelectionDecorations:
-	Selectable:
-		DecorationBounds: 1280, 1280
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -9365,12 +9227,6 @@ TS4TNK2:
 		Recoil: 10
 	WithMuzzleOverlay:
 	AttackTurreted:
-	SelectionDecorations:
-	Selectable:
-		DecorationBounds: 1280, 1280
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -9421,9 +9277,6 @@ TSARTY:
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9486,9 +9339,6 @@ tsarty_bus:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
 		AllowMovement: true
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9553,9 +9403,6 @@ tsnomad:
 		ArmamentNames: primary, garrisoned
 	AutoTarget:
 		AllowMovement: true
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9615,9 +9462,6 @@ tsmlrs:
 		Offset: -500,1,1
 	WithMuzzleOverlay:
 	AttackTurreted:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions
 	WithSpriteTurret:
 	WithTurretAimAnimation:
 		Sequence: aim
@@ -9776,11 +9620,6 @@ tsclosh:
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
 	AttackFrontal:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9829,11 +9668,6 @@ TSLASSPID:
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSCobra
 	DeliversCash:
@@ -9885,11 +9719,6 @@ tscabalcobra:
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSCobra
 	DeliversCash:
@@ -9953,11 +9782,6 @@ tsspddrone:
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSCobra
 	DeliversCash:
@@ -10016,11 +9840,6 @@ tscheavyspider:
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	DeliversCash:
@@ -10132,11 +9951,6 @@ TSART2CABAL:
 	WithMuzzleOverlay:
 	AttackFollowFrontal:
 		FacingTolerance: 45
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	DeliversCash:
@@ -10248,11 +10062,6 @@ TSTTNKCABAL:
 		RequiresCondition: cabaltibcatalysticon
 	AttackTurreted:
 	WithMuzzleOverlay:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	DeliversCash:
@@ -10355,10 +10164,6 @@ TSSAPCCABAL:
 		RequiresCondition: !submerged
 	Turreted:
 		TurnSpeed: 20 #3
-	SelectionDecorations:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -10448,9 +10253,6 @@ TST1000:
 	GrantConditionOnPrerequisite@MACHINESHOP:
 		Condition: hospital
 		Prerequisites: machshop
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: infantry ##########
 	Voiced:
 		VoiceSet: TSCyborg
 	-TakeCover:

@@ -8357,9 +8357,11 @@ CPQDEBUGDUMMY:
 
 ^BotAutoDeployTransport:
 	Inherits: ^BotMicromanageable
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 100
+	IssueOrderToBot@AI:
+		OrderName: Unload
+		OrderTrigger: Attack, Damage
+		OrderChance: 100
+		OrderInterval: 100
 		RequiresCondition: loaded && botmicro
 
 ^BotAutoDeployUnarmedAirTransport:
@@ -8373,41 +8375,47 @@ CPQDEBUGDUMMY:
 
 ^BotAutoDeployOnAttack:
 	Inherits: ^BotMicromanageable
-	AutoDeployer:
-		DeployTrigger: Attack
-		DeployChance: 100
-		DeployTicks: 0
+	IssueOrderToBot@AI:
+		OrderName: GrantConditionOnDeploy
+		OrderTrigger: Attack
+		OrderChance: 100
+		OrderInterval: 0
 		RequiresCondition: botmicro
 
 ^BotAutoDeploySwitchMode:
 	Inherits: ^BotAutoDeployOnAttack
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 500
+	IssueOrderToBot@AI:
+		OrderName: GrantConditionOnDeploy
+		OrderChance: 100
+		OrderInterval: 500
 
 ^BotAutoDeploySwitchMode50:
 	Inherits: ^BotAutoDeploySwitchMode
-	AutoDeployer:
-		DeployChance: 50
-		DeployTicks: 250
-		UndeployTicks: 500
+	IssueOrderToBot@AI:
+		OrderChance: 50
+		OrderInterval: 500
+
+^BotAutoDeployTimedAbility:
+	Inherits: ^BotAutoDeploySwitchMode
+	IssueOrderToBot@AI:
+		OrderName: GrantTimedConditionOnDeploy
+		OrderChance: 50
+		OrderInterval: 500
 
 ^BotAutoDeployOnLowHealth:
 	Inherits: ^BotMicromanageable
 	GrantConditionOnDamageState@UseBomb:
 		Condition: usebomb
 		ValidDamageStates: Heavy, Critical
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 500
-		DeployTrigger: Attack, Damage
+	IssueOrderToBot@AI:
+		OrderName: GrantTimedConditionOnDeploy
+		OrderChance: 100
+		OrderInterval: 500
+		OrderTrigger: Attack, Damage
 		RequiresCondition: usebomb && botmicro
 
 ^BotAutoDeployEvacuateCargo:
 	#Inherits: ^BotAutoDeployOnLowHealth
-	#AutoDeployer:
-	#	DeployTrigger: Damage
-	#	RequiresCondition: usebomb && botmicro && loaded
 
 ^upgrade.template:
 	Buildable:
@@ -9109,6 +9117,11 @@ CPQDEBUGDUMMY:
 		Condition: stealthed
 	TooltipExtras@Cloak:
 		Description: Cloaked
+
+^CloakedVehicleWithUpgrade:
+	Inherits: ^CloakedVehicle
+	# Do not display extra tooltip by default
+	-TooltipExtras@Cloak:
 
 ^CloakedAircraft:
 	Inherits: ^CloakedVehicle

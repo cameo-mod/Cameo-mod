@@ -3910,9 +3910,6 @@ FTRK:
 		Description: actor-ftrk.description
 	Valued:
 		Cost: 800
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 0
 	Tooltip:
 		Name: Flak Truck
 	UpdatesPlayerStatistics:
@@ -4162,6 +4159,7 @@ QTNK:
 	Inherits@NuclearWarDoctrineRA1: ^NuclearWarDoctrineRA1
 	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
+	Inherits@bot: ^BotAutoDeployOnAttack
 	Buildable:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
@@ -4198,10 +4196,9 @@ QTNK:
 		InitialStance: HoldFire
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
-	AutoDeployer:
+	IssueOrderToBot@AI:
+		OrderName: Detonate
 		DeployTrigger: Attack
-		DeployChance: 100
-		DeployTicks: 0
 	MadTankCA:
 		DeployedCondition: deployed
 		KillsSelf: false
@@ -13286,9 +13283,6 @@ MODHOVER:
 		Name: Hovercraft Transport
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 0
 	Health:
 		HP: 65000
 	Repairable:
@@ -13524,10 +13518,10 @@ hakurei:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@COMMANDOSKULL: ^CommandoSkull
-	Inherits@bot: ^BotMicromanageable
 	Inherits@BushidoDiscipline: ^BushidoDiscipline
 	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@bot: ^BotAutoDeployOnLowHealth
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -13603,14 +13597,6 @@ hakurei:
 		EmptyWeapon: THMiss
 		Weapon: THMiss
 		RequiresCondition: !chronobeamed
-	GrantConditionOnDamageState@UseBomb:
-		Condition: bomb
-		ValidDamageStates: Heavy, Critical
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 125
-		DeployTrigger: Attack, Damage
-		RequiresCondition: bomb
 	ProvidesPrerequisite@exorcist:
 		Prerequisite: hasexorcist
 	ActorStatValues:
@@ -13642,9 +13628,6 @@ MODCARR:
 		Name: Armored Car
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 0
 	Health:
 		HP: 42500
 	Repairable:

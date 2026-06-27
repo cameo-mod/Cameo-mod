@@ -7095,11 +7095,11 @@ gdirig:
 		RequireForceMoveCondition: !undeployed
 	Carryable:
 		RequiresCondition: !deployed
-	AutoDeployer:
-		DeployTrigger: Attack, Damage, Periodically, BecomingIdle
-		DeployChance: 100
-		DeployTicks: 100
-		UndeployTicks: 100
+	IssueOrderToBot@AI:
+		OrderName: GrantConditionOnDeploy
+		OrderTrigger: Attack, Damage, Periodically, BecomingIdle
+		OrderChance: 100
+		OrderInterval: 100
 		RequiresCondition: undeployed && !attacking
 	GrantConditionOnAttack:
 		ArmamentNames: primary, deployed, pointdefense, pointdefensedeployed, targeting, targetingdeployed

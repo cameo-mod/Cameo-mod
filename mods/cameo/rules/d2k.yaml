@@ -4582,7 +4582,7 @@ contaminator:
 saboteur:
 	Inherits: ^D2KInfantry
 	Inherits@anim: ^D2KPaletteRenderInfantry
-	Inherits@EXT: ^ExternalConditions
+	Inherits@CLOAK: ^CloakedVehicle
 	Inherits@bot: ^BotMicromanageable
 	Inherits@MC: ^MCImmune
 	Inherits@isengineer: ^IsEngineer
@@ -4608,14 +4608,8 @@ saboteur:
 		InitialDelay: 30
 		CloakDelay: 30
 		CloakSound: STEALTH1.WAV
-		UncloakOn: Attack, Unload, Demolish, Damage, Heal
 		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
 		Palette: d2kcloak
-		CloakedCondition: cloaked
-	GrantConditionOnDamageState@UNCLOAK:
-		Condition: cloak-force-disabled
-		ValidDamageStates: Critical
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -6299,6 +6293,7 @@ d2k_aa_mine:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@Cloak: ^CloakedAircraft
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	AutoTarget:
 		InitialStance: ReturnFire
@@ -6359,7 +6354,6 @@ d2k_aa_mine:
 	Cloak:
 		UncloakOn: Damage
 		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
 	Hovers:
 	-SpawnActorOnDeath:
 	RenderSprites:
@@ -6823,8 +6817,6 @@ d2k_air_drone:
 		Pieces: 1, 2
 		Range: 1c0, 3c0
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
 		CloakSound: appear1.aud
 		UncloakSound: trans1.aud
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
@@ -7981,10 +7973,6 @@ ordos_cobra:
 		Voice: Move
 	Passenger:
 		RequireForceMoveCondition: !undeployed
-	AutoDeployer:
-		DeployChance: 75
-		DeployTicks: 300
-		UndeployTicks: 1000
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
 	DeliversCash:
@@ -8009,6 +7997,7 @@ ordos_python:
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Inherits@bot: ^BotAutoDeploySwitchMode
 	Tooltip:
 		Name: Python Tank
 	Valued:
@@ -8091,10 +8080,6 @@ ordos_python:
 		Voice: Move
 	Passenger:
 		RequireForceMoveCondition: !undeployed
-	AutoDeployer:
-		DeployChance: 75
-		DeployTicks: 300
-		UndeployTicks: 1000
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
 	DeliversCash:
@@ -8116,7 +8101,7 @@ siege_tank_ixian:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@SHADOWS: ^Shadows
-	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@CLOAK: ^CloakedVehicleWithUpgrade
 	Inherits@CLOAKANIM: ^TiberiumCloakAnimation
 	Inherits@Barrel: ^D2K_ReinforcedBarrel
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
@@ -8180,8 +8165,6 @@ siege_tank_ixian:
 	Voiced:
 		VoiceSet: D2KSiegeTank
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, Damage
@@ -8283,6 +8266,7 @@ missile_tank_ixian:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
+	Inherits@CLOAK: ^CloakedVehicleWithUpgrade
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
@@ -8341,8 +8325,6 @@ missile_tank_ixian:
 		RequiresSelection: true
 		PipCount: 10
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, infiltrate, damage
@@ -8999,6 +8981,7 @@ raider:
 
 stealth_raider:
 	Inherits: raider
+	Inherits@CLOAK: ^CloakedVehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Tooltip:
@@ -9015,16 +8998,7 @@ stealth_raider:
 	Voiced:
 		VoiceSet: D2KStealthLightVehicle
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
-		UncloakOn: Attack, Unload, Infiltrate, Demolish, Dock, Damage, Heal
-		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
 		Palette: d2kcloak
-		CloakedCondition: cloaked
-	GrantConditionOnDamageState@UNCLOAK:
-		Condition: cloak-force-disabled
-		ValidDamageStates: Critical
 	AutoTarget:
 		InitialStance: HoldFire
 		InitialStanceAI: ReturnFire
@@ -9128,8 +9102,6 @@ rocket_raider_ixian:
 		BuildPaletteOrder: 10
 		Prerequisites: ~heavy_factory.ixian, ~!upixians_ixraider
 		Description: actor-rocket_raider.description
-	AutoDeployer:
-		DeployChance: 100
 	Tooltip:
 		Name: Ix Raider
 	Valued:
@@ -9168,8 +9140,6 @@ rocket_raider_ixian:
 	Voiced:
 		VoiceSet: D2KRaider
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, Unload
@@ -9261,8 +9231,6 @@ shock_raider:
 	AttractsWorms:
 		Intensity: 420
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, Unload
@@ -9279,7 +9247,6 @@ deviator:
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@EXT: ^ExternalConditions
 	Inherits@IXEMP: ^D2K_Ix_Frontal_EMP
 	Inherits@AntiInf: ^PrioritizeVehicle
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
@@ -9447,7 +9414,6 @@ combat_tank_h:
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@EXT: ^ExternalConditions
 	Inherits@EMP: ^TurretEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Buildable:
@@ -9739,6 +9705,7 @@ combat_tank_o_stealth:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@CLOAk: ^CloakedVehicle
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 	Tooltip:
@@ -9778,13 +9745,8 @@ combat_tank_o_stealth:
 		Weapon: D2KUnitExplodeMed
 		EmptyWeapon: D2KUnitExplodeMed
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
-		UncloakOn: Attack, Unload
 		IsPlayerPalette: true
 		Palette: player_rgba
-		CloakedCondition: cloaked
-		PauseOnCondition: cloak-force-disabled || base-reveal
 	AttractsWorms:
 		Intensity: 520
 	Cloak@TDcloak:
@@ -10040,6 +10002,7 @@ combat_tank_ixian:
 
 carryall.reinforce:
 	Inherits: ^AirstrikePlane
+	Inherits@CLOAK: ^CloakedAircraft
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@selection: ^SelectableEconomicUnit
 	Tooltip:
@@ -10092,10 +10055,6 @@ carryall.reinforce:
 	Cloak:
 		InitialDelay: 80
 		CloakDelay: 80
-		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
-		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
-		CloakedCondition: cloaked
 		RequiresCondition: carryall_cloak
 	SpeedMultiplier@ordos-stealth-bonus:
 		Modifier: 130
@@ -12260,7 +12219,6 @@ fremen_creep:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@exp: ^GainsExperienceRA
-	Inherits@EXT: ^ExternalConditions
 	Inherits@bot: ^BotMicromanageable
 	Tooltip:
 		Name: Fremen Warrior
@@ -13013,8 +12971,6 @@ storm_raider:
 	AttractsWorms:
 		Intensity: 420
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, Unload
@@ -13135,8 +13091,6 @@ heavy_rocket_raider_ixian:
 		BuildPaletteOrder: 10
 		Prerequisites: ~upixians_ixraider
 		Description: actor-rocket_raider.description
-	AutoDeployer:
-		DeployChance: 100
 	Tooltip:
 		Name: Heavy Ix Raider
 	Valued:
@@ -13177,8 +13131,6 @@ heavy_rocket_raider_ixian:
 	Voiced:
 		VoiceSet: D2KRaider
 	Cloak:
-		InitialDelay: 125
-		CloakDelay: 75
 		CloakSound: trans1.aud
 		UncloakSound: appear1.aud
 		UncloakOn: Attack, Unload
@@ -13396,7 +13348,8 @@ d2k_jammer:
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@EXT: ^ExternalConditions
+	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@bot: ^BotAutoDeploySwitchMode50
 	Inherits@AntiEpic: ^PrioritizeEpic
 	Inherits@COMMANDOSKULL: ^CommandoSkull
 	Inherits@botmicro: ^BotAutoDeployTransport
@@ -13472,12 +13425,6 @@ d2k_jammer:
 	Selectable:
 		Bounds: 1536, 1536
 		DecorationBounds: 1536, 1536
-	Cloak@STEALTH:
-		InitialDelay: 125
-		CloakDelay: 75
-		UncloakOn: Attack, Unload, Infiltrate, Demolish, Dock, Damage, Heal
-		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
 	RenderSprites:
 		Image: d2k_projector2
 		PlayerPalette: player_rgba
@@ -13503,10 +13450,6 @@ d2k_jammer:
 		Weapon: d2k_projections
 		RequiresCondition: projection
 		AmmoPoolName: projection
-	AutoDeployer:
-		DeployChance: 100
-		DeployTicks: 750
-		DeployTrigger: Attack, Damage
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: d2k_apparition, d2k_apparition, d2k_apparition, d2k_apparition, d2k_apparition
 		ArmamentNames: secondary
@@ -13567,7 +13510,6 @@ d2k_apparition:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EXT: ^ExternalConditions
 	Inherits@EMP: ^FrontalEMP
 	Inherits@bot: ^BotMicromanageable
 	Inherits@vordelproxy: ^D2KVordelProxyUnit

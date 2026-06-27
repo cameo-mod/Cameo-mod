@@ -3003,14 +3003,16 @@ SCKERRIGANZERG:
 		Damage: 20
 
 SCKERRIGANSUMMON:
+	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@2: SpawnActor
 		Actors: SCBROODLING
 		Range: 5
-		Delay: 15
+		Delay: 5
 		ValidTargets: Air, Ground, Water
 
 SCQUEENSUMMON:
+	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@2: SpawnActor
 		Actors: SCBROODLING
@@ -4043,10 +4045,11 @@ ProbeAttack:
 		NodeRadius: 0
 
 DarkSwarmSpawn:
-	ReloadDelay: 100
+	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@SpawnActor: SpawnActor
 		Actors: darkswarm
+		ForceGround: true
 		Range: 5
 		Delay: 15
 		ValidTargets: Air, Ground, Water
