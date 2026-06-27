@@ -7997,7 +7997,7 @@ ordos_python:
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeModeVehicle
 	Tooltip:
 		Name: Python Tank
 	Valued:
@@ -8021,7 +8021,6 @@ ordos_python:
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
-		RequireForceMoveCondition: deployed
 	Turreted:
 		TurnSpeed: 16
 		Turret: deployed
@@ -8069,17 +8068,10 @@ ordos_python:
 		RequiresCondition: !deployed
 	WithMakeAnimation:
 	GrantConditionOnDeploy:
-		PauseOnCondition: disabled
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		UndeployOnMove: true
-		UndeployOnPickup: true
 		Facing: 640
 		DeploySounds: KobraDeploy.wav
 		UndeploySounds: KobraDeploy.wav
 		Voice: Move
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Voiced:
 		VoiceSet: EBFDOrdosCobra
 	DeliversCash:
@@ -13428,28 +13420,18 @@ d2k_jammer:
 	RenderSprites:
 		Image: d2k_projector2
 		PlayerPalette: player_rgba
-	GrantConditionOnDeploy:
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 5
+		CooldownTicks: 500
 		DeployedCondition: projection
-		SkipMakeAnimation: true
-		UndeployOnMove: true
-		UndeployOnPickup: true
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
 		PauseOnCondition: disabled
-	AmmoPool:
-		Name: projection
-		Ammo: 5
-		Armaments:
-	ReloadAmmoPool:
-		AmmoPool: projection
-		Delay: 250
-		Count: 1
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: True
-		PipCount: 5
 	PeriodicExplosion@projections:
 		Weapon: d2k_projections
 		RequiresCondition: projection
-		AmmoPoolName: projection
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: d2k_apparition, d2k_apparition, d2k_apparition, d2k_apparition, d2k_apparition
 		ArmamentNames: secondary

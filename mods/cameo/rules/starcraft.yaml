@@ -4068,7 +4068,7 @@ SCSIEGETANK:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
-	Inherits@bot: ^BotAutoDeploySwitchMode50
+	Inherits@bot: ^SiegeModeVehicle
 	Tooltip:
 		Name: Siege Tank
 	Valued:
@@ -4082,8 +4082,6 @@ SCSIEGETANK:
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
 	Health:
 		HP: 150000
 	Repairable:
@@ -4158,25 +4156,12 @@ SCSIEGETANK:
 	Selectable:
 		Bounds: 1280, 1280
 		DecorationBounds: 1536, 1536
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		PauseOnCondition: disabled
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
 		DeploySounds: TankSiege.aud
 		UndeploySounds: TankSiege.aud
-		UndeployOnMove: true
-		SmartDeploy: True
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	Passenger:
 		Weight: 4
 		CustomPipType: blue
-		RequireForceMoveCondition: !undeployed
-	Carryable:
-		RequiresCondition: !deployed
 	IssueOrderToBot@AI:
 		OrderTrigger: Attack
 		OrderChance: 75
@@ -4208,7 +4193,7 @@ SCMATADOR:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
-	Inherits@bot: ^BotAutoDeploySwitchMode50
+	Inherits@bot: ^SiegeModeVehicle
 	Tooltip:
 		Name: Matador
 	Valued:
@@ -4222,7 +4207,6 @@ SCMATADOR:
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 100000
 	Repairable:
@@ -4289,25 +4273,12 @@ SCMATADOR:
 	Selectable:
 		Bounds: 1280, 1280
 		DecorationBounds: 1536, 1536
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		PauseOnCondition: disabled
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
 		DeploySounds: TankSiege.aud
 		UndeploySounds: TankSiege.aud
-		UndeployOnMove: true
-		SmartDeploy: True
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	Passenger:
 		Weight: 4
 		CustomPipType: blue
-		RequireForceMoveCondition: !undeployed
-	Carryable:
-		RequiresCondition: !deployed
 	IssueOrderToBot@AI:
 		OrderTrigger: Attack
 		OrderChance: 75
@@ -6400,7 +6371,6 @@ SCZEALOT:
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
-	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Tooltip:
@@ -8067,7 +8037,6 @@ SCAMARANTH:
 		CloakDelay: 50
 		UncloakOn: None
 		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
 		CloakStyle: Alpha
 	-Crushable:
 	Passenger:
@@ -8217,7 +8186,6 @@ SCLEGIONNAIRE:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -8478,12 +8446,8 @@ upidol:
 ####################################################################################################
 
 ^ZergBurrow:
-	Inherits@cloak: ^CloakedVehicle
-	Mobile:
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
+	Inherits@cloak: ^CloakedVehicleWithUpgrade
+	Inherits@bot: ^SiegeMode
 	AttackFrontal:
 		FacingTolerance: 0
 		RequiresCondition: undeployed
@@ -8498,20 +8462,9 @@ upidol:
 		Sequence: deploy
 		Name: deployed
 		RequiresCondition: undeployed
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		CanDeployOnRamps: true
-		SmartDeploy: true
 		DeploySounds: zburrowup.wav
 		UndeploySounds: zburrowdown.wav
-		UndeployOnMove: true
-		PauseOnCondition: disabled
 		RequiresCondition: !parachute
 	Cloak:
 		InitialDelay: 50
@@ -8519,7 +8472,11 @@ upidol:
 		RequiresCondition: deployed
 		CloakStyle: Alpha
 		IsPlayerPalette: true
-		PauseOnCondition: cloak-force-disabled || base-reveal
+	IssueOrderToBot@AI:
+		OrderTrigger: BecomingIdle
+		OrderChance: 50
+		OrderInterval: 1000
+		RequiresCondition: botmicro
 
 ^ZergDoubleSpawner:
 	ProductionCostMultiplier@ZergDoubleSpawner:
@@ -8859,7 +8816,6 @@ SCZERGLING:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@ZergBurrow: ^ZergBurrow
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
@@ -8909,7 +8865,6 @@ SCTALON:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@ZergBurrow: ^ZergBurrow
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
@@ -8958,7 +8913,6 @@ SCSPOREMAW:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@announce: ^AnnounceOnBuild
-	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@ZergBurrow: ^ZergBurrow
@@ -9016,7 +8970,6 @@ SCHYDRALISK:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@announce: ^AnnounceOnBuild
-	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@ZergBurrow: ^ZergBurrow
@@ -9072,7 +9025,6 @@ SCSPITHID:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@shadow: ^SCSmallShadow
 	Inherits@announce: ^AnnounceOnBuild
-	Inherits@bot: ^BotAutoDeploySwitchMode
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@ZergBurrow: ^ZergBurrow
@@ -10044,9 +9996,9 @@ SCLURKER:
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@announce: ^AnnounceOnBuild
-	Inherits@bot: ^BotMicromanageable
 	Inherits@SHADOWS: ^Shadows
 	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@bot: ^SiegeMode
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
@@ -10064,13 +10016,7 @@ SCLURKER:
 	Mobile:
 		Speed: 90
 		Locomotor: wheeled
-		RequireForceMoveCondition: !undeployed
 		TurnSpeed: 18
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: deployed
-	RejectsMoveToAttack:
-		RequiresCondition: deployed
 	Health:
 		HP: 125000
 	ChangesHealth@SelfHealing:
@@ -10079,13 +10025,7 @@ SCLURKER:
 		Type: Heavy
 	-HitShape:
 	HitShape:
-	-GrantConditionOnDeploy:
 	GrantConditionOnDeploy:
-		PauseOnCondition: disabled
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		UndeployOnMove: true
-		UndeployOnPickup: true
 		DeploySounds: zluburrw.aud
 		UndeploySounds: zluburrw.aud
 	WithSpriteBody@deployed:

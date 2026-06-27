@@ -9539,7 +9539,7 @@ steel_qinf:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeMode
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Inherits@AntiAir: ^PrioritizeAir
@@ -9556,10 +9556,6 @@ steel_qinf:
 		Description: actor-ggi.description
 	Mobile:
 		Speed: 48
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 64000
 	ChangesHealth@SelfHealing:
@@ -9675,21 +9671,10 @@ steel_qinf:
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		CanDeployOnRamps: True
-		SmartDeploy: True
 		Facing: 384
 		DeploySounds: iggidepa.wav
 		UndeploySounds: iggidepa.wav
-		UndeployOnMove: true
-		PauseOnCondition: disabled
 		RequiresCondition: !parachute
 		Voice: Deploy
 	Crushable:
@@ -14545,7 +14530,7 @@ nax_hmg:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeMode
 	Inherits@AntiVeh: ^PrioritizeInfantry
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Valued:
@@ -14559,10 +14544,6 @@ nax_hmg:
 		Description: actor-nax_hmg.description
 	Mobile:
 		Speed: 55
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 60000
 	ChangesHealth@SelfHealing:
@@ -14579,7 +14560,7 @@ nax_hmg:
 	Armament@BOTAA:
 		Weapon: NaxiWW2MachinegunnerTargeting
 		Name: targeting
-		RequiresCondition: botmicro
+		RequiresCondition: !deployed
 	Armament@DEPLOYED:
 		Name: deployed
 		Weapon: NaxiWW2Machinegunner
@@ -14639,23 +14620,14 @@ nax_hmg:
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		CanDeployOnRamps: True
-		SmartDeploy: True
 		Facing: 384
 		DeploySounds: iggidepa.wav
 		UndeploySounds: iggidepa.wav
-		UndeployOnMove: true
-		PauseOnCondition: disabled
 		RequiresCondition: !parachute
 		Voice: Deploy
+	DeployOnAttack:
+		ArmamentNames: targeting
 	-TakeCover:
 	Crushable:
 		RequiresCondition: undeployed
@@ -14680,7 +14652,7 @@ nax_quadflak:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeMode
 	Inherits@AntiVeh: ^PrioritizeInfantry
 	Inherits@undead: ^NaxiUndeadRevive
 	Inherits@OstfrontExperience: ^OstfrontExperience
@@ -14696,10 +14668,6 @@ nax_quadflak:
 		Description: actor-nax_quadflak.description
 	Mobile:
 		Speed: 55
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 12000
 	ChangesHealth@SelfHealing:
@@ -14716,7 +14684,7 @@ nax_quadflak:
 	Armament@BOTAA:
 		Weapon: NaxQuadCannonTargeting
 		Name: targeting
-		RequiresCondition: botmicro
+		RequiresCondition: !deployed
 	Armament@DEPLOYED:
 		Name: deployed
 		Weapon: PortableFlak
@@ -14776,23 +14744,14 @@ nax_quadflak:
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		CanDeployOnRamps: True
-		SmartDeploy: True
 		Facing: 384
 		DeploySounds: iggidepa.wav
 		UndeploySounds: iggidepa.wav
-		UndeployOnMove: true
-		PauseOnCondition: disabled
 		RequiresCondition: !parachute
 		Voice: Deploy
+	DeployOnAttack:
+		ArmamentNames: targeting
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -20168,7 +20127,7 @@ futu_enforcer:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeMode
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
@@ -20183,10 +20142,6 @@ futu_enforcer:
 		Description: actor-futu_enforcer.description
 	Mobile:
 		Speed: 60
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 30000
 	ChangesHealth@SelfHealing:
@@ -20268,21 +20223,10 @@ futu_enforcer:
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		CanDeployOnRamps: True
-		SmartDeploy: True
 		Facing: 384
 		DeploySounds: iggidepa.wav
 		UndeploySounds: iggidepa.wav
-		UndeployOnMove: true
-		PauseOnCondition: disabled
 		RequiresCondition: !parachute
 		Voice: Deploy
 	TakeCover:
@@ -20311,7 +20255,7 @@ futu_javelinsoldier:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeMode
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
@@ -20326,10 +20270,6 @@ futu_javelinsoldier:
 		Description: actor-futu_javelinsoldier.description
 	Mobile:
 		Speed: 50
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -20409,21 +20349,10 @@ futu_javelinsoldier:
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		CanDeployOnRamps: True
-		SmartDeploy: True
 		Facing: 384
 		DeploySounds: iggidepa.wav
 		UndeploySounds: iggidepa.wav
-		UndeployOnMove: true
-		PauseOnCondition: disabled
 		RequiresCondition: !parachute
 		Voice: Deploy
 	TakeCover:

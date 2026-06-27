@@ -3366,7 +3366,7 @@ RA2E1:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeMode
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
 	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
@@ -3382,10 +3382,6 @@ RA2E1:
 		Description: actor-ra2e1.description
 	Mobile:
 		Speed: 50
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -3459,20 +3455,10 @@ RA2E1:
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
 		DeploySounds: igidepa.wav,igidepb.wav
 		UndeploySounds: igidepa.wav,igidepb.wav
-		CanDeployOnRamps: True
-		SmartDeploy: True
 		Facing: 384
-		UndeployOnMove: true
 		RequiresCondition: !parachute
 		PauseOnCondition: disabled
 		Voice: Deploy
@@ -3497,7 +3483,7 @@ YRGGI:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@bot: ^SiegeMode
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VOICES: ^WithFeedbackVoiceLines
 	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
@@ -3515,10 +3501,6 @@ YRGGI:
 		Description: actor-ggi.description
 	Mobile:
 		Speed: 45
-		RequireForceMoveCondition: !undeployed
-		ImmovableCondition: !undeployed
-	Passenger:
-		RequireForceMoveCondition: !undeployed
 	Health:
 		HP: 45000
 	ChangesHealth@SelfHealing:
@@ -3609,21 +3591,10 @@ YRGGI:
 	WithMakeAnimation:
 		Sequence: deploy
 		BodyNames: dot
-	RejectsOrders@deployment:
-		Reject: AttackMove, AssaultMove
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
 	GrantConditionOnDeploy:
-		DeployedCondition: deployed
-		UndeployedCondition: undeployed
-		CanDeployOnRamps: True
-		SmartDeploy: True
 		Facing: 384
 		DeploySounds: iggidepa.wav
 		UndeploySounds: iggidepa.wav
-		UndeployOnMove: true
-		PauseOnCondition: disabled
 		RequiresCondition: !parachute
 		Voice: Deploy
 	TakeCover:

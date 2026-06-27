@@ -8417,6 +8417,39 @@ CPQDEBUGDUMMY:
 ^BotAutoDeployEvacuateCargo:
 	#Inherits: ^BotAutoDeployOnLowHealth
 
+^SiegeMode:
+	# Units that deploy into an immobile mode, should not be nudged etc. when deployed
+	Inherits: ^BotAutoDeploySwitchMode
+	Mobile:
+		ImmovableCondition: !undeployed
+		RequireForceMoveCondition: !botmicro && !undeployed
+	Passenger:
+		RequireForceMoveCondition: !undeployed
+	RejectsOrders@deployment:
+		Reject: AttackMove, AssaultMove
+		RequiresCondition: !botmicro && deployed
+	GrantConditionOnDeploy:
+		PauseOnCondition: disabled
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		UndeployOnPickup: true
+		SmartDeploy: True
+	RejectsMoveToAttack:
+		RequiresCondition: !botmicro && deployed
+	RejectsMoveToAttack:
+		Reject: AttackMove, AssaultMove
+		RequiresCondition: !botmicro && deployed
+	IssueOrderToBot@AI:
+		RequiresCondition: botmicro && !deployed
+
+^SiegeModeVehicle:
+	Inherits: ^SiegeMode
+	Carryable:
+		RequiresCondition: !deployed
+	Repairable:
+		RequireForceMoveCondition: !undeployed
+
 ^upgrade.template:
 	Buildable:
 		BuildLimit: 1
