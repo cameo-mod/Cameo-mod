@@ -2279,6 +2279,7 @@ tsblackhandlaser2:
 	Inherits: ^BasicInfantryTibsun
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
+		Scale: 1.16
 		Filename: tsblackhandlaser.shp
 	icon:
 		Filename: tsblackhandlasericon.shp
@@ -2288,13 +2289,14 @@ tsblackhandflamer:
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
 		Filename: tsblackhandflamer.shp
-		Scale: 1.333
+		Scale: 1.1
 	icon:
 		Filename: tsblackhandflamericon.shp
 tsstealthsoldier2:
 	Inherits: ^BasicInfantryTibsun
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
+		Scale: 1.05
 		Filename: tsstealthsoldier.shp
 	icon:
 		Filename: tsstealthsoldiericon.shp
@@ -2306,7 +2308,7 @@ stealthtech:
 tsstealthsoldier:
 	Defaults:
 		Filename: nodstealthsoldier.shp
-		Scale: 1.333
+		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
 		Start: 1
@@ -2421,7 +2423,7 @@ tsstealthsoldier:
 tsblackhandlaser:
 	Defaults:
 		Filename: tdlasertroop.shp
-		Scale: 1.4
+		Scale: 0.92
 	Inherits: ^InfantryOverlays
 	stand:
 		Start: 1
@@ -2682,7 +2684,7 @@ zombie:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Filename: zombie.shp
-		Scale: 2
+		Scale: 1.47
 	stand:
 		Facings: 8
 	stand2:
@@ -3075,6 +3077,7 @@ chemtibatomic:
 gdiofficer:
 	Inherits: ^InfantryOverlays
 	Defaults:
+		Scale: 0.71
 		Filename: modofficer.shp
 	stand:
 		Facings: 8
@@ -3199,6 +3202,7 @@ deadsixrmbo:
 moddeadeye:
 	Inherits: rmbo
 	Defaults: moddeadeye
+		Scale: 2
 		Filename: moddeadeye.shp
 	icon:
 		Filename: deadsixicon.shp
@@ -3209,6 +3213,7 @@ moddeadeye:
 modgunner:
 	Inherits: rmbo
 	Defaults: modgunner
+		Scale: 2
 		Filename: modgunner.shp
 	icon:
 		Filename: deadsixicon.shp
@@ -3219,6 +3224,7 @@ modgunner:
 modhotwire:
 	Inherits: rmbo
 	Defaults: modhotwire
+		Scale: 2
 		Filename: modhotwire.shp
 	icon:
 		Filename: deadsixicon.shp
@@ -3229,6 +3235,7 @@ modhotwire:
 modrpatch:
 	Inherits: rmbo
 	Defaults: modrpatch
+		Scale: 2
 		Filename: modrpatch.shp
 	icon:
 		Filename: deadsixicon.shp
@@ -3239,6 +3246,7 @@ modrpatch:
 modsakura:
 	Inherits: rmbo
 	Defaults: modsakura
+		Scale: 2
 		Filename: modsakura.shp
 	icon:
 		Filename: deadsixicon.shp
@@ -3468,7 +3476,7 @@ gdiempgrenadier:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Filename: tdempgrenadier.shp
-		Scale: 1.4
+		Scale: 0.96
 	stand:
 		Start: 1
 		Facings: 8
@@ -3581,6 +3589,7 @@ gdiempgrenadier:
 gdishotgunner:
 	Inherits: ^InfantryOverlays
 	Defaults:
+		Scale: 0.92
 		Filename: tdshotgunner.shp
 	stand:
 		Facings: 8
@@ -3693,7 +3702,7 @@ gdishotgunner:
 gdisniper:
 	Defaults:
 		Filename: gdisniper.shp
-		Scale: 1.4
+		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
 		Start: 1
@@ -3866,7 +3875,7 @@ gdihavoc:
 	Inherits@2: ^RA2InfantryDeaths
 	Defaults:
 		Filename: havoc.shp
-		Scale: 1.333
+		Scale: 0.8
 	stand:
 		Facings: 8
 	stand2:
@@ -3980,7 +3989,7 @@ nodlasercommando:
 	Inherits@2: ^RA2InfantryDeaths
 	Defaults:
 		Filename: nodlasercommando.shp
-		Scale: 1.333
+		Scale: 0.79
 	stand:
 		Facings: 8
 	stand2:

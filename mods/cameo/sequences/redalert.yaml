@@ -6,7 +6,7 @@ redguard:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Filename: redguard.shp
-		Scale: 1.6
+		Scale: 1.38
 	stand:
 		Facings: 8
 	stand2:
@@ -103,7 +103,7 @@ japanesesoldier:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Filename: redguard.shp
-		Scale: 1.6
+		Scale: 1.38
 	stand:
 		Facings: 8
 	stand2:
@@ -516,7 +516,7 @@ raje3:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: scybgm.shp
-		Scale: 1
+		Scale: 0.69
 	stand:
 		Start: 160
 		Facings: 8
@@ -870,6 +870,7 @@ e7:
 
 gnrl:
 	Defaults:
+		Scale: 0.96
 		Filename: gnrl.shp
 	Inherits: ^InfantryOverlays
 	stand:
@@ -936,7 +937,7 @@ gnrl:
 volkov:
 	Inherits: gnrl
 	Defaults:
-		Scale: 1.5
+		Scale: 1.2
 	icon:
 		Filename: volkovicon.png
 
@@ -1026,6 +1027,7 @@ ra_conscript_ak:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.59
 		Filename: ra_cons_ak.png
 		#Scale: 0.75
 	run:
@@ -1065,6 +1067,7 @@ ra_cons_molo:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.59
 		Filename: ra_cons_molo.png
 		#Scale: 0.75
 	run:
@@ -1104,6 +1107,7 @@ ra_dragunov:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.51
 		Filename: ra_dragunov.png
 		#Scale: 0.75
 	run:
@@ -1143,6 +1147,7 @@ ra_commissar:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.61
 		Filename: ra_commissar.png
 	run:
 		Tick: 48
@@ -1181,6 +1186,7 @@ ra_zapper:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.59
 		Filename: ra_zapper.png
 	run:
 		Tick: 96
@@ -1289,6 +1295,7 @@ raspy:
 
 einstein:
 	Defaults:
+		Scale: 0.65
 		Filename: einstein.shp
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1422,7 +1429,7 @@ rachan:
 rasamurai:
 	Defaults:
 		Filename: rasamurai.shp
-		Scale: 0.8
+		Scale: 0.5
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -1533,7 +1540,7 @@ rasamurai:
 ramaid:
 	Defaults:
 		Filename: ramaid.shp
-		Scale: 0.8
+		Scale: 0.58
 	Inherits: ^InfantryOverlays
 	stand:
 		Facings: 8
@@ -5058,7 +5065,7 @@ rapierjumpjet:
 hakurei:
 	Defaults:
 		Filename: hakurei.shp
-		Scale: 1.333
+		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
 		Start: 1

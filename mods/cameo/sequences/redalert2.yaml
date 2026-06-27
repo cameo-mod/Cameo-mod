@@ -5508,6 +5508,7 @@ ra2e1:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.76
 		Filename: ra2_gi.shp
 	dot:
 		Filename: invisibleitem.shp
@@ -5558,6 +5559,7 @@ ra2e1dep:
 yrggi:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.73
 		Filename: yr_ggi.shp
 	dot:
 		Filename: invisibleitem.shp
@@ -5622,6 +5624,7 @@ yrggidep:
 ra2snipe:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.81
 		Filename: ra2_snipe.shp
 	paradrop:
 		Start: 292
@@ -5632,6 +5635,7 @@ ra2e2:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_cons.shp
 	run:
 		Tick: 120
@@ -5643,6 +5647,7 @@ ra2e2.black:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_bcons.shp
 	run:
 		Tick: 120
@@ -5654,6 +5659,7 @@ ra2e2.black:
 ra2terror:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_trst.shp
 	run:
 		Tick: 120
@@ -5693,6 +5699,7 @@ ra2terror:
 ra2flakt:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.52
 		Filename: ra2_flakt.shp
 	run:
 		Tick: 120
@@ -5720,6 +5727,7 @@ ra2flakt:
 ra2sidewind:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.61
 		Filename: ra2_sidewinder.shp
 	run:
 		Tick: 120
@@ -5737,6 +5745,7 @@ ra2sidewind:
 ra2deso:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.65
 		Filename: ra2_deso.shp
 	dot:
 		Filename: invisibleitem.shp
@@ -5761,6 +5770,7 @@ ra2deso:
 ra2ivan:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.85
 		Filename: ra2_ivan.shp
 	run:
 		Tick: 120
@@ -5781,6 +5791,7 @@ ra2ivan:
 ra2shk:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.76
 		Filename: ra2_shk.shp
 	idle:
 	run:
@@ -5801,6 +5812,7 @@ ra2shk.bot:
 ra2tany:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_tany.shp
 	run:
 		Tick: 120
@@ -5857,6 +5869,7 @@ ra2tany:
 yrinit:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.67
 		Filename: yr_init.shp
 	run:
 		Tick: 120
@@ -5887,6 +5900,7 @@ yrinit:
 yrslav:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
+		Scale: 0.8
 		Filename: yr_slav.shp
 	idle:
 		Filename: invisibleitem.shp
@@ -5949,6 +5963,7 @@ yrbrute:
 yrvirus:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: yr_virus.shp
 	run:
 		Tick: 120
@@ -5970,6 +5985,7 @@ yrvirus:
 ra2yuri:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_yuri.shp
 	deploy:
 		Start: 292
@@ -5993,6 +6009,7 @@ ra2yuri:
 ra2engineer:
 	Inherits: ^RA2Infantry
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_engineer.shp
 	paradrop:
 		Start: 244
@@ -6032,6 +6049,7 @@ ra2dog:
 yryurix:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.8
 		Filename: yr_yurix.shp
 	idle1:
 		Start: 56
@@ -6061,6 +6079,7 @@ yryurix:
 ra2spy:
 	Inherits: ^RA2Infantry
 	Defaults:
+		Scale: 0.88
 		Filename: ra2_spy.shp
 	liedown:
 		Start: 164
@@ -6074,6 +6093,7 @@ ra2spy:
 ra2seal: # TODO: seala on SNOW
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.79
 		Filename: ra2_seal.shp
 	run:
 		Tick: 120
@@ -6124,6 +6144,7 @@ ra2seal: # TODO: seala on SNOW
 ra2cleg:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
+		Scale: 0.76
 		Filename: ra2_cleg.shp
 	run:
 		Start: 117
@@ -6149,6 +6170,7 @@ ra2cleg:
 yrboris:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.73
 		Filename: yr_boris.shp
 	run:
 		Tick: 120
@@ -6186,6 +6208,7 @@ yrboris:
 yrbiot:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 0.63
 		Filename: ra2_biotroop.shp
 	paradrop:
 		Start: 292
@@ -7598,6 +7621,7 @@ yrarnd:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
+		Scale: 0.76
 		Filename: arnd.shp
 	run:
 		Tick: 120
@@ -7611,6 +7635,7 @@ yrarnd:
 yrstln:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
+		Scale: 1.47
 		Filename: yrstln.shp
 	run:
 		Tick: 120
