@@ -1025,198 +1025,268 @@ shok:
 
 ra_conscript_ak:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.59
 		Filename: ra_cons_ak.png
 		#Scale: 0.75
 	run:
+		Scale: 1
 		Tick: 48
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 48
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: ra_conscript_ak_icon.png
 
 ra_cons_molo:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.59
 		Filename: ra_cons_molo.png
 		#Scale: 0.75
 	run:
+		Scale: 1
 		Tick: 48
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 48
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: ra_conscript_molotov_icon.png
 
 ra_dragunov:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.51
 		Filename: ra_dragunov.png
 		#Scale: 0.75
 	run:
+		Scale: 1
 		Tick: 96
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 96
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: ra_dragunovicon.png
 
 ra_commissar:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.61
 		Filename: ra_commissar.png
 	run:
+		Scale: 1
 		Tick: 48
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 48
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: commissaricon.png
 
 ra_zapper:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.59
 		Filename: ra_zapper.png
 	run:
+		Scale: 1
 		Tick: 96
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 96
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: ra_zappericon.png
@@ -1987,7 +2057,7 @@ rajeep2:
 		InterpolatedFacings: 64
 	turret:
 		Filename: RangerLauncherFx.png
-		Scale: 0.5
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: minigun.shp
@@ -2232,7 +2302,7 @@ modtnkd2:
 		Filename: AlliedTankDestroyerTSpritesheet.png
 	idle:
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -2277,9 +2347,11 @@ sheridan:
 	Defaults:
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Filename: SheridanChassisSpriteSheet.png
 		Facings: 64
 	turret:
+		Scale: 1
 		Filename: SheridanTurret2Spritesheet.png
 		Facings: 64
 	muzzle:
@@ -3323,20 +3395,20 @@ jpwr:
 	idle:
 		Filename: JapReactorUndamagedIdle.png
 		Length: *
-		Scale: 0.9
+		Scale: 1
 	damaged-idle:
 		Filename: JapReactorDamagedIdle.png
 		Length: *
-		Scale: 0.9
+		Scale: 1
 	make:
 		Filename: JapReactorBuildup.png
 		Length: *
-		Scale: 0.9
+		Scale: 1
 	dead:
 		Filename: JapReactorDamagedIdle.png
 		Length: *
 		Tick: 13
-		Scale: 0.9
+		Scale: 1
 	bib:
 	icon:
 		Filename: JapPowerplanIcon.shp
@@ -4738,10 +4810,12 @@ alliedcybertank:
 	Defaults:
 		Scale: 0.60
 	idle:
+		Scale: 1
 		Filename: CyberTankChassis.png
 		Facings: 64
 		#Offset: 0,0,-2048
 	turret:
+		Scale: 1
 		Filename: CyberTankTurret.png
 		Facings: 64
 		#Offset: 0,0,-4098
@@ -4760,12 +4834,12 @@ heavyaatank:
 		Filename: HeavyAntiAirTankChassis.png
 		Facings: 64
 		#Offset: 0,0,-2048
-		Scale: 0.7
+		Scale: 1
 	turret:
 		Filename: HeavyAntiAirTankTurret.png
 		Facings: 64
 		#Offset: 0,0,-4098
-		Scale: 0.8
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -4779,11 +4853,11 @@ reconranger:
 	idle:
 		Filename: ReconRangerChassisSpritesheet.png
 		Facings: 64
-		Scale: 0.66
+		Scale: 1
 	turret:
 		Filename: ReconRangerWeaponSpritesheet.png
 		Facings: 64
-		Scale: 0.66
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -4848,9 +4922,11 @@ hammertank:
 	Defaults:
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Filename: SovietHammerTankChassis.png
 		Facings: 32
 	turret:
+		Scale: 1
 		Filename: SovietHammerTankTurret.png
 		Facings: 32
 	muzzle:
@@ -4864,9 +4940,11 @@ kotin:
 	Defaults:
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Filename: KotinChassisSpritesheet.png
 		Facings: 64
 	turret:
+		Scale: 1
 		Filename: KotinTurret2Spritesheet.png
 		Facings: 64
 	muzzle:
@@ -4934,13 +5012,13 @@ modartyturret:
 	turret:
 		Filename: AlliedBastionTurret.png
 		Facings: 64
-		Scale: 0.7
+		Scale: 1
 	make:
 		Filename: AlliedBastionBuildup.png
 		Length: *
-		Offset: 0,-6
+		Offset: 0,-4
 		Tick: 150
-		Scale: 0.7
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -5055,6 +5133,7 @@ rapierjumpjet:
 		Filename: AlliedRapierSpritesheet.png
 		Scale: .9
 	idle:
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp

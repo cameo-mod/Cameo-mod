@@ -2755,14 +2755,16 @@ latin_tortuga:
 	Defaults:
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Filename: latin_tortuga.png
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0,4
 	turret:
+		Scale: 1
 		Filename: latin_tortuga.png
 		Facings: 64
-		Offset: 0,5
+		Offset: 0,4
 	icon:
 		Filename: latin_tortuga_icon.png
 	muzzle:
@@ -3249,7 +3251,7 @@ latin_sub:
 latin_rammax:
 	idle:
 		Filename: latin_rammax.png
-		Scale: 0.5
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -7456,77 +7458,105 @@ nax2_bbomb:
 
 nax_conehead:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.7
 		Filename: nax_conehead.png
 	run:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: nax_conehead_icon.png
 nax_conehead2:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.7
 		Filename: nax_conehead2.png
 	run:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: nax_conehead2_icon.png
@@ -8635,16 +8665,19 @@ futu_mbt:
 
 futu_hvrt:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: futu_acv.png
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,33
+		Offset: 0,30
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,36
+		Offset: 0,32
 	icon:
 		Filename: futu_riptideacvicon.png
 
@@ -8671,11 +8704,14 @@ futu_harv:
 		Filename: futu_harv.png
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
 	dock:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	dock-loop:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	harvesting:
@@ -8689,11 +8725,14 @@ futu_harv2:
 		Filename: futu_harv2.png
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
 	dock:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	dock-loop:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	harvesting:
@@ -8705,12 +8744,14 @@ futu_harv2:
 
 futu_phal:
 	Inherits: ^RA2CannonMuzzle
+		Scale: 1
 	Defaults:
 		Filename: futu_phal.png
 		Scale: 0.95
 	idle:
 		Filename: invisibleitem.shp
 	turret:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: futu_phalanxicon.png
@@ -8738,6 +8779,7 @@ futu_coiler:
 		Filename: futu_coiler.png
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: futu_coilericon.png

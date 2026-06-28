@@ -6200,97 +6200,97 @@ d2k_leech:
 		Filename: tleilax_leech.png
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	run:
 		Filename: tleilax_leech.png
 		Length: 8
 		Facings: 8
 		Tick: 35
-		Scale: 0.6
+		Scale: 1
 	jump:
 		Filename: tleilax_leech.png
 		Length: 8
 		Facings: 8
 		# Tick: 45
-		Scale: 0.6
+		Scale: 1
 	shoot:
 		Filename: tleilax_leech.png
 		Start: 128
 		Length: 8
 		Facings: 8
-		Scale: 0.6
+		Scale: 1
 	idle1:
 		Filename: tleilax_leech.png
 		Length: 8
 		Facings: 8
 		Tick: 45
-		Scale: 0.6
+		Scale: 1
 	idle2:
 		Filename: tleilax_leech.png
 		Start: 128
 		Length: 8
 		Facings: 8
-		Scale: 0.6
+		Scale: 1
 	die:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die1:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die2:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die3:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die4:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die5:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die6:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die7:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die4:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	die-crushed:
 		Filename: tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
-		Scale: 0.6
+		Scale: 1
 	icon:
 		Filename: leechicon.shp
 		Offset: 0,0
@@ -6701,78 +6701,106 @@ contaminator:
 		Filename: contaminatoricon.shp
 ordos_aatrooper:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.76
 		Filename: ordos_aatrooper.png
 	run:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: ordos_aatrooper_icon.png
 
 ordos_mortar:
 	Inherits: ^RA2ArmedInfantry
+		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Scale: 0.71
 		Filename: ordos_mortar.png
 	run:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	walk:
+		Scale: 1
 		Tick: 100
 		Start: 8
 		Length: 10
 		Facings: 8
 	stand:
+		Scale: 1
 	idle1:
+		Scale: 1
 		Start: 88
 	idle2:
+		Scale: 1
 		Start: 103
 	prone-stand:
+		Scale: 1
 		Frames: 122, 126, 132, 137, 143, 149, 155, 161
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 118
 	die1:
+		Scale: 1
 		Start: 166
 	die2:
+		Scale: 1
 		Start: 181
 	shoot:
+		Scale: 1
 		Start: 196
 	prone-shoot:
+		Scale: 1
 		Start: 244
 	paradrop:
+		Scale: 1
 		Start: 324
 	icon:
 		Filename: ordos_mortar_icon.png
@@ -7349,7 +7377,7 @@ swarmer:
 	idle:
 		Filename: ordos_swarmer.png
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -7363,12 +7391,12 @@ ordos_banshee:
 	idle:
 		Filename: ordos_banshee.png
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	move:
 		Filename: ordos_banshee.png
 		Facings: 64
 		Start: 64
-		Scale: 0.9
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -7643,14 +7671,14 @@ ordos_harv:
 	Defaults:
 	idle:
 		Filename: ordos_harv.png
-		Scale: 0.8
+		Scale: 1
 		Start: 64
 		Facings: 64
 	move:
 		Filename: ordos_harv.png
 		Length: 8
 		Facings: 8
-		Scale: 0.8
+		Scale: 1
 	harvest:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -7663,13 +7691,13 @@ ordos_harv:
 		BlendMode: Multiply
 	dock:
 		Filename: ordos_harv.png
-		Scale: 0.8
+		Scale: 1
 		Start: 168
 		Facings: 1
 		Length: 6
 	dock-loop:
 		Filename: ordos_harv.png
-		Scale: 0.8
+		Scale: 1
 		Start: 170
 		Facings: 1
 	icon:
@@ -7997,12 +8025,12 @@ d2k_laser_tank:
 		Filename: ordos_lasertank.png
 		Start: 0
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Filename: ordos_lasertank.png
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	icon:
 		Filename: ordos_lasertank_icon.png
 ordos_deviatormk2:
@@ -8010,12 +8038,12 @@ ordos_deviatormk2:
 		Filename: ordos_deviatormk2.png
 		Start: 0
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Filename: ordos_deviatormk2.png
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	icon:
 		Filename: ordos_deviatormk2_icon.png
 
@@ -8024,12 +8052,12 @@ ordos_apc:
 		Filename: ordos_apc.png
 		Start: 0
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	turret:
 		Filename: ordos_apc.png
 		Start: 64
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	icon:
 		Filename: ordos_apc_icon.png
 
@@ -8037,7 +8065,7 @@ tleilax_labcrawl:
 	idle:
 		Filename: tleilax_labcrawl.png
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	icon:
 		Filename: tleilax_labcrawl_icon.png
 
@@ -8600,7 +8628,7 @@ ix_raider:
 	Defaults:
 	idle:
 		Filename: ix_raider.png
-		Scale: 0.8
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: DATA.R16
@@ -8612,7 +8640,7 @@ ix_raider:
 		BlendMode: Additive
 	turret:
 		Filename: ix_raider.png
-		Scale: 0.8
+		Scale: 1
 		Facings: 64
 		Start: 64
 	icon:
@@ -8680,12 +8708,12 @@ ordos_scoutdrone:
 		Filename: ordos_scoutdrone.png
 		Start: 64
 		Facings: 64
-		Scale: 0.7
+		Scale: 1
 	move:
 		Filename: ordos_scoutdrone.png
 		Length: 8
 		Facings: 8
-		Scale: 0.7
+		Scale: 1
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5

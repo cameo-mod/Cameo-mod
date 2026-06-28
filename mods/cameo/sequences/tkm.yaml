@@ -86,15 +86,19 @@ tkmrefinery:
 		Filename: tkmsupplycenter.png
 		Scale: 0.4
 	idle:
+		Scale: 1
 		Filename: tkmsupplycenter.png
 		Length: *
 	damaged-idle:
+		Scale: 1
 		Filename: tkmsupplycenter.png
 		Length: *
 	dead:
+		Scale: 1
 		Filename: tkmsupplycenter.png
 		Length: 1
 	make:
+		Scale: 1
 		Filename: tkmsupplycentermake.png
 		Length: 20
 	resources:
@@ -234,15 +238,19 @@ tkmbunker:
 		Filename: tkmbunker.png
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Start: 20
 		Length: 1
 	damaged-idle:
+		Scale: 1
 		Start: 20
 		Length: 1
 	dead:
+		Scale: 1
 		Start: 20
 		Length: 1
 	make:
+		Scale: 1
 		Length: 20
 		Tick: 80
 	muzzle:
@@ -272,11 +280,14 @@ tkmairpad:
 		Scale: 0.8
 		Filename: tkmairpad.png
 	idle:
+		Scale: 1
 		Start: 25
 	make:
+		Scale: 1
 		Length: 25
 		Tick: 50
 	dead:
+		Scale: 1
 		Start: 25
 		Tick: 800
 	icon:
@@ -287,15 +298,19 @@ tkmbunkerquadturret:
 		Filename: tkmbunker.png
 		Scale: 0.5
 	idle:
+		Scale: 0.7143
 		Start: 20
 		Length: 1
 	damaged-idle:
+		Scale: 0.7143
 		Start: 20
 		Length: 1
 	dead:
+		Scale: 0.7143
 		Start: 20
 		Length: 1
 	make:
+		Scale: 0.7143
 		Length: 20
 		Tick: 80
 	muzzle:
@@ -320,7 +335,7 @@ tkmbunkerquadturret:
 	turret:
 		Filename: tkmquadtruckturret.png
 		Facings: -32
-		Scale: 0.5
+		Scale: 1
 	icon:
 		Filename: tkmquadturreticon.png
 
@@ -329,15 +344,19 @@ tkmbunkertankturret:
 		Filename: tkmbunker.png
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Start: 20
 		Length: 1
 	damaged-idle:
+		Scale: 1
 		Start: 20
 		Length: 1
 	dead:
+		Scale: 1
 		Start: 20
 		Length: 1
 	make:
+		Scale: 1
 		Length: 20
 		Tick: 80
 	muzzle:
@@ -362,7 +381,7 @@ tkmbunkertankturret:
 	turret:
 		Filename: technicaltankturret.png
 		Facings: -32
-		Scale: 0.8
+		Scale: 1
 	icon:
 		Filename: tkmtankturreticon.png
 
@@ -525,66 +544,81 @@ tkmspetsnaz:
 		Filename: spetsnazidle.png
 		Scale: 0.6
 	stand:
+		Scale: 1
 		Filename: spetsnazidle.png
 		Facings: 8
 		Length: 1
 	run:
+		Scale: 1
 		Filename: spetsnazwalk.png
 		Length: 10
 		Facings: 8
 		Tick: 80
 	idle:
+		Scale: 1
 		Filename: spetsnazidle.png
 		Length: 1
 		Facings: 8
 	idle1:
+		Scale: 1
 		Filename: spetsnazidle2.png
 		Length: 15
 		Facings: 1
 		Tick: 80
 	idle2:
+		Scale: 1
 		Filename: spetsnazidle2.png
 		Length: 15
 		Facings: 1
 		Tick: 80
 	shoot:
+		Scale: 1
 		Filename: spetsnazshoot.png
 		Length: 15
 		Facings: 8
 		Tick: 80
 	die:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die1:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die2:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die3:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die4:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die5:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die6:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die7:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die-crushed:
+		Scale: 1
 		Filename: spetsnazdie.png
 		Length: 15
 		Tick: 80
@@ -894,6 +928,7 @@ tkmharv:
 		Scale: 0.3
 		Filename: tkmsupplytruck.png
 	idle:
+		Scale: 1
 		Facings: -32
 	icon:
 		Filename: tkmsupplytruckicon.png
@@ -903,6 +938,7 @@ tkmharvfull:
 		Scale: 0.3
 		Filename: tkmsupplytruckfull.png
 	idle:
+		Scale: 1
 		Facings: -32
 	icon:
 		Filename: chinasupplytruck.png
@@ -911,11 +947,11 @@ tkmt72:
 	idle:
 		Filename: tkmt72body.png
 		Facings: -32
-		Scale: 0.7
+		Scale: 1
 	turret:
 		Filename: tkmt72tur.png
 		Facings: -32
-		Scale: 0.7
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -943,11 +979,11 @@ tkmabrams:
 	idle:
 		Filename: tkmabramsbody.png
 		Facings: -32
-		Scale: 0.3
+		Scale: 1
 	turret:
 		Filename: tkmabramstur.png
 		Facings: -32
-		Scale: 0.3
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -960,8 +996,10 @@ tkmtechnicaltruck:
 		Filename: tkmquadtruck.png
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: -32
 	turret:
+		Scale: 1
 		Filename: tkmquadtruckturret.png
 		Facings: -32
 	muzzle:
@@ -976,11 +1014,11 @@ tkmstryker:
 		Filename: tkmstrykerbody.png
 	idle:
 		Facings: -32
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Filename: tkmstrykerturret.png
 		Facings: -32
-		Scale: 0.6
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -992,11 +1030,11 @@ tkmzaza:
 	idle:
 		Filename: zazabody.png
 		Facings: -32
-		Scale: 0.65
+		Scale: 1
 	turret:
 		Filename: zazaturret.png
 		Facings: -32
-		Scale: 0.4
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -1008,6 +1046,7 @@ tkmas42:
 	Defaults:
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Filename: tkmas42.png
 		Facings: -32
 	muzzle:
@@ -1019,12 +1058,14 @@ tkmas42:
 
 tkmkatyushalauncher:
 	Inherits: ^RA2GatlingMuzzle
+		Scale: 1
 	Defaults:
 		Filename: tkmkatyushalauncher.png
 		Scale: 0.4
 	idle:
+		Scale: 1
 		Facings: -32
-		Offset: 0,20
+		Offset: 0,8
 	icon:
 		Filename: tkmtornadogicon.png
 
@@ -1032,11 +1073,11 @@ tkmtechnical:
 	idle:
 		Filename: technicalbody.png
 		Facings: -32
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Filename: technicalturret.png
 		Facings: -32
-		Scale: 0.3
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -1048,11 +1089,11 @@ technicaltank:
 	idle:
 		Filename: technicaltankbody.png
 		Facings: -32
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Filename: technicaltankturret.png
 		Facings: -32
-		Scale: 0.6
+		Scale: 0.75
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -1064,6 +1105,7 @@ tkmradartruck:
 	Defaults:
 		Scale: 0.6
 	idle:
+		Scale: 1
 		Filename: tkmradartruck.png
 		Facings: 32
 	icon:
@@ -1073,6 +1115,7 @@ tkmratflak:
 	Defaults:
 		Scale: 0.2
 	idle:
+		Scale: 1
 		Filename: tkmflakbus.png
 		Facings: -32
 	icon:
@@ -1083,15 +1126,19 @@ tkmratflakdeployed:
 		Filename: tkmflakbusdeployed.png
 		Scale: 0.2
 	idle:
+		Scale: 1
 		Start: 71
 		Length: 1
 	damaged-idle:
+		Scale: 1
 		Start: 71
 		Length: 1
 	dead:
+		Scale: 1
 		Start: 71
 		Length: 1
 	make:
+		Scale: 1
 		Length: 71
 		Tick: 15
 	muzzle:
@@ -1116,7 +1163,7 @@ tkmratflakdeployed:
 	turret:
 		Filename: tkmflakbusturret.png
 		Facings: 32
-		Scale: 0.2
+		Scale: 1
 	icon:
 		Filename: tkmflakbusicon.png
 
@@ -1124,6 +1171,7 @@ tkmrepairtruck:
 	Defaults:
 		Scale: 0.4
 	idle:
+		Scale: 1
 		Filename: tkmrepairtruck.png
 		Facings: -32
 	icon:
@@ -1133,6 +1181,7 @@ tkmbattlebus:
 	Defaults:
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Filename: tkmbattlebus.png
 		Facings: 32
 	muzzle:
@@ -1146,9 +1195,11 @@ tkmmedictruck:
 	Defaults:
 		Scale: 0.4
 	idle:
+		Scale: 1
 		Filename: tkmmedictruckbody.png
 		Facings: -32
 	turret:
+		Scale: 1
 		Filename: tkmmedictruckturret.png
 		Facings: -32
 	icon:
@@ -1158,6 +1209,7 @@ tkmsandmarine:
 	Defaults:
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Filename: tkmsandmarine.png
 		Facings: -32
 	muzzle:
@@ -1170,6 +1222,7 @@ tkmbigshiee:
 	Defaults:
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Filename: tkmbigshiee.png
 		Facings: 32
 	muzzle:
@@ -1191,6 +1244,7 @@ tkmdronepodtruck:
 	Defaults:
 		Scale: 0.6
 	idle:
+		Scale: 1
 		Filename: tkmdronepodtruck.png
 		Facings: -32
 	icon:
@@ -1200,11 +1254,11 @@ tkmtrenchtank:
 	idle:
 		Filename: tkmtrenchtankbody.png
 		Facings: -32
-		Scale: 0.2
+		Scale: 1
 	turret:
 		Filename: technicaltankturret.png
 		Facings: -32
-		Scale: 0.6
+		Scale: 0.75
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -1217,15 +1271,19 @@ tkmtrenchtankdeployed:
 		Filename: tkmtrenchtankdeployed.png
 		Scale: 0.2
 	idle:
+		Scale: 1
 		Start: 10
 		Length: 1
 	damaged-idle:
+		Scale: 1
 		Start: 10
 		Length: 1
 	dead:
+		Scale: 1
 		Start: 10
 		Length: 1
 	make:
+		Scale: 1
 		Length: 11
 		Tick: 80
 	muzzle:
@@ -1250,7 +1308,7 @@ tkmtrenchtankdeployed:
 	turret:
 		Filename: technicaltankturret.png
 		Facings: -32
-		Scale: 0.6
+		Scale: 0.75
 	icon:
 		Filename: tkmtrenchtankicon.png
 
@@ -1332,6 +1390,7 @@ tkmviper:
 		Filename: tkmviper.png
 		Scale: 0.15
 	idle:
+		Scale: 1
 		Facings: -32
 		InterpolatedFacings: 64
 	muzzle:
@@ -1346,7 +1405,7 @@ tkmdrone:
 		Filename: tkmdrone.png
 	idle:
 		Facings: -32
-		Scale: 0.5
+		Scale: 1
 	die:
 		Filename: invisibleitem.shp
 		Facings: 1
@@ -1359,6 +1418,7 @@ tkmhuey:
 		Filename: tkmhuey.png
 		Scale: 0.25
 	idle:
+		Scale: 1
 		Facings: -32
 		InterpolatedFacings: 64
 	rotor:

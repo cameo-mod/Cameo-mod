@@ -306,43 +306,67 @@ tszonetrooper:
 		Scale: 0.6
 		Offset: 0,-24
 	stand:
+		Offset: 0,-14
+		Scale: 1
 		Facings: 8
 	run:
+		Offset: 0,-14
+		Scale: 1
 		Start: 8
 		Length: 8
 		Facings: 8
 		Tick: 80
 	idle1:
+		Offset: 0,-14
+		Scale: 1
 		Start: 120
 		Length: 44
 	idle2:
+		Offset: 0,-14
+		Scale: 1
 		Start: 164
 		Length: 44
 	die1:
+		Offset: 0,-14
+		Scale: 1
 		Start: 208
 		Length: 28
 	die2:
+		Offset: 0,-14
+		Scale: 1
 		Start: 236
 		Length: 24
 	die6:
+		Offset: 0,-14
+		Scale: 1
 		Start: 236
 		Length: 24
 	die4:
 		Filename: frag3.shp
 		Length: *
 	die-crushed:
+		Offset: 0,-14
+		Scale: 1
 		Start: 208
 		Length: 1
 	cheer:
+		Offset: 0,-14
+		Scale: 1
 		Start: 120
 		Length: 44
 	die7: electro
+		Offset: 0,-14
+		Scale: 1
 		Length: *
 	die5: flameguy
+		Offset: 0,-14
+		Scale: 1
 		Start: 44
 		Length: 104
 		Tick: 50
 	shoot:
+		Offset: 0,-14
+		Scale: 1
 		Start: 72
 		Length: 6
 		Facings: 8
@@ -1312,7 +1336,7 @@ tstaltitan:
 	idle:
 		Filename: tstaltitan.png
 		Facings: 32
-		Scale: 0.8
+		Scale: 1
 	icon:
 		Filename: tstaltitanicon.png
 	muzzle:
@@ -1321,17 +1345,17 @@ tstaltitan:
 	stand:
 		Filename: tstaltitan.png
 		Facings: 32
-		Scale: 0.8
+		Scale: 1
 	walk:
 		Filename: tstaltitanrun.png
 		Length: 14
 		Facings: 32
 		Tick: 60
-		Scale: 0.8
+		Scale: 1
 	turret:
 		Filename: tstaltitantur.png
 		Facings: 32
-		Scale: 0.8
+		Scale: 1
 
 tsjugg2:
 	idle:
@@ -1550,11 +1574,11 @@ tspitbull:
 	idle:
 		Filename: tspitbull.png
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	turret:
 		Filename: tspitbulltur.png
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	icon:
 		Filename: tspitbullicon.png
 	muzzle:
@@ -1601,12 +1625,12 @@ ts1tnk:
 	idle:
 		Filename: forgot_ltnk.png
 		Facings: 64
-		Scale: 0.45
+		Scale: 1
 	turret:
 		Filename: forgot_ltnk.png
 		Start: 64
 		Facings: 64
-		Scale: 0.45
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1616,7 +1640,7 @@ tsclosh:
 	idle:
 		Filename: forgot_closh.png
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1627,7 +1651,7 @@ tsarty_bus:
 	idle:
 		Filename: forgot_arty_bus.png
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1637,7 +1661,7 @@ tsnomad:
 	idle:
 		Filename: forgot_nomad.png
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1648,7 +1672,7 @@ tsarty:
 	idle:
 		Filename: forgot_arty.png
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1661,12 +1685,12 @@ tswini2:
 	idle:
 		Filename: forgot_wini.png
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	turret:
 		Filename: forgot_wini.png
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1677,12 +1701,12 @@ tscar2:
 	idle:
 		Filename: forgot_car.png
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	turret:
 		Filename: forgot_car.png
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1692,12 +1716,12 @@ tsbowler:
 	idle:
 		Filename: forgot_bowler.png
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Filename: forgot_bowler.png
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1707,7 +1731,7 @@ tsruiner:
 	idle:
 		Filename: forgot_ruiner.png
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1718,12 +1742,12 @@ ts2tnk:
 	idle:
 		Filename: forgot_mtnk.png
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	turret:
 		Filename: forgot_mtnk.png
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -1734,12 +1758,12 @@ ts3tnk:
 	idle:
 		Filename: forgot_htnk.png
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	turret:
 		Filename: forgot_htnk.png
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2180,11 +2204,11 @@ ts4tnk:
 		Filename: forgot_4tnk.png
 	idle:
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	icon:
 		Filename: ts4tnkicon.png
 	muzzle:
@@ -2195,11 +2219,11 @@ ts4tnk2:
 		Filename: forgot_4tnk2.png
 	idle:
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	icon:
 		Filename: forgot_4tnk2_icon.png
 	muzzle:
@@ -2211,19 +2235,19 @@ tsmlrs:
 		Scale: 1.25
 	idle:
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	empty-aim:
 		Start: 128
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	aim:
 		Start: 128
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2234,11 +2258,11 @@ tsm113:
 		Filename: forgot_adats.png
 	idle:
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2249,12 +2273,12 @@ tsapctruck:
 		Filename: forgot_truck.png
 	idle:
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Filename: forgot_car.png
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -2266,7 +2290,7 @@ tslasspid:
 		Filename: cabal_laser_spider.png
 		Facings: 64
 		Start: 64
-		Scale: 0.6
+		Scale: 1
 	icon:
 		Filename: tslasspidicon.png
 	muzzle:
@@ -2276,13 +2300,13 @@ tslasspid:
 		Filename: cabal_laser_spider.png
 		Facings: 64
 		Start: 64
-		Scale: 0.6
+		Scale: 1
 	walk:
 		Filename: cabal_laser_spider.png
 		Length: 8
 		Facings: 8
 		Tick: 60
-		Scale: 0.6
+		Scale: 1
 tscabalcobra:
 	idle:
 		Filename: tscabalcobra.shp
@@ -5014,7 +5038,7 @@ tsapachemutant:
 	idle:
 		Filename: forgot_cobracopter.png
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: forgot_cobracopter_icon.png
 	rotor:
@@ -5029,7 +5053,7 @@ tsapachecabal:
 	idle:
 		Filename: cabal_hk1_gunship.png
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: cabal_hk1_gunship_icon.png
 
@@ -5037,7 +5061,7 @@ tsscrincabal:
 	idle:
 		Filename: cabal_hk2_gunship.png
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: cabal_hk2_gunship_icon.png
 
@@ -5045,7 +5069,7 @@ tscarrycabal:
 	idle:
 		Filename: cabal_overkill_gunship.png
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: cabal_overkill_icon.png
 
@@ -5066,7 +5090,7 @@ tshind:
 	idle:
 		Filename: forgot_wasp.png
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: forgot_wasp_icon.png
 
@@ -5791,7 +5815,7 @@ forgot_mtnk_tur:
 		Filename: forgot_mtnk.png
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	make:
 		Filename: forgot_mtnk_tur.png
 		Length: 64
@@ -5821,7 +5845,7 @@ forgot_ltnk_tur:
 		Filename: forgot_ltnk.png
 		Start: 64
 		Facings: 64
-		Scale: 0.45
+		Scale: 1
 	make:
 		Filename: forgot_ltnk_turret.png
 		Length: 64
@@ -5850,7 +5874,7 @@ forgot_htnk_tur:
 		Filename: forgot_htnk.png
 		Start: 64
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	make:
 		Filename: forgot_mtnk_tur.png
 		Length: 64
@@ -6362,64 +6386,78 @@ cabaldataworm:
 
 ts_sedan:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ts_sedan.png
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
 ts_trucka:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ts_trucka.png
 		Scale: 0.64
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
 ts_truckb:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ts_truckb.png
 		Scale: 0.64
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
 ts_bus:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ts_bus.png
 		Scale: 0.64
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
 ts_pickup:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ts_pickup.png
 		Scale: 0.64
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
 ts_pickupb:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ts_pickupb.png
 		Scale: 0.64
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
 ts_wini:
 	Inherits: ^RA2MachineGunMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ts_wini.png
 		Scale: 0.64
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
