@@ -1,0 +1,972 @@
+op2_rareore_beacon_3bar:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Ore Spawn
+	RadarColorFromTerrain:
+		Terrain: Ore
+	SeedsResource:
+		ResourceType: OP2Ore
+		Interval: 55
+
+op2_commonore_beacon_3bar:
+	Inherits@1: ^TibTree
+	Tooltip:
+		Name: Rare Ore Spawn
+	RadarColorFromTerrain:
+		Terrain: Ore
+	SeedsResource:
+		ResourceType: OP2Ore2
+		Interval: 75
+
+####################################################################################################
+#		INHERITABLES
+####################################################################################################
+
+EDEN_FACTORY_STRUCTURE:
+	Inherits: ^OP2BaseFactoryStructure
+	Tooltip:
+		Name: Eden Structure Factory
+	Transforms:
+		IntoActor: eden_convec_structure_factory
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_FACTORY_STRUCTURE
+	RenderSprites:
+		Image: eden_factory_structure
+
+EDEN_TOKAMAK:
+	Inherits: ^op2base_tokamak
+	Tooltip:
+		Name: Eden Tokamak
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_TOKAMAK
+	Valued:
+		Cost: 800
+	Health:
+		HP: 200000
+	Power:
+		Amount: 200
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure
+		Description: actor-tokamak.description
+	Building:
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+
+EDEN_SMELTER_COMMON:
+	Inherits: ^op2base_smelter_common
+	Tooltip:
+		Name: Eden Common Ore Smelter
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_SMELTER_COMMON
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, eden_tokamak
+		Description: eden-smelter-common.description
+	FreeActor:
+		Actor: eden_cargotruck_empty
+		SpawnOffset: 1,2
+		Facing: 64
+	WithIdleOverlay@SMOKE1:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-anim2
+		Palette: placelinesegment
+
+EDEN_AGRIDOME:
+	Inherits: ^op2base_agridome
+	Tooltip:
+		Name: Eden Agridome
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_AGRIDOME
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 30
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		BuildDuration: 50
+		Description: eden-agridome.description
+
+EDEN_RESIDENCE:
+	Inherits: ^op2base_residence
+	Tooltip:
+		Name: Eden Residence
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_RESIDENCE
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 40
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		BuildDuration: 50
+		Description: actor-eden-residence.description
+
+EDEN_LAB_BASIC:
+	Inherits: ^op2base_basic_lab
+	Tooltip:
+		Name: Eden Basic Lab
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_BASIC_LAB
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 45
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		BuildDuration: 25
+		Description: actor-eden-lab-basic.description
+
+EDEN_FACTORY_VEHICLE:
+	Inherits: ^op2base_factory_vehicle
+	Tooltip:
+		Name: Eden Vehicle Factory
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_FACTORY_VEHICLE
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE, EDEN_AGRIDOME
+		Description: actor-eden-factory-vehicle.description
+
+EDEN_GARAGE:
+	Inherits: ^op2base_garage
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_FACTORY_VEHICLE
+		BuildPaletteOrder: 55
+		BuildDuration: 375
+		Description: actor-eden-garage.description
+
+EDEN_NURSERY:
+	Inherits: ^op2base_nursery
+	Tooltip:
+		Name: Eden Nursery
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_NURSERY
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 60
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE
+		BuildDuration: 50
+		Description: eden-nursery.description
+
+EDEN_UNIVERSITY:
+	Inherits: ^op2base_university
+	Tooltip:
+		Name: Eden University
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_UNIVERSITY
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 70
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE
+		BuildDuration: 50
+		Description: eden-university.description
+
+EDEN_LAB_STANDARD:
+	Inherits: ^op2base_lab_standard
+	Tooltip:
+		Name: Eden Standard Lab
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_LAB_STANDARD
+	Buildable:
+		BuildLimit: 1
+		BuildDuration: 200
+		BuildPaletteOrder: 80
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_BASIC_LAB,EDEN_NURSERY,EDEN_UNIVERSITY
+		Description: eden-lab-standard.description
+
+EDEN_DIRT:
+	Inherits: ^op2base_dirt
+	Tooltip:
+		Name: Eden Dirt
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
+		Description: eden-dirt.description
+
+EDEN_RCC:
+	Inherits: ^op2base_rcc
+	Tooltip:
+		Name: Eden Robot Command Center
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_RCC
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 95
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
+		BuildDuration: 125
+		Description: eden-rcc.description
+
+EDEN_FACTORY_CONSUMER:
+	Inherits: ^BaseBuilding
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 2048,2048
+	HitShape:
+		Type: Rectangle
+			TopLeft: -2560,-2048
+			BottomRight: 2560,2048
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Eden Consumer Factory
+	#ProvidesPrerequisite:
+	#	Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_RCC
+		Description: eden-factory-consumer.description
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 55000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: factoryConsumer
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 2,2
+	Production@NORMAL:
+		Produces: Infantry
+		RequiresCondition: !classicproductionqueues
+	Production@CLASSICPRODUCTIONQUEUES:
+		Produces: RAInfantry
+		RequiresCondition: classicproductionqueues
+	ProductionQueue:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+	ProductionBar@INFANTRYEDENL:
+		ProductionType: Infantry
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAINFANTRYEDENL:
+		ProductionType: RAInfantry
+		RequiresCondition: classicproductionqueues
+	WithIdleOverlay@SMOKE1:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-anim2
+		Palette: placelinesegment
+	WithIdleOverlay@SMOKE2:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-anim3
+		Palette: placelinesegment
+	WithIdleOverlay@SMOKE3:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-anim4
+		Palette: placelinesegment
+
+EDEN_GORF:
+	Inherits: ^op2base_gorf
+	Tooltip:
+		Name: Eden GORF
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_GORF
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
+		Description: eden-gorf.description
+
+EDEN_LAB_ADVANCED:
+	Inherits: ^op2base_lab_advanced
+	#1800
+	Tooltip:
+		Name: Eden Advanced Lab
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_LAB_ADVANCED
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 120
+		BuildDuration: 250
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
+		Description: eden-lab-advanced.description
+
+EDEN_SPACEPORT:
+	Inherits: ^op2base_spaceport
+	#1800
+	Tooltip:
+		Name: Eden Space Port
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_SPACEPORT
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
+		Description: eden-spaceport.description
+
+EDEN_SOLAR_ARRAY:
+	Inherits: ^op2base_solararray
+	Tooltip:
+		Name: Eden Solar Array
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 140
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_SPACEPORT
+		Description: eden-solar-array.description
+
+EDEN_SMELTER_RARE:
+	Inherits: ^op2base_smelter_rare
+	#1800
+	Tooltip:
+		Name: Eden Rare Ore Smelter
+	ProvidesPrerequisite:
+		Prerequisite: EDEN_SMELTER_RARE
+	Buildable:
+		BuildPaletteOrder: 150
+		Queue: Building, RABuilding
+		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
+		Description: eden-smelter-rare.description
+# ####################################################################################################
+# #		DEFENCE EDEN
+# ####################################################################################################
+EDEN_LIGHT_TOWER:
+	Inherits: ^op2base_light_tower
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites: ~eden_factory_structure
+		Queue: Defence, RADefence
+		Description: eden-light-tower.description
+
+EDEN_MINE_COMMON:
+	Inherits: ^op2base_mine_common
+	Tooltip:
+		Name: Eden Common Ore Mine
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Defence, RADefence
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Description: eden-mine-common.description
+
+EDEN_STORAGE_COMMON:
+	Inherits: ^op2base_storage_common
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites: ~eden_factory_structure, EDEN_SMELTER_COMMON
+		Queue: Defence, RADefence
+		Description: eden-storage-common.description
+
+EDEN_GP_LASER:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Eden Laser Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: eden-gp-laser.description
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: edenMobileDefenceLaser
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
+
+EDEN_GP_EMP:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Eden EMP Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: eden-gp-emp.description
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: edenEMPGP
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
+
+EDEN_GP_RAILGUN:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Eden Railgun Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: eden-gp-railgun.description
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: edenDefenceRailgun
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
+
+# ####################################################################################################
+# #		WARES EDEN
+# ####################################################################################################
+
+PLYMOUTH_STRUCTURE_FACTORY:
+	Inherits: ^OP2BaseFactoryStructure
+	Tooltip:
+		Name: Plymouth Structure Factory
+	Transforms:
+		IntoActor: plymouth_convec_structure_factory
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_STRUCTURE_FACTORY
+	RenderSprites:
+		Image: plymouth_structure_factory
+
+PLYMOUTH_TOKAMAK:
+	Inherits: ^op2base_tokamak
+	Tooltip:
+		Name: Plymouth Tokamak
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_TOKAMAK
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY
+		Description: actor-tokamak.description
+
+PLYMOUTH_SMELTER_COMMON:
+	Inherits: ^op2base_smelter_common
+	Tooltip:
+		Name: Plymouth Common Ore Smelter
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_SMELTER_COMMON
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, plymouth_tokamak
+		Description: plymouth-smelter-common.description
+	FreeActor:
+		Actor: plymouth_cargotruck_empty
+		SpawnOffset: 1,2
+		Facing: 64
+
+PLYMOUTH_AGRIDOME:
+	Inherits: ^op2base_agridome
+	Tooltip:
+		Name: Plymouth Agridome
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_AGRIDOME
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 30
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
+		BuildDuration: 100
+		Description: plymouth-agridome.description
+
+PLYMOUTH_RESIDENCE:
+	Inherits: ^op2base_residence
+	Tooltip:
+		Name: Plymouth Residence
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_RESIDENCE
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 40
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		BuildDuration: 100
+		Description: plymouth-residence.description
+
+PLYMOUTH_BASIC_LAB:
+	Inherits: ^op2base_basic_lab
+	Tooltip:
+		Name: Plymouth Basic Lab
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_BASIC_LAB
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 45
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
+		BuildDuration: 25
+		Description: plymouth-basic-lab.description
+
+PLYMOUTH_FACTORY_VEHICLE:
+	Inherits: ^op2base_factory_vehicle
+	Tooltip:
+		Name: Plymouth Vehicle Factory
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_FACTORY_VEHICLE
+	Buildable:
+		BuildPaletteOrder: 50
+		BuildDuration: 600
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE, PLYMOUTH_AGRIDOME
+		Description: plymouth-factory-vehicle.description
+
+PLYMOUTH_GARAGE:
+	Inherits: ^op2base_garage
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_FACTORY_VEHICLE
+		BuildPaletteOrder: 55
+		BuildDuration: 375
+		Description: plymouth-garage.description
+
+PLYMOUTH_NURSERY:
+	Inherits: ^op2base_nursery
+	Tooltip:
+		Name: Plymouth Nursery
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_NURSERY
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 60
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
+		BuildDuration: 50
+		Description: plymouth-nursery.description
+
+PLYMOUTH_UNIVERSITY:
+	Inherits: ^op2base_university
+	Tooltip:
+		Name: Plymouth University
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_UNIVERSITY
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 70
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
+		BuildDuration: 50
+		Description: plymouth-university.description
+
+PLYMOUTH_LAB_STANDARD:
+	Inherits: ^op2base_lab_standard
+	Tooltip:
+		Name: Plymouth Standard Lab
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_LAB_STANDARD
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 80
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_BASIC_LAB,PLYMOUTH_NURSERY,PLYMOUTH_UNIVERSITY
+		Description: plymouth-lab-standard.description
+
+PLYMOUTH_DIRT:
+	Inherits: ^op2base_dirt
+	Tooltip:
+		Name: Plymouth Dirt
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		Description: plymouth-dirt.description
+
+PLYMOUTH_RCC:
+	Inherits: ^op2base_rcc
+	Tooltip:
+		Name: Plymouth Robot Command Center
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_RCC
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 95
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		BuildDuration: 125
+		Description: plymouth-rcc.description
+
+PLYMOUTH_FACTORY_ARACHNID:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Inherits@barr: ^IsBarrack
+	Selectable:
+		Bounds: 2048,2048
+	HitShape:
+		TargetableOffsets: 630,299,0
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Plymouth Arachnid Factory
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_FACTORY_ARACHNID
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_RCC
+		Description: plymouth-factory-arachnid.description
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 55000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: factoryArachnid
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 2,2
+
+PLYMOUTH_GORF:
+	Inherits: ^op2base_gorf
+	Tooltip:
+		Name: Plymouth GORF
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_GORF
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		Description: plymouth-gorf.description
+
+PLYMOUTH_LAB_ADVANCED:
+	Inherits: ^op2base_lab_advanced
+	#1800
+	Tooltip:
+		Name: Plymouth Advanced Lab
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_LAB_ADVANCED
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 120
+		BuildDuration: 250
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
+		Description: plymouth-lab-advanced.description
+
+PLYMOUTH_SPACEPORT:
+	Inherits: ^op2base_spaceport
+	#1800
+	Tooltip:
+		Name: Plymouth Space Port
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_SPACEPORT
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
+		Description: plymouth-spaceport.description
+
+PLYMOUTH_SOLARARRAY:
+	Inherits: ^op2base_solararray
+	Tooltip:
+		Name: Plymouth Solar Array
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 140
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SPACEPORT
+		Description: plymouth-solar-array.description
+
+PLYMOUTH_SMELTER_RARE:
+	Inherits: ^op2base_smelter_rare
+	#1800
+	Tooltip:
+		Name: Plymouth Rare Ore Smelter
+	ProvidesPrerequisite:
+		Prerequisite: PLYMOUTH_SMELTER_RARE
+	Buildable:
+		BuildPaletteOrder: 150
+		Queue: Building, RABuilding
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
+		Description: plymouth-smelter-rare.description
+
+
+# ####################################################################################################
+# #		DEFENCE PLYMOUTH
+# ####################################################################################################
+PLYMOUTH_LIGHT_TOWER:
+	Inherits: ^op2base_light_tower
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites: ~plymouth_structure_factory
+		Queue: Defence, RADefence
+		Description: plymouth-light-tower.description
+
+PLYMOUTH_MINE_COMMON:
+	Inherits: ^op2base_mine_common
+	Tooltip:
+		Name: Plymouth Common Ore Mine
+	ProvidesPrerequisite:
+		Prerequisite:
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Defence, RADefence
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Description: plymouth-mine-common.description
+
+PLYMOUTH_STORAGE_COMMON:
+	Inherits: ^op2base_storage_common
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SMELTER_COMMON
+		Queue: Defence, RADefence
+		Description: plymouth-storage-common.description
+
+PLYMOUTH_GP_MICROWAVE:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Microwave Guard Post
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: plymouth-gp-microwave.description
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: plymouthMobileDefenceMicrowave
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
+
+PLYMOUTH_GP_STICKYFOAM:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Stickyfoam Guard Post
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: plymouth-gp-stickyfoam.description
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: plymouthStickyDefence
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
+
+PLYMOUTH_GP_RPG:
+	Inherits: ^Defense
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: RPG Guard Post
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
+		Queue: Defence, RADefence
+		BuildDuration: 600
+		BuildDurationModifier: 40
+		Description: plymouth-gp-rpg.description
+	Building:
+	Health:
+		HP: 41000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+		InitialFacing: 56
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: plymouthDefenceRPG
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 3c0
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: guardPost
+	BodyOrientation:
+		UseClassicFacingFudge: True
+
+####################################################################################################
+#		UNITS PLYMOUTH
+####################################################################################################

@@ -1,0 +1,72 @@
+World:
+	FactionCA@plymouthl:
+		Name: Plymouth (WIP)
+		InternalName: plymouthl
+		Game: Outpost 2
+		Side: Outpost 2
+		Description: faction-outpost2-plymouth.description
+
+	#Starting units
+	StartingUnits@mcvonlyplymouthl:
+		Class: none
+		ClassName: MCV Only
+		Factions: plymouthl
+		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
+
+	StartingUnits@defaultplymouthl:
+		Class: light
+		ClassName: Light Support
+		Factions: plymouthl
+		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
+		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
+
+	StartingUnits@heavyplymouthl:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: plymouthl
+		BaseActor: PLYMOUTH_CONVEC_STRUCTURE_FACTORY
+		SupportActors: PLYMOUTH_SCOUT,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_MICROWAVE,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG,PLYMOUTH_LYNX_RPG
+
+	FactionCA@edenl:
+		Name: Eden (WIP)
+		InternalName: edenl
+		Game: Outpost 2
+		Side: Outpost 2
+		Description: faction-outpost2-eden.description
+
+	#Starting units
+	StartingUnits@mcvonlyedenl:
+		Class: none
+		ClassName: MCV Only
+		Factions: edenl
+		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
+
+	StartingUnits@defaultedenl:
+		Class: light
+		ClassName: Light Support
+		Factions: edenl
+		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
+		SupportActors: EDEN_SCOUT,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN
+
+	StartingUnits@heavyedenl:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: edenl
+		BaseActor: EDEN_CONVEC_STRUCTURE_FACTORY
+		SupportActors: EDEN_SCOUT,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_LASER,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN,EDEN_LYNX_RAILGUN
+
+####################################################################################################
+#		MISC
+####################################################################################################
+# RALLYFLAG:
+# 	Selectable:
+# 		Bounds: 24,24
+# 	Valued:
+# 		Cost: 600
+# 	Tooltip:
+# 		Name: Rally Flag
+# 	#Building:
+# 	#Health:
+# 	#	HP: 40000
+# 	RevealsShroud:
+# 		Range: 7c0

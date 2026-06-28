@@ -1,0 +1,720 @@
+^OP2Building:
+	GrantConditionOnDamageState:
+		ValidDamageStates: Undamaged, Light, Medium
+		Condition: statusGreen
+	GrantConditionOnDamageState@2:
+		ValidDamageStates: Heavy, Critical
+		Condition: statusRed
+	WithIdleOverlay:
+		RequiresCondition: statusGreen
+		Sequence: statusgreen
+	WithIdleOverlay@2:
+		RequiresCondition: statusRed
+		Sequence: statusred
+	RenderSprites:
+
+^op2_engineer:
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@engineer: ^EngineerDefaultWeapons
+	Inherits@isengineer: ^IsEngineer
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 15
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Mobile:
+		Speed: 90
+	DamageMultiplier@DamageReduction:
+		Modifier: 88
+	Health:
+		HP: 7200
+	AutoTargetPriority@Repair:
+		ValidTargets: Repair, Repairing
+		ValidStances: Ally
+		Priority: 2
+	AutoTargetPriority@DEFAULT:
+		ValidStances: Enemy, Neutral
+	AutoTargetPriority@ATTACKANYTHING:
+		ValidStances: Enemy, Neutral
+	AutoTarget:
+		ScanRadius: 4
+	Passenger:
+		PipType: Yellow
+	InstantlyRepairs:
+		Types: building
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Tech:
+		Types: tech
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	InstantlyRepairs@Civ:
+		Types: civ
+		ValidRelationships: Ally, Neutral
+		EnterBehaviour: Dispose
+		RepairSound: urepair.wav
+	RepairsBridges:
+	CaptureManager:
+	GrantConditionOnPrerequisite@GLOBALREUSABLEENGINEER:
+		Condition: global-reusable-engineers
+		Prerequisites: global-reusable-engineers
+	Captures:
+		RequiresCondition: !global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		ConsumedByCapture: True
+	Captures@REUSABLE:
+		RequiresCondition: global-reusable-engineers
+		CaptureTypes: building, defense, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+	UpdatesPlayerStatistics:
+		AddToArmyValue: false
+
+^op2_supplier:
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 18
+		BuildDuration: 100
+		BuildDurationModifier: 100
+	Mobile:
+		Speed: 90
+	DamageMultiplier@DamageReduction:
+		Modifier: 88
+	Health:
+		HP: 7200
+	DeliversCash:
+		Payload: 500
+		Type: NormalCash
+		PlayerExperience: 50
+		#-Sounds:
+	SpawnActorOnDeath:
+		Actor: moneycrate
+		OwnerType: InternalName
+
+####################################################################################################
+#		BASE ASSETS
+####################################################################################################
+
+^OP2BaseFactoryStructure:
+	Inherits: ^BaseBuilding
+	Inherits@conyard: ^Conyard
+	Inherits@shape: ^3x2Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 3072, 2560
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingPlacedAnimation:
+		RequiresCondition: !build-incomplete
+	Voiced:
+		VoiceSet: factoryStructure
+	RenderSprites:
+		Image: rafact
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_tokamak:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 750
+	Building:
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 225000
+	RevealsShroud:
+		Range: 4c512
+	Power:
+		Amount: 175
+	Voiced:
+		VoiceSet: tokamak
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_smelter_common:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@ref: ^Refinery
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 3072, 2560
+	Building:
+		Footprint: xxx x== ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Refinery:
+		DockAngle: 112
+		DockOffset: 2c512, 2c512, 0
+		IsDragRequired: True
+		DragOffset: 2c512, 2c512, 0
+		DragLength: 12
+	Voiced:
+		VoiceSet: smelterCommon
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_agridome:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 300
+	Building:
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 120000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: agridome
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_residence:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 300
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	Building:
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 120000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: residence
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_basic_lab:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 100
+	Building:
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 30000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: basic_lab
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_factory_vehicle:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@weap: ^IsWeaponFactory
+	Inherits@STATUS: ^OP2Building
+	# Selectable:
+	# 	Bounds: 4096,3072
+	Valued:
+		Cost: 2000
+	Building:
+		Footprint: xxx= xxx= ====
+		Dimensions: 4,3
+		LocalCenterOffset: -512,-512,0
+	Health:
+		HP: 150000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: factoryVehicle
+	RallyPoint:
+		Path: 0,3
+	Exit@1:
+		SpawnOffset: 1500,85,0
+		ExitCell: 3,1
+	# Exit@2:
+	# 	SpawnOffset: 1500,298,0
+	# 	ExitCell: 4,1
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_garage:
+	Inherits: ^BaseBuilding
+	Inherits@CPQWP: ^CPQConditionWithPrimary
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repairing: ^RepairFacility
+	#Inherits@repair2: ^FIX
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Garage
+	Building:
+		Footprint: _+_ +++ _+_
+		Dimensions: 3,3
+	Health:
+		HP: 108000
+	HitShape:
+		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+		Type: Polygon
+			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 3c768
+	Selectable:
+		Bounds: 2048,1024,0,3
+		# DecorationBounds: 128,96
+	SelectionDecorations:
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	Reservable:
+	RepairsUnits:
+		Interval: 10
+		HpPerStep: 800
+		StartRepairingNotification: Repairing
+		FinishRepairingNotification: Repaired
+		PlayerExperience: 15
+	Voiced:
+		VoiceSet: garage
+	RallyPoint:
+	Power:
+		Amount: -50
+	ProvidesPrerequisite@buildingname:
+
+^op2base_nursery:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 500
+	Building:
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 120000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: nursery
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_university:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 500
+	Building:
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 120000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: university
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_lab_standard:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 500
+	Building:
+		BuildLimit: 1
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 120000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: standard_lab
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_dirt:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	#Inherits@forceshield: ^ForceShieldPower
+	Valued:
+		Cost: 500
+	Building:
+		BuildLimit: 1
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 120000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: dirt
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+	GrantExternalConditionPower@forceshield:
+		OrderName: ForceShield
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: upforceshield
+		Icons:
+			1: forceshield
+		ChargeInterval: 4500
+		Names:
+			1: power-forceshield.name
+		Descriptions:
+			1: power-forceshield.description
+		Durations:
+			1: 375
+		Conditions:
+			1: forceshield
+		Dimensions:
+			1: 7,7
+		Footprints:
+			1: ___x___ __xxx__ _xxxxx_ xxxxxxx _xxxxx_ __xxx__ ___x___
+		OnFireSound: sforceon.wav
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		EndChargeSpeechNotification:
+		EndChargeTextNotification: Force shield ready.
+		LaunchSpeechNotification:
+		LaunchTextNotification: Warning: Force shield activated.
+		IncomingSpeechNotification:
+		IncomingTextNotification: Warning: Force shield activated.
+		BlockedCursor: move-blocked
+
+^op2base_rcc:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 400
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 80000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: rcc
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_gorf:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 800
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 90000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: gorf
+	WithBuildingBib:
+	ResourcePurifier:
+		Modifier: 25
+	ProvidesPrerequisite@buildingname:
+
+^op2base_lab_advanced:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 3072,3072
+	Valued:
+		Cost: 1800
+	Building:
+		BuildLimit: 1
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 140000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: advanced_lab
+	WithBuildingBib:
+	FireWarheadsOnDeath@1:
+		Weapon: ReactorNuke
+		RequiresCondition: !chronobeamed
+	ProvidesPrerequisite@buildingname:
+
+^op2base_spaceport:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^4x4Shape
+	Inherits@STATUS: ^OP2Building
+	Inherits@SW: ^PrimarySuperweapon
+	Selectable:
+		Bounds: 3072,3072
+	HitShape:
+		Type: Rectangle
+			TopLeft: -2048,-1536
+			BottomRight: 2048,1536
+	Valued:
+		Cost: 3000
+	Building:
+		BuildLimit: 1
+		Footprint: xxxx xxxx xxxx ====
+		Dimensions: 4,4
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 200000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: spacePort
+	NukePower:
+		PauseOnCondition: lowpower
+		Prerequisites: ~techlevel.superweapons
+		Icon: supernova_missile_super_icon
+		Cursor: nuke
+		ChargeInterval: 9000
+		Description: Supernova Missile
+		LongDesc: support-supernova-missile.description
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		MissileWeapons: supernova_missile_super
+		MissileDelay: 11
+		SpawnOffset: 3c0,-1c768,-2c512
+		DisplayBeacon: True
+		BeaconPoster: atomic
+		BeaconPosterPalette: beaconposter
+		DisplayRadarPing: True
+		CameraRange: 10c0
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		SupportPowerPaletteOrder: 30
+	#WithNukeLaunchAnimation:
+	#	RequiresCondition: !build-incomplete
+	#WithNukeLaunchOverlay:
+	#	RequiresCondition: !build-incomplete
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_solararray:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 2048,2048
+	HitShape:
+		TargetableOffsets: 630,299,0
+	Valued:
+		Cost: 1000
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 300
+	Voiced:
+		VoiceSet: tokamak
+	WithBuildingBib:
+	ScalePowerWithHealth:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_smelter_rare:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	HitShape:
+		Type: Rectangle
+			TopLeft: -2048,-1536
+			BottomRight: 2048,1536
+	Valued:
+		Cost: 2500
+	Building:
+		BuildLimit: 1
+		Footprint: xxx xxx xxx ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 140000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -20
+	Voiced:
+		VoiceSet: smelterRare
+	WithBuildingBib:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_light_tower:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^1x1Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 1024,1024
+	Valued:
+		Cost: 50
+	Tooltip:
+		Name: Light Tower
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	-GivesBuildableArea:
+	Health:
+		HP: 10000
+	RevealsShroud:
+		Range: 12c0
+	DetectCloaked:
+		Range: 12c0
+		RequiresCondition: !lowpower
+	WithSpriteBody:
+	#WithResourceLevelSpriteBody:
+	#	Sequence: stages
+	Power:
+		Amount: -5
+	Voiced:
+		VoiceSet: lightTower
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	SelectionDecorations:
+	-AcceptsDeliveredCash:
+	ProvidesPrerequisite@buildingname:
+
+^op2base_mine_common:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@STATUS: ^OP2Building
+	Selectable:
+		Bounds: 2048,2048
+	Valued:
+		Cost: 800
+	Building:
+		BuildLimit: 1
+		Footprint: xx ==
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 55000
+	RevealsShroud:
+		Range: 4c0
+	CashTrickler:
+		Interval: 375
+		Amount: 50
+	Power:
+		Amount: -50
+	Voiced:
+		VoiceSet: mine_common
+	WithBuildingBib:
+	SeedsResource:
+		Interval: 55	#110
+		ResourceType: OP2Ore
+		MaxRange: 2
+	ProvidesPrerequisite@buildingname:
+
+^op2base_storage_common:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^1x1Shape
+	Inherits@STATUS: ^OP2Building
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Common Storage
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	-GivesBuildableArea:
+	Health:
+		HP: 25000
+	RevealsShroud:
+		Range: 4c0
+	WithSpriteBody:
+	#WithResourceLevelSpriteBody:
+	#	Sequence: stages
+	StoresResources:
+		PipCount: 10
+		PipColor: Green
+		Capacity: 3000
+	Power:
+		Amount: -10
+	Voiced:
+		VoiceSet: storage_common
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	SelectionDecorations:
+	-AcceptsDeliveredCash:
+	Selectable:
+		Bounds: 1024,1024
+	ProvidesPrerequisite@buildingname:
+
+####################################################################################################
+#		BUILDINGS EDEN
+####################################################################################################
