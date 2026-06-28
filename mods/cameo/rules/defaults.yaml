@@ -8452,7 +8452,7 @@ CPQDEBUGDUMMY:
 	Inherits: ^SiegeMode
 	GrantConditionOnMovement:
 		Condition: moving
-		ValidMovementTypes: Horizontal, Vertical
+		ValidMovementTypes: Horizontal, Vertical, Turn
 	AttackTurreted:
 		Armaments: deployed, dummy
 		Turrets: deploy, dummy
@@ -8463,7 +8463,12 @@ CPQDEBUGDUMMY:
 	Armament@Dummy:
 		Name: dummy
 		Turret: dummy
-		PauseOnCondition: !undeployed || moving || deployed
+		PauseOnCondition: !undeployed || undeploying
+		RequiresCondition: !deployed
+	GrantTimedCondition@Undeploying:
+		Condition: undeploying
+		Duration: 25
+		RequiresCondition: undeployed
 	Armament@Deployed:
 		Name: deployed
 		Turret: deploy

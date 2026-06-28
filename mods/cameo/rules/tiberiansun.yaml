@@ -7281,8 +7281,6 @@ TSJUGG:
 		DeploySounds: place2.aud
 		UndeploySounds: clicky1.aud
 		Voice: Move
-	Repairable:
-		RequireForceMoveCondition: !undeployed
 	GrantCondition@PREVIEWWORKAROUND:
 		Condition: real-actor
 	WithFacingSpriteBody:
@@ -7293,21 +7291,21 @@ TSJUGG:
 		Sequence: idletur
 		Name: deployedbody
 	Turreted:
-		Turret: deployed
+		Turret: deploy
 		TurnSpeed: 20
 		InitialFacing: 384
 		Offset: 0,0,256
 		RealignDelay: -1
 	WithSpriteTurret@barrel:
-		Turret: deployed
+		Turret: deploy
 		RequiresCondition: deployed && !engage-air
 		Sequence: barrel
 	WithSpriteTurret@barrelup:
-		Turret: deployed
+		Turret: deploy
 		RequiresCondition: deployed && engage-air
 		Sequence: barrelup
 	WithSpriteTurret@deployed:
-		Turret: deployed
+		Turret: deploy
 		RequiresCondition: deployed
 	AttackTurreted:
 		Voice: Attack
