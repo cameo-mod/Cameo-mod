@@ -9998,7 +9998,7 @@ SCLURKER:
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@SHADOWS: ^Shadows
 	Inherits@ZergBurrow: ^ZergBurrow
-	Inherits@bot: ^SiegeMode
+	Inherits@deploy: ^LurkerMode
 	Inherits@weapon: ^ZergMeleeWeaponUpgrades
 	Inherits@armor: ^ZergGroundArmorUpgrades
 	Inherits@range: ^GroovedSpinesUpgrade
@@ -10045,26 +10045,19 @@ SCLURKER:
 		# ScanRadius: 12
 		InitialStance: AttackAnything
 		# AllowMovement: false
-	Armament:
+	Armament@Deployed:
 		Weapon: LurkerSpines
-		RequiresCondition: deployed
 	Armament@Dummy:
-		Name: dummy
 		Weapon: LurkerTargeting
-		RequiresCondition: !deployed
 	-AttackFrontal:
 	Turreted:
 	AttackTurreted:
-		#RequiresCondition: deployed || botmicro
-		Armaments: primary, dummy
 	RenderRangeCircle:
 	Crushable:
 		RequiresCondition: undeployed
 	Passenger:
 		Weight: 4
 		CustomPipType: blue
-	DeployOnAttack:
-		ArmamentNames: dummy
 	Voiced:
 		VoiceSet: SCLurkerVoice
 	Selectable:

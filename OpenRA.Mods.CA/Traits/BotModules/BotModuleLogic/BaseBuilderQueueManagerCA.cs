@@ -380,40 +380,6 @@ namespace OpenRA.Mods.CA.Traits
 				}
 			}
 
-			// Should always have a barracks
-			if (!baseBuilder.HasAdequateBarracksCount())
-			{
-				var barracks = GetProducibleBuilding(baseBuilder.Info.BarracksTypes, buildableThings);
-				if (barracks != null && HasSufficientPowerForActor(barracks))
-				{
-					AIUtils.BotDebug("AI: {0} decided to build {1}: Priority override (barracks)", queue.Actor.Owner, barracks.Name);
-					return barracks;
-				}
-
-				if (power != null && barracks != null && !HasSufficientPowerForActor(barracks))
-				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-					return power;
-				}
-			}
-
-			// Should always have a vehicles factory
-			if (!baseBuilder.HasAdequateFactoryCount())
-			{
-				var factory = GetProducibleBuilding(baseBuilder.Info.VehiclesFactoryTypes, buildableThings);
-				if (factory != null && HasSufficientPowerForActor(factory))
-				{
-					AIUtils.BotDebug("AI: {0} decided to build {1}: Priority override (factory)", queue.Actor.Owner, factory.Name);
-					return factory;
-				}
-
-				if (power != null && factory != null && !HasSufficientPowerForActor(factory))
-				{
-					AIUtils.BotDebug("{0} decided to build {1}: Priority override (would be low power)", queue.Actor.Owner, power.Name);
-					return power;
-				}
-			}
-
 			// Make sure that we can spend as fast as we are earning
 			if (baseBuilder.Info.NewProductionCashThreshold > 0 && playerResources.GetCashAndResources() > baseBuilder.Info.NewProductionCashThreshold)
 			{

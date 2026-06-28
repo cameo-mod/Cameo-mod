@@ -14530,7 +14530,7 @@ nax_hmg:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^SiegeMode
+	Inherits@deploy: ^LurkerMode
 	Inherits@AntiVeh: ^PrioritizeInfantry
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Valued:
@@ -14557,22 +14557,22 @@ nax_hmg:
 	RenderRangeCircle:
 	RevealOnFire:
 		ArmamentNames: primary, deployed
-	Armament@BOTAA:
+	Armament@Dummy:
 		Weapon: NaxiWW2MachinegunnerTargeting
-		Name: targeting
-		RequiresCondition: !deployed
-	Armament@DEPLOYED:
+		Name: dummy
+	Armament@Deployed:
 		Name: deployed
 		Weapon: NaxiWW2Machinegunner
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && !rank-elite
+		RequiresCondition: (deployed || undeployed) && !rank-elite
 	Armament@DEPLOYEDELITE:
 		Name: deployed
 		Weapon: NaxiWW2MachinegunnerElite
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && rank-elite
+		PauseOnCondition: !deployed || deploying
+		RequiresCondition: (deployed || undeployed) && rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: NaxiWW2Machinegunner
@@ -14581,15 +14581,7 @@ nax_hmg:
 		Name: garrisoned
 		Weapon: NaxiWW2MachinegunnerElite
 		RequiresCondition: rank-elite
-	AttackFrontal:
-		Armaments: primary, targeting
-		RequiresCondition: undeployed
-		FacingTolerance: 2
-	AttackTurreted@deployed:
-		Armaments: deployed
-		Turrets: deploy
-		PauseOnCondition: disabled
-		RequiresCondition: deployed
+	AttackTurreted:
 		Voice: Attack
 	Turreted:
 		Turret: deploy
@@ -14626,8 +14618,6 @@ nax_hmg:
 		UndeploySounds: iggidepa.wav
 		RequiresCondition: !parachute
 		Voice: Deploy
-	DeployOnAttack:
-		ArmamentNames: targeting
 	-TakeCover:
 	Crushable:
 		RequiresCondition: undeployed
@@ -14652,7 +14642,7 @@ nax_quadflak:
 	Inherits@anim: ^RA2Infantry
 	Inherits@editorhack: ^DeployableInfantryEditor
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@bot: ^SiegeMode
+	Inherits@deploy: ^LurkerMode
 	Inherits@AntiVeh: ^PrioritizeInfantry
 	Inherits@undead: ^NaxiUndeadRevive
 	Inherits@OstfrontExperience: ^OstfrontExperience
@@ -14681,22 +14671,23 @@ nax_quadflak:
 	RenderRangeCircle:
 	RevealOnFire:
 		ArmamentNames: primary, deployed
-	Armament@BOTAA:
+	Armament@Dummy:
 		Weapon: NaxQuadCannonTargeting
-		Name: targeting
-		RequiresCondition: !deployed
-	Armament@DEPLOYED:
+		Name: dummy
+	Armament@Deployed:
 		Name: deployed
 		Weapon: PortableFlak
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && !rank-elite
+		PauseOnCondition: !deployed || deploying
+		RequiresCondition: (deployed || undeployed) && !rank-elite
 	Armament@DEPLOYEDELITE:
 		Name: deployed
 		Weapon: PortableFlakE
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && rank-elite
+		PauseOnCondition: !deployed || deploying
+		RequiresCondition: (deployed || undeployed) && rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: PortableFlak
@@ -14705,15 +14696,7 @@ nax_quadflak:
 		Name: garrisoned
 		Weapon: PortableFlakE
 		RequiresCondition: rank-elite
-	AttackFrontal:
-		Armaments: primary, targeting
-		RequiresCondition: undeployed
-		FacingTolerance: 2
-	AttackTurreted@deployed:
-		Armaments: deployed
-		Turrets: deploy
-		PauseOnCondition: disabled
-		RequiresCondition: deployed
+	AttackTurreted:
 		Voice: Attack
 	Turreted:
 		Turret: deploy
@@ -14750,8 +14733,6 @@ nax_quadflak:
 		UndeploySounds: iggidepa.wav
 		RequiresCondition: !parachute
 		Voice: Deploy
-	DeployOnAttack:
-		ArmamentNames: targeting
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle

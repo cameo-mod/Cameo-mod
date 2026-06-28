@@ -133,9 +133,7 @@ namespace OpenRA.Mods.CA.Traits
 
 			botLimits = self.TraitsImplementing<BotLimits>().FirstEnabledTraitOrDefault();
 			if (botLimits != null)
-			{
 				harvesterLimit = botLimits.Info.HarvesterLimit;
-			}
 
 			// Avoid all AIs scanning for idle harvesters on the same tick, randomize their initial scan delay.
 			scanForIdleHarvestersTicks = world.LocalRandom.Next(Info.ScanForIdleHarvestersInterval, Info.ScanForIdleHarvestersInterval * 2);

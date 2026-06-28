@@ -8436,8 +8436,6 @@ CPQDEBUGDUMMY:
 		UndeployOnPickup: true
 		SmartDeploy: True
 	RejectsMoveToAttack:
-		RequiresCondition: !botmicro && deployed
-	RejectsMoveToAttack:
 		Reject: AttackMove, AssaultMove
 		RequiresCondition: !botmicro && deployed
 	IssueOrderToBot@AI:
@@ -8449,6 +8447,31 @@ CPQDEBUGDUMMY:
 		RequiresCondition: !deployed
 	Repairable:
 		RequireForceMoveCondition: !undeployed
+
+^LurkerMode:
+	Inherits: ^SiegeMode
+	GrantConditionOnMovement:
+		Condition: moving
+		ValidMovementTypes: Horizontal, Vertical
+	AttackTurreted:
+		Armaments: deployed, dummy
+		Turrets: deploy, dummy
+	Turreted:
+		Turret: deploy
+	Turreted@dummy:
+		Turret: dummy
+	Armament@Dummy:
+		Name: dummy
+		Turret: dummy
+		PauseOnCondition: !undeployed || moving || deployed
+	Armament@Deployed:
+		Name: deployed
+		Turret: deploy
+		PauseOnCondition: undeployed
+		RequiresCondition: deployed || undeployed
+	DeployOnAttack:
+		RequiresCondition: undeployed && !moving && !deployed
+		ArmamentNames: dummy
 
 ^upgrade.template:
 	Buildable:

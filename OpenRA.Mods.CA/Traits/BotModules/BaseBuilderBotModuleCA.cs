@@ -47,7 +47,7 @@ namespace OpenRA.Mods.CA.Traits
 		public readonly FrozenSet<string> DefenseTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered production facilities.")]
-		public readonly FrozenSet<string> ProductionTypes =	FrozenSet<string>.Empty;
+		public readonly FrozenSet<string> ProductionTypes = FrozenSet<string>.Empty;
 
 		[Desc("Tells the AI what building types are considered naval production facilities.")]
 		public readonly FrozenSet<string> NavalProductionTypes = FrozenSet<string>.Empty;
@@ -651,17 +651,9 @@ namespace OpenRA.Mods.CA.Traits
 		bool HasMinimalRefineryCount() =>
 			AIUtils.CountActorByCommonName(RefineryBuildings) >= Info.InititalMinimumRefineryCount;
 
-		public bool HasAdequateBarracksCount() =>
-			AIUtils.CountActorByCommonName(barracksBuildings) >= 1 ||
-					AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(RefineryBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
-
-		public bool HasAdequateFactoryCount() =>
-			AIUtils.CountActorByCommonName(factoryBuildings) >= 1 ||
-					AIUtils.CountActorByCommonName(powerBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(RefineryBuildings) == 0 ||
-					AIUtils.CountActorByCommonName(ConstructionYardBuildings) == 0;
+		public bool HasAdequateProductionCount() =>
+			Info.ProductionTypes.Count == 0 ||
+			AIUtils.CountActorByCommonName(ProductionBuildings) > 0;
 
 		void SellUselessRefinery(IBot bot)
 		{

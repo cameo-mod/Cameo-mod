@@ -7241,6 +7241,7 @@ TSJUGG:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@MechanicalReliability: ^MechanicalReliability
 	Inherits@MechEngineering: ^MechEngineering
+	Inherits@deploy: ^LurkerMode
 	Inherits@bot: ^SiegeModeVehicle
 	Valued:
 		Cost: 1400
@@ -7297,8 +7298,6 @@ TSJUGG:
 		InitialFacing: 384
 		Offset: 0,0,256
 		RealignDelay: -1
-	Turreted@dummy:
-		Turret: dummy
 	WithSpriteTurret@barrel:
 		Turret: deployed
 		RequiresCondition: deployed && !engage-air
@@ -7310,27 +7309,18 @@ TSJUGG:
 	WithSpriteTurret@deployed:
 		Turret: deployed
 		RequiresCondition: deployed
-	AttackTurreted@deployed:
+	AttackTurreted:
 		Voice: Attack
-		Armaments: deployed, dummy
-		Turrets: deployed, dummy
-		PauseOnCondition: empdisable
 		TargetFrozenActors: True
 		ForceFireIgnoresActors: True
 		OutsideRangeRequiresForceFire: True
-	Armament@deployed:
-		Name: deployed
-		Turret: deployed
+	Armament@Deployed:
 		Weapon: TSJugg90mm
 		LocalOffset: 777,203,999, 777,0,999, 777,-203,999
 		MuzzleSequence: muzzle
 		ReloadingCondition: engage-air
-		RequiresCondition: deployed
 	Armament@Dummy:
-		Name: dummy
-		Turret: dummy
 		Weapon: TSJuggTargeting
-		RequiresCondition: !deployed
 	WithMuzzleOverlay:
 	RevealOnFire:
 		ArmamentNames: deployed
@@ -7341,8 +7331,6 @@ TSJUGG:
 		RequiresCondition: !deployed
 	Voiced:
 		VoiceSet: TSVehicle
-	DeployOnAttack:
-		ArmamentNames: dummy
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
