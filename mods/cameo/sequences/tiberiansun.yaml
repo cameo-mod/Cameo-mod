@@ -5911,40 +5911,9 @@ tsdig:
 		ZOffset: 511
 		Offset: 0, 0, 24
 
-tspulsball:
-	idle:
-		Filename: tspulsball.shp
-		Length: *
-		ZOffset: 1023
-		Offset: 0, 0, 24
-
-tscloud1:
- 	idle:
-		Filename: tscloud1.shp
- 		Length: *
- 		ZOffset: 256
- 		Offset: 0, 0, 24
- 	die:
-		Filename: tscloud1d.shp
- 		Length: *
- 		ZOffset: 256
- 		Offset: 0, 0, 24
-
 # tscloud2:
 # 	Inherits: tscloud1
 # 	die: tscloud2d
-
-tsflameall:
-	# Flamethrower projectile trail (nozzle-to-target flame) must read as fire regardless of
-	# terrain brightness or weather tint.
-	idle:
-		Filename: tsflameall.shp
-		Scale: 0.5
-		Length: 19
-		Facings: -8
-		Tick: 114
-		ZOffset: 1023
-		IgnoreWorldTint: true
 
 tsdroppod:
  	idle:
@@ -6163,37 +6132,6 @@ tsarnd:
 	icon:
 		Filename: tseliminatoricon.shp
 
-
-tsioncannon:
-	Defaults:
-		Length: *
-		ZOffset: 2047
-		Tick: 35
-		IgnoreWorldTint: true
-		ZRamp: 1
-	targeting:
-		Filename: ra2_ring.shp
-	ionring:
-		Filename: tsring1.shp
-		Alpha: 0.75
-		Tick: 50
-		Scale: 1.25
-	ionbeam:
-		Filename: tsionbeam.shp
-		Offset: 0, -60, 60
-		Alpha: 0.75
-		Tick: 40
-	ionbeamstart:
-		Filename: tsionbeamstart.shp
-		Offset: 0, -60, 60
-		Alpha: 0.75
-		Tick: 30
-	ringmini2:
-		Filename: tsringmini2.shp
-		Alpha: 0.75
-		Offset: 0,-6
-		Tick: 5
-		Scale: 0.8
 
 # tsreinca:
 # 	Defaults: reinca

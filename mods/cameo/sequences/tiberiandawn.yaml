@@ -2263,13 +2263,6 @@ rmbo:
 		Facings: 8
 		Scale: 2.0
 
-bhreddragon:
-	idle:
-		Filename: bhreddragon.shp
-		Facings: 32
-		InterpolatedFacings: 64
-		ZOffset: 1023
-
 bhreddragonemp:
 	idle:
 		Filename: bhreddragonemp.shp
@@ -2966,13 +2959,6 @@ miss.husk:
 spit:
 	Defaults:
 		Filename: spit.shp
-	idle:
-		Length: *
-		ZOffset: 1023
-
-spittrail:
-	Defaults:
-		Filename: spittrail.shp
 	idle:
 		Length: *
 		ZOffset: 1023
