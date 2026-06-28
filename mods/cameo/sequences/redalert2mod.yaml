@@ -1274,22 +1274,6 @@ aa_commando:
 	icon:
 		Filename: asian_commando_icon.png
 
-aa_banzai:
-	Defaults:
-		Filename: aa_banzai.shp
-		Offset: 0, 4
-	idle:
-		Length: 2
-		Tick: 50
-
-aa_banzai2:
-	Defaults:
-		Filename: aa_banzai2.shp
-		Offset: 0, 4
-	idle:
-		Length: 2
-		Tick: 25
-
 aa_tkiller:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
@@ -1584,11 +1568,6 @@ aa_plasblue_small:
 		Filename: aa_plasblue.shp
 		ZOffset: 1023
 		Scale: 0.5
-
-aa_plasgree:
-	idle:
-		Filename: aa_plasgree.shp
-		ZOffset: 1023
 
 aa_plasgold:
 	idle:
@@ -8919,3 +8898,19 @@ future_upgrade_equalizer_x2:
 future_upgrade_equalizer_x3:
 	icon:
 		Filename: future_equalizer_x3_icon.png
+
+aa_banzai:
+	Defaults:
+		Filename: aa_banzai.shp
+		Offset: 0, 4
+	idle:
+		Length: 2
+		Tick: 50
+
+aa_banzai2:
+	Defaults:
+		Filename: aa_banzai2.shp
+		Offset: 0, 4
+	idle:
+		Length: 2
+		Tick: 25
