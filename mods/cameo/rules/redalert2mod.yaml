@@ -6196,13 +6196,11 @@ latin_ltnk:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
-	Inherits@cargo: ^CargoVehicle
-	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@uprecover: ^LatinCashrecover
 	Tooltip:
 		Name: Rusher Tank
 	Valued:
-		Cost: 850
+		Cost: 650
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~latin_cgweap, ~!uplatin_mtnk
@@ -6263,10 +6261,6 @@ latin_ltnk:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	WithSpriteTurret:
-	Cargo:
-		InitialUnits: latin_mili, latin_tkiller, latin_monkey
-		Types: Infantry, Hacker, Fremen
-		MaxWeight: 3
 	Voiced:
 		VoiceSet: LatinTankVoice
 	RenderSprites:
@@ -6291,8 +6285,6 @@ latin_mtnk:
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@EMP: ^TurretEMP
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
-	Inherits@cargo: ^CargoVehicle
-	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@uprecover: ^LatinCashrecover
 	Tooltip:
 		Name: Smoker Tank
@@ -6366,7 +6358,7 @@ latin_mtnk:
 		MuzzlePalette: ra2effect
 		RequiresCondition: uplatin_cartelrockets && rank-elite
 	FirepowerMultiplier@MultiWeapon:
-		Modifier: 25
+		Modifier: 50
 	GrantConditionOnPrerequisite@Missile:
 		Condition: uplatin_cartelrockets
 		Prerequisites: uplatin_cartelrockets
@@ -6376,10 +6368,6 @@ latin_mtnk:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	WithSpriteTurret:
-	Cargo:
-		InitialUnits: latin_narco, latin_fthrow, latin_monkey
-		Types: Infantry, Hacker, Fremen
-		MaxWeight: 3
 	Voiced:
 		VoiceSet: LatinHeavyTankVoice
 	RenderSprites:
@@ -11969,7 +11957,7 @@ upsteel_naniteinfusion:
 upsteel_ferrocrete:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: Unlock Ferrocrate Curtain
+		Name: Unlock Ferrocrete Curtain
 	Valued:
 		Cost: 5000
 	Buildable:

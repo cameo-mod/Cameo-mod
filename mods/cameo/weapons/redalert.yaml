@@ -4560,19 +4560,19 @@ ThermobaricNuclearMaverick:
 AlliedTankDestroyerCannon:
 	Inherits: ^MediumCannon
 	Inherits: ^TankDestroyerCannon
-	ReloadDelay: 65
-	Range: 7507
+	ReloadDelay: 60
+	Range: 6819
 	Report: tank5.aud
 	Projectile: Bullet
-		Speed: 750
+		Speed: 1362
 	Warhead@MediumCannon: SpreadDamage
-		Damage: 16000
+		Damage: 12000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 8
+		Damage: 6
 	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 16000
+		Damage: 12000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 8
+		Damage: 6
 
 SheridanCannon:
 	Inherits: ^TankDestroyerCannon
@@ -5010,11 +5010,11 @@ TigerCannon:
 	Inherits: ^MediumChemicalWeapon
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^MediumCannon
-	ReloadDelay: 35
-	Range: 4477
+	ReloadDelay: 37
+	Range: 4720
 	Report: cannon2.aud
 	Projectile: Bullet
-		Speed: 447
+		Speed: 472
 		Image: 50CAL
 		-LaunchAngle:
 	Warhead@Grenade: SpreadDamage

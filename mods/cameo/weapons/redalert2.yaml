@@ -859,11 +859,11 @@ RA2GrandCannonWeapon:
 
 RA2105mm:
 	Inherits: ^RA2MediumCannon
-	ReloadDelay: 46
-	Range: 5052
+	ReloadDelay: 45
+	Range: 5289
 	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
 	Projectile: Bullet
-		Speed: 505
+		Speed: 528
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 8000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -872,25 +872,25 @@ RA2105mm:
 RA2105mm_elite:
 	Inherits: RA2105mm
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 6052
+	Range: 6289
 	Burst: 2
 	BurstDelays: 3
 
 RA2sabot:
 	Inherits: ^RA2TankDestroyerCannon
-	ReloadDelay: 90
-	Range: 6200
+	ReloadDelay: 80
+	Range: 7040
 	Projectile: Bullet
-		Speed: 620
+		Speed: 1408
 	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 60000
+		Damage: 40000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 30
+		Damage: 20
 
 RA2sabot_elite:
 	Inherits: RA2sabot
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 7200
+	Range: 8040
 	Burst: 2
 	BurstDelays: 5
 
@@ -1785,7 +1785,7 @@ RA2FLOATER:
 
 RA2120mm:
 	Inherits: ^RA2MediumCannon
-	Range: 5142
+	Range: 5374
 	ReloadDelay: 54
 	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
 	Projectile: Bullet
@@ -1829,28 +1829,28 @@ RA2120mm_tesla:
 RA2120mm_elite:
 	Inherits: RA2120mm
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 6142
+	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
 RA2120mm_elite_rad:
 	Inherits: RA2120mm_rad
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 6142
+	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
 RA2120mm_elite_fire:
 	Inherits: RA2120mm_fire
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 6142
+	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 
 RA2120mm_elite_tesla:
 	Inherits: RA2120mm_tesla
 	Inherits@Elite: ^RA2EliteEffects
-	Range: 6142
+	Range: 6374
 	Burst: 2
 	BurstDelays: 3
 

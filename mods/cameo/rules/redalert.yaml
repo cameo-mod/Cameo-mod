@@ -10700,16 +10700,16 @@ MODTNKD:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 67500
+		HP: 120000
 	Repairable:
-		HpPerStep: 3375
+		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
-		Step: 27
+		Step: 48
 	Armor:
 		Type: Medium
 	Mobile:
-		Speed: 65
-		TurnSpeed: 26
+		Speed: 60
+		TurnSpeed: 24
 	Armament:
 		Weapon: AlliedTankDestroyerCannon
 		Recoil: 128

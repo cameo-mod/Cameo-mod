@@ -9472,13 +9472,13 @@ combat_tank_o:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 55000
+		HP: 85000
 	Repairable:
-		HpPerStep: 2750
+		HpPerStep: 4250
 	ChangesHealth@SelfHealing:
-		Step: 22
+		Step: 34
 	Shielded:
-		RegenAmount: 44
+		RegenAmount: 68
 	Armor:
 		Type: Medium
 	Mobile:

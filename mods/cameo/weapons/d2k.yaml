@@ -168,10 +168,10 @@ Debris4:
 
 OrdosCombatTankCannon:
 	Inherits: ^D2K_Cannon
-	Range: 5783
-	ReloadDelay: 35
+	Range: 5230
+	ReloadDelay: 44
 	Projectile: Bullet
-		Speed: 578
+		Speed: 523
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 8000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
