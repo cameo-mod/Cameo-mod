@@ -1,0 +1,80 @@
+World:
+	FactionCA@RA2America:
+		Name: Allies RA2 #faction-ra2-allies.name
+		InternalName: ra2america
+		Game: Red Alert 2
+		Side: Red Alert 2
+		Description: faction-ra2-allies.description
+	FactionCA@ra2russia:
+		Name: Soviets RA2 #faction-ra2-soviets.name
+		InternalName: ra2russia
+		Game: Red Alert 2
+		Side: Red Alert 2
+		Description: faction-ra2-soviets.description
+	FactionCA@yuri:
+		Name: Yuri #faction-ra2-yuri.name
+		InternalName: yuri
+		Game: Red Alert 2
+		Side: Red Alert 2
+		Description: faction-ra2-yuri.description
+	FactionCA@Randomra2:
+		Name: Random RA2 #faction-ra2-random.name
+		InternalName: Randomra2
+		RandomFactionMembers: ra2america, ra2russia, yuri
+		Game: Red Alert 2
+		Side: Random
+		Description: faction-ra2-random.description
+	####################################################################################################
+	#		MPSTARTUNITS
+	####################################################################################################
+	StartingUnits@mcvra2allies:
+		Class: none
+		ClassName: MCV Only
+		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		BaseActor: ra2amcv
+	StartingUnits@mcvra2soviet:
+		Class: none
+		ClassName: MCV Only
+		Factions: ra2russia, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		BaseActor: ra2smcv
+	StartingUnits@mcvyuri:
+		Class: none
+		ClassName: MCV Only
+		Factions: yuri
+		BaseActor: yrpcv
+	StartingUnits@defaultra2allies:
+		Class: light
+		ClassName: Light Support
+		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		BaseActor: ra2amcv
+		SupportActors: ra2e1,ra2e1,ra2e1,yrggi,yrggi,ra2fv,ra2mtnk
+	StartingUnits@heavyra2allies:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: ra2america #, ra2french, ra2german, ra2british, ra2korea, ra2koreaaddon
+		BaseActor: ra2amcv
+		SupportActors: ra2e1,ra2e1,ra2e1,yrggi,yrggi,ra2fv,ra2mtnk,ra2mtnk,ra2mtnk,ra2tnkd,ra2fv
+	StartingUnits@defaultra2soviet:
+		Class: light
+		ClassName: Light Support
+		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		BaseActor: ra2smcv
+		SupportActors: ra2e2,ra2e2,ra2e2,ra2flakt,ra2flakt,ra2htnk,ra2htk
+	StartingUnits@heavyra2soviet:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
+		BaseActor: ra2smcv
+		SupportActors: ra2e2,ra2e2,ra2e2,ra2flakt,ra2flakt,ra2htnk,ra2htk,ra2htnk,ra2apoc
+	StartingUnits@defaultyuri:
+		Class: light
+		ClassName: Light Support
+		Factions: yuri
+		BaseActor: yrpcv
+		SupportActors: yrinit,yrinit,yrinit,yrbrute,yrbrute,yrslav,yrytnk,yrltnk
+	StartingUnits@heavyyuri:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: yuri
+		BaseActor: yrpcv
+		SupportActors: yrinit,yrinit,yrinit,yrbrute,yrbrute,yrslav,yrytnk,yrltnk,yrltnk,yrltnk,yrltnk,yrytnk

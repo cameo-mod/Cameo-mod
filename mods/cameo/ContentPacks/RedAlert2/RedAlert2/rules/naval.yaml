@@ -1,0 +1,564 @@
+ra2sqd:
+	Inherits: ^SeaCreature
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@sub: ^Submarine
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: actor-sqd.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~yrygyard
+		Queue: Naval, RANaval
+		Description: actor-sqd.description
+	Mobile:
+		Speed: 120
+		TurnSpeed: 48
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 24
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: SquidPunch
+		LocalOffset: 208,0,48
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: SquidGrab
+		LocalOffset: 208,0,48
+	AttackFrontal:
+		FacingTolerance: 2
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AutoTargetPriority@SQUIDGRAB:
+		ValidTargets: SquidGrab
+		Priority: 10
+	DeliversCash:
+		Payload: 250
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine, Squid, Infantry
+	WithInfantryBody:
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+		DefaultAttackSequence: shoot
+		IdleSequences: idle
+		StandSequences: stand
+	AttackFrontal:
+	InfectorOld:
+		ArmamentNames: secondary
+		Damage: 1000
+		DamageInterval: 1
+		DamageTypes: DefaultDeath
+		DamageSounds: gexpwama.wav, gexpwamb.wav
+		KillState: Critical
+		Voice: Attack
+		StartSequence: grabing
+		Sequence: grab
+		Palette: playerra2
+		IsPlayerPalette: true
+	Voiced:
+		VoiceSet: GiantSquidVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2dlph:
+	Inherits: ^SeaCreature
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@sub: ^Submarine
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: actor-dlph.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2gatech
+		Queue: Naval, RANaval
+		Description: actor-dlph.description
+	Mobile:
+		TurnSpeed: 48
+		Speed: 120
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armor:
+		Type: Light
+	Armament@PRIMARY:
+		Weapon: SonicZap
+		LocalOffset: 208,0,48
+	Armament@SECONDARY:
+		Weapon: SonicZapFriendly
+		LocalOffset: 208,0,48
+		TargetRelationships: Ally
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+		IdleSequences: idle
+		StandSequences: stand
+		DefaultAttackSequence: shoot
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine, Infantry
+	Voiced:
+		VoiceSet: DolphinVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+	# FirepowerMultiplier@Dolphin:
+	# 	Modifier: 125
+
+ra2dest:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 1700
+	Tooltip:
+		Name: actor-dest.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2gayard
+		Queue: Naval, RANaval
+		Description: actor-dest.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+	Health:
+		HP: 160000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Name: secondary
+		Weapon: RA2155mm
+		LocalOffset: 1100,0,100
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: secondary
+		Weapon: RA2155mm_elite
+		LocalOffset: 1100,0,100
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+	Armament@GenerateOsprey:
+		Name: primary
+		Weapon: RA2OspreyTarget
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+		Color: FF0000
+	RenderRangeCircleCA@SECONDARY:
+		Armaments: secondary
+	DetectCloaked:
+		Range: 10000
+		DetectionTypes: Underwater
+	WithMuzzleOverlay:
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	RenderDetectionCircle:
+	Selectable:
+	Voiced:
+		VoiceSet: AlliesNavalVoice
+	CarrierMaster:
+		Actors: ra2asw
+		RearmTicks: 125
+		RespawnTicks: 250
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: true
+		LoadedCondition: osprey-loaded
+		ArmamentNames: primary
+	WithFacingSpriteBody:
+		RequiresCondition: osprey-loaded
+	WithFacingSpriteBody@empty:
+		Sequence: idle-empty
+		RequiresCondition: !osprey-loaded
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2aegis:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: actor-aegis.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2gaairc
+		Queue: Naval, RANaval
+		Description: actor-aegis.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 90
+		TurnSpeed: 32
+	Health:
+		HP: 90000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armor:
+		Type: Medium
+	Armament@AA:
+		Weapon: RA2Medusa
+		LocalOffset: 0,384,384, 0,0,384, 0,-384,384
+		LocalYaw: -75, 0, 75
+		MuzzleSequence: muzzle
+	Armament@AG:
+		Weapon: RA2MedusaAG
+		LocalOffset: 0,384,384, 0,0,384, 0,-384,384
+		LocalYaw: -75, 0, 75
+		MuzzleSequence: muzzle
+		RequiresCondition: upra2aegismissiles
+	GrantConditionOnPrerequisite@Upgrade:
+		Condition: upra2aegismissiles
+		Prerequisites: upra2aegismissiles
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: AegisVoice
+
+ra2carrier:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2VehicleBig
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: actor-ra2carrier.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2gatech
+		Queue: Naval, RANaval
+		Description: actor-ra2carrier.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Superheavy
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	CarrierMaster:
+		Actors: ra2hornet, ra2hornet, ra2hornet
+		RearmTicks: 150
+		RespawnTicks: 300
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Armament@PRIMARY:
+		Weapon: RA2CarrierTarget
+		Damage: 3000
+		ReloadDelay: 150
+	Voiced:
+		VoiceSet: AircraftCarrierVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2sub:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: actor-ra2sub.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2nayard
+		Queue: Naval, RANaval
+		Description: actor-ra2sub.description
+	Mobile:
+		Speed: 90
+		TurnSpeed: 36
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 18
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: RA2TorpTube
+		LocalOffset: 256,0,0
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2TorpTube_elite
+		LocalOffset: 256,0,0
+		RequiresCondition: rank-elite
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
+	DeliversCash:
+		Payload: 475
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Voiced:
+		VoiceSet: TyphoonSubVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2hyd:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: actor-hyd.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2naradr
+		Queue: Naval, RANaval
+		Description: actor-hyd.description
+	Mobile:
+		Speed: 120
+		TurnSpeed: 48
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armor:
+		Type: Light
+	Armament@AA:
+		Weapon: SeaScorpionAA
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,400
+	Armament@AG:
+		Weapon: RA2FlakTrackGun
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,400
+	WithMuzzleOverlay:
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1024, 1024
+	DeliversCash:
+		Payload: 450
+	Voiced:
+		VoiceSet: SeaScorpionVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2dred:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2VehicleBig
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: actor-dred.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ra2natech
+		Queue: Naval, RANaval
+		Description: actor-dred.description
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Superheavy
+	Armament@AG:
+		Weapon: DreadnoughtLaunch
+		Recoil: 85
+		Damage: 2500
+		ReloadDelay: 125
+	MissileSpawnerMasterCA:
+		Actors: ra2dmisl, ra2dmisl
+		SpawnOffset: 172,120,128, -172,-120,128
+		SpawnAllAtOnce: true
+		RespawnTicks: 125
+		LoadedCondition: ammo
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	DeliversCash:
+		Payload: 450
+	Voiced:
+		VoiceSet: SovietNavalVoice
+	WithFacingSpriteBody:
+		RequiresCondition: ammo
+	WithFacingSpriteBody@empty:
+		Sequence: idle-empty
+		RequiresCondition: !ammo
+	RenderSprites:
+		PlayerPalette: playerra2
+
+yrbsub:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Valued:
+		Cost: 3350
+	Tooltip:
+		Name: actor-bsub.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2napsis
+		Queue: Naval, RANaval
+		Description: actor-bsub.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 10
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 10
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Name: secondary
+		Weapon: YRBoomerTorpedo
+		LocalOffset: 200,-100,0, 200,100,0
+		FireDelay: 2
+	Armament@LAUNCH:
+		Weapon: BoomerLaunch
+		LocalOffset: 208,-24,48, 208,24,48
+		Voice: AttackLand
+		Damage: 800
+		ReloadDelay: 125
+	MissileSpawnerMasterCA:
+		#ArmamentNames: primary
+		Actors: yrbsubmisl, yrbsubmisl
+		RespawnTicks: 125
+		SpawnAllAtOnce: true
+		SpawnOffset: 100,-100,100, 100,100,100
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
+	DeliversCash:
+		Payload: 475
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	DetectCloaked:
+		DetectionTypes: Underwater
+		Range: 5000
+	Voiced:
+		VoiceSet: BoomerVoice
+	RenderSprites:
+		PlayerPalette: playerra2

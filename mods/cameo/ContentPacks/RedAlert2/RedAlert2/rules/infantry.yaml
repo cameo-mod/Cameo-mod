@@ -1,0 +1,2536 @@
+RA2Flameguy:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	Mobile:
+		Speed: 71
+		Locomotor: foot
+	HiddenUnderFog:
+	RenderSprites:
+		Palette: ra2effect
+	WithInfantryBody:
+		IdleSequences: run
+	Health:
+		HP: 160
+	ChangesHealth:
+		Step: -10
+		StartIfBelow: 101
+	ScaredyCat:
+		PanicSequencePrefix:
+	WithDeathAnimation:
+		FallbackSequence: die
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: ra2effect
+		DeathPaletteIsPlayerPalette: false
+	HitShape:
+
+RA2ADOG:
+	Inherits: ^DefaultInfantry
+	Inherits@2: ^AffectedByTiberium
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Template: ^DogTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@MC: ^MCImmune
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 29
+		Prerequisites: ~ra2gapile
+		Description: actor-dog.description
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Attack Dog
+		GenericName: Dog
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Bounds: 512, 768, -48, -172
+	DeliversCash:
+		Payload: 100
+	SelectionDecorations:
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 2
+	Armor:
+		Type: None
+	Mobile:
+		Speed: 100
+		Voice: Move
+		RequiresCondition: !attack-cooldown && !eating
+	Guard:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	DetectCloaked:
+		Range: 6000
+		RequiresCondition: !disabled
+		DetectionTypes: Cloak, Hijacker
+	Armament:
+		Weapon: DogJaw
+		ReloadingCondition: attack-cooldown
+	RenderSprites:
+		PlayerPalette: playerra2
+	Crushable:
+		CrushSound: igensqua.wav
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 2
+			PsychicDeath: 1
+			TiberiumDeath: 1
+			RadiationDeath: 1
+			RA2VirusDeath: 1
+			ElectricityDeath: 2
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+	AttackLeap:
+		Voice: Attack
+		PauseOnCondition: attacking || attack-cooldown
+	AttackMove:
+		Voice: Move
+	GrantConditionOnAttack:
+		Condition: eating
+		RevokeDelay: 25
+	GrantConditionWhileAiming:
+		Condition: run
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Targetable:
+		TargetTypes: Ground, Infantry
+	WithInfantryBody:
+		MoveSequence: walk
+		IdleSequences: idle1, idle2
+		StandSequences: stand
+		DefaultAttackSequence: eat
+		RequiresCondition: !run
+	WithInfantryBody@RUN:
+		MoveSequence: run
+		RequiresCondition: run
+	SpeedMultiplier:
+		Modifier: 150
+		RequiresCondition: run
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: run
+	IgnoresDisguise:
+	-Targetable@disguise:
+	-InaccuracyMultiplier@artilleryjammer:
+	Voiced:
+		VoiceSet: RA2DogVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+RA2E1:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^SiegeMode
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Tooltip:
+		Name: G.I.
+	Valued:
+		Cost: 200
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2gapile
+		Queue: Infantry, RAInfantry
+		Description: actor-ra2e1.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	GrantConditionOnPrerequisite@upgrade:
+		Condition: ra2_allies_upgrade_elitegi
+		Prerequisites: ra2_allies_upgrade_elitegi
+	Armament@PRIMARY:
+		Weapon: RA2M60
+		RequiresCondition: !deployed && !ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@PRIMARY2:
+		Weapon: RA2para
+		RequiresCondition: !deployed && ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@DEPLOYED:
+		Name: deployed
+		Weapon: RA2para
+		LocalOffset: 128,0,128
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2vulcan2
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+		Armaments: primary
+		RequiresCondition: undeployed
+		FacingTolerance: 0
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		PauseOnCondition: disabled
+		RequiresCondition: deployed
+		Voice: Attack
+	RangeMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	DamageMultiplier@deployed:
+		Modifier: 75
+		RequiresCondition: deployed
+	DamageMultiplier@ra2_allies_upgrade_elitegi:
+		Modifier: 75
+		RequiresCondition: deployed && ra2_allies_upgrade_elitegi
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 10
+		ArmamentNames: deployed
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		DeploySounds: igidepa.wav,igidepb.wav
+		UndeploySounds: igidepa.wav,igidepb.wav
+		Facing: 384
+		RequiresCondition: !parachute
+		PauseOnCondition: disabled
+		Voice: Deploy
+	TakeCover:
+		RequiresCondition: undeployed
+	Crushable:
+		RequiresCondition: undeployed || (deployed && !ra2_allies_upgrade_elitegi)
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed && ra2_allies_upgrade_elitegi
+	Voiced:
+		VoiceSet: GIVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi
+
+YRGGI:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^SiegeMode
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Tooltip:
+		Name: Guardian G.I.
+	Valued:
+		Cost: 400
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2gapile
+		Queue: Infantry, RAInfantry
+		Description: actor-ggi.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	GrantConditionOnPrerequisite@upgrade:
+		Condition: ra2_allies_upgrade_elitegi
+		Prerequisites: ra2_allies_upgrade_elitegi
+	Armament@PRIMARY:
+		Weapon: GuardianGIMG
+		RequiresCondition: !deployed && !rank-elite && !ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@PRIMARY2:
+		Weapon: GuardianGIMG2
+		RequiresCondition: !deployed && !rank-elite && ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: GuardianGIMGE
+		RequiresCondition: !deployed && rank-elite && !ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@ELITE2:
+		Weapon: GuardianGIMG2E
+		RequiresCondition: !deployed && rank-elite && ra2_allies_upgrade_elitegi
+		LocalOffset: 128,0,256
+	Armament@BOTAA:
+		Weapon: aadeploytargeting.8c0
+		Name: targeting
+		RequiresCondition: botmicro
+	Armament@DEPLOYED:
+		Name: deployed
+		Weapon: RA2GIRocketsG
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: !rank-elite && deployed
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG
+		RequiresCondition: !rank-elite
+	Armament@DEPLOYEDELITE:
+		Name: deployed
+		Weapon: RA2GIRocketsG_elite
+		Turret: deploy
+		LocalOffset: 384,64,384
+		RequiresCondition: rank-elite && deployed
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG_elite
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		Armaments: primary, targeting
+		RequiresCondition: undeployed
+		FacingTolerance: 2
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		PauseOnCondition: disabled
+		RequiresCondition: deployed
+		Voice: Attack
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		RequiresCondition: !parachute
+		Voice: Deploy
+	TakeCover:
+		RequiresCondition: undeployed
+	Crushable:
+		RequiresCondition: undeployed
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed
+	DamageMultiplier@deployed:
+		Modifier: 60
+		RequiresCondition: deployed
+	DamageMultiplier@ra2_allies_upgrade_elitegi:
+		Modifier: 60
+		RequiresCondition: deployed && ra2_allies_upgrade_elitegi
+	Voiced:
+		VoiceSet: GGIVoice
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_elitegi
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
+
+RA2CLEG:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Chrono Legionnaire
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~ra2gatech
+		Queue: Infantry, RAInfantry
+		Description: actor-cleg.description
+	Mobile:
+		Speed: 35
+	Health:
+		HP: 35000
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Passenger:
+	Armament@sound:
+		Weapon: RA2ChronoTele
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: ChronoBeam
+		LocalOffset: 256,43,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: ChronoBeam_elite
+		LocalOffset: 256,43,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ChronoBeam
+		LocalOffset: 256,43,256
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: ChronoBeam_elite
+		LocalOffset: 256,43,256
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	RA2PortableChrono:
+		TeleportType: PortableChrono
+		Voice: Move
+		ChargeDelay: 250
+		MaxTeleportDistance: 50
+		PauseOnCondition: disabled
+	WithRangeCircle@Chrono:
+		Range: 50c0
+		Color: BBEEFF
+		Type: Teleport
+	ExplodeWeaponTeleportEffect:
+		TeleportType: PortableChrono
+		ImpactWeapon: PortableChronoImpact
+		TeleportWeapon: PortableChronoTeleport
+	GrantTimedConditionOnTeleport@Portable:
+		TeleportTypes: PortableChrono
+		Condition: teleported
+		Duration: 75
+	GrantCondition@chrono:
+		Condition: chronodisabled
+		RequiresCondition: chronobeamed || teleported
+	Voiced:
+		VoiceSet: ChronoLegionnaireVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-chrono
+	-TakeCover:
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+RA2SNIPE:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Sniper
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2gatech
+		Queue: Infantry, RAInfantry
+		Description: actor-ra2snipe.description
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 22000
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament@PRIMARY:
+		Weapon: RA2AWP
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2AWPE
+		LocalOffset: 0,0,427
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2AWP
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2AWPE
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 200
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 50
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: RA2SniperVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+RA2ENGINEER:
+	Inherits: E6
+	-WithDeathAnimation: # yaml needs restructuring in the future
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Buildable:
+		Prerequisites: ~ra2gapile
+		Queue: Infantry, RAInfantry
+	Voiced:
+		VoiceSet: AlliesEngineer
+	DeliversCash:
+		Payload: 250
+
+ra2engineer.soviet:
+	Inherits: RA2ENGINEER
+	Buildable:
+		Prerequisites: ~ra2nahand
+		Queue: Infantry, RAInfantry
+	RenderSprites:
+		Image: ra2engineer
+	Voiced:
+		VoiceSet: SovietEngineer
+
+ra2engineer.yuri:
+	Inherits: RA2ENGINEER
+	Buildable:
+		Prerequisites: ~yryabrck
+		Queue: Infantry, RAInfantry
+	RenderSprites:
+		Image: ra2engineer
+	Voiced:
+		VoiceSet: YuriEngineer
+
+RA2TANY:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MC: ^MCImmune
+	Inherits@swim: ^WithSwimsuit
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra2gatech
+		BuildLimit: 1
+		Description: template-commando.description
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Tanya II
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Mobile:
+		Speed: 75
+	Passenger:
+	Armament@PRIMARY:
+		Weapon: RA2DoublePistols
+		RequiresCondition: !rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: RA2DoublePistolsE
+		RequiresCondition: rank-elite
+		LocalOffset: 128,0,256
+	Armament@c4:
+		Weapon: TanyaAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	Armament@c4building:
+		Weapon: GenericC4
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2DoublePistols
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2DoublePistolsE
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 200
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 50
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		StandSequences: stand
+	Voiced:
+		VoiceSet: RA2TanyaVoice
+	ProvidesPrerequisite:
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+RA2SEAL:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^RA2Infantry
+	Inherits@swim: ^WithSwimsuit
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Valued:
+		Cost: 900
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Mobile:
+		Speed: 60
+	Tooltip:
+		Name: SEAL
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra2gaairc
+		Description: actor-seal.description
+	Armament@PRIMARY:
+		Weapon: RA2MP5
+		RequiresCondition: !rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: RA2MP5E
+		RequiresCondition: rank-elite
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2MP5
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2MP5E
+		RequiresCondition: rank-elite
+	Armament@shipc4:
+		Weapon: SEALAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 200
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 50
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	FirepowerMultiplier@Elite:
+		Modifier: 225
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+	Voiced:
+		VoiceSet: SealVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-hmg
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+RA2SPY:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@template: ^ScoutInfantryTemplate
+	Inherits@disguise: ^SpyDisguise
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 90
+		Prerequisites: ~ra2gaairc
+		Description: actor-ra2spy.description
+	Valued:
+		Cost: 500
+	-Tooltip:
+	DisguiseTooltip:
+		Name: Spy
+		GenericName: Soldier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	-Guard:
+	Health:
+		HP: 5000
+	Mobile:
+		Speed: 60
+	Passenger:
+	Disguise:
+	-WithInfantryBody:
+	WithDisguisingInfantryBody:
+		StandSequences: stand
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+	-AttackFrontal:
+	IgnoresDisguise:
+	Voiced:
+		VoiceSet: RA2SpyVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-spy
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
+
+##############################################
+#   Red Alert 2 Soviet Infantry
+##############################################
+
+RA2DOG:
+	Inherits: ^DefaultInfantry
+	Inherits@2: ^AffectedByTiberium
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Template: ^DogTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@MC: ^MCImmune
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2SovietConscription: ^RA2SovietConscription
+	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
+	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 29
+		Prerequisites: ~ra2nahand
+		Description: actor-dog.description
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Attack Dog
+		GenericName: Dog
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Bounds: 512, 768, -48, -172
+	DeliversCash:
+		Payload: 100
+	SelectionDecorations:
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 2
+	Armor:
+		Type: None
+	Mobile:
+		Speed: 100
+		Voice: Move
+		RequiresCondition: !attack-cooldown && !eating
+	Guard:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	DetectCloaked:
+		Range: 6000
+		RequiresCondition: !disabled
+		DetectionTypes: Cloak, Hijacker
+	Armament:
+		Weapon: DogJaw
+		ReloadingCondition: attack-cooldown
+	RenderSprites:
+		PlayerPalette: playerra2
+	Crushable:
+		CrushSound: igensqua.wav
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 2
+			PsychicDeath: 1
+			TiberiumDeath: 1
+			RadiationDeath: 1
+			RA2VirusDeath: 1
+			ElectricityDeath: 2
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+	AttackLeap:
+		Voice: Attack
+		PauseOnCondition: attacking || attack-cooldown
+	AttackMove:
+		Voice: Move
+	GrantConditionOnAttack:
+		Condition: eating
+		RevokeDelay: 25
+	GrantConditionWhileAiming:
+		Condition: run
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Targetable:
+		TargetTypes: Ground, Infantry
+	WithInfantryBody:
+		MoveSequence: walk
+		IdleSequences: idle1, idle2
+		StandSequences: stand
+		DefaultAttackSequence: eat
+		RequiresCondition: !run
+	WithInfantryBody@RUN:
+		MoveSequence: run
+		RequiresCondition: run
+	SpeedMultiplier:
+		Modifier: 150
+		RequiresCondition: run
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: run
+	IgnoresDisguise:
+	-Targetable@disguise:
+	-InaccuracyMultiplier@artilleryjammer:
+	Voiced:
+		VoiceSet: RA2DogVoice
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+
+RA2E2:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2SovietConscription: ^RA2SovietConscription
+	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
+	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Conscript
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2nahand
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 57
+	Health:
+		HP: 13000
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Armament@PRIMARY:
+		Weapon: RA2M1Carbine
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2M1CarbineE
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2vulcan3
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+		FacingTolerance: 0
+	ProductionCostMultiplier@global_conscription_buff:
+		Multiplier: 50
+	ProductionTimeMultiplier@global_conscription_buff:
+		Multiplier: 50
+	FirepowerMultiplier@global_conscription_buff:
+		Modifier: 120
+	SpeedMultiplier@global_conscription_buff:
+		Modifier: 120
+	DamageMultiplier@global_conscription_buff:
+		Modifier: 80
+	ReloadDelayMultiplier@global_conscription_buff:
+		Modifier: 80
+	ChangesHealth@ra2_soviets_upgrade_infantryconditioning:
+		Step: 20
+	DamageMultiplier@ra2_soviets_upgrade_infantryconditioning:
+		Modifier: 50
+	SpeedMultiplier@ra2_soviets_upgrade_infantryconditioning:
+		Modifier: 110
+	RangeMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		Modifier: 130
+	FirepowerMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		Modifier: 130
+	SpeedMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		Modifier: 130
+	Voiced:
+		VoiceSet: ConscriptVoice
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+
+RA2flakt:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2SovietConscription: ^RA2SovietConscription
+	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
+	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Flak Trooper
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2nahand
+		Queue: Infantry, RAInfantry
+		Description: actor-flakt.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2CRFlakGuyGun
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,512
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYAA:
+		Name: primary
+		Weapon: RA2FLAKAA
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,512
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2CRFlakGuyGun
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDAA:
+		Name: garrisoned
+		Weapon: RA2FLAKAA
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYE:
+		Name: primary
+		Weapon: RA2CRFlakGuyGun_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,256
+		RequiresCondition: rank-elite
+	Armament@PRIMARYAAE:
+		Name: primary
+		Weapon: RA2FLAKAA_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDE:
+		Name: garrisoned
+		Weapon: RA2CRFlakGuyGun_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDAAE:
+		Name: garrisoned
+		Weapon: RA2FLAKAA_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 2
+	Voiced:
+		VoiceSet: FlakTrooperVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-flak
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining, ra2_soviets_upgrade_heavycannons
+
+RA2IVAN:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@RA2SovietConscription: ^RA2SovietConscription
+	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
+	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Crazy Ivan
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~ra2naradr
+		Queue: Infantry, RAInfantry
+		Description: actor-ivan.description
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	AutoTarget:
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: CrazyIvanVoice
+	Armament:
+		Weapon: IvanAttach
+		Cursor: c4
+	Armament@aa:
+		Weapon: IvanAttachAir
+		Cursor: c4
+	FireWarheadsOnDeath:
+		Weapon: IvanBomb
+		EmptyWeapon: IvanBomb
+		RequiresCondition: !disabled
+	DeliversCash:
+		Payload: 300
+	Captures:
+		CaptureTypes: bombcar
+		PlayerExperience: 50
+		ConsumedByCapture: True
+		EnterCursor: c4
+	GrantExternalConditionToTransport:
+		Condition: ifv-demo
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+
+ra2shk:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@RA2SovietConscription: ^RA2SovietConscription
+	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
+	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
+	AutoTargetPriority@DEFAULT:
+		InvalidTargets: NoAutoTarget, TeslaCoil
+	AutoTargetPriority@ATTACKANYTHING:
+		InvalidTargets: NoAutoTarget, TeslaCoil
+	AutoTargetPriority@TESLANORMAL:
+		RequiresCondition: !assault-move && !attack-move
+		ValidTargets: TeslaCoil
+		Priority: 90
+	AutoTargetPriority@TESLAAMOVE:
+		RequiresCondition: assault-move || attack-move
+		ValidTargets: TeslaCoil
+		ValidRelationships: Enemy
+		Priority: 90
+	Buildable:
+		Prerequisites: ~ra2naradr
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Description: actor-shk.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Tesla Trooper
+	Health:
+		HP: 48000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Mobile:
+		Voice: Move
+		Speed: 38
+	Armament@PRIMARY:
+		Weapon: RA2PortaTesla
+		LocalOffset: 427,0,341
+		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@PRIMARY2:
+		Weapon: RA2PortaTesla2
+		LocalOffset: 427,0,341
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@PRIMARY3:
+		Weapon: RA2PortaTesla3
+		LocalOffset: 427,0,341
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@TeslaCoilCharge:
+		Weapon: RA2TeslaCoilCharge
+		Cursor: ability
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 427,0,341
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2PortaTesla
+		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: RA2PortaTesla2
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@GARRISONED3:
+		Name: garrisoned
+		Weapon: RA2PortaTesla3
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	TakeCover:
+		ProneOffset: 227,0,-245
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	Voiced:
+		VoiceSet: RA2TeslaTrooperVoice
+	DeliversCash:
+		Payload: 250
+	Selectable:
+		Class: ra2shk
+	GrantConditionOnPrerequisite@EMPTesla:
+		Condition: emptesla
+		Prerequisites: upemptesla
+	ActorStatValues:
+		Upgrades: upemptesla, uparctesla
+	GrantExternalConditionToTransport:
+		Condition: ifv-tesla
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining, ra2_soviets_upgrade_teslaoverload
+
+ra2shk.bot:
+	Inherits: ra2shk
+	Buildable:
+		-Queue:
+	-MapEditorData:
+	-UpdatesPlayerStatistics:
+	Tooltip:
+		Name: Tesla Coil Charger
+	AutoTargetPriority@DEFAULT:
+		InvalidTargets: NoAutoTarget
+		ValidTargets: TeslaCoil
+	AutoTargetPriority@ATTACKANYTHING:
+		InvalidTargets: NoAutoTarget
+		ValidTargets: TeslaCoil
+	-Armament@PRIMARY:
+	-Armament@PRIMARY2:
+	-Armament@PRIMARY3:
+	Armament@TeslaCoilCharge:
+		Weapon: RA2TeslaCoilCharge_cosmetic
+	Mobile:
+		CanTurnWhileDisabled: true
+		ImmovableCondition: disable_movement
+		RequireForceMoveCondition: disable_movement
+	RejectsMoveToAttack:
+	GrantConditionAfterDelay:
+		Condition: disable_movement
+		ShowSelectionBar: false
+		Delay: 10
+	AutoTarget:
+		AllowMovement: false
+		RequiresCondition: nocoil
+	Turreted:
+	-AttackFrontal:
+	AttackFollowFrontal: #TODO
+		MustFaceTarget: true
+	Selectable:
+		Priority: 4
+	DroneSpawnerSlave:
+		MasterDeadCondition: nocoil
+		DamageTypes: DefaultDeath
+	TransformOnCondition:
+		IntoActor: ra2shk
+		RequiresCondition: nocoil
+	RejectsOrders:
+	WithInfantryBody:
+
+RA2DESO:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^BotAutoDeployOnLowHealth
+	Inherits@RA2SovietConscription: ^RA2SovietConscription
+	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
+	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Desolator
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2natech
+		Queue: Infantry, RAInfantry
+		Description: actor-deso.description
+	Mobile:
+		Speed: 59
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	AutoTarget:
+	Armament@PRIMARY:
+		Weapon: RA2RadBeamWeapon
+		LocalOffset: 256,43,341
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2RadBeamWeaponE
+		LocalOffset: 256,43,341
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2RadBeamWeapon
+		LocalOffset: 256,43,341
+	PeriodicExplosion:
+		Weapon: RA2RadEruptionWeapon
+		RequiresCondition: deployed
+		InitialDelay: 10
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		UndeployOnMove: true
+		PauseOnCondition: disabled
+		RequiresCondition: !parachute
+		DeployType: Desolate
+		ExclusiveDeploy: true
+		SmartDeploy: true
+		Voice: Deploy
+	AttackFrontal:
+		RequiresCondition: undeployed
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	WithInfantryBody@deployed:
+		StandSequences: deployed
+		DefaultAttackSequence: deployed-fire
+		RequiresCondition: deployed
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	Voiced:
+		VoiceSet: RA2DesolatorVoice
+	DeliversCash:
+		Payload: 300
+	-DamagedByTintedCells@rad:
+	GrantExternalConditionToTransport:
+		Condition: ifv-chem
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+
+YRBORIS:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2SovietConscription: ^RA2SovietConscription
+	Inherits@RA2SovietInfantryConditioning: ^RA2SovietInfantryConditioning
+	Inherits@RA2SovietShockTrooperTraining: ^RA2SovietShockTrooperTraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~ra2natech
+		BuildLimit: 1
+		Description: actor-boris.description
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Boris
+	Health:
+		HP: 90000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Mobile:
+		Speed: 60
+	Passenger:
+	Armament@PRIMARY:
+		Weapon: BorisAKM
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: BorisAKME
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@AntiBuilding:
+		Weapon: BorisAKM2
+		LocalOffset: 128,0,256
+		RequiresCondition: !canflare
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: MigTarget
+		LocalOffset: 32,0,256
+		RequiresCondition: canflare
+		Voice: AirStrike
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: BorisAKM
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: BorisAKME
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		StandSequences: stand
+	WithInfantryBody:
+		AttackSequences:
+			secondary: secondary-fire
+	Voiced:
+		VoiceSet: BorisVoice
+	AirstrikeMasterCA@1:
+		ArmamentNames: secondary
+		Actors: yrbpln, yrbpln, yrbpln
+		SquadSize: 3
+		InitialActorCount: -1
+		SpawnDistance: 60c0
+		RespawnTicks: 10
+		RearmTicks: 10
+		SlaveAvailableCondition: canflare
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+		MarkSound: Action
+	KeepsDistance:
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+
+##############################################
+#   Red Alert 2 Yuri Infantry
+##############################################
+
+YRINIT:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriStealthSuits: ^RA2YuriStealthSuits
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Yuri Initiate
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~yryabrck
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 66
+	Health:
+		HP: 24000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	AutoTarget:
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2PsychicJab
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2PsychicJab
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: RA2PsychicJab_elite
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2PsychicJab_elite
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@SplashCompensation:
+		Modifier: 50
+	FirepowerMultiplier@ra2_yuri_upgrade_initiatepower:
+		Modifier: 150
+		RequiresCondition: ra2_yuri_upgrade_initiatepower
+	RangeMultiplier@ra2_yuri_upgrade_initiatepower:
+		Modifier: 115
+		RequiresCondition: ra2_yuri_upgrade_initiatepower
+	ReloadDelayMultiplier@ra2_yuri_upgrade_initiatepower:
+		Modifier: 85
+		RequiresCondition: ra2_yuri_upgrade_initiatepower
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_initiatepower:
+		Condition: ra2_yuri_upgrade_initiatepower
+		Prerequisites: ra2_yuri_upgrade_initiatepower
+	AttackFrontal:
+		FacingTolerance: 0
+	AcceptsDeliveredExperience:
+		ValidTypes: infantry
+	Voiced:
+		VoiceSet: InitiateVoice
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_psionicarmor, ra2_yuri_upgrade_stealthsuits, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_initiatepower
+
+YRBRUTE:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Brute
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~yryabrck
+		Queue: Infantry, RAInfantry
+		Description: actor-brute.description
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	Armament@PRIMARY:
+		Weapon: RA2BrutePunch
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2BrutePunchE
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: BruteVoice
+	Passenger:
+		Weight: 2
+	-TakeCover:
+	Targetable@dog:
+		TargetTypes: DogImmune
+	FirepowerMultiplier@ra2_yuri_upgrade_brutestrength:
+		Modifier: 140
+		RequiresCondition: ra2_yuri_upgrade_brutestrength
+	SpeedMultiplier@ra2_yuri_upgrade_brutestrength:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_brutestrength
+	DamageMultiplier@ra2_yuri_upgrade_brutestrength:
+		Modifier: 80
+		RequiresCondition: ra2_yuri_upgrade_brutestrength
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_brutestrength:
+		Condition: ra2_yuri_upgrade_brutestrength
+		Prerequisites: ra2_yuri_upgrade_brutestrength
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_brutestrength
+
+YRSLAV:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Slave
+		RequiresCondition: !freed
+	Tooltip@Freed:
+		Name: Freed Slave
+		RequiresCondition: freed
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~yryabrck
+		#Queue: Infantry, RAInfantry
+		Description: Yuri resource collector.
+	Mobile:
+		Speed: 60
+		Locomotor: chem
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: RA2Shovel
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Shovel
+	AttackFrontal:
+		FacingTolerance: 2
+	AutoTarget:
+		ScanRadius: 10
+		RequiresCondition: freed
+	Voiced:
+		VoiceSet: SlaveWorkerVoice
+		RequiresCondition: !freed
+	Voiced@2:
+		VoiceSet: FreedSlaveVoice
+		RequiresCondition: freed
+	SlaveMinerSpawnerSlave:
+		FreedCondition: freed
+		FreeingRelationships: Neutral, Enemy
+		FreedSound: isl1lia.wav
+		AllowOwnerChange: true
+	DamageMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 50
+	FirepowerMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 200
+	ReloadDelayMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 50
+	SpeedMultiplier@Freed:
+		RequiresCondition: freed
+		Modifier: 200
+	Harvester:
+		Voice: Harvest
+		BaleLoadDelay: 8
+		BaleUnloadDelay: 4
+		BaleUnloadAmount: 1
+		FullyLoadedSpeed: 80
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 8
+	DockClientManager:
+		OccupancyCostModifier: 0
+	GrantConditionOnHarvest:
+		Condition: harvesting
+	WithFacingSpriteBody:
+		Sequence: harvest
+		RequiresCondition: harvesting
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+		RequiresCondition: no-tiberium && !harvesting
+	WithInfantryBody@full:
+		IdleSequences: idle1,idle2
+		StandSequences: stand
+		MoveSequence: full-run
+		DefaultAttackSequence: shoot
+		RequiresCondition: !no-tiberium && !harvesting
+	WithEnabledAnimation:
+		Sequence: cheer
+		RequiresCondition: freed
+	WithDockingAnimation:
+		DockSequence: idle
+		DockLoopSequence: idle
+	-DamagedByTerrain:
+	-TakeCover:
+	Selectable:
+		DecorationBounds: 480, 240, 0, -32
+	WithStoresResourcesPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 1
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision
+
+YRVIRUS:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Virus
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~ra2napsis
+		Queue: Infantry, RAInfantry
+		Description: actor-virus.description
+	Mobile:
+		Speed: 52
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: RA2Virusgun
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_meltingvirus
+	Armament@PRIMARY2:
+		Weapon: RA2Virusgun2
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && ra2_yuri_upgrade_meltingvirus && !ra2_yuri_upgrade_corrosiveammo
+	Armament@PRIMARY3:
+		Weapon: RA2Virusgun3
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+	Armament@ELITE:
+		Weapon: RA2VirusgunE
+		LocalOffset: 0,0,427
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Virusgun
+		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_meltingvirus
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: RA2Virusgun2
+		RequiresCondition: !rank-elite && ra2_yuri_upgrade_meltingvirus && !ra2_yuri_upgrade_corrosiveammo
+	Armament@GARRISONED3:
+		Name: garrisoned
+		Weapon: RA2Virusgun3
+		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2VirusgunE
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTargetPriority:
+		ValidTargets: Infantry
+	Voiced:
+		VoiceSet: VirusVoice
+	DeliversCash:
+		Payload: 350
+	GrantConditionOnPrerequisite@viruscloud:
+		Condition: ra2_yuri_upgrade_meltingvirus
+		Prerequisites: ra2_yuri_upgrade_meltingvirus
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_meltingvirus, ra2_yuri_upgrade_corrosiveammo
+
+YRYURI:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@MC: ^MCImmune
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^BotAutoDeployOnLowHealth
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@RA2YuriMindControlCap: ^RA2YuriMindControlCap
+	Inherits@RA2YuriPsychicRange: ^RA2YuriPsychicRange
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Yuri Clone
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~ra2napsis
+		Queue: Infantry, RAInfantry
+		Description: actor-yuri.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 5
+	Armament@CONTROL:
+		Name: primary
+		Weapon: RA2MindControl
+	#Armament@GARRISONED:
+	#	Name: garrisoned
+	#	Weapon: RA2MindControl
+	Passenger:
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 30
+		Capacity: 1
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	ReloadArmamentsBar:
+	AutoTarget:
+		RequiresCondition: (!controlling && !ra2_yuri_upgrade_domination) || (controlling < 3 && ra2_yuri_upgrade_domination)
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: !deployed && !deploying
+	WithSpriteBody@deployed:
+		Sequence: deployed
+		RequiresCondition: deployed || deploying
+	PeriodicExplosion:
+		Weapon: PsiWave
+		RequiresCondition: deployed && !disabled
+	GrantTimedConditionOnDeploy:
+		DeployedTicks: 125
+		CooldownTicks: 0
+		Facing: 96
+		DeployedCondition: deployed
+		DeployingCondition: deploying
+		DeployAnimation: deploy
+		UndeployAnimation: undeploy
+		ShowSelectionBar: false
+		Voice: Attack
+		PauseOnCondition: disabled
+	WithRangeCircle@PsiWave:
+		Range: 2500
+		Type: psiwave
+		Color: ff0000b0
+	WithRangeCircle@MC:
+		Range: 6000
+		Type: mindcontrol
+		Color: 663399b0
+	RangedGpsProvider@ra2_yuri_upgrade_psychicvision:
+		Range: 15000
+		RequiresCondition: ra2_yuri_upgrade_psychicvision
+	Voiced:
+		VoiceSet: YuriVoice
+	ProximityCaptor@MC:
+		Types: Infantry
+	DeliversCash:
+		Payload: 400
+	IgnoresDisguise:
+	KeepsDistance:
+	RenderSprites:
+		Image: RA2YURI
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_domination, ra2_yuri_upgrade_psychicrange, ra2_yuri_upgrade_psionicarmor
+
+YRYURIX:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@MC: ^MCImmune
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@bot: ^BotAutoDeployOnLowHealth
+	Inherits@RA2YuriMindControlCap: ^RA2YuriMindControlCap
+	Inherits@RA2YuriPsychicRange: ^RA2YuriPsychicRange
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Selectable:
+		DecorationBounds: 512, 1440, 0, -512
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: actor-yurix.name
+	Buildable:
+		BuildPaletteOrder: 150
+		Prerequisites: ~yrygcomd
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: actor-yurix.description
+	Mobile:
+		Speed: 100
+		Locomotor: hover
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: RA2XMindControl
+		ReloadingCondition: reload-structure
+		PauseOnCondition: reload-splash
+	Armament@Splash:
+		Weapon: RA2XMindControlSplash
+		Name: secondary
+		ReloadingCondition: reload-splash
+		PauseOnCondition: reload-structure
+		RequiresCondition: !ra2_yuri_upgrade_domination
+	Armament@Splash2:
+		Weapon: RA2XMindControlSplash2
+		Name: secondary
+		ReloadingCondition: reload-splash
+		PauseOnCondition: reload-structure
+		RequiresCondition: ra2_yuri_upgrade_domination
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 30
+		Capacity: 0
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	SpeedMultiplier@MC1:
+		Modifier: 90
+		RequiresCondition: controlling == 1
+	SpeedMultiplier@MC2:
+		Modifier: 80
+		RequiresCondition: controlling == 2
+	SpeedMultiplier@MC3:
+		Modifier: 70
+		RequiresCondition: controlling == 3
+	SpeedMultiplier@MC4:
+		Modifier: 60
+		RequiresCondition: controlling == 4
+	SpeedMultiplier@MC5:
+		Modifier: 50
+		RequiresCondition: controlling == 5
+	SpeedMultiplier@MC6:
+		Modifier: 40
+		RequiresCondition: controlling == 6
+	SpeedMultiplier@MC7:
+		Modifier: 30
+		RequiresCondition: controlling == 7
+	SpeedMultiplier@MC8:
+		Modifier: 20
+		RequiresCondition: controlling == 8
+	SpeedMultiplier@MC9:
+		Modifier: 10
+		RequiresCondition: controlling == 9
+	SpeedMultiplier@MC10:
+		Modifier: 0
+		RequiresCondition: controlling >= 10
+	ReloadDelayMultiplier@MC1:
+		Modifier: 120
+		RequiresCondition: controlling == 1
+	ReloadDelayMultiplier@MC2:
+		Modifier: 140
+		RequiresCondition: controlling == 2
+	ReloadDelayMultiplier@MC3:
+		Modifier: 160
+		RequiresCondition: controlling == 3
+	ReloadDelayMultiplier@MC4:
+		Modifier: 180
+		RequiresCondition: controlling == 4
+	ReloadDelayMultiplier@MC5:
+		Modifier: 200
+		RequiresCondition: controlling == 5
+	ReloadDelayMultiplier@MC6:
+		Modifier: 220
+		RequiresCondition: controlling == 6
+	ReloadDelayMultiplier@MC7:
+		Modifier: 240
+		RequiresCondition: controlling == 7
+	ReloadDelayMultiplier@MC8:
+		Modifier: 260
+		RequiresCondition: controlling == 8
+	ReloadDelayMultiplier@MC9:
+		Modifier: 280
+		RequiresCondition: controlling == 9
+	ReloadDelayMultiplier@MC10:
+		Modifier: 300
+		RequiresCondition: controlling == 10
+	ReloadArmamentsBar:
+	AutoTarget:
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: !deployed && !deploying
+	WithSpriteBody@deployed:
+		Sequence: deployed
+		RequiresCondition: deployed || deploying
+	PeriodicExplosion:
+		Weapon: PsiWaveX
+		RequiresCondition: deployed && !disabled
+	GrantTimedConditionOnDeploy:
+		DeployedTicks: 250
+		CooldownTicks: 0
+		Facing: 96
+		DeployedCondition: deployed
+		DeployingCondition: deploying
+		DeployAnimation: deploy
+		UndeployAnimation: undeploy
+		ShowSelectionBar: false
+		Voice: Attack
+		PauseOnCondition: disabled || (controlling >= 10)
+	WithRangeCircle@PsiWave:
+		Range: 5000
+		Type: psiwave
+		Color: ff0000b0
+	WithRangeCircle@MC:
+		Range: 8000
+		Type: mindcontrol
+		Color: 663399bb
+	RangedGpsProvider@ra2_yuri_upgrade_psychicvision:
+		Range: 30000
+		RequiresCondition: ra2_yuri_upgrade_psychicvision
+	AcceptsDeliveredExperience:
+		ValidTypes: infantry
+	Voiced:
+		VoiceSet: YuriVoice
+	DeliversCash:
+		Payload: 600
+	IgnoresDisguise:
+	-DamagedByTerrain:
+	#-Cloneable:
+	KeepsDistance:
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_domination, ra2_yuri_upgrade_psychicrange, ra2_yuri_upgrade_psionicarmor
+
+YRGTRP:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriGatlingPower: ^RA2YuriGatlingPower
+	Inherits@RA2YuriGatlingSpeed: ^RA2YuriGatlingSpeed
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Gatling Trooper
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~yrygtech
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2cameo
+		Description: actor-gtrp.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 36000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	AutoTarget:
+	Armament@PRIMARY:
+		Weapon: RA2GattlingInf
+		LocalOffset: 544,100,256
+	Armament@GARRISONED:
+		Weapon: RA2GattlingInf
+		Name: garrisoned
+	ReloadDelayMultiplier@GattlingSpeed1:
+		RequiresCondition: gatling >= 1
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed2:
+		RequiresCondition: gatling >= 2
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed3:
+		RequiresCondition: gatling >= 3
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed4:
+		RequiresCondition: gatling >= 4
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed5:
+		RequiresCondition: gatling >= 5
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed6:
+		RequiresCondition: gatling >= 6
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed7:
+		RequiresCondition: gatling >= 7
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed8:
+		RequiresCondition: gatling >= 8
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed9:
+		RequiresCondition: gatling >= 9
+		Modifier: 90
+	ReloadDelayMultiplier@GattlingSpeed10:
+		RequiresCondition: gatling >= 10
+		Modifier: 90
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 1,2,3,4,5,6,7,8,9,10
+		RevokeDelay: 80
+		MaximumInstances: 10
+	GrantConditionOnAttack@elitegatling:
+		Condition: gatling
+		RequiredShotsPerInstance: 1,1,1,1,1,1,1,1,1,1
+		RevokeDelay: 40
+		MaximumInstances: 10
+	AttackFrontal:
+		FacingTolerance: 2
+	Voiced:
+		VoiceSet: ArnoldVoice
+	RenderSprites:
+		Image: yrarnd
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_gatlingpower, ra2_yuri_upgrade_gatlingspeed
+
+yrbiot:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 100
+		Prerequisites: ~ra2yclon
+		Description: actor-biot.description
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Bio Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 96000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Mobile:
+		Speed: 64
+	Armament@PRIMARY:
+		Weapon: RA2Chemspray
+		LocalOffset: 600,0,512
+		FireDelay: 5
+		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_corrosiveammo
+	Armament@Upgrade:
+		Weapon: RA2Chemspray2
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+	Armament@ELITE:
+		Weapon: RA2ChemsprayE
+		LocalOffset: 0,0,427
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Chemspray
+		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_corrosiveammo
+	Armament@GARRISONEDUpgrade:
+		Name: garrisoned
+		Weapon: RA2Chemspray2
+		RequiresCondition: !rank-elite && ra2_yuri_upgrade_corrosiveammo
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2ChemsprayE
+		RequiresCondition: rank-elite
+	WithInfantryBody:
+	AttackFrontal:
+	Voiced:
+		VoiceSet: RA2DesolatorVoice
+	Selectable:
+		DecorationBounds: 768, 900, 0, -256
+	-DamagedByTerrain:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_corrosiveammo
+	GrantExternalConditionToTransport:
+		Condition: ifv-chem
+
+##############################################
+#   Red Alert 2 Allies Vehicles
+##############################################
+
+ra2dron:
+	Inherits: ^Walker
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Terror Drone
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2naradr
+		Queue: Vehicle, RAVehicle
+		Description: actor-dron.description
+	Mobile:
+		Speed: 200
+		TurnSpeed: 200
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	Passenger:
+		CargoType: Infantry
+		Weight: 2
+	WithInfantryBody:
+		DefaultAttackSequence: jump
+		RequiresCondition: !jousting
+	WithFacingSpriteBody:
+		Sequence: shoot
+		RequiresCondition: jousting
+	#WithTextDecoration@jousting:
+	#	Text: Jousting
+	#	RequiresCondition: jousting
+	Armament:
+		Weapon: RA2DroneJump
+		RequiresCondition: !rank-elite
+	Armament@Elite:
+		Weapon: RA2DroneJumpE
+		RequiresCondition: rank-elite
+	-InfectableCA:
+	AttackInfectCA:
+		Voice: Attack
+		Damage: 2000
+		DamageInterval: 1
+		DamageTypes: DroneInfection, BulletDeath
+		SurviveHostDamageTypes: DroneInfection
+		JoustRange: 2000
+		RequiresCondition: !disabled
+	RejectsOrders:
+		RequiresCondition: jousting
+	SpeedMultiplier@JOUSTING:
+		Modifier: 150
+		RequiresCondition: jousting
+	Targetable:
+		RequiresCondition: !parachute && !untargetable && !jousting
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: TerrorDronable
+	Voiced:
+		VoiceSet: TerrorDroneVoice
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplodeSmall
+		EmptyWeapon: RA2UnitExplodeSmall
+	Targetable@vehicleexplodedamage:
+		TargetTypes: TerrorDrone
+	Targetable@dog:
+		TargetTypes: DogImmune
+	-TemporaryOwnerManager:
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor
+
+##############################################
+#   Red Alert 2 Yuri Vehicles
+##############################################
+
+ra2e2.black:
+	Inherits: RA2E2
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Black Operation Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~disable
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Health:
+		HP: 25000
+	ReloadDelayMultiplier@b:
+		Modifier: 50
+	Voiced:
+		VoiceSet: TechConscriptVoice
+
+ra2sidewind:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Sidewinder
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~disable
+		Queue: Infantry, RAInfantry
+		Description: actor-e3.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 15000
+	AutoTarget:
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2GIRocketsG
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,512
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYE:
+		Name: primary
+		Weapon: RA2GIRocketsG_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		LocalOffset: 256,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDE:
+		Name: garrisoned
+		Weapon: RA2GIRocketsG_elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 2
+	Voiced:
+		VoiceSet: GGIVoice
+	DeliversCash:
+		Payload: 125
+	Voiced:
+		VoiceSet: TechConscriptVoice
+
+# Black Operation Vehicles
+ra2shkhero:
+	Inherits: ra2shk
+	RenderSprites:
+		Image: ra2shk
+	-Buildable:
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Tesla Commando
+	Health:
+		HP: 45000
+	ReloadDelayMultiplier@HERO:
+		Modifier: 25
+	Armament@c4building:
+		Weapon: GenericC4
+		Cursor: c4
+	MustBeDestroyed:
+		RequiredForShortGame: true
+	ChangesHealth@HERO:
+		PercentageStep: 5
+		Delay: 50
+		StartIfBelow: 100
+		DamageCooldown: 125
+
+####################################################################################################
+#		Promotions Soviets
+####################################################################################################
+
+# ### Tesla tree
+
+# upemptesla:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: EMP Tesla Weapons
+# 	Buildable:
+# 		BuildPaletteOrder: 61
+# 		Queue: Promotions
+# 		Description: Tesla weapons will shut down vehicles.
+# 		Prerequisites: ~ra2nacnst, !upemptesla, rank1
+# 	RenderSprites:
+# 		Image: ra2shk
+# 	ProvidesPrerequisite:
+
+# upra2ttnk:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Tesla Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 64
+# 		Queue: Promotions
+# 		Description: Allows construction of the Tesla Tank.
+# 		Prerequisites: ~ra2nacnst, upemptesla, !upra2ttnk, rank1
+# 	RenderSprites:
+# 		Image: ra2ttnk
+# 	ProvidesPrerequisite:
+
+# uparctesla:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Tesla Arcing
+# 	Buildable:
+# 		BuildPaletteOrder: 67
+# 		Queue: Promotions
+# 		Description: Allows tesla bolts to jump to nearby targets.
+# 		Prerequisites: ~ra2nacnst, upra2ttnk, rank1
+# 	RenderSprites:
+# 		Image: ra2ttnk
+# 	ProvidesPrerequisite:
+
+# ^RA2TeslaOverload:
+# 	GrantConditionOnPrerequisite@TeslaArc:
+# 		Condition: arctesla
+# 		Prerequisites: uparctesla
+
+# ra2_soviets_upgrade_coilchargers:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Tesla Coil Chargers
+# 	Buildable:
+# 		BuildPaletteOrder: 70
+# 		Queue: Promotions
+# 		Description: Provide all Tesla Coils with chargers.
+# 		Prerequisites: ~ra2nacnst, uparctesla, rank1
+# 	RenderSprites:
+# 		Image: ra2tesla
+# 	ProvidesPrerequisite:
+
+# ### Radiation tree
+
+# upra2terror:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Terrorist
+# 	Buildable:
+# 		BuildPaletteOrder: 62
+# 		Queue: Promotions
+# 		Description: Allows training of the Terrorist.
+# 		Prerequisites: ~ra2nacnst, !upra2terror, rank1
+# 	RenderSprites:
+# 		Image: ra2terror
+# 	ProvidesPrerequisite:
+
+# upra2deso:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Desolator
+# 	Buildable:
+# 		BuildPaletteOrder: 65
+# 		Queue: Promotions
+# 		Description: Allows training of the Desolator. Infantry becomes immune to radiation.
+# 		Prerequisites: ~ra2nacnst, upra2terror, !upra2deso, rank1
+# 	RenderSprites:
+# 		Image: ra2deso
+# 	ProvidesPrerequisite:
+
+# upra2dtruck:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Demo Truck
+# 	Buildable:
+# 		BuildPaletteOrder: 68
+# 		Queue: Promotions
+# 		Description: Allows construction of the Demo Truck.
+# 		Prerequisites: ~ra2nacnst, upra2deso, !upra2dtruck, rank1
+# 	RenderSprites:
+# 		Image: ra2dtruck
+# 	ProvidesPrerequisite:
+
+# ra2_soviets_upgrade_radiationshells:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Nuclear Munitions
+# 	Buildable:
+# 		BuildPaletteOrder: 71
+# 		Queue: Promotions
+# 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons leave radiation.
+# 		Prerequisites: ~ra2nacnst, upra2dtruck, rank1
+# 	RenderSprites:
+# 	ProvidesPrerequisite:
+
+# ^RA2SovietRadShells:
+# 	GrantConditionOnPrerequisite@RadShells:
+# 		Condition: ra2_soviets_upgrade_radiationshells
+# 		Prerequisites: ra2_soviets_upgrade_radiationshells
+# 	FirepowerMultiplier@RadShells:
+# 		Modifier: 120
+# 		RequiresCondition: ra2_soviets_upgrade_radiationshells
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_upgrade_radiationshells
+
+# ### Industry tree
+
+# upra2mig:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock MiG Bomber
+# 	Buildable:
+# 		BuildPaletteOrder: 63
+# 		Queue: Promotions
+# 		Description: Allows construction of the MiG Bomber.
+# 		Prerequisites: ~ra2nacnst, !upra2mig, rank1
+# 	RenderSprites:
+# 		Image: yrbpln
+# 	ProvidesPrerequisite:
+
+# ra2_soviets_upgrade_terrordronesurprise:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Terror Drone Surprise
+# 	Buildable:
+# 		BuildPaletteOrder: 66
+# 		Queue: Promotions
+# 		Description: Vehicles have a chance of releasing a Terror Drone on destruction.
+# 		Prerequisites: ~ra2nacnst, upra2mig, !ra2_soviets_upgrade_terrordronesurprise, rank1
+# 	RenderSprites:
+# 		Image: ra2dron
+# 	ProvidesPrerequisite:
+
+# ^TerrorDroneSurprise:
+# 	GrantConditionOnPrerequisite@DroneSurprise:
+# 		Condition: dronesurprise
+# 		Prerequisites: ra2_soviets_upgrade_terrordronesurprise
+# 	SpawnActorOnDeath@DroneSurprise:
+# 		Probability: 75
+# 		Actor: ra2dron
+# 		RequiresCondition: dronesurprise && !chronobeamed
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise
+
+# upyrngindp:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Industrial Plant
+# 	Buildable:
+# 		BuildPaletteOrder: 69
+# 		Queue: Promotions
+# 		Description: Enables construction of the Industrial Plant.
+# 		Prerequisites: ~ra2nacnst, ra2_soviets_upgrade_terrordronesurprise, rank1
+# 	RenderSprites:
+# 		Image: yrngindp
+# 	ProvidesPrerequisite:
+
+# ra2_soviets_upgrade_heavyarmorplatings:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Heavy Soviet Armor
+# 	Buildable:
+# 		BuildPaletteOrder: 72
+# 		Queue: Promotions
+# 		Description: All Soviet vehicles and aircraft take 20% less damage.
+# 		Prerequisites: ~ra2nacnst, upyrngindp, rank1
+# 	RenderSprites:
+# 		Image: ra2apoc
+# 	ProvidesPrerequisite:
+
+####################################################################################################
+#		Upgrades Soviets
+####################################################################################################
+
+### Radar ###

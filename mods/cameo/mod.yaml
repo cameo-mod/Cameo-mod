@@ -97,9 +97,6 @@ MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
 
-Include: ContentPacks/TiberianDawn/Shared/content.yaml
-Include: ContentPacks/TiberianDawn/GDI/content.yaml
-Include: ContentPacks/TiberianDawn/Nod/content.yaml
 
 Rules:
 	cameo|rules/misc.yaml
@@ -119,7 +116,6 @@ Rules:
 	cameo|ai/ai.yaml
 	cameo|rules/redalert.yaml
 	cameo|rules/tiberiansun.yaml
-	cameo|rules/redalert2.yaml
 	cameo|rules/redalert2mod.yaml
 	cameo|rules/d2k.yaml
 	cameo|rules/starcraft.yaml
@@ -163,6 +159,12 @@ Rules:
 	cameo|rules/outpost2.yaml
 	# cameo|rules/z.yaml
 	cameo|rules/tkm.yaml
+
+Include: ContentPacks/TiberianDawn/Shared/content.yaml
+Include: ContentPacks/TiberianDawn/GDI/content.yaml
+Include: ContentPacks/TiberianDawn/Nod/content.yaml
+
+Include: ContentPacks/RedAlert2/RedAlert2/content.yaml
 
 Sequences:
 	cameo|sequences/misc.yaml

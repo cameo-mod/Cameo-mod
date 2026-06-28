@@ -1,0 +1,1781 @@
+^RA2Parachutes:
+	WithParachute: ##########
+		ShadowImage: parach-shadow
+		ShadowSequence: idle
+		Image: ra2parach
+		Sequence: idle
+		OpeningSequence: open
+		ClosingSequence: disolve
+		Offset: 0,0,427
+		RequiresCondition: parachute
+		Palette: ra2infantry
+		IsPlayerPalette: true
+
+^GainsExperienceRA2:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA2
+		Conditions:
+			100: rank-veteran
+			250: rank-veteran
+			450: rank-veteran
+			700: rank-veteran
+			1000: rank-veteran
+		LevelUpImage: crate-effects
+		LevelUpSequence: levelup-ra2
+		LevelUpPalette: ra2effect
+	ExternalCondition@rankveteran:
+		Condition: rank-veteran
+		TotalCap: 5
+	GrantCondition@RANK-ELITE:
+		RequiresCondition: rank-veteran >= 5
+		Condition: rank-elite
+	WithDecoration@RANK-1:
+		Image: ra2rank
+		Sequence: rank-veteran-1
+		Palette: effect
+		Position: BottomRight
+		RequiresCondition: rank-veteran == 1 && !rank-elite
+	WithDecoration@RANK-2:
+		Image: ra2rank
+		Sequence: rank-veteran-2
+		Palette: effect
+		Position: BottomRight
+		RequiresCondition: rank-veteran == 2 && !rank-elite
+	WithDecoration@RANK-3:
+		Image: ra2rank
+		Sequence: rank-veteran-3
+		Palette: effect
+		Position: BottomRight
+		RequiresCondition: rank-veteran == 3 && !rank-elite
+	WithDecoration@RANK-4:
+		Image: ra2rank
+		Sequence: rank-veteran-4
+		Palette: effect
+		Position: BottomRight
+		RequiresCondition: rank-veteran == 4 && !rank-elite
+	WithDecoration@RANK-ELITE:
+		Image: ra2rank
+		Sequence: rank-elite
+		Palette: effect
+		Position: BottomRight
+		RequiresCondition: rank-elite
+	DamageMultiplier@RANK-1:
+		Modifier: 90
+	DamageMultiplier@RANK-2:
+		Modifier: 80
+	DamageMultiplier@RANK-3:
+		Modifier: 70
+	DamageMultiplier@RANK-4:
+		Modifier: 60
+		RequiresCondition: rank-veteran == 4
+	DamageMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 50
+	FirepowerMultiplier@RANK-1:
+		Modifier: 120
+	FirepowerMultiplier@RANK-2:
+		Modifier: 140
+	FirepowerMultiplier@RANK-3:
+		Modifier: 160
+	FirepowerMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 180
+	FirepowerMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 200
+	InaccuracyMultiplier@RANK-1:
+		Modifier: 95
+	InaccuracyMultiplier@RANK-2:
+		Modifier: 90
+	InaccuracyMultiplier@RANK-3:
+		Modifier: 85
+	InaccuracyMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 80
+	InaccuracyMultiplier@RANK-ELITE:
+		Modifier: 75
+	SpeedMultiplier@RANK-1:
+		Modifier: 105
+	SpeedMultiplier@RANK-2:
+		Modifier: 110
+	SpeedMultiplier@RANK-3:
+		Modifier: 115
+	SpeedMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 120
+	SpeedMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 125
+	ReloadDelayMultiplier@RANK-1:
+		Modifier: 100
+	ReloadDelayMultiplier@RANK-2:
+		Modifier: 100
+	ReloadDelayMultiplier@RANK-3:
+		Modifier: 100
+	ReloadDelayMultiplier@RANK-ELITE:
+		Modifier: 100
+	RangeMultiplier@RANK-1:
+		Modifier: 100
+	RangeMultiplier@RANK-2:
+		Modifier: 100
+	RangeMultiplier@RANK-3:
+		Modifier: 100
+	RangeMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 100
+	RangeMultiplier@RANK-ELITE:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-1:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-2:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-3:
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 100
+	RevealsShroudMultiplier@RANK-ELITE:
+		Modifier: 110
+	DetectCloakedMultiplier@RANK-1:
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-2:
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-3:
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-4:
+		RequiresCondition: rank-veteran == 4
+		Modifier: 100
+	DetectCloakedMultiplier@RANK-ELITE:
+		Modifier: 100
+	ChangesHealth@eliteplus:
+		RequiresCondition: rank-elite
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 1
+
+^RA2InfantryShadow:
+	RenderSprites:
+		PlayerPalette: ra2infantry
+
+^RA2InfantryDeathAnimations:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BulletDeath: 1
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			RippedApartDeath: 2
+	WithDeathAnimation@effect:
+		DeathSequencePalette: ra2effect
+		DeathPaletteIsPlayerPalette: False
+		DeathTypes:
+			RadiationDeath: 4
+			PsychicDeath: 5
+			TiberiumDeath: 7
+			ElectricityDeath: 6
+			#RA2VirusDeath: 7
+	SpawnActorOnDeath@Flameguy:
+		Probability: 100
+		Actor: RA2Flameguy
+		DeathType: FireDeath
+	FireWarheadsOnDeath@Corpse:
+		DeathTypes: DefaultDeath, BulletDeath, RippedApartDeath
+		Weapon: RA2CorpseSpawner
+		EmptyWeapon: RA2CorpseSpawner
+		RequiresCondition: !chronobeamed
+	#Explodes@CorpseThrow:
+	#	DeathTypes: ExplosionDeath
+	#	Weapon: RA2CorpseThrower
+	#	EmptyWeapon: RA2CorpseThrower
+	#	RequiresCondition: !chronobeamed
+
+^RA2Infantry:
+	Inherits@shadow: ^RA2InfantryDeathAnimations
+	Inherits@para: ^RA2Parachutes
+	RenderSprites:
+		PlayerPalette: ra2infantry
+	Crushable:
+		CrushSound: igensqua.wav
+	DeathSounds@NORMAL:
+		DeathTypes: DefaultDeath, BulletDeath, SmallExplosionDeath, ExplosionDeath, RippedApartDeath
+		RequiresCondition: !chronobeamed
+	DeathSounds@ZAPPED:
+		Voice: Zapped
+		DeathTypes: ElectricityDeath
+		RequiresCondition: !chronobeamed
+	DeathSounds@radiation:
+		Voice: Poisoned
+		DeathTypes: RadiationDeath, TiberiumDeath
+		RequiresCondition: !chronobeamed
+	#DeathSounds@psychic:
+	#	Voice: PsyCrush
+	#	DeathTypes: PsychicDeath
+	#	RequiresCondition: !chronobeamed
+	#DeathSounds@virus:
+	#	Voice: Virus
+	#	DeathTypes: RA2VirusDeath
+	#	RequiresCondition: !chronobeamed
+
+^RA2Building:
+	Inherits@BB: ^BaseBuilding
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	Building:
+		BuildSounds: uplace.wav
+		UndeploySounds: uselbuil.wav
+	FireWarheadsOnDeath:
+		Weapon: RA2BuildingExplode
+		EmptyWeapon: RA2BuildingExplode
+		Sequences: ra2_building, ra2_large_bang, ra2_large_brnl, ra2_verylarge_clsn, ra2_large_tumu
+	FireProjectilesOnDeath:
+		Weapons: RA2LargeDebris
+		RequiresCondition: !chronobeamed
+	FireProjectilesOnDeath@body:
+		Weapons: RA2CorpseThrower
+		Pieces: 0, 2
+		RequiresCondition: !chronobeamed
+	SoundOnDamageTransition:
+		DamagedSounds: gdamag1a.wav, gdamag1b.wav, gdamag1c.wav, gdamag1d.wav, gdamag1e.wav
+		DestroyedSounds: bgendiea.wav, bgendieb.wav, bgendiec.wav, bgendied.wav, bgendiee.wav, bgendief.wav
+
+^RA2Defense:
+	Inherits: ^RA2Building
+	Inherits: ^BasicDefense
+	Inherits@exp: ^GainsExperienceRA2
+	WithIdleOverlay@shrouded:
+		Image: shrouded_overlay
+	-GivesBuildableArea:
+	-CommandBarBlacklist:
+	-AcceptsDeliveredCash:
+
+^RA2Vehicle:
+	Inherits@para: ^RA2Parachutes
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplode
+		EmptyWeapon: RA2UnitExplode
+		RequiresCondition: !chronobeamed
+	FireProjectilesOnDeath:
+		Weapons: RA2Debris
+		RequiresCondition: !chronobeamed
+
+^RA2VehicleBig:
+	Inherits: ^RA2Vehicle
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplodeBig
+		EmptyWeapon: RA2UnitExplodeBig
+
+^RenderVoxel:
+	BodyOrientation:
+		QuantizedFacings: 32
+		CameraPitch: 130
+		UseClassicPerspectiveFudge: false
+	RenderVoxels:
+		Scale: 12.0
+		NormalsPalette: normals
+		PlayerPalette: playerra2
+		LightYaw: 800
+		LightPitch: 150
+		LightAmbientColor: -0.5,-0.5,-0.5
+		LightDiffuseColor: 1.3,1.3,1.3
+	WithVoxelBody:
+		ShowShadow: true
+	Cloak@TDcloak:
+		IsPlayerPalette: true
+		RequiresCondition: cloak-crate-collected
+	Cloak@TScloak:
+		IsPlayerPalette: true
+		RequiresCondition: tscloak
+
+^CivVehicle:
+	Inherits: ^Vehicle
+	Inherits@Voxel: ^RenderVoxel
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Civilian Vehicle
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 6c0
+	BodyOrientation:
+		QuantizedFacings: 32
+	Inherits@EXT: ^ExternalConditions
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 43690, 43690
+	WithVoxelBody:
+	RenderVoxels:
+		Scale: 5.8
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+
+^RA2GarrisonBuilding:
+	Inherits: ^RA2CivBuilding
+
+^RA2PlanewithTurnAnimation:
+	GrantConditionOnMovement@Turn:
+		Condition: Aircraft-Turning
+		ValidMovementTypes: Turn
+	GrantConditionOnMovement@H:
+		ValidMovementTypes: Horizontal #we need a turn condition with left and right
+		Condition: Aircraft-Horizontal
+	GrantConditionOnMovement@V:
+		ValidMovementTypes: Vertical #we need a turn condition with left and right
+		Condition: Aircraft-Vertical
+	WithMoveAnimation@Turn-L:
+		MoveSequence: move-l
+		RequiresCondition: Aircraft-Turning #&& Aircraft-Vertical
+	# WithMoveAnimation@Turn-R:
+	# 	MoveSequence: move-r
+	# 	RequiresCondition: Aircraft-Turning && Aircraft-Horizontal
+	#WithMoveAnimation:
+	#	MoveSequence: move
+	#	Condition: !Aircraft-Turning
+#
+# Sell Actors
+#
+
+^RA2ASpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: ra2engineer, ra2e1, ra2e1, yrggi
+
+^RA2SSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: ra2engineer.soviet, ra2e2, ra2e2, ra2flakt
+
+^RA2YSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: ra2engineer.yuri, yrinit, yrinit, yrbrute
+
+##############################################
+#   Red Alert 2 Allies Structures
+##############################################
+
+^RA2DefaultWeap:
+	Inherits: ^RA2Building
+	Inherits@shape: ^4x3Shape
+	Inherits@weap: ^IsWeaponFactory
+	Tooltip:
+		Name: War Factory
+	Building:
+		Footprint: xxxx= xxxx= =xxx=
+		Dimensions: 5,3
+	RallyPoint:
+		Path: 5,2
+	Exit@1:
+		ExitCell: 4,2
+	WithExitOverlay@front:
+		Sequence: build-door
+		RequiresCondition: !build-incomplete
+	WithExitOverlay@top:
+		Sequence: build-top
+		RequiresCondition: !build-incomplete
+
+^RA2CivBuilding:
+	Inherits: ^CivBuilding
+	-RenderSprites:
+	RenderSprites:
+		PlayerPalette: playerra2
+^RA21x1Garrison:
+	Inherits@2x2: ^1x1Shape
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 50000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 2
+		EjectOnDeath: false
+^RA22x1Garrison:
+	Inherits@2x2: ^1x1Shape
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	Health:
+		HP: 100000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 4
+		EjectOnDeath: false
+
+^RA22x2Garrison:
+	Inherits@2x2: ^2x2Shape
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 200000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 8
+		EjectOnDeath: false
+^RA23x2Garrison:
+	Inherits@2x2: ^3x2Shape
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 300000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 12
+		EjectOnDeath: false
+^RA23x3Garrison:
+	Inherits@2x2: ^3x3Shape
+	Building:
+		Footprint: xxx xxx xxx
+		Dimensions: 3,3
+	Health:
+		HP: 450000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 18
+		EjectOnDeath: false
+^RA24x3Garrison:
+	Inherits@2x2: ^4x3Shape
+	Building:
+		Footprint: xxxx xxxx xxxx
+		Dimensions: 4,3
+	Health:
+		HP: 600000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 24
+		EjectOnDeath: false
+^RA25x3Garrison:
+	Inherits@2x2: ^5x3Shape
+	Building:
+		Footprint: _xxx_ xxxxx _xxx_
+		Dimensions: 5,3
+	Health:
+		HP: 800000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 30
+		EjectOnDeath: false
+^RA25x4Garrison:
+	Inherits@2x2: ^5x4Shape
+	Building:
+		Footprint: _xxx_ xxxxx xxxxx _xxx=
+		Dimensions: 5,4
+	Health:
+		HP: 1000000
+	Garrisonable:
+		Types: Infantry
+		MaxWeight: 40
+		EjectOnDeath: false
+
+^RA2CivProp:
+	Inherits: ^Building
+	-CommandBarBlacklist:
+	Selectable:
+		-Bounds:
+		Class: civbuilding
+	Tooltip:
+		Name: Civilian Building
+		GenericName: Civilian Building
+		GenericStancePrefix: false
+		ShowOwnerRow: true
+	FrozenUnderFog:
+	MapEditorData:
+		Categories: Decoration
+	RenderSprites:
+		PlayerPalette: playerra2
+	Targetable:
+	FireProjectilesOnDeath:
+		Weapons: RA2Debris
+		RequiresCondition: !chronobeamed
+	Health:
+		HP: 5000
+	FireWarheadsOnDeath:
+		Weapon: RA2UnitExplode
+		EmptyWeapon: RA2UnitExplode
+		RequiresCondition: !chronobeamed
+
+^RA2Tree:
+	Inherits: ^Tree
+	RenderSprites:
+		Palette: ra2isotem
+
+^RA2TreeHusk:
+	Inherits: ^TreeHusk
+	RenderSprites:
+		Palette: ra2city
+
+^RA2SovietConscription:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_conscription:
+		Condition: ra2_soviets_upgrade_conscription
+		Prerequisites: ra2_soviets_upgrade_conscription
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_conscription
+
+^RA2SovietInfantryConditioning:
+	ChangesHealth@ra2_soviets_upgrade_infantryconditioning:
+		Step: 15
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ra2_soviets_upgrade_infantryconditioning
+	DamageMultiplier@ra2_soviets_upgrade_infantryconditioning:
+		Modifier: 75
+		RequiresCondition: ra2_soviets_upgrade_infantryconditioning
+	SpeedMultiplier@ra2_soviets_upgrade_infantryconditioning:
+		Modifier: 105
+		RequiresCondition: ra2_soviets_upgrade_infantryconditioning
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_infantryconditioning:
+		Condition: ra2_soviets_upgrade_infantryconditioning
+		Prerequisites: ra2_soviets_upgrade_infantryconditioning
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_infantryconditioning
+
+^RA2SovietShockTrooperTraining:
+	RangeMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_shocktroopertraining
+	FirepowerMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_shocktroopertraining
+	SpeedMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_shocktroopertraining
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_shocktroopertraining:
+		Condition: ra2_soviets_upgrade_shocktroopertraining
+		Prerequisites: ra2_soviets_upgrade_shocktroopertraining
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_shocktroopertraining
+
+^RA2SovietArmorPlatings:
+	SpeedMultiplier@ra2_soviets_upgrade_heavyarmorplatings:
+		Modifier: 90
+		RequiresCondition: ra2_soviets_upgrade_heavyarmorplatings
+	DamageMultiplier@ra2_soviets_upgrade_heavyarmorplatings:
+		Modifier: 70
+		RequiresCondition: ra2_soviets_upgrade_heavyarmorplatings
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_heavyarmorplatings:
+		Condition: ra2_soviets_upgrade_heavyarmorplatings
+		Prerequisites: ra2_soviets_upgrade_heavyarmorplatings
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings
+
+^RA2SovietReactiveArmor:
+	Armor@HAZMAT:
+		Type: HAZMAT
+		RequiresCondition: ra2_soviets_upgrade_reactivearmor
+	DamagedByTintedCells@rad:
+		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
+	DamagedByTintedCells@genrad:
+		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
+	DamagedByTintedCells@tib:
+		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
+	WithDecoration@HAZMAT:
+		Image: pips
+		Sequence: pip-hazmat
+		Position: BottomRight
+		RequiresCondition: ra2_soviets_upgrade_reactivearmor
+	SpeedMultiplier@ra2_soviets_upgrade_reactivearmor:
+		Modifier: 95
+		RequiresCondition: ra2_soviets_upgrade_reactivearmor
+	DamageMultiplier@ra2_soviets_upgrade_reactivearmor:
+		RequiresCondition: ra2_soviets_upgrade_reactivearmor
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_reactivearmor:
+		Condition: ra2_soviets_upgrade_reactivearmor
+		Prerequisites: ra2_soviets_upgrade_reactivearmor
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_reactivearmor
+
+^RA2SovietTeslaDischargeArmor:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1:
+		Modifier: 85
+		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor && EnemyInProximity
+	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor2:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor && !EnemyInProximity
+	DamageMultiplier@ra2_soviets_upgrade_tesladischargearmor:
+		Modifier: 85
+		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor
+	FireWarheads@Tesla:
+		Weapons: TeslaArmorDischargeDummy
+		Interval: 1
+		RequiresCondition: tesladischargearmor && !tesladischargearmorcooldown && EnemyInMaxProximity
+	GrantTimedCondition@tesladischargearmorcooldown:
+		RequiresCondition: tesladischargearmor
+		PauseOnCondition: !tesladischargearmor
+		Condition: tesladischargearmorcooldown
+		Duration: 5
+	GrantConditionOnDamage@tesladischargearmor:
+		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor && !disabled
+		Condition: tesladischargearmor
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@tesladischargearmor:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: tesladischargearmor && !tesladischargearmorcooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_tesladischargearmor:
+		Condition: ra2_soviets_upgrade_tesladischargearmor
+		Prerequisites: ra2_soviets_upgrade_tesladischargearmor
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_tesladischargearmor
+
+^RA2SovietFireShells:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_fireshells:
+		Condition: ra2_soviets_upgrade_fireshells
+		Prerequisites: ra2_soviets_upgrade_fireshells
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_fireshells
+
+^RA2SovietRadShells:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_radiationshells:
+		Condition: ra2_soviets_upgrade_radiationshells
+		Prerequisites: ra2_soviets_upgrade_radiationshells
+	FirepowerMultiplier@ra2_soviets_upgrade_radiationshells:
+		Modifier: 105
+		RequiresCondition: ra2_soviets_upgrade_radiationshells
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_radiationshells
+
+^RA2SovietTeslaShells:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_teslashells:
+		Condition: ra2_soviets_upgrade_teslashells
+		Prerequisites: ra2_soviets_upgrade_teslashells
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_teslashells
+
+^TerrorDroneSurprise:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_terrordronesurprise:
+		Condition: ra2_soviets_upgrade_terrordronesurprise
+		Prerequisites: ra2_soviets_upgrade_terrordronesurprise
+	SpawnActorOnDeath@ra2_soviets_upgrade_terrordronesurprise:
+		Probability: 75
+		Actor: ra2dron
+		RequiresCondition: ra2_soviets_upgrade_terrordronesurprise && !chronobeamed
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_terrordronesurprise
+
+^RA2TeslaOverload:
+	FirepowerMultiplier@ra2_soviets_upgrade_teslaoverload:
+		RequiresCondition: ra2_soviets_upgrade_teslaoverload
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_teslaoverload:
+		Condition: ra2_soviets_upgrade_teslaoverload
+		Prerequisites: ra2_soviets_upgrade_teslaoverload
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_teslaoverload
+
+^RA2HeavyCannons:
+	FirepowerMultiplier@ra2_soviets_upgrade_heavycannons:
+		Modifier: 130
+		RequiresCondition: ra2_soviets_upgrade_heavycannons
+	RangeMultiplier@ra2_soviets_upgrade_heavycannons:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_heavycannons
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_heavycannons:
+		Condition: ra2_soviets_upgrade_heavycannons
+		Prerequisites: ra2_soviets_upgrade_heavycannons
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavycannons
+
+^RA2GrinderTankTreads:
+	ChangesHealth@ra2_soviets_upgrade_grindertanktreads1:
+		PercentageStep: 1
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	ChangesHealth@ra2_soviets_upgrade_grindertanktreads2:
+		Step: 50
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	SpeedMultiplier@ra2_soviets_upgrade_grindertanktreads:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	DamageMultiplier@ra2_soviets_upgrade_grindertanktreads:
+		Modifier: 85
+		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_grindertanktreads:
+		Condition: ra2_soviets_upgrade_grindertanktreads
+		Prerequisites: ra2_soviets_upgrade_grindertanktreads
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_grindertanktreads
+
+^RA2KirovArmorPlatings:
+	DamageMultiplier@ra2_soviets_upgrade_kirovarmorplatings:
+		Modifier: 75
+		RequiresCondition: ra2_soviets_upgrade_kirovarmorplatings
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovarmorplatings:
+		Condition: ra2_soviets_upgrade_kirovarmorplatings
+		Prerequisites: ra2_soviets_upgrade_kirovarmorplatings
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_kirovarmorplatings
+
+^RA2KirovGastroburners:
+	SpeedMultiplier@ra2_soviets_upgrade_kirovgastroburners:
+		Modifier: 125
+		RequiresCondition: ra2_soviets_upgrade_kirovgastroburners
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovgastroburners:
+		Condition: ra2_soviets_upgrade_kirovgastroburners
+		Prerequisites: ra2_soviets_upgrade_kirovgastroburners
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_kirovgastroburners
+
+^RA2KirovAtomicBombs:
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovnuclearshells:
+		Condition: ra2_soviets_upgrade_kirovnuclearshells
+		Prerequisites: ra2_soviets_upgrade_kirovnuclearshells
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_kirovnuclearshells
+
+####################################################################################################
+#		Promotions Allies
+####################################################################################################
+
+# ### Infantry tree
+
+# ra2_allies_upgrade_paratroopers:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Airborne
+# 	Buildable:
+# 		BuildPaletteOrder: 73
+# 		Icon: icon2
+# 		Queue: Promotions
+# 		Description: Allows paratroopers to be accessed from the Airforce Command.
+# 		Prerequisites: ~ra2gacnst, !ra2_allies_upgrade_paratroopers, rank1
+# 	RenderSprites:
+# 		Image: ra2gaairc
+# 	ProvidesPrerequisite:
+
+# upra2seal:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock SEAL
+# 	Buildable:
+# 		BuildPaletteOrder: 76
+# 		Queue: Promotions
+# 		Description: Allows training of SEALs.
+# 		Prerequisites: ~ra2gacnst, !upra2seal, ra2_allies_upgrade_paratroopers, rank1
+# 	RenderSprites:
+# 		Image: ra2seal
+# 	ProvidesPrerequisite:
+
+# upra2snipe:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Sniper
+# 	Buildable:
+# 		BuildPaletteOrder: 79
+# 		Queue: Promotions
+# 		Description: Allows training of Snipers.
+# 		Prerequisites: ~ra2gacnst, !upra2snipe, upra2seal, rank1
+# 	RenderSprites:
+# 		Image: ra2snipe
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_elitegi:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade GIs
+# 	Buildable:
+# 		BuildPaletteOrder: 82
+# 		Queue: Promotions
+# 		Description: Upgrade GI undeployed weapons and deployment armor.
+# 		Prerequisites: ~ra2gacnst, !ra2_allies_upgrade_elitegi, upra2snipe, rank1
+# 	RenderSprites:
+# 		Image: ra2e1
+# 	ProvidesPrerequisite:
+
+# ### Offensive tree
+
+# upra2tnkd:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Tank Destroyer
+# 	Buildable:
+# 		BuildPaletteOrder: 74
+# 		Queue: Promotions
+# 		Description: Allows construction of the Tank Destroyer.
+# 		Prerequisites: ~ra2gacnst, !upra2tnkd, rank1
+# 	RenderSprites:
+# 		Image: ra2tnkd
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_eliterocketeer:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Rocketeers
+# 	Buildable:
+# 		BuildPaletteOrder: 77
+# 		-Queue: #Promotions
+# 		Description: Upgrades the Rocketeer to fire faster and take less damage.
+# 		Prerequisites: ~ra2gacnst, !ra2_allies_upgrade_paratroopers, upra2tnkd, rank1
+# 	RenderSprites:
+# 		Image: ra2rock
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_heavymiragetank:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Heavy Mirage Tanks
+# 	Buildable:
+# 		BuildPaletteOrder: 77
+# 		Queue: Promotions
+# 		Description: Allows construction of Heavy Mirage Tanks.
+# 		Prerequisites: ~ra2gacnst, !ra2_allies_upgrade_heavymiragetank, upra2tnkd, rank1
+# 	RenderSprites:
+# 		Image: ra2hmgtk
+# 	ProvidesPrerequisite:
+
+# upra2beag:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Black Eagle
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Promotions
+# 		Description: Allows construction of the Black Eagle.
+# 		Prerequisites: ~ra2gacnst, !upra2beag, ra2_allies_upgrade_heavymiragetank, rank1
+# 	RenderSprites:
+# 		Image: ra2beag
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_advancedaeronautics:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Advanced Aeronautics
+# 	Buildable:
+# 		BuildPaletteOrder: 83
+# 		Queue: Promotions
+# 		Description: Allied jets receive speed and armor bonuses when attacking.
+# 		Prerequisites: ~ra2gacnst, !ra2_allies_upgrade_advancedaeronautics, upra2beag, rank1
+# 	RenderSprites:
+# 		Image: ra2falc
+# 	ProvidesPrerequisite:
+
+# ^RA2AlliedAdvancedAeronautics:
+# 	GrantConditionOnPrerequisite@supersonic:
+# 		Condition: upaeronautics
+# 		Prerequisites: ra2_allies_upgrade_advancedaeronautics
+# 	GrantConditionOnActivity@supersonic:
+# 		Condition: supersonic
+# 	SpeedMultiplier@supersonic:
+# 		Modifier: 120
+# 		RequiresCondition: supersonic && ammo && upaeronautics
+# 	DamageMultiplier@supersonic:
+# 		RequiresCondition: supersonic && ammo && upaeronautics
+# 		Modifier: 85
+
+# ### Defensive tree
+
+# ra2_allies_upgrade_prismlinking:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Prism Chaining
+# 	Buildable:
+# 		BuildPaletteOrder: 75
+# 		Queue: Promotions
+# 		Description: Allows Prism Towers to chain, boosting damage.
+# 		Prerequisites: ~ra2gacnst, !ra2_allies_upgrade_prismlinking, rank1
+# 	RenderSprites:
+# 		Image: ra2atesla
+# 	ProvidesPrerequisite:
+
+# ra2_allies_upgrade_forceshield:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Force Shield
+# 	Buildable:
+# 		Icon: forceshield
+# 		BuildPaletteOrder: 78
+# 		Queue: Promotions
+# 		Description: Enables the Force Shield power from the Battle Lab.
+# 		Prerequisites: ~ra2gacnst, !ra2_allies_upgrade_forceshield, ra2_allies_upgrade_prismlinking, rank1
+# 	RenderSprites:
+# 		Image: icon
+# 	ProvidesPrerequisite:
+
+# upra2gaorep:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Ore Purifier
+# 	Buildable:
+# 		BuildPaletteOrder: 81
+# 		Queue: Promotions
+# 		Description: Allows construction of the Ore Purifier.
+# 		Prerequisites: ~ra2gacnst, !upra2gaorep, ra2_allies_upgrade_forceshield, rank1
+# 	RenderSprites:
+# 		Image: ra2gaorep
+# 	ProvidesPrerequisite:
+
+# upra2gtgcan:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Grand Cannon
+# 	Buildable:
+# 		BuildPaletteOrder: 84
+# 		Queue: Promotions
+# 		Description: Allows construction of the Grand Cannon.
+# 		Prerequisites: ~ra2gacnst, !upra2gtgcan, upra2gaorep, rank1
+# 	RenderSprites:
+# 		Image: ra2gtgcan
+# 	ProvidesPrerequisite:
+
+####################################################################################################
+#		Upgrades Allies
+####################################################################################################
+
+### Radar ###
+
+^RA2AlliedAssaultSquadTraining:
+	SpeedMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 120
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	FirepowerMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 125
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 80
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	DamageMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 90
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_assaultsquadtraining:
+		Condition: ra2_allies_upgrade_assaultsquadtraining
+		Prerequisites: ra2_allies_upgrade_assaultsquadtraining
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining
+
+^RA2AlliedVanguardTraining:
+	ChangesHealth@ra2_allies_upgrade_vanguardtraining:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	DamageMultiplier@ra2_allies_upgrade_vanguardtraining:
+		Modifier: 70
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	FirepowerMultiplier@ra2_allies_upgrade_vanguardtraining:
+		Modifier: 115
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	SpeedMultiplier@ra2_allies_upgrade_vanguardtraining:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_vanguardtraining:
+		Condition: ra2_allies_upgrade_vanguardtraining
+		Prerequisites: ra2_allies_upgrade_vanguardtraining
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_vanguardtraining
+
+^RA2AlliedEliteInfiltratorsTraining:
+	FirepowerMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 105
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	SpeedMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 105
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 95
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	DamageMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 95
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	RangeMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 120
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	RevealsShroudMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 140
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	DetectCloakedMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 140
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_infiltratorstraining:
+		Condition: ra2_allies_upgrade_infiltratorstraining
+		Prerequisites: ra2_allies_upgrade_infiltratorstraining
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_infiltratorstraining
+
+^RA2AlliedCompositeArmorPlatings:
+	DamageMultiplier@ra2_allies_upgrade_compositearmorplating:
+		Modifier: 80
+		RequiresCondition: ra2_allies_upgrade_compositearmorplating
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_compositearmorplating:
+		Condition: ra2_allies_upgrade_compositearmorplating
+		Prerequisites: ra2_allies_upgrade_compositearmorplating
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating
+
+^RA2AlliedReflectiveArmorPlatings:
+	Armor@REFLECTOR:
+		Type: REFLECTOR
+		RequiresCondition: ra2_allies_upgrade_reflectivearmorplating
+	WithDecoration@REFLECTOR:
+		Image: pips
+		Sequence: pip-reflectivearmor
+		Position: BottomRight
+		RequiresCondition: ra2_allies_upgrade_reflectivearmorplating
+	DamageMultiplier@ra2_allies_upgrade_reflectivearmorplating:
+		RequiresCondition: ra2_allies_upgrade_reflectivearmorplating
+		Modifier: 95
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_reflectivearmorplating:
+		Condition: ra2_allies_upgrade_reflectivearmorplating
+		Prerequisites: ra2_allies_upgrade_reflectivearmorplating
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_reflectivearmorplating
+
+^RA2AlliedChromiumIonPulsePlatings:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	DamageMultiplier@ra2_allies_upgrade_ionpulseplating:
+		RequiresCondition: ra2_allies_upgrade_ionpulseplating
+		Modifier: 90
+	GrantTimedCondition@IonPulseDischargeCooldown:
+		Condition: IonPulseDischargeCooldown
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: ionpulseplating && !ionpulseplatingcooldown && EnemyInMaxProximity
+	FireWarheads@IonPulseDischarge:
+		Weapons: IonPulseDischarge
+		Interval: 125
+		RequiresCondition: ionpulseplating && !ionpulseplatingcooldown && !IonPulseDischargeCooldown && EnemyInMaxProximity
+	GrantTimedCondition@ionpulseplatingcooldown:
+		RequiresCondition: ionpulseplating
+		PauseOnCondition: !ionpulseplating
+		Condition: ionpulseplatingcooldown
+		Duration: 5
+	GrantConditionOnDamage@ionpulseplating:
+		RequiresCondition: ra2_allies_upgrade_ionpulseplating && !disabled
+		Condition: ionpulseplating
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@ionpulseplating:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: ionpulseplating && !ionpulseplatingcooldown && !IonPulseDischargeCooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: ra2_allies_upgrade_ionpulseplating || ra2_allies_upgrade_prismaticbarrier
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: ra2_allies_upgrade_ionpulseplating || ra2_allies_upgrade_prismaticbarrier
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_ionpulseplating:
+		Condition: ra2_allies_upgrade_ionpulseplating
+		Prerequisites: ra2_allies_upgrade_ionpulseplating
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_ionpulseplating
+
+^RA2AlliedAdvancedAeronautics:
+	SpeedMultiplier@ra2_allies_upgrade_advancedaeronautics:
+		Modifier: 125
+		RequiresCondition: ra2_allies_upgrade_advancedaeronautics
+	FirepowerMultiplier@ra2_allies_upgrade_advancedaeronautics:
+		Modifier: 125
+		RequiresCondition: ra2_allies_upgrade_advancedaeronautics
+	DamageMultiplier@ra2_allies_upgrade_advancedaeronautics:
+		Modifier: 75
+		RequiresCondition: ra2_allies_upgrade_advancedaeronautics
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_advancedaeronautics:
+		Condition: ra2_allies_upgrade_advancedaeronautics
+		Prerequisites: ra2_allies_upgrade_advancedaeronautics
+
+^RA2AlliedTankLaserTargeting:
+	FirepowerMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 130
+		RequiresCondition: ra2_allies_upgrade_tanklasertargeting
+	RangeMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 115
+		RequiresCondition: ra2_allies_upgrade_tanklasertargeting
+	RevealsShroudMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 115
+		RequiresCondition: ra2_allies_upgrade_tanklasertargeting
+	DetectCloakedMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 115
+		RequiresCondition: ra2_allies_upgrade_tanklasertargeting
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_tanklasertargeting:
+		Condition: ra2_allies_upgrade_tanklasertargeting
+		Prerequisites: ra2_allies_upgrade_tanklasertargeting
+
+^RA2AlliedThunderboltMissiles:
+	FirepowerMultiplier@ra2_allies_upgrade_thunderboltmissiles:
+		Modifier: 150
+		RequiresCondition: ra2_allies_upgrade_thunderboltmissiles
+	RangeMultiplier@ra2_allies_upgrade_thunderboltmissiles:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_thunderboltmissiles
+	RevealsShroudMultiplier@ra2_allies_upgrade_thunderboltmissiles:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_thunderboltmissiles
+	DetectCloakedMultiplier@ra2_allies_upgrade_thunderboltmissiles:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_thunderboltmissiles
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_thunderboltmissiles:
+		Condition: ra2_allies_upgrade_thunderboltmissiles
+		Prerequisites: ra2_allies_upgrade_thunderboltmissiles
+
+^RA2AlliedIntensifiedPrismBeams:
+	RangeMultiplier@ra2_allies_upgrade_intensifiedprismbeams:
+		RequiresCondition: ra2_allies_upgrade_intensifiedprismbeams
+		Modifier: 125
+	FirepowerMultiplier@ra2_allies_upgrade_intensifiedprismbeams:
+		RequiresCondition: ra2_allies_upgrade_intensifiedprismbeams
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_intensifiedprismbeams:
+		Condition: ra2_allies_upgrade_intensifiedprismbeams
+		Prerequisites: ra2_allies_upgrade_intensifiedprismbeams
+
+^RA2AlliedPrismaticBarrier:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	GrantTimedCondition@shroudedcooldown:
+		Condition: shroudedcooldown
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: prismaticbarrier && !prismaticbarriercooldown && EnemyInMaxProximity
+	GrantTimedCondition@prismaticbarrier:
+		Condition: shrouded
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: prismaticbarrier && !prismaticbarriercooldown && !shroudedcooldown && EnemyInMaxProximity
+	GrantTimedCondition@prismaticbarriercooldown:
+		RequiresCondition: prismaticbarrier
+		PauseOnCondition: !prismaticbarrier
+		Condition: prismaticbarriercooldown
+		Duration: 10
+	GrantConditionOnDamage@prismaticbarrier:
+		RequiresCondition: ra2_allies_upgrade_prismaticbarrier && !disabled
+		Condition: prismaticbarrier
+		Duration: 20
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@prismaticbarrier:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: prismaticbarrier && !prismaticbarriercooldown && !shroudedcooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: ra2_allies_upgrade_ionpulseplating || ra2_allies_upgrade_prismaticbarrier
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: ra2_allies_upgrade_ionpulseplating || ra2_allies_upgrade_prismaticbarrier
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_prismaticbarrier:
+		Condition: ra2_allies_upgrade_prismaticbarrier
+		Prerequisites: ra2_allies_upgrade_prismaticbarrier
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_prismaticbarrier
+
+^RA2AlliedChronoEngine:
+	SpeedMultiplier@ra2_allies_upgrade_chronoengine:
+		RequiresCondition: ra2_allies_upgrade_chronoengine
+		Modifier: 150
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_chronoengine:
+		Condition: ra2_allies_upgrade_chronoengine
+		Prerequisites: ra2_allies_upgrade_chronoengine
+
+####################################################################################################
+#		Promotions Yuri
+####################################################################################################
+
+## Yuri promotions
+### Biological tree
+
+# ra2_yuri_upgrade_meltingvirus:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade Virus
+# 	Buildable:
+# 		BuildPaletteOrder: 85
+# 		Queue: Promotions
+# 		Description: Allows Viruses to attack vehicles.
+# 		Prerequisites: ~yrnacnst, !ra2_yuri_upgrade_meltingvirus, rank1
+# 	RenderSprites:
+# 		Image: yrvirus
+# 	ProvidesPrerequisite:
+
+# ra2_yuri_upgrade_brutestrength:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade Brute
+# 	Buildable:
+# 		BuildPaletteOrder: 88
+# 		-Queue:
+# 		Description: Makes Brutes more resilient.
+# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_meltingvirus, rank1
+# 	RenderSprites:
+# 		Image: yrbrute
+# 	ProvidesPrerequisite:
+
+# upchaossurprise:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Chaos Gas Surprise
+# 	Buildable:
+# 		BuildPaletteOrder: 88
+# 		Queue: Promotions
+# 		Description: Vehicles have a chance of releasing chaos gas on destruction.
+# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_meltingvirus, rank1
+# 	RenderSprites:
+# 		Image: yrcaos
+# 	ProvidesPrerequisite:
+
+# upyryaclon:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Cloning Vats
+# 	Buildable:
+# 		BuildPaletteOrder: 91
+# 		Queue: Promotions
+# 		Description: Allows construction of the Cloning Vats.
+# 		Prerequisites: ~yrnacnst, upchaossurprise, rank1
+# 	RenderSprites:
+# 		Image: ra2naclon
+# 	ProvidesPrerequisite:
+
+# ^ChaosGasSurprise:
+# 	GrantConditionOnPrerequisite@ChaosSurprise:
+# 		Condition: chaossurprise
+# 		Prerequisites: upchaossurprise
+# 	FireWarheadsOnDeath@ChaosSurprise:
+# 		Weapon: RA2Dronegas
+# 		EmptyWeapon: RA2Dronegas
+# 		Chance: 50
+# 		RequiresCondition: chaossurprise && !chronobeamed
+# 	ActorStatValues:
+# 		Upgrades: upchaossurprise
+
+# ra2_yuri_upgrade_geneticboost:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Genetic Modification
+# 	Buildable:
+# 		BuildPaletteOrder: 94
+# 		Queue: Promotions
+# 		Icon: ra2mutate
+# 		Description: Makes Yuri infantry more resilient and self-heal.
+# 		Prerequisites: ~yrnacnst, upyryaclon, rank1
+# 	RenderSprites:
+# 		Image: icon
+# 	ProvidesPrerequisite:
+
+# ### Psychic tree
+
+# ra2_yuri_upgrade_initiatepower:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade Initiate
+# 	Buildable:
+# 		BuildPaletteOrder: 86
+# 		Queue: Promotions
+# 		Description: Increases the range of Initiates.
+# 		Prerequisites: ~yrnacnst, !ra2_yuri_upgrade_initiatepower, rank1
+# 	RenderSprites:
+# 		Image: yrinit
+# 	ProvidesPrerequisite:
+
+# upyryuri:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade Yuri Clone
+# 	Buildable:
+# 		BuildPaletteOrder: 89
+# 		Queue: Promotions
+# 		Description: Increases the range of Yuri Clones.
+# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_initiatepower, rank1
+# 	RenderSprites:
+# 		Image: ra2yuri
+# 	ProvidesPrerequisite:
+
+# upyrnapsis:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade Psychic Sensor
+# 	Buildable:
+# 		BuildPaletteOrder: 91
+# 		Queue: Promotions
+# 		Description: Allows Psychic Sensors to detect nearby unit positions.
+# 		Prerequisites: ~yrnacnst, upyryuri, rank1
+# 	RenderSprites:
+# 		Image: ra2napsis
+# 	ProvidesPrerequisite:
+
+# ra2_yuri_upgrade_domination:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Mind Control Capacity
+# 	Buildable:
+# 		BuildPaletteOrder: 94
+# 		Queue: Promotions
+# 		Description: Increases mind controllers' capacities and control speed.
+# 		Prerequisites: ~yrnacnst, upyrnapsis, rank1
+# 	RenderSprites:
+# 		Image: yrmind
+# 	ProvidesPrerequisite:
+
+# ### Lunar tree
+
+# ra2_yuri_upgrade_supermagnets:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade Magnetron
+# 	Buildable:
+# 		BuildPaletteOrder: 87
+# 		Queue: Promotions
+# 		Description: Makes Magnetrons attack air and gain range.
+# 		Prerequisites: ~yrnacnst, !ra2_yuri_upgrade_supermagnets, rank1
+# 	RenderSprites:
+# 		Image: yrtele
+# 	ProvidesPrerequisite:
+
+# ra2_yuri_upgrade_siphonattack:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Upgrade Floating Discs
+# 	Buildable:
+# 		BuildPaletteOrder: 90
+# 		Queue: Promotions
+# 		Description: Makes Floating Discs able to destroy units and buildings underneath.
+# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_supermagnets, rank1
+# 	RenderSprites:
+# 		Image: yrdisk
+# 	ProvidesPrerequisite:
+
+# upyrlunr:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Unlock Cosmonaut
+# 	Buildable:
+# 		BuildPaletteOrder: 93
+# 		Queue: Promotions
+# 		Description: Allows training of Cosmonauts.
+# 		Prerequisites: ~yrnacnst, ra2_yuri_upgrade_siphonattack, rank1
+# 	RenderSprites:
+# 		Image: yrlunr
+# 	ProvidesPrerequisite:
+
+# ra2_yuri_upgrade_gatlingpower:
+# 	Inherits: ^promotion_upgrade.template
+# 	Tooltip:
+# 		Name: Chainguns
+# 	Buildable:
+# 		BuildPaletteOrder: 96
+# 		Queue: Promotions
+# 		Description: Uprades Gatling weapons to become more powerful.
+# 		Prerequisites: ~yrnacnst, upyrlunr, rank1
+# 	RenderSprites:
+# 		Image: yrygggun
+# 	ProvidesPrerequisite:
+
+####################################################################################################
+#		Upgrades Yuri
+####################################################################################################
+
+### Radar ###
+
+^RA2YuriPsionicLegion:
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psioniclegion:
+		Condition: ra2_yuri_upgrade_psioniclegion
+		Prerequisites: ra2_yuri_upgrade_psioniclegion
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion
+
+^RA2YuriPsionicFanatics:
+	ChangesHealth@ra2_yuri_upgrade_psionicfanatics:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
+	DamageMultiplier@ra2_yuri_upgrade_psionicfanatics:
+		Modifier: 80
+		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
+	ReloadDelayMultiplier@ra2_yuri_upgrade_psionicfanatics:
+		Modifier: 80
+		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
+	SpeedMultiplier@ra2_yuri_upgrade_psionicfanatics:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_psionicfanatics
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicfanatics:
+		Condition: ra2_yuri_upgrade_psionicfanatics
+		Prerequisites: ra2_yuri_upgrade_psionicfanatics
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psionicfanatics
+
+^RA2YuriPsionicElite:
+	RangeMultiplier@ra2_yuri_upgrade_psionicelite:
+		Modifier: 110
+		RequiresCondition: ra2_yuri_upgrade_psionicelite
+	FirepowerMultiplier@ra2_yuri_upgrade_psionicelite:
+		Modifier: 110
+		RequiresCondition: ra2_yuri_upgrade_psionicelite
+	SpeedMultiplier@ra2_yuri_upgrade_psionicelite:
+		Modifier: 110
+		RequiresCondition: ra2_yuri_upgrade_psionicelite
+	ReloadDelayMultiplier@ra2_yuri_upgrade_psionicelite:
+		Modifier: 90
+		RequiresCondition: ra2_yuri_upgrade_psionicelite
+	DamageMultiplier@ra2_yuri_upgrade_psionicelite:
+		Modifier: 90
+		RequiresCondition: ra2_yuri_upgrade_psionicelite
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicelite:
+		Condition: ra2_yuri_upgrade_psionicelite
+		Prerequisites: ra2_yuri_upgrade_psionicelite
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psionicelite
+
+^RA2YuriScrapArmor:
+	SpeedMultiplier@ra2_yuri_upgrade_scraparmor:
+		Modifier: 115
+		RequiresCondition: ra2_yuri_upgrade_scraparmor
+	DamageMultiplier@ra2_yuri_upgrade_scraparmor:
+		Modifier: 85
+		RequiresCondition: ra2_yuri_upgrade_scraparmor
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_scraparmor:
+		Condition: ra2_yuri_upgrade_scraparmor
+		Prerequisites: ra2_yuri_upgrade_scraparmor
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_scraparmor
+
+^RA2YuriChaosGasEmitters:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	SpeedMultiplier@ra2_yuri_upgrade_chaosgasemitters1:
+		Modifier: 110
+		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && EnemyInProximity
+	SpeedMultiplier@ra2_yuri_upgrade_chaosgasemitters2:
+		Modifier: 105
+		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && !EnemyInProximity
+	DamageMultiplier@ra2_yuri_upgrade_chaosgasemitters1:
+		Modifier: 90
+		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && EnemyInProximity
+	DamageMultiplier@ra2_yuri_upgrade_chaosgasemitters2:
+		Modifier: 95
+		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && !EnemyInProximity
+	FireWarheads@Tesla:
+		Weapons: RA2Dronegas
+		Interval: 1
+		RequiresCondition: chaosgasemitters && !chaosgasemitterscooldown && EnemyInMaxProximity
+	GrantTimedCondition@chaosgasemitterscooldown:
+		RequiresCondition: chaosgasemitters
+		PauseOnCondition: !chaosgasemitters
+		Condition: chaosgasemitterscooldown
+		Duration: 5
+	GrantConditionOnDamage@chaosgasemitters:
+		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters && !disabled
+		Condition: chaosgasemitters
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@chaosgasemitters:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: chaosgasemitters && !chaosgasemitterscooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: ra2_yuri_upgrade_chaosgasemitters
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_chaosgasemitters:
+		Condition: ra2_yuri_upgrade_chaosgasemitters
+		Prerequisites: ra2_yuri_upgrade_chaosgasemitters
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_chaosgasemitters
+
+^RA2YuriPsionicShields:
+	Inherits@EnemyInProximity: ^EnemyInProximity
+	DamageMultiplier@ra2_yuri_upgrade_psionicshields:
+		Modifier: 75
+		RequiresCondition: ra2_yuri_upgrade_psionicshields
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: ra2_yuri_upgrade_psionicshields
+	Shielded:
+		DamageRegenDelay: 125
+		RegenAmount: 10
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		SelectionBarColor: 8888FFFF
+		RequiresCondition: !disabled && ((ra2_yuri_upgrade_psionicshields && EnemyInProximity) || shieldgen || shielded)
+	ChangesShield@shielddischarge:
+		Delay: 10
+	GrantTimedCondition@supershielded:
+		Condition: supershielded
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: AlliedShieldFull
+	ChangesPhysicalState@AlliedShieldDeplete:
+		PhysicalStateName: AlliedShield
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: AlliedShieldFull && !supershielded
+	GrantConditionOnPhysicalState@AlliedShieldFull:
+		PhysicalStateName: AlliedShield
+		Condition: AlliedShieldFull
+		UpperValue: 10000
+		LowerValue: 10000
+	WithRangeCircle@psionicshielded:
+		Range: 5000
+		Color: 0000FF88
+		RequiresCondition: psionicshielded || supershielded
+	PhysicalStateAura@AlliedShield:
+		PhysicalStateName: AlliedShield
+		Range: 5000
+		AmountPerTick: 250
+		Interval: 1
+		ValidRelationships: Ally
+		RequiresCondition: ra2_yuri_upgrade_psionicshields && EnemyInProximity
+	PhysicalStateAura@psionicshielded:
+		PhysicalStateName: AlliedShield
+		Range: 5000
+		AmountPerTick: 500
+		Interval: 1
+		ValidRelationships: Ally
+		RequiresCondition: psionicshielded
+	GrantTimedCondition@shieldedcooldown:
+		Condition: shieldedcooldown
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: psionicshields && !psionicshieldscooldown && EnemyInMaxProximity
+	GrantTimedCondition@psionicshielded:
+		Condition: psionicshielded
+		Duration: 40
+		RevokeAfterDurationOnly: true
+		RequiresCondition: psionicshields && !psionicshieldscooldown && !shieldedcooldown && EnemyInMaxProximity
+	GrantTimedCondition@psionicshieldscooldown:
+		RequiresCondition: psionicshields
+		PauseOnCondition: !psionicshields
+		Condition: psionicshieldscooldown
+		Duration: 5
+	GrantConditionOnDamage@psionicshields:
+		RequiresCondition: ra2_yuri_upgrade_psionicshields && !disabled
+		Condition: psionicshields
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	ChangesPhysicalState@psionicshields:
+		PhysicalStateName: EnemyProximity
+		Amount: -10000
+		Delay: 1
+		RequiresCondition: psionicshields && !psionicshieldscooldown && EnemyInMaxProximity
+	PhysicalStateBar@EnemyProximity:
+		RequiresCondition: ra2_yuri_upgrade_psionicshields
+	WithPhysicalStateColoredOverlay@EnemyProximity:
+		RequiresCondition: ra2_yuri_upgrade_psionicshields
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicshields:
+		Condition: ra2_yuri_upgrade_psionicshields
+		Prerequisites: ra2_yuri_upgrade_psionicshields
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psionicshields
+
+^RA2YuriGatlingPower:
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		ArmamentNames: primary, garrisoned
+		RequiredShotsPerInstance: 12, 24
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: false
+		IsCyclic: false
+		RevokeOnNewTarget: false
+		RequiresCondition: !rank-elite
+	GrantConditionOnAttack@elitegatling:
+		Condition: gatling
+		ArmamentNames: primary, garrisoned
+		RequiredShotsPerInstance: 6, 12
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: false
+		IsCyclic: false
+		RevokeOnNewTarget: false
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@ra2_yuri_upgrade_gatlingpower:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_gatlingpower
+	RangeMultiplier@ra2_yuri_upgrade_gatlingpower:
+		Modifier: 110
+		RequiresCondition: ra2_yuri_upgrade_gatlingpower
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_gatlingpower:
+		Condition: ra2_yuri_upgrade_gatlingpower
+		Prerequisites: ra2_yuri_upgrade_gatlingpower
+
+^RA2YuriMindControlCap:
+	MindControllerCapacityModifier@ra2_yuri_upgrade_domination:
+		Amount: 2
+		RequiresCondition: ra2_yuri_upgrade_domination
+	MindControllerDelayModifier@ra2_yuri_upgrade_domination:
+		Modifier: 50
+		RequiresCondition: ra2_yuri_upgrade_domination
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_domination:
+		Condition: ra2_yuri_upgrade_domination
+		Prerequisites: ra2_yuri_upgrade_domination
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_domination
+	Targetable@Psionic:
+		TargetTypes: Psionic
+
+^RA2YuriGatlingSpeed:
+	ReloadDelayMultiplier@ra2_yuri_upgrade_gatlingspeed:
+		Modifier: 70
+		RequiresCondition: ra2_yuri_upgrade_gatlingspeed
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_gatlingspeed:
+		Condition: ra2_yuri_upgrade_gatlingspeed
+		Prerequisites: ra2_yuri_upgrade_gatlingspeed
+
+^RA2YuriPsychicRange:
+	RangeMultiplier@ra2_yuri_upgrade_psychicrange:
+		Modifier: 115
+		RequiresCondition: ra2_yuri_upgrade_psychicrange
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psychicrange:
+		Condition: ra2_yuri_upgrade_psychicrange
+		Prerequisites: ra2_yuri_upgrade_psychicrange
+
+### Battle Lab ###
+
+^RA2YuriPsionicArmor:
+	DamageMultiplier@ra2_yuri_upgrade_psionicarmor:
+		Modifier: 70
+		RequiresCondition: ra2_yuri_upgrade_psionicarmor
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicarmor:
+		Condition: ra2_yuri_upgrade_psionicarmor
+		Prerequisites: ra2_yuri_upgrade_psionicarmor
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psionicarmor
+
+^RA2YuriToxicEngines:
+	FireWarheads@ra2_yuri_upgrade_toxicengines:
+		Weapons: ToxicEngineCloudSpawner
+		Interval: 200
+		RequiresCondition: ra2_yuri_upgrade_toxicengines
+	DamageMultiplier@ra2_yuri_upgrade_toxicengines:
+		Modifier: 80
+		RequiresCondition: ra2_yuri_upgrade_toxicengines
+	SpeedMultiplier@ra2_yuri_upgrade_toxicengines:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_toxicengines
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_toxicengines:
+		Condition: ra2_yuri_upgrade_toxicengines
+		Prerequisites: ra2_yuri_upgrade_toxicengines
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_toxicengines
+
+^RA2YuriPsionicPlasmaBeams:
+	FirepowerMultiplier@ra2_yuri_upgrade_psionicplasmabeams:
+		Modifier: 140
+		RequiresCondition: ra2_yuri_upgrade_psionicplasmabeams
+	ReloadDelayMultiplier@ra2_yuri_upgrade_psionicplasmabeams:
+		Modifier: 80
+		RequiresCondition: ra2_yuri_upgrade_psionicplasmabeams
+	RangeMultiplier@ra2_yuri_upgrade_psionicplasmabeams:
+		Modifier: 110
+		RequiresCondition: ra2_yuri_upgrade_psionicplasmabeams
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psionicplasmabeams:
+		Condition: ra2_yuri_upgrade_psionicplasmabeams
+		Prerequisites: ra2_yuri_upgrade_psionicplasmabeams
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psionicplasmabeams
+
+^RA2YuriGravitonDrive:
+	SpeedMultiplier@ra2_yuri_upgrade_gravitondrive:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_gravitondrive
+	DamageMultiplier@ra2_yuri_upgrade_gravitondrive:
+		Modifier: 80
+		RequiresCondition: ra2_yuri_upgrade_gravitondrive
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_gravitondrive:
+		Condition: ra2_yuri_upgrade_gravitondrive
+		Prerequisites: ra2_yuri_upgrade_gravitondrive
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_gravitondrive
+
+^RA2YuriStealthSuits:
+	Cloak@ra2_yuri_upgrade_stealthsuits:
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: appear1.aud
+		UncloakSound: trans1.aud
+		UncloakOn: Attack, Move, Damage, Heal, SelfHeal
+		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+	SpeedMultiplier@ra2_yuri_upgrade_stealthsuits:
+		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+		Modifier: 110
+	DamageMultiplier@ra2_yuri_upgrade_stealthsuits:
+		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+		Modifier: 90
+	Shielded:
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled && (ra2_yuri_upgrade_stealthsuits || shieldgen || shielded)
+		SelectionBarColor: 8888FFFF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+	ChangesShield@personal_shield:
+		Step: 30
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: ra2_yuri_upgrade_stealthsuits
+	Armor:
+		RequiresCondition: !shielded
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	DamageMultiplier@shielded:
+		RequiresCondition: shielded
+		Modifier: 90
+	ChangesShield@shielddischarge:
+		Delay: 10
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_stealthsuits:
+		Condition: ra2_yuri_upgrade_stealthsuits
+		Prerequisites: ra2_yuri_upgrade_stealthsuits
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_stealthsuits
+
+^RA2YuriGeneMod:
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_geneticboost:
+		Condition: ra2_yuri_upgrade_geneticboost
+		Prerequisites: ra2_yuri_upgrade_geneticboost
+	DamageMultiplier@ra2_yuri_upgrade_geneticboost:
+		Modifier: 80
+		RequiresCondition: ra2_yuri_upgrade_geneticboost
+	SpeedMultiplier@ra2_yuri_upgrade_geneticboost:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_geneticboost
+	ChangesHealth@ra2_yuri_upgrade_geneticboost:
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ra2_yuri_upgrade_geneticboost
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_geneticboost
+	ProvidesPrerequisite:
+
+^RA2YuriPsychicVision:
+	RevealsShroudMultiplier@ra2_yuri_upgrade_psychicvision:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_psychicvision
+	DetectCloakedMultiplier@ra2_yuri_upgrade_psychicvision:
+		Modifier: 120
+		RequiresCondition: ra2_yuri_upgrade_psychicvision
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_psychicvision:
+		Condition: ra2_yuri_upgrade_psychicvision
+		Prerequisites: ra2_yuri_upgrade_psychicvision
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psychicvision
+
+##############################################
+#   Red Alert 2 Civilian Vehicles
+##############################################

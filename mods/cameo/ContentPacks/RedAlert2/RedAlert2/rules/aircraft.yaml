@@ -1,0 +1,1723 @@
+yuriinvisibleplane:
+	Inherits: U2
+	-Contrail@1:
+	-Contrail@2:
+
+ra2asw:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Osprey
+	Buildable:
+		Description: template-carrier-slave.description
+	Aircraft:
+		AltitudeVelocity: 240
+		InitialFacing: 768
+		TurnSpeed: 21
+		Speed: 210
+		MaximumPitch: 42
+		TakeoffSounds: vospstaa.wav
+		LandingSounds: vosplana.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: RA2DepthCharge
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	DetectCloaked:
+		Range: 10000
+		DetectionTypes: Underwater
+	RenderDetectionCircle:
+	FirepowerMultiplier@ScoutShip:
+		Modifier: 50
+	SpawnActorOnDeath:
+		Actor: ra2asw.Husk
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	Voiced:
+		VoiceSet: NighthawkVoice
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2hornet:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Valued:
+		Cost: 1250
+	Tooltip:
+		Name: Hornet
+	Buildable:
+		Description: template-carrier-slave.description
+	Aircraft:
+		AltitudeVelocity: 250
+		InitialFacing: 768
+		TurnSpeed: 25
+		Speed: 225
+		Repulsable: false
+		TakeoffSounds: vhortaka.wav, vhortakb.wav
+		LandingSounds: vhorlana.wav, vhorlanb.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 2
+	Armament@PRIMARY:
+		Weapon: RA2HornetMissile
+		LocalOffset: 427,-171,-213, 427,171,-213
+		PauseOnCondition: !ammo
+	FirepowerMultiplier@ra2hornet:
+		Modifier: 50
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	SpawnActorOnDeath:
+		Actor: ra2hornet.Husk
+	Voiced:
+		VoiceSet: NighthawkVoice
+	AttackAircraft:
+		FacingTolerance: 40
+		PersistentTargeting: false
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 6
+	RenderSprites:
+		PlayerPalette: playerra2
+
+RA2ZEP:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@priority: ^PrioritizeBuilding
+	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
+	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
+	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
+	Inherits@RA2KirovAtomicBombs: ^RA2KirovAtomicBombs
+	Tooltip:
+		Name: Kirov Airship
+	Valued:
+		Cost: 4000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 99
+		Prerequisites: ~ra2natech
+		Queue: Vehicle, Aircraft, RAAircraft
+		Description: actor-zep.description
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 12
+		Speed: 30
+		RepulsionSpeed: 24
+		CanSlide: False
+	Health:
+		HP: 800000
+	ChangesHealth@SelfHealing:
+		Step: 320
+	Armament@PRIMARY:
+		Weapon: RA2KirovBomb
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells && !ra2_soviets_upgrade_kirovnuclearshells
+	Armament@PRIMARYRad:
+		Weapon: RA2KirovBomb_rad
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_kirovnuclearshells
+	Armament@PRIMARYFire:
+		Weapon: RA2KirovBomb_fire
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_kirovnuclearshells
+	Armament@PRIMARYTesla:
+		Weapon: RA2KirovBomb_tesla
+		LocalOffset: 256,0,-512
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells && !ra2_soviets_upgrade_kirovnuclearshells
+	Armament@PRIMARYNuclear:
+		Weapon: RA2KirovBomb_nuclear
+		LocalOffset: 256,0,-512
+		RequiresCondition: (rank-elite && !ra2_soviets_upgrade_kirovnuclearshells) || (!rank-elite && ra2_soviets_upgrade_kirovnuclearshells)
+	Armament@PRIMARYNuclearELITE:
+		Weapon: RA2KirovBomb_nuclear_Elite
+		LocalOffset: 256,0,-512
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_kirovnuclearshells
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Strafe #Hover
+		#StrafeRunLength: 3333
+		#FacingTolerance: 20
+	WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 2560, 2560
+	SpawnActorOnDeath:
+		Actor: RA2ZEP.Husk
+	Voiced:
+		VoiceSet: KirovVoice
+	DeathSounds:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovgastroburners, ra2_soviets_upgrade_kirovnuclearshells
+
+yrschp:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@detect: ^GenericAirDetector
+	Inherits@bot: ^BotAutoDeploySwitchMode50
+	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
+	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Siege Chopper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 98
+		Prerequisites: ~ra2naradr
+		Queue: Vehicle, Aircraft, RAAircraft
+		Description: actor-schp.description
+	Aircraft:
+		TurnSpeed: 30
+		Speed: 150
+		RepulsionSpeed: 30
+		CanForceLand: false
+		#LandableTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, SCMinerals, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice
+		VTOL: true
+		Voice: Move
+		PauseOnCondition: !undeployed || disabled
+	Health:
+		HP: 55000
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 320,0,0
+		MuzzleSequence: muzzle
+		RequiresCondition: undeployed
+	WithMuzzleOverlay:
+	Armament@DeployTargeter:
+		Weapon: deploytargeting.5c0
+		RequiresCondition: botmicro
+	Armament@Deployed:
+		Name: deployed
+		Weapon: RA160mm
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells && deployed
+		Voice: DeployedAttack
+	Armament@DeployedRad:
+		Name: deployed
+		Weapon: RA160mm_rad
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells && deployed
+		Voice: DeployedAttack
+	Armament@DeployedFire:
+		Name: deployed
+		Weapon: RA160mm_fire
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells && deployed
+		Voice: DeployedAttack
+	Armament@DeployedTesla:
+		Name: deployed
+		Weapon: RA160mm_tesla
+		LocalOffset: 410,0,650
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells && deployed
+		Voice: DeployedAttack
+	Armament@DeployedElite:
+		Name: deployed
+		Weapon: RA160mmE_elite
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells && deployed
+		Voice: DeployedAttack
+	Armament@DeployedEliteRad:
+		Name: deployed
+		Weapon: RA160mmE_elite_rad
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells && deployed
+		Voice: DeployedAttack
+	Armament@DeployedEliteFire:
+		Name: deployed
+		Weapon: RA160mmE_elite_fire
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells && deployed
+		Voice: DeployedAttack
+	Armament@DeployedEliteTesla:
+		Name: deployed
+		Weapon: RA160mmE_elite_tesla
+		LocalOffset: 410,0,650
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells && deployed
+		Voice: DeployedAttack
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+	RenderRangeCircle:
+		RangeCircleType: vehicle
+		RequiresCondition: deployed && !airborne
+	Turreted:
+		TurnSpeed: 30
+	-AttackAircraft:
+	AttackTurreted:
+		Armaments: primary, deployed
+		Voice: Attack
+		PauseOnCondition: disabled
+	HeliGrantConditionOnDeploy:
+		DeployAnimation: deploy
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		DeploySound: vchodepa.wav
+		UndeploySound: vchodepa.wav
+		AllowedTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, SCMinerals, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice, ZergSoil
+		DeployVoice: Deploy
+		UndeployVoice: Move
+		CanDeployOnRamps: true
+		SynchronizeDeployment: True
+		PauseOnCondition: disabled
+	RejectsOrders@deployment:
+		Reject: Move
+		RequiresCondition: !undeployed && !airborne
+	RejectsOrders@wierdtakeoff:
+		RequiresCondition: !undeployed && airborne
+	-WithShadow:
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	SpawnActorOnDeath:
+		Actor: yrschp.Husk
+	RenderSprites:
+		PlayerPalette: ra2buildinghack
+	WithVoxelBody:
+		Sequence: deployed
+		RequiresCondition: deployed && !airborne
+	WithVoxelTurret:
+		RequiresCondition: deployed && !airborne
+	WithVoxelHelicopterBody:
+		TickRate: 1
+		RequiresCondition: undeployed
+	Voiced:
+		VoiceSet: SiegeChopperVoice
+	DeathSounds:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells
+
+yrbpln:
+	Inherits: ^AirstrikePlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
+	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Selectable:
+	Tooltip:
+		Name: MiG Bomber
+	Buildable:
+		Description: template-airstrike-slave.description
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	HitShape:
+	Voiced:
+		VoiceSet: MiGVoice
+	DeathSounds:
+	Aircraft:
+		TurnSpeed: 17
+		Speed: 250
+		IdleTurnSpeed: 17
+		IdleSpeed: 180
+		RepulsionSpeed: 3
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: MigMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+	Armament@rad:
+		Name: primary
+		Weapon: MigMissiles_rad
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: ra2_soviets_upgrade_radiationshells
+	Armament@fire:
+		Name: primary
+		Weapon: MigMissiles_fire
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: ra2_soviets_upgrade_fireshells
+	Armament@tesla:
+		Name: primary
+		Weapon: MigMissiles_tesla
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		RequiresCondition: ra2_soviets_upgrade_teslashells
+	FirepowerMultiplier@ra2_soviets_upgrade_radiationshells:
+		Modifier: 125
+	Rearmable:
+		RearmActors: YRBORIS
+	AmmoPool:
+		Ammo: 4
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: yrbpln.husk
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+		StartWidth: 0c96
+		StartColor: DD0000
+		StartColorUsePlayerColor: false
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+		StartWidth: 0c96
+		StartColor: DD0000
+		StartColorUsePlayerColor: false
+	HasParent:
+	AirstrikeSlaveCA:
+		LandingDistance: 1c0
+	SpawnActorOnDeath:
+		Actor: yrbpln.husk
+	RejectsOrders:
+	GivesExperienceToMaster:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		Image: yrbpln
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells
+
+yrbpln1:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
+	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Selectable:
+	Tooltip:
+		Name: MiG Bomber
+	Valued:
+		Cost: 2000
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~ra2natech
+		Queue: Aircraft, RAAircraft
+		Description: actor-bpln.description
+	Health:
+		HP: 57500
+	Repairable:
+		HpPerStep: 2875
+	ChangesHealth@SelfHealing:
+		Step: 23
+	HitShape:
+	Voiced:
+		VoiceSet: MiGVoice
+	DeathSounds:
+	Aircraft:
+		TurnSpeed: 14
+		Speed: 215
+		IdleTurnSpeed: 10
+		IdleSpeed: 150
+		RepulsionSpeed: 3
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: MigMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+	Armament@rad:
+		Name: primary
+		Weapon: MigMissiles_rad
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+	Armament@fire:
+		Name: primary
+		Weapon: MigMissiles_fire
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells
+	Armament@tesla:
+		Name: primary
+		Weapon: MigMissiles_tesla
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: MigMissilesE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite  && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: MigMissilesE_rad
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: MigMissilesE_fire
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: MigMissilesE_tesla
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells
+	Armament@AA:
+		Name: secondary
+		Weapon: MigMissiles_AA
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@AAELITE:
+		Name: secondary
+		Weapon: MigMissiles_AA_ELITE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 8
+		ReloadDelay: 25
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,171,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -640,-171,0
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: yrbpln.husk
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		Image: yrbpln
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells
+
+ra2_tzep:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2KirovArmorPlatings: ^RA2KirovArmorPlatings
+	Inherits@RA2KirovGastroburners: ^RA2KirovGastroburners
+	Valued:
+		Cost: 3600
+	Tooltip:
+		Name: Transport Kirov
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ra2_tzep
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2naradr
+		Queue: Aircraft, RAAircraft, Vehicle
+		Description: actor-shad.description
+	Aircraft:
+		TurnSpeed: 14
+		Speed: 35
+		RepulsionSpeed: 14
+	Health:
+		HP: 265000
+	Repairable:
+		HpPerStep: 13250
+	ChangesHealth@SelfHealing:
+		Step: 106
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 150,-200,-25, 150,200,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	Cargo:
+		InitialUnits: ra2e2, ra2e2, ra2e2, ra2e2, RA2flakt, RA2flakt, ra2shk, ra2shk, RA2HTNK, RA2HTNK
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 14
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ra2_tzep.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: ra2_tzep
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: KirovVoice
+	DeathSounds:
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovgastroburners
+
+ra2_tzep.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Transport Kirov
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2_tzep
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+RA2FALC:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Valued:
+		Cost: 2100
+	Tooltip:
+		Name: Harrier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2gaairc
+		Queue: Aircraft, RAAircraft
+		Description: actor-falc.description
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 12
+		Speed: 180
+		IdleTurnSpeed: 10
+		IdleSpeed: 100
+		TakeoffSounds: vintupa.wav
+		LandingSounds: vintdna.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	Health:
+		HP: 72000
+	Repairable:
+		HpPerStep: 3600
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: HarrierMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 100, -100, 50, -50
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: HarrierMissiles_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 100, -100, 50, -50
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@Harrier:
+		Modifier: 75
+	AmmoPool:
+		Ammo: 8
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 52
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: RA2FALC.Husk
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: -100,256,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -100,-256,0
+		TrailLength: 15
+	Voiced:
+		VoiceSet: HarrierVoice
+	DeathSounds:
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 8
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_advancedaeronautics, ra2_allies_upgrade_thunderboltmissiles
+
+RA2BEAG:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Tooltip:
+		Name: Black Eagle
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2gatech
+		Queue: Aircraft, RAAircraft
+		Description: actor-beag.description
+	Valued:
+		Cost: 3000
+	Health:
+		HP: 85000
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 10
+		Speed: 150
+		IdleTurnSpeed: 8
+		IdleSpeed: 100
+		TakeoffSounds: vintupa.wav
+		LandingSounds: vintdna.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: BlackEagleMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: BlackEagleMissiles_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@PRIMARYUPGRADE:
+		Name: primary
+		Weapon: BlackEagleThunderboltMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@PRIMARYELITEUpgrade:
+		Name: primary
+		Weapon: BlackEagleThunderboltMissiles_elite
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Selectable:
+		DecorationBounds: 1536, 1280
+	AmmoPool:
+		Ammo: 8
+		ReloadDelay: 25
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 4
+	SpawnActorOnDeath:
+		Actor: ra2beag.Husk
+	WithMoveAnimation:
+		MoveSequence: move
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: -100,256,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -100,-256,0
+		TrailLength: 15
+	Voiced:
+		VoiceSet: BlackEagleVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_advancedaeronautics, ra2_allies_upgrade_thunderboltmissiles
+
+ra2shad:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Valued:
+		Cost: 2100
+	Tooltip:
+		Name: Night Hawk
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ra2shad
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2gaairc
+		Queue: Aircraft, RAAircraft
+		Description: actor-shad.description
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+		RepulsionSpeed: 24
+	Health:
+		HP: 87500
+	Repairable:
+		HpPerStep: 4375
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 150,-200,-25, 150,200,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 197,0,180
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 197,0,180
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -1097,0,200
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -1097,0,200
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	Cargo:
+		InitialUnits: ra2e1, ra2e1, yrggi, yrggi, ra2seal
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ra2shad.Husk
+	SelectionDecorations:
+	Selectable:
+		Class: ra2shad
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: ra2shad
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NighthawkVoice
+	DeathSounds:
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+
+YRDISK:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@detect: ^GenericAirDetector
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@RA2YuriGravitonDrive: ^RA2YuriGravitonDrive
+	Inherits@RA2YuriPsionicPlasmaBeams: ^RA2YuriPsionicPlasmaBeams
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Floating Disk
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~yrygtech
+		Queue: Vehicle, Aircraft, RAAircraft
+		Description: actor-disk.description
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 80
+		RepulsionSpeed: 80
+		IdealSeparation: 2000
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2DiskLaser
+		LocalOffset: 800,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: RA2DiskLaser_elite
+		LocalOffset: 800,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	Armament@SECOND:
+		Name: secondary
+		Weapon: RA2DiskDrain
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: ra2_yuri_upgrade_siphonattack
+	Armament@Steal:
+		Name: secondary
+		Weapon: RA2DiskSteal
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		Voice: Steal
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_siphonattack:
+		Condition: ra2_yuri_upgrade_siphonattack
+		Prerequisites: ra2_yuri_upgrade_siphonattack
+	ReloadDelayMultiplier@ra2_yuri_upgrade_disklasers:
+		Modifier: 50
+		RequiresCondition: ra2_yuri_upgrade_disklasers
+	ReloadAmmoDelayMultiplier@ra2_yuri_upgrade_disklasers:
+		Modifier: 75
+		RequiresCondition: ra2_yuri_upgrade_disklasers
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_disklasers:
+		Condition: ra2_yuri_upgrade_disklasers
+		Prerequisites: ra2_yuri_upgrade_disklasers
+	AttackAircraft:
+		Voice: Attack
+		AttackType: Hover
+		FacingTolerance: 512
+	AmmoPool:
+		Armaments: primary
+		Ammo: 3
+		AmmoCondition: ammo
+	WithShadow:
+	WithMoveAnimation:
+		MoveSequence: move
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	ReloadAmmoPool:
+		Delay: 80
+		Count: 1
+	Selectable:
+		DecorationBounds: 1280, 1024
+	SpawnActorOnDeath:
+		Actor: YRDISK.Husk
+	Turreted:
+	Voiced:
+		VoiceSet: DiskVoice
+	RenderRangeCircle:
+		RangeCircleType: aircraft
+	DeathSounds:
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	AmbientSound@Steal:
+		SoundFiles: vflolo5a.wav, vflolo5b.wav
+		Volume: 1.5
+		RequiresCondition: stealing
+	SoundAnnouncement@StealEnd:
+		SoundFiles: vflolo6a.wav
+		Volume: 1.5
+		RequiresCondition: !stealing
+	GrantConditionOnAttack:
+		Condition: stealing
+		RevokeDelay: 5
+		ArmamentNames: secondary
+	DamageMultiplier@stealing:
+		Modifier: 75
+		RequiresCondition: stealing
+	ChangesHealth@stealing:
+		Step: 100
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: stealing
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_gravitondrive, ra2_yuri_upgrade_siphonattack, ra2_yuri_upgrade_disklasers, ra2_yuri_upgrade_psionicplasmabeams
+
+ra2rock:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Tooltip:
+		Name: Rocketeer
+	Valued:
+		Cost: 600
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra2gaairc
+		Queue: Infantry, RAInfantry
+		Description: actor-ra2rock.description
+	Aircraft:
+		TurnSpeed: 36
+		Speed: 180
+		Voice: Move
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armament@PRIMARY:
+		Weapon: ra2roktgun
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ra2rock.husk
+	Voiced:
+		VoiceSet: RocketeerVoice
+	DeathSounds:
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		DefaultAttackSequence: shoot-air
+		IdleSequences: idle-air
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: shoot
+		RequiresCondition: !airborne
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+		RequiresCondition: airborne
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+	RenderSprites:
+		PlayerPalette: playerra2
+	FirepowerMultiplier@ra2_allies_upgrade_eliterocketeer:
+		Modifier: 115
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	ReloadDelayMultiplier@upgrade:
+		Modifier: 85
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	DamageMultiplier@upgrade:
+		Modifier: 85
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	SpeedMultiplier@ra2_allies_upgrade_eliterocketeer:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	RangeMultiplier@ra2_allies_upgrade_eliterocketeer:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_eliterocketeer
+	GrantConditionOnPrerequisite@Upgrade:
+		Condition: ra2_allies_upgrade_eliterocketeer
+		Prerequisites: ra2_allies_upgrade_eliterocketeer
+	ProducibleWithLevel@spyinfantry:
+		Prerequisites: infantry.upgraded
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_eliterocketeer
+
+ra2rock.husk:
+	Inherits: ^HelicopterHusk
+	RenderSprites:
+		Image: ra2rock
+		PlayerPalette: playerra2
+	Tooltip:
+		Name: Rocketeer
+	Aircraft:
+		TurnSpeed: 160
+		Speed: 140
+	FallsToEarth:
+		Explosion: UnitExplode
+	RevealsShroud:
+		Range: 4c0
+		Type: GroundPosition
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: die-air
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+	-WithShadow:
+
+yrlunr:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericAirDetector
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@RA2YuriPsionicLegion: ^RA2YuriPsionicLegion
+	Inherits@RA2YuriPsionicFanatics: ^RA2YuriPsionicFanatics
+	Inherits@RA2YuriPsionicElite: ^RA2YuriPsionicElite
+	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
+	Inherits@RA2YuriGravitonDrive: ^RA2YuriGravitonDrive
+	Inherits@RA2YuriPsionicPlasmaBeams: ^RA2YuriPsionicPlasmaBeams
+	Tooltip:
+		Name: Cosmonaut
+	Valued:
+		Cost: 1100
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Aircraft, RAAircraft
+		Prerequisites: ~yrygcomd
+		Description: actor-ra2rock.description
+	Aircraft:
+		TurnSpeed: 33
+		Speed: 165
+		Voice: Move
+	Health:
+		HP: 28000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armament@PRIMARY:
+		Weapon: RA2CosmonautLaser
+		LocalOffset: 128,196,128, 128,-196,128
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: yrlunr.husk
+	Voiced:
+		VoiceSet: CosmonautVoice
+	DeathSounds:
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		DefaultAttackSequence: shoot-air
+		IdleSequences: idle-air
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: shoot
+		RequiresCondition: !airborne
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+		RequiresCondition: airborne
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_psioniclegion, ra2_yuri_upgrade_psionicfanatics, ra2_yuri_upgrade_psionicelite, ra2_yuri_upgrade_bioengineering, ra2_yuri_upgrade_geneticboost, ra2_yuri_upgrade_psychicvision, ra2_yuri_upgrade_gravitondrive, ra2_yuri_upgrade_psionicplasmabeams
+
+yrlunr.husk:
+	Inherits: ra2rock.husk
+	RenderSprites:
+		Image: yrlunr
+	Tooltip:
+		Name: Cosmonaut
+
+yrspyp:
+	Inherits: ^AirstrikePlane
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Tooltip:
+		Name: Spy Plane
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 150000
+	Armor:
+		Type: Bomber
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 28
+		Speed: 250
+		Repulsable: False
+		MaximumPitch: 56
+	AttackBomber:
+		FacingTolerance: 32
+	Armament:
+		Weapon: RA2SpyCamera
+	SelectionDecorations:
+	Contrail@1:
+		Offset: -725,683,0
+	Contrail@2:
+		Offset: -725,-683,0
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	RenderSprites:
+		Image: yrspyp
+		PlayerPalette: playerra2
+	SpawnActorOnDeath:
+		Actor: yrspyp.husk
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings
+
+ra2cplane:
+	Inherits: ^AirstrikePlane
+	Inherits@upgrade: ^RA2AlliedAdvancedAeronautics
+	ParaDrop:
+		DropRange: 4c0
+		ChuteSound: sparadra.wav
+	Health:
+		HP: 175000
+	Armor:
+		Type: Bomber
+	Valued:
+		Cost: 4000
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 25
+		Speed: 150
+		Repulsable: False
+		MaximumPitch: 50
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+	Tooltip:
+		Name: Cargo Plane
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: ra2cplane.Husk
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: ra2cplane
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_advancedaeronautics
+
+ra2cplanesov:
+	Inherits: ^AirstrikePlane
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	ParaDrop:
+		DropRange: 4c0
+		ChuteSound: sparadra.wav
+	Health:
+		HP: 175000
+	Armor:
+		Type: Bomber
+	Valued:
+		Cost: 4000
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 25
+		Speed: 150
+		Repulsable: False
+		MaximumPitch: 50
+	Cargo:
+		MaxWeight: 10
+	SelectionDecorations:
+	Tooltip:
+		Name: Cargo Plane
+	Contrail@1:
+		Offset: -432,560,0
+	Contrail@2:
+		Offset: -432,-560,0
+	SpawnActorOnDeath:
+		Actor: ra2cplanesov.Husk
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GivesExperience:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	-DamagedByTintedCells@rad:
+	-DamagedByTintedCells@genrad:
+	-DamagedByTintedCells@tib:
+	RenderSprites:
+		Image: ra2cplanesov
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor
+
+####################################################################################################
+#		Red Alert 2 TechBuilding
+####################################################################################################
+
+RA2ZEP.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Kirov Airship
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 40
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		Image: ra2zep
+		PlayerPalette: playerra2
+
+ra2hornet.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Hornet
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 186
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2hornet
+	RenderSprites:
+		PlayerPalette: playerra2
+
+RA2FALC.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Harrier
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2falc
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2beag.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Black Eagle
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2beag
+	RenderSprites:
+		PlayerPalette: playerra2
+
+YRDISK.Husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Floating Disc
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 100
+	RenderSprites:
+		Image: yrdisk
+		PlayerPalette: playerra2
+
+ra2asw.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Osprey
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 200
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2asw
+	RenderSprites:
+		PlayerPalette: playerra2
+
+yrschp.Husk:
+	Inherits: ^HelicopterHusk
+	Inherits@Voxel: ^RenderVoxel
+	Tooltip:
+		Name: Siege Chopper
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 200
+	RenderSprites:
+		Image: yrschp
+	RenderVoxels:
+		Image: yrschp
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2shad.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Night Hawk
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 223
+	RenderSprites:
+		Image: ra2shad
+		PlayerPalette: playerra2
+
+yrbpln.husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: MiG Bomber
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: yrbpln
+		PlayerPalette: playerra2
+
+ra2cplane.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cargo Plane
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2cplane
+		PlayerPalette: playerra2
+
+ra2cplanesov.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cargo Plane
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 149
+	LeavesTrails@0:
+		Offsets: -432,560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	LeavesTrails@1:
+		Offsets: -432,-560,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: ra2cplanesov
+		PlayerPalette: playerra2
+
+
+yrspyp.husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Spy Plane
+	Aircraft:
+		TurnSpeed: 28
+		Speed: 250
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: yrspyp
+		PlayerPalette: playerra2
+
+RA2TXGASG:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	-UpdatesPlayerStatistics:
+	RenderSprites:
+		Palette: ra2effect
+	Interactable:
+	HiddenUnderFog:
+		AlwaysVisibleRelationships: None
+		Type: GroundPosition
+	Health:
+		HP: 20
+	HitShape:
+	Aircraft:
+		Repulsable: false
+		CruiseAltitude: 1
+		Speed: 12
+	WithSpriteBody:
+	BodyOrientation:
+		QuantizedFacings: 32
+	Wanders:
+		MinMoveDelay: 20
+		MaxMoveDelay: 40
+	ChangesHealth:
+		Step: -1
+		Delay: 30
+		StartIfBelow: 200
+	PeriodicExplosion:
+		Weapon: RA2Cloud
+		InitialDelay: 4

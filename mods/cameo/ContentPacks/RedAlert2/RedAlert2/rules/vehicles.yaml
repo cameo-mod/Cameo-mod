@@ -1,0 +1,3690 @@
+dummy_dock:
+	Interactable:
+	Reservable:
+	GrantCondition:
+		Condition: dontmove
+	Mobile:
+		Speed: 1
+		Locomotor: wheeled
+		PauseOnCondition: dontmove
+	Exit@1:
+	RejectsOrders:
+
+RA2AMCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Tooltip:
+		Name: Allied Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~ra2gadept
+	Transforms:
+		IntoActor: ra2gacnst
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: AlliedMCV
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmalliesra2
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine
+
+RA2CMIN:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Chrono Miner
+	Harvester:
+		Voice: Harvest
+		PipCount: 10
+		BaleLoadDelay: 4
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 16
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Buildable:
+		Prerequisites: ~ra2garefn
+		Queue: Vehicle, RAVehicle
+		Description: actor-cmin.description
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	DockClientManager:
+		Voice: Deliver
+	ChronoResourceDelivery:
+		TeleportType: PortableChrono
+		RequiresCondition: !disabled
+	ExplodeWeaponTeleportEffect:
+		TeleportType: PortableChrono
+		ImpactWeapon: ChronoMinerTeleportImpact
+		TeleportWeapon: ChronoMinerTeleport
+	Voiced:
+		VoiceSet: ChronoMinerVoice
+	RenderSprites:
+		Image: RA2CMIN
+		PlayerPalette: playerra2
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine
+
+RA2MTNK:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Tooltip:
+		Name: Grizzly Tank
+	Valued:
+		Cost: 750
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ra2gaweap
+		Queue: Vehicle, RAVehicle
+		Description: template-mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 95
+		TurnSpeed: 19
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 19
+	Armament:
+		Name: primary
+		Weapon: RA2105mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2105mm_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	RangeMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 130
+	FirepowerMultiplier@ra2_allies_upgrade_tanklasertargeting:
+		Modifier: 160
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+RA2TNKD:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tank Destroyer
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2gaairc
+		Queue: Vehicle, RAVehicle
+		Description: actor-ra2tnkd.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 65
+		TurnSpeed: 26
+	Health:
+		HP: 145000
+	Repairable:
+		HpPerStep: 7250
+	ChangesHealth@SelfHealing:
+		Step: 58
+	Armor:
+		Type: Heavy
+	Armament:
+		Name: primary
+		Weapon: RA2sabot
+		RecoilRecovery: 38
+		LocalOffset: 750,0,80
+		MuzzleSequence: muzzle
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2sabot_elite
+		RecoilRecovery: 38
+		LocalOffset: 750,0,80
+		MuzzleSequence: muzzle
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: TankDestroyerVoice
+	DeliversCash:
+		Payload: 450
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+RA2FV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@IFV: ^IFVConditions
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedThunderboltMissiles: ^RA2AlliedThunderboltMissiles
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: actor-fv.name
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~ra2gaweap
+		Queue: Vehicle, RAVehicle
+		Description: actor-fv.description
+	Mobile:
+		Locomotor: wheeled
+		Speed: 150
+		TurnSpeed: 30
+		PauseOnCondition: notmobile || disabled
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Turreted:
+		TurnSpeed: 60
+	FirepowerMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	ReloadDelayMultiplier@ra2_allies_upgrade_assaultsquadtraining:
+		Modifier: 90
+		RequiresCondition: ra2_allies_upgrade_assaultsquadtraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_assaultsquadtraining:
+		Condition: ra2_allies_upgrade_assaultsquadtraining
+		Prerequisites: ra2_allies_upgrade_assaultsquadtraining
+	ChangesHealth@ra2_allies_upgrade_vanguardtraining:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	DamageMultiplier@ra2_allies_upgrade_vanguardtraining:
+		Modifier: 75
+		RequiresCondition: ra2_allies_upgrade_vanguardtraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_vanguardtraining:
+		Condition: ra2_allies_upgrade_vanguardtraining
+		Prerequisites: ra2_allies_upgrade_vanguardtraining
+	SpeedMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	RangeMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 110
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	RevealsShroudMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 120
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	DetectCloakedMultiplier@ra2_allies_upgrade_infiltratorstraining:
+		Modifier: 120
+		RequiresCondition: ra2_allies_upgrade_infiltratorstraining
+	GrantConditionOnPrerequisite@ra2_allies_upgrade_infiltratorstraining:
+		Condition: ra2_allies_upgrade_infiltratorstraining
+		Prerequisites: ra2_allies_upgrade_infiltratorstraining
+	###################
+	#	Infantry
+	###################
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		UnloadVoice: Move
+		LoadedCondition: loaded
+		LoadingCondition: notmobile
+	###################
+	#	Armament
+	###################
+	Armament@primary:
+		Name: primary
+		Weapon: RA2HoverMissile
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryelite:
+		Name: primary
+		Weapon: RA2HoverMissile_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryAA:
+		Name: primary
+		Weapon: RA2HoverMissileAA
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryeliteAA:
+		Name: primary
+		Weapon: RA2HoverMissileAA_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissile
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryeliteThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissile_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryAAThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissileAA
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@primaryeliteAAThunderbolt:
+		Name: primary
+		Weapon: RA2ThunderboltMissileAA_elite
+		LocalOffset: 768,99,290, 768,-99,290
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missile:
+		Weapon: RA2MultiHoverMissile
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileelite:
+		Weapon: RA2MultiHoverMissile_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileAA:
+		Weapon: RA2MultiHoverMissileAA
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileeliteAA:
+		Weapon: RA2MultiHoverMissileAA_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && !ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileThunderbolt:
+		Weapon: RA2MultiThunderboltMissile
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileeliteThunderbolt:
+		Weapon: RA2MultiThunderboltMissile_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileAAThunderbolt:
+		Weapon: RA2MultiThunderboltMissileAA
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && !rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@missileeliteAAThunderbolt:
+		Weapon: RA2MultiThunderboltMissileAA_elite
+		LocalOffset: 768,85,220, 768,-85,220, -100,85,220, -100,-85,220
+		RequiresCondition: ifv-miss && rank-elite && ra2_allies_upgrade_thunderboltmissiles
+	Armament@mg:
+		Weapon: RA2CRM60
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-mg
+	Armament@hmg:
+		Weapon: RA2CRM60H
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-hmg
+	Armament@repair:
+		Weapon: RA2IFVRepair
+		LocalOffset: 164,0,864
+		RequiresCondition: ifv-repair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	Armament@healer:
+		Weapon: MedicHeal
+		LocalOffset: 164,0,864
+		RequiresCondition: ifv-healer
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	FirepowerMultiplier@repair:
+		Modifier: 50
+		RequiresCondition: ifv-repair || ifv-healer
+	Armament@sniper:
+		Weapon: RA2AWP
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-sniper
+	Armament@hero:
+		Weapon: RA2DoublePistolsIFV
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemg
+		MuzzlePalette: ra2effect
+		RequiresCondition: ifv-hero
+	Armament@tesla:
+		Weapon: TTankZap
+		RequiresCondition: ifv-tesla
+	Armament@flak:
+		Weapon: DragunovSniper
+		RequiresCondition: ifv-flak
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlefl
+		MuzzlePalette: ra2effect
+	Armament@cannon:
+		Weapon: RA2MirageGun
+		RequiresCondition: ifv-cannon
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlemm
+		MuzzlePalette: ra2effect
+	Armament@fire:
+		Weapon: BigFlamer
+		RequiresCondition: ifv-fire
+		LocalOffset: 171,0,255
+		MuzzleSequence: muzzlefa
+	Armament@chem:
+		Weapon: RA2RadBeamWeapon
+		RequiresCondition: ifv-chem
+	Armament@chrono:
+		Weapon: IFVChronoBeam
+		LocalOffset: 171,0,255
+		RequiresCondition: ifv-chrono
+	Armament@chronosound:
+		Weapon: IFVChronoSound
+		RequiresCondition: ifv-chrono
+	Armament@ivan:
+		Weapon: DemoTruckTargeting
+		RequiresCondition: ifv-demo
+	GrantConditionOnAttack:
+		Condition: triggered
+		RequiresCondition: ifv-demo && !disabled
+	KillsSelf@ivan:
+		RequiresCondition: ifv-demo && (triggered || invulnerability)
+	FireWarheadsOnDeath@ivan:
+		Weapon: RA2DemoBomb
+		EmptyWeapon: RA2DemoBomb
+		RequiresCondition: ifv-demo && !disabled
+	###################
+	#	Turret Voxel
+	###################
+	WithSpriteTurret@default:
+		Sequence: turret-missile
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-deso && !ifv-demo && !ifv-chrono && !ifv-plasma && !ifv-litlaser && !ifv-medlaser && !ifv-greelaser && !ifv-misslaser && !ifv-chem && !ifv-thrax && !ifv-sonic && !ifv-fremen && !ifv-healer && !ifv-spy && !ifv-thief
+	WithSpriteTurret@mg:
+		Sequence: turret-mg
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-sniper || ifv-flak || ifv-hero || ifv-cannon || ifv-plasma || ifv-litlaser || ifv-medlaser || ifv-greelaser || ifv-chem || ifv-fremen || ifv-thief
+	WithSpriteTurret@flame:
+		Sequence: turret-flame
+		RequiresCondition: ifv-chem || ifv-fire
+	WithSpriteTurret@engineer:
+		Sequence: turret-repair
+		RequiresCondition: ifv-repair
+	WithSpriteTurret@hitech:
+		Sequence: turret-hitech
+		RequiresCondition: ifv-chrono || ifv-misslaser || ifv-sonic || ifv-healer || ifv-spy
+	WithSpriteTurret@tesla:
+		Sequence: turret-tesla
+		RequiresCondition: ifv-tesla
+	WithSpriteTurret@bomb:
+		Sequence: turret-bomb
+		RequiresCondition: ifv-demo
+	###############
+	Tooltip@MG:
+		Name: Machine Gun IFV
+		RequiresCondition: ifv-mg || ifv-thief
+	Tooltip@HMG:
+		Name: Heavy Machine Gun IFV
+		RequiresCondition: ifv-hmg
+	Tooltip@MISS:
+		Name: Missile IFV
+		RequiresCondition: ifv-miss
+	Tooltip@REP:
+		Name: Repair IFV
+		RequiresCondition: ifv-repair
+	Tooltip@SNIPE:
+		Name: Sniper IFV
+		RequiresCondition: ifv-sniper
+	Tooltip@HERO:
+		Name: Hero IFV
+		RequiresCondition: ifv-hero
+	WithDecoration@COMMANDOSKULL:
+		RequiresCondition: ifv-hero
+	Tooltip@FLAK:
+		Name: Flak IFV
+		RequiresCondition: ifv-flak
+	Tooltip@TESLA:
+		Name: Tesla IFV
+		RequiresCondition: ifv-tesla
+	Tooltip@CHEM:
+		Name: Chemical IFV
+		RequiresCondition: ifv-chem
+	Tooltip@CANNON:
+		Name: Cannon IFV
+		RequiresCondition: ifv-cannon
+	Tooltip@FIRE:
+		Name: Flamethrower IFV
+		RequiresCondition: ifv-fire
+	Tooltip@DEMO:
+		Name: Bomb IFV
+		RequiresCondition: ifv-demo
+	Tooltip@CHRONO:
+		Name: Chrono IFV
+		RequiresCondition: ifv-chrono
+	Tooltip@Healer:
+		Name: Healer IFV
+		RequiresCondition: ifv-healer
+	GuardsSelection@HEAL:
+		ValidTargets: Infantry
+		RequiresCondition: ifv-healer && !stance-attackanything
+	GuardsSelection@REPAIR:
+		ValidTargets: Vehicle
+		RequiresCondition: ifv-repair && !stance-attackanything
+	GuardsSelection@SPY:
+		RequiresCondition: ifv-spy
+	KeepsDistance:
+		RequiresCondition: ifv-repair || ifv-healer || ifv-spy
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		Class: ra2fv
+	Voiced:
+		VoiceSet: IFVVoice
+	WithMuzzleOverlay:
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_thunderboltmissiles, ra2_allies_upgrade_tanklasertargeting
+
+RA2FVBOTMG:
+	Inherits: RA2FV
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2gapile
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2fv
+	RenderSprites:
+		Image: ra2fv
+	Cargo:
+		InitialUnits: ra2e1
+	ProductionCostMultiplier:
+		Multiplier: 140
+
+RA2FVBOTMISS:
+	Inherits: RA2FV
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2gapile
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2fv
+	RenderSprites:
+		Image: ra2fv
+	Cargo:
+		InitialUnits: yrggi
+	ProductionCostMultiplier:
+		Multiplier: 180
+
+RA2FVBOTHMG:
+	Inherits: RA2FV
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2gapile, ra2gaairc
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2fv
+	RenderSprites:
+		Image: ra2fv
+	Cargo:
+		InitialUnits: ra2seal
+	ProductionCostMultiplier:
+		Multiplier: 280
+
+RA2FVBOTREP:
+	Inherits: RA2FVBOTMG
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~botplayer, ra2gapile, ra2gadept
+	Cargo:
+		InitialUnits: ra2engineer
+	ProductionCostMultiplier:
+		Multiplier: 200
+
+RA2FVBOTCHRONO:
+	Inherits: RA2FVBOTMG
+	Buildable:
+		Prerequisites: ~botplayer, ra2gapile, ra2gatech
+	Cargo:
+		InitialUnits: ra2cleg
+	ProductionCostMultiplier:
+		Multiplier: 400
+
+RA2SREF:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedIntensifiedPrismBeams: ^RA2AlliedIntensifiedPrismBeams
+	AutoTargetPriority@TESLAAMOVE:
+		ValidTargets: PrismTowerChargeable
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Prism Tank
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra2gatech
+		Queue: Vehicle, RAVehicle
+		Description: actor-sref.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 12 #3
+	Armament@Charge:
+		#Name: secondary
+		Weapon: PrismTankCharge
+		LocalOffset: 410,0,650
+		Recoil: 128
+		RecoilRecovery: 26
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		RequiresCondition: !rank-elite
+	Armament@EliteCharge:
+		#Name: secondary
+		Weapon: PrismTankChargeE
+		LocalOffset: 410,0,650
+		Recoil: 128
+		RecoilRecovery: 26
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		RequiresCondition: rank-elite
+	Armament:
+		#Name: primary
+		Weapon: RA2Comet
+		LocalOffset: 410,0,650
+		Recoil: 128
+		RecoilRecovery: 26
+		TargetRelationships: Enemy
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		#Name: primary
+		Weapon: RA2Comet_elite
+		LocalOffset: 410,0,650
+		Recoil: 128
+		RecoilRecovery: 26
+		TargetRelationships: Enemy
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		TargetFrozenActors: True
+	RenderRangeCircle:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: PrismTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_intensifiedprismbeams
+
+RA2MGTK:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Mirage Tank
+		RequiresCondition: !tree
+	MirageTooltip@Tree:
+		Name: Mirage Tank
+		GenericName: Tree
+		GenericVisibility: Enemy, Neutral
+		RequiresCondition: tree
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2gatech, ~!ra2_allies_upgrade_heavymiragetank
+		Queue: Vehicle, RAVehicle
+		Description: actor-mgtk.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 90
+		TurnSpeed: 18
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 18
+	Armament:
+		Name: primary
+		Weapon: RA2MirageGun
+		LocalOffset: 512,0,128
+		Recoil: 128
+		RecoilRecovery: 26
+		RequiresCondition: !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@elite:
+		Name: primary
+		Weapon: RA2MirageGun_elite
+		LocalOffset: 512,0,128
+		Recoil: 128
+		RecoilRecovery: 26
+		RequiresCondition: rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Mirage:
+		RequiresCondition: !disabled
+		InitialDelay: 25
+		RevealDelay: 25
+		RevealOn: Attack, Move
+		MirageCondition: tree
+		DefaultTargetTypes: t08, t10, t03, t02
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: playerra2
+	AttackTurreted:
+	SelectionDecorations:
+	AutoTarget:
+	Selectable:
+	WithSpriteTurret:
+		RequiresCondition: !tree
+	WithFacingSpriteBody:
+		RequiresCondition: !tree
+	WithMirageSpriteBody:
+		Name: tree
+		RequiresCondition: tree
+		IsPlayerPalette: false
+		Palette: ra_temperat
+	Voiced:
+		VoiceSet: MirageTankVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+RA2HMGTK:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Inherits@RA2AlliedTankLaserTargeting: ^RA2AlliedTankLaserTargeting
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Heavy Mirage Tank
+		RequiresCondition: !tree
+	MirageTooltip@Tree:
+		Name: Heavy Mirage Tank
+		GenericName: Tree
+		GenericVisibility: Enemy, Neutral
+		RequiresCondition: tree
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2_allies_upgrade_heavymiragetank, ra2gatech
+		Queue: Vehicle, RAVehicle
+		Description: actor-mgtk.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 240000
+	Repairable:
+		HpPerStep: 12000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 12
+	Armament:
+		Name: primary
+		Weapon: RA2HeavyMirageGun
+		LocalOffset: 1024,0,128
+		Recoil: 128
+		RecoilRecovery: 16
+		RequiresCondition: !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@elite:
+		Name: primary
+		Weapon: RA2HeavyMirageGun_elite
+		LocalOffset: 1024,0,128
+		Recoil: 128
+		RecoilRecovery: 16
+		RequiresCondition: rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Mirage:
+		RequiresCondition: !disabled
+		InitialDelay: 25
+		RevealDelay: 25
+		RevealOn: Attack, Move
+		MirageCondition: tree
+		DefaultTargetTypes: t08, t10, t03, t02
+	WithMuzzleOverlay:
+	AttackTurreted:
+	SelectionDecorations:
+	AutoTarget:
+	Selectable:
+	WithSpriteTurret:
+		RequiresCondition: !tree
+	WithFacingSpriteBody:
+		RequiresCondition: !tree
+	WithMirageSpriteBody:
+		Name: tree
+		RequiresCondition: tree
+		IsPlayerPalette: false
+		Palette: ra_temperat
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: MirageTankVoice
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine, ra2_allies_upgrade_tanklasertargeting
+
+yrbfrt:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@crush: ^VehicleCrusher
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@RA2AlliedAssaultSquadTraining: ^RA2AlliedAssaultSquadTraining
+	Inherits@RA2AlliedVanguardTraining: ^RA2AlliedVanguardTraining
+	Inherits@RA2AlliedEliteInfiltratorsTraining: ^RA2AlliedEliteInfiltratorsTraining
+	Inherits@RA2AlliedCompositeArmorPlatings: ^RA2AlliedCompositeArmorPlatings
+	Inherits@RA2AlliedReflectiveArmorPlatings: ^RA2AlliedReflectiveArmorPlatings
+	Inherits@RA2AlliedChromiumIonPulsePlatings: ^RA2AlliedChromiumIonPulsePlatings
+	Inherits@RA2AlliedPrismaticBarrier: ^RA2AlliedPrismaticBarrier
+	Inherits@RA2AlliedChronoEngine: ^RA2AlliedChronoEngine
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Battle Fortress
+	UpdatesPlayerStatistics:
+		OverrideActor: yrbfrt
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2gatech
+		Queue: Vehicle, RAVehicle
+		Description: template-opentopped.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	Passenger:
+		Weight: 4
+	Health:
+		HP: 320000
+	Repairable:
+		HpPerStep: 16000
+	ChangesHealth@SelfHealing:
+		Step: 128
+	Armor:
+		Type: Heavy
+	#Turreted:
+	#	TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 32
+	Armament:
+		Weapon: RA220mmrapid
+		MuzzleSequence: muzzle
+	RenderRangeCircle:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 6
+		InitialUnits: ra2e1,ra2e1,yrggi,yrggi,yrggi,yrggi
+		ExclusiveDeploy: true
+		DeployType: Battlefortress
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
+		PauseOnCondition: chronobeamed
+	RevealOnFire:
+		ArmamentNames: primary, garrisoned
+	AutoTarget:
+		AllowMovement: true
+	Selectable:
+		DecorationBounds: 1440, 1440, 0, -128
+		Class: yrbfrt
+	Voiced:
+		VoiceSet: BattleFortressVoice
+	RenderSprites:
+		Image: yrbfrt
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_compositearmorplating, ra2_allies_upgrade_reflectivearmorplating, ra2_allies_upgrade_ionpulseplating, ra2_allies_upgrade_prismaticbarrier, ra2_allies_upgrade_chronoengine
+	#RenderVoxels:
+	#	Image: yrbfrt
+
+yrbfrt.bot:
+	Inherits: yrbfrt
+	EditorOnlyTooltip:
+		Name: Battle Fortress (Empty)
+	Buildable:
+		Prerequisites: ra2gatech, ~botplayer
+	Cargo:
+		-InitialUnits:
+	ProductionCostMultiplier:
+		Multiplier: 50
+
+yrbfrt.bot2:
+	Inherits: yrbfrt
+	EditorOnlyTooltip:
+		Name: Chrono Battle Fortress
+	Buildable:
+		Prerequisites: ra2gatech, ~botplayer
+	Cargo:
+		InitialUnits: ra2cleg,ra2cleg,ra2cleg,ra2cleg,ra2cleg,ra2cleg
+	ProductionCostMultiplier:
+		Multiplier: 200
+
+##############################################
+#   Red Alert 2 Soviet Vehicles
+##############################################
+
+RA2SMCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Tooltip:
+		Name: Soviet Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~ra2nadept
+	Transforms:
+		IntoActor: ra2nacnst
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: SovietMCV
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmsovietra2
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+RA2HTNK:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
+	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Tooltip:
+		Name: Rhino Heavy Tank
+	Valued:
+		Cost: 850
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2naweap
+		Queue: Vehicle, RAVehicle
+		Description: template-mbt.description
+	Mobile:
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 130000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 17
+		Offset: -100,0,5
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2120mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+	Armament@PRIMARYRad:
+		Name: primary
+		Weapon: RA2120mm_rad
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+	Armament@PRIMARYFire:
+		Name: primary
+		Weapon: RA2120mm_fire
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells
+	Armament@PRIMARYTesla:
+		Name: primary
+		Weapon: RA2120mm_tesla
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: RA2120mm_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite  && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: RA2120mm_elite_rad
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+	Armament@PRIMARYELITEFire:
+		Name: primary
+		Weapon: RA2120mm_elite_fire
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells
+	Armament@PRIMARYELITETesla:
+		Name: primary
+		Weapon: RA2120mm_elite_tesla
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2SovietVehicleVoice
+	DeliversCash:
+		Payload: 450
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+RA2HTK:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Flak Track
+	UpdatesPlayerStatistics:
+		OverrideActor: ra2htk
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2naweap
+		Queue: Vehicle, RAVehicle
+		Description: actor-htk.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 95
+		TurnSpeed: 19
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2250
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Turreted:
+		TurnSpeed: 38
+		Offset: -150,0,100
+	Armament@AA:
+		Weapon: RA2FlakTrackAAGun
+		LocalOffset: 600,0,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AG:
+		Weapon: RA2FlakTrackGun
+		LocalOffset: 600,0,300
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@AAE:
+		Weapon: RA2FlakTrackAAGunE
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AGE:
+		Weapon: RA2FlakTrackGunE
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 50
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: ra2htk
+		PlayerPalette: playerra2
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: FlakTrackVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: ra2e2, ra2e2, ra2e2, ra2e2, ra2flakt
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+RA2APOC:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
+	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Tooltip:
+		Name: Apocalypse Tank
+	Valued:
+		Cost: 1750
+	DeliversCash:
+		Payload: 500
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2natech
+		Queue: Vehicle, RAVehicle
+		Description: actor-htnk.description
+	Mobile:
+		Speed: 55
+		TurnSpeed: 11
+	Passenger:
+		Weight: 4
+	Health:
+		HP: 350000
+	Repairable:
+		HpPerStep: 17500
+	ChangesHealth@SelfHealing:
+		Step: 140
+	Armor:
+		Type: Superheavy
+	Turreted:
+		TurnSpeed: 11
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2120xmm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+	Armament@PRIMARYRad:
+		Name: primary
+		Weapon: RA2120xmm_rad
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+	Armament@PRIMARYFire:
+		Name: primary
+		Weapon: RA2120xmm_fire
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells
+	Armament@PRIMARYTesla:
+		Name: primary
+		Weapon: RA2120xmm_tesla
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: RA2MammothTusk
+		LocalOffset: -85,90,340, -85,-90,340
+		LocalYaw: -100, 100
+		Recoil: 10
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: RA2120xmm_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite  && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+	Armament@PRIMARYELITERad:
+		Name: primary
+		Weapon: RA2120xmm_elite_rad
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+	Armament@PRIMARYELITEFire:
+		Name: primary
+		Weapon: RA2120xmm_elite_fire
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells
+	Armament@PRIMARYELITETesla:
+		Name: primary
+		Weapon: RA2120xmm_elite_tesla
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells
+	Armament@SECONDARYELITE:
+		Name: secondary
+		Weapon: RA2MammothTusk_elite
+		LocalOffset: -85,90,340, -85,-90,340
+		LocalYaw: -100, 100
+		Recoil: 10
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@ra2_soviets_upgrade_radiationshells:
+		Modifier: 125
+		Types: primary
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: ApocalypseTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+RA2V3:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+	Inherits@RA2SovietFireShells: ^RA2SovietFireShells
+	Inherits@RA2SovietTeslaShells: ^RA2SovietTeslaShells
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 80
+		Prerequisites: ~ra2naradr
+		Description: actor-v3.description
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: V3 Rocket Launcher
+	Health:
+		HP: 37500
+	Repairable:
+		HpPerStep: 1875
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Armament:
+		Weapon: V3Launch
+		LocalOffset: -1024,0,512
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Weapon: V3LaunchElite
+		LocalOffset: -1024,0,512
+		RequiresCondition: rank-elite
+	MissileSpawnerMasterCA@1:
+		Actors: ra2v3rocket
+		RespawnTicks: 125
+		LoadedCondition: ammo
+		RequiresCondition: !rank-elite
+		SpawnOffset: 0,640,300
+	MissileSpawnerMasterCA@2:
+		Actors: ra2v3rocketelite
+		RespawnTicks: 150
+		LoadedCondition: ammoelite
+		RequiresCondition: rank-elite
+		SpawnOffset: 0,640,300
+	FirepowerMultiplier@RANK-1:
+		Modifier: 125
+	FirepowerMultiplier@RANK-2:
+		Modifier: 150
+	FirepowerMultiplier@RANK-3:
+		Modifier: 175
+	FirepowerMultiplier@RANK-ELITE:
+		Modifier: 200
+	RangeMultiplier@ra2_soviets_upgrade_kirovgastroburners:
+		Modifier: 115
+		RequiresCondition: ra2_soviets_upgrade_kirovgastroburners
+	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovgastroburners:
+		Condition: ra2_soviets_upgrade_kirovgastroburners
+		Prerequisites: ra2_soviets_upgrade_kirovgastroburners
+	SelectionDecorations:
+	FireWarheadsOnDeath:
+		Weapon: V3Explode
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: V3LauncherVoice
+	WithFacingSpriteBody:
+		RequiresCondition: (ammo && !rank-elite) || (ammoelite && rank-elite) #ammo && ammoelite
+		Sequence: idle
+		Name: loaded
+	WithFacingSpriteBody@EMPTY:
+		RequiresCondition: (!ammo && !rank-elite) || (!ammoelite && rank-elite)
+		Sequence: empty-idle
+		Name: reloading
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovgastroburners
+
+RA2TTNK:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Tesla Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2naradr
+		Queue: Vehicle, RAVehicle
+		Description: actor-ttnk.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 15
+	Armament@PRIMARY:
+		Weapon: RA2TankBolt
+		LocalOffset: 600,200,200, 600,-200,200
+		Recoil: 175
+		RecoilRecovery: 35
+		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+	Armament@PRIMARY2:
+		Weapon: RA2TankBolt2
+		LocalOffset: 600,200,200, 600,-200,200
+		Recoil: 175
+		RecoilRecovery: 35
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+	Armament@PRIMARY3:
+		Weapon: RA2TankBolt3
+		LocalOffset: 600,200,200, 600,-200,200
+		Recoil: 175
+		RecoilRecovery: 35
+		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: Ra2TeslaTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_teslaoverload, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+RA2HARV:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2SovietArmorPlatings: ^RA2SovietArmorPlatings
+	Inherits@RA2SovietReactiveArmor: ^RA2SovietReactiveArmor
+	Inherits@RA2SovietTeslaDischargeArmor: ^RA2SovietTeslaDischargeArmor
+	Inherits@RA2GrinderTankTreads: ^RA2GrinderTankTreads
+	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: War Miner
+	Buildable:
+		Prerequisites: ~ra2naweap
+		Queue: Vehicle, RAVehicle
+		Description: actor-ra2harv.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Harvester:
+		Voice: Harvest
+		BaleLoadDelay: 2
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 32
+	Turreted:
+		TurnSpeed: 15
+	Armament@PRIMARY:
+		Weapon: RA220mmrapid
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: WarMinerVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills, Harvester
+		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+
+YRPCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	Tooltip:
+		Name: Yuri Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~yryggrnd
+	Transforms:
+		IntoActor: yrnacnst
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: YuriMCV
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmyuri
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines
+
+YRSMIN:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	ProvidesPrerequisite:
+		Prerequisite: yryarefn
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Slave Miner
+	Buildable:
+		BuildPaletteOrder: 10
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~yrygweap
+		Queue: Vehicle, RAVehicle
+		Description: actor-smin.description
+	Selectable:
+		Priority: 4
+		DecorationBounds: 1536, 1536
+		Class: yrsmin
+	Mobile:
+		Speed: 50
+		TurnSpeed: 10
+		Locomotor: heavywheeled
+		RequiresForceMoveCondition: deployed
+		RequiresCondition: !driver-dead && !being-captured && !beingterrordroned && !deployed
+		ImmovableCondition: driver-dead || deployed
+	Health:
+		HP: 200000
+	Repairable:
+		HpPerStep: 10000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Power:
+		Amount: 0
+	Armor:
+		Type: Heavy
+	Transforms:
+		IntoActor: yryarefn
+		Facing: 128
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+		PauseOnCondition: disabled || terrordroned
+		Voice: Deploy
+	SlaveMinerSpawnerMaster:
+		Actors: yrslav, yrslav, yrslav, yrslav
+		SlavesHaveFreeWill: true
+		SlaveDisposalOnKill: GiveSlavesToAttacker
+		SlaveDisposalOnOwnerChange: GiveSlavesToAttacker
+		SpawnOffset: 511,511,0, 511,511,0, 511,511,0, 511,511,0
+		PauseOnCondition: !deployed
+	ProvidesPrerequisite@yryarefn:
+		Prerequisite: yryarefn
+	Voiced:
+		VoiceSet: SlaveMinerVoice
+	DeliversCash:
+		Payload: 750
+	WithSpriteTurret:
+	Turreted:
+		TurnSpeed: 10
+	AttackTurreted:
+		Voice: Attack
+	Armament@primary:
+		Weapon: RA220mmrapid
+		LocalOffset: 640,0,384
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: yrsmin
+	ActorStatValues:
+		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills
+		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines
+
+yrsmin.empy:
+	Inherits: YRSMIN
+	-Buildable:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: yrsmin
+	-MapEditorData:
+
+YRYTNK:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	Inherits@RA2YuriGatlingPower: ^RA2YuriGatlingPower
+	Inherits@RA2YuriGatlingSpeed: ^RA2YuriGatlingSpeed
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Yuri Gatling Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~yrygweap
+		Queue: Vehicle, RAVehicle
+		Description: actor-ytnk.description
+	Mobile:
+		Speed: 90
+		TurnSpeed: 18
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2250
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 36
+	Armament@1:
+		Weapon: RA2GattlingMG1
+		RequiresCondition: !gatling
+		LocalOffset: 700,90,400, 700,-90,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@2:
+		Weapon: RA2GattlingMG2
+		RequiresCondition: gatling == 1
+		LocalOffset: 700,90,400, 700,-90,400
+		MuzzleSequence: muzzle-1
+		MuzzlePalette: ra2effect
+	Armament@3:
+		Weapon: RA2GattlingMG3
+		RequiresCondition: gatling > 1
+		LocalOffset: 700,90,400, 700,-90,400
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+	Armament@1AA:
+		Weapon: RA2GattlingMG1AA
+		RequiresCondition: !gatling
+		LocalOffset: 700,90,400, 700,-90,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@2AA:
+		Weapon: RA2GattlingMG2AA
+		RequiresCondition: gatling == 1
+		LocalOffset: 700,90,400, 700,-90,400
+		MuzzleSequence: muzzle-1
+		MuzzlePalette: ra2effect
+	Armament@3AA:
+		Weapon: RA2GattlingMG3AA
+		RequiresCondition: gatling > 1
+		LocalOffset: 700,90,400, 700,-90,400
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: GattlingTankVoice
+	FirepowerMultiplier@SpeedupCompensation:
+		Modifier: 75
+	RangeMultiplier@GatlingBuff:
+		Modifier: 108
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_gatlingpower, ra2_yuri_upgrade_gatlingspeed
+
+YRLTNK:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	Tooltip:
+		Name: Lasher Tank
+	Valued:
+		Cost: 600
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~yrygweap
+		Queue: Vehicle, RAVehicle
+		Description: template-mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 105
+		TurnSpeed: 21
+	Health:
+		HP: 70000
+	Repairable:
+		HpPerStep: 3500
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 23
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: RA2LasherCannon
+		LocalOffset: 1000,0,500
+		RequiresCondition: !ra2_yuri_upgrade_lashertoxic && !ra2_yuri_upgrade_lasherlaser && !rank-elite
+	Armament@ELITE:
+		Name: primary
+		Weapon: RA2LasherCannon_elite
+		LocalOffset: 1000,0,500
+		RequiresCondition: !ra2_yuri_upgrade_lashertoxic && !ra2_yuri_upgrade_lasherlaser && rank-elite
+	Armament@Toxic:
+		Name: primary
+		Weapon: RA2LasherToxicMortar
+		LocalOffset: 1000,0,500
+		RequiresCondition: ra2_yuri_upgrade_lashertoxic && !rank-elite
+	Armament@ToxicELITE:
+		Name: primary
+		Weapon: RA2LasherToxicMortar_elite
+		LocalOffset: 1000,0,500
+		RequiresCondition: ra2_yuri_upgrade_lashertoxic && rank-elite
+	Armament@Laser:
+		Name: primary
+		Weapon: RA2LasherLaser
+		LocalOffset: 1000,0,500
+		RequiresCondition: ra2_yuri_upgrade_lasherlaser && !rank-elite
+	Armament@LaserELITE:
+		Name: primary
+		Weapon: RA2LasherLaser_elite
+		LocalOffset: 1000,0,500
+		RequiresCondition: ra2_yuri_upgrade_lasherlaser && rank-elite
+	FirepowerMultiplier@ra2_yuri_upgrade_lashercannon:
+		Modifier: 200
+		RequiresCondition: ra2_yuri_upgrade_lashercannon
+	DamageMultiplier@ra2_yuri_upgrade_lasherarmor:
+		Modifier: 65
+		RequiresCondition: ra2_yuri_upgrade_lasherarmor
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lashercannon:
+		Condition: ra2_yuri_upgrade_lashercannon
+		Prerequisites: ra2_yuri_upgrade_lashercannon
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lashertoxic:
+		Condition: ra2_yuri_upgrade_lashertoxic
+		Prerequisites: ra2_yuri_upgrade_lashertoxic
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lasherlaser:
+		Condition: ra2_yuri_upgrade_lasherlaser
+		Prerequisites: ra2_yuri_upgrade_lasherlaser
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_lasherarmor:
+		Condition: ra2_yuri_upgrade_lasherarmor
+		Prerequisites: ra2_yuri_upgrade_lasherarmor
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: LasherTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_lashercannon, ra2_yuri_upgrade_lashertoxic, ra2_yuri_upgrade_lasherlaser, ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_lasherarmor
+
+YRTELE:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Magnetron
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2napsis
+		Queue: Vehicle, RAVehicle
+		Description: actor-tele.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 65
+		TurnSpeed: 13
+	Passenger:
+		Weight: 3
+	Health:
+		HP: 65000
+	Repairable:
+		HpPerStep: 3250
+	ChangesHealth@SelfHealing:
+		Step: 26
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 13
+	Armament@Normal:
+		Name: primary
+		Weapon: RA2Magnet
+		LocalOffset: 400,0,300
+		RequiresCondition: !rank-elite && !ra2_yuri_upgrade_supermagnets
+	Armament@Upgraded:
+		Name: secondary
+		Weapon: RA2MagnetAA
+		LocalOffset: 400,0,300
+		RequiresCondition: !rank-elite && ra2_yuri_upgrade_supermagnets
+	Armament@elite:
+		Name: primary
+		Weapon: RA2Magnet_elite
+		LocalOffset: 400,0,300
+		RequiresCondition: rank-elite && !ra2_yuri_upgrade_supermagnets
+	Armament@elite_aa:
+		Name: secondary
+		Weapon: RA2MagnetAA_elite
+		LocalOffset: 400,0,300
+		RequiresCondition: rank-elite && ra2_yuri_upgrade_supermagnets
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 50
+		RequiresCondition: !rank-elite
+	RangeMultiplier@ra2_yuri_upgrade_supermagnets:
+		Modifier: 125
+		RequiresCondition: ra2_yuri_upgrade_supermagnets
+	GrantConditionOnPrerequisite@ra2_yuri_upgrade_supermagnets:
+		Condition: ra2_yuri_upgrade_supermagnets
+		Prerequisites: ra2_yuri_upgrade_supermagnets
+	AttackTurreted:
+	WithSpriteTurret:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: MagnetronVoice
+	RenderRangeCircle:
+		RangeCircleType: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_supermagnets
+
+YRCAOS:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Chaos Drone
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ra2napsis
+		Queue: Vehicle, RAVehicle
+		Description: actor-caos.description
+	Mobile:
+		Speed: 140
+		TurnSpeed: 28
+	Health:
+		HP: 12500
+	Repairable:
+		HpPerStep: 625
+	ChangesHealth@SelfHealing:
+		Step: 5
+	Armor:
+		Type: Scout
+	Turreted:
+		TurnSpeed: 2000
+	Armament:
+		Weapon: RA2Dronegas
+		Recoil: 128
+		RecoilRecovery: 26
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: ChaosDroneVoice
+	HitShape:
+		Type: Circle
+			Radius: 128
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2Dronegas
+	FireWarheadsOnDeath@ChaosSurprise:
+		Weapon: RA2Dronegas
+		EmptyWeapon: RA2Dronegas
+		Chance: 100
+		RequiresCondition: !disabled
+	WithRangeCircle:
+		Range: 5000
+	DeliversCash:
+		Payload: 250
+	-TemporaryOwnerManager:
+	Capturable:
+		Types: thiefproof
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines
+
+YRMIND:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@MC: ^MCImmune
+	Inherits@RA2YuriScrapArmor: ^RA2YuriScrapArmor
+	Inherits@RA2YuriChaosGasEmitters: ^RA2YuriChaosGasEmitters
+	Inherits@RA2YuriPsionicShields: ^RA2YuriPsionicShields
+	Inherits@RA2YuriMindControlCap: ^RA2YuriMindControlCap
+	Inherits@RA2YuriPsychicRange: ^RA2YuriPsychicRange
+	Inherits@RA2YuriPsionicArmor: ^RA2YuriPsionicArmor
+	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	Inherits@RA2YuriToxicEngines: ^RA2YuriToxicEngines
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Master Mind
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~yrygtech
+		Queue: Vehicle, RAVehicle
+		Description: actor-mind.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 120
+		TurnSpeed: 24
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 2000
+	Armament@PRIMARY:
+		Weapon: RA2SMindControl
+	MindControllerCA:
+		ArmamentNames: primary
+		TicksToControl: 30
+		ExperienceFromControl: 100
+		Capacity: 0
+		ControllingCondition: slaves
+		RequiresCondition: !disabled
+	ChangesHealth@1:
+		Step: -10
+		Delay: 1
+		StartIfBelow: 101
+		RequiresCondition: (slaves > 3 && !ra2_yuri_upgrade_domination) || (slaves > 6 && ra2_yuri_upgrade_domination)
+	ChangesHealth@2:
+		Step: -20
+		Delay: 1
+		StartIfBelow: 101
+		RequiresCondition: (slaves > 4 && !ra2_yuri_upgrade_domination) || (slaves > 7 && ra2_yuri_upgrade_domination)
+	ChangesHealth@3:
+		Step: -30
+		Delay: 1
+		StartIfBelow: 101
+		RequiresCondition: (slaves > 5 && !ra2_yuri_upgrade_domination) || (slaves > 8 && ra2_yuri_upgrade_domination)
+	ChangesHealth@4:
+		Step: -40
+		Delay: 1
+		StartIfBelow: 101
+		RequiresCondition: (slaves > 6 && !ra2_yuri_upgrade_domination) || (slaves > 9 && ra2_yuri_upgrade_domination)
+	ChangesHealth@5:
+		Step: -50
+		Delay: 1
+		StartIfBelow: 101
+		RequiresCondition: (slaves > 7 && !ra2_yuri_upgrade_domination) || (slaves > 10 && ra2_yuri_upgrade_domination)
+	ChangesHealth@6:
+		Step: -60
+		Delay: 1
+		StartIfBelow: 101
+		RequiresCondition: (slaves > 8 && !ra2_yuri_upgrade_domination) || (slaves > 11 && ra2_yuri_upgrade_domination)
+	ChangesHealth@7:
+		Step: -70
+		Delay: 1
+		StartIfBelow: 101
+		RequiresCondition: (slaves > 9 && !ra2_yuri_upgrade_domination) || (slaves > 12 && ra2_yuri_upgrade_domination)
+	RangedGpsProvider@ra2_yuri_upgrade_psychicvision:
+		Range: 15000
+		RequiresCondition: ra2_yuri_upgrade_psychicvision
+	ReloadArmamentsBar:
+	RenderRangeCircle:
+		RangeCircleType: mindcontrol
+		Color: 663399b0
+	AutoTarget:
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, -128
+	VoiceAnnouncement@Overload:
+		RequiresCondition: (slaves > 3 && !ra2_yuri_upgrade_domination) || (slaves > 6 && ra2_yuri_upgrade_domination)
+		Voice: Overload
+		ValidRelationships: None
+	Voiced:
+		VoiceSet: MasterMindVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_yuri_upgrade_scraparmor, ra2_yuri_upgrade_chaosgasemitters, ra2_yuri_upgrade_psionicshields, ra2_yuri_upgrade_toxicengines, ra2_yuri_upgrade_domination, ra2_yuri_upgrade_psychicrange, ra2_yuri_upgrade_psionicarmor
+
+############################################
+#   Red Alert 2 Naval
+############################################
+
+ra2lcrf:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Amphibious Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2gayard
+		Queue: Naval, RANaval
+		Description: Amphibious transport for ground units.
+	Mobile:
+		Speed: 75
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 450
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 15
+		PassengerFacing: 0
+	Hovers:
+	Voiced:
+		VoiceSet: AlliedLander
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2sapc:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Amphibious Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra2nayard
+		Queue: Naval, RANaval
+		Description: Amphibious transport for ground units.
+	Mobile:
+		Speed: 75
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 450
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 15
+		PassengerFacing: 0
+	Hovers:
+	Voiced:
+		VoiceSet: SovietLander
+	RenderSprites:
+		PlayerPalette: playerra2
+
+yrhovr:
+	Inherits: ^BoatUnit
+	Inherits@cargo: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Hover Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~yrygyard
+		Queue: Naval, RANaval
+		Description: Amphibious transport for ground units.
+	Mobile:
+		Speed: 75
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 450
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 15
+		PassengerFacing: 0
+	Hovers:
+	Voiced:
+		VoiceSet: YuriLander
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ra2leopard:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Leopard
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template-mbt.description
+	Mobile:
+		Speed: 70
+		TurnSpeed: 16
+	Health:
+		HP: 230000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 16 #3
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: RA2120mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2120mm_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@machinegun:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,8,80
+		MuzzleSequence: muzzle-3
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 450
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_heavyarmorplatings
+
+ra2_c_ifv:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Machinegunner IFV
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template-mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2GattlingMG2
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: primary
+		Weapon: RA2GattlingMG1AA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@eliteAA:
+		Name: primary
+		Weapon: RA2GattlingMG2AA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1280,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: playerra2
+ra2_c_hum:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Humvee
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template-mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2GattlingMG2
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: playerra2
+
+# Civilian Army Vehicles
+ra2_c_hum2:
+	Inherits: ra2_c_hum
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Civilian Humvee
+ra2_c_abram:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Civilian MBT
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~disable
+		Queue: Vehicle, RAVehicle
+		Description: template-mbt.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 16
+	Health:
+		HP: 190000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 16 #3
+		Offset: -100,0,5
+	Armament:
+		Name: primary
+		Weapon: RA2120mm
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2120mm_elite
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1024,0,80
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@machinegun:
+		Name: primary
+		Weapon: RA2GattlingMG1
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,8,80
+		MuzzleSequence: muzzle-3
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: RA2AlliesVehicleVoice
+	DeliversCash:
+		Payload: 450
+	RenderSprites:
+		PlayerPalette: playerra2
+
+##############################################
+#   Red Alert 2 Civilian Structures (Garrisonable)
+##############################################
+ra2_car:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2car
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_car_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_car_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_car_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2car
+		PlayerPalette: playerra2
+
+ra2_car_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2car
+		PlayerPalette: playerra2
+
+ra2_taxi:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2taxi
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_taxi_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_taxi_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_taxi_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2taxi
+		PlayerPalette: playerra2
+
+ra2_taxi_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2taxi
+		PlayerPalette: playerra2
+
+ra2_euroc:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2euroc
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_euroc_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_euroc_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_euroc_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2euroc
+		PlayerPalette: playerra2
+
+ra2_euroc_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2euroc
+		PlayerPalette: playerra2
+
+ra2_limo:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2limo
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_limo_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_limo_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_limo_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2limo
+		PlayerPalette: playerra2
+
+ra2_limo_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2limo
+		PlayerPalette: playerra2
+ra2_cop:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2cop
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_cop_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_cop_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_cop_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cop
+		PlayerPalette: playerra2
+
+ra2_cop_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cop
+		PlayerPalette: playerra2
+ra2_bus:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2bus
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_bus_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_bus_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_bus_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bus
+		PlayerPalette: playerra2
+
+ra2_bus_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bus
+		PlayerPalette: playerra2
+ra2_cona:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2cona
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_cona_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_cona_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_cona_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cona
+		PlayerPalette: playerra2
+
+ra2_cona_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2cona
+		PlayerPalette: playerra2
+ra2_suvb:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2suvb
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_suvb_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_suvb_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_suvb_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvb
+		PlayerPalette: playerra2
+
+ra2_suvb_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvb
+		PlayerPalette: playerra2
+
+ra2_suvw:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2suvw
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_suvw_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_suvw_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_suvw_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvw
+		PlayerPalette: playerra2
+
+ra2_suvw_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2suvw
+		PlayerPalette: playerra2
+ra2_stang:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2stang
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_stang_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_stang_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_stang_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2stang
+		PlayerPalette: playerra2
+
+ra2_stang_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2stang
+		PlayerPalette: playerra2
+ra2_trucka:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2trucka
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_trucka_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_trucka_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_trucka_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2trucka
+		PlayerPalette: playerra2
+
+ra2_trucka_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2trucka
+		PlayerPalette: playerra2
+
+ra2_truckb:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2truckb
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_truckb_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_truckb_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_truckb_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2truckb
+		PlayerPalette: playerra2
+
+ra2_truckb_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2truckb
+		PlayerPalette: playerra2
+ra2_ptruck:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ptruck
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ptruck_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ptruck_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ptruck_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ptruck
+		PlayerPalette: playerra2
+
+ra2_ptruck_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ptruck
+		PlayerPalette: playerra2
+ra2_ambu:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ambu
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ambu_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ambu_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ambu_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ambu
+		PlayerPalette: playerra2
+
+ra2_ambu_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ambu
+		PlayerPalette: playerra2
+ra2_bcab:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2bcab
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_bcab_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_bcab_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_bcab_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bcab
+		PlayerPalette: playerra2
+
+ra2_bcab_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2bcab
+		PlayerPalette: playerra2
+
+ra2_ycab:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ycab
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ycab_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ycab_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ycab_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ycab
+		PlayerPalette: playerra2
+
+ra2_ycab_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ycab
+		PlayerPalette: playerra2
+ra2_ddbx:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2ddbx
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_ddbx_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_ddbx_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_ddbx_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ddbx
+		PlayerPalette: playerra2
+
+ra2_ddbx_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2ddbx
+		PlayerPalette: playerra2
+ra2_jeep:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: yrjeep
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_jeep_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_jeep_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_jeep_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: yrjeep
+		PlayerPalette: playerra2
+
+ra2_jeep_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: yrjeep
+		PlayerPalette: playerra2
+ra2_tractor:
+	Inherits: ^CivilianVehicle
+	RenderSprites:
+		Image: ra2tractor
+		PlayerPalette: playerra2
+	TransformOnCapture:
+		IntoActor: ra2_tractor_demo
+		CaptureTypes: bombcar
+	TransformOnCapture@driveby:
+		IntoActor: ra2_tractor_driveby
+		CaptureTypes: driveby
+	Capturable:
+		Types: bombcar, driveby
+		ValidRelationships: Enemy, Neutral, Ally
+
+ra2_tractor_demo:
+	Inherits: ^CivilianSuicideVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2tractor
+		PlayerPalette: playerra2
+
+ra2_tractor_driveby:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	RenderSprites:
+		Image: ra2tractor
+		PlayerPalette: playerra2
+
+# RA2 New Promotions
+
+# RA2UNIONTANK:
+# 	Inherits: ^Tank
+# 	Inherits@Template: ^HighTechTankTemplate
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@vo: ^AttackTurretedVoice
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+# 	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+# 	Inherits@armor: ^RA2SovietArmorPlatings
+# 	Valued:
+# 		Cost: 1750
+# 	Tooltip:
+# 		Name: Union Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 60
+# 		Prerequisites: ~ra2natech
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor-htnk.description
+# 	Mobile:
+# 		Speed: 55
+# 		TurnSpeed: 11
+# 	Passenger:
+# 		Weight: 4
+# 	Health:
+# 		HP: 350000
+# 	Repairable:
+# 		HpPerStep: 17500
+# 	ChangesHealth@SelfHealing:
+# 		Step: 140
+# 	Armor:
+# 		Type: Superheavy
+# 	Turreted:
+# 		TurnSpeed: 11
+# 		Offset: 50,0,150
+# 	Armament@PRIMARY:
+# 		Name: primary
+# 		Weapon: RA2120xmm
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells
+# 	Armament@PRIMARYRAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+# 	Armament@SECONDARY:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: !rank-elite
+# 	Armament@PRIMARYELITE:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && !ra2_soviets_upgrade_radiationshells
+# 	Armament@PRIMARYELITERAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+# 	Armament@SECONDARYELITE:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk_elite
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: rank-elite
+# 	AttackTurreted:
+# 	WithMuzzleOverlay:
+# 	WithSpriteTurret:
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	Voiced:
+# 		VoiceSet: ApocalypseTankVoice
+# 	DeliversCash:
+# 		Payload: 900
+# 	RenderSprites:
+# 		PlayerPalette: playerra2
+# 	FirepowerMultiplier@RadShells:
+# 		Types: primary
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_heavyarmorplatings
+# 	RenderSprites:
+# 		Image: ra2uniontank
+# 		PlayerPalette: player_rgba
+
+# RA2SUPERAPOC:
+# 	Inherits: ^Tank
+# 	Inherits@Template: ^HighTechTankTemplate
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@vo: ^AttackTurretedVoice
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+# 	Inherits@RA2SovietRadShells: ^RA2SovietRadShells
+# 	Inherits@armor: ^RA2SovietArmorPlatings
+# 	Valued:
+# 		Cost: 1750
+# 	Tooltip:
+# 		Name: Apocalypse Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 60
+# 		Prerequisites: ~ra2natech
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor-htnk.description
+# 	Mobile:
+# 		Speed: 55
+# 		TurnSpeed: 11
+# 	Passenger:
+# 		Weight: 4
+# 	Health:
+# 		HP: 350000
+# 	Repairable:
+# 		HpPerStep: 17500
+# 	ChangesHealth@SelfHealing:
+# 		Step: 140
+# 	Armor:
+# 		Type: Superheavy
+# 	Turreted:
+# 		TurnSpeed: 11
+# 		Offset: 50,0,150
+# 	Armament@PRIMARY:
+# 		Name: primary
+# 		Weapon: RA2120xmm
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells
+# 	Armament@PRIMARYRAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+# 	Armament@SECONDARY:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: !rank-elite
+# 	Armament@PRIMARYELITE:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && !ra2_soviets_upgrade_radiationshells
+# 	Armament@PRIMARYELITERAD:
+# 		Name: primary
+# 		Weapon: RA2120xmm_elite_rad
+# 		Recoil: 128
+# 		RecoilRecovery: 38
+# 		LocalOffset: 768,85,90, 768,-85,90
+# 		MuzzleSequence: muzzle-2
+# 		MuzzlePalette: ra2effect
+# 		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+# 	Armament@SECONDARYELITE:
+# 		Name: secondary
+# 		Weapon: RA2MammothTusk_elite
+# 		LocalOffset: -85,90,340, -85,-90,340
+# 		LocalYaw: -100, 100
+# 		Recoil: 10
+# 		RequiresCondition: rank-elite
+# 	AttackTurreted:
+# 	WithMuzzleOverlay:
+# 	WithSpriteTurret:
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	Voiced:
+# 		VoiceSet: ApocalypseTankVoice
+# 	DeliversCash:
+# 		Payload: 900
+# 	RenderSprites:
+# 		PlayerPalette: playerra2
+# 	ActorStatValues:
+# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_heavyarmorplatings
+# 	RenderSprites:
+# 		Image: ra2superapocalypse
+# 		PlayerPalette: player_rgba
+
+# ra2katyusha:
+# 	Inherits: ^Vehicle
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@Template: ^ArtilleryTemplate
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+# 	Inherits@vo: ^AttackFrontalVoice
+# 	Inherits@EMP: ^FrontalEMP
+# 	Buildable:
+# 		Queue: Vehicle, RAVehicle
+# 		BuildPaletteOrder: 80
+# 		Prerequisites: ~ra2natech
+# 		Description: actor-latin_burrito.description
+# 	Valued:
+# 		Cost: 1200
+# 	Tooltip:
+# 		Name: Katyusha Launcher
+# 	Health:
+# 		HP: 35000
+# 	Repairable:
+# 		HpPerStep: 1750
+# 	ChangesHealth@SelfHealing:
+# 		Step: 14
+# 	Armor:
+# 		Type: Medium
+# 	Mobile:
+# 		Speed: 80
+# 		TurnSpeed: 16
+# 	Armament:
+# 		Weapon: RA2RBurritoRocket
+# 		LocalOffset: -250,300,125, -250,150,250, -250,-150,375, -250,-300,500, -250,300,125, -250,150,250, -250,-150,375, -250,-300,500
+# 	Armament@PRIMARYELITE:
+# 		Weapon: RA2RBurritoRocket
+# 		LocalOffset: -250,-300,500, -250,-150,375, -250,150,250, -250,300,125, -250,-300,500, -250,-150,375, -250,150,250, -250,300,125
+# 		RequiresCondition: rank-elite
+# 	FirepowerMultiplier@RANK-1:
+# 		Modifier: 125
+# 	FirepowerMultiplier@RANK-2:
+# 		Modifier: 150
+# 	FirepowerMultiplier@RANK-3:
+# 		Modifier: 175
+# 	FirepowerMultiplier@RANK-ELITE:
+# 		Modifier: 200
+# 	AttackFrontal:
+# 		FacingTolerance: 0
+# 	SelectionDecorations:
+# 	FireWarheadsOnDeath:
+# 		Weapon: V3Explode
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	Voiced:
+# 		VoiceSet: TSVehicle
+# 	WithFacingSpriteBody:
+# 	DeliversCash:
+# 		Payload: 500
+# 	ActorStatValues:
+# 		Upgrades:
+# 	RenderSprites:
+# 		PlayerPalette: player_rgba
+# 		Image: ra2katyusha
+
+# ra2shilka:
+# 	Inherits: ^Vehicle
+# 	Inherits@Template: ^SupportVehicleTemplate
+# 	Inherits@EXP: ^GainsExperienceTD
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@AntiInf: ^PrioritizeInfantry
+# 	Valued:
+# 		Cost: 1600
+# 	Tooltip:
+# 		Name: Shilka
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Buildable:
+# 		BuildPaletteOrder: 20
+# 		Prerequisites: ~ra2natech
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor-jeep.description
+# 	Mobile:
+# 		Speed: 75
+# 		TurnSpeed: 15
+# 	Health:
+# 		HP: 125000
+# 	Repairable:
+# 		HpPerStep: 6250
+# 	ChangesHealth@SelfHealing:
+# 	ChangesHealth@SelfHealing:
+# 		Step: 11
+# 	Turreted:
+# 		TurnSpeed: 30
+# 		Offset: -100,0,300
+# 	Armament:
+# 		Weapon: HeavyAATankCannontkm
+# 		Recoil: 85
+# 		LocalOffset: 800,80,360, 800,-80,360
+# 		MuzzleSequence: muzzle
+# 	FirepowerMultiplier@GattlingSpeed1:
+# 		RequiresCondition: ammo == 3
+# 		Modifier: 125
+# 	FirepowerMultiplier@GattlingSpeed2:
+# 		RequiresCondition: ammo == 2
+# 		Modifier: 133
+# 	FirepowerMultiplier@GattlingSpeed3:
+# 		RequiresCondition: ammo <= 1
+# 		Modifier: 150
+# 	ReloadDelayMultiplier@GattlingSpeed1:
+# 		RequiresCondition: ammo == 3
+# 		Modifier: 90
+# 	ReloadDelayMultiplier@GattlingSpeed2:
+# 		RequiresCondition: ammo == 2
+# 		Modifier: 70
+# 	ReloadDelayMultiplier@GattlingSpeed3:
+# 		RequiresCondition: ammo <= 1
+# 		Modifier: 50
+# 	RangeMultiplier@GattlingSpeed1:
+# 		RequiresCondition: ammo == 3
+# 		Modifier: 105
+# 	RangeMultiplier@GattlingSpeed2:
+# 		RequiresCondition: ammo == 2
+# 		Modifier: 110
+# 	RangeMultiplier@GattlingSpeed3:
+# 		RequiresCondition: ammo <= 1
+# 		Modifier: 115
+# 	WithMuzzleOverlay:
+# 	AttackTurreted:
+# 	FireWarheadsOnDeath:
+# 		Weapon: UnitExplodeSmall
+# 	Voiced:
+# 		VoiceSet: RA2SovietVehicleVoice
+# 	ActorStatValues:
+# 		Upgrades:
+# 	WithSpriteTurret:
+# 	RenderSprites:
+# 		Image: ra2shilka
+# 		PlayerPalette: player_rgba
+
+# ra2advanceteslatank:
+# 	Inherits: ^Tank
+# 	Inherits@Template: ^FireSupportTemplate
+# 	Inherits@anim: ^RA2Vehicle
+# 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+# 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+# 	Inherits@vo: ^AttackTurretedVoice
+# 	Inherits@EMP: ^TurretEMP
+# 	Inherits@SHADOWS: ^Shadows
+# 	Inherits@TeslaTargeting: ^PrioritizeTesla
+# 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
+# 	Inherits@RA2TeslaOverload: ^RA2TeslaOverload
+# 	Valued:
+# 		Cost: 1800
+# 	Tooltip:
+# 		Name: Advance Tesla Tank
+# 	Buildable:
+# 		BuildPaletteOrder: 60
+# 		Prerequisites: ~ra2naradr
+# 		Queue: Vehicle, RAVehicle
+# 		Description: actor-ttnk.description
+# 	Mobile:
+# 		Speed: 75
+# 		TurnSpeed: 15
+# 	Health:
+# 		HP: 75000
+# 	Repairable:
+# 		HpPerStep: 3750
+# 	ChangesHealth@SelfHealing:
+# 		Step: 30
+# 	Armor:
+# 		Type: Medium
+# 	Turreted:
+# 		TurnSpeed: 15
+# 		Offset: 0,0,300
+# 	Armament@PRIMARY:
+# 		Weapon: RA2TankBolt
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: !rank-elite && !arctesla
+# 	Armament@PRIMARY2:
+# 		Weapon: RA2TankBolt2
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: !rank-elite && arctesla
+# 	Armament@PRIMARY3:
+# 		Weapon: RA2TankBolt3
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: !rank-elite && arctesla
+# 	Armament@ELITE:
+# 		Weapon: RA2TankBoltE
+# 		LocalOffset: 600,200,200, 600,-200,200
+# 		Recoil: 170
+# 		RecoilRecovery: 42
+# 		RequiresCondition: rank-elite
+# 	AttackTurreted:
+# 	SelectionDecorations:
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280
+# 	WithSpriteTurret:
+# 	Voiced:
+# 		VoiceSet: Ra2TeslaTankVoice
+# 	RenderSprites:
+# 		Image: ra2advanceteslatank
+# 		PlayerPalette: player_rgba
+# 	ActorStatValues:
+# 		Upgrades: uparctesla, ra2_soviets_upgrade_terrordronesurprise
+
+# ra2mig:
+# 	Inherits: ^RANeutralPlane
+# 	Inherits@Template: ^FighterTemplate
+# 	Inherits@exp: ^GainsExperienceRA
+# 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+# 	Inherits@AntiInf: ^PrioritizeInfantry
+# 	Inherits@AntiAir: ^PrioritizeAir
+# 	Inherits@eject: ^AircraftEjectOnDeath
+# 	Buildable:
+# 		Queue: Aircraft, RAAircraft
+# 		BuildPaletteOrder: 30
+# 		Prerequisites: ~ra2naairf
+# 		Description: actor-yak.description
+# 	Valued:
+# 		Cost: 3200
+# 	Tooltip:
+# 		Name: Mig
+# 	UpdatesPlayerStatistics:
+# 		AddToArmyValue: true
+# 	Health:
+# 		HP: 85000
+# 	ChangesHealth@SelfHealing:
+# 		Step: 34
+# 	Armament@BOMBS:
+# 		Weapon: BlackEagleMissiles
+# 		LocalOffset: 0,-256,-32, 0,256,-32
+# 	Armament@PRIMARY:
+# 		Weapon: YakChainGun
+# 		LocalOffset: 256,-213,0
+# 		MuzzleSequence: muzzle
+# 		PauseOnCondition: !ammo
+# 	Armament@SECONDARY:
+# 		Name: secondary
+# 		Weapon: YakChainGun
+# 		LocalOffset: 256,213,0
+# 		MuzzleSequence: muzzle
+# 		PauseOnCondition: !ammo
+# 	FirepowerMultiplier@doublecannonsandbombs:
+# 		Modifier: 25
+# 	AttackAircraft:
+# 		FacingTolerance: 100
+# 	Aircraft:
+# 		TurnSpeed: 11
+# 		Speed: 170
+# 	SelectionDecorations:
+# 	WithMuzzleOverlay:
+# 	Contrail:
+# 		Offset: -853,0,0
+# 	SpawnActorOnDeath:
+# 		Actor: ra2mig.husk
+# 	EjectOnDeath:
+# 		PilotActor: tkmrifleman
+# 	LeavesTrails:
+# 		Offsets: -853,0,0
+# 		MovingInterval: 2
+# 		Image: smokey
+# 		StationaryInterval: 2
+# 		SpawnAtLastPosition: False
+# 		TrailWhileStationary: True
+# 		Type: CenterPosition
+# 		RequiresCondition: enable-smoke
+# 	Selectable:
+# 		DecorationBounds: 1280, 1280, 0, 128
+# 	Voiced:
+# 		VoiceSet: TSVehicle
+# 	AmmoPool:
+# 		Ammo: 8
+# 		AmmoCondition: ammo
+# 	ReloadAmmoPool:
+# 		Delay: 8
+# 		Count: 1
+# 	WithAmmoPipsDecoration:
+# 		Position: BottomLeft
+# 		RequiresSelection: True
+# 		PipCount: 6
+# 	GrantConditionOnDamageState@SmokeTrail:
+# 		Condition: enable-smoke
+# 	RenderSprites:
+# 		Image: ra2mig
+# 		PlayerPalette: player_rgba
+
+# ra2mig.husk:
+# 	Inherits: ^PlaneHusk
+# 	Tooltip:
+# 		Name: Mig
+# 	Contrail:
+# 		Offset: -853,0,0
+# 	Aircraft:
+# 		TurnSpeed: 20
+# 		Speed: 150
+# 	LeavesTrails:
+# 		Offsets: -853,0,0
+# 		MovingInterval: 2
+# 		Image: smokey
+# 		StationaryInterval: 2
+# 		SpawnAtLastPosition: False
+# 		TrailWhileStationary: True
+# 		Type: CenterPosition
+# 	RenderSprites:
+# 		Image: ra2mig
+# 		PlayerPalette: raplayer
