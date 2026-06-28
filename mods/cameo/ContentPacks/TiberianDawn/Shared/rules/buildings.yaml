@@ -1,0 +1,203 @@
+NUKE:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@sell: ^TDSpawnActorsOnSell
+	HitShape:
+		TargetableOffsets: 630,299,0
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Power Plant
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~fact
+		Queue: Building, RABuilding
+		Description: actor-nuke.description
+	Building:
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 150000
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+	Power:
+		Amount: 125
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: building ##########
+	ProvidesPrerequisite@buildingname:
+
+NUK2:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@sell: ^TDSpawnActorsOnSell
+	HitShape:
+		TargetableOffsets: 630,299,0
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Advanced Power Plant
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~fact, anytdhq
+		Queue: Building, RABuilding
+		Description: actor-nuk2.description
+	Building:
+		Footprint: xX xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 300000
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	Power:
+		Amount: 250
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: building ##########
+	ProvidesPrerequisite@powerplant:
+		Prerequisite: nuke
+
+SILO:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^2x1Shape
+	Inherits@storage: ^StoresResources
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Tiberium Silo
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~fact, proc
+		Queue: Defence, RADefence
+		Description: template-silo.description
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	-GivesBuildableArea:
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 4c0
+	WithBuildingBib:
+		HasMinibib: true
+	-WithSpriteBody:
+	WithResourceLevelSpriteBody:
+		Sequence: stages
+	Power:
+		Amount: -10
+	SelectionDecorations:
+	-AcceptsDeliveredCash:
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+
+SBAG:
+	Inherits: ^Wall
+	Valued:
+		Cost: 50
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Sandbag Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~sandbagbarrier
+		Queue: Defence, RADefence
+		Description: actor-sbag.description
+	Armor:
+		Type: Medium
+	Health:
+		HP: 50000
+	LineBuild:
+		NodeTypes: sandbag
+	LineBuildNode:
+		Types: sandbag
+	WithWallSpriteBody:
+		Type: sandbag
+
+CYCL:
+	Inherits: ^Wall
+	Valued:
+		Cost: 75
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Chain Link Fence
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~chainlinkfence
+		Queue: Defence, RADefence
+		Description: actor-cycl.description
+	Armor:
+		Type: Heavy
+	Health:
+		HP: 75000
+	LineBuild:
+		NodeTypes: chain
+	LineBuildNode:
+		Types: chain
+	WithWallSpriteBody:
+		Type: chain
+
+FENC:
+	Inherits: ^Wall
+	Valued:
+		Cost: 25
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Wire Fence
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~wirefence
+		Queue: Defence, RADefence
+		Description: actor-cycl.description
+	Armor:
+		Type: Light
+	Health:
+		HP: 25000
+	LineBuild:
+		NodeTypes: fence
+	LineBuildNode:
+		Types: fence
+	WithWallSpriteBody:
+		Type: fence
+	RenderSprites:
+		Palette: td_temperat
+
+BRIK:
+	Inherits: ^Wall
+	Valued:
+		Cost: 200
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Concrete Barrier
+	Buildable:
+		BuildPaletteOrder: 0
+		Prerequisites: ~concretebarrier
+		Queue: Defence, RADefence
+		Description: actor-brik.description
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	LineBuild:
+		NodeTypes: concrete
+	LineBuildNode:
+		Types: concrete
+	WithWallSpriteBody:
+		Type: concrete
