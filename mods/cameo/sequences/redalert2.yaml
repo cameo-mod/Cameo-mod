@@ -6608,9 +6608,11 @@ ra2hmgtk:
 	Defaults:
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
 		Filename: neomiragetankchassis.png
 	turret:
+		Scale: 1
 		Facings: 64
 		Filename: neomiragetankturret.png
 	muzzle:
@@ -8083,11 +8085,11 @@ ra2uniontank:
 		Filename: UnionTankBody.png
 	idle:
 		Facings: 32
-		Scale: 0.4
+		Scale: 1
 	turret:
 		Filename: UnionTankTurret.png
 		Facings: 32
-		Scale: 0.25
+		Scale: 1
 	icon:
 		Filename: ra2apocicon.shp
 	muzzle:
@@ -8102,11 +8104,11 @@ ra2superapocalypse:
 		Filename: superapocalypsebody.png
 	idle:
 		Facings: 32
-		Scale: 0.4
+		Scale: 1
 	turret:
 		Filename: superapocalypsetur.png
 		Facings: 32
-		Scale: 0.25
+		Scale: 1
 	icon:
 		Filename: ra2apocicon.shp
 	muzzle:
@@ -8118,12 +8120,14 @@ ra2superapocalypse:
 
 ra2katyusha:
 	Inherits: ^RA2GatlingMuzzle
+		Scale: 1
 	Defaults:
 		Filename: ra2katyusha.png
 		Scale: 0.2
 	idle:
+		Scale: 1
 		Facings: 32
-		Offset: 0,20
+		Offset: 0,4
 	icon:
 		Filename: tkmkatyushaicon.png
 
@@ -8131,11 +8135,11 @@ ra2shilka:
 	idle:
 		Filename: ra2shilkabody.png
 		Facings: 32
-		Scale: 0.25
+		Scale: 1
 	turret:
 		Filename: ra2shilkaturret.png
 		Facings: 32
-		Scale: 0.25
+		Scale: 1
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
@@ -8149,11 +8153,11 @@ ra2advanceteslatank:
 	idle:
 		Filename: ra2advanceteslatankbody.png
 		Facings: 32
-		Scale: 0.25
+		Scale: 1
 	turret:
 		Filename: ra2advanceteslatanktur.png
 		Facings: -32
-		Scale: 0.25
+		Scale: 1
 	icon:
 		Filename: ra2ttnkicon.shp
 
@@ -8162,6 +8166,7 @@ ra2mig:
 		Filename: ra2mig.png
 		Scale: 0.15
 	idle:
+		Scale: 1
 		Facings: -32
 		InterpolatedFacings: 64
 	muzzle:

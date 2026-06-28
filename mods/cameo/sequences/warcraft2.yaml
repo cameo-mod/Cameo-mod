@@ -808,28 +808,35 @@ wc2_human_sunwell:
 		Filename: wc2_sunwell_icon.png
 	make:
 		Filename: AllianceSunwell2mk.png
-		Scale: 0.5
+		Scale: 1
 		Length: *
 		Tick: 110
 	idle:
+		Scale: 1
 		Length: 4
 		Tick: 200
 	damaged-idle:
+		Scale: 1
 		Length: 4
 		Tick: 200
 	critical-idle:
+		Scale: 1
 		Length: 4
 		Tick: 200
 	water:
+		Scale: 1
 		Length: 4
 		Tick: 200
 	damaged-water:
+		Scale: 1
 		Length: 4
 		Tick: 200
 	critical-water:
+		Scale: 1
 		Length: 4
 		Tick: 200
 	dead:
+		Scale: 1
 		Length: *
 		Tick: 5
 
@@ -1059,63 +1066,79 @@ wc2_human_footman:
 
 wc2_human_footman2:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_footman2_icon.png
 	Defaults:
 		Scale: 0.8
 		Filename: AllianceFootman2.png
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 8
 	die:
+		Scale: 1
 		Start: 128
 		Length: 10
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
 
 wc2_human_militia2:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_Millitia_icon.png
 	Defaults:
 		Scale: 0.8
 		Filename: AllianceMilitiaFinal2.png
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 8
 	idle2:
+		Scale: 1
 		Start: 120
 		Length: 8
 	die:
+		Scale: 1
 		Start: 128
 		Length: 8
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
 	harvest:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
 		Tick: 80
 	dock:
+		Scale: 1
 		Start: 0
 		Facings: 8
 	dock-loop:
+		Scale: 1
 		Start: 0
 		Facings: 8
 
@@ -1272,48 +1295,60 @@ wc2_human_elven_ranger:
 
 wc2_human_high_elf_archer:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_high_elf_archer_icon.png
 	Defaults:
 		Filename: AllianceHighElfArcher2.png
 		Scale: 0.8
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 6
 	die:
+		Scale: 1
 		Start: 126
 		Length: 9
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
 
 wc2_human_rifleman:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_Rifleman_icon.png
 	Defaults:
 		Scale: 0.8
 		Filename: AllianceRifleman2.png
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 8
 	die:
+		Scale: 1
 		Start: 128
 		Length: 8
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
@@ -1525,26 +1560,32 @@ wc2_human_paladin:
 
 wc2_human_knight2:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_knight2_icon.png
 	Defaults:
 		Scale: 0.8
 		Filename: AllianceKnight2.png
 	stand:
+		Scale: 1
 		Start: 0
 		Length: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 8
 	die:
+		Scale: 1
 		Start: 128
 		Length: 10
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
@@ -1602,24 +1643,30 @@ wc2_human_demolitionsquad:
 
 wc2_human_mortarteam2:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_mortar_team_icon.png
 	Defaults:
 		Scale: 0.8
 		Filename: AllianceMortarTeam2.png
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 8
 	die:
+		Scale: 1
 		Start: 128
 		Length: 6
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
@@ -1673,48 +1720,60 @@ wc2_human_mage:
 
 wc2_human_high_elf_priest:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_high_elf_priest_icon.png
 	Defaults:
 		Filename: AlliancePriest2.png
 		Scale: 0.7
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 8
 	die:
+		Scale: 1
 		Start: 128
 		Length: 10
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8
 
 wc2_human_high_elf_sorceress:
 	Inherits: ^WC2HumanInfantry
+		Scale: 1
 	icon:
 		Filename: wc2_high_elf_sorceres_icon.png
 	Defaults:
 		Filename: AllianceSorceress2.png
 		Scale: 0.7
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 112
 		Length: 7
 	die:
+		Scale: 1
 		Start: 119
 		Length: 8
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 7
 		Facings: 8
@@ -2412,24 +2471,30 @@ wc2_orc_grunt:
 
 wc2_orc_grunt2:
 	Inherits: ^WC2OrcInfantry
+		Scale: 1
 	icon:
 		Filename: HordeGruntIcon.png
 	Defaults:
 		Scale: 0.8
 		Filename: HordePromoGrunt-135.png
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 120
 		Length: 8
 	die:
+		Scale: 1
 		Start: 128
 		Length: 7
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 8
 		Facings: 8

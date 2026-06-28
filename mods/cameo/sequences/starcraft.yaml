@@ -1574,9 +1574,9 @@ warhoundsparks:
 		Filename: TyrSparks.png
 		Length: *
 		ZOffset: 1023
-		Scale: 0.5
+		Scale: 1
 		Tick: 48
-		Offset: -12,12
+		Offset: -6,6
 		BlendMode: Additive
 
 scghost:
@@ -1766,7 +1766,7 @@ scsiegetank:
 		Facings: -16
 	muzzle:
 		Filename: scsiegetanksiegeshoot.png
-		Scale: 0.5
+		Scale: 1
 		Length: *
 	make:
 		Filename: scsiegetankdeploy.png
@@ -1858,15 +1858,18 @@ sccyclone:
 		Filename: CycloneChassis.png
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Filename: CycloneChassis.png
 		Frames: 0, 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128
 		Facings: 32
 	move:
+		Scale: 1
 		Filename: CycloneChassis.png
 		Length: 4
 		Facings: 32
 		Tick: 16
 	turret:
+		Scale: 1
 		Filename: CycloneTurret.png
 		Facings: 64
 	muzzle:
@@ -2653,6 +2656,7 @@ scepigraph:
 		Filename: EpigraphIdle.png
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: -32
 	icon:
 		Filename: scepigraph.png

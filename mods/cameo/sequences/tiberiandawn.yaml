@@ -301,12 +301,14 @@ td_gdi_boxer:
 		Filename: td_gdi_boxer.png
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,12
+		Offset: 0,9
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,12
+		Offset: 0,9
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
