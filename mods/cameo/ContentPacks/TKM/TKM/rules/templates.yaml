@@ -1,0 +1,66 @@
+####################################################################################################
+#		MCV
+####################################################################################################
+
+^TKMSpawnActorsOnSell:
+	SoundOnDamageTransition:
+		DamagedSounds: expnew01.aud, expnew02.aud, expnew04.aud, expnew05.aud
+		DestroyedSounds: expnew03.aud, expnew07.aud, expnew08.aud, expnew11.aud
+	SpawnActorsOnSell:
+		ActorTypes: tkmengineer, tkmrifleman, tkmrifleman, tkmrifleman
+	Building:
+		BuildSounds: tsplace2.aud
+
+####################################################################################################
+#		TKM Upgrade and Inherits
+####################################################################################################
+
+^upberezkacloakupgrade:
+	GrantConditionOnPrerequisite@berezkacloak:
+		Condition: upspeed
+		Prerequisites: upberezkacloak
+	SpeedMultiplier@berezkacloak:
+		Modifier: 150
+		RequiresCondition: upspeed
+
+^uptitanarsenalupgrade:
+	GrantConditionOnPrerequisite@titanplating:
+		Condition: upspeed
+		Prerequisites: uptitanarsenal
+	DamageMultiplier@titanplatinghealth:
+		Modifier: 75
+		RequiresCondition: upspeed
+	SpeedMultiplier@titanplatingspeed:
+		Modifier: 70
+		RequiresCondition: upspeed
+
+^upsemiautorifles:
+	ActorStatValues:
+		Upgrades: upberezkacloak, upsemiautorifles
+
+^uptwinrockets:
+	ActorStatValues:
+		Upgrades: upberezkacloak, uptwinrockets
+
+^uptkmapbullets:
+	ActorStatValues:
+		Upgrades: uptitanarsenal, uptkmapbullets
+
+^upincendiaryrockets:
+	ActorStatValues:
+		Upgrades: uptitanarsenal, upincendiaryrockets
+
+^tkminfantryupgrade:
+	DamageMultiplier@upinfweapon:
+		Modifier: 70
+		RequiresCondition: tkminfantryupgrade
+	FirepowerMultiplier@upinfweapon:
+		Modifier: 125
+		RequiresCondition: tkminfantryupgrade
+	GrantConditionOnPrerequisite@tkminfantryupgrade:
+		Condition: tkminfantryupgrade
+		Prerequisites: tkminfantryupgrade
+
+#######################################
+# TKM MCV and Construction Yard
+#######################################

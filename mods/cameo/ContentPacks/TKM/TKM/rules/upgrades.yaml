@@ -1,0 +1,355 @@
+upberezkacloak:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berezka Arsenal Upgrade
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Commits to the Berezka Upgrade Tree, which focuses on cloak and hit and run units. Enables cloak for Basic Infantry Units and increase their movespeed.
+		Prerequisites: ~tkmcommandcenter, ~!upberezkacloak, ~!uptitanarsenal, ~!upnatoarsenal
+	RenderSprites:
+		Image: berezkaupgradeicon
+	ProvidesPrerequisite:
+
+uptitanarsenal:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Titan Arsenal Upgrade
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Commits to the Titan Arsenal Upgrade Tree, which utilizes heavy duty arsenal. Enables Basic Infantry Units to have Lightweight ballistic plating.
+		Prerequisites: ~tkmcommandcenter, ~!uptitanarsenal, ~!upberezkacloak, ~!upnatoarsenal
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: titanplatingupgradeicon
+
+upnatoarsenal:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: NATO Arsenal Upgrade
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Commits to the NATO Arsenal Upgrade Tree, which utilizes specialized units to defeat enemies.
+		Prerequisites: ~tkmcommandcenter, ~!uptitanarsenal, ~!upberezkacloak, ~!upnatoarsenal
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: natoupgradeicon
+
+upm16m203:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: M203 Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Gives the troopers grenade launchers.
+		Prerequisites: ~tkmradar, ~upnatoarsenal, ~!upm16m203
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: upm16m203
+
+upsemiautorifles:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Semi Auto Rifles Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Riflemen Arsenal to SKS Rifles.
+		Prerequisites: ~tkmradar, ~!upsemiautorifles, ~upberezkacloak
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmsemiicon
+
+uptwinrockets:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Twin Rockets Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: ChangesRocket Arsenals to modified dual RPGs.
+		Prerequisites: ~tkmradar, ~!uptwinrockets, ~upberezkacloak
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmtwinrocketlauncher
+
+uptkmapbullets:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Titan Armor Piercing Bullets Upgrade
+	Valued:
+		Cost: 2400
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Bullets to APFSDS Armor Piercing Rounds which deals extra damage to armored units.
+		Prerequisites: ~tkmradar, ~!uptkmapbullets, ~uptitanarsenal
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmapbullets
+
+upincendiaryrockets:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Incendiary Rockets Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Rocket Arsenals to incendiary rockets.
+		Prerequisites: ~tkmradar, ~!upincendiaryrockets, ~uptitanarsenal
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmincendiaryrockets
+
+upcryorockets:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cryo Rockets Upgrade
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Changes Rocket Arsenals to Cryo Rockets.
+		Prerequisites: ~tkmradar, ~!upcryorockets, ~upnatoarsenal
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: cryorocketicon
+
+tkmrocketaddon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Technical Tank Rocket Addon
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Upgrades Technical Tank to shoot twin rockets.
+		Prerequisites: ~tkmtechcenter, ~!tkmrocketaddon, ~upberezkacloak, ~uptwinrockets
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmrocketaddon
+
+uppointdefensesystem:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Point Defense System
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Commits to the NATO Arsenal Upgrade Tree, which utilizes specialized units to defeat enemies.
+		Prerequisites: ~tkmradar, ~!uppointdefensesystem, ~upnatoarsenal, ~tkmtechcenter
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmpointdefensesystem
+
+tkmheavydutyarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Heavy Titan Plating
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Gives Vehicles heavier armors.
+		Prerequisites: ~tkmtechcenter, ~!tkmheavydutyarmor, ~uptitanarsenal
+	ProvidesPrerequisite:
+	RenderSprites:
+		Image: tkmheavydutyarmor
+
+tkminfantryupgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: TKM Infantry Upgrade
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Upgrades TKM Infantry Damage and Armor.
+		Prerequisites: ~tkmcommandcenter, ~tkmtechcenter, ~!tkminfantryupgrade
+	RenderSprites:
+		Image: tkminfantryupgradeicon
+	ProvidesPrerequisite:
+		Prerequisite: tkminfantryupgrade
+
+upmedictruck:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Medic Truck
+	Buildable:
+		BuildPaletteOrder: 8043
+		Queue: Promotions
+		Description: Unlocks the Medic Truck.
+		Prerequisites: ~tkmcommandcenter, !upmedictruck, rank1
+	RenderSprites:
+		Image: tkmmedictruck
+	ProvidesPrerequisite:
+
+upjugg:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Juggernaut
+	Buildable:
+		BuildPaletteOrder: 8046
+		Queue: Promotions
+		Description: Allows training of the Juggernaut.
+		Prerequisites: ~tkmcommandcenter, upmedictruck, !upjugg, rank1
+	RenderSprites:
+		Image: tkmjug
+	ProvidesPrerequisite:
+
+upbattlebus:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Battle Bus
+	Buildable:
+		BuildPaletteOrder: 8049
+		Queue: Promotions
+		Description: Unlocks the Battle Bus.
+		Prerequisites: ~tkmcommandcenter, upjugg, !upbattlebus, rank1
+	RenderSprites:
+		Image: tkmbattlebus
+	ProvidesPrerequisite:
+
+upsandmarine:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock the Sand Marine
+	Buildable:
+		BuildPaletteOrder: 8052
+		Queue: Promotions
+		Description: Allows construction of the Sand Marine.
+		Prerequisites: ~tkmcommandcenter, upbattlebus, !upsandmarine, rank1
+	RenderSprites:
+		Image: tkmsandmarine
+	ProvidesPrerequisite:
+
+### Titan Promotion Tree
+
+uprepairtruck:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Repair Truck
+	Buildable:
+		BuildPaletteOrder: 8044
+		Queue: Promotions
+		Description: Unlocks a Repair Truck.
+		Prerequisites: ~tkmcommandcenter, !uprepairtruck, rank1
+	RenderSprites:
+		Image: tkmrepairtruck
+	ProvidesPrerequisite:
+
+uptrenchtank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Trench Tank
+	Buildable:
+		BuildPaletteOrder: 8047
+		Queue: Promotions
+		Description: Allows construction of the Trench Tank.
+		Prerequisites: ~tkmcommandcenter, uprepairtruck, !uptrenchtank, rank1
+	RenderSprites:
+		Image: tkmtrenchtank
+	ProvidesPrerequisite:
+
+upflakbus:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Flak Bus
+	Buildable:
+		BuildPaletteOrder: 8050
+		Queue: Promotions
+		Description: Unlocks the Flak Bus
+		Prerequisites: ~tkmcommandcenter, uptrenchtank, !upflakbus, rank1
+	RenderSprites:
+		Image: tkmratflak
+	ProvidesPrerequisite:
+
+upbigshiee:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock the Big Shiee
+	Buildable:
+		BuildPaletteOrder: 8053
+		Queue: Promotions
+		Description: Unlocks the Big Shiee.
+		Prerequisites: ~tkmcommandcenter, upflakbus, !upbigshiee, rank1
+	RenderSprites:
+		Image: tkmbigshiee
+	ProvidesPrerequisite:
+
+### NATO Promotion Tree
+
+upradartruck:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Radar Truck
+	Buildable:
+		BuildPaletteOrder: 8045
+		Queue: Promotions
+		Description: Allows construction of Radar Trucks.
+		Prerequisites: ~tkmcommandcenter, !upradartruck, rank1
+	RenderSprites:
+		Image: tkmradartruck
+	ProvidesPrerequisite:
+
+upviper:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Viper
+	Buildable:
+		BuildPaletteOrder: 8048
+		Queue: Promotions
+		Description: Allows construction of Vipers.
+		Prerequisites: ~tkmcommandcenter, upradartruck, !upviper, rank1
+	RenderSprites:
+		Image: tkmviper
+	ProvidesPrerequisite:
+
+updronepodtruck:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Drone Pod Truck
+	Buildable:
+		BuildPaletteOrder: 8051
+		Queue: Promotions
+		Description: Allows construction of Drone Pod Trucks.
+		Prerequisites: ~tkmcommandcenter, upviper, !updronepodtruck, rank1
+	RenderSprites:
+		Image: tkmdronepodtruck
+	ProvidesPrerequisite:
+
+upt30:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock T30
+	Buildable:
+		BuildPaletteOrder: 8054
+		Queue: Promotions
+		Description: Allows construction of the T30.
+		Prerequisites: ~tkmcommandcenter, updronepodtruck, !upt30, rank1
+	RenderSprites:
+		Image: tkmt30
+	ProvidesPrerequisite:

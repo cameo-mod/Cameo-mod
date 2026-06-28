@@ -1,0 +1,406 @@
+tkmhuey:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 20
+		Prerequisites: ~tkmairpad
+		Description: actor-hind.description
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Iroquois
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@PRIMARY:
+		Weapon: ChainGun
+		LocalOffset: 85,-200,-85, 85,200,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 2
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: ChainGun
+		LocalOffset: 85,200,-85, 85,-200,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 2
+	Armament@Missiles:
+		Weapon: HindMissiles
+		LocalOffset: 85,250,-85, 85,-250,-85
+		MuzzleSequence: muzzle
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+		RequiresCondition: !upcryorockets && !uptwinrockets && !upincendiaryrockets
+	Armament@PRIMARYNATO:
+		Weapon: HueyCryoMissiles
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: upcryorockets
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	Armament@PRIMARYBEREZKA:
+		Weapon: HueyTwinMissiles
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: uptwinrockets
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 2
+	Armament@PRIMARYTITAN:
+		Weapon: HueyTwinMissiles
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: upincendiaryrockets
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	GrantConditionOnPrerequisite@upcryorockets:
+		Condition: upcryorockets
+		Prerequisites: upcryorockets
+	GrantConditionOnPrerequisite@uptwinrockets:
+		Condition: uptwinrockets
+		Prerequisites: uptwinrockets
+	GrantConditionOnPrerequisite@upincendiaryrockets:
+		Condition: upincendiaryrockets
+		Prerequisites: upincendiaryrockets
+	ActorStatValues:
+		Upgrades: uptwinrockets, upcryorockets, upincendiaryrockets
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackAircraft:
+		FacingTolerance: 40
+		AttackType: Hover
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+	WithIdleOverlay@ROTORAIR:
+		Offset: 0,0,150
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 0,0,150
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	SpawnActorOnDeath:
+		Actor: tkmhuey.husk
+	EjectOnDeath:
+		PilotActor: tkmrifleman
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: TSVehicle
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 4
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+	RenderSprites:
+		PlayerPalette: raplayer
+	Selectable:
+		Class: tkmhuey
+	RenderSprites:
+		Image: tkmhuey
+		PlayerPalette: player_rgba
+
+tkmhuey.husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Hind
+	Aircraft:
+		TurnSpeed: 16
+		Speed: 112
+	WithIdleOverlay:
+		Sequence: rotor
+	LeavesTrails:
+		Offsets: -427,0,0
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: tkmhuey
+		PlayerPalette: player_rgba
+
+tkmviper:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~tkmairpad, ~tkmtechcenter, ~upviper
+		Description: actor-yak.description
+	Valued:
+		Cost: 2900
+	Tooltip:
+		Name: Viper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 85000
+	ChangesHealth@SelfHealing:
+		Step: 34
+	Armament@BOMBS:
+		Weapon: ViperMissiles
+		LocalOffset: 0,-256,-32, 0,256,-32
+		RequiresCondition: !upcryorockets && !uptwinrockets && !uptitanarsenalupgrade
+		PauseOnCondition: !ammo
+	Armament@PRIMARYNATO:
+		Weapon: ViperMissilesCryo
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: upcryorockets
+		PauseOnCondition: !ammo
+	Armament@PRIMARYBEREZKA:
+		Weapon: ViperMissilesTwin
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: uptwinrockets
+		PauseOnCondition: !ammo
+	Armament@PRIMARYTITAN:
+		Weapon: ViperMissilesFire
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: upincendiaryrockets
+		PauseOnCondition: !ammo
+	Armament@PRIMARY:
+		Weapon: YakChainGun
+		LocalOffset: 256,-213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: YakChainGun
+		LocalOffset: 256,213,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	GrantConditionOnPrerequisite@upcryorockets:
+		Condition: upcryorockets
+		Prerequisites: upcryorockets
+	GrantConditionOnPrerequisite@uptwinrockets:
+		Condition: uptwinrockets
+		Prerequisites: uptwinrockets
+	GrantConditionOnPrerequisite@upincendiaryrockets:
+		Condition: upincendiaryrockets
+		Prerequisites: upincendiaryrockets
+	AttackAircraft:
+		FacingTolerance: 100
+	Aircraft:
+		TurnSpeed: 11
+		Speed: 170
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -853,0,0
+	SpawnActorOnDeath:
+		Actor: tkmviper.husk
+	EjectOnDeath:
+		PilotActor: tkmrifleman
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, 128
+	Voiced:
+		VoiceSet: TSVehicle
+	ActorStatValues:
+		Upgrades: uptwinrockets, upcryorockets, upincendiaryrockets
+	AmmoPool:
+		Ammo: 12
+		ReloadDelay: 16
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		Image: tkmviper
+		PlayerPalette: player_rgba
+
+tkmviper.husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: TKM Mig
+	Contrail:
+		Offset: -853,0,0
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: tkmviper
+		PlayerPalette: raplayer
+
+tkmdrone:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Valued:
+		Cost: 25
+	Tooltip:
+		Name: Drone
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~unbuildable
+		Queue: Aircraft, RAAircraft
+		Description: Scout Unit.
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	Cloak:
+	DetectCloaked:
+		Range: 4224
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 500, 500
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	Voiced:
+		VoiceSet: RobotTankVoice
+	BodyOrientation:
+		QuantizedFacings: 32
+	-SpawnActorOnDeath:
+	RenderSprites:
+		Image: tkmdrone
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		TKM Promotions
+####################################################################################################
+
+tkmsuicidedrone:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@armor: ^TerranShipWeaponUpgrades
+	Inherits@weapon: ^TerranShipArmorUpgrades
+	Tooltip:
+		Name: Wraith Drone
+	Valued:
+		Cost: 100
+	Hovers:
+	Aircraft:
+		AltitudeVelocity: 120
+		InitialFacing: 768
+		TurnSpeed: 12
+		Speed: 200
+		VTOL: false
+		Repulsable: false
+		CruiseAltitude: 1c256
+		TakeUpCellWhenLand: false
+	Targetable:
+		TargetTypes: Air
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	RejectsOrders:
+	AttackAircraft:
+		FacingTolerance: 40
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upghostcloak
+		Prerequisites: upghostcloak
+	Cloak:
+		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
+	-SpawnActorOnDeath:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+		EmptyWeapon: HeliExplode
+	GrantConditionOnAttack:
+		Condition: triggered
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	KillsSelf:
+		RequiresCondition: triggered
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 786, 786, 0, 0
+	Voiced:
+		VoiceSet: RobotTankVoice
+	DeathSounds:
+	Armament@PRIMARY:
+		Weapon: TKMDroneExplosion
+	RenderSprites:
+		Image: tkmdrone
+		PlayerPalette: player_rgba

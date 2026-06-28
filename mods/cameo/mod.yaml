@@ -97,9 +97,6 @@ MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
 
-Include: ContentPacks/TiberianDawn/Shared/content.yaml
-Include: ContentPacks/TiberianDawn/GDI/content.yaml
-Include: ContentPacks/TiberianDawn/Nod/content.yaml
 
 Rules:
 	cameo|rules/misc.yaml
@@ -162,7 +159,12 @@ Rules:
 	# cameo|rules/halloween.yaml
 	cameo|rules/outpost2.yaml
 	# cameo|rules/z.yaml
-	cameo|rules/tkm.yaml
+
+Include: ContentPacks/TiberianDawn/Shared/content.yaml
+Include: ContentPacks/TiberianDawn/GDI/content.yaml
+Include: ContentPacks/TiberianDawn/Nod/content.yaml
+
+Include: ContentPacks/TKM/TKM/content.yaml
 
 Sequences:
 	cameo|sequences/misc.yaml

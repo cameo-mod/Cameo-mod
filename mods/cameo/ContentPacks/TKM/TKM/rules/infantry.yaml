@@ -1,0 +1,740 @@
+tkmworker:
+	Inherits: YRSLAV
+	Tooltip:
+		Name: Worker
+	Targetable@SlaveFaster:
+		TargetTypes: SlaveFaster
+		RequiresCondition: SlaveFaster <= 3 && !untargetable
+	ExternalCondition@SlaveFaster:
+		Condition: SlaveFaster
+		TotalCap: 3
+	Voiced:
+		VoiceSet: SlaveWorkerVoice
+		RequiresCondition: !freed
+	Voiced@2:
+		VoiceSet: FreedSlaveVoice
+		RequiresCondition: freed
+	RenderSprites:
+		Image: tkmworker
+
+tkmrifleman:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@speed: ^upberezkacloakupgrade
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Rifleman
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tkmbarracks, ~!uptitanarsenal, ~!upnatoarsenal
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 16000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@PRIMARY:
+		Weapon: NaxiRifle
+		LocalOffset: 500,0,400
+		RequiresCondition: !upsemiautorifles
+	Armament@PRIMARYUPGRADE:
+		Weapon: tkmriflemansemiautorifle
+		LocalOffset: 500,0,400
+		RequiresCondition: upsemiautorifles
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: NaxiRifle
+	GrantConditionOnPrerequisite@upsemiautorifles:
+		Condition: upsemiautorifles
+		Prerequisites: upsemiautorifles
+	GrantConditionOnPrerequisite@uptitanarsenal:
+		Condition: uptitanarsenal
+		Prerequisites: uptitanarsenal
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: uptitanarsenal
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upberezkacloak
+		Prerequisites: upberezkacloak
+	Cloak:
+		RequiresCondition: upberezkacloak
+	Selectable:
+		Class: tkmrifleman
+	# Selectable:
+	# 	Bounds: 256, 512
+	# 	DecorationBounds: 256, 512
+	# Inherits@EXT: ^ExternalConditions ##########
+	# AcceptsDeliveredExperience: ##########
+	# 	ValidTypes: infantry ##########
+	ActorStatValues:
+		Upgrades: tkminfantryupgrade, upsemiautorifles
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tkmspetsnaz:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 160
+	Buildable:
+		BuildPaletteOrder: 1
+		Prerequisites: ~tkmbarracks, ~uptitanarsenal
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2
+	Tooltip:
+		Name: Spetsnaz
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY: ##########
+		Weapon: tkmm16
+		LocalOffset: 128,0,256
+		RequiresCondition: !uptkmapbullets
+	Armament@PRIMARYUPGRADE:
+		Weapon: tkmakap
+		LocalOffset: 500,0,400
+		RequiresCondition: uptkmapbullets
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: tkmm16
+		RequiresCondition: !uptkmapbullets
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: tkmakap
+		RequiresCondition: uptkmapbullets
+	GrantConditionOnPrerequisite@uptkmapbullets:
+		Condition: uptkmapbullets
+		Prerequisites: uptkmapbullets
+	ActorStatValues:
+		Upgrades: uptitanarsenal, tkminfantryupgrade, uptkmapbullets
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: uptitanarsenal
+	GrantConditionOnPrerequisite@uptitanarsenal:
+		Condition: uptitanarsenal
+		Prerequisites: uptitanarsenal
+	Selectable:
+		Class: tkmspetsnaz
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+		RequiresCondition: !parachute
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	RenderSprites:
+		Image: tkmspetsnaz
+		PlayerPalette: player_rgba
+
+tkmjug:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Juggernaut
+	Armor:
+		Type: Plate
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tkmbarracks, ~upjugg, ~tkmradar
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 36000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	AutoTarget:
+	Armament@PRIMARY:
+		Weapon: tkmjug
+		LocalOffset: 544,100,256
+		RequiresCondition: !uptkmapbullets
+	Armament@PRIMARYUPGRADE:
+		Weapon: tkmjuggap
+		LocalOffset: 544,100,256
+		RequiresCondition: uptkmapbullets
+	Armament@GARRISONED:
+		Weapon: tkmjug
+		Name: garrisoned
+		RequiresCondition: !uptkmapbullets
+	Armament@GARRISONEDUPGRADE:
+		Weapon: tkmjuggap
+		Name: garrisoned
+		RequiresCondition: uptkmapbullets
+	GrantConditionOnPrerequisite@uptkmapbullets:
+		Condition: uptkmapbullets
+		Prerequisites: uptkmapbullets
+	AttackFrontal:
+		FacingTolerance: 2
+	# Selectable:
+	# 	Bounds: 256, 512
+	# 	DecorationBounds: 256, 512
+	# Inherits@EXT: ^ExternalConditions ##########
+	# AcceptsDeliveredExperience: ##########
+	# 	ValidTypes: infantry ##########
+	Selectable:
+		Class: tkmjug
+	ActorStatValues:
+		Upgrades: tkminfantryupgrade, uptkmapbullets
+	GrantConditionOnPrerequisite@uptitanarsenal:
+		Condition: uptitanarsenal
+		Prerequisites: uptitanarsenal
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: uptitanarsenal
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tkmthermonaut:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Thermonaut
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tkmbarracks, ~uptitanarsenal, ~tkmradar
+		Queue: Infantry, RAInfantry
+		IconPalette: player
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	AutoTarget:
+	Armament@PRIMARY:
+		Weapon: FirebatF
+		LocalOffset: 544,100,256
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Weapon: FirebatF
+		Name: garrisoned
+		MuzzleSequence: muzzle
+	FireWarheadsOnDeath:
+		Weapon: Flamethrower
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 2
+	# Selectable:
+	# 	Bounds: 256, 512
+	# 	DecorationBounds: 256, 512
+	# Inherits@EXT: ^ExternalConditions ##########
+	# AcceptsDeliveredExperience: ##########
+	# 	ValidTypes: infantry ##########
+	GrantConditionOnPrerequisite@uptitanarsenal:
+		Condition: uptitanarsenal
+		Prerequisites: uptitanarsenal
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: uptitanarsenal
+	ActorStatValues:
+		Upgrades: uptitanarsenal, tkminfantryupgrade
+	Selectable:
+		Class: tkmthermonaut
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tkmthermonaut
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tkmtrooper:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 160
+	Buildable:
+		BuildPaletteOrder: 1
+		Prerequisites: ~tkmbarracks, ~upnatoarsenal
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2
+	Tooltip:
+		Name: Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 16000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@PRIMARY: ##########
+		Weapon: tkmm16
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: tkmm16
+	Armament@m203:
+		Weapon: tkmm203
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: upm16m203
+	Armament@GARRISONEDM203:
+		Name: garrisoned
+		Weapon: tkmm203
+		RequiresCondition: upm16m203
+	GrantConditionOnPrerequisite@upm16m203:
+		Condition: upm16m203
+		Prerequisites: upm16m203
+	ActorStatValues:
+		Upgrades: upnatoarsenal, upm16m203
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+		RequiresCondition: !parachute
+	WithDeathAnimation:
+		DeathSequencePalette: playerra2
+	Selectable:
+		Class: tkmtrooper
+	RenderSprites:
+		Image: tkmtrooper
+		PlayerPalette: playerra2
+
+tkmrocketeer:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@speed: ^upberezkacloakupgrade
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Rocketeer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 11
+		Prerequisites: ~tkmbarracks
+		Queue: Infantry, RAInfantry
+		IconPalette: ra2
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 9000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@PRIMARY:
+		Weapon: Rockets
+		LocalOffset: 500,0,400
+		RequiresCondition: !upcryorockets && !uptwinrockets && !upincendiaryrockets
+	Armament@PRIMARYNATO:
+		Weapon: tkmcryorockets
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: upcryorockets
+	Armament@PRIMARYBEREZKA:
+		Weapon: tkmtwinrockets
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: uptwinrockets
+	Armament@PRIMARYTITAN:
+		Weapon: tkmfirerockets
+		LocalOffset: -160,-276,232
+		LocalYaw: 100
+		MuzzleSequence: muzzle
+		RequiresCondition: upincendiaryrockets
+	Armament@GARRISONED:
+		Weapon: Rockets
+		Name: garrisoned
+		RequiresCondition: !upcryorockets && !uptwinrockets && !upincendiaryrockets
+	Armament@GARRISONEDNATO:
+		Name: garrisoned
+		Weapon: tkmcryorockets
+		MuzzleSequence: muzzle
+		RequiresCondition: upcryorockets
+	Armament@GARRISONEDBEREZKA:
+		Name: garrisoned
+		Weapon: tkmtwinrockets
+		MuzzleSequence: muzzle
+		RequiresCondition: uptwinrockets
+	Armament@GARRISONEDTITAN:
+		Name: garrisoned
+		Weapon: tkmfirerockets
+		MuzzleSequence: muzzle
+		RequiresCondition: upincendiaryrockets
+	GrantConditionOnPrerequisite@upcryorockets:
+		Condition: upcryorockets
+		Prerequisites: upcryorockets
+	GrantConditionOnPrerequisite@uptwinrockets:
+		Condition: uptwinrockets
+		Prerequisites: uptwinrockets
+	GrantConditionOnPrerequisite@upincendiaryrockets:
+		Condition: upincendiaryrockets
+		Prerequisites: upincendiaryrockets
+	GrantConditionOnPrerequisite@uptitanarsenal:
+		Condition: uptitanarsenal
+		Prerequisites: uptitanarsenal
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: uptitanarsenal
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: Rockets
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upberezkacloak
+		Prerequisites: upberezkacloak
+	Cloak:
+		RequiresCondition: upberezkacloak
+	# Selectable:
+	# 	Bounds: 256, 512
+	# 	DecorationBounds: 256, 512
+	# Inherits@EXT: ^ExternalConditions ##########
+	# AcceptsDeliveredExperience: ##########
+	# 	ValidTypes: infantry ##########
+	ActorStatValues:
+		Upgrades: tkminfantryupgrade, uptwinrockets, upcryorockets, upincendiaryrockets
+	Selectable:
+		Class: tkmrocketeer
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tkmengineer:
+	Inherits: E6
+	Inherits@speed: ^upberezkacloakupgrade
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Buildable:
+		Prerequisites: ~tkmbarracks
+		Queue: Infantry, RAInfantry
+	Tooltip:
+		Name: Engineer
+	Voiced:
+		VoiceSet: TSEngineer
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: upberezkacloak, uptitanarsenal, upnatoarsenal
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upberezkacloak
+		Prerequisites: upberezkacloak
+	GrantConditionOnPrerequisite@uptitanarsenal:
+		Condition: uptitanarsenal
+		Prerequisites: uptitanarsenal
+	GrantConditionOnPrerequisite@upnatoarsenal:
+		Condition: upnatoarsenal
+		Prerequisites: upnatoarsenal
+	DamageMultiplier:
+		Modifier: 75
+		RequiresCondition: uptitanarsenal
+	GrantConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 5
+		CooldownTicks: 100
+		DeployedCondition: summon
+		ShowSelectionBar: false
+		ExclusiveDeploy: true
+		DeployType: Summon
+		PauseOnCondition: disabled
+		RequiresCondition: upnatoarsenal
+	AmmoPool:
+		Name: summon
+		Ammo: 1
+		Armaments: tkmdronesummon
+	ReloadAmmoPool:
+		AmmoPool: summon
+		Delay: 100
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 1
+		AmmoPool: summon
+		RequiresCondition: upnatoarsenal
+	PeriodicExplosion@projections:
+		Weapon: tkmdronesummon
+		RequiresCondition: summon
+		AmmoPoolName: summon
+	Selectable:
+		Class: tkmengineer
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tkmsniper:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Sniper
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkmbarracks, ~upberezkacloak, ~tkmradar
+		Queue: Infantry, RAInfantry
+		Description: actor-ra2snipe.description
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 22000
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament@PRIMARY:
+		Weapon: RA2AWP
+		LocalOffset: 0,0,427
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2AWPE
+		LocalOffset: 0,0,427
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2AWP
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2AWPE
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	ActorStatValues:
+		Upgrades: upberezkacloak, tkminfantryupgrade
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		Image: ra2snipe
+
+tkmvon:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Tooltip:
+		Name: Von
+	Valued:
+		Cost: 3000
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tkmbarracks, ~tkmradar, ~!tkmvon
+		Queue: Infantry, RAInfantry
+		Description: actor-ra2snipe.description
+		BuildLimit: 1
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@lockdown:
+		Weapon: VonSniperLockdown
+		LocalOffset: 128,0,256
+		AmmoUsage: 3
+		PauseOnCondition: ammo < 6
+	Armament@PRIMARY:
+		Weapon: VonSniper
+		LocalOffset: 500,0,400
+		RequiresCondition: !uptkmapbullets
+		PauseOnCondition: !ammo
+	Armament@PRIMARYUPGRADE:
+		Weapon: VonSniperAP
+		LocalOffset: 500,0,400
+		RequiresCondition: uptkmapbullets
+		PauseOnCondition: !ammo
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: VonSniper
+		RequiresCondition: !uptkmapbullets
+		PauseOnCondition: !ammo
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: VonSniperAP
+		RequiresCondition: uptkmapbullets
+		PauseOnCondition: !ammo
+	GrantConditionOnPrerequisite@uptkmapbullets:
+		Condition: uptkmapbullets
+		Prerequisites: uptkmapbullets
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 100
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	ReloadAmmoDelayMultiplier@RANK-1:
+		RequiresCondition: rank-veteran == 1
+		Modifier: 85
+	ReloadAmmoDelayMultiplier@RANK-2:
+		RequiresCondition: rank-veteran == 2
+		Modifier: 70
+	ReloadAmmoDelayMultiplier@RANK-3:
+		RequiresCondition: rank-veteran == 3
+		Modifier: 55
+	ReloadAmmoDelayMultiplier@RANK-ELITE:
+		RequiresCondition: rank-elite
+		Modifier: 40
+	AttackFrontal:
+		FacingTolerance: 0
+	ActorStatValues:
+		Upgrades: uptkmapbullets, tkminfantryupgrade
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		Image: tkmvon
+
+tkmspecialforce:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^RA2Infantry
+	Inherits@swim: ^WithSwimsuit
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@infantryweapon: ^tkminfantryupgrade
+	Valued:
+		Cost: 900
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Mobile:
+		Speed: 60
+	Tooltip:
+		Name: Special Force
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~tkmbarracks, ~upnatoarsenal, ~tkmradar
+		Description: actor-seal.description
+	Armament@PRIMARY:
+		Weapon: RA2MP5
+		RequiresCondition: !rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE:
+		Weapon: RA2MP5E
+		RequiresCondition: rank-elite
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2MP5
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2MP5E
+		RequiresCondition: rank-elite
+	Armament@shipc4:
+		Weapon: SEALAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	FirepowerMultiplier@Elite:
+		Modifier: 225
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+	ActorStatValues:
+		Upgrades: tkminfantryupgrade
+	Voiced:
+		VoiceSet: SealVoice
+	RenderSprites:
+		Image: ra2seal
+
+#######################################
+# TKM Vehicles
+#######################################
