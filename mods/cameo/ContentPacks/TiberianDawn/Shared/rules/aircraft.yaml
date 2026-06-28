@@ -1,0 +1,119 @@
+TRAN:
+	Inherits: ^Helicopter
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@bot: ^BotAutoDeployUnarmedAirTransport
+	Inherits@eject: ^AircraftEjectOnDeath
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Chinook Transport
+		OverrideActor: tran
+	-Buildable:
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	WithIdleOverlay@ROTOR1AIR:
+		Offset: 597,0,85
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR1GROUND:
+		Offset: 597,0,85
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2AIR:
+		Offset: -597,0,171
+		Sequence: rotor2
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTOR2GROUND:
+		Offset: -597,0,171
+		Sequence: slow-rotor2
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 10
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 10
+	SpawnActorOnDeath:
+		Actor: TRAN.Husk
+	SelectionDecorations:
+	Selectable:
+		Class: tran
+		DecorationBounds: 1920, 1920
+	RenderSprites:
+		Image: tran
+		PlayerPalette: raplayer
+	FireWarheadsOnDeath:
+		Weapon: LargeHeliExplode
+
+C17:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	Tooltip:
+		Name: Supply Aircraft
+	Interactable:
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 326
+		Repulsable: False
+		MaximumPitch: 36
+		CruiseAltitude: 2560
+		IdleBehavior: LeaveMap
+	OwnerLostAction:
+		Action: Kill
+	HiddenUnderFog:
+		AlwaysVisibleRelationships: None
+		Type: CenterPosition
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	Health:
+		HP: 30000
+	Cargo:
+		MaxWeight: 10
+	DamageMultiplier@INVULNERABLE:
+		Modifier: 0
+	WithFacingSpriteBody:
+	Contrail@1:
+		Offset: -261,-650,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -85,-384,0
+		TrailLength: 16
+	Contrail@3:
+		Offset: -85,384,0
+		TrailLength: 16
+	Contrail@4:
+		Offset: -261,650,0
+		TrailLength: 15
+	DynamicSpeedMultiplier:
+
+TRAN.Husk:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Chinook Transport
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 140
+	WithIdleOverlay@ROTOR1:
+		Offset: 597,0,85
+		Sequence: rotor
+	WithIdleOverlay@ROTOR2:
+		Offset: -597,0,171
+		Sequence: rotor2
+	RenderSprites:
+		Image: tran
+		PlayerPalette: raplayer

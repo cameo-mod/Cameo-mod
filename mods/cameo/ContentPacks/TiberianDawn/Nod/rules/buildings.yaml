@@ -1,0 +1,693 @@
+FACT.NOD:
+	Inherits: ^FACT
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Tooltip:
+		Name: Nod Construction Yard
+	Transforms:
+		IntoActor: mcv.nod
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: fact
+	ProvidesPrerequisite@fact.gdi:
+		Prerequisite: fact.nod
+	ProvidesPrerequisite@wirefence:
+		Prerequisite: wirefence
+	RenderSprites:
+		Image: nodfact
+
+PROC.NOD:
+	Inherits: ^TDPROC
+	Tooltip:
+		Name: Nod Tiberium Refinery
+	Buildable:
+		Prerequisites: ~fact.nod, nuke
+	GrantConditionOnPrerequisite@Normal:
+		Condition: normalharvester
+		Prerequisites: !upstealthsoldier
+	GrantConditionOnPrerequisite@Stealth:
+		Condition: stealthharvester
+		Prerequisites: upstealthsoldier
+	FreeActor@Normal:
+		Actor: HARV.NOD
+		SpawnOffset: 1,2
+		Facing: 256
+		RequiresCondition: normalharvester
+	FreeActor@Stealth:
+		Actor: tanodharv
+		SpawnOffset: 1,2
+		Facing: 256
+		RequiresCondition: stealthharvester
+
+HAND:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Inherits@barr: ^IsBarrack
+	Tooltip:
+		Name: Hand of Nod
+	ProvidesPrerequisite:
+		Prerequisite: barracks
+	Buildable:
+		Prerequisites: ~fact.nod, nuke
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	RallyPoint:
+	Selectable:
+		Bounds: 2048, 2560, 0, -128
+	Exit@1:
+		SpawnOffset: 512,1024,0
+		ExitCell: 1,2
+	ProvidesPrerequisite:
+		Prerequisite: cncbarracks
+
+AFLD:
+	Inherits: ^TDBuilding
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Inherits@weap: ^IsWeaponFactory
+	# Inherits@weap: ^IsVehicleDropzone
+	Inherits@shape: ^4x2Shape
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
+		Type: Rectangle
+			TopLeft: -2048, -1024
+			BottomRight: 2048, 1024
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Nod Airstrip
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	Buildable:
+		BuildDuration: 375
+		BuildDurationModifier: 100
+		Prerequisites: ~fact.nod, proc.nod
+		Description: actor-afld.description
+	Building:
+		Footprint: XXX+ xxx+ ====
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 4,3
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Exit@2:
+		ExitCell: 2,1
+		Facing: 768
+	Exit@3:
+		ExitCell: 1,2
+		Facing: 768
+	Exit@4:
+		ExitCell: 2,2
+		Facing: 768
+	-Production@NORMAL:
+	-Production@CLASSICPRODUCTIONQUEUES:
+	ProductionAirdropCA@NORMAL:
+		Produces: Vehicle
+		RequiresCondition: !classicproductionqueues
+		ActorType: c17
+		LandingFacing: 64
+		ReadyAudio: ReinforcementsArrived
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		PauseOnCondition: disabled
+	ProductionAirdropCA@CLASSIC:
+		Produces: RAVehicle
+		RequiresCondition: classicproductionqueues
+		ActorType: c17
+		LandingFacing: 64
+		ReadyAudio: ReinforcementsArrived
+		SpawnType: ClosestEdgeToDestination
+		ProportionalSpeed: true
+		PauseOnCondition: disabled
+	WithBuildingBib:
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-dish
+	WithDeliveryAnimation:
+		RequiresCondition: !build-incomplete
+
+HPAD.NOD:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Inherits@repair: ^RepairsUnits
+	Tooltip:
+		Name: Nod Helipad
+	Buildable:
+		Prerequisites: ~fact.nod, hq.nod
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RepairsUnits:
+		HpPerStep: 1000
+		PlayerExperience: 25
+		StartRepairingNotification: Repairing
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	RallyPoint:
+	ProvidesPrerequisite@hpad:
+		Prerequisite: hpad
+	RenderSprites:
+		Image: hpad
+
+HQ.Nod:
+	Inherits: ^TDBuilding
+	Inherits@radar: ^RadarBuilding
+	# Inherits@tech: ^IsTechnoBuilding
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@shape: ^2x2Shape
+	ProvidesPrerequisite@anytdhq:
+		Prerequisite: anytdhq
+		RequiresCondition: !(powerdown || infiltrated)
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	WithBuildingBib:
+	RenderSprites:
+		Image: HQ
+	Tooltip:
+		Name: Nod Communications Center
+	Buildable:
+		Prerequisites: ~fact.nod, proc.nod
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+FIX.Nod:
+	Inherits: ^TDBuilding
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	HitShape:
+		TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+		Type: Polygon
+			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Buildable:
+		Prerequisites: ~fact.nod, afld
+	Building:
+		Footprint: _+_ +++ _+_
+		Dimensions: 3,3
+	SelectionDecorations:
+	WithBuildingBib:
+		HasMinibib: true
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	Reservable:
+	RallyPoint:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: FIX
+	Tooltip:
+		Name: Nod Repair Facility
+	ProvidesPrerequisite:
+		Prerequisite: fix.nod
+
+EYE:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@tech: ^IsTechnoBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Advanced Communications Center
+	ProvidesPrerequisite:
+		Prerequisite: anytdhq
+	Buildable:
+		-BuildLimit:
+		BuildPaletteOrder: 100
+		Prerequisites: ~fact.gdi, hq.gdi
+		Queue: Building, RABuilding
+		Description: actor-eye.description
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	WithBuildingBib:
+	IonCannonPower:
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		RequiresCondition: ionc
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: ioncannon
+		Cursor: ioncannon
+		ChargeInterval: 6000
+		WeaponDelay: 0
+		Weapon: TDIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names:
+			1: power-ioncannon.name
+		Descriptions:
+			1: power-ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Ion Cannon ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20
+	RevealsShroud@SWReveal:
+		RequiresCondition: swreveal && ionc
+	SupportPowerChargeBar:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: ionc
+		RequiresCondition: ionc
+	ProvidesPrerequisite@techcenter:
+		Prerequisite: techcenter
+		RequiresCondition: !(powerdown || infiltrated)
+	ProvidesPrerequisite@tdtechcenter:
+		Prerequisite: tdtechcenter
+		RequiresCondition: !(powerdown || infiltrated)
+	DamageMultiplier@ionc:
+		Modifier: 50
+		RequiresCondition: ionc
+	PowerMultiplier@ionc:
+		Modifier: 200
+		RequiresCondition: ionc
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			eye: ionc
+		Requirements:
+			eye: !build-incomplete && !ionc
+
+eye.ionc:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Ion Cannon Uplink
+	Valued:
+		Cost: 5000
+	Buildable:
+		Queue: BuildingAddons
+		BuildPaletteOrder: 100
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~fact.gdi, eye, !ionc, ~techlevel.superweapons
+		Description: actor-eye.ionc-description
+	Power:
+		Amount: -100
+	Plug:
+		Type: eye
+	RenderSprites:
+		Image: eye.ionc
+
+TMPL:
+	Inherits: ^TDBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@tech: ^IsTechnoBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Temple of Nod
+	ProvidesPrerequisite:
+		Prerequisite: anytdhq
+	Buildable:
+		-BuildLimit:
+		BuildPaletteOrder: 100
+		Prerequisites: ~fact.nod, hq.nod
+		Queue: Building, RABuilding
+		Description: actor-tmpl.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 3072, 0, -512
+	SelectionDecorations:
+	RenderDetectionCircle:
+	NukePowerCA:
+		OrderName: NukePowerInfoOrder
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		RequiresCondition: nuke
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: abomb
+		Cursor: nuke
+		ChargeInterval: 10500
+		Names:
+			1: power-nuke.tdname
+		Descriptions:
+			1: power-nuke.description
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear Missile ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear Missile launched.
+		MissileWeapons:
+			1: atomic
+		MissileDelay: 10
+		SpawnOffset: 3c0,0,-1c512
+		BeaconPosterPalette: beaconposter
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		SupportPowerPaletteOrder: 30
+		MissileImage: atomic
+		BeaconActor: BLASTRADIUS.atomic
+	WithBuildingBib:
+	WithSupportPowerActivationAnimation:
+		RequiresCondition: !build-incomplete && nuke
+	WithSupportPowerActivationOverlay:
+		RequiresCondition: !build-incomplete && nuke
+		Sequence: smoke
+	RevealsShroud@SWReveal:
+		RequiresCondition: swreveal && nuke
+	SupportPowerChargeBar:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: nodnuke
+		RequiresCondition: nuke
+	ProvidesPrerequisite@techcenter:
+		Prerequisite: techcenter
+		RequiresCondition: !(powerdown || infiltrated)
+	ProvidesPrerequisite@tdtechcenter:
+		Prerequisite: tdtechcenter
+		RequiresCondition: !(powerdown || infiltrated)
+	DamageMultiplier@nuke:
+		Modifier: 50
+		RequiresCondition: nuke
+	PowerMultiplier@nuke:
+		Modifier: 200
+		RequiresCondition: nuke
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			tmpl: nuke
+		Requirements:
+			tmpl: !build-incomplete && !nuke
+
+tmpl.nuke:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Nuclear Missile Silo
+	Valued:
+		Cost: 5000
+	Buildable:
+		Queue: BuildingAddons
+		BuildPaletteOrder: 100
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~fact.nod, tmpl, !nodnuke, ~techlevel.superweapons
+		Description: actor-tmpl.nuke-description
+	Power:
+		Amount: -100
+	Plug:
+		Type: tmpl
+	RenderSprites:
+		Image: tmpl.nuke
+
+td_nod_templeprime:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@sell: ^TDNodSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@tech: ^IsTechnoBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Tooltip:
+		Name: Temple Prime
+	ProvidesPrerequisite:
+		Prerequisite: anytdhq
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 100
+		Prerequisites: ~fact.nod, tmpl
+		Queue: Building, RABuilding
+		Description: actor-tmpl.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 3072, 0, -512
+	SelectionDecorations:
+	RenderDetectionCircle:
+	WithBuildingBib:
+	WithIdleOverlay@idle:
+		RequiresCondition: !build-incomplete
+		Sequence: idle
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+GUN:
+	Inherits: ^TDDefense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@AntiTank: ^PrioritizeVehicle
+	Inherits@shape: ^1x1Shape
+	Inherits@ImprovedArtilleries: ^ImprovedArtilleries
+	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
+	Inherits@decoration: ^NodRankDecoration
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Nod Gun Turret
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~fact.nod, hand
+		Queue: Defence, RADefence
+		Description: actor-gun.description
+	Building:
+	Health:
+		HP: 150000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 35
+		InitialFacing: 224
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: TurretGun
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_blackmarketupgrades
+	Armament@Upgrade:
+		Weapon: TurretGunBlackMarket
+		LocalOffset: 512,0,112
+		MuzzleSequence: muzzle
+		RequiresCondition: up_blackmarketupgrades
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	Power:
+		Amount: -35
+	RevealsShroud:
+		Range: 7711
+	RangeMultiplier@up_improvedartilleries:
+		Modifier: 110
+	RevealsShroudMultiplier@up_improvedartilleries:
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: up_improvedartilleries, up_blackmarketupgrades
+
+NodLaserTurret:
+	Inherits: ^TDDefense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@DisabledOverlay: ^DisableOnLowPowerOrPowerDown
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@decoration: ^NodRankDecoration
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Nod Laser Turret
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~fact.nod, hand
+		Queue: Defence, RADefence
+		Description: actor-nalasr.description
+	Building:
+	Health:
+		HP: 72500
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 30
+		InitialFacing: 0
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: NodTurretLaser
+		LocalOffset: 500,-80,140, 500,80,140
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 6800
+
+SAM:
+	Inherits: ^TDDefense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@shape: ^2x1Shape
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Nod SAM Site
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~fact.nod, hand, hq.nod
+		Queue: Defence, RADefence
+		Description: actor-sam.description
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+	Health:
+		HP: 100000
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 0
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: Dragon
+		LocalOffset: 0,-64,320, 0,64,320
+		MuzzleSequence: muzzle
+	AttackPopupTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+	WithMuzzleOverlay:
+	Power:
+		Amount: -40
+	-ActorPreviewPlaceBuildingPreview:
+	SequencePlaceBuildingPreview:
+		Sequence: place
+	DamageMultiplier@2x1Shape:
+		Modifier: 75
+	RevealsShroud:
+		Range: 12588
+	DetectCloaked:
+		Range: 6294
+	ActorStatValues:
+		Upgrades: up_guerillatactics, up_advancedguerillatactics
+
+OBLI:
+	Inherits: ^TDDefense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@EliteCapacitors: ^EliteCapacitors
+	Inherits@decoration: ^NodRankDecoration
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Obelisk of Light
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~fact.nod, tmpl
+		Queue: Defence, RADefence
+		Description: actor-obli.description
+	Selectable:
+		Bounds: 1024, 1792, 0, -512
+	SelectionDecorations:
+	Health:
+		HP: 242500
+	WithBuildingBib:
+		HasMinibib: true
+	-WithSpriteBody:
+	WithChargeSpriteBody:
+		Sequence: active
+	Armament:
+		Weapon: LaserObelisk
+		LocalOffset: 0,-85,1280
+	AttackCharges:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		ChargeLevel: 50
+		ChargingCondition: charging
+	AmbientSound:
+		RequiresCondition: charging
+		SoundFiles: obelpowr.aud
+		Interval: 30, 40
+	FirepowerMultiplier@up_elitecapacitors:
+		Modifier: 160
+	ReloadDelayMultiplier@up_elitecapacitors:
+		Modifier: 40
+	RangeMultiplier@up_elitecapacitors:
+		Modifier: 130
+	RevealsShroudMultiplier@up_elitecapacitors:
+		Modifier: 130
+	DetectCloakedMultiplier@up_elitecapacitors:
+		Modifier: 130
+	Power:
+		Amount: -90
+	RevealsShroud:
+		Range: 9600
+	DetectCloaked:
+		Range: 4800
