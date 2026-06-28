@@ -3714,7 +3714,7 @@
 		GreenTint: 0.05
 		BlueTint: 0.025
 	Targetable:
-		RequiresCondition: !damaged && !untargetable
+		RequiresCondition: !untargetable
 	Targetable@destroyed:
 		TargetTypes: TechHusk
 		RequiresCondition: damaged
@@ -3748,8 +3748,22 @@
 	Capturable:
 		Types: none #tech
 		ValidRelationships: Enemy, Neutral, Ally
-	#Targetable:
-	#	TargetTypes: TechHusk
+	Health:
+		HP: 25000
+	Armor:
+		Type: Wood
+	HitShape:
+		UseTargetableCellsOffsets: true
+		Type: Rectangle
+			TopLeft: -512, -512
+			BottomRight: 512, 512
+	Targetable:
+		TargetTypes: Ground, Structure, Building
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: BuildingExplode
+		EmptyWeapon: BuildingExplode
+	ShakeOnDeath:
 	TransformOnCapture:
 	RequiresSpecificOwners:
 		ValidOwnerNames: Neutral
