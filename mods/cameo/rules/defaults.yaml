@@ -7073,14 +7073,6 @@ CPQDEBUGDUMMY:
 	GrantCondition:
 		Condition: shieldpermanent
 
-^TDSpawnActorsOnSell:
-	SpawnActorsOnSell:
-		ActorTypes: e6,e1.gdi,e1.gdi,e1.gdi
-
-^TDNodSpawnActorsOnSell:
-	SpawnActorsOnSell:
-		ActorTypes: e6,e1.nod,e1.nod,e1.nod
-
 ^RASpawnActorsOnSell:
 	Building:
 		BuildSounds: placbldg.aud, build5.aud

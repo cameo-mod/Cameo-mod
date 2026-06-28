@@ -2282,41 +2282,6 @@ ra2rmine:
 	active:
 		Length: 11
 
-ra2caoild:
-	Inherits: ^WithBuildingBib3
-	Defaults:
-		Filename: ra2_ctoild.shp
-		Offset: 0, 0
-	idle:
-		ShadowStart: 4
-	damaged-idle:
-		Start: 1
-		ShadowStart: 5
-	idle-pump:
-		Filename: ra2_ctoild_a.shp
-		Length: 32
-		ShadowStart: 64
-	damaged-idle-pump:
-		Filename: ra2_ctoild_a.shp
-		Length: 32
-		ShadowStart: 96
-	idle-flag:
-		Filename: ra2_ctoild_f.shp
-		Length: 8
-	damaged-idle-flag:
-		Filename: ra2_ctoild_f.shp
-		Length: 8
-	make:
-		Filename: ra2_cgoildmk.shp
-		Length: 14
-		ShadowStart: 14
-	bib:
-		Offset: 0,20
-	dead:
-		Start: 1
-	icon:
-		Filename: ra2caoildicon.shp
-		Offset: 0, 0
 ra2caoild.husk:
 	Inherits: ^WithBuildingBib3
 	Defaults:
@@ -2506,31 +2471,6 @@ ra2machshop.husk:
 		Filename: ra2_cgmach_f.shp
 		Length: 16
 
-ra2caairp:
-	Defaults:
-		Filename: ra2_ctairp.shp
-	idle:
-		ShadowStart: 4
-	damaged-idle:
-		Start: 1
-		ShadowStart: 5
-	idle-overlay:
-		Filename: ra2_ctairp_a.shp
-		Length: 10
-		Tick: 400
-	damaged-idle-overlay:
-		Filename: ra2_ctairp_a.shp
-		Start: 10
-		Length: 10
-		Tick: 400
-	idle-flag:
-		Filename: ra2_ctairp_f.shp
-		Length: 16
-	damaged-idle-flag:
-		Filename: ra2_ctairp_f.shp
-		Length: 16
-	dead:
-		Start: 1
 ra2caairp.husk:
 	Defaults:
 		Filename: ra2_ctairp.shp
@@ -6382,27 +6322,6 @@ ra2harv:
 		Filename: ra2_oregath.shp
 		Length: 15
 		Facings: 8
-ra2cmin:
-	Defaults:
-		Filename: ra2cmin.shp
-	idle:
-		Facings: 64
-	dock:
-		Start: 64
-		Facings: 64
-	dock-loop:
-		Start: 64
-		Facings: 64
-	warpout:
-		Filename: warpout.shp
-		Length: *
-	harvesting:
-		Filename: ra2_oregath.shp
-		Length: 15
-		Facings: 8
-	icon:
-		Filename: ra2cminicon.shp
-
 cra2cmin: #chrono resource delivery is bugged, this is needed to prevent crash on custom chrono miner
 	Defaults:
 		Filename: cra2cmin.shp
@@ -7928,17 +7847,6 @@ ra2atomic:
 	down:
 		Filename: ra2_nkmsldn.shp
 
-ra2txgasg:
-	idle:
-		Filename: txgasg.shp
-		Length: *
-
-yuricntl:
-	overlay:
-		Filename: yuricntl.shp
-		Length: *
-		Offset: 0, -24, 24
-
 ra2doomicon:
 	Defaults:
 		Filename: ra2doomicon.shp
@@ -7951,135 +7859,9 @@ ra2doomskeleton:
 		Filename: ra2doomskeletonicon.shp
 		Start: 0
 
-ra2corpse:
-	death_a:
-		Filename: ra2_death_a.shp
-		Length: *
-		ZOffset: -512
-		Tick: 2500
-	death_b:
-		Filename: ra2_death_b.shp
-		Length: *
-		ZOffset: -512
-		Tick: 2500
-	death_c:
-		Filename: ra2_death_c.shp
-		Length: *
-		ZOffset: -512
-		Tick: 2500
-	death_d:
-		Filename: ra2_death_d.shp
-		Length: *
-		ZOffset: -512
-		Tick: 2500
-	death_e:
-		Filename: ra2_death_e.shp
-		Length: *
-		ZOffset: -512
-		Tick: 2500
-	death_f:
-		Filename: ra2_death_f.shp
-		Length: *
-		ZOffset: -512
-		Tick: 2500
-
-ra2debris:
-	Defaults:
-		Length: *
-	small1:
-		Filename: ra2_dbris1sm.shp
-	small2:
-		Filename: ra2_dbris2sm.shp
-	small3:
-		Filename: ra2_dbris3sm.shp
-	small4:
-		Filename: ra2_dbris4sm.shp
-	small5:
-		Filename: ra2_dbris5sm.shp
-	small6:
-		Filename: ra2_dbris6sm.shp
-	small7:
-		Filename: ra2_dbris7sm.shp
-	small8:
-		Filename: ra2_dbris8sm.shp
-	small9:
-		Filename: ra2_dbris9sm.shp
-	large1:
-		Filename: ra2_dbris1lg.shp
-	large2:
-		Filename: ra2_dbris2lg.shp
-	large3:
-		Filename: ra2_dbris3lg.shp
-	large4:
-		Filename: ra2_dbris4lg.shp
-	large5:
-		Filename: ra2_dbris5lg.shp
-	large6:
-		Filename: ra2_dbris6lg.shp
-	large7:
-		Filename: ra2_dbris7lg.shp
-	large8:
-		Filename: ra2_dbris8lg.shp
-	large9:
-		Filename: ra2_dbris9lg.shp
-	large10:
-		Filename: ra2_dbrs10lg.shp
-	rock1:
-		Filename: ra2_dbri-wm1.shp
-	rock2:
-		Filename: ra2_dbri-wm2.shp
-	rock3:
-		Filename: ra2_dbri-wm3.shp
-	# was unused in vRA2
-	flyingbody:
-		Filename: ra2_dbrs10sm.shp
-
-chronoshift:
-	Defaults:
-		Filename: ra2_chronoar.shp
-		ZOffset: 1536
-		IgnoreWorldTint: true
-	start:
-		Length: 10
-	loop:
-		Start: 11
-		Length: 7
-	end:
-		Start: 18
-		Length: 4
-	warpin:
-		Length: *
-	target:
-		Filename: ra2_chronotg.shp
-		Length: *
-
 upradshells:
 	icon:
 		Filename: churaniumshellicon.shp
-ra2zbomb:
-	idle:
-		Filename: ra2zbomb.shp
-		Facings: 32
-		ZOffset: 1023
-
-ra2_chronosk:
-	Defaults:
-		Filename: ra2_chronosk.shp
-	idle:
-		Length: 13
-		Offset: 0,24
-		ZOffset: 1023
-
-ra2_initfire:
-	# Burning-actor flame overlay (PhysicalState Overheating) must read as fire regardless of
-	# terrain brightness or weather tint.
-	Defaults:
-		Filename: ra2_fire01.shp
-		IgnoreWorldTint: true
-	idle:
-		Length: *
-		ZOffset: 1023
-
 ra2uniontank:
 	Defaults:
 		Filename: UnionTankBody.png
@@ -8421,3 +8203,103 @@ ra2_yuri_upgrade_geneticboost:
 ra2_yuri_upgrade_psychicvision:
 	icon:
 		Filename: ra2_yuri_upgrade_psychicvision_icon.png
+
+ra2caoild:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ra2_ctoild.shp
+		Offset: 0, 0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 64
+	damaged-idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 96
+	idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	damaged-idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	make:
+		Filename: ra2_cgoildmk.shp
+		Length: 14
+		ShadowStart: 14
+	bib:
+		Offset: 0,20
+	dead:
+		Start: 1
+	icon:
+		Filename: ra2caoildicon.shp
+		Offset: 0, 0
+
+ra2caairp:
+	Defaults:
+		Filename: ra2_ctairp.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Length: 10
+		Tick: 400
+	damaged-idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Start: 10
+		Length: 10
+		Tick: 400
+	idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	dead:
+		Start: 1
+
+ra2corpse:
+	death_a:
+		Filename: ra2_death_a.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_b:
+		Filename: ra2_death_b.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_c:
+		Filename: ra2_death_c.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_d:
+		Filename: ra2_death_d.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_e:
+		Filename: ra2_death_e.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_f:
+		Filename: ra2_death_f.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+
+ra2zbomb:
+	idle:
+		Filename: ra2zbomb.shp
+		Facings: 32
+		ZOffset: 1023

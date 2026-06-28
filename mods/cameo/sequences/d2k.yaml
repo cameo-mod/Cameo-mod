@@ -3583,55 +3583,12 @@ d2k_munitions.ordos:
 #		   MISC
 ####################################################
 
-large_trail:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 4126
-		Length: 4
-		Tick: 120
-		BlendMode: Additive
-		ZOffset: 1023
-
-small_trail:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 3988
-		Length: 4
-		Tick: 80
-		BlendMode: Additive
-		ZOffset: 1023
-
-small_trail2:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 3793
-		Length: 4
-		Tick: 80
-		BlendMode: Additive
-		ZOffset: 1023
-
 bazooka_trail:
 	Defaults:
 	idle:
 		Filename: DATA.R16
 		Scale: 1.5
 		Start: 3634
-		Length: 4
-		Tick: 80
-		ZOffset: 1023
-
-bazooka_trail2:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 3797
 		Length: 4
 		Tick: 80
 		ZOffset: 1023
@@ -3672,38 +3629,6 @@ sandtrail:
 		Filename: sandtrail.shp
 		Frames: 7, 4, 6, 5, 2, 0, 3, 1
 
-d2k_pips:
-	Defaults:
-	groups:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 17
-		Length: 10
-		Offset: 3, 3
-	pickup-indicator:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 112
-		Offset: -9, -9
-	pip-empty:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 15
-	pip-green:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 16
-	tag-upgraded:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 110
-		Offset: -8,-8
-
 powerdown:
 	Defaults:
 	disabled:
@@ -3722,16 +3647,6 @@ d2k_editor-overlay:
 	paste:
 		Start: 1
 
-d2k_rpg:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3263
-		Facings: -32
-		ZOffset: 1023
-
 d2k_120mm:
 	Defaults:
 	idle:
@@ -3740,15 +3655,6 @@ d2k_120mm:
 		Remap: 54F94B
 		Start: 3262
 		BlendMode: Additive
-		ZOffset: 1023
-
-d2k_155mm:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3329
 		ZOffset: 1023
 
 d2k_crate-effects:
@@ -3805,15 +3711,6 @@ d2k_missile:
 		Facings: -32
 		ZOffset: 1023
 
-d2k_missile2:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Start: 3554
-		Facings: -32
-		ZOffset: 1023
-
 deathhand:
 	Defaults:
 	up:
@@ -3867,57 +3764,6 @@ d2k_bombs:
 		Remap: 54F94B
 		Start: 3528
 		Length: 4
-		ZOffset: 1023
-
-d2k_grenade:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3618
-		Length: 4
-		Tick: 80
-		ZOffset: 1023
-
-shrapnel:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3538
-		Length: 4
-		ZOffset: 1023
-
-shrapnel2:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3542
-		Length: 1
-		ZOffset: 1023
-
-shrapnel3:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3543
-		Length: 8
-		ZOffset: 1023
-
-shrapnel4:
-	Defaults:
-	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 3551
-		Length: 1
 		ZOffset: 1023
 
 sietch:
@@ -8527,9 +8373,11 @@ combat_siege_tank:
 d2k_ordos_stealth_tank:
 	idle:
 		Filename: ordos_tnkd.png
+		Scale: 1.25
 		Facings: 64
 	muzzle:
 		Filename: DATA.R16
+		Scale: 1.25
 		Remap: 54F94B
 		Start: 4028
 		Tick: 60
@@ -9246,3 +9094,67 @@ d2k_upgrade_needleguns:
 	icon:
 		Filename: needlegunsicon.png
 
+
+small_trail:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 3988
+		Length: 4
+		Tick: 80
+		BlendMode: Additive
+		ZOffset: 1023
+
+small_trail2:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 3793
+		Length: 4
+		Tick: 80
+		BlendMode: Additive
+		ZOffset: 1023
+
+d2k_rpg:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3263
+		Facings: -32
+		ZOffset: 1023
+
+shrapnel2:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3542
+		Length: 1
+		ZOffset: 1023
+
+shrapnel3:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3543
+		Length: 8
+		ZOffset: 1023
+
+shrapnel4:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3551
+		Length: 1
+		ZOffset: 1023
+
+# from tiberiansun.yaml

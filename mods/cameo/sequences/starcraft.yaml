@@ -3461,13 +3461,6 @@ darkswarm:
 	make:
 		Length: 5
 
-plagueunit:
-	overlay:
-		Filename: plagueoverlay.png
-		Length: *
-		Tick: 150
-		ZOffset: 1024
-
 sclurker:
 	Defaults:
 		Filename: sclurkeridle.png
@@ -3863,14 +3856,16 @@ upscrefinery3:
 	icon:
 		Filename: scvespenecoll3icon.shp
 
-scdragoonprojectile:
-	idle:
-		Filename: scdragoonprojectile.png
-		Length: 31
-
 disabledicon:
 	icon:
 		Filename: disabledicon.png
 		Length: 1
 
 
+
+tspulsball:
+	idle:
+		Filename: tspulsball.shp
+		Length: *
+		ZOffset: 1023
+		Offset: 0, 0, 24
