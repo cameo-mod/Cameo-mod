@@ -97,9 +97,9 @@ MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
 
-Include: ContentPacks|TiberianDawn/Shared/content.yaml
-Include: ContentPacks|TiberianDawn/GDI/content.yaml
-Include: ContentPacks|TiberianDawn/Nod/content.yaml
+Include: ContentPacks/TiberianDawn/Shared/content.yaml
+Include: ContentPacks/TiberianDawn/GDI/content.yaml
+Include: ContentPacks/TiberianDawn/Nod/content.yaml
 
 Rules:
 	cameo|rules/misc.yaml
