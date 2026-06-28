@@ -1,0 +1,466 @@
+^TSSpawnActorsOnSell:
+	SoundOnDamageTransition:
+		DamagedSounds: expnew01.aud, expnew02.aud, expnew04.aud, expnew05.aud
+		DestroyedSounds: expnew03.aud, expnew07.aud, expnew08.aud, expnew11.aud
+	SpawnActorsOnSell:
+		ActorTypes: tsengineer, tse1, tse1, tse1
+	Building:
+		BuildSounds: tsplace2.aud
+
+^TSRenderVoxel:
+	Inherits: ^RenderVoxel
+	RenderVoxels:
+		Scale: 15
+		NormalsPalette: ts-normals
+		PlayerPalette: playerra2
+		LightAmbientColor: 0.6, 0.6, 0.6
+		LightDiffuseColor: 0.4, 0.4, 0.4
+		LightPitch: 142
+		LightYaw: 682
+
+^TSInfantry:
+	WithDeathAnimation:
+		PlayerPalette: playerra2
+		DeathTypes:
+			DefaultDeath: 1
+			BulletDeath: 2
+			RippedApartDeath: 2
+			SmallExplosionDeath: 4
+			ExplosionDeath: 4
+			TiberiumDeath: 1
+			RA2VirusDeath: 1
+	Crushable:
+		CrushSound: squish6.aud
+
+# ^HunterSeekersPower:
+	# ProduceActorPowerCA@HunterSeeker:
+	# 	Name: Deploy Hunter-Seeker
+	# 	Description: Deploys a Hunter-Seeker.\n  Instantly kills mobile targets\n  Splash damage strong vs Vehicles, Buildings\n  Requires line of sight to target
+	# 	Icon: hunterseeker
+	# 	PauseOnCondition: lowpower
+	# 	Actors: tsprobe
+	# 	Type: Vehicle.HunterSeeker
+	# 	ChargeInterval: 3000
+	# 	ReadyAudio: Reinforce
+	# 	BlockedAudio:
+	# 	AutoFire: True
+	# 	IncomingSound: hunter2.aud
+	# 	LaunchSound: hunter2.aud
+	# 	OrderName: HunterSeekerSpawn
+	# 	SupportPowerPaletteOrder: 20
+	# Exit@1:
+	# 	ExitCell: 1,0
+	# Exit@2:
+	# 	ExitCell: 1,1
+	# Exit@3:
+	# 	ExitCell: 2,1
+	# Exit@4:
+	# 	ExitCell: 2,0
+	# Production@HunterSeeker:
+	# 	Produces: Vehicle.HunterSeeker
+
+^CABALRankDecoration:
+	WithDecoration@RANK-1:
+		Image: cabalrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: cabalrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: cabalrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: cabalrank
+		Sequence: rank-elite
+		Palette: greyscale
+^ForgottenRankDecoration:
+	WithDecoration@RANK-1:
+		Image: forgotrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: forgotrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: forgotrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: forgotrank
+		Sequence: rank-elite
+		Palette: greyscale
+^MutSWCreature:
+	RejectsOrders:
+	AutoTarget:
+		InitialStance: AttackAnything
+	KillsSelf:
+		Delay: 600
+		RemoveInstead: true
+	PeriodicExplosion@disappear:
+		Weapon: TunnelDisappear
+		InitialDelay: 595
+	GivesExperience:
+		PlayerExperienceModifier: 0
+
+^TSCyborgs:
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	Crushable:
+		CrushClasses: vehicle
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+
+^SubterraneanVoxelVehicle:
+	RevealsShroud:
+		RequiresCondition: !submerged
+	WithVoxelBody:
+		RequiresCondition: !submerged
+	Targetable:
+		RequiresCondition: !submerged && !chronobeamed
+	Targetable@UNDERGROUND:
+		TargetTypes: Underground
+		RequiresCondition: submerged
+	GrantConditionOnSubterraneanLayer:
+		Condition: submerged
+		SubterraneanTransitionPalette: tseffect
+		SubterraneanTransitionImage: tsdig
+		SubterraneanTransitionSequence: idle
+		SubterraneanTransitionSound: subdril1.aud
+	WithDecoration@UNDERGROUND:
+		RequiresCondition: submerged
+		Position: Center
+		Image: gpsdot
+		Sequence: Vehicle
+		RequiresSelection: false
+		Palette: player
+		IsPlayerPalette: true
+	AnnounceOnSeen@subterranean:
+		PingRadar: true
+		Notification: SubterraneanUnitDetected
+	GrantCondition@untargetable:
+		Condition: untargetable
+		RequiresCondition: chronobeamed || invulnerability || submerged
+
+#######################################
+# TS GDI Vehicles
+#######################################
+
+^SERETraining:
+	GrantConditionOnPrerequisite@up_seretraining:
+		Condition: up_seretraining
+		Prerequisites: up_seretraining
+	SpeedMultiplier@up_seretraining:
+		RequiresCondition: up_seretraining
+		Modifier: 120
+	DamageMultiplier@up_seretraining:
+		RequiresCondition: up_seretraining
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: up_seretraining
+
+^TSProjectileImprovements:
+	GrantConditionOnPrerequisite@up_tsprojectileimprovements:
+		Condition: up_tsprojectileimprovements
+		Prerequisites: up_tsprojectileimprovements
+	RangeMultiplier@up_tsprojectileimprovements:
+		RequiresCondition: up_tsprojectileimprovements
+		Modifier: 120
+	FirepowerMultiplier@up_tsprojectileimprovements:
+		RequiresCondition: up_tsprojectileimprovements
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: up_tsprojectileimprovements
+
+^MechanicalReliability:
+	GrantConditionOnPrerequisite@up_mechanicalreliability:
+		Condition: up_mechanicalreliability
+		Prerequisites: up_mechanicalreliability
+	ChangesHealth@up_mechanicalreliability1:
+		PercentageStep: 1
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: up_mechanicalreliability
+	ChangesHealth@up_mechanicalreliability2:
+		Step: 50
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: up_mechanicalreliability
+	DamageMultiplier@up_mechanicalreliability:
+		RequiresCondition: up_mechanicalreliability
+		Modifier: 90
+	SpeedMultiplier@up_mechanicalreliability:
+		RequiresCondition: up_mechanicalreliability
+		Modifier: 110
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability
+
+########## LAB ##########
+
+^CeramicArmor:
+	GrantConditionOnPrerequisite@up_ceramicarmor:
+		Condition: up_ceramicarmor
+		Prerequisites: up_ceramicarmor
+	DamageMultiplier@up_ceramicarmor:
+		RequiresCondition: up_ceramicarmor
+		Modifier: 75
+	SpeedMultiplier@up_ceramicarmor:
+		RequiresCondition: up_ceramicarmor
+		Modifier: 110
+	ActorStatValues:
+		Upgrades: up_ceramicarmor
+
+^MechEngineering:
+	GrantConditionOnPrerequisite@up_mechengineering:
+		Condition: up_mechengineering
+		Prerequisites: up_mechengineering
+	DamageMultiplier@up_mechengineering:
+		RequiresCondition: up_mechengineering
+		Modifier: 80
+	SpeedMultiplier@up_mechengineering:
+		RequiresCondition: up_mechengineering
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: up_mechengineering
+
+^SonicWeaponry:
+	GrantConditionOnPrerequisite@up_sonicweaponry:
+		Condition: up_sonicweaponry
+		Prerequisites: up_sonicweaponry
+	ActorStatValues:
+		Upgrades: up_sonicweaponry
+
+^RailgunWeaponry:
+	# FirepowerMultiplier@up_railgunweaponry:
+	# 	RequiresCondition: up_railgunweaponry
+	# 	Modifier: 125
+	# ReloadDelayMultiplier@up_railgunweaponry:
+	# 	RequiresCondition: up_railgunweaponry
+	# 	Modifier: 110
+	# InaccuracyMultiplier@up_railgunweaponry:
+	# 	RequiresCondition: up_railgunweaponry
+	# 	Modifier: 25
+	GrantConditionOnPrerequisite@up_railgunweaponry:
+		Condition: up_railgunweaponry
+		Prerequisites: up_railgunweaponry
+	ActorStatValues:
+		Upgrades: up_railgunweaponry
+
+^ModernFireControlSystems:
+	GrantConditionOnPrerequisite@up_modernfirecontrolsystems:
+		Condition: up_modernfirecontrolsystems
+		Prerequisites: up_modernfirecontrolsystems
+	ReloadDelayMultiplier@up_modernfirecontrolsystems:
+		RequiresCondition: up_modernfirecontrolsystems
+		Modifier: 90
+	InaccuracyMultiplier@up_modernfirecontrolsystems:
+		RequiresCondition: up_modernfirecontrolsystems
+		Modifier: 90
+	RangeMultiplier@up_modernfirecontrolsystems:
+		RequiresCondition: up_modernfirecontrolsystems
+		Modifier: 105
+	RevealsShroudMultiplier@up_modernfirecontrolsystems:
+		RequiresCondition: up_modernfirecontrolsystems
+		Modifier: 105
+	DetectCloakedMultiplier@up_modernfirecontrolsystems:
+		RequiresCondition: up_modernfirecontrolsystems
+		Modifier: 105
+	ActorStatValues:
+		Upgrades: up_modernfirecontrolsystems
+
+
+################## NOD #########################
+
+############ Radar
+
+^InfiltrationKit:
+	GrantConditionOnPrerequisite@up_infiltrationkit:
+		Condition: up_infiltrationkit
+		Prerequisites: up_infiltrationkit
+	SpeedMultiplier@up_infiltrationkit:
+		RequiresCondition: up_infiltrationkit
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: up_infiltrationkit
+
+^MobilitySpecialization:
+	GrantConditionOnPrerequisite@up_mobilityspecialization:
+		Condition: up_mobilityspecialization
+		Prerequisites: up_mobilityspecialization
+	InaccuracyMultiplier@up_mobilityspecialization:
+		RequiresCondition: up_mobilityspecialization
+		Modifier: 90
+	RangeMultiplier@up_mobilityspecialization:
+		RequiresCondition: up_mobilityspecialization
+		Modifier: 110
+	RevealsShroudMultiplier@up_mobilityspecialization:
+		RequiresCondition: up_mobilityspecialization
+		Modifier: 110
+	DetectCloakedMultiplier@up_mobilityspecialization:
+		RequiresCondition: up_mobilityspecialization
+		Modifier: 110
+	SpeedMultiplier@up_mobilityspecialization:
+		RequiresCondition: up_mobilityspecialization
+		Modifier: 110
+	DamageMultiplier@up_mobilityspecialization:
+		RequiresCondition: up_mobilityspecialization
+		Modifier: 90
+	ActorStatValues:
+		Upgrades: up_mobilityspecialization
+
+^AuxiliaryWeapon:
+	GrantConditionOnPrerequisite@up_auxiliaryweapon:
+		Condition: up_auxiliaryweapon
+		Prerequisites: up_auxiliaryweapon
+	ReloadDelayMultiplier@up_auxiliaryweapon:
+		RequiresCondition: up_auxiliaryweapon
+		Modifier: 90
+	FirepowerMultiplier@up_auxiliaryweapon:
+		RequiresCondition: up_auxiliaryweapon
+		Modifier: 110
+	ActorStatValues:
+		Upgrades: up_auxiliaryweapon
+
+############### Lab
+
+^StealthFieldsImprovements:
+	GrantConditionOnPrerequisite@up_stealthfieldsimprovements:
+		Condition: up_stealthfieldsimprovements
+		Prerequisites: up_stealthfieldsimprovements
+	DamageMultiplier@up_stealthfieldsimprovements:
+		RequiresCondition: up_stealthfieldsimprovements
+		Modifier: 80
+	ActorStatValues:
+		Upgrades: up_stealthfieldsimprovements
+
+^TiberiumLenses:
+	GrantConditionOnPrerequisite@up_tiberiumlenses:
+		Condition: up_tiberiumlenses
+		Prerequisites: up_tiberiumlenses
+	ActorStatValues:
+		Upgrades: up_tiberiumlenses
+
+^TiberiumCoreMissiles:
+	GrantConditionOnPrerequisite@up_tiberiumcoremissiles:
+		Condition: up_tiberiumcoremissiles
+		Prerequisites: up_tiberiumcoremissiles
+	ActorStatValues:
+		Upgrades: up_tiberiumcoremissiles
+
+^AdvancedTiberiumRefinement:
+	GrantConditionOnPrerequisite@up_advancedtiberiumrefinement:
+		Condition: up_advancedtiberiumrefinement
+		Prerequisites: up_advancedtiberiumrefinement
+	SpeedMultiplier@up_advancedtiberiumrefinement:
+		RequiresCondition: up_advancedtiberiumrefinement
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement
+
+^WillOfKane:
+	GrantConditionOnPrerequisite@up_willofkane:
+		Condition: up_willofkane
+		Prerequisites: up_willofkane
+	GrantConditionOnDamageState@Light:
+		Condition: damagedlight
+		ValidDamageStates: Light
+	GrantConditionOnDamageState@Medium:
+		Condition: damagedmedium
+		ValidDamageStates: Medium
+	GrantConditionOnDamageState@Heavy:
+		Condition: damagedheavy
+		ValidDamageStates: Heavy
+	GrantConditionOnDamageState@Critical:
+		Condition: damagedcritical
+		ValidDamageStates: Critical
+	FirepowerMultiplier@Light:
+		Modifier: 110
+		RequiresCondition: damagedlight && up_willofkane
+	FirepowerMultiplier@Medium:
+		Modifier: 120
+		RequiresCondition: damagedmedium && up_willofkane
+	FirepowerMultiplier@Heavy:
+		Modifier: 130
+		RequiresCondition: damagedheavy && up_willofkane
+	FirepowerMultiplier@Cryticcal:
+		Modifier: 140
+		RequiresCondition: damagedcritical && up_willofkane
+	ActorStatValues:
+		Upgrades: up_willofkane
+
+^cabalmobilitymatrix:
+	GrantConditionOnPrerequisite@cabalmobilitymatrix:
+		Condition: cabalmobilitymatrix
+		Prerequisites: cabalmobilitymatrix
+	SpeedMultiplier@cabalmobilitymatrix:
+		RequiresCondition: cabalmobilitymatrix
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: cabalmobilitymatrix
+
+^cabaldarkarmament:
+	GrantConditionOnPrerequisite@cabaldarkarmament:
+		Condition: cabaldarkarmament
+		Prerequisites: cabaldarkarmament
+	ActorStatValues:
+		Upgrades: cabaldarkarmament
+	ReloadDelayMultiplier@cabalmobilitymatrix:
+		RequiresCondition: cabalmobilitymatrix
+		Modifier: 110
+^cabaltibcatalysticon:
+	GrantConditionOnPrerequisite@cabaltibcatalysticon:
+		Condition: cabaltibcatalysticon
+		Prerequisites: cabaltibcatalysticon
+	ActorStatValues:
+		Upgrades: cabaltibcatalysticon
+
+^cabalradarhack:
+	GrantConditionOnPrerequisite@cabalradarhack:
+		Condition: cabalradarhack
+		Prerequisites: cabalradarhack
+	ActorStatValues:
+		Upgrades: cabalradarhack
+############### Lab
+
+^cabalbackupsystemicon:
+	GrantConditionOnPrerequisite@cabalbackupsystemicon:
+		Condition: cabalbackupsystemicon
+		Prerequisites: cabalbackupsystemicon
+	ActorStatValues:
+		Upgrades: cabalbackupsystemicon
+^cabalhandoflegion:
+	GrantConditionOnPrerequisite@cabalhandoflegion:
+		Condition: cabalhandoflegion
+		Prerequisites: cabalhandoflegion
+	ActorStatValues:
+		Upgrades: cabalhandoflegion

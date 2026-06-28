@@ -1,0 +1,53 @@
+tsaegis:
+	Inherits: ^BoatUnit
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Aegis Cruiser
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~wip
+		Queue: Naval, RANaval
+		Description: Heavy GDI anti-aircraft warship.\n Strong vs. Aircraft
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 80000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 6c0
+	Armament:
+		Weapon: TSAegisMissile
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 72789, 72789
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	DeliversCash:
+		Payload: 500
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		Image: ra2aegis
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tsprojectileimprovements, up_mechanicalreliability
+
+#######################################
+# TS Nod Vehicles
+#######################################

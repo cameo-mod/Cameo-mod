@@ -1,0 +1,2416 @@
+TSE1:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Light Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		IconPalette: ra2
+		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 16000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@PRIMARY:
+		Weapon: TSMinigun
+		LocalOffset: 128,0,256
+		# RequiresCondition: !rank-elite
+	# Armament@ELITE:
+	# 	Weapon: TSMinigun
+	# 	RequiresCondition: rank-elite
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSMinigun
+	RenderSprites:
+		Image: tse1.gdi
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+TSE1.GDI:
+	Inherits: TSE1
+	Inherits@SERETraining: ^SERETraining
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile
+	ActorStatValues:
+		Upgrades: up_seretraining
+
+TSE1.NOD:
+	Inherits: TSE1
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsnthand
+	Armament@PRIMARY:
+		Weapon: TSMinigun
+		RequiresCondition: !up_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@UPGRADE:
+		Weapon: TSLasergun
+		RequiresCondition: up_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSMinigun
+		RequiresCondition: !up_tiberiumlenses
+	Armament@UPGRADEGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSLasergun
+		RequiresCondition: up_tiberiumlenses
+	Cloak@up_infiltrationkit:
+		DetectionTypes: GroundCloak
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		IsPlayerPalette: true
+		RequiresCondition: up_infiltrationkit
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tse1.nod
+	ActorStatValues:
+		Upgrades: up_tiberiumlenses, up_infiltrationkit
+
+TSE1PARA:
+	Inherits: TSE1
+	-Buildable:
+	RenderSprites:
+		Image: tse1.gdi
+	ProducibleWithLevel:
+		InitialLevels: 4
+	Parachutable: ##########
+		FallRate: 999
+	UpdatesPlayerStatistics:
+		OverrideActor: tse1
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSMEDIC:
+	Inherits: MEDI
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Buildable:
+		Prerequisites: ~tsgtpile
+		Queue: Infantry, RAInfantry
+		Description: Heals nearby infantry.\n  Unarmed
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Medic
+	WithInfantryBody:
+		IdleSequences: idle
+		StandSequences: stand
+		DefaultAttackSequence: shoot
+	Voiced:
+		VoiceSet: TSMedic
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: up_seretraining
+
+TSENGINEER:
+	Inherits: E6
+	Inherits@anim: ^TSInfantry
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@SERETraining: ^SERETraining
+	Valued:
+		Cost: 600
+	Buildable:
+		Prerequisites: ~tsgtpile
+		Queue: Infantry, RAInfantry
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Voiced:
+		VoiceSet: TSEngineer
+	Armament@PRIMARY:
+		Weapon: TSEngineerPistol
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Weapon: TSEngineerPistol
+	DeliversCash:
+		Payload: 300
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: up_seretraining
+
+TSENGINEER2:
+	Inherits: TSENGINEER
+	Inherits@MC: ^MCImmune
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsnthand
+	RenderSprites:
+		Image: tsengineer
+	Voiced:
+		VoiceSet: TSInfantry
+	-TemporaryOwnerManager:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: altengi
+
+
+TSE2:
+	Inherits: ^Soldier
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Disc Thrower
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 29
+		Prerequisites: ~tsgtpile
+		Queue: Infantry, RAInfantry
+		Description: Fast infantry armed with grenades.\nCan attack air \n  Strong vs Buildings, slow-moving targets
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSGrenade
+		LocalOffset: 0,0,427
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSGrenadeSonic
+		LocalOffset: 0,0,427
+		RequiresCondition: up_sonicweaponry
+	#Armament@aa:
+	#	Weapon: TSGrenadeAA
+	#	LocalOffset: 0,0,427
+	#	FireDelay: 15
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSGrenadeG
+		RequiresCondition: !up_sonicweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSGrenadeSonic
+		RequiresCondition: up_sonicweaponry
+	TakeCover:
+		ProneOffset: 300,0,-227
+	WithInfantryBody:
+		DefaultAttackSequence: throw
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	# Explodes:
+	# 	Weapon: GrenadierExplode
+	# 	EmptyWeapon: GrenadierExplode
+	# 	Chance: 50
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_seretraining, up_sonicweaponry
+
+TSE2PARA:
+	Inherits: TSE2
+	-Buildable:
+	RenderSprites:
+		Image: tse2
+	ProducibleWithLevel:
+		InitialLevels: 4
+	Parachutable: ##########
+		FallRate: 999
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSENFORCER:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Falcon Enforcer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsgtpile
+		Queue: Infantry, RAInfantry
+		Description: Heavy infantry. Effective vs Vehicles, Aircraft.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	Armament@PRIMARY:
+		Weapon: TS30mm
+		LocalOffset: 0,0,427
+		RequiresCondition: !up_railgunweaponry
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TS30mm
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TS30mmRail
+		LocalOffset: 0,0,427
+		RequiresCondition: up_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TS30mmRail
+		RequiresCondition: up_railgunweaponry
+	TakeCover:
+		ProneOffset: 300,0,-227
+	WithInfantryBody:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_seretraining, up_tsprojectileimprovements, up_railgunweaponry
+
+TSRIOTT:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Riot Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~tsgtpile, tsntpulsgdi, tsgtradr
+		Queue: Infantry, RAInfantry
+		Description: Heavy infantry. Effective vs Infantry.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 54000
+	ChangesHealth@SelfHealing:
+		Step: 54
+	Armament@PRIMARY:
+		Weapon: TSShotgun
+		LocalOffset: 0,0,427
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSShotgun
+	TakeCover:
+		ProneOffset: 300,0,-227
+	WithInfantryBody:
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_seretraining
+
+TSZONETROOPER:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Zone Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~tsgtpile, tsgttech, ~upzonetrooper
+		Queue: Infantry, RAInfantry
+		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 80000
+	ChangesHealth@PowerPacks:
+		PercentageStep: 2
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+	ChangesHealth@PowerPacks2:
+		Step: 100
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+	RevealsShroud:
+		Range: 8000
+	DetectCloaked:
+		Range: 4000
+	RenderDetectionCircle:
+	Armament@PRIMARY:
+		Weapon: TSZoneRailgun
+		LocalOffset: 256,43,256
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSZoneRailgunRail
+		LocalOffset: 256,43,256
+		RequiresCondition: up_railgunweaponry
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSZoneRailgun
+		RequiresCondition: !up_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSZoneRailgunRail
+		RequiresCondition: up_railgunweaponry
+	-DamagedByTerrain:
+	-TakeCover:
+	WithInfantryBody:
+		-StandSequences:
+	Selectable:
+		Class: tsghost
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_seretraining, up_railgunweaponry
+
+TSE3:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Rocket Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsnthand
+		Queue: Infantry, RAInfantry
+		Description: Anti-tank/anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY: ##########
+		Weapon: TSBazooka
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: !up_tiberiumcoremissiles
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSBazooka
+		RequiresCondition: !up_tiberiumcoremissiles
+	Armament@UPGRADE: ##########
+		Weapon: TSTibBazooka
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: up_tiberiumcoremissiles
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSTibBazooka
+		RequiresCondition: up_tiberiumcoremissiles
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Voiced:
+		VoiceSet: TSRocket
+	# Armament@GARRISONED: ##########
+	# 	Name: garrisoned
+	# 	Weapon: TSBazookaG
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tiberiumcoremissiles
+
+
+elitcadre:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Valued:
+		Cost: 450
+	Tooltip:
+		Name: Elite Cadre
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOsrder: 50
+		Prerequisites: ~tsnthand, tsntradr
+		Queue: Infantry, RAInfantry
+		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Air, Vehicles\n  Weak vs Siege, Heavy armor
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: elitecadregun
+		RequiresCondition: !up_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@UPGRADE:
+		Weapon: laserelitecadregun
+		RequiresCondition: up_tiberiumlenses
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: elitecadregun
+		RequiresCondition: !up_tiberiumlenses
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: laserelitecadregun
+		RequiresCondition: up_tiberiumlenses
+	Armament@SECONDARY:
+		Weapon: TSCadreGrenade
+		RequiresCondition: up_auxiliaryweapon
+		LocalOffset: 128,0,256
+	Armament@GARRISONEDSECONDARY: ##########
+		Name: garrisoned
+		Weapon: TSCadreGrenade
+		RequiresCondition: up_auxiliaryweapon
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Voiced:
+		VoiceSet: TSRocket
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	RenderSprites:
+		PlayerPalette: ra2player
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tiberiumlenses, up_auxiliaryweapon
+
+TSTOXINTROOP:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 850
+	Tooltip:
+		Name: Toxin Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOsrder: 80
+		Prerequisites: ~tsnthand, tsnttech
+		Queue: Infantry, RAInfantry
+		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSToxinRifle
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSToxinRifle
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Voiced:
+		VoiceSet: TSRocket
+	RenderSprites:
+		PlayerPalette: playerra2
+
+
+TSSHOTGUNCOM:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	# Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Shotgun Commando
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOsrder: 100
+		Prerequisites: ~tsnthand, tsnttech
+		Queue: Infantry, RAInfantry
+		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
+		BuildLimit: 1
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Weapon: TSCommandoShotgun
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSCommandoShotgun
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Voiced:
+		VoiceSet: TSRocket
+	Cloak@up_infiltrationkit:
+		DetectionTypes: GroundCloak
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		IsPlayerPalette: true
+		RequiresCondition: up_infiltrationkit
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_infiltrationkit
+
+
+TSCHAMSPY:
+	Inherits: ^Soldier
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^TSInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 90
+		Prerequisites: ~tsnthand, tsntradr
+		Description: Cloaked spy that can infiltrate structures.
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Chameleon Spy
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	-Guard:
+	Health:
+		HP: 30000
+	Mobile:
+		Speed: 90
+		Voice: Move
+	RevealsShroud:
+		Range: 8000
+	DetectCloaked:
+		Range: 4000
+	RenderDetectionCircle:
+	Armament@PRIMARY:
+		Weapon: ChamBlade
+	Passenger:
+		CustomPipType: blue
+		Voice: Move
+	# Cloak:
+	# 	InitialDelay: 60
+	# 	CloakDelay: 60
+	# 	UncloakOn: Unload
+	# 	PauseOnCondition: disabled || base-reveal
+	# 	IsPlayerPalette: true
+	Infiltrates:
+		Types: SpyInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+		RequiresCondition: up_infiltrationkit
+	IgnoresDisguise:
+	AttackMove:
+		Voice: Move
+	Voiced:
+		VoiceSet: TSSpy
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: up_infiltrationkit
+
+TSMHIJACK:
+	Inherits: ^Soldier
+	Inherits@EXT: ^ExternalConditions
+	Inherits@anim: ^TSInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Mutant Hijacker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~tsnthand, tsntweap, tsntradr, disabled
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: Hijacks vehicles.
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 6000
+	Passenger:
+		CustomPipType: blue
+	Mirage:
+		RequiresCondition: !disabled
+		InitialDelay: 100
+		RevealDelay: 20
+		RevealOn: Attack, Infiltrate, Damage
+		MirageCondition: disguise
+		DefaultTargetTypes: t08, t18, t10, t03, t02
+	CaptureManager:
+	Captures@CAPTURES:
+		CaptureTypes: vehicle
+		PlayerExperience: 50
+		ConsumedByCapture: true
+	Crushable:
+		WarnProbability: 95
+	Cloak:
+		InitialDelay: 250
+		CloakDelay: 120
+		UncloakOn: Attack, Unload, Infiltrate, Demolish, Move
+		DetectionTypes: Cloak, Thief
+		PauseOnCondition: cloak-force-disabled || base-reveal
+		IsPlayerPalette: true
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Voiced:
+		VoiceSet: TSHijacker
+	-DamagedByTerrain:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+
+TSRAILCOM:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	# Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@SERETraining: ^SERETraining
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Railgun Commando
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~tsgtpile, tsgttech
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Weapon: TSCommandoRailgun
+		LocalOffset: 256,43,256
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSCommandoRailgunRail
+		LocalOffset: 256,43,256
+		RequiresCondition: up_railgunweaponry
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSCommandoRailgun
+		RequiresCondition: !up_railgunweaponry
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSCommandoRailgunRail
+		RequiresCondition: up_railgunweaponry
+	-DamagedByTerrain:
+	Selectable:
+		Class: tsghost
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: up_seretraining, up_railgunweaponry
+
+
+#The following are used for the mutant wildlife spawner superweapon
+
+TSMUTANTW:
+	Inherits: TSMUTANT
+	Buildable:
+		Prerequisites: ~TSMUTANTW
+	RenderSprites:
+		Image: tsmutant
+	AttackWander:
+
+TSENGINEECABAL:
+	Inherits: TSENGINEER
+	Inherits@Cyborg: ^TSCyborgs
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsnthand2
+	Voiced:
+		VoiceSet: TSCyborg
+	-TemporaryOwnerManager:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tscabalengi
+	-TakeCover:
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+
+
+TSCYBORG:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Cyborg: ^TSCyborgs
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@DarkArmament: ^cabaldarkarmament
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Cyborg Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 56
+		PauseOnCondition: disabled
+	Armor:
+		Type: Flak
+	Health:
+		HP: 35000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSVulcan3
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcanTower
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+tscyborgb:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Plated Armor Cyborg
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 46
+		PauseOnCondition: disabled
+	Armor:
+		Type: Plate
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSVulcan3
+	Armament@GRENADE:
+		Weapon: TSGrenade
+		RequiresCondition: cabaldarkarmament
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Voiced:
+		VoiceSet: TSCyborgHeavy
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcanTower
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tsdevout:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Devout
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 56
+		PauseOnCondition: disabled
+	Armor:
+		Type: Plate
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSDevoutChainguns
+		LocalOffset: 0,-20,90, 0,20,90
+		RequiresCondition: !cabaldarkarmament
+	Armament@Upgraded:
+		Weapon: TSDevoutChaingunsUpgraded
+		LocalOffset: 0,-20,90, 0,20,90
+		RequiresCondition: cabaldarkarmament
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Voiced:
+		VoiceSet: TSNewCyborgVoice
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcanTowerTwin
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tsascended:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Ascended
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 56
+		PauseOnCondition: disabled
+	Armor:
+		Type: Plate
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSTwinBazooka
+		LocalOffset: 0,20,90, 0,-20,90
+		RequiresCondition: !cabaldarkarmament
+	Armament@Upgraded:
+		Weapon: TSQuadBazooka
+		LocalOffset: 0,-20,90, 0,20,90
+		RequiresCondition: cabaldarkarmament
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Voiced:
+		VoiceSet: TSNewCyborgVoice
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSTwinBazooka
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tshacker:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@HAND: ^cabalhandoflegion
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Hacker Cyborg
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 500
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 56
+		PauseOnCondition: disabled
+	Armor:
+		Type: Plate
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: TSRobotHackingControl
+		LocalOffset: 0,0,90
+	Armament@Vehicle:
+		Weapon: TSMechanicalHackingControl
+		LocalOffset: 0,0,90
+	WithInfantryBody:
+		RequiresCondition: !cydamaged
+		DefaultAttackSequence: attack
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Voiced:
+		VoiceSet: TSNewCyborgVoice
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSRobotHackingControl
+	Selectable:
+		Class: tshacker
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	MindControllerCA:
+		ArmamentNames: primary
+		ExperienceFromControl: 100
+		TicksToControl: 120
+		TicksToRevoke: 25
+		Capacity: 8
+		RequiresCondition: !disabled
+		ControllingCondition: controlling
+	WithRangeCircle@MC:
+		Range: 9500
+		Type: mindcontrol
+		Color: 663399b0
+	SpeedMultiplier@cabalhandoflegion:
+		RequiresCondition: cabalhandoflegion
+		Modifier: 125
+TSREAPER:
+	Inherits: ^Walker
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillAndNeutronImmune
+	Armor:
+		Type: Medium #Wood
+	Valued:
+		Cost: 1000 #1000
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsnthand2, tscabaltech
+		Description: Cyborg walker armed with missiles and nets.\n Strong vs vehicles\n Can immobilize infantry
+		BuildDuration: 500
+		BuildDurationModifier: 100
+	RevealsShroud:
+		Range: 6c0
+	Health:
+		HP: 75000
+	ChangesHealth@SelfHealing:
+		Step: 75
+	Mobile:
+		TurnSpeed: 200
+		Speed: 75
+	Armament:
+		Weapon: TSReaperTusk
+	Armament@TRAP:
+		Weapon: TSReaperTrap
+	Voiced:
+		VoiceSet: TSReaper
+	Tooltip:
+		Name: Cyborg Reaper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	DeathSounds:
+	AttackMove:
+		Voice: Attack
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	RenderSprites:
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, -128
+		Class: tsreaper
+	Capturable:
+		Types: thiefproof
+	ChangesHealth:
+		Step: 30
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+TSCYC2:
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits: TSCYBORG
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Cyborg Commando
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~tsnthand2, tscabaltech
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+	Mobile:
+		Speed: 52
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament@PRIMARY:
+		Weapon: TSCyCannon
+	Voiced:
+		VoiceSet: TSCyborgCommando
+	Selectable:
+		Class: tscyc2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Armor:
+		Type: Heroic
+tsccommando:
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits: TSCYBORG
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 8000
+	Tooltip:
+		Name: Cyborg Commando V2
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~tsnthand2, tscabaltech
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+	Mobile:
+		Speed: 58
+	Health:
+		HP: 400000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament@PRIMARY:
+		Weapon: TSSuperCyCannon
+	Voiced:
+		VoiceSet: TSCyborgCommando
+	Selectable:
+		Class: tscyc2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	Armor:
+		Type: Heroic
+TSDissolver:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EMP: ^TurretEMP
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@HackableRobot: ^HackableRobot
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Dissolver
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry, RAInfantry
+		Description: Anti-Tank Walker\nDissolves mechanical parts to regenerate itself
+		Prerequisites: ~tsnthand2
+		IconPalette: ra2
+	Selectable:
+		Class: TSDissolver
+	Mobile:
+		TurnSpeed: 396
+		Speed: 70
+		Locomotor: foot
+	Health:
+		HP: 28000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armor:
+		Type: Plate
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 40
+		Offset: 0,0,25
+	Armament:
+		Weapon: TSDissolver
+		LocalOffset: 200,0,0
+	RenderSprites:
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	-WithFacingSpriteBody:
+	WithInfantryBody:
+	ChangesHealth:
+		Step: 500
+		Delay: 15
+		StartIfBelow: 150
+		RequiresCondition: attack
+	GrantConditionOnAttack:
+		Condition: attack
+	WithSpriteTurret:
+		RequiresCondition: !attack
+	WithSpriteTurret@1:
+		Sequence: shoot
+		RequiresCondition: attack
+	Voiced:
+		VoiceSet: TSCyborg
+
+TSARND:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Eliminator 800
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsnthand2
+		BuildDurationModifier: 100
+		BuildDuration: 250
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+	Health:
+		HP: 16000
+	Mobile:
+		Speed: 71
+		Voice: Move
+	Guard:
+		Voice: Move
+	RevealsShroud:
+		Range: 6c0
+	Passenger:
+		CustomPipType: red
+		Voice: Move
+	AmmoPool:
+		Ammo: 96
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 15
+		Count: 1
+	Armament@1:
+		Weapon: RA2GattlingMG1
+		PauseOnCondition: ammo <= 64
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: RA2GattlingMG2
+		PauseOnCondition: ammo <= 8 && ammo >= 65
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@3:
+		Weapon: RA2GattlingMG3
+		PauseOnCondition: ammo >= 9
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@1AA:
+		Weapon: RA2GattlingMG1AA
+		PauseOnCondition: ammo <= 64
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@2AA:
+		Weapon: RA2GattlingMG2AA
+		PauseOnCondition: ammo <= 8 && ammo >= 65
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@3AA:
+		Weapon: RA2GattlingMG3AA
+		PauseOnCondition: ammo >= 9
+		LocalOffset: 85,90,299, 85,-90,299
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2DoublePistols
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		StandSequences: stand
+	DetectCloaked:
+		DetectionTypes: Cloak, Hijacker
+	Voiced:
+		VoiceSet: TSE800
+	DeliversCash:
+		Payload: 600
+	GainsExperience:
+		LevelUpNotification: LevelUpRA2
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	RenderSprites:
+		PlayerPalette: playerra2
+
+
+#######################################
+# TS Infantry Forgotten
+#######################################
+TSENGINEERMUTANT:
+	Inherits: TSENGINEER
+	Inherits@MC: ^MCImmune
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile2
+	Voiced:
+		VoiceSet: TSInfantry
+	-TemporaryOwnerManager:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsengineer
+
+tse3.mutant:
+	Inherits: TSE3
+	Inherits@decoration: ^ForgottenRankDecoration
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile2
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tse3mut
+
+
+TSMHIJACKMUTANT:
+	Inherits: TSMHIJACK
+	Inherits@decoration: ^ForgottenRankDecoration
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile2, tsgtweapmutant, tsgtradrmutant
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsmhijack
+
+TSUMAGON:
+	Inherits: TSMUTANT
+	Inherits@Template: ^SniperInfantryTemplate
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Mutant Sniper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 95
+		Prerequisites: ~tsgtpile2, tsfgttech
+		Queue: Infantry, RAInfantry
+		Description: Advanced anti-infantry unit.\nMaximum 10 can be trained.\n  Strong vs Infantry\n  Weak vs Vehicles
+		BuildLimit: 10
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: TSSniper
+	Armament@ELITE:
+		Weapon: TSSniperE
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+	Voiced:
+		VoiceSet: TSUmagon
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSSniper
+	Selectable:
+		Class: tsumagon
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+TSUMAGONSP:
+	Inherits: TSUMAGON
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: tsumagon
+	AutoTarget:
+		ScanRadius: 9999
+		InitialStance: AttackAnything
+	-Voiced:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 5
+
+TSGHOST:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Ghost Stalker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~tsgtpile2, tsfgttech
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		Description: Elite commando infantry, armed with\na railgun and C4.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft\n  Special Ability: Destroy Building with C4\nMaximum 5 can be trained.
+	Mobile:
+		Speed: 75
+	Armor:
+		Type: Light
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament@PRIMARY:
+		Weapon: TSMechRailgun
+		LocalOffset: 256,43,256
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@c4:
+		Weapon: GenericC4
+		Cursor: c4
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSMechRailgun
+	-DamagedByTerrain:
+	Selectable:
+		Class: tsghost
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+TSGHOSTMUTANT:
+	Inherits: TSGHOST
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~tsgtpile2, tsfgttech
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsghost
+
+tsghost.r4:
+	Inherits: TSGHOST
+	-Buildable:
+	RenderSprites:
+		Image: tsghost
+	ProducibleWithLevel:
+		InitialLevels: 4
+	UpdatesPlayerStatistics:
+		OverrideActor: tsghost
+
+tsumagon.r4:
+	Inherits: TSUMAGON
+	-Buildable:
+	RenderSprites:
+		Image: tsumagon
+	ProducibleWithLevel:
+		InitialLevels: 4
+	UpdatesPlayerStatistics:
+		OverrideActor: tsumagon
+
+TSGHOSTSP:
+	Inherits: TSGHOST
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: tsghost
+	AutoTarget:
+		InitialStance: AttackAnything
+		ScanRadius: 9999
+	-Voiced:
+	-Armament@c4:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 5
+
+TSMUTANT:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Mutant
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsgtpile2
+		BuildDuration: 68
+		BuildDurationModifier: 100
+		Queue: Infantry, RAInfantry
+		Description: Mutant armed with dual pistols.\nWeapon has high spread.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armament@PRIMARY:
+		Weapon: MutDualWield
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: MutDualWieldE
+		RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSInfantry
+	-DamagedByTerrain:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcanTower
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+TSMUTANTSP:
+	Inherits: TSMUTANT
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: tsmutant
+	AutoTarget:
+		InitialStance: AttackAnything
+		ScanRadius: 9999
+	-Voiced:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 0
+
+TSMWMN:
+	Inherits: TSMUTANT
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Mutant Soldier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtpile2
+		Queue: Infantry, RAInfantry
+		Description: Mutant armed with a carbine.\nWeapon does high, precise damage.\n  Strong vs infantry, light vehicles\n  Weak vs tanks, aircraft
+		BuildDuration: 120
+		BuildDurationModifier: 100
+	Mobile:
+		Speed: 68
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: MutAPRifle
+		RequiresCondition: !rank-elite
+	Armament@aa:
+		Weapon: TSGrenadeAA
+		LocalOffset: 341,0,256
+	Armament@ELITE:
+		Weapon: MutAPRifleE
+		RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSUmagon
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSRPGTower
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+TSMWMNSP:
+	Inherits: TSMWMN
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: tsmwmn
+	AutoTarget:
+		InitialStance: AttackAnything
+		ScanRadius: 9999
+	-Voiced:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 0
+
+TSMUTANT3:
+	Inherits: TSMUTANT
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Mutant Sergeant
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtpile2, tsgtradrmutant
+		Queue: Infantry, RAInfantry
+		Description: Elite mutant infantry, can use grenades.\n  Strong vs Infantry\n  Weak vs Vehicles
+		BuildDuration: 180
+		BuildDurationModifier: 100
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament@GRENADE:
+		Weapon: TSGrenade
+		PauseOnCondition: !ammo
+	Armament@PRIMARY:
+		Weapon: TSVulcan
+	AmmoPool:
+		Ammo: 8
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 100
+		Count: 1
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcan2
+	Armament@GARRISONED2: ##########
+		Name: garrisoned
+		Weapon: TSGrenadeG
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 3333
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 3333
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+
+TSMUTANT4:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 50
+	Tooltip:
+		Name: Zombie Mutant
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsgtpile2
+		BuildDuration: 68
+		BuildDurationModifier: 100
+		Queue: Infantry, RAInfantry
+		Description: High mutated human.\nNot so Intelligent, only attack in Melee.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Armament@PRIMARY:
+		Weapon: TSZombieAttack
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: TSZombieAttack
+		RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSInfantry
+	-DamagedByTerrain:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcanTower
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+tsshotmut:
+	Inherits: TSMUTANT
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Runner Shotgal
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtpile2
+		Queue: Infantry, RAInfantry
+		Description: Mutant armed with a carbine.\nWeapon does high, precise damage.\n  Strong vs infantry, light vehicles\n  Weak vs tanks, aircraft
+		BuildDuration: 120
+		BuildDurationModifier: 100
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: TSShotgun
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: TSShotgun
+		RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSUmagon
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSRPGTower
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+TSWEEDGUY:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Chem Spray Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsgtpile2, tsgtradrmutant
+		Queue: Infantry, RAInfantry
+		Description: Mutant soldier with a Tiberium weapon.\nCan attack air\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 64
+		Locomotor: chem
+	Health:
+		HP: 52000
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armament@PRIMARY:
+		Weapon: TSChemspray
+		LocalOffset: 341,0,256
+		MuzzleSequence: muzzle
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+	Voiced:
+		VoiceSet: TSWeed
+	-DamagedByTerrain:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSChemspray
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	Targetable@Immune:
+		TargetTypes: ToxinImmune
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+RAPT:
+	Inherits: ^DINO
+	Tooltip:
+		Name: Velociraptor
+	Armament:
+		Weapon: claw
+	Buildable:
+		Description: Bipedal with enlarged sickle-shaped claw on each hindfoot
+	Inherits@EXT: ^ExternalConditions ##########
+
+TSDOGGIE:
+	Inherits: RAPT
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@bounty: ^GlobalBounty ##########
+	Inherits@anim: ^TSInfantry
+	Inherits@autotarget: ^AutoTargetAllAssaultMove
+	Inherits@tibheal: ^TibHealable
+	Health:
+		HP: 52000
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Valued:
+		Cost: 1000
+	Armor:
+		Type: None
+	Armament:
+		Weapon: TSFiendShard
+	Buildable:
+		BuildPaletteOrder: 25
+		BuildDurationModifier: 100
+		BuildDuration: 500
+		Prerequisites: ~tsgtpile2, tsgtradrmutant
+		Queue: Infantry, RAInfantry
+		Description: Canine mutant that hurls Tiberium shards.\nCan attack aircraft\n Strong vs Vehicles\n Weak vs Infantry
+	Mobile:
+		Speed: 100
+		Locomotor: foot
+	Tooltip:
+		Name: Tiberian Fiend
+	Voiced:
+		VoiceSet: TSFiend
+	DetectCloaked:
+		Range: 3c0
+		RequiresCondition: !disabled
+	-RenderSprites:
+	RenderSprites:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSFiendShard
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+tsdoggieblue:
+	Inherits: RAPT
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@bounty: ^GlobalBounty ##########
+	Inherits@anim: ^TSInfantry
+	Inherits@autotarget: ^AutoTargetAllAssaultMove
+	Inherits@tibheal: ^TibHealable
+	Health:
+		HP: 52000
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Valued:
+		Cost: 2000
+	Armor:
+		Type: None
+	Armament:
+		Weapon: TSFiendShardBlue
+	Buildable:
+		BuildPaletteOrder: 25
+		BuildDurationModifier: 100
+		BuildDuration: 500
+		Prerequisites: ~tsgtpile2, tsgtradrmutant
+		Queue: Infantry, RAInfantry
+		Description: Canine mutant that hurls Tiberium shards.\nCan attack aircraft\n Strong vs Vehicles\n Weak vs Infantry
+	Mobile:
+		Speed: 100
+		Locomotor: foot
+	Tooltip:
+		Name: Blue Tiberian Fiend
+	Voiced:
+		VoiceSet: TSFiend
+	DetectCloaked:
+		Range: 3c0
+		RequiresCondition: !disabled
+	-RenderSprites:
+	RenderSprites:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSFiendShardBlue
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+
+#######################################
+# TS Infantry End
+#######################################
+
+TST1000:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Eliminator 1000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsnthand2, tscabaltech
+		BuildDurationModifier: 50
+		BuildLimit: 1
+		Queue: Infantry, RAInfantry
+		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 80
+		PauseOnCondition: disabled
+	Armor:
+		Type: Light
+	Health:
+		HP: 250000
+	Armament@PRIMARY:
+		Weapon: Eliminator-Blades
+	WithInfantryBody:
+		DefaultAttackSequence: attack
+		RequiresCondition: !cydamaged
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVulcanTower
+	ChangesHealth:
+		Step: 500
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	RenderSprites:
+		Image: tst1000
+		PlayerPalette: playerra2
+
+TSDEFENDER:
+	Inherits: ^Tank
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@MC: ^MCImmune
+	Inherits@EMP: ^FrontalEMP
+	Inherits@crush: ^VehicleCrusher
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@ND: ^NotDevourable
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Valued:
+		Cost: 10000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 140
+		BuildLimit: 1
+		BuildDurationModifier: 25
+		Prerequisites: ~tsntweapcabal, tscore
+		Description: Superheavy CABAL epic unit.\n Strong vs ground targets
+	Mobile:
+		Speed: 50
+	Passenger:
+		Weight: 12
+	RevealsShroud:
+		Range: 7c0
+	DetectCloaked:
+		Range: 6c0
+	Armament:
+		Weapon: TSCoreLaser
+		LocalOffset: 1150,-750,410, 1300,750,510
+	Armament@LASER3:
+		Weapon: TSCoreLaser
+		LocalOffset: 1150,750,410, 1300,-750,510
+	AttackFrontal:
+		FacingTolerance: 12
+	Voiced:
+		VoiceSet: TSCABALCore
+	VoiceAnnouncement:
+		Voice: CoreDefenderBuild
+	Tooltip:
+		Name: Core Defender
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Heavy
+	DamageMultiplier@superheavy:
+		Modifier: 50
+	ChangesHealth@1:
+		Step: 400
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	ChangesHealth@2:
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 25
+	ChangesHealth@TIBREPAIR:
+		Step: 400
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ontiberium
+	WithDecoration@REDCROSS2:
+		Image: pips
+		Sequence: pip-heal
+		Position: BottomRight
+		RequiresCondition: ontiberium
+		BlinkInterval: 32
+		BlinkPattern: On, Off
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithInfantryBody:
+		DefaultAttackSequence: attack
+	WithDeathAnimation:
+		DeathSequencePalette: tseffect
+		DeathPaletteIsPlayerPalette: false
+		UseDeathTypeSuffix: false
+	# Explodes:
+	# 	Weapon: MiniNuke
+	# 	EmptyWeapon: MiniNuke
+	HitShape:
+		UseTargetableCellsOffsets: false
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 1024
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2248, 2248
+	Capturable:
+		Types: thiefproof
+	RenderSprites:
+		PlayerPalette: playerra2
+	DeathSounds:
+
+#######################################
+# TS Aircraft
+#######################################

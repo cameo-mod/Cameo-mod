@@ -1,0 +1,110 @@
+World:
+	FactionCA@tsgdi:
+		Name: GDI TS
+		InternalName: tsgdi
+		Game: Tiberian Sun
+		Side: Tiberian Sun
+		Description: faction-ts-gdi.description
+	FactionCA@tsnod:
+		Name: Nod TS
+		InternalName: tsnod
+		Game: Tiberian Sun
+		Side: Tiberian Sun
+		Description: faction-ts-nod.description
+	FactionCA@forgotten:
+		Selectable: true
+		Name: Forgotten TS (WIP)
+		InternalName: forgotten
+		Game: Tiberian Sun
+		Side: Tiberian Sun
+		Description: faction-ts-forgotten.description
+	FactionCA@cabal:
+		Selectable: true
+		Name: CABAL TS (WIP)
+		InternalName: cabal
+		Game: Tiberian Sun
+		Side: Tiberian Sun
+		Description: faction-ts-cabal.description
+	FactionCA@RandomTS:
+		Name: Random TS
+		InternalName: RandomTS
+		RandomFactionMembers: tsnod, tsgdi, forgotten, cabal
+		Game: Tiberian Sun
+		Side: Random
+		Description: faction-ts-random.description
+
+	####################################################################################################
+	#		MPSTARTUNITS
+	####################################################################################################
+	StartingUnits@mcvonlyratsgdi:
+		Class: none
+		ClassName: MCV Only
+		Factions: tsgdi
+		BaseActor: tsmcvgdi
+	StartingUnits@defaulttsgdi:
+		Class: light
+		ClassName: Light Support
+		Factions: tsgdi
+		BaseActor: tsmcvgdi
+		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch
+	StartingUnits@heavytsgdi:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: tsgdi
+		BaseActor: tsmcvgdi
+		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch,tsmmch,tsmmch,tsmmch
+	StartingUnits@mcvonlyratsnod:
+		Class: none
+		ClassName: MCV Only
+		Factions: tsnod
+		BaseActor: tsmcvnod
+	StartingUnits@defaulttsnod:
+		Class: light
+		ClassName: Light Support
+		Factions: tsnod
+		BaseActor: tsmcvnod
+		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk
+	StartingUnits@heavytsnod:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: tsnod
+		BaseActor: tsmcvnod
+		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk,tsttnk,tsttnk,tsttnk
+	StartingUnits@mcvonlyraforgotten:
+		Class: none
+		ClassName: MCV Only
+		Factions: forgotten
+		BaseActor: tsmcvmutant
+	StartingUnits@defaultforgotten:
+		Class: light
+		ClassName: Light Support
+		Factions: forgotten
+		BaseActor: tsmcvmutant
+		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk
+	StartingUnits@heavyforgotten:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: forgotten
+		BaseActor: tsmcvmutant
+		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk,ts2tnk,ts2tnk,ts2tnk
+	StartingUnits@mcvonlyracabal:
+		Class: none
+		ClassName: MCV Only
+		Factions: cabal
+		BaseActor: tsmcvcabal
+	StartingUnits@defaultcabal:
+		Class: light
+		ClassName: Light Support
+		Factions: cabal
+		BaseActor: tsmcvcabal
+		SupportActors: tscyborg,tscyborg,tscyborg,tsbike2,tsttnk2
+	StartingUnits@heavycabal:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: cabal
+		BaseActor: tsmcvcabal
+		SupportActors: tscyborg,tscyborg,tscyborg,tsbike2,tsbike2,tsttnk2,tsttnk2,tsttnk2
+
+#######################################
+# TS Defaults
+#######################################

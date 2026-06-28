@@ -1,0 +1,3684 @@
+tsmonstermaker1:
+	Inherits: VICE
+	Tooltip:
+		Name: Monster Maker
+	Valued:
+		Cost: 5000
+	Health:
+		HP: 15000
+	Mobile:
+		Speed: 1
+	RenderSprites:
+		Image: vice
+	KillsSelf@monstermaker:
+		Delay: 400
+		GrantsCondition: monsterbirth
+	SpawnActorOnDeath@monstermaker:
+		RequiresCondition: monsterbirth
+		Actor: tsmonstermaker1
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker2:
+		RequiresCondition: monsterbirth
+		Probability: 5
+		Actor: vice
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker3:
+		RequiresCondition: monsterbirth
+		Probability: 8
+		Actor: tsdoggiew
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker3b:
+		RequiresCondition: monsterbirth
+		Probability: 8
+		Actor: tsdoggiew
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker3:
+		RequiresCondition: monsterbirth
+		Probability: 5
+		Actor: tsfloater
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker4:
+		RequiresCondition: monsterbirth
+		Probability: 10
+		Actor: tsmutantw
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker4b:
+		RequiresCondition: monsterbirth
+		Probability: 10
+		Actor: tsmutantw
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker5:
+		RequiresCondition: monsterbirth
+		Probability: 5
+		Actor: tsvislrg
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+	SpawnActorOnDeath@monstermaker5b:
+		RequiresCondition: monsterbirth
+		Probability: 6
+		Actor: tsvissml
+		OwnerType: InternalName
+		InternalOwner: Creeps
+		RequiresLobbyCreeps: true
+
+TSMCVGDI:
+	Inherits: ^Vehicle
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Buildable:
+		Prerequisites: ~tsgtweap, tsgtdeptgdi
+		Queue: Vehicle, RAVehicle
+		Description: template-mcv.description
+	Tooltip:
+		Name: Mobile Construction Vehicle
+	Transforms:
+		IntoActor: tsgtcnstgdi
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: tsplace2.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		Image: tsmcv
+	RenderVoxels:
+		Image: tsmcv
+		Scale: 18
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability
+
+TSMCVNOD:
+	Inherits: TSMCVGDI
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsntweap, tsgtdeptnod
+	Tooltip:
+		Name: Nod Mobile Construction Vehicle
+	Transforms:
+		IntoActor: tsgtcnstnod
+	RenderVoxels:
+		Image: tsmcvblack
+
+TSMCVMUTANT:
+	Inherits: TSMCVGDI
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsgtweapmutant, tsgtdeptmutant
+	Transforms:
+		IntoActor: tsgtcnstmutant
+	RenderVoxels:
+		Image: tsmcvgrey
+
+TSMCVCABAL:
+	Inherits: TSMCVGDI
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsntweapcabal, tsgtdeptcabal
+	Tooltip:
+		Name: CABAL Mobile Construction Vehicle
+	Transforms:
+		IntoActor: tsgtcnstcabal
+	Voiced:
+		VoiceSet: TSReaper
+	RenderVoxels:
+		Image: tsmcvblack
+
+#######################################
+# TS Building
+#######################################
+
+tsfloater:
+	Inherits: ^Viceroid
+	Inherits@2: ^MutSWCreature
+	Tooltip:
+		Name: Floater
+	AttackWander:
+	Mobile:
+		Voice: Move
+		Speed: 71
+		Locomotor: hover
+	Armor:
+		Type: None
+	Armament:
+		Weapon: PortaTesla
+		LocalOffset: 384,0,0
+		-MuzzleSequence:
+	-WithMuzzleOverlay:
+
+# tsvissml:
+# 	Inherits: ^Viceroid
+# 	Inherits@2: ^MutSWCreature
+# 	Tooltip:
+# 		Name: Baby Visceroid
+# 	Health:
+# 		HP: 15000
+# 	Valued:
+# 		Cost: 500
+# 	Armor:
+# 		Type: None
+# 	AttackWander:
+# 	ScaredyCat:
+# 	Mobile:
+# 		Speed: 120
+# 	Armament:
+# 		Weapon: ZClaw1
+# 		LocalOffset: 384,0,0
+# 		-MuzzleSequence: muzzle
+# 	-WithMuzzleOverlay:
+
+tsvislrg:
+	Inherits: ^Viceroid
+	Inherits@2: ^MutSWCreature
+	Tooltip:
+		Name: Big Visceroid
+	Armor:
+		Type: None
+	AttackWander:
+	Armament:
+		Weapon: ZClaw3
+		LocalOffset: 384,0,0
+		-MuzzleSequence: muzzle
+	-WithMuzzleOverlay:
+	SpawnActorOnDeath@Division1:
+		Actor: tsvissml
+		OwnerType: Victim
+	SpawnActorOnDeath@Division2:
+		Actor: tsvissml
+		OwnerType: Victim
+
+
+#######################################
+# TS Infantry CABAL
+#######################################
+TSHARV:
+	Inherits: ^TDHARV
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Health:
+		HP: 150000
+	Harvester:
+		PipCount: 8
+		Capacity: 35
+	Buildable:
+		Prerequisites: ~tsgtweap, tsprocgdi
+		Queue: Vehicle, RAVehicle
+		Description: Harvests Tiberium for processing
+	WithVoxelBody:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 500
+	RenderSprites:
+		Image: tsharv
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability
+
+TSHARVNOD:
+	Inherits: ^TDHARV
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
+	Health:
+		HP: 150000
+	Harvester:
+		PipCount: 8
+		Capacity: 35
+	Buildable:
+		Prerequisites: ~tsntweap, tsprocnod
+		Queue: Vehicle, RAVehicle
+		Description: Harvests Tiberium for processing
+	WithVoxelBody:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 500
+	RenderVoxels:
+		Scale: 2
+		Image: dtruck
+	RenderSprites:
+		Image: dtruck
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	GrantConditionOnPrerequisite@up_advancedtiberiumrefinement:
+		Condition: up_advancedtiberiumrefinement
+		Prerequisites: up_advancedtiberiumrefinement
+	SpeedMultiplier@up_advancedtiberiumrefinement:
+		RequiresCondition: up_advancedtiberiumrefinement
+		Modifier: 150
+	Cloak@up_stealthfieldsimprovements:
+		DetectionTypes: GroundCloak
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		IsPlayerPalette: true
+		RequiresCondition: up_stealthfieldsimprovements
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement, up_stealthfieldsimprovements
+
+TSHARVMUTANT:
+	Inherits: ^TDHARV
+	Inherits@Voxel: ^TSRenderVoxel
+	Health:
+		HP: 150000
+	Harvester:
+		PipCount: 8
+		Capacity: 35
+	Buildable:
+		Prerequisites: ~tsgtweapmutant, tsprocmutant
+		Queue: Vehicle, RAVehicle
+		Description: Harvests Tiberium for processing
+	WithVoxelBody:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 500
+	RenderVoxels:
+		Image: gharv
+	RenderSprites:
+		Image: tsharv
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+
+TSHARVCABAL:
+	Inherits: ^TDHARV
+	Inherits@Voxel: ^TSRenderVoxel
+	Health:
+		HP: 150000
+	Harvester:
+		PipCount: 8
+		Capacity: 35
+	Buildable:
+		Prerequisites: ~tsntweapcabal, tsproccabal
+		Queue: Vehicle, RAVehicle
+		Description: Harvests Tiberium for processing
+	WithVoxelBody:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 500
+	RenderVoxels:
+		Image: charv2
+	RenderSprites:
+		Image: tsharvcabal
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+
+#TSWEED:
+#	Inherits: HARV
+#	Inherits@Voxel: ^TSRenderVoxel
+#	Harvester:
+#		Resources: Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Veins
+#		DeliveryBuildings: tsntwast
+#	WithVoxelBody:
+#	WithDockingAnimation:
+#	Voiced:
+#		VoiceSet: TSVehicle
+#	DeliversCash:
+#		Payload: 500
+#	-SpawnActorOnDeath:
+#	Mobile:
+#		Speed: 110
+#	Valued:
+#		Cost: 1100
+
+tsldrone:
+	Inherits: ^Vehicle
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@snipe: ^DriverKillAndNeutronImmune
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Limpet drone
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~wip
+		Queue: Vehicle, RAVehicle
+		Description: Hovering drone that can deploy\ninto a mine.
+	Mobile:
+		Locomotor: hover
+		Speed: 166
+		RequireForceMoveCondition: deployed
+	Health:
+		HP: 11500
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	Voiced:
+		VoiceSet: RobotTankVoice
+	DeliversCash:
+		Payload: 75
+	Hovers:
+		RequiresCondition: !disabled && undeployed
+	Turreted:
+	AttackTurreted:
+		RequiresCondition: deployed
+	Armament:
+		Weapon: TSEMPLimpetBomb
+	RenderVoxels:
+		Scale: 15
+	-TemporaryOwnerManager:
+	Capturable:
+		Types: thiefproof
+	WithMakeAnimation:
+		BodyNames: deployed
+	GrantConditionOnDeploy:
+		UndeployedCondition: undeployed
+		DeployedCondition: deployed
+		UndeployOnMove: true
+		PauseOnCondition: disabled
+		DeploySounds: place2.aud
+		UndeploySounds: place2.aud
+	WithFacingSpriteBody:
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		Sequence: deployed
+		Name: deployed
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: triggered
+	KillsSelf@EMP:
+		RequiresCondition: (empdisable && !untargetable) || triggered
+		DamageTypes: DefaultDeath
+	DetectCloaked:
+		Range: 6c0
+		RequiresCondition: deployed && !disabled
+	Cloak:
+		InitialDelay: 30
+		CloakDelay: 30
+		RequiresCondition: deployed
+		IsPlayerPalette: true
+		PauseOnCondition: cloak-force-disabled || base-reveal
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability
+
+TSPITBULL:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@EMP: ^TurretEMP
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Pitbull
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtweap
+		Description: Scout vehicle.  Strong vs Vehicles, Aircraft.  Weak vs Infantry
+	Mobile:
+		Speed: 150
+		TurnSpeed: 30
+	Health:
+		HP: 27500
+	Repairable:
+		HpPerStep: 1375
+	ChangesHealth@SelfHealing:
+		Step: 11
+	Turreted:
+		TurnSpeed: 30
+		Offset: -85,0,192
+	Armament:
+		Weapon: PitbullRockets
+		LocalOffset: -128, -170, 170, -128, 170, 170
+		LocalYaw: 100, -100
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Image: tspitbull
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	ActorStatValues:
+		Upgrades: up_tsprojectileimprovements, up_mechanicalreliability
+
+TSAPC:
+	Inherits: ^Tank
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@cargo: ^CargoVehicle
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Amphibious APC
+	UpdatesPlayerStatistics:
+		OverrideActor: tsapc
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsgtweap
+		Queue: Vehicle, RAVehicle
+		Description: Armored infantry transport.\nCan move on water.
+	Mobile:
+		Locomotor: amphibius
+		Speed: 113
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Weapon: TSRaiderCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		Class: tsapc
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water, River
+	WithVoxelBody:
+		RequiresCondition: !inwater
+	WithVoxelBody@water:
+		Sequence: water
+		RequiresCondition: inwater
+	RenderVoxels:
+		Image: tsapc
+	RenderSprites:
+		Image: tsapc
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability
+
+
+tsmemp:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Mobile EMP
+	Buildable:
+		BuildPaletteOrder: 110
+		Prerequisites: ~tsgtweap, tsntpulsgdi, tsgtradr
+		Queue: Vehicle, RAVehicle
+		Description: Shuts down vehicles with an EMP blast.\n  Strong vs Vehicles, Cyborgs
+	Mobile:
+		Locomotor: tracked
+		Speed: 100
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
+	RevealsShroud:
+		Range: 5c0
+	Turreted:
+	AttackTurreted:
+	Armament:
+		Weapon: TSMobileEMP
+		MuzzleSequence: muzzle
+#	ReloadArmamentsBar:
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 700
+	RenderVoxels:
+		Image: tsm_emp
+		Scale: 15
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability
+
+TSMMCH:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@detect: ^EliteDetector
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Titan
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsgtweap, ~!uptitanmkii
+		BuildDurationModifier: 100
+		BuildDuration: 375
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 15 #3
+	Armament@PRIMARY:
+		Weapon: TS120mm
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TS120mmRail
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: up_railgunweaponry
+	AttackTurreted:
+	WithMuzzleOverlay:
+	RenderVoxels:
+	-WithVoxelBody:
+	WithVoxelBarrel:
+		LocalOffset: 0,51,256
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	WithSpriteTurret:
+		Recoils: false
+	BodyOrientation:
+		QuantizedFacings: 32
+		UseClassicPerspectiveFudge: False
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderVoxels:
+		Scale: 10
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+
+TSTALTITAN:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Titan MK II
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsgtweap, ~uptitanmkii
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 15 #3
+		Offset: -45,0,392
+	Armament@PRIMARY:
+		Weapon: TS120mmTal
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TS120mmTalRail
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: up_railgunweaponry
+	AttackTurreted:
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	WithSpriteTurret:
+		Recoils: true
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+
+TSJUGG2:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	# Inherits@EMP: ^TurretEMP
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	# Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Juggernaut MK II
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsgtweap, tsgttech, ~upjuggmkii
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 70
+		TurnSpeed: 14
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 9c0
+	# Turreted:
+	# 	TurnSpeed: 14 #3
+	# 	Offset: -45,0,392
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSJugg120mm
+		# Recoil: 128
+		# RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+	# AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	# WithSpriteTurret:
+	# 	Recoils: true
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	WithAttackAnimation@Primary:
+		Sequence: shoot
+		Armament: primary
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering
+
+TSJUGG:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	# Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@detect: ^EliteDetector
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@deploy: ^LurkerMode
+	Inherits@bot: ^SiegeModeVehicle
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Juggernaut
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Juggernaut (deployed)
+		RequiresCondition: deployed
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsgtweap, tsgttech, ~!upjuggmkii
+		Queue: Vehicle, RAVehicle
+		Description: Mobile artillery mech.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Health:
+		HP: 35000
+	Repairable:
+		HpPerStep: 1750
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Mobile:
+		Locomotor: tracked
+		Speed: 71
+		TurnSpeed: 20
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 9c0
+		MaxHeightDelta: 3
+	RenderSprites:
+		Image: tsjugg
+	WithMakeAnimation:
+		BodyNames: body, deployedbody
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+		Name: body
+	WithSpriteBody@deployed:
+		RequiresCondition: !undeployed && real-actor
+		Sequence: idletur
+		Name: deployedbody
+	Turreted:
+		Turret: deploy
+		TurnSpeed: 20
+		InitialFacing: 384
+		Offset: 0,0,256
+		RealignDelay: -1
+	WithSpriteTurret@barrel:
+		Turret: deploy
+		RequiresCondition: deployed && !engage-air
+		Sequence: barrel
+	WithSpriteTurret@barrelup:
+		Turret: deploy
+		RequiresCondition: deployed && engage-air
+		Sequence: barrelup
+	WithSpriteTurret@deployed:
+		Turret: deploy
+		RequiresCondition: deployed
+	AttackTurreted:
+		Voice: Attack
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		OutsideRangeRequiresForceFire: True
+	Armament@Deployed:
+		Weapon: TSJugg90mm
+		LocalOffset: 777,203,999, 777,0,999, 777,-203,999
+		MuzzleSequence: muzzle
+		ReloadingCondition: engage-air
+	Armament@Dummy:
+		Weapon: TSJuggTargeting
+	WithMuzzleOverlay:
+	RevealOnFire:
+		ArmamentNames: deployed
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+		Body: body
+		RequiresCondition: !deployed
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering
+
+TSHVR:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Hover MLRS
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~tsgtweap, tsgtradr
+		Queue: Vehicle, RAVehicle
+		Description: Hovering vehicle armed with\nlong range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		BuildDuration: 300
+		BuildDurationModifier: 100
+	Mobile:
+		Locomotor: hover
+		Speed: 80
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 16
+	Armament:
+		Weapon: TSHoverMissile
+		LocalOffset: 0,121,271, 0,-121,271
+	AttackTurreted:
+	SelectionDecorations:
+		Bounds: 2048, 2048
+		DecorationBounds: 2248, 2248
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	WithVoxelTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 450
+	Hovers:
+		RequiresCondition: !disabled
+	RenderVoxels:
+		Scale: 15
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tsprojectileimprovements, up_mechanicalreliability
+
+TSSMECH:
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EXT: ^ExternalConditions
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 550
+	Tooltip:
+		Name: Wolverine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 25
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		Prerequisites: ~tsgtweap, ~!upwolverinemkii
+		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		TurnSpeed: 32
+		Speed: 80
+		Locomotor: wheeled
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 6c0
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSAssaultCannon
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Name: secondary
+		Weapon: TSAssaultCannonSonic
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: up_sonicweaponry
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: primary
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: secondary
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	Voiced:
+		VoiceSet: TSMech
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_sonicweaponry
+
+TSTALWOLV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EXT: ^ExternalConditions
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Wolverine MK II
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 25
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		Prerequisites: ~tsgtweap, ~upwolverinemkii
+		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		TurnSpeed: 32
+		Speed: 80
+		Locomotor: wheeled
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c0
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSAssaultCannonTal
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Name: secondary
+		Weapon: TSAssaultCannonTalSonic
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: up_sonicweaponry
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: primary
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: secondary
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	Voiced:
+		VoiceSet: TSMech
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_sonicweaponry
+
+TSHMEC:
+	Inherits: ^Tank
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@crush: ^VehicleCrusher
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@ND: ^NotDevourable
+	# Inherits@announce: ^AnnounceGlobal
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Mammoth Prototype
+	# Mammoth MK. II
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~!upmammothmkii
+		Queue: Vehicle, RAVehicle
+		BuildDuration: 1250
+		BuildDurationModifier: 100
+		BuildLimit: 1
+		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
+	Mobile:
+		TurnSpeed: 20
+		Speed: 50
+	Health:
+		HP: 800000
+	#ChangesHealth@1:
+	#	Step: 400
+	#	Delay: 1
+	#	StartIfBelow: 100
+	#	DamageCooldown: 1
+	#ChangesHealth@2:
+	#	PercentageStep: 1
+	#	Delay: 25
+	#	StartIfBelow: 100
+	#	DamageCooldown: 25
+	Repairable:
+		HpPerStep: 40000
+	ChangesHealth@SelfHealing:
+		Step: 320
+	Armor:
+		Type: Superheavy
+	RevealsShroud:
+		Range: 7c0
+	Armament@RAILGUN:
+		Name: railgun
+		Weapon: TSMechRailgun
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: !up_railgunweaponry
+	Armament@MISSILES:
+		Name: missiles
+		Weapon: TSMammothTusk2
+		LocalOffset: -420,-300,600, -420,300,600
+		LocalYaw: -100,100
+	Armament@UpgradeRAILGUN:
+		Name: railgun
+		Weapon: TSMechRailgunRail
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: up_railgunweaponry
+	#	MuzzleSequence: muzzle1
+	#	RequiresCondition: !rank-elite
+	#Armament@MISSILESE:
+	#	Name: missiles
+	#	Weapon: TSMammothTusk_elite
+	#	LocalOffset: -420,-300,600, -420,300,600
+	#	LocalYaw: -100,100
+	#	MuzzleSequence: muzzle1
+	#	RequiresCondition: rank-elite
+	#	MuzzleSequence: muzzle2
+	#	RequiresCondition: !rank-elite
+	#Armament@RAILGUNE:
+	#	Name: railgun
+	#	Weapon: TSMechRailgun_elite
+	#	LocalOffset: 550,-420,650, 550,420,650
+	#	MuzzleSequence: muzzle2
+	#	RequiresCondition: rank-elite
+	AttackFrontal:
+		Armaments: railgun
+		FacingTolerance: 0
+	AttackFollow:
+		Armaments: missiles
+		PauseOnCondition: disabled
+		Voice: Attack
+	Crushable:
+		CrushClasses: hugevehicle
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	-WithVoxelBody:
+	WithVoxelWalkerBody:
+		TickRate: 1
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 1500
+	RenderVoxels:
+		Scale: 15
+	Passenger:
+		Weight: 10
+	Capturable:
+		Types: thiefproof
+	RenderSprites:
+		PlayerPalette: playerra2
+	ProvidesPrerequisite@mkii:
+		Prerequisite: existingmkii
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+
+TSMKII:
+	Inherits: ^Tank
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@crush: ^VehicleCrusher
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@ND: ^NotDevourable
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 8000
+	Tooltip:
+		Name: Mammoth MK. II
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~upmammothmkii
+		Queue: Vehicle, RAVehicle
+		BuildLimit: 1
+		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
+	Mobile:
+		TurnSpeed: 20
+		Speed: 50
+	Health:
+		HP: 1200000
+	Repairable:
+		HpPerStep: 60000
+	ChangesHealth@SelfHealing:
+		Step: 480
+	Armor:
+		Type: Superheavy
+	RevealsShroud:
+		Range: 7c0
+	Armament@RAILGUN:
+		Name: railgun
+		Weapon: TSMechRailgunII
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: !up_railgunweaponry
+	Armament@MISSILES:
+		Name: missiles
+		Weapon: TSMammothTusk2II
+		LocalOffset: -420,-300,600, -420,300,600
+		LocalYaw: -100,100
+	Armament@UpgradeRAILGUN:
+		Name: railgun2
+		Weapon: TSMechRailgunRailII
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: up_railgunweaponry
+	Armament@MG:
+		Name: mg
+		Weapon: TSMechMGII
+		LocalOffset: 600,0,350
+	AttackFrontal@primary:
+		Armaments: railgun
+		FacingTolerance: 0
+	AttackFrontal@secondary:
+		Armaments: mg
+		FacingTolerance: 256
+	AttackFrontal@upgrade:
+		Armaments: railgun2
+		FacingTolerance: 0
+	AttackFollow:
+		Armaments: missiles
+		PauseOnCondition: disabled
+		Voice: Attack
+	Crushable:
+		CrushClasses: hugevehicle
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 1500
+	Passenger:
+		Weight: 10
+	Capturable:
+		Types: thiefproof
+	WithFacingSpriteBody:
+		Sequence: idle
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: railgun
+	WithAttackAnimation@SECONDARY:
+		Sequence: idle
+		Armament: mg
+	WithAttackAnimation@MISSILES:
+		Sequence: idle
+		Armament: missiles
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: railgun2
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	ProvidesPrerequisite@mkii:
+		Prerequisite: existingmkii
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+
+TSSONIC:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Disruptor
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~tsgtweap, tsgttech
+		BuildDuration: 680
+		BuildDurationModifier: 100
+		Queue: Vehicle, RAVehicle
+		Description: Armored high-tech vehicle with\na long range sonic armament.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+	Mobile:
+		TurnSpeed: 10
+		Speed: 50
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 12500
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 10 #3
+	Armament@PRIMARY:
+		Weapon: TSSonicZapWeapon
+		Recoil: 128
+		RecoilRecovery: 26
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSSonicZapWeaponSonic
+		Recoil: 128
+		RecoilRecovery: 26
+		RequiresCondition: up_sonicweaponry
+	AttackTurreted:
+	WithVoxelTurret:
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	-RangeMultiplier@usasearchndestroy:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability, up_sonicweaponry
+
+TSSAPC:
+	Inherits: ^Tank
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@sub: ^SubterraneanVoxelVehicle
+	Inherits@cargo: ^CargoVehicle
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Subterranean APC
+	UpdatesPlayerStatistics:
+		OverrideActor: tssapc
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsntweap, tsntradr
+		Queue: Vehicle, RAVehicle
+		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
+	Mobile:
+		Locomotor: subterranean
+		PauseOnCondition: loading || being-captured || disabled
+		Speed: 71
+	Health:
+		HP: 17500
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 5c0
+		RequiresCondition: !submerged
+	Turreted:
+		TurnSpeed: 20 #3
+	SelectionDecorations:
+	Selectable:
+		Class: tssapc
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		UnloadTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice
+	Targetable@garrisoned:
+		RequiresCondition: loaded && !submerged
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement
+
+TSBGGY:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 450
+	Tooltip:
+		Name: Attack Buggy
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweap
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 64
+		Speed: 160
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSRaiderCannon
+		LocalOffset: 0,-30,250, 0,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_tiberiumlenses
+	Armament@UPGRADE:
+		Weapon: TSLaserRaiderCannon
+		LocalOffset: 0,-30,250, 0,30,250
+		Recoil: 128
+		RecoilRecovery: 24
+		MuzzleSequence: muzzle
+		RequiresCondition: up_tiberiumlenses
+	Armament@SECONDARY:
+		Weapon: TSRaiderGrenade
+		LocalOffset: 0,-30,250, 0,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: up_auxiliaryweapon
+	WithMuzzleOverlay:
+	AttackFollow:
+		FacingTolerance: 512
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mobilityspecialization, up_tiberiumlenses, up_auxiliaryweapon, up_advancedtiberiumrefinement
+
+TSBIKE:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 550
+	Tooltip:
+		Name: Attack Cycle
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweap
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout vehicle, armed with\nrockets.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 68
+		Speed: 170
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 100
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armament@PRIMARY:
+		Weapon: TSBikeMissile
+		RequiresCondition: !up_tiberiumcoremissiles
+		LocalOffset: -153,-204,509, -153,204,509
+	Armament@UPGRADE:
+		Weapon: TSBikeTibMissile
+		RequiresCondition: up_tiberiumcoremissiles
+		LocalOffset: -153,-204,509, -153,204,509
+	AttackFollow:
+		FacingTolerance: 512
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 300
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mobilityspecialization, up_tiberiumcoremissiles, up_advancedtiberiumrefinement
+
+TSBIKECABAL:
+	Inherits: TSBIKE
+	Buildable:
+		Prerequisites: ~tsntweapcabal, ~disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsbike
+	RenderVoxels:
+		Image: tsbike
+
+TSSTNK:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
+	Valued:
+		Cost: 1750
+	Tooltip:
+		Name: Stealth Tank
+	Buildable:
+		BuildPaletteOrder: 150
+		Prerequisites: ~tsntweap, tsnttech
+		Queue: Vehicle, RAVehicle
+		Description: Lightly armoured tank equipped with a \nstealth generator. Armed with missiles.\nCan be spotted by infantry at close range.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Mobile:
+		Locomotor: heavywheeled
+		TurnSpeed: 40
+		Speed: 100
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 5c0
+	Armament@PRIMARY:
+		Weapon: TSStankTusk
+		LocalOffset: -153,-204,509, -153,204,509
+		RequiresCondition: !up_tiberiumcoremissiles
+	Armament@UPGRADE:
+		Weapon: TSStankTibTusk
+		LocalOffset: -153,-204,509, -153,204,509
+		RequiresCondition: up_tiberiumcoremissiles
+	AttackFrontal:
+		FacingTolerance: 256
+	AutoTarget:
+		InitialStance: HoldFire
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 250
+	WithRangeCircle@GenRangeUpgraded:
+		Range: 1512
+		RequiresCondition: up_stealthfieldsimprovements
+	ProximityExternalCondition@StealthGen:
+		Range: 1512
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && up_stealthfieldsimprovements
+	# Cloak:
+	# 	InitialDelay: 90
+	# 	CloakDelay: 90
+	# 	CloakSound: cloak5.aud
+	# 	UncloakSound: cloak5.aud
+	# 	PauseOnCondition: cloak-force-disabled || base-reveal
+	# 	Palette: voxelcloak
+	# 	IsPlayerPalette: true
+	# GrantConditionOnDamageState@UNCLOAK:
+	# 	Condition: cloak-force-disabled
+	# 	ValidDamageStates: Critical
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tiberiumcoremissiles, up_advancedtiberiumrefinement, up_stealthfieldsimprovements
+
+TSSTNKCABAL:
+	Inherits: TSSTNK
+	Buildable:
+		Prerequisites: ~tsntweapcabal, tscabaltech, ~disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsstnk
+	RenderVoxels:
+		Image: tsstnk
+
+TSREPAIR:
+	Inherits: ^Tank
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Mobile Repair Vehicle
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~tsntweap, tsgtdeptnod
+		Queue: Vehicle, RAVehicle
+		Description: Repairs nearby vehicles.\n  Unarmed
+	Mobile:
+		Locomotor: tracked
+		TurnSpeed: 30
+		Speed: 75
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 5c0
+	Armament:
+		Weapon: TSRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	AttackFrontal:
+		FacingTolerance: 0
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 250
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Vehicles
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement
+
+TSREPAIRCABAL:
+	Inherits: TSREPAIR
+	Buildable:
+		Prerequisites: ~tsntweapcabal, tsgtdeptcabal
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsrepair
+	RenderVoxels:
+		Image: tsrepair
+
+TSTTNK:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^RenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@detect: ^EliteDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@bot: ^SiegeModeVehicle
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Tick Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		# BuildDurationModifier: 100
+		# BuildDuration: 300
+		Prerequisites: ~tsntweap
+		Queue: Vehicle, RAVehicle
+		Description: Nod's main battle tank.\nCan deploy to gain extra protection.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		TurnSpeed: 32
+		Speed: 90
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: deployed
+	Turreted:
+		TurnSpeed: 32
+		Turret: deployed
+		Offset: 220,-20,296
+	Armament@PRIMARY:
+		Weapon: TS90mm
+		LocalOffset: 407,0,362
+		RequiresCondition: undeployed && !up_tiberiumlenses
+		MuzzleSequence: muzzle
+	Armament@UPGRADE:
+		Weapon: TSLaser90mm
+		LocalOffset: 407,0,362
+		RequiresCondition: undeployed && up_tiberiumlenses
+		MuzzleSequence: muzzle
+	# Armament@ELITE:
+	# 	Weapon: TS120mmx
+	# 	LocalOffset: 407,0,362
+	# 	# RequiresCondition: rank-elite && undeployed
+	# 	MuzzleSequence: muzzle
+	Armament@deployed:
+		Name: deployed
+		Turret: deployed
+		Weapon: TS90mmDep
+		LocalOffset: 543,75,362
+		RequiresCondition: deployed && !up_tiberiumlenses
+		MuzzleSequence: muzzle
+	Armament@UPGRADEdeployed:
+		Name: deployed
+		Turret: deployed
+		Weapon: TSLaser90mmDep
+		LocalOffset: 543,75,362
+		RequiresCondition: deployed && up_tiberiumlenses
+		MuzzleSequence: muzzle
+	# Armament@elitedeployed:
+	# 	Name: deployed
+	# 	Turret: deployed
+	# 	Weapon: TS120mmx
+	# 	LocalOffset: 543,0,362
+	# 	RequiresCondition: rank-elite && deployed
+	# 	MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: deployed
+		Turret: deployed
+		Weapon: TS25mmDep
+		LocalOffset: 543,-75,362
+		RequiresCondition: deployed && up_auxiliaryweapon && !up_tiberiumlenses
+		MuzzleSequence: muzzle
+	Armament@UPGRADESECONDARY:
+		Name: deployed
+		Turret: deployed
+		Weapon: TSLaser25mmDep
+		LocalOffset: 543,-75,362
+		RequiresCondition: deployed && up_auxiliaryweapon && up_tiberiumlenses
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFrontal:
+		RequiresCondition: undeployed
+		FacingTolerance: 0
+	AttackTurreted@deployed:
+		RequiresCondition: deployed
+		Armaments: deployed
+		Turrets: deployed
+		PauseOnCondition: disabled
+		Voice: Attack
+	WithVoxelBody:
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		RequiresCondition: deployed
+		Sequence: deploy-idle
+	WithVoxelTurret:
+		Turret: deployed
+		RequiresCondition: deployed
+	WithVoxelBarrel:
+		Armament: deployed
+		LocalOffset: 90,0,180
+		RequiresCondition: deployed
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+	WithMakeAnimation:
+	GrantConditionOnDeploy:
+		Facing: 640
+		DeploySounds: place2.aud
+		UndeploySounds: place2.aud
+		Voice: Move
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tiberiumlenses, up_auxiliaryweapon, up_advancedtiberiumrefinement
+
+TSART2:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Artillery
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsntweap, tsntradr
+		Queue: Vehicle, RAVehicle
+		Description: Mobile artillery.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 24 #3
+	Armament@PRIMARY:
+		Weapon: TS155mm
+		LocalOffset: 407,0,362
+		RequiresCondition: !up_auxiliaryweapon
+	Armament@UPGRADE:
+		Weapon: TSAux155mm
+		LocalOffset: 407,0,362
+		RequiresCondition: up_auxiliaryweapon
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+		RequiresCondition: !immobile
+	WithVoxelTurret:
+	WithVoxelBarrel:
+		RequiresCondition: immobile
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	GrantConditionOnAttack@DEPLOY:
+		Condition: immobile
+		RevokeDelay: 20
+	SpeedMultiplier@DEPLOY:
+		Modifier: 0
+		RequiresCondition: immobile
+	WithFacingSpriteBody@Skin2:
+		Sequence: deploy
+		RequiresCondition: immobile
+		Name: body2
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mobilityspecialization, up_auxiliaryweapon, up_advancedtiberiumrefinement
+
+TSSUBTANK:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@FireActor: ^FireActor
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@sub: ^SubterraneanVoxelVehicle
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 1150
+	Tooltip:
+		Name: Devil's Tongue
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsntweap, tsnttech
+		Queue: Vehicle, RAVehicle
+		Description: Subterranean flame tank.\nIs able to move underground.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Mobile:
+		Locomotor: subterranean
+		Speed: 70
+		TurnSpeed: 28
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Armament@PRIMARY:
+		Weapon: TSFireballLauncher
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	AttackFrontal:
+		PauseOnCondition: disabled || submerged
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderVoxels:
+		Scale: 15
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement
+
+TSSUBTANKCABAL:
+	Inherits: TSSUBTANK
+	Buildable:
+		Prerequisites: ~tsntweapcabal, tscabaltech, ~disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tssubtank
+	RenderVoxels:
+		Image: tssubtank
+
+tssgen:
+	Inherits: ^Tank
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
+	ActorStatValues:
+		Upgrades:
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Mobile Stealth Generator
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~tsntweap, tsntstlh
+		Queue: Vehicle, RAVehicle
+		Description: Cloaks nearby buildings and units.\nCan not be cloaked.\n Unarmed
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	ProximityExternalCondition@StealGen:
+		Range: 5c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && !up_stealthfieldsimprovements
+	ProximityExternalCondition@StealGenUpgraded:
+		Range: 7c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && up_stealthfieldsimprovements
+	-ExternalCondition@CLOAK:
+	-ExternalCondition@TSCLOAK:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+	# DetectCloaked:
+	# 	Range: 7c0
+	WithRangeCircle@GenRange:
+		Range: 5c0
+		RequiresCondition: !up_stealthfieldsimprovements
+	WithRangeCircle@GenRangeUpgraded:
+		Range: 7c0
+		RequiresCondition: up_stealthfieldsimprovements
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement, up_stealthfieldsimprovements
+
+tssgencabal:
+	Inherits: tssgen
+	Buildable:
+		Prerequisites: ~tsntweapcabal, tsntstlhcabal, ~disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tssgen
+	RenderVoxels:
+		Image: tssgen
+
+tslpst:
+	Inherits: ^Tank
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Mobile Sensor Array
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~tsgtweap, tsgtradr
+		Queue: Vehicle, RAVehicle
+		Description: Detects cloaked units and buildings.\n Unarmed
+	Mobile:
+		Speed: 85
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 7c0
+	Inherits@EXT: ^ExternalConditions ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	DetectCloaked:
+		Range: 12c0
+	RenderSprites:
+		Image: tslpst
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_mechanicalreliability
+
+tslpstcabal:
+	Inherits: tslpst
+	Buildable:
+		Prerequisites: ~tsntweapcabal, tsntradrcabal, ~disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tslpst
+	RenderVoxels:
+		Image: tslpst
+
+tslpstnod:
+	Inherits: tslpst
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Tooltip:
+		Name: Mobile Sensor Array
+	Buildable:
+		BuildPaletteOrder: 110
+		Prerequisites: ~tsntweap, tsntradr
+		Queue: Vehicle, RAVehicle
+		Description: Shuts down vehicles with an EMP blast.\n  Strong vs Vehicles, Cyborgs
+	RenderSprites:
+		Image: tslpst
+		PlayerPalette: playerra2
+	RenderVoxels:
+		Image: tslpst
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement
+
+
+#######################################
+# TS Forgotten Vehicles
+#######################################
+
+tssapc.mut:
+	Inherits: TSSAPC
+	RenderVoxels:
+		Image: tssapc
+	RenderSprites:
+		Image: tssapc
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsgtweapmutant
+	Cargo:
+		InitialUnits: tsmutant, tsmutant, tsmutant, tsmutant, tsmutant3
+	UpdatesPlayerStatistics:
+		OverrideActor: tssapc
+
+TSWINI2:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Missile Van
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~tsgtweapmutant
+		Queue: Vehicle, RAVehicle
+		Description: Light motor vehicle armed with\nlong range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+		BuildDuration: 300
+		BuildDurationModifier: 100
+	Mobile:
+		Speed: 99
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 28
+		Offset: -120,0,1
+	Armament:
+		Weapon: TSHoverMissile
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 0,121,271, 0,-121,271
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+TSCAR2:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 350
+	Tooltip:
+		Name: Raider Car
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtweapmutant
+		Queue: Vehicle, RAVehicle
+		Description: Fast raiding vehicle.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 135
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 44
+		Offset: 0,0,1
+	Armament:
+		Weapon: TSRaiderCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 0,121,271, 0,-121,271
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Cargo:
+		InitialUnits: tsmutant, tsmutant
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 175
+	RenderSprites:
+		PlayerPalette: player_rgba
+tsbowler:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Bowler
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtweapmutant
+		Queue: Vehicle, RAVehicle
+		Description: Fast raiding vehicle.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 135
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 44
+		Offset: -200,0,25
+	Armament:
+		Weapon: TSAssaultCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 0,121,271, 0,-121,271
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Cargo:
+		InitialUnits: tsmutant, tsmutant, tsmutant
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 175
+	RenderSprites:
+		PlayerPalette: player_rgba
+tsruiner:
+	Inherits: ^CivilianDriveByVehicle
+	Inherits: ^Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Ruiner
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtweapmutant
+		Queue: Vehicle, RAVehicle
+		Description: Fast raiding vehicle.\n  Strong vs Infantry\n  Weak vs Vehicles
+	Mobile:
+		Speed: 135
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 44
+		Offset: 0,0,1
+	Armament:
+		Weapon: TSBikeMissile
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 0,121,271, 0,-121,271
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Cargo:
+		InitialUnits: tsmutant, tse3.mutant
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 175
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+TS1TNK:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Ratty Tank
+	Buildable:
+		BuildPaletteOrder: 170
+		Prerequisites: ~tsgtweapmutant
+		Queue: Vehicle, RAVehicle
+		Description: Fast, lightly armored tank.\n Strong vs Light Vehicles
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Mobile:
+		Locomotor: tracked
+		Speed: 126
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Weapon: 70mm
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 325
+	RenderSprites:
+		PlayerPalette: player_rgba
+	SpawnActorOnDeath:
+		Actor: forgot_ltnk_tur
+TS2TNK:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Warrior Tank
+	Buildable:
+		BuildPaletteOrder: 180
+		Prerequisites: ~tsgtweapmutant, tsgtradrmutant
+		Queue: Vehicle, RAVehicle
+		Description: General-purpose Mutant tank.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
+		BuildDuration: 375
+		BuildDurationModifier: 100
+	Mobile:
+		Locomotor: tracked
+		Speed: 90
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Weapon: 120mm
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 768,0,90
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	RenderSprites:
+		PlayerPalette: player_rgba
+	SpawnActorOnDeath:
+		Actor: forgot_mtnk_tur
+TS3TNK:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Scooper Tank
+	Buildable:
+		BuildPaletteOrder: 190
+		Prerequisites: ~tsgtweapmutant, tsfgttech
+		Queue: Vehicle, RAVehicle
+		Description: Mutant heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
+		BuildDuration: 550
+		BuildDurationModifier: 100
+	Mobile:
+		Locomotor: tracked
+		Speed: 71
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Weapon: 120mmDual
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 768,85,90, 768,-85,90
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	RenderSprites:
+		PlayerPalette: player_rgba
+	SpawnActorOnDeath:
+		Actor: forgot_htnk_tur
+TSFTNK:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Flame Tank
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtweapmutant
+		Queue: Vehicle, RAVehicle
+		Description: Mutant incendiary tank, restored from\nFirst Tiberium War inventories.\n  Strong vs Infantry, Buildings\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 99
+		Locomotor: tracked
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 10000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Armament@PRIMARY:
+		Weapon: BigFlamer
+		LocalOffset: 512,128,42, 512,-128,42
+		MuzzleSequence: muzzle
+	FireWarheadsOnDeath:
+		Weapon: FlametankExplode
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+TS4TNK:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Mammoth Tank
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 200
+		Prerequisites: ~tsgtweapmutant, tsfgttech
+		Queue: Vehicle, RAVehicle
+		BuildDuration: 1250
+		BuildDurationModifier: 100
+		Description: Mutant superheavy tank, restored from\nFirst Tiberium War inventories.\n Can attack Aircraft\n Strong vs Everything
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 45
+		TurnSpeed: 12
+	Passenger:
+		Weight: 4
+	Health:
+		HP: 225000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+	Armament@PRIMARY:
+		Weapon: TS120mmx
+		LocalOffset: 900,85,340, 900,-85,340
+		Recoil: 170
+		RecoilRecovery: 42
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: TSMammothTusk
+		LocalOffset: -85,90,340, -85,-90,340
+		LocalYaw: -100, 100
+		Recoil: 10
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 900
+	ChangesHealth:
+		Step: 60
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	RenderSprites:
+		PlayerPalette: player_rgba
+TS4TNK2:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Chemical Mammoth Tank
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 200
+		Prerequisites: ~tsgtweapmutant, tsfgttech
+		Queue: Vehicle, RAVehicle
+		BuildDuration: 1250
+		BuildDurationModifier: 100
+		Description: Mutant superheavy tank, restored from\nFirst Tiberium War inventories.\n Can attack Aircraft\n Strong vs Everything
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 45
+		TurnSpeed: 12
+	Passenger:
+		Weight: 4
+	Health:
+		HP: 225000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 12
+	Armament@PRIMARY:
+		Weapon: TS120mmxChem
+		LocalOffset: 900,85,340, 900,-85,340
+		Recoil: 170
+		RecoilRecovery: 42
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: TSMammothTuskChem
+		LocalOffset: -85,-90,340
+		LocalYaw: -100, 100
+		Recoil: 10
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 900
+	ChangesHealth:
+		Step: 60
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	RenderSprites:
+		PlayerPalette: player_rgba
+TSARTY:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Tank Killer
+	Buildable:
+		BuildPaletteOrder: 160
+		Prerequisites: ~tsgtweapmutant, tsgtradrmutant
+		Queue: Vehicle, RAVehicle
+		Description: Mutant long ranged vehicle with heavy sabot shells.\n Strong vs Vehicles, Buildings\n Weak vs Infantry, Aircraft
+	Mobile:
+		Speed: 85
+		TurnSpeed: 8
+		Locomotor: lighttracked
+	Health:
+		HP: 125000
+	Repairable:
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: MammothTankCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 624,0,208
+		MuzzleSequence: muzzle
+	Turreted:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: player_rgba
+tsarty_bus:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: Thumper Bus
+	Buildable:
+		BuildPaletteOrder: 160
+		Prerequisites: ~tsgtweapmutant, tsgtradrmutant
+		Queue: Vehicle, RAVehicle
+		Description: Mutant long ranged vehicle with heavy sabot shells.\n Strong vs Vehicles, Buildings\n Weak vs Infantry, Aircraft
+	Mobile:
+		Speed: 85
+		TurnSpeed: 8
+		Locomotor: lighttracked
+	Health:
+		HP: 155000
+	Repairable:
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: MammothTankCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 624,0,208
+		MuzzleSequence: muzzle
+	Turreted:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 6
+		InitialUnits: tsmutant,tsmutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant
+		ExclusiveDeploy: true
+		DeployType: Battlefortress
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
+		PauseOnCondition: chronobeamed
+	RevealOnFire:
+		ArmamentNames: primary, garrisoned
+	AutoTarget:
+		AllowMovement: true
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: player_rgba
+tsnomad:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@barr: ^IsBarrack
+	Valued:
+		Cost: 6000
+	Tooltip:
+		Name: Nomad Barracks
+	Buildable:
+		BuildPaletteOrder: 160
+		Prerequisites: ~tsgtweapmutant, tsgtradrmutant
+		Queue: Vehicle, RAVehicle
+		Description: Mutant long ranged vehicle with heavy sabot shells.\n Strong vs Vehicles, Buildings\n Weak vs Infantry, Aircraft
+	Mobile:
+		Speed: 70
+		TurnSpeed: 6
+		Locomotor: lighttracked
+	Health:
+		HP: 225000
+	Repairable:
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: TSRaiderCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		LocalOffset: 624,0,208
+		MuzzleSequence: muzzle
+	Turreted:
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 12
+		InitialUnits: tsmutant,tsmutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tsmutant,tsmutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant
+		ExclusiveDeploy: true
+		DeployType: Battlefortress
+	AttackOpenTopped:
+		Voice: Attack
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
+		PauseOnCondition: chronobeamed
+	RevealOnFire:
+		ArmamentNames: primary, garrisoned
+	AutoTarget:
+		AllowMovement: true
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProductionQueue@INFANTRY:
+
+tsmlrs:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: MLRS
+	Buildable:
+		BuildPaletteOrder: 160
+		Prerequisites: ~tsgtweapmutant, tsgtradrmutant
+		Queue: Vehicle, RAVehicle
+		Description: Mutant rocket artillery.\n Strong vs Infantry, Buildings\n Weak vs Vehicles
+	Mobile:
+		Speed: 85
+		Locomotor: lighttracked
+	Health:
+		HP: 25000
+	Repairable:
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: 227mm
+		Recoil: 64
+		RecoilRecovery: 32
+		LocalOffset: 0,121,271, 0,-121,271
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: 227mm
+		Recoil: 64
+		RecoilRecovery: 32
+		LocalOffset: 0,-121,271, 0,121,271
+		MuzzleSequence: muzzle
+	Turreted:
+		Offset: -500,1,1
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	WithTurretAimAnimation:
+		Sequence: aim
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+tsm113:
+	Inherits: ^Tank
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@EXT: ^ExternalConditions
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@cargo: ^CargoVehicle
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: M113 Adats
+	UpdatesPlayerStatistics:
+		OverrideActor: tsm113
+	Buildable:
+		BuildPaletteOrder: 160
+		Prerequisites: ~tsgtweapmutant, tsgtpile2
+		Queue: Vehicle, RAVehicle
+		Description: Armored troop transport.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 132
+		PauseOnCondition: notmobile || disabled
+	Health:
+		HP: 100000
+	Repairable:
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: TSAdatsMissile
+		LocalOffset: 85,0,171
+		MuzzleSequence: muzzle
+	Turreted:
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Selectable:
+		Class: tsm113
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		InitialUnits: TSMUTANT,TSMWMN,TSMUTANT3,TSE3.MUTANT
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	WithSpriteTurret:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+tsapctruck:
+	Inherits: ^Tank
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@EXT: ^ExternalConditions
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@cargo: ^CargoVehicle
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: APC Truck
+	UpdatesPlayerStatistics:
+		OverrideActor: tsm113
+	Buildable:
+		BuildPaletteOrder: 150
+		Prerequisites: ~tsgtweapmutant, tsgtpile2
+		Queue: Vehicle, RAVehicle
+		Description: Armored troop transport.\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
+	Mobile:
+		Speed: 132
+		PauseOnCondition: notmobile || disabled
+	Health:
+		HP: 90000
+	Repairable:
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	Armament:
+		Weapon: TSRaiderCannon
+		LocalOffset: 85,0,171
+		MuzzleSequence: muzzle
+	Turreted:
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Selectable:
+		Class: tsapctruck
+	Cargo:
+		UnloadVoice: Move
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		InitialUnits: TSMUTANT,TSMWMN,TSMUTANT3,TSE3.MUTANT
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	WithSpriteTurret:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+
+tsclosh:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Closh Tank
+	Buildable:
+		BuildPaletteOrder: 170
+		Prerequisites: ~tsgtweapmutant
+		Queue: Vehicle, RAVehicle
+		Description: Fast, lightly armored tank.\n Strong vs Light Vehicles
+		BuildDuration: 250
+		BuildDurationModifier: 100
+	Mobile:
+		Locomotor: tracked
+		Speed: 126
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Medium
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 20 #3
+	Armament:
+		Weapon: 70mm
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFrontal:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 325
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+#######################################
+# TS CABAL Vehicles
+#######################################
+TSLASSPID:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Laser Spider
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 64
+		Speed: 160
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSLaserRaiderCannon
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFollow:
+		FacingTolerance: 512
+	Voiced:
+		VoiceSet: TSCobra
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	DeathSounds:
+
+tscabalcobra:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Mantis
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 64
+		Speed: 160
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSCobraLasers
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFollow:
+		FacingTolerance: 512
+	Voiced:
+		VoiceSet: TSCobra
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+
+	DeathSounds:
+
+tsspddrone:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@CATALYST: ^cabaltibcatalysticon
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Spider Tank Drone
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 64
+		Speed: 160
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TS90mm
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: !cabaltibcatalysticon
+	Armament@UPGRADED:
+		Weapon: TS90mm_bluenuke
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: cabaltibcatalysticon
+	Armor:
+		Type: Heavy
+	WithMuzzleOverlay:
+	AttackFollow:
+		FacingTolerance: 512
+	Voiced:
+		VoiceSet: TSCobra
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	DeathSounds:
+
+tscheavyspider:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@BACKUP: ^cabalbackupsystemicon
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Heavy Spider
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 64
+		Speed: 80
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSAssaultCannon
+		LocalOffset: 350,-90,250, 350,90,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: TSReaperTusk
+		LocalOffset: -350,90,340, -350,-90,340
+		LocalYaw: -100, 100
+		Recoil: 10
+	WithMuzzleOverlay:
+	AttackFollow:
+		FacingTolerance: 512
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+ 	SpawnActorOnDeath@backup:
+ 		Actor: tscheavyspider_backup
+		RequiresCondition: cabalbackupsystemicon
+
+tscheavyspider_backup:
+	Inherits: tscheavyspider
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Heavy Spider (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 160000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tscheavyspider
+ 	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1200
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: tscheavyspider
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+
+TSART2CABAL:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@CATALYST: ^cabaltibcatalysticon
+	Inherits@BACKUP: ^cabalbackupsystemicon
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Artillery Spider
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal, tsntradrcabal
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 200000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TS155mm
+		LocalOffset: -125,1,250, -125,1,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: !cabaltibcatalysticon
+	Armament@Upgraded:
+		Weapon: TS155mm_bluenuke
+		LocalOffset: -125,1,250, -125,1,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: cabaltibcatalysticon
+	WithMuzzleOverlay:
+	AttackFollowFrontal:
+		FacingTolerance: 45
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tsartspid
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+ 	SpawnActorOnDeath@backup:
+ 		Actor: tsart2cabal_backup
+		RequiresCondition: cabalbackupsystemicon
+
+tsart2cabal_backup:
+	Inherits: TSART2CABAL
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Artillery Spider (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsntweapcabal, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: tracked
+		Speed: 0
+		TurnSpeed: 0
+	Health:
+		HP: 100000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tsartspid
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+ 	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1600
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: tsart2cabal
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+TSTTNKCABAL:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@detect: ^EliteDetector
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@CATALYST: ^cabaltibcatalysticon
+	Inherits@BACKUP: ^cabalbackupsystemicon
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tarantula
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~tsntweapcabal, tsntradrcabal
+		BuildDurationModifier: 100
+		BuildDuration: 375
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+	Turreted:
+		TurnSpeed: 15 #3
+		Offset: -500,1,1
+	Armament@PRIMARY:
+		Weapon: TS120mm
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: !cabaltibcatalysticon
+	Armament@Upgraded:
+		Weapon: TS120mm_bluenuke
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: cabaltibcatalysticon
+	AttackTurreted:
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	DeliversCash:
+		Payload: 400
+	WithSpriteTurret:
+		Recoils: false
+	BodyOrientation:
+		QuantizedFacings: 32
+		UseClassicPerspectiveFudge: False
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderVoxels:
+		Scale: 10
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tstnkspid
+ 	SpawnActorOnDeath@backup:
+ 		Actor: tsttnkcabal_backup
+		RequiresCondition: cabalbackupsystemicon
+
+tsttnkcabal_backup:
+	Inherits: TSTTNKCABAL
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tarantula (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsntweapcabal, ~disabled
+		Queue: Disabled
+		BuildDurationModifier: 100
+		BuildDuration: 375
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 0
+		TurnSpeed: 0
+	Health:
+		HP: 500000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	BodyOrientation:
+		QuantizedFacings: 32
+		UseClassicPerspectiveFudge: False
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tstnkspid
+ 	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1500
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: tsttnkcabal
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+
+TSSAPCCABAL:
+	Inherits: ^Tank
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@cargo: ^CargoVehicle
+	Valued:
+		Cost: 2600
+	Tooltip:
+		Name: Scarab APC
+	UpdatesPlayerStatistics:
+		OverrideActor: tssapc
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsntweapcabal, tsntradrcabal
+		Queue: Vehicle, RAVehicle
+		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
+	Mobile:
+		Speed: 75
+		Locomotor: hover
+		RequiresCondition: !notmobile && !disabled
+	Hovers:
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 5c0
+		RequiresCondition: !submerged
+	Turreted:
+		TurnSpeed: 20 #3
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 10
+		InitialUnits: tscyborg, tscyborg, tscyborg, tscyborg, tscyborgb, tsdevout, tsascended, tsascended, tshacker, tshacker
+	Targetable@garrisoned:
+		RequiresCondition: loaded && !submerged
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Upgrades: up_advancedtiberiumrefinement
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: tssapccabal

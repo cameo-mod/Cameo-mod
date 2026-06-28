@@ -1,0 +1,3655 @@
+OILB.TS:
+	Inherits: OILB.Building
+	Inherits@cashtrickler: ^CashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Tooltip:
+		Name: Tiberium Pump
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~tsoilderrick, tstek, derricklimit
+		Description: Provides Passive income
+		IconPalette: ra2
+	RenderSprites:
+		Image: tibpump
+	-WithMakeAnimation:
+	WithIdleOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-platform
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+OILB.TS.MUTANT:
+	Inherits: OILB.TS
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^3x4Shape
+	Tooltip:
+		Name: Tiberium Extractor
+	Buildable:
+		BuildLimit: 1
+		Queue: Building, RABuilding
+		Prerequisites: ~tsfgttech, derricklimit
+	SeedsResource:
+		ResourceType: Tiberium
+		Interval: 50
+		MaxRange: 250
+	-WithIdleOverlay@PLATFORM:
+	WithIdleOverlay@LIGHTS:
+		Sequence: anim
+		Palette: tseffect
+	RenderSprites:
+		Image: tibdrill
+		PlayerPalette: playerra2
+
+#######################################
+# TS MCV
+#######################################
+
+TSGTCNST:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Selectable:
+		Bounds: 131072, 87381
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Construction Yard
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		BuildSounds: facbld1.aud
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	RevealsShroud:
+		Range: 10c0
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: mcv
+		Offset: 1,1
+		Facing: 432
+	TransformsIntoMobile:
+		RequiresCondition: factundeploy
+		Locomotor: heavywheeled
+		RequiresForceMove: true
+		RedeployAfterMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: factundeploy
+		CargoType: Vehicle
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: factundeploy
+		RepairActors: fix
+		RequiresForceMove: true
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+	BaseProvider:
+		Range: 14c0
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithIdleOverlay@SIDE:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-side
+	WithIdleOverlay@FRONT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-front
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		Description: Builds structures
+
+TSGTCNSTGDI:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^4x3Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@conyard: ^Conyard
+	Selectable:
+		Bounds: 131072, 87381
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Construction Yard (GDI)
+	Building:
+		Footprint: _xx_ xxxx _xx_
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	RevealsShroud:
+		Range: 10c0
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: tsmcvgdi
+		Offset: 1,1
+		Facing: 432
+	TransformsIntoMobile:
+		RequiresCondition: factundeploy
+		Locomotor: heavywheeled
+		RequiresForceMove: true
+		RedeployAfterMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: factundeploy
+		CargoType: Vehicle
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: factundeploy
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RequiresForceMove: true
+	TransferTimedExternalConditionOnTransform:
+		Condition: invulnerability
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	BaseProvider:
+		Range: 14c0
+	ProvidesPrerequisite@tsoilderrick:
+		Prerequisite: tsoilderrick
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithIdleOverlay@SIDE:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-side
+	WithIdleOverlay@FRONT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-front
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@fact.tsgdi:
+		Prerequisite: fact.tsgdi
+	RenderSprites:
+		Image: tsgtcnst
+		PlayerPalette: playerra2
+
+TSGTCNSTNOD:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@conyard: ^Conyard
+	Selectable:
+		Bounds: 131072, 87381
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Construction Yard (Nod)
+	Building:
+		Footprint: _xx_ xxxx _xx_
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	RevealsShroud:
+		Range: 10c0
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: tsmcvnod
+		Offset: 1,1
+		Facing: 432
+	TransformsIntoMobile:
+		RequiresCondition: factundeploy
+		Locomotor: heavywheeled
+		RequiresForceMove: true
+		RedeployAfterMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: factundeploy
+		CargoType: Vehicle
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: factundeploy
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RequiresForceMove: true
+	TransferTimedExternalConditionOnTransform:
+		Condition: invulnerability
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	BaseProvider:
+		Range: 14c0
+	ProvidesPrerequisite@tsoilderrick:
+		Prerequisite: tsoilderrick
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithIdleOverlay@SIDE:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-side
+	WithIdleOverlay@FRONT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-front
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@fact.tsnod:
+		Prerequisite: fact.tsnod
+	RenderSprites:
+		Image: tsgtcnst
+		PlayerPalette: playerra2
+
+TSGTCNSTCABAL:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@conyard: ^Conyard
+	Selectable:
+		Bounds: 131072, 87381
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Construction Yard (CABAL)
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 10c0
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: tsmcvcabal
+		Offset: 1,1
+		Facing: 432
+	TransformsIntoMobile:
+		RequiresCondition: factundeploy
+		Locomotor: heavywheeled
+		RequiresForceMove: true
+		RedeployAfterMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: factundeploy
+		CargoType: Vehicle
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: factundeploy
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RequiresForceMove: true
+	TransferTimedExternalConditionOnTransform:
+		Condition: invulnerability
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	BaseProvider:
+		Range: 14c0
+	ProvidesPrerequisite@tsoilderrick:
+		Prerequisite: tsoilderrick
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithIdleOverlay@SIDE:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-side
+	WithIdleOverlay@FRONT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-front
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: tsgtcnst
+		PlayerPalette: playerra2
+
+tsprocgdi:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^4x3Shape
+	Inherits@ref: ^Refinery
+	# HitShape:
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -512
+	# 		BottomRight: 1536, 853
+	# HitShape@TOP:
+	# 	Type: Rectangle
+	# 		TopLeft: -512, -1450
+	# 		BottomRight: 896, -512
+	Tooltip:
+		Name: Tiberium Refinery
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtcnstgdi, tsgtpowr
+		Queue: Building, RABuilding
+		Description: template-refinery.description
+	Building:
+		Footprint: xxx_ xxx= _===
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 6c0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	# Selectable:
+	# 	Bounds: 3072, 2560, 0, 0
+	# 	DecorationBounds: 3072, 2560, 0, 0
+	CustomSellValue:
+		Value: 500
+	FreeActor:
+		Actor: TSHARV
+		SpawnOffset: 2,2
+		Facing: 256
+	WithIdleOverlay@REDLIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-redlights
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	WithDockingOverlay@UNLOAD:
+		RequiresCondition: !build-incomplete
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		Image: tsprocgdi
+		PlayerPalette: playerra2
+
+tsprocnod:
+	Inherits: tsprocgdi
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtcnstnod, tsntpowr
+		Queue: Building, RABuilding
+	FreeActor:
+		Actor: TSHARVNOD
+		SpawnOffset: 2,2
+		Facing: 256
+	RenderSprites:
+		Image: tsprocnod
+
+tsproccabal:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: CABAL Refinery
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtcnstcabal, tsntpowrcabal
+		Queue: Building, RABuilding
+		Description: Processes raw Tiberium\ninto useable resources
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 6c0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	CustomSellValue:
+		Value: 500
+	FreeActor:
+		Actor: TSHARVCABAL
+		SpawnOffset: 1,2
+		Facing: 256
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		Image: tsproccabal
+		PlayerPalette: player_rgba
+
+
+tsntwast:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	# HitShape:
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -512
+	# 		BottomRight: 1536, 853
+	# HitShape@TOP:
+	# 	Type: Rectangle
+	# 		TopLeft: -512, -1450
+	# 		BottomRight: 896, -512
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Tiberium Waste Facility
+	Buildable:
+		BuildPaletteOrder: 200
+		BuildLimit: 1
+		Prerequisites: ~tsgtcnstnod, tsnttech, up_advancedtiberiumrefinement
+		Queue: Building, RABuilding
+		Description: actor-tsntwast.description
+	Building:
+		Footprint: xx= xx=
+		Dimensions: 3,2
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 6c0
+	# Selectable:
+	# 	Bounds: 1280, 1280
+	# 	DecorationBounds: 1280, 1024
+	# CustomSellValue:
+	# 	Value: 500
+	WithIdleOverlay@GLOW:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-glow
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@BIB2:
+		RequiresCondition: !build-incomplete
+		Sequence: bibb
+	#WithDockingOverlay@UNLOAD:
+	#	RequiresCondition: !build-incomplete
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	ResourcePurifier:
+		Modifier: 25
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSGTPOWR:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: GDI Power Plant
+	Valued:
+		Cost: 500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 150
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Building, RABuilding
+		Description: template-power.description
+		Prerequisites: ~tsgtcnstgdi
+	Building:
+		Footprint: == xx
+		Dimensions: 2,2
+	RevealsShroud:
+		Range: 4c0
+	Selectable:
+		Bounds: 2048, 2048
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: building ##########
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	WithIdleOverlay@PLUG:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		Sequence: idle-plug
+	WithIdleOverlay@PLUG2:
+		RequiresCondition: powerupgrade
+		PauseOnCondition: disabled
+		Sequence: idle-powrupa
+	WithIdleOverlay@PLUG3:
+		RequiresCondition: powerupgrade
+		PauseOnCondition: disabled
+		Sequence: idle-powrupb
+	ProvidesPrerequisite:
+		Prerequisite: gdipowerupgradeavailable
+		RequiresCondition: !powerupgrade
+	DamageMultiplier@powerupgrade:
+		Modifier: 50
+		RequiresCondition: powerupgrade
+	PowerMultiplier@powerupgrade:
+		Modifier: 200
+		RequiresCondition: powerupgrade
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			tsgtpowr: powerupgrade
+		Requirements:
+			tsgtpowr: !build-incomplete && !powerupgrade
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsgtpowrup:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Power Turbine
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~tsgtcnstgdi, gdipowerupgradeavailable
+		Description: Power plant addon that increases output by 100%
+	Plug:
+		Type: tsgtpowr
+	RenderSprites:
+		Image: tsgtpowrup
+
+TSNTPOWR:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Tooltip:
+		Name: Nod Power Plant
+	Valued:
+		Cost: 600
+	Health:
+		HP: 120000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 180
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsgtcnstnod
+		Description: template-power.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 4c0
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# HitShape:
+	# 	UseTargetableCellsOffsets: false
+	# 	TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+	ProvidesPrerequisite@buildingname:
+		ValidTypes: building ##########
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+TSNTPOWRCABAL:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Tooltip:
+		Name: CABAL Power Plant
+	Valued:
+		Cost: 800
+	Health:
+		HP: 160000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 240
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsgtcnstcabal
+		Description: template-power.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 2048, 2048
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	RevealsShroud:
+		Range: 4c0
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+	ProvidesPrerequisite@buildingname:
+		ValidTypes: building ##########
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	WithIdleOverlay@RAY:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-electro
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tscrys
+
+TSNTAPWR:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Tooltip:
+		Name: Nod Advanced Power Plant
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 240000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 360
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 110
+		Prerequisites: ~tsgtcnstnod, tsntradr
+		Description: template-advpower.description
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	HitShape:
+		TargetableOffsets: -355,-1024,0
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 5c0
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: building ##########
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSGTSILO:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2048
+	Valued:
+		Cost: 150
+	Tooltip:
+		Name: Silo
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Defence, RADefence
+		Description: template-silo.description
+		Prerequisites: ~tsgtcnstgdi, tsproc
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	StoresResources:
+		Capacity: 8000
+	WithResourceLevelOverlay@FILLSTAGE:
+		RequiresCondition: !build-incomplete
+		Sequence: stages
+	WithSpriteBody:
+		Sequence: idle-underlay
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
+	RenderSprites:
+		PlayerPalette: playerra2
+	RenderSprites:
+		Image: tsgtsilo.gdi
+
+TSGTSILONOD:
+	Inherits: TSGTSILO
+	Tooltip:
+		Name: Silo
+	Buildable:
+		Prerequisites: ~tsgtcnstnod, tsprocnod
+	RenderSprites:
+		Image: tsgtsilo.nod
+
+TSGTSILOCABAL:
+	Inherits: TSGTSILO
+	Tooltip:
+		Name: Silo
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tsproccabal
+	RenderSprites:
+		Image: tsgtsilo.cabal
+
+TSGTPILE:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@barr: ^IsBarrack
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 640
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Barracks
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites:  ~tsgtcnstgdi, tsgtpowr
+		Queue: Building, RABuilding
+		Description: template-barracks.description
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 5c0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	WithIdleOverlay@FLAG:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-flag
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSNTHAND:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Inherits@barr: ^IsBarrack
+	# HitShape:
+	# 	UseTargetableCellsOffsets: false
+	# 	TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
+	# Selectable:
+	# 	Bounds: 1280, 1280
+	# 	DecorationBounds: 1280, 1024
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Hand of Nod
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsgtcnstnod, tsntpowr
+		Queue: Building, RABuilding
+		Description: template-barracks.description
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 5c0
+	RallyPoint:
+		Path: 1,2
+	Exit@1:
+		# SpawnOffset: -426,85,0
+		SpawnOffset: 0,0,0
+		ExitCell: 2,1
+	# Exit@2:
+	# 	# SpawnOffset: 298,298,0
+	# 	SpawnOffset: 0,0,0
+	# 	ExitCell: 2,0
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSNTHAND2:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@barr: ^IsBarrack
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Cyborg Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsgtcnstcabal, tsntpowrcabal
+		Queue: Building, RABuilding
+		Description: template-barracks.description
+		IconPalette: windows256
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 5c0
+	RallyPoint:
+		Path: 1,2
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	SelectionDecorations:
+	WithProductionOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-produce
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	RenderSprites:
+		PlayerPalette: playerra2
+
+
+tsgtweap:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^4x3Shape
+	Inherits@weap: ^IsWeaponFactory
+	# HitShape:
+	# 	TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -1024
+	# 		BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: GDI War Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites:  ~tsgtcnstgdi, tsprocgdi
+		Queue: Building, RABuilding
+		Description: template-factory.description
+	Building:
+		Footprint: xxx_ xxx= _===
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	# Selectable:
+	# 	Bounds: 3072, 2048
+	# 	DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 4c0
+	RallyPoint:
+		Path: 5,3
+	Exit@1:
+		# SpawnOffset: -512,-512,0
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	ProductionBar@VEHICLEGDI:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEGDI:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@WHITELIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights-white
+	WithIdleOverlay@REDLIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights-red
+	WithIdleOverlay@TURBINES:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-turbines
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	RenderSprites:
+		Image: tsgtweap
+		PlayerPalette: playerra2
+
+TSNTWEAP:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^4x3Shape
+	Inherits@weap: ^IsWeaponFactory
+	# HitShape:
+	# 	TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -1024
+	# 		BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Nod War Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtcnstnod, tsprocnod
+		Queue: Building, RABuilding
+		Description: template-factory.description
+	Building:
+		Footprint: xxx_ xxx= _===
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	# Selectable:
+	# 	Bounds: 3072, 2048
+	# 	DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 4c0
+	RallyPoint:
+		Path: 5,3
+	Exit@1:
+		# SpawnOffset: -512,-512,0
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	ProductionBar@VEHICLEGDI:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEGDI:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSNTWEAPCABAL:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Inherits@weap: ^IsWeaponFactory
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+		Type: Rectangle
+			TopLeft: -1536, -1024
+			BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: CABAL Mech Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtcnstcabal, tsproccabal
+		Queue: Building, RABuilding
+		Description: template-factory.description
+	Building:
+		Footprint: xx= x== ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 4c0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -512,-512,0
+		ExitCell: 2,1
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	ProductionBar@VEHICLEGDI:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEGDI:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	RenderSprites:
+		PlayerPalette: playerra2
+
+
+tsgtdeptgdi:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	# HitShape:
+	# 	TargetableOffsets: 840,0,0, 598,-640,0, 598,640,0, -1060,0,0, -768,-640,0, -768,640,0
+	# 	Type: Polygon
+	# 		Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Service Depot
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites:  ~tsgtcnstgdi, tsgtweap
+		Queue: Building, RABuilding
+		Description: template-service-depot.description
+	Building:
+		Footprint: x++ +++
+		Dimensions: 3,2
+	# Selectable:
+	# 	Bounds: 1280, 1280
+	# 	DecorationBounds: 1280, 1024
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 5c0
+	Reservable:
+	# RepairsUnits:
+	# 	HpPerStep: 1000
+	# 	Interval: 15
+	# 	PlayerExperience: 25
+	# 	StartRepairingNotification: Repairing
+	RallyPoint:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	WithIdleOverlay@GROUND:
+		RequiresCondition: !build-incomplete
+		Sequence: ground
+	WithIdleOverlay@CIRCUITS:
+		RequiresCondition: !build-incomplete
+		Sequence: circuits
+	WithRepairOverlay@CRANE:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		StartSequence: crane-start
+		Sequence: crane-loop
+		EndSequence: crane-end
+	WithRepairOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: platform
+	WithDeathAnimation@BIB:
+		DeathSequence: dead-ground
+		UseDeathTypeSuffix: false
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+
+tsgtdeptnod:
+	Inherits: tsgtdeptgdi
+	Tooltip:
+		Name: Service Depot
+	Buildable:
+		Prerequisites: ~tsgtcnstnod, tsntweap
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+tsgtdeptcabal:
+	Inherits: tsgtdeptgdi
+	Tooltip:
+		Name: Service Depot
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tsntweapcabal
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+
+tsgthpad:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@hpad: ^IsAircraftFactory
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# HitShape:
+	# 	UseTargetableCellsOffsets: false
+	# 	TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Helipad (GDI)
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtcnstgdi, tsgtradr
+		Queue: Building, RABuilding
+		Description: Produces, rearms and repairs aircraft.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	RevealsShroud:
+		Range: 5c0
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RepairsUnits:
+		HpPerStep: 1000
+		PlayerExperience: 25
+		StartRepairingNotification: Repairing
+	RallyPoint:
+	ProductionQueue@AIRCRAFT:
+	ProductionBar@AIRCRAFTGDI:
+		ProductionType: Aircraft
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAAIRCRAFTGDI:
+		ProductionType: RAAircraft
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -10
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-platform
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+
+tsnthpad:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# HitShape:
+	# 	UseTargetableCellsOffsets: false
+	# 	TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Nod Helipad
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtcnstnod, tsntradr
+		Queue: Building, RABuilding
+		Description: Produces, rearms and repairs aircraft.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	RevealsShroud:
+		Range: 5c0
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RepairsUnits:
+		HpPerStep: 1000
+		PlayerExperience: 25
+		StartRepairingNotification: Repairing
+	RallyPoint:
+	ProductionQueue@AIRCRAFT:
+	ProductionBar@AIRCRAFTNOD:
+		ProductionType: Aircraft
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAAIRCRAFTNOD:
+		ProductionType: RAAircraft
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-platform
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsnthpad2:
+	Inherits: tsnthpad
+	Tooltip:
+		Name: CABAL Helipad
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+	ProductionQueue@AIRCRAFT:
+	ProductionBar@AIRCRAFTNOD:
+		ProductionType: Aircraft
+	ProductionBar@RAAIRCRAFTNOD:
+		ProductionType: RAAircraft
+	RenderSprites:
+		Image: tsnthpadcabal
+
+tsntradr:
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@sell: ^TSSpawnActorsOnSell
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Radar
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~tsgtcnstnod, tsprocnod
+		Queue: Building, RABuilding
+		Description: actor-tsntradr.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2248, 2248
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	RevealsShroud:
+		Range: 10c0
+	ProvidesRadar:
+		RequiresCondition: !jammed && !lowpower
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower
+	SupportPowerChargeBar:
+	Power:
+		Amount: -50
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-dish
+	# DetonateWeaponPower@bribedmutants:
+	# 	Prerequisites:
+	# 		1: mmtsnod
+	# 	Icons:
+	# 		1: mutcommando
+	# 	Names:
+	# 		1: Bribed Mutants
+	# 	ChargeInterval: 6000
+	# 	Descriptions:
+	# 		1: Deploys mutants from the orbit
+	# 	Weapons:
+	# 		1: NODMutantSpawner
+	# 	OrderName: GDI Drop
+	# 	Cursor: ability
+	# 	PauseOnCondition: lowpower
+	# 	InsufficientPowerSpeechNotification: InsufficientPower
+	# 	LaunchSpeechNotification: ReinforcementsArrived
+	# 	IncomingSpeechNotification: EnemyUnitsApproaching
+	# 	SelectTargetSpeechNotification: SelectTarget
+	# 	DisplayBeacon: True
+	# 	DisplayRadarPing: True
+	# 	DisplayTimerStances: Ally, Neutral, Enemy
+	# 	CameraActor: camera.small
+	# 	CameraRemoveDelay: 60
+	# 	AllowMultiple: True
+	RenderSprites:
+		PlayerPalette: playerra2
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+tsntradrcabal:
+	Inherits: tsntradr
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tsproccabal
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntradrcabal
+	ProvidesPrerequisite@robotcontrol:
+		Prerequisite: robotcontrol
+		RequiresCondition: !disabled
+	SupportPowerChargeBar:
+	SpawnActorPower@radarhack:
+		PauseOnCondition: disabled
+		OrderName: SovietRA2SpyPlane
+		Prerequisites:
+			1: cabalradarhack
+		Icons:
+			1: icon
+		ChargeInterval: 4500
+		Names:
+			1: Satellite Hack
+		Descriptions:
+			1: power-ra2psireveal.description
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: SpyPlaneReady
+		Actors:
+			1: camera.psireveal
+		IconImage: cabalradarhack
+		LifeTime: 250
+		DeploySound: spysreve.wav
+		LaunchSound: spysreve.wav
+		IncomingSound: spysreve.wav
+		SupportPowerPaletteOrder: 10
+		EffectSequence: idle
+		BlockedCursor: move-blocked
+tsgtradr:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@shape: ^2x2Shape
+	# HitShape:
+	# 	TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+	# 	Type: Rectangle
+	# 		TopLeft: -1024, -384
+	# 		BottomRight: 1024, 1024
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Radar
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites:  ~tsgtcnstgdi, tsprocgdi
+		Queue: Building, RABuilding
+		Description: actor-tsgtradr.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# 	DecorationBounds: 2248, 2248
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	RevealsShroud:
+		Range: 10c0
+	ProvidesRadar:
+		RequiresCondition: !jammed && !lowpower
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower
+	SupportPowerChargeBar:
+	Power:
+		Amount: -50
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-dish
+	# DetonateWeaponPower:
+	# 	OrderName: GDI Drop
+	# 	Cursor: ability
+	# 	PauseOnCondition: lowpower
+	# 	Icon: droppod
+	# 	Name: Drop Pods
+	# 	Description: Deploys elite infantry from orbit.
+	# 	InsufficientPowerSpeechNotification: InsufficientPower
+	# 	LaunchSpeechNotification: ReinforcementsArrived
+	# 	SelectTargetSpeechNotification: SelectTarget
+	# 	DisplayRadarPing: True
+	# 	ChargeInterval: 4500
+	# 	Weapon: TSDroppodSpawner
+	# 	CameraActor: camera.small
+	# 	CameraRemoveDelay: 60
+	# SupportPowerChargeBar:
+	RenderSprites:
+		PlayerPalette: playerra2
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+tsnttech:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtcnstnod, tsntradr
+		Description: Provides Nod advanced technologies.
+	Tooltip:
+		Name: Nod Tech Center
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -150
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@factionnod:
+		Prerequisite: mmtsnod
+	ProvidesPrerequisite:
+		Prerequisite: tstek
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsgttech:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 131072, 87381
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites:  ~tsgtcnstgdi, tsgtradr
+		Description: Provides GDI advanced technologies.
+	Tooltip:
+		Name: GDI Tech Center
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xxx =x=
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	ProvidesPrerequisite:
+		Prerequisite: tstek
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tscabaltech:
+	Inherits: tsgttech
+	Tooltip:
+		Name: Cabal Tech Center
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+		Description: actor-tscabaltech.description
+		BuildLimit: 1
+	SupportPowerChargeBar:
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	RenderSprites:
+		Image: tscabaltech
+		PlayerPalette: playerra2
+	ProduceActorPower@sabot:
+		Prerequisites: cabalhandoflegion
+			1: cabalhandoflegion
+		Names:
+			1: Give Hackers
+		Descriptions:
+			1: Produces Hackers
+		Icons:
+			1: icon
+		IconImage: cabalhandoflegion
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Actors: tshacker
+		Type: Hackers
+		ChargeInterval: 1500
+		AutoFire: true
+		OrderName: tshacker
+		SupportPowerPaletteOrder: 20
+		RequiresCondition: cabalhandoflegion_tech
+	RallyPoint:
+	GrantConditionOnPrerequisite@cabalhandoflegion_tech:
+		Condition: cabalhandoflegion_tech
+		Prerequisites: cabalhandoflegion
+	Production@Saboteurs:
+		Produces: Hackers
+# tsnttmpl:
+# 	Inherits: ^BaseBuilding
+# 	Inherits@sell: ^TSSpawnActorsOnSell
+# 	Inherits@tech: ^IsTechnoBuilding
+# 	Inherits@shape: ^3x2Shape
+# 	# Inherits@hunterseeker: ^HunterSeekersPower
+# 	Selectable:
+# 		Bounds: 131072, 87381
+# 	HitShape:
+# 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+# 	Buildable:
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 150
+# 		Prerequisites: ~tsgtcnstnod, tsntradr, tsnttech
+# 		Description: Provides Nod advanced technologies.\nProvides Hunter-Seeker support power.
+# 	Tooltip:
+# 		Name: Nod Temple
+# 	Building:
+# 		Footprint: xxx xxx ===
+# 		Dimensions: 3,3
+# 		LocalCenterOffset: 0,-512,0
+# 	Selectable:
+# 		Bounds: 2048, 2048
+# 	Armor:
+# 		Type: Wood
+# 	RevealsShroud:
+# 		Range: 5c0
+# 	Power:
+# 		Amount: -100
+# 	ProvidesPrerequisite@buildingname:
+# 	WithIdleOverlay@LIGHTS:
+# 		RequiresCondition: !build-incomplete && !disabled
+# 		Sequence: idle-lights
+# 	SupportPowerChargeBar:
+# 	RenderSprites:
+# 		PlayerPalette: playerra2
+
+tscore:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	# Inherits@hunterseeker: ^HunterSeekersPower
+	Selectable:
+		Bounds: 131072, 87381
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~tsgtcnstcabal, tscabaltech
+		Description: actor-tscore.description
+	Tooltip:
+		Name: CABAL Core
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHTS2:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights2
+	WithIdleOverlay@LIGHTS2:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights3
+	SupportPowerChargeBar:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsntmisl:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtcnstnod, tsnttech
+		Description: actor-tsntmisl.description
+	Tooltip:
+		Name: Missile Silo
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+		LocalCenterOffset: 0,-512,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -150
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	AttackFollow:
+	GrantConditionOnPrerequisite@chem:
+		Condition: tsntwast
+		Prerequisites: tsntwast
+	Armament@superweapon1:
+		Name: superweapon
+		Weapon: TSTacticalMissile
+		RequiresCondition: !tsntwast
+	Armament@superweapon2:
+		Name: superweapon
+		Weapon: TSTacticalChemMissile
+		RequiresCondition: tsntwast
+	FireArmamentPower:
+		AllowMultiple: true
+		ArmamentName: superweapon
+		Prerequisites:
+			1: ~techlevel.superweapons
+			2: tsntwast
+		Cursor: nuke
+		Icons:
+			1: multimiss
+			2: chemicalmiss
+		TargetCircleRange: 5c0
+		ChargeInterval: 7500
+		Names:
+			1: power-clustermissile.name
+			2: power-chemicalmissile.name
+		Descriptions:
+			1: power-clustermissile.description
+			2: power-chemicalmissile.description
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Cluster Missile ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Cluster Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Cluster Missile launched.
+		OrderName: NukePowerInfoOrder
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		PauseOnCondition: empdisable || disabled
+		CameraRange: 5c0
+		CameraSpawnAdvance: 25
+		CameraRemoveDelay: 350
+	# NukePower@tactmiss:
+	# 	AllowMultiple: true
+	# 	OrderName: TSClusterMissile
+	# 	PauseOnCondition: lowpower
+	# 	Prerequisites: ~techlevel.superweapons
+	# 	Icon: multimiss
+	# 	Cursor: nuke
+	# 	ChargeInterval: 4500
+	# 	Name: Multi Missile
+	# 	Description: Launches a tactical cluster missile.\nApplies heavy damage over a large area.
+	# 	EndChargeSpeechNotification: NuclearWeaponAvailable
+	# 	SelectTargetSpeechNotification: SelectTarget
+	# 	InsufficientPowerSpeechNotification: InsufficientPower
+	# 	LaunchSpeechNotification: NuclearWeaponLaunched
+	# 	IncomingSpeechNotification: NuclearWarheadApproaching
+	# 	MissileWeapon: TSTacticalMissile
+	# 	MissileDelay: 5
+	# 	MissilePalette: tseffect
+	# 	FlightDelay: 100
+	# 	DetonationAltitude: 4c0
+	# 	SpawnOffset: 3c0,0,-1c512
+	# 	DisplayBeacon: True
+	# 	BeaconPoster: multimiss
+	# 	BeaconPosterPalette: beaconposter
+	# 	DisplayTimerRelationships: Ally, Neutral, Enemy
+	# 	DisplayRadarPing: True
+	# 	CameraRange: 10c0
+	# 	CameraRemoveDelay: 60
+	# 	ArrowSequence: arrow
+	# 	ClockSequence: clocklarge
+	# 	CircleSequence: circles
+	# 	MissileImage: TSTacticalMissile
+	# NukePower@tactmiss2:
+	# 	AllowMultiple: true
+	# 	OrderName: TSChemicalMissile
+	# 	PauseOnCondition: lowpower
+	# 	Prerequisites: ~techlevel.superweapons, tsntwast
+	# 	Icon: chemicalmiss
+	# 	Cursor: nuke
+	# 	ChargeInterval: 3500
+	# 	Name: Chemical Missile
+	# 	Description: Launches a tactical missile with\na Tiberium warhead.\n Applies heavy damage over a small area\n Releases toxic gas clouds
+	# 	EndChargeSpeechNotification: NuclearWeaponAvailable
+	# 	SelectTargetSpeechNotification: SelectTarget
+	# 	InsufficientPowerSpeechNotification: InsufficientPower
+	# 	LaunchSpeechNotification: NuclearWeaponLaunched
+	# 	IncomingSpeechNotification: NuclearWarheadApproaching
+	# 	MissileWeapon: TSChemTacticalMissile
+	# 	MissileDelay: 5
+	# 	MissilePalette: tseffect
+	# 	FlightDelay: 100
+	# 	SpawnOffset: 3c0,0,-1c512
+	# 	DisplayBeacon: True
+	# 	BeaconPoster: chemicalmiss
+	# 	BeaconPosterPalette: beaconposter
+	# 	DisplayRadarPing: True
+	# 	DisplayTimerRelationships: Ally, Neutral
+	# 	CameraRange: 10c0
+	# 	CameraRemoveDelay: 150
+	# 	ArrowSequence: arrow
+	# 	ClockSequence: clocklarge
+	# 	CircleSequence: circles
+	# 	MissileImage: TSChemTacticalMissile
+	WithSupportPowerActivationOverlay@1:
+		RequiresCondition: !build-incomplete
+		Sequence: active
+	WithSupportPowerActivationOverlay@2:
+		RequiresCondition: !build-incomplete
+		Sequence: smoke
+	ProvidesPrerequisite@buildingname:
+	SupportPowerChargeBar:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsntmislcabal:
+	Inherits: tsntmisl
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tscore
+		Description: actor-tsntmisl.description
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntmisl
+
+tsctarmr:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 131072, 87381
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	# Buildable:
+	# 	Queue: Addons
+	# 	BuildPaletteOrder: 70
+	# 	Prerequisites: ~tsgtcnstgdi
+	# 	Description: upgrades level infantry.
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Armory
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 80000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	Power:
+		Amount: -100
+	-WithMakeAnimation:
+	ProvidesPrerequisite@buildingname:
+	ProximityExternalCondition@RANK-0:
+		Range: 9c0
+		Condition: Armory-Rank
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsgtplug:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@SW: ^PrimarySuperweapon
+	# Inherits@hunterseeker: ^HunterSeekersPower
+	# Selectable:
+	# 	Bounds: 131072, 87381
+	# HitShape:
+	# 	TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtcnstgdi, tsgttech
+		Description: actor-tsgtplug.description
+	Tooltip:
+		Name: Upgrade Center
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 2048, 2048
+	RevealsShroud:
+		Range: 5c0
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-dish
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !lowpower && !disabled
+		Sequence: idle-lights
+	WithIdleOverlay@STRIP:
+		RequiresCondition: !build-incomplete && !lowpower && !disabled
+		Sequence: idle-strip
+	WithIdleOverlay@ioncannonb:
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-ioncannonb
+	WithIdleOverlay@hunterseekera:
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-hunterseekera
+	IonCannonPower:
+		AllowMultiple: True
+		PauseOnCondition: lowpower || disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1:ioncannon
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		WeaponDelay: 0
+		Weapon: TSIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names:
+			1: power-ioncannon.name
+		Descriptions:
+			1: power-ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Ion Cannon ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: tsionc
+	#Production:
+	#	Produces: UpgradeCenter.TSGDI
+	#	RequiresCondition: plugupgrade < 2
+	#ProductionQueue:
+	#	Type: UpgradeCenter.TSGDI
+	#	Group: Addon
+	#	LowPowerModifier: 200
+	#	QueueLimit: 2
+	#	ItemLimit: 2
+	#	DisplayOrder: 0
+	#GrantConditionOnProduction@plug:
+	#	Condition: plugupgrade
+	#GrantConditionOnProduction@ic:
+	#	Condition: ioncannon
+	#	Actors: tsgtplug2
+	#GrantConditionOnProduction@hs:
+	#	Condition: hunterseeker
+	#	Actors: tsgtplug3
+	RenderSprites:
+		PlayerPalette: playerra2
+
+TSGTCNSTMUTANT:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@conyard: ^Conyard
+	Selectable:
+		Bounds: 131072, 87381
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Construction Yard (Forgotten)
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 10c0
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: tsmcvmutant
+		Offset: 1,1
+		Facing: 432
+	TransformsIntoMobile:
+		RequiresCondition: factundeploy
+		Locomotor: heavywheeled
+		RequiresForceMove: true
+		RedeployAfterMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: factundeploy
+		CargoType: Vehicle
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: factundeploy
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RequiresForceMove: true
+	TransferTimedExternalConditionOnTransform:
+		Condition: invulnerability
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	BaseProvider:
+		Range: 14c0
+	ProvidesPrerequisite@tsoilderricksuper:
+		Prerequisite: tsoilderricksuper
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: forgot_conyard
+		PlayerPalette: player_rgba
+
+tsprocmutant:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Forgotten Refinery
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtcnstmutant
+		Queue: Building, RABuilding
+		Description: Processes raw Tiberium\ninto useable resources
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 6c0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	CustomSellValue:
+		Value: 500
+	FreeActor:
+		Actor: TSHARVMUTANT
+		SpawnOffset: 1,2
+		Facing: 256
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		Image: forgot_refin
+		PlayerPalette: player_rgba
+TSNTPOWRMUTANT:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Selectable:
+		Bounds: 2048, 2048
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~tsgtcnstmutant
+		Description: Provides power for other structures.
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Crystal Power Extractor
+	Health:
+		HP: 150000
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 160
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+	ProvidesPrerequisite@buildingname:
+		ValidTypes: building ##########
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_power
+TSGTSILOMUTANT:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2048
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Silo
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Defence, RADefence
+		Description: Stores excess Tiberium.
+		Prerequisites: ~tsgtcnstmutant, tsprocmutant
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 200000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	StoresResources:
+		Capacity: 3000
+	WithResourceLevelOverlay@FILLSTAGE:
+		RequiresCondition: !build-incomplete
+		Sequence: stages
+	WithSpriteBody:
+		Sequence: idle-underlay
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 8
+	RenderSprites:
+		PlayerPalette: playerra2
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_silo
+
+tsgtpile2:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@barr: ^IsBarrack
+	Inherits@prod: ^ProducesUnits
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 640
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Forgotten Barracks
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tsgtcnstmutant, tsntpowrmutant
+		Queue: Building, RABuilding
+		Description: Trains infantry
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 5c0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: forgot_barracks
+		PlayerPalette: player_rgba
+
+TSGTWEAPMUTANT:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Inherits@weap: ^IsWeaponFactory
+	Inherits@prod: ^ProducesUnits
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+		Type: Rectangle
+			TopLeft: -1536, -1024
+			BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Forgotten War Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtcnstmutant, tsprocmutant
+		Queue: Building, RABuilding
+		Description: Produces vehicles
+	Building:
+		Footprint: xx= x== ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1024
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 4c0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -512,-512,0
+		ExitCell: 2,1
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	ProductionBar@VEHICLEGDI:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEGDI:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	RenderSprites:
+		Image: forgot_weap
+		PlayerPalette: player_rgba
+
+tsgtdeptmutant:
+	Inherits: tsgtdeptgdi
+	Tooltip:
+		Name: Service Depot
+	Buildable:
+		Prerequisites: ~tsgtcnstmutant, tsgtweapmutant
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+
+tsgthpadmutant:
+	Inherits: tsgthpad
+	Tooltip:
+		Name: Helipad (Forgotten)
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~tsgtcnstmutant, tsgtradrmutant
+	ProductionQueue@AIRCRAFT:
+	ProductionBar@AIRCRAFTGDI:
+		ProductionType: Aircraft
+	ProductionBar@RAAIRCRAFTGDI:
+		ProductionType: RAAircraft
+	RenderSprites:
+		Image: tsnthpadmut
+
+tsgtradrmutant:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Radar
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~tsgtcnstmutant, tsprocmutant
+		Queue: Building, RABuilding
+		Description: Provides radar and support powers.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2248, 2248
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	RevealsShroud:
+		Range: 10c0
+	WithBuildingBib:
+	ProvidesRadar:
+		RequiresCondition: !jammed && !lowpower
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower
+	SupportPowerChargeBar:
+	Power:
+		Amount: -50
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_radar
+
+tsfgttech:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 131072, 87381
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~tsgtcnstmutant, tsgtradrmutant
+		Description: Provides Forgotten advanced technologies.\nCan be only built once
+		BuildLimit: 1
+	Tooltip:
+		Name: Forgotten Church
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xxx ===
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: tstek
+	RenderSprites:
+		Image: forgot_church
+		PlayerPalette: player_rgba
+
+forgot_chemicalplant:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 131072, 87381
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~tsgtcnstmutant, tsfgttech
+		Description: Provides Forgotten advanced technologies.\nCan be only built once
+		BuildLimit: 1
+	Tooltip:
+		Name: Forgotten Chemical Plant
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xxx ===
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 5c0
+	WithBuildingBib:
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: forgot_chemicalplant
+		PlayerPalette: player_rgba
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+
+# tsntyard2:
+# 	Inherits: yrygyard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~tsgtcnstgdi
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALYURI:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALYURI:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	RenderSprites:
+# 		Image: yrygyard
+# 		PlayerPalette: playerra2
+
+# tsgtyard:
+# 	Inherits: ra2gayard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~tsgtcnstgdi
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALALLIESRA2:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALALLIESRA2:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	RenderSprites:
+# 		Image: ra2gayard
+# 		PlayerPalette: playerra2
+
+# tsgtyard2:
+# 	Inherits: ra2gayard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~tsgtcnstgdi
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALALLIESRA2:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALALLIESRA2:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	RenderSprites:
+# 		Image: ra2gayard
+# 		PlayerPalette: playerra2
+
+#######################################
+# TS Defensive
+#######################################
+
+tsveinhole:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@shape: ^2x2Shape
+	Selectable:
+		Bounds: 2048, 2048
+		Priority: 0
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 9999
+		Prerequisites: ~tsgtcnstmutant, tsfgttech
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Veinhole
+	Health:
+		HP: 420000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 6c0
+		HasMinibib: True
+	Turreted:
+		TurnSpeed: 396
+		InitialFacing: 224
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	DetectCloaked:
+		Range: 4c0
+	BodyOrientation:
+	Armament:
+		Weapon: TSVeinholeSmoke
+		LocalOffset: 1024,0,448
+	MapEditorData:
+		Categories: Resource spawn
+	OwnerLostAction:
+		Action: ChangeOwner
+	CaptureManager:
+	Capturable:
+		Types: nada
+	SeedsResource:
+		ResourceType: Veins
+		Interval: 50
+
+tsntlasr:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@RenderVoxel: ^TSRenderVoxel
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtcnstnod, tsnthand
+		Description: actor-tsntlasr.description
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -20
+	Tooltip:
+		Name: Laser Turret
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 60000
+	RevealsShroud:
+		Range: 7c0
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: 160,20,3
+	AttackTurreted:
+	Armament@PRIMARY:
+		Weapon: TSTurretLaser
+		RequiresCondition: !up_tiberiumlenses
+	Armament@UPGRADE:
+		Weapon: TSLaserTurretLaser
+		RequiresCondition: up_tiberiumlenses
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithVoxelTurret:
+	AutoTarget:
+	DetectCloaked:
+		Range: 3c0
+	-WithVoxelBody:
+	-Cloak@TDcloak:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tiberiumlenses
+
+tsntlasrcabal:
+	Inherits: tsntlasr
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disable
+	RenderVoxels:
+		Image: tsntlasr
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntlasr
+
+tsgtctwrmg:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Vulcan Tower
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtcnstgdi, tsgtpile
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Basic base defense.\nDoes not require power to operate.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 80000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSVulcanGun
+		LocalOffset: 300,60,600
+		RequiresCondition: !up_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSVulcanGunSonic
+		LocalOffset: 300,60,600
+		RequiresCondition: up_sonicweaponry
+	#Armament@VULCSECONDARY:
+	#	Weapon: TurretGun
+	#	LocalOffset: 300,-60,600
+	AttackTurreted:
+	WithSpriteTurret:
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -20
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_sonicweaponry
+
+tsgtctwrrpg:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: RPG Tower
+	Buildable:
+		BuildPaletteOrder: 130
+		Prerequisites: ~tsgtcnstgdi, tsgttech
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: GDI anti-vehicle base defense.\nDoes not require power to operate.\n  Strong vs Armored ground units\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 150000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSRPGTower
+		LocalOffset: 130,-45,500
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSRPGTowerRail
+		LocalOffset: 130,-45,500
+		MuzzleSequence: muzzle
+		RequiresCondition: up_railgunweaponry
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -20
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_railgunweaponry
+
+tsgtctwrsam:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: SAM Tower
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtcnstgdi, tsgtradr
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: GDI anti-air base defense.\nDoes not require power to operate.\n  Strong vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 100000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament:
+		Weapon: TSGDIRedEye
+		LocalOffset: 250,0,750
+	AttackTurreted:
+	WithSpriteTurret:
+	DetectCloaked:
+		Range: 4c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -30
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tsprojectileimprovements
+
+forgot_tower:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Machinegun Tower
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtcnstmutant, tsgtpile2
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Basic base defense.\nDoes not require power to operate.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 80000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSVulcanGun
+		LocalOffset: 300,60,600
+		RequiresCondition: !up_sonicweaponry
+	#Armament@VULCSECONDARY:
+	#	Weapon: TurretGun
+	#	LocalOffset: 300,-60,600
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -20
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+tsgtctwrsammutant:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Juggerflak Wall
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtcnstmutant, tsgtpile2
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: GDI anti-air base defense.\nDoes not require power to operate.\n  Strong vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament:
+		Weapon: TSJuggerFlakAA
+		LocalOffset: 250,0,750
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 4c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -40
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_juggerflak
+
+
+forgot_ltnk_tur:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Broken Tank Turret
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtcnstmutant, tsgtpile2
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Basic base defense.\nDoes not require power to operate.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 80000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: 70mm
+		LocalOffset: 300,60,600
+		RequiresCondition: !up_sonicweaponry
+	#Armament@VULCSECONDARY:
+	#	Weapon: TurretGun
+	#	LocalOffset: 300,-60,600
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+forgot_mtnk_tur:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Broken Tank Turret
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtcnstmutant, tsgtpile2
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Basic base defense.\nDoes not require power to operate.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 125000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: 120mm
+		LocalOffset: 300,60,600
+		RequiresCondition: !up_sonicweaponry
+	#Armament@VULCSECONDARY:
+	#	Weapon: TurretGun
+	#	LocalOffset: 300,-60,600
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+forgot_htnk_tur:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Broken Tank Turret
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~tsgtcnstmutant, tsgtpile2
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Basic base defense.\nDoes not require power to operate.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 150000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: 120mmDual
+		LocalOffset: 300,60,600
+		RequiresCondition: !up_sonicweaponry
+	#Armament@VULCSECONDARY:
+	#	Weapon: TurretGun
+	#	LocalOffset: 300,-60,600
+	AttackTurreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+tsntsam:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: SAM Site
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtcnstnod, tsnthand
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: actor-tsntsam.description
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 13176
+	Turreted:
+		TurnSpeed: 48
+		Offset: -100,0,150
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSNODRedEye
+		LocalOffset: 250,0,750
+		RequiresCondition: !up_tiberiumcoremissiles
+	Armament@UPGRADE:
+		Weapon: TSNODTibRedEye
+		LocalOffset: 250,0,750
+		RequiresCondition: up_tiberiumcoremissiles
+	AttackTurreted:
+	WithSpriteTurret:
+	DetectCloaked:
+		Range: 4c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -30
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tiberiumcoremissiles
+
+tsntsamcabal:
+	Inherits: tsntsam
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntsam
+
+tsntstlh:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@SHAPE: ^3x2Shape
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
+	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Stealth Generator
+	Buildable:
+		BuildLimit: 1
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 170
+		Prerequisites: ~tsgtcnstnod, tsnttech
+		Description: actor-tsntstlh.description
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 6c0
+	Power:
+		Amount: -150
+	WithIdleOverlay@pulse:
+		RequiresCondition: !disabled && !lowpower
+		Sequence: pulse
+	ProximityExternalCondition@StealthGen:
+		Range: 12c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && !lowpower && !up_stealthfieldsimprovements
+	ProximityExternalCondition@StealthGenUpgraded:
+		Range: 15c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && !lowpower && up_stealthfieldsimprovements
+	ProvidesPrerequisite@buildingname:
+	WithRangeCircle@GenRange:
+		Range: 12c0
+		RequiresCondition: !up_stealthfieldsimprovements
+	WithRangeCircle@GenRangeUpgraded:
+		Range: 15c0
+		RequiresCondition: up_stealthfieldsimprovements
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_stealthfieldsimprovements
+
+tsntstlhcabal:
+	Inherits: tsntstlh
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tscabaltech
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntstlhcabal
+
+tsntpulsgdi:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~tsgtcnstgdi, tsgtradr
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: actor-tsntpulsgdi.description
+		BuildLimit: 1
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: E.M. Pulse Cannon
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 250000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 7c0
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	Armament@PRIMARY:
+		Weapon: TSEMPZapWeapon
+		LocalOffset: 100,0,600
+	Turreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+		Sequence: turret
+	AttackTurreted:
+		OpportunityFire: false
+		PersistentTargeting: false
+	DetonateWeaponPower@Emp:
+		AllowMultiple: false
+		OrderName: SteelEmpCannon
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: tsntpulsgdi
+		IconImage: tsntpuls
+		Icons:
+			1: icon2
+		Cursor: ioncannon
+		ChargeInterval: 6000
+		ActivationDelay: 50
+		ActivationSequence:
+		Names:
+			1: Emp Disable
+		Weapons:
+			1: SteelEmpBomb
+		Descriptions:
+			1: power-ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeSound:
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraActor: camera.small
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+		LaunchSound:
+		IncomingSound:
+	SupportPowerChargeBar:
+	# AttackOrderPower:
+	# 	OrderName: EMPPower
+	# 	PauseOnCondition: disabled || lowpower
+	# 	Cursor: attackmove
+	# 	Icon: emp
+	# 	ChargeInterval: 3000
+	# 	Name: E.M. Pulse
+	# 	Description: Fires a pulse blast which disables\nall mechanical units in the area.
+	# 	EndChargeSpeechNotification: EmPulseCannonReady
+	# 	SelectTargetSpeechNotification: SelectTarget
+	RenderRangeCircle:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntpuls
+
+# tsntpulsnod:
+# 	Inherits: tsntpulsgdi
+# 	Buildable:
+# 		BuildPaletteOrder: 140
+# 		Prerequisites: ~tsgtcnstnod, tsntradr
+# 	Tooltip:
+# 		Name: E.M. Pulse Cannon
+
+# tsntpulscabal:
+# 	Inherits: tsntpulsgdi
+# 	Buildable:
+# 		BuildPaletteOrder: 140
+# 		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+# 	Tooltip:
+# 		Name: E.M. Pulse Cannon
+
+tsntobel:
+	Inherits: ^Defense
+	Inherits@shape: ^2x2Shape
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Obelisk of Light
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsgtcnstnod, tsnttech
+		Queue: Defence, RADefence
+		# BuildDurationModifier: 63
+		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	# Selectable:
+	# 	Bounds: 1024, 1024
+	# 	DecorationBounds: 2048, 2048, 0, -512
+	SelectionDecorations:
+	Health:
+		HP: 250000
+	RevealsShroud:
+		Range: 7c0
+	-WithSpriteBody:
+	WithChargeSpriteBody:
+		Sequence: idle
+	Armament@PRIMARY:
+		Weapon: TSObeliskLaserFire
+		# LocalOffset: 0,180,1600
+		LocalOffset: 0,320,1280
+		RequiresCondition: !up_tiberiumlenses
+	Armament@UPGRADE:
+		Weapon: TSLaserObeliskLaserFire
+		# LocalOffset: 0,180,1600
+		LocalOffset: 0,320,1280
+		RequiresCondition: up_tiberiumlenses
+	AttackCharges:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		ChargeLevel: 50
+		ChargingCondition: charging
+	AmbientSound:
+		RequiresCondition: charging
+		SoundFiles: obelpowr.aud
+		Interval: 30, 40
+	-SpawnActorsOnSell:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower && !disabled
+	WithChargeOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: player
+		IsPlayerPalette: true
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	Power:
+		Amount: -100
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_tiberiumlenses
+
+tsntobelcabal:
+	Inherits: tsntobel
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tscabaltech
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntobelcabal
+	Tooltip:
+		Name: Heavy Cabal Obelisk
+	Valued:
+		Cost: 2600
+	Health:
+		HP: 300000
+	Armament@PRIMARY:
+		Weapon: TSCABALObeliskLaserFire
+		LocalOffset: 0,0,1956
+	WithChargeOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: playerra2
+		IsPlayerPalette: true
+
+tsobl2:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Valued:
+		Cost: 1350
+	Tooltip:
+		Name: Obelisk of Darkness
+	 Buildable:
+	 	BuildPaletteOrder: 60
+	 	Prerequisites: ~tsgtcnstcabal, tsnthand2
+	 	Queue: Defence, RADefence
+	 	BuildDurationModifier: 40
+	 	Description: Advanced air defense.\nRequires power to operate.\n  Strong vs aircraft\n  Weak vs ground units
+	Building:
+		Footprint: x
+	Selectable:
+		Bounds: 2048, 2048
+	SelectionDecorations:
+	Health:
+		HP: 242500
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	WithSpriteBody:
+	Armament:
+		Weapon: DarkObeliskLaser
+		LocalOffset: 0,0,2000
+	AttackCharges:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		ChargeLevel: 30
+		ChargingCondition: charging
+	AmbientSound:
+		RequiresCondition: charging
+		SoundFiles: obelpowr.aud
+		Interval: 30, 40
+	-SpawnActorsOnSell:
+	DetectCloaked:
+		Range: 7c0
+		RequiresCondition: !lowpower && !disabled
+	WithChargeOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: playerra2
+		IsPlayerPalette: true
+	WithIdleOverlay:
+		Sequence: idle-overlay
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	Power:
+		Amount: -75
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsntobel2cabal:
+	Inherits: tsobl2
+	Buildable:
+		Prerequisites: ~tsgtcnstcabal, tscabaltech, ~disabled
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsobl2
+
+tscbunk:
+	Inherits: ^RA2Defense
+	Inherits@cargo: ^ClearableGarrisonNeutronOnly
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Selectable:
+		Bounds: 1024, 1024
+	Tooltip:
+		Name: Pillbox
+	Building:
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~tsgtcnstcabal, tsnthand2
+		Description: actor-pbox.description
+	Valued:
+		Cost: 600
+	Health:
+		HP: 110000
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		InitialUnits: tscyborg
+	AttackGarrisoned:
+		RequiresCondition: !build-incomplete
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: disabled
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 6583
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Damage: 120
+		ReloadDelay: 24
+		Range: 6583
+
+#######################################
+# TS Infantry Reporting!
+#######################################
+
+tsnapost:
+	Inherits: ^BaseBuilding
+	Inherits@IDISABLED: ^DisableOnLowPowerOrPowerDown
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~tsgtcnstnod
+		Description: Stops infantry and blocks enemy fire.\nCan NOT be crushed by tanks.
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Laser Fence
+	Health:
+		HP: 30000
+	Armor:
+		Type: Concrete
+	LineBuild:
+		Range: 10
+		NodeTypes: laserfencenode
+		SegmentType: tsnafnce
+		SegmentsRequireNode: true
+	LineBuildNode:
+		Types: laserfencenode
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 4c0
+	GrantCondition@IDISABLE:
+		RequiresCondition: lowpower || powerdown || empdisable
+		Condition: disabled
+	WithIdleOverlay@LIGHTS-BRIGHT:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: lights-bright
+	WithIdleOverlay@CHAINOFLIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: chainoflights
+		IsPlayerPalette: True
+	WithIdleOverlay@CHAINOFLIGHTS-BRIGHT:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: chainoflights-bright
+	LineBuildSegmentExternalCondition:
+		RequiresCondition: !build-incomplete && !disabled
+		Condition: active-posts
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsnafnce:
+	Inherits: ^Wall
+	Tooltip:
+		Name: Laser Fence
+	LineBuild:
+		NodeTypes: laserfence
+	LineBuildNode:
+		Types: laserfence
+	-Crushable:
+	-Sellable:
+	-Targetable:
+	-Building:
+	EnergyWall:
+		ActiveCondition: active-posts == 2
+		Weapon: TSLaserFence
+	GrantConditionOnLineBuildDirection@X:
+		Direction: X
+		Condition: laserfence-direction-x
+	GrantConditionOnLineBuildDirection@Y:
+		Direction: Y
+		Condition: laserfence-direction-y
+	-WithWallSpriteBody:
+	ExternalCondition@ACTIVE:
+		Condition: active-posts
+	WithWallSpriteBody@XENABLED:
+		RequiresCondition: laserfence-direction-x && active-posts == 2
+		Type: laserfence
+		Sequence: enabled-x
+		Name: x-enabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	WithWallSpriteBody@YENABLED:
+		RequiresCondition: laserfence-direction-y && active-posts == 2
+		Type: laserfence
+		Sequence: enabled-y
+		Name: y-enabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	WithSpriteBody@XDISABLED:
+		RequiresCondition: laserfence-direction-x && active-posts < 2
+		Sequence: disabled-x
+		Name: x-disabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	WithSpriteBody@YDISABLED:
+		RequiresCondition: laserfence-direction-y && active-posts < 2
+		Sequence: disabled-y
+		Name: y-disabled
+		PlayerPalette: player
+		IsPlayerPalette: True
+	BlocksProjectiles:
+		RequiresCondition: active-posts == 2
+	DamageMultiplier: # Prevent all normal damage, but still allows direct kills from the post
+		Modifier: 0
+	# ThrowsShrapnel@SMALL:
+	# 	Weapons: Debris
+	# 	Pieces: 0, 1
+	# 	Range: 2c0, 5c0
+	Interactable:
+		Bounds: 1024, 1024
+	RenderSprites:
+		PlayerPalette: playerra2
+
+#######################################
+# TS Shared Vehicles
+#######################################

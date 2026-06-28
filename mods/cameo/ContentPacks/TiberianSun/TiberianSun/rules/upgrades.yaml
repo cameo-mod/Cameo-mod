@@ -1,0 +1,583 @@
+tsgtplug2:
+	Tooltip:
+		Name: Ion Cannon Uplink
+	Buildable:
+		Queue: UpgradeCenter.TSGDI
+		Description: Enables Ion Cannon strikes.
+	Valued:
+		Cost: 1500
+	RenderSprites:
+	Interactable:
+	KillsSelf:
+		RemoveInstead: true
+	RenderSprites:
+		PlayerPalette: playerra2
+
+tsgtplug3:
+	Tooltip:
+		Name: Seeker Control
+	Buildable:
+		Queue: UpgradeCenter.TSGDI
+		Description: Enables deployment of Hunter-Seekers.
+	Valued:
+		Cost: 1000
+	RenderSprites:
+	Interactable:
+	KillsSelf:
+		RemoveInstead: true
+	RenderSprites:
+		PlayerPalette: playerra2
+
+
+#######################################
+# TS Building Forgotten
+#######################################
+
+TSDOGGIEW:
+	Inherits: ^TSInfantry
+	Inherits@2: ^MutSWCreature
+	RenderSprites:
+		Image: tsdoggie
+	AttackWander:
+
+up_seretraining:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: SERE Training
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade-seretraining.description
+		Prerequisites: ~tsgtradr, !up_seretraining
+	RenderSprites:
+		Image: seretrainingicon
+	ProvidesPrerequisite:
+
+up_tsprojectileimprovements:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Projectile Improvements
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Upgrades
+		Description: upgrade-tsprojectileimprovements.description
+		Prerequisites: ~tsgtradr, !up_tsprojectileimprovements
+	RenderSprites:
+		Image: tsprojectileimprovementsicon
+	ProvidesPrerequisite:
+
+up_mechanicalreliability:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mechanical Reliability
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Upgrades
+		Description: upgrade-mechanicalreliability.description
+		Prerequisites: ~tsgtradr, !up_mechanicalreliability
+	RenderSprites:
+		Image: mechanicalreliabilityicon
+	ProvidesPrerequisite:
+
+up_ceramicarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ceramic Armor
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Research
+		Description: upgrade-ceramicarmor.description
+		Prerequisites: ~tsgttech, !up_ceramicarmor
+	RenderSprites:
+		Image: ceramicarmoricon
+	ProvidesPrerequisite:
+
+up_mechengineering:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mech Engineering
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-mechengineering.description
+		Prerequisites: ~tsgttech, !up_mechengineering
+	RenderSprites:
+		Image: mechengineeringicon
+	ProvidesPrerequisite:
+
+up_sonicweaponry:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Sonic Weaponry
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: upgrade-sonicweaponry.description
+		Prerequisites: ~tsgttech, !up_sonicweaponry
+	RenderSprites:
+		Image: sonicweaponryicon
+	ProvidesPrerequisite:
+
+up_railgunweaponry:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Railgun Weaponry
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: upgrade-railgunweaponry.description
+		Prerequisites: ~tsgttech, !up_railgunweaponry
+	RenderSprites:
+		Image: railgunweaponryicon
+	ProvidesPrerequisite:
+
+up_modernfirecontrolsystems:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Modern Fire Control Systems
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: upgrade-modernfirecontrolsystems.description
+		Prerequisites: ~tsgttech, !up_modernfirecontrolsystems
+	RenderSprites:
+		Image: modernfirecontrolsystemsicon
+	# ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.up_modernfirecontrolsystems
+
+team_upgrade.up_modernfirecontrolsystems:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: up_modernfirecontrolsystems
+	RenderSprites:
+		Image: modernfirecontrolsystemsicon
+	Tooltip:
+		Name: Modern Fire Control Systems
+	Buildable:
+		Description: upgrade-modernfirecontrolsystems.description
+	PlayerDisplayUpgrade:
+
+up_infiltrationkit:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Infiltration Kit
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Procure personal stealth suit to Light Infantry and Shotgun Commando. Allows Chameleon Spies to infiltrate buildings.
+		Prerequisites: ~tsntradr, !up_infiltrationkit
+	RenderSprites:
+		Image: infiltrationkiticon
+	ProvidesPrerequisite:
+
+up_mobilityspecialization:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mobility Specialization
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Upgrades
+		Description: Increases armor, accuracy, speed, vision, detection and attack range for the Brotherhood's light vehicles and aircraft.
+		Prerequisites: ~tsntradr, !up_mobilityspecialization
+	RenderSprites:
+		Image: mobilityspecializationicon
+	ProvidesPrerequisite:
+
+up_auxiliaryweapon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Auxiliary Weapon
+	Valued:
+		Cost: 4000
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Upgrades
+		Description: Adds secondary weapons or improves existing ones in most of Brotherhood's arsenal.
+		Prerequisites: ~tsntradr, !up_auxiliaryweapon
+	RenderSprites:
+		Image: tsauxiliaryweaponicon
+	ProvidesPrerequisite:
+
+up_stealthfieldsimprovements:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stealth Fields Improvements
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Increases effectiveness of Stealth Generators and Stealth Tanks, and upgrades Harvesters with portable stealth generator.
+		Prerequisites: ~tsnttech, !up_stealthfieldsimprovements
+	RenderSprites:
+		Image: stealthfieldsimprovementsicon
+	ProvidesPrerequisite:
+
+up_tiberiumlenses:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tiberium Lenses
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Procure laser weaponries for the Brotherhood's combatants. Improve effectiveness of existing laser-based weapons.
+		Prerequisites: ~tsnttech, !up_tiberiumlenses
+	RenderSprites:
+		Image: tstiberiumlensesicon
+	ProvidesPrerequisite:
+
+up_tiberiumcoremissiles:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tiberium Core Missiles
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Procure tiberium core missile technology to Rocket Soldier, SAM Site, Attack Cycle and Stealth Tank, increasing their firepower.
+		Prerequisites: ~tsnttech, !up_tiberiumcoremissiles
+	RenderSprites:
+		Image: tstiberiumcoremissilesicon
+	ProvidesPrerequisite:
+
+up_advancedtiberiumrefinement:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Advanced Tiberium Refinement
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Research
+		Description: Allows construction of the Waste Facility. Increases all vehicles speed by 25%, and twice the improvement for Harvesters.
+		Prerequisites: ~tsnttech, !up_advancedtiberiumrefinement
+	RenderSprites:
+		Image: advancedtiberiumrefinementicon
+	ProvidesPrerequisite:
+
+team_upgrade.up_willofkane:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: up_willofkane
+	RenderSprites:
+		Image: willofkaneicon
+	Tooltip:
+		Name: Will of Kane (Team Upgrade)
+	Buildable:
+		Description: One vision. One purpose. Peace through power. The Brotherhood's allies get infantry firepower bonus based on missing health.
+	PlayerDisplayUpgrade:
+
+up_willofkane:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Will of Kane
+	Valued:
+		Cost: 8000
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: One vision. One purpose. Peace through power. All infantry get firepower bonus based on missing health.
+		Prerequisites: ~tsnttech, !up_willofkane
+	RenderSprites:
+		Image: willofkaneicon
+	ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.up_willofkane
+
+
+################## CABAL #########################
+
+############ Radar
+cabalmobilitymatrix:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mobility Matrix
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Walkers moves 25% faster, and ads 10% of armor.
+		Prerequisites: ~tsntradrcabal, !cabalmobilitymatrix
+	RenderSprites:
+		Image: cabalmobilitymatrix
+	ProvidesPrerequisite:
+
+cabaldarkarmament:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Dark Armament
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Infantry Unlocks extra weapons, 10% reload faster.
+		Prerequisites: ~tsntradrcabal, !cabaldarkarmament
+	RenderSprites:
+		Image: cabaldarkarmament
+	ProvidesPrerequisite:
+
+cabaltibcatalysticon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Neutron Nuclear Catalyst
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Artillery and Tarantula Unlocks neutron shells.
+		Prerequisites: ~tsntradrcabal, !cabaltibcatalysticon
+	RenderSprites:
+		Image: cabaltibcatalysticon
+	ProvidesPrerequisite:
+
+cabalradarhack:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Radar Hack
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Unlocks Radar Hack Support Power, reveals map location.
+		Prerequisites: ~tsntradrcabal, !cabalradarhack
+	RenderSprites:
+		Image: cabalradarhack
+	ProvidesPrerequisite:
+
+cabalbackupsystemicon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Backup Systems
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Heavy Vehicles turns in Husks when dies, if Husk arent destroyed, it wakes up again.
+		Prerequisites: ~tscabaltech, !cabalbackupsystemicon
+	RenderSprites:
+		Image: cabalbackupsystemicon
+	ProvidesPrerequisite:
+
+cabalhandoflegion:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Hand of CABAL
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Spawns free Hackers from Tech Center, Hackers upgrade speed.
+		Prerequisites: ~tscabaltech, !cabalhandoflegion
+	RenderSprites:
+		Image: cabalhandoflegion
+	ProvidesPrerequisite:
+
+cabaldataworm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Data Worm
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Unlocks a support power at CABAL Core, can hack and turn enemy vehicles or robots in your side.
+		Prerequisites: ~tscabaltech, !cabaldataworm
+	RenderSprites:
+		Image: cabaldataworm
+	ProvidesPrerequisite:
+
+
+##########################
+# Promotions #############
+##########################
+
+upwolverinemkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Wolverine MKII
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Promotions
+		Description: Allows construction of Wolverines MKII.
+		Prerequisites: ~fact.tsgdi, !upwolverinemkii, rank1
+	RenderSprites:
+		Image: tstalwolv
+	ProvidesPrerequisite:
+		Prerequisite: upwolverinemkii
+
+uptitanmkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Titan MKII
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Promotions
+		Description: Allows construction of Titans MKII.
+		Prerequisites: ~fact.tsgdi, !uptitanmkii, upwolverinemkii, rank1
+	RenderSprites:
+		Image: tstaltitan
+	ProvidesPrerequisite:
+		Prerequisite: uptitanmkii
+
+upzonetrooper:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Zone Trooper
+	Buildable:
+		BuildPaletteOrder: 7
+		Queue: Promotions
+		Description: Allows training of Zone Troopers.
+		Prerequisites: ~fact.tsgdi, !upzonetrooper, uptitanmkii, rank1
+	RenderSprites:
+		Image: tszonetrooper
+	ProvidesPrerequisite:
+		Prerequisite: zonetrooper
+
+upmammothmkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mammoth MKII
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Promotions
+		Description: Allows construction of Mammoth MKII.
+		Prerequisites: ~fact.tsgdi, !upmammothmkii, upzonetrooper, rank1
+	RenderSprites:
+		Image: tsmkii
+	ProvidesPrerequisite:
+		Prerequisite: upmammothmkii
+
+upzoneorca:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Zone Orca
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Promotions
+		Description: Allows construction of Zone Orcas.
+		Prerequisites: ~fact.tsgdi, !upzoneorca, rank1
+	RenderSprites:
+		Image: tszoneorca
+	ProvidesPrerequisite:
+		Prerequisite: uupzoneorca
+
+uphammerhead:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Hammerhead
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Promotions
+		Description: Allows construction of Hammerhead.
+		Prerequisites: ~fact.tsgdi, !uphammerhead, upzoneorca, rank1
+	RenderSprites:
+		Image: tshammerhead
+	ProvidesPrerequisite:
+		Prerequisite: uphammerhead
+
+upjuggmkii:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Juggernaut MKII
+	Buildable:
+		BuildPaletteOrder: 8
+		Queue: Promotions
+		Description: Allows construction of Juggernauts MKII.
+		Prerequisites: ~fact.tsgdi, !upjuggmkii, uphammerhead, rank1
+	RenderSprites:
+		Image: tsjugg2
+	ProvidesPrerequisite:
+		Prerequisite: upjuggmkii
+
+upkodiak:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Kodiak
+	Buildable:
+		BuildPaletteOrder: 11
+		Queue: Promotions
+		Description: Allows construction of Kodiak.
+		Prerequisites: ~fact.tsgdi, !upkodiak, upjuggmkii, rank1
+	RenderSprites:
+		Image: tskodk
+	ProvidesPrerequisite:
+		Prerequisite: upkodiak
+
+uptsdummy1:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
+
+uptsdummy2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 6
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
+
+uptsdummy3:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 9
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
+
+uptsdummy4:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: dummy
+	Buildable:
+		BuildPaletteOrder: 12
+		Queue: Promotions
+		Description: dummy
+		Prerequisites: ~fact.tsgdi, disabled, rank1
+	RenderSprites:
+		Image: tsgdidummyicon
