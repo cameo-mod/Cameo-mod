@@ -3677,6 +3677,10 @@ RA2CLEG:
 		ChargeDelay: 250
 		MaxTeleportDistance: 50
 		PauseOnCondition: disabled
+	WithRangeCircle@Chrono:
+		Range: 50c0
+		Color: BBEEFF
+		Type: Teleport
 	ExplodeWeaponTeleportEffect:
 		TeleportType: PortableChrono
 		ImpactWeapon: PortableChronoImpact
