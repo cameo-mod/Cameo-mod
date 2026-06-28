@@ -1,0 +1,2178 @@
+sc_zerg_larva:
+	Inherits: ^Soldier
+	Tooltip:
+		Name: Zerg Larva
+	Buildable:
+		Description: actor-sc_zerg_larva.description
+	Valued:
+		Cost: 50
+	Mobile:
+		Speed: 1
+		CanTurnWhileDisabled: False
+		ImmovableCondition: disable_movement
+		RequireForceMoveCondition: disable_movement
+		Locomotor: foot
+	Health:
+		HP: 10000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 1c0
+	GrantConditionAfterDelay:
+		Condition: disable_movement
+		ShowSelectionBar: false
+		Delay: 10
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: idle
+		RequiresCondition: !sc_zerg_egg
+	WithSpriteBody@egg:
+		Name: egg
+		Sequence: makeunit
+		IsPlayerPalette: True
+		RequiresCondition: sc_zerg_egg
+	ExternalCondition@EGG:
+		Condition: sc_zerg_egg
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	Voiced:
+		VoiceSet: SCBroodlingVoice
+	-DeathSounds@NORMAL:
+	-SpawnActorOnDeath@SCSWARMLING:
+	-WithDeathAnimation:
+	-DamagedByTerrain:
+	-Crushable:
+	-TakeCover:
+	-ActorLostNotification:
+	DroneSpawnerSlave:
+	-MapEditorData:
+	HitShape:
+		Type: Circle
+			Radius: 256
+	RejectsOrders:
+	RejectsMoveToAttack:
+	-Selectable:
+	Interactable:
+	SpeedMultiplier@static:
+		Modifier: 0
+		RequiresCondition: stopmove
+	SpeedMultiplier@egg:
+		Modifier: 0
+		RequiresCondition: sc_zerg_egg
+	GrantConditionOnMovement@static:
+		ValidMovementTypes: Horizontal, Vertical, Turn
+		Condition: stopmove
+	Wanders:
+		MinMoveDelay: 150
+		MaxMoveDelay: 750
+		PauseOnCondition: sc_zerg_egg
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCMARINE:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@range: ^UraniumShellsUpgrade
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Marine
+	Valued:
+		Cost: 200
+	Power:
+		Amount: -10
+	Buildable:
+		Prerequisites: ~scbarracks, ~!upmadcap
+		Queue: Infantry, RAInfantry
+		Description: actor-scmarine.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armament@PRIMARY:
+		Weapon: MarineMG
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: MarineMG
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@TripleShot:
+		Modifier: 33
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	# ProductionTimeMultiplier@speedup:
+	# 	Multiplier: 50
+	# 	Prerequisites: scacademy
+	Voiced:
+		VoiceSet: SCMarineVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upmarinerange, upstimpack
+
+SCREAPER:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Reaper
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Buildable:
+		Prerequisites: ~scbarracks
+		Queue: Infantry, RAInfantry
+		Description: actor-screaper.description
+	Mobile:
+		Speed: 120
+		Locomotor: fakeaircraft
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armament@PRIMARY:
+		Weapon: ReaperPistols
+		LocalOffset: 128,-128,256
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Weapon: ReaperPistols
+		LocalOffset: 128,128,256
+		MuzzleSequence: muzzle
+	Armament@Grenade:
+		Weapon: ReaperGrenade
+		LocalOffset: 128,0,256
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: ReaperPistols
+		LocalOffset: 128,-128,256
+		MuzzleSequence: muzzle
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: ReaperPistols
+		LocalOffset: 128,128,256
+		MuzzleSequence: muzzle
+	Armament@GARRISONEDGrenade:
+		Name: garrisoned
+		Weapon: ReaperGrenade
+		LocalOffset: 128,0,256
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	# ProductionTimeMultiplier@speedup:
+	# 	Multiplier: 50
+	# 	Prerequisites: scacademy
+	Voiced:
+		VoiceSet: SCMarineVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2
+
+SCMADCAP:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@stim: ^Stimpackable
+	Inherits@range: ^UraniumShellsUpgrade
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Madcap
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Buildable:
+		Prerequisites: ~scbarracks, ~upmadcap
+		Queue: Infantry, RAInfantry
+		Description: actor-scmadcap.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armament@PRIMARY:
+		Weapon: MadcapGun
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: MadcapGun
+		MuzzleSequence: muzzle
+	GrantConditionOnAttack@gatling:
+		RevokeDelay: 60
+	GrantConditionOnAttack@elitegatling:
+		RevokeDelay: 30
+	WithMuzzleOverlay:
+	# ProductionTimeMultiplier@speedup:
+	# 	Multiplier: 50
+	# 	Prerequisites: scacademy
+	Voiced:
+		VoiceSet: SCMarineVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upmarinerange, upstimpack
+
+SCFIREBAT:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Firebat
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Buildable:
+		Prerequisites: ~scacademy, ~!upharakan
+		Queue: Infantry, RAInfantry
+		Description: actor-scfirebat.description
+	Mobile:
+		Speed: 52
+	Health:
+		HP: 52000
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armament@1:
+		Weapon: FirebatF
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: FirebatF
+		LocalOffset: 341,120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: FirebatF
+		LocalOffset: 341,-120,128
+		MuzzleSequence: muzzle
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: FirebatF
+		LocalOffset: 341,120,128
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: SCFirebatVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upstimpack
+
+SCHARAKAN:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Valued:
+		Cost: 700
+	Power:
+		Amount: -35
+	Tooltip:
+		Name: Harakan
+	Buildable:
+		Prerequisites: ~scacademy, ~upharakan
+		Queue: Infantry, RAInfantry
+		Description: actor-scharakan.description
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 78000
+	ChangesHealth@SelfHealing:
+		Step: 78
+	Armament@1:
+		Weapon: HarakanF
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@2:
+		Weapon: HarakanF
+		LocalOffset: 341,120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: HarakanF
+		LocalOffset: 341,-120,128
+		MuzzleSequence: muzzle
+	Armament@GARRISONED2:
+		Name: garrisoned
+		Weapon: HarakanF
+		LocalOffset: 341,120,128
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 25
+	RangeMultiplier@Garrisoned:
+		Modifier: 125
+	GrantCondition@battlefortresspassenger:
+		Condition: garrisoned
+		RequiresCondition: battlefortresspassenger
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: SCFirebatVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upstimpack
+
+scmarauder:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Marauder
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Buildable:
+		Prerequisites: ~scacademy
+		Queue: Infantry, RAInfantry
+		Description: actor-scmarauder.description
+	Mobile:
+		Speed: 45
+	Health:
+		HP: 90000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Armament@1:
+		Weapon: MarauderMissiles
+		LocalOffset: 341,125,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	Armament@GARRISONED1:
+		Name: garrisoned
+		Weapon: MarauderMissiles
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: SCMarauderVoice
+	RenderSprites:
+		Image: scmarauder
+	# Selectable:
+	# 	DecorationBounds: 1280, 1280
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upstimpack
+
+SCGHOST:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Ghost
+	Valued:
+		Cost: 700
+	Power:
+		Amount: -35
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~scsciencefacility, ~!upsilvertongue
+		Description: actor-scghost.description
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	Armament@lockdown:
+		Weapon: GhostSniperLockdown
+		LocalOffset: 128,0,256
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 12
+	Armament@PRIMARY:
+		Weapon: GhostSniper
+		LocalOffset: 128,0,256
+		PauseOnCondition: !ammo
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: GhostSniper
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 44
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upghostcloak
+		Prerequisites: upghostcloak
+	Cloak:
+		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
+	WithMuzzleOverlay:
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Voiced:
+		VoiceSet: SCGhostVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upghostcloak
+
+SCSILVERTONGUE:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Specter
+	Valued:
+		Cost: 900
+	Power:
+		Amount: -45
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~scsciencefacility, ~upsilvertongue
+		Description: actor-scsilvertongue.description
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@lockdown:
+		Weapon: SpecterSniperLockdown
+		LocalOffset: 128,0,256
+		AmmoUsage: 4
+		PauseOnCondition: ammo < 12
+	Armament@PRIMARY:
+		Weapon: SpecterSniper
+		LocalOffset: 128,0,256
+		PauseOnCondition: !ammo
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SpecterSniper
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 66
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	GrantConditionOnPrerequisite@cloakon:
+		Condition: upghostcloak
+		Prerequisites: upghostcloak
+	Cloak:
+		RequiresCondition: upghostcloak
+		CloakStyle: Alpha
+	WithMuzzleOverlay:
+	GrantConditionOnDamageState@UNCLOAK:
+		Condition: cloak-force-disabled
+		ValidDamageStates: Critical
+	Voiced:
+		VoiceSet: SCSilvertongueVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upghostcloak
+
+SCMEDIC:
+	Inherits: ^SCTINFANTRY
+	Inherits@Template: ^MedicTemplate
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@pip: ^WithSpecialCargoPip
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Inherits@Heal: ^PrioritizeHeal
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~scacademy
+		Description: actor-scmedic.description
+	Tooltip:
+		Name: Medic
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Passenger:
+		CustomPipType: yellow
+	-Armament@Dummy:
+	Armament@Flare:
+		Weapon: MedicFlare
+		LocalOffset: 128,0,256
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 6
+	Armament@Heal:
+		Weapon: MedicHeal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		LocalOffset: 128,0,256
+		PauseOnCondition: !ammo
+	Armament@FlareGARRISONED:
+		Name: garrisoned
+		Weapon: MedicFlare
+		AmmoUsage: 6
+		PauseOnCondition: ammo < 6
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 30
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
+	Voiced:
+		VoiceSet: SCMedicVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2
+
+SCJIMRAYNOR:
+	Inherits: ^SCTINFANTRY
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@stim: ^Stimpackable
+	Inherits@range: ^UraniumShellsUpgrade
+	Inherits@armor: ^TerranInfantryWeaponUpgrades
+	Inherits@weapon: ^TerranInfantryArmorUpgrades
+	Tooltip:
+		Name: Jim Raynor
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Infantry, RAInfantry
+		Description: actor-scjimraynor.description
+		IconPalette: ra2
+		BuildLimit: 1
+		Prerequisites: ~scsciencefacility
+	Mobile:
+		Speed: 65
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Armament@PRIMARY:
+		Weapon: JimRaynorMachineGun
+		LocalOffset: 225,0,350
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: JimRaynorMachineGun
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	SelectionDecorations:
+		DecorationBounds: -24,0
+	Voiced:
+		VoiceSet: SCJimRaynorVoice
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upmarinerange, upstimpack
+
+SCGOLIATH:
+	Inherits: ^Walker
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Goliath
+	Valued:
+		Cost: 1600
+	Power:
+		Amount: -80
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scarmory, ~!upgoliathmk2
+		Description: actor-scgoliath.description
+	Mobile:
+		Speed: 90
+		TurnSpeed: 18
+		Locomotor: tracked
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 36
+		Offset: 0,0,0
+	Armament@G1:
+		Weapon: GoliathMG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,400,300
+	Armament@G2:
+		Weapon: GoliathMG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,-400,300
+	Armament@A1:
+		Weapon: GoliathRockets
+		LocalOffset: 400,400,300
+	Armament@A2:
+		Weapon: GoliathRockets
+		LocalOffset: 400,-400,300
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 33
+	WithInfantryBody:
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCGoliathVoice
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+SCGOLIATH2:
+	Inherits: ^Walker
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Goliath Mk2
+	Valued:
+		Cost: 2400
+	Power:
+		Amount: -120
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scarmory, ~upgoliathmk2
+		Description: actor-scgoliath2.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+		Locomotor: tracked
+	Health:
+		HP: 175000
+	Repairable:
+		HpPerStep: 8750
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 30
+		Offset: 0,0,0
+	Armament@G1:
+		Weapon: GoliathMk2MG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,400,300
+	Armament@G2:
+		Weapon: GoliathMk2MG
+		MuzzleSequence: muzzle
+		LocalOffset: 400,-400,300
+	Armament@A1:
+		Weapon: GoliathMk2Rockets
+		LocalOffset: 400,400,300
+	Armament@A2:
+		Weapon: GoliathMk2Rockets
+		LocalOffset: 400,-400,300
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 25
+	WithInfantryBody:
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCGoliathVoice
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+SCZEALOT:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Zealot
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scgateway, ~!uplegionnaire
+		Queue: Infantry, RAInfantry
+		Description: actor-sczealot.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Shielded:
+		RegenAmount: 80
+	Armament:
+		Weapon: Psi-blades
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCADEPT:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@bot: ^BotAutoDeploySwitchMode50
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@ResonatingGlaves: ^ResonatingGlaves
+	Tooltip:
+		Name: Adept
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~scgateway
+		Queue: Infantry, RAInfantry
+		Description: actor-sczealot.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 36000
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Shielded:
+		RegenAmount: 72
+	Armament:
+		Weapon: GlaveCanon
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: GlaveCanon
+	AttackFrontal:
+		FacingTolerance: 0
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 100
+		CooldownTicks: 400
+		DeployedCondition: phase
+		DeployingCondition: deploying
+		ShowSelectionBar: true
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+	RangeMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	DamageMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	FirepowerMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	DamageMultiplier@Phase:
+		Modifier: 0
+		RequiresCondition: phase
+	SpeedMultiplier@Phase:
+		Modifier: 200
+		RequiresCondition: phase
+	WithColoredOverlay@Phase:
+		Color: 4488FF44
+		RequiresCondition: phase
+	GrantCondition@untargetable:
+		Condition: untargetable
+		RequiresCondition: phase
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, upglaves
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCDRAGOON:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@range: ^SingularityChargeUpgrade
+	Tooltip:
+		Name: Dragoon
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: -60
+	Buildable:
+		Prerequisites: ~sccyberneticscore
+		Queue: Infantry, RAInfantry
+		Description: actor-scdragoon.description
+	Mobile:
+		Speed: 80
+		TurnSpeed: 1023
+		Locomotor: wheeled
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Shielded:
+		RegenAmount: 60
+	Armor:
+		Type: Medium
+	Armament:
+		Weapon: DragoonCannon
+		FireDelay: 3
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackFrontal:
+		FacingTolerance: 0
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCDragoonVoice
+	DeathSounds:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	WithShadow:
+		Offset: 64, 64, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+
+SCHIGHTEMPLAR:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: High Templar
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~sctemplararchives
+		Queue: Infantry, RAInfantry
+		Description: actor-schightemplar.description
+	Mobile:
+		Speed: 70
+		Locomotor: hover
+	Health:
+		HP: 35000
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Shielded:
+		RegenAmount: 70
+	Armament@Effect:
+		Weapon: PsiStormCosmetic
+		FireDelay: 0
+		AmmoUsage: 0
+		PauseOnCondition: ammo < 8
+	Armament@1:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 8
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@2:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 16
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@3:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 24
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@4:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 32
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@5:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 40
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@6:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 48
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@7:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 56
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	Armament@8:
+		Name: primary
+		Weapon: PsiStorm
+		FireDelay: 64
+		AmmoUsage: 1
+		PauseOnCondition: ammo < 8
+	AmmoPool:
+		Ammo: 16
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 16
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	Voiced:
+		VoiceSet: SCHighTemplarVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCDARKTEMPLAR:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Dark Templar
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~sccitadelofadun, ~!upamaranth
+		Queue: Infantry, RAInfantry
+		Description: actor-scdarktemplar.description
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Shielded:
+		RegenAmount: 100
+	Armament:
+		Weapon: WarpBlade
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCDarkTemplarVoice
+	Cloak:
+		CloakStyle: Alpha
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCZERATUL:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Zeratul
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~sccitadelofadun
+		Queue: Infantry, RAInfantry
+		Description: actor-sczeratul.description
+		BuildLimit: 1
+		IconPalette: ra2
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 250
+	Shielded:
+		RegenAmount: 500
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: ZeratulSlice
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCAMARANTH:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@bot: ^BotAutoDeploySwitchMode
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Amaranth
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: -60
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~sccitadelofadun, ~upamaranth
+		Queue: Infantry, RAInfantry
+		Description: actor-scamaranth.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Shielded:
+		RegenAmount: 140
+	Armament:
+		Weapon: WarpBladeAmaranth
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	# WithIdleOverlay@Shadow:
+		# Offset: 0,0,-360
+	Cloak:
+		InitialDelay: 50
+		CloakDelay: 50
+		UncloakOn: None
+		IsPlayerPalette: true
+		CloakStyle: Alpha
+	-Crushable:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCDarkTemplarVoice
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCATREUS:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@range: ^SingularityChargeUpgrade
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Atreus
+	Valued:
+		Cost: 2400
+	Power:
+		Amount: -120
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~sccyberneticscore, ~upatreus
+		Queue: Infantry, RAInfantry
+		Description: actor-scatreus.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+		Locomotor: wheeled
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Shielded:
+		RegenAmount: 200
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament:
+		Weapon: AtreusMG
+		LocalOffset: 512,0,256
+	WithInfantryBody:
+		IdleSequences: idle
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCDragoonVoice
+	Selectable:
+		DecorationBounds: 1280, 1280
+		Bounds: 1280, 1280
+	WithShadow:
+		Offset: 64, 64, 0
+		ZOffset: -512
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCLEGIONNAIRE:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Legionnaire
+	Valued:
+		Cost: 700
+	Power:
+		Amount: -35
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scgateway, ~uplegionnaire
+		Queue: Infantry, RAInfantry
+		Description: actor-sclegionnaire.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Shielded:
+		RegenAmount: 120
+	Armament:
+		Weapon: Psi-spear
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: SCZealotVoice
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCPATRIARCH:
+	Inherits@protoss: ^BasicProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Patriarch
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~sctemplararchives, ~uppatriarch
+		Queue: Infantry, RAInfantry
+		Description: actor-scpatriarch.description
+		BuildLimit: 1
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 75000
+	ChangesHealth@SelfHealing:
+		Step: 75
+	Shielded:
+		RegenAmount: 150
+	Armament:
+		Weapon: PatriarchShoot
+		LocalOffset: 128,0,256
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: PatriarchShoot
+	ReloadArmamentsBar:
+		Color: 0000FF
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+	-Crushable:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCHighTemplarVoice
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		Protoss Promotions
+####################################################################################################
+
+### Assault Tree
+
+SCZERGLING:
+	Inherits@zerg: ^BasicZerg
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Tooltip:
+		Name: Zergling
+	Valued:
+		Cost: 200
+	ProductionCostMultiplier@dualproduction:
+		Multiplier: 200
+	Power:
+		Amount: -10
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scspawningpool, ~!uptalon
+		Queue: SCZergInfantry
+		AdditionalActors: sczergling
+		Description: actor-sczergling.description
+	Mobile:
+		Speed: 110
+	Health:
+		HP: 11000
+	ChangesHealth@SelfHealing:
+		Step: 11
+	Armament:
+		Weapon: ZerglingClaw
+		FireDelay: 3
+	FirepowerMultiplier@zergling:
+		Modifier: 150
+	AttackFrontal:
+		FacingTolerance: 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-250
+	Voiced:
+		VoiceSet: SCZerglingVoice
+	-SpawnActorOnDeath@SCSWARMLING:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed
+
+SCTALON:
+	Inherits@zerg: ^BasicZerg
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Tooltip:
+		Name: Talon
+	Valued:
+		Cost: 300
+	ProductionCostMultiplier@dualproduction:
+		Multiplier: 200
+	Power:
+		Amount: -15
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scspawningpool, ~uptalon
+		Queue: SCZergInfantry
+		AdditionalActors: sczergling, sczergling
+		Description: actor-sctalon.description
+	Mobile:
+		Speed: 160
+		Locomotor: fakeaircraft
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament:
+		Weapon: TalonClaw
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-250
+	Voiced:
+		VoiceSet: SCZerglingVoice
+	-SpawnActorOnDeath@SCSWARMLING:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed
+
+SCSPOREMAW:
+	Inherits@zerg: ^LargeZerg
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Tooltip:
+		Name: Sporemaw
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~sclair, ~upsporemaw
+		Queue: SCZergInfantry
+		Description: actor-scsporemaw.description
+	Mobile:
+		Speed: 80
+		TurnSpeed: 32
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: SporemawShoot
+		LocalOffset: 0,0,200
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SporemawShoot
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# 	DecorationBounds: 2448, 2448, 0, 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-320
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCHydraliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2
+
+SCHYDRALISK:
+	Inherits@zerg: ^LargeZerg
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Tooltip:
+		Name: Hydralisk
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~schydraliskden
+		Queue: SCZergInfantry
+		Description: actor-schydralisk.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	HitShape:
+		-Type:
+	Armament@PRIMARY:
+		Weapon: HydraSpit
+		LocalOffset: 0,0,200
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: HydraSpit
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCHydraliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+
+SCSPITHID:
+	Inherits@zerg: ^BasicZerg
+	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@range: ^GroovedSpinesUpgrade
+	Tooltip:
+		Name: Spithid
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~schydraliskden, ~upspithid
+		Queue: SCZergInfantry
+		Description: actor-scspithid.description
+	Mobile:
+		Speed: 110
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	HitShape:
+		-Type:
+	Armament@PRIMARY:
+		Weapon: SpithidSpit
+		LocalOffset: 0,0,200
+		MuzzleSequence: muzzle
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SpithidSpit
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# 	DecorationBounds: 2448, 2448, 0, 0
+	# WithIdleOverlay@Shadow:
+	# 	Offset: 0,0,-320
+	Passenger:
+		Weight: 1
+	Voiced:
+		VoiceSet: SCHydraliskVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+
+SCULTRALISK:
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ND: ^NotDevourable
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Tooltip:
+		Name: Ultralisk
+	Valued:
+		Cost: 4400
+	Power:
+		Amount: -220
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~scultraliskcavern
+		Queue: SCZergInfantry
+		Description: actor-scultralisk.description
+	Mobile:
+		Speed: 80
+		TurnSpeed: 32
+		Locomotor: tracked
+	Health:
+		HP: 400000
+	ChangesHealth@SelfHealing:
+		Step: 160
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: UltraliskHusk
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	WithInfantryBody:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCUltraliskVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1536, 1536
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+
+SCHERMIT:
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ND: ^NotDevourable
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Tooltip:
+		Name: Hermit
+	Valued:
+		Cost: 6000
+	Power:
+		Amount: -300
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 80
+		Prerequisites: ~scultraliskcavern, ~uphermit
+		Queue: SCZergInfantry
+		Description: actor-schermit.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Health:
+		HP: 375000
+	ChangesHealth@SelfHealing:
+		Step: 150
+	Armor:
+		Type: Superheavy
+	Armament:
+		Weapon: HermitShoot
+		FireDelay: 3
+		LocalOffset: 384,0,256
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 40
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	WithInfantryBody:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCUltraliskVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1536, 1536
+	FireWarheadsOnDeath:
+		Weapon: HermitExplode
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+
+SCGOREMAW:
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ND: ^NotDevourable
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Tooltip:
+		Name: Goremaw
+	Valued:
+		Cost: 1500
+	Power:
+		Amount: -75
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~scultraliskcavern, ~schive, ~upgoremaw
+		Queue: SCZergInfantry
+		Description: actor-scgoremaw.description
+	Mobile:
+		Speed: 150
+		TurnSpeed: 60
+	Health:
+		HP: 150000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armor:
+		Type: Medium
+	Armament:
+		Weapon: GoremawClaw
+		FireDelay: 3
+	AttackFrontal:
+		FacingTolerance: 0
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	WithInfantryBody:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	GrantConditionOnAttack@gatling:
+		RevokeDelay: 60
+	GrantConditionOnAttack@elitegatling:
+		RevokeDelay: 30
+	Voiced:
+		VoiceSet: SCUltraliskVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1536, 1536
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed
+
+SCLURKER:
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@zerg: ^VeryLargeZerg
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@deploy: ^LurkerMode
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Tooltip:
+		Name: Lurker
+	Valued:
+		Cost: 1300
+	Power:
+		Amount: -65
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~schydraliskden, ~scevolutionchamber, ~sclair
+		Queue: SCZergInfantry
+		Description: actor-sclurker.description
+	Mobile:
+		Speed: 90
+		Locomotor: wheeled
+		TurnSpeed: 18
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Heavy
+	-HitShape:
+	HitShape:
+	GrantConditionOnDeploy:
+		DeploySounds: zluburrw.aud
+		UndeploySounds: zluburrw.aud
+	WithSpriteBody@deployed:
+		Sequence: deploy-idle
+		Name: deployed
+		RequiresCondition: !undeployed
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	-WithMakeAnimation:
+	WithMakeAnimation:
+		BodyNames: deployed
+		Sequence: deploy
+	WithInfantryBody@Editor:
+		DefaultAttackSequence: stand
+		RequiresCondition: undeployed
+	AutoTarget:
+		# ScanRadius: 12
+		InitialStance: AttackAnything
+		# AllowMovement: false
+	Armament@Deployed:
+		Weapon: LurkerSpines
+	Armament@Dummy:
+		Weapon: LurkerTargeting
+	-AttackFrontal:
+	Turreted:
+	AttackTurreted:
+	RenderRangeCircle:
+	Crushable:
+		RequiresCondition: undeployed
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCLurkerVoice
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1280, 1280
+	WithShadow:
+		Offset: 128, 12, 0
+		ZOffset: -512
+		RequiresCondition: undeployed
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, upzergrange
+
+SCINFESTEDTERRAN:
+	Inherits@zerg: ^BasicZerg
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@shadow: ^SCSmallShadow
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Tooltip:
+		Name: Infested Terran Bomber
+	Valued:
+		Cost: 400
+	Power:
+		Amount: -20
+	Buildable:
+		BuildPaletteOrder: 8010
+		Prerequisites: ~scinfestedcommandcenter
+		Queue: Vehicle, RAVehicle
+		Description: actor-scinfestedterran.description
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	GrantConditionOnAttack:
+		Condition: triggered
+		RequiresCondition: !disabled
+	KillsSelf:
+		RequiresCondition: triggered && !disabled
+	FireWarheadsOnDeath:
+		Weapon: InfestedExplosion
+		EmptyWeapon: InfestedExplosion
+		RequiresCondition: triggered && !disabled && !chronobeamed
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1448, 1448, 0, 0
+	Voiced:
+		VoiceSet: SCInfestedTerranVoice
+	WithInfantryBody:
+		IdleSequences: idle
+	Inherits@EXT: ^ExternalConditions
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+
+SCDEFILER:
+	Inherits: ^LargeZerg
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EXT: ^ExternalConditions
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	Tooltip:
+		Name: Defiler
+	Valued:
+		Cost: 1400
+	Power:
+		Amount: -70
+	Buildable:
+		BuildPaletteOrder: 8020
+		Prerequisites: ~scdefilermound
+		Queue: SCZergInfantry
+		Description: actor-scdefiler.description
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armament:
+		Weapon: DefilerPlague
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedCondition: darkswarm
+		CooldownTicks: 1000
+		DeployedTicks: 1
+		PauseOnCondition: disabled
+	PeriodicExplosion:
+		Weapon: DarkSwarmSpawn
+		RequiresCondition: darkswarm
+	-ExternalCondition@DarkSwarm:
+	Voiced:
+		VoiceSet: SCDefilerVoice ##########
+	WithShadow:
+		Offset: 108, 24, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2
+
+SCBROODLING:
+	Inherits@zerg: ^BasicZerg
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Tooltip:
+		Name: Broodling
+	Valued:
+		Cost: 60
+	Mobile:
+		Speed: 120
+	Health:
+		HP: 6000
+	ChangesHealth@SelfHealing:
+		Step: 6
+	Armor:
+		Type: None
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: SCBROODLING
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	Targetable@Broodling:
+		TargetTypes: Broodling
+	Voiced:
+		VoiceSet: SCBroodlingVoice
+	ChangesHealth@timedlife:
+		Step: -30
+		Delay: 1
+		StartIfBelow: 150
+	-ActorLostNotification:
+	-SpawnActorOnDeath@SCSWARMLING:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+
+SCKERRIGANZERG:
+	Inherits: ^LargeZerg
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@swarmer: ^ZergSwarmerUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	Tooltip:
+		Name: Kerrigan
+	Valued:
+		Cost: 4000
+	Power:
+		Amount: -200
+	Buildable:
+		BuildPaletteOrder: 8040
+		Prerequisites: ~scqueensnest
+		Queue: SCZergInfantry
+		Description: actor-sckerriganzerg.description
+		BuildLimit: 1
+		IconPalette: windows256
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 300000
+	ChangesHealth@SelfHealing:
+		Step: 300
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: SCKERRIGANZERG
+		LocalOffset: 341,-120,128
+		FireDelay: 3
+		MuzzleSequence: muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	RenderSprites:
+	Voiced:
+		VoiceSet: SCKerriganZergVoice
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 50
+		CooldownTicks: 600
+		DeployedCondition: summon
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
+		PauseOnCondition: disabled
+	PeriodicExplosion@projections:
+		Weapon: SCKERRIGANSUMMON
+		RequiresCondition: summon
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed

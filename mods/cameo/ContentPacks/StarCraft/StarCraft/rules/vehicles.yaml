@@ -1,0 +1,1209 @@
+SCSCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@worker: ^SCWorker
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	#AutoTargetPriority@Repair:
+	#	ValidTargets: Repair, Repairing
+	#	ValidStances: Ally
+	#	Priority: 2
+	#AutoTargetPriority@DEFAULT:
+	#	ValidStances: Enemy, Neutral
+	#AutoTargetPriority@ATTACKANYTHING:
+	#	ValidStances: Enemy, Neutral
+	Tooltip:
+		Name: SCV
+	Buildable:
+		Prerequisites: ~screfinery
+		Description: actor-scscv.description
+	Armament:
+		Weapon: SCVAttack
+		ForceTargetRelationships: Enemy, Neutral
+	Armament@repair:
+		Name: repair
+		Weapon: SCVRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 240,160,240
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AttackFrontal:
+		FacingTolerance: 64
+		Armaments: primary,repair
+	WithAttackAnimation:
+		Sequence: shoot
+	WithAttackAnimation@fix:
+		Armament: repair
+		Sequence: shoot
+	WithMoveAnimation:
+		MoveSequence: move
+	Voiced:
+		VoiceSet: SCSCVVoice
+	DeathSounds:
+	Targetable@aihack:
+		TargetTypes: SCV
+	WithHarvesterSpriteBody:
+		ImageByFullness: scscv, scscvfull
+	-WithFacingSpriteBody:
+	WithShadow:
+		Offset: 64, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCVULTURE:
+	Inherits: ^Vehicle
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Vulture
+	Valued:
+		Cost: 900
+	Power:
+		Amount: -45
+	Buildable:
+		Prerequisites: ~scfactory
+		Description: actor-scvulture.description
+	Mobile:
+		Speed: 125
+		TurnSpeed: 50
+		Locomotor: hover
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: VultureGrenade
+		LocalOffset: 600,0,0
+	AttackFrontal:
+		FacingTolerance: 0
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Hovers:
+	Voiced:
+		VoiceSet: SCVultureVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+SCSIEGETANK:
+	Inherits: ^Tank
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@ArtilleryBuffs: ^ArtilleryBuffs
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@Crushes: ^VehicleCrusher
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^SiegeModeVehicle
+	Tooltip:
+		Name: Siege Tank
+	Valued:
+		Cost: 2800
+	Power:
+		Amount: -140
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~scengineeringbay
+		Description: actor-scsiegetank.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 150000
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armor:
+		Type: Heavy
+		RequiresCondition: !shielded && undeployed
+	Armor@deployed:
+		Type: Steel
+		RequiresCondition: !shielded && !undeployed
+	Turreted:
+		TurnSpeed: 15
+		Offset: -256,0,256
+		RequiresCondition: undeployed
+	Turreted@deployed:
+		Turret: deployed
+		RealignDelay: -1
+		TurnSpeed: 30
+		RequiresCondition: deployed
+	Armament:
+		Weapon: SiegeTankCannon
+		MuzzleSequence: muzzle
+		LocalOffset: 512,256,0
+		RequiresCondition: undeployed
+	Armament@DEPLOYED:
+		Name: deployed
+		Turret: deployed
+		MuzzleSequence: muzzle
+		Weapon: SiegeTankSiegeCannon
+		LocalOffset: 750,0,250
+		RequiresCondition: deployed
+	# FirepowerMultiplier@deployed:
+	# 	Modifier: 50
+	# 	RequiresCondition: deployed
+	RevealsShroudMultiplier@deployed:
+		Modifier: 150
+		RequiresCondition: deployed
+	RevealsShroudMultiplier@upsiegemode:
+		Modifier: 120
+		RequiresCondition: deployed && upsiegemode
+	RangeMultiplier@upsiegemode:
+		Modifier: 110
+		RequiresCondition: deployed && upsiegemode
+	GrantConditionOnPrerequisite@upsiegemode:
+		Condition: upsiegemode
+		Prerequisites: upsiegemode
+	AttackTurretedCharged:
+		Turrets: primary,deployed
+		Armaments: primary,deployed
+		PauseOnCondition: disabled
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: undeployed
+	WithSpriteTurret@deployed:
+		Sequence: deployed
+		Turret: deployed
+		RequiresCondition: deployed
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+	WithMakeAnimation:
+	WithMoveAnimation:
+		MoveSequence: run
+	RenderRangeCircle:
+	WithRangeCircle:
+		Range: 3980
+		Type: pillbox
+		RequiresCondition: deployed
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1536, 1536
+	GrantConditionOnDeploy:
+		DeploySounds: TankSiege.aud
+		UndeploySounds: TankSiege.aud
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 75
+		OrderInterval: 1000
+	Voiced:
+		VoiceSet: SCSiegeTankVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 108, 48, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2, upsiegemode
+
+SCMATADOR:
+	Inherits: ^Tank
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@FireActor: ^FireActor
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@Crushes: ^VehicleCrusher
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^SiegeModeVehicle
+	Tooltip:
+		Name: Matador
+	Valued:
+		Cost: 1700
+	Power:
+		Amount: -85
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~scfactory, ~upmatador
+		Description: actor-scmatador.description
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armor:
+		Type: Medium
+		RequiresCondition: !shielded && undeployed
+	Armor@deployed:
+		Type: Steel
+		RequiresCondition: !shielded && !undeployed
+	Turreted:
+		TurnSpeed: 15
+		Offset: 0,0,0
+		RequiresCondition: undeployed
+	Turreted@deployed:
+		Turret: deployed
+		RealignDelay: -1
+		TurnSpeed: 30
+		RequiresCondition: deployed
+	Armament:
+		Weapon: MatadorFlamer
+		MuzzleSequence: muzzleflame
+		LocalOffset: 512,0,128
+		RequiresCondition: undeployed
+	Armament@DEPLOYED:
+		Name: deployed
+		Turret: deployed
+		Weapon: MatadorLaser
+		MuzzleSequence: muzzle
+		LocalOffset: 512,0,128
+		RequiresCondition: deployed
+	FirepowerMultiplier@undeployed:
+		Modifier: 33
+		RequiresCondition: undeployed
+	RevealsShroudMultiplier@deployed:
+		Modifier: 125
+		RequiresCondition: deployed
+	RevealsShroudMultiplier@upsiegemode:
+		Modifier: 120
+		RequiresCondition: deployed && upsiegemode
+	RangeMultiplier@upsiegemode:
+		Modifier: 110
+		RequiresCondition: deployed && upsiegemode
+	GrantConditionOnPrerequisite@upsiegemode:
+		Condition: upsiegemode
+		Prerequisites: upsiegemode
+	AttackTurreted:
+		Turrets: primary,deployed
+		Armaments: primary,deployed
+	WithSpriteTurret:
+		RequiresCondition: undeployed
+	WithSpriteTurret@deployed:
+		Sequence: deployed
+		Turret: deployed
+		RequiresCondition: deployed
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1536, 1536
+	GrantConditionOnDeploy:
+		DeploySounds: TankSiege.aud
+		UndeploySounds: TankSiege.aud
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 75
+		OrderInterval: 1000
+	Voiced:
+		VoiceSet: SCSiegeTankVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 108, 48, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2, upsiegemode
+
+SCCYCLONE:
+	Inherits: ^Tank
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Cyclone
+	Valued:
+		Cost: 2300
+	Power:
+		Amount: -115
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~scengineeringbay, ~upsccyclone
+		Description: actor-sccyclone.description
+	Mobile:
+		Speed: 115
+		TurnSpeed: 23
+	Health:
+		HP: 90000
+	Repairable:
+		HpPerStep: 4500
+	ChangesHealth@SelfHealing:
+		Step: 36
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 46
+		Offset: -16,0,64
+	Armament:
+		Weapon: CycloneRockets
+		MuzzleSequence: muzzle
+		RequiresCondition: !lockedon
+		LocalOffset: 512,192,64, 512,-192,64, 448,192,96, 448,-192,96, 384,192,128, 384,-192,128
+	Armament@lockedon:
+		Weapon: CycloneRocketsLockOn
+		MuzzleSequence: muzzle
+		RequiresCondition: lockedon
+		LocalOffset: 512,192,64, 512,-192,64, 448,192,96, 448,-192,96, 384,192,128, 384,-192,128
+	FirepowerMultiplier@lockedon:
+		Modifier: 200
+		RequiresCondition: lockedon
+	SpeedMultiplier@lockedon:
+		Modifier: 125
+		RequiresCondition: lockedon
+	ExternalCondition@lockedon:
+		Condition: lockedon
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderRangeCircle:
+	WithMoveAnimation:
+		MoveSequence: move
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1536, 1536
+	Passenger:
+		Weight: 2
+	Carryable:
+		RequiresCondition: !deployed
+	Voiced:
+		VoiceSet: SCCycloneVoice
+	DeathSounds:
+	WithShadow:
+		Offset: 108, 48, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+scwarhound:
+	Inherits: ^Vehicle
+	Inherits@SC: ^SCTVEHICLE
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Warhound
+	Valued:
+		Cost: 4500
+	Power:
+		Amount: -225
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scsciencefacility, ~upwarhound
+		Description: actor-scwarhound.description
+	Mobile:
+		Speed: 45
+		TurnSpeed: 18
+		Locomotor: tracked
+		RequiresCondition: !hunker
+	Health:
+		HP: 300000
+	Repairable:
+		HpPerStep: 15000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Armor:
+		Type: Heavy
+	Armament@Cannon:
+		Name: primary
+		Weapon: SCTyr
+		LocalOffset: 800,650,350, 800,-650,350
+		MuzzleSequence: muzzle
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 2
+	Armament@Rockets:
+		Name: secondary
+		Weapon: SCTyrAA
+		LocalOffset: 200,300,900, 250,150,950, 250,-150,950, 200,-300,900
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 2
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithMuzzleOverlay:
+	DamageMultiplier@hunker:
+		Modifier: 50
+		RequiresCondition: hunker
+	ChangesHealth@hunker:
+		Step: 120
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: hunker
+	GrantConditionOnDamageState@hunker:
+		Condition: hunker
+		ValidDamageStates: Critical
+	WithFacingSpriteBody@hunker:
+		Sequence: hunker
+		Name: hunker
+		RequiresCondition: hunker
+	RejectsOrders@deployment:
+		Reject: AttackMove, AssaultMove, Attack, Move
+		RequiresCondition: hunker
+	WithIdleOverlay@warhoundsparks:
+		Image: warhoundsparks
+		Sequence: idle
+		Palette: greyscale
+		RequiresCondition: hunker
+	WithIdleOverlay@warhoundsparks2:
+		ImpactSounds: vifvrepa.wav
+		Image: explosion
+		Sequence: repair_weld
+		Palette: ra2effect
+		RequiresCondition: hunker
+	AmbientSound:
+		SoundFiles: vifvrepa.wav
+		Volume: 3
+		RequiresCondition: hunker
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+		RequiresCondition: !hunker
+	WithMoveAnimation:
+		MoveSequence: run
+		ValidMovementTypes: Horizontal, Turn
+	WithAttackAnimation@Cannon:
+		Sequence: shoot
+		Armament: primary
+		Delay: 3
+	WithAttackAnimation@Rockets:
+		Sequence: altshoot
+		Armament: secondary
+		Delay: 3
+	AttackFrontal:
+		FacingTolerance: 20
+		RequiresCondition: !hunker
+	# AutoTarget:
+	# 	InitialStanceAI: Defend
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCTyrVoice
+	Selectable:
+		DecorationBounds: 1600, 1600
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+SCTMCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~scengineeringbay
+		Description: actor-sctmcv.description
+	Tooltip:
+		Name: Terran Mobile Command Center
+	Transforms:
+		IntoActor: sccommandcenter
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds: tscupd00.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: SCSCVVoice
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmecharmor, upmecharmor2
+
+## Terran Promotions
+### Infantry Tree
+
+SCPROBE:
+	Inherits: ^ProtossVehicle
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@explode: ^UnitExplodeSmallProtoss
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@worker: ^SCWorker
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Protoss Probe
+	Buildable:
+		Prerequisites: ~scassimilator
+		Description: actor-scprobe.description
+	Armament:
+		Weapon: ProbeAttack
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: SCProbeVoice
+	DeathSounds:
+	WithHarvesterSpriteBody:
+		ImageByFullness: scprobe, scprobefull
+	-WithFacingSpriteBody:
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCMANIFOLD:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@range: ^SingularityChargeUpgrade
+	Tooltip:
+		Name: Manifold
+	Valued:
+		Cost: 600
+	Power:
+		Amount: -30
+	Buildable:
+		Prerequisites: ~sccyberneticscore, ~upmanifold
+		Queue: Vehicle, RAVehicle
+		Description: actor-scmanifold.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+		Locomotor: hover
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Shielded:
+		RegenAmount: 20
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: ManifoldMG
+	Armament@AA:
+		Weapon: ManifoldMGAA
+	ProximityExternalCondition@AdvancedTargeting:
+		Range: 7500
+		ValidRelationships: Enemy
+		Condition: lockon
+		RequiresCondition: !disabled
+	WithRangeCircle@lockon:
+		Range: 7500
+		Type: lockon
+		Color: FF888888
+		RequiresCondition: !disabled
+	-WithInfantryBody:
+	-Targetable@disguise:
+	-WithDeathAnimation:
+	WithFacingSpriteBody:
+	AttackFrontal:
+		FacingTolerance: 0
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCReaverVoice
+	DeathSounds:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	WithShadow:
+		Offset: 64, 64, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+
+SCANALOGUE:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@range: ^SingularityChargeUpgrade
+	Tooltip:
+		Name: Analogue
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: -60
+	Buildable:
+		Prerequisites: ~sccyberneticscore, ~upanalogue
+		Queue: Vehicle, RAVehicle
+		Description: actor-scanalogue.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+		Locomotor: hover
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Shielded:
+		RegenAmount: 48
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: SCVAttack
+		ForceTargetRelationships: Enemy, Neutral
+	Armament@repair:
+		Name: repair
+		Weapon: SCVRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 240,0,240
+	ProximityExternalCondition@shieldgen:
+		Range: 10000
+		Condition: shieldgen
+		EnableSound: shielded_on.aud
+		DisableSound: shielded_on.aud
+		RequiresCondition: !disabled
+	WithRangeCircle@shieldgen:
+		Range: 10000
+		Type: shield
+		Color: 8888FF88
+		RequiresCondition: !disabled
+	-WithInfantryBody:
+	-Targetable@disguise:
+	-WithDeathAnimation:
+	WithFacingSpriteBody:
+	AttackFrontal:
+		FacingTolerance: 0
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCReaverVoice
+	DeathSounds:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	WithShadow:
+		Offset: 64, 64, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+
+SCIDOL:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@range: ^SingularityChargeUpgrade
+	-ExternalCondition@PropagandaEffect:
+	Tooltip:
+		Name: Idol
+	Valued:
+		Cost: 2800
+	Power:
+		Amount: -140
+	Buildable:
+		Prerequisites: ~sccyberneticscore, ~upidol
+		Queue: Vehicle, RAVehicle
+		BuildLimit: 1
+		Description: actor-scidol.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: hover
+	Health:
+		HP: 350000
+	Repairable:
+		HpPerStep: 17500
+	ChangesHealth@SelfHealing:
+		Step: 140
+	Shielded:
+		RegenAmount: 280
+	Armor:
+		Type: Medium
+	Armament@Upgrade1: ##########
+		Weapon: WaveforceCannonChargedLaser
+		Recoil: 256
+		RecoilRecovery: 32
+		LocalOffset: 600,0,100
+		MuzzleSequence: muzzle
+	Armament@Upgrade2: ##########
+		Weapon: WaveforceCannonDistortedBeam1
+		Recoil: 256
+		RecoilRecovery: 32
+		LocalOffset: 600,0,100
+		FireDelay: 1
+		MuzzleSequence: muzzle
+	Armament@Upgrade3: ##########
+		Weapon: WaveforceCannonDistortedBeam2
+		Recoil: 256
+		RecoilRecovery: 32
+		LocalOffset: 600,0,100
+		FireDelay: 2
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@TripleBeam:
+		Modifier: 223
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 5000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 5000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	WithDecoration@CARRYALL:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+	-WithInfantryBody:
+	-Targetable@disguise:
+	-WithDeathAnimation:
+	WithFacingSpriteBody:
+	AttackFrontal:
+		FacingTolerance: 0
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCReaverVoice
+	DeathSounds:
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 1024, 1024
+	WithShadow:
+		Offset: 64, 64, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+
+SCREAVER:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Reaver
+	Valued:
+		Cost: 2700
+	Power:
+		Amount: -135
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~scroboticssupportbay
+		Queue: Vehicle, RAVehicle
+		Description: actor-screaver.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+	Health:
+		HP: 275000
+	Repairable:
+		HpPerStep: 13750
+	ChangesHealth@SelfHealing:
+		Step: 110
+	Shielded:
+		RegenAmount: 220
+	Armor:
+		Type: Heavy
+	Armament@primary:
+		Name: primary
+		Weapon: ScarabLaunch
+		LocalOffset: 512,0,256
+		PauseOnCondition: !ammo
+	Armament@secondary:
+		Name: secondary
+		Weapon: ScarabLaunchDummy
+		LocalOffset: 512,0,256
+		RequiresCondition: !upreavercapacity
+		PauseOnCondition: !ammo
+	AttackFrontal:
+		FacingTolerance: 0
+	-WithInfantryBody:
+	-Targetable@disguise:
+	WithFacingSpriteBody:
+	WithMoveAnimation:
+	SelectionDecorations:
+	DeathSounds:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 360
+		Count: 1
+	Voiced:
+		VoiceSet: SCReaverVoice
+	WithShadow:
+		Offset: 108, 64, 0
+		ZOffset: -512
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	Selectable:
+		DecorationBounds: 1280, 1280
+	GrantConditionOnPrerequisite@upreavercapacity:
+		Condition: upreavercapacity
+		Prerequisites: upreavercapacity
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, upreavercapacity
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCARCHON:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@explode: ^UnitExplodeSmallProtoss
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Archon
+	Valued:
+		Cost: 5600
+	Power:
+		Amount: -280
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~sctemplararchives
+		Queue: Vehicle, RAVehicle
+		Description: actor-scarchon.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+		Locomotor: hover
+	Health:
+		HP: 350000
+	Repairable:
+		HpPerStep: 17500
+	ChangesHealth@SelfHealing:
+		Step: 140
+	Shielded:
+		RegenAmount: 280
+	Armor:
+		Type: Medium
+	Targetable:
+		TargetTypes: Ground, Vehicle, Infantry
+	RevealsShroud:
+		Range: 7c0
+	AutoTarget:
+		ScanRadius: 6
+		InitialStance: AttackAnything
+	Armament:
+		Weapon: PsionicShockwave
+		LocalOffset: 400,0,100
+		FireDelay: 5
+	AttackFrontal:
+		FacingTolerance: 0
+	WithMuzzleOverlay:
+	-WithInfantryBody:
+	-Targetable@disguise:
+	WithFacingSpriteBody:
+	WithAttackAnimation:
+		Sequence: shoot
+	-HitShape:
+	HitShape:
+	Passenger:
+		Weight: 4
+		CustomPipType: blue
+	Voiced:
+		VoiceSet: SCArchonVoice ##########
+	-WithDeathAnimation:
+	-Crushable:
+	Selectable:
+		Bounds: 1024, 1024
+	WithIdleOverlay:
+		Sequence: shroud
+		IsPlayerPalette: true
+		PauseOnCondition: chronobeamed
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+
+SCPMCV:
+	Inherits: ^ProtossVehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ProtossPersonalShield: ^ProtossPersonalShield
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~scroboticsfacility
+		Description: actor-scpmcv.description
+	Tooltip:
+		Name: Protoss Mobile Nexus
+	Transforms:
+		IntoActor: scnexus
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds: pshbld03.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: SCProbeVoice
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upgroundarmor, upgroundarmor2, upplasmashield
+
+SCPOSITRON:
+	Inherits: ^LargeProtoss
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Tooltip:
+		Name: Positron
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: -60
+	Buildable:
+		Prerequisites: ~sccyberneticscore, ~uppositron
+		Queue: Vehicle, RAVehicle
+		Description: actor-scpositron.description
+	Mobile:
+		Speed: 120
+		TurnSpeed: 48
+		Locomotor: hover
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 3000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Shielded:
+		RegenAmount: 48
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: PositronGrenade
+		LocalOffset: 600,0,0
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackFrontal:
+		FacingTolerance: 0
+	-WithInfantryBody:
+	-Targetable@disguise:
+	WithFacingSpriteBody:
+	Passenger:
+		Weight: 2
+		CustomPipType: blue
+	Hovers:
+	Voiced:
+		VoiceSet: SCDragoonVoice
+	DeathSounds:
+	Selectable:
+		DecorationBounds: 1280, 1280
+		Bounds: 1280, 1280
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+
+SCDRONE:
+	Inherits: ^Vehicle
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@worker: ^SCWorker
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@SHADOWS: ^Shadows
+	Inherits@ZergBurrow: ^ZergBurrow
+	Inherits@weapon: ^ZergMeleeWeaponUpgrades
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Tooltip:
+		Name: Zerg Drone
+	Buildable:
+		Queue: SCZergInfantry
+		Prerequisites: ~scextractor
+		Description: actor-scdrone.description
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	Armament:
+		Weapon: DroneAttack
+	Voiced:
+		VoiceSet: SCDroneVoice
+	-WithMakeAnimation:
+	WithMakeAnimation:
+		Sequence: deploy
+		Name: deployed
+		RequiresCondition: undeployed
+	WithIdleOverlay@deployed:
+		RequiresCondition: deployed
+		Image: scdrone
+		Sequence: deployed
+		Palette: greyscale
+	WithHarvesterSpriteBody:
+		ImageByFullness: scdrone, scdronefull
+	-WithFacingSpriteBody:
+	-WithInfantryBody:
+	-Targetable@disguise:
+	-WithSpriteBody@deployed:
+	Cloak:
+		InitialDelay: 25
+		CloakDelay: 25
+		MinCloakedAlpha: 0.25
+		MaxCloakedAlpha: 0.25
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+
+SCZMCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Buildable:
+		Queue: SCZergInfantry
+		Description: actor-sczmcv.description
+		Prerequisites: ~scevolutionchamber
+	Tooltip:
+		Name: Zerg Hatchery Drone
+	Selectable:
+		Priority: 4
+		DecorationBounds: 1536, 1536
+	Transforms:
+		IntoActor: schatchery
+		Offset: -1,-1
+		Facing: 432
+		TransformSounds: zchrdy00.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: SCDroneVoice
+	WithShadow:
+		Offset: 128, 128, 0
+		ZOffset: -512
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upcarapace, upcarapace2

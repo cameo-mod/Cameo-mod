@@ -1,0 +1,1287 @@
+upmadcap:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Madcap
+	Buildable:
+		BuildPaletteOrder: 8033
+		Queue: Promotions
+		Description: actor-upmadcap.description
+		Prerequisites: ~sccommandcenter, !upmadcap, rank1
+	RenderSprites:
+		Image: scmadcap
+	ProvidesPrerequisite:
+
+upharakan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Harakan
+	Buildable:
+		BuildPaletteOrder: 8036
+		Queue: Promotions
+		Description: actor-upharakan.description
+		Prerequisites: ~sccommandcenter, upmadcap, !upharakan, rank1
+	RenderSprites:
+		Image: scharakan
+	ProvidesPrerequisite:
+
+upsilvertongue:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Spectre and Medivac
+	Buildable:
+		BuildPaletteOrder: 8039
+		Queue: Promotions
+		Description: actor-upsilvertongue.description
+		Prerequisites: ~sccommandcenter, upharakan, !upsilvertongue, rank1
+	RenderSprites:
+		Image: scsilvertongue
+	ProvidesPrerequisite:
+
+uppythean:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Pythean
+	Buildable:
+		BuildPaletteOrder: 8042
+		Queue: Promotions
+		Description: actor-uppythean.description
+		Prerequisites: ~sccommandcenter, upsilvertongue, !uppythean, rank1
+	RenderSprites:
+		Image: scpythean
+	ProvidesPrerequisite:
+
+### Mech Tree
+
+upmatador:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Matador
+	Buildable:
+		BuildPaletteOrder: 8034
+		Queue: Promotions
+		Description: actor-upmatador.description
+		Prerequisites: ~sccommandcenter, !upmatador, rank1
+	RenderSprites:
+		Image: scmatador
+	ProvidesPrerequisite:
+
+upsccyclone:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cyclone
+	Buildable:
+		BuildPaletteOrder: 8037
+		Queue: Promotions
+		Description: actor-upsccyclone.description
+		Prerequisites: ~sccommandcenter, upmatador, !upsccyclone, rank1
+	RenderSprites:
+		Image: sccyclone
+	ProvidesPrerequisite:
+
+upgoliathmk2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Goliath Mk2
+	Buildable:
+		BuildPaletteOrder: 8040
+		Queue: Promotions
+		Description: actor-upgoliathmk2.description
+		Prerequisites: ~sccommandcenter, upsccyclone, !upgoliathmk2, rank1
+	RenderSprites:
+		Image: scgoliath2
+	ProvidesPrerequisite:
+
+upwarhound:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Warhound
+	Buildable:
+		BuildPaletteOrder: 8043
+		Queue: Promotions
+		Description: actor-upwarhound.description
+		Prerequisites: ~sccommandcenter, upgoliathmk2, !upwarhound, rank1
+	RenderSprites:
+		Image: scwarhound
+	ProvidesPrerequisite:
+
+### Ship Tree
+
+upsundog:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Sundog
+	Buildable:
+		BuildPaletteOrder: 8035
+		Queue: Promotions
+		Description: actor-upsundog.description
+		Prerequisites: ~sccommandcenter, !upsundog, rank1
+	RenderSprites:
+		Image: scsundog
+	ProvidesPrerequisite:
+
+upraven:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Raven
+	Buildable:
+		BuildPaletteOrder: 8038
+		Queue: Promotions
+		Description: actor-upraven.description
+		Prerequisites: ~sccommandcenter, upsundog, !upraven, rank1
+	RenderSprites:
+		Image: scraven
+	ProvidesPrerequisite:
+
+upwyvern:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Wyvern
+	Buildable:
+		BuildPaletteOrder: 8041
+		Queue: Promotions
+		Description: actor-upwyvern.description
+		Prerequisites: ~sccommandcenter, upraven, !upwyvern, rank1
+	RenderSprites:
+		Image: scwyvern
+	ProvidesPrerequisite:
+
+upphobos:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Phobos
+	Buildable:
+		BuildPaletteOrder: 8044
+		Queue: Promotions
+		Description: actor-upphobos.description
+		Prerequisites: ~sccommandcenter, upwyvern, !upphobos, rank1
+	RenderSprites:
+		Image: scphobos
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Zerg Promotions
+####################################################################################################
+
+### Assault Tree
+
+uptalon:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Talon
+	Buildable:
+		BuildPaletteOrder: 8045
+		Queue: Promotions
+		Description: actor-uptalon.description
+		Prerequisites: ~schatchery, !uptalon, rank1
+	RenderSprites:
+		Image: sctalon
+	ProvidesPrerequisite:
+
+upspithid:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Spithid
+	Buildable:
+		BuildPaletteOrder: 8048
+		Queue: Promotions
+		Description: actor-upspithid.description
+		Prerequisites: ~schatchery, uptalon, !upspithid, rank1
+	RenderSprites:
+		Image: scspithid
+	ProvidesPrerequisite:
+
+upshriek:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Shriek
+	Buildable:
+		BuildPaletteOrder: 8051
+		Queue: Promotions
+		Description: actor-upshriek.description
+		Prerequisites: ~schatchery, upspithid, !upshriek, rank1
+	RenderSprites:
+		Image: scshriek
+	ProvidesPrerequisite:
+
+upswarmling:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Swarmling
+	Buildable:
+		BuildPaletteOrder: 8054
+		Queue: Promotions
+		Description: actor-upswarmling.description
+		Prerequisites: ~schatchery, upshriek, !upswarmling, rank1
+	RenderSprites:
+		Image: scswarmling
+	ProvidesPrerequisite:
+
+### Assault Tree
+
+upsporemaw:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Sporemaw
+	Buildable:
+		BuildPaletteOrder: 8046
+		Queue: Promotions
+		Description: actor-upsporemaw.description
+		Prerequisites: ~schatchery, !upsporemaw, rank1
+	RenderSprites:
+		Image: scsporemaw
+	ProvidesPrerequisite:
+
+upgoremaw:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Goremaw
+	Buildable:
+		BuildPaletteOrder: 8049
+		Queue: Promotions
+		Description: actor-upgoremaw.description
+		Prerequisites: ~schatchery, upsporemaw, !upgoremaw, rank1
+	RenderSprites:
+		Image: scgoremaw
+	ProvidesPrerequisite:
+
+upgorekraken:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Gorekraken
+	Buildable:
+		BuildPaletteOrder: 8052
+		Queue: Promotions
+		Description: actor-upgorekraken.description
+		Prerequisites: ~schatchery, upgoremaw, !upgorekraken, rank1
+	RenderSprites:
+		Image: scgorekraken
+	ProvidesPrerequisite:
+
+uphermit:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Hermit
+	Buildable:
+		BuildPaletteOrder: 8055
+		Queue: Promotions
+		Description: actor-uphermit.description
+		Prerequisites: ~schatchery, upgorekraken, !uphermit, rank1
+	RenderSprites:
+		Image: schermit
+	ProvidesPrerequisite:
+
+### Support Tree
+
+upbroodweaver:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Broodweaver
+	Buildable:
+		BuildPaletteOrder: 8047
+		Queue: Promotions
+		Description: actor-upbroodweaver.description
+		Prerequisites: ~schatchery, !upbroodweaver, rank1
+	RenderSprites:
+		Image: scbroodweaver
+	ProvidesPrerequisite:
+
+upcorruptor:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Corruptor
+	Buildable:
+		BuildPaletteOrder: 8050
+		Queue: Promotions
+		Description: actor-upcorruptor.description
+		Prerequisites: ~schatchery, upbroodweaver, !upcorruptor, rank1
+	RenderSprites:
+		Image: sccorruptor
+	ProvidesPrerequisite:
+
+updreadshroud:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Dreadshroud
+	Buildable:
+		BuildPaletteOrder: 8053
+		Queue: Promotions
+		Description: actor-updreadshroud.description
+		Prerequisites: ~schatchery, upcorruptor, !updreadshroud, rank1
+	RenderSprites:
+		Image: scdreadshroud
+	ProvidesPrerequisite:
+
+upbehemoth:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Behemoth
+	Buildable:
+		BuildPaletteOrder: 8056
+		Queue: Promotions
+		Description: actor-upbehemoth.description
+		Prerequisites: ~schatchery, updreadshroud, !upbehemoth, rank1
+	RenderSprites:
+		Image: scbehemoth
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		UNIT PROTOSS
+####################################################################################################
+
+uplegionnaire:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Legionnaire
+	Buildable:
+		BuildPaletteOrder: 8045
+		Queue: Promotions
+		Description: actor-uplegionnaire.description
+		Prerequisites: ~scnexus, !uplegionnaire, rank1
+	RenderSprites:
+		Image: sclegionnaire
+	ProvidesPrerequisite:
+
+upatreus:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Atreus
+	Buildable:
+		BuildPaletteOrder: 8048
+		Queue: Promotions
+		Description: actor-upatreus.description
+		Prerequisites: ~scnexus, uplegionnaire, !upatreus, rank1
+	RenderSprites:
+		Image: scatreus
+	ProvidesPrerequisite:
+
+upamaranth:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Amaranth
+	Buildable:
+		BuildPaletteOrder: 8051
+		Queue: Promotions
+		Description: actor-upamaranth.description
+		Prerequisites: ~scnexus, upatreus, !upamaranth, rank1
+	RenderSprites:
+		Image: scamaranth
+	ProvidesPrerequisite:
+
+uppatriarch:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Patriarch
+	Buildable:
+		BuildPaletteOrder: 8054
+		Queue: Promotions
+		Description: actor-uppatriarch.description
+		Prerequisites: ~scnexus, upamaranth, !uppatriarch, rank1
+	RenderSprites:
+		Image: scpatriarch
+	ProvidesPrerequisite:
+
+### Assault Tree
+
+upepigraph:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Epigraph
+	Buildable:
+		BuildPaletteOrder: 8047
+		Queue: Promotions
+		Description: actor-upepigraph.description
+		Prerequisites: ~scnexus, !upepigraph, rank1
+	RenderSprites:
+		Image: scepigraph
+	ProvidesPrerequisite:
+
+uplanifect:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Void Ray
+	Buildable:
+		BuildPaletteOrder: 8050
+		Queue: Promotions
+		Description: actor-uplanifect.description
+		Prerequisites: ~scnexus, upepigraph, !upgladius, rank1
+	RenderSprites:
+		Image: sclanifect
+	ProvidesPrerequisite:
+
+upgladius:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Gladius
+	Buildable:
+		BuildPaletteOrder: 8053
+		Queue: Promotions
+		Description: actor-upgladius.description
+		Prerequisites: ~scnexus, uplanifect, !upgladius, rank1
+	RenderSprites:
+		Image: scgladius
+	ProvidesPrerequisite:
+
+upstarsovereign:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Star Sovereign
+	Buildable:
+		BuildPaletteOrder: 8056
+		Queue: Promotions
+		Description: actor-upstarsovereign.description
+		Prerequisites: ~scnexus, upgladius, !upstarsovereign, rank1
+	RenderSprites:
+		Image: scstarshipsovereign
+	ProvidesPrerequisite:
+
+### Support Tree
+
+uppositron:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Positron
+	Buildable:
+		BuildPaletteOrder: 8046
+		Queue: Promotions
+		Description: actor-uppositron.description
+		Prerequisites: ~scnexus, !uppositron, rank1
+	RenderSprites:
+		Image: scpositron
+	ProvidesPrerequisite:
+
+upanalogue:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Analogue
+	Buildable:
+		BuildPaletteOrder: 8049
+		Queue: Promotions
+		Description: actor-upanalogue.description
+		Prerequisites: ~scnexus, uppositron , !upanalogue, rank1
+	RenderSprites:
+		Image: scanalogue
+	ProvidesPrerequisite:
+
+upmanifold:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Manifold
+	Buildable:
+		BuildPaletteOrder: 8052
+		Queue: Promotions
+		Description: actor-upmanifold.description
+		Prerequisites: ~scnexus, upanalogue, !upmanifold, rank1
+	RenderSprites:
+		Image: scmanifold
+	ProvidesPrerequisite:
+
+upidol:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Idol
+	Buildable:
+		BuildPaletteOrder: 8055
+		Queue: Promotions
+		Description: actor-upidol.description
+		Prerequisites: ~scnexus, upmanifold, !upidol, rank1
+	RenderSprites:
+		Image: scidol
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		UNIT ZERG
+####################################################################################################
+
+DARKSWARM:
+	Inherits@1: ^ExistsInWorld
+	Inherits@2: ^SpriteActor
+	-UpdatesPlayerStatistics:
+	RenderSprites:
+		PlayerPalette: alpha32
+	Interactable:
+	HiddenUnderFog:
+		AlwaysVisibleRelationships: None
+		Type: CenterPosition
+	Health:
+		HP: 250
+	HitShape:
+	Immobile:
+		OccupiesSpace: false
+	WithSpriteBody:
+	WithMakeAnimation:
+	BodyOrientation:
+		QuantizedFacings: 32
+	ChangesHealth:
+		Step: -1
+		Delay: 1
+		StartIfBelow: 200
+		DamageTypes: DefaultDeath
+	ProximityExternalCondition@ds:
+		Range: 5000
+		Condition: DarkSwarm
+
+updragoonrange:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Singularity Charge
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-updragoonrange.description
+		Prerequisites: ~sccyberneticscore, ~!updragoonrange
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: updragoonrange
+	ProvidesPrerequisite:
+		Prerequisite: updragoonrange
+
+upglaves:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Resonating Glaves
+	Buildable:
+		BuildPaletteOrder: 85
+		Queue: Upgrades
+		Description: actor-updragoonrange.description
+		Prerequisites: ~sccitadelofadun, ~!upglaves
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upglaves
+	ProvidesPrerequisite:
+		Prerequisite: upglaves
+
+uppylon1:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Upgrade Pylon Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-uppylon1.description
+		Prerequisites: ~scforge, ~!uppylon1
+	RenderSprites:
+		Image: scpylon
+	ProvidesPrerequisite:
+
+uppylon2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Upgrade Pylon Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-uppylon2.description
+		Prerequisites: ~sccyberneticscore, ~uppylon1, ~!uppylon2
+	RenderSprites:
+		Image: scpylon
+	ProvidesPrerequisite:
+
+upplasmashield:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Plasma Shields
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upplasmashield.description
+		Prerequisites: ~sccyberneticscore, ~!upplasmashield
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: upplasmashield
+	ProvidesPrerequisite:
+		Prerequisite: upplasmashield
+
+upreavercapacity:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reaver Capacity
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upreavercapacity.description
+		Prerequisites: ~scroboticssupportbay
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upreavercapacity
+	ProvidesPrerequisite:
+		Prerequisite: upreavercapacity
+
+upairspeed:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Gravitic Propulsion
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upairspeed.description
+		Prerequisites: ~scroboticssupportbay, ~!upairspeed
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upairspeed
+	ProvidesPrerequisite:
+		Prerequisite: upairspeed
+
+upgroundweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ground Weapons Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upgroundweapons.description
+		Prerequisites: ~scforge, ~!upgroundweapons
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upgroundweapons
+	ProvidesPrerequisite:
+		Prerequisite: upgroundweapons
+
+upgroundweapons2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ground Weapons Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upgroundweapons2.description
+		Prerequisites: ~sctemplararchives, ~upgroundweapons, ~!upgroundweapons2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: upgroundweapons
+	ProvidesPrerequisite:
+		Prerequisite: upgroundweapons
+
+upgroundarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ground Armor Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upgroundarmor.description
+		Prerequisites: ~scforge, ~!upgroundarmor
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upgroundarmor
+	ProvidesPrerequisite:
+		Prerequisite: upgroundarmor
+
+upgroundarmor2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ground Armor Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upgroundarmor2.description
+		Prerequisites: ~sctemplararchives, ~upgroundarmor, ~!upgroundarmor2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: upgroundarmor
+	ProvidesPrerequisite:
+		Prerequisite: upgroundarmor
+
+upairweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Air Weapons Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upairweapons.description
+		Prerequisites: ~sccyberneticscore, ~!upairweapons
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upairweapons
+	ProvidesPrerequisite:
+		Prerequisite: upairweapons
+
+upairweapons2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Air Weapons Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upairweapons2.description
+		Prerequisites: ~scfleetbeacon, ~upairweapons, ~!upairweapons2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: upairweapons
+	ProvidesPrerequisite:
+		Prerequisite: upairweapons
+
+upairarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Air Armor Level 1
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upairarmor.description
+		Prerequisites: ~sccyberneticscore, ~!upairarmor
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: upairarmor
+	ProvidesPrerequisite:
+		Prerequisite: upairarmor
+
+upairarmor2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Air Armor Level 2
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upairarmor2.description
+		Prerequisites: ~scfleetbeacon, ~upairarmor, ~!upairarmor2
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: upairarmor
+	ProvidesPrerequisite:
+		Prerequisite: upairarmor
+
+	####################################################################################################
+	#		Upgrades Terrans
+	####################################################################################################
+
+upstimpack:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stim Pack
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upstimpack.description
+		Prerequisites: ~scacademy, ~!upstimpack
+	RenderSprites:
+		Image: upstimpack
+	ProvidesPrerequisite:
+
+upmarinerange:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: U-238 Shells
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upmarinerange.description
+		Prerequisites: ~scacademy, ~!upmarinerange
+	RenderSprites:
+		Image: upmarinerange
+	ProvidesPrerequisite:
+
+upsupplydepot1:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Upgrade Supply Depot Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upsupplydepot1.description
+		Prerequisites: ~scengineeringbay, ~!upsupplydepot1
+	RenderSprites:
+		Image: scsupplydepot
+	ProvidesPrerequisite:
+
+upsupplydepot2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Upgrade Supply Depot Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upsupplydepot2.description
+		Prerequisites: ~scarmory, ~upsupplydepot1, ~!upsupplydepot2
+	RenderSprites:
+		Image: scsupplydepot
+	ProvidesPrerequisite:
+
+upghostcloak:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cloak Upgrade
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upghostcloak.description
+		Prerequisites: ~scsciencefacility, ~!upghostcloak
+	RenderSprites:
+		Image: sccloak
+	ProvidesPrerequisite:
+
+upsiegemode:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Advanced Siege Mode
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upsiegemode.description
+		Prerequisites: ~scsciencefacility, ~!upsiegemode
+	RenderSprites:
+		Image: scsiegemode
+	ProvidesPrerequisite:
+
+upyamatocannon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Yamato Cannon and Tactical Jump Upgrade
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upyamatocannon.description
+		Prerequisites: ~scsciencefacility, ~!upyamatocannon
+	RenderSprites:
+		Image: scyamatocannon
+	ProvidesPrerequisite:
+
+upinfweapon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Infantry Weapons Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upinfweapon.description
+		Prerequisites: ~scengineeringbay, ~!upinfweapon
+	RenderSprites:
+		Image: upinfweapon
+	ProvidesPrerequisite:
+		Prerequisite: upinfweapon
+
+upinfweapon2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Infantry Weapons Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upinfweapon2.description
+		Prerequisites: ~scsciencefacility, ~upinfweapon, ~!upinfweapon2
+	RenderSprites:
+		Image: upinfweapon
+	ProvidesPrerequisite:
+		Prerequisite: upinfweapon
+
+upinfarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Infantry Armor Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upinfarmor.description
+		Prerequisites: ~scengineeringbay, ~!upinfarmor
+	RenderSprites:
+		Image: upinfarmor
+	ProvidesPrerequisite:
+		Prerequisite: upinfarmor
+
+upinfarmor2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Infantry Armor Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upinfarmor2.description
+		Prerequisites: ~scsciencefacility, ~upinfarmor, ~!upinfarmor2
+	RenderSprites:
+		Image: upinfarmor
+	ProvidesPrerequisite:
+		Prerequisite: upinfarmor
+
+upmechweapon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Vehicle Weapons Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upmechweapon.description
+		Prerequisites: ~scarmory, ~!upmechweapon
+	RenderSprites:
+		Image: upmechweapon
+	ProvidesPrerequisite:
+
+upmechweapon2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Vehicle Weapons Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upmechweapon2.description
+		Prerequisites: ~scsciencefacility, ~upmechweapon, ~!upmechweapon2
+	RenderSprites:
+		Image: upmechweapon
+	ProvidesPrerequisite:
+
+upmecharmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Vehicle Plating Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upmecharmor.description
+		Prerequisites: ~scarmory, ~!upmecharmor
+	RenderSprites:
+		Image: upmecharmor
+	ProvidesPrerequisite:
+
+upmecharmor2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Vehicle Plating Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upmecharmor2.description
+		Prerequisites: ~scsciencefacility, ~upmecharmor, ~!upmecharmor2
+	RenderSprites:
+		Image: upmecharmor
+	ProvidesPrerequisite:
+
+upshipweapon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ship Weapons Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upshipweapon.description
+		Prerequisites: ~scarmory, ~!upshipweapon
+	RenderSprites:
+		Image: upshipweapon
+	ProvidesPrerequisite:
+
+upshipweapon2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ship Weapons Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upshipweapon2.description
+		Prerequisites: ~scsciencefacility, ~upshipweapon, ~!upshipweapon2
+	RenderSprites:
+		Image: upshipweapon
+	ProvidesPrerequisite:
+
+upshiparmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ship Plating Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upshiparmor.description
+		Prerequisites: ~scarmory, ~!upshiparmor
+	RenderSprites:
+		Image: upshiparmor
+	ProvidesPrerequisite:
+
+upshiparmor2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ship Plating Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upshiparmor2.description
+		Prerequisites: ~scsciencefacility, ~upshiparmor, ~!upshiparmor2
+	RenderSprites:
+		Image: upshiparmor
+	ProvidesPrerequisite:
+
+	####################################################################################################
+	#		Upgrades Zerg
+	####################################################################################################
+
+upoverlordspeed:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Pneumatized Carapace
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upoverlordspeed.description
+		Prerequisites: ~schatchery, ~!upoverlordspeed
+	RenderSprites:
+		Image: upoverlordspeed
+	ProvidesPrerequisite:
+
+uplingspeed:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Metabolic Boost
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-uplingspeed.description
+		Prerequisites: ~scspawningpool, ~scevolutionchamber, ~!uplingspeed
+	RenderSprites:
+		Image: uplingspeed
+	ProvidesPrerequisite:
+
+uplingattack:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Adrenal Glands
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-uplingattack.description
+		Prerequisites: ~scevolutionchamber, ~!uplingattack
+	RenderSprites:
+		Image: uplingattack
+	ProvidesPrerequisite:
+
+upzergrange:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Grooved Spines
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upzergrange.description
+		Prerequisites: ~schydraliskden, ~!upzergrange
+	RenderSprites:
+		Image: upzergrange
+	ProvidesPrerequisite:
+
+upzergmelee:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Melee Attacks Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upzergmelee.description
+		Prerequisites: ~scevolutionchamber, ~!upzergmelee
+	RenderSprites:
+		Image: upzergmelee
+	ProvidesPrerequisite:
+
+upzergmelee2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Melee Attacks Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upzergmelee2.description
+		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmelee, ~!upzergmelee2
+	RenderSprites:
+		Image: upzergmelee
+	ProvidesPrerequisite:
+
+upzergmissile:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Missile Attacks Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upzergmissile.description
+		Prerequisites: ~scevolutionchamber, ~!upzergmissile
+	RenderSprites:
+		Image: upzergmissile
+	ProvidesPrerequisite:
+
+upzergmissile2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Missile Attacks Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upzergmissile2.description
+		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmissile, ~!upzergmissile2
+	RenderSprites:
+		Image: upzergmissile
+	ProvidesPrerequisite:
+
+upcarapace:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Carapace Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upcarapace.description
+		Prerequisites: ~scevolutionchamber, ~!upcarapace
+	RenderSprites:
+		Image: upcarapace
+	ProvidesPrerequisite:
+
+upcarapace2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Carapace Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upcarapace2.description
+		Prerequisites: ~scevolutionchamber, ~schive, ~upcarapace, ~!upcarapace2
+	RenderSprites:
+		Image: upcarapace
+	ProvidesPrerequisite:
+
+upflyerattack:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Attacks Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upflyerattack.description
+		Prerequisites: ~scspire, ~!upflyerattack
+	RenderSprites:
+		Image: upflyerattack
+	ProvidesPrerequisite:
+
+upflyerattack2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Attacks Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upflyerattack2.description
+		Prerequisites: ~scspire, ~schive, ~upflyerattack, ~!upflyerattack2
+	RenderSprites:
+		Image: upflyerattack
+	ProvidesPrerequisite:
+
+upflyerarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Carapace Level 1
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: actor-upflyerarmor.description
+		Prerequisites: ~scspire, ~!upflyerarmor
+	RenderSprites:
+		Image: upflyerarmor
+	ProvidesPrerequisite:
+
+upflyerarmor2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Flyer Carapace Level 2
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: actor-upflyerarmor2.description
+		Prerequisites: ~scspire, ~schive, ~upflyerarmor, ~!upflyerarmor2
+	RenderSprites:
+		Image: upflyerarmor
+	ProvidesPrerequisite:
+####################################################################################################
+#		XELNAGA BOSS
+####################################################################################################
+####################################################################################################
+#		Confederation
+####################################################################################################
+####################################################################################################
+#		Sons of Korhal
+####################################################################################################
+####################################################################################################
+#		Rebels of Raynor
+####################################################################################################
+####################################################################################################
+#		Dark Templars
+####################################################################################################
+####################################################################################################
+#		Templars
+####################################################################################################
+####################################################################################################
+#		Infested Colony
+####################################################################################################

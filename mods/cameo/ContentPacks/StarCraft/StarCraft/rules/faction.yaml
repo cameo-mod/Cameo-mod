@@ -1,0 +1,87 @@
+World:
+	FactionCA@terran:
+		Name: Terran SC
+		InternalName: terran
+		Game: StarCraft
+		Side: StarCraft
+		Description: faction-terran.description
+	FactionCA@protoss:
+		Name: Protoss SC
+		InternalName: protoss
+		Game: StarCraft
+		Side: StarCraft
+		Description: faction-protoss.description
+	FactionCA@zerg:
+		Name: Zerg SC
+		InternalName: zerg
+		Game: StarCraft
+		Side: StarCraft
+		Description: faction-zerg.description
+	FactionCA@RandomSC:
+		Name: Random StarCraft
+		InternalName: RandomSC
+		RandomFactionMembers: terran, protoss, zerg
+		Game: StarCraft
+		Side: Random
+		Description: faction-randomsc.description
+	####################################################################################################
+	#		SC TERRAN
+	####################################################################################################
+	StartingUnits@mcvonlyterran:
+		Class: none
+		ClassName: MCV Only
+		Factions: terran
+		BaseActor: sctmcv
+	StartingUnits@defaultterran:
+		Class: light
+		ClassName: Light Support
+		Factions: terran
+		BaseActor: sctmcv
+		SupportActors: scmarine,scmarine,scmarine,scfirebat,scmedic,scvulture
+	StartingUnits@heavyterran:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: terran
+		BaseActor: sctmcv
+		SupportActors: scmarine,scmarine,scfirebat,scmedic,scvulture,scsiegetank,scsiegetank
+	####################################################################################################
+	#		SC PROTOSS
+	####################################################################################################
+	StartingUnits@mcvonlyprotoss:
+		Class: none
+		ClassName: MCV Only
+		Factions: protoss
+		BaseActor: scpmcv
+	StartingUnits@defaultprotoss:
+		Class: light
+		ClassName: Light Support
+		Factions: protoss
+		BaseActor: scpmcv
+		SupportActors: sczealot, scdragoon
+	StartingUnits@heavyprotoss:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: protoss
+		BaseActor: scpmcv
+		SupportActors: sczealot, sczealot, scdragoon, scdragoon
+	####################################################################################################
+	#		SC ZERG
+	####################################################################################################
+	StartingUnits@mcvonlyzerg:
+		Class: none
+		ClassName: MCV Only
+		Factions: zerg
+		BaseActor: sczmcv
+		SupportActors: scoverlord
+	StartingUnits@defaultzerg:
+		Class: light
+		ClassName: Light Support
+		Factions: zerg
+		BaseActor: sczmcv
+		SupportActors: scoverlord, sczergling, sczergling, sczergling, sczergling, schydralisk, schydralisk
+	StartingUnits@heavyzerg:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: zerg
+		BaseActor: sczmcv
+		SupportActors: scoverlord, sczergling, sczergling, sczergling, sczergling, sczergling, sczergling, sczergling, sczergling, schydralisk, schydralisk, schydralisk, schydralisk

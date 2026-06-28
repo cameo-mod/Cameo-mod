@@ -1,0 +1,2638 @@
+SCCOMMANDCENTER:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@shape: ^3x2Shape
+	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits@conyard: ^Conyard
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Tooltip:
+		Name: Command Center
+	Power:
+		Amount: 100
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Transforms:
+		IntoActor: sccommandcenterm
+		Offset: 1,1
+		Facing: 432
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@buildingname:
+	WithBuildingBib:
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	Refinery:
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	Voiced:
+		VoiceSet: SCCommandCenterVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCSUPPLYDEPOT:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@storage: ^StoresResources
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Supply Depot
+	Valued:
+		Cost: 800
+	Power:
+		Amount: 200
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		Prerequisites: ~sccommandcenter
+		Queue: Building, RABuilding
+		Description: actor-scsupplydepot.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: tscupd00.aud
+	Health:
+		HP: 200000
+	StoresResources:
+		Capacity: 4000
+	RevealsShroud:
+		Range: 5c0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	WithIdleOverlay@fans:
+		RequiresCondition: supplydepotupg
+		Sequence: fans
+		Palette: greyscale
+	DamageMultiplier@supplydepotupg:
+		RequiresCondition: supplydepotupg
+		Modifier: 50
+	StoresPlayerResources@supplydepotupg:
+		Capacity: 4000
+		RequiresCondition: supplydepotupg
+	GrantConditionOnPrerequisite@upsupplydepot1:
+		Condition: upsupplydepot1
+		Prerequisites: upsupplydepot1
+	PowerMultiplier@upsupplydepot1:
+		Modifier: 150
+		RequiresCondition: upsupplydepot1 && !upsupplydepot2
+	GrantConditionOnPrerequisite@upsupplydepot2:
+		Condition: upsupplydepot2
+		Prerequisites: upsupplydepot2
+	PowerMultiplier@upsupplydepot2:
+		Modifier: 200
+		RequiresCondition: upsupplydepot2
+	ProvidesPrerequisite:
+		Prerequisite: supplydepotupgradeavailable
+		RequiresCondition: !supplydepotupg
+	PowerMultiplier@supplydepotupg:
+		Modifier: 200
+		RequiresCondition: supplydepotupg
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			scsupplydepot: supplydepotupg
+		Requirements:
+			scsupplydepot: !build-incomplete && !supplydepotupg
+	WithBuildingBib:
+	Voiced:
+		VoiceSet: SCSupplyCenterVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upsupplydepot1, upsupplydepot2
+
+supplydepotexpand:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Expanded Storage
+	Valued:
+		Cost: 800
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~sccommandcenter, supplydepotupgradeavailable
+		Description: actor-supplydepotexpand.description
+	Plug:
+		Type: scsupplydepot
+	RenderSprites:
+		Image: scsupplydepot
+
+SCREFINERY:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@ref: ^SCRefineryCommon
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Refinery
+	Power:
+		Amount: 0
+	Buildable:
+		Prerequisites: ~sccommandcenter
+		BuildPaletteOrder: 20
+		Queue: Building, RABuilding
+		Description: actor-screfinery.description
+	Building:
+		Footprint: _x_ xxx ===
+		BuildSounds: tscupd00.aud
+		Dimensions: 3,3
+	WithBuildingBib:
+	FreeActor@1:
+		Actor: scscv
+		SpawnOffset: 0,2
+		Facing: 540
+	FreeActor@2:
+		Actor: scscv
+		SpawnOffset: 0,2
+		Facing: 540
+	SelectionDecorations:
+	Refinery:
+	DamageMultiplier@refineryupg:
+		RequiresCondition: refineryupg
+		Modifier: 50
+	WithIdleOverlay@smoke:
+		RequiresCondition: refineryupg
+		Sequence: smoke
+		Palette: greyscale
+	SeedsResource:
+		ResourceType: SCGas
+		Interval: 125
+		RequiresCondition: refineryupg
+	CashTrickler@refineryupg:
+		RequiresCondition: refineryupg
+		Interval: 50
+		Amount: 25
+		ShowTicks: True
+	ProvidesPrerequisite:
+		Prerequisite: sctrefineryupgradeavailable
+		RequiresCondition: !refineryupg
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			screfinery: refineryupg
+		Requirements:
+			screfinery: !build-incomplete && !refineryupg
+	Voiced:
+		VoiceSet: SCRefineryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: sctvespenegascollector
+
+sctvespenegascollector:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Vespene Gas Collector
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~sccommandcenter, sctrefineryupgradeavailable
+		Description: actor-sctvespenegascollector.description
+	Plug:
+		Type: screfinery
+	RenderSprites:
+		Image: upscrefinery1
+
+SCBARRACKS:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@barr: ^IsBarrack
+	Tooltip:
+		Name: Barracks
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~sccommandcenter
+		Queue: Building, RABuilding
+		Description: actor-scbarracks.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	ProductionQueue@INFANTRY:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@terran:
+		Multiplier: 125
+	ProductionTimeMultiplier@terran:
+		Multiplier: 125
+	DamageMultiplier@terran:
+		Modifier: 75
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scbarracksm
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCGenericBuildingVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCACADEMY:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Academy
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~sccommandcenter, scbarracks
+		Queue: Building, RABuilding
+		Description: actor-scacademy.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+	Voiced:
+		VoiceSet: SCAcademyVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCENGINEERINGBAY:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Tooltip:
+		Name: Engineering Bay
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~sccommandcenter, scbarracks
+		Queue: Building, RABuilding
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Description: actor-scengineeringbay.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scengineeringbaym
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCEngineeringBayVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCBUNKER:
+	Inherits: ^Defense
+	Inherits@Template: ^BunkerTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@shape: ^2x2Shape
+	Inherits@speedup: ^SCUnitProductionSpeedBoost
+	Inherits@gar: ^ClearableGarrisonNeutronOnly
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Tooltip:
+		Name: Bunker
+	Power:
+		Amount: 0
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~sccommandcenter, scbarracks
+		Description: actor-scbunker.description
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 240000
+	Turreted:
+		TurnSpeed: 1023
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 4
+		EjectOnDeath: false
+		# InitialUnits: scmarine, scfirebat, scmarauder, scmarine
+	WithCargoSounds:
+		EnterSounds: tdrtra00.wav
+		ExitSounds: tdrtra00.wav
+	FireWarheadsOnDeath@healer:
+		Weapon: FakeHealtAPC
+	AttackOpenTopped:
+		Armaments: garrisoned
+		PortOffsets: 300,400,200, -400,500,200, 300,-400,200, -400,-500,200
+		PauseOnCondition: chronobeamed
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 6666
+	-QuantizeFacingsFromSequence:
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	Voiced:
+		VoiceSet: SCGenericBuildingVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmecharmor, upmecharmor2
+
+SCMISSILETURRET:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	-WithTurretSearchlight:
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@shape: ^2x2Shape
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Missile Turret
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~sccommandcenter, scengineeringbay
+		Queue: Defence, RADefence
+		Description: actor-scmissileturret.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: tscupd00.aud
+	Health:
+		HP: 200000
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 0
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament@1:
+		Weapon: MissileTurret
+		LocalOffset: 200,-200,200
+	Armament@2:
+		Weapon: MissileTurret
+		LocalOffset: 200,200,200
+	AttackPopupTurreted:
+		CloseDelay: 25
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	-ActorPreviewPlaceBuildingPreview:
+	SequencePlaceBuildingPreview:
+		Sequence: place
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 11626
+	DetectCloaked:
+		Range: 5813
+	Power:
+		Amount: -60
+	Voiced:
+		VoiceSet: SCAATowerVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+SCSENTINEL:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@detect: ^GenericAllDetector
+	Inherits@EMP: ^TurretEMP
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@armor: ^TerranVehiclesWeaponUpgrades
+	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~sccommandcenter, scbarracks
+		Description: template-anti-infantry-defense.description
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Sentinel
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+		BuildSounds: tscupd00.aud
+	Health:
+		HP: 160000
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: -1,1,1
+		RealignDelay: -1
+	AttackTurreted:
+		Voice: Attack
+	Armament:
+		Weapon: NaxLaserT
+		LocalOffset: 600,0,600
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !upnax2_ylaser
+	ProvidesPrerequisite@buildingname:
+	Transforms:
+		IntoActor: scsentinelm
+		Offset: 0,0
+		NoTransformNotification: BuildingCannotPlaceAudio
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AutoTarget:
+	Power:
+		Amount: -40
+	RevealsShroud:
+		Range: 8181
+	DetectCloaked:
+		Range: 4090
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ProvidesPrerequisite@buildingname:
+	ActorStatValues:
+		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+SCFACTORY:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@weap: ^IsWeaponFactory
+	Tooltip:
+		Name: Weapons Factory
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~sccommandcenter, scbarracks
+		Queue: Building, RABuilding
+		Description: actor-scfactory.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	ProductionQueue@VEHICLE:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@terran:
+		Multiplier: 125
+	ProductionTimeMultiplier@terran:
+		Multiplier: 125
+	DamageMultiplier@terran:
+		Modifier: 75
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3472, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scfactorym
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCGenericBuildingVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCARMORY:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Armory
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~sccommandcenter, scfactory
+		Queue: Building, RABuilding
+		Description: actor-scarmory.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+	Voiced:
+		VoiceSet: SCArmoryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCSTARPORT:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@hpad: ^IsAircraftFactory
+	Tooltip:
+		Name: Starport
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~sccommandcenter, scfactory
+		Queue: Building, RABuilding
+		Description: actor-scstarport.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	ProductionQueue@AIRCRAFT:
+		LowPowerModifier: 10000
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	WithBuildingBib:
+	Transforms:
+		IntoActor: scstarportm
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCArmoryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCSCIENCEFACILITY:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@tech: ^IsTechnoBuilding
+	Tooltip:
+		Name: Science Facility
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 90
+		Prerequisites: ~sccommandcenter, scfactory, scstarport
+		Queue: Building, RABuilding
+		Description: actor-scsciencefacility.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: tscupd00.aud
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	WithBuildingBib:
+		Sequence: smoke
+	SupportPowerChargeBar:
+	Transforms:
+		IntoActor: scsciencefacilitym
+		Offset: 1,1
+		NoTransformNotification: BuildingCannotPlaceAudio
+	Voiced:
+		VoiceSet: SCScienceFacilityVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCTerranMSLO:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Tooltip:
+		Name: Terran Missile Silo
+	Power:
+		Amount: 0
+	Buildable:
+		Prerequisites: ~sccommandcenter, scsciencefacility, ~techlevel.superweapons, !SCTerranMSLO
+		Description: actor-mslo.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: tscupd00.aud
+	NukePowerCA:
+		OrderName: NukePowerInfoOrder
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Cursor: nuke
+		Icons:
+			1: abomb
+		ChargeInterval: 10500
+		Names:
+			1: power-nuke.raname
+		Descriptions:
+			1: power-nuke.description
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear Missile ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear Missile launched.
+		MissileWeapons:
+			1: raatomic
+		MissileDelay: 5
+		SpawnOffset: 1c0,427,0
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		SupportPowerPaletteOrder: 70
+		MissileImage: scatomic
+		MissilePalette: greyscale
+		BeaconActor: BLASTRADIUS.atomic
+	WithBuildingBib:
+	# WithSupportPowerActivationAnimation:
+	# 	RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: abomb
+	Voiced:
+		VoiceSet: SCNuclearSiloVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		BUILDING PROTOSS
+####################################################################################################
+
+SCNEXUS:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@shape: ^3x2Shape
+	Inherits@radar: ^RadarBuilding
+	-Production@Upgrades:
+	-ProductionBar@Upgrades:
+	Inherits@conyard: ^Conyard
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Nexus
+	Power:
+		Amount: 100
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@buildingname:
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	Refinery:
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	Transforms:
+		IntoActor: scpmcv
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCPYLON:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	Inherits@storage: ^StoresResources
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Pylon
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: 250
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~scnexus
+		Queue: Building, RABuilding
+		Description: actor-scpylon.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: pshbld03.aud
+	Health:
+		HP: 250000
+	StoresResources:
+		Capacity: 5000
+	RevealsShroud:
+		Range: 5c0
+	GrantConditionOnPrerequisite@uppylon1:
+		Condition: uppylon1
+		Prerequisites: uppylon1
+	Power@uppylon1:
+		Amount: 150
+		RequiresCondition: uppylon1 && !uppylon2
+	GrantConditionOnPrerequisite@uppylon2:
+		Condition: uppylon2
+		Prerequisites: uppylon2
+	Power@uppylon2:
+		Amount: 200
+		RequiresCondition: uppylon2
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: uppylon1, uppylon2
+
+SCASSIMILATOR:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Assimilator
+	Power:
+		Amount: 0
+	Buildable:
+		Prerequisites: ~scnexus
+		BuildPaletteOrder: 20
+		Queue: Building, RABuilding
+		Description: actor-scassimilator.description
+	Building:
+		Footprint: _x_ xxx ===
+		BuildSounds: pshbld03.aud
+		Dimensions: 3,3
+	FreeActor@1:
+		Actor: scprobe
+		SpawnOffset: 0,2
+		Facing: 540
+	FreeActor@2:
+		Actor: scprobe
+		SpawnOffset: 0,2
+		Facing: 540
+	SelectionDecorations:
+	Refinery:
+	DamageMultiplier@assimilatorupg:
+		RequiresCondition: assimilatorupg
+		Modifier: 50
+	WithIdleOverlay@smoke:
+		RequiresCondition: assimilatorupg
+		Sequence: smoke
+		Palette: greyscale
+	SeedsResource:
+		ResourceType: SCGas2
+		Interval: 125
+		RequiresCondition: assimilatorupg
+	CashTrickler@assimilatorupg:
+		RequiresCondition: assimilatorupg
+		Interval: 50
+		Amount: 25
+		ShowTicks: True
+	ProvidesPrerequisite:
+		Prerequisite: scprefineryupgradeavailable
+		RequiresCondition: !assimilatorupg
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			scassimilator: assimilatorupg
+		Requirements:
+			scassimilator: !build-incomplete && !assimilatorupg
+	Voiced:
+		VoiceSet: SCRefineryVoice
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: scpvespenegascollector
+
+scpvespenegascollector:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Vespene Gas Collector
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~scnexus, scprefineryupgradeavailable
+		Description: actor-scpvespenegascollector.description
+	Plug:
+		Type: scassimilator
+	RenderSprites:
+		Image: upscrefinery2
+
+SCGATEWAY:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@barr: ^IsBarrack
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Gateway
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~scnexus
+		Queue: Building, RABuilding
+		Description: actor-scgateway.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	ProductionQueue@INFANTRY:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@protoss:
+		Multiplier: 125
+	ProductionTimeMultiplier@protoss:
+		Multiplier: 125
+	DamageMultiplier@protoss:
+		Modifier: 75
+	ProvidesPrerequisite@buildingname:
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCFORGE:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Forge
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~scnexus
+		Queue: Building, RABuilding
+		Description: actor-scforge.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCPHOTONCANNON:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@shape: ^2x2Shape
+	Inherits@POWERDOWN: ^DisableOnPowerDown
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Inherits@weapon: ^ProtossGroundWeaponUpgrades
+	Inherits@armor: ^ProtossGroundArmorUpgrades
+	Inherits@range: ^SingularityChargeUpgrade
+	-WithTurretSearchlight:
+	Tooltip:
+		Name: Photon Cannon
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~scnexus, scforge
+		Queue: Defence, RADefence
+		Description: actor-scphotoncannon.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: pshbld03.aud
+	Health:
+		HP: 200000
+	Turreted:
+		InitialFacing: 0
+		RealignDelay: -1
+	WithEmbeddedTurretSpriteBody:
+		QuantizedFacings: 16
+	Armament:
+		Weapon: PhotonCannon
+		LocalOffset: 0,0,500
+	AttackPopupTurreted:
+		CloseDelay: 40
+		ClosedDamageMultiplier: 100
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+	BodyOrientation:
+		QuantizedFacings: 16
+	-WithSpriteBody:
+	-WithDeathAnimation:
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	RevealsShroud:
+		Range: 8228
+	DetectCloaked:
+		Range: 4224
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+
+SCCYBERNETICSCORE:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Cybernetics Core
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 50
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~scnexus, scgateway
+		Queue: Building, RABuilding
+		Description: actor-sccyberneticscore.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCSHIELDBATTERY:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@EMP: ^TurretEMP
+	Inherits@shape: ^3x2Shape
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Shield Battery
+	Building:
+		Footprint: === =x=
+		Dimensions: 3,2
+		BuildSounds: pshbld03.aud
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~scnexus, scgateway
+		Queue: Building, RABuilding
+		Description: actor-scshieldbattery.description
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 10000
+	Armament:
+		Weapon: Heal
+		#Cursor: heal
+		#OutsideRangeCursor: heal
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+	AttackTurreted:
+	Turreted:
+		TurnSpeed: 40
+	WithEmbeddedTurretSpriteBody:
+	AutoTarget:
+		ScanRadius: 10
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry, Vehicle
+	ProximityExternalCondition@shieldgen:
+		Range: 10000
+		Condition: shieldgen
+		EnableSound: shielded_on.aud
+		DisableSound: shielded_on.aud
+		RequiresCondition: !disabled
+	WithRangeCircle@shieldgen:
+		Range: 10000
+		Type: shield
+		Color: 8888FF88
+		RequiresCondition: !disabled
+	RallyPoint:
+	RepairsUnits:
+		ValuePercentage: 0
+		HpPerStep: 500
+		Interval: 12
+	-WithSpriteBody:
+	-GivesBuildableArea:
+	-WithDeathAnimation:
+	FirepowerMultiplier@upplasmashield:
+		Modifier: 200
+		RequiresCondition: upplasmashield
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCROBOTICSFACILITY:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@weap: ^IsWeaponFactory
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Robotics Facility
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~scnexus, sccyberneticscore
+		Queue: Building, RABuilding
+		Description: actor-scroboticsfacility.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	ProductionQueue@VEHICLE:
+		LowPowerModifier: 10000
+	ProductionCostMultiplier@protoss:
+		Multiplier: 125
+	ProductionTimeMultiplier@protoss:
+		Multiplier: 125
+	DamageMultiplier@protoss:
+		Modifier: 75
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCSTARGATE:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^3x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@hpad: ^IsAircraftFactory
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Stargate
+	Power:
+		Amount: 0
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~scnexus, sccyberneticscore
+		Queue: Building, RABuilding
+		Description: actor-scstargate.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	ProductionQueue@AIRCRAFT:
+		LowPowerModifier: 10000
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCCITADELOFADUN:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Citadel of Adun
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 80
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Prerequisites: ~scnexus, sccyberneticscore
+		Queue: Building, RABuilding
+		Description: actor-sccitadelofadun.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCROBOTICSSUPPORTBAY:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Robotics Support Bay
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 90
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Prerequisites: ~scnexus, scroboticsfacility
+		Queue: Building, RABuilding
+		Description: actor-scroboticssupportbay.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCFLEETBEACON:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Fleet Beacon
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 130
+		Prerequisites: ~scnexus, scstargate
+		Queue: Building, RABuilding
+		Description: actor-scfleetbeacon.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	IonCannonPower:
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: ioncannon
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		WeaponDelay: 0
+		Weapon: SteelIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names:
+			1: power-ioncannon.name
+		Descriptions:
+			1: power-ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Ion Cannon ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: ion1.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20
+	SupportPowerChargeBar:
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCTEMPLARARCHIVES:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Templar Archives
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 110
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Prerequisites: ~scnexus, sccitadelofadun, scgateway
+		Queue: Building, RABuilding
+		Description: actor-sctemplararchives.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCOBSERVATORY:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@radar: ^RadarBuilding
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Observatory
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 100
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~scnexus, scroboticsfacility
+		Queue: Building, RABuilding
+		Description: actor-scobservatory.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCARBITERTRIBUNAL:
+	Inherits: ^BaseBuildingProtoss
+	Inherits@shape: ^2x2Shape
+	Inherits@explode: ^BuildingExplodeProtoss
+	Inherits@shieldgenerator: ^ProtossPersonalShield
+	Tooltip:
+		Name: Arbiter Tribunal
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 120
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Prerequisites: ~scnexus, scstargate, sctemplararchives
+		Queue: Building, RABuilding
+		Description: actor-scarbitertribunal.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: pshbld03.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		BUILDING ZERG
+####################################################################################################
+
+SCHATCHERY:
+	Inherits: ^BaseBuildingZerg
+	Inherits@ref: ^SCRefineryCommon
+	Inherits@shape: ^3x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits@breedfaster: ^SCBREEDFASTER
+	#Inherits@barr: ^IsBarrack
+	Inherits@conyard: ^Conyard
+	Tooltip:
+		Name: Hatchery
+		RequiresCondition: !sclair && !schive
+	Tooltip@2:
+		Name: Lair
+		RequiresCondition: sclair && !schive
+	Tooltip@3:
+		Name: Hive
+		RequiresCondition: schive
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@sclair:
+		Prerequisite: sclair
+		RequiresCondition: sclair
+	ProvidesPrerequisite@schive:
+		Prerequisite: schive
+		RequiresCondition: schive
+	ProvidesPrerequisite@lairupgradeavailable:
+		Prerequisite: lairupgradeavailable
+		RequiresCondition: !sclair
+	ProvidesPrerequisite@hiveupgradeavailable:
+		Prerequisite: hiveupgradeavailable
+		RequiresCondition: sclair && !schive
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			schatchery: sclair
+		Requirements:
+			schatchery: !sclair
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			sclair: schive
+		Requirements:
+			sclair: sclair && !schive
+	WithSpriteBody:
+		RequiresCondition: !sclair && !schive
+	WithSpriteBody@lair:
+		Sequence: lair
+		Name: lair
+		RequiresCondition: sclair && !schive
+	WithSpriteBody@hive:
+		Sequence: hive
+		Name: hive
+		RequiresCondition: schive
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: zchrdy00.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	DamageMultiplier@lair:
+		Modifier: 75
+		RequiresCondition: sclair && !schive
+	DamageMultiplier@hive:
+		Modifier: 50
+		RequiresCondition: schive
+	RallyPoint: ##########
+		Path: 1,2
+	PrimaryBuilding:
+		PrimaryCondition: primary
+		SelectionNotification: PrimaryBuildingSelected
+	WithDecoration@primary:
+		RequiresSelection: true
+		Image: rapips
+		Sequence: tag-primary
+		Position: Top
+		RequiresCondition: primary
+	LarvaProductionQueue@ZINFANTRY:
+		Type: SCZergInfantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 100
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+		MaxParallel: 3
+	ProductionBar@ZINFANTRY:
+		ProductionType: SCZergInfantry
+	LarvaConsumingProduction:
+		Produces: SCZergInfantry
+		EggCondition: sc_zerg_egg
+	Exit@0:
+		SpawnOffset: 0,0,0
+		ExitCell: 0,2
+		Facing: 540
+	Exit@1:
+		SpawnOffset: 0,0,0 #-1323,1280,0
+		ExitCell: 1,2
+		Facing: 540
+	Exit@2:
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi, hatchery, creep
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 3000
+		BodyNames: body, lair, hive
+	-WithDeathAnimation:
+	Refinery:
+	##########
+	Sellable:
+	##########
+	GrantConditionOnProduction@botpowerrestriction:
+		Condition: botpowerrestriction
+		Duration: 1000
+		ShowSelectionBar: False
+		Actors: scbotoverlord
+	ProvidesPrerequisite@botpowerrestriction:
+		Prerequisite: botpowerrestriction
+		RequiresCondition: botpowerrestriction
+		RequiresPrerequisites: !Extractor
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death5:
+		Actor: SCBROODLING
+	StoresResources:
+		Capacity: 1000
+	DroneSpawnerMaster:
+		Actors: sc_zerg_larva, sc_zerg_larva, sc_zerg_larva
+		SpawnOffset: -1024,1024,0, 0,1024,0, 1024,1024,0
+		RespawnTicks: 125
+		InitialActorCount: 0
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	Transforms:
+		IntoActor: sczmcv
+	WithCreepOverlay:
+		Adjacent: 5
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+sclair:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Lair
+	Valued:
+		Cost: 1400
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~schatchery, scspawningpool, lairupgradeavailable
+		Description: actor-sclair.description
+	Plug:
+		Type: schatchery
+	RenderSprites:
+		Image: sclair
+
+schive:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Hive
+	Valued:
+		Cost: 2000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~schatchery, sclair, hiveupgradeavailable
+		Description: actor-schive.description
+	Plug:
+		Type: sclair
+	RenderSprites:
+		Image: schive
+
+SCCREEPCOLONY:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EXPERIENCE: ^GainsExperienceBuildings
+	Inherits@armor: ^ZergGroundArmorUpgrades
+	Inherits@weapon: ^ZergMissileWeaponUpgrades
+	Inherits@range: ^GroovedSpinesUpgrade
+	Inherits: ^BuildingPlugProducer
+	-WithTurretSearchlight:
+	Tooltip:
+		Name: Creep Colony
+		RequiresCondition: !sunken && !spore
+	Tooltip@2:
+		Name: Sunken Colony
+		RequiresCondition: sunken
+	Tooltip@3:
+		Name: Spore Colony
+		RequiresCondition: spore
+	Valued:
+		Cost: 1000
+	ProductionCostMultiplier@guardtower:
+		Multiplier: 50
+	ProductionTimeMultiplier@guardtower:
+		Multiplier: 50
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea:
+		AreaTypes: building, creep
+	RequiresBuildableArea:
+		AreaTypes: creep
+		Adjacent: 4
+		IsCircular: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~schatchery
+		Queue: Building, RABuilding
+		Description: actor-sccreepcolony.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	Health:
+		HP: 80000
+	Armor:
+		Type: Wood
+		RequiresCondition: !(sunken || spore)
+	Armor@Upgrade:
+		Type: Concrete
+		RequiresCondition: sunken || spore
+	DamageMultiplier@evo:
+		Modifier: 50
+		RequiresCondition: sunken || spore
+	ProvidesPrerequisite@sunken:
+		Prerequisite: sunken
+		RequiresCondition: sunken
+	ProvidesPrerequisite@spore:
+		Prerequisite: spore
+		RequiresCondition: spore
+	ProvidesPrerequisite@creepcolonyupgradeavailable:
+		Prerequisite: creepcolonyupgradeavailable
+		RequiresCondition: !sunken && !spore
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			sccreepcolony: sunken
+		Requirements:
+			sccreepcolony: !sunken && !spore
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			sccreepcolony2: spore
+		Requirements:
+			sccreepcolony2: !sunken && !spore
+	Sellable:
+	-WithDeathAnimation:
+	##########
+	WithSpriteBody:
+		RequiresCondition: !sunken && !spore
+	WithSpriteBody@sunken:
+		Sequence: sunken
+		Name: sunken
+		RequiresCondition: sunken && !spore
+	WithSpriteBody@spore:
+		Sequence: spore
+		Name: spore
+		RequiresCondition: spore && !sunken
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+		BodyNames: body, sunken, spore
+	AttackOmni:
+		Armaments: primary, spore
+		PauseOnCondition: disabled
+	WithAttackAnimation:
+		Body: sunken
+		Sequence: shoot
+		RequiresCondition: sunken
+	Armament@sunken:
+		Weapon: Tentacle
+		RequiresCondition: sunken
+	Armament@spore:
+		Name: spore
+		Weapon: Spore
+		RequiresCondition: spore
+	RevealOnFire:
+		ArmamentNames: primary, spore
+	RevealsShroud:
+		Range: 5000
+		RequiresCondition: !(sunken || spore)
+	RevealsShroud@upgraded:
+		Range: 10000
+		RequiresCondition: sunken || spore
+	DetectCloaked@spore:
+		Range: 5000
+		RequiresCondition: (sunken || spore) && !disabled
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	WithCreepOverlay:
+		Adjacent: 5
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+
+SCCREEPCOLONYDEFENSE:
+	Inherits: SCCREEPCOLONY
+	Buildable:
+		Queue: Defence, RADefence
+	RenderSprites:
+		Image: SCCREEPCOLONY
+		PlayerPalette: player_rgba
+
+scsporecolonyupgrade:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Sunken Colony
+	Valued:
+		Cost: 500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~schatchery, creepcolonyupgradeavailable
+		Description: actor-scsporecolonyupgrade.description
+	Plug:
+		Type: sccreepcolony
+	RenderSprites:
+		Image: scsunkencolony
+
+scsunkencolonyupgrade:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Spore Colony
+	Valued:
+		Cost: 500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~schatchery, creepcolonyupgradeavailable
+		Description: actor-scsunkencolonyupgrade.description
+	Plug:
+		Type: sccreepcolony2
+	RenderSprites:
+		Image: scsporecolony
+
+scsunkencolony:
+	Inherits: SCCREEPCOLONY
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Sunken Colony
+	Valued:
+		Cost: 1250
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~schatchery
+		Description: actor-scsunkencolony.description
+	GrantCondition:
+		Condition: sunken
+	Selectable:
+		Class: sccreepcolony
+	RenderSprites:
+		Image: scsunkencolony
+
+scsporecolony:
+	Inherits: SCCREEPCOLONY
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Spore Colony
+	Valued:
+		Cost: 1250
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~schatchery
+		Description: actor-scsporecolony.description
+	GrantCondition:
+		Condition: spore
+	Selectable:
+		Class: sccreepcolony
+	RenderSprites:
+		Image: scsporecolony
+
+SCEXTRACTOR:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^3x2Shape
+	Inherits@ref: ^SCRefineryCommon
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Extractor
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 4
+		IsCircular: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~schatchery
+		Queue: Building, RABuilding
+		Description: actor-scextractor.description
+	Building:
+		Footprint: _x_ xxx ===
+		Dimensions: 3,3
+		BuildSounds: zchrdy00.aud
+	FreeActor@1:
+		Actor: scdrone
+		SpawnOffset: 0,2
+		Facing: 540
+	FreeActor@2:
+		Actor: scdrone
+		SpawnOffset: 0,2
+		Facing: 540
+	SelectionDecorations:
+	Refinery:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	DamageMultiplier@extractorupg:
+		RequiresCondition: extractorupg
+		Modifier: 50
+	WithIdleOverlay@smoke:
+		RequiresCondition: extractorupg
+		Sequence: smoke
+		Palette: greyscale
+	SeedsResource:
+		ResourceType: SCGas3
+		Interval: 125
+		RequiresCondition: extractorupg
+	CashTrickler@extractorupg:
+		RequiresCondition: extractorupg
+		Interval: 50
+		Amount: 25
+		ShowTicks: True
+	ProvidesPrerequisite:
+		Prerequisite: sczrefineryupgradeavailable
+		RequiresCondition: !extractorupg
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			scextractor: extractorupg
+		Requirements:
+			scextractor: !build-incomplete && !extractorupg
+	WithCreepOverlay:
+		Adjacent: 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: sczvespenegascollector
+
+sczvespenegascollector:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Vespene Gas Collector
+	Valued:
+		Cost: 2500
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~schatchery, sczrefineryupgradeavailable
+		Description: actor-sczvespenegascollector.description
+	Plug:
+		Type: scextractor
+	RenderSprites:
+		Image: upscrefinery3
+
+SCSPAWNINGPOOL:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	Tooltip:
+		Name: Spawning Pool
+	Valued:
+		Cost: 1250
+	Health:
+		HP: 125000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		BuildDuration: 375
+		BuildDurationModifier: 100
+		Prerequisites: ~schatchery
+		Queue: Building, RABuilding
+		Description: actor-scspawningpool.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCEVOLUTIONCHAMBER:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Evolution Chamber
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 50
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Prerequisites: ~schatchery
+		Queue: Building, RABuilding
+		Description: actor-scevolutionchamber.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCHYDRALISKDEN:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Hydralisk Den
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 60
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~schatchery, scspawningpool
+		Queue: Building, RABuilding
+		Description: actor-schydraliskden.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCQUEENSNEST:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Queen's Nest
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~schatchery, sclair
+		Queue: Building, RABuilding
+		Description: actor-scqueensnest.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCSPIRE:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Spire
+		RequiresCondition: !spirecondition
+	Tooltip@2:
+		Name: Greater Spire
+		RequiresCondition: spirecondition
+	Valued:
+		Cost: 1500
+	Health:
+		HP: 150000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@scgreaterspire:
+		Prerequisite: scgreaterspire
+		RequiresCondition: scgreaterspire
+	Buildable:
+		BuildPaletteOrder: 80
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~schatchery, sclair
+		Queue: Building, RABuilding
+		Description: actor-scspire.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	GivesBuildableArea:
+		AreaTypes: building, spire
+	-WithDeathAnimation:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+		BodyNames: body, greaterspire
+	WithSpriteBody:
+		RequiresCondition: !scgreaterspire
+	WithSpriteBody@greaterspire:
+		Sequence: greaterspire
+		Name: greaterspire
+		RequiresCondition: scgreaterspire
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			scspire: scgreaterspire
+		Requirements:
+			scspire: !scgreaterspire
+	DamageMultiplier@scgreaterspire:
+		RequiresCondition: scgreaterspire
+		Modifier: 50
+	ProvidesPrerequisite:
+		Prerequisite: greaterspireupgradeavailable
+		RequiresCondition: !scgreaterspire
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCGREATERSPIRE:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Greater Spire
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 80
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Queue: BuildingAddons
+		Prerequisites: ~schatchery, sclair, greaterspireupgradeavailable
+		Description: actor-scgreaterspire.description
+	Plug:
+		Type: scspire
+	RenderSprites:
+		Image: scgreaterspire
+
+SCULTRALISKCAVERN:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Ultralisk Cavern
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 90
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~schatchery, schive
+		Queue: Building, RABuilding
+		Description: actor-scultraliskcavern.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	#Production@Research:
+	#	Produces: UltraCave
+	#ProductionQueue@Research:
+	#	Type: UltraCave
+	#	DisplayOrder: 10
+	#	Group: Upgrade
+	#	ItemLimit: 1
+	#	DisallowPaused: true
+	#ProductionBar@Research:
+	#	ProductionType: UltraCave
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death4:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCDEFILERMOUND:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Tooltip:
+		Name: Defiler Mound
+	Valued:
+		Cost: 2000
+	Health:
+		HP: 200000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildDuration: 500
+		BuildDurationModifier: 100
+		Prerequisites: ~schatchery, schive
+		Queue: Building, RABuilding
+		Description: actor-scdefilermound.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 2000
+	-WithDeathAnimation:
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCNYDUSCANAL:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Nydus Canal
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 8010
+		Prerequisites: ~wip-content
+		Queue: Building, RABuilding
+		Description: actor-scnyduscanal.description
+	Building:
+		Footprint: ++ ++
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	Health:
+		HP: 25000
+	RevealsShroud:
+		Range: 7c0
+	RallyPoint:
+		Path: 1,1
+		IsPlayerPalette: true
+	Exit:
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death2:
+		Actor: SCBROODLING
+	SpawnActorOnDeath@death3:
+		Actor: SCBROODLING
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+SCOVERMIND:
+	Inherits: ^BaseBuildingZerg
+	Inherits@radar: ^RadarBuilding
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^2x2Shape
+	Inherits@DisabledOverlay: ^DisabledOverlay
+	Tooltip:
+		Name: Overmind
+	Power:
+		Amount: 2000
+	StoresResources:
+		Capacity: 10000
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		Prerequisites: ~schatchery, schive, derricklimit
+		Queue: Building, RABuilding
+		Description: actor-scovermind.description
+		IconPalette: windows256
+		BuildLimit: 1
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: zchrdy00.aud
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	Production@Research:
+		Produces: Research
+	ProductionBar@Research:
+		ProductionType: Research
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	SelectionDecorations:
+	-WithMakeAnimation:
+	WithLoopedMakeAnimation:
+		Duration: 3000
+	-WithDeathAnimation:
+	-ToggleConditionOnOrder:
+	SpawnActorOnDeath@death1:
+		Actor: SCOVERLORD
+	SpawnActorOnDeath@death2:
+		Actor: SCOVERLORD
+	SpawnActorOnDeath@death3:
+		Actor: SCOVERLORD
+
+SCINFESTEDCOMMANDCENTER:
+	Inherits: ^BaseBuildingZerg
+	Inherits@shape: ^2x2Shape
+	Inherits@supply: ^SCUnitProduction
+	Inherits@weap: ^IsWeaponFactory
+	Tooltip:
+		Name: Infested Command Center
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: zchrdy00.aud
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 8020
+		Prerequisites: ~schatchery, scovermind
+		Queue: Building, RABuilding
+		Description: actor-scinfestedcommandcenter.description
+		IconPalette: windows256
+	WithBuildingBib:
+	ProductionQueue@VEHICLE:
+		LowPowerModifier: 10000
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 2560, 0, 0
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		UNIT TERRAN
+####################################################################################################

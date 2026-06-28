@@ -1,0 +1,724 @@
+^SCSmallShadow:
+	# WithIdleOverlay@Shadow:
+	# 	Sequence: shadow
+	# 	Offset: 0,0,-280
+
+^SCWorker:
+	Valued:
+		Cost: 500
+	Power:
+		Amount: -25
+	Mobile:
+		Locomotor: swimsuit
+		TurnSpeed: 100
+		Speed: 100
+	Hovers:
+	Health:
+		HP: 45000
+	Repairable:
+		HpPerStep: 2250
+	ChangesHealth@SelfHealing:
+		Step: 18
+	FirepowerMultiplier@repair:
+		Modifier: 25
+	Armor:
+		Type: Light
+	StoresResources:
+		Capacity: 5
+	Buildable:
+		BuildPaletteOrder: 10
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		Queue: Infantry, RAInfantry
+	Harvester:
+		BaleLoadDelay: 5
+		BaleUnloadDelay: 1
+		BaleUnloadAmount: 5
+		FullyLoadedSpeed: 100
+	StoresResources:
+		Capacity: 5
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
+	Capturable:
+		Types: thiefproof
+	WithHarvestAnimation:
+	WithDockingAnimation:
+
+^SCRefineryCommon:
+	Inherits: ^Refinery
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+
+^SCUnitProduction:
+	Inherits@prod: ^ProducesUnits
+	GrantConditionOnPowerState@supply:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	ProvidesPrerequisite@supplylimit:
+		Prerequisite: supplylimit
+		RequiresCondition: lowpower
+	Production@NORMAL:
+		PauseOnCondition: lowpower || disabled
+	Production@CLASSICPRODUCTIONQUEUES:
+		PauseOnCondition: lowpower || disabled
+
+^SCUnitProductionSpeedBoost:
+	ProductionTimeMultiplier@speedup:
+		Multiplier: 75
+
+####################################################################################################
+#		Terran Upgrade Inherits
+####################################################################################################
+
+^Stimpackable:
+	Inherits@bot: ^BotAutoDeployTimedAbility
+	GrantTimedConditionOnDeploy@stim:
+		DeployedCondition: stimmed
+		CooldownTicks: 550
+		DeployedTicks: 275
+		PauseOnCondition: disabled || nostim
+		RequiresCondition: upstimpack
+		StartsFullyCharged: true
+	SpeedMultiplier@stim:
+		Modifier: 150
+		RequiresCondition: stimmed
+	ReloadDelayMultiplier@stim:
+		Modifier: 50
+		RequiresCondition: stimmed
+	DamageMultiplier@stim:
+		Modifier: 150
+		RequiresCondition: stimmed
+	GrantTimedCondition@stimdamage:
+		Condition: stimdamage
+		Duration: 4
+		RequiresCondition: stimmed
+	ChangesHealth@stimdamage:
+		Step: -2000
+		Delay: 1
+		StartIfBelow: 150
+		DamageTypes: DefaultDeath
+		RequiresCondition: stimdamage
+	GrantConditionOnDamageState@disablestim:
+		Condition: nostim
+		ValidDamageStates: Critical
+	IssueOrderToBot@AI:
+		OrderTrigger: Attack
+		OrderChance: 50
+		OrderInterval: 550
+		RequiresCondition: upstimpack && !nostim && botmicro
+	GrantConditionOnPrerequisite@stim:
+		Condition: upstimpack
+		Prerequisites: upstimpack
+	ActorStatValues:
+		Upgrades: upstimpack
+
+^UraniumShellsUpgrade:
+	RangeMultiplier@upmarinerange:
+		RequiresCondition: upmarinerange
+		Modifier: 120
+	GrantConditionOnPrerequisite@upmarinerange:
+		Condition: upmarinerange
+		Prerequisites: upmarinerange
+	ActorStatValues:
+		Upgrades: upmarinerange
+
+^TerranInfantryWeaponUpgrades:
+	FirepowerMultiplier@upinfweapon:
+		Modifier: 115
+		RequiresCondition: upinfweapon && !upinfweapon2
+	GrantConditionOnPrerequisite@upinfweapon:
+		Condition: upinfweapon
+		Prerequisites: upinfweapon
+	FirepowerMultiplier@upinfweapon2:
+		Modifier: 135
+		RequiresCondition: upinfweapon2
+	GrantConditionOnPrerequisite@upinfweapon2:
+		Condition: upinfweapon2
+		Prerequisites: upinfweapon2
+	ActorStatValues:
+		Upgrades: upinfweapon
+
+^TerranInfantryArmorUpgrades:
+	DamageMultiplier@upinfarmor:
+		Modifier: 90
+		RequiresCondition: upinfarmor && !upinfarmor2
+	GrantConditionOnPrerequisite@upinfarmor:
+		Condition: upinfarmor
+		Prerequisites: upinfarmor
+	DamageMultiplier@upinfarmor2:
+		Modifier: 80
+		RequiresCondition: upinfarmor2
+	GrantConditionOnPrerequisite@upinfarmor2:
+		Condition: upinfarmor2
+		Prerequisites: upinfarmor2
+	ActorStatValues:
+		Upgrades: upinfarmor
+
+^TerranVehiclesWeaponUpgrades:
+	FirepowerMultiplier@upmechweapon:
+		Modifier: 115
+		RequiresCondition: upmechweapon && !upmechweapon2
+	GrantConditionOnPrerequisite@upmechweapon:
+		Condition: upmechweapon
+		Prerequisites: upmechweapon
+	FirepowerMultiplier@upmechweapon2:
+		Modifier: 135
+		RequiresCondition: upmechweapon2
+	GrantConditionOnPrerequisite@upmechweapon2:
+		Condition: upmechweapon2
+		Prerequisites: upmechweapon2
+	ActorStatValues:
+		Upgrades: upmechweapon
+
+^TerranVehicleArmorUpgrades:
+	DamageMultiplier@upmecharmor:
+		Modifier: 90
+		RequiresCondition: upmecharmor && !upmecharmor2
+	GrantConditionOnPrerequisite@upmecharmor:
+		Condition: upmecharmor
+		Prerequisites: upmecharmor
+	DamageMultiplier@upmecharmor2:
+		Modifier: 80
+		RequiresCondition: upmecharmor2
+	GrantConditionOnPrerequisite@upmecharmor2:
+		Condition: upmecharmor2
+		Prerequisites: upmecharmor2
+	ActorStatValues:
+		Upgrades: upmecharmor
+
+^TerranShipWeaponUpgrades:
+	FirepowerMultiplier@upshipweapon:
+		Modifier: 115
+		RequiresCondition: upshipweapon && !upshipweapon2
+	GrantConditionOnPrerequisite@upshipweapon:
+		Condition: upshipweapon
+		Prerequisites: upshipweapon
+	FirepowerMultiplier@upshipweapon2:
+		Modifier: 135
+		RequiresCondition: upshipweapon2
+	GrantConditionOnPrerequisite@upshipweapon2:
+		Condition: upshipweapon2
+		Prerequisites: upshipweapon2
+	ActorStatValues:
+		Upgrades: upshipweapon
+
+^TerranShipArmorUpgrades:
+	DamageMultiplier@upshiparmor:
+		Modifier: 90
+		RequiresCondition: upshiparmor && !upshiparmor2
+	GrantConditionOnPrerequisite@upshiparmor:
+		Condition: upshiparmor
+		Prerequisites: upshiparmor
+	DamageMultiplier@upshiparmor2:
+		Modifier: 80
+		RequiresCondition: upshiparmor2
+	GrantConditionOnPrerequisite@upshiparmor2:
+		Condition: upshiparmor2
+		Prerequisites: upshiparmor2
+	ActorStatValues:
+		Upgrades: upshiparmor
+
+####################################################################################################
+#		Protoss Upgrade Inherits
+####################################################################################################
+
+^SingularityChargeUpgrade:
+	RangeMultiplier@updragoonrange:
+		RequiresCondition: updragoonrange
+		Modifier: 120
+	GrantConditionOnPrerequisite@updragoonrange:
+		Condition: updragoonrange
+		Prerequisites: updragoonrange
+	ActorStatValues:
+		Upgrades: updragoonrange
+
+^ResonatingGlaves:
+	ReloadDelayMultiplier@upglaves:
+		RequiresCondition: upglaves
+		Modifier: 60
+	GrantConditionOnPrerequisite@upglaves:
+		Condition: upglaves
+		Prerequisites: upglaves
+	ActorStatValues:
+		Upgrades: upglaves
+
+^ProtossGroundWeaponUpgrades:
+	FirepowerMultiplier@upgroundweapons:
+		Modifier: 115
+		RequiresCondition: upgroundweapons && !upgroundweapons2
+	GrantConditionOnPrerequisite@upgroundweapons:
+		Condition: upgroundweapons
+		Prerequisites: upgroundweapons
+	FirepowerMultiplier@upgroundweapons2:
+		Modifier: 135
+		RequiresCondition: upgroundweapons2
+	GrantConditionOnPrerequisite@upgroundweapons2:
+		Condition: upgroundweapons2
+		Prerequisites: upgroundweapons2
+	ActorStatValues:
+		Upgrades: upgroundweapons
+
+^ProtossGroundArmorUpgrades:
+	DamageMultiplier@upgroundarmor:
+		Modifier: 90
+		RequiresCondition: upgroundarmor && !upgroundarmor2
+	GrantConditionOnPrerequisite@upgroundarmor:
+		Condition: upgroundarmor
+		Prerequisites: upgroundarmor
+	DamageMultiplier@upgroundarmor2:
+		Modifier: 80
+		RequiresCondition: upgroundarmor2
+	GrantConditionOnPrerequisite@upgroundarmor2:
+		Condition: upgroundarmor2
+		Prerequisites: upgroundarmor2
+	ActorStatValues:
+		Upgrades: upgroundarmor
+
+^ProtossAirWeaponUpgrades:
+	FirepowerMultiplier@upairweapons:
+		Modifier: 115
+		RequiresCondition: upairweapons && !upairweapons2
+	GrantConditionOnPrerequisite@upairweapons:
+		Condition: upairweapons
+		Prerequisites: upairweapons
+	FirepowerMultiplier@upairweapons2:
+		Modifier: 135
+		RequiresCondition: upairweapons2
+	GrantConditionOnPrerequisite@upairweapons2:
+		Condition: upairweapons2
+		Prerequisites: upairweapons2
+	ActorStatValues:
+		Upgrades: upairweapons
+
+^ProtossAirArmorUpgrades:
+	DamageMultiplier@upairarmor:
+		Modifier: 90
+		RequiresCondition: upairarmor && !upairarmor2
+	GrantConditionOnPrerequisite@upairarmor:
+		Condition: upairarmor
+		Prerequisites: upairarmor
+	DamageMultiplier@upairarmor2:
+		Modifier: 80
+		RequiresCondition: upairarmor2
+	GrantConditionOnPrerequisite@upairarmor2:
+		Condition: upairarmor2
+		Prerequisites: upairarmor2
+	ActorStatValues:
+		Upgrades: upairarmor
+
+^GraviticUpgrade:
+	GrantConditionOnPrerequisite@grav:
+		Condition: upspeed
+		Prerequisites: upairspeed
+	SpeedMultiplier@grav:
+		Modifier: 120
+		RequiresCondition: upspeed
+
+####################################################################################################
+#		Zerg Upgrade Inherits
+####################################################################################################
+
+^ZergSwarmerUpgrades:
+	ReloadDelayMultiplier@uplingattack:
+		Modifier: 75
+		RequiresCondition: uplingattack
+	GrantConditionOnPrerequisite@uplingattack:
+		Condition: uplingattack
+		Prerequisites: uplingattack
+	SpeedMultiplier@uplingspeed:
+		Modifier: 133
+		RequiresCondition: uplingspeed
+	GrantConditionOnPrerequisite@uplingspeed:
+		Condition: uplingspeed
+		Prerequisites: uplingspeed
+
+^ZergMeleeWeaponUpgrades:
+	FirepowerMultiplier@upzergmelee:
+		Modifier: 115
+		RequiresCondition: upzergmelee && !upzergmelee2
+	GrantConditionOnPrerequisite@upzergmelee:
+		Condition: upzergmelee
+		Prerequisites: upzergmelee
+	FirepowerMultiplier@upzergmelee2:
+		Modifier: 135
+		RequiresCondition: upzergmelee2
+	GrantConditionOnPrerequisite@upzergmelee2:
+		Condition: upzergmelee2
+		Prerequisites: upzergmelee2
+	ActorStatValues:
+		Upgrades: upzergmelee
+
+^ZergMissileWeaponUpgrades:
+	FirepowerMultiplier@upzergmissile:
+		Modifier: 115
+		RequiresCondition: upzergmissile && !upzergmissile2
+	GrantConditionOnPrerequisite@upzergmissile:
+		Condition: upzergmissile
+		Prerequisites: upzergmissile
+	FirepowerMultiplier@upzergmissile2:
+		Modifier: 135
+		RequiresCondition: upzergmissile2
+	GrantConditionOnPrerequisite@upzergmissile2:
+		Condition: upzergmissile2
+		Prerequisites: upzergmissile2
+	ActorStatValues:
+		Upgrades: upzergmissile
+
+^ZergGroundArmorUpgrades:
+	DamageMultiplier@upcarapace:
+		Modifier: 90
+		RequiresCondition: upcarapace && !upcarapace2
+	GrantConditionOnPrerequisite@upcarapace:
+		Condition: upcarapace
+		Prerequisites: upcarapace
+	DamageMultiplier@upcarapace2:
+		Modifier: 80
+		RequiresCondition: upcarapace2
+	GrantConditionOnPrerequisite@upcarapace2:
+		Condition: upcarapace2
+		Prerequisites: upcarapace2
+	ActorStatValues:
+		Upgrades: upcarapace
+
+^ZergFlyerWeaponUpgrades:
+	FirepowerMultiplier@upflyerattack:
+		Modifier: 115
+		RequiresCondition: upflyerattack && !upflyerattack2
+	GrantConditionOnPrerequisite@upflyerattack:
+		Condition: upflyerattack
+		Prerequisites: upflyerattack
+	FirepowerMultiplier@upflyerattack2:
+		Modifier: 135
+		RequiresCondition: upflyerattack2
+	GrantConditionOnPrerequisite@upflyerattack2:
+		Condition: upflyerattack2
+		Prerequisites: upflyerattack2
+	ActorStatValues:
+		Upgrades: upflyerattack
+
+^ZergFlyerArmorUpgrades:
+	DamageMultiplier@upflyerarmor:
+		Modifier: 90
+		RequiresCondition: upflyerarmor && !upflyerarmor2
+	GrantConditionOnPrerequisite@upflyerarmor:
+		Condition: upflyerarmor
+		Prerequisites: upflyerarmor
+	DamageMultiplier@upflyerarmor2:
+		Modifier: 80
+		RequiresCondition: upflyerarmor2
+	GrantConditionOnPrerequisite@upflyerarmor2:
+		Condition: upflyerarmor2
+		Prerequisites: upflyerarmor2
+	ActorStatValues:
+		Upgrades: upflyerarmor
+
+^GroovedSpinesUpgrade:
+	RangeMultiplier@upzergrange:
+		RequiresCondition: upzergrange
+		Modifier: 120
+	GrantConditionOnPrerequisite@upzergrange:
+		Condition: upzergrange
+		Prerequisites: upzergrange
+	ActorStatValues:
+		Upgrades: upzergrange
+
+####################################################################################################
+#		BUILDING TERRAN
+####################################################################################################
+
+^BaseBuildingProtoss:
+	Inherits: ^BaseBuilding
+	-ChangesShield@shielddischarge:
+
+^ZergAIProductionBoost:
+	ProductionTimeMultiplier@zergaiboostanybot:
+		Multiplier: 50
+		Prerequisites: botplayer
+
+^BaseBuildingZerg:
+	Inherits: ^BaseBuilding
+	#Inherits@zergai: ^ZergAIProductionBoost
+	RequiresBuildableArea:
+		AreaTypes: creep
+		Adjacent: 4
+		IsCircular: true
+	Building:
+		# TerrainTypes: ZergSoil ##########
+
+^SCBREEDFASTER:
+	ExternalCondition@Fasterbreed:
+		Condition: SCFASTERBREED
+	ProvidesPrerequisite@fasterbreed:
+		Prerequisite: SCFASTERBREED
+		RequiresCondition: SCFASTERBREED
+	ProductionTimeMultiplier@fasterbreed:
+		Prerequisites: SCFASTERBREED
+		Multiplier: 75
+		Queue: SCZergInfantry
+
+^SCTINFANTRY:
+	Inherits: ^DefaultSoldier
+	Inherits@EXT: ^ExternalConditions
+	Inherits@shadow: ^SCSmallShadow
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle
+		DefaultAttackSequence: shoot
+	Armor:
+		Type: None
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: player
+		CrushedPaletteIsPlayerPalette: true
+		PlayerPalette: player_rgba
+	Crushable:
+		CrushClasses: vehicle
+		-CrushSound:
+	Power:
+		Amount: -10
+
+^SCTVEHICLE:
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@EXT: ^ExternalConditions
+	AcceptsDeliveredExperience:
+		ValidTypes: vehicle
+	Buildable:
+		Queue: Vehicle, RAVehicle
+	Power:
+		Amount: -20
+
+^ProtossPersonalShield:
+	Shielded:
+		InitialPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		RegenAmount: 40
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled
+		SelectionBarColor: 8888FFFF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+	DamageMultiplier@shieldpermanent:
+		Modifier: 150
+		Condition: shieldpermanent
+	ChangesShield@personal_shield:
+		Step: 40
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: upplasmashield
+	Armor:
+		RequiresCondition: !shielded
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	Targetable@PersonalShielded:
+		TargetTypes: PersonalShielded
+		RequiresCondition: shielded
+	DamageMultiplier@upplasmashield:
+		Modifier: 80
+		RequiresCondition: upplasmashield && shielded
+	GrantConditionOnPrerequisite@upplasmashield:
+		Condition: upplasmashield
+		Prerequisites: upplasmashield
+	ActorStatValues:
+		Upgrades: upplasmashield
+
+^BasicProtoss: #ONLY USE FOR UNITS THAT INHERIT ^SOLDIER
+	Inherits: ^DefaultSoldier
+	Inherits@ProtossPersonalShield: ^ProtossPersonalShield
+	-ChangesShield@shielddischarge:
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: player
+		CrushedPaletteIsPlayerPalette: true
+	Crushable:
+		CrushClasses: vehicle
+		-CrushSound:
+
+^ProtossVehicle:
+	Inherits: ^Vehicle
+	-ChangesShield@shielddischarge:
+
+^LargeProtoss:
+	Inherits: ^BasicProtoss
+	Inherits@2: ^IronCurtainable
+	Inherits@EMP: ^UnitDisable
+	Inherits@cloak: ^AcceptsCloakCrate
+	Inherits@heal: ^MachineShopRepairable
+	Inherits@chrono: ^Chronoshiftable
+	Mobile:
+		Locomotor: hover
+		PauseOnCondition: disabled
+	-ExternalCondition@REAPERTRAP:
+	-Cloneable:
+	-GrantConditionOnPrerequisite@HOSPITAL:
+	-Captures@DRIVER_KILL:
+	Targetable:
+		TargetTypes: Ground, Vehicle
+		RequiresCondition: !parachute && !chronobeamed && !invulnerability
+	Targetable@ivan:
+		RequiresCondition: !ivanbomb && !chronobeamed && !invulnerability
+	Passenger:
+		CargoType: Vehicle
+	HitShape:
+		Type: Circle
+			Radius: 1024
+
+^AirProtoss:
+	Inherits: ^Helicopter
+	Inherits@ProtossPersonalShield: ^ProtossPersonalShield
+	-ChangesShield@shielddischarge:
+
+^BuildingExplodeProtoss:
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: BuildingExplodeProtoss
+		EmptyWeapon: BuildingExplodeProtoss
+
+^HeliExplodeProtoss:
+	FireWarheadsOnDeath:
+		Weapon: HeliExplodeProtoss
+		EmptyWeapon: HeliExplodeProtoss
+
+^UnitExplodeSmallProtoss:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmallProtoss
+		EmptyWeapon: UnitExplodeSmallProtoss
+
+^ZergBurrow:
+	Inherits@cloak: ^CloakedVehicleWithUpgrade
+	Inherits@bot: ^SiegeMode
+	AttackFrontal:
+		FacingTolerance: 0
+		RequiresCondition: undeployed
+	WithSpriteBody@deployed:
+		Sequence: deployed
+		Name: deployed
+		RequiresCondition: !undeployed
+	WithInfantryBody:
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		BodyNames: deployed
+		Sequence: deploy
+		Name: deployed
+		RequiresCondition: undeployed
+	GrantConditionOnDeploy:
+		DeploySounds: zburrowup.wav
+		UndeploySounds: zburrowdown.wav
+		RequiresCondition: !parachute
+	Cloak:
+		InitialDelay: 50
+		CloakDelay: 50
+		RequiresCondition: deployed
+		CloakStyle: Alpha
+		IsPlayerPalette: true
+	IssueOrderToBot@AI:
+		OrderTrigger: BecomingIdle
+		OrderChance: 50
+		OrderInterval: 1000
+		RequiresCondition: botmicro
+
+^ZergDoubleSpawner:
+	ProductionCostMultiplier@ZergDoubleSpawner:
+		Multiplier: 200
+	Buildable:
+		BuildAmount: 2
+
+^BasicZerg:
+	Inherits: ^DefaultSoldier
+	Inherits@botmicro: ^BotMicromanageable
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+		CrushedSequence: die
+		CrushedSequencePalette: player
+		CrushedPaletteIsPlayerPalette: true
+	Crushable:
+		CrushClasses: vehicle
+		-CrushSound:
+	ProductionTimeMultiplier@supplylimit:
+		Multiplier: 1000
+		Prerequisites: supplylimit
+		Queue: SCZergInfantry
+	ProductionTimeMultiplier@scovermind:
+		Multiplier: 50
+		Prerequisites: scovermind
+		Queue: SCZergInfantry
+	Mobile:
+		Locomotor: chem
+	Targetable@Zerg:
+		RequiresCondition: !parachute && !untargetable
+		TargetTypes: Ground, Infantry, Monster
+	Targetable@HEAL:
+		RequiresCondition: !untargetable && damaged && !Healed
+		TargetTypes: Heal, Healing
+
+^LargeZerg:
+	Inherits: ^BasicZerg
+	Targetable@dog:
+		TargetTypes: DogImmune
+	Mobile:
+		Locomotor: wheeled
+	Targetable@Zerg:
+		TargetTypes: Ground, Vehicle, Monster
+
+^VeryLargeZerg:
+	Inherits: ^LargeZerg
+	Inherits@2: ^IronCurtainable
+	Inherits@cloak: ^AcceptsCloakCrate
+	Inherits@chrono: ^Chronoshiftable
+	Inherits@Crushes: ^VehicleCrusher
+	-ExternalCondition@REAPERTRAP:
+	-Cloneable:
+	-Captures@DRIVER_KILL:
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	Targetable@Zerg:
+		TargetTypes: Ground, Vehicle, Tank, Monster
+	Passenger:
+		CargoType: Vehicle
+
+^AirZerg:
+	Inherits: ^Helicopter
+	-SpawnActorOnDeath:
+	-Integrity:
+	-GrantCondition@electronics:
+	WithDeathAnimation:
+		UseDeathTypeSuffix: False
+	DeathSounds:
+	Targetable@Zerg:
+		TargetTypes: Monster
+	Targetable@HEAL:
+		RequiresCondition: !untargetable && damaged && !Healed
+		TargetTypes: Heal, Healing
+	ProductionTimeMultiplier@supplylimit:
+		Multiplier: 1000
+		Prerequisites: supplylimit
+		Queue: SCZergInfantry
+	ProductionTimeMultiplier@scovermind:
+		Multiplier: 50
+		Prerequisites: scovermind
+		Queue: SCZergInfantry
