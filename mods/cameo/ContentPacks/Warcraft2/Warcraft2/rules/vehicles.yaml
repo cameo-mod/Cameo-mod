@@ -1,0 +1,459 @@
+wc2_human_peasant:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@WC2Template: ^wc2_peasant
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Tooltip:
+		Name: Peasant
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill
+		Description: Harvester.
+	Armament:
+		Weapon: wc2peasantsmack
+		FireDelay: 7
+	-WithInfantryBody:
+	WithHarvesterSpriteBody:
+		ImageByFullness: wc2_human_peasant, wc2_human_peasantgold
+	WithMoveAnimation:
+		MoveSequence: run
+	Voiced:
+		VoiceSet: wc2voicehumanpeasant
+	-DamagedByTerrain:
+	ActorStatValues:
+		Upgrades: wc2_h_str_shield, wc2_h_str_shield2
+
+wc2_human_militia2:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@WC2SwordUpg: ^wc2_h_str_sword
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2Template: ^wc2_peasant
+	Tooltip:
+		Name: Militia Peasant
+	Valued:
+		Cost: 300
+	Power:
+		Amount: -15
+	Mobile:
+		Speed: 90
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 1000
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Harvester:
+		BaleLoadDelay: 4
+		BaleUnloadDelay: 1
+		BaleUnloadAmount: 2
+		FullyLoadedSpeed: 75
+	StoresResources:
+		Capacity: 4
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~wc2_human_barracks
+		Queue: Infantry, RAInfantry
+		Description: Basic melee infantry. Slow but can take some damage.
+	Armament:
+		Weapon: wc2footmanslice
+		FireDelay: 5
+	Targetable@dog:
+		TargetTypes: DogImmune
+	Voiced:
+		VoiceSet: wc2peasantsmack
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	-WithInfantryBody:
+	WithHarvesterSpriteBody:
+		ImageByFullness: wc2_human_militia2, wc2_human_militia2
+	WithMoveAnimation:
+		MoveSequence: run
+	Voiced:
+		VoiceSet: wc2voicehumanpeasant
+	-DamagedByTerrain:
+	ActorStatValues:
+		Upgrades: wc2_h_str_sword, wc2_h_str_sword2, wc2_h_str_shield, wc2_h_str_shield2
+
+wc2_human_knight2:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WC2SwordUpg: ^wc2_h_str_sword
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
+	Inherits@PalUpg: ^wc2_h_paladinupg
+	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
+	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
+	Tooltip:
+		Name: Warcraft 3 Knight
+	Valued:
+		Cost: 2200
+	Power:
+		Amount: -110
+	Health:
+		HP: 180000
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 96
+		Locomotor: tracked
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~wc2_upgrade_paladin2
+		Queue: Infantry, RAInfantry
+		Description: Mounted infantry. Fast and durable.
+	Voiced:
+		VoiceSet: wc2voicehumanknight
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Targetable:
+		TargetTypes: Ground, Vehicle, Monster
+	#Weapons
+	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
+	ActorStatValues:
+		Upgrades: wc2_h_str_sword, wc2_h_str_sword2, wc2_h_str_shield, wc2_h_str_shield2, wc2_h_paladinupg, wc2_h_healingupg, wc2_h_exorcismupg
+
+wc2_human_ballista:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BallUpg: ^wc2_h_str_ballista
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Tooltip:
+		Name: Ballista
+	Valued:
+		Cost: 900
+	Power:
+		Amount: -45
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Mobile:
+		Speed: 45
+		TurnSpeed: 18
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_human_blacksmith
+		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	AttackFrontal:
+		PauseOnCondition: disabled
+		FacingTolerance: 0
+	Armament:
+		Weapon: wc2ballistaFire
+		FireDelay: 20
+	Voiced:
+		VoiceSet: wc2voicehumanballista
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	GrantConditionOnAttack@CatapultCooldown:
+		Condition: cond_catapult_cooldown
+		RevokeDelay: 34
+	Mobile:
+		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
+	ActorStatValues:
+		Upgrades: wc2_h_str_ballista, wc2_h_str_ballista2, wc2_h_str_shield, wc2_h_str_shield2
+
+wc2_human_siege_engine:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@BallUpg: ^wc2_h_str_ballista
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Tooltip:
+		Name: Siege Engine
+	Valued:
+		Cost: 1800
+	Power:
+		Amount: -90
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_human_castle, wc2_human_blacksmith
+		Queue: Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	-AttackFrontal:
+	AttackFrontalCharged:
+		PauseOnCondition: disabled
+		FacingTolerance: 20
+		ChargeLevel: 20, 40
+		ChargingCondition: cond_catapult_cooldown
+		ShowSelectionBar: true
+		LosesChargeWhileTurning: true
+	GrantTimedCondition@cond_catapult_cooldown:
+		RequiresCondition: cond_catapult_cooldown
+		PauseOnCondition: !cond_catapult_cooldown
+		Condition: catapult_cooldown
+		Duration: 40
+	DamageMultiplier@catapult_cooldown:
+		Modifier: 50
+		RequiresCondition: catapult_cooldown
+	SpeedMultiplier@catapult_cooldown:
+		Modifier: 25
+		RequiresCondition: catapult_cooldown
+	Armament:
+		Weapon: SiegeEngineCannon
+		FireDelay: 3
+	Voiced:
+		VoiceSet: wc2voicehumanballista
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	ActorStatValues:
+		Upgrades: wc2_h_str_ballista, wc2_h_str_ballista2, wc2_h_str_shield, wc2_h_str_shield2
+
+wc2_orc_peon:
+	Inherits@WC2INFANTRY: ^WC2Infantry
+	Inherits@WC2Template: ^wc2_peasant
+	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Tooltip:
+		Name: Peon
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill
+		Description: Harvester. Zug zug!
+	Armament:
+		Weapon: wc2peasantsmack
+		FireDelay: 7
+	-WithInfantryBody:
+	WithHarvesterSpriteBody:
+		ImageByFullness: wc2_orc_peon, wc2_orc_peon_full
+	WithMoveAnimation:
+		MoveSequence: run
+	Voiced:
+		VoiceSet: wc2voiceorcpeongrunt
+	-DamagedByTerrain:
+	ActorStatValues:
+		Upgrades: wc2_o_str_shield, wc2_o_str_shield2
+
+wc2_orc_kodo_beast:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@TAxeUpg: ^wc2_o_str_throwaxe
+	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@BLighterUpg: ^wc2_o_berserker_lighteraxes
+	Inherits@BScoutUpg: ^wc2_o_berserker_scouting
+	Inherits@BRegenUpg: ^wc2_o_berserker_regen
+	Inherits@BerserkerUpg: ^wc2_o_berserkerupg
+	-ExternalCondition@PropagandaEffect:
+	Tooltip:
+		Name: Kodo Beast
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: -50
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 125
+	Mobile:
+		Speed: 60
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_orc_troll_lumber_mill
+		Queue: Infantry, RAInfantry
+		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 5000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 5000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	Armament:
+		Weapon: wc2axeFire
+		FireDelay: 7
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: wc2axeFire
+	Voiced:
+		VoiceSet: wc2voiceorctrollaxethrower
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	ActorStatValues:
+		Upgrades: wc2_o_str_throwaxe, wc2_o_str_throwaxe2, wc2_o_str_shield, wc2_o_str_shield2, wc2_o_berserkerupg, wc2_o_berserker_lighteraxes, wc2_o_berserker_scouting
+
+# Ogre also has built-in ogremage stuff so that ogremage's upgrades and spells will be applied to already-built ogres, just as in WC2.
+wc2_runes:
+	Inherits: ^Mine
+	RenderSprites:
+		Image: wc2_effect_runes
+	-WithSpriteBody:
+	GrantPeriodicCondition:
+		Condition: cond_show
+		ActiveDuration: 14
+		CooldownDuration: 138
+		StartsGranted: True
+	WithIdleOverlay:
+		Sequence: idle
+		RequiresCondition: cond_show
+	FireWarheadsOnDeath:
+		Weapon: wc2ogremageRunes_Hit
+	Mine:
+		AvoidFriendly: false
+		BlockFriendly: false
+	-Immobile:
+	Mobile:
+		Locomotor: wheeled
+		Speed: 1
+		PauseOnCondition: dontmove
+	GrantCondition@dontmove:
+		Condition: dontmove
+	RejectsOrders:
+	Health:
+		HP: 10000
+	KillsSelf:
+		Delay: 1000
+		RemoveInstead: true
+	DamageMultiplier@Runes:
+		Modifier: 0
+
+wc2_orc_catapult:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CatUpg: ^wc2_o_str_catapult
+	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Tooltip:
+		Name: Catapult
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_orc_blacksmith
+		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	AttackFrontal:
+		PauseOnCondition: disabled
+		FacingTolerance: 0
+	Armament:
+		Weapon: wc2catapultFire
+		FireDelay: 5
+	Voiced:
+		VoiceSet: wc2orccatapult
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	WithAttackAnimation@After:
+		Sequence: after-shoot
+		Delay: 11
+		DelayRelativeTo: Attack
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	GrantConditionOnAttack@CatapultCooldown:
+		Condition: cond_catapult_cooldown
+		RevokeDelay: 34
+	Mobile:
+		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
+	ActorStatValues:
+		Upgrades: wc2_o_str_catapult, wc2_o_str_catapult2, wc2_o_str_shield, wc2_o_str_shield2
+
+wc2_orc_siege_engine:
+	Inherits@WC2VEHICLE: ^WC2Vehicle
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@CatUpg: ^wc2_o_str_catapult
+	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Tooltip:
+		Name: Siege Engine
+	Valued:
+		Cost: 1800
+	Power:
+		Amount: -90
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~wc2_orc_stronghold, wc2_orc_blacksmith
+		Queue: Vehicle, RAVehicle
+		Description: Powerful long range siege unit.
+	-AttackFrontal:
+	AttackFrontalCharged:
+		PauseOnCondition: disabled
+		FacingTolerance: 20
+		ChargeLevel: 20, 40
+		ChargingCondition: cond_catapult_cooldown
+		ShowSelectionBar: true
+		LosesChargeWhileTurning: true
+	GrantTimedCondition@cond_catapult_cooldown:
+		RequiresCondition: cond_catapult_cooldown
+		PauseOnCondition: !cond_catapult_cooldown
+		Condition: catapult_cooldown
+		Duration: 40
+	DamageMultiplier@catapult_cooldown:
+		Modifier: 50
+		RequiresCondition: catapult_cooldown
+	SpeedMultiplier@catapult_cooldown:
+		Modifier: 25
+		RequiresCondition: catapult_cooldown
+	Armament:
+		Weapon: SiegeEngineCannon
+		FireDelay: 3
+	Voiced:
+		VoiceSet: wc2voicehumanballista
+	-Integrity:
+	-GrantCondition@electronics:
+	-WithDeathAnimation:
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: wc2visualexplode
+		EmptyWeapon: wc2visualexplode
+	ActorStatValues:
+		Upgrades: wc2_o_str_catapult, wc2_o_str_catapult2, wc2_o_str_shield, wc2_o_str_shield2

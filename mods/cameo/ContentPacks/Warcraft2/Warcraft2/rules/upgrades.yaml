@@ -1,0 +1,899 @@
+Player:
+	SupportPowerBotModule:
+		Decisions:
+			wc2_holyvision:
+				OrderName: wc2_holyvision
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Enemy
+					Types: Ground
+					Attractiveness: 1
+					TargetMetric: None
+					CheckRadius: 5c0
+			wc2_spy_of_kilrogg:
+				OrderName: wc2_spy_of_kilrogg
+				MinimumAttractiveness: 1
+				Consideration@1:
+					Against: Enemy
+					Types: Ground
+					Attractiveness: 1
+					TargetMetric: None
+					CheckRadius: 5c0
+			wc2_healing:
+				OrderName: wc2_healing
+				MinimumAttractiveness: 3000
+				FineScanRadius: 2
+				Consideration@1:
+					Against: Ally
+					Types: Heal, Healing
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_bloodlust:
+				OrderName: wc2_bloodlust
+				MinimumAttractiveness: 3000
+				FineScanRadius: 2
+				Consideration@1:
+					Against: Ally
+					Types: Infantry
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_haste:
+				OrderName: wc2_haste
+				MinimumAttractiveness: 3000
+				FineScanRadius: 2
+				Consideration@1:
+					Against: Ally
+					Types: Infantry
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_slow:
+				OrderName: wc2_slow
+				MinimumAttractiveness: 3000
+				FineScanRadius: 2
+				Consideration@1:
+					Against: Enemy
+					Types: Ground
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_invisibility:
+				OrderName: wc2_invisibility
+				MinimumAttractiveness: 3000
+				FineScanRadius: 2
+				Consideration@1:
+					Against: Ally
+					Types: Infantry
+					Attractiveness: 3
+					TargetMetric: Value
+					CheckRadius: 2c0
+			wc2_blizzard:
+				OrderName: wc2_blizzard
+				MinimumAttractiveness: 3000
+				Consideration@1:
+					Against: Enemy
+					Types: Structure
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 5c0
+				Consideration@2:
+					Against: Ally
+					Types: Air, Ground, Water
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 7c0
+			wc2_deathanddecay:
+				OrderName: wc2_deathanddecay
+				MinimumAttractiveness: 3000
+				Consideration@1:
+					Against: Enemy
+					Types: Structure
+					Attractiveness: 1
+					TargetMetric: Value
+					CheckRadius: 5c0
+				Consideration@2:
+					Against: Ally
+					Types: Air, Ground, Water
+					Attractiveness: -10
+					TargetMetric: Value
+					CheckRadius: 7c0
+
+###############################################################
+# WC2 BASE CLASSSES AND INHERITABLES
+###############################################################
+
+wc2_human_betterfarm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Better Farm
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~!wc2_human_betterfarm, ~wc2_human_farm, wc2_human_keep
+		Queue: Research
+		Description: Gives Farms +50% Supply and HP (150% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_human_bestfarm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Best Farm
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~wc2_human_betterfarm, ~wc2_human_farm, wc2_human_castle
+		Queue: Research
+		Description: Gives Farms +100% Supply and HP (200% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_camera_scanner:
+	Inherits: camera.scan
+	-RenderSprites:
+	-WithSpriteBody:
+	RevealsShroud:
+		Range: 2c0
+	DetectCloaked:
+		RequiresCondition: cond_timer
+	GrantPeriodicCondition:
+		Condition: cond_timer
+		ActiveDuration: 250
+		CooldownDuration: 15
+		StartsGranted: False
+
+wc2_orc_betterfarm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Better Farm
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~!wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_stronghold
+		Queue: Research
+		Description: Gives Farms +50% Supply and HP (150% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_orc_bestfarm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Best Farm
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_fortress
+		Queue: Research
+		Description: Gives Farms +100% Supply and HP (200% total)
+		Icon: icon
+	RenderSprites:
+	ProvidesPrerequisite:
+
+wc2_h_str_sword:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Sword Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 15%. Double Effect for Footmen.
+		Prerequisites: ~!wc2_h_str_sword, ~wc2_human_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_str_sword
+	ProvidesPrerequisite:
+
+wc2_h_str_sword2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Sword Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 35%. Double Effect for Footmen.
+		Prerequisites: !wc2_h_str_sword2, ~wc2_h_str_sword, ~wc2_human_blacksmith, wc2_human_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_h_str_sword2
+	ProvidesPrerequisite:
+
+wc2_h_str_shield:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Armor Strength
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 10%. Footmen have 15% damage resistance instead.
+		Prerequisites: ~!wc2_h_str_shield, ~wc2_human_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_str_shield
+	ProvidesPrerequisite:
+
+wc2_h_str_shield2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Armor Strength II
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 20%. Footmen have 30% damage resistance instead.
+		Prerequisites: !wc2_h_str_shield2, ~wc2_h_str_shield, ~wc2_human_blacksmith, wc2_human_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_h_str_shield2
+	ProvidesPrerequisite:
+
+wc2_h_str_arrow:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Arrow Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases arrow damage dealt by Archers and Guard Towers by 15%.
+		Prerequisites: ~!wc2_h_str_arrow, ~wc2_human_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_str_arrow
+	ProvidesPrerequisite:
+
+wc2_h_str_arrow2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Arrow Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases arrow damage by Archers and Guard Towers by 35%.
+		Prerequisites: !wc2_h_str_arrow2, ~wc2_h_str_arrow, ~wc2_human_blacksmith, wc2_human_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_h_str_arrow2
+	ProvidesPrerequisite:
+
+wc2_upgrade_footman:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name:  Warcraft 3 Footman
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Footman into the Warcraft 3 Footman
+		Prerequisites: ~!wc2_upgrade_footman, ~wc2_human_blacksmith, wc2_human_castle
+	RenderSprites:
+		Image: wc2_human_footman2
+
+wc2_h_rangerupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ranger
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Intense training is given to Elven Archers.\nIncreases damage resistance by 20% and unlocks upgrades for the Ranger.
+		Prerequisites: ~!wc2_h_rangerupg, ~wc2_human_blacksmith ## when keep/castle are fixed, will require Castle
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_rangerupg
+	ProvidesPrerequisite:
+
+wc2_upgrade_high_elf_archer:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: High Elven Archer
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Elven Ranger into the High Elven Archer
+		Prerequisites: ~!wc2_upgrade_high_elf_archer, ~wc2_human_blacksmith, wc2_h_rangerupg, wc2_human_castle
+	RenderSprites:
+		Image: wc2_human_high_elf_archer
+
+wc2_h_ranger_longbow:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ranger Longbow
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases range of Rangers by 20%.
+		Prerequisites: ~!wc2_h_ranger_longbow, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_castle
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_ranger_longbow
+	ProvidesPrerequisite:
+
+wc2_h_ranger_scouting:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ranger Scouting
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases vision range of Rangers by 20%.
+		Prerequisites: ~!wc2_h_ranger_scouting, ~wc2_h_rangerupg, ~wc2_human_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_ranger_scouting
+	ProvidesPrerequisite:
+
+wc2_h_ranger_marksman:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ranger Marksman
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases arrow damage of Rangers by 25%.
+		Prerequisites: ~!wc2_h_ranger_marksman, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_keep
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_ranger_marksman
+	ProvidesPrerequisite:
+
+wc2_h_str_ballista:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ballista Strength
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases ballista damage dealt by Ballista by 15%
+		Prerequisites: ~!wc2_h_str_ballista, ~wc2_human_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_str_ballista
+	ProvidesPrerequisite:
+
+wc2_h_str_ballista2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ballista Strength II
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases ballista damage dealt by Ballista by 35%
+		Prerequisites: !wc2_h_str_ballista2, ~wc2_h_str_ballista, ~wc2_human_blacksmith, wc2_human_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_h_str_ballista2
+	ProvidesPrerequisite:
+
+wc2_h_str_cannon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cannon Damage
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 15%
+		Prerequisites: ~!wc2_h_str_cannon, ~wc2_human_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_str_cannon
+	ProvidesPrerequisite:
+
+wc2_h_str_cannon2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cannon Damage II
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 35%
+		Prerequisites: !wc2_h_str_cannon2, ~wc2_h_str_cannon, ~wc2_human_blacksmith, wc2_human_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_h_str_cannon2
+	ProvidesPrerequisite:
+
+wc2_h_str_navyshield:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Naval Armor
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Research
+		Description: Increases damage resistance of all Naval Vessels by 10%
+		Prerequisites: ~!wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_str_navyshield
+	ProvidesPrerequisite:
+
+wc2_h_str_navyshield2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Naval Armor II
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Research
+		Description: Increases damage resistance of all Naval Vessels by 20%
+		Prerequisites: !wc2_h_str_navyshield2, ~wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard, wc2_human_castle
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_h_str_navyshield2
+	ProvidesPrerequisite:
+
+wc2_h_paladinupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Paladin
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Perform holy rituals to turn your noble Knights into righteous Paladins!\nPaladins are more powerful and can cast Heal.\nIncreases damage resistance, melee damage and speed by 25%.
+		Prerequisites: ~!wc2_h_paladinupg, ~wc2_human_blacksmith, wc2_human_church
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_paladinupg
+	ProvidesPrerequisite:
+
+wc2_upgrade_paladin2:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Warcraft 3 Knight (WIP)
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Paladin into the Warcraft 3 Knight (WIP)
+		Prerequisites: ~!wc2_upgrade_paladin2, ~wc2_human_blacksmith, wc2_h_paladinupg, wc2_human_church
+	RenderSprites:
+		Image: wc2_human_knight2
+
+wc2_h_healingupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Healing
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Paladins can now heal.\nToggle Paladin's modes by deploying them.\nHealing uses mana.
+		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_healingupg, ~wc2_human_blacksmith, wc2_human_church
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_healingupg
+	ProvidesPrerequisite:
+
+wc2_h_exorcismupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Exorcism
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Paladins can now exorcise.\nToggle Paladin's modes by deploying them.\nExorcism only affects undead units.\nGood vs Orc Death Knight and Skeleton.
+		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_exorcismupg, ~wc2_human_blacksmith, wc2_human_church
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_exorcismupg
+	ProvidesPrerequisite:
+
+wc2_h_slowupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Slow
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Research
+		Description: Allows Mages to cast Slow.\nToggle Mage's modes by deploying them.\nSlows down affected target.\nAffects movement and attack speed.\nUses 50 mana.
+		Prerequisites: ~!wc2_h_slowupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_slowupg
+	ProvidesPrerequisite:
+
+wc2_h_polymorphupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Polymorph
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Research
+		Description: Allows Mages to cast Polymorph.\nToggle Mage's modes by deploying them.\nTurns target into a\nharmless critter.\nUses 200 mana.
+		Prerequisites: ~!wc2_h_polymorphupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_polymorphupg
+	ProvidesPrerequisite:
+
+wc2_h_blizzardupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Blizzard
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Research
+		Description: Allows Mages to cast Blizzard.\nToggle Mage's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
+		Prerequisites: ~!wc2_h_blizzardupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_h_blizzardupg
+	ProvidesPrerequisite:
+
+####################################################################################################
+# WC2 ORC UPGRADES
+####################################################################################################
+
+wc2_o_str_axe:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Axe Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 15%. Double Effect for Grunts.
+		Prerequisites: ~!wc2_o_str_axe, ~wc2_orc_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_str_axe
+	ProvidesPrerequisite:
+
+wc2_o_str_axe2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Axe Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases melee damage by 35%. Double Effect for Grunts.
+		Prerequisites: !wc2_o_str_axe2, ~wc2_o_str_axe, ~wc2_orc_blacksmith, wc2_orc_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_o_str_axe2
+	ProvidesPrerequisite:
+
+wc2_o_str_shield:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Armor Strength
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 10%. Grunts have 15% damage resistance instead.
+		Prerequisites: ~!wc2_o_str_shield, ~wc2_orc_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_str_shield
+	ProvidesPrerequisite:
+
+wc2_o_str_shield2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Armor Strength II
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases damage resistance of all land units by 20%. Grunts have 30% damage resistance instead.
+		Prerequisites: !wc2_o_str_shield2, ~wc2_o_str_shield, ~wc2_orc_blacksmith, wc2_orc_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_o_str_shield2
+	ProvidesPrerequisite:
+
+wc2_o_str_throwaxe:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Throwing Axe Strength
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases ranged damage dealt by Axethrowers and Guard Towers by 15%.
+		Prerequisites: ~!wc2_o_str_throwaxe, ~wc2_orc_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_str_throwaxe
+	ProvidesPrerequisite:
+
+wc2_o_str_throwaxe2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Throwing Axe Strength II
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Increases ranged damage by Axethrowers and Guard Towers by 35%
+		Prerequisites: !wc2_o_str_throwaxe2, ~wc2_o_str_throwaxe, ~wc2_orc_blacksmith, wc2_orc_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_o_str_throwaxe2
+	ProvidesPrerequisite:
+
+wc2_upgrade_grunt:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name:  Warcraft 3 Grunt
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Grunt into the Warcraft 3 Grunt
+		Prerequisites: ~!wc2_upgrade_grunt, ~wc2_orc_blacksmith, wc2_orc_fortress
+	RenderSprites:
+		Image: wc2_orc_grunt2
+
+wc2_o_berserkerupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Troll Axethrowers are driven into a mad frenzy.\nIncreases damage resistance by 20% and unlocks upgrades for the Berserker.
+		Prerequisites: ~!wc2_o_berserkerupg, ~wc2_orc_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_berserkerupg
+	ProvidesPrerequisite:
+
+wc2_upgrade_troll_spearthrower:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Troll Headhunter
+	Buildable:
+		Queue: Research
+		Description: Upgrades the Troll Berserker into the Troll Headhunter
+		Prerequisites: ~!wc2_upgrade_troll_spearthrower, ~wc2_orc_blacksmith, wc2_o_berserkerupg, wc2_orc_fortress
+	RenderSprites:
+		Image: wc2_orc_troll_spearthrower
+
+wc2_o_berserker_lighteraxes:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker Light Axes
+	Buildable:
+		BuildPaletteOrder: 2
+		Queue: Research
+		Description: Increases throwing range of Berserker axes by 20%.
+		Prerequisites: ~!wc2_o_berserker_lighteraxes, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_fortress
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_berserker_lighteraxes
+	ProvidesPrerequisite:
+
+wc2_o_berserker_scouting:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker Scouting
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases vision range of Berserkers by 20%.
+		Prerequisites: ~!wc2_o_berserker_scouting, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_berserker_scouting
+	ProvidesPrerequisite:
+
+wc2_o_berserker_regen:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Berserker Regeneration
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Berserkers heal over time (5% HP each second) and take 20% less damage.
+		Prerequisites: ~!wc2_o_berserker_regen, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_stronghold
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_berserker_regen
+	ProvidesPrerequisite:
+
+wc2_o_str_catapult:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Catapult Strength
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases Catapult damage by 15%
+		Prerequisites: ~!wc2_o_str_catapult, ~wc2_orc_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_str_catapult
+	ProvidesPrerequisite:
+
+wc2_o_str_catapult2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Catapult Strength II
+	Buildable:
+		BuildPaletteOrder: 3
+		Queue: Research
+		Description: Increases Catapult damage by 35%
+		Prerequisites: !wc2_o_str_catapult2, ~wc2_o_str_catapult, ~wc2_orc_blacksmith, wc2_orc_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_o_str_catapult2
+	ProvidesPrerequisite:
+
+wc2_o_str_cannon:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cannon Damage
+	Buildable:
+		BuildPaletteOrder: 4
+		BuildLimit: 1
+		Queue: Research
+		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 15%
+		Prerequisites: ~!wc2_o_str_cannon, ~wc2_orc_blacksmith
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_str_cannon
+	ProvidesPrerequisite:
+
+wc2_o_str_cannon2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cannon Damage II
+	Buildable:
+		BuildPaletteOrder: 4
+		Queue: Research
+		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 35%
+		Prerequisites: !wc2_o_str_cannon2, ~wc2_o_str_cannon, ~wc2_orc_blacksmith, wc2_orc_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_o_str_cannon2
+	ProvidesPrerequisite:
+
+wc2_o_str_navyshield:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Naval Armor
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Research
+		Description: Increases damage resistance of all Naval Vessels by 10%.
+		Prerequisites: ~!wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_str_navyshield
+	ProvidesPrerequisite:
+
+wc2_o_str_navyshield2:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Naval Armor II
+	Buildable:
+		BuildPaletteOrder: 5
+		Queue: Research
+		Description: Increases damage resistance of all Naval Vessels by 20%.
+		Prerequisites: !wc2_o_str_navyshield2, ~wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard, wc2_orc_fortress
+	Valued:
+		Cost: 5000
+	RenderSprites:
+		Image: wc2_o_str_navyshield2
+	ProvidesPrerequisite:
+
+wc2_o_ogremageupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ogre-Mage
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Perform mysterious rituals to transform your Ogres into Ogre-Magi!\nOgre-Magi are more powerful and can cast Bloodlust.\nBloodlust makes your units hit harder for a short time.\nIncreases damage resistance by 20%.\nIncreases melee damage by 25%.
+		Prerequisites: ~!wc2_o_ogremageupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_ogremageupg
+	ProvidesPrerequisite:
+
+wc2_o_bloodlustupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Bloodlust
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Allows Ogre-Magi to cast bloodlust.\nToggle Oger-Mage's modes by deploying them.\nTriples damage output of affected unit.\nUses 50 mana.
+		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_bloodlustupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_bloodlustupg
+	ProvidesPrerequisite:
+
+wc2_o_runesupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Runes
+	Buildable:
+		BuildPaletteOrder: 1
+		Queue: Research
+		Description: Allows Ogre-Magi to cast runes.\nToggle Oger-Mage's modes by deploying them.\nDeploys five land mines in a + shape.\nUses 200 mana.
+		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_runesupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_runesupg
+	ProvidesPrerequisite:
+
+wc2_o_hasteupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Haste
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Research
+		Description: Allows Death Knights to cast haste.\nToggle Death Knight's modes by deploying them.\nSpeeds up affected target.\nAffects movement and attack speed.\nUses 50 mana.
+		Prerequisites: ~!wc2_o_hasteupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_hasteupg
+	ProvidesPrerequisite:
+
+wc2_o_deathanddecayupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Death and Decay
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Research
+		Description: Allows Death Knights to cast death and decay.\nToggle Death Knight's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
+		Prerequisites: ~!wc2_o_deathanddecayupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_deathanddecayupg
+	ProvidesPrerequisite:
+
+wc2_o_raisedeadupg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Raise Dead
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Research
+		Description: Allows Death Knights to cast raise dead.\nToggle Death Knight's modes by deploying them.\nSummons a skeleton.\nUses 50 mana.
+		Prerequisites: ~!wc2_o_raisedeadupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+	Valued:
+		Cost: 2500
+	RenderSprites:
+		Image: wc2_o_raisedeadupg
+	ProvidesPrerequisite:

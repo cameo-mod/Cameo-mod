@@ -1,0 +1,1919 @@
+wc2_human_townhall:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^3x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits@conyard: ^Conyard
+	Tooltip:
+		Name: Town Hall
+		RequiresCondition: !wc2_human_keep && !wc2_human_castle
+	Tooltip@2:
+		Name: Keep
+		RequiresCondition: wc2_human_keep && !wc2_human_castle
+	Tooltip@3:
+		Name: Castle
+		RequiresCondition: wc2_human_castle
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@wc2_human_keep:
+		Prerequisite: wc2_human_keep
+		RequiresCondition: wc2_human_keep
+	ProvidesPrerequisite@wc2_human_castle:
+		Prerequisite: wc2_human_castle
+		RequiresCondition: wc2_human_castle
+	ProvidesPrerequisite@keepupgradeavailable:
+		Prerequisite: keepupgradeavailable
+		RequiresCondition: !wc2_human_keep
+	ProvidesPrerequisite@castleupgradeavailable:
+		Prerequisite: castleupgradeavailable
+		RequiresCondition: wc2_human_keep && !wc2_human_castle
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			wc2_human_townhall: wc2_human_keep
+		Requirements:
+			wc2_human_townhall: !wc2_human_keep
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			wc2_human_keep: wc2_human_castle
+		Requirements:
+			wc2_human_keep: wc2_human_keep && !wc2_human_castle
+	WithSpriteBody@keep:
+		RequiresCondition: !wc2_human_keep && !wc2_human_castle
+	WithSpriteBody@keep:
+		Sequence: wc2_human_keep
+		Name: keep
+		RequiresCondition: wc2_human_keep && !wc2_human_castle
+	WithSpriteBody@castle:
+		Sequence: wc2_human_castle
+		Name: castle
+		RequiresCondition: wc2_human_castle
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: wc2_constrct.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	DamageMultiplier@keep:
+		Modifier: 75
+		RequiresCondition: wc2_human_townhall && !wc2_human_castle
+	DamageMultiplier@castle:
+		Modifier: 50
+		RequiresCondition: wc2_human_castle
+	GrantConditionOnPowerState@supply:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	ProvidesPrerequisite@supplylimit:
+		Prerequisite: supplylimit
+		RequiresCondition: lowpower
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi, hatchery
+	WithMakeAnimation:
+	-WithDeathAnimation:
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c512, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c512, 1c512, 0
+		MaxQueueLength: 10
+	Sellable:
+	Refinery:
+		DockOffset: 0,2
+	StoresResources:
+		Capacity: 1000
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	Transforms:
+		IntoActor: wc2_human_mcv
+
+wc2_human_keep:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Keep
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites:  ~wc2_human_townhall, keepupgradeavailable, wc2_human_blacksmith
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_human_townhall
+
+wc2_human_castle:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Castle
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_human_townhall, wc2_human_keep, castleupgradeavailable, wc2_human_gnomish_inventor, wc2_human_stables
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_human_keep
+
+# wc2_human_keep:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Keep
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 20
+# 		Prerequisites: ~!wc2_human_keep, ~wc2_human_barracks
+# 		Queue: Addons
+# 		Description: Unlocks more advanced buildings.
+# 		Icon: icon
+# 	RenderSprites:
+# 	ProvidesPrerequisite:
+
+# wc2_human_castle:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Castle
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 21
+# 		Prerequisites: ~wc2_human_keep, wc2_human_elven_lumber_mill, wc2_human_blacksmith, wc2_human_stables
+# 		Queue: Addons
+# 		Description: Unlocks even more advanced buildings.
+# 		Icon: icon
+# 	RenderSprites:
+# 	ProvidesPrerequisite:
+
+wc2_human_farm:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_farm: ^wc2_farm
+	Tooltip:
+		Name: Farm
+	Valued:
+		Cost: 1200
+	Power:
+		Amount: 300
+	StoresResources:
+		Capacity: 6000
+	Health:
+		HP: 300000
+	Buildable:
+		Prerequisites: ~wc2_human_townhall
+		Queue: Building, RABuilding
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: wc2humanfarmvoice
+	### Upgrade stuff ###
+	# Un upgraded sprite
+	WithSpriteBody:
+		RequiresCondition: !wc2_human_betterfarm && !wc2_human_bestfarm
+
+	# Better Farm Upgrade
+	GrantConditionOnPrerequisite@betterfarm:
+		Condition: wc2_human_betterfarm
+		Prerequisites: wc2_human_betterfarm
+	WithSpriteBody@betterfarm:
+		Sequence: wc2_human_betterfarm
+		RequiresCondition: wc2_human_betterfarm && !wc2_human_bestfarm
+	PowerMultiplier@betterfarm:
+		Modifier: 150
+		RequiresCondition: wc2_human_betterfarm && !wc2_human_bestfarm
+	DamageMultiplier@betterfarm:
+		Modifier: 66
+		RequiresCondition: wc2_human_betterfarm && !wc2_human_bestfarm
+
+	# Best Farm Upgrade
+	GrantConditionOnPrerequisite@bestfarm:
+		Condition: wc2_human_bestfarm
+		Prerequisites: wc2_human_bestfarm
+	WithSpriteBody@bestfarm:
+		Sequence: wc2_human_bestfarm
+		RequiresCondition: wc2_human_bestfarm
+	PowerMultiplier@bestfarm:
+		Modifier: 200
+		RequiresCondition: wc2_human_bestfarm
+	DamageMultiplier@bestfarm:
+		Modifier: 50
+		RequiresCondition: wc2_human_bestfarm
+	SpawnActorsOnSell@bestfarm:
+		ActorTypes: wc2_critter_sheep
+		ValuePercent: 4
+		RequiresCondition: wc2_human_bestfarm
+
+wc2_human_barracks:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_barracks: ^wc2_barracks
+	Tooltip:
+		Name: Barracks
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Warriors of the Alliance live and train here.\nProduces many Human units.
+		Prerequisites: ~wc2_human_townhall, wc2_human_farm
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: humanbarracksvoice
+
+wc2_human_elven_lumber_mill:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
+	Tooltip:
+		Name: Elven Lumber Mill
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_farm
+		Queue: Building, RABuilding
+		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resources.\nProduces bows enabling Archers.\nProvides arrow upgrades for archers and guard towers.
+	FreeActor@1:
+		Actor: wc2_human_peasant
+	FreeActor@2:
+		Actor: wc2_human_peasant
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_elven_archer
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+	Voiced:
+		VoiceSet: wc2humanlumbermillvoice
+
+wc2_human_blacksmith:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@addon: ^BuildingPlugProducer
+	Tooltip:
+		Name: Blacksmith
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_barracks
+		Queue: Building, RABuilding
+		Description: Enables Ballista and upgrading Scout Towers to Cannon Towers.\nEnables upgrades to units.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: humanblacksmithvoice
+
+wc2_human_gnomish_inventor:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_inventor: ^wc2_inventor
+	Tooltip:
+		Name: Gnomish Inventor
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_keep
+		Queue: Building, RABuilding
+		Description: Here Dwarves and Gnomes invent marvels.\nProvides Radar.\nTrains Demo Squads and Gnomish Flying Machines.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: wc2gnomishinventorvoice
+
+wc2_human_stables:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_stables: ^wc2_stables
+	Tooltip:
+		Name: Stables
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_keep
+		Queue: Building, RABuilding
+		Description: Stables the horses for Knights, allowing their production in the Barracks.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: humanstablevoice
+
+wc2_human_church:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_church: ^wc2_church
+	Tooltip:
+		Name: Church
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_castle
+		Queue: Building, RABuilding
+		Description: Allows Knights to upgrade to Paladins and trains them in holy magicks.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: humanchurchvoice
+	# Support powers
+	# Holy vision comsat
+	IonCannonPower@HOLYVISION:
+		OrderName: wc2_holyvision
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1:
+		Icons:
+			1: holyvision
+		Names:
+			1: Holy Vision
+		Descriptions:
+			1: Reveals an area of the map\nand cloaked enemy units.
+		Cursor: ability
+		ChargeInterval: 3750
+		EndChargeSpeechNotification: SpyPlaneReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_spell.aud
+		DisplayTimerRelationships: Ally, Neutral
+		DisplayRadarPing: True
+		CameraActor: wc2_camera_scanner
+		CameraRemoveDelay: 250
+		SupportPowerPaletteOrder: 10
+		Weapon: wc2holyvisionSuper
+		WeaponDelay: 15
+		Effect: wc2_effect_sparkle
+		EffectSequence: idle-longer
+	# Healing support power.
+	IonCannonPower@HEALING:
+		OrderName: wc2_healing
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1:
+		Icons:
+			1: healing
+		Names:
+			1: Healing
+		Descriptions:
+			1: Heals a group of units.
+		Cursor: ability
+		ChargeInterval: 3750
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_spell.aud
+		DisplayTimerRelationships: Ally, Neutral
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 20
+		Weapon: wc2healingSuper
+		WeaponDelay: 15
+		Effect: wc2_effect_sparkle
+		EffectSequence: idle-longer
+
+wc2_human_sunwell:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@power: ^PowerPlant
+	# Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Tooltip:
+		Name: Sunwell
+	Valued:
+		Cost: 2500
+	Power:
+		Amount: 2500
+	Health:
+		HP: 250000
+	Armor:
+		Type: Wood
+	Buildable:
+		BuildPaletteOrder: 999
+		Prerequisites: ~wc2_human_townhall, wc2_human_church
+		BuildLimit: 1
+		Queue: Building, RABuilding
+		Description: Increases Speed, Damage Resistance, Firepower and Rate of Fire by 10% and gives addtional Regeneration.
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 12345
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 12345
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	RevealsShroud:
+		Range: 12345
+	Building:
+		Footprint: XX XX
+		Dimensions: 2,2
+	Selectable:
+		Bounds: 1024, 1024
+		DecorationBounds: 2048, 2048, 0, -512
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: humanchurchvoice
+	SoundOnDamageTransition:
+		DestroyedSounds: wc2_bldexpl1.aud, wc2_bldexpl2.aud, wc2_bldexpl3.aud
+	FireWarheadsOnDeath:
+		Type: CenterPosition
+		Weapon: wc2buildingexplode
+		EmptyWeapon: wc2buildingexplode
+	Building:
+		BuildSounds: wc2_constrct.aud
+	GrantTimedCondition:
+		Condition: wc2cond_playsound
+		Duration: 50
+		RequiresCondition: !build-incomplete
+	AmbientSound:
+		SoundFiles:
+		Interval: 100
+		RequiresCondition: wc2cond_playsound
+	WithIdleOverlay@water:
+		Sequence: water
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+
+# Used for holyvision support power.
+wc2_human_mage_tower:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_temple: ^wc2_temple
+	Tooltip:
+		Name: Mage Tower
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_castle
+		Queue: Building, RABuilding
+		Description: Teaches men in arcane magicks.\nTrains Mages.\nUnlocks Blizzard superweapon.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: wc2magetowervoice
+	# Support powers
+	# Slow
+	GrantExternalConditionPower@SLOW:
+		OrderName: wc2_slow
+		#PauseOnCondition: lowpower
+		Icon: slow
+		ChargeInterval: 3000
+		Name: Slow
+		Description: Decreases movement speed and attack rate.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_slow
+		OnFireSound: wc2_slow.aud
+		#IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 20
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Invisibility
+	GrantExternalConditionPower@INVISIBILITY:
+		OrderName: wc2_invisibility
+		#PauseOnCondition: lowpower
+		Icon: invisibility
+		ChargeInterval: 3000
+		Name: Invisibility
+		Description: Cloaks units.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_invisibility
+		OnFireSound: wc2_invisibl.aud
+		#IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 30
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Blizzard super weapon
+	IonCannonPower@BLIZZARD:
+		OrderName: wc2_blizzard
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: blizzard
+		Names:
+			1: Blizzard
+		Descriptions:
+			1: Rain down icy death in a large area.
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_icestorm.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 90
+		Weapon: wc2blizzardSuper
+		WeaponDelay: 0
+		TargetCircleRanges:
+			1: 7000
+		Effect: wc2_effect_blizzard
+		EffectSequence: hit
+
+wc2_human_gryphon_aviary:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_nest: ^wc2_nest
+	Tooltip:
+		Name: Gryphon Aviary
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_castle
+		Queue: Building, RABuilding
+		Description: A great Gryphon Matriarch lives here.\nTrains formidable Gryphon Riders.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_human_footman
+	Voiced:
+		VoiceSet: wc2gryphonaviaryvoice
+
+wc2_human_shipyard:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_shipyard: ^wc2_shipyard
+	Tooltip:
+		Name: Shipyard
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Produces and repairs ships.
+	Voiced:
+		VoiceSet: wc2orcshipyardvoice
+
+wc2_human_foundry:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_foundry: ^wc2_foundry
+	Tooltip:
+		Name: Foundry
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_shipyard, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Unlocks production of the Transport and the Battleship\nProvides upgrades for naval units.
+	Voiced:
+		VoiceSet: wc2orcoilfoundryvoice
+
+wc2_human_oil_refinery:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_oil_refinery: ^wc2_oil_refinery
+	Tooltip:
+		Name: Oil Refinery
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_shipyard, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Unlocks the construction of Oil Platforms for passive income.
+	Voiced:
+		VoiceSet: wc2orcoilrefineryvoice
+
+wc2_human_oil_platform:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_oil_platform: ^wc2_oil_platform
+	Tooltip:
+		Name: Oil Platform
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_oil_refinery, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Provides passive income.\nOil tankers can drill here for further income boost.
+	Voiced:
+		VoiceSet: wc2orcoilplatformvoice
+
+wc2_human_scout_tower:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	-WithTurretSearchlight:
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EXPERIENCE: ^GainsExperienceBuildings
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Human Scout Tower
+		RequiresCondition: !guard && !cannon
+	Tooltip@2:
+		Name: Human Guard Tower
+		RequiresCondition: guard
+	Tooltip@3:
+		Name: Human Cannon Tower
+		RequiresCondition: cannon
+	Valued:
+		Cost: 1200
+	ProductionCostMultiplier@guardtower:
+		Multiplier: 50
+	ProductionTimeMultiplier@guardtower:
+		Multiplier: 50
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_human_townhall, wc2_human_barracks
+		Queue: Defence, RADefence
+		Description: Can be upgraded to Guard or Cannon Tower.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: wc2_constrct.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	Health:
+		HP: 100000
+	Armor:
+		Type: Wood
+		RequiresCondition: !(guard || cannon)
+	Armor@Upgrade:
+		Type: Concrete
+		RequiresCondition: guard || cannon
+	DamageMultiplier@evo:
+		Modifier: 50
+		RequiresCondition: guard || cannon
+	ProvidesPrerequisite@guard:
+		Prerequisite: guard
+		RequiresCondition: guard
+	ProvidesPrerequisite@cannon:
+		Prerequisite: cannon
+		RequiresCondition: cannon
+	ProvidesPrerequisite@scouttowerupgradeavailable:
+		Prerequisite: scouttowerupgradeavailable
+		RequiresCondition: !guard && !cannon
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			wcscouttower: guard
+		Requirements:
+			wcscouttower: !guard && !cannon
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			wcscouttower2: cannon
+		Requirements:
+			wcscouttower2: !guard && !cannon
+	Sellable:
+	-WithDeathAnimation:
+	##########
+	WithSpriteBody:
+		RequiresCondition: !guard && !cannon
+	WithSpriteBody@guard:
+		Sequence: guard
+		Name: guard
+		RequiresCondition: guard && !cannon
+	WithSpriteBody@cannon:
+		Sequence: cannon
+		Name: cannon
+		RequiresCondition: cannon && !guard
+	-WithMakeAnimation:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+	Turreted:
+		TurnSpeed: 1023
+	AttackTurreted:
+		Armaments: primary, cannon, guard
+		PauseOnCondition: disabled
+	Armament@guard:
+		Weapon: wc2_tower_arrow
+		RequiresCondition: guard
+		LocalOffset: 0,0,500
+	Armament@cannon:
+		Name: cannon
+		Weapon: wc2cannontowerFire
+		RequiresCondition: cannon
+	RevealOnFire:
+		ArmamentNames: primary, cannon
+	RevealsShroud:
+		Range: 5000
+		RequiresCondition: !(guard || cannon)
+	RevealsShroud@upgraded:
+		Range: 10000
+		RequiresCondition: guard || cannon
+	DetectCloaked@cannon:
+		Range: 5000
+		RequiresCondition: (guard || cannon) && !disabled
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	GrantConditionOnPrerequisite@WC2ArrowUpg:
+		Condition: wc2arrow_upg
+		Prerequisites: wc2_h_str_arrow
+	GrantConditionOnPrerequisite@WC2ArrowUpg2:
+		Condition: wc2arrow_upg2
+		Prerequisites: wc2_h_str_arrow2
+	FirepowerMultiplier@WC2ArrowUpg:
+		Modifier: 125
+		RequiresCondition: wc2arrow_upg && guard
+	FirepowerMultiplier@WC2ArrowUpg2:
+		Modifier: 125
+		RequiresCondition: wc2arrow_upg2 && guard
+	GrantConditionOnPrerequisite@HCannonUpg:
+		Condition: hcannon_upg
+		Prerequisites: wc2_h_str_cannon
+	GrantConditionOnPrerequisite@HCannonUpg2:
+		Condition: hcannon_upg2
+		Prerequisites: wc2_h_str_cannon2
+	FirepowerMultiplier@HCannonUpg:
+		Modifier: 125
+		RequiresCondition: hcannon_upg && cannon
+	FirepowerMultiplier@HCannonUpg2:
+		Modifier: 125
+		RequiresCondition: hcannon_upg2 && cannon
+	ActorStatValues:
+		Upgrades: wc2_h_str_arrow, wc2_h_str_arrow2, wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_shield, wc2_h_str_shield2
+
+wchumancannontowerupgrade:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Guard Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill, scouttowerupgradeavailable
+		Description: Guard tower, attacks land, sea, and air with fast arrows.
+	Plug:
+		Type: wcscouttower
+	RenderSprites:
+		Image: wc2_human_guard_tower
+
+wchumanguardtowerupgrade:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Cannon Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith, scouttowerupgradeavailable
+		Description: Cannon tower, attacks land. Has huge splash damage.
+	Plug:
+		Type: wcscouttower2
+	RenderSprites:
+		Image: wc2_human_cannon_tower
+
+wc2_human_guard_tower:
+	Inherits: wc2_human_scout_tower
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Guard Tower
+	Valued:
+		Cost: 1500
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill
+		Description: Guard tower, attacks land, sea, and air with fast arrows.
+	GrantCondition:
+		Condition: guard
+	Selectable:
+		Class: wc2_human_scout_tower
+	RenderSprites:
+		Image: wc2_human_guard_tower
+
+wc2_human_cannon_tower:
+	Inherits: wc2_human_scout_tower
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Cannon Tower
+	Valued:
+		Cost: 1500
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith
+		Description: Cannon tower, attacks land. Has huge splash damage.
+	GrantCondition:
+		Condition: cannon
+	Selectable:
+		Class: wc2_human_scout_tower
+	RenderSprites:
+		Image: wc2_human_cannon_tower
+
+# wc2_human_scout_tower:
+# 	Inherits@WC2BUILDING: ^WC2HumanDefense
+# 	Inherits@wc2_watch_tower: ^wc2_watch_tower
+# 	# Don't declare AutoTarget stuff before AttackBase stuff or an annoying bug with WithSpriteBody will occur.
+# 	#Inherits@AUTOTARGET: ^AutoTargetAll
+# 	Tooltip:
+# 		Name: Scout Tower
+# 	Buildable:
+# 		Prerequisites: ~wc2_human_barracks
+# 		Queue: Defence, RADefence
+# 		Description: Upgradable defense building\nDetector
+# 	Voiced:
+# 		VoiceSet: humanguardtowervoice
+# 	Armament@guardtower:
+# 		Weapon: wc2_tower_arrow
+# 		RequiresCondition: humanguardtowerupg
+# 	Armament@guardtoweraa:
+# 		Weapon: wc2_tower_arrow_aa
+# 		RequiresCondition: humanguardtowerupg
+# 	Armament@cannontower:
+# 		Weapon: wc2cannontowerFire
+# 		RequiresCondition: humancannontowerupg
+# 	WithRangeCircle:
+# 		Range: 3072
+# 		RequiresCondition: humancannontowerupg
+# 	Inherits@AUTOTARGET: ^AutoTargetAll
+# 	### Upgrade stuff ###
+# 	Production:
+# 		Produces: Towerupgrade.human2
+# 		RequiresCondition: !humanguardtowerupg && !humancannontowerupg
+# 	ProductionBar:
+# 		ProductionType: Towerupgrade.human2
+# 	ProductionQueue:
+# 		Type: Towerupgrade.human2
+# 		DisplayOrder: 0
+# 		Group: Addon
+# 		LowPowerModifier: 200
+# 		QueueLimit: 1
+# 		ItemLimit: 1
+# 	GrantConditionOnProduction@guardtower:
+# 		Condition: humanguardtowerupg
+# 		Actors: wc2_human_guard_tower
+# 	GrantConditionOnProduction@cannontower:
+# 		Condition: humancannontowerupg
+# 		Actors: wc2_human_cannon_tower
+# 	WithSpriteBody:
+# 		RequiresCondition: !humanguardtowerupg && !humancannontowerupg
+# 	WithSpriteBody@guardtower:
+# 		Sequence: wc2_human_guard_tower
+# 		RequiresCondition: humanguardtowerupg
+# 	WithSpriteBody@cannontower:
+# 		Sequence: wc2_human_cannon_tower
+# 		RequiresCondition: humancannontowerupg
+# 	DamageMultiplier@guardtower:
+# 		Modifier: 75
+# 		RequiresCondition: humanguardtowerupg
+# 	DamageMultiplier@cannontower:
+# 		Modifier: 67
+# 		RequiresCondition: humancannontowerupg
+
+# wc2_human_guard_tower:
+# 	Tooltip:
+# 		Name: Guard Tower
+# 	Buildable:
+# 		BuildPaletteOrder: 1
+# 		Prerequisites: ~wc2_human_elven_lumber_mill
+# 		Queue: Towerupgrade.human2
+# 		BuildDuration: 3500
+# 		BuildDurationModifier: 12
+# 		Description: Guard tower, attacks land, sea, and air.
+# 	Valued:
+# 		Cost: 800
+# 	Interactable:
+# 	AlwaysVisible:
+# 	KillsSelf:
+# 		RemoveInstead: true
+# 	RenderSprites:
+
+# wc2_human_cannon_tower:
+# 	Tooltip:
+# 		Name: Cannon Tower
+# 	Buildable:
+# 		BuildPaletteOrder: 1
+# 		Prerequisites: ~wc2_human_blacksmith
+# 		Queue: Towerupgrade.human2
+# 		BuildDuration: 4750
+# 		BuildDurationModifier: 12
+# 		Description: Cannon tower, attacks land.
+# 	Valued:
+# 		Cost: 1600
+# 	Interactable:
+# 	AlwaysVisible:
+# 	KillsSelf:
+# 		RemoveInstead: true
+# 	RenderSprites:
+
+wc2_human_wall:
+	Inherits: ^Wall
+	Valued:
+		Cost: 300
+	CustomSellValue:
+		Value: 0
+	Tooltip:
+		Name: Wall
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~wc2_human_townhall
+		Queue: Defence, RADefence
+		Description: Stops infantry and most tanks.\nBlocks some projectiles.
+	Health:
+		HP: 25000
+	Armor:
+		Type: Heavy
+	BlocksProjectiles:
+	Crushable:
+		CrushClasses: heavywall
+		-CrushSound:
+	SoundOnDamageTransition:
+		DestroyedSounds: crumble.aud
+	# WithMakeAnimation:
+	# 	Condition: build-incomplete
+	LineBuild:
+		NodeTypes: wc2_human_wall
+	LineBuildNode:
+		Types: wc2_human_wall
+	WithWallSpriteBody:
+		Type: wc2_human_wall
+		RequiresCondition: !cond_timer
+	WithIdleOverlay@wc2walltimer:
+		Sequence: make
+		RequiresCondition: cond_timer
+	GrantTimedCondition@wc2walltimer:
+		Condition: cond_timer
+		Duration: 30
+	RenderSprites:
+	RenderSprites:
+		Palette: player
+
+wc2_human_goldmine:
+	Inherits@WC2BUILDING: ^WC2HumanBuilding
+	Inherits@wc2_goldmine: ^wc2_goldmine
+	Tooltip:
+		Name: Human Gold Mine
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Send workers inside to provide passive income.\nMiners progressively get experience and work more efficiently.
+		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith, derricklimit
+	Voiced:
+		VoiceSet: neutralgoldminevoice
+	RenderSprites:
+		Image: wc2_human_goldmine
+
+wc2_human_goldmine.bot:
+	Inherits@WC2BUILDING: wc2_human_goldmine
+	Valued:
+		Cost: 15000
+	Buildable:
+		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith, derricklimit, ~botplayer
+	Cargo:
+		InitialUnits: wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant
+	RenderSprites:
+		Image: wc2_human_goldmine
+
+###################################################################################################
+# WC2 HUMAN UNITS
+###################################################################################################
+
+wc2_orc_greathall:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^Refinery
+	Inherits@shape: ^3x2Shape
+	Inherits@bot: ^BotMicromanageable
+	Inherits@conyard: ^Conyard
+	Tooltip:
+		Name: Great Hall
+		RequiresCondition: !wc2_orc_stronghold && !wc2_orc_fortress
+	Tooltip@2:
+		Name: Stronghold
+		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress
+	Tooltip@3:
+		Name: Fortress
+		RequiresCondition: wc2_orc_fortress
+	Production@INFANTRY:
+		Produces: Infantry
+		PauseOnCondition: disabled
+	ProductionQueue@INFANTRY:
+		Type: Infantry
+		DisplayOrder: 2
+		Group: Infantry
+		LowPowerModifier: 300
+		ReadyAudio: UnitReady
+		BlockedAudio: NoBuild
+		LimitedAudio: BuildingInProgress
+		QueuedAudio: Training
+		OnHoldAudio: OnHold
+		CancelledAudio: Cancelled
+		InfiniteBuildLimit: 10
+	ProductionBar@INFANTRY:
+		ProductionType: Infantry
+	# Production@NORMAL:
+	# 	-RequiresCondition:
+	# -Production@CLASSICPRODUCTIONQUEUES:
+	# ProductionBar@BUILDING:
+	# 	-RequiresCondition:
+	# ProductionBar@DEFENCE:
+	# 	-RequiresCondition:
+	# -ProductionBar@RABUILDING:
+	# -ProductionBar@RADEFENCE:
+	ProductionQueue@Building:
+		LowPowerModifier: 100
+	ProductionQueue@Defense:
+		LowPowerModifier: 100
+	Selectable:
+		Bounds: 3072, 2048
+		DecorationBounds: 3300, 2448, 0, 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@wc2_orc_stronghold:
+		Prerequisite: wc2_orc_stronghold
+		RequiresCondition: wc2_orc_stronghold
+	ProvidesPrerequisite@wc2_orc_fortress:
+		Prerequisite: wc2_orc_fortress
+		RequiresCondition: wc2_orc_fortress
+	ProvidesPrerequisite@strongholdupgradeavailable:
+		Prerequisite: strongholdupgradeavailable
+		RequiresCondition: !wc2_orc_stronghold
+	ProvidesPrerequisite@fortressupgradeavailable:
+		Prerequisite: fortressupgradeavailable
+		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			wc2_orc_greathall: wc2_orc_stronghold
+		Requirements:
+			wc2_orc_greathall: !wc2_orc_stronghold
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			wc2_orc_stronghold: wc2_orc_fortress
+		Requirements:
+			wc2_orc_stronghold: wc2_orc_stronghold && !wc2_orc_fortress
+	WithSpriteBody:
+		RequiresCondition: !wc2_orc_stronghold && !wc2_orc_fortress
+	WithSpriteBody@keep:
+		Sequence: wc2_orc_stronghold
+		Name: stronghold
+		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress
+	WithSpriteBody@castle:
+		Sequence: wc2_orc_fortress
+		Name: fortress
+		RequiresCondition: wc2_orc_fortress
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: wc2_constrct.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	DamageMultiplier@keep:
+		Modifier: 75
+		RequiresCondition: wc2_orc_greathall && !wc2_orc_fortress
+	DamageMultiplier@castle:
+		Modifier: 50
+		RequiresCondition: wc2_orc_fortress
+	GrantConditionOnPowerState@supply:
+		Condition: lowpower
+		ValidPowerStates: Low, Critical
+	ProvidesPrerequisite@supplylimit:
+		Prerequisite: supplylimit
+		RequiresCondition: lowpower
+	RallyPoint: ##########
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -1024,1024,0 #-1323,1280,0
+		ExitCell: 0,2
+		Facing: 540
+	ProvidesRadar:
+		RequiresCondition: !jammed
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi, hatchery
+	WithMakeAnimation:
+	-WithDeathAnimation:
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c512, 1c512, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c512, 1c512, 0
+		MaxQueueLength: 10
+	Sellable:
+	Refinery:
+		DockOffset: 0,2
+	StoresResources:
+		Capacity: 1000
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+		FullSequence: pip-yellow
+	Transforms:
+		IntoActor: wc2_orc_mcv
+
+wc2_orc_stronghold:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Stronghold
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites:  ~wc2_orc_greathall, strongholdupgradeavailable, wc2_orc_blacksmith
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_orc_greathall
+
+wc2_orc_fortress:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Fortress
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold, fortressupgradeavailable, wc2_orc_goblin_alchemist, wc2_orc_ogre_mound
+		Description: Unlocks more advanced buildings.
+	Plug:
+		Type: wc2_orc_stronghold
+
+wc2_orc_pigfarm:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_farm: ^wc2_farm
+	Tooltip:
+		Name: Pigfarm
+	Valued:
+		Cost: 1000
+	Power:
+		Amount: 250
+	StoresResources:
+		Capacity: 5000
+	Health:
+		HP: 250000
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall
+		Queue: Building, RABuilding
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: wc2orcfarmvoice
+	### Upgrade stuff ###
+	# Un upgraded sprite
+	WithSpriteBody:
+		RequiresCondition: !wc2_orc_betterfarm && !wc2_orc_bestfarm
+
+	# Better Farm Upgrade
+	GrantConditionOnPrerequisite@betterfarm:
+		Condition: wc2_orc_betterfarm
+		Prerequisites: wc2_orc_betterfarm
+	WithSpriteBody@betterfarm:
+		Sequence: wc2_orc_betterfarm
+		RequiresCondition: wc2_orc_betterfarm && !wc2_orc_bestfarm
+	PowerMultiplier@betterfarm:
+		Modifier: 150
+		RequiresCondition: wc2_orc_betterfarm && !wc2_orc_bestfarm
+	DamageMultiplier@betterfarm:
+		Modifier: 66
+		RequiresCondition: wc2_orc_betterfarm && !wc2_orc_bestfarm
+
+	# Best Farm Upgrade
+	GrantConditionOnPrerequisite@bestfarm:
+		Condition: wc2_orc_bestfarm
+		Prerequisites: wc2_orc_bestfarm
+	WithSpriteBody@bestfarm:
+		Sequence: wc2_orc_bestfarm
+		RequiresCondition: wc2_orc_bestfarm
+	PowerMultiplier@bestfarm:
+		Modifier: 200
+		RequiresCondition: wc2_orc_bestfarm
+	DamageMultiplier@bestfarm:
+		Modifier: 50
+		RequiresCondition: wc2_orc_bestfarm
+	SpawnActorsOnSell@bestfarm:
+		ActorTypes: wc2_critter_boar
+		ValuePercent: 4
+		RequiresCondition: wc2_orc_bestfarm
+
+wc2_orc_barracks:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_barracks: ^wc2_barracks
+	Tooltip:
+		Name: Barracks
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Warriors of the Horde live and train here.\nProduces many Orcish units.
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_pigfarm
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: orcbarracksvoice
+
+wc2_orc_troll_lumber_mill:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
+	Tooltip:
+		Name: Troll Lumbermill
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_pigfarm
+		Queue: Building, RABuilding
+		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resource\nProduces axes enabling Axethrowers.\nProvides upgrades for Axethrowers.\nUnlocks Guard Tower upgrade.
+	FreeActor@1:
+		Actor: wc2_orc_peon
+	FreeActor@2:
+		Actor: wc2_orc_peon
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_troll_axethrower
+	Refinery:
+	DockHost:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK2:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: -1c0, 1c0, 0
+		MaxQueueLength: 10
+	DockHost@DOCK3:
+		Type: Unload
+		DockAngle: 0
+		DockOffset: 1c0, 1c0, 0
+		MaxQueueLength: 10
+	Voiced:
+		VoiceSet: wc2orclumbermillvoice
+
+wc2_orc_blacksmith:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_blacksmith: ^wc2_blacksmith
+	Inherits@addon: ^BuildingPlugProducer
+	Tooltip:
+		Name: Blacksmith
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_barracks
+		Queue: Building, RABuilding
+		Description: Enables Catapults and upgrading Scout Towers to Cannon Towers.\nEnables upgrades to units.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: wc2orcblacksmithvoice
+
+wc2_orc_goblin_alchemist:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_inventor: ^wc2_inventor
+	Tooltip:
+		Name: Golbin Alchemist
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold
+		Queue: Building, RABuilding
+		Description: Ingenious goblins dabble in alchemy and invention.\nProvides Radar.\nTrains Sappers & Zeppelins.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: wc2orcgoblinalchemist
+
+wc2_orc_ogre_mound:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_stables: ^wc2_stables
+	Tooltip:
+		Name: Ogre Mound
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold
+		Queue: Building, RABuilding
+		Description: Unlocks production of Ogres.\nThis place smells bad!
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: wc2orcogremound
+
+wc2_orc_altar_of_storms:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_church: ^wc2_church
+	Tooltip:
+		Name: Altar of Storms
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_fortress
+		Queue: Building, RABuilding
+		Description: Teaches Ogres how to read and cast dark magicks.\nUnlocks Ogre Mage upgrade for Ogres.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: wc2orcaltarofstorms
+	# Support powers
+	# Spy of Kilrogg support power.
+	AirstrikePower@SPYOFKILROGG:
+		OrderName: wc2_spy_of_kilrogg
+		# Prerequisites:
+		# 	1: wc2_orc_altar_of_storms
+		# Icons:
+		# 	1: kilrogg
+		Icon: kilrogg
+		ChargeInterval: 3750
+		# Names:
+		# 	1: Spy of Kilrogg
+		# Descriptions:
+		# 	1: Reveals an area of the map\nand cloaked enemy units.
+		Name: Spy of Kilrogg
+		Description: Reveals an area of the map\nand cloaked enemy units.
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: SpyPlaneReady
+		CameraActor: camera.spyplane
+		CameraRemoveDelay: 150
+		SquadSizes:
+			1: 1
+		UnitTypes:
+			1: wc2_support_orc_eye_of_kilrogg
+		QuantizedFacings: 8
+		DisplayBeacon: true
+		BeaconImage: icon
+		BeaconPoster: kilrogg_beacon
+		ArrowSequence: wc2_arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: wc2_airstrikedirection
+		SupportPowerPaletteOrder: 10
+	# Bloodlust support power.
+	GrantExternalConditionPower@BLOODLUST:
+		OrderName: wc2_bloodlust
+		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orc_altar_of_storms
+		# Icons:
+		# 	1: bloodlust
+		Icon: bloodlust
+		ChargeInterval: 3000
+		# Names:
+		# 	1: Bloodlust
+		# Descriptions:
+		# 	1: Triples damage output of units.
+		Name: Bloodlust
+		Description: Triples damage output of units.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_bloodlust
+		OnFireSound: wc2_blodlust.aud
+		IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 20
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Runes support power.
+	IonCannonPower@RUNES:
+		OrderName: wc2_runes
+		PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: ~techlevel.superweapons
+		Prerequisites: ~techlevel.superweapons
+		# Icons:
+		# 	1: runes
+		Icon: runes
+		Cursor: ability
+		ChargeInterval: 4500
+		# Names:
+		# 	1: Runes
+		# Descriptions:
+		# 	1: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
+		Name: Runes
+		Description: Deploy OgreMage runes anywhere on the map.\nThese are land mines.\nUse with caution.\nDisappears after a while.
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_spell.aud
+		DisplayTimerRelationships: Ally, Neutral
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 30
+		Weapon: wc2runesSuper
+		WeaponDelay: 15
+		Effect: wc2_effect_sparkle
+		EffectSequence: idle-longer
+
+wc2_orc_temple_of_the_damned:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_temple: ^wc2_temple
+	Tooltip:
+		Name: Temple of the Damned
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_fortress
+		Queue: Building, RABuilding
+		Description: Terrible rituals are performed here.\nTrains Death Knights and raise Skeletons.\nUnlocks Death & Decay superweapon.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: wc2orctempleofthedamnedvoice
+	# Support powers
+	# Haste
+	GrantExternalConditionPower@HASTE:
+		OrderName: wc2_haste
+		#PauseOnCondition: lowpower
+		# Prerequisites:
+		# 	1: wc2_orc_temple_of_the_damned
+		# Icons:
+		# 	1: haste
+		Icon: haste
+		ChargeInterval: 3000
+		# Names:
+		# 	1: Haste
+		# Descriptions:
+		# 	1: Increases movement speed and attack rate.
+		Name: Haste
+		Description: Increases movement speed and attack rate.
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: wc2_cond_haste
+		OnFireSound: wc2_haste.aud
+		#IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 30
+		ValidRelationships: Enemy, Neutral, Ally
+		Dimensions: 5, 5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+	# Death and decay super weapon
+	IonCannonPower@DEATHANDDECAY:
+		OrderName: wc2_deathanddecay
+		PauseOnCondition: lowpower
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1: deathanddecay
+		Names:
+			1: Death and decay
+		Descriptions:
+			1: Rots and kills in a large area.
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		OnFireSound: wc2_decay.aud
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraActor: camera.small
+		SupportPowerPaletteOrder: 90
+		Weapon: wc2deathanddecaySuper
+		WeaponDelay: 0
+		TargetCircleRanges:
+			1: 7000
+		Effect: wc2_effect_death_and_decay
+		EffectSequence: idle
+
+wc2_orc_dragon_roost:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_nest: ^wc2_nest
+	Tooltip:
+		Name: Dragon Roost
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_fortress
+		Queue: Building, RABuilding
+		Description: A captured dragon is forced to lay eggs for the Horde.\nTrains mighty Dragons.
+	SpawnActorsOnSell:
+		ActorTypes: wc2_orc_grunt
+	Voiced:
+		VoiceSet: wc2orcdragonroost
+
+wc2_orc_shipyard:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_shipyard: ^wc2_shipyard
+	Tooltip:
+		Name: Shipyard
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Produces and repairs ships.
+	Voiced:
+		VoiceSet: wc2orcshipyardvoice
+
+wc2_orc_foundry:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_foundry: ^wc2_foundry
+	Tooltip:
+		Name: Foundry
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_shipyard, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Unlocks production of the Transport and the Juggernaught.\nProvides upgrades for naval units.
+	Voiced:
+		VoiceSet: wc2orcoilfoundryvoice
+
+wc2_orc_oil_refinery:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_oil_refinery: ^wc2_oil_refinery
+	Tooltip:
+		Name: Oil Refinery
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_shipyard, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Unlocks the construction of Oil Platforms for passive income.
+	Voiced:
+		VoiceSet: wc2orcoilrefineryvoice
+
+wc2_orc_oil_platform:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_oil_platform: ^wc2_oil_platform
+	Tooltip:
+		Name: Oil Platform
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_oil_refinery, ~globalnaval
+		Queue: Building, RABuilding
+		Description: Provides passive income.\nOil tankers can drill here for further income boost.
+	Voiced:
+		VoiceSet: wc2orcoilplatformvoice
+
+wc2_orc_watch_tower:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	-WithTurretSearchlight:
+	Inherits@exp: ^GainsExperienceTDBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EXPERIENCE: ^GainsExperienceBuildings
+	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits: ^BuildingPlugProducer
+	Tooltip:
+		Name: Orc Watch Tower
+		RequiresCondition: !guard && !cannon
+	Tooltip@2:
+		Name: Orc Guard Tower
+		RequiresCondition: guard
+	Tooltip@3:
+		Name: Orc Cannon Tower
+		RequiresCondition: cannon
+	Valued:
+		Cost: 1200
+	ProductionCostMultiplier@guardtower:
+		Multiplier: 50
+	ProductionTimeMultiplier@guardtower:
+		Multiplier: 50
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_barracks
+		Queue: Defence, RADefence
+		Description: Can be upgraded to Guard or Cannon Tower.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		BuildSounds: wc2_constrct.aud
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
+	Health:
+		HP: 100000
+	Armor:
+		Type: Wood
+		RequiresCondition: !(guard || cannon)
+	Armor@Upgrade:
+		Type: Concrete
+		RequiresCondition: guard || cannon
+	DamageMultiplier@evo:
+		Modifier: 50
+		RequiresCondition: guard || cannon
+	ProvidesPrerequisite@guard:
+		Prerequisite: guard
+		RequiresCondition: guard
+	ProvidesPrerequisite@cannon:
+		Prerequisite: cannon
+		RequiresCondition: cannon
+	ProvidesPrerequisite@scouttowerupgradeavailable:
+		Prerequisite: scouttowerupgradeavailable
+		RequiresCondition: !guard && !cannon
+	Pluggable:
+		Offset: 0,0
+		Conditions:
+			wcscouttower: guard
+		Requirements:
+			wcscouttower: !guard && !cannon
+	Pluggable@2:
+		Offset: 0,0
+		Conditions:
+			wcscouttower2: cannon
+		Requirements:
+			wcscouttower2: !guard && !cannon
+	Sellable:
+	-WithDeathAnimation:
+	##########
+	WithSpriteBody:
+		RequiresCondition: !guard && !cannon
+	WithSpriteBody@guard:
+		Sequence: guard
+		Name: guard
+		RequiresCondition: guard && !cannon
+	WithSpriteBody@cannon:
+		Sequence: cannon
+		Name: cannon
+		RequiresCondition: cannon && !guard
+	-WithMakeAnimation:
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithSpriteTurret:
+	Turreted:
+		TurnSpeed: 1023
+	AttackTurreted:
+		Armaments: primary, cannon
+		PauseOnCondition: disabled
+	Armament@guard:
+		Weapon: wc2_tower_arrow
+		RequiresCondition: guard
+		LocalOffset: 0,0,500
+	Armament@cannon:
+		Name: cannon
+		Weapon: wc2cannontowerFire
+		RequiresCondition: cannon
+	RevealOnFire:
+		ArmamentNames: primary, cannon
+	RevealsShroud:
+		Range: 5000
+		RequiresCondition: !(guard || cannon)
+	RevealsShroud@upgraded:
+		Range: 10000
+		RequiresCondition: guard || cannon
+	DetectCloaked@cannon:
+		Range: 5000
+		RequiresCondition: (guard || cannon) && !disabled
+	Selectable:
+		Bounds: 2048, 2048
+		DecorationBounds: 2448, 2448, 0, 0
+	GrantConditionOnPrerequisite@TAxeUpg:
+		Condition: throwaxe_upg
+		Prerequisites: wc2_o_str_throwaxe
+	GrantConditionOnPrerequisite@TAxeUpg2:
+		Condition: throwaxe_upg2
+		Prerequisites: wc2_o_str_throwaxe2
+	FirepowerMultiplier@TAxeUpg:
+		Modifier: 125
+		RequiresCondition: throwaxe_upg && guard
+	FirepowerMultiplier@TAxeUpg2:
+		Modifier: 125
+		RequiresCondition: throwaxe_upg2 && guard
+	GrantConditionOnPrerequisite@OCannonUpg:
+		Condition: ocannon_upg
+		Prerequisites: wc2_o_str_cannon
+	GrantConditionOnPrerequisite@OCannonUpg2:
+		Condition: ocannon_upg2
+		Prerequisites: wc2_o_str_cannon2
+	FirepowerMultiplier@OCannonUpg:
+		Modifier: 125
+		RequiresCondition: ocannon_upg && cannon
+	FirepowerMultiplier@OCannonUpg2:
+		Modifier: 125
+		RequiresCondition: ocannon_upg2 && cannon
+	ActorStatValues:
+		Upgrades: wc2_o_str_throwaxe, wc2_o_str_throwaxe2, wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_shield, wc2_o_str_shield2
+
+wcorcguardtowerupgrade:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Guard Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill, scouttowerupgradeavailable
+		Description: Ground base defense.
+	Plug:
+		Type: wcscouttower
+	RenderSprites:
+		Image: wc2_orc_guard_tower
+
+wcorccannontowerupgrade:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Cannon Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith, scouttowerupgradeavailable
+		Description: Anti-aircraft base defense.
+	Plug:
+		Type: wcscouttower2
+	RenderSprites:
+		Image: wc2_orc_cannon_tower
+
+wc2_orc_guard_tower:
+	Inherits: wc2_orc_watch_tower
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Guard Tower
+	Valued:
+		Cost: 1600
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill
+		Description: Guard tower, attacks land, sea, and air with fast arrows.
+	GrantCondition:
+		Condition: guard
+	Selectable:
+		Class: wc2_orc_watch_tower
+	RenderSprites:
+		Image: wc2_orc_guard_tower
+
+wc2_orc_cannon_tower:
+	Inherits: wc2_orc_watch_tower
+	-ProductionCostMultiplier@guardtower:
+	Tooltip:
+		Name: Cannon Tower
+	Valued:
+		Cost: 1600
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith
+		Description: Cannon tower, attacks land. Has huge splash damage.
+	GrantCondition:
+		Condition: cannon
+	Selectable:
+		Class: wc2_orc_watch_tower
+	RenderSprites:
+		Image: wc2_orc_cannon_tower
+
+# wc2_orc_watch_tower:
+# 	Inherits@WC2BUILDING: ^WC2OrcDefense
+# 	Inherits@wc2_watch_tower: ^wc2_watch_tower
+# 	# Don't declare AutoTarget stuff before AttackBase stuff or an annoying bug with WithSpriteBody will occur.
+# 	#Inherits@AUTOTARGET: ^AutoTargetAll
+# 	Tooltip:
+# 		Name: Watch Tower
+# 	Buildable:
+# 		Prerequisites: ~wc2_orc_barracks
+# 		Queue: Defence, RADefence
+# 		Description: Upgradable defense building\nDetector
+# 	Voiced:
+# 		VoiceSet: orcguardtowervoice
+# 	Armament@guardtower:
+# 		Weapon: wc2_tower_axe
+# 		RequiresCondition: orcguardtowerupg
+# 	Armament@guardtoweraa:
+# 		Weapon: wc2_tower_axe_aa
+# 		RequiresCondition: orcguardtowerupg
+# 	Armament@cannontower:
+# 		Weapon: wc2cannontowerFire
+# 		RequiresCondition: orccannontowerupg
+# 	WithRangeCircle:
+# 		Range: 3072
+# 		RequiresCondition: orccannontowerupg
+# 	Inherits@AUTOTARGET: ^AutoTargetAll
+# 	### Upgrade stuff ###
+# 	Production:
+# 		Produces: Towerupgrade.orc2
+# 		RequiresCondition: !orcguardtowerupg && !orccannontowerupg
+# 	ProductionBar:
+# 		ProductionType: Towerupgrade.orc2
+# 	ProductionQueue:
+# 		Type: Towerupgrade.orc2
+# 		DisplayOrder: 0
+# 		Group: Addon
+# 		LowPowerModifier: 200
+# 		QueueLimit: 1
+# 		ItemLimit: 1
+# 	GrantConditionOnProduction@guardtower:
+# 		Condition: orcguardtowerupg
+# 		Actors: wc2_orc_guard_tower
+# 	GrantConditionOnProduction@cannontower:
+# 		Condition: orccannontowerupg
+# 		Actors: wc2_orc_cannon_tower
+# 	WithSpriteBody:
+# 		RequiresCondition: !orcguardtowerupg && !orccannontowerupg
+# 	WithSpriteBody@guardtower:
+# 		Sequence: wc2_orc_guard_tower
+# 		RequiresCondition: orcguardtowerupg
+# 	WithSpriteBody@cannontower:
+# 		Sequence: wc2_orc_cannon_tower
+# 		RequiresCondition: orccannontowerupg
+# 	DamageMultiplier@guardtower:
+# 		Modifier: 75
+# 		RequiresCondition: orcguardtowerupg
+# 	DamageMultiplier@cannontower:
+# 		Modifier: 67
+# 		RequiresCondition: orccannontowerupg
+
+# wc2_orc_guard_tower:
+# 	Tooltip:
+# 		Name: Guard Tower
+# 	Buildable:
+# 		BuildPaletteOrder: 1
+# 		Prerequisites: ~wc2_orc_troll_lumber_mill
+# 		Queue: Towerupgrade.orc2
+# 		BuildDuration: 3500
+# 		BuildDurationModifier: 15
+# 		Description: Guard tower, attacks land, sea, and air.
+# 	Valued:
+# 		Cost: 800
+# 	Interactable:
+# 	AlwaysVisible:
+# 	KillsSelf:
+# 		RemoveInstead: true
+# 	RenderSprites:
+
+# wc2_orc_cannon_tower:
+# 	Tooltip:
+# 		Name: Cannon Tower
+# 	Buildable:
+# 		BuildPaletteOrder: 1
+# 		Prerequisites: ~wc2_orc_blacksmith
+# 		Queue: Towerupgrade.orc2
+# 		BuildDuration: 4750
+# 		BuildDurationModifier: 15
+# 		Description: Cannon tower, attacks land.
+# 	Valued:
+# 		Cost: 1600
+# 	Interactable:
+# 	AlwaysVisible:
+# 	KillsSelf:
+# 		RemoveInstead: true
+# 	RenderSprites:
+
+wc2_orc_wall:
+	Inherits: wc2_human_wall
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~wc2_orc_greathall
+		Queue: Defence, RADefence
+	LineBuild:
+		NodeTypes: wc2_orc_wall
+	LineBuildNode:
+		Types: wc2_orc_wall
+	WithWallSpriteBody:
+		Type: wc2_orc_wall
+	RenderSprites:
+		Palette: player
+
+wc2_orc_goldmine:
+	Inherits@WC2BUILDING: ^WC2OrcBuilding
+	Inherits@wc2_goldmine: ^wc2_goldmine
+	Tooltip:
+		Name: Orc Gold Mine
+	Buildable:
+		Queue: Building, RABuilding
+		Description: Send workers inside to provide passive income.\nMiners progressively get experience and work more efficiently.
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith, derricklimit
+	Voiced:
+		VoiceSet: neutralgoldminevoice
+	RenderSprites:
+		Image: wc2_orc_goldmine
+
+wc2_orc_goldmine.bot:
+	Inherits@WC2BUILDING: wc2_orc_goldmine
+	Valued:
+		Cost: 15000
+	Buildable:
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith, derricklimit, ~botplayer
+	Cargo:
+		InitialUnits: wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon
+	RenderSprites:
+		Image: wc2_orc_goldmine
+
+####################################################################################################
+# WC2 ORC UNITS
+####################################################################################################

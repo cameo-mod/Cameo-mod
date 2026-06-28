@@ -1,0 +1,319 @@
+wc2_human_gnomish_flying_machine:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@WC2Template: ^wc2_airscout
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Tooltip:
+		Name: Flying Machine
+	Buildable:
+		Prerequisites: ~wc2_human_gnomish_inventor
+		Queue: Vehicle, RAVehicle
+		Description: Flying scout unit. He's got a flying machine!\nDetector.
+	Voiced:
+		VoiceSet: wc2voicehumanflyingmachine
+	ActorStatValues:
+		Upgrades: wc2_h_str_shield, wc2_h_str_shield2
+
+wc2_human_gyrocopter2:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@WC2Template: ^wc2_airscout
+	Tooltip:
+		Name: Gyrocopter Machine
+	Buildable:
+		Prerequisites: ~wc2_human_gnomish_inventor
+		Queue: Vehicle, RAVehicle
+		Description: Flying scout unit. He's got a flying machine!\nDetector.
+	Voiced:
+		VoiceSet: wc2voicehumanflyingmachine
+
+wc2_human_gryphon_rider:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Tooltip:
+		Name: Gryphon Rider
+	Valued:
+		Cost: 1500
+	Power:
+		Amount: -75
+	Health:
+		HP: 125000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	-Integrity:
+	-GrantCondition@electronics:
+	Aircraft:
+		Speed: 145
+		TurnSpeed: 29
+		RepulsionSpeed: 29
+	Targetable@HEAL:
+		RequiresCondition: damaged
+		TargetTypes: Heal
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_human_gryphon_aviary
+		Queue: Aircraft, RAAircraft
+		Description: Flying attacker unit.\nMagical hammer can hit multiple targets in a line.\nStrong vs air units.
+	Armament@VISIBLE:
+		Weapon: wc2gryphonFireVisible
+		LocalOffset: 400,0,0
+		Name: primary
+		FireDelay: 3
+	AttackAircraft:
+		FacingTolerance: 0
+		AttackType: Hover
+		Armaments: primary, secondary
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@haste:
+		Body: body-haste
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@slow:
+		Body: body-slow
+		Armament: primary
+		Sequence: shoot
+	Voiced:
+		VoiceSet: wc2voicehumangryphonrider
+	WithFacingSpriteBody:
+		RequiresCondition: (!wc2_cond_haste && !wc2_cond_slow) || (wc2_cond_haste && wc2_cond_slow)
+	WithFacingSpriteBody@Haste:
+		Name: body-haste
+		Sequence: idle-haste
+		RequiresCondition: wc2_cond_haste && !wc2_cond_slow
+	WithFacingSpriteBody@Slow:
+		Name: body-slow
+		Sequence: idle-slow
+		RequiresCondition: wc2_cond_slow && !wc2_cond_haste
+	ActorStatValues:
+		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_shield, wc2_h_str_shield2
+
+####################################################################################################
+# WC2 ORC BUILDINGS
+####################################################################################################
+
+wc2_orc_goblin_zeppelin:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@WC2Template: ^wc2_airscout
+	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Tooltip:
+		Name: Goblin Zeppelin
+	Buildable:
+		Prerequisites: ~wc2_orc_goblin_alchemist
+		Queue: Vehicle, RAVehicle
+		Description: Flying scout unit. He can see your house!\nDetector.
+	Voiced:
+		VoiceSet: wc2voiceorcgoblinzeppelin
+	ActorStatValues:
+		Upgrades: wc2_o_str_shield, wc2_o_str_shield2
+
+wc2_orc_dragon:
+	Inherits@WC2AirUnit: ^WC2AirUnit
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Tooltip:
+		Name: Dragon
+	Valued:
+		Cost: 2000
+	Power:
+		Amount: -100
+	Health:
+		HP: 150000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	-Integrity:
+	-GrantCondition@electronics:
+	Aircraft:
+		Speed: 125
+		TurnSpeed: 25
+		RepulsionSpeed: 25
+	Targetable@HEAL:
+		RequiresCondition: damaged
+		TargetTypes: Heal
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~wc2_orc_dragon_roost
+		Queue: Aircraft, RAAircraft
+		Description: Flying ranged attacker.\nFire breath can hit multiple targets in a line.\nStrong vs Aircraft
+	Armament@VISIBLE:
+		Weapon: wc2dragonFireVisible
+		LocalOffset: 400,-64,64, 400,64,64
+		LocalYaw: 64, -64
+		Name: primary
+		FireDelay: 3
+	Armament@EXPLOSIONS:
+		Weapon: wc2dragonFireExplosion
+		LocalOffset: 400,0,0
+		Name: secondary
+		FireDelay: 7
+	AttackAircraft:
+		FacingTolerance: 0
+		AttackType: Hover
+		Armaments: primary, secondary
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@haste:
+		Body: body-haste
+		Armament: primary
+		Sequence: shoot
+	WithAttackAnimation@slow:
+		Body: body-slow
+		Armament: primary
+		Sequence: shoot
+	Voiced:
+		VoiceSet: wc2voiceorcdragon
+	WithFacingSpriteBody:
+		RequiresCondition: (!wc2_cond_haste && !wc2_cond_slow) || (wc2_cond_haste && wc2_cond_slow)
+	WithFacingSpriteBody@Haste:
+		Name: body-haste
+		Sequence: idle-haste
+		RequiresCondition: wc2_cond_haste && !wc2_cond_slow
+	WithFacingSpriteBody@Slow:
+		Name: body-slow
+		Sequence: idle-slow
+		RequiresCondition: wc2_cond_slow && !wc2_cond_haste
+	ActorStatValues:
+		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_shield, wc2_o_str_shield2
+
+wc2_orc_eye_of_kilrogg:
+	Inherits: ^WC2AirUnit
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Eye of Kilrogg
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~disabled
+		Queue: Infantry, RAInfantry
+		Description: Fast, weak scouting unit.
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 2048
+		Speed: 350
+		IdealSeparation: 1c0
+		RepulsionSpeed: 10
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 15c0
+		Type: GroundPosition
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Power:
+		Amount: 0
+	Voiced:
+		VoiceSet: wc2voiceorceyeofkillrog
+	# Die after a short while
+	GrantTimedCondition@EyeOfKilrogg:
+		Condition: wc2_cond_eyeofkilrogg_timer
+		Duration: 480
+	ChangesHealth@EyeOfKilrogg:
+		PercentageStep: -10
+		Delay: 5
+		StartIfBelow: 110
+		RequiresCondition: !wc2_cond_eyeofkilrogg_timer
+	-WithDeathAnimation:
+
+wc2_support_orc_eye_of_kilrogg:
+	Inherits: ^RANeutralPlane
+	Health:
+		HP: 200000
+	Tooltip:
+		Name: Eye of Kilrogg
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 28
+		Speed: 373
+		Repulsable: False
+		MaximumPitch: 56
+	AttackBomber:
+		FacingTolerance: 32
+	-Selectable:
+	Interactable:
+	SelectionDecorations:
+	-Voiced:
+	-Targetable@AIRBORNE:
+	Contrail@1:
+		Offset: -512,0,128
+	-SpawnActorOnDeath:
+	LeavesTrails:
+		Offsets: -1c43,0,0
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	RejectsOrders:
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+
+####################################################################################################
+# WC2 NEUTRAL STUFF
+####################################################################################################
+
+wc2_neutral_daemon:
+	Inherits: ^WC2AirUnit
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@announce: ^AnnounceOnBuild
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Daemon
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 99
+		Prerequisites: ~disabled
+		Queue: Infantry, RAInfantry
+		Description: Daemonic flying attacker.
+	Aircraft:
+		InitialFacing: 896
+		TurnSpeed: 28
+		Speed: 125
+		IdealSeparation: 1c0
+		RepulsionSpeed: 10
+	Health:
+		HP: 30000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	Armament@PRIMARY:
+		Weapon: wc2daemonFire
+		LocalOffset: 400,0,0
+		Name: primary
+		FireDelay: 7
+	AttackAircraft:
+		FacingTolerance: 80
+		AttackType: Hover
+		Armaments: primary
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	DeathSounds:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Power:
+		Amount: -30
+	Voiced:
+		VoiceSet: wc2voiceorcdragon
+
+####################################################################################################
+# WC2 HUMAN UPGRADES
+####################################################################################################

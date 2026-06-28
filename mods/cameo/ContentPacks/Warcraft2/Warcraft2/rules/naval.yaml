@@ -1,0 +1,229 @@
+wc2_human_oil_tanker:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_oil_tanker
+	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_human_oil_refinery
+		Queue: Naval, RANaval
+		Description: Drills inside Oil Platforms for income.
+	Tooltip:
+		Name: Oil Tanker
+	Voiced:
+		VoiceSet: wc2voicehumanoiltanker
+	ActorStatValues:
+		Upgrades: wc2_h_str_navyshield, wc2_h_str_navyshield2
+
+wc2_human_elven_destroyer:
+	Inherits@WC2SHIP: ^WC2Ship
+	Inherits@WC2Template: ^wc2_destroyer
+	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_human_shipyard
+		Queue: Naval, RANaval
+		Description: Light scout & support ship. Can attack air units.
+	Tooltip:
+		Name: Elven Destroyer
+	Turreted:
+		TurnSpeed: 28
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: wc2lightshipFire
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: wc2voicehumanship
+	ActorStatValues:
+		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_navyshield, wc2_h_str_navyshield2
+
+wc2_human_transport:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_transport
+	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_human_foundry
+		Queue: Naval, RANaval
+		Description: Transport ship.
+	Tooltip:
+		Name: Transport
+	Voiced:
+		VoiceSet: wc2voicehumanship
+	ActorStatValues:
+		Upgrades: wc2_h_str_navyshield, wc2_h_str_navyshield2
+
+wc2_human_battleship:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_battleship
+	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_human_foundry, ~wc2_human_blacksmith ##once keep/castle are fixed, prereq will be wc2_human_keep, wc2_human_foundry
+		Queue: Naval, RANaval
+		Description: Heavy artillery ship.
+	Tooltip:
+		Name: Battleship
+	Turreted:
+		TurnSpeed: 28
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: wc2heavyshipFire
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: wc2voicehumanship
+	ActorStatValues:
+		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_navyshield, wc2_h_str_navyshield2
+
+wc2_human_gnomish_submarine:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_submarine
+	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Inherits@HNavySUpg: ^wc2_h_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_human_foundry, ~wc2_human_gnomish_inventor
+		Queue: Naval, RANaval
+		Description: Stealthed attack vessel.
+	Tooltip:
+		Name: Gnomish Submarine
+	Armament@PRIMARY:
+		Weapon: wc2submarineFire
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+		FireDelay: 7
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: wc2voicehumansub
+	-WithDeathAnimation:
+	WithDeathAnimation@Bubbles:
+		Delay: 0
+	ActorStatValues:
+		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_navyshield, wc2_h_str_navyshield2
+
+####################################################################################################
+# WC2 HUMAN AIR UNITS
+####################################################################################################
+
+wc2_orc_oil_tanker:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_oil_tanker
+	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_orc_oil_refinery
+		Queue: Naval, RANaval
+		Description: Drills oil inside Oil Platforms for income.
+	Tooltip:
+		Name: Oil Tanker
+	Voiced:
+		VoiceSet: wc2voiceorcship
+	ActorStatValues:
+		Upgrades: wc2_o_str_navyshield, wc2_o_str_navyshield2
+
+wc2_orc_trolldestroyer:
+	Inherits@WC2SHIP: ^WC2Ship
+	Inherits@WC2Template: ^wc2_destroyer
+	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_orc_shipyard
+		Queue: Naval, RANaval
+		Description: Light scout & support ship.
+	Tooltip:
+		Name: Troll Destroyer
+	Turreted:
+		TurnSpeed: 28
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: wc2lightshipFire
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: wc2voiceorcship
+	ActorStatValues:
+		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_navyshield, wc2_o_str_navyshield2
+
+wc2_orc_transport:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_transport
+	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_orc_foundry
+		Queue: Naval, RANaval
+		Description: Transport ship.
+	Tooltip:
+		Name: Transport
+	Voiced:
+		VoiceSet: wc2voiceorcship
+	ActorStatValues:
+		Upgrades: wc2_o_str_navyshield, wc2_o_str_navyshield2
+
+wc2_orc_ogre_juggernaught:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_battleship
+	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_orc_foundry, ~wc2_orc_blacksmith ##once stronghold/fortress are fixed, prereq will be wc2_orc_stronghold, wc2_orc_foundry
+		Queue: Naval, RANaval
+		Description: Heavy artillery ship.
+	Tooltip:
+		Name: Ogre Juggernaught
+	Turreted:
+		TurnSpeed: 28
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: wc2heavyshipFire
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: wc2voiceorcship
+	ActorStatValues:
+		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_navyshield, wc2_o_str_navyshield2
+
+wc2_orc_giant_turtle:
+	Inherits@WC2Ship: ^WC2Ship
+	Inherits@WC2Template: ^wc2_submarine
+	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Inherits@ONavySUpg: ^wc2_o_str_navyshield
+	Buildable:
+		Prerequisites: ~wc2_orc_foundry, ~wc2_orc_goblin_alchemist
+		Queue: Naval, RANaval
+		Description: Turtle go grrr.\nStealthed attack submarine.
+	Tooltip:
+		Name: Giant Turtle
+	Armament@PRIMARY:
+		Weapon: wc2submarineFire
+		LocalOffset: 208,0,48
+		MuzzleSequence: muzzle
+		FireDelay: 7
+	WithAttackAnimation:
+		Armament: primary
+		Sequence: shoot
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: wc2voiceorcsub
+	-WithDeathAnimation:
+	WithDeathAnimation@Bubbles:
+		Delay: 0
+	ActorStatValues:
+		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_navyshield, wc2_o_str_navyshield2
+
+####################################################################################################
+# WC2 ORC AIR UNITS
+####################################################################################################
