@@ -1613,84 +1613,104 @@ ramaid:
 		Scale: 0.58
 	Inherits: ^InfantryOverlays
 	stand:
+		Scale: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 24
 		Length: 6
 		Facings: 8
 		Tick: 120
 	shoot:
+		Scale: 1
 		Start: 120
 		Length: 6
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 16
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 16
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 72
 		Length: 6
 		Facings: 8
 		Tick: 120
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 4
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 4
 	prone-shoot:
+		Scale: 1
 		Start: 168
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 24
 		Length: 6
 		Facings: 8
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 24
 		Length: 6
 		Facings: 8
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 24
 		Length: 6
 		Facings: 8
 		Tick: 120
 	cheer:
+		Scale: 1
 		Start: 4
 	# Dancing
 	idle4:
+		Scale: 1
 		Start: 24
 		Length: 6
 		Facings: 8
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 276
 		Length: 12
 		Tick: 80
 	# Explode
 	die2:
+		Scale: 1
 		Start: 305
 		Length: 12
 		Tick: 80
 	# Fly and explode in air
 	die3:
+		Scale: 1
 		Start: 330
 		Length: 12
 		Tick: 80
 	# Fly through air squish on ground
 	die4:
+		Scale: 1
 		Start: 330
 		Length: 12
 		Tick: 80
 	# Burn
 	die5:
+		Scale: 1
 		Start: 305
 		Length: 12
 		Tick: 80
@@ -2390,12 +2410,14 @@ modhover:
 		Filename: modhover_new.shp
 		Scale: 0.4
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,4
+		Offset: 0, 2
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,4
+		Offset: 0, 2
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -2407,12 +2429,14 @@ modhovert:
 		Filename: modhovert.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,8
+		Offset: 0, 6
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,8
+		Offset: 0, 6
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -2486,12 +2510,14 @@ modwave:
 		Filename: modwave.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,8
+		Offset: 0, 6
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,8
+		Offset: 0, 6
 	muzzle:
 		Filename: blueartexp.shp
 		Length: *
@@ -2519,14 +2545,18 @@ jharv:
 		Filename: jharv.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
 	harvest:
+		Scale: 1
 		Start: 64
 		Length: 16
 		Facings: 8
 	dock:
+		Scale: 1
 		Facings: 64
 	dock-loop:
+		Scale: 1
 		Facings: 64
 	icon:
 		Start: 0
@@ -2539,6 +2569,7 @@ jballista:
 		Filename: jballista.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
@@ -4509,39 +4540,39 @@ crab:
 	stand:
 		Facings: -8
 		ShadowStart: 156
-		Scale: 0.70
+		Scale: 1
 	die:
 		Start: 150
 		Length: 6
 		ShadowStart: 306
-		Scale: 0.70
+		Scale: 1
 	run:
 		Start: 8
 		Length: 8
 		Facings: -8
 		ShadowStart: 164
-		Scale: 0.70
+		Scale: 1
 	idle1:
 		Start: 73
 		Length: 12
 		ShadowStart: 229
-		Scale: 0.70
+		Scale: 1
 	idle2:
 		Start: 85
 		Length: 18
 		ShadowStart: 241
-		Scale: 0.70
+		Scale: 1
 	bite:
 		Start: 103
 		Length: 5
 		Facings: -8
 		ShadowStart: 259
-		Scale: 0.70
+		Scale: 1
 	die-crushed:
 		Start: 143
 		Length: 7
 		ZOffset: -511
-		Scale: 0.70
+		Scale: 1
 	icon:
 		Filename: crabicon.shp
 
@@ -4551,11 +4582,11 @@ flyant:
 	idle:
 		Facings: 8
 		Length: 2
-		Scale: 0.80
+		Scale: 1
 	move:
 		Facings: 8
 		Length: 2
-		Scale: 0.80
+		Scale: 1
 	icon:
 		Filename: flyanticon.shp
 
@@ -4974,20 +5005,24 @@ jballistat:
 		Filename: jballistat.shp
 		Scale: 0.8
 	idle:
-		Offset: 0,-2
+		Scale: 1
+		Offset: 0, -2
 		Facings: 64
 	make:
+		Scale: 1
 		Filename: jballistat.shp
 		Start: 64
 		Length: 12
-		Offset: 0,-2
+		Offset: 0, -2
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
 		Facings: 8
 	dead:
+		Scale: 1
 	bib:
-		Offset: 0,-5
+		Scale: 1
+		Offset: 0, -4
 	icon:
 		Filename: jballistaticon.shp
 
@@ -5140,86 +5175,106 @@ hakurei:
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
+		Scale: 1
 		Start: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Start: 9
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 25
 		Length: 6
 		Facings: 8
 		Tick: 100
 	shoot:
+		Scale: 1
 		Start: 121
 		Length: 6
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 17
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 144
 		Stride: 4
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 73
 		Length: 6
 		Facings: 8
 		Tick: 100
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	prone-shoot:
+		Scale: 1
 		Start: 169
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 225
 		Length: 8
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 234
 		Length: 2
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 250
 		Length: 12
 		Tick: 120
 	cheer:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# Dancing
 	idle4:
+		Scale: 1
 		Start: 262
 		Length: 12
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 278
 		Length: 16
 		Tick: 80
 	# Explode
 	die2:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
 	die3:
+		Scale: 1
 		Start: 307
 		Length: 17
 		Tick: 80
 	# Fly through air squish on ground
 	die4:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Burn
 	die5:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
@@ -5322,28 +5377,36 @@ rocketangel:
 		Tick: 200
 		Offset: 0, 0, 16
 	stand:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 70
 		Length: 10
 		Facings: 8
 		Tick: 200
 	idle:
+		Scale: 1
 		Start: 8
 		Length: 31
 	idle1:
+		Scale: 1
 		Start: 8
 		Length: 31
 	idle2:
+		Scale: 1
 		Start: 39
 		Length: 31
 	prone-run:
+		Scale: 1
 		Start: 86
 		Length: 6
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Facings: 8
 	flying:
+		Scale: 1
 		Start: 150
 		Length: 10
 		Facings: 8
@@ -5352,6 +5415,7 @@ rocketangel:
 		Length: 20
 		Tick: 50
 	die-falling:
+		Scale: 1
 		Start: 470
 		Length: 20
 		Tick: 40
@@ -5368,23 +5432,28 @@ rocketangel:
 		Length: 20
 		Tick: 50
 	attack:
+		Scale: 1
 		Start: 230
 		Length: 6
 		Facings: 8
 	flying-attack:
+		Scale: 1
 		Start: 350
 		Facings: 8
 		Length: 15
 		Tick: 100
 	prone-attack:
+		Scale: 1
 		Start: 212
 		Length: 6
 		Facings: 8
 	standup:
+		Scale: 1
 		Start: 260
 		Length: 2
 		Facings: 8
 	cheer:
+		Scale: 1
 		Facings: 8
 	# Burn
 	die5:

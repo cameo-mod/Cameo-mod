@@ -964,8 +964,10 @@ aa_japrif:
 		Scale: 0.75
 		Offset: 0,-16
 	stand:
+		Scale: 1
 		ShadowStart: 253
 	run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
@@ -973,6 +975,7 @@ aa_japrif:
 		Tick: 90
 		ShadowStart: 261
 	prone-run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
@@ -980,16 +983,19 @@ aa_japrif:
 		Tick: 120
 		ShadowStart: 261
 	idle1:
+		Scale: 1
 		Start: 88
 		Length: 15
 		Tick: 120
 		ShadowStart: 341
 	idle2:
+		Scale: 1
 		Start: 88
 		Length: 15
 		Tick: 120
 		ShadowStart: 341
 	shoot:
+		Scale: 1
 		Start: 103
 		Length: 15
 		Facings: 8
@@ -997,6 +1003,7 @@ aa_japrif:
 		Tick: 80
 		ShadowStart: 356
 	prone-shoot:
+		Scale: 1
 		Start: 103
 		Length: 15
 		Facings: 8
@@ -1004,14 +1011,17 @@ aa_japrif:
 		Tick: 106
 		ShadowStart: 356
 	die1:
+		Scale: 1
 		Start: 223
 		Length: 15
 		ShadowStart: 476
 	die2:
+		Scale: 1
 		Start: 223
 		Length: 15
 		ShadowStart: 476
 	paradrop:
+		Scale: 1
 		Start: 1
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -1098,8 +1108,10 @@ aa_archer:
 		Filename: aa_archer.shp
 		Scale: 0.9
 	stand:
+		Scale: 1
 		ShadowStart: 549
 	run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
@@ -1107,6 +1119,7 @@ aa_archer:
 		Tick: 90
 		ShadowStart: 557
 	prone-run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
@@ -1114,16 +1127,19 @@ aa_archer:
 		Tick: 120
 		ShadowStart: 557
 	idle1:
+		Scale: 1
 		Start: 88
 		Length: 20
 		Tick: 120
 		ShadowStart: 637
 	idle2:
+		Scale: 1
 		Start: 108
 		Length: 20
 		Tick: 120
 		ShadowStart: 657
 	shoot:
+		Scale: 1
 		Start: 128
 		Length: 10
 		Facings: 8
@@ -1131,6 +1147,7 @@ aa_archer:
 		Tick: 80
 		ShadowStart: 677
 	prone-shoot:
+		Scale: 1
 		Start: 128
 		Length: 10
 		Facings: 8
@@ -1138,14 +1155,17 @@ aa_archer:
 		Tick: 106
 		ShadowStart: 677
 	die1:
+		Scale: 1
 		Start: 208
 		Length: 15
 		ShadowStart: 757
 	die2:
+		Scale: 1
 		Start: 228
 		Length: 15
 		ShadowStart: 777
 	paradrop:
+		Scale: 1
 		Start: 1
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -1280,15 +1300,19 @@ aa_tkiller:
 		Scale: 0.9
 		Filename: aa_tkiller.shp
 	run:
+		Scale: 1
 		Tick: 120
 	prone-run:
+		Scale: 1
 		Tick: 160
 	shoot:
+		Scale: 1
 		Start: 164
 		Length: 6
 		Facings: 8
 		Tick: 80
 	prone-shoot:
+		Scale: 1
 		Tick: 106
 	icon:
 		Filename: aa_tkilicon.shp
@@ -1366,7 +1390,7 @@ aa_quas:
 		Filename: aa_quas.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_quasicon.shp
 	muzzle:
@@ -1378,7 +1402,7 @@ aa_viper:
 		Filename: aa_viper.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_viper_icon.shp
 	muzzle:
@@ -1439,11 +1463,11 @@ aa_hotwi:
 		Scale: 0.75
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
@@ -1471,6 +1495,7 @@ aa_oilt:
 		Filename: aa_oilt.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: aa_oilticon.shp
@@ -1525,11 +1550,11 @@ aa_pulv:
 		Scale: 0.8
 	idle:
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
@@ -1649,7 +1674,7 @@ aa_railt:
 		Filename: aa_railt.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_rtnkicon.shp
 
@@ -1659,7 +1684,7 @@ aa_railt2:
 		Filename: aa_railt2.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_rtnk2icon.shp
 
@@ -1669,7 +1694,7 @@ aa_dragonfly:
 		Filename: aa_dragonfly.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_drgflyicon.shp
 
@@ -1679,7 +1704,7 @@ aa_ftnk:
 		Filename: aa_ftnk.shp
 	idle:
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: aa_ftnkicon.shp
 
@@ -1776,7 +1801,7 @@ aa_quasfrig:
 		Filename: aa_quasfrig.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_quasfrigicon.shp
 	muzzle:
@@ -1789,7 +1814,7 @@ aa_gunb:
 		Filename: aa_gunb.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_gunb_icon.shp
 
@@ -1807,17 +1832,21 @@ aa_kami:
 	Defaults:
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Filename: aa_kami.shp
 		Facings: 64
 	move:
+		Scale: 1
 		Filename: aa_kami.shp
 		Facings: 64
 		Start: 64
 	move-l:
+		Scale: 1
 		Filename: aa_kami.shp
 		Facings: 64
 		Start: 128
 	move-r:
+		Scale: 1
 		Filename: aa_kami.shp
 		Facings: 64
 		Start: 192
@@ -1840,7 +1869,7 @@ aa_ksub:
 		Filename: aa_ksub.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: aa_ksub_icon.shp
 
@@ -1849,7 +1878,7 @@ aa_wtrt:
 		Filename: aa_wtrt.shp
 	idle:
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: aa_wtrt_icon.shp
 	muzzle:
@@ -1862,7 +1891,7 @@ aa_lsub:
 		Filename: aa_lsub.shp
 	idle:
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	icon:
 		Filename: aa_lsub_icon.shp
 
@@ -1871,19 +1900,19 @@ aa_mlrs:
 		Filename: aa_mlrs.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	empty-aim:
 		Start: 128
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	aim:
 		Start: 128
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -2713,12 +2742,14 @@ latin_ltnk:
 		Filename: latin_ltnk.shp
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 2
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 2
 	icon:
 		Filename: latin_ltnk_icon.shp
 	muzzle:
@@ -2757,8 +2788,10 @@ latin_mtnk:
 		Filename: latin_mtnk.shp
 		Scale: 0.6
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	icon:
@@ -2776,12 +2809,14 @@ latin_diablo:
 		Filename: latin_diablo.shp
 		Scale: 0.65
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,6
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,6
+		Offset: 0, 4
 	icon:
 		Filename: latin_diablo_icon.shp
 	muzzle:
@@ -2798,7 +2833,7 @@ latin_buggy:
 		Scale: 0.8
 	idle:
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	turret:
 		Filename: invisibleitem.shp
 	barrel:
@@ -2813,7 +2848,7 @@ latinscrapcar:
 		Scale: 0.8
 	idle:
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	turret:
 		Filename: invisibleitem.shp
 	barrel:
@@ -2828,7 +2863,7 @@ latinscrapcar2:
 		Scale: 0.8
 	idle:
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	turret:
 		Filename: invisibleitem.shp
 	barrel:
@@ -2842,16 +2877,19 @@ latin_apc:
 		Filename: latin_apc.shp
 		Scale: 0.65
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,-8
+		Offset: 0, -5
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,-9
+		Offset: 0, -6
 	turret-up:
+		Scale: 1
 		Filename: latin_apctur2.shp
 		Facings: 64
-		Offset: 0,-9
+		Offset: 0, -6
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
@@ -2863,6 +2901,7 @@ latin_humvee:
 		Filename: latin_humvee.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
 		Filename: invisibleitem.shp
@@ -2877,6 +2916,7 @@ latin_cartel:
 		Filename: latin_cartel.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
 		Filename: invisibleitem.shp
@@ -2890,8 +2930,9 @@ latin_nuketruk:
 		Filename: latin_nuketruk.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,-4
+		Offset: 0, -3
 	icon:
 		Filename: latin_nuketrukicon.shp
 
@@ -2901,12 +2942,14 @@ latin_rtruck:
 		Filename: latin_rtruck.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	empty-idle:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	icon:
 		Filename: latin_missiletruck_icon.shp
 
@@ -2916,12 +2959,14 @@ latin_burrito:
 		Filename: latin_burrito.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	empty-idle:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	icon:
 		Filename: latin_burrito_icon.shp
 
@@ -2942,20 +2987,26 @@ latin_topol:
 		Filename: latin_scud.shp
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
 	idle-up1:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	idle-up2:
+		Scale: 1
 		Start: 128
 		Facings: 64
 	idle-up3:
+		Scale: 1
 		Start: 192
 		Facings: 64
 	idle-up4:
+		Scale: 1
 		Start: 256
 		Facings: 64
 	idle-up5:
+		Scale: 1
 		Start: 256
 		Facings: 64
 	icon:
@@ -2967,12 +3018,14 @@ latin_lars:
 		Filename: latin_lars.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	empty-idle:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	icon:
 		Filename: latin_lars_icon.shp
 
@@ -2982,10 +3035,13 @@ latin_harv:
 		Filename: latin_harv.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
 	dock:
+		Scale: 1
 		Facings: 64
 	dock-loop:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: latin_harv_icon.shp
@@ -3199,8 +3255,10 @@ latin_witch:
 		Scale: 0.8
 		Filename: latin_witch.shp
 	run:
+		Scale: 1
 		Tick: 120
 	paradrop:
+		Scale: 1
 		Start: 292
 	icon:
 		Filename: ra2e2icon.shp
@@ -3208,7 +3266,7 @@ latin_witch:
 latin_triton:
 	idle:
 		Filename: latin_triton.shp
-		Scale: 0.6
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -3218,7 +3276,7 @@ latin_triton:
 latin_sub:
 	idle:
 		Filename: latin_sub.shp
-		Scale: 0.75
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -3981,50 +4039,60 @@ steel_fedinf:
 		Scale: 0.8
 		Offset: 0,-4
 	stand:
+		Scale: 1
 		ShadowStart: 281
 	run:
+		Scale: 1
 		Start: 8
 		Length: 13
 		Facings: 8
 		Tick: 80
 		ShadowStart: 289
 	prone-run:
+		Scale: 1
 		Start: 8
 		Length: 13
 		Facings: 8
 		Tick: 106
 		ShadowStart: 289
 	idle1:
+		Scale: 1
 		Start: 200
 		Length: 30
 		Tick: 120
 		ShadowStart: 481
 	idle2:
+		Scale: 1
 		Start: 200
 		Length: 30
 		Tick: 120
 		ShadowStart: 481
 	shoot:
+		Scale: 1
 		Start: 112
 		Length: 11
 		Facings: 8
 		Tick: 120
 		ShadowStart: 393
 	prone-shoot:
+		Scale: 1
 		Start: 112
 		Length: 11
 		Facings: 8
 		Tick: 160
 		ShadowStart: 393
 	die1:
+		Scale: 1
 		Start: 260
 		Length: 20
 		ShadowStart: 540
 	die2:
+		Scale: 1
 		Start: 260
 		Length: 20
 		ShadowStart: 540
 	paradrop:
+		Scale: 1
 		Start: 280
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -4054,66 +4122,80 @@ steel_qinf:
 		Scale: 0.8
 		Offset: 0,-4
 	stand:
+		Scale: 1
 		ShadowStart: 332
 	dot:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	run:
+		Scale: 1
 		Start: 8
 		Length: 15
 		Facings: 8
 		Tick: 80
 		ShadowStart: 340
 	prone-run:
+		Scale: 1
 		Start: 8
 		Length: 15
 		Facings: 8
 		Tick: 106
 		ShadowStart: 340
 	idle1:
+		Scale: 1
 		Start: 279
 		Length: 14
 		Tick: 120
 		ShadowStart: 611
 	idle2:
+		Scale: 1
 		Start: 315
 		Length: 15
 		Tick: 120
 		ShadowStart: 647
 	shoot:
+		Scale: 1
 		Start: 128
 		Length: 8
 		Facings: 8
 		Tick: 120
 		ShadowStart: 460
 	prone-shoot:
+		Scale: 1
 		Start: 128
 		Length: 8
 		Facings: 8
 		Tick: 160
 		ShadowStart: 460
 	die1:
+		Scale: 1
 		Start: 297
 		Length: 18
 		ShadowStart: 629
 	die2:
+		Scale: 1
 		Start: 297
 		Length: 18
 		ShadowStart: 629
 	paradrop:
+		Scale: 1
 		Start: 323
 	deployed:
+		Scale: 1
 		Start: 207
 		Facings: 8
 	deploy:
+		Scale: 1
 		Start: 192
 		Length: 15
 		ShadowStart: 524
 	shoot-deployed:
+		Scale: 1
 		Start: 215
 		Length: 8
 		Facings: 8
 	undeploy:
+		Scale: 1
 		Start: 192
 		Length: 15
 		ShadowStart: 524
@@ -4184,8 +4266,10 @@ steel_board_inf:
 		Scale: 0.7
 		Offset: 0,-4
 	stand:
+		Scale: 1
 		ShadowStart: 303
 	run:
+		Scale: 1
 		Start: 8
 		Length: 15
 		Facings: 8
@@ -4193,16 +4277,19 @@ steel_board_inf:
 		Tick: 80
 		ShadowStart: 311
 	idle1:
+		Scale: 1
 		Start: 265
 		Length: 12
 		Tick: 120
 		ShadowStart: 568
 	idle2:
+		Scale: 1
 		Start: 265
 		Length: 12
 		Tick: 120
 		ShadowStart: 568
 	shoot:
+		Scale: 1
 		Start: 128
 		Length: 15
 		Facings: 8
@@ -4210,14 +4297,17 @@ steel_board_inf:
 		Tick: 80
 		ShadowStart: 431
 	die1:
+		Scale: 1
 		Start: 248
 		Length: 18
 		ShadowStart: 551
 	die2:
+		Scale: 1
 		Start: 248
 		Length: 18
 		ShadowStart: 551
 	paradrop:
+		Scale: 1
 		Start: 8
 		Length: 15
 		Facings: 8
@@ -4296,11 +4386,11 @@ steel_manta_hunt:
 		Offset: 0,32
 	idle:
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
@@ -4436,11 +4526,11 @@ steel_katy:
 		Offset: 5,0
 	idle:
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
@@ -4619,7 +4709,7 @@ steel_hummer:
 		Filename: steel_hummer.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: steel_hummer_icon.shp
 
@@ -4630,11 +4720,11 @@ steel_oldqtnk:
 		Scale: 1
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
@@ -4646,11 +4736,11 @@ steel_cougar:
 		Filename: steel_cougar.shp
 	idle:
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	turret:
 		Start: 64
 		Facings: 64
-		Scale: 0.6
+		Scale: 1
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
@@ -4662,7 +4752,7 @@ steel_cobra:
 		Filename: steel_cobra.shp
 	idle:
 		Facings: 64
-		Scale: 0.8
+		Scale: 1
 	icon:
 		Filename: steel_cobra_icon.shp
 
@@ -4712,7 +4802,7 @@ steel_dagger:
 		Filename: steel_dagger.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: steel_dagger_icon.shp
 
@@ -4773,7 +4863,7 @@ steel_cargoship:
 		Offset: 0,8
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	muzzle:
 		Filename: steel_energymuzzle.shp
 		Length: 14
@@ -4786,7 +4876,7 @@ steel_cruiser:
 		Filename: steel_cruiser.shp
 	idle:
 		Facings: 64
-		Scale: 0.90
+		Scale: 1
 	muzzle:
 		Filename: steel_energymuzzle.shp
 		Length: 14
@@ -4798,7 +4888,7 @@ steel_cruiser_f:
 		Filename: steel_cruiser_f.shp
 	idle:
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	muzzle:
 		Filename: steel_energymuzzle.shp
 		Length: 14
@@ -5591,11 +5681,13 @@ nax_flak88:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
+		Scale: 1
 		Filename: nax_flak88mk.shp
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
 	turret:
+		Scale: 1
 		Filename: nax_flak88.shp
 		Facings: 64
 	icon:
@@ -5614,11 +5706,13 @@ nax2_sturmcann:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
+		Scale: 1
 		Filename: nax2_sturmcannmk.shp
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
 	turret:
+		Scale: 1
 		Filename: nax2_sturmcann.shp
 		Facings: 64
 	icon:
@@ -5671,8 +5765,10 @@ nax_rifle:
 		Filename: nax_rifle.shp
 		Scale: 0.7
 	run:
+		Scale: 1
 		Tick: 120
 	paradrop:
+		Scale: 1
 		Start: 292
 	icon:
 		Filename: nax_rifle_icon.png
@@ -5696,8 +5792,10 @@ nax_shrek:
 		Scale: 0.7
 		Filename: nax_shrek.shp
 	run:
+		Scale: 1
 		Tick: 120
 	paradrop:
+		Scale: 1
 		Start: 292
 	icon:
 		Filename: nax_shrek_icon.png
@@ -5838,6 +5936,7 @@ nax_mcv:
 		Scale: 0.7
 		Offset: 0, 8
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: nax_mcv_icon.png
@@ -5848,6 +5947,7 @@ nax2_mcv:
 		Filename: nax2_mcv.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: nax2_mcv_icon.png
@@ -5858,8 +5958,10 @@ nax_panzer:
 		Filename: nax_panzer.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	icon:
@@ -5878,8 +5980,10 @@ nax2_panzer:
 		Scale: 0.75
 		Offset: 0,24
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	icon:
@@ -5898,12 +6002,14 @@ nax_tiger:
 		Filename: nax_tiger.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_tiger_icon.png
 	muzzle:
@@ -5919,6 +6025,7 @@ nax_zombietank:
 		Filename: nax_zombietank.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: ra2bficon.shp
@@ -5930,8 +6037,10 @@ nax2_tiger:
 		Scale: 0.8
 		Offset: 0,24
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	icon:
@@ -5950,12 +6059,14 @@ nax_wirbelwind:
 		Filename: nax_wirbelwind.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_wirbelwind_icon.png
 	muzzle:
@@ -5971,12 +6082,14 @@ nax_car:
 		Filename: nax_car.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_car_icon.png
 
@@ -5986,12 +6099,14 @@ nax_kingtiger:
 		Filename: nax_kingtiger.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_kingtiger_icon.png
 	muzzle:
@@ -6007,12 +6122,14 @@ nax_assault:
 		Filename: nax_assault.shp
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 2
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 2
 	icon:
 		Filename: nax_assault_icon.png
 	muzzle:
@@ -6028,8 +6145,9 @@ nax_imperial:
 		Filename: nax_imperial.shp
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 2
 	icon:
 		Filename: nax_imperial_icon.png
 	muzzle:
@@ -6045,12 +6163,14 @@ nax_maus:
 		Filename: nax_maus.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_maus_icon.png
 	muzzle:
@@ -6066,12 +6186,14 @@ nax_ratte:
 		Filename: nax_ratte.shp
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_ratte_icon.png
 	muzzle:
@@ -6087,8 +6209,9 @@ nax_grille:
 		Filename: nax_grille.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_grille_icon.png
 	muzzle:
@@ -6107,6 +6230,7 @@ nax2_grille:
 	idle:
 		Filename: invisibleitem.shp
 	turret:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: nax2_grille_icon.png
@@ -6124,8 +6248,9 @@ nax_hetzer:
 		Filename: nax_hetzer.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_hetzer_icon.png
 	muzzle:
@@ -6141,8 +6266,9 @@ nax_atankcann:
 		Filename: nax_atankcann.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_atankcann_icon.png
 	muzzle:
@@ -6158,8 +6284,9 @@ nax_jagdpanzer:
 		Filename: nax_jagdpanzer.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_jagdpanzer_icon.png
 	muzzle:
@@ -6177,6 +6304,7 @@ nax2_jager:
 	idle:
 		Filename: invisibleitem.shp
 	turret:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: nax2_jager_icon.png
@@ -6195,6 +6323,7 @@ nax2_crystal:
 	idle:
 		Filename: invisibleitem.shp
 	turret:
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -6212,6 +6341,7 @@ nax_gravity:
 		Scale: 0.9
 		Offset: 0,24
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: nax_jagdpanzer_icon.png
@@ -6229,8 +6359,9 @@ nax_brummbar:
 		Filename: nax_brummbar.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_brummbar_icon.png
 	muzzle:
@@ -6246,8 +6377,9 @@ nax_sturmtiger:
 		Filename: nax_sturmtiger.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_sturmtiger_icon.png
 	muzzle:
@@ -6263,8 +6395,9 @@ nax_nokana:
 		Filename: nax_nokana.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_nokana_icon.png
 	muzzle:
@@ -6280,8 +6413,9 @@ nax_halftrack:
 		Filename: nax_halftrack.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_halftrack_icon.png
 	muzzle:
@@ -6455,7 +6589,7 @@ nax_eng:
 		Scale: 0.9
 	idle:
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	turret:
 		Filename: invisibleitem.shp
 	barrel:
@@ -6468,16 +6602,20 @@ nax_me262:
 	Defaults:
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Filename: nax_me262.shp
 		Facings: 64
 	move:
+		Scale: 1
 		Filename: nax_me262.shp
 		Facings: 64
 	move-l:
+		Scale: 1
 		Filename: nax_me262.shp
 		Facings: 64
 		Start: 64
 	move-r:
+		Scale: 1
 		Filename: nax_me262.shp
 		Facings: 64
 		Start: 128
@@ -6488,15 +6626,19 @@ nax_bf109:
 	Defaults:
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Filename: nax_bf109.shp
 		Facings: 64
 	move:
+		Scale: 1
 		Filename: nax_bf109.shp
 		Facings: 64
 	move-l:
+		Scale: 1
 		Filename: nax_bf109.shp
 		Facings: 64
 	move-r:
+		Scale: 1
 		Filename: nax_bf109.shp
 		Facings: 64
 	icon:
@@ -6558,16 +6700,20 @@ nax_drone:
 	Defaults:
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Filename: nax_drone.shp
 		Facings: 64
 	move:
+		Scale: 1
 		Filename: nax_drone.shp
 		Facings: 64
 	move-l:
+		Scale: 1
 		Filename: nax_drone.shp
 		Facings: 64
 		Start: 64
 	move-r:
+		Scale: 1
 		Filename: nax_drone.shp
 		Facings: 64
 		Start: 128
@@ -6578,17 +6724,21 @@ nax_interceptor:
 	Defaults:
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Filename: nax_interceptor.shp
 		Facings: 64
 	move:
+		Scale: 1
 		Filename: nax_interceptor.shp
 		Facings: 64
 		Start: 64
 	move-l:
+		Scale: 1
 		Filename: nax_interceptor.shp
 		Facings: 64
 		Start: 128
 	move-r:
+		Scale: 1
 		Filename: nax_interceptor.shp
 		Facings: 64
 		Start: 128
@@ -6599,16 +6749,20 @@ nax_piercer:
 	Defaults:
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Filename: nax_piercer.shp
 		Facings: 64
 	move:
+		Scale: 1
 		Filename: nax_piercer.shp
 		Facings: 64
 	move-l:
+		Scale: 1
 		Filename: nax_piercer.shp
 		Facings: 64
 		Start: 64
 	move-r:
+		Scale: 1
 		Filename: nax_piercer.shp
 		Facings: 64
 		Start: 128
@@ -6621,12 +6775,14 @@ nax_brad:
 		Filename: nax_brad.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	empty-idle:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	icon:
 		Filename: nax_brad_icon.png
 
@@ -6656,12 +6812,14 @@ nax2_aatank:
 	idle:
 		Filename: invisibleitem.shp
 	turret:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 16
 	empty-turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 16
 	icon:
 		Filename: nax_brad_icon.png
 
@@ -6671,8 +6829,9 @@ nax_sarubia:
 		Filename: nax_sarubia.shp
 		Scale: 0.64
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,1
+		Offset: 0, 1
 	icon:
 		Filename: nax_sarubia_icon.png
 	muzzle:
@@ -6698,16 +6857,19 @@ nax_shoe:
 		Filename: nax_shoe.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	empty-idle:
+		Scale: 1
 		Start: 128
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_shoe_icon.png
 	muzzle:
@@ -6858,57 +7020,69 @@ nax_hmg:
 		Scale: 0.6
 		Offset: 0,-4
 	stand:
+		Scale: 1
 		ShadowStart: 271
 	dot:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
 		Tick: 80
 		ShadowStart: 279
 	idle1:
+		Scale: 1
 		Start: 106
 		Length: 15
 		Tick: 120
 		ShadowStart: 377
 	idle2:
+		Scale: 1
 		Start: 106
 		Length: 15
 		Tick: 120
 		ShadowStart: 377
 	shoot:
+		Scale: 1
 		Start: 121
 		Length: 15
 		Facings: 8
 		Tick: 120
 		ShadowStart: 392
 	die1:
+		Scale: 1
 		Start: 241
 		Length: 15
 		ShadowStart: 512
 	die2:
+		Scale: 1
 		Start: 241
 		Length: 15
 		ShadowStart: 512
 	paradrop:
+		Scale: 1
 		Start: 1
 	deployed:
+		Scale: 1
 		Start: 98
 		Facings: 8
 		ShadowStart: 369
 	deploy:
+		Scale: 1
 		Start: 88
 		Length: 10
 		ShadowStart: 359
 	shoot-deployed:
+		Scale: 1
 		Start: 121
 		Length: 15
 		Facings: 8
 		Tick: 120
 		ShadowStart: 392
 	undeploy:
+		Scale: 1
 		Start: 256
 		Length: 15
 		ShadowStart: 527
@@ -7015,8 +7189,9 @@ nax_kubel:
 		Filename: nax_kubel.shp
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_kubel_icon.png
 	muzzle:
@@ -7032,8 +7207,9 @@ nax_bmwbike:
 		Filename: nax_bmwbike.shp
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax_bmw_icon.png
 	muzzle:
@@ -7051,36 +7227,45 @@ nax_alien:
 		Scale: 0.75
 		Offset: 0,-16
 	stand:
+		Scale: 1
 	run:
+		Scale: 1
 		Start: 8
 		Length: 12
 		Facings: 8
 		Tick: 90
 	idle1:
+		Scale: 1
 		Start: 304
 		Length: 21
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 325
 		Length: 21
 		Tick: 120
 	shoot:
+		Scale: 1
 		Start: 104
 		Length: 15
 		Facings: 8
 		Tick: 80
 	mind:
+		Scale: 1
 		Start: 224
 		Length: 10
 		Facings: 8
 		Tick: 80
 	die1:
+		Scale: 1
 		Start: 367
 		Length: 16
 	die2:
+		Scale: 1
 		Start: 383
 		Length: 21
 	paradrop:
+		Scale: 1
 		Start: 1
 	garrison-muzzle:
 		Filename: minigun.shp
@@ -7107,17 +7292,22 @@ nax2_armor_mg:
 		Filename: nax2_armor_mg.shp
 		Scale: 0.9
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -7131,17 +7321,22 @@ nax2_engi:
 		Filename: nax2_engi.shp
 		Scale: 0.9
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Facings: 32
 	icon:
 		Filename: nax2_engi_icon.png
@@ -7152,17 +7347,22 @@ nax2_giant_rk:
 		Filename: nax2_giant_rk.shp
 		Scale: 0.9
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -7176,24 +7376,31 @@ nax2_armor_harv:
 		Filename: nax2_armor_harv.shp
 		Scale: 0.9
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
 		Tick: 80
 	dock:
+		Scale: 1
 		Facings: 32
 	dock-loop:
+		Scale: 1
 		Facings: 32
 	harvesting:
 		Filename: ra2_oregath.shp
@@ -7209,12 +7416,14 @@ nax2_beetle:
 		Filename: nax2_beetle.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: nax2_beetle_icon.png
 
@@ -7225,8 +7434,10 @@ nax2_lasert:
 		Scale: 0.8
 		Offset: 0,24
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	icon:
@@ -7419,15 +7630,19 @@ nax2_bbomb:
 	Defaults:
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Filename: nax2_bbomb.shp
 		Facings: 64
 	move:
+		Scale: 1
 		Filename: nax2_bbomb.shp
 		Facings: 64
 	move-l:
+		Scale: 1
 		Filename: nax2_bbomb.shp
 		Facings: 64
 	move-r:
+		Scale: 1
 		Filename: nax2_bbomb.shp
 		Facings: 64
 	icon:
@@ -8143,67 +8358,85 @@ futu_javelinsoldier:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	stand:
+		Scale: 1
 		ShadowStart: 432
 	run:
+		Scale: 1
 		Tick: 120
 		ShadowStart: 440
 	liedown:
+		Scale: 1
 		Start: 196
 		ShadowStart: 628
 	standup:
+		Scale: 1
 		Start: 212
 		ShadowStart: 644
 	prone-stand:
+		Scale: 1
 		Frames: 94, 100, 106, 112, 118, 124, 130, 136
 	prone-run:
+		Scale: 1
 		Start: 94
 		ShadowStart: 526
 	idle1:
+		Scale: 1
 		Start: 64
 		ShadowStart: 496
 	idle2:
+		Scale: 1
 		Start: 79
 		ShadowStart: 511
 	shoot:
+		Scale: 1
 		Start: 278
 		Length: 6
 		Facings: 8
 		ShadowStart: 710
 	prone-shoot:
+		Scale: 1
 		Start: 326
 		Length: 6
 		Facings: 8
 		ShadowStart: 758
 	deployed:
+		Scale: 1
 		Start: 375
 		Facings: 8
 		ShadowStart: 807
 	deploy:
+		Scale: 1
 		Start: 431
 		Length: 1
 		ShadowStart: 863
 	shoot-deployed:
+		Scale: 1
 		Start: 383
 		Length: 6
 		Facings: 8
 		ShadowStart: 815
 	undeploy:
+		Scale: 1
 		Start: 431
 		Length: 1
 		ShadowStart: 863
 	paradrop:
+		Scale: 1
 		Start: 374
 		Length: 1
 		ShadowStart: 806
 	cheer:
+		Scale: 1
 		Start: 228
 		Length: 49
 		ShadowStart: 660
 	die1:
+		Scale: 1
 		Start: 142
 		Length: 28
 		ShadowStart: 574
 	die2:
+		Scale: 1
 		Start: 171
 		Length: 26
 		ShadowStart: 603
@@ -8251,17 +8484,22 @@ future_robot_cannon:
 		Filename: future_robot_cannon.shp
 		Scale: 0.4
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -8283,17 +8521,22 @@ future_robot_missiles:
 		Filename: future_robot_missiles.shp
 		Scale: 0.4
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -8315,17 +8558,22 @@ future_robot_shotgun:
 		Filename: future_robot_shotgun.shp
 		Scale: 0.4
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -8449,17 +8697,22 @@ future_mech_machinegun:
 		Filename: future_mech_machinegun.shp
 		Scale: 0.8
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -8473,17 +8726,22 @@ future_mech_plasma:
 		Filename: future_mech_plasma.shp
 		Scale: 0.8
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -8512,17 +8770,22 @@ futu_manticore:
 		Filename: future_mech_plasma.shp
 		Scale: 0.8
 	idle1:
+		Scale: 1
 		Facings: 32
 	idle2:
+		Scale: 1
 		Facings: 32
 	stand:
+		Scale: 1
 		Facings: 32
 	run:
+		Scale: 1
 		Start: 33
 		Length: 8
 		Facings: 8
 		Tick: 110
 	shoot:
+		Scale: 1
 		Start: 98
 		Length: 8
 		Facings: 8
@@ -8538,7 +8801,7 @@ futu_ifv:
 	idle:
 		Filename: futu_ifv.shp
 		Facings: 64
-		Scale: 0.9
+		Scale: 1
 	turret-missile:
 		Start: 64
 		Facings: 64

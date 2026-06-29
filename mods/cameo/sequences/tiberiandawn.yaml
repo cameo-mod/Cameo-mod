@@ -2190,6 +2190,7 @@ rmbo:
 		Length: 15
 		ShadowStart: 441
 	die-exploding:
+		Scale: 1
 		Filename: tss_bang34.shp
 		Length: *
 	die-crushed:
@@ -2306,86 +2307,106 @@ tsstealthsoldier:
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
+		Scale: 1
 		Start: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Start: 9
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 25
 		Length: 6
 		Facings: 8
 		Tick: 100
 	shoot:
+		Scale: 1
 		Start: 121
 		Length: 6
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 17
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 144
 		Stride: 4
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 73
 		Length: 6
 		Facings: 8
 		Tick: 100
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	prone-shoot:
+		Scale: 1
 		Start: 169
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 225
 		Length: 8
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 234
 		Length: 2
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 250
 		Length: 12
 		Tick: 120
 	cheer:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# Dancing
 	idle4:
+		Scale: 1
 		Start: 262
 		Length: 12
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 278
 		Length: 16
 		Tick: 80
 	# Explode
 	die2:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
 	die3:
+		Scale: 1
 		Start: 307
 		Length: 17
 		Tick: 80
 	# Fly through air squish on ground
 	die4:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Burn
 	die5:
+		Scale: 1
 		Start: 278
 		Length: 16
 		Tick: 80
@@ -2421,86 +2442,106 @@ tsblackhandlaser:
 		Scale: 0.92
 	Inherits: ^InfantryOverlays
 	stand:
+		Scale: 1
 		Start: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Start: 9
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 25
 		Length: 6
 		Facings: 8
 		Tick: 100
 	shoot:
+		Scale: 1
 		Start: 121
 		Length: 6
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 17
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 144
 		Stride: 4
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 73
 		Length: 6
 		Facings: 8
 		Tick: 100
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	prone-shoot:
+		Scale: 1
 		Start: 169
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 225
 		Length: 8
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 234
 		Length: 2
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 250
 		Length: 12
 		Tick: 120
 	cheer:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# Dancing
 	idle4:
+		Scale: 1
 		Start: 262
 		Length: 12
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 278
 		Length: 16
 		Tick: 80
 	# Explode
 	die2:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
 	die3:
+		Scale: 1
 		Start: 307
 		Length: 17
 		Tick: 80
 	# Fly through air squish on ground
 	die4:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Burn
 	die5:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
@@ -2633,8 +2674,8 @@ gdicarrier:
 		Filename: gdicarrier.shp
 	idle:
 		Facings: 64
-		Offset: 0,32
-		Scale: 0.8
+		Offset: 0, 26
+		Scale: 1
 	icon:
 		Filename: futurecarrier.png
 
@@ -2972,15 +3013,19 @@ gdiexosuit:
 		Scale: 0.3
 		Offset: 0,-5
 	idle:
+		Scale: 1
 		Facings: -8
 	stand:
+		Scale: 1
 		Facings: -8
 	walk:
+		Scale: 1
 		Start: 8
 		Facings: 8
 		Length: 8
 		Tick: 100
 	shoot:
+		Scale: 1
 		Start: 56
 		Length: 3
 		Facings: 8
@@ -3031,7 +3076,7 @@ hdtruck:
 		Facings: 32
 		InterpolatedFacings: 64
 		ShadowStart: 32
-		Scale: 0.4
+		Scale: 1
 	icon:
 		Filename: truckicon.shp
 newhumvee:
@@ -3334,8 +3379,8 @@ nodbuggy2:
 		Filename: nodbuggy2.shp
 	idle:
 		Facings: -64
-		Scale: 0.35
-		Offset: 0,-12
+		Scale: 1
+		Offset: 0, -4
 	turret:
 		Filename: bggy.shp
 		Start: 32
@@ -3353,12 +3398,12 @@ nodltnk2:
 		Filename: renegade_ltnk.shp
 	idle:
 		Facings: 64
-		Scale: 0.5
+		Scale: 1
 	turret:
 		Filename: renegade_ltnk.shp
 		Facings: 64
 		Start: 64
-		Scale: 0.5
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -3420,11 +3465,11 @@ gdipredator:
 		Filename: gdipredator.shp
 	idle:
 		Facings: -64
-		Scale: 0.25
+		Scale: 1
 	turret:
 		Facings: -64
 		Start: 64
-		Scale: 0.25
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -3441,11 +3486,11 @@ gdimammoth3:
 		Filename: gdimammoth3.shp
 	idle:
 		Facings: -64
-		Scale: 0.25
+		Scale: 1
 	turret:
 		Facings: -64
 		Start: 64
-		Scale: 0.25
+		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -3466,85 +3511,105 @@ gdiempgrenadier:
 		Filename: tdempgrenadier.shp
 		Scale: 0.96
 	stand:
+		Scale: 1
 		Start: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Start: 9
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 25
 		Length: 6
 		Facings: 8
 		Tick: 100
 	throw:
+		Scale: 1
 		Start: 121
 		Length: 6
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 17
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 17
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 73
 		Length: 6
 		Facings: 8
 		Tick: 100
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	prone-throw:
+		Scale: 1
 		Start: 169
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 225
 		Length: 8
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 234
 		Length: 2
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 250
 		Length: 12
 		Tick: 120
 	cheer:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# Dancing
 	idle4:
+		Scale: 1
 		Start: 262
 		Length: 12
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 278
 		Length: 16
 		Tick: 80
 	# Explode
 	die2:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
 	die3:
+		Scale: 1
 		Start: 307
 		Length: 17
 		Tick: 80
 	# Fly through air squish on ground
 	die4:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Burn
 	die5:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
@@ -3693,86 +3758,106 @@ gdisniper:
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
+		Scale: 1
 		Start: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Start: 9
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 25
 		Length: 6
 		Facings: 8
 		Tick: 100
 	shoot:
+		Scale: 1
 		Start: 121
 		Length: 6
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 17
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 144
 		Stride: 4
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 73
 		Length: 6
 		Facings: 8
 		Tick: 100
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	prone-shoot:
+		Scale: 1
 		Start: 169
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 225
 		Length: 8
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 234
 		Length: 2
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 250
 		Length: 12
 		Tick: 120
 	cheer:
+		Scale: 1
 		Start: 217
 		Facings: 8
 	# Dancing
 	idle4:
+		Scale: 1
 		Start: 262
 		Length: 12
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 278
 		Length: 16
 		Tick: 80
 	# Explode
 	die2:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
 	die3:
+		Scale: 1
 		Start: 307
 		Length: 17
 		Tick: 80
 	# Fly through air squish on ground
 	die4:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
 	# Burn
 	die5:
+		Scale: 1
 		Start: 331
 		Length: 8
 		Tick: 80
@@ -3843,12 +3928,16 @@ tanodharv:
 		Filename: tanodharv.shp
 		Scale: 0.4
 	idle:
+		Scale: 1
 		Facings: -64
 	harvest:
+		Scale: 1
 		Facings: -64
 	dock:
+		Scale: 1
 		Facings: -64
 	dock-loop:
+		Scale: 1
 		Facings: -64
 	harvesting:
 		Filename: ra2_oregath.shp
@@ -3865,54 +3954,67 @@ gdihavoc:
 		Filename: havoc.shp
 		Scale: 0.8
 	stand:
+		Scale: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
 		Tick: 50
 	shoot:
+		Scale: 1
 		Start: 128
 		Length: 7
 		Facings: 8
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 252
 		Length: 2
 		Facings: 8
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 268
 		Length: 2
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 244
 		Stride: 4
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 112
 		Stride: 4
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 284
 		Length: 10
 		Facings: 8
 		Tick: 50
 	prone-shoot:
+		Scale: 1
 		Start: 364
 		Length: 7
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 88
 		Length: 20
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 108
 		Length: 20
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 224
 		Length: 20
 		Tick: 120
@@ -3925,6 +4027,7 @@ gdihavoc:
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 184
 		Length: 20
 		Tick: 80
@@ -3979,54 +4082,67 @@ nodlasercommando:
 		Filename: nodlasercommando.shp
 		Scale: 0.79
 	stand:
+		Scale: 1
 		Facings: 8
 	stand2:
+		Scale: 1
 		Facings: 8
 	run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
 		Tick: 50
 	shoot:
+		Scale: 1
 		Start: 128
 		Length: 10
 		Facings: 8
 	# stand -> prone transition
 	liedown:
+		Scale: 1
 		Start: 284
 		Length: 2
 		Facings: 8
 	# prone -> stand transition
 	standup:
+		Scale: 1
 		Start: 268
 		Length: 2
 		Facings: 8
 	prone-stand:
+		Scale: 1
 		Start: 300
 		Stride: 4
 		Facings: 8
 	prone-stand2:
+		Scale: 1
 		Start: 112
 		Stride: 4
 		Facings: 8
 	prone-run:
+		Scale: 1
 		Start: 308
 		Length: 10
 		Facings: 8
 		Tick: 50
 	prone-shoot:
+		Scale: 1
 		Start: 388
 		Length: 6
 		Facings: 8
 	idle1:
+		Scale: 1
 		Start: 88
 		Length: 20
 		Tick: 120
 	idle2:
+		Scale: 1
 		Start: 108
 		Length: 20
 		Tick: 120
 	idle3:
+		Scale: 1
 		Start: 248
 		Length: 20
 		Tick: 120
@@ -4039,11 +4155,13 @@ nodlasercommando:
 		Tick: 120
 	# Shot
 	die1:
+		Scale: 1
 		Start: 208
 		Length: 20
 		Tick: 80
 	# Explode
 	die2:
+		Scale: 1
 		Start: 228
 		Length: 20
 		Tick: 80

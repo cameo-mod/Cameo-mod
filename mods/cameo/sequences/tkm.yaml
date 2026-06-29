@@ -115,15 +115,18 @@ tkmworker:
 	idle:
 		Filename: invisibleitem.shp
 	run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Tick: 120
 	harvest:
+		Scale: 1
 		Start: 188
 		Length: 10
 		Tick: 120
 		Facings: 1
 	full-run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Tick: 120
@@ -134,22 +137,28 @@ tkmworker:
 	full-harvest:
 		Filename: invisibleitem.shp
 	shoot:
+		Scale: 1
 		Start: 164
 	dock:
+		Scale: 1
 		Start: 0
 		Facings: 8
 	dock-loop:
+		Scale: 1
 		Start: 0
 		Facings: 8
 	die1:
+		Scale: 1
 		Start: 268
 		Length: 15
 		Tick: 120
 	die2:
+		Scale: 1
 		Start: 268
 		Length: 15
 		Tick: 120
 	cheer:
+		Scale: 1
 		Start: 0
 		Facings: 8
 	icon:
@@ -716,48 +725,58 @@ tkmjug:
 		Filename: tkmjug.shp
 		Scale: 0.9
 	stand:
+		Scale: 1
 		Facings: 8
 		ShadowStart: 255
 	idle:
+		Scale: 1
 		Facings: 8
 		ShadowStart: 255
 	idle1:
+		Scale: 1
 		Start: 88
 		Length: 15
 		Facings: 1
 		Tick: 80
 		ShadowStart: 343
 	idle2:
+		Scale: 1
 		Start: 238
 		Length: 14
 		Facings: 1
 		Tick: 80
 		ShadowStart: 493
 	run:
+		Scale: 1
 		Start: 8
 		Length: 10
 		Facings: 8
 		Tick: 80
 		ShadowStart: 263
 	shoot:
+		Scale: 1
 		Start: 103
 		Length: 15
 		Facings: 8
 		Tick: 80
 		ShadowStart: 358
 	die:
+		Scale: 1
 		Start: 223
 		Length: 15
 		ShadowStart: 478
 	die1:
+		Scale: 1
 		Start: 223
 		Length: 15
 		ShadowStart: 478
 	die2:
+		Scale: 1
 		Start: 223
 		Length: 15
 		ShadowStart: 478
 	die3:
+		Scale: 1
 		Start: 223
 		Length: 15
 		ShadowStart: 478
@@ -766,6 +785,7 @@ tkmjug:
 		Length: 104
 		Tick: 50
 	die6:
+		Scale: 1
 		Start: 223
 		Length: 15
 		ShadowStart: 478

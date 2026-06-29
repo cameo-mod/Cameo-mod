@@ -5991,7 +5991,7 @@ d2k_drone:
 		Start: 48
 		ShadowStart: 138
 		Facings: -8
-		Scale: 0.7
+		Scale: 1
 	run:
 		Filename: drone.shp
 		Start: 0
@@ -5999,14 +5999,14 @@ d2k_drone:
 		ShadowStart: 88
 		Facings: -8
 		Tick: 80
-		Scale: 0.7
+		Scale: 1
 	jump:
 		Filename: drone.shp
 		Start: 56
 		Length: 4
 		ShadowStart: 144
 		Facings: -8
-		Scale: 0.7
+		Scale: 1
 	shoot:
 		Filename: dronejump.shp
 		Facings: 8
@@ -6146,23 +6146,23 @@ d2k_leech_s:
 		Filename: d2k_leech.shp
 		Start: 32
 		Facings: -32
-		Scale: 0.64
+		Scale: 1
 	run:
 		Filename: d2k_leech.shp
 		Length: 4
 		Facings: 8
 		Tick: 45
-		Scale: 0.64
+		Scale: 1
 	jump:
 		Filename: d2k_leech.shp
 		Start: 32
 		Facings: -32
-		Scale: 0.64
+		Scale: 1
 	shoot:
 		Filename: d2k_leech.shp
 		Start: 32
 		Facings: -32
-		Scale: 0.64
+		Scale: 1
 	icon:
 		Filename: leechicon.shp
 		Offset: 0,-1
@@ -7085,7 +7085,7 @@ d2k_basq:
 	idle:
 		Filename: d2k_basq.shp
 		Facings: -32
-		Scale: 0.7
+		Scale: 1
 	icon:
 		Filename: d2k_basq_icon.shp
 		Offset: 0,-1
@@ -7989,12 +7989,12 @@ d2k_annihilator:
 		Filename: d2k_annihilator.shp
 		Start: 0
 		Facings: -32
-		Scale: 0.75
+		Scale: 1
 	turret:
 		Filename: d2k_annihilator_turret.shp
 		Start: 32
 		Facings: -32
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: d2k_annihilator_icon.shp
 

@@ -6220,12 +6220,14 @@ ra2htnk:
 		Filename: ra2_rhino.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: ra2htnkicon.shp
 	muzzle:
@@ -6271,12 +6273,14 @@ ra2v3:
 		Filename: ra2v3.shp
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 10
 	empty-idle:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 10
 	icon:
 		Filename: ra2v3icon.shp
 
@@ -6285,16 +6289,18 @@ ra2v3rocket:
 		Filename: ra2v3rocket.shp
 		Facings: 64
 		ZOffset: 1023
-		Scale: 0.5
-		Offset: 0,10
+		Scale: 1
+		Offset: 0, 5
 
 ra2ttnk:
 	Defaults:
 		Filename: ra2_teslatank.shp
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	icon:
@@ -6345,14 +6351,14 @@ ra2mtnk:
 	Defaults:
 		Filename: ra2grizzly.shp
 	idle:
-		Scale: 0.75
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
-		Scale: 0.75
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: ra2mtnkicon.shp
 
@@ -6372,6 +6378,7 @@ ra2tnkd:
 		Filename: ra2tnkd.shp
 		Scale: 0.9
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: ra2tnkdesicon.shp
@@ -6511,10 +6518,10 @@ ra2mgtk:
 	Defaults:
 		Filename: ra2mirage.shp
 	idle:
-		Scale: 0.75
+		Scale: 1
 		Facings: 64
 	turret:
-		Scale: 0.75
+		Scale: 1
 		Start: 64
 		Facings: 64
 	icon:
@@ -6592,12 +6599,14 @@ yrytnk:
 		Filename: yr_ytnk.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,10
+		Offset: 0, 7
 	turret:
+		Scale: 1
 		Facings: 64
 		Start: 64
-		Offset: 0,10
+		Offset: 0, 7
 	icon:
 		Filename: ra2ytnkicon.shp
 
@@ -6607,8 +6616,10 @@ yrltnk:
 		Filename: yr_lasher.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
 	barrel:
@@ -6621,12 +6632,14 @@ yrtele:
 		Filename: yr_tele.shp
 		Scale: 0.7
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,15
+		Offset: 0, 10
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,15
+		Offset: 0, 10
 	icon:
 		Filename: ra2magneticon.shp
 
@@ -6643,7 +6656,7 @@ yrmind:
 	idle:
 		Filename: ra2_mastermind.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2mmindicon.shp
 
@@ -6736,7 +6749,7 @@ ra2lcrf:
 	idle:
 		Filename: ra2_ahvrtransport.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2lcrafticon.shp
 
@@ -6744,7 +6757,7 @@ ra2sapc:
 	idle:
 		Filename: ra2_shvrtransport.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2sapcicon.shp
 
@@ -6752,7 +6765,7 @@ yrhovr:
 	idle:
 		Filename: ra2_yhvrtransport.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2horvicon.shp
 
@@ -6760,12 +6773,12 @@ ra2dest:
 	idle:
 		Filename: ra2_dest.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	idle-empty:
 		Filename: ra2_dest.shp
 		Start: 64
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2desticon.shp
 	muzzle:
@@ -6790,7 +6803,7 @@ ra2dmisl:
 		Filename: ra2_dreadmissile.shp
 		Facings: 64
 		ZOffset: 1023
-		Scale: 0.75
+		Scale: 1
 
 ra2vlad:
 	idle:
@@ -6803,7 +6816,7 @@ ra2carrier:
 	idle:
 		Filename: ra2_carrier.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2carriericon.shp
 
@@ -6869,7 +6882,7 @@ ra2dlph:
 ra2hyd:
 	idle:
 		Filename: ra2_seascorpion.shp
-		Scale: 0.75
+		Scale: 1
 		Facings: 64
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -6882,6 +6895,7 @@ ra2dtruck:
 		Filename: ra2_bombtruck.shp
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: ra2dmtrukicon.shp
@@ -6892,12 +6906,14 @@ ra2leopard:
 		Filename: ra2_leopard.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: invisibleitem.shp
 	muzzle:
@@ -6988,8 +7004,8 @@ ra2_c_hum:
 		Filename: ra2_c_hum.shp
 	idle:
 		Facings: 64
-		Offset: 0,5
-		Scale: 0.8
+		Offset: 0, 4
+		Scale: 1
 	turret:
 		Filename: ra2_c_ifv.shp
 		Start: 64
@@ -7036,8 +7052,8 @@ ra2_c_hum2:
 		Filename: ra2_c_hum2.shp
 	idle:
 		Facings: 64
-		Offset: 0,5
-		Scale: 0.8
+		Offset: 0, 4
+		Scale: 1
 	turret:
 		Filename: ra2_c_ifv.shp
 		Start: 64
@@ -7084,12 +7100,14 @@ ra2_c_abram:
 		Filename: ra2_c_abram.shp
 		Scale: 0.8
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	turret:
+		Scale: 1
 		Start: 64
 		Facings: 64
-		Offset: 0,5
+		Offset: 0, 4
 	icon:
 		Filename: invisibleitem.shp
 	muzzle:
@@ -7137,11 +7155,13 @@ ra2zep:
 		Filename: ra2_kirov.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,32
+		Offset: 0, 24
 	move:
+		Scale: 1
 		Facings: 64
-		Offset: 0,32
+		Offset: 0, 24
 	icon:
 		Filename: ra2kirovicon.shp
 
@@ -7205,7 +7225,7 @@ ra2hind:
 	idle:
 		Filename: ra2_hind.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	rotor:
 		Filename: ra2_hind_rotor.shp
 		Length: *
@@ -7224,11 +7244,13 @@ ra2beag:
 		Filename: ra2_blackeagle.shp
 		Scale: 0.75
 	idle:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	move:
+		Scale: 1
 		Facings: 64
-		Offset: 0,20
+		Offset: 0, 15
 	icon:
 		Filename: ra2blackeagicon.shp
 
@@ -7405,7 +7427,7 @@ ra2asw:
 	idle:
 		Filename: ra2_osprey.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2ospreyicon.shp
 
@@ -7430,7 +7452,7 @@ yrspyp:
 	idle:
 		Filename: ra2_spyplane.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 	icon:
 		Filename: ra2_p_spyplaneicon.shp
 
@@ -7438,13 +7460,13 @@ ra2cplane:
 	idle:
 		Filename: ra2_cplane.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 
 ra2cplanesov:
 	idle:
 		Filename: ra2_cplanesov.shp
 		Facings: 64
-		Scale: 0.75
+		Scale: 1
 
 yrbpln:
 	idle:
@@ -7645,6 +7667,7 @@ ra2trucka:
 		Filename: ra2_bombtruck.shp
 		Scale: 0.5
 	idle:
+		Scale: 1
 		Facings: 64
 	icon:
 		Filename: invisibleitem.shp
