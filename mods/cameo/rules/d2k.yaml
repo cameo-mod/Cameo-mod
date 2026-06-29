@@ -1370,12 +1370,12 @@ refinery.ordos:
 	FreeActorWithDelivery@1:
 		Actor: harv.ordos
 		DeliveryOffset: 2,2
-		DeliveringActor: ordos_carryall.reinforce
+		DeliveringActor: carryall.ordos.reinforce
 		Facing: 160
 	# FreeActorWithDelivery@2:
 	# 	Actor: harv.ordos
 	# 	DeliveryOffset: 0,2
-	# 	DeliveringActor: ordos_carryall.reinforce
+	# 	DeliveringActor: carryall.ordos.reinforce
 	# 	Facing: 160
 	RenderSprites:
 		Image: refinery.ordos
@@ -6442,7 +6442,7 @@ eye.ordos:
 	Targetable:
 		TargetTypes: Air, Plane
 	SpawnActorOnDeath:
-		Actor: ordos_eye.husk
+		Actor: eye.ordos.husk
 	Selectable:
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
@@ -6514,7 +6514,7 @@ banshee.ordos:
 	Targetable:
 		TargetTypes: Air, Plane
 	SpawnActorOnDeath:
-		Actor: ordos_banshee.husk
+		Actor: banshee.ordos.husk
 	Selectable:
 		Bounds: 1280, 1024, 0, 0
 	SelectionDecorations:
@@ -6954,7 +6954,7 @@ swarmer.husk:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: swarmer
-ordos_banshee.husk:
+banshee.ordos.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Banshee
@@ -6967,7 +6967,7 @@ ordos_banshee.husk:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: banshee.ordos
-ordos_eye.husk:
+eye.ordos.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Eye on the Sky
@@ -10131,16 +10131,16 @@ carryall.paradrop:
 		DropRange: 4c0
 		ChuteSound: chute1.aud
 
-ordos_carryall.reinforce:
+carryall.ordos.reinforce:
 	Inherits: carryall.reinforce
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: Advanced Carryall
 	SpawnActorOnDeath@CRUISING:
-		Actor: ordos_carryall.husk
+		Actor: carryall.ordos.husk
 		RequiresCondition: cruising
 	SpawnActorOnDeath@LANDING:
-		Actor: ordos_carryall.huskVTOL
+		Actor: carryall.ordos.huskVTOL
 		RequiresCondition: !cruising
 	RenderSprites:
 		Image: carryall.ordos
@@ -10161,10 +10161,10 @@ carryall.ordos:
 	Tooltip:
 		Name: Advanced Carryall
 	SpawnActorOnDeath@CRUISING:
-		Actor: ordos_carryall.husk
+		Actor: carryall.ordos.husk
 		RequiresCondition: cruising
 	SpawnActorOnDeath@LANDING:
-		Actor: ordos_carryall.huskVTOL
+		Actor: carryall.ordos.huskVTOL
 		RequiresCondition: !cruising
 	RenderSprites:
 		Image: carryall.ordos
@@ -10266,7 +10266,7 @@ carryall.huskVTOL:
 		PlayerPalette: playerd2k
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
-ordos_carryall.husk:
+carryall.ordos.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Advanced Carryall
@@ -10280,7 +10280,7 @@ ordos_carryall.husk:
 		PlayerPalette: player_rgba
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
-ordos_carryall.huskVTOL:
+carryall.ordos.huskVTOL:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Advanced Carryall
@@ -10912,7 +10912,7 @@ duelist_tank.husk:
 	TransformOnCapture:
 		IntoActor: duelist_tank
 
-missile_tank.husk:
+missile_tank.ixian.husk:
 	Inherits: ^D2KVehicleHusk
 	Health:
 		HP: 750
@@ -10966,17 +10966,17 @@ deviator.husk:
 	ThrowsParticle@turret:
 		Anim: turret
 
-combat_tank_a.husk:
+combat_tank.atreides.husk:
 	Inherits: ^combat_tank.husk
 	TransformOnCapture:
 		IntoActor: combat_tank.atreides
 
-combat_tank_h.husk:
+combat_tank.harkonnen.husk:
 	Inherits: ^combat_tank.husk
 	TransformOnCapture:
 		IntoActor: combat_tank.harkonnen
 
-combat_tank_o.husk:
+combat_tank.ordos.husk:
 	Inherits: ^combat_tank.husk
 	TransformOnCapture:
 		IntoActor: combat_tank.ordos
@@ -13727,7 +13727,7 @@ drone.ixian:
 		Ammo: 5
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
-		Actor: d2k_ixdrone.husk
+		Actor: drone.ixian.husk
 	EjectOnDeath:
 		PilotActor: heavy_inf
 	SelectionDecorations:
@@ -13749,7 +13749,7 @@ drone.ixian:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-d2k_ixdrone.husk:
+drone.ixian.husk:
 	Inherits: ^SmallHelicopterHusk
 	Tooltip:
 		Name: Ix Railgun Drone
