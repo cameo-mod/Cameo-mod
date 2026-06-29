@@ -1487,6 +1487,15 @@
 		BuildDurationModifier: 25
 	TooltipExtras@Epic:
 		Description: Epic
+	GrantConditionOnDamageState@EpicBurning:
+		Condition: epic-wounded
+		ValidDamageStates: Heavy, Critical
+	SpawnsActorPeriodically@GroundFire:
+		RequiresCondition: epic-wounded
+		Actor: groundfire
+		Range: 1
+		Interval: 16, 32
+		Chance: 100
 
 ^FighterTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
@@ -1635,6 +1644,15 @@
 		BuildDurationModifier: 25
 	TooltipExtras@Epic:
 		Description: Epic
+	GrantConditionOnDamageState@EpicBurning:
+		Condition: epic-wounded
+		ValidDamageStates: Heavy, Critical
+	SpawnsActorPeriodically@GroundFire:
+		RequiresCondition: epic-wounded
+		Actor: groundfire
+		Range: 1
+		Interval: 16, 32
+		Chance: 100
 
 ^FlyingInfantryTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
