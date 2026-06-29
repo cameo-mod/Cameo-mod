@@ -1647,12 +1647,15 @@
 	GrantConditionOnDamageState@EpicBurning:
 		Condition: epic-wounded
 		ValidDamageStates: Heavy, Critical
-	SpawnsActorPeriodically@GroundFire:
+	# Aircraft carry the smoke on the unit instead of dropping ground fire beneath them.
+	LeavesTrails@EpicSmoke:
 		RequiresCondition: epic-wounded
-		Actor: groundfire
-		Range: 1
-		Interval: 16, 32
-		Chance: 100
+		Image: smokey
+		MovingInterval: 3
+		StationaryInterval: 3
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
 
 ^FlyingInfantryTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
