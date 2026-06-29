@@ -818,14 +818,14 @@ OILB.d2k:
 	-WithDeathAnimation:
 	-ActorPreviewPlaceBuildingPreview:
 
-construction_yard.ixian:
+# Generic construction yard template. Common traits here; each faction actor below
+# sets its tooltip name, the MCV it deploys back into, and its sprite image.
+^construction_yard:
 	Inherits@D2kBLD: ^D2KBuilding
 	Inherits@shape: ^3x3Shape
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@conyard: ^Conyard
-	Tooltip:
-		Name: Ixian Construction Yard
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -836,14 +836,11 @@ construction_yard.ixian:
 	# ProductionBar@Addons:
 	# 	ProductionType: Addons
 	Transforms:
-		IntoActor: d2k_mcv.ixian
 		Offset: 1,1
 		Facing: 64
 		RequiresCondition: factundeploy
 	SpawnActorsOnSell:
 		ActorTypes: light_inf, light_inf, engineer
-	RenderSprites:
-		Image: conyard.atreides
 	WithBuildingPlacedOverlay:
 		RequiresCondition: !build-incomplete
 		Palette: d2kunit
@@ -877,21 +874,28 @@ construction_yard.ixian:
 		Actor: trooper
 	FreeActor@CPQDEBUGDUMMY:
 		-RequiresCondition:
+
+construction_yard.ixian:
+	Inherits: ^construction_yard
+	Tooltip:
+		Name: Ixian Construction Yard
+	Transforms:
+		IntoActor: d2k_mcv.ixian
+	RenderSprites:
+		Image: conyard.atreides
+
 construction_yard.ordos:
-	Inherits@D2kBLD: construction_yard.ixian
+	Inherits: ^construction_yard
 	Tooltip:
 		Name: Ordos Construction Yard
 	Transforms:
 		IntoActor: d2k_mcv.ordos
-		Offset: 1,1
-		Facing: 64
-		RequiresCondition: factundeploy
-	SpawnActorsOnSell:
-		ActorTypes: light_inf, light_inf, engineer
 	RenderSprites:
 		Image: conyard.ordos
 
-wind_trap.atreides:
+# Generic wind trap template. Common traits live here; each faction actor below
+# only sets its own build prerequisite (owning construction yard) and sprite image.
+^wind_trap:
 	Inherits: ^D2KBuilding
 	Inherits@power: ^PowerPlant
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -901,7 +905,6 @@ wind_trap.atreides:
 		BuildPaletteOrder: 10
 		Description: template-power.description
 		IconPalette: d2kunit
-		Prerequisites: ~construction_yard.ixian
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -930,8 +933,6 @@ wind_trap.atreides:
 		Type: Concrete
 	RevealsShroud:
 		Range: 4c0
-	RenderSprites:
-		Image: power.atreides
 	WithIdleOverlay@ZAPS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-zaps
@@ -949,32 +950,26 @@ wind_trap.atreides:
 	SpawnActorOnDeath@death2:
 		Actor: light_inf
 
-wind_trap.ordos:
-	Inherits: wind_trap.atreides
+wind_trap.atreides:
+	Inherits: ^wind_trap
 	Buildable:
-		Queue: Building, RABuilding
-		BuildPaletteOrder: 10
-		Description: template-power.description
-		IconPalette: d2kunit
+		Prerequisites: ~construction_yard.atreides
+	RenderSprites:
+		Image: power.atreides
+
+wind_trap.ixian:
+	Inherits: ^wind_trap
+	Buildable:
+		Prerequisites: ~construction_yard.ixian
+	RenderSprites:
+		Image: power.atreides
+
+wind_trap.ordos:
+	Inherits: ^wind_trap
+	Buildable:
 		Prerequisites: ~construction_yard.ordos
-	Valued:
-		Cost: 500
-	Tooltip:
-		Name: Wind Trap
-	Building:
-		Footprint: xx xx ==
-		Dimensions: 2,3
-		LocalCenterOffset: 0,-512,0
 	RenderSprites:
 		Image: power.ordos
-	Power:
-		Amount: 100
-	ScalePowerWithHealth:
-	ProvidesPrerequisite@buildingname:
-	SpawnActorOnDeath@death1:
-		Actor: light_inf
-	SpawnActorOnDeath@death2:
-		Actor: light_inf
 
 # d2k_mini_windtrap:
 # 	Inherits: ^D2KBuilding
@@ -1043,7 +1038,7 @@ d2k_barracks.ixian:
 	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, wind_trap.atreides
+		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Barracks
@@ -1265,13 +1260,14 @@ d2k_barracks.ordos:
 # 	-WithMakeAnimation:
 # 	-WithDeathAnimation:
 
-refinery.atreides:
+# Generic spice refinery template. Common traits here; each faction actor below sets
+# its build prerequisite, its harvester/delivery actors, and its sprite image.
+^refinery:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^3x3Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, wind_trap.atreides
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Spice Refinery
@@ -1291,20 +1287,6 @@ refinery.atreides:
 	DockHost:
 		DockAngle: 640
 		DockOffset: 1c5,0c5,0
-	FreeActor:
-		Actor: harvester
-		SpawnOffset: 0,2
-		Facing: 160
-	FreeActorWithDelivery@1:
-		Actor: harvester
-		DeliveryOffset: 2,2
-		DeliveringActor: carryall.reinforce
-		Facing: 160
-	# FreeActorWithDelivery@2:
-	# 	Actor: harvester
-	# 	DeliveryOffset: 0,2
-	# 	DeliveringActor: carryall.reinforce
-	# 	Facing: 160
 	GrantConditionOnPrerequisite@d2k_spice_sifter_upgrade:
 		Condition: d2k_spice_sifter_upgrade
 		Prerequisites: d2k_spice_sifter_upgrade
@@ -1313,8 +1295,6 @@ refinery.atreides:
 		RequiresCondition: d2k_spice_sifter_upgrade
 	ActorStatValues:
 		Upgrades: d2k_spice_sifter_upgrade
-	RenderSprites:
-		Image: refinery.atreides
 	WithIdleOverlay@TOP:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-top
@@ -1336,11 +1316,53 @@ refinery.atreides:
 		Actor: light_inf
 	SpawnActorOnDeath@death4:
 		Actor: trooper
+
+refinery.atreides:
+	Inherits: ^refinery
+	Buildable:
+		Prerequisites: ~construction_yard.atreides, wind_trap.atreides
+	FreeActor:
+		Actor: harvester
+		SpawnOffset: 0,2
+		Facing: 160
+	FreeActorWithDelivery@1:
+		Actor: harvester
+		DeliveryOffset: 2,2
+		DeliveringActor: carryall.reinforce
+		Facing: 160
+	# FreeActorWithDelivery@2:
+	# 	Actor: harvester
+	# 	DeliveryOffset: 0,2
+	# 	DeliveringActor: carryall.reinforce
+	# 	Facing: 160
+	RenderSprites:
+		Image: refinery.atreides
+
+refinery.ixian:
+	Inherits: ^refinery
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+	FreeActor:
+		Actor: harvester
+		SpawnOffset: 0,2
+		Facing: 160
+	FreeActorWithDelivery@1:
+		Actor: harvester
+		DeliveryOffset: 2,2
+		DeliveringActor: carryall.reinforce
+		Facing: 160
+	# FreeActorWithDelivery@2:
+	# 	Actor: harvester
+	# 	DeliveryOffset: 0,2
+	# 	DeliveringActor: carryall.reinforce
+	# 	Facing: 160
+	RenderSprites:
+		Image: refinery.atreides
+
 refinery.ordos:
-	Inherits: refinery.atreides
+	Inherits: ^refinery
 	Buildable:
 		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
-		IconPalette: d2kunit
 	FreeActor:
 		Actor: ordos_harv
 		SpawnOffset: 0,2
@@ -1358,13 +1380,14 @@ refinery.ordos:
 	RenderSprites:
 		Image: refinery.ordos
 
-d2k_silo.atreides:
+# Generic storage silo template. Common traits here; each faction actor below sets
+# its build prerequisite and sprite image.
+^d2k_silo:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^1x1Shape
 	Inherits@storage: ^StoresResources
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, refinery.atreides
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 310
 		Description: template-silo.description
@@ -1379,8 +1402,6 @@ d2k_silo.atreides:
 		Type: Wood
 	RevealsShroud:
 		Range: 4c0
-	RenderSprites:
-		Image: silo.atreides
 	-WithSpriteBody:
 	WithResourceLevelSpriteBody:
 		Sequence: stages
@@ -1400,14 +1421,25 @@ d2k_silo.atreides:
 		RequiresSelection: true
 		PipCount: 5
 		FullSequence: pip-yellow
+
+d2k_silo.atreides:
+	Inherits: ^d2k_silo
+	Buildable:
+		Prerequisites: ~construction_yard.atreides, refinery.atreides
+	RenderSprites:
+		Image: silo.atreides
+
+d2k_silo.ixian:
+	Inherits: ^d2k_silo
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, refinery.ixian
+	RenderSprites:
+		Image: silo.atreides
+
 d2k_silo.ordos:
-	Inherits: d2k_silo.atreides
+	Inherits: ^d2k_silo
 	Buildable:
 		Prerequisites: ~construction_yard.ordos, refinery.ordos
-		Queue: Defence, RADefence
-		BuildPaletteOrder: 310
-		Description: template-silo.description
-		IconPalette: d2kunit
 	RenderSprites:
 		Image: silo.ordos
 d2k_munitions.ixian:
@@ -1722,7 +1754,7 @@ heavy_factory.ixian:
 	RenderSprites:
 		Image: heavy.mercenary
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, refinery.atreides
+		Prerequisites: ~construction_yard.ixian, refinery.ixian
 		Description: template-factory.description
 		IconPalette: player
 	ProductionQueue@VEHICLE:
@@ -1829,7 +1861,7 @@ outpost.ixian:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, refinery.atreides
+		Prerequisites: ~construction_yard.ixian, refinery.ixian
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Outpost
@@ -1983,29 +2015,21 @@ ixian_launchpad:
 		Actor: trooper
 
 high_tech_factory.ordos:
-	Inherits: high_tech_factory.ixian
+	Inherits: ^high_tech_factory
 	Buildable:
 		Prerequisites: ~construction_yard.ordos, outpost.ordos
-		Description: actor-high_tech_factory.description
-		IconPalette: d2kunit
-	Building:
-		Footprint: _X_ xxx XXX ===
-		Dimensions: 3,4
-		LocalCenterOffset: 0,-512,0
-	Tooltip:
-		Name: High Tech Factory
-	RallyPoint:
 	RenderSprites:
 		Image: hightech.ordos
 
-research_centre.ixian:
+# Generic research centre. Common traits here; each faction actor sets its build
+# prerequisite and sprite image.
+^research_centre:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CPQ: ^CPQCondition
 	Inherits@shape: ^3x3Shape
 	Inherits@tech: ^IsTechnoBuilding
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, outpost.ixian
 		Description: Unlocks advanced units and upgrades.
 		IconPalette: d2kunit
 	Tooltip:
@@ -2024,8 +2048,6 @@ research_centre.ixian:
 		Type: Rectangle
 			TopLeft: -512, -1536
 			BottomRight: 512, -512
-	RenderSprites:
-		Image: research.gold
 	Production@Upgrade:
 		Produces: Upgrade
 	WithIdleOverlay@LIGHTS:
@@ -2047,18 +2069,23 @@ research_centre.ixian:
 	SpawnActorOnDeath@death4:
 		Actor: trooper
 
+research_centre.ixian:
+	Inherits: ^research_centre
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, outpost.ixian
+	RenderSprites:
+		Image: research.gold
+
 research_centre.ordos:
-	Inherits: research_centre.ixian
+	Inherits: ^research_centre
 	Buildable:
 		Prerequisites: ~construction_yard.ordos, outpost.ordos
-		Description: Unlocks advanced units and upgrades.
-		IconPalette: d2kunit
-	Tooltip:
-		Name: Ix Research Center
 	RenderSprites:
 		Image: research.ordos
 
-high_tech_factory.ixian:
+# Generic high tech (aircraft) factory. Common traits here; each faction actor sets
+# its build prerequisite and sprite image.
+^high_tech_factory:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -2066,7 +2093,6 @@ high_tech_factory.ixian:
 	Inherits@shape: ^3x3Shape
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian
 		Description: actor-high_tech_factory.description
 		IconPalette: d2kunit
 	Building:
@@ -2096,8 +2122,6 @@ high_tech_factory.ixian:
 			TopLeft: -512, -1536
 			BottomRight: 512, -512
 	RallyPoint:
-	RenderSprites:
-		Image: hightech.atreides
 	WithProductionOverlay@WELDING:
 		RequiresCondition: !build-incomplete
 		Queues: Aircraft
@@ -2136,7 +2160,16 @@ high_tech_factory.ixian:
 	SpawnActorOnDeath@death4:
 		Actor: trooper
 
-starport.ixian:
+high_tech_factory.ixian:
+	Inherits: ^high_tech_factory
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+	RenderSprites:
+		Image: hightech.atreides
+
+# Generic starport. Common traits here; each faction actor sets its build
+# prerequisite and sprite image.
+^starport:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -2150,7 +2183,6 @@ starport.ixian:
 		BuildPaletteOrder: 150
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian, derricklimit
 		Description: Dropzone for quick reinforcements, and passive income.
 		IconPalette: d2kunit
 	Building:
@@ -2206,8 +2238,6 @@ starport.ixian:
 	ProductionBar@RAVEHICLE:
 		ProductionType: RAVehicle
 		RequiresCondition: classicproductionqueues
-	RenderSprites:
-		Image: starport.smuggler
 	WithDeliveryOverlay:
 		RequiresCondition: !build-incomplete
 		#Palette: starportlights
@@ -2239,8 +2269,15 @@ starport.ixian:
 	SpawnActorOnDeath@death2:
 		Actor: light_inf
 
+starport.ixian:
+	Inherits: ^starport
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, research_centre.ixian, derricklimit
+	RenderSprites:
+		Image: starport.smuggler
+
 starport.ordos:
-	Inherits: starport.ixian
+	Inherits: ^starport
 	Buildable:
 		Prerequisites: ~construction_yard.ordos, research_centre.ordos, derricklimit
 	RenderSprites:
