@@ -1499,7 +1499,7 @@
 		IsDecoration: True
 	# Smoke does not stick: it is emitted at the unit's current position each tick and then rises and
 	# drifts away on its own, leaving a trail as the unit moves. Same smoke the ground fire uses.
-	DeterministicOffsetSmokeParticleEmitter@EpicSmoke:
+	SmokeParticleEmitter@EpicSmoke:
 		RequiresCondition: epic-wounded
 		Image: smoke_fire_glow
 		Sequences: idle
@@ -1670,7 +1670,7 @@
 		IsDecoration: True
 	# Smoke does not stick: it is emitted at the unit's current position each tick and then rises and
 	# drifts away on its own, leaving a trail as the unit moves. Same smoke the ground fire uses.
-	DeterministicOffsetSmokeParticleEmitter@EpicSmoke:
+	SmokeParticleEmitter@EpicSmoke:
 		RequiresCondition: epic-wounded
 		Image: smoke_fire_glow
 		Sequences: idle
