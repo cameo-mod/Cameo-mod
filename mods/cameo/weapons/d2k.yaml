@@ -1449,7 +1449,7 @@ DeviatorMissile:
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 5
 	Warhead@Effect: CreateEffect
-		Explosions: deviator.ordos
+		Explosions: deviator
 		ExplosionPalette: deviatorgas
 		UsePlayerPalette: true
 		ImpactSounds: bioball_impact.wav
@@ -2248,7 +2248,7 @@ CrateExplosion:
 			Heavy: 30
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 25
+			harvester: 25
 		AffectsParent: true
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
@@ -2450,7 +2450,7 @@ Laboratory_Bioball:
 		Damage: 5
 		DamageTypes: Prone75Percent, TriggerProne, ContaminatorMutate
 	Warhead@Effect: CreateEffect
-		Explosions: deviator.ordos
+		Explosions: deviator
 		ExplosionPalette: deviatorgas
 		UsePlayerPalette: true
 		ImpactSounds: bioball_impact.wav
@@ -2745,7 +2745,7 @@ d2k_munitions_explosion_h:
 
 D2K_Personal_Shield_Impact:
 	Warhead@PersonalShielded: CreateEffect
-		Explosions: up_personal_shield.ixian
+		Explosions: ixian_personal_shield
 		ValidTargets: PersonalShielded
 		Inaccuracy: 0c128
 		ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
@@ -4960,7 +4960,7 @@ oDevBullet:
 			Heavy: 100
 			invulnerable: 0
 			Concrete: 40
-			harvester.ixian: 100
+			harvester: 100
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 3250
 	Warhead@3Eff: CreateEffect
@@ -4994,7 +4994,7 @@ o155mm:
 			Heavy: 20
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 25
+			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 5625
@@ -5028,7 +5028,7 @@ o155mm:
 			Heavy: 100
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 50
+			harvester: 50
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -5068,7 +5068,7 @@ o155mm:
 			Heavy: 100
 			invulnerable: 0
 			Concrete: 30
-			harvester.ixian: 50
+			harvester: 50
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 720
 	Warhead@3Eff: CreateEffect
@@ -5096,7 +5096,7 @@ oRocket:
 			Heavy: 50
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 50
+			harvester: 50
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 625
 	Warhead@3Eff: CreateEffect
@@ -5152,9 +5152,9 @@ oDeviatorMissile:
 			Heavy: 100
 			invulnerable: 0
 			Concrete: 50
-			harvester.ixian: 100
+			harvester: 100
 	Warhead@3Eff: CreateEffect
-		Explosions: deviator.ordos
+		Explosions: deviator
 		ExplosionPalette: deviatorgas
 		UsePlayerPalette: true
 		-ImpactSounds:
@@ -5233,7 +5233,7 @@ oOrniBomb:
 			Heavy: 60
 			invulnerable: 0
 			Concrete: 25
-			harvester.ixian: 60
+			harvester: 60
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -5299,7 +5299,7 @@ oDeathHandCluster:
 			Heavy: 60
 			invulnerable: 0
 			Concrete: 25
-			harvester.ixian: 60
+			harvester: 60
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -5362,7 +5362,7 @@ ogrenade:
 			Heavy: 20
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 25
+			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater
@@ -5387,7 +5387,7 @@ oGrenDeath:
 			Heavy: 20
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 25
+			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -5411,7 +5411,7 @@ oSardDeath:
 			Light: 90
 			invulnerable: 0
 			Concrete: 30
-			harvester.ixian: 50
+			harvester: 50
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: SandCrater, RockCrater
@@ -5459,7 +5459,7 @@ oPlasmaExplosion:
 			Heavy: 20
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 25
+			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: d2k_piffs
@@ -5502,7 +5502,7 @@ oM_HMG:
 			Heavy: 50
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 50
+			harvester: 50
 	Warhead@2Concrete: DamagesConcrete
 		Damage: 625
 
@@ -5570,7 +5570,7 @@ oDebris:
 			Heavy: 75
 			Concrete: 100
 			invulnerable: 0
-			harvester.ixian: 50
+			harvester: 50
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@2Smu: LeaveSmudge
@@ -5601,7 +5601,7 @@ oDebris2:
 			Heavy: 30
 			invulnerable: 0
 			Concrete: 20
-			harvester.ixian: 25
+			harvester: 25
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@3Eff: CreateEffect
 		Explosions: d2k_small_napalm
