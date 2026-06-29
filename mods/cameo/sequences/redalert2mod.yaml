@@ -2755,7 +2755,7 @@ latin_mtnk:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: latin_mtnk.shp
-		Scale: 0.6
+		Scale: 1
 	idle:
 		Facings: 64
 	turret:
@@ -4245,6 +4245,56 @@ steel_board_inf:
 		Scale: 1
 		Offset: 0,0
 
+steel_runner:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: steel_runner.png
+	run:
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Scale: 1
+		Tick: 48
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Scale: 1
+		Start: 118
+	die1:
+		Scale: 1
+		Start: 166
+	die2:
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
+		Start: 324
+	icon:
+		Filename: steel_runner_icon.png
+
 steel_mako:
 	Defaults:
 		Filename: steel_mako.shp
@@ -4828,9 +4878,9 @@ steel_defender:
 		Filename: steel_defender_icon.shp
 		Offset: 0,0
 
-upsteel_pulserifles:
+upsteel_pulseweapons:
 	icon:
-		Filename: steel_upgrade_pulserifles_icon.png
+		Filename: steel_upgrade_pulseweapons_icon.png
 
 upsteel_naniteinfusion:
 	icon:

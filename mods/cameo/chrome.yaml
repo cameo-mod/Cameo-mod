@@ -1260,6 +1260,35 @@ sidebar-button-soviet-disabled:
 sidebar-button-soviet-highlighted-disabled:
 	Inherits: sidebar-button-allies-disabled
 
+# RA1 Japan
+
+^Sidebarmodjapan:
+	Image: sidebar-modjapan.png
+sidebar-modjapan:
+	Inherits: sidebar
+	Inherits@2: ^Sidebarmodjapan
+sidebar-button-modjapan:
+	Inherits: sidebar-button
+	Inherits@2: ^Sidebarmodjapan
+sidebar-button-modjapan-hover:
+	Inherits: sidebar-button-hover
+	Inherits@2: ^Sidebarmodjapan
+sidebar-button-modjapan-pressed:
+	Inherits: sidebar-button-modjapan
+sidebar-button-modjapan-highlighted:
+	Inherits: sidebar-button-highlighted
+	Inherits@2: ^Sidebarmodjapan
+sidebar-button-modjapan-highlighted-hover:
+	Inherits: sidebar-button-highlighted-hover
+	Inherits@2: ^Sidebarmodjapan
+sidebar-button-modjapan-highlighted-pressed:
+	Inherits: sidebar-button-ra2yuri-highlighted
+sidebar-button-modjapan-disabled:
+	Inherits: sidebar-button-disabled
+	Inherits@2: ^Sidebarmodjapan
+sidebar-button-modjapan-highlighted-disabled:
+	Inherits: sidebar-button-modjapan-disabled
+
 # TD
 ^SidebarTD:
 	Image: sidebar-td.png
@@ -1312,20 +1341,6 @@ sidebar-nod:
 		background-bottom: 0, 166, 238, 8
 		background-supportoverlay: 77, 324, 64, 48
 
-sidebar-tkm:
-	Inherits: ^SidebarTD
-	Regions:
-		radar: 290, 290, 222, 222
-		insignia: 290, 290, 222, 222
-		background-top: 0, 185, 238, 262
-		background-moneybin: 0, 54, 238, 28
-		background-tabs: 41, 54, 197, 28
-		background-tabs-side: 0, 116, 41, 47
-		background-iconbg: 12, 275, 190, 47
-		background-iconrow: 0, 116, 238, 47
-		background-bottom: 0, 166, 238, 8
-		background-supportoverlay: 77, 324, 64, 48
-
 sidebar-button-nod:
 	Inherits: ^SidebarTD
 	PanelRegion: 260, 165, 5, 5, 18, 18, 5, 5
@@ -1346,6 +1361,21 @@ sidebar-button-nod-disabled:
 	Inherits: sidebar-button-gdi-disabled
 sidebar-button-nod-highlighted-disabled:
 	Inherits: sidebar-button-gdi-disabled
+
+sidebar-tkm:
+	Inherits: ^SidebarTD
+	Regions:
+		radar: 290, 290, 222, 222
+		insignia: 290, 290, 222, 222
+		background-top: 0, 185, 238, 262
+		background-moneybin: 0, 54, 238, 28
+		background-tabs: 41, 54, 197, 28
+		background-tabs-side: 0, 116, 41, 47
+		background-iconbg: 12, 275, 190, 47
+		background-iconrow: 0, 116, 238, 47
+		background-bottom: 0, 166, 238, 8
+		background-supportoverlay: 77, 324, 64, 48
+
 # Generic
 
 sidebar-generic:
