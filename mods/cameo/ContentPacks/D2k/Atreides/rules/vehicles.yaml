@@ -1,0 +1,11 @@
+combat_tank.atreides:
+	Inherits: ^combat_tank
+	Buildable:
+		Prerequisites: ~faction.atreides, ~techlevel.medium
+	Armament:
+		Weapon: 80mm_A
+
+combat_tank_husk.atreides:
+	Inherits: ^combat_tank.husk
+	TransformOnCapture:
+		IntoActor: combat_tank.atreides

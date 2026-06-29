@@ -1,0 +1,28 @@
+World:
+	FactionCA@Ordos:
+		Name: Ordos DU
+		InternalName: ordos
+		Game: Dune Universe
+		Side: Dune
+		Description: faction-d2k-ordos.description
+	StartingUnits@ordos:
+		Class: none
+		ClassName: MCV Only
+		BaseActor: d2k_mcv.ordos
+		Factions: ordos
+	StartingUnits@ordos_L:
+		Class: light
+		ClassName: Light Support
+		Factions: ordos
+		BaseActor: d2k_mcv.ordos
+		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, combat_tank.ixian
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
+	StartingUnits@ordos_h:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: ordos
+		BaseActor: d2k_mcv.ordos
+		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, combat_tank.ixian, duelist_tank
+		InnerSupportRadius: 3
+		OuterSupportRadius: 5
