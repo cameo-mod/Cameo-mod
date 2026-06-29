@@ -1494,8 +1494,9 @@
 	# while below half health.
 	WithIdleOverlay@EpicFire:
 		RequiresCondition: epic-wounded
-		Image: groundfire_flame
+		Image: fire
 		Sequence: 1
+		Palette: effect
 		IsDecoration: True
 	# Smoke does not stick: it is emitted at the unit's current position each tick and then rises and
 	# drifts away on its own, leaving a trail as the unit moves. Same smoke the ground fire uses.
@@ -1665,8 +1666,9 @@
 	# while below half health.
 	WithIdleOverlay@EpicFire:
 		RequiresCondition: epic-wounded
-		Image: groundfire_flame
+		Image: fire
 		Sequence: 1
+		Palette: effect
 		IsDecoration: True
 	# Smoke does not stick: it is emitted at the unit's current position each tick and then rises and
 	# drifts away on its own, leaving a trail as the unit moves. Same smoke the ground fire uses.
