@@ -1,0 +1,53 @@
+combat_tank.harkonnen:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 40
+		Description: Main Battle Tank\n  Strong vs Tanks\n  Weak vs Infantry
+		IconPalette: d2kunit
+		Prerequisites: ~heavy.harkonnen_combat, ~techlevel.medium, ~!faction.guild, ~!faction.corrino
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Harkonnen Combat Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 70000
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 65
+		TurnSpeed: 13
+	Turreted:
+		TurnSpeed: 13
+	Armament:
+		Weapon: 80mm_H
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 256,0,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	AttractsWorms:
+		Intensity: 520
+	Cloak@TDcloak:
+		Palette: d2kcloak
+	Voiced:
+		VoiceSet: D2KCombatTank
+
+combat_tank_husk.harkonnen:
+	Inherits: ^combat_tank.husk
+	TransformOnCapture:
+		IntoActor: combat_tank.harkonnen

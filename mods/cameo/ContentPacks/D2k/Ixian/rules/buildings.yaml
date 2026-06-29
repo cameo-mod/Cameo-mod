@@ -1,0 +1,1149 @@
+construction_yard.ixian:
+	Inherits: ^construction_yard
+	Tooltip:
+		Name: Ixian Construction Yard
+	Transforms:
+		IntoActor: d2k_mcv.ixian
+	RenderSprites:
+		Image: conyard.atreides
+
+wind_trap.ixian:
+	Inherits: ^wind_trap
+	Buildable:
+		Prerequisites: ~construction_yard.ixian
+	RenderSprites:
+		Image: power.atreides
+
+d2k_barracks.ixian:
+	Inherits: ^D2KBuilding
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@barr: ^IsBarrack
+	Inherits@Prereqs: ^D2KPrereqs
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Ixian Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 352,576,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 512,480,0
+		ExitCell: 1,2
+	RenderSprites:
+		Image: barracks.ixian
+	ProvidesPrerequisite@d2kbarracks:
+		Prerequisite: d2k_barracks
+	ProvidesPrerequisite@barracks:
+		Prerequisite: barracks
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Prerequisites: upgrade_barracks
+	DamageMultiplier@upgrade_barracks:
+		RequiresCondition: upgrade_barracks
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: upgrade_barracks
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 1, 2
+		Range: 1c512, 2c768
+
+refinery.ixian:
+	Inherits: ^refinery
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+	FreeActor:
+		Actor: harvester.ixian
+		SpawnOffset: 0,2
+		Facing: 160
+	FreeActorWithDelivery@1:
+		Actor: harvester.ixian
+		DeliveryOffset: 2,2
+		DeliveringActor: carryall.reinforce
+		Facing: 160
+	# FreeActorWithDelivery@2:
+	# 	Actor: harvester.ixian
+	# 	DeliveryOffset: 0,2
+	# 	DeliveringActor: carryall.reinforce
+	# 	Facing: 160
+	RenderSprites:
+		Image: refinery.atreides
+
+d2k_silo.ixian:
+	Inherits: ^d2k_silo
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, refinery.ixian
+	RenderSprites:
+		Image: silo.atreides
+
+d2k_munitions.ixian:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 310
+		Description: actor-d2k_munitions.description
+		IconPalette: player
+	D2kActorPreviewPlaceBuildingPreview:
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Ixian Munitions Silo
+	RequiresBuildableArea:
+		AreaTypes: building
+		Adjacent: 4
+	Health:
+		HP: 50000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	RenderSprites:
+		Image: d2k_munitions.atreides
+	WithSpriteBody:
+	Power:
+		Amount: -10
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	FireProjectilesOnDeath:
+		Weapons: Debris, Debris2, Debris3, Debris4
+		Pieces: 2, 4
+		Range: 2c0, 4c0
+	-WithDeathAnimation:
+	FireWarheadsOnDeath:
+		Type: Footprint
+		Weapon: d2k_munitions_explosion
+		EmptyWeapon: d2k_munitions_explosion
+	ProximityExternalCondition@d2krearm:
+		Condition: d2k_rearm
+		Range: 7500
+		ValidRelationships: Ally
+	WithRangeCircle:
+		Range: 7500
+
+# light_factory:
+# 	Inherits: ^D2KBuilding
+# 	Inherits@UPGRADEABLE: ^D2kUpgradeable
+# 	Inherits@D2KSprite: ^D2KPaletteRender
+# 	Inherits@CPQWP: ^CPQConditionWithPrimary
+# 	Inherits@Prereqs: ^D2KPrereqs
+# 	Inherits@shape: ^3x3Shape
+# 	Buildable:
+# 		Prerequisites: refinery, ~d2k_prereq_no_tleilaxu
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 230
+# 		BuildDuration: 250
+# 		BuildDurationModifier: 100
+# 		Description: Produces light vehicles.
+# 		IconPalette: d2kunit
+# 	Valued:
+# 		Cost: 500
+# 	Tooltip:
+# 		Name: Light Factory
+# 	Building:
+# 		Footprint: xxx xx= ===
+# 		Dimensions: 3,3
+# 		LocalCenterOffset: 0,-512,0
+# 	Health:
+# 		HP: 108000
+# 	Armor:
+# 		Type: Wood
+# 	RevealsShroud:
+# 		Range: 5c768
+# 	RenderSprites:
+# 		Image: light.ordos
+# 		FactionImages:
+# 			atreides: light.atreides
+# 			fremen: light.atreides
+# 			ixian: light.atreides
+# 			harkonnen: light.harkonnen
+# 			corrino: light.harkonnen
+# 			guild: light.harkonnen
+# 			emperor: light.harkonnen
+# 	WithIdleOverlay@TOP:
+# 		RequiresCondition: !build-incomplete
+# 		Sequence: idle-top
+# 	WithProductionOverlay@WELDING:
+# 		RequiresCondition: !build-incomplete
+# 		Queues: Vehicle
+# 		Sequence: production-welding
+# 	RallyPoint:
+# 	Exit@1:
+# 		SpawnOffset: 544,-224,0
+# 		ExitCell: 2,1
+# 	Production@NORMAL:
+# 		Produces: Vehicle
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RAVehicle
+# 		RequiresCondition: classicproductionqueues
+	# ProductionQueue:
+	# 	Type: Vehicle
+	# 	DisplayOrder: 3
+	# 	Group: Vehicle
+	# 	LowPowerModifier: 300
+	# 	ReadyAudio: UnitReady
+	# 	BlockedAudio: NoBuild
+	# 	LimitedAudio: BuildingInProgress
+	# 	QueuedAudio: Training
+	# 	OnHoldAudio: OnHold
+	# 	CancelledAudio: Cancelled
+	# 	InfiniteBuildLimit: 10
+# 	ProductionBar@vehicle:
+# 		ProductionType: Vehicle
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@ravehicle:
+# 		ProductionType: RAVehicle
+# 		RequiresCondition: classicproductionqueues
+# 	ProvidesPrerequisite@atreides:
+# 		Prerequisite: light.atreides
+# 	ProvidesPrerequisite@ordos:
+# 		Prerequisite: light.ordos
+# 	ProvidesPrerequisite@harkonnen:
+# 		Prerequisite: light.harkonnen
+# 	ProvidesPrerequisite@trike:
+# 		Prerequisite: light.trike
+# 		Factions: atreides, fremen, harkonnen, corrino, mercenary, ixian
+# 	ProvidesPrerequisite@raider.ordos:
+# 		Prerequisite: light.raider
+# 		Factions: ordos, smugglers
+# 	ProvidesPrerequisite@buildingname:
+# 	Power:
+# 		Amount: -125
+# 	GrantConditionOnPrerequisite@UPGRADEABLE:
+# 		Prerequisites: up_light.ordos
+# 	-WithDeathAnimation:
+# 	ThrowsShrapnel:
+# 		Weapons: Debris2, Debris3
+# 		Pieces: 3, 7
+# 		Range: 1c512, 2c768
+# 	SpawnActorOnDeath@death1:
+# 		Actor: light_inf
+# 	SpawnActorOnDeath@death2:
+# 		Actor: light_inf
+# 	SpawnActorOnDeath@death3:
+# 		Actor: light_inf
+	# Production@upgrade:
+	# 	Produces: Upgrades
+	# ProductionBar@upgrade:
+	# 	ProductionType: Upgrade
+
+heavy_factory.ixian:
+	Inherits: heavy_factory
+	Tooltip:
+		Name: Ixian Advanced Heavy Factory
+	ProductionCostMultiplier@ixian:
+		Multiplier: 125
+	ProductionTimeMultiplier@ixian:
+		Multiplier: 125
+	DamageMultiplier@ixian:
+		Modifier: 75
+	RenderSprites:
+		Image: heavy.mercenary
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, refinery.ixian
+		Description: template-factory.description
+		IconPalette: player
+	ProductionQueue@VEHICLE:
+		BuildDurationModifier: 75
+	ProvidesPrerequisite@missiletank:
+		Prerequisite: heavy.missile_tank
+	# ProvidesPrerequisite@upgrade_heavy:
+	# 	Prerequisite: upgrade_heavy
+
+repair_pad.ixian:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, heavy_factory.ixian
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Ixian Repair Pad
+	Building:
+		Footprint: === =+= ===
+		Dimensions: 3,3
+	# HitShape:
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -512
+	# 		BottomRight: 1536, 512
+	# HitShape@TOPANDBOTTOM:
+	# 	Type: Rectangle
+	# 		TopLeft: -512, -1536
+	# 		BottomRight: 512, 1536
+	Reservable:
+	RallyPoint:
+	RenderSprites:
+		Image: repair_pad.gold
+	WithRepairOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: effect75alpha
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 4, 6
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+
+outpost.ixian:
+	Inherits: ^D2KBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, refinery.ixian
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Ixian Outpost
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: outpost.atreides
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete && !severe-damaged
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+		# Offset: -30,-60,0
+	GrantConditionOnDamageState@STOPDISH:
+		Condition: severe-damaged
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 5, 9
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	ProvidesPrerequisite@outpost:
+		Prerequisite: outpost.d2k
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+launchpad.ixian:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TDSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Tooltip:
+		Name: Ixian Launchpad
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, outpost.ixian
+	Building:
+		BuildSounds: BUILD1.WAV
+		Footprint: xx xx
+		Dimensions: 2,2
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	RallyPoint:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@high_tech_factory:
+		Prerequisite: high_tech_factory
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Condition: upgrade_hightech
+		Prerequisites: upgrade_hightech
+	DamageMultiplier@upgrade_hightech:
+		RequiresCondition: upgrade_hightech
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: upgrade_hightech
+	WithMakeAnimation:
+		Condition: build-incomplete
+	WithCrumbleOverlay:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 7, 10
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: light_inf
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+
+research_centre.ixian:
+	Inherits: ^research_centre
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, outpost.ixian
+	RenderSprites:
+		Image: research.gold
+
+high_tech_factory.ixian:
+	Inherits: ^high_tech_factory
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+	RenderSprites:
+		Image: hightech.atreides
+
+# Generic starport. Common traits here; each faction actor sets its build
+# prerequisite and sprite image.
+
+starport.ixian:
+	Inherits: ^starport
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, research_centre.ixian, derricklimit
+	RenderSprites:
+		Image: starport.smuggler
+
+supercomputer.ixian:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@Prereqs: ^D2KPrereqs
+	Inherits@shape: ^4x3Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Buildable:
+		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+		Description: Provides a nuclear weapon support power.
+		IconPalette: player
+	Tooltip:
+		Name: Ixian Supercomputer
+	Building:
+		Footprint: xxxx xxxx ====
+		Dimensions: 4,3
+	WithMakeAnimation:
+	NukePowerCA:
+		OrderName: PulseMissile
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Cursor: nuke
+		Icons:
+			1: abomb
+		ChargeInterval: 10500
+		Names:
+			1: power-nuke.d2kname
+		Descriptions:
+			1: power-nuke.d2kdescription
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear weapon ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear weapon launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear weapon impact imminent.
+		MissileWeapons:
+			1: PulseMissile
+		MissileDelay: 25
+		SpawnOffset: 0,0,1024
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		DisplayBeacon: true
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		SupportPowerPaletteOrder: 70
+		MissileImage: raatomic
+		BeaconActor: BLASTRADIUS.atomic
+	WithBuildingBib:
+	WithSupportPowerActivationAnimation:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	RenderSprites:
+		Image: supercomputer.ixian
+		Palette: td_temperat
+	-WithCrumbleOverlay:
+
+# starport_smuggler:
+# 	Inherits: starport
+# 	Tooltip:
+# 		Name: Advanced Starport
+# 	RenderSprites:
+# 		Image: starport.smuggler
+# 	Health:
+# 		HP: 121000
+# 	Buildable:
+# 		Prerequisites: heavy_factory, outpost, research_centre, ~techlevel.high, ~faction.smugglers
+# 		Description: Dropzone for quick reinforcements.\nEnables drop-off of supervehicles
+# 		BuildDuration: 1500
+# 		BuildDurationModifier: 100
+# 		IconPalette: player
+# 	Valued:
+# 		Cost: 2000
+# 	ProvidesPrerequisite@itself:
+# 		Prerequisite: starport
+# 	Power:
+# 		Amount: -250
+
+# starport_corrino:
+# 	Inherits: starport_smuggler
+# 	Tooltip:
+# 		Name: Emperor's Starport
+# 	RenderSprites:
+# 		Image: starport.corrino
+# 	Health:
+# 		HP: 145000
+# 	Buildable:
+# 		Prerequisites: heavy_factory, outpost, research_centre, ~techlevel.high, ~faction.corrino
+# 		Description: Dropzone for quick reinforcements.\nEnables drop-off of Corrino's Special Vehicles
+# 		BuildDuration: 1500
+# 		IconPalette: d2kunit
+# 	Valued:
+# 		Cost: 2500
+
+machine_gun_turret.ixian:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EMP: ^TurretEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@shape: ^1x1Shape
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+		BuildPaletteOrder: 550
+		Description: template-anti-infantry-defense.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Machine Gun Turret
+	Health:
+		HP: 75000
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithMuzzleOverlay:
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 96
+		InitialFacing: 2048
+		RealignDelay: -1
+	Armament:
+		Weapon: HMG_turret
+		LocalOffset: 256,0,576
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: !up_needleguns.ixian
+	Armament@Upgrade: ##########
+		Weapon: HMG_turret_upgrade
+		LocalOffset: 256,0,576
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: up_needleguns.ixian
+	Replacement:
+		ReplaceableTypes: Tower
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	-WithSpriteTurret:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -30
+	RevealsShroud:
+		Range: 7394
+	ActorStatValues:
+		Upgrades: up_needleguns.ixian, up_general_purpose_armor.ixian
+
+medium_gun_turret.ixian:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@shape: ^1x1Shape
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@Barrel: ^D2K_ReinforcedBarrel
+	Tooltip:
+		Name: Gun Turret
+	Valued:
+		Cost: 1000
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+		BuildPaletteOrder: 550
+		Description: template-anti-vehicle-defense.description
+		IconPalette: d2kunit
+	Health:
+		HP: 125000
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithMuzzleOverlay:
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 16
+		InitialFacing: 2048
+		RealignDelay: -1
+	Armament:
+		Weapon: 110mm_Gun
+		LocalOffset: 512,0,432
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	Replacement:
+		ReplaceableTypes: Tower
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	RenderSprites:
+		Image: medium_gun_turret.ixian
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 7979
+	ActorStatValues:
+		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian
+
+large_gun_turret.ixian:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@shape: ^1x1Shape
+	Inherits@EMP: ^TurretEMP
+	Inherits@HeavyMissiles: ^D2K_HeavyMissilesUpgrade
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~construction_yard.ixian, outpost.ixian
+		BuildPaletteOrder: 610
+		Description: actor-large_gun_turret.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Rocket Turret
+	Health:
+		HP: 150000
+	BodyOrientation:
+		QuantizedFacings: 32
+	Armament@PRIMARY:
+		Weapon: D2K_TowerMissile
+		LocalOffset: 256,384,768, 256,-384,768
+	Turreted:
+		TurnSpeed: 32
+		InitialFacing: 2048
+		RealignDelay: -1
+	AttackTurreted:
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Replacement:
+		ReplaceableTypes: Tower
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 3, 5
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -75
+	RevealsShroud:
+		Range: 10684
+	DetectCloaked:
+		Range: 5342
+	ActorStatValues:
+		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian
+
+# d2k_mine_ap:
+# 	Inherits: ^D2KMine
+# 	Buildable:
+# 		Queue: Defence, RADefence
+# 		BuildPaletteOrder: 60
+# 		BuildDuration: 150
+# 		Prerequisites: d2k_barracks, ~faction.smugglers, ~techlevel.low
+# 		Description: Defensive structure. Explodes when an enemy unit moves over it.\n  Strong vs Infantry\n  Weak vs Tanks\n\n  Invisible to enemy.
+# 		IconPalette: d2kunit
+# 	Valued:
+# 		Cost: 125
+# 	Tooltip:
+# 		Name: Anti-Personnel Mine
+# 	FireWarheadsOnDeath:
+
+# 		Weapon: D2KAPMine
+# 		EmptyWeapon: D2KAPMine
+# 	ActorPreviewPlaceBuildingPreview:
+# 	ThrowsShrapnel:
+# 		Weapons: Debris2, Debris3
+# 		Pieces: 2, 4
+# 		Range: 1c512, 2c768
+# 	RenderSprites:
+
+# d2k_sandworm_tower:
+# 	Inherits: ^Defense
+# 	Inherits@AUTOTARGET: ^AutoTargetAll
+# 	Inherits@shape: ^1x1Shape
+# 	Selectable:
+# 		Bounds: 1024, 1440
+# 	Valued:
+# 		Cost: 1200
+# 	Tooltip:
+# 		Name: Tamed Sandworm
+# 	Buildable:
+# 		BuildPaletteOrder: 4
+# 		Prerequisites: d2k_flesh_vat, ~faction.tleilaxu, ~techlevel.medium
+# 		Queue: Defence, RADefence
+# 		BuildDurationModifier: 50
+# 		BuildDuration: 1250
+# 		Description: Universal Base Defence\nCan burrow to reposition or swallow enemy units\nCannot swallow large units
+# 	Building:
+# 		Footprint: xx
+# 		Dimensions: 2,1
+# 	Armor:
+# 		Type: Wood
+# 	Health:
+# 		HP: 72000
+# 	RevealsShroud:
+# 		Range: 12c0
+# 	Turreted:
+# 		TurnSpeed: 32
+# 		InitialFacing: 0
+# 	WithSpriteBody:
+# 	WithSpriteTurret:
+# 	-MustBeDestroyed:
+# 	-WithDeathAnimation:
+# 	-WithMakeAnimation:
+# 	AutoTarget:
+# 		InitialStance: AttackAnything
+# 		ScanRadius: -1
+# 	Armament:
+# 		Weapon: d2k_sandworm_electricity
+# 		LocalOffset: 1200,0,0
+# 	AttackTurreted:
+# 		RequiresCondition: !build-incomplete && !lowpower
+# 	Power:
+# 		Amount: 0
+# 	BodyOrientation:
+# 		QuantizedFacings: 8
+# 	Transforms:
+# 		IntoActor: sandworm_tleilaxu
+# 		Offset: -1,-1
+# 		TransformSounds: BUILD1.WAV
+# 		Facing: 256
+# 		NoTransformNotification: BuildingCannotPlaceAudio
+
+# d2k_mine_at:
+# 	Inherits: ^D2KMine
+# 	Buildable:
+# 		Queue: Defence, RADefence
+# 		BuildPaletteOrder: 70
+# 		BuildDuration: 200
+# 		Prerequisites: d2k_barracks, ~faction.smugglers, ~techlevel.medium
+# 		Description: Defensive structure. Explodes when an enemy unit moves over it.\n  Strong vs Tanks\n  Weak vs Infantry\n\n  Invisible to enemy.
+# 		IconPalette: d2kunit
+# 	Valued:
+# 		Cost: 200
+# 	Tooltip:
+# 		Name: Anti-Tank Mine
+# 	FireWarheadsOnDeath:
+
+# 		Weapon: D2KATMine
+# 		EmptyWeapon: D2KATMine
+# 	ActorPreviewPlaceBuildingPreview:
+# 	ThrowsShrapnel:
+# 		Weapons: Debris2, Debris3
+# 		Pieces: 3, 5
+# 		Range: 1c512, 2c768
+# 	RenderSprites:
+
+# ^Guild_teleport:
+# 	PortableChrono:
+# 		ChronoshiftSound: d2k_teleport.wav
+# 		CircleColor: FF0000
+# 		CircleBorderColor: B00000
+# 		TargetLineColor: FF0000
+# 		MaxDistance: 12
+# 		ChargeDelay: 225
+# 		TargetCursor: ability
+# palace:
+# 	Inherits: ^D2KBuilding
+# 	Inherits@IDISABLE: ^D2KDisableOnLowPowerOrPowerDown
+# 	Inherits@D2KSprite: ^D2KPaletteRender
+# 	Inherits@SW: ^PrimarySuperweapon
+# 	Inherits@shape: ^3x3Shape
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~du_palace, !swpalace
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 620
+# 		BuildDuration: 937
+# 		BuildDurationModifier: 100
+# 		Description: Unlocks elite infantry and weapons.\nProvides Passive Income\nCan be only built once.
+# 		IconPalette: d2kunit
+# 	Valued:
+# 		Cost: 1600
+# 	Tooltip:
+# 		Name: Palace
+# 	Building:
+# 		Footprint: xx= xxx =xx
+# 		Dimensions: 3,3
+# 	Health:
+# 		HP: 121000
+# 	HitShape:
+# 		Type: Rectangle
+# 			TopLeft: -1536, -512
+# 			BottomRight: 1536, 512
+# 	HitShape@TOP:
+# 		Type: Rectangle
+# 			TopLeft: -1536, -1536
+# 			BottomRight: 512, -512
+# 	HitShape@BOTTOM:
+# 		Type: Rectangle
+# 			TopLeft: -512, 512
+# 			BottomRight: 1536, 1536
+# 	Armor:
+# 		Type: Concrete
+# 	RevealsShroud:
+# 		Range: 4c768
+# 	RenderSprites:
+# 		Image: palace.ordos
+# 		FactionImages:
+# 			atreides: palace.atreides
+# 			fremen: palace.atreides
+# 			ixian: palace.atreides
+# 			harkonnen: palace.harkonnen
+# 			corrino: palace.corrino
+# 			guild: palace.harkonnen
+# 	WithSupportPowerActivationOverlay:
+# 		RequiresCondition: !build-incomplete && !launchpad-damaged && harkonnen
+# 	GrantConditionOnDamageState@LAUNCHPADDAMAGED:
+# 		Condition: launchpad-damaged
+# 	Power:
+# 		Amount: -200
+# 	ProvidesPrerequisite@swlimit:
+# 		Prerequisite: swpalace
+# 	#ProductionQueue:
+# 	#	RequiresCondition: atreides || ordos
+# 	SupportPowerChargeBar:
+# 	NukePowerCA:
+# 		Cursor: nuke
+# 		Icon: deathhand
+# 		IconPalette: d2kunit
+# 		PauseOnCondition: disabled
+# 		Prerequisites:
+# 			1: ~techlevel.superweapons
+# 		Icons:
+# 			1: deathhand
+# 		Names:
+# 			1: Death Hand
+# 		Descriptions:
+# 			1: Launches a death hand missile at a target location
+# 		MissileWeapons:
+# 			1: deathhand
+# 		BeaconPosters:
+# 			1: deathhand
+# 		CircleRanges:
+# 			1: 10000
+# 		ChargeInterval: 4500
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		BeginChargeSpeechNotification: DeathHandCharging
+# 		InsufficientPowerSpeechNotification: InsufficientPower
+# 		EndChargeSpeechNotification: DeathHandAvailable
+# 		LaunchSpeechNotification: NuclearWeaponLaunched
+# 		IncomingSpeechNotification: NuclearWarheadApproaching
+# 		MissileDelay: 5
+# 		MissilePalette: d2kunit
+# 		TrailPalette: d2kunit
+# 		SpawnOffset: 32,816,0
+# 		DetonationAltitude: 3c0
+# 		RemoveMissileOnDetonation: False
+# 		AllowMultiple: True
+# 		DisplayBeacon: True
+# 		DisplayRadarPing: True
+# 		DisplayTimerRelationships: Ally, Neutral, Enemy
+# 		CameraRange: 10000
+# 		ArrowSequence: arrow
+# 		CircleSequence: circles
+# 		FlightVelocity: 384
+# 		TrailInterval: 0
+# 		TrailImage: large_trail
+# 		TrailSequences: idle
+# 		SupportPowerPaletteOrder: 40
+# 		OrderName: deathhand
+# 		MissileImage: deathhand
+# 	ProduceActorPower@atrfremen:
+# 		Name: Hire Fremen Guerillas
+# 		Description: Fast Elite infantry units armed with assault rifles and machine guns. When grouped, they can take down buildings extremely quickly\n  Strong vs Buildings\n  Weak vs Infantry, Vehicles\n  Special Ability: Invisibility
+# 		Icon: fremeng
+# 		IconPalette: d2kunit
+# 		AllowMultiple: True
+# 		PauseOnCondition: disabled
+# 		Prerequisites: ~techlevel.superweapons, ~faction.atreides
+# 		Actors: fremeng, fremeng, fremeng
+# 		Type: Fremen
+# 		ChargeInterval: 1500
+# 		AutoFire: true
+# 		OrderName: callatrfremen
+# 		SupportPowerPaletteOrder: 20
+# 		LaunchSound: A_FSEL1.AUD
+# 	DetonateWeaponPower@fremen:
+# 		Prerequisites:
+# 			1: ~techlevel.superweapons
+# 		Icons:
+# 			1: fremen
+# 		Names:
+# 			1: Desert Phantoms
+# 		Descriptions:
+# 			1: Deploys 8 Desert Phantoms anywhere on map
+# 		Weapons:
+# 			1: DesertPhantomsSpawn
+# 		BeaconPosters:
+# 			1: fremen
+# 		OrderName: GDI Drop
+# 		Cursor: ability
+# 		PauseOnCondition: lowpower
+# 		InsufficientPowerSpeechNotification: InsufficientPower
+# 		LaunchSpeechNotification: ReinforcementsArrived
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		DisplayBeacon: True
+# 		DisplayRadarPing: True
+# 		DisplayTimerRelationships: Ally, Neutral, Enemy
+# 		ChargeInterval: 6000
+# 		IncomingSpeechNotification: EnemyUnitsApproaching
+# 		CameraActor: camera.small
+# 		IconPalette: windows256
+# 		CameraRemoveDelay: 60
+# 		AllowMultiple: True
+# 	IonCannonPower:
+# 		Prerequisites:
+# 			1: ~techlevel.superweapons
+# 		Icons:
+# 			1: d2k_chaos_lightning_icon
+# 		Names:
+# 			1: Chaos Lightning
+# 		Descriptions:
+# 			1: Strikes enemy with Powerful Lightning Strike which deals damage and temporarily causes chaos making units attack each other
+# 		OrderName: chaoslightning
+# 		Weapon: d2k_chaos_lightning
+# 		AllowMultiple: true
+# 		IconPalette: ra2
+# 		Cursor: ioncannon
+# 		Effect: d2k_chaos_effect
+# 		EffectPalette: alpha75
+# 		ChargeInterval: 6000
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		InsufficientPowerSpeechNotification: InsufficientPower
+# 		OnFireSound: ion1.aud
+# 		DisplayRadarPing: True
+# 		DisplayTimerRelationships: Ally, Neutral, Enemy
+# 		CameraActor: camera
+# 		CameraRemoveDelay: 100
+# 	ProduceActorPower@saboteur:
+# 		Prerequisites:
+# 			1: ~techlevel.superweapons
+# 		Icons:
+# 			1: saboteur
+# 		Names:
+# 			1: Recruit Saboteur
+# 		Descriptions:
+# 			1: Sneaky stealth infantry that can infiltrate safely, armed with explosives that can be attached to vehicles and buildings\n  Strong vs Buildings\n  Weak vs Everything\n  Special Abilities: Destroy Buildings, Invisibility
+# 		BeaconPosters:
+# 			1: fremen
+# 		AllowMultiple: True
+# 		IconPalette: d2kunit
+# 		PauseOnCondition: disabled
+# 		AutoFire: true
+# 		Actors: saboteur
+# 		Type: Saboteur
+# 		ChargeInterval: 2250
+# 		OrderName: callsaboteur
+# 		SupportPowerPaletteOrder: 30
+# 		LaunchSound: O_SCONF1.AUD
+# 	Exit@1:
+# 		SpawnOffset: -704,768,0
+# 		ExitCell: -1,2
+# 	Exit@2:
+# 		SpawnOffset: -704,768,0
+# 		ExitCell: -1,3
+# 	Exit@3:
+# 		SpawnOffset: -704,768,0
+# 		ExitCell: 0,3
+# 	GrantConditionOnPrerequisite@ATREIDES:
+# 		Condition: atreides
+# 		Prerequisites: faction.atreides
+# 	GrantConditionOnPrerequisite@ORDOS:
+# 		Condition: ordos
+# 		Prerequisites: faction.ordos
+# 	Production@Atreides:
+# 		Produces: Fremen
+# 		RequiresCondition: atreides
+# 	Production@Ordos:
+# 		Produces: Saboteur
+# 		RequiresCondition: ordos
+# 	SupportPowerChargeBar:
+# 		RequiresCondition: atreides || harkonnen || ordos
+# 	ProvidesPrerequisite@buildingname:
+# 	-WithDeathAnimation:
+# 	ThrowsShrapnel:
+# 		Weapons: Debris, Debris2, Debris3
+# 		Pieces: 8, 14
+# 		Range: 1c512, 2c768
+# 	SpawnActorOnDeath@death1:
+# 		Actor: trooper
+# 	SpawnActorOnDeath@death2:
+# 		Actor: trooper
+# 	SpawnActorOnDeath@death3:
+# 		Actor: trooper
+# 	SpawnActorOnDeath@death4:
+# 		Actor: trooper
+
+storm_lasher.ixian:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@selection: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@shape: ^2x2Shape
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~up_stormlasher.ixian, research_centre.ixian
+		BuildPaletteOrder: 750
+		Description: actor-storm_lasher.description
+		IconPalette: player
+	Valued:
+		Cost: 5000
+	Tooltip:
+		Name: Storm Lasher
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 200000
+	Shielded:
+		RegenAmount: 160
+	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+		Modifier: 200
+		RequiresCondition: up_advanced_ixian_technology.ixian
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithMuzzleOverlay:
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 64
+		InitialFacing: 2048
+		RealignDelay: -1
+	Armament:
+		Weapon: d2kStormLasher
+		#LocalOffset: 0,0,512
+		MuzzleSequence: muzzle
+	ReloadArmamentsBar:
+	Replacement:
+		ReplaceableTypes: Tower
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithSpriteBody:
+		Sequence: idle
+	WithMuzzleOverlay:
+	-WithDeathAnimation:
+	-WithWallSpriteBody:
+	-WithSpriteTurret:
+	WithIdleOverlay@lasher:
+		Sequence: idle-overlay
+		RequiresCondition: !build-incomplete && !severe-damaged
+	GrantConditionOnDamageState@stoplasher:
+		Condition: severe-damaged
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -250
+	RevealsShroud:
+		Range: 11384
+	DetectCloaked:
+		Range: 5692
+	ActorStatValues:
+		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+
+
+	### Armor Tree

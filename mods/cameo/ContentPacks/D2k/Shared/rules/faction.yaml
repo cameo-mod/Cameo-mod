@@ -1,0 +1,52 @@
+World:
+	# FactionCA@Corrino:
+	# 	Name: Corrino DU
+	# 	Game: Dune Universe
+	# 	Side: Houses
+	# 	InternalName: corrino
+	# 	Description: House Corrino\nOnce deadliest and grandest House in the Universe and for many thousands of years the imperial family of Imperium from the world Salusa Secundus.\nCorrino uses their elite trained Sardaukars, to rule the war.\nBonus: Uparmored Harvesters\nSupport Power: Release the Sardaukars
+	FactionCA@RandomDU:
+		Name: Random Dune
+		InternalName: RandomDU
+		RandomFactionMembers: ordos, ixian #atreides, ordos, harkonnen, corrino, ixian
+		Game: Dune Universe
+		Side: Random
+		Description: faction-d2k-random.description
+
+	#########################################
+	#   DUNE UNIVERSE
+	#########################################
+
+Player:
+	ExternalCondition@BuildingsOwned:
+		Condition: BuildingsOwned
+	ProvidesPrerequisite@BuildingsOwnedVordel:
+		Prerequisite: allowsVordelMCV
+		RequiresCondition: BuildingsOwned < 10
+	ProvidesPrerequisite@vordel2:
+		Prerequisite: vordel2
+		RequiresCondition: (BuildingsOwned >= 2)
+	ProvidesPrerequisite@vordel3:
+		Prerequisite: vordel3
+		RequiresCondition: (BuildingsOwned >= 3)
+	ProvidesPrerequisite@vordel4:
+		Prerequisite: vordel4
+		RequiresCondition: (BuildingsOwned >= 4)
+	ProvidesPrerequisite@vordel5:
+		Prerequisite: vordel5
+		RequiresCondition: (BuildingsOwned >= 5)
+	ProvidesPrerequisite@vordel6:
+		Prerequisite: vordel6
+		RequiresCondition: (BuildingsOwned >= 6)
+	ProvidesPrerequisite@vordel7:
+		Prerequisite: vordel7
+		RequiresCondition: (BuildingsOwned >= 7)
+	ProvidesPrerequisite@vordel8:
+		Prerequisite: vordel8
+		RequiresCondition: (BuildingsOwned >= 8)
+	ProvidesPrerequisite@vordel9:
+		Prerequisite: vordel9
+		RequiresCondition: (BuildingsOwned >= 9)
+	ProvidesPrerequisite@vordel10:
+		Prerequisite: vordel10
+		RequiresCondition: (BuildingsOwned >= 10)

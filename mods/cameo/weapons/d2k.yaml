@@ -2745,17 +2745,17 @@ d2k_munitions_explosion_h:
 
 D2K_Personal_Shield_Impact:
 	Warhead@PersonalShielded: CreateEffect
-		Explosions: d2k_personal_shield
+		Explosions: ixian_personal_shield
 		ValidTargets: PersonalShielded
 		Inaccuracy: 0c128
 		ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
 	Warhead@PersonalShieldedSard: CreateEffect
-		Explosions: d2k_personal_shield_sard
+		Explosions: ixian_personal_shield_sard
 		ValidTargets: PersonalShieldedSard
 		Inaccuracy: 0c128
 		ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
 	Warhead@PersonalShieldedHeavy: CreateEffect
-		Explosions: d2k_personal_shield_heavy
+		Explosions: ixian_personal_shield_heavy
 		ValidTargets: PersonalShieldedHeavy
 		Inaccuracy: 0c128
 		ImpactSounds: d2k_personal_shield_1_heavy.aud, d2k_personal_shield_2_heavy.aud, d2k_personal_shield_3_heavy.aud, d2k_personal_shield_4_heavy.aud, d2k_personal_shield_5_heavy.aud, d2k_personal_shield_6_heavy.aud, d2k_personal_shield_7_heavy.aud
@@ -3306,7 +3306,7 @@ HMG_Duelist_upgrade:
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 1
 
-autogun_turret:
+autogun_turret.ordos:
 	Inherits: ^HeavyCannon
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
@@ -3397,7 +3397,7 @@ autogun_tank_small:
 	Range: 6220
 
 d2k_sardaukar_elite:
-	Inherits: autogun_turret
+	Inherits: autogun_turret.ordos
 	Burst: 5
 	BurstDelays: 1
 	ReloadDelay: 11
@@ -4119,7 +4119,7 @@ PhoenixRocketShrapnel:
 		Damage: 1
 
 
-d2k_air_drone:
+air_drone.ixian:
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^LightChemicalWeapon
 	Inherits: ^FlakWeapon
@@ -4263,15 +4263,15 @@ d2k_air_drone_guns_upgrade:
 		Damage: 1
 
 d2k_heavy_air_drone:
-	Inherits: d2k_air_drone
+	Inherits: air_drone.ixian
 	Range: 7100
 	ReloadDelay: 140
 	Burst: 8
 	Warhead@Shrapnel: FireShrapnel
 		Amount: 4
 
-d2k_aa_mine:
-	Inherits: d2k_air_drone
+aa_mine.ordos:
+	Inherits: air_drone.ixian
 	Burst: 15
 	Range: 2c0
 	BurstDelays: 0
@@ -4340,7 +4340,7 @@ d2k_laser_aa:
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 
-d2k_laser_tank:
+laser_tank.ordos:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^RailgunWeapon
@@ -4429,7 +4429,7 @@ d2k_farasha_charge:
 		SecondaryBeamColor: FF000030
 		TrackTarget: false
 
-d2k_farasha:
+farasha.ixian:
 	Inherits: ^TeslaWeapon
 	Inherits: ^HeavyFlameWeapon
 	Inherits: ^RailgunWeapon
@@ -4491,7 +4491,7 @@ d2k_farasha:
 		InvalidTargets: Vehicle, Structure
 
 d2k_farasha_aa:
-	Inherits: d2k_farasha
+	Inherits: farasha.ixian
 	-FirstBurstTargetOffset:
 	-FollowingBurstTargetOffset:
 	Projectile: LaserZap
@@ -4641,7 +4641,7 @@ d2k_basq_AA:
 # 	ReloadDelay: 1
 # 	Projectile: InstantExplode
 # 	Warhead@1Actor: SpawnActor
-# 		Actors: d2k_kwny_fighter, d2k_kwny_fighter, d2k_kwny_fighter, d2k_farasha
+# 		Actors: d2k_kwny_fighter, d2k_kwny_fighter, d2k_kwny_fighter, farasha.ixian
 # 		Range: 5
 # 		Image: ra2cmin
 # 		Sequence: warpout
@@ -4713,7 +4713,7 @@ d2k_chemgun:
 d2k_projections:
 	Projectile: InstantHit
 	Warhead@2: SpawnActor
-		Actors: d2k_apparition
+		Actors: apparition.ixian
 		Range: 3
 		Delay: 10
 

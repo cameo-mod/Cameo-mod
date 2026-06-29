@@ -41,7 +41,7 @@ wall:
 		Start: 4327
 		Offset: -30,-24
 
-artillery_platform:
+artillery_platform.ordos:
 	Defaults:
 	invisible:
 		Filename: DATA.R16
@@ -93,7 +93,7 @@ artillery_platform:
 		Filename: artillery_platformicon.shp
 		Offset: 0,-1
 
-machine_gun_turret:
+machine_gun_turret.ixian:
 	Defaults:
 		Scale: 1.5
 	invisible:
@@ -133,7 +133,7 @@ machine_gun_turret:
 		Filename: machine_gun_towericon.shp
 		Offset: 0,-1
 
-storm_lasher:
+storm_lasher.ixian:
 	invisible:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -178,7 +178,7 @@ storm_lasher:
 		Filename: d2k_storm_lasher_icon.shp
 		Offset: 0,-1
 
-supercomputer:
+supercomputer.ixian:
 	Inherits: ^WithBuildingBib1
 	Defaults:
 		Filename: ixiansuperweapon.shp
@@ -201,7 +201,7 @@ supercomputer:
 		Filename: ixiansuperweaponicon.png
 		Offset: 0,0
 
-autogun_turret:
+autogun_turret.ordos:
 	Defaults:
 	invisible:
 		Filename: DATA.R16
@@ -293,7 +293,7 @@ flame_turret:
 		Filename: flame_towericon.shp
 		Offset: 0,-1
 
-medium_gun_turret:
+medium_gun_turret.ixian:
 	Defaults:
 	invisible:
 		Filename: DATA.R16
@@ -355,7 +355,7 @@ medium_gun_turret:
 		Start: 4333
 		Offset: -30,-24
 
-large_gun_turret:
+large_gun_turret.ixian:
 	Defaults:
 	invisible:
 		Filename: DATA.R16
@@ -1117,7 +1117,7 @@ hightech.atreides:
 	active:
 		Filename: invisibleitem.shp
 
-ixian_launchpad:
+launchpad.ixian:
 	Defaults:
 		Filename: IxHoverpad.png
 		Offset: 0,16
@@ -4193,7 +4193,7 @@ trooper:
 		Start: 4273
 		Offset: -30,-24
 
-twinrockettrooper:
+twin_rocket_trooper.ixian:
 	Inherits: vordel_effect
 	Defaults:
 	stand:
@@ -4900,7 +4900,7 @@ shockgunner:
 		Facings: -32
 		BlendMode: Additive
 
-storm_infantry:
+storm_infantry.ixian:
 	Defaults:
 		Scale: 1.5
 	stand:
@@ -5001,7 +5001,7 @@ storm_infantry:
 		Facings: -32
 		BlendMode: Additive
 
-d2k_neocymek:
+neocymek.ixian:
 	Inherits: ^SCSmallShadow
 	Defaults:
 		Filename: IxCymekSpriteSheet.png
@@ -6016,7 +6016,7 @@ d2k_drone:
 		Filename: droneicon.shp
 		Offset: 0,-1
 
-d2k_ixdrone:
+drone.ixian:
 	Defaults:
 		Filename: IxRailgun.png
 		Offset: 0, 16
@@ -6041,7 +6041,7 @@ d2k_ixdroneprojectile:
 		InterpolatedFacings: 64
 		ZOffset: 1023
 
-d2k_leech:
+leech.ordos:
 	stand:
 		Filename: tleilax_leech.png
 		Start: 64
@@ -6426,7 +6426,7 @@ d2k_hijacker:
 		Filename: hijackericon.shp
 		Offset: 0,-1
 
-facedancer:
+face_dancer.ordos:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Scale: 1.47
@@ -6504,11 +6504,11 @@ facedancer:
 		Filename: facedancericon.shp
 
 facedancer_harv:
-	Inherits: facedancer
+	Inherits: face_dancer.ordos
 	icon:
 		Filename: facedancerworkericon.shp
 
-contaminator:
+contaminator.ordos:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6545,7 +6545,7 @@ contaminator:
 		Start: 324
 	icon:
 		Filename: contaminatoricon.shp
-ordos_aatrooper:
+aatrooper.ordos:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
@@ -6598,7 +6598,7 @@ ordos_aatrooper:
 	icon:
 		Filename: ordos_aatrooper_icon.png
 
-ordos_mortar:
+mortar.ordos:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
@@ -7218,7 +7218,7 @@ d2k_combat_fleet.husk:
 		Facings: -32
 		Scale: 1.875
 
-swarmer:
+swarmer.ordos:
 	Defaults:
 	idle:
 		Filename: ordos_swarmer.png
@@ -7232,7 +7232,7 @@ swarmer:
 	icon:
 		Filename: ordos_swarmer_icon.png
 
-ordos_banshee:
+banshee.ordos:
 	Defaults:
 	idle:
 		Filename: ordos_banshee.png
@@ -7250,7 +7250,7 @@ ordos_banshee:
 		Scale: 0.7
 	icon:
 		Filename: ordos_banshee_icon.png
-ordos_wraith:
+wraith.ordos:
 	Defaults:
 		Filename: ordos_wraith.png
 	idle:
@@ -7267,7 +7267,7 @@ ordos_wraith:
 		Tick: 100
 	icon:
 		Filename: ordos_wraith_icon.png
-ordos_eye:
+eye.ordos:
 	Defaults:
 	idle:
 		Filename: ordos_eye.png
@@ -7297,7 +7297,7 @@ d2k_gunship.husk:
 		ZOffset: -512
 		Facings: -32
 
-d2k_air_drone:
+air_drone.ixian:
 	idle:
 		Filename: d2k_air_drone.shp
 		Scale: 1.5
@@ -7313,7 +7313,7 @@ d2k_heavy_air_drone:
 	icon:
 		Filename: d2k_air_drone_icon.shp
 
-swarmer.husk:
+swarmer_husk.ordos:
 	Defaults:
 	idle:
 		Filename: swarmer.shp
@@ -7478,7 +7478,7 @@ d2k_mcv.husk:
 		Facings: -32
 		ZOffset: -1023
 
-harvester:
+harvester.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -7513,7 +7513,7 @@ harvester:
 		Remap: 54F94B
 		Start: 4280
 		Offset: -30,-24
-ordos_harv:
+harv.ordos:
 	Defaults:
 	idle:
 		Filename: ordos_harv.png
@@ -7549,7 +7549,7 @@ ordos_harv:
 	icon:
 		Filename: ordos_harv_icon.png
 
-harvester.husk:
+harvester_husk.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -7661,7 +7661,7 @@ siege_quad:
 	icon:
 		Filename: d2k_siege_quad_icon.shp
 
-ordos_cobra:
+cobra.ordos:
 	Defaults:
 		Filename: ordos_cobra.png
 	idle:
@@ -7687,7 +7687,7 @@ ordos_cobra:
 		Length: 3
 		BlendMode: Additive
 
-ordos_python:
+python.ordos:
 	Defaults:
 		Filename: ordos_python.png
 	idle:
@@ -7866,7 +7866,7 @@ d2k_projector2:
 	icon:
 		Filename: d2k_projector_icon.shp
 
-d2k_laser_tank:
+laser_tank.ordos:
 	idle:
 		Filename: ordos_lasertank.png
 		Start: 0
@@ -7879,7 +7879,7 @@ d2k_laser_tank:
 		Scale: 1
 	icon:
 		Filename: ordos_lasertank_icon.png
-ordos_deviatormk2:
+deviatormk2.ordos:
 	idle:
 		Filename: ordos_deviatormk2.png
 		Start: 0
@@ -7893,7 +7893,7 @@ ordos_deviatormk2:
 	icon:
 		Filename: ordos_deviatormk2_icon.png
 
-ordos_apc:
+apc.ordos:
 	idle:
 		Filename: ordos_apc.png
 		Start: 0
@@ -7907,7 +7907,7 @@ ordos_apc:
 	icon:
 		Filename: ordos_apc_icon.png
 
-tleilax_labcrawl:
+tleilax_labcrawl.ordos:
 	idle:
 		Filename: tleilax_labcrawl.png
 		Facings: 64
@@ -7923,7 +7923,7 @@ d2k_qafza:
 	icon:
 		Filename: d2k_qafza_icon.shp
 
-d2k_aa_mine:
+aa_mine.ordos:
 	idle:
 		Filename: ordos_aamine.png
 		Facings: 64
@@ -7945,7 +7945,7 @@ d2k_kwny_fighter.husk:
 		ZOffset: -512
 		Facings: -32
 
-d2k_farasha:
+farasha.ixian:
 	idle:
 		Filename: IxFarashaSpritesheet.png
 		Scale: 1.5
@@ -7954,7 +7954,7 @@ d2k_farasha:
 	icon:
 		Filename: farasha_icon.png
 
-d2k_farasha.husk:
+farasha_husk.ixian:
 	idle:
 		Filename: d2k_farasha.shp
 		ZOffset: -512
@@ -7974,7 +7974,7 @@ d2k_farasha_drone.husk:
 		ZOffset: -512
 		Facings: -32
 
-missile_tank.husk:
+missile_tank_husk.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8023,7 +8023,7 @@ sonic_tank.husk:
 		Facings: -32
 		ZOffset: -512
 
-combat_tank_a:
+combat_tank.atreides:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8052,7 +8052,7 @@ combat_tank_a:
 		Start: 4281
 		Offset: -30,-24
 
-combat_tank_a.husk:
+combat_tank_husk.atreides:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8145,7 +8145,7 @@ duelist_tank.husk:
 		Facings: -32
 		ZOffset: -512
 
-combat_tank_h:
+combat_tank.harkonnen:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8174,7 +8174,7 @@ combat_tank_h:
 		Start: 4282
 		Offset: -30,-24
 
-combat_tank_h.husk:
+combat_tank_husk.harkonnen:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8191,7 +8191,7 @@ combat_tank_h.husk:
 		Facings: -32
 		ZOffset: -512
 
-combat_tank_o:
+combat_tank.ordos:
 	Inherits: vordel_effect
 	Defaults:
 	idle:
@@ -8221,7 +8221,7 @@ combat_tank_o:
 		Start: 4283
 		Offset: -30,-24
 
-combat_tank_ixian:
+combat_tank.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8308,7 +8308,7 @@ combat_tank_fremen:
 		Start: 4281
 		Offset: -30,-24
 
-d2k_autogun_tank_small:
+autogun_tank_small.ordos:
 	idle:
 		Filename: d2k_ct_striped.shp
 		Facings: -32
@@ -8328,7 +8328,7 @@ d2k_autogun_tank_small:
 	icon:
 		Filename: combatautoguntankicon.shp
 
-combat_tank_o.husk:
+combat_tank_husk.ordos:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8345,7 +8345,7 @@ combat_tank_o.husk:
 		Facings: -32
 		ZOffset: -512
 
-combat_siege_tank:
+combat_siege_tank.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8449,7 +8449,7 @@ d2k_tyrant.husk:
 		ZOffset: -512
 		Facings: -32
 
-raider:
+raider.ordos:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8494,7 +8494,7 @@ ix_raider:
 	icon:
 		Filename: d2k_shock_raider_icon.shp
 
-shock_raider:
+shock_raider.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8520,7 +8520,7 @@ shock_raider:
 	icon:
 		Filename: d2k_shock_raider_icon.shp
 
-stealth_raider:
+stealth_raider.ordos:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8550,7 +8550,7 @@ stealth_raider:
 		Start: 4298
 		Offset: -30,-24
 
-ordos_scoutdrone:
+scoutdrone.ordos:
 	Defaults:
 	idle:
 		Filename: ordos_scoutdrone.png
@@ -8574,7 +8574,7 @@ ordos_scoutdrone:
 		Filename: ordos_scoutdrone_icon.png
 
 
-storm_raider:
+storm_raider.ixian:
 	Defaults:
 	idle:
 		Filename: IxStormTrikeSpritestreet.png
@@ -8588,7 +8588,7 @@ storm_raider:
 	icon:
 		Filename: IxStormTrikeIcon.png
 
-d2k_autogun_tank:
+autogun_tank.ordos:
 	idle:
 		Filename: d2k_autogun_tank.shp
 		Facings: -32
@@ -8608,7 +8608,7 @@ d2k_autogun_tank.husk:
 		Filename: d2k_autogun_tank.shp
 		Facings: -32
 
-deviator:
+deviator.ordos:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8623,7 +8623,7 @@ deviator:
 		Start: 4286
 		Offset: -30,-24
 
-deviator.husk:
+deviator_husk.ordos:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8651,7 +8651,7 @@ carryall:
 carryall.reinforce:
 	Inherits: carryall
 
-ordos_carryall:
+carryall.ordos:
 	Defaults:
 	idle:
 		Filename: ordos_carryall.png
@@ -8748,7 +8748,7 @@ d2k_airdefenseplatform:
 	icon:
 		Filename: d2k_airdefenseplatform_icon.shp
 
-d2k_personal_shield_icon:
+ixian_personal_shield_icon:
 	icon:
 		Filename: d2k_personal_shield_icon.shp
 
@@ -8976,7 +8976,7 @@ vordel_effect:
 		Tick: 140
 		ZOffset: -256
 
-d2k_apparition:
+apparition.ixian:
 	Inherits: vordel_effect
 	Defaults:
 		Filename: d2k_apparition.shp
@@ -9017,7 +9017,7 @@ d2k_defender:
 	icon:
 		Filename: d2k_defender_icon.shp
 
-d2k_ixbomber:
+bomber.ixian:
 	Defaults:
 		Filename: IxHeavyDrone.png
 		Offset: 0, 32
@@ -9027,7 +9027,7 @@ d2k_ixbomber:
 		Filename: d2k_ixianbombericon.png
 		Offset: 0,0
 
-d2k_resonancedrone:
+resonance_drone.ixian:
 	Defaults:
 		Filename: IxResonanceDrone.png
 		Offset: 0, 4
@@ -9043,7 +9043,7 @@ d2k_resonancedrone:
 		Filename: d2k_resonancedroneicon.png
 		Offset: 0,0
 
-d2k_ordos_heavycombattank:
+heavycombattank.ordos:
 	Defaults:
 		Scale: 1.5
 	idle:
@@ -9067,12 +9067,12 @@ d2k_ordos_heavycombattank:
 	icon:
 		Filename: d2k_ordos_heavycombattank_icon.png
 
-ordos_upgrade_toxin:
+up_toxin.ordos:
 	icon:
 		Filename: ordos_upgrade_toxin.png
 		Offset: 0,0
 
-ordos_upgrade_shield:
+up_shield.ordos:
 	icon:
 		Filename: ordos_upgrade_shield.png
 		Offset: 0,0
@@ -9082,15 +9082,15 @@ ordos_upgrade_para:
 		Filename: ordos_upgrade_para.png
 		Offset: 0,0
 
-d2k_ordos_upgrade_heavycombattank_rockets:
+up_heavycombattank_rockets.ordos:
 	icon:
 		Filename: d2k_ordos_upgrade_heavycombattank_rockets_icon.png
 
-d2k_upgrade_twinrockettrooper:
+up_twin_rocket_trooper.ixian:
 	icon:
 		Filename: twinbazookaicon.png
 
-d2k_upgrade_needleguns:
+up_needleguns.ixian:
 	icon:
 		Filename: needlegunsicon.png
 

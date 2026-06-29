@@ -1,0 +1,1139 @@
+construction_yard.ordos:
+	Inherits: ^construction_yard
+	Tooltip:
+		Name: Ordos Construction Yard
+	Transforms:
+		IntoActor: d2k_mcv.ordos
+	RenderSprites:
+		Image: conyard.ordos
+
+# Generic wind trap template. Common traits live here; each faction actor below
+# only sets its own build prerequisite (owning construction yard) and sprite image.
+
+wind_trap.ordos:
+	Inherits: ^wind_trap
+	Buildable:
+		Prerequisites: ~construction_yard.ordos
+	RenderSprites:
+		Image: power.ordos
+
+# d2k_mini_windtrap:
+# 	Inherits: ^D2KBuilding
+# 	Inherits@D2KSprite: ^D2KPaletteRender
+# 	Inherits@shape: ^1x1Shape
+# 	Buildable:
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 110
+# 		BuildDuration: 50
+# 		BuildDurationModifier: 100
+# 		Description: Provides power for other structures.\nTakes a lot less space than regular Wind Trap
+# 		IconPalette: player
+# 		Prerequisites: ~construction_yard.ixian
+# 	Valued:
+# 		Cost: 150
+# 	Tooltip:
+# 		Name: Mini Wind Trap
+# 	Building:
+# 		Footprint: x
+# 		Dimensions: 1,1
+# 		LocalCenterOffset: 0,-512,0
+# 	Health:
+# 		HP: 16000
+# 	GrantConditionOnPrerequisite@Remote:
+# 		Prerequisites: faction.mercenary
+# 		Condition: wt_upg
+# 	PowerMultiplier@wt_upg:
+# 		Modifier: 125
+# 		RequiresCondition: wt_upg
+# 	Armor:
+# 		Type: Wood
+# 	RevealsShroud:
+# 		Range: 3c768
+# 	RenderSprites:
+# 		Image: minipower.ordos
+# 		FactionImages:
+# 			atreides: minipower.atreides
+# 			fremen: minipower.atreides
+# 			ixian: minipower.atreides
+# 			harkonnen: minipower.harkonnen
+# 			corrino: minipower.harkonnen
+# 			guild: minipower.harkonnen
+# 			emperor: minipower.harkonnen
+# 	WithIdleOverlay@ZAPS:
+# 		RequiresCondition: !build-incomplete
+# 		Sequence: idle-zaps
+# 	Power:
+# 		Amount: 150
+# 	ScalePowerWithHealth:
+# 	ProvidesPrerequisite@buildingname:
+# 	RevealOnDeath:
+# 		Radius: 3c768
+# 	-WithDeathAnimation:
+# 	ThrowsShrapnel:
+# 		Weapons: Debris2
+# 		Pieces: 1, 1
+# 		Range: 0c512, 1c256
+# 	ProvidesPrerequisite@windtrap:
+# 		Prerequisite: wind_trap
+
+d2k_barracks.ordos:
+	Inherits: ^D2KBuilding
+	Inherits@UPGRADEABLE: ^D2kUpgradeable
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@barr: ^IsBarrack
+	Inherits@Prereqs: ^D2KPrereqs
+	Inherits@shape: ^2x2Shape
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Ordos Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 352,576,0
+		ExitCell: 0,2
+	Exit@2:
+		SpawnOffset: 512,480,0
+		ExitCell: 1,2
+	RenderSprites:
+		Image: barracks.ordos
+	ProvidesPrerequisite@d2kbarracks:
+		Prerequisite: d2k_barracks
+	ProvidesPrerequisite@barracks:
+		Prerequisite: barracks
+	GrantConditionOnPrerequisite@UPGRADEABLE:
+		Prerequisites: upgrade_barracks
+	ActorStatValues:
+		Upgrades: upgrade_barracks
+	-WithDeathAnimation:
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 1, 2
+		Range: 1c512, 2c768
+
+# d2k_flesh_vat:
+# 	Inherits: ^D2KBuilding
+# 	Inherits@UPGRADEABLE: ^D2kUpgradeable
+# 	Inherits@CPQWP: ^CPQConditionWithPrimary
+# 	Inherits@shape: ^3x2Shape
+# 	Buildable:
+# 		Prerequisites: ~faction.tleilaxu, d2k_silo_tleilaxu
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 220
+# 		BuildDuration: 500
+# 		BuildDurationModifier: 100
+# 		Description: Breeds genetically modified Ghola creatures within Axlotl Tanks
+# 		IconPalette: windows256
+# 	Valued:
+# 		Cost: 1000
+# 	Tooltip:
+# 		Name: Flesh Vat
+# 	Power:
+# 		Amount: -25
+# 	D2kActorPreviewPlaceBuildingPreview:
+# 	Building:
+# 		Footprint: x=x =xx ===
+# 		Dimensions: 3,3
+# 		LocalCenterOffset: 0,-512,0
+# 	Health:
+# 		HP: 108000
+# 	Armor:
+# 		Type: Wood
+# 	RevealsShroud:
+# 		Range: 3c768
+# 	RallyPoint:
+# 	Exit@1:
+# 		SpawnOffset: 352,576,0
+# 		ExitCell: 0,2
+# 	Exit@2:
+# 		SpawnOffset: 512,480,0
+# 		ExitCell: 1,2
+# 	Production@NORMAL:
+# 		Produces: Infantry
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RAInfantry
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Infantry
+# 		Group: Infantry
+# 		ReadyAudio: UnitReady
+# 		BlockedAudio: NoBuild
+# 		LowPowerModifier: 250
+# 		LimitedAudio: BuildingInProgress
+# 		QueuedAudio: Building
+# 		OnHoldAudio: OnHold
+# 		CancelledAudio: Cancelled
+# 	ProductionBar@infantry:
+# 		ProductionType: Infantry
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@rainfantry:
+# 		ProductionType: RAInfantry
+# 		RequiresCondition: classicproductionqueues
+# 	RenderSprites:
+# 		Image: d2k_flesh_vat
+# 	ProvidesPrerequisite@buildingname:
+# 	GrantConditionOnPrerequisite@UPGRADEABLE:
+# 		Prerequisites: upgrade_barracks
+# 	RevealOnDeath:
+# 		Radius: 3c768
+# 	-WithDeathAnimation:
+# 	-WithMakeAnimation:
+# 	SpawnActorOnDeath@death1:
+# 		Actor: face_dancer.ordos
+# 	SpawnActorOnDeath@death2:
+# 		Actor: face_dancer.ordos
+# 	SpawnActorOnDeath@death3:
+# 		Actor: face_dancer.ordos
+# 	SpawnActorOnDeath@death4:
+# 		Actor: face_dancer.ordos
+# 	ThrowsShrapnel:
+# 		Weapons: Debris2, Debris3
+# 		Pieces: 1, 2
+# 		Range: 1c512, 2c768
+
+# d2k_tleilaxu_tech:
+# 	Inherits: ^D2KBuilding
+# 	Inherits@SW: ^PrimarySuperweapon
+# 	Inherits@shape: ^3x3Shape
+# 	Building:
+# 		Footprint: =x= xxx =x=
+# 		Dimensions: 3,3
+# 		LocalCenterOffset: 0,-512,0
+# 	Buildable:
+# 		Prerequisites: ~faction.tleilaxu, d2k_flesh_vat, !swpalace
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 220
+# 		BuildDuration: 1500
+# 		BuildDurationModifier: 100
+# 		Description: Provides upgrades and advanced technologies for Tleilaxu\nProvides Radar\nProvides superweapon
+# 		IconPalette: windows256
+# 	ProvidesRadar:
+# 		RequiresCondition: !disabled && !jammed
+# 	RevealsShroud:
+# 		Range: 5c0
+# 	Valued:
+# 		Cost: 3000
+# 	D2kActorPreviewPlaceBuildingPreview:
+# 	Tooltip:
+# 		Name: Center of Genetical Engineering
+# 	Health:
+# 		HP: 125000
+# 	Power:
+# 		Amount: -100
+# 	SpawnActorPower@worm:
+# 		PauseOnCondition: disabled
+# 		AllowMultiple: True
+# 		OrderName: sandworm
+# 		Icon: wormicon
+# 		IconPalette: d2kunit
+# 		ChargeInterval: 3000
+# 		Name: Wormsign
+# 		IncomingSpeechNotification: EnemyUnitsApproaching
+# 		DisplayTimerRelationships: Ally, Neutral, Enemy
+# 		Description: Summons Tamed Sandworm anywhere on the map.\nSandworm can roam around the map and swallow enemy units\nCannot swallow big targets
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		InsufficientPowerSpeechNotification: InsufficientPower
+# 		Prerequisites: ~faction.tleilaxu
+# 		Actors: sandworm_tleilaxu_summon
+# 		SupportPowerPaletteOrder: 10
+# 		EffectSequence: idle
+# 	SpawnActorOnDeath@death1:
+# 		Actor: face_dancer.ordos
+# 	SpawnActorOnDeath@death2:
+# 		Actor: face_dancer.ordos
+# 	SpawnActorOnDeath@death3:
+# 		Actor: face_dancer.ordos
+# 	SpawnActorOnDeath@death4:
+# 		Actor: face_dancer.ordos
+# 	ProvidesPrerequisite@swlimit:
+# 		Prerequisite: swpalace
+# 	ProvidesPrerequisite@buildingname:
+# 	-WithMakeAnimation:
+# 	-WithDeathAnimation:
+
+# Generic spice refinery template. Common traits here; each faction actor below sets
+# its build prerequisite, its harvester.ixian/delivery actors, and its sprite image.
+
+refinery.ordos:
+	Inherits: ^refinery
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
+	FreeActor:
+		Actor: harv.ordos
+		SpawnOffset: 0,2
+		Facing: 160
+	FreeActorWithDelivery@1:
+		Actor: harv.ordos
+		DeliveryOffset: 2,2
+		DeliveringActor: carryall_reinforce.ordos
+		Facing: 160
+	# FreeActorWithDelivery@2:
+	# 	Actor: harv.ordos
+	# 	DeliveryOffset: 0,2
+	# 	DeliveringActor: carryall_reinforce.ordos
+	# 	Facing: 160
+	RenderSprites:
+		Image: refinery.ordos
+
+# Generic storage silo template. Common traits here; each faction actor below sets
+# its build prerequisite and sprite image.
+
+d2k_silo.ordos:
+	Inherits: ^d2k_silo
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, refinery.ordos
+	RenderSprites:
+		Image: silo.ordos
+
+light_factory.ordos:
+	Inherits: light_factory
+	Tooltip:
+		Name: Ordos Light Factory
+	RenderSprites:
+		Image: light.ordos
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, refinery.ordos
+		Description: template-factory.description
+		IconPalette: player
+
+heavy_factory.ordos:
+	Inherits: heavy_factory
+	Tooltip:
+		Name: Ordos Heavy Factory
+	RenderSprites:
+		Image: heavy.ordos
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, refinery.ordos
+		Description: template-factory.description
+		IconPalette: player
+
+repair_pad.ordos:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, heavy_factory.ordos
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Ordos Repair Pad
+	Building:
+		Footprint: === =+= ===
+		Dimensions: 3,3
+	# HitShape:
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -512
+	# 		BottomRight: 1536, 512
+	# HitShape@TOPANDBOTTOM:
+	# 	Type: Rectangle
+	# 		TopLeft: -512, -1536
+	# 		BottomRight: 512, 1536
+	Reservable:
+	RallyPoint:
+	RenderSprites:
+		Image: repair_pad.ordos
+	WithRepairOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: effect75alpha
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 4, 6
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	ProvidesPrerequisite@repair_pad:
+		Prerequisite: repair_pad.ordos
+
+outpost.ordos:
+	Inherits: ^D2KBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^3x3Shape
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, refinery.ordos
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Ordos Outpost
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	RenderSprites:
+		Image: outpost.ordos
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete && !severe-damaged
+		Sequence: idle-dish
+		PauseOnCondition: disabled
+		# Offset: -30,-60,0
+	GrantConditionOnDamageState@STOPDISH:
+		Condition: severe-damaged
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 5, 9
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	ProvidesPrerequisite@outpost:
+		Prerequisite: outpost.d2k
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	ParatroopersPower@paratroopers:
+		OrderName: OrdosSmugglers
+		Prerequisites:
+			1: upordos_outpost.ordos
+		IconImage: ordos_upgrade_para
+		Icons:
+			1: icon
+		Names:
+			1: Ordos Contraband
+		ChargeInterval: 6000
+		Descriptions:
+			1: power-paratroopers.description
+		DropItems:
+			1: stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos, stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos, stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos
+		SelectTargetSpeechNotification: SelectTarget
+		AllowImpassableCells: false
+		QuantizedFacings: 16
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		UnitTypes:
+			1: frigate.paradrop
+		SquadSizes:
+			1: 3
+		SquadOffset: 1792,1792,0
+
+high_tech_factory.ordos:
+	Inherits: ^high_tech_factory
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, outpost.ordos
+	RenderSprites:
+		Image: hightech.ordos
+
+# Generic research centre. Common traits here; each faction actor sets its build
+# prerequisite and sprite image.
+
+research_centre.ordos:
+	Inherits: ^research_centre
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, outpost.ordos
+	RenderSprites:
+		Image: research.ordos
+
+# Generic high tech (aircraft) factory. Common traits here; each faction actor sets
+# its build prerequisite and sprite image.
+
+starport.ordos:
+	Inherits: ^starport
+	Buildable:
+		Prerequisites: ~construction_yard.ordos, research_centre.ordos, derricklimit
+	RenderSprites:
+		Image: starport.ordos
+
+artillery_platform.ordos:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@shape: ^1x1Shape
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	-WithTurretSearchlight:
+	Tooltip:
+		Name: Artillery Platform
+	Valued:
+		Cost: 1200
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~d2k_barracks.ordos
+		BuildPaletteOrder: 550
+		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
+		IconPalette: d2kunit
+	Health:
+		HP: 125000
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithMuzzleOverlay:
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 16
+		InitialFacing: 2048
+		RealignDelay: -1
+	Armament:
+		Weapon: D2K_155mm_turret
+		LocalOffset: 512,0,640
+		Recoil: 150
+		RecoilRecovery: 19
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	Replacement:
+		ReplaceableTypes: Tower
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	RenderSprites:
+		Image: artillery_platform.ordos
+	Power:
+		Amount: -60
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 5000
+	ActorStatValues:
+		Upgrades: up_contraband.ordos
+
+autogun_turret.ordos:
+	Inherits: ^D2KDefense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@detect: ^GenericAllDetector
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@EMP: ^TurretEMP
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@gat: ^GatlingSpeedUpTurretBehavior
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Tooltip:
+		Name: Autogun Turret
+	Valued:
+		Cost: 1100
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~d2k_barracks.ordos
+		BuildPaletteOrder: 510
+		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
+		IconPalette: chrome
+	Health:
+		HP: 75000
+	Armament:
+		Weapon: autogun_turret.ordos
+		LocalOffset: 500,-150,400, 500,150,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	WithSpriteTurret:
+		Palette: player
+		IsPlayerPalette: True
+		RequiresCondition: !build-incomplete
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-WithDeathAnimation:
+	BodyOrientation:
+		QuantizedFacings: 32
+	WithMuzzleOverlay:
+	WithSpriteBody:
+		Name: make
+		Sequence: invisible
+	WithMakeAnimation:
+		Condition: build-incomplete
+		BodyNames: make
+	Turreted:
+		TurnSpeed: 16
+		InitialFacing: 2048
+		RealignDelay: -1
+	Replacement:
+		ReplaceableTypes: Tower
+	WithWallSpriteBody:
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		Image: autogun_turret.ordos
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 2, 4
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	Power:
+		Amount: -55
+	RevealsShroud:
+		Range: 7710
+	DetectCloaked:
+		Range: 3855
+	ActorStatValues:
+		Upgrades: up_contraband.ordos
+
+# flame_turret:
+# 	Inherits: medium_gun_turret.ixian
+# 	Inherits@AntiInf: ^PrioritizeInfantry
+# 	AutoTargetPriority@INFANTRY:
+# 		Priority: 50
+# 	Buildable:
+# 		Queue: Defence, RADefence
+# 		Prerequisites: ~anyharkonnen, d2k_barracks
+# 		BuildPaletteOrder: 510
+# 		Description: Defensive structure.\nDetector.\n  Strong vs Infantry, Vehicles, Tanks\n  Weak vs Siege
+# 	Health:
+# 		HP: 40000
+# 	-WithSpriteTurret:
+# 	WithMuzzleOverlay:
+# 	Valued:
+# 		Cost: 700
+# 	Tooltip:
+# 		Name: Flame Turret
+# 	Armament:
+# 		Weapon: d2kFlameTurret
+
+palace.ordos:
+	Inherits: ^D2KBuilding
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@CPQ: ^CPQCondition
+	Inherits@shape: ^3x3Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~construction_yard.ordos, research_centre.ordos
+		Description: This structure unlocks support powers.
+		IconPalette: d2kunit
+	Tooltip:
+		Name: Palace
+	Building:
+		Footprint: xxx xxx XXX
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	HitShape:
+		TargetableOffsets: -1574,-158,0, -1050,-1024,0, -1155,960,0
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 1536
+	HitShape@TOP:
+		TargetableOffsets: 1312,0,0
+		Type: Rectangle
+			TopLeft: -512, -1536
+			BottomRight: 512, -512
+	RenderSprites:
+		Image: palace.ordos
+	ProvidesPrerequisite@palace:
+		Prerequisite: palace
+	-WithDeathAnimation:
+	FireProjectilesOnDeath:
+		Weapons: Debris2, Debris3
+		Pieces: 8, 12
+		Range: 1c512, 2c768
+	SpawnActorOnDeath@death1:
+		Actor: light_inf
+	SpawnActorOnDeath@death2:
+		Actor: light_inf
+	SpawnActorOnDeath@death3:
+		Actor: light_inf
+	SpawnActorOnDeath@death4:
+		Actor: trooper
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: opalace
+	DetonateWeaponPower@Chaos:
+		OrderName: AsianChaosSuperweapon
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: aa_cgchao
+		Icons:
+			1: icon2
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		ActivationDelay: 25
+		ActivationSequence:
+		Names:
+			1: power-chaos.name
+		Weapons:
+			1: AsianChaosSuperweapon
+		Descriptions:
+			1: power-chaos.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeSound: sgenopen.wav
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: camera.small
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+		LaunchSound: sgenopen.wav
+		IncomingSound: sgenopen.wav
+	SupportPowerChargeBar:
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	ProduceActorPower@sabot:
+		Names:
+			1: Give Saboteurs
+		Descriptions:
+			1: Produces saboteurs
+		Icons:
+			1: icon
+		IconImage: saboteur
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites: palace
+			1: palace
+		Actors: trooper, trooper, saboteur, saboteur
+		Type: Saboteurs
+		ChargeInterval: 1500
+		AutoFire: true
+		OrderName: saboteur
+		SupportPowerPaletteOrder: 20
+		RequiresCondition: palace_saboteurs
+	RallyPoint:
+	GrantConditionOnPrerequisite@palace_saboteurs:
+		Condition: palace_saboteurs
+		Prerequisites: palace
+	Production@Saboteurs:
+		Produces: Saboteurs
+
+# palace_emperor:
+# 	Inherits: ^D2KBuilding
+# 	Inherits@IDISABLE: ^D2KDisableOnLowPowerOrPowerDown
+# 	Inherits@D2KSprite: ^D2KPaletteRender
+# 	Inherits@SW: ^PrimarySuperweapon
+# 	Inherits@shape: ^3x3Shape
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~faction.corrino, !swpalace
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 620
+# 		BuildDuration: 937
+# 		BuildDurationModifier: 100
+# 		Description: Trains Emperor's Elite Sardaukars.\nProvides Passive Income\nMakes all infantry trained elite\nProvides discount for Sardaukars\nCan be only built once.
+# 		IconPalette: d2kunit
+# 	Power:
+# 		Amount: -250
+# 	ProvidesPrerequisite@buildingname:
+# 	-WithDeathAnimation:
+# 	ProvidesPrerequisite@swlimit:
+# 		Prerequisite: swpalace
+# 	UpdatesDerrickCount:
+# 	Valued:
+# 		Cost: 3000
+# 	Tooltip:
+# 		Name: Emperor's Palace
+# 	Building:
+# 		Footprint: xx= xxx =xx
+# 		Dimensions: 3,3
+# 	Health:
+# 		HP: 145000
+# 	HitShape:
+# 		Type: Rectangle
+# 			TopLeft: -1536, -512
+# 			BottomRight: 1536, 512
+# 	HitShape@TOP:
+# 		Type: Rectangle
+# 			TopLeft: -1536, -1536
+# 			BottomRight: 512, -512
+# 	HitShape@BOTTOM:
+# 		Type: Rectangle
+# 			TopLeft: -512, 512
+# 			BottomRight: 1536, 1536
+# 	Armor:
+# 		Type: Concrete
+# 	RevealsShroud:
+# 		Range: 4c768
+# 	RenderSprites:
+# 		Image: palace.corrino
+# 	DetonateWeaponPower@sardaukar:
+# 		Prerequisites:
+# 			1: ~techlevel.superweapons
+# 		Icons:
+# 			1: sardaukar_icon
+# 		Names:
+# 			1: Release the Sardaukars
+# 		Descriptions:
+# 			1: Deploys Corrino's Sardaukars from orbit to decimate your enemies.\nDrop Pods damages area around\nProvides passive income
+# 		Weapons:
+# 			1: SardaukarDroppodSpawner
+# 		BeaconPosters:
+# 			1: sardaukar_icon
+# 		OrderName: GDI Drop
+# 		Cursor: ability
+# 		PauseOnCondition: disabled
+# 		InsufficientPowerSpeechNotification: InsufficientPower
+# 		LaunchSpeechNotification: ReinforcementsArrived
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		DisplayBeacon: True
+# 		DisplayRadarPing: True
+# 		DisplayTimerRelationships: Ally, Neutral, Enemy
+# 		ChargeInterval: 6000
+# 		IncomingSpeechNotification: EnemyUnitsApproaching
+# 		CameraActor: camera.small
+# 		IconPalette: d2kunit
+# 		CameraRemoveDelay: 60
+# 		AllowMultiple: True
+# 	ThrowsShrapnel:
+# 		Weapons: Debris, Debris2, Debris3
+# 		Pieces: 9, 15
+# 		Range: 1c512, 2c768
+# 	SpawnActorOnDeath@death1:
+# 		Actor: mpsardaukar
+# 	SpawnActorOnDeath@death2:
+# 		Actor: mpsardaukar
+# 	SpawnActorOnDeath@death3:
+# 		Actor: mpsardaukar
+# 	SpawnActorOnDeath@death4:
+# 		Actor: mpsardaukar
+# 	SpawnActorOnDeath@death5:
+# 		Actor: mpsardaukar
+# 	CashTrickler:
+# 		Interval: 150
+# 		Amount: 50
+
+# golden_lion_throne:
+# 	Inherits: palace_emperor
+# 	Inherits@shape: ^4x3Shape
+# 	Valued:
+# 		Cost: 2000
+# 	-ProvidesPrerequisite@swlimit:
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Description: Provides Death before Dishonor Support Power and passive income
+# 		BuildLimit: 1
+# 	RenderSprites:
+# 		Image: golden_lion_throne
+# 	Tooltip:
+# 		Name: Golden Lion Throne
+# 	Building:
+# 		Footprint: xxx= xxxx =xxx
+# 		Dimensions: 4,3
+# 	-DetonateWeaponPower@sardaukar:
+# 	SpawnActorOnDeath@death1:
+# 		Actor: emperor_sardaukar
+# 	SpawnActorOnDeath@death2:
+# 		Actor: emperor_sardaukar
+# 	SpawnActorOnDeath@death3:
+# 		Actor: emperor_sardaukar
+# 	SpawnActorOnDeath@death4:
+# 		Actor: emperor_sardaukar
+# 	SpawnActorOnDeath@death5:
+# 		Actor: emperor_sardaukar
+# 	DetonateWeaponPower@elitesardaukar:
+# 		Prerequisites:
+# 			1: ~techlevel.superweapons
+# 		Icons:
+# 			1: sardaukar_elite_icon
+# 		Names:
+# 			1: Death before Dishonor
+# 		Descriptions:
+# 			1: Deploys Corrino's Sardaukar Juggernauts and Chief from orbit to devastate your enemies.\nDrop Pods damages area around heavily and stuns everything around\nSardaukar Chief can plant C4 and jams enemy radar
+# 		Weapons:
+# 			1: SardaukarEliteDroppodSpawner
+# 		BeaconPosters:
+# 			1: sardaukar_elite_icon
+# 		OrderName: GDI Drop
+# 		Cursor: ability
+# 		PauseOnCondition: lowpower
+# 		InsufficientPowerSpeechNotification: InsufficientPower
+# 		LaunchSpeechNotification: ReinforcementsArrived
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		DisplayBeacon: True
+# 		DisplayRadarPing: True
+# 		DisplayTimerRelationships: Ally, Neutral, Enemy
+# 		ChargeInterval: 9000
+# 		IncomingSpeechNotification: EnemyUnitsApproaching
+# 		CameraActor: camera.small
+# 		CameraRemoveDelay: 60
+# 		AllowMultiple: True
+
+# d2k_command_center:
+# 	Inherits: ^D2KBuilding
+# 	Inherits@IDISABLE: ^D2KDisableOnLowPowerOrPowerDown
+# 	Inherits@SW: ^PrimarySuperweapon
+# 	Inherits@D2KSprite: ^D2KPaletteRender
+# 	Inherits@shape: ^3x3Shape
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~faction.mercenary, !swpalace
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 620
+# 		BuildDuration: 1000
+# 		BuildDurationModifier: 100
+# 		Description: Allows to call reinforcements and special powers for Mercenaries\nProvides Passive Income
+# 		IconPalette: player
+# 	Power:
+# 		Amount: -200
+# 	ProvidesPrerequisite@buildingname:
+# 	-WithDeathAnimation:
+# 	ProvidesPrerequisite@swlimit:
+# 		Prerequisite: swpalace
+# 	Valued:
+# 		Cost: 2000
+# 	Tooltip:
+# 		Name: Command Center
+# 	Building:
+# 		Footprint: xx= xxx =xx
+# 		Dimensions: 3,3
+# 	Health:
+# 		HP: 145000
+# 	HitShape:
+# 		Type: Rectangle
+# 			TopLeft: -1536, -512
+# 			BottomRight: 1536, 512
+# 	HitShape@TOP:
+# 		Type: Rectangle
+# 			TopLeft: -1536, -1536
+# 			BottomRight: 512, -512
+# 	HitShape@BOTTOM:
+# 		Type: Rectangle
+# 			TopLeft: -512, 512
+# 			BottomRight: 1536, 1536
+# 	Armor:
+# 		Type: Concrete
+# 	RevealsShroud:
+# 		Range: 4c768
+# 	RenderSprites:
+# 		Image: d2k_command_center
+# 	GrantExternalConditionPower@Bounty:
+# 		Prerequisites:
+# 			1: ~techlevel.superweapons
+# 		Icons:
+# 			1: glabounty3
+# 		Names:
+# 			1: Bounty Hunting
+# 		Descriptions:
+# 			1: Places Bounty on selected targets giving up to 40% of their total value\nupon being killed or destroyed.
+# 		Conditions:
+# 			1: glabounty3
+# 		Durations:
+# 			1: 375
+# 		Footprints:
+# 			1: _______x_______ ______xxx______ _____xxxxx_____ ____xxxxxxx____ ___xxxxxxxxx___ __xxxxxxxxxxx__ _xxxxxxxxxxxxx_ xxxxxxxxxxxxxxx _xxxxxxxxxxxxx_ __xxxxxxxxxxx__ ___xxxxxxxxx___ ____xxxxxxx____ _____xxxxx_____ ______xxx______ _______x_______
+# 		OrderName: CashBounty3
+# 		ChargeInterval: 4500
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		DisplayRadarPing: True
+# 		ValidRelationships: Enemy, Neutral
+# 		StartFullyCharged: false
+# 		Dimensions: 15, 15
+# 	ParatroopersPower@merc1:
+# 		Icons:
+# 			1: mercenary_1_icon
+# 			2: mercenary_1_icon
+# 			3: mercenary_1_icon
+# 		Names:
+# 			1: Strike Team Paradrop I
+# 			2: Strike Team Paradrop II
+# 			3: Strike Team Paradrop III
+# 		Descriptions:
+# 			1: Carryall planes drops a Small Mercenary strike team\nanywhere on the map.
+# 			2: Carryall planes drops a Mercenary strike team\nanywhere on the map.
+# 			3: Carryall planes drops a Mercenary army\nanywhere on the map.
+# 		DropItems:
+# 			1: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper
+# 			2: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trike, trike, quad
+# 			3: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trooper, trooper, submachinegunner, submachinegunner, trooper, trike, trike, trike, quad, quad, combat_tank.ordos, combat_tank.ordos, siege_tank
+# 		Prerequisites:
+# 			1:
+# 			2: d2k_striketeam2
+# 			3: d2k_striketeam3
+# 		BeaconPosters:
+# 			1: pinficon
+# 			2: pinficon
+# 			3: pinficon
+# 		UnitTypes:
+# 			1: carryall.paradrop
+# 			2: carryall.paradrop
+# 			3: carryall.paradrop
+# 		SquadSizes:
+# 			1: 1
+# 			2: 2
+# 			3: 3
+# 		PauseOnCondition: lowpower
+# 		AllowMultiple: True
+# 		OrderName: mercenary_reinforcements
+# 		Icon: mercenary_1_icon
+# 		IconPalette: d2kunit
+# 		ChargeInterval: 4500
+# 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
+# 		SelectTargetSpeechNotification: SelectTarget
+# 		AllowImpassableCells: false
+# 		QuantizedFacings: 32
+# 		CameraActor: camera.paradrop
+# 		DisplayBeacon: true
+# 		BeaconPoster: pinficon
+# 		ArrowSequence: arrow
+# 		ClockSequence: clocklarge
+# 		CircleSequence: circles
+# 		UseDirectionalTarget: True
+# 		DirectionArrowAnimation: airstrikedirection
+# 		StartFullyCharged: false
+# 		IncomingSpeechNotification: EnemyUnitsApproaching
+# 	ThrowsShrapnel:
+# 		Weapons: Debris, Debris2, Debris3
+# 		Pieces: 9, 15
+# 		Range: 1c512, 2c768
+# 	SpawnActorOnDeath@death1:
+# 		Actor: light_inf
+# 	SpawnActorOnDeath@death2:
+# 		Actor: light_inf
+# 	SpawnActorOnDeath@death3:
+# 		Actor: light_inf
+# 	SpawnActorOnDeath@death4:
+# 		Actor: light_inf
+# 	RenderSprites:
+
+# emperor_command_center:
+# 	Inherits: d2k_command_center
+# 	-ProvidesPrerequisite@swlimit:
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Description: Allows to call Mercenaries reinforcements and Bounty Hunting Support Power
+# 		BuildLimit: 1
+
+# emperor_a_palace:
+# 	Inherits: palace
+# 	Inherits@orni: ^DU_OrnithopterSupportPower
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Description: Enables Fremen Guerilla and Ornithopters support powers
+# 		BuildLimit: 1
+# 	Valued:
+# 		Cost: 2000
+# 	Tooltip:
+# 		Name: Atreides Palace
+# 	RenderSprites:
+# 		Image: palace.atreides
+# 		-FactionImages:
+# 	-WithSupportPowerActivationOverlay:
+# 	Power:
+# 		Amount: -200
+# 	-ProvidesPrerequisite@swlimit:
+# 	-DetonateWeaponPower@fremen:
+# 	-IonCannonPower:
+# 	-GrantConditionOnPrerequisite@ATREIDES:
+# 	-GrantConditionOnPrerequisite@ORDOS:
+# 	Production@Atreides:
+# 		-RequiresCondition:
+# 	-Production@Ordos:
+# emperor_h_palace:
+# 	Inherits: palace
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Description: Enables Death Hand Missile
+# 		BuildLimit: 1
+# 	Valued:
+# 		Cost: 2000
+# 	Tooltip:
+# 		Name: Harkonnen Palace
+# 	RenderSprites:
+# 		Image: palace.harkonnen
+# 		-FactionImages:
+# 	-WithSupportPowerActivationOverlay:
+# 	Power:
+# 		Amount: -200
+# 	-ProvidesPrerequisite@swlimit:
+# 	-DetonateWeaponPower@fremen:
+# 	-IonCannonPower:
+# 	-GrantConditionOnPrerequisite@ATREIDES:
+# 	-GrantConditionOnPrerequisite@ORDOS:
+# 	-Production@Ordos:
+# 	-Production@Atreides:
+
+# emperor_o_palace:
+# 	Inherits: palace
+# 	Buildable:
+# 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
+# 		Description: Produces Saboteur and enables Chaos Lightning Support Power
+# 		BuildLimit: 1
+# 	Valued:
+# 		Cost: 2000
+# 	Tooltip:
+# 		Name: Ordos Palace
+# 	RenderSprites:
+# 		Image: palace.ordos
+# 		-FactionImages:
+# 	-WithSupportPowerActivationOverlay:
+# 	Power:
+# 		Amount: -200
+# 	-ProvidesPrerequisite@swlimit:
+# 	-DetonateWeaponPower@fremen:
+# 	-GrantConditionOnPrerequisite@ATREIDES:
+# 	-GrantConditionOnPrerequisite@ORDOS:
+# 	-Production@Atreides:
+# 	Production@Ordos:
+# 		-RequiresCondition:
+
+# conyard.atreides:
+# 	Inherits: construction_yard
+# 	Buildable:
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 1000
+# 		Prerequisites: ~wip-content
+# 		ForceFaction: atreides
+# 		IconPalette: d2kunit
+# 	RenderSprites:
+# 		Image: conyard.atreides
+# 		-FactionImages:
+
+# conyard.harkonnen:
+# 	Inherits: construction_yard
+# 	Buildable:
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 1000
+# 		Prerequisites: ~wip-content
+# 		ForceFaction: harkonnen
+# 		IconPalette: d2kunit
+# 	RenderSprites:
+# 		Image: conyard.harkonnen
+# 		-FactionImages:
+
+# conyard.ordos:
+# 	Inherits: construction_yard
+# 	Buildable:
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 1000
+# 		Prerequisites: ~wip-content
+# 		ForceFaction: ordos
+# 		IconPalette: d2kunit
+# 	RenderSprites:
+# 		Image: conyard.ordos
+# 		-FactionImages:
+
+###################################
+#     UNITS
+###################################

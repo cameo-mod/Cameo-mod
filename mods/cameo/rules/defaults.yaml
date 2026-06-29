@@ -753,7 +753,7 @@
 
 ^LeechEggLayable:
 	SpawnActorOnDeath@Leech2:
-		Actor: d2k_leech
+		Actor: leech.ordos
 		Probability: 100
 		OwnerType: Killer
 		DeathType: LeechTankInfect
@@ -773,7 +773,7 @@
 #		TargetTypes: LeechEggKill
 #		RequiresCondition: LeechEggLaid && LeechEggKill
 #	SpawnActorOnDeath@Leech:
-#		Actor: d2k_leech
+#		Actor: leech.ordos
 #		Probability: 100
 #		InternalOwner: Creeps
 #		RequiresCondition: LeechEggLaid && !LeechEggKill
@@ -1487,6 +1487,15 @@
 		BuildDurationModifier: 25
 	TooltipExtras@Epic:
 		Description: Epic
+	GrantConditionOnDamageState@EpicBurning:
+		Condition: epic-wounded
+		ValidDamageStates: Heavy, Critical
+	SpawnsActorPeriodically@GroundFire:
+		RequiresCondition: epic-wounded
+		Actor: groundfire
+		Range: 1
+		Interval: 16, 32
+		Chance: 100
 
 ^FighterTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
@@ -1635,6 +1644,15 @@
 		BuildDurationModifier: 25
 	TooltipExtras@Epic:
 		Description: Epic
+	GrantConditionOnDamageState@EpicBurning:
+		Condition: epic-wounded
+		ValidDamageStates: Heavy, Critical
+	SpawnsActorPeriodically@GroundFire:
+		RequiresCondition: epic-wounded
+		Actor: groundfire
+		Range: 1
+		Interval: 16, 32
+		Chance: 100
 
 ^FlyingInfantryTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
@@ -2986,7 +3004,7 @@
 		EmptyWeapon: MutateEffect
 		DeathTypes: QuestionMutate
 	SpawnActorOnDeath@Contaminator:
-		Actor: contaminator
+		Actor: contaminator.ordos
 		OwnerType: Killer
 		DeathType: ContaminatorMutate
 	SpawnActorOnDeath@Assimilator:
@@ -6386,7 +6404,7 @@ CPQDEBUGDUMMY:
 		CloakDelay: 75
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 		CloakedCondition: cloaked
-		RequiresCondition: !disabled && (stealthed || d2k_advanced_ixian_technology)
+		RequiresCondition: !disabled && (stealthed || up_advanced_ixian_technology.ixian)
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
 	WithColoredSelectionBox:
@@ -6428,7 +6446,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,ixian_launchpad,ra2gaairc,ra2naairf,aa_cgairf,steel_conpad,latin_cgair,nax_airfield,tkmairpad,tsgthpad,tsgthpadmutant,tsnthpad,tsnthpad2
+		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,aa_cgairf,steel_conpad,latin_cgair,nax_airfield,tkmairpad,tsgthpad,tsgthpadmutant,tsnthpad,tsnthpad2
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -8813,12 +8831,12 @@ CPQDEBUGDUMMY:
 			# swgreedo: ifv-hero
 			# swrmbo.hutt: ifv-medlaser
 			# light_inf: ifv-mg
-			# chem_troop: ifv-chem
+			# chem_troop.ordos: ifv-chem
 			# engineer: ifv-repair
 			# trooper: ifv-miss
 			# fremen: ifv-fremen
-			# facedancer: ifv-cannon
-			# contaminator: ifv-chem
+			# face_dancer.ordos: ifv-cannon
+			# contaminator.ordos: ifv-chem
 			# grenadier: ifv-cannon
 			# sardaukar: ifv-mg
 			# mpsardaukar: ifv-mg

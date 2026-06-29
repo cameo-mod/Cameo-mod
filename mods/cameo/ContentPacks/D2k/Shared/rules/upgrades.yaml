@@ -1,0 +1,200 @@
+engineer:
+	Inherits: E6
+	Inherits@BulletImmune: ^BulletImmune
+	Inherits@personalshield: ^D2KPersonalShield
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Buildable:
+		Prerequisites: ~d2k_barracks
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: engineer
+	Voiced:
+		VoiceSet: D2KEngineerVoice
+
+# submachinegunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 60
+# 	Tooltip:
+# 		Name: Mercenary
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with SMG\nDeals burst damage.\nShort Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.mercenary
+# 		BuildDuration: 80
+# 		BuildDurationModifier: 100
+# 		Icon: icon_merc
+# 	Mobile:
+# 		Speed: 48
+# 	Health:
+# 		HP: 7200
+# 	Armament@PRIMARY: ##########
+# 		Weapon: LMG_burst
+# 	RenderSprites:
+# 		Image: light_inf
+# 	Voiced:
+# 		VoiceSet: D2KTrooper
+
+# shotgunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 80
+# 	Tooltip:
+# 		Name: Shotgunner
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with shotgun\nDeals massive damage up front.\nVery Short Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.smugglers
+# 		BuildDuration: 90
+# 		BuildDurationModifier: 100
+# 	WithInfantryBody:
+# 		-IdleSequences: idle1,idle2
+# 		DefaultAttackSequence: shoot
+# 	Armament@PRIMARY: ##########
+# 		Weapon: d2k_shotgun
+# 		LocalOffset: 0,0,50
+# 	Health:
+# 		HP: 6000
+# 	Mobile:
+# 		Speed: 48
+# 		Voice: Move
+# 	RenderSprites:
+# 		Image: shotgunner
+# 		PlayerPalette: player
+# 	Voiced:
+# 		VoiceSet: D2KShotgunner
+
+upgrade_conyard:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Construction Yard Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~d2k_construction_yard, research_centre, !upgrade_conyard
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: Construction Yard gets 25% more armor. Reduces cost and production time by 10% for all Defenses and upgrades Concrete Slabs.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: conyard.ordos
+
+upgrade_barracks:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Barracks Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~d2k_barracks, research_centre, !upgrade_barracks
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: Barracks gets 25% more armor. Reduces cost and production time by 10% for all infantry.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: barracks.ordos
+
+upgrade_heavy:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Heavy Factory Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~heavy_factory, research_centre, !upgrade_heavy
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: Heavy Factory gets 25% more armor. Reduces cost and production time by 10% for all heavy vehicles.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: heavy.ordos
+
+upgrade_hightech:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: High Tech Factory Upgrade
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~high_tech_factory, research_centre, !upgrade_hightech
+		Queue: Upgrades
+		BuildLimit: 1
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Description: High Tech Factory gets 25% more armor. Reduces cost and production time by 10% for all air units.
+		IconPalette: d2kunit
+	Valued:
+		Cost: 1250
+	RenderSprites:
+		Image: hightech.atreides
+
+d2k_wind_trap_upgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Advanced Wind Traps
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~outpost.d2k, !d2k_wind_trap_upgrade
+		Queue: Upgrades
+		Description: upgrade-wind_trap.description
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: power.atreides
+
+#   Common Upgrades
+
+d2k_spice_sifter_upgrade:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Efficient Filtering
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 200
+		Prerequisites: ~research_centre, !d2k_spice_sifter_upgrade
+		Queue: Research
+		Description: upgrade-spice_sifter.description
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: d2k_spice_sifter
+
+#   Ixian Upgrades
+
+sonic_tank.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1000
+	Tooltip:
+		Name: Sonic Tank (Destroyed)
+	TransformOnCapture:
+		IntoActor: sonic_tank
+
+devastator.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1250
+	Tooltip:
+		Name: Devastator (Destroyed)
+	TransformOnCapture:
+		IntoActor: devastator
+
+d2k_tyrant.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1500
+	Tooltip:
+		Name: Tyrant (Destroyed)
+	TransformOnCapture:
+		IntoActor: d2k_tyrant
