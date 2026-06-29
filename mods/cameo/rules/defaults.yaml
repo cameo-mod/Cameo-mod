@@ -1490,12 +1490,26 @@
 	GrantConditionOnDamageState@EpicBurning:
 		Condition: epic-wounded
 		ValidDamageStates: Heavy, Critical
-	SpawnsActorPeriodically@GroundFire:
+	# Fire sticks to the body (attached overlay), reusing the ground fire sprite; shows continuously
+	# while below half health.
+	WithIdleOverlay@EpicFire:
 		RequiresCondition: epic-wounded
-		Actor: groundfire
-		Range: 1
-		Interval: 16, 32
-		Chance: 100
+		Image: groundfire_flame
+		Sequence: 1
+		IsDecoration: True
+	# Smoke does not stick: it is emitted at the unit's current position each tick and then rises and
+	# drifts away on its own, leaving a trail as the unit moves. Same smoke the ground fire uses.
+	DeterministicOffsetSmokeParticleEmitter@EpicSmoke:
+		RequiresCondition: epic-wounded
+		Image: smoke_fire_glow
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 6, 12
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
 
 ^FighterTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
@@ -1647,15 +1661,26 @@
 	GrantConditionOnDamageState@EpicBurning:
 		Condition: epic-wounded
 		ValidDamageStates: Heavy, Critical
-	# Aircraft carry the smoke on the unit instead of dropping ground fire beneath them.
-	LeavesTrails@EpicSmoke:
+	# Fire sticks to the body (attached overlay), reusing the ground fire sprite; shows continuously
+	# while below half health.
+	WithIdleOverlay@EpicFire:
 		RequiresCondition: epic-wounded
-		Image: smokey
-		MovingInterval: 3
-		StationaryInterval: 3
-		SpawnAtLastPosition: False
-		TrailWhileStationary: True
-		Type: CenterPosition
+		Image: groundfire_flame
+		Sequence: 1
+		IsDecoration: True
+	# Smoke does not stick: it is emitted at the unit's current position each tick and then rises and
+	# drifts away on its own, leaving a trail as the unit moves. Same smoke the ground fire uses.
+	DeterministicOffsetSmokeParticleEmitter@EpicSmoke:
+		RequiresCondition: epic-wounded
+		Image: smoke_fire_glow
+		Sequences: idle
+		Palette: effect
+		SpawnFrequency: 6, 12
+		Duration: 64
+		Speed: 6, 16
+		Gravity: 30, 70
+		TurnRate: 2
+		Offset: 0,0,128
 
 ^FlyingInfantryTemplate:
 	Inherits@EXPERIENCE: ^GainsExperienceAircraft
