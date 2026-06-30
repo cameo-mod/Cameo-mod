@@ -400,7 +400,7 @@ missile_tank.ixian:
 # 		Weapon: D2KUnitExplodeLarge
 # 		EmptyWeapon: D2KUnitExplodeLarge
 # 	SpawnActorOnDeath:
-# 		Actor: sonic_tank.husk
+# 		Actor: sonic_tank_husk.atreides
 # 		OwnerType: InternalName
 # 		EffectiveOwnerFromOwner: true
 # 	AttractsWorms:
@@ -1086,7 +1086,7 @@ heavy_rocket_raider.ixian:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: heavy_inf, heavy_inf, heavy_inf, twin_rocket_trooper.ixian, shock_infantry.ixian
+		InitialUnits: heavy_inf.ixian, heavy_inf.ixian, heavy_inf.ixian, twin_rocket_trooper.ixian, shock_infantry.ixian
 		LoadingCondition: notmobile
 	WithCargoPipsDecoration:
 		Position: BottomLeft
@@ -1517,3 +1517,95 @@ apparition.ixian:
 # 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
 
 	### Artillery and Air Tree
+
+duelist_tank.ixian:
+	Inherits@D2KT: ^D2KTank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@D2KSprite: ^D2KPaletteRender
+	Inherits@IXEMP: ^D2K_Ix_Turret_EMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@Barrel: ^D2K_ReinforcedBarrel
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 40
+		IconPalette: d2kunit
+		Prerequisites: ~research_centre.ixian
+		Description: actor-duelist_tank.description
+	Valued:
+		Cost: 1800
+	Tooltip:
+		Name: Ix Duelist Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 240000
+	Repairable:
+		HpPerStep: 12000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armor:
+		Type: Heavy
+	Shielded:
+		RegenAmount: 158
+	Mobile:
+		Speed: 45
+		TurnSpeed: 9
+	Turreted:
+		TurnSpeed: 9
+		Offset: 0,0,0
+	Armament:
+		Weapon: DuelistTankCannon
+		Recoil: 150
+		RecoilRecovery: 15
+		LocalOffset: 256,0,320
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+	Armament@Guns: ##########
+		Weapon: HMG_Duelist
+		LocalOffset: 128,-128,128, 128,128,128
+		MuzzleSequence: muzzle2
+		MuzzlePalette: d2keffect
+		RequiresCondition: !up_needleguns.ixian
+	Armament@Upgrade: ##########
+		Weapon: HMG_Duelist_upgrade
+		LocalOffset: 128,-128,128, 128,128,128
+		MuzzleSequence: muzzle2
+		MuzzlePalette: d2keffect
+		RequiresCondition: up_needleguns.ixian
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	ActorStatValues:
+		Upgrades: up_siege_range.ixian
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: D2KUnitExplodeMed
+		EmptyWeapon: D2KUnitExplodeMed
+	AttractsWorms:
+		Intensity: 520
+	Cloak@TDcloak:
+	Voiced:
+		VoiceSet: D2KDuelistTank
+	RangeMultiplier@up_needleguns.ixian:
+		Modifier: 105
+	FirepowerMultiplier@up_needleguns.ixian:
+		Modifier: 110
+	ActorStatValues:
+		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+
+duelist_tank_husk.ixian:
+	Inherits: ^D2KVehicleHusk
+	Tooltip:
+		Name: Ix Duelist Tank (Destroyed)
+	Health:
+		HP: 1250
+	ThrowsParticle@turret:
+		Anim: turret
+	TransformOnCapture:
+		IntoActor: duelist_tank.ixian

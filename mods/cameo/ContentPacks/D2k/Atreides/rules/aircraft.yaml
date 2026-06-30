@@ -1,1 +1,12 @@
-# No aircraft units.
+ornithopter_husk.atreides:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Ornithopter
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 224
+	RenderSprites:
+		Image: ornithopter
+		PlayerPalette: playerd2k
+	FallsToEarth:
+		Explosion: D2KUnitExplodeMed
