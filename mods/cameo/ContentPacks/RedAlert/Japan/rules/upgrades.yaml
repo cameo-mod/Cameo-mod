@@ -120,6 +120,22 @@ up_nanotechrepairs:
 	ProvidesTeamProxyActor:
 		Actor: team_upgrade.up_nanotechrepairs
 
+team_upgrade.up_nanotechrepairs:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: up_nanotechrepairs
+	RenderSprites:
+		Image: nanotechrepairsicon
+	Tooltip:
+		Name: Nanotech Repairs
+	Buildable:
+		Description: upgrade-nanotechrepairs.description
+	PlayerDisplayUpgrade:
+
+	####################################################################################################
+	#		Promotions Japan
+	####################################################################################################
+
 upsamurai:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:

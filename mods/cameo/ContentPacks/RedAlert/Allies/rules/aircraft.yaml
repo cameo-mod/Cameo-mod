@@ -1,3 +1,9 @@
+BADR.Allies:
+	Inherits: BADR
+	Inherits@AirSuperiorityDoctrine: ^AirSuperiorityDoctrine
+	RenderSprites:
+		Image: badr
+
 MH60:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate

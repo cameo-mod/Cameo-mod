@@ -104,6 +104,18 @@ ra_upgrade_menofsteel:
 	ProvidesTeamProxyActor:
 		Actor: ra_upgrade_menofsteel_proxy_actor
 
+ra_upgrade_menofsteel_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Men Of Steel
+	Buildable:
+		Description: ra_upgrade_menofsteel.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra_upgrade_menofsteel
+	ProvidesPrerequisite:
+		Prerequisite: ra_upgrade_menofsteel
+
 ra_upgrade_massproduction:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
@@ -126,6 +138,18 @@ ra_upgrade_wareconomy:
 	ProvidesTeamProxyActor:
 		Actor: ra_upgrade_wareconomy_proxy_actor
 
+ra_upgrade_wareconomy_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: War Economy
+	Buildable:
+		Description: ra_upgrade_wareconomy.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra_upgrade_wareconomy
+	ProvidesPrerequisite:
+		Prerequisite: ra_upgrade_wareconomy
+
 ra_upgrade_incendiarybullets:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
@@ -147,6 +171,18 @@ ra_upgrade_scorchedearth:
 		Image: ra_upgrade_scorchedearth
 	ProvidesTeamProxyActor:
 		Actor: ra_upgrade_scorchedearth_proxy_actor
+
+ra_upgrade_scorchedearth_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Scorched Earth
+	Buildable:
+		Description: ra_upgrade_scorchedearth.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra_upgrade_scorchedearth
+	ProvidesPrerequisite:
+		Prerequisite: ra_upgrade_scorchedearth
 
 ra_upgrade_teslaarcing:
 	Inherits: ^tech_upgrade_template
@@ -180,6 +216,18 @@ ra_upgrade_reactoroverload:
 	ProvidesTeamProxyActor:
 		Actor: ra_upgrade_reactoroverload_proxy_actor
 
+ra_upgrade_reactoroverload_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Reactor Overload
+	Buildable:
+		Description: ra_upgrade_reactoroverload.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra_upgrade_reactoroverload
+	ProvidesPrerequisite:
+		Prerequisite: ra_upgrade_reactoroverload
+
 ra_upgrade_autoloaders:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
@@ -212,6 +260,18 @@ ra_upgrade_stalinium:
 	ProvidesTeamProxyActor:
 		Actor: ra_upgrade_stalinium_proxy_actor
 
+ra_upgrade_stalinium_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Stalinium
+	Buildable:
+		Description: ra_upgrade_stalinium.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra_upgrade_stalinium
+	ProvidesPrerequisite:
+		Prerequisite: ra_upgrade_stalinium
+
 ra_upgrade_unstableisotopes:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
@@ -243,6 +303,18 @@ ra_upgrade_nuclearshells:
 		Image: ra_upgrade_nuclearshells
 	ProvidesTeamProxyActor:
 		Actor: ra_upgrade_nuclearshells_proxy_actor
+
+ra_upgrade_nuclearshells_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Nuclear Tank Shells
+	Buildable:
+		Description: ra_upgrade_nuclearshells.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: ra_upgrade_nuclearshells
+	ProvidesPrerequisite:
+		Prerequisite: ra_upgrade_nuclearshells
 
 ra_upgrade_afterburners:
 	Inherits: ^unit_upgrade_template

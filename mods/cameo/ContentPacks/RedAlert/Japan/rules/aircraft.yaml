@@ -1,3 +1,39 @@
+BADR.Japan:
+	Inherits: BADR
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	RenderSprites:
+		Image: c17
+	SpawnActorOnDeath:
+		Actor: C17.Husk
+	ActorStatValues:
+		Upgrades: up_divinewindprotocol, up_nanotechrepairs
+
+jsuperbomber:
+	Inherits: BADR
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Super Bomber
+	Health:
+		HP: 125000
+	Aircraft:
+		Speed: 200
+	Valued:
+		Cost: 5000
+	Contrail@1:
+		Offset: -300,300,0
+	Contrail@2:
+		Offset: -300,-300,0
+	AttackBomber:
+		FacingTolerance: 32
+	Armament:
+		Weapon: JapanSuperBomb
+	RenderSprites:
+		Image: jsuperbomber
+		PlayerPalette: player
+	SpawnActorOnDeath:
+		Actor: jsuperbomber.Husk
+
 MODKAMI:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
@@ -220,6 +256,102 @@ JHIND:
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 	ActorStatValues:
 		Upgrades: up_waveforcebullets, up_divinewindprotocol, up_energizedarrows, up_advancedplasmaweapons, up_nanotechrepairs
+
+zerofighter:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Zero Fighter
+	Buildable:
+		Description: template-carrier-slave.description
+	Aircraft:
+		AltitudeVelocity: 250
+		InitialFacing: 768
+		TurnSpeed: 25
+		Speed: 175
+		Repulsable: false
+		TakeoffSounds: vhortaka.wav, vhortakb.wav
+		LandingSounds: vhorlana.wav, vhorlanb.wav
+		TakeUpCellWhenLand: false
+	Health:
+		HP: 7500
+	Armament@PRIMARY:
+		Weapon: ZeroFighterChainGun
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !up_waveforcebullets
+	Armament@SECONDARY:
+		Weapon: ZeroFighterChainGun
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !up_waveforcebullets
+	Armament@Upgrade: ##########
+		Weapon: ZeroFighterChainGunWaveforce
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: up_waveforcebullets
+	Armament@UpgradeSECONDARY:
+		Weapon: ZeroFighterChainGunWaveforce
+		LocalOffset: 128,128,0, 128,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: up_waveforcebullets
+	FirepowerMultiplier@doublecannons:
+		Modifier: 50
+	Armament:
+		Weapon: JapanCarrierFighterBomb
+	AmmoPool:
+		Ammo: 30
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	SpawnActorOnDeath:
+		Actor: modkamimini.Husk
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	AttackAircraft:
+		FacingTolerance: 40
+		RequiresCondition: ammo
+	CarrierSlave:
+		LandingDistance: 8000
+	AutoTarget:
+		InitialStanceAI: AttackAnything
+		InitialStance: AttackAnything
+	HasParent:
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-WithShadow:
+	-MapEditorData:
+	RejectsOrders:
+	WithMuzzleOverlay:
+	Contrail:
+		Offset: -500,0,125
+	LeavesTrails:
+		Offsets: -500,0,125
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	RenderSprites:
+		PlayerPalette: player
+		Image: modkamimini
+	ActorStatValues:
+		Upgrades: up_waveforcebullets, up_divinewindprotocol
 
 ROCKETANGEL.husk:
 	Inherits: ^SmallHelicopterHusk

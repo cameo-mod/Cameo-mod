@@ -343,6 +343,72 @@ RAJEEP:
 	ActorStatValues:
 		Upgrades: up_advancedradarsystems, up_gpssatellitesupport
 
+RAAPC:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@cargo: ^CargoVehicle
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@botmicro: ^BotAutoDeployTransport
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Allied APC
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 120
+		Prerequisites: ~tent, ~!upphasetransport
+		Description: actor-apc.description
+	Mobile:
+		Speed: 105
+		TurnSpeed: 21
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 42
+	Armament@PRIMARY:
+		Weapon: APCGunAllies
+		Recoil: 96
+		RecoilRecovery: 18
+		LocalOffset: 85,85,299, 85,-85,299
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Weapon: APCGunAlliesAA
+		Recoil: 96
+		RecoilRecovery: 18
+		LocalOffset: 85,85,299, 85,-85,299
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: rae1, rae1, medi, rae3, rae3
+	RenderSprites:
+		Image: raapc
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	Selectable:
+		Class: raapc
+	ActorStatValues:
+		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+
 MNLY:
 	Inherits: ^Tank
 	Inherits@mines: ^DeployToClearMines
@@ -640,6 +706,63 @@ MODTIGER:
 		VoiceSet: RAVehicleVoice
 	RenderSprites:
 		Image: alliedtiger
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+
+alliedcybertank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AdvancedRadarSystems: ^AdvancedRadarSystems
+	Inherits@LaserTargetingSystems: ^LaserTargetingSystems
+	Inherits@ChronoArmor: ^ChronoArmor
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~disabled
+		BuildPaletteOrder: 110
+		Description: actor-tiger.description
+	Tooltip:
+		Name: Allied Cyber Tank
+	Valued:
+		Cost: 1300
+	Mobile:
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 160000
+	Repairable:
+		HpPerStep: 8000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 15
+		Offset: 0,0,0
+	Armament:
+		Weapon: TigerCannon
+		Recoil: 150
+		RecoilRecovery: 50
+		LocalOffset: 1200,0,200
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	#SpawnActorOnDeath:
+	#	Actor: 2TNK.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport

@@ -1,3 +1,13 @@
+BADR.Soviet:
+	Inherits: BADR
+	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
+	Inherits@Afterburners: ^AfterburnersUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	RenderSprites:
+		Image: badr
+	ActorStatValues:
+		Upgrades: ra_doctrine_heavyarmor, ra_upgrade_afterburners, ra_upgrade_stalinium
+
 YAK:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate

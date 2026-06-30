@@ -120,6 +120,22 @@ up_gpssatellitesupport:
 	ProvidesTeamProxyActor:
 		Actor: team_upgrade.up_gpssatellitesupport
 
+team_upgrade.up_gpssatellitesupport:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: up_gpssatellitesupport
+	RenderSprites:
+		Image: gpssatellitesupporticon
+	Tooltip:
+		Name: GPS Satellite Support
+	Buildable:
+		Description: upgrade-gpssatellitesupport.description
+	PlayerDisplayUpgrade:
+
+	####################################################################################################
+	#		Promotions Allies
+	####################################################################################################
+
 upalliedmachinegunner:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
