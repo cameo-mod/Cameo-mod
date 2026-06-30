@@ -566,14 +566,6 @@ actor-cmin =
    .name = Chrono Miner
    .description = Collects resources and teleports to refinery when full.
 
-actor-robo =
-   .name = Robot Tank
-   .description = Light unmanned tank.
-      Can hover over water.
-      Immune to mind control.
-      Requires Robot Control to operate.
-        Strong vs Vehicles
-
 actor-fv =
    .name = Infantry Fighting Vehicle
    .description = Changes turret with passenger.
@@ -660,11 +652,6 @@ actor-deso =
       Can deploy to irradiate area.
         Strong vs Infantry
 
-actor-terror =
-   .name = Terrorist
-   .description = Suicide bomber.
-      Explodes when killed
-
 actor-ivan =
    .name = Crazy Ivan
    .description = Plants time bombs on targets.
@@ -700,10 +687,6 @@ actor-schp =
         Strong vs Infantry when airborne
         Strong vs Buildings when deployed
         Weak vs Aircraft, Air Defense
-
-actor-ra2hind =
-   .name = Hind Transport
-   .description = Carryall helicopter armed with a machine gun.
 
 actor-zep =
    .name = Kirov Airship
@@ -1018,306 +1001,28 @@ power-forceshield =
    .name = Force Shield
    .description = Makes selected buildings temporarily invulnerable.
 
-actor-aashinobi =
-   .description = Stealth soldier.
-      Can infiltrate buildings.
-
-actor-alligator =
-   .description = Large reptile.
-       Strong vs Infantry, Vehicles
-       Weak vs Defenses, Aircraft
-
-actor-aaquas =
-   .description = Light scout vehicle.
-      Can attack aircraft.
-       Strong vs Infantry, Air
-
-actor-aapulv =
-   .description = Armed with a gatling cannon.
-       Strong vs Infantry, Air
-
-actor-aahowi =
-   .description = Mobile heavy artillery.
-
-actor-aaviper =
-   .description = Hovering mobile artillery.
-      Attacks leave toxin clouds.
-
 actor-aamecha =
    .description = Robot armed with machine guns.
       Can attack air.
-
-actor-aapanth =
-   .description = Amphibious transport armed with a cannon.
-
-actor-aaoilt =
-   .description = Truck carrying fuel.
-      Explodes violently when destroyed or deployed.
-
-actor-aapelican =
-   .description = Helicopter armed with missiles.
-      Can attack air.
-
-actor-aaphoenix =
-   .description = Multirole fighter-bomber.
-      Can attack air.
-
-actor-aagunb =
-   .description = Fast gunboat armed with a cannon and a flak gun.
-      Can attack air.
-
-actor-aaquasfrig =
-   .description = Warship armed with plasma cannons.
-      Can attack air.
-
-actor-aacarrier =
-   .description = Aircraft carrier that deploys 4 fighters
-      armed with machine guns.
-
-actor-aatsun =
-   .description = Aircraft carrier that deploys 3 fighters
-      armed with chemical bombs.
-
-actor-aaksub =
-   .description = Suicide bomber submarine.
-
-actor-cgpnch =
-   .description = Defense buildable on water.
-      Can detect submarines.
-       Strong vs Ships, Submarines
-
-actor-cghype =
-   .description = Anti-aircraft tractor beam.
-      Requires power to operate.
-       Strong vs Air
-
-actor-cgtnkr =
-   .description = Fill with Oil Trucks to generate more power.
-
-actor-cgchtw =
-   .description = Defense that dispenses chaos gas.
-      Requires power to operate
-
-actor-cgplas =
-   .description = Long range anti-ground defense.
-      Requires power to operate
-
-actor-cgchao =
-   .description = Provides Chaos Storm support power.
-      Requires power to operate.
-
-actor-cgionc =
-   .description = Provides Ion Cannon support power.
-      Requires power to operate.
 
 power-chaos =
    .name = Chaos Storm
    .description = Releases chaos gas on a target area.
 
-actor-steel_board_inf =
-   .description = Armed with anti-vehicle grenades.
-
-actor-steel_mako =
-   .description = Main battle hoverbike.
-
-actor-steel_manta =
-   .description = Anti-infantry and anti-air vehicle.
-
 actor-steel_qtank =
    .description = Main battle tank.
     Deploy to switch to an artillery gun.
 
-actor-steel_beholder =
-   .description = Armed with powerful anti-ground lasers.
-
-actor-steel_katy =
-   .description = Heavy anti-ground tank.
-
-actor-steel_mega =
-   .description = Melee fighting robot.
-
-actor-steel_savi =
-   .description = Protects nearby units with shields.
-
-actor-steel_grun =
-   .description = Anti-air turret.
-
-actor-steel_inspect =
-   .description = Armed with an ion cannon.
-
-actor-latin_mili =
-   .description = Basic rifle infantry.
-       Can be upgraded with Molotovs.
-
-actor-latin_fftr =
-   .description = Attacks vehicles and aircraft with explosive arrows.
-
-actor-latin_fthrow =
-   .description = Flamethrower infantry.
-
-actor-latin_monkey =
-   .description = Primate armed with grenades.
-
-actor-latin_narco =
-   .description = Elite infantry armed with pistols and grenades.
-
-actor-latin_yakovlev =
-   .description = Attack aircraft armed with machine guns.
-
-actor-latin_buggy =
-   .description = Fast attack vehicle armed with machine guns.
-       Can be upgraded with gatling guns
-
-actor-latin_mortarbike =
-   .description = Fast light artillery vehicle.
-
-actor-latin_humvee =
-   .description = Drive-by vehicle loaded with Narcos.
-
-actor-latin_apc =
-   .description = Amphibious infantry transport.
-      Can attack air.
-
-actor-latin_diablo =
-   .description = Anti-aircraft tank.
-
 actor-latin_burrito =
    .description = Incendiary heavy rocket artillery.
 
-actor-latin_lars =
-   .description = Long range anti air support.
-
-actor-latin_topol =
-   .description = ICBM launcher.
-
-actor-latin_sml =
-   .description = Long-range missile launcher.
-      Rockets can be shot down
-
-actor-latin_ca12hit =
-   .description = Provides Topol Storm support power.
-      Requires power to operate.
-
-actor-latin_radar =
-   .description = Provides radar, unlocks technologies,
-      and provides EMP capabilities.
-      Requires power to operate.
-
-      Only one may be constructed per player.
-
-actor-latin_cgte =
-   .description = Provides steady flow of cash.
-      Produces scrap cars to bolster the army.
-      Requires power to operate.
-
-      Only one may be constructed per player.
-
-actor-nax_merc =
-   .description = Sniper Infantry with long range.
-
-actor-nax_mp40 =
-   .description = Elite assault infantry.
-
-actor-nax_litt =
-   .description = Commando armed with a gun that creates black holes.
-      Black holes damage nearby enemies and can be targeted
-
-actor-nax_slavemaster =
-   .description = Whips slaves to make them work faster.
-
-actor-nax_atankcann =
-   .description = Anti-tank artillery piece.
-      Very slow to move and turn
-
-actor-nax_alien =
-   .description = Alien armed with an energy cannon.
-
-actor-nax_hmg =
-   .description = Machine gun crew.
-      Needs to deploy to attack.
-
-actor-nax_quadflak =
-   .description = Flak cannon crew.
-      Needs to deploy to attack.
-      Can only attack air.
-
-actor-nax_kubel =
-   .description = Fast scout vehicle with 2 passengers.
-      Can attack air.
-
-actor-nax_bmwbike =
-   .description = Very fast scout vehicle.
-      Can attack air.
-
-actor-nax_wirbelwind =
-   .description = Anti-aircraft and anti-infantry tank.
-
-actor-nax_grille =
-   .description = Self-propelled medium-range howitzer.
-
-actor-nax_brummbar =
-   .description = Self-propelled long-range howitzer.
-
-actor-nax_sturmtiger =
-   .description = Heavily armored assault artillery.
-
-actor-nax_hetzer =
-   .description = Light tank destroyer.
-
-actor-nax_jagdpanzer =
-   .description = Heavy tank destroyer.
-
-actor-nax_eng =
-   .description = Captures buildings and repairs vehicles.
-      Unarmed
-
-actor-nax_brad =
-   .description = Multiple rocket launcher.
-      Rockets can be shot down
-
-actor-nax_sarubia =
-   .description = Main battle tank.
-      Projectiles can be shot down
-
-actor-nax_shoe =
-   .description = Superheavy tank armed with cannons, mortars, and rockets.
-      Has fireports for 2 passengers.
-
-actor-nax_nokana =
-   .description = Superheavy tank with a fireport for a vehicle.
-      Armed with cannons and rockets
-
-actor-nax_haunebu =
-   .description = Multirole floating disc.
-
-actor-nax_haunebu2 =
-   .description = Heavy multirole floating disc.
-      Drops a cow on targets.
-
 actor-nax_me262 =
    .description = Multirole fighter armed with machineguns.
-
-actor-nax_piercer =
-   .description = Advanced multirole fighter.
-      Projectiles splash and corrode targets,
-      inflicting debuffs and damage over time.
 
 actor-nax_dieglocke =
    .description = Superheavy spaceship.
       Creates massive toxin clouds.
       Only attacks targets below.
-
-actor-nax_flak88 =
-   .description = All-purpose defense.
-      Can attack air.
-
-actor-nax_airfield =
-   .description = Produces aircraft.
-      Automatically deploys fighters to attack enemies.
-
-actor-nax_rocket =
-   .description = Provides a V1 missile.
-      Requires power to operate
 
 actor-shock_infantry =
    .description = Armed with a shock gun.
@@ -1535,44 +1240,6 @@ upgrade-d2k_advanced_ixian_technology =
       Stealth Generators are also given to Ix Missile Tanks and Ix Siege Tanks.
       Infantry with Personal Shield Generators also have 50% more shield armor.
 
-upgrade-uplatin_mili =
-   .description =  Equips Militias with Molotovs.
-      Increases Firepower and Damage Resistance of all Infantry by 25% and gives Self Healing.
-      Doubles the effect for the Militia and gives Molotovs.
-
-upgrade-uplatin_cartelrockets =
-   .description =  Upgrades all rockets with Black Market Cartel Rockets.
-      Increases Firepower and Range of all Rocket Artilleries by 25%.
-      Gives Rusher Tanks, Smoker Tanks and APCs additional Rocket Launchers.
-
-upgrade-uplatin_ngbunk2 =
-   .description = Increases garrisoned buildings range, vision and armor by 30%.
-
-upgrade-latin_up_chaingun =
-   .description = Stolen Tech from Yuri:
-      Equips different units and defenses with Chainguns.
-      Increases Rate of Fire with each shot!
-      Diablos gain 25% more Range, 25% faster Reload Delay and 50% more Firepower.
-
-upgrade-latin_up_industrial =
-   .description = Stolen Tech from Soviets:
-      Reduces Cost of Vehicles by 20%.
-      Increases Damage Resistance of all Vehicles by 20%.
-
-upgrade-uplatin_alliedstolentech =
-   .description = Stolen Tech from Allies:
-      Increases Speed of all Vehicles by 25% and Range by 5%.
-      Freedom Fighters and Diablos disguise as trees.
-
-upgrade-latin_up_hotfire =
-   .description =  Stolen Tech from Asian Alliance:
-      Increases Firepower and Rate of Fire of all Fire Weapons by 25%.
-      Terrorists, Demo Trucks, Flame Troopers and Mortar Bikes have their Firepower increased by 100% instead.
-      Flame Troopers and Mortar Bikes also gain 10% more Range and 20% more Speed.
-
-upgrade-uplatin_cashrecover =
-   .description = Recycles lost vehicles for a cashback of 20%.
-
 asian_upgrade_infantryspec =
    .description = Equips Infantry with new or additional weapons.
       All Infantry have 5% more Damage Resistance, Fire Power and Range.
@@ -1589,10 +1256,6 @@ asian_upgrade_phalanx =
 
 asian_upgrade_dragonfire =
    .description = Increases Flame and Plasma Weapon Damage by 50%.
-
-asian_upgrade_celestialpower =
-   .description = Increases Firepower and Range of Quasar Weapons and Railguns by 25%.
-      Increases EMP Effect of Quasar Weapons by 100%
 
 asian_upgrade_banzai =
    .description = Infantry enter Banzai Mode on low health:
@@ -1937,13 +1600,6 @@ template-tech-center =
 template-anti-vehicle-defense =
    .description = Anti-vehicle defense.
 
-template-anti-aircraft-defense =
-   .description = Anti-aircraft defense.
-
-template-anti-aircraft-power-defense =
-   .description = Anti-aircraft defense.
-      Requires power to operate.
-
 template-scout-infantry =
    .description = General-purpose infantry.
       Strong vs Infantry
@@ -1953,11 +1609,6 @@ template-antitank-antiair-infantry =
    .description = Anti-vehicle infantry.
       Strong vs Vehicles, Aircraft
       Weak vs Infantry
-
-template-antitank-infantry =
-   .description = Anti-vehicle infantry.
-      Strong vs Vehicles
-      Weak vs Infantry, Aircraft
 
 template-mbt =
    .description = Main battle tank.
@@ -2075,103 +1726,6 @@ faction-ra2-yuri =
    .name = Yuri
    .description = Yuri from Yuri's Revenge
       Support powers: Genetic Mutator, Psychic Dominator
-
-faction-ra2-modded-random =
-   .name = Any
-   .description = Random faction
-      A random faction from Red Alert 2 Mods will be chosen when the game starts.
-
-faction-ra2-asianalliance =
-   .name = Asian Alliance
-   .description = Asian Alliance from Eagle Red Mod
-      Asian Alliance is a massive high-tech coalition of China, Japan, and Korea.
-      Acting as a unified East Asian front that has decided to pursue its own
-      technological path, independent of the Allied and Soviet blocs. They focus on
-      pulverizer, fire and high-energy plasma weaponry and Mass Infantry Deployment
-
-      Support powers: Chaos Storm, Ion Cannon
-
-faction-ra2-syndicate =
-   .name = Latin Syndicate
-   .description = Latin American Crime Syndicate with old Soviet Technology
-      The Latin Syndicate is a ruthless, criminal-industrial war machine that weaponizes attrition,
-      area denial, and the enemy's own technology. Operating from fortified bunker networks,
-      they combine "black market" Soviet surplus with ingenious scrap-based engineering to overwhelm
-      opponents through constant pressure and tactical disruption.
-
-      Support powers: Topol Strike
-
-faction-ra2-consortium =
-   .name = Steel Consortium
-   .description = Steel Consortium from Reign of Steel Mod
-      Support powers: Ion Cannon
-
-faction-ra2-naxis =
-   .name = Naxis
-   .description = Naxis custom faction in Red Alert 2 style.
-      A satirical fusion of 1940s aesthetics and over-the-top "secret weapon" tropes,
-      Naxis serves as a parody of World War II-era Germany, incorporating anachronistic
-      units from across the WWII gaming genre. They trade elegance for raw, clanking
-      industrial power and occult experimentation.
-
-      Difficulty: ©©©©
-      Early Game: ©©©©©
-      Mid Game: ©©
-      Late Game: ©©©©
-      Playstyle: Turtle
-      Strength: Bunkers, Heavy Tanks and Artillery
-      Weakness: Aircraft
-      Countered by: Heavy Armor, Map Control
-      Special Units: Ratte, Nokana
-      Special Buildings: Sausage Factory, Beer Factory
-      Team Upgrades: Blitzkrieg
-      Support powers: Revive the Undead Warriors, V1 Rocket
-
-faction-ra2-lnaxis =
-   .name = Schwarzer Mond
-   .description = Schwarzer Mond custom faction in Red Alert 2 style.
-      The Schwarzer Mond (Black Moon) is the elite, space-faring branch of the Naxis,
-      operating from secret bases on the lunar surface. They have abandoned the
-      traditional warfare of Earth for "crazy science" and the manipulation of
-      planetary forces, making them one of the most unpredictable factions in the field.
-
-      Difficulty: ©©©
-      Early Game: ©©
-      Mid Game: ©©©©©
-      Late Game: ©©©©
-      Playstyle: Timing Attack
-      Strength: Mid to Lategame Tanks and Artillery
-      Weakness: Aircraft
-      Countered by: Early Game Rush, Aircraft
-      Special Units: Parzival, Dalek, Die Glocke
-      Special Buildings: Moon Dairy Farm
-      Team Upgrades: WIP
-      Support powers: Gravity Core, Meteor Traction Beam
-
-faction-ra2-futuretech =
-   .name = FutureTech
-   .description = FutureTech: High-End Robotics and Experimental Weaponry
-
-      The secretive European defense conglomerate FutureTech pushes the boundaries of
-      ethical science to secure Allied dominance. Operating from high-security labs in
-      the Netherlands, they field an arsenal of cutting-edge robotics and experimental
-      energy weapons that excel at overwhelming the enemy at a steep cost.
-
-      Heavy investment in infrastructure is required before FutureTech's most advanced
-      units can be deployed. Their technology is among the most powerful on the battlefield,
-      but their base defenses are sparse, offering little protection without a standing army.
-
-      Difficulty: ©©©©©
-      Early Game: ©©
-      Mid Game: ©©©
-      Late Game: ©©©©©
-      Playstyle: Tech Rush
-      Strength: Late Game Offense, Robotic Units
-      Weakness: Early Game, Base Defense
-      Countered by: Early Aggression, Air Raids
-      Special Units: Future Tank, Harbinger Gunship, Cryocopter
-      Special Buildings: Hypercore, Robot Control Center
-      Support powers: Paradrop (Planned: Sigma Harmonizer, Robot Energize)
 
 faction-d2k-random =
    .name = Any

@@ -51,3 +51,12 @@ combat_tank_husk.harkonnen:
 	Inherits: ^combat_tank.husk
 	TransformOnCapture:
 		IntoActor: combat_tank.harkonnen
+
+devastator_husk.harkonnen:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1250
+	Tooltip:
+		Name: Devastator (Destroyed)
+	TransformOnCapture:
+		IntoActor: devastator

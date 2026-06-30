@@ -691,3 +691,16 @@ OBLI:
 		Range: 9600
 	DetectCloaked:
 		Range: 4800
+
+CNCSPEN:
+	Inherits: RASPEN
+	Tooltip:
+		Name: Nod Sub Pen
+	Buildable:
+		Prerequisites: ~fact.nod, proc.nod, ~globalnaval
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: cncspen
+		PlayerPalette: player_rgba

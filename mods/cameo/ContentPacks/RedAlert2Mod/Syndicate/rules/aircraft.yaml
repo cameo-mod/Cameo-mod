@@ -1,0 +1,298 @@
+ra2hind.latin:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@uprecover: ^LatinCashrecover
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Hind Transport
+	Buildable:
+		BuildPaletteOrder: 97
+		Prerequisites:  ~cgair.latin
+		Queue: Aircraft, RAAircraft
+		IconPalette: ra2cameo
+		Description: actor-ra2hind.description
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Aircraft:
+		TurnSpeed: 18
+		Speed: 90
+		RepulsionSpeed: 18
+	Health:
+		HP: 95000
+	Repairable:
+		HpPerStep: 4750
+	ChangesHealth@SelfHealing:
+		Step: 38
+	Armament@PRIMARY:
+		Weapon: BlackHawkCannon
+		LocalOffset: 128,-213,-85, 128,213,-85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && up_chaingun.latin
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
+	WithMuzzleOverlay:
+	AttackAircraft:
+		FacingTolerance: 80
+	WithIdleOverlay@ROTORAIR:
+		Offset: 0,0,20
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 0,0,20
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	SpawnActorOnDeath:
+		Actor: ra2hind_husk.latin
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Carryall:
+		LocalOffset: 0,0,-256
+	Voiced:
+		VoiceSet: SiegeChopperVoice
+	DeathSounds:
+	RenderSprites:
+		PlayerPalette: playerra2
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
+
+ra2hind_husk.latin:
+	Inherits: ^LargeHelicopterHusk
+	Tooltip:
+		Name: Hind Transport
+	Aircraft:
+		TurnSpeed: 17
+		Speed: 85
+	RenderSprites:
+		Image: ra2hind.latin
+		PlayerPalette: playerra2
+
+yakolev.latin:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	# Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Selectable:
+	Tooltip:
+		Name: Yakovlev
+	Valued:
+		Cost: 900
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~cgair.latin
+		Queue: Aircraft, RAAircraft
+		Description: actor-latin_yakovlev.description
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	HitShape:
+	Voiced:
+		VoiceSet: LatinMigVoice
+	Aircraft:
+		TurnSpeed: 11
+		Speed: 165
+		IdleTurnSpeed: 8
+		IdleSpeed: 120
+		RepulsionSpeed: 33
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: YakovlevCannon
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite && !up_chaingun.latin
+	Armament@ELITE:
+		Name: primary
+		Weapon: YakovlevCannonE
+		LocalOffset: 425,250,-225, 425,-250,-225, 425,150,-225, 425,-150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	Armament@up_chaingun.latin:
+		Name: primary
+		Weapon: YakovlevCannonE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		PauseOnCondition: !ammo
+		RequiresCondition: up_chaingun.latin
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && up_chaingun.latin
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
+	AmmoPool:
+		Ammo: 8
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 40
+		Count: 1
+	ReloadAmmoDelayMultiplier@up_chaingun.latin:
+		RequiresCondition: up_chaingun.latin
+		Modifier: 50
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 8
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -640,0,280
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: yakolev_husk.latin
+	ActorStatValues:
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
+	RenderSprites:
+		Image: yakolev.latin
+		PlayerPalette: playerra2
+
+yakolev_husk.latin:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Yakovlev
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: yakolev.latin
+		PlayerPalette: playerra2
+
+mig.latin:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^CartelRocketsUpgrade
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Selectable:
+	Tooltip:
+		Name: MiG-21
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~cgair.latin, ~cgspy.latin
+		Queue: Aircraft, RAAircraft
+		Description: actor-bpln.description
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	HitShape:
+	Voiced:
+		VoiceSet: LatinMigVoice
+	Aircraft:
+		TurnSpeed: 12
+		Speed: 190
+		IdleTurnSpeed: 10
+		IdleSpeed: 150
+		RepulsionSpeed: 30
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	Armament:
+		Name: primary
+		Weapon: MigMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: MigMissilesE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: secondary
+		Weapon: MigMissiles_AA
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 2
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@AAELITE:
+		Name: secondary
+		Weapon: MigMissiles_AA_ELITE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
+		LocalYaw: 50, -50, 25, -25
+		AmmoUsage: 1
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 4
+		ReloadDelay: 50
+		AmmoCondition: ammo
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -960,0,240
+		TrailLength: 15
+	SpawnActorOnDeath:
+		Actor: mig_husk.latin
+	RenderSprites:
+		Image: mig.latin
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_cartelrockets.latin, up_hotfire.latin
+
+mig_husk.latin:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: MiG-21
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 185
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: mig.latin
+		PlayerPalette: playerra2

@@ -1,0 +1,466 @@
+uber.nax2:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Übermensch
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~tech.nax2
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 64
+	Health:
+		HP: 64000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armament@PRIMARY:
+		Weapon: ÜbermenschLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: ÜbermenschLaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ÜbermenschLaser
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: ÜbermenschLaserE
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Crushable:
+		CrushClasses: vehicle
+	Voiced:
+		VoiceSet: NaxiUbermenVoice
+
+parv.nax2:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Parzival
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 100
+		Prerequisites: ~tech.nax2
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Armament@PRIMARY:
+		Weapon: BlackHoleMaker
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: BlackHoleMakerE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: BlackHoleMaker
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: BlackHoleMakerE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: NaxiUbermenVoice
+
+armor_mg.nax2:
+	Inherits: ^Walker
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Noid MG Armor
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~radar.nax2
+		Queue: Infantry, RAInfantry
+		Description: actor-aamecha.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Superheavy
+	Armament@PRIMARY:
+		Weapon: NaxiMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
+	Armament@ELITE:
+		Weapon: NaxiMP40LaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && !up_ylaser.nax2
+	Armament@PRIMARY_UP:
+		Weapon: Lunar_YellowMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && up_ylaser.nax2
+	Armament@ELITE_UP:
+		Weapon: Lunar_YellowMP40LaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && up_ylaser.nax2
+	AttackFrontal:
+		FacingTolerance: 20
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+armor_harv.nax2:
+	Inherits: ^Walker
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Noid Harvester
+	Buildable:
+		BuildDuration: 250
+		BuildDurationModifier: 100
+		BuildPaletteOrder: 75
+		Prerequisites: ~refin.nax2
+		Queue: Infantry, RAInfantry
+		Description: actor-aamecha.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armor:
+		Type: Plate
+	Armament@PRIMARY:
+		Weapon: NaxiMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiMP40LaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 20
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	Harvester:
+		BaleLoadDelay: 6
+		BaleUnloadDelay: 6
+	DockClientManager:
+		OccupancyCostModifier: 0
+	StoresResources:
+		Capacity: 90
+	WithStoresResourcesPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 9
+	Mobile:
+		Locomotor: chem
+
+engi.nax2:
+	Inherits: ^Walker
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Engineering Armor
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~barr.nax2
+		Queue: Infantry, RAInfantry
+		Description: actor-aamecha.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Plate
+	Armament:
+		Name: primary
+		Weapon: RA2IFVRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 5
+	AttackFrontal:
+		FacingTolerance: 20
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
+
+lunar.nax2:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Lunar Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~barr.nax2
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: NaxiRifleLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
+	Armament@ELITE:
+		Weapon: NaxiRifleLaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && !up_ylaser.nax2
+	Armament@PRIMARY_UP:
+		Weapon: Lunar_YellowRifleLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && up_ylaser.nax2
+	Armament@ELITE_UP:
+		Weapon: Lunar_YellowRifleLaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && up_ylaser.nax2
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiRifleLaser
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiRifleLaserE
+		RequiresCondition: rank-elite && !up_ylaser.nax2
+	Armament@GARRISONED_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowRifleLaser
+		RequiresCondition: !rank-elite && up_ylaser.nax2
+	Armament@GARRISONEDELITE_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowRifleLaserE
+		RequiresCondition: rank-elite && up_ylaser.nax2
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiLunarTroopVoice
+
+lunar2.nax2:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 350
+	Tooltip:
+		Name: Lunar Rocket
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~barr.nax2
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armament@PRIMARY:
+		Weapon: NaxCorrosionRocketTrooper
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxCorrosionRocketTrooper
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxCorrosionRocketTrooper
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxCorrosionRocketTrooper
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiLunarTroopVoice
+
+hole_small.nax2:
+	Inherits@1: hole.nax2
+	Health:
+		HP: 25000
+	ChangesHealth:
+		Step: -100
+
+hole.nax2:
+	Inherits: ^EnergyEntity
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Armament:
+		Weapon: NaxiBlackholeShoot
+		LocalOffset: 0,0,5
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Mobile:
+		Locomotor: hover
+		Speed: 5
+		TurnSpeed: 255
+	RenderSprites:
+		Palette: ra2infantry
+	Health:
+		HP: 2400
+	ChangesHealth:
+		Step: -10
+		Delay: 1
+		StartIfBelow: 101
+	WithDeathAnimation:
+		FallbackSequence: die
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: ra2infantry
+		DeathPaletteIsPlayerPalette: false
+	Tooltip:
+		Name: Black Hole
+	Targetable@BlackHole:
+		TargetTypes: BlackHole, Ground
+	Voiced:
+		VoiceSet: DinoVoice
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:

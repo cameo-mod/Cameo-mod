@@ -4582,7 +4582,7 @@ light_inf:
 		Facings: -32
 		BlendMode: Additive
 
-heavy_inf:
+heavy_inf.ixian:
 	Inherits: vordel_effect
 	Defaults:
 		Filename: IxHeavyTrooper.png
@@ -5383,7 +5383,7 @@ fremen:
 	phantomicon:
 		Filename: fremenwarrioricon.shp
 
-saboteur:
+saboteur.ordos:
 	Defaults:
 	stand:
 		Filename: DATA.R16
@@ -7960,7 +7960,7 @@ farasha_husk.ixian:
 		ZOffset: -512
 		Facings: -32
 
-d2k_farasha_drone:
+farasha_drone.ixian:
 	idle:
 		Filename: d2k_farasha_drone.shp
 		Start: 0
@@ -7968,7 +7968,7 @@ d2k_farasha_drone:
 	icon:
 		Filename: d2k_farasha_icon.shp
 
-d2k_farasha_drone.husk:
+farasha_drone_husk.ixian:
 	idle:
 		Filename: d2k_farasha_drone.shp
 		ZOffset: -512
@@ -8013,7 +8013,7 @@ sonic_tank:
 		Start: 4288
 		Offset: -30,-24
 
-sonic_tank.husk:
+sonic_tank_husk.atreides:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8096,7 +8096,7 @@ mongoose_d2k_a:
 	icon:
 		Filename: d2kmongoosecameo.png
 
-duelist_tank:
+duelist_tank.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8129,7 +8129,7 @@ duelist_tank:
 	icon:
 		Filename: d2k_duelist_tank_icon.shp
 
-duelist_tank.husk:
+duelist_tank_husk.ixian:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -8425,7 +8425,7 @@ devastator:
 		Start: 4289
 		Offset: -30,-24
 
-devastator.husk:
+devastator_husk.harkonnen:
 	Defaults:
 	idle:
 		Filename: DATA.R16

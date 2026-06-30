@@ -1,0 +1,24 @@
+World:
+	FactionCA@syndicate:
+		Name: Latin Syndicate
+		InternalName: syndicate
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction-ra2-syndicate.description
+	StartingUnits@mcvsyndicate:
+		Class: none
+		ClassName: MCV Only
+		Factions: syndicate
+		BaseActor: mcv.latin
+	StartingUnits@defaultsyndicate:
+		Class: light
+		ClassName: Light Support
+		Factions: syndicate
+		BaseActor: mcv.latin
+		SupportActors: mili.latin,mili.latin,mili.latin,fftr.latin,fftr.latin,wirbelwind.nax,tiger.nax
+	StartingUnits@heavysyndicate:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: syndicate
+		BaseActor: mcv.latin
+		SupportActors: mili.latin,mili.latin,mili.latin,fftr.latin,fftr.latin,wirbelwind.nax,tiger.nax,tiger.nax,tiger.nax,ptnk.asian,wirbelwind.nax

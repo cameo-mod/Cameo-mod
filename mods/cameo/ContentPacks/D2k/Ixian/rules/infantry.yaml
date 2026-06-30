@@ -148,3 +148,67 @@ storm_infantry.ixian:
 		PlayerPalette: player
 	ActorStatValues:
 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+
+heavy_inf.ixian:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@Armor: ^D2K_GeneralPurposeArmor
+	Inherits@NeedleGuns: ^D2K_NeedleGuns
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Rashidan
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~up_heavy_inf.ixian
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 32000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament@PRIMARY: ##########
+		Weapon: RashinanGun
+		LocalOffset: 128,0,256
+		RequiresCondition: !up_needleguns.ixian
+		MuzzlePalette: d2keffect
+	Armament@Upgrade: ##########
+		Weapon: RashinanGun_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: up_needleguns.ixian
+		MuzzlePalette: d2keffect
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: RashinanGun
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !up_needleguns.ixian
+		MuzzlePalette: d2keffect
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: RashinanGun_upgrade
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: up_needleguns.ixian
+		MuzzlePalette: d2keffect
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4,idle5,idle6,idle7,idle8
+		DefaultAttackSequence: shoot
+	TakeCover:
+		ProneOffset: 300,0,-200
+	Parachutable:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian

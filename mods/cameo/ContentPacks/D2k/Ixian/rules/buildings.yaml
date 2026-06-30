@@ -1004,11 +1004,11 @@ large_gun_turret.ixian:
 # 		DisplayTimerRelationships: Ally, Neutral, Enemy
 # 		CameraActor: camera
 # 		CameraRemoveDelay: 100
-# 	ProduceActorPower@saboteur:
+# 	ProduceActorPower@saboteur.ordos:
 # 		Prerequisites:
 # 			1: ~techlevel.superweapons
 # 		Icons:
-# 			1: saboteur
+# 			1: saboteur.ordos
 # 		Names:
 # 			1: Recruit Saboteur
 # 		Descriptions:
@@ -1019,7 +1019,7 @@ large_gun_turret.ixian:
 # 		IconPalette: d2kunit
 # 		PauseOnCondition: disabled
 # 		AutoFire: true
-# 		Actors: saboteur
+# 		Actors: saboteur.ordos
 # 		Type: Saboteur
 # 		ChargeInterval: 2250
 # 		OrderName: callsaboteur

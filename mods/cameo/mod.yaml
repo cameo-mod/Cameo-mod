@@ -107,6 +107,14 @@ Include: ContentPacks/D2k/Ordos/content.yaml
 Include: ContentPacks/D2k/Atreides/content.yaml
 Include: ContentPacks/D2k/Harkonnen/content.yaml
 
+Include: ContentPacks/RedAlert2Mod/Shared/content.yaml
+Include: ContentPacks/RedAlert2Mod/AsianAlliance/content.yaml
+Include: ContentPacks/RedAlert2Mod/Syndicate/content.yaml
+Include: ContentPacks/RedAlert2Mod/Consortium/content.yaml
+Include: ContentPacks/RedAlert2Mod/Naxis/content.yaml
+Include: ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml
+Include: ContentPacks/RedAlert2Mod/FutureTech/content.yaml
+
 Rules:
 	cameo|rules/misc.yaml
 	cameo|rules/player.yaml
@@ -126,7 +134,8 @@ Rules:
 	cameo|rules/redalert.yaml
 	cameo|rules/tiberiansun.yaml
 	cameo|rules/redalert2.yaml
-	cameo|rules/redalert2mod.yaml
+	# redalert2mod.yaml migrated to ContentPacks/RedAlert2Mod/* (Included above).
+	# File kept on disk as dormant reference; not loaded here to avoid duplicate keys.
 	# d2k.yaml migrated to ContentPacks/D2k/* (Included above). File kept on disk
 	# for the commented planned factions (Atreides/Harkonnen/Corrino) reference.
 	cameo|rules/starcraft.yaml
