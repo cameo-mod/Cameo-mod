@@ -1,4 +1,4 @@
-﻿World:
+World:
 	FactionCA@terran:
 		Name: Terran SC
 		InternalName: terran
@@ -1075,7 +1075,7 @@ SCSENTINEL:
 		LocalOffset: 600,0,600
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upnax2_ylaser
+		RequiresCondition: !up_ylaser.nax2
 	ProvidesPrerequisite@buildingname:
 	Transforms:
 		IntoActor: scsentinelm
