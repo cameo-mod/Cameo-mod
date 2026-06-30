@@ -458,6 +458,7 @@ artillery_platform.ordos:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@EMP: ^TurretEMP
@@ -528,6 +529,7 @@ autogun_turret.ordos:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@detect: ^GenericAllDetector
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EMP: ^TurretEMP

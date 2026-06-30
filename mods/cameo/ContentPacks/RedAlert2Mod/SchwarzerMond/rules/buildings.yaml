@@ -244,6 +244,7 @@ twr.nax2:
 sturmcann.nax2:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^NaxisSpawnActorsOnSell

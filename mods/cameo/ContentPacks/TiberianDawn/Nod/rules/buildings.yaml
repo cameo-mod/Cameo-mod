@@ -485,6 +485,7 @@ td_nod_templeprime:
 GUN:
 	Inherits: ^TDDefense
 	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@exp: ^GainsExperienceTDBuilding
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@AntiTank: ^PrioritizeVehicle

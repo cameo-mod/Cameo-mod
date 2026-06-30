@@ -525,6 +525,7 @@ machine_gun_turret.ixian:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EMP: ^TurretEMP
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -596,6 +597,7 @@ medium_gun_turret.ixian:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@EMP: ^TurretEMP
 	Inherits@D2KSprite: ^D2KPaletteRender

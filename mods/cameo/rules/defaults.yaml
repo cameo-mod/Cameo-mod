@@ -2209,6 +2209,16 @@
 		Payload: 300
 		Type: GrinderCash
 		Sounds: bgrinda.wav
+	Inherits@muzzleglow: ^MuzzleGlowCannon
+
+# Shared muzzle-glow tuning for cannon/gun units — inherited by ^Tank and by cannon defence
+# turrets so both use identical values. Geometry/fades fall back to the trait defaults;
+# tune the muzzle-flash brightness here in one place.
+^MuzzleGlowCannon:
+	WithMuzzleGlow:
+		Intensity: 1.6
+		CoreIntensity: 2.2
+		FlashBrightness: 1.1
 
 ^Walker:
 	Inherits: ^Vehicle
@@ -5674,7 +5684,8 @@
 		Condition: CommandoDebuff
 	WithColoredOverlay@COMMANDODEBUFF:
 		RequiresCondition: CommandoDebuff
-		Color: 0088FF88
+		Color: 0088FF40
+		Multiply: true
 	DamageMultiplier@COMMANDODEBUFF:
 		Modifier: 150
 		RequiresCondition: CommandoDebuff
