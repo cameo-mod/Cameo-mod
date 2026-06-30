@@ -219,7 +219,7 @@ stalker.steel:
 		Name: Stalker
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~qatech.steel
+		Prerequisites: ~up_stalker.steel, ~qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:
@@ -299,7 +299,7 @@ white_rabbit.steel:
 		Name: White Rabbit
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~qatech.steel
+		Prerequisites: ~up_white_rabbit.steel, ~qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:
@@ -1486,7 +1486,7 @@ beholder.steel:
 		Name: Beholder
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~up_beholder.steel, qatech.steel
+		Prerequisites: qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:

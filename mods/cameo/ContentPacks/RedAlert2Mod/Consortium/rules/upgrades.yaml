@@ -103,17 +103,17 @@ up_katy.steel:
 		Image: katy.steel
 	ProvidesPrerequisite:
 
-up_bfg10k.steel:
+up_white_rabbit.steel:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock BFG 10000
+		Name: Unlock White Rabbit
 	Buildable:
 		BuildPaletteOrder: 119
 		Queue: Promotions
-		Description: Enables construction of the BFG 10000.
-		Prerequisites: ~qacst.steel, up_katy.steel, !up_bfg10k.steel, rank1
+		Description: Enables construction of the White Rabbit.
+		Prerequisites: ~qacst.steel, up_katy.steel, !up_white_rabbit.steel, rank1
 	RenderSprites:
-		Image: bfg10k.steel
+		Image: white_rabbit.steel
 	ProvidesPrerequisite:
 
 ### Unisoft tree
@@ -144,17 +144,17 @@ up_defender.steel:
 		Image: defender.steel
 	ProvidesPrerequisite:
 
-up_beholder.steel:
+up_stalker.steel:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Beholder
+		Name: Unlock Stalker
 	Buildable:
 		BuildPaletteOrder: 117
 		Queue: Promotions
-		Description: Enables construction of Beholders.
-		Prerequisites: ~qacst.steel, up_defender.steel, !up_beholder.steel, rank1
+		Description: Enables construction of Stalkers.
+		Prerequisites: ~qacst.steel, up_defender.steel, !up_stalker.steel, rank1
 	RenderSprites:
-		Image: beholder.steel
+		Image: stalker.steel
 	ProvidesPrerequisite:
 
 up_cruiser.steel:
@@ -165,7 +165,7 @@ up_cruiser.steel:
 		BuildPaletteOrder: 120
 		Queue: Promotions
 		Description: Enables construction of Cloud Breakers.
-		Prerequisites: ~qacst.steel, up_beholder.steel, !up_cruiser.steel, rank1
+		Prerequisites: ~qacst.steel, up_stalker.steel, !up_cruiser.steel, rank1
 	RenderSprites:
 		Image: cruiser.steel
 	ProvidesPrerequisite:
