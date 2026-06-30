@@ -34,21 +34,21 @@ SNIPER:
 	Armament@PRIMARY:
 		Weapon: LightSniper
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: LightSniper
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: CryoLightSniper
 		LocalOffset: 128,0,256
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: CryoLightSniper
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	Cloak:
@@ -59,7 +59,7 @@ SNIPER:
 		DeathSequencePalette: raplayer
 	-MustBeDestroyed:
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_gpssatellitesupport.allies
 
 E7:
 	Inherits: ^Soldier
@@ -127,7 +127,7 @@ E7:
 		VoiceSet: TanyaVoice
 	ProvidesPrerequisite:
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_lasertargetingsystems.allies, up_gpssatellitesupport.allies
 
 MEDI:
 	Inherits: ^Soldier
@@ -175,7 +175,7 @@ MEDI:
 		ValidTargets: Infantry
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_gpssatellitesupport.allies
 	GrantExternalConditionToTransport:
 		Condition: ifv-healer
 
@@ -240,7 +240,7 @@ MECH:
 	KeepsDistance:
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_gpssatellitesupport.allies
 
 RASPY:
 	Inherits: ^Soldier
@@ -296,7 +296,7 @@ RASPY:
 	Voiced:
 		VoiceSet: SpyVoice
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_gpssatellitesupport.allies
 	GrantExternalConditionToTransport:
 		Condition: ifv-spy
 
@@ -320,7 +320,7 @@ alliedmachinegunner:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: actor-e1.description
-		Prerequisites: ~upalliedmachinegunner
+		Prerequisites: ~up_alliedmachinegunner.allies
 	Mobile:
 		Speed: 50
 	Health:
@@ -352,7 +352,7 @@ alliedmachinegunner:
 	Selectable:
 		Class: rae1
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_lasertargetingsystems.allies, up_gpssatellitesupport.allies
 	GrantExternalConditionToTransport:
 		Condition: ifv-hmg
 

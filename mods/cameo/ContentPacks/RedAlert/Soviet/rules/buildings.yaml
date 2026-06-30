@@ -43,10 +43,10 @@ RAPROC.SOVIET:
 	Inherits@sell: ^RASovietSpawnActorsOnSell
 	GrantConditionOnPrerequisite@Normal:
 		Condition: normalharvester
-		Prerequisites: !ra_doctrine_industrialefficiency
+		Prerequisites: !up_doctrine_industrialefficiency.soviet
 	GrantConditionOnPrerequisite@Industrial:
 		Condition: industrialminer
-		Prerequisites: ra_doctrine_industrialefficiency
+		Prerequisites: up_doctrine_industrialefficiency.soviet
 	FreeActor@Normal:
 		Actor: RAHARV.SOVIET
 		SpawnOffset: 1,2
@@ -65,7 +65,7 @@ RAPROC.SOVIET:
 		Prerequisites: ~rafact.soviet, powr
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: ra_doctrine_industrialefficiency, ra_upgrade_wareconomy
+		Upgrades: up_doctrine_industrialefficiency.soviet, up_wareconomy.soviet
 
 RAWEAP:
 	Inherits: ^BaseBuilding
@@ -74,7 +74,7 @@ RAWEAP:
 	Inherits@weap: ^IsWeaponFactory
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~rafact.soviet, raproc.soviet, ~!ra_doctrine_industrialefficiency
+		Prerequisites: ~rafact.soviet, raproc.soviet, ~!up_doctrine_industrialefficiency.soviet
 		Description: template-factory.description
 	Tooltip:
 		Name: Soviet War Factory
@@ -101,7 +101,7 @@ ra_gigafactory:
 	Inherits: RAWEAP
 	Inherits@shape: ^4x3Shape
 	Buildable:
-		Prerequisites: ~rafact.soviet, raproc.soviet, ~ra_doctrine_industrialefficiency
+		Prerequisites: ~rafact.soviet, raproc.soviet, ~up_doctrine_industrialefficiency.soviet
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Description: template-factory.description
@@ -161,7 +161,7 @@ RAAFLD:
 	Inherits@spy: ^InfiltrateForSupportPowerReset
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
-		Prerequisites: ~rafact.soviet, dome.soviet, ~!ra_doctrine_industrialefficiency
+		Prerequisites: ~rafact.soviet, dome.soviet, ~!up_doctrine_industrialefficiency.soviet
 		Description: actor-raafld.description
 	Tooltip:
 		Name: Soviet Airfield
@@ -176,7 +176,7 @@ RAAFLD:
 		OrderName: SovietSpyPlane
 		Prerequisites:
 			1:
-			2: ra_promotion_superspyplane
+			2: up_promotion_superspyplane.soviet
 		Icons:
 			1: spyplane
 			2: spyplane
@@ -209,24 +209,24 @@ RAAFLD:
 		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 60
-	GrantConditionOnPrerequisite@ra_upgrade_afterburners:
-		Condition: ra_upgrade_afterburners
-		Prerequisites: ra_upgrade_afterburners
-	GrantConditionOnPrerequisite@ra_promotion_parabombs2:
-		Condition: ra_promotion_parabombs2
-		Prerequisites: ra_promotion_parabombs2
-	GrantConditionOnPrerequisite@ra_promotion_parabombs3:
-		Condition: ra_promotion_parabombs3
-		Prerequisites: ra_promotion_parabombs3
+	GrantConditionOnPrerequisite@up_afterburners.soviet:
+		Condition: up_afterburners.soviet
+		Prerequisites: up_afterburners.soviet
+	GrantConditionOnPrerequisite@up_promotion_parabombs2.soviet:
+		Condition: up_promotion_parabombs2.soviet
+		Prerequisites: up_promotion_parabombs2.soviet
+	GrantConditionOnPrerequisite@up_promotion_parabombs3.soviet:
+		Condition: up_promotion_parabombs3.soviet
+		Prerequisites: up_promotion_parabombs3.soviet
 	ProvidesPrerequisite@parabombs1:
 		Prerequisite: parabombs1
-		RequiresCondition: ra_upgrade_afterburners || ra_promotion_parabombs2
+		RequiresCondition: up_afterburners.soviet || up_promotion_parabombs2.soviet
 	ProvidesPrerequisite@parabombs2:
 		Prerequisite: parabombs2
-		RequiresCondition: (ra_upgrade_afterburners && ra_promotion_parabombs2) || (!ra_upgrade_afterburners && ra_promotion_parabombs3)
+		RequiresCondition: (up_afterburners.soviet && up_promotion_parabombs2.soviet) || (!up_afterburners.soviet && up_promotion_parabombs3.soviet)
 	ProvidesPrerequisite@parabombs3:
 		Prerequisite: parabombs3
-		RequiresCondition: ra_upgrade_afterburners && ra_promotion_parabombs3
+		RequiresCondition: up_afterburners.soviet && up_promotion_parabombs3.soviet
 	AirstrikePower@parabombs:
 		OrderName: Parabombs
 		ChargeInterval: 7500
@@ -275,37 +275,37 @@ RAAFLD:
 		OrderName: SovietParatroopers
 		ChargeInterval: 9000
 		Prerequisites:
-			1: ra_upgrade_afterburners
-			2: ra_upgrade_afterburners, ra_doctrine_conscription
-			3: ra_upgrade_afterburners, ra_doctrine_industrialefficiency
-			4: ra_upgrade_afterburners, ra_doctrine_inferno
-			5: ra_upgrade_afterburners, ra_doctrine_conscription, ra_doctrine_teslatech
-			6: ra_upgrade_afterburners, ra_doctrine_conscription, ra_doctrine_heavyarmor
-			7: ra_upgrade_afterburners, ra_doctrine_conscription, ra_doctrine_nuclearwar
-			8: ra_upgrade_afterburners, ra_doctrine_industrialefficiency, ra_doctrine_teslatech
-			9: ra_upgrade_afterburners, ra_doctrine_industrialefficiency, ra_doctrine_heavyarmor
-			10: ra_upgrade_afterburners, ra_doctrine_industrialefficiency, ra_doctrine_nuclearwar
-			11: ra_upgrade_afterburners, ra_doctrine_inferno, ra_doctrine_teslatech
-			12: ra_upgrade_afterburners, ra_doctrine_inferno, ra_doctrine_heavyarmor
-			13: ra_upgrade_afterburners, ra_doctrine_inferno, ra_doctrine_nuclearwar
-			14: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_conscription, ra_doctrine_teslatech
-			15: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_conscription, ra_doctrine_heavyarmor
-			16: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_conscription, ra_doctrine_nuclearwar
-			17: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_industrialefficiency, ra_doctrine_teslatech
-			18: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_industrialefficiency, ra_doctrine_heavyarmor
-			19: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_industrialefficiency, ra_doctrine_nuclearwar
-			20: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_inferno, ra_doctrine_teslatech
-			21: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_inferno, ra_doctrine_heavyarmor
-			22: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_inferno, ra_doctrine_nuclearwar
-			23: ra_upgrade_afterburners, upcyberdog, ra_doctrine_conscription, ra_doctrine_teslatech
-			24: ra_upgrade_afterburners, upcyberdog, ra_doctrine_conscription, ra_doctrine_heavyarmor
-			25: ra_upgrade_afterburners, upcyberdog, ra_doctrine_conscription, ra_doctrine_nuclearwar
-			26: ra_upgrade_afterburners, upcyberdog, ra_doctrine_industrialefficiency, ra_doctrine_teslatech
-			27: ra_upgrade_afterburners, upcyberdog, ra_doctrine_industrialefficiency, ra_doctrine_heavyarmor
-			28: ra_upgrade_afterburners, upcyberdog, ra_doctrine_industrialefficiency, ra_doctrine_nuclearwar
-			29: ra_upgrade_afterburners, upcyberdog, ra_doctrine_inferno, ra_doctrine_teslatech
-			30: ra_upgrade_afterburners, upcyberdog, ra_doctrine_inferno, ra_doctrine_heavyarmor
-			31: ra_upgrade_afterburners, upcyberdog, ra_doctrine_inferno, ra_doctrine_nuclearwar
+			1: up_afterburners.soviet
+			2: up_afterburners.soviet, up_doctrine_conscription.soviet
+			3: up_afterburners.soviet, up_doctrine_industrialefficiency.soviet
+			4: up_afterburners.soviet, up_doctrine_inferno.soviet
+			5: up_afterburners.soviet, up_doctrine_conscription.soviet, up_doctrine_teslatech.soviet
+			6: up_afterburners.soviet, up_doctrine_conscription.soviet, up_doctrine_heavyarmor.soviet
+			7: up_afterburners.soviet, up_doctrine_conscription.soviet, up_doctrine_nuclearwar.soviet
+			8: up_afterburners.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_teslatech.soviet
+			9: up_afterburners.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_heavyarmor.soviet
+			10: up_afterburners.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_nuclearwar.soviet
+			11: up_afterburners.soviet, up_doctrine_inferno.soviet, up_doctrine_teslatech.soviet
+			12: up_afterburners.soviet, up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet
+			13: up_afterburners.soviet, up_doctrine_inferno.soviet, up_doctrine_nuclearwar.soviet
+			14: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_conscription.soviet, up_doctrine_teslatech.soviet
+			15: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_conscription.soviet, up_doctrine_heavyarmor.soviet
+			16: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_conscription.soviet, up_doctrine_nuclearwar.soviet
+			17: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_teslatech.soviet
+			18: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_heavyarmor.soviet
+			19: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_nuclearwar.soviet
+			20: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_inferno.soviet, up_doctrine_teslatech.soviet
+			21: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet
+			22: up_afterburners.soviet, up_mortarsoldier.soviet, up_doctrine_inferno.soviet, up_doctrine_nuclearwar.soviet
+			23: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_conscription.soviet, up_doctrine_teslatech.soviet
+			24: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_conscription.soviet, up_doctrine_heavyarmor.soviet
+			25: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_conscription.soviet, up_doctrine_nuclearwar.soviet
+			26: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_teslatech.soviet
+			27: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_heavyarmor.soviet
+			28: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_industrialefficiency.soviet, up_doctrine_nuclearwar.soviet
+			29: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_inferno.soviet, up_doctrine_teslatech.soviet
+			30: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet
+			31: up_afterburners.soviet, up_cyberdog.soviet, up_doctrine_inferno.soviet, up_doctrine_nuclearwar.soviet
 		Icons:
 			1: paratroopers
 			2: paratroopers
@@ -567,7 +567,7 @@ ra_largeairfield:
 		# Reveal from the building center instead, like the Soviet War Factory.
 		Type: CenterPosition
 	Buildable:
-		Prerequisites: ~rafact.soviet, dome.soviet, ~ra_doctrine_industrialefficiency
+		Prerequisites: ~rafact.soviet, dome.soviet, ~up_doctrine_industrialefficiency.soviet
 		BuildDuration: 625
 		BuildDurationModifier: 100
 		Description: actor-raafld.description
@@ -807,11 +807,11 @@ FTUR:
 	Armament:
 		Weapon: FireballLauncher
 		LocalOffset: 512,0,0
-		RequiresCondition: !ra_doctrine_inferno
+		RequiresCondition: !up_doctrine_inferno.soviet
 	Armament@Upgrade:
 		Weapon: FireballLauncherThermobaric
 		LocalOffset: 512,0,0
-		RequiresCondition: ra_doctrine_inferno
+		RequiresCondition: up_doctrine_inferno.soviet
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	-QuantizeFacingsFromSequence:
@@ -820,10 +820,10 @@ FTUR:
 	ProvidesPrerequisite@buildingname:
 	FireWarheadsOnDeath:
 		Weapon: FireballLauncher
-		RequiresCondition: !ra_doctrine_inferno
+		RequiresCondition: !up_doctrine_inferno.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: FireballLauncherThermobaric
-		RequiresCondition: ra_doctrine_inferno
+		RequiresCondition: up_doctrine_inferno.soviet
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:
@@ -833,7 +833,7 @@ FTUR:
 	RevealsShroud:
 		Range: 6742
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_stalinium
+		Upgrades: up_doctrine_inferno.soviet, up_scorchedearth.soviet, up_stalinium.soviet
 
 TSLA:
 	Inherits: ^Defense
@@ -868,17 +868,17 @@ TSLA:
 	Armament:
 		Weapon: TeslaZap
 		LocalOffset: 0,0,896
-		RequiresCondition: !ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: !up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade1:
 		Weapon: TeslaZapEMP
 		LocalOffset: 0,0,896
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade2:
 		Weapon: TeslaZapEMPArc
 		LocalOffset: 0,0,896
-		RequiresCondition: ra_upgrade_teslaarcing
-	FirepowerMultiplier@ra_upgrade_reactoroverload:
-		RequiresCondition: ra_upgrade_reactoroverload
+		RequiresCondition: up_teslaarcing.soviet
+	FirepowerMultiplier@up_reactoroverload.soviet:
+		RequiresCondition: up_reactoroverload.soviet
 		Modifier: 200
 	AttackTesla:
 		RequiresCondition: !build-incomplete
@@ -898,7 +898,7 @@ TSLA:
 	DetectCloaked:
 		Range: 4659
 	ActorStatValues:
-		Upgrades: ra_doctrine_teslatech, ra_upgrade_teslaarcing, ra_upgrade_reactoroverload, ra_upgrade_stalinium
+		Upgrades: up_doctrine_teslatech.soviet, up_teslaarcing.soviet, up_reactoroverload.soviet, up_stalinium.soviet
 
 RASAM:
 	Inherits: ^Defense
@@ -956,12 +956,12 @@ RASAM:
 		Range: 12790
 	DetectCloaked:
 		Range: 6395
-	FirepowerMultiplier@ra_upgrade_highexplosiverockets:
+	FirepowerMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 110
-	RangeMultiplier@ra_upgrade_highexplosiverockets:
+	RangeMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 110
-	RevealsShroudMultiplier@ra_upgrade_highexplosiverockets:
+	RevealsShroudMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: ra_upgrade_highexplosiverockets, ra_upgrade_stalinium
+		Upgrades: up_highexplosiverockets.soviet, up_stalinium.soviet
 

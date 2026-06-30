@@ -1,4 +1,4 @@
-up_advancedradarsystems:
+up_advancedradarsystems.allies:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Advanced Radar Systems
@@ -8,12 +8,12 @@ up_advancedradarsystems:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-advancedradarsystems.description
-		Prerequisites: ~dome.allies, !up_advancedradarsystems
+		Prerequisites: ~dome.allies, !up_advancedradarsystems.allies
 	RenderSprites:
 		Image: advancedradarsystemicon
 	ProvidesPrerequisite:
 
-up_infantryarmorplating:
+up_infantryarmorplating.allies:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Infantry Armor Plating
@@ -23,12 +23,12 @@ up_infantryarmorplating:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-infantryarmorplating.description
-		Prerequisites: ~dome.allies, !up_infantryarmorplating
+		Prerequisites: ~dome.allies, !up_infantryarmorplating.allies
 	RenderSprites:
 		Image: infantryarmorplatingicon
 	ProvidesPrerequisite:
 
-up_reinforcedstructures:
+up_reinforcedstructures.allies:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Reinforced Structures
@@ -38,12 +38,12 @@ up_reinforcedstructures:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-reinforcedstructures.description
-		Prerequisites: ~dome.allies, !up_reinforcedstructures
+		Prerequisites: ~dome.allies, !up_reinforcedstructures.allies
 	RenderSprites:
 		Image: reinforcedstructuresicon
 	ProvidesPrerequisite:
 
-up_airsuperioritydoctrine:
+up_airsuperioritydoctrine.allies:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Air Superiority Doctrine
@@ -53,12 +53,12 @@ up_airsuperioritydoctrine:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-airsuperioritydoctrine.description
-		Prerequisites: ~atek, !up_airsuperioritydoctrine
+		Prerequisites: ~atek, !up_airsuperioritydoctrine.allies
 	RenderSprites:
 		Image: airsuperiorityicon
 	ProvidesPrerequisite:
 
-up_lasertargetingsystems:
+up_lasertargetingsystems.allies:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Laser Targeting Systems
@@ -68,12 +68,12 @@ up_lasertargetingsystems:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-lasertargetingsystems.description
-		Prerequisites: ~atek, !up_lasertargetingsystems
+		Prerequisites: ~atek, !up_lasertargetingsystems.allies
 	RenderSprites:
 		Image: lasertargetingsystemicon
 	ProvidesPrerequisite:
 
-up_chronoarmor:
+up_chronoarmor.allies:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Chrono Armor
@@ -83,12 +83,12 @@ up_chronoarmor:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-chronoarmor.description
-		Prerequisites: ~atek, !up_chronoarmor
+		Prerequisites: ~atek, !up_chronoarmor.allies
 	RenderSprites:
 		Image: chronoarmoricon
 	ProvidesPrerequisite:
 
-up_cryomissiles:
+up_cryomissiles.allies:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cryo Missiles
@@ -98,12 +98,12 @@ up_cryomissiles:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-cryomissiles.description
-		Prerequisites: ~atek, !up_cryomissiles
+		Prerequisites: ~atek, !up_cryomissiles.allies
 	RenderSprites:
 		Image: cryomissilesicon
 	ProvidesPrerequisite:
 
-up_gpssatellitesupport:
+up_gpssatellitesupport.allies:
 	Inherits: ^upgrade.template
 	Tooltip:
 		Name: GPS Satellite Support
@@ -113,17 +113,17 @@ up_gpssatellitesupport:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-gpssatellitesupport.description
-		Prerequisites: ~atek, up_advancedradarsystems, !up_gpssatellitesupport
+		Prerequisites: ~atek, up_advancedradarsystems.allies, !up_gpssatellitesupport.allies
 	RenderSprites:
 		Image: gpssatellitesupporticon
 	#ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
-		Actor: team_upgrade.up_gpssatellitesupport
+		Actor: up_team_gpssatellitesupport.allies
 
-team_upgrade.up_gpssatellitesupport:
+up_team_gpssatellitesupport.allies:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_gpssatellitesupport
+		Prerequisite: up_gpssatellitesupport.allies
 	RenderSprites:
 		Image: gpssatellitesupporticon
 	Tooltip:
@@ -136,7 +136,7 @@ team_upgrade.up_gpssatellitesupport:
 	#		Promotions Allies
 	####################################################################################################
 
-upalliedmachinegunner:
+up_alliedmachinegunner.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Machine Gunner
@@ -144,13 +144,13 @@ upalliedmachinegunner:
 		BuildPaletteOrder: 25
 		Queue: Promotions
 		Description: Allows training of Machine Gunners.
-		Prerequisites: ~rafact.allies, !upalliedmachinegunner, rank1
+		Prerequisites: ~rafact.allies, !up_alliedmachinegunner.allies, rank1
 	RenderSprites:
 		Image: alliedmachinegunner
 	ProvidesPrerequisite:
-		Prerequisite: upalliedmachinegunner
+		Prerequisite: up_alliedmachinegunner.allies
 
-upsheridan:
+up_sheridan.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Sheridan
@@ -158,13 +158,13 @@ upsheridan:
 		BuildPaletteOrder: 28
 		Queue: Promotions
 		Description: Allows construction of the Sheridan Light Tank.
-		Prerequisites: ~rafact.allies, !upsheridan, upalliedmachinegunner, rank1
+		Prerequisites: ~rafact.allies, !up_sheridan.allies, up_alliedmachinegunner.allies, rank1
 	RenderSprites:
 		Image: sheridan
 	ProvidesPrerequisite:
-		Prerequisite: upsheridan
+		Prerequisite: up_sheridan.allies
 
-uprapierjumpjet:
+up_rapierjumpjet.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Rapier Jumpjet
@@ -172,13 +172,13 @@ uprapierjumpjet:
 		BuildPaletteOrder: 31
 		Queue: Promotions
 		Description: Allows construction of the Rapier Jumpjet.
-		Prerequisites: ~rafact.allies, !uprapierjumpjet, upsheridan, rank1
+		Prerequisites: ~rafact.allies, !up_rapierjumpjet.allies, up_sheridan.allies, rank1
 	RenderSprites:
 		Image: rapierjumpjet
 	ProvidesPrerequisite:
-		Prerequisite: uprapierjumpjet
+		Prerequisite: up_rapierjumpjet.allies
 
-upmodspaceport:
+up_modspaceport.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Reinforcement Pad
@@ -186,13 +186,13 @@ upmodspaceport:
 		BuildPaletteOrder: 34
 		Queue: Promotions
 		Description: Allows construction of the Reinforcement Pad.
-		Prerequisites: ~rafact.allies, !upmodspaceport, uprapierjumpjet, rank1
+		Prerequisites: ~rafact.allies, !up_modspaceport.allies, up_rapierjumpjet.allies, rank1
 	RenderSprites:
 		Image: modspaceport
 	ProvidesPrerequisite:
-		Prerequisite: upmodspaceport
+		Prerequisite: up_modspaceport.allies
 
-upreconranger:
+up_reconranger.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Recon Ranger.
@@ -200,13 +200,13 @@ upreconranger:
 		BuildPaletteOrder: 26
 		Queue: Promotions
 		Description: Allows construction of the Recon Ranger.
-		Prerequisites: ~rafact.allies, !upreconranger, rank1
+		Prerequisites: ~rafact.allies, !up_reconranger.allies, rank1
 	RenderSprites:
 		Image: reconranger
 	ProvidesPrerequisite:
-		Prerequisite: upreconranger
+		Prerequisite: up_reconranger.allies
 
-upalliedtiger:
+up_alliedtiger.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Tiger Heavy Tank
@@ -214,13 +214,13 @@ upalliedtiger:
 		BuildPaletteOrder: 29
 		Queue: Promotions
 		Description: Allows construction of the Tiger Heavy Tank.
-		Prerequisites: ~rafact.allies, !upalliedtiger, upreconranger, rank1
+		Prerequisites: ~rafact.allies, !up_alliedtiger.allies, up_reconranger.allies, rank1
 	RenderSprites:
 		Image: alliedtiger
 	ProvidesPrerequisite:
-		Prerequisite: upalliedtiger
+		Prerequisite: up_alliedtiger.allies
 
-upalliedtankdestroyer:
+up_alliedtankdestroyer.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Tank Destroyer
@@ -228,13 +228,13 @@ upalliedtankdestroyer:
 		BuildPaletteOrder: 32
 		Queue: Promotions
 		Description: Allows construction of the Tank Destroyer.
-		Prerequisites: ~rafact.allies, !upalliedtankdestroyer, upalliedtiger, rank1
+		Prerequisites: ~rafact.allies, !up_alliedtankdestroyer.allies, up_alliedtiger.allies, rank1
 	RenderSprites:
 		Image: modtnkd2
 	ProvidesPrerequisite:
-		Prerequisite: upalliedtankdestroyer
+		Prerequisite: up_alliedtankdestroyer.allies
 
-upctnk:
+up_ctnk.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Chrono Tank
@@ -242,13 +242,13 @@ upctnk:
 		BuildPaletteOrder: 35
 		Queue: Promotions
 		Description: Allows construction of the Chrono Tank.
-		Prerequisites: ~rafact.allies, !upctnk, upalliedtankdestroyer, rank1
+		Prerequisites: ~rafact.allies, !up_ctnk.allies, up_alliedtankdestroyer.allies, rank1
 	RenderSprites:
 		Image: ctnk
 	ProvidesPrerequisite:
-		Prerequisite: upctnk
+		Prerequisite: up_ctnk.allies
 
-uphbox:
+up_hbox.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Camo Pillbox
@@ -256,13 +256,13 @@ uphbox:
 		BuildPaletteOrder: 27
 		Queue: Promotions
 		Description: Allows construction of the Camo Pillbox.
-		Prerequisites: ~rafact.allies, !uphbox, rank1
+		Prerequisites: ~rafact.allies, !up_hbox.allies, rank1
 	RenderSprites:
 		Image: hbox
 	ProvidesPrerequisite:
-		Prerequisite: uphbox
+		Prerequisite: up_hbox.allies
 
-upphasetransport:
+up_phasetransport.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Phase Transport
@@ -270,13 +270,13 @@ upphasetransport:
 		BuildPaletteOrder: 30
 		Queue: Promotions
 		Description: Allows construction of Phase Transports.
-		Prerequisites: ~rafact.allies, !upphasetransport, uphbox, rank1
+		Prerequisites: ~rafact.allies, !up_phasetransport.allies, up_hbox.allies, rank1
 	RenderSprites:
 		Image: sapc
 	ProvidesPrerequisite:
-		Prerequisite: upphasetransport
+		Prerequisite: up_phasetransport.allies
 
-upbastion:
+up_bastion.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Bastion
@@ -284,13 +284,13 @@ upbastion:
 		BuildPaletteOrder: 33
 		Queue: Promotions
 		Description: Allows construction of Bastion Artillery Bunkers.
-		Prerequisites: ~rafact.allies, !upbastion, upphasetransport, rank1
+		Prerequisites: ~rafact.allies, !up_bastion.allies, up_phasetransport.allies, rank1
 	RenderSprites:
 		Image: modartyturret
 	ProvidesPrerequisite:
-		Prerequisite: upbastion
+		Prerequisite: up_bastion.allies
 
-upgapgeneratorradarjammer:
+up_gapgeneratorradarjammer.allies:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Gap Generator and Radar Jammer
@@ -298,11 +298,11 @@ upgapgeneratorradarjammer:
 		BuildPaletteOrder: 36
 		Queue: Promotions
 		Description: Allows construction of the Gap Generator and Mobile Radar Jammer.
-		Prerequisites: ~rafact.allies, !upgapgeneratorradarjammer, upbastion, rank1
+		Prerequisites: ~rafact.allies, !up_gapgeneratorradarjammer.allies, up_bastion.allies, rank1
 	RenderSprites:
 		Image: gapgeneratorradarjammer
 	ProvidesPrerequisite:
-		Prerequisite: upgapgeneratorradarjammer
+		Prerequisite: up_gapgeneratorradarjammer.allies
 
 	####################################################################################################
 	#		Promotion Units Allies

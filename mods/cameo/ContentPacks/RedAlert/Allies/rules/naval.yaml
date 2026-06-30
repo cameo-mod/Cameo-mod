@@ -52,7 +52,7 @@ PT:
 		Image: pt
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 DD:
 	Inherits: ^BoatUnit
@@ -93,13 +93,13 @@ DD:
 		LocalOffset: 100,-100,0, 100,100,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: StingerCryo
 		LocalOffset: 100,-100,0, 100,100,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Armament@DC1:
 		Weapon: DepthCharge
 		LocalOffset: 100,-100,0, 100,100,0
@@ -128,7 +128,7 @@ DD:
 		Image: radd
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 CA:
 	Inherits: ^BoatUnit
@@ -200,5 +200,5 @@ CA:
 		Image: raca
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_chronoarmor.allies, up_lasertargetingsystems.allies, up_gpssatellitesupport.allies
 

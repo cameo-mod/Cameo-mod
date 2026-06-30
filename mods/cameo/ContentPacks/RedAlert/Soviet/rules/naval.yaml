@@ -34,11 +34,11 @@ SS:
 	Armament@PRIMARY:
 		Weapon: TorpTube
 		LocalOffset: 256,0,0
-		RequiresCondition: !ra_doctrine_inferno
+		RequiresCondition: !up_doctrine_inferno.soviet
 	Armament@Upgrade:
 		Weapon: TorpTubeThermobaric
 		LocalOffset: 256,0,0
-		RequiresCondition: ra_doctrine_inferno
+		RequiresCondition: up_doctrine_inferno.soviet
 	RenderRangeCircle:
 	Targetable:
 		TargetTypes: Ground, Water, Ship, Submarine
@@ -55,7 +55,7 @@ SS:
 		Image: rass
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_upgrade_unstableisotopes, ra_doctrine_inferno, ra_upgrade_stalinium
+		Upgrades: up_unstableisotopes.soviet, up_doctrine_inferno.soviet, up_stalinium.soviet
 
 MSUB:
 	Inherits: ^BoatUnit
@@ -114,12 +114,12 @@ MSUB:
 	RenderSprites:
 		Image: ramsub
 		#PlayerPalette: raplayer
-	FirepowerMultiplier@ra_upgrade_highexplosiverockets:
+	FirepowerMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 110
-	RangeMultiplier@ra_upgrade_highexplosiverockets:
+	RangeMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 110
-	RevealsShroudMultiplier@ra_upgrade_highexplosiverockets:
+	RevealsShroudMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: ra_upgrade_unstableisotopes, ra_upgrade_highexplosiverockets, ra_doctrine_inferno, ra_upgrade_stalinium
+		Upgrades: up_unstableisotopes.soviet, up_highexplosiverockets.soviet, up_doctrine_inferno.soviet, up_stalinium.soviet
 

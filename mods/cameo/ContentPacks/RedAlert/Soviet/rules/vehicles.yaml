@@ -16,7 +16,7 @@ v1truck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~dome.soviet, ~!ra_doctrine_heavyarmor
+		Prerequisites: ~dome.soviet, ~!up_doctrine_heavyarmor.soviet
 		Queue: Vehicle, RAVehicle
 		Description: actor-v1truck.description
 	Mobile:
@@ -38,12 +38,12 @@ v1truck:
 		Weapon: v1rockets
 		LocalOffset: -512,256,256, -512,128,256, -512,-128,256, -512,-256,256
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@Upgrade:
 		Weapon: v1rocketsThermobaric
 		LocalOffset: -512,256,256, -512,128,256, -512,-128,256, -512,-256,256
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -67,17 +67,17 @@ v1truck:
 		Sequence: turret0
 	FireWarheadsOnDeath:
 		Weapon: v1rockets
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: v1rocketsThermobaric
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	ReloadAmmoPool:
 		Delay: 25
 		Count: 1
 	Selectable:
 		DecorationBounds: 1280, 1280
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_scorchedearth
+		Upgrades: up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_unstableisotopes.soviet, up_scorchedearth.soviet
 
 ra_grad:
 	Inherits: ^Tank
@@ -95,7 +95,7 @@ ra_grad:
 		Name: Grad
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~stek, ~ra_doctrine_heavyarmor
+		Prerequisites: ~stek, ~up_doctrine_heavyarmor.soviet
 		Queue: Vehicle, RAVehicle
 		Description: actor-v2rl.description
 	Mobile:
@@ -116,21 +116,21 @@ ra_grad:
 		Weapon: GradRockets
 		LocalOffset: 400,300,50, 400,-75,0, 400,150,50, 400,-225,0, 400,225,50, 400,-150,0, 400,75,50, 400,-300,0
 		MuzzleSequence: muzzle
-		RequiresCondition: !(ra_upgrade_highexplosiverockets || ra_upgrade_scorchedearth)
+		RequiresCondition: !(up_highexplosiverockets.soviet || up_scorchedearth.soviet)
 	Armament@Upgrade:
 		Weapon: GradHeavyRockets
 		LocalOffset: 400,300,50, 400,-75,0, 400,150,50, 400,-225,0, 400,225,50, 400,-150,0, 400,75,50, 400,-300,0
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_highexplosiverockets || ra_upgrade_scorchedearth
+		RequiresCondition: up_highexplosiverockets.soviet || up_scorchedearth.soviet
 	AttackTurreted:
 	WithSpriteTurret:
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: GradRockets
-		RequiresCondition: !(ra_upgrade_highexplosiverockets || ra_upgrade_scorchedearth)
+		RequiresCondition: !(up_highexplosiverockets.soviet || up_scorchedearth.soviet)
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: GradHeavyRockets
-		RequiresCondition: ra_upgrade_highexplosiverockets || ra_upgrade_scorchedearth
+		RequiresCondition: up_highexplosiverockets.soviet || up_scorchedearth.soviet
 	RenderRangeCircle:
 	GrantConditionOnAttack:
 		Condition: firing
@@ -149,7 +149,7 @@ ra_grad:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_doctrine_heavyarmor, ra_upgrade_highexplosiverockets, ra_upgrade_scorchedearth, ra_upgrade_stalinium
+		Upgrades: up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet, up_highexplosiverockets.soviet, up_scorchedearth.soviet, up_stalinium.soviet
 
 V2RL:
 	Inherits: ^Vehicle
@@ -164,7 +164,7 @@ V2RL:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~stek, ~!ra_doctrine_nuclearwar
+		Prerequisites: ~stek, ~!up_doctrine_nuclearwar.soviet
 		Description: actor-v2rl.description
 	Valued:
 		Cost: 1600
@@ -188,19 +188,19 @@ V2RL:
 		ReloadingCondition: reloading
 		LocalOffset: -256,0,128
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_highexplosiverockets && !ra_upgrade_teslarockets
+		RequiresCondition: !up_highexplosiverockets.soviet && !up_teslarockets.soviet
 	Armament@HE:
 		Weapon: SCUDThermobaric
 		ReloadingCondition: reloading
 		LocalOffset: -256,0,128
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_highexplosiverockets
+		RequiresCondition: up_highexplosiverockets.soviet
 	Armament@Tesla:
 		Weapon: SCUDTesla
 		ReloadingCondition: reloading
 		LocalOffset: -256,0,128
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_teslarockets
+		RequiresCondition: up_teslarockets.soviet
 	WithFacingSpriteBody:
 		RequiresCondition: !reloading
 		Name: loaded
@@ -212,13 +212,13 @@ V2RL:
 	SelectionDecorations:
 	FireWarheadsOnDeath:
 		Weapon: SCUD
-		RequiresCondition: !ra_upgrade_highexplosiverockets && !ra_upgrade_teslarockets
+		RequiresCondition: !up_highexplosiverockets.soviet && !up_teslarockets.soviet
 	FireWarheadsOnDeath@HE:
 		Weapon: SCUDThermobaric
-		RequiresCondition: ra_upgrade_highexplosiverockets
+		RequiresCondition: up_highexplosiverockets.soviet
 	FireWarheadsOnDeath@Tesla:
 		Weapon: SCUDTesla
-		RequiresCondition: ra_upgrade_teslarockets
+		RequiresCondition: up_teslarockets.soviet
 	Selectable:
 		DecorationBounds: 1280, 1280
 	Voiced:
@@ -226,7 +226,7 @@ V2RL:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_doctrine_heavyarmor, ra_upgrade_teslarockets, ra_upgrade_highexplosiverockets, ra_upgrade_scorchedearth
+		Upgrades: up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet, up_teslarockets.soviet, up_highexplosiverockets.soviet, up_scorchedearth.soviet
 
 V2RLNUKE:
 	Inherits: ^Vehicle
@@ -241,7 +241,7 @@ V2RLNUKE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~stek, ~ra_doctrine_nuclearwar
+		Prerequisites: ~stek, ~up_doctrine_nuclearwar.soviet
 		Description: actor-v2rl.description
 	Valued:
 		Cost: 2300
@@ -265,13 +265,13 @@ V2RLNUKE:
 		ReloadingCondition: reloading
 		LocalOffset: -512,0,128
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_nuclearrockets
+		RequiresCondition: !up_nuclearrockets.soviet
 	Armament@Upgrade:
 		Weapon: SCUDNUKEThermobaric
 		ReloadingCondition: reloading
 		LocalOffset: -512,0,128
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearrockets
+		RequiresCondition: up_nuclearrockets.soviet
 	WithFacingSpriteBody:
 		RequiresCondition: !reloading
 		Name: loaded
@@ -285,10 +285,10 @@ V2RLNUKE:
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: SCUDNUKE
-		RequiresCondition: !ra_upgrade_nuclearrockets
+		RequiresCondition: !up_nuclearrockets.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: SCUDNUKEThermobaric
-		RequiresCondition: ra_upgrade_nuclearrockets
+		RequiresCondition: up_nuclearrockets.soviet
 	Selectable:
 		DecorationBounds: 1280, 1280
 	Voiced:
@@ -296,7 +296,7 @@ V2RLNUKE:
 	-DamagedByTintedCells@rad:
 	-DamagedByTintedCells@genrad:
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_doctrine_nuclearwar, ra_upgrade_nuclearrockets, ra_upgrade_unstableisotopes, ra_upgrade_scorchedearth
+		Upgrades: up_doctrine_inferno.soviet, up_doctrine_nuclearwar.soviet, up_nuclearrockets.soviet, up_unstableisotopes.soviet, up_scorchedearth.soviet
 
 3TNK:
 	Inherits: ^Tank
@@ -311,7 +311,7 @@ V2RLNUKE:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~raweap, ~!ra_upgrade_hammertank
+		Prerequisites: ~raweap, ~!up_hammertank.soviet
 		BuildPaletteOrder: 120
 		Description: actor-3tnk.description
 	Valued:
@@ -339,14 +339,14 @@ V2RLNUKE:
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_nuclearshells
+		RequiresCondition: !up_nuclearshells.soviet
 	Armament@Upgrade:
 		Weapon: 105mmThermobaric
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearshells
+		RequiresCondition: up_nuclearshells.soviet
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -362,7 +362,7 @@ V2RLNUKE:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_autoloaders, ra_upgrade_unstableisotopes, ra_upgrade_nuclearshells
+		Upgrades: up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_autoloaders.soviet, up_unstableisotopes.soviet, up_nuclearshells.soviet
 
 hammertank:
 	Inherits: ^Tank
@@ -380,7 +380,7 @@ hammertank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra_upgrade_hammertank, ~!ra_upgrade_heavyteslatank, ~!ra_upgrade_kotintank
+		Prerequisites: ~up_hammertank.soviet, ~!up_heavyteslatank.soviet, ~!up_kotintank.soviet
 		BuildPaletteOrder: 120
 		Description: actor-kotin.description
 	Valued:
@@ -408,24 +408,24 @@ hammertank:
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_nuclearshells
+		RequiresCondition: !up_nuclearshells.soviet
 	Armament@Upgrade:
 		Weapon: HammerTankCannonThermobaric
 		Recoil: 150
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,100, 1100,-100,100
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearshells
+		RequiresCondition: up_nuclearshells.soviet
 	Armament@shtora:
 		Weapon: ShtoraLaser
 		Recoil: 20
 		RecoilRecovery: 10
 		LocalOffset: 0,200,50
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_shtoradefensesystem
-	GrantConditionOnPrerequisite@ra_upgrade_shtoradefensesystem:
-		Condition: ra_upgrade_shtoradefensesystem
-		Prerequisites: ra_upgrade_shtoradefensesystem
+		RequiresCondition: up_shtoradefensesystem.soviet
+	GrantConditionOnPrerequisite@up_shtoradefensesystem.soviet:
+		Condition: up_shtoradefensesystem.soviet
+		Prerequisites: up_shtoradefensesystem.soviet
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -438,14 +438,14 @@ hammertank:
 		VoiceSet: RussianVehicleVoice
 	FireWarheadsOnDeath:
 		Weapon: HammerTankCannon
-		RequiresCondition: !ra_doctrine_inferno
+		RequiresCondition: !up_doctrine_inferno.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: HammerTankCannonThermobaric
-		RequiresCondition: ra_doctrine_inferno
+		RequiresCondition: up_doctrine_inferno.soviet
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_upgrade_shtoradefensesystem, ra_upgrade_autoloaders, ra_upgrade_unstableisotopes, ra_upgrade_nuclearshells, ra_upgrade_stalinium
+		Upgrades: up_shtoradefensesystem.soviet, up_autoloaders.soviet, up_unstableisotopes.soviet, up_nuclearshells.soviet, up_stalinium.soviet
 
 TTNK2:
 	Inherits: ^Tank
@@ -460,7 +460,7 @@ TTNK2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra_upgrade_heavyteslatank
+		Prerequisites: ~up_heavyteslatank.soviet
 		Description: actor-ttnk2.description
 	Valued:
 		Cost: 3500
@@ -490,13 +490,13 @@ TTNK2:
 		LocalOffset: 50,0,200
 		AmmoUsage: 8
 		PauseOnCondition: pdammo < 8
-		RequiresCondition: !ra_upgrade_teslaarcing
+		RequiresCondition: !up_teslaarcing.soviet
 	Armament@Arcing:
 		Weapon: TTankZap2EMPArc
 		LocalOffset: 50,0,200
 		AmmoUsage: 8
 		PauseOnCondition: pdammo < 8
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	WithIdleOverlay@SPINNER:
 		Sequence: spinner
 		Offset: -110,0,90
@@ -525,8 +525,8 @@ TTNK2:
 		RequiresSelection: true
 		FullSequence: pip-red
 		PipCount: 12
-	ReloadAmmoDelayMultiplier@ra_upgrade_teslaarcing:
-		RequiresCondition: ra_upgrade_teslaarcing
+	ReloadAmmoDelayMultiplier@up_teslaarcing.soviet:
+		RequiresCondition: up_teslaarcing.soviet
 		Modifier: 75
 	SelectionDecorations:
 	Selectable:
@@ -545,7 +545,7 @@ TTNK2:
 	ProducibleWithLevel:
 		Prerequisites: vehicles.upgraded
 	ActorStatValues:
-		Upgrades: ra_doctrine_teslatech, ra_upgrade_teslaarcing, ra_upgrade_stalinium
+		Upgrades: up_doctrine_teslatech.soviet, up_teslaarcing.soviet, up_stalinium.soviet
 
 Kotin:
 	Inherits: ^Tank
@@ -561,7 +561,7 @@ Kotin:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra_upgrade_kotintank
+		Prerequisites: ~up_kotintank.soviet
 		BuildPaletteOrder: 120
 		Description: actor-kotin.description
 	Valued:
@@ -589,14 +589,14 @@ Kotin:
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,200, 1100,-100,200
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_nuclearshells
+		RequiresCondition: !up_nuclearshells.soviet
 	Armament@Upgrade:
 		Weapon: KotinCannonThermobaric
 		Recoil: 150
 		RecoilRecovery: 25
 		LocalOffset: 1100,100,200, 1100,-100,200
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearshells
+		RequiresCondition: up_nuclearshells.soviet
 	-DamagedByTintedCells@rad:
 	-DamagedByTintedCells@genrad:
 	-DamagedByTintedCells@tib:
@@ -612,16 +612,16 @@ Kotin:
 		VoiceSet: RussianVehicleVoice
 	FireWarheadsOnDeath:
 		Weapon: KotinCannon
-		RequiresCondition: !ra_upgrade_nuclearshells
+		RequiresCondition: !up_nuclearshells.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: KotinCannonThermobaric
-		RequiresCondition: ra_upgrade_nuclearshells
-	SpeedMultiplier@ra_upgrade_unstableisotopes:
+		RequiresCondition: up_nuclearshells.soviet
+	SpeedMultiplier@up_unstableisotopes.soviet:
 		Modifier: 140
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_nuclearshells, ra_upgrade_stalinium
+		Upgrades: up_doctrine_nuclearwar.soviet, up_unstableisotopes.soviet, up_nuclearshells.soviet, up_stalinium.soviet
 
 4TNK:
 	Inherits: ^Tank
@@ -640,7 +640,7 @@ Kotin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~stek, ~!ra_doctrine_heavyarmor
+		Prerequisites: ~stek, ~!up_doctrine_heavyarmor.soviet
 		Description: actor-htnk.description
 	Valued:
 		Cost: 2000
@@ -670,28 +670,28 @@ Kotin:
 		Recoil: 175
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_nuclearshells && !ra_promotion_targetingcomputer
+		RequiresCondition: !up_nuclearshells.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@PRIMARYTargetingComputer:
 		Weapon: ra120mmTargetingComputer
 		LocalOffset: 900,180,340, 900,-180,340
 		Recoil: 175
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_nuclearshells && ra_promotion_targetingcomputer
+		RequiresCondition: !up_nuclearshells.soviet && up_promotion_targetingcomputer.soviet
 	Armament@Upgrade:
 		Weapon: ra120mmThermobaric
 		LocalOffset: 900,180,340, 900,-180,340
 		Recoil: 175
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearshells && !ra_promotion_targetingcomputer
+		RequiresCondition: up_nuclearshells.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@UpgradeTargetingComputer:
 		Weapon: ra120mmThermobaricTargetingComputer
 		LocalOffset: 900,180,340, 900,-180,340
 		Recoil: 175
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearshells && ra_promotion_targetingcomputer
+		RequiresCondition: up_nuclearshells.soviet && up_promotion_targetingcomputer.soviet
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: MammothTusk
@@ -700,7 +700,7 @@ Kotin:
 		Recoil: 50
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_teslarockets && !ra_upgrade_nuclearrockets && !ra_promotion_targetingcomputer
+		RequiresCondition: !up_teslarockets.soviet && !up_nuclearrockets.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@SECONDARYTargetingComputer:
 		Name: secondary
 		Weapon: MammothTuskTargetingComputer
@@ -709,7 +709,7 @@ Kotin:
 		Recoil: 50
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_teslarockets && !ra_upgrade_nuclearrockets && ra_promotion_targetingcomputer
+		RequiresCondition: !up_teslarockets.soviet && !up_nuclearrockets.soviet && up_promotion_targetingcomputer.soviet
 	Armament@TeslaSECONDARY:
 		Name: secondary
 		Weapon: MammothTuskTesla
@@ -718,7 +718,7 @@ Kotin:
 		Recoil: 50
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_teslarockets && !ra_promotion_targetingcomputer
+		RequiresCondition: up_teslarockets.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@TeslaSECONDARYTargetingComputer:
 		Name: secondary
 		Weapon: MammothTuskTeslaTargetingComputer
@@ -727,7 +727,7 @@ Kotin:
 		Recoil: 50
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_teslarockets && ra_promotion_targetingcomputer
+		RequiresCondition: up_teslarockets.soviet && up_promotion_targetingcomputer.soviet
 	Armament@NukeSECONDARY:
 		Name: secondary
 		Weapon: MammothTuskThermobaric
@@ -736,7 +736,7 @@ Kotin:
 		Recoil: 50
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearrockets && !ra_promotion_targetingcomputer
+		RequiresCondition: up_nuclearrockets.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@NukeSECONDARYTargetingComputer:
 		Name: secondary
 		Weapon: MammothTuskThermobaricTargetingComputer
@@ -745,10 +745,10 @@ Kotin:
 		Recoil: 50
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_nuclearrockets && ra_promotion_targetingcomputer
-	GrantConditionOnPrerequisite@ra_promotion_targetingcomputer:
-		Condition: ra_promotion_targetingcomputer
-		Prerequisites: ra_promotion_targetingcomputer
+		RequiresCondition: up_nuclearrockets.soviet && up_promotion_targetingcomputer.soviet
+	GrantConditionOnPrerequisite@up_promotion_targetingcomputer.soviet:
+		Condition: up_promotion_targetingcomputer.soviet
+		Prerequisites: up_promotion_targetingcomputer.soviet
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -764,7 +764,7 @@ Kotin:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_promotion_targetingcomputer, ra_upgrade_teslarockets, ra_upgrade_nuclearrockets, ra_upgrade_unstableisotopes, ra_upgrade_nuclearshells
+		Upgrades: up_promotion_targetingcomputer.soviet, up_teslarockets.soviet, up_nuclearrockets.soviet, up_unstableisotopes.soviet, up_nuclearshells.soviet
 
 5TNK:
 	Inherits: ^Tank
@@ -780,7 +780,7 @@ Kotin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~stek, ~ra_doctrine_heavyarmor
+		Prerequisites: ~stek, ~up_doctrine_heavyarmor.soviet
 		Description: actor-htnk.description
 	Valued:
 		Cost: 4000
@@ -812,7 +812,7 @@ Kotin:
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: !ra_upgrade_nuclearshells && !ra_promotion_targetingcomputer
+		RequiresCondition: !up_nuclearshells.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@PRIMARYTargetingComputer:
 		Weapon: ra120mm2TargetingComputer
 		LocalOffset: 1200,180,340, 1200,-180,340
@@ -820,7 +820,7 @@ Kotin:
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: !ra_upgrade_nuclearshells && ra_promotion_targetingcomputer
+		RequiresCondition: !up_nuclearshells.soviet && up_promotion_targetingcomputer.soviet
 	Armament@Upgrade:
 		Weapon: ra120mm2Thermobaric
 		LocalOffset: 1200,180,340, 1200,-180,340
@@ -828,7 +828,7 @@ Kotin:
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: ra_upgrade_nuclearshells && !ra_promotion_targetingcomputer
+		RequiresCondition: up_nuclearshells.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@UpgradeTargetingComputer:
 		Weapon: ra120mm2ThermobaricTargetingComputer
 		LocalOffset: 1200,180,340, 1200,-180,340
@@ -836,7 +836,7 @@ Kotin:
 		RecoilRecovery: 30
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: ra_upgrade_nuclearshells && ra_promotion_targetingcomputer
+		RequiresCondition: up_nuclearshells.soviet && up_promotion_targetingcomputer.soviet
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: MammothTusk2
@@ -846,7 +846,7 @@ Kotin:
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: !ra_upgrade_highexplosiverockets && !ra_promotion_targetingcomputer
+		RequiresCondition: !up_highexplosiverockets.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@SECONDARYTargetingComputer:
 		Name: secondary
 		Weapon: MammothTusk2TargetingComputer
@@ -856,7 +856,7 @@ Kotin:
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: !ra_upgrade_highexplosiverockets && ra_promotion_targetingcomputer
+		RequiresCondition: !up_highexplosiverockets.soviet && up_promotion_targetingcomputer.soviet
 	Armament@UpgradeSECONDARY:
 		Name: secondary
 		Weapon: MammothTusk2Thermobaric
@@ -866,7 +866,7 @@ Kotin:
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: ra_upgrade_highexplosiverockets && !ra_promotion_targetingcomputer
+		RequiresCondition: up_highexplosiverockets.soviet && !up_promotion_targetingcomputer.soviet
 	Armament@UpgradeSECONDARYTargetingComputer:
 		Name: secondary
 		Weapon: MammothTusk2ThermobaricTargetingComputer
@@ -876,10 +876,10 @@ Kotin:
 		RecoilRecovery: 25
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 2
-		RequiresCondition: ra_upgrade_highexplosiverockets && ra_promotion_targetingcomputer
-	GrantConditionOnPrerequisite@ra_promotion_targetingcomputer:
-		Condition: ra_promotion_targetingcomputer
-		Prerequisites: ra_promotion_targetingcomputer
+		RequiresCondition: up_highexplosiverockets.soviet && up_promotion_targetingcomputer.soviet
+	GrantConditionOnPrerequisite@up_promotion_targetingcomputer.soviet:
+		Condition: up_promotion_targetingcomputer.soviet
+		Prerequisites: up_promotion_targetingcomputer.soviet
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -906,7 +906,7 @@ Kotin:
 		Position: BottomLeft
 		RequiresSelection: True
 	ActorStatValues:
-		Upgrades: ra_promotion_targetingcomputer, ra_upgrade_autoloaders, ra_upgrade_highexplosiverockets, ra_upgrade_nuclearshells, ra_upgrade_stalinium
+		Upgrades: up_promotion_targetingcomputer.soviet, up_autoloaders.soviet, up_highexplosiverockets.soviet, up_nuclearshells.soviet, up_stalinium.soviet
 
 RAHARV.SOVIET:
 	Inherits: ^RAHARV
@@ -915,18 +915,18 @@ RAHARV.SOVIET:
 	Tooltip:
 		Name: Soviet Ore Truck
 	Buildable:
-		Prerequisites: ~raproc.soviet, ~!ra_doctrine_industrialefficiency
+		Prerequisites: ~raproc.soviet, ~!up_doctrine_industrialefficiency.soviet
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
-		Upgrades: ra_doctrine_industrialefficiency, ra_doctrine_heavyarmor, ra_upgrade_wareconomy, ra_upgrade_stalinium
+		Upgrades: up_doctrine_industrialefficiency.soviet, up_doctrine_heavyarmor.soviet, up_wareconomy.soviet, up_stalinium.soviet
 
 ra_industrialminer:
 	Inherits: RAHARV.SOVIET
 	Tooltip:
 		Name: Soviet Heavy Industrial Miner
 	Buildable:
-		Prerequisites: ~raproc.soviet, ~ra_doctrine_industrialefficiency
+		Prerequisites: ~raproc.soviet, ~up_doctrine_industrialefficiency.soviet
 	Valued:
 		Cost: 1200
 	StoresResources:
@@ -965,7 +965,7 @@ RAMCV.SOVIET:
 	Voiced:
 		VoiceSet: RussianVehicleVoice
 	ActorStatValues:
-		Upgrades: ra_doctrine_heavyarmor, ra_upgrade_stalinium
+		Upgrades: up_doctrine_heavyarmor.soviet, up_stalinium.soviet
 
 TTNK:
 	Inherits: ^Tank
@@ -1004,15 +1004,15 @@ TTNK:
 	Armament:
 		Weapon: TTankZap
 		LocalOffset: 0,0,213
-		RequiresCondition: !ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: !up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade1:
 		Weapon: TTankZapEMP
 		LocalOffset: 0,0,213
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade2:
 		Weapon: TTankZapEMPArc
 		LocalOffset: 0,0,213
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	AttackFrontal:
 		FacingTolerance: 0
 	Turreted:
@@ -1028,7 +1028,7 @@ TTNK:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_doctrine_teslatech, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_teslaarcing, ra_upgrade_unstableisotopes
+		Upgrades: up_doctrine_teslatech.soviet, up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_teslaarcing.soviet, up_unstableisotopes.soviet
 
 ra_heatraytank:
 	Inherits: ^Tank
@@ -1051,7 +1051,7 @@ ra_heatraytank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra_upgrade_heatraytank
+		Prerequisites: ~up_heatraytank.soviet
 		Description: actor-ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1093,7 +1093,7 @@ ra_heatraytank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_scorchedearth
+		Upgrades: up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_unstableisotopes.soviet, up_scorchedearth.soviet
 
 FTRK:
 	Inherits: ^Vehicle
@@ -1113,7 +1113,7 @@ FTRK:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~raweap, ~!ra_doctrine_conscription
+		Prerequisites: ~raweap, ~!up_doctrine_conscription.soviet
 		Description: actor-ftrk.description
 	Valued:
 		Cost: 800
@@ -1163,7 +1163,7 @@ FTRK:
 		Image: ftrk
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_autoloaders, ra_upgrade_unstableisotopes, ra_upgrade_stalinium
+		Upgrades: up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_autoloaders.soviet, up_unstableisotopes.soviet, up_stalinium.soviet
 
 MODBTR:
 	Inherits: ^Tank
@@ -1186,16 +1186,16 @@ MODBTR:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~raweap, ~ra_doctrine_conscription
+		Prerequisites: ~raweap, ~up_doctrine_conscription.soviet
 		Description: actor-btr.description
 	Valued:
 		Cost: 1600
 	Tooltip:
 		Name: BTR-80
-		RequiresCondition: !upgtnk
+		RequiresCondition: !up_gtnk.soviet
 	Tooltip@Gatling:
 		Name: Gatling BTR
-		RequiresCondition: upgtnk
+		RequiresCondition: up_gtnk.soviet
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1227,28 +1227,28 @@ MODBTR:
 		Recoil: 85
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@TeslaUpgrade2:
 		Weapon: BTRTeslaMachineGunArc
 		Recoil: 85
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	Armament@TeslaUpgrade1AA:
 		Weapon: BTRTeslaMachineGunAA
 		Recoil: 85
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@TeslaUpgrade2AA:
 		Weapon: BTRTeslaMachineGunArcAA
 		Recoil: 85
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	ReloadDelayMultiplier@Gatling:
 		Modifier: 200
-		RequiresCondition: ra_doctrine_teslatech
+		RequiresCondition: up_doctrine_teslatech.soviet
 	WithMuzzleOverlay:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
@@ -1272,28 +1272,28 @@ MODBTR:
 		Count: 1
 		ResetOnFire: True
 	ReloadDelayMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo < 10 && upgtnk
+		RequiresCondition: ammo < 10 && up_gtnk.soviet
 		Modifier: 80
 	ReloadDelayMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo < 6 && upgtnk
+		RequiresCondition: ammo < 6 && up_gtnk.soviet
 		Modifier: 80
 	ReloadDelayMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1 && upgtnk
+		RequiresCondition: ammo <= 1 && up_gtnk.soviet
 		Modifier: 80
 	RangeMultiplier@GattlingSpeed1:
-		RequiresCondition: ammo < 10 && upgtnk
+		RequiresCondition: ammo < 10 && up_gtnk.soviet
 		Modifier: 105
 	RangeMultiplier@GattlingSpeed2:
-		RequiresCondition: ammo < 6 && upgtnk
+		RequiresCondition: ammo < 6 && up_gtnk.soviet
 		Modifier: 105
 	RangeMultiplier@GattlingSpeed3:
-		RequiresCondition: ammo <= 1 && upgtnk
+		RequiresCondition: ammo <= 1 && up_gtnk.soviet
 		Modifier: 105
-	GrantConditionOnPrerequisite@upgtnk:
-		Condition: upgtnk
-		Prerequisites: upgtnk
+	GrantConditionOnPrerequisite@up_gtnk.soviet:
+		Condition: up_gtnk.soviet
+		Prerequisites: up_gtnk.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_conscription, ra_doctrine_teslatech, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, upgtnk, ra_upgrade_teslaarcing, ra_upgrade_autoloaders, ra_upgrade_unstableisotopes, ra_upgrade_stalinium
+		Upgrades: up_doctrine_conscription.soviet, up_doctrine_teslatech.soviet, up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_gtnk.soviet, up_teslaarcing.soviet, up_autoloaders.soviet, up_unstableisotopes.soviet, up_stalinium.soviet
 
 DTRK:
 	Inherits: ^Vehicle
@@ -1352,7 +1352,7 @@ DTRK:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_scorchedearth
+		Upgrades: up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_unstableisotopes.soviet, up_scorchedearth.soviet
 
 QTNK:
 	Inherits: ^Tank
@@ -1431,7 +1431,7 @@ QTNK:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_scorchedearth
+		Upgrades: up_doctrine_inferno.soviet, up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_unstableisotopes.soviet, up_scorchedearth.soviet
 
 ####################################################################################################
 #		RA Aircraft
@@ -1458,16 +1458,16 @@ MODGTNK:
 		Name: Gatling Tank
 	Valued:
 		Cost: 1100
-	ProductionCostMultiplier@ra_doctrine_industrialefficiency:
-		Prerequisites: ra_doctrine_industrialefficiency
+	ProductionCostMultiplier@up_doctrine_industrialefficiency.soviet:
+		Prerequisites: up_doctrine_industrialefficiency.soviet
 		Multiplier: 75
-	ProductionTimeMultiplier@ra_doctrine_industrialefficiency:
-		Prerequisites: ra_doctrine_industrialefficiency
+	ProductionTimeMultiplier@up_doctrine_industrialefficiency.soviet:
+		Prerequisites: up_doctrine_industrialefficiency.soviet
 		Multiplier: 75
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~raweap, ~upgtnk, ~!ra_doctrine_conscription
+		Prerequisites: ~raweap, ~up_gtnk.soviet, ~!up_doctrine_conscription.soviet
 		Description: actor-gtnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -1490,52 +1490,52 @@ MODGTNK:
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_incendiarybullets
+		RequiresCondition: !up_incendiarybullets.soviet
 	Armament@AA:
 		Weapon: RAGatlingTankCannonAA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: !ra_upgrade_incendiarybullets
+		RequiresCondition: !up_incendiarybullets.soviet
 	Armament@UpgradeAG:
 		Weapon: IncendiaryRAGatlingTankCannon
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_incendiarybullets
+		RequiresCondition: up_incendiarybullets.soviet
 	Armament@UpgradeAA:
 		Weapon: IncendiaryRAGatlingTankCannonAA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_incendiarybullets
+		RequiresCondition: up_incendiarybullets.soviet
 	Armament@TeslaUpgrade1:
 		Weapon: TeslaRAGatlingTankCannon
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@TeslaUpgrade2:
 		Weapon: TeslaRAGatlingTankCannonArc
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	Armament@TeslaUpgrade1AA:
 		Weapon: TeslaRAGatlingTankCannonAA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@TeslaUpgrade2AA:
 		Weapon: TeslaRAGatlingTankCannonArcAA
 		Recoil: 85
 		LocalOffset: 500,100,450, 500,-100,450
 		MuzzleSequence: muzzle
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	ReloadDelayMultiplier@Gatling:
 		Modifier: 200
-		RequiresCondition: ra_doctrine_teslatech
+		RequiresCondition: up_doctrine_teslatech.soviet
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -1583,10 +1583,10 @@ MODGTNK:
 	RangeMultiplier@GattlingSpeed3:
 		RequiresCondition: ammo <= 1
 		Modifier: 115
-	ReloadDelayMultiplier@ra_upgrade_autoloaders:
+	ReloadDelayMultiplier@up_autoloaders.soviet:
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: ra_doctrine_industrialefficiency, ra_doctrine_teslatech, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, upgtnk, ra_upgrade_incendiarybullets, ra_upgrade_teslaarcing, ra_upgrade_autoloaders, ra_upgrade_unstableisotopes, ra_upgrade_stalinium
+		Upgrades: up_doctrine_industrialefficiency.soviet, up_doctrine_teslatech.soviet, up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_gtnk.soviet, up_incendiarybullets.soviet, up_teslaarcing.soviet, up_autoloaders.soviet, up_unstableisotopes.soviet, up_stalinium.soviet
 
 MonsterTank:
 	Inherits: ^Tank
@@ -1614,7 +1614,7 @@ MonsterTank:
 	Buildable:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~stek, ~upmonstertank
+		Prerequisites: ~stek, ~up_monstertank.soviet
 		BuildPaletteOrder: 120
 		Description: actor-monstertank.description
 	Valued:
@@ -1645,7 +1645,7 @@ MonsterTank:
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
-		RequiresCondition: !ra_doctrine_inferno
+		RequiresCondition: !up_doctrine_inferno.soviet
 	Armament@Upgrade:
 		Weapon: MonsterTank120mmThermobaric
 		Recoil: 250
@@ -1654,7 +1654,7 @@ MonsterTank:
 		MuzzleSequence: muzzle
 		AmmoUsage: 8
 		PauseOnCondition: ammo < 8
-		RequiresCondition: ra_doctrine_inferno
+		RequiresCondition: up_doctrine_inferno.soviet
 	Armament@SECONDARY:
 		Weapon: MonsterTankTusk
 		Recoil: 100
@@ -1694,12 +1694,12 @@ MonsterTank:
 		PipCount: 12
 	RenderSprites:
 		PlayerPalette: player_rgba
-	FirepowerMultiplier@ra_upgrade_highexplosiverockets:
+	FirepowerMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 105
-	RangeMultiplier@ra_upgrade_highexplosiverockets:
+	RangeMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 105
-	RevealsShroudMultiplier@ra_upgrade_highexplosiverockets:
+	RevealsShroudMultiplier@up_highexplosiverockets.soviet:
 		Modifier: 110
 	ActorStatValues:
-		Upgrades: ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_autoloaders, ra_upgrade_unstableisotopes, ra_upgrade_stalinium
+		Upgrades: up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_autoloaders.soviet, up_unstableisotopes.soviet, up_stalinium.soviet
 

@@ -27,21 +27,21 @@ RAJE1:
 		VoiceSet: JapaneseVoice
 	Armament@PRIMARY: ##########
 		Weapon: CHGuardRifle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@GARRISONED: ##########
 		Weapon: CHGuardRifle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@Upgrade: ##########
 		Weapon: CHGuardRifleWaveforce
 		LocalOffset: 128,0,256
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: CHGuardRifleWaveforce
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_waveforcebullets
+		Upgrades: up_bushidodiscipline.japan, up_stealthsuitintegration.japan, up_waveforcebullets.japan
 
 RAJE3:
 	Inherits: ^Soldier
@@ -81,14 +81,14 @@ RAJE3:
 		Weapon: TankBusterBeamCannonCharged
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TankBusterBeamCannonCharged
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	FirepowerMultiplier@DualBeam:
 		Modifier: 50
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	TakeCover:
 		ProneOffset: 180,0,-200
 	AttackFrontal:
@@ -108,7 +108,7 @@ RAJE3:
 	Voiced:
 		VoiceSet: JapaneseVoice
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+		Upgrades: up_bushidodiscipline.japan, up_stealthsuitintegration.japan, up_advancedplasmaweapons.japan
 	GrantExternalConditionToTransport:
 		Condition: ifv-miss
 
@@ -145,20 +145,20 @@ RAJE4:
 		Weapon: Flamer
 		LocalOffset: 700,0,500
 		FireDelay: 8
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: Flamer
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Weapon: PlasmaFlamer
 		LocalOffset: 700,0,500
 		FireDelay: 8
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: PlasmaFlamer
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		RequiresCondition: !parachute
@@ -180,7 +180,7 @@ RAJE4:
 	Voiced:
 		VoiceSet: JapaneseVoice
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration
+		Upgrades: up_bushidodiscipline.japan, up_stealthsuitintegration.japan
 
 RASAMURAI:
 	Inherits: ^Soldier
@@ -201,7 +201,7 @@ RASAMURAI:
 		Name: Samurai
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~upsamurai
+		Prerequisites: ~up_samurai.japan
 		Queue: Infantry, RAInfantry
 		Description: actor-rasamurai.description
 	Mobile:
@@ -212,19 +212,19 @@ RASAMURAI:
 		Step: 35
 	Armament@PRIMARY: ##########
 		Weapon: SamuraiBlade
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: SamuraiBlade
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Weapon: SamuraiBladeCharged
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: SamuraiBladeCharged
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	-TakeCover:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -236,7 +236,7 @@ RASAMURAI:
 		VoiceSet: SamuraiVoice
 		Volume: 3
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+		Upgrades: up_bushidodiscipline.japan, up_stealthsuitintegration.japan, up_advancedplasmaweapons.japan
 
 RAMAID:
 	Inherits: RAJE3
@@ -254,7 +254,7 @@ RAMAID:
 		Name: Archer Maiden
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~dome.japan, ~uparchermaiden
+		Prerequisites: ~dome.japan, ~up_archermaiden.japan
 		Queue: Infantry, RAInfantry
 		Description: actor-ramaid.description
 	Mobile:
@@ -265,19 +265,19 @@ RAMAID:
 		Step: 20
 	Armament@PRIMARY: ##########
 		Weapon: JapanMaidenBow
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !up_energizedarrows.japan
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: JapanMaidenBow
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !up_energizedarrows.japan
 	Armament@Upgrade: ##########
 		Weapon: JapanMaidenBowEnergized
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: JapanMaidenBowEnergized
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	Voiced:
 		VoiceSet: JapaneseArcherVoice
 	RenderSprites:
@@ -289,7 +289,7 @@ RAMAID:
 		DeathSequencePalette: player
 		DeathPaletteIsPlayerPalette: true
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_energizedarrows
+		Upgrades: up_bushidodiscipline.japan, up_stealthsuitintegration.japan, up_energizedarrows.japan
 
 ROCKETANGEL:
 	Inherits: ^JumpjetInfantry
@@ -315,7 +315,7 @@ ROCKETANGEL:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~modjtek, ~uprocketangel
+		Prerequisites: ~modjtek, ~up_rocketangel.japan
 		Queue: Infantry, RAInfantry, Aircraft, RAAircraft
 		Description: actor-rocketangel.description
 	Aircraft:
@@ -423,7 +423,7 @@ ROCKETANGEL:
 	ProducibleWithLevel@spyinfantry:
 		Prerequisites: infantry.upgraded
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons, up_divinewindprotocol
+		Upgrades: up_bushidodiscipline.japan, up_stealthsuitintegration.japan, up_advancedplasmaweapons.japan, up_divinewindprotocol.japan
 
 hakurei:
 	Inherits: ^Soldier
@@ -458,7 +458,7 @@ hakurei:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 10
-		Prerequisites: ~modjtek, ~uphakurei, !hasexorcist
+		Prerequisites: ~modjtek, ~up_hakurei.japan, !hasexorcist
 		Queue: Infantry, RAInfantry
 		Description: actor-hakurei.description
 	Mobile:
@@ -499,9 +499,9 @@ hakurei:
 		PauseOnCondition: disabled
 		ExclusiveDeploy: true
 		DeployType: Detonate
-	DamageMultiplier@up_stealthsuitintegration:
+	DamageMultiplier@up_stealthsuitintegration.japan:
 		Modifier: 75
-		RequiresCondition: spellcard && up_stealthsuitintegration
+		RequiresCondition: spellcard && up_stealthsuitintegration.japan
 	DamageMultiplier@SpellCard:
 		Modifier: 50
 		RequiresCondition: spellcard
@@ -527,5 +527,5 @@ hakurei:
 	ProvidesPrerequisite@exorcist:
 		Prerequisite: hasexorcist
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+		Upgrades: up_bushidodiscipline.japan, up_stealthsuitintegration.japan, up_advancedplasmaweapons.japan
 

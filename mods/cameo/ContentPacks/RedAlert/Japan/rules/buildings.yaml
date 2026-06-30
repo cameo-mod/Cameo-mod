@@ -151,7 +151,7 @@ MODRAAFLD:
 	AirstrikePower@JapanSuperBomber:
 		OrderName: JapanSuperBomber
 		Prerequisites:
-			1: ~techlevel.superweapons, up_divinewindprotocol
+			1: ~techlevel.superweapons, up_divinewindprotocol.japan
 		Icons:
 			1: airstrike
 		ChargeInterval: 7500
@@ -181,9 +181,9 @@ MODRAAFLD:
 	ParatroopersPower@paratroopers:
 		OrderName: japanparatroopers
 		Prerequisites:
-			1: up_bushidodiscipline
-			2: up_bushidodiscipline, upsamurai
-			3: up_bushidodiscipline, uparchermaiden
+			1: up_bushidodiscipline.japan
+			2: up_bushidodiscipline.japan, up_samurai.japan
+			3: up_bushidodiscipline.japan, up_archermaiden.japan
 			4: ~wip
 		Icons:
 			1: paratroopers
@@ -370,13 +370,13 @@ jmgnest:
 		Weapon: JHighV
 		LocalOffset: 768,0,512
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@Upgrade: ##########
 		Name: primary
 		Weapon: JHighVWaveforce
 		LocalOffset: 768,0,512
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -396,7 +396,7 @@ jmgnest:
 	DetectCloaked:
 		Range: 3348
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_nanotechrepairs.japan
 
 jballistat:
 	Inherits: ^Defense
@@ -437,16 +437,16 @@ jballistat:
 		Weapon: BallistaTowerMultiShotEnergized
 		LocalOffset: 624,0,208
 		PauseOnCondition: ammo < 5
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	Armament@UpgradeAIR: ##########
 		Weapon: BallistaSingleShotAirEnergized
 		LocalOffset: 624,0,208
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	ReloadDelayMultiplier@DualWeapon:
 		Modifier: 125
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	AmmoPool:
 		Ammo: 5
 		AmmoCondition: ammo
@@ -477,10 +477,10 @@ jballistat:
 		Range: 9214
 	DetectCloaked:
 		Range: 4607
-	FirepowerMultiplier@up_energizedarrows:
+	FirepowerMultiplier@up_energizedarrows.japan:
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_energizedarrows, up_nanotechrepairs
+		Upgrades: up_energizedarrows.japan, up_nanotechrepairs.japan
 
 modpillboxfort:
 	Inherits: ^Defense
@@ -536,7 +536,7 @@ modpillboxfort:
 	DetectCloaked:
 		Range: 4912
 	ActorStatValues:
-		Upgrades: up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 	####################################################################################################
 	#		Upgrades Allies

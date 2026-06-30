@@ -36,13 +36,13 @@ japanspeedboat:
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@Upgrade:
 		Weapon: JapanSpeedBoatGunWaveforce
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	Armament@DC1:
 		Weapon: DepthCharge
 		LocalOffset: 100,-100,0, 100,100,0
@@ -83,7 +83,7 @@ japanspeedboat:
 		RequiresCondition: gatling
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_nanotechrepairs.japan
 
 yamatobattleship:
 	Inherits: ^BoatUnit
@@ -169,7 +169,7 @@ yamatobattleship:
 		Image: yamatobattleship
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_nanotechrepairs
+		Upgrades: up_superiorwarengines.japan, up_nanotechrepairs.japan
 
 japancarrier:
 	Inherits: ^BoatUnit
@@ -222,5 +222,5 @@ japancarrier:
 	RenderSprites:
 		PlayerPalette: player
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_nanotechrepairs
+		Upgrades: up_superiorwarengines.japan, up_nanotechrepairs.japan
 

@@ -9,7 +9,7 @@ DOG:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~barr, ~!upcyberdog
+		Prerequisites: ~barr, ~!up_cyberdog.soviet
 		Description: actor-dog.description
 	Valued:
 		Cost: 200
@@ -101,29 +101,29 @@ RARE1:
 	Inherits@IncendiaryBulletsUpgradeRA1: ^IncendiaryBulletsUpgradeRA1
 	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
 	Buildable:
-		Prerequisites: ~barr, ~!ra_doctrine_conscription
+		Prerequisites: ~barr, ~!up_doctrine_conscription.soviet
 	Armament@PRIMARY: ##########
 		Weapon: M1Carbine
 		LocalOffset: 128,0,256
-		RequiresCondition: !ra_upgrade_incendiarybullets
+		RequiresCondition: !up_incendiarybullets.soviet
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: M1Carbine
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !ra_upgrade_incendiarybullets
+		RequiresCondition: !up_incendiarybullets.soviet
 	Armament@Upgrade: ##########
 		Weapon: IncendiaryM1Carbine
 		LocalOffset: 128,0,256
-		RequiresCondition: ra_upgrade_incendiarybullets
+		RequiresCondition: up_incendiarybullets.soviet
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: IncendiaryM1Carbine
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: ra_upgrade_incendiarybullets
+		RequiresCondition: up_incendiarybullets.soviet
 	Voiced:
 		VoiceSet: RussianVoice
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_incendiarybullets, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_incendiarybullets.soviet, up_menofsteel.soviet
 
 ra_conscript_ak:
 	Inherits: ^Soldier
@@ -145,7 +145,7 @@ ra_conscript_ak:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~ra_doctrine_conscription
+		Prerequisites: ~up_doctrine_conscription.soviet
 		Queue: Infantry, RAInfantry
 		AdditionalActors: ra_cons_molo
 		Description: actor-e2.description
@@ -165,13 +165,13 @@ ra_conscript_ak:
 		Modifier: 33
 	FireWarheadsOnDeath@Vengeance1:
 		Weapon: VengeanceActivator1
-		RequiresCondition: !ra_upgrade_vengeance
+		RequiresCondition: !up_vengeance.soviet
 	FireWarheadsOnDeath@Vengeance2:
 		Weapon: VengeanceActivator2
-		RequiresCondition: ra_upgrade_vengeance && !upsubliminal2
+		RequiresCondition: up_vengeance.soviet && !upsubliminal2
 	FireWarheadsOnDeath@Vengeance3:
 		Weapon: VengeanceActivator3
-		RequiresCondition: ra_upgrade_vengeance && upsubliminal2
+		RequiresCondition: up_vengeance.soviet && upsubliminal2
 	TakeCover:
 		ProneOffset: 180,0,-200
 	WithInfantryBody@PARACHUTE:
@@ -186,7 +186,7 @@ ra_conscript_ak:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_vengeance.soviet, up_menofsteel.soviet
 
 RAE2:
 	Inherits: ^Soldier
@@ -207,7 +207,7 @@ RAE2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~barr, ~!ra_doctrine_conscription
+		Prerequisites: ~barr, ~!up_doctrine_conscription.soviet
 		Queue: Infantry, RAInfantry
 		Description: actor-e2.description
 	Mobile:
@@ -220,20 +220,20 @@ RAE2:
 		Weapon: GrenadeRA
 		LocalOffset: 0,0,427
 		FireDelay: 15
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: GrenadeRA
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@Upgrade:
 		Weapon: GrenadeThermobaric
 		LocalOffset: 0,0,427
 		FireDelay: 15
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: GrenadeThermobaric
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	TakeCover:
 		ProneOffset: 180,0,-200
 	WithInfantryBody:
@@ -244,10 +244,10 @@ RAE2:
 		RequiresCondition: parachute
 	FireWarheadsOnDeath:
 		Weapon: GrenadeRAExplode
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: GrenadeThermobaricExplode
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	Voiced:
@@ -256,7 +256,7 @@ RAE2:
 		Image: rae2
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_doctrine_inferno.soviet, up_scorchedearth.soviet, up_menofsteel.soviet
 
 mortarsoldier:
 	Inherits: ^Soldier
@@ -272,7 +272,7 @@ mortarsoldier:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~dome.soviet, ~upmortarsoldier
+		Prerequisites: ~dome.soviet, ~up_mortarsoldier.soviet
 		Description: actor-mortarsoldier.description
 	Valued:
 		Cost: 500
@@ -290,28 +290,28 @@ mortarsoldier:
 		Weapon: SiegeMortar
 		LocalOffset: 427,0,341
 		FireDelay: 10
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: SiegeMortar
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@Upgrade:
 		Weapon: SiegeMortarThermobaric
 		LocalOffset: 427,0,341
 		FireDelay: 10
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: SiegeMortarThermobaric
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	FirepowerMultiplier@SplashDamage:
 		Modifier: 75
 	FireWarheadsOnDeath:
 		Weapon: SiegeMortarExplode
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: SiegeMortarThermobaricExplode
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	TakeCover:
 		ProneOffset: 227,0,-245
 	WithInfantryBody:
@@ -325,7 +325,7 @@ mortarsoldier:
 		Image: mortarsoldier
 		PlayerPalette: playerra
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_doctrine_inferno.soviet, up_scorchedearth.soviet, up_menofsteel.soviet
 
 RARE3:
 	Inherits: ^RAE3
@@ -333,11 +333,11 @@ RARE3:
 	Tooltip:
 		Name: Soviet Rocket Soldier
 	Buildable:
-		Prerequisites: ~barr, ~!ra_doctrine_inferno, ~!ra_doctrine_conscription
+		Prerequisites: ~barr, ~!up_doctrine_inferno.soviet, ~!up_doctrine_conscription.soviet
 	Voiced:
 		VoiceSet: RussianVoice
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_menofsteel.soviet
 
 ra_dragunov:
 	Inherits: ^Soldier
@@ -357,7 +357,7 @@ ra_dragunov:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~ra_doctrine_conscription
+		Prerequisites: ~up_doctrine_conscription.soviet
 		Queue: Infantry, RAInfantry
 		Description: Powerful Anti Material Sniper. Strong vs Tanks and Aircraft
 	Mobile:
@@ -388,7 +388,7 @@ ra_dragunov:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_vengeance.soviet, up_menofsteel.soviet
 
 e3flamer:
 	Inherits: ^RAE3
@@ -402,7 +402,7 @@ e3flamer:
 	Tooltip:
 		Name: Fire Rocket Soldier
 	Buildable:
-		Prerequisites: ~ra_doctrine_inferno
+		Prerequisites: ~up_doctrine_inferno.soviet
 		Queue: Infantry, RAInfantry
 	Valued:
 		Cost: 400
@@ -416,32 +416,32 @@ e3flamer:
 		Weapon: FireRockets
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: FireRockets
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@Upgrade:
 		Weapon: FireRocketsThermobaric
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: FireRocketsThermobaric
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	FireWarheadsOnDeath:
 		Weapon: FireRocketsExplode
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: FireRocketsThermobaricExplode
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	RenderSprites:
 		Image: e3flamer
 	Voiced:
 		VoiceSet: RussianVoice
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_scorchedearth.soviet, up_menofsteel.soviet
 
 RAE4:
 	Inherits: ^Soldier
@@ -476,20 +476,20 @@ RAE4:
 		Weapon: FireballGun
 		LocalOffset: 500,0,250
 		FireDelay: 8
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: FireballGun
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	Armament@Upgrade:
 		Weapon: FireballGunThermobaric
 		LocalOffset: 500,0,250
 		FireDelay: 8
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: FireballGunThermobaric
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		RequiresCondition: !parachute
@@ -502,17 +502,17 @@ RAE4:
 		ProneOffset: 160,0,-200
 	FireWarheadsOnDeath:
 		Weapon: FireballGunExplode
-		RequiresCondition: !ra_upgrade_scorchedearth
+		RequiresCondition: !up_scorchedearth.soviet
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: FireballGunThermobaricExplode
-		RequiresCondition: ra_upgrade_scorchedearth
+		RequiresCondition: up_scorchedearth.soviet
 	RenderSprites:
 		Image: rae4
 		PlayerPalette: raplayer
 	Voiced:
 		VoiceSet: RussianVoice
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_doctrine_inferno.soviet, up_scorchedearth.soviet, up_menofsteel.soviet
 
 SHOK:
 	Inherits: ^Soldier
@@ -528,7 +528,7 @@ SHOK:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~stek, ~!ra_doctrine_teslatech
+		Prerequisites: ~stek, ~!up_doctrine_teslatech.soviet
 		Description: actor-shok.description
 	Valued:
 		Cost: 600
@@ -545,27 +545,27 @@ SHOK:
 	Armament@PRIMARY:
 		Weapon: PortaTesla
 		LocalOffset: 427,0,341
-		RequiresCondition: !ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: !up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade1:
 		Weapon: PortaTeslaEMP
 		LocalOffset: 427,0,341
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade2:
 		Weapon: PortaTeslaEMPArc
 		LocalOffset: 427,0,341
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: PortaTesla
-		RequiresCondition: !ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: !up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade1GARRISONED:
 		Name: garrisoned
 		Weapon: PortaTeslaEMP
-		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+		RequiresCondition: up_doctrine_teslatech.soviet && !up_teslaarcing.soviet
 	Armament@Upgrade2GARRISONED:
 		Name: garrisoned
 		Weapon: PortaTeslaEMPArc
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	TakeCover:
 		ProneOffset: 227,0,-245
 	WithInfantryBody:
@@ -579,7 +579,7 @@ SHOK:
 	GrantExternalConditionToTransport:
 		Condition: ifv-tesla
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_teslatech, ra_upgrade_teslaarcing, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_doctrine_teslatech.soviet, up_teslaarcing.soviet, up_menofsteel.soviet
 
 ra_zapper:
 	Inherits: ^Soldier
@@ -595,7 +595,7 @@ ra_zapper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~stek, ~ra_doctrine_teslatech
+		Prerequisites: ~stek, ~up_doctrine_teslatech.soviet
 		Description: actor-shok.description
 	Valued:
 		Cost: 1200
@@ -612,19 +612,19 @@ ra_zapper:
 	Armament@PRIMARY:
 		Weapon: ZapperPortaTesla
 		LocalOffset: 427,0,341
-		RequiresCondition: !ra_upgrade_teslaarcing
+		RequiresCondition: !up_teslaarcing.soviet
 	Armament@Upgrade:
 		Weapon: ZapperPortaTeslaArc
 		LocalOffset: 427,0,341
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: ZapperPortaTesla
-		RequiresCondition: !ra_upgrade_teslaarcing
+		RequiresCondition: !up_teslaarcing.soviet
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: ZapperPortaTeslaArc
-		RequiresCondition: ra_upgrade_teslaarcing
+		RequiresCondition: up_teslaarcing.soviet
 	TakeCover:
 		ProneOffset: 227,0,-245
 	WithInfantryBody:
@@ -642,7 +642,7 @@ ra_zapper:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_teslatech, ra_upgrade_teslaarcing, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_doctrine_teslatech.soviet, up_teslaarcing.soviet, up_menofsteel.soviet
 
 ra_commissar:
 	Inherits: ^Soldier
@@ -668,7 +668,7 @@ ra_commissar:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Buildable:
-		Prerequisites: ~ra_upgrade_commissar
+		Prerequisites: ~up_commissar.soviet
 		Queue: Infantry, RAInfantry
 		Description: actor-gdiofficer.description
 	Armament@PRIMARY:
@@ -679,13 +679,13 @@ ra_commissar:
 		Weapon: CommissarPistol
 	FireWarheadsOnDeath@Vengeance1:
 		Weapon: VengeanceActivator1
-		RequiresCondition: !ra_upgrade_vengeance
+		RequiresCondition: !up_vengeance.soviet
 	FireWarheadsOnDeath@Vengeance2:
 		Weapon: VengeanceActivator2
-		RequiresCondition: ra_upgrade_vengeance && !upsubliminal
+		RequiresCondition: up_vengeance.soviet && !upsubliminal
 	FireWarheadsOnDeath@Vengeance3:
 		Weapon: VengeanceActivator3
-		RequiresCondition: ra_upgrade_vengeance && upsubliminal
+		RequiresCondition: up_vengeance.soviet && upsubliminal
 	ProducibleWithLevel:
 		InitialLevels: 1
 	ProximityExternalCondition@PropagandaEffect:
@@ -696,7 +696,7 @@ ra_commissar:
 		Range: 5000
 		ValidRelationships: Ally
 		Condition: upsubliminal2
-		RequiresCondition: ra_upgrade_vengeance
+		RequiresCondition: up_vengeance.soviet
 	WithRangeCircle@propaganda:
 		Range: 5000
 		Type: propaganda
@@ -724,7 +724,7 @@ ra_commissar:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_vengeance.soviet, up_menofsteel.soviet
 
 cyberdog:
 	Inherits: ^DefaultInfantry
@@ -741,7 +741,7 @@ cyberdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~upcyberdog, ~barr
+		Prerequisites: ~up_cyberdog.soviet, ~barr
 		Description: Cybernetically modified dog that is far more durable and can attack vehicles.
 	Valued:
 		Cost: 1000
@@ -831,7 +831,7 @@ cyberdog:
 			ContaminatorMutate: 1
 			QuestionMutate: 1
 	ActorStatValues:
-		Upgrades: ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_stalinium
+		Upgrades: up_doctrine_heavyarmor.soviet, up_doctrine_nuclearwar.soviet, up_unstableisotopes.soviet, up_stalinium.soviet
 
 VOLKOV:
 	Inherits: ^Soldier
@@ -857,7 +857,7 @@ VOLKOV:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		BuildPaletteOrder: 130
-		Prerequisites: ~stek, ~upvolkov
+		Prerequisites: ~stek, ~up_volkov.soviet
 		Description: actor-volkov.description
 	Tooltip:
 		Name: Volkov
@@ -866,51 +866,51 @@ VOLKOV:
 	Armament:
 		Weapon: VolkovMagneticWeapon
 		LocalOffset: 500,0,250
-		RequiresCondition: !ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+		RequiresCondition: !up_incendiarybullets.soviet && !up_teslaarcing.soviet && !up_nuclearshells.soviet
 	Armament@Tesla:
 		Weapon: VolkovMagneticWeaponTesla
 		LocalOffset: 500,0,250
-		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+		RequiresCondition: !up_incendiarybullets.soviet && up_teslaarcing.soviet
 	Armament@NuclearShells:
 		Weapon: VolkovMagneticWeaponNuclearShells
 		LocalOffset: 500,0,250
-		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+		RequiresCondition: !up_incendiarybullets.soviet && up_nuclearshells.soviet
 	Armament@Incendiary:
 		Weapon: VolkovMagneticWeaponIncendiary
 		LocalOffset: 500,0,250
-		RequiresCondition: ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+		RequiresCondition: up_incendiarybullets.soviet && !up_teslaarcing.soviet && !up_nuclearshells.soviet
 	Armament@IncendiaryTesla:
 		Weapon: VolkovMagneticWeaponIncendiaryTesla
 		LocalOffset: 500,0,250
-		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+		RequiresCondition: up_incendiarybullets.soviet && up_teslaarcing.soviet
 	Armament@IncendiaryNuclearShells:
 		Weapon: VolkovMagneticWeaponIncendiaryNuclearShells
 		LocalOffset: 500,0,250
-		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+		RequiresCondition: up_incendiarybullets.soviet && up_nuclearshells.soviet
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: VolkovMagneticWeapon
-		RequiresCondition: !ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+		RequiresCondition: !up_incendiarybullets.soviet && !up_teslaarcing.soviet && !up_nuclearshells.soviet
 	Armament@GARRISONEDTesla:
 		Name: garrisoned
 		Weapon: VolkovMagneticWeaponTesla
-		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+		RequiresCondition: !up_incendiarybullets.soviet && up_teslaarcing.soviet
 	Armament@GARRISONEDNuclearShells:
 		Name: garrisoned
 		Weapon: VolkovMagneticWeaponNuclearShells
-		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+		RequiresCondition: !up_incendiarybullets.soviet && up_nuclearshells.soviet
 	Armament@GARRISONEDIncendiary:
 		Name: garrisoned
 		Weapon: VolkovMagneticWeaponIncendiary
-		RequiresCondition: ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+		RequiresCondition: up_incendiarybullets.soviet && !up_teslaarcing.soviet && !up_nuclearshells.soviet
 	Armament@GARRISONEDIncendiaryTesla:
 		Name: garrisoned
 		Weapon: VolkovMagneticWeaponIncendiaryTesla
-		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+		RequiresCondition: up_incendiarybullets.soviet && up_teslaarcing.soviet
 	Armament@GARRISONEDIncendiaryNuclearShells:
 		Name: garrisoned
 		Weapon: VolkovMagneticWeaponIncendiaryNuclearShells
-		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+		RequiresCondition: up_incendiarybullets.soviet && up_nuclearshells.soviet
 	Health:
 		HP: 400000
 	ChangesHealth@SelfHealing:
@@ -932,5 +932,5 @@ VOLKOV:
 	AnnounceOnKill:
 	-Crushable:
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_upgrade_incendiarybullets, ra_upgrade_teslaarcing, ra_upgrade_autoloaders, ra_upgrade_nuclearshells
+		Upgrades: up_promotion_superoptics.soviet, up_incendiarybullets.soviet, up_teslaarcing.soviet, up_autoloaders.soviet, up_nuclearshells.soviet
 

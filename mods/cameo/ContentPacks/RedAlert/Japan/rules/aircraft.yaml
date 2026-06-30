@@ -7,7 +7,7 @@ BADR.Japan:
 	SpawnActorOnDeath:
 		Actor: C17.Husk
 	ActorStatValues:
-		Upgrades: up_divinewindprotocol, up_nanotechrepairs
+		Upgrades: up_divinewindprotocol.japan, up_nanotechrepairs.japan
 
 jsuperbomber:
 	Inherits: BADR
@@ -69,26 +69,26 @@ MODKAMI:
 		MuzzleSequence: muzzle
 		AmmoUsage: 6
 		PauseOnCondition: ammo < 6
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !up_energizedarrows.japan
 	Armament@MissilesUpgrade:
 		Weapon: ZeroFighterArrowsEnergized
 		LocalOffset: 85,-300,-85, 85,300,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 6
 		PauseOnCondition: ammo < 6
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	Armament@PRIMARY:
 		Weapon: ZeroFighterChainGun
 		LocalOffset: 256,213,0, 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 6
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@Upgrade: ##########
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 256,213,0, 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 6
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	AttackAircraft:
@@ -132,7 +132,7 @@ MODKAMI:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_divinewindprotocol, up_energizedarrows, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_divinewindprotocol.japan, up_energizedarrows.japan, up_nanotechrepairs.japan
 
 JHIND:
 	Inherits: ^Helicopter
@@ -171,42 +171,42 @@ JHIND:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !up_energizedarrows.japan
 	Armament@MissilesUpgrade:
 		Weapon: JHindArrowsEnergized
 		LocalOffset: 85,-300,-85, 85,300,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	Armament@Cannon:
 		Weapon: JHindCannon
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@CannonUpgrade:
 		Weapon: JHindPlasmaCannon
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@ChainGun:
 		Weapon: JHindChainGun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@ChainGunUpgrade:
 		Weapon: JHindChainGunWaveforce
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	AttackAircraft:
 		FacingTolerance: 40
 		AttackType: Hover
@@ -255,7 +255,7 @@ JHIND:
 		UncloakSound: appear1.aud
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_divinewindprotocol, up_energizedarrows, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_divinewindprotocol.japan, up_energizedarrows.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 zerofighter:
 	Inherits: ^RANeutralPlane
@@ -285,25 +285,25 @@ zerofighter:
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@SECONDARY:
 		Weapon: ZeroFighterChainGun
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@Upgrade: ##########
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	Armament@UpgradeSECONDARY:
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	FirepowerMultiplier@doublecannons:
 		Modifier: 50
 	Armament:
@@ -351,7 +351,7 @@ zerofighter:
 		PlayerPalette: player
 		Image: modkamimini
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_divinewindprotocol
+		Upgrades: up_waveforcebullets.japan, up_divinewindprotocol.japan
 
 ROCKETANGEL.husk:
 	Inherits: ^SmallHelicopterHusk
@@ -386,7 +386,7 @@ MODBOMBER:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~modjtek, ~upjapanesebomber
+		Prerequisites: ~modjtek, ~up_japanesebomber.japan
 		Description: actor-jpbomber.description
 	Valued:
 		Cost: 1500
@@ -411,24 +411,24 @@ MODBOMBER:
 		LocalOffset: 0,128,0, 0,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@UpgradeGuns:
 		Name: secondary
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 0,128,0, 0,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	Armament@Bombs:
 		Name: primary
 		Weapon: JapaneseHeavyBomb
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@UpgradeBombs: ##########
 		Name: primary
 		Weapon: JapanesePlasmaBomb
 		PauseOnCondition: !ammo
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	RangeMultiplier@Chaingun:
 		Modifier: 70
 	Aircraft:
@@ -475,5 +475,5 @@ MODBOMBER:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_advancedplasmaweapons, up_divinewindprotocol, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_advancedplasmaweapons.japan, up_divinewindprotocol.japan, up_nanotechrepairs.japan
 

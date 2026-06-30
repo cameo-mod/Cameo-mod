@@ -25,258 +25,258 @@
 ####################################################################################################
 
 ^Conscription:
-	ProductionCostMultiplier@ra_doctrine_conscription:
-		Prerequisites: ra_doctrine_conscription
+	ProductionCostMultiplier@up_doctrine_conscription.soviet:
+		Prerequisites: up_doctrine_conscription.soviet
 		Multiplier: 75
-	ProductionTimeMultiplier@ra_doctrine_conscription:
-		Prerequisites: ra_doctrine_conscription
+	ProductionTimeMultiplier@up_doctrine_conscription.soviet:
+		Prerequisites: up_doctrine_conscription.soviet
 		Multiplier: 75
-	FirepowerMultiplier@ra_doctrine_conscription:
-		RequiresCondition: ra_doctrine_conscription
+	FirepowerMultiplier@up_doctrine_conscription.soviet:
+		RequiresCondition: up_doctrine_conscription.soviet
 		Modifier: 110
-	DamageMultiplier@ra_doctrine_conscription:
-		RequiresCondition: ra_doctrine_conscription
+	DamageMultiplier@up_doctrine_conscription.soviet:
+		RequiresCondition: up_doctrine_conscription.soviet
 		Modifier: 90
-	GrantConditionOnPrerequisite@ra_doctrine_conscription:
-		Condition: ra_doctrine_conscription
-		Prerequisites: ra_doctrine_conscription
+	GrantConditionOnPrerequisite@up_doctrine_conscription.soviet:
+		Condition: up_doctrine_conscription.soviet
+		Prerequisites: up_doctrine_conscription.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_conscription
+		Upgrades: up_doctrine_conscription.soviet
 
 ^NuclearEngines:
-	SpeedMultiplier@ra_upgrade_unstableisotopes:
-		RequiresCondition: ra_upgrade_unstableisotopes
+	SpeedMultiplier@up_unstableisotopes.soviet:
+		RequiresCondition: up_unstableisotopes.soviet
 		Modifier: 120
-	FirepowerMultiplier@ra_upgrade_unstableisotopes:
-		RequiresCondition: ra_upgrade_unstableisotopes
+	FirepowerMultiplier@up_unstableisotopes.soviet:
+		RequiresCondition: up_unstableisotopes.soviet
 		Modifier: 110
-	GrantConditionOnPrerequisite@ra_upgrade_unstableisotopes:
-		Condition: ra_upgrade_unstableisotopes
-		Prerequisites: ra_upgrade_unstableisotopes
+	GrantConditionOnPrerequisite@up_unstableisotopes.soviet:
+		Condition: up_unstableisotopes.soviet
+		Prerequisites: up_unstableisotopes.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_unstableisotopes
+		Upgrades: up_unstableisotopes.soviet
 
 ^RocketEnhancements:
-	FirepowerMultiplier@ra_upgrade_highexplosiverockets:
-		RequiresCondition: ra_upgrade_highexplosiverockets
+	FirepowerMultiplier@up_highexplosiverockets.soviet:
+		RequiresCondition: up_highexplosiverockets.soviet
 		Modifier: 125
-	RangeMultiplier@ra_upgrade_highexplosiverockets:
-		RequiresCondition: ra_upgrade_highexplosiverockets
+	RangeMultiplier@up_highexplosiverockets.soviet:
+		RequiresCondition: up_highexplosiverockets.soviet
 		Modifier: 125
-	RevealsShroudMultiplier@ra_upgrade_highexplosiverockets:
-		RequiresCondition: ra_upgrade_highexplosiverockets
+	RevealsShroudMultiplier@up_highexplosiverockets.soviet:
+		RequiresCondition: up_highexplosiverockets.soviet
 		Modifier: 150
-	GrantConditionOnPrerequisite@ra_upgrade_highexplosiverockets:
-		Condition: ra_upgrade_highexplosiverockets
-		Prerequisites: ra_upgrade_highexplosiverockets
+	GrantConditionOnPrerequisite@up_highexplosiverockets.soviet:
+		Condition: up_highexplosiverockets.soviet
+		Prerequisites: up_highexplosiverockets.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_highexplosiverockets
+		Upgrades: up_highexplosiverockets.soviet
 
 ^SovietAutoLoaders:
-	ReloadDelayMultiplier@ra_upgrade_autoloaders:
-		RequiresCondition: ra_upgrade_autoloaders
+	ReloadDelayMultiplier@up_autoloaders.soviet:
+		RequiresCondition: up_autoloaders.soviet
 		Modifier: 60
-	ReloadAmmoDelayMultiplier@ra_upgrade_autoloaders:
-		RequiresCondition: ra_upgrade_autoloaders
+	ReloadAmmoDelayMultiplier@up_autoloaders.soviet:
+		RequiresCondition: up_autoloaders.soviet
 		Modifier: 80
-	GrantConditionOnPrerequisite@ra_upgrade_autoloaders:
-		Condition: ra_upgrade_autoloaders
-		Prerequisites: ra_upgrade_autoloaders
+	GrantConditionOnPrerequisite@up_autoloaders.soviet:
+		Condition: up_autoloaders.soviet
+		Prerequisites: up_autoloaders.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_autoloaders
+		Upgrades: up_autoloaders.soviet
 
 ^ExperimentalTeslaWeaponry:
-	FirepowerMultiplier@ra_doctrine_teslatech:
-		RequiresCondition: ra_doctrine_teslatech
+	FirepowerMultiplier@up_doctrine_teslatech.soviet:
+		RequiresCondition: up_doctrine_teslatech.soviet
 		Modifier: 150
-	GrantConditionOnPrerequisite@ra_doctrine_teslatech:
-		Condition: ra_doctrine_teslatech
-		Prerequisites: ra_doctrine_teslatech
+	GrantConditionOnPrerequisite@up_doctrine_teslatech.soviet:
+		Condition: up_doctrine_teslatech.soviet
+		Prerequisites: up_doctrine_teslatech.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_teslatech
+		Upgrades: up_doctrine_teslatech.soviet
 
 ^AdvancedThermobarics:
-	FirepowerMultiplier@ra_doctrine_inferno:
-		RequiresCondition: ra_doctrine_inferno
+	FirepowerMultiplier@up_doctrine_inferno.soviet:
+		RequiresCondition: up_doctrine_inferno.soviet
 		Modifier: 125
-	GrantConditionOnPrerequisite@ra_doctrine_inferno:
-		Condition: ra_doctrine_inferno
-		Prerequisites: ra_doctrine_inferno
+	GrantConditionOnPrerequisite@up_doctrine_inferno.soviet:
+		Condition: up_doctrine_inferno.soviet
+		Prerequisites: up_doctrine_inferno.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno
+		Upgrades: up_doctrine_inferno.soviet
 
 ^SovietSteel:
-	DamageMultiplier@ra_upgrade_stalinium:
-		RequiresCondition: ra_upgrade_stalinium
+	DamageMultiplier@up_stalinium.soviet:
+		RequiresCondition: up_stalinium.soviet
 		Modifier: 60
-	SpeedMultiplier@ra_upgrade_stalinium:
-		RequiresCondition: ra_upgrade_stalinium
+	SpeedMultiplier@up_stalinium.soviet:
+		RequiresCondition: up_stalinium.soviet
 		Modifier: 90
-	GrantConditionOnPrerequisite@ra_upgrade_stalinium:
-		Condition: ra_upgrade_stalinium
-		Prerequisites: ra_upgrade_stalinium
+	GrantConditionOnPrerequisite@up_stalinium.soviet:
+		Condition: up_stalinium.soviet
+		Prerequisites: up_stalinium.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_stalinium
+		Upgrades: up_stalinium.soviet
 
 ####################################################################################################
 #		Allied Upgrade Inherits
 ####################################################################################################
 
 ^AdvancedRadarSystems:
-	RevealsShroudMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	RevealsShroudMultiplier@up_advancedradarsystems.allies:
+		RequiresCondition: up_advancedradarsystems.allies
 		Modifier: 110
-	DetectCloakedMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	DetectCloakedMultiplier@up_advancedradarsystems.allies:
+		RequiresCondition: up_advancedradarsystems.allies
 		Modifier: 110
-	InaccuracyMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	InaccuracyMultiplier@up_advancedradarsystems.allies:
+		RequiresCondition: up_advancedradarsystems.allies
 		Modifier: 90
-	RangeMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	RangeMultiplier@up_advancedradarsystems.allies:
+		RequiresCondition: up_advancedradarsystems.allies
 		Modifier: 110
-	FirepowerMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	FirepowerMultiplier@up_advancedradarsystems.allies:
+		RequiresCondition: up_advancedradarsystems.allies
 		Modifier: 110
-	ReloadDelayMultiplier@up_advancedradarsystems:
-		RequiresCondition: up_advancedradarsystems
+	ReloadDelayMultiplier@up_advancedradarsystems.allies:
+		RequiresCondition: up_advancedradarsystems.allies
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_advancedradarsystems:
-		Condition: up_advancedradarsystems
-		Prerequisites: up_advancedradarsystems
+	GrantConditionOnPrerequisite@up_advancedradarsystems.allies:
+		Condition: up_advancedradarsystems.allies
+		Prerequisites: up_advancedradarsystems.allies
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems
+		Upgrades: up_advancedradarsystems.allies
 
 ^InfantryArmorPlating:
-	DamageMultiplier@up_infantryarmorplating:
-		RequiresCondition: up_infantryarmorplating
+	DamageMultiplier@up_infantryarmorplating.allies:
+		RequiresCondition: up_infantryarmorplating.allies
 		Modifier: 70
-	ReloadDelayMultiplier@up_infantryarmorplating:
-		RequiresCondition: up_infantryarmorplating
+	ReloadDelayMultiplier@up_infantryarmorplating.allies:
+		RequiresCondition: up_infantryarmorplating.allies
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_infantryarmorplating:
-		Condition: up_infantryarmorplating
-		Prerequisites: up_infantryarmorplating
+	GrantConditionOnPrerequisite@up_infantryarmorplating.allies:
+		Condition: up_infantryarmorplating.allies
+		Prerequisites: up_infantryarmorplating.allies
 	ActorStatValues:
-		Upgrades: up_infantryarmorplating
+		Upgrades: up_infantryarmorplating.allies
 
 ^ReinforcedStructures:
-	DamageMultiplier@up_reinforcedstructures:
-		RequiresCondition: up_reinforcedstructures
+	DamageMultiplier@up_reinforcedstructures.allies:
+		RequiresCondition: up_reinforcedstructures.allies
 		Modifier: 75
-	ProductionCostMultiplier@up_reinforcedstructures:
-		Prerequisites: up_reinforcedstructures
+	ProductionCostMultiplier@up_reinforcedstructures.allies:
+		Prerequisites: up_reinforcedstructures.allies
 		Multiplier: 75
-	ProductionTimeMultiplier@up_reinforcedstructures:
-		Prerequisites: up_reinforcedstructures
+	ProductionTimeMultiplier@up_reinforcedstructures.allies:
+		Prerequisites: up_reinforcedstructures.allies
 		Multiplier: 75
-	GrantConditionOnPrerequisite@up_reinforcedstructures:
-		Condition: up_reinforcedstructures
-		Prerequisites: up_reinforcedstructures
+	GrantConditionOnPrerequisite@up_reinforcedstructures.allies:
+		Condition: up_reinforcedstructures.allies
+		Prerequisites: up_reinforcedstructures.allies
 	ActorStatValues:
-		Upgrades: up_reinforcedstructures
+		Upgrades: up_reinforcedstructures.allies
 
 ^AirSuperiorityDoctrine:
-	DamageMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	DamageMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 85
-	FirepowerMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	FirepowerMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 115
-	ReloadDelayMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	ReloadDelayMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 85
-	ReloadAmmoDelayMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	ReloadAmmoDelayMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 85
-	SpeedMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	SpeedMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 115
-	RangeMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	RangeMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 115
-	RevealsShroudMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	RevealsShroudMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 115
-	DetectCloakedMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	DetectCloakedMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 115
-	InaccuracyMultiplier@up_airsuperioritydoctrine:
-		RequiresCondition: up_airsuperioritydoctrine
+	InaccuracyMultiplier@up_airsuperioritydoctrine.allies:
+		RequiresCondition: up_airsuperioritydoctrine.allies
 		Modifier: 85
-	GrantConditionOnPrerequisite@up_airsuperioritydoctrine:
-		Condition: up_airsuperioritydoctrine
-		Prerequisites: up_airsuperioritydoctrine
+	GrantConditionOnPrerequisite@up_airsuperioritydoctrine.allies:
+		Condition: up_airsuperioritydoctrine.allies
+		Prerequisites: up_airsuperioritydoctrine.allies
 	ActorStatValues:
-		Upgrades: up_airsuperioritydoctrine
+		Upgrades: up_airsuperioritydoctrine.allies
 
 ^LaserTargetingSystems:
-	FirepowerMultiplier@up_lasertargetingsystems:
-		RequiresCondition: up_lasertargetingsystems
+	FirepowerMultiplier@up_lasertargetingsystems.allies:
+		RequiresCondition: up_lasertargetingsystems.allies
 		Modifier: 125
-	GrantConditionOnPrerequisite@up_lasertargetingsystems:
-		Condition: up_lasertargetingsystems
-		Prerequisites: up_lasertargetingsystems
+	GrantConditionOnPrerequisite@up_lasertargetingsystems.allies:
+		Condition: up_lasertargetingsystems.allies
+		Prerequisites: up_lasertargetingsystems.allies
 	ActorStatValues:
-		Upgrades: up_lasertargetingsystems
+		Upgrades: up_lasertargetingsystems.allies
 
 ^ChronoArmor:
-	WithColoredOverlay@up_chronoarmor:
+	WithColoredOverlay@up_chronoarmor.allies:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Color: 0000FF44
-	DamageMultiplier@up_chronoarmor:
+	DamageMultiplier@up_chronoarmor.allies:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Modifier: 65
-	SpeedMultiplier@up_chronoarmor:
+	SpeedMultiplier@up_chronoarmor.allies:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Modifier: 150
-	ReloadDelayMultiplier@up_chronoarmor:
+	ReloadDelayMultiplier@up_chronoarmor.allies:
 		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
 		Modifier: 65
-	GrantTimedCondition@up_chronoarmor:
+	GrantTimedCondition@up_chronoarmor.allies:
 		RequiresCondition: chronoarmordamage
 		PauseOnCondition: !chronoarmordamage
 		Condition: chronoarmordamagecooldown
 		Duration: 12
-	GrantConditionOnDamage@up_chronoarmor:
-		RequiresCondition: up_chronoarmor
+	GrantConditionOnDamage@up_chronoarmor.allies:
+		RequiresCondition: up_chronoarmor.allies
 		Condition: chronoarmordamage
 		Duration: 24
 		PlayerRelationship: Ally, Neutral, Enemy
-	GrantConditionOnPrerequisite@up_chronoarmor:
-		Condition: up_chronoarmor
-		Prerequisites: up_chronoarmor
+	GrantConditionOnPrerequisite@up_chronoarmor.allies:
+		Condition: up_chronoarmor.allies
+		Prerequisites: up_chronoarmor.allies
 	ActorStatValues:
-		Upgrades: up_chronoarmor
+		Upgrades: up_chronoarmor.allies
 
 ^CryoMissiles:
-	FirepowerMultiplier@up_cryomissiles:
-		RequiresCondition: up_cryomissiles
+	FirepowerMultiplier@up_cryomissiles.allies:
+		RequiresCondition: up_cryomissiles.allies
 		Modifier: 75
-	GrantConditionOnPrerequisite@up_cryomissiles:
-		Condition: up_cryomissiles
-		Prerequisites: up_cryomissiles
+	GrantConditionOnPrerequisite@up_cryomissiles.allies:
+		Condition: up_cryomissiles.allies
+		Prerequisites: up_cryomissiles.allies
 	ActorStatValues:
-		Upgrades: up_cryomissiles
+		Upgrades: up_cryomissiles.allies
 
 ^GPSSatelliteSupport:
-	RangeMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	RangeMultiplier@up_gpssatellitesupport.allies:
+		RequiresCondition: up_gpssatellitesupport.allies
 		Modifier: 110
-	RevealsShroudMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	RevealsShroudMultiplier@up_gpssatellitesupport.allies:
+		RequiresCondition: up_gpssatellitesupport.allies
 		Modifier: 110
-	DetectCloakedMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	DetectCloakedMultiplier@up_gpssatellitesupport.allies:
+		RequiresCondition: up_gpssatellitesupport.allies
 		Modifier: 110
-	InaccuracyMultiplier@up_gpssatellitesupport:
-		RequiresCondition: up_gpssatellitesupport
+	InaccuracyMultiplier@up_gpssatellitesupport.allies:
+		RequiresCondition: up_gpssatellitesupport.allies
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_gpssatellitesupport:
-		Condition: up_gpssatellitesupport
-		Prerequisites: up_gpssatellitesupport
+	GrantConditionOnPrerequisite@up_gpssatellitesupport.allies:
+		Condition: up_gpssatellitesupport.allies
+		Prerequisites: up_gpssatellitesupport.allies
 	ActorStatValues:
-		Upgrades: up_gpssatellitesupport
+		Upgrades: up_gpssatellitesupport.allies
 
 
 ####################################################################################################
@@ -289,80 +289,80 @@
 		ActorTypes: rae6,raje1,raje1,raje1
 
 ^BushidoDiscipline:
-	DamageMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	DamageMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 90
-	FirepowerMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	FirepowerMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 110
-	ReloadDelayMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	ReloadDelayMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 90
-	SpeedMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	SpeedMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 110
-	RangeMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	RangeMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 110
-	RevealsShroudMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	RevealsShroudMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 110
-	DetectCloakedMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	DetectCloakedMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 110
-	InaccuracyMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	InaccuracyMultiplier@up_bushidodiscipline.japan:
+		RequiresCondition: up_bushidodiscipline.japan
 		Modifier: 90
-	ChangesHealth@up_bushidodiscipline:
+	ChangesHealth@up_bushidodiscipline.japan:
 		Step: 10
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline
-	ChangesShield@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline.japan
+	ChangesShield@up_bushidodiscipline.japan:
 		Step: 20
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline
+		RequiresCondition: up_bushidodiscipline.japan
 	GrantConditionOnDamageState@wounded:
 		Condition: wounded
 	DamageMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 80
 	FirepowerMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 120
 	ReloadDelayMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 80
 	SpeedMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 120
 	RangeMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 120
 	RevealsShroudMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 120
 	DetectCloakedMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 120
 	InaccuracyMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 		Modifier: 80
 	ChangesHealth@wounded:
 		Step: 20
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 	ChangesShield@wounded:
 		Step: 40
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: up_bushidodiscipline.japan && wounded
 	WithDecoration@wounded:
 		Image: bushido_icon
 		Sequence: idle
@@ -370,89 +370,89 @@
 		Position: TopRight
 		BlinkInterval: 1
 		BlinkPattern: On, Off, On, Off
-		RequiresCondition: up_bushidodiscipline && wounded
-	GrantConditionOnPrerequisite@up_bushidodiscipline:
-		Condition: up_bushidodiscipline
-		Prerequisites: up_bushidodiscipline
+		RequiresCondition: up_bushidodiscipline.japan && wounded
+	GrantConditionOnPrerequisite@up_bushidodiscipline.japan:
+		Condition: up_bushidodiscipline.japan
+		Prerequisites: up_bushidodiscipline.japan
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline
+		Upgrades: up_bushidodiscipline.japan
 
 ^WaveforceBullets:
-	FirepowerMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	FirepowerMultiplier@up_waveforcebullets.japan:
+		RequiresCondition: up_waveforcebullets.japan
 		Modifier: 110
-	ReloadDelayMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	ReloadDelayMultiplier@up_waveforcebullets.japan:
+		RequiresCondition: up_waveforcebullets.japan
 		Modifier: 90
-	RangeMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	RangeMultiplier@up_waveforcebullets.japan:
+		RequiresCondition: up_waveforcebullets.japan
 		Modifier: 110
-	RevealsShroudMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	RevealsShroudMultiplier@up_waveforcebullets.japan:
+		RequiresCondition: up_waveforcebullets.japan
 		Modifier: 110
-	DetectCloakedMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	DetectCloakedMultiplier@up_waveforcebullets.japan:
+		RequiresCondition: up_waveforcebullets.japan
 		Modifier: 110
-	InaccuracyMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	InaccuracyMultiplier@up_waveforcebullets.japan:
+		RequiresCondition: up_waveforcebullets.japan
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_waveforcebullets:
-		Condition: up_waveforcebullets
-		Prerequisites: up_waveforcebullets
+	GrantConditionOnPrerequisite@up_waveforcebullets.japan:
+		Condition: up_waveforcebullets.japan
+		Prerequisites: up_waveforcebullets.japan
 	ActorStatValues:
-		Upgrades: up_waveforcebullets
+		Upgrades: up_waveforcebullets.japan
 
 ^DivineWindProtocol:
-	DamageMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	DamageMultiplier@up_divinewindprotocol.japan:
+		RequiresCondition: up_divinewindprotocol.japan
 		Modifier: 90
-	FirepowerMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	FirepowerMultiplier@up_divinewindprotocol.japan:
+		RequiresCondition: up_divinewindprotocol.japan
 		Modifier: 110
-	ReloadDelayMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	ReloadDelayMultiplier@up_divinewindprotocol.japan:
+		RequiresCondition: up_divinewindprotocol.japan
 		Modifier: 90
-	ReloadAmmoDelayMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	ReloadAmmoDelayMultiplier@up_divinewindprotocol.japan:
+		RequiresCondition: up_divinewindprotocol.japan
 		Modifier: 90
-	SpeedMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	SpeedMultiplier@up_divinewindprotocol.japan:
+		RequiresCondition: up_divinewindprotocol.japan
 		Modifier: 110
-	GrantConditionOnPrerequisite@up_divinewindprotocol:
-		Condition: up_divinewindprotocol
-		Prerequisites: up_divinewindprotocol
+	GrantConditionOnPrerequisite@up_divinewindprotocol.japan:
+		Condition: up_divinewindprotocol.japan
+		Prerequisites: up_divinewindprotocol.japan
 	ActorStatValues:
-		Upgrades: up_divinewindprotocol
+		Upgrades: up_divinewindprotocol.japan
 
 ^StealthSuitIntegration:
-	Cloak@up_stealthsuitintegration:
+	Cloak@up_stealthsuitintegration.japan:
 		InitialDelay: 125
 		CloakDelay: 75
 		CloakSound: appear1.aud
 		UncloakSound: trans1.aud
 		UncloakOn: Attack, Move, Damage, Heal, SelfHeal
-		RequiresCondition: up_stealthsuitintegration
-	SpeedMultiplier@up_stealthsuitintegration:
-		RequiresCondition: up_stealthsuitintegration
+		RequiresCondition: up_stealthsuitintegration.japan
+	SpeedMultiplier@up_stealthsuitintegration.japan:
+		RequiresCondition: up_stealthsuitintegration.japan
 		Modifier: 110
-	DamageMultiplier@up_stealthsuitintegration:
-		RequiresCondition: up_stealthsuitintegration
+	DamageMultiplier@up_stealthsuitintegration.japan:
+		RequiresCondition: up_stealthsuitintegration.japan
 		Modifier: 90
 	Shielded:
 		DamageRegenDelay: 125
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
-		RequiresCondition: !disabled && (up_stealthsuitintegration || shieldgen || shielded)
+		RequiresCondition: !disabled && (up_stealthsuitintegration.japan || shieldgen || shielded)
 		SelectionBarColor: 8888FFFF
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
-		RequiresCondition: up_stealthsuitintegration
+		RequiresCondition: up_stealthsuitintegration.japan
 	ChangesShield@personal_shield:
 		Step: 30
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 125
-		RequiresCondition: up_stealthsuitintegration
+		RequiresCondition: up_stealthsuitintegration.japan
 	Armor:
 		RequiresCondition: !shielded
 	Armor@shielded:
@@ -463,62 +463,62 @@
 		Modifier: 90
 	ChangesShield@shielddischarge:
 		Delay: 10
-	GrantConditionOnPrerequisite@up_stealthsuitintegration:
-		Condition: up_stealthsuitintegration
-		Prerequisites: up_stealthsuitintegration
+	GrantConditionOnPrerequisite@up_stealthsuitintegration.japan:
+		Condition: up_stealthsuitintegration.japan
+		Prerequisites: up_stealthsuitintegration.japan
 	ActorStatValues:
-		Upgrades: up_stealthsuitintegration:
+		Upgrades: up_stealthsuitintegration.japan:
 
 ^EnergizedArrows:
-	FirepowerMultiplier@up_energizedarrows:
-		RequiresCondition: up_energizedarrows
+	FirepowerMultiplier@up_energizedarrows.japan:
+		RequiresCondition: up_energizedarrows.japan
 		Modifier: 125
-	GrantConditionOnPrerequisite@up_energizedarrows:
-		Condition: up_energizedarrows
-		Prerequisites: up_energizedarrows
+	GrantConditionOnPrerequisite@up_energizedarrows.japan:
+		Condition: up_energizedarrows.japan
+		Prerequisites: up_energizedarrows.japan
 	ActorStatValues:
-		Upgrades: up_energizedarrows
+		Upgrades: up_energizedarrows.japan
 
 ^SuperiorWarEngines:
-	SpeedMultiplier@up_superiorwarengines:
-		RequiresCondition: up_superiorwarengines
+	SpeedMultiplier@up_superiorwarengines.japan:
+		RequiresCondition: up_superiorwarengines.japan
 		Modifier: 120
-	ReloadDelayMultiplier@up_superiorwarengines:
-		RequiresCondition: up_superiorwarengines
+	ReloadDelayMultiplier@up_superiorwarengines.japan:
+		RequiresCondition: up_superiorwarengines.japan
 		Modifier: 80
-	DamageMultiplier@up_superiorwarengines:
-		RequiresCondition: up_superiorwarengines
+	DamageMultiplier@up_superiorwarengines.japan:
+		RequiresCondition: up_superiorwarengines.japan
 		Modifier: 80
-	GrantConditionOnPrerequisite@up_superiorwarengines:
-		Condition: up_superiorwarengines
-		Prerequisites: up_superiorwarengines
+	GrantConditionOnPrerequisite@up_superiorwarengines.japan:
+		Condition: up_superiorwarengines.japan
+		Prerequisites: up_superiorwarengines.japan
 	ActorStatValues:
-		Upgrades: up_superiorwarengines
+		Upgrades: up_superiorwarengines.japan
 
 ^AdvancedPlasmaWeapons:
-	FirepowerMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	FirepowerMultiplier@up_advancedplasmaweapons.japan:
+		RequiresCondition: up_advancedplasmaweapons.japan
 		Modifier: 110
-	ReloadDelayMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	ReloadDelayMultiplier@up_advancedplasmaweapons.japan:
+		RequiresCondition: up_advancedplasmaweapons.japan
 		Modifier: 90
-	RangeMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	RangeMultiplier@up_advancedplasmaweapons.japan:
+		RequiresCondition: up_advancedplasmaweapons.japan
 		Modifier: 110
-	RevealsShroudMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	RevealsShroudMultiplier@up_advancedplasmaweapons.japan:
+		RequiresCondition: up_advancedplasmaweapons.japan
 		Modifier: 110
-	DetectCloakedMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	DetectCloakedMultiplier@up_advancedplasmaweapons.japan:
+		RequiresCondition: up_advancedplasmaweapons.japan
 		Modifier: 110
-	InaccuracyMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	InaccuracyMultiplier@up_advancedplasmaweapons.japan:
+		RequiresCondition: up_advancedplasmaweapons.japan
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_advancedplasmaweapons:
-		Condition: up_advancedplasmaweapons
-		Prerequisites: up_advancedplasmaweapons
+	GrantConditionOnPrerequisite@up_advancedplasmaweapons.japan:
+		Condition: up_advancedplasmaweapons.japan
+		Prerequisites: up_advancedplasmaweapons.japan
 	ActorStatValues:
-		Upgrades: up_advancedplasmaweapons
+		Upgrades: up_advancedplasmaweapons.japan
 
 ^NanoTechRepairs:
 	ChangesHealth@up_nanotechrepairs1:
@@ -526,21 +526,21 @@
 		Delay: 100
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: up_nanotechrepairs.japan
 	ChangesHealth@up_nanotechrepairs2:
 		Step: 20
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_nanotechrepairs
-	DamageMultiplier@up_nanotechrepairs:
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: up_nanotechrepairs.japan
+	DamageMultiplier@up_nanotechrepairs.japan:
+		RequiresCondition: up_nanotechrepairs.japan
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_nanotechrepairs:
-		Condition: up_nanotechrepairs
-		Prerequisites: up_nanotechrepairs
+	GrantConditionOnPrerequisite@up_nanotechrepairs.japan:
+		Condition: up_nanotechrepairs.japan
+		Prerequisites: up_nanotechrepairs.japan
 	ActorStatValues:
-		Upgrades: up_nanotechrepairs
+		Upgrades: up_nanotechrepairs.japan
 
 ^NanoTechExtraRepairs:
 	WithColoredOverlay@nanotechrepairsdamage:
@@ -573,7 +573,7 @@
 		Condition: nanotechrepairsdamagecooldown
 		Duration: 5
 	GrantConditionOnDamage@nanotechrepairsdamage:
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: up_nanotechrepairs.japan
 		Condition: nanotechrepairsdamage
 		Duration: 10
 		PlayerRelationship: Ally, Neutral, Enemy
@@ -607,7 +607,7 @@
 		Condition: extrananotechrepairsdamagecooldown
 		Duration: 10
 	GrantConditionOnDamage@extrananotechrepairsdamage:
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: up_nanotechrepairs.japan
 		Condition: extrananotechrepairsdamage
 		Duration: 20
 		PlayerRelationship: Ally, Neutral, Enemy
@@ -923,240 +923,240 @@
 		OccupiesSpace: false
 
 ^IndustrialEfficiencyDoctrineRA1:
-	GrantConditionOnPrerequisite@ra_doctrine_industrialefficiency:
-		Condition: ra_doctrine_industrialefficiency
-		Prerequisites: ra_doctrine_industrialefficiency
+	GrantConditionOnPrerequisite@up_doctrine_industrialefficiency.soviet:
+		Condition: up_doctrine_industrialefficiency.soviet
+		Prerequisites: up_doctrine_industrialefficiency.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_industrialefficiency
+		Upgrades: up_doctrine_industrialefficiency.soviet
 
 ^InfernoDoctrineRA1:
-	GrantConditionOnPrerequisite@ra_doctrine_inferno:
-		Condition: ra_doctrine_inferno
-		Prerequisites: ra_doctrine_inferno
-	FirepowerMultiplier@ra_doctrine_inferno:
-		RequiresCondition: ra_doctrine_inferno
+	GrantConditionOnPrerequisite@up_doctrine_inferno.soviet:
+		Condition: up_doctrine_inferno.soviet
+		Prerequisites: up_doctrine_inferno.soviet
+	FirepowerMultiplier@up_doctrine_inferno.soviet:
+		RequiresCondition: up_doctrine_inferno.soviet
 		Modifier: 125
-	DamageMultiplier@ra_doctrine_inferno:
-		RequiresCondition: ra_doctrine_inferno
+	DamageMultiplier@up_doctrine_inferno.soviet:
+		RequiresCondition: up_doctrine_inferno.soviet
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: ra_doctrine_inferno
+		Upgrades: up_doctrine_inferno.soviet
 
 ^TeslaExperimentalTechDoctrineRA1:
-	GrantConditionOnPrerequisite@ra_doctrine_teslatech:
-		Condition: ra_doctrine_teslatech
-		Prerequisites: ra_doctrine_teslatech
+	GrantConditionOnPrerequisite@up_doctrine_teslatech.soviet:
+		Condition: up_doctrine_teslatech.soviet
+		Prerequisites: up_doctrine_teslatech.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_teslatech
+		Upgrades: up_doctrine_teslatech.soviet
 
 ^HeavyArmorDoctrineRA1:
-	DamageMultiplier@ra_doctrine_heavyarmor:
-		RequiresCondition: ra_doctrine_heavyarmor
+	DamageMultiplier@up_doctrine_heavyarmor.soviet:
+		RequiresCondition: up_doctrine_heavyarmor.soviet
 		Modifier: 90
-	GrantConditionOnPrerequisite@ra_doctrine_heavyarmor:
-		Condition: ra_doctrine_heavyarmor
-		Prerequisites: ra_doctrine_heavyarmor
+	GrantConditionOnPrerequisite@up_doctrine_heavyarmor.soviet:
+		Condition: up_doctrine_heavyarmor.soviet
+		Prerequisites: up_doctrine_heavyarmor.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_heavyarmor
+		Upgrades: up_doctrine_heavyarmor.soviet
 
 ^NuclearWarDoctrineRA1:
-	FirepowerMultiplier@ra_doctrine_nuclearwar:
-		RequiresCondition: ra_doctrine_nuclearwar
+	FirepowerMultiplier@up_doctrine_nuclearwar.soviet:
+		RequiresCondition: up_doctrine_nuclearwar.soviet
 		Modifier: 110
-	SpeedMultiplier@ra_doctrine_nuclearwar:
-		RequiresCondition: ra_doctrine_nuclearwar
+	SpeedMultiplier@up_doctrine_nuclearwar.soviet:
+		RequiresCondition: up_doctrine_nuclearwar.soviet
 		Modifier: 110
-	GrantConditionOnPrerequisite@ra_doctrine_nuclearwar:
-		Condition: ra_doctrine_nuclearwar
-		Prerequisites: ra_doctrine_nuclearwar
+	GrantConditionOnPrerequisite@up_doctrine_nuclearwar.soviet:
+		Condition: up_doctrine_nuclearwar.soviet
+		Prerequisites: up_doctrine_nuclearwar.soviet
 	ActorStatValues:
-		Upgrades: ra_doctrine_nuclearwar
+		Upgrades: up_doctrine_nuclearwar.soviet
 
 ####################################################################################################
 #		Upgrades Soviets
 ####################################################################################################
 
 ^VengeanceUpgradeRA1:
-	GrantConditionOnPrerequisite@ra_upgrade_vengeance:
-		Condition: ra_upgrade_vengeance
-		Prerequisites: ra_upgrade_vengeance
+	GrantConditionOnPrerequisite@up_vengeance.soviet:
+		Condition: up_vengeance.soviet
+		Prerequisites: up_vengeance.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_vengeance
+		Upgrades: up_vengeance.soviet
 
 ^MenOfSteelTeamUpgradeRA1:
-	FirepowerMultiplier@ra_upgrade_menofsteel:
-		RequiresCondition: ra_upgrade_menofsteel
+	FirepowerMultiplier@up_menofsteel.soviet:
+		RequiresCondition: up_menofsteel.soviet
 		Modifier: 110
-	DamageMultiplier@ra_upgrade_menofsteel:
-		RequiresCondition: ra_upgrade_menofsteel
+	DamageMultiplier@up_menofsteel.soviet:
+		RequiresCondition: up_menofsteel.soviet
 		Modifier: 90
-	GrantConditionOnPrerequisite@ra_upgrade_menofsteel:
-		Condition: ra_upgrade_menofsteel
-		Prerequisites: ra_upgrade_menofsteel
+	GrantConditionOnPrerequisite@up_menofsteel.soviet:
+		Condition: up_menofsteel.soviet
+		Prerequisites: up_menofsteel.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_menofsteel
+		Upgrades: up_menofsteel.soviet
 
 #############################
 
 ^WarEconomyTeamUpgradeRA1:
-	ProductionCostMultiplier@ra_upgrade_wareconomy:
-		Prerequisites: ra_upgrade_wareconomy
+	ProductionCostMultiplier@up_wareconomy.soviet:
+		Prerequisites: up_wareconomy.soviet
 		Multiplier: 90
-	ProductionTimeMultiplier@ra_upgrade_wareconomy:
-		Prerequisites: ra_upgrade_wareconomy
+	ProductionTimeMultiplier@up_wareconomy.soviet:
+		Prerequisites: up_wareconomy.soviet
 		Multiplier: 90
-	SpeedMultiplier@ra_upgrade_wareconomy:
-		RequiresCondition: ra_upgrade_wareconomy
+	SpeedMultiplier@up_wareconomy.soviet:
+		RequiresCondition: up_wareconomy.soviet
 		Modifier: 110
-	ResourceValueMultiplier@ra_upgrade_wareconomy:
+	ResourceValueMultiplier@up_wareconomy.soviet:
 		Modifier: 110
-		RequiresCondition: ra_upgrade_wareconomy
-	GrantConditionOnPrerequisite@ra_upgrade_wareconomy:
-		Condition: ra_upgrade_wareconomy
-		Prerequisites: ra_upgrade_wareconomy
+		RequiresCondition: up_wareconomy.soviet
+	GrantConditionOnPrerequisite@up_wareconomy.soviet:
+		Condition: up_wareconomy.soviet
+		Prerequisites: up_wareconomy.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_wareconomy
+		Upgrades: up_wareconomy.soviet
 
 #############################
 
 ^IncendiaryBulletsUpgradeRA1:
-	GrantConditionOnPrerequisite@ra_upgrade_incendiarybullets:
-		Condition: ra_upgrade_incendiarybullets
-		Prerequisites: ra_upgrade_incendiarybullets
+	GrantConditionOnPrerequisite@up_incendiarybullets.soviet:
+		Condition: up_incendiarybullets.soviet
+		Prerequisites: up_incendiarybullets.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_incendiarybullets
+		Upgrades: up_incendiarybullets.soviet
 
 ^ScorchedEarthTeamUpgradeRA1:
-	FirepowerMultiplier@ra_upgrade_scorchedearth:
-		RequiresCondition: ra_upgrade_scorchedearth
+	FirepowerMultiplier@up_scorchedearth.soviet:
+		RequiresCondition: up_scorchedearth.soviet
 		Modifier: 125
-	GrantConditionOnPrerequisite@ra_upgrade_scorchedearth:
-		Condition: ra_upgrade_scorchedearth
-		Prerequisites: ra_upgrade_scorchedearth
+	GrantConditionOnPrerequisite@up_scorchedearth.soviet:
+		Condition: up_scorchedearth.soviet
+		Prerequisites: up_scorchedearth.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_scorchedearth
+		Upgrades: up_scorchedearth.soviet
 
 #############################
 
 ^TeslaArcingUpgradeRA1:
-	GrantConditionOnPrerequisite@ra_upgrade_teslaarcing:
-		Condition: ra_upgrade_teslaarcing
-		Prerequisites: ra_upgrade_teslaarcing
+	GrantConditionOnPrerequisite@up_teslaarcing.soviet:
+		Condition: up_teslaarcing.soviet
+		Prerequisites: up_teslaarcing.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_teslaarcing
+		Upgrades: up_teslaarcing.soviet
 
 ^TeslaRocketsUpgradeRA1:
-	GrantConditionOnPrerequisite@ra_upgrade_teslarockets:
-		Condition: ra_upgrade_teslarockets
-		Prerequisites: ra_upgrade_teslarockets
+	GrantConditionOnPrerequisite@up_teslarockets.soviet:
+		Condition: up_teslarockets.soviet
+		Prerequisites: up_teslarockets.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_teslarockets
+		Upgrades: up_teslarockets.soviet
 
 ^ReactorOverloadTeamUpgradeRA1:
-	PowerMultiplier@ra_upgrade_reactoroverload:
-		RequiresCondition: ra_upgrade_reactoroverload
+	PowerMultiplier@up_reactoroverload.soviet:
+		RequiresCondition: up_reactoroverload.soviet
 		Modifier: 200
-	GrantConditionOnPrerequisite@ra_upgrade_reactoroverload:
-		Condition: ra_upgrade_reactoroverload
-		Prerequisites: ra_upgrade_reactoroverload
+	GrantConditionOnPrerequisite@up_reactoroverload.soviet:
+		Condition: up_reactoroverload.soviet
+		Prerequisites: up_reactoroverload.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_reactoroverload
+		Upgrades: up_reactoroverload.soviet
 
 #############################
 
 ^AutoloadersUpgradeRA1:
-	ReloadDelayMultiplier@ra_upgrade_autoloaders:
-		RequiresCondition: ra_upgrade_autoloaders
+	ReloadDelayMultiplier@up_autoloaders.soviet:
+		RequiresCondition: up_autoloaders.soviet
 		Modifier: 60
-	ReloadAmmoDelayMultiplier@ra_upgrade_autoloaders:
-		RequiresCondition: ra_upgrade_autoloaders
+	ReloadAmmoDelayMultiplier@up_autoloaders.soviet:
+		RequiresCondition: up_autoloaders.soviet
 		Modifier: 60
-	GrantConditionOnPrerequisite@ra_upgrade_autoloaders:
-		Condition: ra_upgrade_autoloaders
-		Prerequisites: ra_upgrade_autoloaders
+	GrantConditionOnPrerequisite@up_autoloaders.soviet:
+		Condition: up_autoloaders.soviet
+		Prerequisites: up_autoloaders.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_autoloaders
+		Upgrades: up_autoloaders.soviet
 
 ^HighExplosiveRocketsUpgradeRA1:
-	GrantConditionOnPrerequisite@ra_upgrade_highexplosiverockets:
-		Condition: ra_upgrade_highexplosiverockets
-		Prerequisites: ra_upgrade_highexplosiverockets
+	GrantConditionOnPrerequisite@up_highexplosiverockets.soviet:
+		Condition: up_highexplosiverockets.soviet
+		Prerequisites: up_highexplosiverockets.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_highexplosiverockets
+		Upgrades: up_highexplosiverockets.soviet
 
 ^StaliniumTeamUpgradeRA1:
-	DamageMultiplier@ra_upgrade_stalinium:
-		RequiresCondition: ra_upgrade_stalinium
+	DamageMultiplier@up_stalinium.soviet:
+		RequiresCondition: up_stalinium.soviet
 		Modifier: 80
-	GrantConditionOnPrerequisite@ra_upgrade_stalinium:
-		Condition: ra_upgrade_stalinium
-		Prerequisites: ra_upgrade_stalinium
+	GrantConditionOnPrerequisite@up_stalinium.soviet:
+		Condition: up_stalinium.soviet
+		Prerequisites: up_stalinium.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_stalinium
+		Upgrades: up_stalinium.soviet
 
 #############################
 
 ^UnstableIsotopesUpgradeRA1:
-	SpeedMultiplier@ra_upgrade_unstableisotopes:
-		RequiresCondition: ra_upgrade_unstableisotopes
+	SpeedMultiplier@up_unstableisotopes.soviet:
+		RequiresCondition: up_unstableisotopes.soviet
 		Modifier: 120
-	GrantConditionOnPrerequisite@ra_upgrade_unstableisotopes:
-		Condition: ra_upgrade_unstableisotopes
-		Prerequisites: ra_upgrade_unstableisotopes
+	GrantConditionOnPrerequisite@up_unstableisotopes.soviet:
+		Condition: up_unstableisotopes.soviet
+		Prerequisites: up_unstableisotopes.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_unstableisotopes
+		Upgrades: up_unstableisotopes.soviet
 
 ^NuclearRocketsUpgradeRA1:
-	GrantConditionOnPrerequisite@ra_upgrade_nuclearrockets:
-		Condition: ra_upgrade_nuclearrockets
-		Prerequisites: ra_upgrade_nuclearrockets
+	GrantConditionOnPrerequisite@up_nuclearrockets.soviet:
+		Condition: up_nuclearrockets.soviet
+		Prerequisites: up_nuclearrockets.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_nuclearrockets
+		Upgrades: up_nuclearrockets.soviet
 
 ^NuclearShellsTeamUpgradeRA1:
-	FirepowerMultiplier@ra_upgrade_nuclearshells:
-		RequiresCondition: ra_upgrade_nuclearshells
+	FirepowerMultiplier@up_nuclearshells.soviet:
+		RequiresCondition: up_nuclearshells.soviet
 		Modifier: 120
-	GrantConditionOnPrerequisite@ra_upgrade_nuclearshells:
-		Condition: ra_upgrade_nuclearshells
-		Prerequisites: ra_upgrade_nuclearshells
+	GrantConditionOnPrerequisite@up_nuclearshells.soviet:
+		Condition: up_nuclearshells.soviet
+		Prerequisites: up_nuclearshells.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_nuclearshells
+		Upgrades: up_nuclearshells.soviet
 
 #############################
 
 ^AfterburnersUpgradeRA1:
-	SpeedMultiplier@ra_upgrade_afterburners:
-		RequiresCondition: ra_upgrade_afterburners
+	SpeedMultiplier@up_afterburners.soviet:
+		RequiresCondition: up_afterburners.soviet
 		Modifier: 115
-	RangeMultiplier@ra_upgrade_afterburners:
-		RequiresCondition: ra_upgrade_afterburners
+	RangeMultiplier@up_afterburners.soviet:
+		RequiresCondition: up_afterburners.soviet
 		Modifier: 115
-	FirepowerMultiplier@ra_upgrade_afterburners:
-		RequiresCondition: ra_upgrade_afterburners
+	FirepowerMultiplier@up_afterburners.soviet:
+		RequiresCondition: up_afterburners.soviet
 		Modifier: 115
-	DamageMultiplier@ra_upgrade_afterburners:
-		RequiresCondition: ra_upgrade_afterburners
+	DamageMultiplier@up_afterburners.soviet:
+		RequiresCondition: up_afterburners.soviet
 		Modifier: 85
-	GrantConditionOnPrerequisite@ra_upgrade_afterburners:
-		Condition: ra_upgrade_afterburners
-		Prerequisites: ra_upgrade_afterburners
+	GrantConditionOnPrerequisite@up_afterburners.soviet:
+		Condition: up_afterburners.soviet
+		Prerequisites: up_afterburners.soviet
 	ActorStatValues:
-		Upgrades: ra_upgrade_afterburners
+		Upgrades: up_afterburners.soviet
 
 ^SuperOpticsPromotionRA1:
-	RevealsShroudMultiplier@ra_promotion_superoptics:
-		RequiresCondition: ra_promotion_superoptics
+	RevealsShroudMultiplier@up_promotion_superoptics.soviet:
+		RequiresCondition: up_promotion_superoptics.soviet
 		Modifier: 120
-	DetectCloakedMultiplier@ra_promotion_superoptics:
-		RequiresCondition: ra_promotion_superoptics
+	DetectCloakedMultiplier@up_promotion_superoptics.soviet:
+		RequiresCondition: up_promotion_superoptics.soviet
 		Modifier: 120
-	RangeMultiplier@ra_promotion_superoptics:
-		RequiresCondition: ra_promotion_superoptics
+	RangeMultiplier@up_promotion_superoptics.soviet:
+		RequiresCondition: up_promotion_superoptics.soviet
 		Modifier: 110
-	GrantConditionOnPrerequisite@ra_promotion_superoptics:
-		Condition: ra_promotion_superoptics
-		Prerequisites: ra_promotion_superoptics
+	GrantConditionOnPrerequisite@up_promotion_superoptics.soviet:
+		Condition: up_promotion_superoptics.soviet
+		Prerequisites: up_promotion_superoptics.soviet
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics
+		Upgrades: up_promotion_superoptics.soviet
 

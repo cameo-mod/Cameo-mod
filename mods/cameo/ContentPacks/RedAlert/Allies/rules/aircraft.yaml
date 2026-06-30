@@ -107,7 +107,7 @@ MH60:
 		RequiresSelection: True
 		PipCount: 6
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_airsuperioritydoctrine.allies, up_gpssatellitesupport.allies
 
 RAHELI:
 	Inherits: ^Helicopter
@@ -146,14 +146,14 @@ RAHELI:
 		LocalYaw: -75, 75
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: HellfireCryo
 		LocalOffset: 50,250,-100, 50,-250,-100
 		LocalYaw: -75, 75
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
@@ -222,7 +222,7 @@ RAHELI:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_airsuperioritydoctrine.allies, up_gpssatellitesupport.allies
 
 RATRAN:
 	Inherits: ^Helicopter
@@ -297,7 +297,7 @@ RATRAN:
 	FireWarheadsOnDeath:
 		Weapon: LargeHeliExplode
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_airsuperioritydoctrine.allies, up_gpssatellitesupport.allies
 
 RATRAN.Husk:
 	Inherits: ^LargeHelicopterHusk
@@ -327,7 +327,7 @@ rapierjumpjet:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: atek, ~uprapierjumpjet
+		Prerequisites: atek, ~up_rapierjumpjet.allies
 		Description: actor-rapierjumpjet.description
 	Valued:
 		Cost: 1300
@@ -345,12 +345,12 @@ rapierjumpjet:
 		Weapon: RapierBombs
 		LocalOffset: 256,213,0, 256,-213,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade:
 		Weapon: RapierBombsCryo
 		LocalOffset: 256,213,0, 256,-213,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: Aphid
@@ -358,7 +358,7 @@ rapierjumpjet:
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@SECONDARYUpgrade:
 		Name: secondary
 		Weapon: AphidCryo
@@ -366,7 +366,7 @@ rapierjumpjet:
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	AttackAircraft:
@@ -415,7 +415,7 @@ rapierjumpjet:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_airsuperioritydoctrine.allies, up_gpssatellitesupport.allies
 
 rapierjumpjet.Husk:
 	Inherits: ^PlaneHusk

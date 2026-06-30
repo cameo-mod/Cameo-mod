@@ -1,4 +1,4 @@
-up_bushidodiscipline:
+up_bushidodiscipline.japan:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Bushido Discipline
@@ -8,12 +8,12 @@ up_bushidodiscipline:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-bushidodiscipline.description
-		Prerequisites: ~dome.japan, !up_bushidodiscipline
+		Prerequisites: ~dome.japan, !up_bushidodiscipline.japan
 	RenderSprites:
 		Image: bushidodisciplineicon
 	ProvidesPrerequisite:
 
-up_waveforcebullets:
+up_waveforcebullets.japan:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Waveforce Bullets
@@ -23,12 +23,12 @@ up_waveforcebullets:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-waveforcebullets.description
-		Prerequisites: ~dome.japan, !up_waveforcebullets
+		Prerequisites: ~dome.japan, !up_waveforcebullets.japan
 	RenderSprites:
 		Image: waveforcebulletsicon
 	ProvidesPrerequisite:
 
-up_divinewindprotocol:
+up_divinewindprotocol.japan:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Divine Wind Protocol
@@ -38,12 +38,12 @@ up_divinewindprotocol:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-divinewindprotocol.description
-		Prerequisites: ~dome.japan, !up_divinewindprotocol
+		Prerequisites: ~dome.japan, !up_divinewindprotocol.japan
 	RenderSprites:
 		Image: divinewindprotocol
 	ProvidesPrerequisite:
 
-up_stealthsuitintegration:
+up_stealthsuitintegration.japan:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Stealth Suit Integration
@@ -53,12 +53,12 @@ up_stealthsuitintegration:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-stealthsuitintegration.description
-		Prerequisites: ~modjtek, !up_stealthsuitintegration
+		Prerequisites: ~modjtek, !up_stealthsuitintegration.japan
 	RenderSprites:
 		Image: stealthsuitintegrationicon
 	ProvidesPrerequisite:
 
-up_energizedarrows:
+up_energizedarrows.japan:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Energized Arrows
@@ -68,12 +68,12 @@ up_energizedarrows:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-energizedarrows.description
-		Prerequisites: ~modjtek, !up_energizedarrows
+		Prerequisites: ~modjtek, !up_energizedarrows.japan
 	RenderSprites:
 		Image: energizedarrowsicon
 	ProvidesPrerequisite:
 
-up_superiorwarengines:
+up_superiorwarengines.japan:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Superior War Engines
@@ -83,12 +83,12 @@ up_superiorwarengines:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-superiorwarengines.description
-		Prerequisites: ~modjtek, !up_superiorwarengines
+		Prerequisites: ~modjtek, !up_superiorwarengines.japan
 	RenderSprites:
 		Image: superiorwarenginesicon
 	ProvidesPrerequisite:
 
-up_advancedplasmaweapons:
+up_advancedplasmaweapons.japan:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Advanced Plasma Weapons
@@ -98,12 +98,12 @@ up_advancedplasmaweapons:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-advancedplasmaweapons.description
-		Prerequisites: ~modjtek, !up_advancedplasmaweapons
+		Prerequisites: ~modjtek, !up_advancedplasmaweapons.japan
 	RenderSprites:
 		Image: advancedplasmaweaponsicon
 	ProvidesPrerequisite:
 
-up_nanotechrepairs:
+up_nanotechrepairs.japan:
 	Inherits: ^upgrade.template
 	Tooltip:
 		Name: Nanotech Repairs
@@ -113,17 +113,17 @@ up_nanotechrepairs:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-nanotechrepairs.description
-		Prerequisites: ~modjtek, !up_nanotechrepairs
+		Prerequisites: ~modjtek, !up_nanotechrepairs.japan
 	RenderSprites:
 		Image: nanotechrepairsicon
 	#ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
-		Actor: team_upgrade.up_nanotechrepairs
+		Actor: up_team_nanotechrepairs.japan
 
-team_upgrade.up_nanotechrepairs:
+up_team_nanotechrepairs.japan:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_nanotechrepairs
+		Prerequisite: up_nanotechrepairs.japan
 	RenderSprites:
 		Image: nanotechrepairsicon
 	Tooltip:
@@ -136,7 +136,7 @@ team_upgrade.up_nanotechrepairs:
 	#		Promotions Japan
 	####################################################################################################
 
-upsamurai:
+up_samurai.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Samurai
@@ -144,13 +144,13 @@ upsamurai:
 		BuildPaletteOrder: 49
 		Queue: Promotions
 		Description: Allows training of Samurai.
-		Prerequisites: ~rafact.japan, !upsamurai, rank1
+		Prerequisites: ~rafact.japan, !up_samurai.japan, rank1
 	RenderSprites:
 		Image: rasamurai
 	ProvidesPrerequisite:
-		Prerequisite: upsamurai
+		Prerequisite: up_samurai.japan
 
-uparchermaiden:
+up_archermaiden.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Archer Maiden
@@ -158,13 +158,13 @@ uparchermaiden:
 		BuildPaletteOrder: 52
 		Queue: Promotions
 		Description: Allows training of Archer Maidens.
-		Prerequisites: ~rafact.japan, !uparchermaiden, upsamurai, rank1
+		Prerequisites: ~rafact.japan, !up_archermaiden.japan, up_samurai.japan, rank1
 	RenderSprites:
 		Image: ramaid
 	ProvidesPrerequisite:
-		Prerequisite: uparchermaiden
+		Prerequisite: up_archermaiden.japan
 
-uprocketangel:
+up_rocketangel.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Rocket Angel
@@ -172,13 +172,13 @@ uprocketangel:
 		BuildPaletteOrder: 55
 		Queue: Promotions
 		Description: Allows training of Rocket Angels.
-		Prerequisites: ~rafact.japan, !uprocketangel, uparchermaiden, rank1
+		Prerequisites: ~rafact.japan, !up_rocketangel.japan, up_archermaiden.japan, rank1
 	RenderSprites:
 		Image: rocketangel
 	ProvidesPrerequisite:
-		Prerequisite: uprocketangel
+		Prerequisite: up_rocketangel.japan
 
-uphakurei:
+up_hakurei.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Exorcist
@@ -186,13 +186,13 @@ uphakurei:
 		BuildPaletteOrder: 58
 		Queue: Promotions
 		Description: Allows training of the Exorcist.
-		Prerequisites: ~rafact.japan, !uphakurei, uprocketangel, rank1
+		Prerequisites: ~rafact.japan, !up_hakurei.japan, up_rocketangel.japan, rank1
 	RenderSprites:
 		Image: hakurei
 	ProvidesPrerequisite:
-		Prerequisite: uphakurei
+		Prerequisite: up_hakurei.japan
 
-uparmoredcarr:
+up_armoredcarr.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Armored Car
@@ -200,13 +200,13 @@ uparmoredcarr:
 		BuildPaletteOrder: 50
 		Queue: Promotions
 		Description: Allows construction of the Armored Car.
-		Prerequisites: ~rafact.japan, !uparmoredcarr, rank1
+		Prerequisites: ~rafact.japan, !up_armoredcarr.japan, rank1
 	RenderSprites:
 		Image: modcarr
 	ProvidesPrerequisite:
-		Prerequisite: uparmoredcarr
+		Prerequisite: up_armoredcarr.japan
 
-upchiha:
+up_chiha.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Heavy Chi-Ha Heavy Tank
@@ -214,13 +214,13 @@ upchiha:
 		BuildPaletteOrder: 53
 		Queue: Promotions
 		Description: Allows construction of the Chi-Ha Heavy Tank.
-		Prerequisites: ~rafact.japan, !upchiha, uparmoredcarr, rank1
+		Prerequisites: ~rafact.japan, !up_chiha.japan, up_armoredcarr.japan, rank1
 	RenderSprites:
 		Image: typechiha
 	ProvidesPrerequisite:
-		Prerequisite: upchiha
+		Prerequisite: up_chiha.japan
 
-upflamehovertank:
+up_flamehovertank.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Hovercraft Flametank
@@ -228,13 +228,13 @@ upflamehovertank:
 		BuildPaletteOrder: 56
 		Queue: Promotions
 		Description: Allows construction of the Hovercraft Flametank.
-		Prerequisites: ~rafact.japan, !upflamehovertank, upchiha, rank1
+		Prerequisites: ~rafact.japan, !up_flamehovertank.japan, up_chiha.japan, rank1
 	RenderSprites:
 		Image: modhovert
 	ProvidesPrerequisite:
-		Prerequisite: upflamehovertank
+		Prerequisite: up_flamehovertank.japan
 
-upshogunexecutioner:
+up_shogunexecutioner.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Shogun Executioner
@@ -242,13 +242,13 @@ upshogunexecutioner:
 		BuildPaletteOrder: 59
 		Queue: Promotions
 		Description: Allows construction of the Shogun Executioner.
-		Prerequisites: ~rafact.japan, !upshogunexecutioner, upflamehovertank, rank1
+		Prerequisites: ~rafact.japan, !up_shogunexecutioner.japan, up_flamehovertank.japan, rank1
 	RenderSprites:
 		Image: shogunexecutioner
 	ProvidesPrerequisite:
-		Prerequisite: upshogunexecutioner
+		Prerequisite: up_shogunexecutioner.japan
 
-upgrenadebuggy:
+up_grenadebuggy.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Grenade Buggy
@@ -256,13 +256,13 @@ upgrenadebuggy:
 		BuildPaletteOrder: 51
 		Queue: Promotions
 		Description: Allows construction of the Grenade Buggy.
-		Prerequisites: ~rafact.japan, !upgrenadebuggy, rank1
+		Prerequisites: ~rafact.japan, !up_grenadebuggy.japan, rank1
 	RenderSprites:
 		Image: modbggy
 	ProvidesPrerequisite:
-		Prerequisite: upgrenadebuggy
+		Prerequisite: up_grenadebuggy.japan
 
-upjapanesebomber:
+up_japanesebomber.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Japanese Bomber
@@ -270,13 +270,13 @@ upjapanesebomber:
 		BuildPaletteOrder: 54
 		Queue: Promotions
 		Description: Allows construction of the Japanese Bomber.
-		Prerequisites: ~rafact.japan, !upjapanesebomber, upgrenadebuggy, rank1
+		Prerequisites: ~rafact.japan, !up_japanesebomber.japan, up_grenadebuggy.japan, rank1
 	RenderSprites:
 		Image: modbomber
 	ProvidesPrerequisite:
-		Prerequisite: upjapanesebomber
+		Prerequisite: up_japanesebomber.japan
 
-upwaveforcetank:
+up_waveforcetank.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Waveforce Tank
@@ -284,13 +284,13 @@ upwaveforcetank:
 		BuildPaletteOrder: 57
 		Queue: Promotions
 		Description: Allows construction of the Waveforce Tank.
-		Prerequisites: ~rafact.japan, !upwaveforcetank, upjapanesebomber, rank1
+		Prerequisites: ~rafact.japan, !up_waveforcetank.japan, up_japanesebomber.japan, rank1
 	RenderSprites:
 		Image: waveforcetank
 	ProvidesPrerequisite:
-		Prerequisite: upwaveforcetank
+		Prerequisite: up_waveforcetank.japan
 
-upwaveforceartillery:
+up_waveforceartillery.japan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Waveforce Artillery
@@ -298,11 +298,11 @@ upwaveforceartillery:
 		BuildPaletteOrder: 60
 		Queue: Promotions
 		Description: Allows construction of the Waveforce Artillery.
-		Prerequisites: ~rafact.japan, !upwaveforceartillery, upwaveforcetank, rank1
+		Prerequisites: ~rafact.japan, !up_waveforceartillery.japan, up_waveforcetank.japan, rank1
 	RenderSprites:
 		Image: modwave
 	ProvidesPrerequisite:
-		Prerequisite: upwaveforceartillery
+		Prerequisite: up_waveforceartillery.japan
 
 	####################################################################################################
 	#		Promotion Units Japan

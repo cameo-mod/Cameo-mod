@@ -55,7 +55,7 @@ MODKUBEL:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~modraweapj, ~!uparmoredcarr, ~!upgrenadebuggy
+		Prerequisites: ~modraweapj, ~!up_armoredcarr.japan, ~!up_grenadebuggy.japan
 		Description: actor-jeep.description
 	Valued:
 		Cost: 300
@@ -79,12 +79,12 @@ MODKUBEL:
 		Weapon: M60mgJapan
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@Upgrade: ##########
 		Weapon: M60mgWaveforce
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -93,7 +93,7 @@ MODKUBEL:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_nanotechrepairs.japan
 
 MODTYPEJ:
 	Inherits: ^Tank
@@ -110,7 +110,7 @@ MODTYPEJ:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, ~!upchiha
+		Prerequisites: ~modraweapj, ~!up_chiha.japan
 		Description: template-mbt.description
 	Valued:
 		Cost: 800
@@ -138,14 +138,14 @@ MODTYPEJ:
 		RecoilRecovery: 38
 		LocalOffset: 720,0,240
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Weapon: Type89PlasmaCannon
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -157,7 +157,7 @@ MODTYPEJ:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 MODNANO:
 	Inherits: ^Vehicle
@@ -217,7 +217,7 @@ MODNANO:
 	RenderSprites:
 		Image: modnano
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 jballista:
 	Inherits: ^Tank
@@ -258,16 +258,16 @@ jballista:
 		Weapon: BallistaMultiShotEnergized
 		LocalOffset: 624,0,208
 		FireDelay: 3
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: up_energizedarrows.japan
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryExplode
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
-	FirepowerMultiplier@up_energizedarrows:
+	FirepowerMultiplier@up_energizedarrows.japan:
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_energizedarrows, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: up_energizedarrows.japan, up_superiorwarengines.japan, up_nanotechrepairs.japan
 
 modoitank:
 	Inherits: ^Tank
@@ -334,7 +334,7 @@ modoitank:
 		Recoil: 350
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Turret: main
 		Weapon: OIBigPlasmaCannon
@@ -342,7 +342,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@PRIMARY:
 		Turret: primary
 		Weapon: OISmallCannon
@@ -350,7 +350,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@SECONDARY:
 		Turret: secondary
 		Weapon: OISmallCannon
@@ -358,7 +358,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Back:
 		Turret: back
 		Weapon: OISmallCannon
@@ -366,7 +366,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@UpgradePRIMARY:
 		Turret: primary
 		Weapon: OISmallPlasmaCannon
@@ -374,7 +374,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeSECONDARY:
 		Turret: secondary
 		Weapon: OISmallPlasmaCannon
@@ -382,7 +382,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeBack:
 		Turret: back
 		Weapon: OISmallPlasmaCannon
@@ -390,33 +390,33 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@PRIMARYFlame:
 		Turret: primary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@SECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@UpgradePRIMARYFlame:
 		Turret: primary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeSECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	AttackTurreted:
 		Turrets: primary, secondary, main, back
 	WithMuzzleOverlay:
@@ -445,7 +445,7 @@ modoitank:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 MODCORE:
 	Inherits: ^Vehicle
@@ -654,7 +654,7 @@ MODHOVER:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~dome.japan, ~uparchermaiden
+		Prerequisites: ~dome.japan, ~up_archermaiden.japan
 		Description: actor-jphover.description
 	Valued:
 		Cost: 1500
@@ -679,32 +679,32 @@ MODHOVER:
 		Weapon: HovercraftCannon
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Weapon: HovercraftPlasmaCannon
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@flak:
 		Weapon: JapaneseHovercraftFlak
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@Upgradeflak:
 		Weapon: JapaneseHovercraftFlakWaveforce
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	Armament@AA:
 		Weapon: JapaneseHovercraftFlakAA
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@UpgradeAA:
 		Weapon: JapaneseHovercraftFlakAAkWaveforce
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	FirepowerMultiplier@doublecannonsandbombs:
 		Modifier: 50
 	Turreted:
@@ -725,7 +725,7 @@ MODHOVER:
 	Selectable:
 		Class: modhover
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 MODCARR:
 	Inherits: ^Vehicle
@@ -745,7 +745,7 @@ MODCARR:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~modraweapj, ~uparmoredcarr
+		Prerequisites: ~modraweapj, ~up_armoredcarr.japan
 		Description: actor-gtnk.description
 	Valued:
 		Cost: 700
@@ -772,25 +772,25 @@ MODCARR:
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@AA:
 		Weapon: ArmoredCarMGAA
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !up_waveforcebullets.japan
 	Armament@UpgradeAG:
 		Weapon: ArmoredCarMGWaveforce
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	Armament@UpgradeAA:
 		Weapon: ArmoredCarMGAAWaveforce
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: up_waveforcebullets.japan
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -814,9 +814,9 @@ MODCARR:
 		Delay: 12
 		Count: 1
 		ResetOnFire: True
-	FirepowerMultiplier@up_waveforcebullets:
+	FirepowerMultiplier@up_waveforcebullets.japan:
 		Modifier: 125
-	RangeMultiplier@up_waveforcebullets:
+	RangeMultiplier@up_waveforcebullets.japan:
 		Modifier: 105
 	FirepowerMultiplier@GattlingSpeed:
 		Modifier: 10
@@ -839,7 +839,7 @@ MODCARR:
 		RequiresCondition: ammo <= 1
 		Modifier: 105
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_nanotechrepairs.japan
 
 typechiha:
 	Inherits: ^Tank
@@ -858,7 +858,7 @@ typechiha:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, ~upchiha
+		Prerequisites: ~modraweapj, ~up_chiha.japan
 		Description: template-mbt.description
 	Valued:
 		Cost: 1200
@@ -886,14 +886,14 @@ typechiha:
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Weapon: Type97PlasmaCannon
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	ProximityExternalCondition@PropagandaEffect:
 		Range: 5000
 		ValidRelationships: Ally
@@ -918,7 +918,7 @@ typechiha:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeBig
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 modhovert:
 	Inherits: ^Tank
@@ -934,7 +934,7 @@ modhovert:
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~dome.japan, ~upflamehovertank
+		Prerequisites: ~dome.japan, ~up_flamehovertank.japan
 		BuildPaletteOrder: 120
 		Description: actor-jphovert.description
 	Valued:
@@ -966,14 +966,14 @@ modhovert:
 		RecoilRecovery: 36
 		LocalOffset: 800,-120,160, 800,120,160
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Weapon: HeavyPlasmaFlamer
 		Recoil: 160
 		RecoilRecovery: 36
 		LocalOffset: 800,-120,160, 800,120,160
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	FireWarheadsOnDeath:
 		Weapon: FlametankExplode
 	AttackTurreted:
@@ -987,7 +987,7 @@ modhovert:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 shogunexecutioner:
 	Inherits: ^Walker
@@ -1015,7 +1015,7 @@ shogunexecutioner:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 75
-		Prerequisites: ~upshogunexecutioner, modjtek
+		Prerequisites: ~up_shogunexecutioner.japan, modjtek
 		Queue: Vehicle, RAVehicle
 		Description: actor-aamecha.description
 	Mobile:
@@ -1067,7 +1067,7 @@ shogunexecutioner:
 	WithIdleOverlay@extrananotechrepairsdamage:
 		Image: nanodrone_overlay_big
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -1093,7 +1093,7 @@ MODBGGY:
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~upgrenadebuggy
+		Prerequisites: ~up_grenadebuggy.japan
 		Description: actor-jpbggy.description
 	Mobile:
 		Speed: 120
@@ -1111,18 +1111,18 @@ MODBGGY:
 		Weapon: BuggyGrenade
 		LocalOffset: 333,0,333
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade: ##########
 		Weapon: BuggyPlasmaGrenade
 		LocalOffset: 333,0,333
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	FireWarheadsOnDeath:
 		Weapon: BuggyGrenade
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: BuggyPlasmaGrenade
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -1132,7 +1132,7 @@ MODBGGY:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 waveforcetank:
 	Inherits: ^Tank
@@ -1149,7 +1149,7 @@ waveforcetank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modjtek, ~upwaveforcetank
+		Prerequisites: ~modjtek, ~up_waveforcetank.japan
 		Description: actor-waveforcetank.description
 	Valued:
 		Cost: 1800
@@ -1177,14 +1177,14 @@ waveforcetank:
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Upgrade1: ##########
 		Weapon: WaveforceCannonChargedLaser
 		Recoil: 256
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@Upgrade2: ##########
 		Weapon: WaveforceCannonDistortedBeam1
 		Recoil: 256
@@ -1192,7 +1192,7 @@ waveforcetank:
 		LocalOffset: 1024,0,360
 		FireDelay: 1
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@Upgrade3: ##########
 		Weapon: WaveforceCannonDistortedBeam2
 		Recoil: 256
@@ -1200,10 +1200,10 @@ waveforcetank:
 		LocalOffset: 1024,0,360
 		FireDelay: 2
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	FirepowerMultiplier@TripleBeam:
 		Modifier: 66
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -1226,7 +1226,7 @@ waveforcetank:
 		RequiresCondition: firing
 		Modifier: 50
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 MODWAVE:
 	Inherits: ^Vehicle
@@ -1247,7 +1247,7 @@ MODWAVE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 75
-		Prerequisites: ~modjtek, ~upwaveforceartillery
+		Prerequisites: ~modjtek, ~up_waveforceartillery.japan
 		Description: actor-waveforcearty.description
 	Valued:
 		Cost: 2500
@@ -1289,7 +1289,7 @@ MODWAVE:
 	RenderSprites:
 		Image: modwave
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan
 
 exorcistoitank:
 	Inherits: ^Tank
@@ -1317,7 +1317,7 @@ exorcistoitank:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
 		BuildLimit: 1
-		Prerequisites: ~modjtek, ~uphakurei, !hasexorcist
+		Prerequisites: ~modjtek, ~up_hakurei.japan, !hasexorcist
 		Description: actor-oitank.description-exorcist
 	Valued:
 		Cost: 10000
@@ -1378,7 +1378,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@SECONDARY:
 		Turret: secondary
 		Weapon: OISmallCannon
@@ -1386,7 +1386,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@Back:
 		Turret: back
 		Weapon: OISmallCannon
@@ -1394,7 +1394,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@UpgradePRIMARY:
 		Turret: primary
 		Weapon: OISmallPlasmaCannon
@@ -1402,7 +1402,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeSECONDARY:
 		Turret: secondary
 		Weapon: OISmallPlasmaCannon
@@ -1410,7 +1410,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeBack:
 		Turret: back
 		Weapon: OISmallPlasmaCannon
@@ -1418,33 +1418,33 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@PRIMARYFlame:
 		Turret: primary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@SECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !up_advancedplasmaweapons.japan
 	Armament@UpgradePRIMARYFlame:
 		Turret: primary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	Armament@UpgradeSECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: up_advancedplasmaweapons.japan
 	AttackTurreted:
 		Turrets: primary, secondary, main, back
 	WithMuzzleOverlay:
@@ -1488,4 +1488,4 @@ exorcistoitank:
 	WithIdleOverlay@extrananotechrepairsdamage:
 		Image: nanodrone_overlay_big
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: up_waveforcebullets.japan, up_superiorwarengines.japan, up_advancedplasmaweapons.japan, up_nanotechrepairs.japan

@@ -12,7 +12,7 @@
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~raweapa, ~!upsheridan
+		Prerequisites: ~raweapa, ~!up_sheridan.allies
 		Description: actor-ltnk.description
 	Valued:
 		Cost: 500
@@ -56,7 +56,7 @@
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 2TNK:
 	Inherits: ^Tank
@@ -70,7 +70,7 @@
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~raweapa, ~!upalliedtiger
+		Prerequisites: ~raweapa, ~!up_alliedtiger.allies
 		BuildPaletteOrder: 110
 		Description: template-mbt.description
 	Valued:
@@ -113,7 +113,7 @@
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 heavyaatank:
 	Inherits: ^Vehicle
@@ -214,7 +214,7 @@ heavyaatank:
 	KeepsDistance:
 	RenderRangeCircle:
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_airsuperioritydoctrine, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_airsuperioritydoctrine.allies, up_gpssatellitesupport.allies
 
 RAARTY:
 	Inherits: ^Tank
@@ -252,12 +252,12 @@ RAARTY:
 		Weapon: 155mm
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: 155mmCryo
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryExplode
@@ -266,7 +266,7 @@ RAARTY:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_gpssatellitesupport.allies
 
 RAHARV.ALLIES:
 	Inherits: ^RAHARV
@@ -279,7 +279,7 @@ RAHARV.ALLIES:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 RAMCV.ALLIES:
 	Inherits: ^RAMCV
@@ -294,7 +294,7 @@ RAMCV.ALLIES:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 RAJEEP:
 	Inherits: ^Vehicle
@@ -307,7 +307,7 @@ RAJEEP:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~raweapa, ~!upreconranger
+		Prerequisites: ~raweapa, ~!up_reconranger.allies
 		Description: actor-jeep.description
 	Valued:
 		Cost: 300
@@ -341,7 +341,7 @@ RAJEEP:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_gpssatellitesupport.allies
 
 RAAPC:
 	Inherits: ^Tank
@@ -363,7 +363,7 @@ RAAPC:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~tent, ~!upphasetransport
+		Prerequisites: ~tent, ~!up_phasetransport.allies
 		Description: actor-apc.description
 	Mobile:
 		Speed: 105
@@ -407,7 +407,7 @@ RAAPC:
 	Selectable:
 		Class: raapc
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 MNLY:
 	Inherits: ^Tank
@@ -459,7 +459,7 @@ MNLY:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 sheridan:
 	Inherits: ^Tank
@@ -482,7 +482,7 @@ sheridan:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~upsheridan
+		Prerequisites: ~up_sheridan.allies
 		Queue: Vehicle, RAVehicle
 		Description: actor-sheridan.description
 	Mobile:
@@ -514,7 +514,7 @@ sheridan:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade:
 		Weapon: SheridanMissilesCryo
 		Recoil: 64
@@ -523,7 +523,7 @@ sheridan:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Armament@MG:
 		Weapon: SheridanVulcan
 		LocalOffset: 384,-64,128
@@ -557,7 +557,7 @@ sheridan:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 reconranger:
 	Inherits: ^Vehicle
@@ -573,7 +573,7 @@ reconranger:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~upreconranger
+		Prerequisites: ~up_reconranger.allies
 		Description: actor-jeep.description2
 	Valued:
 		Cost: 500
@@ -597,12 +597,12 @@ reconranger:
 		Weapon: ReconRangerRecoillessGun
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: CryoReconRangerRecoillessGun
 		MuzzleSequence: muzzle
 		LocalOffset: 730,0,166
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -650,7 +650,7 @@ reconranger:
 		RequiresCondition: firing3
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_gpssatellitesupport.allies
 
 MODTIGER:
 	Inherits: ^Tank
@@ -665,7 +665,7 @@ MODTIGER:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~upalliedtiger
+		Prerequisites: ~up_alliedtiger.allies
 		BuildPaletteOrder: 110
 		Description: actor-tiger.description
 	Tooltip:
@@ -708,7 +708,7 @@ MODTIGER:
 		Image: alliedtiger
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 alliedcybertank:
 	Inherits: ^Tank
@@ -765,7 +765,7 @@ alliedcybertank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 MODTNKD:
 	Inherits: ^Tank
@@ -783,7 +783,7 @@ MODTNKD:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 110
 		Description: actor-tnkd.description
-		Prerequisites: ~upalliedtankdestroyer, dome.allies
+		Prerequisites: ~up_alliedtankdestroyer.allies, dome.allies
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -821,7 +821,7 @@ MODTNKD:
 		Image: modtnkd2
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 CTNK:
 	Inherits: ^Vehicle
@@ -841,7 +841,7 @@ CTNK:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
-		Prerequisites: atek, ~upctnk
+		Prerequisites: atek, ~up_ctnk.allies
 		Description: actor-ctnk.description
 	Valued:
 		Cost: 2000
@@ -867,25 +867,25 @@ CTNK:
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@SECONDARY:
 		Weapon: ChronoTusk
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade:
 		Weapon: ChronoTuskCryo
 		LocalOffset: -160,-276,232
 		LocalYaw: 100
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Armament@UpgradeSECONDARY:
 		Weapon: ChronoTuskCryo
 		LocalOffset: -160,276,232
 		LocalYaw: -100
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	AttackFrontal:
 		FacingTolerance: 10
 	WithMuzzleOverlay:
@@ -902,7 +902,7 @@ CTNK:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeBig
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 SAPC:
 	Inherits: ^Vehicle
@@ -923,7 +923,7 @@ SAPC:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 130
-		Prerequisites: atek, ~upphasetransport
+		Prerequisites: atek, ~up_phasetransport.allies
 		Description: actor-sapc.description
 	Valued:
 		Cost: 1800
@@ -949,12 +949,12 @@ SAPC:
 		Weapon: APTusk
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: APTuskCryo
 		LocalOffset: 192,0,176
 		MuzzleSequence: muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Turreted:
 		TurnSpeed: 25
 	AttackTurreted:
@@ -979,7 +979,7 @@ SAPC:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_cryomissiles, up_chronoarmor, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_chronoarmor.allies, up_gpssatellitesupport.allies
 
 RAMGG:
 	Inherits: ^Tank
@@ -996,7 +996,7 @@ RAMGG:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 150
-		Prerequisites: atek, ~upgapgeneratorradarjammer
+		Prerequisites: atek, ~up_gapgeneratorradarjammer.allies
 		Description: actor-mgg.description
 	Tooltip:
 		Name: Mobile Gap Generator
@@ -1066,7 +1066,7 @@ RAMGG:
 	TooltipExtras@Support:
 		Description: Support Vehicle
 	ActorStatValues:
-		Upgrades: up_chronoarmor
+		Upgrades: up_chronoarmor.allies
 
 MRJ:
 	Inherits: ^Tank
@@ -1088,7 +1088,7 @@ MRJ:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
-		Prerequisites: atek, ~upgapgeneratorradarjammer
+		Prerequisites: atek, ~up_gapgeneratorradarjammer.allies
 		Description: actor-mrj.description
 	Health:
 		HP: 25000
@@ -1171,7 +1171,7 @@ MRJ:
 	TooltipExtras@Support:
 		Description: Support Vehicle
 	ActorStatValues:
-		Upgrades: up_chronoarmor
+		Upgrades: up_chronoarmor.allies
 
 	####################################################################################################
 	#		Doctrines Soviets

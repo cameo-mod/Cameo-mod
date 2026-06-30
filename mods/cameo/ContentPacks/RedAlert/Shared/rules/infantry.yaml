@@ -9,23 +9,23 @@ RAE1:
 	Armament@PRIMARY: ##########
 		Weapon: M1Carbine
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: M1Carbine
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: CryoM1Carbine
 		LocalOffset: 128,0,256
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: CryoM1Carbine
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_gpssatellitesupport.allies
 
 ra_cons_molo:
 	Inherits: ^Soldier
@@ -72,13 +72,13 @@ ra_cons_molo:
 		Weapon: ConscriptMolotovExplode
 	FireWarheadsOnDeath@Vengeance1:
 		Weapon: VengeanceActivator1
-		RequiresCondition: !ra_upgrade_vengeance
+		RequiresCondition: !up_vengeance.soviet
 	FireWarheadsOnDeath@Vengeance2:
 		Weapon: VengeanceActivator2
-		RequiresCondition: ra_upgrade_vengeance && !upsubliminal2
+		RequiresCondition: up_vengeance.soviet && !upsubliminal2
 	FireWarheadsOnDeath@Vengeance3:
 		Weapon: VengeanceActivator3
-		RequiresCondition: ra_upgrade_vengeance && upsubliminal2
+		RequiresCondition: up_vengeance.soviet && upsubliminal2
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
 	Voiced:
@@ -88,7 +88,7 @@ ra_cons_molo:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
+		Upgrades: up_promotion_superoptics.soviet, up_doctrine_conscription.soviet, up_vengeance.soviet, up_menofsteel.soviet
 
 RAE3:
 	Inherits: ^RAE3
@@ -104,22 +104,22 @@ RAE3:
 		Weapon: RocketsRA
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: RocketsRA
-		RequiresCondition: !up_cryomissiles
+		RequiresCondition: !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: RocketsRACryo
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: RocketsRACryo
-		RequiresCondition: up_cryomissiles
+		RequiresCondition: up_cryomissiles.allies
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_infantryarmorplating, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_infantryarmorplating.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_gpssatellitesupport.allies
 
 RAE6:
 	Inherits: E6

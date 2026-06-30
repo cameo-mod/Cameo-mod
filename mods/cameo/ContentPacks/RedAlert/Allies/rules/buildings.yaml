@@ -98,26 +98,26 @@ DOME.Allies:
 		Prerequisites: ~rafact.allies, raproc.allies
 	Tooltip:
 		Name: Allied Radar Dome
-	RevealsShroudMultiplier@up_advancedradarsystems:
+	RevealsShroudMultiplier@up_advancedradarsystems.allies:
 		Modifier: 150
-	DetectCloakedMultiplier@up_advancedradarsystems:
+	DetectCloakedMultiplier@up_advancedradarsystems.allies:
 		Modifier: 150
 	RangedGpsProvider:
 		Range: 20000
-		RequiresCondition: !disabled && !up_advancedradarsystems
+		RequiresCondition: !disabled && !up_advancedradarsystems.allies
 	WithRangeCircle:
 		Range: 20000
 		Color: FF000088
-		RequiresCondition: !disabled && !up_advancedradarsystems
+		RequiresCondition: !disabled && !up_advancedradarsystems.allies
 	RangedGpsProvider@upgrade:
 		Range: 30000
-		RequiresCondition: !disabled && up_advancedradarsystems
+		RequiresCondition: !disabled && up_advancedradarsystems.allies
 	WithRangeCircle@upgrade:
 		Range: 30000
 		Color: FF000088
-		RequiresCondition: !disabled && up_advancedradarsystems
+		RequiresCondition: !disabled && up_advancedradarsystems.allies
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures
+		Upgrades: up_advancedradarsystems.allies, up_reinforcedstructures.allies
 	Production@Upgrades:
 		Produces: Upgrades
 	ProductionBar@Upgrades:
@@ -166,7 +166,7 @@ ATEK:
 	WithBuildingBib:
 	GpsPower:
 		Prerequisites:
-			1: up_gpssatellitesupport
+			1: up_gpssatellitesupport.allies
 		Icons:
 			1: gps
 		OneShot: true
@@ -195,7 +195,7 @@ ATEK:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	ActorStatValues:
-		Upgrades: up_reinforcedstructures, up_gpssatellitesupport
+		Upgrades: up_reinforcedstructures.allies, up_gpssatellitesupport.allies
 
 RAFIX.Allies:
 	Inherits: ^RAFIX
@@ -291,7 +291,7 @@ PDOX:
 		OrderName: ChronoReinforcements
 		Cost: 1000
 		Prerequisites:
-			1: up_chronoarmor
+			1: up_chronoarmor.allies
 		PauseOnCondition: disabled
 		Icons:
 			1: chronoreinforcements
@@ -378,7 +378,7 @@ PBOX:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~rafact.allies, tent, ~!uphbox
+		Prerequisites: ~rafact.allies, tent, ~!up_hbox.allies
 		Description: actor-pbox.description
 	Valued:
 		Cost: 400
@@ -418,7 +418,7 @@ PBOX:
 		ReloadDelay: 48
 		Range: 6570
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_reinforcedstructures.allies, up_lasertargetingsystems.allies, up_gpssatellitesupport.allies
 
 RAGUN:
 	Inherits: ^Defense
@@ -467,7 +467,7 @@ RAGUN:
 	RevealsShroud:
 		Range: 8683
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_lasertargetingsystems, up_reinforcedstructures, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_lasertargetingsystems.allies, up_reinforcedstructures.allies, up_gpssatellitesupport.allies
 
 AGUN:
 	Inherits: ^Defense
@@ -519,7 +519,7 @@ AGUN:
 	DetectCloaked:
 		Range: 5706
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_reinforcedstructures.allies, up_lasertargetingsystems.allies, up_gpssatellitesupport.allies
 
 MODSPACEPORT:
 	Inherits: ^BaseBuilding
@@ -535,7 +535,7 @@ MODSPACEPORT:
 		BuildPaletteOrder: 150
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: atek, ~upmodspaceport, derricklimit
+		Prerequisites: atek, ~up_modspaceport.allies, derricklimit
 		Description: Dropzone for quick reinforcements, and passive income.
 	Building:
 		Footprint: XXXXX xxxx+ =====
@@ -663,7 +663,7 @@ HBOX:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~uphbox
+		Prerequisites: ~up_hbox.allies
 		Description: actor-hbox.description
 	Valued:
 		Cost: 1300
@@ -708,7 +708,7 @@ HBOX:
 		ReloadDelay: 50
 		Range: 7640
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_reinforcedstructures.allies, up_lasertargetingsystems.allies, up_gpssatellitesupport.allies
 
 modartyturret:
 	Inherits: ^Defense
@@ -727,7 +727,7 @@ modartyturret:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 90
-		Prerequisites: ~upbastion
+		Prerequisites: ~up_bastion.allies
 		Description: actor-bastion.description
 	-WithTurretSearchlight:
 	Valued:
@@ -757,14 +757,14 @@ modartyturret:
 		MuzzleSequence: muzzle
 		Turret: cannon
 		Name: cannon
-		RequiresCondition: !disabled && !lowpower && !up_cryomissiles
+		RequiresCondition: !disabled && !lowpower && !up_cryomissiles.allies
 	Armament@Upgrade: ##########
 		Weapon: 155mmBastionCryo
 		LocalOffset: 1000,0,900
 		MuzzleSequence: muzzle
 		Turret: cannon
 		Name: cannon
-		RequiresCondition: !disabled && !lowpower && up_cryomissiles
+		RequiresCondition: !disabled && !lowpower && up_cryomissiles.allies
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
@@ -798,7 +798,7 @@ modartyturret:
 	DetectCloaked:
 		Range: 5092
 	ActorStatValues:
-		Upgrades: up_advancedradarsystems, up_reinforcedstructures, up_lasertargetingsystems, up_cryomissiles, up_gpssatellitesupport
+		Upgrades: up_advancedradarsystems.allies, up_reinforcedstructures.allies, up_lasertargetingsystems.allies, up_cryomissiles.allies, up_gpssatellitesupport.allies
 
 GAP:
 	Inherits: ^Defense
@@ -811,11 +811,11 @@ GAP:
 	-RenderRangeCircle:
 	-ExternalCondition@shrouded:
 	-ExternalCondition@lockon:
-	-RangeMultiplier@up_gpssatellitesupport:
-	-RevealsShroudMultiplier@up_gpssatellitesupport:
-	-DetectCloakedMultiplier@up_gpssatellitesupport:
-	-InaccuracyMultiplier@up_gpssatellitesupport:
-	-GrantConditionOnPrerequisite@up_gpssatellitesupport:
+	-RangeMultiplier@up_gpssatellitesupport.allies:
+	-RevealsShroudMultiplier@up_gpssatellitesupport.allies:
+	-DetectCloakedMultiplier@up_gpssatellitesupport.allies:
+	-InaccuracyMultiplier@up_gpssatellitesupport.allies:
+	-GrantConditionOnPrerequisite@up_gpssatellitesupport.allies:
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -827,7 +827,7 @@ GAP:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
-		Prerequisites: atek, ~upgapgeneratorradarjammer
+		Prerequisites: atek, ~up_gapgeneratorradarjammer.allies
 		Description: actor-gap.description
 	Selectable:
 		Bounds: 1024, 2048, 0, -512
@@ -877,5 +877,5 @@ GAP:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	ActorStatValues:
-		Upgrades: up_reinforcedstructures
+		Upgrades: up_reinforcedstructures.allies
 
