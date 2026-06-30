@@ -414,3 +414,71 @@ heavy_inf:
 		DeathSequencePalette: player_rgba
 	ActorStatValues:
 		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+
+engineer:
+	Inherits: E6
+	Inherits@BulletImmune: ^BulletImmune
+	Inherits@personalshield: ^D2KPersonalShield
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Buildable:
+		Prerequisites: ~d2k_barracks
+		IconPalette: d2kunit
+	RenderSprites:
+		Image: engineer
+	Voiced:
+		VoiceSet: D2KEngineerVoice
+
+# submachinegunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 60
+# 	Tooltip:
+# 		Name: Mercenary
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with SMG\nDeals burst damage.\nShort Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.mercenary
+# 		BuildDuration: 80
+# 		BuildDurationModifier: 100
+# 		Icon: icon_merc
+# 	Mobile:
+# 		Speed: 48
+# 	Health:
+# 		HP: 7200
+# 	Armament@PRIMARY: ##########
+# 		Weapon: LMG_burst
+# 	RenderSprites:
+# 		Image: light_inf
+# 	Voiced:
+# 		VoiceSet: D2KTrooper
+
+# shotgunner:
+# 	Inherits: light_inf
+# 	Valued:
+# 		Cost: 80
+# 	Tooltip:
+# 		Name: Shotgunner
+# 	Buildable:
+# 		BuildPaletteOrder: 10
+# 		Queue: Infantry, RAInfantry
+# 		Description: General-purpose infantry equipped with shotgun\nDeals massive damage up front.\nVery Short Range\n  Strong vs Infantry, Vehicles\n  Weak vs Siege
+# 		Prerequisites: ~faction.smugglers
+# 		BuildDuration: 90
+# 		BuildDurationModifier: 100
+# 	WithInfantryBody:
+# 		-IdleSequences: idle1,idle2
+# 		DefaultAttackSequence: shoot
+# 	Armament@PRIMARY: ##########
+# 		Weapon: d2k_shotgun
+# 		LocalOffset: 0,0,50
+# 	Health:
+# 		HP: 6000
+# 	Mobile:
+# 		Speed: 48
+# 		Voice: Move
+# 	RenderSprites:
+# 		Image: shotgunner
+# 		PlayerPalette: player
+# 	Voiced:
+# 		VoiceSet: D2KShotgunner

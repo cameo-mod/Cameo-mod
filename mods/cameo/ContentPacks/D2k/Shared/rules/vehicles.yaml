@@ -1,3 +1,30 @@
+sonic_tank.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1000
+	Tooltip:
+		Name: Sonic Tank (Destroyed)
+	TransformOnCapture:
+		IntoActor: sonic_tank
+
+devastator.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1250
+	Tooltip:
+		Name: Devastator (Destroyed)
+	TransformOnCapture:
+		IntoActor: devastator
+
+d2k_tyrant.husk:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1500
+	Tooltip:
+		Name: Tyrant (Destroyed)
+	TransformOnCapture:
+		IntoActor: d2k_tyrant
+
 siege_tank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
