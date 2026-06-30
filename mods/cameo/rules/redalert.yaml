@@ -4955,6 +4955,113 @@ MODKAMI:
 	ActorStatValues:
 		Upgrades: up_waveforcebullets, up_divinewindprotocol, up_energizedarrows, up_nanotechrepairs
 
+MODBOMBER:
+	Inherits: ^RANeutralPlane
+	Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@eject: ^AircraftEjectOnDeath
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 30
+		Prerequisites: ~modjtek
+		Description: actor-jpbomber.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Japanese Bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 122500
+	Repairable:
+		HpPerStep: 6125
+	ChangesHealth@SelfHealing:
+		Step: 49
+	AttackAircraft:
+		AttackType: Strafe
+		Armaments: primary, secondary
+		StrafeRunLength: 5000
+		FacingTolerance: 50
+	Armament@Guns:
+		Name: secondary
+		Weapon: ZeroFighterChainGun
+		LocalOffset: 0,128,0, 0,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: !up_waveforcebullets
+	Armament@UpgradeGuns:
+		Name: secondary
+		Weapon: ZeroFighterChainGunWaveforce
+		LocalOffset: 0,128,0, 0,-128,0
+		MuzzleSequence: muzzle
+		PauseOnCondition: !ammo
+		RequiresCondition: up_waveforcebullets
+	Armament@Bombs:
+		Name: primary
+		Weapon: JapaneseHeavyBomb
+		PauseOnCondition: !ammo
+		RequiresCondition: !up_advancedplasmaweapons
+	Armament@UpgradeBombs: ##########
+		Name: primary
+		Weapon: JapanesePlasmaBomb
+		PauseOnCondition: !ammo
+		RequiresCondition: up_advancedplasmaweapons
+	RangeMultiplier@Chaingun:
+		Modifier: 70
+	Aircraft:
+		TurnSpeed: 11
+		Speed: 165
+		IdealSeparation: 2500
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	AmmoPool:
+		Ammo: 12
+		ReloadDelay: 16
+		AmmoCondition: ammo
+	SelectionDecorations:
+	WithMuzzleOverlay:
+	Contrail@1:
+		Offset: -500,-250,200
+	Contrail@2:
+		Offset: -500,250,200
+	SpawnActorOnDeath:
+		Actor: modbomber.Husk
+	EjectOnDeath:
+		PilotActor: RASAMURAI
+	LeavesTrails:
+		Offsets: -500,0,200
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+		RequiresCondition: enable-smoke
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		Image: modbomber
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	GrantConditionOnDamageState@SmokeTrail:
+		Condition: enable-smoke
+	ActorStatValues:
+		Upgrades: up_waveforcebullets, up_advancedplasmaweapons, up_divinewindprotocol, up_nanotechrepairs
+
 MIG:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
@@ -13101,19 +13208,19 @@ upgrenadebuggy:
 	ProvidesPrerequisite:
 		Prerequisite: upgrenadebuggy
 
-upjapanesebomber:
+upjapanshrinetank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Japanese Bomber
+		Name: Unlock Shrine Tank
 	Buildable:
 		BuildPaletteOrder: 54
 		Queue: Promotions
-		Description: Allows construction of the Japanese Bomber.
-		Prerequisites: ~rafact.japan, !upjapanesebomber, upgrenadebuggy, rank1
+		Description: Allows construction of the Shrine Tank.
+		Prerequisites: ~rafact.japan, !upjapanshrinetank, upgrenadebuggy, rank1
 	RenderSprites:
-		Image: modbomber
+		Image: japan_shrine_minitank
 	ProvidesPrerequisite:
-		Prerequisite: upjapanesebomber
+		Prerequisite: upjapanshrinetank
 
 upwaveforcetank:
 	Inherits: ^promotion_upgrade.template
@@ -13123,7 +13230,7 @@ upwaveforcetank:
 		BuildPaletteOrder: 57
 		Queue: Promotions
 		Description: Allows construction of the Waveforce Tank.
-		Prerequisites: ~rafact.japan, !upwaveforcetank, upjapanesebomber, rank1
+		Prerequisites: ~rafact.japan, !upwaveforcetank, upjapanshrinetank, rank1
 	RenderSprites:
 		Image: waveforcetank
 	ProvidesPrerequisite:
@@ -14009,113 +14116,62 @@ MODBGGY:
 	ActorStatValues:
 		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
 
-MODBOMBER:
-	Inherits: ^RANeutralPlane
-	Inherits@reload: ^RearmableAircraft
-	Inherits@Template: ^BomberTemplate
+japan_shrine_minitank:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@AntiBuil: ^PrioritizeBuilding
-	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
 	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
-	Inherits@DivineWindProtocol: ^DivineWindProtocol
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
-	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Buildable:
-		Queue: Aircraft, RAAircraft
-		BuildPaletteOrder: 30
-		Prerequisites: ~modjtek, ~upjapanesebomber
-		Description: actor-jpbomber.description
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 50
+		Prerequisites: ~modraweapj, ~upjapanshrinetank
+		Description: template-mbt.description
 	Valued:
-		Cost: 1500
+		Cost: 1600
 	Tooltip:
-		Name: Japanese Bomber
+		Name: Shrine Minitank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 122500
+		HP: 60000
 	Repairable:
-		HpPerStep: 6125
+		HpPerStep: 3000
 	ChangesHealth@SelfHealing:
-		Step: 49
-	AttackAircraft:
-		AttackType: Strafe
-		Armaments: primary, secondary
-		StrafeRunLength: 5000
-		FacingTolerance: 50
-	Armament@Guns:
-		Name: secondary
-		Weapon: ZeroFighterChainGun
-		LocalOffset: 0,128,0, 0,-128,0
+		Step: 24
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+	Turreted:
+		Offset: 64,0,0
+		TurnSpeed: 24
+	Armament:
+		Weapon: ShrineTankCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
-		PauseOnCondition: !ammo
-		RequiresCondition: !up_waveforcebullets
-	Armament@UpgradeGuns:
-		Name: secondary
-		Weapon: ZeroFighterChainGunWaveforce
-		LocalOffset: 0,128,0, 0,-128,0
-		MuzzleSequence: muzzle
-		PauseOnCondition: !ammo
-		RequiresCondition: up_waveforcebullets
-	Armament@Bombs:
-		Name: primary
-		Weapon: JapaneseHeavyBomb
-		PauseOnCondition: !ammo
-		RequiresCondition: !up_advancedplasmaweapons
-	Armament@UpgradeBombs: ##########
-		Name: primary
-		Weapon: JapanesePlasmaBomb
-		PauseOnCondition: !ammo
-		RequiresCondition: up_advancedplasmaweapons
-	RangeMultiplier@Chaingun:
-		Modifier: 70
-	Aircraft:
-		TurnSpeed: 11
-		Speed: 165
-		IdealSeparation: 2500
-	AutoTarget:
-		InitialStance: Defend
-		InitialStanceAI: AttackAnything
-		ScanRadius: 10
-	AmmoPool:
-		Ammo: 12
-		ReloadDelay: 16
-		AmmoCondition: ammo
-	SelectionDecorations:
+	AttackTurreted:
 	WithMuzzleOverlay:
-	Contrail@1:
-		Offset: -500,-250,200
-	Contrail@2:
-		Offset: -500,250,200
-	SpawnActorOnDeath:
-		Actor: modbomber.Husk
-	EjectOnDeath:
-		PilotActor: RASAMURAI
-	LeavesTrails:
-		Offsets: -500,0,200
-		MovingInterval: 2
-		Image: smokey
-		StationaryInterval: 2
-		SpawnAtLastPosition: False
-		TrailWhileStationary: True
-		Type: CenterPosition
-		RequiresCondition: enable-smoke
+	WithSpriteTurret:
+	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
-	RenderSprites:
-		Image: modbomber
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: True
-		PipCount: 4
-	GrantConditionOnDamageState@SmokeTrail:
-		Condition: enable-smoke
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_advancedplasmaweapons, up_divinewindprotocol, up_nanotechrepairs
+		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
 
 waveforcetank:
 	Inherits: ^Tank

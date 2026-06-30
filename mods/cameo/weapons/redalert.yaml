@@ -5404,6 +5404,91 @@ Type97PlasmaCannon:
 		ImpactSounds: psahit00.aud
 		Explosions: purple_plasma
 
+ShrineTankCannon:
+	Inherits: ^TeslaWeapon
+	Inherits: ^RailgunWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^MediumCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumFlameWeapon
+	ReloadDelay: 50
+	Range: 6370
+	Report: thattack1.wav, thattack2.wav, thattack3.wav
+	Projectile: Missile
+		HorizontalRateOfTurn: 33
+		VerticalRateOfTurn: 66
+		Speed: 333
+		Inaccuracy: 333
+		RangeLimit: 33333
+		Image: hakurei_tailsman
+		Sequences: idle
+		Palette: player
+		IsPlayerPalette: True
+		TrailImage: hakureiring
+		TrailSequences: idle2, idle1
+		TrailInterval: 0
+		MinimumLaunchAngle: 111
+		MaximumLaunchAngle: 111
+		MaximumLaunchSpeed: 333
+		MinimumLaunchSpeed: 333
+		ContrailLength: 0
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+		CloseEnough: 333
+		AllowSnapping: true
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MagicWeapon: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		Explosions: tsring
+		ExplosionPalette: tseffect
+		ImpactSounds:
+
 WaveforceCannon:
 	Inherits: ^HeavyMissile
 	Inherits: ^RailgunWeapon

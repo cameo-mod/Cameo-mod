@@ -9755,6 +9755,8 @@ steel_runner:
 	Voiced:
 		VoiceSet: RA2TanyaVoice
 	ProvidesPrerequisite:
+	RenderSprites:
+		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_resonanceammo, upsteel_shielresistance
 

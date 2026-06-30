@@ -5280,6 +5280,20 @@ typechiha:
 	icon:
 		Filename: ChiHaIcon.shp
 
+japan_shrine_minitank:
+	Defaults:
+		Filename: japan_shrine_minitank.png
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: japan_shrine_minitank_icon.png
+
 waveforcetank:
 	Defaults:
 		Filename: waveforcetank.shp
