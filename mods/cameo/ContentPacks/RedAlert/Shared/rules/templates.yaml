@@ -1,0 +1,1162 @@
+^GainsExperienceRA:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA1
+		Conditions:
+			200: rank-veteran
+			400: rank-veteran
+			600: rank-veteran
+			800: rank-veteran
+
+^GainsExperienceRABuilding:
+	GainsExperience:
+		LevelUpNotification: LevelUpRA1
+		Conditions:
+			250: rank-veteran
+			500: rank-veteran
+			750: rank-veteran
+			1000: rank-veteran
+
+####################################################################################################
+#		Red Alert
+####################################################################################################
+
+####################################################################################################
+#		Soviet Upgrade Inherits
+####################################################################################################
+
+^Conscription:
+	ProductionCostMultiplier@ra_doctrine_conscription:
+		Prerequisites: ra_doctrine_conscription
+		Multiplier: 75
+	ProductionTimeMultiplier@ra_doctrine_conscription:
+		Prerequisites: ra_doctrine_conscription
+		Multiplier: 75
+	FirepowerMultiplier@ra_doctrine_conscription:
+		RequiresCondition: ra_doctrine_conscription
+		Modifier: 110
+	DamageMultiplier@ra_doctrine_conscription:
+		RequiresCondition: ra_doctrine_conscription
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra_doctrine_conscription:
+		Condition: ra_doctrine_conscription
+		Prerequisites: ra_doctrine_conscription
+	ActorStatValues:
+		Upgrades: ra_doctrine_conscription
+
+^NuclearEngines:
+	SpeedMultiplier@ra_upgrade_unstableisotopes:
+		RequiresCondition: ra_upgrade_unstableisotopes
+		Modifier: 120
+	FirepowerMultiplier@ra_upgrade_unstableisotopes:
+		RequiresCondition: ra_upgrade_unstableisotopes
+		Modifier: 110
+	GrantConditionOnPrerequisite@ra_upgrade_unstableisotopes:
+		Condition: ra_upgrade_unstableisotopes
+		Prerequisites: ra_upgrade_unstableisotopes
+	ActorStatValues:
+		Upgrades: ra_upgrade_unstableisotopes
+
+^RocketEnhancements:
+	FirepowerMultiplier@ra_upgrade_highexplosiverockets:
+		RequiresCondition: ra_upgrade_highexplosiverockets
+		Modifier: 125
+	RangeMultiplier@ra_upgrade_highexplosiverockets:
+		RequiresCondition: ra_upgrade_highexplosiverockets
+		Modifier: 125
+	RevealsShroudMultiplier@ra_upgrade_highexplosiverockets:
+		RequiresCondition: ra_upgrade_highexplosiverockets
+		Modifier: 150
+	GrantConditionOnPrerequisite@ra_upgrade_highexplosiverockets:
+		Condition: ra_upgrade_highexplosiverockets
+		Prerequisites: ra_upgrade_highexplosiverockets
+	ActorStatValues:
+		Upgrades: ra_upgrade_highexplosiverockets
+
+^SovietAutoLoaders:
+	ReloadDelayMultiplier@ra_upgrade_autoloaders:
+		RequiresCondition: ra_upgrade_autoloaders
+		Modifier: 60
+	ReloadAmmoDelayMultiplier@ra_upgrade_autoloaders:
+		RequiresCondition: ra_upgrade_autoloaders
+		Modifier: 80
+	GrantConditionOnPrerequisite@ra_upgrade_autoloaders:
+		Condition: ra_upgrade_autoloaders
+		Prerequisites: ra_upgrade_autoloaders
+	ActorStatValues:
+		Upgrades: ra_upgrade_autoloaders
+
+^ExperimentalTeslaWeaponry:
+	FirepowerMultiplier@ra_doctrine_teslatech:
+		RequiresCondition: ra_doctrine_teslatech
+		Modifier: 150
+	GrantConditionOnPrerequisite@ra_doctrine_teslatech:
+		Condition: ra_doctrine_teslatech
+		Prerequisites: ra_doctrine_teslatech
+	ActorStatValues:
+		Upgrades: ra_doctrine_teslatech
+
+^AdvancedThermobarics:
+	FirepowerMultiplier@ra_doctrine_inferno:
+		RequiresCondition: ra_doctrine_inferno
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra_doctrine_inferno:
+		Condition: ra_doctrine_inferno
+		Prerequisites: ra_doctrine_inferno
+	ActorStatValues:
+		Upgrades: ra_doctrine_inferno
+
+^SovietSteel:
+	DamageMultiplier@ra_upgrade_stalinium:
+		RequiresCondition: ra_upgrade_stalinium
+		Modifier: 60
+	SpeedMultiplier@ra_upgrade_stalinium:
+		RequiresCondition: ra_upgrade_stalinium
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra_upgrade_stalinium:
+		Condition: ra_upgrade_stalinium
+		Prerequisites: ra_upgrade_stalinium
+	ActorStatValues:
+		Upgrades: ra_upgrade_stalinium
+
+####################################################################################################
+#		Allied Upgrade Inherits
+####################################################################################################
+
+^AdvancedRadarSystems:
+	RevealsShroudMultiplier@up_advancedradarsystems:
+		RequiresCondition: up_advancedradarsystems
+		Modifier: 110
+	DetectCloakedMultiplier@up_advancedradarsystems:
+		RequiresCondition: up_advancedradarsystems
+		Modifier: 110
+	InaccuracyMultiplier@up_advancedradarsystems:
+		RequiresCondition: up_advancedradarsystems
+		Modifier: 90
+	RangeMultiplier@up_advancedradarsystems:
+		RequiresCondition: up_advancedradarsystems
+		Modifier: 110
+	FirepowerMultiplier@up_advancedradarsystems:
+		RequiresCondition: up_advancedradarsystems
+		Modifier: 110
+	ReloadDelayMultiplier@up_advancedradarsystems:
+		RequiresCondition: up_advancedradarsystems
+		Modifier: 90
+	GrantConditionOnPrerequisite@up_advancedradarsystems:
+		Condition: up_advancedradarsystems
+		Prerequisites: up_advancedradarsystems
+	ActorStatValues:
+		Upgrades: up_advancedradarsystems
+
+^InfantryArmorPlating:
+	DamageMultiplier@up_infantryarmorplating:
+		RequiresCondition: up_infantryarmorplating
+		Modifier: 70
+	ReloadDelayMultiplier@up_infantryarmorplating:
+		RequiresCondition: up_infantryarmorplating
+		Modifier: 90
+	GrantConditionOnPrerequisite@up_infantryarmorplating:
+		Condition: up_infantryarmorplating
+		Prerequisites: up_infantryarmorplating
+	ActorStatValues:
+		Upgrades: up_infantryarmorplating
+
+^ReinforcedStructures:
+	DamageMultiplier@up_reinforcedstructures:
+		RequiresCondition: up_reinforcedstructures
+		Modifier: 75
+	ProductionCostMultiplier@up_reinforcedstructures:
+		Prerequisites: up_reinforcedstructures
+		Multiplier: 75
+	ProductionTimeMultiplier@up_reinforcedstructures:
+		Prerequisites: up_reinforcedstructures
+		Multiplier: 75
+	GrantConditionOnPrerequisite@up_reinforcedstructures:
+		Condition: up_reinforcedstructures
+		Prerequisites: up_reinforcedstructures
+	ActorStatValues:
+		Upgrades: up_reinforcedstructures
+
+^AirSuperiorityDoctrine:
+	DamageMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 85
+	FirepowerMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 115
+	ReloadDelayMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 85
+	ReloadAmmoDelayMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 85
+	SpeedMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 115
+	RangeMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 115
+	RevealsShroudMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 115
+	DetectCloakedMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 115
+	InaccuracyMultiplier@up_airsuperioritydoctrine:
+		RequiresCondition: up_airsuperioritydoctrine
+		Modifier: 85
+	GrantConditionOnPrerequisite@up_airsuperioritydoctrine:
+		Condition: up_airsuperioritydoctrine
+		Prerequisites: up_airsuperioritydoctrine
+	ActorStatValues:
+		Upgrades: up_airsuperioritydoctrine
+
+^LaserTargetingSystems:
+	FirepowerMultiplier@up_lasertargetingsystems:
+		RequiresCondition: up_lasertargetingsystems
+		Modifier: 125
+	GrantConditionOnPrerequisite@up_lasertargetingsystems:
+		Condition: up_lasertargetingsystems
+		Prerequisites: up_lasertargetingsystems
+	ActorStatValues:
+		Upgrades: up_lasertargetingsystems
+
+^ChronoArmor:
+	WithColoredOverlay@up_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Color: 0000FF44
+	DamageMultiplier@up_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Modifier: 65
+	SpeedMultiplier@up_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Modifier: 150
+	ReloadDelayMultiplier@up_chronoarmor:
+		RequiresCondition: chronoarmordamage && !chronoarmordamagecooldown
+		Modifier: 65
+	GrantTimedCondition@up_chronoarmor:
+		RequiresCondition: chronoarmordamage
+		PauseOnCondition: !chronoarmordamage
+		Condition: chronoarmordamagecooldown
+		Duration: 12
+	GrantConditionOnDamage@up_chronoarmor:
+		RequiresCondition: up_chronoarmor
+		Condition: chronoarmordamage
+		Duration: 24
+		PlayerRelationship: Ally, Neutral, Enemy
+	GrantConditionOnPrerequisite@up_chronoarmor:
+		Condition: up_chronoarmor
+		Prerequisites: up_chronoarmor
+	ActorStatValues:
+		Upgrades: up_chronoarmor
+
+^CryoMissiles:
+	FirepowerMultiplier@up_cryomissiles:
+		RequiresCondition: up_cryomissiles
+		Modifier: 75
+	GrantConditionOnPrerequisite@up_cryomissiles:
+		Condition: up_cryomissiles
+		Prerequisites: up_cryomissiles
+	ActorStatValues:
+		Upgrades: up_cryomissiles
+
+^GPSSatelliteSupport:
+	RangeMultiplier@up_gpssatellitesupport:
+		RequiresCondition: up_gpssatellitesupport
+		Modifier: 110
+	RevealsShroudMultiplier@up_gpssatellitesupport:
+		RequiresCondition: up_gpssatellitesupport
+		Modifier: 110
+	DetectCloakedMultiplier@up_gpssatellitesupport:
+		RequiresCondition: up_gpssatellitesupport
+		Modifier: 110
+	InaccuracyMultiplier@up_gpssatellitesupport:
+		RequiresCondition: up_gpssatellitesupport
+		Modifier: 90
+	GrantConditionOnPrerequisite@up_gpssatellitesupport:
+		Condition: up_gpssatellitesupport
+		Prerequisites: up_gpssatellitesupport
+	ActorStatValues:
+		Upgrades: up_gpssatellitesupport
+
+
+####################################################################################################
+#		Japanese Upgrade Inherits
+####################################################################################################
+
+^JapanSpawnActorsOnSell:
+	Inherits: ^RASpawnActorsOnSell
+	SpawnActorsOnSell:
+		ActorTypes: rae6,raje1,raje1,raje1
+
+^BushidoDiscipline:
+	DamageMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 90
+	FirepowerMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 110
+	ReloadDelayMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 90
+	SpeedMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 110
+	RangeMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 110
+	RevealsShroudMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 110
+	DetectCloakedMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 110
+	InaccuracyMultiplier@up_bushidodiscipline:
+		RequiresCondition: up_bushidodiscipline
+		Modifier: 90
+	ChangesHealth@up_bushidodiscipline:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_bushidodiscipline
+	ChangesShield@up_bushidodiscipline:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_bushidodiscipline
+	GrantConditionOnDamageState@wounded:
+		Condition: wounded
+	DamageMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 80
+	FirepowerMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 120
+	ReloadDelayMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 80
+	SpeedMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 120
+	RangeMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 120
+	RevealsShroudMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 120
+	DetectCloakedMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 120
+	InaccuracyMultiplier@wounded:
+		RequiresCondition: up_bushidodiscipline && wounded
+		Modifier: 80
+	ChangesHealth@wounded:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_bushidodiscipline && wounded
+	ChangesShield@wounded:
+		Step: 40
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_bushidodiscipline && wounded
+	WithDecoration@wounded:
+		Image: bushido_icon
+		Sequence: idle
+		Palette: greyscale
+		Position: TopRight
+		BlinkInterval: 1
+		BlinkPattern: On, Off, On, Off
+		RequiresCondition: up_bushidodiscipline && wounded
+	GrantConditionOnPrerequisite@up_bushidodiscipline:
+		Condition: up_bushidodiscipline
+		Prerequisites: up_bushidodiscipline
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline
+
+^WaveforceBullets:
+	FirepowerMultiplier@up_waveforcebullets:
+		RequiresCondition: up_waveforcebullets
+		Modifier: 110
+	ReloadDelayMultiplier@up_waveforcebullets:
+		RequiresCondition: up_waveforcebullets
+		Modifier: 90
+	RangeMultiplier@up_waveforcebullets:
+		RequiresCondition: up_waveforcebullets
+		Modifier: 110
+	RevealsShroudMultiplier@up_waveforcebullets:
+		RequiresCondition: up_waveforcebullets
+		Modifier: 110
+	DetectCloakedMultiplier@up_waveforcebullets:
+		RequiresCondition: up_waveforcebullets
+		Modifier: 110
+	InaccuracyMultiplier@up_waveforcebullets:
+		RequiresCondition: up_waveforcebullets
+		Modifier: 90
+	GrantConditionOnPrerequisite@up_waveforcebullets:
+		Condition: up_waveforcebullets
+		Prerequisites: up_waveforcebullets
+	ActorStatValues:
+		Upgrades: up_waveforcebullets
+
+^DivineWindProtocol:
+	DamageMultiplier@up_divinewindprotocol:
+		RequiresCondition: up_divinewindprotocol
+		Modifier: 90
+	FirepowerMultiplier@up_divinewindprotocol:
+		RequiresCondition: up_divinewindprotocol
+		Modifier: 110
+	ReloadDelayMultiplier@up_divinewindprotocol:
+		RequiresCondition: up_divinewindprotocol
+		Modifier: 90
+	ReloadAmmoDelayMultiplier@up_divinewindprotocol:
+		RequiresCondition: up_divinewindprotocol
+		Modifier: 90
+	SpeedMultiplier@up_divinewindprotocol:
+		RequiresCondition: up_divinewindprotocol
+		Modifier: 110
+	GrantConditionOnPrerequisite@up_divinewindprotocol:
+		Condition: up_divinewindprotocol
+		Prerequisites: up_divinewindprotocol
+	ActorStatValues:
+		Upgrades: up_divinewindprotocol
+
+^StealthSuitIntegration:
+	Cloak@up_stealthsuitintegration:
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: appear1.aud
+		UncloakSound: trans1.aud
+		UncloakOn: Attack, Move, Damage, Heal, SelfHeal
+		RequiresCondition: up_stealthsuitintegration
+	SpeedMultiplier@up_stealthsuitintegration:
+		RequiresCondition: up_stealthsuitintegration
+		Modifier: 110
+	DamageMultiplier@up_stealthsuitintegration:
+		RequiresCondition: up_stealthsuitintegration
+		Modifier: 90
+	Shielded:
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		ShieldsUpCondition: shielded
+		RequiresCondition: !disabled && (up_stealthsuitintegration || shieldgen || shielded)
+		SelectionBarColor: 8888FFFF
+	GrantCondition@shieldpermanent:
+		Condition: shieldpermanent
+		RequiresCondition: up_stealthsuitintegration
+	ChangesShield@personal_shield:
+		Step: 30
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 125
+		RequiresCondition: up_stealthsuitintegration
+	Armor:
+		RequiresCondition: !shielded
+	Armor@shielded:
+		Type: Shield
+		RequiresCondition: shielded
+	DamageMultiplier@shielded:
+		RequiresCondition: shielded
+		Modifier: 90
+	ChangesShield@shielddischarge:
+		Delay: 10
+	GrantConditionOnPrerequisite@up_stealthsuitintegration:
+		Condition: up_stealthsuitintegration
+		Prerequisites: up_stealthsuitintegration
+	ActorStatValues:
+		Upgrades: up_stealthsuitintegration:
+
+^EnergizedArrows:
+	FirepowerMultiplier@up_energizedarrows:
+		RequiresCondition: up_energizedarrows
+		Modifier: 125
+	GrantConditionOnPrerequisite@up_energizedarrows:
+		Condition: up_energizedarrows
+		Prerequisites: up_energizedarrows
+	ActorStatValues:
+		Upgrades: up_energizedarrows
+
+^SuperiorWarEngines:
+	SpeedMultiplier@up_superiorwarengines:
+		RequiresCondition: up_superiorwarengines
+		Modifier: 120
+	ReloadDelayMultiplier@up_superiorwarengines:
+		RequiresCondition: up_superiorwarengines
+		Modifier: 80
+	DamageMultiplier@up_superiorwarengines:
+		RequiresCondition: up_superiorwarengines
+		Modifier: 80
+	GrantConditionOnPrerequisite@up_superiorwarengines:
+		Condition: up_superiorwarengines
+		Prerequisites: up_superiorwarengines
+	ActorStatValues:
+		Upgrades: up_superiorwarengines
+
+^AdvancedPlasmaWeapons:
+	FirepowerMultiplier@up_advancedplasmaweapons:
+		RequiresCondition: up_advancedplasmaweapons
+		Modifier: 110
+	ReloadDelayMultiplier@up_advancedplasmaweapons:
+		RequiresCondition: up_advancedplasmaweapons
+		Modifier: 90
+	RangeMultiplier@up_advancedplasmaweapons:
+		RequiresCondition: up_advancedplasmaweapons
+		Modifier: 110
+	RevealsShroudMultiplier@up_advancedplasmaweapons:
+		RequiresCondition: up_advancedplasmaweapons
+		Modifier: 110
+	DetectCloakedMultiplier@up_advancedplasmaweapons:
+		RequiresCondition: up_advancedplasmaweapons
+		Modifier: 110
+	InaccuracyMultiplier@up_advancedplasmaweapons:
+		RequiresCondition: up_advancedplasmaweapons
+		Modifier: 90
+	GrantConditionOnPrerequisite@up_advancedplasmaweapons:
+		Condition: up_advancedplasmaweapons
+		Prerequisites: up_advancedplasmaweapons
+	ActorStatValues:
+		Upgrades: up_advancedplasmaweapons
+
+^NanoTechRepairs:
+	ChangesHealth@up_nanotechrepairs1:
+		PercentageStep: 1
+		Delay: 100
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_nanotechrepairs
+	ChangesHealth@up_nanotechrepairs2:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_nanotechrepairs
+	DamageMultiplier@up_nanotechrepairs:
+		RequiresCondition: up_nanotechrepairs
+		Modifier: 90
+	GrantConditionOnPrerequisite@up_nanotechrepairs:
+		Condition: up_nanotechrepairs
+		Prerequisites: up_nanotechrepairs
+	ActorStatValues:
+		Upgrades: up_nanotechrepairs
+
+^NanoTechExtraRepairs:
+	WithColoredOverlay@nanotechrepairsdamage:
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+		Color: 11223344
+	WithIdleOverlay@nanotechrepairsdamage:
+		Image: nanodrone_overlay
+		Sequence: idle
+		Palette: shield30
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+		IsDecoration: True
+	ChangesHealth@nanotechrepairsdamage1:
+		PercentageStep: 1
+		Delay: 50
+		StartIfBelow: 100
+		DamageCooldown: 10
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+	ChangesHealth@nanotechrepairsdamage2:
+		Step: 40
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 10
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+	DamageMultiplier@nanotechrepairsdamage:
+		RequiresCondition: nanotechrepairsdamage && !nanotechrepairsdamagecooldown
+		Modifier: 90
+	GrantTimedCondition@nanotechrepairsdamage:
+		RequiresCondition: nanotechrepairsdamage
+		PauseOnCondition: !nanotechrepairsdamage
+		Condition: nanotechrepairsdamagecooldown
+		Duration: 5
+	GrantConditionOnDamage@nanotechrepairsdamage:
+		RequiresCondition: up_nanotechrepairs
+		Condition: nanotechrepairsdamage
+		Duration: 10
+		PlayerRelationship: Ally, Neutral, Enemy
+	WithColoredOverlay@extrananotechrepairsdamage:
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+		Color: 11223344
+	WithIdleOverlay@extrananotechrepairsdamage:
+		Image: nanodrone_overlay
+		Sequence: idle
+		Palette: shield30
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+		IsDecoration: True
+	ChangesHealth@extrananotechrepairsdamage1:
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 20
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+	ChangesHealth@extrananotechrepairsdamage2:
+		Step: 80
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 20
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+	DamageMultiplier@extrananotechrepairsdamage:
+		RequiresCondition: extrananotechrepairsdamage && !extrananotechrepairsdamagecooldown
+		Modifier: 90
+	GrantTimedCondition@extrananotechrepairsdamage:
+		RequiresCondition: extrananotechrepairsdamage
+		PauseOnCondition: !extrananotechrepairsdamage
+		Condition: extrananotechrepairsdamagecooldown
+		Duration: 10
+	GrantConditionOnDamage@extrananotechrepairsdamage:
+		RequiresCondition: up_nanotechrepairs
+		Condition: extrananotechrepairsdamage
+		Duration: 20
+		PlayerRelationship: Ally, Neutral, Enemy
+
+####################################################################################################
+#		INFANTRY
+####################################################################################################
+
+^RAE1:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Valued:
+		Cost: 100
+	Tooltip:
+		Name: Rifle Infantry
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: actor-e1.description
+	Mobile:
+		Speed: 58
+	Health:
+		HP: 14000
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Armament@PRIMARY: ##########
+		Weapon: M1Carbine
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: M1Carbine
+		MuzzleSequence: garrison-muzzle
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: rae1
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Voiced:
+		VoiceSet: RAGenericVoice
+
+^RAE3:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: RA Rocket Soldier
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry, RAInfantry
+		Description: actor-e3.description
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY: ##########
+		Weapon: RocketsRA
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: RocketsRA
+	TakeCover:
+		ProneOffset: 180,0,-200
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: rae3
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Voiced:
+		VoiceSet: RAGenericVoice
+
+^RAHARV:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~raprocharv
+		Description: template-harvester.description
+	Valued:
+		Cost: 1000 #1100
+	Tooltip:
+		Name: template-harvester.raname
+	SelectionDecorations:
+	Harvester:
+		BaleLoadDelay: 3
+		BaleUnloadDelay: 1
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 30
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 90
+		TurnSpeed: 18
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	GpsDot:
+		String: Harvester
+	FireWarheadsOnDeath:
+		RequiresCondition: !no-tiberium
+		Weapon: OreExplosion
+	FireWarheadsOnDeath@empty:
+		RequiresCondition: no-tiberium
+		Weapon: UnitExplodeHarvEmpty
+	WithHarvesterSpriteBody:
+		ImageByFullness: raharvempty, raharvhalf, raharv
+	-WithFacingSpriteBody:
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		Image: raharv
+		PlayerPalette: raplayer
+
+^RAMCV:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Transforms:
+		IntoActor: rafact.allies
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: placbldg.aud, build5.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeBig
+	RenderSprites:
+		Image: ramcv
+		PlayerPalette: raplayer
+
+^RAFACT:
+	Inherits: ^BaseBuilding
+	Inherits@conyard: ^Conyard
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Selectable:
+		Bounds: 3072, 3072, 0, -128
+	Tooltip:
+		Name: Allied Construction Yard
+	Building:
+		Footprint: xxx xxx xxx ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	Transforms:
+		IntoActor: ramcv.allies
+		Offset: 1,1
+		Facing: 432
+		RequiresCondition: factundeploy
+	WithBuildingPlacedAnimation:
+	ProvidesPrerequisite@rafact:
+		Prerequisite: rafact
+	ProvidesPrerequisite@concretebarrier:
+		Prerequisite: concretebarrier
+	ProvidesPrerequisite@oilderrick:
+		Prerequisite: oilderrick
+	RenderSprites:
+		Image: rafact
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+^RAPROC:
+	Inherits: ^BaseBuilding
+	Inherits@ref: ^Refinery
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Buildable:
+		Prerequisites: ~rafact, powr
+	Tooltip:
+		Name: Ore Refinery
+	Building:
+		Footprint: _X_ xxx X== ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+		DecorationBounds: 3072, 3072, 0, 0
+	SelectionDecorations:
+	Refinery:
+	DockHost:
+		DockAngle: 256
+		DockOffset: 0, 1c0, 0
+	DrawLineToTarget:
+	WithBuildingBib:
+	WithIdleOverlay@TOP:
+		Sequence: idle-top
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	ProvidesPrerequisite@raproc:
+		Prerequisite: raproc
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+^Dome:
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RASpawnActorsOnSell
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 630,-384,0, 630,384,0, -700,-512,0, -700,512,0
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	ProvidesPrerequisite:
+		Prerequisite: anyrahq
+	RenderSprites:
+		Image: dome
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+^RAFIX:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^RASpawnActorsOnSell
+	Inherits@shape: ^3x3Shape
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Buildable:
+		Prerequisites: ~rafact.allies, raweapa
+	Tooltip:
+		Name: Service Depot
+	Building:
+		Footprint: _+_ +++ _+_
+		Dimensions: 3,3
+	SelectionDecorations:
+	WithBuildingBib:
+		HasMinibib: true
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
+	Reservable:
+	RallyPoint:
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -683
+			BottomRight: 1536, 853
+	HitShape@TOPANDBOTTOM:
+		TargetableOffsets: 840,0,0, -1060,0,0
+		Type: Rectangle
+			TopLeft: -640, -768
+			BottomRight: 640, 1024
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: rafix
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+^RiftBase:
+	Interactable:
+		Bounds: 64, 64
+	ScriptTriggers:
+	RenderSprites:
+	WithSpriteBody:
+	ClassicFacingBodyOrientation:
+		QuantizedFacings: 1
+	HiddenUnderFog:
+		Type: GroundPosition
+	HitShape:
+	Immobile:
+		OccupiesSpace: false
+
+^IndustrialEfficiencyDoctrineRA1:
+	GrantConditionOnPrerequisite@ra_doctrine_industrialefficiency:
+		Condition: ra_doctrine_industrialefficiency
+		Prerequisites: ra_doctrine_industrialefficiency
+	ActorStatValues:
+		Upgrades: ra_doctrine_industrialefficiency
+
+^InfernoDoctrineRA1:
+	GrantConditionOnPrerequisite@ra_doctrine_inferno:
+		Condition: ra_doctrine_inferno
+		Prerequisites: ra_doctrine_inferno
+	FirepowerMultiplier@ra_doctrine_inferno:
+		RequiresCondition: ra_doctrine_inferno
+		Modifier: 125
+	DamageMultiplier@ra_doctrine_inferno:
+		RequiresCondition: ra_doctrine_inferno
+		Modifier: 80
+	ActorStatValues:
+		Upgrades: ra_doctrine_inferno
+
+^TeslaExperimentalTechDoctrineRA1:
+	GrantConditionOnPrerequisite@ra_doctrine_teslatech:
+		Condition: ra_doctrine_teslatech
+		Prerequisites: ra_doctrine_teslatech
+	ActorStatValues:
+		Upgrades: ra_doctrine_teslatech
+
+^HeavyArmorDoctrineRA1:
+	DamageMultiplier@ra_doctrine_heavyarmor:
+		RequiresCondition: ra_doctrine_heavyarmor
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra_doctrine_heavyarmor:
+		Condition: ra_doctrine_heavyarmor
+		Prerequisites: ra_doctrine_heavyarmor
+	ActorStatValues:
+		Upgrades: ra_doctrine_heavyarmor
+
+^NuclearWarDoctrineRA1:
+	FirepowerMultiplier@ra_doctrine_nuclearwar:
+		RequiresCondition: ra_doctrine_nuclearwar
+		Modifier: 110
+	SpeedMultiplier@ra_doctrine_nuclearwar:
+		RequiresCondition: ra_doctrine_nuclearwar
+		Modifier: 110
+	GrantConditionOnPrerequisite@ra_doctrine_nuclearwar:
+		Condition: ra_doctrine_nuclearwar
+		Prerequisites: ra_doctrine_nuclearwar
+	ActorStatValues:
+		Upgrades: ra_doctrine_nuclearwar
+
+####################################################################################################
+#		Upgrades Soviets
+####################################################################################################
+
+^VengeanceUpgradeRA1:
+	GrantConditionOnPrerequisite@ra_upgrade_vengeance:
+		Condition: ra_upgrade_vengeance
+		Prerequisites: ra_upgrade_vengeance
+	ActorStatValues:
+		Upgrades: ra_upgrade_vengeance
+
+^MenOfSteelTeamUpgradeRA1:
+	FirepowerMultiplier@ra_upgrade_menofsteel:
+		RequiresCondition: ra_upgrade_menofsteel
+		Modifier: 110
+	DamageMultiplier@ra_upgrade_menofsteel:
+		RequiresCondition: ra_upgrade_menofsteel
+		Modifier: 90
+	GrantConditionOnPrerequisite@ra_upgrade_menofsteel:
+		Condition: ra_upgrade_menofsteel
+		Prerequisites: ra_upgrade_menofsteel
+	ActorStatValues:
+		Upgrades: ra_upgrade_menofsteel
+
+#############################
+
+^WarEconomyTeamUpgradeRA1:
+	ProductionCostMultiplier@ra_upgrade_wareconomy:
+		Prerequisites: ra_upgrade_wareconomy
+		Multiplier: 90
+	ProductionTimeMultiplier@ra_upgrade_wareconomy:
+		Prerequisites: ra_upgrade_wareconomy
+		Multiplier: 90
+	SpeedMultiplier@ra_upgrade_wareconomy:
+		RequiresCondition: ra_upgrade_wareconomy
+		Modifier: 110
+	ResourceValueMultiplier@ra_upgrade_wareconomy:
+		Modifier: 110
+		RequiresCondition: ra_upgrade_wareconomy
+	GrantConditionOnPrerequisite@ra_upgrade_wareconomy:
+		Condition: ra_upgrade_wareconomy
+		Prerequisites: ra_upgrade_wareconomy
+	ActorStatValues:
+		Upgrades: ra_upgrade_wareconomy
+
+#############################
+
+^IncendiaryBulletsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra_upgrade_incendiarybullets:
+		Condition: ra_upgrade_incendiarybullets
+		Prerequisites: ra_upgrade_incendiarybullets
+	ActorStatValues:
+		Upgrades: ra_upgrade_incendiarybullets
+
+^ScorchedEarthTeamUpgradeRA1:
+	FirepowerMultiplier@ra_upgrade_scorchedearth:
+		RequiresCondition: ra_upgrade_scorchedearth
+		Modifier: 125
+	GrantConditionOnPrerequisite@ra_upgrade_scorchedearth:
+		Condition: ra_upgrade_scorchedearth
+		Prerequisites: ra_upgrade_scorchedearth
+	ActorStatValues:
+		Upgrades: ra_upgrade_scorchedearth
+
+#############################
+
+^TeslaArcingUpgradeRA1:
+	GrantConditionOnPrerequisite@ra_upgrade_teslaarcing:
+		Condition: ra_upgrade_teslaarcing
+		Prerequisites: ra_upgrade_teslaarcing
+	ActorStatValues:
+		Upgrades: ra_upgrade_teslaarcing
+
+^TeslaRocketsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra_upgrade_teslarockets:
+		Condition: ra_upgrade_teslarockets
+		Prerequisites: ra_upgrade_teslarockets
+	ActorStatValues:
+		Upgrades: ra_upgrade_teslarockets
+
+^ReactorOverloadTeamUpgradeRA1:
+	PowerMultiplier@ra_upgrade_reactoroverload:
+		RequiresCondition: ra_upgrade_reactoroverload
+		Modifier: 200
+	GrantConditionOnPrerequisite@ra_upgrade_reactoroverload:
+		Condition: ra_upgrade_reactoroverload
+		Prerequisites: ra_upgrade_reactoroverload
+	ActorStatValues:
+		Upgrades: ra_upgrade_reactoroverload
+
+#############################
+
+^AutoloadersUpgradeRA1:
+	ReloadDelayMultiplier@ra_upgrade_autoloaders:
+		RequiresCondition: ra_upgrade_autoloaders
+		Modifier: 60
+	ReloadAmmoDelayMultiplier@ra_upgrade_autoloaders:
+		RequiresCondition: ra_upgrade_autoloaders
+		Modifier: 60
+	GrantConditionOnPrerequisite@ra_upgrade_autoloaders:
+		Condition: ra_upgrade_autoloaders
+		Prerequisites: ra_upgrade_autoloaders
+	ActorStatValues:
+		Upgrades: ra_upgrade_autoloaders
+
+^HighExplosiveRocketsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra_upgrade_highexplosiverockets:
+		Condition: ra_upgrade_highexplosiverockets
+		Prerequisites: ra_upgrade_highexplosiverockets
+	ActorStatValues:
+		Upgrades: ra_upgrade_highexplosiverockets
+
+^StaliniumTeamUpgradeRA1:
+	DamageMultiplier@ra_upgrade_stalinium:
+		RequiresCondition: ra_upgrade_stalinium
+		Modifier: 80
+	GrantConditionOnPrerequisite@ra_upgrade_stalinium:
+		Condition: ra_upgrade_stalinium
+		Prerequisites: ra_upgrade_stalinium
+	ActorStatValues:
+		Upgrades: ra_upgrade_stalinium
+
+#############################
+
+^UnstableIsotopesUpgradeRA1:
+	SpeedMultiplier@ra_upgrade_unstableisotopes:
+		RequiresCondition: ra_upgrade_unstableisotopes
+		Modifier: 120
+	GrantConditionOnPrerequisite@ra_upgrade_unstableisotopes:
+		Condition: ra_upgrade_unstableisotopes
+		Prerequisites: ra_upgrade_unstableisotopes
+	ActorStatValues:
+		Upgrades: ra_upgrade_unstableisotopes
+
+^NuclearRocketsUpgradeRA1:
+	GrantConditionOnPrerequisite@ra_upgrade_nuclearrockets:
+		Condition: ra_upgrade_nuclearrockets
+		Prerequisites: ra_upgrade_nuclearrockets
+	ActorStatValues:
+		Upgrades: ra_upgrade_nuclearrockets
+
+^NuclearShellsTeamUpgradeRA1:
+	FirepowerMultiplier@ra_upgrade_nuclearshells:
+		RequiresCondition: ra_upgrade_nuclearshells
+		Modifier: 120
+	GrantConditionOnPrerequisite@ra_upgrade_nuclearshells:
+		Condition: ra_upgrade_nuclearshells
+		Prerequisites: ra_upgrade_nuclearshells
+	ActorStatValues:
+		Upgrades: ra_upgrade_nuclearshells
+
+#############################
+
+^AfterburnersUpgradeRA1:
+	SpeedMultiplier@ra_upgrade_afterburners:
+		RequiresCondition: ra_upgrade_afterburners
+		Modifier: 115
+	RangeMultiplier@ra_upgrade_afterburners:
+		RequiresCondition: ra_upgrade_afterburners
+		Modifier: 115
+	FirepowerMultiplier@ra_upgrade_afterburners:
+		RequiresCondition: ra_upgrade_afterburners
+		Modifier: 115
+	DamageMultiplier@ra_upgrade_afterburners:
+		RequiresCondition: ra_upgrade_afterburners
+		Modifier: 85
+	GrantConditionOnPrerequisite@ra_upgrade_afterburners:
+		Condition: ra_upgrade_afterburners
+		Prerequisites: ra_upgrade_afterburners
+	ActorStatValues:
+		Upgrades: ra_upgrade_afterburners
+
+^SuperOpticsPromotionRA1:
+	RevealsShroudMultiplier@ra_promotion_superoptics:
+		RequiresCondition: ra_promotion_superoptics
+		Modifier: 120
+	DetectCloakedMultiplier@ra_promotion_superoptics:
+		RequiresCondition: ra_promotion_superoptics
+		Modifier: 120
+	RangeMultiplier@ra_promotion_superoptics:
+		RequiresCondition: ra_promotion_superoptics
+		Modifier: 110
+	GrantConditionOnPrerequisite@ra_promotion_superoptics:
+		Condition: ra_promotion_superoptics
+		Prerequisites: ra_promotion_superoptics
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics
+

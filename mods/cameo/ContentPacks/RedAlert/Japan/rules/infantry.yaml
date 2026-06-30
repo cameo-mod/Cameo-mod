@@ -1,0 +1,531 @@
+RAJE1:
+	Inherits: ^RAE1
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@BushidoDiscipline: ^BushidoDiscipline
+	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Buildable:
+		Prerequisites: ~modtentj
+		Queue: Infantry, RAInfantry
+		Description: actor-e1.description-jp
+	Tooltip:
+		Name: Imperial Scoutsman
+	Valued:
+		Cost: 100
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 11000
+	ChangesHealth@SelfHealing:
+		Step: 11
+	RenderSprites:
+		Image: japanesesoldier
+		PlayerPalette: player
+	WithDeathAnimation:
+		DeathSequencePalette: player
+	Voiced:
+		VoiceSet: JapaneseVoice
+	Armament@PRIMARY: ##########
+		Weapon: CHGuardRifle
+		RequiresCondition: !up_waveforcebullets
+	Armament@GARRISONED: ##########
+		Weapon: CHGuardRifle
+		RequiresCondition: !up_waveforcebullets
+	Armament@Upgrade: ##########
+		Weapon: CHGuardRifleWaveforce
+		LocalOffset: 128,0,256
+		RequiresCondition: up_waveforcebullets
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: CHGuardRifleWaveforce
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: up_waveforcebullets
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_waveforcebullets
+
+RAJE3:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@BushidoDiscipline: ^BushidoDiscipline
+	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Tank Buster
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry, RAInfantry
+		Description: actor-e3.description
+		Prerequisites: ~dome.japan
+	Mobile:
+		Speed: 48
+	Health:
+		HP: 48000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armament@PRIMARY: ##########
+		Weapon: TankBusterBeamCannon
+		LocalOffset: 256,43,341
+		FireDelay: 5
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TankBusterBeamCannon
+	Armament@Upgrade: ##########
+		Weapon: TankBusterBeamCannonCharged
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: up_advancedplasmaweapons
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TankBusterBeamCannonCharged
+		RequiresCondition: up_advancedplasmaweapons
+	FirepowerMultiplier@DualBeam:
+		Modifier: 50
+		RequiresCondition: up_advancedplasmaweapons
+	TakeCover:
+		ProneOffset: 180,0,-200
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	RenderSprites:
+		Image: raje3
+		PlayerPalette: ra2cyborgplayer
+	WithDeathAnimation:
+		DeathSequencePalette: ra2cyborgplayer
+	WithInfantryBody:
+		IdleSequences: idle1, idle2, idle3
+	Voiced:
+		VoiceSet: JapaneseVoice
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+	GrantExternalConditionToTransport:
+		Condition: ifv-miss
+
+RAJE4:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXP: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@BushidoDiscipline: ^BushidoDiscipline
+	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Tooltip:
+		Name: Japanese Flamethrower
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 45
+		Prerequisites: ~modtentj
+		Queue: Infantry, RAInfantry
+		Description: actor-e4.description
+	Valued:
+		Cost: 200
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	Mobile:
+		Speed: 50
+	Armament:
+		Weapon: Flamer
+		LocalOffset: 700,0,500
+		FireDelay: 8
+		RequiresCondition: !up_advancedplasmaweapons
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: Flamer
+		RequiresCondition: !up_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Weapon: PlasmaFlamer
+		LocalOffset: 700,0,500
+		FireDelay: 8
+		RequiresCondition: up_advancedplasmaweapons
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: PlasmaFlamer
+		RequiresCondition: up_advancedplasmaweapons
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	TakeCover:
+		ProneOffset: 160,0,-300
+	FireWarheadsOnDeath:
+		Weapon: Flamethrower
+	UpdatesPlayerStatistics:
+	Selectable:
+		Class: rae4
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	RenderSprites:
+		Image: je4
+		PlayerPalette: raplayer
+	Voiced:
+		VoiceSet: JapaneseVoice
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline, up_stealthsuitintegration
+
+RASAMURAI:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@BushidoDiscipline: ^BushidoDiscipline
+	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Samurai
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~upsamurai
+		Queue: Infantry, RAInfantry
+		Description: actor-rasamurai.description
+	Mobile:
+		Speed: 65
+	Health:
+		HP: 35000
+	ChangesHealth@SelfHealing:
+		Step: 35
+	Armament@PRIMARY: ##########
+		Weapon: SamuraiBlade
+		RequiresCondition: !up_advancedplasmaweapons
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: SamuraiBlade
+		RequiresCondition: !up_advancedplasmaweapons
+	Armament@Upgrade: ##########
+		Weapon: SamuraiBladeCharged
+		RequiresCondition: up_advancedplasmaweapons
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: SamuraiBladeCharged
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: up_advancedplasmaweapons
+	-TakeCover:
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4
+	RenderSprites:
+		Image: rasamurai
+	Voiced:
+		VoiceSet: SamuraiVoice
+		Volume: 3
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+
+RAMAID:
+	Inherits: RAJE3
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@BushidoDiscipline: ^BushidoDiscipline
+	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
+	Inherits@EnergizedArrows: ^EnergizedArrows
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Archer Maiden
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~dome.japan, ~uparchermaiden
+		Queue: Infantry, RAInfantry
+		Description: actor-ramaid.description
+	Mobile:
+		Speed: 72
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY: ##########
+		Weapon: JapanMaidenBow
+		RequiresCondition: !up_energizedarrows
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: JapanMaidenBow
+		RequiresCondition: !up_energizedarrows
+	Armament@Upgrade: ##########
+		Weapon: JapanMaidenBowEnergized
+		RequiresCondition: up_energizedarrows
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: JapanMaidenBowEnergized
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: up_energizedarrows
+	Voiced:
+		VoiceSet: JapaneseArcherVoice
+	RenderSprites:
+		Image: ramaid
+		PlayerPalette: player
+	WithDeathAnimation:
+		DeathSequencePalette: player
+	WithDeathAnimation@effect:
+		DeathSequencePalette: player
+		DeathPaletteIsPlayerPalette: true
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_energizedarrows
+
+ROCKETANGEL:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@BushidoDiscipline: ^BushidoDiscipline
+	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@DivineWindProtocol: ^DivineWindProtocol
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Rocket Angel
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~modjtek, ~uprocketangel
+		Queue: Infantry, RAInfantry, Aircraft, RAAircraft
+		Description: actor-rocketangel.description
+	Aircraft:
+		TurnSpeed: 28
+		Speed: 140
+		VTOL: true
+		Voice: Move
+	Health:
+		HP: 24000
+	ChangesHealth@SelfHealing:
+		Step: 24
+	Armament@PRIMARY:
+		Weapon: RocketAngelRockets
+		LocalOffset: 512,-512,512, 512,512,512, 512,-512,512, 512,512,512
+		LocalYaw: -128, 128, -64, 64
+		FireDelay: 10
+	FirepowerMultiplier@rocketangel:
+		Modifier: 50
+	GrantConditionOnAttack@firing1:
+		Condition: firing1
+		RevokeDelay: 44
+	GrantConditionOnAttack@firing2:
+		Condition: firing2
+		RevokeDelay: 33
+	GrantConditionOnAttack@firing3:
+		Condition: firing3
+		RevokeDelay: 22
+	GrantConditionOnAttack@firing4:
+		Condition: firing4
+		RevokeDelay: 11
+	DamageMultiplier@firing1:
+		Modifier: 111
+		RequiresCondition: firing1
+	DamageMultiplier@firing2:
+		Modifier: 111
+		RequiresCondition: firing2
+	DamageMultiplier@firing3:
+		Modifier: 111
+		RequiresCondition: firing3
+	DamageMultiplier@firing4:
+		Modifier: 111
+		RequiresCondition: firing4
+	SpeedMultiplier@firing1:
+		Modifier: 77
+		RequiresCondition: firing1
+	TurnSpeedMultiplier@firing1:
+		Modifier: 77
+		RequiresCondition: firing1
+	SpeedMultiplier@firing2:
+		Modifier: 77
+		RequiresCondition: firing2
+	TurnSpeedMultiplier@firing2:
+		Modifier: 77
+		RequiresCondition: firing2
+	SpeedMultiplier@firing3:
+		Modifier: 77
+		RequiresCondition: firing3
+	TurnSpeedMultiplier@firing3:
+		Modifier: 77
+		RequiresCondition: firing3
+	SpeedMultiplier@firing4:
+		Modifier: 77
+		RequiresCondition: firing4
+	TurnSpeedMultiplier@firing4:
+		Modifier: 77
+		RequiresCondition: firing4
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: ROCKETANGEL.husk
+	SelectionDecorations:
+	AttackMove:
+		Voice: AttackMove
+	DeathSounds:
+		Voice: Die
+	Voiced:
+		VoiceSet: RocketAngelVoice
+	AnnounceOnKill:
+	WithInfantryBody:
+		IdleSequences: idle2
+		DefaultAttackSequence: attack
+		RequiresCondition: !airborne
+	WithFacingSpriteBody:
+		Sequence: stand
+		RequiresCondition: airborne
+	WithMoveAnimation:
+		MoveSequence: flying
+		RequiresCondition: airborne
+	WithAttackAnimation:
+		Sequence: flying-attack
+		RequiresCondition: airborne
+	WithIdleAnimation:
+		Sequences: idle1
+		Interval: 200
+		RequiresCondition: airborne
+	Selectable:
+		Bounds: 1024, 1024, 0, -512
+	FireWarheadsOnDeath:
+		Weapon: HeliExplode
+	RenderSprites:
+		Image: rocketangel
+		PlayerPalette: playerra2
+	ProducibleWithLevel@spyinfantry:
+		Prerequisites: infantry.upgraded
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons, up_divinewindprotocol
+
+hakurei:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@AntiMindControl: ^PrioritizePsionic
+	Inherits@AntiEpic: ^PrioritizeEpic
+	Inherits@AntiMonster: ^PrioritizeMonster
+	Inherits@MC: ^MCImmune
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@BushidoDiscipline: ^BushidoDiscipline
+	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@bot: ^BotAutoDeployOnLowHealth
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Exorcist
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 10
+		Prerequisites: ~modjtek, ~uphakurei, !hasexorcist
+		Queue: Infantry, RAInfantry
+		Description: actor-hakurei.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 75000
+	ChangesHealth@SelfHealing:
+		Step: 75
+	Armament@PRIMARY: ##########
+		Weapon: Hakureiring
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		PauseOnCondition: spellcard
+	Armament@Special: ##########
+		Weapon: Hakureiring2
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		PauseOnCondition: spellcard
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: Hakureiring
+		MuzzleSequence: garrison-muzzle
+	Armament@GARRISONEDSpecial: ##########
+		Name: garrisoned
+		Weapon: Hakureiring2
+		MuzzleSequence: garrison-muzzle
+	PeriodicExplosion:
+		Weapon: ReimuDreamSeal
+		RequiresCondition: spellcard && !disabled
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 200
+		CooldownTicks: 1500
+		DeployedCondition: spellcard
+		DeployingCondition: deploying
+		ShowSelectionBar: true
+		Voice: Attack
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+	DamageMultiplier@up_stealthsuitintegration:
+		Modifier: 75
+		RequiresCondition: spellcard && up_stealthsuitintegration
+	DamageMultiplier@SpellCard:
+		Modifier: 50
+		RequiresCondition: spellcard
+	FirepowerMultiplier@SpellCard:
+		Modifier: 50
+		RequiresCondition: spellcard
+	SpeedMultiplier@SpellCard:
+		Modifier: 0
+		RequiresCondition: spellcard
+	WithColoredOverlay@SpellCard:
+		Color: FFFFFF22
+		RequiresCondition: spellcard
+	AnnounceOnKill:
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4
+	Voiced:
+		VoiceSet: ReimuVoice
+		Volume: 3
+	FireWarheadsOnDeath:
+		EmptyWeapon: THMiss
+		Weapon: THMiss
+		RequiresCondition: !chronobeamed
+	ProvidesPrerequisite@exorcist:
+		Prerequisite: hasexorcist
+	ActorStatValues:
+		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+

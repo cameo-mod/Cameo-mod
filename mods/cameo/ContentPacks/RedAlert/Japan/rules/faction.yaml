@@ -1,0 +1,28 @@
+World:
+	FactionCA@modjapan:
+		Name: Japan RA1 #faction-ra-japan.name
+		InternalName: modjapan
+		Side: Red Alert
+		Game: Red Alert
+		Description: faction-ra-japan.description
+	StartingUnits@mcvonlyramodjapan:
+		Class: none
+		ClassName: MCV Only
+		Factions: modjapan
+		BaseActor: ramcv.japan
+	StartingUnits@defaultmodjapan:
+		Class: light
+		ClassName: Light Support
+		Factions: modjapan
+		BaseActor: ramcv.japan
+		SupportActors: rae1,rae1,rae1,rae3,rae3,modkubel,modtypej
+	StartingUnits@heavymodjapan:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: modjapan
+		BaseActor: ramcv.japan
+		SupportActors: rae1,rae1,rae1,rae3,rae3,modkubel,modtypej,modbggy,modbggy,modtypej,modhover
+
+####################################################################################################
+#		Experience
+####################################################################################################

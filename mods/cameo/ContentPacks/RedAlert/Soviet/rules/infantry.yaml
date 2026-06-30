@@ -1,0 +1,936 @@
+DOG:
+	Inherits: ^DefaultInfantry
+	Inherits@2: ^AffectedByTiberium
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Template: ^DogTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@MC: ^MCImmune
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 29
+		Prerequisites: ~barr, ~!upcyberdog
+		Description: actor-dog.description
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: actor-dog.name
+		GenericName: Dog
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Bounds: 512, 768, -48, -172
+	SelectionDecorations:
+	Health:
+		HP: 5000
+	ChangesHealth@SelfHealing:
+		Step: 5
+	Armor:
+		Type: None
+	Mobile:
+		Speed: 100
+		Voice: Move
+		RequiresCondition: !attack-cooldown && !eating
+	Guard:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	DetectCloaked:
+		Range: 6000
+		RequiresCondition: !disabled
+	Armament:
+		Weapon: DogJaw
+		ReloadingCondition: attack-cooldown
+	AttackLeap:
+		Voice: Attack
+		PauseOnCondition: attacking || attack-cooldown
+	AttackMove:
+		Voice: Move
+	GrantConditionOnAttack:
+		Condition: eating
+		RevokeDelay: 25
+	GrantConditionWhileAiming:
+		Condition: run
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Targetable:
+		TargetTypes: Ground, Infantry
+	WithInfantryBody:
+		MoveSequence: walk
+		IdleSequences: idle1, idle2
+		StandSequences: stand
+		DefaultAttackSequence: eat
+		RequiresCondition: !run
+	WithInfantryBody@RUN:
+		MoveSequence: run
+		RequiresCondition: run
+	SpeedMultiplier:
+		Modifier: 150
+		RequiresCondition: run
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: run
+	IgnoresDisguise:
+	RenderSprites:
+		PlayerPalette: raplayer
+	Voiced:
+		VoiceSet: DogVoice
+	-Targetable@disguise:
+	-InaccuracyMultiplier@artilleryjammer:
+	WithDeathAnimation:
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 5
+			PsychicDeath: 5
+			TiberiumDeath: 6
+			RadiationDeath: 6
+			RA2VirusDeath: 6
+			ElectricityDeath: 6
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+
+RARE1:
+	Inherits: ^RAE1
+	Inherits@IncendiaryBulletsUpgradeRA1: ^IncendiaryBulletsUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Buildable:
+		Prerequisites: ~barr, ~!ra_doctrine_conscription
+	Armament@PRIMARY: ##########
+		Weapon: M1Carbine
+		LocalOffset: 128,0,256
+		RequiresCondition: !ra_upgrade_incendiarybullets
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: M1Carbine
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: !ra_upgrade_incendiarybullets
+	Armament@Upgrade: ##########
+		Weapon: IncendiaryM1Carbine
+		LocalOffset: 128,0,256
+		RequiresCondition: ra_upgrade_incendiarybullets
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: IncendiaryM1Carbine
+		MuzzleSequence: garrison-muzzle
+		RequiresCondition: ra_upgrade_incendiarybullets
+	Voiced:
+		VoiceSet: RussianVoice
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_incendiarybullets, ra_upgrade_menofsteel
+
+ra_conscript_ak:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VengeanceUpgradeRA1: ^VengeanceUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Tooltip:
+		Name: AK-47 Conscript
+	Valued:
+		Cost: 200
+	ProductionCostMultiplier@dualproduction:
+		Multiplier: 200
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ra_doctrine_conscription
+		Queue: Infantry, RAInfantry
+		AdditionalActors: ra_cons_molo
+		Description: actor-e2.description
+	Mobile:
+		Speed: 71
+	Health:
+		HP: 22000
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armament:
+		Weapon: ConscriptAK47
+		LocalOffset: 0,0,450
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ConscriptAK47
+	FirepowerMultiplier@TripleShot:
+		Modifier: 33
+	FireWarheadsOnDeath@Vengeance1:
+		Weapon: VengeanceActivator1
+		RequiresCondition: !ra_upgrade_vengeance
+	FireWarheadsOnDeath@Vengeance2:
+		Weapon: VengeanceActivator2
+		RequiresCondition: ra_upgrade_vengeance && !upsubliminal2
+	FireWarheadsOnDeath@Vengeance3:
+		Weapon: VengeanceActivator3
+		RequiresCondition: ra_upgrade_vengeance && upsubliminal2
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Voiced:
+		VoiceSet: RussianConscriptVoice
+	AttackFrontal:
+		Voice: Attack
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
+
+RAE2:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Valued:
+		Cost: 200
+	Tooltip:
+		Name: Soviet Grenadier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~barr, ~!ra_doctrine_conscription
+		Queue: Infantry, RAInfantry
+		Description: actor-e2.description
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 8000
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armament:
+		Weapon: GrenadeRA
+		LocalOffset: 0,0,427
+		FireDelay: 15
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: GrenadeRA
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@Upgrade:
+		Weapon: GrenadeThermobaric
+		LocalOffset: 0,0,427
+		FireDelay: 15
+		RequiresCondition: ra_upgrade_scorchedearth
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: GrenadeThermobaric
+		RequiresCondition: ra_upgrade_scorchedearth
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithInfantryBody:
+		DefaultAttackSequence: throw
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	FireWarheadsOnDeath:
+		Weapon: GrenadeRAExplode
+		RequiresCondition: !ra_upgrade_scorchedearth
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: GrenadeThermobaricExplode
+		RequiresCondition: ra_upgrade_scorchedearth
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Voiced:
+		VoiceSet: RussianVoice
+	RenderSprites:
+		Image: rae2
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+
+mortarsoldier:
+	Inherits: ^Soldier
+	Inherits@Template: ^MortarInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@AntiDef: ^PrioritizeDefence
+	Inherits@anim: ^TDRAInfantry
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 130
+		Prerequisites: ~dome.soviet, ~upmortarsoldier
+		Description: actor-mortarsoldier.description
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Soviet Mortar Soldier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 16000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Mobile:
+		Speed: 48
+	Armament@PRIMARY:
+		Weapon: SiegeMortar
+		LocalOffset: 427,0,341
+		FireDelay: 10
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SiegeMortar
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@Upgrade:
+		Weapon: SiegeMortarThermobaric
+		LocalOffset: 427,0,341
+		FireDelay: 10
+		RequiresCondition: ra_upgrade_scorchedearth
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: SiegeMortarThermobaric
+		RequiresCondition: ra_upgrade_scorchedearth
+	FirepowerMultiplier@SplashDamage:
+		Modifier: 75
+	FireWarheadsOnDeath:
+		Weapon: SiegeMortarExplode
+		RequiresCondition: !ra_upgrade_scorchedearth
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: SiegeMortarThermobaricExplode
+		RequiresCondition: ra_upgrade_scorchedearth
+	TakeCover:
+		ProneOffset: 227,0,-245
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	RenderRangeCircle:
+		RangeCircleType: infantry
+	Voiced:
+		VoiceSet: RussianVoice
+	RenderSprites:
+		Image: mortarsoldier
+		PlayerPalette: playerra
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+
+RARE3:
+	Inherits: ^RAE3
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Tooltip:
+		Name: Soviet Rocket Soldier
+	Buildable:
+		Prerequisites: ~barr, ~!ra_doctrine_inferno, ~!ra_doctrine_conscription
+	Voiced:
+		VoiceSet: RussianVoice
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_menofsteel
+
+ra_dragunov:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Tooltip:
+		Name: Dragunov Anti Material Sniper
+	Valued:
+		Cost: 400
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~ra_doctrine_conscription
+		Queue: Infantry, RAInfantry
+		Description: Powerful Anti Material Sniper. Strong vs Tanks and Aircraft
+	Mobile:
+		Speed: 40
+	Health:
+		HP: 20000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament:
+		Weapon: DragunovSniper
+		LocalOffset: 0,0,427
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: DragunovSniper
+	TakeCover:
+		ProneOffset: 180,0,-200
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Voiced:
+		VoiceSet: RussianCommissarVoice
+	AttackFrontal:
+		Voice: Attack
+	GrantExternalConditionToTransport:
+		Condition: ifv-flak
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
+
+e3flamer:
+	Inherits: ^RAE3
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Tooltip:
+		Name: Fire Rocket Soldier
+	Buildable:
+		Prerequisites: ~ra_doctrine_inferno
+		Queue: Infantry, RAInfantry
+	Valued:
+		Cost: 400
+	Health:
+		HP: 16000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Mobile:
+		Speed: 48
+	Armament@PRIMARY: ##########
+		Weapon: FireRockets
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: FireRockets
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@Upgrade:
+		Weapon: FireRocketsThermobaric
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: ra_upgrade_scorchedearth
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: FireRocketsThermobaric
+		RequiresCondition: ra_upgrade_scorchedearth
+	FireWarheadsOnDeath:
+		Weapon: FireRocketsExplode
+		RequiresCondition: !ra_upgrade_scorchedearth
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: FireRocketsThermobaricExplode
+		RequiresCondition: ra_upgrade_scorchedearth
+	RenderSprites:
+		Image: e3flamer
+	Voiced:
+		VoiceSet: RussianVoice
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+
+RAE4:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXP: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AntiBuil: ^PrioritizeBuilding
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Tooltip:
+		Name: Soviet Flamethrower
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Valued:
+		Cost: 200
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 45
+		Prerequisites: ~dome.soviet
+		Description: actor-e4.description
+	Health:
+		HP: 16000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Mobile:
+		Speed: 56
+	Armament:
+		Weapon: FireballGun
+		LocalOffset: 500,0,250
+		FireDelay: 8
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: FireballGun
+		RequiresCondition: !ra_upgrade_scorchedearth
+	Armament@Upgrade:
+		Weapon: FireballGunThermobaric
+		LocalOffset: 500,0,250
+		FireDelay: 8
+		RequiresCondition: ra_upgrade_scorchedearth
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: FireballGunThermobaric
+		RequiresCondition: ra_upgrade_scorchedearth
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	TakeCover:
+		ProneOffset: 160,0,-200
+	FireWarheadsOnDeath:
+		Weapon: FireballGunExplode
+		RequiresCondition: !ra_upgrade_scorchedearth
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: FireballGunThermobaricExplode
+		RequiresCondition: ra_upgrade_scorchedearth
+	RenderSprites:
+		Image: rae4
+		PlayerPalette: raplayer
+	Voiced:
+		VoiceSet: RussianVoice
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_menofsteel
+
+SHOK:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@TeslaExperimentalTechDoctrineRA1: ^TeslaExperimentalTechDoctrineRA1
+	Inherits@TeslaArcingUpgradeRA1: ^TeslaArcingUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 130
+		Prerequisites: ~stek, ~!ra_doctrine_teslatech
+		Description: actor-shok.description
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Shock Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Mobile:
+		Speed: 40
+	Armament@PRIMARY:
+		Weapon: PortaTesla
+		LocalOffset: 427,0,341
+		RequiresCondition: !ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+	Armament@Upgrade1:
+		Weapon: PortaTeslaEMP
+		LocalOffset: 427,0,341
+		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+	Armament@Upgrade2:
+		Weapon: PortaTeslaEMPArc
+		LocalOffset: 427,0,341
+		RequiresCondition: ra_upgrade_teslaarcing
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: PortaTesla
+		RequiresCondition: !ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+	Armament@Upgrade1GARRISONED:
+		Name: garrisoned
+		Weapon: PortaTeslaEMP
+		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+	Armament@Upgrade2GARRISONED:
+		Name: garrisoned
+		Weapon: PortaTeslaEMPArc
+		RequiresCondition: ra_upgrade_teslaarcing
+	TakeCover:
+		ProneOffset: 227,0,-245
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	Voiced:
+		VoiceSet: ShokVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-tesla
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_teslatech, ra_upgrade_teslaarcing, ra_upgrade_menofsteel
+
+ra_zapper:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@TeslaExperimentalTechDoctrineRA1: ^TeslaExperimentalTechDoctrineRA1
+	Inherits@TeslaArcingUpgradeRA1: ^TeslaArcingUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 130
+		Prerequisites: ~stek, ~ra_doctrine_teslatech
+		Description: actor-shok.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Zapper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 60000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Mobile:
+		Speed: 30
+	Armament@PRIMARY:
+		Weapon: ZapperPortaTesla
+		LocalOffset: 427,0,341
+		RequiresCondition: !ra_upgrade_teslaarcing
+	Armament@Upgrade:
+		Weapon: ZapperPortaTeslaArc
+		LocalOffset: 427,0,341
+		RequiresCondition: ra_upgrade_teslaarcing
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ZapperPortaTesla
+		RequiresCondition: !ra_upgrade_teslaarcing
+	Armament@UpgradeGARRISONED:
+		Name: garrisoned
+		Weapon: ZapperPortaTeslaArc
+		RequiresCondition: ra_upgrade_teslaarcing
+	TakeCover:
+		ProneOffset: 227,0,-245
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		RequiresCondition: !parachute
+	WithInfantryBody@PARACHUTE:
+		StandSequences: parachute
+		RequiresCondition: parachute
+	Voiced:
+		VoiceSet: ShokVoice
+	GrantExternalConditionToTransport:
+		Condition: ifv-tesla
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_doctrine_teslatech, ra_upgrade_teslaarcing, ra_upgrade_menofsteel
+
+ra_commissar:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@VengeanceUpgradeRA1: ^VengeanceUpgradeRA1
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	-ExternalCondition@PropagandaEffect:
+	Tooltip:
+		Name: Commissar
+	Valued:
+		Cost: 700
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Buildable:
+		Prerequisites: ~ra_upgrade_commissar
+		Queue: Infantry, RAInfantry
+		Description: actor-gdiofficer.description
+	Armament@PRIMARY:
+		Weapon: CommissarPistol
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: CommissarPistol
+	FireWarheadsOnDeath@Vengeance1:
+		Weapon: VengeanceActivator1
+		RequiresCondition: !ra_upgrade_vengeance
+	FireWarheadsOnDeath@Vengeance2:
+		Weapon: VengeanceActivator2
+		RequiresCondition: ra_upgrade_vengeance && !upsubliminal
+	FireWarheadsOnDeath@Vengeance3:
+		Weapon: VengeanceActivator3
+		RequiresCondition: ra_upgrade_vengeance && upsubliminal
+	ProducibleWithLevel:
+		InitialLevels: 1
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 5000
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	ProximityExternalCondition@upsubliminal:
+		Range: 5000
+		ValidRelationships: Ally
+		Condition: upsubliminal2
+		RequiresCondition: ra_upgrade_vengeance
+	WithRangeCircle@propaganda:
+		Range: 5000
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	WithDecoration@CARRYALL:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: infantry ##########
+	WithDecoration@CARRYALL:
+		Image: d2k_pips
+		Sequence: pickup-indicator
+		ValidRelationships: Ally, Enemy, Neutral
+	GrantExternalConditionToTransport:
+		Condition: ifv-healer
+	Voiced:
+		VoiceSet: RussianCommissarVoice
+		Volume: 2.5
+	AttackFrontal:
+		Voice: Attack
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_doctrine_conscription, ra_upgrade_vengeance, ra_upgrade_menofsteel
+
+cyberdog:
+	Inherits: ^DefaultInfantry
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@Template: ^DogTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@MC: ^MCImmune
+	Inherits@HeavyArmorDoctrineRA1: ^HeavyArmorDoctrineRA1
+	Inherits@NuclearWarDoctrineRA1: ^NuclearWarDoctrineRA1
+	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 29
+		Prerequisites: ~upcyberdog, ~barr
+		Description: Cybernetically modified dog that is far more durable and can attack vehicles.
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Cyberdog
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Selectable:
+		Bounds: 512, 768, -48, -172
+	SelectionDecorations:
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Mobile:
+		Speed: 100
+		Voice: Move
+		RequiresCondition: !attack-cooldown && !eating
+	Guard:
+		Voice: Move
+	Passenger:
+		Voice: Move
+	RevealsShroud:
+		Range: 10000
+	DetectCloaked:
+		Range: 10000
+		RequiresCondition: !disabled
+	RenderDetectionCircle:
+	Armament:
+		Weapon: CyberneticDogJaw
+		ReloadingCondition: attack-cooldown
+	AttackLeap:
+		Voice: Attack
+		PauseOnCondition: attacking || attack-cooldown
+	AttackMove:
+		Voice: Move
+	GrantConditionOnAttack:
+		Condition: eating
+		RevokeDelay: 25
+	GrantConditionWhileAiming:
+		Condition: run
+	AutoTarget:
+		InitialStance: AttackAnything
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Infantry
+	Targetable:
+		TargetTypes: Ground, Infantry
+	WithInfantryBody:
+		MoveSequence: walk
+		IdleSequences: idle1, idle2
+		StandSequences: stand
+		DefaultAttackSequence: eat
+		RequiresCondition: !run
+	WithInfantryBody@RUN:
+		MoveSequence: run
+		RequiresCondition: run
+	SpeedMultiplier:
+		Modifier: 150
+		RequiresCondition: run
+	DamageMultiplier:
+		Modifier: 50
+		RequiresCondition: run
+	IgnoresDisguise:
+	RenderSprites:
+		PlayerPalette: raplayer
+	Voiced:
+		VoiceSet: DogVoice
+	-Targetable@disguise:
+	-InaccuracyMultiplier@artilleryjammer:
+	-InaccuracyMultiplier@PromotionUnit:
+	Targetable@dog:
+		TargetTypes: DogImmune
+	WithDeathAnimation:
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 5
+			PsychicDeath: 5
+			TiberiumDeath: 6
+			RadiationDeath: 6
+			RA2VirusDeath: 6
+			ElectricityDeath: 6
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+	ActorStatValues:
+		Upgrades: ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_stalinium
+
+VOLKOV:
+	Inherits: ^Soldier
+	Inherits@anim: ^TDRAInfantry
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@SuperOpticsPromotionRA1: ^SuperOpticsPromotionRA1
+	Inherits@IncendiaryBulletsUpgradeRA1: ^IncendiaryBulletsUpgradeRA1
+	Inherits@TeslaArcingUpgradeRA1: ^TeslaArcingUpgradeRA1
+	Inherits@AutoloadersUpgradeRA1: ^AutoloadersUpgradeRA1
+	Inherits@NuclearShellsTeamUpgradeRA1: ^NuclearShellsTeamUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildLimit: 1
+		BuildPaletteOrder: 130
+		Prerequisites: ~stek, ~upvolkov
+		Description: actor-volkov.description
+	Tooltip:
+		Name: Volkov
+	Valued:
+		Cost: 10000
+	Armament:
+		Weapon: VolkovMagneticWeapon
+		LocalOffset: 500,0,250
+		RequiresCondition: !ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+	Armament@Tesla:
+		Weapon: VolkovMagneticWeaponTesla
+		LocalOffset: 500,0,250
+		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+	Armament@NuclearShells:
+		Weapon: VolkovMagneticWeaponNuclearShells
+		LocalOffset: 500,0,250
+		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+	Armament@Incendiary:
+		Weapon: VolkovMagneticWeaponIncendiary
+		LocalOffset: 500,0,250
+		RequiresCondition: ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+	Armament@IncendiaryTesla:
+		Weapon: VolkovMagneticWeaponIncendiaryTesla
+		LocalOffset: 500,0,250
+		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+	Armament@IncendiaryNuclearShells:
+		Weapon: VolkovMagneticWeaponIncendiaryNuclearShells
+		LocalOffset: 500,0,250
+		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: VolkovMagneticWeapon
+		RequiresCondition: !ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+	Armament@GARRISONEDTesla:
+		Name: garrisoned
+		Weapon: VolkovMagneticWeaponTesla
+		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+	Armament@GARRISONEDNuclearShells:
+		Name: garrisoned
+		Weapon: VolkovMagneticWeaponNuclearShells
+		RequiresCondition: !ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+	Armament@GARRISONEDIncendiary:
+		Name: garrisoned
+		Weapon: VolkovMagneticWeaponIncendiary
+		RequiresCondition: ra_upgrade_incendiarybullets && !ra_upgrade_teslaarcing && !ra_upgrade_nuclearshells
+	Armament@GARRISONEDIncendiaryTesla:
+		Name: garrisoned
+		Weapon: VolkovMagneticWeaponIncendiaryTesla
+		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_teslaarcing
+	Armament@GARRISONEDIncendiaryNuclearShells:
+		Name: garrisoned
+		Weapon: VolkovMagneticWeaponIncendiaryNuclearShells
+		RequiresCondition: ra_upgrade_incendiarybullets && ra_upgrade_nuclearshells
+	Health:
+		HP: 400000
+	ChangesHealth@SelfHealing:
+		Step: 400
+	Mobile:
+		Speed: 55
+		PauseOnCondition: disabled
+	AttackFrontal:
+		FacingTolerance: 0
+	RenderSprites:
+		Image: volkov
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	WithInfantryBody:
+		IdleSequences: idle1
+		DefaultAttackSequence: shoot
+	Voiced:
+		VoiceSet: StavrosVoice
+	AnnounceOnKill:
+	-Crushable:
+	ActorStatValues:
+		Upgrades: ra_promotion_superoptics, ra_upgrade_incendiarybullets, ra_upgrade_teslaarcing, ra_upgrade_autoloaders, ra_upgrade_nuclearshells
+

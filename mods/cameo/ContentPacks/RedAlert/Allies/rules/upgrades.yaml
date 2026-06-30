@@ -1,0 +1,294 @@
+up_advancedradarsystems:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Advanced Radar Systems
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade-advancedradarsystems.description
+		Prerequisites: ~dome.allies, !up_advancedradarsystems
+	RenderSprites:
+		Image: advancedradarsystemicon
+	ProvidesPrerequisite:
+
+up_infantryarmorplating:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Infantry Armor Plating
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade-infantryarmorplating.description
+		Prerequisites: ~dome.allies, !up_infantryarmorplating
+	RenderSprites:
+		Image: infantryarmorplatingicon
+	ProvidesPrerequisite:
+
+up_reinforcedstructures:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reinforced Structures
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: upgrade-reinforcedstructures.description
+		Prerequisites: ~dome.allies, !up_reinforcedstructures
+	RenderSprites:
+		Image: reinforcedstructuresicon
+	ProvidesPrerequisite:
+
+up_airsuperioritydoctrine:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Air Superiority Doctrine
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-airsuperioritydoctrine.description
+		Prerequisites: ~atek, !up_airsuperioritydoctrine
+	RenderSprites:
+		Image: airsuperiorityicon
+	ProvidesPrerequisite:
+
+up_lasertargetingsystems:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Laser Targeting Systems
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-lasertargetingsystems.description
+		Prerequisites: ~atek, !up_lasertargetingsystems
+	RenderSprites:
+		Image: lasertargetingsystemicon
+	ProvidesPrerequisite:
+
+up_chronoarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Chrono Armor
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-chronoarmor.description
+		Prerequisites: ~atek, !up_chronoarmor
+	RenderSprites:
+		Image: chronoarmoricon
+	ProvidesPrerequisite:
+
+up_cryomissiles:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cryo Missiles
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-cryomissiles.description
+		Prerequisites: ~atek, !up_cryomissiles
+	RenderSprites:
+		Image: cryomissilesicon
+	ProvidesPrerequisite:
+
+up_gpssatellitesupport:
+	Inherits: ^upgrade.template
+	Tooltip:
+		Name: GPS Satellite Support
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: upgrade-gpssatellitesupport.description
+		Prerequisites: ~atek, up_advancedradarsystems, !up_gpssatellitesupport
+	RenderSprites:
+		Image: gpssatellitesupporticon
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.up_gpssatellitesupport
+
+upalliedmachinegunner:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Machine Gunner
+	Buildable:
+		BuildPaletteOrder: 25
+		Queue: Promotions
+		Description: Allows training of Machine Gunners.
+		Prerequisites: ~rafact.allies, !upalliedmachinegunner, rank1
+	RenderSprites:
+		Image: alliedmachinegunner
+	ProvidesPrerequisite:
+		Prerequisite: upalliedmachinegunner
+
+upsheridan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Sheridan
+	Buildable:
+		BuildPaletteOrder: 28
+		Queue: Promotions
+		Description: Allows construction of the Sheridan Light Tank.
+		Prerequisites: ~rafact.allies, !upsheridan, upalliedmachinegunner, rank1
+	RenderSprites:
+		Image: sheridan
+	ProvidesPrerequisite:
+		Prerequisite: upsheridan
+
+uprapierjumpjet:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Rapier Jumpjet
+	Buildable:
+		BuildPaletteOrder: 31
+		Queue: Promotions
+		Description: Allows construction of the Rapier Jumpjet.
+		Prerequisites: ~rafact.allies, !uprapierjumpjet, upsheridan, rank1
+	RenderSprites:
+		Image: rapierjumpjet
+	ProvidesPrerequisite:
+		Prerequisite: uprapierjumpjet
+
+upmodspaceport:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Reinforcement Pad
+	Buildable:
+		BuildPaletteOrder: 34
+		Queue: Promotions
+		Description: Allows construction of the Reinforcement Pad.
+		Prerequisites: ~rafact.allies, !upmodspaceport, uprapierjumpjet, rank1
+	RenderSprites:
+		Image: modspaceport
+	ProvidesPrerequisite:
+		Prerequisite: upmodspaceport
+
+upreconranger:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Recon Ranger.
+	Buildable:
+		BuildPaletteOrder: 26
+		Queue: Promotions
+		Description: Allows construction of the Recon Ranger.
+		Prerequisites: ~rafact.allies, !upreconranger, rank1
+	RenderSprites:
+		Image: reconranger
+	ProvidesPrerequisite:
+		Prerequisite: upreconranger
+
+upalliedtiger:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Tiger Heavy Tank
+	Buildable:
+		BuildPaletteOrder: 29
+		Queue: Promotions
+		Description: Allows construction of the Tiger Heavy Tank.
+		Prerequisites: ~rafact.allies, !upalliedtiger, upreconranger, rank1
+	RenderSprites:
+		Image: alliedtiger
+	ProvidesPrerequisite:
+		Prerequisite: upalliedtiger
+
+upalliedtankdestroyer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Tank Destroyer
+	Buildable:
+		BuildPaletteOrder: 32
+		Queue: Promotions
+		Description: Allows construction of the Tank Destroyer.
+		Prerequisites: ~rafact.allies, !upalliedtankdestroyer, upalliedtiger, rank1
+	RenderSprites:
+		Image: modtnkd2
+	ProvidesPrerequisite:
+		Prerequisite: upalliedtankdestroyer
+
+upctnk:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Chrono Tank
+	Buildable:
+		BuildPaletteOrder: 35
+		Queue: Promotions
+		Description: Allows construction of the Chrono Tank.
+		Prerequisites: ~rafact.allies, !upctnk, upalliedtankdestroyer, rank1
+	RenderSprites:
+		Image: ctnk
+	ProvidesPrerequisite:
+		Prerequisite: upctnk
+
+uphbox:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Camo Pillbox
+	Buildable:
+		BuildPaletteOrder: 27
+		Queue: Promotions
+		Description: Allows construction of the Camo Pillbox.
+		Prerequisites: ~rafact.allies, !uphbox, rank1
+	RenderSprites:
+		Image: hbox
+	ProvidesPrerequisite:
+		Prerequisite: uphbox
+
+upphasetransport:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Phase Transport
+	Buildable:
+		BuildPaletteOrder: 30
+		Queue: Promotions
+		Description: Allows construction of Phase Transports.
+		Prerequisites: ~rafact.allies, !upphasetransport, uphbox, rank1
+	RenderSprites:
+		Image: sapc
+	ProvidesPrerequisite:
+		Prerequisite: upphasetransport
+
+upbastion:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Bastion
+	Buildable:
+		BuildPaletteOrder: 33
+		Queue: Promotions
+		Description: Allows construction of Bastion Artillery Bunkers.
+		Prerequisites: ~rafact.allies, !upbastion, upphasetransport, rank1
+	RenderSprites:
+		Image: modartyturret
+	ProvidesPrerequisite:
+		Prerequisite: upbastion
+
+upgapgeneratorradarjammer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Gap Generator and Radar Jammer
+	Buildable:
+		BuildPaletteOrder: 36
+		Queue: Promotions
+		Description: Allows construction of the Gap Generator and Mobile Radar Jammer.
+		Prerequisites: ~rafact.allies, !upgapgeneratorradarjammer, upbastion, rank1
+	RenderSprites:
+		Image: gapgeneratorradarjammer
+	ProvidesPrerequisite:
+		Prerequisite: upgapgeneratorradarjammer
+
+	####################################################################################################
+	#		Promotion Units Allies
+	####################################################################################################
+

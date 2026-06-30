@@ -1,0 +1,44 @@
+RALST:
+	Inherits: ^BoatUnit
+	Inherits@2: ^UnarmedCargoVehicle
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Naval Transport
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~ranavaltransport
+		Queue: Naval, RANaval
+	Mobile:
+		Speed: 100
+		Locomotor: lcraft
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7500
+	WithLandingCraftAnimation:
+		OpenTerrainTypes: Clear, Rough, Road, Ore, Gems, Beach
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Cargo:
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 10
+		PassengerFacing: 0
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	Voiced:
+		VoiceSet: RAVehicleVoice
+	RenderSprites:
+		PlayerPalette: raplayer
+
+####################################################################################################
+#		BUILDINGS
+####################################################################################################
+

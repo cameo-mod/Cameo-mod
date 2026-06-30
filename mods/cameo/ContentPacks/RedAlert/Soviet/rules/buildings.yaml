@@ -1,0 +1,967 @@
+RAFACT.SOVIET:
+	Inherits: ^RAFACT
+	Tooltip:
+		Name: Soviet Construction Yard
+	Transforms:
+		IntoActor: ramcv.soviet
+	ProvidesPrerequisite@wirefence:
+		Prerequisite: wirefence
+
+BARR:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@barr: ^IsBarrack
+	Inherits@barr: ^Conscription
+	Buildable:
+		Prerequisites: ~rafact.soviet, powr
+	Tooltip:
+		Name: Soviet Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -170,810,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: -725,640,0
+		ExitCell: 0,2
+	ProvidesPrerequisite:
+		Prerequisite: barracks
+	ProvidesPrerequisite:
+		Prerequisite: rabarracks
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+RAPROC.SOVIET:
+	Inherits: ^RAPROC
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	GrantConditionOnPrerequisite@Normal:
+		Condition: normalharvester
+		Prerequisites: !ra_doctrine_industrialefficiency
+	GrantConditionOnPrerequisite@Industrial:
+		Condition: industrialminer
+		Prerequisites: ra_doctrine_industrialefficiency
+	FreeActor@Normal:
+		Actor: RAHARV.SOVIET
+		SpawnOffset: 1,2
+		Facing: 256
+		RequiresCondition: normalharvester
+	FreeActor@Industrial:
+		Actor: ra_industrialminer
+		SpawnOffset: 1,2
+		Facing: 256
+		RequiresCondition: industrialminer
+	Tooltip:
+		Name: Soviet Ore Refinery
+	RenderSprites:
+		Image: raproc
+	Buildable:
+		Prerequisites: ~rafact.soviet, powr
+	ProvidesPrerequisite@buildingname:
+	ActorStatValues:
+		Upgrades: ra_doctrine_industrialefficiency, ra_upgrade_wareconomy
+
+RAWEAP:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@weap: ^IsWeaponFactory
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~rafact.soviet, raproc.soviet, ~!ra_doctrine_industrialefficiency
+		Description: template-factory.description
+	Tooltip:
+		Name: Soviet War Factory
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	WithProductionDoorOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: build-top
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: 213,-128,0
+		ExitCell: 1,2
+	ProvidesPrerequisite:
+		Prerequisite: vehicleproduction
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra_gigafactory:
+	Inherits: RAWEAP
+	Inherits@shape: ^4x3Shape
+	Buildable:
+		Prerequisites: ~rafact.soviet, raproc.soviet, ~ra_doctrine_industrialefficiency
+		BuildDuration: 750
+		BuildDurationModifier: 100
+		Description: template-factory.description
+	Tooltip:
+		Name: Soviet Large Factory
+	Valued:
+		Cost: 3000
+	Health:
+		HP: 600000
+	Power:
+		Amount: -60
+	RevealsShroud:
+		Range: 10000
+	Building:
+		Footprint: xxxx xxxx xxxx ====
+		Dimensions: 4,4
+		LocalCenterOffset: 0,0,0
+	ProductionQueue@VEHICLE:
+		BuildDurationModifier: 50
+	Exit@1:
+		SpawnOffset: 256,512,0
+		ExitCell: 2,3
+	WithIdleOverlay@smoke1:
+		Offset: 250,-750,1250
+		Sequence: smoke
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@smoke2:
+		Offset: 0,-500,1500
+		Sequence: smoke
+		RequiresCondition: !build-incomplete
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@inherits:
+		Prerequisite: raweap
+
+DOME.Soviet:
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@dome: ^Dome
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Tooltip:
+		Name: Soviet Radar Dome
+	Buildable:
+		Prerequisites: ~rafact.soviet, raproc.soviet
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+RAAFLD:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@hpad: ^IsAircraftFactory
+	Buildable:
+		Prerequisites: ~rafact.soviet, dome.soviet, ~!ra_doctrine_industrialefficiency
+		Description: actor-raafld.description
+	Tooltip:
+		Name: Soviet Airfield
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	AirstrikePower@spyplane:
+		OrderName: SovietSpyPlane
+		Prerequisites:
+			1:
+			2: ra_promotion_superspyplane
+		Icons:
+			1: spyplane
+			2: spyplane
+		ChargeInterval: 4500
+		Names:
+			1: Spy Plane
+			2: Super Spy Plane Squad
+		Descriptions:
+			1: Sends in a Spy Plane to reveal a large area on the map and lock on to enemy units and defenses for 20 seconds.
+			2: Sends in a squad of 3 Spy Planes to reveal a large area on the map and lock on to enemy units and defenses for 30 seconds.
+		SelectTargetSpeechNotification: SelectTarget
+		EndChargeSpeechNotification: SpyPlaneReady
+		CameraActor: camera.spyplane
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: u2
+			2: u3
+		SquadSizes:
+			1: 1
+			2: 3
+		SquadOffset: 4096,4096,0
+		QuantizedFacings: 32
+		DisplayBeacon: true
+		BeaconPosters:
+			1: racamicon
+			2: racamicon
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 60
+	GrantConditionOnPrerequisite@ra_upgrade_afterburners:
+		Condition: ra_upgrade_afterburners
+		Prerequisites: ra_upgrade_afterburners
+	GrantConditionOnPrerequisite@ra_promotion_parabombs2:
+		Condition: ra_promotion_parabombs2
+		Prerequisites: ra_promotion_parabombs2
+	GrantConditionOnPrerequisite@ra_promotion_parabombs3:
+		Condition: ra_promotion_parabombs3
+		Prerequisites: ra_promotion_parabombs3
+	ProvidesPrerequisite@parabombs1:
+		Prerequisite: parabombs1
+		RequiresCondition: ra_upgrade_afterburners || ra_promotion_parabombs2
+	ProvidesPrerequisite@parabombs2:
+		Prerequisite: parabombs2
+		RequiresCondition: (ra_upgrade_afterburners && ra_promotion_parabombs2) || (!ra_upgrade_afterburners && ra_promotion_parabombs3)
+	ProvidesPrerequisite@parabombs3:
+		Prerequisite: parabombs3
+		RequiresCondition: ra_upgrade_afterburners && ra_promotion_parabombs3
+	AirstrikePower@parabombs:
+		OrderName: Parabombs
+		ChargeInterval: 7500
+		Prerequisites:
+			1: parabombs1
+			2: parabombs2
+			3: parabombs3
+		Icons:
+			1: airstrike
+			2: airstrike
+			3: airstrike
+		Names:
+			1: Parabombs Level 1
+			2: Parabombs Level 2
+			3: Parabombs Level 3
+		Descriptions:
+			1: power-parabombs.description
+			2: power-parabombs.description
+			3: power-parabombs.description
+		SelectTargetSpeechNotification: SelectTarget
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: badr.bomber
+			2: badr.bomber
+			3: badr.bomber
+		QuantizedFacings: 32
+		DisplayBeacon: true
+		BeaconPosters:
+			1: airstrike
+			2: airstrike
+			3: airstrike
+		SquadSizes:
+			1: 3
+			2: 5
+			3: 7
+		SquadOffset: 1792,1792,0
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 40
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	ParatroopersPower@paratroopers:
+		OrderName: SovietParatroopers
+		ChargeInterval: 9000
+		Prerequisites:
+			1: ra_upgrade_afterburners
+			2: ra_upgrade_afterburners, ra_doctrine_conscription
+			3: ra_upgrade_afterburners, ra_doctrine_industrialefficiency
+			4: ra_upgrade_afterburners, ra_doctrine_inferno
+			5: ra_upgrade_afterburners, ra_doctrine_conscription, ra_doctrine_teslatech
+			6: ra_upgrade_afterburners, ra_doctrine_conscription, ra_doctrine_heavyarmor
+			7: ra_upgrade_afterburners, ra_doctrine_conscription, ra_doctrine_nuclearwar
+			8: ra_upgrade_afterburners, ra_doctrine_industrialefficiency, ra_doctrine_teslatech
+			9: ra_upgrade_afterburners, ra_doctrine_industrialefficiency, ra_doctrine_heavyarmor
+			10: ra_upgrade_afterburners, ra_doctrine_industrialefficiency, ra_doctrine_nuclearwar
+			11: ra_upgrade_afterburners, ra_doctrine_inferno, ra_doctrine_teslatech
+			12: ra_upgrade_afterburners, ra_doctrine_inferno, ra_doctrine_heavyarmor
+			13: ra_upgrade_afterburners, ra_doctrine_inferno, ra_doctrine_nuclearwar
+			14: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_conscription, ra_doctrine_teslatech
+			15: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_conscription, ra_doctrine_heavyarmor
+			16: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_conscription, ra_doctrine_nuclearwar
+			17: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_industrialefficiency, ra_doctrine_teslatech
+			18: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_industrialefficiency, ra_doctrine_heavyarmor
+			19: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_industrialefficiency, ra_doctrine_nuclearwar
+			20: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_inferno, ra_doctrine_teslatech
+			21: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_inferno, ra_doctrine_heavyarmor
+			22: ra_upgrade_afterburners, upmortarsoldier, ra_doctrine_inferno, ra_doctrine_nuclearwar
+			23: ra_upgrade_afterburners, upcyberdog, ra_doctrine_conscription, ra_doctrine_teslatech
+			24: ra_upgrade_afterburners, upcyberdog, ra_doctrine_conscription, ra_doctrine_heavyarmor
+			25: ra_upgrade_afterburners, upcyberdog, ra_doctrine_conscription, ra_doctrine_nuclearwar
+			26: ra_upgrade_afterburners, upcyberdog, ra_doctrine_industrialefficiency, ra_doctrine_teslatech
+			27: ra_upgrade_afterburners, upcyberdog, ra_doctrine_industrialefficiency, ra_doctrine_heavyarmor
+			28: ra_upgrade_afterburners, upcyberdog, ra_doctrine_industrialefficiency, ra_doctrine_nuclearwar
+			29: ra_upgrade_afterburners, upcyberdog, ra_doctrine_inferno, ra_doctrine_teslatech
+			30: ra_upgrade_afterburners, upcyberdog, ra_doctrine_inferno, ra_doctrine_heavyarmor
+			31: ra_upgrade_afterburners, upcyberdog, ra_doctrine_inferno, ra_doctrine_nuclearwar
+		Icons:
+			1: paratroopers
+			2: paratroopers
+			3: paratroopers
+			4: paratroopers
+			5: paratroopers
+			6: paratroopers
+			7: paratroopers
+			8: paratroopers
+			9: paratroopers
+			10: paratroopers
+			11: paratroopers
+			12: paratroopers
+			13: paratroopers
+			14: paratroopers
+			15: paratroopers
+			16: paratroopers
+			17: paratroopers
+			18: paratroopers
+			19: paratroopers
+			20: paratroopers
+			21: paratroopers
+			22: paratroopers
+			23: paratroopers
+			24: paratroopers
+			25: paratroopers
+			26: paratroopers
+			27: paratroopers
+			28: paratroopers
+			29: paratroopers
+			30: paratroopers
+			31: paratroopers
+		Names:
+			1: Soviet Paratroopers
+			2: Soviet Paratroopers (Conscription)
+			3: Soviet Paratroopers (Industrial)
+			4: Soviet Paratroopers (Inferno)
+			5: Soviet Paratroopers (Conscription, Tesla Tech)
+			6: Soviet Paratroopers (Conscription, Heavy Armor)
+			7: Soviet Paratroopers (Conscription, Nuclear War)
+			8: Soviet Paratroopers (Industrial, Tesla Tech)
+			9: Soviet Paratroopers (Industrial, Heavy Armor)
+			10: Soviet Paratroopers (Industrial, Nuclear War)
+			11: Soviet Paratroopers (Inferno, Tesla Tech)
+			12: Soviet Paratroopers (Inferno, Heavy Armor)
+			13: Soviet Paratroopers (Inferno, Nuclear War)
+			14: Soviet Paratroopers (Mortar Soldier, Conscription, Tesla Tech)
+			15: Soviet Paratroopers (Mortar Soldier, Conscription, Heavy Armor)
+			16: Soviet Paratroopers (Mortar Soldier, Conscription, Nuclear War)
+			17: Soviet Paratroopers (Mortar Soldier, Industrial, Tesla Tech)
+			18: Soviet Paratroopers (Mortar Soldier, Industrial, Heavy Armor)
+			19: Soviet Paratroopers (Mortar Soldier, Industrial, Nuclear War)
+			20: Soviet Paratroopers (Mortar Soldier, Inferno, Tesla Tech)
+			21: Soviet Paratroopers (Mortar Soldier, Inferno, Heavy Armor)
+			22: Soviet Paratroopers (Mortar Soldier, Inferno, Nuclear War)
+			23: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Tesla Tech)
+			24: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Heavy Armor)
+			25: Soviet Paratroopers (Mortar Soldier, Cyberdog, Conscription, Nuclear War)
+			26: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Tesla Tech)
+			27: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Heavy Armor)
+			28: Soviet Paratroopers (Mortar Soldier, Cyberdog, Industrial, Nuclear War)
+			29: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Tesla Tech)
+			30: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Heavy Armor)
+			31: Soviet Paratroopers (Mortar Soldier, Cyberdog, Inferno, Nuclear War)
+		Descriptions:
+			1: power-paratroopers.description
+			2: power-paratroopers.description
+			3: power-paratroopers.description
+			4: power-paratroopers.description
+			5: power-paratroopers.description
+			6: power-paratroopers.description
+			7: power-paratroopers.description
+			8: power-paratroopers.description
+			9: power-paratroopers.description
+			10: power-paratroopers.description
+			11: power-paratroopers.description
+			12: power-paratroopers.description
+			13: power-paratroopers.description
+			14: power-paratroopers.description
+			15: power-paratroopers.description
+			16: power-paratroopers.description
+			17: power-paratroopers.description
+			18: power-paratroopers.description
+			19: power-paratroopers.description
+			20: power-paratroopers.description
+			21: power-paratroopers.description
+			22: power-paratroopers.description
+			23: power-paratroopers.description
+			24: power-paratroopers.description
+			25: power-paratroopers.description
+			26: power-paratroopers.description
+			27: power-paratroopers.description
+			28: power-paratroopers.description
+			29: power-paratroopers.description
+			30: power-paratroopers.description
+			31: power-paratroopers.description
+		DropItems:
+			1: dog, rare1, rae2, rare3, rae4, shok, dog, rare1, rae2, rare3, rae4, shok
+			2: dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar, modbtr, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar
+			3: dog, rare1, rae2, rare3, rae4, shok, 3tnk, ftrk, v1truck, modgtnk, dog, rare1, rae2, rare3, rae4, shok
+			4: dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_heatraytank, v2rl, dog, rare1, rae2, rare3, e3flamer, rae4, shok
+			5: dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_zapper, ra_commissar, modbtr, ttnk, ttnk2, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_zapper, ra_commissar
+			6: dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar, modbtr, hammertank, ra_grad, 5tnk, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar
+			7: dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar, modbtr, kotin, v2rlnuke, 4tnk, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar
+			8: dog, rare1, rae2, rare3, rae4, shok, ra_zapper, 3tnk, ftrk, v1truck, modgtnk, ttnk, ttnk2, dog, rare1, rae2, rare3, rae4, shok, ra_zapper
+			9: dog, rare1, rae2, rare3, rae4, shok, 3tnk, ftrk, v1truck, modgtnk, hammertank, ra_grad, 5tnk, dog, rare1, rae2, rare3, rae4, shok
+			10: dog, rare1, rae2, rare3, rae4, shok, 3tnk, ftrk, v1truck, modgtnk, kotin, v2rlnuke, 4tnk, dog, rare1, rae2, rare3, rae4, shok
+			11: dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_zapper, ra_heatraytank, v2rl, ttnk, ttnk2, dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_zapper
+			12: dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_heatraytank, v2rl, hammertank, ra_grad, 5tnk, dog, rare1, rae2, rare3, e3flamer, rae4, shok
+			13: dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_heatraytank, v2rl, kotin, v2rlnuke, 4tnk, dog, rare1, rae2, rare3, e3flamer, rae4, shok
+			14: mortarsoldier, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_zapper, ra_commissar, modbtr, ttnk, ttnk2, mortarsoldier, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_zapper, ra_commissar
+			15: mortarsoldier, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar, modbtr, hammertank, ra_grad, 5tnk, mortarsoldier, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar
+			16: mortarsoldier, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar, modbtr, kotin, v2rlnuke, 4tnk, mortarsoldier, dog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar
+			17: mortarsoldier, dog, rare1, rae2, rare3, rae4, shok, ra_zapper, 3tnk, ftrk, v1truck, modgtnk, ttnk, ttnk2, mortarsoldier, dog, rare1, rae2, rare3, rae4, shok, ra_zapper
+			18: mortarsoldier, dog, rare1, rae2, rare3, rae4, shok, 3tnk, ftrk, v1truck, modgtnk, hammertank, ra_grad, 5tnk, mortarsoldier, dog, rare1, rae2, rare3, rae4, shok
+			19: mortarsoldier, dog, rare1, rae2, rare3, rae4, shok, 3tnk, ftrk, v1truck, modgtnk, kotin, v2rlnuke, 4tnk, mortarsoldier, dog, rare1, rae2, rare3, rae4, shok
+			20: mortarsoldier, dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_zapper, ra_heatraytank, v2rl, ttnk, ttnk2, mortarsoldier, dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_zapper
+			21: mortarsoldier, dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_heatraytank, v2rl, hammertank, ra_grad, 5tnk, mortarsoldier, dog, rare1, rae2, rare3, e3flamer, rae4, shok
+			22: mortarsoldier, dog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_heatraytank, v2rl, kotin, v2rlnuke, 4tnk, mortarsoldier, dog, rare1, rae2, rare3, e3flamer, rae4, shok
+			23: mortarsoldier, cyberdog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_zapper, ra_commissar, modbtr, ttnk, ttnk2, mortarsoldier, cyberdog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_zapper, ra_commissar
+			24: mortarsoldier, cyberdog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar, modbtr, hammertank, ra_grad, 5tnk, mortarsoldier, cyberdog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar
+			25: mortarsoldier, cyberdog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar, modbtr, kotin, v2rlnuke, 4tnk, mortarsoldier, cyberdog, rare1, ra_conscript_ak, rae2, ra_cons_molo, rare3, rae4, shok, ra_commissar
+			26: mortarsoldier, cyberdog, rare1, rae2, rare3, rae4, shok, ra_zapper, 3tnk, ftrk, v1truck, modgtnk, ttnk, ttnk2, mortarsoldier, cyberdog, rare1, rae2, rare3, rae4, shok, ra_zapper
+			27: mortarsoldier, cyberdog, rare1, rae2, rare3, rae4, shok, 3tnk, ftrk, v1truck, modgtnk, hammertank, ra_grad, 5tnk, mortarsoldier, cyberdog, rare1, rae2, rare3, rae4, shok
+			28: mortarsoldier, cyberdog, rare1, rae2, rare3, rae4, shok, 3tnk, ftrk, v1truck, modgtnk, kotin, v2rlnuke, 4tnk, mortarsoldier, cyberdog, rare1, rae2, rare3, rae4, shok
+			29: mortarsoldier, cyberdog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_zapper, ra_heatraytank, v2rl, ttnk, ttnk2, mortarsoldier, cyberdog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_zapper
+			30: mortarsoldier, cyberdog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_heatraytank, v2rl, hammertank, ra_grad, 5tnk, mortarsoldier, cyberdog, rare1, rae2, rare3, e3flamer, rae4, shok
+			31: mortarsoldier, cyberdog, rare1, rae2, rare3, e3flamer, rae4, shok, ra_heatraytank, v2rl, kotin, v2rlnuke, 4tnk, mortarsoldier, cyberdog, rare1, rae2, rare3, e3flamer, rae4, shok
+		SelectTargetSpeechNotification: SelectTarget
+		AllowImpassableCells: false
+		QuantizedFacings: 32
+		CameraActor: camera.paradrop
+		DisplayBeacon: true
+		BeaconPosters:
+			1: pinficon
+			2: pinficon
+			3: pinficon
+			4: pinficon
+			5: pinficon
+			6: pinficon
+			7: pinficon
+			8: pinficon
+			9: pinficon
+			10: pinficon
+			11: pinficon
+			12: pinficon
+			13: pinficon
+			14: pinficon
+			15: pinficon
+			16: pinficon
+			17: pinficon
+			18: pinficon
+			19: pinficon
+			20: pinficon
+			21: pinficon
+			22: pinficon
+			23: pinficon
+			24: pinficon
+			25: pinficon
+			26: pinficon
+			27: pinficon
+			28: pinficon
+			29: pinficon
+			30: pinficon
+			31: pinficon
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		UnitTypes:
+			1: badr.soviet
+			2: badr.soviet
+			3: badr.soviet
+			4: badr.soviet
+			5: badr.soviet
+			6: badr.soviet
+			7: badr.soviet
+			8: badr.soviet
+			9: badr.soviet
+			10: badr.soviet
+			11: badr.soviet
+			12: badr.soviet
+			13: badr.soviet
+			14: badr.soviet
+			15: badr.soviet
+			16: badr.soviet
+			17: badr.soviet
+			18: badr.soviet
+			19: badr.soviet
+			20: badr.soviet
+			21: badr.soviet
+			22: badr.soviet
+			23: badr.soviet
+			24: badr.soviet
+			25: badr.soviet
+			26: badr.soviet
+			27: badr.soviet
+			28: badr.soviet
+			29: badr.soviet
+			30: badr.soviet
+			31: badr.soviet
+		SquadSizes:
+			1: 3
+			2: 4
+			3: 4
+			4: 4
+			5: 5
+			6: 5
+			7: 5
+			8: 5
+			9: 5
+			10: 5
+			11: 5
+			12: 5
+			13: 5
+			14: 6
+			15: 6
+			16: 6
+			17: 6
+			18: 6
+			19: 6
+			20: 6
+			21: 6
+			22: 6
+			23: 7
+			24: 7
+			25: 7
+			26: 7
+			27: 7
+			28: 7
+			29: 7
+			30: 7
+			31: 7
+		SquadOffset: 1792,1792,0
+	SupportPowerChargeBar:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+ra_largeairfield:
+	Inherits: RAAFLD
+	Inherits@shape: ^4x3Shape
+	Tooltip:
+		Name: Large Soviet Airfield
+	Valued:
+		Cost: 2500
+	Health:
+		HP: 500000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 10000
+		# Footprint is all-passable (==== for the aircraft landing pads), so the default
+		# footprint-based reveal has no occupied cells to project from and gives no vision.
+		# Reveal from the building center instead, like the Soviet War Factory.
+		Type: CenterPosition
+	Buildable:
+		Prerequisites: ~rafact.soviet, dome.soviet, ~ra_doctrine_industrialefficiency
+		BuildDuration: 625
+		BuildDurationModifier: 100
+		Description: actor-raafld.description
+	WithIdleOverlay@flag:
+		Sequence: flag
+	Building:
+		Footprint: ==== ==== ====
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	ProductionQueue@AIRCRAFT:
+		BuildDurationModifier: 50
+	Exit@1:
+		ExitCell: 1,1
+		Facing: 768
+	Reservable:
+	SpawnNeighboringActors:
+		ActorTypes: dummy_dock
+		Locations: 0,0, 1,0, 2,0, 3,0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@inherits:
+		Prerequisite: raafld
+	RenderSprites:
+		PlayerPalette: raplayer
+
+STEK:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Prerequisites: ~rafact.soviet, dome.soviet
+	Tooltip:
+		Name: Soviet Tech Center
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	ProvidesPrerequisite:
+		Prerequisite: tek
+	ProvidesPrerequisite@techcenter:
+		Prerequisite: techcenter
+	Production@Research:
+		Produces: Research
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+RAFIX.Soviet:
+	Inherits: ^RAFIX
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Tooltip:
+		Name: Soviet Service Depot
+	Buildable:
+		Prerequisites: ~rafact.soviet, raweap
+	RenderSprites:
+		Image: rafixs
+
+RASPEN:
+	Inherits: ^BaseBuilding
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: Soviet Sub Pen
+	Buildable:
+		Prerequisites: ~rafact.soviet, raproc.soviet, ~globalnaval
+		Queue: Building, RABuilding
+		Description: template-shipyard.description
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: ranavaltransport
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+MSLO:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x1Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	RenderSprites:
+		PlayerPalette: playerra
+	Tooltip:
+		Name: Soviet Missile Silo
+	Buildable:
+		Prerequisites: ~stek, ~techlevel.superweapons, !abomb
+		Description: actor-mslo.description
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+		BuildSounds: placbldg.aud, build5.aud
+	NukePowerCA:
+		OrderName: NukePowerInfoOrder
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Cursor: nuke
+		Icons:
+			1: abomb
+		ChargeInterval: 10500
+		Names:
+			1: power-nuke.raname
+		Descriptions:
+			1: power-nuke.description
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear Missile ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear Missile launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear Missile launched.
+		MissileWeapons:
+			1: raatomic
+		MissileDelay: 5
+		SpawnOffset: 1c0,427,0
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		SupportPowerPaletteOrder: 70
+		MissileImage: raatomic
+		BeaconActor: BLASTRADIUS.atomic
+	WithSupportPowerActivationAnimation:
+		RequiresCondition: !build-incomplete
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: abomb
+
+IRON:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@SW: ^Superweapon
+	Inherits@sell: ^RASovietSpawnActorsOnSell
+	Buildable:
+		Queue: Defence, RADefence
+		Prerequisites: ~stek, ~techlevel.superweapons
+		Description: actor-iron.description
+	Tooltip:
+		Name: Iron Curtain
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+		BuildSounds: placbldg.aud, build5.aud
+	SelectionDecorations:
+	WithBuildingBib:
+		HasMinibib: true
+	GrantExternalConditionPower@IRONCURTAIN:
+		OrderName: IronCurtain
+		PauseOnCondition: disabled
+		Prerequisites:
+			1:
+		Icons:
+			1: invuln
+		ChargeInterval: 4500
+		Names:
+			1: power-ironcurtain.name
+		Descriptions:
+			1: power-ironcurtain.description
+		Durations:
+			1: 500
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: IronCurtainCharging
+		#EndChargeSpeechNotification: IronCurtainReady
+		DisplayRadarPing: True
+		Conditions:
+			1: invulnerability
+		OnFireSound: ironcur9.aud
+		IncomingSound: ironcur9.aud
+		SupportPowerPaletteOrder: 10
+		Dimensions:
+			1: 5,5
+		Footprints:
+			1: __x__ _xxx_ xxxxx _xxx_ __x__
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		BlockedCursor: move-blocked
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+FTUR:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@FireActor: ^FireActor
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 60
+		Prerequisites: ~rafact.soviet, barr
+		Description: actor-ftur.description
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Flame Tower
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Health:
+		HP: 64000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 1023
+		Offset: 0,0,112
+	Armament:
+		Weapon: FireballLauncher
+		LocalOffset: 512,0,0
+		RequiresCondition: !ra_doctrine_inferno
+	Armament@Upgrade:
+		Weapon: FireballLauncherThermobaric
+		LocalOffset: 512,0,0
+		RequiresCondition: ra_doctrine_inferno
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	ProvidesPrerequisite@buildingname:
+	FireWarheadsOnDeath:
+		Weapon: FireballLauncher
+		RequiresCondition: !ra_doctrine_inferno
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: FireballLauncherThermobaric
+		RequiresCondition: ra_doctrine_inferno
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -30
+	RevealsShroud:
+		Range: 6742
+	ActorStatValues:
+		Upgrades: ra_doctrine_inferno, ra_upgrade_scorchedearth, ra_upgrade_stalinium
+
+TSLA:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@selection: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@TeslaTargeting: ^PrioritizeTesla
+	Inherits@ExperimentalTeslaWeaponry: ^ExperimentalTeslaWeaponry
+	Inherits@TeslaArcingUpgradeRA1: ^TeslaArcingUpgradeRA1
+	Inherits@ReactorOverloadTeamUpgradeRA1: ^ReactorOverloadTeamUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Building:
+		BuildSounds: placbldg.aud, build5.aud
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 80
+		Prerequisites: ~rafact.soviet, stek
+		Description: actor-tsla.description
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Tesla Coil
+	Selectable:
+		Bounds: 1024, 1792, 0, -384
+	SelectionDecorations:
+	Health:
+		HP: 90000
+	WithBuildingBib:
+		HasMinibib: true
+	WithTeslaChargeAnimation:
+	Armament:
+		Weapon: TeslaZap
+		LocalOffset: 0,0,896
+		RequiresCondition: !ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+	Armament@Upgrade1:
+		Weapon: TeslaZapEMP
+		LocalOffset: 0,0,896
+		RequiresCondition: ra_doctrine_teslatech && !ra_upgrade_teslaarcing
+	Armament@Upgrade2:
+		Weapon: TeslaZapEMPArc
+		LocalOffset: 0,0,896
+		RequiresCondition: ra_upgrade_teslaarcing
+	FirepowerMultiplier@ra_upgrade_reactoroverload:
+		RequiresCondition: ra_upgrade_reactoroverload
+		Modifier: 200
+	AttackTesla:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		ChargeAudio: tslachg2.aud
+		InitialChargeDelay: 25
+		MaxCharges: 3
+		ReloadDelay: 100
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	Power:
+		Amount: -75
+	RevealsShroud:
+		Range: 9318
+	DetectCloaked:
+		Range: 4659
+	ActorStatValues:
+		Upgrades: ra_doctrine_teslatech, ra_upgrade_teslaarcing, ra_upgrade_reactoroverload, ra_upgrade_stalinium
+
+RASAM:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@shape: ^2x1Shape
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	HitShape:
+		Type: Rectangle
+			TopLeft: -768,-512
+			BottomRight: 768,512
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 100
+		Prerequisites: ~rafact.soviet, dome.soviet
+		Description: actor-sam.description
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Soviet SAM Site
+	Building:
+		Footprint: xx
+		Dimensions: 2,1
+		BuildSounds: placbldg.aud, build5.aud
+	Health:
+		HP: 75000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 60
+		InitialFacing: 0
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Armament:
+		Weapon: Nike
+		LocalOffset: 0,0,320
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: raplayer
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	DamageMultiplier@2x1Shape:
+		Modifier: 75
+	Power:
+		Amount: -35
+	RevealsShroud:
+		Range: 12790
+	DetectCloaked:
+		Range: 6395
+	FirepowerMultiplier@ra_upgrade_highexplosiverockets:
+		Modifier: 110
+	RangeMultiplier@ra_upgrade_highexplosiverockets:
+		Modifier: 110
+	RevealsShroudMultiplier@ra_upgrade_highexplosiverockets:
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: ra_upgrade_highexplosiverockets, ra_upgrade_stalinium
+

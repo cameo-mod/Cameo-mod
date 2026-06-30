@@ -1,0 +1,226 @@
+japanspeedboat:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ra1jsyrd
+		Queue: Naval, RANaval
+		Description: actor-jpspeedboat.description
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Japanese Speedboat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 140
+		TurnSpeed: 28
+	Turreted:
+		TurnSpeed: 56
+		Offset: 200,0,200
+	Armament@AG:
+		Weapon: JapanSpeedBoatGun
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_waveforcebullets
+	Armament@Upgrade:
+		Weapon: JapanSpeedBoatGunWaveforce
+		Recoil: 85
+		LocalOffset: 400,-100,300, 400,100,300
+		MuzzleSequence: muzzle
+		RequiresCondition: up_waveforcebullets
+	Armament@DC1:
+		Weapon: DepthCharge
+		LocalOffset: 100,-100,0, 100,100,0
+		LocalYaw: 80, -80
+		MuzzleSequence: muzzle
+	Armament@DC2:
+		Weapon: DepthCharge
+		LocalOffset: 100,100,0, 100,-100,0
+		LocalYaw: 80, -80
+		FireDelay: 5
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	WithSpriteTurret:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 250
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		Image: japanspeedboat
+		PlayerPalette: player_rgba
+	GrantConditionOnAttack@gatling:
+		Condition: gatling
+		ArmamentNames: primary
+		RequiredShotsPerInstance: 5, 10
+		MaximumInstances: 2
+		RevokeDelay: 25
+		RevokeAll: true
+		IsCyclic: false
+		RevokeOnNewTarget: false
+	ReloadDelayMultiplier@GattlingSpeed:
+		RequiresCondition: gatling >= 2
+		Modifier: 50
+	RangeMultiplier@GattlingSpeed:
+		RequiresCondition: gatling
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: up_waveforcebullets, up_superiorwarengines, up_nanotechrepairs
+
+yamatobattleship:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^BattleShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Yamato Battleship
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~dome.japan
+		Queue: Naval, RANaval
+		Description: actor-yamatobattleship.description
+	Mobile:
+		Speed: 35
+		TurnSpeed: 7
+	Health:
+		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Superheavy
+	Turreted@PRIMARY:
+		Turret: primary
+		Offset: -896,0,128
+		TurnSpeed: 7
+	Turreted@SECONDARY:
+		Turret: secondary
+		Offset: 768,0,128
+		TurnSpeed: 7
+	Turreted@AA:
+		Turret: flak
+		Offset: 256,0,128
+		TurnSpeed: 14
+		FacingTolerance: 90
+	Armament@PRIMARY:
+		Turret: primary
+		Weapon: YamatoCannon
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 200
+		RecoilRecovery: 25
+		MuzzleSequence: muzzle
+	Armament@SECONDARY:
+		Name: secondary
+		Turret: secondary
+		Weapon: YamatoCannon
+		LocalOffset: 480,-100,40, 480,100,40
+		Recoil: 200
+		RecoilRecovery: 25
+		MuzzleSequence: muzzle
+	Armament@AA:
+		Turret: flak
+		Weapon: YamatoFlak
+		LocalOffset: 240,-100,40, 240,100,40
+		Recoil: 50
+		RecoilRecovery: 10
+		MuzzleSequence: muzzle
+	AttackTurreted:
+		Turrets: primary, secondary, flak
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	Selectable:
+		DecorationBounds: 2048, 2048
+	WithSpriteTurret@PRIMARY:
+		Turret: primary
+	WithSpriteTurret@SECONDARY:
+		Turret: secondary
+	WithSpriteTurret@AA:
+		Turret: flak
+		Sequence: turret2
+	DeliversCash:
+		Payload: 500
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		Image: yamatobattleship
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: up_superiorwarengines, up_nanotechrepairs
+
+japancarrier:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@SuperiorWarEngines: ^SuperiorWarEngines
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: actor-japancarrier.name
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~modjtek
+		Queue: Naval, RANaval
+		Description: Japanese Aircraft Carrier
+	Selectable:
+		DecorationBounds: 2048, 2048
+	Mobile:
+		Speed: 45
+		TurnSpeed: 9
+	Health:
+		HP: 225000
+	ChangesHealth@SelfHealing:
+		Step: 90
+	Armor:
+		Type: Superheavy
+	AttackFollow:
+		Voice: Attack
+		PauseOnCondition: disabled
+	DeliversCash:
+		Payload: 450
+	CarrierMaster:
+		Actors: zerofighter, zerofighter, zerofighter, zerofighter
+		RearmTicks: 125
+		RespawnTicks: 250
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Armament@PRIMARY:
+		Weapon: JapanCarrierTarget
+		Damage: 1500
+		ReloadDelay: 125
+	Voiced:
+		VoiceSet: JapaneseVehicleVoice
+	RenderSprites:
+		PlayerPalette: player
+	ActorStatValues:
+		Upgrades: up_superiorwarengines, up_nanotechrepairs
+

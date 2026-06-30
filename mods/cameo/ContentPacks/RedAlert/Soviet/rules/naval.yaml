@@ -1,0 +1,125 @@
+SS:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Soviet Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~raspen
+		Queue: Naval, RANaval
+		Description: actor-ss.description
+	Mobile:
+		Speed: 75
+		TurnSpeed: 30
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 15
+		Offset: 512,0,0
+	Armament@PRIMARY:
+		Weapon: TorpTube
+		LocalOffset: 256,0,0
+		RequiresCondition: !ra_doctrine_inferno
+	Armament@Upgrade:
+		Weapon: TorpTubeThermobaric
+		LocalOffset: 256,0,0
+		RequiresCondition: ra_doctrine_inferno
+	RenderRangeCircle:
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 475
+	Voiced:
+		VoiceSet: RussianVehicleVoice
+	Cloak@underwater:
+	RenderSprites:
+		Image: rass
+		PlayerPalette: raplayer
+	ActorStatValues:
+		Upgrades: ra_upgrade_unstableisotopes, ra_doctrine_inferno, ra_upgrade_stalinium
+
+MSUB:
+	Inherits: ^BoatUnit
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
+	Inherits@HighExplosiveRocketsUpgradeRA1: ^HighExplosiveRocketsUpgradeRA1
+	Inherits@InfernoDoctrineRA1: ^InfernoDoctrineRA1
+	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Missile Submarine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~stek
+		Queue: Naval, RANaval
+		Description: actor-msub.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armor:
+		Type: Medium
+	Armament@PRIMARY:
+		Weapon: 227mm
+		LocalOffset: 208,128,48, 208,-128,48
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 1000
+	Cloak@underwater:
+		CloakDelay: 100
+	Voiced:
+		VoiceSet: RussianVehicleVoice
+	FirepowerMultiplier@MissileSubBuff:
+		Modifier: 200
+	RangeMultiplier@MissileSubBuff:
+		Modifier: 200
+	RenderSprites:
+		Image: ramsub
+		#PlayerPalette: raplayer
+	FirepowerMultiplier@ra_upgrade_highexplosiverockets:
+		Modifier: 110
+	RangeMultiplier@ra_upgrade_highexplosiverockets:
+		Modifier: 110
+	RevealsShroudMultiplier@ra_upgrade_highexplosiverockets:
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: ra_upgrade_unstableisotopes, ra_upgrade_highexplosiverockets, ra_doctrine_inferno, ra_upgrade_stalinium
+

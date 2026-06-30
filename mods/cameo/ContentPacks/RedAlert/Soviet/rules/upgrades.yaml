@@ -1,0 +1,643 @@
+ra_doctrine_conscription:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Conscription Doctrine
+	Buildable:
+		Description: ra_doctrine_conscription.description
+		Prerequisites: ~dome.soviet, !ra_soviet_doctrine_1, !global_conscription_buff
+	RenderSprites:
+		Image: ra_doctrine_conscription
+	ProvidesPrerequisite@ra_soviet_doctrine_1:
+		Prerequisite: ra_soviet_doctrine_1
+	ProvidesPrerequisite@global_conscription_buff:
+		Prerequisite: global_conscription_buff
+
+ra_doctrine_industrialefficiency:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Industrial Efficiency Doctrine
+	Buildable:
+		Description: ra_doctrine_industrialefficiency.description
+		Prerequisites: ~dome.soviet, !ra_soviet_doctrine_1
+	RenderSprites:
+		Image: ra_doctrine_industrialefficiency
+	ProvidesPrerequisite@ra_soviet_doctrine_1:
+		Prerequisite: ra_soviet_doctrine_1
+
+ra_doctrine_inferno:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Inferno Doctrine
+	Buildable:
+		Description: ra_doctrine_inferno.description
+		Prerequisites: ~dome.soviet, !ra_soviet_doctrine_1
+	RenderSprites:
+		Image: ra_doctrine_inferno
+	ProvidesPrerequisite@ra_soviet_doctrine_1:
+		Prerequisite: ra_soviet_doctrine_1
+
+ra_doctrine_teslatech:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Tesla and Experimental Tech Doctrine
+	Buildable:
+		Description: ra_doctrine_teslatech.description
+		Prerequisites: ~dome.soviet, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
+	RenderSprites:
+		Image: ra_doctrine_teslatech
+	ProvidesPrerequisite@ra_soviet_doctrine_2:
+		Prerequisite: ra_soviet_doctrine_2
+
+ra_doctrine_heavyarmor:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Heavy Armor Doctrine
+	Buildable:
+		Description: ra_doctrine_heavyarmor.description
+		Prerequisites: ~dome.soviet, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
+	RenderSprites:
+		Image: ra_doctrine_heavyarmor
+	ProvidesPrerequisite@ra_soviet_doctrine_2:
+		Prerequisite: ra_soviet_doctrine_2
+
+ra_doctrine_nuclearwar:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Nuclear War Doctrine
+	Buildable:
+		Description: ra_doctrine_nuclearwar.description
+		Prerequisites: ~dome.soviet, ra_soviet_doctrine_1, !ra_soviet_doctrine_2
+	RenderSprites:
+		Image: ra_doctrine_nuclearwar
+	ProvidesPrerequisite@ra_soviet_doctrine_2:
+		Prerequisite: ra_soviet_doctrine_2
+
+ra_upgrade_hazmatsuits:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Hazmat Suits
+	Buildable:
+		Description: ra_upgrade_hazmatsuits.description
+		Prerequisites: ~stek, !ra_upgrade_hazmatsuits
+	RenderSprites:
+		Image: ra_upgrade_hazmatsuits
+
+ra_upgrade_vengeance:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Vengeance
+	Buildable:
+		Description: ra_upgrade_vengeance.description
+		Prerequisites: ~stek, ~ra_doctrine_conscription, !ra_upgrade_vengeance
+	RenderSprites:
+		Image: ra_upgrade_vengeance
+
+ra_upgrade_menofsteel:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Men Of Steel
+	Buildable:
+		Description: ra_upgrade_menofsteel.description
+		Prerequisites: ~stek, ~ra_doctrine_conscription, !ra_upgrade_menofsteel
+	RenderSprites:
+		Image: ra_upgrade_menofsteel
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_menofsteel_proxy_actor
+
+ra_upgrade_massproduction:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Mass Production
+	Buildable:
+		Description: ra_upgrade_massproduction.description
+		Prerequisites: ~stek, ~ra_doctrine_industrialefficiency, !ra_upgrade_massproduction
+	RenderSprites:
+		Image: ra_upgrade_massproduction
+
+ra_upgrade_wareconomy:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: War Economy
+	Buildable:
+		Description: ra_upgrade_wareconomy.description
+		Prerequisites: ~stek, ~ra_doctrine_industrialefficiency, !ra_upgrade_wareconomy
+	RenderSprites:
+		Image: ra_upgrade_wareconomy
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_wareconomy_proxy_actor
+
+ra_upgrade_incendiarybullets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Incendiary Bullets
+	Buildable:
+		Description: ra_upgrade_incendiarybullets.description
+		Prerequisites: ~stek, ~ra_doctrine_inferno, !ra_upgrade_incendiarybullets
+	RenderSprites:
+		Image: ra_upgrade_incendiarybullets
+
+ra_upgrade_scorchedearth:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Scorched Earth
+	Buildable:
+		Description: ra_upgrade_scorchedearth.description
+		Prerequisites: ~stek, ~ra_doctrine_inferno, !ra_upgrade_scorchedearth
+	RenderSprites:
+		Image: ra_upgrade_scorchedearth
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_scorchedearth_proxy_actor
+
+ra_upgrade_teslaarcing:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Tesla Arcing
+	Buildable:
+		Description: ra_upgrade_teslaarcing.description
+		Prerequisites: ~stek, ~ra_doctrine_teslatech, !ra_upgrade_teslaarcing
+	RenderSprites:
+		Image: ra_upgrade_teslaarcing
+
+ra_upgrade_teslarockets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Tesla Rockets
+	Buildable:
+		Description: ra_upgrade_teslarockets.description
+		Prerequisites: ~stek, ~ra_doctrine_teslatech, !ra_upgrade_teslarockets
+	RenderSprites:
+		Image: ra_upgrade_teslarockets
+
+ra_upgrade_reactoroverload:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Reactor Overload
+	Buildable:
+		Description: ra_upgrade_reactoroverload.description
+		Prerequisites: ~stek, ~ra_doctrine_teslatech, !ra_upgrade_reactoroverload
+	RenderSprites:
+		Image: ra_upgrade_reactoroverload
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_reactoroverload_proxy_actor
+
+ra_upgrade_autoloaders:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Autoloaders
+	Buildable:
+		Description: ra_upgrade_autoloaders.description
+		Prerequisites: ~stek, ~ra_doctrine_heavyarmor, !ra_upgrade_autoloaders
+	RenderSprites:
+		Image: ra_upgrade_autoloaders
+
+ra_upgrade_highexplosiverockets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: High Explosive Rockets
+	Buildable:
+		Description: ra_upgrade_highexplosiverockets.description
+		Prerequisites: ~stek, ~ra_doctrine_heavyarmor, !ra_upgrade_highexplosiverockets
+	RenderSprites:
+		Image: ra_upgrade_highexplosiverockets
+
+ra_upgrade_stalinium:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Stalinium
+	Buildable:
+		Description: ra_upgrade_stalinium.description
+		Prerequisites: ~stek, ~ra_doctrine_heavyarmor, !ra_upgrade_stalinium
+	RenderSprites:
+		Image: ra_upgrade_stalinium
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_stalinium_proxy_actor
+
+ra_upgrade_unstableisotopes:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Unstable Isotopes
+	Buildable:
+		Description: ra_upgrade_unstableisotopes.description
+		Prerequisites: ~stek, ~ra_doctrine_nuclearwar, !ra_upgrade_unstableisotopes
+	RenderSprites:
+		Image: ra_upgrade_unstableisotopes
+
+ra_upgrade_nuclearrockets:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Thermonuclear Rockets
+	Buildable:
+		Description: ra_upgrade_nuclearrockets.description
+		Prerequisites: ~stek, ~ra_doctrine_nuclearwar, !ra_upgrade_nuclearrockets
+	RenderSprites:
+		Image: ra_upgrade_nuclearrockets
+
+ra_upgrade_nuclearshells:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Nuclear Tank Shells
+	Buildable:
+		Description: ra_upgrade_nuclearshells.description
+		Prerequisites: ~stek, ~ra_doctrine_nuclearwar, !ra_upgrade_nuclearshells
+	RenderSprites:
+		Image: ra_upgrade_nuclearshells
+	ProvidesTeamProxyActor:
+		Actor: ra_upgrade_nuclearshells_proxy_actor
+
+ra_upgrade_afterburners:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Afterburners
+	Buildable:
+		Description: ra_upgrade_afterburners.description
+		Prerequisites: ~dome.soviet, !ra_upgrade_afterburners
+	RenderSprites:
+		Image: ra_upgrade_afterburners
+
+ra_upgrade_hammertank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Hammer Tank Upgrade
+	Buildable:
+		Description: Upgrades the Heavy Tank to the Hammer Tank
+		Prerequisites: ~dome.soviet, !ra_upgrade_hammertank
+	RenderSprites:
+		Image: hammertank
+
+ra_upgrade_heavyteslatank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Heavy Tesla Tank Upgrade
+	Buildable:
+		Description: Upgrades the Hammer Tank to the Heavy Tesla Tank
+		Prerequisites: ~stek, ~ra_doctrine_teslatech, ra_upgrade_hammertank, !ra_upgrade_heavyteslatank
+	RenderSprites:
+		Image: ttnk2
+
+ra_upgrade_shtoradefensesystem:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Shtora Defense System Upgrade
+	Buildable:
+		Description: ra_upgrade_shtoradefensesystem.description
+		Prerequisites: ~stek, ~ra_doctrine_heavyarmor, ra_upgrade_hammertank, !ra_upgrade_shtoradefensesystem
+	RenderSprites:
+		Image: ra_upgrade_shtoradefensesystem
+
+ra_upgrade_kotintank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Kotin Nuclear Tank Upgrade
+	Buildable:
+		Description: Upgrades the Hammer Tank to the Kotin Nuclear Tank
+		Prerequisites: ~stek, ~ra_doctrine_nuclearwar, ra_upgrade_hammertank, !ra_upgrade_kotintank
+	RenderSprites:
+		Image: kotin
+
+ra_upgrade_commissar:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Commissar
+	Buildable:
+		Description: Unlocks the Soviet Commissar
+		Prerequisites: ~dome.soviet, ~ra_doctrine_conscription, !ra_upgrade_commissar
+	RenderSprites:
+		Image: ra_commissar
+
+ra_upgrade_heatraytank:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Heatray Tank
+	Buildable:
+		Description: Unlocks the Heatray Tank
+		Prerequisites: ~dome.soviet, ~ra_doctrine_inferno, !ra_upgrade_heatraytank
+	RenderSprites:
+		Image: ra_heatraytank
+
+ra_upgrade_yaktesla:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Tesla Yak
+	Buildable:
+		Description: Upgrades the Yak into the Tesla Yak.
+		Prerequisites: ~dome.soviet, ~ra_doctrine_teslatech, !ra_upgrade_yaktesla
+	RenderSprites:
+		Image: yaktesla
+
+ra_upgrade_yakarmored:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Armored Yak
+	Buildable:
+		Description: Upgrades the Yak into the Armored Yak.
+		Prerequisites: ~dome.soviet, ~ra_doctrine_heavyarmor, !ra_upgrade_yakarmored
+	RenderSprites:
+		Image: yakarmored
+
+ra_upgrade_yaknuclear:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Nuclear Yak
+	Buildable:
+		Description: Upgrades the Yak into the Nuclear Yak.
+		Prerequisites: ~dome.soviet, ~ra_doctrine_nuclearwar, !ra_upgrade_yaknuclear
+	RenderSprites:
+		Image: yaknuclear
+
+#############################
+
+# ra_doctrine_conscription:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Conscription
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Addons
+# 		Description: upgrade-conscription.description
+# 		Prerequisites: ~dome.soviet, !ra_doctrine_conscription
+# 	RenderSprites:
+# 		Image: conscriptionicon
+# 	ProvidesPrerequisite:
+
+# ra_upgrade_unstableisotopes:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Nuclear Engines
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Addons
+# 		Description: upgrade-nuclearengines.description
+# 		Prerequisites: ~dome.soviet, !ra_upgrade_unstableisotopes
+# 	RenderSprites:
+# 		Image: nuclearenginesicon
+# 	ProvidesPrerequisite:
+
+# ra_upgrade_highexplosiverockets:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Rocket Enhancements
+# 	Valued:
+# 		Cost: 5000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Addons
+# 		Description: upgrade-rocketenhancements.description
+# 		Prerequisites: ~dome.soviet, !ra_upgrade_highexplosiverockets
+# 	RenderSprites:
+# 		Image: rocketenhancementsicon
+# 	ProvidesPrerequisite:
+
+# ra_upgrade_autoloaders:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Soviet Auto Loaders
+# 	Valued:
+# 		Cost: 7500
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade-sovietautoloaders.description
+# 		Prerequisites: ~stek, !ra_upgrade_autoloaders
+# 	RenderSprites:
+# 		Image: sovietautoloadersicon
+# 	ProvidesPrerequisite:
+
+# ra_doctrine_teslatech:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Experimental Tesla Weaponry
+# 	Valued:
+# 		Cost: 7500
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade-experimentalteslaweaponry.description
+# 		Prerequisites: ~stek, !ra_doctrine_teslatech
+# 	RenderSprites:
+# 		Image: experimentalteslaweaponsicon
+# 	ProvidesPrerequisite:
+
+# ra_doctrine_inferno:
+# 	Inherits: ^researched_upgrade.template
+# 	Tooltip:
+# 		Name: Advanced Thermobarics
+# 	Valued:
+# 		Cost: 10000
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade-advancedthermobarics.description
+# 		Prerequisites: ~stek, !ra_doctrine_inferno
+# 	RenderSprites:
+# 		Image: advancedthermobaricsicon
+# 	ProvidesPrerequisite:
+
+# ra_upgrade_stalinium:
+# 	Inherits: ^upgrade.template
+# 	Tooltip:
+# 		Name: Soviet Steel "Stalinium"
+# 	Valued:
+# 		Cost: 12500
+# 	Buildable:
+# 		BuildPaletteOrder: 80
+# 		Queue: Research
+# 		Description: upgrade-sovietsteel.description
+# 		Prerequisites: ~stek, !ra_upgrade_stalinium
+# 	RenderSprites:
+# 		Image: staliniumsteelicon
+# 	#ProvidesPrerequisite:
+# 	ProvidesTeamProxyActor:
+# 		Actor: team_upgrade.ra_upgrade_stalinium
+
+# team_upgrade.ra_upgrade_stalinium:
+# 	Inherits: ^researched_upgrade.template
+# 	ProvidesPrerequisite:
+# 		Prerequisite: ra_upgrade_stalinium
+# 	RenderSprites:
+# 		Image: staliniumsteelicon
+# 	Tooltip:
+# 		Name: Soviet Steel
+# 	Buildable:
+# 		Description: upgrade-sovietsteel.description
+# 	PlayerDisplayUpgrade:
+
+	####################################################################################################
+	#		Promotions Soviets
+	####################################################################################################
+
+ra_promotion_superoptics:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Infantry Super Optics
+	Buildable:
+		BuildPaletteOrder: 37
+		Queue: Promotions
+		Description: ra_promotion_superoptics.description
+		Prerequisites: ~rafact.soviet, !ra_promotion_superoptics, rank1
+	RenderSprites:
+		Image: ra_promotion_superoptics
+	ProvidesPrerequisite:
+		Prerequisite: ra_promotion_superoptics
+
+upmortarsoldier:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mortar Soldier
+	Buildable:
+		BuildPaletteOrder: 40
+		Queue: Promotions
+		Description: Allows training of Mortar Soldiers. Upgrades Paratroopers Support Power and increases planes by 1.
+		Prerequisites: ~rafact.soviet, !upmortarsoldier, ra_promotion_superoptics, rank1
+	RenderSprites:
+		Image: mortarsoldier
+	ProvidesPrerequisite:
+		Prerequisite: upmortarsoldier
+
+upcyberdog:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cyberdog
+	Buildable:
+		BuildPaletteOrder: 43
+		Queue: Promotions
+		Description: Allows training of Cyberdogs. Upgrades Paratroopers Support Power and increases planes by 1.
+		Prerequisites: ~rafact.soviet, !upcyberdog, upmortarsoldier, rank1
+	RenderSprites:
+		Image: cyberdog
+	ProvidesPrerequisite:
+		Prerequisite: upcyberdog
+
+upvolkov:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Volkov
+	Buildable:
+		BuildPaletteOrder: 46
+		Queue: Promotions
+		Description: Allows construction of the Supercyborg Volkov.
+		Prerequisites: ~rafact.soviet, !upvolkov, upcyberdog, rank1
+	RenderSprites:
+		Image: volkov
+	ProvidesPrerequisite:
+		Prerequisite: upvolkov
+
+upgtnk:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Gatling Tank
+	Buildable:
+		BuildPaletteOrder: 38
+		Queue: Promotions
+		Description: Allows construction of the Gatling Tank. Upgrades BTR.
+		Prerequisites: ~rafact.soviet, !upgtnk, rank1
+	RenderSprites:
+		Image: modgtnk
+	ProvidesPrerequisite:
+		Prerequisite: upgtnk
+
+ra_promotion_superspyplane:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Super Spy Plane
+	Buildable:
+		BuildPaletteOrder: 41
+		Queue: Promotions
+		Description: Enables the Super Spy Plane Support Power.
+		Prerequisites: ~rafact.soviet, !ra_promotion_superspyplane, upgtnk, rank1
+	RenderSprites:
+		Image: u2
+	ProvidesPrerequisite:
+		Prerequisite: ra_promotion_superspyplane
+
+ra_promotion_targetingcomputer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Mammoth Tank Targeting Computer
+	Buildable:
+		BuildPaletteOrder: 44
+		Queue: Promotions
+		Description: ra_promotion_targetingcomputer.description
+		Prerequisites: ~rafact.soviet, !ra_promotion_targetingcomputer, ra_promotion_superspyplane, rank1
+	RenderSprites:
+		Image: ra_promotion_targetingcomputer
+	ProvidesPrerequisite:
+		Prerequisite: ra_promotion_targetingcomputer
+
+upmonstertank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Monster Tank
+	Buildable:
+		BuildPaletteOrder: 47
+		Queue: Promotions
+		Description: Allows construction of the Monster Tank.
+		Prerequisites: ~rafact.soviet, !upmonstertank, ra_promotion_targetingcomputer, rank1
+	RenderSprites:
+		Image: monstertank
+	ProvidesPrerequisite:
+		Prerequisite: upmonstertank
+
+ra_promotion_parabombs2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Parabombs Level 2
+	Buildable:
+		BuildPaletteOrder: 39
+		Queue: Promotions
+		Description: Upgrades the Parabombs Support Power.
+		Prerequisites: ~rafact.soviet, !ra_promotion_parabombs2, rank1
+	RenderSprites:
+		Image: badr
+	ProvidesPrerequisite:
+		Prerequisite: ra_promotion_parabombs2
+
+ra_promotion_hurricanerocketpod:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Hurricane Rocket Pods
+	Buildable:
+		BuildPaletteOrder: 42
+		Queue: Promotions
+		Description: ra_promotion_hurricanerocketpod.description
+		Prerequisites: ~rafact.soviet, !ra_promotion_hurricanerocketpod, ra_promotion_parabombs2, rank1
+	RenderSprites:
+		Image: ra_promotion_hurricanerocketpod
+	ProvidesPrerequisite:
+		Prerequisite: ra_promotion_hurricanerocketpod
+
+ra_promotion_parabombs3:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Parabombs Level 3
+	Buildable:
+		BuildPaletteOrder: 45
+		Queue: Promotions
+		Description: Upgrades the Parabombs Support Power.
+		Prerequisites: ~rafact.soviet, !ra_promotion_parabombs3, ra_promotion_hurricanerocketpod, rank1
+	RenderSprites:
+		Image: badr
+	ProvidesPrerequisite:
+		Prerequisite: ra_promotion_parabombs3
+
+upmignukebomber:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Supersonic Nuclear Bomber
+	Buildable:
+		BuildPaletteOrder: 48
+		Queue: Promotions
+		Description: Allows construction of the Supersonic Nuclear Bomber.
+		Prerequisites: ~rafact.soviet, !upmignukebomber, ra_promotion_parabombs3, rank1
+	RenderSprites:
+		Image: mignuke
+	ProvidesPrerequisite:
+		Prerequisite: upmignukebomber
+
+	####################################################################################################
+	#		Promotion Units Soviets
+	####################################################################################################
+

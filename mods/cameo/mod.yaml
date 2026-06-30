@@ -115,6 +115,11 @@ Include: ContentPacks/RedAlert2Mod/Naxis/content.yaml
 Include: ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml
 Include: ContentPacks/RedAlert2Mod/FutureTech/content.yaml
 
+Include: ContentPacks/RedAlert/Shared/content.yaml
+Include: ContentPacks/RedAlert/Allies/content.yaml
+Include: ContentPacks/RedAlert/Soviet/content.yaml
+Include: ContentPacks/RedAlert/Japan/content.yaml
+
 Rules:
 	cameo|rules/misc.yaml
 	cameo|rules/player.yaml
@@ -131,9 +136,10 @@ Rules:
 	cameo|rules/husks.yaml
 	cameo|rules/promotions.yaml
 	cameo|ai/ai.yaml
-	cameo|rules/redalert.yaml
 	cameo|rules/tiberiansun.yaml
 	cameo|rules/redalert2.yaml
+	# redalert.yaml migrated to ContentPacks/RedAlert/* (Included above).
+	# File kept on disk as dormant reference; not loaded here to avoid duplicate keys.
 	# redalert2mod.yaml migrated to ContentPacks/RedAlert2Mod/* (Included above).
 	# File kept on disk as dormant reference; not loaded here to avoid duplicate keys.
 	# d2k.yaml migrated to ContentPacks/D2k/* (Included above). File kept on disk

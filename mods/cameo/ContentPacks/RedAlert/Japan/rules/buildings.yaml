@@ -1,0 +1,544 @@
+RAFACT.Japan:
+	Inherits: ^RAFACT
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Construction Yard
+	Transforms:
+		IntoActor: ramcv.japan
+	-ProvidesPrerequisite@rafact:
+	WithDeathAnimation:
+		DeathSequencePalette: player
+	RenderSprites:
+		Image: rafactj
+		PlayerPalette: player
+	ProvidesPrerequisite@chainlinkfence:
+		Prerequisite: chainlinkfence
+
+JPWR:
+	Inherits: ^BaseBuilding
+	Inherits@power: ^PowerPlant
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~rafact.japan
+		Description: actor-nuke.description
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Waveforce Reactor
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 175000 #40000
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c512
+	WithBuildingBib:
+	Power:
+		Amount: 225
+	ScalePowerWithHealth:
+	WithDeathAnimation:
+		DeathSequence: dead
+		UseDeathTypeSuffix: false
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+
+MODTENTJ:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@barr: ^IsBarrack
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Prerequisites: ~rafact.japan, jpwr
+	Tooltip:
+		Name: Japanese Barracks
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	WithBuildingBib:
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -42,810,0
+		ExitCell: 1,2
+	Exit@2:
+		SpawnOffset: -725,640,0
+		ExitCell: 0,2
+	ProvidesPrerequisite:
+		Prerequisite: rabarracks
+	RenderSprites:
+		Image: modjbarr
+		PlayerPalette: player
+	WithDeathAnimation:
+		DeathSequencePalette: player
+
+JPROC:
+	Inherits: ^RAPROC
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	FreeActor:
+		Actor: RAHARV.JAPAN
+		SpawnOffset: 1,2
+		Facing: 256
+	Tooltip:
+		Name: Japanese Ore Refinery
+	Buildable:
+		Prerequisites: ~rafact.japan, jpwr
+	-WithIdleOverlay@TOP:
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		PlayerPalette: player
+
+MODRAWEAPJ:
+	Inherits: RAWEAP
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese War Factory
+	Buildable:
+		Prerequisites: ~rafact.japan, jproc
+	RenderSprites:
+		Image: jweap
+		PlayerPalette: player
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+	ProvidesPrerequisite@buildingname:
+
+DOME.Japan:
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@dome: ^Dome
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Tooltip:
+		Name: Japanese Radar Array
+	Buildable:
+		Prerequisites: ~rafact.japan, jproc
+	RenderSprites:
+		Image: jdome
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: player_rgba
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+MODRAAFLD:
+	Inherits: RAAFLD
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Airfield
+	Buildable:
+		Prerequisites: ~rafact.japan, dome.japan
+	-AirstrikePower@spyplane:
+	-AirstrikePower@parabombs:
+	AirstrikePower@JapanSuperBomber:
+		OrderName: JapanSuperBomber
+		Prerequisites:
+			1: ~techlevel.superweapons, up_divinewindprotocol
+		Icons:
+			1: airstrike
+		ChargeInterval: 7500
+		Names:
+			1: power-super-bombers.name
+		Descriptions:
+			1: power-super-bombers.description
+		SelectTargetSpeechNotification: SelectTarget
+		CameraActor: camera
+		CameraRemoveDelay: 150
+		UnitTypes:
+			1: jsuperbomber
+		QuantizedFacings: 64
+		DisplayBeacon: true
+		BeaconPosters:
+			1: airstrike
+		SquadSizes:
+			1: 5
+		SquadOffset: 1792,1792,0
+		ArrowSequence: arrow
+		ClockSequence: clock
+		CircleSequence: circles
+		#UseDirectionalTarget: True
+		DirectionArrowAnimation: airstrikedirection
+		SupportPowerPaletteOrder: 40
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+	ParatroopersPower@paratroopers:
+		OrderName: japanparatroopers
+		Prerequisites:
+			1: up_bushidodiscipline
+			2: up_bushidodiscipline, upsamurai
+			3: up_bushidodiscipline, uparchermaiden
+			4: ~wip
+		Icons:
+			1: paratroopers
+			2: paratroopers
+			3: paratroopers
+		Names:
+			1: power-paratroopers.name
+			2: power-paratroopers.name
+			3: power-paratroopers.name
+		ChargeInterval: 6000
+		Descriptions:
+			1: power-paratroopers.description
+			2: power-paratroopers.description
+			3: power-paratroopers.description
+		DropItems:
+			1: raje1, raje3, raje4, raje1, raje3, raje4, raje1, raje3, raje4
+			2: raje1, raje3, raje4, rasamurai, raje1, raje3, raje4, rasamurai, raje1, raje3, raje4, rasamurai
+			3: raje1, raje3, raje4, ramaid, rasamurai, raje1, raje3, raje4, ramaid, rasamurai, raje1, raje3, raje4, ramaid, rasamurai
+		UnitTypes:
+			1: badr.japan
+			2: badr.japan
+			3: badr.japan
+		SquadOffset: 1792,1792,0
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: jraafld
+		PlayerPalette: player
+
+MODJTEK:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Prerequisites: ~rafact.japan, dome.japan
+	Tooltip:
+		Name: Japanese Tech Center
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 3072, 0, -512
+		DecorationBounds: 3072, 3072, 0, -512
+	WithBuildingBib:
+	ProvidesPrerequisite@techcenter:
+		Prerequisite: techcenter
+
+JSHRINE:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@SW: ^PrimarySuperweapon
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Tooltip:
+		Name: Japanese Shrine
+	Buildable:
+		Prerequisites: ~modjtek, ~techlevel.superweapons
+		Description: actor-mslo.description
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	DetonateWeaponPowerCA:
+		AllowMultiple: true
+		OrderName: MagicOrbHailstorm
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		IconImage: jshrine
+		Icons:
+			1: japanspellcard
+		Cursor: ability
+		ChargeInterval: 10500
+		ActivationDelay: 100
+		ActivationSequence:
+		Names:
+			1: Magic Orb Hailstorm
+		Descriptions:
+			1: Unleashes a hailstorm of magical orbs that deal damage over a wide area and disable vehicles and structures.
+		Weapons:
+			1: MagicOrbHailstormActivate
+		EndChargeSound: snukread.wav
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Magic Orb Hailstorm ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Spell Card cast.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Spell Card cast.
+		LaunchSound: spellcard.wav
+		IncomingSound: spellcard.wav
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraRemoveDelay: 500
+		Duration: 250
+		ActiveCondition: active
+		DisplayBeacon: True
+		DisplayRadarPing: True
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		BeaconPosters:
+			1: japanspellcardicon
+		TargetCircleRanges:
+			1: 10000
+		TargetCircleColors: ff000080
+		BeaconActor: BLASTRADIUS.atomic
+		CameraRange: 10000
+	SupportPowerChargeBar:
+	RenderSprites:
+		Image: jshrine
+
+RAFIX.Japan:
+	Inherits: ^RAFIX
+	Inherits@sell: ^JapanSpawnActorsOnSell
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Service Depot
+	Buildable:
+		Prerequisites: ~rafact.japan, modraweapj
+	RenderSprites:
+		Image: rafixj
+
+RA1JSYRD:
+	Inherits: ^BaseBuilding
+	Inherits@shipyard: ^IsShipyard
+	Inherits@shape: ^3x3Shape
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Tooltip:
+		Name: Japanese Naval Yard
+	Buildable:
+		Prerequisites: ~rafact.japan, jproc, ~globalnaval
+	Building:
+		Footprint: =+= +++ =+=
+		Dimensions: 3,3
+		TerrainTypes: Water
+	-GivesBuildableArea:
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: ranavaltransport
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	Targetable:
+		TargetTypes: Ground, Water, C4, Structure
+	RenderSprites:
+		Image: ra1jsyrd
+		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: raplayer
+
+jmgnest:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@detect: ^GenericAllDetector
+	Inherits@EMP: ^TurretEMP
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@WaveforceBullets: ^WaveforceBullets
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Japanese MG Nest
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~~rafact.japan, modtentj
+		Queue: Defence, RADefence
+		Description: actor-mgnest.description
+	Building:
+	Health:
+		HP: 110000
+	WithBuildingBib:
+		HasMinibib: true
+	Armament:
+		Name: primary
+		Weapon: JHighV
+		LocalOffset: 768,0,512
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_waveforcebullets
+	Armament@Upgrade: ##########
+		Name: primary
+		Weapon: JHighVWaveforce
+		LocalOffset: 768,0,512
+		MuzzleSequence: muzzle
+		RequiresCondition: up_waveforcebullets
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 25
+		InitialFacing: 200
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Power:
+		Amount: -50
+	RevealsShroud:
+		Range: 6696
+	DetectCloaked:
+		Range: 3348
+	ActorStatValues:
+		Upgrades: up_waveforcebullets, up_nanotechrepairs
+
+jballistat:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@selection: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@detect: ^GenericAllDetector
+	Inherits@EMP: ^TurretEMP
+	Inherits@shape: ^1x1Shape
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@EnergizedArrows: ^EnergizedArrows
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Ballista Tower
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~~rafact.japan, ~dome.japan
+		Queue: Defence, RADefence
+		Description: actor-mgnest.description
+	Building:
+	Health:
+		HP: 190000
+	WithBuildingBib:
+		HasMinibib: true
+	Armament@PRIMARY: ##########
+		Weapon: BallistaTowerMultiShot
+		LocalOffset: 624,0,208
+		PauseOnCondition: ammo < 5
+	Armament@AIR: ##########
+		Weapon: BallistaSingleShotAir
+		LocalOffset: 624,0,208
+		AmmoUsage: 5
+		PauseOnCondition: ammo < 5
+	Armament@Upgrade: ##########
+		Weapon: BallistaTowerMultiShotEnergized
+		LocalOffset: 624,0,208
+		PauseOnCondition: ammo < 5
+		RequiresCondition: up_energizedarrows
+	Armament@UpgradeAIR: ##########
+		Weapon: BallistaSingleShotAirEnergized
+		LocalOffset: 624,0,208
+		AmmoUsage: 5
+		PauseOnCondition: ammo < 5
+		RequiresCondition: up_energizedarrows
+	ReloadDelayMultiplier@DualWeapon:
+		Modifier: 125
+		RequiresCondition: up_energizedarrows
+	AmmoPool:
+		Ammo: 5
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 5
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	-RenderRangeCircle:
+	RenderRangeCircleCA:
+		Armaments: primary
+	RenderRangeCircleCA@SECONDARY:
+		Armaments: secondary
+	AttackTurreted:
+		RequiresCondition: !build-incomplete
+	WithMuzzleOverlay:
+	Turreted:
+		TurnSpeed: 25
+		InitialFacing: 200
+		RealignDelay: -1
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	Power:
+		Amount: -70
+	RevealsShroud:
+		Range: 9214
+	DetectCloaked:
+		Range: 4607
+	FirepowerMultiplier@up_energizedarrows:
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: up_energizedarrows, up_nanotechrepairs
+
+modpillboxfort:
+	Inherits: ^Defense
+	Inherits@exp: ^GainsExperienceRABuilding
+	Inherits@selection: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@EMP: ^TurretEMP
+	Inherits@shape: ^2x2Shape
+	Inherits@AntiTank: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AdvancedPlasmaWeapons: ^AdvancedPlasmaWeapons
+	Inherits@NanoTechRepairs: ^NanoTechRepairs
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 90
+		Prerequisites: ~rafact.japan, modjtek
+		Description: actor-waveforceturret.description
+	Valued:
+		Cost: 3200
+	Tooltip:
+		Name: Waveforce Turret
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 220000
+	WithBuildingBib:
+		HasMinibib: true
+	Turreted:
+		TurnSpeed: 15
+		RealignDelay: -1
+	Armament@WaveTurretShell:
+		Weapon: WaveTurretShell
+		LocalOffset: 1000,0,500
+		MuzzleSequence: muzzle
+	FirepowerMultiplier@SplashCompensation:
+		Modifier: 50
+	AttackTurreted:
+	WithMuzzleOverlay:
+	-WithSpriteBody:
+	WithEmbeddedTurretSpriteBody:
+	RenderSprites:
+		Image: modpillboxfort
+	FireWarheadsOnDeath:
+		Weapon: WaveTurretImpact
+	DamageMultiplier@2x2Shape:
+		Modifier: 50
+	Power:
+		Amount: -160
+	RevealsShroud:
+		Range: 9824
+	DetectCloaked:
+		Range: 4912
+	ActorStatValues:
+		Upgrades: up_advancedplasmaweapons, up_nanotechrepairs
+
+	####################################################################################################
+	#		Upgrades Allies
+	####################################################################################################
+

@@ -1,0 +1,28 @@
+World:
+	FactionCA@soviet:
+		Name: Soviets RA1 #faction-ra-soviets.name
+		InternalName: soviet
+		Game: Red Alert
+		Side: Red Alert
+		Description: faction-ra-soviets.description
+	StartingUnits@mcvonlyrasoviet:
+		Class: none
+		ClassName: MCV Only
+		Factions: soviet
+		BaseActor: ramcv.soviet
+	StartingUnits@defaultsoviet:
+		Class: light
+		ClassName: Light Support
+		Factions: soviet
+		BaseActor: ramcv.soviet
+		SupportActors: rae1,rae1,rae1,rae3,rae3,raapc,ftrk
+	StartingUnits@heavysoviet:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: soviet
+		BaseActor: ramcv.soviet
+		SupportActors: rae1,rae1,rae1,rae3,rae3,raapc,ftrk,3tnk,3tnk
+
+	####################################################################################################
+	#		Modded RA
+	####################################################################################################

@@ -1,0 +1,24 @@
+World:
+	FactionCA@allies:
+		Name: Allies RA1 #faction-ra-allies.name
+		InternalName: allies
+		Game: Red Alert
+		Side: Red Alert
+		Description: faction-ra-allies.description
+	StartingUnits@mcvonlyraallies:
+		Class: none
+		ClassName: MCV Only
+		Factions: allies
+		BaseActor: ramcv.allies
+	StartingUnits@defaultallies:
+		Class: light
+		ClassName: Light Support
+		Factions: allies
+		BaseActor: ramcv.allies
+		SupportActors: rae1,rae1,rae1,rae3,rae3,rajeep,1tnk
+	StartingUnits@heavyallies:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: allies
+		BaseActor: ramcv.allies
+		SupportActors: rae1,rae1,rae1,rae3,rae3,rajeep,1tnk,2tnk,2tnk,2tnk
