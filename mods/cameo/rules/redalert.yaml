@@ -14159,18 +14159,20 @@ japan_shrine_minitank:
 		Weapon: ShrineTankCannon
 		Recoil: 128
 		RecoilRecovery: 38
-		LocalOffset: 720,0,320
+		LocalOffset: 240,0,32
 		MuzzleSequence: muzzle
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 1280, 1280
+		DecorationBounds: 1024, 1024
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeBig
+	RenderSprites:
+		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
 

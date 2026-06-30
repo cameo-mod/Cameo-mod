@@ -3426,7 +3426,7 @@ jproc:
 	bib:
 		ZOffset: -1c512
 	icon:
-		Filename: raprocicon.png
+		Filename: japan_refinery_icon.png
 
 
 modjbarr:
@@ -5283,6 +5283,7 @@ typechiha:
 japan_shrine_minitank:
 	Defaults:
 		Filename: japan_shrine_minitank.png
+		Offset: 0, -8
 	idle:
 		Facings: 64
 	turret:
@@ -5293,6 +5294,7 @@ japan_shrine_minitank:
 		Length: *
 	icon:
 		Filename: japan_shrine_minitank_icon.png
+		Offset: 0, 0
 
 waveforcetank:
 	Defaults:
