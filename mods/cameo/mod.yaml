@@ -97,23 +97,40 @@ MapFolders:
 	cameo|maps: System
 	~^SupportDir|maps/cameo/{DEV_VERSION}: User
 
+# Faction content packs — the Include order below defines the lobby faction
+# selector order (the lobby groups factions by Side and lists them in load
+# order). Unmigrated themes are loaded via include-only wrapper packs so every
+# faction is ordered from this one place; see ContentPacks/<Theme>/content.yaml.
 Include: ContentPacks/TiberianDawn/Shared/content.yaml
 Include: ContentPacks/TiberianDawn/GDI/content.yaml
 Include: ContentPacks/TiberianDawn/Nod/content.yaml
 
-Include: ContentPacks/D2k/Shared/content.yaml
-Include: ContentPacks/D2k/Ixian/content.yaml
-Include: ContentPacks/D2k/Ordos/content.yaml
-Include: ContentPacks/D2k/Atreides/content.yaml
-Include: ContentPacks/D2k/Harkonnen/content.yaml
+Include: ContentPacks/RedAlert/content.yaml
+
+Include: ContentPacks/TiberianSun/content.yaml
+
+Include: ContentPacks/RedAlert2/content.yaml
 
 Include: ContentPacks/RedAlert2Mod/Shared/content.yaml
 Include: ContentPacks/RedAlert2Mod/AsianAlliance/content.yaml
-Include: ContentPacks/RedAlert2Mod/Syndicate/content.yaml
 Include: ContentPacks/RedAlert2Mod/Consortium/content.yaml
+Include: ContentPacks/RedAlert2Mod/Syndicate/content.yaml
 Include: ContentPacks/RedAlert2Mod/Naxis/content.yaml
 Include: ContentPacks/RedAlert2Mod/SchwarzerMond/content.yaml
 Include: ContentPacks/RedAlert2Mod/FutureTech/content.yaml
+Include: ContentPacks/TKM/content.yaml
+
+Include: ContentPacks/D2k/Shared/content.yaml
+Include: ContentPacks/D2k/Ordos/content.yaml
+Include: ContentPacks/D2k/Ixian/content.yaml
+Include: ContentPacks/D2k/Atreides/content.yaml
+Include: ContentPacks/D2k/Harkonnen/content.yaml
+
+Include: ContentPacks/StarCraft/content.yaml
+
+Include: ContentPacks/Warcraft2/content.yaml
+
+Include: ContentPacks/Outpost2/content.yaml
 
 Rules:
 	cameo|rules/misc.yaml
@@ -131,15 +148,15 @@ Rules:
 	cameo|rules/husks.yaml
 	cameo|rules/promotions.yaml
 	cameo|ai/ai.yaml
-	cameo|rules/redalert.yaml
-	cameo|rules/tiberiansun.yaml
-	cameo|rules/redalert2.yaml
+	# redalert.yaml, tiberiansun.yaml, redalert2.yaml are now loaded via include-only
+	# wrapper packs (ContentPacks/{RedAlert,TiberianSun,RedAlert2}/) so their factions
+	# can be ordered in the lobby; not loaded here to avoid duplicate keys.
 	# redalert2mod.yaml migrated to ContentPacks/RedAlert2Mod/* (Included above).
 	# File kept on disk as dormant reference; not loaded here to avoid duplicate keys.
 	# d2k.yaml migrated to ContentPacks/D2k/* (Included above). File kept on disk
 	# for the commented planned factions (Atreides/Harkonnen/Corrino) reference.
-	cameo|rules/starcraft.yaml
-	cameo|rules/warcraft2.yaml
+	# starcraft.yaml, warcraft2.yaml are now loaded via include-only wrapper packs
+	# (ContentPacks/{StarCraft,Warcraft2}/) so their factions can be ordered in the lobby.
 	# cameo|rules/xcom.yaml
 	# cameo|rules/advancewars.yaml
 	# cameo|rules/camea.yaml
@@ -176,9 +193,9 @@ Rules:
 	# cameo|rules/xmas.yaml
 	# cameo|rules/valentine.yaml
 	# cameo|rules/halloween.yaml
-	cameo|rules/outpost2.yaml
+	# outpost2.yaml, tkm.yaml are now loaded via include-only wrapper packs
+	# (ContentPacks/{Outpost2,TKM}/) so their factions can be ordered in the lobby.
 	# cameo|rules/z.yaml
-	cameo|rules/tkm.yaml
 
 Sequences:
 	cameo|sequences/misc.yaml
