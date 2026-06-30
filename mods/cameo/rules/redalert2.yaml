@@ -15881,3 +15881,84 @@ ra2_tractor_driveby:
 # 	RenderSprites:
 # 		Image: ra2mig
 # 		PlayerPalette: raplayer
+
+# Robot Tank copy for the redalert2 theme (spawned by a SpawnActorWarhead in weapons/redalert2.yaml).
+yrrobo:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RobotControllable: ^RobotControllable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Robot Tank
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~egtech.futu
+		Queue: Vehicle, RAVehicle
+		Description: actor-robo.description
+	Mobile:
+		Locomotor: hover
+		Speed: 130
+		TurnSpeed: 26
+		PauseOnCondition: !robotcontrol || disabled
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 26 #3
+	Armament:
+		Name: primary
+		Weapon: RA2Robotmm
+		Recoil: 85
+		RecoilRecovery: 25
+		LocalOffset: 800,0,-250
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2Robotmm_elite
+		Recoil: 85
+		RecoilRecovery: 25
+		LocalOffset: 800,0,-250
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		PauseOnCondition: !robotcontrol || disabled
+	WithSpriteTurret:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: RobotTankVoice
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+		RequiresCondition: !disabled && robotcontrol
+	DeliversCash:
+		Payload: 300
+	-TemporaryOwnerManager:
+	Capturable:
+		Types: thiefproof
+	GrantConditionOnPrerequisite:
+		Condition: robotcontrol
+		Prerequisites: robotcontrol
+	WithColoredOverlay@disabled:
+		Color: 000000b4
+		RequiresCondition: disabled && !chronodisabled || !robotcontrol
+	RenderSprites:
+		PlayerPalette: playerra2

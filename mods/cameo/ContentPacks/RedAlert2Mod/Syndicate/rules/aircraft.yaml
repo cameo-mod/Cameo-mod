@@ -63,6 +63,7 @@ ra2hind.latin:
 		VoiceSet: SiegeChopperVoice
 	DeathSounds:
 	RenderSprites:
+		Image: ra2hind
 		PlayerPalette: playerra2
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 75
@@ -77,7 +78,7 @@ ra2hind_husk.latin:
 		TurnSpeed: 17
 		Speed: 85
 	RenderSprites:
-		Image: ra2hind.latin
+		Image: ra2hind
 		PlayerPalette: playerra2
 
 yakolev.latin:

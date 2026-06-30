@@ -2148,7 +2148,7 @@
 		Prerequisites: yrngindp
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: latin_up_industrial
+		Prerequisites: up_industrial.latin
 	ProductionCostMultiplier@ShockwaveIndustrial:
 		Multiplier: 90
 		Prerequisites: schindustrialplant
@@ -2172,7 +2172,7 @@
 		RequiresCondition: cashrecover
 	GrantConditionOnPrerequisite@CashRecover:
 		Condition: cashrecover
-		Prerequisites: uplatin_cashrecover
+		Prerequisites: up_cashrecover.latin
 	EdibleByLeap:
 	Crushable:
 		WarnProbability: 0
@@ -2426,7 +2426,7 @@
 		Prerequisites: ra_upgrade_massproduction
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: latin_up_industrial
+		Prerequisites: up_industrial.latin
 	ProductionCostMultiplier@DuneFactoryUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_hightech
@@ -2807,22 +2807,22 @@
 			modartyturret: garrisoned
 			ra2gapill: garrisoned
 			yrngbnkr: garrisoned
-			nax_bunk: garrisoned
+			bunk.nax: garrisoned
 			scbunker: garrisoned
-			latin_cgpile: biggarrisoned
-			latin_cgup: biggarrisoned
-			latin_ngbunk2: biggarrisoned
+			cgpile.latin: biggarrisoned
+			cgup.latin: biggarrisoned
+			ngbunk2.latin: biggarrisoned
 			gdiassaultapc: battlefortresspassenger
 			yrbfrt: battlefortresspassenger
-			aa_dragonfly: battlefortresspassenger
-			aa_wtrt: battlefortresspassenger
-			latin_humvee: battlefortresspassenger
-			latin_cartel: battlefortresspassenger
-			latinscrapcar_driveby: battlefortresspassenger
-			latinscrapcar2_driveby: battlefortresspassenger
-			nax_zombietank: battlefortresspassenger
-			nax_shoe: battlefortresspassenger
-			steel_potnk: battlefortresspassenger
+			dragonfly.asian: battlefortresspassenger
+			wtrt.asian: battlefortresspassenger
+			humvee.latin: battlefortresspassenger
+			cartel.latin: battlefortresspassenger
+			scrapcar_driveby.latin: battlefortresspassenger
+			scrapcar2_driveby.latin: battlefortresspassenger
+			zombietank.nax: battlefortresspassenger
+			shoe.nax: battlefortresspassenger
+			potnk.steel: battlefortresspassenger
 			scpythean: battlefortresspassenger
 			scbehemoth: battlefortresspassenger
 			tsm113: battlefortresspassenger
@@ -2847,10 +2847,10 @@
 		RequiresCondition: garrisoned
 	RangeMultiplier@BigGarrison:
 		Modifier: 130
-		RequiresCondition: biggarrisoned && uplatin_ngbunk2
+		RequiresCondition: biggarrisoned && up_ngbunk2.latin
 	GrantConditionOnPrerequisite@ngbunk2:
-		Condition: uplatin_ngbunk2
-		Prerequisites: uplatin_ngbunk2
+		Condition: up_ngbunk2.latin
+		Prerequisites: up_ngbunk2.latin
 	ProductionCostMultiplier@DuneBarracksUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_barracks
@@ -3091,7 +3091,7 @@
 	DeathSounds@NORMAL:
 		RequiresCondition: !chronobeamed
 	SpawnActorOnDeath@ZombieInfect:
-		Actor: nax_undead
+		Actor: undead.nax
 		Probability: 100
 		OwnerType: Killer
 		DeathType: ZombieInfection
@@ -6476,7 +6476,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,aa_cgairf,steel_conpad,latin_cgair,nax_airfield,tkmairpad,tsgthpad,tsgthpadmutant,tsnthpad,tsnthpad2
+		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,tsgthpad,tsgthpadmutant,tsnthpad,tsnthpad2
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6496,11 +6496,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, aa_cgdept, latin_cgdept, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal, plymouth_garage, eden_garage
+		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, aa_cgdept, latin_cgdept, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal, plymouth_garage, eden_garage
+		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -7023,12 +7023,12 @@ CPQDEBUGDUMMY:
 	DamageMultiplier@shielded:
 		RequiresCondition: shielded && !shieldpermanent
 		Modifier: 150
-	DamageMultiplier@upsteel_shielresistance:
-		RequiresCondition: upsteel_shielresistance && shielded
+	DamageMultiplier@up_shielresistance.steel:
+		RequiresCondition: up_shielresistance.steel && shielded
 		Modifier: 75
-	GrantConditionOnPrerequisite@upsteel_shielresistance:
-		Condition: upsteel_shielresistance
-		Prerequisites: upsteel_shielresistance
+	GrantConditionOnPrerequisite@up_shielresistance.steel:
+		Condition: up_shielresistance.steel
+		Prerequisites: up_shielresistance.steel
 	ExternalCondition@shieldhit:
 		Condition: shieldhit
 	WithIdleOverlay@shield1:
@@ -8733,7 +8733,7 @@ CPQDEBUGDUMMY:
 			# rare1: ifv-mg
 			# ra2e1: ifv-mg
 			# ra2e2: ifv-mg
-			# aa_gren: ifv-mg
+			# gren.asian: ifv-mg
 			# 2100scav: ifv-mg
 			# 2100scav2: ifv-mg
 			# scmarine: ifv-mg
@@ -8754,7 +8754,7 @@ CPQDEBUGDUMMY:
 			# sglrebel: ifv-mg
 			# sglcamorebel: ifv-mg
 			# sgldemorebel: ifv-mg
-			# aa_japrif: ifv-mg
+			# japrif.asian: ifv-mg
 			# e2: ifv-cannon
 			# rae2: ifv-cannon
 			# tse2: ifv-cannon
@@ -8762,7 +8762,7 @@ CPQDEBUGDUMMY:
 			# tsmutant3: ifv-cannon
 			# che2: ifv-cannon
 			# leange2: ifv-cannon
-			# aa_plast: ifv-cannon
+			# plast.asian: ifv-cannon
 			# e6: ifv-repair
 			# rae6: ifv-repair
 			# medi: ifv-healer
@@ -8786,7 +8786,7 @@ CPQDEBUGDUMMY:
 			# rae3: ifv-miss
 			# rare3: ifv-miss
 			# yrggi: ifv-miss
-			# aa_tkiller: ifv-miss
+			# tkiller.asian: ifv-miss
 			# tse3: ifv-miss
 			# gle3: ifv-miss
 			# che3: ifv-miss
@@ -8803,7 +8803,7 @@ CPQDEBUGDUMMY:
 			# rae4: ifv-fire
 			# raje4: ifv-fire
 			# yrinit: ifv-fire
-			# aa_flam: ifv-fire
+			# flam.asian: ifv-fire
 			# scfirebat: ifv-fire
 			# e5: ifv-chem
 			# ra2deso: ifv-chem
@@ -8827,7 +8827,7 @@ CPQDEBUGDUMMY:
 			# yrvirus: ifv-sniper
 			# raspy: ifv-spy
 			# ra2spy: ifv-spy
-			# aa_shinobi: ifv-spy
+			# shinobi.asian: ifv-spy
 			# tschamspy: ifv-sniper
 			# tsumagon: ifv-sniper
 			# glkell: ifv-sniper
@@ -8979,7 +8979,7 @@ CPQDEBUGDUMMY:
 			# raje1: ifv-mg
 			# raje3: ifv-miss
 			# ramaid: ifv-archermaiden
-			# aa_archer: ifv-archermaiden
+			# archer.asian: ifv-archermaiden
 			# sniper: ifv-sniper
 			# wc_h_footman: ifv-archer
 			# wc_h_archer: ifv-archer
