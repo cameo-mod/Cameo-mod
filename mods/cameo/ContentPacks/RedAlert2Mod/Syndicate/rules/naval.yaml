@@ -1,4 +1,4 @@
-latin_triton:
+triton.latin:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^BattleShipTemplate
@@ -15,7 +15,7 @@ latin_triton:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~latin_cgyard
+		Prerequisites: ~cgyard.latin
 		Queue: Naval, RANaval
 		Description: actor-hyd.description
 	Mobile:
@@ -45,39 +45,39 @@ latin_triton:
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 0
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ReloadDelayMultiplier@gat1:
 		Modifier: 50
-		RequiresCondition: gatling == 1 && latin_up_chaingun
+		RequiresCondition: gatling == 1 && up_chaingun.latin
 	ReloadDelayMultiplier@gat2:
 		Modifier: 25
-		RequiresCondition: gatling > 1 && latin_up_chaingun
+		RequiresCondition: gatling > 1 && up_chaingun.latin
 	RangeMultiplier@gat1:
 		Modifier: 111
-		RequiresCondition: gatling == 1 && latin_up_chaingun
+		RequiresCondition: gatling == 1 && up_chaingun.latin
 	RangeMultiplier@gat2:
 		Modifier: 123
-		RequiresCondition: gatling > 1 && latin_up_chaingun
+		RequiresCondition: gatling > 1 && up_chaingun.latin
 	GrantConditionOnAttack@gatling:
 		Condition: gatling
 		RequiredShotsPerInstance: 3, 8
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
 		Condition: gatling
 		RequiredShotsPerInstance: 2, 4
-		RequiresCondition: rank-elite && latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
 	Selectable:
 		DecorationBounds: 1024, 1024
 	Voiced:
 		VoiceSet: LatinSoldierVoice
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 	RenderSprites:
 		PlayerPalette: playerra2
 
-latin_sub:
+sub.latin:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
@@ -95,7 +95,7 @@ latin_sub:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~latin_cgyard, latin_cgspy
+		Prerequisites: ~cgyard.latin, cgspy.latin
 		Queue: Naval, RANaval
 		Description: actor-ra2sub.description
 	Mobile:
@@ -113,7 +113,7 @@ latin_sub:
 	Armament@ARTILLERY:
 		Weapon: RA2AkulaRockets
 		LocalOffset: 800,320,250, 800,-320,250, 600,320,250, 600,-320,250, 400,320,250, 400,-320,250, 200,320,250, 200,-320,250
-	FirepowerMultiplier@latin_up_hotfire:
+	FirepowerMultiplier@up_hotfire.latin:
 		Modifier: 200
 	Targetable:
 		TargetTypes: Ground, Water, Ship, Submarine
@@ -132,11 +132,11 @@ latin_sub:
 	Voiced:
 		VoiceSet: TyphoonSubVoice
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_hotfire.latin
 	RenderSprites:
 		PlayerPalette: playerra2
 
-latin_rammax:
+rammax.latin:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
@@ -153,7 +153,7 @@ latin_rammax:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~latin_cgyard
+		Prerequisites: ~cgyard.latin
 		Queue: Naval, RANaval
 		Description: Little Drone, Armed with a Sabotage weapon, effective aganist ships
 	Mobile:
@@ -188,7 +188,7 @@ latin_rammax:
 	Voiced:
 		VoiceSet: LatinSoldierVoice
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial
+		Upgrades: up_cashrecover.latin, up_industrial.latin
 	RenderSprites:
 		PlayerPalette: playerra2
 

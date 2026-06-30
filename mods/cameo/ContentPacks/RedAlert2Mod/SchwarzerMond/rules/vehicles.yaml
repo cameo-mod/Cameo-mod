@@ -1,4 +1,4 @@
-nax2_mcv:
+mcv.nax2:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -6,9 +6,9 @@ nax2_mcv:
 	Tooltip:
 		Name: Naxis Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~nax2_powr, nax2_radar
+		Prerequisites: ~powr.nax2, radar.nax2
 	Transforms:
-		IntoActor: nax2_conyard
+		IntoActor: conyard.nax2
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -21,7 +21,7 @@ nax2_mcv:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax2_dalek:
+dalek.nax2:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -35,7 +35,7 @@ nax2_dalek:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax2_tech
+		Prerequisites: ~tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: Dalek
 	Mobile:
@@ -75,7 +75,7 @@ nax2_dalek:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-nax2_armor_harv:
+armor_harv.nax2:
 	Inherits: ^Walker
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -96,7 +96,7 @@ nax2_armor_harv:
 		BuildDuration: 250
 		BuildDurationModifier: 100
 		BuildPaletteOrder: 75
-		Prerequisites: ~nax2_refin
+		Prerequisites: ~refin.nax2
 		Queue: Infantry, RAInfantry
 		Description: actor-aamecha.description
 	Mobile:
@@ -152,7 +152,7 @@ nax2_armor_harv:
 	Mobile:
 		Locomotor: chem
 
-nax2_engi:
+engi.nax2:
 	Inherits: ^Walker
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -170,7 +170,7 @@ nax2_engi:
 		Name: Engineering Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~nax2_barr
+		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
 		Description: actor-aamecha.description
 	Mobile:
@@ -227,7 +227,7 @@ nax2_engi:
 		EnterBlockedCursor: move-blocked
 		Voice: Move
 
-nax2_beetle:
+beetle.nax2:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -243,7 +243,7 @@ nax2_beetle:
 		Name: Laser Beetle
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~nax2_weap
+		Prerequisites: ~weap.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -268,7 +268,7 @@ nax2_beetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upnax2_ylaser
+		RequiresCondition: !up_ylaser.nax2
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiBeetleLaserAA
@@ -277,7 +277,7 @@ nax2_beetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upnax2_ylaser
+		RequiresCondition: !up_ylaser.nax2
 	Armament@UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaser
@@ -286,7 +286,7 @@ nax2_beetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upnax2_ylaser
+		RequiresCondition: up_ylaser.nax2
 	Armament@AA_UP:
 		Name: primary
 		Weapon: Lunar_YellowBeetleLaserAA
@@ -295,7 +295,7 @@ nax2_beetle:
 		LocalOffset: 512,1,80, 512,-1,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upnax2_ylaser
+		RequiresCondition: up_ylaser.nax2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -307,7 +307,7 @@ nax2_beetle:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax2_panzer:
+panzer.nax2:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -322,7 +322,7 @@ nax2_panzer:
 		Name: Lunar Panzer
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~nax2_weap
+		Prerequisites: ~weap.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -351,7 +351,7 @@ nax2_panzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !upnax2_gplasma
+		RequiresCondition: !rank-elite && !up_gplasma.nax2
 	Armament@elite:
 		Name: primary
 		Weapon: LunarPanzerCannonE
@@ -360,7 +360,7 @@ nax2_panzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !upnax2_gplasma
+		RequiresCondition: rank-elite && !up_gplasma.nax2
 	Armament@upgraded:
 		Name: primary
 		Weapon: Lunar_Green105mm
@@ -369,7 +369,7 @@ nax2_panzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upnax2_gplasma
+		RequiresCondition: !rank-elite && up_gplasma.nax2
 	Armament@upgraded-elite:
 		Name: primary
 		Weapon: Lunar_Green105mm_elite
@@ -378,7 +378,7 @@ nax2_panzer:
 		LocalOffset: 1280,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && upnax2_gplasma
+		RequiresCondition: rank-elite && up_gplasma.nax2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -391,7 +391,7 @@ nax2_panzer:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax2_tiger:
+tiger.nax2:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -406,7 +406,7 @@ nax2_tiger:
 		Name: Lunar Tiger
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~nax2_radar
+		Prerequisites: ~radar.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -435,7 +435,7 @@ nax2_tiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !upnax2_gplasma
+		RequiresCondition: !rank-elite && !up_gplasma.nax2
 	Armament@elite:
 		Name: primary
 		Weapon: LunarTigerCannonE
@@ -444,7 +444,7 @@ nax2_tiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !upnax2_gplasma
+		RequiresCondition: rank-elite && !up_gplasma.nax2
 	Armament@-upgrade:
 		Name: primary
 		Weapon: Lunar_GreenTigerCannon
@@ -453,7 +453,7 @@ nax2_tiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upnax2_gplasma
+		RequiresCondition: !rank-elite && up_gplasma.nax2
 	Armament@elite-upgrade:
 		Name: primary
 		Weapon: Lunar_GreenTigerCannonE
@@ -462,7 +462,7 @@ nax2_tiger:
 		LocalOffset: 1500,0,0
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && upnax2_gplasma
+		RequiresCondition: rank-elite && up_gplasma.nax2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -475,7 +475,7 @@ nax2_tiger:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax2_jager:
+jager.nax2:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -490,7 +490,7 @@ nax2_jager:
 		Name: Neo Jagdpanzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~nax2_tech
+		Prerequisites: ~tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -514,25 +514,25 @@ nax2_jager:
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !upnax2_gplasma
+		RequiresCondition: !rank-elite && !up_gplasma.nax2
 	Armament@elite:
 		Weapon: LunarNaxiJadgDestroyerE
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !upnax2_gplasma
+		RequiresCondition: rank-elite && !up_gplasma.nax2
 	Armament@AG-upgraded:
 		Weapon: Lunar_GreenJadgDestroyer
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upnax2_gplasma
+		RequiresCondition: !rank-elite && up_gplasma.nax2
 	Armament@elite-upgrade:
 		Weapon: Lunar_GreenJadgDestroyerE
 		LocalOffset: 400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && upnax2_gplasma
+		RequiresCondition: rank-elite && up_gplasma.nax2
 	WithMuzzleOverlay:
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -546,7 +546,7 @@ nax2_jager:
 	AttackTurreted:
 	WithSpriteTurret:
 
-nax2_grille:
+grille.nax2:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -561,7 +561,7 @@ nax2_grille:
 		Name: Lunar Grille
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~nax2_radar
+		Prerequisites: ~radar.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -585,25 +585,25 @@ nax2_grille:
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !upnax2_gplasma
+		RequiresCondition: !rank-elite && !up_gplasma.nax2
 	Armament@elite:
 		Weapon: NaxGrilleArtyE
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !upnax2_gplasma
+		RequiresCondition: rank-elite && !up_gplasma.nax2
 	Armament@upgraded:
 		Weapon: Lunar_GreenGrilleArty
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upnax2_gplasma
+		RequiresCondition: !rank-elite && up_gplasma.nax2
 	Armament@elite-upgrade:
 		Weapon: Lunar_GreenGrilleArtyE
 		LocalOffset: 500,0,150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && upnax2_gplasma
+		RequiresCondition: rank-elite && up_gplasma.nax2
 	WithMuzzleOverlay:
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -617,7 +617,7 @@ nax2_grille:
 	AttackTurreted:
 	WithSpriteTurret:
 
-nax2_giant_rk:
+giant_rk.nax2:
 	Inherits: ^Walker
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -636,7 +636,7 @@ nax2_giant_rk:
 		Name: Korruptes Biest
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~nax2_weap, nax2_radar, nax2_tech
+		Prerequisites: ~weap.nax2, radar.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aamecha.description
 	Mobile:
@@ -676,7 +676,7 @@ nax2_giant_rk:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax2_crystal:
+crystal.nax2:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -690,7 +690,7 @@ nax2_crystal:
 		Name: Crystal Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~nax2_tech
+		Prerequisites: ~tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -756,7 +756,7 @@ nax2_crystal:
 	AttackTurreted:
 	WithSpriteTurret:
 
-nax2_bradley:
+bradley.nax2:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -768,7 +768,7 @@ nax2_bradley:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~nax2_weap, nax2_radar
+		Prerequisites: ~weap.nax2, radar.nax2
 		Description: actor-v3.description
 	Valued:
 		Cost: 2000
@@ -796,7 +796,7 @@ nax2_bradley:
 		MuzzleSequence: muzzle
 	MissileSpawnerMasterCA:
 		#ArmamentNames: primary
-		Actors: nax_miniv2, nax_miniv2, nax_miniv2, nax_miniv2
+		Actors: miniv2.nax, miniv2.nax, miniv2.nax, miniv2.nax
 		RespawnTicks: 135
 		SpawnAllAtOnce: true
 		SpawnOffset: 333,333,777, 333,-333,777, -333,333,777, -333,-333,777
@@ -833,7 +833,7 @@ nax2_bradley:
 		Sequence: empty-turret
 		Name: reloading
 
-nax2_aatank:
+aatank.nax2:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -845,7 +845,7 @@ nax2_aatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~nax2_weap, nax2_radar
+		Prerequisites: ~weap.nax2, radar.nax2
 		Description: actor-v3.description
 	Valued:
 		Cost: 2500
@@ -915,7 +915,7 @@ nax2_aatank:
 		Sequence: empty-turret
 		Name: reloading
 
-nax2_lasert:
+lasert.nax2:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -931,7 +931,7 @@ nax2_lasert:
 		Name: Laser Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~nax2_weap
+		Prerequisites: ~weap.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -961,7 +961,7 @@ nax2_lasert:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upnax2_ylaser
+		RequiresCondition: !up_ylaser.nax2
 	Armament@AA:
 		Name: primary
 		Weapon: NaxiTank2LaserAA
@@ -970,7 +970,7 @@ nax2_lasert:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upnax2_ylaser
+		RequiresCondition: !up_ylaser.nax2
 	Armament@UP:
 		Name: primary
 		Weapon: Lunar_YellowTank2Laser
@@ -979,7 +979,7 @@ nax2_lasert:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upnax2_ylaser
+		RequiresCondition: up_ylaser.nax2
 	Armament@AA_UP:
 		Name: primary
 		Weapon: Lunar_YellowTank2LaserAA
@@ -988,7 +988,7 @@ nax2_lasert:
 		LocalOffset: 850,150,-60, 850,-150,-60
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upnax2_ylaser
+		RequiresCondition: up_ylaser.nax2
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:

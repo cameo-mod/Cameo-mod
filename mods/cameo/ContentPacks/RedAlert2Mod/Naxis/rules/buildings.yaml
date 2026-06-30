@@ -1,11 +1,11 @@
-nax_hole_small:
-	Inherits@1: nax_hole
+hole_small.nax:
+	Inherits@1: hole.nax
 	Health:
 		HP: 25000
 	ChangesHealth:
 		Step: -100
 
-nax_conyard:
+conyard.nax:
 	Inherits: ^RA2Building
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^4x3Shape
@@ -16,7 +16,7 @@ nax_conyard:
 		Footprint: xxxx xxxx xxxx
 		Dimensions: 4,3
 	Transforms:
-		IntoActor: nax_mcv
+		IntoActor: mcv.nax
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -29,10 +29,10 @@ nax_conyard:
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: nax_conyard.infiltrated
+		Proxy: conyard_infiltrated.nax
 		Types: TechStealerInfiltrate
 
-nax_powr:
+powr.nax:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^NaxisSpawnActorsOnSell
@@ -45,7 +45,7 @@ nax_powr:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template-power.description
-		Prerequisites: ~nax_conyard
+		Prerequisites: ~conyard.nax
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -60,7 +60,7 @@ nax_powr:
 	ScalePowerWithHealth:
 	ProvidesPrerequisite@buildingname:
 
-nax_barr:
+barr.nax:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^NaxisSpawnActorsOnSell
@@ -69,7 +69,7 @@ nax_barr:
 	Tooltip:
 		Name: Naxis Barracks
 	Buildable:
-		Prerequisites: ~nax_conyard, nax_powr
+		Prerequisites: ~conyard.nax, powr.nax
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -82,7 +82,7 @@ nax_barr:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-nax_refin:
+refin.nax:
 	Inherits: ^RA2Building
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -90,7 +90,7 @@ nax_refin:
 	Tooltip:
 		Name: Naxis Ore Refinery
 	Buildable:
-		Prerequisites: ~nax_conyard, nax_powr
+		Prerequisites: ~conyard.nax, powr.nax
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -102,7 +102,7 @@ nax_refin:
 		MaxQueueLength: 15
 	DrawLineToTarget:
 	SlaveMinerSpawnerMaster:
-		Actors: nax_slav, nax_slav, nax_slav, nax_slav, nax_slav
+		Actors: slav.nax, slav.nax, slav.nax, slav.nax, slav.nax
 		SlavesHaveFreeWill: true
 		SlaveDisposalOnKill: GiveSlavesToAttacker
 		SlaveDisposalOnOwnerChange: GiveSlavesToAttacker
@@ -113,7 +113,7 @@ nax_refin:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 
-nax_weap:
+weap.nax:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Tooltip:
@@ -124,7 +124,7 @@ nax_weap:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Description: template-factory.description
-		Prerequisites: ~nax_conyard, nax_refin
+		Prerequisites: ~conyard.nax, refin.nax
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -137,7 +137,7 @@ nax_weap:
 	Voiced:
 		VoiceSet: PRCWarFactoryVoice
 
-nax_naval:
+naval.nax:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
@@ -147,7 +147,7 @@ nax_naval:
 	Tooltip:
 		Name: Naxis Naval Yard
 	Buildable:
-		Prerequisites: ~nax_conyard, nax_barr, ~globalnaval
+		Prerequisites: ~conyard.nax, barr.nax, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -163,14 +163,14 @@ nax_naval:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 
-nax_radar:
+radar.nax:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~nax_conyard, nax_refin
+		Prerequisites: ~conyard.nax, refin.nax
 		Description: template-radar.description
 	Tooltip:
 		Name: Naxis Radar
@@ -184,7 +184,7 @@ nax_radar:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-nax_airfield:
+airfield.nax:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -202,7 +202,7 @@ nax_airfield:
 	Buildable:
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Prerequisites: ~nax_conyard, nax_radar
+		Prerequisites: ~conyard.nax, radar.nax
 		Queue: Building, RABuilding
 		Description: actor-nax_airfield.description
 	Building:
@@ -229,7 +229,7 @@ nax_airfield:
 	ProvidesPrerequisite@buildingname:
 	AttackTurreted:
 	CarrierMaster:
-		Actors: nax_interceptor, nax_interceptor, nax_interceptor
+		Actors: interceptor.nax, interceptor.nax, interceptor.nax
 		RearmTicks: 90
 		RespawnTicks: 180
 		InstaRepair: true
@@ -244,8 +244,8 @@ nax_airfield:
 	ParatroopersPower@paratroopers:
 		OrderName: NaxisParatroopers
 		Prerequisites:
-			1: nax_airfield
-			2: nax_airfield, upnax_paratanks
+			1: airfield.nax
+			2: airfield.nax, up_paratanks.nax
 		Icons:
 			1: paratroopers
 			2: paratroopers
@@ -257,8 +257,8 @@ nax_airfield:
 			1: power-paratroopers.description
 			2: power-paratroopers.description
 		DropItems:
-			1: nax_panzer, nax_panzer, nax_panzer, nax_car, nax_car, nax_atankcann, nax_atankcann
-			2: nax_tiger, nax_tiger, nax_panzer, nax_panzer, nax_panzer, nax_wirbelwind, nax_wirbelwind, nax_car, nax_car, nax_car, nax_atankcann, nax_atankcann
+			1: panzer.nax, panzer.nax, panzer.nax, car.nax, car.nax, atankcann.nax, atankcann.nax
+			2: tiger.nax, tiger.nax, panzer.nax, panzer.nax, panzer.nax, wirbelwind.nax, wirbelwind.nax, car.nax, car.nax, car.nax, atankcann.nax, atankcann.nax
 		SelectTargetSpeechNotification: SelectTarget
 		AllowImpassableCells: false
 		QuantizedFacings: 16
@@ -273,17 +273,17 @@ nax_airfield:
 		#UseDirectionalTarget: True
 		DirectionArrowAnimation: airstrikedirection
 		UnitTypes:
-			1: nax_cplane
-			2: nax_cplane
+			1: cplane.nax
+			2: cplane.nax
 		SquadSizes:
 			1: 3
 			2: 5
 	AirstrikePower@parabombs:
 		OrderName: NaxParabombs
 		Prerequisites:
-			1: nax_airfield, nax_tech
-			2: nax_airfield, nax_tech, up_nax_horten
-			3: nax_airfield, nax_tech, up_nax_horten, up_nax_horten2
+			1: airfield.nax, tech.nax
+			2: airfield.nax, tech.nax, up_nax_horten.futu
+			3: airfield.nax, tech.nax, up_nax_horten.futu, up_nax_horten2.futu
 		Icons:
 			1: airstrike
 			2: airstrike
@@ -301,9 +301,9 @@ nax_airfield:
 		CameraActor: camera
 		CameraRemoveDelay: 150
 		UnitTypes:
-			1: nax_horten.bomber
-			2: nax_horten.bomber
-			3: nax_horten.bomber
+			1: horten_bomber.nax
+			2: horten_bomber.nax
+			3: horten_bomber.nax
 		QuantizedFacings: 16
 		DisplayBeacon: true
 		BeaconPosters:
@@ -323,7 +323,7 @@ nax_airfield:
 		SupportPowerPaletteOrder: 40
 		DisplayTimerRelationships: Ally, Neutral, Enemy
 
-nax_tek:
+tek.nax:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^NaxisSpawnActorsOnSell
@@ -331,7 +331,7 @@ nax_tek:
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
-		Prerequisites: ~nax_conyard, nax_radar
+		Prerequisites: ~conyard.nax, radar.nax
 	Tooltip:
 		Name: Naxis Academy
 	Building:
@@ -343,14 +343,14 @@ nax_tek:
 	Valued:
 		Cost: 2000
 
-nax_tech:
+tech.nax:
 	Inherits: ^RA2Building
 	Inherits@sell: ^NaxisSpawnActorsOnSell
 	Inherits@radar: ^IsTechnoBuilding
 	Inherits@shape: ^4x3Shape
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~nax_conyard, nax_radar
+		Prerequisites: ~conyard.nax, radar.nax
 	Tooltip:
 		Name: Naxis Tech Center
 	Building:
@@ -361,7 +361,7 @@ nax_tech:
 	DetonateWeaponPower@NaxiSupportZombies:
 		OrderName: NaxiSupportZombies
 		Prerequisites:
-			1: nax_tech
+			1: tech.nax
 		PauseOnCondition: disabled
 		Icons:
 			1: conssupp1
@@ -385,9 +385,9 @@ nax_tech:
 		LaunchSound: schrmov.wav
 		IncomingSound: schrmov.wav
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: up_shielresistance.steel
 
-nax_beer:
+beer.nax:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -400,13 +400,13 @@ nax_beer:
 		BuildLimit: 1
 		Queue: Building, RABuilding
 		Description: Produces Passive Income and adds Firepower bonus with Infantry
-		Prerequisites: ~nax_conyard, nax_tek, derricklimit
+		Prerequisites: ~conyard.nax, tek.nax, derricklimit
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
 	ProvidesPrerequisite@buildingname:
 
-nax_sausage:
+sausage.nax:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -419,13 +419,13 @@ nax_sausage:
 		BuildLimit: 1
 		Queue: Building, RABuilding
 		Description: Produces Passive Income and adds Damage Resistance bonus with Infantry
-		Prerequisites: ~nax_conyard, nax_tek, derricklimit
+		Prerequisites: ~conyard.nax, tek.nax, derricklimit
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
 	ProvidesPrerequisite@buildingname:
 
-nax_twr:
+twr.nax:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -439,7 +439,7 @@ nax_twr:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~nax_conyard, nax_barr
+		Prerequisites: ~conyard.nax, barr.nax
 		Description: template-anti-infantry-defense.description
 	Valued:
 		Cost: 650
@@ -476,9 +476,9 @@ nax_twr:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_atlantikwall, up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_atlantikwall.futu, up_ostfrontexperience.futu, up_massopticsintegration.futu
 
-nax_flak88:
+flak88.nax:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -492,7 +492,7 @@ nax_flak88:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~nax_conyard, nax_weap
+		Prerequisites: ~conyard.nax, weap.nax
 		Description: actor-nax_flak88.description
 	Valued:
 		Cost: 1200
@@ -534,9 +534,9 @@ nax_flak88:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_atlantikwall, up_tankarsenalrenovation, up_massopticsintegration
+		Upgrades: up_atlantikwall.futu, up_tankarsenalrenovation.futu, up_massopticsintegration.futu
 
-nax_bunk:
+bunk.nax:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BunkerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -554,7 +554,7 @@ nax_bunk:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~nax_conyard, nax_barr
+		Prerequisites: ~conyard.nax, barr.nax
 		Description: actor-nabnkr.description
 	Valued:
 		Cost: 1000
@@ -585,7 +585,7 @@ nax_bunk:
 	RevealsShroud:
 		Range: 6666
 	Selectable:
-		Class: nax_bunk
+		Class: bunk.nax
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo, Kills, Experience
 	AttackTurreted:
@@ -616,22 +616,22 @@ nax_bunk:
 		Sequence: turret-aa
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_atlantikwall
+		Upgrades: up_atlantikwall.futu
 	Pluggable:
 		Conditions:
-			nax_bunk.mg: mg
-			nax_bunk.aa: aa
-			nax_bunk.mortar: mortar
+			bunk_mg.nax: mg
+			bunk_aa.nax: aa
+			bunk_mortar.nax: mortar
 		Requirements:
-			nax_bunk.mg: !build-incomplete && !mortar && !aa && !mg
-			nax_bunk.aa: !build-incomplete && !mortar && !aa && !mg
-			nax_bunk.mortar: !build-incomplete && !mortar && !aa && !mg
+			bunk_mg.nax: !build-incomplete && !mortar && !aa && !mg
+			bunk_aa.nax: !build-incomplete && !mortar && !aa && !mg
+			bunk_mortar.nax: !build-incomplete && !mortar && !aa && !mg
 		EditorOptions:
-			nax_bunk.mg: Machinegun Turret
-			nax_bunk.aa: Mini Flak Turret
-			nax_bunk.mortar: Mortar Turret
+			bunk_mg.nax: Machinegun Turret
+			bunk_aa.nax: Mini Flak Turret
+			bunk_mortar.nax: Mortar Turret
 
-nax_bunk.mg:
+bunk_mg.nax:
 	Inherits: ^BuildingPlug
 	Valued:
 		Cost: 300
@@ -642,13 +642,13 @@ nax_bunk.mg:
 		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~nax_bunk, nax_barr
+		Prerequisites: ~bunk.nax, barr.nax
 	Plug:
-		Type: nax_bunk.mg
+		Type: bunk_mg.nax
 	RenderSprites:
-		Image: nax_bunk
+		Image: bunk.nax
 
-nax_bunk.mortar:
+bunk_mortar.nax:
 	Inherits: ^BuildingPlug
 	Valued:
 		Cost: 500
@@ -659,13 +659,13 @@ nax_bunk.mortar:
 		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~nax_bunk, nax_radar
+		Prerequisites: ~bunk.nax, radar.nax
 	Plug:
-		Type: nax_bunk.mortar
+		Type: bunk_mortar.nax
 	RenderSprites:
-		Image: nax_bunk
+		Image: bunk.nax
 
-nax_bunk.aa:
+bunk_aa.nax:
 	Inherits: ^BuildingPlug
 	Valued:
 		Cost: 500
@@ -676,13 +676,13 @@ nax_bunk.aa:
 		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~nax_bunk, nax_radar
+		Prerequisites: ~bunk.nax, radar.nax
 	Plug:
-		Type: nax_bunk.aa
+		Type: bunk_aa.nax
 	RenderSprites:
-		Image: nax_bunk
+		Image: bunk.nax
 
-nax_rocket:
+rocket.nax:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -693,7 +693,7 @@ nax_rocket:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~nax_conyard, nax_tech, !nax_rocket
+		Prerequisites: ~conyard.nax, tech.nax, !rocket.nax
 		Queue: Defence, RADefence
 		Description: actor-nax_rocket.description
 	Building:
@@ -747,7 +747,7 @@ nax_rocket:
 	SupportPowerChargeBar:
 	WithSupportPowerActivationAnimation:
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: nax_rocket
+		Prerequisite: rocket.nax
 
 ####################################################################################################
 #		Red Alert 2 Moon Naxis Structures

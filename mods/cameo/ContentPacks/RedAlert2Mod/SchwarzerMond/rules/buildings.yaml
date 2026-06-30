@@ -1,4 +1,4 @@
-nax2_conyard:
+conyard.nax2:
 	Inherits: ^RA2Building
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^4x3Shape
@@ -9,7 +9,7 @@ nax2_conyard:
 		Footprint: xxxx xxxx xxxx
 		Dimensions: 4,3
 	Transforms:
-		IntoActor: nax2_mcv
+		IntoActor: mcv.nax2
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -22,10 +22,10 @@ nax2_conyard:
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: nax2_conyard.infiltrated
+		Proxy: conyard_infiltrated.nax2
 		Types: TechStealerInfiltrate
 
-nax2_powr:
+powr.nax2:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -38,7 +38,7 @@ nax2_powr:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template-power.description
-		Prerequisites: ~nax2_conyard
+		Prerequisites: ~conyard.nax2
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -53,7 +53,7 @@ nax2_powr:
 	ScalePowerWithHealth:
 	ProvidesPrerequisite@buildingname:
 
-nax2_barr:
+barr.nax2:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -62,7 +62,7 @@ nax2_barr:
 	Tooltip:
 		Name: Schwarzer Mond Barracks
 	Buildable:
-		Prerequisites: ~nax2_conyard, nax2_powr
+		Prerequisites: ~conyard.nax2, powr.nax2
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -75,7 +75,7 @@ nax2_barr:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-nax2_refin:
+refin.nax2:
 	Inherits: ^RA2Building
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -83,7 +83,7 @@ nax2_refin:
 	Tooltip:
 		Name: Schwarzer Mond Ore Refinery
 	Buildable:
-		Prerequisites: ~nax2_conyard, nax2_powr
+		Prerequisites: ~conyard.nax2, powr.nax2
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -95,11 +95,11 @@ nax2_refin:
 		MaxQueueLength: 15
 	DrawLineToTarget:
 	FreeActor@1:
-		Actor: nax2_armor_harv
+		Actor: armor_harv.nax2
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@2:
-		Actor: nax2_armor_harv
+		Actor: armor_harv.nax2
 		SpawnOffset: 2,1
 		Facing: 256
 	SelectionDecorations:
@@ -108,14 +108,14 @@ nax2_refin:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 
-nax2_radar:
+radar.nax2:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~nax2_conyard, nax2_refin
+		Prerequisites: ~conyard.nax2, refin.nax2
 		Description: template-radar.description
 	Tooltip:
 		Name: Schwarzer Mond Radar
@@ -129,7 +129,7 @@ nax2_radar:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-nax2_airfield:
+airfield.nax2:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -147,7 +147,7 @@ nax2_airfield:
 	Buildable:
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Prerequisites: ~nax2_conyard, nax2_radar
+		Prerequisites: ~conyard.nax2, radar.nax2
 		Queue: Building, RABuilding
 		Description: Produces aircraft.
 	Building:
@@ -171,7 +171,7 @@ nax2_airfield:
 	ProvidesPrerequisite@buildingname:
 	AttackTurreted:
 	CarrierMaster:
-		Actors: nax_drone, nax_drone, nax_drone, nax_drone, nax_drone
+		Actors: drone.nax, drone.nax, drone.nax, drone.nax, drone.nax
 		RearmTicks: 75
 		RespawnTicks: 150
 		InstaRepair: true
@@ -183,7 +183,7 @@ nax2_airfield:
 		Weapon: NaxDefensivePlaneTarget
 	AutoTarget:
 
-nax2_twr:
+twr.nax2:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -195,7 +195,7 @@ nax2_twr:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~nax2_conyard, nax2_barr
+		Prerequisites: ~conyard.nax2, barr.nax2
 		Description: template-anti-infantry-defense.description
 	Valued:
 		Cost: 800
@@ -220,13 +220,13 @@ nax2_twr:
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upnax2_ylaser
+		RequiresCondition: !up_ylaser.nax2
 	Armament@UP:
 		Weapon: Lunar_YellowLaserT
 		LocalOffset: 300,1,700, 300,-1,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upnax2_ylaser
+		RequiresCondition: up_ylaser.nax2
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -241,7 +241,7 @@ nax2_twr:
 		Range: 4090
 	ProvidesPrerequisite@buildingname:
 
-nax2_sturmcann:
+sturmcann.nax2:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -253,7 +253,7 @@ nax2_sturmcann:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~nax2_conyard, nax2_weap
+		Prerequisites: ~conyard.nax2, weap.nax2
 		Description: template-anti-infantry-defense.description
 	Valued:
 		Cost: 1200
@@ -278,13 +278,13 @@ nax2_sturmcann:
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upnax2_gplasma
+		RequiresCondition: !up_gplasma.nax2
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_GreenSturmArty
 		LocalOffset: 888,44,700
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upnax2_gplasma
+		RequiresCondition: up_gplasma.nax2
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -297,13 +297,13 @@ nax2_sturmcann:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 
-nax2_tech:
+tech.nax2:
 	Inherits: ^RA2Building
 	Inherits@radar: ^IsTechnoBuilding
 	Inherits@shape: ^4x3Shape
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~nax2_conyard, nax2_radar
+		Prerequisites: ~conyard.nax2, radar.nax2
 		Description: template-radar.description
 	Tooltip:
 		Name: Schwarzer Mond Tech Center
@@ -313,7 +313,7 @@ nax2_tech:
 	Production@Research:
 		Produces: Research
 
-nax2_weap:
+weap.nax2:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
 	Tooltip:
@@ -324,7 +324,7 @@ nax2_weap:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Description: template-factory.description
-		Prerequisites: ~nax2_conyard, nax2_refin
+		Prerequisites: ~conyard.nax2, refin.nax2
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -337,7 +337,7 @@ nax2_weap:
 	Voiced:
 		VoiceSet: PRCWarFactoryVoice
 
-nax2_meteorray:
+meteorray.nax2:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -346,7 +346,7 @@ nax2_meteorray:
 		Name: Meteor Traction Ray
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax2_conyard, nax2_tech, !nax2_meteorray
+		Prerequisites: ~conyard.nax2, tech.nax2, !meteorray.nax2
 		Queue: Defence, RADefence
 		Description: actor-namisl.description
 	Building:
@@ -403,7 +403,7 @@ nax2_meteorray:
 	SupportPowerChargeBar:
 	WithSupportPowerActivationAnimation:
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: nax2_meteorray
+		Prerequisite: meteorray.nax2
 
 # nax2_chrono:
 # 	Inherits: ^RA2Building
@@ -413,7 +413,7 @@ nax2_meteorray:
 # 	HitShape:
 # 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 # 	Buildable:
-# 		Prerequisites: ~nax2_tech
+# 		Prerequisites: ~tech.nax2
 # 	Tooltip:
 # 		Name: Dark Chronosphere
 # 	Building:
@@ -468,7 +468,7 @@ nax2_meteorray:
 # 	Power:
 # 		Amount: -200
 
-nax2_gcore:
+gcore.nax2:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^SpaceNaxisSpawnActorsOnSell
@@ -485,7 +485,7 @@ nax2_gcore:
 		Amount: -125
 	Buildable:
 		Description: Reduces movement speed and range of nearby vehicles.
-		Prerequisites: ~nax2_tech
+		Prerequisites: ~tech.nax2
 		Queue: Defence, RADefence
 	ProximityExternalCondition@gravity_1:
 		Range: 15000
@@ -548,7 +548,7 @@ nax2_gcore:
 		Color: 20027788
 		RequiresCondition: !disabled
 
-nax2_dairy:
+dairy.nax2:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@cashtrickler: ^CashTricklerWithExperience
@@ -560,7 +560,7 @@ nax2_dairy:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Produces Passive income and adds hp bonus with Infantry
-		Prerequisites: ~nax2_tech, ~techlevel.medium, derricklimit
+		Prerequisites: ~tech.nax2, ~techlevel.medium, derricklimit
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2

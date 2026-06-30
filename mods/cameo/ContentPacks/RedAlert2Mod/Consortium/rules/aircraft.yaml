@@ -1,4 +1,4 @@
-steel_inspect.Husk:
+inspect_husk.steel:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Empress Station
@@ -14,7 +14,7 @@ steel_inspect.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_inspect
+		Image: inspect.steel
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -24,7 +24,7 @@ steel_inspect.Husk:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-steel_twister:
+twister.steel:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -39,7 +39,7 @@ steel_twister:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~steel_conpad
+		Prerequisites: ~conpad.steel
 		Queue: Aircraft, RAAircraft
 		Description: actor-falc.description
 	Aircraft:
@@ -81,7 +81,7 @@ steel_twister:
 		Delay: 42
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: steel_twister.Husk
+		Actor: twister_husk.steel
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -104,9 +104,9 @@ steel_twister:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_twister.Husk:
+twister_husk.steel:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Twister
@@ -122,11 +122,11 @@ steel_twister.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_twister
+		Image: twister.steel
 	RenderSprites:
 		PlayerPalette: playerra2cons
 
-steel_grun.Husk:
+grun_husk.steel:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Flying Turret
@@ -134,11 +134,11 @@ steel_grun.Husk:
 		TurnSpeed: 24
 		Speed: 120
 	RenderSprites:
-		Image: steel_grun
+		Image: grun.steel
 		PlayerPalette: playerra2rot
 	Turreted:
 
-steel_cargoship:
+cargoship.steel:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -156,7 +156,7 @@ steel_cargoship:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~steel_conpad
+		Prerequisites: ~conpad.steel
 		Queue: Aircraft, RAAircraft
 		Description: actor-shad.description
 	Aircraft:
@@ -177,7 +177,7 @@ steel_cargoship:
 		MuzzlePalette: ra2effect
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: steel_fedinf, steel_board_inf, steel_qinf, steel_fedinf, steel_board_inf, steel_qinf
+		InitialUnits: fedinf.steel, board_inf.steel, qinf.steel, fedinf.steel, board_inf.steel, qinf.steel
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 6
 		AfterLoadDelay: 0
@@ -187,20 +187,20 @@ steel_cargoship:
 		FacingTolerance: 10
 		AttackType: Hover
 	SpawnActorOnDeath:
-		Actor: steel_cargoship.Husk
+		Actor: cargoship_husk.steel
 	SelectionDecorations:
 	Selectable:
-		Class: steel_cargoship
+		Class: cargoship.steel
 		Bounds: 1536, 1536
 	RenderSprites:
-		Image: steel_cargoship
+		Image: cargoship.steel
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: SteelConsortiumTankVoice
 	ActorStatValues:
-		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_cargoship.Husk:
+cargoship_husk.steel:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Cargo Ship
@@ -216,7 +216,7 @@ steel_cargoship.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_cargoship
+		Image: cargoship.steel
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -226,7 +226,7 @@ steel_cargoship.Husk:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-steel_cruiser.Husk:
+cruiser_husk.steel:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Cruiser
@@ -242,7 +242,7 @@ steel_cruiser.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_cruiser
+		Image: cruiser.steel
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -252,7 +252,7 @@ steel_cruiser.Husk:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-steel_cruiser_f.Husk:
+cruiser_f_husk.steel:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Hornet
@@ -268,7 +268,7 @@ steel_cruiser_f.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: steel_cruiser_f
+		Image: cruiser_f.steel
 	RenderSprites:
 		PlayerPalette: playerra2
 

@@ -1,4 +1,4 @@
-nax_corpse:
+corpse.nax:
 	Inherits: ^SpriteActor
 	RenderSprites:
 		Palette: ra2effect
@@ -38,7 +38,7 @@ nax_corpse:
 		DamageTypes: ZombieRevive
 		GrantsCondition: revive
 	SpawnActorOnDeath@NaxiRevive:
-		Actor: nax_undead
+		Actor: undead.nax
 		Probability: 100
 		DeathType: ZombieRevive
 		SpawnAfterDefeat: false
@@ -52,14 +52,14 @@ nax_corpse:
 	MapEditorData:
 		Categories: System
 
-nax_corpse_big:
-	Inherits: nax_corpse
+corpse_big.nax:
+	Inherits: corpse.nax
 	Health:
 		HP: 150000
 	SpawnActorOnDeath@NaxiRevive:
-		Actor: nax_frank
+		Actor: frank.nax
 
-nax_rifle:
+rifle.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -76,7 +76,7 @@ nax_rifle:
 		Name: Naxi Rifle Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr
+		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -110,9 +110,9 @@ nax_rifle:
 	Voiced:
 		VoiceSet: NaxiSoldatVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 
-nax_cons:
+cons.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -129,7 +129,7 @@ nax_cons:
 		Name: Naxi Rifle Recruit
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr
+		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -163,9 +163,9 @@ nax_cons:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 
-nax_mp40:
+mp40.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -182,7 +182,7 @@ nax_mp40:
 		Name: SS Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr, nax_radar
+		Prerequisites: ~barr.nax, radar.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_mp40.description
 	Mobile:
@@ -216,9 +216,9 @@ nax_mp40:
 	Voiced:
 		VoiceSet: NaxiSSVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_fcons:
+fcons.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@FireInfantry: ^FireInfantry
@@ -235,7 +235,7 @@ nax_fcons:
 		Name: Naxi Flamer
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr
+		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-e4.description
 	Mobile:
@@ -271,9 +271,9 @@ nax_fcons:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_merc:
+merc.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -291,7 +291,7 @@ nax_merc:
 		Name: Naxi Mercenary Sniper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr, nax_radar
+		Prerequisites: ~barr.nax, radar.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_merc.description
 	Mobile:
@@ -325,9 +325,9 @@ nax_merc:
 	Voiced:
 		VoiceSet: NaxiSoldatVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 
-nax_shrek:
+shrek.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -343,7 +343,7 @@ nax_shrek:
 		Name: Panzerschreck
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr, nax_tek
+		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-infantry.description
 	Mobile:
@@ -377,9 +377,9 @@ nax_shrek:
 	Voiced:
 		VoiceSet: NaxiTroopVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_tcons:
+tcons.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -395,7 +395,7 @@ nax_tcons:
 		Name: Panzerfaust Trooper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr
+		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-infantry.description
 	Mobile:
@@ -429,9 +429,9 @@ nax_tcons:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_litt:
+litt.nax:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -445,7 +445,7 @@ nax_litt:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~nax_tek
+		Prerequisites: ~tek.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_litt.description
 	Aircraft:
@@ -473,7 +473,7 @@ nax_litt:
 		FacingTolerance: 10
 		AttackType: Hover
 	SpawnActorOnDeath:
-		Actor: nax_litt.husk
+		Actor: litt_husk.nax
 	Voiced:
 		VoiceSet: NaxiMageVoice
 	-WithShadow:
@@ -501,9 +501,9 @@ nax_litt:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_slavemaster:
+slavemaster.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -520,7 +520,7 @@ nax_slavemaster:
 		Name: Slave Overseer
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr, nax_refin
+		Prerequisites: ~barr.nax, refin.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_slavemaster.description
 	Mobile:
@@ -566,14 +566,14 @@ nax_slavemaster:
 	Voiced:
 		VoiceSet: NaxiFemVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_slav:
+slav.nax:
 	Inherits: YRSLAV
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr, nax_refin
+		Prerequisites: ~barr.nax, refin.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_slavemaster.description
 	Targetable@SlaveFaster:
@@ -592,9 +592,9 @@ nax_slav:
 		Modifier: 250
 		RequiresCondition: SlaveFaster >= 3
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_frank:
+frank.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -637,9 +637,9 @@ nax_frank:
 	Targetable@dog:
 		TargetTypes: DogImmune
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_alien:
+alien.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -655,7 +655,7 @@ nax_alien:
 		Name: Naxi Alien
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr, ~disabled
+		Prerequisites: ~barr.nax, ~disabled
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_alien.description
 	Mobile:
@@ -689,10 +689,10 @@ nax_alien:
 	Voiced:
 		VoiceSet: NaxiUFOVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 	-TakeCover:
 
-nax_hmg:
+hmg.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -710,7 +710,7 @@ nax_hmg:
 		Name: Naxi Machinegunners
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~nax_tek
+		Prerequisites: ~tek.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_hmg.description
 	Mobile:
@@ -802,9 +802,9 @@ nax_hmg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience
+		Upgrades: up_ostfrontexperience.futu
 
-nax_quadflak:
+quadflak.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -824,7 +824,7 @@ nax_quadflak:
 		Name: Portable Flak
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~nax_barr
+		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_quadflak.description
 	Mobile:
@@ -918,9 +918,9 @@ nax_quadflak:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 
-nax_undead:
+undead.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -970,9 +970,9 @@ nax_undead:
 	Voiced:
 		VoiceSet: NaxiZombie
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 
-nax_conehead:
+conehead.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -989,9 +989,9 @@ nax_conehead:
 		Name: Coneheads Knights
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax_barr, nax_tek
+		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
-		AdditionalActors: nax_conehead, nax_conehead, nax_conehead, nax_conehead, nax_conehead2
+		AdditionalActors: conehead.nax, conehead.nax, conehead.nax, conehead.nax, conehead2.nax
 		Description: template-scout-infantry.description
 	Mobile:
 		Speed: 90
@@ -1019,10 +1019,10 @@ nax_conehead:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 	RenderSprites:
 		PlayerPalette: player_rgba
-nax_conehead2:
+conehead2.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -1039,7 +1039,7 @@ nax_conehead2:
 		Name: Conehead Leader
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax_barr, ~disabled
+		Prerequisites: ~barr.nax, ~disabled
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -1073,14 +1073,14 @@ nax_conehead2:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience, up_massopticsintegration
+		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 	RenderSprites:
 		PlayerPalette: player_rgba
 ####################################################################################################
 #		Red Alert 2 Moon Naxis Infantry
 ####################################################################################################
 
-nax_lunar:
+lunar.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -1095,7 +1095,7 @@ nax_lunar:
 		Name: Lunar Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax2_barr
+		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -1107,41 +1107,41 @@ nax_lunar:
 	Armament@PRIMARY:
 		Weapon: NaxiRifleLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && !upnax2_ylaser
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
 	Armament@ELITE:
 		Weapon: NaxiRifleLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && !upnax2_ylaser
+		RequiresCondition: rank-elite && !up_ylaser.nax2
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowRifleLaser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && upnax2_ylaser
+		RequiresCondition: !rank-elite && up_ylaser.nax2
 	Armament@ELITE_UP:
 		Weapon: Lunar_YellowRifleLaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && upnax2_ylaser
+		RequiresCondition: rank-elite && up_ylaser.nax2
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: NaxiRifleLaser
-		RequiresCondition: !rank-elite && !upnax2_ylaser
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: NaxiRifleLaserE
-		RequiresCondition: rank-elite && !upnax2_ylaser
+		RequiresCondition: rank-elite && !up_ylaser.nax2
 	Armament@GARRISONED_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowRifleLaser
-		RequiresCondition: !rank-elite && upnax2_ylaser
+		RequiresCondition: !rank-elite && up_ylaser.nax2
 	Armament@GARRISONEDELITE_UP:
 		Name: garrisoned
 		Weapon: Lunar_YellowRifleLaserE
-		RequiresCondition: rank-elite && upnax2_ylaser
+		RequiresCondition: rank-elite && up_ylaser.nax2
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: NaxiLunarTroopVoice
 
-nax_lunar2:
+lunar2.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -1155,7 +1155,7 @@ nax_lunar2:
 		Name: Lunar Rocket
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~nax2_barr
+		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:

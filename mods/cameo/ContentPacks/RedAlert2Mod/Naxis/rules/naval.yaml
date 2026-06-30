@@ -1,4 +1,4 @@
-nax_tuboat:
+tuboat.nax:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
@@ -14,7 +14,7 @@ nax_tuboat:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~nax_naval
+		Prerequisites: ~naval.nax
 		Queue: Naval, RANaval
 		Description: actor-ra2sub.description
 	Mobile:
@@ -49,7 +49,7 @@ nax_tuboat:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_muboat:
+muboat.nax:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ArtilleryShipTemplate
@@ -67,7 +67,7 @@ nax_muboat:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~nax_tech
+		Prerequisites: ~tech.nax
 		Queue: Naval, RANaval
 		Description: actor-msub.description
 	Mobile:
@@ -115,10 +115,10 @@ nax_muboat:
 		Sequence: idle-empty
 		RequiresCondition: !ammo
 	RenderSprites:
-		Image: nax_muboat
+		Image: muboat.nax
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe
+		Upgrades: up_wunderwaffe.futu
 
 ####################################################################################################
 #		Red Alert 2 Naxis Tree

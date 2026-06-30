@@ -1,4 +1,4 @@
-steel_qmcv:
+qmcv.steel:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -9,7 +9,7 @@ steel_qmcv:
 	Tooltip:
 		Name: Consortium Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: steel_qtradr, ~steel_qaweap
+		Prerequisites: qtradr.steel, ~qaweap.steel
 	Mobile:
 		Speed: 60
 		Locomotor: amphibius
@@ -22,7 +22,7 @@ steel_qmcv:
 	Armor:
 		Type: Light
 	Transforms:
-		IntoActor: steel_qacst
+		IntoActor: qacst.steel
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -36,9 +36,9 @@ steel_qmcv:
 		PlayerPalette: playerra2cons
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qmin:
+qmin.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -72,7 +72,7 @@ steel_qmin:
 		TurnSpeed: 20
 		Locomotor: hover
 	Buildable:
-		Prerequisites: ~steel_qref
+		Prerequisites: ~qref.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-cmin.description
 	WithHarvestAnimation:
@@ -82,7 +82,7 @@ steel_qmin:
 	Voiced:
 		VoiceSet: ChronoMinerVoice
 	RenderSprites:
-		Image: steel_qmin
+		Image: qmin.steel
 		PlayerPalette: playerra2cons
 	Hovers:
 		Ticks: 10
@@ -97,9 +97,9 @@ steel_qmin:
 		Sequence: harvesting
 		Palette: ra2effect
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_mako:
+mako.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -116,7 +116,7 @@ steel_mako:
 		Name: Mako
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~steel_qaweap, ~!upsteel_quantumtank
+		Prerequisites: ~qaweap.steel, ~!up_quantumtank.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_mako.description
 	Mobile:
@@ -136,25 +136,25 @@ steel_mako:
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
 	Armament@ELITE:
 		Weapon: SteelMakoGunE
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !upsteel_empquantumweapons
+		RequiresCondition: rank-elite && !up_empquantumweapons.steel
 	Armament@UpgradePRIMARY:
 		Weapon: SteelMakoGunEMP
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && up_empquantumweapons.steel
 	Armament@UpgradeELITE:
 		Weapon: SteelMakoGunEMPE
 		LocalOffset: 500,200,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && upsteel_empquantumweapons
+		RequiresCondition: rank-elite && up_empquantumweapons.steel
 	AttackFrontal:
 	WithMuzzleOverlay:
 	Selectable:
@@ -171,9 +171,9 @@ steel_mako:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
-steel_quantumtank:
+quantumtank.steel:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -195,7 +195,7 @@ steel_quantumtank:
 		Name: Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~upsteel_quantumtank
+		Prerequisites: ~up_quantumtank.steel
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -220,7 +220,7 @@ steel_quantumtank:
 		LocalOffset: 1000,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
 	Armament@Upgrade:
 		Name: primary
 		Weapon: SteelQuantumCannonEMP
@@ -229,7 +229,7 @@ steel_quantumtank:
 		LocalOffset: 1000,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && up_empquantumweapons.steel
 	Armament@elite:
 		Name: primary
 		Weapon: SteelQuantumCannon_elite
@@ -239,9 +239,9 @@ steel_quantumtank:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@upsteel_empquantumweapons:
+	FirepowerMultiplier@up_empquantumweapons.steel:
 		Modifier: 125
-		RequiresCondition: upsteel_empquantumweapons
+		RequiresCondition: up_empquantumweapons.steel
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -256,9 +256,9 @@ steel_quantumtank:
 		PlayerPalette: playerra2cons
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
-steel_manta:
+manta.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -278,7 +278,7 @@ steel_manta:
 		Name: Manta
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~steel_qaweap, ~!upsteel_manta_hunt
+		Prerequisites: ~qaweap.steel, ~!up_manta_hunt.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_manta.description
 	Mobile:
@@ -318,25 +318,25 @@ steel_manta:
 		LocalOffset: 300,100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	Armament@UpgradeAG2:
 		Weapon: SteelMantaAGResonance
 		LocalOffset: 300,-100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	Armament@UpgradeAA1:
 		Weapon: SteelMantaAAResonance
 		LocalOffset: 300,100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	Armament@UpgradeAA2:
 		Weapon: SteelMantaAAResonance
 		LocalOffset: 300,-100,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	ReloadDelayMultiplier@ELITE:
@@ -358,9 +358,9 @@ steel_manta:
 		TargetTypes: Water, Ship
 	WithMoveAnimation:
 	ActorStatValues:
-		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_resonanceammo, upsteel_shielresistance
+		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_resonanceammo.steel, up_shielresistance.steel
 
-steel_manta_hunt:
+manta_hunt.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -381,7 +381,7 @@ steel_manta_hunt:
 		Name: Barracuda
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~upsteel_manta_hunt
+		Prerequisites: ~up_manta_hunt.steel
 		Queue: Vehicle, RAVehicle
 		Description: Kills Infantry better
 	Mobile:
@@ -438,7 +438,7 @@ steel_manta_hunt:
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	Armament@UpgradeAG2:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsResonance
@@ -447,7 +447,7 @@ steel_manta_hunt:
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	Armament@UpgradeAA1:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsAAResonance
@@ -456,7 +456,7 @@ steel_manta_hunt:
 		LocalOffset: 500,200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	Armament@UpgradeAA2:
 		Name: primary
 		Weapon: SteelMantaHunterCannonsAAResonance
@@ -465,7 +465,7 @@ steel_manta_hunt:
 		LocalOffset: 500,-200,-150
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	RangeMultiplier@Barracuda:
 		Modifier: 83
 	FirepowerMultiplier@DualWeapon:
@@ -490,9 +490,9 @@ steel_manta_hunt:
 		BobDistance: -64
 		InitialHeight: 384
 	ActorStatValues:
-		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_resonanceammo, upsteel_shielresistance
+		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_resonanceammo.steel, up_shielresistance.steel
 
-steel_mega:
+mega.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -513,7 +513,7 @@ steel_mega:
 		Name: Megalodon
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~steel_qatech
+		Prerequisites: ~qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_mega.description
 	Mobile:
@@ -533,13 +533,13 @@ steel_mega:
 		RequiresCondition: !rank-elite
 	Armament@ELITE:
 		Weapon: SteelMegaSwordEMP
-		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && up_empquantumweapons.steel
 	Armament@elite:
 		Weapon: SteelMegaSwordE
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@upsteel_empquantumweapons:
+	FirepowerMultiplier@up_empquantumweapons.steel:
 		Modifier: 125
-		RequiresCondition: upsteel_empquantumweapons
+		RequiresCondition: up_empquantumweapons.steel
 	AttackFrontal:
 		FacingTolerance: 10
 	WithInfantryBody:
@@ -557,9 +557,9 @@ steel_mega:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
-steel_arty:
+arty.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -576,7 +576,7 @@ steel_arty:
 		Name: Hammerhead Artillery Tank
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~steel_qtradr
+		Prerequisites: ~qtradr.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_arty.description
 	Mobile:
@@ -660,9 +660,9 @@ steel_arty:
 		QuantizedFacings: 32
 	-QuantizeFacingsFromSequence:
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_potnk:
+potnk.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -685,7 +685,7 @@ steel_potnk:
 		Name: Poseidon Tank
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_qtradr
+		Prerequisites: ~qtradr.steel
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:
@@ -726,7 +726,7 @@ steel_potnk:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
-		InitialUnits: steel_fedinf,steel_board_inf,steel_qinf,steel_fedinf,steel_board_inf,steel_qinf
+		InitialUnits: fedinf.steel,board_inf.steel,qinf.steel,fedinf.steel,board_inf.steel,qinf.steel
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	RenderSprites:
@@ -737,9 +737,9 @@ steel_potnk:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_dagger:
+dagger.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -757,7 +757,7 @@ steel_dagger:
 		Name: Dagger
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~upsteel_dagger, steel_qatech
+		Prerequisites: ~up_dagger.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-aahowi.description
 	Mobile:
@@ -795,9 +795,9 @@ steel_dagger:
 	Voiced:
 		VoiceSet: SteelConsortiumTankVoice
 	ActorStatValues:
-		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_beholder:
+beholder.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -815,7 +815,7 @@ steel_beholder:
 		Name: Beholder
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~upsteel_beholder, steel_qatech
+		Prerequisites: ~up_beholder.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:
@@ -869,4 +869,4 @@ steel_beholder:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel

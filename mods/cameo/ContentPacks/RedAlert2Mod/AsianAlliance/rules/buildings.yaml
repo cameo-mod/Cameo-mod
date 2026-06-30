@@ -1,4 +1,4 @@
-aa_cgcnst:
+cgcnst.asian:
 	Inherits: ^RA2Building
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^4x3Shape
@@ -9,7 +9,7 @@ aa_cgcnst:
 		Footprint: xxxx xxxx xxxx
 		Dimensions: 4,3
 	Transforms:
-		IntoActor: aa_acv
+		IntoActor: acv.asian
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -28,10 +28,10 @@ aa_cgcnst:
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: aa_cgcnst.infiltrated
+		Proxy: cgcnst_infiltrated.asian
 		Types: TechStealerInfiltrate
 
-aa_cgapwr:
+cgapwr.asian:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -44,7 +44,7 @@ aa_cgapwr:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template-power.description
-		Prerequisites: ~aa_cgcnst
+		Prerequisites: ~cgcnst.asian
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -61,7 +61,7 @@ aa_cgapwr:
 		Sequence: idle-glow
 	ProvidesPrerequisite@buildingname:
 
-aa_cgbrck:
+cgbrck.asian:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -69,7 +69,7 @@ aa_cgbrck:
 	Tooltip:
 		Name: Asian Barracks
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgapwr
+		Prerequisites: ~cgcnst.asian, cgapwr.asian
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -88,7 +88,7 @@ aa_cgbrck:
 	Voiced:
 		VoiceSet: PRCBarracksVoice
 
-aa_cgrefn:
+cgrefn.asian:
 	Inherits: ^RA2Building
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -96,7 +96,7 @@ aa_cgrefn:
 	Tooltip:
 		Name: Asian Ore Refinery
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgapwr
+		Prerequisites: ~cgcnst.asian, cgapwr.asian
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -108,19 +108,19 @@ aa_cgrefn:
 		MaxQueueLength: 15
 	DrawLineToTarget:
 	FreeActor@1:
-		Actor: aa_drmn
+		Actor: drmn.asian
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@2:
-		Actor: aa_drmn
+		Actor: drmn.asian
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@3:
-		Actor: aa_drmn
+		Actor: drmn.asian
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@4:
-		Actor: aa_drmn
+		Actor: drmn.asian
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
@@ -131,13 +131,13 @@ aa_cgrefn:
 	Voiced:
 		VoiceSet: PRCSupplyVoice
 
-aa_cgweap:
+cgweap.asian:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^AASpawnActorsOnSell
 	Tooltip:
 		Name: Asian War Factory
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgrefn
+		Prerequisites: ~cgcnst.asian, cgrefn.asian
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -150,7 +150,7 @@ aa_cgweap:
 	Voiced:
 		VoiceSet: PRCWarFactoryVoice
 
-aa_cgdept:
+cgdept.asian:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -163,7 +163,7 @@ aa_cgdept:
 	Tooltip:
 		Name: Asian Service Depot
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgweap
+		Prerequisites: ~cgcnst.asian, cgweap.asian
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -181,7 +181,7 @@ aa_cgdept:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-aa_cgradr:
+cgradr.asian:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^2x2Shape
@@ -194,7 +194,7 @@ aa_cgradr:
 	ProvidesPrerequisite:
 		Prerequisite: anyhq
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgrefn
+		Prerequisites: ~cgcnst.asian, cgrefn.asian
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -217,7 +217,7 @@ aa_cgradr:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-aa_cgtech:
+cgtech.asian:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -229,7 +229,7 @@ aa_cgtech:
 		BuildPaletteOrder: 140
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~aa_cgcnst, aa_cgradr
+		Prerequisites: ~cgcnst.asian, cgradr.asian
 		Description: template-tech-center.description
 	Tooltip:
 		Name: Asian Battle Lab
@@ -243,7 +243,7 @@ aa_cgtech:
 	Production@Research:
 		Produces: Research
 
-aa_cgmiac:
+cgmiac.asian:
 	Inherits: ^RA2Building
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -255,7 +255,7 @@ aa_cgmiac:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 140
 		BuildLimit: 1
-		Prerequisites: ~aa_cgcnst, aa_cgtech, derricklimit
+		Prerequisites: ~cgcnst.asian, cgtech.asian, derricklimit
 		Description: Upgrades the Veterancy of Troops.
 	Tooltip:
 		Name: Military Academy
@@ -310,13 +310,13 @@ aa_cgmiac:
 	Voiced:
 		VoiceSet: CHPropagandaCenterVoice
 
-aa_cgairf:
+cgairf.asian:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgradr
+		Prerequisites: ~cgcnst.asian, cgradr.asian
 	Tooltip:
 		Name: Asian Airforce Command
 	Building:
@@ -335,9 +335,9 @@ aa_cgairf:
 		OrderName: AAClusterBomb
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: upaa_clusterbombs
-			2: upaa_chaosbombs
-		IconImage: aa_tankmine
+			1: up_clusterbombs.asian
+			2: up_chaosbombs.asian
+		IconImage: tankmine.asian
 		Icons:
 			1: icon
 			2: icon2
@@ -352,8 +352,8 @@ aa_cgairf:
 		CameraActor: camera
 		CameraRemoveDelay: 150
 		UnitTypes:
-			1: aa_bomber.minebomb
-			2: aa_bomber.minebomb2
+			1: bomber_minebomb.asian
+			2: bomber_minebomb2.asian
 		QuantizedFacings: 16
 		DisplayBeacon: true
 		BeaconPosters:
@@ -374,20 +374,20 @@ aa_cgairf:
 		OrderName: aaparatroopers
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: upaa_massparadrop
-			2: upaa_massparadrop, upaa_japrif
-			3: upaa_massparadrop, upaa_plast
-			4: upaa_massparadrop, upaa_samurai
-			5: upaa_massparadrop, upaa_japrif, upaa_plast
-			6: upaa_massparadrop, upaa_plast, upaa_samurai
-			7: upaa_massparadrop, upaa_japrif, upaa_samurai
-			8: upaa_massparadrop, upaa_japrif, upaa_plast, upaa_samurai
-			9: upaa_massparadrop, upaa_plast, upaa_samurai, upaa_archer
-			10: upaa_massparadrop, upaa_japrif, upaa_samurai, upaa_archer
-			11: upaa_massparadrop, upaa_japrif, upaa_plast, upaa_samurai, upaa_archer
-			12: upaa_massparadrop, upaa_plast, upaa_samurai, upaa_archer, upaa_asdf
-			13: upaa_massparadrop, upaa_japrif, upaa_samurai, upaa_archer, upaa_asdf
-			14: upaa_massparadrop, upaa_japrif, upaa_plast, upaa_samurai, upaa_archer, upaa_asdf
+			1: up_massparadrop.asian
+			2: up_massparadrop.asian, up_japrif.asian
+			3: up_massparadrop.asian, up_plast.asian
+			4: up_massparadrop.asian, up_samurai.asian
+			5: up_massparadrop.asian, up_japrif.asian, up_plast.asian
+			6: up_massparadrop.asian, up_plast.asian, up_samurai.asian
+			7: up_massparadrop.asian, up_japrif.asian, up_samurai.asian
+			8: up_massparadrop.asian, up_japrif.asian, up_plast.asian, up_samurai.asian
+			9: up_massparadrop.asian, up_plast.asian, up_samurai.asian, up_archer.asian
+			10: up_massparadrop.asian, up_japrif.asian, up_samurai.asian, up_archer.asian
+			11: up_massparadrop.asian, up_japrif.asian, up_plast.asian, up_samurai.asian, up_archer.asian
+			12: up_massparadrop.asian, up_plast.asian, up_samurai.asian, up_archer.asian, up_asdf.asian
+			13: up_massparadrop.asian, up_japrif.asian, up_samurai.asian, up_archer.asian, up_asdf.asian
+			14: up_massparadrop.asian, up_japrif.asian, up_plast.asian, up_samurai.asian, up_archer.asian, up_asdf.asian
 		Icons:
 			1: paratroopers
 			2: paratroopers
@@ -435,20 +435,20 @@ aa_cgairf:
 			13: Deploys 3 ultimate squads including Fanatics, Samurai, Archers, and the ASDF specialist.
 			14: Deploys 3 supreme squads featuring the full might of the Alliance, including the ASDF specialist.
 		DropItems:
-			1: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_alligator,aa_gren,aa_tkiller,aa_flam
-			2: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif
-			3: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast
-			4: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_samurai
-			5: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast
-			6: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai
-			7: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai
-			8: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai
-			9: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_archer,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_archer,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_archer
-			10: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_archer,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_archer,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_archer
-			11: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_archer,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_archer,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_archer
-			12: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_archer,aa_asdf,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_archer,aa_asdf,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_plast,aa_samurai,aa_archer,aa_asdf
-			13: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_archer,aa_asdf,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_archer,aa_asdf,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_samurai,aa_archer,aa_asdf
-			14: aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_archer,aa_asdf,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_archer,aa_asdf,aa_alligator,aa_gren,aa_tkiller,aa_flam,aa_japrif,aa_plast,aa_samurai,aa_archer,aa_asdf
+			1: alligator.asian,gren.asian,tkiller.asian,flam.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian
+			2: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian
+			3: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian
+			4: alligator.asian,gren.asian,tkiller.asian,flam.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,samurai.asian
+			5: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian
+			6: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian
+			7: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian
+			8: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian
+			9: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian
+			10: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian
+			11: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian
+			12: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,asdf.asian
+			13: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,asdf.asian
+			14: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,asdf.asian
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
 		SelectTargetSpeechNotification: SelectTarget
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -521,7 +521,7 @@ aa_cgairf:
 	Voiced:
 		VoiceSet: PRCAirfieldVoice
 
-aa_cgflam:
+cgflam.asian:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@FireActor: ^FireActor
@@ -533,7 +533,7 @@ aa_cgflam:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgcnst, aa_cgbrck
+		Prerequisites: ~cgcnst.asian, cgbrck.asian
 		Description: template-anti-infantry-defense.description
 	Valued:
 		Cost: 800
@@ -570,9 +570,9 @@ aa_cgflam:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: asian_upgrade_dragonfire
+		Upgrades: upgrade_dragonfire.asian
 
-aa_cgpnch:
+cgpnch.asian:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -582,7 +582,7 @@ aa_cgpnch:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgyard
+		Prerequisites: ~cgyard.asian
 		Description: actor-cgpnch.description
 	Valued:
 		Cost: 1200
@@ -608,13 +608,13 @@ aa_cgpnch:
 		LocalOffset: 350,22,100, 350,-22,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !asian_upgrade_celestialpower
+		RequiresCondition: !upgrade_celestialpower.asian
 	Armament@Upgrade:
 		Weapon: AsianPunisherAGEMP
 		LocalOffset: 350,22,100, 350,-22,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_upgrade_celestialpower
+		RequiresCondition: upgrade_celestialpower.asian
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -631,9 +631,9 @@ aa_cgpnch:
 		DetectionTypes: Underwater
 		Range: 6000
 	ActorStatValues:
-		Upgrades: asian_upgrade_celestialpower
+		Upgrades: upgrade_celestialpower.asian
 
-aa_cgpuls:
+cgpuls.asian:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -644,7 +644,7 @@ aa_cgpuls:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
-		Prerequisites: ~aa_cgcnst, aa_cgradr
+		Prerequisites: ~cgcnst.asian, cgradr.asian
 		Description: template-anti-aircraft-power-defense.description
 	Valued:
 		Cost: 900
@@ -660,11 +660,11 @@ aa_cgpuls:
 	Armament:
 		Weapon: AsianPhotonCannon
 		LocalOffset: 0,0,400
-		RequiresCondition: !asian_upgrade_celestialpower
+		RequiresCondition: !upgrade_celestialpower.asian
 	Armament@Upgrade:
 		Weapon: AsianPhotonCannonEMP
 		LocalOffset: 0,0,400
-		RequiresCondition: asian_upgrade_celestialpower
+		RequiresCondition: upgrade_celestialpower.asian
 	AttackTurreted:
 	Turreted:
 	Sellable:
@@ -682,9 +682,9 @@ aa_cgpuls:
 	DetectCloaked:
 		Range: 7000
 	ActorStatValues:
-		Upgrades: asian_upgrade_celestialpower
+		Upgrades: upgrade_celestialpower.asian
 
-aa_cgrail:
+cgrail.asian:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -695,7 +695,7 @@ aa_cgrail:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: ~aa_cgcnst, aa_cgtech
+		Prerequisites: ~cgcnst.asian, cgtech.asian
 		Description: template-anti-vehicle-defense.description
 	Valued:
 		Cost: 2500
@@ -746,9 +746,9 @@ aa_cgrail:
 	DetectCloaked:
 		Range: 4800
 	ActorStatValues:
-		Upgrades: asian_upgrade_celestialpower
+		Upgrades: upgrade_celestialpower.asian
 
-aa_cgchtw:
+cgchtw.asian:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -761,7 +761,7 @@ aa_cgchtw:
 		BuildPaletteOrder: 80
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~aa_cgcnst, aa_cgmiac
+		Prerequisites: ~cgcnst.asian, cgmiac.asian
 		Description: actor-cgchtw.description
 	Valued:
 		Cost: 1000
@@ -803,7 +803,7 @@ aa_cgchtw:
 	DetectCloaked:
 		Range: 2500
 
-aa_cgplas:
+cgplas.asian:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -816,7 +816,7 @@ aa_cgplas:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~aa_cgcnst, aa_cgmiac
+		Prerequisites: ~cgcnst.asian, cgmiac.asian
 		Description: actor-cgplas.description
 	Valued:
 		Cost: 4000
@@ -856,9 +856,9 @@ aa_cgplas:
 	DetectCloaked:
 		Range: 7000
 	ActorStatValues:
-		Upgrades: asian_upgrade_dragonfire
+		Upgrades: upgrade_dragonfire.asian
 
-aa_cghype:
+cghype.asian:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -869,7 +869,7 @@ aa_cghype:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgcnst, aa_cgmiac
+		Prerequisites: ~cgcnst.asian, cgmiac.asian
 		Description: actor-cghype.description
 	Valued:
 		Cost: 1000
@@ -904,9 +904,9 @@ aa_cghype:
 	DetectCloaked:
 		Range: 4500
 	ActorStatValues:
-		Upgrades: asian_upgrade_celestialpower
+		Upgrades: upgrade_celestialpower.asian
 
-aa_cgtnkr:
+cgtnkr.asian:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -918,12 +918,12 @@ aa_cgtnkr:
 	Tooltip:
 		Name: Tank Reactor
 	ProvidesPrerequisite:
-		Prerequisite: aa_cgtnkr
+		Prerequisite: cgtnkr.asian
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Building, RABuilding
 		Description: actor-cgtnkr.description
-		Prerequisites: ~aa_cgcnst, aa_cgtech
+		Prerequisites: ~cgcnst.asian, cgtech.asian
 	Building:
 		Footprint: xxx =x=
 		Dimensions: 3,2
@@ -960,13 +960,13 @@ aa_cgtnkr:
 		Position: BottomLeft
 		RequiresSelection: true
 
-aa_cgionc:
+cgionc.asian:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgtech, !aa_cgionc
+		Prerequisites: ~cgcnst.asian, cgtech.asian, !cgionc.asian
 		Description: actor-cgionc.description
 	Tooltip:
 		Name: Advanced Communication Center
@@ -978,7 +978,7 @@ aa_cgionc:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: aa_cgionc
+		IconImage: cgionc.asian
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -1011,9 +1011,9 @@ aa_cgionc:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: aa_cgionc
+		Prerequisite: cgionc.asian
 
-aa_cgchao:
+cgchao.asian:
 	Inherits: ^RA2Building
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@SW: ^Superweapon
@@ -1022,7 +1022,7 @@ aa_cgchao:
 	Tooltip:
 		Name: Chaos Storm Inductor
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgtech
+		Prerequisites: ~cgcnst.asian, cgtech.asian
 		Description: actor-cgchao.description
 	Building:
 		Footprint: =x= xxx xxx
@@ -1034,7 +1034,7 @@ aa_cgchao:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: aa_cgchao
+		IconImage: cgchao.asian
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -1064,7 +1064,7 @@ aa_cgchao:
 		IncomingSound: sgenopen.wav
 	SupportPowerChargeBar:
 
-aa_bomber.minebomb:
+bomber_minebomb.asian:
 	Inherits: BADR
 	Health:
 		HP: 100000
@@ -1089,7 +1089,7 @@ aa_bomber.minebomb:
 		Position: BottomLeft
 		RequiresSelection: True
 	SpawnActorOnDeath:
-		Actor: aa_bomber.Husk
+		Actor: bomber_husk.asian
 	Cloak:
 		CloakDelay: 25
 		CloakSound: trans1.aud
@@ -1099,12 +1099,12 @@ aa_bomber.minebomb:
 		Image: aa_bomber
 		PlayerPalette: playerra2
 
-aa_bomber.minebomb2:
-	Inherits: aa_bomber.minebomb
+bomber_minebomb2.asian:
+	Inherits: bomber_minebomb.asian
 	Armament:
 		Weapon: AsianMineBomb2
 
-aa_cgyard:
+cgyard.asian:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
@@ -1114,7 +1114,7 @@ aa_cgyard:
 	Tooltip:
 		Name: Asian Naval Yard
 	Buildable:
-		Prerequisites: ~aa_cgcnst, aa_cgrefn, ~globalnaval
+		Prerequisites: ~cgcnst.asian, cgrefn.asian, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -1131,19 +1131,19 @@ aa_cgyard:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 
-aa_awall:
+awall.asian:
 	Inherits: BRIK
 	RenderSprites:
-		Image: aa_awall
+		Image: awall.asian
 		Palette: ra2
 		PlayerPalette: playerra2
 	Buildable:
-		Prerequisites: ~aa_cgcnst
+		Prerequisites: ~cgcnst.asian
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2
 		PlayerPalette: playerra2
-		Type: aa_awall
+		Type: awall.asian
 
 ##############################################
 ##############################################

@@ -1,4 +1,4 @@
-futu_egcnst:
+egcnst.futu:
 	Inherits: ^RA2Building
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^5x3Shape
@@ -11,7 +11,7 @@ futu_egcnst:
 		Footprint: =xxx= xxxxx =xxx=
 		Dimensions: 5,3
 	Transforms:
-		IntoActor: futu_mcv
+		IntoActor: mcv.futu
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -34,10 +34,10 @@ futu_egcnst:
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: futu_egcnst.infiltrated
+		Proxy: egcnst_infiltrated.futu
 		Types: TechStealerInfiltrate
 
-futu_ggpowr:
+ggpowr.futu:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
@@ -50,7 +50,7 @@ futu_ggpowr:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template-power.description
-		Prerequisites: ~futu_egcnst
+		Prerequisites: ~egcnst.futu
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -73,7 +73,7 @@ futu_ggpowr:
 		RequiresCondition: !build-incomplete && damaged
 	ProvidesPrerequisite@buildingname:
 
-futu_egrefn:
+egrefn.futu:
 	Inherits: ^RA2Building
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -81,7 +81,7 @@ futu_egrefn:
 	Tooltip:
 		Name: FutureTech Refinery
 	Buildable:
-		Prerequisites: ~futu_egcnst, futu_ggpowr
+		Prerequisites: ~egcnst.futu, ggpowr.futu
 		Description: actor-futu_egrefn.description
 	Building:
 		Footprint: xxx= xxx= x+==
@@ -92,7 +92,7 @@ futu_egrefn:
 		DockOffset: 1086,1086,0
 	DrawLineToTarget:
 	FreeActor:
-		Actor: futu_harv
+		Actor: harv.futu
 		SpawnOffset: 3,2
 		Facing: 128
 	SelectionDecorations:
@@ -108,7 +108,7 @@ futu_egrefn:
 	RenderSprites:
 		PlayerPalette: playerra2future1
 
-futu_egpile:
+egpile.futu:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
@@ -116,7 +116,7 @@ futu_egpile:
 	Tooltip:
 		Name: Troop Gate
 	Buildable:
-		Prerequisites: ~futu_egcnst, futu_ggpowr
+		Prerequisites: ~egcnst.futu, ggpowr.futu
 		Description: actor-futu_egpile.description
 	Building:
 		Footprint: xxx xxx ===
@@ -145,13 +145,13 @@ futu_egpile:
 	RenderSprites:
 		PlayerPalette: playerra2future1
 
-futu_egweap2:
+egweap2.futu:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
 	Tooltip:
 		Name: Warp Gate
 	Buildable:
-		Prerequisites: ~futu_egcnst, futu_egrefn
+		Prerequisites: ~egcnst.futu, egrefn.futu
 		Description: actor-futu_egweap2.description
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
@@ -174,7 +174,7 @@ futu_egweap2:
 	RenderSprites:
 		PlayerPalette: playerra2future1
 
-yrgarobo:
+yrgarobo.futu:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^2x2Shape
@@ -190,7 +190,7 @@ yrgarobo:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 140
-		Prerequisites: ~futu_egcnst, futu_egweap2
+		Prerequisites: ~egcnst.futu, egweap2.futu
 		Description: actor-yrgarobo.description
 	Building:
 		Footprint: == xx
@@ -202,7 +202,7 @@ yrgarobo:
 		Prerequisite: robotcontrol
 		RequiresCondition: !disabled
 
-futu_egtf:
+egtf.futu:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
@@ -210,7 +210,7 @@ futu_egtf:
 	Tooltip:
 		Name: Transmission Center
 	Buildable:
-		Prerequisites: ~futu_egcnst, futu_egrefn
+		Prerequisites: ~egcnst.futu, egrefn.futu
 		Description: actor-futu_egtf.description
 	Building:
 		Footprint: === xxx xxx
@@ -236,14 +236,14 @@ futu_egtf:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-futu_launchpad:
+launchpad.futu:
 	Inherits: ^RA2Building
 	Inherits@shape: ^5x3Shape
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~futu_egcnst, futu_egtf
+		Prerequisites: ~egcnst.futu, egtf.futu
 		Description: actor-gaairc.description
 	Tooltip:
 		Name: FutureTech Launch Pad
@@ -258,11 +258,11 @@ futu_launchpad:
 		ExitCell: 1,1
 		Facing: 768
 		SpawnOffset: 0,0,4000
-		ProductionTypes: future_harbinger
+		ProductionTypes: harbinger.futu
 	Production@NORMAL:
-		Produces: Aircraft, future_harbinger
+		Produces: Aircraft, harbinger.futu
 	Production@CLASSICPRODUCTIONQUEUES:
-		Produces: RAAircraft, future_harbinger
+		Produces: RAAircraft, harbinger.futu
 	Reservable:
 	SpawnNeighboringActors:
 		ActorTypes: dummy_dock
@@ -271,9 +271,9 @@ futu_launchpad:
 	ParatroopersPower@ra2paratroopers:
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: futu_launchpad
+			1: launchpad.futu
 		OrderName: USA Paratroopers
-		IconImage: futu_launchpad
+		IconImage: launchpad.futu
 		Icons:
 			1: icon2
 		ChargeInterval: 6000
@@ -282,7 +282,7 @@ futu_launchpad:
 		Descriptions:
 			1: power-paratroopers.description
 		DropItems:
-			1: futu_wheel,future_robot_cannon,futu_wheel,future_robot_missiles,futu_wheel,future_robot_shotgun,futu_wheel,future_robot_cannon,futu_wheel,future_robot_missiles,futu_wheel,future_robot_shotgun,futu_wheel
+			1: wheel.futu,robot_cannon.futu,wheel.futu,robot_missiles.futu,wheel.futu,robot_shotgun.futu,wheel.futu,robot_cannon.futu,wheel.futu,robot_missiles.futu,wheel.futu,robot_shotgun.futu,wheel.futu
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
 		SelectTargetSpeechNotification: SelectTarget
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -321,7 +321,7 @@ futu_launchpad:
 		PauseOnCondition: disabled
 		RequiresCondition: !build-incomplete
 
-futu_egtech:
+egtech.futu:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
@@ -329,7 +329,7 @@ futu_egtech:
 	Selectable:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
-		Prerequisites: ~futu_egcnst, futu_egtf
+		Prerequisites: ~egcnst.futu, egtf.futu
 		Description: actor-futu_egtech.description
 	Tooltip:
 		Name: FutureTech Battle Lab
@@ -348,7 +348,7 @@ futu_egtech:
 	RenderSprites:
 		PlayerPalette: playerra2future1
 
-futu_egshock:
+egshock.futu:
 	Inherits: ^RA2Building
 	Inherits@sell: ^FutureTechSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
@@ -360,7 +360,7 @@ futu_egshock:
 		Name: Hypercore
 	Buildable:
 		BuildLimit: 1
-		Prerequisites: ~futu_egcnst, futu_egtech, derricklimit
+		Prerequisites: ~egcnst.futu, egtech.futu, derricklimit
 		BuildPaletteOrder: 999
 		BuildDuration: 1500
 		BuildDurationModifier: 100
@@ -391,11 +391,11 @@ futu_egshock:
 		Weapon: ReactorNuke
 		RequiresCondition: !chronobeamed
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: futu_egshock
+		Prerequisite: egshock.futu
 	RenderSprites:
 		PlayerPalette: playerra2future2
 
-futu_gggun:
+gggun.futu:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -406,7 +406,7 @@ futu_gggun:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~futu_egcnst, futu_egtech
+		Prerequisites: ~egcnst.futu, egtech.futu
 		Description: actor-futu_gggun.description
 	Valued:
 		Cost: 1500
@@ -447,7 +447,7 @@ futu_gggun:
 		Range: 3562
 	ProvidesPrerequisite@buildingname:
 
-futu_ggmlt:
+ggmlt.futu:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -460,7 +460,7 @@ futu_ggmlt:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~futu_egcnst, futu_egpile
+		Prerequisites: ~egcnst.futu, egpile.futu
 		Description: actor-futu_ggmlt.description
 	Valued:
 		Cost: 800

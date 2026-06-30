@@ -1,4 +1,4 @@
-up_ostfrontexperience:
+up_ostfrontexperience.futu:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ostfront Experience
@@ -8,12 +8,12 @@ up_ostfrontexperience:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Infantry gets 15% to range, damage and armor
-		Prerequisites: ~nax_radar, !up_ostfrontexperience
+		Prerequisites: ~radar.nax, !up_ostfrontexperience.futu
 	RenderSprites:
 		Image: ostfrontexperienceicon
 	ProvidesPrerequisite:
 
-up_atlantikwall:
+up_atlantikwall.futu:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Atlantikwall
@@ -23,12 +23,12 @@ up_atlantikwall:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Defenses get 20% armor and automatic repair.
-		Prerequisites: ~nax_radar, !up_atlantikwall
+		Prerequisites: ~radar.nax, !up_atlantikwall.futu
 	RenderSprites:
 		Image: atlantikwallicon
 	ProvidesPrerequisite:
 
-up_tankarsenalrenovation:
+up_tankarsenalrenovation.futu:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Tank Arsenal Renovation
@@ -38,12 +38,12 @@ up_tankarsenalrenovation:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Tier I-II gain 15% to speed, damage, reload speed and armor
-		Prerequisites: ~nax_tech, !up_tankarsenalrenovation
+		Prerequisites: ~tech.nax, !up_tankarsenalrenovation.futu
 	RenderSprites:
 		Image: tankarsenalrenovationicon
 	ProvidesPrerequisite:
 
-up_massopticsintegration:
+up_massopticsintegration.futu:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Mass Optics Integration
@@ -53,12 +53,12 @@ up_massopticsintegration:
 		BuildPaletteOrder: 100
 		Queue: Research
 		Description: Increase accuracy, vision, detection and attack range of scouts, artillery and AA by 25%
-		Prerequisites: ~nax_tech, !up_massopticsintegration
+		Prerequisites: ~tech.nax, !up_massopticsintegration.futu
 	RenderSprites:
 		Image: massopticsintegrationicon
 	ProvidesPrerequisite:
 
-up_wunderwaffe:
+up_wunderwaffe.futu:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Wunderwaffe
@@ -68,12 +68,12 @@ up_wunderwaffe:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: High Tier vehicles get 20% to attack speed, damage and armor
-		Prerequisites: ~nax_tech, !up_wunderwaffe
+		Prerequisites: ~tech.nax, !up_wunderwaffe.futu
 	RenderSprites:
 		Image: wunderwaffeicon
 	ProvidesPrerequisite:
 
-up_blitzkrieg:
+up_blitzkrieg.futu:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Blitzkrieg
@@ -83,17 +83,17 @@ up_blitzkrieg:
 		BuildPaletteOrder: 130
 		Queue: Research
 		Description: upgrade-blitzkrieg.description
-		Prerequisites: ~nax_tech, !up_blitzkrieg
+		Prerequisites: ~tech.nax, !up_blitzkrieg.futu
 	RenderSprites:
 		Image: blitzkriegicon
 	# ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
-		Actor: team_upgrade.up_blitzkrieg
+		Actor: up_team_blitzkrieg.futu
 
-team_upgrade.up_blitzkrieg:
+up_team_blitzkrieg.futu:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_blitzkrieg
+		Prerequisite: up_blitzkrieg.futu
 	RenderSprites:
 		Image: blitzkriegicon
 	Tooltip:
@@ -102,7 +102,7 @@ team_upgrade.up_blitzkrieg:
 		Description: Increase all vehicles movement speed by 25%
 	PlayerDisplayUpgrade:
 
-up_nax_horten:
+up_nax_horten.futu:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Horten Bomber Strike
@@ -110,12 +110,12 @@ up_nax_horten:
 		BuildPaletteOrder: 118
 		Queue: Promotions
 		Description: Upgrades Horten Bombers from 3 to 5 Planes.
-		Prerequisites: ~nax_conyard, upnax_shrek, !up_nax_horten, rank1
+		Prerequisites: ~conyard.nax, up_shrek.nax, !up_nax_horten.futu, rank1
 	RenderSprites:
 		Image: nax_horten
 	ProvidesPrerequisite:
 
-up_nax_horten2:
+up_nax_horten2.futu:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Horten Bomber Strike
@@ -123,7 +123,7 @@ up_nax_horten2:
 		BuildPaletteOrder: 121
 		Queue: Promotions
 		Description: Upgrades Horten Bombers from 5 to 7 Planes.
-		Prerequisites: ~nax_conyard, up_nax_horten, !up_nax_horten2, rank1
+		Prerequisites: ~conyard.nax, up_nax_horten.futu, !up_nax_horten2.futu, rank1
 	RenderSprites:
 		Image: nax_horten
 	ProvidesPrerequisite:
@@ -131,7 +131,7 @@ up_nax_horten2:
 ####################################################################################################
 #		Red Alert 2 Naxis Planes
 ####################################################################################################
-futu_egcnst.infiltrated:
+egcnst_infiltrated.futu:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Stolen FutureTech Building Plans
@@ -139,39 +139,39 @@ futu_egcnst.infiltrated:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: futu_egcnst
+		Prerequisite: egcnst.futu
 	RenderSprites:
-		Image: futu_egcnst
+		Image: egcnst.futu
 
-future_upgrade_equalizer_x1:
+upgrade_equalizer_x1.futu:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Equalizer X1
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~futu_egtf, !future_upgrade_equalizer_x1
+		Prerequisites: ~egtf.futu, !upgrade_equalizer_x1.futu
 	RenderSprites:
-		Image: future_upgrade_equalizer_x1
+		Image: upgrade_equalizer_x1.futu
 	ProvidesPrerequisite:
 
-future_upgrade_equalizer_x2:
+upgrade_equalizer_x2.futu:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Equalizer X2
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~futu_egtf, futu_egtech, future_upgrade_equalizer_x1, !future_upgrade_equalizer_x2
+		Prerequisites: ~egtf.futu, egtech.futu, upgrade_equalizer_x1.futu, !upgrade_equalizer_x2.futu
 	RenderSprites:
-		Image: future_upgrade_equalizer_x2
+		Image: upgrade_equalizer_x2.futu
 	ProvidesPrerequisite:
 
-future_upgrade_equalizer_x3:
+upgrade_equalizer_x3.futu:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Equalizer X3
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~futu_egtf, futu_egtech, futu_egshock, future_upgrade_equalizer_x2, !future_upgrade_equalizer_x3
+		Prerequisites: ~egtf.futu, egtech.futu, egshock.futu, upgrade_equalizer_x2.futu, !upgrade_equalizer_x3.futu
 	RenderSprites:
-		Image: future_upgrade_equalizer_x3
+		Image: upgrade_equalizer_x3.futu
 	ProvidesPrerequisite:

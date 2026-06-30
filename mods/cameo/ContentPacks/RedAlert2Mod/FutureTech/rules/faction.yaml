@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: futuretech
-		BaseActor: futu_mcv
+		BaseActor: mcv.futu
 	StartingUnits@defaultfuturetech:
 		Class: light
 		ClassName: Light Support
 		Factions: futuretech
-		BaseActor: futu_mcv
-		SupportActors: futu_wheel,futu_wheel,futu_wheel,future_robot_missiles,future_robot_missiles,future_robot_cannon,future_robot_cannon
+		BaseActor: mcv.futu
+		SupportActors: wheel.futu,wheel.futu,wheel.futu,robot_missiles.futu,robot_missiles.futu,robot_cannon.futu,robot_cannon.futu
 	StartingUnits@heavyfuturetech:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: futuretech
-		BaseActor: futu_mcv
-		SupportActors: futu_wheel,futu_wheel,futu_wheel,future_robot_missiles,future_robot_missiles,future_robot_cannon,future_robot_cannon,future_robot_cannon,future_robot_cannon,future_robot_cannon,future_robot_missiles
+		BaseActor: mcv.futu
+		SupportActors: wheel.futu,wheel.futu,wheel.futu,robot_missiles.futu,robot_missiles.futu,robot_cannon.futu,robot_cannon.futu,robot_cannon.futu,robot_cannon.futu,robot_cannon.futu,robot_missiles.futu

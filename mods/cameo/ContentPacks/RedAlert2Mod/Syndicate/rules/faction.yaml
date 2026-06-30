@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: syndicate
-		BaseActor: latin_mcv
+		BaseActor: mcv.latin
 	StartingUnits@defaultsyndicate:
 		Class: light
 		ClassName: Light Support
 		Factions: syndicate
-		BaseActor: latin_mcv
-		SupportActors: latin_mili,latin_mili,latin_mili,latin_fftr,latin_fftr,nax_wirbelwind,nax_tiger
+		BaseActor: mcv.latin
+		SupportActors: mili.latin,mili.latin,mili.latin,fftr.latin,fftr.latin,wirbelwind.nax,tiger.nax
 	StartingUnits@heavysyndicate:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: syndicate
-		BaseActor: latin_mcv
-		SupportActors: latin_mili,latin_mili,latin_mili,latin_fftr,latin_fftr,nax_wirbelwind,nax_tiger,nax_tiger,nax_tiger,aa_ptnk,nax_wirbelwind
+		BaseActor: mcv.latin
+		SupportActors: mili.latin,mili.latin,mili.latin,fftr.latin,fftr.latin,wirbelwind.nax,tiger.nax,tiger.nax,tiger.nax,ptnk.asian,wirbelwind.nax

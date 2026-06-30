@@ -1591,14 +1591,14 @@ AsianMineSpawner:
 	Range: 7000
 	ReloadDelay: 35
 	Projectile: Bullet
-		Image: aa_tankmine
+		Image: tankmine.asian
 		Sequences: idle
 		Blockable: false
 		Speed: 250
 		Palette: playerra2
 		IsPlayerPalette: true
 	Warhead@1: SpawnActorOrWeapon
-		Actors: aa_tankmine
+		Actors: tankmine.asian
 		Weapon: AsianTankMine
 		Range: 3
 		ValidTargets: Ground, Water, Air
@@ -1618,14 +1618,14 @@ AsianMineSpawner2:
 	Range: 7000
 	ReloadDelay: 35
 	Projectile: Bullet
-		Image: aa_chaomine
+		Image: chaomine.asian
 		Sequences: idle
 		Blockable: false
 		Speed: 250
 		Palette: playerra2
 		IsPlayerPalette: true
 	Warhead@1: SpawnActorOrWeapon
-		Actors: aa_chaomine
+		Actors: chaomine.asian
 		Weapon: AsianChaosMine
 		Range: 3
 		ValidTargets: Ground, Water, Air
@@ -4462,7 +4462,7 @@ SteelSupportSpawner1:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: steel_cougar, steel_cougar, steel_cougar, steel_cougar, steel_cougar, steel_hummer, steel_hummer
+		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel
 		Range: 5
 		Image: ra2cmin
 		Sequence: warpout
@@ -4474,7 +4474,7 @@ SteelSupportSpawner2:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: steel_cougar, steel_cougar, steel_cougar, steel_cougar, steel_hummer, steel_hummer, steel_hummer, steel_oldqtnk
+		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel
 		Range: 5
 		Image: ra2cmin
 		Sequence: warpout
@@ -4486,7 +4486,7 @@ SteelSupportSpawner3:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: steel_cougar, steel_cougar, steel_cougar, steel_hummer, steel_hummer, steel_hummer, steel_hummer, steel_oldqtnk, steel_oldqtnk
+		Actors: cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel
 		Range: 5
 		Image: ra2cmin
 		Sequence: warpout
@@ -4498,7 +4498,7 @@ SteelSupportSpawner4:
 	ReloadDelay: 1
 	Projectile: InstantExplode
 	Warhead@1Actor: SpawnActor
-		Actors: steel_cougar, steel_cougar, steel_hummer, steel_hummer, steel_hummer, steel_hummer, steel_hummer, steel_oldqtnk, steel_oldqtnk, steel_cobra
+		Actors: cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel, cobra.steel
 		Range: 5
 		Image: ra2cmin
 		Sequence: warpout
@@ -6015,7 +6015,7 @@ BlackHoleMaker:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@1Actor: SpawnActor
-		Actors: nax_hole_small
+		Actors: hole_small.nax
 		#OwnerType: InternalName
 		#InternalOwner: Creeps
 		Range: 5
@@ -6458,7 +6458,7 @@ NaxZombieSupportWeaponZombies:
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
 		Delay: 10
 	Warhead@Actor1: SpawnActorOrWeapon
-		Actors: nax_undead
+		Actors: undead.nax
 		Delay: 10
 		Weapon: AsianTankMine
 		Range: 12
@@ -6475,7 +6475,7 @@ NaxZombieSupportWeaponFranks:
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
 		Delay: 10
 	Warhead@Actor2: SpawnActorOrWeapon
-		Actors: nax_frank
+		Actors: frank.nax
 		Delay: 10
 		Weapon: AsianTankMine
 		Range: 12
@@ -6492,7 +6492,7 @@ NaxZombieSupportWeaponTanks:
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
 		Delay: 10
 	Warhead@Actor2: SpawnActorOrWeapon
-		Actors: nax_zombietank
+		Actors: zombietank.nax
 		Delay: 10
 		Weapon: AsianTankMine
 		Range: 12
@@ -6924,7 +6924,7 @@ MeteorFlameFragment:
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@Aliens: SpawnActorOrWeapon
-		Actors: nax_alien
+		Actors: alien.nax
 		Weapon: AsianTankMine
 		Range: 12
 		FallRate: 100

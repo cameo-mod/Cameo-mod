@@ -1,4 +1,4 @@
-steel_qacst:
+qacst.steel:
 	Inherits: ra2gacnst
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@shape: ^4x3Shape
@@ -11,21 +11,21 @@ steel_qacst:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-1024,0
 	Transforms:
-		IntoActor: steel_qmcv
+		IntoActor: qmcv.steel
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_shielresistance
+		Upgrades: up_shielresistance.steel
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
-		Proxy: steel_qacst.infiltrated
+		Proxy: qacst_infiltrated.steel
 		Types: TechStealerInfiltrate
 	-ProvidesPrerequisite@ra2oilderrick:
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qapowr:
+qapowr.steel:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@water: ^SteelUnderwaterStructure
@@ -40,7 +40,7 @@ steel_qapowr:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template-power.description
-		Prerequisites: ~steel_qacst
+		Prerequisites: ~qacst.steel
 	Building:
 		Footprint: == xx
 		Dimensions: 2,2
@@ -62,9 +62,9 @@ steel_qapowr:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qref:
+qref.steel:
 	Inherits: ^RA2Building
 	Inherits@ref: ^Refinery
 	Inherits@water: ^SteelUnderwaterStructure
@@ -74,7 +74,7 @@ steel_qref:
 	Tooltip:
 		Name: Consortium Refinery
 	Buildable:
-		Prerequisites: ~steel_qacst, steel_qapowr
+		Prerequisites: ~qacst.steel, qapowr.steel
 	Building:
 		Footprint: xxx= xxxx =xx=
 		Dimensions: 4,3
@@ -86,7 +86,7 @@ steel_qref:
 		DockOffset: 1086,1086,0
 	DrawLineToTarget:
 	FreeActor:
-		Actor: steel_qmin
+		Actor: qmin.steel
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
@@ -99,9 +99,9 @@ steel_qref:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qabarr:
+qabarr.steel:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
@@ -112,7 +112,7 @@ steel_qabarr:
 	Tooltip:
 		Name: Steel Barracks
 	Buildable:
-		Prerequisites: ~steel_qacst, steel_qapowr
+		Prerequisites: ~qacst.steel, qapowr.steel
 	Building:
 		Footprint: xx ==
 		Dimensions: 2,2
@@ -127,9 +127,9 @@ steel_qabarr:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qtradr:
+qtradr.steel:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@radar: ^RadarBuilding
@@ -146,7 +146,7 @@ steel_qtradr:
 	Tooltip:
 		Name: Consortium Radar
 	Buildable:
-		Prerequisites: ~steel_qacst, steel_qref
+		Prerequisites: ~qacst.steel, qref.steel
 	Building:
 		Footprint: === xxx xxx
 		Dimensions: 3,3
@@ -162,10 +162,10 @@ steel_qtradr:
 	DetonateWeaponPower@SteelSupportSpawner:
 		OrderName: SteelSupportSpawner
 		Prerequisites:
-			1: upsteel_conssupp1
-			2: upsteel_conssupp2
-			3: upsteel_conssupp3
-			4: upsteel_conssupp4
+			1: up_conssupp1.steel
+			2: up_conssupp2.steel
+			3: up_conssupp3.steel
+			4: up_conssupp4.steel
 		PauseOnCondition: disabled
 		Icons:
 			1: conssupp1
@@ -201,9 +201,9 @@ steel_qtradr:
 		LaunchSound: schrmov.wav
 		IncomingSound: schrmov.wav
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qaclone:
+qaclone.steel:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
@@ -216,7 +216,7 @@ steel_qaclone:
 		Name: Cloning Vats
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~steel_qacst, steel_qatech
+		Prerequisites: ~qacst.steel, qatech.steel
 		Queue: Building, RABuilding
 		Description: Clones produced infantry.
 		BuildLimit: 1
@@ -246,9 +246,9 @@ steel_qaclone:
 	WithIdleOverlay@top:
 		Sequence: idle-top
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qaweap:
+qaweap.steel:
 	Inherits: ^RA2DefaultWeap
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
@@ -256,7 +256,7 @@ steel_qaweap:
 	Tooltip:
 		Name: Consortium War Factory
 	Buildable:
-		Prerequisites: ~steel_qacst, steel_qref
+		Prerequisites: ~qacst.steel, qref.steel
 	Building:
 		Footprint: =x== xxxx =xxx
 		Dimensions: 4,3
@@ -274,9 +274,9 @@ steel_qaweap:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qatech:
+qatech.steel:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@tech: ^IsTechnoBuilding
@@ -286,7 +286,7 @@ steel_qatech:
 	Selectable:
 		Bounds: 3072, 2048, 0, 0
 	Buildable:
-		Prerequisites: ~steel_qacst, steel_qtradr
+		Prerequisites: ~qacst.steel, qtradr.steel
 	Tooltip:
 		Name: Consortium Battle Lab
 	Building:
@@ -302,8 +302,8 @@ steel_qatech:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: upsteel_emp
-		IconImage: steel_qatech
+			1: up_emp.steel
+		IconImage: qatech.steel
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -333,9 +333,9 @@ steel_qatech:
 		IncomingSound:
 	SupportPowerChargeBar:
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance, upsteel_emp
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel, up_emp.steel
 
-steel_qaorbit:
+qaorbit.steel:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -343,7 +343,7 @@ steel_qaorbit:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
-		Prerequisites: ~steel_qacst, steel_qatech, !steel_qaorbit
+		Prerequisites: ~qacst.steel, qatech.steel, !qaorbit.steel
 		Description: actor-cgionc.description
 	Tooltip:
 		Name: Orbital Cannon Activator
@@ -355,7 +355,7 @@ steel_qaorbit:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: steel_qaorbit
+		IconImage: qaorbit.steel
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -388,16 +388,16 @@ steel_qaorbit:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: steel_qaorbit
+		Prerequisite: qaorbit.steel
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_fedturret:
+fedturret.steel:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -412,7 +412,7 @@ steel_fedturret:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~steel_qacst, steel_qabarr
+		Prerequisites: ~qacst.steel, qabarr.steel
 		Description: template-anti-infantry-defense.description
 	Valued:
 		Cost: 700
@@ -443,7 +443,7 @@ steel_fedturret:
 		LocalOffset: 400,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_resonanceammo
+		RequiresCondition: up_resonanceammo.steel
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -459,9 +459,9 @@ steel_fedturret:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: upsteel_scalpel, upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_resonanceammo, upsteel_shielresistance
+		Upgrades: up_scalpel.steel, up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_resonanceammo.steel, up_shielresistance.steel
 
-steel_fedaa:
+fedaa.steel:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -475,7 +475,7 @@ steel_fedaa:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~steel_qacst, steel_qtradr
+		Prerequisites: ~qacst.steel, qtradr.steel
 		Description: template-anti-infantry-defense.description
 	Valued:
 		Cost: 1000
@@ -500,14 +500,14 @@ steel_fedaa:
 		LocalOffset: 125,225,250, 125,-225,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upsteel_empquantumweapons
+		RequiresCondition: !up_empquantumweapons.steel
 	Armament@Upgrade:
 		Name: primary
 		Weapon: ConsortiumMissileSystemEMP
 		LocalOffset: 125,225,250, 125,-225,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_empquantumweapons
+		RequiresCondition: up_empquantumweapons.steel
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -525,11 +525,11 @@ steel_fedaa:
 		Range: 6000
 	ProvidesPrerequisite@buildingname:
 	DroneSpawnerMaster@steel_scalpel:
-		Actors: steel_scalpelAA
+		Actors: scalpelAA.steel
 	ActorStatValues:
-		Upgrades: upsteel_scalpel, upsteel_empquantumweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_scalpel.steel, up_empquantumweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qcannon:
+qcannon.steel:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -545,7 +545,7 @@ steel_qcannon:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~steel_qacst, steel_qatech
+		Prerequisites: ~qacst.steel, qatech.steel
 		Description: actor-cgplas.description
 	Valued:
 		Cost: 2000
@@ -570,28 +570,28 @@ steel_qcannon:
 		LocalOffset: 600,300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upsteel_empquantumweapons
+		RequiresCondition: !up_empquantumweapons.steel
 	Armament@2:
 		Name: primary
 		Weapon: SteelQuantumTurretRail
 		LocalOffset: 600,-300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upsteel_empquantumweapons
+		RequiresCondition: !up_empquantumweapons.steel
 	Armament@Upgrade1:
 		Name: primary
 		Weapon: SteelQuantumTurretRailEMP
 		LocalOffset: 600,300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_empquantumweapons
+		RequiresCondition: up_empquantumweapons.steel
 	Armament@Upgrade2:
 		Name: primary
 		Weapon: SteelQuantumTurretRailEMP
 		LocalOffset: 600,-300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_empquantumweapons
+		RequiresCondition: up_empquantumweapons.steel
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -611,11 +611,11 @@ steel_qcannon:
 	DetectCloaked:
 		Range: 4444
 	DroneSpawnerMaster@steel_scalpel:
-		Actors: steel_scalpelQuantumCannon
+		Actors: scalpelQuantumCannon.steel
 	ActorStatValues:
-		Upgrades: upsteel_scalpel, upsteel_empquantumweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_scalpel.steel, up_empquantumweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_bfg10k:
+bfg10k.steel:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -630,7 +630,7 @@ steel_bfg10k:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
 		BuildLimit: 1
-		Prerequisites: ~upsteel_bfg10k
+		Prerequisites: ~up_bfg10k.steel
 		Description: actor-gun.description
 	Valued:
 		Cost: 10000
@@ -689,7 +689,7 @@ steel_bfg10k:
 		Prerequisites:
 			1: ~techlevel.superweapons
 		Cursor: nuke
-		IconImage: steel_bfg10k
+		IconImage: bfg10k.steel
 		Icons:
 			1: icon
 		TargetCircleRange: 4c0
@@ -729,9 +729,9 @@ steel_bfg10k:
 	DetectCloaked:
 		Range: 12500
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_conpad:
+conpad.steel:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -740,7 +740,7 @@ steel_conpad:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
-		Prerequisites: ~steel_qacst, steel_qtradr
+		Prerequisites: ~qacst.steel, qtradr.steel
 	Tooltip:
 		Name: Consortium Airpad
 	Building:
@@ -764,9 +764,9 @@ steel_conpad:
 		Sequence: idle-dish
 		PauseOnCondition: lowpower
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_qoil:
+qoil.steel:
 	Inherits: ^RA2Building
 	Inherits@power: ^PowerPlant
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -784,7 +784,7 @@ steel_qoil:
 		BuildPaletteOrder: 999
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~steel_qacst, steel_qatech, derricklimit
+		Prerequisites: ~qacst.steel, qatech.steel, derricklimit
 		Description: Super Income Building. Produces 3x the income of an oil derrick.
 	Building:
 		Footprint: xxx xxx xxx
@@ -800,7 +800,7 @@ steel_qoil:
 	ExperienceTrickler@1:
 		Amount: 750
 	RenderSprites:
-		Image: steel_qoil
+		Image: qoil.steel
 		PlayerPalette: player_rgba
 	-WithDeathAnimation:
 	-ToggleConditionOnOrder:
@@ -813,7 +813,7 @@ steel_qoil:
 		#PauseOnCondition: lowpower
 		RequiresCondition: !build-incomplete && !in_water
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
 ##############################################
 #   Red Alert 2 Underwater Structure
@@ -821,7 +821,7 @@ steel_qoil:
 ##############################################
 #   Red Alert 2 Consortium Infantry
 ##############################################
-steel_katy:
+katy.steel:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^HighTechTankTemplate
@@ -844,7 +844,7 @@ steel_katy:
 		Name: Katy Tank
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~upsteel_katy, steel_qatech
+		Prerequisites: ~up_katy.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_katy.description
 	Mobile:
@@ -877,7 +877,7 @@ steel_katy:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
 	Armament@ELITE:
 		Name: primary
 		Weapon: SteelKatyCannonsE
@@ -886,7 +886,7 @@ steel_katy:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !upsteel_empquantumweapons
+		RequiresCondition: rank-elite && !up_empquantumweapons.steel
 	Armament@Upgrade:
 		Name: primary
 		Weapon: SteelKatyCannonsEMP
@@ -895,7 +895,7 @@ steel_katy:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && up_empquantumweapons.steel
 	Armament@UpgradeELITE:
 		Name: primary
 		Weapon: SteelKatyCannonsEMPE
@@ -904,7 +904,7 @@ steel_katy:
 		LocalOffset: 1250,-250,250, 1250,250,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && upsteel_empquantumweapons
+		RequiresCondition: rank-elite && up_empquantumweapons.steel
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -922,9 +922,9 @@ steel_katy:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
-steel_defender:
+defender.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -947,7 +947,7 @@ steel_defender:
 		Name: Defender Bot
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~upsteel_defender, steel_qtradr
+		Prerequisites: ~up_defender.steel, qtradr.steel
 		Queue: Vehicle, RAVehicle
 		Description: Shielded Battle Robot
 	Mobile:
@@ -973,19 +973,19 @@ steel_defender:
 	Armament@PRIMARY:
 		Weapon: SteelInfRailgun
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: !rank-elite && !upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
 	Armament@PRIMARYELITE:
 		Weapon: SteelInfRailgunE
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: rank-elite && !upsteel_empquantumweapons
+		RequiresCondition: rank-elite && !up_empquantumweapons.steel
 	Armament@UpgradePRIMARY:
 		Weapon: SteelInfRailgunEMP
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && up_empquantumweapons.steel
 	Armament@UpgradePRIMARYELITE:
 		Weapon: SteelInfRailgunEMPE
 		LocalOffset: 300,200,1000, 300,-200,1000
-		RequiresCondition: rank-elite && upsteel_empquantumweapons
+		RequiresCondition: rank-elite && up_empquantumweapons.steel
 	AttackFrontal:
 		FacingTolerance: 10
 	RenderRangeCircle:
@@ -1020,9 +1020,9 @@ steel_defender:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
-steel_stalker:
+stalker.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1042,7 +1042,7 @@ steel_stalker:
 		Name: Stalker
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_qatech
+		Prerequisites: ~qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:
@@ -1099,9 +1099,9 @@ steel_stalker:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-white_rabbit:
+white_rabbit.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1122,7 +1122,7 @@ white_rabbit:
 		Name: White Rabbit
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~steel_qatech
+		Prerequisites: ~qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:
@@ -1176,9 +1176,9 @@ white_rabbit:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_inspect:
+inspect.steel:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -1198,7 +1198,7 @@ steel_inspect:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~steel_qatech
+		Prerequisites: ~qatech.steel
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor-steel_inspect.description
@@ -1239,7 +1239,7 @@ steel_inspect:
 		Bounds: 2048, 2048
 		DecorationBounds: 2048, 2048, 0, -128
 	SpawnActorOnDeath:
-		Actor: steel_inspect.Husk
+		Actor: inspect_husk.steel
 	Voiced:
 		VoiceSet: SteelEmpressVoice
 	RenderSprites:
@@ -1250,9 +1250,9 @@ steel_inspect:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_grun:
+grun.steel:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -1265,7 +1265,7 @@ steel_grun:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 110
-		Prerequisites: ~steel_qatech
+		Prerequisites: ~qatech.steel
 		Description: actor-steel_grun.description
 	Valued:
 		Cost: 4500
@@ -1298,16 +1298,16 @@ steel_grun:
 		LocalOffset: 250,0,-250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && upsteel_empquantumweapons
+		RequiresCondition: !rank-elite && up_empquantumweapons.steel
 	Armament@elite:
 		Weapon: SteelAirTurretE
 		LocalOffset: 250,0,-250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@upsteel_empquantumweapons:
+	FirepowerMultiplier@up_empquantumweapons.steel:
 		Modifier: 125
-		RequiresCondition: upsteel_empquantumweapons
+		RequiresCondition: up_empquantumweapons.steel
 	AttackAircraft:
 		FacingTolerance: 10
 	Aircraft:
@@ -1316,7 +1316,7 @@ steel_grun:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	SpawnActorOnDeath:
-		Actor: steel_grun.Husk
+		Actor: grun_husk.steel
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -1340,9 +1340,9 @@ steel_grun:
 		TurnSpeed: 24
 	WithSpriteTurret:
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
-steel_cougar:
+cougar.steel:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1364,7 +1364,7 @@ steel_cougar:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_qaweap, ~disabled
+		Prerequisites: ~qaweap.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Mobile:
@@ -1403,9 +1403,9 @@ steel_cougar:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_hummer:
+hummer.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1423,7 +1423,7 @@ steel_hummer:
 		Name: Federation Hummer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_qaweap, ~disabled
+		Prerequisites: ~qaweap.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -1461,9 +1461,9 @@ steel_hummer:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_oldqtnk:
+oldqtnk.steel:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1484,7 +1484,7 @@ steel_oldqtnk:
 		Name: Beta Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_qaweap, steel_qatech, ~disabled
+		Prerequisites: ~qaweap.steel, qatech.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -1529,9 +1529,9 @@ steel_oldqtnk:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_cobra:
+cobra.steel:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^LineBreakerTemplate
@@ -1549,7 +1549,7 @@ steel_cobra:
 		Name: Federation Cobra
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~steel_qaweap, steel_qatech, ~disabled
+		Prerequisites: ~qaweap.steel, qatech.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -1591,9 +1591,9 @@ steel_cobra:
 	Voiced:
 		VoiceSet: SteelCloneVoice
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_savi:
+savi.steel:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -1610,7 +1610,7 @@ steel_savi:
 		Name: Support Shield Generator
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~steel_qaweap, steel_qatech
+		Prerequisites: ~qaweap.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_savi.description
 	Mobile:
@@ -1654,9 +1654,9 @@ steel_savi:
 		Color: 8888FF88
 		RequiresCondition: !disabled
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
 
-steel_cruiser:
+cruiser.steel:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1675,7 +1675,7 @@ steel_cruiser:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~steel_conpad, steel_qoil, ~upsteel_cruiser
+		Prerequisites: ~conpad.steel, qoil.steel, ~up_cruiser.steel
 		Queue: Aircraft, RAAircraft
 		Description: actor-shad.description
 	Aircraft:
@@ -1713,13 +1713,13 @@ steel_cruiser:
 		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_empquantumweapons && !rank-elite
+		RequiresCondition: up_empquantumweapons.steel && !rank-elite
 	Armament@CANNONELITE:
 		Weapon: SteelCruiserArtilleryE
 		LocalOffset: -150,-400,-25, -150,400,-25, -444,-400,-25, -444,400,-25
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upsteel_empquantumweapons && rank-elite
+		RequiresCondition: up_empquantumweapons.steel && rank-elite
 	FirepowerMultiplier@Carrier:
 		Modifier: 50
 	RenderRangeCircle:
@@ -1728,7 +1728,7 @@ steel_cruiser:
 		FacingTolerance: 10
 		AttackType: Hover
 	SpawnActorOnDeath:
-		Actor: steel_cruiser.Husk
+		Actor: cruiser_husk.steel
 	SelectionDecorations:
 	Selectable:
 		Bounds: 2560, 2560
@@ -1742,16 +1742,16 @@ steel_cruiser:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	CarrierMaster:
-		Actors: steel_cruiser_f, steel_cruiser_f, steel_cruiser_f, steel_cruiser_f, steel_cruiser_f, steel_cruiser_f, steel_cruiser_f, steel_cruiser_f
+		Actors: cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel, cruiser_f.steel
 		RearmTicks: 25
 		RespawnTicks: 75
 		InstaRepair: true
 		SlaveDisposalOnKill: KillSlaves
 		SpawnAllAtOnce: false
 	ActorStatValues:
-		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
-steel_cruiser_f:
+cruiser_f.steel:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -1801,14 +1801,14 @@ steel_cruiser_f:
 		LocalOffset: 0,-256,0, 0,256,0
 		LocalYaw: 64, -64
 		PauseOnCondition: !ammo
-		RequiresCondition: upsteel_empquantumweapons
+		RequiresCondition: up_empquantumweapons.steel
 	FirepowerMultiplier@CruiserFighter:
 		Modifier: 10
 	AmmoPool:
 		Ammo: 10
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
-		Actor: steel_cruiser_f.Husk
+		Actor: cruiser_f_husk.steel
 	Voiced:
 		VoiceSet: SteelEmpressVoice
 	AttackAircraft:
@@ -1833,4 +1833,4 @@ steel_cruiser_f:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_empquantumweapons, upsteel_shielresistance
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel

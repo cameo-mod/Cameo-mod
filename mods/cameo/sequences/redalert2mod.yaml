@@ -70,7 +70,7 @@
 #		Red Alert 2 Asian Alliance Buildings
 ####################################################################################################
 
-aa_cgcnst:
+cgcnst.asian:
 	Defaults:
 		Offset: 2,-26
 	idle:
@@ -107,7 +107,7 @@ aa_cgcnst:
 		Filename: ra2ayardicon.shp
 		Offset: 0,0
 
-aa_cgapwr:
+cgapwr.asian:
 	Defaults:
 		Offset: 0,-2
 	idle:
@@ -136,7 +136,7 @@ aa_cgapwr:
 		Filename: aa_apwricon.shp
 		Offset: 0,0
 
-aa_cgbrck:
+cgbrck.asian:
 	Defaults:
 		Offset: 0,-16
 	build:
@@ -170,7 +170,7 @@ aa_cgbrck:
 		Filename: aa_abrkicon.shp
 		Offset: 0,0
 
-aa_cgrefn:
+cgrefn.asian:
 	Defaults:
 		Offset: 1,-12
 	idle:
@@ -200,7 +200,7 @@ aa_cgrefn:
 		Filename: aa_refinery.shp
 		Offset: 0,0
 
-aa_cgweap:
+cgweap.asian:
 	Defaults:
 		Offset: -18,-28
 	idle:
@@ -281,7 +281,7 @@ aa_cgweap:
 		Filename: aa_awaricon.shp
 		Offset: 0,0
 
-aa_cgdept:
+cgdept.asian:
 	Defaults:
 		Offset: 0,-24
 	idle:
@@ -324,7 +324,7 @@ aa_cgdept:
 		Filename: aa_depticon.shp
 		Offset: 0,0
 
-aa_cgradr:
+cgradr.asian:
 	Defaults:
 		Offset: 0,-8
 	idle:
@@ -368,7 +368,7 @@ aa_cgradr:
 		Filename: aa_radar_icon.shp
 		Offset: 0,0
 
-aa_cgtech:
+cgtech.asian:
 	Defaults:
 		Offset: -8,-14
 	idle:
@@ -397,7 +397,7 @@ aa_cgtech:
 		Filename: aa_labicon.shp
 		Offset: 0,0
 
-aa_cgairf:
+cgairf.asian:
 	Defaults:
 		Offset: 5,-22 #12
 	idle:
@@ -448,7 +448,7 @@ aa_cgairf:
 		Filename: aa_airfldicon.shp
 		Offset: 0,0
 
-aa_cgrail:
+cgrail.asian:
 	Defaults:
 		Offset: 0,-3
 	idle:
@@ -487,7 +487,7 @@ aa_cgrail:
 		Filename: aa_railticon.shp
 		Offset: 0,0
 
-aa_cgflam:
+cgflam.asian:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,2
@@ -514,7 +514,7 @@ aa_cgflam:
 		Filename: aa_flamturreticon.shp
 		Offset: 0,0
 
-aa_cgpuls:
+cgpuls.asian:
 	Defaults:
 		Offset: 0,-3
 	idle-normal:
@@ -550,7 +550,7 @@ aa_cgpuls:
 		Filename: aa_pulsicon.shp
 		Offset: 0,0
 
-aa_cgpnch:
+cgpnch.asian:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,4
@@ -577,7 +577,7 @@ aa_cgpnch:
 		Filename: aa_punisher_icon.shp
 		Offset: 0,0
 
-aa_cgplas:
+cgplas.asian:
 	Defaults:
 		Offset: 0,-4
 	idle:
@@ -610,7 +610,7 @@ aa_cgplas:
 		Filename: aa_plasmacannon_icon.shp
 		Offset: 0,0
 
-aa_cgchtw:
+cgchtw.asian:
 	Defaults:
 		Offset: 0,-3
 	idle-normal:
@@ -641,7 +641,7 @@ aa_cgchtw:
 		Filename: aa_chtwicon.shp
 		Offset: 0,0
 
-aa_cgtnkr:
+cgtnkr.asian:
 	Defaults:
 		Offset: 0,-28
 	idle:
@@ -682,7 +682,7 @@ aa_cgtnkr:
 		Filename: aa_tankricon.shp
 		Offset: 0,0
 
-aa_cghype:
+cghype.asian:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,4
@@ -709,7 +709,7 @@ aa_cghype:
 		Filename: aa_hypeicon.shp
 		Offset: 0,0
 
-aa_cgmiac:
+cgmiac.asian:
 	Defaults:
 		Offset: -4,-24
 	idle:
@@ -736,7 +736,7 @@ aa_cgmiac:
 		Filename: aa_miacicon.shp
 		Offset: 0,0
 
-aa_cgchao:
+cgchao.asian:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -789,7 +789,7 @@ aa_cgchao:
 		Filename: aa_cgchao_icon2.shp
 		Offset: 0,0
 
-aa_cgionc:
+cgionc.asian:
 	Defaults:
 		Offset: 8,-14
 	idle:
@@ -817,14 +817,14 @@ aa_cgionc:
 		Filename: aa_cgionc_icon.shp
 		Offset: 0,0
 
-aa_chaomine:
+chaomine.asian:
 	idle:
 		Filename: aa_chaomine.shp
 		ZOffset: -512
 	icon:
 		Filename: aa_chaomine_icon.shp
 
-aa_tankmine:
+tankmine.asian:
 	idle:
 		Filename: aa_tankmine.shp
 		ZOffset: -512
@@ -833,7 +833,7 @@ aa_tankmine:
 	icon2:
 		Filename: aa_chaomine_icon.shp
 
-aa_cgyard:
+cgyard.asian:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -883,7 +883,7 @@ aa_cgyard:
 		Filename: aa_ayard.shp
 		Offset: 0,0
 
-aa_awall:
+awall.asian:
 	Defaults:
 		Filename: aa_awall.shp
 	idle:
@@ -909,7 +909,7 @@ aa_awall:
 		Filename: aa_pulsmuzz.shp
 		Length: 16
 
-aa_gren:
+gren.asian:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: aa_gren.shp
@@ -957,7 +957,7 @@ aa_gren:
 	icon:
 		Filename: aa_militia_icon.shp
 
-aa_japrif:
+japrif.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_japrif.shp
@@ -1026,7 +1026,7 @@ aa_japrif:
 		Scale: 1
 		Offset: 0,0
 
-aa_samurai:
+samurai.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_samurai.shp
@@ -1092,7 +1092,7 @@ aa_samurai:
 		Filename: aa_samurai_icon.shp
 		Scale: 1
 
-aa_archer:
+archer.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_archer.shp
@@ -1158,7 +1158,7 @@ aa_archer:
 		Filename: aa_archer_icon.shp
 		Scale: 1
 
-aa_shinobi:
+shinobi.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_shinobi.shp
@@ -1224,7 +1224,7 @@ aa_shinobi:
 		Filename: aa_shinobi_icon.shp
 		Scale: 1
 
-aa_asdf:
+asdf.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_asdf.shp
@@ -1265,7 +1265,7 @@ aa_asdf:
 	icon:
 		Filename: asdficon.png
 
-aa_commando:
+commando.asian:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: ra2_snipe.shp
@@ -1274,7 +1274,7 @@ aa_commando:
 	icon:
 		Filename: asian_commando_icon.png
 
-aa_tkiller:
+tkiller.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Scale: 0.9
@@ -1293,7 +1293,7 @@ aa_tkiller:
 	icon:
 		Filename: aa_tkilicon.shp
 
-aa_plast:
+plast.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_plast.shp
@@ -1317,7 +1317,7 @@ aa_plast:
 		Start: 116
 		Tick: 106
 
-aa_flam:
+flam.asian:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: aa_flam.shp
@@ -1361,7 +1361,7 @@ aa_flam:
 		Start: 116
 		Tick: 106
 
-aa_quas:
+quas.asian:
 	Defaults:
 		Filename: aa_quas.shp
 	idle:
@@ -1373,7 +1373,7 @@ aa_quas:
 		Filename: aa_pulsmuzz.shp
 		Length: *
 
-aa_viper:
+viper.asian:
 	Defaults:
 		Filename: aa_viper.shp
 	idle:
@@ -1385,7 +1385,7 @@ aa_viper:
 		Filename: ra2_gunfire.shp
 		Length: *
 
-aa_lynx:
+lynx.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_lynx.shp
@@ -1432,7 +1432,7 @@ aa_lynx:
 		InterpolatedFacings: 32
 		Length: 3
 
-aa_hotwi:
+hotwi.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_hotwi.shp
@@ -1449,7 +1449,7 @@ aa_hotwi:
 	icon:
 		Filename: aa_hotwiicon.shp
 
-aa_panth:
+panth.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_panth.shp
@@ -1466,7 +1466,7 @@ aa_panth:
 	icon:
 		Filename: aa_enforcericon.shp
 
-aa_oilt:
+oilt.asian:
 	Defaults:
 		Filename: aa_oilt.shp
 		Scale: 0.75
@@ -1475,7 +1475,7 @@ aa_oilt:
 	icon:
 		Filename: aa_oilticon.shp
 
-aa_acv:
+acv.asian:
 	Defaults:
 		Filename: aa_acv.shp
 	idle:
@@ -1483,7 +1483,7 @@ aa_acv:
 	icon:
 		Filename: aa_acvicon.shp
 
-aa_drmn:
+drmn.asian:
 	Defaults:
 		Filename: aa_drmn.shp
 	idle:
@@ -1518,7 +1518,7 @@ caa_drmn: #chrono resource delivery is bugged, this is needed to prevent crash o
 	icon:
 		Filename: aa_drmnicon.shp
 
-aa_pulv:
+pulv.asian:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: aa_pulv.shp
@@ -1535,7 +1535,7 @@ aa_pulv:
 	icon:
 		Filename: aa_pulvicon.shp
 
-aa_ptnk:
+ptnk.asian:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: aa_ptnk.shp
@@ -1574,7 +1574,7 @@ aa_plasgold:
 		Filename: aa_plasgold.shp
 		ZOffset: 1023
 
-aa_mecha:
+mecha.asian:
 	Defaults:
 		Filename: aa_mecha.shp
 	idle1:
@@ -1605,7 +1605,7 @@ aa_mecha:
 		Filename: aa_mecha_icon.shp
 		Offset: 0,0
 
-aa_phoenix:
+phoenix.asian:
 	idle:
 		Filename: aa_phoenix.shp
 		Facings: 64
@@ -1643,7 +1643,7 @@ aa_bomber:
 	icon:
 		Filename: aa_phoenixicon.shp
 
-aa_railt:
+railt.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_railt.shp
@@ -1653,7 +1653,7 @@ aa_railt:
 	icon:
 		Filename: aa_rtnkicon.shp
 
-aa_railt2:
+railt2.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_railt2.shp
@@ -1663,7 +1663,7 @@ aa_railt2:
 	icon:
 		Filename: aa_rtnk2icon.shp
 
-aa_dragonfly:
+dragonfly.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_dragonfly.shp
@@ -1673,7 +1673,7 @@ aa_dragonfly:
 	icon:
 		Filename: aa_drgflyicon.shp
 
-aa_ftnk:
+ftnk.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_ftnk.shp
@@ -1683,7 +1683,7 @@ aa_ftnk:
 	icon:
 		Filename: aa_ftnkicon.shp
 
-aa_alligator:
+alligator.asian:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
 		Filename: aa_alligator.shp
@@ -1715,7 +1715,7 @@ aa_alligator:
 	icon:
 		Filename: aa_alligator_icon.shp
 
-aa_pelican:
+pelican.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_pelican.shp
@@ -1771,7 +1771,7 @@ explosion:
 	aa_plasgreeexp:
 		Filename: aa_plasgreeexp.shp
 
-aa_quasfrig:
+quasfrig.asian:
 	Defaults:
 		Filename: aa_quasfrig.shp
 	idle:
@@ -1783,7 +1783,7 @@ aa_quasfrig:
 		Filename: aa_pulsmuzz.shp
 		Length: *
 
-aa_gunb:
+gunb.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_gunb.shp
@@ -1793,7 +1793,7 @@ aa_gunb:
 	icon:
 		Filename: aa_gunb_icon.shp
 
-aa_karrier:
+karrier.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_karrier.shp
@@ -1803,7 +1803,7 @@ aa_karrier:
 	icon:
 		Filename: aa_karrioricon.shp
 
-aa_kami:
+kami.asian:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -1824,7 +1824,7 @@ aa_kami:
 	icon:
 		Filename: aa_phoenixicon.shp
 
-aa_tsun:
+tsun.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_tsun.shp
@@ -1834,7 +1834,7 @@ aa_tsun:
 	icon:
 		Filename: aa_tsun_icon.shp
 
-aa_ksub:
+ksub.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_ksub.shp
@@ -1844,7 +1844,7 @@ aa_ksub:
 	icon:
 		Filename: aa_ksub_icon.shp
 
-aa_wtrt:
+wtrt.asian:
 	Defaults:
 		Filename: aa_wtrt.shp
 	idle:
@@ -1856,7 +1856,7 @@ aa_wtrt:
 		Filename: aa_pulsmuzz.shp
 		Length: *
 
-aa_lsub:
+lsub.asian:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: aa_lsub.shp
@@ -1866,7 +1866,7 @@ aa_lsub:
 	icon:
 		Filename: aa_lsub_icon.shp
 
-aa_mlrs:
+mlrs.asian:
 	Defaults:
 		Filename: aa_mlrs.shp
 	idle:
@@ -1890,35 +1890,35 @@ aa_mlrs:
 	icon:
 		Filename: aa_mlrs_icon.shp
 
-asian_upgrade_infantryspec:
+upgrade_infantryspec.asian:
 	icon:
 		Filename: asian_upgrade_infantryspec_icon.png
 
-asian_upgrade_pulverizer:
+upgrade_pulverizer.asian:
 	icon:
 		Filename: asian_upgrade_pulverizer_icon.png
 
-asian_upgrade_phalanx:
+upgrade_phalanx.asian:
 	icon:
 		Filename: asian_upgrade_phalanx_icon.png
 
-asian_upgrade_dragonfire:
+upgrade_dragonfire.asian:
 	icon:
 		Filename: asian_upgrade_dragonfire_icon.png
 
-asian_upgrade_celestialpower:
+upgrade_celestialpower.asian:
 	icon:
 		Filename: asian_upgrade_celestialpower_icon.png
 
-asian_upgrade_banzai:
+upgrade_banzai.asian:
 	icon:
 		Filename: asian_upgrade_banzai_icon.png
 
-asian_team_upgrade_dragonway:
+team_upgrade_dragonway.asian:
 	icon:
 		Filename: asian_team_upgrade_dragonway_icon.png
 
-asian_team_upgrade_diplomacy:
+team_upgrade_diplomacy.asian:
 	icon:
 		Filename: asian_team_upgrade_diplomacy_icon.png
 
@@ -1926,7 +1926,7 @@ asian_team_upgrade_diplomacy:
 #   Red Alert 2 Latin Buildings
 ##############################################
 
-latin_cgcnst:
+cgcnst.latin:
 	Defaults:
 		Offset: 2,-26
 	idle:
@@ -1980,7 +1980,7 @@ latin_cgcnst:
 		Filename: latinconyardicon.png
 		Offset: 0,0
 
-latin_cgpow:
+cgpow.latin:
 	Defaults:
 		Offset: -5,-30
 	idle:
@@ -2020,7 +2020,7 @@ latin_cgpow:
 		Filename: latin_powericon.shp
 		Offset: 0,0
 
-latin_cgpile:
+cgpile.latin:
 	Defaults:
 		Offset: -16,0
 	build:
@@ -2067,7 +2067,7 @@ latin_cgpile:
 		Filename: latin_barricon.shp
 		Offset: 0,0
 
-latin_cgweap:
+cgweap.latin:
 	Defaults:
 		Offset: -20,-26
 	idle:
@@ -2150,7 +2150,7 @@ latin_cgweap:
 		Filename: latin_weapicon.shp
 		Offset: 0,0
 
-latin_cgauto:
+cgauto.latin:
 	Defaults:
 		Offset: -20,-26
 	idle:
@@ -2200,7 +2200,7 @@ latin_cgauto:
 		Tick: 150
 		ZOffset: -511
 
-latin_cgup:
+cgup.latin:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: latin_cgup.shp
@@ -2246,7 +2246,7 @@ latin_cgup:
 		Filename: latin_upicon.shp
 		Offset: 0, 0
 
-latin_cgspy:
+cgspy.latin:
 	Defaults:
 		Offset: -8,-14
 	idle:
@@ -2283,7 +2283,7 @@ latin_cgspy:
 		Filename: latin_p_traitors.shp
 		Offset: 0,0
 
-latin_radar:
+radar.latin:
 	Defaults:
 		Offset: -8,-14
 	idle:
@@ -2313,7 +2313,7 @@ latin_radar:
 		Filename: latin_radar_icon.png
 		Offset: 0,0
 
-latin_cgte:
+cgte.latin:
 	Defaults:
 		Offset: -8,-14
 	idle:
@@ -2348,7 +2348,7 @@ latin_cgte:
 		Filename: latin_teicon.shp
 		Offset: 0,0
 
-latin_cgair:
+cgair.latin:
 	Defaults:
 		Offset: -12,-22 #12
 	idle:
@@ -2398,7 +2398,7 @@ latin_cgair:
 		Filename: latin_airicon.shp
 		Offset: 0,0
 
-latin_ngbunk2:
+ngbunk2.latin:
 	idle:
 		Filename: latin_nagaurd.shp
 		ShadowStart: 4
@@ -2434,7 +2434,7 @@ latin_ngbunk2:
 		Length: 32
 		Tick: 150
 
-latin_ca12hit:
+ca12hit.latin:
 	Defaults:
 		Offset: 0,-10
 	idle:
@@ -2514,7 +2514,7 @@ latin_ca12hit:
 		Filename: ra2nuksiloicon.shp
 		Offset: 0,0
 
-latin_cgdept:
+cgdept.latin:
 	Defaults:
 		Offset: -12,-36
 	idle:
@@ -2567,7 +2567,7 @@ latin_cgdept:
 		Filename: ra2srepicon.shp
 		Offset: 0,0
 
-latin_sml:
+sml.latin:
 	Defaults:
 		Offset: 0,-4
 	idle:
@@ -2597,7 +2597,7 @@ latin_sml:
 		Filename: latin_sml_icon.shp
 		Offset: 0,0
 
-latin_ngdshktur:
+ngdshktur.latin:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,-8
@@ -2621,7 +2621,7 @@ latin_ngdshktur:
 		Filename: latin_sentrygun2_icon.shp
 		Offset: 0,0
 
-latin_aatur:
+aatur.latin:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,8
@@ -2645,7 +2645,7 @@ latin_aatur:
 		Filename: latinaadefendericon.png
 		Offset: 0,0
 
-latin_cgyard:
+cgyard.latin:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -2707,7 +2707,7 @@ latin_cgyard:
 #   Red Alert 2 Units Buildings
 ##############################################
 
-latin_ltnk:
+ltnk.latin:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: latin_ltnk.shp
@@ -2727,7 +2727,7 @@ latin_ltnk:
 	muzzle-2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
-latin_tortuga:
+tortuga.latin:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Scale: 0.8
@@ -2751,7 +2751,7 @@ latin_tortuga:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-latin_mtnk:
+mtnk.latin:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: latin_mtnk.shp
@@ -2770,7 +2770,7 @@ latin_mtnk:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-latin_diablo:
+diablo.latin:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: latin_diablo.shp
@@ -2791,7 +2791,7 @@ latin_diablo:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-latin_buggy:
+buggy.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_buggy.shp
@@ -2806,7 +2806,7 @@ latin_buggy:
 	icon:
 		Filename: latin_buggy_icon.shp
 
-latinscrapcar:
+scrapcar.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latinscrapcar.shp
@@ -2821,7 +2821,7 @@ latinscrapcar:
 	icon:
 		Filename: latin_buggy_icon.shp
 
-latinscrapcar2:
+scrapcar2.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latinscrapcar2.shp
@@ -2836,7 +2836,7 @@ latinscrapcar2:
 	icon:
 		Filename: latin_buggy_icon.shp
 
-latin_apc:
+apc.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_apc.shp
@@ -2857,7 +2857,7 @@ latin_apc:
 	icon:
 		Filename: latin_apc_icon.shp
 
-latin_humvee:
+humvee.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_humvee.shp
@@ -2871,7 +2871,7 @@ latin_humvee:
 	icon:
 		Filename: latin_humvee_icon.shp
 
-latin_cartel:
+cartel.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_cartel.shp
@@ -2885,7 +2885,7 @@ latin_cartel:
 	icon:
 		Filename: latin_cartel_icon.shp
 
-latin_nuketruk:
+nuketruk.latin:
 	Defaults:
 		Filename: latin_nuketruk.shp
 		Scale: 0.8
@@ -2895,7 +2895,7 @@ latin_nuketruk:
 	icon:
 		Filename: latin_nuketrukicon.shp
 
-latin_rtruck:
+rtruck.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_rtruck.shp
@@ -2910,7 +2910,7 @@ latin_rtruck:
 	icon:
 		Filename: latin_missiletruck_icon.shp
 
-latin_burrito:
+burrito.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_burrito.shp
@@ -2925,7 +2925,7 @@ latin_burrito:
 	icon:
 		Filename: latin_burrito_icon.shp
 
-latin_mortarbike:
+mortarbike.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_mortarbike.shp
@@ -2936,7 +2936,7 @@ latin_mortarbike:
 	icon:
 		Filename: latin_quad_icon.shp
 
-latin_topol:
+topol.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_scud.shp
@@ -2961,7 +2961,7 @@ latin_topol:
 	icon:
 		Filename: latin_topol_icon.shp
 
-latin_lars:
+lars.latin:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: latin_lars.shp
@@ -2976,7 +2976,7 @@ latin_lars:
 	icon:
 		Filename: latin_lars_icon.shp
 
-latin_harv:
+harv.latin:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: latin_harv.shp
@@ -2994,7 +2994,7 @@ latin_harv:
 		Length: 15
 		Facings: 8
 
-latin_mig:
+mig.latin:
 	idle:
 		Filename: latin_mig.shp
 		Facings: 64
@@ -3012,7 +3012,7 @@ latin_mig:
 	icon:
 		Filename: latin_mig_icon.shp
 
-latin_yakolev:
+yakolev.latin:
 	idle:
 		Filename: latin_yak.shp
 		Facings: 64
@@ -3030,7 +3030,7 @@ latin_yakolev:
 	icon:
 		Filename: latin_yak_icon.shp
 
-latin_mili:
+mili.latin:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -3061,7 +3061,7 @@ latin_mili:
 	icon:
 		Filename: latin_miliicon.shp
 
-latin_fftr:
+fftr.latin:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -3108,7 +3108,7 @@ latin_fftr:
 	icon:
 		Filename: latin_fftr_icon.shp
 
-latin_narco:
+narco.latin:
 	Inherits: ^RA2ArmedCivilian
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -3142,7 +3142,7 @@ latin_narco:
 	icon:
 		Filename: latin_narco_icon.shp
 
-latin_fthrow:
+fthrow.latin:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -3205,7 +3205,7 @@ latin_witch:
 	icon:
 		Filename: ra2e2icon.shp
 
-latin_triton:
+triton.latin:
 	idle:
 		Filename: latin_triton.shp
 		Scale: 0.6
@@ -3215,7 +3215,7 @@ latin_triton:
 		Length: *
 	icon:
 		Filename: latin_triton_icon.shp
-latin_sub:
+sub.latin:
 	idle:
 		Filename: latin_sub.shp
 		Scale: 0.75
@@ -3225,7 +3225,7 @@ latin_sub:
 		Length: *
 	icon:
 		Filename: latin_sub_icon.shp
-latin_rammax:
+rammax.latin:
 	idle:
 		Filename: latin_rammax.png
 		Scale: 1
@@ -3236,7 +3236,7 @@ latin_rammax:
 	icon:
 		Filename: latin_rammax_icon.png
 
-uplatin_cartelrockets:
+up_cartelrockets.latin:
 	icon:
 		Filename: latin_cartelrockets_icon.png
 
@@ -3248,11 +3248,11 @@ latin_up_tech2:
 	icon:
 		Filename: latin_up_tech2.shp
 
-latin_up_chaingun:
+up_chaingun.latin:
 	icon:
 		Filename: latin_up_chaingun.shp
 
-latin_up_industrial:
+up_industrial.latin:
 	icon:
 		Filename: latin_up_industrial.shp
 
@@ -3260,11 +3260,11 @@ latin_up_miraging:
 	icon:
 		Filename: latin_up_miraging.shp
 
-latin_up_hotfire:
+up_hotfire.latin:
 	icon:
 		Filename: latin_up_hotfire.shp
 
-latin_monkey:
+monkey.latin:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
 		Filename: latin_monkey.shp
@@ -3300,7 +3300,7 @@ latin_monkey:
 #   Red Alert 2 Consortium Buildings
 ##############################################
 
-steel_qabarr:
+qabarr.steel:
 	Defaults:
 		Offset: 16,-10
 		Tick: 50
@@ -3327,7 +3327,7 @@ steel_qabarr:
 		Filename: steel_qabarr_icon.shp
 		Offset: 0,0
 
-steel_qapowr:
+qapowr.steel:
 	Defaults:
 		Offset: 0,-4
 		Tick: 50
@@ -3361,7 +3361,7 @@ steel_qapowr:
 		Filename: steel_qapowr_icon.shp
 		Offset: 0,0
 
-steel_qref:
+qref.steel:
 	Defaults:
 		Offset: 1,-12
 		Tick: 50
@@ -3409,7 +3409,7 @@ steel_qref:
 		Filename: steel_qref_icon.shp
 		Offset: 0,0
 
-steel_qtradr:
+qtradr.steel:
 	Defaults:
 		Offset: 0,-8
 		Tick: 50
@@ -3448,7 +3448,7 @@ steel_qtradr:
 		Filename: steel_qtradr_icon.shp
 		Offset: 0,0
 
-steel_qaclone:
+qaclone.steel:
 	Defaults:
 		Offset: -16,-20
 		Tick: 50
@@ -3475,7 +3475,7 @@ steel_qaclone:
 		Filename: steel_qaclone_icon.shp
 		Offset: 0,0
 
-steel_qacst:
+qacst.steel:
 	Defaults:
 		Offset: 2,-26
 	idle:
@@ -3522,7 +3522,7 @@ steel_qacst:
 		Filename: steelconyardicon.png
 		Offset: 0,0
 
-steel_qaweap:
+qaweap.steel:
 	Defaults:
 		Offset: -20,-26
 		Tick: 50
@@ -3609,7 +3609,7 @@ steel_qaweap:
 		Filename: steel_qaweap_icon.shp
 		Offset: 0,0
 
-steel_qatech:
+qatech.steel:
 	Defaults:
 		Offset: -8,-8
 		Tick: 50
@@ -3647,7 +3647,7 @@ steel_qatech:
 		Filename: steel_emp_icon.shp
 		Offset: 0,0
 
-steel_qaorbit:
+qaorbit.steel:
 	Defaults:
 		Offset: -8,-20
 		Scale: 1
@@ -3687,7 +3687,7 @@ steel_qaorbit:
 		Filename: steel_qaorbit_icon.shp
 		Offset: 0,0
 
-steel_fedturret:
+fedturret.steel:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,-4
@@ -3713,7 +3713,7 @@ steel_fedturret:
 		Filename: steel_fedturret_icon.shp
 		Offset: 0,0
 
-steel_fedaa:
+fedaa.steel:
 	Defaults:
 		Offset: 0,-6
 	idle:
@@ -3742,7 +3742,7 @@ steel_fedaa:
 		Filename: steel_fedaa_icon.shp
 		Offset: 0,0
 
-steel_qcannon:
+qcannon.steel:
 	Defaults:
 		Offset: -4,-20
 		Scale: 1.25
@@ -3774,7 +3774,7 @@ steel_qcannon:
 		Filename: steel_qcannon_icon.shp
 		Offset: 0,0
 
-steel_bfg10k:
+bfg10k.steel:
 	Defaults:
 		Offset: 55,15
 		#Scale: 1.25
@@ -3799,7 +3799,7 @@ steel_bfg10k:
 		Filename: bfg10kicon.png
 		Offset: 0,0
 
-steel_conpad:
+conpad.steel:
 	Defaults:
 		Offset: 2,-10 #12
 		Scale: 1.5
@@ -3850,7 +3850,7 @@ steel_conpad:
 		Filename: steel_conpad_icon.shp
 		Offset: 0,0
 
-steel_qoil:
+qoil.steel:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: cons_thermo_ground.png
@@ -3923,7 +3923,7 @@ steel_blasterball:
 		Filename: steel_blasterball.shp
 		ZOffset: 1023
 
-steel_qmcv:
+qmcv.steel:
 	Defaults:
 		Filename: steel_qmcv.shp
 		Offset: 0,16
@@ -3943,7 +3943,7 @@ steel_qmcv:
 		Filename: steel_qmcv_icon.shp
 		Offset: 0,0
 
-steel_qmin:
+qmin.steel:
 	Defaults:
 		Filename: steel_qmin.shp
 		Offset: 0,32
@@ -3974,7 +3974,7 @@ steel_qmin:
 		Filename: steel_qmin_icon.shp
 		Offset: 0,0
 
-steel_fedinf:
+fedinf.steel:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: steel_fedinf.shp
@@ -4047,7 +4047,7 @@ steel_fedinf:
 		Scale: 1
 		Offset: 0,0
 
-steel_qinf:
+qinf.steel:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
 		Filename: steel_qinf.shp
@@ -4138,7 +4138,7 @@ steel_qinf:
 		Scale: 1
 		Offset: 0,0
 
-steel_fedeng:
+fedeng.steel:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: steel_fedeng.shp
@@ -4177,7 +4177,7 @@ steel_fedeng:
 		Scale: 1
 		Offset: 0,0
 
-steel_board_inf:
+board_inf.steel:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: steel_board_inf.shp
@@ -4245,7 +4245,7 @@ steel_board_inf:
 		Scale: 1
 		Offset: 0,0
 
-steel_runner:
+runner.steel:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -4295,7 +4295,7 @@ steel_runner:
 	icon:
 		Filename: steel_runner_icon.png
 
-steel_mako:
+mako.steel:
 	Defaults:
 		Filename: steel_mako.shp
 		Offset: 0,30
@@ -4317,7 +4317,7 @@ steel_mako:
 		Filename: steel_energymuzzle.shp
 		Length: 14
 
-steel_manta:
+manta.steel:
 	Defaults:
 		Filename: steel_manta.shp
 		Offset: 0,32
@@ -4340,7 +4340,7 @@ steel_manta:
 		Filename: steel_manta_icon.shp
 		Offset: 0,0
 
-steel_manta_hunt:
+manta_hunt.steel:
 	Defaults:
 		Filename: steel_manta_hunt.shp
 		Offset: 0,32
@@ -4393,7 +4393,7 @@ steel_manta_hunt:
 		InterpolatedFacings: 32
 		Length: 3
 
-steel_arty:
+arty.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: steel_qtank.shp
@@ -4447,7 +4447,7 @@ steel_arty:
 		Filename: steel_qtank_icon.shp
 		Offset: 0,0
 
-steel_quantumtank:
+quantumtank.steel:
 	Defaults:
 		Filename: steel_qutnk.shp
 		Scale: 1
@@ -4478,7 +4478,7 @@ steel_quantumtank:
 		Filename: steel_qutnk_icon.shp
 		Offset: 0,0
 
-steel_katy:
+katy.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: steel_katy.shp
@@ -4497,7 +4497,7 @@ steel_katy:
 		Filename: steel_katy_icon.shp
 		Offset: 0,0
 
-steel_mega:
+mega.steel:
 	Defaults:
 		Filename: steel_mega.shp
 		Offset: 0,16
@@ -4522,7 +4522,7 @@ steel_mega:
 		Filename: steel_mega_icon.shp
 		Offset: 0,0
 
-steel_stalker:
+stalker.steel:
 	Defaults:
 		Filename: steel_stalker.png
 		Offset: 0,4
@@ -4544,7 +4544,7 @@ steel_stalker:
 		Filename: steel_stalker_icon.png
 		Offset: 0,0
 
-steel_beholder:
+beholder.steel:
 	Defaults:
 		Filename: steel_beholder.shp
 		Offset: 0,48
@@ -4574,7 +4574,7 @@ steel_beholder:
 		Filename: steel_beholder_icon.shp
 		Offset: 0,0
 
-white_rabbit:
+white_rabbit.steel:
 	Defaults:
 		Filename: white_rabbit.shp
 		Offset: 0,36
@@ -4623,7 +4623,7 @@ white_rabbit:
 		Filename: white_rabbit_icon.png
 		Offset: 0,0
 
-steel_potnk:
+potnk.steel:
 	Defaults:
 		Filename: steel_potnk.shp
 		Offset: 0,16
@@ -4648,7 +4648,7 @@ steel_potnk:
 		Filename: steel_potnk_icon.shp
 		Offset: 0,0
 
-steel_inspect:
+inspect.steel:
 	Defaults:
 		Filename: steel_inspect.shp
 		Offset: 0,16
@@ -4663,7 +4663,7 @@ steel_inspect:
 		Filename: steel_inspect_icon.shp
 		Offset: 0,0
 
-steel_hummer:
+hummer.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: steel_hummer.shp
@@ -4673,7 +4673,7 @@ steel_hummer:
 	icon:
 		Filename: steel_hummer_icon.shp
 
-steel_oldqtnk:
+oldqtnk.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: steel_oldqtnk.shp
@@ -4690,7 +4690,7 @@ steel_oldqtnk:
 	icon:
 		Filename: steel_oldqtnk_icon.shp
 
-steel_cougar:
+cougar.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: steel_cougar.shp
@@ -4706,7 +4706,7 @@ steel_cougar:
 	icon:
 		Filename: steel_cougar_icon.shp
 
-steel_cobra:
+cobra.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: steel_cobra.shp
@@ -4716,7 +4716,7 @@ steel_cobra:
 	icon:
 		Filename: steel_cobra_icon.shp
 
-steel_twister:
+twister.steel:
 	idle:
 		Filename: steel_twister.shp
 		Facings: -8
@@ -4756,7 +4756,7 @@ steel_scalpel:
 		Length: 14
 		Offset: 0,0
 
-steel_dagger:
+dagger.steel:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: steel_dagger.shp
@@ -4766,7 +4766,7 @@ steel_dagger:
 	icon:
 		Filename: steel_dagger_icon.shp
 
-steel_grun:
+grun.steel:
 	Defaults:
 		Filename: steel_grun.shp
 		Scale: 1
@@ -4792,7 +4792,7 @@ steel_grun:
 		Filename: steel_energymuzzle.shp
 		Length: 14
 
-steel_savi:
+savi.steel:
 	Defaults:
 		Filename: steel_savi.shp
 		Offset: 0,16
@@ -4817,7 +4817,7 @@ steel_savi:
 		Filename: steel_energymuzzle.shp
 		Length: 14
 
-steel_cargoship:
+cargoship.steel:
 	Defaults:
 		Filename: steel_cargoship.shp
 		Offset: 0,8
@@ -4831,7 +4831,7 @@ steel_cargoship:
 		Filename: steel_cargoship_icon.shp
 		Offset: 0,0
 
-steel_cruiser:
+cruiser.steel:
 	Defaults:
 		Filename: steel_cruiser.shp
 	idle:
@@ -4843,7 +4843,7 @@ steel_cruiser:
 	icon:
 		Filename: steel_cruiser_icon.shp
 
-steel_cruiser_f:
+cruiser_f.steel:
 	Defaults:
 		Filename: steel_cruiser_f.shp
 	idle:
@@ -4855,7 +4855,7 @@ steel_cruiser_f:
 	icon:
 		Filename: steel_cargoship_icon.shp
 
-steel_defender:
+defender.steel:
 	Defaults:
 		Filename: steel_defender.shp
 		Offset: 4,20
@@ -4878,27 +4878,27 @@ steel_defender:
 		Filename: steel_defender_icon.shp
 		Offset: 0,0
 
-upsteel_pulseweapons:
+up_pulseweapons.steel:
 	icon:
 		Filename: steel_upgrade_pulseweapons_icon.png
 
-upsteel_naniteinfusion:
+up_naniteinfusion.steel:
 	icon:
 		Filename: steel_upgrade_naniteinfusion_icon.png
 
-upsteel_ferrocrete:
+up_ferrocrete.steel:
 	icon:
 		Filename: steel_upgrade_ferrocrete_icon.png
 
-upsteel_resonanceammo:
+up_resonanceammo.steel:
 	icon:
 		Filename: steel_upgrade_resonanceammo_icon.png
 
-upsteel_empquantumweapons:
+up_empquantumweapons.steel:
 	icon:
 		Filename: steel_upgrade_quantumweaponpower_icon.png
 
-upsteel_shielresistance:
+up_shielresistance.steel:
 	icon:
 		Filename: steel_upgrade_shieldpower_icon.png
 
@@ -4906,7 +4906,7 @@ upsteel_shielresistance:
 #   Red Alert 2 Naxis
 ##############################################
 
-nax_conyard:
+conyard.nax:
 	Defaults:
 		Offset: -8,8
 	idle:
@@ -4939,7 +4939,7 @@ nax_conyard:
 		Filename: nax_conyard_icon.png
 		Offset: 0,0
 
-nax2_conyard:
+conyard.nax2:
 	Defaults:
 		Offset: -8,8
 	idle:
@@ -4972,7 +4972,7 @@ nax2_conyard:
 		Filename: lunarnaxisconyard.png
 		Offset: 0,0
 
-nax_weap:
+weap.nax:
 	Defaults:
 		Offset: -16,16
 	idle:
@@ -5031,7 +5031,7 @@ nax_weap:
 		Filename: nax_weap_icon.png
 		Offset: 0,0
 
-nax2_weap:
+weap.nax2:
 	Defaults:
 		Offset: -16,16
 	idle:
@@ -5088,7 +5088,7 @@ nax2_weap:
 		Filename: nax2_weap_icon.png
 		Offset: 0,0
 
-nax_naval:
+naval.nax:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -5126,7 +5126,7 @@ nax_naval:
 		Filename: ra2nayardicon.shp
 		Offset: 0,0
 
-nax_powr:
+powr.nax:
 	Defaults:
 		Offset: 0,-2
 	idle:
@@ -5145,7 +5145,7 @@ nax_powr:
 		Filename: nax_power_icon.png
 		Offset: 0,0
 
-nax2_powr:
+powr.nax2:
 	Defaults:
 		Offset: 0,-2
 	idle:
@@ -5164,7 +5164,7 @@ nax2_powr:
 		Filename: nax2_powr_icon.png
 		Offset: 0,0
 
-nax_barr:
+barr.nax:
 	Defaults:
 		Offset: -16,20
 	idle:
@@ -5183,7 +5183,7 @@ nax_barr:
 		Filename: nax_barr_icon.png
 		Offset: 0,0
 
-nax2_barr:
+barr.nax2:
 	Defaults:
 		Offset: -16,20
 	idle:
@@ -5202,7 +5202,7 @@ nax2_barr:
 		Filename: nax2_barr_icon.png
 		Offset: 0,0
 
-nax_refin:
+refin.nax:
 	Defaults:
 		Offset: -1,-6
 	idle:
@@ -5227,7 +5227,7 @@ nax_refin:
 		Filename: nax_refin_icon.png
 		Offset: 0,0
 
-nax2_refin:
+refin.nax2:
 	Defaults:
 		Offset: -1,-6
 	idle:
@@ -5252,7 +5252,7 @@ nax2_refin:
 		Filename: nax2_refin_icon.png
 		Offset: 0,0
 
-nax_radar:
+radar.nax:
 	Defaults:
 		Offset: 6,12
 	idle:
@@ -5273,7 +5273,7 @@ nax_radar:
 		Filename: nax_radar_icon.png
 		Offset: 0,0
 
-nax2_radar:
+radar.nax2:
 	Defaults:
 		Offset: 6,12
 	idle:
@@ -5294,7 +5294,7 @@ nax2_radar:
 		Filename: nax2_radar_icon.png
 		Offset: 0,0
 
-nax_airfield:
+airfield.nax:
 	Defaults:
 		Offset: 0, 24
 	idle:
@@ -5315,7 +5315,7 @@ nax_airfield:
 		Filename: nax_airfield_icon.png
 		Offset: 0,0
 
-nax2_airfield:
+airfield.nax2:
 	Defaults:
 		Offset: 2, 8
 	idle:
@@ -5336,7 +5336,7 @@ nax2_airfield:
 		Filename: nax2_airfield_icon.png
 		Offset: 0,0
 
-nax_tech:
+tech.nax:
 	Defaults:
 		Offset: 0, 0
 	idle:
@@ -5357,7 +5357,7 @@ nax_tech:
 		Filename: nax_tech_icon.png
 		Offset: 0,0
 
-nax2_tech:
+tech.nax2:
 	Defaults:
 		Offset: 2, 6
 	idle:
@@ -5378,7 +5378,7 @@ nax2_tech:
 		Filename: nax2_tech_icon.png
 		Offset: 0,0
 
-nax_tek:
+tek.nax:
 	Defaults:
 		Offset: -2,24
 	idle:
@@ -5420,7 +5420,7 @@ nax2_chrono:
 		Filename: nax2_chrono_icon.png
 		Offset: 0,0
 
-nax2_gcore:
+gcore.nax2:
 	Defaults:
 		Offset: -8,16
 	idle:
@@ -5441,7 +5441,7 @@ nax2_gcore:
 		Filename: nax2_gcore_icon.png
 		Offset: 0,0
 
-nax_beer:
+beer.nax:
 	Defaults:
 		Offset: 0,-2
 	idle:
@@ -5460,7 +5460,7 @@ nax_beer:
 		Filename: nax_beer_icon.png
 		Offset: 0,0
 
-nax_sausage:
+sausage.nax:
 	Defaults:
 		Offset: 0,-2
 	idle:
@@ -5481,7 +5481,7 @@ nax_sausage:
 		Filename: nax_sausage_icon.png
 		Offset: 0,0
 
-nax2_dairy:
+dairy.nax2:
 	Defaults:
 		Offset: 0,-2
 	idle:
@@ -5502,7 +5502,7 @@ nax2_dairy:
 		Filename: nax2_dairy_icon.png
 		Offset: 0,0
 
-nax_rocket:
+rocket.nax:
 	Defaults:
 		Offset: 0,-10
 		Filename: nax_rocket.shp
@@ -5538,7 +5538,7 @@ nax_v1_rocket:
 		Start: 1
 	idle:
 
-nax2_meteorray:
+meteorray.nax2:
 	Defaults:
 		Offset: 0,-10
 		Filename: nax2_meteorray.shp
@@ -5577,7 +5577,7 @@ nax2_meteor:
 		Tick: 50
 	idle:
 
-nax_twr:
+twr.nax:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,2
@@ -5602,7 +5602,7 @@ nax_twr:
 		Filename: nax_twr_icon.png
 		Offset: 0,0
 
-nax2_twr:
+twr.nax2:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,2
@@ -5629,7 +5629,7 @@ nax2_twr:
 		Filename: nax2_twr_icon.png
 		Offset: 0,0
 
-nax_flak88:
+flak88.nax:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,-8
@@ -5652,7 +5652,7 @@ nax_flak88:
 		Filename: nax_flak88_icon.png
 		Offset: 0,0
 
-nax2_sturmcann:
+sturmcann.nax2:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,-8
@@ -5675,7 +5675,7 @@ nax2_sturmcann:
 		Filename: nax2_sturmcann_icon.png
 		Offset: 0,0
 
-nax_bunk:
+bunk.nax:
 	Defaults:
 		Offset: 0, 0
 	idle:
@@ -5714,7 +5714,7 @@ nax_bunk:
 		Filename: nax_bunk_mg.shp
 		Facings: 64
 
-nax_rifle:
+rifle.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -5727,7 +5727,7 @@ nax_rifle:
 	icon:
 		Filename: nax_rifle_icon.png
 
-nax_mp40:
+mp40.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -5739,7 +5739,7 @@ nax_mp40:
 	icon:
 		Filename: nax_mp40_icon.png
 
-nax_shrek:
+shrek.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -5752,7 +5752,7 @@ nax_shrek:
 	icon:
 		Filename: nax_shrek_icon.png
 
-nax_litt:
+litt.nax:
 	Defaults:
 		Filename: nax_litt_new.shp
 	stand:
@@ -5835,7 +5835,7 @@ nax_litt:
 	icon:
 		Filename: nax_mage_icon.png
 
-nax2_parv:
+parv.nax2:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -5873,7 +5873,7 @@ nax2_parv:
 	icon:
 		Filename: nax_parzival_icon.png
 
-nax2_dalek:
+dalek.nax2:
 	Defaults:
 		Filename: nax2_dalek.png
 	idle:
@@ -5882,7 +5882,7 @@ nax2_dalek:
 	icon:
 		Filename: naxdalekicon.png
 
-nax_mcv:
+mcv.nax:
 	Defaults:
 		Filename: nax_mcv.shp
 		Scale: 0.7
@@ -5893,7 +5893,7 @@ nax_mcv:
 		Filename: nax_mcv_icon.png
 		Offset: 0, 0
 
-nax2_mcv:
+mcv.nax2:
 	Defaults:
 		Filename: nax2_mcv.shp
 		Scale: 0.7
@@ -5902,7 +5902,7 @@ nax2_mcv:
 	icon:
 		Filename: nax2_mcv_icon.png
 
-nax_panzer:
+panzer.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_panzer.shp
@@ -5921,7 +5921,7 @@ nax_panzer:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax2_panzer:
+panzer.nax2:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax2_panzer.shp
@@ -5942,7 +5942,7 @@ nax2_panzer:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_tiger:
+tiger.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_tiger.shp
@@ -5963,7 +5963,7 @@ nax_tiger:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_zombietank:
+zombietank.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_zombietank.shp
@@ -5973,7 +5973,7 @@ nax_zombietank:
 	icon:
 		Filename: ra2bficon.shp
 
-nax2_tiger:
+tiger.nax2:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax2_tiger.shp
@@ -5994,7 +5994,7 @@ nax2_tiger:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_wirbelwind:
+wirbelwind.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_wirbelwind.shp
@@ -6015,7 +6015,7 @@ nax_wirbelwind:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_car:
+car.nax:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: nax_car.shp
@@ -6030,7 +6030,7 @@ nax_car:
 	icon:
 		Filename: nax_car_icon.png
 
-nax_kingtiger:
+kingtiger.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_kingtiger.shp
@@ -6051,7 +6051,7 @@ nax_kingtiger:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_assault:
+assault.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_assault.shp
@@ -6072,7 +6072,7 @@ nax_assault:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_imperial:
+imperial.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_imperial.shp
@@ -6089,7 +6089,7 @@ nax_imperial:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_maus:
+maus.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_maus.shp
@@ -6110,7 +6110,7 @@ nax_maus:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_ratte:
+ratte.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_ratte.shp
@@ -6131,7 +6131,7 @@ nax_ratte:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_grille:
+grille.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_grille.shp
@@ -6148,7 +6148,7 @@ nax_grille:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax2_grille:
+grille.nax2:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax2_grille.shp
@@ -6168,7 +6168,7 @@ nax2_grille:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_hetzer:
+hetzer.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_hetzer.shp
@@ -6185,7 +6185,7 @@ nax_hetzer:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_atankcann:
+atankcann.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_atankcann.shp
@@ -6202,7 +6202,7 @@ nax_atankcann:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_jagdpanzer:
+jagdpanzer.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_jagdpanzer.shp
@@ -6219,7 +6219,7 @@ nax_jagdpanzer:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax2_jager:
+jager.nax2:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax2_jager.shp
@@ -6237,7 +6237,7 @@ nax2_jager:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax2_crystal:
+crystal.nax2:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax2_crystal.shp
@@ -6255,7 +6255,7 @@ nax2_crystal:
 	icon:
 		Filename: naxcrystaltankicon.png
 
-nax_gravity:
+gravity.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_gravity.shp
@@ -6273,7 +6273,7 @@ nax_gravity:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_brummbar:
+brummbar.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_brummbar.shp
@@ -6290,7 +6290,7 @@ nax_brummbar:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_sturmtiger:
+sturmtiger.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_sturmtiger.shp
@@ -6307,7 +6307,7 @@ nax_sturmtiger:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_nokana:
+nokana.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_nokana.shp
@@ -6324,7 +6324,7 @@ nax_nokana:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_halftrack:
+halftrack.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_halftrack.shp
@@ -6356,7 +6356,7 @@ nax_hole_shoot:
 	die:
 		Length: 64
 
-nax_hole_small:
+hole_small.nax:
 	Defaults:
 		Filename: nax_hole.shp
 		Tick: 64
@@ -6372,7 +6372,7 @@ nax_hole_small:
 		Length: 64
 		Tick: 8
 
-nax_hole:
+hole.nax:
 	Defaults:
 		Filename: nax_hole.shp
 		Tick: 80
@@ -6387,7 +6387,7 @@ nax_hole:
 	die:
 		Length: 64
 
-nax_slavemaster:
+slavemaster.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -6399,7 +6399,7 @@ nax_slavemaster:
 	icon:
 		Filename: ra2e2icon.shp
 
-nax_slav:
+slav.nax:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
 		Filename: yr_slav.shp
@@ -6441,7 +6441,7 @@ nax_slav:
 	icon:
 		Filename: workericon.png
 
-nax_haunebu:
+haunebu.nax:
 	Defaults:
 		Filename: nax_haunebu.shp
 	idle:
@@ -6459,7 +6459,7 @@ nax_haunebu:
 	icon:
 		Filename: nax_haunebu_icon.png
 
-nax_haunebu2:
+haunebu2.nax:
 	Defaults:
 		Filename: nax_ufox.shp
 		Offset: 0, 16
@@ -6479,7 +6479,7 @@ nax_haunebu2:
 		Filename: nax_haunebu2_icon.png
 		Offset: 0, 0
 
-nax_dieglocke:
+dieglocke.nax:
 	Defaults:
 		Filename: nax_dieglocke.shp
 	idle:
@@ -6497,7 +6497,7 @@ nax_dieglocke:
 	icon:
 		Filename: nax_glocke_icon.png
 
-nax_eng:
+eng.nax:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: nax_eng.shp
@@ -6514,7 +6514,7 @@ nax_eng:
 		Filename: nax_engitruk_icon.png
 		Offset: 0, 0
 
-nax_me262:
+me262.nax:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -6534,7 +6534,7 @@ nax_me262:
 	icon:
 		Filename: nax_me262_icon.png
 
-nax_bf109:
+bf109.nax:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -6552,7 +6552,7 @@ nax_bf109:
 	icon:
 		Filename: nax_bf109_icon.png
 
-nax_zep:
+zep.nax:
 	Defaults:
 		Filename: nax_zep.shp
 		Scale: 1
@@ -6565,7 +6565,7 @@ nax_zep:
 	icon:
 		Filename: nax_zep_icon.png
 
-nax2_zep:
+zep.nax2:
 	Defaults:
 		Filename: nax2_zep.shp
 		Scale: 1
@@ -6591,7 +6591,7 @@ nax_horten:
 	icon:
 		Filename: nax_horten_icon.png
 
-nax_cplane:
+cplane.nax:
 	Defaults:
 		Filename: nax_cplane.shp
 		Scale: 1
@@ -6604,7 +6604,7 @@ nax_cplane:
 	icon:
 		Filename: nax_zep_icon.png
 
-nax_drone:
+drone.nax:
 	Defaults:
 		Scale: 0.5
 	idle:
@@ -6624,7 +6624,7 @@ nax_drone:
 	icon:
 		Filename: nax_drone_icon.png
 
-nax_interceptor:
+interceptor.nax:
 	Defaults:
 		Scale: 0.9
 	idle:
@@ -6645,7 +6645,7 @@ nax_interceptor:
 	icon:
 		Filename: nax_drone_icon.png
 
-nax_piercer:
+piercer.nax:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -6665,7 +6665,7 @@ nax_piercer:
 	icon:
 		Filename: nax_piercer_icon.png
 
-nax_brad:
+brad.nax:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: nax_brad.shp
@@ -6680,7 +6680,7 @@ nax_brad:
 	icon:
 		Filename: nax_brad_icon.png
 
-nax2_bradley:
+bradley.nax2:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: nax2_bradley.shp
@@ -6698,7 +6698,7 @@ nax2_bradley:
 	icon:
 		Filename: nax_brad_icon.png
 
-nax2_aatank:
+aatank.nax2:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
 		Filename: nax2_aatank.shp
@@ -6715,7 +6715,7 @@ nax2_aatank:
 	icon:
 		Filename: nax_brad_icon.png
 
-nax_sarubia:
+sarubia.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_sarubia.shp
@@ -6731,7 +6731,7 @@ nax_sarubia:
 	muzzle-2:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
-nax_sarubia_bomb:
+sarubia_bomb.nax:
 	Defaults:
 		Filename: nax_sarubia_bomb.shp
 	up:
@@ -6742,7 +6742,7 @@ nax_sarubia_bomb:
 		InterpolatedFacings: 32
 		Length: 21
 
-nax_shoe:
+shoe.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_shoe.shp
@@ -6767,7 +6767,7 @@ nax_shoe:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_muboat:
+muboat.nax:
 	Defaults:
 		Filename: nax_muboat.shp
 		Scale: 0.9
@@ -6782,7 +6782,7 @@ nax_muboat:
 	icon:
 		Filename: ra2subicon.shp
 
-nax_tuboat:
+tuboat.nax:
 	idle:
 		Scale: 0.65
 		Filename: nax_muboat.shp
@@ -6791,7 +6791,7 @@ nax_tuboat:
 	icon:
 		Filename: ra2subicon.shp
 
-nax_frank:
+frank.nax:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
 		Filename: nax_frank.shp
@@ -6825,7 +6825,7 @@ nax_frank:
 	icon:
 		Filename: nax_frank_icon.png
 
-nax_merc:
+merc.nax:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_merc.shp
@@ -6844,7 +6844,7 @@ nax_merc:
 		Scale: 1
 		Offset: 0,0
 
-nax_cons:
+cons.nax:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_cons.shp
@@ -6863,7 +6863,7 @@ nax_cons:
 		Scale: 1
 		Offset: 0,0
 
-nax_tcons:
+tcons.nax:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_tcons.shp
@@ -6882,7 +6882,7 @@ nax_tcons:
 		Scale: 1
 		Offset: 0,0
 
-nax_fcons:
+fcons.nax:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
 		Filename: nax_fcons.shp
@@ -6901,7 +6901,7 @@ nax_fcons:
 		Scale: 1
 		Offset: 0,0
 
-nax_hmg:
+hmg.nax:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: nax_hmg.shp
@@ -6983,7 +6983,7 @@ nax_hmg:
 		Scale: 1
 		Offset: 0,0
 
-nax_quadflak:
+quadflak.nax:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: nax_quadflak.shp
@@ -7059,7 +7059,7 @@ nax_quadflak:
 		Scale: 1
 		Offset: 0,0
 
-nax_kubel:
+kubel.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_kubel.shp
@@ -7076,7 +7076,7 @@ nax_kubel:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_bmwbike:
+bmwbike.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_bmwbike.shp
@@ -7093,7 +7093,7 @@ nax_bmwbike:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-nax_alien:
+alien.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7152,7 +7152,7 @@ nax_cowprojectile:
 		InterpolatedFacings: 32
 		ZOffset: 1023
 
-nax2_armor_mg:
+armor_mg.nax2:
 	Defaults:
 		Filename: nax2_armor_mg.shp
 		Scale: 0.9
@@ -7176,7 +7176,7 @@ nax2_armor_mg:
 		Filename: nax2_armor_mg_icon.png
 		Offset: 0,0
 
-nax2_engi:
+engi.nax2:
 	Defaults:
 		Filename: nax2_engi.shp
 		Scale: 0.9
@@ -7197,7 +7197,7 @@ nax2_engi:
 		Filename: nax2_engi_icon.png
 		Offset: 0,0
 
-nax2_giant_rk:
+giant_rk.nax2:
 	Defaults:
 		Filename: nax2_giant_rk.shp
 		Scale: 0.9
@@ -7221,7 +7221,7 @@ nax2_giant_rk:
 		Filename: nax2_giant_rk_icon.png
 		Offset: 0,0
 
-nax2_armor_harv:
+armor_harv.nax2:
 	Defaults:
 		Filename: nax2_armor_harv.shp
 		Scale: 0.9
@@ -7253,7 +7253,7 @@ nax2_armor_harv:
 		Filename: nax2_armor_harv_icon.png
 		Offset: 0,0
 
-nax2_beetle:
+beetle.nax2:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: nax2_beetle.shp
@@ -7268,7 +7268,7 @@ nax2_beetle:
 	icon:
 		Filename: nax2_beetle_icon.png
 
-nax2_lasert:
+lasert.nax2:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Filename: nax2_lasert.shp
@@ -7283,7 +7283,7 @@ nax2_lasert:
 		Filename: naxlasertankicon.png
 		Offset: 0,0
 
-nax_lunar:
+lunar.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7321,7 +7321,7 @@ nax_lunar:
 	icon:
 		Filename: nax2_lunar_icon.png
 
-nax_lunar2:
+lunar2.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7359,7 +7359,7 @@ nax_lunar2:
 	icon:
 		Filename: nax2_lunar2_icon.png
 
-nax2_uber:
+uber.nax2:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7397,7 +7397,7 @@ nax2_uber:
 	icon:
 		Filename: nax2_uber_icon.png
 
-nax_undead:
+undead.nax:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7435,7 +7435,7 @@ nax_undead:
 	icon:
 		Filename: nax_undead_icon.png
 
-nax_corpse:
+corpse.nax:
 	make:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
@@ -7452,20 +7452,20 @@ nax_corpse:
 	icon:
 		Filename: nax_undead_icon.png
 
-nax_corpse_big:
-	Inherits: nax_corpse
+corpse_big.nax:
+	Inherits: corpse.nax
 	idle:
 		Filename: ra2_death_b.shp
 	die:
 		Filename: ra2_death_b.shp
 
-nax_miniv2:
+miniv2.nax:
 	idle:
 		Filename: nax_miniv2.shp
 		Facings: 64
 		ZOffset: 1023
 
-nax2_bbomb:
+bbomb.nax2:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -7483,7 +7483,7 @@ nax2_bbomb:
 	icon:
 		Filename: nax_piercer_icon.png
 
-nax_conehead:
+conehead.nax:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
@@ -7535,7 +7535,7 @@ nax_conehead:
 		Start: 324
 	icon:
 		Filename: nax_conehead_icon.png
-nax_conehead2:
+conehead2.nax:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
@@ -7616,18 +7616,18 @@ blitzkriegicon:
 	icon:
 		Filename: blitzkriegicon.png
 
-upnax2_ylaser:
+up_ylaser.nax2:
 	icon:
 		Filename: upnax2_ylaser.png
 
-upnax2_gplasma:
+up_gplasma.nax2:
 	icon:
 		Filename: upnax2_gplasma.png
 
 ##############################################
 #   Red Alert 2 Future Tech
 ##############################################
-futu_mcv:
+mcv.futu:
 	Defaults:
 		Filename: ra2mcv.shp
 	idle:
@@ -7635,7 +7635,7 @@ futu_mcv:
 	icon:
 		Filename: futu_mcvicon.png
 
-futu_egcnst:
+egcnst.futu:
 	Defaults:
 		Offset: 2,-40
 	idle:
@@ -7674,7 +7674,7 @@ futu_egcnst:
 		Filename: futu_conyardicon.png
 		Offset: 0,0
 
-futu_ggpowr:
+ggpowr.futu:
 	Defaults:
 		Offset: 0,-16
 	idle:
@@ -7706,7 +7706,7 @@ futu_ggpowr:
 		Filename: futu_reactoricon.png
 		Offset: 0,0
 
-futu_egpile:
+egpile.futu:
 	Defaults:
 		Offset: 10,-10
 	build:
@@ -7760,7 +7760,7 @@ futu_egpile:
 		Filename: futu_troopgateicon.png
 		Offset: 0,0
 
-futu_egweap2:
+egweap2.futu:
 	Defaults:
 		Offset: -24,-36
 	idle:
@@ -7857,7 +7857,7 @@ futu_egweap2:
 		Filename: futu_warpgateicon.png
 		Offset: 0,0
 
-futu_launchpad:
+launchpad.futu:
 	Defaults:
 		Offset: -32,-48 #12
 	idle:
@@ -7917,7 +7917,7 @@ futu_launchpad:
 		Filename: ra2_p_airborne.shp
 		Offset: 0,0
 
-futu_egtf:
+egtf.futu:
 	Defaults:
 		Offset: -4,16
 	build:
@@ -7965,7 +7965,7 @@ futu_egtf:
 		Filename: futu_transmissioncentericon.png
 		Offset: 0,0
 
-futu_egrefn:
+egrefn.futu:
 	Defaults:
 		Offset: -10,-26
 	idle:
@@ -8007,7 +8007,7 @@ futu_egrefn:
 		Filename: futu_refineryicon.png
 		Offset: 0,0
 
-futu_egtech:
+egtech.futu:
 	Defaults:
 		Offset: -12,4
 	idle:
@@ -8040,7 +8040,7 @@ futu_egtech:
 		Filename: futu_battlelabicon.png
 		Offset: 0,0
 
-futu_egshock:
+egshock.futu:
 	Defaults:
 		Offset: -8,-32
 	idle:
@@ -8086,7 +8086,7 @@ futu_egshock:
 		Filename: futu_shockcentericon.png
 		Offset: 0,0
 
-futu_gggun:
+gggun.futu:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,-4
@@ -8113,7 +8113,7 @@ futu_gggun:
 		Filename: futu_gggun_icon.png
 		Offset: 0,0
 
-futu_ggmlt:
+ggmlt.futu:
 	Defaults:
 		Offset: 0,-4
 	idle:
@@ -8146,7 +8146,7 @@ futu_ggmlt:
 
 #   Red Alert 2 Future Tech Tank
 
-futu_enforcer:
+enforcer.futu:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: futu_enforcer.shp
@@ -8184,7 +8184,7 @@ futu_enforcer:
 	icon:
 		Filename: futu_enforcericon.png
 
-futu_javelinsoldier:
+javelinsoldier.futu:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Scale: 0.7
@@ -8260,19 +8260,19 @@ futu_javelinsoldier:
 	icon:
 		Filename: futu_javelinsoldiericon.png
 
-futu_fedeng:
-	Inherits: steel_fedeng
+fedeng.futu:
+	Inherits: fedeng.steel
 	icon:
 		Filename: futu_engiicon.png
 		Scale: 1
 		Offset: 0,0
 
-futu_engi:
-	Inherits: nax2_engi
+engi.futu:
+	Inherits: engi.nax2
 	icon:
 		Filename: futu_repairdroidicon.png
 
-futu_wheel:
+wheel.futu:
 	Defaults:
 		Filename: futu_wheel.shp
 	idle1:
@@ -8296,7 +8296,7 @@ futu_wheel:
 		Filename: futu_scoutroboticon.png
 		Offset: 0,0
 
-future_robot_cannon:
+robot_cannon.futu:
 	Defaults:
 		Filename: future_robot_cannon.shp
 		Scale: 0.4
@@ -8328,7 +8328,7 @@ future_robot_cannon:
 		Filename: futu_cannonroboticon.png
 		Offset: 0,0
 
-future_robot_missiles:
+robot_missiles.futu:
 	Defaults:
 		Filename: future_robot_missiles.shp
 		Scale: 0.4
@@ -8360,7 +8360,7 @@ future_robot_missiles:
 		Filename: futu_missileroboticon.png
 		Offset: 0,0
 
-future_robot_shotgun:
+robot_shotgun.futu:
 	Defaults:
 		Filename: future_robot_shotgun.shp
 		Scale: 0.4
@@ -8392,7 +8392,7 @@ future_robot_shotgun:
 		Filename: futu_shotgunroboticon.png
 		Offset: 0,0
 
-futu_cryoleg:
+cryoleg.futu:
 	Defaults:
 		Filename: crleg.shp
 		ShadowStart: -1
@@ -8494,7 +8494,7 @@ futu_cryoleg:
 		Filename: steel_energymuzzle.shp
 		ShadowStart: -1
 
-future_mech_machinegun:
+mech_machinegun.futu:
 	Defaults:
 		Filename: future_mech_machinegun.shp
 		Scale: 0.8
@@ -8518,7 +8518,7 @@ future_mech_machinegun:
 		Filename: futu_chaingunmechicon.png
 		Offset: 0,0
 
-future_mech_plasma:
+mech_plasma.futu:
 	Defaults:
 		Filename: future_mech_plasma.shp
 		Scale: 0.8
@@ -8542,17 +8542,17 @@ future_mech_plasma:
 		Filename: futu_plasmamechicon.png
 		Offset: 0,0
 
-futu_landcarr:
+landcarr.futu:
 	Inherits: ^RA2CannonMuzzle
 	icon:
 		Filename: futu_beehiveicon.png
 
-futu_landcarr_drone:
+landcarr_drone.futu:
 	Inherits: ra2hornet
 	Defaults:
 		Scale: 0.5
 
-futu_orion:
+orion.futu:
 	Inherits: ^RA2CannonMuzzle
 	icon:
 		Filename: futu_oriontankicon.png
@@ -8581,7 +8581,7 @@ futu_manticore:
 		Filename: aa_mecha_icon.shp
 		Offset: 0,0
 
-futu_ifv:
+ifv.futu:
 	Defaults:
 		Filename: ra2ifv.shp
 		Scale: 0.7
@@ -8685,12 +8685,12 @@ futu_ifv:
 	icon:
 		Filename: futu_salamanderifvicon.png
 
-futu_mbt:
+mbt.futu:
 	Inherits: ^RA2CannonMuzzle
 	icon:
 		Filename: futu_guardiantankicon.png
 
-futu_hvrt:
+hvrt.futu:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
@@ -8708,7 +8708,7 @@ futu_hvrt:
 	icon:
 		Filename: futu_riptideacvicon.png
 
-futu_cryo:
+cryo.futu:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: futu_cryo.png
@@ -8726,7 +8726,7 @@ futu_cryo:
 	icon:
 		Filename: future_cryocopter_icon.png
 
-futu_harv:
+harv.futu:
 	Defaults:
 		Filename: futu_harv.png
 		Scale: 0.9
@@ -8747,7 +8747,7 @@ futu_harv:
 		Facings: 8
 	icon:
 		Filename: futu_harvicon.png
-futu_harv2:
+harv2.futu:
 	Defaults:
 		Filename: futu_harv2.png
 		Scale: 0.9
@@ -8769,7 +8769,7 @@ futu_harv2:
 	icon:
 		Filename: futu_harv2icon.png
 
-futu_phal:
+phal.futu:
 	Inherits: ^RA2CannonMuzzle
 		Scale: 1
 	Defaults:
@@ -8789,7 +8789,7 @@ futu_phal:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-futu_athena:
+athena.futu:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: futu_antena.png
@@ -8801,7 +8801,7 @@ futu_athena:
 	icon:
 		Filename: futu_athenacannonicon.png
 
-futu_coiler:
+coiler.futu:
 	Defaults:
 		Filename: futu_coiler.png
 		Scale: 0.7
@@ -8811,7 +8811,7 @@ futu_coiler:
 	icon:
 		Filename: futu_coilericon.png
 
-futu_futu:
+futu.futu:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: futu_futu.png
@@ -8846,7 +8846,7 @@ yrrobo:
 	icon:
 		Filename: yrroboicon.png
 
-futu_spy:
+spy.futu:
 	Inherits: ^RA2Infantry
 	Defaults:
 		Filename: ra2_spy.shp
@@ -8859,7 +8859,7 @@ futu_spy:
 	icon:
 		Filename: futu_infiltratoricon.png
 
-futu_blackwidow:
+blackwidow.futu:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: ra2_tany_black.shp
@@ -8915,7 +8915,7 @@ futu_blackwidow:
 		Filename: futu_blackwidowicon.png
 	iconchrono: futu_blackwidowicon.png
 
-future_twister:
+twister.futu:
 	idle:
 		Filename: steel_twister.shp
 		Facings: -8
@@ -8929,7 +8929,7 @@ future_twister:
 	icon:
 		Filename: steel_twister_icon.shp
 
-future_harbinger:
+harbinger.futu:
 	Defaults:
 		Filename: future_harbinger.png
 	idle:
@@ -8937,15 +8937,15 @@ future_harbinger:
 	icon:
 		Filename: future_harbinger_icon.png
 
-future_upgrade_equalizer_x1:
+upgrade_equalizer_x1.futu:
 	icon:
 		Filename: future_equalizer_x1_icon.png
 
-future_upgrade_equalizer_x2:
+upgrade_equalizer_x2.futu:
 	icon:
 		Filename: future_equalizer_x2_icon.png
 
-future_upgrade_equalizer_x3:
+upgrade_equalizer_x3.futu:
 	icon:
 		Filename: future_equalizer_x3_icon.png
 

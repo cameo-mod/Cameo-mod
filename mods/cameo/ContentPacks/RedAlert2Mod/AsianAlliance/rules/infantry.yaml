@@ -1,4 +1,4 @@
-aa_gren:
+gren.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -12,15 +12,15 @@ aa_gren:
 	Inherits@kami: ^KamikazeMode
 	Tooltip:
 		Name: Asian Militia
-		RequiresCondition: !asian_upgrade_infantryspec
-	Tooltip@asian_upgrade_infantryspec:
+		RequiresCondition: !upgrade_infantryspec.asian
+	Tooltip@upgrade_infantryspec.asian:
 		Name: Asian Grenadier
-		RequiresCondition: asian_upgrade_infantryspec
+		RequiresCondition: upgrade_infantryspec.asian
 	Valued:
 		Cost: 100
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~aa_cgbrck
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -40,11 +40,11 @@ aa_gren:
 	Armament@GRENADE:
 		Weapon: AsianGrenade
 		LocalOffset: 128,0,256
-		RequiresCondition: asian_upgrade_infantryspec && !rank-elite
+		RequiresCondition: upgrade_infantryspec.asian && !rank-elite
 	Armament@GRENADEELITE:
 		Weapon: AsianGrenadeE
 		LocalOffset: 128,0,256
-		RequiresCondition: asian_upgrade_infantryspec && rank-elite
+		RequiresCondition: upgrade_infantryspec.asian && rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2AsianShotgun
@@ -58,22 +58,22 @@ aa_gren:
 	Armament@GRENADEG:
 		Name: garrisoned
 		Weapon: AsianGrenade
-		RequiresCondition: asian_upgrade_infantryspec && !rank-elite
+		RequiresCondition: upgrade_infantryspec.asian && !rank-elite
 	Armament@GRENADEGE:
 		Name: garrisoned
 		Weapon: AsianGrenadeE
-		RequiresCondition: asian_upgrade_infantryspec && rank-elite
-	DamageMultiplier@asian_upgrade_infantryspec:
-		RequiresCondition: asian_upgrade_infantryspec
+		RequiresCondition: upgrade_infantryspec.asian && rank-elite
+	DamageMultiplier@upgrade_infantryspec.asian:
+		RequiresCondition: upgrade_infantryspec.asian
 		Modifier: 50
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: RedGuardVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
-aa_tkiller:
+tkiller.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -91,7 +91,7 @@ aa_tkiller:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgbrck
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Mobile:
@@ -104,46 +104,46 @@ aa_tkiller:
 		Name: primary
 		Weapon: AsianTankKillerRocket
 		LocalOffset: 128,0,256
-		RequiresCondition: !rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && !upgrade_infantryspec.asian
 	Armament@Upgrade:
 		Name: primary
 		Weapon: AsianTankKillerRocket_upgrade
 		LocalOffset: 128,0,256
-		RequiresCondition: !rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && upgrade_infantryspec.asian
 	Armament@PRIMARYELITE:
 		Name: primary
 		Weapon: AsianTankKillerRocket_elite
 		LocalOffset: 128,0,256
-		RequiresCondition: rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && !upgrade_infantryspec.asian
 	Armament@PRIMARYELITEUpgrade:
 		Name: primary
 		Weapon: AsianTankKillerRocket_elite_upgrade
 		LocalOffset: 128,0,256
-		RequiresCondition: rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && upgrade_infantryspec.asian
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: AsianTankKillerRocket
-		RequiresCondition: !rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && !upgrade_infantryspec.asian
 	Armament@GARRISONEDUpgrade:
 		Name: garrisoned
 		Weapon: AsianTankKillerRocket_upgrade
-		RequiresCondition: !rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && upgrade_infantryspec.asian
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: AsianTankKillerRocket_elite
-		RequiresCondition: rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && !upgrade_infantryspec.asian
 	Armament@GARRISONEDELITEUpgrade:
 		Name: garrisoned
 		Weapon: AsianTankKillerRocket_elite_upgrade
-		RequiresCondition: rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && upgrade_infantryspec.asian
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: TankHunterVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
-aa_plast:
+plast.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -163,7 +163,7 @@ aa_plast:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~upaa_plast, aa_cgtech
+		Prerequisites: ~up_plast.asian, cgtech.asian
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-infantry.description
 	Mobile:
@@ -193,9 +193,9 @@ aa_plast:
 	Voiced:
 		VoiceSet: TankHunterVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai, asian_upgrade_dragonfire
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian, upgrade_dragonfire.asian
 
-aa_flam:
+flam.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@FireInfantry: ^FireInfantry
@@ -214,7 +214,7 @@ aa_flam:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~aa_cgradr
+		Prerequisites: ~cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-e4.description
 	Mobile:
@@ -227,29 +227,29 @@ aa_flam:
 		Name: primary
 		Weapon: AsianFlamerTroop
 		LocalOffset: 427,0,341
-		RequiresCondition: !rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && !upgrade_infantryspec.asian
 	Armament@Upgrade:
 		Name: primary
 		Weapon: AsianFlamerTroop2
 		LocalOffset: 427,0,341
-		RequiresCondition: (rank-elite && !asian_upgrade_infantryspec) || (!rank-elite && asian_upgrade_infantryspec)
+		RequiresCondition: (rank-elite && !upgrade_infantryspec.asian) || (!rank-elite && upgrade_infantryspec.asian)
 	Armament@ELITE:
 		Name: primary
 		Weapon: AsianFlamerTurret
 		LocalOffset: 427,0,341
-		RequiresCondition: rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && upgrade_infantryspec.asian
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: AsianFlamerTroop
-		RequiresCondition: !rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && !upgrade_infantryspec.asian
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: AsianFlamerTroop2
-		RequiresCondition: (rank-elite && !asian_upgrade_infantryspec) || (!rank-elite && asian_upgrade_infantryspec)
+		RequiresCondition: (rank-elite && !upgrade_infantryspec.asian) || (!rank-elite && upgrade_infantryspec.asian)
 	Armament@GARRISONEDE:
 		Name: garrisoned
 		Weapon: AsianFlamerTurret
-		RequiresCondition: rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && upgrade_infantryspec.asian
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 50
 	FireWarheadsOnDeath:
@@ -259,9 +259,9 @@ aa_flam:
 	Voiced:
 		VoiceSet: AsianFlametroopVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai, asian_upgrade_dragonfire
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian, upgrade_dragonfire.asian
 
-aa_japrif:
+japrif.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -279,7 +279,7 @@ aa_japrif:
 		Cost: 250
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~upaa_japrif
+		Prerequisites: ~up_japrif.asian
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -291,38 +291,38 @@ aa_japrif:
 	Armament@PRIMARY:
 		Weapon: RA2AsianShotgunFanatic1
 		LocalOffset: 128,0,256
-		RequiresCondition: !rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && !upgrade_infantryspec.asian
 	Armament@Upgrade:
 		Weapon: RA2AsianShotgunFanatic2
 		LocalOffset: 128,0,256
-		RequiresCondition: (rank-elite && !asian_upgrade_infantryspec) || (!rank-elite && asian_upgrade_infantryspec)
+		RequiresCondition: (rank-elite && !upgrade_infantryspec.asian) || (!rank-elite && upgrade_infantryspec.asian)
 	Armament@ELITE:
 		Weapon: RA2AsianShotgunFanatic3
 		LocalOffset: 128,0,256
-		RequiresCondition: rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && upgrade_infantryspec.asian
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2AsianShotgunFanatic1
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && !upgrade_infantryspec.asian
 	Armament@GARRISONEDUpgrade:
 		Name: garrisoned
 		Weapon: RA2AsianShotgunFanatic2
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: (rank-elite && !asian_upgrade_infantryspec) || (!rank-elite && asian_upgrade_infantryspec)
+		RequiresCondition: (rank-elite && !upgrade_infantryspec.asian) || (!rank-elite && upgrade_infantryspec.asian)
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: RA2AsianShotgunFanatic3
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && upgrade_infantryspec.asian
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: AsianKamiVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
-aa_samurai:
+samurai.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -340,7 +340,7 @@ aa_samurai:
 		Cost: 350
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~upaa_samurai, aa_cgradr
+		Prerequisites: ~up_samurai.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-rasamurai.description
 	Mobile:
@@ -351,21 +351,21 @@ aa_samurai:
 		Step: 40
 	Armament@Sword1:
 		Weapon: AsianSamuraiSword1
-		RequiresCondition: !rank-elite && !asian_upgrade_infantryspec
+		RequiresCondition: !rank-elite && !upgrade_infantryspec.asian
 	Armament@Sword2:
 		Weapon: AsianSamuraiSword2
-		RequiresCondition: (rank-elite && !asian_upgrade_infantryspec) || (!rank-elite && asian_upgrade_infantryspec)
+		RequiresCondition: (rank-elite && !upgrade_infantryspec.asian) || (!rank-elite && upgrade_infantryspec.asian)
 	Armament@Sword3:
 		Weapon: AsianSamuraiSword3
-		RequiresCondition: rank-elite && asian_upgrade_infantryspec
+		RequiresCondition: rank-elite && upgrade_infantryspec.asian
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: AsianSamuVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
-aa_archer:
+archer.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -384,7 +384,7 @@ aa_archer:
 		Cost: 450
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~upaa_archer, aa_cgradr
+		Prerequisites: ~up_archer.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Mobile:
@@ -416,9 +416,9 @@ aa_archer:
 	Voiced:
 		VoiceSet: AsianMaidVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai, asian_upgrade_celestialpower
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian, upgrade_celestialpower.asian
 
-aa_shinobi:
+shinobi.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -437,7 +437,7 @@ aa_shinobi:
 		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~aa_cgradr
+		Prerequisites: ~cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-aashinobi.description
 	Mobile:
@@ -475,14 +475,14 @@ aa_shinobi:
 		Notification: BuildingInfiltrated
 		PlayerExperience: 50
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
 ra2engineer.asian:
 	Inherits: RA2ENGINEER
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
 	Inherits@kami: ^KamikazeMode
 	Buildable:
-		Prerequisites: ~aa_cgbrck
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 	Voiced:
 		VoiceSet: CHHackerVoice
@@ -493,9 +493,9 @@ ra2engineer.asian:
 	Captures@REUSABLE:
 		Voice: Attack
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian
 
-aa_alligator:
+alligator.asian:
 	Inherits: ^DefaultInfantry
 	Inherits@2: ^AffectedByTiberium
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -513,7 +513,7 @@ aa_alligator:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgbrck
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-alligator.description
 	Mobile:
@@ -563,9 +563,9 @@ aa_alligator:
 	IgnoresDisguise:
 	-Targetable@disguise:
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
-aa_asdf:
+asdf.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -583,7 +583,7 @@ aa_asdf:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~upaa_asdf, aa_cgmiac
+		Prerequisites: ~up_asdf.asian, cgmiac.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-boris.description
 		IconPalette: ra2cameo
@@ -596,11 +596,11 @@ aa_asdf:
 	Armament@PRIMARY:
 		Weapon: ASDFGun
 		LocalOffset: 128,0,256
-		RequiresCondition: !asian_upgrade_infantryspec
+		RequiresCondition: !upgrade_infantryspec.asian
 	Armament@Upgrade:
 		Weapon: ASDFGun2
 		LocalOffset: 128,0,256
-		RequiresCondition: asian_upgrade_infantryspec
+		RequiresCondition: upgrade_infantryspec.asian
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: ASDFKamikazeTargeting
@@ -609,11 +609,11 @@ aa_asdf:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: ASDFGun
-		RequiresCondition: !asian_upgrade_infantryspec
+		RequiresCondition: !upgrade_infantryspec.asian
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: ASDFGun2
-		RequiresCondition: asian_upgrade_infantryspec
+		RequiresCondition: upgrade_infantryspec.asian
 	AttackFrontal:
 		FacingTolerance: 0
 	WithInfantryBody:
@@ -623,7 +623,7 @@ aa_asdf:
 			primary: shoot
 	AirstrikeMasterCA@1:
 		ArmamentNames: secondary
-		Actors: aa_kami.asdf
+		Actors: kami_asdf.asian
 		SquadSize: 1
 		InitialActorCount: -1
 		RespawnTicks: 25
@@ -644,9 +644,9 @@ aa_asdf:
 	DeliversCash:
 		Payload: 600
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
-aa_commando:
+commando.asian:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -665,7 +665,7 @@ aa_commando:
 		Cost: 3000
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~aa_cgmiac
+		Prerequisites: ~cgmiac.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-ra2snipe.description
 		BuildLimit: 1
@@ -683,26 +683,26 @@ aa_commando:
 	Armament@PRIMARY:
 		Weapon: AsianSniper
 		LocalOffset: 500,0,400
-		RequiresCondition: !asian_upgrade_infantryspec
+		RequiresCondition: !upgrade_infantryspec.asian
 		PauseOnCondition: !ammo
 	Armament@PRIMARYUPGRADE:
 		Weapon: AsianSniperAP
 		LocalOffset: 500,0,400
-		RequiresCondition: asian_upgrade_infantryspec
+		RequiresCondition: upgrade_infantryspec.asian
 		PauseOnCondition: !ammo
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: AsianSniper
-		RequiresCondition: !asian_upgrade_infantryspec
+		RequiresCondition: !upgrade_infantryspec.asian
 		PauseOnCondition: !ammo
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: AsianSniperAP
-		RequiresCondition: asian_upgrade_infantryspec
+		RequiresCondition: upgrade_infantryspec.asian
 		PauseOnCondition: !ammo
-	GrantConditionOnPrerequisite@asian_upgrade_infantryspec:
-		Condition: asian_upgrade_infantryspec
-		Prerequisites: asian_upgrade_infantryspec
+	GrantConditionOnPrerequisite@upgrade_infantryspec.asian:
+		Condition: upgrade_infantryspec.asian
+		Prerequisites: upgrade_infantryspec.asian
 	AmmoPool:
 		Ammo: 6
 		AmmoCondition: ammo
@@ -730,9 +730,9 @@ aa_commando:
 	Voiced:
 		VoiceSet: TSUmagon
 	RenderSprites:
-		Image: aa_commando
+		Image: commando.asian
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_infantryspec, asian_upgrade_banzai
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
 
 ##############################################
 #   Red Alert 2 Asian Tanks

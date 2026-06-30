@@ -1,4 +1,4 @@
-futu_enforcer:
+enforcer.futu:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -17,7 +17,7 @@ futu_enforcer:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~futu_egpile
+		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_enforcer.description
 	Mobile:
@@ -126,7 +126,7 @@ futu_enforcer:
 	ActorStatValues:
 		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
 
-futu_javelinsoldier:
+javelinsoldier.futu:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -145,7 +145,7 @@ futu_javelinsoldier:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~futu_egpile
+		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_javelinsoldier.description
 	Mobile:
@@ -252,17 +252,17 @@ futu_javelinsoldier:
 	ActorStatValues:
 		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
 
-futu_fedeng:
+fedeng.futu:
 	Inherits: RA2ENGINEER
 	Buildable:
-		Prerequisites: ~futu_egpile
+		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_fedeng.description
 	RenderSprites:
-		Image: futu_fedeng
+		Image: fedeng.futu
 	-TakeCover:
 
-futu_spy:
+spy.futu:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2Infantry
 	Inherits@template: ^ScoutInfantryTemplate
@@ -273,7 +273,7 @@ futu_spy:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 90
-		Prerequisites: ~futu_egtech
+		Prerequisites: ~egtech.futu
 		Description: actor-ra2spy.description
 	Valued:
 		Cost: 1000
@@ -304,7 +304,7 @@ futu_spy:
 	Voiced:
 		VoiceSet: RA2SpyVoice
 
-futu_blackwidow:
+blackwidow.futu:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -330,7 +330,7 @@ futu_blackwidow:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~futu_egtech
+		Prerequisites: ~egtech.futu
 		Description: actor-futu_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
@@ -366,9 +366,9 @@ futu_blackwidow:
 	Voiced:
 		VoiceSet: BlackWidowVoice
 	ActorStatValues:
-		Upgrades: future_upgrade_equalizer_x1, future_upgrade_equalizer_x2, future_upgrade_equalizer_x3
+		Upgrades: upgrade_equalizer_x1.futu, upgrade_equalizer_x2.futu, upgrade_equalizer_x3.futu
 
-futu_cryoleg:
+cryoleg.futu:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -383,7 +383,7 @@ futu_cryoleg:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 121
-		Prerequisites: ~futu_egshock
+		Prerequisites: ~egshock.futu
 		BuildLimit: 1
 		Description: actor-futu_cryoleg.description
 	RenderSprites:

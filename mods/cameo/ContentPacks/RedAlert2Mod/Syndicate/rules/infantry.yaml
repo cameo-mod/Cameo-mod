@@ -1,4 +1,4 @@
-latin_mili:
+mili.latin:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -14,7 +14,7 @@ latin_mili:
 		Cost: 130
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~latin_cgpile
+		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-latin_mili.description
 	Mobile:
@@ -31,10 +31,10 @@ latin_mili:
 		RequiresCondition: rank-elite
 	Armament@Molotov:
 		Weapon: RA2Molotov
-		RequiresCondition: uplatin_mili && !rank-elite
+		RequiresCondition: up_mili.latin && !rank-elite
 	Armament@MolotovELITE:
 		Weapon: RA2MolotovE
-		RequiresCondition: uplatin_mili && rank-elite
+		RequiresCondition: up_mili.latin && rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2MiliAK47
@@ -50,34 +50,34 @@ latin_mili:
 	Armament@MolotovGARRISONED:
 		Name: garrisoned
 		Weapon: RA2Molotov
-		RequiresCondition: uplatin_mili && !rank-elite
+		RequiresCondition: up_mili.latin && !rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@MolotovGARRISONEDELITE:
 		Name: garrisoned
 		Weapon: RA2MolotovE
-		RequiresCondition: uplatin_mili && rank-elite
+		RequiresCondition: up_mili.latin && rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: LatinSoldierVoice
-	DamageMultiplier@uplatin_mili:
+	DamageMultiplier@up_mili.latin:
 		Modifier: 50
-	FirepowerMultiplier@uplatin_mili:
+	FirepowerMultiplier@up_mili.latin:
 		Modifier: 150
 	ActorStatValues:
-		Upgrades: uplatin_mili, latin_up_chaingun
+		Upgrades: up_mili.latin, up_chaingun.latin
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 
-latin_tkiller:
+tkiller.latin:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -92,7 +92,7 @@ latin_tkiller:
 		Cost: 270
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~latin_cgpile
+		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Mobile:
@@ -124,9 +124,9 @@ latin_tkiller:
 	Voiced:
 		VoiceSet: LatinSoldierVoice
 	RenderSprites:
-		Image: aa_tkiller
+		Image: tkiller.asian
 
-latin_monkey:
+monkey.latin:
 	Inherits: ^DefaultInfantry
 	Inherits@2: ^AffectedByTiberium
 	Inherits@Template: ^GrenadierInfantryTemplate
@@ -143,7 +143,7 @@ latin_monkey:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~latin_cgpile
+		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-latin_monkey.description
 	Mobile:
@@ -155,27 +155,27 @@ latin_monkey:
 	Armament@PRIMARY:
 		Weapon: LatinMonkeyGrenade1
 		LocalOffset: 128,0,256
-		RequiresCondition: (!latin_up_hotfire && !rank-elite)
+		RequiresCondition: (!up_hotfire.latin && !rank-elite)
 	Armament@SECONDARY:
 		Weapon: LatinMonkeyGrenade2
 		LocalOffset: 128,0,256
-		RequiresCondition: (latin_up_hotfire && !rank-elite) || (!latin_up_hotfire && rank-elite)
+		RequiresCondition: (up_hotfire.latin && !rank-elite) || (!up_hotfire.latin && rank-elite)
 	Armament@ELITE:
 		Weapon: LatinMonkeyGrenade3
 		LocalOffset: 128,0,256
-		RequiresCondition: (latin_up_hotfire && rank-elite)
+		RequiresCondition: (up_hotfire.latin && rank-elite)
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: LatinMonkeyGrenade1
-		RequiresCondition: (!latin_up_hotfire && !rank-elite)
+		RequiresCondition: (!up_hotfire.latin && !rank-elite)
 	Armament@GARRISONEDSECONDARY:
 		Name: garrisoned
 		Weapon: LatinMonkeyGrenade2
-		RequiresCondition: (latin_up_hotfire && !rank-elite) || (!latin_up_hotfire && rank-elite)
+		RequiresCondition: (up_hotfire.latin && !rank-elite) || (!up_hotfire.latin && rank-elite)
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: LatinMonkeyGrenade3
-		RequiresCondition: (latin_up_hotfire && rank-elite)
+		RequiresCondition: (up_hotfire.latin && rank-elite)
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
@@ -206,9 +206,9 @@ latin_monkey:
 	FireWarheadsOnDeath:
 		Weapon: LatinMonkeyGrenadeExplode
 	ActorStatValues:
-		Upgrades: uplatin_mili, latin_up_hotfire
+		Upgrades: up_mili.latin, up_hotfire.latin
 
-latin_fthrow:
+fthrow.latin:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@FireInfantry: ^FireInfantry
@@ -225,7 +225,7 @@ latin_fthrow:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~latin_cgspy
+		Prerequisites: ~cgspy.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-latin_fthrow.description
 	Mobile:
@@ -254,25 +254,25 @@ latin_fthrow:
 		RequiresCondition: rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-	FirepowerMultiplier@latin_up_hotfire:
+	FirepowerMultiplier@up_hotfire.latin:
 		Modifier: 200
-		RequiresCondition: latin_up_hotfire
-	RangeMultiplier@latin_up_hotfire:
+		RequiresCondition: up_hotfire.latin
+	RangeMultiplier@up_hotfire.latin:
 		Modifier: 110
-		RequiresCondition: latin_up_hotfire
-	SpeedMultiplier@latin_up_hotfire:
+		RequiresCondition: up_hotfire.latin
+	SpeedMultiplier@up_hotfire.latin:
 		Modifier: 120
-		RequiresCondition: latin_up_hotfire
+		RequiresCondition: up_hotfire.latin
 	FireWarheadsOnDeath:
 		Weapon: SyndicateFireballLauncherExplode
 	ActorStatValues:
-		Upgrades: uplatin_mili, latin_up_hotfire
+		Upgrades: up_mili.latin, up_hotfire.latin
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: LatinSoldierVoice
 
-latin_narco:
+narco.latin:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -290,7 +290,7 @@ latin_narco:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~uplatin_narco, latin_radar
+		Prerequisites: ~up_narco.latin, radar.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-latin_narco.description
 	Mobile:
@@ -369,16 +369,16 @@ latin_narco:
 	FireWarheadsOnDeath:
 		Weapon: LatinMonkeyGrenadeExplode
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: uplatin_mili, latin_up_chaingun, latin_up_hotfire
+		Upgrades: up_mili.latin, up_chaingun.latin, up_hotfire.latin
 
-latin_fftr:
+fftr.latin:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -396,7 +396,7 @@ latin_fftr:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~latin_cgspy
+		Prerequisites: ~cgspy.latin
 		BuildLimit: 1
 		Description: actor-latin_fftr.description
 	Mobile:
@@ -454,11 +454,11 @@ latin_fftr:
 		RequiresCondition: !tree
 	Voiced:
 		VoiceSet: LatinRamboVoice
-	GrantConditionOnPrerequisite@uplatin_alliedstolentech:
-		Condition: uplatin_alliedstolentech
-		Prerequisites: uplatin_alliedstolentech
+	GrantConditionOnPrerequisite@up_alliedstolentech.latin:
+		Condition: up_alliedstolentech.latin
+		Prerequisites: up_alliedstolentech.latin
 	Mirage:
-		RequiresCondition: !disabled && uplatin_alliedstolentech
+		RequiresCondition: !disabled && up_alliedstolentech.latin
 		InitialDelay: 25
 		RevealDelay: 25
 		RevealOn: Attack, Move, Damage, SelfHeal
@@ -466,20 +466,20 @@ latin_fftr:
 		DefaultTargetTypes: t08, t10, t03, t02
 	WithMirageSpriteBody:
 		Name: tree
-		RequiresCondition: tree && uplatin_alliedstolentech
+		RequiresCondition: tree && up_alliedstolentech.latin
 		IsPlayerPalette: false
 		Palette: ra_temperat
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: uplatin_mili, latin_up_chaingun, uplatin_alliedstolentech, latin_up_hotfire
+		Upgrades: up_mili.latin, up_chaingun.latin, up_alliedstolentech.latin, up_hotfire.latin
 
-latin_mortarbike:
+mortarbike.latin:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MortarInfantryTemplate
@@ -493,7 +493,7 @@ latin_mortarbike:
 	Buildable:
 		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
 		BuildPaletteOrder: 30
-		Prerequisites: ~uplatin_mortarbike
+		Prerequisites: ~up_mortarbike.latin
 		Description: actor-latin_mortarbike.description
 	Tooltip:
 		Name: Mortar Bike
@@ -528,24 +528,24 @@ latin_mortarbike:
 		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: LatinSoldierVoice
-	FirepowerMultiplier@latin_up_hotfire:
+	FirepowerMultiplier@up_hotfire.latin:
 		Modifier: 200
-		RequiresCondition: latin_up_hotfire
-	RangeMultiplier@latin_up_hotfire:
+		RequiresCondition: up_hotfire.latin
+	RangeMultiplier@up_hotfire.latin:
 		Modifier: 110
-		RequiresCondition: latin_up_hotfire
-	SpeedMultiplier@latin_up_hotfire:
+		RequiresCondition: up_hotfire.latin
+	SpeedMultiplier@up_hotfire.latin:
 		Modifier: 120
-		RequiresCondition: latin_up_hotfire
+		RequiresCondition: up_hotfire.latin
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_hotfire.latin
 
-ra2engineer.syndicate:
+ra2engineer.latin:
 	Inherits: RA2ENGINEER
 	Buildable:
-		Prerequisites: ~latin_cgpile
+		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
 	Voiced:
 		VoiceSet: LatinEngVoice
@@ -556,7 +556,7 @@ ra2engineer.syndicate:
 	Captures@REUSABLE:
 		Voice: Attack
 
-latin_ra2terror:
+ra2terror.latin:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -572,7 +572,7 @@ latin_ra2terror:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~uplatin_ra2terror
+		Prerequisites: ~up_ra2terror.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-terror.description
 	Mobile:
@@ -585,7 +585,7 @@ latin_ra2terror:
 		Weapon: RA2Terrorist
 		EmptyWeapon: RA2Terrorist
 		RequiresCondition: !disabled
-	FirepowerMultiplier@latin_up_hotfire:
+	FirepowerMultiplier@up_hotfire.latin:
 		Modifier: 200
 	AttackFrontal:
 		FacingTolerance: 512
@@ -608,7 +608,7 @@ latin_ra2terror:
 		ConsumedByCapture: True
 		EnterCursor: c4
 	ActorStatValues:
-		Upgrades: uplatin_mili, latin_up_hotfire
+		Upgrades: up_mili.latin, up_hotfire.latin
 	RenderSprites:
 		Image: ra2terror #placeholder
 	GrantExternalConditionToTransport:

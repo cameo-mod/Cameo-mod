@@ -1,4 +1,4 @@
-nax2_uber:
+uber.nax2:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -13,7 +13,7 @@ nax2_uber:
 		Name: Übermensch
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~nax2_tech
+		Prerequisites: ~tech.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -45,7 +45,7 @@ nax2_uber:
 	Voiced:
 		VoiceSet: NaxiUbermenVoice
 
-nax2_parv:
+parv.nax2:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -61,7 +61,7 @@ nax2_parv:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax2_tech
+		Prerequisites: ~tech.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -96,7 +96,7 @@ nax2_parv:
 	Voiced:
 		VoiceSet: NaxiUbermenVoice
 
-nax2_armor_mg:
+armor_mg.nax2:
 	Inherits: ^Walker
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -116,7 +116,7 @@ nax2_armor_mg:
 		Name: Noid MG Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~nax2_radar
+		Prerequisites: ~radar.nax2
 		Queue: Infantry, RAInfantry
 		Description: actor-aamecha.description
 	Mobile:
@@ -134,19 +134,19 @@ nax2_armor_mg:
 	Armament@PRIMARY:
 		Weapon: NaxiMP40Laser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && !upnax2_ylaser
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
 	Armament@ELITE:
 		Weapon: NaxiMP40LaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && !upnax2_ylaser
+		RequiresCondition: rank-elite && !up_ylaser.nax2
 	Armament@PRIMARY_UP:
 		Weapon: Lunar_YellowMP40Laser
 		LocalOffset: 500,0,400
-		RequiresCondition: !rank-elite && upnax2_ylaser
+		RequiresCondition: !rank-elite && up_ylaser.nax2
 	Armament@ELITE_UP:
 		Weapon: Lunar_YellowMP40LaserE
 		LocalOffset: 500,0,400
-		RequiresCondition: rank-elite && upnax2_ylaser
+		RequiresCondition: rank-elite && up_ylaser.nax2
 	AttackFrontal:
 		FacingTolerance: 20
 	WithInfantryBody:

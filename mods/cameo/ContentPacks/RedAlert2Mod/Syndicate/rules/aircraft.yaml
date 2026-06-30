@@ -1,4 +1,4 @@
-ra2hind:
+ra2hind.latin:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -12,7 +12,7 @@ ra2hind:
 		Name: Hind Transport
 	Buildable:
 		BuildPaletteOrder: 97
-		Prerequisites:  ~latin_cgair
+		Prerequisites:  ~cgair.latin
 		Queue: Aircraft, RAAircraft
 		IconPalette: ra2cameo
 		Description: actor-ra2hind.description
@@ -34,12 +34,12 @@ ra2hind:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	WithMuzzleOverlay:
 	AttackAircraft:
 		FacingTolerance: 80
@@ -54,7 +54,7 @@ ra2hind:
 		RequiresCondition: !airborne
 		PauseOnCondition: disabled
 	SpawnActorOnDeath:
-		Actor: ra2hind.husk
+		Actor: ra2hind_husk.latin
 	Selectable:
 		DecorationBounds: 1280, 1024
 	Carryall:
@@ -67,9 +67,9 @@ ra2hind:
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 
-ra2hind.husk:
+ra2hind_husk.latin:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
 		Name: Hind Transport
@@ -77,10 +77,10 @@ ra2hind.husk:
 		TurnSpeed: 17
 		Speed: 85
 	RenderSprites:
-		Image: ra2hind
+		Image: ra2hind.latin
 		PlayerPalette: playerra2
 
-latin_yakolev:
+yakolev.latin:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -95,7 +95,7 @@ latin_yakolev:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~latin_cgair
+		Prerequisites: ~cgair.latin
 		Queue: Aircraft, RAAircraft
 		Description: actor-latin_yakovlev.description
 	Health:
@@ -122,7 +122,7 @@ latin_yakolev:
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
-		RequiresCondition: !rank-elite && !latin_up_chaingun
+		RequiresCondition: !rank-elite && !up_chaingun.latin
 	Armament@ELITE:
 		Name: primary
 		Weapon: YakovlevCannonE
@@ -130,28 +130,28 @@ latin_yakolev:
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
 		RequiresCondition: rank-elite
-	Armament@latin_up_chaingun:
+	Armament@up_chaingun.latin:
 		Name: primary
 		Weapon: YakovlevCannonE
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
-		RequiresCondition: latin_up_chaingun
+		RequiresCondition: up_chaingun.latin
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	AmmoPool:
 		Ammo: 8
 		AmmoCondition: ammo
 	ReloadAmmoPool:
 		Delay: 40
 		Count: 1
-	ReloadAmmoDelayMultiplier@latin_up_chaingun:
-		RequiresCondition: latin_up_chaingun
+	ReloadAmmoDelayMultiplier@up_chaingun.latin:
+		RequiresCondition: up_chaingun.latin
 		Modifier: 50
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
@@ -162,14 +162,14 @@ latin_yakolev:
 		Offset: -640,0,280
 		TrailLength: 15
 	SpawnActorOnDeath:
-		Actor: latin_yakolev.husk
+		Actor: yakolev_husk.latin
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 	RenderSprites:
-		Image: latin_yakolev
+		Image: yakolev.latin
 		PlayerPalette: playerra2
 
-latin_yakolev.husk:
+yakolev_husk.latin:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Yakovlev
@@ -185,10 +185,10 @@ latin_yakolev.husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: latin_yakolev
+		Image: yakolev.latin
 		PlayerPalette: playerra2
 
-latin_mig:
+mig.latin:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -205,7 +205,7 @@ latin_mig:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~latin_cgair, ~latin_cgspy
+		Prerequisites: ~cgair.latin, ~cgspy.latin
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:
@@ -271,14 +271,14 @@ latin_mig:
 		Offset: -960,0,240
 		TrailLength: 15
 	SpawnActorOnDeath:
-		Actor: latin_mig.husk
+		Actor: mig_husk.latin
 	RenderSprites:
-		Image: latin_mig
+		Image: mig.latin
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, uplatin_cartelrockets, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_cartelrockets.latin, up_hotfire.latin
 
-latin_mig.husk:
+mig_husk.latin:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: MiG-21
@@ -294,5 +294,5 @@ latin_mig.husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: latin_mig
+		Image: mig.latin
 		PlayerPalette: playerra2

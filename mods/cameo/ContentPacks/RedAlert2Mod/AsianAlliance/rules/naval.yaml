@@ -1,4 +1,4 @@
-aa_panth:
+panth.asian:
 	Inherits: ^BoatUnit
 	Inherits@cargo: ^CargoVehicle
 	Inherits@Template: ^ScoutShipTemplate
@@ -15,7 +15,7 @@ aa_panth:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~aa_cgyard
+		Prerequisites: ~cgyard.asian
 		Queue: Naval, RANaval
 		Description: actor-aapanth.description
 	Mobile:
@@ -68,9 +68,9 @@ aa_panth:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_upgrade_phalanx
+		Upgrades: upgrade_phalanx.asian
 
-aa_ksub:
+ksub.asian:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
@@ -87,7 +87,7 @@ aa_ksub:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgyard
+		Prerequisites: ~cgyard.asian
 		Queue: Naval, RANaval
 		Description: actor-aaksub.description
 	Mobile:
@@ -133,9 +133,9 @@ aa_ksub:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_upgrade_phalanx
+		Upgrades: upgrade_phalanx.asian
 
-aa_gunb:
+gunb.asian:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
@@ -151,7 +151,7 @@ aa_gunb:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~aa_cgyard
+		Prerequisites: ~cgyard.asian
 		Queue: Naval, RANaval
 		Description: actor-aagunb.description
 	Mobile:
@@ -212,9 +212,9 @@ aa_gunb:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_upgrade_phalanx
+		Upgrades: upgrade_phalanx.asian
 
-aa_lsub:
+lsub.asian:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^ScoutShipTemplate
@@ -231,7 +231,7 @@ aa_lsub:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgradr
+		Prerequisites: ~cgradr.asian
 		Queue: Naval, RANaval
 		Description: actor-ra2sub.description
 	Mobile:
@@ -266,9 +266,9 @@ aa_lsub:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_upgrade_phalanx
+		Upgrades: upgrade_phalanx.asian
 
-aa_quasfrig:
+quasfrig.asian:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^BattleShipTemplate
@@ -285,7 +285,7 @@ aa_quasfrig:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~aa_cgradr
+		Prerequisites: ~cgradr.asian
 		Queue: Naval, RANaval
 		Description: actor-aaquasfrig.description
 	Mobile:
@@ -302,25 +302,25 @@ aa_quasfrig:
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !asian_upgrade_celestialpower
+		RequiresCondition: !upgrade_celestialpower.asian
 	Armament@UpgradeAG:
 		Weapon: AsianQuasarBoatAGEMP
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_upgrade_celestialpower
+		RequiresCondition: upgrade_celestialpower.asian
 	Armament@AA:
 		Weapon: AsianQuasarBoatAA
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !asian_upgrade_celestialpower
+		RequiresCondition: !upgrade_celestialpower.asian
 	Armament@UpgradeAA:
 		Weapon: AsianQuasarBoatAAEMP
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: asian_upgrade_celestialpower
+		RequiresCondition: upgrade_celestialpower.asian
 	WithMuzzleOverlay:
 	AttackFrontal:
 		Voice: Attack
@@ -330,9 +330,9 @@ aa_quasfrig:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_celestialpower
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_celestialpower.asian
 
-aa_karrier:
+karrier.asian:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2VehicleBig
 	Inherits@Template: ^ArtilleryShipTemplate
@@ -349,7 +349,7 @@ aa_karrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~aa_cgtech, ~!upaa_tsunami
+		Prerequisites: ~cgtech.asian, ~!up_tsunami.asian
 		Queue: Naval, RANaval
 		Description: actor-aacarrier.description
 	Selectable:
@@ -369,7 +369,7 @@ aa_karrier:
 	RenderSprites:
 		PlayerPalette: playerra2
 	CarrierMaster:
-		Actors: aa_kami, aa_kami, aa_kami, aa_kami
+		Actors: kami.asian, kami.asian, kami.asian, kami.asian
 		RearmTicks: 300
 		RespawnTicks: 600
 		InstaRepair: true
@@ -380,9 +380,9 @@ aa_karrier:
 	Voiced:
 		VoiceSet: AsianShipVoice
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_dragonfire
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
 
-aa_tsun:
+tsun.asian:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2VehicleBig
 	Inherits@Template: ^ArtilleryShipTemplate
@@ -398,7 +398,7 @@ aa_tsun:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~upaa_tsunami, aa_cgmiac
+		Prerequisites: ~up_tsunami.asian, cgmiac.asian
 		Queue: Naval, RANaval
 		Description: actor-aatsun.description
 	Selectable:
@@ -418,7 +418,7 @@ aa_tsun:
 	RenderSprites:
 		PlayerPalette: playerra2
 	CarrierMaster:
-		Actors: aa_kami_chemical, aa_kami_chemical, aa_kami_chemical, aa_kami_chemical
+		Actors: kami_chemical.asian, kami_chemical.asian, kami_chemical.asian, kami_chemical.asian
 		RearmTicks: 150
 		RespawnTicks: 300
 		InstaRepair: true
@@ -429,9 +429,9 @@ aa_tsun:
 	Voiced:
 		VoiceSet: AsianTsunamiVoice
 	GrantConditionOnPrerequisite@Upgrade:
-		Condition: upaa_tsunami
-		Prerequisites: upaa_tsunami
+		Condition: up_tsunami.asian
+		Prerequisites: up_tsunami.asian
 	ActorStatValues:
-		Upgrades: upaa_tsunami
+		Upgrades: up_tsunami.asian
 	ActorStatValues:
-		Upgrades: asian_upgrade_phalanx
+		Upgrades: upgrade_phalanx.asian

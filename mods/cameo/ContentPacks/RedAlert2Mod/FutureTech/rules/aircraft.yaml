@@ -1,4 +1,4 @@
-future_twister:
+twister.futu:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -12,7 +12,7 @@ future_twister:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~futu_launchpad
+		Prerequisites: ~launchpad.futu
 		Queue: Aircraft, RAAircraft
 		Description: actor-future_twister.description
 	Aircraft:
@@ -54,7 +54,7 @@ future_twister:
 		Delay: 42
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: steel_twister.Husk
+		Actor: twister_husk.steel
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -77,7 +77,7 @@ future_twister:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 
-futu_cryo:
+cryo.futu:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -88,7 +88,7 @@ futu_cryo:
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~futu_egtech
+		Prerequisites: ~egtech.futu
 		Description: actor-futu_cryo.description
 	Valued:
 		Cost: 1350
@@ -129,7 +129,7 @@ futu_cryo:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	SpawnActorOnDeath:
-		Actor: futu_cryo.Husk
+		Actor: cryo_husk.futu
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -164,7 +164,7 @@ futu_cryo:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-futu_cryo.Husk:
+cryo_husk.futu:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Cryocopter
@@ -172,10 +172,10 @@ futu_cryo.Husk:
 		TurnSpeed: 15
 		Speed: 75
 	RenderSprites:
-		Image: futu_cryo
+		Image: cryo.futu
 		PlayerPalette: player_rgba
 
-future_harbinger:
+harbinger.futu:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -190,9 +190,9 @@ future_harbinger:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildAtProductionType: future_harbinger
+		BuildAtProductionType: harbinger.futu
 		BuildPaletteOrder: 100
-		Prerequisites: ~futu_egshock
+		Prerequisites: ~egshock.futu
 		Queue: Aircraft, RAAircraft
 		Description: actor-future_harbinger.description
 	Aircraft:
@@ -241,7 +241,7 @@ future_harbinger:
 		Modifier: 50
 	Turreted:
 	SpawnActorOnDeath:
-		Actor: future_harbinger.Husk
+		Actor: harbinger_husk.futu
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -286,7 +286,7 @@ future_harbinger:
 		EffectPalette: ra2effect
 		RequiresCondition: spawn-cloaked
 
-future_harbinger.Husk:
+harbinger_husk.futu:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Harbinger Gunship
@@ -302,5 +302,5 @@ future_harbinger.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: future_harbinger
+		Image: harbinger.futu
 		PlayerPalette: player_rgba

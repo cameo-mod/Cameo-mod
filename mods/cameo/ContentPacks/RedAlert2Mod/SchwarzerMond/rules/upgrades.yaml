@@ -1,4 +1,4 @@
-nax2_conyard.infiltrated:
+conyard_infiltrated.nax2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Stolen Schwarzer Mond Buildings Plans
@@ -6,11 +6,11 @@ nax2_conyard.infiltrated:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: nax2_conyard
+		Prerequisite: conyard.nax2
 	RenderSprites:
-		Image: nax2_conyard
+		Image: conyard.nax2
 
-upnax2_ylaser:
+up_ylaser.nax2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Crystal Lens
@@ -20,12 +20,12 @@ upnax2_ylaser:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Yellow lasers upgrades shooting range and burst
-		Prerequisites: ~nax2_radar, !upnax2_ylaser
+		Prerequisites: ~radar.nax2, !up_ylaser.nax2
 	RenderSprites:
-		Image: upnax2_ylaser
+		Image: up_ylaser.nax2
 	ProvidesPrerequisite:
 
-upnax2_gplasma:
+up_gplasma.nax2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Green Plasma Shells
@@ -35,9 +35,9 @@ upnax2_gplasma:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Tanks deals more damage and Tesla type damage
-		Prerequisites: ~nax2_radar, !upnax2_gplasma
+		Prerequisites: ~radar.nax2, !up_gplasma.nax2
 	RenderSprites:
-		Image: upnax2_gplasma
+		Image: up_gplasma.nax2
 	ProvidesPrerequisite:
 
 ####################################################################################################

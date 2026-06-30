@@ -1,4 +1,4 @@
-nax2_zep:
+zep.nax2:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -11,10 +11,10 @@ nax2_zep:
 		Name: Space Zeppelin
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: nax_zep
+		OverrideActor: zep.nax
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~nax2_airfield, ~nax2_radar
+		Prerequisites: ~airfield.nax2, ~radar.nax2
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor-shad.description
 	Aircraft:
@@ -58,7 +58,7 @@ nax2_zep:
 		RequiresCondition: rank-elite
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: nax_lunar, nax_lunar, nax_lunar, nax_lunar, nax_lunar2, nax_lunar2, nax2_panzer, nax2_panzer, nax2_panzer, nax2_panzer
+		InitialUnits: lunar.nax, lunar.nax, lunar.nax, lunar.nax, lunar2.nax, lunar2.nax, panzer.nax2, panzer.nax2, panzer.nax2, panzer.nax2
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 12
 		AfterLoadDelay: 0
@@ -68,19 +68,19 @@ nax2_zep:
 		FacingTolerance: 10
 		AttackType: Hover
 	SpawnActorOnDeath:
-		Actor: nax2_zep.Husk
+		Actor: zep_husk.nax2
 	SelectionDecorations:
 	Selectable:
 		Class: ra2shad
 		DecorationBounds: 1280, 1024
 	RenderSprites:
-		Image: nax2_zep
+		Image: zep.nax2
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 50
-nax2_zep.Husk:
+zep_husk.nax2:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Transport Zeppelin
@@ -96,7 +96,7 @@ nax2_zep.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax2_zep
+		Image: zep.nax2
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -106,7 +106,7 @@ nax2_zep.Husk:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax2_bbomb:
+bbomb.nax2:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -120,7 +120,7 @@ nax2_bbomb:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax2_airfield, ~nax2_tech
+		Prerequisites: ~airfield.nax2, ~tech.nax2
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_piercer.description
 	Health:
@@ -155,21 +155,21 @@ nax2_bbomb:
 		InitialStanceAI: AttackAnything
 		ScanRadius: 10
 	SpawnActorOnDeath:
-		Actor: nax2_bbomb.Husk
+		Actor: bbomb_husk.nax2
 		Offset: 0,0
 	SpawnActorOnDeath@1:
-		Actor: nax2_bbomb2.Husk
+		Actor: bbomb2_husk.nax2
 		Offset: 48,48
 	SpawnActorOnDeath@2:
-		Actor: nax2_bbomb3.Husk
+		Actor: bbomb3_husk.nax2
 		Offset: -48,-48
 	RenderSprites:
-		Image: nax2_bbomb
+		Image: bbomb.nax2
 		PlayerPalette: playerra2
 	EjectOnDeath:
-		PilotActor: nax_alien
+		PilotActor: alien.nax
 
-nax2_bbomb.Husk:
+bbomb_husk.nax2:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Black Bomb
@@ -177,7 +177,7 @@ nax2_bbomb.Husk:
 		TurnSpeed: 20
 		Speed: 150
 	RenderSprites:
-		Image: nax_miniv2
+		Image: miniv2.nax
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -186,8 +186,8 @@ nax2_bbomb.Husk:
 	WithShadow:
 	RenderSprites:
 		PlayerPalette: playerra2
-nax2_bbomb2.Husk:
-	Inherits: nax2_bbomb.Husk
+bbomb2_husk.nax2:
+	Inherits: bbomb_husk.nax2
 	Tooltip:
 		Name: Black Bomb
 	Aircraft:
@@ -195,8 +195,8 @@ nax2_bbomb2.Husk:
 		Speed: 125
 	FallsToEarth:
 		Velocity: 90
-nax2_bbomb3.Husk:
-	Inherits: nax2_bbomb.Husk
+bbomb3_husk.nax2:
+	Inherits: bbomb_husk.nax2
 	Tooltip:
 		Name: Black Bomb
 	Aircraft:

@@ -1,4 +1,4 @@
-nax_interceptor:
+interceptor.nax:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -45,7 +45,7 @@ nax_interceptor:
 		RequiresSelection: true
 		PipCount: 6
 	SpawnActorOnDeath:
-		Actor: nax_interceptor.Husk
+		Actor: interceptor_husk.nax
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
@@ -87,7 +87,7 @@ nax_interceptor:
 		TrailLength: 15
 	-Voiced:
 
-nax_interceptor.Husk:
+interceptor_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Interceptor
@@ -103,11 +103,11 @@ nax_interceptor.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax_interceptor
+		Image: interceptor.nax
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_drone:
+drone.nax:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -148,7 +148,7 @@ nax_drone:
 		Ammo: 6
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
-		Actor: nax_drone.Husk
+		Actor: drone_husk.nax
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
@@ -193,7 +193,7 @@ nax_drone:
 		Offset: -500,0,250
 		TrailLength: 15
 	-Voiced:
-nax_drone.Husk:
+drone_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Drone
@@ -209,14 +209,14 @@ nax_drone.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax_drone
+		Image: drone.nax
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_litt.husk:
+litt_husk.nax:
 	Inherits: ^HelicopterHusk
 	RenderSprites:
-		Image: nax_litt
+		Image: litt.nax
 		PlayerPalette: playerra2
 	Tooltip:
 		Name: Sky Mage
@@ -238,7 +238,7 @@ nax_litt.husk:
 		ForceToGround: true
 	-WithShadow:
 
-nax_bf109:
+bf109.nax:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -252,7 +252,7 @@ nax_bf109:
 		Cost: 1100
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax_radar, ~!nax_upgrade_me262
+		Prerequisites: ~radar.nax, ~!upgrade_me262.nax
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:
@@ -299,12 +299,12 @@ nax_bf109:
 		Offset: -960,0,0
 		TrailLength: 15
 	SpawnActorOnDeath:
-		Actor: nax_me262.husk
+		Actor: me262_husk.nax
 	RenderSprites:
-		Image: nax_bf109
+		Image: bf109.nax
 		PlayerPalette: playerra2
 
-nax_bf109.Husk:
+bf109_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: BF 109
@@ -320,11 +320,11 @@ nax_bf109.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax_bf109
+		Image: bf109.nax
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_me262:
+me262.nax:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -338,7 +338,7 @@ nax_me262:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax_upgrade_me262
+		Prerequisites: ~upgrade_me262.nax
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:
@@ -407,12 +407,12 @@ nax_me262:
 		Offset: -640,-171,0
 		TrailLength: 15
 	SpawnActorOnDeath:
-		Actor: nax_me262.husk
+		Actor: me262_husk.nax
 	RenderSprites:
-		Image: nax_me262
+		Image: me262.nax
 		PlayerPalette: playerra2
 
-nax_me262.Husk:
+me262_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Me 262
@@ -428,11 +428,11 @@ nax_me262.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax_me262
+		Image: me262.nax
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_zep:
+zep.nax:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -445,10 +445,10 @@ nax_zep:
 		Name: Transport Zeppelin
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: nax_zep
+		OverrideActor: zep.nax
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~nax_radar
+		Prerequisites: ~radar.nax
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor-shad.description
 	Aircraft:
@@ -492,7 +492,7 @@ nax_zep:
 		RequiresCondition: rank-elite
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: nax_rifle, nax_rifle, nax_rifle, nax_rifle, nax_rifle, nax_rifle, nax_panzer, nax_panzer, nax_panzer, nax_panzer
+		InitialUnits: rifle.nax, rifle.nax, rifle.nax, rifle.nax, rifle.nax, rifle.nax, panzer.nax, panzer.nax, panzer.nax, panzer.nax
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 12
 		AfterLoadDelay: 0
@@ -502,19 +502,19 @@ nax_zep:
 		FacingTolerance: 10
 		AttackType: Hover
 	SpawnActorOnDeath:
-		Actor: nax_zep.Husk
+		Actor: zep_husk.nax
 	SelectionDecorations:
 	Selectable:
 		Class: ra2shad
 		DecorationBounds: 1280, 1024
 	RenderSprites:
-		Image: nax_zep
+		Image: zep.nax
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: NaxiAircraftVoice
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 50
-nax_zep.Husk:
+zep_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Transport Zeppelin
@@ -530,7 +530,7 @@ nax_zep.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax_zep
+		Image: zep.nax
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -540,7 +540,7 @@ nax_zep.Husk:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_horten.bomber:
+horten_bomber.nax:
 	Inherits: BADR.Soviet
 	Tooltip:
 		Name: Horten Bomber Plane
@@ -552,7 +552,7 @@ nax_horten.bomber:
 		Image: nax_horten
 		PlayerPalette: playerra2
 	SpawnActorOnDeath:
-		Actor: nax_horten.Husk
+		Actor: horten_husk.nax
 	LeavesTrails@0:
 		Offsets: -250,1500,500
 		MovingInterval: 2
@@ -569,7 +569,7 @@ nax_horten.bomber:
 		SpawnAtLastPosition: False
 		TrailWhileStationary: True
 		Type: CenterPosition
-nax_horten.Husk:
+horten_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Horten Bomber Plane
@@ -580,7 +580,7 @@ nax_horten.Husk:
 		Image: nax_horten
 		PlayerPalette: playerra2
 
-nax_cplane:
+cplane.nax:
 	Inherits: ^AirstrikePlane
 	ParaDrop:
 		DropRange: 4c0
@@ -609,7 +609,7 @@ nax_cplane:
 	Contrail@2:
 		Offset: -432,-560,0
 	SpawnActorOnDeath:
-		Actor: nax_cplane.Husk
+		Actor: cplane_husk.nax
 	LeavesTrails@0:
 		Offsets: -432,560,0
 		MovingInterval: 2
@@ -633,10 +633,10 @@ nax_cplane:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	RenderSprites:
-		Image: nax_cplane
+		Image: cplane.nax
 		PlayerPalette: playerra2
 
-nax_cplane.Husk:
+cplane_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Cargo Plane
@@ -660,13 +660,13 @@ nax_cplane.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax_cplane
+		Image: cplane.nax
 		PlayerPalette: playerra2
 
 ####################################################################################################
 #		Red Alert 2 Moon Naxis Planes
 ####################################################################################################
-nax_haunebu:
+haunebu.nax:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -682,7 +682,7 @@ nax_haunebu:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~nax2_airfield
+		Prerequisites: ~airfield.nax2
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_haunebu.description
 	Aircraft:
@@ -726,7 +726,7 @@ nax_haunebu:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	SpawnActorOnDeath:
-		Actor: nax_haunebu.Husk
+		Actor: haunebu_husk.nax
 	Turreted:
 	Voiced:
 		VoiceSet: NaxiUFOVoice
@@ -738,9 +738,9 @@ nax_haunebu:
 	RenderSprites:
 		PlayerPalette: playerra2
 	EjectOnDeath:
-		PilotActor: nax_alien
+		PilotActor: alien.nax
 
-nax_haunebu.Husk:
+haunebu_husk.nax:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
 		Name: Haunebu II
@@ -748,10 +748,10 @@ nax_haunebu.Husk:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: nax_haunebu
+		Image: haunebu.nax
 		PlayerPalette: playerra2
 
-nax_haunebu2:
+haunebu2.nax:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -767,7 +767,7 @@ nax_haunebu2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~nax2_airfield, ~nax2_tech
+		Prerequisites: ~airfield.nax2, ~tech.nax2
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_haunebu2.description
 	Aircraft:
@@ -816,7 +816,7 @@ nax_haunebu2:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	SpawnActorOnDeath:
-		Actor: nax_haunebu2.Husk
+		Actor: haunebu2_husk.nax
 	Turreted:
 	Voiced:
 		VoiceSet: NaxiUFOVoice
@@ -828,9 +828,9 @@ nax_haunebu2:
 	RenderSprites:
 		PlayerPalette: playerra2
 	EjectOnDeath:
-		PilotActor: nax_alien
+		PilotActor: alien.nax
 
-nax_haunebu2.Husk:
+haunebu2_husk.nax:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
 		Name: Haunebu III
@@ -838,10 +838,10 @@ nax_haunebu2.Husk:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: nax_haunebu2
+		Image: haunebu2.nax
 		PlayerPalette: playerra2
 
-nax_piercer:
+piercer.nax:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -855,7 +855,7 @@ nax_piercer:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~nax2_airfield, ~nax2_tech
+		Prerequisites: ~airfield.nax2, ~tech.nax2
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_piercer.description
 	Health:
@@ -898,14 +898,14 @@ nax_piercer:
 		Offset: -640,-171,0
 		TrailLength: 15
 	SpawnActorOnDeath:
-		Actor: nax_piercer.husk
+		Actor: piercer_husk.nax
 	RenderSprites:
-		Image: nax_piercer
+		Image: piercer.nax
 		PlayerPalette: playerra2
 	EjectOnDeath:
-		PilotActor: nax_alien
+		PilotActor: alien.nax
 
-nax_piercer.Husk:
+piercer_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Corruptor Piercer
@@ -921,11 +921,11 @@ nax_piercer.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: nax_piercer
+		Image: piercer.nax
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_dieglocke:
+dieglocke.nax:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -940,7 +940,7 @@ nax_dieglocke:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~nax2_airfield, ~nax2_tech
+		Prerequisites: ~airfield.nax2, ~tech.nax2
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_dieglocke.description
@@ -977,7 +977,7 @@ nax_dieglocke:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	SpawnActorOnDeath:
-		Actor: nax_dieglocke.Husk
+		Actor: dieglocke_husk.nax
 	Turreted:
 	Voiced:
 		VoiceSet: NaxiUFOBigVoice
@@ -1010,7 +1010,7 @@ nax_dieglocke:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-nax_dieglocke.Husk:
+dieglocke_husk.nax:
 	Inherits: ^LargeHelicopterHusk
 	Tooltip:
 		Name: Die Glocke
@@ -1018,5 +1018,5 @@ nax_dieglocke.Husk:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: nax_dieglocke
+		Image: dieglocke.nax
 		PlayerPalette: playerra2

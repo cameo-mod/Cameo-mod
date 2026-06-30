@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: asianalliance
-		BaseActor: aa_acv
+		BaseActor: acv.asian
 	StartingUnits@defaultasianalliance:
 		Class: light
 		ClassName: Light Support
 		Factions: asianalliance
-		BaseActor: aa_acv
-		SupportActors: aa_gren,aa_gren,aa_gren,aa_tkiller,aa_tkiller,aa_quas,aa_lynx
+		BaseActor: acv.asian
+		SupportActors: gren.asian,gren.asian,gren.asian,tkiller.asian,tkiller.asian,quas.asian,lynx.asian
 	StartingUnits@heavyasianalliance:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: asianalliance
-		BaseActor: aa_acv
-		SupportActors: aa_gren,aa_gren,aa_gren,aa_tkiller,aa_tkiller,aa_quas,aa_lynx,aa_lynx,aa_lynx,aa_ptnk,aa_quas
+		BaseActor: acv.asian
+		SupportActors: gren.asian,gren.asian,gren.asian,tkiller.asian,tkiller.asian,quas.asian,lynx.asian,lynx.asian,lynx.asian,ptnk.asian,quas.asian

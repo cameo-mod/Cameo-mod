@@ -1,4 +1,4 @@
-aa_phoenix:
+phoenix.asian:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -14,7 +14,7 @@ aa_phoenix:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~aa_cgtech
+		Prerequisites: ~cgtech.asian
 		Queue: Aircraft, RAAircraft
 		Description: actor-aaphoenix.description
 	Aircraft:
@@ -57,7 +57,7 @@ aa_phoenix:
 		RequiresSelection: True
 		PipCount: 2
 	SpawnActorOnDeath:
-		Actor: aa_phoenix.Husk
+		Actor: phoenix_husk.asian
 	#GrantConditionOnMovement@Turn:
 	#	Condition: Aircraft-Turning
 	#	ValidMovementTypes: Turn
@@ -92,9 +92,9 @@ aa_phoenix:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_team_upgrade_diplomacy, asian_upgrade_phalanx, asian_upgrade_dragonfire
+		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
 
-aa_pelican:
+pelican.asian:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -104,7 +104,7 @@ aa_pelican:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~aa_cgairf
+		Prerequisites: ~cgairf.asian
 		Description: actor-aapelican.description
 	Valued:
 		Cost: 2000
@@ -138,16 +138,16 @@ aa_pelican:
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: asian_upgrade_phalanx && !rank-elite
+		RequiresCondition: upgrade_phalanx.asian && !rank-elite
 	Armament@MGelite:
 		Weapon: AsianPelicanMG_elite
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: asian_upgrade_phalanx && rank-elite
-	ReloadAmmoDelayMultiplier@asian_upgrade_phalanx:
-		RequiresCondition: asian_upgrade_phalanx
+		RequiresCondition: upgrade_phalanx.asian && rank-elite
+	ReloadAmmoDelayMultiplier@upgrade_phalanx.asian:
+		RequiresCondition: upgrade_phalanx.asian
 		Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 80
@@ -167,7 +167,7 @@ aa_pelican:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	SpawnActorOnDeath:
-		Actor: aa_pelican.Husk
+		Actor: pelican_husk.asian
 	LeavesTrails:
 		Offsets: -427,0,0
 		Image: smokey
@@ -198,9 +198,9 @@ aa_pelican:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: asian_upgrade_phalanx
+		Upgrades: upgrade_phalanx.asian
 
-aa_kami:
+kami.asian:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -233,7 +233,7 @@ aa_kami:
 		Ammo: 18
 		AmmoCondition: ammo
 	SpawnActorOnDeath:
-		Actor: aa_kami.Husk
+		Actor: kami_husk.asian
 	WithMoveAnimation:
 		MoveSequence: move
 	AttackAircraft:
@@ -278,8 +278,8 @@ aa_kami:
 		TrailLength: 15
 	-Voiced:
 
-aa_kami_chemical:
-	Inherits: aa_kami
+kami_chemical.asian:
+	Inherits: kami.asian
 	Valued:
 		Cost: 1600
 	Health:
@@ -293,12 +293,12 @@ aa_kami_chemical:
 		LocalOffset: 427,-171,-213, 427,171,-213
 		PauseOnCondition: !ammo
 	RenderSprites:
-		Image: aa_kami
+		Image: kami.asian
 	SpawnActorOnDeath:
-		Actor: aa_kami_chemical.Husk
+		Actor: kami_chemical_husk.asian
 
-aa_kami.asdf:
-	Inherits: aa_kami
+kami_asdf.asian:
+	Inherits: kami.asian
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -324,15 +324,15 @@ aa_kami.asdf:
 	AirstrikeSlaveCA:
 	GivesExperienceToMaster:
 	RenderSprites:
-		Image: aa_kami
+		Image: kami.asian
 	SpawnActorOnDeath:
-		Actor: aa_kami.Husk
+		Actor: kami_husk.asian
 		RequiresCondition: airborne && !diving
 
 #######################################
 # RA2 Asian Husks
 #######################################
-aa_kami.Husk:
+kami_husk.asian:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Kamikaze
@@ -348,7 +348,7 @@ aa_kami.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: aa_kami
+		Image: kami.asian
 	RenderSprites:
 		PlayerPalette: playerra2
 	FireWarheadsOnDeathCA@Chemical:
@@ -357,7 +357,7 @@ aa_kami.Husk:
 	FirepowerMultiplier@Explodes:
 		Modifier: 50
 
-aa_kami_chemical.Husk:
+kami_chemical_husk.asian:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Chemical Kamikaze
@@ -373,7 +373,7 @@ aa_kami_chemical.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: aa_kami
+		Image: kami.asian
 	RenderSprites:
 		PlayerPalette: playerra2
 	FireWarheadsOnDeathCA@Chemical:
@@ -382,7 +382,7 @@ aa_kami_chemical.Husk:
 	FirepowerMultiplier@Explodes:
 		Modifier: 25
 
-aa_phoenix.Husk:
+phoenix_husk.asian:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Phoenix
@@ -398,11 +398,11 @@ aa_phoenix.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: aa_phoenix
+		Image: phoenix.asian
 	RenderSprites:
 		PlayerPalette: playerra2
 
-aa_pelican.Husk:
+pelican_husk.asian:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Pelican
@@ -410,5 +410,5 @@ aa_pelican.Husk:
 		TurnSpeed: 24
 		Speed: 120
 	RenderSprites:
-		Image: aa_pelican
+		Image: pelican.asian
 		PlayerPalette: playerra2

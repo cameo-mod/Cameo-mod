@@ -1,74 +1,74 @@
-latinscrapcar:
+scrapcar.latin:
 	Inherits: ^CivilianVehicle
 	RenderSprites:
-		Image: latinscrapcar
+		Image: scrapcar.latin
 		PlayerPalette: playerra2
 	TransformOnCapture:
-		IntoActor: latinscrapcar_demo
+		IntoActor: scrapcar_demo.latin
 		CaptureTypes: bombcar
 	TransformOnCapture@driveby:
-		IntoActor: latinscrapcar_driveby
+		IntoActor: scrapcar_driveby.latin
 		CaptureTypes: driveby
 	Capturable:
 		Types: bombcar, driveby
 		ValidRelationships: Enemy, Neutral, Ally
 
-latinscrapcar_demo:
+scrapcar_demo.latin:
 	Inherits: ^CivilianSuicideVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	RenderSprites:
-		Image: latinscrapcar
+		Image: scrapcar.latin
 		PlayerPalette: playerra2
 
-latinscrapcar_driveby:
+scrapcar_driveby.latin:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Cargo:
-		InitialUnits: latin_mili, latin_narco, latin_fthrow
+		InitialUnits: mili.latin, narco.latin, fthrow.latin
 	RenderSprites:
-		Image: latinscrapcar
+		Image: scrapcar.latin
 		PlayerPalette: playerra2
 
-latinscrapcar2:
+scrapcar2.latin:
 	Inherits: ^CivilianVehicle
 	RenderSprites:
 		Image: ra2car
 		PlayerPalette: playerra2
 	TransformOnCapture:
-		IntoActor: latinscrapcar2_demo
+		IntoActor: scrapcar2_demo.latin
 		CaptureTypes: bombcar
 	TransformOnCapture@driveby:
-		IntoActor: latinscrapcar2_driveby
+		IntoActor: scrapcar2_driveby.latin
 		CaptureTypes: driveby
 	Capturable:
 		Types: bombcar, driveby
 		ValidRelationships: Enemy, Neutral, Ally
 
-latinscrapcar2_demo:
+scrapcar2_demo.latin:
 	Inherits: ^CivilianSuicideVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	RenderSprites:
-		Image: latinscrapcar2
+		Image: scrapcar2.latin
 		PlayerPalette: playerra2
 
-latinscrapcar2_driveby:
+scrapcar2_driveby.latin:
 	Inherits: ^CivilianDriveByVehicle
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMP: ^FrontalEMP
 	Cargo:
-		InitialUnits: latin_mili, latin_monkey, latin_tkiller
+		InitialUnits: mili.latin, monkey.latin, tkiller.latin
 	RenderSprites:
-		Image: latinscrapcar2
+		Image: scrapcar2.latin
 		PlayerPalette: playerra2
 
 ##############################################
 #   Red Alert 2 Syndicate Units
 ##############################################
 
-latin.deathcash:
+deathcash.latin:
 	Inherits: RACAMERA
 	EditorOnlyTooltip:
 		Name: (Deathcash)
@@ -81,7 +81,7 @@ latin.deathcash:
 		RemoveInstead: true
 		Delay: 125
 
-latin.deathcash.small:
+deathcash_small.latin:
 	Inherits: RACAMERA
 	EditorOnlyTooltip:
 		Name: (Deathcash)
@@ -94,7 +94,7 @@ latin.deathcash.small:
 		RemoveInstead: true
 		Delay: 125
 
-latin_mcv:
+mcv.latin:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -104,9 +104,9 @@ latin_mcv:
 	Tooltip:
 		Name: Syndicate Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~latin_cgdept
+		Prerequisites: ~cgdept.latin
 	Transforms:
-		IntoActor: latin_cgcnst
+		IntoActor: cgcnst.latin
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -120,7 +120,7 @@ latin_mcv:
 		PlayerPalette: playerra2
 		Image: ra2smcv #placeholder
 
-latin_buggy:
+buggy.latin:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
@@ -137,7 +137,7 @@ latin_buggy:
 		Cost: 700
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~uplatin_buggy
+		Prerequisites: ~up_buggy.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_buggy.description
 	Mobile:
@@ -158,25 +158,25 @@ latin_buggy:
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !latin_up_chaingun
+		RequiresCondition: !rank-elite && !up_chaingun.latin
 	Armament@Elite:
 		Weapon: LatinBuggyMGE
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !latin_up_chaingun
+		RequiresCondition: rank-elite && !up_chaingun.latin
 	Armament@Gatling:
 		Weapon: LatinBuggyChaingun
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	Armament@GatlingElite:
 		Weapon: LatinBuggyChaingunE
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
 	Armament@Rocket:
 		Weapon: LatinBuggyRocket
 		LocalOffset: 500,-100,300, 500,100,300
@@ -200,16 +200,16 @@ latin_buggy:
 	RenderSprites:
 		PlayerPalette: playerra2
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 
-latin_tortuga:
+tortuga.latin:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^LineBreakerTemplate
@@ -225,7 +225,7 @@ latin_tortuga:
 		Cost: 3000
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~latin_cgte
+		Prerequisites: ~cgte.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_buggy.description
 	Mobile:
@@ -246,25 +246,25 @@ latin_tortuga:
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !latin_up_chaingun
+		RequiresCondition: !rank-elite && !up_chaingun.latin
 	Armament@Elite:
 		Weapon: LatinBuggyMGE
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !latin_up_chaingun
+		RequiresCondition: rank-elite && !up_chaingun.latin
 	Armament@Gatling:
 		Weapon: LatinBuggyChaingun
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	Armament@GatlingElite:
 		Weapon: LatinBuggyChaingunE
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -274,17 +274,17 @@ latin_tortuga:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 	WithSpriteTurret:
 
-latin_ltnk:
+ltnk.latin:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -300,7 +300,7 @@ latin_ltnk:
 		Cost: 650
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~latin_cgweap, ~!uplatin_mtnk
+		Prerequisites: ~cgweap.latin, ~!up_mtnk.latin
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -341,17 +341,17 @@ latin_ltnk:
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && !rank-elite
+		RequiresCondition: up_cartelrockets.latin && !rank-elite
 	Armament@AAE:
 		Weapon: LatinRusherRocketE
 		LocalOffset: 600,200,300, 600,-200,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && rank-elite
+		RequiresCondition: up_cartelrockets.latin && rank-elite
 	GrantConditionOnPrerequisite@Missile:
-		Condition: uplatin_cartelrockets
-		Prerequisites: uplatin_cartelrockets
+		Condition: up_cartelrockets.latin
+		Prerequisites: up_cartelrockets.latin
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -363,16 +363,16 @@ latin_ltnk:
 	RenderSprites:
 		PlayerPalette: playerra2
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, uplatin_cartelrockets, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_cartelrockets.latin, up_chaingun.latin
 
-latin_mtnk:
+mtnk.latin:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -389,7 +389,7 @@ latin_mtnk:
 		Cost: 1800
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~uplatin_mtnk
+		Prerequisites: ~up_mtnk.latin
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -446,19 +446,19 @@ latin_mtnk:
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && !rank-elite
+		RequiresCondition: up_cartelrockets.latin && !rank-elite
 	Armament@AAE:
 		Weapon: LatinSmokerRocketE
 		LocalOffset: 600,200,300, 600,-200,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && rank-elite
+		RequiresCondition: up_cartelrockets.latin && rank-elite
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 50
 	GrantConditionOnPrerequisite@Missile:
-		Condition: uplatin_cartelrockets
-		Prerequisites: uplatin_cartelrockets
+		Condition: up_cartelrockets.latin
+		Prerequisites: up_cartelrockets.latin
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -470,16 +470,16 @@ latin_mtnk:
 	RenderSprites:
 		PlayerPalette: playerra2
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, uplatin_cartelrockets, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_cartelrockets.latin, up_chaingun.latin
 
-latin_diablo:
+diablo.latin:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -495,7 +495,7 @@ latin_diablo:
 		Cost: 1200
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~latin_cgweap
+		Prerequisites: ~cgweap.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_diablo.description
 	Mobile:
@@ -544,21 +544,21 @@ latin_diablo:
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
-	RangeMultiplier@latin_up_chaingun:
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
+	RangeMultiplier@up_chaingun.latin:
 		Modifier: 125
-		RequiresCondition: latin_up_chaingun
-	ReloadDelayMultiplier@latin_up_chaingun:
+		RequiresCondition: up_chaingun.latin
+	ReloadDelayMultiplier@up_chaingun.latin:
 		Modifier: 75
-		RequiresCondition: latin_up_chaingun
-	FirepowerMultiplier@latin_up_chaingun:
+		RequiresCondition: up_chaingun.latin
+	FirepowerMultiplier@up_chaingun.latin:
 		Modifier: 150
-		RequiresCondition: latin_up_chaingun
+		RequiresCondition: up_chaingun.latin
 	AttackTurreted:
 	# RenderRangeCircleCA:
 	# 	Armaments: primary
@@ -573,11 +573,11 @@ latin_diablo:
 		VoiceSet: LatinTankVoice
 	RenderSprites:
 		PlayerPalette: playerra2
-	GrantConditionOnPrerequisite@uplatin_alliedstolentech:
-		Condition: uplatin_alliedstolentech
-		Prerequisites: uplatin_alliedstolentech
+	GrantConditionOnPrerequisite@up_alliedstolentech.latin:
+		Condition: up_alliedstolentech.latin
+		Prerequisites: up_alliedstolentech.latin
 	Mirage:
-		RequiresCondition: !disabled && uplatin_alliedstolentech
+		RequiresCondition: !disabled && up_alliedstolentech.latin
 		InitialDelay: 25
 		RevealDelay: 25
 		RevealOn: Attack, Move
@@ -585,7 +585,7 @@ latin_diablo:
 		DefaultTargetTypes: t08, t10, t03, t02
 	WithMirageSpriteBody:
 		Name: tree
-		RequiresCondition: tree && uplatin_alliedstolentech
+		RequiresCondition: tree && up_alliedstolentech.latin
 		IsPlayerPalette: false
 		Palette: ra_temperat
 	WithSpriteTurret:
@@ -593,9 +593,9 @@ latin_diablo:
 	WithFacingSpriteBody:
 		RequiresCondition: !tree
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 
-latin_apc:
+apc.latin:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -614,7 +614,7 @@ latin_apc:
 		Cost: 2400
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~uplatin_apc, latin_cgspy
+		Prerequisites: ~up_apc.latin, cgspy.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_apc.description
 	Mobile:
@@ -666,69 +666,69 @@ latin_apc:
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: latin_up_chaingun && !rank-elite
+		RequiresCondition: up_chaingun.latin && !rank-elite
 	Armament@MachinegunELITE:
 		Weapon: RA2APCMachineGunE
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: latin_up_chaingun && rank-elite
+		RequiresCondition: up_chaingun.latin && rank-elite
 	Armament@MachinegunAA:
 		Weapon: RA2APCMachineGunAA
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: latin_up_chaingun && !rank-elite
+		RequiresCondition: up_chaingun.latin && !rank-elite
 	Armament@MachinegunAAELITE:
 		Weapon: RA2APCMachineGunAAE
 		LocalOffset: 600,15,300, 600,-15,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: latin_up_chaingun && rank-elite
+		RequiresCondition: up_chaingun.latin && rank-elite
 	Armament@Rockets:
 		Weapon: RA2APCRocket
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && !rank-elite
+		RequiresCondition: up_cartelrockets.latin && !rank-elite
 	Armament@RocketsELITE:
 		Weapon: RA2APCRocketE
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && rank-elite
+		RequiresCondition: up_cartelrockets.latin && rank-elite
 	Armament@RocketsAA:
 		Weapon: RA2APCRocketAA
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && !rank-elite
+		RequiresCondition: up_cartelrockets.latin && !rank-elite
 	Armament@RocketsAAELITE:
 		Weapon: RA2APCRocketAAE
 		LocalOffset: 600,-150,300, 600,150,300
 		Recoil: 85
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: uplatin_cartelrockets && rank-elite
+		RequiresCondition: up_cartelrockets.latin && rank-elite
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	WithMuzzleOverlay:
 	AttackTurreted:
 	Selectable:
 		DecorationBounds: 1024, 1024
 	RenderSprites:
-		Image: latin_apc
+		Image: apc.latin
 		PlayerPalette: playerra2
 	WithSpriteTurret:
 	Voiced:
@@ -736,20 +736,20 @@ latin_apc:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: latin_mili, latin_tkiller, latin_monkey, latin_fthrow, latin_narco
+		InitialUnits: mili.latin, tkiller.latin, monkey.latin, fthrow.latin, narco.latin
 	GrantConditionOnPrerequisite@Missile:
-		Condition: uplatin_cartelrockets
-		Prerequisites: uplatin_cartelrockets
+		Condition: up_cartelrockets.latin
+		Prerequisites: up_cartelrockets.latin
 	WithSpriteTurret:
 		Sequence: turret
-		RequiresCondition: !uplatin_alliedstolentech
+		RequiresCondition: !up_alliedstolentech.latin
 	WithSpriteTurret@up:
 		Sequence: turret-up
-		RequiresCondition: uplatin_alliedstolentech
+		RequiresCondition: up_alliedstolentech.latin
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 
-latin_humvee:
+humvee.latin:
 	Inherits: ^Tank
 	Inherits@GAINSEXPERIENCE: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -767,7 +767,7 @@ latin_humvee:
 		Cost: 3000
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~latin_cgspy, ~!uplatin_cartel
+		Prerequisites: ~cgspy.latin, ~!up_cartel.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_humvee.description
 	Mobile:
@@ -800,12 +800,12 @@ latin_humvee:
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	RenderRangeCircle:
 	WithMuzzleOverlay:
 	AttackFrontal:
@@ -813,7 +813,7 @@ latin_humvee:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: latin_humvee
+		Image: humvee.latin
 		PlayerPalette: playerra2
 	WithSpriteTurret:
 	Voiced:
@@ -821,7 +821,7 @@ latin_humvee:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: latin_mili, latin_tkiller, latin_monkey, latin_fthrow, latin_narco
+		InitialUnits: mili.latin, tkiller.latin, monkey.latin, fthrow.latin, narco.latin
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
@@ -830,9 +830,9 @@ latin_humvee:
 	WithSpriteTurret:
 		Sequence: turret
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 
-latin_cartel:
+cartel.latin:
 	Inherits: ^Tank
 	Inherits@GAINSEXPERIENCE: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -851,7 +851,7 @@ latin_cartel:
 		Name: Cartel Truck
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~latin_cgspy, ~uplatin_cartel
+		Prerequisites: ~cgspy.latin, ~up_cartel.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_humvee.description
 	Mobile:
@@ -884,12 +884,12 @@ latin_cartel:
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	RenderRangeCircle:
 	WithMuzzleOverlay:
 	AttackFrontal:
@@ -904,7 +904,7 @@ latin_cartel:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
-		InitialUnits: latin_mili, latin_tkiller, latin_monkey, latin_fthrow, latin_narco, latin_mili, latin_tkiller, latin_monkey, latin_fthrow, latin_narco
+		InitialUnits: mili.latin, tkiller.latin, monkey.latin, fthrow.latin, narco.latin, mili.latin, tkiller.latin, monkey.latin, fthrow.latin, narco.latin
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
@@ -913,9 +913,9 @@ latin_cartel:
 	WithSpriteTurret:
 		Sequence: turret
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
 
-latin_rtruck:
+rtruck.latin:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -929,7 +929,7 @@ latin_rtruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~latin_radar, ~!uplatin_burrito
+		Prerequisites: ~radar.latin, ~!up_burrito.latin
 		Description: actor-mssm.description
 	Valued:
 		Cost: 1000
@@ -985,9 +985,9 @@ latin_rtruck:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, uplatin_cartelrockets, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_cartelrockets.latin, up_hotfire.latin
 
-latin_burrito:
+burrito.latin:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1002,7 +1002,7 @@ latin_burrito:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~uplatin_burrito, latin_cgup
+		Prerequisites: ~up_burrito.latin, cgup.latin
 		Description: actor-latin_burrito.description
 	Tooltip:
 		Name: Burrito
@@ -1055,9 +1055,9 @@ latin_burrito:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, uplatin_cartelrockets, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_cartelrockets.latin, up_hotfire.latin
 
-latin_lars:
+lars.latin:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -1073,7 +1073,7 @@ latin_lars:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~uplatin_lars, latin_cgup
+		Prerequisites: ~up_lars.latin, cgup.latin
 		Description: actor-latin_lars.description
 	Valued:
 		Cost: 1300
@@ -1098,12 +1098,12 @@ latin_lars:
 		LocalOffset: -500,-250,250, -500,0,250, -500,250,250, -500,-250,500, -500,0,500, -500,250,500
 		RequiresCondition: rank-elite
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	RenderRangeCircle:
 	FirepowerMultiplier@RANK-1:
 		Modifier: 125
@@ -1136,9 +1136,9 @@ latin_lars:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_chaingun, uplatin_cartelrockets, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin, up_cartelrockets.latin, up_hotfire.latin
 
-latin_harv:
+harv.latin:
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -1150,7 +1150,7 @@ latin_harv:
 	Tooltip:
 		Name: Collection Truck
 	Buildable:
-		Prerequisites: ~latin_cgauto
+		Prerequisites: ~cgauto.latin
 		Queue: Vehicle, RAVehicle
 		Description: template-harvester.description
 	Mobile:
@@ -1180,7 +1180,7 @@ latin_harv:
 		Sequence: harvesting
 		Palette: ra2effect
 
-latin_ra2dtruck:
+ra2dtruck.latin:
 	Inherits: DTRK
 	Inherits@anim: ^RA2Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1199,7 +1199,7 @@ latin_ra2dtruck:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~uplatin_ra2dtruck, latin_radar
+		Prerequisites: ~up_ra2dtruck.latin, radar.latin
 	Voiced:
 		VoiceSet: RA2DemolitionTruckVoice
 	GrantConditionOnDeploy:
@@ -1207,7 +1207,7 @@ latin_ra2dtruck:
 	FireWarheadsOnDeathCA@bomb:
 		Weapon: RA2DemoBomb
 		EmptyWeapon: RA2DemoBomb
-	FirepowerMultiplier@latin_up_hotfire:
+	FirepowerMultiplier@up_hotfire.latin:
 		Modifier: 200
 	-DamagedByTintedCells@rad:
 	-DamagedByTintedCells@genrad:
@@ -1218,7 +1218,7 @@ latin_ra2dtruck:
 		Image: ra2dtruck #placeholder
 #   Pass those units to Syndicate
 
-latin_nuketruk:
+nuketruk.latin:
 	Inherits: DTRK
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
@@ -1237,7 +1237,7 @@ latin_nuketruk:
 		HP: 60000
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~uplatin_nuketruk, latin_cgspy
+		Prerequisites: ~up_nuketruk.latin, cgspy.latin
 		BuildLimit: 1
 		BuildDurationModifier: 50
 	Voiced:
@@ -1257,11 +1257,11 @@ latin_nuketruk:
 		DecorationBounds: 1536, 1536
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: latin_nuketruk
+		Image: nuketruk.latin
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_hotfire.latin
 
-latin_topol:
+topol.latin:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
@@ -1278,7 +1278,7 @@ latin_topol:
 		Cost: 6000
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~uplatin_topol, latin_cgup
+		Prerequisites: ~up_topol.latin, cgup.latin
 		Description: actor-latin_topol.description
 		BuildLimit: 1
 	Health:
@@ -1358,7 +1358,7 @@ latin_topol:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_hotfire
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_hotfire.latin
 
 #######################################
 # Red Alert 2 Syndicate Promotion Tree

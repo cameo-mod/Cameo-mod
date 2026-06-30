@@ -1,4 +1,4 @@
-latin_cgpow:
+cgpow.latin:
 	Inherits: ^RA2Building
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
@@ -10,7 +10,7 @@ latin_cgpow:
 		Name: Power Station
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~latin_cgcnst
+		Prerequisites: ~cgcnst.latin
 		Queue: Building, RABuilding
 		Description: actor-nanrct.description
 	Building:
@@ -40,7 +40,7 @@ latin_cgpow:
 		Modifier: 25
 	ProvidesPrerequisite@buildingname:
 
-latin_cgpile:
+cgpile.latin:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -54,7 +54,7 @@ latin_cgpile:
 	Tooltip:
 		Name: Combat Barracks
 	Buildable:
-		Prerequisites: ~latin_cgcnst, latin_cgpow
+		Prerequisites: ~cgcnst.latin, cgpow.latin
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -96,7 +96,7 @@ latin_cgpile:
 		Stats: Armor, Sight, Cargo, Kills, Experience
 	GivesBuildableArea:
 
-latin_cgauto:
+cgauto.latin:
 	Inherits: ^RA2Building
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -104,7 +104,7 @@ latin_cgauto:
 	Tooltip:
 		Name: Recycling Refinery
 	Buildable:
-		Prerequisites: ~latin_cgcnst, latin_cgpow
+		Prerequisites: ~cgcnst.latin, cgpow.latin
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -115,7 +115,7 @@ latin_cgauto:
 		DockOffset: 1086,1086,0
 	DrawLineToTarget:
 	FreeActor:
-		Actor: latin_harv
+		Actor: harv.latin
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
@@ -129,7 +129,7 @@ latin_cgauto:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 
-latin_radar:
+radar.latin:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
@@ -139,7 +139,7 @@ latin_radar:
 	Buildable:
 		BuildLimit: 1
 		Description: actor-latin_radar.description
-		Prerequisites: ~latin_cgcnst, latin_cgauto
+		Prerequisites: ~cgcnst.latin, cgauto.latin
 	Tooltip:
 		Name: Latin EMP Radar
 	Building:
@@ -154,8 +154,8 @@ latin_radar:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: uplatin_emp
-		IconImage: steel_qatech
+			1: up_emp.latin
+		IconImage: qatech.steel
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -188,14 +188,14 @@ latin_radar:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-latin_cgair:
+cgair.latin:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~latin_cgcnst, latin_radar
+		Prerequisites: ~cgcnst.latin, radar.latin
 		Description: actor-gaairc.description
 	Tooltip:
 		Name: Air Station
@@ -229,7 +229,7 @@ latin_cgair:
 		PauseOnCondition: disabled
 		OrderName: SovietRA2SpyPlane
 		Prerequisites:
-			1: latin_cgair
+			1: cgair.latin
 		IconImage: yrspyp
 		Icons:
 			1: icon
@@ -256,7 +256,7 @@ latin_cgair:
 		DirectionArrowAnimation: airstrikedirection
 		SupportPowerPaletteOrder: 10
 
-latin_cgspy:
+cgspy.latin:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
@@ -264,7 +264,7 @@ latin_cgspy:
 	Selectable:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
-		Prerequisites: ~latin_cgcnst, latin_radar
+		Prerequisites: ~cgcnst.latin, radar.latin
 	Tooltip:
 		Name: Spy Center
 	Building:
@@ -284,8 +284,8 @@ latin_cgspy:
 		OrderName: TraitorsPower
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: latin_cgspy
-		IconImage: latin_cgspy
+			1: cgspy.latin
+		IconImage: cgspy.latin
 		Icons:
 			1: icon2
 		Cursor: ability
@@ -321,7 +321,7 @@ latin_cgspy:
 		BeaconActor: CAMERA.sw
 		CameraRange: 6000
 
-latin_cgup:
+cgup.latin:
 	Inherits: ^RA2Building
 	Inherits: ^BasicDefense
 	Inherits@Template: ^BasicDefenseTemplate
@@ -337,7 +337,7 @@ latin_cgup:
 		Name: Defense Bureau
 	Buildable:
 		BuildLimit: 1
-		Prerequisites: ~latin_cgcnst, latin_cgspy, derricklimit
+		Prerequisites: ~cgcnst.latin, cgspy.latin, derricklimit
 		Description: actor-oilb.description
 	Building:
 		Footprint: xxx xxx xxx
@@ -352,7 +352,7 @@ latin_cgup:
 		PauseOnCondition: lowpower
 		RequiresCondition: !build-incomplete
 	RenderSprites:
-		Image: latin_cgup
+		Image: cgup.latin
 		PlayerPalette: playerra2
 	-WithDeathAnimation:
 	GivesBuildableArea:
@@ -379,7 +379,7 @@ latin_cgup:
 		Range: 10000
 	GivesBuildableArea:
 
-latin_cgte:
+cgte.latin:
 	Inherits: ^RA2Building
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
@@ -390,7 +390,7 @@ latin_cgte:
 	Buildable:
 		BuildLimit: 1
 		Description: actor-latin_cgte.description
-		Prerequisites: ~latin_cgcnst, latin_cgup, derricklimit
+		Prerequisites: ~cgcnst.latin, cgup.latin, derricklimit
 	Tooltip:
 		Name: Recycling Center
 	Building:
@@ -411,12 +411,12 @@ latin_cgte:
 			1: Produces scrap cars
 		Icons:
 			1: icon
-		IconImage: latin_buggy
+		IconImage: buggy.latin
 		AllowMultiple: True
 		PauseOnCondition: disabled
 		Prerequisites:
 			1:
-		Actors: latinscrapcar_driveby, latinscrapcar2_driveby
+		Actors: scrapcar_driveby.latin, scrapcar2_driveby.latin
 		Type: Car
 		ChargeInterval: 750
 		AutoFire: true
@@ -439,7 +439,7 @@ latin_cgte:
 	AcceptsDeliveredCash:
 		ValidTypes: GrinderCash
 
-latin_ca12hit:
+ca12hit.latin:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -450,7 +450,7 @@ latin_ca12hit:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~latin_cgcnst, latin_cgspy, !ra2topolstrike
+		Prerequisites: ~cgcnst.latin, cgspy.latin, !ra2topolstrike
 		Queue: Defence, RADefence
 		Description: actor-latin_ca12hit.description
 	Building:
@@ -511,7 +511,7 @@ latin_ca12hit:
 	WithIdleOverlay@bib:
 		Sequence: bib
 
-latin_cgdept:
+cgdept.latin:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^SyndicateSpawnActorsOnSell
@@ -524,7 +524,7 @@ latin_cgdept:
 	Tooltip:
 		Name: Syndicate Service Depot
 	Buildable:
-		Prerequisites: ~latin_cgcnst, latin_cgweap
+		Prerequisites: ~cgcnst.latin, cgweap.latin
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -540,7 +540,7 @@ latin_cgdept:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-latin_ngdshktur:
+ngdshktur.latin:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -551,7 +551,7 @@ latin_ngdshktur:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~latin_cgcnst, latin_cgpile
+		Prerequisites: ~cgcnst.latin, cgpile.latin
 		Description: template-anti-infantry-defense.description
 	Valued:
 		Cost: 700
@@ -590,21 +590,21 @@ latin_ngdshktur:
 		RequiresCondition: !build-incomplete
 	AutoTarget:
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: latin_up_chaingun
+		Upgrades: up_chaingun.latin
 	Power:
 		Amount: -30
 	RevealsShroud:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 
-latin_ngbunk2:
+ngbunk2.latin:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BunkerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -622,7 +622,7 @@ latin_ngbunk2:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~latin_cgcnst, latin_cgpile
+		Prerequisites: ~cgcnst.latin, cgpile.latin
 		Description: actor-nabnkr.description
 	Valued:
 		Cost: 600
@@ -653,15 +653,15 @@ latin_ngbunk2:
 		Range: 10000
 	DetectCloaked:
 		Range: 5000
-		RequiresCondition: uplatin_ngbunk2
+		RequiresCondition: up_ngbunk2.latin
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Cargo, Kills
 	WithIdleOverlay@top:
 		Sequence: idle-top
 		PauseOnCondition: disabled
-		RequiresCondition: !build-incomplete && uplatin_ngbunk2
+		RequiresCondition: !build-incomplete && up_ngbunk2.latin
 
-latin_sml:
+sml.latin:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -674,7 +674,7 @@ latin_sml:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~latin_cgcnst, latin_cgup
+		Prerequisites: ~cgcnst.latin, cgup.latin
 		Description: actor-latin_sml.description
 	Valued:
 		Cost: 5000
@@ -720,16 +720,16 @@ latin_sml:
 	DetectCloaked:
 		Range: 7000
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: latin_up_chaingun, latin_up_hotfire
+		Upgrades: up_chaingun.latin, up_hotfire.latin
 
-latin_aatur:
+aatur.latin:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -741,7 +741,7 @@ latin_aatur:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~latin_cgcnst, latin_radar
+		Prerequisites: ~cgcnst.latin, radar.latin
 		Description: template-anti-aircraft-defense.description
 	Valued:
 		Cost: 1500
@@ -773,17 +773,17 @@ latin_aatur:
 		Condition: gatling
 		RequiredShotsPerInstance: 4,8,12,16,20,24,28,32,36,40
 		RevokeDelay: 40
-		RequiresCondition: !rank-elite && latin_up_chaingun
+		RequiresCondition: !rank-elite && up_chaingun.latin
 	GrantConditionOnAttack@elitegatling:
 		Condition: gatling
 		RequiredShotsPerInstance: 2,4,6,8,10,12,14,16,18,20
 		RevokeDelay: 20
-		RequiresCondition: rank-elite && latin_up_chaingun
-	GrantConditionOnPrerequisite@latin_up_chaingun:
-		Condition: latin_up_chaingun
-		Prerequisites: latin_up_chaingun
+		RequiresCondition: rank-elite && up_chaingun.latin
+	GrantConditionOnPrerequisite@up_chaingun.latin:
+		Condition: up_chaingun.latin
+		Prerequisites: up_chaingun.latin
 	ActorStatValues:
-		Upgrades: latin_up_chaingun
+		Upgrades: up_chaingun.latin
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithMuzzleOverlay:
@@ -800,7 +800,7 @@ latin_aatur:
 	DetectCloaked:
 		Range: 7500
 
-latin_cgyard:
+cgyard.latin:
 	Inherits: ^RA2Building
 	Inherits@shipyard: ^IsShipyard
 	Inherits@shape: ^3x3Shape
@@ -810,7 +810,7 @@ latin_cgyard:
 	Tooltip:
 		Name: Syndicate Naval Yard
 	Buildable:
-		Prerequisites: ~latin_cgcnst, latin_cgpile, ~globalnaval
+		Prerequisites: ~cgcnst.latin, cgpile.latin, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
