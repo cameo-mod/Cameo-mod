@@ -40,33 +40,33 @@
 		ActorTypes: ra2engineer.asian, gren.asian, gren.asian, tkiller.asian
 
 ^InfantrySpecUpgrade:
-	DamageMultiplier@upgrade_infantryspec.asian:
+	DamageMultiplier@up_infantryspec.asian:
 		Modifier: 95
-		RequiresCondition: upgrade_infantryspec.asian
-	FirepowerMultiplier@upgrade_infantryspec.asian:
+		RequiresCondition: up_infantryspec.asian
+	FirepowerMultiplier@up_infantryspec.asian:
 		Modifier: 105
-		RequiresCondition: upgrade_infantryspec.asian
-	RangeMultiplier@upgrade_infantryspec.asian:
+		RequiresCondition: up_infantryspec.asian
+	RangeMultiplier@up_infantryspec.asian:
 		Modifier: 105
-		RequiresCondition: upgrade_infantryspec.asian
-	GrantConditionOnPrerequisite@upgrade_infantryspec.asian:
-		Condition: upgrade_infantryspec.asian
-		Prerequisites: upgrade_infantryspec.asian
+		RequiresCondition: up_infantryspec.asian
+	GrantConditionOnPrerequisite@up_infantryspec.asian:
+		Condition: up_infantryspec.asian
+		Prerequisites: up_infantryspec.asian
 	ActorStatValues:
-		Upgrades: upgrade_infantryspec.asian
+		Upgrades: up_infantryspec.asian
 
 ^PulverizerUpgrades:
-	FirepowerMultiplier@upgrade_pulverizer.asian:
+	FirepowerMultiplier@up_pulverizer.asian:
 		Modifier: 75
-		RequiresCondition: upgrade_pulverizer.asian
-	RangeMultiplier@upgrade_pulverizer.asian:
+		RequiresCondition: up_pulverizer.asian
+	RangeMultiplier@up_pulverizer.asian:
 		Modifier: 115
-		RequiresCondition: upgrade_pulverizer.asian
-	GrantConditionOnPrerequisite@upgrade_pulverizer.asian:
-		Condition: upgrade_pulverizer.asian
-		Prerequisites: upgrade_pulverizer.asian
+		RequiresCondition: up_pulverizer.asian
+	GrantConditionOnPrerequisite@up_pulverizer.asian:
+		Condition: up_pulverizer.asian
+		Prerequisites: up_pulverizer.asian
 	ActorStatValues:
-		Upgrades: upgrade_pulverizer.asian
+		Upgrades: up_pulverizer.asian
 
 ^AsianPhalanxUpgrade:
 	ExternalCondition@AsianPhalanx:
@@ -116,49 +116,49 @@
 	WithColoredOverlay@AsianPhalanx5:
 		Color: 88888840
 		RequiresCondition: AsianPhalanx >= 5
-	DamageMultiplier@upgrade_phalanx.asian:
+	DamageMultiplier@up_phalanx.asian:
 		Modifier: 90
-		RequiresCondition: upgrade_phalanx.asian
-	GrantConditionOnPrerequisite@upgrade_phalanx.asian:
-		Condition: upgrade_phalanx.asian
-		Prerequisites: upgrade_phalanx.asian
+		RequiresCondition: up_phalanx.asian
+	GrantConditionOnPrerequisite@up_phalanx.asian:
+		Condition: up_phalanx.asian
+		Prerequisites: up_phalanx.asian
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 ^DragonFireUpgrades:
-	FirepowerMultiplier@upgrade_dragonfire.asian:
+	FirepowerMultiplier@up_dragonfire.asian:
 		Modifier: 150
-		RequiresCondition: upgrade_dragonfire.asian
-	GrantConditionOnPrerequisite@upgrade_dragonfire.asian:
-		Condition: upgrade_dragonfire.asian
-		Prerequisites: upgrade_dragonfire.asian
+		RequiresCondition: up_dragonfire.asian
+	GrantConditionOnPrerequisite@up_dragonfire.asian:
+		Condition: up_dragonfire.asian
+		Prerequisites: up_dragonfire.asian
 	ActorStatValues:
-		Upgrades: upgrade_dragonfire.asian
+		Upgrades: up_dragonfire.asian
 
 ^CelestialPowerUpgrades:
-	FirepowerMultiplier@upgrade_celestialpower.asian:
+	FirepowerMultiplier@up_celestialpower.asian:
 		Modifier: 125
-		RequiresCondition: upgrade_celestialpower.asian
-	RangeMultiplier@upgrade_celestialpower.asian:
+		RequiresCondition: up_celestialpower.asian
+	RangeMultiplier@up_celestialpower.asian:
 		Modifier: 125
-		RequiresCondition: upgrade_celestialpower.asian
-	GrantConditionOnPrerequisite@upgrade_celestialpower.asian:
-		Condition: upgrade_celestialpower.asian
-		Prerequisites: upgrade_celestialpower.asian
+		RequiresCondition: up_celestialpower.asian
+	GrantConditionOnPrerequisite@up_celestialpower.asian:
+		Condition: up_celestialpower.asian
+		Prerequisites: up_celestialpower.asian
 	ActorStatValues:
-		Upgrades: upgrade_celestialpower.asian
+		Upgrades: up_celestialpower.asian
 
 ^KamikazeMode:
-	GrantConditionOnPrerequisite@upgrade_banzai.asian:
-		Condition: upgrade_banzai.asian
-		Prerequisites: upgrade_banzai.asian
+	GrantConditionOnPrerequisite@up_banzai.asian:
+		Condition: up_banzai.asian
+		Prerequisites: up_banzai.asian
 	GrantConditionOnDamageState@BanzaiHeavy:
 		ValidDamageStates: Heavy
 		Condition: BanzaiHeavy
-		RequiresCondition: upgrade_banzai.asian
+		RequiresCondition: up_banzai.asian
 	GrantCondition@KamikazeHeavy:
 		Condition: KamikazeHeavy
-		RequiresCondition: BanzaiHeavy && upgrade_banzai.asian
+		RequiresCondition: BanzaiHeavy && up_banzai.asian
 	DamageMultiplier@KamikazeHeavy:
 		Modifier: 75
 		RequiresCondition: KamikazeHeavy
@@ -190,10 +190,10 @@
 	GrantConditionOnDamageState@BanzaiCritical:
 		ValidDamageStates: Critical
 		Condition: BanzaiCritical
-		RequiresCondition: upgrade_banzai.asian
+		RequiresCondition: up_banzai.asian
 	GrantCondition@KamikazeCritical:
 		Condition: KamikazeCritical
-		RequiresCondition: BanzaiCritical && upgrade_banzai.asian
+		RequiresCondition: BanzaiCritical && up_banzai.asian
 	DamageMultiplier@KamikazeCritical:
 		Modifier: 50
 		RequiresCondition: KamikazeCritical
@@ -225,7 +225,7 @@
 	#RejectsOrders@KamikazeCritical:
 	#	RequiresCondition: KamikazeCritical
 	ActorStatValues:
-		Upgrades: upgrade_banzai.asian
+		Upgrades: up_banzai.asian
 
 ^WayOfTheDragon:
 	DamageMultiplier@dragonwaydamage:
@@ -237,25 +237,25 @@
 	SpeedMultiplier@dragonwaydamage:
 		RequiresCondition: dragonwaydamage
 		Modifier: 105
-	GrantConditionOnDamage@team_upgrade_dragonway.asian:
-		RequiresCondition: team_upgrade_dragonway.asian
+	GrantConditionOnDamage@up_team_dragonway.asian:
+		RequiresCondition: up_team_dragonway.asian
 		Condition: dragonwaydamage
 		Duration: 25
 		PlayerRelationship: Ally, Neutral, Enemy
-	DamageMultiplier@team_upgrade_dragonway.asian:
+	DamageMultiplier@up_team_dragonway.asian:
 		Modifier: 95
-		RequiresCondition: team_upgrade_dragonway.asian
-	FirepowerMultiplier@team_upgrade_dragonway.asian:
+		RequiresCondition: up_team_dragonway.asian
+	FirepowerMultiplier@up_team_dragonway.asian:
 		Modifier: 105
-		RequiresCondition: team_upgrade_dragonway.asian
-	SpeedMultiplier@team_upgrade_dragonway.asian:
+		RequiresCondition: up_team_dragonway.asian
+	SpeedMultiplier@up_team_dragonway.asian:
 		Modifier: 105
-		RequiresCondition: team_upgrade_dragonway.asian
-	GrantConditionOnPrerequisite@team_upgrade_dragonway.asian:
-		Condition: team_upgrade_dragonway.asian
-		Prerequisites: team_upgrade_dragonway.asian
+		RequiresCondition: up_team_dragonway.asian
+	GrantConditionOnPrerequisite@up_team_dragonway.asian:
+		Condition: up_team_dragonway.asian
+		Prerequisites: up_team_dragonway.asian
 	ActorStatValues:
-		Upgrades: team_upgrade_dragonway.asian
+		Upgrades: up_team_dragonway.asian
 
 ^SyndicateSpawnActorsOnSell:
 	SpawnActorsOnSell:
@@ -539,7 +539,7 @@
 		RequiresCondition: !in_water
 ^SpaceNaxisSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: lunar.nax, lunar.nax, lunar.nax, lunar2.nax
+		ActorTypes: lunar.nax2, lunar.nax2, lunar.nax2, lunar2.nax2
 		RequiresCondition: !in_water
 
 ^NaxiUndeadRevive:
@@ -768,41 +768,41 @@
 		Modifier: 90
 
 ^FutureTechEqualizerUpgrades:
-	FirepowerMultiplier@upgrade_equalizer_x1.futu:
+	FirepowerMultiplier@up_equalizer_x1.futu:
 		Modifier: 110
-		RequiresCondition: upgrade_equalizer_x1.futu
-	ReloadDelayMultiplier@upgrade_equalizer_x1.futu:
+		RequiresCondition: up_equalizer_x1.futu
+	ReloadDelayMultiplier@up_equalizer_x1.futu:
 		Modifier: 90
-		RequiresCondition: upgrade_equalizer_x1.futu
-	RangeMultiplier@upgrade_equalizer_x1.futu:
+		RequiresCondition: up_equalizer_x1.futu
+	RangeMultiplier@up_equalizer_x1.futu:
 		Modifier: 105
-		RequiresCondition: upgrade_equalizer_x1.futu
-	GrantConditionOnPrerequisite@upgrade_equalizer_x1.futu:
-		Condition: upgrade_equalizer_x1.futu
-		Prerequisites: upgrade_equalizer_x1.futu
-	FirepowerMultiplier@upgrade_equalizer_x2.futu:
+		RequiresCondition: up_equalizer_x1.futu
+	GrantConditionOnPrerequisite@up_equalizer_x1.futu:
+		Condition: up_equalizer_x1.futu
+		Prerequisites: up_equalizer_x1.futu
+	FirepowerMultiplier@up_equalizer_x2.futu:
 		Modifier: 110
-		RequiresCondition: upgrade_equalizer_x2.futu
-	ReloadDelayMultiplier@upgrade_equalizer_x2.futu:
+		RequiresCondition: up_equalizer_x2.futu
+	ReloadDelayMultiplier@up_equalizer_x2.futu:
 		Modifier: 90
-		RequiresCondition: upgrade_equalizer_x2.futu
-	RangeMultiplier@upgrade_equalizer_x2.futu:
+		RequiresCondition: up_equalizer_x2.futu
+	RangeMultiplier@up_equalizer_x2.futu:
 		Modifier: 105
-		RequiresCondition: upgrade_equalizer_x2.futu
-	GrantConditionOnPrerequisite@upgrade_equalizer_x2.futu:
-		Condition: upgrade_equalizer_x2.futu
-		Prerequisites: upgrade_equalizer_x2.futu
-	FirepowerMultiplier@upgrade_equalizer_x3.futu:
+		RequiresCondition: up_equalizer_x2.futu
+	GrantConditionOnPrerequisite@up_equalizer_x2.futu:
+		Condition: up_equalizer_x2.futu
+		Prerequisites: up_equalizer_x2.futu
+	FirepowerMultiplier@up_equalizer_x3.futu:
 		Modifier: 110
-		RequiresCondition: upgrade_equalizer_x3.futu
-	ReloadDelayMultiplier@upgrade_equalizer_x3.futu:
+		RequiresCondition: up_equalizer_x3.futu
+	ReloadDelayMultiplier@up_equalizer_x3.futu:
 		Modifier: 90
-		RequiresCondition: upgrade_equalizer_x3.futu
-	RangeMultiplier@upgrade_equalizer_x3.futu:
+		RequiresCondition: up_equalizer_x3.futu
+	RangeMultiplier@up_equalizer_x3.futu:
 		Modifier: 105
-		RequiresCondition: upgrade_equalizer_x3.futu
-	GrantConditionOnPrerequisite@upgrade_equalizer_x3.futu:
-		Condition: upgrade_equalizer_x3.futu
-		Prerequisites: upgrade_equalizer_x3.futu
+		RequiresCondition: up_equalizer_x3.futu
+	GrantConditionOnPrerequisite@up_equalizer_x3.futu:
+		Condition: up_equalizer_x3.futu
+		Prerequisites: up_equalizer_x3.futu
 	ActorStatValues:
-		Upgrades: upgrade_equalizer_x1.futu, upgrade_equalizer_x2.futu, upgrade_equalizer_x3.futu
+		Upgrades: up_equalizer_x1.futu, up_equalizer_x2.futu, up_equalizer_x3.futu

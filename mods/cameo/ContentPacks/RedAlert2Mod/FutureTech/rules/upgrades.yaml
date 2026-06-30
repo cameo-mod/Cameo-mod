@@ -144,35 +144,35 @@ egcnst_infiltrated.futu:
 	RenderSprites:
 		Image: egcnst.futu
 
-upgrade_equalizer_x1.futu:
+up_equalizer_x1.futu:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Equalizer X1
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~egtf.futu, !upgrade_equalizer_x1.futu
+		Prerequisites: ~egtf.futu, !up_equalizer_x1.futu
 	RenderSprites:
-		Image: upgrade_equalizer_x1.futu
+		Image: up_equalizer_x1.futu
 	ProvidesPrerequisite:
 
-upgrade_equalizer_x2.futu:
+up_equalizer_x2.futu:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Equalizer X2
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~egtf.futu, egtech.futu, upgrade_equalizer_x1.futu, !upgrade_equalizer_x2.futu
+		Prerequisites: ~egtf.futu, egtech.futu, up_equalizer_x1.futu, !up_equalizer_x2.futu
 	RenderSprites:
-		Image: upgrade_equalizer_x2.futu
+		Image: up_equalizer_x2.futu
 	ProvidesPrerequisite:
 
-upgrade_equalizer_x3.futu:
+up_equalizer_x3.futu:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Equalizer X3
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~egtf.futu, egtech.futu, egshock.futu, upgrade_equalizer_x2.futu, !upgrade_equalizer_x3.futu
+		Prerequisites: ~egtf.futu, egtech.futu, egshock.futu, up_equalizer_x2.futu, !up_equalizer_x3.futu
 	RenderSprites:
-		Image: upgrade_equalizer_x3.futu
+		Image: up_equalizer_x3.futu
 	ProvidesPrerequisite:

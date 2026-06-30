@@ -851,3 +851,98 @@ lasert.nax2:
 ##############################################
 #   Red Alert 2 Naxis Upgrades
 ##############################################
+
+gravity.nax2:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Gravity Core Tank
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~weap.nax2, radar.nax2, tech.nax2
+		Queue: Vehicle, RAVehicle
+		Description: actor-aaquas.description
+	Mobile:
+		Locomotor: hover
+		Speed: 40
+		TurnSpeed: 16
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+	Health:
+		HP: 300000
+	Repairable:
+		HpPerStep: 3125
+	Armor:
+		Type: Medium
+	Armament@AG:
+		Weapon: GLStingerTargeting
+		LocalOffset: 400,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiLunarCoreVoice
+	ProximityExternalCondition@gravity_1:
+		Range: 12500
+		Condition: GravityGenerator
+		RequiresCondition: !disabled
+		ValidRelationships: Enemy
+	WithRangeCircle@gravity_1:
+		Range: 12500
+		Type: gravity
+		Color: 20027788
+		RequiresCondition: !disabled
+	ProximityExternalCondition@gravity_2:
+		Range: 10000
+		Condition: GravityGenerator
+		RequiresCondition: !disabled
+		ValidRelationships: Enemy
+	WithRangeCircle@gravity_2:
+		Range: 10000
+		Type: gravity
+		Color: 20027788
+		RequiresCondition: !disabled
+	ProximityExternalCondition@gravity_3:
+		Range: 7500
+		Condition: GravityGenerator
+		RequiresCondition: !disabled
+		ValidRelationships: Enemy
+	WithRangeCircle@gravity_3:
+		Range: 7500
+		Type: gravity
+		Color: 20027788
+		RequiresCondition: !disabled
+	ProximityExternalCondition@gravity_4:
+		Range: 5000
+		Condition: GravityGenerator
+		RequiresCondition: !disabled
+		ValidRelationships: Enemy
+	WithRangeCircle@gravity_4:
+		Range: 5000
+		Type: gravity
+		Color: 20027788
+		RequiresCondition: !disabled
+	ProximityExternalCondition@gravity_5:
+		Range: 2500
+		Condition: GravityGenerator
+		RequiresCondition: !disabled
+		ValidRelationships: Enemy
+	WithRangeCircle@gravity_5:
+		Range: 2500
+		Type: gravity
+		Color: 20027788
+		RequiresCondition: !disabled

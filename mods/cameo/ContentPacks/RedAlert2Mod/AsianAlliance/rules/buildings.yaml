@@ -570,7 +570,7 @@ cgflam.asian:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: upgrade_dragonfire.asian
+		Upgrades: up_dragonfire.asian
 
 cgpnch.asian:
 	Inherits: ^RA2Defense
@@ -608,13 +608,13 @@ cgpnch.asian:
 		LocalOffset: 350,22,100, 350,-22,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upgrade_celestialpower.asian
+		RequiresCondition: !up_celestialpower.asian
 	Armament@Upgrade:
 		Weapon: AsianPunisherAGEMP
 		LocalOffset: 350,22,100, 350,-22,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_celestialpower.asian
+		RequiresCondition: up_celestialpower.asian
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -631,7 +631,7 @@ cgpnch.asian:
 		DetectionTypes: Underwater
 		Range: 6000
 	ActorStatValues:
-		Upgrades: upgrade_celestialpower.asian
+		Upgrades: up_celestialpower.asian
 
 cgpuls.asian:
 	Inherits: ^RA2Defense
@@ -660,11 +660,11 @@ cgpuls.asian:
 	Armament:
 		Weapon: AsianPhotonCannon
 		LocalOffset: 0,0,400
-		RequiresCondition: !upgrade_celestialpower.asian
+		RequiresCondition: !up_celestialpower.asian
 	Armament@Upgrade:
 		Weapon: AsianPhotonCannonEMP
 		LocalOffset: 0,0,400
-		RequiresCondition: upgrade_celestialpower.asian
+		RequiresCondition: up_celestialpower.asian
 	AttackTurreted:
 	Turreted:
 	Sellable:
@@ -682,7 +682,7 @@ cgpuls.asian:
 	DetectCloaked:
 		Range: 7000
 	ActorStatValues:
-		Upgrades: upgrade_celestialpower.asian
+		Upgrades: up_celestialpower.asian
 
 cgrail.asian:
 	Inherits: ^RA2Defense
@@ -746,7 +746,7 @@ cgrail.asian:
 	DetectCloaked:
 		Range: 4800
 	ActorStatValues:
-		Upgrades: upgrade_celestialpower.asian
+		Upgrades: up_celestialpower.asian
 
 cgchtw.asian:
 	Inherits: ^RA2Defense
@@ -856,7 +856,7 @@ cgplas.asian:
 	DetectCloaked:
 		Range: 7000
 	ActorStatValues:
-		Upgrades: upgrade_dragonfire.asian
+		Upgrades: up_dragonfire.asian
 
 cghype.asian:
 	Inherits: ^RA2Defense
@@ -904,7 +904,7 @@ cghype.asian:
 	DetectCloaked:
 		Range: 4500
 	ActorStatValues:
-		Upgrades: upgrade_celestialpower.asian
+		Upgrades: up_celestialpower.asian
 
 cgtnkr.asian:
 	Inherits: ^RA2Building

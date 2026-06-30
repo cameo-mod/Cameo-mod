@@ -68,7 +68,7 @@ panth.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 ksub.asian:
 	Inherits: ^BoatUnit
@@ -133,7 +133,7 @@ ksub.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 gunb.asian:
 	Inherits: ^BoatUnit
@@ -212,7 +212,7 @@ gunb.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 lsub.asian:
 	Inherits: ^BoatUnit
@@ -266,7 +266,7 @@ lsub.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 quasfrig.asian:
 	Inherits: ^BoatUnit
@@ -302,25 +302,25 @@ quasfrig.asian:
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upgrade_celestialpower.asian
+		RequiresCondition: !up_celestialpower.asian
 	Armament@UpgradeAG:
 		Weapon: AsianQuasarBoatAGEMP
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_celestialpower.asian
+		RequiresCondition: up_celestialpower.asian
 	Armament@AA:
 		Weapon: AsianQuasarBoatAA
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upgrade_celestialpower.asian
+		RequiresCondition: !up_celestialpower.asian
 	Armament@UpgradeAA:
 		Weapon: AsianQuasarBoatAAEMP
 		LocalOffset: 500,0,250, 600,0,250, 700,0,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_celestialpower.asian
+		RequiresCondition: up_celestialpower.asian
 	WithMuzzleOverlay:
 	AttackFrontal:
 		Voice: Attack
@@ -330,7 +330,7 @@ quasfrig.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_celestialpower.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_celestialpower.asian
 
 karrier.asian:
 	Inherits: ^BoatUnit
@@ -380,7 +380,7 @@ karrier.asian:
 	Voiced:
 		VoiceSet: AsianShipVoice
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
 
 tsun.asian:
 	Inherits: ^BoatUnit
@@ -434,4 +434,4 @@ tsun.asian:
 	ActorStatValues:
 		Upgrades: up_tsunami.asian
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian

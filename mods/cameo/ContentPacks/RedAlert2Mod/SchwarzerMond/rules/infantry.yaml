@@ -315,3 +315,152 @@ engi.nax2:
 		EnterCursor: ability
 		EnterBlockedCursor: move-blocked
 		Voice: Move
+
+lunar.nax2:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Lunar Soldier
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~barr.nax2
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: NaxiRifleLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
+	Armament@ELITE:
+		Weapon: NaxiRifleLaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && !up_ylaser.nax2
+	Armament@PRIMARY_UP:
+		Weapon: Lunar_YellowRifleLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && up_ylaser.nax2
+	Armament@ELITE_UP:
+		Weapon: Lunar_YellowRifleLaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && up_ylaser.nax2
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxiRifleLaser
+		RequiresCondition: !rank-elite && !up_ylaser.nax2
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxiRifleLaserE
+		RequiresCondition: rank-elite && !up_ylaser.nax2
+	Armament@GARRISONED_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowRifleLaser
+		RequiresCondition: !rank-elite && up_ylaser.nax2
+	Armament@GARRISONEDELITE_UP:
+		Name: garrisoned
+		Weapon: Lunar_YellowRifleLaserE
+		RequiresCondition: rank-elite && up_ylaser.nax2
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiLunarTroopVoice
+
+lunar2.nax2:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Valued:
+		Cost: 350
+	Tooltip:
+		Name: Lunar Rocket
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~barr.nax2
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armament@PRIMARY:
+		Weapon: NaxCorrosionRocketTrooper
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxCorrosionRocketTrooper
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: NaxCorrosionRocketTrooper
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NaxCorrosionRocketTrooper
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: NaxiLunarTroopVoice
+
+hole_small.nax2:
+	Inherits@1: hole.nax2
+	Health:
+		HP: 25000
+	ChangesHealth:
+		Step: -100
+
+hole.nax2:
+	Inherits: ^EnergyEntity
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Armament:
+		Weapon: NaxiBlackholeShoot
+		LocalOffset: 0,0,5
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Mobile:
+		Locomotor: hover
+		Speed: 5
+		TurnSpeed: 255
+	RenderSprites:
+		Palette: ra2infantry
+	Health:
+		HP: 2400
+	ChangesHealth:
+		Step: -10
+		Delay: 1
+		StartIfBelow: 101
+	WithDeathAnimation:
+		FallbackSequence: die
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: ra2infantry
+		DeathPaletteIsPlayerPalette: false
+	Tooltip:
+		Name: Black Hole
+	Targetable@BlackHole:
+		TargetTypes: BlackHole, Ground
+	Voiced:
+		VoiceSet: DinoVoice
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:

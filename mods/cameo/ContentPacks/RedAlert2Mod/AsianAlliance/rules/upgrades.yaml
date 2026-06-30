@@ -175,35 +175,35 @@ up_howitzer.asian:
 #		Upgrades Asian Alliance
 ####################################################################################################
 
-upgrade_infantryspec.asian:
+up_infantryspec.asian:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Modernized Infantry Equipment
 	Buildable:
 		Description: asian_upgrade_infantryspec.description
-		Prerequisites: ~cgradr.asian, !upgrade_infantryspec.asian
+		Prerequisites: ~cgradr.asian, !up_infantryspec.asian
 	RenderSprites:
-		Image: upgrade_infantryspec.asian
+		Image: up_infantryspec.asian
 
-upgrade_pulverizer.asian:
+up_pulverizer.asian:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Heavy Pulverizer Weapons
 	Buildable:
 		Description: asian_upgrade_pulverizer.description
-		Prerequisites: ~cgradr.asian, !upgrade_pulverizer.asian
+		Prerequisites: ~cgradr.asian, !up_pulverizer.asian
 	RenderSprites:
-		Image: upgrade_pulverizer.asian
+		Image: up_pulverizer.asian
 
-upgrade_phalanx.asian:
+up_phalanx.asian:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Asian Phalanx
 	Buildable:
 		Description: asian_upgrade_phalanx.description
-		Prerequisites: ~cgradr.asian, !upgrade_phalanx.asian
+		Prerequisites: ~cgradr.asian, !up_phalanx.asian
 	RenderSprites:
-		Image: upgrade_phalanx.asian
+		Image: up_phalanx.asian
 	ProvidesPrerequisite:
 
 up_massparadrop.asian:
@@ -256,52 +256,52 @@ up_tsunami.asian:
 		Image: tsun.asian
 	ProvidesPrerequisite:
 
-upgrade_dragonfire.asian:
+up_dragonfire.asian:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Dragon Fire
 	Buildable:
 		Description: asian_upgrade_dragonfire.description
-		Prerequisites: ~cgtech.asian, !upgrade_dragonfire.asian
+		Prerequisites: ~cgtech.asian, !up_dragonfire.asian
 	RenderSprites:
-		Image: upgrade_dragonfire.asian
+		Image: up_dragonfire.asian
 	ProvidesPrerequisite:
 
-upgrade_celestialpower.asian:
+up_celestialpower.asian:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Celestial Power
 	Buildable:
 		Description: asian_upgrade_celestialpower.description
-		Prerequisites: ~cgtech.asian, !upgrade_celestialpower.asian
+		Prerequisites: ~cgtech.asian, !up_celestialpower.asian
 	RenderSprites:
-		Image: upgrade_celestialpower.asian
+		Image: up_celestialpower.asian
 	ProvidesPrerequisite:
 
-upgrade_banzai.asian:
+up_banzai.asian:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Banzai Mode
 	Buildable:
 		Description: asian_upgrade_banzai.description
-		Prerequisites: ~cgtech.asian, cgmiac.asian, !upgrade_banzai.asian
+		Prerequisites: ~cgtech.asian, cgmiac.asian, !up_banzai.asian
 	RenderSprites:
-		Image: upgrade_banzai.asian
+		Image: up_banzai.asian
 	ProvidesPrerequisite:
 
-team_upgrade_dragonway.asian:
+up_team_dragonway.asian:
 	Inherits: ^team_upgrade_template
 	Tooltip:
 		Name: Way of the Dragon
 	Buildable:
 		Description: asian_team_upgrade_dragonway.description
-		Prerequisites: ~cgtech.asian, cgmiac.asian, !team_upgrade_dragonway.asian
+		Prerequisites: ~cgtech.asian, cgmiac.asian, !up_team_dragonway.asian
 	RenderSprites:
-		Image: team_upgrade_dragonway.asian
+		Image: up_team_dragonway.asian
 	ProvidesTeamProxyActor:
-		Actor: upgrade_dragonway_proxy_actor.asian
+		Actor: up_dragonway_proxy_actor.asian
 
-upgrade_dragonway_proxy_actor.asian:
+up_dragonway_proxy_actor.asian:
 	Inherits: ^team_upgrade_proxy_actor
 	Tooltip:
 		Name: Way of the Dragon
@@ -309,23 +309,23 @@ upgrade_dragonway_proxy_actor.asian:
 		Description: asian_team_upgrade_dragonway.description
 	PlayerDisplayUpgrade:
 	RenderSprites:
-		Image: team_upgrade_dragonway.asian
+		Image: up_team_dragonway.asian
 	ProvidesPrerequisite:
-		Prerequisite: team_upgrade_dragonway.asian
+		Prerequisite: up_team_dragonway.asian
 
-team_upgrade_diplomacy.asian:
+up_team_diplomacy.asian:
 	Inherits: ^team_upgrade_template
 	Tooltip:
 		Name: Asian Diplomacy
 	Buildable:
 		Description: asian_team_upgrade_diplomacy.description
-		Prerequisites: ~cgtech.asian, cgmiac.asian, !team_upgrade_diplomacy.asian
+		Prerequisites: ~cgtech.asian, cgmiac.asian, !up_team_diplomacy.asian
 	RenderSprites:
-		Image: team_upgrade_diplomacy.asian
+		Image: up_team_diplomacy.asian
 	ProvidesTeamProxyActor:
-		Actor: team_upgrade_diplomacy_proxy_actor.asian
+		Actor: up_team_diplomacy_proxy_actor.asian
 
-team_upgrade_diplomacy_proxy_actor.asian:
+up_team_diplomacy_proxy_actor.asian:
 	Inherits: ^team_upgrade_proxy_actor
 	Tooltip:
 		Name: Asian Diplomacy
@@ -333,9 +333,9 @@ team_upgrade_diplomacy_proxy_actor.asian:
 		Description: asian_team_upgrade_diplomacy.description
 	PlayerDisplayUpgrade:
 	RenderSprites:
-		Image: team_upgrade_diplomacy.asian
+		Image: up_team_diplomacy.asian
 	ProvidesPrerequisite:
-		Prerequisite: team_upgrade_diplomacy.asian
+		Prerequisite: up_team_diplomacy.asian
 
 ##############################################
 #   Red Alert 2 Syndicate Buildings

@@ -158,13 +158,13 @@ up_shrek.nax:
 		Image: shrek.nax
 	ProvidesPrerequisite:
 
-upgrade_me262.nax:
+up_me262.nax:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Unlock Me 262
 	Buildable:
 		Description: Upgrades the BF 109 to the Me 262
-		Prerequisites: ~radar.nax, !upgrade_me262.nax
+		Prerequisites: ~radar.nax, !up_me262.nax
 	RenderSprites:
 		Image: me262.nax
 

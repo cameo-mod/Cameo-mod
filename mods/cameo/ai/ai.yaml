@@ -3190,7 +3190,7 @@ Player:
 		HighValueTargetTypes: fact.gdi, fact.nod, proc.gdi, proc.nod, weap, afld, hq.gdi, hq.nod, eye, tmpl, td_nod_templeprime, rafact.allies, rafact.soviet, rafact.japan, raproc.allies, raproc.soviet, jproc, raweap, ra_gigafactory, raweapa, modraweapj, dome.allies, dome.soviet, dome.japan, atek, stek, modjtek, gap, mslo, iron, pdox, jshrine, ra2gacnst, ra2nacnst, yrnacnst, ra2garefn, ra2narefn, yryarefn, ra2gaweap, ra2naweap, yrygweap, ra2gaairc, ra2naradr, ra2napsis, ra2gatech, ra2natech, yrygtech, yrygcomd, ra2gaweat, ra2gacsph, ra2namisl, ra2nairon, yrygppet, yryggntc, cgcnst.asian, cgrefn.asian, cgweap.asian, cgradr.asian, cgtech.asian, cgionc.asian, cgchao.asian, qacst.steel, qref.steel, qaweap.steel, qatech.steel, qaorbit.steel, cgcnst.latin, cgauto.latin, cgweap.latin, cgspy.latin, ca12hit.latin, conyard.nax, refin.nax, weap.nax, radar.nax, tek.nax, tech.nax, rocket.nax, conyard.nax2, refin.nax2; weap.nax2, radar.nax2, tech.nax2, meteorray.nax2, gcore.nax2, egcnst.futu, egrefn.futu, egweap2.futu, egtf.futu, egtech.futu, construction_yard.ixian, refinery.ixian, heavy_factory.ixian, outpost.ixian research_centre.ixian, starport.ixian, supercomputer.ixian, construction_yard.ordos, refinery.ordos, heavy_factory.ordos, outpost.ordos research_centre.ordos, starport.ordos, tsntmisl, tsntmislcabal, tsgtplug
 		HighValueTargetPriority: 50
 		AirToAirPriority: 25
-		BigAirThreats: gdifirehawk, mignuke, modbomber, rapierjumpjet, ra2beag, yrbpln1, ra2zep, yrdisk, phoenix.asian, inspect.steel, cruiser.steel, mig.latin, zep.nax, zep.nax2, haunebu.nax, haunebu2.nax, dieglocke.nax, piercer.nax, cryo.futu, harbinger.futu, farasha.ixian, bomber.ixian, eye.ordos, wraith.ordos, scbattlecruiser, scwyvern, sccarrier, scgladius, scguardian, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
+		BigAirThreats: gdifirehawk, mignuke, modbomber, rapierjumpjet, ra2beag, yrbpln1, ra2zep, yrdisk, phoenix.asian, inspect.steel, cruiser.steel, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, dieglocke.nax2, piercer.nax2, cryo.futu, harbinger.futu, farasha.ixian, bomber.ixian, eye.ordos, wraith.ordos, scbattlecruiser, scwyvern, sccarrier, scgladius, scguardian, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
 		AirSquadTargetTypes:
 			heli: Aircraft, Ground, Naval
 			orca: Aircraft, Ground, Naval
@@ -3378,7 +3378,7 @@ Player:
 	LoadGarrisonerBotModuleCA@Infantry:
 		RequiresCondition: genericbot && !easiestbot
 		PassengersPerScan: 6
-		GarrisonerUnit: e1.gdi, e1.nod, e2, e3.gdi, e3.nod, e4, e5, e3chem, tsblackhandlaser, tsblackhandflamer, tsstealthsoldier, gdishotgunner, gdimissilesoldier, gdisniper, rae1, rare1, raje1, rare3, raje3, shok, mortarsoldier, ramaid, rae2, rae4, raje4, sniper, alliedmachinegunner, e3flamer, ra2e1, ra2ggi, ra2seal, ra2e2, ra2shk, ra2flakt, ra2deso, ra2snipe, yrinit, yrvirus, gren.asian, tkiller.asian, flam.asian, plast.asian, japrif.asian, archer.asian, asdf.asian, light_inf, heavy_inf, trooper, shock_infantry.ixian, storm_infantry.ixian, fedinf.steel, board_inf.steel, qinf.steel, mili.latin, tkiller.latin, fftr.latin, fthrow.latin, narco.latin, rifle.nax, cons.nax, mp40.nax, merc.nax, shrek.nax, tcons.nax, lunar.nax, lunar2.nax, uber.nax2, enforcer.futu, javelinsoldier.futu, scmarine, scfirebat, scmarauder, scghost, scmadcap, scharakan, scsilvertongue, scspithid, wc2_human_elven_archer, wc2_human_elven_ranger, wc2_orc_troll_axethrower, wc2_orc_troll_berserker, tkmrifleman, tkmjug, tkmtrooper, tkmrocketeer, tkmspetsnaz
+		GarrisonerUnit: e1.gdi, e1.nod, e2, e3.gdi, e3.nod, e4, e5, e3chem, tsblackhandlaser, tsblackhandflamer, tsstealthsoldier, gdishotgunner, gdimissilesoldier, gdisniper, rae1, rare1, raje1, rare3, raje3, shok, mortarsoldier, ramaid, rae2, rae4, raje4, sniper, alliedmachinegunner, e3flamer, ra2e1, ra2ggi, ra2seal, ra2e2, ra2shk, ra2flakt, ra2deso, ra2snipe, yrinit, yrvirus, gren.asian, tkiller.asian, flam.asian, plast.asian, japrif.asian, archer.asian, asdf.asian, light_inf, heavy_inf, trooper, shock_infantry.ixian, storm_infantry.ixian, fedinf.steel, board_inf.steel, qinf.steel, mili.latin, tkiller.latin, fftr.latin, fthrow.latin, narco.latin, rifle.nax, cons.nax, mp40.nax, merc.nax, shrek.nax, tcons.nax, lunar.nax2, lunar2.nax2, uber.nax2, enforcer.futu, javelinsoldier.futu, scmarine, scfirebat, scmarauder, scghost, scmadcap, scharakan, scsilvertongue, scspithid, wc2_human_elven_archer, wc2_human_elven_ranger, wc2_orc_troll_axethrower, wc2_orc_troll_berserker, tkmrifleman, tkmjug, tkmtrooper, tkmrocketeer, tkmspetsnaz
 	LoadCargoBotModule@Infantry:
 		RequiresCondition: genericbot
 		TransportTypesAndLoadRequirement:
@@ -3413,7 +3413,7 @@ Player:
 			miss: All
 			ramiss: All
 			fcom: All
-		PassengerTypes: e1.gdi, e1.nod, e2, e3.gdi, e3.nod, e4, e5, e3chem, tsblackhandlaser, tsblackhandflamer, tsstealthsoldier, gdishotgunner, gdimissilesoldier, gdisniper, rae1, rare1, raje1, rare3, raje3, shok, mortarsoldier, ramaid, rae2, rae4, raje4, sniper, alliedmachinegunner, e3flamer, ra2e1, ra2ggi, ra2seal, ra2e2, ra2shk, ra2flakt, ra2deso, ra2snipe, yrinit, yrvirus, gren.asian, tkiller.asian, flam.asian, plast.asian, japrif.asian, archer.asian, asdf.asian, light_inf, heavy_inf, trooper, shock_infantry.ixian, storm_infantry.ixian, fedinf.steel, board_inf.steel, qinf.steel, mili.latin, tkiller.latin, fftr.latin, fthrow.latin, narco.latin, rifle.nax, cons.nax, mp40.nax, merc.nax, shrek.nax, tcons.nax, lunar.nax, lunar2.nax, uber.nax2, enforcer.futu, javelinsoldier.futu, scmarine, scfirebat, scmarauder, scghost, scmadcap, scharakan, scsilvertongue, scspithid, wc2_human_elven_archer, wc2_human_elven_ranger, wc2_orc_troll_axethrower, wc2_orc_troll_berserker, tkmrifleman, tkmjug, tkmtrooper, tkmrocketeer, tkmspetsnaz
+		PassengerTypes: e1.gdi, e1.nod, e2, e3.gdi, e3.nod, e4, e5, e3chem, tsblackhandlaser, tsblackhandflamer, tsstealthsoldier, gdishotgunner, gdimissilesoldier, gdisniper, rae1, rare1, raje1, rare3, raje3, shok, mortarsoldier, ramaid, rae2, rae4, raje4, sniper, alliedmachinegunner, e3flamer, ra2e1, ra2ggi, ra2seal, ra2e2, ra2shk, ra2flakt, ra2deso, ra2snipe, yrinit, yrvirus, gren.asian, tkiller.asian, flam.asian, plast.asian, japrif.asian, archer.asian, asdf.asian, light_inf, heavy_inf, trooper, shock_infantry.ixian, storm_infantry.ixian, fedinf.steel, board_inf.steel, qinf.steel, mili.latin, tkiller.latin, fftr.latin, fthrow.latin, narco.latin, rifle.nax, cons.nax, mp40.nax, merc.nax, shrek.nax, tcons.nax, lunar.nax2, lunar2.nax2, uber.nax2, enforcer.futu, javelinsoldier.futu, scmarine, scfirebat, scmarauder, scghost, scmadcap, scharakan, scsilvertongue, scspithid, wc2_human_elven_archer, wc2_human_elven_ranger, wc2_orc_troll_axethrower, wc2_orc_troll_berserker, tkmrifleman, tkmjug, tkmtrooper, tkmrocketeer, tkmspetsnaz
 		ValidTransportOwner: AlliedBot
 	LoadCargoBotModule@TankBunker:
 		RequiresCondition: genericbot
@@ -3425,7 +3425,7 @@ Player:
 		RequiresCondition: genericbot
 		TransportTypesAndLoadRequirement:
 			yryapowr: IdleUnit
-		PassengerTypes: e1.gdi, e1.nod, rae1, rare1, raje1, ra2e1, ra2e2, yrinit, light_inf, gren.asian, fedinf.steel, mili.latin, rifle.nax, cons.nax, lunar.nax, scmarine, tkmrifleman, enforcer.futu
+		PassengerTypes: e1.gdi, e1.nod, rae1, rare1, raje1, ra2e1, ra2e2, yrinit, light_inf, gren.asian, fedinf.steel, mili.latin, rifle.nax, cons.nax, lunar.nax2, scmarine, tkmrifleman, enforcer.futu
 		ValidTransportOwner: AlliedBot
 		ScanTick: 799
 	MinelayerBotModule:
@@ -4820,8 +4820,8 @@ Player:
 		MaxAircraft: 25
 		MaintainAirSuperiority: true
 		MaxAirSuperiority: 25
-		AirToAirUnits: heli, orca, nodvenom, gdifirehawk, yak, yaktesla, yakarmored, yaknuclear, mig, su57, raheli, rapierjumpjet, modkami, ra2falc, yrschp, yrbpln1, ra2hind.latin, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, twister.steel, grun.steel, cruiser.steel, yakolev.latin, mig.latin, haunebu.nax, haunebu2.nax, me262.nax, bf109.nax, piercer.nax, haunebu.nax, haunebu2.nax, me262.nax, piercer.nax, dieglocke.nax, bf109.nax, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
-		AirThreatUnits: heli, orca, nodvenom, gdifirehawk, tran.gdi, tran.nod, yak, yaktesla, yakarmored, yaknuclear, mig, su57, mignuke, hind, raheli, MH60, rapierjumpjet, modkami, modbomber, modhip, ratran, ra2falc, ra2beag, yrschp, yrbpln1, ra2hind.latin, ra2zep, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, inspect.steel, twister.steel, grun.steel, cargoship.steel, cruiser.steel, yakolev.latin, mig.latin, zep.nax, zep.nax2, haunebu.nax, haunebu2.nax, me262.nax, bf109.nax, piercer.nax, dieglocke.nax, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragonwc2_orc_dragon
+		AirToAirUnits: heli, orca, nodvenom, gdifirehawk, yak, yaktesla, yakarmored, yaknuclear, mig, su57, raheli, rapierjumpjet, modkami, ra2falc, yrschp, yrbpln1, ra2hind.latin, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, twister.steel, grun.steel, cruiser.steel, yakolev.latin, mig.latin, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, piercer.nax2, dieglocke.nax2, bf109.nax, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
+		AirThreatUnits: heli, orca, nodvenom, gdifirehawk, tran.gdi, tran.nod, yak, yaktesla, yakarmored, yaknuclear, mig, su57, mignuke, hind, raheli, MH60, rapierjumpjet, modkami, modbomber, modhip, ratran, ra2falc, ra2beag, yrschp, yrbpln1, ra2hind.latin, ra2zep, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, inspect.steel, twister.steel, grun.steel, cargoship.steel, cruiser.steel, yakolev.latin, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, dieglocke.nax2, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragonwc2_orc_dragon
 		#UnitBuilderMinCredits: 0
 		UnitQueues: Infantry, RAInfantry, SCZergInfantry, Vehicle, RAVehicle, Aircraft, RAAircraft, Naval, RANaval, Addons, Upgrades, Research, Promotions
 		UnitDelays:
@@ -5537,14 +5537,14 @@ Player:
 			up_massparadrop.asian: 1
 			up_clusterbombs.asian: 1
 			up_chaosbombs.asian: 1
-			upgrade_infantryspec.asian: 1
-			upgrade_pulverizer.asian: 1
-			upgrade_phalanx.asian: 1
-			upgrade_dragonfire.asian: 1
+			up_infantryspec.asian: 1
+			up_pulverizer.asian: 1
+			up_phalanx.asian: 1
+			up_dragonfire.asian: 1
 			asian_upgrade_quasar: 1
-			upgrade_banzai.asian: 1
-			team_upgrade_dragonway.asian: 1
-			team_upgrade_diplomacy.asian: 1
+			up_banzai.asian: 1
+			up_team_dragonway.asian: 1
+			up_team_diplomacy.asian: 1
 			########### Units Consortium
 			qmin.steel: 10
 			fedinf.steel: 1
@@ -5660,14 +5660,14 @@ Player:
 			halftrack.nax: 1
 			wirbelwind.nax: 1
 			sturmtiger.nax: 1
-			haunebu.nax: 1
-			haunebu2.nax: 1
+			haunebu.nax2: 1
+			haunebu2.nax2: 1
 			bf109.nax: 1
 			me262.nax: 1
 			zep.nax: 1
 			zep.nax2: 1
-			piercer.nax: 1
-			dieglocke.nax: 1
+			piercer.nax2: 1
+			dieglocke.nax2: 1
 			eng.nax: 1
 			engi.nax2: 1
 			brad.nax: 1
@@ -5698,7 +5698,7 @@ Player:
 			up_nax_horten2.futu: 1
 			########### Naxis Upgrades
 			# up_resurrection.nax: 1
-			upgrade_me262.nax: 1
+			up_me262.nax: 1
 			up_ostfrontexperience.futu: 1
 			up_atlantikwall.futu: 1
 			up_tankarsenalrenovation.futu: 1
@@ -5733,12 +5733,12 @@ Player:
 			twister.futu: 1
 			cryo.futu: 1
 			harbinger.futu: 1
-			upgrade_equalizer_x1.futu: 1
-			upgrade_equalizer_x2.futu: 1
-			upgrade_equalizer_x3.futu: 1
+			up_equalizer_x1.futu: 1
+			up_equalizer_x2.futu: 1
+			up_equalizer_x3.futu: 1
 			########### Units Space Naxis
-			lunar.nax: 1
-			lunar2.nax: 1
+			lunar.nax2: 1
+			lunar2.nax2: 1
 			uber.nax2: 1
 			parv.nax2: 1
 			dalek.nax2: 1
@@ -5751,7 +5751,7 @@ Player:
 			grille.nax2: 1
 			giant_rk.nax2: 1
 			crystal.nax2: 1
-			gravity.nax: 1
+			gravity.nax2: 1
 			bradley.nax2: 1
 			aatank.nax2: 1
 			lasert.nax2: 1

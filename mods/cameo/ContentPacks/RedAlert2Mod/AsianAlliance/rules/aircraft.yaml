@@ -92,7 +92,7 @@ phoenix.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
 
 pelican.asian:
 	Inherits: ^Helicopter
@@ -138,16 +138,16 @@ pelican.asian:
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: upgrade_phalanx.asian && !rank-elite
+		RequiresCondition: up_phalanx.asian && !rank-elite
 	Armament@MGelite:
 		Weapon: AsianPelicanMG_elite
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: upgrade_phalanx.asian && rank-elite
-	ReloadAmmoDelayMultiplier@upgrade_phalanx.asian:
-		RequiresCondition: upgrade_phalanx.asian
+		RequiresCondition: up_phalanx.asian && rank-elite
+	ReloadAmmoDelayMultiplier@up_phalanx.asian:
+		RequiresCondition: up_phalanx.asian
 		Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 80
@@ -198,7 +198,7 @@ pelican.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 kami.asian:
 	Inherits: ^RANeutralPlane

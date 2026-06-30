@@ -75,25 +75,25 @@ quas.asian:
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upgrade_celestialpower.asian
+		RequiresCondition: !up_celestialpower.asian
 	Armament@UpgradeAG:
 		Weapon: AsianQuasarAGEMP
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_celestialpower.asian
+		RequiresCondition: up_celestialpower.asian
 	Armament@AA:
 		Weapon: AsianQuasarAA
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !upgrade_celestialpower.asian
+		RequiresCondition: !up_celestialpower.asian
 	Armament@UpgradeAA:
 		Weapon: AsianQuasarAAEMP
 		LocalOffset: -400,0,300
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_celestialpower.asian
+		RequiresCondition: up_celestialpower.asian
 	AttackFrontal:
 	WithMuzzleOverlay:
 	Selectable:
@@ -104,7 +104,7 @@ quas.asian:
 	Voiced:
 		VoiceSet: AsianQuasarVoice
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_celestialpower.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_celestialpower.asian
 
 dragonfly.asian:
 	Inherits: ^Tank
@@ -161,7 +161,7 @@ dragonfly.asian:
 	Targetable@Hover:
 		TargetTypes: Water, Ship
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 lynx.asian:
 	Inherits: ^Tank
@@ -221,22 +221,22 @@ lynx.asian:
 		Weapon: AsianLynxMG
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_phalanx.asian && !rank-elite
+		RequiresCondition: up_phalanx.asian && !rank-elite
 	Armament@MGelite:
 		Weapon: AsianLynxMG_elite
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_phalanx.asian && rank-elite
+		RequiresCondition: up_phalanx.asian && rank-elite
 	ProximityExternalCondition@AsianPhalanx:
 		Range: 7500
 		ValidRelationships: Ally
 		Condition: AsianPhalanx
-		RequiresCondition: upgrade_phalanx.asian
+		RequiresCondition: up_phalanx.asian
 	WithRangeCircle@AsianPhalanx:
 		Range: 7500
 		Type: AsianPhalanx
 		Color: 88888888
-		RequiresCondition: upgrade_phalanx.asian
+		RequiresCondition: up_phalanx.asian
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -245,7 +245,7 @@ lynx.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 oilt.asian:
 	Inherits: DTRK
@@ -281,7 +281,7 @@ oilt.asian:
 		CargoType: OilTruck
 		CustomPipType: red
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
 
 acv.asian:
 	Inherits: ^Vehicle
@@ -307,7 +307,7 @@ acv.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 drmn.asian:
 	Inherits: ^Tank
@@ -364,7 +364,7 @@ drmn.asian:
 		Sequence: harvesting
 		Palette: ra2effect
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 pulv.asian:
 	Inherits: ^Tank
@@ -410,7 +410,7 @@ pulv.asian:
 		LocalOffset: 800,0,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_pulverizer.asian
+		RequiresCondition: up_pulverizer.asian
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -421,7 +421,7 @@ pulv.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_pulverizer.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_pulverizer.asian
 
 ptnk.asian:
 	Inherits: ^Tank
@@ -481,7 +481,7 @@ ptnk.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
 
 viper.asian:
 	Inherits: ^Tank
@@ -537,7 +537,7 @@ viper.asian:
 	Targetable@Hover:
 		TargetTypes: Water, Ship
 	ActorStatValues:
-		Upgrades: upgrade_phalanx.asian
+		Upgrades: up_phalanx.asian
 
 mlrs.asian:
 	Inherits: ^Tank
@@ -592,7 +592,7 @@ mlrs.asian:
 	Voiced:
 		VoiceSet: AsianAllianceVehicleVoice
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
 
 hotwi.asian:
 	Inherits: ^Tank
@@ -667,7 +667,7 @@ hotwi.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
 
 ftnk.asian:
 	Inherits: ^Tank
@@ -726,7 +726,7 @@ ftnk.asian:
 	FireWarheadsOnDeath@flame:
 		Weapon: AsianOilBombFragments
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_dragonfire.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
 
 mecha.asian:
 	Inherits: ^Walker
@@ -776,7 +776,7 @@ mecha.asian:
 		LocalOffset: 800,-300,600, 800,300,600
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: upgrade_pulverizer.asian
+		RequiresCondition: up_pulverizer.asian
 	AttackFrontal:
 		FacingTolerance: 20
 	WithInfantryBody:
@@ -797,7 +797,7 @@ mecha.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_pulverizer.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_pulverizer.asian
 
 railt.asian:
 	Inherits: ^Tank
@@ -853,7 +853,7 @@ railt.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_celestialpower.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_celestialpower.asian
 
 railt2.asian:
 	Inherits: railt.asian
@@ -960,4 +960,4 @@ wtrt.asian:
 		Image: wtrt.asian
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: team_upgrade_diplomacy.asian, upgrade_phalanx.asian, upgrade_infantryspec.asian, upgrade_banzai.asian
+		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_infantryspec.asian, up_banzai.asian

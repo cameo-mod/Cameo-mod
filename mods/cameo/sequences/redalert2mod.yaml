@@ -1890,35 +1890,35 @@ mlrs.asian:
 	icon:
 		Filename: aa_mlrs_icon.shp
 
-upgrade_infantryspec.asian:
+up_infantryspec.asian:
 	icon:
 		Filename: asian_upgrade_infantryspec_icon.png
 
-upgrade_pulverizer.asian:
+up_pulverizer.asian:
 	icon:
 		Filename: asian_upgrade_pulverizer_icon.png
 
-upgrade_phalanx.asian:
+up_phalanx.asian:
 	icon:
 		Filename: asian_upgrade_phalanx_icon.png
 
-upgrade_dragonfire.asian:
+up_dragonfire.asian:
 	icon:
 		Filename: asian_upgrade_dragonfire_icon.png
 
-upgrade_celestialpower.asian:
+up_celestialpower.asian:
 	icon:
 		Filename: asian_upgrade_celestialpower_icon.png
 
-upgrade_banzai.asian:
+up_banzai.asian:
 	icon:
 		Filename: asian_upgrade_banzai_icon.png
 
-team_upgrade_dragonway.asian:
+up_team_dragonway.asian:
 	icon:
 		Filename: asian_team_upgrade_dragonway_icon.png
 
-team_upgrade_diplomacy.asian:
+up_team_diplomacy.asian:
 	icon:
 		Filename: asian_team_upgrade_diplomacy_icon.png
 
@@ -6255,7 +6255,7 @@ crystal.nax2:
 	icon:
 		Filename: naxcrystaltankicon.png
 
-gravity.nax:
+gravity.nax2:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Filename: nax_gravity.shp
@@ -6356,7 +6356,7 @@ nax_hole_shoot:
 	die:
 		Length: 64
 
-hole_small.nax:
+hole_small.nax2:
 	Defaults:
 		Filename: nax_hole.shp
 		Tick: 64
@@ -6372,7 +6372,7 @@ hole_small.nax:
 		Length: 64
 		Tick: 8
 
-hole.nax:
+hole.nax2:
 	Defaults:
 		Filename: nax_hole.shp
 		Tick: 80
@@ -6441,7 +6441,7 @@ slav.nax:
 	icon:
 		Filename: workericon.png
 
-haunebu.nax:
+haunebu.nax2:
 	Defaults:
 		Filename: nax_haunebu.shp
 	idle:
@@ -6459,7 +6459,7 @@ haunebu.nax:
 	icon:
 		Filename: nax_haunebu_icon.png
 
-haunebu2.nax:
+haunebu2.nax2:
 	Defaults:
 		Filename: nax_ufox.shp
 		Offset: 0, 16
@@ -6479,7 +6479,7 @@ haunebu2.nax:
 		Filename: nax_haunebu2_icon.png
 		Offset: 0, 0
 
-dieglocke.nax:
+dieglocke.nax2:
 	Defaults:
 		Filename: nax_dieglocke.shp
 	idle:
@@ -6645,7 +6645,7 @@ interceptor.nax:
 	icon:
 		Filename: nax_drone_icon.png
 
-piercer.nax:
+piercer.nax2:
 	Defaults:
 		Scale: 0.8
 	idle:
@@ -7283,7 +7283,7 @@ lasert.nax2:
 		Filename: naxlasertankicon.png
 		Offset: 0,0
 
-lunar.nax:
+lunar.nax2:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -7321,7 +7321,7 @@ lunar.nax:
 	icon:
 		Filename: nax2_lunar_icon.png
 
-lunar2.nax:
+lunar2.nax2:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
@@ -8937,15 +8937,15 @@ harbinger.futu:
 	icon:
 		Filename: future_harbinger_icon.png
 
-upgrade_equalizer_x1.futu:
+up_equalizer_x1.futu:
 	icon:
 		Filename: future_equalizer_x1_icon.png
 
-upgrade_equalizer_x2.futu:
+up_equalizer_x2.futu:
 	icon:
 		Filename: future_equalizer_x2_icon.png
 
-upgrade_equalizer_x3.futu:
+up_equalizer_x3.futu:
 	icon:
 		Filename: future_equalizer_x3_icon.png
 
