@@ -2216,9 +2216,9 @@
 # tune the muzzle-flash brightness here in one place.
 ^MuzzleGlowCannon:
 	WithMuzzleGlow:
-		Intensity: 1.6
-		CoreIntensity: 2.2
-		FlashBrightness: 1.1
+		Intensity: 1.0
+		CoreIntensity: 1.5
+		FlashBrightness: 0.8
 
 ^Walker:
 	Inherits: ^Vehicle

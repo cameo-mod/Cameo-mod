@@ -95,7 +95,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 
 		void INotifyAttack.Attacking(Actor self, in Target target, Armament a, Barrel barrel)
 		{
-			if (IsTraitDisabled || !Game.Settings.Graphics.LaserGlow)
+			if (IsTraitDisabled || !Game.Settings.Graphics.TankMuzzleFlashes)
 				return;
 
 			if (barrel == null || (Info.Armaments.Count > 0 && !Info.Armaments.Contains(a.Info.Name)))

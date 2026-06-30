@@ -301,6 +301,7 @@ support-power-timer = { $player }'s { $support-power }: { $time }
 
 ## settings-display.yaml
 checkbox-laser-glow = Weapon Glow Effects
+checkbox-tank-muzzle-flashes = Tank muzzle flashes
 checkbox-heat-distortion = Heat Distortion Effects
 checkbox-shockwave = Shockwave Distortion Effects
 checkbox-screen-shake = Screen Shake Effects
