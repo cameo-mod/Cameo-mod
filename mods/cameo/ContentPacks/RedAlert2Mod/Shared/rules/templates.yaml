@@ -1,0 +1,808 @@
+^Palettes:
+	PaletteFromFile@ra2rotunits:
+		Name: ra2rotunit
+		Filename: steelunittem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2rotunits:
+		BasePalette: ra2rotunit
+		BaseName: playerra2rot
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	PaletteFromFile@ra2consunits:
+		Name: ra2consunit
+		Filename: steelfedutem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2consunits:
+		BasePalette: ra2consunit
+		BaseName: playerra2cons
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	PaletteFromFile@ra2future1:
+		Name: ra2future1
+		Filename: eapal1tem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2future1:
+		BasePalette: ra2future1
+		BaseName: playerra2future1
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+	PaletteFromFile@ra2future2:
+		Name: ra2future2
+		Filename: eapal2tem.pal
+		ShadowIndex: 1, 4
+	PlayerColorPalette@ra2future2:
+		BasePalette: ra2future2
+		BaseName: playerra2future2
+		RemapIndex: 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+
+##############################################
+#   Red Alert 2 Asian Structures
+##############################################
+^AASpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: ra2engineer.asian, gren.asian, gren.asian, tkiller.asian
+
+^InfantrySpecUpgrade:
+	DamageMultiplier@up_infantryspec.asian:
+		Modifier: 95
+		RequiresCondition: up_infantryspec.asian
+	FirepowerMultiplier@up_infantryspec.asian:
+		Modifier: 105
+		RequiresCondition: up_infantryspec.asian
+	RangeMultiplier@up_infantryspec.asian:
+		Modifier: 105
+		RequiresCondition: up_infantryspec.asian
+	GrantConditionOnPrerequisite@up_infantryspec.asian:
+		Condition: up_infantryspec.asian
+		Prerequisites: up_infantryspec.asian
+	ActorStatValues:
+		Upgrades: up_infantryspec.asian
+
+^PulverizerUpgrades:
+	FirepowerMultiplier@up_pulverizer.asian:
+		Modifier: 75
+		RequiresCondition: up_pulverizer.asian
+	RangeMultiplier@up_pulverizer.asian:
+		Modifier: 115
+		RequiresCondition: up_pulverizer.asian
+	GrantConditionOnPrerequisite@up_pulverizer.asian:
+		Condition: up_pulverizer.asian
+		Prerequisites: up_pulverizer.asian
+	ActorStatValues:
+		Upgrades: up_pulverizer.asian
+
+^AsianPhalanxUpgrade:
+	ExternalCondition@AsianPhalanx:
+		Condition: AsianPhalanx
+	DamageMultiplier@AsianPhalanx1:
+		Modifier: 95
+		RequiresCondition: AsianPhalanx == 1
+	DamageMultiplier@AsianPhalanx2:
+		Modifier: 90
+		RequiresCondition: AsianPhalanx == 2
+	DamageMultiplier@AsianPhalanx3:
+		Modifier: 85
+		RequiresCondition: AsianPhalanx == 3
+	DamageMultiplier@AsianPhalanx4:
+		Modifier: 80
+		RequiresCondition: AsianPhalanx == 4
+	DamageMultiplier@AsianPhalanx5:
+		Modifier: 75
+		RequiresCondition: AsianPhalanx >= 5
+	SpeedMultiplier@AsianPhalanx1:
+		Modifier: 95
+		RequiresCondition: AsianPhalanx == 1
+	SpeedMultiplier@AsianPhalanx2:
+		Modifier: 90
+		RequiresCondition: AsianPhalanx == 2
+	SpeedMultiplier@AsianPhalanx3:
+		Modifier: 85
+		RequiresCondition: AsianPhalanx == 3
+	SpeedMultiplier@AsianPhalanx4:
+		Modifier: 80
+		RequiresCondition: AsianPhalanx == 4
+	SpeedMultiplier@AsianPhalanx5:
+		Modifier: 75
+		RequiresCondition: AsianPhalanx >= 5
+	WithColoredOverlay@AsianPhalanx1:
+		Color: 44444408
+		RequiresCondition: AsianPhalanx == 1
+	WithColoredOverlay@AsianPhalanx2:
+		Color: 55555516
+		RequiresCondition: AsianPhalanx == 2
+	WithColoredOverlay@AsianPhalanx3:
+		Color: 66666624
+		RequiresCondition: AsianPhalanx == 3
+	WithColoredOverlay@AsianPhalanx4:
+		Color: 77777732
+		RequiresCondition: AsianPhalanx == 4
+	WithColoredOverlay@AsianPhalanx5:
+		Color: 88888840
+		RequiresCondition: AsianPhalanx >= 5
+	DamageMultiplier@up_phalanx.asian:
+		Modifier: 90
+		RequiresCondition: up_phalanx.asian
+	GrantConditionOnPrerequisite@up_phalanx.asian:
+		Condition: up_phalanx.asian
+		Prerequisites: up_phalanx.asian
+	ActorStatValues:
+		Upgrades: up_phalanx.asian
+
+^DragonFireUpgrades:
+	FirepowerMultiplier@up_dragonfire.asian:
+		Modifier: 150
+		RequiresCondition: up_dragonfire.asian
+	GrantConditionOnPrerequisite@up_dragonfire.asian:
+		Condition: up_dragonfire.asian
+		Prerequisites: up_dragonfire.asian
+	ActorStatValues:
+		Upgrades: up_dragonfire.asian
+
+^CelestialPowerUpgrades:
+	FirepowerMultiplier@up_celestialpower.asian:
+		Modifier: 125
+		RequiresCondition: up_celestialpower.asian
+	RangeMultiplier@up_celestialpower.asian:
+		Modifier: 125
+		RequiresCondition: up_celestialpower.asian
+	GrantConditionOnPrerequisite@up_celestialpower.asian:
+		Condition: up_celestialpower.asian
+		Prerequisites: up_celestialpower.asian
+	ActorStatValues:
+		Upgrades: up_celestialpower.asian
+
+^KamikazeMode:
+	GrantConditionOnPrerequisite@up_banzai.asian:
+		Condition: up_banzai.asian
+		Prerequisites: up_banzai.asian
+	GrantConditionOnDamageState@BanzaiHeavy:
+		ValidDamageStates: Heavy
+		Condition: BanzaiHeavy
+		RequiresCondition: up_banzai.asian
+	GrantCondition@KamikazeHeavy:
+		Condition: KamikazeHeavy
+		RequiresCondition: BanzaiHeavy && up_banzai.asian
+	DamageMultiplier@KamikazeHeavy:
+		Modifier: 75
+		RequiresCondition: KamikazeHeavy
+	RangeMultiplier@KamikazeHeavy:
+		Modifier: 75
+		RequiresCondition: KamikazeHeavy
+	ReloadDelayMultiplier@KamikazeHeavy:
+		Modifier: 75
+		RequiresCondition: KamikazeHeavy
+	FirepowerMultiplier@KamikazeHeavy:
+		Modifier: 125
+		RequiresCondition: KamikazeHeavy
+	SpeedMultiplier@KamikazeHeavy:
+		Modifier: 125
+		RequiresCondition: KamikazeHeavy
+	ChangesHealth@KamikazeHeavy:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: KamikazeHeavy
+	WithDecoration@KamikazeHeavy:
+		Image: aa_banzai
+		Sequence: idle
+		Position: TopRight
+		BlinkInterval: 32
+		BlinkPattern: On, On, On, On
+		RequiresCondition: KamikazeHeavy
+	GrantConditionOnDamageState@BanzaiCritical:
+		ValidDamageStates: Critical
+		Condition: BanzaiCritical
+		RequiresCondition: up_banzai.asian
+	GrantCondition@KamikazeCritical:
+		Condition: KamikazeCritical
+		RequiresCondition: BanzaiCritical && up_banzai.asian
+	DamageMultiplier@KamikazeCritical:
+		Modifier: 50
+		RequiresCondition: KamikazeCritical
+	RangeMultiplier@KamikazeCritical:
+		Modifier: 50
+		RequiresCondition: KamikazeCritical
+	ReloadDelayMultiplier@KamikazeCritical:
+		Modifier: 50
+		RequiresCondition: KamikazeCritical
+	FirepowerMultiplier@KamikazeCritical:
+		Modifier: 150
+		RequiresCondition: KamikazeCritical
+	SpeedMultiplier@KamikazeCritical:
+		Modifier: 150
+		RequiresCondition: KamikazeCritical
+	ChangesHealth@KamikazeCritical:
+		Step: 20
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: KamikazeCritical
+	WithDecoration@KamikazeCritical:
+		Image: aa_banzai2
+		Sequence: idle
+		Position: TopRight
+		BlinkInterval: 32
+		BlinkPattern: On, On, On, On
+		RequiresCondition: KamikazeCritical
+	#RejectsOrders@KamikazeCritical:
+	#	RequiresCondition: KamikazeCritical
+	ActorStatValues:
+		Upgrades: up_banzai.asian
+
+^WayOfTheDragon:
+	DamageMultiplier@dragonwaydamage:
+		RequiresCondition: dragonwaydamage
+		Modifier: 95
+	FirepowerMultiplier@dragonwaydamage:
+		RequiresCondition: dragonwaydamage
+		Modifier: 105
+	SpeedMultiplier@dragonwaydamage:
+		RequiresCondition: dragonwaydamage
+		Modifier: 105
+	GrantConditionOnDamage@up_team_dragonway.asian:
+		RequiresCondition: up_team_dragonway.asian
+		Condition: dragonwaydamage
+		Duration: 25
+		PlayerRelationship: Ally, Neutral, Enemy
+	DamageMultiplier@up_team_dragonway.asian:
+		Modifier: 95
+		RequiresCondition: up_team_dragonway.asian
+	FirepowerMultiplier@up_team_dragonway.asian:
+		Modifier: 105
+		RequiresCondition: up_team_dragonway.asian
+	SpeedMultiplier@up_team_dragonway.asian:
+		Modifier: 105
+		RequiresCondition: up_team_dragonway.asian
+	GrantConditionOnPrerequisite@up_team_dragonway.asian:
+		Condition: up_team_dragonway.asian
+		Prerequisites: up_team_dragonway.asian
+	ActorStatValues:
+		Upgrades: up_team_dragonway.asian
+
+^SyndicateSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: ra2engineer.latin, mili.latin, mili.latin, monkey.latin
+
+^LatinEliteGuerillas:
+	DamageMultiplier@up_mili.latin:
+		Modifier: 75
+		RequiresCondition: up_mili.latin
+	FirepowerMultiplier@up_mili.latin:
+		Modifier: 125
+		RequiresCondition: up_mili.latin
+	ChangesHealth@up_mili.latin:
+		Step: 10
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: up_mili.latin
+	GrantConditionOnPrerequisite@up_mili.latin:
+		Condition: up_mili.latin
+		Prerequisites: up_mili.latin
+	ActorStatValues:
+		Upgrades: up_mili.latin
+
+^CartelRocketsUpgrade:
+	RangeMultiplier@up_cartelrockets.latin:
+		Modifier: 125
+		RequiresCondition: up_cartelrockets.latin
+	FirepowerMultiplier@up_cartelrockets.latin:
+		Modifier: 125
+		RequiresCondition: up_cartelrockets.latin
+	GrantConditionOnPrerequisite@up_cartelrockets.latin:
+		Condition: up_cartelrockets.latin
+		Prerequisites: up_cartelrockets.latin
+	ActorStatValues:
+		Upgrades: up_cartelrockets.latin
+
+^LightPosts:
+	DamageMultiplier@up_ngbunk2.latin:
+		Modifier: 70
+		RequiresCondition: up_ngbunk2.latin
+	RevealsShroudMultiplier@up_ngbunk2.latin:
+		Modifier: 130
+		RequiresCondition: up_ngbunk2.latin
+	GrantConditionOnPrerequisite@up_ngbunk2.latin:
+		Condition: up_ngbunk2.latin
+		Prerequisites: up_ngbunk2.latin
+	ActorStatValues:
+		Upgrades: up_ngbunk2.latin
+
+^LatinFlameUpgrades:
+	FirepowerMultiplier@up_hotfire.latin:
+		Modifier: 125
+		RequiresCondition: up_hotfire.latin
+	ReloadDelayMultiplier@up_hotfire.latin:
+		Modifier: 75
+		RequiresCondition: up_hotfire.latin
+	GrantConditionOnPrerequisite@up_hotfire.latin:
+		Condition: up_hotfire.latin
+		Prerequisites: up_hotfire.latin
+	ActorStatValues:
+		Upgrades: up_hotfire.latin
+
+^LatinCashrecover:
+	DamageMultiplier@up_industrial.latin:
+		Modifier: 80
+		RequiresCondition: up_industrial.latin
+	SpeedMultiplier@up_alliedstolentech.latin:
+		Modifier: 125
+		RequiresCondition: up_alliedstolentech.latin
+	RangeMultiplier@up_alliedstolentech.latin:
+		Modifier: 105
+		RequiresCondition: up_alliedstolentech.latin
+	GrantConditionOnPrerequisite@up_industrial.latin:
+		Condition: up_industrial.latin
+		Prerequisites: up_industrial.latin
+	GrantConditionOnPrerequisite@up_alliedstolentech.latin:
+		Condition: up_alliedstolentech.latin
+		Prerequisites: up_alliedstolentech.latin
+	ActorStatValues:
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin
+
+##############################################
+#   Red Alert 2 Consortium Structure
+##############################################
+^ConsortiumSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: fedeng.steel, fedinf.steel, fedinf.steel, qinf.steel
+		RequiresCondition: !in_water
+
+^SteelUnderwaterStructure:
+	Inherits@sell: ^ConsortiumSpawnActorsOnSell
+	Cloak@underwater:
+		DetectionTypes: Underwater, GroundCloak, Cloak
+		InitialDelay: 0
+		CloakDelay: 75
+		CloakedCondition: underwater
+		PauseOnCondition: disabled
+		IsPlayerPalette: true
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+		RequiresCondition: in_water
+	Targetable@water:
+		TargetTypes: Water, Ship, Submarine
+		RequiresCondition: in_water
+	Building:
+		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,Water ##########
+	SpawnActorsOnSell@in_water:
+		ActorTypes: board_inf.steel, board_inf.steel, manta.steel
+		RequiresCondition: in_water
+	GrantConditionOnTerrain@Water:
+		TerrainTypes: Water
+		Condition: in_water
+
+^ScalpelDrones:
+	Armament@DroneTargeting:
+		Name: secondary
+		Weapon: GLStingerTargeting
+		RequiresCondition: up_scalpel.steel
+	RenderRangeCircleCA@targeting:
+		Armaments: secondary
+		Color: FF0000
+		#RequiresCondition: up_scalpel.steel
+	DroneSpawnerMaster@steel_scalpel:
+		Actors: scalpelMG.steel
+		ArmamentNames: secondary
+		RespawnTicks: 500
+		PauseOnCondition: disabled || !up_scalpel.steel
+		RequiresCondition: up_scalpel.steel
+		FollowAfterAttackDelay: 25
+		ShouldSpawnInitialLoad: false
+	GrantConditionOnPrerequisite@up_scalpel.steel:
+		Condition: up_scalpel.steel
+		Prerequisites: up_scalpel.steel
+	ActorStatValues:
+		Upgrades: up_scalpel.steel
+
+^SteelUnderwaterTransit:
+	Cloak@underwater:
+		DetectionTypes: Underwater, GroundCloak, Cloak
+		InitialDelay: 0
+		CloakDelay: 25
+		CloakedCondition: underwater
+		PauseOnCondition: disabled
+		RequiresCondition: !cloak-force-disabled && !underbridge && inwater
+		IsPlayerPalette: true
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water
+	Targetable@water:
+		TargetTypes: Water, Ship, Submarine
+		RequiresCondition: inwater
+
+^SteelDefensiveDrones:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Selectable:
+	#Interactable:
+	Buildable:
+		Description: template-drone-slave.description
+	RevealsShroud:
+		Range: 5000
+		Type: CenterPosition
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Aircraft:
+		CruiseAltitude: 1200
+		InitialFacing: 192
+		IdleTurnSpeed: 8
+		TurnSpeed: 32
+		Speed: 80
+		RepulsionSpeed: 40
+		MaximumPitch: 40
+		CanForceLand: false
+		VTOL: true
+	AttackAircraft:
+		AttackType: Hover
+		PersistentTargeting: false
+		FacingTolerance: 10
+	-SpawnActorOnDeath:
+	-ActorLostNotification:
+	-UpdatesPlayerStatistics:
+	DroneSpawnerSlave:
+		AttackCallBackDistance: 15000
+		MovingCallBackCellDistance: 1000
+		GrantConditionWhenMasterIsDisabled: notenabled
+		GrantConditionWhenMasterIsPaused: paused
+	KillsSelf@masterdisabled:
+		RequiresCondition: paused
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		PlayerPalette: playerra2rot
+		Image: steel_scalpel
+	ActorStatValues:
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+
+^SteelConsortiumPulseWeapons:
+	FirepowerMultiplier@up_pulseweapons.steel:
+		RequiresCondition: up_pulseweapons.steel
+		Modifier: 130
+	RangeMultiplier@up_pulseweapons.steel:
+		RequiresCondition: up_pulseweapons.steel
+		Modifier: 115
+	GrantConditionOnPrerequisite@up_pulseweapons.steel:
+		Condition: up_pulseweapons.steel
+		Prerequisites: up_pulseweapons.steel
+	ActorStatValues:
+		Upgrades: up_pulseweapons.steel
+
+^SteelConsortiumNaniteInfusion:
+	DamageMultiplier@up_naniteinfusion.steel:
+		RequiresCondition: up_naniteinfusion.steel
+		Modifier: 95
+	ChangesHealth@up_naniteinfusion.steel:
+		PercentageStep: 1
+		Delay: 80
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: up_naniteinfusion.steel
+	ChangesHealth@up_naniteinfusion.steel:
+		Step: 25
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: up_naniteinfusion.steel
+	GrantConditionOnPrerequisite@up_naniteinfusion.steel:
+		Condition: up_naniteinfusion.steel
+		Prerequisites: up_naniteinfusion.steel
+	ActorStatValues:
+		Upgrades: up_naniteinfusion.steel
+
+^SteelConsortiumNaniteInfusionInfantry:
+	Inherits: ^SteelConsortiumNaniteInfusion
+	DamageMultiplier@up_naniteinfusion.steel:
+		Modifier: 90
+	ChangesHealth@up_naniteinfusion.steel:
+		Delay: 40
+	ChangesHealth@up_naniteinfusion.steel:
+		Step: 50
+
+^SteelConsortiumFerrocrete:
+	DamageMultiplier@up_ferrocrete.steel:
+		RequiresCondition: up_ferrocrete.steel
+		Modifier: 85
+	GrantConditionOnPrerequisite@up_ferrocrete.steel:
+		Condition: up_ferrocrete.steel
+		Prerequisites: up_ferrocrete.steel
+	ActorStatValues:
+		Upgrades: up_ferrocrete.steel
+
+^SteelConsortiumResonanceAmmo:
+	FirepowerMultiplier@up_resonanceammo.steel:
+		RequiresCondition: up_resonanceammo.steel
+		Modifier: 50
+	RangeMultiplier@up_resonanceammo.steel:
+		RequiresCondition: up_resonanceammo.steel
+		Modifier: 110
+	GrantConditionOnPrerequisite@up_resonanceammo.steel:
+		Condition: up_resonanceammo.steel
+		Prerequisites: up_resonanceammo.steel
+	ActorStatValues:
+		Upgrades: up_resonanceammo.steel
+
+^QuantumWeaponsEMP:
+	GrantConditionOnPrerequisite@up_empquantumweapons.steel:
+		Condition: up_empquantumweapons.steel
+		Prerequisites: up_empquantumweapons.steel
+	ActorStatValues:
+		Upgrades: up_empquantumweapons.steel
+
+^NaxisSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: rifle.nax, rifle.nax, rifle.nax, tcons.nax, cons.nax, cons.nax, cons.nax
+		RequiresCondition: !in_water
+^SpaceNaxisSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: lunar.nax2, lunar.nax2, lunar.nax2, lunar2.nax2
+		RequiresCondition: !in_water
+
+^NaxiUndeadRevive:
+	GrantConditionOnPrerequisite@NaxiRevive:
+		Condition: nax_revive
+		Prerequisites: up_resurrection.nax
+	SpawnActorOnDeath@NaxiRevive1: #TODO: Multiple death types support for SpawnActorOnDeath
+		Actor: corpse.nax
+		Probability: 100
+		DeathType: BulletDeath
+		SpawnAfterDefeat: false
+		RequiresCondition: nax_revive && !chronobeamed
+	FireWarheadsOnDeath@Corpse:
+		DeathTypes: BulletDeath
+		Weapon: RA2CorpseSpawner
+		EmptyWeapon: RA2CorpseSpawner
+		RequiresCondition: !chronobeamed && !nax_revive
+
+^NaxiUndeadReviveBig:
+	Inherits: ^NaxiUndeadRevive
+	SpawnActorOnDeath@NaxiRevive1:
+		Actor: corpse_big.nax
+
+^OstfrontExperience:
+	DamageMultiplier@up_ostfrontexperience.futu:
+		RequiresCondition: up_ostfrontexperience.futu
+		Modifier: 85
+	FirepowerMultiplier@up_ostfrontexperience.futu:
+		RequiresCondition: up_ostfrontexperience.futu
+		Modifier: 115
+	SpeedMultiplier@up_ostfrontexperience.futu:
+		RequiresCondition: up_ostfrontexperience.futu
+		Modifier: 115
+	GrantConditionOnPrerequisite@up_ostfrontexperience.futu:
+		Condition: up_ostfrontexperience.futu
+		Prerequisites: up_ostfrontexperience.futu
+	FirepowerMultiplier@beer.nax:
+		RequiresCondition: beer.nax
+		Modifier: 125
+	GrantConditionOnPrerequisite@beer.nax:
+		Condition: beer.nax
+		Prerequisites: beer.nax
+	DamageMultiplier@sausage.nax:
+		RequiresCondition: sausage.nax
+		Modifier: 80
+	GrantConditionOnPrerequisite@sausage.nax:
+		Condition: sausage.nax
+		Prerequisites: sausage.nax
+	ActorStatValues:
+		Upgrades: up_ostfrontexperience.futu
+
+^Atlantikwall:
+	DamageMultiplier@up_atlantikwall.futu:
+		RequiresCondition: up_atlantikwall.futu
+		Modifier: 80
+	ChangesHealth@up_atlantikwall1:
+		PercentageStep: 1
+		Delay: 40
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: up_atlantikwall.futu
+	ChangesHealth@up_atlantikwall2:
+		Step: 50
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 50
+		RequiresCondition: up_atlantikwall.futu
+	GrantConditionOnPrerequisite@up_atlantikwall.futu:
+		Condition: up_atlantikwall.futu
+		Prerequisites: up_atlantikwall.futu
+	ActorStatValues:
+		Upgrades: up_atlantikwall.futu
+
+^TankArsenalRenovation:
+	DamageMultiplier@up_tankarsenalrenovation.futu:
+		RequiresCondition: up_tankarsenalrenovation.futu
+		Modifier: 85
+	FirepowerMultiplier@up_tankarsenalrenovation.futu:
+		RequiresCondition: up_tankarsenalrenovation.futu
+		Modifier: 115
+	ReloadDelayMultiplier@up_tankarsenalrenovation.futu:
+		RequiresCondition: up_tankarsenalrenovation.futu
+		Modifier: 85
+	SpeedMultiplier@up_tankarsenalrenovation.futu:
+		RequiresCondition: up_tankarsenalrenovation.futu
+		Modifier: 115
+	GrantConditionOnPrerequisite@up_tankarsenalrenovation.futu:
+		Condition: up_tankarsenalrenovation.futu
+		Prerequisites: up_tankarsenalrenovation.futu
+	ActorStatValues:
+		Upgrades: up_tankarsenalrenovation.futu
+
+^MassOpticsIntegration:
+	RevealsShroudMultiplier@up_massopticsintegration.futu:
+		RequiresCondition: up_massopticsintegration.futu
+		Modifier: 125
+	DetectCloakedMultiplier@up_massopticsintegration.futu:
+		RequiresCondition: up_massopticsintegration.futu
+		Modifier: 125
+	InaccuracyMultiplier@up_massopticsintegration.futu:
+		RequiresCondition: up_massopticsintegration.futu
+		Modifier: 75
+	RangeMultiplier@up_massopticsintegration.futu:
+		RequiresCondition: up_massopticsintegration.futu
+		Modifier: 125
+	GrantConditionOnPrerequisite@up_massopticsintegration.futu:
+		Condition: up_massopticsintegration.futu
+		Prerequisites: up_massopticsintegration.futu
+	ActorStatValues:
+		Upgrades: up_massopticsintegration.futu
+
+^Wunderwaffe:
+	DamageMultiplier@up_wunderwaffe.futu:
+		RequiresCondition: up_wunderwaffe.futu
+		Modifier: 80
+	FirepowerMultiplier@up_wunderwaffee:
+		RequiresCondition: up_wunderwaffe.futu
+		Modifier: 120
+	ReloadDelayMultiplier@up_wunderwaffe.futu:
+		RequiresCondition: up_wunderwaffe.futu
+		Modifier: 80
+	GrantConditionOnPrerequisite@up_wunderwaffe.futu:
+		Condition: up_wunderwaffe.futu
+		Prerequisites: up_wunderwaffe.futu
+	ActorStatValues:
+		Upgrades: up_wunderwaffe.futu
+
+^Blitzkrieg:
+	GrantConditionOnPrerequisite@up_blitzkrieg.futu:
+		Condition: up_blitzkrieg.futu
+		Prerequisites: up_blitzkrieg.futu
+	SpeedMultiplier@up_blitzkrieg.futu:
+		RequiresCondition: up_blitzkrieg.futu
+		Modifier: 125
+	ActorStatValues:
+		Upgrades: up_blitzkrieg.futu
+
+##############################################
+#   Red Alert 2 Lunar Naxis Upgrades
+##############################################
+
+^NaxiYellowLaserUpgrade:
+	GrantConditionOnPrerequisite@up_ylaser.nax2:
+		Condition: up_ylaser.nax2
+		Prerequisites: up_ylaser.nax2
+
+^NaxiGreenPlasmaUpgrade:
+	GrantConditionOnPrerequisite@up_gplasma.nax2:
+		Condition: up_gplasma.nax2
+		Prerequisites: up_gplasma.nax2
+	FirepowerMultiplier@up_gplasma.nax2:
+		RequiresCondition: up_gplasma.nax2
+		Modifier: 125
+
+^FutureTechSpawnActorsOnSell:
+	SpawnActorsOnSell:
+		ActorTypes: fedeng.futu, enforcer.futu, enforcer.futu, javelinsoldier.futu
+
+^FutureRobotEnergizable:
+	Inherits@RobotControllable: ^RobotControllable
+	Targetable@RobotEnergizable:
+		TargetTypes: RobotEnergizable
+		RequiresCondition: RobotEnergizable <= 5 && !untargetable
+	ExternalCondition@RobotEnergizable:
+		Condition: RobotEnergizable
+		TotalCap: 5
+	SpeedMultiplier@RobotEnergizable1:
+		Modifier: 120
+		RequiresCondition: RobotEnergizable == 1
+	SpeedMultiplier@RobotEnergizable2:
+		Modifier: 140
+		RequiresCondition: RobotEnergizable == 2
+	SpeedMultiplier@RobotEnergizable3:
+		Modifier: 160
+		RequiresCondition: RobotEnergizable == 3
+	SpeedMultiplier@RobotEnergizable4:
+		Modifier: 180
+		RequiresCondition: RobotEnergizable == 4
+	SpeedMultiplier@RobotEnergizable5:
+		Modifier: 200
+		RequiresCondition: RobotEnergizable >= 5
+	ReloadDelayMultiplier@RobotEnergizable1:
+		Modifier: 90
+		RequiresCondition: RobotEnergizable == 1
+	ReloadDelayMultiplier@RobotEnergizable2:
+		Modifier: 80
+		RequiresCondition: RobotEnergizable == 2
+	ReloadDelayMultiplier@RobotEnergizable3:
+		Modifier: 70
+		RequiresCondition: RobotEnergizable == 3
+	ReloadDelayMultiplier@RobotEnergizable4:
+		Modifier: 60
+		RequiresCondition: RobotEnergizable == 4
+	ReloadDelayMultiplier@RobotEnergizable5:
+		Modifier: 50
+		RequiresCondition: RobotEnergizable >= 5
+
+^RobotControllable:
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Mobile:
+		PauseOnCondition: !robotcontrol || disabled
+	Capturable:
+		Types: thiefproof
+	GrantConditionOnPrerequisite:
+		Condition: robotcontrol
+		Prerequisites: robotcontrol
+	WithColoredOverlay@disabled:
+		Color: 000000b4
+		RequiresCondition: disabled && !chronodisabled || !robotcontrol
+	FirepowerMultiplier@RobotControllable:
+		Modifier: 110
+	DamageMultiplier@RobotControllable:
+		Modifier: 90
+	ReloadDelayMultiplier@RobotControllable:
+		Modifier: 90
+	SpeedMultiplier@RobotControllable:
+		Modifier: 105
+	RangeMultiplier@RobotControllable:
+		Modifier: 105
+	RevealsShroudMultiplier@RobotControllable:
+		Modifier: 105
+	DetectCloakedMultiplier@RobotControllable:
+		Modifier: 105
+	InaccuracyMultiplier@RobotControllable:
+		Modifier: 90
+
+^FutureTechEqualizerUpgrades:
+	FirepowerMultiplier@up_equalizer_x1.futu:
+		Modifier: 110
+		RequiresCondition: up_equalizer_x1.futu
+	ReloadDelayMultiplier@up_equalizer_x1.futu:
+		Modifier: 90
+		RequiresCondition: up_equalizer_x1.futu
+	RangeMultiplier@up_equalizer_x1.futu:
+		Modifier: 105
+		RequiresCondition: up_equalizer_x1.futu
+	GrantConditionOnPrerequisite@up_equalizer_x1.futu:
+		Condition: up_equalizer_x1.futu
+		Prerequisites: up_equalizer_x1.futu
+	FirepowerMultiplier@up_equalizer_x2.futu:
+		Modifier: 110
+		RequiresCondition: up_equalizer_x2.futu
+	ReloadDelayMultiplier@up_equalizer_x2.futu:
+		Modifier: 90
+		RequiresCondition: up_equalizer_x2.futu
+	RangeMultiplier@up_equalizer_x2.futu:
+		Modifier: 105
+		RequiresCondition: up_equalizer_x2.futu
+	GrantConditionOnPrerequisite@up_equalizer_x2.futu:
+		Condition: up_equalizer_x2.futu
+		Prerequisites: up_equalizer_x2.futu
+	FirepowerMultiplier@up_equalizer_x3.futu:
+		Modifier: 110
+		RequiresCondition: up_equalizer_x3.futu
+	ReloadDelayMultiplier@up_equalizer_x3.futu:
+		Modifier: 90
+		RequiresCondition: up_equalizer_x3.futu
+	RangeMultiplier@up_equalizer_x3.futu:
+		Modifier: 105
+		RequiresCondition: up_equalizer_x3.futu
+	GrantConditionOnPrerequisite@up_equalizer_x3.futu:
+		Condition: up_equalizer_x3.futu
+		Prerequisites: up_equalizer_x3.futu
+	ActorStatValues:
+		Upgrades: up_equalizer_x1.futu, up_equalizer_x2.futu, up_equalizer_x3.futu

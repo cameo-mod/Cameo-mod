@@ -1,0 +1,225 @@
+conyard_infiltrated.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Naxis Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: conyard.nax
+	RenderSprites:
+		Image: conyard.nax
+
+up_resurrection.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Resurrection
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Infantry killed by small arms leave corpses that can resurrect as zombies.
+		Prerequisites: ~tech.nax, ~disabled
+	RenderSprites:
+		Image: undead.nax
+
+up_sarubia.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Sarubia Model
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		Description: Enables construction of the Sarubia.
+		Prerequisites: ~conyard.nax, !up_sarubia.nax, rank1
+	RenderSprites:
+		Image: sarubia.nax
+	ProvidesPrerequisite:
+
+up_brad.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Donnerschlag Model and other advanced Missiles
+	Buildable:
+		BuildPaletteOrder: 113
+		Queue: Promotions
+		Description: Enables construction of the Donnerschlag.
+		Prerequisites: ~conyard.nax, up_sarubia.nax, !up_brad.nax, rank1
+	RenderSprites:
+		Image: brad.nax
+	ProvidesPrerequisite:
+
+up_shoe.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Shoe, Karn, and King
+	Buildable:
+		BuildPaletteOrder: 116
+		Queue: Promotions
+		Description: Enables construction of the Shoe Karn.
+		Prerequisites: ~conyard.nax, up_brad.nax, !up_shoe.nax, rank1
+	RenderSprites:
+		Image: shoe.nax
+	ProvidesPrerequisite:
+
+up_nokana.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Bosses Tanks
+	Buildable:
+		BuildPaletteOrder: 119
+		Queue: Promotions
+		Description: Enables construction of the Iron Nokana.
+		Prerequisites: ~conyard.nax, up_shoe.nax, !up_nokana.nax, rank1
+	RenderSprites:
+		Image: nokana.nax
+	ProvidesPrerequisite:
+
+#		Army
+
+up_kingtiger.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Generation II tanks
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		Description: Enables construction of King Tiger, Brummbar, and Jagdpanzer vehicles.
+		Prerequisites: ~conyard.nax, !up_kingtiger.nax, rank1
+	RenderSprites:
+		Image: kingtiger.nax
+	ProvidesPrerequisite:
+
+up_sturmtiger.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Heavy Vehicles
+	Buildable:
+		BuildPaletteOrder: 114
+		Queue: Promotions
+		Description: Enables construction of Maus and Sturmtiger vehicles.
+		Prerequisites: ~conyard.nax, up_kingtiger.nax, !up_sturmtiger.nax, rank1
+	RenderSprites:
+		Image: sturmtiger.nax
+	ProvidesPrerequisite:
+
+up_paratanks.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Better Paratanks
+	Buildable:
+		BuildPaletteOrder: 117
+		Queue: Promotions
+		Description: Upgrades Paratanks Support with more units.
+		Prerequisites: ~conyard.nax, up_sturmtiger.nax, !up_paratanks.nax, rank1
+	RenderSprites:
+		Image: tiger.nax
+	ProvidesPrerequisite:
+
+up_ratte.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: The Ratte
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Promotions
+		Description: Enables construction of the Ratte.
+		Prerequisites: ~conyard.nax, up_paratanks.nax, !up_ratte.nax, rank1
+	RenderSprites:
+		Image: ratte.nax
+	ProvidesPrerequisite:
+
+#		Soldats
+
+up_merc.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Partisans
+	Buildable:
+		BuildPaletteOrder: 112
+		Queue: Promotions
+		Description: Enables construction of Partisan.
+		Prerequisites: ~conyard.nax, !up_merc.nax, rank1
+	RenderSprites:
+		Image: merc.nax
+	ProvidesPrerequisite:
+
+up_shrek.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Shrek
+	Buildable:
+		BuildPaletteOrder: 115
+		Queue: Promotions
+		Description: Enables construction of Panzershrek.
+		Prerequisites: ~conyard.nax, up_merc.nax, !up_shrek.nax, rank1
+	RenderSprites:
+		Image: shrek.nax
+	ProvidesPrerequisite:
+
+up_me262.nax:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Me 262
+	Buildable:
+		Description: Upgrades the BF 109 to the Me 262
+		Prerequisites: ~radar.nax, !up_me262.nax
+	RenderSprites:
+		Image: me262.nax
+
+miniv2.nax:
+	Inherits: ^ShootableMissile
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	CruiseMissile:
+		MaxAltitude: 2500
+		MinAirborneAltitude: 125
+		LaunchAngle: 125
+		Speed: 250
+		TurnSpeed: 25
+		LaunchSounds: vbooat1a.wav
+		MaxTargetMovement: 10000
+		TrackTarget: true
+		AirborneCondition: airborne
+	LeavesTrails:
+		Image: ra2_smokey
+		Palette: ra2effect
+		MovingInterval: 1
+		Type: CenterPosition
+		SpawnAtLastPosition: false
+		Offsets: -450, 0, 0
+	SpawnedExplodes:
+		Weapon: YRBoomerSCUD
+		EmptyWeapon: YRBoomerSCUD
+		#RequiresCondition: !airborne
+	MissileSpawnerSlave:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+	ActorStatValues:
+		Upgrades: up_wunderwaffe.futu
+
+sarubia_bomb.nax:
+	Inherits: ^ShootableMissile
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Health:
+		HP: 15000
+	BallisticMissileCA:
+		LaunchAngle: 5
+		Speed: 80
+		LaunchSounds: vdesatta.wav, vdesattb.wav
+	MissileSpawnerSlave:
+	SpawnedExplodes:
+		Weapon: NaxiJadgDestroyer
+		EmptyWeapon: NaxiJadgDestroyer
+	RenderSprites:
+		Image: sarubia_bomb.nax
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+	WithShadow:
+	Mine:
+		CrushClasses: mine
+		DetonateClasses: mine
+		BlockFriendly: true
+	ActorStatValues:
+		Upgrades: up_wunderwaffe.futu
