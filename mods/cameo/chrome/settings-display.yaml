@@ -402,6 +402,19 @@ Container@DISPLAY_PANEL:
 					Width: PARENT_WIDTH - 24
 					Height: 25
 					Children:
+						Container@TANK_MUZZLE_FLASHES_CHECKBOX_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH - 20
+							Children:
+								Checkbox@TANK_MUZZLE_FLASHES_CHECKBOX:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: checkbox-tank-muzzle-flashes
+				Container@ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 25
+					Children:
 						Container@HEAT_DISTORTION_CHECKBOX_CONTAINER:
 							X: 10
 							Width: PARENT_WIDTH - 20
