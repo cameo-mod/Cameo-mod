@@ -1,0 +1,127 @@
+nax_tuboat:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ScoutShipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Torpedo U boat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~nax_naval
+		Queue: Naval, RANaval
+		Description: actor-ra2sub.description
+	Mobile:
+		Speed: 78
+		TurnSpeed: 32
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 12
+		Offset: 512,0,0
+	Armament@Torp:
+		Weapon: AsianSmallTorpedo
+		LocalOffset: 256,-128,0, 256,128,0
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	RenderDetectionCircle:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Cloak@underwater:
+		CloakDelay: 75
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+nax_muboat:
+	Inherits: ^BoatUnit
+	Inherits@effects: ^RA2Vehicle
+	Inherits@Template: ^ArtilleryShipTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@EXPERIENCE: ^GainsExperience
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@sub: ^Submarine
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Heavy Missile U boat
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~nax_tech
+		Queue: Naval, RANaval
+		Description: actor-msub.description
+	Mobile:
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Armor:
+		Type: Medium
+	Armament:
+		Weapon: NaxiMissileUboat
+		LocalOffset: 800,200,0, 800,-200,0
+	WithMuzzleOverlay:
+	Targetable:
+		TargetTypes: Ground, Water, Ship, Submarine
+	AttackFrontal:
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1536, 1536
+	DeliversCash:
+		Payload: 1000
+	Cloak@underwater:
+		CloakDelay: 100
+	Voiced:
+		VoiceSet: VehicleVoice
+	FirepowerMultiplier@BallisticMissileSubBuff:
+		Modifier: 200
+	FireWarheadsOnDeath:
+		Weapon: ArtilleryShell
+	AmmoPool:
+		Ammo: 2
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 65
+		Count: 1
+	WithFacingSpriteBody:
+		Sequence: idle
+		RequiresCondition: ammo == 2
+	WithFacingSpriteBody@OneMissile:
+		Sequence: idle-one
+		RequiresCondition: ammo == 1
+	WithFacingSpriteBody@NoMissiles:
+		Sequence: idle-empty
+		RequiresCondition: !ammo
+	RenderSprites:
+		Image: nax_muboat
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_wunderwaffe
+
+####################################################################################################
+#		Red Alert 2 Naxis Tree
+####################################################################################################
+#		Wolfestein
+#		Metal Slug

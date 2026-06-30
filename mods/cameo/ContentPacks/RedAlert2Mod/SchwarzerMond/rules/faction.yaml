@@ -1,0 +1,24 @@
+World:
+	FactionCA@lnaxis:
+		Name: Schwarzer Mond
+		InternalName: lnaxis
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction-ra2-lnaxis.description
+	StartingUnits@mcvlnaxis:
+		Class: none
+		ClassName: MCV Only
+		Factions: lnaxis
+		BaseActor: nax2_mcv
+	StartingUnits@defaultlnaxis:
+		Class: light
+		ClassName: Light Support
+		Factions: lnaxis
+		BaseActor: nax2_mcv
+		SupportActors: nax_lunar,nax_lunar,nax_lunar,nax_lunar2,nax_lunar2,nax2_beetle,nax2_tiger
+	StartingUnits@heavylnaxis:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: lnaxis
+		BaseActor: nax2_mcv
+		SupportActors: nax_lunar,nax_lunar,nax_lunar2,nax_lunar2,nax_lunar2,nax2_beetle,nax2_tiger,nax2_panzer,nax2_panzer,nax2_beetle,nax2_beetle

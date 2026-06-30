@@ -1,0 +1,313 @@
+steel_qacst.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Consortium Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: steel_qacst
+	RenderSprites:
+		Image: steel_qacst
+
+upsteel_conssupp1:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL1
+	Buildable:
+		BuildPaletteOrder: 109
+		Queue: Promotions
+		Description: Teleports in a small group of Federation units to support the Consortium. Includes Cougars and Hummers.
+		Prerequisites: ~steel_qacst, !upsteel_conssupp1, rank1
+	RenderSprites:
+		Image: steel_cougar
+	ProvidesPrerequisite:
+
+upsteel_conssupp2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL2
+	Buildable:
+		BuildPaletteOrder: 112
+		Queue: Promotions
+		Description: Teleports in a medium group of Federation units to support the Consortium. Includes Cougars, Hummers and a Beta Quantum Tank.
+		Prerequisites: ~steel_qacst, upsteel_conssupp1, !upsteel_conssupp2, rank1
+	RenderSprites:
+		Image: steel_hummer
+	ProvidesPrerequisite:
+
+upsteel_conssupp3:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL3
+	Buildable:
+		BuildPaletteOrder: 115
+		Queue: Promotions
+		Description: Teleports in a big group of Federation units to support the Consortium. Includes Cougars, Hummers and two Beta Quantum Tanks.
+		Prerequisites: ~steel_qacst, upsteel_conssupp2, !upsteel_conssupp3, rank1
+	RenderSprites:
+		Image: steel_oldqtnk
+	ProvidesPrerequisite:
+
+upsteel_conssupp4:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL4
+	Buildable:
+		BuildPaletteOrder: 118
+		Queue: Promotions
+		Description: Teleports in a large group of Federation units to support the Consortium. Includes Cougars, Hummers, two Beta Quantum Tanks and a Cobra.
+		Prerequisites: ~steel_qacst, upsteel_conssupp3, !upsteel_conssupp4, rank1
+	RenderSprites:
+		Image: steel_cobra
+	ProvidesPrerequisite:
+
+### Military tree
+upsteel_quantumtank:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Quantum Tank
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		Description: Enables construction of Quantum Tanks.
+		Prerequisites: ~steel_qacst, !upsteel_quantumtank, rank1
+	RenderSprites:
+		Image: steel_quantumtank
+	ProvidesPrerequisite:
+
+upsteel_dagger:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Dagger Artillery
+	Buildable:
+		BuildPaletteOrder: 113
+		Queue: Promotions
+		Description: Enables construction of Daggers.
+		Prerequisites: ~steel_qacst, upsteel_quantumtank, !upsteel_dagger, rank1
+	RenderSprites:
+		Image: steel_dagger
+	ProvidesPrerequisite:
+
+upsteel_katy:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Katy Tank
+	Buildable:
+		BuildPaletteOrder: 116
+		Queue: Promotions
+		Description: Unlocks Katy Tank.
+		Prerequisites: ~steel_qacst, upsteel_dagger, !upsteel_katy, rank1
+	RenderSprites:
+		Image: steel_katy
+	ProvidesPrerequisite:
+
+upsteel_bfg10k:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock BFG 10000
+	Buildable:
+		BuildPaletteOrder: 119
+		Queue: Promotions
+		Description: Enables construction of the BFG 10000.
+		Prerequisites: ~steel_qacst, upsteel_katy, !upsteel_bfg10k, rank1
+	RenderSprites:
+		Image: steel_bfg10k
+	ProvidesPrerequisite:
+
+### Unisoft tree
+
+upsteel_manta_hunt:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Barracuda
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		Description: Enables construction of Mantas Hunters.
+		Prerequisites: ~steel_qacst, !upsteel_manta_hunt, rank1
+	RenderSprites:
+		Image: steel_manta_hunt
+	ProvidesPrerequisite:
+
+upsteel_defender:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Defender Bot
+	Buildable:
+		BuildPaletteOrder: 114
+		Queue: Promotions
+		Description: Enables construction of Defender Bots.
+		Prerequisites: ~steel_qacst, upsteel_manta_hunt, !upsteel_defender, rank1
+	RenderSprites:
+		Image: steel_defender
+	ProvidesPrerequisite:
+
+upsteel_beholder:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Beholder
+	Buildable:
+		BuildPaletteOrder: 117
+		Queue: Promotions
+		Description: Enables construction of Beholders.
+		Prerequisites: ~steel_qacst, upsteel_defender, !upsteel_beholder, rank1
+	RenderSprites:
+		Image: steel_beholder
+	ProvidesPrerequisite:
+
+upsteel_cruiser:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cloud Breaker
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Promotions
+		Description: Enables construction of Cloud Breakers.
+		Prerequisites: ~steel_qacst, upsteel_beholder, !upsteel_cruiser, rank1
+	RenderSprites:
+		Image: steel_cruiser
+	ProvidesPrerequisite:
+
+
+####################################################################################################
+#		Upgrades Consortium
+####################################################################################################
+
+upsteel_pulseweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Pulse Weapons
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases Firepower of all bullet based weapons by 30% and Range by 15%. Clone Troopers gain 60% more Firepower and 30% more Range instead.
+		Prerequisites: ~steel_qtradr, !upsteel_pulseweapons
+	RenderSprites:
+		Image: upsteel_pulseweapons
+	ProvidesPrerequisite:
+
+upsteel_naniteinfusion:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Nanite Infusion
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Infuses all Units and Buildings with nanites that regenerate them faster and take 5% less damage. Double effect for Infantry.
+		Prerequisites: ~steel_qtradr, !upsteel_naniteinfusion
+	RenderSprites:
+		Image: upsteel_naniteinfusion
+	ProvidesPrerequisite:
+
+upsteel_ferrocrete:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Unlock Ferrocrete Curtain
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases Damage Resistance of all Vehicles and Buildings by 15%.
+		Prerequisites: ~steel_qtradr, !upsteel_ferrocrete
+	RenderSprites:
+		Image: upsteel_ferrocrete
+	ProvidesPrerequisite:
+
+upsteel_emp:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Unlock Emp Cannon
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Icon: icon2
+		Description: Allows the use of the EMP cannon support power from the Consortium Battle Lab.
+		Prerequisites: ~steel_qatech, !upsteel_emp
+	RenderSprites:
+		Image: steel_qatech
+	ProvidesPrerequisite:
+
+upsteel_scalpel:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Scalpel Defenders
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Spawns Scalpel defense drones for your defensive structures.
+		Prerequisites: ~steel_qatech, !upsteel_scalpel
+	RenderSprites:
+		Image: steel_scalpel
+	ProvidesPrerequisite:
+
+upsteel_resonanceammo:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Resonance Ammo
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: All Bullets ricochet between targets, dealing additional damage! Increases Range by all bullets by 10%.
+		Prerequisites: ~steel_qatech, !upsteel_resonanceammo
+	RenderSprites:
+		Image: upsteel_resonanceammo
+	ProvidesPrerequisite:
+
+upsteel_empquantumweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Quantum Weapon Power
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Increases damage and adds a powerful EMP effect to all Quantum Weapons. Effective against armored vehicles and aircraft.
+		Prerequisites: ~steel_qatech, !upsteel_empquantumweapons
+	RenderSprites:
+		Image: upsteel_empquantumweapons
+	ProvidesPrerequisite:
+
+upsteel_shielresistance:
+	Inherits: ^upgrade.template
+	Tooltip:
+		Name: Shield Resistance
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Increases the amount of damage shields can take by 25%.
+		Prerequisites: ~steel_qatech, !upsteel_shielresistance
+	RenderSprites:
+		Image: upsteel_shielresistance
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.upsteel_shielresistance
+
+team_upgrade.upsteel_shielresistance:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: upsteel_shielresistance
+	RenderSprites:
+		Image: upsteel_shielresistance
+	Tooltip:
+		Name: Shield Resistance
+	Buildable:
+		Description: Increases the amount of damage shields can take.
+	PlayerDisplayUpgrade:
+
+####################################################################################################
+#		Red Alert 2 Naxis Structures
+####################################################################################################

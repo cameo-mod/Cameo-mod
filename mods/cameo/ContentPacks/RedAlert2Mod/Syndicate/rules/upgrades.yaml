@@ -1,0 +1,359 @@
+latin_cgcnst:
+	Inherits: ra2gacnst
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Tooltip:
+		Name: Syndicate Construction Yard
+	Transforms:
+		IntoActor: latin_mcv
+	WithIdleOverlay@fans:
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		RequiresCondition: !build-incomplete
+	WithBuildingPlacedOverlay:
+		Sequence: build
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: latin_cgcnst.infiltrated
+		Types: TechStealerInfiltrate
+
+latin_cgcnst.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Syndicate Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: latin_cgcnst
+	RenderSprites:
+		Image: latin_cgcnst
+
+latin_cgweap:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Tooltip:
+		Name: Syndicate Factory
+	Buildable:
+		Prerequisites: ~latin_cgcnst, latin_cgauto
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights2:
+		Sequence: idle-lights2
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: bib
+
+uplatin_mortarbike:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mortar Bikes
+	Buildable:
+		BuildPaletteOrder: 121
+		Queue: Promotions
+		Description: Enables construction of Mortar Bikes.
+		Prerequisites: ~latin_cgcnst, !uplatin_mortarbike, rank1
+	RenderSprites:
+		Image: latin_mortarbike
+	ProvidesPrerequisite:
+
+uplatin_narco:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Narcos
+	Buildable:
+		BuildPaletteOrder: 124
+		Queue: Promotions
+		Description: Enables training of Narco Forces.
+		Prerequisites: ~latin_cgcnst, !uplatin_narco, uplatin_mortarbike, rank1
+	RenderSprites:
+		Image: latin_narco
+	ProvidesPrerequisite:
+
+uplatin_cartel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cartel Trucks
+	Buildable:
+		BuildPaletteOrder: 127
+		Queue: Promotions
+		Description: Enables construction of Cartel Trucks.
+		Prerequisites: ~latin_cgcnst, !uplatin_cartel, uplatin_narco, rank1
+	RenderSprites:
+		Image: latin_cartel
+	ProvidesPrerequisite:
+
+uplatin_burrito:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Burritos
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Promotions
+		Description: Enables construction of Burritos.
+		Prerequisites: ~latin_cgcnst, !uplatin_burrito, uplatin_cartel, rank1
+	RenderSprites:
+		Image: latin_burrito
+	ProvidesPrerequisite:
+
+### War tree
+uplatin_buggy:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Raider Buggy
+	Buildable:
+		BuildPaletteOrder: 122
+		Queue: Promotions
+		Description: Enables construction of Raider Buggies.
+		Prerequisites: ~latin_cgcnst, !uplatin_buggy, rank1
+	RenderSprites:
+		Image: latin_buggy
+	ProvidesPrerequisite:
+
+uplatin_mtnk:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Smoker Tanks
+	Buildable:
+		BuildPaletteOrder: 125
+		Queue: Promotions
+		Description: Enables construction of Smoker Tanks.
+		Prerequisites: ~latin_cgcnst, !uplatin_mtnk, uplatin_buggy, rank1
+	RenderSprites:
+		Image: latin_mtnk
+	ProvidesPrerequisite:
+
+uplatin_apc:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Latin APC.
+	Buildable:
+		BuildPaletteOrder: 128
+		Queue: Promotions
+		Description: Enables construction of Latin APCs.
+		Prerequisites: ~latin_cgcnst, !uplatin_apc, uplatin_mtnk, rank1
+	RenderSprites:
+		Image: latin_apc
+	ProvidesPrerequisite:
+
+uplatin_lars:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock LARS
+	Buildable:
+		BuildPaletteOrder: 131
+		Queue: Promotions
+		Description: Enables construction of LARS.
+		Prerequisites: ~latin_cgcnst, !uplatin_lars, uplatin_apc, rank1
+	RenderSprites:
+		Image: latin_lars
+	ProvidesPrerequisite:
+
+### Artillery Weapons tree
+
+uplatin_ra2terror:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Terrorists
+	Buildable:
+		BuildPaletteOrder: 123
+		Queue: Promotions
+		Description: Enables training of terrorists.
+		Prerequisites: ~latin_cgcnst, !uplatin_ra2terror, rank1
+	RenderSprites:
+		Image: ra2terror
+	ProvidesPrerequisite:
+
+uplatin_ra2dtruck:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Demolition Trucks
+	Buildable:
+		BuildPaletteOrder: 126
+		Queue: Promotions
+		Description: Enables construction of Demo Trucks.
+		Prerequisites: ~latin_cgcnst, uplatin_ra2terror, !uplatin_ra2dtruck, rank1
+	RenderSprites:
+		Image: ra2dtruck
+	ProvidesPrerequisite:
+
+uplatin_nuketruk:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Nuke Trucks
+	Buildable:
+		BuildPaletteOrder: 129
+		Queue: Promotions
+		Description: Enables construction of Nuke Trucks.
+		Prerequisites: ~latin_cgcnst, uplatin_ra2dtruck, !uplatin_nuketruk, rank1
+	RenderSprites:
+		Image: latin_nuketruk
+	ProvidesPrerequisite:
+
+uplatin_topol:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock TOPOL M
+	Buildable:
+		BuildPaletteOrder: 132
+		Queue: Promotions
+		Description: Enables construction of TOPOLs.
+		Prerequisites: ~latin_cgcnst, uplatin_nuketruk, !uplatin_topol, rank1
+	RenderSprites:
+		Image: latin_topol
+	ProvidesPrerequisite:
+
+##############################################
+#   Red Alert 2 Syndicate Upgrade
+##############################################
+uplatin_mili:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Elite Guerillas
+	Buildable:
+		Description: upgrade-uplatin_mili.description
+		Prerequisites: ~latin_radar, !uplatin_mili
+	RenderSprites:
+		Image: latin_mili
+	ProvidesPrerequisite:
+
+uplatin_cartelrockets:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Cartel Rockets
+	Buildable:
+		Description: upgrade-uplatin_cartelrockets.description
+		Prerequisites: ~latin_radar, !uplatin_cartelrockets
+	RenderSprites:
+		Image: uplatin_cartelrockets
+	ProvidesPrerequisite:
+
+uplatin_ngbunk2:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Lightposts
+	Buildable:
+		Description: upgrade-uplatin_ngbunk2.description
+		Prerequisites: ~latin_radar, !uplatin_ngbunk2
+	RenderSprites:
+		Image: latin_ngbunk2
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.uplatin_ngbunk2
+
+team_upgrade.uplatin_ngbunk2:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: uplatin_ngbunk2
+	RenderSprites:
+		Image: latin_ngbunk2
+	Tooltip:
+		Name: Lightposts
+	Buildable:
+		Description: upgrade-uplatin_ngbunk2.description
+	PlayerDisplayUpgrade:
+
+uplatin_emp:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Emp Cannon
+	Buildable:
+		Icon: icon2
+		Description: Allows the use of the EMP cannon support power from the Latin EMP Radar.
+		Prerequisites: ~latin_radar, !uplatin_emp
+	RenderSprites:
+		Image: steel_qatech
+	ProvidesPrerequisite:
+
+latin_up_chaingun:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Yuri Stolen Tech: Chainguns
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade-latin_up_chaingun.description
+		Prerequisites: ~latin_cgspy, !latin_up_chaingun
+	RenderSprites:
+		Image: latin_up_chaingun
+	ProvidesPrerequisite:
+
+latin_up_industrial:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Soviet Stolen Tech: Industrial Methods
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade-latin_up_industrial.description
+		Prerequisites: ~latin_cgspy, !latin_up_industrial
+	RenderSprites:
+		Image: latin_up_industrial
+	ProvidesPrerequisite:
+
+uplatin_alliedstolentech:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Allied Stolen Tech: Extra Missiles and Miraging
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade-uplatin_alliedstolentech.description
+		Prerequisites: ~latin_cgspy, !uplatin_alliedstolentech
+	RenderSprites:
+		Image: latin_up_miraging
+	ProvidesPrerequisite:
+
+latin_up_hotfire:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Asian Alliance Stolen Tech: Hot Fire
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade-latin_up_hotfire.description
+		Prerequisites: ~latin_cgspy, !latin_up_hotfire
+	RenderSprites:
+		Image: latin_up_hotfire
+	ProvidesPrerequisite:
+
+uplatin_cashrecover:
+	Inherits: ^upgrade.template
+	Tooltip:
+		Name: Cash Recovery
+	Valued:
+		Cost: 12500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: upgrade-uplatin_cashrecover.description
+		Prerequisites: ~latin_cgspy, !uplatin_cashrecover
+	RenderSprites:
+		Image: latin_up_tech2
+	#ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.uplatin_cashrecover
+
+team_upgrade.uplatin_cashrecover:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: uplatin_cashrecover
+	RenderSprites:
+		Image: latin_up_tech2
+	Tooltip:
+		Name: Cash Recovery
+	Buildable:
+		Description: upgrade-uplatin_cashrecover.description
+	PlayerDisplayUpgrade:

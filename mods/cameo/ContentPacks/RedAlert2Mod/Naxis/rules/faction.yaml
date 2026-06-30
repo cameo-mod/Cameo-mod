@@ -1,0 +1,24 @@
+World:
+	FactionCA@naxis:
+		Name: Naxis
+		InternalName: naxis
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction-ra2-naxis.description
+	StartingUnits@mcvnaxis:
+		Class: none
+		ClassName: MCV Only
+		Factions: naxis
+		BaseActor: nax_mcv
+	StartingUnits@defaultnaxis:
+		Class: light
+		ClassName: Light Support
+		Factions: naxis
+		BaseActor: nax_mcv
+		SupportActors: nax_rifle,nax_rifle,nax_rifle,nax_mp40,nax_mp40,nax_wirbelwind,nax_tiger
+	StartingUnits@heavynaxis:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: naxis
+		BaseActor: nax_mcv
+		SupportActors: nax_rifle,nax_rifle,nax_rifle,nax_mp40,nax_mp40,nax_wirbelwind,nax_tiger,nax_tiger,nax_tiger,nax_wirbelwind,nax_wirbelwind

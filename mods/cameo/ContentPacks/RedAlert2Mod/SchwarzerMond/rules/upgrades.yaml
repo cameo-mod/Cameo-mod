@@ -1,0 +1,45 @@
+nax2_conyard.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Schwarzer Mond Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: nax2_conyard
+	RenderSprites:
+		Image: nax2_conyard
+
+upnax2_ylaser:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Crystal Lens
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Yellow lasers upgrades shooting range and burst
+		Prerequisites: ~nax2_radar, !upnax2_ylaser
+	RenderSprites:
+		Image: upnax2_ylaser
+	ProvidesPrerequisite:
+
+upnax2_gplasma:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Green Plasma Shells
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Tanks deals more damage and Tesla type damage
+		Prerequisites: ~nax2_radar, !upnax2_gplasma
+	RenderSprites:
+		Image: upnax2_gplasma
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Red Alert 2 Naxis Vehicles
+####################################################################################################

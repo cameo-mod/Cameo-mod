@@ -1,0 +1,342 @@
+aa_cgcnst.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Asian Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: aa_cgcnst
+	RenderSprites:
+		Image: aa_cgcnst
+
+upaa_samurai:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Samurai
+	Buildable:
+		BuildPaletteOrder: 97
+		Queue: Promotions
+		Description: Allows training of Samurai and upgrades paratroopers to use Samurais.
+		Prerequisites: ~aa_cgcnst, !upaa_samurai, rank1
+	RenderSprites:
+		Image: aa_samurai
+	ProvidesPrerequisite:
+
+upaa_archer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Veteran Archers
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Promotions
+		Description: Allows training of Veteran Archers and upgrades paratroopers to use Archers.
+		Prerequisites: ~aa_cgcnst, upaa_samurai, !upaa_archer, rank1
+	RenderSprites:
+		Image: aa_archer
+	ProvidesPrerequisite:
+
+upaa_asdf:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock ASDF
+	Buildable:
+		BuildPaletteOrder: 103
+		Queue: Promotions
+		Description: Enables training ASDF and upgrades paratroopers to use ASDFs.
+		IconPalette: ra2cameo
+		Prerequisites: ~aa_cgcnst, upaa_archer, !upaa_asdf, rank1
+	RenderSprites:
+		Image: aa_asdf
+	ProvidesPrerequisite:
+
+upaa_warturtle:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock War Turtle
+	Buildable:
+		BuildPaletteOrder: 106
+		Queue: Promotions
+		Description: Enables construction of War Turtles.
+		Prerequisites: ~aa_cgcnst, upaa_asdf, !upaa_warturtle, rank1
+	RenderSprites:
+		Image: aa_wtrt
+	ProvidesPrerequisite:
+
+### Military tree
+
+upaa_japrif:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Fanatic
+	Buildable:
+		BuildPaletteOrder: 98
+		Queue: Promotions
+		Description: Allows training of Fanatics and upgrades paratroopers to use Fanatics.
+		Prerequisites: ~aa_cgcnst, !upaa_japrif, rank1
+	RenderSprites:
+		Image: aa_japrif
+	ProvidesPrerequisite:
+
+upaa_mlrs:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock MLRS
+	Buildable:
+		BuildPaletteOrder: 101
+		Queue: Promotions
+		Description: Enables construction of MLRS.
+		Prerequisites: ~aa_cgcnst, upaa_japrif, !upaa_mlrs, rank1
+	RenderSprites:
+		Image: aa_mlrs
+	ProvidesPrerequisite:
+
+upaa_mecha:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Pulverizer Mecha
+	Buildable:
+		BuildPaletteOrder: 104
+		Queue: Promotions
+		Description: Enables construction of Pulverizer Mechas.
+		Prerequisites: ~aa_cgcnst, upaa_mlrs, !upaa_mecha, rank1
+	RenderSprites:
+		Image: aa_mecha
+	ProvidesPrerequisite:
+
+upaa_railt2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Heavy Railgun Tank
+	Buildable:
+		BuildPaletteOrder: 107
+		Queue: Promotions
+		Description: Enables construction of Heavy Railgun Tanks.
+		Prerequisites: ~aa_cgcnst, upaa_mecha, !upaa_railt2, rank1
+	RenderSprites:
+		Image: aa_railt2
+	ProvidesPrerequisite:
+
+### Fire tree
+
+upaa_ftnk:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Flame Tank
+	Buildable:
+		BuildPaletteOrder: 99
+		Queue: Promotions
+		Description: Enables construction of Flame Tanks.
+		Prerequisites: ~aa_cgcnst, !upaa_ftnk, rank1
+	RenderSprites:
+		Image: aa_ftnk
+	ProvidesPrerequisite:
+
+upaa_plast:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Plasma Trooper
+	Buildable:
+		BuildPaletteOrder: 102
+		Queue: Promotions
+		Description: Enables training of Plasma Troopers.
+		Prerequisites: ~aa_cgcnst, upaa_ftnk, !upaa_plast, rank1
+	RenderSprites:
+		Image: aa_plast
+	ProvidesPrerequisite:
+
+upaa_ptnk:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Plasma Tank
+	Buildable:
+		BuildPaletteOrder: 105
+		Queue: Promotions
+		Description: Enables construction of Plasma Tanks.
+		Prerequisites: ~aa_cgcnst, upaa_plast, !upaa_ptnk, rank1
+	RenderSprites:
+		Image: aa_ptnk
+	ProvidesPrerequisite:
+
+upaa_howitzer:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Howitzer
+	Buildable:
+		BuildPaletteOrder: 108
+		Queue: Promotions
+		Description: Enables construction of Howitzers.
+		Prerequisites: ~aa_cgcnst, upaa_ptnk, !upaa_howitzer, rank1
+	RenderSprites:
+		Image: aa_hotwi
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Upgrades Asian Alliance
+####################################################################################################
+
+asian_upgrade_infantryspec:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Modernized Infantry Equipment
+	Buildable:
+		Description: asian_upgrade_infantryspec.description
+		Prerequisites: ~aa_cgradr, !asian_upgrade_infantryspec
+	RenderSprites:
+		Image: asian_upgrade_infantryspec
+
+asian_upgrade_pulverizer:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Heavy Pulverizer Weapons
+	Buildable:
+		Description: asian_upgrade_pulverizer.description
+		Prerequisites: ~aa_cgradr, !asian_upgrade_pulverizer
+	RenderSprites:
+		Image: asian_upgrade_pulverizer
+
+asian_upgrade_phalanx:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Asian Phalanx
+	Buildable:
+		Description: asian_upgrade_phalanx.description
+		Prerequisites: ~aa_cgradr, !asian_upgrade_phalanx
+	RenderSprites:
+		Image: asian_upgrade_phalanx
+	ProvidesPrerequisite:
+
+upaa_massparadrop:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Mass Paradrop
+	Buildable:
+		# Sequence: icon
+		Icon: paratroopers
+		Description: Allows the use of the Mass Paradrop support power from the Asian Alliance Airfield.
+		Prerequisites: ~aa_cgradr, !upaa_massparadrop
+	RenderSprites:
+		Image: icon
+	ProvidesPrerequisite:
+
+upaa_clusterbombs:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Cluster Bombs
+	Buildable:
+		# Sequence: icon
+		Icon: icon
+		Description: Allows the use of the Cluster Bombs support power from the Asian Alliance Airfield.
+		Prerequisites: ~aa_cgradr, !upaa_clusterbombs
+	RenderSprites:
+		Image: aa_tankmine
+	ProvidesPrerequisite:
+
+upaa_chaosbombs:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Chaos Bombs
+	Buildable:
+		# Sequence: icon
+		Icon: icon2
+		Description: Allows the use of the Chaos Bombs support power from the Asian Alliance Airfield.
+		Prerequisites: ~aa_cgradr, aa_cgmiac, upaa_clusterbombs, !upaa_chaosbombs
+	RenderSprites:
+		Image: aa_tankmine
+	ProvidesPrerequisite:
+
+upaa_tsunami:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Tsunami Carrier Upgrade
+	Buildable:
+		Description: Upgrades Kamikaze Carrier to Tsunami Carrier.
+		Prerequisites: ~aa_cgmiac, ~aa_cgyard, !upaa_tsunami
+	RenderSprites:
+		Image: aa_tsun
+	ProvidesPrerequisite:
+
+asian_upgrade_dragonfire:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Dragon Fire
+	Buildable:
+		Description: asian_upgrade_dragonfire.description
+		Prerequisites: ~aa_cgtech, !asian_upgrade_dragonfire
+	RenderSprites:
+		Image: asian_upgrade_dragonfire
+	ProvidesPrerequisite:
+
+asian_upgrade_celestialpower:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Celestial Power
+	Buildable:
+		Description: asian_upgrade_celestialpower.description
+		Prerequisites: ~aa_cgtech, !asian_upgrade_celestialpower
+	RenderSprites:
+		Image: asian_upgrade_celestialpower
+	ProvidesPrerequisite:
+
+asian_upgrade_banzai:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Banzai Mode
+	Buildable:
+		Description: asian_upgrade_banzai.description
+		Prerequisites: ~aa_cgtech, aa_cgmiac, !asian_upgrade_banzai
+	RenderSprites:
+		Image: asian_upgrade_banzai
+	ProvidesPrerequisite:
+
+asian_team_upgrade_dragonway:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Way of the Dragon
+	Buildable:
+		Description: asian_team_upgrade_dragonway.description
+		Prerequisites: ~aa_cgtech, aa_cgmiac, !asian_team_upgrade_dragonway
+	RenderSprites:
+		Image: asian_team_upgrade_dragonway
+	ProvidesTeamProxyActor:
+		Actor: asian_upgrade_dragonway_proxy_actor
+
+asian_upgrade_dragonway_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Way of the Dragon
+	Buildable:
+		Description: asian_team_upgrade_dragonway.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: asian_team_upgrade_dragonway
+	ProvidesPrerequisite:
+		Prerequisite: asian_team_upgrade_dragonway
+
+asian_team_upgrade_diplomacy:
+	Inherits: ^team_upgrade_template
+	Tooltip:
+		Name: Asian Diplomacy
+	Buildable:
+		Description: asian_team_upgrade_diplomacy.description
+		Prerequisites: ~aa_cgtech, aa_cgmiac, !asian_team_upgrade_diplomacy
+	RenderSprites:
+		Image: asian_team_upgrade_diplomacy
+	ProvidesTeamProxyActor:
+		Actor: asian_team_upgrade_diplomacy_proxy_actor
+
+asian_team_upgrade_diplomacy_proxy_actor:
+	Inherits: ^team_upgrade_proxy_actor
+	Tooltip:
+		Name: Asian Diplomacy
+	Buildable:
+		Description: asian_team_upgrade_diplomacy.description
+	PlayerDisplayUpgrade:
+	RenderSprites:
+		Image: asian_team_upgrade_diplomacy
+	ProvidesPrerequisite:
+		Prerequisite: asian_team_upgrade_diplomacy
+
+##############################################
+#   Red Alert 2 Syndicate Buildings
+##############################################

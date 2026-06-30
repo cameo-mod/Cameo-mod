@@ -1,0 +1,24 @@
+World:
+	FactionCA@consortium:
+		Name: Steel Consortium
+		InternalName: consortium
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction-ra2-consortium.description
+	StartingUnits@mcvconsortium:
+		Class: none
+		ClassName: MCV Only
+		Factions: consortium
+		BaseActor: steel_qmcv
+	StartingUnits@defaultconsortium:
+		Class: light
+		ClassName: Light Support
+		Factions: consortium
+		BaseActor: steel_qmcv
+		SupportActors: steel_fedinf,steel_fedinf,steel_fedinf,steel_qinf,steel_qinf,steel_manta,steel_arty
+	StartingUnits@heavyconsortium:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: consortium
+		BaseActor: steel_qmcv
+		SupportActors: steel_fedinf,steel_fedinf,steel_fedinf,steel_qinf,steel_qinf,steel_manta,steel_qtank,steel_qtank,steel_qtank,steel_qutnk,steel_manta

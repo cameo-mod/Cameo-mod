@@ -1,0 +1,421 @@
+futu_enforcer:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^SiegeMode
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Enforcer
+	Valued:
+		Cost: 300
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~futu_egpile
+		Queue: Infantry, RAInfantry
+		Description: actor-futu_enforcer.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	AutoTarget:
+		InitialStance: Defend
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armament@PRIMARY:
+		Weapon: FutureEnforcerShotgun
+		RequiresCondition: !deployed && !rank-elite
+		LocalOffset: 128,0,256
+	Armament@PRIMARY2:
+		Name: deployed
+		Weapon: FutureEnforcerShotgunDeployed
+		RequiresCondition: deployed && !rank-elite
+		LocalOffset: 128,0,256
+		Turret: deploy
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: FutureEnforcerShotgunDeployed
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: FutureEnforcerShotgunE
+		RequiresCondition: !deployed && rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE2:
+		Name: deployed
+		Weapon: FutureEnforcerShotgunDeployedE
+		RequiresCondition: deployed && rank-elite
+		LocalOffset: 128,0,256
+		Turret: deploy
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: FutureEnforcerShotgunDeployedE
+		RequiresCondition: rank-elite
+	Armament@BOTAA:
+		Weapon: aadeploytargeting.8c0
+		Name: targeting
+		RequiresCondition: botmicro
+	AttackFrontal:
+		Armaments: primary, targeting
+		RequiresCondition: undeployed
+		FacingTolerance: 2
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		PauseOnCondition: disabled
+		RequiresCondition: deployed
+		Voice: Attack
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		RequiresCondition: !parachute
+		Voice: Deploy
+	TakeCover:
+		RequiresCondition: undeployed
+	Crushable:
+		RequiresCondition: undeployed
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed
+	DamageMultiplier@deployed:
+		Modifier: 60
+		RequiresCondition: deployed
+	Voiced:
+		VoiceSet: GGIVoice
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
+
+futu_javelinsoldier:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@editorhack: ^DeployableInfantryEditor
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@bot: ^SiegeMode
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Javelin Soldier
+	Valued:
+		Cost: 400
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~futu_egpile
+		Queue: Infantry, RAInfantry
+		Description: actor-futu_javelinsoldier.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	RenderRangeCircle:
+		RequiresCondition: deployed
+	RevealOnFire:
+		ArmamentNames: primary, deployed
+	Armament@PRIMARY:
+		Weapon: FutureJavelinRockets
+		RequiresCondition: !deployed && !rank-elite
+		LocalOffset: 128,0,256
+	Armament@PRIMARY2:
+		Name: deployed
+		Weapon: FutureJavelinRocketsDeployed
+		RequiresCondition: deployed && !rank-elite
+		LocalOffset: 128,0,256
+		Turret: deploy
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: FutureJavelinRocketsDeployed
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: FutureJavelinRocketsE
+		RequiresCondition: !deployed && rank-elite
+		LocalOffset: 128,0,256
+	Armament@ELITE2:
+		Name: deployed
+		Weapon: FutureJavelinRocketsDeployedE
+		RequiresCondition: deployed && rank-elite
+		LocalOffset: 128,0,256
+		Turret: deploy
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: FutureJavelinRocketsDeployedE
+		RequiresCondition: rank-elite
+	Armament@BOTAA:
+		Weapon: aadeploytargeting.8c0
+		Name: targeting
+		RequiresCondition: botmicro
+	AttackFrontal:
+		Armaments: primary, targeting
+		RequiresCondition: undeployed
+		FacingTolerance: 2
+	AttackTurreted@deployed:
+		Armaments: deployed
+		Turrets: deploy
+		PauseOnCondition: disabled
+		RequiresCondition: deployed
+		Voice: Attack
+	Turreted:
+		Turret: deploy
+		RealignDelay: -1
+		TurnSpeed: 1023
+		InitialFacing: 368
+	WithSpriteTurret@idle:
+		Turret: deploy
+		Sequence: deployed
+		RequiresCondition: deployed && !animate-turret
+	WithSpriteTurret@animated:
+		Turret: deploy
+		Sequence: shoot-deployed
+		RequiresCondition: deployed && animate-turret
+	WithSpriteBody:
+		Sequence: dot
+		Name: dot
+		RequiresCondition: !undeployed
+	GrantConditionOnAttack:
+		Condition: animate-turret
+		RevokeDelay: 5
+		ArmamentNames: deployed
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+		RequiresCondition: undeployed
+	WithMakeAnimation:
+		Sequence: deploy
+		BodyNames: dot
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		RequiresCondition: !parachute
+		Voice: Deploy
+	TakeCover:
+		RequiresCondition: undeployed
+	Crushable:
+		RequiresCondition: undeployed
+	Crushable@deployed:
+		CrushClasses: vehicle
+		RequiresCondition: !undeployed
+	DamageMultiplier@deployed:
+		Modifier: 60
+		RequiresCondition: deployed
+	Voiced:
+		VoiceSet: GGIVoice
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	ActorStatValues:
+		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
+
+futu_fedeng:
+	Inherits: RA2ENGINEER
+	Buildable:
+		Prerequisites: ~futu_egpile
+		Queue: Infantry, RAInfantry
+		Description: actor-futu_fedeng.description
+	RenderSprites:
+		Image: futu_fedeng
+	-TakeCover:
+
+futu_spy:
+	Inherits: ^Soldier
+	Inherits@anim: ^RA2Infantry
+	Inherits@template: ^ScoutInfantryTemplate
+	Inherits@disguise: ^SpyDisguise
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@pip: ^WithSpecialCargoPip
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 90
+		Prerequisites: ~futu_egtech
+		Description: actor-ra2spy.description
+	Valued:
+		Cost: 1000
+	-Tooltip:
+	DisguiseTooltip:
+		Name: Infiltrator
+		GenericName: Soldier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	-Guard:
+	Health:
+		HP: 5000
+	Mobile:
+		Speed: 60
+	Passenger:
+	Disguise:
+	-WithInfantryBody:
+	WithDisguisingInfantryBody:
+		StandSequences: stand
+		DefaultAttackSequence: shoot
+		IdleSequences: idle1,idle2
+	Infiltrates:
+		Types: TechStealerInfiltrate
+		Notification: BuildingInfiltrated
+		PlayerExperience: 50
+	-AttackFrontal:
+	IgnoresDisguise:
+	Voiced:
+		VoiceSet: RA2SpyVoice
+
+futu_blackwidow:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@anim: ^RA2Infantry
+	Inherits@swim: ^WithSwimsuit
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Mobile:
+		Speed: 75
+	Tooltip:
+		Name: Black Widow
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 120
+		Prerequisites: ~futu_egtech
+		Description: actor-futu_blackwidow.description
+	Armament@PRIMARY:
+		Weapon: BlackWidowPistols
+		RequiresCondition: !rank-elite
+		LocalOffset: 128,-16,256, 128,16,256
+	Armament@ELITE:
+		Weapon: BlackWidowPistolsE
+		RequiresCondition: rank-elite
+		LocalOffset: 128,-16,256, 128,16,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: BlackWidowPistols
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: BlackWidowPistolsE
+		RequiresCondition: rank-elite
+	Armament@shipc4:
+		Weapon: SEALAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+		Voice: Demolish
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	AttackMove:
+		Voice: Attack
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+	Voiced:
+		VoiceSet: BlackWidowVoice
+	ActorStatValues:
+		Upgrades: future_upgrade_equalizer_x1, future_upgrade_equalizer_x2, future_upgrade_equalizer_x3
+
+futu_cryoleg:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^RA2Infantry
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MC: ^MCImmune
+	Inherits@COMMANDOSKULL: ^CommandoSkull
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 121
+		Prerequisites: ~futu_egshock
+		BuildLimit: 1
+		Description: actor-futu_cryoleg.description
+	RenderSprites:
+		PlayerPalette: playerra2
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: Cryo Legionnaire
+	Health:
+		HP: 360000
+	ChangesHealth@SelfHealing:
+		Step: 360
+	Mobile:
+		Speed: 75
+	Armament@PRIMARY:
+		Weapon: CryoLegionnaireAttack
+		LocalOffset: 128,100,350
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 50
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: attack
+		StandSequences: stand
+	Voiced:
+		VoiceSet: CryoLegionnaireVoice
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Red Alert 2 Future Vehicles
+####################################################################################################

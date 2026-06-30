@@ -1,0 +1,177 @@
+up_ostfrontexperience:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ostfront Experience
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Infantry gets 15% to range, damage and armor
+		Prerequisites: ~nax_radar, !up_ostfrontexperience
+	RenderSprites:
+		Image: ostfrontexperienceicon
+	ProvidesPrerequisite:
+
+up_atlantikwall:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Atlantikwall
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Defenses get 20% armor and automatic repair.
+		Prerequisites: ~nax_radar, !up_atlantikwall
+	RenderSprites:
+		Image: atlantikwallicon
+	ProvidesPrerequisite:
+
+up_tankarsenalrenovation:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tank Arsenal Renovation
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Tier I-II gain 15% to speed, damage, reload speed and armor
+		Prerequisites: ~nax_tech, !up_tankarsenalrenovation
+	RenderSprites:
+		Image: tankarsenalrenovationicon
+	ProvidesPrerequisite:
+
+up_massopticsintegration:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mass Optics Integration
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Increase accuracy, vision, detection and attack range of scouts, artillery and AA by 25%
+		Prerequisites: ~nax_tech, !up_massopticsintegration
+	RenderSprites:
+		Image: massopticsintegrationicon
+	ProvidesPrerequisite:
+
+up_wunderwaffe:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Wunderwaffe
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: High Tier vehicles get 20% to attack speed, damage and armor
+		Prerequisites: ~nax_tech, !up_wunderwaffe
+	RenderSprites:
+		Image: wunderwaffeicon
+	ProvidesPrerequisite:
+
+up_blitzkrieg:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Blitzkrieg
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Research
+		Description: upgrade-blitzkrieg.description
+		Prerequisites: ~nax_tech, !up_blitzkrieg
+	RenderSprites:
+		Image: blitzkriegicon
+	# ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: team_upgrade.up_blitzkrieg
+
+team_upgrade.up_blitzkrieg:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: up_blitzkrieg
+	RenderSprites:
+		Image: blitzkriegicon
+	Tooltip:
+		Name: Blitzkrieg
+	Buildable:
+		Description: Increase all vehicles movement speed by 25%
+	PlayerDisplayUpgrade:
+
+up_nax_horten:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Horten Bomber Strike
+	Buildable:
+		BuildPaletteOrder: 118
+		Queue: Promotions
+		Description: Upgrades Horten Bombers from 3 to 5 Planes.
+		Prerequisites: ~nax_conyard, upnax_shrek, !up_nax_horten, rank1
+	RenderSprites:
+		Image: nax_horten
+	ProvidesPrerequisite:
+
+up_nax_horten2:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Horten Bomber Strike
+	Buildable:
+		BuildPaletteOrder: 121
+		Queue: Promotions
+		Description: Upgrades Horten Bombers from 5 to 7 Planes.
+		Prerequisites: ~nax_conyard, up_nax_horten, !up_nax_horten2, rank1
+	RenderSprites:
+		Image: nax_horten
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Red Alert 2 Naxis Planes
+####################################################################################################
+futu_egcnst.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen FutureTech Building Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: futu_egcnst
+	RenderSprites:
+		Image: futu_egcnst
+
+future_upgrade_equalizer_x1:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Equalizer X1
+	Buildable:
+		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
+		Prerequisites: ~futu_egtf, !future_upgrade_equalizer_x1
+	RenderSprites:
+		Image: future_upgrade_equalizer_x1
+	ProvidesPrerequisite:
+
+future_upgrade_equalizer_x2:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Equalizer X2
+	Buildable:
+		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
+		Prerequisites: ~futu_egtf, futu_egtech, future_upgrade_equalizer_x1, !future_upgrade_equalizer_x2
+	RenderSprites:
+		Image: future_upgrade_equalizer_x2
+	ProvidesPrerequisite:
+
+future_upgrade_equalizer_x3:
+	Inherits: ^doctrine_template
+	Tooltip:
+		Name: Equalizer X3
+	Buildable:
+		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
+		Prerequisites: ~futu_egtf, futu_egtech, futu_egshock, future_upgrade_equalizer_x2, !future_upgrade_equalizer_x3
+	RenderSprites:
+		Image: future_upgrade_equalizer_x3
+	ProvidesPrerequisite:

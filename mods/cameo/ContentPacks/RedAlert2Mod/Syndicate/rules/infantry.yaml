@@ -1,0 +1,615 @@
+latin_mili:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	Tooltip:
+		Name: Latin Militia
+	Valued:
+		Cost: 130
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~latin_cgpile
+		Queue: Infantry, RAInfantry
+		Description: actor-latin_mili.description
+	Mobile:
+		Speed: 52
+	Health:
+		HP: 13000
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Armament@PRIMARY:
+		Weapon: RA2MiliAK47
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2MiliAK47E
+		RequiresCondition: rank-elite
+	Armament@Molotov:
+		Weapon: RA2Molotov
+		RequiresCondition: uplatin_mili && !rank-elite
+	Armament@MolotovELITE:
+		Weapon: RA2MolotovE
+		RequiresCondition: uplatin_mili && rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2MiliAK47
+		RequiresCondition: !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2MiliAK47E
+		RequiresCondition: rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@MolotovGARRISONED:
+		Name: garrisoned
+		Weapon: RA2Molotov
+		RequiresCondition: uplatin_mili && !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@MolotovGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2MolotovE
+		RequiresCondition: uplatin_mili && rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	DamageMultiplier@uplatin_mili:
+		Modifier: 50
+	FirepowerMultiplier@uplatin_mili:
+		Modifier: 150
+	ActorStatValues:
+		Upgrades: uplatin_mili, latin_up_chaingun
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_up_chaingun
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_up_chaingun
+	GrantConditionOnPrerequisite@latin_up_chaingun:
+		Condition: latin_up_chaingun
+		Prerequisites: latin_up_chaingun
+
+latin_tkiller:
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	Tooltip:
+		Name: Latin Tank Killer
+	Valued:
+		Cost: 270
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~latin_cgpile
+		Queue: Infantry, RAInfantry
+		Description: template-antitank-antiair-infantry.description
+	Mobile:
+		Speed: 53
+	Health:
+		HP: 13000
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: LatinTankKillerRocket
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: LatinTankKillerRocket
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYE:
+		Name: primary
+		Weapon: LatinTankKillerRocket_elite
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONEDE:
+		Name: garrisoned
+		Weapon: LatinTankKillerRocket_elite
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	RenderSprites:
+		Image: aa_tkiller
+
+latin_monkey:
+	Inherits: ^DefaultInfantry
+	Inherits@2: ^AffectedByTiberium
+	Inherits@Template: ^GrenadierInfantryTemplate
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@MC: ^MCImmune
+	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Tooltip:
+		Name: Grenade Monkey
+	Valued:
+		Cost: 400
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~latin_cgpile
+		Queue: Infantry, RAInfantry
+		Description: actor-latin_monkey.description
+	Mobile:
+		Speed: 80
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: LatinMonkeyGrenade1
+		LocalOffset: 128,0,256
+		RequiresCondition: (!latin_up_hotfire && !rank-elite)
+	Armament@SECONDARY:
+		Weapon: LatinMonkeyGrenade2
+		LocalOffset: 128,0,256
+		RequiresCondition: (latin_up_hotfire && !rank-elite) || (!latin_up_hotfire && rank-elite)
+	Armament@ELITE:
+		Weapon: LatinMonkeyGrenade3
+		LocalOffset: 128,0,256
+		RequiresCondition: (latin_up_hotfire && rank-elite)
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: LatinMonkeyGrenade1
+		RequiresCondition: (!latin_up_hotfire && !rank-elite)
+	Armament@GARRISONEDSECONDARY:
+		Name: garrisoned
+		Weapon: LatinMonkeyGrenade2
+		RequiresCondition: (latin_up_hotfire && !rank-elite) || (!latin_up_hotfire && rank-elite)
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: LatinMonkeyGrenade3
+		RequiresCondition: (latin_up_hotfire && rank-elite)
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: LatinMonkeyDie
+	RenderSprites:
+		PlayerPalette: playerra2
+	Crushable:
+		CrushSound: igensqua.wav
+	WithDeathAnimation:
+		DeathSequencePalette: ra2infantry
+		DeathTypes:
+			DefaultDeath: 1
+			BruteMutate: 1
+			BulletDeath: 1
+			RippedApartDeath: 2
+			SmallExplosionDeath: 2
+			ExplosionDeath: 2
+			FireDeath: 2
+			PsychicDeath: 1
+			TiberiumDeath: 1
+			RadiationDeath: 1
+			RA2VirusDeath: 1
+			ElectricityDeath: 2
+			ContaminatorMutate: 1
+			QuestionMutate: 1
+	IgnoresDisguise:
+	-Targetable@disguise:
+	FireWarheadsOnDeath:
+		Weapon: LatinMonkeyGrenadeExplode
+	ActorStatValues:
+		Upgrades: uplatin_mili, latin_up_hotfire
+
+latin_fthrow:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@FireInfantry: ^FireInfantry
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	Tooltip:
+		Name: Latin Flame Trooper
+	Valued:
+		Cost: 500
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~latin_cgspy
+		Queue: Infantry, RAInfantry
+		Description: actor-latin_fthrow.description
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 55000
+	ChangesHealth@SelfHealing:
+		Step: 55
+	Armament@PRIMARY:
+		Weapon: SyndicateFireballLauncher
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: SyndicateFireballLauncherE
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: SyndicateFireballLauncher
+		RequiresCondition: !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: SyndicateFireballLauncherE
+		RequiresCondition: rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	FirepowerMultiplier@latin_up_hotfire:
+		Modifier: 200
+		RequiresCondition: latin_up_hotfire
+	RangeMultiplier@latin_up_hotfire:
+		Modifier: 110
+		RequiresCondition: latin_up_hotfire
+	SpeedMultiplier@latin_up_hotfire:
+		Modifier: 120
+		RequiresCondition: latin_up_hotfire
+	FireWarheadsOnDeath:
+		Weapon: SyndicateFireballLauncherExplode
+	ActorStatValues:
+		Upgrades: uplatin_mili, latin_up_hotfire
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+
+latin_narco:
+	Inherits: ^Soldier
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Tooltip:
+		Name: Narco
+	Valued:
+		Cost: 900
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~uplatin_narco, latin_radar
+		Queue: Infantry, RAInfantry
+		Description: actor-latin_narco.description
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 28000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Armament@Grenade:
+		Weapon: NarcoGrenade
+		LocalOffset: 250,0,400
+		AmmoUsage: 7
+		PauseOnCondition: ammo < 7
+		RequiresCondition: !rank-elite
+	Armament@GrenadeELITE:
+		Weapon: NarcoGrenadeE
+		LocalOffset: 250,0,400
+		AmmoUsage: 7
+		PauseOnCondition: ammo < 7
+		RequiresCondition: rank-elite
+	Armament@Pistol:
+		Weapon: RA2NarcoPistol
+		LocalOffset: 128,0,256
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 7
+		RequiresCondition: !rank-elite
+	Armament@PistolELITE:
+		Weapon: RA2NarcoPistolsE
+		LocalOffset: 128,0,256
+		AmmoUsage: 2
+		PauseOnCondition: ammo < 7
+		RequiresCondition: rank-elite
+	Armament@GrenadeGARRISONED:
+		Name: garrisoned
+		Weapon: NarcoGrenade
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GrenadeGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: NarcoGrenadeE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@PistolGARRISONED:
+		Name: garrisoned
+		Weapon: RA2NarcoPistol
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@PistolGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2NarcoPistolsE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AmmoPool:
+		Ammo: 7
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 1
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	-ReloadAmmoDelayMultiplier@RANK-1:
+	-ReloadAmmoDelayMultiplier@RANK-2:
+	-ReloadAmmoDelayMultiplier@RANK-3:
+	-ReloadAmmoDelayMultiplier@RANK-ELITE:
+	AttackFrontal:
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: LatinNarcoVoice
+	FireWarheadsOnDeath:
+		Weapon: LatinMonkeyGrenadeExplode
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_up_chaingun
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_up_chaingun
+	GrantConditionOnPrerequisite@latin_up_chaingun:
+		Condition: latin_up_chaingun
+		Prerequisites: latin_up_chaingun
+	ActorStatValues:
+		Upgrades: uplatin_mili, latin_up_chaingun, latin_up_hotfire
+
+latin_fftr:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Tooltip:
+		Name: Freedom Fighter
+	Valued:
+		Cost: 3000
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Prerequisites: ~latin_cgspy
+		BuildLimit: 1
+		Description: actor-latin_fftr.description
+	Mobile:
+		Speed: 55
+	Health:
+		HP: 77000
+	ChangesHealth@SelfHealing:
+		Step: 77
+	Armament@PRIMARY:
+		Weapon: RA2FreedomAK47
+		LocalOffset: 128,0,256
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2FreedomAK47E
+		LocalOffset: 128,0,256
+		RequiresCondition: rank-elite
+	Armament@ROCKET:
+		Weapon: RA2FreedomRocket
+		LocalOffset: 250,0,400
+		Name: secondary
+		RequiresCondition: !rank-elite
+	Armament@ROCKETELITE:
+		Weapon: RA2FreedomRocketE
+		LocalOffset: 250,0,400
+		Name: secondary
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2FreedomAK47
+		RequiresCondition: !rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2FreedomAK47E
+		RequiresCondition: rank-elite
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@RocketGARRISONED:
+		Name: garrisoned
+		Weapon: RA2FreedomRocket
+		RequiresCondition: !rank-elite
+	Armament@RocketGARRISONEDELITE:
+		Name: garrisoned
+		Weapon: RA2FreedomRocketE
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@DualWeapon:
+		Modifier: 50
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		AttackSequences:
+			secondary: arrow
+		RequiresCondition: !tree
+	Voiced:
+		VoiceSet: LatinRamboVoice
+	GrantConditionOnPrerequisite@uplatin_alliedstolentech:
+		Condition: uplatin_alliedstolentech
+		Prerequisites: uplatin_alliedstolentech
+	Mirage:
+		RequiresCondition: !disabled && uplatin_alliedstolentech
+		InitialDelay: 25
+		RevealDelay: 25
+		RevealOn: Attack, Move, Damage, SelfHeal
+		MirageCondition: tree
+		DefaultTargetTypes: t08, t10, t03, t02
+	WithMirageSpriteBody:
+		Name: tree
+		RequiresCondition: tree && uplatin_alliedstolentech
+		IsPlayerPalette: false
+		Palette: ra_temperat
+	GrantConditionOnAttack@gatling:
+		RequiresCondition: !rank-elite && latin_up_chaingun
+	GrantConditionOnAttack@elitegatling:
+		RequiresCondition: rank-elite && latin_up_chaingun
+	GrantConditionOnPrerequisite@latin_up_chaingun:
+		Condition: latin_up_chaingun
+		Prerequisites: latin_up_chaingun
+	ActorStatValues:
+		Upgrades: uplatin_mili, latin_up_chaingun, uplatin_alliedstolentech, latin_up_hotfire
+
+latin_mortarbike:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MortarInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
+		BuildPaletteOrder: 30
+		Prerequisites: ~uplatin_mortarbike
+		Description: actor-latin_mortarbike.description
+	Tooltip:
+		Name: Mortar Bike
+	Valued:
+		Cost: 500
+	Health:
+		HP: 28000
+	Repairable:
+		HpPerStep: 1400
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Mobile:
+		Speed: 140
+		TurnSpeed: 56
+	Armament:
+		Weapon: RA2MortarBike
+		LocalOffset: 222,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2MortarBikeE
+		LocalOffset: 222,0,400
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@Mortar:
+		Modifier: 50
+	FireWarheadsOnDeathCA@Mortar:
+		Weapon: RA2MortarBike
+		RequiresCondition: !disabled
+	AttackFrontal:
+		FacingTolerance: 0
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	FirepowerMultiplier@latin_up_hotfire:
+		Modifier: 200
+		RequiresCondition: latin_up_hotfire
+	RangeMultiplier@latin_up_hotfire:
+		Modifier: 110
+		RequiresCondition: latin_up_hotfire
+	SpeedMultiplier@latin_up_hotfire:
+		Modifier: 120
+		RequiresCondition: latin_up_hotfire
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: uplatin_cashrecover, latin_up_industrial, uplatin_alliedstolentech, latin_up_hotfire
+
+ra2engineer.syndicate:
+	Inherits: RA2ENGINEER
+	Buildable:
+		Prerequisites: ~latin_cgpile
+		Queue: Infantry, RAInfantry
+	Voiced:
+		VoiceSet: LatinEngVoice
+	RenderSprites:
+		Image: ra2engineer
+	Captures:
+		Voice: Attack
+	Captures@REUSABLE:
+		Voice: Attack
+
+latin_ra2terror:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Inherits@EliteGuerillas: ^LatinEliteGuerillas
+	Tooltip:
+		Name: Terrorist
+	Valued:
+		Cost: 200
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~uplatin_ra2terror
+		Queue: Infantry, RAInfantry
+		Description: actor-terror.description
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 15
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: RA2Terrorist
+		EmptyWeapon: RA2Terrorist
+		RequiresCondition: !disabled
+	FirepowerMultiplier@latin_up_hotfire:
+		Modifier: 200
+	AttackFrontal:
+		FacingTolerance: 512
+	Armament@PRIMARY:
+		Weapon: SuicideBomberTargeting
+	GrantConditionOnAttack:
+		Condition: triggered
+		RequiresCondition: !disabled
+	KillsSelf:
+		RequiresCondition: triggered && !disabled
+	WithInfantryBody:
+	Voiced:
+		VoiceSet: RA2TerroristVoice
+	DeliversCash:
+		Payload: 60
+	-TakeCover:
+	Captures:
+		CaptureTypes: bombcar
+		PlayerExperience: 50
+		ConsumedByCapture: True
+		EnterCursor: c4
+	ActorStatValues:
+		Upgrades: uplatin_mili, latin_up_hotfire
+	RenderSprites:
+		Image: ra2terror #placeholder
+	GrantExternalConditionToTransport:
+		Condition: ifv-demo

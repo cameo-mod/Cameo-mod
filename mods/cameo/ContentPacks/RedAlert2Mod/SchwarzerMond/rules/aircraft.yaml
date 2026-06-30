@@ -1,0 +1,209 @@
+nax2_zep:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Valued:
+		Cost: 6000
+	Tooltip:
+		Name: Space Zeppelin
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: nax_zep
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~nax2_airfield, ~nax2_radar
+		Queue: Aircraft, RAAircraft, Vehicle
+		Description: actor-shad.description
+	Aircraft:
+		TurnSpeed: 35
+		Speed: 35
+		AltitudeVelocity: 0c50
+		RepulsionSpeed: 15
+	Health:
+		HP: 1350000
+	Repairable:
+		HpPerStep: 2625
+	ChangesHealth@SelfHealing:
+		Step: 21
+	Armament:
+		Name: primary
+		Weapon: NaxiBeetleLaser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: NaxiBeetleLaser
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite
+	Armament@AA:
+		Name: primary
+		Weapon: NaxiBeetleLaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: !rank-elite
+	Armament@eliteAA:
+		Name: primary
+		Weapon: NaxiBeetleLaserAA
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 512,200,80, 512,-200,80, 512,200,280, 512,-200,280
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	Cargo:
+		InitialUnits: nax_lunar, nax_lunar, nax_lunar, nax_lunar, nax_lunar2, nax_lunar2, nax2_panzer, nax2_panzer, nax2_panzer, nax2_panzer
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 12
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: nax2_zep.Husk
+	SelectionDecorations:
+	Selectable:
+		Class: ra2shad
+		DecorationBounds: 1280, 1024
+	RenderSprites:
+		Image: nax2_zep
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	FirepowerMultiplier@FirerateCompensation:
+		Modifier: 50
+nax2_zep.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Transport Zeppelin
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: nax2_zep
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+nax2_bbomb:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@turnanimation: ^RA2PlanewithTurnAnimation
+	Inherits@eject: ^AircraftEjectOnDeath
+	Selectable:
+	Tooltip:
+		Name: Black Bomb
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~nax2_airfield, ~nax2_tech
+		Queue: Aircraft, RAAircraft
+		Description: actor-nax_piercer.description
+	Health:
+		HP: 37500
+	ChangesHealth@SelfHealing:
+		Step: 7
+	HitShape:
+	Voiced:
+		VoiceSet: NaxiPiercerUFOVoice
+	Aircraft:
+		TurnSpeed: 10
+		Speed: 75
+		IdleTurnSpeed: 8
+		IdleSpeed: 120
+		RepulsionSpeed: 30
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 100
+	GrantConditionOnAttack:
+		Condition: triggered
+	GrantConditionOnDeploy:
+		DeployedCondition: triggered
+		PauseOnCondition: disabled
+		ExclusiveDeploy: true
+		DeployType: Detonate
+	KillsSelf:
+		RequiresCondition: !disabled && triggered
+	Armament@PRIMARY:
+		Weapon: DemoTruckTargeting
+	AutoTarget:
+		InitialStance: Defend
+		InitialStanceAI: AttackAnything
+		ScanRadius: 10
+	SpawnActorOnDeath:
+		Actor: nax2_bbomb.Husk
+		Offset: 0,0
+	SpawnActorOnDeath@1:
+		Actor: nax2_bbomb2.Husk
+		Offset: 48,48
+	SpawnActorOnDeath@2:
+		Actor: nax2_bbomb3.Husk
+		Offset: -48,-48
+	RenderSprites:
+		Image: nax2_bbomb
+		PlayerPalette: playerra2
+	EjectOnDeath:
+		PilotActor: nax_alien
+
+nax2_bbomb.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Black Bomb
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 150
+	RenderSprites:
+		Image: nax_miniv2
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 80
+		Explosion: NaxisBlackBomb
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+nax2_bbomb2.Husk:
+	Inherits: nax2_bbomb.Husk
+	Tooltip:
+		Name: Black Bomb
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 125
+	FallsToEarth:
+		Velocity: 90
+nax2_bbomb3.Husk:
+	Inherits: nax2_bbomb.Husk
+	Tooltip:
+		Name: Black Bomb
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 100
+	FallsToEarth:
+		Velocity: 100
+####################################################################################################
+#		Red Alert 2 Future Structures
+####################################################################################################

@@ -1,0 +1,24 @@
+World:
+	FactionCA@asianalliance:
+		Name: Asian Alliance
+		InternalName: asianalliance
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction-ra2-asianalliance.description
+	StartingUnits@mcvasianalliance:
+		Class: none
+		ClassName: MCV Only
+		Factions: asianalliance
+		BaseActor: aa_acv
+	StartingUnits@defaultasianalliance:
+		Class: light
+		ClassName: Light Support
+		Factions: asianalliance
+		BaseActor: aa_acv
+		SupportActors: aa_gren,aa_gren,aa_gren,aa_tkiller,aa_tkiller,aa_quas,aa_lynx
+	StartingUnits@heavyasianalliance:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: asianalliance
+		BaseActor: aa_acv
+		SupportActors: aa_gren,aa_gren,aa_gren,aa_tkiller,aa_tkiller,aa_quas,aa_lynx,aa_lynx,aa_lynx,aa_ptnk,aa_quas

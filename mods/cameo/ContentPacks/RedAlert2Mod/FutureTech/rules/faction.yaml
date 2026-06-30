@@ -1,0 +1,24 @@
+World:
+	FactionCA@futuretech:
+		Name: FutureTech
+		InternalName: futuretech
+		Game: RA2 expanded
+		Side: RA2 Mod
+		Description: faction-ra2-futuretech.description
+	StartingUnits@mcvfuturetech:
+		Class: none
+		ClassName: MCV Only
+		Factions: futuretech
+		BaseActor: futu_mcv
+	StartingUnits@defaultfuturetech:
+		Class: light
+		ClassName: Light Support
+		Factions: futuretech
+		BaseActor: futu_mcv
+		SupportActors: futu_wheel,futu_wheel,futu_wheel,future_robot_missiles,future_robot_missiles,future_robot_cannon,future_robot_cannon
+	StartingUnits@heavyfuturetech:
+		Class: heavy
+		ClassName: Heavy Support
+		Factions: futuretech
+		BaseActor: futu_mcv
+		SupportActors: futu_wheel,futu_wheel,futu_wheel,future_robot_missiles,future_robot_missiles,future_robot_cannon,future_robot_cannon,future_robot_cannon,future_robot_cannon,future_robot_cannon,future_robot_missiles

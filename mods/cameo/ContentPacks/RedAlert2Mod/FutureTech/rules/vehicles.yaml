@@ -1,0 +1,1314 @@
+futu_mcv:
+	Inherits: ^Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@mcv: ^MCV
+	Inherits@SHADOWS: ^Shadows
+	Tooltip:
+		Name: FutureTech Mobile Construction Vehicle
+	Buildable:
+		Prerequisites: ~futu_egtf
+		Description: actor-futu_mcv.description
+	Transforms:
+		IntoActor: futu_egcnst
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: uplace.wav
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: AlliedMCV
+	ProvidesPrerequisite@faction:
+		Prerequisite: mmfuture
+	RenderSprites:
+		PlayerPalette: playerra2
+
+futu_engi:
+	Inherits: ^Walker
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@RobotControllable: ^RobotControllable
+	Tooltip:
+		Name: Repair Droid
+	Valued:
+		Cost: 800
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~yrgarobo
+		Queue: Infantry, RAInfantry
+		Description: actor-futu_engi.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Plate
+	Armament:
+		Name: primary
+		Weapon: RA2IFVRepair
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 5
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
+		CaptureDelay: 375
+		ConsumedByCapture: False
+		EnterCursor: ability
+		EnterBlockedCursor: move-blocked
+		Voice: Move
+	RenderSprites:
+		Image: futu_engi
+
+futu_wheel:
+	Inherits: ^Walker
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@FE: ^FutureRobotEnergizable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Scout Droid
+	Valued:
+		Cost: 200
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~yrgarobo
+		Queue: Infantry, RAInfantry
+		Description: actor-futu_wheel.description
+	Mobile:
+		Speed: 70
+		TurnSpeed: 28
+		Locomotor: chem
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: Future_Wheel_MG
+		LocalOffset: 200,200,600, 200,-200,600
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: Future_Wheel_MGE
+		LocalOffset: 200,200,600, 200,-200,600
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+		CargoType: Infantry
+	Voiced:
+		VoiceSet: FutureRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantExternalConditionToTransport:
+		Condition: ifv-mg
+
+future_robot_shotgun:
+	Inherits: ^Walker
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@FE: ^FutureRobotEnergizable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Shotgun Droid
+	Valued:
+		Cost: 400
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~yrgarobo, futu_egtf
+		Queue: Infantry, RAInfantry
+		Description: actor-future_robot_shotgun.description
+	Mobile:
+		Speed: 55
+		TurnSpeed: 22
+		Locomotor: chem
+	Health:
+		HP: 55000
+	Repairable:
+		HpPerStep: 2750
+	ChangesHealth@SelfHealing:
+		Step: 22
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Weapon: ShotgunAttackRobotGun
+		LocalOffset: 400,125,175
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: ShotgunAttackRobotGunE
+		LocalOffset: 400,125,175
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+		CargoType: Infantry
+	Voiced:
+		VoiceSet: FutureRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantExternalConditionToTransport:
+		Condition: ifv-mg
+
+future_robot_missiles:
+	Inherits: ^Walker
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@FE: ^FutureRobotEnergizable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Missile Droid
+	Valued:
+		Cost: 600
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~yrgarobo, futu_egtech
+		Queue: Infantry, RAInfantry
+		Description: actor-future_robot_missiles.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: chem
+	Health:
+		HP: 67500
+	Repairable:
+		HpPerStep: 3375
+	ChangesHealth@SelfHealing:
+		Step: 27
+	Armor:
+		Type: Flak
+	Armament@PRIMARY:
+		Weapon: MissileAttackRobotGun
+		LocalOffset: 200,150,400, 200,-150,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: MissileAttackRobotGunE
+		LocalOffset: 200,150,400, 200,-150,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+		CargoType: Infantry
+	Voiced:
+		VoiceSet: FutureRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantExternalConditionToTransport:
+		Condition: ifv-miss
+
+future_robot_cannon:
+	Inherits: ^Walker
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@FE: ^FutureRobotEnergizable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Cannon Droid
+	Valued:
+		Cost: 525
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~yrgarobo, futu_egshock
+		Queue: Infantry, RAInfantry
+		Description: actor-future_robot_cannon.description
+	Mobile:
+		Speed: 35
+		TurnSpeed: 14
+		Locomotor: chem
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armor:
+		Type: Plate
+	Armament@PRIMARY:
+		Weapon: CannonAttackRobotGun
+		LocalOffset: 400,125,175
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: CannonAttackRobotGunE
+		LocalOffset: 400,125,175
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+		CargoType: Infantry
+	Voiced:
+		VoiceSet: FutureRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantExternalConditionToTransport:
+		Condition: ifv-cannon
+
+future_mech_machinegun:
+	Inherits: ^Walker
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@UpGat: ^GatlingSpeedUpUnitBehavior
+	Inherits@RobotControllable: ^RobotControllable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Gun Strider
+	Valued:
+		Cost: 2500
+	Selectable:
+		Bounds: 1440, 1440, 0, -144
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~futu_egtech
+		Queue: Vehicle, RAVehicle
+		Description: actor-future_mech_machinegun.description
+	Mobile:
+		Speed: 35
+		TurnSpeed: 14
+		Locomotor: tracked
+	Health:
+		HP: 320000
+	Repairable:
+		HpPerStep: 16000
+	ChangesHealth@SelfHealing:
+		Step: 128
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: FutureMechGatling
+		LocalOffset: 200,300,500, 200,-300,500
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 4
+	Voiced:
+		VoiceSet: AsianAllianceRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+future_mech_plasma:
+	Inherits: ^Walker
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@RobotControllable: ^RobotControllable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Plasma Strider
+	Valued:
+		Cost: 2600
+	Selectable:
+		Bounds: 1440, 1440, 0, -144
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~futu_egshock
+		Queue: Vehicle, RAVehicle
+		Description: actor-future_mech_plasma.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 240000
+	Repairable:
+		HpPerStep: 12000
+	ChangesHealth@SelfHealing:
+		Step: 96
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Weapon: FutureMechPlasma
+		LocalOffset: 100,190,800, 100,-190,800
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: FutureMechPlasmaE
+		LocalOffset: 100,190,800, 100,-190,800
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 4
+	Voiced:
+		VoiceSet: AsianAllianceRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+
+futu_ifv:
+	Inherits: RA2FV
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Salamander IFV
+	Valued:
+		Cost: 950
+	Buildable:
+		Prerequisites: ~futu_egweap2
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_ifv.description
+	Mobile:
+		Speed: 150
+		TurnSpeed: 30
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	FirepowerMultiplier@futu_ifv:
+		Modifier: 150
+	Turreted:
+		TurnSpeed: 30
+		Offset: -270,0,1
+	Selectable:
+		Class: futu_ifv
+	Voiced:
+		VoiceSet: FutureIFVVoice
+
+YRROBO:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@RobotControllable: ^RobotControllable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Robot Tank
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~futu_egtech
+		Queue: Vehicle, RAVehicle
+		Description: actor-robo.description
+	Mobile:
+		Locomotor: hover
+		Speed: 130
+		TurnSpeed: 26
+		PauseOnCondition: !robotcontrol || disabled
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 26 #3
+	Armament:
+		Name: primary
+		Weapon: RA2Robotmm
+		Recoil: 85
+		RecoilRecovery: 25
+		LocalOffset: 800,0,-250
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: RA2Robotmm_elite
+		Recoil: 85
+		RecoilRecovery: 25
+		LocalOffset: 800,0,-250
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+		PauseOnCondition: !robotcontrol || disabled
+	WithSpriteTurret:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: RobotTankVoice
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+		RequiresCondition: !disabled && robotcontrol
+	DeliversCash:
+		Payload: 300
+	-TemporaryOwnerManager:
+	Capturable:
+		Types: thiefproof
+	GrantConditionOnPrerequisite:
+		Condition: robotcontrol
+		Prerequisites: robotcontrol
+	WithColoredOverlay@disabled:
+		Color: 000000b4
+		RequiresCondition: disabled && !chronodisabled || !robotcontrol
+	RenderSprites:
+		PlayerPalette: playerra2
+
+futu_mbt:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 850
+	Tooltip:
+		Name: Guardian Tank
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~futu_egweap2
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_mbt.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 85
+		TurnSpeed: 17
+	Health:
+		HP: 115000
+	Repairable:
+		HpPerStep: 5750
+	ChangesHealth@SelfHealing:
+		Step: 46
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 17
+		Offset: -40,0,0
+	BodyOrientation:
+		QuantizedFacings: 32
+		CameraPitch: 85
+		UseClassicPerspectiveFudge: false
+	RenderVoxels:
+		NormalsPalette: normals
+		PlayerPalette: playerra2
+		Scale: 9.2
+	WithVoxelBody:
+	WithVoxelTurret:
+	WithShadow:
+	-WithFacingSpriteBody:
+	RenderSprites:
+		PlayerPalette: playerra2
+	Armament:
+		Name: primary
+		Weapon: GuardianTankCannon
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1720,0,440
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: GuardianTankCannonE
+		Recoil: 128
+		RecoilRecovery: 38
+		LocalOffset: 1720,0,440
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	Armament@debuff:
+		Name: primary
+		Weapon: Future_MBT_DebuffLaser
+		LocalOffset: 160,0,700
+		RequiresCondition: deployed
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	Voiced:
+		VoiceSet: FutureGuardianVoice
+	GrantConditionOnDeploy:
+		DeployedCondition: deployed
+		UndeployedCondition: undeployed
+		DeploySounds: iggidepa.wav
+		UndeploySounds: iggidepa.wav
+		CanDeployOnRamps: True
+		SmartDeploy: True
+		Facing: 384
+		UndeployOnMove: false
+		RequiresCondition: !parachute
+		PauseOnCondition: disabled
+		Voice: Move
+	SpeedMultiplier@Laser:
+		RequiresCondition: deployed
+		Modifier: 90
+	ReloadDelayMultiplier@Laser:
+		RequiresCondition: deployed
+		Modifier: 150
+
+futu_hvrt:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 1700
+	Tooltip:
+		Name: Riptide ACV
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~futu_egweap2
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_hvrt.description
+	Mobile:
+		Speed: 105
+		TurnSpeed: 21
+		Locomotor: hover
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+	Health:
+		HP: 65000
+	Repairable:
+		HpPerStep: 3250
+	ChangesHealth@SelfHealing:
+		Step: 26
+	Turreted:
+		TurnSpeed: 21
+		Offset: -150,0,5
+	Armament@AG:
+		Weapon: ACV_Machinegun
+		LocalOffset: 150,0,0
+		Recoil: 85
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water
+	Armament@WATER:
+		Weapon: FutureMicrotorpedos
+		LocalOffset: 256,-128,0, 256,128,0
+		RequiresCondition: inwater
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: futu_hvrt
+		PlayerPalette: player_rgba
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: FutureACVVoice
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		InitialUnits: futu_enforcer, futu_enforcer, futu_enforcer, futu_javelinsoldier, futu_javelinsoldier
+
+futu_phal:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Phalanx (WIP)
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~futu_egtech
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_phal.description
+	Mobile:
+		Speed: 90
+		TurnSpeed: 19
+		Locomotor: hover
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	Armor:
+		Type: Medium
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Turreted:
+		TurnSpeed: 12
+		Offset: -150,0,5
+	Armament:
+		Weapon: RA2RTruckRocket
+		LocalOffset: -500,250,0, -500,0,125, -500,-250,250, -500,250,0, -500,0,125, -500,-250,250
+	Armament@PRIMARYELITE:
+		Weapon: RA2RTruckRocket
+		LocalOffset: -500,-250,250, -500,0,125, -500,250,0, -500,-250,250, -500,0,125, -500,250,0
+		RequiresCondition: rank-elite
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water
+	Armament@WATER:
+		Weapon: FutureMicrotorpedos
+		LocalOffset: 256,-128,0, 256,128,0
+	WithMuzzleOverlay:
+	AttackTurreted:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		Image: futu_phal
+		PlayerPalette: player_rgba
+	WithSpriteTurret:
+	Voiced:
+		VoiceSet: FutureACVVoice
+	PortableChronoCA:
+		ChargeDelay: 750
+		HasDistanceLimit: false
+		FlashScreen: true
+		ChronoshiftSound: chrono2.aud
+
+futu_landcarr:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 2100
+	Tooltip:
+		Name: Beehive Drone Carrier
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~futu_egshock
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_landcarr.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 45
+		TurnSpeed: 12
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6500
+	ChangesHealth@SelfHealing:
+		Step: 52
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 12
+		Offset: 0,0,0
+	BodyOrientation:
+		QuantizedFacings: 32
+		CameraPitch: 85
+		UseClassicPerspectiveFudge: false
+	RenderVoxels:
+		NormalsPalette: normals
+		PlayerPalette: playerra2
+		Scale: 1
+	WithVoxelBody:
+	WithShadow:
+	-WithFacingSpriteBody:
+	RenderSprites:
+		PlayerPalette: playerra2
+	Armament@PRIMARY:
+		Weapon: BeehiveCarrierTarget
+		ReloadDelay: 150
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 800, 800, 0, -125
+	Voiced:
+		VoiceSet: BeehiveCarrierVoice
+	CarrierMaster:
+		Actors: futu_landcarr_drone, futu_landcarr_drone, futu_landcarr_drone
+		RearmTicks: 25
+		RespawnTicks: 150
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Exit@0:
+		SpawnOffset: 0,0,0
+		Facing: 0
+	Exit@1:
+		SpawnOffset: 0,0,0
+		Facing: 0
+	Exit@2:
+		SpawnOffset: 0,0,0
+		Facing: 0
+
+futu_landcarr_drone:
+	Inherits: ra2hornet
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	Aircraft:
+		VTOL: true
+	-AutoTarget:
+	AutoTarget:
+		InitialStanceAI: Defend
+		InitialStance: Defend
+		ScanRadius: 12
+	CarrierSlave:
+		LandingDistance: 0
+
+futu_orion:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Valued:
+		Cost: 3600
+	Tooltip:
+		Name: Orion Tank
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~futu_egtech
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_orion.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 180000
+	Repairable:
+		HpPerStep: 9000
+	ChangesHealth@SelfHealing:
+		Step: 72
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 12
+		Offset: -40,0,0
+	BodyOrientation:
+		QuantizedFacings: 32
+		CameraPitch: 85
+		UseClassicPerspectiveFudge: false
+	RenderVoxels:
+		NormalsPalette: normals
+		PlayerPalette: playerra2
+		Scale: 1
+	WithVoxelBody:
+	WithVoxelTurret:
+	WithShadow:
+	-WithFacingSpriteBody:
+	RenderSprites:
+		PlayerPalette: playerra2
+	Armament:
+		Name: primary
+		Weapon: OrionRailgun
+		Recoil: 200
+		RecoilRecovery: 45
+		LocalOffset: 1000,0,325
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: OrionRailgunE
+		Recoil: 200
+		RecoilRecovery: 45
+		LocalOffset: 1000,0,325
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 900, 900, 0, -125
+	Voiced:
+		VoiceSet: OrionTankVoice
+
+futu_harv:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Prospector
+	Harvester:
+		Voice: Harvest
+		PipCount: 10
+		BaleLoadDelay: 4
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 32
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Buildable:
+		Prerequisites: ~futu_egrefn
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_harv.description
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	DockClientManager:
+		Voice: Deliver
+	Voiced:
+		VoiceSet: ChronoMinerVoice
+	RenderSprites:
+		Image: futu_harv
+		PlayerPalette: player_rgba
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+
+futu_harv2:
+	Inherits: ^Tank
+	Inherits@Template: ^HarvesterTemplate
+	Inherits@selection: ^SelectableEconomicUnit
+	Inherits@harv: ^Harvester
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Valued:
+		Cost: 1200
+	Tooltip:
+		Name: Prospector MK2
+	Harvester:
+		Voice: Harvest
+		PipCount: 10
+		BaleLoadDelay: 4
+		BaleUnloadDelay: 2
+		EmptyCondition: no-tiberium
+	StoresResources:
+		Capacity: 32
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Armor:
+		Type: Medium
+	Mobile:
+		Speed: 120
+		TurnSpeed: 24
+		Locomotor: hover
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+	Buildable:
+		Prerequisites: ~futu_egtech
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_harv2.description
+	WithHarvestAnimation:
+	WithDockingAnimation:
+	DockClientManager:
+		Voice: Deliver
+	Voiced:
+		VoiceSet: ChronoMinerVoice
+	RenderSprites:
+		Image: futu_harv2
+		PlayerPalette: player_rgba
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	RevealsShroud:
+		Range: 7500
+		RequiresCondition: !disabled
+	RevealsShroud@Offline:
+		Range: 5000
+		RequiresCondition: disabled
+	DetectCloaked:
+		Range: 7500
+		RequiresCondition: !disabled
+	RangedGpsProvider:
+		Range: 15000
+		RequiresCondition: !disabled
+	RenderDetectionCircle:
+	WithRangeCircle:
+		Range: 15000
+		Color: FF000088
+		RequiresCondition: !disabled
+
+futu_athena:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Athena Cannon
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~futu_egtf
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_athena.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 12
+	Health:
+		HP: 62500
+	Repairable:
+		HpPerStep: 3125
+	Armor:
+		Type: Medium
+	Armament@AG:
+		Name: athena-beam
+		Weapon: AthenaLaser
+		LocalOffset: 400,0,300
+		RequiresCondition: athena-charged == 1
+	Armament@VISUAL:
+		Name: primary
+		Weapon: AthenaVisualLaser
+		LocalOffset: 400,0,300
+	AttackFrontal:
+		Armaments: primary, athena-beam
+	GrantConditionOnAttack@CHARGE:
+		Condition: athena-charged
+		ArmamentNames: primary
+		RequiredShotsPerInstance: 25
+		MaximumInstances: 1
+		RevokeDelay: 5
+		RevokeOnNewTarget: true
+		RevokeAll: true
+		ShowSelectionBar: true
+		SelectionBarColor: 83B9FC
+		RequiresCondition: !athena-recharging
+	GrantConditionOnAttackCA@RECHARGE:
+		Condition: athena-recharging
+		ArmamentNames: athena-beam
+		RequiredShotsPerInstance: 1
+		MaximumInstances: 1
+		RevokeDelay: 100
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: FutureAnthenaVoice
+
+futu_coiler:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AutoRepair: ^PrioritizeRepair
+	Inherits@EMP: ^FrontalEMP
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 170
+		Prerequisites: ~futu_egshock
+		Description: actor-futu_coiler.description
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Energizer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Light
+	Mobile:
+		Speed: 50
+		TurnSpeed: 20
+	Armament@Agressive:
+		Name: primary
+		Weapon: Future_CoilerAgressive
+		ForceTargetRelationships: Enemy, Neutral
+		LocalOffset: 0,0,250
+	Armament@Support:
+		Name: repair
+		Weapon: Future_CoilerFriendMain
+		TargetRelationships: Ally
+		ForceTargetRelationships: Ally
+		LocalOffset: 0,0,250
+	AttackFrontal:
+		FacingTolerance: 0
+		Armaments: primary,repair
+	AutoTargetPriority@Repair:
+		ValidTargets: RobotEnergizable
+	Turreted:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: FutureCoilerVoice
+	FireWarheadsOnDeath:
+		Weapon: UnitExplode
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+futu_futu:
+	Inherits: ^Tank
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@SHADOWS: ^Shadows
+	Inherits@announce: ^AnnounceOnBuild
+	Inherits@RobotControllable: ^RobotControllable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Valued:
+		Cost: 10000
+	Tooltip:
+		Name: Future Tank
+	Buildable:
+		BuildPaletteOrder: 200
+		BuildLimit: 1
+		Prerequisites: ~futu_egshock, yrgarobo
+		Queue: Vehicle, RAVehicle
+		Description: actor-futu_futu.description
+	Mobile:
+		Locomotor: tracked
+		Speed: 45
+		TurnSpeed: 9
+	Health:
+		HP: 650000
+	Repairable:
+		HpPerStep: 32500
+	ChangesHealth@SelfHealing:
+		Step: 260
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 9 #3
+		Offset: 75,0,1
+	Armament:
+		Name: primary
+		Weapon: FutureTankCannons
+		LocalOffset: 400,400,400, 400,-400,400
+		Recoil: 128
+		RecoilRecovery: 38
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@elite:
+		Name: primary
+		Weapon: FutureTankCannonsE
+		LocalOffset: 400,400,400, 400,-400,400
+		Recoil: 128
+		RecoilRecovery: 38
+		MuzzleSequence: muzzle-2
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@MultiWeapon:
+		Modifier: 25
+	AttackTurreted:
+		PauseOnCondition: !robotcontrol || disabled
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	WithSpriteTurret@default:
+		Sequence: turret
+	Voiced:
+		VoiceSet: FutureTankVoice
+	DeliversCash:
+		Payload: 350
+	RenderSprites:
+		PlayerPalette: player_rgba
+
+####################################################################################################
+#		Red Alert 2 Future Aircraft
+####################################################################################################

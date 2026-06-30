@@ -1,0 +1,165 @@
+nax2_uber:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@PUpgrade: ^NaxiGreenPlasmaUpgrade
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Übermensch
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~nax2_tech
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 64
+	Health:
+		HP: 64000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armament@PRIMARY:
+		Weapon: ÜbermenschLaser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: ÜbermenschLaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: ÜbermenschLaser
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: ÜbermenschLaserE
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	Crushable:
+		CrushClasses: vehicle
+	Voiced:
+		VoiceSet: NaxiUbermenVoice
+
+nax2_parv:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^RA2Infantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@announce: ^AnnounceGlobal
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Parzival
+	Buildable:
+		BuildLimit: 1
+		BuildPaletteOrder: 100
+		Prerequisites: ~nax2_tech
+		Queue: Infantry, RAInfantry
+		Description: template-scout-infantry.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Armament@PRIMARY:
+		Weapon: BlackHoleMaker
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: BlackHoleMakerE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: BlackHoleMaker
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@GARRISONEDELITE:
+		Name: garrisoned
+		Weapon: BlackHoleMakerE
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+		FacingTolerance: 0
+	AnnounceOnKill:
+	Voiced:
+		VoiceSet: NaxiUbermenVoice
+
+nax2_armor_mg:
+	Inherits: ^Walker
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@LUpgrade: ^NaxiYellowLaserUpgrade
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Noid MG Armor
+	Buildable:
+		BuildPaletteOrder: 75
+		Prerequisites: ~nax2_radar
+		Queue: Infantry, RAInfantry
+		Description: actor-aamecha.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: tracked
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Superheavy
+	Armament@PRIMARY:
+		Weapon: NaxiMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && !upnax2_ylaser
+	Armament@ELITE:
+		Weapon: NaxiMP40LaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && !upnax2_ylaser
+	Armament@PRIMARY_UP:
+		Weapon: Lunar_YellowMP40Laser
+		LocalOffset: 500,0,400
+		RequiresCondition: !rank-elite && upnax2_ylaser
+	Armament@ELITE_UP:
+		Weapon: Lunar_YellowMP40LaserE
+		LocalOffset: 500,0,400
+		RequiresCondition: rank-elite && upnax2_ylaser
+	AttackFrontal:
+		FacingTolerance: 20
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+	Voiced:
+		VoiceSet: NaxiRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2

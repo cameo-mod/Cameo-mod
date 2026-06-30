@@ -1,0 +1,167 @@
+nax_conyard.infiltrated:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Stolen Naxis Buildings Plans
+	Buildable:
+		Description:
+	RenderSprites:
+	ProvidesPrerequisite@buildingname:
+		Prerequisite: nax_conyard
+	RenderSprites:
+		Image: nax_conyard
+
+upnax_resurrection:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Resurrection
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Infantry killed by small arms leave corpses that can resurrect as zombies.
+		Prerequisites: ~nax_tech, ~disabled
+	RenderSprites:
+		Image: nax_undead
+
+upnax_sarubia:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Sarubia Model
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		Description: Enables construction of the Sarubia.
+		Prerequisites: ~nax_conyard, !upnax_sarubia, rank1
+	RenderSprites:
+		Image: nax_sarubia
+	ProvidesPrerequisite:
+
+upnax_brad:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Donnerschlag Model and other advanced Missiles
+	Buildable:
+		BuildPaletteOrder: 113
+		Queue: Promotions
+		Description: Enables construction of the Donnerschlag.
+		Prerequisites: ~nax_conyard, upnax_sarubia, !upnax_brad, rank1
+	RenderSprites:
+		Image: nax_brad
+	ProvidesPrerequisite:
+
+upnax_shoe:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Shoe, Karn, and King
+	Buildable:
+		BuildPaletteOrder: 116
+		Queue: Promotions
+		Description: Enables construction of the Shoe Karn.
+		Prerequisites: ~nax_conyard, upnax_brad, !upnax_shoe, rank1
+	RenderSprites:
+		Image: nax_shoe
+	ProvidesPrerequisite:
+
+upnax_nokana:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Bosses Tanks
+	Buildable:
+		BuildPaletteOrder: 119
+		Queue: Promotions
+		Description: Enables construction of the Iron Nokana.
+		Prerequisites: ~nax_conyard, upnax_shoe, !upnax_nokana, rank1
+	RenderSprites:
+		Image: nax_nokana
+	ProvidesPrerequisite:
+
+#		Army
+upnax_kingtiger:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Generation II tanks
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		Description: Enables construction of King Tiger, Brummbar, and Jagdpanzer vehicles.
+		Prerequisites: ~nax_conyard, !upnax_kingtiger, rank1
+	RenderSprites:
+		Image: nax_kingtiger
+	ProvidesPrerequisite:
+
+upnax_sturmtiger:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Heavy Vehicles
+	Buildable:
+		BuildPaletteOrder: 114
+		Queue: Promotions
+		Description: Enables construction of Maus and Sturmtiger vehicles.
+		Prerequisites: ~nax_conyard, upnax_kingtiger, !upnax_sturmtiger, rank1
+	RenderSprites:
+		Image: nax_sturmtiger
+	ProvidesPrerequisite:
+
+upnax_paratanks:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Better Paratanks
+	Buildable:
+		BuildPaletteOrder: 117
+		Queue: Promotions
+		Description: Upgrades Paratanks Support with more units.
+		Prerequisites: ~nax_conyard, upnax_sturmtiger, !upnax_paratanks, rank1
+	RenderSprites:
+		Image: nax_tiger
+	ProvidesPrerequisite:
+
+upnax_ratte:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: The Ratte
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Promotions
+		Description: Enables construction of the Ratte.
+		Prerequisites: ~nax_conyard, upnax_paratanks, !upnax_ratte, rank1
+	RenderSprites:
+		Image: nax_ratte
+	ProvidesPrerequisite:
+
+#		Soldats
+upnax_merc:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Partisans
+	Buildable:
+		BuildPaletteOrder: 112
+		Queue: Promotions
+		Description: Enables construction of Partisan.
+		Prerequisites: ~nax_conyard, !upnax_merc, rank1
+	RenderSprites:
+		Image: nax_merc
+	ProvidesPrerequisite:
+
+upnax_shrek:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Shrek
+	Buildable:
+		BuildPaletteOrder: 115
+		Queue: Promotions
+		Description: Enables construction of Panzershrek.
+		Prerequisites: ~nax_conyard, upnax_merc, !upnax_shrek, rank1
+	RenderSprites:
+		Image: nax_shrek
+	ProvidesPrerequisite:
+
+nax_upgrade_me262:
+	Inherits: ^unit_upgrade_template
+	Tooltip:
+		Name: Unlock Me 262
+	Buildable:
+		Description: Upgrades the BF 109 to the Me 262
+		Prerequisites: ~nax_radar, !nax_upgrade_me262
+	RenderSprites:
+		Image: nax_me262

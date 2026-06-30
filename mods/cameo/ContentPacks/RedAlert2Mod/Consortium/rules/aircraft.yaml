@@ -1,0 +1,279 @@
+steel_inspect.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Empress Station
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_inspect
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+steel_twister:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^FighterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Tooltip:
+		Name: Twister
+	Valued:
+		Cost: 1000
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 100
+		Prerequisites: ~steel_conpad
+		Queue: Aircraft, RAAircraft
+		Description: actor-falc.description
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 10
+		Speed: 150
+		IdleTurnSpeed: 10
+		IdleSpeed: 100
+		TakeoffSounds: twisSounda.wav, twisSoundb.wav
+		LandingSounds: twisSounda.wav, twisSoundb.wav
+		CanHover: false
+		CanSlide: false
+		VTOL: true
+		Voice: Move
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: SteelTwisterMissiles
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		PauseOnCondition: !ammo
+		RequiresCondition: !rank-elite
+	Armament@PRIMARYELITE:
+		Name: primary
+		Weapon: SteelTwisterMissilesE
+		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225, 425,0,-225
+		LocalYaw: 100, -100, 50, -50, 0
+		PauseOnCondition: !ammo
+		RequiresCondition: rank-elite
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 42
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: steel_twister.Husk
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1024
+	Contrail@1:
+		Offset: -100,256,0
+		TrailLength: 15
+	Contrail@2:
+		Offset: -100,-256,0
+		TrailLength: 15
+	Voiced:
+		VoiceSet: SteelAircraftVoice
+	DeathSounds:
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		PlayerPalette: playerra2cons
+	ActorStatValues:
+		Upgrades: upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+
+steel_twister.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Twister
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 176
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_twister
+	RenderSprites:
+		PlayerPalette: playerra2cons
+
+steel_grun.Husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Flying Turret
+	Aircraft:
+		TurnSpeed: 24
+		Speed: 120
+	RenderSprites:
+		Image: steel_grun
+		PlayerPalette: playerra2rot
+	Turreted:
+
+steel_cargoship:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@cargo: ^CargoAircraft
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@bot: ^BotAutoDeployTransport
+	Inherits@SteelConsortiumPulseWeapons: ^SteelConsortiumPulseWeapons
+	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
+	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Cargo Ship
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~steel_conpad
+		Queue: Aircraft, RAAircraft
+		Description: actor-shad.description
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 100
+		AltitudeVelocity: 100
+		RepulsionSpeed: 50
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Weapon: SteelCargoshipCannons
+		LocalOffset: -150,-400,-25, -150,400,-25
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	WithMuzzleOverlay:
+	Cargo:
+		InitialUnits: steel_fedinf, steel_board_inf, steel_qinf, steel_fedinf, steel_board_inf, steel_qinf
+		Types: Infantry, Hacker, Fremen, Vehicle
+		MaxWeight: 6
+		AfterLoadDelay: 0
+		BeforeUnloadDelay: 0
+		AfterUnloadDelay: 0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	SpawnActorOnDeath:
+		Actor: steel_cargoship.Husk
+	SelectionDecorations:
+	Selectable:
+		Class: steel_cargoship
+		Bounds: 1536, 1536
+	RenderSprites:
+		Image: steel_cargoship
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: SteelConsortiumTankVoice
+	ActorStatValues:
+		Upgrades: upsteel_pulseweapons, upsteel_naniteinfusion, upsteel_ferrocrete, upsteel_shielresistance
+
+steel_cargoship.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cargo Ship
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_cargoship
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+steel_cruiser.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Cruiser
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 40
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_cruiser
+	ShakeOnDeath:
+	FallsToEarth:
+		Moves: false
+		Velocity: 43
+		Explosion: KirovExplode
+	WithShadow:
+	RenderSprites:
+		PlayerPalette: playerra2
+
+steel_cruiser_f.Husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Hornet
+	Aircraft:
+		TurnSpeed: 20
+		Speed: 186
+	LeavesTrails:
+		Offsets: -853,0,171
+		MovingInterval: 2
+		Image: smokey
+		StationaryInterval: 2
+		SpawnAtLastPosition: False
+		TrailWhileStationary: True
+		Type: CenterPosition
+	RenderSprites:
+		Image: steel_cruiser_f
+	RenderSprites:
+		PlayerPalette: playerra2
+
+#######################################
+# Steel Consortium Promotion Tree
+#######################################
+
+### Federation tree
