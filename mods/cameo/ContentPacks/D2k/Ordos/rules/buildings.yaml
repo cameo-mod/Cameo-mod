@@ -712,16 +712,16 @@ palace.ordos:
 			1: Produces saboteurs
 		Icons:
 			1: icon
-		IconImage: saboteur
+		IconImage: saboteur.ordos
 		AllowMultiple: True
 		PauseOnCondition: disabled
 		Prerequisites: palace
 			1: palace
-		Actors: trooper, trooper, saboteur, saboteur
+		Actors: trooper, trooper, saboteur.ordos, saboteur.ordos
 		Type: Saboteurs
 		ChargeInterval: 1500
 		AutoFire: true
-		OrderName: saboteur
+		OrderName: saboteur.ordos
 		SupportPowerPaletteOrder: 20
 		RequiresCondition: palace_saboteurs
 	RallyPoint:

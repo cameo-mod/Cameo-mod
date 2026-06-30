@@ -370,3 +370,16 @@ ATWR:
 		Range: 4386
 	ActorStatValues:
 		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
+
+CNCSYRD:
+	Inherits: RA1SYRD
+	Tooltip:
+		Name: GDI Naval Yard
+	Buildable:
+		Prerequisites: ~fact.gdi, proc.gdi, ~globalnaval
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	RenderSprites:
+		Image: cncsyrd
+		PlayerPalette: player_rgba

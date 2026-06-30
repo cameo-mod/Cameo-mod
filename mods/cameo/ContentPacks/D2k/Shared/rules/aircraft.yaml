@@ -149,19 +149,6 @@ frigate.paradrop:
 	RenderSprites:
 		Image: frigate
 
-ornithopter.husk:
-	Inherits: ^PlaneHusk
-	Tooltip:
-		Name: Ornithopter
-	Aircraft:
-		TurnSpeed: 20
-		Speed: 224
-	RenderSprites:
-		Image: ornithopter
-		PlayerPalette: playerd2k
-	FallsToEarth:
-		Explosion: D2KUnitExplodeMed
-
 carryall.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -193,84 +180,3 @@ carryall.huskVTOL:
 		PlayerPalette: playerd2k
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
-
-d2k_heavydrone.husk:
-	Inherits: ^SmallHelicopterHusk
-	Tooltip:
-		Name: Ix Heavy Drone
-	Aircraft:
-		TurnSpeed: 16
-		Speed: 186
-	RenderSprites:
-		Image: bomber.ixian
-		PlayerPalette: player_rgba
-
-d2k_farasha_drone:
-	Inherits: ^RANeutralPlane
-	Inherits@Template: ^BomberTemplate
-	Inherits@exp: ^GainsExperienceRA
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@Armor: ^D2K_GeneralPurposeArmor
-	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
-	Valued:
-		Cost: 1000
-	Tooltip:
-		Name: Alfayrus
-	Buildable:
-		Description: template-carrier-slave.description
-	Hovers:
-	Aircraft:
-		InitialFacing: 896
-		TurnSpeed: 32
-		Speed: 215
-		Repulsable: false
-		VTOL: false
-		CruiseAltitude: 1c256
-		TakeUpCellWhenLand: false
-	Targetable:
-		TargetTypes: Air
-	CarrierSlave:
-		LandingDistance: 6400
-	HasParent:
-	Health:
-		HP: 25000
-	ChangesHealth@SelfHealing:
-		Step: 10
-	Shielded:
-		InitialPercentageStrength: 100
-		MaxPercentageStrength: 100
-		RegenAmount: 20
-	Armament@PRIMARY:
-		Weapon: d2k_farasha_drone
-		LocalOffset: 150,0,0
-	AttackAircraft:
-		FacingTolerance: 40
-	Voiced:
-		VoiceSet: D2KVehicleVoice
-	RejectsOrders:
-	-ActorLostNotification:
-	-UpdatesPlayerStatistics:
-	HitShape:
-	-MapEditorData:
-	SpawnActorOnDeath:
-		Actor: d2k_farasha_drone.husk
-		OwnerType: InternalName
-		EffectiveOwnerFromOwner: true
-	FireProjectilesOnDeath:
-		Weapons: Debris, Debris2
-		Pieces: 1, 2
-		Range: 1c0, 3c0
-	ActorStatValues:
-		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
-
-d2k_farasha_drone.husk:
-	Inherits: ^PlaneHusk
-	Tooltip:
-		Name: Alfayrus
-	Aircraft:
-		TurnSpeed: 20
-		Speed: 260
-	RenderSprites:
-		Image: d2k_farasha_drone
-	FallsToEarth:
-		Explosion: D2KUnitExplodeSmall
