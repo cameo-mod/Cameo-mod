@@ -1,63 +1,9 @@
-corpse.nax:
-	Inherits: ^SpriteActor
-	RenderSprites:
-		Palette: ra2effect
-	Interactable:
-		Bounds: 768, 768, 0, -256
-	WithSpriteBody:
-	WithMakeAnimation:
-	WithDeathAnimation:
-		DeathSequencePalette: ra2effect
-		DeathPaletteIsPlayerPalette: false
-		UseDeathTypeSuffix: false
-		RequiresCondition: !revive
-	HiddenUnderFog:
-	OwnerLostAction:
-		Action: Kill
-	Mine:
-		CrushClasses: mine
-		DetonateClasses: mine
-		BlockFriendly: false
+hole_small.nax:
+	Inherits@1: hole.nax
 	Health:
-		HP: 75000
-		NotifyAppliedDamage: false
-	Armor:
-		Type: Light
-	Tooltip:
-		Name: Corpse
-	Targetable:
-		TargetTypes: Ground, Mine
-	Mobile:
-		Speed: 1
-		Locomotor: foot
-		PauseOnCondition: dontmove
-	GrantCondition:
-		Condition: dontmove
-	KillsSelf:
-		Delay: 500
-		DamageTypes: ZombieRevive
-		GrantsCondition: revive
-	SpawnActorOnDeath@NaxiRevive:
-		Actor: undead.nax
-		Probability: 100
-		DeathType: ZombieRevive
-		SpawnAfterDefeat: false
-	Voiced:
-		VoiceSet: NaxiZombie
-	DeathSounds:
-		Voice: Move
-		DeathTypes: ZombieRevive
-	RejectsOrders:
-	HitShape:
-	MapEditorData:
-		Categories: System
-
-corpse_big.nax:
-	Inherits: corpse.nax
-	Health:
-		HP: 150000
-	SpawnActorOnDeath@NaxiRevive:
-		Actor: frank.nax
+		HP: 25000
+	ChangesHealth:
+		Step: -100
 
 rifle.nax:
 	Inherits: ^Soldier
@@ -1022,6 +968,7 @@ conehead.nax:
 		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
 	RenderSprites:
 		PlayerPalette: player_rgba
+
 conehead2.nax:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
@@ -1184,3 +1131,146 @@ lunar2.nax:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: NaxiLunarTroopVoice
+
+hole.nax:
+	Inherits: ^EnergyEntity
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Armament:
+		Weapon: NaxiBlackholeShoot
+		LocalOffset: 0,0,5
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Mobile:
+		Locomotor: hover
+		Speed: 5
+		TurnSpeed: 255
+	RenderSprites:
+		Palette: ra2infantry
+	Health:
+		HP: 2400
+	ChangesHealth:
+		Step: -10
+		Delay: 1
+		StartIfBelow: 101
+	WithDeathAnimation:
+		FallbackSequence: die
+		UseDeathTypeSuffix: false
+		DeathSequencePalette: ra2infantry
+		DeathPaletteIsPlayerPalette: false
+	Tooltip:
+		Name: Black Hole
+	Targetable@BlackHole:
+		TargetTypes: BlackHole, Ground
+	Voiced:
+		VoiceSet: DinoVoice
+	-UpdatesPlayerStatistics:
+	-ActorLostNotification:
+	-MapEditorData:
+
+atankcann.nax:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@TankArsenalRenovation: ^TankArsenalRenovation
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Anti Tank Cannon
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~barr.nax
+		Queue: Infantry, RAInfantry
+		Description: actor-nax_atankcann.description
+	Mobile:
+		Locomotor: wheeled
+		Speed: 30
+		TurnSpeed: 12
+	Health:
+		HP: 17500
+	Repairable:
+		HpPerStep: 875
+	ChangesHealth@SelfHealing:
+		Step: 7
+	Armor:
+		Type: Light
+	Armament@PRIMARY:
+		Weapon: NaxiAntiTankCannon
+		LocalOffset: 300,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: NaxiAntiTankCannonE
+		LocalOffset: 300,0,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	AttackFrontal:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+
+bmwbike.nax:
+	Inherits: ^Tank
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@EMP: ^TurretEMP
+	Inherits@MassOpticsIntegration: ^MassOpticsIntegration
+	Valued:
+		Cost: 450
+	Tooltip:
+		Name: BMW Bike
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~weap.nax
+		Queue: Infantry, RAInfantry
+		Description: actor-nax_bmwbike.description
+	Mobile:
+		Locomotor: lighttracked
+		Speed: 125
+		TurnSpeed: 16
+	Health:
+		HP: 22000
+	Repairable:
+		HpPerStep: 4125
+	ChangesHealth@SelfHealing:
+		Step: 33
+	Armor:
+		Type: Light
+	Armament@AG:
+		Weapon: NaxiWW2MachinegunSmall
+		LocalOffset: 300,10,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	Armament@AA:
+		Weapon: NaxiWW2MachinegunSmallAA
+		LocalOffset: 300,10,300
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+	AttackTurreted:
+	Turreted:
+	WithMuzzleOverlay:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	RenderSprites:
+		PlayerPalette: playerra2
+	Voiced:
+		VoiceSet: NaxiTankVoice
+	ActorStatValues:
+		Upgrades: up_massopticsintegration.futu

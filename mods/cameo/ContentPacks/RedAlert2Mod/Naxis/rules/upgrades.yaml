@@ -77,6 +77,7 @@ up_nokana.nax:
 	ProvidesPrerequisite:
 
 #		Army
+
 up_kingtiger.nax:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
@@ -130,6 +131,7 @@ up_ratte.nax:
 	ProvidesPrerequisite:
 
 #		Soldats
+
 up_merc.nax:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
@@ -165,3 +167,59 @@ upgrade_me262.nax:
 		Prerequisites: ~radar.nax, !upgrade_me262.nax
 	RenderSprites:
 		Image: me262.nax
+
+miniv2.nax:
+	Inherits: ^ShootableMissile
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	CruiseMissile:
+		MaxAltitude: 2500
+		MinAirborneAltitude: 125
+		LaunchAngle: 125
+		Speed: 250
+		TurnSpeed: 25
+		LaunchSounds: vbooat1a.wav
+		MaxTargetMovement: 10000
+		TrackTarget: true
+		AirborneCondition: airborne
+	LeavesTrails:
+		Image: ra2_smokey
+		Palette: ra2effect
+		MovingInterval: 1
+		Type: CenterPosition
+		SpawnAtLastPosition: false
+		Offsets: -450, 0, 0
+	SpawnedExplodes:
+		Weapon: YRBoomerSCUD
+		EmptyWeapon: YRBoomerSCUD
+		#RequiresCondition: !airborne
+	MissileSpawnerSlave:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+	ActorStatValues:
+		Upgrades: up_wunderwaffe.futu
+
+sarubia_bomb.nax:
+	Inherits: ^ShootableMissile
+	Inherits@Wunderwaffe: ^Wunderwaffe
+	Health:
+		HP: 15000
+	BallisticMissileCA:
+		LaunchAngle: 5
+		Speed: 80
+		LaunchSounds: vdesatta.wav, vdesattb.wav
+	MissileSpawnerSlave:
+	SpawnedExplodes:
+		Weapon: NaxiJadgDestroyer
+		EmptyWeapon: NaxiJadgDestroyer
+	RenderSprites:
+		Image: sarubia_bomb.nax
+		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+	WithShadow:
+	Mine:
+		CrushClasses: mine
+		DetonateClasses: mine
+		BlockFriendly: true
+	ActorStatValues:
+		Upgrades: up_wunderwaffe.futu

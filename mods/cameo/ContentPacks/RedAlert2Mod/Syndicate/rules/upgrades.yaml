@@ -1,25 +1,3 @@
-cgcnst.latin:
-	Inherits: ra2gacnst
-	Inherits@sell: ^SyndicateSpawnActorsOnSell
-	Tooltip:
-		Name: Syndicate Construction Yard
-	Transforms:
-		IntoActor: mcv.latin
-	WithIdleOverlay@fans:
-	WithIdleOverlay@top:
-		Sequence: idle-top
-		RequiresCondition: !build-incomplete
-	WithIdleOverlay@normal:
-		Sequence: idle-normal
-		RequiresCondition: !build-incomplete
-	WithBuildingPlacedOverlay:
-		Sequence: build
-	Targetable@TechStealerInfiltrate:
-		TargetTypes: TechStealerInfiltrate
-	InfiltrateForSupportPower:
-		Proxy: cgcnst_infiltrated.latin
-		Types: TechStealerInfiltrate
-
 cgcnst_infiltrated.latin:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
@@ -31,22 +9,6 @@ cgcnst_infiltrated.latin:
 		Prerequisite: cgcnst.latin
 	RenderSprites:
 		Image: cgcnst.latin
-
-cgweap.latin:
-	Inherits: ^RA2DefaultWeap
-	Inherits@sell: ^SyndicateSpawnActorsOnSell
-	Tooltip:
-		Name: Syndicate Factory
-	Buildable:
-		Prerequisites: ~cgcnst.latin, cgauto.latin
-	WithIdleOverlay@lights:
-		Sequence: idle-lights
-		RequiresCondition: !build-incomplete
-	WithIdleOverlay@lights2:
-		Sequence: idle-lights2
-		RequiresCondition: !build-incomplete
-	WithIdleOverlay@bib:
-		Sequence: bib
 
 up_mortarbike.latin:
 	Inherits: ^promotion_upgrade.template
@@ -101,6 +63,7 @@ up_burrito.latin:
 	ProvidesPrerequisite:
 
 ### War tree
+
 up_buggy.latin:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
@@ -210,6 +173,7 @@ up_topol.latin:
 ##############################################
 #   Red Alert 2 Syndicate Upgrade
 ##############################################
+
 up_mili.latin:
 	Inherits: ^doctrine_template
 	Tooltip:
@@ -357,3 +321,29 @@ up_team_cashrecover.latin:
 	Buildable:
 		Description: upgrade-uplatin_cashrecover.description
 	PlayerDisplayUpgrade:
+
+deathcash.latin:
+	Inherits: RACAMERA
+	EditorOnlyTooltip:
+		Name: (Deathcash)
+	RevealsShroud:
+		Range: 2500
+	CashTrickler:
+		Interval: 25
+		Amount: 50
+	KillsSelf:
+		RemoveInstead: true
+		Delay: 125
+
+deathcash_small.latin:
+	Inherits: RACAMERA
+	EditorOnlyTooltip:
+		Name: (Deathcash)
+	RevealsShroud:
+		Range: 2500
+	CashTrickler:
+		Interval: 25
+		Amount: 25
+	KillsSelf:
+		RemoveInstead: true
+		Delay: 125

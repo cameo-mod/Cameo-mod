@@ -1,3 +1,66 @@
+mortarbike.latin:
+	Inherits: ^Vehicle
+	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^MortarInfantryTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@uprecover: ^LatinCashrecover
+	Inherits@flamerup: ^LatinFlameUpgrades
+	Buildable:
+		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
+		BuildPaletteOrder: 30
+		Prerequisites: ~up_mortarbike.latin
+		Description: actor-latin_mortarbike.description
+	Tooltip:
+		Name: Mortar Bike
+	Valued:
+		Cost: 500
+	Health:
+		HP: 28000
+	Repairable:
+		HpPerStep: 1400
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Mobile:
+		Speed: 140
+		TurnSpeed: 56
+	Armament:
+		Weapon: RA2MortarBike
+		LocalOffset: 222,0,400
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: RA2MortarBikeE
+		LocalOffset: 222,0,400
+		RequiresCondition: rank-elite
+	FirepowerMultiplier@Mortar:
+		Modifier: 50
+	FireWarheadsOnDeathCA@Mortar:
+		Weapon: RA2MortarBike
+		RequiresCondition: !disabled
+	AttackFrontal:
+		FacingTolerance: 0
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: LatinSoldierVoice
+	FirepowerMultiplier@up_hotfire.latin:
+		Modifier: 200
+		RequiresCondition: up_hotfire.latin
+	RangeMultiplier@up_hotfire.latin:
+		Modifier: 110
+		RequiresCondition: up_hotfire.latin
+	SpeedMultiplier@up_hotfire.latin:
+		Modifier: 120
+		RequiresCondition: up_hotfire.latin
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_hotfire.latin
+
 scrapcar.latin:
 	Inherits: ^CivilianVehicle
 	RenderSprites:
@@ -67,32 +130,6 @@ scrapcar2_driveby.latin:
 ##############################################
 #   Red Alert 2 Syndicate Units
 ##############################################
-
-deathcash.latin:
-	Inherits: RACAMERA
-	EditorOnlyTooltip:
-		Name: (Deathcash)
-	RevealsShroud:
-		Range: 2500
-	CashTrickler:
-		Interval: 25
-		Amount: 50
-	KillsSelf:
-		RemoveInstead: true
-		Delay: 125
-
-deathcash_small.latin:
-	Inherits: RACAMERA
-	EditorOnlyTooltip:
-		Name: (Deathcash)
-	RevealsShroud:
-		Range: 2500
-	CashTrickler:
-		Interval: 25
-		Amount: 25
-	KillsSelf:
-		RemoveInstead: true
-		Delay: 125
 
 mcv.latin:
 	Inherits: ^Vehicle

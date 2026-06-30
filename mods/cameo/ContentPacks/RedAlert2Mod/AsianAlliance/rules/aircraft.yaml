@@ -332,6 +332,7 @@ kami_asdf.asian:
 #######################################
 # RA2 Asian Husks
 #######################################
+
 kami_husk.asian:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -412,3 +413,55 @@ pelican_husk.asian:
 	RenderSprites:
 		Image: pelican.asian
 		PlayerPalette: playerra2
+
+bomber_minebomb.asian:
+	Inherits: BADR
+	Health:
+		HP: 100000
+	Valued:
+		Cost: 5000
+	Aircraft:
+		CruiseAltitude: 2500
+		TurnSpeed: 25
+		Speed: 250
+		Repulsable: False
+		MaximumPitch: 50
+	AttackBomber:
+		PauseOnCondition: !ammo
+		FacingTolerance: 64
+	Armament:
+		Weapon: AsianMineBomb
+	AmmoPool:
+		Ammo: 1
+	Tooltip:
+		Name: Asian Stealth Bomber
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+	SpawnActorOnDeath:
+		Actor: bomber_husk.asian
+	Cloak:
+		CloakDelay: 25
+		CloakSound: trans1.aud
+		UncloakSound: appear1.aud
+		UncloakOn: Attack, Unload
+	RenderSprites:
+		Image: aa_bomber
+		PlayerPalette: playerra2
+
+bomber_minebomb2.asian:
+	Inherits: bomber_minebomb.asian
+	Armament:
+		Weapon: AsianMineBomb2
+
+bomber_husk.asian:
+	Inherits: BADR.Husk
+	RenderSprites:
+		Image: aa_bomber
+		PlayerPalette: playerra2
+
+#######################################
+# RA2 Asian Commander Tree
+#######################################
+
+### Infantry tree

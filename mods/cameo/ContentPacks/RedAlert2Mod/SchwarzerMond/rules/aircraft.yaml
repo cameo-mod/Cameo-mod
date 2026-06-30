@@ -80,6 +80,7 @@ zep.nax2:
 		VoiceSet: NaxiTankVoice
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 50
+
 zep_husk.nax2:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -186,6 +187,7 @@ bbomb_husk.nax2:
 	WithShadow:
 	RenderSprites:
 		PlayerPalette: playerra2
+
 bbomb2_husk.nax2:
 	Inherits: bbomb_husk.nax2
 	Tooltip:
@@ -195,6 +197,7 @@ bbomb2_husk.nax2:
 		Speed: 125
 	FallsToEarth:
 		Velocity: 90
+
 bbomb3_husk.nax2:
 	Inherits: bbomb_husk.nax2
 	Tooltip:

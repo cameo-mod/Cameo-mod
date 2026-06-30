@@ -830,3 +830,41 @@ cgyard.latin:
 		TargetTypes: Ground, Water, C4, Structure
 
 #   Scrapcar
+
+cgcnst.latin:
+	Inherits: ra2gacnst
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Tooltip:
+		Name: Syndicate Construction Yard
+	Transforms:
+		IntoActor: mcv.latin
+	WithIdleOverlay@fans:
+	WithIdleOverlay@top:
+		Sequence: idle-top
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@normal:
+		Sequence: idle-normal
+		RequiresCondition: !build-incomplete
+	WithBuildingPlacedOverlay:
+		Sequence: build
+	Targetable@TechStealerInfiltrate:
+		TargetTypes: TechStealerInfiltrate
+	InfiltrateForSupportPower:
+		Proxy: cgcnst_infiltrated.latin
+		Types: TechStealerInfiltrate
+
+cgweap.latin:
+	Inherits: ^RA2DefaultWeap
+	Inherits@sell: ^SyndicateSpawnActorsOnSell
+	Tooltip:
+		Name: Syndicate Factory
+	Buildable:
+		Prerequisites: ~cgcnst.latin, cgauto.latin
+	WithIdleOverlay@lights:
+		Sequence: idle-lights
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@lights2:
+		Sequence: idle-lights2
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@bib:
+		Sequence: bib

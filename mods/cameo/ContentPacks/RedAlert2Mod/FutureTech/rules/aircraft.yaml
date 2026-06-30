@@ -304,3 +304,19 @@ harbinger_husk.futu:
 	RenderSprites:
 		Image: harbinger.futu
 		PlayerPalette: player_rgba
+
+landcarr_drone.futu:
+	Inherits: ra2hornet
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	Aircraft:
+		VTOL: true
+	-AutoTarget:
+	AutoTarget:
+		InitialStanceAI: Defend
+		InitialStance: Defend
+		ScanRadius: 12
+	CarrierSlave:
+		LandingDistance: 0

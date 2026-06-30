@@ -193,6 +193,7 @@ drone.nax:
 		Offset: -500,0,250
 		TrailLength: 15
 	-Voiced:
+
 drone_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -514,6 +515,7 @@ zep.nax:
 		VoiceSet: NaxiAircraftVoice
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 50
+
 zep_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -569,6 +571,7 @@ horten_bomber.nax:
 		SpawnAtLastPosition: False
 		TrailWhileStationary: True
 		Type: CenterPosition
+
 horten_husk.nax:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -666,6 +669,7 @@ cplane_husk.nax:
 ####################################################################################################
 #		Red Alert 2 Moon Naxis Planes
 ####################################################################################################
+
 haunebu.nax:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
