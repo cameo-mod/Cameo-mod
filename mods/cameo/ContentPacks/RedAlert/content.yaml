@@ -1,0 +1,5 @@
+# Include-only content pack: loads the unmigrated Red Alert ruleset as-is so its
+# factions are ordered alongside the migrated packs via mod.yaml's Include order.
+# No rules are split here; this only controls faction load order in the lobby.
+Rules:
+	cameo|rules/redalert.yaml
