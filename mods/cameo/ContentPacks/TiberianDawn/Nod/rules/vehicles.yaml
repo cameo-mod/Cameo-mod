@@ -1,3 +1,83 @@
+nodspecter:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
+	Inherits@ImprovedArtilleries: ^ImprovedArtilleries
+	Inherits@GuerillaTactics: ^GuerillaTactics
+	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
+	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
+	Inherits@decoration: ^NodRankDecoration
+	Inherits@gat: ^GatlingSpeedUpUnitBehavior
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Specter Artillery
+	Buildable:
+		Prerequisites: hq.nod, ~upnodspecter
+		BuildPaletteOrder: 60
+		Queue: Vehicle, RAVehicle
+		Description: actor-specter.description
+	Mobile:
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 22500
+	Repairable:
+		HpPerStep: 1125
+	ChangesHealth@SelfHealing:
+		Step: 9
+	Armor:
+		Type: Light
+	Armament:
+		Weapon: SpecterArtilleryShell
+		LocalOffset: 500,0,500
+		MuzzleSequence: muzzle
+		RequiresCondition: !up_blackmarketupgrades
+	Armament@Upgrade:
+		Weapon: SpecterArtilleryShellUpgrade
+		LocalOffset: 500,0,500
+		MuzzleSequence: muzzle
+		RequiresCondition: up_blackmarketupgrades
+	WithMuzzleOverlay:
+	AutoTarget:
+		InitialStanceAI: Defend
+	FireWarheadsOnDeath:
+		Weapon: SpecterArtilleryShell
+		RequiresCondition: !up_blackmarketupgrades
+	FireWarheadsOnDeath@Upgrade:
+		Weapon: SpecterArtilleryShellUpgrade
+		RequiresCondition: up_blackmarketupgrades
+	GrantCondition@gatling:
+		Condition: cloak-force-disabled
+		RequiresCondition: gatling
+	GrantConditionOnAttack@gatling:
+		RevokeDelay: 80
+	GrantConditionOnAttack@elitegatling:
+		MaximumInstances: 40
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 160
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 10
+	RenderSprites:
+		Image: nodspecter
+	Voiced:
+		VoiceSet: TSVehicle
+	Cloak:
+		UncloakOn: Attack, Damage
+	ActorStatValues:
+		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_improvedartilleries, up_blackmarketupgrades
+
 MCV.NOD:
 	Inherits@mcv: ^TDMCV
 	Inherits@GuerillaTactics: ^GuerillaTactics

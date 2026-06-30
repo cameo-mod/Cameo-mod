@@ -1,16 +1,3 @@
-CNCSPEN:
-	Inherits: RASPEN
-	Tooltip:
-		Name: Nod Sub Pen
-	Buildable:
-		Prerequisites: ~fact.nod, proc.nod, ~globalnaval
-	ProvidesPrerequisite@buildingname:
-	GivesBuildableArea: ##########
-		AreaTypes: building, cityi
-	RenderSprites:
-		Image: cncspen
-		PlayerPalette: player_rgba
-
 CNCSS:
 	Inherits: ^BoatUnit
 	Inherits@Template: ^ScoutShipTemplate

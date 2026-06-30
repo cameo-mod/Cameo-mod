@@ -9,3 +9,12 @@ combat_tank_husk.atreides:
 	Inherits: ^combat_tank.husk
 	TransformOnCapture:
 		IntoActor: combat_tank.atreides
+
+sonic_tank_husk.atreides:
+	Inherits: ^D2KVehicleHusk
+	Health:
+		HP: 1000
+	Tooltip:
+		Name: Sonic Tank (Destroyed)
+	TransformOnCapture:
+		IntoActor: sonic_tank

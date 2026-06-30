@@ -151,58 +151,6 @@ ORCA.Husk:
 	RenderSprites:
 		Image: orca
 
-gdicarrier:
-	Inherits: ^BoatUnit
-	Inherits@Template: ^ArtilleryShipTemplate
-	Inherits@exp: ^GainsExperienceTD
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EMP: ^FrontalEMP
-	Inherits@LongRangeSensors: ^LongRangeSensors
-	Inherits@CuttingEdge: ^CuttingEdgeEquipment
-	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
-	Inherits@decoration: ^GDIRankDecoration
-	Valued:
-		Cost: 4000
-	Tooltip:
-		Name: GDI Super Carrier
-	Buildable:
-		BuildPaletteOrder: 30
-		Prerequisites: ~cncsyrd, eye
-		Queue: Naval, RANaval
-		Description: actor-japancarrier.description
-	Selectable:
-		DecorationBounds: 2048, 2048
-	Mobile:
-		Speed: 50
-		TurnSpeed: 10
-	Health:
-		HP: 300000
-	ChangesHealth@SelfHealing:
-		Step: 120
-	Armor:
-		Type: Superheavy
-	AttackFollow:
-		PauseOnCondition: disabled
-	DeliversCash:
-		Payload: 450
-	CarrierMaster:
-		Actors: A10Carrier, A10Carrier, A10Carrier
-		RearmTicks: 125
-		RespawnTicks: 250
-		InstaRepair: true
-		SlaveDisposalOnKill: KillSlaves
-		SpawnAllAtOnce: false
-	Armament@PRIMARY:
-		Weapon: JapanCarrierTarget
-		Damage: 1500
-		ReloadDelay: 125
-	Voiced:
-		VoiceSet: VehicleVoice
-	RenderSprites:
-		PlayerPalette: player
-	ActorStatValues:
-		Upgrades: up_longrangesensors, up_cuttingedgeequipment, up_lightweightarmorplating
-
 A10Carrier:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
