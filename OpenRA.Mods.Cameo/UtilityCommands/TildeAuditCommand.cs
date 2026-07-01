@@ -67,6 +67,17 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 			// so it's a safe TD-only (not faction-specific) anchor for shared items like walls.
 			"weap", "afld", "pyle", "hand", "hpad.gdi", "hpad.nod", "fact",
 			"eye", "tmpl", "hq.gdi", "hq.nod",
+			// RedAlert: bare/per-faction producer buildings (Barracks/War Factory/Airfield/
+			// Helipad-equivalent) - each verified to require only "~rafact.<faction>" (+ a
+			// non-hiding companion), so they're transitively faction-exclusive and safe
+			// queue-tab-defining anchors. "rafact" bare is RA1's version of TD's "fact" (granted
+			// by the shared ^RAFACT template, explicitly withdrawn for Japan).
+			"barr", "raweap", "raweapa", "raafld", "rahpad", "modraweapj",
+			"tent", "modtentj", "rafact",
+			// RA1-wide shared tokens (granted by multiple faction producers, e.g. all three
+			// Barracks variants grant "rabarracks") - RA1-exclusive, same generic-shared-anchor
+			// role as TD's "fact".
+			"rabarracks", "ranavaltransport",
 		};
 
 		[Desc("[tokens|visibility]",
@@ -126,15 +137,22 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 						.Where(p => p.StartsWith('~') && !p.StartsWith("~!"))
 						.Select(p => ClassifyBare(p[1..].ToLowerInvariant()))
 						.ToList();
-					var keepCount = bareTildeClasses.Count(c => c.StartsWith("KEEP_"));
 
-					// If NOTHING on this line is a real KEEP-classified anchor (ConYard/faction/
-					// toggle/queue-tab-structural), stripping ANY '~' from a candidate token -
-					// whether it's the only one or one of several - can leave the actor with zero
-					// hide-gates, leaking it into every other faction/theme sharing the same Queue
-					// tag. Flag every candidate on such a line so a strip must ADD a companion
-					// KEEP token (or deliberately keep one candidate tilde'd as the anchor), never
-					// just delete every '~'.
+					// KEEP_TOGGLE (lobby/global settings like techlevel.*) does NOT count as a
+					// leak-preventing anchor: every faction in every theme can satisfy it equally,
+					// so an actor whose ONLY other tilde is a toggle is exactly as exposed as one
+					// with no keep token at all. Only KEEP_CONYARD/KEEP_STRUCTURAL (theme- or
+					// faction-exclusive by construction) count. Caught live: IRON/JSHRINE/MSLO/PDOX
+					// (`stek, ~techlevel.superweapons`) leaked into every other theme's palette
+					// because ~techlevel.superweapons alone was wrongly treated as sufficient.
+					var keepCount = bareTildeClasses.Count(c => c is "KEEP_CONYARD" or "KEEP_STRUCTURAL");
+
+					// If NOTHING on this line is a real KEEP-classified anchor, stripping ANY '~'
+					// from a candidate token - whether it's the only one or one of several - can
+					// leave the actor with zero hide-gates, leaking it into every other faction/
+					// theme sharing the same Queue tag. Flag every candidate on such a line so a
+					// strip must ADD a companion KEEP token (or deliberately keep one candidate
+					// tilde'd as the anchor), never just delete every '~'.
 					var noKeepAnchor = keepCount == 0 && bareTildeClasses.Count > 0;
 
 					var firstTildeSeen = false;
