@@ -78,6 +78,13 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 			// Barracks variants grant "rabarracks") - RA1-exclusive, same generic-shared-anchor
 			// role as TD's "fact".
 			"rabarracks", "ranavaltransport",
+			// RedAlert2: per-faction producer buildings (War Factory/Barracks/Airforce Command
+			// HQ) plus the Radar/Psychic-Sensor buildings that host the Upgrades queue tab -
+			// each verified to require only "~<faction ConYard>" (+ non-hiding companions), so
+			// they're transitively faction-exclusive and safe queue-tab-defining anchors.
+			"ra2gaweap", "ra2naweap", "yrygweap",
+			"ra2gapile", "ra2nahand", "yryabrck",
+			"ra2gaairc", "ra2naradr", "ra2napsis",
 		};
 
 		[Desc("[tokens|visibility]",

@@ -3637,7 +3637,7 @@ RA2CLEG:
 		Name: Chrono Legionnaire
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Infantry, RAInfantry
 		Description: actor-cleg.description
 	Mobile:
@@ -3719,7 +3719,7 @@ RA2SNIPE:
 		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Infantry, RAInfantry
 		Description: actor-ra2snipe.description
 	Mobile:
@@ -3810,7 +3810,7 @@ RA2TANY:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		BuildLimit: 1
 		Description: template-commando.description
 	Valued:
@@ -4482,7 +4482,7 @@ RA2DESO:
 		Name: Desolator
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nacnst, ra2natech
 		Queue: Infantry, RAInfantry
 		Description: actor-deso.description
 	Mobile:
@@ -4561,7 +4561,7 @@ YRBORIS:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nacnst, ra2natech
 		BuildLimit: 1
 		Description: actor-boris.description
 	Valued:
@@ -5072,7 +5072,7 @@ YRYURIX:
 		Name: actor-yurix.name
 	Buildable:
 		BuildPaletteOrder: 150
-		Prerequisites: ~yrygcomd
+		Prerequisites: ~yrnacnst, yrygcomd
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor-yurix.description
@@ -5234,7 +5234,7 @@ YRGTRP:
 		Name: Gatling Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~yrygtech
+		Prerequisites: ~yrnacnst, yrygtech
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2cameo
 		Description: actor-gtrp.description
@@ -5318,7 +5318,7 @@ yrbiot:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra2yclon
+		Prerequisites: ~yrnacnst, ra2yclon
 		Description: actor-biot.description
 	Valued:
 		Cost: 400
@@ -5389,7 +5389,7 @@ RA2AMCV:
 	Tooltip:
 		Name: Allied Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra2gadept
+		Prerequisites: ~ra2gacnst, ra2gadept
 	Transforms:
 		IntoActor: ra2gacnst
 		Offset: -1,-1
@@ -6023,7 +6023,7 @@ RA2SREF:
 		Name: Prism Tank
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Vehicle, RAVehicle
 		Description: actor-sref.description
 	Mobile:
@@ -6113,7 +6113,7 @@ RA2MGTK:
 		RequiresCondition: tree
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2gatech, ~!ra2_allies_upgrade_heavymiragetank
+		Prerequisites: ~ra2gacnst, ra2gatech, ~!ra2_allies_upgrade_heavymiragetank
 		Queue: Vehicle, RAVehicle
 		Description: actor-mgtk.description
 	Mobile:
@@ -6203,7 +6203,7 @@ RA2HMGTK:
 		RequiresCondition: tree
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2_allies_upgrade_heavymiragetank, ra2gatech
+		Prerequisites: ~ra2gacnst, ra2_allies_upgrade_heavymiragetank, ra2gatech
 		Queue: Vehicle, RAVehicle
 		Description: actor-mgtk.description
 	Mobile:
@@ -6292,7 +6292,7 @@ yrbfrt:
 		OverrideActor: yrbfrt
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:
@@ -6389,7 +6389,7 @@ RA2SMCV:
 	Tooltip:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra2nadept
+		Prerequisites: ~ra2nacnst, ra2nadept
 	Transforms:
 		IntoActor: ra2nacnst
 		Offset: -1,-1
@@ -6643,7 +6643,7 @@ RA2APOC:
 		Payload: 500
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nacnst, ra2natech
 		Queue: Vehicle, RAVehicle
 		Description: actor-htnk.description
 	Mobile:
@@ -7150,7 +7150,7 @@ YRPCV:
 	Tooltip:
 		Name: Yuri Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~yryggrnd
+		Prerequisites: ~yrnacnst, yryggrnd
 	Transforms:
 		IntoActor: yrnacnst
 		Offset: -1,-1
@@ -7614,7 +7614,7 @@ YRMIND:
 		Name: Master Mind
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~yrygtech
+		Prerequisites: ~yrnacnst, yrygtech
 		Queue: Vehicle, RAVehicle
 		Description: actor-mind.description
 	Mobile:
@@ -7909,7 +7909,7 @@ ra2dlph:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Naval, RANaval
 		Description: actor-dlph.description
 	Mobile:
@@ -8158,7 +8158,7 @@ ra2carrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Naval, RANaval
 		Description: actor-ra2carrier.description
 	Selectable:
@@ -8377,7 +8377,7 @@ ra2dred:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nacnst, ra2natech
 		Queue: Naval, RANaval
 		Description: actor-dred.description
 	Selectable:
@@ -8584,7 +8584,7 @@ RA2ZEP:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 99
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nacnst, ra2natech
 		Queue: Vehicle, Aircraft, RAAircraft
 		Description: actor-zep.description
 	Aircraft:
@@ -8916,7 +8916,7 @@ yrbpln1:
 		Cost: 2000
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nacnst, ra2natech
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:
@@ -9235,7 +9235,7 @@ RA2BEAG:
 		Name: Black Eagle
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Aircraft, RAAircraft
 		Description: actor-beag.description
 	Valued:
@@ -9420,7 +9420,7 @@ YRDISK:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~yrygtech
+		Prerequisites: ~yrnacnst, yrygtech
 		Queue: Vehicle, Aircraft, RAAircraft
 		Description: actor-disk.description
 	Aircraft:
@@ -9659,7 +9659,7 @@ yrlunr:
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~yrygcomd
+		Prerequisites: ~yrnacnst, yrygcomd
 		Description: actor-ra2rock.description
 	Aircraft:
 		TurnSpeed: 33
@@ -12225,7 +12225,7 @@ upra2aegismissiles:
 		BuildPaletteOrder: 70
 		Queue: Research
 		Description: Allows Aegis Cruisers to target ground targets.
-		Prerequisites: ~ra2gatech, ~ra2gayard, !upra2aegismissiles
+		Prerequisites: ra2gatech, ~ra2gayard, !upra2aegismissiles
 	RenderSprites:
 		Image: ra2aegis
 	ProvidesPrerequisite:
@@ -12814,7 +12814,7 @@ ra2_soviets_upgrade_heavyarmorplatings:
 		Name: Heavy Armor Platings
 	Buildable:
 		Description: All Soviet Vehicles and Aircraft have 25% more Damage Resistance but move 10% slower.
-		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
+		Prerequisites: ~ra2nacnst, ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
 		Image: ra2_soviets_upgrade_heavyarmorplatings
 	ProvidesPrerequisite@ra2_soviet_doctrine_2:
@@ -12839,7 +12839,7 @@ ra2_soviets_upgrade_reactivearmor:
 		Name: Reactive Armor
 	Buildable:
 		Description: Tanks gain gain 50% Damage Resistance to Area of Effect weapons and 10% Damage Resistance against everything else but move 5% slower.
-		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
+		Prerequisites: ~ra2nacnst, ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
 		Image: ra2_soviets_upgrade_reactivearmor
 	ProvidesPrerequisite@ra2_soviet_doctrine_2:
@@ -12878,7 +12878,7 @@ ra2_soviets_upgrade_tesladischargearmor:
 		Name: Tesla Discharge Armor
 	Buildable:
 		Description: Causes Armor to slowly charge up once enemies are nearby. When fully charged Tesla Arcs discharge upon taking damage. Gives 15% more Damage Resistance. While Tesla Armor is charging up Speed is reduced by 15% but increased by 15% if out of combat.
-		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
+		Prerequisites: ~ra2nacnst, ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
 		Image: ra2_soviets_upgrade_tesladischargearmor
 	ProvidesPrerequisite@ra2_soviet_doctrine_2:
@@ -12930,7 +12930,7 @@ ra2_soviets_upgrade_fireshells:
 		Name: Fire Munitions
 	Buildable:
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons spread fire and deal 25% more damage.
-		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
+		Prerequisites: ~ra2nacnst, ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
 		Image: ra2_soviets_upgrade_fireshells
 	ProvidesPrerequisite@ra2_soviet_doctrine_3:
@@ -12949,7 +12949,7 @@ ra2_soviets_upgrade_radiationshells:
 		Name: Nuclear Munitions
 	Buildable:
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons leave radiation and deal 25% more damage.
-		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
+		Prerequisites: ~ra2nacnst, ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
 		Image: ra2_soviets_upgrade_radiationshells
 	ProvidesPrerequisite@ra2_soviet_doctrine_3:
@@ -12971,7 +12971,7 @@ ra2_soviets_upgrade_teslashells:
 		Name: Tesla Munitions
 	Buildable:
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons zap nearby targets on impact and deal 25% more damage.
-		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
+		Prerequisites: ~ra2nacnst, ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
 		Image: ra2_soviets_upgrade_teslashells
 	ProvidesPrerequisite@ra2_soviet_doctrine_3:
@@ -13012,7 +13012,7 @@ ra2_soviets_upgrade_coilchargers:
 	Buildable:
 		Queue: Research
 		Description: Provide all Tesla Coils with chargers.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_coilchargers
+		Prerequisites: ~ra2nacnst, ra2natech, !ra2_soviets_upgrade_coilchargers
 	RenderSprites:
 		Image: ra2tesla
 	ProvidesPrerequisite:
@@ -13025,7 +13025,7 @@ ra2_soviets_upgrade_teslaoverload:
 		Name: Tesla Overload
 	Buildable:
 		Description: Allows tesla bolts to jump to nearby targets and cause EMP damage. Increases Firepower by 25%.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_teslaoverload
+		Prerequisites: ~ra2nacnst, ra2natech, !ra2_soviets_upgrade_teslaoverload
 	RenderSprites:
 		Image: ra2_soviets_upgrade_teslaoverload
 
@@ -13045,7 +13045,7 @@ ra2_soviets_upgrade_heavycannons:
 		Name: Heavy Cannons
 	Buildable:
 		Description: Increases Tank Cannon and Flak Firepower by 30% and Range by 15%.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_heavycannons
+		Prerequisites: ~ra2nacnst, ra2natech, !ra2_soviets_upgrade_heavycannons
 	RenderSprites:
 		Image: ra2_soviets_upgrade_heavycannons
 
@@ -13068,7 +13068,7 @@ ra2_soviets_upgrade_grindertanktreads:
 		Name: Grinder Tank Treads
 	Buildable:
 		Description: All Soviet Tanks and tracked Vehicles gain 15% more Speed and Damage Resistance and faster Regeneration.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_grindertanktreads
+		Prerequisites: ~ra2nacnst, ra2natech, !ra2_soviets_upgrade_grindertanktreads
 	RenderSprites:
 		Image: ra2_soviets_upgrade_grindertanktreads
 
@@ -13103,7 +13103,7 @@ ra2_soviets_upgrade_kirovarmorplatings:
 		Name: Kirov Armor Platings
 	Buildable:
 		Description: Increases Damage Resistance of Kirovs and V3 Rockets by 25%.
-		Prerequisites: ~ra2natech, yrngindp, !ra2_soviets_upgrade_kirovarmorplatings
+		Prerequisites: ~ra2nacnst, ra2natech, yrngindp, !ra2_soviets_upgrade_kirovarmorplatings
 	RenderSprites:
 		Image: ra2_soviets_upgrade_kirovarmorplatings
 
@@ -13123,7 +13123,7 @@ ra2_soviets_upgrade_kirovgastroburners:
 		Name: Gastroburners
 	Buildable:
 		Description: Increases Speed of Kirovs by 25% and V3 Range by 15%.
-		Prerequisites: ~ra2natech, yrngindp, !ra2_soviets_upgrade_kirovgastroburners
+		Prerequisites: ~ra2nacnst, ra2natech, yrngindp, !ra2_soviets_upgrade_kirovgastroburners
 	RenderSprites:
 		Image: ra2_soviets_upgrade_kirovgastroburners
 
@@ -13143,7 +13143,7 @@ ra2_soviets_upgrade_kirovnuclearshells:
 		Name: Kirov Atomic Bombs
 	Buildable:
 		Description: Replaces the Kirov Bombs with Atomic Bombs
-		Prerequisites: ~ra2natech, yrngindp, ra2namisl, !ra2_soviets_upgrade_kirovnuclearshells
+		Prerequisites: ~ra2nacnst, ra2natech, yrngindp, ra2namisl, !ra2_soviets_upgrade_kirovnuclearshells
 	RenderSprites:
 		Image: ra2_soviets_upgrade_kirovnuclearshells
 
@@ -13467,7 +13467,7 @@ ra2_allies_upgrade_compositearmorplating:
 		Name: Composite Armor Plating
 	Buildable:
 		Description: All Allied Vehicles and Aircraft take 20% less damage.
-		Prerequisites: ~ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
+		Prerequisites: ~ra2gacnst, ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
 		Image: ra2_allies_upgrade_compositearmorplating
 	ProvidesPrerequisite@ra2_allied_doctrine_2:
@@ -13489,7 +13489,7 @@ ra2_allies_upgrade_reflectivearmorplating:
 		Name: Reflective Armor Plating
 	Buildable:
 		Description: Tanks gain gain 50% Damage Resistance to Energy weapons and take 5% less damage overall.
-		Prerequisites: ~ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
+		Prerequisites: ~ra2gacnst, ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
 		Image: ra2_allies_upgrade_reflectivearmorplating
 	ProvidesPrerequisite@ra2_allied_doctrine_2:
@@ -13519,7 +13519,7 @@ ra2_allies_upgrade_ionpulseplating:
 		Name: Chromium Ion Pulse Plating
 	Buildable:
 		Description: Causes Ion Discharges everytime a Vehicle takes damage with a 5 second cooldown. Gives 10% more Damage Resistance. Ion Discharges mark enemy units in a small radius for additional damage.
-		Prerequisites: ~ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
+		Prerequisites: ~ra2gacnst, ra2gatech, ra2_allied_doctrine_1, !ra2_allied_doctrine_2
 	RenderSprites:
 		Image: ra2_allies_upgrade_ionpulseplating
 	ProvidesPrerequisite@ra2_allied_doctrine_2:
@@ -13592,7 +13592,7 @@ ra2_allies_upgrade_eliterocketeer:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Rocketeer with 15% more firepower, 15% faster reload, 15% damage resistance, 10% more range and 10% more speed.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_eliterocketeer
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_eliterocketeer
 	RenderSprites:
 		Image: ra2_allies_upgrade_eliterocketeer
 
@@ -13603,7 +13603,7 @@ ra2_allies_upgrade_prismlinking:
 	Buildable:
 		Queue: Research
 		Description: Allows Prism Towers to link, boosting damage.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_prismlinking
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_prismlinking
 	RenderSprites:
 		Image: ra2_allies_upgrade_prismlinking
 
@@ -13615,7 +13615,7 @@ ra2_allies_upgrade_forceshield:
 		Queue: Research
 		Icon: forceshield
 		Description: Enables the Force Shield power from the Battle Lab.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_forceshield
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_forceshield
 	RenderSprites:
 		Image: icon
 
@@ -13626,7 +13626,7 @@ ra2_allies_upgrade_heavymiragetank:
 	Buildable:
 		Queue: Research
 		Description: Allows construction of Heavy Mirage Tanks.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_heavymiragetank
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_heavymiragetank
 	RenderSprites:
 		Image: ra2hmgtk
 
@@ -13638,7 +13638,7 @@ ra2_allies_upgrade_advancedaeronautics:
 		Name: Advanced Aeronautics
 	Buildable:
 		Description: Harriers and Black Eagles have 25% increased Speed, Firepower and Damage Resistance.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_advancedaeronautics
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_advancedaeronautics
 	RenderSprites:
 		Image: ra2_allies_upgrade_advancedaeronautics
 
@@ -13662,7 +13662,7 @@ ra2_allies_upgrade_tanklasertargeting:
 		Name: Tank Laser Targeting
 	Buildable:
 		Description: Increases Firepower of all Allied vehicles by 30% and Range by 15%. Grizzly Tanks receive twice that bonus.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_tanklasertargeting
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_tanklasertargeting
 	RenderSprites:
 		Image: ra2_allies_upgrade_tanklasertargeting
 
@@ -13689,7 +13689,7 @@ ra2_allies_upgrade_thunderboltmissiles:
 		Name: Thunderbolt Missiles
 	Buildable:
 		Description: Increases Firepower of all Allied Missiles by 50% and Range by 10%.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_thunderboltmissiles
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_thunderboltmissiles
 	RenderSprites:
 		Image: ra2_allies_upgrade_thunderboltmissiles
 
@@ -13716,7 +13716,7 @@ ra2_allies_upgrade_intensifiedprismbeams:
 		Name: Intensified Prism Beams
 	Buildable:
 		Description: Prism Tanks and Prism Towers have 25% more Range and Firepower.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_intensifiedprismbeams
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_intensifiedprismbeams
 	RenderSprites:
 		Image: ra2_allies_upgrade_intensifiedprismbeams
 
@@ -13739,7 +13739,7 @@ ra2_allies_upgrade_prismaticbarrier:
 		Cost: 10000
 	Buildable:
 		Description: Causes Prismatic Barrier effect every time a Vehicle takes damage with a 5 second cooldown. The Prismatic Barrier stops once the unit starts attacking.
-		Prerequisites: ~ra2gatech, !ra2_allies_upgrade_prismaticbarrier
+		Prerequisites: ~ra2gacnst, ra2gatech, !ra2_allies_upgrade_prismaticbarrier
 	RenderSprites:
 		Image: ra2_allies_upgrade_prismaticbarrier
 
@@ -13788,7 +13788,7 @@ ra2_allies_upgrade_chronoengine:
 		Cost: 12500
 	Buildable:
 		Description: All Allied Vehicles drive 50% faster.
-		Prerequisites: ~ra2gatech, ra2gacsph, !ra2_allies_upgrade_chronoengine
+		Prerequisites: ~ra2gacnst, ra2gatech, ra2gacsph, !ra2_allies_upgrade_chronoengine
 	RenderSprites:
 		Image: ra2_allies_upgrade_chronoengine
 
@@ -14096,7 +14096,7 @@ ra2_yuri_upgrade_lashercannon:
 		Name: Lasher HE Cannon
 	Buildable:
 		Description: Increases Lasher Cannon Firepower by 100%.
-		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+		Prerequisites: ~yrnacnst, yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
 		Image: ra2_yuri_upgrade_lashercannon
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
@@ -14108,7 +14108,7 @@ ra2_yuri_upgrade_lashertoxic:
 		Name: Lasher Toxic Gas Shells
 	Buildable:
 		Description: Replaces the Lasher Cannon with a Toxic Gas Mortar.
-		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+		Prerequisites: ~yrnacnst, yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
 		Image: ra2_yuri_upgrade_lashertoxic
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
@@ -14120,7 +14120,7 @@ ra2_yuri_upgrade_lasherlaser:
 		Name: Lasher Laser Cannon
 	Buildable:
 		Description: Replaces the Lasher Cannon with a powerful Laser Cannon.
-		Prerequisites: ~yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
+		Prerequisites: ~yrnacnst, yrygtech, ra2_yuri_doctrine_1, !ra2_yuri_doctrine_2
 	RenderSprites:
 		Image: ra2_yuri_upgrade_lasherlaser
 	ProvidesPrerequisite@ra2_yuri_doctrine_2:
@@ -14132,7 +14132,7 @@ ra2_yuri_upgrade_scraparmor:
 		Name: Scrap Vehicle Armor
 	Buildable:
 		Description: Yuri Vehicles gain 15% more Damage Resistance and Speed.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
 		Image: ra2_yuri_upgrade_scraparmor
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
@@ -14157,7 +14157,7 @@ ra2_yuri_upgrade_chaosgasemitters:
 		Name: Chaos Gas Emitters
 	Buildable:
 		Description: Yuri Vehicles periodically emit Chaos Gas in a small radius after taking damage. Increases Damage Resistance and Speed by 5% and doubles if enemies are nearby.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
 		Image: ra2_yuri_upgrade_chaosgasemitters
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
@@ -14212,7 +14212,7 @@ ra2_yuri_upgrade_psionicshields:
 		Name: Psionic Vehicle Shields
 	Buildable:
 		Description: Yuri vehicles charge with psionic shields when enemies are nearby. Psionic shields are also provided to allied units in a small radius. After taking damage the shield quickly charges up.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2_yuri_doctrine_2, !ra2_yuri_doctrine_3
 	RenderSprites:
 		Image: ra2_yuri_upgrade_psionicshields
 	ProvidesPrerequisite@ra2_yuri_doctrine_3:
@@ -14345,7 +14345,7 @@ ra2_yuri_upgrade_gatlingpower:
 	Buildable:
 		Queue: Research
 		Description: All Gatling weapons have 20% more Firepower and 10% more Range.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_gatlingpower
+		Prerequisites: ~yrnacnst, yrygtech, !ra2_yuri_upgrade_gatlingpower
 	RenderSprites:
 		Image: ra2_yuri_upgrade_gatlingpower
 
@@ -14387,7 +14387,7 @@ ra2_yuri_upgrade_meltingvirus:
 	Buildable:
 		Queue: Research
 		Description: Allows Viruses to attack vehicles and structures. Increases Firepower by 50%.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_meltingvirus
+		Prerequisites: ~yrnacnst, yrygtech, !ra2_yuri_upgrade_meltingvirus
 	RenderSprites:
 		Image: ra2_yuri_upgrade_meltingvirus
 	ProvidesPrerequisite:
@@ -14425,7 +14425,7 @@ ra2_yuri_upgrade_gatlingspeed:
 	Buildable:
 		Queue: Research
 		Description: All Gatling weapons have 30% more Rate of Fire.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_upgrade_gatlingpower, !ra2_yuri_upgrade_gatlingspeed
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2_yuri_upgrade_gatlingpower, !ra2_yuri_upgrade_gatlingspeed
 	RenderSprites:
 		Image: ra2_yuri_upgrade_gatlingspeed
 	ProvidesPrerequisite:
@@ -14445,7 +14445,7 @@ ra2_yuri_upgrade_corrosiveammo:
 	Buildable:
 		Queue: Research
 		Description: Adds a powerful corrosive effect to the Virus Sniper that slows down enemy vehicles and deals damage over time. Increases Firepower by 33%.
-		Prerequisites: ~yrygtech, yrygcomd, ra2_yuri_upgrade_meltingvirus, !ra2_yuri_upgrade_corrosiveammo
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2_yuri_upgrade_meltingvirus, !ra2_yuri_upgrade_corrosiveammo
 	RenderSprites:
 		Image: ra2_yuri_upgrade_corrosiveammo
 	ProvidesPrerequisite:
@@ -14457,7 +14457,7 @@ ra2_yuri_upgrade_supermagnets:
 	Buildable:
 		Queue: Research
 		Description: Allows Magnetrons to attack air and gain 25% more Range.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_supermagnets
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, !ra2_yuri_upgrade_supermagnets
 	RenderSprites:
 		Image: ra2_yuri_upgrade_supermagnets
 	ProvidesPrerequisite:
@@ -14469,7 +14469,7 @@ ra2_yuri_upgrade_bioreactorefficiency:
 	Buildable:
 		Queue: Research
 		Description: Doubles the power output of Bio Reactors.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_bioreactorefficiency
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_bioreactorefficiency
 	RenderSprites:
 		Image: ra2_yuri_upgrade_bioreactorefficiency
 	ProvidesPrerequisite:
@@ -14481,7 +14481,7 @@ ra2_yuri_upgrade_bioengineering:
 	Buildable:
 		Queue: Research
 		Description: All Infantry Cost and Build Time is reduced by 40%.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_bioengineering
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_bioengineering
 	RenderSprites:
 		Image: ra2_yuri_upgrade_bioengineering
 	ProvidesPrerequisite:
@@ -14493,7 +14493,7 @@ ra2_yuri_upgrade_psychicrange:
 	Buildable:
 		Queue: Research
 		Description: Increases Mind Control Range of all Psychic Units by 15%. Pyshic Towers gain 30% more Range.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_psychicrange
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, !ra2_yuri_upgrade_psychicrange
 	RenderSprites:
 		Image: ra2_yuri_upgrade_psychicrange
 
@@ -14513,7 +14513,7 @@ ra2_yuri_upgrade_psionicarmor:
 		Name: Psionic Armor
 	Buildable:
 		Description: Psychic Units and Towers gain 30% more Damage Resistance.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_psionicarmor
+		Prerequisites: ~yrnacnst, yrygtech, !ra2_yuri_upgrade_psionicarmor
 	RenderSprites:
 		Image: ra2_yuri_upgrade_psionicarmor
 
@@ -14533,7 +14533,7 @@ ra2_yuri_upgrade_toxicengines:
 		Name: Toxic Engines
 	Buildable:
 		Description: Yuri Vehicle gain 20% more Speed and Damage Resistance nd periodically release toxic gas clouds.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_toxicengines
+		Prerequisites: ~yrnacnst, yrygtech, !ra2_yuri_upgrade_toxicengines
 	RenderSprites:
 		Image: ra2_yuri_upgrade_toxicengines
 
@@ -14560,7 +14560,7 @@ ra2_yuri_upgrade_psionicplasmabeams:
 		Name: Psionic Plasma Beams
 	Buildable:
 		Description: All Yuri energy weapons gain 40% more Firepower, 20% more Rate of Fire and 10% more Range.
-		Prerequisites: ~yrygtech, !ra2_yuri_upgrade_psionicplasmabeams
+		Prerequisites: ~yrnacnst, yrygtech, !ra2_yuri_upgrade_psionicplasmabeams
 	RenderSprites:
 		Image: ra2_yuri_upgrade_psionicplasmabeams
 
@@ -14588,7 +14588,7 @@ ra2_yuri_upgrade_gravitondrive:
 		Cost: 5000
 	Buildable:
 		Description: Floating Disks and Cosmonauts gain 20% more Speed and Damage Resistance.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_gravitondrive
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, !ra2_yuri_upgrade_gravitondrive
 	RenderSprites:
 		Image: ra2_yuri_upgrade_gravitondrive
 
@@ -14613,7 +14613,7 @@ ra2_yuri_upgrade_siphonattack:
 		Cost: 5000
 	Buildable:
 		Description: Allows Floating Disks to directly attack units below with its siphon.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_siphonattack
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, !ra2_yuri_upgrade_siphonattack
 	RenderSprites:
 		Image: ra2_yuri_upgrade_siphonattack
 
@@ -14625,7 +14625,7 @@ ra2_yuri_upgrade_disklasers:
 		Cost: 5000
 	Buildable:
 		Description: Increases the Rate of Fire of Floating Disks by 100% and reduces the Ammo Reload Delay by 25%.
-		Prerequisites: ~yrygtech, yrygcomd, !ra2_yuri_upgrade_disklasers
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, !ra2_yuri_upgrade_disklasers
 	RenderSprites:
 		Image: ra2_yuri_upgrade_disklasers
 
@@ -14635,7 +14635,7 @@ ra2_yuri_upgrade_stealthsuits:
 		Name: Infantry Stealth Suits
 	Buildable:
 		Description: TEAM Upgrade: All Scout and Anti Tank Anti Air Infantry in your team receive stealth suits with personal shield generators.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_stealthsuits
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_stealthsuits
 	RenderSprites:
 		Image: ra2_yuri_upgrade_stealthsuits
 	ProvidesTeamProxyActor:
@@ -14704,7 +14704,7 @@ ra2_yuri_upgrade_geneticboost:
 		Name: Genetic Modification Boost
 	Buildable:
 		Description: TEAM Upgrade: All Infantry in your team gain 20% more Damage Resistance, Speed and Regeneration.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_geneticboost
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_geneticboost
 	RenderSprites:
 		Image: ra2_yuri_upgrade_geneticboost
 	ProvidesTeamProxyActor:
@@ -14748,7 +14748,7 @@ ra2_yuri_upgrade_psychicvision:
 		Name: Psychic Vision
 	Buildable:
 		Description: TEAM Upgrade: Increases Infantry Vision and Detection Range by 20%. For Yuri: Increases Psychic Sensor Vision and Detection Range by 50%.
-		Prerequisites: ~yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_psychicvision
+		Prerequisites: ~yrnacnst, yrygtech, yrygcomd, ra2yclon, !ra2_yuri_upgrade_psychicvision
 	RenderSprites:
 		Image: ra2_yuri_upgrade_psychicvision
 	ProvidesTeamProxyActor:
