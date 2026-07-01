@@ -95,6 +95,12 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 			// TS ConYards also grant this alternate per-faction token (same secondary-grant
 			// role as TD's "fact" / RA1's "rafact"), each verified to have exactly one provider.
 			"fact.tsgdi", "fact.tsnod",
+			// StarCraft: per-race unit-producer buildings (Barracks/Factory/Starport/Gateway/
+			// Spawning Pool) and buildings that explicitly host their own "Upgrades" queue
+			// (Queen's Nest/Defiler Mound/Armory/Engineering Bay) - each verified to require
+			// only its own race's ConYard, so they're safe queue-tab-defining anchors.
+			"scbarracks", "scfactory", "scstarport", "scgateway", "scspawningpool",
+			"scqueensnest", "scdefilermound", "scarmory", "scengineeringbay",
 		};
 
 		[Desc("[tokens|visibility]",
