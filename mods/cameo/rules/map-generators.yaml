@@ -837,9 +837,11 @@
 							ra2cmine: 20
 							ra2gmine: 15
 			IntegerOption@Seed:
+				Label: label-room-map-generator-option-seed
 				Parameter: Seed
 				Default: 0
 			MultiIntegerChoiceOption@Players:
+				Label: label-room-map-generator-option-players
 				Parameter: Players
 				Choices: 2, 3, 4, 5, 6, 7, 8
 				Default: 4

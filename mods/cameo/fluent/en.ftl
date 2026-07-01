@@ -5,6 +5,8 @@ map-generator-classic = Map Generator
 map-generator-clear = Clear Terrain
 map-generator-d2k = Map Generator
 map-generator-room = Map Generator
+label-room-map-generator-option-seed = Seed
+label-room-map-generator-option-players = Players
 
 dropdown-weather =
    .label = Weather
