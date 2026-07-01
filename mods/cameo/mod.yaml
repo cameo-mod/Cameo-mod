@@ -152,7 +152,6 @@ Rules:
 	# wrapper packs (ContentPacks/{RedAlert,TiberianSun,RedAlert2}/) so their factions
 	# can be ordered in the lobby; not loaded here to avoid duplicate keys.
 	# redalert2mod.yaml migrated to ContentPacks/RedAlert2Mod/* (Included above).
-	# File kept on disk as dormant reference; not loaded here to avoid duplicate keys.
 	# d2k.yaml migrated to ContentPacks/D2k/* (Included above). File kept on disk
 	# for the commented planned factions (Atreides/Harkonnen/Corrino) reference.
 	# starcraft.yaml, warcraft2.yaml are now loaded via include-only wrapper packs
