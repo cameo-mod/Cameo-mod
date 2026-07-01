@@ -810,6 +810,40 @@
 					Settings:
 						AreaEntityBonus: 800
 						PlayerCountEntityBonus: 0
+	RoomMapGenerator@room:
+		Type: room
+		Name: map-generator-room
+		Tilesets: RA_INTERIOR
+		Settings:
+			MultiChoiceOption@hidden_defaults:
+				Choice@hidden_defaults:
+					Settings:
+						Margin: 2
+						MinRoomSize: 6
+						MaxRoomSize: 10
+						RoomAttempts: 60
+						RoomGap: 1
+						BattleRoomSize: 14
+						FloorTile: 255
+						WallTile: 329
+						DrillerAreaDivisor: 30
+						SpawnMinimumRadius: 2
+						SpawnMaximumRadius: 6
+						SpawnZoneRadius: 2
+						SpawnCentralReservationFraction: 0
+						DrillerWeights:
+							ra2mine: 40
+							ra2smine: 25
+							ra2cmine: 20
+							ra2gmine: 15
+			IntegerOption@Seed:
+				Parameter: Seed
+				Default: 0
+			MultiIntegerChoiceOption@Players:
+				Parameter: Players
+				Choices: 2, 3, 4, 5, 6, 7, 8
+				Default: 4
+				Priority: 1
 	ClearMapGenerator@clear:
 		Type: clear
 		Name: map-generator-clear

@@ -4,6 +4,7 @@ mod-windowtitle = OpenRA - Cameo
 map-generator-classic = Map Generator
 map-generator-clear = Clear Terrain
 map-generator-d2k = Map Generator
+map-generator-room = Map Generator
 
 dropdown-weather =
    .label = Weather
