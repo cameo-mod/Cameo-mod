@@ -15,7 +15,7 @@ swarmer.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~construction_yard.ordos, high_tech_factory.ordos
+		Prerequisites: ~high_tech_factory.ordos
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -82,7 +82,7 @@ aa_mine.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~construction_yard.ordos, high_tech_factory.ordos
+		Prerequisites: ~high_tech_factory.ordos
 		Description: Slowly Flying Mine that hurls missiles upon contact with enemy airplane before exploding\nIn higher numbers can take down entire squadron
 	Tooltip:
 		Name: Air Mine
@@ -157,7 +157,7 @@ eye.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~construction_yard.ordos, research_centre.ordos
+		Prerequisites: ~high_tech_factory.ordos, research_centre.ordos
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	Health:
 		HP: 150000
@@ -213,7 +213,7 @@ banshee.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~construction_yard.ordos, up_banshee.ordos, research_centre.ordos
+		Prerequisites: ~high_tech_factory.ordos, up_banshee.ordos, research_centre.ordos
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	Health:
 		HP: 37500
@@ -297,7 +297,7 @@ wraith.ordos:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~construction_yard.ordos, up_wraith.ordos, palace.ordos
+		Prerequisites: ~high_tech_factory.ordos, up_wraith.ordos, palace.ordos
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_dieglocke.description
@@ -781,7 +781,7 @@ carryall.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 120
-		Prerequisites: ~construction_yard.ordos, high_tech_factory.ordos
+		Prerequisites: ~high_tech_factory.ordos
 	Tooltip:
 		Name: Advanced Carryall
 	SpawnActorOnDeath@CRUISING:

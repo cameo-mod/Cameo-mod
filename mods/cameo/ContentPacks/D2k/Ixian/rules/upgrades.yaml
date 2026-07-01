@@ -5,7 +5,7 @@ up_twin_rocket_trooper.ixian:
 	Buildable:
 		Queue: Upgrades
 		Description: Upgrades Rocket Troopers with Twin Rocket Troopers
-		Prerequisites: ~construction_yard.ixian, outpost.ixian, !up_twin_rocket_trooper.ixian
+		Prerequisites: ~outpost.ixian, !up_twin_rocket_trooper.ixian
 		# Prerequisites: ~outpost.d2k, !up_twin_rocket_trooper.ixian
 	RenderSprites:
 		Image: up_twin_rocket_trooper.ixian
@@ -18,7 +18,7 @@ up_needleguns.ixian:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: ~construction_yard.ixian, outpost.ixian, !up_needleguns.ixian
+		Prerequisites: ~outpost.ixian, !up_needleguns.ixian
 		Queue: Upgrades
 		Description: upgrade-d2k_upgrade_needleguns.description
 		IconPalette: d2kunit
@@ -35,7 +35,7 @@ up_personal_shield.ixian:
 		BuildPaletteOrder: 200
 		Queue: Upgrades
 		Description: upgrade-personal_shield.description
-		Prerequisites: ~construction_yard.ixian, outpost.ixian, !up_personal_shield.ixian
+		Prerequisites: ~outpost.ixian, !up_personal_shield.ixian
 		IconPalette: ra2
 	RenderSprites:
 		Image: ixian_personal_shield_icon
@@ -48,7 +48,7 @@ up_general_purpose_armor.ixian:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian, !up_general_purpose_armor.ixian
+		Prerequisites: ~research_centre.ixian, !up_general_purpose_armor.ixian
 		Queue: Research
 		Description: upgrade-d2k_general_purpose_armor.description
 		IconPalette: d2kunit
@@ -63,7 +63,7 @@ up_siege_range.ixian:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian, !up_siege_range.ixian
+		Prerequisites: ~research_centre.ixian, !up_siege_range.ixian
 		Queue: Research
 		Description: upgrade-d2k_siege_range_upgrade.description
 	RenderSprites:
@@ -77,7 +77,7 @@ up_heavy_missile.ixian:
 		Cost: 7500
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian, !up_heavy_missile.ixian
+		Prerequisites: ~research_centre.ixian, !up_heavy_missile.ixian
 		Queue: Research
 		Description: upgrade-d2k_heavy_missile_upgrade.description
 	RenderSprites:
@@ -93,7 +93,7 @@ up_advanced_ixian_technology.ixian:
 		BuildPaletteOrder: 200
 		Queue: Research
 		Description: upgrade-d2k_advanced_ixian_technology.description
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian, up_personal_shield.ixian, !up_advanced_ixian_technology.ixian
+		Prerequisites: ~research_centre.ixian, up_personal_shield.ixian, !up_advanced_ixian_technology.ixian
 	RenderSprites:
 		Image: storm_raider.ixian
 	#ProvidesPrerequisite:

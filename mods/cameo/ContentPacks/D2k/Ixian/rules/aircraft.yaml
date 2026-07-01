@@ -19,7 +19,7 @@ air_drone.ixian:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
-		Prerequisites: ~construction_yard.ixian, launchpad.ixian
+		Prerequisites: ~launchpad.ixian
 		Description: actor-air_drone.description
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
@@ -199,7 +199,7 @@ drone.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~construction_yard.ixian, up_drone.ixian, high_tech_factory.ixian
+		Prerequisites: up_drone.ixian, ~high_tech_factory.ixian
 		Queue: Aircraft, RAAircraft
 		Description: actor-venom.description
 	Aircraft:
@@ -415,7 +415,7 @@ bomber.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~construction_yard.ixian, up_bomber.ixian, launchpad.ixian, research_centre.ixian
+		Prerequisites: up_bomber.ixian, ~launchpad.ixian, research_centre.ixian
 		Queue: Aircraft, RAAircraft
 		Description: actor-venom.description
 	Aircraft:
@@ -481,7 +481,7 @@ resonance_drone.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~construction_yard.ixian, up_resonance_drone.ixian, high_tech_factory.ixian, research_centre.ixian
+		Prerequisites: up_resonance_drone.ixian, ~high_tech_factory.ixian, research_centre.ixian
 		Queue: Aircraft, RAAircraft
 		Description: actor-venom.description
 	Aircraft:
@@ -586,7 +586,7 @@ farasha.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 180
-		Prerequisites: ~construction_yard.ixian, up_farasha.ixian, high_tech_factory.ixian, research_centre.ixian
+		Prerequisites: up_farasha.ixian, ~high_tech_factory.ixian, research_centre.ixian
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor-farasha.description
