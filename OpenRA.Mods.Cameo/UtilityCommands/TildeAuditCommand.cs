@@ -45,7 +45,7 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 		{
 			"techlevel.low", "techlevel.medium", "techlevel.high", "techlevel.superweapons",
 			"globalnaval", "disabled", "disable", "botplayer", "hardbotplayer",
-			"unbuildable", "wip-content", "not available",
+			"unbuildable", "wip-content", "not available", "wip",
 		};
 
 		// Queue-tab-defining structures not covered by ai.yaml's ConstructionYardTypes list
@@ -85,6 +85,16 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 			"ra2gaweap", "ra2naweap", "yrygweap",
 			"ra2gapile", "ra2nahand", "yryabrck",
 			"ra2gaairc", "ra2naradr", "ra2napsis",
+			// TiberianSun: per-faction producer buildings (War Factory/Barracks/Helipad) -
+			// each verified to require only its own faction's ConYard, so they're safe
+			// queue-tab-defining anchors. GDI/Nod/Mutant(Forgotten)/CABAL are 4 distinct
+			// factions here, not tiers of the same building despite the "2" suffix naming.
+			"tsgtweap", "tsntweap", "tsgtweapmutant", "tsntweapcabal",
+			"tsgtpile", "tsgtpile2", "tsnthand", "tsnthand2",
+			"tsgthpad", "tsnthpad", "tsgthpadmutant", "tsnthpad2",
+			// TS ConYards also grant this alternate per-faction token (same secondary-grant
+			// role as TD's "fact" / RA1's "rafact"), each verified to have exactly one provider.
+			"fact.tsgdi", "fact.tsnod",
 		};
 
 		[Desc("[tokens|visibility]",

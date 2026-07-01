@@ -327,7 +327,7 @@ OILB.TS.MUTANT:
 	Buildable:
 		BuildLimit: 1
 		Queue: Building, RABuilding
-		Prerequisites: ~tsfgttech, derricklimit
+		Prerequisites: ~tsgtcnstmutant, tsfgttech, derricklimit
 	SeedsResource:
 		ResourceType: Tiberium
 		Interval: 50
@@ -4331,7 +4331,7 @@ TSZONETROOPER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tsgtpile, tsgttech, ~upzonetrooper
+		Prerequisites: ~tsgtpile, tsgttech, upzonetrooper
 		Queue: Infantry, RAInfantry
 		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
 	Mobile:
@@ -7107,7 +7107,7 @@ TSTALTITAN:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap, ~uptitanmkii
+		Prerequisites: ~tsgtweap, uptitanmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -7176,7 +7176,7 @@ TSJUGG2:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap, tsgttech, ~upjuggmkii
+		Prerequisites: ~tsgtweap, tsgttech, upjuggmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -7490,7 +7490,7 @@ TSTALWOLV:
 		BuildPaletteOrder: 25
 		BuildDuration: 250
 		BuildDurationModifier: 100
-		Prerequisites: ~tsgtweap, ~upwolverinemkii
+		Prerequisites: ~tsgtweap, upwolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 32
@@ -7682,7 +7682,7 @@ TSMKII:
 		Name: Mammoth MK. II
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~upmammothmkii
+		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, upmammothmkii
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
@@ -10447,7 +10447,7 @@ TSZONEORCA:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~tsgthpad, ~upzoneorca
+		Prerequisites: ~tsgthpad, upzoneorca
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
 		Speed: 165
@@ -10518,7 +10518,7 @@ TSHAMMERHEAD:
 		Name: Hammerhead
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgthpad, ~uphammerhead
+		Prerequisites: ~tsgthpad, uphammerhead
 		Queue: Aircraft, RAAircraft
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
@@ -12016,7 +12016,7 @@ up_seretraining:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-seretraining.description
-		Prerequisites: ~tsgtradr, !up_seretraining
+		Prerequisites: ~tsgtcnstgdi, tsgtradr, !up_seretraining
 	RenderSprites:
 		Image: seretrainingicon
 	ProvidesPrerequisite:
@@ -12044,7 +12044,7 @@ up_tsprojectileimprovements:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
 		Description: upgrade-tsprojectileimprovements.description
-		Prerequisites: ~tsgtradr, !up_tsprojectileimprovements
+		Prerequisites: ~tsgtcnstgdi, tsgtradr, !up_tsprojectileimprovements
 	RenderSprites:
 		Image: tsprojectileimprovementsicon
 	ProvidesPrerequisite:
@@ -12072,7 +12072,7 @@ up_mechanicalreliability:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
 		Description: upgrade-mechanicalreliability.description
-		Prerequisites: ~tsgtradr, !up_mechanicalreliability
+		Prerequisites: ~tsgtcnstgdi, tsgtradr, !up_mechanicalreliability
 	RenderSprites:
 		Image: mechanicalreliabilityicon
 	ProvidesPrerequisite:
@@ -12114,7 +12114,7 @@ up_ceramicarmor:
 		BuildPaletteOrder: 110
 		Queue: Research
 		Description: upgrade-ceramicarmor.description
-		Prerequisites: ~tsgttech, !up_ceramicarmor
+		Prerequisites: ~tsgtcnstgdi, tsgttech, !up_ceramicarmor
 	RenderSprites:
 		Image: ceramicarmoricon
 	ProvidesPrerequisite:
@@ -12142,7 +12142,7 @@ up_mechengineering:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-mechengineering.description
-		Prerequisites: ~tsgttech, !up_mechengineering
+		Prerequisites: ~tsgtcnstgdi, tsgttech, !up_mechengineering
 	RenderSprites:
 		Image: mechengineeringicon
 	ProvidesPrerequisite:
@@ -12170,7 +12170,7 @@ up_sonicweaponry:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: upgrade-sonicweaponry.description
-		Prerequisites: ~tsgttech, !up_sonicweaponry
+		Prerequisites: ~tsgtcnstgdi, tsgttech, !up_sonicweaponry
 	RenderSprites:
 		Image: sonicweaponryicon
 	ProvidesPrerequisite:
@@ -12192,7 +12192,7 @@ up_railgunweaponry:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: upgrade-railgunweaponry.description
-		Prerequisites: ~tsgttech, !up_railgunweaponry
+		Prerequisites: ~tsgtcnstgdi, tsgttech, !up_railgunweaponry
 	RenderSprites:
 		Image: railgunweaponryicon
 	ProvidesPrerequisite:
@@ -12223,7 +12223,7 @@ up_modernfirecontrolsystems:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: upgrade-modernfirecontrolsystems.description
-		Prerequisites: ~tsgttech, !up_modernfirecontrolsystems
+		Prerequisites: ~tsgtcnstgdi, tsgttech, !up_modernfirecontrolsystems
 	RenderSprites:
 		Image: modernfirecontrolsystemsicon
 	# ProvidesPrerequisite:
@@ -12279,7 +12279,7 @@ up_infiltrationkit:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Procure personal stealth suit to Light Infantry and Shotgun Commando. Allows Chameleon Spies to infiltrate buildings.
-		Prerequisites: ~tsntradr, !up_infiltrationkit
+		Prerequisites: ~tsgtcnstnod, tsntradr, !up_infiltrationkit
 	RenderSprites:
 		Image: infiltrationkiticon
 	ProvidesPrerequisite:
@@ -12304,7 +12304,7 @@ up_mobilityspecialization:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
 		Description: Increases armor, accuracy, speed, vision, detection and attack range for the Brotherhood's light vehicles and aircraft.
-		Prerequisites: ~tsntradr, !up_mobilityspecialization
+		Prerequisites: ~tsgtcnstnod, tsntradr, !up_mobilityspecialization
 	RenderSprites:
 		Image: mobilityspecializationicon
 	ProvidesPrerequisite:
@@ -12344,7 +12344,7 @@ up_auxiliaryweapon:
 		BuildPaletteOrder: 110
 		Queue: Upgrades
 		Description: Adds secondary weapons or improves existing ones in most of Brotherhood's arsenal.
-		Prerequisites: ~tsntradr, !up_auxiliaryweapon
+		Prerequisites: ~tsgtcnstnod, tsntradr, !up_auxiliaryweapon
 	RenderSprites:
 		Image: tsauxiliaryweaponicon
 	ProvidesPrerequisite:
@@ -12374,7 +12374,7 @@ up_stealthfieldsimprovements:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: Increases effectiveness of Stealth Generators and Stealth Tanks, and upgrades Harvesters with portable stealth generator.
-		Prerequisites: ~tsnttech, !up_stealthfieldsimprovements
+		Prerequisites: ~tsgtcnstnod, tsnttech, !up_stealthfieldsimprovements
 	RenderSprites:
 		Image: stealthfieldsimprovementsicon
 	ProvidesPrerequisite:
@@ -12399,7 +12399,7 @@ up_tiberiumlenses:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Procure laser weaponries for the Brotherhood's combatants. Improve effectiveness of existing laser-based weapons.
-		Prerequisites: ~tsnttech, !up_tiberiumlenses
+		Prerequisites: ~tsgtcnstnod, tsnttech, !up_tiberiumlenses
 	RenderSprites:
 		Image: tstiberiumlensesicon
 	ProvidesPrerequisite:
@@ -12421,7 +12421,7 @@ up_tiberiumcoremissiles:
 		BuildPaletteOrder: 100
 		Queue: Research
 		Description: Procure tiberium core missile technology to Rocket Soldier, SAM Site, Attack Cycle and Stealth Tank, increasing their firepower.
-		Prerequisites: ~tsnttech, !up_tiberiumcoremissiles
+		Prerequisites: ~tsgtcnstnod, tsnttech, !up_tiberiumcoremissiles
 	RenderSprites:
 		Image: tstiberiumcoremissilesicon
 	ProvidesPrerequisite:
@@ -12443,7 +12443,7 @@ up_advancedtiberiumrefinement:
 		BuildPaletteOrder: 110
 		Queue: Research
 		Description: Allows construction of the Waste Facility. Increases all vehicles speed by 25%, and twice the improvement for Harvesters.
-		Prerequisites: ~tsnttech, !up_advancedtiberiumrefinement
+		Prerequisites: ~tsgtcnstnod, tsnttech, !up_advancedtiberiumrefinement
 	RenderSprites:
 		Image: advancedtiberiumrefinementicon
 	ProvidesPrerequisite:
@@ -12511,7 +12511,7 @@ up_willofkane:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: One vision. One purpose. Peace through power. All infantry get firepower bonus based on missing health.
-		Prerequisites: ~tsnttech, !up_willofkane
+		Prerequisites: ~tsgtcnstnod, tsnttech, !up_willofkane
 	RenderSprites:
 		Image: willofkaneicon
 	ProvidesPrerequisite:
@@ -12532,7 +12532,7 @@ cabalmobilitymatrix:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Walkers moves 25% faster, and ads 10% of armor.
-		Prerequisites: ~tsntradrcabal, !cabalmobilitymatrix
+		Prerequisites: ~tsgtcnstcabal, tsntradrcabal, !cabalmobilitymatrix
 	RenderSprites:
 		Image: cabalmobilitymatrix
 	ProvidesPrerequisite:
@@ -12557,7 +12557,7 @@ cabaldarkarmament:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Infantry Unlocks extra weapons, 10% reload faster.
-		Prerequisites: ~tsntradrcabal, !cabaldarkarmament
+		Prerequisites: ~tsgtcnstcabal, tsntradrcabal, !cabaldarkarmament
 	RenderSprites:
 		Image: cabaldarkarmament
 	ProvidesPrerequisite:
@@ -12581,7 +12581,7 @@ cabaltibcatalysticon:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Artillery and Tarantula Unlocks neutron shells.
-		Prerequisites: ~tsntradrcabal, !cabaltibcatalysticon
+		Prerequisites: ~tsgtcnstcabal, tsntradrcabal, !cabaltibcatalysticon
 	RenderSprites:
 		Image: cabaltibcatalysticon
 	ProvidesPrerequisite:
@@ -12603,7 +12603,7 @@ cabalradarhack:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Unlocks Radar Hack Support Power, reveals map location.
-		Prerequisites: ~tsntradrcabal, !cabalradarhack
+		Prerequisites: ~tsgtcnstcabal, tsntradrcabal, !cabalradarhack
 	RenderSprites:
 		Image: cabalradarhack
 	ProvidesPrerequisite:
@@ -12626,7 +12626,7 @@ cabalbackupsystemicon:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Heavy Vehicles turns in Husks when dies, if Husk arent destroyed, it wakes up again.
-		Prerequisites: ~tscabaltech, !cabalbackupsystemicon
+		Prerequisites: ~tsgtcnstcabal, tscabaltech, !cabalbackupsystemicon
 	RenderSprites:
 		Image: cabalbackupsystemicon
 	ProvidesPrerequisite:
@@ -12647,7 +12647,7 @@ cabalhandoflegion:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Spawns free Hackers from Tech Center, Hackers upgrade speed.
-		Prerequisites: ~tscabaltech, !cabalhandoflegion
+		Prerequisites: ~tsgtcnstcabal, tscabaltech, !cabalhandoflegion
 	RenderSprites:
 		Image: cabalhandoflegion
 	ProvidesPrerequisite:
@@ -12668,7 +12668,7 @@ cabaldataworm:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Unlocks a support power at CABAL Core, can hack and turn enemy vehicles or robots in your side.
-		Prerequisites: ~tscabaltech, !cabaldataworm
+		Prerequisites: ~tsgtcnstcabal, tscabaltech, !cabaldataworm
 	RenderSprites:
 		Image: cabaldataworm
 	ProvidesPrerequisite:
