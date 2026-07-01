@@ -16,7 +16,7 @@ fedinf.steel:
 		Name: Clone Trooper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~qabarr.steel
+		Prerequisites: ~qacst.steel, qabarr.steel
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -90,7 +90,7 @@ board_inf.steel:
 		Name: Hover Board Grenadier
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~qtradr.steel
+		Prerequisites: ~qacst.steel, qtradr.steel
 		Queue: Infantry, RAInfantry
 		Description: actor-steel_board_inf.description
 	Mobile:
@@ -180,7 +180,7 @@ qinf.steel:
 		Name: Quantum Missile Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~qatech.steel
+		Prerequisites: ~qacst.steel, qatech.steel
 		Queue: Infantry, RAInfantry
 		Description: actor-ggi.description
 	Mobile:
@@ -324,7 +324,7 @@ fedeng.steel:
 	Inherits: RA2ENGINEER
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
 	Buildable:
-		Prerequisites: ~qabarr.steel
+		Prerequisites: ~qacst.steel, qabarr.steel
 		Queue: Infantry, RAInfantry
 	RenderSprites:
 		Image: fedeng.steel
@@ -354,7 +354,7 @@ runner.steel:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~qatech.steel
+		Prerequisites: ~qacst.steel, qatech.steel
 		BuildLimit: 1
 		Description: template-commando.description
 	Health:

@@ -6,7 +6,7 @@ mcv.nax2:
 	Tooltip:
 		Name: Naxis Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~powr.nax2, radar.nax2
+		Prerequisites: ~conyard.nax2, powr.nax2, radar.nax2
 	Transforms:
 		IntoActor: conyard.nax2
 		Offset: -1,-1
@@ -35,7 +35,7 @@ dalek.nax2:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~tech.nax2
+		Prerequisites: ~conyard.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: Dalek
 	Mobile:
@@ -91,7 +91,7 @@ beetle.nax2:
 		Name: Laser Beetle
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax2
+		Prerequisites: ~conyard.nax2, weap.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -170,7 +170,7 @@ panzer.nax2:
 		Name: Lunar Panzer
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~weap.nax2
+		Prerequisites: ~conyard.nax2, weap.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -254,7 +254,7 @@ tiger.nax2:
 		Name: Lunar Tiger
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~radar.nax2
+		Prerequisites: ~conyard.nax2, radar.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -338,7 +338,7 @@ jager.nax2:
 		Name: Neo Jagdpanzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tech.nax2
+		Prerequisites: ~conyard.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -409,7 +409,7 @@ grille.nax2:
 		Name: Lunar Grille
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~radar.nax2
+		Prerequisites: ~conyard.nax2, radar.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -484,7 +484,7 @@ giant_rk.nax2:
 		Name: Korruptes Biest
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~weap.nax2, radar.nax2, tech.nax2
+		Prerequisites: ~conyard.nax2, weap.nax2, radar.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aamecha.description
 	Mobile:
@@ -538,7 +538,7 @@ crystal.nax2:
 		Name: Crystal Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tech.nax2
+		Prerequisites: ~conyard.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -616,7 +616,7 @@ bradley.nax2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~weap.nax2, radar.nax2
+		Prerequisites: ~conyard.nax2, weap.nax2, radar.nax2
 		Description: actor-v3.description
 	Valued:
 		Cost: 2000
@@ -693,7 +693,7 @@ aatank.nax2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~weap.nax2, radar.nax2
+		Prerequisites: ~conyard.nax2, weap.nax2, radar.nax2
 		Description: actor-v3.description
 	Valued:
 		Cost: 2500
@@ -779,7 +779,7 @@ lasert.nax2:
 		Name: Laser Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax2
+		Prerequisites: ~conyard.nax2, weap.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -866,7 +866,7 @@ gravity.nax2:
 		Name: Gravity Core Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax2, radar.nax2, tech.nax2
+		Prerequisites: ~conyard.nax2, weap.nax2, radar.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:

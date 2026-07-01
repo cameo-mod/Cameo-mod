@@ -24,7 +24,7 @@ up_pulseweapons.steel:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Increases Firepower of all bullet based weapons by 30% and Range by 15%. Clone Troopers gain 60% more Firepower and 30% more Range instead.
-		Prerequisites: ~qtradr.steel, !up_pulseweapons.steel
+		Prerequisites: ~qacst.steel, qtradr.steel, !up_pulseweapons.steel
 	RenderSprites:
 		Image: up_pulseweapons.steel
 	ProvidesPrerequisite:
@@ -39,7 +39,7 @@ up_naniteinfusion.steel:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Infuses all Units and Buildings with nanites that regenerate them faster and take 5% less damage. Double effect for Infantry.
-		Prerequisites: ~qtradr.steel, !up_naniteinfusion.steel
+		Prerequisites: ~qacst.steel, qtradr.steel, !up_naniteinfusion.steel
 	RenderSprites:
 		Image: up_naniteinfusion.steel
 	ProvidesPrerequisite:
@@ -54,7 +54,7 @@ up_ferrocrete.steel:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Increases Damage Resistance of all Vehicles and Buildings by 15%.
-		Prerequisites: ~qtradr.steel, !up_ferrocrete.steel
+		Prerequisites: ~qacst.steel, qtradr.steel, !up_ferrocrete.steel
 	RenderSprites:
 		Image: up_ferrocrete.steel
 	ProvidesPrerequisite:
@@ -70,7 +70,7 @@ up_emp.steel:
 		Queue: Research
 		Icon: icon2
 		Description: Allows the use of the EMP cannon support power from the Consortium Battle Lab.
-		Prerequisites: ~qatech.steel, !up_emp.steel
+		Prerequisites: ~qacst.steel, qatech.steel, !up_emp.steel
 	RenderSprites:
 		Image: qatech.steel
 	ProvidesPrerequisite:
@@ -85,7 +85,7 @@ up_scalpel.steel:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: Spawns Scalpel defense drones for your defensive structures.
-		Prerequisites: ~qatech.steel, !up_scalpel.steel
+		Prerequisites: ~qacst.steel, qatech.steel, !up_scalpel.steel
 	RenderSprites:
 		Image: steel_scalpel
 	ProvidesPrerequisite:
@@ -100,7 +100,7 @@ up_resonanceammo.steel:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: All Bullets ricochet between targets, dealing additional damage! Increases Range by all bullets by 10%.
-		Prerequisites: ~qatech.steel, !up_resonanceammo.steel
+		Prerequisites: ~qacst.steel, qatech.steel, !up_resonanceammo.steel
 	RenderSprites:
 		Image: up_resonanceammo.steel
 	ProvidesPrerequisite:
@@ -115,7 +115,7 @@ up_empquantumweapons.steel:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: Increases damage and adds a powerful EMP effect to all Quantum Weapons. Effective against armored vehicles and aircraft.
-		Prerequisites: ~qatech.steel, !up_empquantumweapons.steel
+		Prerequisites: ~qacst.steel, qatech.steel, !up_empquantumweapons.steel
 	RenderSprites:
 		Image: up_empquantumweapons.steel
 	ProvidesPrerequisite:
@@ -130,7 +130,7 @@ up_shielresistance.steel:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: Increases the amount of damage shields can take by 25%.
-		Prerequisites: ~qatech.steel, !up_shielresistance.steel
+		Prerequisites: ~qacst.steel, qatech.steel, !up_shielresistance.steel
 	RenderSprites:
 		Image: up_shielresistance.steel
 	ProvidesTeamProxyActor:

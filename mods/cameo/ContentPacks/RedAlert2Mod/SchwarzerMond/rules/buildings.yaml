@@ -486,7 +486,7 @@ gcore.nax2:
 		Amount: -125
 	Buildable:
 		Description: Reduces movement speed and range of nearby vehicles.
-		Prerequisites: ~tech.nax2
+		Prerequisites: ~conyard.nax2, tech.nax2
 		Queue: Defence, RADefence
 	ProximityExternalCondition@gravity_1:
 		Range: 15000
@@ -561,7 +561,7 @@ dairy.nax2:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Produces Passive income and adds hp bonus with Infantry
-		Prerequisites: ~tech.nax2, ~techlevel.medium, derricklimit
+		Prerequisites: ~conyard.nax2, tech.nax2, ~techlevel.medium, derricklimit
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2

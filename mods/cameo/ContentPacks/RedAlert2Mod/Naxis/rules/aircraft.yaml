@@ -228,7 +228,7 @@ bf109.nax:
 		Cost: 1100
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~radar.nax, ~!up_me262.nax
+		Prerequisites: ~conyard.nax, radar.nax, ~!up_me262.nax
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:
@@ -314,7 +314,7 @@ me262.nax:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~up_me262.nax
+		Prerequisites: ~conyard.nax, up_me262.nax
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:
@@ -424,7 +424,7 @@ zep.nax:
 		OverrideActor: zep.nax
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~radar.nax
+		Prerequisites: ~conyard.nax, radar.nax
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor-shad.description
 	Aircraft:

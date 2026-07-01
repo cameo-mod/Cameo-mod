@@ -20,7 +20,7 @@ up_ylaser.nax2:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Yellow lasers upgrades shooting range and burst
-		Prerequisites: ~radar.nax2, !up_ylaser.nax2
+		Prerequisites: ~conyard.nax2, radar.nax2, !up_ylaser.nax2
 	RenderSprites:
 		Image: up_ylaser.nax2
 	ProvidesPrerequisite:
@@ -35,7 +35,7 @@ up_gplasma.nax2:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Tanks deals more damage and Tesla type damage
-		Prerequisites: ~radar.nax2, !up_gplasma.nax2
+		Prerequisites: ~conyard.nax2, radar.nax2, !up_gplasma.nax2
 	RenderSprites:
 		Image: up_gplasma.nax2
 	ProvidesPrerequisite:

@@ -14,7 +14,7 @@ phoenix.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cgtech.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian
 		Queue: Aircraft, RAAircraft
 		Description: actor-aaphoenix.description
 	Aircraft:
@@ -104,7 +104,7 @@ pelican.asian:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgairf.asian
+		Prerequisites: ~cgcnst.asian, cgairf.asian
 		Description: actor-aapelican.description
 	Valued:
 		Cost: 2000

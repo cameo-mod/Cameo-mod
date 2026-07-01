@@ -76,7 +76,7 @@ halftrack.nax:
 		Name: Halftrack
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax
+		Prerequisites: ~conyard.nax, weap.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-apc.description
 	Mobile:
@@ -133,7 +133,7 @@ kubel.nax:
 		Name: Kübelwagen
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax
+		Prerequisites: ~conyard.nax, weap.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_kubel.description
 	Mobile:
@@ -186,7 +186,7 @@ wirbelwind.nax:
 		Name: Wirbelwind
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_wirbelwind.description
 	Mobile:
@@ -261,7 +261,7 @@ mcv.nax:
 	Tooltip:
 		Name: Naxi Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~powr.nax, tek.nax
+		Prerequisites: ~conyard.nax, powr.nax, tek.nax
 	Transforms:
 		IntoActor: conyard.nax
 		Offset: -1,-1
@@ -293,7 +293,7 @@ tiger.nax:
 		Name: Tiger Heavy Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, ~!up_kingtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, ~!up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -356,7 +356,7 @@ kingtiger.nax:
 		Name: King Tiger Heavy Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, ~up_kingtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -420,7 +420,7 @@ maus.nax:
 		Name: Maus
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, tech.nax, ~up_sturmtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, tech.nax, up_sturmtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -486,7 +486,7 @@ ratte.nax:
 	Buildable:
 		BuildPaletteOrder: 150
 		BuildLimit: 1
-		Prerequisites: ~weap.nax, tech.nax, ~up_ratte.nax
+		Prerequisites: ~conyard.nax, weap.nax, tech.nax, up_ratte.nax
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -566,7 +566,7 @@ grille.nax:
 		Name: Grille
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~!up_kingtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax, ~!up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_grille.description
 	Mobile:
@@ -618,7 +618,7 @@ brummbar.nax:
 		Name: Brummbär
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax, up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_brummbar.description
 	Mobile:
@@ -669,7 +669,7 @@ sturmtiger.nax:
 		Name: Sturm Tiger
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, tech.nax, ~up_sturmtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, tech.nax, up_sturmtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_sturmtiger.description
 	Mobile:
@@ -716,7 +716,7 @@ hetzer.nax:
 		Name: Hetzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~!up_kingtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax, ~!up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_hetzer.description
 	Mobile:
@@ -770,7 +770,7 @@ jagdpanzer.nax:
 		Name: Jagdpanzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax, up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_jagdpanzer.description
 	Mobile:
@@ -822,7 +822,7 @@ eng.nax:
 		Name: Engineering Truck
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~powr.nax
+		Prerequisites: ~conyard.nax, powr.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_eng.description
 	Mobile:
@@ -890,7 +890,7 @@ brad.nax:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~weap.nax, tech.nax, ~up_brad.nax
+		Prerequisites: ~conyard.nax, weap.nax, tech.nax, up_brad.nax
 		Description: actor-nax_brad.description
 	Valued:
 		Cost: 2300
@@ -989,7 +989,7 @@ sarubia.nax:
 		Name: Nop-03 Sarubia
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, tech.nax, ~up_sarubia.nax
+		Prerequisites: ~conyard.nax, weap.nax, tech.nax, up_sarubia.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_sarubia.description
 	Mobile:
@@ -1041,7 +1041,7 @@ shoe.nax:
 		Name: Shoe Karn
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~weap.nax, tech.nax, ~up_shoe.nax
+		Prerequisites: ~conyard.nax, weap.nax, tech.nax, up_shoe.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_shoe.description
 	Mobile:
@@ -1129,7 +1129,7 @@ nokana.nax:
 	Buildable:
 		BuildPaletteOrder: 80
 		BuildLimit: 1
-		Prerequisites: ~weap.nax, tech.nax, ~up_nokana.nax
+		Prerequisites: ~conyard.nax, weap.nax, tech.nax, up_nokana.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_nokana.description
 	Mobile:
@@ -1204,7 +1204,7 @@ zombietank.nax:
 		OverrideActor: zombietank.nax
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:
@@ -1278,7 +1278,7 @@ assault.nax:
 		Name: Imperial Assault Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, ~up_kingtiger.nax, ~disabled
+		Prerequisites: ~conyard.nax, weap.nax, up_kingtiger.nax, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -1347,7 +1347,7 @@ imperial.nax:
 		Name: Imperial Turbo Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, !disabled
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax, !disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -1412,7 +1412,7 @@ panzer.nax:
 		Name: Panzer III
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~weap.nax, ~disabled
+		Prerequisites: ~conyard.nax, weap.nax, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -1477,7 +1477,7 @@ car.nax:
 		Name: Combat Car
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, ~disabled
+		Prerequisites: ~conyard.nax, weap.nax, radar.nax, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:

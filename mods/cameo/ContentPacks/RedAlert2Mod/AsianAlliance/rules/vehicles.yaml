@@ -57,7 +57,7 @@ quas.asian:
 	UpdatesPlayerStatistics:
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgweap.asian
+		Prerequisites: ~cgcnst.asian, cgweap.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -122,7 +122,7 @@ dragonfly.asian:
 	UpdatesPlayerStatistics:
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgweap.asian
+		Prerequisites: ~cgcnst.asian, cgweap.asian
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:
@@ -180,7 +180,7 @@ lynx.asian:
 		Cost: 850
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgweap.asian
+		Prerequisites: ~cgcnst.asian, cgweap.asian
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -260,7 +260,7 @@ oilt.asian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~cgradr.asian, cgtnkr.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, cgtnkr.asian
 		Description: actor-aaoilt.description
 	Valued:
 		Cost: 1000
@@ -292,7 +292,7 @@ acv.asian:
 	Tooltip:
 		Name: Asian Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~cgdept.asian
+		Prerequisites: ~cgcnst.asian, cgdept.asian
 	Transforms:
 		IntoActor: cgcnst.asian
 		Offset: -1,-1
@@ -383,7 +383,7 @@ pulv.asian:
 		Name: Pulverizer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgradr.asian, ~!up_mecha.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, ~!up_mecha.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-aapulv.description
 	Mobile:
@@ -440,7 +440,7 @@ ptnk.asian:
 		Name: Plasma Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~up_ptnk.asian, cgtech.asian
+		Prerequisites: ~cgcnst.asian, up_ptnk.asian, cgtech.asian
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -498,7 +498,7 @@ viper.asian:
 		Name: Viper
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgradr.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaviper.description
 	Mobile:
@@ -559,7 +559,7 @@ mlrs.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~up_mlrs.asian, cgtech.asian
+		Prerequisites: ~cgcnst.asian, up_mlrs.asian, cgtech.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-mlrs.description
 	Mobile:
@@ -611,7 +611,7 @@ hotwi.asian:
 		Name: Howitzer
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~up_howitzer.asian, cgmiac.asian
+		Prerequisites: ~cgcnst.asian, up_howitzer.asian, cgmiac.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-aahowi.description
 	Mobile:
@@ -687,7 +687,7 @@ ftnk.asian:
 		Name: Asian Flame Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~up_ftnk.asian
+		Prerequisites: ~cgcnst.asian, up_ftnk.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-ftnk.description
 	Mobile:
@@ -751,7 +751,7 @@ mecha.asian:
 		Name: Pulverizer Mecha
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~up_mecha.asian, cgtech.asian
+		Prerequisites: ~cgcnst.asian, up_mecha.asian, cgtech.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-aamecha.description
 	Mobile:
@@ -815,7 +815,7 @@ railt.asian:
 		Name: Railgun Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgtech.asian, ~!up_railt2.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, ~!up_railt2.asian
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -864,7 +864,7 @@ railt2.asian:
 		Name: Heavy Railgun Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~up_railt2.asian, cgtech.asian
+		Prerequisites: ~cgcnst.asian, up_railt2.asian, cgtech.asian
 		Queue: Vehicle, RAVehicle
 	Mobile:
 		Locomotor: tracked
@@ -903,7 +903,7 @@ wtrt.asian:
 		Name: War Turtle
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~up_warturtle.asian, cgmiac.asian
+		Prerequisites: ~cgcnst.asian, up_warturtle.asian, cgmiac.asian
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:

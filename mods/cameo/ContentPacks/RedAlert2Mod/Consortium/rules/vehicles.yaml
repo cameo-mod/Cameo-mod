@@ -21,7 +21,7 @@ katy.steel:
 		Name: Katy Tank
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~up_katy.steel, qatech.steel
+		Prerequisites: ~qacst.steel, up_katy.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_katy.description
 	Mobile:
@@ -124,7 +124,7 @@ defender.steel:
 		Name: Defender Bot
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~up_defender.steel, qtradr.steel
+		Prerequisites: ~qacst.steel, up_defender.steel, qtradr.steel
 		Queue: Vehicle, RAVehicle
 		Description: Shielded Battle Robot
 	Mobile:
@@ -219,7 +219,7 @@ stalker.steel:
 		Name: Stalker
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~up_stalker.steel, ~qatech.steel
+		Prerequisites: ~qacst.steel, up_stalker.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:
@@ -299,7 +299,7 @@ white_rabbit.steel:
 		Name: White Rabbit
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~up_white_rabbit.steel, ~qatech.steel
+		Prerequisites: ~qacst.steel, up_white_rabbit.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:
@@ -377,7 +377,7 @@ cougar.steel:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~qaweap.steel, ~disabled
+		Prerequisites: ~qacst.steel, qaweap.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Mobile:
@@ -436,7 +436,7 @@ hummer.steel:
 		Name: Federation Hummer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~qaweap.steel, ~disabled
+		Prerequisites: ~qacst.steel, qaweap.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -497,7 +497,7 @@ oldqtnk.steel:
 		Name: Beta Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~qaweap.steel, qatech.steel, ~disabled
+		Prerequisites: ~qacst.steel, qaweap.steel, qatech.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -562,7 +562,7 @@ cobra.steel:
 		Name: Federation Cobra
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~qaweap.steel, qatech.steel, ~disabled
+		Prerequisites: ~qacst.steel, qaweap.steel, qatech.steel, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -623,7 +623,7 @@ savi.steel:
 		Name: Support Shield Generator
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~qaweap.steel, qatech.steel
+		Prerequisites: ~qacst.steel, qaweap.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_savi.description
 	Mobile:
@@ -680,7 +680,7 @@ qmcv.steel:
 	Tooltip:
 		Name: Consortium Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: qtradr.steel, ~qaweap.steel
+		Prerequisites: ~qacst.steel, qtradr.steel, qaweap.steel
 	Mobile:
 		Speed: 60
 		Locomotor: amphibius
@@ -787,7 +787,7 @@ mako.steel:
 		Name: Mako
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~qaweap.steel, ~!up_quantumtank.steel
+		Prerequisites: ~qacst.steel, qaweap.steel, ~!up_quantumtank.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_mako.description
 	Mobile:
@@ -866,7 +866,7 @@ quantumtank.steel:
 		Name: Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~up_quantumtank.steel
+		Prerequisites: ~qacst.steel, up_quantumtank.steel
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -949,7 +949,7 @@ manta.steel:
 		Name: Manta
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~qaweap.steel, ~!up_manta_hunt.steel
+		Prerequisites: ~qacst.steel, qaweap.steel, ~!up_manta_hunt.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_manta.description
 	Mobile:
@@ -1052,7 +1052,7 @@ manta_hunt.steel:
 		Name: Barracuda
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~up_manta_hunt.steel
+		Prerequisites: ~qacst.steel, up_manta_hunt.steel
 		Queue: Vehicle, RAVehicle
 		Description: Kills Infantry better
 	Mobile:
@@ -1184,7 +1184,7 @@ mega.steel:
 		Name: Megalodon
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~qatech.steel
+		Prerequisites: ~qacst.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_mega.description
 	Mobile:
@@ -1247,7 +1247,7 @@ arty.steel:
 		Name: Hammerhead Artillery Tank
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~qtradr.steel
+		Prerequisites: ~qacst.steel, qtradr.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_arty.description
 	Mobile:
@@ -1356,7 +1356,7 @@ potnk.steel:
 		Name: Poseidon Tank
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~qtradr.steel
+		Prerequisites: ~qacst.steel, qtradr.steel
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:
@@ -1428,7 +1428,7 @@ dagger.steel:
 		Name: Dagger
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~up_dagger.steel, qatech.steel
+		Prerequisites: ~qacst.steel, up_dagger.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-aahowi.description
 	Mobile:
@@ -1486,7 +1486,7 @@ beholder.steel:
 		Name: Beholder
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~qaweap.steel, qatech.steel
+		Prerequisites: ~qacst.steel, qaweap.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
 		Description: actor-steel_beholder.description
 	Mobile:

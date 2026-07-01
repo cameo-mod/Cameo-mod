@@ -17,7 +17,7 @@ enforcer.futu:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~egpile.futu
+		Prerequisites: ~egcnst.futu, egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_enforcer.description
 	Mobile:
@@ -145,7 +145,7 @@ javelinsoldier.futu:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~egpile.futu
+		Prerequisites: ~egcnst.futu, egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_javelinsoldier.description
 	Mobile:
@@ -255,7 +255,7 @@ javelinsoldier.futu:
 fedeng.futu:
 	Inherits: RA2ENGINEER
 	Buildable:
-		Prerequisites: ~egpile.futu
+		Prerequisites: ~egcnst.futu, egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_fedeng.description
 	RenderSprites:
@@ -273,7 +273,7 @@ spy.futu:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 90
-		Prerequisites: ~egtech.futu
+		Prerequisites: ~egcnst.futu, egtech.futu
 		Description: actor-ra2spy.description
 	Valued:
 		Cost: 1000
@@ -330,7 +330,7 @@ blackwidow.futu:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~egtech.futu
+		Prerequisites: ~egcnst.futu, egtech.futu
 		Description: actor-futu_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
@@ -383,7 +383,7 @@ cryoleg.futu:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 121
-		Prerequisites: ~egshock.futu
+		Prerequisites: ~egcnst.futu, egshock.futu
 		BuildLimit: 1
 		Description: actor-futu_cryoleg.description
 	RenderSprites:
@@ -437,7 +437,7 @@ engi.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~yrgarobo.futu
+		Prerequisites: ~egcnst.futu, yrgarobo.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_engi.description
 	Mobile:
@@ -516,7 +516,7 @@ wheel.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~yrgarobo.futu
+		Prerequisites: ~egcnst.futu, yrgarobo.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-futu_wheel.description
 	Mobile:
@@ -579,7 +579,7 @@ robot_shotgun.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~yrgarobo.futu, egtf.futu
+		Prerequisites: ~egcnst.futu, yrgarobo.futu, egtf.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-future_robot_shotgun.description
 	Mobile:
@@ -647,7 +647,7 @@ robot_missiles.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~yrgarobo.futu, egtech.futu
+		Prerequisites: ~egcnst.futu, yrgarobo.futu, egtech.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-future_robot_missiles.description
 	Mobile:
@@ -716,7 +716,7 @@ robot_cannon.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~yrgarobo.futu, egshock.futu
+		Prerequisites: ~egcnst.futu, yrgarobo.futu, egshock.futu
 		Queue: Infantry, RAInfantry
 		Description: actor-future_robot_cannon.description
 	Mobile:

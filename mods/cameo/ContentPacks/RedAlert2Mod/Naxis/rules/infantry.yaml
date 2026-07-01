@@ -15,7 +15,7 @@ rifle.nax:
 		Name: Naxi Rifle Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~conyard.nax, barr.nax
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -68,7 +68,7 @@ cons.nax:
 		Name: Naxi Rifle Recruit
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~conyard.nax, barr.nax
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -121,7 +121,7 @@ mp40.nax:
 		Name: SS Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, radar.nax
+		Prerequisites: ~conyard.nax, barr.nax, radar.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_mp40.description
 	Mobile:
@@ -174,7 +174,7 @@ fcons.nax:
 		Name: Naxi Flamer
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~conyard.nax, barr.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-e4.description
 	Mobile:
@@ -230,7 +230,7 @@ merc.nax:
 		Name: Naxi Mercenary Sniper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, radar.nax
+		Prerequisites: ~conyard.nax, barr.nax, radar.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_merc.description
 	Mobile:
@@ -282,7 +282,7 @@ shrek.nax:
 		Name: Panzerschreck
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~conyard.nax, barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-infantry.description
 	Mobile:
@@ -334,7 +334,7 @@ tcons.nax:
 		Name: Panzerfaust Trooper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~conyard.nax, barr.nax
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-infantry.description
 	Mobile:
@@ -384,7 +384,7 @@ litt.nax:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tek.nax
+		Prerequisites: ~conyard.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_litt.description
 	Aircraft:
@@ -459,7 +459,7 @@ slavemaster.nax:
 		Name: Slave Overseer
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, refin.nax
+		Prerequisites: ~conyard.nax, barr.nax, refin.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_slavemaster.description
 	Mobile:
@@ -512,7 +512,7 @@ slav.nax:
 	Inherits@OstfrontExperience: ^OstfrontExperience
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, refin.nax
+		Prerequisites: ~conyard.nax, barr.nax, refin.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_slavemaster.description
 	Targetable@SlaveFaster:
@@ -596,7 +596,7 @@ hmg.nax:
 		Name: Naxi Machinegunners
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tek.nax
+		Prerequisites: ~conyard.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_hmg.description
 	Mobile:
@@ -710,7 +710,7 @@ quadflak.nax:
 		Name: Portable Flak
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~barr.nax
+		Prerequisites: ~conyard.nax, barr.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_quadflak.description
 	Mobile:
@@ -875,7 +875,7 @@ conehead.nax:
 		Name: Coneheads Knights
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~barr.nax, tek.nax
+		Prerequisites: ~conyard.nax, barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		AdditionalActors: conehead.nax, conehead.nax, conehead.nax, conehead.nax, conehead2.nax
 		Description: template-scout-infantry.description
@@ -926,7 +926,7 @@ conehead2.nax:
 		Name: Conehead Leader
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, ~disabled
+		Prerequisites: ~conyard.nax, barr.nax, ~disabled
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -983,7 +983,7 @@ atankcann.nax:
 		Name: Anti Tank Cannon
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~barr.nax
+		Prerequisites: ~conyard.nax, barr.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_atankcann.description
 	Mobile:
@@ -1036,7 +1036,7 @@ bmwbike.nax:
 		Name: BMW Bike
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax
+		Prerequisites: ~conyard.nax, weap.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_bmwbike.description
 	Mobile:
@@ -1114,7 +1114,7 @@ alien.nax:
 		Name: Naxi Alien
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, ~disabled
+		Prerequisites: ~conyard.nax, barr.nax, ~disabled
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_alien.description
 	Mobile:

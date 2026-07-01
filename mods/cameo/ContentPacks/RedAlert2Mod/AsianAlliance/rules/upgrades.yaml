@@ -20,7 +20,7 @@ up_infantryspec.asian:
 		Name: Modernized Infantry Equipment
 	Buildable:
 		Description: asian_upgrade_infantryspec.description
-		Prerequisites: ~cgradr.asian, !up_infantryspec.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, !up_infantryspec.asian
 	RenderSprites:
 		Image: up_infantryspec.asian
 
@@ -30,7 +30,7 @@ up_pulverizer.asian:
 		Name: Heavy Pulverizer Weapons
 	Buildable:
 		Description: asian_upgrade_pulverizer.description
-		Prerequisites: ~cgradr.asian, !up_pulverizer.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, !up_pulverizer.asian
 	RenderSprites:
 		Image: up_pulverizer.asian
 
@@ -40,7 +40,7 @@ up_phalanx.asian:
 		Name: Asian Phalanx
 	Buildable:
 		Description: asian_upgrade_phalanx.description
-		Prerequisites: ~cgradr.asian, !up_phalanx.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, !up_phalanx.asian
 	RenderSprites:
 		Image: up_phalanx.asian
 	ProvidesPrerequisite:
@@ -53,7 +53,7 @@ up_massparadrop.asian:
 		# Sequence: icon
 		Icon: paratroopers
 		Description: Allows the use of the Mass Paradrop support power from the Asian Alliance Airfield.
-		Prerequisites: ~cgradr.asian, !up_massparadrop.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, !up_massparadrop.asian
 	RenderSprites:
 		Image: icon
 	ProvidesPrerequisite:
@@ -66,7 +66,7 @@ up_clusterbombs.asian:
 		# Sequence: icon
 		Icon: icon
 		Description: Allows the use of the Cluster Bombs support power from the Asian Alliance Airfield.
-		Prerequisites: ~cgradr.asian, !up_clusterbombs.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, !up_clusterbombs.asian
 	RenderSprites:
 		Image: tankmine.asian
 	ProvidesPrerequisite:
@@ -79,7 +79,7 @@ up_chaosbombs.asian:
 		# Sequence: icon
 		Icon: icon2
 		Description: Allows the use of the Chaos Bombs support power from the Asian Alliance Airfield.
-		Prerequisites: ~cgradr.asian, cgmiac.asian, up_clusterbombs.asian, !up_chaosbombs.asian
+		Prerequisites: ~cgcnst.asian, cgradr.asian, cgmiac.asian, up_clusterbombs.asian, !up_chaosbombs.asian
 	RenderSprites:
 		Image: tankmine.asian
 	ProvidesPrerequisite:
@@ -90,7 +90,7 @@ up_tsunami.asian:
 		Name: Tsunami Carrier Upgrade
 	Buildable:
 		Description: Upgrades Kamikaze Carrier to Tsunami Carrier.
-		Prerequisites: ~cgmiac.asian, ~cgyard.asian, !up_tsunami.asian
+		Prerequisites: cgmiac.asian, ~cgyard.asian, !up_tsunami.asian
 	RenderSprites:
 		Image: tsun.asian
 	ProvidesPrerequisite:
@@ -101,7 +101,7 @@ up_dragonfire.asian:
 		Name: Dragon Fire
 	Buildable:
 		Description: asian_upgrade_dragonfire.description
-		Prerequisites: ~cgtech.asian, !up_dragonfire.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, !up_dragonfire.asian
 	RenderSprites:
 		Image: up_dragonfire.asian
 	ProvidesPrerequisite:
@@ -112,7 +112,7 @@ up_celestialpower.asian:
 		Name: Celestial Power
 	Buildable:
 		Description: asian_upgrade_celestialpower.description
-		Prerequisites: ~cgtech.asian, !up_celestialpower.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, !up_celestialpower.asian
 	RenderSprites:
 		Image: up_celestialpower.asian
 	ProvidesPrerequisite:
@@ -123,7 +123,7 @@ up_banzai.asian:
 		Name: Banzai Mode
 	Buildable:
 		Description: asian_upgrade_banzai.description
-		Prerequisites: ~cgtech.asian, cgmiac.asian, !up_banzai.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, cgmiac.asian, !up_banzai.asian
 	RenderSprites:
 		Image: up_banzai.asian
 	ProvidesPrerequisite:
@@ -134,7 +134,7 @@ up_team_dragonway.asian:
 		Name: Way of the Dragon
 	Buildable:
 		Description: asian_team_upgrade_dragonway.description
-		Prerequisites: ~cgtech.asian, cgmiac.asian, !up_team_dragonway.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, cgmiac.asian, !up_team_dragonway.asian
 	RenderSprites:
 		Image: up_team_dragonway.asian
 	ProvidesTeamProxyActor:
@@ -158,7 +158,7 @@ up_team_diplomacy.asian:
 		Name: Asian Diplomacy
 	Buildable:
 		Description: asian_team_upgrade_diplomacy.description
-		Prerequisites: ~cgtech.asian, cgmiac.asian, !up_team_diplomacy.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, cgmiac.asian, !up_team_diplomacy.asian
 	RenderSprites:
 		Image: up_team_diplomacy.asian
 	ProvidesTeamProxyActor:

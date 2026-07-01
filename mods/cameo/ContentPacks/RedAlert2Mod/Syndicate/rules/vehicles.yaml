@@ -12,7 +12,7 @@ mortarbike.latin:
 	Buildable:
 		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
 		BuildPaletteOrder: 30
-		Prerequisites: ~up_mortarbike.latin
+		Prerequisites: ~cgcnst.latin, up_mortarbike.latin
 		Description: actor-latin_mortarbike.description
 	Tooltip:
 		Name: Mortar Bike
@@ -141,7 +141,7 @@ mcv.latin:
 	Tooltip:
 		Name: Syndicate Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~cgdept.latin
+		Prerequisites: ~cgcnst.latin, cgdept.latin
 	Transforms:
 		IntoActor: cgcnst.latin
 		Offset: -1,-1
@@ -174,7 +174,7 @@ buggy.latin:
 		Cost: 700
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~up_buggy.latin
+		Prerequisites: ~cgcnst.latin, up_buggy.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_buggy.description
 	Mobile:
@@ -262,7 +262,7 @@ tortuga.latin:
 		Cost: 3000
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgte.latin
+		Prerequisites: ~cgcnst.latin, cgte.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_buggy.description
 	Mobile:
@@ -337,7 +337,7 @@ ltnk.latin:
 		Cost: 650
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgweap.latin, ~!up_mtnk.latin
+		Prerequisites: ~cgcnst.latin, cgweap.latin, ~!up_mtnk.latin
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -426,7 +426,7 @@ mtnk.latin:
 		Cost: 1800
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~up_mtnk.latin
+		Prerequisites: ~cgcnst.latin, up_mtnk.latin
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -532,7 +532,7 @@ diablo.latin:
 		Cost: 1200
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cgweap.latin
+		Prerequisites: ~cgcnst.latin, cgweap.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_diablo.description
 	Mobile:
@@ -651,7 +651,7 @@ apc.latin:
 		Cost: 2400
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~up_apc.latin, cgspy.latin
+		Prerequisites: ~cgcnst.latin, up_apc.latin, cgspy.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_apc.description
 	Mobile:
@@ -804,7 +804,7 @@ humvee.latin:
 		Cost: 3000
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgspy.latin, ~!up_cartel.latin
+		Prerequisites: ~cgcnst.latin, cgspy.latin, ~!up_cartel.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_humvee.description
 	Mobile:
@@ -888,7 +888,7 @@ cartel.latin:
 		Name: Cartel Truck
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgspy.latin, ~up_cartel.latin
+		Prerequisites: ~cgcnst.latin, cgspy.latin, up_cartel.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_humvee.description
 	Mobile:
@@ -966,7 +966,7 @@ rtruck.latin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~radar.latin, ~!up_burrito.latin
+		Prerequisites: ~cgcnst.latin, radar.latin, ~!up_burrito.latin
 		Description: actor-mssm.description
 	Valued:
 		Cost: 1000
@@ -1039,7 +1039,7 @@ burrito.latin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~up_burrito.latin, cgup.latin
+		Prerequisites: ~cgcnst.latin, up_burrito.latin, cgup.latin
 		Description: actor-latin_burrito.description
 	Tooltip:
 		Name: Burrito
@@ -1110,7 +1110,7 @@ lars.latin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~up_lars.latin, cgup.latin
+		Prerequisites: ~cgcnst.latin, up_lars.latin, cgup.latin
 		Description: actor-latin_lars.description
 	Valued:
 		Cost: 1300
@@ -1236,7 +1236,7 @@ ra2dtruck.latin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~up_ra2dtruck.latin, radar.latin
+		Prerequisites: ~cgcnst.latin, up_ra2dtruck.latin, radar.latin
 	Voiced:
 		VoiceSet: RA2DemolitionTruckVoice
 	GrantConditionOnDeploy:
@@ -1274,7 +1274,7 @@ nuketruk.latin:
 		HP: 60000
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~up_nuketruk.latin, cgspy.latin
+		Prerequisites: ~cgcnst.latin, up_nuketruk.latin, cgspy.latin
 		BuildLimit: 1
 		BuildDurationModifier: 50
 	Voiced:
@@ -1315,7 +1315,7 @@ topol.latin:
 		Cost: 6000
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~up_topol.latin, cgup.latin
+		Prerequisites: ~cgcnst.latin, up_topol.latin, cgup.latin
 		Description: actor-latin_topol.description
 		BuildLimit: 1
 	Health:

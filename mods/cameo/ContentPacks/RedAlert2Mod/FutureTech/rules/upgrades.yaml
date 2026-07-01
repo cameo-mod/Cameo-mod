@@ -20,7 +20,7 @@ up_equalizer_x1.futu:
 		Name: Equalizer X1
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~egtf.futu, !up_equalizer_x1.futu
+		Prerequisites: ~egcnst.futu, egtf.futu, !up_equalizer_x1.futu
 	RenderSprites:
 		Image: up_equalizer_x1.futu
 	ProvidesPrerequisite:
@@ -31,7 +31,7 @@ up_equalizer_x2.futu:
 		Name: Equalizer X2
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~egtf.futu, egtech.futu, up_equalizer_x1.futu, !up_equalizer_x2.futu
+		Prerequisites: ~egcnst.futu, egtf.futu, egtech.futu, up_equalizer_x1.futu, !up_equalizer_x2.futu
 	RenderSprites:
 		Image: up_equalizer_x2.futu
 	ProvidesPrerequisite:
@@ -42,7 +42,7 @@ up_equalizer_x3.futu:
 		Name: Equalizer X3
 	Buildable:
 		Description: Increases All Weapon Firepower and Rate of Fire by 10% and Range by 5%.
-		Prerequisites: ~egtf.futu, egtech.futu, egshock.futu, up_equalizer_x2.futu, !up_equalizer_x3.futu
+		Prerequisites: ~egcnst.futu, egtf.futu, egtech.futu, egshock.futu, up_equalizer_x2.futu, !up_equalizer_x3.futu
 	RenderSprites:
 		Image: up_equalizer_x3.futu
 	ProvidesPrerequisite:

@@ -12,7 +12,7 @@ ra2hind.latin:
 		Name: Hind Transport
 	Buildable:
 		BuildPaletteOrder: 97
-		Prerequisites:  ~cgair.latin
+		Prerequisites:  ~cgcnst.latin, cgair.latin
 		Queue: Aircraft, RAAircraft
 		IconPalette: ra2cameo
 		Description: actor-ra2hind.description
@@ -96,7 +96,7 @@ yakolev.latin:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~cgair.latin
+		Prerequisites: ~cgcnst.latin, cgair.latin
 		Queue: Aircraft, RAAircraft
 		Description: actor-latin_yakovlev.description
 	Health:
@@ -206,7 +206,7 @@ mig.latin:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~cgair.latin, ~cgspy.latin
+		Prerequisites: ~cgcnst.latin, cgair.latin, cgspy.latin
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:

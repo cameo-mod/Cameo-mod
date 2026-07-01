@@ -12,7 +12,7 @@ twister.futu:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~launchpad.futu
+		Prerequisites: ~egcnst.futu, launchpad.futu
 		Queue: Aircraft, RAAircraft
 		Description: actor-future_twister.description
 	Aircraft:
@@ -88,7 +88,7 @@ cryo.futu:
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~egtech.futu
+		Prerequisites: ~egcnst.futu, egtech.futu
 		Description: actor-futu_cryo.description
 	Valued:
 		Cost: 1350
@@ -192,7 +192,7 @@ harbinger.futu:
 	Buildable:
 		BuildAtProductionType: harbinger.futu
 		BuildPaletteOrder: 100
-		Prerequisites: ~egshock.futu
+		Prerequisites: ~egcnst.futu, egshock.futu
 		Queue: Aircraft, RAAircraft
 		Description: actor-future_harbinger.description
 	Aircraft:
