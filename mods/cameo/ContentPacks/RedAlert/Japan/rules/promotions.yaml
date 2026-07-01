@@ -1,0 +1,171 @@
+up_samurai.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Samurai
+	Buildable:
+		BuildPaletteOrder: 49
+		Queue: Promotions
+		Description: Allows training of Samurai.
+		Prerequisites: ~rafact.japan, !up_samurai.japan, rank1
+	RenderSprites:
+		Image: rasamurai
+	ProvidesPrerequisite:
+		Prerequisite: up_samurai.japan
+
+up_archermaiden.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Archer Maiden
+	Buildable:
+		BuildPaletteOrder: 52
+		Queue: Promotions
+		Description: Allows training of Archer Maidens.
+		Prerequisites: ~rafact.japan, !up_archermaiden.japan, up_samurai.japan, rank1
+	RenderSprites:
+		Image: ramaid
+	ProvidesPrerequisite:
+		Prerequisite: up_archermaiden.japan
+
+up_rocketangel.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Rocket Angel
+	Buildable:
+		BuildPaletteOrder: 55
+		Queue: Promotions
+		Description: Allows training of Rocket Angels.
+		Prerequisites: ~rafact.japan, !up_rocketangel.japan, up_archermaiden.japan, rank1
+	RenderSprites:
+		Image: rocketangel
+	ProvidesPrerequisite:
+		Prerequisite: up_rocketangel.japan
+
+up_hakurei.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Exorcist
+	Buildable:
+		BuildPaletteOrder: 58
+		Queue: Promotions
+		Description: Allows training of the Exorcist.
+		Prerequisites: ~rafact.japan, !up_hakurei.japan, up_rocketangel.japan, rank1
+	RenderSprites:
+		Image: hakurei
+	ProvidesPrerequisite:
+		Prerequisite: up_hakurei.japan
+
+up_armoredcarr.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Armored Car
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Promotions
+		Description: Allows construction of the Armored Car.
+		Prerequisites: ~rafact.japan, !up_armoredcarr.japan, rank1
+	RenderSprites:
+		Image: modcarr
+	ProvidesPrerequisite:
+		Prerequisite: up_armoredcarr.japan
+
+up_chiha.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Heavy Chi-Ha Heavy Tank
+	Buildable:
+		BuildPaletteOrder: 53
+		Queue: Promotions
+		Description: Allows construction of the Chi-Ha Heavy Tank.
+		Prerequisites: ~rafact.japan, !up_chiha.japan, up_armoredcarr.japan, rank1
+	RenderSprites:
+		Image: typechiha
+	ProvidesPrerequisite:
+		Prerequisite: up_chiha.japan
+
+up_flamehovertank.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Hovercraft Flametank
+	Buildable:
+		BuildPaletteOrder: 56
+		Queue: Promotions
+		Description: Allows construction of the Hovercraft Flametank.
+		Prerequisites: ~rafact.japan, !up_flamehovertank.japan, up_chiha.japan, rank1
+	RenderSprites:
+		Image: modhovert
+	ProvidesPrerequisite:
+		Prerequisite: up_flamehovertank.japan
+
+up_shogunexecutioner.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Shogun Executioner
+	Buildable:
+		BuildPaletteOrder: 59
+		Queue: Promotions
+		Description: Allows construction of the Shogun Executioner.
+		Prerequisites: ~rafact.japan, !up_shogunexecutioner.japan, up_flamehovertank.japan, rank1
+	RenderSprites:
+		Image: shogunexecutioner
+	ProvidesPrerequisite:
+		Prerequisite: up_shogunexecutioner.japan
+
+up_grenadebuggy.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Grenade Buggy
+	Buildable:
+		BuildPaletteOrder: 51
+		Queue: Promotions
+		Description: Allows construction of the Grenade Buggy.
+		Prerequisites: ~rafact.japan, !up_grenadebuggy.japan, rank1
+	RenderSprites:
+		Image: modbggy
+	ProvidesPrerequisite:
+		Prerequisite: up_grenadebuggy.japan
+
+up_japanesebomber.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Japanese Bomber
+	Buildable:
+		BuildPaletteOrder: 54
+		Queue: Promotions
+		Description: Allows construction of the Japanese Bomber.
+		Prerequisites: ~rafact.japan, !up_japanesebomber.japan, up_grenadebuggy.japan, rank1
+	RenderSprites:
+		Image: modbomber
+	ProvidesPrerequisite:
+		Prerequisite: up_japanesebomber.japan
+
+up_waveforcetank.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Waveforce Tank
+	Buildable:
+		BuildPaletteOrder: 57
+		Queue: Promotions
+		Description: Allows construction of the Waveforce Tank.
+		Prerequisites: ~rafact.japan, !up_waveforcetank.japan, up_japanesebomber.japan, rank1
+	RenderSprites:
+		Image: waveforcetank
+	ProvidesPrerequisite:
+		Prerequisite: up_waveforcetank.japan
+
+up_waveforceartillery.japan:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Waveforce Artillery
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Promotions
+		Description: Allows construction of the Waveforce Artillery.
+		Prerequisites: ~rafact.japan, !up_waveforceartillery.japan, up_waveforcetank.japan, rank1
+	RenderSprites:
+		Image: modwave
+	ProvidesPrerequisite:
+		Prerequisite: up_waveforceartillery.japan
+
+	####################################################################################################
+	#		Promotion Units Japan
+	####################################################################################################
