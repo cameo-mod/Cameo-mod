@@ -232,6 +232,15 @@ stalker.steel:
 	# 	HpPerStep: 6875
 	ChangesHealth@SelfHealing:
 		Step: 140
+	DamageMultiplier@shielded:
+		Modifier: 200
+		RequiresCondition: shieldpermanent
+	Armor:
+		RequiresCondition: shieldpermanent
+	Armor@shielded:
+		RequiresCondition: shieldpermanent
+	Armor@Medium:
+		Type: Medium
 	Shielded:
 		MaxPercentageStrength: 200
 		InitialPercentageStrength: 200
@@ -314,6 +323,15 @@ white_rabbit.steel:
 	# 	HpPerStep: 7500
 	ChangesHealth@SelfHealing:
 		Step: 150
+	DamageMultiplier@shielded:
+		Modifier: 200
+		RequiresCondition: shieldpermanent
+	Armor:
+		RequiresCondition: shieldpermanent
+	Armor@shielded:
+		RequiresCondition: shieldpermanent
+	Armor@Heavy:
+		Type: Heavy
 	Shielded:
 		MaxPercentageStrength: 200
 		InitialPercentageStrength: 200
