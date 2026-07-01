@@ -2182,7 +2182,7 @@ wc2_human_betterfarm:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~!wc2_human_betterfarm, ~wc2_human_farm, wc2_human_keep
+		Prerequisites: ~wc2_human_townhall, ~!wc2_human_betterfarm, wc2_human_farm, wc2_human_keep
 		Queue: Research
 		Description: Gives Farms +50% Supply and HP (150% total)
 		Icon: icon
@@ -2197,7 +2197,7 @@ wc2_human_bestfarm:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_betterfarm, ~wc2_human_farm, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, wc2_human_betterfarm, wc2_human_farm, wc2_human_castle
 		Queue: Research
 		Description: Gives Farms +100% Supply and HP (200% total)
 		Icon: icon
@@ -2972,7 +2972,7 @@ wc2_human_mcv:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
 	Inherits@WC2Template: ^wc2_mcv
 	Buildable:
-		Prerequisites: ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith
 		Description: Transforms into a Town Hall.
 	Tooltip:
 		Name: Mobile Construction Vehicle (Human)
@@ -3045,7 +3045,7 @@ wc2_human_militia2:
 		Capacity: 4
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_barracks
+		Prerequisites: ~wc2_human_townhall, wc2_human_barracks
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage.
 	Armament:
@@ -3091,7 +3091,7 @@ wc2_human_footman:
 		Speed: 75
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_barracks, ~!wc2_upgrade_footman
+		Prerequisites: ~wc2_human_townhall, wc2_human_barracks, ~!wc2_upgrade_footman
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage.
 	Armament:
@@ -3134,7 +3134,7 @@ wc2_human_footman2:
 		Speed: 85
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_upgrade_footman
+		Prerequisites: ~wc2_human_townhall, wc2_upgrade_footman
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage.
 	Armament:
@@ -3226,7 +3226,7 @@ wc2_human_elven_ranger:
 	Tooltip:
 		Name: Elven Ranger
 	Buildable:
-		Prerequisites: ~wc2_h_rangerupg, wc2_human_elven_lumber_mill
+		Prerequisites: ~wc2_human_townhall, wc2_h_rangerupg, wc2_human_elven_lumber_mill
 		Description: Elite ranged infantry. Not as durable as Footman.\nCan attack air.
 	Selectable:
 		Class: wc2_human_elven_archer
@@ -3263,7 +3263,7 @@ wc2_human_high_elf_archer:
 		Speed: 85
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_upgrade_high_elf_archer
+		Prerequisites: ~wc2_human_townhall, wc2_upgrade_high_elf_archer
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry. Not as durable as Footman.\nCan attack air.
 	Armament:
@@ -3311,7 +3311,7 @@ wc2_human_rifleman:
 		Speed: 64
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry. Not as durable as Footman.\nCan attack air.
 	Armament:
@@ -3382,7 +3382,7 @@ wc2_human_knight:
 		Locomotor: tracked
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_human_stables, ~!wc2_h_paladinupg
+		Prerequisites: ~wc2_human_townhall, wc2_human_stables, ~!wc2_h_paladinupg
 		Queue: Infantry, RAInfantry
 		Description: Mounted infantry. Fast and durable.
 	Voiced:
@@ -3420,7 +3420,7 @@ wc2_human_paladin:
 	Tooltip:
 		Name: Paladin
 	Buildable:
-		Prerequisites: ~wc2_h_paladinupg, wc2_human_church, wc2_human_stables, ~!wc2_upgrade_paladin2
+		Prerequisites: ~wc2_human_townhall, wc2_h_paladinupg, wc2_human_church, wc2_human_stables, ~!wc2_upgrade_paladin2
 		Description: Mounted holy infantry. Very fast and quite durable.\nCan cast healing magicks.
 	Voiced:
 		VoiceSet: wc2voicehumanpaladin
@@ -3465,7 +3465,7 @@ wc2_human_knight2:
 		Locomotor: tracked
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_upgrade_paladin2
+		Prerequisites: ~wc2_human_townhall, wc2_upgrade_paladin2
 		Queue: Infantry, RAInfantry
 		Description: Mounted infantry. Fast and durable.
 	Voiced:
@@ -3620,7 +3620,7 @@ wc2_human_ballista:
 		TurnSpeed: 18
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith
 		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	AttackFrontal:
@@ -3669,7 +3669,7 @@ wc2_human_siege_engine:
 		TurnSpeed: 28
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_human_castle, wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, wc2_human_castle, wc2_human_blacksmith
 		Queue: Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	-AttackFrontal:
@@ -3717,7 +3717,7 @@ wc2_human_demolitionsquad:
 	Tooltip:
 		Name: Demolition Squad
 	Buildable:
-		Prerequisites: ~wc2_human_gnomish_inventor
+		Prerequisites: ~wc2_human_townhall, wc2_human_gnomish_inventor
 		Queue: Vehicle, RAVehicle
 		Description: Explosive suicide infantry. Can attack normally.
 	#Weapons and demolition
@@ -3769,7 +3769,7 @@ wc2_human_mortarteam2:
 		Speed: 80
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_gnomish_inventor, wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, wc2_human_gnomish_inventor, wc2_human_blacksmith
 		Queue: Infantry, RAInfantry
 		Description: Mortar Team that deals a lot of splash damage over high range.
 	Armament:
@@ -3801,7 +3801,7 @@ wc2_human_mage:
 	Tooltip:
 		Name: Mage
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~wc2_human_townhall, wc2_human_mage_tower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -3939,7 +3939,7 @@ wc2_human_archmage:
 	Tooltip:
 		Name: Archmage
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~wc2_human_townhall, wc2_human_mage_tower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -4080,7 +4080,7 @@ wc2_human_high_elf_priest:
 	Tooltip:
 		Name: High Elf priest
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~wc2_human_townhall, wc2_human_mage_tower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -4194,7 +4194,7 @@ wc2_human_high_elf_sorceress:
 	Tooltip:
 		Name: High Elf Sorceress
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~wc2_human_townhall, wc2_human_mage_tower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -4306,7 +4306,7 @@ wc2_human_oil_tanker:
 	Inherits@WC2Template: ^wc2_oil_tanker
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_human_oil_refinery
+		Prerequisites: ~wc2_human_townhall, wc2_human_oil_refinery
 		Queue: Naval, RANaval
 		Description: Drills inside Oil Platforms for income.
 	Tooltip:
@@ -4322,7 +4322,7 @@ wc2_human_elven_destroyer:
 	Inherits@HCannonUpg: ^wc2_h_str_cannon
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_human_shipyard
+		Prerequisites: ~wc2_human_townhall, wc2_human_shipyard
 		Queue: Naval, RANaval
 		Description: Light scout & support ship. Can attack air units.
 	Tooltip:
@@ -4347,7 +4347,7 @@ wc2_human_transport:
 	Inherits@WC2Template: ^wc2_transport
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_human_foundry
+		Prerequisites: ~wc2_human_townhall, wc2_human_foundry
 		Queue: Naval, RANaval
 		Description: Transport ship.
 	Tooltip:
@@ -4363,7 +4363,7 @@ wc2_human_battleship:
 	Inherits@HCannonUpg: ^wc2_h_str_cannon
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_human_foundry, ~wc2_human_blacksmith ##once keep/castle are fixed, prereq will be wc2_human_keep, wc2_human_foundry
+		Prerequisites: ~wc2_human_townhall, wc2_human_foundry, wc2_human_blacksmith ##once keep/castle are fixed, prereq will be wc2_human_keep, wc2_human_foundry
 		Queue: Naval, RANaval
 		Description: Heavy artillery ship.
 	Tooltip:
@@ -4389,7 +4389,7 @@ wc2_human_gnomish_submarine:
 	Inherits@HCannonUpg: ^wc2_h_str_cannon
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_human_foundry, ~wc2_human_gnomish_inventor
+		Prerequisites: ~wc2_human_townhall, wc2_human_foundry, wc2_human_gnomish_inventor
 		Queue: Naval, RANaval
 		Description: Stealthed attack vessel.
 	Tooltip:
@@ -4423,7 +4423,7 @@ wc2_human_gnomish_flying_machine:
 	Tooltip:
 		Name: Flying Machine
 	Buildable:
-		Prerequisites: ~wc2_human_gnomish_inventor
+		Prerequisites: ~wc2_human_townhall, wc2_human_gnomish_inventor
 		Queue: Vehicle, RAVehicle
 		Description: Flying scout unit. He's got a flying machine!\nDetector.
 	Voiced:
@@ -4437,7 +4437,7 @@ wc2_human_gyrocopter2:
 	Tooltip:
 		Name: Gyrocopter Machine
 	Buildable:
-		Prerequisites: ~wc2_human_gnomish_inventor
+		Prerequisites: ~wc2_human_townhall, wc2_human_gnomish_inventor
 		Queue: Vehicle, RAVehicle
 		Description: Flying scout unit. He's got a flying machine!\nDetector.
 	Voiced:
@@ -4471,7 +4471,7 @@ wc2_human_gryphon_rider:
 		TargetTypes: Heal
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_human_gryphon_aviary
+		Prerequisites: ~wc2_human_townhall, wc2_human_gryphon_aviary
 		Queue: Aircraft, RAAircraft
 		Description: Flying attacker unit.\nMagical hammer can hit multiple targets in a line.\nStrong vs air units.
 	Armament@VISIBLE:
@@ -4750,7 +4750,7 @@ wc2_orc_betterfarm:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~!wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_stronghold
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_orc_betterfarm, wc2_orc_pigfarm, wc2_orc_stronghold
 		Queue: Research
 		Description: Gives Farms +50% Supply and HP (150% total)
 		Icon: icon
@@ -4765,7 +4765,7 @@ wc2_orc_bestfarm:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_betterfarm, wc2_orc_pigfarm, wc2_orc_fortress
 		Queue: Research
 		Description: Gives Farms +100% Supply and HP (200% total)
 		Icon: icon
@@ -5458,7 +5458,7 @@ wc2_orc_mcv:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
 	Inherits@WC2Template: ^wc2_mcv
 	Buildable:
-		Prerequisites: ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith
 		Description: Transforms into a Great Hall.
 	Tooltip:
 		Name: Mobile Construction Vehicle (Orc)
@@ -5523,7 +5523,7 @@ wc2_orc_grunt:
 		Speed: 65
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_orc_barracks, ~!wc2_upgrade_grunt
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_barracks, ~!wc2_upgrade_grunt
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage. Lok'tar!
 	Armament:
@@ -5566,7 +5566,7 @@ wc2_orc_grunt2:
 		Speed: 70
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_upgrade_grunt
+		Prerequisites: ~wc2_orc_greathall, wc2_upgrade_grunt
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage. Lok'tar!
 	Armament:
@@ -5648,7 +5648,7 @@ wc2_orc_troll_berserker:
 	Tooltip:
 		Name: Troll Berserker
 	Buildable:
-		Prerequisites: ~wc2_orc_troll_lumber_mill, ~wc2_o_berserkerupg, ~!wc2_upgrade_troll_spearthrower
+		Prerequisites: ~wc2_orc_troll_lumber_mill, wc2_o_berserkerupg, ~!wc2_upgrade_troll_spearthrower
 		Description: Elite ranged infantry.\nNot as durable as Grunt.\nCan attack air.
 	Selectable:
 		Class: wc2_orc_troll_axethrower
@@ -5685,7 +5685,7 @@ wc2_orc_troll_spearthrower:
 		Speed: 75
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_upgrade_troll_spearthrower
+		Prerequisites: ~wc2_orc_greathall, wc2_upgrade_troll_spearthrower
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
 	Armament:
@@ -5784,7 +5784,7 @@ wc2_orc_ogre:
 		Locomotor: tracked
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_orc_ogre_mound, ~!wc2_o_ogremageupg
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_ogre_mound, ~!wc2_o_ogremageupg
 		Queue: Infantry, RAInfantry
 		Description: Improved melee infantry.\nStinky, fast, dumb and dangerous!
 	Voiced:
@@ -5829,7 +5829,7 @@ wc2_orc_ogremage:
 	Tooltip:
 		Name: Ogre-Mage
 	Buildable:
-		Prerequisites: ~wc2_o_ogremageupg, wc2_orc_ogre_mound, wc2_orc_altar_of_storms
+		Prerequisites: ~wc2_orc_greathall, wc2_o_ogremageupg, wc2_orc_ogre_mound, wc2_orc_altar_of_storms
 		Description: Improved magickal melee infantry.\nStinky, very fast, smart, and dangerous!
 	Voiced:
 		VoiceSet: wc2voiceorcogremage
@@ -6023,7 +6023,7 @@ wc2_orc_catapult:
 		TurnSpeed: 16
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith
 		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	AttackFrontal:
@@ -6076,7 +6076,7 @@ wc2_orc_siege_engine:
 		TurnSpeed: 28
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_orc_stronghold, wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold, wc2_orc_blacksmith
 		Queue: Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	-AttackFrontal:
@@ -6124,7 +6124,7 @@ wc2_orc_goblin_sappers:
 	Tooltip:
 		Name: Goblin Sappers
 	Buildable:
-		Prerequisites: ~wc2_orc_goblin_alchemist
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_goblin_alchemist
 		Queue: Vehicle, RAVehicle
 		Description: Explosive suicide infantry. Can attack normally.
 	#Weapons and demolition
@@ -6165,7 +6165,7 @@ wc2_orc_deathknight:
 	Tooltip:
 		Name: Death Knight
 	Buildable:
-		Prerequisites: ~wc2_orc_temple_of_the_damned
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_temple_of_the_damned
 		Queue: Infantry, RAInfantry
 		Description: Powerful undead spell caster.\nCan attack Air.\nDetector
 	Voiced:
@@ -6373,7 +6373,7 @@ wc2_orc_oil_tanker:
 	Inherits@WC2Template: ^wc2_oil_tanker
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_orc_oil_refinery
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_oil_refinery
 		Queue: Naval, RANaval
 		Description: Drills oil inside Oil Platforms for income.
 	Tooltip:
@@ -6389,7 +6389,7 @@ wc2_orc_trolldestroyer:
 	Inherits@OCannonUpg: ^wc2_o_str_cannon
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_orc_shipyard
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_shipyard
 		Queue: Naval, RANaval
 		Description: Light scout & support ship.
 	Tooltip:
@@ -6414,7 +6414,7 @@ wc2_orc_transport:
 	Inherits@WC2Template: ^wc2_transport
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_orc_foundry
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_foundry
 		Queue: Naval, RANaval
 		Description: Transport ship.
 	Tooltip:
@@ -6430,7 +6430,7 @@ wc2_orc_ogre_juggernaught:
 	Inherits@OCannonUpg: ^wc2_o_str_cannon
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_orc_foundry, ~wc2_orc_blacksmith ##once stronghold/fortress are fixed, prereq will be wc2_orc_stronghold, wc2_orc_foundry
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_foundry, wc2_orc_blacksmith ##once stronghold/fortress are fixed, prereq will be wc2_orc_stronghold, wc2_orc_foundry
 		Queue: Naval, RANaval
 		Description: Heavy artillery ship.
 	Tooltip:
@@ -6456,7 +6456,7 @@ wc2_orc_giant_turtle:
 	Inherits@OCannonUpg: ^wc2_o_str_cannon
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_orc_foundry, ~wc2_orc_goblin_alchemist
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_foundry, wc2_orc_goblin_alchemist
 		Queue: Naval, RANaval
 		Description: Turtle go grrr.\nStealthed attack submarine.
 	Tooltip:
@@ -6490,7 +6490,7 @@ wc2_orc_goblin_zeppelin:
 	Tooltip:
 		Name: Goblin Zeppelin
 	Buildable:
-		Prerequisites: ~wc2_orc_goblin_alchemist
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_goblin_alchemist
 		Queue: Vehicle, RAVehicle
 		Description: Flying scout unit. He can see your house!\nDetector.
 	Voiced:
@@ -6526,7 +6526,7 @@ wc2_orc_dragon:
 		TargetTypes: Heal
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_orc_dragon_roost
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_dragon_roost
 		Queue: Aircraft, RAAircraft
 		Description: Flying ranged attacker.\nFire breath can hit multiple targets in a line.\nStrong vs Aircraft
 	Armament@VISIBLE:
@@ -6742,7 +6742,7 @@ wc2_h_str_sword:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 15%. Double Effect for Footmen.
-		Prerequisites: ~!wc2_h_str_sword, ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_str_sword, wc2_human_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6757,7 +6757,7 @@ wc2_h_str_sword2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 35%. Double Effect for Footmen.
-		Prerequisites: !wc2_h_str_sword2, ~wc2_h_str_sword, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, !wc2_h_str_sword2, wc2_h_str_sword, wc2_human_blacksmith, wc2_human_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -6772,7 +6772,7 @@ wc2_h_str_shield:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 10%. Footmen have 15% damage resistance instead.
-		Prerequisites: ~!wc2_h_str_shield, ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_str_shield, wc2_human_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6787,7 +6787,7 @@ wc2_h_str_shield2:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 20%. Footmen have 30% damage resistance instead.
-		Prerequisites: !wc2_h_str_shield2, ~wc2_h_str_shield, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, !wc2_h_str_shield2, wc2_h_str_shield, wc2_human_blacksmith, wc2_human_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -6802,7 +6802,7 @@ wc2_h_str_arrow:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases arrow damage dealt by Archers and Guard Towers by 15%.
-		Prerequisites: ~!wc2_h_str_arrow, ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_str_arrow, wc2_human_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6817,7 +6817,7 @@ wc2_h_str_arrow2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases arrow damage by Archers and Guard Towers by 35%.
-		Prerequisites: !wc2_h_str_arrow2, ~wc2_h_str_arrow, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, !wc2_h_str_arrow2, wc2_h_str_arrow, wc2_human_blacksmith, wc2_human_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -6831,7 +6831,7 @@ wc2_upgrade_footman:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Footman into the Warcraft 3 Footman
-		Prerequisites: ~!wc2_upgrade_footman, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, ~!wc2_upgrade_footman, wc2_human_blacksmith, wc2_human_castle
 	RenderSprites:
 		Image: wc2_human_footman2
 
@@ -6843,7 +6843,7 @@ wc2_h_rangerupg:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Intense training is given to Elven Archers.\nIncreases damage resistance by 20% and unlocks upgrades for the Ranger.
-		Prerequisites: ~!wc2_h_rangerupg, ~wc2_human_blacksmith ## when keep/castle are fixed, will require Castle
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_rangerupg, wc2_human_blacksmith ## when keep/castle are fixed, will require Castle
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6857,7 +6857,7 @@ wc2_upgrade_high_elf_archer:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Elven Ranger into the High Elven Archer
-		Prerequisites: ~!wc2_upgrade_high_elf_archer, ~wc2_human_blacksmith, wc2_h_rangerupg, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, ~!wc2_upgrade_high_elf_archer, wc2_human_blacksmith, wc2_h_rangerupg, wc2_human_castle
 	RenderSprites:
 		Image: wc2_human_high_elf_archer
 
@@ -6869,7 +6869,7 @@ wc2_h_ranger_longbow:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases range of Rangers by 20%.
-		Prerequisites: ~!wc2_h_ranger_longbow, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_ranger_longbow, wc2_h_rangerupg, wc2_human_blacksmith, wc2_human_castle
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6884,7 +6884,7 @@ wc2_h_ranger_scouting:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases vision range of Rangers by 20%.
-		Prerequisites: ~!wc2_h_ranger_scouting, ~wc2_h_rangerupg, ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_ranger_scouting, wc2_h_rangerupg, wc2_human_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6899,7 +6899,7 @@ wc2_h_ranger_marksman:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases arrow damage of Rangers by 25%.
-		Prerequisites: ~!wc2_h_ranger_marksman, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_keep
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_ranger_marksman, wc2_h_rangerupg, wc2_human_blacksmith, wc2_human_keep
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6914,7 +6914,7 @@ wc2_h_str_ballista:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases ballista damage dealt by Ballista by 15%
-		Prerequisites: ~!wc2_h_str_ballista, ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_str_ballista, wc2_human_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6929,7 +6929,7 @@ wc2_h_str_ballista2:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases ballista damage dealt by Ballista by 35%
-		Prerequisites: !wc2_h_str_ballista2, ~wc2_h_str_ballista, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, !wc2_h_str_ballista2, wc2_h_str_ballista, wc2_human_blacksmith, wc2_human_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -6944,7 +6944,7 @@ wc2_h_str_cannon:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 15%
-		Prerequisites: ~!wc2_h_str_cannon, ~wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_str_cannon, wc2_human_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6959,7 +6959,7 @@ wc2_h_str_cannon2:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 35%
-		Prerequisites: !wc2_h_str_cannon2, ~wc2_h_str_cannon, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, !wc2_h_str_cannon2, wc2_h_str_cannon, wc2_human_blacksmith, wc2_human_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -6974,7 +6974,7 @@ wc2_h_str_navyshield:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 10%
-		Prerequisites: ~!wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_str_navyshield, wc2_human_blacksmith, wc2_human_shipyard
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6989,7 +6989,7 @@ wc2_h_str_navyshield2:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 20%
-		Prerequisites: !wc2_h_str_navyshield2, ~wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard, wc2_human_castle
+		Prerequisites: ~wc2_human_townhall, !wc2_h_str_navyshield2, wc2_h_str_navyshield, wc2_human_blacksmith, wc2_human_shipyard, wc2_human_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -7004,7 +7004,7 @@ wc2_h_paladinupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Perform holy rituals to turn your noble Knights into righteous Paladins!\nPaladins are more powerful and can cast Heal.\nIncreases damage resistance, melee damage and speed by 25%.
-		Prerequisites: ~!wc2_h_paladinupg, ~wc2_human_blacksmith, wc2_human_church
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_paladinupg, wc2_human_blacksmith, wc2_human_church
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7018,7 +7018,7 @@ wc2_upgrade_paladin2:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Paladin into the Warcraft 3 Knight (WIP)
-		Prerequisites: ~!wc2_upgrade_paladin2, ~wc2_human_blacksmith, wc2_h_paladinupg, wc2_human_church
+		Prerequisites: ~wc2_human_townhall, ~!wc2_upgrade_paladin2, wc2_human_blacksmith, wc2_h_paladinupg, wc2_human_church
 	RenderSprites:
 		Image: wc2_human_knight2
 
@@ -7030,7 +7030,7 @@ wc2_h_healingupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Paladins can now heal.\nToggle Paladin's modes by deploying them.\nHealing uses mana.
-		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_healingupg, ~wc2_human_blacksmith, wc2_human_church
+		Prerequisites: ~wc2_human_townhall, wc2_h_paladinupg, ~!wc2_h_healingupg, wc2_human_blacksmith, wc2_human_church
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7045,7 +7045,7 @@ wc2_h_exorcismupg:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Paladins can now exorcise.\nToggle Paladin's modes by deploying them.\nExorcism only affects undead units.\nGood vs Orc Death Knight and Skeleton.
-		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_exorcismupg, ~wc2_human_blacksmith, wc2_human_church
+		Prerequisites: ~wc2_human_townhall, wc2_h_paladinupg, ~!wc2_h_exorcismupg, wc2_human_blacksmith, wc2_human_church
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7060,7 +7060,7 @@ wc2_h_slowupg:
 		BuildPaletteOrder: 20
 		Queue: Research
 		Description: Allows Mages to cast Slow.\nToggle Mage's modes by deploying them.\nSlows down affected target.\nAffects movement and attack speed.\nUses 50 mana.
-		Prerequisites: ~!wc2_h_slowupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_slowupg, wc2_human_blacksmith, wc2_human_mage_tower
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7075,7 +7075,7 @@ wc2_h_polymorphupg:
 		BuildPaletteOrder: 30
 		Queue: Research
 		Description: Allows Mages to cast Polymorph.\nToggle Mage's modes by deploying them.\nTurns target into a\nharmless critter.\nUses 200 mana.
-		Prerequisites: ~!wc2_h_polymorphupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_polymorphupg, wc2_human_blacksmith, wc2_human_mage_tower
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7090,7 +7090,7 @@ wc2_h_blizzardupg:
 		BuildPaletteOrder: 40
 		Queue: Research
 		Description: Allows Mages to cast Blizzard.\nToggle Mage's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
-		Prerequisites: ~!wc2_h_blizzardupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+		Prerequisites: ~wc2_human_townhall, ~!wc2_h_blizzardupg, wc2_human_blacksmith, wc2_human_mage_tower
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7109,7 +7109,7 @@ wc2_o_str_axe:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 15%. Double Effect for Grunts.
-		Prerequisites: ~!wc2_o_str_axe, ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_str_axe, wc2_orc_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7124,7 +7124,7 @@ wc2_o_str_axe2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 35%. Double Effect for Grunts.
-		Prerequisites: !wc2_o_str_axe2, ~wc2_o_str_axe, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, !wc2_o_str_axe2, wc2_o_str_axe, wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -7139,7 +7139,7 @@ wc2_o_str_shield:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 10%. Grunts have 15% damage resistance instead.
-		Prerequisites: ~!wc2_o_str_shield, ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_str_shield, wc2_orc_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7154,7 +7154,7 @@ wc2_o_str_shield2:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 20%. Grunts have 30% damage resistance instead.
-		Prerequisites: !wc2_o_str_shield2, ~wc2_o_str_shield, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, !wc2_o_str_shield2, wc2_o_str_shield, wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -7169,7 +7169,7 @@ wc2_o_str_throwaxe:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases ranged damage dealt by Axethrowers and Guard Towers by 15%.
-		Prerequisites: ~!wc2_o_str_throwaxe, ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_str_throwaxe, wc2_orc_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7184,7 +7184,7 @@ wc2_o_str_throwaxe2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases ranged damage by Axethrowers and Guard Towers by 35%
-		Prerequisites: !wc2_o_str_throwaxe2, ~wc2_o_str_throwaxe, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, !wc2_o_str_throwaxe2, wc2_o_str_throwaxe, wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -7198,7 +7198,7 @@ wc2_upgrade_grunt:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Grunt into the Warcraft 3 Grunt
-		Prerequisites: ~!wc2_upgrade_grunt, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_upgrade_grunt, wc2_orc_blacksmith, wc2_orc_fortress
 	RenderSprites:
 		Image: wc2_orc_grunt2
 
@@ -7210,7 +7210,7 @@ wc2_o_berserkerupg:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Troll Axethrowers are driven into a mad frenzy.\nIncreases damage resistance by 20% and unlocks upgrades for the Berserker.
-		Prerequisites: ~!wc2_o_berserkerupg, ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_berserkerupg, wc2_orc_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7224,7 +7224,7 @@ wc2_upgrade_troll_spearthrower:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Troll Berserker into the Troll Headhunter
-		Prerequisites: ~!wc2_upgrade_troll_spearthrower, ~wc2_orc_blacksmith, wc2_o_berserkerupg, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_upgrade_troll_spearthrower, wc2_orc_blacksmith, wc2_o_berserkerupg, wc2_orc_fortress
 	RenderSprites:
 		Image: wc2_orc_troll_spearthrower
 
@@ -7236,7 +7236,7 @@ wc2_o_berserker_lighteraxes:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases throwing range of Berserker axes by 20%.
-		Prerequisites: ~!wc2_o_berserker_lighteraxes, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_berserker_lighteraxes, wc2_o_berserkerupg, wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7251,7 +7251,7 @@ wc2_o_berserker_scouting:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases vision range of Berserkers by 20%.
-		Prerequisites: ~!wc2_o_berserker_scouting, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_berserker_scouting, wc2_o_berserkerupg, wc2_orc_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7266,7 +7266,7 @@ wc2_o_berserker_regen:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Berserkers heal over time (5% HP each second) and take 20% less damage.
-		Prerequisites: ~!wc2_o_berserker_regen, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_stronghold
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_berserker_regen, wc2_o_berserkerupg, wc2_orc_blacksmith, wc2_orc_stronghold
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7281,7 +7281,7 @@ wc2_o_str_catapult:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases Catapult damage by 15%
-		Prerequisites: ~!wc2_o_str_catapult, ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_str_catapult, wc2_orc_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7296,7 +7296,7 @@ wc2_o_str_catapult2:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases Catapult damage by 35%
-		Prerequisites: !wc2_o_str_catapult2, ~wc2_o_str_catapult, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, !wc2_o_str_catapult2, wc2_o_str_catapult, wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -7312,7 +7312,7 @@ wc2_o_str_cannon:
 		BuildLimit: 1
 		Queue: Research
 		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 15%
-		Prerequisites: ~!wc2_o_str_cannon, ~wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_str_cannon, wc2_orc_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7327,7 +7327,7 @@ wc2_o_str_cannon2:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 35%
-		Prerequisites: !wc2_o_str_cannon2, ~wc2_o_str_cannon, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, !wc2_o_str_cannon2, wc2_o_str_cannon, wc2_orc_blacksmith, wc2_orc_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -7342,7 +7342,7 @@ wc2_o_str_navyshield:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 10%.
-		Prerequisites: ~!wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_str_navyshield, wc2_orc_blacksmith, wc2_orc_shipyard
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7357,7 +7357,7 @@ wc2_o_str_navyshield2:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 20%.
-		Prerequisites: !wc2_o_str_navyshield2, ~wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard, wc2_orc_fortress
+		Prerequisites: ~wc2_orc_greathall, !wc2_o_str_navyshield2, wc2_o_str_navyshield, wc2_orc_blacksmith, wc2_orc_shipyard, wc2_orc_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
@@ -7372,7 +7372,7 @@ wc2_o_ogremageupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Perform mysterious rituals to transform your Ogres into Ogre-Magi!\nOgre-Magi are more powerful and can cast Bloodlust.\nBloodlust makes your units hit harder for a short time.\nIncreases damage resistance by 20%.\nIncreases melee damage by 25%.
-		Prerequisites: ~!wc2_o_ogremageupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_ogremageupg, wc2_orc_blacksmith, wc2_orc_altar_of_storms
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7387,7 +7387,7 @@ wc2_o_bloodlustupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Allows Ogre-Magi to cast bloodlust.\nToggle Oger-Mage's modes by deploying them.\nTriples damage output of affected unit.\nUses 50 mana.
-		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_bloodlustupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+		Prerequisites: ~wc2_orc_greathall, wc2_o_ogremageupg, ~!wc2_o_bloodlustupg, wc2_orc_blacksmith, wc2_orc_altar_of_storms
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7402,7 +7402,7 @@ wc2_o_runesupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Allows Ogre-Magi to cast runes.\nToggle Oger-Mage's modes by deploying them.\nDeploys five land mines in a + shape.\nUses 200 mana.
-		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_runesupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+		Prerequisites: ~wc2_orc_greathall, wc2_o_ogremageupg, ~!wc2_o_runesupg, wc2_orc_blacksmith, wc2_orc_altar_of_storms
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7417,7 +7417,7 @@ wc2_o_hasteupg:
 		BuildPaletteOrder: 20
 		Queue: Research
 		Description: Allows Death Knights to cast haste.\nToggle Death Knight's modes by deploying them.\nSpeeds up affected target.\nAffects movement and attack speed.\nUses 50 mana.
-		Prerequisites: ~!wc2_o_hasteupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_hasteupg, wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7432,7 +7432,7 @@ wc2_o_deathanddecayupg:
 		BuildPaletteOrder: 30
 		Queue: Research
 		Description: Allows Death Knights to cast death and decay.\nToggle Death Knight's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
-		Prerequisites: ~!wc2_o_deathanddecayupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_deathanddecayupg, wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7447,7 +7447,7 @@ wc2_o_raisedeadupg:
 		BuildPaletteOrder: 40
 		Queue: Research
 		Description: Allows Death Knights to cast raise dead.\nToggle Death Knight's modes by deploying them.\nSummons a skeleton.\nUses 50 mana.
-		Prerequisites: ~!wc2_o_raisedeadupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+		Prerequisites: ~wc2_orc_greathall, ~!wc2_o_raisedeadupg, wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
 	Valued:
 		Cost: 2500
 	RenderSprites:
