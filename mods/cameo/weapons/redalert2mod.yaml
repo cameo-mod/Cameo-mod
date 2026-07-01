@@ -5623,12 +5623,14 @@ NaxMausCannon_elite:
 	BurstDelays: 3
 
 LunarTigerCannon:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^HeavyBomb
 	Inherits: ^MediumFlameWeapon
-	Inherits: NaxMausCannon
+	Inherits: ^RA2MediumCannon
 	ReloadDelay: 80
 	Report: trashcannon.wav
-	Range: 5100
-	MinRange: 1020
+	Range: 5105
+	MinRange: 1021
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
