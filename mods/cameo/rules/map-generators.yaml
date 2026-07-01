@@ -819,23 +819,24 @@
 				Choice@hidden_defaults:
 					Settings:
 						Margin: 2
-						MinRoomSize: 6
-						MaxRoomSize: 10
-						RoomAttempts: 60
-						RoomGap: 1
-						BattleRoomSize: 14
+						MinRoomSize: 16
+						MaxRoomSize: 24
+						RoomAttempts: 5000
+						MaxConsecutiveFailures: 60
+						RoomGap: 2
+						SpawnRingRadiusPercent: 65
+						SpawnRoomAttempts: 20
+						CorridorMinWidth: 4
+						CorridorMaxWidth: 8
 						FloorTile: 268
 						WallTile: 331
-						DrillerAreaDivisor: 30
+						VoidTile: 329
+						OreMineActor: MINE
+						GemMineActor: GMINE
 						SpawnMinimumRadius: 2
 						SpawnMaximumRadius: 6
 						SpawnZoneRadius: 2
 						SpawnCentralReservationFraction: 0
-						DrillerWeights:
-							ra2mine: 40
-							ra2smine: 25
-							ra2cmine: 20
-							ra2gmine: 15
 			IntegerOption@Seed:
 				Label: label-room-map-generator-option-seed
 				Parameter: Seed
