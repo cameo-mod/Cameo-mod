@@ -308,6 +308,7 @@ checkbox-screen-shake = Screen Shake Effects
 checkbox-ground-fire-smoke = Ground Fire Smoke Effects
 checkbox-decoupled-rendering = Decoupled Render Thread (Experimental)
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
+checkbox-low-vram-sprite-scale = Low VRAM mode (halve sprite resolution)
 
 ## settings-gameplay.yaml
 label-game-play-section-header = Gameplay
