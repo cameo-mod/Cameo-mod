@@ -408,5 +408,7 @@ runner.steel:
 	Voiced:
 		VoiceSet: RA2TanyaVoice
 	ProvidesPrerequisite:
+	RenderSprites:
+		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_resonanceammo.steel, up_shielresistance.steel
