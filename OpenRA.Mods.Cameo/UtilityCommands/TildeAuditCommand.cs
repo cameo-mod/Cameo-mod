@@ -59,6 +59,7 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 			"eden_factory_vehicle", "plymouth_factory_vehicle",
 			"plymouth_factory_arachnid", "eden_factory_consumer",
 			"construction_yard", "construction_yard.atreides", "upgrade_conyard",
+			"tkmfactory", "tkmbarracks", "tkmairpad",
 		};
 
 		[Desc("[tokens|visibility]",
@@ -100,13 +101,34 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 				{
 					var queue = string.Join(",", b.Queue);
 
-					// A bare '~token' with no other tilde token anywhere on the SAME line is the
-					// actor's only hide-gate. Stripping it in isolation removes ALL visibility
-					// gating - not just the intended one - and leaks the actor into every other
-					// faction/theme sharing the same Queue tag. Flag it so a strip must ADD a
-					// companion KEEP-classified token (the real ConYard/faction lock), never just
-					// delete the '~'.
-					var tildeTokenCount = b.Prerequisites.Count(p => p.StartsWith('~') && !p.StartsWith("~!"));
+					// Classify every bare '~token' (kind + KEEP class) first, in one pass, before
+					// emitting anything - the safety note below depends on the OUTCOME for the
+					// whole line, not just this one token.
+					string ClassifyBare(string token)
+					{
+						if (conyardTokens.Contains(token))
+							return "KEEP_CONYARD";
+						if (KnownToggleTokens.Contains(token))
+							return "KEEP_TOGGLE";
+						if (KnownStructuralTokens.Contains(token))
+							return "KEEP_STRUCTURAL";
+						return "CANDIDATE";
+					}
+
+					var bareTildeClasses = b.Prerequisites
+						.Where(p => p.StartsWith('~') && !p.StartsWith("~!"))
+						.Select(p => ClassifyBare(p[1..].ToLowerInvariant()))
+						.ToList();
+					var keepCount = bareTildeClasses.Count(c => c.StartsWith("KEEP_"));
+
+					// If NOTHING on this line is a real KEEP-classified anchor (ConYard/faction/
+					// toggle/queue-tab-structural), stripping ANY '~' from a candidate token -
+					// whether it's the only one or one of several - can leave the actor with zero
+					// hide-gates, leaking it into every other faction/theme sharing the same Queue
+					// tag. Flag every candidate on such a line so a strip must ADD a companion
+					// KEEP token (or deliberately keep one candidate tilde'd as the anchor), never
+					// just delete every '~'.
+					var noKeepAnchor = keepCount == 0 && bareTildeClasses.Count > 0;
 
 					var firstTildeSeen = false;
 					foreach (var raw in b.Prerequisites)
@@ -129,17 +151,12 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 								var isFirst = !firstTildeSeen;
 								firstTildeSeen = true;
 								var token = body.ToLowerInvariant();
-								if (conyardTokens.Contains(token))
-									cls = "KEEP_CONYARD";
-								else if (KnownToggleTokens.Contains(token))
-									cls = "KEEP_TOGGLE";
-								else if (KnownStructuralTokens.Contains(token))
-									cls = "KEEP_STRUCTURAL";
-								else
+								cls = ClassifyBare(token);
+								if (cls == "CANDIDATE")
 								{
 									cls = isFirst ? "CANDIDATE_FIRST" : "CANDIDATE";
-									if (tildeTokenCount == 1)
-										note = "SOLE_TILDE-do-not-strip-without-adding-a-KEEP-companion-token";
+									if (noKeepAnchor)
+										note = "NO_KEEP_ANCHOR-do-not-strip-every-tilde-on-this-line-without-adding-a-KEEP-companion-or-keeping-one-as-anchor";
 								}
 							}
 						}
