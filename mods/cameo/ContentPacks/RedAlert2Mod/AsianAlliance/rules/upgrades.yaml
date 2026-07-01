@@ -1,3 +1,7 @@
+####################################################################################################
+#		Upgrades Asian Alliance
+####################################################################################################
+
 cgcnst_infiltrated.asian:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
@@ -171,7 +175,3 @@ up_team_diplomacy_proxy_actor.asian:
 		Image: up_team_diplomacy.asian
 	ProvidesPrerequisite:
 		Prerequisite: up_team_diplomacy.asian
-
-##############################################
-#   Red Alert 2 Syndicate Buildings
-##############################################
