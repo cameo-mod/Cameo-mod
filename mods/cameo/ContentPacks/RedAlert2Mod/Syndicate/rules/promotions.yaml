@@ -1,0 +1,163 @@
+up_mortarbike.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mortar Bikes
+	Buildable:
+		BuildPaletteOrder: 121
+		Queue: Promotions
+		Description: Enables construction of Mortar Bikes.
+		Prerequisites: ~cgcnst.latin, !up_mortarbike.latin, rank1
+	RenderSprites:
+		Image: mortarbike.latin
+	ProvidesPrerequisite:
+
+up_narco.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Narcos
+	Buildable:
+		BuildPaletteOrder: 124
+		Queue: Promotions
+		Description: Enables training of Narco Forces.
+		Prerequisites: ~cgcnst.latin, !up_narco.latin, up_mortarbike.latin, rank1
+	RenderSprites:
+		Image: narco.latin
+	ProvidesPrerequisite:
+
+up_cartel.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cartel Trucks
+	Buildable:
+		BuildPaletteOrder: 127
+		Queue: Promotions
+		Description: Enables construction of Cartel Trucks.
+		Prerequisites: ~cgcnst.latin, !up_cartel.latin, up_narco.latin, rank1
+	RenderSprites:
+		Image: cartel.latin
+	ProvidesPrerequisite:
+
+up_burrito.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Burritos
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Promotions
+		Description: Enables construction of Burritos.
+		Prerequisites: ~cgcnst.latin, !up_burrito.latin, up_cartel.latin, rank1
+	RenderSprites:
+		Image: burrito.latin
+	ProvidesPrerequisite:
+
+### War tree
+
+up_buggy.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Raider Buggy
+	Buildable:
+		BuildPaletteOrder: 122
+		Queue: Promotions
+		Description: Enables construction of Raider Buggies.
+		Prerequisites: ~cgcnst.latin, !up_buggy.latin, rank1
+	RenderSprites:
+		Image: buggy.latin
+	ProvidesPrerequisite:
+
+up_mtnk.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Smoker Tanks
+	Buildable:
+		BuildPaletteOrder: 125
+		Queue: Promotions
+		Description: Enables construction of Smoker Tanks.
+		Prerequisites: ~cgcnst.latin, !up_mtnk.latin, up_buggy.latin, rank1
+	RenderSprites:
+		Image: mtnk.latin
+	ProvidesPrerequisite:
+
+up_apc.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Latin APC.
+	Buildable:
+		BuildPaletteOrder: 128
+		Queue: Promotions
+		Description: Enables construction of Latin APCs.
+		Prerequisites: ~cgcnst.latin, !up_apc.latin, up_mtnk.latin, rank1
+	RenderSprites:
+		Image: apc.latin
+	ProvidesPrerequisite:
+
+up_lars.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock LARS
+	Buildable:
+		BuildPaletteOrder: 131
+		Queue: Promotions
+		Description: Enables construction of LARS.
+		Prerequisites: ~cgcnst.latin, !up_lars.latin, up_apc.latin, rank1
+	RenderSprites:
+		Image: lars.latin
+	ProvidesPrerequisite:
+
+### Artillery Weapons tree
+
+up_ra2terror.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Terrorists
+	Buildable:
+		BuildPaletteOrder: 123
+		Queue: Promotions
+		Description: Enables training of terrorists.
+		Prerequisites: ~cgcnst.latin, !up_ra2terror.latin, rank1
+	RenderSprites:
+		Image: ra2terror
+	ProvidesPrerequisite:
+
+up_ra2dtruck.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Demolition Trucks
+	Buildable:
+		BuildPaletteOrder: 126
+		Queue: Promotions
+		Description: Enables construction of Demo Trucks.
+		Prerequisites: ~cgcnst.latin, up_ra2terror.latin, !up_ra2dtruck.latin, rank1
+	RenderSprites:
+		Image: ra2dtruck
+	ProvidesPrerequisite:
+
+up_nuketruk.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Nuke Trucks
+	Buildable:
+		BuildPaletteOrder: 129
+		Queue: Promotions
+		Description: Enables construction of Nuke Trucks.
+		Prerequisites: ~cgcnst.latin, up_ra2dtruck.latin, !up_nuketruk.latin, rank1
+	RenderSprites:
+		Image: nuketruk.latin
+	ProvidesPrerequisite:
+
+up_topol.latin:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock TOPOL M
+	Buildable:
+		BuildPaletteOrder: 132
+		Queue: Promotions
+		Description: Enables construction of TOPOLs.
+		Prerequisites: ~cgcnst.latin, up_nuketruk.latin, !up_topol.latin, rank1
+	RenderSprites:
+		Image: topol.latin
+	ProvidesPrerequisite:
+
+##############################################
+#   Red Alert 2 Syndicate Upgrade
+##############################################

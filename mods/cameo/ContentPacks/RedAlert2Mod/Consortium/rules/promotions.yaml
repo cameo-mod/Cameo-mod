@@ -1,0 +1,163 @@
+up_conssupp1.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL1
+	Buildable:
+		BuildPaletteOrder: 109
+		Queue: Promotions
+		Description: Teleports in a small group of Federation units to support the Consortium. Includes Cougars and Hummers.
+		Prerequisites: ~qacst.steel, !up_conssupp1.steel, rank1
+	RenderSprites:
+		Image: cougar.steel
+	ProvidesPrerequisite:
+
+up_conssupp2.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL2
+	Buildable:
+		BuildPaletteOrder: 112
+		Queue: Promotions
+		Description: Teleports in a medium group of Federation units to support the Consortium. Includes Cougars, Hummers and a Beta Quantum Tank.
+		Prerequisites: ~qacst.steel, up_conssupp1.steel, !up_conssupp2.steel, rank1
+	RenderSprites:
+		Image: hummer.steel
+	ProvidesPrerequisite:
+
+up_conssupp3.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL3
+	Buildable:
+		BuildPaletteOrder: 115
+		Queue: Promotions
+		Description: Teleports in a big group of Federation units to support the Consortium. Includes Cougars, Hummers and two Beta Quantum Tanks.
+		Prerequisites: ~qacst.steel, up_conssupp2.steel, !up_conssupp3.steel, rank1
+	RenderSprites:
+		Image: oldqtnk.steel
+	ProvidesPrerequisite:
+
+up_conssupp4.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Support LVL4
+	Buildable:
+		BuildPaletteOrder: 118
+		Queue: Promotions
+		Description: Teleports in a large group of Federation units to support the Consortium. Includes Cougars, Hummers, two Beta Quantum Tanks and a Cobra.
+		Prerequisites: ~qacst.steel, up_conssupp3.steel, !up_conssupp4.steel, rank1
+	RenderSprites:
+		Image: cobra.steel
+	ProvidesPrerequisite:
+
+### Military tree
+
+up_quantumtank.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Quantum Tank
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		Description: Enables construction of Quantum Tanks.
+		Prerequisites: ~qacst.steel, !up_quantumtank.steel, rank1
+	RenderSprites:
+		Image: quantumtank.steel
+	ProvidesPrerequisite:
+
+up_dagger.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Dagger Artillery
+	Buildable:
+		BuildPaletteOrder: 113
+		Queue: Promotions
+		Description: Enables construction of Daggers.
+		Prerequisites: ~qacst.steel, up_quantumtank.steel, !up_dagger.steel, rank1
+	RenderSprites:
+		Image: dagger.steel
+	ProvidesPrerequisite:
+
+up_katy.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Katy Tank
+	Buildable:
+		BuildPaletteOrder: 116
+		Queue: Promotions
+		Description: Unlocks Katy Tank.
+		Prerequisites: ~qacst.steel, up_dagger.steel, !up_katy.steel, rank1
+	RenderSprites:
+		Image: katy.steel
+	ProvidesPrerequisite:
+
+up_white_rabbit.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock White Rabbit
+	Buildable:
+		BuildPaletteOrder: 119
+		Queue: Promotions
+		Description: Enables construction of the White Rabbit.
+		Prerequisites: ~qacst.steel, up_katy.steel, !up_white_rabbit.steel, rank1
+	RenderSprites:
+		Image: white_rabbit.steel
+	ProvidesPrerequisite:
+
+### Unisoft tree
+
+up_manta_hunt.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Barracuda
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		Description: Enables construction of Mantas Hunters.
+		Prerequisites: ~qacst.steel, !up_manta_hunt.steel, rank1
+	RenderSprites:
+		Image: manta_hunt.steel
+	ProvidesPrerequisite:
+
+up_defender.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Defender Bot
+	Buildable:
+		BuildPaletteOrder: 114
+		Queue: Promotions
+		Description: Enables construction of Defender Bots.
+		Prerequisites: ~qacst.steel, up_manta_hunt.steel, !up_defender.steel, rank1
+	RenderSprites:
+		Image: defender.steel
+	ProvidesPrerequisite:
+
+up_stalker.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Stalker
+	Buildable:
+		BuildPaletteOrder: 117
+		Queue: Promotions
+		Description: Enables construction of Stalkers.
+		Prerequisites: ~qacst.steel, up_defender.steel, !up_stalker.steel, rank1
+	RenderSprites:
+		Image: stalker.steel
+	ProvidesPrerequisite:
+
+up_cruiser.steel:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cloud Breaker
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Promotions
+		Description: Enables construction of Cloud Breakers.
+		Prerequisites: ~qacst.steel, up_stalker.steel, !up_cruiser.steel, rank1
+	RenderSprites:
+		Image: cruiser.steel
+	ProvidesPrerequisite:
+
+####################################################################################################
+#		Upgrades Consortium
+####################################################################################################
