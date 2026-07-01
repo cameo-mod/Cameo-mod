@@ -49,7 +49,7 @@ rifle.nax:
 	Voiced:
 		VoiceSet: NaxiSoldatVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 
 cons.nax:
 	Inherits: ^Soldier
@@ -102,7 +102,7 @@ cons.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 
 mp40.nax:
 	Inherits: ^Soldier
@@ -155,7 +155,7 @@ mp40.nax:
 	Voiced:
 		VoiceSet: NaxiSSVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 fcons.nax:
 	Inherits: ^Soldier
@@ -210,7 +210,7 @@ fcons.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 merc.nax:
 	Inherits: ^Soldier
@@ -264,7 +264,7 @@ merc.nax:
 	Voiced:
 		VoiceSet: NaxiSoldatVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 
 shrek.nax:
 	Inherits: ^Soldier
@@ -316,7 +316,7 @@ shrek.nax:
 	Voiced:
 		VoiceSet: NaxiTroopVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 tcons.nax:
 	Inherits: ^Soldier
@@ -368,7 +368,7 @@ tcons.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 litt.nax:
 	Inherits: ^JumpjetInfantry
@@ -440,7 +440,7 @@ litt.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 slavemaster.nax:
 	Inherits: ^Soldier
@@ -505,7 +505,7 @@ slavemaster.nax:
 	Voiced:
 		VoiceSet: NaxiFemVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 slav.nax:
 	Inherits: YRSLAV
@@ -531,7 +531,7 @@ slav.nax:
 		Modifier: 250
 		RequiresCondition: SlaveFaster >= 3
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 frank.nax:
 	Inherits: ^Soldier
@@ -576,7 +576,7 @@ frank.nax:
 	Targetable@dog:
 		TargetTypes: DogImmune
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 hmg.nax:
 	Inherits: ^Soldier
@@ -688,7 +688,7 @@ hmg.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 quadflak.nax:
 	Inherits: ^Soldier
@@ -804,7 +804,7 @@ quadflak.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 
 undead.nax:
 	Inherits: ^Soldier
@@ -856,7 +856,7 @@ undead.nax:
 	Voiced:
 		VoiceSet: NaxiZombie
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 
 conehead.nax:
 	Inherits: ^Soldier
@@ -905,7 +905,7 @@ conehead.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -960,7 +960,7 @@ conehead2.nax:
 	Voiced:
 		VoiceSet: NaxiEngVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 	RenderSprites:
 		PlayerPalette: player_rgba
 ####################################################################################################
@@ -1019,7 +1019,7 @@ atankcann.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 bmwbike.nax:
 	Inherits: ^Tank
@@ -1071,7 +1071,7 @@ bmwbike.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.futu
+		Upgrades: up_massopticsintegration.nax
 
 litt_husk.nax:
 	Inherits: ^HelicopterHusk
@@ -1148,5 +1148,5 @@ alien.nax:
 	Voiced:
 		VoiceSet: NaxiUFOVoice
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_ostfrontexperience.nax, up_massopticsintegration.nax
 	-TakeCover:

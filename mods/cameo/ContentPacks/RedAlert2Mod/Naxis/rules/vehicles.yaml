@@ -114,7 +114,7 @@ halftrack.nax:
 		MaxWeight: 10
 		InitialUnits: cons.nax, cons.nax, cons.nax, cons.nax, fcons.nax, fcons.nax, mp40.nax, mp40.nax, merc.nax, shrek.nax
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.futu
+		Upgrades: up_massopticsintegration.nax
 
 kubel.nax:
 	Inherits: ^Tank
@@ -167,7 +167,7 @@ kubel.nax:
 		MaxWeight: 5
 		InitialUnits: cons.nax, cons.nax, rifle.nax, rifle.nax, mp40.nax
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.futu
+		Upgrades: up_massopticsintegration.nax
 
 wirbelwind.nax:
 	Inherits: ^Tank
@@ -250,7 +250,7 @@ wirbelwind.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 mcv.nax:
 	Inherits: ^Vehicle
@@ -276,7 +276,7 @@ mcv.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu
+		Upgrades: up_tankarsenalrenovation.nax
 
 tiger.nax:
 	Inherits: ^Tank
@@ -339,7 +339,7 @@ tiger.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu
+		Upgrades: up_tankarsenalrenovation.nax
 
 kingtiger.nax:
 	Inherits: ^Tank
@@ -402,7 +402,7 @@ kingtiger.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu
+		Upgrades: up_tankarsenalrenovation.nax
 
 maus.nax:
 	Inherits: ^Tank
@@ -466,7 +466,7 @@ maus.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu
+		Upgrades: up_wunderwaffe.nax
 
 ratte.nax:
 	Inherits: ^Tank
@@ -548,7 +548,7 @@ ratte.nax:
 	Passenger:
 		Weight: 6
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu, up_massopticsintegration.futu
+		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
 
 grille.nax:
 	Inherits: ^Tank
@@ -600,7 +600,7 @@ grille.nax:
 	Voiced:
 		VoiceSet: NaxiArtyVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 brummbar.nax:
 	Inherits: ^Tank
@@ -651,7 +651,7 @@ brummbar.nax:
 	Voiced:
 		VoiceSet: NaxiArtyVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 sturmtiger.nax:
 	Inherits: ^Tank
@@ -698,7 +698,7 @@ sturmtiger.nax:
 	Voiced:
 		VoiceSet: NaxiArtyVoice
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu, up_massopticsintegration.futu
+		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
 
 hetzer.nax:
 	Inherits: ^Tank
@@ -752,7 +752,7 @@ hetzer.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 jagdpanzer.nax:
 	Inherits: ^Tank
@@ -806,7 +806,7 @@ jagdpanzer.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 eng.nax:
 	Inherits: ^Tank
@@ -971,7 +971,7 @@ brad.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu, up_massopticsintegration.futu
+		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
 
 sarubia.nax:
 	Inherits: ^Tank
@@ -1022,7 +1022,7 @@ sarubia.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu, up_massopticsintegration.futu
+		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
 
 shoe.nax:
 	Inherits: ^Tank
@@ -1109,7 +1109,7 @@ shoe.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu, up_massopticsintegration.futu
+		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
 
 nokana.nax:
 	Inherits: ^Tank
@@ -1183,7 +1183,7 @@ nokana.nax:
 	Passenger:
 		Weight: 5
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu, up_massopticsintegration.futu
+		Upgrades: up_wunderwaffe.nax, up_massopticsintegration.nax
 
 zombietank.nax:
 	Inherits: ^Tank
@@ -1257,7 +1257,7 @@ zombietank.nax:
 		Image: zombietank.nax
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu
+		Upgrades: up_tankarsenalrenovation.nax
 	#RenderVoxels:
 	#	Image: yrbfrt
 
@@ -1329,7 +1329,7 @@ assault.nax:
 	FirepowerMultiplier@tiger.nax:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu
+		Upgrades: up_tankarsenalrenovation.nax
 
 imperial.nax:
 	Inherits: ^Tank
@@ -1392,7 +1392,7 @@ imperial.nax:
 	Voiced:
 		VoiceSet: NaxiTankVoice
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 #		Support Tanks
 
@@ -1459,7 +1459,7 @@ panzer.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu
+		Upgrades: up_tankarsenalrenovation.nax
 
 car.nax:
 	Inherits: ^Tank
@@ -1523,7 +1523,7 @@ car.nax:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.futu
+		Upgrades: up_massopticsintegration.nax
 
 ####################################################################################################
 #		Naxis Ships

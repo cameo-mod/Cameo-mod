@@ -197,7 +197,7 @@ miniv2.nax:
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu
+		Upgrades: up_wunderwaffe.nax
 
 sarubia_bomb.nax:
 	Inherits: ^ShootableMissile
@@ -222,4 +222,138 @@ sarubia_bomb.nax:
 		DetonateClasses: mine
 		BlockFriendly: true
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu
+		Upgrades: up_wunderwaffe.nax
+
+####################################################################################################
+#		Upgrades Naxis (moved from FutureTech content pack — implementations already live here)
+####################################################################################################
+
+up_ostfrontexperience.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Ostfront Experience
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Upgrades
+		Description: Infantry gets 15% to range, damage and armor
+		Prerequisites: ~radar.nax, !up_ostfrontexperience.nax
+	RenderSprites:
+		Image: ostfrontexperienceicon
+	ProvidesPrerequisite:
+
+up_atlantikwall.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Atlantikwall
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Defenses get 20% armor and automatic repair.
+		Prerequisites: ~radar.nax, !up_atlantikwall.nax
+	RenderSprites:
+		Image: atlantikwallicon
+	ProvidesPrerequisite:
+
+up_tankarsenalrenovation.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tank Arsenal Renovation
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Tier I-II gain 15% to speed, damage, reload speed and armor
+		Prerequisites: ~tech.nax, !up_tankarsenalrenovation.nax
+	RenderSprites:
+		Image: tankarsenalrenovationicon
+	ProvidesPrerequisite:
+
+up_massopticsintegration.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mass Optics Integration
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Research
+		Description: Increase accuracy, vision, detection and attack range of scouts, artillery and AA by 25%
+		Prerequisites: ~tech.nax, !up_massopticsintegration.nax
+	RenderSprites:
+		Image: massopticsintegrationicon
+	ProvidesPrerequisite:
+
+up_wunderwaffe.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Wunderwaffe
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: High Tier vehicles get 20% to attack speed, damage and armor
+		Prerequisites: ~tech.nax, !up_wunderwaffe.nax
+	RenderSprites:
+		Image: wunderwaffeicon
+	ProvidesPrerequisite:
+
+up_blitzkrieg.nax:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Blitzkrieg
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 130
+		Queue: Research
+		Description: upgrade-blitzkrieg.description
+		Prerequisites: ~tech.nax, !up_blitzkrieg.nax
+	RenderSprites:
+		Image: blitzkriegicon
+	# ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: up_team_blitzkrieg.nax
+
+up_team_blitzkrieg.nax:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: up_blitzkrieg.nax
+	RenderSprites:
+		Image: blitzkriegicon
+	Tooltip:
+		Name: Blitzkrieg
+	Buildable:
+		Description: Increase all vehicles movement speed by 25%
+	PlayerDisplayUpgrade:
+
+up_nax_horten.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Horten Bomber Strike
+	Buildable:
+		BuildPaletteOrder: 118
+		Queue: Promotions
+		Description: Upgrades Horten Bombers from 3 to 5 Planes.
+		Prerequisites: ~conyard.nax, up_shrek.nax, !up_nax_horten.nax, rank1
+	RenderSprites:
+		Image: nax_horten
+	ProvidesPrerequisite:
+
+up_nax_horten2.nax:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Horten Bomber Strike
+	Buildable:
+		BuildPaletteOrder: 121
+		Queue: Promotions
+		Description: Upgrades Horten Bombers from 5 to 7 Planes.
+		Prerequisites: ~conyard.nax, up_nax_horten.nax, !up_nax_horten2.nax, rank1
+	RenderSprites:
+		Image: nax_horten
+	ProvidesPrerequisite:

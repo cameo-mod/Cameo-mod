@@ -275,8 +275,8 @@ airfield.nax:
 		OrderName: NaxParabombs
 		Prerequisites:
 			1: airfield.nax, tech.nax
-			2: airfield.nax, tech.nax, up_nax_horten.futu
-			3: airfield.nax, tech.nax, up_nax_horten.futu, up_nax_horten2.futu
+			2: airfield.nax, tech.nax, up_nax_horten.nax
+			3: airfield.nax, tech.nax, up_nax_horten.nax, up_nax_horten2.nax
 		Icons:
 			1: airstrike
 			2: airstrike
@@ -469,7 +469,7 @@ twr.nax:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_atlantikwall.futu, up_ostfrontexperience.futu, up_massopticsintegration.futu
+		Upgrades: up_atlantikwall.nax, up_ostfrontexperience.nax, up_massopticsintegration.nax
 
 flak88.nax:
 	Inherits: ^RA2Defense
@@ -527,7 +527,7 @@ flak88.nax:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_atlantikwall.futu, up_tankarsenalrenovation.futu, up_massopticsintegration.futu
+		Upgrades: up_atlantikwall.nax, up_tankarsenalrenovation.nax, up_massopticsintegration.nax
 
 bunk.nax:
 	Inherits: ^RA2Defense
@@ -609,7 +609,7 @@ bunk.nax:
 		Sequence: turret-aa
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_atlantikwall.futu
+		Upgrades: up_atlantikwall.nax
 	Pluggable:
 		Conditions:
 			bunk_mg.nax: mg

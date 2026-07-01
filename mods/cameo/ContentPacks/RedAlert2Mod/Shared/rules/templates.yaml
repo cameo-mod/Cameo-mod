@@ -564,18 +564,18 @@
 		Actor: corpse_big.nax
 
 ^OstfrontExperience:
-	DamageMultiplier@up_ostfrontexperience.futu:
-		RequiresCondition: up_ostfrontexperience.futu
+	DamageMultiplier@up_ostfrontexperience.nax:
+		RequiresCondition: up_ostfrontexperience.nax
 		Modifier: 85
-	FirepowerMultiplier@up_ostfrontexperience.futu:
-		RequiresCondition: up_ostfrontexperience.futu
+	FirepowerMultiplier@up_ostfrontexperience.nax:
+		RequiresCondition: up_ostfrontexperience.nax
 		Modifier: 115
-	SpeedMultiplier@up_ostfrontexperience.futu:
-		RequiresCondition: up_ostfrontexperience.futu
+	SpeedMultiplier@up_ostfrontexperience.nax:
+		RequiresCondition: up_ostfrontexperience.nax
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_ostfrontexperience.futu:
-		Condition: up_ostfrontexperience.futu
-		Prerequisites: up_ostfrontexperience.futu
+	GrantConditionOnPrerequisite@up_ostfrontexperience.nax:
+		Condition: up_ostfrontexperience.nax
+		Prerequisites: up_ostfrontexperience.nax
 	FirepowerMultiplier@beer.nax:
 		RequiresCondition: beer.nax
 		Modifier: 125
@@ -589,93 +589,93 @@
 		Condition: sausage.nax
 		Prerequisites: sausage.nax
 	ActorStatValues:
-		Upgrades: up_ostfrontexperience.futu
+		Upgrades: up_ostfrontexperience.nax
 
 ^Atlantikwall:
-	DamageMultiplier@up_atlantikwall.futu:
-		RequiresCondition: up_atlantikwall.futu
+	DamageMultiplier@up_atlantikwall.nax:
+		RequiresCondition: up_atlantikwall.nax
 		Modifier: 80
 	ChangesHealth@up_atlantikwall1:
 		PercentageStep: 1
 		Delay: 40
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_atlantikwall.futu
+		RequiresCondition: up_atlantikwall.nax
 	ChangesHealth@up_atlantikwall2:
 		Step: 50
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_atlantikwall.futu
-	GrantConditionOnPrerequisite@up_atlantikwall.futu:
-		Condition: up_atlantikwall.futu
-		Prerequisites: up_atlantikwall.futu
+		RequiresCondition: up_atlantikwall.nax
+	GrantConditionOnPrerequisite@up_atlantikwall.nax:
+		Condition: up_atlantikwall.nax
+		Prerequisites: up_atlantikwall.nax
 	ActorStatValues:
-		Upgrades: up_atlantikwall.futu
+		Upgrades: up_atlantikwall.nax
 
 ^TankArsenalRenovation:
-	DamageMultiplier@up_tankarsenalrenovation.futu:
-		RequiresCondition: up_tankarsenalrenovation.futu
+	DamageMultiplier@up_tankarsenalrenovation.nax:
+		RequiresCondition: up_tankarsenalrenovation.nax
 		Modifier: 85
-	FirepowerMultiplier@up_tankarsenalrenovation.futu:
-		RequiresCondition: up_tankarsenalrenovation.futu
+	FirepowerMultiplier@up_tankarsenalrenovation.nax:
+		RequiresCondition: up_tankarsenalrenovation.nax
 		Modifier: 115
-	ReloadDelayMultiplier@up_tankarsenalrenovation.futu:
-		RequiresCondition: up_tankarsenalrenovation.futu
+	ReloadDelayMultiplier@up_tankarsenalrenovation.nax:
+		RequiresCondition: up_tankarsenalrenovation.nax
 		Modifier: 85
-	SpeedMultiplier@up_tankarsenalrenovation.futu:
-		RequiresCondition: up_tankarsenalrenovation.futu
+	SpeedMultiplier@up_tankarsenalrenovation.nax:
+		RequiresCondition: up_tankarsenalrenovation.nax
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_tankarsenalrenovation.futu:
-		Condition: up_tankarsenalrenovation.futu
-		Prerequisites: up_tankarsenalrenovation.futu
+	GrantConditionOnPrerequisite@up_tankarsenalrenovation.nax:
+		Condition: up_tankarsenalrenovation.nax
+		Prerequisites: up_tankarsenalrenovation.nax
 	ActorStatValues:
-		Upgrades: up_tankarsenalrenovation.futu
+		Upgrades: up_tankarsenalrenovation.nax
 
 ^MassOpticsIntegration:
-	RevealsShroudMultiplier@up_massopticsintegration.futu:
-		RequiresCondition: up_massopticsintegration.futu
+	RevealsShroudMultiplier@up_massopticsintegration.nax:
+		RequiresCondition: up_massopticsintegration.nax
 		Modifier: 125
-	DetectCloakedMultiplier@up_massopticsintegration.futu:
-		RequiresCondition: up_massopticsintegration.futu
+	DetectCloakedMultiplier@up_massopticsintegration.nax:
+		RequiresCondition: up_massopticsintegration.nax
 		Modifier: 125
-	InaccuracyMultiplier@up_massopticsintegration.futu:
-		RequiresCondition: up_massopticsintegration.futu
+	InaccuracyMultiplier@up_massopticsintegration.nax:
+		RequiresCondition: up_massopticsintegration.nax
 		Modifier: 75
-	RangeMultiplier@up_massopticsintegration.futu:
-		RequiresCondition: up_massopticsintegration.futu
+	RangeMultiplier@up_massopticsintegration.nax:
+		RequiresCondition: up_massopticsintegration.nax
 		Modifier: 125
-	GrantConditionOnPrerequisite@up_massopticsintegration.futu:
-		Condition: up_massopticsintegration.futu
-		Prerequisites: up_massopticsintegration.futu
+	GrantConditionOnPrerequisite@up_massopticsintegration.nax:
+		Condition: up_massopticsintegration.nax
+		Prerequisites: up_massopticsintegration.nax
 	ActorStatValues:
-		Upgrades: up_massopticsintegration.futu
+		Upgrades: up_massopticsintegration.nax
 
 ^Wunderwaffe:
-	DamageMultiplier@up_wunderwaffe.futu:
-		RequiresCondition: up_wunderwaffe.futu
+	DamageMultiplier@up_wunderwaffe.nax:
+		RequiresCondition: up_wunderwaffe.nax
 		Modifier: 80
 	FirepowerMultiplier@up_wunderwaffee:
-		RequiresCondition: up_wunderwaffe.futu
+		RequiresCondition: up_wunderwaffe.nax
 		Modifier: 120
-	ReloadDelayMultiplier@up_wunderwaffe.futu:
-		RequiresCondition: up_wunderwaffe.futu
+	ReloadDelayMultiplier@up_wunderwaffe.nax:
+		RequiresCondition: up_wunderwaffe.nax
 		Modifier: 80
-	GrantConditionOnPrerequisite@up_wunderwaffe.futu:
-		Condition: up_wunderwaffe.futu
-		Prerequisites: up_wunderwaffe.futu
+	GrantConditionOnPrerequisite@up_wunderwaffe.nax:
+		Condition: up_wunderwaffe.nax
+		Prerequisites: up_wunderwaffe.nax
 	ActorStatValues:
-		Upgrades: up_wunderwaffe.futu
+		Upgrades: up_wunderwaffe.nax
 
 ^Blitzkrieg:
-	GrantConditionOnPrerequisite@up_blitzkrieg.futu:
-		Condition: up_blitzkrieg.futu
-		Prerequisites: up_blitzkrieg.futu
-	SpeedMultiplier@up_blitzkrieg.futu:
-		RequiresCondition: up_blitzkrieg.futu
+	GrantConditionOnPrerequisite@up_blitzkrieg.nax:
+		Condition: up_blitzkrieg.nax
+		Prerequisites: up_blitzkrieg.nax
+	SpeedMultiplier@up_blitzkrieg.nax:
+		RequiresCondition: up_blitzkrieg.nax
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: up_blitzkrieg.futu
+		Upgrades: up_blitzkrieg.nax
 
 ##############################################
 #   Red Alert 2 Lunar Naxis Upgrades
