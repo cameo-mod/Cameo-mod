@@ -43,7 +43,7 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 		// faction-identity token is treated as a real progression gate (CANDIDATE).
 		static readonly string[] KnownToggleTokens =
 		{
-			"techlevel.low", "techlevel.medium", "techlevel.high",
+			"techlevel.low", "techlevel.medium", "techlevel.high", "techlevel.superweapons",
 			"globalnaval", "disabled", "disable", "botplayer", "hardbotplayer",
 			"unbuildable", "wip-content", "not available",
 		};
@@ -60,6 +60,13 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 			"plymouth_factory_arachnid", "eden_factory_consumer",
 			"construction_yard", "construction_yard.atreides", "upgrade_conyard",
 			"tkmfactory", "tkmbarracks", "tkmairpad",
+			// TiberianDawn: bare bi-faction producer buildings (GDI/Nod each have their own
+			// actor under this name, per-faction-folder-split, never shared across the two -
+			// verified via each folder's own definition). "fact" is the generic ConYard token
+			// both FACT.GDI/FACT.NOD explicitly grant via ProvidesPrerequisite@buildingname,
+			// so it's a safe TD-only (not faction-specific) anchor for shared items like walls.
+			"weap", "afld", "pyle", "hand", "hpad.gdi", "hpad.nod", "fact",
+			"eye", "tmpl", "hq.gdi", "hq.nod",
 		};
 
 		[Desc("[tokens|visibility]",

@@ -177,7 +177,7 @@ gdiempgrenadier:
 		Name: EMP Grenadier
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~upgdiempgrenadier
+		Prerequisites: ~pyle, upgdiempgrenadier
 		Queue: Infantry, RAInfantry
 		Description: actor-empgrenadier.description
 	Mobile:
@@ -234,7 +234,7 @@ gdimissilesoldier:
 		Name: Sonic Missile Soldier
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~upgdimissilesoldier
+		Prerequisites: ~pyle, upgdimissilesoldier
 		Queue: Infantry, RAInfantry
 		Description: actor-e3.description
 	Mobile:
@@ -278,7 +278,7 @@ gdisniper:
 		Name: GDI Heavy Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: hq.gdi, ~upgdisniper
+		Prerequisites: ~pyle, hq.gdi, upgdisniper
 		Queue: Infantry, RAInfantry
 		Description: actor-gdisniper.description
 	Mobile:
@@ -320,7 +320,7 @@ gdishotgunner:
 		Name: Shotgunner
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~upgdishotgunner
+		Prerequisites: ~pyle, upgdishotgunner
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -371,7 +371,7 @@ gdiofficer:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Buildable:
-		Prerequisites: hq.gdi, ~upgdiofficer
+		Prerequisites: ~pyle, hq.gdi, upgdiofficer
 		Queue: Infantry, RAInfantry
 		Description: actor-gdiofficer.description
 	Armament@PRIMARY:
@@ -442,7 +442,7 @@ gdihavoc:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: eye, ~upgdihavoc
+		Prerequisites: ~pyle, eye, upgdihavoc
 		Queue: Infantry, RAInfantry
 		Description: actor-havoc.description
 	RenderSprites:

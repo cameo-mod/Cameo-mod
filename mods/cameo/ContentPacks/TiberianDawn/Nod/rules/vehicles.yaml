@@ -18,7 +18,7 @@ nodspecter:
 	Tooltip:
 		Name: Specter Artillery
 	Buildable:
-		Prerequisites: hq.nod, ~upnodspecter
+		Prerequisites: ~afld, hq.nod, upnodspecter
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
 		Description: actor-specter.description
@@ -557,7 +557,7 @@ chembike:
 		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~upchemicalbike
+		Prerequisites: ~afld, upchemicalbike
 		Queue: Vehicle, RAVehicle
 		Description: actor-bike.description
 	Mobile:
@@ -634,7 +634,7 @@ chemstnk:
 		Type: Medium
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: tmpl, ~upchemicalstealthtank
+		Prerequisites: ~afld, tmpl, upchemicalstealthtank
 		Queue: Vehicle, RAVehicle
 		Description: actor-stnk.description
 	Armament:
@@ -678,7 +678,7 @@ chemssm:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
 		Description: actor-mssm.description
-		Prerequisites: td_nod_templeprime, ~upchemicalssmlauncher
+		Prerequisites: ~afld, td_nod_templeprime, upchemicalssmlauncher
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -735,7 +735,7 @@ nodbuggy2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~upnodbuggy2
+		Prerequisites: ~afld, upnodbuggy2
 	Valued:
 		Cost: 500
 	Mobile:
@@ -826,7 +826,7 @@ nodltnk2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~upnodltnk2
+		Prerequisites: ~afld, upnodltnk2
 		Description: actor-ltnk2.description
 	Mobile:
 		Speed: 100
@@ -892,7 +892,7 @@ nodftnk2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: hq.nod, ~upnodftnk2
+		Prerequisites: ~afld, hq.nod, upnodftnk2
 		Description: actor-ftnk.description
 	Mobile:
 		Speed: 75
@@ -950,7 +950,7 @@ tanodharv:
 		Sequence: harvesting
 		Palette: ra2effect
 	Buildable:
-		Prerequisites: ~upstealthsoldier
+		Prerequisites: ~afld, upstealthsoldier
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: tanodharv

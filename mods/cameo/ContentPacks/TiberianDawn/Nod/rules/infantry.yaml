@@ -207,7 +207,7 @@ cheme3:
 		Locomotor: chem
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~upchemicalrocket
+		Prerequisites: ~hand, upchemicalrocket
 		Queue: Infantry, RAInfantry
 		Description: actor-cheme3.description
 	Armament@PRIMARY: ##########
@@ -257,7 +257,7 @@ tsblackhandlaser:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: td_nod_templeprime, ~upblackhandlaser
+		Prerequisites: ~hand, td_nod_templeprime, upblackhandlaser
 		Description: actor-blackhandlaser.description
 	Valued:
 		Cost: 700
@@ -307,7 +307,7 @@ tsblackhandflamer:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: hq.nod, ~upblackhandflamer
+		Prerequisites: ~hand, hq.nod, upblackhandflamer
 		Description: actor-blackhandflamer.description
 	Valued:
 		Cost: 600
@@ -364,7 +364,7 @@ tsstealthsoldier:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: tmpl, ~upstealthsoldier
+		Prerequisites: ~hand, tmpl, upstealthsoldier
 		Description: actor-stealthsoldier.description
 	Valued:
 		Cost: 500
@@ -430,7 +430,7 @@ nodlasercommando:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: td_nod_templeprime, ~upnodvenom
+		Prerequisites: ~hand, td_nod_templeprime, upnodvenom
 		Queue: Infantry, RAInfantry
 		Description: actor-lasercommando.description
 	RenderSprites:
