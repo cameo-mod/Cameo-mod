@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@terran:
 		Name: Terran SC
 		InternalName: terran
@@ -7848,6 +7848,7 @@ SCARBITER:
 	Inherits: ^AirProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@explode: ^HeliExplodeProtoss
@@ -7858,9 +7859,9 @@ SCARBITER:
 	Tooltip:
 		Name: Arbiter
 	Valued:
-		Cost: 2000
+		Cost: 4800
 	Power:
-		Amount: -100
+		Amount: -240
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -7875,13 +7876,13 @@ SCARBITER:
 		IdealSeparation: 1c0
 		RepulsionSpeed: 10
 	Health:
-		HP: 125000
+		HP: 225000
 	Repairable:
-		HpPerStep: 6250
+		HpPerStep: 11250
 	ChangesHealth@SelfHealing:
-		Step: 50
+		Step: 90
 	Shielded:
-		RegenAmount: 100
+		RegenAmount: 180
 	Armament:
 		Weapon: ArbiterCannon
 		LocalOffset: 400,0,0

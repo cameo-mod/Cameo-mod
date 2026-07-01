@@ -1631,13 +1631,13 @@ MissileTurret:
 ArbiterStasis:
 	Projectile: InstantHit
 	Report: plsecan2.aud
-	Range: 5000
-	MinRange: 1000
+	Range: 4280
+	MinRange: 856
 	ReloadDelay: 250
 	ValidTargets: Chronobeamable
 	Warhead@Condition: GrantExternalCondition
 		ValidTargets: Chronobeamable
-		Range: 5000
+		Range: 4280
 		Condition: chronobeamed
 		Duration: 125
 
@@ -3226,11 +3226,11 @@ GladiusCannon:
 
 ArbiterCannon:
 	Inherits: PhotonCannon
-	ReloadDelay: 32
-	Range: 4850
+	ReloadDelay: 25
+	Range: 4280
 	Projectile: Missile
-		Speed: 485
-		CloseEnough: 485
+		Speed: 428
+		CloseEnough: 428
 		AllowSnapping: true
 
 GlaveCanon:

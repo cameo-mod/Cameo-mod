@@ -10766,6 +10766,15 @@ steel_stalker:
 	# 	HpPerStep: 6875
 	ChangesHealth@SelfHealing:
 		Step: 140
+	DamageMultiplier@shielded:
+		Modifier: 200
+		RequiresCondition: shieldpermanent
+	Armor:
+		RequiresCondition: shieldpermanent
+	Armor@shielded:
+		RequiresCondition: shieldpermanent
+	Armor@Medium:
+		Type: Medium
 	Shielded:
 		MaxPercentageStrength: 200
 		InitialPercentageStrength: 200
@@ -10848,6 +10857,15 @@ white_rabbit:
 	# 	HpPerStep: 7500
 	ChangesHealth@SelfHealing:
 		Step: 150
+	DamageMultiplier@shielded:
+		Modifier: 200
+		RequiresCondition: shieldpermanent
+	Armor:
+		RequiresCondition: shieldpermanent
+	Armor@shielded:
+		RequiresCondition: shieldpermanent
+	Armor@Heavy:
+		Type: Heavy
 	Shielded:
 		MaxPercentageStrength: 200
 		InitialPercentageStrength: 200
@@ -14949,6 +14967,7 @@ nax_conehead:
 		Upgrades: up_ostfrontexperience, up_massopticsintegration
 	RenderSprites:
 		PlayerPalette: player_rgba
+
 nax_conehead2:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
