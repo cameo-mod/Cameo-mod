@@ -15,7 +15,7 @@ twin_rocket_trooper.ixian:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~up_twin_rocket_trooper.ixian
+		Prerequisites: ~construction_yard.ixian, up_twin_rocket_trooper.ixian
 		Description: template-antitank-antiair-infantry.description
 		IconPalette: d2kunit
 	Valued:
@@ -69,7 +69,7 @@ shock_infantry.ixian:
 		Queue: Infantry, RAInfantry
 		Description: actor-shock_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~research_centre.ixian, ~!up_storm_infantry.ixian
+		Prerequisites: ~construction_yard.ixian, research_centre.ixian, ~!up_storm_infantry.ixian
 	Health:
 		HP: 36000
 	ChangesHealth@SelfHealing:
@@ -120,7 +120,7 @@ storm_infantry.ixian:
 		Queue: Infantry, RAInfantry
 		Description: actor-shock_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~up_storm_infantry.ixian, research_centre.ixian
+		Prerequisites: ~construction_yard.ixian, up_storm_infantry.ixian, research_centre.ixian
 	Mobile:
 		Speed: 44
 	Health:
@@ -171,7 +171,7 @@ heavy_inf.ixian:
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~up_heavy_inf.ixian
+		Prerequisites: ~construction_yard.ixian, up_heavy_inf.ixian
 	Mobile:
 		Speed: 50
 	Health:

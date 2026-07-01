@@ -89,7 +89,7 @@ carryall:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 120
-		Prerequisites: ~high_tech_factory.ixian
+		Prerequisites: ~construction_yard.ixian, high_tech_factory.ixian
 
 carryall.paradrop:
 	Inherits: carryall.reinforce

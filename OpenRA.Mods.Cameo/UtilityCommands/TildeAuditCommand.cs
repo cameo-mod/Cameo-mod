@@ -101,6 +101,10 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 			// only its own race's ConYard, so they're safe queue-tab-defining anchors.
 			"scbarracks", "scfactory", "scstarport", "scgateway", "scspawningpool",
 			"scqueensnest", "scdefilermound", "scarmory", "scengineeringbay",
+			// D2k: shared refinery-grant token (both refinery.ixian/.ordos inherit the same
+			// ^abstract template granting it) - D2k-exclusive but faction-agnostic, same role
+			// as TD's "fact".
+			"spice_refinery", "d2k_barracks", "outpost.d2k", "d2k_construction_yard",
 		};
 
 		[Desc("[tokens|visibility]",

@@ -473,7 +473,7 @@ artillery_platform.ordos:
 		Cost: 1200
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~d2k_barracks.ordos
+		Prerequisites: ~construction_yard.ordos, d2k_barracks.ordos
 		BuildPaletteOrder: 550
 		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -545,7 +545,7 @@ autogun_turret.ordos:
 		Cost: 1100
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~d2k_barracks.ordos
+		Prerequisites: ~construction_yard.ordos, d2k_barracks.ordos
 		BuildPaletteOrder: 510
 		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
 		IconPalette: chrome

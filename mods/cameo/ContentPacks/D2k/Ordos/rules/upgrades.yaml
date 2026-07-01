@@ -23,7 +23,7 @@ up_aatrooper.ordos:
 	Buildable:
 		Queue: Upgrades
 		Description: Upgrades the Rocket Trooper to the Anti Air Trooper
-		Prerequisites: ~outpost.ordos, !up_aatrooper.ordos
+		Prerequisites: ~construction_yard.ordos, outpost.ordos, !up_aatrooper.ordos
 	RenderSprites:
 		Image: aatrooper.ordos
 
@@ -34,7 +34,7 @@ up_heavycombattank.ordos:
 	Buildable:
 		Queue: Upgrades
 		Description: Upgrades the Ordos Combat Tank to the Heavy Combat Tank
-		Prerequisites: ~outpost.ordos, !up_heavycombattank.ordos
+		Prerequisites: ~construction_yard.ordos, outpost.ordos, !up_heavycombattank.ordos
 		IconPalette: ra2
 	RenderSprites:
 		Image: heavycombattank.ordos
@@ -46,7 +46,7 @@ up_heavycombattank_rockets.ordos:
 	Buildable:
 		Queue: Upgrades
 		Description: Upgrades the Heavy Combat Tank with Rocket Launchers.
-		Prerequisites: ~outpost.ordos, research_centre.ordos, up_heavycombattank.ordos, !up_heavycombattank_rockets.ordos
+		Prerequisites: ~construction_yard.ordos, outpost.ordos, research_centre.ordos, up_heavycombattank.ordos, !up_heavycombattank_rockets.ordos
 	RenderSprites:
 		Image: up_heavycombattank_rockets.ordos
 
@@ -57,7 +57,7 @@ up_heavy_autogun_tank.ordos:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Autogun Tank to the Heavy Autogun Tank
-		Prerequisites: ~research_centre.ordos, ~up_heavycombattank.ordos, !up_heavy_autogun_tank.ordos
+		Prerequisites: ~construction_yard.ordos, research_centre.ordos, up_heavycombattank.ordos, !up_heavy_autogun_tank.ordos
 	RenderSprites:
 		Image: autogun_tank.ordos
 
@@ -67,7 +67,7 @@ up_shield.ordos:
 		Name: Ordos Shields
 	Buildable:
 		Description: ordos_upgrade_shield.description
-		Prerequisites: ~research_centre.ordos, !up_shield.ordos
+		Prerequisites: ~construction_yard.ordos, research_centre.ordos, !up_shield.ordos
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: up_shield.ordos
@@ -78,7 +78,7 @@ up_toxin.ordos:
 		Name: Biological Warfare
 	Buildable:
 		Description: ordos_upgrade_toxin.description
-		Prerequisites: ~research_centre.ordos, !up_toxin.ordos
+		Prerequisites: ~construction_yard.ordos, research_centre.ordos, !up_toxin.ordos
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: up_toxin.ordos
@@ -89,7 +89,7 @@ up_contraband.ordos:
 		Name: Contraband
 	Buildable:
 		Description: ordos_upgrade_contraband.description
-		Prerequisites: ~research_centre.ordos, !up_contraband.ordos
+		Prerequisites: ~construction_yard.ordos, research_centre.ordos, !up_contraband.ordos
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: ordos_upgrade_para
