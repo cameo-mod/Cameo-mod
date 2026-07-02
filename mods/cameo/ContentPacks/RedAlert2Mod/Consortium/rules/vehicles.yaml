@@ -233,8 +233,7 @@ stalker.steel:
 	ChangesHealth@SelfHealing:
 		Step: 140
 	DamageMultiplier@shielded:
-		Modifier: 200
-		RequiresCondition: shieldpermanent
+		RequiresCondition: shielded
 	Armor:
 		RequiresCondition: shieldpermanent
 	Armor@shielded:
@@ -324,8 +323,7 @@ white_rabbit.steel:
 	ChangesHealth@SelfHealing:
 		Step: 150
 	DamageMultiplier@shielded:
-		Modifier: 200
-		RequiresCondition: shieldpermanent
+		RequiresCondition: shielded
 	Armor:
 		RequiresCondition: shieldpermanent
 	Armor@shielded:

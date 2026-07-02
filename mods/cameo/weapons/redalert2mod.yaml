@@ -5630,7 +5630,8 @@ LunarTigerCannon:
 	ReloadDelay: 80
 	Report: trashcannon.wav
 	Range: 5105
-	MinRange: 1021
+	Projectile: Bullet
+		Speed: 510
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
