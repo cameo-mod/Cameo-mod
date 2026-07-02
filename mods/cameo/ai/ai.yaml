@@ -4820,8 +4820,8 @@ Player:
 		MaxAircraft: 25
 		MaintainAirSuperiority: true
 		MaxAirSuperiority: 25
-		AirToAirUnits: heli, orca, nodvenom, gdifirehawk, yak, yaktesla, yakarmored, yaknuclear, mig, su57, raheli, rapierjumpjet, modkami, ra2falc, yrschp, yrbpln1, ra2hind.latin, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, twister.steel, grun.steel, cruiser.steel, yakolev.latin, mig.latin, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, piercer.nax2, dieglocke.nax2, bf109.nax, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
-		AirThreatUnits: heli, orca, nodvenom, gdifirehawk, tran.gdi, tran.nod, yak, yaktesla, yakarmored, yaknuclear, mig, su57, mignuke, hind, raheli, MH60, rapierjumpjet, modkami, modbomber, modhip, ratran, ra2falc, ra2beag, yrschp, yrbpln1, ra2hind.latin, ra2zep, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, inspect.steel, twister.steel, grun.steel, cargoship.steel, cruiser.steel, yakolev.latin, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, dieglocke.nax2, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, sclanifect, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragonwc2_orc_dragon
+		AirToAirUnits: heli, orca, nodvenom, gdifirehawk, yak, yaktesla, yakarmored, yaknuclear, mig, su57, raheli, rapierjumpjet, modkami, ra2falc, yrschp, yrbpln1, ra2hind.latin, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, twister.steel, grun.steel, cruiser.steel, yakolev.latin, mig.latin, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, piercer.nax2, dieglocke.nax2, bf109.nax, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, scvoidray, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
+		AirThreatUnits: heli, orca, nodvenom, gdifirehawk, tran.gdi, tran.nod, yak, yaktesla, yakarmored, yaknuclear, mig, su57, mignuke, hind, raheli, MH60, rapierjumpjet, modkami, modbomber, modhip, ratran, ra2falc, ra2beag, yrschp, yrbpln1, ra2hind.latin, ra2zep, yrdisk, ra2shad, phoenix.asian, pelican.asian, air_drone.ixian, d2k_heavy_air_drone, farasha.ixian, inspect.steel, twister.steel, grun.steel, cargoship.steel, cruiser.steel, yakolev.latin, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, dieglocke.nax2, twister.futu, cryo.futu, harbinger.futu, scwraith, scsundog, scbattlecruiser, scvalkyrie, scwyvern, scscout, scepigraph, sccarrier, scgladius, scvoidray, scmutalisk, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragonwc2_orc_dragon
 		#UnitBuilderMinCredits: 0
 		UnitQueues: Infantry, RAInfantry, SCZergInfantry, Vehicle, RAVehicle, Aircraft, RAAircraft, Naval, RANaval, Addons, Upgrades, Research, Promotions
 		UnitDelays:
@@ -6052,7 +6052,7 @@ Player:
 			scarchon: 5
 			scscout: 5
 			scepigraph: 5
-			sclanifect: 1
+			scvoidray: 3
 			scgladius: 3
 			sccorsair: 1
 			sccarrier: 5

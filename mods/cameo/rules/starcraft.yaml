@@ -7392,7 +7392,7 @@ SCEPIGRAPH:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCLANIFECT:
+SCvoidray:
 	Inherits: ^AirProtoss
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -7417,9 +7417,9 @@ SCLANIFECT:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstargate, ~uplanifect
+		Prerequisites: ~scstargate, ~upvoidray
 		Queue: Aircraft, RAAircraft
-		Description: actor-sclanifect.description
+		Description: actor-scvoidray.description
 	Aircraft:
 		Speed: 140
 		TurnSpeed: 28
@@ -8349,17 +8349,17 @@ upepigraph:
 		Image: scepigraph
 	ProvidesPrerequisite:
 
-uplanifect:
+upvoidray:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Lanifect
+		Name: Unlock Void Ray
 	Buildable:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
-		Description: actor-uplanifect.description
+		Description: actor-upvoidray.description
 		Prerequisites: ~scnexus, upepigraph, !upgladius, rank1
 	RenderSprites:
-		Image: sclanifect
+		Image: scvoidray
 	ProvidesPrerequisite:
 
 upgladius:
@@ -8370,7 +8370,7 @@ upgladius:
 		BuildPaletteOrder: 8053
 		Queue: Promotions
 		Description: actor-upgladius.description
-		Prerequisites: ~scnexus, uplanifect, !upgladius, rank1
+		Prerequisites: ~scnexus, upvoidray, !upgladius, rank1
 	RenderSprites:
 		Image: scgladius
 	ProvidesPrerequisite:
