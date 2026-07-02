@@ -6,7 +6,7 @@ mcv.nax2:
 	Tooltip:
 		Name: Naxis Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~powr.nax2, radar.nax2
+		Prerequisites: ~weap.nax2, powr.nax2, radar.nax2
 	Transforms:
 		IntoActor: conyard.nax2
 		Offset: -1,-1
@@ -35,7 +35,7 @@ dalek.nax2:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~tech.nax2
+		Prerequisites: ~weap.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: Dalek
 	Mobile:
@@ -254,7 +254,7 @@ tiger.nax2:
 		Name: Lunar Tiger
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~radar.nax2
+		Prerequisites: ~weap.nax2, radar.nax2
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -338,7 +338,7 @@ jager.nax2:
 		Name: Neo Jagdpanzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tech.nax2
+		Prerequisites: ~weap.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -409,7 +409,7 @@ grille.nax2:
 		Name: Lunar Grille
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~radar.nax2
+		Prerequisites: ~weap.nax2, radar.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:
@@ -538,7 +538,7 @@ crystal.nax2:
 		Name: Crystal Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tech.nax2
+		Prerequisites: ~weap.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
 		Description: actor-aaquas.description
 	Mobile:

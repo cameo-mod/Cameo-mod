@@ -3669,7 +3669,7 @@ wc2_human_siege_engine:
 		TurnSpeed: 28
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_human_castle, wc2_human_blacksmith
+		Prerequisites: ~wc2_human_townhall, wc2_human_castle, wc2_human_blacksmith
 		Queue: Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	-AttackFrontal:
@@ -5648,7 +5648,7 @@ wc2_orc_troll_berserker:
 	Tooltip:
 		Name: Troll Berserker
 	Buildable:
-		Prerequisites: ~wc2_orc_troll_lumber_mill, ~wc2_o_berserkerupg, ~!wc2_upgrade_troll_spearthrower
+		Prerequisites: ~wc2_orc_troll_lumber_mill, wc2_o_berserkerupg, ~!wc2_upgrade_troll_spearthrower
 		Description: Elite ranged infantry.\nNot as durable as Grunt.\nCan attack air.
 	Selectable:
 		Class: wc2_orc_troll_axethrower
@@ -6076,7 +6076,7 @@ wc2_orc_siege_engine:
 		TurnSpeed: 28
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_orc_stronghold, wc2_orc_blacksmith
+		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold, wc2_orc_blacksmith
 		Queue: Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	-AttackFrontal:

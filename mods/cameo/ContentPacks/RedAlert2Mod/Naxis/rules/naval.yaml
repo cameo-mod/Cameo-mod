@@ -67,7 +67,7 @@ muboat.nax:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tech.nax
+		Prerequisites: ~naval.nax, tech.nax
 		Queue: Naval, RANaval
 		Description: actor-msub.description
 	Mobile:

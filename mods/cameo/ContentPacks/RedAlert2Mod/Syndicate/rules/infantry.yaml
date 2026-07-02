@@ -225,7 +225,7 @@ fthrow.latin:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cgspy.latin
+		Prerequisites: ~cgpile.latin, cgspy.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-latin_fthrow.description
 	Mobile:
@@ -290,7 +290,7 @@ narco.latin:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~up_narco.latin, radar.latin
+		Prerequisites: ~cgpile.latin, up_narco.latin, radar.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-latin_narco.description
 	Mobile:
@@ -396,7 +396,7 @@ fftr.latin:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgspy.latin
+		Prerequisites: ~cgpile.latin, cgspy.latin
 		BuildLimit: 1
 		Description: actor-latin_fftr.description
 	Mobile:
@@ -509,7 +509,7 @@ ra2terror.latin:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~up_ra2terror.latin
+		Prerequisites: ~cgpile.latin, up_ra2terror.latin
 		Queue: Infantry, RAInfantry
 		Description: actor-terror.description
 	Mobile:

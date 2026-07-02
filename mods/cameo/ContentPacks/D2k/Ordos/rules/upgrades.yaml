@@ -57,7 +57,7 @@ up_heavy_autogun_tank.ordos:
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Autogun Tank to the Heavy Autogun Tank
-		Prerequisites: ~research_centre.ordos, ~up_heavycombattank.ordos, !up_heavy_autogun_tank.ordos
+		Prerequisites: ~research_centre.ordos, up_heavycombattank.ordos, !up_heavy_autogun_tank.ordos
 	RenderSprites:
 		Image: autogun_tank.ordos
 

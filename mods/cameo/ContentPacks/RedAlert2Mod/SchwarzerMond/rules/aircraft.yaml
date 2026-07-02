@@ -14,7 +14,7 @@ zep.nax2:
 		OverrideActor: zep.nax
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~airfield.nax2, ~radar.nax2
+		Prerequisites: ~weap.nax2, airfield.nax2, radar.nax2
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor-shad.description
 	Aircraft:
@@ -121,7 +121,7 @@ bbomb.nax2:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~airfield.nax2, ~tech.nax2
+		Prerequisites: ~airfield.nax2, tech.nax2
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_piercer.description
 	Health:
@@ -312,7 +312,7 @@ haunebu2.nax2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~airfield.nax2, ~tech.nax2
+		Prerequisites: ~airfield.nax2, tech.nax2
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_haunebu2.description
 	Aircraft:
@@ -400,7 +400,7 @@ piercer.nax2:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~airfield.nax2, ~tech.nax2
+		Prerequisites: ~airfield.nax2, tech.nax2
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_piercer.description
 	Health:
@@ -485,7 +485,7 @@ dieglocke.nax2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~airfield.nax2, ~tech.nax2
+		Prerequisites: ~airfield.nax2, tech.nax2
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_dieglocke.description

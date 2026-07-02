@@ -929,7 +929,7 @@ ra_conscript_ak:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~ra_doctrine_conscription
+		Prerequisites: ~barr, ra_doctrine_conscription
 		Queue: Infantry, RAInfantry
 		AdditionalActors: ra_cons_molo
 		Description: actor-e2.description
@@ -1101,7 +1101,7 @@ mortarsoldier:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~dome.soviet, ~upmortarsoldier
+		Prerequisites: ~barr, dome.soviet, upmortarsoldier
 		Description: actor-mortarsoldier.description
 	Valued:
 		Cost: 500
@@ -1327,7 +1327,7 @@ ra_dragunov:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~ra_doctrine_conscription
+		Prerequisites: ~barr, ra_doctrine_conscription
 		Queue: Infantry, RAInfantry
 		Description: Powerful Anti Material Sniper. Strong vs Tanks and Aircraft
 	Mobile:
@@ -1372,7 +1372,7 @@ e3flamer:
 	Tooltip:
 		Name: Fire Rocket Soldier
 	Buildable:
-		Prerequisites: ~ra_doctrine_inferno
+		Prerequisites: ~barr, ra_doctrine_inferno
 		Queue: Infantry, RAInfantry
 	Valued:
 		Cost: 400
@@ -1433,7 +1433,7 @@ RAJE3:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
 		Description: actor-e3.description
-		Prerequisites: ~dome.japan
+		Prerequisites: ~modtentj, dome.japan
 	Mobile:
 		Speed: 48
 	Health:
@@ -1503,7 +1503,7 @@ RAE4:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 45
-		Prerequisites: ~dome.soviet
+		Prerequisites: ~barr, dome.soviet
 		Description: actor-e4.description
 	Health:
 		HP: 16000
@@ -1637,7 +1637,7 @@ SHOK:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~stek, ~!ra_doctrine_teslatech
+		Prerequisites: ~barr, stek, ~!ra_doctrine_teslatech
 		Description: actor-shok.description
 	Valued:
 		Cost: 600
@@ -1704,7 +1704,7 @@ ra_zapper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~stek, ~ra_doctrine_teslatech
+		Prerequisites: ~barr, stek, ra_doctrine_teslatech
 		Description: actor-shok.description
 	Valued:
 		Cost: 1200
@@ -1777,7 +1777,7 @@ ra_commissar:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Buildable:
-		Prerequisites: ~ra_upgrade_commissar
+		Prerequisites: ~barr, ra_upgrade_commissar
 		Queue: Infantry, RAInfantry
 		Description: actor-gdiofficer.description
 	Armament@PRIMARY:
@@ -1857,7 +1857,7 @@ SNIPER:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 80
-		Prerequisites: ~dome.allies
+		Prerequisites: ~tent, dome.allies
 		Description: actor-rasniper.description
 	Health:
 		HP: 10000
@@ -1927,7 +1927,7 @@ E7:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~atek
+		Prerequisites: ~tent, atek
 		BuildLimit: 1
 		Description: template-commando.description
 	Valued:
@@ -2040,7 +2040,7 @@ MECH:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~rafix.allies
+		Prerequisites: ~tent, rafix.allies
 		Description: actor-mech.description
 	Valued:
 		Cost: 500
@@ -2161,7 +2161,7 @@ RASPY:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 25
-		Prerequisites: ~dome.allies
+		Prerequisites: ~tent, dome.allies
 		Description: actor-spy.description
 	Valued:
 		Cost: 500
@@ -2235,7 +2235,7 @@ v1truck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~dome.soviet, ~!ra_doctrine_heavyarmor
+		Prerequisites: ~raweap, dome.soviet, ~!ra_doctrine_heavyarmor
 		Queue: Vehicle, RAVehicle
 		Description: actor-v1truck.description
 	Mobile:
@@ -2314,7 +2314,7 @@ ra_grad:
 		Name: Grad
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~stek, ~ra_doctrine_heavyarmor
+		Prerequisites: ~raweap, stek, ra_doctrine_heavyarmor
 		Queue: Vehicle, RAVehicle
 		Description: actor-v2rl.description
 	Mobile:
@@ -2383,7 +2383,7 @@ V2RL:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~stek, ~!ra_doctrine_nuclearwar
+		Prerequisites: ~raweap, stek, ~!ra_doctrine_nuclearwar
 		Description: actor-v2rl.description
 	Valued:
 		Cost: 1600
@@ -2460,7 +2460,7 @@ V2RLNUKE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~stek, ~ra_doctrine_nuclearwar
+		Prerequisites: ~raweap, stek, ra_doctrine_nuclearwar
 		Description: actor-v2rl.description
 	Valued:
 		Cost: 2300
@@ -2716,7 +2716,7 @@ hammertank:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra_upgrade_hammertank, ~!ra_upgrade_heavyteslatank, ~!ra_upgrade_kotintank
+		Prerequisites: ~raweap, ra_upgrade_hammertank, ~!ra_upgrade_heavyteslatank, ~!ra_upgrade_kotintank
 		BuildPaletteOrder: 120
 		Description: actor-kotin.description
 	Valued:
@@ -2796,7 +2796,7 @@ TTNK2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra_upgrade_heavyteslatank
+		Prerequisites: ~raweap, ra_upgrade_heavyteslatank
 		Description: actor-ttnk2.description
 	Valued:
 		Cost: 3500
@@ -2897,7 +2897,7 @@ Kotin:
 	Inherits@UnstableIsotopesUpgradeRA1: ^UnstableIsotopesUpgradeRA1
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ra_upgrade_kotintank
+		Prerequisites: ~raweap, ra_upgrade_kotintank
 		BuildPaletteOrder: 120
 		Description: actor-kotin.description
 	Valued:
@@ -2976,7 +2976,7 @@ Kotin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~stek, ~!ra_doctrine_heavyarmor
+		Prerequisites: ~raweap, stek, ~!ra_doctrine_heavyarmor
 		Description: actor-htnk.description
 	Valued:
 		Cost: 2000
@@ -3116,7 +3116,7 @@ Kotin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~stek, ~ra_doctrine_heavyarmor
+		Prerequisites: ~raweap, stek, ra_doctrine_heavyarmor
 		Description: actor-htnk.description
 	Valued:
 		Cost: 4000
@@ -3259,7 +3259,7 @@ heavyaatank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~dome.allies
+		Prerequisites: ~raweapa, dome.allies
 		Description: actor-heavyaatank.description
 	Valued:
 		Cost: 1250
@@ -3356,7 +3356,7 @@ RAARTY:
 	Inherits@CryoMissiles: ^CryoMissiles
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~dome.allies
+		Prerequisites: ~raweapa, dome.allies
 		BuildPaletteOrder: 70
 		Description: actor-arty.description
 	Valued:
@@ -3478,7 +3478,7 @@ ra_industrialminer:
 	Tooltip:
 		Name: Soviet Heavy Industrial Miner
 	Buildable:
-		Prerequisites: ~raproc.soviet, ~ra_doctrine_industrialefficiency
+		Prerequisites: ~raweap, ~raproc.soviet, ra_doctrine_industrialefficiency
 	Valued:
 		Cost: 1200
 	StoresResources:
@@ -3560,7 +3560,7 @@ RAMCV.ALLIES:
 	Tooltip:
 		Name: Allied Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~rafix.allies
+		Prerequisites: ~raweapa, rafix.allies
 	Transforms:
 		IntoActor: rafact.allies
 	Voiced:
@@ -3575,7 +3575,7 @@ RAMCV.SOVIET:
 	Tooltip:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~rafix.soviet
+		Prerequisites: ~raweap, rafix.soviet
 	Transforms:
 		IntoActor: rafact.soviet
 	Voiced:
@@ -3589,7 +3589,7 @@ RAMCV.JAPAN:
 	Tooltip:
 		Name: Japanese Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~rafix.japan
+		Prerequisites: ~modraweapj, rafix.japan
 	Transforms:
 		IntoActor: rafact.japan
 	Voiced:
@@ -3717,7 +3717,7 @@ MNLY:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 310
-		Prerequisites: ~rafix.allies
+		Prerequisites: ~raweapa, rafix.allies
 		Description: actor-mnly.description
 	Valued:
 		Cost: 800
@@ -3779,7 +3779,7 @@ TTNK:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~dome.soviet
+		Prerequisites: ~raweap, dome.soviet
 		Description: actor-ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -3844,7 +3844,7 @@ ra_heatraytank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~ra_upgrade_heatraytank
+		Prerequisites: ~raweap, ra_upgrade_heatraytank
 		Description: actor-ttnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -3979,7 +3979,7 @@ MODBTR:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~raweap, ~ra_doctrine_conscription
+		Prerequisites: ~raweap, ra_doctrine_conscription
 		Description: actor-btr.description
 	Valued:
 		Cost: 1600
@@ -4103,7 +4103,7 @@ DTRK:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		BuildPaletteOrder: 160
-		Prerequisites: ~stek
+		Prerequisites: ~raweap, stek
 		Description: actor-dtrk.description
 	Valued:
 		Cost: 1500
@@ -4164,7 +4164,7 @@ QTNK:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 190
-		Prerequisites: ~stek
+		Prerequisites: ~raweap, stek
 		Description: actor-qtnk.description
 	Valued:
 		Cost: 3000
@@ -4551,7 +4551,7 @@ yaktesla:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra_upgrade_yaktesla
+		Prerequisites: ~raafld, ra_upgrade_yaktesla
 		Description: actor-yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -4667,7 +4667,7 @@ yakarmored:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra_upgrade_yakarmored
+		Prerequisites: ~raafld, ra_upgrade_yakarmored
 		Description: actor-yak.description
 	Valued:
 		Cost: 1600
@@ -4769,7 +4769,7 @@ yaknuclear:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra_upgrade_yaknuclear
+		Prerequisites: ~raafld, ra_upgrade_yaknuclear
 		Description: actor-yak.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -4971,7 +4971,7 @@ MODBOMBER:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~modjtek
+		Prerequisites: ~modraafld, modjtek
 		Description: actor-jpbomber.description
 	Valued:
 		Cost: 1500
@@ -5081,7 +5081,7 @@ MIG:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~stek, ~!ra_doctrine_heavyarmor
+		Prerequisites: ~raafld, stek, ~!ra_doctrine_heavyarmor
 		Description: actor-mig.description
 	Valued:
 		Cost: 1400
@@ -5202,7 +5202,7 @@ su57:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~stek, ~ra_doctrine_heavyarmor
+		Prerequisites: ~raafld, stek, ra_doctrine_heavyarmor
 		Description: actor-su57.description
 	Valued:
 		Cost: 3000
@@ -5500,7 +5500,7 @@ ra_kamov:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra_doctrine_teslatech
+		Prerequisites: ~raafld, ra_doctrine_teslatech
 		Description: actor-hind.description
 	Valued:
 		Cost: 2100
@@ -5794,7 +5794,7 @@ RAHELI:
 	Inherits@eject: ^AircraftEjectOnDeath
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~atek
+		Prerequisites: ~rahpad, atek
 		Queue: Aircraft, RAAircraft
 		Description: actor-raheli.description
 	Valued:
@@ -5910,7 +5910,7 @@ JHIND:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~modjtek
+		Prerequisites: ~modraafld, modjtek
 		Description: actor-hind.description
 	Valued:
 		Cost: 2000
@@ -6327,7 +6327,7 @@ MODNANO:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 70
-		Prerequisites: ~dome.japan
+		Prerequisites: ~modraweapj, dome.japan
 		Description: actor-nanobggy.description
 	Valued:
 		Cost: 1200
@@ -6382,7 +6382,7 @@ jballista:
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~modjtek
+		Prerequisites: ~modraweapj, modjtek
 		BuildPaletteOrder: 70
 		Description: actor-arty.description
 	Valued:
@@ -6438,7 +6438,7 @@ modoitank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~modjtek
+		Prerequisites: ~modraweapj, modjtek
 		Description: actor-oitank.description
 	Valued:
 		Cost: 7000
@@ -6607,7 +6607,7 @@ MODCORE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		BuildDurationModifier: 25
 		Description: actor-jpcore.description-factory
 	Valued:
@@ -6655,7 +6655,7 @@ MODCORE1:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		Description: actor-jpcore.description-refinery
 		Icon: icon1
 	Valued:
@@ -6674,7 +6674,7 @@ MODCORE2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		Description: actor-jpcore.description-power
 		Icon: icon2
 	Valued:
@@ -6693,7 +6693,7 @@ MODCORE3:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		Description: actor-jpcore.description-barracks
 		Icon: icon3
 	Valued:
@@ -6712,7 +6712,7 @@ MODCORE4:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		Description: actor-jpcore.description-radar
 		Icon: icon4
 	Valued:
@@ -6731,7 +6731,7 @@ MODCORE5:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		Description: actor-jpcore.description-airfield
 		Icon: icon5
 	Valued:
@@ -6750,7 +6750,7 @@ MODCORE6:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		Description: actor-jpcore.description-service-depot
 		Icon: icon6
 	Valued:
@@ -6769,7 +6769,7 @@ MODCORE7:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~rafix.japan, dome.japan
+		Prerequisites: ~modraweapj, rafix.japan, dome.japan
 		Description: actor-jpcore.description-tech-center
 		Icon: icon7
 	Valued:
@@ -6862,7 +6862,7 @@ DD:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~dome.allies
+		Prerequisites: ~ra1syrd, dome.allies
 		Queue: Naval, RANaval
 		Description: actor-dd.description
 	Mobile:
@@ -6936,7 +6936,7 @@ CA:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~atek
+		Prerequisites: ~ra1syrd, atek
 		Queue: Naval, RANaval
 		Description: actor-ca.description
 	Mobile:
@@ -7094,7 +7094,7 @@ yamatobattleship:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~dome.japan
+		Prerequisites: ~ra1jsyrd, dome.japan
 		Queue: Naval, RANaval
 		Description: actor-yamatobattleship.description
 	Mobile:
@@ -7180,7 +7180,7 @@ japancarrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~modjtek
+		Prerequisites: ~ra1jsyrd, modjtek
 		Queue: Naval, RANaval
 		Description: Japanese Aircraft Carrier
 	Selectable:
@@ -7393,7 +7393,7 @@ MSUB:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~stek
+		Prerequisites: ~raspen, stek
 		Queue: Naval, RANaval
 		Description: actor-msub.description
 	Mobile:
@@ -8014,7 +8014,7 @@ ra_gigafactory:
 	Inherits: RAWEAP
 	Inherits@shape: ^4x3Shape
 	Buildable:
-		Prerequisites: ~rafact.soviet, raproc.soviet, ~ra_doctrine_industrialefficiency
+		Prerequisites: ~rafact.soviet, raproc.soviet, ra_doctrine_industrialefficiency
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Description: template-factory.description
@@ -8592,7 +8592,7 @@ ra_largeairfield:
 		# Reveal from the building center instead, like the Soviet War Factory.
 		Type: CenterPosition
 	Buildable:
-		Prerequisites: ~rafact.soviet, dome.soviet, ~ra_doctrine_industrialefficiency
+		Prerequisites: ~rafact.soviet, dome.soviet, ra_doctrine_industrialefficiency
 		BuildDuration: 625
 		BuildDurationModifier: 100
 		Description: actor-raafld.description
@@ -9674,7 +9674,7 @@ jmgnest:
 		Name: Japanese MG Nest
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~~rafact.japan, modtentj
+		Prerequisites: ~rafact.japan, modtentj
 		Queue: Defence, RADefence
 		Description: actor-mgnest.description
 	Building:
@@ -9733,7 +9733,7 @@ jballistat:
 		Name: Ballista Tower
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~~rafact.japan, ~dome.japan
+		Prerequisites: ~rafact.japan, dome.japan
 		Queue: Defence, RADefence
 		Description: actor-mgnest.description
 	Building:
@@ -10189,7 +10189,7 @@ alliedmachinegunner:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: actor-e1.description
-		Prerequisites: ~upalliedmachinegunner
+		Prerequisites: ~tent, upalliedmachinegunner
 	Mobile:
 		Speed: 50
 	Health:
@@ -10246,7 +10246,7 @@ sheridan:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~upsheridan
+		Prerequisites: ~raweapa, upsheridan
 		Queue: Vehicle, RAVehicle
 		Description: actor-sheridan.description
 	Mobile:
@@ -10340,7 +10340,7 @@ rapierjumpjet:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: atek, ~uprapierjumpjet
+		Prerequisites: ~rahpad, atek, uprapierjumpjet
 		Description: actor-rapierjumpjet.description
 	Valued:
 		Cost: 1300
@@ -10466,7 +10466,7 @@ MODSPACEPORT:
 		BuildPaletteOrder: 150
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: atek, ~upmodspaceport, derricklimit
+		Prerequisites: ~rafact.allies, atek, upmodspaceport, derricklimit
 		Description: Dropzone for quick reinforcements, and passive income.
 	Building:
 		Footprint: XXXXX xxxx+ =====
@@ -10590,7 +10590,7 @@ reconranger:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~upreconranger
+		Prerequisites: ~raweapa, upreconranger
 		Description: actor-jeep.description2
 	Valued:
 		Cost: 500
@@ -10682,7 +10682,7 @@ MODTIGER:
 	Inherits@ChronoArmor: ^ChronoArmor
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~upalliedtiger
+		Prerequisites: ~raweapa, upalliedtiger
 		BuildPaletteOrder: 110
 		Description: actor-tiger.description
 	Tooltip:
@@ -10800,7 +10800,7 @@ MODTNKD:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 110
 		Description: actor-tnkd.description
-		Prerequisites: ~upalliedtankdestroyer, dome.allies
+		Prerequisites: ~raweapa, upalliedtankdestroyer, dome.allies
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -10858,7 +10858,7 @@ CTNK:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 200
-		Prerequisites: atek, ~upctnk
+		Prerequisites: ~raweapa, atek, upctnk
 		Description: actor-ctnk.description
 	Valued:
 		Cost: 2000
@@ -10939,7 +10939,7 @@ HBOX:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~uphbox
+		Prerequisites: ~rafact.allies, uphbox
 		Description: actor-hbox.description
 	Valued:
 		Cost: 1300
@@ -11005,7 +11005,7 @@ SAPC:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 130
-		Prerequisites: atek, ~upphasetransport
+		Prerequisites: ~raweapa, atek, upphasetransport
 		Description: actor-sapc.description
 	Valued:
 		Cost: 1800
@@ -11080,7 +11080,7 @@ modartyturret:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 90
-		Prerequisites: ~upbastion
+		Prerequisites: ~rafact.allies, upbastion
 		Description: actor-bastion.description
 	-WithTurretSearchlight:
 	Valued:
@@ -11180,7 +11180,7 @@ GAP:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
-		Prerequisites: atek, ~upgapgeneratorradarjammer
+		Prerequisites: ~rafact.allies, atek, upgapgeneratorradarjammer
 		Description: actor-gap.description
 	Selectable:
 		Bounds: 1024, 2048, 0, -512
@@ -11247,7 +11247,7 @@ RAMGG:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 150
-		Prerequisites: atek, ~upgapgeneratorradarjammer
+		Prerequisites: ~raweapa, atek, upgapgeneratorradarjammer
 		Description: actor-mgg.description
 	Tooltip:
 		Name: Mobile Gap Generator
@@ -11339,7 +11339,7 @@ MRJ:
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
-		Prerequisites: atek, ~upgapgeneratorradarjammer
+		Prerequisites: ~raweapa, atek, upgapgeneratorradarjammer
 		Description: actor-mrj.description
 	Health:
 		HP: 25000
@@ -12396,7 +12396,7 @@ cyberdog:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~upcyberdog, ~barr
+		Prerequisites: upcyberdog, ~barr
 		Description: Cybernetically modified dog that is far more durable and can attack vehicles.
 	Valued:
 		Cost: 1000
@@ -12512,7 +12512,7 @@ VOLKOV:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		BuildPaletteOrder: 130
-		Prerequisites: ~stek, ~upvolkov
+		Prerequisites: ~barr, stek, upvolkov
 		Description: actor-volkov.description
 	Tooltip:
 		Name: Volkov
@@ -12619,7 +12619,7 @@ MODGTNK:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~raweap, ~upgtnk, ~!ra_doctrine_conscription
+		Prerequisites: ~raweap, upgtnk, ~!ra_doctrine_conscription
 		Description: actor-gtnk.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -12766,7 +12766,7 @@ MonsterTank:
 	Buildable:
 		BuildLimit: 1
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~stek, ~upmonstertank
+		Prerequisites: ~raweap, stek, upmonstertank
 		BuildPaletteOrder: 120
 		Description: actor-monstertank.description
 	Valued:
@@ -12874,7 +12874,7 @@ MIGNUKE:
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~stek, ~upmignukebomber
+		Prerequisites: ~raafld, stek, upmignukebomber
 		Description: actor-mignuke.description
 	Valued:
 		Cost: 7000
@@ -13274,7 +13274,7 @@ RASAMURAI:
 		Name: Samurai
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~upsamurai
+		Prerequisites: ~modtentj, upsamurai
 		Queue: Infantry, RAInfantry
 		Description: actor-rasamurai.description
 	Mobile:
@@ -13327,7 +13327,7 @@ RAMAID:
 		Name: Archer Maiden
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~dome.japan, ~uparchermaiden
+		Prerequisites: ~modtentj, dome.japan, uparchermaiden
 		Queue: Infantry, RAInfantry
 		Description: actor-ramaid.description
 	Mobile:
@@ -13383,7 +13383,7 @@ MODHOVER:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~dome.japan, ~uparchermaiden
+		Prerequisites: ~modraweapj, dome.japan, uparchermaiden
 		Description: actor-jphover.description
 	Valued:
 		Cost: 1500
@@ -13480,7 +13480,7 @@ ROCKETANGEL:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~modjtek, ~uprocketangel
+		Prerequisites: ~modtentj, modjtek, uprocketangel
 		Queue: Infantry, RAInfantry, Aircraft, RAAircraft
 		Description: actor-rocketangel.description
 	Aircraft:
@@ -13639,7 +13639,7 @@ hakurei:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 10
-		Prerequisites: ~modjtek, ~uphakurei, !hasexorcist
+		Prerequisites: ~modtentj, modjtek, uphakurei, !hasexorcist
 		Queue: Infantry, RAInfantry
 		Description: actor-hakurei.description
 	Mobile:
@@ -13728,7 +13728,7 @@ MODCARR:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~modraweapj, ~uparmoredcarr
+		Prerequisites: ~modraweapj, uparmoredcarr
 		Description: actor-gtnk.description
 	Valued:
 		Cost: 700
@@ -13841,7 +13841,7 @@ typechiha:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, ~upchiha
+		Prerequisites: ~modraweapj, upchiha
 		Description: template-mbt.description
 	Valued:
 		Cost: 1200
@@ -13917,7 +13917,7 @@ modhovert:
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~dome.japan, ~upflamehovertank
+		Prerequisites: ~modraweapj, dome.japan, upflamehovertank
 		BuildPaletteOrder: 120
 		Description: actor-jphovert.description
 	Valued:
@@ -13998,7 +13998,7 @@ shogunexecutioner:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 75
-		Prerequisites: ~upshogunexecutioner, modjtek
+		Prerequisites: ~modraweapj, upshogunexecutioner, modjtek
 		Queue: Vehicle, RAVehicle
 		Description: actor-aamecha.description
 	Mobile:
@@ -14076,7 +14076,7 @@ MODBGGY:
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~upgrenadebuggy
+		Prerequisites: ~modraweapj, upgrenadebuggy
 		Description: actor-jpbggy.description
 	Mobile:
 		Speed: 120
@@ -14133,7 +14133,7 @@ japan_shrine_minitank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, ~upjapanshrinetank
+		Prerequisites: ~modraweapj, upjapanshrinetank
 		Description: template-mbt.description
 	Valued:
 		Cost: 1600
@@ -14191,7 +14191,7 @@ waveforcetank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modjtek, ~upwaveforcetank
+		Prerequisites: ~modraweapj, modjtek, upwaveforcetank
 		Description: actor-waveforcetank.description
 	Valued:
 		Cost: 1800
@@ -14289,7 +14289,7 @@ MODWAVE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 75
-		Prerequisites: ~modjtek, ~upwaveforceartillery
+		Prerequisites: ~modraweapj, modjtek, upwaveforceartillery
 		Description: actor-waveforcearty.description
 	Valued:
 		Cost: 2500
@@ -14359,7 +14359,7 @@ exorcistoitank:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
 		BuildLimit: 1
-		Prerequisites: ~modjtek, ~uphakurei, !hasexorcist
+		Prerequisites: ~modraweapj, modjtek, uphakurei, !hasexorcist
 		Description: actor-oitank.description-exorcist
 	Valued:
 		Cost: 10000

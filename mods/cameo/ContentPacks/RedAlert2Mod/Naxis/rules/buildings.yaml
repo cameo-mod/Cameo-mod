@@ -635,7 +635,7 @@ bunk_mg.nax:
 		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~bunk.nax, barr.nax
+		Prerequisites: ~conyard.nax, bunk.nax, barr.nax
 	Plug:
 		Type: bunk_mg.nax
 	RenderSprites:
@@ -652,7 +652,7 @@ bunk_mortar.nax:
 		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~bunk.nax, radar.nax
+		Prerequisites: ~conyard.nax, bunk.nax, radar.nax
 	Plug:
 		Type: bunk_mortar.nax
 	RenderSprites:
@@ -669,7 +669,7 @@ bunk_aa.nax:
 		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~bunk.nax, radar.nax
+		Prerequisites: ~conyard.nax, bunk.nax, radar.nax
 	Plug:
 		Type: bunk_aa.nax
 	RenderSprites:

@@ -11,7 +11,7 @@ apc.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~outpost.ordos, ~!up_tleilax_labcrawl.ordos
+		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~!up_tleilax_labcrawl.ordos
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -74,7 +74,7 @@ tleilax_labcrawl.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~up_tleilax_labcrawl.ordos, research_centre.ordos
+		Prerequisites: ~heavy_factory.ordos, up_tleilax_labcrawl.ordos, research_centre.ordos
 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 		IconPalette: windows256
 	Valued:
@@ -132,7 +132,7 @@ d2k_mcv.ordos:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@mcv: ^MCV
 	Buildable:
-		Prerequisites: ~repair_pad.ordos
+		Prerequisites: ~heavy_factory.ordos, repair_pad.ordos
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ordos Mobile Construction Vehicle
@@ -799,7 +799,7 @@ cobra.ordos:
 		Cost: 1500
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~outpost.ordos, ~!up_python.ordos
+		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~!up_python.ordos
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -906,7 +906,7 @@ python.ordos:
 		Cost: 2500
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~up_python.ordos, outpost.ordos
+		Prerequisites: ~heavy_factory.ordos, up_python.ordos, outpost.ordos
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -999,7 +999,7 @@ laser_tank.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~up_laser_tank.ordos, research_centre.ordos
+		Prerequisites: ~heavy_factory.ordos, up_laser_tank.ordos, research_centre.ordos
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -1064,7 +1064,7 @@ deviatormk2.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~up_deviatormk2.ordos, research_centre.ordos
+		Prerequisites: ~heavy_factory.ordos, up_deviatormk2.ordos, palace.ordos
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
@@ -1455,7 +1455,7 @@ stealth_raider.ordos:
 	Valued:
 		Cost: 1300
 	Buildable:
-		Prerequisites: ~up_stealth_raider.ordos
+		Prerequisites: ~light_factory.ordos, up_stealth_raider.ordos
 		BuildPaletteOrder: 30
 		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -1497,7 +1497,7 @@ scoutdrone.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~up_scoutdrone.ordos
+		Prerequisites: ~light_factory.ordos, up_scoutdrone.ordos
 		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -1566,7 +1566,7 @@ deviator.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~palace.ordos
+		Prerequisites: ~heavy_factory.ordos, palace.ordos
 		Description: Fires a warhead which changes\nthe allegiance of enemy vehicles
 		IconPalette: d2kunit
 	Health:
@@ -1684,7 +1684,7 @@ heavycombattank.ordos:
 		BuildPaletteOrder: 40
 		Description: template-mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~up_heavycombattank.ordos
+		Prerequisites: ~heavy_factory.ordos, up_heavycombattank.ordos
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1749,7 +1749,7 @@ autogun_tank_small.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~outpost.ordos, ~!up_heavy_autogun_tank.ordos
+		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~!up_heavy_autogun_tank.ordos
 		Description: Combat Anti-Infantry and Anti-Air Vehicle
 		IconPalette: ra2
 	Armament:
@@ -1803,7 +1803,7 @@ autogun_tank.ordos:
 		Cost: 2800
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~up_heavy_autogun_tank.ordos
+		Prerequisites: ~heavy_factory.ordos, up_heavy_autogun_tank.ordos
 		BuildPaletteOrder: 50
 		Description: Heavy Anti-Infantry Tank\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks
 	UpdatesPlayerStatistics:
@@ -1865,7 +1865,7 @@ combat_tank_stealth.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~research_centre.ordos
+		Prerequisites: ~heavy_factory.ordos, research_centre.ordos
 		Description: Fast stealth tank with powerful long range cannon\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: windows256
 	Armor:

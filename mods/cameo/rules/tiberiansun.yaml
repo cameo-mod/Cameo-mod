@@ -327,7 +327,7 @@ OILB.TS.MUTANT:
 	Buildable:
 		BuildLimit: 1
 		Queue: Building, RABuilding
-		Prerequisites: ~tsfgttech, derricklimit
+		Prerequisites: ~tsgtcnstmutant, tsfgttech, derricklimit
 	SeedsResource:
 		ResourceType: Tiberium
 		Interval: 50
@@ -4331,7 +4331,7 @@ TSZONETROOPER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tsgtpile, tsgttech, ~upzonetrooper
+		Prerequisites: ~tsgtpile, tsgttech, upzonetrooper
 		Queue: Infantry, RAInfantry
 		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
 	Mobile:
@@ -7107,7 +7107,7 @@ TSTALTITAN:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap, ~uptitanmkii
+		Prerequisites: ~tsgtweap, uptitanmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -7176,7 +7176,7 @@ TSJUGG2:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap, tsgttech, ~upjuggmkii
+		Prerequisites: ~tsgtweap, tsgttech, upjuggmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -7490,7 +7490,7 @@ TSTALWOLV:
 		BuildPaletteOrder: 25
 		BuildDuration: 250
 		BuildDurationModifier: 100
-		Prerequisites: ~tsgtweap, ~upwolverinemkii
+		Prerequisites: ~tsgtweap, upwolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 32
@@ -7682,7 +7682,7 @@ TSMKII:
 		Name: Mammoth MK. II
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~upmammothmkii
+		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, upmammothmkii
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
@@ -10447,7 +10447,7 @@ TSZONEORCA:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~tsgthpad, ~upzoneorca
+		Prerequisites: ~tsgthpad, upzoneorca
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
 		Speed: 165
@@ -10518,7 +10518,7 @@ TSHAMMERHEAD:
 		Name: Hammerhead
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgthpad, ~uphammerhead
+		Prerequisites: ~tsgthpad, uphammerhead
 		Queue: Aircraft, RAAircraft
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:

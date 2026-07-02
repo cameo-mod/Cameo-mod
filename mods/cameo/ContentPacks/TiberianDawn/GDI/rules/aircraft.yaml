@@ -261,7 +261,7 @@ gdifirehawk:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: eye, ~upgdifirehawk
+		Prerequisites: ~hpad.gdi, eye, upgdifirehawk
 		Description: actor-firehawk.description
 	Health:
 		HP: 180000

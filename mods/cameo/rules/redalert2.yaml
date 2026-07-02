@@ -3637,7 +3637,7 @@ RA2CLEG:
 		Name: Chrono Legionnaire
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gapile, ra2gatech
 		Queue: Infantry, RAInfantry
 		Description: actor-cleg.description
 	Mobile:
@@ -3719,7 +3719,7 @@ RA2SNIPE:
 		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gapile, ra2gatech
 		Queue: Infantry, RAInfantry
 		Description: actor-ra2snipe.description
 	Mobile:
@@ -3810,7 +3810,7 @@ RA2TANY:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gapile, ra2gatech
 		BuildLimit: 1
 		Description: template-commando.description
 	Valued:
@@ -4482,7 +4482,7 @@ RA2DESO:
 		Name: Desolator
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nahand, ra2natech
 		Queue: Infantry, RAInfantry
 		Description: actor-deso.description
 	Mobile:
@@ -4561,7 +4561,7 @@ YRBORIS:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nahand, ra2natech
 		BuildLimit: 1
 		Description: actor-boris.description
 	Valued:
@@ -5072,7 +5072,7 @@ YRYURIX:
 		Name: actor-yurix.name
 	Buildable:
 		BuildPaletteOrder: 150
-		Prerequisites: ~yrygcomd
+		Prerequisites: ~yryabrck, yrygcomd
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor-yurix.description
@@ -5234,7 +5234,7 @@ YRGTRP:
 		Name: Gatling Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~yrygtech
+		Prerequisites: ~yryabrck, yrygtech
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2cameo
 		Description: actor-gtrp.description
@@ -5318,7 +5318,7 @@ yrbiot:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra2yclon
+		Prerequisites: ~yryabrck, ra2yclon
 		Description: actor-biot.description
 	Valued:
 		Cost: 400
@@ -5389,7 +5389,7 @@ RA2AMCV:
 	Tooltip:
 		Name: Allied Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra2gadept
+		Prerequisites: ~ra2gaweap, ra2gadept
 	Transforms:
 		IntoActor: ra2gacnst
 		Offset: -1,-1
@@ -6023,7 +6023,7 @@ RA2SREF:
 		Name: Prism Tank
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gaweap, ra2gatech
 		Queue: Vehicle, RAVehicle
 		Description: actor-sref.description
 	Mobile:
@@ -6113,7 +6113,7 @@ RA2MGTK:
 		RequiresCondition: tree
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2gatech, ~!ra2_allies_upgrade_heavymiragetank
+		Prerequisites: ~ra2gaweap, ra2gatech, ~!ra2_allies_upgrade_heavymiragetank
 		Queue: Vehicle, RAVehicle
 		Description: actor-mgtk.description
 	Mobile:
@@ -6203,7 +6203,7 @@ RA2HMGTK:
 		RequiresCondition: tree
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2_allies_upgrade_heavymiragetank, ra2gatech
+		Prerequisites: ~ra2gaweap, ra2_allies_upgrade_heavymiragetank, ra2gatech
 		Queue: Vehicle, RAVehicle
 		Description: actor-mgtk.description
 	Mobile:
@@ -6292,7 +6292,7 @@ yrbfrt:
 		OverrideActor: yrbfrt
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gaweap, ra2gatech
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:
@@ -6389,7 +6389,7 @@ RA2SMCV:
 	Tooltip:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra2nadept
+		Prerequisites: ~ra2naweap, ra2nadept
 	Transforms:
 		IntoActor: ra2nacnst
 		Offset: -1,-1
@@ -6643,7 +6643,7 @@ RA2APOC:
 		Payload: 500
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2naweap, ra2natech
 		Queue: Vehicle, RAVehicle
 		Description: actor-htnk.description
 	Mobile:
@@ -7150,7 +7150,7 @@ YRPCV:
 	Tooltip:
 		Name: Yuri Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~yryggrnd
+		Prerequisites: ~yrygweap, yryggrnd
 	Transforms:
 		IntoActor: yrnacnst
 		Offset: -1,-1
@@ -7614,7 +7614,7 @@ YRMIND:
 		Name: Master Mind
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~yrygtech
+		Prerequisites: ~yrygweap, yrygtech
 		Queue: Vehicle, RAVehicle
 		Description: actor-mind.description
 	Mobile:
@@ -7909,7 +7909,7 @@ ra2dlph:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gayard, ra2gatech
 		Queue: Naval, RANaval
 		Description: actor-dlph.description
 	Mobile:
@@ -8158,7 +8158,7 @@ ra2carrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gayard, ra2gatech
 		Queue: Naval, RANaval
 		Description: actor-ra2carrier.description
 	Selectable:
@@ -8377,7 +8377,7 @@ ra2dred:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2nayard, ra2natech
 		Queue: Naval, RANaval
 		Description: actor-dred.description
 	Selectable:
@@ -8584,7 +8584,7 @@ RA2ZEP:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 99
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2naweap, ra2natech
 		Queue: Vehicle, Aircraft, RAAircraft
 		Description: actor-zep.description
 	Aircraft:
@@ -8916,7 +8916,7 @@ yrbpln1:
 		Cost: 2000
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra2natech
+		Prerequisites: ~ra2naairf, ra2natech
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:
@@ -9235,7 +9235,7 @@ RA2BEAG:
 		Name: Black Eagle
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2gatech
+		Prerequisites: ~ra2gaairc, ra2gatech
 		Queue: Aircraft, RAAircraft
 		Description: actor-beag.description
 	Valued:
@@ -9420,7 +9420,7 @@ YRDISK:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~yrygtech
+		Prerequisites: ~yrygweap, yrygtech
 		Queue: Vehicle, Aircraft, RAAircraft
 		Description: actor-disk.description
 	Aircraft:

@@ -384,7 +384,7 @@ litt.nax:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tek.nax
+		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_litt.description
 	Aircraft:
@@ -596,7 +596,7 @@ hmg.nax:
 		Name: Naxi Machinegunners
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tek.nax
+		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_hmg.description
 	Mobile:
@@ -1036,7 +1036,7 @@ bmwbike.nax:
 		Name: BMW Bike
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax
+		Prerequisites: ~barr.nax, weap.nax
 		Queue: Infantry, RAInfantry
 		Description: actor-nax_bmwbike.description
 	Mobile:

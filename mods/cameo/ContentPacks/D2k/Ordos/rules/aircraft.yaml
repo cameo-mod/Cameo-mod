@@ -157,7 +157,7 @@ eye.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~research_centre.ordos
+		Prerequisites: ~high_tech_factory.ordos, research_centre.ordos
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	Health:
 		HP: 150000
@@ -213,7 +213,7 @@ banshee.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~up_banshee.ordos, research_centre.ordos
+		Prerequisites: ~high_tech_factory.ordos, up_banshee.ordos, research_centre.ordos
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	Health:
 		HP: 37500
@@ -297,7 +297,7 @@ wraith.ordos:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~up_wraith.ordos, palace.ordos
+		Prerequisites: ~high_tech_factory.ordos, up_wraith.ordos, palace.ordos
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor-nax_dieglocke.description

@@ -15,7 +15,7 @@ aatrooper.ordos:
 		Name: Anti Air Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~up_aatrooper.ordos
+		Prerequisites: ~d2k_barracks.ordos, up_aatrooper.ordos
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Health:
@@ -67,7 +67,7 @@ chem_troop.ordos:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
-		Prerequisites: ~up_chem_troop.ordos
+		Prerequisites: ~d2k_barracks.ordos, up_chem_troop.ordos
 		IconPalette: player
 	Health:
 		HP: 30000
@@ -117,7 +117,7 @@ mortar.ordos:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~up_mortar.ordos
+		Prerequisites: ~d2k_barracks.ordos, up_mortar.ordos
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Health:
@@ -283,7 +283,7 @@ face_dancer.ordos:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		BuildLimit: 1
-		Prerequisites: ~palace.ordos
+		Prerequisites: ~d2k_barracks.ordos, palace.ordos
 		Description: Genetically modified humanoid armed with a powerful rocket launcher. Can cloak. Does not lie down when attacked. Immune to Tiberium
 	Health:
 		HP: 90000
@@ -339,7 +339,7 @@ contaminator.ordos:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 10
-		Prerequisites: ~d2k_barracks.ordos, ~up_contaminator.ordos
+		Prerequisites: ~d2k_barracks.ordos, up_contaminator.ordos
 		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
 	Health:
 		HP: 75000
@@ -666,7 +666,7 @@ leech.ordos:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites:  ~up_leech.ordos
+		Prerequisites: ~d2k_barracks.ordos, up_leech.ordos
 		Description: Stealth creature that can attack infantry and infect vehicles.
 		IconPalette: player
 	Selectable:

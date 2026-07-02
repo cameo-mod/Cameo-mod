@@ -3525,7 +3525,7 @@ SCMADCAP:
 	Power:
 		Amount: -15
 	Buildable:
-		Prerequisites: ~scbarracks, ~upmadcap
+		Prerequisites: ~scbarracks, upmadcap
 		Queue: Infantry, RAInfantry
 		Description: actor-scmadcap.description
 	Mobile:
@@ -4202,7 +4202,7 @@ SCMATADOR:
 		Amount: -85
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scfactory, ~upmatador
+		Prerequisites: ~scfactory, upmatador
 		Description: actor-scmatador.description
 	Mobile:
 		Speed: 100
@@ -4314,7 +4314,7 @@ SCCYCLONE:
 		Amount: -115
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scengineeringbay, ~upsccyclone
+		Prerequisites: ~scengineeringbay, upsccyclone
 		Description: actor-sccyclone.description
 	Mobile:
 		Speed: 115
@@ -4467,7 +4467,7 @@ SCGOLIATH2:
 		Amount: -120
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scarmory, ~upgoliathmk2
+		Prerequisites: ~scarmory, upgoliathmk2
 		Description: actor-scgoliath2.description
 	Mobile:
 		Speed: 75
@@ -4750,7 +4750,7 @@ SCSUNDOG:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, ~upsundog
+		Prerequisites: ~scstarport, upsundog
 		Queue: Aircraft, RAAircraft
 		Description: actor-scsundog.description
 	Aircraft:
@@ -4893,7 +4893,7 @@ SCWYVERN:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, scarmory, ~upwyvern
+		Prerequisites: ~scstarport, scarmory, upwyvern
 		Queue: Aircraft, RAAircraft
 		Description: actor-scwyvern.description
 	Aircraft:
@@ -4953,7 +4953,7 @@ SCRAVEN:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, ~upraven
+		Prerequisites: ~scstarport, upraven
 		Queue: Aircraft, RAAircraft
 		Description: actor-scraven.description
 	Aircraft:
@@ -5105,7 +5105,7 @@ SCPYTHEAN:
 		OverrideActor: scdropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstarport, ~uppythean
+		Prerequisites: ~scstarport, uppythean
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		Description: actor-scpythean.description
@@ -5219,7 +5219,7 @@ SCMEDIVAC:
 		OverrideActor: scdropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstarport, ~upsilvertongue
+		Prerequisites: ~scstarport, upsilvertongue
 		Queue: Aircraft, RAAircraft
 		Description: actor-scmedivac.description
 	Aircraft:
@@ -5293,7 +5293,7 @@ SCBATTLECRUISER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~scstarport, ~scsciencefacility
+		Prerequisites: ~scstarport, scsciencefacility
 		Queue: Aircraft, RAAircraft
 		Description: actor-scbattlecruiser.description
 	Aircraft:
@@ -5451,7 +5451,7 @@ SCPHOBOS:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 40
-		Prerequisites: ~scstarport, ~scsciencefacility, ~upphobos
+		Prerequisites: ~scstarport, scsciencefacility, upphobos
 		Queue: Aircraft, RAAircraft
 		Description: actor-scphobos.description
 	Aircraft:
@@ -8198,7 +8198,7 @@ SCLEGIONNAIRE:
 		Amount: -35
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scgateway, ~uplegionnaire
+		Prerequisites: ~scgateway, uplegionnaire
 		Queue: Infantry, RAInfantry
 		Description: actor-sclegionnaire.description
 	Mobile:
@@ -8726,7 +8726,7 @@ SCBROODWEAVER:
 		OverrideActor: scoverlord
 	Buildable:
 		BuildPaletteOrder: 0
-		Prerequisites: ~schatchery, ~upbroodweaver
+		Prerequisites: ~schatchery, upbroodweaver
 		Queue: SCZergInfantry
 		Description: actor-scbroodweaver.description
 	Aircraft:
@@ -8881,7 +8881,7 @@ SCTALON:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scspawningpool, ~uptalon
+		Prerequisites: ~scspawningpool, uptalon
 		Queue: SCZergInfantry
 		AdditionalActors: sczergling, sczergling
 		Description: actor-sctalon.description
@@ -8928,7 +8928,7 @@ SCSPOREMAW:
 		Amount: -50
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~sclair, ~upsporemaw
+		Prerequisites: ~sclair, upsporemaw
 		Queue: SCZergInfantry
 		Description: actor-scsporemaw.description
 	Mobile:
@@ -9200,7 +9200,7 @@ SCSWARMLING:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~scgreaterspire, ~schive, ~upswarmling
+		Prerequisites: scgreaterspire, ~schive, upswarmling
 		Queue: SCZergInfantry
 		Description: actor-scswarmling.description
 	Aircraft:
@@ -9949,7 +9949,7 @@ SCGOREMAW:
 		Amount: -75
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~scultraliskcavern, ~schive, ~upgoremaw
+		Prerequisites: scultraliskcavern, ~schive, upgoremaw
 		Queue: SCZergInfantry
 		Description: actor-scgoremaw.description
 	Mobile:
@@ -10011,7 +10011,7 @@ SCLURKER:
 		Amount: -65
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~schydraliskden, ~scevolutionchamber, ~sclair
+		Prerequisites: schydraliskden, scevolutionchamber, ~sclair
 		Queue: SCZergInfantry
 		Description: actor-sclurker.description
 	Mobile:
@@ -10378,7 +10378,7 @@ SCBEHEMOTH:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 20
-		Prerequisites: ~sclair, ~upbehemoth
+		Prerequisites: ~sclair, upbehemoth
 		Queue: SCZergInfantry
 		Description: actor-scbehemoth.description
 	Aircraft:
@@ -10798,7 +10798,7 @@ upsupplydepot2:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor-upsupplydepot2.description
-		Prerequisites: ~scarmory, ~upsupplydepot1, ~!upsupplydepot2
+		Prerequisites: ~scarmory, upsupplydepot1, ~!upsupplydepot2
 	RenderSprites:
 		Image: scsupplydepot
 	ProvidesPrerequisite:
@@ -11061,7 +11061,7 @@ uplingspeed:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor-uplingspeed.description
-		Prerequisites: ~scspawningpool, ~scevolutionchamber, ~!uplingspeed
+		Prerequisites: ~scspawningpool, scevolutionchamber, ~!uplingspeed
 	RenderSprites:
 		Image: uplingspeed
 	ProvidesPrerequisite:
@@ -11121,7 +11121,7 @@ upzergmelee2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor-upzergmelee2.description
-		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmelee, ~!upzergmelee2
+		Prerequisites: scevolutionchamber, ~schive, upzergmelee, ~!upzergmelee2
 	RenderSprites:
 		Image: upzergmelee
 	ProvidesPrerequisite:
@@ -11151,7 +11151,7 @@ upzergmissile2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor-upzergmissile2.description
-		Prerequisites: ~scevolutionchamber, ~schive, ~upzergmissile, ~!upzergmissile2
+		Prerequisites: scevolutionchamber, ~schive, upzergmissile, ~!upzergmissile2
 	RenderSprites:
 		Image: upzergmissile
 	ProvidesPrerequisite:
@@ -11181,7 +11181,7 @@ upcarapace2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor-upcarapace2.description
-		Prerequisites: ~scevolutionchamber, ~schive, ~upcarapace, ~!upcarapace2
+		Prerequisites: scevolutionchamber, ~schive, upcarapace, ~!upcarapace2
 	RenderSprites:
 		Image: upcarapace
 	ProvidesPrerequisite:
@@ -11211,7 +11211,7 @@ upflyerattack2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor-upflyerattack2.description
-		Prerequisites: ~scspire, ~schive, ~upflyerattack, ~!upflyerattack2
+		Prerequisites: scspire, ~schive, upflyerattack, ~!upflyerattack2
 	RenderSprites:
 		Image: upflyerattack
 	ProvidesPrerequisite:
@@ -11241,7 +11241,7 @@ upflyerarmor2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor-upflyerarmor2.description
-		Prerequisites: ~scspire, ~schive, ~upflyerarmor, ~!upflyerarmor2
+		Prerequisites: scspire, ~schive, upflyerarmor, ~!upflyerarmor2
 	RenderSprites:
 		Image: upflyerarmor
 	ProvidesPrerequisite:

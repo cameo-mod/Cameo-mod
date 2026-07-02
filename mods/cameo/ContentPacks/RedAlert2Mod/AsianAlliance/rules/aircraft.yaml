@@ -14,7 +14,7 @@ phoenix.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cgtech.asian
+		Prerequisites: ~cgairf.asian, cgtech.asian
 		Queue: Aircraft, RAAircraft
 		Description: actor-aaphoenix.description
 	Aircraft:

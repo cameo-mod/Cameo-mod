@@ -124,7 +124,7 @@ upm16m203:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Gives the troopers grenade launchers.
-		Prerequisites: ~tkmradar, ~upnatoarsenal, ~!upm16m203
+		Prerequisites: ~tkmradar, upnatoarsenal, ~!upm16m203
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: upm16m203
@@ -139,7 +139,7 @@ upsemiautorifles:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Changes Riflemen Arsenal to SKS Rifles.
-		Prerequisites: ~tkmradar, ~!upsemiautorifles, ~upberezkacloak
+		Prerequisites: ~tkmradar, ~!upsemiautorifles, upberezkacloak
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: tkmsemiicon
@@ -158,7 +158,7 @@ uptwinrockets:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: ChangesRocket Arsenals to modified dual RPGs.
-		Prerequisites: ~tkmradar, ~!uptwinrockets, ~upberezkacloak
+		Prerequisites: ~tkmradar, ~!uptwinrockets, upberezkacloak
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: tkmtwinrocketlauncher
@@ -177,7 +177,7 @@ uptkmapbullets:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Changes Bullets to APFSDS Armor Piercing Rounds which deals extra damage to armored units.
-		Prerequisites: ~tkmradar, ~!uptkmapbullets, ~uptitanarsenal
+		Prerequisites: ~tkmradar, ~!uptkmapbullets, uptitanarsenal
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: tkmapbullets
@@ -196,7 +196,7 @@ upincendiaryrockets:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Changes Rocket Arsenals to incendiary rockets.
-		Prerequisites: ~tkmradar, ~!upincendiaryrockets, ~uptitanarsenal
+		Prerequisites: ~tkmradar, ~!upincendiaryrockets, uptitanarsenal
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: tkmincendiaryrockets
@@ -215,7 +215,7 @@ upcryorockets:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Changes Rocket Arsenals to Cryo Rockets.
-		Prerequisites: ~tkmradar, ~!upcryorockets, ~upnatoarsenal
+		Prerequisites: ~tkmradar, ~!upcryorockets, upnatoarsenal
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: cryorocketicon
@@ -230,7 +230,7 @@ tkmrocketaddon:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: Upgrades Technical Tank to shoot twin rockets.
-		Prerequisites: ~tkmtechcenter, ~!tkmrocketaddon, ~upberezkacloak, ~uptwinrockets
+		Prerequisites: ~tkmtechcenter, ~!tkmrocketaddon, upberezkacloak, uptwinrockets
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: tkmrocketaddon
@@ -245,7 +245,7 @@ uppointdefensesystem:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: Commits to the Titan Arsenal Upgrade Tree, which utilizes specialized units to defeat enemies.
-		Prerequisites: ~tkmradar, ~!uppointdefensesystem, ~uptitanarsenal, ~tkmtechcenter
+		Prerequisites: ~tkmradar, ~!uppointdefensesystem, uptitanarsenal, tkmtechcenter
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: tkmpointdefensesystem
@@ -265,7 +265,7 @@ tkmheavydutyarmor:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: Gives Vehicles heavier armors.
-		Prerequisites: ~tkmtechcenter, ~!tkmheavydutyarmor, ~uptitanarsenal
+		Prerequisites: ~tkmtechcenter, ~!tkmheavydutyarmor, uptitanarsenal
 	ProvidesPrerequisite:
 	RenderSprites:
 		Image: tkmheavydutyarmor
@@ -280,7 +280,7 @@ tkminfantryupgrade:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: Upgrades TKM Infantry Damage and Armor.
-		Prerequisites: ~tkmcommandcenter, ~tkmtechcenter, ~!tkminfantryupgrade
+		Prerequisites: ~tkmcommandcenter, tkmtechcenter, ~!tkminfantryupgrade
 	RenderSprites:
 		Image: tkminfantryupgradeicon
 	ProvidesPrerequisite:
@@ -905,7 +905,7 @@ tkmmarine:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 1
-		Prerequisites: ~tkmbarracks, ~upnatoarsenal
+		Prerequisites: ~tkmbarracks, upnatoarsenal
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
 	Tooltip:
@@ -977,7 +977,7 @@ tkmjug:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tkmbarracks, ~upjugg, ~tkmradar
+		Prerequisites: ~tkmbarracks, upjugg, tkmradar
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -1051,7 +1051,7 @@ tkmthermonaut:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tkmbarracks, ~uptitanarsenal, ~tkmradar
+		Prerequisites: ~tkmbarracks, uptitanarsenal, tkmradar
 		Queue: Infantry, RAInfantry
 		IconPalette: player
 		Description: General-purpose infantry.\n  Strong vs Infantry\n  Weak vs Vehicles
@@ -1113,7 +1113,7 @@ tkmtrooper:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 1
-		Prerequisites: ~tkmbarracks, ~uptitanarsenal
+		Prerequisites: ~tkmbarracks, uptitanarsenal
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2
 	Tooltip:
@@ -1350,7 +1350,7 @@ tkmsniper:
 		Name: Sniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tkmbarracks, ~upberezkacloak, ~tkmradar
+		Prerequisites: ~tkmbarracks, upberezkacloak, tkmradar
 		Queue: Infantry, RAInfantry
 		Description: actor-ra2snipe.description
 	Mobile:
@@ -1400,7 +1400,7 @@ tkmvon:
 		Cost: 3000
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tkmbarracks, ~tkmtechcenter
+		Prerequisites: ~tkmbarracks, tkmtechcenter
 		Queue: Infantry, RAInfantry
 		Description: actor-ra2snipe.description
 		BuildLimit: 1
@@ -1489,7 +1489,7 @@ tkmvan:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tkmbarracks, ~tkmradar, ~!tkmvon, ~disabled
+		Prerequisites: ~tkmbarracks, tkmradar, ~!tkmvon, ~disabled
 		Queue: Infantry, RAInfantry
 		Description: actor-ra2snipe.description
 		BuildLimit: 1
@@ -1540,7 +1540,7 @@ tkmspetsnaz:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~tkmbarracks, ~uptitanarsenal, ~tkmradar
+		Prerequisites: ~tkmbarracks, uptitanarsenal, tkmradar
 		Description: actor-seal.description
 	Armament@PRIMARY:
 		Weapon: tkmsmg
@@ -1874,7 +1874,7 @@ tkmquadtruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 22
-		Prerequisites: ~tkmfactory, ~upberezkacloak, ~tkmradar
+		Prerequisites: ~tkmfactory, upberezkacloak, tkmradar
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Mobile:
@@ -1925,7 +1925,7 @@ tkmzaza:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 22
-		Prerequisites: ~tkmfactory, ~uptitanarsenal, ~tkmtechcenter
+		Prerequisites: ~tkmfactory, uptitanarsenal, tkmtechcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Mobile:
@@ -2011,7 +2011,7 @@ tkmstryker:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 22
-		Prerequisites: ~tkmfactory, ~upnatoarsenal, ~tkmradar
+		Prerequisites: ~tkmfactory, upnatoarsenal, tkmradar
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Mobile:
@@ -2071,7 +2071,7 @@ tkmabrams:
 		Name: Abrams
 	Buildable:
 		BuildPaletteOrder: 23
-		Prerequisites: ~tkmfactory, ~upnatoarsenal, ~tkmradar
+		Prerequisites: ~tkmfactory, upnatoarsenal, tkmradar
 		Queue: Vehicle, RAVehicle
 		Description: TKM NATO heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
 	Mobile:
@@ -2125,7 +2125,7 @@ tkmabramspoint:
 	Tooltip:
 		Name: Abrams (Point Defense System)
 	Buildable:
-		Prerequisites: ~tkmfactory, ~uppointdefensesystem, ~tkmradar, ~disabled
+		Prerequisites: ~tkmfactory, uppointdefensesystem, tkmradar, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: TKM NATO heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
 	RenderRangeCircle:
@@ -2154,7 +2154,7 @@ t72:
 		Name: T-72M
 	Buildable:
 		BuildPaletteOrder: 23
-		Prerequisites: ~tkmfactory, ~uptitanarsenal, ~tkmradar
+		Prerequisites: ~tkmfactory, uptitanarsenal, tkmradar
 		Queue: Vehicle, RAVehicle
 		Description: TKM Russian heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
 	Mobile:
@@ -2235,7 +2235,7 @@ tkmtrenchtruck:
 		NoTransformNotification: BuildingCannotPlaceAudio
 	Buildable:
 		BuildPaletteOrder: 23
-		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~upberezkacloak, ~!uptrenchtank
+		Prerequisites: ~tkmfactory, tkmtechcenter, upberezkacloak, ~!uptrenchtank
 		Queue: Vehicle, RAVehicle
 		Description: TKM forward base. Provides Buildable Area.
 		BuildDuration: 3000
@@ -2311,7 +2311,7 @@ tkmkatyushalauncher:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 24
-		Prerequisites: ~tkmfactory, ~tkmtechcenter
+		Prerequisites: ~tkmfactory, tkmtechcenter
 		Description: actor-latin_burrito.description
 	Valued:
 		Cost: 1200
@@ -2554,7 +2554,7 @@ tkmviper:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~tkmairpad, ~tkmtechcenter, ~upviper
+		Prerequisites: ~tkmairpad, tkmtechcenter, upviper
 		Description: actor-yak.description
 	Valued:
 		Cost: 1750
@@ -2741,7 +2741,7 @@ tkmradartruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~tkmfactory, ~upradartruck
+		Prerequisites: ~tkmfactory, upradartruck
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Mobile:
@@ -2788,7 +2788,7 @@ tkmrepairtruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 26
-		Prerequisites: ~tkmfactory, ~uprepairtruck
+		Prerequisites: ~tkmfactory, uprepairtruck
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Armament@repair:
@@ -2852,7 +2852,7 @@ tkmmedictruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 27
-		Prerequisites: ~tkmfactory, ~upmedictruck
+		Prerequisites: ~tkmfactory, upmedictruck
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Armament@Heal:
@@ -2912,7 +2912,7 @@ tkmdronepodtruck:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 26
-		Prerequisites: ~tkmfactory, ~updronepodtruck, ~tkmtechcenter
+		Prerequisites: ~tkmfactory, updronepodtruck, tkmtechcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Armament:
@@ -3037,7 +3037,7 @@ tkmtrenchtank:
 		NoTransformNotification: BuildingCannotPlaceAudio
 	Buildable:
 		BuildPaletteOrder: 23
-		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~uptrenchtank
+		Prerequisites: ~tkmfactory, tkmtechcenter, uptrenchtank
 		Queue: Vehicle, RAVehicle
 		Description: TKM forward base.\n Strong vs Infantry, Buildings, Vehicles\n Weak vs Aircraft
 		BuildDuration: 3000
@@ -3145,7 +3145,7 @@ t30:
 		Name: T-30
 	Buildable:
 		BuildPaletteOrder: 190
-		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~!t30, ~upt30
+		Prerequisites: ~tkmfactory, tkmtechcenter, ~!t30, upt30
 		Queue: Vehicle, RAVehicle
 		Description: TKM Russian heavy armor.\n Strong vs Vehicles\n Weak vs Aircraft, Infantry
 		BuildLimit: 1
@@ -3214,7 +3214,7 @@ tkmbattlebus:
 		OverrideActor: yrbfrt
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~upbattlebus
+		Prerequisites: ~tkmfactory, tkmtechcenter, upbattlebus
 		Queue: Vehicle, RAVehicle
 		Description: template-opentopped.description
 	Mobile:
@@ -3352,7 +3352,7 @@ tkmsandmarine:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 190
-		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~!tkmsandmarine, ~upsandmarine
+		Prerequisites: ~tkmfactory, tkmtechcenter, ~!tkmsandmarine, upsandmarine
 		Queue: Vehicle, RAVehicle
 		Description: Subterranean super vehicle. Strong against everything ground.
 		BuildLimit: 1
@@ -3505,7 +3505,7 @@ tkmratflak:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~tkmfactory, ~upflakbus, ~tkmtechcenter
+		Prerequisites: ~tkmfactory, upflakbus, tkmtechcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Transforms:
@@ -3621,7 +3621,7 @@ tkmbigshiee:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 190
-		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~!tkmbigshiee, ~upbigshiee
+		Prerequisites: ~tkmfactory, tkmtechcenter, ~!tkmbigshiee, upbigshiee
 		Queue: Vehicle, RAVehicle
 		Description: Super Open Topped vehicle. Strong against everything ground.
 		BuildLimit: 1

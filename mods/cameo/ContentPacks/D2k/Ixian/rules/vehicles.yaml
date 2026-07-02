@@ -5,7 +5,7 @@ d2k_mcv.ixian:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@mcv: ^MCV
 	Buildable:
-		Prerequisites: ~repair_pad.ixian
+		Prerequisites: ~heavy_factory.ixian, repair_pad.ixian
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Mobile Construction Vehicle
@@ -101,7 +101,7 @@ siege_tank.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~up_siegetank.ixian, outpost.ixian
+		Prerequisites: ~heavy_factory.ixian, up_siegetank.ixian, outpost.ixian
 		Description: actor-siege_tank.description
 		IconPalette: ra2
 	Health:
@@ -188,7 +188,7 @@ missile_tank.ixian:
 		AddToArmyValue: true
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~research_centre.ixian
+		Prerequisites: ~heavy_factory.ixian, research_centre.ixian
 		BuildPaletteOrder: 60
 		Description: actor-missile_tank.description
 		IconPalette: d2kunit
@@ -542,7 +542,7 @@ shock_raider.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~research_centre.ixian, ~!up_stormraider.ixian
+		Prerequisites: ~heavy_factory.ixian, research_centre.ixian, ~!up_stormraider.ixian
 		Description: actor-shock_raider.description
 		IconPalette: player
 	Valued:
@@ -925,7 +925,7 @@ storm_raider.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~up_stormraider.ixian, research_centre.ixian
+		Prerequisites: ~heavy_factory.ixian, up_stormraider.ixian, research_centre.ixian
 		Description: actor-shock_raider.description
 		IconPalette: player
 	Valued:
@@ -1002,7 +1002,7 @@ heavy_rocket_raider.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~up_raider.ixian
+		Prerequisites: ~heavy_factory.ixian, up_raider.ixian
 		Description: actor-rocket_raider.description
 	Tooltip:
 		Name: Heavy Ix Raider
@@ -1110,7 +1110,7 @@ combat_siege_tank.ixian:
 		BuildPaletteOrder: 40
 		IconPalette: d2kunit
 		Description: actor-siege_tank.description
-		Prerequisites: ~outpost.ixian
+		Prerequisites: ~heavy_factory.ixian, outpost.ixian
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1181,7 +1181,7 @@ neocymek.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~up_neocymek.ixian, research_centre.ixian
+		Prerequisites: ~heavy_factory.ixian, up_neocymek.ixian, research_centre.ixian
 		Description: Colossal Ixian Mech.
 	Mobile:
 		Speed: 45
@@ -1276,7 +1276,7 @@ jammer.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		BuildPaletteOrder: 60
-		Prerequisites: ~up_projector.ixian, research_centre.ixian
+		Prerequisites: ~heavy_factory.ixian, up_projector.ixian, research_centre.ixian
 		Description: actor-ixprojector.description
 		IconPalette: windows256
 	Health:
@@ -1534,7 +1534,7 @@ duelist_tank.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
 		IconPalette: d2kunit
-		Prerequisites: ~research_centre.ixian
+		Prerequisites: ~heavy_factory.ixian, research_centre.ixian
 		Description: actor-duelist_tank.description
 	Valued:
 		Cost: 1800
