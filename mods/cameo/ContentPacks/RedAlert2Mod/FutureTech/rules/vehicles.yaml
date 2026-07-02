@@ -7,7 +7,7 @@ mcv.futu:
 	Tooltip:
 		Name: FutureTech Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~egcnst.futu, egtf.futu
+		Prerequisites: ~egweap2.futu, egtf.futu
 		Description: actor-futu_mcv.description
 	Transforms:
 		IntoActor: egcnst.futu
@@ -43,7 +43,7 @@ mech_machinegun.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egcnst.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-future_mech_machinegun.description
 	Mobile:
@@ -100,7 +100,7 @@ mech_plasma.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egcnst.futu, egshock.futu
+		Prerequisites: ~egweap2.futu, egshock.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-future_mech_plasma.description
 	Mobile:
@@ -154,7 +154,7 @@ ifv.futu:
 	Valued:
 		Cost: 950
 	Buildable:
-		Prerequisites: ~egcnst.futu, egweap2.futu
+		Prerequisites: ~egweap2.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_ifv.description
 	Mobile:
@@ -193,7 +193,7 @@ yrrobo.futu:
 		Name: Robot Tank
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~egcnst.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-robo.description
 	Mobile:
@@ -274,7 +274,7 @@ mbt.futu:
 		Name: Guardian Tank
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~egcnst.futu, egweap2.futu
+		Prerequisites: ~egweap2.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_mbt.description
 	Mobile:
@@ -373,7 +373,7 @@ hvrt.futu:
 		Name: Riptide ACV
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~egcnst.futu, egweap2.futu
+		Prerequisites: ~egweap2.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_hvrt.description
 	Mobile:
@@ -438,7 +438,7 @@ phal.futu:
 		Name: Phalanx (WIP)
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~egcnst.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_phal.description
 	Mobile:
@@ -507,7 +507,7 @@ landcarr.futu:
 		Name: Beehive Drone Carrier
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egcnst.futu, egshock.futu
+		Prerequisites: ~egweap2.futu, egshock.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_landcarr.description
 	Mobile:
@@ -584,7 +584,7 @@ orion.futu:
 		Name: Orion Tank
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~egcnst.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_orion.description
 	Mobile:
@@ -726,7 +726,7 @@ harv2.futu:
 		BobDistance: -64
 		InitialHeight: 384
 	Buildable:
-		Prerequisites: ~egcnst.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_harv2.description
 	WithHarvestAnimation:
@@ -775,7 +775,7 @@ athena.futu:
 		Name: Athena Cannon
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~egcnst.futu, egtf.futu
+		Prerequisites: ~egweap2.futu, egtf.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_athena.description
 	Mobile:
@@ -835,7 +835,7 @@ coiler.futu:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
-		Prerequisites: ~egcnst.futu, egshock.futu
+		Prerequisites: ~egweap2.futu, egshock.futu
 		Description: actor-futu_coiler.description
 	Valued:
 		Cost: 1000
@@ -900,7 +900,7 @@ futu.futu:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: ~egcnst.futu, egshock.futu, yrgarobo.futu
+		Prerequisites: ~egweap2.futu, egshock.futu, yrgarobo.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_futu.description
 	Mobile:

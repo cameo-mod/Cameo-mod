@@ -20,7 +20,7 @@ up_resurrection.nax:
 		BuildPaletteOrder: 100
 		Queue: Research
 		Description: Infantry killed by small arms leave corpses that can resurrect as zombies.
-		Prerequisites: ~conyard.nax, tech.nax, ~disabled
+		Prerequisites: ~tech.nax, ~disabled
 	RenderSprites:
 		Image: undead.nax
 
@@ -30,7 +30,7 @@ up_me262.nax:
 		Name: Unlock Me 262
 	Buildable:
 		Description: Upgrades the BF 109 to the Me 262
-		Prerequisites: ~conyard.nax, radar.nax, !up_me262.nax
+		Prerequisites: ~radar.nax, !up_me262.nax
 	RenderSprites:
 		Image: me262.nax
 
@@ -104,7 +104,7 @@ up_ostfrontexperience.nax:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: Infantry gets 15% to range, damage and armor
-		Prerequisites: ~conyard.nax, radar.nax, !up_ostfrontexperience.nax
+		Prerequisites: ~radar.nax, !up_ostfrontexperience.nax
 	RenderSprites:
 		Image: ostfrontexperienceicon
 	ProvidesPrerequisite:
@@ -119,7 +119,7 @@ up_atlantikwall.nax:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Defenses get 20% armor and automatic repair.
-		Prerequisites: ~conyard.nax, radar.nax, !up_atlantikwall.nax
+		Prerequisites: ~radar.nax, !up_atlantikwall.nax
 	RenderSprites:
 		Image: atlantikwallicon
 	ProvidesPrerequisite:
@@ -134,7 +134,7 @@ up_tankarsenalrenovation.nax:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Tier I-II gain 15% to speed, damage, reload speed and armor
-		Prerequisites: ~conyard.nax, tech.nax, !up_tankarsenalrenovation.nax
+		Prerequisites: ~tech.nax, !up_tankarsenalrenovation.nax
 	RenderSprites:
 		Image: tankarsenalrenovationicon
 	ProvidesPrerequisite:
@@ -149,7 +149,7 @@ up_massopticsintegration.nax:
 		BuildPaletteOrder: 100
 		Queue: Research
 		Description: Increase accuracy, vision, detection and attack range of scouts, artillery and AA by 25%
-		Prerequisites: ~conyard.nax, tech.nax, !up_massopticsintegration.nax
+		Prerequisites: ~tech.nax, !up_massopticsintegration.nax
 	RenderSprites:
 		Image: massopticsintegrationicon
 	ProvidesPrerequisite:
@@ -164,7 +164,7 @@ up_wunderwaffe.nax:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: High Tier vehicles get 20% to attack speed, damage and armor
-		Prerequisites: ~conyard.nax, tech.nax, !up_wunderwaffe.nax
+		Prerequisites: ~tech.nax, !up_wunderwaffe.nax
 	RenderSprites:
 		Image: wunderwaffeicon
 	ProvidesPrerequisite:
@@ -179,7 +179,7 @@ up_blitzkrieg.nax:
 		BuildPaletteOrder: 130
 		Queue: Research
 		Description: upgrade-blitzkrieg.description
-		Prerequisites: ~conyard.nax, tech.nax, !up_blitzkrieg.nax
+		Prerequisites: ~tech.nax, !up_blitzkrieg.nax
 	RenderSprites:
 		Image: blitzkriegicon
 	# ProvidesPrerequisite:

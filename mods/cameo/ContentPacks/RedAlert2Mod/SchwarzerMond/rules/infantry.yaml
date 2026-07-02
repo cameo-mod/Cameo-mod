@@ -13,7 +13,7 @@ uber.nax2:
 		Name: Übermensch
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~conyard.nax2, tech.nax2
+		Prerequisites: ~barr.nax2, tech.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -61,7 +61,7 @@ parv.nax2:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 100
-		Prerequisites: ~conyard.nax2, tech.nax2
+		Prerequisites: ~barr.nax2, tech.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -116,7 +116,7 @@ armor_mg.nax2:
 		Name: Noid MG Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~conyard.nax2, radar.nax2
+		Prerequisites: ~barr.nax2, radar.nax2
 		Queue: Infantry, RAInfantry
 		Description: actor-aamecha.description
 	Mobile:
@@ -259,7 +259,7 @@ engi.nax2:
 		Name: Engineering Armor
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~conyard.nax2, barr.nax2
+		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
 		Description: actor-aamecha.description
 	Mobile:
@@ -331,7 +331,7 @@ lunar.nax2:
 		Name: Lunar Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~conyard.nax2, barr.nax2
+		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -391,7 +391,7 @@ lunar2.nax2:
 		Name: Lunar Rocket
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~conyard.nax2, barr.nax2
+		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:

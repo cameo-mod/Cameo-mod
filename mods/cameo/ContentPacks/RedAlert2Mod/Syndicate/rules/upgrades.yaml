@@ -20,7 +20,7 @@ up_mili.latin:
 		Name: Elite Guerillas
 	Buildable:
 		Description: upgrade-uplatin_mili.description
-		Prerequisites: ~cgcnst.latin, radar.latin, !up_mili.latin
+		Prerequisites: ~radar.latin, !up_mili.latin
 	RenderSprites:
 		Image: mili.latin
 	ProvidesPrerequisite:
@@ -31,7 +31,7 @@ up_cartelrockets.latin:
 		Name: Cartel Rockets
 	Buildable:
 		Description: upgrade-uplatin_cartelrockets.description
-		Prerequisites: ~cgcnst.latin, radar.latin, !up_cartelrockets.latin
+		Prerequisites: ~radar.latin, !up_cartelrockets.latin
 	RenderSprites:
 		Image: up_cartelrockets.latin
 	ProvidesPrerequisite:
@@ -42,7 +42,7 @@ up_ngbunk2.latin:
 		Name: Lightposts
 	Buildable:
 		Description: upgrade-uplatin_ngbunk2.description
-		Prerequisites: ~cgcnst.latin, radar.latin, !up_ngbunk2.latin
+		Prerequisites: ~radar.latin, !up_ngbunk2.latin
 	RenderSprites:
 		Image: ngbunk2.latin
 	#ProvidesPrerequisite:
@@ -68,7 +68,7 @@ up_emp.latin:
 	Buildable:
 		Icon: icon2
 		Description: Allows the use of the EMP cannon support power from the Latin EMP Radar.
-		Prerequisites: ~cgcnst.latin, radar.latin, !up_emp.latin
+		Prerequisites: ~radar.latin, !up_emp.latin
 	RenderSprites:
 		Image: qatech.steel
 	ProvidesPrerequisite:
@@ -83,7 +83,7 @@ up_chaingun.latin:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade-latin_up_chaingun.description
-		Prerequisites: ~cgcnst.latin, cgspy.latin, !up_chaingun.latin
+		Prerequisites: ~cgspy.latin, !up_chaingun.latin
 	RenderSprites:
 		Image: up_chaingun.latin
 	ProvidesPrerequisite:
@@ -98,7 +98,7 @@ up_industrial.latin:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade-latin_up_industrial.description
-		Prerequisites: ~cgcnst.latin, cgspy.latin, !up_industrial.latin
+		Prerequisites: ~cgspy.latin, !up_industrial.latin
 	RenderSprites:
 		Image: up_industrial.latin
 	ProvidesPrerequisite:
@@ -113,7 +113,7 @@ up_alliedstolentech.latin:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade-uplatin_alliedstolentech.description
-		Prerequisites: ~cgcnst.latin, cgspy.latin, !up_alliedstolentech.latin
+		Prerequisites: ~cgspy.latin, !up_alliedstolentech.latin
 	RenderSprites:
 		Image: latin_up_miraging
 	ProvidesPrerequisite:
@@ -128,7 +128,7 @@ up_hotfire.latin:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade-latin_up_hotfire.description
-		Prerequisites: ~cgcnst.latin, cgspy.latin, !up_hotfire.latin
+		Prerequisites: ~cgspy.latin, !up_hotfire.latin
 	RenderSprites:
 		Image: up_hotfire.latin
 	ProvidesPrerequisite:
@@ -143,7 +143,7 @@ up_cashrecover.latin:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: upgrade-uplatin_cashrecover.description
-		Prerequisites: ~cgcnst.latin, cgspy.latin, !up_cashrecover.latin
+		Prerequisites: ~cgspy.latin, !up_cashrecover.latin
 	RenderSprites:
 		Image: latin_up_tech2
 	#ProvidesPrerequisite:

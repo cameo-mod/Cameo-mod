@@ -20,7 +20,7 @@ gren.asian:
 		Cost: 100
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cgcnst.asian, cgbrck.asian
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -91,7 +91,7 @@ tkiller.asian:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgcnst.asian, cgbrck.asian
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Mobile:
@@ -163,7 +163,7 @@ plast.asian:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cgcnst.asian, up_plast.asian, cgtech.asian
+		Prerequisites: ~cgbrck.asian, up_plast.asian, cgtech.asian
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-infantry.description
 	Mobile:
@@ -214,7 +214,7 @@ flam.asian:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~cgcnst.asian, cgradr.asian
+		Prerequisites: ~cgbrck.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-e4.description
 	Mobile:
@@ -279,7 +279,7 @@ japrif.asian:
 		Cost: 250
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cgcnst.asian, up_japrif.asian
+		Prerequisites: ~cgbrck.asian, up_japrif.asian
 		Queue: Infantry, RAInfantry
 		Description: template-scout-infantry.description
 	Mobile:
@@ -340,7 +340,7 @@ samurai.asian:
 		Cost: 350
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cgcnst.asian, up_samurai.asian, cgradr.asian
+		Prerequisites: ~cgbrck.asian, up_samurai.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-rasamurai.description
 	Mobile:
@@ -384,7 +384,7 @@ archer.asian:
 		Cost: 450
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cgcnst.asian, up_archer.asian, cgradr.asian
+		Prerequisites: ~cgbrck.asian, up_archer.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Mobile:
@@ -437,7 +437,7 @@ shinobi.asian:
 		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~cgcnst.asian, cgradr.asian
+		Prerequisites: ~cgbrck.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-aashinobi.description
 	Mobile:
@@ -482,7 +482,7 @@ ra2engineer.asian:
 	Inherits@AsianPhalanxUpgrade: ^AsianPhalanxUpgrade
 	Inherits@kami: ^KamikazeMode
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgbrck.asian
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 	Voiced:
 		VoiceSet: CHHackerVoice
@@ -513,7 +513,7 @@ alligator.asian:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgcnst.asian, cgbrck.asian
+		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-alligator.description
 	Mobile:
@@ -583,7 +583,7 @@ asdf.asian:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~cgcnst.asian, up_asdf.asian, cgmiac.asian
+		Prerequisites: ~cgbrck.asian, up_asdf.asian, cgmiac.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-boris.description
 		IconPalette: ra2cameo
@@ -665,7 +665,7 @@ commando.asian:
 		Cost: 3000
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~cgcnst.asian, cgmiac.asian
+		Prerequisites: ~cgbrck.asian, cgmiac.asian
 		Queue: Infantry, RAInfantry
 		Description: actor-ra2snipe.description
 		BuildLimit: 1
