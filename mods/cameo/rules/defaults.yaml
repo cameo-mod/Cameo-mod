@@ -1438,6 +1438,9 @@
 	Inherits@AntiBuil: ^PrioritizeBuilding
 	Inherits@AntiDef: ^PrioritizeDefence
 	Inherits@AntiInf: ^PrioritizeInfantry
+	# Indirect-fire: tilt the muzzle flash up out of the ground like a howitzer (Pitch is a WAngle, 1024=360deg).
+	WithMuzzleGlow:
+		Pitch: 113
 	AutoTargetPriority@INFANTRY:
 		ValidTargets: Infantry
 		Priority: 10
@@ -2031,6 +2034,10 @@
 
 ^Vehicle:
 	Inherits: ^BasicUnit
+	# Muzzle-flash glow for every ground vehicle; gated per-armament by MuzzleSequence, so only
+	# gun/MG units flash (harvesters, MCVs, transports without a muzzle stay dark). Ships opt out
+	# via ^BoatUnit; non-gun creatures reusing a vehicle template opt out with -WithMuzzleGlow.
+	Inherits@muzzleglow: ^MuzzleGlowCannon
 	Inherits@2: ^IronCurtainable
 	Inherits@mindcontrol: ^MindControllable
 	Inherits@rad: ^VehicleRadiation
@@ -2209,7 +2216,6 @@
 		Payload: 300
 		Type: GrinderCash
 		Sounds: bgrinda.wav
-	Inherits@muzzleglow: ^MuzzleGlowCannon
 
 # Shared muzzle-glow tuning for cannon/gun units — inherited by ^Tank and by cannon defence
 # turrets so both use identical values. Geometry/fades fall back to the trait defaults;
@@ -2233,6 +2239,8 @@
 
 ^BoatUnit:
 	Inherits: ^Vehicle
+	# Ships weren't part of the muzzle-flash pass; opt the whole naval line out (re-enable per-ship if wanted).
+	-WithMuzzleGlow:
 	Inherits@snipe: ^DriverKillImmune
 	Mobile:
 		Locomotor: naval

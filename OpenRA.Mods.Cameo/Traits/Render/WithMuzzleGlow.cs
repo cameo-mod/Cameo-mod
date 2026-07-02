@@ -83,6 +83,11 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		[Desc("Minimum ticks between flashes from this trait (0 = flash on every shot). Use to tame very rapid-fire weapons.")]
 		public readonly int MinInterval = 0;
 
+		[Desc("Upward tilt of the plume from the ground, as a WAngle (1024 = 360 degrees). 0 = flat along the",
+			"barrel's facing (direct-fire tanks). Raise it for indirect-fire artillery so the flash points up",
+			"and forward like a howitzer muzzle instead of lying flat.")]
+		public readonly WAngle Pitch = WAngle.Zero;
+
 		public override object Create(ActorInitializer init) { return new WithMuzzleGlow(this); }
 	}
 
@@ -129,9 +134,12 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			var source = self.CenterPosition + a.MuzzleOffset(self, barrel);
 			var yaw = a.MuzzleOrientation(self, barrel).Yaw;
 
-			// Yaw 0 faces north (-Y); project the plume forward out of the barrel.
+			// Yaw 0 faces north (-Y); project the plume forward out of the barrel. Pitch tilts it up out of
+			// the ground plane (Z) so indirect-fire artillery flashes point up-and-forward; Pitch 0 stays flat.
 			var length = (int)(Info.Length.Length * lengthJitter);
-			var coneTip = source + new WVec(0, -length, 0).Rotate(WRot.FromYaw(yaw));
+			var horizontal = length * Info.Pitch.Cos() / 1024;
+			var vertical = length * Info.Pitch.Sin() / 1024;
+			var coneTip = source + new WVec(0, -horizontal, vertical).Rotate(WRot.FromYaw(yaw));
 
 			// Plume: bright/wide at the muzzle (StartScale), narrowing forward (EndScale), no far pool.
 			glowRenderer.RegisterGlow(source, coneTip, Info.Color, Info.StartScale,
