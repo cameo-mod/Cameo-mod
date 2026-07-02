@@ -1424,7 +1424,7 @@ EDEN_CONVEC_STRUCTURE_FACTORY:
 	Tooltip:
 		Name: Eden Convec - Structure Factory
 	Buildable:
-		Prerequisites: ~eden_factory_structure, eden_university
+		Prerequisites: ~eden_factory_vehicle, eden_university
 		Queue: Vehicle, RAVehicle
 		Description: eden-convec-structure-factory.description
 	Transforms:
@@ -2523,7 +2523,7 @@ PLYMOUTH_CONVEC_STRUCTURE_FACTORY:
 	Tooltip:
 		Name: Plymouth Convec - Structure Factory
 	Buildable:
-		Prerequisites: ~plymouth_structure_factory, plymouth_university
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, plymouth_university
 		Queue: Vehicle, RAVehicle
 		Description: plymouth-convec-structure-factory.description
 	Selectable:
@@ -2550,7 +2550,7 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~plymouth_structure_factory, plymouth_smelter_common
+		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, plymouth_smelter_common
 		Queue: Vehicle, RAVehicle
 		Description: template-harvester.description
 	Harvester:
