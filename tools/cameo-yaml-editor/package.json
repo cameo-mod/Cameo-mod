@@ -1,0 +1,86 @@
+{
+  "name": "cameo-yaml-editor",
+  "displayName": "Cameo YAML Editor",
+  "description": "Resolve and edit Cameo-mod actors, weapons, and sequences across MiniYAML inheritance chains.",
+  "version": "0.0.1",
+  "private": true,
+  "publisher": "cameo-mod",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "cameoYamlEditor",
+          "title": "Cameo Actors",
+          "icon": "$(symbol-class)"
+        }
+      ]
+    },
+    "views": {
+      "cameoYamlEditor": [
+        {
+          "id": "cameoYamlEditor.factionTree",
+          "name": "Factions"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "cameoYamlEditor.refresh",
+        "title": "Cameo YAML Editor: Refresh Index",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "cameoYamlEditor.openActor",
+        "title": "Cameo YAML Editor: Open Actor"
+      },
+      {
+        "command": "cameoYamlEditor.searchActors",
+        "title": "Cameo YAML Editor: Search Actors",
+        "icon": "$(search)"
+      }
+    ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "cameoYamlEditor.searchActors",
+          "when": "view == cameoYamlEditor.factionTree",
+          "group": "navigation@1"
+        },
+        {
+          "command": "cameoYamlEditor.refresh",
+          "when": "view == cameoYamlEditor.factionTree",
+          "group": "navigation@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Cameo YAML Editor",
+      "properties": {
+        "cameoYamlEditor.modYamlPath": {
+          "type": "string",
+          "default": "mods/cameo/mod.yaml",
+          "description": "Path to mod.yaml, relative to the workspace root."
+        },
+        "cameoYamlEditor.engineDir": {
+          "type": "string",
+          "default": "engine",
+          "description": "Path to the engine checkout, relative to the workspace root (used to resolve ^EngineDir package references)."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.85.0",
+    "typescript": "^5.4.0"
+  }
+}
