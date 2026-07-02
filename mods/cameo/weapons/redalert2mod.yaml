@@ -4830,14 +4830,20 @@ NaxiRifleConsE:
 		ContrailStartColor: FFAA55
 
 NaxiRifleLaser:
-	Inherits: NaxiRifle
+	Inherits: ^SmallArms
 	Inherits: ^RA2LaserWeapon
 	ReloadDelay: 60
 	Range: 4097
 	Report: vpriatta.wav
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
+		Image: 50CAL
 		ContrailStartColor: ff2d2d
 		ContrailEndColor: f55105
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 200
+		ContrailLength: 20
+		Speed: 10000
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
 		Damage: 4000
@@ -5175,18 +5181,27 @@ NaxiMP40E:
 		ContrailEndColor: E60000
 
 NaxiMP40Laser:
-	Inherits: NaxiMP40
+	Inherits: ^Grenade
+	Inherits: ^HeavyCannon
+	Inherits: ^RA2Chaingun
 	Inherits: ^SmallArms
 	Inherits: ^RA2LaserWeapon
+	ValidTargets: Ground, Water, Trees
 	Report: vpriatta.wav
 	Range: 4384
 	ReloadDelay: 100
 	Burst: 5
 	BurstDelays: 5
 	Projectile: Bullet
+		Image: 50CAL
 		ContrailStartColor: ff2d2d
 		ContrailEndColor: f55105
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 15
+		ContrailLength: 8
+		Speed: 10000
 		Width: 25
+		Inaccuracy: 600
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -5217,11 +5232,39 @@ NaxiMP40LaserE:
 	BurstDelays: 3
 
 NaxiFlamerTroop:
-	Inherits: AsianFlamerTurret
-	Range: 4830
+	Inherits: ^LightFlameWeapon
+	ValidTargets: Ground, Water, Trees
 	ReloadDelay: 60
 	Burst: 3
 	BurstDelays: 3
+	Range: 4830
+	StartBurstReport: flamer2.aud
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
+		Amount: 4000
+	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 2000
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_initfire
+		ExplosionPalette: ra2effect
+		-ImpactSounds:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
 
 NaxiFlamerTroopE:
 	Inherits: NaxiFlamerTroop
@@ -5230,7 +5273,18 @@ NaxiFlamerTroopE:
 	BurstDelays: 3
 
 NaxiFlamerTroopExplode:
-	Inherits: AsianFlamerTurret
+	Inherits: ^LightFlameWeapon
+	ValidTargets: Ground, Water, Trees
+	ReloadDelay: 30
+	Burst: 6
+	BurstDelays: 3
+	Range: 6666
+	StartBurstReport: flamer2.aud
+	Projectile: Bullet
+		Speed: 180, 240
+		LaunchAngle: 10, 20
+		Image: tsflameall
+		Palette: tseffect
 	Warhead@LightFlameWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
@@ -5241,6 +5295,17 @@ NaxiFlamerTroopExplode:
 		Amount: 6000
 	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
 		Amount: 3000
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_initfire
+		ExplosionPalette: ra2effect
+		-ImpactSounds:
+		ImpactActors: false
+		ValidTargets: Ground, Water
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: AsianFlameFragment
+		Amount: 2
+		AimChance: 0
+		AimTargetStances: Enemy, Neutral
 
 NaxiSniper:
 	Inherits: ^SniperWeapon
@@ -6633,7 +6698,9 @@ NaxiAntiTankCannonCorrosion:
 	Inherits@Corrosion: ^NaxOxidationShells
 
 NaxiAlienPistol:
-	Inherits: Lunar_Green105mm
+	Inherits: ^TeslaWeapon
+	Inherits: ^RA2MediumCannon
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Report: nax_aliengun.wav
 	Range: 5136
 	ReloadDelay: 50

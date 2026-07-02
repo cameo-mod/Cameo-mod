@@ -1351,24 +1351,155 @@ wc2gruntslice2:
 		ImpactSounds: wc2_sword1.aud,wc2_sword2.aud,wc2_sword3.aud
 
 wc2axeFire:
-	Inherits: wc2arrowFire
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	Inherits: ^MediumCannon
+	Inherits: ^Grenade
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ArrowWeapon
 	ReloadDelay: 38
 	Range: 6445
 	Report: wc2_axe.aud
-	Projectile:
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
 		Image: wc2_orc_trollaxethrower_axe
+		Speed: 600
+		HorizontalRateOfTurn: 60
+		VerticalRateOfTurn: 60
+		RangeLimit: 12000
+		AllowSnapping: True
+		CloseEnough: 600
+		ContrailLength: 0
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@ArrowWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_axe.aud
+		ValidTargets: Ground, Water, Air
 
 wc2axeFirespear:
-	Inherits: wc2highArrowFire
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	Inherits: ^MediumCannon
+	Inherits: ^Grenade
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ArrowWeapon
+	Inherits: ^LaserWeapon
+	Inherits: ^HeavyMissile
+	Inherits: ^HeavyAAWeapon
 	ReloadDelay: 40
 	Range: 7711
 	Report: wc2_axe.aud
-	Projectile:
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
 		Image: wc2_orc_trollaxethrower_axe
+		Speed: 700
+		LaunchAngle: 70
+		HorizontalRateOfTurn: 70
+		VerticalRateOfTurn: 70
+		RangeLimit: 14000
+		AllowSnapping: True
+		CloseEnough: 700
+		ContrailLength: 0
+		-TrailImage:
+		-MaximumLaunchSpeed:
+		-MinimumLaunchSpeed:
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@ArrowWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 	Warhead@Effect: CreateEffect
 		ImpactSounds: wc2_axe.aud
+		ValidTargets: Ground, Water, Air
 
 wc2ogrepunch:
 	Inherits: ^SwordWeapon
@@ -1540,10 +1671,28 @@ wc2catapultFire:
 # Death Knight basic attack
 wc2deathknightFire:
 	Inherits: ^HeavyFlameWeapon
-	Inherits: wc2mageFire
+	Inherits: ^TeslaChargedWeapon
+	ReloadDelay: 40
+	Range: 8000
 	Report: wc2_touchdrk.aud
-	Projectile:
+	ValidTargets: Ground, Water, Trees, Air
+	Projectile: Bullet
+		Speed: 640
 		Image: wc2_effect_death_knight_attack
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 8000
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4
+	Warhead@Effect: CreateEffect
+		Image: wc2_effect_death_knight_attack
+		Explosions: hit
+		ImpactSounds: wc2_firehit.aud
+		ValidTargets: Ground, Air
 	Warhead@HeavyFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 8000
@@ -1556,8 +1705,6 @@ wc2deathknightFire:
 		ValidTargets: Ground, Water, Trees, Air
 		Damage: 4
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@Effect:
-		Image: wc2_effect_death_knight_attack
 
 # Primary deathcoil projectile
 # 50 WC2 Damage = 11250 ORA damage. Divide by 3 since there's 3 projectiles.
@@ -1622,60 +1769,90 @@ wc2deathknightHaste:
 		ValidTargets: haste_target
 
 wc2deathknightDeathAndDecay:
-	Inherits: wc2mageBlizzard
+	ReloadDelay: 50
+	Range: 8000
 	Report: wc2_decay.aud
-	Warhead@InitialSpreader:
+	ValidTargets: Ground, Water, Air, Trees
+	Projectile: InstantHit
+	Warhead@1Dam_impact: SpreadDamage
+		Spread: 0c1
+		Damage: 1
+	ValidTargets: Ground, Water, Air, Trees
+		AffectsParent: True
+		DamageTypes: Prone50Percent, TriggerProne
+	Warhead@InitialSpreader: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Spread
 		RandomClusterCount: 5
 		Dimensions: 5, 5
 		Footprint: __x__ _xxx_ xxxxx _xxx_ __x__
 
 wc2deathknightDeathAndDecay_Spread:
-	Inherits: wc2mageBlizzard_Spread
+	ValidTargets: Ground, Water, Air, Trees
 	Projectile: InstantHit
 		Blockable: false
 	Warhead@Projectiles1: FireCluster
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 1
 		Dimensions: 1, 1
 		Footprint: x
 	Warhead@Projectiles2: FireCluster
+		Delay: 30
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 2
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
 	Warhead@Projectiles3: FireCluster
+		Delay: 60
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 3
 		Dimensions: 1, 1
 		Footprint: x
 	Warhead@Projectiles4: FireCluster
+		Delay: 90
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 4
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
 	Warhead@Projectiles5: FireCluster
+		Delay: 120
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 5
 		Dimensions: 1, 1
 		Footprint: x
 	Warhead@Projectiles6: FireCluster
+		Delay: 150
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 6
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
 	Warhead@Projectiles7: FireCluster
+		Delay: 180
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 5
 		Dimensions: 1, 1
 		Footprint: x
 	Warhead@Projectiles8: FireCluster
+		Delay: 210
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 4
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
 	Warhead@Projectiles9: FireCluster
+		Delay: 240
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 3
 		Dimensions: 1, 1
 		Footprint: x
 	Warhead@Projectiles10: FireCluster
+		Delay: 270
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 2
 		Dimensions: 3,3
 		Footprint: _x_ xxx _x_
 	Warhead@Projectiles11: FireCluster
+		Delay: 300
 		Weapon: wc2deathknightDeathAndDecay_Hit
+		RandomClusterCount: 1
 		Dimensions: 1, 1
 		Footprint: x
 

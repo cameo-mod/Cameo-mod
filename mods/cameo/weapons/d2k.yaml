@@ -4271,7 +4271,13 @@ d2k_heavy_air_drone:
 		Amount: 4
 
 aa_mine.ordos:
-	Inherits: air_drone.ixian
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^FlakWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^HeavyBomb
+	Inherits: ^D2KMissile
+	ReloadDelay: 132
 	Burst: 15
 	Range: 2c0
 	BurstDelays: 0
@@ -4292,6 +4298,77 @@ aa_mine.ordos:
 		CruiseAltitude: 2c124
 		AllowSnapping: true
 		TerrainHeightAware: true
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@LightChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+		ValidRelationships: Neutral, Enemy
+	Warhead@Shrapnel: FireShrapnel
+		ValidTargets: Ground, Water, Trees, Air
+		Weapon: PhoenixRocketShrapnel
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
 		Spread: 0c768

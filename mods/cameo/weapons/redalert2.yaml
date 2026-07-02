@@ -4231,9 +4231,22 @@ RA2vulcan:
 		Damage: 1
 
 RA2vulcan3:
-	Inherits: RA2vulcan2
+	Inherits: ^RA2SmallArms
+	Inherits: ^RA2Chaingun
+	ValidTargets: Ground, Water, Trees
 	ReloadDelay: 50
+	Range: 5724
+	Burst: 3
+	BurstDelays: 2
 	Report: baocatta.wav, baocattb.wav, baocattc.wav
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
 
 BlackHawkCannon:
 	Inherits: ^RA2SmallArms
@@ -5431,15 +5444,24 @@ IFVAttach:
 	Range: 4c512
 
 TanyaAttach:
-	Inherits: IvanAttach
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Report: icraatta.wav
+	ReloadDelay: 20
+	Range: 2000
 	ValidTargets: Vehicle, Ship, Submarine
 	InvalidTargets: ivanattached, Monster
 	Warhead@1: AttachDelayedWeapon
 		Weapon: TanyaBomb
+		Type: ivanbomb
 		TriggerTime: 50
+		Range: 1
+	Warhead@2: TargetDamage
 
 TanyaBomb:
-	Inherits: IvanBomb
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
 	Inherits: ^TankDestroyerCannon
 	Inherits: ^MediumCannon
 	Inherits: ^HeavyCannon
@@ -5485,10 +5507,18 @@ TanyaBomb:
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water, Underwater
 		Damage: 50
+	-Warhead@Effect1:
+	-Warhead@Effect2:
 	Warhead@Effect: CreateEffect
 		Explosions: self_destruct
 		ExplosionPalette: effect
 		ImpactSounds: gexpcraa.wav
+		ValidTargets: Ground, Air, Ship, Trees
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpcraa.wav
+		ValidTargets: Water, Underwater
+		InvalidTargets: Ship, Structure, Bridge
 
 SEALAttach:
 	Inherits: TanyaAttach
