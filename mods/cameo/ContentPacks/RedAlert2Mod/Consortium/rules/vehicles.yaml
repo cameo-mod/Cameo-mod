@@ -890,7 +890,7 @@ quantumtank.steel:
 		Name: Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~qaweap.steel, up_quantumtank.steel
+		Prerequisites: ~qaweap.steel, ~up_quantumtank.steel
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -1076,7 +1076,7 @@ manta_hunt.steel:
 		Name: Barracuda
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~qaweap.steel, up_manta_hunt.steel
+		Prerequisites: ~qaweap.steel, ~up_manta_hunt.steel
 		Queue: Vehicle, RAVehicle
 		Description: Kills Infantry better
 	Mobile:

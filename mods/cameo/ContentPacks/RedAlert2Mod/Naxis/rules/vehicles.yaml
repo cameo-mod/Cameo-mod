@@ -356,7 +356,7 @@ kingtiger.nax:
 		Name: King Tiger Heavy Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, up_kingtiger.nax
+		Prerequisites: ~weap.nax, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -618,7 +618,7 @@ brummbar.nax:
 		Name: Brummbär
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, up_kingtiger.nax
+		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_brummbar.description
 	Mobile:
@@ -770,7 +770,7 @@ jagdpanzer.nax:
 		Name: Jagdpanzer
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, radar.nax, up_kingtiger.nax
+		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: actor-nax_jagdpanzer.description
 	Mobile:
@@ -1278,7 +1278,7 @@ assault.nax:
 		Name: Imperial Assault Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, up_kingtiger.nax, ~disabled
+		Prerequisites: ~weap.nax, ~up_kingtiger.nax, ~disabled
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:

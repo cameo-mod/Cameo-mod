@@ -177,7 +177,7 @@ gdiempgrenadier:
 		Name: EMP Grenadier
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~pyle, upgdiempgrenadier
+		Prerequisites: ~pyle, ~upgdiempgrenadier
 		Queue: Infantry, RAInfantry
 		Description: actor-empgrenadier.description
 	Mobile:
@@ -234,7 +234,7 @@ gdimissilesoldier:
 		Name: Sonic Missile Soldier
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~pyle, upgdimissilesoldier
+		Prerequisites: ~pyle, ~upgdimissilesoldier
 		Queue: Infantry, RAInfantry
 		Description: actor-e3.description
 	Mobile:
@@ -442,7 +442,7 @@ gdihavoc:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~pyle, eye, upgdihavoc
+		Prerequisites: ~pyle, eye, ~upgdihavoc
 		Queue: Infantry, RAInfantry
 		Description: actor-havoc.description
 	RenderSprites:

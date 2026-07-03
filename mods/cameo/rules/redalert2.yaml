@@ -6217,7 +6217,7 @@ RA2HMGTK:
 		RequiresCondition: tree
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2gaweap, ra2_allies_upgrade_heavymiragetank, ra2gatech
+		Prerequisites: ~ra2gaweap, ~ra2_allies_upgrade_heavymiragetank, ra2gatech
 		Queue: Vehicle, RAVehicle
 		Description: actor-mgtk.description
 	Mobile:
