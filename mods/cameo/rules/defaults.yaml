@@ -1823,6 +1823,7 @@
 		BuildDurationModifier: 50
 	WithTurretSearchlight:
 		RequiresCondition: !disabled
+		IdleElevation: 199 # ~70 degrees; sweeps the sky instead of the ground while idle
 
 ^AdvancedDefenseTemplate:
 	Inherits@DisabledOverlay: ^DisableOnLowPowerOrPowerDown
