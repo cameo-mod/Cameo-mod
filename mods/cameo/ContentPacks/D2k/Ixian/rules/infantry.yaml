@@ -15,7 +15,7 @@ twin_rocket_trooper.ixian:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks.ixian, up_twin_rocket_trooper.ixian
+		Prerequisites: ~d2k_barracks.ixian, ~up_twin_rocket_trooper.ixian
 		Description: template-antitank-antiair-infantry.description
 		IconPalette: d2kunit
 	Valued:
@@ -120,7 +120,7 @@ storm_infantry.ixian:
 		Queue: Infantry, RAInfantry
 		Description: actor-shock_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_barracks.ixian, up_storm_infantry.ixian, research_centre.ixian
+		Prerequisites: ~d2k_barracks.ixian, ~up_storm_infantry.ixian, research_centre.ixian
 	Mobile:
 		Speed: 44
 	Health:

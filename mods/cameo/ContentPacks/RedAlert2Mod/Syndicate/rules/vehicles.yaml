@@ -426,7 +426,7 @@ mtnk.latin:
 		Cost: 1800
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgweap.latin, up_mtnk.latin
+		Prerequisites: ~cgweap.latin, ~up_mtnk.latin
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:
@@ -888,7 +888,7 @@ cartel.latin:
 		Name: Cartel Truck
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgweap.latin, cgspy.latin, up_cartel.latin
+		Prerequisites: ~cgweap.latin, cgspy.latin, ~up_cartel.latin
 		Queue: Vehicle, RAVehicle
 		Description: actor-latin_humvee.description
 	Mobile:
@@ -1039,7 +1039,7 @@ burrito.latin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~cgweap.latin, up_burrito.latin, cgup.latin
+		Prerequisites: ~cgweap.latin, ~up_burrito.latin, cgup.latin
 		Description: actor-latin_burrito.description
 	Tooltip:
 		Name: Burrito

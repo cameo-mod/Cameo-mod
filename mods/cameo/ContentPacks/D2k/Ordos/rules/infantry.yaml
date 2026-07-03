@@ -15,7 +15,7 @@ aatrooper.ordos:
 		Name: Anti Air Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks.ordos, up_aatrooper.ordos
+		Prerequisites: ~d2k_barracks.ordos, ~up_aatrooper.ordos
 		Queue: Infantry, RAInfantry
 		Description: template-antitank-antiair-infantry.description
 	Health:

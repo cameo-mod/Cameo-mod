@@ -398,7 +398,7 @@ tsun.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cgyard.asian, up_tsunami.asian, cgmiac.asian
+		Prerequisites: ~cgyard.asian, ~up_tsunami.asian, cgmiac.asian
 		Queue: Naval, RANaval
 		Description: actor-aatsun.description
 	Selectable:

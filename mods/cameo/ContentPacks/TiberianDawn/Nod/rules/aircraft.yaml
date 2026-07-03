@@ -137,7 +137,7 @@ nodvenom:
 		Name: Venom
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~hpad.nod, td_nod_templeprime, upnodvenom
+		Prerequisites: ~hpad.nod, td_nod_templeprime, ~upnodvenom
 		Queue: Aircraft, RAAircraft
 		Description: actor-venom.description
 	Aircraft:

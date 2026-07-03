@@ -550,7 +550,7 @@ gdiassaultapc:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~weap, eye, upgdiassaultapc
+		Prerequisites: ~weap, eye, ~upgdiassaultapc
 		Description: template-opentopped.description
 	Mobile:
 		Speed: 100
@@ -633,7 +633,7 @@ gdihumvee:
 		Name: Humvee Mk. II
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~weap, upgdihumvee
+		Prerequisites: ~weap, ~upgdihumvee
 		Queue: Vehicle, RAVehicle
 		Description: actor-jeep.description
 	Valued:
@@ -726,7 +726,7 @@ gdipredator:
 		Name: Predator Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap, upgdipredator
+		Prerequisites: ~weap, ~upgdipredator
 		Queue: Vehicle, RAVehicle
 		Description: actor-gdipredator.description
 	Mobile:
@@ -826,7 +826,7 @@ gdimammoth3:
 		Name: Mammoth Tank Mk. III
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap, eye, upgdimammoth3
+		Prerequisites: ~weap, eye, ~upgdimammoth3
 		Queue: Vehicle, RAVehicle
 		Description: actor-htnk.description
 	Mobile:
@@ -914,7 +914,7 @@ gdiexosuit:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~weap, eye, upgdihavoc
+		Prerequisites: ~weap, eye, ~upgdihavoc
 		Description: actor-exosuit.description
 	Mobile:
 		TurnSpeed: 40

@@ -3525,7 +3525,7 @@ SCMADCAP:
 	Power:
 		Amount: -15
 	Buildable:
-		Prerequisites: ~scbarracks, upmadcap
+		Prerequisites: ~scbarracks, ~upmadcap
 		Queue: Infantry, RAInfantry
 		Description: actor-scmadcap.description
 	Mobile:
@@ -4467,7 +4467,7 @@ SCGOLIATH2:
 		Amount: -120
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scarmory, upgoliathmk2
+		Prerequisites: ~scarmory, ~upgoliathmk2
 		Description: actor-scgoliath2.description
 	Mobile:
 		Speed: 75
@@ -4750,7 +4750,7 @@ SCSUNDOG:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, upsundog
+		Prerequisites: ~scstarport, ~upsundog
 		Queue: Aircraft, RAAircraft
 		Description: actor-scsundog.description
 	Aircraft:
@@ -4893,7 +4893,7 @@ SCWYVERN:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, scarmory, upwyvern
+		Prerequisites: ~scstarport, scarmory, ~upwyvern
 		Queue: Aircraft, RAAircraft
 		Description: actor-scwyvern.description
 	Aircraft:
@@ -5219,7 +5219,7 @@ SCMEDIVAC:
 		OverrideActor: scdropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstarport, upsilvertongue
+		Prerequisites: ~scstarport, ~upsilvertongue
 		Queue: Aircraft, RAAircraft
 		Description: actor-scmedivac.description
 	Aircraft:
@@ -8198,7 +8198,7 @@ SCLEGIONNAIRE:
 		Amount: -35
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scgateway, uplegionnaire
+		Prerequisites: ~scgateway, ~uplegionnaire
 		Queue: Infantry, RAInfantry
 		Description: actor-sclegionnaire.description
 	Mobile:
@@ -8881,7 +8881,7 @@ SCTALON:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scspawningpool, uptalon
+		Prerequisites: ~scspawningpool, ~uptalon
 		Queue: SCZergInfantry
 		AdditionalActors: sczergling, sczergling
 		Description: actor-sctalon.description
