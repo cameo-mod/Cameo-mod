@@ -51,6 +51,7 @@ cgpile.latin:
 	Inherits@gar: ^ClearableGarrisonNeutronOnly
 	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@lightposts: ^LightPosts
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Combat Barracks
 	Buildable:
@@ -333,6 +334,7 @@ cgup.latin:
 	Inherits@gar: ^ClearableGarrisonNeutronOnly
 	Inherits@bot2: ^BotAutoDeployEvacuateCargo
 	Inherits@lightposts: ^LightPosts
+	-WithTurretSearchlight:
 	Tooltip:
 		Name: Defense Bureau
 	Buildable:
