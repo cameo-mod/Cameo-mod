@@ -1513,6 +1513,64 @@ sidebar-button-asianalliance-disabled:
 sidebar-button-asianalliance-highlighted-disabled:
 	Inherits: sidebar-button-asianalliance-disabled
 
+# Steel Consortium
+
+^SidebarSteelConsortium:
+	Image: sidebar-consortium.png
+sidebar-consortium:
+	Inherits: sidebar
+	Inherits@2: ^SidebarSteelConsortium
+sidebar-button-consortium:
+	Inherits: sidebar-button
+	Inherits@2: ^SidebarSteelConsortium
+sidebar-button-consortium-hover:
+	Inherits: sidebar-button-hover
+	Inherits@2: ^SidebarSteelConsortium
+sidebar-button-consortium-pressed:
+	Inherits: sidebar-button-consortium
+sidebar-button-consortium-highlighted:
+	Inherits: sidebar-button-highlighted
+	Inherits@2: ^SidebarSteelConsortium
+sidebar-button-consortium-highlighted-hover:
+	Inherits: sidebar-button-highlighted-hover
+	Inherits@2: ^SidebarSteelConsortium
+sidebar-button-consortium-highlighted-pressed:
+	Inherits: sidebar-button-consortium-highlighted
+sidebar-button-consortium-disabled:
+	Inherits: sidebar-button-disabled
+	Inherits@2: ^SidebarSteelConsortium
+sidebar-button-consortium-highlighted-disabled:
+	Inherits: sidebar-button-consortium-disabled
+
+# FutureTech
+
+^SidebarFutureTech:
+	Image: sidebar-futuretech.png
+sidebar-futuretech:
+	Inherits: sidebar
+	Inherits@2: ^SidebarFutureTech
+sidebar-button-futuretech:
+	Inherits: sidebar-button
+	Inherits@2: ^SidebarFutureTech
+sidebar-button-futuretech-hover:
+	Inherits: sidebar-button-hover
+	Inherits@2: ^SidebarFutureTech
+sidebar-button-futuretech-pressed:
+	Inherits: sidebar-button-futuretech
+sidebar-button-futuretech-highlighted:
+	Inherits: sidebar-button-highlighted
+	Inherits@2: ^SidebarFutureTech
+sidebar-button-futuretech-highlighted-hover:
+	Inherits: sidebar-button-highlighted-hover
+	Inherits@2: ^SidebarFutureTech
+sidebar-button-futuretech-highlighted-pressed:
+	Inherits: sidebar-button-futuretech-highlighted
+sidebar-button-futuretech-disabled:
+	Inherits: sidebar-button-disabled
+	Inherits@2: ^SidebarFutureTech
+sidebar-button-futuretech-highlighted-disabled:
+	Inherits: sidebar-button-futuretech-disabled
+
 # 2100
 
 ^Sidebar2100:

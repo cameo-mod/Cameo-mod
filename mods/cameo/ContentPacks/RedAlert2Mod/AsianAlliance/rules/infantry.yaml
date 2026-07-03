@@ -496,7 +496,8 @@ ra2engineer.asian:
 		Upgrades: up_team_diplomacy.asian, up_phalanx.asian
 
 alligator.asian:
-	Inherits: ^DefaultInfantry
+	Inherits: ^Soldier
+	Inherits@swim: ^WithSwimsuit
 	Inherits@2: ^AffectedByTiberium
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@detect: ^GenericGroundDetector
@@ -544,7 +545,7 @@ alligator.asian:
 	Crushable:
 		CrushSound: igensqua.wav
 	WithDeathAnimation:
-		DeathSequencePalette: ra2infantry
+		DeathSequencePalette: playerra2
 		DeathTypes:
 			DefaultDeath: 1
 			BruteMutate: 1
@@ -560,6 +561,16 @@ alligator.asian:
 			ElectricityDeath: 2
 			ContaminatorMutate: 1
 			QuestionMutate: 1
+	Cloak@underwater:
+		DetectionTypes: Underwater, GroundCloak, Cloak
+		InitialDelay: 0
+		CloakDelay: 25
+		CloakedCondition: underwater
+		PauseOnCondition: disabled
+		RequiresCondition: !cloak-force-disabled && !underbridge && swimming
+		IsPlayerPalette: true
+		CloakSound: vnavupa.wav
+		UncloakSound: vnavupa.wav
 	IgnoresDisguise:
 	-Targetable@disguise:
 	ActorStatValues:

@@ -213,6 +213,7 @@ stalker.steel:
 	Inherits@shield: ^HasShieldGenerator
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
+	Inherits@quantum: ^QuantumWeaponsEMP
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -252,11 +253,18 @@ stalker.steel:
 	Armament:
 		Weapon: SteelStalkerRailgun
 		LocalOffset: 900,300,500
-		RequiresCondition: !rank-elite
-	Armament@ELITE:
+		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
+	Armament@Upgrade:
+		Weapon: SteelStalkerRailgunEMP
+		LocalOffset: 900,300,500
+		RequiresCondition: !rank-elite && up_empquantumweapons.steel
+	Armament@elite:
 		Weapon: SteelStalkerRailgunE
 		LocalOffset: 900,300,500
 		RequiresCondition: rank-elite
+	FirepowerMultiplier@up_empquantumweapons.steel:
+		Modifier: 125
+		RequiresCondition: up_empquantumweapons.steel
 	AttackFrontal:
 		FacingTolerance: 10
 	WithInfantryBody:
@@ -284,7 +292,7 @@ stalker.steel:
 	WithIdleOverlay@shield_damage:
 		Sequence: shield-complete-big
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
 white_rabbit.steel:
 	Inherits: ^Tank
@@ -973,13 +981,13 @@ manta.steel:
 		Speed: 115
 		TurnSpeed: 46
 	Health:
-		HP: 27500
+		HP: 55000
 	Repairable:
-		HpPerStep: 1375
+		HpPerStep: 2750
 	ChangesHealth@SelfHealing:
-		Step: 11
+		Step: 22
 	Armor:
-		Type: Light
+		Type: Medium
 	Armament@AG1:
 		Weapon: SteelMantaAG
 		LocalOffset: 300,100,0

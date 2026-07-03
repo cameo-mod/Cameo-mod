@@ -2548,6 +2548,7 @@ yryabrck:
 
 yryarefn:
 	Inherits@2: ^RA2Defense
+	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^RA2YSpawnActorsOnSell
@@ -2571,8 +2572,19 @@ yryarefn:
 		Footprint: xx x+
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 200000
+	ChangesHealth@SelfHealing:
+		Step: 80
 	Power:
 		Amount: 0
+	Armor:
+		Type: Heavy
+		-RequiresCondition:
+	Armor@Concrete:
+		Type: Concrete
+	DamageMultiplier@Concrete:
+		Modifier: 200
 	RevealsShroud:
 		Range: 6666
 	DetectCloaked:
@@ -2601,13 +2613,15 @@ yryarefn:
 		Facing: 128
 		Voice: Undeploy
 	Turreted:
-		TurnSpeed: 90
+		TurnSpeed: 10
 	AttackTurreted:
 		Voice: Attack
 	Armament:
 		Weapon: RA220mmrapid
-		LocalOffset: 512,0,1132
+		LocalOffset: 640,0,640
 		MuzzleSequence: muzzle
+	RangeMultiplier@SlaveMiner:
+		Modifier: 120
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Voiced:
@@ -7170,6 +7184,7 @@ YRPCV:
 YRSMIN:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
+	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^TurretEMP
@@ -7204,14 +7219,21 @@ YRSMIN:
 		ImmovableCondition: driver-dead || deployed
 	Health:
 		HP: 200000
-	Repairable:
-		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
 		Step: 80
 	Power:
 		Amount: 0
 	Armor:
 		Type: Heavy
+		-RequiresCondition:
+	Armor@Concrete:
+		Type: Concrete
+	DamageMultiplier@Concrete:
+		Modifier: 200
+	RevealsShroud:
+		Range: 6666
+	DetectCloaked:
+		Range: 3333
 	Transforms:
 		IntoActor: yryarefn
 		Facing: 128
@@ -7239,9 +7261,11 @@ YRSMIN:
 		Voice: Attack
 	Armament@primary:
 		Weapon: RA220mmrapid
-		LocalOffset: 640,0,384
+		LocalOffset: 640,0,640
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+	RangeMultiplier@SlaveMiner:
+		Modifier: 120
 	WithMuzzleOverlay:
 	RenderSprites:
 		PlayerPalette: playerra2

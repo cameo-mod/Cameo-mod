@@ -52,17 +52,17 @@ up_conssupp4.steel:
 
 ### Military tree
 
-up_quantumtank.steel:
+up_manta_hunt.steel:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Quantum Tank
+		Name: Unlock Barracuda
 	Buildable:
 		BuildPaletteOrder: 110
 		Queue: Promotions
-		Description: Enables construction of Quantum Tanks.
-		Prerequisites: ~qacst.steel, !up_quantumtank.steel, rank1
+		Description: Enables construction of Mantas Hunters.
+		Prerequisites: ~qacst.steel, !up_manta_hunt.steel, rank1
 	RenderSprites:
-		Image: quantumtank.steel
+		Image: manta_hunt.steel
 	ProvidesPrerequisite:
 
 up_dagger.steel:
@@ -73,7 +73,7 @@ up_dagger.steel:
 		BuildPaletteOrder: 113
 		Queue: Promotions
 		Description: Enables construction of Daggers.
-		Prerequisites: ~qacst.steel, up_quantumtank.steel, !up_dagger.steel, rank1
+		Prerequisites: ~qacst.steel, up_manta_hunt.steel, !up_dagger.steel, rank1
 	RenderSprites:
 		Image: dagger.steel
 	ProvidesPrerequisite:
@@ -106,17 +106,17 @@ up_white_rabbit.steel:
 
 ### Unisoft tree
 
-up_manta_hunt.steel:
+up_quantumtank.steel:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Barracuda
+		Name: Quantum Tank
 	Buildable:
 		BuildPaletteOrder: 111
 		Queue: Promotions
-		Description: Enables construction of Mantas Hunters.
-		Prerequisites: ~qacst.steel, !up_manta_hunt.steel, rank1
+		Description: Enables construction of Quantum Tanks.
+		Prerequisites: ~qacst.steel, !up_quantumtank.steel, rank1
 	RenderSprites:
-		Image: manta_hunt.steel
+		Image: quantumtank.steel
 	ProvidesPrerequisite:
 
 up_defender.steel:
@@ -127,7 +127,7 @@ up_defender.steel:
 		BuildPaletteOrder: 114
 		Queue: Promotions
 		Description: Enables construction of Defender Bots.
-		Prerequisites: ~qacst.steel, up_manta_hunt.steel, !up_defender.steel, rank1
+		Prerequisites: ~qacst.steel, up_quantumtank.steel, !up_defender.steel, rank1
 	RenderSprites:
 		Image: defender.steel
 	ProvidesPrerequisite:

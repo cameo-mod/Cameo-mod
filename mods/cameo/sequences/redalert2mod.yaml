@@ -1712,6 +1712,34 @@ alligator.asian:
 	die2:
 		Start: 101
 		#ShadowStart: 265
+	swim-stand:
+		Facings: 8
+	swim-idle1:
+		Start: 56
+		Length: 15
+		Tick: 120
+	swim-idle2:
+		Start: 71
+		Length: 15
+		Tick: 120
+	swim-run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		Tick: 120
+	swim-die1:
+		Start: 86
+		Length: 15
+	swim-die2:
+		Start: 101
+		Length: 15
+	swim-shoot:
+		Start: 116
+		Length: 6
+		Facings: 8
+		InterpolatedFacings: 32
+	swim-cheer:
+		Start: 1
 	icon:
 		Filename: aa_alligator_icon.shp
 
