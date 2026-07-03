@@ -74,7 +74,7 @@ tleilax_labcrawl.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~heavy_factory.ordos, up_tleilax_labcrawl.ordos, research_centre.ordos
+		Prerequisites: ~heavy_factory.ordos, ~up_tleilax_labcrawl.ordos, research_centre.ordos
 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 		IconPalette: windows256
 	Valued:
@@ -906,7 +906,7 @@ python.ordos:
 		Cost: 2500
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy_factory.ordos, up_python.ordos, outpost.ordos
+		Prerequisites: ~heavy_factory.ordos, ~up_python.ordos, outpost.ordos
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -1455,7 +1455,7 @@ stealth_raider.ordos:
 	Valued:
 		Cost: 1300
 	Buildable:
-		Prerequisites: ~light_factory.ordos, up_stealth_raider.ordos
+		Prerequisites: ~light_factory.ordos, ~up_stealth_raider.ordos
 		BuildPaletteOrder: 30
 		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -1684,7 +1684,7 @@ heavycombattank.ordos:
 		BuildPaletteOrder: 40
 		Description: template-mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~heavy_factory.ordos, up_heavycombattank.ordos
+		Prerequisites: ~heavy_factory.ordos, ~up_heavycombattank.ordos
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1803,7 +1803,7 @@ autogun_tank.ordos:
 		Cost: 2800
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy_factory.ordos, up_heavy_autogun_tank.ordos
+		Prerequisites: ~heavy_factory.ordos, ~up_heavy_autogun_tank.ordos
 		BuildPaletteOrder: 50
 		Description: Heavy Anti-Infantry Tank\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks
 	UpdatesPlayerStatistics:

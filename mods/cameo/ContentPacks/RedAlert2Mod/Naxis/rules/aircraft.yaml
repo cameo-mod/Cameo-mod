@@ -314,7 +314,7 @@ me262.nax:
 		Cost: 1500
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~airfield.nax, up_me262.nax
+		Prerequisites: ~airfield.nax, ~up_me262.nax
 		Queue: Aircraft, RAAircraft
 		Description: actor-bpln.description
 	Health:

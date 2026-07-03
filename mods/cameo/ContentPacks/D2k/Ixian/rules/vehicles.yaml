@@ -925,7 +925,7 @@ storm_raider.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~heavy_factory.ixian, up_stormraider.ixian, research_centre.ixian
+		Prerequisites: ~heavy_factory.ixian, ~up_stormraider.ixian, research_centre.ixian
 		Description: actor-shock_raider.description
 		IconPalette: player
 	Valued:
@@ -1002,7 +1002,7 @@ heavy_rocket_raider.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~heavy_factory.ixian, up_raider.ixian
+		Prerequisites: ~heavy_factory.ixian, ~up_raider.ixian
 		Description: actor-rocket_raider.description
 	Tooltip:
 		Name: Heavy Ix Raider
