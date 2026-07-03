@@ -42,6 +42,11 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		[Desc("Speed at which the searchlight turns toward the turret's aim direction.")]
 		public readonly WAngle TurnSpeed = new(24);
 
+		[Desc("Elevation above horizontal used when idle/no target is being tracked, e.g. an anti-air " +
+			"searchlight sweeping the sky instead of the ground. 0 (default) keeps the beam level with the ground. " +
+			"1024 units = 360 degrees, so 256 is straight up.")]
+		public readonly WAngle IdleElevation = WAngle.Zero;
+
 		[Desc("Color of the registered glow.")]
 		public readonly Color Color = Color.FromArgb(170, Color.LightYellow);
 
@@ -55,13 +60,37 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		public readonly SearchlightShape Shape = SearchlightShape.Cone;
 
 		[Desc("Glow radius scale at the Shape=Cone source (narrow end, at the turret).")]
-		public readonly float ConeStartScale = 0.4f;
+		public readonly float ConeStartScale = 0.12f;
 
-		[Desc("Glow radius scale at the Shape=Cone target (wide end, the far pool).")]
+		[Desc("Glow radius scale at the Shape=Cone body's wide end. Match PoolScale so the beam's wide end " +
+			"meets the endpoint pool seamlessly instead of stepping to a different width.")]
 		public readonly float ConeEndScale = 1.6f;
 
-		[Desc("Extra brightness ramped toward the Shape=Cone wide end to form the light pool.")]
-		public readonly float EndpointBoost = 1.2f;
+		[Desc("Peak brightness of the Shape=Cone endpoint pool. The pool is a separate glow centred on the " +
+			"target; values above 1 make it punch through brighter than the beam body. 0 disables the pool.")]
+		public readonly float EndpointBoost = 1.3f;
+
+		[Desc("Brightness of the Shape=Cone body at its wide end relative to the source. " +
+			"1 keeps the body as bright as the source; lower values dim the beam as it travels outward, " +
+			"as if scattering into fog, while the endpoint pool still punches through.")]
+		public readonly float ConeFadeEnd = 0.45f;
+
+		[Desc("Edge softness exponent at the Shape=Cone source (narrow end). Higher values give a crisper, " +
+			"more defined beam edge. 2 is a standard Gaussian falloff.")]
+		public readonly float EdgeSharpnessStart = 4f;
+
+		[Desc("Edge softness exponent at the Shape=Cone body's wide end and the endpoint pool. Lower values " +
+			"give a softer, more diffuse edge. 2 is a standard Gaussian falloff.")]
+		public readonly float EdgeSharpnessEnd = 2.0f;
+
+		[Desc("Radius scale of the Shape=Cone endpoint pool, independent of the beam body's width so the " +
+			"pool can spread wider than the beam that feeds it.")]
+		public readonly float PoolScale = 1.6f;
+
+		[Desc("Vertical (screen-Y) squash applied to the Shape=Cone endpoint pool. 1 keeps the pool a true " +
+			"circle, which matches this projection's flat-ground circle for any beam facing. Lower values " +
+			"flatten it in screen-Y regardless of facing, so only leave below 1 for a stylised top-down look.")]
+		public readonly float EndpointGroundSquash = 1.0f;
 
 		[Desc("Lobby option id that enables weather searchlights.")]
 		public readonly string WeatherOption = "weather";
@@ -248,7 +277,12 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			var maxLength = MaxSearchlightLength();
 			var target = CurrentAttackTarget(self);
 			if (!target.IsValidFor(self))
-				return source + new WVec(0, -maxLength, 0).Rotate(orientation);
+			{
+				var idleHorizontalLength = maxLength * Info.IdleElevation.Cos() / 1024;
+				var idleVerticalLength = maxLength * Info.IdleElevation.Sin() / 1024;
+				var idleHorizontalTarget = new WVec(0, -idleHorizontalLength, 0).Rotate(orientation);
+				return source + new WVec(idleHorizontalTarget.X, idleHorizontalTarget.Y, idleVerticalLength);
+			}
 
 			var targetOffset = attack.GetTargetPosition(source, target) - source;
 			var targetHorizontalLength = targetOffset.HorizontalLength;
@@ -347,17 +381,20 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 
 		IRenderable EmitSearchlight(WPos source, WPos target, float intensityScale)
 		{
-			// Cone tapers the glow radius from narrow (turret) to wide (far pool) in a single
-			// GlowRenderer registration; Beam keeps a uniform radius with no endpoint pool.
+			// Cone tapers the beam-body glow radius from narrow (turret) to wide, dimming the body and
+			// softening its edge along the way, and adds a separate flattened endpoint pool on the ground;
+			// Beam keeps a uniform radius, brightness and edge with no endpoint pool.
 			if (Info.Shape == SearchlightShape.Cone)
 				return new TurretSearchlightRenderable(new[]
 				{
-					new SearchlightGlow(source, target, Info.Color, Info.ConeStartScale, Info.ConeEndScale, Info.Intensity * intensityScale, Info.EndpointBoost)
+					new SearchlightGlow(source, target, Info.Color, Info.ConeStartScale, Info.ConeEndScale, Info.Intensity * intensityScale,
+						Info.EndpointBoost, Info.ConeFadeEnd, Info.EdgeSharpnessStart, Info.EdgeSharpnessEnd, Info.EndpointGroundSquash, Info.PoolScale)
 				});
 
 			return new TurretSearchlightRenderable(new[]
 			{
-				new SearchlightGlow(source, target, Info.Color, Info.GlowScale, Info.GlowScale, Info.Intensity * intensityScale, 0f)
+				new SearchlightGlow(source, target, Info.Color, Info.GlowScale, Info.GlowScale, Info.Intensity * intensityScale,
+					0f, 1f, 2f, 2f, 1f, 0f)
 			});
 		}
 
@@ -391,8 +428,14 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		public readonly float GlowScaleEnd;
 		public readonly float Intensity;
 		public readonly float EndpointBoost;
+		public readonly float FadeEnd;
+		public readonly float EdgeSharpnessStart;
+		public readonly float EdgeSharpnessEnd;
+		public readonly float EndpointGroundSquash;
+		public readonly float PoolScale;
 
-		public SearchlightGlow(WPos source, WPos target, Color color, float glowScale, float glowScaleEnd, float intensity, float endpointBoost)
+		public SearchlightGlow(WPos source, WPos target, Color color, float glowScale, float glowScaleEnd, float intensity,
+			float endpointBoost, float fadeEnd, float edgeSharpnessStart, float edgeSharpnessEnd, float endpointGroundSquash, float poolScale)
 		{
 			Source = source;
 			Target = target;
@@ -401,6 +444,11 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			GlowScaleEnd = glowScaleEnd;
 			Intensity = intensity;
 			EndpointBoost = endpointBoost;
+			FadeEnd = fadeEnd;
+			EdgeSharpnessStart = edgeSharpnessStart;
+			EdgeSharpnessEnd = edgeSharpnessEnd;
+			EndpointGroundSquash = endpointGroundSquash;
+			PoolScale = poolScale;
 		}
 	}
 
@@ -422,7 +470,8 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		{
 			var offset = vec;
 			return new TurretSearchlightRenderable(glows.Select(g =>
-				new SearchlightGlow(g.Source + offset, g.Target + offset, g.Color, g.GlowScale, g.GlowScaleEnd, g.Intensity, g.EndpointBoost)));
+				new SearchlightGlow(g.Source + offset, g.Target + offset, g.Color, g.GlowScale, g.GlowScaleEnd, g.Intensity,
+					g.EndpointBoost, g.FadeEnd, g.EdgeSharpnessStart, g.EdgeSharpnessEnd, g.EndpointGroundSquash, g.PoolScale)));
 		}
 
 		public IRenderable AsDecoration() { return this; }
@@ -436,7 +485,9 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 
 			foreach (var glow in glows)
 				glowRenderer.RegisterGlow(glow.Source, glow.Target, glow.Color, glow.GlowScale,
-					intensity: glow.Intensity, scaleEnd: glow.GlowScaleEnd, endpointBoost: glow.EndpointBoost);
+					intensity: glow.Intensity, scaleEnd: glow.GlowScaleEnd, endpointBoost: glow.EndpointBoost,
+					fadeEnd: glow.FadeEnd, edgeExponentStart: glow.EdgeSharpnessStart, edgeExponentEnd: glow.EdgeSharpnessEnd,
+					endpointSquash: glow.EndpointGroundSquash, poolScale: glow.PoolScale);
 		}
 
 		public void RenderDebugGeometry(WorldRenderer wr) { }
