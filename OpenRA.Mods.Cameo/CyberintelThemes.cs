@@ -7,6 +7,7 @@
 using System;
 using System.IO;
 using OpenRA.FileSystem;
+using OpenRA.Primitives;
 
 namespace OpenRA.Mods.Cameo
 {
@@ -33,9 +34,16 @@ namespace OpenRA.Mods.Cameo
 		public static readonly string[] Options =
 			["cyan", "green", "amber", "orange", "blue", "white", "red", "purple", "magenta", "classic", Random];
 
+		// The concrete theme resolved by the most recent Apply() this process — set by the loadscreen
+		// at boot for the "random" case, so the menu can colour its text to match the actual pick
+		// (the setting itself just says "random"). Null when no Apply ran (e.g. a fixed theme, where
+		// the setting already names the concrete theme).
+		public static string CurrentTheme { get; private set; }
+
 		public static void Apply(string name, IReadOnlyFileSystem fileSystem)
 		{
 			var theme = name == Random ? Colours[Game.CosmeticRandom.Next(Colours.Length)] : name;
+			CurrentTheme = theme;
 
 			try
 			{
@@ -56,6 +64,31 @@ namespace OpenRA.Mods.Cameo
 			{
 				Log.Write("debug", "Cameo UI theme apply failed for '" + name + "': " + e);
 			}
+		}
+
+		// Menu title + body text colours per theme, matched to each sheet's neon family, so the menu
+		// text tracks the selected colour. Returns false for unknown themes and for "classic" (which
+		// resets to the stock chrome colours in CameoMainMenuLogic instead).
+		public static bool TryGetMenuColours(string theme, out Color title, out Color text)
+		{
+			(int, int, int) t, b;
+			switch (theme)
+			{
+				case "cyan": t = (190, 246, 255); b = (120, 224, 244); break;
+				case "green": t = (190, 255, 190); b = (130, 235, 150); break;
+				case "amber": t = (255, 236, 180); b = (238, 198, 112); break;
+				case "orange": t = (255, 206, 150); b = (248, 168, 110); break;
+				case "blue": t = (200, 224, 255); b = (150, 196, 252); break;
+				case "white": t = (255, 255, 255); b = (210, 218, 230); break;
+				case "red": t = (255, 206, 190); b = (248, 150, 138); break;
+				case "purple": t = (224, 206, 255); b = (192, 160, 240); break;
+				case "magenta": t = (255, 200, 236); b = (248, 144, 208); break;
+				default: title = default; text = default; return false;
+			}
+
+			title = Color.FromArgb(t.Item1, t.Item2, t.Item3);
+			text = Color.FromArgb(b.Item1, b.Item2, b.Item3);
+			return true;
 		}
 	}
 }
