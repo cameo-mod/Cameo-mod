@@ -1362,19 +1362,41 @@ sidebar-button-nod-disabled:
 sidebar-button-nod-highlighted-disabled:
 	Inherits: sidebar-button-gdi-disabled
 
+^SidebarTKM:
+	Image: sidebar-tkm.png
 sidebar-tkm:
-	Inherits: ^SidebarTD
+	Inherits: ^SidebarTKM
 	Regions:
-		radar: 290, 290, 222, 222
-		insignia: 290, 290, 222, 222
+		radar: 290, 67, 222, 222
+		insignia: 290, 67, 222, 222
 		background-top: 0, 185, 238, 262
-		background-moneybin: 0, 54, 238, 28
-		background-tabs: 41, 54, 197, 28
+		background-moneybin: 0, 85, 238, 28
+		background-tabs: 41, 85, 197, 28
 		background-tabs-side: 0, 116, 41, 47
-		background-iconbg: 12, 275, 190, 47
+		background-iconbg: 12, 227, 190, 47
 		background-iconrow: 0, 116, 238, 47
 		background-bottom: 0, 166, 238, 8
-		background-supportoverlay: 77, 324, 64, 48
+		background-supportoverlay: 12, 324, 64, 48
+sidebar-button-tkm:
+	Inherits: ^SidebarTKM
+	PanelRegion: 260, 165, 5, 5, 18, 18, 5, 5
+sidebar-button-tkm-hover:
+	Inherits: ^SidebarTKM
+	PanelRegion: 260, 136, 5, 5, 18, 18, 5, 5
+sidebar-button-tkm-pressed:
+	Inherits: sidebar-button-tkm
+sidebar-button-tkm-highlighted:
+	Inherits: ^SidebarTKM
+	PanelRegion: 260, 223, 5, 5, 18, 18, 5, 5
+sidebar-button-tkm-highlighted-hover:
+	Inherits: ^SidebarTKM
+	PanelRegion: 260, 194, 5, 5, 18, 18, 5, 5
+sidebar-button-tkm-highlighted-pressed:
+	Inherits: sidebar-button-tkm-highlighted
+sidebar-button-tkm-disabled:
+	Inherits: sidebar-button-gdi-disabled
+sidebar-button-tkm-highlighted-disabled:
+	Inherits: sidebar-button-gdi-disabled
 
 # Generic
 

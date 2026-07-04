@@ -6564,7 +6564,7 @@ RA2HTK:
 	Inherits@RA2HeavyCannons: ^RA2HeavyCannons
 	Inherits@TerrorDroneSurprise: ^TerrorDroneSurprise
 	Valued:
-		Cost: 700
+		Cost: 900
 	Tooltip:
 		Name: Flak Track
 	UpdatesPlayerStatistics:
@@ -6614,7 +6614,7 @@ RA2HTK:
 		MuzzlePalette: ra2effect
 		RequiresCondition: rank-elite
 	FirepowerMultiplier@MultiWeapon:
-		Modifier: 50
+		Modifier: 75
 	WithMuzzleOverlay:
 	AttackTurreted:
 	Selectable:
@@ -6628,7 +6628,7 @@ RA2HTK:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: ra2e2, ra2e2, ra2e2, ra2e2, ra2flakt
+		InitialUnits: ra2e2, ra2e2, ra2e2, ra2flakt, ra2flakt
 	ActorStatValues:
 		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
 

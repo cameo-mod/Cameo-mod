@@ -4392,7 +4392,6 @@ RA2FLAKAA:
 	Inherits: ^RA2FlakWeapon
 	ReloadDelay: 26
 	Range: 7834
-	Projectile: InstantHit
 	ValidTargets: Air
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 8000
@@ -4417,7 +4416,7 @@ RA2FlakTrackGun:
 	Inherits: ^Chaingun
 	Inherits: RA2FLAKAG
 	ReloadDelay: 18
-	Range: 5614
+	Range: 5528
 	ValidTargets: Ground, Water, Trees
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Trees
@@ -4449,7 +4448,7 @@ RA2FlakTrackGun:
 
 RA2FlakTrackGunE:
 	Inherits: RA2FlakTrackGun
-	Range: 6614
+	Range: 6528
 	Burst: 2
 	BurstDelays: 3
 
@@ -4457,7 +4456,7 @@ RA2FlakTrackAAGun:
 	Inherits: RA2FlakTrackGun
 	Inherits: ^RA2FlakWeapon
 	ValidTargets: Air
-	Range: 8421
+	Range: 8292
 	Projectile: Bullet
 		-LaunchAngle:
 	Warhead@SmallArms: SpreadDamage
@@ -4485,7 +4484,7 @@ RA2FlakTrackAAGun:
 
 RA2FlakTrackAAGunE:
 	Inherits: RA2FlakTrackAAGun
-	Range: 9421
+	Range: 9292
 	Burst: 2
 	BurstDelays: 3
 
