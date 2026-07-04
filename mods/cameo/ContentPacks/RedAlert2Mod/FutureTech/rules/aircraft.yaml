@@ -88,7 +88,7 @@ cryo.futu:
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~egweap2.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu, ~up_cryocopter.futu
 		Description: actor-futu_cryo.description
 	Valued:
 		Cost: 1350
@@ -192,7 +192,7 @@ harbinger.futu:
 	Buildable:
 		BuildAtProductionType: harbinger.futu
 		BuildPaletteOrder: 100
-		Prerequisites: ~launchpad.futu, egshock.futu
+		Prerequisites: ~launchpad.futu, egshock.futu, ~up_harbinger.futu
 		Queue: Aircraft, RAAircraft
 		Description: actor-future_harbinger.description
 	Aircraft:

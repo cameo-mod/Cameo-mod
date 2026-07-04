@@ -74,7 +74,7 @@ tleilax_labcrawl.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~heavy_factory.ordos, ~up_tleilax_labcrawl.ordos, research_centre.ordos
+		Prerequisites: ~heavy_factory.ordos, research_centre.ordos, ~up_tleilax_labcrawl.ordos
 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 		IconPalette: windows256
 	Valued:
@@ -906,7 +906,7 @@ python.ordos:
 		Cost: 2500
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy_factory.ordos, ~up_python.ordos, outpost.ordos
+		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~up_python.ordos
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit

@@ -43,7 +43,7 @@ mech_machinegun.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egweap2.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu, ~up_gatling_strider.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-future_mech_machinegun.description
 	Mobile:
@@ -100,7 +100,7 @@ mech_plasma.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egweap2.futu, egshock.futu
+		Prerequisites: ~egweap2.futu, egshock.futu, ~up_plasma_strider.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-future_mech_plasma.description
 	Mobile:
@@ -154,7 +154,7 @@ ifv.futu:
 	Valued:
 		Cost: 950
 	Buildable:
-		Prerequisites: ~egweap2.futu
+		Prerequisites: ~egweap2.futu, ~up_salamander.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_ifv.description
 	Mobile:
@@ -193,7 +193,7 @@ yrrobo.futu:
 		Name: Robot Tank
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~egweap2.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu, ~up_robot_tank.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-robo.description
 	Mobile:
@@ -584,7 +584,7 @@ orion.futu:
 		Name: Orion Tank
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~egweap2.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu, ~up_orion.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_orion.description
 	Mobile:
@@ -900,7 +900,7 @@ futu.futu:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: ~egweap2.futu, egshock.futu, yrgarobo.futu
+		Prerequisites: ~egweap2.futu, egshock.futu, yrgarobo.futu, ~up_futuretank.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_futu.description
 	Mobile:

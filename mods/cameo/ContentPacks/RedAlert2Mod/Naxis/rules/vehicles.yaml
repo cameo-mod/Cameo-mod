@@ -1278,7 +1278,7 @@ assault.nax:
 		Name: Imperial Assault Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap.nax, ~up_kingtiger.nax, ~disabled
+		Prerequisites: ~weap.nax, ~disabled, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
 		Description: template-mbt.description
 	Mobile:

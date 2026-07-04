@@ -1,0 +1,161 @@
+### Droid tree
+
+up_shotgun_droid.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Shotgun Droid
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Promotions
+		Description: Enables construction of the Shotgun Droid.
+		Prerequisites: ~egcnst.futu, !up_shotgun_droid.futu, rank1
+	RenderSprites:
+		Image: robot_shotgun.futu
+	ProvidesPrerequisite:
+
+up_cannon_droid.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cannon Droid
+	Buildable:
+		BuildPaletteOrder: 103
+		Queue: Promotions
+		Description: Enables construction of the Cannon Droid.
+		Prerequisites: ~egcnst.futu, up_shotgun_droid.futu, !up_cannon_droid.futu, rank1
+	RenderSprites:
+		Image: robot_cannon.futu
+	ProvidesPrerequisite:
+
+up_missile_droid.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Missile Droid
+	Buildable:
+		BuildPaletteOrder: 106
+		Queue: Promotions
+		Description: Enables construction of the Missile Droid.
+		Prerequisites: ~egcnst.futu, up_cannon_droid.futu, !up_missile_droid.futu, rank1
+	RenderSprites:
+		Image: robot_missiles.futu
+	ProvidesPrerequisite:
+
+up_cryoleg.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cryo Legionnaire
+	Buildable:
+		BuildPaletteOrder: 109
+		Queue: Promotions
+		Description: Enables construction of the Cryo Legionnaire.
+		Prerequisites: ~egcnst.futu, up_missile_droid.futu, !up_cryoleg.futu, rank1
+	RenderSprites:
+		Image: cryoleg.futu
+	ProvidesPrerequisite:
+
+### Armor tree
+
+up_salamander.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Salamander IFV
+	Buildable:
+		BuildPaletteOrder: 101
+		Queue: Promotions
+		Description: Enables construction of the Salamander IFV.
+		Prerequisites: ~egcnst.futu, !up_salamander.futu, rank1
+	RenderSprites:
+		Image: ifv.futu
+	ProvidesPrerequisite:
+
+up_robot_tank.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Robot Tank
+	Buildable:
+		BuildPaletteOrder: 104
+		Queue: Promotions
+		Description: Enables construction of the Robot Tank.
+		Prerequisites: ~egcnst.futu, up_salamander.futu, !up_robot_tank.futu, rank1
+	RenderSprites:
+		Image: yrrobo.futu
+	ProvidesPrerequisite:
+
+up_orion.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Orion Tank
+	Buildable:
+		BuildPaletteOrder: 107
+		Queue: Promotions
+		Description: Enables construction of the Orion Tank.
+		Prerequisites: ~egcnst.futu, up_robot_tank.futu, !up_orion.futu, rank1
+	RenderSprites:
+		Image: orion.futu
+	ProvidesPrerequisite:
+
+up_futuretank.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Future Tank
+	Buildable:
+		BuildPaletteOrder: 110
+		Queue: Promotions
+		Description: Enables construction of the Future Tank.
+		Prerequisites: ~egcnst.futu, up_orion.futu, !up_futuretank.futu, rank1
+	RenderSprites:
+		Image: futu.futu
+	ProvidesPrerequisite:
+
+### Strider tree
+
+up_gatling_strider.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Gun Strider
+	Buildable:
+		BuildPaletteOrder: 102
+		Queue: Promotions
+		Description: Enables construction of the Gun Strider.
+		Prerequisites: ~egcnst.futu, !up_gatling_strider.futu, rank1
+	RenderSprites:
+		Image: mech_machinegun.futu
+	ProvidesPrerequisite:
+
+up_plasma_strider.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Plasma Strider
+	Buildable:
+		BuildPaletteOrder: 105
+		Queue: Promotions
+		Description: Enables construction of the Plasma Strider.
+		Prerequisites: ~egcnst.futu, up_gatling_strider.futu, !up_plasma_strider.futu, rank1
+	RenderSprites:
+		Image: mech_plasma.futu
+	ProvidesPrerequisite:
+
+up_cryocopter.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Cryocopter
+	Buildable:
+		BuildPaletteOrder: 108
+		Queue: Promotions
+		Description: Enables construction of the Cryocopter.
+		Prerequisites: ~egcnst.futu, up_plasma_strider.futu, !up_cryocopter.futu, rank1
+	RenderSprites:
+		Image: cryo.futu
+	ProvidesPrerequisite:
+
+up_harbinger.futu:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Harbinger Gunship
+	Buildable:
+		BuildPaletteOrder: 111
+		Queue: Promotions
+		Description: Enables construction of the Harbinger Gunship.
+		Prerequisites: ~egcnst.futu, up_cryocopter.futu, !up_harbinger.futu, rank1
+	RenderSprites:
+		Image: harbinger.futu
+	ProvidesPrerequisite:

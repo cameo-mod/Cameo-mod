@@ -751,7 +751,7 @@ mecha.asian:
 		Name: Pulverizer Mecha
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~cgweap.asian, ~up_mecha.asian, cgtech.asian
+		Prerequisites: ~cgweap.asian, cgtech.asian, ~up_mecha.asian
 		Queue: Vehicle, RAVehicle
 		Description: actor-aamecha.description
 	Mobile:
@@ -864,7 +864,7 @@ railt2.asian:
 		Name: Heavy Railgun Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~cgweap.asian, ~up_railt2.asian, cgtech.asian
+		Prerequisites: ~cgweap.asian, cgtech.asian, ~up_railt2.asian
 		Queue: Vehicle, RAVehicle
 	Mobile:
 		Locomotor: tracked
