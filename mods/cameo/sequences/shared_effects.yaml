@@ -322,3 +322,184 @@ bhreddragon:
 		InterpolatedFacings: 64
 		ZOffset: 1023
 
+# from d2k.yaml (relocated for lazy-loading floor)
+small_trail:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 3988
+		Length: 4
+		Tick: 80
+		BlendMode: Additive
+		ZOffset: 1023
+
+small_trail2:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Start: 3793
+		Length: 4
+		Tick: 80
+		BlendMode: Additive
+		ZOffset: 1023
+
+d2k_rpg:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3263
+		Facings: -32
+		ZOffset: 1023
+
+shrapnel2:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3542
+		Length: 1
+		ZOffset: 1023
+
+shrapnel3:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3543
+		Length: 8
+		ZOffset: 1023
+
+shrapnel4:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3551
+		Length: 1
+		ZOffset: 1023
+
+# from redalert2.yaml (relocated for lazy-loading floor)
+ra2caoild:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ra2_ctoild.shp
+		Offset: 0, 0
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 64
+	damaged-idle-pump:
+		Filename: ra2_ctoild_a.shp
+		Length: 32
+		ShadowStart: 96
+	idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	damaged-idle-flag:
+		Filename: ra2_ctoild_f.shp
+		Length: 8
+	make:
+		Filename: ra2_cgoildmk.shp
+		Length: 14
+		ShadowStart: 14
+	bib:
+		Offset: 0,20
+	dead:
+		Start: 1
+	icon:
+		Filename: ra2caoildicon.shp
+		Offset: 0, 0
+
+ra2caairp:
+	Defaults:
+		Filename: ra2_ctairp.shp
+	idle:
+		ShadowStart: 4
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+	idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Length: 10
+		Tick: 400
+	damaged-idle-overlay:
+		Filename: ra2_ctairp_a.shp
+		Start: 10
+		Length: 10
+		Tick: 400
+	idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	damaged-idle-flag:
+		Filename: ra2_ctairp_f.shp
+		Length: 16
+	dead:
+		Start: 1
+
+ra2corpse:
+	death_a:
+		Filename: ra2_death_a.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_b:
+		Filename: ra2_death_b.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_c:
+		Filename: ra2_death_c.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_d:
+		Filename: ra2_death_d.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_e:
+		Filename: ra2_death_e.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	death_f:
+		Filename: ra2_death_f.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+
+ra2zbomb:
+	idle:
+		Filename: ra2zbomb.shp
+		Facings: 32
+		ZOffset: 1023
+
+# from redalert2mod.yaml (relocated for lazy-loading floor)
+aa_banzai:
+	Defaults:
+		Filename: aa_banzai.shp
+		Offset: 0, 4
+	idle:
+		Length: 2
+		Tick: 50
+
+aa_banzai2:
+	Defaults:
+		Filename: aa_banzai2.shp
+		Offset: 0, 4
+	idle:
+		Length: 2
+		Tick: 25
+
