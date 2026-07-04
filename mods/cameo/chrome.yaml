@@ -1155,6 +1155,35 @@ mainmenu-border:
 	PanelRegion: 650, 389, 39, 39, 38, 38, 39, 39
 	PanelSides: Edges
 
+# Cyberintel main-menu reskin (placeholder art in uibits/cyberintel-ui.png).
+# Isolated regions referenced only from chrome/mainmenu.yaml so the shared grey
+# chrome (lobby, settings, in-game) is untouched. Swap the png for final art;
+# the 9-slice metrics below are sized to the 256x256 placeholder sheet layout.
+^Cyberintel:
+	Image: cyberintel-ui.png
+
+cyberintel-panel:
+	Inherits: ^Cyberintel
+	PanelRegion: 0, 0, 32, 32, 64, 64, 32, 32
+
+cyberintel-backdrop:
+	Inherits: ^Cyberintel
+	PanelRegion: 128, 0, 0, 0, 64, 64, 0, 0
+	PanelSides: Center
+
+cyberintel-button:
+	Inherits: ^Cyberintel
+	PanelRegion: 0, 128, 10, 10, 44, 44, 10, 10
+cyberintel-button-hover:
+	Inherits: ^Cyberintel
+	PanelRegion: 64, 128, 10, 10, 44, 44, 10, 10
+cyberintel-button-pressed:
+	Inherits: ^Cyberintel
+	PanelRegion: 128, 128, 10, 10, 44, 44, 10, 10
+cyberintel-button-disabled:
+	Inherits: ^Cyberintel
+	PanelRegion: 192, 128, 10, 10, 44, 44, 10, 10
+
 dropdown:
 	Inherits: ^Dialog
 	Regions:

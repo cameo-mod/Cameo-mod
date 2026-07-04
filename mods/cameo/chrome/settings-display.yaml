@@ -1,5 +1,5 @@
 Container@DISPLAY_PANEL:
-	Logic: DisplaySettingsLogic
+	Logic: DisplaySettingsLogic, CameoDisplaySettingsLogic
 	Width: PARENT_WIDTH
 	Height: PARENT_HEIGHT
 	Children:
@@ -238,6 +238,34 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: Selected Unit Tooltip
+				Container@UI_THEME_ROW:
+					Width: PARENT_WIDTH - 24
+					Height: 50
+					Children:
+						Container@UI_THEME_CONTAINER:
+							X: 10
+							Width: PARENT_WIDTH / 2 - 20
+							Children:
+								Label@UI_THEME_DROP_DOWN_LABEL:
+									Width: PARENT_WIDTH
+									Height: 20
+									Font: Regular
+									Text: ui-theme-label
+								DropDownButton@UI_THEME_DROP_DOWN:
+									Y: 25
+									Width: PARENT_WIDTH
+									Height: 25
+									Font: Regular
+						Container@UI_THEME_HINT_CONTAINER:
+							X: PARENT_WIDTH / 2 + 10
+							Width: PARENT_WIDTH / 2 - 20
+							Children:
+								Label@UI_THEME_RESTART_HINT:
+									Y: 25
+									Width: PARENT_WIDTH
+									Height: 25
+									Font: Regular
+									Text: ui-theme-restart-hint
 				Container@SPACER:
 				Background@VIDEO_SECTION_HEADER:
 					X: 5
@@ -478,19 +506,6 @@ Container@DISPLAY_PANEL:
 									Height: 20
 									Font: Regular
 									Text: checkbox-ground-fire-smoke
-				Container@ROW:
-					Width: PARENT_WIDTH - 24
-					Height: 30
-					Children:
-						Container@DECOUPLED_RENDERING_CHECKBOX_CONTAINER:
-							X: 10
-							Width: PARENT_WIDTH - 20
-							Children:
-								Checkbox@DECOUPLED_RENDERING_CHECKBOX:
-									Width: PARENT_WIDTH
-									Height: 20
-									Font: Regular
-									Text: checkbox-decoupled-rendering
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
 					Height: 30
