@@ -306,7 +306,6 @@ checkbox-heat-distortion = Heat Distortion Effects
 checkbox-shockwave = Shockwave Distortion Effects
 checkbox-screen-shake = Screen Shake Effects
 checkbox-ground-fire-smoke = Ground Fire Smoke Effects
-checkbox-decoupled-rendering = Decoupled Render Thread (Experimental)
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
 checkbox-flash-transients-container =
     .label = Flash Priority Notifications
@@ -332,6 +331,8 @@ checkbox-quota-mode =
     .tooltip = Production buildings automatically re-queue units to maintain target alive counts per type.
         Left-click a unit in the production panel to set its target; right-click to lower it.
         Due to its instability, this feature is currently single-player only, and disabled in multiplayer.
+ui-theme-label = UI Colour Theme
+ui-theme-restart-hint = Applies after restart
 
 ## Map Generator (from OpenRA RA)
 ## map-generators.yaml

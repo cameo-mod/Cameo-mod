@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Linq;
 using OpenRA.FileSystem;
 using OpenRA.Graphics;
+using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common.LoadScreens;
 using OpenRA.Primitives;
 
@@ -88,6 +89,13 @@ namespace OpenRA.Mods.Cameo.LoadScreens
 		public override void Init(Manifest manifest, IReadOnlyFileSystem fileSystem)
 		{
 			base.Init(manifest, fileSystem);
+
+			// Re-apply the "random" UI colour theme on every boot, before ChromeProvider loads the
+			// chrome sheets, so a fresh colour shows this session. Concrete themes are already the
+			// active files (copied when chosen in Settings), so they need no per-boot work.
+			if (Game.Settings.GetOrCreate<CameoSettings>(null).UITheme == CyberintelThemes.Random)
+				CyberintelThemes.Apply(CyberintelThemes.Random, fileSystem);
+
 			var info = Info;
 
 			if (info.TryGetValue("SplashImage", out var splash))

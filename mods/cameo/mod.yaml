@@ -14,6 +14,9 @@ FileSystem: DefaultFileSystem
 		$cameo: cameo
 		cameo|ContentPacks: ContentPacks
 		cameo|uibits
+		# Writable override for the cyberintel UI colour theme: the switcher copies the chosen
+		# theme's sheets here; mounted after uibits so they shadow the shipped defaults by bare name.
+		~^SupportDir|Content/cameo/theme
 		^EngineDir|mods/common: common
 		~^SupportDir|Content/cameo/music
 		cameo|bits: bits
