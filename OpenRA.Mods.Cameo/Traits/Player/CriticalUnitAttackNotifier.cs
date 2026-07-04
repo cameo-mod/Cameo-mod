@@ -30,6 +30,9 @@ namespace OpenRA.Mods.Cameo.Traits
 		[Desc("Text notification to display.")]
 		public readonly string TextNotification = null;
 
+		[Desc("Flash the text notification to draw attention to it.")]
+		public readonly bool FlashTextNotification = false;
+
 		public override object Create(ActorInitializer init) { return new CriticalUnitAttackNotifier(this); }
 	}
 
@@ -57,7 +60,7 @@ namespace OpenRA.Mods.Cameo.Traits
 
 			if (Game.RunTime > lastNotifyTime + info.NotifyInterval)
 			{
-				TextNotificationsManager.AddTransientLine(self.Owner, info.TextNotification);
+				TextNotificationsManager.AddTransientLine(self.Owner, info.TextNotification, info.FlashTextNotification);
 				lastNotifyTime = Game.RunTime;
 			}
 		}

@@ -13,6 +13,16 @@ Container@TRANSIENTS_PANEL:
 			HideOverflow: False
 			TransientsTemplate: CAMEO_TRANSIENT_LINE_TEMPLATE
 			FeedbackTemplate: CAMEO_TRANSIENT_LINE_TEMPLATE
+			# Whole-line flash: pulse the line's BACKGROUND box bright (white) for 2 cycles,
+			# leaving the text styling unchanged. Blank FlashFont disables the bold swap so it's
+			# fill-only (an empty value, NOT "" — MiniYaml reads "" as a literal 2-char string).
+			FlashFont:
+			FlashCount: 2
+			FlashHighlight: True
+			# White, slightly transparent (C0 = ~75% opaque) so the battlefield shows through a little.
+			FlashBackgroundColor: FFFFFFC0
+			# Match the template's TextColor so the flash leaves the text unchanged.
+			FlashTextColor: AFEEEE
 
 # Transient notification line with a translucent box backing.
 # Width is pinned to the panel width (550): a PARENT_WIDTH ColorBlock would

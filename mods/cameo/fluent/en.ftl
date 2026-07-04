@@ -308,6 +308,9 @@ checkbox-screen-shake = Screen Shake Effects
 checkbox-ground-fire-smoke = Ground Fire Smoke Effects
 checkbox-decoupled-rendering = Decoupled Render Thread (Experimental)
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
+checkbox-flash-transients-container =
+    .label = Flash Priority Notifications
+    .tooltip = Flash important game-event notifications (base/unit under attack, superweapons) to draw attention
 
 ## settings-gameplay.yaml
 label-game-play-section-header = Gameplay
