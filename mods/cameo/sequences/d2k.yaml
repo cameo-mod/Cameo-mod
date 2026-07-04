@@ -3979,6 +3979,40 @@ d2k_shroud:
 		Offset: 0,0
 		Length: 1
 
+rockcraters:
+	Defaults:
+	rockcrater1:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 114
+		Length: 16
+		Offset: -16,-16
+	rockcrater2:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 130
+		Length: 16
+		Offset: -16,-16
+
+sandcraters:
+	Defaults:
+	sandcrater1:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 146
+		Length: 16
+		Offset: -16,-16
+	sandcrater2:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 162
+		Length: 16
+		Offset: -16,-16
+
 null:
 	Defaults:
 	idle:
