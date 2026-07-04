@@ -29,9 +29,11 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 
 		bool IUtilityCommand.ValidateArguments(string[] args) => args.Length >= 2;
 
-		[Desc("FACTION[,FACTION...] [--floor a,b,c]",
+		[Desc("FACTION[,FACTION...] [--closure] [--exclude-shared] [--floor a,b,c]",
 			"Preview theme-file gating for the given factions: bundles loaded vs skipped and any un-covered " +
-			"image (leak). Cross-reference skipped bundles with --art-memory-report for MiB saved.")]
+			"image (leak). Defaults to the starting-units basis (the algorithm the in-game gate uses); pass " +
+			"--closure to preview the prerequisite-closure basis instead. Accepts Random-style factions (expanded " +
+			"to their member union). Cross-reference skipped bundles with --art-memory-report for MiB saved.")]
 		void IUtilityCommand.Run(Utility utility, string[] args)
 		{
 			var modData = Game.ModData = utility.ModData;
@@ -41,12 +43,16 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 
 			var floor = DefaultFloor.ToHashSet(StringComparer.OrdinalIgnoreCase);
 			var excludeShared = args.Contains("--exclude-shared");
-			var startingUnits = args.Contains("--startingunits");
+
+			// Default to the starting-units basis (what the in-game gate uses). --closure opts into the older
+			// prerequisite-closure basis; the deprecated --startingunits is accepted as a no-op for back-compat.
+			var closure = args.Contains("--closure");
 			for (var i = 2; i < args.Length - 1; i++)
 				if (args[i] == "--floor")
 					floor = args[i + 1].Split(',').Select(s => s.Trim()).ToHashSet(StringComparer.OrdinalIgnoreCase);
 
-			var allFactions = FactionArtClosure.Factions(rules).ToHashSet(StringComparer.OrdinalIgnoreCase);
+			// Validate against ALL faction names including Random-style containers (so "Random" is accepted).
+			var allFactions = FactionArtClosure.AllFactionNames(rules).ToHashSet(StringComparer.OrdinalIgnoreCase);
 			var unknown = requested.Where(f => !allFactions.Contains(f)).ToArray();
 			if (unknown.Length > 0)
 			{
@@ -64,15 +70,17 @@ namespace OpenRA.Mods.Cameo.UtilityCommands
 					allBundles.Add(bundle);
 			}
 
-			var result = startingUnits
-				? FactionArtClosure.ResolveByStartingUnits(modData, rules, requested, floor)
-				: FactionArtClosure.Resolve(modData, rules, requested, floor, excludeUniversal: excludeShared);
+			var result = closure
+				? FactionArtClosure.Resolve(modData, rules, requested, floor, excludeUniversal: excludeShared)
+				: FactionArtClosure.ResolveByStartingUnits(modData, rules, requested, floor);
 
-			var basis = startingUnits ? "starting-units" : (excludeShared ? "closure/exclude-shared" : "closure");
+			var basis = closure ? (excludeShared ? "closure/exclude-shared" : "closure") : "starting-units";
 			Console.WriteLine($"Factions: {string.Join(", ", requested)}  (basis: {basis})");
-			foreach (var faction in requested)
-				if (result.RosterByFaction.TryGetValue(faction, out var roster))
-					Console.WriteLine($"  {faction}: {roster.Count} ownable actors");
+
+			// Report the resolver's actual per-faction rosters (keys are the concrete factions, with Random-style
+			// slots already expanded to their members) rather than the raw request, so "Random" shows its members.
+			foreach (var kv in result.RosterByFaction.OrderBy(k => k.Key, StringComparer.OrdinalIgnoreCase))
+				Console.WriteLine($"  {kv.Key}: {kv.Value.Count} ownable actors");
 			Console.WriteLine($"Images referenced: {result.Images.Count}");
 			Console.WriteLine();
 

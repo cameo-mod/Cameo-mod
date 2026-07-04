@@ -79,6 +79,55 @@ namespace OpenRA.Mods.Cameo.Graphics
 				.ToArray();
 		}
 
+		// Expand any requested "Random"-style faction (one with RandomFactionMembers, e.g. Random / RandomTournament
+		// / Randomcnc) to the union of its concrete members, and normalise every name to its canonical
+		// FactionInfo.InternalName casing. A Random lobby slot is not resolved to a concrete faction until the World
+		// is created (after the sprite load), so the gate must preload every member's art. Members can themselves be
+		// random containers, so this resolves transitively. Names with no matching FactionInfo are passed through
+		// verbatim so the caller's validation can still report them.
+		public static string[] ExpandRandomFactions(Ruleset rules, IEnumerable<string> requested)
+		{
+			var byName = new Dictionary<string, FactionInfo>(StringComparer.OrdinalIgnoreCase);
+			foreach (var f in rules.Actors[SystemActors.World].TraitInfos<FactionInfo>())
+				if (!string.IsNullOrEmpty(f.InternalName))
+					byName.TryAdd(f.InternalName, f);
+
+			var result = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			var queue = new Queue<string>(requested);
+			var seen = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+			var guard = 0;
+			while (queue.Count > 0 && guard++ < 1000)
+			{
+				var name = queue.Dequeue();
+				if (!byName.TryGetValue(name, out var fi))
+				{
+					result.Add(name);
+					continue;
+				}
+
+				if (fi.RandomFactionMembers.Count > 0)
+				{
+					foreach (var m in fi.RandomFactionMembers)
+						if (seen.Add(m))
+							queue.Enqueue(m);
+				}
+				else
+					result.Add(fi.InternalName);
+			}
+
+			return result.ToArray();
+		}
+
+		// All faction names including Random-style containers (for input validation, which must accept "Random").
+		public static string[] AllFactionNames(Ruleset rules)
+		{
+			return rules.Actors[SystemActors.World].TraitInfos<FactionInfo>()
+				.Where(f => !string.IsNullOrEmpty(f.InternalName))
+				.Select(f => f.InternalName)
+				.Distinct(StringComparer.OrdinalIgnoreCase)
+				.ToArray();
+		}
+
 		// Full potential roster (actor keys) each faction can build/own, via the engine prerequisite graph
 		// seeded from StartingUnits. This is the "could ever build this match" set, not the currently-unlocked
 		// set, because art must be preloaded (it can't hitch-load at runtime).
@@ -388,6 +437,60 @@ namespace OpenRA.Mods.Cameo.Graphics
 			}
 		}
 
+		// Actor keys an actor references via [ActorReference] trait fields — husks it leaves (LeavesHusk), actors it
+		// spawns when sold (SpawnActorsOnSell), capture-transform targets (TransformOnCapture), support-power drop
+		// payloads, etc. These predictably appear in-play but are NOT reachable through the build-prerequisite graph
+		// from the referencing actor, so their art must be folded in explicitly or the spawned actor renders blank.
+		public static IEnumerable<string> GetReferencedActors(ActorInfo actor)
+		{
+			TraitInfo[] traitInfos;
+			try { traitInfos = actor.TraitInfos<TraitInfo>().ToArray(); }
+			catch { yield break; }
+
+			foreach (var traitInfo in traitInfos)
+			{
+				foreach (var field in traitInfo.GetType().GetFields(BindingFlags.Public | BindingFlags.Instance))
+				{
+					if (field.GetCustomAttribute<ActorReferenceAttribute>(true) == null)
+						continue;
+
+					var value = field.GetValue(traitInfo);
+					if (value is string s)
+					{
+						if (!string.IsNullOrEmpty(s))
+							yield return s;
+					}
+					else if (value is IEnumerable<string> list)
+					{
+						foreach (var a in list)
+							if (!string.IsNullOrEmpty(a))
+								yield return a;
+					}
+				}
+			}
+		}
+
+		// Grow an actor set by the actors it references (transitively, bounded) so husks/spawned/capture-transform
+		// targets have their art loaded too. Only actors that actually exist in the ruleset are added.
+		public static void ExpandReferencedActors(HashSet<string> actors, IReadOnlyDictionary<string, ActorInfo> byKey)
+		{
+			var changed = true;
+			var guard = 0;
+			while (changed && guard++ < 100)
+			{
+				changed = false;
+				foreach (var key in actors.ToArray())
+				{
+					if (!byKey.TryGetValue(key, out var ai))
+						continue;
+
+					foreach (var reff in GetReferencedActors(ai))
+						if (byKey.ContainsKey(reff) && actors.Add(reff))
+							changed = true;
+				}
+			}
+		}
+
 		// Resolve the bundles/images to load for a set of factions, given the always-loaded floor bundles.
 		// extraActors lets callers fold in preplaced/map actors (shellmap, campaign) whose factions aren't in
 		// the lobby set.
@@ -397,6 +500,14 @@ namespace OpenRA.Mods.Cameo.Graphics
 			var imageBundles = BuildImageBundles(modData);
 			var rosters = ComputeRosters(rules);
 			var allFactions = Factions(rules);
+
+			// Expand Random-style slots to their member union and normalise casing (a Random slot's concrete pick
+			// isn't known until the World is built, after sprite load, so preload every member).
+			requestedFactions = ExpandRandomFactions(rules, requestedFactions);
+
+			var byKey = new Dictionary<string, ActorInfo>(StringComparer.OrdinalIgnoreCase);
+			foreach (var ai in rules.Actors)
+				byKey[ai.Key] = ai.Value;
 
 			var weaponsByName = new Dictionary<string, WeaponInfo>(StringComparer.OrdinalIgnoreCase);
 			foreach (var w in rules.Weapons)
@@ -430,6 +541,9 @@ namespace OpenRA.Mods.Cameo.Graphics
 			if (extraActors != null)
 				actorKeys.UnionWith(extraActors);
 
+			// Fold in husks / sold-spawned / capture-transform target actors (not build-reachable from the roster).
+			ExpandReferencedActors(actorKeys, byKey);
+
 			foreach (var key in actorKeys)
 			{
 				if (!rules.Actors.TryGetValue(key, out var actor))
@@ -454,6 +568,11 @@ namespace OpenRA.Mods.Cameo.Graphics
 			var world = rules.Actors[SystemActors.World];
 			var startUnits = world.TraitInfos<StartingUnitsInfo>().ToList();
 
+			// Expand Random-style slots to their member union and normalise casing. Normalisation also fixes the
+			// case-sensitive StartingUnits.Factions match below (that set uses an ordinal comparer, so a mis-cased
+			// name like "GDI" would silently match no StartingUnits and seed nothing).
+			var factions = ExpandRandomFactions(rules, requestedFactions);
+
 			var byKey = new Dictionary<string, ActorInfo>(StringComparer.OrdinalIgnoreCase);
 			foreach (var ai in rules.Actors)
 				byKey[ai.Key] = ai.Value;
@@ -464,7 +583,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 
 			var result = new Result();
 
-			foreach (var faction in requestedFactions)
+			foreach (var faction in factions)
 			{
 				var seed = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 				void SeedAdd(string a)
@@ -475,7 +594,7 @@ namespace OpenRA.Mods.Cameo.Graphics
 
 				foreach (var su in startUnits)
 				{
-					if (su.Factions.Count > 0 && !su.Factions.Contains(faction))
+					if (su.Factions.Count > 0 && !su.Factions.Any(x => string.Equals(x, faction, StringComparison.OrdinalIgnoreCase)))
 						continue;
 
 					SeedAdd(su.BaseActor);
@@ -503,6 +622,9 @@ namespace OpenRA.Mods.Cameo.Graphics
 					}
 				}
 
+				// Fold in husks / sold-spawned / capture-transform target actors (not build-reachable from the seed).
+				ExpandReferencedActors(seed, byKey);
+
 				result.RosterByFaction[faction] = seed;
 				foreach (var key in seed)
 					if (rules.Actors.TryGetValue(key, out var actor))
@@ -510,9 +632,13 @@ namespace OpenRA.Mods.Cameo.Graphics
 			}
 
 			if (extraActors != null)
-				foreach (var key in extraActors)
+			{
+				var extra = new HashSet<string>(extraActors, StringComparer.OrdinalIgnoreCase);
+				ExpandReferencedActors(extra, byKey);
+				foreach (var key in extra)
 					if (rules.Actors.TryGetValue(key, out var actor))
-						CollectActorImages(actor, requestedFactions.ToArray(), weaponsByName, img => result.Images.Add(img));
+						CollectActorImages(actor, factions, weaponsByName, img => result.Images.Add(img));
+			}
 
 			MapImagesToBundles(imageBundles, floor, result);
 			return result;
