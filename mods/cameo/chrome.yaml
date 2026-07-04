@@ -1155,10 +1155,11 @@ mainmenu-border:
 	PanelRegion: 650, 389, 39, 39, 38, 38, 39, 39
 	PanelSides: Edges
 
-# Cyberintel main-menu reskin (placeholder art in uibits/cyberintel-ui.png).
-# Isolated regions referenced only from chrome/mainmenu.yaml so the shared grey
-# chrome (lobby, settings, in-game) is untouched. Swap the png for final art;
-# the 9-slice metrics below are sized to the 256x256 placeholder sheet layout.
+# Cyberintel main-menu reskin (placeholder art in uibits/cyberintel-ui.png). These regions are
+# referenced only from chrome/mainmenu.yaml (the menu-specific neon panels/buttons). The rest of the
+# shared UI is re-themed separately by recolouring dialog.png itself; the in-game sidebar and HUD
+# glyphs live in other sheets and stay untouched. Swap the png for final art; the 9-slice metrics
+# below are sized to the 256x256 placeholder sheet layout.
 ^Cyberintel:
 	Image: cyberintel-ui.png
 
