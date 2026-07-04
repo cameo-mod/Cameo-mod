@@ -7312,6 +7312,7 @@ CPQDEBUGDUMMY:
 	Transforms:
 		PauseOnCondition: disabled || terrordroned
 		TransformTextNotification: New base hub has been deployed.
+		FlashTransformTextNotification: true
 	NewConstructionOptionsOnDeploy:
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability

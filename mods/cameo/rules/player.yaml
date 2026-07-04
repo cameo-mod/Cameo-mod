@@ -118,6 +118,7 @@ Player:
 		ValidTargets: Structure
 		Notification: BaseAttack
 		TextNotification: Structure under attack.
+		FlashTextNotification: true
 		AllyNotification: OurAllyIsUnderAttack
 		AllyTextNotification: Ally under attack.
 	HarvesterAttackNotifier:
@@ -126,6 +127,7 @@ Player:
 	CriticalUnitAttackNotifier:
 		NotifyInterval: 3000
 		TextNotification: Our MCV unit is under attack.
+		FlashTextNotification: true
 	EnemyWatcher:
 	Shroud:
 		FogCheckboxDisplayOrder: 3
