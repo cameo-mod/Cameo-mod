@@ -3818,6 +3818,41 @@ ra2scorches:
 				Filename: ra2_burnt12.tem
 		Length: 4
 
+# from d2k.yaml — SmudgeLayer art resolved at World-actor construction (before the lazy gate), so it lives in the floor
+rockcraters:
+	Defaults:
+	rockcrater1:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 114
+		Length: 16
+		Offset: -16,-16
+	rockcrater2:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 130
+		Length: 16
+		Offset: -16,-16
+
+sandcraters:
+	Defaults:
+	sandcrater1:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 146
+		Length: 16
+		Offset: -16,-16
+	sandcrater2:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 162
+		Length: 16
+		Offset: -16,-16
+
 smokland:
 	Defaults:
 		Filename: smokland.shp

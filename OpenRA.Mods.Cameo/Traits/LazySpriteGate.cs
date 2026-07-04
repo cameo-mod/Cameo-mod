@@ -47,12 +47,17 @@ namespace OpenRA.Mods.Cameo.Traits
 		{
 			var modData = Game.ModData;
 			var rules = world.Map.Rules;
-			var floor = info.Floor.ToHashSet(StringComparer.OrdinalIgnoreCase);
+
+			// The floor bundles: prefer the manifest's EagerSpriteBundles (the same list the engine loads eagerly
+			// before this gate runs) so the two stay in sync; fall back to the trait's own list if unset.
+			var floorList = modData.Manifest.EagerSpriteBundles.Length > 0 ? modData.Manifest.EagerSpriteBundles.AsEnumerable() : info.Floor;
+			var floor = floorList.ToHashSet(StringComparer.OrdinalIgnoreCase);
 
 			// Resolved in-play factions. Random is already resolved to a concrete faction on each player by now, so
 			// this is the exact set of factions the match will field (no need to preload every Random member).
+			// Skip spectators (the shared "Everyone" observer carries a resolved Random faction that fields nothing).
 			var factions = world.Players
-				.Where(p => p.Faction != null && !string.IsNullOrEmpty(p.Faction.InternalName))
+				.Where(p => !p.Spectating && p.Faction != null && !string.IsNullOrEmpty(p.Faction.InternalName))
 				.Select(p => p.Faction.InternalName)
 				.Distinct(StringComparer.OrdinalIgnoreCase)
 				.ToArray();

@@ -527,6 +527,11 @@ TerrainFormat: DefaultTerrain
 # only the art the in-play factions and preplaced map actors need. Requires an engine with ISpriteLoadGate.
 DeferSpriteLoading: True
 
+# The always-loaded floor: world-level shared art (shroud, smudges, decorations, effects, civilian, campaign)
+# that World-actor traits resolve during World construction, before the gate runs. Loaded eagerly at map
+# prepare. Must stay in sync with LazySpriteGate's floor (the trait reads this list).
+EagerSpriteBundles: misc, shared_effects, decorations, funpark, civilian, campaign
+
 SpriteSequenceFormat: CameoSpriteSequence
 	IndexedSheetSize: 2048
 
