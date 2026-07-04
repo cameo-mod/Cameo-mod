@@ -11,6 +11,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -459,6 +460,15 @@ namespace OpenRA.Mods.Cameo.Graphics
 					{
 						if (!string.IsNullOrEmpty(s))
 							yield return s;
+					}
+					else if (value is ImmutableArray<string> ia)
+					{
+						// A `default` ImmutableArray throws on enumeration (it is not an empty sequence), so guard
+						// IsDefault before iterating — some [ActorReference] fields default to default(ImmutableArray).
+						if (!ia.IsDefault)
+							foreach (var a in ia)
+								if (!string.IsNullOrEmpty(a))
+									yield return a;
 					}
 					else if (value is IEnumerable<string> list)
 					{
