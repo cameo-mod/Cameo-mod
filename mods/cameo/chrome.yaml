@@ -901,8 +901,13 @@ progressbar-bg:
 progressbar-thumb:
 	Inherits: button
 
+# Drawn by HealthBarWidget only when no actor is selected (the empty stats panel);
+# points at a fully transparent atlas block so it renders nothing. Must NOT reuse the
+# themed button sprite, whose neon outline would show as a stray speck on the panel.
 progressbar-thumb-empty:
-	Inherits: button
+	Inherits: ^Dialog
+	PanelRegion: 504, 0, 0, 0, 8, 8, 0, 0
+	PanelSides: Center
 
 progressbar-thumb-green:
 	Image: healthbars.png
