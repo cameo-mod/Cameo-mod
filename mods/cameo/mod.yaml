@@ -101,6 +101,10 @@ MapFolders:
 # selector order (the lobby groups factions by Side and lists them in load
 # order). Unmigrated themes are loaded via include-only wrapper packs so every
 # faction is ordered from this one place; see ContentPacks/<Theme>/content.yaml.
+# Core: cross-theme global factions (Random, RTF). Included first so they sort
+# to the top of the Random group, above the per-theme Random <X> entries.
+Include: ContentPacks/Core/content.yaml
+
 Include: ContentPacks/TiberianDawn/Shared/content.yaml
 Include: ContentPacks/TiberianDawn/GDI/content.yaml
 Include: ContentPacks/TiberianDawn/Nod/content.yaml
