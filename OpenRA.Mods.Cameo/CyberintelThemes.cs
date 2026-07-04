@@ -21,6 +21,10 @@ namespace OpenRA.Mods.Cameo
 	{
 		public const string Random = "random";
 
+		// The stock-OpenRA look: classic-dialog.png is the original grey chrome, and the main menu
+		// reverts its neon panels/buttons to the stock dialog/button regions (see CameoMainMenuLogic).
+		public const string Classic = "classic";
+
 		// The concrete themes, and also the pool "random" draws from.
 		public static readonly string[] Colours =
 			["cyan", "green", "amber", "orange", "blue", "white", "red", "purple", "magenta", "classic"];

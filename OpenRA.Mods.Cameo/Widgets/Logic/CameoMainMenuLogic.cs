@@ -9,7 +9,10 @@
  */
 #endregion
 
+using OpenRA.Graphics;
+using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common.Widgets;
+using OpenRA.Primitives;
 using OpenRA.Widgets;
 
 namespace OpenRA.Mods.Cameo.Widgets.Logic
@@ -29,6 +32,34 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				{
 					{ "world", world }
 				});
+
+			// The "classic" UI theme reverts the menu to the stock OpenRA look: swap the cyberintel
+			// neon panels/buttons back to the stock dialog/button chrome and drop the themed text
+			// colours. The other themes keep the cyberintel menu chrome (the theme only recolours it).
+			if (Game.ModData.GetSettings<CameoSettings>().UITheme == CyberintelThemes.Classic)
+				RevertToClassicChrome(widget);
+		}
+
+		static void RevertToClassicChrome(Widget widget)
+		{
+			foreach (var child in widget.Children)
+			{
+				switch (child)
+				{
+					case ButtonWidget b when b.Background == "cyberintel-button":
+						b.Background = "button";
+						b.TextColor = ChromeMetrics.Get<Color>("ButtonTextColor");
+						break;
+					case BackgroundWidget bg when bg.Background == "cyberintel-panel":
+						bg.Background = "dialog";
+						break;
+					case LabelWidget l:
+						l.TextColor = ChromeMetrics.Get<Color>("TextColor");
+						break;
+				}
+
+				RevertToClassicChrome(child);
+			}
 		}
 	}
 }
