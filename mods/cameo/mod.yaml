@@ -523,6 +523,10 @@ SpriteFormats: ShpTD, TmpTD, ShpTS, TmpRA, PngSheet, R8
 
 TerrainFormat: DefaultTerrain
 
+# Lazy sprite loading: skip the eager full sprite load and let the World actor's LazySpriteGate trait load
+# only the art the in-play factions and preplaced map actors need. Requires an engine with ISpriteLoadGate.
+DeferSpriteLoading: True
+
 SpriteSequenceFormat: CameoSpriteSequence
 	IndexedSheetSize: 2048
 

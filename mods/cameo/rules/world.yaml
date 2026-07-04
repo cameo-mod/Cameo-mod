@@ -907,6 +907,7 @@
 World:
 	Inherits: ^BaseWorld
 	Inherits@MapGenerators: ^MapGenerators
+	LazySpriteGate:
 	CryoFogLimiter:
 		Max: 24
 	StatisticsRecorder:
