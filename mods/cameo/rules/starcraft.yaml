@@ -6425,7 +6425,7 @@ SCADEPT:
 		BuildPaletteOrder: 25
 		Prerequisites: ~scgateway
 		Queue: Infantry, RAInfantry
-		Description: actor-sczealot.description
+		Description: actor-scadept.description
 	Mobile:
 		Speed: 70
 	Health:
@@ -6443,35 +6443,22 @@ SCADEPT:
 		FacingTolerance: 0
 	GrantTimedConditionOnDeploy:
 		StartsFullyCharged: true
-		DeployedTicks: 100
+		DeployedTicks: 175
 		CooldownTicks: 400
 		DeployedCondition: phase
-		DeployingCondition: deploying
 		ShowSelectionBar: true
 		PauseOnCondition: disabled
 		ExclusiveDeploy: true
 		DeployType: Detonate
-	RangeMultiplier@Phase:
-		Modifier: 0
-		RequiresCondition: phase
-	DamageMultiplier@Phase:
-		Modifier: 0
-		RequiresCondition: phase
-	FirepowerMultiplier@Phase:
-		Modifier: 0
-		RequiresCondition: phase
-	DamageMultiplier@Phase:
-		Modifier: 0
-		RequiresCondition: phase
-	SpeedMultiplier@Phase:
-		Modifier: 200
-		RequiresCondition: phase
-	WithColoredOverlay@Phase:
-		Color: 4488FF44
-		RequiresCondition: phase
-	GrantCondition@untargetable:
-		Condition: untargetable
-		RequiresCondition: phase
+		Voice: Action
+	ShadeMaster:
+		Actors: scadept.shade
+		RespawnTicks: 175
+		TeleportType: SCShade
+		LoadedCondition: shade-ready
+		PauseOnCondition: !phase
+	Exit:
+		SpawnOffset: 768, 768, 0
 	WithInfantryBody:
 	Voiced:
 		VoiceSet: SCZealotVoice
@@ -6479,6 +6466,48 @@ SCADEPT:
 		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, upglaves
 	RenderSprites:
 		PlayerPalette: player_rgba
+
+scadept.shade:
+	Inherits: SCADEPT
+	-UpdatesPlayerStatistics:
+	-MapEditorData:
+	-ActorLostNotification:
+	Tooltip:
+		Name: Adept Shade
+	Buildable:
+		Description: actor-scadept.shade.description
+		-Queue:
+	-GrantTimedConditionOnDeploy:
+	-ShadeMaster:
+	-Passenger:
+	-SharedPassenger:
+	-Garrisoner:
+	-Armament:
+	-Armament@GARRISONED:
+	-DeathSounds@NORMAL:
+	DamageMultiplier@Phase:
+		Modifier: 0
+	SpeedMultiplier@Phase:
+		Modifier: 200
+	WithColoredOverlay@Phase:
+		Color: 4488FF44
+	GrantCondition@untargetable:
+		Condition: untargetable
+		-RequiresCondition:
+	ShadeSlave:
+		DeathType: ShadeTeleport
+	KillsSelf@Phase:
+		DamageTypes: ShadeTeleport
+		Delay: 175
+	GrantConditionOnDeploy:
+		DeployedCondition: cancel
+		ExclusiveDeploy: true
+		DeployType: Detonate
+	KillsSelf@Cancel:
+		DamageTypes: DefaultDeath
+		RequiresCondition: cancel
+	RenderSprites:
+		Image: scadept
 
 SCDRAGOON:
 	Inherits: ^LargeProtoss
