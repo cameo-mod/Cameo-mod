@@ -98,6 +98,10 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 		[Desc("Lobby option value that enables weather searchlights.")]
 		public readonly string WeatherValue = "weather";
 
+		[Desc("Require the weather lobby option to be set before searchlights render. Set false to always " +
+			"enable them regardless of the lobby option, e.g. on shellmaps / menu backgrounds that have no lobby.")]
+		public readonly bool RequireWeatherOption = true;
+
 		[Desc("Disable the searchlight while the owning player is in Low or Critical power.")]
 		public readonly bool DisableOnLowPower = true;
 
@@ -174,7 +178,7 @@ namespace OpenRA.Mods.Cameo.Traits.Render
 			ScheduleNextScan(self);
 
 			var selected = self.World.LobbyInfo.GlobalSettings.OptionOrDefault(Info.WeatherOption, "none");
-			weatherEnabled = selected == Info.WeatherValue;
+			weatherEnabled = !Info.RequireWeatherOption || selected == Info.WeatherValue;
 		}
 
 		void ITick.Tick(Actor self)
