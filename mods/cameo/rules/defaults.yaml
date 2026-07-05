@@ -1976,6 +1976,7 @@
 	Inherits@CryoFreezable: ^CryoFreezable
 	Inherits@EnemyInProximity: ^EnemyInProximity
 	Inherits@HealingField: ^AffectedByHealingField
+	Inherits@recall: ^Recallable
 	Huntable:
 	OwnerLostAction:
 		Action: Kill
@@ -8700,6 +8701,15 @@ CPQDEBUGDUMMY:
 
 ^Chronoshiftable:
 	RA2Chronoshiftable:
+		Image: ra2cmin
+		WarpInSequence: warpout
+		WarpOutSequence: warpout
+		RequiresCondition: !untargetable
+		Palette: ra2effect
+
+^Recallable:
+	RA2Chronoshiftable@Recall:
+		TeleportType: SCRecall
 		Image: ra2cmin
 		WarpInSequence: warpout
 		WarpOutSequence: warpout

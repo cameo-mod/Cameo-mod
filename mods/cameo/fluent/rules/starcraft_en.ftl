@@ -508,6 +508,7 @@ actor-scarbiter =
    .description = Protoss support vessel.
         Cloaks nearby friendly units
         Can cast a stasis field to freeze units
+        Can recall units to its position
 
 actor-scpmcv =
    .description = Transforms into a Nexus. Builds structures and provides radar.
@@ -847,3 +848,7 @@ actor-upflyerarmor =
 
 actor-upflyerarmor2 =
    .description = Increases Armor of all Flying Zerg units by 20%.
+
+power-recall =
+   .name = Recall
+   .description = Teleports units to the recaller.

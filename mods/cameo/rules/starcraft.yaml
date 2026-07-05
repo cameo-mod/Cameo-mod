@@ -7910,6 +7910,41 @@ SCARBITER:
 		Condition: tscloak
 	WithRangeCircle:
 		Range: 5000
+	RecallPower:
+		StartFullyCharged: true
+		OrderName: Recall
+		Prerequisites:
+			1: !botplayer
+		PauseOnCondition: disabled
+		IconImage: ra2gacsph
+		Icons:
+			1: icon2
+		ChargeInterval: 4500
+		Names:
+			1: power-recall.name
+		Descriptions:
+			1: power-recall.description
+		Dimensions:
+			1: 5,5
+		Footprints:
+			1: xxxxx xxxxx xxxxx xxxxx xxxxx
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		#BeginChargeSpeechNotification: ChronosphereCharging
+		#EndChargeSpeechNotification: ChronosphereReady
+		#EndChargeSound: schropen.wav
+		Durations:
+			1: -1
+		DisplayRadarPing: True
+		SelectionCursor: ability
+		TargetCursor: ability
+		LaunchSound: schrmov.wav
+		IncomingSound: schrmov.wav
+		TeleportType: SCRecall
+		ImpactWeapon: ChronoshiftImpact
+		TeleportWeapon: ChronoshiftImpact
+		ValidRelationships: Ally
+		#DisplayTimerRelationships: Ally, Neutral, Enemy
 	ActorStatValues:
 		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
 	RenderSprites:
