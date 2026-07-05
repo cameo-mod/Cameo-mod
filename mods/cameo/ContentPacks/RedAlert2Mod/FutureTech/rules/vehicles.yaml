@@ -43,7 +43,7 @@ mech_machinegun.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egweap2.futu, egtech.futu, ~up_gatling_strider.futu
+		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-future_mech_machinegun.description
 	Mobile:
@@ -100,7 +100,7 @@ mech_plasma.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egweap2.futu, egshock.futu, ~up_plasma_strider.futu
+		Prerequisites: ~egweap2.futu, egshock.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-future_mech_plasma.description
 	Mobile:
@@ -674,7 +674,7 @@ harv.futu:
 		Speed: 100
 		TurnSpeed: 20
 	Buildable:
-		Prerequisites: ~egrefn.futu
+		Prerequisites: ~egrefn.futu, ~!up_prospector.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_harv.description
 	WithHarvestAnimation:
@@ -726,7 +726,7 @@ harv2.futu:
 		BobDistance: -64
 		InitialHeight: 384
 	Buildable:
-		Prerequisites: ~egweap2.futu, egtech.futu
+		Prerequisites: ~egweap2.futu, egtech.futu, ~up_prospector.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor-futu_harv2.description
 	WithHarvestAnimation:

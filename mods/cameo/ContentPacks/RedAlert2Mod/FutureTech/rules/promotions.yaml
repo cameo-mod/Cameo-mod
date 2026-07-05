@@ -108,30 +108,30 @@ up_futuretank.futu:
 
 ### Strider tree
 
-up_gatling_strider.futu:
+up_prospector.futu:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Gun Strider
+		Name: Unlock Prospector MK2
 	Buildable:
 		BuildPaletteOrder: 102
 		Queue: Promotions
-		Description: Enables construction of the Gun Strider.
-		Prerequisites: ~egcnst.futu, !up_gatling_strider.futu, rank1
+		Description: Enables construction of the Prospector MK2.
+		Prerequisites: ~egcnst.futu, !up_prospector.futu, rank1
 	RenderSprites:
-		Image: mech_machinegun.futu
+		Image: harv2.futu
 	ProvidesPrerequisite:
 
-up_plasma_strider.futu:
+up_blackwidow.futu:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Plasma Strider
+		Name: Unlock Black Widow
 	Buildable:
 		BuildPaletteOrder: 105
 		Queue: Promotions
-		Description: Enables construction of the Plasma Strider.
-		Prerequisites: ~egcnst.futu, up_gatling_strider.futu, !up_plasma_strider.futu, rank1
+		Description: Enables construction of the Black Widow.
+		Prerequisites: ~egcnst.futu, up_prospector.futu, !up_blackwidow.futu, rank1
 	RenderSprites:
-		Image: mech_plasma.futu
+		Image: blackwidow.futu
 	ProvidesPrerequisite:
 
 up_cryocopter.futu:
@@ -142,7 +142,7 @@ up_cryocopter.futu:
 		BuildPaletteOrder: 108
 		Queue: Promotions
 		Description: Enables construction of the Cryocopter.
-		Prerequisites: ~egcnst.futu, up_plasma_strider.futu, !up_cryocopter.futu, rank1
+		Prerequisites: ~egcnst.futu, up_blackwidow.futu, !up_cryocopter.futu, rank1
 	RenderSprites:
 		Image: cryo.futu
 	ProvidesPrerequisite:

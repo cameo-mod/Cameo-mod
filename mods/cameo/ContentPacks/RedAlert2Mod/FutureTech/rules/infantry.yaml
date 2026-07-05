@@ -330,7 +330,7 @@ blackwidow.futu:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~egpile.futu, egtech.futu
+		Prerequisites: ~egpile.futu, egtech.futu, ~up_blackwidow.futu
 		Description: actor-futu_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
