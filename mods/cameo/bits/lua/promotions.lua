@@ -19,7 +19,7 @@ PromotionNotificationText = {
 
 Seconds = 0
 
-PointsPerRank = { 0, 1, 1, 1, 1, 1, 1, 2}
+PointsPerRank = { 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 
 PointActorExists = { }
 Points = { }
@@ -27,8 +27,8 @@ HasPointsActors = { }
 Levels = { }
 TextColors = { }
 
-Ranks = { "Level 1", "Level 2", "Level 3", "Level 4", "Level 5" , "Level 6", "Level 7", "Level 8" }
-RankXPs = { 0, 5000, 15000, 30000, 50000, 75000, 115000, 140000 }
+Ranks = { "Level 0", "Level 1", "Level 2", "Level 3", "Level 4" , "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Level 10" }
+RankXPs = { 0, 4000, 12000, 24000, 40000, 60000, 84000, 112000, 144000, 180000, 220000 }
 
 NotifyPromotion = function(player)
 	Media.DisplayMessageToPlayer(player, Utils.Random(PromotionNotificationText), "General Staff", player.Color)
@@ -47,7 +47,7 @@ TickPromotions = function()
 	for _,player in pairs(players) do
 		if player.IsLocalPlayer then
 			localPlayerIsNull = false;
-			if Levels[player.InternalName] < 7 then
+			if Levels[player.InternalName] < 10 then
 				PromotionsText = "Current Rank: " .. Ranks[Levels[player.InternalName] + 1] .. "\nPromotion Points: " .. Points[player.InternalName] .. "\nProgress to Next Rank: " .. player.Experience - RankXPs[Levels[player.InternalName] + 1] .. "/" .. RankXPs[Levels[player.InternalName] + 2] - RankXPs[Levels[player.InternalName] + 1] .. "\n\n"
 			else
 				PromotionsText = "Current Rank: " .. Ranks[Levels[player.InternalName] + 1] .. "\nPromotion Points: " .. Points[player.InternalName] .. "\n\n"
@@ -114,6 +114,27 @@ TickPromotions = function()
 		if player.Experience >= RankXPs[8] and not (Levels[player.InternalName] > 6) then
 			Levels[player.InternalName] = Levels[player.InternalName] + 1
 			Points[player.InternalName] = Points[player.InternalName] + PointsPerRank[8]
+
+			NotifyPromotion(player)
+		end
+
+		if player.Experience >= RankXPs[9] and not (Levels[player.InternalName] > 7) then
+			Levels[player.InternalName] = Levels[player.InternalName] + 1
+			Points[player.InternalName] = Points[player.InternalName] + PointsPerRank[9]
+
+			NotifyPromotion(player)
+		end
+
+		if player.Experience >= RankXPs[10] and not (Levels[player.InternalName] > 8) then
+			Levels[player.InternalName] = Levels[player.InternalName] + 1
+			Points[player.InternalName] = Points[player.InternalName] + PointsPerRank[10]
+
+			NotifyPromotion(player)
+		end
+
+		if player.Experience >= RankXPs[11] and not (Levels[player.InternalName] > 9) then
+			Levels[player.InternalName] = Levels[player.InternalName] + 1
+			Points[player.InternalName] = Points[player.InternalName] + PointsPerRank[11]
 
 			NotifyPromotion(player)
 		end

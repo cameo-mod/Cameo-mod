@@ -2,23 +2,26 @@ Player:
 	PlayerPromotions:
 		Conditions:
 			0:
-			5000:
-			15000:
-			30000:
-			50000:
-			75000:
-			115000:
-			140000:
+			4000:
+			12000:
+			24000:
+			40000:
+			60000:
+			84000:
+			112000:
+			144000:
+			180000:
+			220000:
 		HasPointsCondition: haspoints
 		PointsPerRank:
-			default: 0, 1, 1, 1, 1, 1, 1, 2
-			classic: 1, 1, 1, 1, 3, 0, 0, 0
-			double: 0, 2, 2, 2, 2, 2, 2, 4
-			allatstart: 12, 0, 0, 0, 0, 0, 0, 0
-			none: 0, 0, 0, 0, 0, 0, 0, 0
+			default: 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1
+			classic: 1, 1, 1, 1, 3, 0, 0, 0, 0, 0, 0
+			double: 0, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2
+			allatstart: 12, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+			none: 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 		PointsPerRankDefault: default
 		Ranks:
-			default: promotions.rank1, promotions.rank2, promotions.rank3, promotions.rank4, promotions.rank5, promotions.rank6, promotions.rank7, promotions.rank8
+			default: promotions.rank1, promotions.rank2, promotions.rank3, promotions.rank4, promotions.rank5, promotions.rank6, promotions.rank7, promotions.rank8, promotions.rank9, promotions.rank10, promotions.rank11
 		RanksDefault: default
 		ID: promotions
 		Label: promotions.lobby-label
