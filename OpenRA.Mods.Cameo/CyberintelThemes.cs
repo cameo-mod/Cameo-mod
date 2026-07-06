@@ -26,13 +26,34 @@ namespace OpenRA.Mods.Cameo
 		// reverts its neon panels/buttons to the stock dialog/button regions (see CameoMainMenuLogic).
 		public const string Classic = "classic";
 
+		// Imported native skin: the Dune 2000 UI sheet, re-baked into Cameo's dialog.png geometry (its
+		// region layout is common-derived, so structurally compatible). Like "classic" it uses the
+		// native stock-chrome menu drawn from its own dialog.png.
+		public const string Dune = "d2k";
+
 		// The concrete themes, and also the pool "random" draws from.
 		public static readonly string[] Colours =
-			["cyan", "green", "amber", "orange", "blue", "white", "red", "purple", "magenta", "classic"];
+			["cyan", "green", "amber", "orange", "blue", "white", "red", "purple", "magenta", "d2k", "classic"];
 
 		// Dropdown options: the concrete themes plus the special "random" entry.
 		public static readonly string[] Options =
-			["cyan", "green", "amber", "orange", "blue", "white", "red", "purple", "magenta", "classic", Random];
+			["cyan", "green", "amber", "orange", "blue", "white", "red", "purple", "magenta", "d2k", "classic", Random];
+
+		// Themes that use the mod's native stock-chrome menu (drawn from the themed dialog.png) rather
+		// than the cyberintel neon menu sheet: the pristine OpenRA look plus the imported d2k skin,
+		// whose authentic menu is simply its own dialog panels and buttons.
+		public static bool UsesNativeChrome(string theme) =>
+			theme == Classic || theme == Dune;
+
+		// Human-facing dropdown label; the raw id for the imported skin is terse ("d2k").
+		public static string DisplayName(string option)
+		{
+			switch (option)
+			{
+				case Dune: return "Dune 2000";
+				default: return string.IsNullOrEmpty(option) ? option : char.ToUpperInvariant(option[0]) + option[1..];
+			}
+		}
 
 		// The concrete theme resolved by the most recent Apply() this process — set by the loadscreen
 		// at boot for the "random" case, so the menu can colour its text to match the actual pick

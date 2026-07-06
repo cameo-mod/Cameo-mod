@@ -42,10 +42,11 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 			if (theme == CyberintelThemes.Random)
 				theme = CyberintelThemes.CurrentTheme;
 
-			// "classic" reverts the menu to the stock OpenRA look; every other theme recolours the
+			// The native-chrome themes (classic + the imported d2k / CA skins) revert the menu to the
+			// stock OpenRA look, drawn from their own dialog.png; every other theme recolours the
 			// cyberintel menu text to match its neon family (the panels/buttons are already coloured
 			// by the swapped sheet).
-			if (theme == CyberintelThemes.Classic)
+			if (theme != null && CyberintelThemes.UsesNativeChrome(theme))
 				RevertToClassicChrome(widget);
 			else if (theme != null && CyberintelThemes.TryGetMenuColours(theme, out var title, out var text))
 			{

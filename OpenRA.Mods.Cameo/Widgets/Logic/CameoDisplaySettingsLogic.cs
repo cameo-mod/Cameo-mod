@@ -28,7 +28,7 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 				return;
 
 			uiThemeDropDown.OnMouseDown = _ => ShowUIThemeDropdown(uiThemeDropDown);
-			uiThemeDropDown.GetText = () => FirstUpper(cameoSettings.UITheme);
+			uiThemeDropDown.GetText = () => CyberintelThemes.DisplayName(cameoSettings.UITheme);
 		}
 
 		void ShowUIThemeDropdown(DropDownButtonWidget dropdown)
@@ -48,13 +48,11 @@ namespace OpenRA.Mods.Cameo.Widgets.Logic
 							CyberintelThemes.Apply(o, Game.ModData.DefaultFileSystem);
 					});
 
-				item.Get<LabelWidget>("LABEL").GetText = () => FirstUpper(o);
+				item.Get<LabelWidget>("LABEL").GetText = () => CyberintelThemes.DisplayName(o);
 				return item;
 			}
 
 			dropdown.ShowDropDown("LABEL_DROPDOWN_TEMPLATE", 500, CyberintelThemes.Options, SetupItem);
 		}
-
-		static string FirstUpper(string s) => string.IsNullOrEmpty(s) ? s : char.ToUpperInvariant(s[0]) + s[1..];
 	}
 }
