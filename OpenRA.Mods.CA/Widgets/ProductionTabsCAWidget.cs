@@ -26,13 +26,6 @@ namespace OpenRA.Mods.CA.Widgets
 		public string Name;
 		public ProductionQueue Queue;
 		public Actor Actor;
-
-		// Decoupled rendering: per-frame render/UI reads (tab visibility, done-highlight, group alert,
-		// type-button enabled state) must not enumerate the live sim-mutated queue lists. Refreshed by
-		// ProductionTabGroupCA.RefreshCachedState from the widget's Tick, under the world read lock.
-		public bool CachedVisible;
-		public bool CachedAnyDone;
-		public bool CachedAnyQueued;
 	}
 
 	public class ProductionTabGroupCA
@@ -40,24 +33,7 @@ namespace OpenRA.Mods.CA.Widgets
 		public List<ProductionTabCA> Tabs = new List<ProductionTabCA>();
 		public string Group;
 		public int NextQueueName = 1;
-
-		// Cached by RefreshCachedState (called under the world read lock); read every frame by the
-		// production-type button image lambda, so it must not touch live queue state.
-		public bool Alert { get; private set; }
-
-		public void RefreshCachedState()
-		{
-			var alert = false;
-			foreach (var t in Tabs)
-			{
-				t.CachedVisible = t.Queue.AlwaysVisible || t.Queue.BuildableItems().Any();
-				t.CachedAnyDone = t.Queue.AllQueued().Any(i => i.Done);
-				t.CachedAnyQueued = t.Queue.AllQueued().Any();
-				alert |= t.CachedAnyDone;
-			}
-
-			Alert = alert;
-		}
+		public bool Alert { get { return Tabs.Any(t => t.Queue.AllQueued().Any(i => i.Done)); } }
 
 		public void Update(IEnumerable<ProductionQueue> allQueues)
 		{
@@ -164,10 +140,9 @@ namespace OpenRA.Mods.CA.Widgets
 			if (queueGroup == null)
 				return true;
 
-			// Prioritize alerted queues (cached state - see ProductionTabCA)
-			var queues = Groups[queueGroup].Tabs
-					.OrderByDescending(t => t.CachedAnyDone ? 2 : !t.CachedAnyQueued ? 1 : 0)
-					.Select(t => t.Queue)
+			// Prioritize alerted queues
+			var queues = Groups[queueGroup].Tabs.Select(t => t.Queue)
+					.OrderByDescending(q => q.AllQueued().Any(i => i.Done) ? 2 : !q.AllQueued().Any() ? 1 : 0)
 					.ToList();
 
 			if (reverse) queues.Reverse();
@@ -213,8 +188,7 @@ namespace OpenRA.Mods.CA.Widgets
 
 		public IEnumerable<ProductionTabCA> GetTabs()
 		{
-			// Cached visibility (see ProductionTabCA) - called every frame from Draw/input paths.
-			return Groups[queueGroup].Tabs.Where(t => t.CachedVisible);
+			return Groups[queueGroup].Tabs.Where(t => t.Queue.BuildableItems().Any() || t.Queue.AlwaysVisible);
 		}
 
 		public override void Draw()
@@ -271,7 +245,7 @@ namespace OpenRA.Mods.CA.Widgets
 				// Draw number label
 				var textSize = font.Measure(tab.Name);
 				var position = new int2(rect.X + (rect.Width - textSize.X) / 2, (rect.Y + (rect.Height - textSize.Y) / 2) - 1);
-				font.DrawText(tab.Name, position, tab.CachedAnyDone ? Color.Gold : Color.White);
+				font.DrawText(tab.Name, position, tab.Queue.AllQueued().Any(i => i.Done) ? Color.Gold : Color.White);
 
 				tabsShown++;
 			}
@@ -304,63 +278,35 @@ namespace OpenRA.Mods.CA.Widgets
 			startTabIndex += amount;
 		}
 
-		// Set from the sim thread by ActorChanged; consumed by Tick on the main thread under the world read lock.
-		volatile bool queuesDirty = true;
-
-		// Is added to world.ActorAdded by the SidebarLogic handler.
-		// Decoupled rendering: world.ActorAdded/ActorRemoved fire on the SIM thread, so this must not
-		// touch widget state directly - it only marks the queue list dirty; the actual refresh happens in Tick
-		// under the world read lock on the main thread.
+		// Is added to world.ActorAdded by the SidebarLogic handler
 		public void ActorChanged(Actor a)
 		{
 			if (a.World.Disposing)
 				return;
 
-			if (a.Info.HasTraitInfo<ProductionQueueInfo>() || a.Info.HasTraitInfo<ProvidesPrerequisiteInfo>())
-				queuesDirty = true;
-		}
-
-		public override void TickOuter()
-		{
-			// Decoupled rendering: the queue-list + cached-render refresh MUST run every logic tick
-			// regardless of this widget's visibility. Widget.TickOuter only calls Tick() when IsVisible() is
-			// true, but IsVisible depends on Tabs being populated by this very refresh (chicken-and-egg: the
-			// tab strip could never appear after the first production queue is built), and the production-type
-			// buttons (a separate, always-visible container) read CachedVisible every frame even while the
-			// numbered tab strip itself is hidden. So drive the refresh from TickOuter, before the base
-			// visibility gate.
-			RefreshState();
-			base.TickOuter();
-		}
-
-		void RefreshState()
-		{
-			// Decoupled rendering: refresh queue/tab state only when the sim thread is not mid-tick, so
-			// the sidebar never reflects a half-updated world. Also refreshes the per-tab cached render state
-			// (visibility, done-highlight, alert) that Draw, GetTabs and the type buttons read.
-			if (!Game.TryEnterWorldReadLock())
-				return;
-
-			try
+			if (a.Info.HasTraitInfo<ProductionQueueInfo>())
 			{
-				if (queuesDirty)
-				{
-					queuesDirty = false;
-					RefreshQueues();
-				}
+				UpdateQueues(a);
 
-				foreach (var g in Groups.Values)
-					g.RefreshCachedState();
+				if (queueGroup == null)
+					return;
+
+				// Queue destroyed, was last of type: switch to a new group
+				if (Groups[queueGroup].Tabs.Count == 0)
+					QueueGroup = Groups.Where(g => g.Value.Tabs.Count > 0)
+						.Select(g => g.Key).FirstOrDefault();
+
+				// Queue destroyed, others of same type: switch to another tab
+				else if (!Groups[queueGroup].Tabs.Select(t => t.Queue).Contains(CurrentQueue))
+					SelectNextTab(false);
 			}
-			finally
-			{
-				Game.ExitWorldReadLock();
-			}
+			else if (a.Info.HasTraitInfo<ProvidesPrerequisiteInfo>())
+				UpdateQueues(a);
 		}
 
-		void RefreshQueues()
+		void UpdateQueues(Actor a)
 		{
-			var allQueues = world.ActorsWithTrait<ProductionQueue>()
+			var allQueues = a.World.ActorsWithTrait<ProductionQueue>()
 				.Where(p => p.Actor.Owner == p.Actor.World.LocalPlayer && p.Actor.IsInWorld && p.Trait.Enabled)
 				.Select(p => p.Trait).ToList();
 
@@ -369,18 +315,6 @@ namespace OpenRA.Mods.CA.Widgets
 
 			if (allQueues.Count > 0 && CurrentQueue == null)
 				UpdateTab(allQueues.First());
-
-			if (queueGroup == null)
-				return;
-
-			// Queue destroyed, was last of type: switch to a new group
-			if (Groups[queueGroup].Tabs.Count == 0)
-				QueueGroup = Groups.Where(g => g.Value.Tabs.Count > 0)
-					.Select(g => g.Key).FirstOrDefault();
-
-			// Queue destroyed, others of same type: switch to another tab
-			else if (!Groups[queueGroup].Tabs.Select(t => t.Queue).Contains(CurrentQueue))
-				SelectNextTab(false);
 		}
 
 		void UpdateTab(ProductionQueue queue, bool recenter = false)
@@ -459,19 +393,7 @@ namespace OpenRA.Mods.CA.Widgets
 				{
 					pressedTabIndex = tabIndex;
 					var tab = Groups[queueGroup].Tabs[tabIndex];
-
-					// Decoupled rendering: switching the queue refreshes the palette icons from live queue state - wait out
-					// any in-flight sim tick (one-shot input; matches original single-threaded timing).
-					Game.EnterWorldReadLock();
-					try
-					{
-						UpdateTab(tab.Queue);
-					}
-					finally
-					{
-						Game.ExitWorldReadLock();
-					}
-
+					UpdateTab(tab.Queue);
 					Game.Sound.PlayNotification(world.Map.Rules, null, "Sounds", ClickSound, null);
 
 					if (mi.MultiTapCount > 1 && tab.Actor != null && tab.Actor.IsInWorld)
@@ -490,20 +412,16 @@ namespace OpenRA.Mods.CA.Widgets
 			if (e.Event != KeyInputEvent.Down)
 				return false;
 
-			if (PreviousProductionTabKey.IsActivatedBy(e) || NextProductionTabKey.IsActivatedBy(e))
+			if (PreviousProductionTabKey.IsActivatedBy(e))
 			{
 				Game.Sound.PlayNotification(world.Map.Rules, null, "Sounds", ClickSound, null);
+				return SelectNextTab(true);
+			}
 
-				// Decoupled rendering: SelectNextTab switches the queue, refreshing palette icons from live queue state.
-				Game.EnterWorldReadLock();
-				try
-				{
-					return SelectNextTab(PreviousProductionTabKey.IsActivatedBy(e));
-				}
-				finally
-				{
-					Game.ExitWorldReadLock();
-				}
+			if (NextProductionTabKey.IsActivatedBy(e))
+			{
+				Game.Sound.PlayNotification(world.Map.Rules, null, "Sounds", ClickSound, null);
+				return SelectNextTab(false);
 			}
 
 			return false;

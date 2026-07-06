@@ -35,7 +35,6 @@ namespace OpenRA.Mods.Cameo.Widgets
 		bool scatterDisabled = true;
 		bool stopDisabled = true;
 		bool waypointModeDisabled = true;
-		bool deployDisabled = true;
 
 		int deployHighlighted;
 		int scatterHighlighted;
@@ -75,8 +74,8 @@ namespace OpenRA.Mods.Cameo.Widgets
 						world.OrderGenerator = new CustomFormationsAttackMoveOrderGenerator(selectedActors, Game.Settings.Game.ResolveActionButton(MouseActionType.ConfirmOrder));
 				}
 
-				attackMoveButton.OnClick = () => UnderWorldLock(() => Toggle(true));
-				attackMoveButton.OnKeyPress = _ => UnderWorldLock(() => Toggle(false));
+				attackMoveButton.OnClick = () => Toggle(true);
+				attackMoveButton.OnKeyPress = _ => Toggle(false);
 			}
 
 			var forceMoveButton = widget.GetOrNull<ButtonWidget>("FORCE_MOVE");
@@ -86,13 +85,13 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 				forceMoveButton.IsDisabled = () => { UpdateStateIfNecessary(); return forceMoveDisabled; };
 				forceMoveButton.IsHighlighted = () => !forceMoveButton.IsDisabled() && IsForceModifiersActive(Modifiers.Alt);
-				forceMoveButton.OnClick = () => UnderWorldLock(() =>
+				forceMoveButton.OnClick = () =>
 				{
 					if (forceMoveButton.IsHighlighted())
 						world.CancelInputMode();
 					else
 						world.OrderGenerator = new ForceModifiersOrderGenerator(world, Modifiers.Alt, true);
-				});
+				};
 			}
 
 			var forceAttackButton = widget.GetOrNull<ButtonWidget>("FORCE_ATTACK");
@@ -104,13 +103,13 @@ namespace OpenRA.Mods.Cameo.Widgets
 				forceAttackButton.IsHighlighted = () => !forceAttackButton.IsDisabled() && IsForceModifiersActive(Modifiers.Ctrl)
 					&& world.OrderGenerator is not CustomFormationsAttackMoveOrderGenerator;
 
-				forceAttackButton.OnClick = () => UnderWorldLock(() =>
+				forceAttackButton.OnClick = () =>
 				{
 					if (forceAttackButton.IsHighlighted())
 						world.CancelInputMode();
 					else
 						world.OrderGenerator = new ForceModifiersOrderGenerator(world, Modifiers.Ctrl, true);
-				});
+				};
 			}
 
 			var guardButton = widget.GetOrNull<ButtonWidget>("GUARD");
@@ -132,8 +131,8 @@ namespace OpenRA.Mods.Cameo.Widgets
 						world.OrderGenerator = new GuardOrderGenerator(world, selectedActors, "Guard", "guard");
 				}
 
-				guardButton.OnClick = () => UnderWorldLock(() => Toggle(true));
-				guardButton.OnKeyPress = _ => UnderWorldLock(() => Toggle(false));
+				guardButton.OnClick = () => Toggle(true);
+				guardButton.OnKeyPress = _ => Toggle(false);
 			}
 
 			var scatterButton = widget.GetOrNull<ButtonWidget>("SCATTER");
@@ -163,21 +162,8 @@ namespace OpenRA.Mods.Cameo.Widgets
 				{
 					UpdateStateIfNecessary();
 
-					// Decoupled rendering: CanIssueDeployOrder dispatches a live trait on a selected actor the sim can
-					// dispose; evaluate under a non-blocking world lock and keep last frame's result when mid-tick.
-					if (!Game.TryEnterWorldReadLock())
-						return deployDisabled;
-
-					try
-					{
-						var queued = Game.GetModifierKeys().HasModifier(Modifiers.Shift);
-						deployDisabled = !selectedDeploys.Any(pair => pair.Trait.CanIssueDeployOrder(pair.Actor, queued));
-						return deployDisabled;
-					}
-					finally
-					{
-						Game.ExitWorldReadLock();
-					}
+					var queued = Game.GetModifierKeys().HasModifier(Modifiers.Shift);
+					return !selectedDeploys.Any(pair => pair.Trait.CanIssueDeployOrder(pair.Actor, queued));
 				};
 
 				deployButton.IsHighlighted = () => deployHighlighted > 0;
@@ -218,13 +204,13 @@ namespace OpenRA.Mods.Cameo.Widgets
 
 				queueOrdersButton.IsDisabled = () => { UpdateStateIfNecessary(); return waypointModeDisabled; };
 				queueOrdersButton.IsHighlighted = () => !queueOrdersButton.IsDisabled() && IsForceModifiersActive(Modifiers.Shift);
-				queueOrdersButton.OnClick = () => UnderWorldLock(() =>
+				queueOrdersButton.OnClick = () =>
 				{
 					if (queueOrdersButton.IsHighlighted())
 						world.CancelInputMode();
 					else
 						world.OrderGenerator = new ForceModifiersOrderGenerator(world, Modifiers.Shift, false);
-				});
+				};
 			}
 
 			var keyOverrides = widget.GetOrNull<LogicKeyListenerWidget>("MODIFIER_OVERRIDES");
@@ -297,26 +283,8 @@ namespace OpenRA.Mods.Cameo.Widgets
 			return world.OrderGenerator is UnitOrderGenerator && Game.GetModifierKeys().HasFlag(modifiers);
 		}
 
-		static void UnderWorldLock(Action a)
-		{
-			// Decoupled rendering: run a one-shot command-bar callback under the blocking world lock so its OrderGenerator
-			// swap / order issue can't race the sim thread's OrderGenerator.Tick. No-op when decoupling is off.
-			Game.EnterWorldReadLock();
-			try { a(); }
-			finally { Game.ExitWorldReadLock(); }
-		}
-
 		void UpdateStateIfNecessary()
 		{
-			// Decoupled rendering: enumerates live Selection actors + their traits (TraitsImplementing hits CheckDestroyed
-			// on a disposed actor). Runs per frame (button IsDisabled during unlocked Ui.Draw) and from one-shot order
-			// callbacks. Guard with a non-blocking world lock: keep last frame's cached state when the sim is mid-tick.
-			// One-shot callers hold the blocking world lock, so this re-enters it (Monitor re-entrant) and refreshes.
-			if (!Game.TryEnterWorldReadLock())
-				return;
-
-			try
-			{
 			if (selectionHash == world.Selection.Hash)
 				return;
 
@@ -340,59 +308,36 @@ namespace OpenRA.Mods.Cameo.Widgets
 			waypointModeDisabled = !cbbInfos.Any(i => i == null || !i.DisableWaypointMode);
 
 			selectionHash = world.Selection.Hash;
-			}
-			finally
-			{
-				Game.ExitWorldReadLock();
-			}
 		}
 
 		void PerformKeyboardOrderOnSelection(Func<Actor, Order> f)
 		{
-			// Decoupled rendering: one-shot order issue under the blocking world lock (UpdateStateIfNecessary re-enters it).
-			Game.EnterWorldReadLock();
-			try
-			{
-				UpdateStateIfNecessary();
+			UpdateStateIfNecessary();
 
-				var orders = selectedActors
-					.Select(f)
-					.ToArray();
+			var orders = selectedActors
+				.Select(f)
+				.ToArray();
 
-				foreach (var o in orders)
-					world.IssueOrder(o);
+			foreach (var o in orders)
+				world.IssueOrder(o);
 
-				orders.PlayVoiceForOrders();
-			}
-			finally
-			{
-				Game.ExitWorldReadLock();
-			}
+			orders.PlayVoiceForOrders();
 		}
 
 		void PerformDeployOrderOnSelection(bool queued)
 		{
-			// Decoupled rendering: one-shot deploy issue under the blocking world lock (see above).
-			Game.EnterWorldReadLock();
-			try
-			{
-				UpdateStateIfNecessary();
+			UpdateStateIfNecessary();
 
-				var orders = selectedDeploys
-					.Where(pair => pair.Trait.CanIssueDeployOrder(pair.Actor, queued))
-					.Select(d => d.Trait.IssueDeployOrder(d.Actor, queued))
-					.Where(d => d != null)
-					.ToArray();
+			var orders = selectedDeploys
+				.Where(pair => pair.Trait.CanIssueDeployOrder(pair.Actor, queued))
+				.Select(d => d.Trait.IssueDeployOrder(d.Actor, queued))
+				.Where(d => d != null)
+				.ToArray();
 
-				foreach (var o in orders)
-					world.IssueOrder(o);
+			foreach (var o in orders)
+				world.IssueOrder(o);
 
-				orders.PlayVoiceForOrders();
-			}
-			finally
-			{
-				Game.ExitWorldReadLock();
-			}
+			orders.PlayVoiceForOrders();
 		}
 	}
 }
