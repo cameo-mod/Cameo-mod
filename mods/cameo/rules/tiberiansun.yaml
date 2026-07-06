@@ -2119,7 +2119,7 @@ tsntmisl:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstnod, tsnttech
+		Prerequisites: ~tsgtcnstnod, tsnttech, !tsntmisl, ~techlevel.superweapons
 		Description: actor-tsntmisl.description
 	Tooltip:
 		Name: Missile Silo
@@ -2250,7 +2250,8 @@ tsntmisl:
 	WithSupportPowerActivationOverlay@2:
 		RequiresCondition: !build-incomplete
 		Sequence: smoke
-	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: tsntmisl
 	SupportPowerChargeBar:
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -2258,7 +2259,7 @@ tsntmisl:
 tsntmislcabal:
 	Inherits: tsntmisl
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tscore
+		Prerequisites: ~tsgtcnstcabal, tscore, !tsntmisl, ~techlevel.superweapons
 		Description: actor-tsntmisl.description
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -2314,7 +2315,7 @@ tsgtplug:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstgdi, tsgttech
+		Prerequisites: ~tsgtcnstgdi, tsgttech, !tsionc, ~techlevel.superweapons
 		Description: actor-tsgtplug.description
 	Tooltip:
 		Name: Upgrade Center

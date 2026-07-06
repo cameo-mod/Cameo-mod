@@ -343,7 +343,7 @@ qaorbit.steel:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
-		Prerequisites: ~qacst.steel, qatech.steel, !qaorbit.steel
+		Prerequisites: ~qacst.steel, qatech.steel, !qaorbit.steel, ~techlevel.superweapons
 		Description: actor-cgionc.description
 	Tooltip:
 		Name: Orbital Cannon Activator
@@ -630,7 +630,7 @@ bfg10k.steel:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
 		BuildLimit: 1
-		Prerequisites: ~qacst.steel, qatech.steel
+		Prerequisites: ~qacst.steel, qatech.steel, ~techlevel.superweapons
 		Description: actor-gun.description
 	Valued:
 		Cost: 10000

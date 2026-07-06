@@ -1351,7 +1351,7 @@ SCTerranMSLO:
 	# WithSupportPowerActivationAnimation:
 	# 	RequiresCondition: !build-incomplete
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: abomb
+		Prerequisite: SCTerranMSLO
 	Voiced:
 		VoiceSet: SCNuclearSiloVoice
 	RenderSprites:
@@ -2001,7 +2001,7 @@ SCFLEETBEACON:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: ~scnexus, scstargate
+		Prerequisites: ~scnexus, scstargate, !SCPurifierStrike
 		Queue: Building, RABuilding
 		Description: actor-scfleetbeacon.description
 	Building:
@@ -2053,6 +2053,9 @@ SCFLEETBEACON:
 		Bounds: 2048, 2048
 		DecorationBounds: 2448, 2448, 0, 0
 	SelectionDecorations:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: SCPurifierStrike
+		RequiresPrerequisites: global-swlimit
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -5860,9 +5863,6 @@ SCSCIENCEFACILITYM:
 		IntoActor: scsciencefacility
 	RenderSprites:
 		Image: scsciencefacility
-	ProvidesPrerequisite@swlimit:
-		RequiresPrerequisites: global-swlimit
-		Prerequisite: terrannuke
 	RenderSprites:
 		PlayerPalette: player_rgba
 

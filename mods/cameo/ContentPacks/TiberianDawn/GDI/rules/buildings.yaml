@@ -210,10 +210,10 @@ FIX.GDI:
 EYE:
 	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
-	Inherits@SW: ^PrimarySuperweapon
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
 	Inherits@tech: ^IsTechnoBuilding
+	Inherits@SW: ^PrimarySuperweapon
 	-Production@Upgrades:
 	-ProductionBar@Upgrades:
 	Inherits: ^BuildingPlugProducer

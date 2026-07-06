@@ -452,7 +452,7 @@ ca12hit.latin:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~cgcnst.latin, cgspy.latin, !ra2topolstrike
+		Prerequisites: ~cgcnst.latin, cgspy.latin, !ra2topolstrike, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor-latin_ca12hit.description
 	Building:

@@ -424,7 +424,7 @@ supercomputer.ixian:
 	Inherits@shape: ^4x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+		Prerequisites: ~construction_yard.ixian, research_centre.ixian, !supercomputer.ixian, ~techlevel.superweapons
 		Description: Provides a nuclear weapon support power.
 		IconPalette: player
 	Tooltip:
@@ -482,6 +482,8 @@ supercomputer.ixian:
 	RenderSprites:
 		Image: supercomputer.ixian
 		Palette: td_temperat
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: supercomputer.ixian
 	-WithCrumbleOverlay:
 
 # starport_smuggler:

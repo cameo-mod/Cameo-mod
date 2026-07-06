@@ -626,7 +626,7 @@ palace.ordos:
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~construction_yard.ordos, research_centre.ordos
+		Prerequisites: ~construction_yard.ordos, research_centre.ordos, !opalace, ~techlevel.superweapons
 		Description: This structure unlocks support powers.
 		IconPalette: d2kunit
 	Tooltip:
@@ -717,7 +717,7 @@ palace.ordos:
 		IconImage: saboteur.ordos
 		AllowMultiple: True
 		PauseOnCondition: disabled
-		Prerequisites: palace
+		Prerequisites:
 			1: palace
 		Actors: trooper, trooper, saboteur.ordos, saboteur.ordos
 		Type: Saboteurs

@@ -1046,7 +1046,7 @@ ra2gaweat:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~ra2gacnst, ra2gatech, !weatherstorm
+		Prerequisites: ~ra2gacnst, ra2gatech, !weatherstorm, ~techlevel.superweapons
 		Description: actor-gaweat.description
 	Tooltip:
 		Name: Weather Control Center
@@ -1108,7 +1108,7 @@ ra2gacsph:
 	Inherits@shape: ^3x4Shape
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~ra2gacnst, ra2gatech
+		Prerequisites: ~ra2gacnst, ra2gatech, ~techlevel.superweapons
 		Description: actor-pdox.description
 	Tooltip:
 		Name: Chronosphere
@@ -1118,7 +1118,7 @@ ra2gacsph:
 	RA2ChronoshiftPower@chronoshift:
 		OrderName: Chronoshift
 		Prerequisites:
-			1: !botplayer
+			1: !botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		IconImage: ra2gacsph
 		Icons:
@@ -1155,7 +1155,7 @@ ra2gacsph:
 	DetonateWeaponPower@aichrono:
 		OrderName: RA2ChronoshiftAI
 		Prerequisites:
-			1: botplayer
+			1: botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		IconImage: ra2gacsph
 		Icons:
@@ -1932,7 +1932,7 @@ ra2namisl:
 		Name: Nuclear Missile Silo
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra2nacnst, ra2natech, !ra2nuke
+		Prerequisites: ~ra2nacnst, ra2natech, !ra2nuke, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor-namisl.description
 	Building:
@@ -1998,7 +1998,7 @@ ra2nairon:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2natech
+		Prerequisites: ~ra2nacnst, ra2natech, ~techlevel.superweapons
 		Description: actor-iron.description
 	Tooltip:
 		Name: Iron Curtain
@@ -2012,7 +2012,7 @@ ra2nairon:
 		OrderName: IronCurtain
 		PauseOnCondition: disabled
 		Prerequisites:
-			1:
+			1: ~techlevel.superweapons
 		IconImage: ra2nairon
 		Icons:
 			1: icon2
@@ -2863,7 +2863,7 @@ yrygppet:
 	Tooltip:
 		Name: Psychic Dominator
 	Buildable:
-		Prerequisites: ~yrnacnst, yrygtech, !psydom
+		Prerequisites: ~yrnacnst, yrygtech, !psydom, ~techlevel.superweapons
 		Description: actor-yappet.description
 	Building:
 		Footprint: =x= xxx xxx
@@ -2941,7 +2941,7 @@ yryggntc:
 	Tooltip:
 		Name: Genetic Mutator
 	Buildable:
-		Prerequisites: ~yrnacnst, yrygtech
+		Prerequisites: ~yrnacnst, yrygtech, ~techlevel.superweapons
 		Description: actor-yagntc.description
 	Building:
 		Footprint: =x= xxx xxx

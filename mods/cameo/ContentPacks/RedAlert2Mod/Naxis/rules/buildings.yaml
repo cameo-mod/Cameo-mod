@@ -686,7 +686,7 @@ rocket.nax:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~conyard.nax, tech.nax, !rocket.nax
+		Prerequisites: ~conyard.nax, tech.nax, !rocket.nax, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor-nax_rocket.description
 	Building:

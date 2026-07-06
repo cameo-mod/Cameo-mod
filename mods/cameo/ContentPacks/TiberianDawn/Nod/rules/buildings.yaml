@@ -222,10 +222,10 @@ FIX.Nod:
 TMPL:
 	Inherits: ^TDBuilding
 	Inherits@shape: ^3x3Shape
-	Inherits@SW: ^PrimarySuperweapon
 	Inherits@sell: ^TDNodSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
 	Inherits@tech: ^IsTechnoBuilding
+	Inherits@SW: ^PrimarySuperweapon
 	-Production@Upgrades:
 	-ProductionBar@Upgrades:
 	Inherits: ^BuildingPlugProducer

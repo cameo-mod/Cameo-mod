@@ -966,7 +966,7 @@ cgionc.asian:
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgtech.asian, !cgionc.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, !cgionc.asian, ~techlevel.superweapons
 		Description: actor-cgionc.description
 	Tooltip:
 		Name: Advanced Communication Center
@@ -1022,7 +1022,7 @@ cgchao.asian:
 	Tooltip:
 		Name: Chaos Storm Inductor
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgtech.asian
+		Prerequisites: ~cgcnst.asian, cgtech.asian, ~techlevel.superweapons
 		Description: actor-cgchao.description
 	Building:
 		Footprint: =x= xxx xxx

@@ -8801,7 +8801,7 @@ JSHRINE:
 	Tooltip:
 		Name: Japanese Shrine
 	Buildable:
-		Prerequisites: ~modjtek, ~techlevel.superweapons
+		Prerequisites: ~modjtek, ~techlevel.superweapons, !jshrine
 		Description: actor-mslo.description
 	Building:
 		Footprint: xxx xxx ===
@@ -8855,6 +8855,8 @@ JSHRINE:
 		BeaconActor: BLASTRADIUS.atomic
 		CameraRange: 10000
 	SupportPowerChargeBar:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: jshrine
 	RenderSprites:
 		Image: jshrine
 
@@ -9133,7 +9135,7 @@ PDOX:
 	Inherits@sell: ^RASpawnActorsOnSell
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~atek, ~techlevel.superweapons
+		Prerequisites: ~atek, ~techlevel.superweapons, !pdox
 		Description: actor-pdox.description
 	Tooltip:
 		Name: Chronosphere
@@ -9146,7 +9148,7 @@ PDOX:
 	RA2ChronoshiftPower@chronoshift:
 		OrderName: Chronoshift
 		Prerequisites:
-			1: !botplayer
+			1: !botplayer, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		Icons:
 			1: chrono
@@ -9183,7 +9185,7 @@ PDOX:
 		OrderName: ChronoReinforcements
 		Cost: 1000
 		Prerequisites:
-			1: up_chronoarmor
+			1: up_chronoarmor, ~techlevel.superweapons
 		PauseOnCondition: disabled
 		Icons:
 			1: chronoreinforcements
@@ -9209,7 +9211,7 @@ PDOX:
 		AllowMultiple: true
 		OrderName: ChronoVortex
 		Prerequisites:
-			1:
+			1: ~techlevel.superweapons
 		IconImage: pdox
 		Icons:
 			1: chronovortex
@@ -9248,7 +9250,8 @@ PDOX:
 		TargetCircleColors: ff000080
 		BeaconActor: BLASTRADIUS.super
 		CameraRange: 12345
-	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: pdox
 	RenderSprites:
 		PlayerPalette: raplayer
 	WithDeathAnimation:

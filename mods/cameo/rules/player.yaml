@@ -197,13 +197,6 @@ Player:
 		Enabled: True
 		DisplayOrder: 14
 		Prerequisites: base-reveal
-	LobbyPrerequisiteCheckbox@SWLIMIT:
-		ID: swlimit
-		Label: Limit Super Weapons
-		Description: Only 1 of each primary superweapon can be built by a player
-		Enabled: True
-		DisplayOrder: 15
-		Prerequisites: global-swlimit
 	LobbyPrerequisiteCheckbox@SWREVEAL:
 		ID: swreveal
 		Label: Reveal Super Weapons
@@ -211,13 +204,6 @@ Player:
 		Enabled: True
 		DisplayOrder: 16
 		Prerequisites: global-swreveal
-	LobbyPrerequisiteCheckbox@WIPCONTENT:
-		ID: wipcontent
-		Label: WIP Content
-		Description: Provides access to content that is heavily in progress. WARNING: Prone to crashes
-		Enabled: False
-		DisplayOrder: 25
-		Prerequisites: wip-content
 	LobbyPrerequisiteCheckbox@SHADOW:
 		ID: shadows
 		Label: Generated Shadows
@@ -231,23 +217,16 @@ Player:
 	FrozenActorLayer:
 	PlaceBeacon:
 	ProvidesTechPrerequisite@none:
-		Name: Limited
-		Id: nopowers
-	ProvidesTechPrerequisite@low:
-		Name: Low
-		Prerequisites: techlevel.low
-		Id: lowpowers
-	ProvidesTechPrerequisite@medium:
-		Name: Medium
-		Prerequisites: techlevel.low, techlevel.medium
-		Id: medpowers
-	ProvidesTechPrerequisite@nosuper:
-		Name: High
-		Prerequisites: techlevel.low, techlevel.medium, techlevel.high
-		Id: highpowers
-	ProvidesTechPrerequisite@all:
-		Name: Unrestricted
-		Prerequisites: techlevel.low, techlevel.medium, techlevel.high, techlevel.superweapons
+		Name: No Superweapons
+		Prerequisites: global-swlimit
+		Id: no-superweapons
+	ProvidesTechPrerequisite@limited-sw:
+		Name: Limited Superweapons
+		Prerequisites: techlevel.superweapons, global-swlimit
+		Id: superweapons
+	ProvidesTechPrerequisite@unlimited-sw:
+		Name: Unlimited Superweapons
+		Prerequisites: techlevel.superweapons
 		Id: unrestricted
 	GrantConditionOnPrerequisiteManager:
 	ResourceStorageWarning:

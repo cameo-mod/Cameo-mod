@@ -347,7 +347,7 @@ meteorray.nax2:
 		Name: Meteor Traction Ray
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~conyard.nax2, tech.nax2, !meteorray.nax2
+		Prerequisites: ~conyard.nax2, tech.nax2, !meteorray.nax2, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor-namisl.description
 	Building:
