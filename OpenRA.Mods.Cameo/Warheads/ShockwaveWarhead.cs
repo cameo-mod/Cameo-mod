@@ -10,7 +10,7 @@
 #endregion
 
 using OpenRA.GameRules;
-using OpenRA.Mods.Common.Traits;
+using OpenRA.Mods.Cameo.Traits;
 using OpenRA.Mods.Common.Warheads;
 using OpenRA.Traits;
 

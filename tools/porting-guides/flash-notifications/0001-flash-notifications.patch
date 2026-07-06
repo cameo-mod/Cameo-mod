@@ -1,0 +1,225 @@
+From b0b0544d4adae970fc747e9b01241ef6e80032fc Mon Sep 17 00:00:00 2001
+From: xan2622 <xan2622@online.fr>
+Date: Mon, 11 May 2026 17:29:01 +0300
+Subject: [PATCH] Add a heal debug command
+
+Co-authored-by: Gustas <37534529+PunkPun@users.noreply.github.com>
+---
+ OpenRA.Mods.Common/Commands/DevCommands.cs       | 16 ++++++++++++++++
+ .../Traits/Player/DeveloperMode.cs               | 12 ++++++++++++
+ .../Widgets/Logic/Ingame/DebugMenuLogic.cs       | 16 ++++++++++++++++
+ mods/cnc/chrome/ingame-debug.yaml                |  7 +++++++
+ mods/common/chrome/ingame-debug.yaml             |  8 ++++++++
+ mods/common/fluent/common.ftl                    |  1 +
+ mods/common/fluent/ingame-debug.ftl              |  1 +
+ mods/ra/chrome/ingame-debug.yaml                 |  8 ++++++++
+ mods/ts/chrome/ingame-debug.yaml                 |  8 ++++++++
+ 9 files changed, 77 insertions(+)
+
+diff --git a/OpenRA.Mods.Common/Commands/DevCommands.cs b/OpenRA.Mods.Common/Commands/DevCommands.cs
+index d05251dd2e..2d81c33fa3 100644
+--- a/OpenRA.Mods.Common/Commands/DevCommands.cs
++++ b/OpenRA.Mods.Common/Commands/DevCommands.cs
+@@ -78,6 +78,9 @@ public class DevCommands : IChatCommand, IWorldLoaded
+ 		[FluentReference]
+ 		const string ResetExplorationDescription = "description-reset-shroud";
+ 
++		[FluentReference]
++		const string HealSelectedActorsDescription = "description-heal-selected-actors";
++
+ 		[FluentReference]
+ 		const string KillSelectedActorsDescription = "description-kill-selected-actors";
+ 
+@@ -101,6 +104,7 @@ public static class Commands
+ 			public const string ResetExploration = "reset-shroud";
+ 			public const string PlayerExperience = "player-experience";
+ 			public const string Kill = "kill";
++			public const string Heal = "heal";
+ 			public const string Dispose = "dispose";
+ 		}
+ 
+@@ -123,6 +127,7 @@ public static class Commands
+ 			{ Commands.PlayerExperience, (PlayerExperienceDescription, PlayerExperience) },
+ 			{ PowerManager.CommandName, (PowerOutageDescription, PowerOutage) },
+ 			{ Commands.Kill, (KillSelectedActorsDescription, Kill) },
++			{ Commands.Heal, (HealSelectedActorsDescription, Heal) },
+ 			{ Commands.Dispose, (DisposeSelectedActorsDescription, Dispose) }
+ 		};
+ 
+@@ -255,6 +260,17 @@ static void PowerOutage(string arg, World world)
+ 			world.IssueOrder(new Order(PowerManager.OrderName, world.LocalPlayer.PlayerActor, false) { ExtraData = 250 });
+ 		}
+ 
++		static void Heal(string arg, World world)
++		{
++			foreach (var actor in world.Selection.Actors)
++			{
++				if (actor.IsDead)
++					continue;
++
++				world.IssueOrder(new Order(DeveloperMode.Orders.Heal, world.LocalPlayer.PlayerActor, Target.FromActor(actor), false));
++			}
++		}
++
+ 		static void Kill(string arg, World world)
+ 		{
+ 			foreach (var actor in world.Selection.Actors)
+diff --git a/OpenRA.Mods.Common/Traits/Player/DeveloperMode.cs b/OpenRA.Mods.Common/Traits/Player/DeveloperMode.cs
+index 80f7c1d3cd..903e6e7788 100644
+--- a/OpenRA.Mods.Common/Traits/Player/DeveloperMode.cs
++++ b/OpenRA.Mods.Common/Traits/Player/DeveloperMode.cs
+@@ -91,6 +91,7 @@ public static class Orders
+ 			public const string UnlimitedPower = "DevUnlimitedPower";
+ 			public const string BuildAnywhere = "DevBuildAnywhere";
+ 			public const string PlayerExperience = "DevPlayerExperience";
++			public const string Heal = "DevHeal";
+ 			public const string Kill = "DevKill";
+ 			public const string Dispose = "DevDispose";
+ 		}
+@@ -275,6 +276,17 @@ public void ResolveOrder(Actor self, Order order)
+ 					break;
+ 				}
+ 
++				case Orders.Heal:
++				{
++					if (order.Target.Type != TargetType.Actor)
++						break;
++
++					var actor = order.Target.Actor;
++					var health = actor.TraitOrDefault<IHealth>();
++					health?.InflictDamage(actor, actor, new Damage(-health.MaxHP), true);
++					break;
++				}
++
+ 				case Orders.Kill:
+ 				{
+ 					if (order.Target.Type != TargetType.Actor)
+diff --git a/OpenRA.Mods.Common/Widgets/Logic/Ingame/DebugMenuLogic.cs b/OpenRA.Mods.Common/Widgets/Logic/Ingame/DebugMenuLogic.cs
+index d3caea7a90..7515f49c2d 100644
+--- a/OpenRA.Mods.Common/Widgets/Logic/Ingame/DebugMenuLogic.cs
++++ b/OpenRA.Mods.Common/Widgets/Logic/Ingame/DebugMenuLogic.cs
+@@ -58,6 +58,22 @@ public DebugMenuLogic(Widget widget, World world)
+ 				cashAllButton.OnClick = () => IssueOrder(world, DeveloperMode.Orders.GiveCashAll);
+ 			}
+ 
++			var healButton = widget.GetOrNull<ButtonWidget>("HEAL_SELECTED");
++			if (healButton != null)
++			{
++				healButton.GetTooltipText = () => FluentProvider.GetMessage(TooltipDebugCommand, "command", '/' + DevCommands.Commands.Heal);
++				healButton.OnClick = () =>
++				{
++					foreach (var actor in world.Selection.Actors)
++					{
++						if (actor.IsDead)
++							continue;
++
++						world.IssueOrder(new Order(DeveloperMode.Orders.Heal, world.LocalPlayer.PlayerActor, Target.FromActor(actor), false));
++					}
++				};
++			}
++
+ 			var growResourcesButton = widget.GetOrNull<ButtonWidget>("GROW_RESOURCES");
+ 			if (growResourcesButton != null)
+ 			{
+diff --git a/mods/cnc/chrome/ingame-debug.yaml b/mods/cnc/chrome/ingame-debug.yaml
+index fdc03644ce..bb88de3b3e 100644
+--- a/mods/cnc/chrome/ingame-debug.yaml
++++ b/mods/cnc/chrome/ingame-debug.yaml
+@@ -150,6 +150,13 @@ Container@DEBUG_PANEL:
+ 					Width: PARENT_WIDTH - 17
+ 					Height: 35
+ 					Children:
++						Button@HEAL_SELECTED:
++							X: 15
++							Width: 146
++							Height: 35
++							Text: button-debug-panel-heal-selected
++							TooltipTemplate: BUTTON_TOOLTIP
++							TooltipContainer: TOOLTIP_CONTAINER
+ 						Button@DISPOSE_SELECTED:
+ 							X: 172
+ 							Width: 146
+diff --git a/mods/common/chrome/ingame-debug.yaml b/mods/common/chrome/ingame-debug.yaml
+index eb4243089d..15681aaf90 100644
+--- a/mods/common/chrome/ingame-debug.yaml
++++ b/mods/common/chrome/ingame-debug.yaml
+@@ -156,6 +156,14 @@ Container@DEBUG_PANEL:
+ 					Width: PARENT_WIDTH - 17
+ 					Height: 30
+ 					Children:
++						Button@HEAL_SELECTED:
++							X: 15
++							Width: 151
++							Height: 30
++							Font: Bold
++							Text: button-debug-panel-heal-selected
++							TooltipTemplate: BUTTON_TOOLTIP
++							TooltipContainer: TOOLTIP_CONTAINER
+ 						Button@DISPOSE_SELECTED:
+ 							X: 177
+ 							Width: 151
+diff --git a/mods/common/fluent/common.ftl b/mods/common/fluent/common.ftl
+index 11a53f7570..d086f0973f 100644
+--- a/mods/common/fluent/common.ftl
++++ b/mods/common/fluent/common.ftl
+@@ -736,6 +736,7 @@ description-power-outage = causes a 5-second power outage for the local player.
+ description-grow-resources = grows resources on the map.
+ description-clear-shroud = reveals the entire map.
+ description-reset-shroud = hides the entire map.
++description-heal-selected-actors = heals selected actors.
+ description-kill-selected-actors = kills selected actors.
+ description-dispose-selected-actors = disposes selected actors.
+ 
+diff --git a/mods/common/fluent/ingame-debug.ftl b/mods/common/fluent/ingame-debug.ftl
+index fbf8d74cef..e475c35297 100644
+--- a/mods/common/fluent/ingame-debug.ftl
++++ b/mods/common/fluent/ingame-debug.ftl
+@@ -8,6 +8,7 @@ checkbox-debug-panel-instant-charge = Instant Charge Time
+ checkbox-debug-panel-disable-visibility-checks = Disable Visibility Checks
+ button-debug-panel-give-cash = Give $20,000
+ button-debug-panel-give-cash-all = Give Cash All
++button-debug-panel-heal-selected = Heal Selected
+ button-debug-panel-dispose-selected = Dispose Selected
+ button-debug-panel-grow-resources = Grow Resources
+ button-debug-panel-kill-selected = Kill Selected
+diff --git a/mods/ra/chrome/ingame-debug.yaml b/mods/ra/chrome/ingame-debug.yaml
+index 337cd8a4a6..2d8dce77fd 100644
+--- a/mods/ra/chrome/ingame-debug.yaml
++++ b/mods/ra/chrome/ingame-debug.yaml
+@@ -168,6 +168,14 @@ Container@DEBUG_PANEL:
+ 					Width: PARENT_WIDTH - 17
+ 					Height: 30
+ 					Children:
++						Button@HEAL_SELECTED:
++							X: 15
++							Width: 151
++							Height: 30
++							Font: Bold
++							Text: button-debug-panel-heal-selected
++							TooltipTemplate: BUTTON_TOOLTIP
++							TooltipContainer: TOOLTIP_CONTAINER
+ 						Button@DISPOSE_SELECTED:
+ 							X: 177
+ 							Width: 151
+diff --git a/mods/ts/chrome/ingame-debug.yaml b/mods/ts/chrome/ingame-debug.yaml
+index b614cdb561..fa3d6b15db 100644
+--- a/mods/ts/chrome/ingame-debug.yaml
++++ b/mods/ts/chrome/ingame-debug.yaml
+@@ -156,6 +156,14 @@ Container@DEBUG_PANEL:
+ 					Width: PARENT_WIDTH - 17
+ 					Height: 30
+ 					Children:
++						Button@HEAL_SELECTED:
++							X: 15
++							Width: 151
++							Height: 30
++							Font: Bold
++							Text: button-debug-panel-heal-selected
++							TooltipTemplate: BUTTON_TOOLTIP
++							TooltipContainer: TOOLTIP_CONTAINER
+ 						Button@DISPOSE_SELECTED:
+ 							X: 177
+ 							Width: 151
+-- 
+2.42.0.windows.2
+
