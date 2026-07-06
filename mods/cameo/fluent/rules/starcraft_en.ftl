@@ -439,9 +439,7 @@ actor-scadept =
    .description = Protoss infantry.
         Can deploy to create an invulnerable shade.
         Teleports to the shade.
-
-actor-scadept.shade =
-   .description = A shade cast by an Adept.
+   .shade-description = A shade cast by an Adept.
         Deploy to cancel the shade teleport.
 
 actor-scdragoon =

@@ -6411,7 +6411,7 @@ SCADEPT:
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
-	Inherits@bot: ^BotAutoDeploySwitchMode50
+	Inherits@bot: ^BotAutoDeployTimedAbility
 	Inherits@weapon: ^ProtossGroundWeaponUpgrades
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Inherits@ResonatingGlaves: ^ResonatingGlaves
@@ -6475,7 +6475,7 @@ scadept.shade:
 	Tooltip:
 		Name: Adept Shade
 	Buildable:
-		Description: actor-scadept.shade.description
+		Description: actor-scadept.shade-description
 		-Queue:
 	-GrantTimedConditionOnDeploy:
 	-ShadeMaster:
@@ -6506,6 +6506,15 @@ scadept.shade:
 	KillsSelf@Cancel:
 		DamageTypes: DefaultDeath
 		RequiresCondition: cancel
+	IssueOrderToBot@AI: ## infiltrate
+		OrderName: Move
+		OrderTrigger: BecomingIdle, Periodically
+		OrderChance: 100
+		OrderInterval: 50
+		TargetRangeInCell: 12
+		ValidTargets: Ground
+		ValidRelationships: Enemy
+		TargetDistance: Furthest
 	RenderSprites:
 		Image: scadept
 

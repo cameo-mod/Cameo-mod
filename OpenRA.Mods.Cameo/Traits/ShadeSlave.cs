@@ -54,6 +54,9 @@ namespace OpenRA.Mods.Cameo.Traits
 			if (Info.DeathType != null && !e.Damage.DamageTypes.Contains(Info.DeathType))
 				return;
 
+			if (!master.IsInWorld || master.IsDead || master == null)
+				return;
+
 			spawnerMaster.TeleportToSlave(master, self);
 		}
 	}

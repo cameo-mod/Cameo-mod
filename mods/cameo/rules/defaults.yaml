@@ -8515,6 +8515,7 @@ CPQDEBUGDUMMY:
 		Reject: AttackMove, AssaultMove
 		RequiresCondition: !botmicro && deployed
 	IssueOrderToBot@AI:
+		OrderInterval: 60
 		RequiresCondition: botmicro && !deployed
 
 ^SiegeModeVehicle:

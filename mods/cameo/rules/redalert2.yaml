@@ -3711,6 +3711,15 @@ RA2CLEG:
 	GrantExternalConditionToTransport:
 		Condition: ifv-chrono
 	-TakeCover:
+	IssueOrderToBot@AI: ## teleport
+		OrderName: PortableChronoTeleport
+		OrderTrigger: Damage
+		OrderChance: 100
+		OrderInterval: 80
+		TargetRangeInCell: 50
+		ValidTargets: Ground
+		ValidRelationships: Ally
+		TargetDistance: Furthest
 	ActorStatValues:
 		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining
 
