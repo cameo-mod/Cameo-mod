@@ -227,7 +227,7 @@ wc_h_townhall:
 	Inherits@ai: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -346,7 +346,7 @@ wc_h_farm:
 	Inherits@shape: ^2x2Shape
 	Inherits@BURNABLE: ^WC1Building
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	StoresResources:
@@ -416,7 +416,7 @@ wc_h_guard_tower:
 	Inherits@BURNABLE: ^WC1Building
 	Inherits@upgrade_arrows: ^wc_h_str_arrow
 	Selectable:
-		Bounds: 72789, 72789
+		Bounds: 1706, 1706
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -543,7 +543,7 @@ wc_h_barracks:
 	ProvidesPrerequisite@barracks:
 		Prerequisite: barracks
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	Voiced:
 		VoiceSet: humanbarracksvoice
 
@@ -597,7 +597,7 @@ wc_h_lumbermill:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -627,7 +627,7 @@ wc_h_blacksmith:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQCondition
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -677,7 +677,7 @@ wc_h_church:
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -748,7 +748,7 @@ wc_h_stable:
 	Inherits@shape: ^2x2Shape
 	Inherits@CPQWP: ^CPQCondition
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -792,7 +792,7 @@ wc_h_tower:
 	Inherits@wcprod: ^WCUnitProduction
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -867,7 +867,7 @@ wc_h_stormwind:
 	Inherits@shape: ^2x2Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Selectable:
-		Bounds: 174762, 174762
+		Bounds: 4096, 4096
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -1379,7 +1379,6 @@ wc_h_mcv:
 		Name: Mobile Construction Peasant (Human)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 95
 	DamageMultiplier@DamageReduction:
@@ -1993,7 +1992,7 @@ wc_goldmine:
 	Inherits@Bot: ^BotMicromanageable
 	Inherits@XP: ^GainsExperienceCity
 	Selectable:
-		Bounds: 72789, 72789
+		Bounds: 1706, 1706
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -2365,7 +2364,7 @@ wc_o_demon:
 		InitialStance: AttackAnything
 		ScanRadius: 6
 	Selectable:
-		Bounds: 58240, 58240, 0, 0
+		Bounds: 1365, 1365, 0, 0
 
 wc_n_demon:
 	Inherits: wc_o_demon
@@ -2593,7 +2592,7 @@ wc_n_slime:
 		VoiceSet: AntVoice
 	-Crushable:
 	Selectable:
-		Bounds: 65536, 65536
+		Bounds: 1536, 1536
 	SpawnActorOnDeath@1:
 		Actor: wc_n_slime_b
 	SpawnActorOnDeath@2:

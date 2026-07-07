@@ -43,7 +43,7 @@ WIN98_MYCOMPUTER:
 	Inherits@ai: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -234,7 +234,7 @@ WIN98_BARRACKS:
 	ProvidesPrerequisite:
 		Prerequisite: WIN98_BARRACKS
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	Voiced:
 		VoiceSet: win98barracksvoice
 
@@ -256,7 +256,7 @@ WIN98_RECYCLEBIN:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 116480, 116480
+		Bounds: 2730, 2730
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -364,7 +364,7 @@ WIN98_INPUT_DEVICES:
 	ProvidesPrerequisite:
 		Prerequisite: WIN98_INPUT_DEVICES
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	Voiced:
 		VoiceSet: inputdevicesvoice
 
@@ -422,7 +422,7 @@ WIN98_AQUANET:
 			TopLeft: -1536, -1536
 			BottomRight: 1536, 1536
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -654,7 +654,7 @@ WIN98_AERIAL_UPLINK:
 		ActorTypes: win98_user
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	Voiced:
 		VoiceSet: aerialuplinkvoice
 
@@ -984,7 +984,7 @@ WIN98_XBOX:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		TargetableOffsets: 630,299,0
 	StoresResources:
@@ -1088,8 +1088,7 @@ WIN98_USER:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	Valued:
 		Cost: 150
 	Tooltip:
@@ -1127,8 +1126,7 @@ WIN98_USER:
 WIN98_ERASE:
 	Inherits: E3
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -1155,8 +1153,7 @@ WIN98_HARVESTER:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	AutoTargetPriority@Repair:
 		ValidTargets: Repair, Repairing
 		ValidRelationships: Ally
@@ -1201,8 +1198,7 @@ WIN98_HARVESTER:
 WIN98_FREECELL:
 	Inherits: E6
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -1224,8 +1220,7 @@ WIN98_AGENT:
 	Inherits: ^Soldier
 	Inherits@EXT: ^ExternalConditions
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -1281,8 +1276,7 @@ WIN98_SPIDER:
 	Inherits@EXT: ^ExternalConditions
 	Inherits@mechanic: ^MechanicDefaultWeapons
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
@@ -1328,8 +1322,7 @@ WIN98_CLIPPY:
 	Inherits@announce: ^AnnounceGlobal
 	Inherits@MC: ^MCImmune
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
@@ -1407,7 +1400,6 @@ WIN98_MCV:
 		Name: Mobile Construction Vehicle (Win98)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 95
 	Health:
@@ -1569,8 +1561,7 @@ WIN98_BITCOIN:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Selectable:
-		Bounds: 58240, 58240
-		DecorationBounds: 1536, 1536
+		Bounds: 1536, 1536
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -1745,7 +1736,7 @@ WIN98_EXPLORER:
 	SelectionDecorations:
 	Selectable:
 		Class: ratran
-		DecorationBounds: 72789, 65536
+		DecorationBounds: 1706, 1536
 	Voiced:
 		VoiceSet: win98explorervoice
 	WithCargoPipsDecoration:
@@ -1985,7 +1976,7 @@ WIN98_BENCHY:
 		DetectionTypes: Underwater
 	RenderDetectionCircle:
 	Selectable:
-		DecorationBounds: 69162, 69162
+		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
 		Payload: 500

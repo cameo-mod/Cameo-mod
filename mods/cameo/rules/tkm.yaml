@@ -1,4 +1,4 @@
-﻿
+
 ####################################################################################################
 #		MCV
 ####################################################################################################
@@ -341,7 +341,6 @@ tkmcommandcenter:
 		LocalCenterOffset: 0,-512,0
 	Selectable:
 		Bounds: 3072, 2048
-		DecorationBounds: 3300, 2448, 0, 0
 	SelectionDecorations:
 	Transforms:
 		IntoActor: tkmmcv
@@ -532,8 +531,7 @@ tkmfactory:
 		Dimensions: 3,3
 		LocalCenterOffset: 250,-600,0
 	Selectable:
-		Bounds: 3072, 2048
-		DecorationBounds: 3300, 2448, 0, 0
+		Bounds: 3300, 2448, 0, 0
 	SelectionDecorations:
 	RevealsShroud:
 		Range: 4c0
@@ -582,8 +580,7 @@ tkmairpad:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,512,0
 	Selectable:
-		Bounds: 3072, 2048
-		DecorationBounds: 3300, 2448, 0, 0
+		Bounds: 3300, 2448, 0, 0
 	SelectionDecorations:
 	RevealsShroud:
 		Range: 4c0

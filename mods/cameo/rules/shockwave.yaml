@@ -1771,7 +1771,6 @@ shockwave_mcv:
 		BuildDurationModifier: 100
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 200000
@@ -2552,8 +2551,7 @@ susaranger:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -2615,8 +2613,7 @@ susamarine:
 		ZOffset: -512
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	RenderSprites:
 		Image: susamarine
 		PlayerPalette: playerra2
@@ -2638,8 +2635,7 @@ susamissiledefender:
 		PlayerPalette: playerra2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -2678,8 +2674,7 @@ susapath:
 		ZOffset: -512
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 3626
-		DecorationBounds: 29098, 29098, 0, 3626
+		Bounds: 682, 682, 0, 85
 	TakeCover:
 		DamageModifiers:
 			Prone50Percent: 50
@@ -2716,8 +2711,7 @@ susaburton:
 		DeathSequencePalette: playerra2
 	-TakeCover:
 	Selectable:
-		Bounds: 29098, 29098, 0, 3626
-		DecorationBounds: 29098, 29098, 0, 3626
+		Bounds: 682, 682, 0, 85
 	RenderSprites:
 		Image: susaburton
 		PlayerPalette: playerra2
@@ -2989,7 +2983,6 @@ susalittlebird:
 	SpawnActorOnDeath:
 		Actor: susalittlebird.husk
 	Selectable:
-		DecorationBounds: 43690, 43690
 	-GrantConditionOnPrerequisite@stealth:
 	-Cloak:
 	-ProductionCostMultiplier@selectusaairforce:
@@ -3076,7 +3069,7 @@ susacomanche:
 	WithIdleOverlay@ROTORGROUND:
 		Offset: 200,0,100
 	Selectable:
-		DecorationBounds: 65536, 50944
+		DecorationBounds: 1536, 1194
 	RenderSprites:
 		Image: usarah66
 	SpawnActorOnDeath:
@@ -3315,8 +3308,7 @@ susabiohazardtech:
 		ZOffset: -512
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	RenderSprites:
 		Image: susabiohazardtech
 		PlayerPalette: playerra2
@@ -3954,7 +3946,7 @@ susalockdownmlrs:
 		UndeployTicks: 200
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 1280, 1280, 0, 14549
+		DecorationBounds: 1280, 1280, 0, 341
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -4289,8 +4281,7 @@ susasupportstealthfighter:
 	AmmoPool:
 		Ammo: 2
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -4544,7 +4535,7 @@ susarailgunartillery:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 65536, 50944
+		DecorationBounds: 1536, 1194
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -4657,8 +4648,7 @@ susalaserstealth:
 		ReloadCount: 25
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	RenderSprites:
 	SpawnActorOnDeath:
@@ -4953,7 +4943,6 @@ susasheridan:
 		LocalOffset: 768,0,90
 	-WithMuzzleOverlay:
 	Selectable:
-		DecorationBounds: 43690, 43690
 	Voiced:
 		VoiceSet: USACrusaderTankVoice
 	Inherits@ProducesDrones: ^ProducesDrones
@@ -5037,8 +5026,7 @@ susaraptor:
 		Ammo: 4
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -5139,8 +5127,7 @@ susatornado:
 		Ammo: 1
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -5198,7 +5185,7 @@ susapavelow:
 	Health:
 		HP: 50000
 	Selectable:
-		Bounds: 72789, 65536, 0, -45482
+		Bounds: 1706, 1536, 0, -1066
 	Mobile:
 		Speed: 116
 		Locomotor: fakeaircraft
@@ -5302,8 +5289,7 @@ susahangar:
 		Range: 7c0
 		RevealGeneratedShroud: False
 	Selectable:
-		Bounds: 100096, 81920, 0, 43690
-		DecorationBounds: 116480, 81920, 0, 43690
+		Bounds: 2730, 1920, 0, 1024
 	Exit@1:
 		ExitCell: 1,1
 		Facing: 768
@@ -5817,8 +5803,7 @@ susawraith:
 		Condition: upsusasabremissiles
 		Prerequisites: upsusasabremissiles
 	Selectable:
-		Bounds: 72789, 72789, 0, 14549
-		DecorationBounds: 72789, 72789, 0, 14549
+		Bounds: 1706, 1706, 0, 341
 	RenderSprites:
 	-Turreted@pointdefense:
 	-Armament@pointdefense:
@@ -5944,7 +5929,7 @@ susastarlifter:
 			VerticalBottomOffset: 1024
 		Turret: primary
 	Selectable:
-		Bounds: 72789, 65536, 0, -45482
+		Bounds: 1706, 1536, 0, -1066
 	Armor:
 		Type: Heavy
 	RevealsShroud:
@@ -6095,7 +6080,7 @@ susamammoth:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 87381, 87381
+		DecorationBounds: 2048, 2048
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -6648,7 +6633,7 @@ susaphalynx:
 		Class: susaphalanx
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 87381, 58240, 0, 14549
+		DecorationBounds: 2048, 1365, 0, 341
 	AmmoPool:
 		Ammo: 5
 		AmmoCondition: ammo
@@ -6692,8 +6677,7 @@ susablackwidow:
 		Ammo: 6
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -6757,8 +6741,7 @@ susaf16xl:
 		Ammo: 2
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -6825,7 +6808,7 @@ susaconcreteslab:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Selectable:
-		Bounds: 80085, 80085
+		Bounds: 1877, 1877
 		Class: susaconcreteslab
 	Valued:
 		Cost: 300
@@ -7349,7 +7332,7 @@ sglrebel:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 0
+		DecorationBounds: 682, 853, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7395,7 +7378,7 @@ sglworker:
 		Condition: moving
 		ValidMovementTypes: Horizontal, Vertical, Turn
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 7253
+		DecorationBounds: 682, 853, 0, 170
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7421,7 +7404,7 @@ sglrpgtrooper:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, -3626
+		DecorationBounds: 682, 853, 0, -85
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7436,7 +7419,7 @@ sglhijack:
 	WithInfantryBody:
 		IdleSequences: idle
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, -3626
+		DecorationBounds: 682, 853, 0, -85
 	WithDeathAnimation:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
@@ -7487,7 +7470,7 @@ sglkell:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 0
+		DecorationBounds: 682, 853, 0, 0
 	WithMuzzleOverlay:
 	WithShadow:
 		Offset: 0, 96, 0
@@ -7548,7 +7531,7 @@ sglaangrymob1:
 		UseDeathTypeSuffix: false
 		RequiresCondition: ak47upgrade
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -7579,7 +7562,7 @@ sglaangrymob2:
 	WithInfantryBody:
 		IdleSequences: idle, idle2, idle3
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithDeathAnimation:
 		DeathSequence: die
 		DeathSequencePalette: playerra2
@@ -7830,8 +7813,7 @@ sglairpad:
 		Range: 7c0
 		RevealGeneratedShroud: False
 	Selectable:
-		Bounds: 100096, 81920, 0, 43690
-		DecorationBounds: 116480, 81920, 0, 43690
+		Bounds: 2730, 1920, 0, 1024
 	Exit@1:
 		ExitCell: 1,1
 		Facing: 768
@@ -8430,8 +8412,7 @@ sgldesertfly:
 		Ammo: 3
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	Contrail@1:
 		Offset: -598,-683,0
 	Contrail@2:
@@ -8766,7 +8747,7 @@ sgllatrun:
 	SelectionDecorations:
 	WithMuzzleOverlay:
 	Selectable:
-		DecorationBounds: 61866, 61866
+		DecorationBounds: 1450, 1450
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience:
 		ValidTypes: USAPilot
@@ -9697,7 +9678,7 @@ sglhip:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	Voiced:
 		VoiceSet: CHHelixVoice
 	Production:
@@ -10951,7 +10932,7 @@ sgltoxinrebel:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 29098, 36394, 0, 0
+		DecorationBounds: 682, 853, 0, 0
 
 sgltoxinrebel_grey:
 	Inherits: sgltoxinrebel
@@ -11643,7 +11624,7 @@ sglfundamentalist1:
 		UseDeathTypeSuffix: false
 		RequiresCondition: !ak47upgrade
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -11677,7 +11658,7 @@ sglfundamentalist2:
 		DeathSequencePalette: playerra2
 		UseDeathTypeSuffix: false
 	Selectable:
-		DecorationBounds: 21845, 29098, 0, -1792
+		DecorationBounds: 512, 682, 0, -42
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -12521,8 +12502,7 @@ schpower3:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -12828,8 +12808,7 @@ schredguard:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -12851,8 +12830,7 @@ schtankhunter:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -12957,7 +12935,7 @@ schsiegesoldier:
 		RequiresCondition: deployed
 		RequiresSelection: true
 	Selectable:
-		DecorationBounds: 29098, 29098, 0, 0
+		DecorationBounds: 682, 682, 0, 0
 
 schhacker:
 	Inherits: CHHACKER
@@ -12966,8 +12944,7 @@ schhacker:
 		Prerequisites: schbarracks, schpropaganda, ~anyschina, ~!schina_nuke
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -13015,8 +12992,7 @@ schlotus:
 	-ProductionCostMultiplier@selectchtanks:
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -13039,8 +13015,7 @@ schofficer:
 		IdleSequences: idle1, idle2
 	SelectionDecorations:
 	Selectable:
-		Bounds: 29098, 29098, 0, 0
-		DecorationBounds: 29098, 29098, 0, 0
+		Bounds: 682, 682, 0, 0
 	WithShadow:
 		Offset: 0, 96, 0
 		ZOffset: -512
@@ -13275,8 +13250,7 @@ schempmig:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -13651,8 +13625,7 @@ schlisteningpost:
 		Offset: 2200,0,0
 		RequiresCondition: !damaged
 	Selectable:
-		DecorationBounds: 1536, 1536
-		Bounds: 65536, 65536
+		Bounds: 1536, 1536
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -14057,7 +14030,7 @@ schramjet:
 		Class: schramjet
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 87381, 58240, 0, 14549
+		DecorationBounds: 2048, 1365, 0, 341
 	-WithDeathAnimation:
 	-WithMakeAnimation:
 
@@ -14217,8 +14190,7 @@ schrazerbomber:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 65536, 50944, 0, 3626
-		DecorationBounds: 72789, 52778, 0, 1792
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -14365,7 +14337,7 @@ schtransporthelix:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	Voiced:
 		VoiceSet: CHHelixVoice
 	ReloadAmmoPool:
@@ -14485,8 +14457,7 @@ schindustrialplant:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,0,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 87381, 0, -18176
+		Bounds: 3072, 2048, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 120000
@@ -14969,7 +14940,7 @@ schfortifiedgattling:
 		BuildDurationModifier: 40
 		IconPalette: ra2
 	Selectable:
-		Bounds: 47317, 47317
+		Bounds: 1109, 1109
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -15193,7 +15164,7 @@ schassaulthelix:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	Voiced:
 		VoiceSet: CHHelixVoice
 	Production:
@@ -15768,7 +15739,7 @@ schnukegattlingcannon:
 		Description: All-purpose defensive structure.\nDoes not need to spin to gain full speed\nCan work while powered off\nCan be powered off to conserve power\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Selectable:
-		Bounds: 47317, 47317
+		Bounds: 1109, 1109
 	SelectionDecorations:
 	Health:
 		HP: 44000
@@ -16136,7 +16107,7 @@ schhammercannon:
 		FacingTolerance: 0
 	SelectionDecorations:
 	Selectable:
-		Bounds: 2048, 2048, 0, 58240
+		Bounds: 48, 48, 0, 1365
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -16491,7 +16462,7 @@ schsupplyhelicopterleang:
 			VerticalBottomOffset: 1024
 		Turret: primary
 	Selectable:
-		Bounds: 72789, 65536, 0, -45482
+		Bounds: 1706, 1536, 0, -1066
 	Mobile:
 		Speed: 112
 		TurnSpeed: 16

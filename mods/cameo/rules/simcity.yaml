@@ -150,7 +150,6 @@ CITYMCV:
 		Name: Mobile Construction Vehicle (SimCity)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 75
 		Locomotor: heavywheeled
@@ -928,7 +927,7 @@ CITYHARBOR:
 	Inherits: ^BaseBuilding
 	Inherits@ref: ^Refinery
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -1049,7 +1048,7 @@ CITYAIRPORT:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@SW: ^PrimarySuperweapon
 	Selectable:
-		Bounds: 174762, 174762
+		Bounds: 4096, 4096
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle

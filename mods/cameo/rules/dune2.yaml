@@ -611,7 +611,6 @@ dunemcv:
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -1100,7 +1099,7 @@ dunehtnk:
 		EmptyWeapon: UnitExplodeMech
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -1169,7 +1168,7 @@ duneconyard:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -1360,8 +1359,7 @@ dunerefin:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActorWithDelivery@1:
@@ -1449,7 +1447,7 @@ dunebarr:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 dunebarr2:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -1519,7 +1517,7 @@ dunebarr2:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 dunelweap:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -1589,7 +1587,7 @@ dunelweap:
 		Amount: -30
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	ProvidesPrerequisite@d2unlocktrike:
 		Prerequisite: d2unlocktrike
 		Factions: d2atreides
@@ -1660,7 +1658,7 @@ dunehweap:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 dunehitech:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
@@ -1725,7 +1723,7 @@ dunehitech:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 
 duneradar:
 	Inherits: ^BaseBuilding
@@ -1752,8 +1750,7 @@ duneradar:
 		Dimensions: 2,2
 		BuildSounds: dune2place.aud
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1796,8 +1793,7 @@ duneixhouse:
 		Dimensions: 2,2
 		BuildSounds: dune2place.aud
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1938,7 +1934,7 @@ dunespaceport:
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@weap: ^IsWeaponFactory
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -2046,8 +2042,7 @@ dunepalace:
 		Dimensions: 3,3
 		BuildSounds: dune2place.aud
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -2382,7 +2377,7 @@ duneorni:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 54613, 50944, 0, 3626
+		DecorationBounds: 1280, 1194, 0, 85
 	Voiced:
 		VoiceSet: Dune2VehicleVoice
 	RenderSprites:

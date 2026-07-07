@@ -380,7 +380,7 @@ techgdrone:
 		Delay: 30
 		Count: 1
 	Selectable:
-		DecorationBounds: 36394, 27306
+		DecorationBounds: 853, 640
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -412,7 +412,7 @@ UniversalHusk:
 	Inherits: ^TechBuilding
 	Inherits@shape: ^2x2Shape
 	Selectable:
-		Bounds: 233002, 87381
+		Bounds: 6144, 3072
 	OwnerLostAction:
 		Action: ChangeOwner
 	Building:
@@ -585,7 +585,7 @@ BHFACT:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQ: ^CPQCondition
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 3500
 	Tooltip:

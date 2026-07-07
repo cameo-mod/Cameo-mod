@@ -1585,14 +1585,18 @@ tspitbull:
 		Filename: gunfire2.shp
 		Length: 5
 
-# tsprobe:
-# 	idle: tsgghunt
-# 	shadow: tsgghunt
-# 		Start: 8
-# 		ZOffset: -511
-# 	icon: tshunterseekersicon
-# 	muzzle: gunfire2
-# 		Length: 5
+tsprobe:
+	Defaults:
+		Filename: tsgghunt.shp
+	idle:
+	shadow:
+		Start: 8
+		ZOffset: -511
+	icon:
+		Filename: tshunterseekersicon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
 
 tssgen:
 	Defaults:
@@ -4546,7 +4550,7 @@ tsprocmutant:
 tsproccabal:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Offset: 0,-12
+		Offset: 0,48
 	idle:
 		Filename: cabal_refinery.png
 		Start: 32
@@ -6183,9 +6187,8 @@ tibpump:
 		Tick: 100
 	dead:
 	icon:
-		Filename: ra2caoildicon.shp
+		Filename: ts_tiberiumpump_icon.png
 		Offset: 0, 0
-		UseTilesetCode: false
 
 tibdrill:
 	# idle:

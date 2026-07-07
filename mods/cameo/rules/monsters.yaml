@@ -32,7 +32,7 @@ TRIC:
 	Buildable:
 		Description: Quadruped with large bony frill and three horns
 	Selectable:
-		DecorationBounds: 61866, 43690, 0, 3626
+		DecorationBounds: 1450, 1024, 0, 85
 	Inherits@EXT: ^ExternalConditions ##########
 
 tric.citydrop:
@@ -119,8 +119,7 @@ Ant:
 		BuildDurationModifier: 100
 		Description: Irradiated insect that grew oversize.
 	Selectable:
-		Bounds: 1024, 1024, 0, -128
-		DecorationBounds: 1280, 1280, 0, -64
+		Bounds: 1280, 1280, 0, -64
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -555,7 +554,7 @@ RA2TRIPOD:
 	Tooltip:
 		Name: DOOM Tripod
 	Selectable:
-		Bounds: 100096, 163840, 0, 45482
+		Bounds: 2346, 3840, 0, 1066
 		Voice: Select
 	SelectionDecorations:
 	Health:
@@ -614,7 +613,7 @@ RA2CREEPCOLONY:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Selectable:
-		Bounds: 80085, 80085
+		Bounds: 1877, 1877
 		Class: sccreepcolony
 	Valued:
 		Cost: 600

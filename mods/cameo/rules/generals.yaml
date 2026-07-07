@@ -2588,8 +2588,7 @@ glsite:
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks\n  Weak vs Infantry
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 2048, 2048, 0, -512
+		Bounds: 2048, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 85000
@@ -5855,8 +5854,7 @@ chpower:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 3072, 2048
-		DecorationBounds: 3072, 2901, 0, -426
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -6377,8 +6375,7 @@ chpropagandatower:
 	WithBuildingBib:
 		HasMinibib: true
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 1024, 2048, 0, -512
+		Bounds: 1024, 2048, 0, -512
 	ProximityExternalCondition@PropagandaEffect:
 		Range: 6000
 		ValidRelationships: Ally
@@ -8859,8 +8856,7 @@ CHMIG:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -8958,8 +8954,7 @@ CHMIG2:
 		Count: 2
 		RequiresCondition: !upmignuke
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -11102,8 +11097,7 @@ usapower:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 3072, 2048
-		DecorationBounds: 3072, 2901, 0, -426
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -12310,8 +12304,7 @@ usaraptor:
 		Delay: 25
 		Count: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -12464,8 +12457,7 @@ usastealth:
 		Ammo: 4
 		AmmoCondition: ammo
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -12603,8 +12595,7 @@ usaaurora:
 		Delay: 250
 		Count: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0

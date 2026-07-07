@@ -1,4 +1,4 @@
-﻿# Warcraft 2 rules
+# Warcraft 2 rules
 
 # HP, Armor, and Cost values taken directly from ingame, since every wiki and website has discrepancies/errors.
 
@@ -1962,7 +1962,6 @@ wc2_human_townhall:
 		LowPowerModifier: 100
 	Selectable:
 		Bounds: 3072, 2048
-		DecorationBounds: 3300, 2448, 0, 0
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@wc2_human_keep:
 		Prerequisite: wc2_human_keep
@@ -2399,8 +2398,7 @@ wc2_human_sunwell:
 		Footprint: XX XX
 		Dimensions: 2,2
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 2048, 2048, 0, -512
+		Bounds: 2048, 2048, 0, -512
 	SpawnActorsOnSell:
 		ActorTypes: wc2_human_footman
 	Voiced:
@@ -2709,7 +2707,6 @@ wc2_human_scout_tower:
 		RequiresCondition: (guard || cannon) && !disabled
 	Selectable:
 		Bounds: 2048, 2048
-		DecorationBounds: 2448, 2448, 0, 0
 	GrantConditionOnPrerequisite@WC2ArrowUpg:
 		Condition: wc2arrow_upg
 		Prerequisites: wc2_h_str_arrow
@@ -4560,7 +4557,6 @@ wc2_orc_greathall:
 		LowPowerModifier: 100
 	Selectable:
 		Bounds: 3072, 2048
-		DecorationBounds: 3300, 2448, 0, 0
 	ProvidesPrerequisite@buildingname:
 	ProvidesPrerequisite@wc2_orc_stronghold:
 		Prerequisite: wc2_orc_stronghold
@@ -5222,7 +5218,6 @@ wc2_orc_watch_tower:
 		RequiresCondition: (guard || cannon) && !disabled
 	Selectable:
 		Bounds: 2048, 2048
-		DecorationBounds: 2448, 2448, 0, 0
 	GrantConditionOnPrerequisite@TAxeUpg:
 		Condition: throwaxe_upg
 		Prerequisites: wc2_o_str_throwaxe

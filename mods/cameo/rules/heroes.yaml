@@ -615,7 +615,6 @@ giegue:
 		ControllingCondition: controlling
 	Selectable:
 		Bounds: 1365, 2048, 0, -682
-		DecorationBounds: 1365, 2048, 0, -682
 	-Production:
 	-ProductionQueue:
 	WithDecoration@psi:
@@ -2426,7 +2425,6 @@ House:
 	Inherits@exp: ^AngelExperience
 	Selectable:
 		Bounds: 1024, 1024
-		DecorationBounds: 1024, 1024
 	Buildable:
 		Queue: Upgrade.Angel
 		BuildPaletteOrder: 10
@@ -3192,7 +3190,6 @@ mdkmissile:
 	ProvidesPrerequisite@hero:
 		Prerequisite: 1hero
 	Selectable:
-		DecorationBounds: 1024, 1024
 		Bounds: 1024, 1024
 	Exit:
 		ExitCell: 0,1
@@ -3220,7 +3217,6 @@ mdkmissile:
 		FacingTolerance: 80
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 1024, 1024
 		Bounds: 1024, 1024
 	Exit:
 		ExitCell: 0,1

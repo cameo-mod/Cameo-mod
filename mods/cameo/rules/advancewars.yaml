@@ -4405,7 +4405,6 @@ mcv.orange:
 		BuildLimit: 1
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 250000
@@ -11330,7 +11329,7 @@ awtcopter:
 	SelectionDecorations:
 	Selectable:
 		Class: tran
-		DecorationBounds: 74624, 74624
+		DecorationBounds: 1749, 1749
 	RenderSprites:
 		Image: awtcopter
 		FactionImages:
@@ -11436,7 +11435,7 @@ awcruiser:
 		DetectionTypes: Underwater
 	RenderDetectionCircle:
 	Selectable:
-		DecorationBounds: 69162, 69162
+		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
 		Payload: 500
@@ -11663,7 +11662,7 @@ awbattleship:
 	AttackFrontal:
 		FacingTolerance: 0
 	Selectable:
-		DecorationBounds: 69162, 69162
+		DecorationBounds: 1621, 1621
 	Inherits@EXT: ^ExternalConditions
 	DeliversCash:
 		Payload: 500

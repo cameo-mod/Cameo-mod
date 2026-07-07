@@ -452,8 +452,8 @@ wh40kstrategy:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -602,8 +602,8 @@ wh40kstrategyo:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -760,8 +760,8 @@ wh40kstrategym:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -911,8 +911,8 @@ wh40kstrategyc:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1063,8 +1063,8 @@ wh40kstrategyt:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 630,-300,0, 420,512,0, -420,-512,0, -630,300,0
 	Selectable:
-		Priority: 0
 		Bounds: 2048, 2048
+		Priority: 0
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1250,7 +1250,6 @@ wh40kmcv:
 		Name: Mobile Construction Vehicle (Imperial Guard)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 120000
@@ -1721,7 +1720,7 @@ wh40kheavybolt:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -1779,7 +1778,7 @@ wh40kheavybolt2:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 75000
@@ -1838,8 +1837,7 @@ wh40kproc:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -3601,7 +3599,7 @@ wh40kleman:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3662,7 +3660,7 @@ wh40kchime:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3723,7 +3721,7 @@ wh40khellhound:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3825,7 +3823,7 @@ wh40kbanewolf:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -4310,7 +4308,7 @@ wh40kbaneblade:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -5348,8 +5346,7 @@ wh40kprocm:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -5410,7 +5407,7 @@ wh40kbolterturret:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 160000
@@ -5468,7 +5465,7 @@ wh40kbolterturret2:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 150000
@@ -6336,7 +6333,6 @@ wh40kmcvm:
 		Name: Stronghold Transporter (Space Marines)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -6440,7 +6436,7 @@ wh40kpredator:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6572,7 +6568,7 @@ wh40krhino:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6637,7 +6633,7 @@ wh40kwhirl:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6688,7 +6684,7 @@ wh40klandspeed:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7163,7 +7159,7 @@ wh40klandraider:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7791,7 +7787,6 @@ wh40kmcvo:
 		Name: Da Konztruktion Vehicle (Orkz)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 120000
@@ -8141,7 +8136,7 @@ wh40kwhaaag:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 50000
@@ -8329,8 +8324,7 @@ wh40kproco:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -10175,7 +10169,7 @@ wh40kwartrukk:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10237,7 +10231,7 @@ wh40kwartrakk:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10343,7 +10337,7 @@ wh40korcleman:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10709,7 +10703,6 @@ wh40kmcvc:
 		Name: Stronghold Transporter (Space Marines)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 140000
@@ -10861,7 +10854,7 @@ wh40kchaospredator:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -10963,7 +10956,7 @@ wh40kchaosrhino:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -13005,8 +12998,7 @@ wh40kprocc:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -13064,7 +13056,7 @@ wh40kbolterturretc:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 160000
@@ -13122,7 +13114,7 @@ wh40kbolterturret2c:
 		BuildDurationModifier: 40
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Infantry\n  Weak vs Vehicles
 	Selectable:
-		Bounds: 87381, 89173
+		Bounds: 2048, 2090
 	SelectionDecorations:
 	Health:
 		HP: 150000
@@ -14098,8 +14090,7 @@ wh40kproct:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Power:
 		Amount: -30
@@ -14592,7 +14583,7 @@ wh40khammerhead:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -14755,7 +14746,7 @@ wh40kdronehard:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########

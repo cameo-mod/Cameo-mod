@@ -143,32 +143,33 @@ World:
 	Crushable:
 		CrushSound: squish6.aud
 
-# ^HunterSeekersPower:
-	# ProduceActorPowerCA@HunterSeeker:
-	# 	Name: Deploy Hunter-Seeker
-	# 	Description: Deploys a Hunter-Seeker.\n  Instantly kills mobile targets\n  Splash damage strong vs Vehicles, Buildings\n  Requires line of sight to target
-	# 	Icon: hunterseeker
-	# 	PauseOnCondition: lowpower
-	# 	Actors: tsprobe
-	# 	Type: Vehicle.HunterSeeker
-	# 	ChargeInterval: 3000
-	# 	ReadyAudio: Reinforce
-	# 	BlockedAudio:
-	# 	AutoFire: True
-	# 	IncomingSound: hunter2.aud
-	# 	LaunchSound: hunter2.aud
-	# 	OrderName: HunterSeekerSpawn
-	# 	SupportPowerPaletteOrder: 20
-	# Exit@1:
-	# 	ExitCell: 1,0
-	# Exit@2:
-	# 	ExitCell: 1,1
-	# Exit@3:
-	# 	ExitCell: 2,1
-	# Exit@4:
-	# 	ExitCell: 2,0
-	# Production@HunterSeeker:
-	# 	Produces: Vehicle.HunterSeeker
+^HunterSeekersPower:
+	ProduceActorPower@HunterSeeker:
+		Name: Data Worm
+		Description: A self-replicating data worm hijacks a Hunter-Seeker droid and launches it at a designated target.\n  Instantly kills mobile targets\n  Splash damage strong vs Vehicles, Buildings\n  Requires line of sight to target
+		Icon: cabaldataworm
+		PauseOnCondition: lowpower || disabled
+		Prerequisites: cabaldataworm
+		Actors: tsprobe
+		Type: Vehicle.HunterSeeker
+		ChargeInterval: 3000
+		ReadyAudio: Reinforce
+		BlockedAudio:
+		AutoFire: True
+		IncomingSound: hunter2.aud
+		LaunchSound: hunter2.aud
+		OrderName: HunterSeekerSpawn
+		SupportPowerPaletteOrder: 20
+	Exit@1:
+		ExitCell: 1,0
+	Exit@2:
+		ExitCell: 1,1
+	Exit@3:
+		ExitCell: 2,1
+	Exit@4:
+		ExitCell: 2,0
+	Production@HunterSeeker:
+		Produces: Vehicle.HunterSeeker
 
 ^CABALRankDecoration:
 	WithDecoration@RANK-1:
@@ -187,6 +188,30 @@ World:
 		Image: cabalrank
 		Sequence: rank-elite
 		Palette: greyscale
+	GrantConditionOnPrerequisite@cabalfirewallprotocol:
+		Condition: cabalfirewallprotocol
+		Prerequisites: cabalfirewallprotocol
+	Targetable@FIREWALLPROTOCOL:
+		TargetTypes: MCImmune
+		RequiresCondition: cabalfirewallprotocol
+	GrantConditionOnPrerequisite@upcabalfullassimilation:
+		Condition: upcabalfullassimilation
+		Prerequisites: upcabalfullassimilation
+	RevealsShroudMultiplier@FULLASSIMILATION:
+		RequiresCondition: upcabalfullassimilation
+		Modifier: 120
+	DetectCloakedMultiplier@FULLASSIMILATION:
+		RequiresCondition: upcabalfullassimilation
+		Modifier: 120
+	GrantConditionOnPrerequisite@cabalnetworkprotocols:
+		Condition: cabalnetworkprotocols
+		Prerequisites: cabalnetworkprotocols
+	FirepowerMultiplier@NETWORKPROTOCOLS:
+		RequiresCondition: cabalnetworkprotocols
+		Modifier: 108
+	ReloadDelayMultiplier@NETWORKPROTOCOLS:
+		RequiresCondition: cabalnetworkprotocols
+		Modifier: 95
 ^ForgottenRankDecoration:
 	WithDecoration@RANK-1:
 		Image: forgotrank
@@ -304,9 +329,6 @@ OILB.TS:
 		Queue: Building, RABuilding
 		Prerequisites: ~tsoilderrick, tstek, derricklimit
 		Description: Provides Passive income
-		IconPalette: ra2
-	RenderSprites:
-		Image: tibpump
 	-WithMakeAnimation:
 	WithIdleOverlay@PLATFORM:
 		RequiresCondition: !build-incomplete
@@ -315,6 +337,7 @@ OILB.TS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
 	RenderSprites:
+		Image: tibpump
 		PlayerPalette: playerra2
 
 OILB.TS.MUTANT:
@@ -349,7 +372,7 @@ TSGTCNST:
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -403,7 +426,6 @@ TSGTCNST:
 		RequiresCondition: !build-incomplete
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
@@ -416,7 +438,7 @@ TSGTCNSTGDI:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -474,7 +496,6 @@ TSGTCNSTGDI:
 		RequiresCondition: !build-incomplete
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
@@ -490,7 +511,7 @@ TSGTCNSTNOD:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -548,7 +569,6 @@ TSGTCNSTNOD:
 		RequiresCondition: !build-incomplete
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
@@ -566,7 +586,7 @@ TSGTCNSTCABAL:
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -626,10 +646,11 @@ TSGTCNSTCABAL:
 		RequiresCondition: !build-incomplete
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@fact.cabal:
+		Prerequisite: fact.cabal
 	RenderSprites:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
@@ -815,7 +836,6 @@ tsproccabal:
 		Capacity: 1000
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -1085,7 +1105,6 @@ TSNTAPWR:
 		TargetableOffsets: -355,-1024,0
 	Selectable:
 		Bounds: 3072, 2048
-		DecorationBounds: 3072, 2048
 	SelectionDecorations:
 	RevealsShroud:
 		Range: 5c0
@@ -1204,8 +1223,7 @@ TSGTPILE:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
@@ -1307,8 +1325,7 @@ TSNTHAND2:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	SelectionDecorations:
 	WithProductionOverlay:
 		RequiresCondition: !build-incomplete
@@ -1478,7 +1495,6 @@ TSNTWEAPCABAL:
 		LocalCenterOffset: 0,-512,0
 	Selectable:
 		Bounds: 3072, 2048
-		DecorationBounds: 3072, 2048
 	SelectionDecorations:
 	RevealsShroud:
 		Range: 4c0
@@ -1743,8 +1759,7 @@ tsntradr:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 2248, 2248
+		Bounds: 2248, 2248
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1947,7 +1962,7 @@ tsgttech:
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2035,7 +2050,7 @@ tscabaltech:
 # 	Inherits@shape: ^3x2Shape
 # 	# Inherits@hunterseeker: ^HunterSeekersPower
 # 	Selectable:
-# 		Bounds: 131072, 87381
+# 		Bounds: 3072, 2048
 # 	HitShape:
 # 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 # 	Buildable:
@@ -2070,9 +2085,9 @@ tscore:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
-	# Inherits@hunterseeker: ^HunterSeekersPower
+	Inherits@hunterseeker: ^HunterSeekersPower
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 1280, 1024
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2088,7 +2103,6 @@ tscore:
 		LocalCenterOffset: 0,-512,0
 	Selectable:
 		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -2264,13 +2278,24 @@ tsntmislcabal:
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsntmisl
+	Armament@superweapon1:
+		Name: superweapon
+		Weapon: TSTacticalMissile
+		RequiresCondition: !cabalclusterwarhead
+	Armament@superweapon2:
+		Name: superweapon
+		Weapon: TSTacticalNeutronMissile
+		RequiresCondition: cabalclusterwarhead
+	GrantConditionOnPrerequisite@cabalclusterwarhead:
+		Condition: cabalclusterwarhead
+		Prerequisites: cabalclusterwarhead
 
 tsctarmr:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	# Buildable:
@@ -2309,7 +2334,7 @@ tsgtplug:
 	Inherits@SW: ^PrimarySuperweapon
 	# Inherits@hunterseeker: ^HunterSeekersPower
 	# Selectable:
-	# 	Bounds: 131072, 87381
+	# 	Bounds: 3072, 2048
 	# HitShape:
 	# 	TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2440,7 +2465,7 @@ TSGTCNSTMUTANT:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -2491,7 +2516,6 @@ TSGTCNSTMUTANT:
 		RequiresCondition: !build-incomplete
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
@@ -2534,7 +2558,6 @@ tsprocmutant:
 		Capacity: 1000
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -2679,8 +2702,7 @@ tsgtpile2:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	RenderSprites:
 		Image: forgot_barracks
 		PlayerPalette: player_rgba
@@ -2711,8 +2733,7 @@ TSGTWEAPMUTANT:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	SelectionDecorations:
 	RevealsShroud:
 		Range: 4c0
@@ -2798,8 +2819,7 @@ tsgtradrmutant:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 2248, 2248
+		Bounds: 2248, 2248
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -2827,7 +2847,7 @@ tsfgttech:
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2864,7 +2884,7 @@ forgot_chemicalplant:
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -3091,8 +3111,13 @@ tsntlasr:
 
 tsntlasrcabal:
 	Inherits: tsntlasr
+	Tooltip:
+		Name: Plasma Turret
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disable
+		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disabled
+	Armament@PRIMARY:
+		Weapon: TSCABALPlasmaFire
+		RequiresCondition: !up_tiberiumlenses
 	RenderVoxels:
 		Image: tsntlasr
 	RenderSprites:
@@ -3521,7 +3546,7 @@ tsntsam:
 		Name: SAM Site
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstnod, tsnthand
+		Prerequisites: ~tsgtcnstnod, tsntradr
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: actor-tsntsam.description
@@ -3558,14 +3583,6 @@ tsntsam:
 		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: up_tiberiumcoremissiles
-
-tsntsamcabal:
-	Inherits: tsntsam
-	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disabled
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tsntsam
 
 tsntstlh:
 	Inherits: ^BaseBuilding
@@ -3836,12 +3853,12 @@ tsobl2:
 		Cost: 1350
 	Tooltip:
 		Name: Obelisk of Darkness
-	 Buildable:
-	 	BuildPaletteOrder: 60
-	 	Prerequisites: ~tsgtcnstcabal, tsnthand2
-	 	Queue: Defence, RADefence
-	 	BuildDurationModifier: 40
-	 	Description: Advanced air defense.\nRequires power to operate.\n  Strong vs aircraft\n  Weak vs ground units
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Advanced air defense.\nRequires power to operate.\n  Strong vs aircraft\n  Weak vs ground units
 	Building:
 		Footprint: x
 	Selectable:
@@ -3883,14 +3900,6 @@ tsobl2:
 		Amount: -75
 	RenderSprites:
 		PlayerPalette: playerra2
-
-tsntobel2cabal:
-	Inherits: tsobl2
-	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tscabaltech, ~disabled
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tsobl2
 
 tscbunk:
 	Inherits: ^RA2Defense
@@ -5041,6 +5050,7 @@ TSCYBORG:
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@DarkArmament: ^cabaldarkarmament
+	Inherits@RECLAMATION: ^upcabalreclamation
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -5098,6 +5108,7 @@ tscyborgb:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabaldarkarmament
+	Inherits@RECLAMATION: ^upcabalreclamation
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -5186,6 +5197,7 @@ tsdevout:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabaldarkarmament
+	Inherits@RECLAMATION: ^upcabalreclamation
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -5277,6 +5289,7 @@ tsascended:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabaldarkarmament
+	Inherits@RECLAMATION: ^upcabalreclamation
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -5366,6 +5379,7 @@ tshacker:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@UPLINK: ^upcabalneuraluplink
 	Inherits@EMP: ^UnitDisable
 	Inherits@HAND: ^cabalhandoflegion
 	Valued:
@@ -5470,6 +5484,7 @@ TSREAPER:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
+	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Armor:
 		Type: Medium #Wood
 	Valued:
@@ -5660,6 +5675,8 @@ TSARND:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@DarkArmament: ^cabaldarkarmament
+	Inherits@RECLAMATION: ^upcabalreclamation
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -6732,8 +6749,7 @@ tsprobe:
 	Tooltip:
 		Name: Hunter-Seeker Droid
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 2248, 2248
+		Bounds: 2248, 2248
 	WithFacingSpriteBody:
 	WithSpriteBody@shadow:
 		Sequence: shadow
@@ -7378,8 +7394,7 @@ TSHVR:
 		LocalOffset: 0,121,271, 0,-121,271
 	AttackTurreted:
 	SelectionDecorations:
-		Bounds: 2048, 2048
-		DecorationBounds: 2248, 2248
+		Bounds: 2248, 2248
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7637,8 +7652,7 @@ TSHMEC:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7738,8 +7752,7 @@ TSMKII:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7876,7 +7889,7 @@ tsaegis:
 	AttackFrontal:
 		FacingTolerance: 0
 	Selectable:
-		DecorationBounds: 72789, 72789
+		DecorationBounds: 1706, 1706
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -8079,16 +8092,6 @@ TSBIKE:
 	ActorStatValues:
 		Upgrades: up_mobilityspecialization, up_tiberiumcoremissiles, up_advancedtiberiumrefinement
 
-TSBIKECABAL:
-	Inherits: TSBIKE
-	Buildable:
-		Prerequisites: ~tsntweapcabal, ~disabled
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tsbike
-	RenderVoxels:
-		Image: tsbike
-
 TSSTNK:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
@@ -8175,16 +8178,6 @@ TSSTNK:
 		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: up_tiberiumcoremissiles, up_advancedtiberiumrefinement, up_stealthfieldsimprovements
-
-TSSTNKCABAL:
-	Inherits: TSSTNK
-	Buildable:
-		Prerequisites: ~tsntweapcabal, tscabaltech, ~disabled
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tsstnk
-	RenderVoxels:
-		Image: tsstnk
 
 TSREPAIR:
 	Inherits: ^Tank
@@ -8524,16 +8517,6 @@ TSSUBTANK:
 	ActorStatValues:
 		Upgrades: up_advancedtiberiumrefinement
 
-TSSUBTANKCABAL:
-	Inherits: TSSUBTANK
-	Buildable:
-		Prerequisites: ~tsntweapcabal, tscabaltech, ~disabled
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tssubtank
-	RenderVoxels:
-		Image: tssubtank
-
 tssgen:
 	Inherits: ^Tank
 	Inherits@Voxel: ^TSRenderVoxel
@@ -8649,35 +8632,6 @@ tslpst:
 		PlayerPalette: playerra2
 	ActorStatValues:
 		Upgrades: up_mechanicalreliability
-
-tslpstcabal:
-	Inherits: tslpst
-	Buildable:
-		Prerequisites: ~tsntweapcabal, tsntradrcabal, ~disabled
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: tslpst
-	RenderVoxels:
-		Image: tslpst
-
-tslpstnod:
-	Inherits: tslpst
-	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
-	Tooltip:
-		Name: Mobile Sensor Array
-	Buildable:
-		BuildPaletteOrder: 110
-		Prerequisites: ~tsntweap, tsntradr
-		Queue: Vehicle, RAVehicle
-		Description: Shuts down vehicles with an EMP blast.\n  Strong vs Vehicles, Cyborgs
-	RenderSprites:
-		Image: tslpst
-		PlayerPalette: playerra2
-	RenderVoxels:
-		Image: tslpst
-	ActorStatValues:
-		Upgrades: up_advancedtiberiumrefinement
-
 
 #######################################
 # TS Forgotten Vehicles
@@ -9603,6 +9557,7 @@ TSLASSPID:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@REINFORCED: ^upcabalreinforcedchassis
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -9654,6 +9609,7 @@ tscabalcobra:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@REINFORCED: ^upcabalreinforcedchassis
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -9707,6 +9663,7 @@ tsspddrone:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Inherits@CATALYST: ^cabaltibcatalysticon
+	Inherits@REINFORCED: ^upcabalreinforcedchassis
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -9769,6 +9726,7 @@ tscheavyspider:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Inherits@BACKUP: ^cabalbackupsystemicon
+	Inherits@OVERCHARGE: ^upcabalovercharge
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -9878,6 +9836,7 @@ TSART2CABAL:
 	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Inherits@CATALYST: ^cabaltibcatalysticon
 	Inherits@BACKUP: ^cabalbackupsystemicon
+	Inherits@OVERCHARGE: ^upcabalovercharge
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -9981,6 +9940,7 @@ TSTTNKCABAL:
 	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
 	Inherits@CATALYST: ^cabaltibcatalysticon
 	Inherits@BACKUP: ^cabalbackupsystemicon
+	Inherits@OVERCHARGE: ^upcabalovercharge
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -10100,6 +10060,7 @@ TSSAPCCABAL:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@cargo: ^CargoVehicle
+	Inherits@REINFORCED: ^upcabalreinforcedchassis
 	Valued:
 		Cost: 2600
 	Tooltip:
@@ -10158,9 +10119,9 @@ TST1000:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
+	Inherits@DarkArmament: ^cabaldarkarmament
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 2560, 0, 0
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -10248,6 +10209,8 @@ TSDEFENDER:
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@ND: ^NotDevourable
 	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@REINFORCED: ^upcabalreinforcedchassis
+	Inherits@OVERCHARGE: ^upcabalovercharge
 	Valued:
 		Cost: 10000
 	UpdatesPlayerStatistics:
@@ -10327,8 +10290,7 @@ TSDEFENDER:
 			TopLeft: -1024, -1024
 			BottomRight: 1024, 1024
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 2248, 2248
+		Bounds: 2248, 2248
 	Capturable:
 		Types: thiefproof
 	RenderSprites:
@@ -10709,8 +10671,7 @@ TSTRNSPORT:
 	Tooltip:
 		Name: Carryall
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -10773,13 +10734,13 @@ tscarrycabal:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@OVERCHARGE: ^upcabalovercharge
 	Valued:
 		Cost: 1750
 	Tooltip:
 		Name: Overkill Carryall
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -10847,8 +10808,7 @@ TSTRNSPORTMUTANT:
 	Tooltip:
 		Name: Carryall
 	Selectable:
-		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1024
+		Bounds: 1280, 1024
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -10966,6 +10926,7 @@ TSSCRINCABAL:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@OVERCHARGE: ^upcabalovercharge
 	Valued:
 		Cost: 2400
 	Tooltip:
@@ -11275,6 +11236,7 @@ TSAPACHECABAL:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
+	Inherits@OVERCHARGE: ^upcabalovercharge
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -12546,6 +12508,9 @@ cabalmobilitymatrix:
 	SpeedMultiplier@cabalmobilitymatrix:
 		RequiresCondition: cabalmobilitymatrix
 		Modifier: 125
+	DamageMultiplier@cabalmobilitymatrix:
+		RequiresCondition: cabalmobilitymatrix
+		Modifier: 90
 	ActorStatValues:
 		Upgrades: cabalmobilitymatrix
 
@@ -12570,9 +12535,9 @@ cabaldarkarmament:
 		Prerequisites: cabaldarkarmament
 	ActorStatValues:
 		Upgrades: cabaldarkarmament
-	ReloadDelayMultiplier@cabalmobilitymatrix:
-		RequiresCondition: cabalmobilitymatrix
-		Modifier: 110
+	ReloadDelayMultiplier@cabaldarkarmament:
+		RequiresCondition: cabaldarkarmament
+		Modifier: 90
 cabaltibcatalysticon:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
@@ -12616,6 +12581,21 @@ cabalradarhack:
 		Prerequisites: cabalradarhack
 	ActorStatValues:
 		Upgrades: cabalradarhack
+
+cabalnetworkprotocols:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Networked Combat Protocols
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: CABAL's assimilated network coordinates targeting across all units.\n  All units gain 8% firepower and 5% faster reload.
+		Prerequisites: ~tsntradrcabal, !cabalnetworkprotocols
+	RenderSprites:
+		Image: cabalradarhack
+	ProvidesPrerequisite:
 ############### Lab
 
 cabalbackupsystemicon:
@@ -12626,7 +12606,7 @@ cabalbackupsystemicon:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Upgrades
+		Queue: Research
 		Description: Heavy Vehicles turns in Husks when dies, if Husk arent destroyed, it wakes up again.
 		Prerequisites: ~tscabaltech, !cabalbackupsystemicon
 	RenderSprites:
@@ -12647,7 +12627,7 @@ cabalhandoflegion:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Upgrades
+		Queue: Research
 		Description: Spawns free Hackers from Tech Center, Hackers upgrade speed.
 		Prerequisites: ~tscabaltech, !cabalhandoflegion
 	RenderSprites:
@@ -12668,11 +12648,41 @@ cabaldataworm:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 90
-		Queue: Upgrades
-		Description: Unlocks a support power at CABAL Core, can hack and turn enemy vehicles or robots in your side.
+		Queue: Research
+		Description: Unlocks the Data Worm support power at CABAL Core.\nHijacks a Hunter-Seeker droid and launches it at a target, instantly destroying mobile units.
 		Prerequisites: ~tscabaltech, !cabaldataworm
 	RenderSprites:
 		Image: cabaldataworm
+	ProvidesPrerequisite:
+
+cabalfirewallprotocol:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Firewall Protocol
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: CABAL units become resistant to enemy mind control and vehicle hijacking.
+		Prerequisites: ~tscabaltech, !cabalfirewallprotocol
+	RenderSprites:
+		Image: cabalradarhack
+	ProvidesPrerequisite:
+
+cabalclusterwarhead:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cluster Warhead
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Retrofits the Missile Silo with a neutron cluster warhead,\nspreading its payload across a wider area on impact.
+		Prerequisites: ~tscore, !cabalclusterwarhead
+	RenderSprites:
+		Image: cabaltibcatalysticon
 	ProvidesPrerequisite:
 
 
@@ -12839,3 +12849,125 @@ uptsdummy4:
 		Prerequisites: ~fact.tsgdi, disabled, rank1
 	RenderSprites:
 		Image: tsgdidummyicon
+
+################## CABAL Research #########################
+
+upcabalreinforcedchassis:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reinforced Chassis
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Laser Spider, Mantis and Spider Tank Drone gain 15% armor.
+		Prerequisites: ~tscabaltech, !upcabalreinforcedchassis
+	RenderSprites:
+		Image: cabalmobilitymatrix
+	ProvidesPrerequisite:
+		Prerequisite: upcabalreinforcedchassis
+
+^upcabalreinforcedchassis:
+	GrantConditionOnPrerequisite@upcabalreinforcedchassis:
+		Condition: upcabalreinforcedchassis
+		Prerequisites: upcabalreinforcedchassis
+	DamageMultiplier@upcabalreinforcedchassis:
+		RequiresCondition: upcabalreinforcedchassis
+		Modifier: 85
+	ActorStatValues:
+		Upgrades: upcabalreinforcedchassis
+
+upcabalovercharge:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Overcharged Servos
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Heavy Spider, Artillery Spider and Tarantula reload 15% faster.
+		Prerequisites: ~tscabaltech, !upcabalovercharge
+	RenderSprites:
+		Image: cabaldarkarmament
+	ProvidesPrerequisite:
+		Prerequisite: upcabalovercharge
+
+^upcabalovercharge:
+	GrantConditionOnPrerequisite@upcabalovercharge:
+		Condition: upcabalovercharge
+		Prerequisites: upcabalovercharge
+	ReloadDelayMultiplier@upcabalovercharge:
+		RequiresCondition: upcabalovercharge
+		Modifier: 85
+	ActorStatValues:
+		Upgrades: upcabalovercharge
+
+upcabalneuraluplink:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Neural Uplink
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Hacker Cyborg hacking attacks reload 20% faster.
+		Prerequisites: ~tscabaltech, !upcabalneuraluplink
+	RenderSprites:
+		Image: cabalhandoflegion
+	ProvidesPrerequisite:
+		Prerequisite: upcabalneuraluplink
+
+^upcabalneuraluplink:
+	GrantConditionOnPrerequisite@upcabalneuraluplink:
+		Condition: upcabalneuraluplink
+		Prerequisites: upcabalneuraluplink
+	ReloadDelayMultiplier@upcabalneuraluplink:
+		RequiresCondition: upcabalneuraluplink
+		Modifier: 80
+	ActorStatValues:
+		Upgrades: upcabalneuraluplink
+
+upcabalreclamation:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reclamation Protocols
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Cyborg Infantry and Plated Armor Cyborg self-repair faster.
+		Prerequisites: ~tscabaltech, !upcabalreclamation
+	RenderSprites:
+		Image: cabalbackupsystemicon
+	ProvidesPrerequisite:
+		Prerequisite: upcabalreclamation
+
+^upcabalreclamation:
+	GrantConditionOnPrerequisite@upcabalreclamation:
+		Condition: upcabalreclamation
+		Prerequisites: upcabalreclamation
+	ChangesHealth@RECLAMATION:
+		Step: 10
+		RequiresCondition: upcabalreclamation
+	ActorStatValues:
+		Upgrades: upcabalreclamation
+
+upcabalfullassimilation:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Full Assimilation
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: CABAL's assimilated network extends unit sensor range and cloak detection by 20%.
+		Prerequisites: ~tscabaltech, !upcabalfullassimilation
+	RenderSprites:
+		Image: cabaldataworm
+	ProvidesPrerequisite:
+		Prerequisite: upcabalfullassimilation

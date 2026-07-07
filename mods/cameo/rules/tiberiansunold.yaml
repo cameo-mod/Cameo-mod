@@ -293,7 +293,7 @@ TSGTCNST:
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -365,7 +365,7 @@ TSGTCNSTGDI:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -439,7 +439,7 @@ TSGTCNSTNOD:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -542,7 +542,7 @@ TSGTCNSTMUTANT:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -623,7 +623,7 @@ TSGTCNSTCABAL:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -844,8 +844,7 @@ TSPROC:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -907,8 +906,7 @@ tsntwast:
 	RevealsShroud:
 		Range: 6c0
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	WithIdleOverlay@GLOW:
@@ -1043,8 +1041,7 @@ TSNTAPWR:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -1179,7 +1176,7 @@ TSGTPILE:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
@@ -1254,8 +1251,7 @@ TSNTHAND:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete
@@ -1341,8 +1337,7 @@ TSGTWEAP:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1426,8 +1421,7 @@ TSNTWEAP:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1538,8 +1532,7 @@ tsgtdept:
 		Footprint: _+_ +++ _+_
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1779,8 +1772,7 @@ tsntradr:
 		Dimensions: 2,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -1850,8 +1842,7 @@ tsgtradr:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -2021,7 +2012,7 @@ tsgttech:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2071,7 +2062,7 @@ tsnttmpl:
 	Inherits@shape: ^3x2Shape
 	# Inherits@hunterseeker: ^HunterSeekersPower
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2109,7 +2100,7 @@ tscore:
 	Inherits@shape: ^3x2Shape
 	# Inherits@hunterseeker: ^HunterSeekersPower
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2256,7 +2247,7 @@ tsctarmr:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2293,7 +2284,7 @@ tsgtplug:
 	Inherits@SW: ^PrimarySuperweapon
 	# Inherits@hunterseeker: ^HunterSeekersPower
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
@@ -2893,8 +2884,7 @@ tsntobel:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 2048, 2048, 0, -512
+		Bounds: 2048, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 100000
@@ -2948,7 +2938,7 @@ tsobl2:
 	Building:
 		Footprint: x
 	Selectable:
-		Bounds: 43690, 116480
+		Bounds: 1024, 2730
 	SelectionDecorations:
 	Health:
 		HP: 50000
@@ -3286,8 +3276,6 @@ TSJUMPJET2:
 		AttackType: Hover
 	-SpawnActorOnDeath:
 	SelectionDecorations:
-	Selectable:
-		DecorationBounds: 21845, 36394
 	Voiced:
 		VoiceSet: TSJumpJet
 	-WithFacingSpriteBody:
@@ -3297,8 +3285,7 @@ TSJUMPJET2:
 		StandSequences: idle
 		MoveSequence: idle
 	Selectable:
-		Bounds: 32768, 32768, 0, -10922
-		DecorationBounds: 21845, 30933, 0, -10922
+		Bounds: 512, 853
 	ChangesHealth@HOSPITAL:
 		Step: 500
 		Delay: 100
@@ -4496,8 +4483,7 @@ tsprobe:
 	Tooltip:
 		Name: Hunter-Seeker Droid
 	Selectable:
-		Bounds: 32768, 32768, 0, -10922
-		DecorationBounds: 21845, 30933, 0, -10922
+		Bounds: 512, 725, 0, -256
 	WithFacingSpriteBody:
 	WithSpriteBody@shadow:
 		Sequence: shadow
@@ -4950,8 +4936,7 @@ TSHMEC:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		Bounds: 72789, 63701, 0, -18176
-		DecorationBounds: 2048, 2048, 0, -512
+		Bounds: 2048, 2048, 0, -512
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -5051,7 +5036,7 @@ tsaegis:
 	AttackFrontal:
 		FacingTolerance: 0
 	Selectable:
-		DecorationBounds: 72789, 72789
+		DecorationBounds: 1706, 1706
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -6344,8 +6329,7 @@ TST1000:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Selectable:
-		Bounds: 43690, 87381
-		DecorationBounds: 43690, 87381
+		Bounds: 1024, 2048
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -6515,8 +6499,7 @@ TSDEFENDER:
 			TopLeft: -1024, -1024
 			BottomRight: 1024, 1024
 	Selectable:
-		Bounds: 87381, 131072, 3626, 1792
-		DecorationBounds: 94634, 131072
+		Bounds: 2218, 3072
 	AutoTarget:
 		ScanRadius: 10
 	Capturable:
@@ -6849,7 +6832,7 @@ TSTRNSPORT:
 		Type: CenterPosition
 	RenderSprites:
 	Selectable:
-		Bounds: 80085, 58240, 0, -14549
+		Bounds: 1877, 1365, 0, -341
 	SpawnActorOnDeath:
 		Actor: TSTRNSPORT.Husk
 	WithVoxelBody:

@@ -958,7 +958,6 @@ zmcv:
 		BuildDuration: 4500
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -1006,7 +1005,7 @@ zfort:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 218453, 174762
+		Bounds: 5120, 4096
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -1493,8 +1492,7 @@ zfix:
 		Footprint: xxx x+x +++
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 150000

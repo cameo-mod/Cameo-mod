@@ -70,7 +70,7 @@ SYRF:
 	Inherits: ^FakeBuilding
 	Inherits@infiltrate: ^InfiltratableFake
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 890
 		Queue: Defense
@@ -115,7 +115,7 @@ SPEF:
 	Inherits: ^FakeBuilding
 	Inherits@infiltrate: ^InfiltratableFake
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Targetable:
 		TargetTypes: Ground, Water, Structure, SpyInfiltrate
 	Buildable:
@@ -160,7 +160,7 @@ WEAF:
 	Inherits@infiltrate: ^InfiltratableFake
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 920
 		Prerequisites: #~structures.france, ~techlevel.medium
@@ -230,8 +230,7 @@ DOMF:
 FIXF:
 	Inherits: ^FakeBuilding
 	Selectable:
-		Bounds: 123776, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 940
 		Queue: Defense
@@ -290,8 +289,7 @@ FAPW:
 	RenderSprites:
 		Image: APWR
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -18176
+		Bounds: 3072, 2901, 0, -426
 	SelectionDecorations:
 	Valued:
 		Cost: 50
@@ -366,7 +364,7 @@ MSLF:
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^2x1Shape
 	Selectable:
-		Bounds: 87381, 43690
+		Bounds: 2048, 1024
 	Tooltip:
 		Name: Fake Missile Silo
 		GenericName: Missile Silo
@@ -396,7 +394,7 @@ MSLF:
 FACF:
 	Inherits: ^FakeBuilding
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	Buildable:
 		BuildPaletteOrder: 1000
 		Queue: Defense

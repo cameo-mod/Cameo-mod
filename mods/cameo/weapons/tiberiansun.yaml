@@ -1234,6 +1234,12 @@ TSTurretLaser:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 
+TSCABALPlasmaFire:
+	Inherits: TSTurretLaser
+	Projectile: LaserZap
+		Color: 0040FF80
+		SecondaryBeamColor: 80C0FF
+
 TSLaserTurretLaser:
 	Inherits: ^Chaingun
 	Inherits: ^LaserWeapon
@@ -1482,6 +1488,9 @@ TSSuperCyCannon:
 TSCABALObeliskLaserFire:
 	Inherits: TSObeliskLaserFire
 	Report: obelcor3.aud
+	Projectile:
+		Color: 0040FF80
+		SecondaryBeamColor: 80C0FF
 
 TSHunterKillerLasers:
 	Inherits: ^Chaingun
@@ -1499,6 +1508,8 @@ TSHunterKillerLasers:
 		Duration: 8
 		SecondaryBeamWidth: 18
 		-HitAnim:
+		Color: 0040FF80
+		SecondaryBeamColor: 80C0FF
 	Warhead@Chaingun: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Air
@@ -3477,6 +3488,20 @@ TSMissileBomblet:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
 
+
+TSTacticalNeutronMissile:
+	Inherits: TSTacticalMissile
+	Warhead@1Dam: FireFragment
+		Weapon: TSTacticalNeutronMissileDamage
+
+TSTacticalNeutronMissileDamage:
+	Inherits: TSTacticalMissileDamage
+	Warhead@Cluster2: FireRadius
+		Weapon: TSMissileBomblet
+		ImpactActors: false
+		Amount: 8
+		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
+		AirThreshold: 8c0
 
 TSTacticalChemMissile:
 	Inherits: TSTacticalMissile

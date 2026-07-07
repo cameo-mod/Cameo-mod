@@ -878,21 +878,23 @@ RA2105mm_elite:
 
 RA2sabot:
 	Inherits: ^RA2TankDestroyerCannon
-	ReloadDelay: 80
+	ReloadDelay: 160
 	Range: 7040
 	Projectile: Bullet
 		Speed: 1408
 	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 40000
+		Damage: 80000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 20
+		Damage: 40
 
 RA2sabot_elite:
 	Inherits: RA2sabot
 	Inherits@Elite: ^RA2EliteEffects
 	Range: 8040
-	Burst: 2
-	BurstDelays: 5
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 160000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 80
 
 RA2MirageGun:
 	Inherits: ^RailgunWeapon

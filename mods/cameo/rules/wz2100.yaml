@@ -265,8 +265,7 @@ Player:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	Health:
 		HP: 100000
 	RevealsShroud:
@@ -326,8 +325,8 @@ Player:
 		BuildDuration: 250
 		Description: Provides resources
 	Selectable:
-		Priority: 0
 		Bounds: 1024, 1024
+		Priority: 0
 	Health:
 		HP: 50000
 	RevealsShroud:
@@ -431,8 +430,7 @@ Player:
 		Queue: Building, RABuilding
 		Description: Heals nearby units.
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 87381, 0, -21845
+		Bounds: 2048, 2048, 0, -512
 	Health:
 		HP: 100000
 	RevealsShroud:
@@ -728,8 +726,7 @@ Player:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	Health:
 		HP: 120000
 	RevealsShroud:
@@ -892,8 +889,7 @@ Player:
 		RequiresCondition: classicproductionqueues
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 
 2100VFY1:
@@ -1064,7 +1060,7 @@ Player:
 	Inherits@shape: ^1x1Shape
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	Selectable:
-		Bounds: 50944, 50944
+		Bounds: 1194, 1194
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
@@ -1372,8 +1368,7 @@ Player:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 20000
@@ -1417,8 +1412,7 @@ Player:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 20000
@@ -1461,8 +1455,7 @@ Player:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 30000
@@ -1500,8 +1493,7 @@ Player:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 30000
@@ -1793,8 +1785,7 @@ psc2100factory2:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 21845
+		Bounds: 3072, 2048, 0, 512
 	Health:
 		HP: 50000
 	RevealsShroud:
@@ -1859,8 +1850,7 @@ psc2100factory2:
 		LocalCenterOffset: 0,-512,0
 	SelectionDecorations:
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 43690
+		Bounds: 3072, 2048, 0, 1024
 	Health:
 		HP: 110000
 	Armor:
@@ -1983,8 +1973,7 @@ psc2100factory2:
 		LocalCenterOffset: 0,-512,0
 	SelectionDecorations:
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 43690
+		Bounds: 3072, 2048, 0, 1024
 	Health:
 		HP: 110000
 	Armor:
@@ -2055,8 +2044,7 @@ psc2100factory2:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-640,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 21845
+		Bounds: 3072, 2048, 0, 512
 	Production@NORMAL:
 		Produces: Aircraft
 		RequiresCondition: !classicproductionqueues
@@ -2316,7 +2304,7 @@ psc2100factory2:
 	Inherits@EMP: ^TurretEMP
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Selectable:
-		Bounds: 43690, 65536
+		Bounds: 1024, 1536
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -2497,8 +2485,7 @@ psc2100factory2:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381, 0, 0
-		DecorationBounds: 131072, 87381, 0, 21845
+		Bounds: 3072, 2048, 0, 512
 	Health:
 		HP: 50000
 	RevealsShroud:
@@ -2543,8 +2530,7 @@ psc2100factory2:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 25000
@@ -3056,7 +3042,7 @@ psc2100chopshop2:
 	ProducibleWithLevel:
 		Prerequisites: aircraft.upgraded
 	Selectable:
-		DecorationBounds: 69162, 58240
+		DecorationBounds: 1621, 1365
 	SelectionDecorations:
 	ThrowsShrapnel:
 		Weapons: Debris2, Debris3
@@ -4141,7 +4127,6 @@ psc2100chopshop2:
 		HP: 250000
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Transforms:
 		IntoActor: 2100hq.alpha
 		Offset: -1,-1
@@ -6711,7 +6696,6 @@ psc2100chopshop2:
 		Description: Deploys into another Construction Yard.\n  Automaticaly Repairs Structures in a 3 Tile Radius
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 100
 	Health:
@@ -7432,7 +7416,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		DecorationBounds: 54613, 54613
+		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: 2100ScavengerVoice2
 	RenderSprites:
@@ -7503,7 +7487,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		DecorationBounds: 54613, 54613
+		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: 2100ScavengerVoice2
 	RenderSprites:
@@ -7575,7 +7559,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		DecorationBounds: 54613, 54613
+		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: 2100ScavengerVoice2
 	RenderSprites:

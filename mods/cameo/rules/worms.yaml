@@ -85,7 +85,7 @@ WCON:
 	Inherits@aicash: ^AIConyardCash
 	Inherits@conyard: ^Conyard
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -275,8 +275,7 @@ WREF:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -361,8 +360,7 @@ WHAND:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 	WithIdleOverlay@FLIP:
 		Sequence: flip-overlay
@@ -397,8 +395,7 @@ WWEAP:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -498,8 +495,7 @@ WHQ:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	#RenderSprites:
 	#	Image: dome
@@ -546,8 +542,7 @@ WSHEEPSTRIKECOMMAND:
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	#RenderSprites:
 	#	Image: dome
@@ -615,8 +610,7 @@ WTIMEMACHINE:
 		Dimensions: 1,2
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	#RenderSprites:
 	#	Image: dome
@@ -698,8 +692,7 @@ WCONCRETEDONKEY:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -776,10 +769,10 @@ WSILO:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	SelectionDecorations:
+		Bounds: 2048, 1024
 	-AcceptsDeliveredCash:
 	Selectable:
-		Bounds: 87381, 43690
-		DecorationBounds: 89173, 54613
+		DecorationBounds: 2090, 1280
 	WithIdleOverlay@BARREL:
 		Sequence: barrel-overlay
 	WithIdleOverlay@BARREL2:
@@ -822,10 +815,10 @@ WSANTASSLEIGH:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	SelectionDecorations:
+		Bounds: 2048, 1024
 	-AcceptsDeliveredCash:
 	Selectable:
-		Bounds: 87381, 43690
-		DecorationBounds: 89173, 54613
+		DecorationBounds: 2090, 1280
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -972,8 +965,7 @@ LASPY:
 		BuildDurationModifier: 40
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 80085, 0, -18176
+		Bounds: 938, 1877, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 75000
@@ -1010,7 +1002,7 @@ WORMS_WORMPAD:
 	Inherits@prod: ^ProducesUnits
 	Inherits@hpad: ^IsAircraftFactory
 	Selectable:
-		Bounds: 125610, 125610
+		Bounds: 2944, 2944
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0

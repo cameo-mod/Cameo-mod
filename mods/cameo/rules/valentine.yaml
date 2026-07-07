@@ -1130,8 +1130,7 @@ valentine_tower_ballista:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 938, 2048, 0, -512
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 75000
@@ -1183,8 +1182,7 @@ valentine_tower_double:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 938, 2048, 0, -512
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 50000
@@ -1618,8 +1616,7 @@ valovecraft:
 		AmmoCondition: ammo
 		ReloadCount: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -1794,8 +1791,7 @@ giantcupido:
 		AmmoCondition: ammo
 		ReloadCount: 1
 	Selectable:
-		Bounds: 1536, 1194, 0, 85
-		DecorationBounds: 1706, 1237, 0, 42
+		Bounds: 1706, 1237, 0, 42
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -598,-683,0
@@ -1901,7 +1897,6 @@ cute_kirov:
 	WithSpriteControlGroupDecoration:
 	Selectable:
 		Bounds: 8192, 8192
-		DecorationBounds: 8192, 8192
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
@@ -2321,7 +2316,6 @@ valentines_teletubby_po:
 		TargetableOffsets: 500,250,0
 	Selectable:
 		Bounds: 2133, 3200
-		DecorationBounds: 2133, 3200
 	Valued:
 		Cost: 10000
 	Tooltip:

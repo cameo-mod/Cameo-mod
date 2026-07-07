@@ -327,7 +327,7 @@ sowheadquarters:
 	Power:
 		Amount: 100
 	Selectable:
-		Bounds: 163840, 163840, 0, -9088
+		Bounds: 3840, 3840, 0, -213
 	CashTrickler@player:
 		Interval: 100
 		Amount: 100
@@ -396,7 +396,7 @@ sowlightfactory:
 		ExitCell: 1,1
 		Facing: 520
 	Selectable:
-		Bounds: 109226, 100096, 0, -9088
+		Bounds: 2560, 2346, 0, -213
 	Power:
 		Amount: -25
 		RequiresCondition: !being-warped
@@ -534,7 +534,7 @@ sowmediumfactory:
 		Prerequisite: sowlightfactory
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 118314, 118314, 0, -9088
+		Bounds: 2773, 2773, 0, -213
 	Power:
 		Amount: -50
 	WithMakeAnimation:
@@ -651,7 +651,7 @@ sowheavyfactory:
 		ExitCell: 1,2
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 127402, 127402, 0, -9088
+		Bounds: 2986, 2986, 0, -213
 	Power:
 		Amount: -100
 	WithMakeAnimation:
@@ -771,7 +771,7 @@ sowabcfactory:
 		ExitCell: 1,2
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 145621, 136533, 0, -9088
+		Bounds: 3413, 3200, 0, -213
 	Power:
 		Amount: -75
 	WithMakeAnimation:
@@ -857,7 +857,7 @@ sowradar:
 		ExitCell: 1,1
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 118314, 118314, 0, -9088
+		Bounds: 2773, 2773, 0, -213
 	Power:
 		Amount: -100
 	WithMakeAnimation:
@@ -994,7 +994,7 @@ sowgoldmine:
 		Range: 10c0
 	-MustBeDestroyed:
 	Selectable:
-		Bounds: 109226, 109226, 0, -9088
+		Bounds: 2560, 2560, 0, -213
 	GrantConditionOnDamageState:
 		Condition: disable-overlay
 	WithIdleOverlay@mlynek:
@@ -1190,7 +1190,7 @@ sowpower:
 		Prerequisites: sowovercharge
 		Condition: sowovercharge
 	Selectable:
-		Bounds: 109226, 100096, 0, -9088
+		Bounds: 2560, 2346, 0, -213
 	Power:
 		Amount: 500
 	WithMakeAnimation:
@@ -1251,7 +1251,7 @@ sowresearch:
 	ProvidesPrerequisite@sowresearch:
 		Prerequisite: sowresearch
 	Selectable:
-		Bounds: 109226, 109226, 0, -9088
+		Bounds: 2560, 2560, 0, -213
 	ScalePowerWithHealth:
 	Power:
 		Amount: 300
@@ -1394,7 +1394,7 @@ sowmechfactory:
 		RequiresCondition: !disable-overlay && !build-incomplete
 		sequence: idle-overlay
 	Selectable:
-		Bounds: 118314, 118314, 0, -9088
+		Bounds: 2773, 2773, 0, -213
 	Power:
 		Amount: -200
 	WithMakeAnimation:
@@ -1459,7 +1459,7 @@ sowasteroidstation:
 	Power:
 		Amount: -500
 	Selectable:
-		Bounds: 163840, 254848, 0, -9088
+		Bounds: 3840, 5973, 0, -213
 	WithMakeAnimation:
 		Condition: build-incomplete
 	-WithBuildingRepairDecoration:
@@ -1690,7 +1690,7 @@ sow_minigun_tower:
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpowerw: ^sow_unit_lowpower
 	Selectable:
-		Bounds: 54613, 72789
+		Bounds: 1280, 1706
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -1750,7 +1750,7 @@ sow_defragmenter_tower:
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpowerw: ^sow_unit_lowpower
 	Selectable:
-		Bounds: 54613, 72789
+		Bounds: 1280, 1706
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -1809,7 +1809,7 @@ sow_vulcano_tower:
 	Inherits@BotMicro: ^BotMicromanageable
 	Inherits@lowpowerw: ^sow_unit_lowpower
 	Selectable:
-		Bounds: 54613, 72789
+		Bounds: 1280, 1706
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -1893,7 +1893,7 @@ sow_lt_cannon:
 	Turreted:
 		TurnSpeed: 32
 	Selectable:
-		Bounds: 45482, 45482
+		Bounds: 1066, 1066
 	AutoTarget:
 		InitialStance: AttackAnything
 		ScanRadius: -1
@@ -1930,7 +1930,7 @@ sow_lt_flame:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 50944, 45482
+		Bounds: 1194, 1066
 	Buildable:
 		BuildPaletteOrder: 2
 		Queue: Infantry, RAInfantry
@@ -1993,7 +1993,7 @@ sow_lt_siege:
 		Description: Light Long Range Vehicle
 		Prerequisites: factory_sowupgrade_1
 	Selectable:
-		Bounds: 45482, 45482
+		Bounds: 1066, 1066
 	Mobile:
 		Speed: 80
 		TurnSpeed: 40
@@ -2044,7 +2044,7 @@ sow_lt_special:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 45482, 45482
+		Bounds: 1066, 1066
 	Buildable:
 		BuildPaletteOrder: 4
 		Queue: Infantry, RAInfantry
@@ -2105,7 +2105,7 @@ sow_lt_antiair:
 		Description: Light Anti-Air vehicle\nDetector
 		Prerequisites: factory_sowupgrade_3
 	Selectable:
-		Bounds: 45482, 45482
+		Bounds: 1066, 1066
 	Mobile:
 		Speed: 80
 		TurnSpeed: 40
@@ -2160,7 +2160,7 @@ sow_mt_cannon:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 61866, 61866
+		Bounds: 1450, 1450
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
@@ -2216,7 +2216,7 @@ sow_mt_flame:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 65536, 61866
+		Bounds: 1536, 1450
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
@@ -2272,7 +2272,7 @@ sow_mt_siege:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 61866, 61866
+		Bounds: 1450, 1450
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
@@ -2328,7 +2328,7 @@ sow_mt_special:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 61866, 61866
+		Bounds: 1450, 1450
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
@@ -2384,7 +2384,7 @@ sow_mt_antiair:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 61866, 61866
+		Bounds: 1450, 1450
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
@@ -2441,7 +2441,7 @@ sow_ht_cannon:
 	Valued:
 		Cost: 2000
 	Selectable:
-		Bounds: 69162, 69162
+		Bounds: 1621, 1621
 	Tooltip:
 		Name: Heavy Panzer
 	UpdatesPlayerStatistics:
@@ -2505,7 +2505,7 @@ sow_ht_flame:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Selectable:
-		Bounds: 76458, 69162
+		Bounds: 1792, 1621
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Aircraft, RAAircraft
@@ -2561,7 +2561,7 @@ sow_ht_siege:
 	Valued:
 		Cost: 2800
 	Selectable:
-		Bounds: 69162, 69162
+		Bounds: 1621, 1621
 	Tooltip:
 		Name: Heavy Siege
 	UpdatesPlayerStatistics:
@@ -2621,7 +2621,7 @@ sow_ht_special:
 	Valued:
 		Cost: 3200
 	Selectable:
-		Bounds: 69162, 69162
+		Bounds: 1621, 1621
 	Tooltip:
 		Name: Heavy Special
 	UpdatesPlayerStatistics:
@@ -2678,7 +2678,7 @@ sow_ht_antiair:
 	Inherits@sowaiunit: ^sowgeneric
 	Inherits@fasterprodb: ^sow_power_boost
 	Selectable:
-		Bounds: 69162, 69162
+		Bounds: 1621, 1621
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -2749,7 +2749,7 @@ sow_abc:
 	Inherits@lowpowerw: ^sow_unit_lowpower
 	Inherits@MC: ^MCImmune
 	Selectable:
-		Bounds: 69162, 69162
+		Bounds: 1621, 1621
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -2897,8 +2897,7 @@ sow_advancer:
 	CaptureProgressBar:
 		Color: b80000
 	Selectable:
-		DecorationBounds: 1536, 1536
-		Bounds: 65536, 65536
+		Bounds: 1536, 1536
 	AutoTargetPriority@repair:
 		ValidTargets: Repairing
 		InvalidTargets: sowupgrade, sowupgrade_1, sowupgrade_2, sowupgrade_3
@@ -3117,7 +3116,7 @@ sow_mech_avenger_mk2:
 	Tooltip:
 		Name: Avenger Mk.2
 	Selectable:
-		Bounds: 101930, 87381
+		Bounds: 2389, 2048
 	Buildable:
 		Queue: wmk2.sow
 		BuildPaletteOrder: 1
@@ -3252,7 +3251,7 @@ sow_mech_kodiak_mk2:
 	WithSpriteTurret:
 		TurnSpeed: 2
 	Selectable:
-		Bounds: 101930, 87381
+		Bounds: 2389, 2048
 	Armor:
 		Type: Heavy
 	Armament:
@@ -3356,7 +3355,7 @@ sow_mech_gatling_mk2:
 		Description: Upgraded Gatling Walker capable of running at incredible speeds\n- Massively Increased Speed\n- Increased Fire Rate\n- Increased Range\n- Can shoot down Air units effectively\n- Much more vulnerable than regular Gatling\n- Can be Repaired by Advancer\n- Immune to Mind Control\nDetector
 		BuildLimit: 1
 	Selectable:
-		Bounds: 101930, 87381
+		Bounds: 2389, 2048
 	Health:
 		HP: 75000
 	Power:
@@ -3476,7 +3475,7 @@ sow_mech_jaguar_mk2:
 		Description: Upgraded Jaguar Walker utilizing Stealth Technology and massive damage against Structures\n- Increased Speed and manuevarability\n- Increased Damage against Structures\n - Cloaked\n - More vulnerable than regular Jaguar\n- Repairs itself over time\n- Immune to Mind Control
 		BuildLimit: 1
 	Selectable:
-		Bounds: 101930, 87381
+		Bounds: 2389, 2048
 	Health:
 		HP: 150000
 	Power:
@@ -3601,7 +3600,7 @@ sow_mech_achilles_mk2:
 		Description: Upgraded Achilles Walker is equipped with Atomic Bomb that will detonate upon its death\n Note: Detonation will happen even if unit is disabled\n- Massively Increased Speed and manuevarability\n- Can be Repaired by Advancer\n- Repairs itself over time\n- Immune to Mind Control\nDetector
 		BuildLimit: 1
 	Selectable:
-		Bounds: 101930, 87381
+		Bounds: 2389, 2048
 	Health:
 		HP: 300000
 	Power:

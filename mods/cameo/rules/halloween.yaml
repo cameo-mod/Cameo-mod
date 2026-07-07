@@ -490,8 +490,7 @@ halloween_tower:
 	Tooltip:
 		Name: Mediaval Tower
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 43690, 72789, 0, -14549
+		Bounds: 1024, 1706, 0, -341
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -557,8 +556,7 @@ halloween_spirittower:
 	Tooltip:
 		Name: Spirit Tower
 	Selectable:
-		Bounds: 76458, 76458
-		DecorationBounds: 43690, 72789, 0, -14549
+		Bounds: 1024, 1706, 0, -341
 	SelectionDecorations:
 	Health:
 		HP: 70000
@@ -769,8 +767,7 @@ halloween_cauldron:
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 91008, 0, 21845
-		DecorationBounds: 131072, 127402, 0, -3626
+		Bounds: 3072, 2986, 0, -85
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -1214,7 +1211,7 @@ halloween_rockgolem:
 		EmptyWeapon: halloween_ghost_spawner_bigunit
 		RequiresCondition: halloween_upgrade.ghost
 	Selectable:
-		Bounds: 65536, 65536
+		Bounds: 1536, 1536
 	GrantConditionOnPrerequisite@mana:
 		Prerequisites: halloween_upgrade.mana
 		Condition: halloween_upgrade.mana
@@ -2058,7 +2055,6 @@ halloween_mcv:
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled

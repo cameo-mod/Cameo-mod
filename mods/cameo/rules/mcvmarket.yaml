@@ -2,7 +2,7 @@ MCVMARKET:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Buildable:
 		BuildPaletteOrder: 10001
 		Prerequisites: barracks, ~mmenabled, !hasmm

@@ -258,8 +258,10 @@ qaweap.steel:
 	Buildable:
 		Prerequisites: ~qacst.steel, qref.steel
 	Building:
-		Footprint: =x== xxxx =xxx
+		Footprint: =x== xxx= =x==
 		Dimensions: 4,3
+	Exit@1:
+		ExitCell: 3,2
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete

@@ -1,4 +1,4 @@
-﻿World:
+World:
 	FactionCA@allies:
 		Name: Allies RA1 #faction-ra-allies.name
 		InternalName: allies
@@ -6587,7 +6587,6 @@ modoitank:
 	SelectionDecorations:
 	Selectable:
 		Bounds: 2048, 2048, 0, 0
-		DecorationBounds: 2048, 2048, 0, 0
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeBig
 	WithIdleOverlay@nanotechrepairsdamage:
@@ -6616,7 +6615,6 @@ MODCORE:
 		Name: Core (War Factory)
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	SelectionDecorations:
 	Health:
 		HP: 50000
@@ -7813,8 +7811,7 @@ MODTENTJ:
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 3072, 2560, 0, 0
-		DecorationBounds: 3072, 3072, 0, 0
+		Bounds: 3072, 3072, 0, 0
 	SelectionDecorations:
 	Refinery:
 	DockHost:
@@ -8787,7 +8784,6 @@ MODJTEK:
 		LocalCenterOffset: 0,-512,0
 	Selectable:
 		Bounds: 3072, 3072, 0, -512
-		DecorationBounds: 3072, 3072, 0, -512
 	WithBuildingBib:
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
@@ -10916,7 +10912,6 @@ CTNK:
 		ChronoshiftSound: chrono2.aud
 	Selectable:
 		Bounds: 1280, 1280
-		DecorationBounds: 1280, 1280
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	FireWarheadsOnDeath:
@@ -11187,7 +11182,6 @@ GAP:
 		Description: actor-gap.description
 	Selectable:
 		Bounds: 1024, 2048, 0, -512
-		DecorationBounds: 1024, 2048, 0, -512
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower || disabled
@@ -12825,7 +12819,6 @@ MonsterTank:
 	SelectionDecorations:
 	Selectable:
 		Bounds: 2048, 2048
-		DecorationBounds: 2048, 2048
 	AnnounceOnKill:
 	Voiced:
 		VoiceSet: MonsterTankVoice
@@ -12903,7 +12896,6 @@ MIGNUKE:
 		IdleSpeed: 100
 	Selectable:
 		Bounds: 1536, 1536, 0, 0
-		DecorationBounds: 1536, 1536, 0, 0
 	SelectionDecorations:
 	Contrail@1:
 		Offset: -725,683,0
@@ -13992,8 +13984,7 @@ shogunexecutioner:
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Selectable:
-		Bounds: 2000, 3000, 0, 0
-		DecorationBounds: 2000, 3000
+		Bounds: 2000, 3000
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -14169,7 +14160,6 @@ japan_shrine_minitank:
 	WithSpriteTurret:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 1024, 1024
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	FireWarheadsOnDeath:
@@ -14521,7 +14511,6 @@ exorcistoitank:
 	SelectionDecorations:
 	Selectable:
 		Bounds: 2048, 2048, 0, 0
-		DecorationBounds: 2048, 2048, 0, 0
 	Voiced:
 		VoiceSet: ReimuVoice
 	FireWarheadsOnDeath:

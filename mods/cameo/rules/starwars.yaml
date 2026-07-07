@@ -205,8 +205,7 @@ Player:
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 218453, 218453
-		DecorationBounds: 218453, 218453
+		Bounds: 3072, 2730, 0, -682
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -225,8 +224,7 @@ Player:
 		Dimensions: 4,4
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 500000
@@ -304,10 +302,10 @@ swsilo:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	SelectionDecorations:
+		Bounds: 2048, 1024
 	-AcceptsDeliveredCash:
 	Selectable:
-		Bounds: 87381, 43690
-		DecorationBounds: 89173, 54613
+		DecorationBounds: 2090, 1280
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -408,8 +406,7 @@ swhq:
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -441,7 +438,7 @@ swfact.empire:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^SWSpawnActorsOnSellEmpire
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -556,7 +553,6 @@ swmcv.empire:
 		Description: Deploys into another Construction Yard.\n  Unarmed
 	Selectable:
 		Priority: 4
-		DecorationBounds: 1536, 1536
 	Mobile:
 		Speed: 71
 		Locomotor: heavywheeled
@@ -598,7 +594,7 @@ swpower:
 	Inherits@power: ^PowerPlant
 	Inherits@sell: ^SWSpawnActorsOnSellEmpire
 	Selectable:
-		Bounds: 58240, 87381
+		Bounds: 1365, 2048
 	Valued:
 		Cost: 250
 	Tooltip:
@@ -718,7 +714,7 @@ swpyle:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	RenderSprites:
 		Image: swibarr
 swfort:
@@ -802,8 +798,7 @@ swweap:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -879,8 +874,7 @@ sweproc:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Bounds: 131072, 101930
-		DecorationBounds: 132864, 131072
+		Bounds: 3114, 3072
 	CustomSellValue:
 		Value: 500
 	FreeActor:
@@ -1201,7 +1195,7 @@ swstarport:
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -1288,7 +1282,7 @@ swfact.rebels:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -1471,8 +1465,7 @@ swhand:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 	RenderSprites:
 		Image: swrebarr
@@ -1522,8 +1515,7 @@ swweapre:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -1654,7 +1646,7 @@ swafld:
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -1741,7 +1733,7 @@ swfact.republic:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^SWSpawnActorsOnSellRepublic
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -1927,7 +1919,7 @@ swpyler:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	RenderSprites:
 		Image: swrbarr
 swfortr:
@@ -1977,8 +1969,7 @@ swweapr:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -2106,7 +2097,7 @@ swstarportr:
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -2193,7 +2184,7 @@ swfact.separatist:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^SWSpawnActorsOnSellDroid
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -2374,8 +2365,7 @@ swweapd:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 116480, 0, -29098
+		Bounds: 3072, 2730, 0, -682
 	SelectionDecorations:
 	Health:
 		HP: 110000
@@ -2531,8 +2521,7 @@ swbarrdroid:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 123776, 0, -18176
+		Bounds: 2048, 2901, 0, -426
 	SelectionDecorations:
 	RenderSprites:
 		Image: swdbarr
@@ -2590,7 +2579,7 @@ swtrade:
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -2713,7 +2702,7 @@ swfact.hutt:
 	Inherits@conyard: ^Conyard
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Selectable:
-		Bounds: 131072, 87381
+		Bounds: 3072, 2048
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -2893,7 +2882,7 @@ swpyleh:
 		Amount: -20
 	ProvidesPrerequisite@buildingname:
 	Selectable:
-		Bounds: 87381, 76458, 0, -9088
+		Bounds: 2048, 1792, 0, -213
 	RenderSprites:
 		Image: barr
 
@@ -2931,7 +2920,7 @@ swafldh:
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Selectable:
-		Bounds: 174762, 87381
+		Bounds: 4096, 2048
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85
 		Type: Rectangle
@@ -3403,8 +3392,7 @@ SWFIX:
 		Footprint: _+_ +++ _+_
 		Dimensions: 3,3
 	Selectable:
-		Bounds: 116480, 61866, 0, 5461
-		DecorationBounds: 131072, 87381
+		Bounds: 3072, 2048
 	SelectionDecorations:
 	Health:
 		HP: 80000
@@ -3454,8 +3442,7 @@ sweye:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 87381, 72789, 0, 16384
-		DecorationBounds: 87381, 96469, 0, -7253
+		Bounds: 2048, 2261, 0, -170
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
@@ -3554,8 +3541,7 @@ swtmpl:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -3632,8 +3618,7 @@ swdtmpl:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -3711,8 +3696,7 @@ swpalace:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	Selectable:
-		Bounds: 131072, 87381
-		DecorationBounds: 131072, 123776, 0, -21845
+		Bounds: 3072, 2901, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 210000
@@ -3876,7 +3860,7 @@ SWSAM:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@shape: ^2x1Shape
 	Selectable:
-		Bounds: 87381, 43690
+		Bounds: 2048, 1024
 	HitShape:
 		Type: Rectangle
 			TopLeft: -768,-512
@@ -3934,8 +3918,7 @@ SWOBLI:
 		Queue: Defence, RADefence
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs all Ground units\n  Cannot target Aircraft
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 80085, 0, -18176
+		Bounds: 938, 1877, 0, -426
 	SelectionDecorations:
 	Health:
 		HP: 90000
@@ -4019,8 +4002,7 @@ SWATWR:
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Aircraft, Tanks, Infantry
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 200000
@@ -4148,8 +4130,7 @@ swsite:
 		Queue: Defence, RADefence
 		Description: All-purpose defensive structure.\n  Strong vs Infantry, Tanks\n  Weak vs Aircraft\n Spawn Tusken Raiders
 	Selectable:
-		Bounds: 2048, 2048
-		DecorationBounds: 87381, 87381, 0, -21845
+		Bounds: 2048, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 200000
@@ -4288,7 +4269,7 @@ swcloneplant:
 	Inherits@sell: ^SWSpawnActorsOnSell
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Selectable:
-		Bounds: 131072, 131072
+		Bounds: 3072, 3072
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -4330,7 +4311,7 @@ swindustrialplant:
 			BottomRight: 2048, 1536
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Selectable:
-		Bounds: 174762, 131072
+		Bounds: 4096, 3072
 	HitShape:
 		TargetableOffsets: 630,299,0
 	Valued:
@@ -4378,8 +4359,7 @@ swaatower:
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
-		Bounds: 1024, 1024
-		DecorationBounds: 40021, 87381, 0, -21845
+		Bounds: 938, 2048, 0, -512
 	SelectionDecorations:
 	Health:
 		HP: 50000
@@ -4965,7 +4945,7 @@ swvice:
 	-WithMuzzleOverlay:
 	-DamagedByTerrain:
 	Selectable:
-		Bounds: 25472, 25472
+		Bounds: 597, 597
 	RenderSprites:
 		Image: swvice
 	Voiced:
@@ -5587,7 +5567,7 @@ swhtnk:
 		DamageCooldown: 1
 	SelectionDecorations:
 	Selectable:
-		Bounds: 116480, 116480, 0, -21845
+		Bounds: 2730, 2730, 0, -512
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7551,7 +7531,7 @@ sw4tnk:
 		DamageCooldown: 1
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7615,7 +7595,7 @@ swaa:
 	WithMuzzleOverlay:
 	SelectionDecorations:
 	Selectable:
-		DecorationBounds: 61866, 61866, 0, -5461
+		DecorationBounds: 1450, 1450, 0, -128
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -7682,7 +7662,7 @@ swjugger:
 		DamageCooldown: 1
 	SelectionDecorations:
 	Selectable:
-		Bounds: 91008, 91008, 0, -9088
+		Bounds: 2133, 2133, 0, -213
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -8054,7 +8034,7 @@ swtran:
 	SelectionDecorations:
 	Selectable:
 		Class: tran
-		DecorationBounds: 74624, 74624
+		DecorationBounds: 1749, 1749
 	RenderSprites:
 		Image: swtran
 	WithCargoPipsDecoration:

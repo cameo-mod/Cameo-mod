@@ -916,14 +916,14 @@ actor-tsgtradr =
    Requires power to operate.
 
 actor-tscabaltech =
-   .name = Radar
+   .name = Cabal Tech Center
    .description = Provides CABAL advanced technologies.
    Only one may be built at a time.
 
 actor-tscore =
-   .name = Radar
+   .name = CABAL Core
    .description = Provides CABAL advanced technologies.
-   Provides Hunter-Seeker support power.
+   Provides Data Worm support power.
 
 actor-tsntmisl =
    .name = Missile Silo
@@ -1708,7 +1708,7 @@ faction-ts-forgotten =
 faction-ts-cabal =
    .name = CABAL
    .description = CABAL from Tiberian Sun
-      Support powers:
+      Support powers: Data Worm, Satellite Hack
 
 faction-ra2-random =
    .name = Any
