@@ -1387,9 +1387,7 @@ raider.ordos:
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@botmicro: ^BotAutoDeployTransport
 	Inherits@D2KSprite: ^D2KPaletteRender
-	Inherits@CARGO: ^CargoVehicle
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
@@ -1397,7 +1395,7 @@ raider.ordos:
 	Tooltip:
 		Name: Ordos Raider
 	Valued:
-		Cost: 900
+		Cost: 1200
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
@@ -1407,20 +1405,20 @@ raider.ordos:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
-		HP: 35000
+		HP: 60000
 	Repairable:
-		HpPerStep: 1750
+		HpPerStep: 3000
 	ChangesHealth@SelfHealing:
-		Step: 14
+		Step: 24
 	Shielded:
-		RegenAmount: 28
+		RegenAmount: 48
 	Mobile:
-		Speed: 135
-		TurnSpeed: 54
+		Speed: 180
+		TurnSpeed: 72
 	WithMuzzleOverlay:
 	Armament@damage:
 		Weapon: HMGo
-		LocalOffset: 170,0,0
+		LocalOffset: 140,90,50, 140,-90,50
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle
 	AttackFrontal:
@@ -1430,18 +1428,10 @@ raider.ordos:
 		EmptyWeapon: D2KUnitExplodeSmall
 	AttractsWorms:
 		Intensity: 420
-	Cloak@TDcloak:
-		Palette: d2kcloak
 	Voiced:
 		VoiceSet: D2KRaider
-	Cargo:
-		Types: Infantry, Hacker, Fremen
-		MaxWeight: 4
-		InitialUnits: light_inf, light_inf, trooper, trooper
-		LoadingCondition: notmobile
-	WithCargoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: up_shield.ordos, up_contraband.ordos
 
@@ -1527,10 +1517,10 @@ scoutdrone.ordos:
 		Intensity: 120
 	Cloak@TDcloak:
 		Palette: player_rgba
-	Voiced:
-		VoiceSet: D2KDustScout
 	RenderSprites:
 		PlayerPalette: player_rgba
+	Voiced:
+		VoiceSet: D2KDustScout
 	WithMoveAnimation:
 		MoveSequence: move
 	ActorStatValues:

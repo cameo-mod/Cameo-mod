@@ -3051,26 +3051,19 @@ HMG_fremen:
 
 HMGo:
 	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	ReloadDelay: 47
-	Burst: 4
+	ReloadDelay: 8
+	Burst: 9
 	BurstDelays: 2
-	Range: 4835
+	Range: 6000
 	-Report:
 	StartBurstReport: hmgo1.wav, hmgo2.wav
 	ValidTargets: Ground, Water, Trees, Air
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
+		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 2000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
-		Damage: 1
+		Damage: 2
 
 HMGstealth:
 	Inherits: ^SmallArms

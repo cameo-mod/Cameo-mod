@@ -8452,11 +8452,10 @@ d2k_tyrant.husk:
 raider.ordos:
 	Defaults:
 	idle:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 2421
+		Filename: ordos_raider_buggy.png
 		Facings: -32
+		InterpolatedFacings: 64
+		Offset: 0, 4
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -8466,11 +8465,7 @@ raider.ordos:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: DATA.R16
-		Scale: 1.5
-		Remap: 54F94B
-		Start: 4278
-		Offset: -30,-24
+		Filename: ordos_raider_buggy_icon.png
 
 ix_raider:
 	Defaults:

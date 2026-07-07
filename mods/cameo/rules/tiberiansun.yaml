@@ -13,7 +13,7 @@ World:
 		Description: faction-ts-nod.description
 	FactionCA@forgotten:
 		Selectable: true
-		Name: Forgotten TS (WIP)
+		Name: Forgotten TS
 		InternalName: forgotten
 		Game: Tiberian Sun
 		Side: Tiberian Sun
@@ -6379,7 +6379,7 @@ tsshotmut:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_mypet
+		Upgrades: up_genomemapping, up_mypet, up_unity
 
 TSWEEDGUY:
 	Inherits: ^Soldier
@@ -9157,7 +9157,7 @@ tsruiner:
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: !up_chemicalweapons
 		MuzzleSequence: muzzle
 	Armament@UPGRADE:
 		Weapon: TSChemRuinerMissile
@@ -9226,7 +9226,7 @@ TS1TNK:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: up_chemicalweapons
 	WithMuzzleOverlay:
 	AttackTurreted:
 	WithSpriteTurret:
@@ -11729,7 +11729,7 @@ TSAPACHEMUTANT:
 		LocalOffset: 0,121,271, 0,-121,271
 		PauseOnCondition: !ammo
 		RequiresCondition: !up_chemicalweapons
-	Armament@PRIMARY:
+	Armament@SECONDARY:
 		Weapon: TSChemCobraMissile
 		LocalOffset: 0,121,271, 0,-121,271
 		PauseOnCondition: !ammo
@@ -11931,7 +11931,7 @@ TSHELI:
 		Weapon: TSChemApacheMissile
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: up_chemicalweapons
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
