@@ -888,6 +888,7 @@
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Inherits@RA2YuriGeneMod: ^RA2YuriGeneMod
 	Inherits@RA2YuriPsychicVision: ^RA2YuriPsychicVision
+	Inherits@TiberiumAdaptability: ^TiberiumAdaptability
 	DamageMultiplier@InfantryBuff:
 		Modifier: 90
 	FirepowerMultiplier@InfantryBuff:
@@ -903,6 +904,7 @@
 	Inherits: ^NanoTechRepairs
 	Inherits@ModernFireControlSystems: ^ModernFireControlSystems
 	Inherits@Blitzkrieg: ^Blitzkrieg
+	Inherits@TiberiumAdaptability: ^TiberiumAdaptability
 	DamageMultiplier@VehicleBuffs:
 		Modifier: 90
 	ChangesHealth@SelfHealing:
@@ -916,7 +918,6 @@
 	Inherits@upgrade: ^LightWeightArmorPlating
 	Inherits@StaliniumTeamUpgradeRA1: ^StaliniumTeamUpgradeRA1
 	Inherits@NuclearShellsTeamUpgradeRA1: ^NuclearShellsTeamUpgradeRA1
-	Inherits@Blitzkrieg: ^Blitzkrieg
 	DamageMultiplier@TankBuffs:
 		Modifier: 80
 	FirepowerMultiplier@TankBuffs:
@@ -926,11 +927,13 @@
 		RequiresCondition: tankbunkered
 
 ^ArtilleryBuffs:
+	Inherits@VehicleBuffs: ^VehicleBuffs
 	Inherits@ScorchedEarthTeamUpgradeRA1: ^ScorchedEarthTeamUpgradeRA1
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnologyTeamUpgrade
 
 ^AircraftBuffs:
 	Inherits@GlobalBuffs: ^GlobalBuffs
+	Inherits@TiberiumAdaptability: ^TiberiumAdaptability
 	DamageMultiplier@AircraftBuffs:
 		Modifier: 90
 	FirepowerMultiplier@AircraftBuffs:

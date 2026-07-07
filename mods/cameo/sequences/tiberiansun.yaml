@@ -591,7 +591,23 @@ tsdoggie:
 		Start: 91
 		Length: 8
 		ShadowStart: 210
+	idle2:
+		Start: 91
+		Length: 8
+		ShadowStart: 210
 	die:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die1:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die2:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die3:
 		Start: 99
 		Length: 10
 		ShadowStart: 218
@@ -608,8 +624,17 @@ tsdoggie:
 		Start: 109
 		Length: 10
 		ShadowStart: 228
+	die6:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die7:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
 	icon:
 		Filename: forgot_fiend_icon.png
+
 tsdoggieblue:
 	Defaults:
 		Filename: tsdoggieblue.shp
@@ -640,7 +665,23 @@ tsdoggieblue:
 		Start: 91
 		Length: 8
 		ShadowStart: 210
+	idle2:
+		Start: 91
+		Length: 8
+		ShadowStart: 210
 	die:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die1:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die2:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die3:
 		Start: 99
 		Length: 10
 		ShadowStart: 218
@@ -657,6 +698,14 @@ tsdoggieblue:
 		Start: 109
 		Length: 10
 		ShadowStart: 228
+	die6:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
+	die7:
+		Start: 99
+		Length: 10
+		ShadowStart: 218
 	icon:
 		Filename: forgot_fiend_blue_icon.png
 
@@ -1567,6 +1616,8 @@ tsapc:
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
+	turret:
+		Filename: invisibleitem.shp
 
 tspitbull:
 	Defaults:
@@ -1661,6 +1712,9 @@ tsarty_bus:
 		Length: 5
 	icon:
 		Filename: forgot_arty_bus_icon.png
+	turret:
+		Filename: invisibleitem.shp
+
 tsnomad:
 	idle:
 		Filename: forgot_nomad.png
@@ -1671,6 +1725,8 @@ tsnomad:
 		Length: 5
 	icon:
 		Filename: forgot_nomad_icon.png
+	turret:
+		Filename: invisibleitem.shp
 
 tsarty:
 	idle:
@@ -3497,7 +3553,6 @@ tsgttech:
 		Offset: 0, 0
 
 tsfgttech:
-	Inherits: ^WithBuildingBib2
 	Defaults:
 		Filename: tamtech.shp
 		Offset: -12, -30, 30
@@ -5538,7 +5593,6 @@ forgot_silo:
 # 	icon: tsjumpjeticon
 
 tsveinhole:
-	Inherits: ^WithBuildingBib3
 	idle:
 		Filename: tsveinhole.shp
 	recoil:
@@ -6438,3 +6492,35 @@ willofkaneicon:
 tsgdidummyicon:
 	icon:
 		Filename: tsgdidummyicon.png
+
+genomemappingicon:
+	icon:
+		Filename: genomemappingicon.png
+
+chemicalfuelicon:
+	icon:
+		Filename: chemicalfuelicon.png
+
+mypeticon:
+	icon:
+		Filename: mypeticon.png
+
+junkarmoricon:
+	icon:
+		Filename: junkarmoricon.png
+
+tiberiumboostersicon:
+	icon:
+		Filename: tiberiumboostersicon.png
+
+unityicon:
+	icon:
+		Filename: unityicon.png
+
+chemicalweaponsicon:
+	icon:
+		Filename: chemicalweaponsicon.png
+
+tiberiumadaptabilityicon:
+	icon:
+		Filename: tiberiumadaptabilityicon.png
