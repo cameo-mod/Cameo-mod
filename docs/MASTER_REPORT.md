@@ -64,7 +64,7 @@ GitHub disallows automated crawling of `/tree/` file listings, and this analysis
 - **Standard OpenRA SDK skeleton.** Anyone who has modded OpenRA can find their way around; `make`, `launch-game`, `utility` all behave as expected. Keep this.
 - **Custom traits are split into two DLLs.** `OpenRA.Mods.CA` carries battle-tested Combined Arms traits; `OpenRA.Mods.Cameo` carries Cameo-specific ones. This separation is healthy — CA can be periodically re-synced from its upstream without touching Cameo-specific code.
 - **Fluent localization is real** (6.5% of the repo) — most mods never get this far. The new Spanish EVA for Latin Syndicate (TB16) shows the pipeline works.
-- **The asset optimization pass (RAMpage build) established three concrete asset norms**: downscale sprites to engine-used resolution, trim transparent sprite borders, and standardize WAVs to mono/8-bit/11025 Hz. These must be codified as pre-commit checks (§11.4) so the 12 GB RAM problem can never regrow.
+- **The asset optimization pass (RAMpage build) established three concrete asset norms**: downscale sprites to engine-used resolution, trim transparent sprite borders, and standardize WAVs to mono/16-bit/22050 Hz. These must be codified as pre-commit checks (§11.4) so the 12 GB RAM problem can never regrow.
 - **Upstream engine syncs are happening** (TB15). This is expensive but essential; §12 Phase 0 schedules them on a fixed cadence.
 
 ### 3.2 The structural problems
@@ -139,7 +139,7 @@ Every removal ("Removed duplicate Nod units…") tends to leave weapons/warheads
 *Detector:* `audit_orphans.py` — reference-count every weapon, warhead template, condition, sequence and image from the resolved ruleset; list zero-reference entries. Review before deleting (maps/Lua may reference some — the script also greps `maps/` and Lua).
 
 ### B11 — Asset format regressions **[VERIFIED as fixed once]**
-The RAMpage norms (downscaled sprites, trimmed borders, mono 8-bit 11025 Hz WAV) will silently regress the first time someone drops in a raw 4K sprite sheet or a stereo 44.1 kHz WAV.
+The RAMpage norms (downscaled sprites, trimmed borders, mono 16-bit 22050 Hz WAV) will silently regress the first time someone drops in a raw 4K sprite sheet or a stereo 44.1 kHz WAV.
 *Detector:* `audit_assets.py` in pre-commit/CI — reject oversized PNGs (per-category max dimensions), untrimmed alpha borders beyond a threshold, and non-conforming WAVs; print the exact conversion command to fix each file.
 
 ### B12 — Localization drift **[INFERRED]**
@@ -376,37 +376,45 @@ The July tournament is a data goldmine: collect per-game faction pick, map, dura
 
 ### 9.1 The grammar
 
+The baseline is the scheme RA1 Soviet content already uses (`ra_commissar`,
+`ra_grad`, `ra_upgrade_autoloaders`, `ra_promotion_superoptics`,
+`ra_doctrine_conscription`): a faction prefix plus the name — **no structural
+type word in unit ids**. A type marker appears only on tech-tree items
+(upgrades / promotions / doctrines).
+
 ```
-actor id  :=  [game_]faction_type_name[_variant]
-file name :=  same as the asset's owning actor id, plus suffixes
-icon file :=  <actor_id>_icon.<ext>
+unit/building id :=  [game_]faction_name[_variant]
+tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_name
+file name        :=  same as the asset's owning actor id, plus suffixes
+icon file        :=  <actor_id>_icon.<ext>
 ```
 
-- **`game`** — required only when the same faction name exists in multiple source games. Registry of game prefixes (fixed, lowercase): `td`, `ts`, `ra1`, `ra2`, `d2k`, `sc` (StarCraft), `wc2`, `cam` (Cameo originals — optional, see below). Examples: `td_gdi_*` vs `ts_gdi_*`; `ra1_allies_*` vs `ra2_allies_*`. Factions that exist once (yuri, cabal, forgotten, steel_consortium, futuretech, schwarzer_mond, latin_syndicate, asian_alliance, japan, naxis, tkm, atreides, harkonnen, ordos, terran, zerg, protoss, wc2_humans/wc2_orcs — note wc2 prefix needed because "humans/orcs" alone would collide with future WC3) omit the game prefix.
-- **`faction`** — the canonical faction slug from the registry (§9.2). Never abbreviate ad hoc; never two spellings (this kills the Consortium/Steel Consortium drift: the slug is `scon`… no — see §9.2, use full words, `steel_consortium` — abbreviations are how drift starts).
-- **`type`** — from the closed vocabulary in §9.4. One word. Examples: `inf`, `veh`, `air`, `nav`, `bld`, `def`, `sup` (support power dummy), `upg`, `wall`, `husk`, `prop` (decorative/neutral).
+- **`game`** — required ONLY when the same faction name exists in multiple source games. Registry of game prefixes (fixed, lowercase): `td`, `ts`, `ra1`, `ra2` (+ future prefixes as collisions appear). Examples: `td_gdi_*` vs `ts_gdi_*`; `ra1_soviet_*` vs `ra2_soviet_*`. Every faction that exists once (yuri, cabal, forgotten, steel_consortium, futuretech, schwarzer_mond, latin_syndicate, asian_alliance, japan, naxis, tkm, atreides, harkonnen, ordos, ixian, terran, zerg, protoss, humans, orcs…) omits the game prefix; a prefix is added the day a collision actually appears, not preemptively.
+- **`faction`** — the canonical faction slug from the registry (§9.2). Never abbreviate ad hoc; never two spellings (this kills the Consortium/Steel Consortium drift — use full words, `steel_consortium`; abbreviations are how drift starts).
+- **`upgrade|promotion|doctrine`** — full words, only on tech-tree items: `upgrade` for cash research, `promotion` for rank-gated unlocks, `doctrine` for mutually-exclusive doctrine picks. Team-proxy dummies append `_proxy_actor` (existing RA1 convention).
 - **`name`** — the unit's snake_case display-ish name: `titan`, `slave_miner`, `sky_hammer`, `ghost_stalker`.
 - **`variant`** — optional: `_mk2`, `_elite`, `_husk`, `_water` (movement variants), `_ai` (AI-only variants — historical "Special Bot variants" should be explicit).
 
 **Examples**
 ```
-ts_gdi_veh_titan            ts_gdi_veh_titan_husk
-ts_nod_bld_obelisk          cabal_bld_obelisk_of_darkness
-yuri_veh_slave_miner        steel_consortium_air_sky_hammer
-forgotten_inf_ghost_stalker ra2_allies_upg_chromium_ion_plating
-protoss_inf_adept           d2k_ordos_veh_raider
+ts_gdi_titan                ts_gdi_titan_husk
+ts_nod_obelisk              cabal_obelisk_of_darkness
+yuri_slave_miner            steel_consortium_sky_hammer
+forgotten_ghost_stalker     ra2_allies_upgrade_chromium_ion_plating
+protoss_adept               ordos_raider
+cabal_upgrade_dark_armament forgotten_promotion_bowler
 ```
-Icons: `ts_gdi_veh_titan_icon.png`. Portraits/cameos, if distinct from icons: `_cameo`. Build palettes/other per-actor art keep the actor id as stem.
+Icons: `ts_gdi_titan_icon.png`. Portraits/cameos, if distinct from icons: `_cameo`. Build palettes/other per-actor art keep the actor id as stem.
 
 ### 9.2 The faction slug registry
 Create `docs/design/faction_registry.yaml` — the single authority mapping `slug → display name, game prefix, tier, terrain-dependency, archetypes`. Every tool (naming lint, matrix generator, leak audit) reads it. Rule: **a faction slug appears in exactly one place in the repo as a definition; everywhere else it is a reference.**
 
 ### 9.3 Shared and neutral content
-- Cross-faction *templates* use the `^` MiniYAML convention and live only in `rules/templates/`: `^cameo_veh_tank_medium`, `^cameo_bld_production`.
-- Truly shared concrete actors (crates, civilians, critters, husks-generic, map props) use the `neutral_` prefix: `neutral_prop_rock_01`, `neutral_veh_supply_truck` (the historical "every faction has Supply Truck & Engineer" content). Engineers/MCVs that are per-faction *skins* of shared behavior should be per-faction actors inheriting the shared template — not one shared actor with per-faction render hacks.
+- Cross-faction *templates* use the `^` MiniYAML convention and live only in `rules/templates/`: `^cameo_tank_medium`, `^cameo_production_building`.
+- Truly shared concrete actors (crates, civilians, critters, husks-generic, map props) use the `neutral_` prefix: `neutral_rock_01`, `neutral_supply_truck` (the historical "every faction has Supply Truck & Engineer" content). Engineers/MCVs that are per-faction *skins* of shared behavior should be per-faction actors inheriting the shared template — not one shared actor with per-faction render hacks.
 
-### 9.4 Type & class vocabularies (closed lists, versioned)
-`type` (structural, in the ID): `inf, veh, air, nav, bld, def, wall, upg, sup, husk, prop, hero`.
+### 9.4 Tech-item markers & class vocabulary (closed lists, versioned)
+Tech-item markers (the only type words that appear in IDs): `upgrade, promotion, doctrine` (+ `_proxy_actor` suffix for team proxies). Structural type words (`inf/veh/air/…`) do NOT appear in IDs — they remain internal audit-tool vocabulary only.
 `class` (gameplay taxonomy, in YAML metadata not the ID — this is your "Main Battle Tank"/"Line Breaker" system): define `docs/design/unit_classes.yaml` with the canonical list and one-line definitions (e.g., `scout, rifle, at_infantry, sniper, grenadier, engineer, harvester, mbt, line_breaker, harass_buggy, artillery, aa_mobile, transport, epic, commando, support_caster…`). B7's audit enforces membership. Classes are what global template multipliers key off — which is why the list must be closed and reviewed.
 
 ### 9.5 File layout naming
@@ -499,7 +507,7 @@ Nightly: full audit suite + full smoke matrix + RAM/load-time budget check (fail
 - Work through the 17 open PRs: anything older than 2 builds gets rebased-or-closed; stale PRs against a refactoring tree rot fast.
 
 ### 11.4 Asset pipeline rules (codifying RAMpage)
-`tools/assets/normalize.sh <file>` applies: PNG downscale to category max, alpha-border trim, WAV → mono 8-bit 11025 Hz. Pre-commit hook runs it in check mode. Document category max resolutions in `docs/design/asset_budget.md` (infantry sprite ≤ X, building ≤ Y, UI ≤ Z…). Add a licensing ledger `docs/CREDITS.yaml` (source game/author/license per asset pack — the Cosmonarchy loan and CC BY-NC originals need traceability before 1.0).
+`tools/assets/normalize.sh <file>` applies: PNG downscale to category max, alpha-border trim, WAV → mono 16-bit 22050 Hz. Pre-commit hook runs it in check mode. Document category max resolutions in `docs/design/asset_budget.md` (infantry sprite ≤ X, building ≤ Y, UI ≤ Z…). Add a licensing ledger `docs/CREDITS.yaml` (source game/author/license per asset pack — the Cosmonarchy loan and CC BY-NC originals need traceability before 1.0).
 
 ### 11.5 Test strategy
 - **Smoke:** headless bot-vs-bot, 5 in-game minutes, per Tier-1 faction (catches B8-class crashes).
@@ -688,11 +696,14 @@ exit ${failed:-0}
 
 ## Appendix B — Naming vocabulary quick reference
 
-Game prefixes: `td ts ra1 ra2 d2k sc wc2` (+ future: `wc3 aw sw xcom`). Cameo originals: no prefix.
-Types: `inf veh air nav bld def wall upg sup husk prop hero`.
+Baseline: the RA1 Soviet scheme (`ra_grad`, `ra_upgrade_autoloaders`, `ra_promotion_superoptics`, `ra_doctrine_conscription`).
+Unit/building ids: `[game_]faction_name[_variant]` — no structural type words.
+Tech items only: `upgrade | promotion | doctrine` marker between faction and name; team proxies end `_proxy_actor`.
+Game prefixes: only on actual collisions — `td ts ra1 ra2` today (+ future prefixes the day a new collision appears).
 Suffixes: `_icon _cameo _husk _mk2 _elite _ai _water`.
 Collision rule: two factions share a name → both take game prefixes (`td_gdi`, `ts_gdi` — never leave one bare).
 Slug spelling: full words, snake_case, no abbreviations (`steel_consortium`, not `scon`/`consortium`).
+Asset files follow their owning actor id as stem (sequence `Filename:` entries included); icons are `<actor_id>_icon.<ext>`. Shared sprite archives (e.g. `DATA.R16`) referenced by many images are exempt.
 
 ## Appendix C — Faction design one-pager template (`docs/design/factions/<slug>.md`)
 
