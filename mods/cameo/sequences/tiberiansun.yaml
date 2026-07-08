@@ -6245,33 +6245,6 @@ tibpump:
 		Offset: 0, 0
 
 tibdrill:
-	# idle:
-	# 	Length: 164
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# 	ShadowStart: 330
-	# damaged-idle:
-	# 	Start: 164
-	# 	Length: 165
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# 	ShadowStart: 494
-	# anim:
-	# 	Filename: tibdrill_b.shp
-	# 	Length: 164
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# damaged-anim:
-	# 	Filename: tibdrill_b.shp
-	# 	Start: 164
-	# 	Length: 165
-	# 	Offset: 0,0, 60
-	# 	Tick: 60
-	# dead:
-	# 	Offset: 0,0, 60
-	# icon:
-	# 	Filename: tibdrillicon.shp
-	# 	Offset: 0, 0
 	Defaults:
 		Filename: tibdrill_a.shp
 	idle:
@@ -6299,9 +6272,8 @@ tibdrill:
 	dead:
 		Offset: 0,0, 60
 	icon:
-		Filename: ra2caoildicon.shp
+		Filename: forgotten_tiberiumspike_icon.png
 		Offset: 0, 0
-		UseTilesetCode: false
 
 tsbomb:
 	idle:

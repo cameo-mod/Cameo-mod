@@ -4775,6 +4775,11 @@ NaxBrummbarArty:
 		Inaccuracy: 1400
 		Speed: 280
 		ContrailLength: 28
+		ContrailStartWidth: 70
+		ContrailEndWidth: 14
+		ContrailStartColor: AAAA4488
+		ContrailEndColor: 22222222
+		TrailImage: black_smokey
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 14000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
@@ -5733,7 +5738,13 @@ NaxSturmArty:
 	Projectile: Bullet
 		Inaccuracy: 1400
 		Speed: 320
-		ContrailLength: 28
+		ContrailLength: 32
+		ContrailStartWidth: 160
+		ContrailEndWidth: 32
+		ContrailStartColor: AA884488
+		ContrailEndColor: 88442222
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
 	Warhead@HeavyBomb: SpreadDamage
 		Damage: 30000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage

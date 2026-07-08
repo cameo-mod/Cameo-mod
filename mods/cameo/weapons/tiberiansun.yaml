@@ -782,54 +782,70 @@ TS155mmFrag:
 TSBusMortar:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^HeavyBomb
-	ReloadDelay: 30
+	ReloadDelay: 120
 	Range: 7850
 	TargetActorCenter: true
+	Report: trashcannon.wav
 	Projectile: Bullet
 		Speed: 280
-		LaunchAngle: 165
-		ContrailLength: 30
-		ContrailWidth: 0c32
+		LaunchAngle: 70
+		ContrailLength: 35
+		ContrailStartWidth: 70
+		ContrailEndWidth: 14
+		ContrailStartColor: AAAA4488
+		ContrailEndColor: 22222222
+		TrailImage: black_smokey
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 32000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
+		Damage: 16000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 16
 	Warhead@HeavyBomb: SpreadDamage
-		Damage: 8000
+		Damage: 32000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 16
 
 TSBusMortarChem:
-	Inherits: ^MediumChemicalWeapon
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^HeavyBomb
-	ReloadDelay: 30
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 120
 	Range: 7850
 	TargetActorCenter: true
+	Report: trashcannon.wav
 	Projectile: Bullet
 		Speed: 280
-		LaunchAngle: 165
-		ContrailLength: 30
-		ContrailWidth: 0c32
-		ContrailColor: 16A63288
+		LaunchAngle: 70
+		ContrailLength: 35
+		ContrailStartWidth: 140
+		ContrailEndWidth: 28
+		ContrailStartColor: 22AA4488
+		ContrailEndColor: 11882222
+		TrailImage: green_smokey
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 32000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
+		Damage: 16000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 16
 	Warhead@HeavyBomb: SpreadDamage
-		Damage: 8000
+		Damage: 32000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 16
 	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 32000
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Damage: 4000
+		Damage: 16000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 16
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50

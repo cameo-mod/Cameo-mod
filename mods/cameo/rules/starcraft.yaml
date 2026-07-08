@@ -157,7 +157,6 @@
 		MaxQueueLength: 10
 
 ^SCUnitProduction:
-	Inherits@prod: ^ProducesUnits
 	GrantConditionOnPowerState@supply:
 		Condition: lowpower
 		ValidPowerStates: Low, Critical
@@ -5143,7 +5142,7 @@ SCPYTHEAN:
 		LocalOffset: 400,0,0, 200,200,0, 200,-200,0, 300,300,0, 300,-300,0
 		MuzzleSequence: muzzle
 	RangeMultiplier@Pythean:
-		Modifier: 80
+		Modifier: 85
 	GrantConditionOnPrerequisite@cloakon:
 		Condition: upghostcloak
 		Prerequisites: upghostcloak

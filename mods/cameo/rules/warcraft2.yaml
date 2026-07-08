@@ -195,7 +195,6 @@ Player:
 		ZOffset: -512
 
 ^WCUnitProduction:
-	Inherits@prod: ^ProducesUnits
 	GrantConditionOnPowerState@supply:
 		Condition: lowpower
 		ValidPowerStates: Low, Critical

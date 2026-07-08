@@ -2850,6 +2850,8 @@
 			scbehemoth: battlefortresspassenger
 			tsm113: battlefortresspassenger
 			tkmbattlebus: battlefortresspassenger
+			tsnomad: battlefortresspassenger
+			tsarty_bus: battlefortresspassenger
 	MassEntersCargo:
 	SharedPassenger:
 		CargoType: Infantry
@@ -7868,7 +7870,6 @@ CPQDEBUGDUMMY:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@DisabledOverlay: ^DisableOnPowerDown
 	Inherits: ^ScaledProducer
-	Inherits@prod: ^ProducesUnits
 	Inherits@repair: ^RepairsUnits
 	Buildable:
 		Queue: Building, RABuilding

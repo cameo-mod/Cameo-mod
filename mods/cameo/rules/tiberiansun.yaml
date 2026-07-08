@@ -346,7 +346,7 @@ OILB.TS.MUTANT:
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Inherits@shape: ^3x4Shape
 	Tooltip:
-		Name: Tiberium Extractor
+		Name: Tiberium Spike
 	Buildable:
 		BuildLimit: 1
 		Queue: Building, RABuilding
@@ -2667,7 +2667,6 @@ tsgtpile2:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
-	Inherits@prod: ^ProducesUnits
 	HitShape:
 		UseTargetableCellsOffsets: false
 		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
@@ -2714,7 +2713,6 @@ TSGTWEAPMUTANT:
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
 	Inherits@weap: ^IsWeaponFactory
-	Inherits@prod: ^ProducesUnits
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -6164,8 +6162,6 @@ TSMWMN:
 		Prerequisites: ~tsgtpile2, ~forgot_chemicalplant
 		Queue: Infantry, RAInfantry
 		Description: Mutant armed with a carbine. Strong vs Infantry. Weak vs Everything else.
-		BuildDuration: 120
-		BuildDurationModifier: 100
 	Mobile:
 		Speed: 75
 	Health:
@@ -9397,8 +9393,6 @@ tsclosh:
 		Prerequisites: ~tsgtweapmutant, tsgtradrmutant, ~!uptsftnk
 		Queue: Vehicle, RAVehicle
 		Description: Close range tank. Strong vs Buildings, Infantry. Weak vs Armor, Aircraft.
-		BuildDuration: 250
-		BuildDurationModifier: 100
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -9722,7 +9716,7 @@ tsarty_bus:
 	Inherits@TiberiumBoosters: ^TiberiumBoosters
 	Inherits@Unity: ^Unity
 	Valued:
-		Cost: 3400
+		Cost: 5200
 	Tooltip:
 		Name: Thumper Bus
 	Buildable:
@@ -9745,22 +9739,22 @@ tsarty_bus:
 		Range: 7c0
 	Armament@PRIMARY:
 		Weapon: TSBusMortar
-		Recoil: 128
-		RecoilRecovery: 26
-		LocalOffset: 624,0,208
+		Recoil: 200
+		RecoilRecovery: 20
+		LocalOffset: 1200,0,600
 		MuzzleSequence: muzzle
 		RequiresCondition: !up_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSBusMortarChem
-		Recoil: 128
-		RecoilRecovery: 26
-		LocalOffset: 624,0,208
+		Recoil: 200
+		RecoilRecovery: 20
+		LocalOffset: 1200,0,600
 		MuzzleSequence: muzzle
 		RequiresCondition: up_chemicalweapons
-	Turreted:
-		TurnSpeed: 18 #3
-	AttackTurreted:
-	WithSpriteTurret:
+	# Turreted:
+	# 	TurnSpeed: 18 #3
+	# AttackTurreted:
+	# WithSpriteTurret:
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -9768,7 +9762,7 @@ tsarty_bus:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 12
-		InitialUnits: tsmwmn,tsmwmn,tsmwmn,tsmwmn,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant
+		InitialUnits: tsmwmn,tsmwmn,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tsshotmut,tsshotmut,tsshotmut,tsmwmn,tsshotmut,tsmwmn
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
@@ -9796,33 +9790,34 @@ tsnomad:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@cargo: ^OpenToppedVehicle
-	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@barr: ^IsBarrack
 	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@cargo: ^OpenToppedVehicle
+	Inherits@bot: ^BotAutoDeployEvacuateCargo
 	Inherits@ChemicalFuel: ^ChemicalFuel
 	Inherits@MyPet: ^MyPetLarge
 	Inherits@JunkArmor: ^JunkArmor
 	Inherits@TiberiumBoosters: ^TiberiumBoosters
 	Inherits@Unity: ^Unity
 	Valued:
-		Cost: 4000
+		Cost: 6500
 	Tooltip:
 		Name: Nomad Barracks
 	Buildable:
+		-BuildDuration:
 		BuildPaletteOrder: 160
 		Prerequisites: ~tsgtweapmutant, tsfgttech
 		Queue: Vehicle, RAVehicle
 		Description: Forgotten moving barracks. Infantry can shoot from inside.
 	Mobile:
-		Speed: 60
-		TurnSpeed: 12
+		Speed: 65
+		TurnSpeed: 13
 	Health:
-		HP: 800000
+		HP: 650000
 	Repairable:
-		HpPerStep: 40000 #20
+		HpPerStep: 32500
 	ChangesHealth@SelfHealing:
-		Step: 320 #2500
+		Step: 260
 	-Power:
 	Armor:
 		Type: Superheavy
@@ -9835,21 +9830,21 @@ tsnomad:
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
 	Turreted:
-		TurnSpeed: 12 #3
+		TurnSpeed: 13
 	AttackTurreted:
 	WithSpriteTurret:
 	WithMuzzleOverlay:
 	Cargo:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
-		MaxWeight: 14
-		InitialUnits: tsmwmn,tsmwmn,tsmwmn,tsmwmn,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant
+		MaxWeight: 9
+		InitialUnits: tsmutant,tse3.mutant,tsmwmn,tsmutant3,tsshotmut,tsweedguy,tsdoggie,tsdoggieblue,tsumagon
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
-		PortOffsets: 384,0,128, -384,0,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128
+		PortOffsets: 384,-224,128, -384,-224,128, 224,-341,128, -224,-341,128, 224,341,128, -224,341,128, 384,224,128, -384,224,128, 0,0,128
 		PauseOnCondition: chronobeamed
 	RevealOnFire:
 		ArmamentNames: primary, garrisoned
@@ -9869,6 +9864,9 @@ tsnomad:
 		ExitCell: 1,1
 	GrantExternalConditionToProduced:
 		Condition: produced
+	Selectable:
+		Bounds: 2248, 2248
+		DecorationBounds: 2248, 2248
 	ProductionQueue@INFANTRY:
 	ActorStatValues:
 		Upgrades: up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
