@@ -110,6 +110,14 @@ def main() -> int:
                     entry = (name.lower(), c.key,
                              spec[0] if spec else "", c.get(spec[0]) if spec else "")
                     cond_traits.setdefault(ident.lower(), []).append(entry)
+            # any trait-level Prerequisites (support powers, ProducibleWithLevel,
+            # ProvidesPrerequisite gates …) is unlock-style consumption too
+            if not c.key.startswith("GrantConditionOnPrerequisite"):
+                tp = c.get("Prerequisites") or ""
+                for tok in tp.split(","):
+                    tok = tok.strip().lstrip("~!").strip().lower()
+                    if tok:
+                        unlock_consumers.setdefault(tok, []).append(name.lower())
         for tok in m.positive_prereqs(res):
             unlock_consumers.setdefault(tok, []).append(name.lower())
 

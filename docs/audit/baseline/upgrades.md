@@ -1,6 +1,6 @@
 # audit_upgrades — inverted / dead upgrade effects (B3)
 
-Upgrade items found: **565** — inverted-direction traits: **95**, dead upgrades: **19**, dead wiring tokens: **25**, without intent entries: **526**
+Upgrade items found: **565** — inverted-direction traits: **95**, dead upgrades: **4**, dead wiring tokens: **25**, without intent entries: **526**
 
 
 ## Inverted-direction stat traits gated on upgrade conditions
@@ -108,24 +108,9 @@ Upgrade items found: **565** — inverted-direction traits: **95**, dead upgrade
 
 | upgrade | extra tokens | file |
 |---|---|---|
-| cabaldataworm | (own name only) | mods/cameo/rules/tiberiansun.yaml |
-| cabalradarhack | (own name only) | mods/cameo/rules/tiberiansun.yaml |
-| ra2_allies_upgrade_forceshield | (own name only) | mods/cameo/rules/redalert2.yaml |
-| ra2_allies_upgrade_paratroopers | (own name only) | mods/cameo/rules/redalert2.yaml |
-| ra2_yuri_upgrade_bioengineering | (own name only) | mods/cameo/rules/redalert2.yaml |
-| ra2_yuri_upgrade_corrosiveammo | (own name only) | mods/cameo/rules/redalert2.yaml |
 | ra2teslaupgrade | (own name only) | mods/cameo/rules/redalert2.yaml |
-| ra_upgrade_massproduction | (own name only) | mods/cameo/rules/redalert.yaml |
-| tkmrocketaddon | (own name only) | mods/cameo/rules/tkm.yaml |
 | tsgtplug2 | (own name only) | mods/cameo/rules/tiberiansun.yaml |
 | tsgtplug3 | (own name only) | mods/cameo/rules/tiberiansun.yaml |
-| up_chaosbombs.asian | (own name only) | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/rules/upgrades.yaml |
-| up_conssupp4.steel | (own name only) | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/rules/promotions.yaml |
-| up_emp.latin | (own name only) | mods/cameo/ContentPacks/RedAlert2Mod/Syndicate/rules/upgrades.yaml |
-| up_emp.steel | (own name only) | mods/cameo/ContentPacks/RedAlert2Mod/Consortium/rules/upgrades.yaml |
-| up_massparadrop.asian | (own name only) | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/rules/upgrades.yaml |
-| up_nax_horten2.nax | (own name only) | mods/cameo/ContentPacks/RedAlert2Mod/Naxis/rules/upgrades.yaml |
-| up_team_diplomacy.asian | (own name only) | mods/cameo/ContentPacks/RedAlert2Mod/AsianAlliance/rules/upgrades.yaml |
 | uptsdummy4 | (own name only) | mods/cameo/rules/tiberiansun.yaml |
 
 
