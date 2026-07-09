@@ -178,7 +178,7 @@ up_blitzkrieg.nax:
 	Buildable:
 		BuildPaletteOrder: 130
 		Queue: Research
-		Description: upgrade-blitzkrieg.description
+		Description: Blitzkrieg doctrine: all allied vehicles move 25% faster.
 		Prerequisites: ~tech.nax, !up_blitzkrieg.nax
 	RenderSprites:
 		Image: blitzkriegicon

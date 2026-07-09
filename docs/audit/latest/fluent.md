@@ -1,15 +1,11 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **4105** — unresolved fluent refs in rules: **3**, orphaned actor-* messages: **233**
+Fluent messages loaded: **4105** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **233**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
 
-| actor | field | missing key |
-|---|---|---|
-| SCvoidray | Buildable.Description | actor-scvoidray.description |
-| up_blitzkrieg.nax | Buildable.Description | upgrade-blitzkrieg.description |
-| upvoidray | Buildable.Description | actor-upvoidray.description |
+_none found_
 
 
 ## F2 — fluent actor-* messages for actors that no longer exist
@@ -257,18 +253,18 @@ Fluent messages loaded: **4105** — unresolved fluent refs in rules: **3**, orp
 |---|---|---|
 | allies | 1/75 | 1% |
 | asianalliance | 0/78 | 0% |
-| cabal | 0/62 | 0% |
+| cabal | 0/64 | 0% |
 | consortium | 0/65 | 0% |
 | edenl | 0/47 | 0% |
 | forgotten | 0/80 | 0% |
 | futuretech | 0/60 | 0% |
-| gdi | 1/72 | 1% |
+| gdi | 1/71 | 1% |
 | human2 | 0/73 | 0% |
 | ixian | 0/80 | 0% |
 | lnaxis | 0/45 | 0% |
 | modjapan | 1/78 | 1% |
 | naxis | 0/79 | 0% |
-| nod | 3/76 | 3% |
+| nod | 3/75 | 4% |
 | orc2 | 0/64 | 0% |
 | ordos | 0/88 | 0% |
 | plymouthl | 0/48 | 0% |
@@ -279,7 +275,7 @@ Fluent messages loaded: **4105** — unresolved fluent refs in rules: **3**, orp
 | syndicate | 0/72 | 0% |
 | terran | 0/81 | 0% |
 | tkm | 1/76 | 1% |
-| tsgdi | 0/66 | 0% |
+| tsgdi | 0/67 | 0% |
 | tsnod | 0/51 | 0% |
 | yuri | 2/68 | 2% |
 | zerg | 0/78 | 0% |

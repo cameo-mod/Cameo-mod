@@ -4,10 +4,10 @@ Actors+templates scanned: **3841**
 
 | violation | meaning | count |
 |---|---|---|
-| V1 | concrete actor inherits from concrete actor | 328 |
+| V1 | concrete actor inherits from concrete actor | 330 |
 | V2 | inherit crosses faction ownership | 23 |
 | V3 | dangling inherit target (BLOCKING) | 0 |
-| V4 | chain depth > 3 | 1639 |
+| V4 | chain depth > 3 | 1641 |
 | V5 | > 2 -Trait removals (warning) | 91 |
 
 
@@ -107,6 +107,7 @@ _none found_
 | SCSTARPORTM | SCCOMMANDCENTERM | ? | ? | mods/cameo/rules/starcraft.yaml |
 | TECHBCANNON2 | TECHBCANNON | ? | ? | mods/cameo/rules/tech.yaml |
 | TSCYC2 | TSCYBORG | ? | ? | mods/cameo/rules/tiberiansun.yaml |
+| TSDOGGIEW | tsdoggie | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSE1.GDI | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSE1.NOD | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSE1PARA | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
@@ -114,6 +115,7 @@ _none found_
 | TSE3.Nod | TSE3 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEECABAL | TSENGINEER | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER | E6 | ? | tiberiandawn/shared | mods/cameo/rules/tiberiansun.yaml |
+| TSENGINEER.GDI | TSENGINEER | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER2 | TSENGINEER | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEERMUTANT | TSENGINEER | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSGHOSTSP | TSGHOST | ? | ? | mods/cameo/rules/tiberiansun.yaml |
@@ -876,6 +878,7 @@ _none found_
 | TSCYC2 | 6 | mods/cameo/rules/tiberiansun.yaml |
 | TSDEFENDER | 4 | mods/cameo/rules/tiberiansun.yaml |
 | TSDOGGIE | 5 | mods/cameo/rules/tiberiansun.yaml |
+| TSDOGGIEW | 6 | mods/cameo/rules/tiberiansun.yaml |
 | TSDissolver | 4 | mods/cameo/rules/tiberiansun.yaml |
 | TSE1 | 5 | mods/cameo/rules/tiberiansun.yaml |
 | TSE1.GDI | 6 | mods/cameo/rules/tiberiansun.yaml |
@@ -888,6 +891,7 @@ _none found_
 | TSENFORCER | 5 | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEECABAL | 7 | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER | 6 | mods/cameo/rules/tiberiansun.yaml |
+| TSENGINEER.GDI | 7 | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEER2 | 7 | mods/cameo/rules/tiberiansun.yaml |
 | TSENGINEERMUTANT | 7 | mods/cameo/rules/tiberiansun.yaml |
 | TSFTNK | 5 | mods/cameo/rules/tiberiansun.yaml |

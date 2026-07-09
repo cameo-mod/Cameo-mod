@@ -1,6 +1,6 @@
 # audit_upgrades — inverted / dead upgrade effects (B3)
 
-Upgrade items found: **565** — inverted-direction traits: **95**, dead upgrades: **4**, dead wiring tokens: **25**, without intent entries: **526**
+Upgrade items found: **565** — inverted-direction traits: **96**, dead upgrades: **4**, dead wiring tokens: **25**, without intent entries: **526**
 
 
 ## Inverted-direction stat traits gated on upgrade conditions
@@ -80,6 +80,7 @@ Upgrade items found: **565** — inverted-direction traits: **95**, dead upgrade
 | up_cyberneticmodifications | nodlasercommando | DamageMultiplier@up_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
 | up_cyberneticmodifications | rae6 | DamageMultiplier@up_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
 | up_cyberneticmodifications | tsengineer | DamageMultiplier@up_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
+| up_cyberneticmodifications | tsengineer.gdi | DamageMultiplier@up_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
 | up_cyberneticmodifications | tsengineer2 | DamageMultiplier@up_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
 | up_cyberneticmodifications | tsengineecabal | DamageMultiplier@up_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
 | up_cyberneticmodifications | tsengineermutant | DamageMultiplier@up_cyberneticmodifications | 200 | <100 = takes less damage | no intent entry |
@@ -118,7 +119,7 @@ Upgrade items found: **565** — inverted-direction traits: **95**, dead upgrade
 
 | token | #consumer traits | sample consumers |
 |---|---|---|
-| base-reveal | 1512 | 1tnk, 2tnk, 3tnk, 4tnk |
+| base-reveal | 1514 | 1tnk, 2tnk, 3tnk, 4tnk |
 | classicproductionqueues | 152 | afld, airfield.nax, airfield.nax2, barr |
 | derricklimit_is_0 | 1 | player |
 | derricklimit_is_3 | 1 | player |
@@ -135,12 +136,12 @@ Upgrade items found: **565** — inverted-direction traits: **95**, dead upgrade
 | scaledprices | 101 | afld, airfield.nax, airfield.nax2, barr |
 | scaledproductionqueues | 101 | afld, airfield.nax, airfield.nax2, barr |
 | upemptesla | 3 | ra2shk, ra2shk.bot, ra2shkhero |
-| upra2deso | 302 | aatrooper.ordos, alien.nax, alliedmachinegunner, alligator.asian |
-| upsubliminal | 1042 | 1tnk, 2tnk, 3tnk, 4tnk |
-| upsubliminal2 | 1042 | 1tnk, 2tnk, 3tnk, 4tnk |
-| usabombardament | 1042 | 1tnk, 2tnk, 3tnk, 4tnk |
-| usaholdtheline | 1042 | 1tnk, 2tnk, 3tnk, 4tnk |
-| usasearchndestroy | 1042 | 1tnk, 2tnk, 3tnk, 4tnk |
+| upra2deso | 304 | aatrooper.ordos, alien.nax, alliedmachinegunner, alligator.asian |
+| upsubliminal | 1044 | 1tnk, 2tnk, 3tnk, 4tnk |
+| upsubliminal2 | 1044 | 1tnk, 2tnk, 3tnk, 4tnk |
+| usabombardament | 1044 | 1tnk, 2tnk, 3tnk, 4tnk |
+| usaholdtheline | 1044 | 1tnk, 2tnk, 3tnk, 4tnk |
+| usasearchndestroy | 1044 | 1tnk, 2tnk, 3tnk, 4tnk |
 | usaupcounter | 2 | modhip, ratran |
 | usaupsupplylines | 31 | beer.nax, cgmiac.asian, cgte.latin, cgup.latin |
 

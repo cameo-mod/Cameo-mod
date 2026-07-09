@@ -7456,7 +7456,7 @@ SCvoidray:
 		BuildPaletteOrder: 20
 		Prerequisites: ~scstargate, ~upvoidray
 		Queue: Aircraft, RAAircraft
-		Description: actor-scvoidray.description
+		Description: Aerial assault craft whose prismatic beam intensifies while it stays on target.
 	Aircraft:
 		Speed: 140
 		TurnSpeed: 28
@@ -8428,7 +8428,7 @@ upvoidray:
 	Buildable:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
-		Description: actor-upvoidray.description
+		Description: Allows construction of Void Rays.
 		Prerequisites: ~scnexus, upepigraph, !upgladius, rank1
 	RenderSprites:
 		Image: scvoidray

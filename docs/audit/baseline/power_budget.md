@@ -1,6 +1,6 @@
 # audit_power_budget — worst-case stacked multipliers (R2)
 
-Units above the 2.0× effective-power budget: **762**
+Units above the 2.0× effective-power budget: **763**
 
 
 ## Breaches (damage× × surv× = power×), largest first
@@ -464,7 +464,6 @@ Units above the 2.0× effective-power budget: **762**
 | nod | e1.nod | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_advancedguerillatactics=115; FirepowerMultiplier@up_guerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | nod | e3.nod | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_advancedguerillatactics=115; FirepowerMultiplier@up_guerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | nod | rmbo.nod | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_advancedguerillatactics=115; FirepowerMultiplier@up_guerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| nod | tsengineer | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_guerillatactics=115; FirepowerMultiplier@up_advancedguerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | nod | tsstealthsoldier | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_advancedguerillatactics=115; FirepowerMultiplier@up_guerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | syndicate | cgpile.latin | 1.80 | 2.38 | 4.29 | DamageMultiplier@up_ngbunk2.latin=70; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | syndicate | ngbunk2.latin | 1.80 | 2.38 | 4.29 | DamageMultiplier@up_ngbunk2.latin=70; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
@@ -620,6 +619,7 @@ Units above the 2.0× effective-power budget: **762**
 | forgotten | tswini2 | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tse1.gdi | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tse2 | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| tsgdi | tsengineer.gdi | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsjumpjet2 | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsrailcom | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tszonetrooper | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -734,8 +734,9 @@ Units above the 2.0× effective-power budget: **762**
 | tsnod | tsbike | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_mobilityspecialization=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsnod | tssapc | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_mobilityspecialization=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsnod | tsscrin | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_mobilityspecialization=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| gdi | tsengineer | 1.95 | 1.43 | 2.79 | FirepowerMultiplier@up_longrangesensors=105; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| cabal | tsbike | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | cabal | tsengineecabal | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| cabal | tsttnk | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | edenl | eden_lynx_emp | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | edenl | eden_lynx_laser | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | edenl | eden_lynx_railgun | 1.86 | 1.43 | 2.65 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |

@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **550** across 1834 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **550** across 1833 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (46)
@@ -222,7 +222,7 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | tsblackhandflamer | RegenAmount 25 | expected 72 (2 x SelfHealing 36) |
 | tsblackhandlaser | RegenAmount 25 | expected 120 (2 x SelfHealing 60) |
 | tsengineecabal | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
-| tsengineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
+| tsengineer.gdi | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
 | tsengineer2 | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
 | tsengineermutant | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
 | tsharv | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
@@ -629,6 +629,6 @@ _none found_
 | actor | actual | expected |
 |---|---|---|
 | lnaxis: twr.nax2 | prereqs: barr.nax2, conyard.nax2 (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
-| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 

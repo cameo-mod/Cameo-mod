@@ -5,7 +5,6 @@ actors:
 	tsapachenod: ts_nod_harpy
 	tsart2: ts_nod_artillery
 	tsbggy: ts_nod_attack_buggy
-	tsbike: ts_nod_attack_cycle
 	tschamspy: ts_nod_chameleon_spy
 	tse1.nod: ts_nod_light_infantry
 	tse3.nod: ts_nod_rocket_infantry
@@ -38,7 +37,6 @@ actors:
 	tsstnk: ts_nod_stealth_tank
 	tssubtank: ts_nod_devil_s_tongue
 	tstoxintroop: ts_nod_toxin_trooper
-	tsttnk: ts_nod_tick_tank
 	up_advancedtiberiumrefinement: ts_nod_upgrade_advanced_tiberium_refinement
 	up_auxiliaryweapon: ts_nod_upgrade_auxiliary_weapon
 	up_infiltrationkit: ts_nod_upgrade_infiltration_kit
@@ -64,8 +62,6 @@ files:
 	tsauxiliaryweaponicon.png: ts_nod_upgrade_auxiliary_weapon_icon.png
 	tsbansheeicon.shp: ts_nod_banshee_fighter_icon.shp
 	tsbggy.shp: ts_nod_attack_buggy.shp
-	tsbike.shp: ts_nod_attack_cycle.shp
-	tsbikeicon.shp: ts_nod_attack_cycle_icon.shp
 	tsbuggyicon.shp: ts_nod_attack_buggy_icon.shp
 	tsdepticon.png: ts_nod_service_depot_icon.png
 	tsdeviltongueicon.shp: ts_nod_devil_s_tongue_icon.shp
@@ -89,8 +85,6 @@ files:
 	tsgtdeptbb.shp: ts_nod_service_depot_tsgtdeptbb.shp
 	tsgtdeptmk.shp: ts_nod_service_depot_tsgtdeptmk.shp
 	tsgtsilo.shp: ts_nod_silo_tsgtsilo.shp
-	tsgttick.shp: ts_nod_tick_tank_tsgttick.shp
-	tsgttickmk.shp: ts_nod_tick_tank_tsgttickmk.shp
 	tshandicon.png: ts_nod_hand_of_nod_icon.png
 	tshandofcabalicon.png: ts_nod_hand_of_nod_tshandofcabalicon.png
 	tsharpyicon.shp: ts_nod_harpy_icon.shp
@@ -172,7 +166,6 @@ files:
 	tstiberiumcoremissilesicon.png: ts_nod_upgrade_tiberium_core_missiles_icon.png
 	tstiberiumlensesicon.png: ts_nod_upgrade_tiberium_lenses_icon.png
 	tstibwasticon.shp: ts_nod_tiberium_waste_facility_icon.shp
-	tstickicon.png: ts_nod_tick_tank_icon.png
 	tstoxintroop.shp: ts_nod_toxin_trooper.shp
 	tstoxintroopicon.png: ts_nod_toxin_trooper_icon.png
 	willofkaneicon.png: ts_nod_upgrade_will_of_kane_icon.png

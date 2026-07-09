@@ -97,13 +97,13 @@ World:
 		ClassName: Light Support
 		Factions: cabal
 		BaseActor: tsmcvcabal
-		SupportActors: tscyborg,tscyborg,tscyborg,tsbike2,tsttnk2
+		SupportActors: tscyborg,tscyborg,tscyborg,tsbike,tsttnk
 	StartingUnits@heavycabal:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: cabal
 		BaseActor: tsmcvcabal
-		SupportActors: tscyborg,tscyborg,tscyborg,tsbike2,tsbike2,tsttnk2,tsttnk2,tsttnk2
+		SupportActors: tscyborg,tscyborg,tscyborg,tsbike,tsbike,tsttnk,tsttnk,tsttnk
 
 #######################################
 # TS Defaults
@@ -4118,6 +4118,8 @@ TSENGINEER:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Buildable:
+		Prerequisites: ~tsengineer
 	Mobile:
 		Speed: 55
 	Health:
@@ -4134,12 +4136,14 @@ TSENGINEER:
 	DeliversCash:
 		Payload: 300
 	RenderSprites:
+		Image: tsengineer
 		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
 TSENGINEER.GDI:
+	Inherits: TSENGINEER
 	Inherits@SERETraining: ^SERETraining
 	Buildable:
 		Queue: Infantry, RAInfantry
@@ -4876,8 +4880,10 @@ TSRAILCOM:
 		PlayerExperienceModifier: 0
 
 TSDOGGIEW:
-	Inherits: ^TSInfantry
+	Inherits: TSDOGGIE
 	Inherits@2: ^MutSWCreature
+	Buildable:
+		Prerequisites: ~tsdoggiew
 	RenderSprites:
 		Image: tsdoggie
 	AttackWander:
@@ -5650,32 +5656,26 @@ TSARND:
 		Weapon: RA2GattlingMG1
 		PauseOnCondition: ammo <= 64
 		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
 	Armament@2:
 		Weapon: RA2GattlingMG2
 		PauseOnCondition: ammo <= 8 && ammo >= 65
 		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
 	Armament@3:
 		Weapon: RA2GattlingMG3
 		PauseOnCondition: ammo >= 9
 		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
 	Armament@1AA:
 		Weapon: RA2GattlingMG1AA
 		PauseOnCondition: ammo <= 64
 		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
 	Armament@2AA:
 		Weapon: RA2GattlingMG2AA
 		PauseOnCondition: ammo <= 8 && ammo >= 65
 		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
 	Armament@3AA:
 		Weapon: RA2GattlingMG3AA
 		PauseOnCondition: ammo >= 9
 		LocalOffset: 85,90,299, 85,-90,299
-		MuzzleSequence: muzzle
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2DoublePistols
@@ -12002,7 +12002,7 @@ tsflocust:
 		Description: Heavy bomber. Strong vs Buildings. Weak vs Aircraft.
 	Aircraft:
 		CruiseAltitude: 2560
-		TurnSpeed: 72
+		TurnSpeed: 12
 		Speed: 180
 		CruisingCondition: cruising
 		TakeoffSounds: orcaup1.aud
@@ -12887,7 +12887,7 @@ up_genomemapping:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
-		Description: Increases damage resistance of Forgotten infantry by 20%. Also increases their range, vision and speed by 10%.
+		Description: Increases damage resistance, range, vision and speed of Forgotten infantry by 10%.
 		Prerequisites: ~tsgtradrmutant, !up_genomemapping
 	RenderSprites:
 		Image: genomemappingicon
@@ -12911,7 +12911,7 @@ up_genomemapping:
 		Modifier: 110
 	DamageMultiplier@up_genomemapping:
 		RequiresCondition: up_genomemapping
-		Modifier: 80
+		Modifier: 90
 	ActorStatValues:
 		Upgrades: up_genomemapping
 
@@ -12924,7 +12924,7 @@ up_chemicalfuel:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Upgrades
-		Description: Increases vehicle speed by 30%.
+		Description: Increases vehicle speed by 20%.
 		Prerequisites: ~tsgtradrmutant, !up_chemicalfuel
 	RenderSprites:
 		Image: chemicalfuelicon
@@ -12936,7 +12936,7 @@ up_chemicalfuel:
 		Prerequisites: up_chemicalfuel
 	SpeedMultiplier@up_chemicalfuel:
 		RequiresCondition: up_chemicalfuel
-		Modifier: 130
+		Modifier: 120
 	ActorStatValues:
 		Upgrades: up_chemicalfuel
 
@@ -12999,7 +12999,7 @@ up_junkarmor:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: Increases damage resistance of vehicles by 25%.
+		Description: Increases Damage Resistance and Speed of vehicles by 15%.
 		Prerequisites: ~tsfgttech, !up_junkarmor
 	RenderSprites:
 		Image: junkarmoricon
@@ -13011,7 +13011,10 @@ up_junkarmor:
 		Prerequisites: up_junkarmor
 	DamageMultiplier@up_junkarmor:
 		RequiresCondition: up_junkarmor
-		Modifier: 75
+		Modifier: 85
+	SpeedMultiplier@up_junkarmor:
+		RequiresCondition: up_junkarmor
+		Modifier: 115
 	ActorStatValues:
 		Upgrades: up_junkarmor
 
@@ -13024,7 +13027,7 @@ up_tiberiumboosters:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Research
-		Description: Increses range of Mutant missiles and shells by 25%.
+		Description: Increases range of Mutant missiles and shells by 15%.
 		Prerequisites: ~tsfgttech, !up_tiberiumboosters
 	RenderSprites:
 		Image: tiberiumboostersicon
@@ -13036,7 +13039,7 @@ up_tiberiumboosters:
 		Prerequisites: up_tiberiumboosters
 	RangeMultiplier@up_tiberiumboosters:
 		RequiresCondition: up_tiberiumboosters
-		Modifier: 125
+		Modifier: 115
 	ActorStatValues:
 		Upgrades: up_tiberiumboosters
 

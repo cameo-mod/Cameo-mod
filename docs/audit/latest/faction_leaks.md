@@ -1,6 +1,6 @@
 # audit_faction_leaks — cross-faction leaks (B1)
 
-Factions checked: **28** — L1 leaks: **10**, L3 concrete-inherit leaks: **13**, shared/unattributed buildables: **1106**
+Factions checked: **28** — L1 leaks: **10**, L3 concrete-inherit leaks: **13**, shared/unattributed buildables: **1105**
 
 
 ## L1 — buildable in faction X but owned by faction Y
@@ -681,7 +681,7 @@ Factions checked: **28** — L1 leaks: **10**, L3 concrete-inherit leaks: **13**
 | tsarty_bus | 1 | forgotten |
 | tsascended | 1 | cabal |
 | tsbggy | 1 | tsnod |
-| tsbike | 1 | tsnod |
+| tsbike | 2 | cabal, tsnod |
 | tsbowler | 1 | forgotten |
 | tscabalcobra | 1 | cabal |
 | tscar2 | 1 | forgotten |
@@ -706,7 +706,6 @@ Factions checked: **28** — L1 leaks: **10**, L3 concrete-inherit leaks: **13**
 | tse3.nod | 1 | tsnod |
 | tsenforcer | 1 | tsgdi |
 | tsengineecabal | 1 | cabal |
-| tsengineer | 2 | gdi, nod |
 | tsengineer.gdi | 1 | tsgdi |
 | tsengineer2 | 1 | tsnod |
 | tsengineermutant | 1 | forgotten |
@@ -777,7 +776,7 @@ Factions checked: **28** — L1 leaks: **10**, L3 concrete-inherit leaks: **13**
 | tstoxintroop | 1 | tsnod |
 | tstrnsport | 1 | tsgdi |
 | tstrnsportmutant | 1 | forgotten |
-| tsttnk | 1 | tsnod |
+| tsttnk | 2 | cabal, tsnod |
 | tsttnkcabal | 1 | cabal |
 | tsumagon | 1 | forgotten |
 | tsweedguy | 1 | forgotten |

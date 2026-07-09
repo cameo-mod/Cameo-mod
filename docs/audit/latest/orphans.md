@@ -1,13 +1,11 @@
 # audit_orphans — dead content (B10)
 
-Live weapons: **2302** — orphans: **345**, dangling weapon refs (BLOCKING): **1**, conditions granted-never-consumed: **16**
+Live weapons: **2302** — orphans: **345**, dangling weapon refs (BLOCKING): **0**, conditions granted-never-consumed: **16**
 
 
 ## O2 — dangling weapon references (crash-on-use class)
 
-| actor | trait | missing weapon | file |
-|---|---|---|---|
-| casinocrate | ExplodeCrateAction@chem | TSChemTacticalMissile | mods/cameo/rules/misc.yaml |
+_none found_
 
 
 ## O1 — orphan weapons (no live actor/weapon/map/lua reference)

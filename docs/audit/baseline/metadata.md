@@ -1,6 +1,6 @@
 # audit_metadata — tooltip/metadata rot (B7)
 
-Duplicate-tooltip groups: **31**, buildables missing Tooltip name: **5**
+Duplicate-tooltip groups: **29**, buildables missing Tooltip name: **5**
 
 
 ## M1 — same tooltip name on multiple buildables of one faction
@@ -11,7 +11,6 @@ Duplicate-tooltip groups: **31**, buildables missing Tooltip name: **5**
 | consortium | quantum tank | quantumtank.steel, up_quantumtank.steel |
 | edenl | impulse items | consumer_items_impulse, consumer_items_luxury_wares, consumer_items_wares |
 | forgotten | tiberian fiend | tsdoggie, tsdoggieblue |
-| gdi | engineer | e6, tsengineer |
 | gdi | ion cannon uplink | eye.ionc, tsgtplug2 |
 | human2 | cannon tower | wc2_human_cannon_tower, wchumanguardtowerupgrade |
 | human2 | guard tower | wc2_human_guard_tower, wchumancannontowerupgrade |
@@ -22,7 +21,6 @@ Duplicate-tooltip groups: **31**, buildables missing Tooltip name: **5**
 | ixian | concrete slab | concreteabuilding, concreteadefense |
 | ixian | large concrete slab | concretebbuilding, concretebdefense |
 | naxis | horten bomber strike | up_nax_horten.nax, up_nax_horten2.nax |
-| nod | engineer | e6, tsengineer |
 | orc2 | cannon tower | wc2_orc_cannon_tower, wcorccannontowerupgrade |
 | orc2 | guard tower | wc2_orc_guard_tower, wcorcguardtowerupgrade |
 | orc2 | ogre-mage | wc2_o_ogremageupg, wc2_orc_ogremage |
