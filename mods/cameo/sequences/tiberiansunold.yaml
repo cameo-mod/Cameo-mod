@@ -440,12 +440,12 @@ tsvissml:
 	icon:
 		Filename: viceicnh.shp
 
-tscyborg:
+cabal_cyborginfantry:
 	Inherits: ^TSBasicInfantry
 	Defaults:
 		Tick: 80
 		Offset: 0, 0, 16
-		Filename: tscyborg.shp
+		Filename: cabal_platedarmorcyborg.shp
 	stand:
 		Facings: 8
 		ShadowStart: 370
@@ -532,10 +532,10 @@ ts_nod_elitecadre:
 		Filename: ts_nod_elitecadre_icon.shp
 		AddExtension: False
 
-tscyc2:
+cabal_cyborgcommando:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: tscyc2.shp
+		Filename: cabal_cyborgcommando.shp
 		Offset: 0, 0, 16
 	stand:
 		Facings: 8
@@ -575,69 +575,69 @@ tscyc2:
 		Facings: 8
 		ShadowStart: 568
 	icon:
-		Filename: tscycommicon.shp
+		Filename: cabal_cyborgcommando_icon.shp
 
-tsdefender:
+cabal_coredefender:
 	Defaults:
-		Filename: tsdefender.shp
+		Filename: cabal_coredefender_tsdefender.shp
 	idle:
 		Filename:  invisibleitem.shp
 	stand:
-		Filename: tsdefender.shp
+		Filename: cabal_coredefender_tsdefender.shp
 		Facings: -8
 		ShadowStart: 168
 	stand2:
-		Filename: tsdefender.shp
+		Filename: cabal_coredefender_tsdefender.shp
 		Facings: -8
 		ShadowStart: 168
 	run:
-		Filename: tsdefender.shp
+		Filename: cabal_coredefender_tsdefender.shp
 		Start: 8
 		Length: 8
 		Facings: -8
 		ShadowStart: 176
 		Tick: 100
 	attack:
-		Filename: tsdefender.shp
+		Filename: cabal_coredefender_tsdefender.shp
 		Facings: -8
 		Length: 12
 		Start: 72
 		ShadowStart: 168
 	die:
-		Filename:  defd_exp.shp
+		Filename:  cabal_coredefender_defd_exp.shp
 		Length: *
 		Tick: 100
 	icon:
 		Filename: tsdefendericon.shp
 
-tsreaper:
+cabal_cyborgreaper:
 	Defaults:
-		Filename: tsreaper.shp
+		Filename: cabal_cyborgreaper.shp
 	idle:
-		Filename: tsreaper.shp
+		Filename: cabal_cyborgreaper.shp
 		Facings: -8
 		ShadowStart: 117
 	stand:
-		Filename: tsreaper.shp
+		Filename: cabal_cyborgreaper.shp
 		Facings: -8
 		ShadowStart: 168
 	run:
-		Filename: tsreaper.shp
+		Filename: cabal_cyborgreaper.shp
 		Start: 8
 		Length: 12
 		Facings: -8
 		ShadowStart: 125
 	shoot:
-		Filename: tsreaper.shp
+		Filename: cabal_cyborgreaper.shp
 		Facings: -8
 		ShadowStart: 117
 	die:
-		Filename: tsreaper.shp
+		Filename: cabal_cyborgreaper.shp
 		Start: 104
 		Length: 12
 		ShadowStart: 221
 	icon:
-		Filename: tsreapericon.shp
+		Filename: cabal_cyborgreaper_icon.shp
 
 ts_gdi_titan:
 	idle:
@@ -967,7 +967,7 @@ ts_gdi_juggernaut:
 
 # ts_nod_mobilerepairvehicle:
 # 	idle: invisibleitem
-# 	icon: ts_nod_mobilerepairvehicle_icon.shp
+# 	icon: cabal_mobilerepairvehicle_icon.shp
 # 		AddExtension: False
 # 	muzzle: gunfire2
 # 		Length: 5
@@ -986,7 +986,7 @@ tsmcv:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: ts_nod_mobileconstructionvehicle_icon.shp
+		Filename: cabal_mobileconstructionvehicle_icon.shp
 
 # tsart2turret:
 # 	idle: tsgtarty
@@ -1059,22 +1059,22 @@ tsgtcnst:
 		Scale: 1.5
 		Offset: 0, -20, 20
 	idle:
-		Filename: ts_nod_constructionyard.shp
+		Filename: cabal_constructionyard.shp
 		ShadowStart: 3
 	build:
-		Filename: ts_nod_constructionyard.shp
+		Filename: cabal_constructionyard.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ts_nod_constructionyard.shp
+		Filename: cabal_constructionyard.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: ts_nod_constructionyard.shp
+		Filename: cabal_constructionyard.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	make: 
-		Filename: ts_nod_constructionyard_mk.shp
+		Filename: cabal_constructionyard_mk.shp
 		Length: 24
 		ShadowStart: 24
 	crane-overlay: 
@@ -1594,7 +1594,7 @@ ts_nod_warfactory:
 # 	icon: tsnodtempleicon
 # 		Offset: 0, 0
 
-# tscore:
+# cabal_core:
 # 	Defaults:
 # 		Offset: -1,-21, 42
 # 	idle:
@@ -3055,7 +3055,7 @@ tspulsball:
 # 		Length: *
 # 		ZOffset: 256
 
-# tsobl2:
+# cabal_obeliskofdarkness:
 # 	Defaults:
 # 		Offset: 15, 0, 0
 # 	idle: obl2
@@ -3095,36 +3095,36 @@ tspulsball:
 # 		ShadowStart: 1
 # 		Offset: 0, -10, 10
 
-tsdissolver:
+cabal_dissolver:
 	stand:
-		Filename: tsdissolver.shp
+		Filename: cabal_dissolver.shp
 		Facings: -8
 	run:
-		Filename: tsdissolver.shp
+		Filename: cabal_dissolver.shp
 		Start: 8
 		Facings: -8
 		Length: 4
 		Tick: 110
 	turret:
-		Filename: tsdissolver.shp
+		Filename: cabal_dissolver.shp
 		Start: 40
 		Facings: -32
 	shoot:
-		Filename: tsdissolver.shp
+		Filename: cabal_dissolver.shp
 		Start: 72
 		Facings: -32
 	icon:
-		Filename: tsdissolvericon.shp
+		Filename: cabal_dissolver_icon.shp
 
 tsdissolvereffect:
 	idle:
-		Filename: tsdissolver-weapon.shp
+		Filename: cabal_dissolver-weapon.shp
 		Length: *
 		Tick: 90
 
-tst1000:
+cabal_eliminator1000:
 	Defaults:
-		Filename: tst1000.shp
+		Filename: cabal_eliminator1000.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	Defaults:
@@ -3215,10 +3215,10 @@ tst1000:
 		Facings: 8
 		Scale: 1.5
 	icon:
-		Filename: tst1000icon.shp
+		Filename: cabal_eliminator1000_icon.shp
 		AddExtension: False
 
-# tsarnd:
+# cabal_eliminator800:
 # 	Inherits: ^RA2ArmedInfantry
 # 	Defaults: yrarnd
 # 	run:

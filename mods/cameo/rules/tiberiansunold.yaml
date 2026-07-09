@@ -89,19 +89,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: cabal
-		BaseActor: tsmcvcabal
+		BaseActor: cabal_mobileconstructionvehicle
 	StartingUnits@defaultcabal:
 		Class: light
 		ClassName: Light Support
 		Factions: cabal
-		BaseActor: tsmcvcabal
-		SupportActors: tscyborg,tscyborg,tscyborg,tsbike2,tsttnk2
+		BaseActor: cabal_mobileconstructionvehicle
+		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,tsbike2,tsttnk2
 	StartingUnits@heavycabal:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: cabal
-		BaseActor: tsmcvcabal
-		SupportActors: tscyborg,tscyborg,tscyborg,tsbike2,tsbike2,tsttnk2,tsttnk2,tsttnk2
+		BaseActor: cabal_mobileconstructionvehicle
+		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,tsbike2,tsbike2,tsttnk2,tsttnk2,tsttnk2
 
 Player:
 	ExternalCondition@PassiveIncomeBuildingsOwned:
@@ -613,7 +613,7 @@ forgotten_constructionyard:
 	RenderSprites:
 		Image: tsgtcnst
 
-TSGTCNSTCABAL:
+cabal_constructionyard:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
 	Inherits: ^BaseBuilding
@@ -647,7 +647,7 @@ TSGTCNSTCABAL:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvcabal
+		IntoActor: cabal_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -782,19 +782,19 @@ tsmcvmutant.bot:
 		BuildLimit: 1
 		Prerequisites: ~techlevel.medium, tsgtdept, ~botplayer, allowsMCV
 
-TSMCVCABAL:
+cabal_mobileconstructionvehicle:
 	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Transforms:
-		IntoActor: tsgtcnstcabal
+		IntoActor: cabal_constructionyard
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmcabal
 
 tsmcvcabal.bot:
-	Inherits: TSMCVCABAL
+	Inherits: cabal_mobileconstructionvehicle
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
@@ -1260,7 +1260,7 @@ ts_nod_handof:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-light
 
-TSNTHAND2:
+cabal_cyborgfactory:
 	Inherits: ts_nod_handof
 	Tooltip:
 		Name: Hand of CABAL
@@ -1729,7 +1729,7 @@ ts_nod_helipad:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-lights
 
-TSNTHPAD2:
+cabal_helipad:
 	Inherits: ts_nod_helipad
 	Tooltip:
 		Name: Helipad (CABAL)
@@ -2094,7 +2094,7 @@ tsnttmpl:
 		Sequence: idle-lights
 	SupportPowerChargeBar:
 
-tscore:
+cabal_core:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
@@ -2921,7 +2921,7 @@ ts_nod_obeliskoflight:
 	Power:
 		Amount: -100
 
-tsobl2:
+cabal_obeliskofdarkness:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -3078,7 +3078,7 @@ ts_nod_engineer:
 	RenderSprites:
 		Image: tsengineer
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 	-TemporaryOwnerManager:
 
 ts_gdi_discthrower:
@@ -3430,7 +3430,7 @@ ts_nod_elitecadre:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-TSCYBORG:
+cabal_cyborginfantry:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3501,7 +3501,7 @@ TSCYBORG:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -3509,7 +3509,7 @@ TSCYBORG:
 		Name: garrisoned
 		Weapon: TSVulcanTower
 	Selectable:
-		Class: tscyborg
+		Class: cabal_cyborginfantry
 
 ts_nod_chameleonspy:
 	Inherits: ^Soldier
@@ -3609,7 +3609,7 @@ forgotten_mutanthijacker:
 		VoiceSet: TSHijacker
 	-DamagedByTerrain:
 
-TSREAPER:
+cabal_cyborgreaper:
 	Inherits: ^Walker
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -3641,7 +3641,7 @@ TSREAPER:
 	Armament@TRAP:
 		Weapon: TSReaperTrap
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	Tooltip:
 		Name: Cyborg Reaper
 	UpdatesPlayerStatistics:
@@ -3657,7 +3657,7 @@ TSREAPER:
 	RenderSprites:
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, -128
-		Class: tsreaper
+		Class: cabal_cyborgreaper
 	Capturable:
 		Types: thiefproof
 	ChangesHealth:
@@ -3667,16 +3667,16 @@ TSREAPER:
 		DamageCooldown: 1
 
 TSREAPER2:
-	Inherits: TSREAPER
+	Inherits: cabal_cyborgreaper
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	UpdatesPlayerStatistics:
-		OverrideActor: tsreaper
+		OverrideActor: cabal_cyborgreaper
 	RenderSprites:
-		Image: tsreaper
+		Image: cabal_cyborgreaper
 
-TSCYC2:
-	Inherits: TSCYBORG
+cabal_cyborgcommando:
+	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
 	Valued:
 		Cost: 1800
@@ -3703,10 +3703,10 @@ TSCYC2:
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
-		Class: tscyc2
+		Class: cabal_cyborgcommando
 
 TSCYC2.CABAL:
-	Inherits: TSCYC2
+	Inherits: cabal_cyborgcommando
 	Buildable:
 		Queue: Infantry, RAInfantry
 	DamageMultiplier:
@@ -3714,9 +3714,9 @@ TSCYC2.CABAL:
 	FirepowerMultiplier:
 		Modifier: 120
 	RenderSprites:
-		Image: tscyc2
+		Image: cabal_cyborgcommando
 
-TSDissolver:
+cabal_dissolver:
 	Inherits: ^Vehicle
 	Inherits@EXT: ^ExternalConditions
 	Inherits@EMP: ^TurretEMP
@@ -3732,7 +3732,7 @@ TSDissolver:
 		Prerequisites:
 		IconPalette: ra2
 	Selectable:
-		Class: TSDissolver
+		Class: cabal_dissolver
 	Mobile:
 		TurnSpeed: 396
 		Speed: 70
@@ -3747,7 +3747,7 @@ TSDissolver:
 		TurnSpeed: 40
 		Offset: 0,0,25
 	Armament:
-		Weapon: TSDissolver
+		Weapon: cabal_dissolver
 		LocalOffset: 200,0,0
 	RenderSprites:
 	QuantizeFacingsFromSequence:
@@ -3767,7 +3767,7 @@ TSDissolver:
 		Sequence: shoot
 		RequiresCondition: attack
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 
 forgotten_mutantsniper:
 	Inherits: forgotten_mutant
@@ -6318,7 +6318,7 @@ tsm113.bot3:
 # TS CABAL Vehicles
 #######################################
 
-TST1000:
+cabal_eliminator1000:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -6391,7 +6391,7 @@ TST1000:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -6404,9 +6404,9 @@ TST1000:
 		StartIfBelow: 100
 		DamageCooldown: 1
 	RenderSprites:
-		Image: tst1000
+		Image: cabal_eliminator1000
 
-TSDEFENDER:
+cabal_coredefender:
 	Inherits: ^Tank
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -6514,7 +6514,7 @@ TSBIKE2:
 		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	RenderSprites:
 		Image: tsbike
 	RenderVoxels:
@@ -6532,7 +6532,7 @@ TSSTNK2:
 		Prerequisites: tek, ~techlevel.high
 		Queue: Vehicle, RAVehicle
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	RenderSprites:
 		Image: ts_nod_stealthtank
 	RenderVoxels:
@@ -6547,7 +6547,7 @@ TSREPAIR2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	RenderSprites:
 		Image: ts_nod_mobilerepairvehicle
 	RenderVoxels:
@@ -6563,7 +6563,7 @@ TSTTNK2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	AttackTurreted@deployed:
 	RenderSprites:
 		Image: tsttnk
@@ -6586,7 +6586,7 @@ TSART2C:
 	RenderVoxels:
 		Image: ts_nod_artillery
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	-TemporaryOwnerManager:
 
 TSSUBTANK2:
@@ -6596,7 +6596,7 @@ TSSUBTANK2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	RenderSprites:
 		Image: ts_nod_devilstongue
 	RenderVoxels:
@@ -6612,7 +6612,7 @@ TSSAPC2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	RenderSprites:
 		Image: ts_nod_subterraneanapc
 	RenderVoxels:
@@ -7350,7 +7350,7 @@ TSCLOUD1:
 # 	Voiced:
 # 		VoiceSet: TSVehicle
 
-TSARND:
+cabal_eliminator800:
 	Inherits: ^Soldier
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMPfrontal: ^FrontalEMP

@@ -4724,7 +4724,7 @@ swddroid:
 	RenderSprites:
 
 swdroidb2:
-	Inherits: TSCYBORG
+	Inherits: cabal_cyborginfantry
 	Inherits@MC: ^MCImmune
 	Inherits@laserup: ^SWLaserUpgrades
 	Inherits@infup: ^SWDroidUpgrades
@@ -4744,7 +4744,7 @@ swdroidb2:
 	Armament@PRIMARY:
 		Weapon: SWLaserG
 	Selectable:
-		Class: tscyborg
+		Class: cabal_cyborginfantry
 	Voiced:
 		VoiceSet: SWBigDroidVoice
 	ProductionCostMultiplier@Industrial:

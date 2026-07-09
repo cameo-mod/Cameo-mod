@@ -915,12 +915,12 @@ actor-ts_gdi_radar =
    Unlocks higher-tech units and buildings.
    Requires power to operate.
 
-actor-tscabaltech =
+actor-cabal_techcenter =
    .name = Cabal Tech Center
    .description = Provides CABAL advanced technologies.
    Only one may be built at a time.
 
-actor-tscore =
+actor-cabal_core =
    .name = CABAL Core
    .description = Provides CABAL advanced technologies.
    Provides Data Worm support power.

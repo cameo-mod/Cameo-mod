@@ -258,7 +258,7 @@ MMTSMUTANTMCV:
 		BuildPaletteOrder: 130
 		Prerequisites: !mmmutant
 MMTSCABALMCV:
-	Inherits@MCV: TSMCVCABAL
+	Inherits@MCV: cabal_mobileconstructionvehicle
 	Tooltip:
 		Name: Mobile Construction Vehicle (CABAL)
 	Buildable:

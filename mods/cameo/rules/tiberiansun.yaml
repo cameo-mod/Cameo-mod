@@ -91,19 +91,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: cabal
-		BaseActor: tsmcvcabal
+		BaseActor: cabal_mobileconstructionvehicle
 	StartingUnits@defaultcabal:
 		Class: light
 		ClassName: Light Support
 		Factions: cabal
-		BaseActor: tsmcvcabal
-		SupportActors: tscyborg,tscyborg,tscyborg,tsbike,tsttnk
+		BaseActor: cabal_mobileconstructionvehicle
+		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,tsbike,tsttnk
 	StartingUnits@heavycabal:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: cabal
-		BaseActor: tsmcvcabal
-		SupportActors: tscyborg,tscyborg,tscyborg,tsbike,tsbike,tsttnk,tsttnk,tsttnk
+		BaseActor: cabal_mobileconstructionvehicle
+		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,tsbike,tsbike,tsttnk,tsttnk,tsttnk
 
 #######################################
 # TS Defaults
@@ -151,10 +151,10 @@ World:
 			1: A self-replicating data worm hijacks a Hunter-Seeker droid and launches it at a designated target.\n  Instantly kills mobile targets\n  Splash damage strong vs Vehicles, Buildings\n  Requires line of sight to target
 		Icons:
 			1: icon
-		IconImage: cabaldataworm
+		IconImage: cabal_upgrade_dataworm
 		PauseOnCondition: lowpower || disabled
 		Prerequisites:
-			1: cabaldataworm
+			1: cabal_upgrade_dataworm
 		ChargeInterval: 4500
 		ArmamentName: superweapon
 		ValidRelationships: Enemy, Neutral, Ally
@@ -207,29 +207,29 @@ World:
 		Image: cabalrank
 		Sequence: rank-elite
 		Palette: greyscale
-	GrantConditionOnPrerequisite@cabalfirewallprotocol:
-		Condition: cabalfirewallprotocol
-		Prerequisites: cabalfirewallprotocol
+	GrantConditionOnPrerequisite@cabal_upgrade_firewallprotocol:
+		Condition: cabal_upgrade_firewallprotocol
+		Prerequisites: cabal_upgrade_firewallprotocol
 	Targetable@FIREWALLPROTOCOL:
 		TargetTypes: MCImmune
-		RequiresCondition: cabalfirewallprotocol
-	GrantConditionOnPrerequisite@upcabalfullassimilation:
-		Condition: upcabalfullassimilation
-		Prerequisites: upcabalfullassimilation
+		RequiresCondition: cabal_upgrade_firewallprotocol
+	GrantConditionOnPrerequisite@cabal_upgrade_fullassimilation:
+		Condition: cabal_upgrade_fullassimilation
+		Prerequisites: cabal_upgrade_fullassimilation
 	RevealsShroudMultiplier@FULLASSIMILATION:
-		RequiresCondition: upcabalfullassimilation
+		RequiresCondition: cabal_upgrade_fullassimilation
 		Modifier: 120
 	DetectCloakedMultiplier@FULLASSIMILATION:
-		RequiresCondition: upcabalfullassimilation
+		RequiresCondition: cabal_upgrade_fullassimilation
 		Modifier: 120
-	GrantConditionOnPrerequisite@cabalnetworkprotocols:
-		Condition: cabalnetworkprotocols
-		Prerequisites: cabalnetworkprotocols
+	GrantConditionOnPrerequisite@cabal_upgrade_networkedcombatprotocols:
+		Condition: cabal_upgrade_networkedcombatprotocols
+		Prerequisites: cabal_upgrade_networkedcombatprotocols
 	FirepowerMultiplier@NETWORKPROTOCOLS:
-		RequiresCondition: cabalnetworkprotocols
+		RequiresCondition: cabal_upgrade_networkedcombatprotocols
 		Modifier: 108
 	ReloadDelayMultiplier@NETWORKPROTOCOLS:
-		RequiresCondition: cabalnetworkprotocols
+		RequiresCondition: cabal_upgrade_networkedcombatprotocols
 		Modifier: 95
 
 INVISIBLEPLANE:
@@ -406,7 +406,7 @@ TSGTCNST:
 	Buildable:
 		Description: Builds structures
 
-TSGTCNSTCABAL:
+cabal_constructionyard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -430,7 +430,7 @@ TSGTCNSTCABAL:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvcabal
+		IntoActor: cabal_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -481,17 +481,17 @@ TSGTCNSTCABAL:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
 
-TSMCVCABAL:
+cabal_mobileconstructionvehicle:
 	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsntweapcabal, tsgtdeptcabal
+		Prerequisites: ~cabal_mechfactory, cabal_servicedepot
 	Tooltip:
 		Name: CABAL Mobile Construction Vehicle
 	Transforms:
-		IntoActor: tsgtcnstcabal
+		IntoActor: cabal_constructionyard
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	RenderVoxels:
 		Image: tsmcvblack
 
@@ -499,7 +499,7 @@ TSMCVCABAL:
 # TS Building
 #######################################
 
-tsproccabal:
+cabal_refinery:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -517,7 +517,7 @@ tsproccabal:
 		Name: CABAL Refinery
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtcnstcabal, tsntpowrcabal
+		Prerequisites: ~cabal_constructionyard, cabal_powerplant
 		Queue: Building, RABuilding
 		Description: Processes raw Tiberium\ninto useable resources
 	Building:
@@ -535,7 +535,7 @@ tsproccabal:
 	CustomSellValue:
 		Value: 500
 	FreeActor:
-		Actor: TSHARVCABAL
+		Actor: cabal_tiberiumharvester
 		SpawnOffset: 1,2
 		Facing: 256
 	Power:
@@ -549,10 +549,10 @@ tsproccabal:
 		RequiresSelection: true
 		PipCount: 10
 	RenderSprites:
-		Image: tsproccabal
+		Image: cabal_refinery
 		PlayerPalette: player_rgba
 
-TSNTPOWRCABAL:
+cabal_powerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -570,7 +570,7 @@ TSNTPOWRCABAL:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgtcnstcabal
+		Prerequisites: ~cabal_constructionyard
 		Description: template-power.description
 	Building:
 		Footprint: xx xx
@@ -645,16 +645,16 @@ TSGTSILO:
 	RenderSprites:
 		Image: tsgtsilo.gdi
 
-TSGTSILOCABAL:
+cabal_silo:
 	Inherits: TSGTSILO
 	Tooltip:
 		Name: Silo
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsproccabal
+		Prerequisites: ~cabal_constructionyard, cabal_refinery
 	RenderSprites:
 		Image: tsgtsilo.cabal
 
-TSNTHAND2:
+cabal_cyborgfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
@@ -669,7 +669,7 @@ TSNTHAND2:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgtcnstcabal, tsntpowrcabal
+		Prerequisites: ~cabal_constructionyard, cabal_powerplant
 		Queue: Building, RABuilding
 		Description: template-barracks.description
 		IconPalette: windows256
@@ -704,7 +704,7 @@ TSNTHAND2:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSNTWEAPCABAL:
+cabal_mechfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
@@ -721,7 +721,7 @@ TSNTWEAPCABAL:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgtcnstcabal, tsproccabal
+		Prerequisites: ~cabal_constructionyard, cabal_refinery
 		Queue: Building, RABuilding
 		Description: template-factory.description
 	Building:
@@ -761,23 +761,23 @@ TSNTWEAPCABAL:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtdeptcabal:
+cabal_servicedepot:
 	Inherits: ts_gdi_servicedepot
 	Tooltip:
 		Name: Service Depot
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsntweapcabal
+		Prerequisites: ~cabal_constructionyard, cabal_mechfactory
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
 
-tsnthpad2:
+cabal_helipad:
 	Inherits: ts_nod_helipad
 	Tooltip:
 		Name: CABAL Helipad
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+		Prerequisites: ~cabal_constructionyard, cabal_radar
 	ProductionQueue@AIRCRAFT:
 	ProductionBar@AIRCRAFTNOD:
 		ProductionType: Aircraft
@@ -786,13 +786,13 @@ tsnthpad2:
 	RenderSprites:
 		Image: tsnthpadcabal
 
-tsntradrcabal:
+cabal_radar:
 	Inherits: ts_nod_radar
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsproccabal
+		Prerequisites: ~cabal_constructionyard, cabal_refinery
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntradrcabal
+		Image: cabal_radar
 	ProvidesPrerequisite@robotcontrol:
 		Prerequisite: robotcontrol
 		RequiresCondition: !disabled
@@ -801,7 +801,7 @@ tsntradrcabal:
 		PauseOnCondition: disabled
 		OrderName: SovietRA2SpyPlane
 		Prerequisites:
-			1: cabalradarhack
+			1: cabal_upgrade_radarhack
 		Icons:
 			1: icon
 		ChargeInterval: 4500
@@ -814,7 +814,7 @@ tsntradrcabal:
 		EndChargeSpeechNotification: SpyPlaneReady
 		Actors:
 			1: camera.psireveal
-		IconImage: cabalradarhack
+		IconImage: cabal_upgrade_radarhack
 		LifeTime: 250
 		DeploySound: spysreve.wav
 		LaunchSound: spysreve.wav
@@ -823,7 +823,7 @@ tsntradrcabal:
 		EffectSequence: idle
 		BlockedCursor: move-blocked
 
-tscabaltech:
+cabal_techcenter:
 	Inherits: ts_gdi_techcenter
 	Tooltip:
 		Name: Cabal Tech Center
@@ -832,7 +832,7 @@ tscabaltech:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+		Prerequisites: ~cabal_constructionyard, cabal_radar
 		Description: actor-tscabaltech.description
 		BuildLimit: 1
 	SupportPowerChargeBar:
@@ -846,31 +846,31 @@ tscabaltech:
 		SpawnOffset: -704,768,0
 		ExitCell: 0,3
 	RenderSprites:
-		Image: tscabaltech
+		Image: cabal_techcenter
 		PlayerPalette: playerra2
 	ProduceActorPower@sabot:
-		Prerequisites: cabalhandoflegion
-			1: cabalhandoflegion
+		Prerequisites: cabal_upgrade_handof
+			1: cabal_upgrade_handof
 		Names:
 			1: Give Hackers
 		Descriptions:
 			1: Produces Hackers
 		Icons:
 			1: icon
-		IconImage: cabalhandoflegion
+		IconImage: cabal_upgrade_handof
 		AllowMultiple: True
 		PauseOnCondition: disabled
-		Actors: tshacker
+		Actors: cabal_hackercyborg
 		Type: Hackers
 		ChargeInterval: 1500
 		AutoFire: true
-		OrderName: tshacker
+		OrderName: cabal_hackercyborg
 		SupportPowerPaletteOrder: 20
 		RequiresCondition: cabalhandoflegion_tech
 	RallyPoint:
 	GrantConditionOnPrerequisite@cabalhandoflegion_tech:
 		Condition: cabalhandoflegion_tech
-		Prerequisites: cabalhandoflegion
+		Prerequisites: cabal_upgrade_handof
 	Production@Saboteurs:
 		Produces: Hackers
 # tsnttmpl:
@@ -910,7 +910,7 @@ tscabaltech:
 # 	RenderSprites:
 # 		PlayerPalette: playerra2
 
-tscore:
+cabal_core:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
@@ -923,7 +923,7 @@ tscore:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: ~tsgtcnstcabal, tscabaltech
+		Prerequisites: ~cabal_constructionyard, cabal_techcenter
 		Description: actor-tscore.description
 	Tooltip:
 		Name: CABAL Core
@@ -951,10 +951,10 @@ tscore:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsntmislcabal:
+cabal_missilesilo:
 	Inherits: ts_nod_missilesilo
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tscore, !ts_nod_missilesilo, ~techlevel.superweapons
+		Prerequisites: ~cabal_constructionyard, cabal_core, !ts_nod_missilesilo, ~techlevel.superweapons
 		Description: actor-tsntmisl.description
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -962,14 +962,14 @@ tsntmislcabal:
 	Armament@superweapon1:
 		Name: superweapon
 		Weapon: TSTacticalMissile
-		RequiresCondition: !cabalclusterwarhead
+		RequiresCondition: !cabal_upgrade_clusterwarhead
 	Armament@superweapon2:
 		Name: superweapon
 		Weapon: TSTacticalNeutronMissile
-		RequiresCondition: cabalclusterwarhead
-	GrantConditionOnPrerequisite@cabalclusterwarhead:
-		Condition: cabalclusterwarhead
-		Prerequisites: cabalclusterwarhead
+		RequiresCondition: cabal_upgrade_clusterwarhead
+	GrantConditionOnPrerequisite@cabal_upgrade_clusterwarhead:
+		Condition: cabal_upgrade_clusterwarhead
+		Prerequisites: cabal_upgrade_clusterwarhead
 
 tsctarmr:
 	Inherits: ^BaseBuilding
@@ -1046,7 +1046,7 @@ tsntlasrcabal:
 	Tooltip:
 		Name: Plasma Turret
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disabled
+		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory, ~disabled
 	Armament@PRIMARY:
 		Weapon: TSCABALPlasmaFire
 		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
@@ -1056,21 +1056,21 @@ tsntlasrcabal:
 		PlayerPalette: playerra2
 		Image: ts_nod_laserturret
 
-tsntstlhcabal:
+cabal_stealthgenerator:
 	Inherits: ts_nod_stealthgenerator
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tscabaltech
+		Prerequisites: ~cabal_constructionyard, cabal_techcenter
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntstlhcabal
+		Image: cabal_stealthgenerator
 
-tsntobelcabal:
+cabal_heavycabalobelisk:
 	Inherits: ts_nod_obeliskoflight
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tscabaltech
+		Prerequisites: ~cabal_constructionyard, cabal_techcenter
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntobelcabal
+		Image: cabal_heavycabalobelisk
 	Tooltip:
 		Name: Heavy Cabal Obelisk
 	Valued:
@@ -1085,7 +1085,7 @@ tsntobelcabal:
 		Palette: playerra2
 		IsPlayerPalette: true
 
-tsobl2:
+cabal_obeliskofdarkness:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
@@ -1096,7 +1096,7 @@ tsobl2:
 		Name: Obelisk of Darkness
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+		Prerequisites: ~cabal_constructionyard, cabal_radar
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Advanced air defense.\nRequires power to operate.\n  Strong vs aircraft\n  Weak vs ground units
@@ -1142,7 +1142,7 @@ tsobl2:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tscbunk:
+cabal_pillbox:
 	Inherits: ^RA2Defense
 	Inherits@cargo: ^ClearableGarrisonNeutronOnly
 	Inherits@Template: ^BasicDefenseTemplate
@@ -1157,7 +1157,7 @@ tscbunk:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgtcnstcabal, tsnthand2
+		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory
 		Description: actor-pbox.description
 	Valued:
 		Cost: 600
@@ -1171,7 +1171,7 @@ tscbunk:
 	Cargo:
 		Types: Infantry
 		MaxWeight: 1
-		InitialUnits: tscyborg
+		InitialUnits: cabal_cyborginfantry
 	AttackGarrisoned:
 		RequiresCondition: !build-incomplete
 		Armaments: garrisoned
@@ -1479,14 +1479,14 @@ tsvislrg:
 		Condition: hospital
 		Prerequisites: machshop
 
-TSENGINEECABAL:
+cabal_engineer:
 	Inherits: TSENGINEER
 	Inherits@Cyborg: ^TSCyborgs
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 	-TemporaryOwnerManager:
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -1495,7 +1495,7 @@ TSENGINEECABAL:
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
 
-TSCYBORG:
+cabal_cyborginfantry:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@Cyborg: ^TSCyborgs
@@ -1504,8 +1504,8 @@ TSCYBORG:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@DarkArmament: ^cabaldarkarmament
-	Inherits@RECLAMATION: ^upcabalreclamation
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
 		Cost: 300
 	Tooltip:
@@ -1514,7 +1514,7 @@ TSCYBORG:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -1537,7 +1537,7 @@ TSCYBORG:
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 	-TakeCover:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
@@ -1548,7 +1548,7 @@ TSCYBORG:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-tscyborgb:
+cabal_platedarmorcyborg:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -1561,8 +1561,8 @@ tscyborgb:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabaldarkarmament
-	Inherits@RECLAMATION: ^upcabalreclamation
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -1571,7 +1571,7 @@ tscyborgb:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -1587,7 +1587,7 @@ tscyborgb:
 		Weapon: TSVulcan3
 	Armament@GRENADE:
 		Weapon: TSGrenade
-		RequiresCondition: cabaldarkarmament
+		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -1635,7 +1635,7 @@ tscyborgb:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-tsdevout:
+cabal_devout:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -1648,8 +1648,8 @@ tsdevout:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabaldarkarmament
-	Inherits@RECLAMATION: ^upcabalreclamation
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -1658,7 +1658,7 @@ tsdevout:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -1673,11 +1673,11 @@ tsdevout:
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
 		LocalOffset: 0,-20,90, 0,20,90
-		RequiresCondition: !cabaldarkarmament
+		RequiresCondition: !cabal_upgrade_darkarmament
 	Armament@Upgraded:
 		Weapon: TSDevoutChaingunsUpgraded
 		LocalOffset: 0,-20,90, 0,20,90
-		RequiresCondition: cabaldarkarmament
+		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -1725,7 +1725,7 @@ tsdevout:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-tsascended:
+cabal_ascended:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -1738,8 +1738,8 @@ tsascended:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabaldarkarmament
-	Inherits@RECLAMATION: ^upcabalreclamation
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -1748,7 +1748,7 @@ tsascended:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -1763,11 +1763,11 @@ tsascended:
 	Armament@PRIMARY:
 		Weapon: TSTwinBazooka
 		LocalOffset: 0,20,90, 0,-20,90
-		RequiresCondition: !cabaldarkarmament
+		RequiresCondition: !cabal_upgrade_darkarmament
 	Armament@Upgraded:
 		Weapon: TSQuadBazooka
 		LocalOffset: 0,-20,90, 0,20,90
-		RequiresCondition: cabaldarkarmament
+		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -1815,7 +1815,7 @@ tsascended:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-tshacker:
+cabal_hackercyborg:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -1827,9 +1827,9 @@ tshacker:
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
-	Inherits@UPLINK: ^upcabalneuraluplink
+	Inherits@UPLINK: ^cabal_upgrade_neuraluplink
 	Inherits@EMP: ^UnitDisable
-	Inherits@HAND: ^cabalhandoflegion
+	Inherits@HAND: ^cabal_upgrade_handof
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1838,7 +1838,7 @@ tshacker:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -1898,7 +1898,7 @@ tshacker:
 		Name: garrisoned
 		Weapon: TSRobotHackingControl
 	Selectable:
-		Class: tshacker
+		Class: cabal_hackercyborg
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -1916,11 +1916,11 @@ tshacker:
 		Range: 9500
 		Type: mindcontrol
 		Color: 663399b0
-	SpeedMultiplier@cabalhandoflegion:
-		RequiresCondition: cabalhandoflegion
+	SpeedMultiplier@cabal_upgrade_handof:
+		RequiresCondition: cabal_upgrade_handof
 		Modifier: 125
 
-TSREAPER:
+cabal_cyborgreaper:
 	Inherits: ^Walker
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1931,7 +1931,7 @@ TSREAPER:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Armor:
 		Type: Medium #Wood
 	Valued:
@@ -1939,7 +1939,7 @@ TSREAPER:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsnthand2, tscabaltech
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Description: Cyborg walker armed with missiles and nets.\n Strong vs vehicles\n Can immobilize infantry
 	Health:
 		HP: 75000
@@ -1953,7 +1953,7 @@ TSREAPER:
 	Armament@TRAP:
 		Weapon: TSReaperTrap
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	Tooltip:
 		Name: Cyborg Reaper
 	UpdatesPlayerStatistics:
@@ -1969,7 +1969,7 @@ TSREAPER:
 	RenderSprites:
 	Selectable:
 		DecorationBounds: 1280, 1280, 0, -128
-		Class: tsreaper
+		Class: cabal_cyborgreaper
 	Capturable:
 		Types: thiefproof
 	ChangesHealth:
@@ -1983,9 +1983,9 @@ TSREAPER:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-TSCYC2:
+cabal_cyborgcommando:
 	Inherits@Template: ^HeroInfantryTemplate
-	Inherits: TSCYBORG
+	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
 	Valued:
 		Cost: 4000
@@ -1995,7 +1995,7 @@ TSCYC2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~tsnthand2, tscabaltech
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
@@ -2010,16 +2010,16 @@ TSCYC2:
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
-		Class: tscyc2
+		Class: cabal_cyborgcommando
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	Armor:
 		Type: Heroic
 
-tsccommando:
+cabal_cyborgcommandov2:
 	Inherits@Template: ^HeroInfantryTemplate
-	Inherits: TSCYBORG
+	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
 	Valued:
 		Cost: 8000
@@ -2029,7 +2029,7 @@ tsccommando:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~tsnthand2, tscabaltech
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
@@ -2044,14 +2044,14 @@ tsccommando:
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
-		Class: tscyc2
+		Class: cabal_cyborgcommando
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	Armor:
 		Type: Heroic
 
-TSDissolver:
+cabal_dissolver:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EMP: ^TurretEMP
@@ -2065,10 +2065,10 @@ TSDissolver:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
 		Description: Anti-Tank Walker\nDissolves mechanical parts to regenerate itself
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 		IconPalette: ra2
 	Selectable:
-		Class: TSDissolver
+		Class: cabal_dissolver
 	Mobile:
 		TurnSpeed: 396
 		Speed: 70
@@ -2083,7 +2083,7 @@ TSDissolver:
 		TurnSpeed: 40
 		Offset: 0,0,25
 	Armament:
-		Weapon: TSDissolver
+		Weapon: cabal_dissolver
 		LocalOffset: 200,0,0
 	RenderSprites:
 	QuantizeFacingsFromSequence:
@@ -2103,9 +2103,9 @@ TSDissolver:
 		Sequence: shoot
 		RequiresCondition: attack
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 
-TSARND:
+cabal_eliminator800:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2114,15 +2114,15 @@ TSARND:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
-	Inherits@DarkArmament: ^cabaldarkarmament
-	Inherits@RECLAMATION: ^upcabalreclamation
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
 		Cost: 1000
 	Tooltip:
 		Name: Eliminator 800
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsnthand2
+		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Health:
@@ -2298,7 +2298,7 @@ tsnafnce:
 # TS Shared Vehicles
 #######################################
 
-TSHARVCABAL:
+cabal_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
 	Health:
@@ -2307,7 +2307,7 @@ TSHARVCABAL:
 		PipCount: 8
 		Capacity: 35
 	Buildable:
-		Prerequisites: ~tsntweapcabal, tsproccabal
+		Prerequisites: ~cabal_mechfactory, cabal_refinery
 		Queue: Vehicle, RAVehicle
 		Description: Harvests Tiberium for processing
 	WithVoxelBody:
@@ -2319,7 +2319,7 @@ TSHARVCABAL:
 	RenderVoxels:
 		Image: charv2
 	RenderSprites:
-		Image: tsharvcabal
+		Image: cabal_tiberiumharvester
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
@@ -2618,10 +2618,10 @@ TSBIKE:
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement
 
-TSREPAIRCABAL:
+cabal_mobilerepairvehicle:
 	Inherits: ts_nod_mobilerepairvehicle
 	Buildable:
-		Prerequisites: ~tsntweapcabal, tsgtdeptcabal
+		Prerequisites: ~cabal_mechfactory, cabal_servicedepot
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: ts_nod_mobilerepairvehicle
@@ -2766,14 +2766,14 @@ TSTTNK:
 tssgencabal:
 	Inherits: ts_nod_mobilestealthgenerator
 	Buildable:
-		Prerequisites: ~tsntweapcabal, tsntstlhcabal, ~disabled
+		Prerequisites: ~cabal_mechfactory, cabal_stealthgenerator, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: ts_nod_mobilestealthgenerator
 	RenderVoxels:
 		Image: ts_nod_mobilestealthgenerator
 
-TSLASSPID:
+cabal_laserspider:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2782,15 +2782,15 @@ TSLASSPID:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
-	Inherits@REINFORCED: ^upcabalreinforcedchassis
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
 		Cost: 600
 	Tooltip:
 		Name: Laser Spider
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweapcabal
+		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -2825,7 +2825,7 @@ TSLASSPID:
 		ValidMovementTypes: Horizontal, Turn
 	DeathSounds:
 
-tscabalcobra:
+cabal_mantis:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2834,15 +2834,15 @@ tscabalcobra:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
-	Inherits@REINFORCED: ^upcabalreinforcedchassis
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
 		Cost: 600
 	Tooltip:
 		Name: Mantis
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweapcabal
+		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -2878,7 +2878,7 @@ tscabalcobra:
 
 	DeathSounds:
 
-tsspddrone:
+cabal_spidertankdrone:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2887,16 +2887,16 @@ tsspddrone:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
-	Inherits@CATALYST: ^cabaltibcatalysticon
-	Inherits@REINFORCED: ^upcabalreinforcedchassis
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
 		Cost: 600
 	Tooltip:
 		Name: Spider Tank Drone
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweapcabal
+		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -2915,14 +2915,14 @@ tsspddrone:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: !cabaltibcatalysticon
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@UPGRADED:
 		Weapon: TS90mm_bluenuke
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: cabaltibcatalysticon
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	Armor:
 		Type: Heavy
 	WithMuzzleOverlay:
@@ -2941,7 +2941,7 @@ tsspddrone:
 		ValidMovementTypes: Horizontal, Turn
 	DeathSounds:
 
-tscheavyspider:
+cabal_heavyspider:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2950,16 +2950,16 @@ tscheavyspider:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
-	Inherits@BACKUP: ^cabalbackupsystemicon
-	Inherits@OVERCHARGE: ^upcabalovercharge
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@BACKUP: ^cabal_upgrade_backupsystems
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1200
 	Tooltip:
 		Name: Heavy Spider
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweapcabal
+		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -3000,17 +3000,17 @@ tscheavyspider:
 		ValidMovementTypes: Horizontal, Turn
  	SpawnActorOnDeath@backup:
  		Actor: tscheavyspider_backup
-		RequiresCondition: cabalbackupsystemicon
+		RequiresCondition: cabal_upgrade_backupsystems
 
 tscheavyspider_backup:
-	Inherits: tscheavyspider
+	Inherits: cabal_heavyspider
 	Valued:
 		Cost: 1200
 	Tooltip:
 		Name: Heavy Spider (Backup Mode)
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweapcabal, ~disabled
+		Prerequisites: ~cabal_mechfactory, ~disabled
 		Queue: Disabled
 		Description: HuskMode
 	Mobile:
@@ -3034,7 +3034,7 @@ tscheavyspider_backup:
 		ValidMovementTypes: Horizontal, Turn
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tscheavyspider
+		Image: cabal_heavyspider
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
@@ -3042,12 +3042,12 @@ tscheavyspider_backup:
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
-		IntoActor: tscheavyspider
+		IntoActor: cabal_heavyspider
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-TSART2CABAL:
+cabal_artilleryspider:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3056,17 +3056,17 @@ TSART2CABAL:
 	Inherits@EMP: ^FrontalEMP
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
-	Inherits@CATALYST: ^cabaltibcatalysticon
-	Inherits@BACKUP: ^cabalbackupsystemicon
-	Inherits@OVERCHARGE: ^upcabalovercharge
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@BACKUP: ^cabal_upgrade_backupsystems
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1600
 	Tooltip:
 		Name: Artillery Spider
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweapcabal, tsntradrcabal
+		Prerequisites: ~cabal_mechfactory, cabal_radar
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -3085,14 +3085,14 @@ TSART2CABAL:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: !cabaltibcatalysticon
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS155mm_bluenuke
 		LocalOffset: -125,1,250, -125,1,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: cabaltibcatalysticon
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	WithMuzzleOverlay:
 	AttackFollowFrontal:
 		FacingTolerance: 45
@@ -3110,17 +3110,17 @@ TSART2CABAL:
 		ValidMovementTypes: Horizontal, Turn
  	SpawnActorOnDeath@backup:
  		Actor: tsart2cabal_backup
-		RequiresCondition: cabalbackupsystemicon
+		RequiresCondition: cabal_upgrade_backupsystems
 
 tsart2cabal_backup:
-	Inherits: TSART2CABAL
+	Inherits: cabal_artilleryspider
 	Valued:
 		Cost: 1600
 	Tooltip:
 		Name: Artillery Spider (Backup Mode)
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweapcabal, ~disabled
+		Prerequisites: ~cabal_mechfactory, ~disabled
 		Queue: Disabled
 		Description: HuskMode
 	Mobile:
@@ -3146,12 +3146,12 @@ tsart2cabal_backup:
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
-		IntoActor: tsart2cabal
+		IntoActor: cabal_artilleryspider
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-TSTTNKCABAL:
+cabal_tarantula:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3160,10 +3160,10 @@ TSTTNKCABAL:
 	Inherits@EMP: ^TurretEMP
 	Inherits@detect: ^EliteDetector
 	Inherits@vo: ^AttackTurretedVoice
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
-	Inherits@CATALYST: ^cabaltibcatalysticon
-	Inherits@BACKUP: ^cabalbackupsystemicon
-	Inherits@OVERCHARGE: ^upcabalovercharge
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@BACKUP: ^cabal_upgrade_backupsystems
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -3171,7 +3171,7 @@ TSTTNKCABAL:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsntweapcabal, tsntradrcabal
+		Prerequisites: ~cabal_mechfactory, cabal_radar
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
@@ -3194,14 +3194,14 @@ TSTTNKCABAL:
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
-		RequiresCondition: !cabaltibcatalysticon
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
-		RequiresCondition: cabaltibcatalysticon
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	AttackTurreted:
 	WithMuzzleOverlay:
 	Voiced:
@@ -3225,17 +3225,17 @@ TSTTNKCABAL:
 		Image: tstnkspid
  	SpawnActorOnDeath@backup:
  		Actor: tsttnkcabal_backup
-		RequiresCondition: cabalbackupsystemicon
+		RequiresCondition: cabal_upgrade_backupsystems
 
 tsttnkcabal_backup:
-	Inherits: TSTTNKCABAL
+	Inherits: cabal_tarantula
 	Valued:
 		Cost: 1500
 	Tooltip:
 		Name: Tarantula (Backup Mode)
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tsntweapcabal, ~disabled
+		Prerequisites: ~cabal_mechfactory, ~disabled
 		Queue: Disabled
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
@@ -3266,17 +3266,17 @@ tsttnkcabal_backup:
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
-		IntoActor: tsttnkcabal
+		IntoActor: cabal_tarantula
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-TSSAPCCABAL:
+cabal_scarabapc:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@cargo: ^CargoVehicle
-	Inherits@REINFORCED: ^upcabalreinforcedchassis
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
 		Cost: 2600
 	Tooltip:
@@ -3285,7 +3285,7 @@ TSSAPCCABAL:
 		OverrideActor: ts_nod_subterraneanapc
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsntweapcabal, tsntradrcabal
+		Prerequisites: ~cabal_mechfactory, cabal_radar
 		Queue: Vehicle, RAVehicle
 		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
 	Mobile:
@@ -3311,7 +3311,7 @@ TSSAPCCABAL:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
-		InitialUnits: tscyborg, tscyborg, tscyborg, tscyborg, tscyborgb, tsdevout, tsascended, tsascended, tshacker, tshacker
+		InitialUnits: cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_platedarmorcyborg, cabal_devout, cabal_ascended, cabal_ascended, cabal_hackercyborg, cabal_hackercyborg
 	Targetable@garrisoned:
 		RequiresCondition: loaded && !submerged
 	WithCargoPipsDecoration:
@@ -3321,9 +3321,9 @@ TSSAPCCABAL:
 		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement
 	RenderSprites:
 		PlayerPalette: player_rgba
-		Image: tssapccabal
+		Image: cabal_scarabapc
 
-TST1000:
+cabal_eliminator1000:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3335,7 +3335,7 @@ TST1000:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
-	Inherits@DarkArmament: ^cabaldarkarmament
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
 	Valued:
@@ -3346,7 +3346,7 @@ TST1000:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsnthand2, tscabaltech
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		BuildLimit: 1
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
@@ -3393,7 +3393,7 @@ TST1000:
 		Condition: hospital
 		Prerequisites: machshop
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: cabal_cyborginfantry
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
@@ -3406,10 +3406,10 @@ TST1000:
 		StartIfBelow: 100
 		DamageCooldown: 1
 	RenderSprites:
-		Image: tst1000
+		Image: cabal_eliminator1000
 		PlayerPalette: playerra2
 
-TSDEFENDER:
+cabal_coredefender:
 	Inherits: ^Tank
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3423,9 +3423,9 @@ TSDEFENDER:
 	Inherits@detect: ^GenericGroundDetector
 	Inherits@snipe: ^DriverKillImmune
 	Inherits@ND: ^NotDevourable
-	Inherits@MOBIMATRIX: ^cabalmobilitymatrix
-	Inherits@REINFORCED: ^upcabalreinforcedchassis
-	Inherits@OVERCHARGE: ^upcabalovercharge
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 10000
 	UpdatesPlayerStatistics:
@@ -3434,7 +3434,7 @@ TSDEFENDER:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
 		BuildLimit: 1
-		Prerequisites: ~tsntweapcabal, tscore
+		Prerequisites: ~cabal_mechfactory, cabal_core
 		Description: Superheavy CABAL epic unit.\n Strong vs ground targets
 	Mobile:
 		Speed: 50
@@ -3513,12 +3513,12 @@ TSDEFENDER:
 # TS Aircraft
 #######################################
 
-tscarrycabal:
+cabal_overkillcarryall:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^upcabalovercharge
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1750
 	Tooltip:
@@ -3530,7 +3530,7 @@ tscarrycabal:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsnthpad2
+		Prerequisites: ~cabal_helipad
 		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
 	Aircraft:
 		TurnSpeed: 29
@@ -3551,11 +3551,11 @@ tscarrycabal:
 		Type: Light
 	RenderSprites:
 	SpawnActorOnDeath:
-		Actor: tscarrycabal.Husk
+		Actor: cabal_overkillcarryall_husk
 	Voiced:
 		VoiceSet: TSHeli
 	RenderSprites:
-		Image: tscarrycabal
+		Image: cabal_overkillcarryall
 		PlayerPalette: player_rgba
 	Armament@PRIMARY:
 		Weapon: TSHunterKillerLasers
@@ -3567,7 +3567,7 @@ tscarrycabal:
 		PauseOnCondition: disabled
 		AttackType: Hover
 
-tscarrycabal.Husk:
+cabal_overkillcarryall_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Overkill Carryall
@@ -3578,17 +3578,17 @@ tscarrycabal.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tscarrycabal
+		Image: cabal_overkillcarryall
 		PlayerPalette: player_rgba
 
-TSSCRINCABAL:
+cabal_hunterkillermk2:
 	Inherits: ^Helicopter
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^upcabalovercharge
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 2400
 	Tooltip:
@@ -3597,7 +3597,7 @@ TSSCRINCABAL:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsnthpad2, tscabaltech
+		Prerequisites: ~cabal_helipad, cabal_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Aircraft:
@@ -3639,7 +3639,7 @@ TSSCRINCABAL:
 	DeathSounds:
 		VolumeMultiplier: 2
 	SpawnActorOnDeath:
-		Actor: TSSCRINCABAL.Husk
+		Actor: cabal_hunterkillermk2_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -3647,10 +3647,10 @@ TSSCRINCABAL:
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
 	RenderSprites:
-		Image: tsscrincabal
+		Image: cabal_hunterkillermk2
 		PlayerPalette: player_rgba
 
-TSSCRINCABAL.Husk:
+cabal_hunterkillermk2_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Hunter Killer MK2
@@ -3661,16 +3661,16 @@ TSSCRINCABAL.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsscrincabal
+		Image: cabal_hunterkillermk2
 		PlayerPalette: player_rgba
 
-TSAPACHECABAL:
+cabal_hunterkillermk1:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@reload: ^RearmableAircraft
-	Inherits@OVERCHARGE: ^upcabalovercharge
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -3679,7 +3679,7 @@ TSAPACHECABAL:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsnthpad2
+		Prerequisites: ~cabal_helipad
 		Queue: Aircraft, RAAircraft
 		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Aircraft:
@@ -3717,16 +3717,16 @@ TSAPACHECABAL:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSAPACHECABAL.Husk
+		Actor: cabal_hunterkillermk1_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	RenderSprites:
-		Image: tsapachecabal
+		Image: cabal_hunterkillermk1
 		PlayerPalette: player_rgba
 
-TSAPACHECABAL.Husk:
+cabal_hunterkillermk1_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Harpy
@@ -3737,7 +3737,7 @@ TSAPACHECABAL.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsapachecabal
+		Image: cabal_hunterkillermk1
 
 TSAPACHE.Husk:
 	Inherits: ^HelicopterHusk
@@ -4123,7 +4123,7 @@ team_upgrade.up_willofkane:
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_tiberiumadaptability
 
-cabalmobilitymatrix:
+cabal_upgrade_mobilitymatrix:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Mobility Matrix
@@ -4133,25 +4133,25 @@ cabalmobilitymatrix:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Walkers moves 25% faster, and ads 10% of armor.
-		Prerequisites: ~tsntradrcabal, !cabalmobilitymatrix
+		Prerequisites: ~cabal_radar, !cabal_upgrade_mobilitymatrix
 	RenderSprites:
-		Image: cabalmobilitymatrix
+		Image: cabal_upgrade_mobilitymatrix
 	ProvidesPrerequisite:
 
-^cabalmobilitymatrix:
-	GrantConditionOnPrerequisite@cabalmobilitymatrix:
-		Condition: cabalmobilitymatrix
-		Prerequisites: cabalmobilitymatrix
-	SpeedMultiplier@cabalmobilitymatrix:
-		RequiresCondition: cabalmobilitymatrix
+^cabal_upgrade_mobilitymatrix:
+	GrantConditionOnPrerequisite@cabal_upgrade_mobilitymatrix:
+		Condition: cabal_upgrade_mobilitymatrix
+		Prerequisites: cabal_upgrade_mobilitymatrix
+	SpeedMultiplier@cabal_upgrade_mobilitymatrix:
+		RequiresCondition: cabal_upgrade_mobilitymatrix
 		Modifier: 125
-	DamageMultiplier@cabalmobilitymatrix:
-		RequiresCondition: cabalmobilitymatrix
+	DamageMultiplier@cabal_upgrade_mobilitymatrix:
+		RequiresCondition: cabal_upgrade_mobilitymatrix
 		Modifier: 90
 	ActorStatValues:
-		Upgrades: cabalmobilitymatrix
+		Upgrades: cabal_upgrade_mobilitymatrix
 
-cabaldarkarmament:
+cabal_upgrade_darkarmament:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Dark Armament
@@ -4161,22 +4161,22 @@ cabaldarkarmament:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Infantry Unlocks extra weapons, 10% reload faster.
-		Prerequisites: ~tsntradrcabal, !cabaldarkarmament
+		Prerequisites: ~cabal_radar, !cabal_upgrade_darkarmament
 	RenderSprites:
-		Image: cabaldarkarmament
+		Image: cabal_upgrade_darkarmament
 	ProvidesPrerequisite:
 
-^cabaldarkarmament:
-	GrantConditionOnPrerequisite@cabaldarkarmament:
-		Condition: cabaldarkarmament
-		Prerequisites: cabaldarkarmament
+^cabal_upgrade_darkarmament:
+	GrantConditionOnPrerequisite@cabal_upgrade_darkarmament:
+		Condition: cabal_upgrade_darkarmament
+		Prerequisites: cabal_upgrade_darkarmament
 	ActorStatValues:
-		Upgrades: cabaldarkarmament
-	ReloadDelayMultiplier@cabaldarkarmament:
-		RequiresCondition: cabaldarkarmament
+		Upgrades: cabal_upgrade_darkarmament
+	ReloadDelayMultiplier@cabal_upgrade_darkarmament:
+		RequiresCondition: cabal_upgrade_darkarmament
 		Modifier: 90
 
-cabaltibcatalysticon:
+cabal_upgrade_neutronnuclearcatalyst:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Neutron Nuclear Catalyst
@@ -4186,19 +4186,19 @@ cabaltibcatalysticon:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Artillery and Tarantula Unlocks neutron shells.
-		Prerequisites: ~tsntradrcabal, !cabaltibcatalysticon
+		Prerequisites: ~cabal_radar, !cabal_upgrade_neutronnuclearcatalyst
 	RenderSprites:
-		Image: cabaltibcatalysticon
+		Image: cabal_upgrade_neutronnuclearcatalyst
 	ProvidesPrerequisite:
 
-^cabaltibcatalysticon:
-	GrantConditionOnPrerequisite@cabaltibcatalysticon:
-		Condition: cabaltibcatalysticon
-		Prerequisites: cabaltibcatalysticon
+^cabal_upgrade_neutronnuclearcatalyst:
+	GrantConditionOnPrerequisite@cabal_upgrade_neutronnuclearcatalyst:
+		Condition: cabal_upgrade_neutronnuclearcatalyst
+		Prerequisites: cabal_upgrade_neutronnuclearcatalyst
 	ActorStatValues:
-		Upgrades: cabaltibcatalysticon
+		Upgrades: cabal_upgrade_neutronnuclearcatalyst
 
-cabalradarhack:
+cabal_upgrade_radarhack:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Radar Hack
@@ -4208,19 +4208,19 @@ cabalradarhack:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Unlocks Radar Hack Support Power, reveals map location.
-		Prerequisites: ~tsntradrcabal, !cabalradarhack
+		Prerequisites: ~cabal_radar, !cabal_upgrade_radarhack
 	RenderSprites:
-		Image: cabalradarhack
+		Image: cabal_upgrade_radarhack
 	ProvidesPrerequisite:
 
-^cabalradarhack:
-	GrantConditionOnPrerequisite@cabalradarhack:
-		Condition: cabalradarhack
-		Prerequisites: cabalradarhack
+^cabal_upgrade_radarhack:
+	GrantConditionOnPrerequisite@cabal_upgrade_radarhack:
+		Condition: cabal_upgrade_radarhack
+		Prerequisites: cabal_upgrade_radarhack
 	ActorStatValues:
-		Upgrades: cabalradarhack
+		Upgrades: cabal_upgrade_radarhack
 
-cabalnetworkprotocols:
+cabal_upgrade_networkedcombatprotocols:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Networked Combat Protocols
@@ -4230,13 +4230,13 @@ cabalnetworkprotocols:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: CABAL's assimilated network coordinates targeting across all units.\n  All units gain 8% firepower and 5% faster reload.
-		Prerequisites: ~tsntradrcabal, !cabalnetworkprotocols
+		Prerequisites: ~cabal_radar, !cabal_upgrade_networkedcombatprotocols
 	RenderSprites:
-		Image: cabalradarhack
+		Image: cabal_upgrade_radarhack
 	ProvidesPrerequisite:
 ############### Lab
 
-cabalbackupsystemicon:
+cabal_upgrade_backupsystems:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Backup Systems
@@ -4246,19 +4246,19 @@ cabalbackupsystemicon:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Heavy Vehicles turns in Husks when dies, if Husk arent destroyed, it wakes up again.
-		Prerequisites: ~tscabaltech, !cabalbackupsystemicon
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_backupsystems
 	RenderSprites:
-		Image: cabalbackupsystemicon
+		Image: cabal_upgrade_backupsystems
 	ProvidesPrerequisite:
 
-^cabalbackupsystemicon:
-	GrantConditionOnPrerequisite@cabalbackupsystemicon:
-		Condition: cabalbackupsystemicon
-		Prerequisites: cabalbackupsystemicon
+^cabal_upgrade_backupsystems:
+	GrantConditionOnPrerequisite@cabal_upgrade_backupsystems:
+		Condition: cabal_upgrade_backupsystems
+		Prerequisites: cabal_upgrade_backupsystems
 	ActorStatValues:
-		Upgrades: cabalbackupsystemicon
+		Upgrades: cabal_upgrade_backupsystems
 
-cabalhandoflegion:
+cabal_upgrade_handof:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Hand of CABAL
@@ -4268,19 +4268,19 @@ cabalhandoflegion:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Spawns free Hackers from Tech Center, Hackers upgrade speed.
-		Prerequisites: ~tscabaltech, !cabalhandoflegion
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_handof
 	RenderSprites:
-		Image: cabalhandoflegion
+		Image: cabal_upgrade_handof
 	ProvidesPrerequisite:
 
-^cabalhandoflegion:
-	GrantConditionOnPrerequisite@cabalhandoflegion:
-		Condition: cabalhandoflegion
-		Prerequisites: cabalhandoflegion
+^cabal_upgrade_handof:
+	GrantConditionOnPrerequisite@cabal_upgrade_handof:
+		Condition: cabal_upgrade_handof
+		Prerequisites: cabal_upgrade_handof
 	ActorStatValues:
-		Upgrades: cabalhandoflegion
+		Upgrades: cabal_upgrade_handof
 
-cabaldataworm:
+cabal_upgrade_dataworm:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Data Worm
@@ -4290,12 +4290,12 @@ cabaldataworm:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Unlocks the Data Worm support power at CABAL Core.\nHijacks a Hunter-Seeker droid and launches it at a target, instantly destroying mobile units.
-		Prerequisites: ~tscabaltech, !cabaldataworm
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_dataworm
 	RenderSprites:
-		Image: cabaldataworm
+		Image: cabal_upgrade_dataworm
 	ProvidesPrerequisite:
 
-cabalfirewallprotocol:
+cabal_upgrade_firewallprotocol:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Firewall Protocol
@@ -4305,12 +4305,12 @@ cabalfirewallprotocol:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: CABAL units become resistant to enemy mind control and vehicle hijacking.
-		Prerequisites: ~tscabaltech, !cabalfirewallprotocol
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_firewallprotocol
 	RenderSprites:
-		Image: cabalradarhack
+		Image: cabal_upgrade_radarhack
 	ProvidesPrerequisite:
 
-cabalclusterwarhead:
+cabal_upgrade_clusterwarhead:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cluster Warhead
@@ -4320,9 +4320,9 @@ cabalclusterwarhead:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Retrofits the Missile Silo with a neutron cluster warhead,\nspreading its payload across a wider area on impact.
-		Prerequisites: ~tscore, !cabalclusterwarhead
+		Prerequisites: ~cabal_core, !cabal_upgrade_clusterwarhead
 	RenderSprites:
-		Image: cabaltibcatalysticon
+		Image: cabal_upgrade_neutronnuclearcatalyst
 	ProvidesPrerequisite:
 
 
@@ -4382,7 +4382,7 @@ uptsdummy4:
 
 # FPRGOTTEN ##############
 
-upcabalreinforcedchassis:
+cabal_upgrade_reinforcedchassis:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Reinforced Chassis
@@ -4392,23 +4392,23 @@ upcabalreinforcedchassis:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Laser Spider, Mantis and Spider Tank Drone gain 15% armor.
-		Prerequisites: ~tscabaltech, !upcabalreinforcedchassis
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reinforcedchassis
 	RenderSprites:
-		Image: cabalmobilitymatrix
+		Image: cabal_upgrade_mobilitymatrix
 	ProvidesPrerequisite:
-		Prerequisite: upcabalreinforcedchassis
+		Prerequisite: cabal_upgrade_reinforcedchassis
 
-^upcabalreinforcedchassis:
-	GrantConditionOnPrerequisite@upcabalreinforcedchassis:
-		Condition: upcabalreinforcedchassis
-		Prerequisites: upcabalreinforcedchassis
-	DamageMultiplier@upcabalreinforcedchassis:
-		RequiresCondition: upcabalreinforcedchassis
+^cabal_upgrade_reinforcedchassis:
+	GrantConditionOnPrerequisite@cabal_upgrade_reinforcedchassis:
+		Condition: cabal_upgrade_reinforcedchassis
+		Prerequisites: cabal_upgrade_reinforcedchassis
+	DamageMultiplier@cabal_upgrade_reinforcedchassis:
+		RequiresCondition: cabal_upgrade_reinforcedchassis
 		Modifier: 85
 	ActorStatValues:
-		Upgrades: upcabalreinforcedchassis
+		Upgrades: cabal_upgrade_reinforcedchassis
 
-upcabalovercharge:
+cabal_upgrade_overchargedservos:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Overcharged Servos
@@ -4418,23 +4418,23 @@ upcabalovercharge:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Heavy Spider, Artillery Spider and Tarantula reload 15% faster.
-		Prerequisites: ~tscabaltech, !upcabalovercharge
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_overchargedservos
 	RenderSprites:
-		Image: cabaldarkarmament
+		Image: cabal_upgrade_darkarmament
 	ProvidesPrerequisite:
-		Prerequisite: upcabalovercharge
+		Prerequisite: cabal_upgrade_overchargedservos
 
-^upcabalovercharge:
-	GrantConditionOnPrerequisite@upcabalovercharge:
-		Condition: upcabalovercharge
-		Prerequisites: upcabalovercharge
-	ReloadDelayMultiplier@upcabalovercharge:
-		RequiresCondition: upcabalovercharge
+^cabal_upgrade_overchargedservos:
+	GrantConditionOnPrerequisite@cabal_upgrade_overchargedservos:
+		Condition: cabal_upgrade_overchargedservos
+		Prerequisites: cabal_upgrade_overchargedservos
+	ReloadDelayMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
 		Modifier: 85
 	ActorStatValues:
-		Upgrades: upcabalovercharge
+		Upgrades: cabal_upgrade_overchargedservos
 
-upcabalneuraluplink:
+cabal_upgrade_neuraluplink:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Neural Uplink
@@ -4444,23 +4444,23 @@ upcabalneuraluplink:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Hacker Cyborg hacking attacks reload 20% faster.
-		Prerequisites: ~tscabaltech, !upcabalneuraluplink
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_neuraluplink
 	RenderSprites:
-		Image: cabalhandoflegion
+		Image: cabal_upgrade_handof
 	ProvidesPrerequisite:
-		Prerequisite: upcabalneuraluplink
+		Prerequisite: cabal_upgrade_neuraluplink
 
-^upcabalneuraluplink:
-	GrantConditionOnPrerequisite@upcabalneuraluplink:
-		Condition: upcabalneuraluplink
-		Prerequisites: upcabalneuraluplink
-	ReloadDelayMultiplier@upcabalneuraluplink:
-		RequiresCondition: upcabalneuraluplink
+^cabal_upgrade_neuraluplink:
+	GrantConditionOnPrerequisite@cabal_upgrade_neuraluplink:
+		Condition: cabal_upgrade_neuraluplink
+		Prerequisites: cabal_upgrade_neuraluplink
+	ReloadDelayMultiplier@cabal_upgrade_neuraluplink:
+		RequiresCondition: cabal_upgrade_neuraluplink
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: upcabalneuraluplink
+		Upgrades: cabal_upgrade_neuraluplink
 
-upcabalreclamation:
+cabal_upgrade_reclamationprotocols:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Reclamation Protocols
@@ -4470,23 +4470,23 @@ upcabalreclamation:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Cyborg Infantry and Plated Armor Cyborg self-repair faster.
-		Prerequisites: ~tscabaltech, !upcabalreclamation
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reclamationprotocols
 	RenderSprites:
-		Image: cabalbackupsystemicon
+		Image: cabal_upgrade_backupsystems
 	ProvidesPrerequisite:
-		Prerequisite: upcabalreclamation
+		Prerequisite: cabal_upgrade_reclamationprotocols
 
-^upcabalreclamation:
-	GrantConditionOnPrerequisite@upcabalreclamation:
-		Condition: upcabalreclamation
-		Prerequisites: upcabalreclamation
+^cabal_upgrade_reclamationprotocols:
+	GrantConditionOnPrerequisite@cabal_upgrade_reclamationprotocols:
+		Condition: cabal_upgrade_reclamationprotocols
+		Prerequisites: cabal_upgrade_reclamationprotocols
 	ChangesHealth@RECLAMATION:
 		Step: 10
-		RequiresCondition: upcabalreclamation
+		RequiresCondition: cabal_upgrade_reclamationprotocols
 	ActorStatValues:
-		Upgrades: upcabalreclamation
+		Upgrades: cabal_upgrade_reclamationprotocols
 
-upcabalfullassimilation:
+cabal_upgrade_fullassimilation:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Full Assimilation
@@ -4496,8 +4496,8 @@ upcabalfullassimilation:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: CABAL's assimilated network extends unit sensor range and cloak detection by 20%.
-		Prerequisites: ~tscabaltech, !upcabalfullassimilation
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_fullassimilation
 	RenderSprites:
-		Image: cabaldataworm
+		Image: cabal_upgrade_dataworm
 	ProvidesPrerequisite:
-		Prerequisite: upcabalfullassimilation
+		Prerequisite: cabal_upgrade_fullassimilation

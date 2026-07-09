@@ -6502,7 +6502,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,tsnthpad2
+		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6522,11 +6522,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, tsgtdeptcabal, plymouth_garage, eden_garage
+		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, tsgtdeptcabal, plymouth_garage, eden_garage
+		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -8776,7 +8776,7 @@ CPQDEBUGDUMMY:
 			# tse1: ifv-mg
 			# ts_nod_lightinfantry: ifv-mg
 			# tse1para: ifv-mg
-			# tscyborg: fv-hvmg
+			# cabal_cyborginfantry: fv-hvmg
 			# tscyborgc: fv-hvmg
 			# forgotten_mutant: ifv-mg
 			# forgotten_mutantsoldier: ifv-mg
@@ -8851,7 +8851,7 @@ CPQDEBUGDUMMY:
 			# cityswat: ifv-hero
 			# yrboris: ifv-hero
 			# ra2seal: ifv-hero
-			# tscyc2: ifv-hero
+			# cabal_cyborgcommando: ifv-hero
 			# tscyc2.cabal: ifv-hero
 			# forgotten_ghoststalker: ifv-hero
 			# tsghost.mutant: ifv-hero

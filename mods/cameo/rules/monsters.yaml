@@ -469,7 +469,7 @@ RA2SPIDER:
 		StartIfBelow: 150
 
 RA2CYBORG:
-	Inherits: TSREAPER
+	Inherits: cabal_cyborgreaper
 	Health:
 		HP: 30000
 	Armor:
@@ -492,11 +492,11 @@ RA2CYBORG:
 		Weapon: RA2CYBORG
 	-Armament@TRAP:
 	Voiced:
-		VoiceSet: TSReaper
+		VoiceSet: cabal_cyborgreaper
 	Tooltip:
 		Name: DOOM Reaper
 	RenderSprites:
-		Image: tsreaper
+		Image: cabal_cyborgreaper
 
 RA2FLOATER:
 	Inherits: ^Vehicle
