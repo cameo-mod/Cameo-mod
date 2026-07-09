@@ -41,18 +41,18 @@ forgotten_tiberiumharvester:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
 forgotten_scarabapc:
-	Inherits: TSSAPC
+	Inherits: ts_nod_subterraneanapc
 	RenderVoxels:
-		Image: tssapc
+		Image: ts_nod_subterraneanapc
 	RenderSprites:
-		Image: tssapc
+		Image: ts_nod_subterraneanapc
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_warfactory, ~disabled
 	Cargo:
 		InitialUnits: forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutantsergeant
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 
 forgotten_missilevan:
 	Inherits: ^Tank

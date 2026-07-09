@@ -4350,7 +4350,7 @@ drphasetran:
 	Tooltip:
 		Name: Phase Transport
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	Mobile:
 		Locomotor: subterranean
 		PauseOnCondition: loading || being-captured || disabled
@@ -4406,7 +4406,7 @@ drphasetran.easybot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 
 drphasetran.normalbot:
@@ -4419,7 +4419,7 @@ drphasetran.normalbot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 drphasetran.hardbot:
 	Inherits: drphasetran
@@ -4431,7 +4431,7 @@ drphasetran.hardbot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 drphasetran.brutalbot:
 	Inherits: drphasetran
@@ -4443,7 +4443,7 @@ drphasetran.brutalbot:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	MobSpawnerSlave:
 drjack:
 	Inherits: ^Soldier

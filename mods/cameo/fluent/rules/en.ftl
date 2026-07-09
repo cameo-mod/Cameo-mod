@@ -894,16 +894,16 @@ actor-yagntc =
    .description = Provides Genetic Mutator power.
       Requires power to operate.
 
-actor-tsntwast =
+actor-ts_nod_tiberiumwastefacility =
    .name = Tiberium Waste Facility
    .description = Increases income from minerals by 25%.
    Unlocks Chemical Missile for the Missile Silo.
 
-actor-tsntpowr =
+actor-ts_nod_powerplant =
    .name = Power Plant
    .description = Provides power for other structures.
 
-actor-tsntradr =
+actor-ts_nod_radar =
    .name = Radar
    .description = Provides radar.
    Unlocks higher-tech units and buildings.
@@ -925,7 +925,7 @@ actor-tscore =
    .description = Provides CABAL advanced technologies.
    Provides Data Worm support power.
 
-actor-tsntmisl =
+actor-ts_nod_missilesilo =
    .name = Missile Silo
    .description = Constructs and launches long-range missiles as support power.
 
@@ -933,20 +933,20 @@ actor-ts_gdi_upgradecenter =
    .name = Upgrade Center
    .description = Provides Hunter-Seeker and Ion Cannon support powers.
 
-actor-tsntlasr =
+actor-ts_nod_laserturret =
    .name = Laser Turret
    .description = Basic base defense.
    Strong vs Ground units.
    Cannot attack Aircraft.
 
-actor-tsntsam =
+actor-ts_nod_samsite =
    .name = SAM Site
    .description = Anti-aircraft missile battery.
    Requires power to operate.
    Strong vs Aircraft.
    Cannot attack Ground units.
 
-actor-tsntstlh =
+actor-ts_nod_stealthgenerator =
    .name = Stealth Generator
    .description = Generates a cloaking field to hide your forces from the enemy.
    Only one can be built at a time.
@@ -956,7 +956,7 @@ actor-ts_gdi_empulsecannon =
    .description = Launches electro-magnetic pulse that disables mechanical units in an area.
    Requires power to operate.
 
-actor-tsntobel =
+actor-ts_nod_obeliskoflight =
    .description = Advanced base defense.
    Requires power to operate.
    Strong vs Ground units.

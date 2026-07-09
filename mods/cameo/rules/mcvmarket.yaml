@@ -243,7 +243,7 @@ MMTSGDIMCV:
 		Prerequisites: !mmtsgdi
 
 MMTSNODMCV:
-	Inherits@MCV: TSMCVNOD
+	Inherits@MCV: ts_nod_mobileconstructionvehicle
 	Tooltip:
 		Name: Mobile Construction Vehicle (TS Nod)
 	Buildable:

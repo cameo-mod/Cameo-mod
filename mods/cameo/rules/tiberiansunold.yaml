@@ -55,19 +55,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: tsnod
-		BaseActor: tsmcvnod
+		BaseActor: ts_nod_mobileconstructionvehicle
 	StartingUnits@defaulttsnod:
 		Class: light
 		ClassName: Light Support
 		Factions: tsnod
-		BaseActor: tsmcvnod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk
+		BaseActor: ts_nod_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,tsttnk
 	StartingUnits@heavytsnod:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tsnod
-		BaseActor: tsmcvnod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk,tsttnk,tsttnk,tsttnk
+		BaseActor: ts_nod_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,tsttnk,tsttnk,tsttnk,tsttnk
 	StartingUnits@mcvonlyraforgotten:
 		Class: none
 		ClassName: MCV Only
@@ -429,7 +429,7 @@ ts_gdi_constructionyard:
 	RenderSprites:
 		Image: tsgtcnst
 
-TSGTCNSTNOD:
+ts_nod_constructionyard:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
 	Inherits: ^BaseBuilding
@@ -463,7 +463,7 @@ TSGTCNSTNOD:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvnod
+		IntoActor: ts_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -750,17 +750,17 @@ tsmcvgdi.bot:
 		BuildLimit: 1
 		Prerequisites: ~techlevel.medium, tsgtdept, ~botplayer, allowsMCV
 
-TSMCVNOD:
+ts_nod_mobileconstructionvehicle:
 	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Transforms:
-		IntoActor: tsgtcnstnod
+		IntoActor: ts_nod_constructionyard
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmtsnod
 
 tsmcvnod.bot:
-	Inherits: TSMCVNOD
+	Inherits: ts_nod_mobileconstructionvehicle
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
@@ -876,7 +876,7 @@ TSPROC:
 		RequiresSelection: true
 		PipCount: 10
 
-tsntwast:
+ts_nod_tiberiumwastefacility:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	HitShape:
@@ -981,7 +981,7 @@ ts_gdi_powerplant:
 		Amount: 100
 	ProvidesPrerequisite@buildingname:
 
-TSNTPOWR:
+ts_nod_powerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1020,7 +1020,7 @@ TSNTPOWR:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
 
-TSNTAPWR:
+ts_nod_advancedpowerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1187,7 +1187,7 @@ ts_gdi_barracks:
 		RequiresCondition: !build-incomplete
 		Sequence: idle-flag
 
-TSNTHAND:
+ts_nod_handof:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
@@ -1261,7 +1261,7 @@ TSNTHAND:
 		Sequence: idle-light
 
 TSNTHAND2:
-	Inherits: TSNTHAND
+	Inherits: ts_nod_handof
 	Tooltip:
 		Name: Hand of CABAL
 	Buildable:
@@ -1284,10 +1284,10 @@ TSNTHAND2:
 	ProductionBar@RAINFANTRYNOD:
 		ProductionType: RAInfantry
 	RenderSprites:
-		Image: tsnthand
+		Image: ts_nod_handof
 
 forgotten_barracks:
-	Inherits: TSNTHAND
+	Inherits: ts_nod_handof
 	Tooltip:
 		Name: Hand of Forgotten
 	Buildable:
@@ -1308,7 +1308,7 @@ forgotten_barracks:
 	ProductionBar@RAINFANTRYNOD:
 		ProductionType: RAInfantry
 	RenderSprites:
-		Image: tsnthand
+		Image: ts_nod_handof
 
 ts_gdi_warfactory:
 	Inherits: ^BaseBuilding
@@ -1394,7 +1394,7 @@ ts_gdi_warfactory:
 		RequiresCondition: !build-incomplete
 		Sequence: bib2
 
-TSNTWEAP:
+ts_nod_warfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
@@ -1473,7 +1473,7 @@ TSNTWEAP:
 		Sequence: bib2
 
 TSNTWEAP2:
-	Inherits: TSNTWEAP
+	Inherits: ts_nod_warfactory
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: tsproc
@@ -1490,10 +1490,10 @@ TSNTWEAP2:
 	ProductionBar@RAVEHICLEGDI:
 		ProductionType: RAVehicle
 	RenderSprites:
-		Image: tsntweap
+		Image: ts_nod_warfactory
 
 TSGTWEAP2:
-	Inherits: TSNTWEAP
+	Inherits: ts_nod_warfactory
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: tsproc
@@ -1510,7 +1510,7 @@ TSGTWEAP2:
 	ProductionBar@RAVEHICLEGDI:
 		ProductionType: RAVehicle
 	RenderSprites:
-		Image: tsntweap
+		Image: ts_nod_warfactory
 
 tsgtdept:
 	Inherits: ^BaseBuilding
@@ -1660,7 +1660,7 @@ TSGTHPAD2:
 	RenderSprites:
 		Image: ts_gdi_helipad
 
-TSNTHPAD:
+ts_nod_helipad:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x1Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1730,7 +1730,7 @@ TSNTHPAD:
 		Sequence: idle-lights
 
 TSNTHPAD2:
-	Inherits: TSNTHPAD
+	Inherits: ts_nod_helipad
 	Tooltip:
 		Name: Helipad (CABAL)
 	Buildable:
@@ -1746,9 +1746,9 @@ TSNTHPAD2:
 	ProductionBar@RAAIRCRAFTNOD:
 		ProductionType: RAAircraft
 	RenderSprites:
-		Image: tsnthpad
+		Image: ts_nod_helipad
 
-tsntradr:
+ts_nod_radar:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	HitShape:
@@ -1939,19 +1939,19 @@ tsgtradr2:
 		Image: ts_gdi_radar
 
 forgotten_scarabapc:
-	Inherits: TSSAPC
+	Inherits: ts_nod_subterraneanapc
 	-Buildable:
 	RenderVoxels:
-		Image: tssapc
+		Image: ts_nod_subterraneanapc
 	RenderSprites:
-		Image: tssapc
+		Image: ts_nod_subterraneanapc
 	Cargo:
 		InitialUnits: forgotten_ghoststalker_r4,forgotten_ghoststalker_r4,forgotten_mutantsniper_r4,forgotten_mutantsniper_r4,forgotten_mutantsniper_r4
 	AutoDeployer:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 
 forgotten_ghoststalker_r4:
 	Inherits: forgotten_ghoststalker
@@ -1973,7 +1973,7 @@ forgotten_mutantsniper_r4:
 	UpdatesPlayerStatistics:
 		OverrideActor: forgotten_mutantsniper
 
-tsnttech:
+ts_nod_techcenter:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
@@ -2138,7 +2138,7 @@ tscore:
 		Sequence: idle-lights3
 	SupportPowerChargeBar:
 
-tsntmisl:
+ts_nod_missilesilo:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
@@ -2206,7 +2206,7 @@ tsntmisl:
 	# 	AllowMultiple: true
 	# 	OrderName: TSChemicalMissile
 	# 	PauseOnCondition: lowpower
-	# 	Prerequisites: ~techlevel.superweapons, tsntwast
+	# 	Prerequisites: ~techlevel.superweapons, ts_nod_tiberiumwastefacility
 	# 	Icon: chemicalmiss
 	# 	Cursor: nuke
 	# 	ChargeInterval: 3500
@@ -2539,7 +2539,7 @@ forgotten_veinhole:
 		ResourceType: Veins
 		Interval: 50
 
-tsntlasr:
+ts_nod_laserturret:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@RenderVoxel: ^TSRenderVoxel
@@ -2731,7 +2731,7 @@ tsgtwr:
 	RangeMultiplier:
 		Modifier: 105
 
-tsntsam:
+ts_nod_samsite:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2773,7 +2773,7 @@ tsntsam:
 	Power:
 		Amount: -30
 
-tsntstlh:
+ts_nod_stealthgenerator:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@SHAPE: ^3x2Shape
@@ -2866,7 +2866,7 @@ tsntpuls:
 	RenderRangeCircle:
 	SupportPowerChargeBar:
 
-tsntobel:
+ts_nod_obeliskoflight:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -3020,12 +3020,12 @@ TSE1:
 	Voiced:
 		VoiceSet: TSInfantry
 
-TSE1.NOD:
+ts_nod_lightinfantry:
 	Inherits: TSE1
 	Buildable:
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: tse1.nod
+		Image: ts_nod_lightinfantry
 
 TSE1PARA:
 	Inherits: TSE1
@@ -3070,7 +3070,7 @@ TSENGINEER:
 	DeliversCash:
 		Payload: 250
 
-TSENGINEER2:
+ts_nod_engineer:
 	Inherits: TSENGINEER
 	Inherits@MC: ^MCImmune
 	Buildable:
@@ -3375,7 +3375,7 @@ TSE3:
 		Name: garrisoned
 		Weapon: TSBazookaG
 
-elitcadre:
+ts_nod_elitecadre:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -3511,7 +3511,7 @@ TSCYBORG:
 	Selectable:
 		Class: tscyborg
 
-TSCHAMSPY:
+ts_nod_chameleonspy:
 	Inherits: ^Soldier
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@anim: ^TSInfantry
@@ -4237,7 +4237,7 @@ forgotten_chemsprayinfantry:
 # 		Actor: tsvissml
 # 		OwnerType: Victim
 
-# tsnapost:
+# ts_nod_laserfence:
 # 	Inherits: ^BaseBuilding
 # 	Inherits@IDISABLED: ^DisableOnLowPowerOrPowerDown
 # 	Buildable:
@@ -4372,7 +4372,7 @@ ts_gdi_tiberiumharvester:
 #	-Buildable:
 #	Harvester:
 #		Resources: Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Veins
-#		DeliveryBuildings: tsntwast
+#		DeliveryBuildings: ts_nod_tiberiumwastefacility
 #	WithVoxelBody:
 #	WithDockingAnimation:
 #	Voiced:
@@ -5051,7 +5051,7 @@ tsaegis:
 #######################################
 # TS Nod Vehicles
 #######################################
-TSBGGY:
+ts_nod_attackbuggy:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5146,7 +5146,7 @@ TSBIKE:
 	DeliversCash:
 		Payload: 250
 
-TSSTNK:
+ts_nod_stealthtank:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5201,7 +5201,7 @@ TSSTNK:
 		Condition: cloak-force-disabled
 		ValidDamageStates: Critical
 
-TSREPAIR:
+ts_nod_mobilerepairvehicle:
 	Inherits: ^Tank
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
@@ -5229,7 +5229,7 @@ TSREPAIR:
 	RevealsShroud:
 		Range: 5c0
 	Armament:
-		Weapon: TSRepair
+		Weapon: ts_nod_mobilerepairvehicle
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 	AttackFrontal:
@@ -5364,7 +5364,7 @@ TSTTNK:
 	DeliversCash:
 		Payload: 350
 
-TSART2:
+ts_nod_artillery:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5462,7 +5462,7 @@ TSART2:
 		Condition: untargetable
 		RequiresCondition: chronobeamed || invulnerability || submerged
 
-TSSUBTANK:
+ts_nod_devilstongue:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5507,7 +5507,7 @@ TSSUBTANK:
 	RenderVoxels:
 		Scale: 6.3
 
-TSSAPC:
+ts_nod_subterraneanapc:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@Voxel: ^TSRenderVoxel
@@ -5518,7 +5518,7 @@ TSSAPC:
 	Tooltip:
 		Name: Subterranean APC
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: anyhq, ~techlevel.medium
@@ -5541,7 +5541,7 @@ TSSAPC:
 		TurnSpeed: 20 #3
 	SelectionDecorations:
 	Selectable:
-		Class: tssapc
+		Class: ts_nod_subterraneanapc
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -5623,7 +5623,7 @@ tsbsub:
 	RenderSprites:
 		Image: yrbsub
 
-tssgen:
+ts_nod_mobilestealthgenerator:
 	Inherits: ^Tank
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@detect: ^GenericGroundDetector
@@ -5633,7 +5633,7 @@ tssgen:
 		Name: Mobile Stealth Generator
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: tsntstlh, ~techlevel.high
+		Prerequisites: ts_nod_stealthgenerator, ~techlevel.high
 		Queue: Vehicle, RAVehicle
 		Description: Cloaks nearby buildings and units.\nCan not be cloaked.\n Unarmed
 	Mobile:
@@ -6524,7 +6524,7 @@ TSBIKE2:
 	-TemporaryOwnerManager:
 
 TSSTNK2:
-	Inherits: TSSTNK
+	Inherits: ts_nod_stealthtank
 	Inherits@MC: ^MCImmune
 	Inherits@snipe: ^DriverKillImmune
 	Buildable:
@@ -6534,24 +6534,24 @@ TSSTNK2:
 	Voiced:
 		VoiceSet: TSReaper
 	RenderSprites:
-		Image: tsstnk
+		Image: ts_nod_stealthtank
 	RenderVoxels:
-		Image: tsstnk
+		Image: ts_nod_stealthtank
 	Valued:
 		Cost: 1100
 	-TemporaryOwnerManager:
 
 TSREPAIR2:
-	Inherits: TSREPAIR
+	Inherits: ts_nod_mobilerepairvehicle
 	Inherits@MC: ^MCImmune
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Voiced:
 		VoiceSet: TSReaper
 	RenderSprites:
-		Image: tsrepair
+		Image: ts_nod_mobilerepairvehicle
 	RenderVoxels:
-		Image: tsrepair
+		Image: ts_nod_mobilerepairvehicle
 	Valued:
 		Cost: 1100
 	-TemporaryOwnerManager:
@@ -6574,7 +6574,7 @@ TSTTNK2:
 	-TemporaryOwnerManager:
 
 TSART2C:
-	Inherits: TSART2
+	Inherits: ts_nod_artillery
 	Inherits@MC: ^MCImmune
 	Inherits@snipe: ^DriverKillImmune
 	Valued:
@@ -6582,15 +6582,15 @@ TSART2C:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: tsart2
+		Image: ts_nod_artillery
 	RenderVoxels:
-		Image: tsart2
+		Image: ts_nod_artillery
 	Voiced:
 		VoiceSet: TSReaper
 	-TemporaryOwnerManager:
 
 TSSUBTANK2:
-	Inherits: TSSUBTANK
+	Inherits: ts_nod_devilstongue
 	Inherits@MC: ^MCImmune
 	Inherits@snipe: ^DriverKillImmune
 	Buildable:
@@ -6598,15 +6598,15 @@ TSSUBTANK2:
 	Voiced:
 		VoiceSet: TSReaper
 	RenderSprites:
-		Image: tssubtank
+		Image: ts_nod_devilstongue
 	RenderVoxels:
-		Image: tssubtank
+		Image: ts_nod_devilstongue
 	Valued:
 		Cost: 700
 	-TemporaryOwnerManager:
 
 TSSAPC2:
-	Inherits: TSSAPC
+	Inherits: ts_nod_subterraneanapc
 	Inherits@MC: ^MCImmune
 	Inherits@snipe: ^DriverKillImmune
 	Buildable:
@@ -6614,9 +6614,9 @@ TSSAPC2:
 	Voiced:
 		VoiceSet: TSReaper
 	RenderSprites:
-		Image: tssapc
+		Image: ts_nod_subterraneanapc
 	RenderVoxels:
-		Image: tssapc
+		Image: ts_nod_subterraneanapc
 	Valued:
 		Cost: 750
 	-TemporaryOwnerManager:
@@ -6861,7 +6861,7 @@ ts_gdi_carryall_husk:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSSCRIN:
+ts_nod_bansheefighter:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6911,7 +6911,7 @@ TSSCRIN:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSScrin
+		VoiceSet: ts_nod_bansheefighter
 	AmmoPool:
 		Ammo: 15
 		ReloadCount: 5
@@ -6922,14 +6922,14 @@ TSSCRIN:
 	DeathSounds:
 		VolumeMultiplier: 2
 	SpawnActorOnDeath:
-		Actor: TSSCRIN.Husk
+		Actor: ts_nod_bansheefighter_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 3
 
 
-TSSCRIN.Husk:
+ts_nod_bansheefighter_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -6941,9 +6941,9 @@ TSSCRIN.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsscrin
+		Image: ts_nod_bansheefighter
 	RenderVoxels:
-		Image: tsscrin
+		Image: ts_nod_bansheefighter
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
@@ -6993,7 +6993,7 @@ TSAPACHE:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSScrin
+		VoiceSet: ts_nod_bansheefighter
 	AmmoPool:
 		Ammo: 12
 		AmmoCondition: ammo

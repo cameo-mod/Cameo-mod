@@ -20,7 +20,7 @@ tae3.gdi:
 		AddExtension: False
 
 tae1.nod:
-	Inherits: tse1.nod
+	Inherits: ts_nod_lightinfantry
 	Defaults: tse1
 	stand: tamilitant
 		Facings: 8
@@ -128,8 +128,8 @@ tablackhand:
 	icon: tablackhandicon.shp
 		AddExtension: False
 taconfessor:
-	Inherits: elitcadre
-	Defaults: elitcadre
+	Inherits: ts_nod_elitecadre
+	Defaults: ts_nod_elitecadre
 	stand: taconfessor
 		Facings: 8
 		ShadowStart: 628
@@ -202,8 +202,8 @@ taforgotten:
 	icon: taforgottenicon
 
 tatrooper:
-	Inherits: elitcadre
-	Defaults: elitcadre
+	Inherits: ts_nod_elitecadre
+	Defaults: ts_nod_elitecadre
 	icon: tazonetroopicon.shp
 		AddExtension: False
 
@@ -1156,12 +1156,12 @@ tamgnest2:
 	icon: tamgnest2icon
 		Offset: 0,0
 tamgnod:
-	Defaults: tsntlasr
+	Defaults: ts_nod_laserturret
 		Offset: 0,4
-	idle: tsntlasr
-	damaged-idle: tsntlasr
+	idle: ts_nod_laserturret
+	damaged-idle: ts_nod_laserturret
 		Start: 1
-	critical-idle: tsntlasr
+	critical-idle: ts_nod_laserturret
 		Start: 2
 	make: invisibleitem
 	dead: invisibleitem

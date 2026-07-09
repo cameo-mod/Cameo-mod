@@ -57,19 +57,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: tsnod
-		BaseActor: tsmcvnod
+		BaseActor: ts_nod_mobileconstructionvehicle
 	StartingUnits@defaulttsnod:
 		Class: light
 		ClassName: Light Support
 		Factions: tsnod
-		BaseActor: tsmcvnod
-		SupportActors: tse1,tse1,tse1,tse3.nod,tse3.nod,tsbggy,tsttnk
+		BaseActor: ts_nod_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,tsttnk
 	StartingUnits@heavytsnod:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tsnod
-		BaseActor: tsmcvnod
-		SupportActors: tse1,tse1,tse1,tse3.nod,tse3.nod,tsbggy,tsttnk,tsttnk,tsttnk,tsttnk
+		BaseActor: ts_nod_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,tsttnk,tsttnk,tsttnk,tsttnk
 	StartingUnits@mcvonlyraforgotten:
 		Class: none
 		ClassName: MCV Only
@@ -406,7 +406,7 @@ TSGTCNST:
 	Buildable:
 		Description: Builds structures
 
-TSGTCNSTNOD:
+ts_nod_constructionyard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -426,7 +426,7 @@ TSGTCNSTNOD:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvnod
+		IntoActor: ts_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -552,15 +552,15 @@ TSGTCNSTCABAL:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
 
-TSMCVNOD:
+ts_nod_mobileconstructionvehicle:
 	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsntweap, tsgtdeptnod
+		Prerequisites: ~ts_nod_warfactory, ts_nod_servicedepot
 	Tooltip:
 		Name: Nod Mobile Construction Vehicle
 	Transforms:
-		IntoActor: tsgtcnstnod
+		IntoActor: ts_nod_constructionyard
 	RenderVoxels:
 		Image: tsmcvblack
 
@@ -582,18 +582,18 @@ TSMCVCABAL:
 # TS Building
 #######################################
 
-tsprocnod:
+ts_nod_tiberiumrefinery:
 	Inherits: ts_gdi_tiberiumrefinery
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtcnstnod, tsntpowr
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_powerplant
 		Queue: Building, RABuilding
 	FreeActor:
-		Actor: TSHARVNOD
+		Actor: ts_nod_tiberiumharvester
 		SpawnOffset: 2,2
 		Facing: 256
 	RenderSprites:
-		Image: tsprocnod
+		Image: ts_nod_tiberiumrefinery
 
 tsproccabal:
 	Inherits: ^BaseBuilding
@@ -648,7 +648,7 @@ tsproccabal:
 		Image: tsproccabal
 		PlayerPalette: player_rgba
 
-tsntwast:
+ts_nod_tiberiumwastefacility:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -667,7 +667,7 @@ tsntwast:
 	Buildable:
 		BuildPaletteOrder: 200
 		BuildLimit: 1
-		Prerequisites: ~tsgtcnstnod, tsnttech, up_advancedtiberiumrefinement
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter, ts_nod_upgrade_advancedtiberiumrefinement
 		Queue: Building, RABuilding
 		Description: actor-tsntwast.description
 	Building:
@@ -701,7 +701,7 @@ tsntwast:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSNTPOWR:
+ts_nod_powerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -719,7 +719,7 @@ TSNTPOWR:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgtcnstnod
+		Prerequisites: ~ts_nod_constructionyard
 		Description: template-power.description
 	Building:
 		Footprint: xx xx
@@ -787,7 +787,7 @@ TSNTPOWRCABAL:
 		PlayerPalette: playerra2
 		Image: tscrys
 
-TSNTAPWR:
+ts_nod_advancedpowerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -805,7 +805,7 @@ TSNTAPWR:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
-		Prerequisites: ~tsgtcnstnod, tsntradr
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
 		Description: template-advpower.description
 	Building:
 		Footprint: xxx xxx
@@ -874,12 +874,12 @@ TSGTSILO:
 	RenderSprites:
 		Image: tsgtsilo.gdi
 
-TSGTSILONOD:
+ts_nod_silo:
 	Inherits: TSGTSILO
 	Tooltip:
 		Name: Silo
 	Buildable:
-		Prerequisites: ~tsgtcnstnod, tsprocnod
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
 	RenderSprites:
 		Image: tsgtsilo.nod
 
@@ -892,7 +892,7 @@ TSGTSILOCABAL:
 	RenderSprites:
 		Image: tsgtsilo.cabal
 
-TSNTHAND:
+ts_nod_handof:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
@@ -910,7 +910,7 @@ TSNTHAND:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgtcnstnod, tsntpowr
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_powerplant
 		Queue: Building, RABuilding
 		Description: template-barracks.description
 	Building:
@@ -991,7 +991,7 @@ TSNTHAND2:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSNTWEAP:
+ts_nod_warfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^4x3Shape
@@ -1008,7 +1008,7 @@ TSNTWEAP:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgtcnstnod, tsprocnod
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
 		Queue: Building, RABuilding
 		Description: template-factory.description
 	Building:
@@ -1107,12 +1107,12 @@ TSNTWEAPCABAL:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtdeptnod:
+ts_nod_servicedepot:
 	Inherits: ts_gdi_servicedepot
 	Tooltip:
 		Name: Service Depot
 	Buildable:
-		Prerequisites: ~tsgtcnstnod, tsntweap
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_warfactory
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
@@ -1127,7 +1127,7 @@ tsgtdeptcabal:
 		Image: tsgtdept
 		PlayerPalette: playerra2
 
-tsnthpad:
+ts_nod_helipad:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1143,7 +1143,7 @@ tsnthpad:
 		Name: Nod Helipad
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tsgtcnstnod, tsntradr
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
 		Queue: Building, RABuilding
 		Description: Produces, rearms and repairs aircraft.
 	Building:
@@ -1177,7 +1177,7 @@ tsnthpad:
 		PlayerPalette: playerra2
 
 tsnthpad2:
-	Inherits: tsnthpad
+	Inherits: ts_nod_helipad
 	Tooltip:
 		Name: CABAL Helipad
 	Buildable:
@@ -1191,7 +1191,7 @@ tsnthpad2:
 	RenderSprites:
 		Image: tsnthpadcabal
 
-tsntradr:
+ts_nod_radar:
 	Inherits: ^BaseBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@spy: ^InfiltrateForSupportPowerReset
@@ -1208,7 +1208,7 @@ tsntradr:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~tsgtcnstnod, tsprocnod
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
 		Queue: Building, RABuilding
 		Description: actor-tsntradr.description
 	Building:
@@ -1267,7 +1267,7 @@ tsntradr:
 		ProductionType: Upgrades
 
 tsntradrcabal:
-	Inherits: tsntradr
+	Inherits: ts_nod_radar
 	Buildable:
 		Prerequisites: ~tsgtcnstcabal, tsproccabal
 	RenderSprites:
@@ -1303,7 +1303,7 @@ tsntradrcabal:
 		EffectSequence: idle
 		BlockedCursor: move-blocked
 
-tsnttech:
+ts_nod_techcenter:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
@@ -1313,7 +1313,7 @@ tsnttech:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstnod, tsntradr
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
 		Description: Provides Nod advanced technologies.
 	Tooltip:
 		Name: Nod Tech Center
@@ -1401,7 +1401,7 @@ tscabaltech:
 # 	Buildable:
 # 		Queue: Building, RABuilding
 # 		BuildPaletteOrder: 150
-# 		Prerequisites: ~tsgtcnstnod, tsntradr, tsnttech
+# 		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar, ts_nod_techcenter
 # 		Description: Provides Nod advanced technologies.\nProvides Hunter-Seeker support power.
 # 	Tooltip:
 # 		Name: Nod Temple
@@ -1466,7 +1466,7 @@ tscore:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsntmisl:
+ts_nod_missilesilo:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
@@ -1476,7 +1476,7 @@ tsntmisl:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstnod, tsnttech, !tsntmisl, ~techlevel.superweapons
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter, !ts_nod_missilesilo, ~techlevel.superweapons
 		Description: actor-tsntmisl.description
 	Tooltip:
 		Name: Missile Silo
@@ -1495,22 +1495,22 @@ tsntmisl:
 		Sequence: idle-lights
 	AttackFollow:
 	GrantConditionOnPrerequisite@chem:
-		Condition: tsntwast
-		Prerequisites: tsntwast
+		Condition: ts_nod_tiberiumwastefacility
+		Prerequisites: ts_nod_tiberiumwastefacility
 	Armament@superweapon1:
 		Name: superweapon
 		Weapon: TSTacticalMissile
-		RequiresCondition: !tsntwast
+		RequiresCondition: !ts_nod_tiberiumwastefacility
 	Armament@superweapon2:
 		Name: superweapon
 		Weapon: TSTacticalChemMissile
-		RequiresCondition: tsntwast
+		RequiresCondition: ts_nod_tiberiumwastefacility
 	FireArmamentPower:
 		AllowMultiple: true
 		ArmamentName: superweapon
 		Prerequisites:
 			1: ~techlevel.superweapons
-			2: tsntwast
+			2: ts_nod_tiberiumwastefacility
 		Cursor: nuke
 		Icons:
 			1: multimiss
@@ -1574,7 +1574,7 @@ tsntmisl:
 	# 	AllowMultiple: true
 	# 	OrderName: TSChemicalMissile
 	# 	PauseOnCondition: lowpower
-	# 	Prerequisites: ~techlevel.superweapons, tsntwast
+	# 	Prerequisites: ~techlevel.superweapons, ts_nod_tiberiumwastefacility
 	# 	Icon: chemicalmiss
 	# 	Cursor: nuke
 	# 	ChargeInterval: 3500
@@ -1608,19 +1608,19 @@ tsntmisl:
 		RequiresCondition: !build-incomplete
 		Sequence: smoke
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: tsntmisl
+		Prerequisite: ts_nod_missilesilo
 	SupportPowerChargeBar:
 	RenderSprites:
 		PlayerPalette: playerra2
 
 tsntmislcabal:
-	Inherits: tsntmisl
+	Inherits: ts_nod_missilesilo
 	Buildable:
-		Prerequisites: ~tsgtcnstcabal, tscore, !tsntmisl, ~techlevel.superweapons
+		Prerequisites: ~tsgtcnstcabal, tscore, !ts_nod_missilesilo, ~techlevel.superweapons
 		Description: actor-tsntmisl.description
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntmisl
+		Image: ts_nod_missilesilo
 	Armament@superweapon1:
 		Name: superweapon
 		Weapon: TSTacticalMissile
@@ -1703,7 +1703,7 @@ tsgtplug3:
 # TS Building Forgotten
 #######################################
 
-tsntlasr:
+ts_nod_laserturret:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -1714,7 +1714,7 @@ tsntlasr:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtcnstnod, tsnthand
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_handof
 		Description: actor-tsntlasr.description
 	Valued:
 		Cost: 800
@@ -1738,10 +1738,10 @@ tsntlasr:
 	AttackTurreted:
 	Armament@PRIMARY:
 		Weapon: TSTurretLaser
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserTurretLaser
-		RequiresCondition: up_tiberiumlenses
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	BodyOrientation:
 		QuantizedFacings: 16
 	WithVoxelTurret:
@@ -1753,24 +1753,24 @@ tsntlasr:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tiberiumlenses
+		Upgrades: ts_nod_upgrade_tiberiumlenses
 
 tsntlasrcabal:
-	Inherits: tsntlasr
+	Inherits: ts_nod_laserturret
 	Tooltip:
 		Name: Plasma Turret
 	Buildable:
 		Prerequisites: ~tsgtcnstcabal, tsnthand2, ~disabled
 	Armament@PRIMARY:
 		Weapon: TSCABALPlasmaFire
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	RenderVoxels:
-		Image: tsntlasr
+		Image: ts_nod_laserturret
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsntlasr
+		Image: ts_nod_laserturret
 
-tsntsam:
+ts_nod_samsite:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -1783,7 +1783,7 @@ tsntsam:
 		Name: SAM Site
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstnod, tsntradr
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: actor-tsntsam.description
@@ -1803,11 +1803,11 @@ tsntsam:
 	Armament@PRIMARY:
 		Weapon: TSNODRedEye
 		LocalOffset: 250,0,750
-		RequiresCondition: !up_tiberiumcoremissiles
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 	Armament@UPGRADE:
 		Weapon: TSNODTibRedEye
 		LocalOffset: 250,0,750
-		RequiresCondition: up_tiberiumcoremissiles
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	AttackTurreted:
 	WithSpriteTurret:
 	DetectCloaked:
@@ -1819,9 +1819,9 @@ tsntsam:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tiberiumcoremissiles
+		Upgrades: ts_nod_upgrade_tiberiumcoremissiles
 
-tsntstlh:
+ts_nod_stealthgenerator:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@SHAPE: ^3x2Shape
@@ -1836,7 +1836,7 @@ tsntstlh:
 		BuildLimit: 1
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 170
-		Prerequisites: ~tsgtcnstnod, tsnttech
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter
 		Description: actor-tsntstlh.description
 	Building:
 		Footprint: xxx xxx
@@ -1857,34 +1857,34 @@ tsntstlh:
 		Condition: tscloak
 		EnableSound: cloak5.aud
 		DisableSound: cloak5.aud
-		RequiresCondition: !disabled && !lowpower && !up_stealthfieldsimprovements
+		RequiresCondition: !disabled && !lowpower && !ts_nod_upgrade_stealthfieldsimprovements
 	ProximityExternalCondition@StealthGenUpgraded:
 		Range: 15c0
 		Condition: tscloak
 		EnableSound: cloak5.aud
 		DisableSound: cloak5.aud
-		RequiresCondition: !disabled && !lowpower && up_stealthfieldsimprovements
+		RequiresCondition: !disabled && !lowpower && ts_nod_upgrade_stealthfieldsimprovements
 	ProvidesPrerequisite@buildingname:
 	WithRangeCircle@GenRange:
 		Range: 12c0
-		RequiresCondition: !up_stealthfieldsimprovements
+		RequiresCondition: !ts_nod_upgrade_stealthfieldsimprovements
 	WithRangeCircle@GenRangeUpgraded:
 		Range: 15c0
-		RequiresCondition: up_stealthfieldsimprovements
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_stealthfieldsimprovements
+		Upgrades: ts_nod_upgrade_stealthfieldsimprovements
 
 tsntstlhcabal:
-	Inherits: tsntstlh
+	Inherits: ts_nod_stealthgenerator
 	Buildable:
 		Prerequisites: ~tsgtcnstcabal, tscabaltech
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tsntstlhcabal
 
-tsntobel:
+ts_nod_obeliskoflight:
 	Inherits: ^Defense
 	Inherits@shape: ^2x2Shape
 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -1897,7 +1897,7 @@ tsntobel:
 		Name: Obelisk of Light
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtcnstnod, tsnttech
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter
 		Queue: Defence, RADefence
 		# BuildDurationModifier: 63
 		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs Ground units\n  Weak vs Aircraft
@@ -1919,12 +1919,12 @@ tsntobel:
 		Weapon: TSObeliskLaserFire
 		# LocalOffset: 0,180,1600
 		LocalOffset: 0,320,1280
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserObeliskLaserFire
 		# LocalOffset: 0,180,1600
 		LocalOffset: 0,320,1280
-		RequiresCondition: up_tiberiumlenses
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	AttackCharges:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -1950,10 +1950,10 @@ tsntobel:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tiberiumlenses
+		Upgrades: ts_nod_upgrade_tiberiumlenses
 
 tsntobelcabal:
-	Inherits: tsntobel
+	Inherits: ts_nod_obeliskoflight
 	Buildable:
 		Prerequisites: ~tsgtcnstcabal, tscabaltech
 	RenderSprites:
@@ -2129,30 +2129,30 @@ TSE1:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-TSE1.NOD:
+ts_nod_lightinfantry:
 	Inherits: TSE1
 	Inherits@TiberiumLenses: ^TiberiumLenses
 	Inherits@InfiltrationKit: ^InfiltrationKit
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsnthand
+		Prerequisites: ~ts_nod_handof
 	Armament@PRIMARY:
 		Weapon: TSMinigun
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 		LocalOffset: 128,0,256
 	Armament@UPGRADE:
 		Weapon: TSLasergun
-		RequiresCondition: up_tiberiumlenses
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 		LocalOffset: 128,0,256
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSMinigun
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADEGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSLasergun
-		RequiresCondition: up_tiberiumlenses
-	Cloak@up_infiltrationkit:
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
+	Cloak@ts_nod_upgrade_infiltrationkit:
 		DetectionTypes: GroundCloak
 		InitialDelay: 125
 		CloakDelay: 75
@@ -2160,12 +2160,12 @@ TSE1.NOD:
 		UncloakSound: cloak5.aud
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
-		RequiresCondition: up_infiltrationkit
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tse1.nod
+		Image: ts_nod_lightinfantry
 	ActorStatValues:
-		Upgrades: up_tiberiumlenses, up_infiltrationkit
+		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_infiltrationkit
 
 TSE1PARA:
 	Inherits: TSE1
@@ -2214,12 +2214,12 @@ TSENGINEER:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-TSENGINEER2:
+ts_nod_engineer:
 	Inherits: TSENGINEER
 	Inherits@MC: ^MCImmune
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsnthand
+		Prerequisites: ~ts_nod_handof
 	RenderSprites:
 		Image: tsengineer
 	Voiced:
@@ -2302,39 +2302,39 @@ TSE3:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSE3.Nod:
+ts_nod_rocketinfantry:
 	Inherits: TSE3
 	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsnthand
+		Prerequisites: ~ts_nod_handof
 		Queue: Infantry, RAInfantry
 		Description: Anti-tank/anti-aircraft infantry. \n  Strong vs Tanks, Aircraft\n  Weak vs Infantry
 	Armament@PRIMARY: ##########
 		Weapon: TSBazooka
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: !up_tiberiumcoremissiles
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSBazooka
-		RequiresCondition: !up_tiberiumcoremissiles
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 	Armament@UPGRADE: ##########
 		Weapon: TSTibBazooka
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: up_tiberiumcoremissiles
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: TSTibBazooka
-		RequiresCondition: up_tiberiumcoremissiles
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	RenderSprites:
 		Image: TSE3
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tiberiumcoremissiles
+		Upgrades: ts_nod_upgrade_tiberiumcoremissiles
 
-elitcadre:
+ts_nod_elitecadre:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2353,7 +2353,7 @@ elitcadre:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOsrder: 50
-		Prerequisites: ~tsnthand, tsntradr
+		Prerequisites: ~ts_nod_handof, ts_nod_radar
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Air, Vehicles\n  Weak vs Siege, Heavy armor
 	Mobile:
@@ -2364,28 +2364,28 @@ elitcadre:
 		Step: 20
 	Armament@PRIMARY:
 		Weapon: elitecadregun
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 		LocalOffset: 128,0,256
 	Armament@UPGRADE:
 		Weapon: laserelitecadregun
-		RequiresCondition: up_tiberiumlenses
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 		LocalOffset: 128,0,256
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: elitecadregun
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: laserelitecadregun
-		RequiresCondition: up_tiberiumlenses
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	Armament@SECONDARY:
 		Weapon: TSCadreGrenade
-		RequiresCondition: up_auxiliaryweapon
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
 		LocalOffset: 128,0,256
 	Armament@GARRISONEDSECONDARY: ##########
 		Name: garrisoned
 		Weapon: TSCadreGrenade
-		RequiresCondition: up_auxiliaryweapon
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
 	TakeCover:
 		ProneOffset: 180,0,-200
 	Voiced:
@@ -2409,9 +2409,9 @@ elitcadre:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tiberiumlenses, up_auxiliaryweapon
+		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon
 
-TSTOXINTROOP:
+ts_nod_toxintrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2428,7 +2428,7 @@ TSTOXINTROOP:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOsrder: 80
-		Prerequisites: ~tsnthand, tsnttech
+		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
 	Mobile:
@@ -2450,7 +2450,7 @@ TSTOXINTROOP:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSSHOTGUNCOM:
+ts_nod_shotguncommando:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -2470,7 +2470,7 @@ TSSHOTGUNCOM:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOsrder: 100
-		Prerequisites: ~tsnthand, tsnttech
+		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
 		BuildLimit: 1
@@ -2490,7 +2490,7 @@ TSSHOTGUNCOM:
 		ProneOffset: 180,0,-200
 	Voiced:
 		VoiceSet: TSRocket
-	Cloak@up_infiltrationkit:
+	Cloak@ts_nod_upgrade_infiltrationkit:
 		DetectionTypes: GroundCloak
 		InitialDelay: 125
 		CloakDelay: 75
@@ -2498,13 +2498,13 @@ TSSHOTGUNCOM:
 		UncloakSound: cloak5.aud
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
-		RequiresCondition: up_infiltrationkit
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_infiltrationkit
+		Upgrades: ts_nod_upgrade_infiltrationkit
 
-TSCHAMSPY:
+ts_nod_chameleonspy:
 	Inherits: ^Soldier
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@anim: ^TSInfantry
@@ -2517,7 +2517,7 @@ TSCHAMSPY:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 90
-		Prerequisites: ~tsnthand, tsntradr
+		Prerequisites: ~ts_nod_handof, ts_nod_radar
 		Description: Cloaked spy that can infiltrate structures.
 	Valued:
 		Cost: 500
@@ -2543,7 +2543,7 @@ TSCHAMSPY:
 		Types: SpyInfiltrate
 		Notification: BuildingInfiltrated
 		PlayerExperience: 50
-		RequiresCondition: up_infiltrationkit
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
 	IgnoresDisguise:
 	AttackMove:
 		Voice: Move
@@ -2555,7 +2555,7 @@ TSCHAMSPY:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_infiltrationkit
+		Upgrades: ts_nod_upgrade_infiltrationkit
 
 ^MutSWCreature:
 	RejectsOrders:
@@ -3427,13 +3427,13 @@ RAPT:
 		Description: Bipedal with enlarged sickle-shaped claw on each hindfoot
 	Inherits@EXT: ^ExternalConditions ##########
 
-tsnapost:
+ts_nod_laserfence:
 	Inherits: ^BaseBuilding
 	Inherits@IDISABLED: ^DisableOnLowPowerOrPowerDown
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtcnstnod
+		Prerequisites: ~ts_nod_constructionyard
 		Description: Stops infantry and blocks enemy fire.\nCan NOT be crushed by tanks.
 	Valued:
 		Cost: 200
@@ -3540,7 +3540,7 @@ tsnafnce:
 # TS Shared Vehicles
 #######################################
 
-TSHARVNOD:
+ts_nod_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
@@ -3550,7 +3550,7 @@ TSHARVNOD:
 		PipCount: 8
 		Capacity: 35
 	Buildable:
-		Prerequisites: ~tsntweap, tsprocnod
+		Prerequisites: ~ts_nod_warfactory, ts_nod_tiberiumrefinery
 		Queue: Vehicle, RAVehicle
 		Description: Harvests Tiberium for processing
 	WithVoxelBody:
@@ -3567,13 +3567,13 @@ TSHARVNOD:
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
-	GrantConditionOnPrerequisite@up_advancedtiberiumrefinement:
-		Condition: up_advancedtiberiumrefinement
-		Prerequisites: up_advancedtiberiumrefinement
-	SpeedMultiplier@up_advancedtiberiumrefinement:
-		RequiresCondition: up_advancedtiberiumrefinement
+	GrantConditionOnPrerequisite@ts_nod_upgrade_advancedtiberiumrefinement:
+		Condition: ts_nod_upgrade_advancedtiberiumrefinement
+		Prerequisites: ts_nod_upgrade_advancedtiberiumrefinement
+	SpeedMultiplier@ts_nod_upgrade_advancedtiberiumrefinement:
+		RequiresCondition: ts_nod_upgrade_advancedtiberiumrefinement
 		Modifier: 150
-	Cloak@up_stealthfieldsimprovements:
+	Cloak@ts_nod_upgrade_stealthfieldsimprovements:
 		DetectionTypes: GroundCloak
 		InitialDelay: 125
 		CloakDelay: 75
@@ -3581,9 +3581,9 @@ TSHARVNOD:
 		UncloakSound: cloak5.aud
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
-		RequiresCondition: up_stealthfieldsimprovements
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
 	ActorStatValues:
-		Upgrades: up_advancedtiberiumrefinement, up_stealthfieldsimprovements
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_stealthfieldsimprovements
 
 TSHARVCABAL:
 	Inherits: ^TDHARV
@@ -3616,7 +3616,7 @@ TSHARVCABAL:
 #	Inherits@Voxel: ^TSRenderVoxel
 #	Harvester:
 #		Resources: Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Veins
-#		DeliveryBuildings: tsntwast
+#		DeliveryBuildings: ts_nod_tiberiumwastefacility
 #	WithVoxelBody:
 #	WithDockingAnimation:
 #	Voiced:
@@ -3883,7 +3883,7 @@ tsaegis:
 # TS Nod Vehicles
 #######################################
 
-TSSAPC:
+ts_nod_subterraneanapc:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
@@ -3901,10 +3901,10 @@ TSSAPC:
 	Tooltip:
 		Name: Subterranean APC
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsntweap, tsntradr
+		Prerequisites: ~ts_nod_warfactory, ts_nod_radar
 		Queue: Vehicle, RAVehicle
 		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
 	Mobile:
@@ -3921,11 +3921,11 @@ TSSAPC:
 	Armament@PRIMARY:
 		Weapon: TSSAPCMissiles
 		LocalOffset: -153,-204,509, -153,204,509
-		RequiresCondition: !up_tiberiumcoremissiles
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 	Armament@UPGRADE:
 		Weapon: TSSAPCCoreMissiles
 		LocalOffset: -153,-204,509, -153,204,509
-		RequiresCondition: up_tiberiumcoremissiles
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	AttackFrontal:
 		FacingTolerance: 64
 	RevealsShroud:
@@ -3933,7 +3933,7 @@ TSSAPC:
 		RequiresCondition: !submerged
 	SelectionDecorations:
 	Selectable:
-		Class: tssapc
+		Class: ts_nod_subterraneanapc
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -3945,16 +3945,16 @@ TSSAPC:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
 		UnloadTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice
-		InitialUnits: TSE1.Nod, TSE1.Nod, TSE1.Nod, TSE3.Nod, TSE3.Nod, elitcadre
+		InitialUnits: ts_nod_lightinfantry, ts_nod_lightinfantry, ts_nod_lightinfantry, ts_nod_rocketinfantry, ts_nod_rocketinfantry, ts_nod_elitecadre
 	Targetable@garrisoned:
 		RequiresCondition: loaded && !submerged
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization, up_tiberiumcoremissiles, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement
 
-TSBGGY:
+ts_nod_attackbuggy:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3973,7 +3973,7 @@ TSBGGY:
 		Name: Attack Buggy
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweap
+		Prerequisites: ~ts_nod_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -3992,21 +3992,21 @@ TSBGGY:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_tiberiumlenses
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
 	Armament@UPGRADE:
 		Weapon: TSLaserRaiderCannon
 		LocalOffset: 0,-30,250, 0,30,250
 		Recoil: 128
 		RecoilRecovery: 24
 		MuzzleSequence: muzzle
-		RequiresCondition: up_tiberiumlenses
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
 	Armament@SECONDARY:
 		Weapon: TSRaiderGrenade
 		LocalOffset: 0,-30,250, 0,30,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: up_auxiliaryweapon
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
@@ -4022,7 +4022,7 @@ TSBGGY:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization, up_tiberiumlenses, up_auxiliaryweapon, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
 
 TSBIKE:
 	Inherits: ^Vehicle
@@ -4044,7 +4044,7 @@ TSBIKE:
 		Name: Attack Cycle
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsntweap
+		Prerequisites: ~ts_nod_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: Fast scout vehicle, armed with\nrockets.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
@@ -4059,11 +4059,11 @@ TSBIKE:
 		Step: 8
 	Armament@PRIMARY:
 		Weapon: TSBikeMissile
-		RequiresCondition: !up_tiberiumcoremissiles
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 		LocalOffset: -153,-204,509, -153,204,509
 	Armament@UPGRADE:
 		Weapon: TSBikeTibMissile
-		RequiresCondition: up_tiberiumcoremissiles
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 		LocalOffset: -153,-204,509, -153,204,509
 	AttackFollow:
 		FacingTolerance: 512
@@ -4079,9 +4079,9 @@ TSBIKE:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization, up_tiberiumcoremissiles, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement
 
-TSSTNK:
+ts_nod_stealthtank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -4104,7 +4104,7 @@ TSSTNK:
 		Name: Stealth Tank
 	Buildable:
 		BuildPaletteOrder: 150
-		Prerequisites: ~tsntweap, tsnttech
+		Prerequisites: ~ts_nod_warfactory, ts_nod_techcenter
 		Queue: Vehicle, RAVehicle
 		Description: Lightly armoured tank equipped with a \nstealth generator. Armed with missiles.\nCan be spotted by infantry at close range.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Mobile:
@@ -4122,11 +4122,11 @@ TSSTNK:
 	Armament@PRIMARY:
 		Weapon: TSStankTusk
 		LocalOffset: -153,-204,509, -153,204,509
-		RequiresCondition: !up_tiberiumcoremissiles
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
 	Armament@UPGRADE:
 		Weapon: TSStankTibTusk
 		LocalOffset: -153,-204,509, -153,204,509
-		RequiresCondition: up_tiberiumcoremissiles
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
 	AttackFrontal:
 		FacingTolerance: 256
 	AutoTarget:
@@ -4143,13 +4143,13 @@ TSSTNK:
 		Payload: 250
 	WithRangeCircle@GenRangeUpgraded:
 		Range: 1512
-		RequiresCondition: up_stealthfieldsimprovements
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
 	ProximityExternalCondition@StealthGen:
 		Range: 1512
 		Condition: tscloak
 		EnableSound: cloak5.aud
 		DisableSound: cloak5.aud
-		RequiresCondition: !disabled && up_stealthfieldsimprovements
+		RequiresCondition: !disabled && ts_nod_upgrade_stealthfieldsimprovements
 	# Cloak:
 	# 	InitialDelay: 90
 	# 	CloakDelay: 90
@@ -4164,9 +4164,9 @@ TSSTNK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tiberiumcoremissiles, up_advancedtiberiumrefinement, up_stealthfieldsimprovements
+		Upgrades: ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_stealthfieldsimprovements
 
-TSREPAIR:
+ts_nod_mobilerepairvehicle:
 	Inherits: ^Tank
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
@@ -4180,7 +4180,7 @@ TSREPAIR:
 		Name: Mobile Repair Vehicle
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~tsntweap, tsgtdeptnod
+		Prerequisites: ~ts_nod_warfactory, ts_nod_servicedepot
 		Queue: Vehicle, RAVehicle
 		Description: Repairs nearby vehicles.\n  Unarmed
 	Mobile:
@@ -4196,7 +4196,7 @@ TSREPAIR:
 	Armor:
 		Type: Heavy
 	Armament:
-		Weapon: TSRepair
+		Weapon: ts_nod_mobilerepairvehicle
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 		PauseOnCondition: !ammo
@@ -4222,17 +4222,17 @@ TSREPAIR:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement
 
 TSREPAIRCABAL:
-	Inherits: TSREPAIR
+	Inherits: ts_nod_mobilerepairvehicle
 	Buildable:
 		Prerequisites: ~tsntweapcabal, tsgtdeptcabal
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tsrepair
+		Image: ts_nod_mobilerepairvehicle
 	RenderVoxels:
-		Image: tsrepair
+		Image: ts_nod_mobilerepairvehicle
 
 TSTTNK:
 	Inherits: ^Tank
@@ -4256,7 +4256,7 @@ TSTTNK:
 		BuildPaletteOrder: 60
 		# BuildDurationModifier: 100
 		# BuildDuration: 300
-		Prerequisites: ~tsntweap
+		Prerequisites: ~ts_nod_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: Nod's main battle tank.\nCan deploy to gain extra protection.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
@@ -4283,12 +4283,12 @@ TSTTNK:
 	Armament@PRIMARY:
 		Weapon: TS90mm
 		LocalOffset: 407,0,362
-		RequiresCondition: undeployed && !up_tiberiumlenses
+		RequiresCondition: undeployed && !ts_nod_upgrade_tiberiumlenses
 		MuzzleSequence: muzzle
 	Armament@UPGRADE:
 		Weapon: TSLaser90mm
 		LocalOffset: 407,0,362
-		RequiresCondition: undeployed && up_tiberiumlenses
+		RequiresCondition: undeployed && ts_nod_upgrade_tiberiumlenses
 		MuzzleSequence: muzzle
 	# Armament@ELITE:
 	# 	Weapon: TS120mmx
@@ -4300,14 +4300,14 @@ TSTTNK:
 		Turret: deployed
 		Weapon: TS90mmDep
 		LocalOffset: 543,75,362
-		RequiresCondition: deployed && !up_tiberiumlenses
+		RequiresCondition: deployed && !ts_nod_upgrade_tiberiumlenses
 		MuzzleSequence: muzzle
 	Armament@UPGRADEdeployed:
 		Name: deployed
 		Turret: deployed
 		Weapon: TSLaser90mmDep
 		LocalOffset: 543,75,362
-		RequiresCondition: deployed && up_tiberiumlenses
+		RequiresCondition: deployed && ts_nod_upgrade_tiberiumlenses
 		MuzzleSequence: muzzle
 	# Armament@elitedeployed:
 	# 	Name: deployed
@@ -4321,14 +4321,14 @@ TSTTNK:
 		Turret: deployed
 		Weapon: TS25mmDep
 		LocalOffset: 543,-75,362
-		RequiresCondition: deployed && up_auxiliaryweapon && !up_tiberiumlenses
+		RequiresCondition: deployed && ts_nod_upgrade_auxiliaryweapon && !ts_nod_upgrade_tiberiumlenses
 		MuzzleSequence: muzzle
 	Armament@UPGRADESECONDARY:
 		Name: deployed
 		Turret: deployed
 		Weapon: TSLaser25mmDep
 		LocalOffset: 543,-75,362
-		RequiresCondition: deployed && up_auxiliaryweapon && up_tiberiumlenses
+		RequiresCondition: deployed && ts_nod_upgrade_auxiliaryweapon && ts_nod_upgrade_tiberiumlenses
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
 	AttackFrontal:
@@ -4367,9 +4367,9 @@ TSTTNK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tiberiumlenses, up_auxiliaryweapon, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
 
-TSART2:
+ts_nod_artillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -4387,7 +4387,7 @@ TSART2:
 		Name: Artillery
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsntweap, tsntradr
+		Prerequisites: ~ts_nod_warfactory, ts_nod_radar
 		Queue: Vehicle, RAVehicle
 		Description: Mobile artillery.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
 	Mobile:
@@ -4407,11 +4407,11 @@ TSART2:
 	Armament@PRIMARY:
 		Weapon: TS155mm
 		LocalOffset: 407,0,362
-		RequiresCondition: !up_auxiliaryweapon
+		RequiresCondition: !ts_nod_upgrade_auxiliaryweapon
 	Armament@UPGRADE:
 		Weapon: TSAux155mm
 		LocalOffset: 407,0,362
-		RequiresCondition: up_auxiliaryweapon
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
@@ -4440,9 +4440,9 @@ TSART2:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization, up_auxiliaryweapon, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
 
-TSSUBTANK:
+ts_nod_devilstongue:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@FireActor: ^FireActor
@@ -4460,7 +4460,7 @@ TSSUBTANK:
 		Name: Devil's Tongue
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsntweap, tsnttech
+		Prerequisites: ~ts_nod_warfactory, ts_nod_techcenter
 		Queue: Vehicle, RAVehicle
 		Description: Subterranean flame tank.\nIs able to move underground.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
 	Mobile:
@@ -4494,9 +4494,9 @@ TSSUBTANK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement
 
-tssgen:
+ts_nod_mobilestealthgenerator:
 	Inherits: ^Tank
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@detect: ^GenericGroundDetector
@@ -4510,7 +4510,7 @@ tssgen:
 		Name: Mobile Stealth Generator
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~tsntweap, tsntstlh
+		Prerequisites: ~ts_nod_warfactory, ts_nod_stealthgenerator
 		Queue: Vehicle, RAVehicle
 		Description: Cloaks nearby buildings and units.\nCan not be cloaked.\n Unarmed
 	Mobile:
@@ -4536,13 +4536,13 @@ tssgen:
 		Condition: tscloak
 		EnableSound: cloak5.aud
 		DisableSound: cloak5.aud
-		RequiresCondition: !disabled && !up_stealthfieldsimprovements
+		RequiresCondition: !disabled && !ts_nod_upgrade_stealthfieldsimprovements
 	ProximityExternalCondition@StealGenUpgraded:
 		Range: 7c0
 		Condition: tscloak
 		EnableSound: cloak5.aud
 		DisableSound: cloak5.aud
-		RequiresCondition: !disabled && up_stealthfieldsimprovements
+		RequiresCondition: !disabled && ts_nod_upgrade_stealthfieldsimprovements
 	-ExternalCondition@CLOAK:
 	-ExternalCondition@TSCLOAK:
 	-Cloak@TDcloak:
@@ -4551,24 +4551,24 @@ tssgen:
 	# 	Range: 7c0
 	WithRangeCircle@GenRange:
 		Range: 5c0
-		RequiresCondition: !up_stealthfieldsimprovements
+		RequiresCondition: !ts_nod_upgrade_stealthfieldsimprovements
 	WithRangeCircle@GenRangeUpgraded:
 		Range: 7c0
-		RequiresCondition: up_stealthfieldsimprovements
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_advancedtiberiumrefinement, up_stealthfieldsimprovements
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_stealthfieldsimprovements
 
 tssgencabal:
-	Inherits: tssgen
+	Inherits: ts_nod_mobilestealthgenerator
 	Buildable:
 		Prerequisites: ~tsntweapcabal, tsntstlhcabal, ~disabled
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: tssgen
+		Image: ts_nod_mobilestealthgenerator
 	RenderVoxels:
-		Image: tssgen
+		Image: ts_nod_mobilestealthgenerator
 
 TSLASSPID:
 	Inherits: ^Vehicle
@@ -5079,7 +5079,7 @@ TSSAPCCABAL:
 	Tooltip:
 		Name: Scarab APC
 	UpdatesPlayerStatistics:
-		OverrideActor: tssapc
+		OverrideActor: ts_nod_subterraneanapc
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~tsntweapcabal, tsntradrcabal
@@ -5115,7 +5115,7 @@ TSSAPCCABAL:
 		Position: BottomLeft
 		RequiresSelection: true
 	ActorStatValues:
-		Upgrades: up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: tssapccabal
@@ -5378,7 +5378,7 @@ tscarrycabal.Husk:
 		Image: tscarrycabal
 		PlayerPalette: player_rgba
 
-TSSCRIN:
+ts_nod_bansheefighter:
 	Inherits: ^Helicopter
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -5396,7 +5396,7 @@ TSSCRIN:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsnthpad, tsnttech, tsntradr
+		Prerequisites: ~ts_nod_helipad, ts_nod_techcenter, ts_nod_radar
 		Queue: Aircraft, RAAircraft
 		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Aircraft:
@@ -5428,7 +5428,7 @@ TSSCRIN:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: TSScrin
+		VoiceSet: ts_nod_bansheefighter
 	AmmoPool:
 		Ammo: 4
 		ReloadCount: 4
@@ -5439,13 +5439,13 @@ TSSCRIN:
 	DeathSounds:
 		VolumeMultiplier: 2
 	SpawnActorOnDeath:
-		Actor: TSSCRIN.Husk
+		Actor: ts_nod_bansheefighter_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
 
 TSSCRINCABAL:
 	Inherits: ^Helicopter
@@ -5497,7 +5497,7 @@ TSSCRINCABAL:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: TSScrin
+		VoiceSet: ts_nod_bansheefighter
 	AmmoPool:
 		Ammo: 24
 		ReloadCount: 4
@@ -5511,7 +5511,7 @@ TSSCRINCABAL:
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
 	RenderSprites:
 		Image: tsscrincabal
 		PlayerPalette: player_rgba
@@ -5530,7 +5530,7 @@ TSSCRINCABAL.Husk:
 		Image: tsscrincabal
 		PlayerPalette: player_rgba
 
-TSSCRIN.Husk:
+ts_nod_bansheefighter_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -5542,14 +5542,14 @@ TSSCRIN.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsscrin
+		Image: ts_nod_bansheefighter
 	RenderVoxels:
-		Image: tsscrin
+		Image: ts_nod_bansheefighter
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSAPACHENOD:
+ts_nod_harpy:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5568,7 +5568,7 @@ TSAPACHENOD:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsnthpad
+		Prerequisites: ~ts_nod_helipad
 		Queue: Aircraft, RAAircraft
 		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Aircraft:
@@ -5585,37 +5585,37 @@ TSAPACHENOD:
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 		AmmoUsage: 5
-		RequiresCondition: !up_tiberiumlenses && !up_auxiliaryweapon
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon
 	Armament@SECONDARY:
 		Weapon: TSHarpyMultiClaw
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 		AmmoUsage: 0
-		RequiresCondition: !up_tiberiumlenses && up_auxiliaryweapon
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
 	Armament@PRIMARYAOE:
 		Weapon: TSHarpyAOEClaw
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 		AmmoUsage: 5
-		RequiresCondition: !up_tiberiumlenses && up_auxiliaryweapon
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
 	Armament@UPGRADE:
 		Weapon: TSLaserHarpyClaw
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 		AmmoUsage: 4
-		RequiresCondition: up_tiberiumlenses && !up_auxiliaryweapon
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses && !ts_nod_upgrade_auxiliaryweapon
 	Armament@SECONDARYUPGRADE:
 		Weapon: TSLaserHarpyMultiClaw
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 		AmmoUsage: 0
-		RequiresCondition: up_tiberiumlenses && up_auxiliaryweapon
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
 	Armament@UPGRADEAOE:
 		Weapon: TSLaserHarpyAOEClaw
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 		AmmoUsage: 4
-		RequiresCondition: up_tiberiumlenses && up_auxiliaryweapon
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses && ts_nod_upgrade_auxiliaryweapon
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
@@ -5628,7 +5628,7 @@ TSAPACHENOD:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSScrin
+		VoiceSet: ts_nod_bansheefighter
 	AmmoPool:
 		Ammo: 80
 		AmmoCondition: ammo
@@ -5657,7 +5657,7 @@ TSAPACHENOD:
 	RenderSprites:
 		Image: tsapache
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization, up_tiberiumlenses, up_auxiliaryweapon, up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
 
 TSAPACHECABAL:
 	Inherits: ^Helicopter
@@ -5703,7 +5703,7 @@ TSAPACHECABAL:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: TSScrin
+		VoiceSet: ts_nod_bansheefighter
 	AmmoPool:
 		Ammo: 12
 		AmmoCondition: ammo
@@ -5998,7 +5998,7 @@ team_upgrade.up_modernfirecontrolsystems:
 
 ############ Radar
 
-up_infiltrationkit:
+ts_nod_upgrade_infiltrationkit:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Infiltration Kit
@@ -6008,22 +6008,22 @@ up_infiltrationkit:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
 		Description: Procure personal stealth suit to Light Infantry and Shotgun Commando. Allows Chameleon Spies to infiltrate buildings.
-		Prerequisites: ~tsntradr, !up_infiltrationkit
+		Prerequisites: ~ts_nod_radar, !ts_nod_upgrade_infiltrationkit
 	RenderSprites:
 		Image: infiltrationkiticon
 	ProvidesPrerequisite:
 
 ^InfiltrationKit:
-	GrantConditionOnPrerequisite@up_infiltrationkit:
-		Condition: up_infiltrationkit
-		Prerequisites: up_infiltrationkit
-	SpeedMultiplier@up_infiltrationkit:
-		RequiresCondition: up_infiltrationkit
+	GrantConditionOnPrerequisite@ts_nod_upgrade_infiltrationkit:
+		Condition: ts_nod_upgrade_infiltrationkit
+		Prerequisites: ts_nod_upgrade_infiltrationkit
+	SpeedMultiplier@ts_nod_upgrade_infiltrationkit:
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: up_infiltrationkit
+		Upgrades: ts_nod_upgrade_infiltrationkit
 
-up_mobilityspecialization:
+ts_nod_upgrade_mobilityspecialization:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Mobility Specialization
@@ -6033,37 +6033,37 @@ up_mobilityspecialization:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
 		Description: Increases armor, accuracy, speed, vision, detection and attack range for the Brotherhood's light vehicles and aircraft.
-		Prerequisites: ~tsntradr, !up_mobilityspecialization
+		Prerequisites: ~ts_nod_radar, !ts_nod_upgrade_mobilityspecialization
 	RenderSprites:
 		Image: mobilityspecializationicon
 	ProvidesPrerequisite:
 
 ^MobilitySpecialization:
-	GrantConditionOnPrerequisite@up_mobilityspecialization:
-		Condition: up_mobilityspecialization
-		Prerequisites: up_mobilityspecialization
-	InaccuracyMultiplier@up_mobilityspecialization:
-		RequiresCondition: up_mobilityspecialization
+	GrantConditionOnPrerequisite@ts_nod_upgrade_mobilityspecialization:
+		Condition: ts_nod_upgrade_mobilityspecialization
+		Prerequisites: ts_nod_upgrade_mobilityspecialization
+	InaccuracyMultiplier@ts_nod_upgrade_mobilityspecialization:
+		RequiresCondition: ts_nod_upgrade_mobilityspecialization
 		Modifier: 90
-	RangeMultiplier@up_mobilityspecialization:
-		RequiresCondition: up_mobilityspecialization
+	RangeMultiplier@ts_nod_upgrade_mobilityspecialization:
+		RequiresCondition: ts_nod_upgrade_mobilityspecialization
 		Modifier: 110
-	RevealsShroudMultiplier@up_mobilityspecialization:
-		RequiresCondition: up_mobilityspecialization
+	RevealsShroudMultiplier@ts_nod_upgrade_mobilityspecialization:
+		RequiresCondition: ts_nod_upgrade_mobilityspecialization
 		Modifier: 110
-	DetectCloakedMultiplier@up_mobilityspecialization:
-		RequiresCondition: up_mobilityspecialization
+	DetectCloakedMultiplier@ts_nod_upgrade_mobilityspecialization:
+		RequiresCondition: ts_nod_upgrade_mobilityspecialization
 		Modifier: 110
-	SpeedMultiplier@up_mobilityspecialization:
-		RequiresCondition: up_mobilityspecialization
+	SpeedMultiplier@ts_nod_upgrade_mobilityspecialization:
+		RequiresCondition: ts_nod_upgrade_mobilityspecialization
 		Modifier: 110
-	DamageMultiplier@up_mobilityspecialization:
-		RequiresCondition: up_mobilityspecialization
+	DamageMultiplier@ts_nod_upgrade_mobilityspecialization:
+		RequiresCondition: ts_nod_upgrade_mobilityspecialization
 		Modifier: 90
 	ActorStatValues:
-		Upgrades: up_mobilityspecialization
+		Upgrades: ts_nod_upgrade_mobilityspecialization
 
-up_auxiliaryweapon:
+ts_nod_upgrade_auxiliaryweapon:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Auxiliary Weapon
@@ -6073,27 +6073,27 @@ up_auxiliaryweapon:
 		BuildPaletteOrder: 110
 		Queue: Upgrades
 		Description: Adds secondary weapons or improves existing ones in most of Brotherhood's arsenal.
-		Prerequisites: ~tsntradr, !up_auxiliaryweapon
+		Prerequisites: ~ts_nod_radar, !ts_nod_upgrade_auxiliaryweapon
 	RenderSprites:
 		Image: tsauxiliaryweaponicon
 	ProvidesPrerequisite:
 
 ^AuxiliaryWeapon:
-	GrantConditionOnPrerequisite@up_auxiliaryweapon:
-		Condition: up_auxiliaryweapon
-		Prerequisites: up_auxiliaryweapon
-	ReloadDelayMultiplier@up_auxiliaryweapon:
-		RequiresCondition: up_auxiliaryweapon
+	GrantConditionOnPrerequisite@ts_nod_upgrade_auxiliaryweapon:
+		Condition: ts_nod_upgrade_auxiliaryweapon
+		Prerequisites: ts_nod_upgrade_auxiliaryweapon
+	ReloadDelayMultiplier@ts_nod_upgrade_auxiliaryweapon:
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
 		Modifier: 90
-	FirepowerMultiplier@up_auxiliaryweapon:
-		RequiresCondition: up_auxiliaryweapon
+	FirepowerMultiplier@ts_nod_upgrade_auxiliaryweapon:
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
 		Modifier: 110
 	ActorStatValues:
-		Upgrades: up_auxiliaryweapon
+		Upgrades: ts_nod_upgrade_auxiliaryweapon
 
 ############### Lab
 
-up_stealthfieldsimprovements:
+ts_nod_upgrade_stealthfieldsimprovements:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Stealth Fields Improvements
@@ -6103,22 +6103,22 @@ up_stealthfieldsimprovements:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: Increases effectiveness of Stealth Generators and Stealth Tanks, and upgrades Harvesters with portable stealth generator.
-		Prerequisites: ~tsnttech, !up_stealthfieldsimprovements
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_stealthfieldsimprovements
 	RenderSprites:
 		Image: stealthfieldsimprovementsicon
 	ProvidesPrerequisite:
 
 ^StealthFieldsImprovements:
-	GrantConditionOnPrerequisite@up_stealthfieldsimprovements:
-		Condition: up_stealthfieldsimprovements
-		Prerequisites: up_stealthfieldsimprovements
-	DamageMultiplier@up_stealthfieldsimprovements:
-		RequiresCondition: up_stealthfieldsimprovements
+	GrantConditionOnPrerequisite@ts_nod_upgrade_stealthfieldsimprovements:
+		Condition: ts_nod_upgrade_stealthfieldsimprovements
+		Prerequisites: ts_nod_upgrade_stealthfieldsimprovements
+	DamageMultiplier@ts_nod_upgrade_stealthfieldsimprovements:
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: up_stealthfieldsimprovements
+		Upgrades: ts_nod_upgrade_stealthfieldsimprovements
 
-up_tiberiumlenses:
+ts_nod_upgrade_tiberiumlenses:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Tiberium Lenses
@@ -6128,19 +6128,19 @@ up_tiberiumlenses:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: Procure laser weaponries for the Brotherhood's combatants. Improve effectiveness of existing laser-based weapons.
-		Prerequisites: ~tsnttech, !up_tiberiumlenses
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_tiberiumlenses
 	RenderSprites:
 		Image: tstiberiumlensesicon
 	ProvidesPrerequisite:
 
 ^TiberiumLenses:
-	GrantConditionOnPrerequisite@up_tiberiumlenses:
-		Condition: up_tiberiumlenses
-		Prerequisites: up_tiberiumlenses
+	GrantConditionOnPrerequisite@ts_nod_upgrade_tiberiumlenses:
+		Condition: ts_nod_upgrade_tiberiumlenses
+		Prerequisites: ts_nod_upgrade_tiberiumlenses
 	ActorStatValues:
-		Upgrades: up_tiberiumlenses
+		Upgrades: ts_nod_upgrade_tiberiumlenses
 
-up_tiberiumcoremissiles:
+ts_nod_upgrade_tiberiumcoremissiles:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Tiberium Core Missiles
@@ -6150,19 +6150,19 @@ up_tiberiumcoremissiles:
 		BuildPaletteOrder: 100
 		Queue: Research
 		Description: Procure tiberium core missile technology to Rocket Soldier, SAM Site, Attack Cycle and Stealth Tank, increasing their firepower.
-		Prerequisites: ~tsnttech, !up_tiberiumcoremissiles
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_tiberiumcoremissiles
 	RenderSprites:
 		Image: tstiberiumcoremissilesicon
 	ProvidesPrerequisite:
 
 ^TiberiumCoreMissiles:
-	GrantConditionOnPrerequisite@up_tiberiumcoremissiles:
-		Condition: up_tiberiumcoremissiles
-		Prerequisites: up_tiberiumcoremissiles
+	GrantConditionOnPrerequisite@ts_nod_upgrade_tiberiumcoremissiles:
+		Condition: ts_nod_upgrade_tiberiumcoremissiles
+		Prerequisites: ts_nod_upgrade_tiberiumcoremissiles
 	ActorStatValues:
-		Upgrades: up_tiberiumcoremissiles
+		Upgrades: ts_nod_upgrade_tiberiumcoremissiles
 
-up_advancedtiberiumrefinement:
+ts_nod_upgrade_advancedtiberiumrefinement:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Advanced Tiberium Refinement
@@ -6172,25 +6172,25 @@ up_advancedtiberiumrefinement:
 		BuildPaletteOrder: 110
 		Queue: Research
 		Description: Allows construction of the Waste Facility. Increases all vehicles speed by 25%, and twice the improvement for Harvesters.
-		Prerequisites: ~tsnttech, !up_advancedtiberiumrefinement
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_advancedtiberiumrefinement
 	RenderSprites:
 		Image: advancedtiberiumrefinementicon
 	ProvidesPrerequisite:
 
 ^AdvancedTiberiumRefinement:
-	GrantConditionOnPrerequisite@up_advancedtiberiumrefinement:
-		Condition: up_advancedtiberiumrefinement
-		Prerequisites: up_advancedtiberiumrefinement
-	SpeedMultiplier@up_advancedtiberiumrefinement:
-		RequiresCondition: up_advancedtiberiumrefinement
+	GrantConditionOnPrerequisite@ts_nod_upgrade_advancedtiberiumrefinement:
+		Condition: ts_nod_upgrade_advancedtiberiumrefinement
+		Prerequisites: ts_nod_upgrade_advancedtiberiumrefinement
+	SpeedMultiplier@ts_nod_upgrade_advancedtiberiumrefinement:
+		RequiresCondition: ts_nod_upgrade_advancedtiberiumrefinement
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: up_advancedtiberiumrefinement
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement
 
 ^WillOfKane:
-	GrantConditionOnPrerequisite@up_willofkane:
-		Condition: up_willofkane
-		Prerequisites: up_willofkane
+	GrantConditionOnPrerequisite@ts_nod_upgrade_willofkane:
+		Condition: ts_nod_upgrade_willofkane
+		Prerequisites: ts_nod_upgrade_willofkane
 	GrantConditionOnDamageState@Light:
 		Condition: damagedlight
 		ValidDamageStates: Light
@@ -6205,23 +6205,23 @@ up_advancedtiberiumrefinement:
 		ValidDamageStates: Critical
 	FirepowerMultiplier@Light:
 		Modifier: 110
-		RequiresCondition: damagedlight && up_willofkane
+		RequiresCondition: damagedlight && ts_nod_upgrade_willofkane
 	FirepowerMultiplier@Medium:
 		Modifier: 120
-		RequiresCondition: damagedmedium && up_willofkane
+		RequiresCondition: damagedmedium && ts_nod_upgrade_willofkane
 	FirepowerMultiplier@Heavy:
 		Modifier: 130
-		RequiresCondition: damagedheavy && up_willofkane
+		RequiresCondition: damagedheavy && ts_nod_upgrade_willofkane
 	FirepowerMultiplier@Cryticcal:
 		Modifier: 140
-		RequiresCondition: damagedcritical && up_willofkane
+		RequiresCondition: damagedcritical && ts_nod_upgrade_willofkane
 	ActorStatValues:
-		Upgrades: up_willofkane
+		Upgrades: ts_nod_upgrade_willofkane
 
 team_upgrade.up_willofkane:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_willofkane
+		Prerequisite: ts_nod_upgrade_willofkane
 	RenderSprites:
 		Image: willofkaneicon
 	Tooltip:
@@ -6230,7 +6230,7 @@ team_upgrade.up_willofkane:
 		Description: One vision. One purpose. Peace through power. The Brotherhood's allies get infantry firepower bonus based on missing health.
 	PlayerDisplayUpgrade:
 
-up_willofkane:
+ts_nod_upgrade_willofkane:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Will of Kane
@@ -6240,7 +6240,7 @@ up_willofkane:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: One vision. One purpose. Peace through power. All infantry get firepower bonus based on missing health.
-		Prerequisites: ~tsnttech, !up_willofkane
+		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_willofkane
 	RenderSprites:
 		Image: willofkaneicon
 	ProvidesPrerequisite:

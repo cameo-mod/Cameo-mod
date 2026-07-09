@@ -6436,7 +6436,7 @@ chinternetcenter:
 		LoadedCondition: cond_loaded
 	RevealActorsPower@SATHACK:
 		CameraActor: camera.sathack
-		TargetActors: fact.gdi, fact.nod, rafact.allies, rafact.soviet, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, tsgtcnstnod, forgotten_constructionyard, tsgtcnstcabal, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
+		TargetActors: fact.gdi, fact.nod, rafact.allies, rafact.soviet, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, tsgtcnstcabal, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
 		LifeTime: 500
 		OrderName: satellitehack1
 		Icon: sathack1

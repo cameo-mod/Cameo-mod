@@ -64,13 +64,13 @@ World:
 		ClassName: Light Support
 		Factions: tanod
 		BaseActor: mcv.tanod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,tsttnk
 	StartingUnits@heavytanod:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tanod
 		BaseActor: mcv.tanod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,tsbggy,tsttnk,tsttnk,tsttnk,tsttnk
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,tsttnk,tsttnk,tsttnk,tsttnk
 	StartingUnits@mcvonlyrataforgotten:
 		Class: none
 		ClassName: MCV Only
@@ -269,7 +269,7 @@ TABLACKHAND:
 		RequiresCondition: taupflamer1
 		Modifier: 75
 TACONFESSOR:
-	Inherits: elitcadre
+	Inherits: ts_nod_elitecadre
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -324,7 +324,7 @@ TAE3.MUTANT:
 	Voiced:
 		VoiceSet: RA2DesolatorVoice
 TATROOPER:
-	Inherits: elitcadre
+	Inherits: ts_nod_elitecadre
 	Tooltip:
 		Name: Zone Trooper
 	Buildable:
@@ -5554,7 +5554,7 @@ taflakb.bot:
 	RenderSprites:
 		Image: taflakb
 tamgnod:
-	Inherits: tsntlasr
+	Inherits: ts_nod_laserturret
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	RenderSprites:
 		Image: tamgnod

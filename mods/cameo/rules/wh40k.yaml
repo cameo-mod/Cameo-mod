@@ -3975,7 +3975,7 @@ wh40ksentinel:
 			2100scav2: ifv-mg
 			scmarine: ifv-mg
 			tse1: ifv-mg
-			tse1.nod: ifv-mg
+			ts_nod_lightinfantry: ifv-mg
 			tse1para: ifv-mg
 			tscyborg: ifv-mg
 			tscyborgc: ifv-mg
@@ -4006,7 +4006,7 @@ wh40ksentinel:
 			ra2engineer.yuri: ifv-repair
 			yrslav: ifv-repair
 			tsengineer: ifv-repair
-			tsengineer2: ifv-repair
+			ts_nod_engineer: ifv-repair
 			forgotten_mutanthijacker: ifv-repair
 			rathf: ifv-repair
 			glhijack: ifv-repair
@@ -4056,7 +4056,7 @@ wh40ksentinel:
 			yrvirus: ifv-sniper
 			raspy: ifv-sniper
 			ra2spy: ifv-sniper
-			tschamspy: ifv-sniper
+			ts_nod_chameleonspy: ifv-sniper
 			forgotten_mutantsniper: ifv-sniper
 			glkell: ifv-sniper
 			leangkell: ifv-sniper
@@ -8577,7 +8577,7 @@ wh40kgretchin:
 		RequiresCondition: ammo == 0
 		Modifier: 100
 	Armament:
-		Weapon: TSRepair
+		Weapon: ts_nod_mobilerepairvehicle
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 	AutoTarget:
