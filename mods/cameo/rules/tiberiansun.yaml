@@ -384,8 +384,6 @@ TSGTCNST:
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 1000000
-	RevealsShroud:
-		Range: 10c0
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
@@ -449,8 +447,6 @@ TSGTCNSTGDI:
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 1000000
-	RevealsShroud:
-		Range: 10c0
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
@@ -522,8 +518,6 @@ TSGTCNSTNOD:
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 1000000
-	RevealsShroud:
-		Range: 10c0
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
@@ -599,8 +593,6 @@ TSGTCNSTCABAL:
 		HP: 1000000
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 10c0
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
@@ -749,8 +741,6 @@ tsprocgdi:
 		Footprint: xxx_ xxx= _===
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-512,0
-	RevealsShroud:
-		Range: 6c0
 	Refinery:
 	DockHost:
 		DockAngle: 680
@@ -826,8 +816,6 @@ tsproccabal:
 		Footprint: _x_ xxx === ===
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
-	RevealsShroud:
-		Range: 6c0
 	Refinery:
 	DockHost:
 		DockAngle: 680
@@ -885,8 +873,6 @@ tsntwast:
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 100000
-	RevealsShroud:
-		Range: 6c0
 	# Selectable:
 	# 	Bounds: 1280, 1280
 	# 	DecorationBounds: 1280, 1024
@@ -1207,8 +1193,6 @@ TSGTPILE:
 		Footprint: xx xx ==
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
-	RevealsShroud:
-		Range: 5c0
 	RallyPoint:
 	Exit@1:
 		SpawnOffset: -426,85,0
@@ -1261,8 +1245,6 @@ TSNTHAND:
 		Footprint: xxx xxx
 		Dimensions: 3,2
 		LocalCenterOffset: 0,-512,0
-	RevealsShroud:
-		Range: 5c0
 	RallyPoint:
 		Path: 1,2
 	Exit@1:
@@ -1310,8 +1292,6 @@ TSNTHAND2:
 		Footprint: xx xx ==
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
-	RevealsShroud:
-		Range: 5c0
 	RallyPoint:
 		Path: 1,2
 	Exit@1:
@@ -1368,8 +1348,6 @@ tsgtweap:
 	# 	Bounds: 3072, 2048
 	# 	DecorationBounds: 3072, 2048
 	SelectionDecorations:
-	RevealsShroud:
-		Range: 4c0
 	RallyPoint:
 		Path: 5,3
 	Exit@1:
@@ -1436,8 +1414,6 @@ TSNTWEAP:
 	# 	Bounds: 3072, 2048
 	# 	DecorationBounds: 3072, 2048
 	SelectionDecorations:
-	RevealsShroud:
-		Range: 4c0
 	RallyPoint:
 		Path: 5,3
 	Exit@1:
@@ -1496,8 +1472,6 @@ TSNTWEAPCABAL:
 	Selectable:
 		Bounds: 3072, 2048
 	SelectionDecorations:
-	RevealsShroud:
-		Range: 4c0
 	RallyPoint:
 		Path: 0,2
 	Exit@1:
@@ -1555,8 +1529,6 @@ tsgtdeptgdi:
 	# 	Bounds: 1280, 1280
 	# 	DecorationBounds: 1280, 1024
 	SelectionDecorations:
-	RevealsShroud:
-		Range: 5c0
 	Reservable:
 	# RepairsUnits:
 	# 	HpPerStep: 1000
@@ -1637,8 +1609,6 @@ tsgthpad:
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
-	RevealsShroud:
-		Range: 5c0
 	Exit@1:
 		SpawnOffset: 0,-256,0
 	Reservable:
@@ -1691,8 +1661,6 @@ tsnthpad:
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
-	RevealsShroud:
-		Range: 5c0
 	Exit@1:
 		SpawnOffset: 0,-256,0
 	Reservable:
@@ -1763,8 +1731,6 @@ tsntradr:
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
-	RevealsShroud:
-		Range: 10c0
 	ProvidesRadar:
 		RequiresCondition: !jammed && !lowpower
 	RenderDetectionCircle:
@@ -1879,8 +1845,6 @@ tsgtradr:
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
-	RevealsShroud:
-		Range: 10c0
 	ProvidesRadar:
 		RequiresCondition: !jammed && !lowpower
 	RenderDetectionCircle:
@@ -1941,8 +1905,6 @@ tsnttech:
 		LocalCenterOffset: 0,0,0
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 5c0
 	Power:
 		Amount: -150
 	ProvidesPrerequisite@buildingname:
@@ -1980,8 +1942,6 @@ tsgttech:
 		LocalCenterOffset: 0,0,0
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 5c0
 	Power:
 		Amount: -100
 	ProvidesPrerequisite@buildingname:
@@ -2105,8 +2065,6 @@ tscore:
 		Bounds: 1280, 1280
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 5c0
 	Power:
 		Amount: -100
 	ProvidesPrerequisite@buildingname:
@@ -2315,8 +2273,6 @@ tsctarmr:
 		HP: 80000
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 5c0
 	Power:
 		Amount: -100
 	-WithMakeAnimation:
@@ -2478,8 +2434,6 @@ TSGTCNSTMUTANT:
 		HP: 1000000
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 10c0
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
@@ -2550,8 +2504,6 @@ tsprocmutant:
 		Footprint: _x_ xxx === ===
 		Dimensions: 3,4
 		LocalCenterOffset: 0,-512,0
-	RevealsShroud:
-		Range: 6c0
 	Refinery:
 	DockHost:
 		DockAngle: 680
@@ -2687,8 +2639,6 @@ tsgtpile2:
 		Footprint: xx xx ==
 		Dimensions: 2,3
 		LocalCenterOffset: 0,-512,0
-	RevealsShroud:
-		Range: 5c0
 	RallyPoint:
 	Exit@1:
 		SpawnOffset: -426,85,0
@@ -2735,8 +2685,6 @@ TSGTWEAPMUTANT:
 	Selectable:
 		Bounds: 1280, 1024
 	SelectionDecorations:
-	RevealsShroud:
-		Range: 4c0
 	RallyPoint:
 		Path: 0,2
 	Exit@1:
@@ -2823,8 +2771,6 @@ tsgtradrmutant:
 	SelectionDecorations:
 	WithSpriteBody:
 		PauseOnCondition: lowpower
-	RevealsShroud:
-		Range: 10c0
 	WithBuildingBib:
 	ProvidesRadar:
 		RequiresCondition: !jammed && !lowpower
@@ -2866,8 +2812,6 @@ tsfgttech:
 		LocalCenterOffset: 0,0,0
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 5c0
 	WithBuildingBib:
 	Power:
 		Amount: -100
@@ -2903,8 +2847,6 @@ forgot_chemicalplant:
 		LocalCenterOffset: 0,0,0
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 5c0
 	WithBuildingBib:
 	Power:
 		Amount: -100
@@ -4439,8 +4381,6 @@ TSZONETROOPER:
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 50
-	RevealsShroud:
-		Range: 8000
 	DetectCloaked:
 		Range: 4000
 	RenderDetectionCircle:
@@ -4833,8 +4773,6 @@ TSCHAMSPY:
 	Mobile:
 		Speed: 90
 		Voice: Move
-	RevealsShroud:
-		Range: 8000
 	DetectCloaked:
 		Range: 4000
 	RenderDetectionCircle:
@@ -5086,8 +5024,6 @@ TSCYBORG:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~tsnthand2
-		BuildDurationModifier: 100
-		BuildDuration: 250
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -5144,8 +5080,6 @@ tscyborgb:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~tsnthand2
-		BuildDurationModifier: 100
-		BuildDuration: 250
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -5233,8 +5167,6 @@ tsdevout:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~tsnthand2
-		BuildDurationModifier: 100
-		BuildDuration: 250
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -5325,8 +5257,6 @@ tsascended:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~tsnthand2
-		BuildDurationModifier: 100
-		BuildDuration: 250
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -5417,8 +5347,6 @@ tshacker:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~tsnthand2
-		BuildDurationModifier: 100
-		BuildDuration: 500
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -5514,16 +5442,12 @@ TSREAPER:
 	Armor:
 		Type: Medium #Wood
 	Valued:
-		Cost: 1000 #1000
+		Cost: 1000
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
 		Prerequisites: ~tsnthand2, tscabaltech
 		Description: Cyborg walker armed with missiles and nets.\n Strong vs vehicles\n Can immobilize infantry
-		BuildDuration: 500
-		BuildDurationModifier: 100
-	RevealsShroud:
-		Range: 6c0
 	Health:
 		HP: 75000
 	ChangesHealth@SelfHealing:
@@ -5581,8 +5505,6 @@ TSCYC2:
 		Prerequisites: ~tsnthand2, tscabaltech
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		BuildDuration: 625
-		BuildDurationModifier: 100
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
 		Speed: 52
@@ -5616,8 +5538,6 @@ tsccommando:
 		Prerequisites: ~tsnthand2, tscabaltech
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		BuildDuration: 625
-		BuildDurationModifier: 100
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
 		Speed: 58
@@ -5664,8 +5584,6 @@ TSDissolver:
 		Step: 28
 	Armor:
 		Type: Plate
-	RevealsShroud:
-		Range: 7c0
 	Turreted:
 		TurnSpeed: 40
 		Offset: 0,0,25
@@ -5710,8 +5628,6 @@ TSARND:
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~tsnthand2
-		BuildDurationModifier: 100
-		BuildDuration: 250
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Health:
@@ -5721,8 +5637,6 @@ TSARND:
 		Voice: Move
 	Guard:
 		Voice: Move
-	RevealsShroud:
-		Range: 6c0
 	Passenger:
 		CustomPipType: red
 		Voice: Move
@@ -6943,8 +6857,6 @@ tsldrone:
 		HpPerStep: 2637
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
 	Voiced:
 		VoiceSet: RobotTankVoice
 	DeliversCash:
@@ -7008,9 +6920,6 @@ tsprobe:
 		HP: 20000
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 3c0
-		Type: GroundPosition
 	Buildable:
 		Queue: Vehicle.HunterSeeker
 		Description: Fire-and-forget munition.\nInstantly kills mobile targets.
@@ -7208,10 +7117,8 @@ TSAPC:
 		Step: 32
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
-		TurnSpeed: 20 #3
+		TurnSpeed: 20
 	Armament:
 		Weapon: TSAAPCCannon
 		Recoil: 128
@@ -7281,8 +7188,6 @@ tsmemp:
 		HpPerStep: 7500
 	ChangesHealth@SelfHealing:
 		Step: 60
-	RevealsShroud:
-		Range: 5c0
 	Turreted:
 	AttackTurreted:
 	Armament:
@@ -7323,8 +7228,6 @@ TSMMCH:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~tsgtweap, ~!uptitanmkii
-		BuildDurationModifier: 100
-		BuildDuration: 375
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
@@ -7338,10 +7241,8 @@ TSMMCH:
 		Step: 40
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
-		TurnSpeed: 15 #3
+		TurnSpeed: 15
 	Armament@PRIMARY:
 		Weapon: TS120mm
 		Recoil: 128
@@ -7416,10 +7317,8 @@ TSTALTITAN:
 		Step: 48
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
-		TurnSpeed: 15 #3
+		TurnSpeed: 15
 		Offset: -45,0,392
 	Armament@PRIMARY:
 		Weapon: TS120mmTal
@@ -7485,8 +7384,6 @@ TSJUGG2:
 		Step: 20
 	Armor:
 		Type: Medium
-	RevealsShroud:
-		Range: 9c0
 	# Turreted:
 	# 	TurnSpeed: 14 #3
 	# 	Offset: -45,0,392
@@ -7649,8 +7546,6 @@ TSHVR:
 		Prerequisites: ~tsgtweap, tsgtradr
 		Queue: Vehicle, RAVehicle
 		Description: Hovering vehicle armed with\nlong range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
-		BuildDuration: 300
-		BuildDurationModifier: 100
 	Mobile:
 		Locomotor: hover
 		Speed: 80
@@ -7662,8 +7557,6 @@ TSHVR:
 		Step: 12
 	Armor:
 		Type: Medium
-	RevealsShroud:
-		Range: 7c0
 	Turreted:
 		TurnSpeed: 16
 	Armament:
@@ -7711,8 +7604,6 @@ TSSMECH:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 25
-		BuildDuration: 250
-		BuildDurationModifier: 100
 		Prerequisites: ~tsgtweap, ~!upwolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -7727,8 +7618,6 @@ TSSMECH:
 		Step: 12
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 6c0
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -7783,8 +7672,6 @@ TSTALWOLV:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 25
-		BuildDuration: 250
-		BuildDurationModifier: 100
 		Prerequisites: ~tsgtweap, upwolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -7799,8 +7686,6 @@ TSTALWOLV:
 		Step: 20
 	Armor:
 		Type: Medium
-	RevealsShroud:
-		Range: 6c0
 	AttackFrontal:
 		FacingTolerance: 0
 	Armament@PRIMARY:
@@ -7859,8 +7744,6 @@ TSHMEC:
 		BuildPaletteOrder: 140
 		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~!upmammothmkii
 		Queue: Vehicle, RAVehicle
-		BuildDuration: 1250
-		BuildDurationModifier: 100
 		BuildLimit: 1
 		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
 	Mobile:
@@ -7884,8 +7767,6 @@ TSHMEC:
 		Step: 320
 	Armor:
 		Type: Superheavy
-	RevealsShroud:
-		Range: 7c0
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgun
@@ -7991,8 +7872,6 @@ TSMKII:
 		Step: 480
 	Armor:
 		Type: Superheavy
-	RevealsShroud:
-		Range: 7c0
 	Armament@RAILGUN:
 		Name: railgun
 		Weapon: TSMechRailgunII
@@ -8084,8 +7963,6 @@ TSSONIC:
 	Buildable:
 		BuildPaletteOrder: 120
 		Prerequisites: ~tsgtweap, tsgttech
-		BuildDuration: 680
-		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
 		Description: Armored high-tech vehicle with\na long range sonic armament.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
@@ -8099,10 +7976,8 @@ TSSONIC:
 		Step: 100
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 7c0
 	Turreted:
-		TurnSpeed: 10 #3
+		TurnSpeed: 10
 	Armament@PRIMARY:
 		Weapon: TSSonicZapWeapon
 		Recoil: 128
@@ -8160,8 +8035,6 @@ tsaegis:
 		HP: 80000
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 6c0
 	Armament:
 		Weapon: TSAegisMissile
 	AttackFrontal:
@@ -8423,8 +8296,6 @@ TSSTNK:
 		Step: 32
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 5c0
 	Armament@PRIMARY:
 		Weapon: TSStankTusk
 		LocalOffset: -153,-204,509, -153,204,509
@@ -8501,8 +8372,6 @@ TSREPAIR:
 		Step: 20
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 5c0
 	Armament:
 		Weapon: TSRepair
 		TargetRelationships: Ally
@@ -8579,8 +8448,6 @@ TSTTNK:
 		Step: 40
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	RevealOnFire:
 		ArmamentNames: primary, deployed
 	DamageMultiplier:
@@ -8712,10 +8579,8 @@ TSART2:
 		Step: 12
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
 	Turreted:
-		TurnSpeed: 24 #3
+		TurnSpeed: 24
 	Armament@PRIMARY:
 		Weapon: TS155mm
 		LocalOffset: 407,0,362
@@ -8787,8 +8652,6 @@ TSSUBTANK:
 		Step: 40
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Armament@PRIMARY:
 		Weapon: TSFireballLauncher
 	SelectionDecorations:
@@ -8835,8 +8698,6 @@ tssgen:
 		HpPerStep: 2637
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 5c0
 	SelectionDecorations:
 	Selectable:
 	Inherits@EXT: ^ExternalConditions ##########
@@ -8908,8 +8769,6 @@ tslpst:
 		HpPerStep: 2637
 	Armor:
 		Type: Wood
-	RevealsShroud:
-		Range: 7c0
 	Inherits@EXT: ^ExternalConditions ##########
 	WithVoxelBody:
 	Voiced:
@@ -8974,9 +8833,9 @@ TSWINI2:
 	Health:
 		HP: 35000
 	Repairable:
-		HpPerStep: 1750 #20
+		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
-		Step: 14 #2500
+		Step: 14
 	Armor:
 		Type: Light
 	Turreted:
@@ -9032,9 +8891,9 @@ TSCAR2:
 	Health:
 		HP: 22500
 	Repairable:
-		HpPerStep: 1125 #20
+		HpPerStep: 1125
 	ChangesHealth@SelfHealing:
-		Step: 9 #2500
+		Step: 9
 	Turreted:
 		TurnSpeed: 36
 		Offset: 0,0,1
@@ -9086,9 +8945,9 @@ tsbowler:
 	Health:
 		HP: 40000
 	Repairable:
-		HpPerStep: 2000 #20
+		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
-		Step: 16 #2500
+		Step: 16
 	Turreted:
 		TurnSpeed: 24
 		Offset: -200,0,25
@@ -9142,9 +9001,9 @@ tsruiner:
 	Health:
 		HP: 35000
 	Repairable:
-		HpPerStep: 1750 #20
+		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
-		Step: 14 #2500
+		Step: 14
 	Turreted:
 		TurnSpeed: 30
 		Offset: 0,0,1
@@ -9204,13 +9063,13 @@ TS1TNK:
 	Health:
 		HP: 70000
 	Repairable:
-		HpPerStep: 3500 #20
+		HpPerStep: 3500
 	ChangesHealth@SelfHealing:
-		Step: 28 #2500
+		Step: 28
 	Armor:
 		Type: Medium
 	Turreted:
-		TurnSpeed: 18 #3
+		TurnSpeed: 18
 	Armament@PRIMARY:
 		Weapon: TS70mm
 		Recoil: 128
@@ -9267,15 +9126,13 @@ TS2TNK:
 	Health:
 		HP: 100000
 	Repairable:
-		HpPerStep: 5000 #20
+		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
-		Step: 40 #2500
+		Step: 40
 	Armor:
 		Type: Medium
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
-		TurnSpeed: 15 #3
+		TurnSpeed: 15
 	Armament@PRIMARY:
 		Weapon: TSHighVelocity2
 		Recoil: 128
@@ -9334,15 +9191,13 @@ TS3TNK:
 	Health:
 		HP: 250000
 	Repairable:
-		HpPerStep: 10000 #20
+		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
-		Step: 80 #2500
+		Step: 80
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
-		TurnSpeed: 13 #3
+		TurnSpeed: 13
 	AttackTurreted:
 	WithSpriteTurret:
 	Armament@PRIMARY:
@@ -9399,13 +9254,11 @@ tsclosh:
 	Health:
 		HP: 120000
 	Repairable:
-		HpPerStep: 6000 #20
+		HpPerStep: 6000
 	ChangesHealth@SelfHealing:
-		Step: 48 #2500
+		Step: 48
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Armament@PRIMARY:
 		Weapon: MutFlamer
 		Recoil: 128
@@ -9460,13 +9313,11 @@ TSFTNK:
 	Health:
 		HP: 200000
 	Repairable:
-		HpPerStep: 10000 #20
+		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
-		Step: 80 #2500
+		Step: 80
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Armament@PRIMARY:
 		Weapon: MutHFlamer
 		LocalOffset: 512,128,42, 512,-128,42
@@ -9523,13 +9374,11 @@ TS4TNK:
 	Health:
 		HP: 1000000
 	Repairable:
-		HpPerStep: 50000 #20
+		HpPerStep: 50000
 	ChangesHealth@SelfHealing:
-		Step: 400 #2500
+		Step: 400
 	Armor:
 		Type: Superheavy
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
 		TurnSpeed: 10
 	Armament@PRIMARY:
@@ -9588,8 +9437,6 @@ TS4TNK2:
 		BuildPaletteOrder: 200
 		Prerequisites: ~tsgtweapmutant, tsfgttech, ~uptschemmammoth
 		Queue: Vehicle, RAVehicle
-		BuildDuration: 1250
-		BuildDurationModifier: 100
 		Description: Mutant experimental fire support tank. Strong vs Everything.
 	Mobile:
 		Speed: 60
@@ -9599,13 +9446,11 @@ TS4TNK2:
 	Health:
 		HP: 400000
 	Repairable:
-		HpPerStep: 20000 #20
+		HpPerStep: 20000
 	ChangesHealth@SelfHealing:
-		Step: 160 #2500
+		Step: 160
 	Armor:
 		Type: Superheavy
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
 		TurnSpeed: 12
 	Armament@PRIMARY:
@@ -9665,13 +9510,11 @@ TSARTY:
 	Health:
 		HP: 85000
 	Repairable:
-		HpPerStep: 4250 #20
+		HpPerStep: 4250
 	ChangesHealth@SelfHealing:
-		Step: 34 #2500
+		Step: 34
 	Armor:
 		Type: Medium
-	RevealsShroud:
-		Range: 7c0
 	Armament@PRIMARY:
 		Weapon: TSHighVelocity
 		Recoil: 128
@@ -9730,13 +9573,11 @@ tsarty_bus:
 	Health:
 		HP: 200000
 	Repairable:
-		HpPerStep: 10000 #20
+		HpPerStep: 10000
 	ChangesHealth@SelfHealing:
-		Step: 80 #2500
+		Step: 80
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 7c0
 	Armament@PRIMARY:
 		Weapon: TSBusMortar
 		Recoil: 200
@@ -9821,8 +9662,6 @@ tsnomad:
 	-Power:
 	Armor:
 		Type: Superheavy
-	RevealsShroud:
-		Range: 7c0
 	Armament:
 		Weapon: TSNomadGun
 		Recoil: 128
@@ -9901,13 +9740,11 @@ tsmlrs:
 	Health:
 		HP: 40000
 	Repairable:
-		HpPerStep: 2000 #20
+		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
-		Step: 16 #2500
+		Step: 16
 	Armor:
 		Type: Medium
-	RevealsShroud:
-		Range: 7c0
 	Armament@PRIMARY:
 		Weapon: TSMLRSMissile
 		Recoil: 64
@@ -9971,14 +9808,12 @@ tsm113:
 	Health:
 		HP: 50000
 	Repairable:
-		HpPerStep: 2500 #20
+		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
-		Step: 20 #2500
+		Step: 20
 	Repairable:
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
 	Armament@PRIMARY:
 		Weapon: TSAdatsMissile
 		LocalOffset: 85,0,171
@@ -10056,13 +9891,11 @@ tsapctruck:
 	Health:
 		HP: 80000
 	Repairable:
-		HpPerStep: 4000 #20
+		HpPerStep: 4000
 	ChangesHealth@SelfHealing:
-		Step: 32 #2500
+		Step: 32
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
 	Armament:
 		Weapon: TSMutApcCannon
 		LocalOffset: 85,0,171
@@ -10495,8 +10328,6 @@ TSTTNKCABAL:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~tsntweapcabal, tsntradrcabal
-		BuildDurationModifier: 100
-		BuildDuration: 375
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
@@ -10510,10 +10341,8 @@ TSTTNKCABAL:
 		Step: 40
 	Armor:
 		Type: Heavy
-	RevealsShroud:
-		Range: 6c0
 	Turreted:
-		TurnSpeed: 15 #3
+		TurnSpeed: 15
 		Offset: -500,1,1
 	Armament@PRIMARY:
 		Weapon: TS120mm
@@ -10564,8 +10393,6 @@ tsttnkcabal_backup:
 		BuildPaletteOrder: 50
 		Prerequisites: ~tsntweapcabal, ~disabled
 		Queue: Disabled
-		BuildDurationModifier: 100
-		BuildDuration: 375
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
@@ -10633,7 +10460,7 @@ TSSAPCCABAL:
 		Range: 5c0
 		RequiresCondition: !submerged
 	Turreted:
-		TurnSpeed: 20 #3
+		TurnSpeed: 20
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -10677,7 +10504,6 @@ TST1000:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tsnthand2, tscabaltech
-		BuildDurationModifier: 50
 		BuildLimit: 1
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
@@ -10765,15 +10591,12 @@ TSDEFENDER:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
 		BuildLimit: 1
-		BuildDurationModifier: 25
 		Prerequisites: ~tsntweapcabal, tscore
 		Description: Superheavy CABAL epic unit.\n Strong vs ground targets
 	Mobile:
 		Speed: 50
 	Passenger:
 		Weight: 12
-	RevealsShroud:
-		Range: 7c0
 	DetectCloaked:
 		Range: 6c0
 	Armament:
@@ -11241,9 +11064,6 @@ TSTRNSPORT:
 		HP: 47500
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
-		Type: CenterPosition
 	RenderSprites:
 	SpawnActorOnDeath:
 		Actor: TSTRNSPORT.Husk
@@ -11311,9 +11131,6 @@ tscarrycabal:
 		HP: 47500
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
-		Type: CenterPosition
 	RenderSprites:
 	SpawnActorOnDeath:
 		Actor: tscarrycabal.Husk
@@ -11381,9 +11198,6 @@ TSTRNSPORTMUTANT:
 		HP: 17500
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
-		Type: CenterPosition
 	RenderSprites:
 	SpawnActorOnDeath:
 		Actor: TSTRNSPORT.Husk
@@ -11434,9 +11248,6 @@ TSSCRIN:
 		HpPerStep: 3000
 	ChangesHealth@SelfHealing:
 		Step: 24
-	RevealsShroud:
-		Range: 7c0
-		Type: GroundPosition
 	Armament@PRIMARY:
 		Weapon: TSProton
 		LocalOffset: 0,0,0
@@ -11503,9 +11314,6 @@ TSSCRINCABAL:
 		HpPerStep: 3000
 	ChangesHealth@SelfHealing:
 		Step: 24
-	RevealsShroud:
-		Range: 7c0
-		Type: GroundPosition
 	Armament@PRIMARY:
 		Weapon: TSHunterKillerLasers
 		LocalOffset: 0,0,0
@@ -11606,9 +11414,6 @@ TSAPACHENOD:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	RevealsShroud:
-		Range: 7c0
-		Type: GroundPosition
 	Armament@PRIMARY:
 		Weapon: TSHarpyClaw
 		LocalOffset: 0,0,0
@@ -11717,11 +11522,9 @@ TSAPACHEMUTANT:
 	Health:
 		HP: 32500
 	Repairable:
-		HpPerStep: 1625 #20
+		HpPerStep: 1625
 	ChangesHealth@SelfHealing:
-		Step: 13 #2500
-	RevealsShroud:
-		Range: 7c0
+		Step: 13
 	Armament@PRIMARY:
 		Weapon: TSCobraMissile
 		LocalOffset: 0,121,271, 0,-121,271
@@ -11818,9 +11621,6 @@ TSAPACHECABAL:
 		HP: 22500
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
-		Type: GroundPosition
 	Armament@PRIMARY:
 		Weapon: TSHunterKillerLasers
 		LocalOffset: 0,0,0
@@ -11915,11 +11715,9 @@ TSHELI:
 	Health:
 		HP: 30000
 	Repairable:
-		HpPerStep: 1500 #20
+		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
-		Step: 12 #2500
-	RevealsShroud:
-		Range: 7c0
+		Step: 12
 	Armament@PRIMARY:
 		Weapon: TSApacheMissile
 		LocalOffset: 0,0,0
@@ -12026,11 +11824,9 @@ TSHIND:
 	Health:
 		HP: 25000
 	Repairable:
-		HpPerStep: 1250 #20
+		HpPerStep: 1250
 	ChangesHealth@SelfHealing:
-		Step: 10 #2500
-	RevealsShroud:
-		Range: 7c0
+		Step: 10
 	Armament@PRIMARY:
 		Weapon: TSWaspClaw
 		LocalOffset: 0,0,0
@@ -12126,11 +11922,9 @@ tscropplane:
 	Health:
 		HP: 75000
 	Repairable:
-		HpPerStep: 3750 #20
+		HpPerStep: 3750
 	ChangesHealth@SelfHealing:
-		Step: 30 #2500
-	RevealsShroud:
-		Range: 7c0
+		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSCropBomb
 		LocalOffset: 0,0,0
@@ -12218,11 +12012,9 @@ tsflocust:
 	Health:
 		HP: 115000
 	Repairable:
-		HpPerStep: 5750 #20
+		HpPerStep: 5750
 	ChangesHealth@SelfHealing:
-		Step: 46 #2500
-	RevealsShroud:
-		Range: 7c0
+		Step: 46
 	Armament@PRIMARY:
 		Weapon: TSLocustBomb
 		LocalOffset: 0,0,0
@@ -12388,9 +12180,6 @@ TSTRAN:
 		HP: 18000
 	Armor:
 		Type: Light
-	RevealsShroud:
-		Range: 7c0
-		Type: GroundPosition
 	-WithShadow:
 	SelectionDecorations:
 	Selectable:
