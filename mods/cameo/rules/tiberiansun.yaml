@@ -13145,7 +13145,7 @@ forgotten_upgrade_chemicalweapons:
 
 ^TiberiumAdaptability:
 	GrantConditionOnPrerequisite@forgotten_upgrade_tiberiumadaptability:
-		Condition: up_wtiberiumadaptability
+		Condition: forgotten_upgrade_tiberiumadaptability
 		Prerequisites: forgotten_upgrade_tiberiumadaptability
 	ChangesHealth@forgotten_upgrade_tiberiumadaptability:
 		PercentageStep: 1
