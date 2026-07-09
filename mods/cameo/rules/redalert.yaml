@@ -2782,6 +2782,44 @@ hammertank:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: ra_upgrade_shtoradefensesystem, ra_upgrade_autoloaders, ra_upgrade_unstableisotopes, ra_upgrade_nuclearshells, ra_upgrade_stalinium
+		
+sovgorynych:
+	Inherits: ^Tank
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 190
+		Prerequisites: ~raweap
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Gorynych Tank
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 70
+		TurnSpeed: 12
+	Selectable:
+		Bounds: 1280, 1280
+		DecorationBounds: 1280, 1280
+	Voiced:
+		VoiceSet: RussianVehicleVoice
+	RenderSprites:
+		Image: sovgorynych
+		PlayerPalette: player_rgba
+	Turreted:
+		TurnSpeed: 20
+	WithSpriteTurret:
+	Armament:
+		Weapon: BigFlamer
+		LocalOffset: 512,128,42, 512,-128,42
+	AttackTurreted:
+	FireWarheadsOnDeath:
+		Weapon: FlametankExplode
 
 TTNK2:
 	Inherits: ^Tank
@@ -4225,6 +4263,40 @@ QTNK:
 		PlayerPalette: raplayer
 	ActorStatValues:
 		Upgrades: ra_doctrine_inferno, ra_doctrine_heavyarmor, ra_doctrine_nuclearwar, ra_upgrade_unstableisotopes, ra_upgrade_scorchedearth
+
+sovstalinfist:
+	Inherits: ^RAMCV
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 190
+		Prerequisites: ~stek
+		BuildLimit: 1
+	Valued:
+		Cost: 7000
+	Tooltip:
+		Name: Stalin Fist 
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 100000
+	Armor:
+		Type: Heavy
+	Mobile:
+		Speed: 60
+		TurnSpeed: 12
+	SelectionDecorations:
+	Selectable:
+		Bounds: 3072, 3072
+		DecorationBounds: 3072, 3072
+	Transforms:
+		IntoActor: ra_gigafactory
+		Offset: -1,0
+		Facing: 0
+	Voiced:
+		VoiceSet: RussianVehicleVoice
+	RenderSprites:
+		Image: sovstalinfist
+		PlayerPalette: player_rgba
 
 ####################################################################################################
 #		RA Aircraft

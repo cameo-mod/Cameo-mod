@@ -3,8 +3,8 @@
 # TA Infantry
 #######################################
 taforgotten:
-	Inherits: tsmutant
-	Defaults: tsmutant
+	Inherits: forgotten_mutant
+	Defaults: forgotten_mutant
 	icon: taforgottenicon
 	
 tae1.gdi:
@@ -94,7 +94,7 @@ tae3mutant:
 	die4: frag3
 		Length: *
 tablackhand:
-	Inherits: tsweedguy
+	Inherits: forgotten_chemsprayinfantry
 	Defaults: tsweed
 	-muzzle:
 	muzzle:
@@ -197,8 +197,8 @@ tanodcommando:
 		AddExtension: False
 
 taforgotten:
-	Inherits: tsmutant
-	Defaults: tsmutant
+	Inherits: forgotten_mutant
+	Defaults: forgotten_mutant
 	icon: taforgottenicon
 
 tatrooper:
@@ -212,13 +212,13 @@ tasnipe:
 	Defaults: ra2snipe
 	icon: tasnipericon
 tamutsnipe:
-	Inherits: tsumagon
-	Defaults: tsumagon
+	Inherits: forgotten_mutantsniper
+	Defaults: forgotten_mutantsniper
 	icon: tamutsnipeicon.shp
 		AddExtension: False
 tamutcommando:
-	Inherits: tsghost
-	Defaults: tsghost
+	Inherits: forgotten_ghoststalker
+	Defaults: forgotten_ghoststalker
 	icon: tamutcommandoicon.shp
 		AddExtension: False
 #######################################

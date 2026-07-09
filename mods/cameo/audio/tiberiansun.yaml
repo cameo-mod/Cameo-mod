@@ -27,7 +27,7 @@ TSRocket:
 		Action: 15-i008, 15-i014, 15-i026
 		Attack: 15-i008, 15-i014, 15-i026, 15-i050, 15-i060
 
-TSUmagon:
+forgotten_mutantsniper:
 	Inherits: TSCivilianFemale
 	Voices:
 		Select: 10-i000, 10-i002, 10-i004, 10-i006
@@ -35,7 +35,7 @@ TSUmagon:
 		Action: 10-i016, 10-i020, 10-i022
 		Attack: 10-i024, 10-i026, 10-i028, 10-i030
 
-TSGhost:
+forgotten_ghoststalker:
 	Inherits: ^TSDeath
 	Voices:
 		Select: 14-i000, 14-i002, 14-i004
@@ -107,7 +107,7 @@ TSCyborgCommando:
 		Attack: 23-i014, 23-i018, 23-i020, 23-i022
 		CoreDefenderBuild: 99-n464
 
-TSMutant:
+forgotten_mutant:
 	Inherits: TSInfantry
 	Voices:
 		Select: 15-i032, 15-i048
@@ -162,7 +162,7 @@ TSMech:
 		Action: 15-i024, 15-i044
 		Attack: 15-i006, 15-i046
 
-TSHeli:
+forgotten_apache:
 	Voices:
 		Select: 30-i000, 30-i002, 30-i004, 30-i006
 		Move: 30-i014, 30-i016, 30-i018, 30-i022

@@ -82,6 +82,9 @@ def proposed_id(m: Model, faction: str, lname: str) -> str:
     # display names often repeat the faction ("CABAL Core") — dedupe
     if name.startswith(slug + "_"):
         name = name[len(slug) + 1:]
+    # RA1 baseline: the name is ONE group without underscores
+    # (ra_heatraytank, ra_upgrade_nuclearshells), variants stay suffixed
+    name = name.replace("_", "")
     parts = [p for p in (game, slug, marker, name) if p]
     out = "_".join(parts)
     return re.sub(r"_{2,}", "_", out)

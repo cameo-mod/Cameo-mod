@@ -5331,6 +5331,31 @@ monstertank:
 	icon:
 		Filename: monstertankicon.png
 
+sovstalinfist:
+	Defaults:
+	idle:
+		Filename: sovstalinfist.png
+		Facings: 64
+		Scale: 0.8
+	icon:
+		Filename: sovstalinfisticon.png
+
+sovgorynych:
+	idle:
+		Filename: sovgorynych.png
+		Facings: 64
+		Start: 0
+		Length: 1
+		Scale: 0.5		
+	turret:
+		Filename: sovgorynych.png
+		Facings: 64
+		Start: 64
+		Length: 1
+		Scale: 0.5		
+	icon:
+		Filename: sovgorynychicon.png
+		
 rocketangel:
 	Defaults:
 		Filename: rocketangel.shp

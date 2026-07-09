@@ -392,17 +392,17 @@ icon file        :=  <actor_id>_icon.<ext>
 - **`game`** — required ONLY when the same faction name exists in multiple source games. Registry of game prefixes (fixed, lowercase): `td`, `ts`, `ra1`, `ra2` (+ future prefixes as collisions appear). Examples: `td_gdi_*` vs `ts_gdi_*`; `ra1_soviet_*` vs `ra2_soviet_*`. Every faction that exists once (yuri, cabal, forgotten, steel_consortium, futuretech, schwarzer_mond, latin_syndicate, asian_alliance, japan, naxis, tkm, atreides, harkonnen, ordos, ixian, terran, zerg, protoss, humans, orcs…) omits the game prefix; a prefix is added the day a collision actually appears, not preemptively.
 - **`faction`** — the canonical faction slug from the registry (§9.2). Never abbreviate ad hoc; never two spellings (this kills the Consortium/Steel Consortium drift — use full words, `steel_consortium`; abbreviations are how drift starts).
 - **`upgrade|promotion|doctrine`** — full words, only on tech-tree items: `upgrade` for cash research, `promotion` for rank-gated unlocks, `doctrine` for mutually-exclusive doctrine picks. Team-proxy dummies append `_proxy_actor` (existing RA1 convention).
-- **`name`** — the unit's snake_case display-ish name: `titan`, `slave_miner`, `sky_hammer`, `ghost_stalker`.
+- **`name`** — the unit's display-ish name as ONE lowercase group without separators (RA1 baseline: `heatraytank`, `nuclearshells`): `titan`, `slaveminer`, `skyhammer`, `ghoststalker`.
 - **`variant`** — optional: `_mk2`, `_elite`, `_husk`, `_water` (movement variants), `_ai` (AI-only variants — historical "Special Bot variants" should be explicit).
 
 **Examples**
 ```
 ts_gdi_titan                ts_gdi_titan_husk
-ts_nod_obelisk              cabal_obelisk_of_darkness
-yuri_slave_miner            steel_consortium_sky_hammer
-forgotten_ghost_stalker     ra2_allies_upgrade_chromium_ion_plating
+ts_nod_obelisk              cabal_obeliskofdarkness
+yuri_slaveminer             steel_consortium_skyhammer
+forgotten_ghoststalker      ra2_allies_upgrade_chromiumionplating
 protoss_adept               ordos_raider
-cabal_upgrade_dark_armament forgotten_promotion_bowler
+cabal_upgrade_darkarmament  forgotten_promotion_bowler
 ```
 Icons: `ts_gdi_titan_icon.png`. Portraits/cameos, if distinct from icons: `_cameo`. Build palettes/other per-actor art keep the actor id as stem.
 

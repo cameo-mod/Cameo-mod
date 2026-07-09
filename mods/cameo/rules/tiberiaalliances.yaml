@@ -81,13 +81,13 @@ World:
 		ClassName: Light Support
 		Factions: taforgotten
 		BaseActor: mcv.tamutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank
 	StartingUnits@heavytaforgotten:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: taforgotten
 		BaseActor: mcv.tamutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk,ts2tnk,ts2tnk,ts2tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank,forgotten_warriortank,forgotten_warriortank,forgotten_warriortank
 	StartingUnits@mcvonlyrataelectro:
 		Class: none
 		ClassName: MCV Only
@@ -98,13 +98,13 @@ World:
 		ClassName: Light Support
 		Factions: taelectro
 		BaseActor: mcv.taelectro
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank
 	StartingUnits@heavytaelectro:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: taelectro
 		BaseActor: mcv.taelectro
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk,ts2tnk,ts2tnk,ts2tnk
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank,forgotten_warriortank,forgotten_warriortank,forgotten_warriortank
 
 Player:
 ^TALevelUpgradeable:
@@ -201,7 +201,7 @@ TAE1.NOD:
 		RequiresCondition: taupstealth1
 		IsPlayerPalette: true
 TAFORGOTTEN:
-	Inherits: TSMUTANT
+	Inherits: forgotten_mutant
 	Valued:
 		Cost: 100
 	Tooltip:
@@ -246,7 +246,7 @@ TAE3.NOD:
 		RequiresCondition: taupdefence1
 		Modifier: 75
 TABLACKHAND:
-	Inherits: TSWEEDGUY
+	Inherits: forgotten_chemsprayinfantry
 	Valued:
 		Cost: 250
 	Tooltip:
@@ -388,7 +388,7 @@ TANODCOMMANDO:
 		RequiresCondition: taupstealth2
 		IsPlayerPalette: true
 TAMUTSNIPE:
-	Inherits: TSUMAGON
+	Inherits: forgotten_mutantsniper
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -402,7 +402,7 @@ TAMUTSNIPE:
 	RenderSprites:
 		Image: tamutsnipe
 TAMUTCOMMANDO:
-	Inherits: TSGHOST
+	Inherits: forgotten_ghoststalker
 	RenderSprites:
 		Image: tamutcommando
 	Valued:
@@ -412,7 +412,7 @@ TAMUTCOMMANDO:
 		BuildLimit: 0
 		Prerequisites: barracks, upgrade.tamutbarr3
 	UpdatesPlayerStatistics:
-		OverrideActor: tsghost
+		OverrideActor: forgotten_ghoststalker
 	Armament@PRIMARY:
 		Weapon: MutAPRifleE
 		LocalOffset: 256,43,256

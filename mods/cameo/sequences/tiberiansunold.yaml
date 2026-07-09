@@ -197,16 +197,16 @@ tse3:
 		Filename: tse3icon.shp
 		AddExtension: False
 
-tsumagon:
+forgotten_mutantsniper:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsumagon.shp
+		Filename: forgotten_mutantsniper.shp
 	icon:
-		Filename: tsumagonicon.shp
+		Filename: forgotten_mutantsniper_icon.shp
 		AddExtension: False
 
-tsghost:
+forgotten_ghoststalker:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
@@ -214,7 +214,7 @@ tsghost:
 	icon:
 		Filename: tsghosticon.shp
 
-tsmhijack:
+forgotten_mutanthijacker:
 	Inherits: ^TSBasicInfantry
 	Defaults:
 		Filename: tsghost.shp
@@ -228,7 +228,7 @@ tschamspy:
 	icon:
 		Filename: tsspyicon.shp
 
-tsmutant:
+forgotten_mutant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
@@ -236,7 +236,7 @@ tsmutant:
 	icon:
 		Filename: tsmutanticon.shp
 
-tsmwmn:
+forgotten_mutantsoldier:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
@@ -244,7 +244,7 @@ tsmwmn:
 	icon:
 		Filename: tsmutant2icon.shp
 
-tsmutant3:
+forgotten_mutantsergeant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
@@ -259,9 +259,9 @@ tstratos:
 	icon:
 		Filename: tsmutcicon.shp
 
-tsweedguy:
+forgotten_chemsprayinfantry:
 	Defaults: 
-		Filename: tsweed.shp
+		Filename: forgotten_chemsprayinfantry.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -365,11 +365,11 @@ tsweedguy:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: tstoxinicon.shp
+		Filename: forgotten_chemsprayinfantry_icon.shp
 
-tsdoggie:
+forgotten_tiberianfiend:
 	Defaults:
-		Filename: tsdoggie.shp
+		Filename: forgotten_tiberianfiend.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -725,37 +725,37 @@ tsharv:
 # 	icon: tsmempicon.png
 # 		AddExtension: false
 
-# ts1tnk:
+# forgotten_rattytank:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
 # 	icon: tsltnkicon
 
-# tswini2:
+# forgotten_missilevan:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
 # 	icon: tswini2icon
 
-# tscar2:
+# forgotten_raidercar:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
 # 	icon: tsraidcaricon
 
-# ts2tnk:
+# forgotten_warriortank:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
 # 	icon: tsmtnkicon
 
-# ts3tnk:
+# forgotten_scoopertank:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
 # 	icon: tshtnkicon
 
-# tsftnk:
+# forgotten_flametank:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
@@ -986,7 +986,7 @@ tsmcv:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tssmcvicon.shp
+		Filename: forgotten_mobileconstructionvehicle_icon.shp
 
 # tsart2turret:
 # 	idle: tsgtarty
@@ -1021,32 +1021,32 @@ tssapc:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tssubapcicon.shp
+		Filename: forgotten_scarabapc_icon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
-# ts4tnk:
+# forgotten_experimentalmammothtank:
 # 	idle: invisibleitem
 # 	icon: ts4tnkicon
 # 	muzzle: gunfire2
 # 		Length: 5
 
-# tsmlrs:
+# forgotten_mlrs:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
 # 	icon: msamicnh.tem
 # 		AddExtension: False
 
-# tsarty:
+# forgotten_tankkiller:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
 # 	icon: artyicnh.tem
 # 		AddExtension: False
 
-# tsm113:
+# forgotten_m113adats:
 # 	idle: invisibleitem
 # 	muzzle: gunfire2
 # 		Length: 5
@@ -2698,7 +2698,7 @@ tsgtsilo.gdi:
 # 		Start: 4
 # 		Length: 8
 
-# tsheli:
+# forgotten_apache:
 # 	idle: invisibleitem
 # 	icon: tsharpyicon
 # 	rotor: lrotor
@@ -2707,7 +2707,7 @@ tsgtsilo.gdi:
 # 		Start: 4
 # 		Length: 8
 
-# tshind:
+# forgotten_wasp:
 # 	idle: invisibleitem
 # 	icon: tsharpyicon
 # 	rotor: lrotor
@@ -2841,7 +2841,7 @@ tsjumpjet:
 # 		Length: 6
 # 	icon: tsjumpjeticon
 
-# tsveinhole:
+# forgotten_veinhole:
 # 	idle:
 # 	recoil:
 # 		Length: 12
@@ -2862,7 +2862,7 @@ tsjumpjet:
 # 			CAMEO: TEMPERAT
 # 		Length: *
 # 		Offset: -1,-1
-# 	icon: gunicnh.tem
+# 	icon: forgotten_veinhole_icon.tem
 # 		AddExtension: False
 
 # tsveinsmoke:

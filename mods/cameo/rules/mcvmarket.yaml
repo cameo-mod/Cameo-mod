@@ -251,7 +251,7 @@ MMTSNODMCV:
 		Prerequisites: !mmtsnod
 
 MMTSMUTANTMCV:
-	Inherits@MCV: TSMCVMUTANT
+	Inherits@MCV: forgotten_mobileconstructionvehicle
 	Tooltip:
 		Name: Mobile Construction Vehicle (Mutants)
 	Buildable:

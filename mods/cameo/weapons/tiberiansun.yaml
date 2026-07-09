@@ -5537,7 +5537,7 @@ MutSAPC:
 		ValidTargets: Ground, Air, Water
 		ImpactActors: false
 	Warhead@2: SpawnActor
-		Actors: tssapc.mut
+		Actors: forgotten_scarabapc
 		Range: 3
 		Delay: 10
 
@@ -5613,35 +5613,35 @@ NODMutant:
 		ValidTargets: Ground, Air, Water
 		ImpactActors: false
 	Warhead@2: SpawnActor
-		Actors: tsmutantsp,tsmutantsp
+		Actors: forgotten_mutant_sp,forgotten_mutant_sp
 		Range: 3
 		Delay: 10
 
 NODMutant1:
 	Inherits: NODMutant
 	Warhead@2: SpawnActor
-		Actors: tsmwmnsp
+		Actors: forgotten_mutantsoldier_sp
 		Range: 3
 		Delay: 10
 
 NODMutant2:
 	Inherits: NODMutant
 	Warhead@2: SpawnActor
-		Actors: tsumagonsp
+		Actors: forgotten_mutantsniper_sp
 		Range: 3
 		Delay: 10
 
 NODMutant3:
 	Inherits: NODMutant
 	Warhead@2: SpawnActor
-		Actors: tsghostsp
+		Actors: forgotten_ghoststalker_sp
 		Range: 3
 		Delay: 10
 
 NODMutant4:
 	Inherits: NODMutant
 	Warhead@2: SpawnActor
-		Actors: tsmutant3
+		Actors: forgotten_mutantsergeant
 		Range: 3
 		Delay: 10
 
@@ -5666,7 +5666,7 @@ ViscSpawner:
 FiendSpawner:
 	Inherits: FloaterSpawner
 	Warhead@2: SpawnActor
-		Actors: tsdoggiew
+		Actors: forgotten_tiberianfiend_wild
 
 TunnelDisappear:
 	ReloadDelay: 10

@@ -2848,10 +2848,10 @@
 			potnk.steel: battlefortresspassenger
 			scpythean: battlefortresspassenger
 			scbehemoth: battlefortresspassenger
-			tsm113: battlefortresspassenger
+			forgotten_m113adats: battlefortresspassenger
 			tkmbattlebus: battlefortresspassenger
-			tsnomad: battlefortresspassenger
-			tsarty_bus: battlefortresspassenger
+			forgotten_nomadbarracks: battlefortresspassenger
+			forgotten_thumperbus: battlefortresspassenger
 	MassEntersCargo:
 	SharedPassenger:
 		CargoType: Infantry
@@ -6502,7 +6502,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,tsgthpad,tsgthpadmutant,tsnthpad,tsnthpad2
+		RearmActors: dummy_dock,hpad.gdi,hpad.nod,rahpad,raafld,ra_largeairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,tsgthpad,forgotten_helipad,tsnthpad,tsnthpad2
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6522,11 +6522,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal, plymouth_garage, eden_garage
+		RepairActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, forgotten_servicedepot, tsgtdeptcabal, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, tsgtdeptmutant, tsgtdeptcabal, plymouth_garage, eden_garage
+		RearmActors: fix.gdi, fix.nod, rafix.allies, rafix.soviet, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, tsgtdeptgdi, tsgtdeptnod, forgotten_servicedepot, tsgtdeptcabal, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -8778,8 +8778,8 @@ CPQDEBUGDUMMY:
 			# tse1para: ifv-mg
 			# tscyborg: fv-hvmg
 			# tscyborgc: fv-hvmg
-			# tsmutant: ifv-mg
-			# tsmwmn: ifv-mg
+			# forgotten_mutant: ifv-mg
+			# forgotten_mutantsoldier: ifv-mg
 			# sczergling: ifv-mg
 			# gle1: ifv-mg
 			# che1: ifv-mg
@@ -8795,7 +8795,7 @@ CPQDEBUGDUMMY:
 			# rae2: ifv-cannon
 			# tse2: ifv-cannon
 			# tse2para: ifv-cannon
-			# tsmutant3: ifv-cannon
+			# forgotten_mutantsergeant: ifv-cannon
 			# che2: ifv-cannon
 			# leange2: ifv-cannon
 			# plast.asian: ifv-cannon
@@ -8810,7 +8810,7 @@ CPQDEBUGDUMMY:
 			# yrslav: ifv-repair
 			# tsengineer: ifv-repair
 			# tsengineer2: ifv-repair
-			# tsmhijack: ifv-thief
+			# forgotten_mutanthijacker: ifv-thief
 			# rathf: ifv-thief
 			# glhijack: ifv-thief
 			# chhacker: ifv-repair
@@ -8843,7 +8843,7 @@ CPQDEBUGDUMMY:
 			# scfirebat: ifv-fire
 			# e5: ifv-chem
 			# ra2deso: ifv-chem
-			# tsweedguy: ifv-chem
+			# forgotten_chemsprayinfantry: ifv-chem
 			# gle1toxin: ifv-thrax
 			# rmbo: ifv-hero
 			# e7: ifv-hero
@@ -8853,7 +8853,7 @@ CPQDEBUGDUMMY:
 			# ra2seal: ifv-hero
 			# tscyc2: ifv-hero
 			# tscyc2.cabal: ifv-hero
-			# tsghost: ifv-hero
+			# forgotten_ghoststalker: ifv-hero
 			# tsghost.mutant: ifv-hero
 			# usaburton: ifv-hero
 			# susaburton: ifv-hero
@@ -8865,7 +8865,7 @@ CPQDEBUGDUMMY:
 			# ra2spy: ifv-spy
 			# shinobi.asian: ifv-spy
 			# tschamspy: ifv-sniper
-			# tsumagon: ifv-sniper
+			# forgotten_mutantsniper: ifv-sniper
 			# glkell: ifv-sniper
 			# leangkell: ifv-sniper
 			# glsabo: ifv-sniper
