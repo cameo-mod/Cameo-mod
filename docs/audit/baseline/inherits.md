@@ -107,7 +107,7 @@ _none found_
 | SCSTARPORTM | SCCOMMANDCENTERM | ? | ? | mods/cameo/rules/starcraft.yaml |
 | TECHBCANNON2 | TECHBCANNON | ? | ? | mods/cameo/rules/tech.yaml |
 | TSCYC2 | TSCYBORG | ? | ? | mods/cameo/rules/tiberiansun.yaml |
-| TSDOGGIEW | tsdoggie | ? | ? | mods/cameo/rules/tiberiansun.yaml |
+| TSDOGGIEW | TSDOGGIE | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSE1.GDI | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSE1.NOD | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |
 | TSE1PARA | TSE1 | ? | ? | mods/cameo/rules/tiberiansun.yaml |

@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **550** across 1833 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (46)
@@ -629,6 +629,237 @@ _none found_
 | actor | actual | expected |
 |---|---|---|
 | lnaxis: twr.nax2 | prereqs: barr.nax2, conyard.nax2 (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
-| ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+
+
+## F14 — StartingUnits referencing nonexistent actors (crash class)  (0)
+
+_none found_
+
+
+## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (62)
+
+| actor | actual | expected |
+|---|---|---|
+| gdi: defaultgdia | total cost 1300 | target ~2000 (±15%) |
+| gdi: defaultgdia | e3 (cost 200) x2 vs e1 (cost 100) x1 | pricier units must not outnumber cheaper ones |
+| nod: defaultnoda | total cost 1300 | target ~2000 (±15%) |
+| nod: defaultnoda | bggy | light support must be Tier-1 only (producer-building prereqs only) |
+| allies: defaultallies | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| soviet: defaultsoviet | total cost 3000 | target ~2000 (±15%) |
+| soviet: defaultsoviet | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| modjapan: defaultmodjapan | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| tsgdi: defaulttsgdi | total cost 2460 | target ~2000 (±15%) |
+| tsgdi: defaulttsgdi | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| tsnod: defaulttsnod | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| forgotten: defaultforgotten | total cost 2890 | target ~2000 (±15%) |
+| forgotten: defaultforgotten | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| forgotten: defaultforgotten | tsmutant3 (cost 750) x2 vs tsmwmn (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: defaultforgotten | tsmutant3 (cost 750) x2 vs tscar2 (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: defaultforgotten | tsmutant3 (cost 750) x2 vs ts1tnk (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: defaultforgotten | tsmutant3, tsmwmn | light support must be Tier-1 only (producer-building prereqs only) |
+| cabal: defaultcabal | 3 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| ra2america: defaultra2allies | total cost 2650 | target ~2000 (±15%) |
+| ra2america: defaultra2allies | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| ra2russia: defaultra2soviet | total cost 2650 | target ~2000 (±15%) |
+| ra2russia: defaultra2soviet | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| yuri: defaultyuri | total cost 3350 | target ~2000 (±15%) |
+| yuri: defaultyuri | 6 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| yuri: defaultyuri | yrbrute (cost 400) x2 vs yrslav (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| asianalliance: defaultasianalliance | total cost 2650 | target ~2000 (±15%) |
+| asianalliance: defaultasianalliance | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| consortium: defaultconsortium | total cost 4750 | target ~2000 (±15%) |
+| consortium: defaultconsortium | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| consortium: defaultconsortium | qinf.steel (cost 1150) x2 vs manta.steel (cost 850) x1 | pricier units must not outnumber cheaper ones |
+| consortium: defaultconsortium | qinf.steel (cost 1150) x2 vs arty.steel (cost 1000) x1 | pricier units must not outnumber cheaper ones |
+| consortium: defaultconsortium | qinf.steel | light support must be Tier-1 only (producer-building prereqs only) |
+| syndicate: defaultsyndicate | total cost 8990 | target ~2000 (±15%) |
+| syndicate: defaultsyndicate | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| syndicate: defaultsyndicate | fftr.latin (cost 3000) x2 vs wirbelwind.nax (cost 1800) x1 | pricier units must not outnumber cheaper ones |
+| syndicate: defaultsyndicate | fftr.latin (cost 3000) x2 vs tiger.nax (cost 800) x1 | pricier units must not outnumber cheaper ones |
+| syndicate: defaultsyndicate | fftr.latin | light support must be Tier-1 only (producer-building prereqs only) |
+| naxis: defaultnaxis | total cost 3900 | target ~2000 (±15%) |
+| naxis: defaultnaxis | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| naxis: defaultnaxis | mp40.nax | light support must be Tier-1 only (producer-building prereqs only) |
+| lnaxis: defaultlnaxis | total cost 2710 | target ~2000 (±15%) |
+| lnaxis: defaultlnaxis | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| futuretech: defaultfuturetech | total cost 2850 | target ~2000 (±15%) |
+| futuretech: defaultfuturetech | 0 infantry : 7 vehicles | want ~5 infantry per vehicle |
+| futuretech: defaultfuturetech | robot_cannon.futu, robot_missiles.futu, wheel.futu | light support must be Tier-1 only (producer-building prereqs only) |
+| tkm: defaulttstkm | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| ordos: ordos_L | total cost 3300 | target ~2000 (±15%) |
+| ordos: ordos_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| ixian: ixian_L | total cost 3300 | target ~2000 (±15%) |
+| ixian: ixian_L | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| terran: defaultterran | total cost 2600 | target ~2000 (±15%) |
+| protoss: defaultprotoss | total cost 1500 | target ~2000 (±15%) |
+| protoss: defaultprotoss | 1 infantry : 1 vehicles | want ~5 infantry per vehicle |
+| protoss: defaultprotoss | sczealot | light support must be Tier-1 only (producer-building prereqs only) |
+| plymouthl: defaultplymouthl | total cost 3050 | target ~2000 (±15%) |
+| plymouthl: defaultplymouthl | 0 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| plymouthl: defaultplymouthl | plymouth_lynx_microwave (cost 500) x3 vs plymouth_scout (cost 350) x1 | pricier units must not outnumber cheaper ones |
+| plymouthl: defaultplymouthl | plymouth_lynx_rpg (cost 600) x2 vs plymouth_scout (cost 350) x1 | pricier units must not outnumber cheaper ones |
+| edenl: defaultedenl | total cost 4350 | target ~2000 (±15%) |
+| edenl: defaultedenl | 0 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| edenl: defaultedenl | eden_lynx_laser (cost 750) x3 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| edenl: defaultedenl | eden_lynx_railgun (cost 900) x2 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
+
+
+## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (112)
+
+| actor | actual | expected |
+|---|---|---|
+| gdi: heavygdia | total cost 3000 | target ~10000 (±15%) |
+| gdi: heavygdia | 6 infantry : 3 vehicles | want ~5 infantry per vehicle |
+| gdi: heavygdia | mtnk (cost 900) x2 vs jeep (cost 400) x1 | pricier units must not outnumber cheaper ones |
+| gdi: heavygdia | all units are Tier 1 | heavy support should mix all tiers |
+| gdi: heavygdib | total cost 3600 | target ~10000 (±15%) |
+| gdi: heavygdib | all units are Tier 1 | heavy support should mix all tiers |
+| nod: heavynoda | total cost 2800 | target ~10000 (±15%) |
+| nod: heavynoda | 6 infantry : 3 vehicles | want ~5 infantry per vehicle |
+| nod: heavynodb | total cost 2700 | target ~10000 (±15%) |
+| allies: heavyallies | total cost 3800 | target ~10000 (±15%) |
+| allies: heavyallies | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
+| allies: heavyallies | 2tnk (cost 700) x3 vs rae3 (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| allies: heavyallies | 2tnk (cost 700) x3 vs rajeep (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| allies: heavyallies | 2tnk (cost 700) x3 vs 1tnk (cost 500) x1 | pricier units must not outnumber cheaper ones |
+| allies: heavyallies | all units are Tier 1 | heavy support should mix all tiers |
+| soviet: heavysoviet | total cost 5000 | target ~10000 (±15%) |
+| soviet: heavysoviet | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| soviet: heavysoviet | 3tnk (cost 1000) x2 vs ftrk (cost 800) x1 | pricier units must not outnumber cheaper ones |
+| soviet: heavysoviet | all units are Tier 1 | heavy support should mix all tiers |
+| modjapan: heavymodjapan | total cost 6100 | target ~10000 (±15%) |
+| modjapan: heavymodjapan | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| modjapan: heavymodjapan | modtypej (cost 800) x2 vs modkubel (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| modjapan: heavymodjapan | modbggy (cost 900) x2 vs modkubel (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| modjapan: heavymodjapan | all units are Tier 1 | heavy support should mix all tiers |
+| tsgdi: heavytsgdi | total cost 5310 | target ~10000 (±15%) |
+| tsgdi: heavytsgdi | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
+| tsgdi: heavytsgdi | tsmmch (cost 950) x4 vs tse1 (cost 120) x3 | pricier units must not outnumber cheaper ones |
+| tsgdi: heavytsgdi | tsmmch (cost 950) x4 vs tse2 (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| tsgdi: heavytsgdi | tsmmch (cost 950) x4 vs tssmech (cost 550) x1 | pricier units must not outnumber cheaper ones |
+| tsgdi: heavytsgdi | all units are Tier 1 | heavy support should mix all tiers |
+| tsnod: heavytsnod | total cost 4610 | target ~10000 (±15%) |
+| tsnod: heavytsnod | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
+| tsnod: heavytsnod | tsttnk (cost 800) x4 vs tse1 (cost 120) x3 | pricier units must not outnumber cheaper ones |
+| tsnod: heavytsnod | tsttnk (cost 800) x4 vs tse3.nod (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| tsnod: heavytsnod | tsttnk (cost 800) x4 vs tsbggy (cost 450) x1 | pricier units must not outnumber cheaper ones |
+| tsnod: heavytsnod | all units are Tier 1 | heavy support should mix all tiers |
+| forgotten: heavyforgotten | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
+| forgotten: heavyforgotten | tsmutant3 (cost 750) x2 vs tsmwmn (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | tsmutant3 (cost 750) x2 vs tscar2 (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | tsmutant3 (cost 750) x2 vs ts1tnk (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tsmutant (cost 120) x2 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tsmwmn (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tsmutant3 (cost 750) x2 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tscar2 (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs ts1tnk (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| cabal: heavycabal | total cost 4400 | target ~10000 (±15%) |
+| cabal: heavycabal | 3 infantry : 5 vehicles | want ~5 infantry per vehicle |
+| cabal: heavycabal | tsttnk (cost 800) x3 vs tsbike (cost 550) x2 | pricier units must not outnumber cheaper ones |
+| cabal: heavycabal | all units are Tier 1 | heavy support should mix all tiers |
+| ra2america: heavyra2allies | total cost 6150 | target ~10000 (±15%) |
+| ra2america: heavyra2allies | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| ra2america: heavyra2allies | ra2mtnk (cost 750) x3 vs yrggi (cost 400) x2 | pricier units must not outnumber cheaper ones |
+| ra2america: heavyra2allies | ra2mtnk (cost 750) x3 vs ra2fv (cost 500) x2 | pricier units must not outnumber cheaper ones |
+| ra2america: heavyra2allies | all units are Tier 1 | heavy support should mix all tiers |
+| ra2russia: heavyra2soviet | total cost 5250 | target ~10000 (±15%) |
+| ra2russia: heavyra2soviet | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| yuri: heavyyuri | total cost 6250 | target ~10000 (±15%) |
+| yuri: heavyyuri | 6 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| yuri: heavyyuri | yrbrute (cost 400) x2 vs yrslav (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| yuri: heavyyuri | yrytnk (cost 1100) x2 vs yrslav (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| yuri: heavyyuri | yrltnk (cost 600) x4 vs yrinit (cost 200) x3 | pricier units must not outnumber cheaper ones |
+| yuri: heavyyuri | yrltnk (cost 600) x4 vs yrbrute (cost 400) x2 | pricier units must not outnumber cheaper ones |
+| yuri: heavyyuri | yrltnk (cost 600) x4 vs yrslav (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| yuri: heavyyuri | all units are Tier 1 | heavy support should mix all tiers |
+| asianalliance: heavyasianalliance | total cost 7650 | target ~10000 (±15%) |
+| asianalliance: heavyasianalliance | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| asianalliance: heavyasianalliance | lynx.asian (cost 850) x3 vs tkiller.asian (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| consortium: heavyconsortium | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| consortium: heavyconsortium | quantumtank.steel (cost 1600) x4 vs fedinf.steel (cost 200) x3 | pricier units must not outnumber cheaper ones |
+| consortium: heavyconsortium | quantumtank.steel (cost 1600) x4 vs qinf.steel (cost 1150) x2 | pricier units must not outnumber cheaper ones |
+| consortium: heavyconsortium | quantumtank.steel (cost 1600) x4 vs manta.steel (cost 850) x2 | pricier units must not outnumber cheaper ones |
+| syndicate: heavysyndicate | total cost 14790 | target ~10000 (±15%) |
+| syndicate: heavysyndicate | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| syndicate: heavysyndicate | fftr.latin (cost 3000) x2 vs ptnk.asian (cost 2400) x1 | pricier units must not outnumber cheaper ones |
+| naxis: heavynaxis | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| naxis: heavynaxis | wirbelwind.nax (cost 1800) x3 vs mp40.nax (cost 500) x2 | pricier units must not outnumber cheaper ones |
+| naxis: heavynaxis | tiger.nax (cost 800) x3 vs mp40.nax (cost 500) x2 | pricier units must not outnumber cheaper ones |
+| lnaxis: heavylnaxis | total cost 5640 | target ~10000 (±15%) |
+| lnaxis: heavylnaxis | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
+| lnaxis: heavylnaxis | lunar2.nax2 (cost 350) x3 vs lunar.nax2 (cost 120) x2 | pricier units must not outnumber cheaper ones |
+| lnaxis: heavylnaxis | beetle.nax2 (cost 700) x3 vs lunar.nax2 (cost 120) x2 | pricier units must not outnumber cheaper ones |
+| lnaxis: heavylnaxis | beetle.nax2 (cost 700) x3 vs panzer.nax2 (cost 650) x2 | pricier units must not outnumber cheaper ones |
+| lnaxis: heavylnaxis | all units are Tier 1 | heavy support should mix all tiers |
+| futuretech: heavyfuturetech | total cost 5025 | target ~10000 (±15%) |
+| futuretech: heavyfuturetech | 0 infantry : 11 vehicles | want ~5 infantry per vehicle |
+| futuretech: heavyfuturetech | robot_cannon.futu (cost 525) x5 vs wheel.futu (cost 200) x3 | pricier units must not outnumber cheaper ones |
+| tkm: heavytstkm | total cost 3060 | target ~10000 (±15%) |
+| tkm: heavytstkm | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
+| tkm: heavytstkm | tkmtechnical (cost 400) x4 vs tkmrifleman (cost 120) x3 | pricier units must not outnumber cheaper ones |
+| tkm: heavytstkm | tkmtechnical (cost 400) x4 vs tkmrocketeer (cost 200) x2 | pricier units must not outnumber cheaper ones |
+| tkm: heavytstkm | all units are Tier 1 | heavy support should mix all tiers |
+| ordos: ordos_h | total cost 7100 | target ~10000 (±15%) |
+| ordos: ordos_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| ordos: ordos_h | all units are Tier 1 | heavy support should mix all tiers |
+| ixian: ixian_h | total cost 7100 | target ~10000 (±15%) |
+| ixian: ixian_h | 5 infantry : 4 vehicles | want ~5 infantry per vehicle |
+| terran: heavyterran | total cost 8000 | target ~10000 (±15%) |
+| terran: heavyterran | 4 infantry : 3 vehicles | want ~5 infantry per vehicle |
+| terran: heavyterran | scsiegetank (cost 2800) x2 vs scfirebat (cost 500) x1 | pricier units must not outnumber cheaper ones |
+| terran: heavyterran | scsiegetank (cost 2800) x2 vs scmedic (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| terran: heavyterran | scsiegetank (cost 2800) x2 vs scvulture (cost 900) x1 | pricier units must not outnumber cheaper ones |
+| protoss: heavyprotoss | total cost 3000 | target ~10000 (±15%) |
+| protoss: heavyprotoss | 2 infantry : 2 vehicles | want ~5 infantry per vehicle |
+| zerg: heavyzerg | total cost 4100 | target ~10000 (±15%) |
+| plymouthl: heavyplymouthl | total cost 3650 | target ~10000 (±15%) |
+| plymouthl: heavyplymouthl | 0 infantry : 7 vehicles | want ~5 infantry per vehicle |
+| plymouthl: heavyplymouthl | plymouth_lynx_microwave (cost 500) x3 vs plymouth_scout (cost 350) x1 | pricier units must not outnumber cheaper ones |
+| plymouthl: heavyplymouthl | plymouth_lynx_rpg (cost 600) x3 vs plymouth_scout (cost 350) x1 | pricier units must not outnumber cheaper ones |
+| edenl: heavyedenl | total cost 5250 | target ~10000 (±15%) |
+| edenl: heavyedenl | 0 infantry : 7 vehicles | want ~5 infantry per vehicle |
+| edenl: heavyedenl | eden_lynx_laser (cost 750) x3 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| edenl: heavyedenl | eden_lynx_railgun (cost 900) x3 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
+
+
+## F17 — fighter/bomber TurnSpeed ≠ Speed/15 (frontal: 2×)  (7)
+
+| actor | actual | expected |
+|---|---|---|
+| aa_mine.ordos | TurnSpeed 8 (Speed 35) | expected 2 = Speed/15 |
+| bbomb.nax2 | TurnSpeed 10 (Speed 75) | expected 5 = Speed/15 |
+| mignuke | TurnSpeed 15 (Speed 200) | expected 13 = Speed/15 |
+| scscourge | TurnSpeed 40 (Speed 200) | expected 13 = Speed/15 |
+| tkmviper | TurnSpeed 25 (Speed 150) | expected 10 = Speed/15 |
+| tscropplane | TurnSpeed 64 (Speed 160) | expected 11 = Speed/15 |
+| tsscrincabal | TurnSpeed 29 (Speed 145) | expected 10 = Speed/15 |
+
+
+## F18 — weapons targeting Air whose damage warheads can't hit Air  (21)
+
+| actor | actual | expected |
+|---|---|---|
+| beehivecarriertarget | Warhead@1Dam | targets Air but no damage warhead hits Air (used by landcarr.futu) |
+| boomerlaunch | Warhead@1Dam | targets Air but no damage warhead hits Air (used by yrbsub) |
+| defilerplague | Warhead@HeavyChemicalWeapon, Warhead@HeavyChemicalWeaponFriendlyFire, Warhead@HeavyChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by scdefiler) |
+| ivanattachair | Warhead@2 | targets Air but no damage warhead hits Air (used by ra2ivan) |
+| naxdefensiveplanetarget | Warhead@1Dam | targets Air but no damage warhead hits Air (used by airfield.nax, airfield.nax2) |
+| naxdieglocke | Warhead@HeavyChemicalWeapon, Warhead@HeavyChemicalWeaponFriendlyFire, Warhead@HeavyChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by dieglocke.nax2) |
+| pdlaserbike | Warhead@1Dam | targets Air but no damage warhead hits Air (used by bike, chembike) |
+| pdlaserltnk2 | Warhead@1Dam | targets Air but no damage warhead hits Air (used by nodltnk2) |
+| sciencevesseldefensematrix | Warhead@1 | targets Air but no damage warhead hits Air (used by scsciencevessel) |
+| tkmpdlaser | Warhead@1Dam | targets Air but no damage warhead hits Air (used by t72) |
+| tsassaultcannon | Warhead@FlakWeapon, Warhead@FlakWeaponPercentage, Warhead@Concrete, Warhead@Chaingun | targets Air but no damage warhead hits Air (used by tscheavyspider, tssmech) |
+| tsassaultcannontal | Warhead@Chaingun, Warhead@ChaingunPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tstalwolv) |
+| tsfiendshard | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggie) |
+| tsfiendshardblue | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggieblue) |
+| tsfiendshardblueup | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggieblue) |
+| tsfiendshardup | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggie) |
+| tstacticalchemmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsntmisl) |
+| tstacticalmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsntmisl, tsntmislcabal) |
+| tstacticalneutronmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsntmislcabal) |
+| wc2deathknightdeathanddecay | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_orc_deathknight) |
+| wc2mageblizzard | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_human_archmage, wc2_human_mage) |
 

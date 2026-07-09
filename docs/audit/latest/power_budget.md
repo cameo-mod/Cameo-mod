@@ -212,7 +212,6 @@ Units above the 2.0× effective-power budget: **763**
 | syndicate | topol.latin | 3.00 | 2.08 | 6.25 | DamageMultiplier@up_industrial.latin=80; FirepowerMultiplier@up_hotfire.latin=125; ReloadDelayMultiplier@up_hotfire.latin=75; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | soviet | mignuke | 2.67 | 2.33 | 6.23 | DamageMultiplier@ra_doctrine_heavyarmor=90; FirepowerMultiplier@ra_upgrade_afterburners=115; DamageMultiplier@ra_upgrade_afterburners=85; FirepowerMultiplier@ra_upgrade_scorchedearth=125; DamageMultiplier@ra_upgrade_stalinium=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | ixian | siege_tank.ixian | 3.48 | 1.79 | 6.22 | FirepowerMultiplier@up_advanced_ixian_technology.ixian=125; FirepowerMultiplier@up_siege_range.ixian=150; DamageMultiplier@up_general_purpose_armor.ixian=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | ts4tnk2 | 3.25 | 1.90 | 6.19 | DamageMultiplier@up_junkarmor=75; FirepowerMultiplier@up_chemicalweapons=175; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | ordos | face_dancer.ordos | 3.87 | 1.59 | 6.14 | ReloadDelayMultiplier@up_toxin.ordos=90; DamageMultiplier@up_toxin.ordos=90; FirepowerMultiplier@up_contraband.ordos=125; FirepowerMultiplier@up_toxin.ordos=150; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | soviet | hind | 3.10 | 1.98 | 6.14 | DamageMultiplier@ra_doctrine_heavyarmor=90; ReloadDelayMultiplier@ra_upgrade_autoloaders=60; DamageMultiplier@ra_upgrade_stalinium=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | soviet | yakarmored | 3.10 | 1.98 | 6.14 | DamageMultiplier@ra_doctrine_heavyarmor=90; ReloadDelayMultiplier@ra_upgrade_autoloaders=60; DamageMultiplier@ra_upgrade_stalinium=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -347,6 +346,7 @@ Units above the 2.0× effective-power budget: **763**
 | nod | chembike | 3.07 | 1.79 | 5.48 | FirepowerMultiplier@up_advancedguerillatactics=115; FirepowerMultiplier@up_elementalwarfare=125; DamageMultiplier@up_elementalwarfare=80; FirepowerMultiplier@up_guerillatactics=115; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | nod | chemstnk | 3.07 | 1.79 | 5.48 | FirepowerMultiplier@up_elementalwarfare=125; DamageMultiplier@up_elementalwarfare=80; FirepowerMultiplier@up_guerillatactics=115; FirepowerMultiplier@up_advancedguerillatactics=115; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | ra2america | ra2sref | 2.25 | 2.44 | 5.48 | DamageMultiplier@ra2_allies_upgrade_compositearmorplating=80; DamageMultiplier@ra2_allies_upgrade_reflectivearmorplating=95; DamageMultiplier@ra2_allies_upgrade_ionpulseplating=90; FirepowerMultiplier@ra2_allies_upgrade_intensifiedprismbeams=125; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
+| forgotten | ts4tnk2 | 3.25 | 1.68 | 5.46 | DamageMultiplier@up_junkarmor=85; FirepowerMultiplier@up_chemicalweapons=175; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | gdi | mlrs | 2.74 | 1.98 | 5.44 | DamageMultiplier@up_lightweightarmorplating=80; FirepowerMultiplier@up_longrangesensors=105; FirepowerMultiplier@up_advancedmissiletargeting=115; FirepowerMultiplier@up_cuttingedgeequipment=110; ReloadDelayMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130 |
 | ixian | large_gun_turret.ixian | 3.00 | 1.79 | 5.36 | FirepowerMultiplier@up_heavy_missile.ixian=120; DamageMultiplier@up_general_purpose_armor.ixian=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | tkm | tkmsniper | 2.25 | 2.38 | 5.36 | DamageMultiplier@upinfweapon=70; FirepowerMultiplier@upinfweapon=125; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
@@ -365,9 +365,6 @@ Units above the 2.0× effective-power budget: **763**
 | gdi | gdiofficer | 3.17 | 1.59 | 5.03 | FirepowerMultiplier@up_longrangesensors=105; FirepowerMultiplier@up_armorpiercingbullets=133; FirepowerMultiplier@up_cuttingedgeequipment=110; ReloadDelayMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | gdi | gdisniper | 3.17 | 1.59 | 5.03 | FirepowerMultiplier@up_longrangesensors=105; FirepowerMultiplier@up_armorpiercingbullets=133; FirepowerMultiplier@up_cuttingedgeequipment=110; ReloadDelayMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | gdi | rmbo.gdi | 3.17 | 1.59 | 5.03 | FirepowerMultiplier@up_longrangesensors=105; FirepowerMultiplier@up_armorpiercingbullets=133; FirepowerMultiplier@up_cuttingedgeequipment=110; ReloadDelayMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsarty_bus | 2.07 | 2.42 | 5.02 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsclosh | 2.07 | 2.42 | 5.02 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsftnk | 2.07 | 2.42 | 5.02 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsriott | 2.07 | 2.42 | 5.02 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | syndicate | sml.latin | 3.00 | 1.67 | 5.00 | FirepowerMultiplier@up_hotfire.latin=125; ReloadDelayMultiplier@up_hotfire.latin=75; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | syndicate | tkiller.latin | 2.25 | 2.22 | 5.00 | DamageMultiplier@up_mili.latin=75; FirepowerMultiplier@up_mili.latin=125; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
@@ -415,15 +412,9 @@ Units above the 2.0× effective-power budget: **763**
 | naxis | tiger.nax | 2.44 | 1.96 | 4.78 | DamageMultiplier@up_tankarsenalrenovation.nax=85; FirepowerMultiplier@up_tankarsenalrenovation.nax=115; ReloadDelayMultiplier@up_tankarsenalrenovation.nax=85; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | naxis | wirbelwind.nax | 2.44 | 1.96 | 4.78 | DamageMultiplier@up_tankarsenalrenovation.nax=85; FirepowerMultiplier@up_tankarsenalrenovation.nax=115; ReloadDelayMultiplier@up_tankarsenalrenovation.nax=85; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | naxis | zombietank.nax | 2.44 | 1.96 | 4.78 | DamageMultiplier@up_tankarsenalrenovation.nax=85; FirepowerMultiplier@up_tankarsenalrenovation.nax=115; ReloadDelayMultiplier@up_tankarsenalrenovation.nax=85; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
-| forgotten | forgot_htnk_tur | 2.50 | 1.90 | 4.76 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | forgot_ltnk_tur | 2.50 | 1.90 | 4.76 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | forgot_mtnk_tur | 2.50 | 1.90 | 4.76 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | nod | sam | 3.31 | 1.43 | 4.72 | FirepowerMultiplier@up_guerillatactics=115; FirepowerMultiplier@up_advancedguerillatactics=115; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsorca | 2.23 | 2.12 | 4.72 | FirepowerMultiplier@up_tsprojectileimprovements=120; DamageMultiplier@up_ceramicarmor=75; DamageMultiplier@up_mechanicalreliability=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tszoneorca | 2.23 | 2.12 | 4.72 | FirepowerMultiplier@up_tsprojectileimprovements=120; DamageMultiplier@up_ceramicarmor=75; DamageMultiplier@up_mechanicalreliability=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsmutant4 | 2.07 | 2.27 | 4.71 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsshotmut | 2.07 | 2.27 | 4.71 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsweedguy | 2.07 | 2.27 | 4.71 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | ordos | autogun_tank.ordos | 2.59 | 1.82 | 4.71 | FirepowerMultiplier@up_contraband.ordos=125; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | ordos | combat_tank_stealth.ordos | 2.59 | 1.82 | 4.71 | FirepowerMultiplier@up_contraband.ordos=125; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsmemp | 2.30 | 2.02 | 4.65 | ReloadDelayMultiplier@up_modernfirecontrolsystems=90; DamageMultiplier@up_mechanicalreliability=90; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
@@ -445,6 +436,9 @@ Units above the 2.0× effective-power budget: **763**
 | ordos | autogun_turret.ordos | 3.12 | 1.43 | 4.46 | FirepowerMultiplier@up_contraband.ordos=125; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | soviet | rasam | 2.50 | 1.79 | 4.46 | DamageMultiplier@ra_upgrade_stalinium=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | syndicate | ra2terror.latin | 3.33 | 1.33 | 4.44 | FirepowerMultiplier@up_hotfire.latin=200; ReloadDelayMultiplier@up_hotfire.latin=75; DamageMultiplier@up_mili.latin=75; FirepowerMultiplier@up_mili.latin=125 |
+| forgotten | tsarty_bus | 2.07 | 2.14 | 4.43 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsclosh | 2.07 | 2.14 | 4.43 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsftnk | 2.07 | 2.14 | 4.43 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | modjapan | hakurei | 2.77 | 1.59 | 4.40 | DamageMultiplier@up_bushidodiscipline=90; FirepowerMultiplier@up_bushidodiscipline=110; ReloadDelayMultiplier@up_bushidodiscipline=90; FirepowerMultiplier@up_advancedplasmaweapons=110; ReloadDelayMultiplier@up_advancedplasmaweapons=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | soviet | ra_commissar | 2.50 | 1.76 | 4.40 | FirepowerMultiplier@global_conscription_buff=110; DamageMultiplier@global_conscription_buff=90; ReloadDelayMultiplier@global_conscription_buff=90; FirepowerMultiplier@ra_upgrade_menofsteel=110; DamageMultiplier@ra_upgrade_menofsteel=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | soviet | ra_conscript_ak | 2.50 | 1.76 | 4.40 | FirepowerMultiplier@global_conscription_buff=110; DamageMultiplier@global_conscription_buff=90; ReloadDelayMultiplier@global_conscription_buff=90; FirepowerMultiplier@ra_upgrade_menofsteel=110; DamageMultiplier@ra_upgrade_menofsteel=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -469,6 +463,12 @@ Units above the 2.0× effective-power budget: **763**
 | syndicate | ngbunk2.latin | 1.80 | 2.38 | 4.29 | DamageMultiplier@up_ngbunk2.latin=70; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | tsgdi | tsgtctwrsam | 3.00 | 1.43 | 4.29 | FirepowerMultiplier@up_tsprojectileimprovements=120; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsenforcer | 2.23 | 1.90 | 4.24 | DamageMultiplier@up_seretraining=75; FirepowerMultiplier@up_tsprojectileimprovements=120; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | forgot_htnk_tur | 2.50 | 1.68 | 4.20 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | forgot_ltnk_tur | 2.50 | 1.68 | 4.20 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | forgot_mtnk_tur | 2.50 | 1.68 | 4.20 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsmutant4 | 2.07 | 2.02 | 4.18 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsshotmut | 2.07 | 2.02 | 4.18 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsweedguy | 2.07 | 2.02 | 4.18 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=55; FirepowerMultiplier@RANK-3=145; ReloadDelayMultiplier@RANK-3=70 |
 | ixian | combat_tank.ixian | 2.32 | 1.79 | 4.15 | FirepowerMultiplier@up_siege_range.ixian=125; DamageMultiplier@up_general_purpose_armor.ixian=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | ixian | light_inf | 2.32 | 1.79 | 4.15 | DamageMultiplier@up_general_purpose_armor.ixian=80; FirepowerMultiplier@up_needleguns.ixian=125; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | asianalliance | cghype.asian | 2.36 | 1.75 | 4.14 | DamageMultiplier@up_team_dragonway.asian=95; FirepowerMultiplier@up_team_dragonway.asian=105; FirepowerMultiplier@up_celestialpower.asian=125; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
@@ -599,24 +599,6 @@ Units above the 2.0× effective-power budget: **763**
 | tsgdi | tsgtctwrmg | 2.50 | 1.43 | 3.57 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsgtctwrrpg | 2.50 | 1.43 | 3.57 | DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | cabal | tsscrincabal | 2.48 | 1.43 | 3.55 | FirepowerMultiplier@NETWORKPROTOCOLS=108; ReloadDelayMultiplier@NETWORKPROTOCOLS=95; ReloadDelayMultiplier@upcabalovercharge=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | ts1tnk | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | ts2tnk | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | ts3tnk | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | ts4tnk | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsapachemutant | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsapctruck | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsarty | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsbowler | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tscar2 | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tscropplane | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsflocust | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsheli | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tshind | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsm113 | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsmlrs | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsnomad | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsruiner | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tswini2 | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_junkarmor=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tse1.gdi | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tse2 | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsengineer.gdi | 1.86 | 1.90 | 3.54 | DamageMultiplier@up_seretraining=75; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -641,16 +623,6 @@ Units above the 2.0× effective-power budget: **763**
 | consortium | runner.steel | 1.80 | 1.85 | 3.33 | DamageMultiplier@up_naniteinfusion.steel=90; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | syndicate | ra2dtruck.latin | 2.67 | 1.25 | 3.33 | DamageMultiplier@up_industrial.latin=80; FirepowerMultiplier@up_hotfire.latin=200; ReloadDelayMultiplier@up_hotfire.latin=75 |
 | asianalliance | cgchtw.asian | 1.89 | 1.75 | 3.32 | DamageMultiplier@up_team_dragonway.asian=95; FirepowerMultiplier@up_team_dragonway.asian=105; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
-| forgotten | tsdoggie | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsdoggieblue | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tse3.mutant | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsengineermutant | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsghost | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsmhijack | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsmutant | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsmutant3 | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsmwmn | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
-| forgotten | tsumagon | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_genomemapping=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | ixian | bomber.ixian | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_general_purpose_armor.ixian=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | ixian | farasha.ixian | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_general_purpose_armor.ixian=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | ixian | jammer.ixian | 1.86 | 1.79 | 3.32 | DamageMultiplier@up_general_purpose_armor.ixian=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -675,6 +647,24 @@ Units above the 2.0× effective-power budget: **763**
 | allies | rajeep | 2.27 | 1.43 | 3.24 | FirepowerMultiplier@up_advancedradarsystems=110; ReloadDelayMultiplier@up_advancedradarsystems=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsnod | elitcadre | 2.27 | 1.43 | 3.24 | ReloadDelayMultiplier@up_auxiliaryweapon=90; FirepowerMultiplier@up_auxiliaryweapon=110; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsnod | tsttnk | 2.27 | 1.43 | 3.24 | ReloadDelayMultiplier@up_auxiliaryweapon=90; FirepowerMultiplier@up_auxiliaryweapon=110; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | ts1tnk | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | ts2tnk | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | ts3tnk | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | ts4tnk | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsapachemutant | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsapctruck | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsarty | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsbowler | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tscar2 | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tscropplane | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsflocust | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsheli | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tshind | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsm113 | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsmlrs | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsnomad | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsruiner | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tswini2 | 1.86 | 1.68 | 3.12 | DamageMultiplier@up_junkarmor=85; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | gdi | gdihavoc | 2.41 | 1.25 | 3.01 | FirepowerMultiplier@up_longrangesensors=105; FirepowerMultiplier@up_advancedmissiletargeting=115; FirepowerMultiplier@up_armorpiercingbullets=133; FirepowerMultiplier@up_cuttingedgeequipment=120; ReloadDelayMultiplier@up_cuttingedgeequipment=80; DamageMultiplier@up_cuttingedgeequipment=80 |
 | cabal | tscbunk | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | futuretech | engi.futu | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
@@ -731,6 +721,16 @@ Units above the 2.0× effective-power budget: **763**
 | tkm | tkmviper | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | yuri | yrbsub | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | yuri | yrngtbnk | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
+| forgotten | tsdoggie | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsdoggieblue | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tse3.mutant | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsengineermutant | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsghost | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsmhijack | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsmutant | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsmutant3 | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsmwmn | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| forgotten | tsumagon | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_genomemapping=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsnod | tsbike | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_mobilityspecialization=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsnod | tssapc | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_mobilityspecialization=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | tsnod | tsscrin | 1.86 | 1.59 | 2.95 | DamageMultiplier@up_mobilityspecialization=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |

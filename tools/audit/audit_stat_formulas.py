@@ -36,6 +36,17 @@ Ordos Raider (raider.ordos).
       identifiable radar tier, and Terran/Zerg (non-tiered tech trees).
       Violations whose fix would strip the faction's ONLY pre-radar defense
       are listed as DEFERRED (every faction must keep a Tier-1 defense).
+  F14 StartingUnits sets must reference only existing actors (crash class)
+  F15 Light Support sets: Tier-1 units only (nothing gated above its
+      producer building), total ~2000 (±15%), ~5 infantry per vehicle,
+      pricier units never outnumbering cheaper ones
+  F16 Heavy Support sets: same cost/ratio/frequency rules at ~10000, and at
+      least one above-Tier-1 unit (an all-tier mix)
+  F17 fighters and bombers (by class template): Aircraft.TurnSpeed ==
+      Speed / 15 (frontal-weapon craft: 2x), e.g. Speed 180 -> TurnSpeed 12
+  F18 anti-air weapons: a weapon whose ValidTargets include Air must have at
+      least one damage warhead whose ValidTargets include Air (inherited
+      warheads resolved) — otherwise it fires at aircraft but deals nothing
 
 Scope: buildable rosters of real factions. Tolerance ±1 on divisions.
 """
@@ -109,19 +120,25 @@ def inherits_template(m, name, needles) -> bool:
 TIER_EXEMPT_FACTIONS = {"terran", "zerg"}   # non-tiered tech trees
 
 
-def defense_tier_check(m: Model, rows: dict) -> None:
-    """F12/F13 — AA defense gated by radar tier; advanced defense by tech tier."""
-    rs = m.rs
-    for fac in sorted(f.internal for f in m.real_factions()):
-        if fac in TIER_EXEMPT_FACTIONS:
-            continue
-        roster = m.buildable_roster(fac)
+class TierContext:
+    """Per-faction building-tier model shared by the tier-based checks.
 
-        radars, armed_defs = set(), []
-        radar_tokens: set[str] = set()
-        buildings: dict[str, set[str]] = {}          # building -> provided tokens
-        promo_tokens: set[str] = set()
-        for lname in roster:
+    Data-driven building tiers: conyard (no building prereqs) = 0,
+    barracks/refinery = 1, radar = 2, tech = 3, post-tech = 4/5...
+    A token's tier is its CHEAPEST provider (alternate providers like
+    advanced power plants must neither inflate nor cycle the chain), so
+    tiers are solved as a monotone fixpoint rather than by recursion.
+    """
+
+    def __init__(self, m: Model, fac: str):
+        rs = m.rs
+        self.m, self.fac = m, fac
+        self.roster = m.buildable_roster(fac)
+        self.buildings: dict[str, set[str]] = {}
+        self.radars: set[str] = set()
+        self.radar_tokens: set[str] = set()
+        self.promo_tokens: set[str] = set()
+        for lname in self.roster:
             res = rs.resolve(lname)
             if res is None:
                 continue
@@ -129,80 +146,111 @@ def defense_tier_check(m: Model, rows: dict) -> None:
             queue = (b.get("Queue") or "").lower() if b else ""
             toks = m._provider_tokens(lname, res)
             if "promotion" in queue:
-                promo_tokens |= toks
+                self.promo_tokens |= toks
             # D2k-style delivered refineries have no Building trait, so
             # Building-queue membership also qualifies for the tier graph.
-            is_building = (bool(res.children_named("Building"))
-                           or "building" in queue or "defence" in queue
-                           or "defense" in queue)
-            if is_building:
-                buildings[lname] = toks
+            if (res.children_named("Building") or "building" in queue
+                    or "defence" in queue or "defense" in queue):
+                self.buildings[lname] = toks
                 if inherits_template(m, lname, ("RadarBuilding",)):
-                    radars.add(lname)
-                    radar_tokens |= toks
+                    self.radars.add(lname)
+                    self.radar_tokens |= toks
+
+        self.token_providers: dict[str, set[str]] = {}
+        for bld, toks in self.buildings.items():
+            for t in toks:
+                self.token_providers.setdefault(t, set()).add(bld)
+        bld_prereqs = {bld: [t for t in m.positive_prereqs(rs.resolve(bld))
+                             if self.token_providers.get(t, set()) - {bld}]
+                       for bld in self.buildings}
+        self.tier = {bld: 0 for bld in self.buildings}
+        for _ in range(len(self.buildings)):
+            changed = False
+            for bld, toks in bld_prereqs.items():
+                new = 0
+                for tok in toks:
+                    provs = self.token_providers[tok] - {bld}
+                    new = max(new, 1 + min(self.tier[p] for p in provs))
+                if new > self.tier[bld]:
+                    self.tier[bld] = new
+                    changed = True
+            if not changed:
+                break
+        self.radar_tier = min(self.tier[r] for r in self.radars) \
+            if self.radars else None
+
+    def gate(self, actor: str) -> tuple[int, bool, bool, set[str]]:
+        """(gate tier, radar_gated, promotion_gated, prereqs)."""
+        res = self.m.rs.resolve(actor)
+        prereqs = set(self.m.positive_prereqs(res))
+        gate = 0
+        for tok in prereqs:
+            providers = self.token_providers.get(tok, ())
+            if providers:
+                gate = max(gate, min(self.tier[p] for p in providers))
+        return (gate, bool(prereqs & self.radar_tokens),
+                bool(prereqs & self.promo_tokens), prereqs)
+
+    def producer_tier(self, queue_word: str) -> int:
+        """Min tier among buildings producing the given queue type."""
+        best = None
+        for bld in self.buildings:
+            res = self.m.rs.resolve(bld)
+            for pr in res.children_named("Production"):
+                if queue_word.lower() in (pr.get("Produces") or "").lower():
+                    t = self.tier[bld]
+                    best = t if best is None or t < best else best
+        return best if best is not None else 1
+
+
+_ctx_cache: dict[str, TierContext] = {}
+
+
+def tier_context(m: Model, fac: str) -> TierContext:
+    if fac not in _ctx_cache:
+        _ctx_cache[fac] = TierContext(m, fac)
+    return _ctx_cache[fac]
+
+
+def weapon_hits_air(rs, wname: str) -> bool:
+    w = rs.resolve_weapon(wname) if wname else None
+    if w is None:
+        return False
+    if "air" in (w.get("ValidTargets") or "").lower():
+        return True
+    return any(c.key.startswith("Warhead")
+               and "air" in (c.get("ValidTargets") or "").lower()
+               for c in w.children)
+
+
+def defense_tier_check(m: Model, rows: dict) -> None:
+    """F12/F13 — AA defense gated by radar tier; advanced defense by tech tier."""
+    rs = m.rs
+    for fac in sorted(f.internal for f in m.real_factions()):
+        if fac in TIER_EXEMPT_FACTIONS:
+            continue
+        ctx = tier_context(m, fac)
+        armed_defs = []
+        for lname in ctx.roster:
+            res = rs.resolve(lname)
+            if res is None:
+                continue
+            b = res.child("Buildable")
+            queue = (b.get("Queue") or "").lower() if b else ""
             if ("defence" in queue or "defense" in queue) \
                     and res.children_named("Armament"):
                 armed_defs.append(lname)
 
         # single-armed-defense factions (photon cannon style) are exempt
-        if len(armed_defs) <= 1:
+        if len(armed_defs) <= 1 or ctx.radar_tier is None:
             continue
-
-        # data-driven building tiers: conyard(no building prereqs)=0,
-        # barracks/refinery=1, radar=2, tech=3, post-tech=4/5...
-        # A token's tier is the CHEAPEST provider (alternate providers like
-        # advanced power plants must not inflate or cycle the chain), so
-        # tiers are solved as a monotone fixpoint rather than by recursion.
-        token_providers: dict[str, set[str]] = {}
-        for bld, toks in buildings.items():
-            for t in toks:
-                token_providers.setdefault(t, set()).add(bld)
-        bld_prereqs = {bld: [t for t in m.positive_prereqs(rs.resolve(bld))
-                             if token_providers.get(t, set()) - {bld}]
-                       for bld in buildings}
-        tier = {bld: 0 for bld in buildings}
-        for _ in range(len(buildings)):
-            changed = False
-            for bld, toks in bld_prereqs.items():
-                new = 0
-                for tok in toks:
-                    provs = token_providers[tok] - {bld}
-                    new = max(new, 1 + min(tier[p] for p in provs))
-                if new > tier[bld]:
-                    tier[bld] = new
-                    changed = True
-            if not changed:
-                break
-
-        def gate_info(defense: str) -> tuple[int, bool, bool, set[str]]:
-            """(gate tier, radar_gated, promotion_gated, prereqs) of a defense."""
-            res_d = rs.resolve(defense)
-            prereqs = set(m.positive_prereqs(res_d))
-            gate = 0
-            for tok in prereqs:
-                providers = token_providers.get(tok, ())
-                if providers:
-                    gate = max(gate, min(tier[p] for p in providers))
-            return gate, bool(prereqs & radar_tokens), bool(prereqs & promo_tokens), prereqs
-
-        if not radars:
-            continue    # no identifiable radar tier: exempt (WC2-style trees)
-        radar_tier = min(tier[r] for r in radars)
+        radar_tier = ctx.radar_tier
+        gate_info = ctx.gate
 
         def has_aa_weapon(defense: str) -> bool:
             res_d = rs.resolve(defense)
-            for arm in res_d.children_named("Armament"):
-                wname = arm.get("Weapon")
-                w = rs.resolve_weapon(wname) if wname else None
-                if w is None:
-                    continue
-                vt = (w.get("ValidTargets") or "").lower()
-                if "air" in vt:
-                    return True
-                for c in w.children:
-                    if c.key.startswith("Warhead") and "air" in (c.get("ValidTargets") or "").lower():
-                        return True
-            return False
+            return any(weapon_hits_air(rs, arm.get("Weapon"))
+                       for arm in res_d.children_named("Armament"))
 
         # F12: at least one AA tower must sit on the radar tier; extra AA
         # towers at tech tier or above are legal "advanced AA". An
@@ -225,7 +273,7 @@ def defense_tier_check(m: Model, rows: dict) -> None:
                 if not baseline_ok:
                     rows["F12"].append([f"{fac}: {d}",
                                         f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
-                                        f"no AA on radar tier: {', '.join(sorted(radars))}"])
+                                        f"no AA on radar tier: {', '.join(sorted(ctx.radars))}"])
                 elif not radar_gated and gate < radar_tier:
                     rows["F12"].append([f"{fac}: {d}",
                                         f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
@@ -261,12 +309,133 @@ def defense_tier_check(m: Model, rows: dict) -> None:
                                 note])
 
 
+def starting_units_check(m: Model, rows: dict) -> None:
+    """F14/F15/F16 — StartingUnits existence + light/heavy composition.
+
+    Light Support: only Tier-1 units (gated no higher than their producer
+    building), total cost ~2000, diverse, ~5 infantry per vehicle, cheaper
+    units at least as frequent as pricier ones.
+    Heavy Support: all-tier mix, total cost ~10000, same ratio/frequency
+    rules, and at least one above-Tier-1 unit.
+    """
+    rs = m.rs
+    world = rs.resolve("World")
+    real = {f.internal for f in m.real_factions()}
+    COST_TOL = 0.15
+    targets = {"light": 2000, "heavy": 10000}
+
+    for node in world.children:
+        if not node.key.startswith("StartingUnits"):
+            continue
+        set_id = node.key.split("@", 1)[-1]
+        facs = [x.strip() for x in (node.get("Factions") or "").split(",") if x.strip()]
+        fac = next((f for f in facs if f in real), facs[0] if facs else "?")
+        cls = (node.get("Class") or "").lower()
+        units: list[str] = []
+        base = node.get("BaseActor")
+        for fieldname in ("SupportActors", "InnerSupportActors"):
+            v = node.get(fieldname)
+            if v:
+                units += [x.strip().lower() for x in v.split(",") if x.strip()]
+
+        # F14 — every referenced actor must exist (crash class)
+        for a in ([base.lower()] if base else []) + units:
+            if rs.actor(a) is None:
+                rows["F14"].append([f"{fac}: {set_id}", a, "actor does not exist"])
+
+        target = targets.get(cls)
+        if target is None or not units:
+            continue
+        units = [u for u in units if rs.actor(u) is not None]
+        counts: dict[str, int] = {}
+        for u in units:
+            counts[u] = counts.get(u, 0) + 1
+        cost = {u: int((rs.resolve(u).get("Valued", "Cost") or "0").split(",")[0])
+                for u in counts}
+        total = sum(cost[u] * n for u, n in counts.items())
+        inf = sum(n for u, n in counts.items() if m.unit_type(u) == "inf")
+        veh = sum(n for u, n in counts.items()
+                  if m.unit_type(u) in ("veh", "air", "nav"))
+        key = "F15" if cls == "light" else "F16"
+        where = f"{fac}: {set_id}"
+
+        if abs(total - target) > target * COST_TOL:
+            rows[key].append([where, f"total cost {total}",
+                              f"target ~{target} (±{int(COST_TOL*100)}%)"])
+        if veh and inf < 4 * veh:
+            rows[key].append([where, f"{inf} infantry : {veh} vehicles",
+                              "want ~5 infantry per vehicle"])
+        elif veh == 0 and cls == "light" and len(counts) > 2:
+            rows[key].append([where, f"{inf} infantry : 0 vehicles",
+                              "light set should include a vehicle"])
+        for a in counts:
+            for b in counts:
+                if cost[a] > cost[b] and counts[a] > counts[b]:
+                    rows[key].append([where,
+                                      f"{a} (cost {cost[a]}) x{counts[a]} vs "
+                                      f"{b} (cost {cost[b]}) x{counts[b]}",
+                                      "pricier units must not outnumber cheaper ones"])
+
+        if fac in real and fac not in TIER_EXEMPT_FACTIONS:
+            ctx = tier_context(m, fac)
+            if ctx.radar_tier is not None:
+                over_tier1 = []
+                for u in sorted(counts):
+                    ut = m.unit_type(u)
+                    prod = ctx.producer_tier(
+                        "Infantry" if ut == "inf"
+                        else "Aircraft" if ut == "air" else "Vehicle")
+                    if ctx.gate(u)[0] > prod:
+                        over_tier1.append(u)
+                if cls == "light" and over_tier1:
+                    rows["F15"].append([where, ", ".join(over_tier1),
+                                        "light support must be Tier-1 only "
+                                        "(producer-building prereqs only)"])
+                if cls == "heavy" and not over_tier1:
+                    rows["F16"].append([where, "all units are Tier 1",
+                                        "heavy support should mix all tiers"])
+
+
+def aa_warhead_check(m: Model, rows: dict) -> None:
+    """F18 — weapons that target Air but whose damage warheads can't hit Air."""
+    rs = m.rs
+    used_by: dict[str, set[str]] = {}
+    roster_all: set[str] = set()
+    for f in m.real_factions():
+        roster_all |= m.buildable_roster(f.internal)
+    for lname in roster_all:
+        res = rs.resolve(lname)
+        if res is None:
+            continue
+        for arm in res.children_named("Armament"):
+            w = arm.get("Weapon")
+            if w:
+                used_by.setdefault(w.lower(), set()).add(lname)
+
+    for wname in sorted(used_by):
+        w = rs.resolve_weapon(wname)
+        if w is None:
+            continue
+        if "air" not in (w.get("ValidTargets") or "").lower():
+            continue
+        dmg_warheads = [c for c in w.children
+                        if c.key.startswith("Warhead") and "Damage" in (c.value or "")]
+        if not dmg_warheads:
+            continue
+        airless = [c.key for c in dmg_warheads
+                   if "air" not in (c.get("ValidTargets") or "").lower()]
+        if len(airless) == len(dmg_warheads):
+            users = ", ".join(sorted(used_by[wname])[:5])
+            rows["F18"].append([wname, ", ".join(airless[:4]),
+                                f"targets Air but no damage warhead hits Air (used by {users})"])
+
+
 def main() -> int:
     m = Model()
     rs = m.rs
     rows = {k: [] for k in
             ("F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10",
-             "F11", "F12", "F13")}
+             "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18")}
 
     names: set[str] = set()
     for f in m.real_factions():
@@ -387,7 +556,22 @@ def main() -> int:
                         rows["F11"].append([lname, f"RevokeDelay {rd}",
                                             f"expected {reload_d//2} (ReloadDelay {reload_d}/2)"])
 
+        # F17: fighters/bombers turn at Speed/15 (frontal-weapon craft 2x)
+        if ut == "air" and inherits_template(m, lname, ("FighterTemplate", "BomberTemplate")):
+            spd = ivalue(res, "Aircraft", "Speed")
+            ats = ivalue(res, "Aircraft", "TurnSpeed")
+            if spd and ats is not None:
+                frontal = any(c.key.split("@")[0].startswith("AttackFrontal")
+                              for c in res.children)
+                want = round(spd / 15) * (2 if frontal else 1)
+                label = "2 x Speed/15 (frontal)" if frontal else "Speed/15"
+                if not close(ats, want):
+                    rows["F17"].append([lname, f"TurnSpeed {ats} (Speed {spd})",
+                                        f"expected {want} = {label}"])
+
     defense_tier_check(m, rows)
+    starting_units_check(m, rows)
+    aa_warhead_check(m, rows)
 
     total = sum(len(v) for v in rows.values())
     print(h1("audit_stat_formulas — house stat formulas"))
@@ -407,6 +591,11 @@ def main() -> int:
         "F11": "F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)",
         "F12": "F12 — anti-air defense not gated by the faction's radar tier",
         "F13": "F13 — advanced defense not gated by the faction's tech tier",
+        "F14": "F14 — StartingUnits referencing nonexistent actors (crash class)",
+        "F15": "F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)",
+        "F16": "F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)",
+        "F17": "F17 — fighter/bomber TurnSpeed ≠ Speed/15 (frontal: 2×)",
+        "F18": "F18 — weapons targeting Air whose damage warheads can't hit Air",
     }
     for k in rows:
         print(h2(f"{titles[k]}  ({len(rows[k])})"))

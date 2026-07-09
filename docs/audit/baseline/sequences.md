@@ -1,6 +1,6 @@
 # audit_sequences — art/sequence references (B6)
 
-S1 missing images: **12**, S2 missing sequences: **11**, S3 unreferenced sequence images: **542** (of 2944 defined)
+S1 missing images: **11**, S2 missing sequences: **11**, S3 unreferenced sequence images: **542** (of 2944 defined)
 
 
 ## S1 — actor render image not defined in sequences
@@ -14,7 +14,6 @@ S1 missing images: **12**, S2 missing sequences: **11**, S3 unreferenced sequenc
 | TECHBCANNON2 | techbcannon2 | mods/cameo/rules/tech.yaml |
 | TRAN.Husk1 | tran1husk | mods/cameo/rules/husks.yaml |
 | TRAN.Husk2 | tran2husk | mods/cameo/rules/husks.yaml |
-| TSENGINEER.GDI | tsengineer.gdi | mods/cameo/rules/tiberiansun.yaml |
 | ra2ctnewy26 | ra2ctnewy26 | mods/cameo/rules/redalert2.yaml |
 | techcementffact | techcementffact | mods/cameo/rules/tech.yaml |
 | techmetalffact | techmetalffact | mods/cameo/rules/tech.yaml |
