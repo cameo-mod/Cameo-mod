@@ -676,7 +676,7 @@ large_gun_turret.ixian:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+		Prerequisites: ~construction_yard.ixian, outpost.ixian
 		BuildPaletteOrder: 610
 		Description: actor-large_gun_turret.description
 		IconPalette: d2kunit

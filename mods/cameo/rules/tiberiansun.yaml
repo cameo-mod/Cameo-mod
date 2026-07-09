@@ -4120,6 +4120,8 @@ TSENGINEER:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
 		Prerequisites: ~tsengineer
+	Valued:
+		Cost: 600
 	Mobile:
 		Speed: 55
 	Health:
@@ -5654,31 +5656,44 @@ TSARND:
 		Count: 1
 	Armament@1:
 		Weapon: RA2GattlingMG1
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 64
 		LocalOffset: 85,90,299, 85,-90,299
 	Armament@2:
 		Weapon: RA2GattlingMG2
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
 		LocalOffset: 85,90,299, 85,-90,299
 	Armament@3:
 		Weapon: RA2GattlingMG3
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo >= 9
 		LocalOffset: 85,90,299, 85,-90,299
 	Armament@1AA:
 		Weapon: RA2GattlingMG1AA
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 64
 		LocalOffset: 85,90,299, 85,-90,299
 	Armament@2AA:
 		Weapon: RA2GattlingMG2AA
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
 		LocalOffset: 85,90,299, 85,-90,299
 	Armament@3AA:
 		Weapon: RA2GattlingMG3AA
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo >= 9
 		LocalOffset: 85,90,299, 85,-90,299
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2DoublePistols
+	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
 	WithInfantryBody:
@@ -11743,10 +11758,9 @@ TSHELI:
 		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 12
-		ReloadCount: 3
 		AmmoCondition: ammo
 	ReloadAmmoPool:
-		Delay: 25
+		Delay: 30
 		Count: 1
 	SpawnActorOnDeath:
 		Actor: TSHELI.Husk

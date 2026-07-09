@@ -6175,6 +6175,9 @@ tsarnd:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Filename: arnd.shp
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
 	run:
 		Tick: 120
 	paradrop:
