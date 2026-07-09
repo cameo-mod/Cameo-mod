@@ -3799,7 +3799,7 @@ forgotten_mutantsniper:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: forgotten_mutantsniper
+		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSSniper
@@ -3857,7 +3857,7 @@ forgotten_ghoststalker:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: forgotten_ghoststalker
+		VoiceSet: TSGhost
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -3991,7 +3991,7 @@ forgotten_mutantsoldier:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: forgotten_mutantsniper
+		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSRPGTower
@@ -6676,7 +6676,7 @@ TSORCA:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 10
 		ReloadCount: 2
@@ -6759,7 +6759,7 @@ TSORCAB:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 20
 		ReloadCount: 10
@@ -6837,7 +6837,7 @@ TSTRNSPORT:
 		Actor: TSTRNSPORT.Husk
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	RenderVoxels:
 		Scale: 7.4
 
@@ -7090,7 +7090,7 @@ forgotten_apache:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 12
 		ReloadCount: 3
@@ -7183,7 +7183,7 @@ forgotten_wasp:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 12
 		ReloadCount: 3
@@ -7280,7 +7280,7 @@ TSTRAN:
 		MaxWeight: 10
 		AfterUnloadDelay: 40
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	SpawnActorOnDeath:
 		Actor: TSTRAN.Husk
 	RenderVoxels:

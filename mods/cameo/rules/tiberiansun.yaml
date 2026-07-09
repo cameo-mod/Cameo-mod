@@ -4418,7 +4418,7 @@ TSZONETROOPER:
 		LocalOffset: 256,43,256
 		RequiresCondition: up_railgunweaponry
 	Voiced:
-		VoiceSet: forgotten_ghoststalker
+		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSZoneRailgun
@@ -4864,7 +4864,7 @@ TSRAILCOM:
 		LocalOffset: 256,43,256
 		RequiresCondition: up_railgunweaponry
 	Voiced:
-		VoiceSet: forgotten_ghoststalker
+		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSCommandoRailgun
@@ -5888,7 +5888,7 @@ forgotten_mutantsniper:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 	Voiced:
-		VoiceSet: forgotten_mutantsniper
+		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSSniper
@@ -5960,7 +5960,7 @@ forgotten_ghoststalker:
 		LocalOffset: 256,43,256
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Voiced:
-		VoiceSet: forgotten_ghoststalker
+		VoiceSet: TSGhost
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -6126,7 +6126,7 @@ forgotten_mutantsoldier:
 	# 	Weapon: MutAPRifleE
 	# 	RequiresCondition: rank-elite
 	Voiced:
-		VoiceSet: forgotten_mutantsniper
+		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: MutAPRifle
@@ -6312,7 +6312,7 @@ forgotten_runnershotgal:
 	# 	Weapon: TSShotgun
 	# 	RequiresCondition: rank-elite
 	Voiced:
-		VoiceSet: forgotten_mutantsniper
+		VoiceSet: TSUmagon
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSMutShotgun
@@ -6505,7 +6505,7 @@ forgotten_tiberianfiend:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~forgotten_barracks, forgotten_church, ~!forgotten_promotion_bluetiberiumfiend
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~!forgotten_promotion_viniferafiend
 		Queue: Infantry, RAInfantry
 		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
 	Mobile:
@@ -6541,7 +6541,7 @@ forgotten_tiberianfiend:
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-forgotten_bluetiberiumfiend:
+forgotten_viniferafiend:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6565,14 +6565,14 @@ forgotten_bluetiberiumfiend:
 		Cost: 2000
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_bluetiberiumfiend
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_viniferafiend
 		Queue: Infantry, RAInfantry
 		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
 	Mobile:
 		Speed: 60
 		Locomotor: foot
 	Tooltip:
-		Name: Tiberian Fiend
+		Name: Vinifera Fiend
 	Voiced:
 		VoiceSet: TSFiend
 	-RenderSprites:
@@ -9709,7 +9709,7 @@ forgotten_nomadbarracks:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 9
-		InitialUnits: forgotten_mutant,forgotten_rocketinfantry,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_runnershotgal,forgotten_chemsprayinfantry,forgotten_tiberianfiend,forgotten_bluetiberiumfiend,forgotten_mutantsniper
+		InitialUnits: forgotten_mutant,forgotten_rocketinfantry,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_runnershotgal,forgotten_chemsprayinfantry,forgotten_tiberianfiend,forgotten_viniferafiend,forgotten_mutantsniper
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
@@ -10760,7 +10760,7 @@ TSORCA:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -10851,7 +10851,7 @@ TSZONEORCA:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -11022,7 +11022,7 @@ TSORCAB:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 20
 		ReloadDelay: 10
@@ -11101,7 +11101,7 @@ TSTRNSPORT:
 		Actor: TSTRNSPORT.Husk
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	RenderVoxels:
 		Scale: 15
 	ActorStatValues:
@@ -11167,7 +11167,7 @@ tscarrycabal:
 	SpawnActorOnDeath:
 		Actor: tscarrycabal.Husk
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	RenderSprites:
 		Image: tscarrycabal
 		PlayerPalette: player_rgba
@@ -11235,7 +11235,7 @@ forgotten_carryall:
 		Actor: TSTRNSPORT.Husk
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	RenderVoxels:
 		Scale: 15
 		Image: tstrnsport
@@ -11772,7 +11772,7 @@ forgotten_apache:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 12
 		AmmoCondition: ammo
@@ -11872,7 +11872,7 @@ forgotten_wasp:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -11975,7 +11975,7 @@ forgotten_cropplane:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 1
 		ReloadCount: 1
@@ -12065,7 +12065,7 @@ forgotten_locustbomber:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	AmmoPool:
 		Ammo: 1
 		ReloadCount: 1
@@ -12237,7 +12237,7 @@ TSTRAN:
 		MaxWeight: 10
 		AfterUnloadDelay: 40
 	Voiced:
-		VoiceSet: forgotten_apache
+		VoiceSet: TSHeli
 	SpawnActorOnDeath:
 		Actor: TSTRAN.Husk
 	RenderVoxels:
@@ -13601,19 +13601,19 @@ forgotten_promotion_runnershotgal:
 	ProvidesPrerequisite:
 		Prerequisite: forgotten_promotion_runnershotgal
 
-forgotten_promotion_bluetiberiumfiend:
+forgotten_promotion_viniferafiend:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Blue Tiberium Fiend
+		Name: Unlock Vinifera Fiend
 	Buildable:
 		BuildPaletteOrder: 7
 		Queue: Promotions
-		Description: Allows training of Blue Tiberium Fiend.
-		Prerequisites: ~fact.forgotten, forgotten_promotion_runnershotgal, !forgotten_promotion_bluetiberiumfiend, rank1
+		Description: Allows training of Vinifera Fiends.
+		Prerequisites: ~fact.forgotten, forgotten_promotion_runnershotgal, !forgotten_promotion_viniferafiend, rank1
 	RenderSprites:
-		Image: forgotten_bluetiberiumfiend
+		Image: forgotten_viniferafiend
 	ProvidesPrerequisite:
-		Prerequisite: forgotten_promotion_bluetiberiumfiend
+		Prerequisite: forgotten_promotion_viniferafiend
 
 forgotten_promotion_ghoststalker:
 	Inherits: ^promotion_upgrade.template
@@ -13623,7 +13623,7 @@ forgotten_promotion_ghoststalker:
 		BuildPaletteOrder: 10
 		Queue: Promotions
 		Description: Allows training of Ghost Stalker.
-		Prerequisites: ~fact.forgotten, forgotten_promotion_bluetiberiumfiend, !forgotten_promotion_ghoststalker, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_viniferafiend, !forgotten_promotion_ghoststalker, rank1
 	RenderSprites:
 		Image: forgotten_ghoststalker
 	ProvidesPrerequisite:

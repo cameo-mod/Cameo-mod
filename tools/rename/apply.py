@@ -66,6 +66,18 @@ def build_replacer(actors: dict[str, str]):
     return sub
 
 
+VOICE_LINE = re.compile(r"^\s*VoiceSets?:", re.IGNORECASE)
+
+
+def audio_voice_keys() -> set[str]:
+    keys: set[str] = set()
+    for p in (MOD / "audio").glob("*.yaml"):
+        for line in p.read_text(encoding="utf-8-sig", errors="replace").splitlines():
+            if line and not line[0] in "\t #" and line.rstrip().endswith(":"):
+                keys.add(line.rstrip()[:-1].lower())
+    return keys
+
+
 def main() -> int:
     if len(sys.argv) != 2:
         print(__doc__)
@@ -75,14 +87,36 @@ def main() -> int:
     sub = build_replacer(actors)
     print(f"map: {len(actors)} actor ids, {len(files)} files")
 
+    # pre-flight: cross-namespace collisions (voice sets are NOT actor ids —
+    # a shared voice named like a unit must never be renamed with it)
+    voices = audio_voice_keys()
+    clashes = sorted(a for a in actors if a.lower() in voices)
+    if clashes:
+        print("NOTE: these ids also name audio voice sets; audio files and "
+              "VoiceSet lines are protected:", ", ".join(clashes))
+
     # ---- text replacement across the tree --------------------------------- #
     n_files = n_hits = 0
     targets: list[pathlib.Path] = []
     for pat in ("**/*.yaml", "**/*.ftl", "**/*.lua"):
         targets += [p for p in MOD.glob(pat) if p.is_file()]
     for p in sorted(set(targets)):
+        if (MOD / "audio") in p.parents:
+            continue    # voice/notification namespace, never actor ids
         text = p.read_text(encoding="utf-8-sig", errors="replace")
-        new, n = sub(text)
+        if VOICE_LINE.search(text):
+            # protect VoiceSet lines: substitute line-wise
+            out_lines, n = [], 0
+            for line in text.split("\n"):
+                if VOICE_LINE.match(line):
+                    out_lines.append(line)
+                    continue
+                repl, k = sub(line)
+                out_lines.append(repl)
+                n += k
+            new = "\n".join(out_lines)
+        else:
+            new, n = sub(text)
         # filename strings (files map) in yaml — boundary-safe so a new name
         # containing the old stem can never be re-matched (idempotent)
         fn = 0
@@ -111,9 +145,16 @@ def main() -> int:
                 text = data.decode("utf-8-sig")
             except UnicodeDecodeError:
                 continue
-            new, n = sub(text)
+            out_lines, n = [], 0
+            for line in text.split("\n"):
+                if VOICE_LINE.match(line):
+                    out_lines.append(line)
+                    continue
+                repl, k = sub(line)
+                out_lines.append(repl)
+                n += k
             if n:
-                members[name] = new.encode("utf-8")
+                members[name] = "\n".join(out_lines).encode("utf-8")
                 changed = True
         if changed:
             buf = io.BytesIO()

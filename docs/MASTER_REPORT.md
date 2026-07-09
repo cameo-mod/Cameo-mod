@@ -394,6 +394,7 @@ icon file        :=  <actor_id>_icon.<ext>
 - **`upgrade|promotion|doctrine`** — full words, only on tech-tree items: `upgrade` for cash research, `promotion` for rank-gated unlocks, `doctrine` for mutually-exclusive doctrine picks. Team-proxy dummies append `_proxy_actor` (existing RA1 convention).
 - **`name`** — the unit's display-ish name as ONE lowercase group without separators (RA1 baseline: `heatraytank`, `nuclearshells`): `titan`, `slaveminer`, `skyhammer`, `ghoststalker`.
 - **`variant`** — optional: `_mk2`, `_elite`, `_husk`, `_water` (movement variants), `_ai` (AI-only variants — historical "Special Bot variants" should be explicit).
+- **Tooltip consistency** — the id's name group derives from the Tooltip Name and both must stay in sync: when an id is disambiguated, the Tooltip is renamed too, so no two actors of a faction share a display name (audit_metadata M1 enforces). New display names are a design decision — propose options and let design pick (e.g. the blue Tiberian Fiend became "Vinifera Fiend"). Shared cross-actor namespaces (voice sets, shared sprites) are never renamed with a unit; tools/rename/apply.py protects audio files and VoiceSet lines.
 
 **Examples**
 ```
