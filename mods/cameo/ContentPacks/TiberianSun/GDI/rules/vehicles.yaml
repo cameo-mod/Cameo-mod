@@ -1,0 +1,1072 @@
+ts_gdi_mobileconstructionvehicle:
+	Inherits: ^Vehicle
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Buildable:
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_servicedepot
+		Queue: Vehicle, RAVehicle
+		Description: template-mcv.description
+	Tooltip:
+		Name: Mobile Construction Vehicle
+	Transforms:
+		IntoActor: ts_gdi_constructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: tsplace2.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		Image: tsmcv
+	RenderVoxels:
+		Image: tsmcv
+		Scale: 18
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_tiberiumharvester:
+	Inherits: ^TDHARV
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Health:
+		HP: 150000
+	Harvester:
+		PipCount: 8
+		Capacity: 35
+	Buildable:
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_tiberiumrefinery
+		Queue: Vehicle, RAVehicle
+		Description: Harvests Tiberium for processing
+	WithVoxelBody:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 500
+	RenderSprites:
+		Image: ts_gdi_tiberiumharvester
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_pitbull:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXP: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@EMP: ^TurretEMP
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 400
+	Tooltip:
+		Name: Pitbull
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_gdi_warfactory
+		Description: Scout vehicle.  Strong vs Vehicles, Aircraft.  Weak vs Infantry
+	Mobile:
+		Speed: 150
+		TurnSpeed: 30
+	Health:
+		HP: 27500
+	Repairable:
+		HpPerStep: 1375
+	ChangesHealth@SelfHealing:
+		Step: 11
+	Turreted:
+		TurnSpeed: 30
+		Offset: -85,0,192
+	Armament:
+		Weapon: PitbullRockets
+		LocalOffset: -128, -170, 170, -128, 170, 170
+		LocalYaw: 100, -100
+		MuzzleSequence: muzzle
+	AttackTurreted:
+	WithMuzzleOverlay:
+	WithSpriteTurret:
+	RenderSprites:
+		Image: ts_gdi_pitbull
+		PlayerPalette: player_rgba
+	FireWarheadsOnDeath:
+		Weapon: UnitExplodeSmall
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_amphibiousapc:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@botmicro: ^BotAutoDeployTransport
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@cargo: ^CargoVehicle
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 1640
+	Tooltip:
+		Name: Amphibious APC
+	UpdatesPlayerStatistics:
+		OverrideActor: ts_gdi_amphibiousapc
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ts_gdi_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: Armored infantry transport.\nCan move on water.
+	Mobile:
+		Locomotor: amphibius
+		Speed: 100
+		TurnSpeed: 20
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 20
+	Armament:
+		Weapon: TSAAPCCannon
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+		Class: ts_gdi_amphibiousapc
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 6
+		InitialUnits: ts_gdi_lightinfantry, ts_gdi_lightinfantry, ts_gdi_discthrower, ts_gdi_discthrower, ts_gdi_falconenforcer, ts_gdi_falconenforcer
+	GrantConditionOnTerrain:
+		Condition: inwater
+		TerrainTypes: Water, River
+	WithVoxelBody:
+		RequiresCondition: !inwater
+	WithVoxelBody@water:
+		Sequence: water
+		RequiresCondition: inwater
+	RenderVoxels:
+		Image: ts_gdi_amphibiousapc
+	RenderSprites:
+		Image: ts_gdi_amphibiousapc
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_mobileemp:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Mobile EMP
+	Buildable:
+		BuildPaletteOrder: 110
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_empulsecannon, ts_gdi_radar
+		Queue: Vehicle, RAVehicle
+		Description: Shuts down vehicles with an EMP blast.\n  Strong vs Vehicles, Cyborgs
+	Mobile:
+		Locomotor: tracked
+		Speed: 100
+		TurnSpeed: 40
+	Health:
+		HP: 150000
+	Armor:
+		Type: Heavy
+	Repairable:
+		HpPerStep: 7500
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Turreted:
+	AttackTurreted:
+	Armament:
+		Weapon: TSMobileEMP
+		MuzzleSequence: muzzle
+#	ReloadArmamentsBar:
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 700
+	RenderVoxels:
+		Image: tsm_emp
+		Scale: 15
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_titan:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@detect: ^EliteDetector
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Titan
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_unlocktitanmkii
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 15
+	Armament@PRIMARY:
+		Weapon: TS120mm
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TS120mmRail
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	AttackTurreted:
+	WithMuzzleOverlay:
+	RenderVoxels:
+	-WithVoxelBody:
+	WithVoxelBarrel:
+		LocalOffset: 0,51,256
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	WithSpriteTurret:
+		Recoils: false
+	BodyOrientation:
+		QuantizedFacings: 32
+		UseClassicPerspectiveFudge: False
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderVoxels:
+		Scale: 10
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+
+ts_gdi_titanmkii:
+	Inherits: ^Tank
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^TurretEMP
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Titan MK II
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_promotion_unlocktitanmkii
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 75
+		TurnSpeed: 15
+	Health:
+		HP: 120000
+	Repairable:
+		HpPerStep: 6000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 15
+		Offset: -45,0,392
+	Armament@PRIMARY:
+		Weapon: TS120mmTal
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TS120mmTalRail
+		Recoil: 128
+		RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	AttackTurreted:
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	WithSpriteTurret:
+		Recoils: true
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+
+ts_gdi_juggernautmkii:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	# Inherits@EMP: ^TurretEMP
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	# Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Valued:
+		Cost: 2200
+	Tooltip:
+		Name: Juggernaut MK II
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ts_gdi_promotion_unlockjuggernautmkii
+		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+	Mobile:
+		Locomotor: heavytracked
+		Speed: 70
+		TurnSpeed: 14
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	# Turreted:
+	# 	TurnSpeed: 14 #3
+	# 	Offset: -45,0,392
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSJugg120mm
+		# Recoil: 128
+		# RecoilRecovery: 32
+		LocalOffset: 800, 300, 700
+		MuzzleSequence: muzzle
+	# AttackTurreted:
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	# WithSpriteTurret:
+	# 	Recoils: true
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	WithAttackAnimation@Primary:
+		Sequence: shoot
+		Armament: primary
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering
+
+ts_gdi_juggernaut:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	# Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@detect: ^EliteDetector
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@deploy: ^LurkerMode
+	Inherits@bot: ^SiegeModeVehicle
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: Juggernaut
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Juggernaut (deployed)
+		RequiresCondition: deployed
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ~!ts_gdi_promotion_unlockjuggernautmkii
+		Queue: Vehicle, RAVehicle
+		Description: Mobile artillery mech.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Health:
+		HP: 35000
+	Repairable:
+		HpPerStep: 1750
+	ChangesHealth@SelfHealing:
+		Step: 14
+	Mobile:
+		Locomotor: tracked
+		Speed: 71
+		TurnSpeed: 20
+	RevealsShroud:
+		RequiresCondition: !inside-tunnel
+		Range: 9c0
+		MaxHeightDelta: 3
+	RenderSprites:
+		Image: ts_gdi_juggernaut
+	WithMakeAnimation:
+		BodyNames: body, deployedbody
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
+	WithFacingSpriteBody:
+		RequiresCondition: !deployed
+		Name: body
+	WithSpriteBody@deployed:
+		RequiresCondition: !undeployed && real-actor
+		Sequence: idletur
+		Name: deployedbody
+	Turreted:
+		Turret: deploy
+		TurnSpeed: 20
+		InitialFacing: 384
+		Offset: 0,0,256
+		RealignDelay: -1
+	WithSpriteTurret@barrel:
+		Turret: deploy
+		RequiresCondition: deployed && !engage-air
+		Sequence: barrel
+	WithSpriteTurret@barrelup:
+		Turret: deploy
+		RequiresCondition: deployed && engage-air
+		Sequence: barrelup
+	WithSpriteTurret@deployed:
+		Turret: deploy
+		RequiresCondition: deployed
+	AttackTurreted:
+		Voice: Attack
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		OutsideRangeRequiresForceFire: True
+	Armament@Deployed:
+		Weapon: TSJugg90mm
+		LocalOffset: 777,203,999, 777,0,999, 777,-203,999
+		MuzzleSequence: muzzle
+		ReloadingCondition: engage-air
+	Armament@Dummy:
+		Weapon: TSJuggTargeting
+	WithMuzzleOverlay:
+	RevealOnFire:
+		ArmamentNames: deployed
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+		Body: body
+		RequiresCondition: !deployed
+	Voiced:
+		VoiceSet: TSVehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering
+
+ts_gdi_hovermlrs:
+	Inherits: ^Tank
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Hover MLRS
+	Buildable:
+		BuildPaletteOrder: 80
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_radar
+		Queue: Vehicle, RAVehicle
+		Description: Hovering vehicle armed with\nlong range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Mobile:
+		Locomotor: hover
+		Speed: 80
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Medium
+	Turreted:
+		TurnSpeed: 16
+	Armament:
+		Weapon: TSHoverMissile
+		LocalOffset: 0,121,271, 0,-121,271
+	AttackTurreted:
+	SelectionDecorations:
+		Bounds: 2248, 2248
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	WithVoxelTurret:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 450
+	Hovers:
+		RequiresCondition: !disabled
+	RenderVoxels:
+		Scale: 15
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability
+
+ts_gdi_wolverine:
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EXT: ^ExternalConditions
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 550
+	Tooltip:
+		Name: Wolverine
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 25
+		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_unlockwolverinemkii
+		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		TurnSpeed: 32
+		Speed: 80
+		Locomotor: wheeled
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Light
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSAssaultCannon
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Name: secondary
+		Weapon: TSAssaultCannonSonic
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: primary
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: secondary
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	Voiced:
+		VoiceSet: TSMech
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_wolverinemkii:
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EXT: ^ExternalConditions
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 950
+	Tooltip:
+		Name: Wolverine MK II
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 25
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_promotion_unlockwolverinemkii
+		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		TurnSpeed: 32
+		Speed: 80
+		Locomotor: wheeled
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Medium
+	AttackFrontal:
+		FacingTolerance: 0
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: TSAssaultCannonTal
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Name: secondary
+		Weapon: TSAssaultCannonTalSonic
+		LocalOffset: 25,121,171, 0,-121,171
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: primary
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: secondary
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	Voiced:
+		VoiceSet: TSMech
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_mammothprototype:
+	Inherits: ^Tank
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@crush: ^VehicleCrusher
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@ND: ^NotDevourable
+	# Inherits@announce: ^AnnounceGlobal
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Mammoth Prototype
+	# Mammoth MK. II
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ~!ts_gdi_promotion_unlockmammothmkii
+		Queue: Vehicle, RAVehicle
+		BuildLimit: 1
+		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
+	Mobile:
+		TurnSpeed: 20
+		Speed: 50
+	Health:
+		HP: 800000
+	#ChangesHealth@1:
+	#	Step: 400
+	#	Delay: 1
+	#	StartIfBelow: 100
+	#	DamageCooldown: 1
+	#ChangesHealth@2:
+	#	PercentageStep: 1
+	#	Delay: 25
+	#	StartIfBelow: 100
+	#	DamageCooldown: 25
+	Repairable:
+		HpPerStep: 40000
+	ChangesHealth@SelfHealing:
+		Step: 320
+	Armor:
+		Type: Superheavy
+	Armament@RAILGUN:
+		Name: railgun
+		Weapon: TSMechRailgun
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@MISSILES:
+		Name: missiles
+		Weapon: TSMammothTusk2
+		LocalOffset: -420,-300,600, -420,300,600
+		LocalYaw: -100,100
+	Armament@UpgradeRAILGUN:
+		Name: railgun
+		Weapon: TSMechRailgunRail
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	#	MuzzleSequence: muzzle1
+	#	RequiresCondition: !rank-elite
+	#Armament@MISSILESE:
+	#	Name: missiles
+	#	Weapon: TSMammothTusk_elite
+	#	LocalOffset: -420,-300,600, -420,300,600
+	#	LocalYaw: -100,100
+	#	MuzzleSequence: muzzle1
+	#	RequiresCondition: rank-elite
+	#	MuzzleSequence: muzzle2
+	#	RequiresCondition: !rank-elite
+	#Armament@RAILGUNE:
+	#	Name: railgun
+	#	Weapon: TSMechRailgun_elite
+	#	LocalOffset: 550,-420,650, 550,420,650
+	#	MuzzleSequence: muzzle2
+	#	RequiresCondition: rank-elite
+	AttackFrontal:
+		Armaments: railgun
+		FacingTolerance: 0
+	AttackFollow:
+		Armaments: missiles
+		PauseOnCondition: disabled
+		Voice: Attack
+	Crushable:
+		CrushClasses: hugevehicle
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1280, 1024
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	-WithVoxelBody:
+	WithVoxelWalkerBody:
+		TickRate: 1
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 1500
+	RenderVoxels:
+		Scale: 15
+	Passenger:
+		Weight: 10
+	Capturable:
+		Types: thiefproof
+	RenderSprites:
+		PlayerPalette: playerra2
+	ProvidesPrerequisite@mkii:
+		Prerequisite: existingmkii
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+
+ts_gdi_mammothmkii:
+	Inherits: ^Tank
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@crush: ^VehicleCrusher
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@ND: ^NotDevourable
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@MechEngineering: ^MechEngineering
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 8000
+	Tooltip:
+		Name: Mammoth MK. II
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ts_gdi_promotion_unlockmammothmkii
+		Queue: Vehicle, RAVehicle
+		BuildLimit: 1
+		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
+	Mobile:
+		TurnSpeed: 20
+		Speed: 50
+	Health:
+		HP: 1200000
+	Repairable:
+		HpPerStep: 60000
+	ChangesHealth@SelfHealing:
+		Step: 480
+	Armor:
+		Type: Superheavy
+	Armament@RAILGUN:
+		Name: railgun
+		Weapon: TSMechRailgunII
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@MISSILES:
+		Name: missiles
+		Weapon: TSMammothTusk2II
+		LocalOffset: -420,-300,600, -420,300,600
+		LocalYaw: -100,100
+	Armament@UpgradeRAILGUN:
+		Name: railgun2
+		Weapon: TSMechRailgunRailII
+		LocalOffset: 400,-350,450, 400,350,450
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	Armament@MG:
+		Name: mg
+		Weapon: TSMechMGII
+		LocalOffset: 600,0,350
+	AttackFrontal@primary:
+		Armaments: railgun
+		FacingTolerance: 0
+	AttackFrontal@secondary:
+		Armaments: mg
+		FacingTolerance: 256
+	AttackFrontal@upgrade:
+		Armaments: railgun2
+		FacingTolerance: 0
+	AttackFollow:
+		Armaments: missiles
+		PauseOnCondition: disabled
+		Voice: Attack
+	Crushable:
+		CrushClasses: hugevehicle
+	WithMuzzleOverlay:
+	SelectionDecorations:
+	Selectable:
+		Bounds: 1280, 1024
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 1500
+	Passenger:
+		Weight: 10
+	Capturable:
+		Types: thiefproof
+	WithFacingSpriteBody:
+		Sequence: idle
+	WithAttackAnimation@PRIMARY:
+		Sequence: shoot
+		Armament: railgun
+	WithAttackAnimation@SECONDARY:
+		Sequence: idle
+		Armament: mg
+	WithAttackAnimation@MISSILES:
+		Sequence: idle
+		Armament: missiles
+	WithAttackAnimation@UPGRADE:
+		Sequence: shoot
+		Armament: railgun2
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	ProvidesPrerequisite@mkii:
+		Prerequisite: existingmkii
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
+
+ts_gdi_disruptor:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 2400
+	Tooltip:
+		Name: Disruptor
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter
+		Queue: Vehicle, RAVehicle
+		Description: Armored high-tech vehicle with\na long range sonic armament.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+	Mobile:
+		TurnSpeed: 10
+		Speed: 50
+	Health:
+		HP: 250000
+	Repairable:
+		HpPerStep: 12500
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armor:
+		Type: Heavy
+	Turreted:
+		TurnSpeed: 10
+	Armament@PRIMARY:
+		Weapon: TSSonicZapWeapon
+		Recoil: 128
+		RecoilRecovery: 26
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSSonicZapWeaponSonic
+		Recoil: 128
+		RecoilRecovery: 26
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	AttackTurreted:
+	WithVoxelTurret:
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	-RangeMultiplier@usasearchndestroy:
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_mobilesensorarray:
+	Inherits: ^Tank
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@MechanicalReliability: ^MechanicalReliability
+	Valued:
+		Cost: 1100
+	Tooltip:
+		Name: Mobile Sensor Array
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_radar
+		Queue: Vehicle, RAVehicle
+		Description: Detects cloaked units and buildings.\n Unarmed
+	Mobile:
+		Speed: 85
+	Health:
+		HP: 60000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Wood
+	Inherits@EXT: ^ExternalConditions ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	DetectCloaked:
+		Range: 12c0
+	RenderSprites:
+		Image: ts_gdi_mobilesensorarray
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
+
+#######################################
+# TS Forgotten Vehicles
+#######################################

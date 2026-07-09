@@ -1,0 +1,366 @@
+ts_gdi_upgradecenter:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@SW: ^PrimarySuperweapon
+	# Inherits@hunterseeker: ^HunterSeekersPower
+	# Selectable:
+	# 	Bounds: 3072, 2048
+	# HitShape:
+	# 	TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 140
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter, !tsionc, ~techlevel.superweapons
+		Description: actor-tsgtplug.description
+	Tooltip:
+		Name: Upgrade Center
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 2048, 2048
+	RevealsShroud:
+		Range: 5c0
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-dish
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !lowpower && !disabled
+		Sequence: idle-lights
+	WithIdleOverlay@STRIP:
+		RequiresCondition: !build-incomplete && !lowpower && !disabled
+		Sequence: idle-strip
+	WithIdleOverlay@ioncannonb:
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-ioncannonb
+	WithIdleOverlay@hunterseekera:
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-hunterseekera
+	IonCannonPower:
+		AllowMultiple: True
+		PauseOnCondition: lowpower || disabled
+		Prerequisites:
+			1: ~techlevel.superweapons
+		Icons:
+			1:ioncannon
+		Cursor: ioncannon
+		ChargeInterval: 7500
+		WeaponDelay: 0
+		Weapon: TSIonCannon
+		Effect: tsioncannon
+		EffectSequence: targeting
+		EffectPalette: ra2effect
+		Names:
+			1: power-ioncannon.name
+		Descriptions:
+			1: power-ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeTextNotification: Ion Cannon ready.
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		DisplayRadarPing: True
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		CameraActor: CAMERA.small
+		SupportPowerPaletteOrder: 20
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+	ProvidesPrerequisite@swlimit:
+		Prerequisite: tsionc
+	#Production:
+	#	Produces: UpgradeCenter.TSGDI
+	#	RequiresCondition: plugupgrade < 2
+	#ProductionQueue:
+	#	Type: UpgradeCenter.TSGDI
+	#	Group: Addon
+	#	LowPowerModifier: 200
+	#	QueueLimit: 2
+	#	ItemLimit: 2
+	#	DisplayOrder: 0
+	#GrantConditionOnProduction@plug:
+	#	Condition: plugupgrade
+	#GrantConditionOnProduction@ic:
+	#	Condition: ioncannon
+	#	Actors: tsgtplug2
+	#GrantConditionOnProduction@hs:
+	#	Condition: hunterseeker
+	#	Actors: tsgtplug3
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_gdi_vulcantower:
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@SonicWeaponry: ^SonicWeaponry
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Vulcan Tower
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_barracks
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Basic base defense.\nDoes not require power to operate.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 80000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSVulcanGun
+		LocalOffset: 300,60,600
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
+	Armament@Upgrade:
+		Weapon: TSVulcanGunSonic
+		LocalOffset: 300,60,600
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
+	#Armament@VULCSECONDARY:
+	#	Weapon: TurretGun
+	#	LocalOffset: 300,-60,600
+	AttackTurreted:
+	WithSpriteTurret:
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -20
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_sonicweaponry
+
+ts_gdi_rpgtower:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@RailgunWeaponry: ^RailgunWeaponry
+	Valued:
+		Cost: 1400
+	Tooltip:
+		Name: RPG Tower
+	Buildable:
+		BuildPaletteOrder: 130
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: GDI anti-vehicle base defense.\nDoes not require power to operate.\n  Strong vs Armored ground units\n  Weak vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 150000
+	RevealsShroud:
+		Range: 7c0
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament@PRIMARY:
+		Weapon: TSRPGTower
+		LocalOffset: 130,-45,500
+		MuzzleSequence: muzzle
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
+	Armament@Upgrade:
+		Weapon: TSRPGTowerRail
+		LocalOffset: 130,-45,500
+		MuzzleSequence: muzzle
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
+	WithMuzzleOverlay:
+	AttackTurreted:
+	WithSpriteTurret:
+	DetectCloaked:
+		Range: 3c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -20
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_railgunweaponry
+
+ts_gdi_samtower:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Inherits@TSProjectileImprovements: ^TSProjectileImprovements
+	Valued:
+		Cost: 800
+	Tooltip:
+		Name: SAM Tower
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_radar
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: GDI anti-air base defense.\nDoes not require power to operate.\n  Strong vs Aircraft
+	RequiresBuildableArea:
+		AreaTypes: building
+	Selectable:
+		Bounds: 1024, 1024
+	SelectionDecorations:
+	Health:
+		HP: 100000
+	Armor:
+		Type: Light
+	RevealsShroud:
+		Range: 12440
+	Turreted:
+		TurnSpeed: 48
+		Offset: 0,0,0
+	WithSpriteBody:
+	Armament:
+		Weapon: TSGDIRedEye
+		LocalOffset: 250,0,750
+	AttackTurreted:
+	WithSpriteTurret:
+	DetectCloaked:
+		Range: 4c0
+	-SpawnActorsOnSell:
+	-WithDeathAnimation:
+	Power:
+		Amount: -30
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_gdi_upgrade_projectileimprovements
+
+ts_gdi_empulsecannon:
+	Inherits: ^Defense
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@EMP: ^TurretEMP
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		BuildPaletteOrder: 140
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: actor-tsntpulsgdi.description
+		BuildLimit: 1
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: E.M. Pulse Cannon
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 250000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 7c0
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	Armament@PRIMARY:
+		Weapon: TSEMPZapWeapon
+		LocalOffset: 100,0,600
+	Turreted:
+	WithSpriteTurret:
+		RequiresCondition: !build-incomplete
+		Sequence: turret
+	AttackTurreted:
+		OpportunityFire: false
+		PersistentTargeting: false
+	DetonateWeaponPower@Emp:
+		AllowMultiple: false
+		OrderName: SteelEmpCannon
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ts_gdi_empulsecannon
+		IconImage: tsntpuls
+		Icons:
+			1: icon2
+		Cursor: ioncannon
+		ChargeInterval: 6000
+		ActivationDelay: 50
+		ActivationSequence:
+		Names:
+			1: Emp Disable
+		Weapons:
+			1: SteelEmpBomb
+		Descriptions:
+			1: power-ioncannon.description
+		BeginChargeSpeechNotification: IonCannonCharging
+		EndChargeSpeechNotification: IonCannonReady
+		EndChargeSound:
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		DisplayRadarPing: True
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		CameraActor: camera.small
+		CameraRange: 6000
+		CameraRemoveDelay: 125
+		TargetCircleRanges:
+			1: 6000
+		TargetCircleColor: ff000080
+		LaunchSound:
+		IncomingSound:
+	SupportPowerChargeBar:
+	# AttackOrderPower:
+	# 	OrderName: EMPPower
+	# 	PauseOnCondition: disabled || lowpower
+	# 	Cursor: attackmove
+	# 	Icon: emp
+	# 	ChargeInterval: 3000
+	# 	Name: E.M. Pulse
+	# 	Description: Fires a pulse blast which disables\nall mechanical units in the area.
+	# 	EndChargeSpeechNotification: EmPulseCannonReady
+	# 	SelectTargetSpeechNotification: SelectTarget
+	RenderRangeCircle:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsntpuls
+
+# tsntpulsnod:
+# 	Inherits: ts_gdi_empulsecannon
+# 	Buildable:
+# 		BuildPaletteOrder: 140
+# 		Prerequisites: ~tsgtcnstnod, tsntradr
+# 	Tooltip:
+# 		Name: E.M. Pulse Cannon
+
+# tsntpulscabal:
+# 	Inherits: ts_gdi_empulsecannon
+# 	Buildable:
+# 		BuildPaletteOrder: 140
+# 		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
+# 	Tooltip:
+# 		Name: E.M. Pulse Cannon

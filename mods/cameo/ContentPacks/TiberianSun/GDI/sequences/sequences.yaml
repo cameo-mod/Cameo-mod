@@ -1,0 +1,1185 @@
+ts_gdi_lightinfantry:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: tse1.shp
+	icon:
+		Filename: tse1gicon.png
+
+ts_gdi_medic:
+	Defaults:
+		Filename: ts_gdi_medic.shp
+		Scale: 1.25
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+		ShadowStart: 307
+	idle:
+		Facings: 8
+		ShadowStart: 307
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 315
+	idle1:
+		Start: 56
+		Length: 15
+		ShadowStart: 363
+	idle2:
+		Start: 71
+		Length: 15
+		ShadowStart: 378
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		ShadowStart: 393
+	prone-stand:
+		Start: 86
+		Facings: 8
+		Stride: 6
+		ShadowStart: 393
+	die1:
+		Start: 134
+		Length: 15
+		ShadowStart: 441
+	die2:
+		Start: 149
+		Length: 15
+		ShadowStart: 455
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 159
+		Length: 5
+		ShadowStart: 451
+		Tick: 800
+		ZOffset: -511
+	die6:
+		Start: 149
+		Length: 15
+		ShadowStart: 455
+	standup:
+		Start: 260
+		Length: 2
+		Facings: 8
+		ShadowStart: 567
+	die7:
+		Filename: electro.shp
+		Length: *
+	die5: e1
+		Start: 418
+		Length: 18
+		Tick: 80
+	shoot:
+		Start: 292
+		Length: 14
+		ShadowStart: 599
+	prone-shoot:
+		Start: 292
+		Length: 14
+		ShadowStart: 599
+	icon:
+		Filename: ts_gdi_medic_icon.png
+
+ts_gdi_discthrower:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: alte2.shp
+	icon:
+		Filename: ts_gdi_discthrower_icon.png
+
+ts_gdi_falconenforcer:
+	icon:
+		Filename: ts_gdi_falconenforcer_icon.png
+	Defaults:
+		Tick: 80
+		Offset: 0, 0, 16
+		Filename: ts_gdi_falconenforcer.shp
+		Scale: 1.25
+	stand:
+		Facings: 8
+		ShadowStart: 300
+	liedown:
+		Facings: 8
+		ShadowStart: 300
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 308
+	idle1:
+		Start: 56
+		Length: 15
+		ShadowStart: 356
+	idle2:
+		Start: 71
+		Length: 15
+		ShadowStart: 371
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		ShadowStart: 386
+	prone-stand:
+		Start: 86
+		Facings: 8
+		Stride: 6
+		ShadowStart: 378
+	prone-stand2:
+		Start: 86
+		Facings: 8
+		Stride: 6
+		ShadowStart: 378
+	die1:
+		Start: 134
+		Length: 15
+		ShadowStart: 434
+	die2:
+		Start: 149
+		Length: 15
+		ShadowStart: 449
+	die6:
+		Start: 149
+		Length: 15
+		ShadowStart: 449
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Start: 159
+		Length: 5
+		ShadowStart: 451
+		Tick: 800
+		ZOffset: -511
+	standup:
+		Start: 212
+		Length: 2
+		Facings: 8
+		ShadowStart: 512
+	cheer:
+		Start: 244
+		Length: 8
+		Facings: 1
+		ShadowStart: 544
+	die7: electro
+		Length: *
+	die5: flameguy
+		Start: 44
+		Length: 104
+		Tick: 50
+	shoot:
+		Start: 164
+		Length: 6
+		Facings: 8
+		ShadowStart: 464
+	prone-shoot:
+		Start: 252
+		Length: 6
+		Facings: 8
+		ShadowStart: 552
+
+ts_gdi_zonetrooper:
+	Defaults:
+		Filename: ts_gdi_zonetrooper.png
+		Scale: 0.6
+		Offset: 0,-24
+	stand:
+		Offset: 0,-14
+		Scale: 1
+		Facings: 8
+	run:
+		Offset: 0,-14
+		Scale: 1
+		Start: 8
+		Length: 8
+		Facings: 8
+		Tick: 80
+	idle1:
+		Offset: 0,-14
+		Scale: 1
+		Start: 120
+		Length: 44
+	idle2:
+		Offset: 0,-14
+		Scale: 1
+		Start: 164
+		Length: 44
+	die1:
+		Offset: 0,-14
+		Scale: 1
+		Start: 208
+		Length: 28
+	die2:
+		Offset: 0,-14
+		Scale: 1
+		Start: 236
+		Length: 24
+	die6:
+		Offset: 0,-14
+		Scale: 1
+		Start: 236
+		Length: 24
+	die4:
+		Filename: frag3.shp
+		Length: *
+	die-crushed:
+		Offset: 0,-14
+		Scale: 1
+		Start: 208
+		Length: 1
+	cheer:
+		Offset: 0,-14
+		Scale: 1
+		Start: 120
+		Length: 44
+	die7: electro
+		Offset: 0,-14
+		Scale: 1
+		Length: *
+	die5: flameguy
+		Offset: 0,-14
+		Scale: 1
+		Start: 44
+		Length: 104
+		Tick: 50
+	shoot:
+		Offset: 0,-14
+		Scale: 1
+		Start: 72
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: ts_gdi_zonetrooper_icon.png
+		Offset: 0, 0
+
+ts_gdi_riottrooper:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: ts_gdi_riottrooper.shp
+	icon:
+		Filename: ts_gdi_riottrooper_icon.png
+
+ts_gdi_railguncommando:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: ts_gdi_railguncommando.shp
+		Scale: 1.1
+	icon:
+		Filename: ts_gdi_railguncommando_icon.png
+
+ts_gdi_titan:
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: ts_gdi_titan.shp
+		Facings: -8
+		Stride: 15
+		ShadowStart: 152
+		Offset: 0, 0, 12
+	icon:
+		Filename: tstitanicon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: ts_gdi_titan.shp
+		Facings: -8
+		Stride: 15
+		ShadowStart: 152
+		Offset: 0, 0, 12
+	walk:
+		Filename: ts_gdi_titan.shp
+		Length: 15
+		Facings: -8
+		ShadowStart: 152
+		Offset: 0, 0, 12
+		Tick: 60
+	turret:
+		Filename: ts_gdi_titan.shp
+		Start: 120
+		Facings: -32
+		Offset: 0, 0, 12
+
+ts_gdi_titanmkii:
+	idle:
+		Filename: ts_gdi_titanmkii.png
+		Facings: 32
+		Scale: 1
+	icon:
+		Filename: ts_gdi_titanmkii_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: ts_gdi_titanmkii.png
+		Facings: 32
+		Scale: 1
+	walk:
+		Filename: ts_gdi_titanmkii_run.png
+		Length: 14
+		Facings: 32
+		Tick: 60
+		Scale: 1
+	turret:
+		Filename: ts_gdi_titanmkii_tur.png
+		Facings: 32
+		Scale: 1
+
+ts_gdi_juggernautmkii:
+	idle:
+		Filename: ts_gdi_juggernautmkii.shp
+		Facings: -8
+		Scale: 0.8
+	icon:
+		Filename: ts_gdi_juggernautmkii_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: ts_gdi_juggernautmkii.shp
+		Facings: -8
+	walk:
+		Filename: ts_gdi_juggernautmkii.shp
+		Length: 17
+		Start: 8
+		Facings: -8
+		# Tick: 60
+	shoot:
+		Filename: ts_gdi_juggernautmkii.shp
+		Facings: -8
+		Start: 144
+		Length: 7
+
+ts_gdi_tiberiumharvester:
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	dock:
+		Filename: invisibleitem.shp
+	dock-loop:
+		Filename: invisibleitem.shp
+	warpout:
+		Filename: invisibleitem.shp
+	harvesting:
+		Filename: ra2_oregath.shp
+		Length: 15
+		Facings: 8
+	icon:
+		Filename: tsharvestericon.shp
+
+ts_gdi_kodiakcommandship:
+	Defaults:
+		Filename: ts_gdi_kodiakcommandship.shp
+		Scale: 1.25
+		Offset: 0,0,64
+		ZRamp: 1
+	idle:
+		Facings: -32
+	icon:
+		Filename: ts_gdi_kodiakcommandship_icon.png
+
+ts_gdi_amphibiousapc:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_amphibiousapc_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	turret:
+		Filename: invisibleitem.shp
+
+ts_gdi_pitbull:
+	Defaults:
+		Scale: 1
+	idle:
+		Filename: ts_gdi_pitbull.png
+		Facings: 64
+		Scale: 1
+	turret:
+		Filename: ts_gdi_pitbull_tur.png
+		Facings: 64
+		Scale: 1
+	icon:
+		Filename: ts_gdi_pitbull_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_gdi_mobilesensorarray:
+	Defaults:
+		Filename: invisibleitem.shp
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_mobilesensorarray_icon.shp
+
+ts_gdi_mobileemp:
+	Defaults:
+		Filename: invisibleitem.shp
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_mobileemp_icon.png
+
+ts_gdi_hovermlrs:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_hovermlrs_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_gdi_wolverine:
+	idle:
+		Filename: invisibleitem.shp
+	Defaults:
+		Filename: ts_gdi_wolverine.shp
+		Offset: 0,0,8
+		Scale: 1.0
+	stand:
+		Filename: ts_gdi_wolverine.shp
+		Start: 96
+		Facings: -8
+		ShadowStart: 232
+	walk:
+		Filename: ts_gdi_wolverine.shp
+		Facings: -8
+		Length: 12
+		ShadowStart: 136
+	shoot:
+		Filename: ts_gdi_wolverine.shp
+		Start: 104
+		Length: 4
+		Facings: -8
+		ShadowStart: 240
+		Tick: 100
+	icon:
+		Filename: ts_gdi_wolverine_icon.shp
+
+ts_gdi_wolverinemkii:
+	idle:
+		Filename: invisibleitem.shp
+	Defaults:
+		Filename: ts_gdi_wolverinemkii.png
+	stand:
+		Filename: ts_gdi_wolverinemkii.png
+		Facings: 64
+	walk:
+		Filename: ts_gdi_wolverinemkii_run.png
+		Facings: 64
+		Length: 8
+	shoot:
+		Filename: ts_gdi_wolverinemkii.png
+		Facings: 64
+	icon:
+		Filename: ts_gdi_wolverinemkii_icon.png
+
+ts_gdi_mammothprototype:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_mammothprototype_icon.shp
+	muzzle2:
+		Filename: lightbluelasermuzzle.shp
+		Length: 3
+	muzzle1:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_gdi_mammothmkii:
+	Defaults:
+		Filename: invisibleitem.shp
+	idle:
+		Filename: ts_gdi_mammothmkii_idle.png
+		Facings: -32
+	walk:
+		Filename: ts_gdi_mammothmkii_walk.png
+		Length: 20
+		Facings: -8
+	shoot:
+		Filename: ts_gdi_mammothmkii_atk.png
+		Length: 3
+		Facings: -32
+	icon:
+		Filename: ts_gdi_mammothmkii_icon.png
+	muzzle2:
+		Filename: lightbluelasermuzzle.shp
+		Length: 3
+	muzzle1:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_gdi_juggernaut:
+	Defaults:
+		Scale: 1.255
+	idle:
+		Filename: ts_gdi_juggernaut_jugger.shp
+		Facings: -8
+		Stride: 15
+		ShadowStart: 120
+		Offset: 0, 0, 12
+	walk:
+		Filename: ts_gdi_juggernaut_jugger.shp
+		Length: 15
+		Facings: -8
+		ShadowStart: 120
+		Offset: 0, 0, 12
+		Tick: 60
+	turret:
+		Filename: ts_gdi_juggernaut_djugg_a.shp
+		Facings: 32
+		Offset: -4, 0, 12
+	barrel:
+		Filename: ts_gdi_juggernaut_juggerbarl.shp
+		Facings: 32
+		Offset: -4, 0, 12
+		Scale: 0.5
+	barrelup:
+		Filename: ts_gdi_juggernaut_juggerbarlup.shp
+		Facings: 32
+		Offset: -4, 0, 12
+		Scale: 0.5
+	idletur:
+		Filename: ts_gdi_juggernaut_djugg.shp
+		ShadowStart: 3
+		Offset: 0, -12, 12
+	damaged-idletur:
+		Filename: ts_gdi_juggernaut_djugg.shp
+		Start: 1
+		ShadowStart: 4
+		Offset: 0, -12, 12
+	make:
+		Filename: ts_gdi_juggernaut_djuggmk.shp
+		Length: 18
+		ShadowStart: 18
+		Offset: 0, -12, 12
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 2
+	icon:
+		Filename: ts_gdi_juggernaut_icon.png
+
+ts_gdi_disruptor:
+	Defaults:
+		Filename: invisibleitem.shp
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_disruptor_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_gdi_powerplant:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Offset: 0, -6, 24
+		Filename: ts_gdi_powerplant.shp
+	idle:
+		ShadowStart: 3
+		Filename: ts_gdi_powerplant.shp
+	damaged-idle:
+		Filename: ts_gdi_powerplant.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_gdi_powerplant.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: ts_gdi_powerplant_a.shp
+		Length: 12
+		Tick: 200
+	damaged-idle-lights:
+		Filename: ts_gdi_powerplant_a.shp
+		Start: 12
+		Length: 12
+		Tick: 200
+	idle-plug:
+		Filename: ts_gdi_powerplant_b.shp
+		Length: 12
+		Tick: 200
+	damaged-idle-plug:
+		Filename: ts_gdi_powerplant_b.shp
+		Length: 12
+		Tick: 200
+	idle-powrupa:
+		Filename: ts_gdi_powerplant_b.shp
+		Length: 12
+		Tick: 200
+		Offset: -48, -6, 0
+	damaged-idle-powrupa:
+		Filename: ts_gdi_powerplant_b.shp
+		Length: 12
+		Tick: 200
+		Offset: -48, -6, 0
+	idle-powrupb:
+		Filename: ts_gdi_powerplant_b.shp
+		Length: 12
+		Tick: 200
+		Offset: -24, 8, 0
+	damaged-idle-powrupb:
+		Filename: ts_gdi_powerplant_b.shp
+		Length: 12
+		Tick: 200
+		Offset: -24, 8, 0
+	make:
+	icon:
+		Filename: ts_gdi_powerplant_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_gdi_powerturbine:
+	icon:
+		Filename: ts_gdi_powerturbine_icon.png
+
+ts_gdi_barracks:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ts_gdi_barracks.shp
+		Offset: 0, -12, 24
+		Scale: 1.25
+	idle:
+		Filename: ts_gdi_barracks.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_gdi_barracks.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_gdi_barracks.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: ts_gdi_barracks_a.shp
+		Length: 7
+		Tick: 200
+		ZOffset: 1023
+	damaged-idle-lights:
+		Filename: ts_gdi_barracks_a.shp
+		Start: 7
+		Length: 7
+		Tick: 200
+		ZOffset: 1023
+	idle-light:
+		Filename: ts_gdi_barracks_b.shp
+		Length: 7
+		Tick: 200
+	damaged-idle-light:
+		Filename: ts_gdi_barracks_b.shp
+		Start: 7
+		Length: 7
+		Tick: 200
+	idle-flag:
+		Filename: ts_gdi_barracks_c.shp
+		Length: 7
+		Tick: 100
+	damaged-idle-flag:
+		Filename: ts_gdi_barracks_c.shp
+		Start: 7
+		Length: 7
+		Tick: 100
+	make:
+		Filename: ts_gdi_barracks.shp
+	icon:
+		Filename: ts_gdi_barracks_icon.shp
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_gdi_warfactory:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: ts_gdi_warfactory.shp
+		Offset: -4, -21, 22
+		Scale: 1.25
+	idle:
+		Filename: ts_gdi_warfactory_1.shp
+		ShadowStart: 2
+		ZOffset: -1024
+		Offset: -4, -21, 0
+	damaged-idle:
+		Filename: ts_gdi_warfactory_1.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1024
+		Offset: -4, -21, 0
+	idle-roof:
+		Filename: ts_gdi_warfactory_2.shp
+		ShadowStart: 2
+	damaged-idle-roof:
+		Filename: ts_gdi_warfactory_2.shp
+		Start: 1
+		ShadowStart: 3
+	dead:
+		Filename: ts_gdi_warfactory.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights-white:
+		Filename: ts_gdi_warfactory_a.shp
+		Length: 16
+		Tick: 100
+		ZOffset: 2048
+	idle-lights-red:
+		Filename: ts_gdi_warfactory_b.shp
+		Length: 8
+		Tick: 120
+		ZOffset: 2048
+	idle-turbines:
+		Filename: ts_gdi_warfactory_c.shp
+		Length: 4
+		Tick: 80
+		ZOffset: 2048
+	damaged-idle-turbines:
+		Filename: ts_gdi_warfactory_c.shp
+		Length: 4
+		Tick: 80
+		ZOffset: 2048
+	build-door:
+		Filename: ts_gdi_warfactory_d.shp
+		Length: 9
+		ShadowStart: 9
+	damaged-build-door:
+		Filename: ts_gdi_warfactory_d.shp
+		Length: 9
+		ShadowStart: 9
+	make:
+		Filename: ts_gdi_warfactory_mk.shp
+	bib2:
+		Filename: ts_gdi_warfactory_bb.shp
+		Length: 1
+		ZOffset: -1024
+		Offset: -4, -21, 0
+		ZRamp: 1
+	damaged-bib2:
+		Filename: ts_gdi_warfactory_bb.shp
+		Start: 1
+		Length: 1
+		ZOffset: -1024
+		Offset: -4, -21, 0
+		ZRamp: 1
+	dead-bib2:
+		Filename: ts_gdi_warfactory_bb.shp
+		Start: 2
+		Length: 1
+		ZOffset: -1024
+		Offset: -4, -21, 0
+		ZRamp: 1
+	icon:
+		Filename: ts_gdi_warfactory_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_gdi_radar:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ts_gdi_radar_radr.shp
+		Offset: 0, -12, 12
+		Scale: 1.15
+	idle:
+		Filename: ts_gdi_radar_radr.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_gdi_radar_radr.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_gdi_radar_radr.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-dish:
+		Filename: ts_gdi_radar_radr_a.shp
+		Length: 15
+		Reverses: True
+		Tick: 200
+	damaged-idle-dish:
+		Filename: ts_gdi_radar_radr_a.shp
+		Start: 15
+		Length: 15
+		Reverses: True
+		Tick: 240
+	make:
+		Filename: ts_gdi_radar_commmk.shp
+		Length: 20
+		ShadowStart: 20
+	icon:
+		Filename: tsgdiradaricon.shp
+		Offset: 0, 0
+
+ts_gdi_techcenter:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: ts_gdi_techcenter.shp
+		Offset: -16, -32, 30
+		Scale: 1.25
+	idle:
+		Filename: ts_gdi_techcenter.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_gdi_techcenter.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_gdi_techcenter.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename:  ts_gdi_techcenter_a.shp
+		Length: 8
+		Tick: 200
+	damaged-idle-lights:
+		Filename:  ts_gdi_techcenter_a.shp
+		Start: 8
+		Length: 8
+		Tick: 240
+	make:
+		Filename: ts_gdi_techcenter_mk.shp
+	icon:
+		Filename:  tstechicon.png
+		Offset: 0, 0
+
+ts_gdi_helipad:
+	Defaults:
+		Filename: ts_gdi_helipad.shp
+		Offset: 0, -24, 1
+		Scale: 1.25
+	idle:
+		Filename: ts_gdi_helipad.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+		Offset: 0, -24, 8
+	damaged-idle:
+		Filename: ts_gdi_helipad.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+		Offset: 0, -24, 8
+	dead:
+		Filename: ts_gdi_helipad.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+		Offset: 0, -24, 8
+	idle-platform:
+		Filename: ts_gdi_helipad_bb.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+	damaged-idle-platform:
+		Filename: ts_gdi_helipad_bb.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+	dead-platform:
+		Filename: ts_gdi_helipad_bb.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+	idle-lights:
+		Filename: ts_gdi_helipad_a.shp
+		Length: 8
+		Tick: 100
+		Offset: 0, -36
+		ZOffset: -1c511
+	active:
+		Filename: ts_gdi_helipad_a.shp
+		Length: 8
+		Tick: 100
+		Offset: 0, -36
+		ZOffset: -1c511
+	damaged-active:
+		Filename: ts_gdi_helipad_a.shp
+		Length: 8
+		Tick: 100
+		Offset: 0, -36
+		ZOffset: -1c511
+	damaged-idle-lights:
+		Filename: ts_gdi_helipad_a.shp
+		Start: 8
+		Length: 8
+		Tick: 100
+		Offset: 0, -36
+		ZOffset: -1c511
+	make:
+		Filename: ts_gdi_helipad_mk.shp
+	icon:
+		Filename: ts_gdi_helipad_icon.shp
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_gdi_tiberiumrefinery:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Scale: 1.25
+		Filename: ts_gdi_tiberiumrefinery.shp
+		Offset: -12, -20, 20
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	make:
+	unload-overlay:
+		Filename: ts_gdi_tiberiumrefinery_a.shp
+		Length: *
+		ZOffset: 1024
+	idle-redlights:
+		Filename: ts_gdi_tiberiumrefinery_c.shp
+		Length: 16
+		Tick: 120
+	damaged-idle-redlights:
+		Filename: ts_gdi_tiberiumrefinery_c.shp
+		Length: 16
+		Tick: 120
+	bib2:
+		Filename: ts_gdi_tiberiumrefinery_bb.shp
+		Length: 1
+		ZOffset: -1024
+		# Offset: 0, 0, 5
+		ZRamp: 1
+	damaged-bib2:
+		Filename: ts_gdi_tiberiumrefinery_bb.shp
+		Start: 1
+		ZOffset: -1024
+		# Offset: 0, 0, 5
+		ZRamp: 1
+	dead-bib2:
+		Filename: ts_gdi_tiberiumrefinery_bb.shp
+		Start: 2
+		ZOffset: -1024
+		# Offset: 0, 0, 5
+	icon:
+		Filename: tsrefineryicon.shp
+		Offset: 0, 0
+
+ts_gdi_upgradecenter:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ts_gdi_upgradecenter.shp
+		Offset: 18,-4, 15
+		Scale: 1.25
+	idle:
+		Filename: ts_gdi_upgradecenter.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_gdi_upgradecenter.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_gdi_upgradecenter.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-dish:
+		Filename: ts_gdi_upgradecenter_a.shp
+		Length: 20
+		Tick: 120
+	damaged-idle-dish:
+		Filename: ts_gdi_upgradecenter_a.shp
+		Start: 20
+		Length: 20
+		Tick: 120
+	idle-lights:
+		Filename: ts_gdi_upgradecenter_b.shp
+		Length: 20
+		Tick: 120
+	damaged-idle-lights:
+		Filename: ts_gdi_upgradecenter_b.shp
+		Start: 20
+		Length: 20
+		Tick: 120
+	idle-strip:
+		Filename: ts_gdi_upgradecenter_c.shp
+		Length: 8
+		Tick: 120
+	damaged-idle-strip:
+		Filename: ts_gdi_upgradecenter_c.shp
+		Start: 8
+		Length: 8
+		Tick: 120
+	idle-ioncannona:
+		Filename: ts_gdi_upgradecenter_f.shp
+		Length: 15
+		Tick: 120
+		Reverses: true
+		Offset: 0, -4, 15
+	idle-ioncannonb:
+		Filename: ts_gdi_upgradecenter_f.shp
+		Length: 15
+		Reverses: true
+		Tick: 120
+	idle-hunterseekera:
+		Filename: ts_gdi_upgradecenter_e.shp
+		Length: 15
+		Tick: 120
+		Reverses: true
+		Offset: -8, -11, 15
+	idle-hunterseekerb:
+		Filename: ts_gdi_upgradecenter_e.shp
+		Length: 15
+		Reverses: true
+		Tick: 120
+	make:
+		Filename: ts_gdi_upgradecenter_mk.shp
+	icon:
+		Filename: ts_gdi_upgradecenter_icon.shp
+		Offset: 0, 0
+
+ts_gdi_orcafighter:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_orcafighter_icon.png
+
+ts_gdi_zoneorcafighter:
+	idle:
+		Filename: ts_gdi_zoneorcafighter.png
+		Facings: 64
+	icon:
+		Filename: ts_gdi_zoneorcafighter_icon.png
+
+ts_gdi_hammerhead:
+	idle:
+		Filename: ts_gdi_hammerhead.png
+		Facings: 64
+	lrotor: lrotor
+		Filename: lrotor.shp
+		Length: 4
+	slow-lrotor:
+		Filename: lrotor.shp
+		Start: 4
+		Length: 8
+	rrotor: rrotor
+		Filename: rrotor.shp
+		Length: 4
+	slow-rrotor:
+		Filename: rrotor.shp
+		Start: 4
+		Length: 8
+	icon:
+		Filename: ts_gdi_hammerhead_icon.png
+
+ts_gdi_orcabomber:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_orcabomber_icon.shp
+
+ts_gdi_carryall:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_gdi_carryall_icon.png
+
+ts_gdi_vulcantower:
+	Defaults:
+		Filename: tsgtctwr.shp
+		Scale: 1.25
+	idle:
+		Filename: tsgtctwr.shp
+	damaged-idle:
+		Filename: tsgtctwr.shp
+		Start: 1
+	critical-idle:
+		Filename: tsgtctwr.shp
+		Start: 2
+	turret:
+		Filename: ts_gdi_vulcantower.shp
+		Facings: 32
+		UseClassicFacings: True
+		Offset: 0,0
+	make:
+		Filename: tsgtctwrmk.shp
+		Length: 11
+		ShadowStart: 11
+	dead:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: ts_gdi_vulcantower_icon.shp
+		Offset: 0,0
+
+ts_gdi_rpgtower:
+	Defaults:
+		Filename: tsgtctwr.shp
+		Scale: 1.25
+	idle:
+		Filename: tsgtctwr.shp
+	damaged-idle:
+		Filename: tsgtctwr.shp
+		Start: 1
+	critical-idle:
+		Filename: tsgtctwr.shp
+		Start: 2
+	turret:
+		Filename: ts_gdi_rpgtower.shp
+		Facings: 32
+		UseClassicFacings: True
+		Offset: 0,0
+	make:
+		Filename: tsgtctwrmk.shp
+		Length: 11
+		ShadowStart: 11
+	dead:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: ts_gdi_rpgtower_icon.shp
+		Offset: 0,0
+
+ts_gdi_samtower:
+	Defaults:
+		Filename: tsgtctwr.shp
+		Scale: 1.25
+	idle:
+		Filename: tsgtctwr.shp
+	damaged-idle:
+		Filename: tsgtctwr.shp
+		Start: 1
+	critical-idle:
+		Filename: tsgtctwr.shp
+		Start: 2
+	turret:
+		Filename: tsgtctwr_d.shp
+		Facings: 32
+		UseClassicFacings: True
+		Offset: 0,0
+	make:
+		Filename: tsgtctwrmk.shp
+		Length: 11
+		ShadowStart: 11
+	dead:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: ts_gdi_samtower_icon.shp
+		Offset: 0,0

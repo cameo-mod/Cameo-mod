@@ -68,6 +68,19 @@ mods/cameo/ContentPacks/<Theme>/<Faction>/
   before and after, and the faction's resolved closure diff must be empty.
 - mod.yaml `Include:` order defines the lobby faction order.
 
+**End goal — dynamic faction loading.** Content packs exist so the game can
+load ONLY the factions picked in the lobby (and only what the active
+shellmap needs) instead of every actor at boot: Cameo is the ultimate
+crossover RTS and will keep growing — at peak it consumed 12 GB of RAM,
+locking out 8 GB and 4 GB players before the main menu. Therefore packs
+must become COMPLETELY self-contained, loadable without cross-dependencies:
+- a separate ai.yaml per faction inside its pack;
+- all game files the faction needs — sprites, voxels, icons, sounds —
+  inside the pack, cleanly separated into per-type subfolders;
+- shared content lives only in theme Shared/ packs or the core;
+- a future audit walks every pack, verifies which files are actually used,
+  and deletes the unused ones.
+
 ## 3. House stat formulas (audited as F1–F18, `audit_stat_formulas.py`)
 
 Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
