@@ -144,20 +144,30 @@ World:
 		CrushSound: squish6.aud
 
 ^HunterSeekersPower:
-	ProduceActorPower@HunterSeeker:
-		Name: Data Worm
-		Description: A self-replicating data worm hijacks a Hunter-Seeker droid and launches it at a designated target.\n  Instantly kills mobile targets\n  Splash damage strong vs Vehicles, Buildings\n  Requires line of sight to target
-		Icon: cabaldataworm
+	FireArmamentPower@HunterSeeker:
+		Names:
+			1: Data Worm
+		Descriptions:
+			1: A self-replicating data worm hijacks a Hunter-Seeker droid and launches it at a designated target.\n  Instantly kills mobile targets\n  Splash damage strong vs Vehicles, Buildings\n  Requires line of sight to target
+		Icons:
+			1: icon
+		IconImage: cabaldataworm
 		PauseOnCondition: lowpower || disabled
-		Prerequisites: cabaldataworm
-		Actors: tsprobe
-		Type: Vehicle.HunterSeeker
-		ChargeInterval: 3000
-		ReadyAudio: Reinforce
-		BlockedAudio:
-		AutoFire: True
+		Prerequisites:
+			1: cabaldataworm
+		ChargeInterval: 4500
+		ArmamentName: superweapon
+		ValidRelationships: Enemy, Neutral, Ally
+		EndChargeSpeechNotification: AirstrikeReady
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		IncomingSpeechNotification: EnemyPlanesApproaching
 		IncomingSound: hunter2.aud
 		LaunchSound: hunter2.aud
+		TargetMustBeVisible: true
+		TargetActors: true
+		ShowSelectionBoxes: true
+		TargetCircleRange: 1c512
 		OrderName: HunterSeekerSpawn
 		SupportPowerPaletteOrder: 20
 	Exit@1:
@@ -168,8 +178,17 @@ World:
 		ExitCell: 2,1
 	Exit@4:
 		ExitCell: 2,0
-	Production@HunterSeeker:
-		Produces: Vehicle.HunterSeeker
+	Turreted:
+	AttackTurreted:
+	Armament@HunterSeeker:
+		Weapon: TSHSeekerLaunch
+		Name: superweapon
+	CarrierMaster@HunterSeeker:
+		ArmamentNames: superweapon
+		Actors: tsprobe
+		SpawnIsMissile: true
+		UseArmamentTurretFacing: true
+		SlaveDisposalOnKill: DoNothing
 
 ^CABALRankDecoration:
 	WithDecoration@RANK-1:
@@ -6926,8 +6945,10 @@ tsprobe:
 	Inherits: ^Helicopter
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
+	-ActorLostNotification:
+	-UpdatesPlayerStatistics:
 	Aircraft:
-		Speed: 300
+		Speed: 210
 		CanForceLand: false
 		AltitudeVelocity: 0c768
 		Repulsable: false
@@ -6953,31 +6974,27 @@ tsprobe:
 		VoiceSet: RobotTankVoice
 	AutoTarget:
 		ScanRadius: 40
+		RequiresCondition: autonomous
+		InitialStance: AttackAnything
 	Armament@PRIMARY:
-		Weapon: TSHSeekerBomb
+		Weapon: TSHSeekerTargeting
 	RejectsOrders:
-		Except: Attack, ForceAttack
-		RequiresCondition: !lockon
-	RejectsOrders@lockon:
-		RequiresCondition: lockon
-	GrantConditionWhileAiming:
-		Condition: lockon
-	GrantConditionOnAttack:
-		Condition: triggered
-	KillsSelf:
-		RequiresCondition: triggered
+		RequiresCondition: !autonomous
+	DiveOnAttack:
+		Speed: 300
+		DiveCondition: diving
+	SpawnedExplodes:
+		Weapon: TSHSeekerBomb
+		EmptyWeapon: TSHSeekerBomb
+		RequiresCondition: diving
 	RenderSprites:
 		PlayerPalette: playerra2
 	-RenderVoxels:
 	-WithVoxelBody:
 	-WithShadow:
 	-SpawnActorOnDeath:
-	# Explodes:
-	# 	RequiresCondition: airborne && !triggered
-	# Explodes@bomb:
-	# 	Weapon: TSHSeekerExplode
-	# 	EmptyWeapon: TSHSeekerExplode
-	# 	RequiresCondition: triggered
+	CarrierSlave:
+		AutonomousCondition: autonomous
 
 TSCLOUD1:
 	Inherits@1: ^ExistsInWorld

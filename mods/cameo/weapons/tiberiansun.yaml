@@ -5100,6 +5100,7 @@ TSTacticalMissile:
 	Report: samshot1.aud
 	ValidTargets: Ground, Water, Air
 	Range: 9999c0
+	MinRange: 3c0
 	AirThreshold: 11c0
 	Projectile: Missile
 		RangeLimit: -1
@@ -5242,63 +5243,58 @@ TSChemBomblet:
 		EndSequences: die
 		Palette: tseffect
 		AirThreshold: 8c0
+		ImpactActors: false
+		ValidTargets: Ground, Water, Air
+
+TSHSeekerLaunch:
+	Range: 9999c0
+	MinRange: 1c0
+	ReloadDelay: 50
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Projectile: InstantHit
+	Warhead@1: TargetDamage
+		ValidTargets: Ground, Water, Air
 
 TSHSeekerBomb:
 	Range: 0c128
 	ReloadDelay: 120
-	ValidTargets: Ground, Water
+	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
 	Projectile: InstantHit
 	Warhead@1Dam: HealthPercentageDamage
 		Damage: 300
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath
-		ValidTargets: Infantry, Vehicle, Ship, Submarine, Creep
+		ValidTargets: Ground, Water, Air
 		InvalidTargets: Structure
 	Warhead@2DamStructure: SpreadDamage
-		Damage: 25000
+		Damage: 100000
 		Spread: 64
 		Falloff: 100, 100
-		Versus:
-			Heavy: 1500
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath
 		ValidTargets: Structure
-
-TSHSeekerExplode:
-	Projectile: InstantExplode
-	Range: 1c0
-	#ValidTargets: Ground, Air, Water
-	Warhead@1Dam: SpreadDamage
-		Spread: 1c0
-		Falloff: 100, 75, 50, 25, 0
-		Damage: 30000
-		Versus:
-			None: 5
-			Wood: 33
-			Light: 100
-			Medium: 125
-			Heavy: 150
-		DamageTypes: Prone50Percent, TriggerProne, FireDeath
-		#ValidTargets: Ground, Air, Water
-		AffectsParent: true
-	Warhead@2Eff: CreateEffect
+	Warhead@Eff: CreateEffect
 		Explosions: verylarge_twlt
 		ExplosionPalette: tseffect
 		ImpactSounds: expnew09.aud, expnew06.aud
 		ValidTargets: Ground, Air, Water
-	Warhead@3Smu: LeaveSmudge
+	Warhead@Smu: LeaveSmudge
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Building, Wall
 		Size: 2
-	Warhead@4Cam: RevealShroud
+	Warhead@Cam: RevealShroud
 		Radius: 4c0
 		RevealGeneratedShroud: true
 		Duration: 120
 
 TSHSeekerTargeting:
 	ReloadDelay: 30
-	Range: 0c128
+	Range: 4c0
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
+		ValidTargets: Ground, Water, Air
 
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
