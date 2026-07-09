@@ -47,13 +47,13 @@ World:
 		ClassName: Light Support
 		Factions: tsgdi
 		BaseActor: mcv.tagdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan
 	StartingUnits@heavytagdi:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tsgdi
 		BaseActor: mcv.tagdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch,tsmmch,tsmmch,tsmmch
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan
 	StartingUnits@mcvonlyratanod:
 		Class: none
 		ClassName: MCV Only
@@ -1210,7 +1210,7 @@ tascooper:
 		VoiceSet: MarauderTankVoice
 
 tajugg:
-	Inherits: TSJUGG
+	Inherits: ts_gdi_juggernaut
 	Valued:
 		Cost: 950
 	Tooltip:
@@ -1237,9 +1237,9 @@ tajugg:
 	RenderVoxels:
 		Scale: 5.0
 	RenderSprites:
-		Image: tsjugg
+		Image: ts_gdi_juggernaut
 	RenderVoxels:
-		Image: tsjugg
+		Image: ts_gdi_juggernaut
 
 taptnk:
 	Inherits: ^Tank
@@ -5902,5 +5902,5 @@ tamutflak:
 	-WithVoxelBody:
 	RenderSprites:
 	RenderVoxels:
-		Image: tsjugg
+		Image: ts_gdi_juggernaut
 		Scale: 7.5

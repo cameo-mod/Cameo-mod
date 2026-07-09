@@ -38,19 +38,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: tsgdi
-		BaseActor: tsmcvgdi
+		BaseActor: ts_gdi_mobileconstructionvehicle
 	StartingUnits@defaulttsgdi:
 		Class: light
 		ClassName: Light Support
 		Factions: tsgdi
-		BaseActor: tsmcvgdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch
+		BaseActor: ts_gdi_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan
 	StartingUnits@heavytsgdi:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tsgdi
-		BaseActor: tsmcvgdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch,tsmmch,tsmmch,tsmmch
+		BaseActor: ts_gdi_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan
 	StartingUnits@mcvonlyratsnod:
 		Class: none
 		ClassName: MCV Only
@@ -355,7 +355,7 @@ TSGTCNST:
 	Buildable:
 		Description: Builds structures
 
-TSGTCNSTGDI:
+ts_gdi_constructionyard:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
 	Inherits: ^BaseBuilding
@@ -383,7 +383,7 @@ TSGTCNSTGDI:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvgdi
+		IntoActor: ts_gdi_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -694,7 +694,7 @@ TSGTCNSTCABAL:
 	RenderSprites:
 		Image: tsgtcnst
 
-TSMCVGDI:
+ts_gdi_mobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@mcv: ^MCV
@@ -724,7 +724,7 @@ TSMCVGDI:
 	RevealsShroud:
 		Range: 7c0
 	Transforms:
-		IntoActor: tsgtcnstgdi
+		IntoActor: ts_gdi_constructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: tsplace2.aud
@@ -744,14 +744,14 @@ TSMCVGDI:
 		Prerequisite: mmtsgdi
 
 tsmcvgdi.bot:
-	Inherits: TSMCVGDI
+	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
 		Prerequisites: ~techlevel.medium, tsgtdept, ~botplayer, allowsMCV
 
 TSMCVNOD:
-	Inherits: TSMCVGDI
+	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Transforms:
@@ -767,7 +767,7 @@ tsmcvnod.bot:
 		Prerequisites: ~techlevel.medium, tsgtdept, ~botplayer, allowsMCV
 
 forgotten_mobileconstructionvehicle:
-	Inherits: TSMCVGDI
+	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Transforms:
@@ -783,7 +783,7 @@ tsmcvmutant.bot:
 		Prerequisites: ~techlevel.medium, tsgtdept, ~botplayer, allowsMCV
 
 TSMCVCABAL:
-	Inherits: TSMCVGDI
+	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Transforms:
@@ -848,7 +848,7 @@ TSPROC:
 	CustomSellValue:
 		Value: 500
 	FreeActor:
-		Actor: TSHARV
+		Actor: ts_gdi_tiberiumharvester
 		SpawnOffset: 1,2
 		Facing: 256
 	WithBuildingBib:
@@ -927,7 +927,7 @@ tsntwast:
 	ResourcePurifier:
 		Modifier: 25
 
-TSGTPOWR:
+ts_gdi_powerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1109,7 +1109,7 @@ TSGTSILO:
 		RequiresSelection: true
 		PipCount: 5
 
-TSGTPILE:
+ts_gdi_barracks:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1310,7 +1310,7 @@ forgotten_barracks:
 	RenderSprites:
 		Image: tsnthand
 
-TSGTWEAP:
+ts_gdi_warfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
@@ -1572,7 +1572,7 @@ tsgtdept:
 		DeathSequence: dead-ground
 		UseDeathTypeSuffix: false
 
-TSGTHPAD:
+ts_gdi_helipad:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x1Shape
@@ -1642,7 +1642,7 @@ TSGTHPAD:
 		Sequence: idle-lights
 
 TSGTHPAD2:
-	Inherits: TSGTHPAD
+	Inherits: ts_gdi_helipad
 	Tooltip:
 		Name: Helipad (Forgotten)
 	Buildable:
@@ -1658,7 +1658,7 @@ TSGTHPAD2:
 	ProductionBar@RAAIRCRAFTGDI:
 		ProductionType: RAAircraft
 	RenderSprites:
-		Image: tsgthpad
+		Image: ts_gdi_helipad
 
 TSNTHPAD:
 	Inherits: ^BaseBuilding
@@ -1817,7 +1817,7 @@ tsntradr:
 	# 	AllowMultiple: True
 	# 	Prerequisites: mmtsnod
 
-tsgtradr:
+ts_gdi_radar:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@spy: ^InfiltrateForSupportPowerReset
@@ -1884,7 +1884,7 @@ tsgtradr:
 	# SupportPowerChargeBar:
 
 tsgtradr2:
-	Inherits: tsgtradr
+	Inherits: ts_gdi_radar
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
 		BuildPaletteOrder: 70
@@ -1936,7 +1936,7 @@ tsgtradr2:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: mutstorm
 	RenderSprites:
-		Image: tsgtradr
+		Image: ts_gdi_radar
 
 forgotten_scarabapc:
 	Inherits: TSSAPC
@@ -2007,7 +2007,7 @@ tsnttech:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
 
-tsgttech:
+ts_gdi_techcenter:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
@@ -2044,7 +2044,7 @@ tsgttech:
 		Sequence: idle-lights
 
 forgotten_church:
-	Inherits: tsgttech
+	Inherits: ts_gdi_techcenter
 	Tooltip:
 		Name: Forgotten Tech Center
 	Buildable:
@@ -2054,7 +2054,7 @@ forgotten_church:
 		Description: Provides Forgotten advanced technologies.\nCan be only built once
 		BuildLimit: 1
 	RenderSprites:
-		Image: tsgttech
+		Image: ts_gdi_techcenter
 
 tsnttmpl:
 	Inherits: ^BaseBuilding
@@ -2277,7 +2277,7 @@ tsctarmr:
 		Range: 9c0
 		Condition: Armory-Rank
 
-tsgtplug:
+ts_gdi_upgradecenter:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2585,7 +2585,7 @@ tsntlasr:
 	-WithVoxelBody:
 	-Cloak@TDcloak:
 
-tsgtctwrmg:
+ts_gdi_vulcantower:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2630,7 +2630,7 @@ tsgtctwrmg:
 	Power:
 		Amount: -20
 
-tsgtctwrrpg:
+ts_gdi_rpgtower:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2674,7 +2674,7 @@ tsgtctwrrpg:
 	Power:
 		Amount: -20
 
-tsgtctwrsam:
+ts_gdi_samtower:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -3016,7 +3016,7 @@ TSE1:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	RenderSprites:
-		Image: tse1.gdi
+		Image: ts_gdi_lightinfantry
 	Voiced:
 		VoiceSet: TSInfantry
 
@@ -3031,7 +3031,7 @@ TSE1PARA:
 	Inherits: TSE1
 	-Buildable:
 	RenderSprites:
-		Image: tse1.gdi
+		Image: ts_gdi_lightinfantry
 	ProducibleWithLevel:
 		InitialLevels: 4
 	Parachutable: ##########
@@ -3039,7 +3039,7 @@ TSE1PARA:
 	UpdatesPlayerStatistics:
 		OverrideActor: tse1
 
-TSMEDIC:
+ts_gdi_medic:
 	Inherits: MEDI
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
@@ -3056,7 +3056,7 @@ TSMEDIC:
 		StandSequences: stand
 		DefaultAttackSequence: shoot
 	Voiced:
-		VoiceSet: TSMedic
+		VoiceSet: ts_gdi_medic
 	RenderSprites:
 
 TSENGINEER:
@@ -3081,7 +3081,7 @@ TSENGINEER2:
 		VoiceSet: TSCyborg
 	-TemporaryOwnerManager:
 
-TSE2:
+ts_gdi_discthrower:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -3130,10 +3130,10 @@ TSE2:
 		VoiceSet: TSInfantry
 
 TSE2PARA:
-	Inherits: TSE2
+	Inherits: ts_gdi_discthrower
 	-Buildable:
 	RenderSprites:
-		Image: tse2
+		Image: ts_gdi_discthrower
 	ProducibleWithLevel:
 		InitialLevels: 4
 	Parachutable: ##########
@@ -3229,7 +3229,7 @@ TSJUMPJET:
 		TerrainTypes: Water, River
 		Condition: swimming
 	#Transforms:
-	#	IntoActor: tsjumpjet2
+	#	IntoActor: ts_gdi_jumpjetinfantry
 	#	Offset: 0,0
 	#	Facing: 2
 	#	TransformSounds:
@@ -3238,7 +3238,7 @@ TSJUMPJET:
 		Name: garrisoned
 		Weapon: TSVulcanTower
 
-TSJUMPJET2:
+ts_gdi_jumpjetinfantry:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4347,7 +4347,7 @@ tsnafnce:
 # TS Shared Vehicles
 #######################################
 
-TSHARV:
+ts_gdi_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
 	Health:
@@ -4525,7 +4525,7 @@ tsprobe:
 # TS GDI Vehicles
 #######################################
 
-TSMMCH:
+ts_gdi_titan:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4590,7 +4590,7 @@ TSMMCH:
 	RenderVoxels:
 		Scale: 5.0
 
-TSJUGG:
+ts_gdi_juggernaut:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4673,7 +4673,7 @@ TSJUGG:
 		Position: BottomLeft
 		RequiresSelection: True
 
-TSAPC:
+ts_gdi_amphibiousapc:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4686,7 +4686,7 @@ TSAPC:
 	Tooltip:
 		Name: Amphibious APC
 	UpdatesPlayerStatistics:
-		OverrideActor: tsapc
+		OverrideActor: ts_gdi_amphibiousapc
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: barracks, ~techlevel.low
@@ -4714,7 +4714,7 @@ TSAPC:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		Class: tsapc
+		Class: ts_gdi_amphibiousapc
 	Inherits@EXT: ^ExternalConditions ##########
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
@@ -4734,9 +4734,9 @@ TSAPC:
 		Sequence: water
 		RequiresCondition: inwater
 	RenderVoxels:
-		Image: tsapc
+		Image: ts_gdi_amphibiousapc
 	RenderSprites:
-		Image: tsapc
+		Image: ts_gdi_amphibiousapc
 	AutoDeployer:
 		DeployChance: 100
 		DeployTicks: 0
@@ -4745,15 +4745,15 @@ TSAPC:
 		RequiresSelection: true
 
 tsapc.bot:
-	Inherits: TSAPC
+	Inherits: ts_gdi_amphibiousapc
 	Buildable:
 		Prerequisites: barracks, ~hardbotplayer
 	Cargo:
-		InitialUnits: tse2, tse2, tse1, tse1, tsmedic
+		InitialUnits: ts_gdi_discthrower, ts_gdi_discthrower, tse1, tse1, ts_gdi_medic
 	ProductionCostMultiplier:
 		Multiplier: 180
 
-TSHVR:
+ts_gdi_hovermlrs:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4806,7 +4806,7 @@ TSHVR:
 	RenderVoxels:
 		Scale: 7.2
 
-TSSMECH:
+ts_gdi_wolverine:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4852,7 +4852,7 @@ TSSMECH:
 	Voiced:
 		VoiceSet: TSMech
 
-TSHMEC:
+ts_gdi_mammothprototype:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4954,7 +4954,7 @@ TSHMEC:
 	Capturable:
 		Types: thiefproof
 
-TSSONIC:
+ts_gdi_disruptor:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5671,7 +5671,7 @@ tssgen:
 	WithRangeCircle:
 		Range: 7c0
 
-tslpst:
+ts_gdi_mobilesensorarray:
 	Inherits: ^Tank
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@detect: ^GenericGroundDetector
@@ -5705,7 +5705,7 @@ tslpst:
 	DetectCloaked:
 		Range: 12c0
 
-tsmemp:
+ts_gdi_mobileemp:
 	Inherits: ^Tank
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -6626,7 +6626,7 @@ TSSAPC2:
 # TS Aircraft
 #######################################
 
-TSORCA:
+ts_gdi_orcafighter:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6685,14 +6685,14 @@ TSORCA:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSORCA.Husk
+		Actor: ts_gdi_orcafighter_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 5
 
 
-TSORCA.Husk:
+ts_gdi_orcafighter_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -6701,14 +6701,14 @@ TSORCA.Husk:
 		TurnSpeed: 80
 		Speed: 186
 	RenderSprites:
-		Image: tsorca
+		Image: ts_gdi_orcafighter
 	RenderVoxels:
-		Image: tsorca
+		Image: ts_gdi_orcafighter
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSORCAB:
+ts_gdi_orcabomber:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -6768,7 +6768,7 @@ TSORCAB:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSORCAB.Husk
+		Actor: ts_gdi_orcabomber_husk
 	RenderVoxels:
 		Scale: 7.4
 	WithAmmoPipsDecoration:
@@ -6777,7 +6777,7 @@ TSORCAB:
 		PipCount: 2
 
 
-TSORCAB.Husk:
+ts_gdi_orcabomber_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -6789,15 +6789,15 @@ TSORCAB.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsorcab
+		Image: ts_gdi_orcabomber
 	RenderVoxels:
-		Image: tsorcab
+		Image: ts_gdi_orcabomber
 		Scale: 7.4
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSTRNSPORT:
+ts_gdi_carryall:
 	Inherits: ^Helicopter
 	Inherits@Voxel: ^TSRenderVoxel
 	Valued:
@@ -6834,14 +6834,14 @@ TSTRNSPORT:
 	Selectable:
 		Bounds: 1877, 1365, 0, -341
 	SpawnActorOnDeath:
-		Actor: TSTRNSPORT.Husk
+		Actor: ts_gdi_carryall_husk
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSHeli
 	RenderVoxels:
 		Scale: 7.4
 
-TSTRNSPORT.Husk:
+ts_gdi_carryall_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -6853,9 +6853,9 @@ TSTRNSPORT.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tstrnsport
+		Image: ts_gdi_carryall
 	RenderVoxels:
-		Image: tstrnsport
+		Image: ts_gdi_carryall
 		Scale: 7.4
 	-WithShadow:
 	-Cloak@TDcloak:

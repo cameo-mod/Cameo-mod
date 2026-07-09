@@ -80,7 +80,7 @@
 		Facings: 8
 		ShadowStart: 504
 
-tse1.gdi:
+ts_gdi_lightinfantry:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
@@ -98,9 +98,9 @@ tse1.nod:
 		Filename: tse1nicon.shp
 		AddExtension: False
 
-tsmedic:
+ts_gdi_medic:
 	Defaults:
-		Filename: tsmedic.shp
+		Filename: ts_gdi_medic.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:
@@ -179,7 +179,7 @@ tsengineer:
 	icon:
 		Filename: tsenggicon.shp
 
-tse2:
+ts_gdi_discthrower:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
@@ -639,9 +639,9 @@ tsreaper:
 	icon:
 		Filename: tsreapericon.shp
 
-tsmmch:
+ts_gdi_titan:
 	idle:
-		Filename: tsmmch.shp
+		Filename: ts_gdi_titan.shp
 		Facings: -8
 		Stride: 15
 		ShadowStart: 152
@@ -653,25 +653,25 @@ tsmmch:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: tsmmch.shp
+		Filename: ts_gdi_titan.shp
 		Facings: -8
 		Stride: 15
 		ShadowStart: 152
 		Offset: 0, 0, 12
 	walk:
-		Filename: tsmmch.shp
+		Filename: ts_gdi_titan.shp
 		Length: 15
 		Facings: -8
 		ShadowStart: 152
 		Offset: 0, 0, 12
 		Tick: 60
 	turret:
-		Filename: tsmmch.shp
+		Filename: ts_gdi_titan.shp
 		Start: 120
 		Facings: -32
 		Offset: 0, 0, 12
 
-tsharv:
+ts_gdi_tiberiumharvester:
 	Defaults:
 		Scale: 1.5
 	idle:
@@ -694,9 +694,9 @@ tsharv:
 # 	icon: tsweedeatericon.shp
 # 		AddExtension: False
 
-# tsapc:
+# ts_gdi_amphibiousapc:
 # 	idle: invisibleitem
-# 	icon: tsaphapcicon.shp
+# 	icon: ts_gdi_amphibiousapc_icon.shp
 # 		AddExtension: False
 # 	muzzle: gunfire2
 # 		Length: 5
@@ -716,13 +716,13 @@ tsharv:
 # 	muzzle: gunfire2
 # 		Length: 5
 
-# tslpst:
+# ts_gdi_mobilesensorarray:
 # 	idle: invisibleitem
 # 	icon: tslpsticon
 
-# tsmemp:
+# ts_gdi_mobileemp:
 # 	idle: invisibleitem
-# 	icon: tsmempicon.png
+# 	icon: ts_gdi_mobileemp_icon.png
 # 		AddExtension: false
 
 # forgotten_rattytank:
@@ -761,9 +761,9 @@ tsharv:
 # 		Length: 5
 # 	icon: tsftnkicon
 
-# tshvr:
+# ts_gdi_hovermlrs:
 # 	idle: invisibleitem
-# 	icon: tshvricon.shp
+# 	icon: ts_gdi_hovermlrs_icon.shp
 # 		AddExtension: False
 # 	muzzle: gunfire2
 # 		Length: 5
@@ -787,7 +787,7 @@ tsldrone:
 # 		Start: 41
 # 	icon: jmin
 
-# tssmech:
+# ts_gdi_wolverine:
 # 	idle: invisibleitem
 # 	Defaults:
 # 		Offset: 0,0,8
@@ -805,42 +805,42 @@ tsldrone:
 # 		Facings: -8
 # 		ShadowStart: 240
 # 		Tick: 100
-# 	icon: tswolverineicon.shp
+# 	icon: ts_gdi_wolverine_icon.shp
 # 		AddExtension: False
 
-# tshmec:
+# ts_gdi_mammothprototype:
 # 	idle: invisibleitem
-# 	icon: tsmammothmk2icon.shp
+# 	icon: ts_gdi_mammothprototype_icon.shp
 # 		AddExtension: False
 # 	muzzle2: lightbluelasermuzzle
 # 		Length: 3
 # 	muzzle1: gunfire2
 # 		Length: 5
 
-tsjugg:
+ts_gdi_juggernaut:
 	Defaults:
 		Offset: 0, 12
-		Filename: tsjugger.shp
+		Filename: ts_gdi_juggernaut_jugger.shp
 	stand:
-		Filename: tsjugger.shp
+		Filename: ts_gdi_juggernaut_jugger.shp
 		Facings: -8
 		Stride: 15
 		ShadowStart: 120
 	walk:
-		Filename: tsjugger.shp
+		Filename: ts_gdi_juggernaut_jugger.shp
 		Length: 15
 		Facings: -8
 		ShadowStart: 120
 		Tick: 60
 	idle:
-		Filename: tsdjugg.shp
+		Filename: ts_gdi_juggernaut_djugg.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: tsdjugg.shp
+		Filename: ts_gdi_juggernaut_djugg.shp
 		Start: 1
 		ShadowStart: 4
 	make:
-		Filename: tsdjugg.shp
+		Filename: ts_gdi_juggernaut_djugg.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
@@ -849,9 +849,9 @@ tsjugg:
 		Offset: 0, 0
 		AddExtension: False
 
-# tssonic:
+# ts_gdi_disruptor:
 # 	idle: invisibleitem
-# 	icon: tsdisruptoricon.shp
+# 	icon: ts_gdi_disruptor_icon.shp
 # 		AddExtension: False
 # 	muzzle: gunfire2
 # 		Length: 5
@@ -986,7 +986,7 @@ tsmcv:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: forgotten_mobileconstructionvehicle_icon.shp
+		Filename: ts_gdi_mobileconstructionvehicle_icon.shp
 
 # tsart2turret:
 # 	idle: tsgtarty
@@ -1059,22 +1059,22 @@ tsgtcnst:
 		Scale: 1.5
 		Offset: 0, -20, 20
 	idle:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard.shp
 		ShadowStart: 3
 	build:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: tsgtcnst.shp
+		Filename: ts_gdi_constructionyard.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	make: 
-		Filename: tsgtcnstmk.shp
+		Filename: ts_gdi_constructionyard_mk.shp
 		Length: 24
 		ShadowStart: 24
 	crane-overlay: 
@@ -1111,58 +1111,58 @@ tsgtcnst:
 		Filename: tsfacticon.shp
 		Offset: 0,0
 
-tsgtpowr:
+ts_gdi_powerplant:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Scale: 1.5
 		Offset: 0, -12, 24
-		Filename: tsgtpowr.shp
+		Filename: ts_gdi_powerplant.shp
 	idle:
 		ShadowStart: 3
-		Filename: tsgtpowr.shp
+		Filename: ts_gdi_powerplant.shp
 	damaged-idle:
-		Filename: tsgtpowr.shp
+		Filename: ts_gdi_powerplant.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: tsgtpowr.shp
+		Filename: ts_gdi_powerplant.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	idle-lights:
-		Filename: tsgtpowr_a.shp
+		Filename: ts_gdi_powerplant_a.shp
 		Length: 12
 		Tick: 200
 	damaged-idle-lights:
-		Filename: tsgtpowr_a.shp
+		Filename: ts_gdi_powerplant_a.shp
 		Start: 12
 		Length: 12
 		Tick: 200
 	idle-plug:
-		Filename: tsgtpowr_b.shp
+		Filename: ts_gdi_powerplant_b.shp
 		Length: 12
 		Tick: 200
 	damaged-idle-plug:
-		Filename: tsgtpowr_b.shp
+		Filename: ts_gdi_powerplant_b.shp
 		Length: 12
 		Tick: 200
 	idle-powrupa:
-		Filename: tsgtpowr_b.shp
+		Filename: ts_gdi_powerplant_b.shp
 		Length: 12
 		Tick: 200
 		Offset: -30, -12, 24
 	damaged-idle-powrupa:
-		Filename: tsgtpowr_b.shp
+		Filename: ts_gdi_powerplant_b.shp
 		Length: 12
 		Tick: 200
 		Offset: -30, -12, 24
 	idle-powrupb:
-		Filename: tsgtpowr_b.shp
+		Filename: ts_gdi_powerplant_b.shp
 		Length: 12
 		Tick: 200
 		Offset: -16, -6, 24
 	damaged-idle-powrupb:
-		Filename: tsgtpowr_b.shp
+		Filename: ts_gdi_powerplant_b.shp
 		Length: 12
 		Tick: 200
 		Offset: -16, -6, 24
@@ -1179,137 +1179,137 @@ drplasma2:
 		Facings: 16
 		ZOffset: 1023		
 
-# tsgtpowrup:
-# 	Inherits: tsgtpowr
-# 	Defaults: tsgtpowr
+# ts_gdi_powerturbine:
+# 	Inherits: ts_gdi_powerplant
+# 	Defaults: ts_gdi_powerplant
 # 	icon: tsturbicon
 
-tsgtpile:
+ts_gdi_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: tsgtpile.shp
+		Filename: ts_gdi_barracks.shp
 		Offset: 0, -12, 24
 	idle:
-		Filename: tsgtpile.shp
+		Filename: ts_gdi_barracks.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: tsgtpile.shp
+		Filename: ts_gdi_barracks.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: tsgtpile.shp
+		Filename: ts_gdi_barracks.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	idle-lights:
-		Filename: tsgtpile_a.shp
+		Filename: ts_gdi_barracks_a.shp
 		Length: 7
 		Tick: 200
 		ZOffset: 1023
 	damaged-idle-lights:
-		Filename: tsgtpile_a.shp
+		Filename: ts_gdi_barracks_a.shp
 		Start: 7
 		Length: 7
 		Tick: 200
 		ZOffset: 1023
 	idle-light:
-		Filename: tsgtpile_b.shp
+		Filename: ts_gdi_barracks_b.shp
 		Length: 7
 		Tick: 200
 	damaged-idle-light:
-		Filename: tsgtpile_b.shp
+		Filename: ts_gdi_barracks_b.shp
 		Start: 7
 		Length: 7
 		Tick: 200
 	idle-flag:
-		Filename: tsgtpile_c.shp
+		Filename: ts_gdi_barracks_c.shp
 		Length: 7
 		Tick: 100
 	damaged-idle-flag:
-		Filename: tsgtpile_c.shp
+		Filename: ts_gdi_barracks_c.shp
 		Start: 7
 		Length: 7
 		Tick: 100
 	make:
-		Filename: tsgtpile.shp
+		Filename: ts_gdi_barracks.shp
 	icon:
-		Filename: tsbarracksicon.shp
+		Filename: ts_gdi_barracks_icon.shp
 		Offset: 0, 0
 		UseTilesetCode: false
 
-tsgtweap:
+ts_gdi_warfactory:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: tsgtweap.shp
+		Filename: ts_gdi_warfactory.shp
 		Offset: -12, -21, 22
 	idle:
-		Filename: tsgtweap_1.shp
+		Filename: ts_gdi_warfactory_1.shp
 		ShadowStart: 2
 		ZOffset: -1024
 		Offset: -12, -21, 0
 	damaged-idle:
-		Filename: tsgtweap_1.shp
+		Filename: ts_gdi_warfactory_1.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
 		Offset: -12, -21, 0
 	idle-roof:
-		Filename: tsgtweap_2.shp
+		Filename: ts_gdi_warfactory_2.shp
 		ShadowStart: 2
 	damaged-idle-roof:
-		Filename: tsgtweap_2.shp
+		Filename: ts_gdi_warfactory_2.shp
 		Start: 1
 		ShadowStart: 3
 	dead:
-		Filename: tsgtweap.shp
+		Filename: ts_gdi_warfactory.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	idle-lights-white:
-		Filename: tsgtweap_a.shp
+		Filename: ts_gdi_warfactory_a.shp
 		Length: 16
 		Tick: 100
 		ZOffset: 2048
 	idle-lights-red:
-		Filename: tsgtweap_b.shp
+		Filename: ts_gdi_warfactory_b.shp
 		Length: 8
 		Tick: 120
 		ZOffset: 2048
 	idle-turbines:
-		Filename: tsgtweap_c.shp
+		Filename: ts_gdi_warfactory_c.shp
 		Length: 4
 		Tick: 80
 		ZOffset: 2048
 	damaged-idle-turbines:
-		Filename: tsgtweap_c.shp
+		Filename: ts_gdi_warfactory_c.shp
 		Length: 4
 		Tick: 80
 		ZOffset: 2048
 	build-door:
-		Filename: tsgtweap_d.shp
+		Filename: ts_gdi_warfactory_d.shp
 		Length: 9
 		ShadowStart: 9
 	damaged-build-door:
-		Filename: tsgtweap_d.shp
+		Filename: ts_gdi_warfactory_d.shp
 		Length: 9
 		ShadowStart: 9
 	make:
-		Filename: tsgtweapmk.shp
+		Filename: ts_gdi_warfactory_mk.shp
 	bib2:
-		Filename: tsgtweapbb.shp
+		Filename: ts_gdi_warfactory_bb.shp
 		Length: 1
 		ZOffset: -1024
 		Offset: -12, -21, 0
 		ZRamp: 1
 	damaged-bib2:
-		Filename: tsgtweapbb.shp
+		Filename: ts_gdi_warfactory_bb.shp
 		Start: 1
 		Length: 1
 		ZOffset: -1024
 		Offset: -12, -21, 0
 		ZRamp: 1
 	dead-bib2:
-		Filename: tsgtweapbb.shp
+		Filename: ts_gdi_warfactory_bb.shp
 		Start: 2
 		Length: 1
 		ZOffset: -1024
@@ -1667,7 +1667,7 @@ tsntweap:
 # 	icon: tstmplicon
 # 		Offset: 0, 0
 
-# tsgtradr:
+# ts_gdi_radar:
 # 	Defaults:
 # 		Offset: 0, -12, 12
 # 	idle:
@@ -1699,7 +1699,7 @@ tsntweap:
 # 	icon: tsgdiradaricon
 # 		Offset: 0, 0
 
-# tsgttech:
+# ts_gdi_techcenter:
 # 	Defaults:
 # 		Offset: -12, -30, 30
 # 	idle:
@@ -2247,7 +2247,7 @@ tsntweap:
 # 		Offset: 0, 0
 # 		UseTilesetCode: false
 
-# tsgthpad:
+# ts_gdi_helipad:
 # 	Defaults:
 # 		Offset: 0, -24, 1
 # 	idle:
@@ -2341,7 +2341,7 @@ tsproc.gdi:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.5
-		Filename: tsntrefn.shp
+		Filename: ts_gdi_tiberiumrefinery.shp
 		Offset: -12, -21, 20
 	idle:
 		ShadowStart: 3
@@ -2354,31 +2354,31 @@ tsproc.gdi:
 		Tick: 400
 	make:
 	unload-overlay:
-		Filename: tsntrefn_a.shp
+		Filename: ts_gdi_tiberiumrefinery_a.shp
 		Length: *
 		ZOffset: 1024
 	idle-redlights:
-		Filename: tsntrefn_c.shp
+		Filename: ts_gdi_tiberiumrefinery_c.shp
 		Length: 16
 		Tick: 120
 	damaged-idle-redlights:
-		Filename: tsntrefn_c.shp
+		Filename: ts_gdi_tiberiumrefinery_c.shp
 		Length: 16
 		Tick: 120
 	bib2:
-		Filename: tsntrefnbb.shp
+		Filename: ts_gdi_tiberiumrefinery_bb.shp
 		Length: 1
 		ZOffset: -1024
 		Offset: -12, -21, 5
 		ZRamp: 1
 	damaged-bib2:
-		Filename: tsntrefnbb.shp
+		Filename: ts_gdi_tiberiumrefinery_bb.shp
 		Start: 1
 		ZOffset: -1024
 		Offset: -12, -21, 5
 		ZRamp: 1
 	dead-bib2:
-		Filename: tsntrefnbb.shp
+		Filename: ts_gdi_tiberiumrefinery_bb.shp
 		Start: 2
 		ZOffset: -1024
 		Offset: -12, -21, 5
@@ -2605,8 +2605,8 @@ tsgtsilo.gdi:
 # 	icon: tsmissilesiloicon
 # 		Offset: 0, 0
 
-# tsgtplug:
-# 	Defaults: tsgtplug
+# ts_gdi_upgradecenter:
+# 	Defaults: ts_gdi_upgradecenter
 # 		Offset: 6,-21, 15
 # 	idle:
 # 		ShadowStart: 3
@@ -2666,22 +2666,22 @@ tsgtsilo.gdi:
 # 		Offset: 0, 0
 
 # tsgtplug2:
-# 	Inherits: tsgtplug
+# 	Inherits: ts_gdi_upgradecenter
 # 	icon: tsioncannonuplinkicon
 
 # tsgtplug3:
-# 	Inherits: tsgtplug
+# 	Inherits: ts_gdi_upgradecenter
 # 	icon: tsseekcontrolicon
 
-# tsorca:
+# ts_gdi_orcafighter:
 # 	idle: invisibleitem
 # 	icon: tsorcaicon
 
-# tsorcab:
+# ts_gdi_orcabomber:
 # 	idle: invisibleitem
 # 	icon: tsorca2icon
 
-# tstrnsport:
+# ts_gdi_carryall:
 # 	idle: invisibleitem
 # 	icon: tsotrnicon
 
@@ -2828,9 +2828,9 @@ tsjumpjet:
 		Tick: 80
 	# Fly through air squish on ground
 	icon:
-		Filename: tsjumpjeticon.shp
+		Filename: ts_gdi_jumpjetinfantry_icon.shp
 
-# tsjumpjet2:
+# ts_gdi_jumpjetinfantry:
 # 	idle: tsjumpjet
 # 		Facings: 8
 # 		Length: 6
@@ -2882,7 +2882,7 @@ tsjumpjet:
 # 	icon: tslaserturret
 # 		Offset: 0,0
 
-# tsgtctwrmg:
+# ts_gdi_vulcantower:
 # 	Defaults: tsgtctwr
 # 	idle: tsgtctwr
 # 	damaged-idle: tsgtctwr
@@ -2903,7 +2903,7 @@ tsjumpjet:
 # 	icon: tsvulkturicon
 # 		Offset: 0,0
 
-# tsgtctwrrpg:
+# ts_gdi_rpgtower:
 # 	Defaults: tsgtctwr
 # 	idle: tsgtctwr
 # 	damaged-idle: tsgtctwr
@@ -2924,7 +2924,7 @@ tsjumpjet:
 # 	icon: tsrpgturreticon
 # 		Offset: 0,0
 
-# tsgtctwrsam:
+# ts_gdi_samtower:
 # 	Defaults: tsgtctwr
 # 	idle: tsgtctwr
 # 	damaged-idle: tsgtctwr

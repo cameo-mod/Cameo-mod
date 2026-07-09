@@ -280,7 +280,7 @@ forgotten_warfactory:
 		PlayerPalette: player_rgba
 
 forgotten_servicedepot:
-	Inherits: tsgtdeptgdi
+	Inherits: ts_gdi_servicedepot
 	Tooltip:
 		Name: Service Depot
 	Buildable:
@@ -290,7 +290,7 @@ forgotten_servicedepot:
 		PlayerPalette: playerra2
 
 forgotten_helipad:
-	Inherits: tsgthpad
+	Inherits: ts_gdi_helipad
 	Tooltip:
 		Name: Helipad (Forgotten)
 	Buildable:
@@ -439,7 +439,7 @@ forgotten_chemicalplant:
 # 	Inherits: yrygyard
 # 	Buildable:
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~tsgtcnstgdi
+# 		Prerequisites: ~ts_gdi_constructionyard
 # 		Queue: Building, RABuilding
 # 		Description: Produces, and\nrepairs boats
 # 	Production@NORMAL:
@@ -464,7 +464,7 @@ forgotten_chemicalplant:
 # 	Inherits: ra2gayard
 # 	Buildable:
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~tsgtcnstgdi
+# 		Prerequisites: ~ts_gdi_constructionyard
 # 		Queue: Building, RABuilding
 # 		Description: Produces, and\nrepairs boats
 # 	Production@NORMAL:
@@ -489,7 +489,7 @@ forgotten_chemicalplant:
 # 	Inherits: ra2gayard
 # 	Buildable:
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~tsgtcnstgdi
+# 		Prerequisites: ~ts_gdi_constructionyard
 # 		Queue: Building, RABuilding
 # 		Description: Produces, and\nrepairs boats
 # 	Production@NORMAL:

@@ -1,5 +1,5 @@
 forgotten_mobileconstructionvehicle:
-	Inherits: TSMCVGDI
+	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~forgotten_warfactory, forgotten_servicedepot
@@ -33,7 +33,7 @@ forgotten_tiberiumharvester:
 	RenderVoxels:
 		Image: gharv
 	RenderSprites:
-		Image: tsharv
+		Image: ts_gdi_tiberiumharvester
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect

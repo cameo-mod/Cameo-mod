@@ -40,19 +40,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: tsgdi
-		BaseActor: tsmcvgdi
+		BaseActor: ts_gdi_mobileconstructionvehicle
 	StartingUnits@defaulttsgdi:
 		Class: light
 		ClassName: Light Support
 		Factions: tsgdi
-		BaseActor: tsmcvgdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch
+		BaseActor: ts_gdi_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan
 	StartingUnits@heavytsgdi:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tsgdi
-		BaseActor: tsmcvgdi
-		SupportActors: tse1,tse1,tse1,tse2,tse2,tssmech,tsmmch,tsmmch,tsmmch,tsmmch
+		BaseActor: ts_gdi_mobileconstructionvehicle
+		SupportActors: tse1,tse1,tse1,ts_gdi_discthrower,ts_gdi_discthrower,ts_gdi_wolverine,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan,ts_gdi_titan
 	StartingUnits@mcvonlyratsnod:
 		Class: none
 		ClassName: MCV Only
@@ -406,7 +406,7 @@ TSGTCNST:
 	Buildable:
 		Description: Builds structures
 
-TSGTCNSTGDI:
+ts_gdi_constructionyard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -426,7 +426,7 @@ TSGTCNSTGDI:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvgdi
+		IntoActor: ts_gdi_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -623,7 +623,7 @@ TSGTCNSTCABAL:
 		Image: tsgtcnst
 		PlayerPalette: playerra2
 
-TSMCVGDI:
+ts_gdi_mobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@Template: ^SupportVehicleTemplate
@@ -631,13 +631,13 @@ TSMCVGDI:
 	Inherits@mcv: ^MCV
 	Inherits@MechanicalReliability: ^MechanicalReliability
 	Buildable:
-		Prerequisites: ~tsgtweap, tsgtdeptgdi
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_servicedepot
 		Queue: Vehicle, RAVehicle
 		Description: template-mcv.description
 	Tooltip:
 		Name: Mobile Construction Vehicle
 	Transforms:
-		IntoActor: tsgtcnstgdi
+		IntoActor: ts_gdi_constructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: tsplace2.aud
@@ -651,10 +651,10 @@ TSMCVGDI:
 		Image: tsmcv
 		Scale: 18
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 TSMCVNOD:
-	Inherits: TSMCVGDI
+	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~tsntweap, tsgtdeptnod
@@ -666,7 +666,7 @@ TSMCVNOD:
 		Image: tsmcvblack
 
 TSMCVCABAL:
-	Inherits: TSMCVGDI
+	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~tsntweapcabal, tsgtdeptcabal
@@ -683,7 +683,7 @@ TSMCVCABAL:
 # TS Building
 #######################################
 
-tsprocgdi:
+ts_gdi_tiberiumrefinery:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^4x3Shape
@@ -700,7 +700,7 @@ tsprocgdi:
 		Name: Tiberium Refinery
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtcnstgdi, tsgtpowr
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_powerplant
 		Queue: Building, RABuilding
 		Description: template-refinery.description
 	Building:
@@ -719,7 +719,7 @@ tsprocgdi:
 	CustomSellValue:
 		Value: 500
 	FreeActor:
-		Actor: TSHARV
+		Actor: ts_gdi_tiberiumharvester
 		SpawnOffset: 2,2
 		Facing: 256
 	WithIdleOverlay@REDLIGHTS:
@@ -741,11 +741,11 @@ tsprocgdi:
 		RequiresSelection: true
 		PipCount: 10
 	RenderSprites:
-		Image: tsprocgdi
+		Image: ts_gdi_tiberiumrefinery
 		PlayerPalette: playerra2
 
 tsprocnod:
-	Inherits: tsprocgdi
+	Inherits: ts_gdi_tiberiumrefinery
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~tsgtcnstnod, tsntpowr
@@ -863,7 +863,7 @@ tsntwast:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSGTPOWR:
+ts_gdi_powerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -883,7 +883,7 @@ TSGTPOWR:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template-power.description
-		Prerequisites: ~tsgtcnstgdi
+		Prerequisites: ~ts_gdi_constructionyard
 	Building:
 		Footprint: == xx
 		Dimensions: 2,2
@@ -921,14 +921,14 @@ TSGTPOWR:
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			tsgtpowr: powerupgrade
+			ts_gdi_powerplant: powerupgrade
 		Requirements:
-			tsgtpowr: !build-incomplete && !powerupgrade
+			ts_gdi_powerplant: !build-incomplete && !powerupgrade
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtpowrup:
+ts_gdi_powerturbine:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Power Turbine
@@ -937,12 +937,12 @@ tsgtpowrup:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites: ~tsgtcnstgdi, gdipowerupgradeavailable
+		Prerequisites: ~ts_gdi_constructionyard, gdipowerupgradeavailable
 		Description: Power plant addon that increases output by 100%
 	Plug:
-		Type: tsgtpowr
+		Type: ts_gdi_powerplant
 	RenderSprites:
-		Image: tsgtpowrup
+		Image: ts_gdi_powerturbine
 
 TSNTPOWR:
 	Inherits: ^BaseBuilding
@@ -1084,7 +1084,7 @@ TSGTSILO:
 		BuildPaletteOrder: 100
 		Queue: Defence, RADefence
 		Description: template-silo.description
-		Prerequisites: ~tsgtcnstgdi, tsproc
+		Prerequisites: ~ts_gdi_constructionyard, tsproc
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1135,7 +1135,7 @@ TSGTSILOCABAL:
 	RenderSprites:
 		Image: tsgtsilo.cabal
 
-TSGTPILE:
+ts_gdi_barracks:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
@@ -1152,7 +1152,7 @@ TSGTPILE:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites:  ~tsgtcnstgdi, tsgtpowr
+		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_powerplant
 		Queue: Building, RABuilding
 		Description: template-barracks.description
 	Building:
@@ -1285,7 +1285,7 @@ TSNTHAND2:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtweap:
+ts_gdi_warfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^4x3Shape
@@ -1302,7 +1302,7 @@ tsgtweap:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites:  ~tsgtcnstgdi, tsprocgdi
+		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_tiberiumrefinery
 		Queue: Building, RABuilding
 		Description: template-factory.description
 	Building:
@@ -1348,7 +1348,7 @@ tsgtweap:
 		RequiresCondition: !build-incomplete
 		Sequence: bib2
 	RenderSprites:
-		Image: tsgtweap
+		Image: ts_gdi_warfactory
 		PlayerPalette: playerra2
 
 TSNTWEAP:
@@ -1467,7 +1467,7 @@ TSNTWEAPCABAL:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtdeptgdi:
+ts_gdi_servicedepot:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1483,7 +1483,7 @@ tsgtdeptgdi:
 		Name: Service Depot
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites:  ~tsgtcnstgdi, tsgtweap
+		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_warfactory
 		Queue: Building, RABuilding
 		Description: template-service-depot.description
 	Building:
@@ -1533,7 +1533,7 @@ tsgtdeptgdi:
 		PlayerPalette: playerra2
 
 tsgtdeptnod:
-	Inherits: tsgtdeptgdi
+	Inherits: ts_gdi_servicedepot
 	Tooltip:
 		Name: Service Depot
 	Buildable:
@@ -1543,7 +1543,7 @@ tsgtdeptnod:
 		PlayerPalette: playerra2
 
 tsgtdeptcabal:
-	Inherits: tsgtdeptgdi
+	Inherits: ts_gdi_servicedepot
 	Tooltip:
 		Name: Service Depot
 	Buildable:
@@ -1552,7 +1552,7 @@ tsgtdeptcabal:
 		Image: tsgtdept
 		PlayerPalette: playerra2
 
-tsgthpad:
+ts_gdi_helipad:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
@@ -1568,7 +1568,7 @@ tsgthpad:
 		Name: Helipad (GDI)
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tsgtcnstgdi, tsgtradr
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_radar
 		Queue: Building, RABuilding
 		Description: Produces, rearms and repairs aircraft.
 	Building:
@@ -1779,7 +1779,7 @@ tsntradrcabal:
 		EffectSequence: idle
 		BlockedCursor: move-blocked
 
-tsgtradr:
+ts_gdi_radar:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
@@ -1797,7 +1797,7 @@ tsgtradr:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites:  ~tsgtcnstgdi, tsprocgdi
+		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_tiberiumrefinery
 		Queue: Building, RABuilding
 		Description: actor-tsgtradr.description
 	Building:
@@ -1883,7 +1883,7 @@ tsnttech:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgttech:
+ts_gdi_techcenter:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
@@ -1895,7 +1895,7 @@ tsgttech:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites:  ~tsgtcnstgdi, tsgtradr
+		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_radar
 		Description: Provides GDI advanced technologies.
 	Tooltip:
 		Name: GDI Tech Center
@@ -1919,7 +1919,7 @@ tsgttech:
 		PlayerPalette: playerra2
 
 tscabaltech:
-	Inherits: tsgttech
+	Inherits: ts_gdi_techcenter
 	Tooltip:
 		Name: Cabal Tech Center
 	Selectable:
@@ -2224,7 +2224,7 @@ tsctarmr:
 	# Buildable:
 	# 	Queue: Addons
 	# 	BuildPaletteOrder: 70
-	# 	Prerequisites: ~tsgtcnstgdi
+	# 	Prerequisites: ~ts_gdi_constructionyard
 	# 	Description: upgrades level infantry.
 	Valued:
 		Cost: 1500
@@ -2248,7 +2248,7 @@ tsctarmr:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtplug:
+ts_gdi_upgradecenter:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2261,7 +2261,7 @@ tsgtplug:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstgdi, tsgttech, !tsionc, ~techlevel.superweapons
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter, !tsionc, ~techlevel.superweapons
 		Description: actor-tsgtplug.description
 	Tooltip:
 		Name: Upgrade Center
@@ -2447,7 +2447,7 @@ tsntlasrcabal:
 		PlayerPalette: playerra2
 		Image: tsntlasr
 
-tsgtctwrmg:
+ts_gdi_vulcantower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -2462,7 +2462,7 @@ tsgtctwrmg:
 		Name: Vulcan Tower
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tsgtcnstgdi, tsgtpile
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_barracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Basic base defense.\nDoes not require power to operate.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
@@ -2482,11 +2482,11 @@ tsgtctwrmg:
 	Armament@PRIMARY:
 		Weapon: TSVulcanGun
 		LocalOffset: 300,60,600
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSVulcanGunSonic
 		LocalOffset: 300,60,600
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	#Armament@VULCSECONDARY:
 	#	Weapon: TurretGun
 	#	LocalOffset: 300,-60,600
@@ -2501,9 +2501,9 @@ tsgtctwrmg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_sonicweaponry
 
-tsgtctwrrpg:
+ts_gdi_rpgtower:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -2518,7 +2518,7 @@ tsgtctwrrpg:
 		Name: RPG Tower
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: ~tsgtcnstgdi, tsgttech
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: GDI anti-vehicle base defense.\nDoes not require power to operate.\n  Strong vs Armored ground units\n  Weak vs Aircraft
@@ -2539,12 +2539,12 @@ tsgtctwrrpg:
 		Weapon: TSRPGTower
 		LocalOffset: 130,-45,500
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TSRPGTowerRail
 		LocalOffset: 130,-45,500
 		MuzzleSequence: muzzle
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	WithMuzzleOverlay:
 	AttackTurreted:
 	WithSpriteTurret:
@@ -2557,9 +2557,9 @@ tsgtctwrrpg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_railgunweaponry
 
-tsgtctwrsam:
+ts_gdi_samtower:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -2574,7 +2574,7 @@ tsgtctwrsam:
 		Name: SAM Tower
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstgdi, tsgtradr
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_radar
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: GDI anti-air base defense.\nDoes not require power to operate.\n  Strong vs Aircraft
@@ -2607,7 +2607,7 @@ tsgtctwrsam:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tsprojectileimprovements
+		Upgrades: ts_gdi_upgrade_projectileimprovements
 
 tsntsam:
 	Inherits: ^Defense
@@ -2723,7 +2723,7 @@ tsntstlhcabal:
 		PlayerPalette: playerra2
 		Image: tsntstlhcabal
 
-tsntpulsgdi:
+ts_gdi_empulsecannon:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@shape: ^2x2Shape
@@ -2734,7 +2734,7 @@ tsntpulsgdi:
 		Bounds: 2048, 2048
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstgdi, tsgttech
+		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_techcenter
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: actor-tsntpulsgdi.description
@@ -2770,7 +2770,7 @@ tsntpulsgdi:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: tsntpulsgdi
+			1: ts_gdi_empulsecannon
 		IconImage: tsntpuls
 		Icons:
 			1: icon2
@@ -2816,7 +2816,7 @@ tsntpulsgdi:
 		Image: tsntpuls
 
 # tsntpulsnod:
-# 	Inherits: tsntpulsgdi
+# 	Inherits: ts_gdi_empulsecannon
 # 	Buildable:
 # 		BuildPaletteOrder: 140
 # 		Prerequisites: ~tsgtcnstnod, tsntradr
@@ -2824,7 +2824,7 @@ tsntpulsgdi:
 # 		Name: E.M. Pulse Cannon
 
 # tsntpulscabal:
-# 	Inherits: tsntpulsgdi
+# 	Inherits: ts_gdi_empulsecannon
 # 	Buildable:
 # 		BuildPaletteOrder: 140
 # 		Prerequisites: ~tsgtcnstcabal, tsntradrcabal
@@ -3067,7 +3067,7 @@ TSE1:
 		Name: garrisoned
 		Weapon: TSMinigun
 	RenderSprites:
-		Image: tse1.gdi
+		Image: ts_gdi_lightinfantry
 	Voiced:
 		VoiceSet: TSInfantry
 	RenderSprites:
@@ -3076,14 +3076,14 @@ TSE1:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-TSE1.GDI:
+ts_gdi_lightinfantry:
 	Inherits: TSE1
 	Inherits@SERETraining: ^SERETraining
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile
+		Prerequisites: ~ts_gdi_barracks
 	ActorStatValues:
-		Upgrades: up_seretraining
+		Upgrades: ts_gdi_upgrade_seretraining
 
 TSE1.NOD:
 	Inherits: TSE1
@@ -3127,7 +3127,7 @@ TSE1PARA:
 	Inherits: TSE1
 	-Buildable:
 	RenderSprites:
-		Image: tse1.gdi
+		Image: ts_gdi_lightinfantry
 	ProducibleWithLevel:
 		InitialLevels: 4
 	Parachutable: ##########
@@ -3137,13 +3137,13 @@ TSE1PARA:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSMEDIC:
+ts_gdi_medic:
 	Inherits: MEDI
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@SERETraining: ^SERETraining
 	Buildable:
-		Prerequisites: ~tsgtpile
+		Prerequisites: ~ts_gdi_barracks
 		Queue: Infantry, RAInfantry
 		Description: Heals nearby infantry.\n  Unarmed
 	Valued:
@@ -3155,14 +3155,14 @@ TSMEDIC:
 		StandSequences: stand
 		DefaultAttackSequence: shoot
 	Voiced:
-		VoiceSet: TSMedic
+		VoiceSet: ts_gdi_medic
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_seretraining
+		Upgrades: ts_gdi_upgrade_seretraining
 
 TSENGINEER:
 	Inherits: E6
@@ -3197,14 +3197,14 @@ TSENGINEER:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-TSENGINEER.GDI:
+ts_gdi_engineer:
 	Inherits: TSENGINEER
 	Inherits@SERETraining: ^SERETraining
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile
+		Prerequisites: ~ts_gdi_barracks
 	ActorStatValues:
-		Upgrades: up_seretraining
+		Upgrades: ts_gdi_upgrade_seretraining
 
 TSENGINEER2:
 	Inherits: TSENGINEER
@@ -3221,7 +3221,7 @@ TSENGINEER2:
 		PlayerPalette: playerra2
 		Image: altengi
 
-TSE2:
+ts_gdi_discthrower:
 	Inherits: ^Soldier
 	Inherits@Template: ^GrenadierInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3240,7 +3240,7 @@ TSE2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 29
-		Prerequisites: ~tsgtpile
+		Prerequisites: ~ts_gdi_barracks
 		Queue: Infantry, RAInfantry
 		Description: Fast infantry armed with grenades.\nCan attack air \n  Strong vs Buildings, slow-moving targets
 	Mobile:
@@ -3252,11 +3252,11 @@ TSE2:
 	Armament@PRIMARY:
 		Weapon: TSGrenade
 		LocalOffset: 0,0,427
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSGrenadeSonic
 		LocalOffset: 0,0,427
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	#Armament@aa:
 	#	Weapon: TSGrenadeAA
 	#	LocalOffset: 0,0,427
@@ -3264,11 +3264,11 @@ TSE2:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSGrenadeG
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSGrenadeSonic
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	TakeCover:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
@@ -3285,13 +3285,13 @@ TSE2:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_seretraining, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_sonicweaponry
 
 TSE2PARA:
-	Inherits: TSE2
+	Inherits: ts_gdi_discthrower
 	-Buildable:
 	RenderSprites:
-		Image: tse2
+		Image: ts_gdi_discthrower
 	ProducibleWithLevel:
 		InitialLevels: 4
 	Parachutable: ##########
@@ -3299,7 +3299,7 @@ TSE2PARA:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSENFORCER:
+ts_gdi_falconenforcer:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3319,7 +3319,7 @@ TSENFORCER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgtpile
+		Prerequisites: ~ts_gdi_barracks
 		Queue: Infantry, RAInfantry
 		Description: Heavy infantry. Effective vs Vehicles, Aircraft.
 	Mobile:
@@ -3331,19 +3331,19 @@ TSENFORCER:
 	Armament@PRIMARY:
 		Weapon: TS30mm
 		LocalOffset: 0,0,427
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TS30mm
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TS30mmRail
 		LocalOffset: 0,0,427
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TS30mmRail
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	TakeCover:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
@@ -3355,9 +3355,9 @@ TSENFORCER:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_seretraining, up_tsprojectileimprovements, up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_railgunweaponry
 
-TSRIOTT:
+ts_gdi_riottrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3375,7 +3375,7 @@ TSRIOTT:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 45
-		Prerequisites: ~tsgtpile, tsntpulsgdi, tsgtradr
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_empulsecannon, ts_gdi_radar
 		Queue: Infantry, RAInfantry
 		Description: Heavy infantry. Effective vs Infantry.
 	Mobile:
@@ -3401,9 +3401,9 @@ TSRIOTT:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_seretraining
+		Upgrades: ts_gdi_upgrade_seretraining
 
-TSZONETROOPER:
+ts_gdi_zonetrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3423,7 +3423,7 @@ TSZONETROOPER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tsgtpile, tsgttech, upzonetrooper
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_techcenter, ts_gdi_promotion_unlockzonetrooper
 		Queue: Infantry, RAInfantry
 		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
 	Mobile:
@@ -3446,21 +3446,21 @@ TSZONETROOPER:
 	Armament@PRIMARY:
 		Weapon: TSZoneRailgun
 		LocalOffset: 256,43,256
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TSZoneRailgunRail
 		LocalOffset: 256,43,256
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSZoneRailgun
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSZoneRailgunRail
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	-DamagedByTerrain:
 	-TakeCover:
 	WithInfantryBody:
@@ -3472,9 +3472,9 @@ TSZONETROOPER:
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_seretraining, up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_railgunweaponry
 
-tsjumpjet2:
+ts_gdi_jumpjetinfantry:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3490,7 +3490,7 @@ tsjumpjet2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtpile, tsgtradr
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_radar
 		Queue: Infantry, RAInfantry
 		Description: Airborne soldier.\nCan attack aircraft.\n  Strong vs Infantry, Light armor\n  Weak vs AA
 	Aircraft:
@@ -3538,7 +3538,7 @@ tsjumpjet2:
 		PlayerPalette: playerra2
 		Image: tsjumpjet
 	ActorStatValues:
-		Upgrades: up_seretraining
+		Upgrades: ts_gdi_upgrade_seretraining
 
 TSJUMPJET.Husk:
 	Inherits: ^HelicopterHusk
@@ -3856,7 +3856,7 @@ TSCHAMSPY:
 	ActorStatValues:
 		Upgrades: up_infiltrationkit
 
-TSRAILCOM:
+ts_gdi_railguncommando:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -3877,7 +3877,7 @@ TSRAILCOM:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~tsgtpile, tsgttech
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: Elite commando infantry, armed with a railgun.  Strong vs Everything.
@@ -3890,21 +3890,21 @@ TSRAILCOM:
 	Armament@PRIMARY:
 		Weapon: TSCommandoRailgun
 		LocalOffset: 256,43,256
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TSCommandoRailgunRail
 		LocalOffset: 256,43,256
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSCommandoRailgun
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSCommandoRailgunRail
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	-DamagedByTerrain:
 	Selectable:
 		Class: forgotten_ghoststalker
@@ -3914,7 +3914,7 @@ TSRAILCOM:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_seretraining, up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_seretraining, ts_gdi_upgrade_railgunweaponry
 
 
 #The following are used for the mutant wildlife spawner superweapon
@@ -4902,7 +4902,7 @@ tsnafnce:
 # TS Shared Vehicles
 #######################################
 
-TSHARV:
+ts_gdi_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@MechanicalReliability: ^MechanicalReliability
@@ -4912,7 +4912,7 @@ TSHARV:
 		PipCount: 8
 		Capacity: 35
 	Buildable:
-		Prerequisites: ~tsgtweap, tsprocgdi
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_tiberiumrefinery
 		Queue: Vehicle, RAVehicle
 		Description: Harvests Tiberium for processing
 	WithVoxelBody:
@@ -4922,12 +4922,12 @@ TSHARV:
 	DeliversCash:
 		Payload: 500
 	RenderSprites:
-		Image: tsharv
+		Image: ts_gdi_tiberiumharvester
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 TSHARVNOD:
 	Inherits: ^TDHARV
@@ -5094,7 +5094,7 @@ tsldrone:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 tsprobe:
 	Inherits: ^Helicopter
@@ -5220,7 +5220,7 @@ TSCLOUD1:
 # TS GDI Vehicles
 #######################################
 
-TSPITBULL:
+ts_gdi_pitbull:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -5239,7 +5239,7 @@ TSPITBULL:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtweap
+		Prerequisites: ~ts_gdi_warfactory
 		Description: Scout vehicle.  Strong vs Vehicles, Aircraft.  Weak vs Infantry
 	Mobile:
 		Speed: 150
@@ -5262,14 +5262,14 @@ TSPITBULL:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	RenderSprites:
-		Image: tspitbull
+		Image: ts_gdi_pitbull
 		PlayerPalette: player_rgba
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_tsprojectileimprovements, up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability
 
-TSAPC:
+ts_gdi_amphibiousapc:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
@@ -5286,10 +5286,10 @@ TSAPC:
 	Tooltip:
 		Name: Amphibious APC
 	UpdatesPlayerStatistics:
-		OverrideActor: tsapc
+		OverrideActor: ts_gdi_amphibiousapc
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtweap
+		Prerequisites: ~ts_gdi_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: Armored infantry transport.\nCan move on water.
 	Mobile:
@@ -5315,7 +5315,7 @@ TSAPC:
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
-		Class: tsapc
+		Class: ts_gdi_amphibiousapc
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -5323,7 +5323,7 @@ TSAPC:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
-		InitialUnits: TSE1.GDI, TSE1.GDI, TSE2, TSE2, TSENFORCER, TSENFORCER
+		InitialUnits: ts_gdi_lightinfantry, ts_gdi_lightinfantry, ts_gdi_discthrower, ts_gdi_discthrower, ts_gdi_falconenforcer, ts_gdi_falconenforcer
 	GrantConditionOnTerrain:
 		Condition: inwater
 		TerrainTypes: Water, River
@@ -5333,18 +5333,18 @@ TSAPC:
 		Sequence: water
 		RequiresCondition: inwater
 	RenderVoxels:
-		Image: tsapc
+		Image: ts_gdi_amphibiousapc
 	RenderSprites:
-		Image: tsapc
+		Image: ts_gdi_amphibiousapc
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
-tsmemp:
+ts_gdi_mobileemp:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5359,7 +5359,7 @@ tsmemp:
 		Name: Mobile EMP
 	Buildable:
 		BuildPaletteOrder: 110
-		Prerequisites: ~tsgtweap, tsntpulsgdi, tsgtradr
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_empulsecannon, ts_gdi_radar
 		Queue: Vehicle, RAVehicle
 		Description: Shuts down vehicles with an EMP blast.\n  Strong vs Vehicles, Cyborgs
 	Mobile:
@@ -5391,9 +5391,9 @@ tsmemp:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
-TSMMCH:
+ts_gdi_titan:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5413,7 +5413,7 @@ TSMMCH:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap, ~!uptitanmkii
+		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_unlocktitanmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
@@ -5435,14 +5435,14 @@ TSMMCH:
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TS120mmRail
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	AttackTurreted:
 	WithMuzzleOverlay:
 	RenderVoxels:
@@ -5468,9 +5468,9 @@ TSMMCH:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
-TSTALTITAN:
+ts_gdi_titanmkii:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5489,7 +5489,7 @@ TSTALTITAN:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap, uptitanmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_promotion_unlocktitanmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -5512,14 +5512,14 @@ TSTALTITAN:
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@Upgrade:
 		Weapon: TS120mmTalRail
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700
 		MuzzleSequence: muzzle
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	AttackTurreted:
 	WithMuzzleOverlay:
 	Voiced:
@@ -5536,9 +5536,9 @@ TSTALTITAN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
-TSJUGG2:
+ts_gdi_juggernautmkii:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5556,7 +5556,7 @@ TSJUGG2:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweap, tsgttech, upjuggmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ts_gdi_promotion_unlockjuggernautmkii
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: heavytracked
@@ -5605,9 +5605,9 @@ TSJUGG2:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering
 
-TSJUGG:
+ts_gdi_juggernaut:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5633,7 +5633,7 @@ TSJUGG:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtweap, tsgttech, ~!upjuggmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, ~!ts_gdi_promotion_unlockjuggernautmkii
 		Queue: Vehicle, RAVehicle
 		Description: Mobile artillery mech.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
 	Health:
@@ -5651,7 +5651,7 @@ TSJUGG:
 		Range: 9c0
 		MaxHeightDelta: 3
 	RenderSprites:
-		Image: tsjugg
+		Image: ts_gdi_juggernaut
 	WithMakeAnimation:
 		BodyNames: body, deployedbody
 	GrantConditionOnDeploy:
@@ -5710,9 +5710,9 @@ TSJUGG:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering
 
-TSHVR:
+ts_gdi_hovermlrs:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5729,7 +5729,7 @@ TSHVR:
 		Name: Hover MLRS
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tsgtweap, tsgtradr
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_radar
 		Queue: Vehicle, RAVehicle
 		Description: Hovering vehicle armed with\nlong range missiles.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
 	Mobile:
@@ -5767,9 +5767,9 @@ TSHVR:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tsprojectileimprovements, up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability
 
-TSSMECH:
+ts_gdi_wolverine:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5790,7 +5790,7 @@ TSSMECH:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 25
-		Prerequisites: ~tsgtweap, ~!upwolverinemkii
+		Prerequisites: ~ts_gdi_warfactory, ~!ts_gdi_promotion_unlockwolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 32
@@ -5810,12 +5810,12 @@ TSSMECH:
 		Name: primary
 		Weapon: TSAssaultCannon
 		LocalOffset: 25,121,171, 0,-121,171
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Name: secondary
 		Weapon: TSAssaultCannonSonic
 		LocalOffset: 25,121,171, 0,-121,171
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	WithFacingSpriteBody:
@@ -5834,9 +5834,9 @@ TSSMECH:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
 
-TSTALWOLV:
+ts_gdi_wolverinemkii:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5858,7 +5858,7 @@ TSTALWOLV:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 25
-		Prerequisites: ~tsgtweap, upwolverinemkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_promotion_unlockwolverinemkii
 		Description: Anti-personnel walker.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		TurnSpeed: 32
@@ -5878,12 +5878,12 @@ TSTALWOLV:
 		Name: primary
 		Weapon: TSAssaultCannonTal
 		LocalOffset: 25,121,171, 0,-121,171
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Name: secondary
 		Weapon: TSAssaultCannonTalSonic
 		LocalOffset: 25,121,171, 0,-121,171
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	QuantizeFacingsFromSequence:
 		Sequence: stand
 	WithFacingSpriteBody:
@@ -5902,9 +5902,9 @@ TSTALWOLV:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_sonicweaponry
 
-TSHMEC:
+ts_gdi_mammothprototype:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5928,7 +5928,7 @@ TSHMEC:
 	# Mammoth MK. II
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, ~!upmammothmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ~!ts_gdi_promotion_unlockmammothmkii
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
@@ -5957,7 +5957,7 @@ TSHMEC:
 		Name: railgun
 		Weapon: TSMechRailgun
 		LocalOffset: 400,-350,450, 400,350,450
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@MISSILES:
 		Name: missiles
 		Weapon: TSMammothTusk2
@@ -5967,7 +5967,7 @@ TSHMEC:
 		Name: railgun
 		Weapon: TSMechRailgunRail
 		LocalOffset: 400,-350,450, 400,350,450
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	#	MuzzleSequence: muzzle1
 	#	RequiresCondition: !rank-elite
 	#Armament@MISSILESE:
@@ -6019,9 +6019,9 @@ TSHMEC:
 	ProvidesPrerequisite@mkii:
 		Prerequisite: existingmkii
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
-TSMKII:
+ts_gdi_mammothmkii:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6043,7 +6043,7 @@ TSMKII:
 		Name: Mammoth MK. II
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtweap, tsgttech, !existingmkii, upmammothmkii
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter, !existingmkii, ts_gdi_promotion_unlockmammothmkii
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: Slow heavy walker. Armed with dual railguns and rocket launchers. Strong vs Everything. Maximum 1 can be built.
@@ -6062,7 +6062,7 @@ TSMKII:
 		Name: railgun
 		Weapon: TSMechRailgunII
 		LocalOffset: 400,-350,450, 400,350,450
-		RequiresCondition: !up_railgunweaponry
+		RequiresCondition: !ts_gdi_upgrade_railgunweaponry
 	Armament@MISSILES:
 		Name: missiles
 		Weapon: TSMammothTusk2II
@@ -6072,7 +6072,7 @@ TSMKII:
 		Name: railgun2
 		Weapon: TSMechRailgunRailII
 		LocalOffset: 400,-350,450, 400,350,450
-		RequiresCondition: up_railgunweaponry
+		RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	Armament@MG:
 		Name: mg
 		Weapon: TSMechMGII
@@ -6129,9 +6129,9 @@ TSMKII:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_mechengineering, up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_mechengineering, ts_gdi_upgrade_railgunweaponry
 
-TSSONIC:
+ts_gdi_disruptor:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6148,7 +6148,7 @@ TSSONIC:
 		Name: Disruptor
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~tsgtweap, tsgttech
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_techcenter
 		Queue: Vehicle, RAVehicle
 		Description: Armored high-tech vehicle with\na long range sonic armament.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
@@ -6168,12 +6168,12 @@ TSSONIC:
 		Weapon: TSSonicZapWeapon
 		Recoil: 128
 		RecoilRecovery: 26
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSSonicZapWeaponSonic
 		Recoil: 128
 		RecoilRecovery: 26
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	AttackTurreted:
 	WithVoxelTurret:
 	SelectionDecorations:
@@ -6192,7 +6192,7 @@ TSSONIC:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
 
 tsaegis:
 	Inherits: ^BoatUnit
@@ -6240,7 +6240,7 @@ tsaegis:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_tsprojectileimprovements, up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_mechanicalreliability
 
 #######################################
 # TS Nod Vehicles
@@ -6933,7 +6933,7 @@ tssgencabal:
 	RenderVoxels:
 		Image: tssgen
 
-tslpst:
+ts_gdi_mobilesensorarray:
 	Inherits: ^Tank
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@detect: ^GenericGroundDetector
@@ -6944,7 +6944,7 @@ tslpst:
 		Name: Mobile Sensor Array
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~tsgtweap, tsgtradr
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_radar
 		Queue: Vehicle, RAVehicle
 		Description: Detects cloaked units and buildings.\n Unarmed
 	Mobile:
@@ -6966,10 +6966,10 @@ tslpst:
 	DetectCloaked:
 		Range: 12c0
 	RenderSprites:
-		Image: tslpst
+		Image: ts_gdi_mobilesensorarray
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 #######################################
 # TS Forgotten Vehicles
@@ -7715,7 +7715,7 @@ TSDEFENDER:
 # TS Aircraft
 #######################################
 
-TSORCA:
+ts_gdi_orcafighter:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -7735,7 +7735,7 @@ TSORCA:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~tsgthpad, ~!upzoneorca
+		Prerequisites: ~ts_gdi_helipad, ~!ts_gdi_promotion_unlockzoneorca
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
 		Speed: 145
@@ -7755,12 +7755,12 @@ TSORCA:
 		Weapon: TSHellfire
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSHellfireSonic
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
@@ -7781,15 +7781,15 @@ TSORCA:
 		Delay: 64
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSORCA.Husk
+		Actor: ts_gdi_orcafighter_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: up_tsprojectileimprovements, up_ceramicarmor, up_mechanicalreliability, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
 
-TSORCA.Husk:
+ts_gdi_orcafighter_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -7798,14 +7798,14 @@ TSORCA.Husk:
 		TurnSpeed: 80
 		Speed: 186
 	RenderSprites:
-		Image: tsorca
+		Image: ts_gdi_orcafighter
 	RenderVoxels:
-		Image: tsorca
+		Image: ts_gdi_orcafighter
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSZONEORCA:
+ts_gdi_zoneorcafighter:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -7825,7 +7825,7 @@ TSZONEORCA:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Aircraft, RAAircraft
-		Prerequisites: ~tsgthpad, upzoneorca
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_promotion_unlockzoneorca
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
 		Speed: 165
@@ -7845,12 +7845,12 @@ TSZONEORCA:
 		Weapon: TSZoneHellfire
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSZoneHellfireSonic
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
@@ -7872,15 +7872,15 @@ TSZONEORCA:
 		Delay: 64
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSORCA.Husk
+		Actor: ts_gdi_orcafighter_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: up_tsprojectileimprovements, up_ceramicarmor, up_mechanicalreliability, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_projectileimprovements, ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
 
-TSHAMMERHEAD:
+ts_gdi_hammerhead:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -7896,7 +7896,7 @@ TSHAMMERHEAD:
 		Name: Hammerhead
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgthpad, uphammerhead
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_promotion_unlockhammerhead
 		Queue: Aircraft, RAAircraft
 		Description: Fast assault gunship with\ndual missile launchers.\n  Strong vs Aircraft, Vehicles
 	Aircraft:
@@ -7971,11 +7971,11 @@ TSHAMMERHEAD:
 		Position: BottomRight
 		RequiresSelection: true
 	SpawnActorOnDeath:
-		Actor: TSORCA.Husk
+		Actor: ts_gdi_orcafighter_husk
 	ActorStatValues:
-		Upgrades: up_ceramicarmor, up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability
 
-TSORCAB:
+ts_gdi_orcabomber:
 	Inherits: ^Helicopter
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -7994,7 +7994,7 @@ TSORCAB:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgthpad, tsgttech
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: Heavy bomber.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Aircraft:
@@ -8016,12 +8016,12 @@ TSORCAB:
 		Weapon: TSBomb
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Weapon: TSBombSonic
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	FirepowerMultiplier@AmmoCompensation:
 		Modifier: 25
 	AttackAircraft:
@@ -8044,7 +8044,7 @@ TSORCAB:
 	# 	Delay: 25
 	# 	Count: 1
 	SpawnActorOnDeath:
-		Actor: TSORCAB.Husk
+		Actor: ts_gdi_orcabomber_husk
 	RenderVoxels:
 		Scale: 15
 	WithAmmoPipsDecoration:
@@ -8052,9 +8052,9 @@ TSORCAB:
 		RequiresSelection: True
 		PipCount: 10
 	ActorStatValues:
-		Upgrades: up_ceramicarmor, up_mechanicalreliability, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
 
-TSORCAB.Husk:
+ts_gdi_orcabomber_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -8066,15 +8066,15 @@ TSORCAB.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsorcab
+		Image: ts_gdi_orcabomber
 	RenderVoxels:
-		Image: tsorcab
+		Image: ts_gdi_orcabomber
 		Scale: 15
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSTRNSPORT:
+ts_gdi_carryall:
 	Inherits: ^Helicopter
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@CeramicArmor: ^CeramicArmor
@@ -8090,7 +8090,7 @@ TSTRNSPORT:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgthpad
+		Prerequisites: ~ts_gdi_helipad
 		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
 	Aircraft:
 		TurnSpeed: 80
@@ -8110,16 +8110,16 @@ TSTRNSPORT:
 		Type: Light
 	RenderSprites:
 	SpawnActorOnDeath:
-		Actor: TSTRNSPORT.Husk
+		Actor: ts_gdi_carryall_husk
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSHeli
 	RenderVoxels:
 		Scale: 15
 	ActorStatValues:
-		Upgrades: up_ceramicarmor, up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability
 
-TSTRNSPORT.Husk:
+ts_gdi_carryall_husk:
 	Inherits: ^PlaneHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -8131,9 +8131,9 @@ TSTRNSPORT.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tstrnsport
+		Image: ts_gdi_carryall
 	RenderVoxels:
-		Image: tstrnsport
+		Image: ts_gdi_carryall
 		Scale: 7.4
 	-WithShadow:
 	-Cloak@TDcloak:
@@ -8748,7 +8748,7 @@ TSTRAN.Husk:
 		Image: tstran
 		Scale: 15
 
-TSKODK:
+ts_gdi_kodiakcommandship:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -8768,7 +8768,7 @@ TSKODK:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgthpad, tsgtplug, upkodiak
+		Prerequisites: ~ts_gdi_helipad, ts_gdi_upgradecenter, ts_gdi_promotion_unlockkodiak
 		Queue: Aircraft, RAAircraft
 		Description: GDI command ship. Strong vs Everything
 		BuildLimit: 1
@@ -8789,13 +8789,13 @@ TSKODK:
 		Weapon: KodiakCannon
 		LocalOffset: 800,0,-200
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_sonicweaponry
+		RequiresCondition: !ts_gdi_upgrade_sonicweaponry
 	Armament@Upgrade:
 		Name: primary
 		Weapon: KodiakCannonSonic
 		LocalOffset: 800,0,-200
 		MuzzleSequence: muzzle
-		RequiresCondition: up_sonicweaponry
+		RequiresCondition: ts_gdi_upgrade_sonicweaponry
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: KodiakAAGuns
@@ -8815,7 +8815,7 @@ TSKODK:
 	Voiced:
 		VoiceSet: SCBattleCruiserVoice
 	SpawnActorOnDeath:
-		Actor: TSKODK.Husk
+		Actor: ts_gdi_kodiakcommandship_husk
 	DeathSounds:
 	# -ReloadAmmoDelayMultiplier@RANK-1:
 	# -ReloadAmmoDelayMultiplier@RANK-2:
@@ -8824,7 +8824,7 @@ TSKODK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_ceramicarmor, up_mechanicalreliability, up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_ceramicarmor, ts_gdi_upgrade_mechanicalreliability, ts_gdi_upgrade_sonicweaponry
 	#IonCannonPower:
 	#	AllowMultiple: True
 	#	OrderName: GDIDropDod
@@ -8857,7 +8857,7 @@ TSKODK:
 	#		1: 5000
 	#	TargetCircleColor: ff000080
 
-TSKODK.Husk:
+ts_gdi_kodiakcommandship_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Kodiak Command Ship
@@ -8865,7 +8865,7 @@ TSKODK.Husk:
 		TurnSpeed: 15
 		Speed: 30
 	RenderSprites:
-		Image: tskodk
+		Image: ts_gdi_kodiakcommandship
 		PlayerPalette: playerra2
 	FallsToEarth:
 		Explosion: KirovExplode
@@ -8878,7 +8878,7 @@ TSKODK.Husk:
 
 ########## Radar ##########
 
-up_seretraining:
+ts_gdi_upgrade_seretraining:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: SERE Training
@@ -8888,25 +8888,25 @@ up_seretraining:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade-seretraining.description
-		Prerequisites: ~tsgtradr, !up_seretraining
+		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_seretraining
 	RenderSprites:
 		Image: seretrainingicon
 	ProvidesPrerequisite:
 
 ^SERETraining:
-	GrantConditionOnPrerequisite@up_seretraining:
-		Condition: up_seretraining
-		Prerequisites: up_seretraining
-	SpeedMultiplier@up_seretraining:
-		RequiresCondition: up_seretraining
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_seretraining:
+		Condition: ts_gdi_upgrade_seretraining
+		Prerequisites: ts_gdi_upgrade_seretraining
+	SpeedMultiplier@ts_gdi_upgrade_seretraining:
+		RequiresCondition: ts_gdi_upgrade_seretraining
 		Modifier: 120
-	DamageMultiplier@up_seretraining:
-		RequiresCondition: up_seretraining
+	DamageMultiplier@ts_gdi_upgrade_seretraining:
+		RequiresCondition: ts_gdi_upgrade_seretraining
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_seretraining
+		Upgrades: ts_gdi_upgrade_seretraining
 
-up_tsprojectileimprovements:
+ts_gdi_upgrade_projectileimprovements:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Projectile Improvements
@@ -8916,25 +8916,25 @@ up_tsprojectileimprovements:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
 		Description: upgrade-tsprojectileimprovements.description
-		Prerequisites: ~tsgtradr, !up_tsprojectileimprovements
+		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_projectileimprovements
 	RenderSprites:
 		Image: tsprojectileimprovementsicon
 	ProvidesPrerequisite:
 
 ^TSProjectileImprovements:
-	GrantConditionOnPrerequisite@up_tsprojectileimprovements:
-		Condition: up_tsprojectileimprovements
-		Prerequisites: up_tsprojectileimprovements
-	RangeMultiplier@up_tsprojectileimprovements:
-		RequiresCondition: up_tsprojectileimprovements
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_projectileimprovements:
+		Condition: ts_gdi_upgrade_projectileimprovements
+		Prerequisites: ts_gdi_upgrade_projectileimprovements
+	RangeMultiplier@ts_gdi_upgrade_projectileimprovements:
+		RequiresCondition: ts_gdi_upgrade_projectileimprovements
 		Modifier: 120
-	FirepowerMultiplier@up_tsprojectileimprovements:
-		RequiresCondition: up_tsprojectileimprovements
+	FirepowerMultiplier@ts_gdi_upgrade_projectileimprovements:
+		RequiresCondition: ts_gdi_upgrade_projectileimprovements
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: up_tsprojectileimprovements
+		Upgrades: ts_gdi_upgrade_projectileimprovements
 
-up_mechanicalreliability:
+ts_gdi_upgrade_mechanicalreliability:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Mechanical Reliability
@@ -8944,39 +8944,39 @@ up_mechanicalreliability:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
 		Description: upgrade-mechanicalreliability.description
-		Prerequisites: ~tsgtradr, !up_mechanicalreliability
+		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_mechanicalreliability
 	RenderSprites:
 		Image: mechanicalreliabilityicon
 	ProvidesPrerequisite:
 
 ^MechanicalReliability:
-	GrantConditionOnPrerequisite@up_mechanicalreliability:
-		Condition: up_mechanicalreliability
-		Prerequisites: up_mechanicalreliability
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_mechanicalreliability:
+		Condition: ts_gdi_upgrade_mechanicalreliability
+		Prerequisites: ts_gdi_upgrade_mechanicalreliability
 	ChangesHealth@up_mechanicalreliability1:
 		PercentageStep: 1
 		Delay: 40
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_mechanicalreliability
+		RequiresCondition: ts_gdi_upgrade_mechanicalreliability
 	ChangesHealth@up_mechanicalreliability2:
 		Step: 50
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_mechanicalreliability
-	DamageMultiplier@up_mechanicalreliability:
-		RequiresCondition: up_mechanicalreliability
+		RequiresCondition: ts_gdi_upgrade_mechanicalreliability
+	DamageMultiplier@ts_gdi_upgrade_mechanicalreliability:
+		RequiresCondition: ts_gdi_upgrade_mechanicalreliability
 		Modifier: 90
-	SpeedMultiplier@up_mechanicalreliability:
-		RequiresCondition: up_mechanicalreliability
+	SpeedMultiplier@ts_gdi_upgrade_mechanicalreliability:
+		RequiresCondition: ts_gdi_upgrade_mechanicalreliability
 		Modifier: 110
 	ActorStatValues:
-		Upgrades: up_mechanicalreliability
+		Upgrades: ts_gdi_upgrade_mechanicalreliability
 
 ########## LAB ##########
 
-up_ceramicarmor:
+ts_gdi_upgrade_ceramicarmor:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ceramic Armor
@@ -8986,25 +8986,25 @@ up_ceramicarmor:
 		BuildPaletteOrder: 110
 		Queue: Research
 		Description: upgrade-ceramicarmor.description
-		Prerequisites: ~tsgttech, !up_ceramicarmor
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_ceramicarmor
 	RenderSprites:
 		Image: ceramicarmoricon
 	ProvidesPrerequisite:
 
 ^CeramicArmor:
-	GrantConditionOnPrerequisite@up_ceramicarmor:
-		Condition: up_ceramicarmor
-		Prerequisites: up_ceramicarmor
-	DamageMultiplier@up_ceramicarmor:
-		RequiresCondition: up_ceramicarmor
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_ceramicarmor:
+		Condition: ts_gdi_upgrade_ceramicarmor
+		Prerequisites: ts_gdi_upgrade_ceramicarmor
+	DamageMultiplier@ts_gdi_upgrade_ceramicarmor:
+		RequiresCondition: ts_gdi_upgrade_ceramicarmor
 		Modifier: 75
-	SpeedMultiplier@up_ceramicarmor:
-		RequiresCondition: up_ceramicarmor
+	SpeedMultiplier@ts_gdi_upgrade_ceramicarmor:
+		RequiresCondition: ts_gdi_upgrade_ceramicarmor
 		Modifier: 110
 	ActorStatValues:
-		Upgrades: up_ceramicarmor
+		Upgrades: ts_gdi_upgrade_ceramicarmor
 
-up_mechengineering:
+ts_gdi_upgrade_mechengineering:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Mech Engineering
@@ -9014,25 +9014,25 @@ up_mechengineering:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade-mechengineering.description
-		Prerequisites: ~tsgttech, !up_mechengineering
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_mechengineering
 	RenderSprites:
 		Image: mechengineeringicon
 	ProvidesPrerequisite:
 
 ^MechEngineering:
-	GrantConditionOnPrerequisite@up_mechengineering:
-		Condition: up_mechengineering
-		Prerequisites: up_mechengineering
-	DamageMultiplier@up_mechengineering:
-		RequiresCondition: up_mechengineering
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_mechengineering:
+		Condition: ts_gdi_upgrade_mechengineering
+		Prerequisites: ts_gdi_upgrade_mechengineering
+	DamageMultiplier@ts_gdi_upgrade_mechengineering:
+		RequiresCondition: ts_gdi_upgrade_mechengineering
 		Modifier: 80
-	SpeedMultiplier@up_mechengineering:
-		RequiresCondition: up_mechengineering
+	SpeedMultiplier@ts_gdi_upgrade_mechengineering:
+		RequiresCondition: ts_gdi_upgrade_mechengineering
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: up_mechengineering
+		Upgrades: ts_gdi_upgrade_mechengineering
 
-up_sonicweaponry:
+ts_gdi_upgrade_sonicweaponry:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Sonic Weaponry
@@ -9042,19 +9042,19 @@ up_sonicweaponry:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: upgrade-sonicweaponry.description
-		Prerequisites: ~tsgttech, !up_sonicweaponry
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_sonicweaponry
 	RenderSprites:
 		Image: sonicweaponryicon
 	ProvidesPrerequisite:
 
 ^SonicWeaponry:
-	GrantConditionOnPrerequisite@up_sonicweaponry:
-		Condition: up_sonicweaponry
-		Prerequisites: up_sonicweaponry
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_sonicweaponry:
+		Condition: ts_gdi_upgrade_sonicweaponry
+		Prerequisites: ts_gdi_upgrade_sonicweaponry
 	ActorStatValues:
-		Upgrades: up_sonicweaponry
+		Upgrades: ts_gdi_upgrade_sonicweaponry
 
-up_railgunweaponry:
+ts_gdi_upgrade_railgunweaponry:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Railgun Weaponry
@@ -9064,28 +9064,28 @@ up_railgunweaponry:
 		BuildPaletteOrder: 90
 		Queue: Research
 		Description: upgrade-railgunweaponry.description
-		Prerequisites: ~tsgttech, !up_railgunweaponry
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_railgunweaponry
 	RenderSprites:
 		Image: railgunweaponryicon
 	ProvidesPrerequisite:
 
 ^RailgunWeaponry:
-	# FirepowerMultiplier@up_railgunweaponry:
-	# 	RequiresCondition: up_railgunweaponry
+	# FirepowerMultiplier@ts_gdi_upgrade_railgunweaponry:
+	# 	RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	# 	Modifier: 125
-	# ReloadDelayMultiplier@up_railgunweaponry:
-	# 	RequiresCondition: up_railgunweaponry
+	# ReloadDelayMultiplier@ts_gdi_upgrade_railgunweaponry:
+	# 	RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	# 	Modifier: 110
-	# InaccuracyMultiplier@up_railgunweaponry:
-	# 	RequiresCondition: up_railgunweaponry
+	# InaccuracyMultiplier@ts_gdi_upgrade_railgunweaponry:
+	# 	RequiresCondition: ts_gdi_upgrade_railgunweaponry
 	# 	Modifier: 25
-	GrantConditionOnPrerequisite@up_railgunweaponry:
-		Condition: up_railgunweaponry
-		Prerequisites: up_railgunweaponry
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_railgunweaponry:
+		Condition: ts_gdi_upgrade_railgunweaponry
+		Prerequisites: ts_gdi_upgrade_railgunweaponry
 	ActorStatValues:
-		Upgrades: up_railgunweaponry
+		Upgrades: ts_gdi_upgrade_railgunweaponry
 
-up_modernfirecontrolsystems:
+ts_gdi_upgrade_modernfirecontrolsystems:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Modern Fire Control Systems
@@ -9095,7 +9095,7 @@ up_modernfirecontrolsystems:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: upgrade-modernfirecontrolsystems.description
-		Prerequisites: ~tsgttech, !up_modernfirecontrolsystems
+		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_modernfirecontrolsystems
 	RenderSprites:
 		Image: modernfirecontrolsystemsicon
 	# ProvidesPrerequisite:
@@ -9105,7 +9105,7 @@ up_modernfirecontrolsystems:
 team_upgrade.up_modernfirecontrolsystems:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_modernfirecontrolsystems
+		Prerequisite: ts_gdi_upgrade_modernfirecontrolsystems
 	RenderSprites:
 		Image: modernfirecontrolsystemsicon
 	Tooltip:
@@ -9115,26 +9115,26 @@ team_upgrade.up_modernfirecontrolsystems:
 	PlayerDisplayUpgrade:
 
 ^ModernFireControlSystems:
-	GrantConditionOnPrerequisite@up_modernfirecontrolsystems:
-		Condition: up_modernfirecontrolsystems
-		Prerequisites: up_modernfirecontrolsystems
-	ReloadDelayMultiplier@up_modernfirecontrolsystems:
-		RequiresCondition: up_modernfirecontrolsystems
+	GrantConditionOnPrerequisite@ts_gdi_upgrade_modernfirecontrolsystems:
+		Condition: ts_gdi_upgrade_modernfirecontrolsystems
+		Prerequisites: ts_gdi_upgrade_modernfirecontrolsystems
+	ReloadDelayMultiplier@ts_gdi_upgrade_modernfirecontrolsystems:
+		RequiresCondition: ts_gdi_upgrade_modernfirecontrolsystems
 		Modifier: 90
-	InaccuracyMultiplier@up_modernfirecontrolsystems:
-		RequiresCondition: up_modernfirecontrolsystems
+	InaccuracyMultiplier@ts_gdi_upgrade_modernfirecontrolsystems:
+		RequiresCondition: ts_gdi_upgrade_modernfirecontrolsystems
 		Modifier: 90
-	RangeMultiplier@up_modernfirecontrolsystems:
-		RequiresCondition: up_modernfirecontrolsystems
+	RangeMultiplier@ts_gdi_upgrade_modernfirecontrolsystems:
+		RequiresCondition: ts_gdi_upgrade_modernfirecontrolsystems
 		Modifier: 105
-	RevealsShroudMultiplier@up_modernfirecontrolsystems:
-		RequiresCondition: up_modernfirecontrolsystems
+	RevealsShroudMultiplier@ts_gdi_upgrade_modernfirecontrolsystems:
+		RequiresCondition: ts_gdi_upgrade_modernfirecontrolsystems
 		Modifier: 105
-	DetectCloakedMultiplier@up_modernfirecontrolsystems:
-		RequiresCondition: up_modernfirecontrolsystems
+	DetectCloakedMultiplier@ts_gdi_upgrade_modernfirecontrolsystems:
+		RequiresCondition: ts_gdi_upgrade_modernfirecontrolsystems
 		Modifier: 105
 	ActorStatValues:
-		Upgrades: up_modernfirecontrolsystems
+		Upgrades: ts_gdi_upgrade_modernfirecontrolsystems
 
 
 ################## NOD #########################
@@ -9616,7 +9616,7 @@ cabalclusterwarhead:
 
 # GDI ####################
 
-upwolverinemkii:
+ts_gdi_promotion_unlockwolverinemkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Wolverine MKII
@@ -9624,13 +9624,13 @@ upwolverinemkii:
 		BuildPaletteOrder: 1
 		Queue: Promotions
 		Description: Allows construction of Wolverines MKII.
-		Prerequisites: ~fact.tsgdi, !upwolverinemkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockwolverinemkii, rank1
 	RenderSprites:
-		Image: tstalwolv
+		Image: ts_gdi_wolverinemkii
 	ProvidesPrerequisite:
-		Prerequisite: upwolverinemkii
+		Prerequisite: ts_gdi_promotion_unlockwolverinemkii
 
-uptitanmkii:
+ts_gdi_promotion_unlocktitanmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Titan MKII
@@ -9638,13 +9638,13 @@ uptitanmkii:
 		BuildPaletteOrder: 4
 		Queue: Promotions
 		Description: Allows construction of Titans MKII.
-		Prerequisites: ~fact.tsgdi, !uptitanmkii, upwolverinemkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlocktitanmkii, ts_gdi_promotion_unlockwolverinemkii, rank1
 	RenderSprites:
-		Image: tstaltitan
+		Image: ts_gdi_titanmkii
 	ProvidesPrerequisite:
-		Prerequisite: uptitanmkii
+		Prerequisite: ts_gdi_promotion_unlocktitanmkii
 
-upzonetrooper:
+ts_gdi_promotion_unlockzonetrooper:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Zone Trooper
@@ -9652,13 +9652,13 @@ upzonetrooper:
 		BuildPaletteOrder: 7
 		Queue: Promotions
 		Description: Allows training of Zone Troopers.
-		Prerequisites: ~fact.tsgdi, !upzonetrooper, uptitanmkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockzonetrooper, ts_gdi_promotion_unlocktitanmkii, rank1
 	RenderSprites:
-		Image: tszonetrooper
+		Image: ts_gdi_zonetrooper
 	ProvidesPrerequisite:
 		Prerequisite: zonetrooper
 
-upmammothmkii:
+ts_gdi_promotion_unlockmammothmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Mammoth MKII
@@ -9666,13 +9666,13 @@ upmammothmkii:
 		BuildPaletteOrder: 10
 		Queue: Promotions
 		Description: Allows construction of Mammoth MKII.
-		Prerequisites: ~fact.tsgdi, !upmammothmkii, upzonetrooper, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockmammothmkii, ts_gdi_promotion_unlockzonetrooper, rank1
 	RenderSprites:
-		Image: tsmkii
+		Image: ts_gdi_mammothmkii
 	ProvidesPrerequisite:
-		Prerequisite: upmammothmkii
+		Prerequisite: ts_gdi_promotion_unlockmammothmkii
 
-upzoneorca:
+ts_gdi_promotion_unlockzoneorca:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Zone Orca
@@ -9680,13 +9680,13 @@ upzoneorca:
 		BuildPaletteOrder: 2
 		Queue: Promotions
 		Description: Allows construction of Zone Orcas.
-		Prerequisites: ~fact.tsgdi, !upzoneorca, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockzoneorca, rank1
 	RenderSprites:
-		Image: tszoneorca
+		Image: ts_gdi_zoneorcafighter
 	ProvidesPrerequisite:
 		Prerequisite: uupzoneorca
 
-uphammerhead:
+ts_gdi_promotion_unlockhammerhead:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Hammerhead
@@ -9694,13 +9694,13 @@ uphammerhead:
 		BuildPaletteOrder: 5
 		Queue: Promotions
 		Description: Allows construction of Hammerhead.
-		Prerequisites: ~fact.tsgdi, !uphammerhead, upzoneorca, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockhammerhead, ts_gdi_promotion_unlockzoneorca, rank1
 	RenderSprites:
-		Image: tshammerhead
+		Image: ts_gdi_hammerhead
 	ProvidesPrerequisite:
-		Prerequisite: uphammerhead
+		Prerequisite: ts_gdi_promotion_unlockhammerhead
 
-upjuggmkii:
+ts_gdi_promotion_unlockjuggernautmkii:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Juggernaut MKII
@@ -9708,13 +9708,13 @@ upjuggmkii:
 		BuildPaletteOrder: 8
 		Queue: Promotions
 		Description: Allows construction of Juggernauts MKII.
-		Prerequisites: ~fact.tsgdi, !upjuggmkii, uphammerhead, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockjuggernautmkii, ts_gdi_promotion_unlockhammerhead, rank1
 	RenderSprites:
-		Image: tsjugg2
+		Image: ts_gdi_juggernautmkii
 	ProvidesPrerequisite:
-		Prerequisite: upjuggmkii
+		Prerequisite: ts_gdi_promotion_unlockjuggernautmkii
 
-upkodiak:
+ts_gdi_promotion_unlockkodiak:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Kodiak
@@ -9722,11 +9722,11 @@ upkodiak:
 		BuildPaletteOrder: 11
 		Queue: Promotions
 		Description: Allows construction of Kodiak.
-		Prerequisites: ~fact.tsgdi, !upkodiak, upjuggmkii, rank1
+		Prerequisites: ~fact.tsgdi, !ts_gdi_promotion_unlockkodiak, ts_gdi_promotion_unlockjuggernautmkii, rank1
 	RenderSprites:
-		Image: tskodk
+		Image: ts_gdi_kodiakcommandship
 	ProvidesPrerequisite:
-		Prerequisite: upkodiak
+		Prerequisite: ts_gdi_promotion_unlockkodiak
 
 uptsdummy1:
 	Inherits: ^promotion_upgrade.template

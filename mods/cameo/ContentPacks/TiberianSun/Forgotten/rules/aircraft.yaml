@@ -35,15 +35,15 @@ forgotten_carryall:
 		Type: Light
 	RenderSprites:
 	SpawnActorOnDeath:
-		Actor: TSTRNSPORT.Husk
+		Actor: ts_gdi_carryall_husk
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSHeli
 	RenderVoxels:
 		Scale: 15
-		Image: tstrnsport
+		Image: ts_gdi_carryall
 	RenderSprites:
-		Image: tstrnsport
+		Image: ts_gdi_carryall
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 

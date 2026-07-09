@@ -118,11 +118,11 @@ tsmcvgrey:
 tsmcvblack:
 	idle:
 
-tsharv:
+ts_gdi_tiberiumharvester:
 	idle:
 	unload: tshorv
 
-tsapc:
+ts_gdi_amphibiousapc:
 	idle:
 	water: tsapcw
 
@@ -131,7 +131,7 @@ tsart2:
 	turret: tsart2tur
 	barrel: tsart2barl
 
-tsjugg:
+ts_gdi_juggernaut:
 	barrel: tsdjuggbar
 
 tssubtank:
@@ -161,29 +161,29 @@ tsttnkturret:
 	turret: tsttnktur
 	barrel: tsttnkbarl
 
-tsmmch:
+ts_gdi_titan:
 	barrel: tsmmchbarl
 
-tshmec:
+ts_gdi_mammothprototype:
 	idle:
 
-tshvr:
+ts_gdi_hovermlrs:
 	idle:
 	turret: tshvrtur
 
 tsstnk:
 	idle:
 
-tsorca:
+ts_gdi_orcafighter:
 	idle:
 
-tsorcab:
+ts_gdi_orcabomber:
 	idle:
 
 tsorcatran:
 	idle:
 
-tstrnsport:
+ts_gdi_carryall:
 	idle:
 
 tsscrin:
@@ -219,7 +219,7 @@ tstrucka:
 tstruckb:
 	idle:
 
-tslpst:
+ts_gdi_mobilesensorarray:
 	idle:
 
 tsicbm:
@@ -265,7 +265,7 @@ tstraincar:
 tscargocar:
 	idle:
 
-tssonic:
+ts_gdi_disruptor:
 	idle:
 	turret: tssonictur
 

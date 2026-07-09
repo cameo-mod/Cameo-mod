@@ -909,7 +909,7 @@ actor-tsntradr =
    Unlocks higher-tech units and buildings.
    Requires power to operate.
 
-actor-tsgtradr =
+actor-ts_gdi_radar =
    .name = Radar
    .description = Provides radar.
    Unlocks higher-tech units and buildings.
@@ -929,7 +929,7 @@ actor-tsntmisl =
    .name = Missile Silo
    .description = Constructs and launches long-range missiles as support power.
 
-actor-tsgtplug =
+actor-ts_gdi_upgradecenter =
    .name = Upgrade Center
    .description = Provides Hunter-Seeker and Ion Cannon support powers.
 
@@ -951,7 +951,7 @@ actor-tsntstlh =
    .description = Generates a cloaking field to hide your forces from the enemy.
    Only one can be built at a time.
 
-actor-tsntpulsgdi =
+actor-ts_gdi_empulsecannon =
    .name = E.M. Pulse Cannon
    .description = Launches electro-magnetic pulse that disables mechanical units in an area.
    Requires power to operate.
