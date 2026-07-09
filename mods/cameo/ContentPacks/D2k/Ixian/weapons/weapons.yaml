@@ -204,7 +204,7 @@ D2K_Bazooka2:
 	Inherits: ^D2KMissile
 	Range: 6400
 	ReloadDelay: 5
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Blockable: false
 		Inaccuracy: 33
@@ -238,25 +238,25 @@ D2K_Rocket_Trooper2:
 		TrailPalette: effect75alpha
 		TrailInterval: 1
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 
 D2K_Rocket_Trooper1:
@@ -273,22 +273,22 @@ D2K_Rocket_Trooper1:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 
 D2K_TowerMissile:
@@ -300,7 +300,7 @@ D2K_TowerMissile:
 	Burst: 2
 	Range: 10684
 	BurstDelays: 5
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Blockable: false
 		RangeLimit: 33333
@@ -310,34 +310,34 @@ D2K_TowerMissile:
 		CloseEnough: 666
 		AllowSnapping: true
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 
 mtank_pri2:
@@ -346,7 +346,7 @@ mtank_pri2:
 	Inherits: ^D2KMissile
 	ReloadDelay: 5
 	Range: 10052
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
 	Projectile: Missile
 		RangeLimit: 45000
@@ -359,28 +359,28 @@ mtank_pri2:
 		CloseEnough: 500
 		AllowSnapping: true
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MediumFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_med_explosion
@@ -407,28 +407,28 @@ IxRailgunDroneBullet:
 		ContrailStartColor: 77CCFFAA
 		ContrailLength: 14
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 
 ResonanceDroneRepair:
@@ -544,7 +544,7 @@ EMPDisable.end:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 d2k_munitions_explosion:
 	Inherits: ^MagicWeapon
@@ -584,30 +584,30 @@ RashinanGun:
 	Burst: 4
 	BurstDelays: 0
 	Report: DSDSHTGN.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 RashinanGun_upgrade:
@@ -615,42 +615,42 @@ RashinanGun_upgrade:
 	Inherits: ^HeavyCannon
 	Inherits: RashinanGun
 	Inherits: ^HeavyMachineGunProjectile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 RaiderGuns:
@@ -662,18 +662,18 @@ RaiderGuns:
 	Range: 6400
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 RaiderGuns_upgrade:
@@ -682,24 +682,24 @@ RaiderGuns_upgrade:
 	Inherits: ^HeavyMachineGunProjectile
 	Projectile: Bullet
 		Inaccuracy: 120
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 HMG_turret:
@@ -711,18 +711,18 @@ HMG_turret:
 	Range: 7394
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 HMG_turret_upgrade:
@@ -735,24 +735,24 @@ HMG_turret_upgrade:
 	StartBurstReport: 20MMGUN1.WAV
 	Projectile: Bullet
 		Inaccuracy: 120
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 HMG_Duelist:
@@ -771,45 +771,45 @@ HMG_Duelist:
 	Projectile: Bullet
 		-LaunchAngle:
 	StartBurstReport: 20MMGUN1.WAV
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 HMG_Duelist_upgrade:
@@ -818,24 +818,24 @@ HMG_Duelist_upgrade:
 	Inherits: ^HeavyCannon
 	Inherits: HMG_Duelist
 	Inherits: ^HeavyMachineGunProjectile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 d2kStormLasher:
@@ -1027,12 +1027,12 @@ D2K_ShockGunInf:
 		BeamColor: 33FFEE
 		BeamWidth: 33
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Range: 0, 25, 50, 100
 		Falloff: 100, 50, 25, 0
 		Damage: 18000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Spread: 100
 		Damage: 9
 
@@ -1045,23 +1045,23 @@ D2K_StormGunInf:
 		BeamColor: 33FFEE
 		BeamWidth: 66
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
 		Damage: 12000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Spread: 1000
 		Damage: 6
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
 		Damage: 12000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Range: 0, 500, 1000, 2000
 		Falloff: 100, 50, 25, 0
 		Damage: 6000
@@ -1094,23 +1094,23 @@ D2K_StormGunCymek:
 		BeamColor: 33FFEE
 		BeamWidth: 66
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
 		Damage: 16000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Spread: 1000
 		Damage: 8
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Range: 0, 250, 500, 1000
 		Falloff: 100, 50, 25, 0
 		Damage: 16000
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 		DamageCalculationType: ClosestTargetablePosition
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Range: 0, 500, 1000, 2000
 		Falloff: 100, 50, 25, 0
 		Damage: 6000
@@ -1196,48 +1196,48 @@ d2k_air_drone_guns:
 	Range: 6500
 	-Report:
 	StartBurstReport: 20MMGUN1.WAV
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 
 d2k_air_drone_guns_upgrade:
 	Inherits: ^HeavyCannon
 	Inherits: d2k_air_drone_guns
 	Inherits: ^HeavyMachineGunProjectile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 d2k_laser:
@@ -1290,7 +1290,7 @@ farasha.ixian:
 	FirstBurstTargetOffset: -500,0,0
 	FollowingBurstTargetOffset: 100,0,0
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: LaserZap #Railgun
 		TrackTarget: false
 		#SecondaryBeamWidth: 96
@@ -1308,31 +1308,31 @@ farasha.ixian:
 		HelixAngleDeltaPerTick: 32
 		QuantizationCount: 64
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@HeavyFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1000
 	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Effect: CreateEffect
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLSML4.WAV
 		ExplosionPalette: effect75alpha
@@ -1422,40 +1422,40 @@ d2k_basq:
 	Range: 3333
 	Report: zhyfir00.aud
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 3333
 		Inaccuracy: 333
 		ContrailStartColor: 00FF4400
 	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Explosions: sczhsplash
@@ -1518,7 +1518,7 @@ MongooseRocket:
 	ReloadDelay: 64
 	Range: 6183
 	Report: d2k_buggy_rocket.wav
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Acceleration: 6
 		Speed: 666
@@ -1527,58 +1527,58 @@ MongooseRocket:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Effect: CreateEffect
 		Explosions: d2k_rocket_explosion

@@ -408,23 +408,23 @@ AsianLynxTankCannon_elite:
 AsianLynxMG:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 51
 	Burst: 3
 	BurstDelays: 2
 	Range: 5357
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 AsianLynxMG_elite:
@@ -539,7 +539,7 @@ AsianPhotonCannon:
 		ExplosionPalette: ra2effect
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 
 AsianPhotonCannonEMP:
 	Inherits: AsianPhotonCannon
@@ -1151,11 +1151,11 @@ AsianRailgun:
 	Projectile: Railgun
 		BeamColor: F8B62184
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 30000
 		ValidRelationships: Enemy, Neutral
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 15
 		ValidRelationships: Enemy, Neutral
 	Warhead@Effect: CreateEffect
@@ -1174,10 +1174,10 @@ AsianRailTank:
 		HelixRadius: 64
 		HelixThickness: 32
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 24000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 12
 	Warhead@Effect: CreateEffect
 		Explosions: ra2_medium_clsn
@@ -1865,7 +1865,7 @@ AsianSniper:
 	ReloadDelay: 25
 	Range: 9455
 	Report: TGhFir00.aud
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: FF9933
@@ -1877,34 +1877,34 @@ AsianSniper:
 		Width: 100
 		Inaccuracy: 0
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 3
 	Warhead@Effect: CreateEffect
 		Explosions: small_poof
@@ -1954,72 +1954,72 @@ AsianSniperLockdown:
 		ContrailStartColor: 4488FF
 		ContrailEndColor: 22446688
 	Warhead@TeslaChargedWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 32000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 16
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		ValidRelationships: Enemy, Neutral
 		Damage: 64000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla

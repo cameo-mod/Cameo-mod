@@ -97,15 +97,15 @@ RA2NarcoPistol:
 	ReloadDelay: 22
 	Range: 6300
 	Report: itanatta.wav, itanattb.wav
-	ValidTargets: Ground, Water, Trees, Garrisoned, Air
+	ValidTargets: Ground, Water, Garrisoned, Air
 	Warhead@SniperWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Garrisoned, Air
+		ValidTargets: Ground, Water, Garrisoned, Air
 		Damage: 20000
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
-		ValidTargets: Ground, Water, Trees, Garrisoned, Air
+		ValidTargets: Ground, Water, Garrisoned, Air
 		Damage: 20000
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Garrisoned, Air
+		ValidTargets: Ground, Water, Garrisoned, Air
 		Damage: 10
 
 RA2NarcoPistolsE:
@@ -772,7 +772,7 @@ DiabloCannon:
 	Inherits: ^RA2FlakWeapon
 	ReloadDelay: 16
 	Range: 6300
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1269,7 +1269,7 @@ RA2APCFlakCannon:
 	Inherits: ^RA2FlakWeapon
 	ReloadDelay: 12
 	Range: 5740
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
@@ -1319,7 +1319,7 @@ RA2APCFlakCannonAAE:
 RA2APCMachineGun:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Range: 5740
 	ReloadDelay: 12
 	Burst: 4
@@ -1375,7 +1375,7 @@ RA2APCRocket:
 	BurstDelays: 3
 	Range: 5740
 	Report: vintatta.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Missile
 		Speed: 400
 		Arm: 2

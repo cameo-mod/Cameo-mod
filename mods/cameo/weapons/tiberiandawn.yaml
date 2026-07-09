@@ -203,7 +203,7 @@ FlametankExplode:
 	Inherits: ^Grenade
 	Inherits: ^HeavyMissile
 	Inherits: ^MediumMissile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 111
 	Range: 9920
 	MinRange: 1984
@@ -220,40 +220,40 @@ FlametankExplode:
 		LaunchAngle: 125
 		Speed: 500
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 HighVAP:
 	Inherits: ^Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 22
 	Burst: 4
 	BurstDelays: 2

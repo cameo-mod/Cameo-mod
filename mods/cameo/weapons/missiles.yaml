@@ -33,7 +33,7 @@
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
@@ -339,7 +339,7 @@ HonestJohn:
 		Spread: 512
 		Damage: 4500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 100
 			Wood: 50
@@ -351,7 +351,7 @@ HonestJohn:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ValidTargets: Water
@@ -394,11 +394,11 @@ HonestJohnCamea:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: kaboom25.aud
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: splash9.aud
@@ -476,7 +476,7 @@ MammothTusk:
         ValidTargets: Air, Infantry
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground, Trees
+		ValidTargets: Ground
 	Warhead@5EffAir: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: kaboom25.aud
@@ -536,7 +536,7 @@ SCUD:
 		Spread: 341
 		Damage: 4500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75

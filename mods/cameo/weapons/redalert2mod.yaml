@@ -87,7 +87,7 @@ AsianOilBombFragments:
 
 AsianFlamerTurret:
 	Inherits: ^LightFlameWeapon
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 30
 	Burst: 6
 	BurstDelays: 3
@@ -121,7 +121,7 @@ AsianFlamerTurret:
 		AimTargetStances: Enemy, Neutral
 
 AsianChaosSuperweapon:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@1: CreateEffect
 		Explosions: chaosgas
 		ExplosionPalette: ra2effect
@@ -390,55 +390,55 @@ SteelTwisterMissiles:
 	Range: 5000
 	MinRange: 1000
 	Report: twisterfire.wav
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Inaccuracy: 500
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyAAWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@Effect: CreateEffect
@@ -576,7 +576,7 @@ SteelSupportSpawner4:
 		Explosions: nax_corr_ex
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
@@ -686,7 +686,7 @@ NaxiMP40:
 	Inherits: ^Grenade
 	Inherits: ^HeavyCannon
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 75
 	Burst: 10
 	BurstDelays: 5
@@ -890,21 +890,21 @@ NaxiAlienPistol:
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 3
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Warhead@MediumCannon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 NaxiV1Rocket:
@@ -1547,30 +1547,30 @@ RA2Robotmm:
 	Range: 5780
 	ReloadDelay: 48
 	Report: vrobatta.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Railgun
 		BeamColor: 00EEFF88
 		Railgun: 96
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@LaserWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 
 RA2Robotmm_elite:
@@ -1589,7 +1589,7 @@ RA2Robotmm_elite:
 		Amount: 3
 		AimChance: 50
 		AimTargetStances: Enemy, Neutral
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 RA2Robotmm_eliteScatter:
 	Inherits: RA2Robotmm_elite
@@ -1617,4 +1617,4 @@ RA2Robotmm_eliteScatter:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship

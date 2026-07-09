@@ -784,7 +784,7 @@ SWBomb:
 		Explosions: blueartexp
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 SWArtilleryShell:
 	Inherits: ArtilleryShell
 	Report: swgrenade.aud

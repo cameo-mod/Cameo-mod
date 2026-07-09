@@ -917,7 +917,7 @@ SUSAMedivacBlackhawk:
 		InvalidTargets: Building, Structure
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: heal2.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 SUSAWraith:
 	Inherits: CHBattlemasterCannon
@@ -1055,7 +1055,7 @@ SUSAHowitzer:
 		DamageTypes: TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -1427,7 +1427,7 @@ SUSAUnstableEffectExplosion:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 2
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 		
 SUSABradleyMissile:
 	Inherits: USAHumveeMissile
@@ -1496,7 +1496,7 @@ SUSAB52CruiseMissile:
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	-Warhead@2ClustF: FireShrapnel
 
 SUSALaserCannonAGUp:
@@ -2176,7 +2176,7 @@ SGLLatrun:
 		DamageTypes: TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
@@ -2466,7 +2466,7 @@ SCHEMPMig:
 		ValidTargets: Ground, Water
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@1Dam: SpreadDamage
 		Damage: 3000
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath

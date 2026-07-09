@@ -427,19 +427,19 @@ TS120mmxChem:
 	BurstDelays: 4
 	Report: tnkfire4.aud
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 40000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 20
 	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 40000
 	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 20000
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 20
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 5
@@ -504,7 +504,7 @@ TSChemBazooka:
 
 TSVanMissile:
 	Inherits: ^ShrapnelWeapon
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 32
 	Burst: 2
@@ -529,7 +529,7 @@ TSVanMissile:
 TSChemVanMissile:
 	Inherits: ^MediumChemicalWeapon
 	Inherits: ^ShrapnelWeapon
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 32
 	Burst: 2
@@ -569,7 +569,7 @@ TSChemVanMissile:
 
 TSMLRSMissile:
 	Inherits: ^ShrapnelWeapon
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 34
 	Burst: 4
@@ -594,7 +594,7 @@ TSMLRSMissile:
 TSChemMLRSMissile:
 	Inherits: ^MediumChemicalWeapon
 	Inherits: ^ShrapnelWeapon
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Report: missile6.aud
 	ReloadDelay: 34
 	Burst: 4
@@ -640,7 +640,7 @@ TSMammothTuskChem:
 	Report: misl1.aud
 	Burst: 4
 	BurstDelays: 6
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Inaccuracy: 640
 		Speed: 240
@@ -666,19 +666,19 @@ TSMammothTuskChem:
 		ImpactSounds: xplosml2.aud
 		ImpactActors: false
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 20000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 20000
 	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 10
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 2
@@ -694,7 +694,7 @@ TSMammothTuskChem:
 TSMammothTusk:
 	Inherits@glow: ^ImpactGlow
 	Inherits: ^HeavyMissile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Speed: 500
 		HorizontalRateOfTurn: 25
@@ -711,10 +711,10 @@ TSMammothTusk:
 	Report: misl1.aud
 	Warhead@HeavyMissile: SpreadDamage
 		Damage: 60000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		Damage: 30
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_building
 
@@ -726,19 +726,19 @@ TSRuinerMissile:
 	Report: misl1.aud
 	Warhead@Grenade: SpreadDamage
 		Damage: 18000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@GrenadeFriendlyFire:
 		Damage: 9000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 9
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 18000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 9
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 
 TSChemRuinerMissile:
 	Inherits: ^LightChemicalWeapon
@@ -753,37 +753,37 @@ TSChemRuinerMissile:
 		TrailImage: spittrail
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
 		Damage: 5000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 5
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 8000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
 		Damage: 4000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 4
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@Grenade: SpreadDamage
 		Damage: 18000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@GrenadeFriendlyFire:
 		Damage: 9000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Damage: 9
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 18000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 9
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 1
 		Duration: 50
@@ -802,51 +802,51 @@ TSApacheMissile:
 	Inherits: ^Grenade
 	Inherits: ^HeavyMissile
 	Inherits: ^MediumMissile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4688
 	Report: orcamis1.aud
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 
 TSChemApacheMissile:
@@ -857,62 +857,62 @@ TSChemApacheMissile:
 	Inherits: ^Grenade
 	Inherits: ^HeavyMissile
 	Inherits: ^MediumMissile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 15
 	Range: 4688
 	Report: orcamis1.aud
 	Projectile: Missile
 		TrailImage: spittrail
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 12000
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
@@ -932,51 +932,51 @@ TSCobraMissile:
 	Inherits: ^Grenade
 	Inherits: ^HeavyMissile
 	Inherits: ^MediumMissile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Range: 5052
 	Report: orcamis1.aud
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 
 TSChemCobraMissile:
@@ -987,62 +987,62 @@ TSChemCobraMissile:
 	Inherits: ^Grenade
 	Inherits: ^HeavyMissile
 	Inherits: ^MediumMissile
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 12
 	Range: 5052
 	Report: orcamis1.aud
 	Projectile: Missile
 		TrailImage: spittrail
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 12000
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 6
 	Warhead@Cloud: SpawnSmokeParticle
 		Count: 3
@@ -1063,19 +1063,19 @@ TSAdatsMissile:
 	BurstDelays: 2
 	ReloadDelay: 54
 	Report: misl1.aud
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@FlakWeapon: SpreadDamage
 		Damage: 4000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 2
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 2
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 TSAdatsMissileAA:
 	Inherits: TSAdatsMissile
@@ -1541,10 +1541,10 @@ TSCropBomb:
 		Image: 120mm
 		Shadow: true
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 120000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 60
 	Warhead@2Eff: CreateEffect
 		Explosions: small_frag
@@ -1570,10 +1570,10 @@ TSCropBombChem:
 		Image: 120mm
 		Shadow: true
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 120000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 60
 	Warhead@HeavyChemicalWeapon: SpreadDamage
 		Damage: 60000
@@ -1617,10 +1617,10 @@ TSLocustBombChem:
 		Image: 120mm
 		Shadow: true
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 180000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 90
 	Warhead@HeavyChemicalWeapon: SpreadDamage
 		Damage: 90000
@@ -1660,7 +1660,7 @@ TSMutShotgun:
 	ReloadDelay: 32
 	Range: 3112
 	Report: DSDSHTGN.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -1693,7 +1693,7 @@ TSMutShotgun:
 TSMutVulcanTurret:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 6
 	Range: 6272
 	Report: tsgun4.aud
@@ -1708,7 +1708,7 @@ TSMutVulcanTurret:
 
 TSRaiderCarCannon:
 	Inherits: ^SmallArms
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 2
@@ -1722,7 +1722,7 @@ TSRaiderCarCannon:
 TSBowlerCannon:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 5
 	Range: 6603
 	Report: chaingn1.aud
@@ -1756,19 +1756,19 @@ TSMutApcCannon:
 	Inherits: ^FlakWeapon
 	ReloadDelay: 12
 	Range: 6147
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@FlakWeapon: SpreadDamage
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 
 TSNomadGun:
 	Inherits: ^Chaingun
@@ -1784,13 +1784,13 @@ TSNomadGun:
 		ContrailEndWidth: 100
 		ContrailLength: 10
 		Speed: 10000
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Chaingun: SpreadDamage
 		Damage: 8000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 4
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 TSSniper:
 	Inherits: ^SniperWeapon
@@ -1809,7 +1809,7 @@ TSGhostGun:
 	ReloadDelay: 25
 	Range: 9557
 	Report: silencer.aud
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -1835,7 +1835,7 @@ TSChemGhostGun:
 	ReloadDelay: 25
 	Range: 9557
 	Report: silencer.aud
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000
@@ -1883,7 +1883,7 @@ TSSergGun:
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water

@@ -126,7 +126,7 @@ WIN98MINEDemolitionExplode:
 		ImpactSounds: gexpmina.wav, gexpminb.wav
 	Warhead@3Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, Wall
 
 RegeditInterceptorLauncher:
 	ReloadDelay: 100

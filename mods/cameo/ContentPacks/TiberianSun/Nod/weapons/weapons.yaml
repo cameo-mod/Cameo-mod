@@ -122,19 +122,19 @@ TSStankTusk:
 		LaunchAngle: 75
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 5
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		Damage: 5000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 
 TSStankTibTusk:
 	Inherits: ^MediumCannon
@@ -150,28 +150,28 @@ TSStankTibTusk:
 		TrailImage: spittrail
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 5
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
 		Damage: 5000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 5
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannonFriendlyFire: SpreadDamage
 		Damage: 5000
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 5
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 
 TSNODRedEye:
 	Inherits: ^HeavyMissile
@@ -264,7 +264,7 @@ TSCommandoShotgun:
 	ReloadDelay: 20
 	Range: 4146
 	Report: DSDSHTGN.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Grenade: SpreadDamage
 		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -355,7 +355,7 @@ ChamBlade:
 
 TSRaiderCannon:
 	Inherits: ^SmallArms
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 2
@@ -476,7 +476,7 @@ TSToxinRifle:
 	BurstDelays: 3
 	Report: silencer.aud
 	Range: 10293
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailZOffset: 4000

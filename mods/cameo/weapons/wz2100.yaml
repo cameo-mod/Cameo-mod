@@ -181,7 +181,7 @@ TwinAssaultGunAA:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: piffs
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 
 CommandoGun:
 	ReloadDelay: 6
@@ -610,7 +610,7 @@ IceCreamMortar:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, 2100ResearchSteal
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: mpodexpl.aud

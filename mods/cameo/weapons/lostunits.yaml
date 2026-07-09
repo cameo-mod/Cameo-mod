@@ -164,7 +164,7 @@ BigDaddyMissile:
 		Spread: 512
 		Damage: 2300
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 100
 			Wood: 100
@@ -176,7 +176,7 @@ BigDaddyMissile:
 		Explosions: big_napalm
 		ImpactSounds: aoemissileimpact1.wav, aoemissileimpact2.wav, aoemissileimpact3.wav
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ValidTargets: Water

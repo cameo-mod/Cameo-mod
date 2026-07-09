@@ -28,7 +28,7 @@
 		Explosions: ra2_flak_explosion_ground
 		ExplosionPalette: ra2unit
 		-ImpactSounds:
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
@@ -52,7 +52,7 @@
 		Explosions: ra2_small_clsn
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
@@ -73,7 +73,7 @@
 		Explosions: ra2_medium_clsn
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
@@ -87,7 +87,7 @@
 		Explosions: ra2_large_clsn
 		ExplosionPalette: tseffect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: tseffect
@@ -322,82 +322,82 @@ HarrierMissiles:
 	Range: 5555
 	MinRange: 1111
 	Report: vintatta.wav
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Inaccuracy: 333
 		Speed: 555
 	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyAAWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 		ValidRelationships: Neutral, Enemy
 		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
@@ -996,7 +996,7 @@ RA2HoverMissile:
 	Burst: 2
 	BurstDelays: 4
 	Report: vifvatta.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 6000
@@ -1361,7 +1361,7 @@ RA2KirovBomb:
 		Shadow: True
 	Warhead@HeavyBomb: SpreadDamage
 		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 80000
 		Spread: 800
 	Warhead@HeavyBombFriendlyFire: SpreadDamage
@@ -1467,7 +1467,7 @@ RA2KirovBomb_tesla:
 		Explosions: ra2_kirovtesla
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@Shrapnel: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: TeslaFragmentLarge
@@ -1491,7 +1491,7 @@ RA2KirovBomb_nuclear:
 		Explosions: ra2nukesmall
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Volume: 0.5
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
@@ -1527,7 +1527,7 @@ RA2KirovBomb_nuclear_Elite:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 1000
@@ -1581,7 +1581,7 @@ RA2TRIPODPLAZMA:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c213
 		Damage: 5000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 20
 			Wood: 75
@@ -1606,7 +1606,7 @@ RA2REVENANT:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c308
 		Damage: 10000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 40
 			Wood: 40
@@ -1665,7 +1665,7 @@ RA2PINKY:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c512
 		Damage: 24000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -3562,11 +3562,11 @@ RA2MedusaAG:
 	Inherits: RA2Medusa
 	Range: 9000
 	InvalidTargets: Underwater, Submarine
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 MigMissiles:
 	Inherits: ^HeavyBomb
@@ -3820,7 +3820,7 @@ RA2SCUD:
 	-Report:
 	-Projectile:
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Missile
 		Arm: 0
 		Blockable: false
@@ -3937,7 +3937,7 @@ RA2SCUDELITE:
 		Explosions: ra2_terrorist_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpapoa.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@Radiation: CreateTintedCells
 		Falloff: 100, 75, 66, 50, 33, 25, 20, 10
 		Spread: 600
@@ -4146,7 +4146,7 @@ RA2M60:
 
 RA2para:
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 19
 	Range: 4750
 	Burst: 3
@@ -4166,7 +4166,7 @@ RA2vulcan2:
 GuardianGIMG:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 20
 	Range: 4762
 	Burst: 3
@@ -4217,7 +4217,7 @@ RA2M1CarbineE:
 RA2vulcan:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 14
 	Range: 6577
 	Burst: 3
@@ -4303,23 +4303,23 @@ RA2SKELETON:
 RA2CRM60:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 14
 	Burst: 4
 	BurstDelays: 2
 	Range: 5660
 	Report: vifvat2a.wav, vifvat2b.wav, vifvat2c.wav
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 RA2CRM60H:
@@ -4376,12 +4376,12 @@ RA2CRFlakGuyGun:
 	Inherits: RA2FLAKAG
 	ReloadDelay: 17
 	Range: 4900
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 
 RA2CRFlakGuyGun_elite:
@@ -4419,33 +4419,33 @@ RA2FlakTrackGun:
 	Inherits: RA2FLAKAG
 	ReloadDelay: 18
 	Range: 5528
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 RA2FlakTrackGunE:
@@ -4582,7 +4582,7 @@ RA2GattlingMG1:
 	Report: vgatlo2a.wav, vgatlo2b.wav, vgatlo2c.wav
 	Range: 5000
 	ReloadDelay: 6
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Image: 50CAL
 		ContrailStartColor: FFAA44
@@ -4593,16 +4593,16 @@ RA2GattlingMG1:
 		Speed: 10000
 		Width: 100
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 RA2GattlingMG1AA:
@@ -5003,13 +5003,13 @@ RA2CosmonautLaser:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		Chance: 15
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	-Warhead@EffectWater:
 
 RA220mmrapid:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 15
 	Range: 5000
 	Report: vwaratta.wav, vwarattb.wav
@@ -5020,10 +5020,10 @@ RA220mmrapid:
 		ValidTargets: Ground, Air, Water
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2
 
 ####################################################################################################
@@ -5031,7 +5031,7 @@ RA220mmrapid:
 ####################################################################################################
 
 RA2Mutate:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@1Dam: HealthPercentageDamage
 		Spread: 4c0
 		Damage: 300
@@ -5133,7 +5133,7 @@ RA2Terrorist:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, Wall, Trees
+		InvalidTargets: Structure, Wall
 
 RA2Atomic:
 	Inherits: Atomic
@@ -5334,7 +5334,7 @@ LightningBolt:
 		ValidTargets: Ground, Air, Water
 	Warhead@6Eff: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 
 psireveal:
 	Range: 1c0
@@ -5401,7 +5401,7 @@ IvanBomb:
 		Explosions: ivan_explosion
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpcraa.wav
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpcraa.wav
@@ -5540,16 +5540,16 @@ BorisAKM:
 	Burst: 4
 	BurstDelays: 2
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2
 
 BorisAKME:

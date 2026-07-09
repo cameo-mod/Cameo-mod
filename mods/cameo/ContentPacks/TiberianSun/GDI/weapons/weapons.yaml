@@ -197,41 +197,41 @@ KodiakCannon:
 	Burst: 3
 	BurstDelays: 4
 	Report: tnkfire4.aud
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 850
 	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 
 KodiakCannonSonic:
@@ -248,54 +248,54 @@ KodiakCannonSonic:
 	Burst: 3
 	BurstDelays: 4
 	Report: tnkfire4.aud
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@HeavyChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@RailgunWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 8000
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4
 
 TSSonicWeaponEffect:
@@ -474,17 +474,17 @@ TSCommandoRailgun:
 	Burst: 3
 	BurstDelays: 4
 	Report: railuse5.aud
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Projectile: Railgun
 		BeamColor: 00FFFF88
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@RailgunPercentage: HealthPercentageDamage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 
 TSCommandoRailgunRail:
 	Inherits: TSCommandoRailgun
@@ -499,17 +499,17 @@ TSZoneRailgun:
 	Range: 6230
 	ReloadDelay: 60
 	Report: railuse5.aud
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: Railgun
 		BeamColor: 00FFFF88
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 40000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@RailgunPercentage: HealthPercentageDamage
 		Damage: 20
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 TSZoneRailgunRail:
 	Inherits: TSZoneRailgun
@@ -518,11 +518,11 @@ TSZoneRailgunRail:
 	Warhead@RailgunWeapon: SpreadDamage
 		Damage: 60000
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@RailgunPercentage: HealthPercentageDamage
 		Damage: 30
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 PitbullRockets:
 	Inherits: ^LightMissile
@@ -540,7 +540,7 @@ TSHoverMissile:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^ShrapnelWeapon
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Report: missile6.aud
 	ReloadDelay: 60
 	Burst: 2
@@ -553,25 +553,25 @@ TSHoverMissile:
 		Inaccuracy: 32
 		VerticalRateOfTurn: 20
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 
 TSMammothTusk2:
@@ -655,19 +655,19 @@ TSHellfireSonic:
 		RangeLimit: 25000
 		PointDefenseTypes: Missile
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4000
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2
 
 TSZoneHellfire:
@@ -720,19 +720,19 @@ TSBomb:
 		Image: 120mm
 		Shadow: true
 	Warhead@ShrapnelWeapon: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 5000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 5
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 5
 	Warhead@Effect: CreateEffect
 		Explosions: small_frag
@@ -760,25 +760,25 @@ TSBombSonic:
 	# 	Image: 120mm
 	# 	Shadow: true
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 5
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 5000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 5
 	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 10000
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 5
 	-Warhead@Effect1:
 	-Warhead@Effect2:
@@ -839,7 +839,7 @@ TSShotgun:
 	ReloadDelay: 46
 	Range: 4002
 	Report: DSDSHTGN.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Grenade: SpreadDamage
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -977,7 +977,7 @@ TSAssaultCannonTalSonic:
 TSVulcanGun:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 48
 	Burst: 4
 	BurstDelays: 2
@@ -999,7 +999,7 @@ TSVulcanGunSonic:
 	Inherits: ^TeslaWeapon
 	Inherits: ^MagicWeapon
 	Inherits: ^TSSonicGrenade
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 66
 	Burst: 4
 	BurstDelays: 2
@@ -1007,31 +1007,31 @@ TSVulcanGunSonic:
 	-Report:
 	StartBurstReport: tsgun4.aud
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@TeslaWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2
 	Warhead@MagicWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 4000
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2
 
 KodiakAAGuns:
@@ -1055,32 +1055,32 @@ TSHammerheadGun:
 	ReloadDelay: 6
 	Range: 5451
 	Report: cygun1.aud
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Chaingun: SpreadDamage
 		Damage: 4000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 TSAAPCCannon:
 	Inherits: ^Chaingun
 	Inherits: ^FlakWeapon
 	ReloadDelay: 10
 	Range: 6263
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@FlakWeapon: SpreadDamage
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 
 TSMechMGII:
 	Inherits: ^Chaingun
@@ -1096,13 +1096,13 @@ TSMechMGII:
 		ContrailEndWidth: 100
 		ContrailLength: 10
 		Speed: 10000
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Chaingun: SpreadDamage
 		Damage: 16000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 8
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon

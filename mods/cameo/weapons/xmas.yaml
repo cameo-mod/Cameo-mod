@@ -84,11 +84,11 @@ xmas_satan_bomb:
 		DamageTypes: Prone100Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: napalm
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
@@ -105,7 +105,7 @@ xmas_snowball_cannon:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_snowball
 		ImpactSounds: xmas_snowball_hit.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 9000
 		Spread: 0c512
@@ -129,7 +129,7 @@ xmas_snowball_small:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_snowball_small
 		ImpactSounds: xmas_snowball_hit.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
 		Spread: 0c256
@@ -153,7 +153,7 @@ xmas_snowball_snowy:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_snowball_small
 		ImpactSounds: xmas_snowball_hit.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
 		Spread: 0c256
@@ -198,7 +198,7 @@ xmas_icespike:
 	Warhead@3Eff: CreateEffect
 		Explosions: xmas_icespike
 		ImpactSounds: xmas_icebreak.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@1Dam: SpreadDamage
 		Damage: 4500
 		Spread: 0c384

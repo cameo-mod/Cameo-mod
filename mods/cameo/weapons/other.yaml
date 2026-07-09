@@ -46,7 +46,7 @@ C4:
 		ImpactSounds: gexpcraa.wav
 
 ^FlameWeapon:
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 55
 	Range: 2c512
 	InvalidTargets: Wall
@@ -56,7 +56,7 @@ C4:
 	Warhead@1Dam: SpreadDamage
 		Spread: 468
 		Damage: 4000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		Versus:
 			None: 110
@@ -152,7 +152,7 @@ Laser:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 
 ^DinoWeapon:
 	ReloadDelay: 30
@@ -202,13 +202,13 @@ Demolish:
 ####################################################################################################
 
 ^FireWeapon:
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 65
 	Range: 5c0
 	Warhead@1Dam: SpreadDamage
 		Spread: 213
 		Damage: 15000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
         InvalidTargets: FireActor, WaterActor
 		Versus:
 			None: 90
@@ -536,7 +536,7 @@ ZClaw3:
 
 Spit:
 	Inherits: ^FireWeapon
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	BurstDelays: 60
 	Projectile: Bullet
 		Speed: 250
@@ -552,7 +552,7 @@ Spit:
             Medium: 40
 			Heavy: 25
 			Concrete: 20
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 	Warhead@3Eff: CreateEffect
 		Explosions: chemball
 		ImpactSounds: firebl3.aud
@@ -657,7 +657,7 @@ Horn2:
 
 Teeth2:
 	ReloadDelay: 30
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Range: 2c0
 	Report: dinoatk1.aud
 	Projectile: Bullet
@@ -673,7 +673,7 @@ Teeth2:
 			Heavy: 30		#10
 			Concrete: 20	#10
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 
 Claw2:
 	ReloadDelay: 20
@@ -750,7 +750,7 @@ CannonBall:
 			Concrete: 10
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Tank, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: smallfire
 
@@ -766,7 +766,7 @@ Fireball:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 308
 		Damage: 8000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 30
 			Wood: 40
@@ -824,7 +824,7 @@ PlasmaPuff:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 716
 		Damage: 5000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 20
 			Wood: 75
@@ -853,7 +853,7 @@ FireBurst:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 512
 		Damage: 32000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -882,7 +882,7 @@ PlasmaBurst:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 500
 		Damage: 32000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -1081,7 +1081,7 @@ Lazer:
 	Warhead@1Dam: SpreadDamage
 		Spread: 512
 		Damage: 32000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 1000
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
@@ -1100,7 +1100,7 @@ Electricity:
 		Damage: 10000
 		Versus:
 			None: 1000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
@@ -1121,7 +1121,7 @@ TripodPlasmaPuff:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 213
 		Damage: 4000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 20
 			Wood: 75
@@ -1164,12 +1164,12 @@ TripodPlasmaballAA:
 		ImpactSounds: dsfirxpl.aud
 
 MothershipExplosion:
-	ValidTargets: Ground, Trees, Water, Underwater, Air
+	ValidTargets: Ground, Water, Underwater, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 5c0
 		Damage: 6000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		Versus:
 			Concrete: 25
 		AffectsParent: false
@@ -1181,26 +1181,26 @@ MothershipExplosion:
 		Spread: 30c0
 		Damage: 200000
 		InvalidTargets: Vehicle, Tank, Structure, Wall
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 30c0
 		Damage: 200000
 		Delay: 1
 		InvalidTargets: Vehicle, Tank, Structure, Wall
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary, Prone50Percent, TriggerProne
 	Warhead@12Res_areanuke3: DestroyResource
 		Size: 4
 		Delay: 15
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Tank, Structure, Wall
 		Size: 20
 		Delay: 15
 	Warhead@14Smu_areanuke3: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Tank, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Tank, Structure, Wall
 		Size: 20
 		Delay: 15
 
@@ -1228,7 +1228,7 @@ TripodExplosion:
 		Spread: 3c0
 		Damage: 10000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Delay: 6
 		Versus:
 			None: 90

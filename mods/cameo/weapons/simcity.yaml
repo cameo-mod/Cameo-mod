@@ -110,7 +110,7 @@ PatriotFireTruck:
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: blue_poof
 		ImpactSounds: xplos.aud
@@ -233,7 +233,7 @@ CasinoCrateCluster:
 		Footprint: xxxxxx xxxxxx xxxxxx xxxxxx xxxxxx xxxxxx
 
 CasinoCrateSpawner:
-	InvalidTargets: Structure, Water, Trees
+	InvalidTargets: Structure, Water
 	Projectile: Bullet
 		Image: tscrate
 		Speed: 370
@@ -371,7 +371,7 @@ GreenBomb:
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -394,7 +394,7 @@ BlueBomb:
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: splash9.aud
@@ -423,7 +423,7 @@ RailStationArty:
 		Spread: 1c512
 		Damage: 9000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 100
 			Wood: 20

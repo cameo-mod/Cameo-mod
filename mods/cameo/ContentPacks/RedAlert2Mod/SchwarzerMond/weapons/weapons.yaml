@@ -37,33 +37,33 @@ NaxiBeetleLaser:
 	Burst: 2
 	BurstDelays: 4
 	Report: AWMinilaser.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: LaserZap
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 NaxiBeetleLaserAA:
 	Inherits: NaxiBeetleLaser
@@ -115,33 +115,33 @@ NaxiTank2Laser:
 	Burst: 4
 	BurstDelays: 4
 	Report: AWMinilaser.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Projectile: LaserZap
 		Width: 25
 	Warhead@SmallArms: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@Chaingun: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@MediumMissile: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 2000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 1
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 
 NaxiTank2LaserAA:
 	Inherits: NaxiTank2Laser
@@ -426,7 +426,7 @@ DalekCannonScatter:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 DalekCannonScatterE:
 	Inherits: DalekCannonScatter
@@ -480,10 +480,10 @@ NaxiBlackholeShoot:
 		AirThreshold: 10000
 		ValidTargets: Air, Ground, Water
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 BlackHoleSuck:
@@ -517,7 +517,7 @@ NaxCorrosionRocket:
 	MinRange: 1600
 	Report: nax_corrokit.wav
 	SoundVolume: 2.0
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Missile
 		Inaccuracy: 600
 		Speed: 600
@@ -528,38 +528,38 @@ NaxCorrosionRocket:
 		ContrailEndColorUsePlayerColor: true
 		ContrailEndColor: FFFFFF
 	Warhead@Grenade: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		ValidRelationships: Neutral, Enemy
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		ValidRelationships: Neutral, Enemy
 	Warhead@Effect: CreateEffect
 		Explosions: nax_corr_ex
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@Condition: GrantExternalCondition
 		Range: 2000
 		Condition: corroded
@@ -736,7 +736,7 @@ NaxDieGlocke:
 	ReloadDelay: 30
 	Burst: 2
 	BurstDelays: 3
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 4000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -769,7 +769,7 @@ NaxiCowDrop:
 		Shadow: True
 	Warhead@HeavyBomb: SpreadDamage
 		ValidRelationships: Neutral, Enemy
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		Damage: 10000
 		Spread: 1000
 	Warhead@HeavyBombFriendlyFire: SpreadDamage
@@ -964,7 +964,7 @@ Naxis_Jagerline:
 	Inherits: ^Grenade
 	Inherits: ^HeavyAAWeapon
 	Inherits: ^MediumMissile
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 60
 	Range: 7825
 	MinRange: 1565
@@ -1011,7 +1011,7 @@ Naxis_Jagerline:
 	Warhead@Effect: CreateEffect
 		Explosions: med_frag
 		ImpactSounds: kaboom25.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 Naxis_Jagerline_AA:
 	Inherits: Naxis_Jagerline

@@ -10,7 +10,7 @@
 	Warhead@Effect: CreateEffect
 		Explosions: green_small_fire
 		ImpactSounds: kaboom12.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@EffectWater: CreateEffect
 		Explosions: green_small_fire
 		ImpactSounds: kaboom12.aud
@@ -394,22 +394,22 @@ D2K_Rocket_Trooper:
 		HorizontalRateOfTurn: 22
 		VerticalRateOfTurn: 22
 	Warhead@LightMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 
 D2K_Combat_Fleet:
@@ -1293,24 +1293,24 @@ LMG_upgrade:
 	ReloadDelay: 20
 	Range: 4448
 	Report: gun11.aud
-	ValidTargets: Ground, Water, Trees, Air
+	ValidTargets: Ground, Water, Air
 	Warhead@HeavyCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 Fremen_S:
@@ -1738,7 +1738,7 @@ d2kFlameTurret:
 
 d2k_flame_tank:
 	Inherits: Flamer
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	InvalidTargets: Wall
 	ReloadDelay: 5
 	Range: 4c0
@@ -1758,7 +1758,7 @@ d2k_flame_tank:
 			Medium: 12
 			Heavy: 6
 			Concrete: 10
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		DamageTypes: FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
@@ -1824,13 +1824,13 @@ PhoenixRocketShrapnel:
 		RangeLimit: 33333
 		Inaccuracy: 333
 	Warhead@LightFlameWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 
 air_drone.ixian:
@@ -1851,72 +1851,72 @@ air_drone.ixian:
 		Acceleration: 4
 		Inaccuracy: 25
 	Warhead@TankDestroyerCannon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@LightChemicalWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeapon: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyBomb: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyBombPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyMissile: SpreadDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Damage: 1
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 		ValidRelationships: Neutral, Enemy
 	Warhead@Shrapnel: FireShrapnel
-		ValidTargets: Ground, Water, Trees, Air
+		ValidTargets: Ground, Water, Air
 		Weapon: PhoenixRocketShrapnel
 		Amount: 2
 		AimChance: 50
@@ -2002,7 +2002,7 @@ d2k_sandworm_electricity:
 d2k_chaos_lightning:
 	Range: 2c0
 	Projectile: InstantHit
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: susaenforcerbeamimpact.wav
 	Warhead@1Dam: HealthPercentageDamage
@@ -2022,10 +2022,10 @@ d2k_chaos_lightning:
 			Concrete: 20
 	Warhead@2Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Smu_area: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 		Size: 1
 		Delay: 3
 	Warhead@3: GrantExternalCondition
@@ -2893,7 +2893,7 @@ oDebris4:
 PulseMissile:
 	Inherits: ^TeslaChargedWeapon
 	Inherits: ^TeslaWeapon
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@TeslaChargedWeapon: SpreadDamage
 		ValidTargets: Shielded
@@ -2960,7 +2960,7 @@ PulseMissile:
 			Bomber: 44
 			Fighter: 40
 		Delay: 0
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Eff_impact: CreateEffect
@@ -3009,7 +3009,7 @@ PulseMissile:
 			Bomber: 44
 			Fighter: 40
 		Delay: 3
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@4Res_areanukea: DestroyResource
@@ -3048,7 +3048,7 @@ PulseMissile:
 			Bomber: 44
 			Fighter: 40
 		Delay: 6
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@8Res_areanukeb: DestroyResource
@@ -3084,7 +3084,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 9
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@11Res_areanukec: DestroyResource
 		Size: 9
@@ -3119,7 +3119,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 12
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@11Dam_areanuke3: SpreadDamage
 		Spread: 6000
@@ -3145,7 +3145,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 15
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage1: HealthPercentageDamage
 		Spread: 10000
@@ -3170,7 +3170,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage2: HealthPercentageDamage
 		Spread: 9000
@@ -3195,7 +3195,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage3: HealthPercentageDamage
 		Spread: 8000
@@ -3220,7 +3220,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage4: HealthPercentageDamage
 		Spread: 7000
@@ -3245,7 +3245,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage5: HealthPercentageDamage
 		Spread: 6000
@@ -3270,7 +3270,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage6: HealthPercentageDamage
 		Spread: 5000
@@ -3295,7 +3295,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage7: HealthPercentageDamage
 		Spread: 4000
@@ -3320,7 +3320,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage8: HealthPercentageDamage
 		Spread: 3000
@@ -3345,7 +3345,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage9: HealthPercentageDamage
 		Spread: 2000
@@ -3370,7 +3370,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@NuclearMissilePercentage10: HealthPercentageDamage
 		Spread: 1000
@@ -3395,7 +3395,7 @@ PulseMissile:
 			Fighter: 40
 		Delay: 18
 		AffectsParent: true
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMP1: AffectsIntegrity
 		Damage: 1000000

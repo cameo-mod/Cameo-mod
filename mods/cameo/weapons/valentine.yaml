@@ -180,12 +180,12 @@ TeletubbyLaser:
 			Concrete: 50
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: big_napalm
 		#ImpactSounds: firebl3.aud
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 
 ValentineTowerDouble:
 	Inherits: LovebowFireB
@@ -447,7 +447,7 @@ CuteKirovBomb:
 		Delay: 5
 		Explosions: napalm
 		ImpactSounds: gexp14a.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
@@ -456,7 +456,7 @@ CuteKirovBomb:
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@Yuri_effect: CreateEffect
 		ImpactSounds: spsydom.wav
 		ImpactActors: false
@@ -508,7 +508,7 @@ CuteKirovBombElite:
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	-Warhead@5Eff:
 	Warhead@1Radiation: CreateTintedCells
 		Spread: 1c512

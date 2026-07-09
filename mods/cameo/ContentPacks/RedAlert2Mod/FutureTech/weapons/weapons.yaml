@@ -1,23 +1,23 @@
 ACV_Machinegun:
 	Inherits: ^RA2SmallArms
 	Inherits: ^RA2Chaingun
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	ReloadDelay: 21
 	Burst: 4
 	BurstDelays: 2
 	Range: 5555
 	Report: AUACV_mgFireA.wav, AUACV_mgFireB.wav, AUACV_mgFireC.wav, AUACV_mgFireD.wav
 	Warhead@SmallArms: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 	Warhead@Chaingun: SpreadDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 2000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Damage: 1
 
 Future_MBT_DebuffLaser:
@@ -769,7 +769,7 @@ Future_MultiMissile_Sigma:
 		Explosions: blue_med_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 FutureEnforcerShotgun:
 	Inherits: ^Grenade
@@ -781,7 +781,7 @@ FutureEnforcerShotgun:
 	ReloadDelay: 40
 	Range: 3000
 	Report: DSDSHTGN.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
@@ -997,7 +997,7 @@ ShotgunAttackRobotGun:
 	ReloadDelay: 55
 	Range: 4110
 	Report: laser_cannon3_3.wav
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	Warhead@Grenade: SpreadDamage
 		Damage: 2000
 	Warhead@GrenadeFriendlyFire: SpreadDamage

@@ -644,7 +644,7 @@ DRTwinArtilleryShell:
 		DamageTypes: Prone50Percent, TriggerProne, DefaultDeath
 	Warhead@2Eff: CreateEffect
 		Explosions: drrailexp
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 
 DRPortableRailgun:
 	Inherits: ^DRRailgun
@@ -742,7 +742,7 @@ DRMetalFragments:
 			Heavy: 80
 	Warhead@2Eff: CreateEffect
 		Explosions: poof
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 
 DRGantClaws:
 	Inherits: MandibleHeavy
@@ -962,13 +962,13 @@ DRSuicideBomb:
 	MinRange: 0c0
 
 DRDissecator:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Report: nukemisl.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 15c0
 		Damage: 35000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -1010,7 +1010,7 @@ DRDissecator:
 		Damage: 15000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 6
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -1031,7 +1031,7 @@ DRDissecator:
 		Damage: 5000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 9
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		AffectsParent: True
 		Versus:
 			None: 100
@@ -1160,7 +1160,7 @@ DRTNissileTurretAG:
 		Spread: 341
 		Damage: 5500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75

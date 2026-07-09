@@ -55,7 +55,7 @@ DTLaser:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 
 DTChemspray:
 	Inherits: ^FlameWeapon
@@ -95,7 +95,7 @@ DTMissileCrawler:
 		Spread: 1c0
 		Damage: 5000
 		Falloff: 1000, 500, 333, 100, 50, 33, 10, 0
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 80
 			Wood: 90
@@ -120,7 +120,7 @@ DTMissileCrawler:
 		Explosions: big_napalm
 		ImpactSounds: firebl3.aud
 		ImpactActors: false
-		ValidTargets: Ground, Air, Ship, Trees
+		ValidTargets: Ground, Air, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: large_splash
 		ValidTargets: Water
@@ -176,7 +176,7 @@ RedoubtGun:
 	Warhead@3Eff: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: kaboom15.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 
 DTTurretGun:
 	Inherits: TurretGun
@@ -192,7 +192,7 @@ DTHighV:
 	BurstDelays: 2
 
 DTMutate:
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@1Dam: HealthPercentageDamage
 		Spread: 4c0
 		Damage: 300

@@ -176,7 +176,7 @@ DoomPlasma:
 		ValidTargets: Ground, Water, Air
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 
 DoomGarrisonPlasma:
 	Inherits: DoomPlasma
@@ -225,7 +225,7 @@ WolfenFlak88:
 		ImpactSounds: xplosml2.aud
 	Warhead@2Eff: CreateEffect
 		Explosions: flak_explosion_ground
-		ValidTargets: Air, Ground, Water, Trees
+		ValidTargets: Air, Ground, Water
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
 	

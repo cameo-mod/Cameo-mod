@@ -12,12 +12,12 @@
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -25,7 +25,7 @@
 		InvalidTargets: Ship, Structure, Bridge
 		
 ^sow_flame:
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 	InvalidTargets: Wall
 	Projectile: Bullet
 		Speed: 300
@@ -33,7 +33,7 @@
 		Image: fb3
 		LaunchAngle: 45
 		Inaccuracy: 0c32
-	ValidTargets: Ground, Water, Trees
+	ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		DamageTypes: FireDeath, Incendiary
 	Warhead@2Smu: LeaveSmudge
@@ -43,7 +43,7 @@
 ^sow_antiair:
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -99,12 +99,12 @@
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -402,11 +402,11 @@ sow_ht_special:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4Eff: CreateEffect
 		Explosions: small_napalm
 		
@@ -442,7 +442,7 @@ sow_mech_avenger:
 		DamageTypes: ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -492,7 +492,7 @@ sow_mech_kodiak:
 		DamageTypes: TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 		
 sow_mech_kodiak_mk2:
 	Inherits: sow_mech_kodiak
@@ -526,7 +526,7 @@ sow_mech_kodiak_mk2:
 		ValidTargets: Ground
 	Warhead@1Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 		
 sow_mech_gatling:
 	ReloadDelay: 5
@@ -555,12 +555,12 @@ sow_mech_gatling:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: cannon_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees, Air
+		ValidTargets: Ground, Ship, Air
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -605,11 +605,11 @@ sow_mech_jaguar:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -681,7 +681,7 @@ sow_advancer:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Structure, Wall, Husk, Creep
 	
 sow_advancer_mk2:
 	Inherits: sow_advancer
@@ -815,14 +815,14 @@ sow_advancer_upgrade_3:
 		Delay: 350
 		
 sow_abc_nuke:
-	ValidTargets: Ground, Trees, Water, Underwater, Air
+	ValidTargets: Ground, Water, Underwater, Air
 	Report: sow_abc_nuke.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1c512
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 15000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			Wood: 50
 			Medium: 200
@@ -842,7 +842,7 @@ sow_abc_nuke:
 		Damage: 12000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 20
-		ValidTargets: Ground, Trees, Water, Underwater, Air
+		ValidTargets: Ground, Water, Underwater, Air
 		Versus:
 			Wood: 45
 			Concrete: 20
@@ -873,7 +873,7 @@ sow_abc_nuke:
 		Damage: 8000
 		Falloff: 3000, 368, 135, 50, 18, 7, 0
 		Delay: 40
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	#Warhead@9Res_areanuke2: DestroyResource
 	#	Size: 3
@@ -896,14 +896,14 @@ sow_abc_nuke:
 		Damage: 8000
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
 		Delay: 75
-		ValidTargets: Trees
+		ValidTargets: Ground
 		DamageTypes: Incendiary
 	#Warhead@12Res_areanuke3: DestroyResource
 	#	Size: 4
 	#	Delay: 60
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, Wall
 		Size: 6
 		Delay: 60
 		
@@ -914,7 +914,7 @@ sow_abc_nuke_pp:
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 12500
 		Falloff: 800, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			Wood: 250
 			Medium: 20
@@ -922,13 +922,13 @@ sow_abc_nuke_pp:
 			Concrete: 200
 			
 sow_aircraft_husk:
-	ValidTargets: Ground, Trees, Water, Underwater
+	ValidTargets: Ground, Water, Underwater
 	Report: sow_abc_nuke.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 2c512
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 50000
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 300
 			Light: 250
@@ -945,18 +945,18 @@ sow_aircraft_husk:
 		ImpactActors: false
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, Wall
 		Size: 4
 		Delay: 30
 		
 sow_fighter_husk:
-	ValidTargets: Ground, Trees, Water, Underwater
+	ValidTargets: Ground, Water, Underwater
 	Report: sow_abc_nuke.aud
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 2c0
 		ImpactSounds: sow_abc_nuke.aud
 		Damage: 20000
-		ValidTargets: Ground, Trees, Water, Air
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 300
 			Light: 250
@@ -973,7 +973,7 @@ sow_fighter_husk:
 		ImpactActors: false
 	Warhead@13Smu_areanuke3: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Trees
+		InvalidTargets: Vehicle, Structure, Wall
 		Size: 4
 		Delay: 30
 		
@@ -1068,7 +1068,7 @@ satelliteprotection:
 		DamageTypes: ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Structure, Wall, Husk, Creep
 		
 satelliteprotection_mk2:
 	Inherits: satelliteprotection
@@ -1109,11 +1109,11 @@ sowfighter:
 		ValidTargets: Ground, Water, Air
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: fighter_payload.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	
 sowbomber:
 	ReloadDelay: 2
@@ -1138,11 +1138,11 @@ sowbomber:
 		ValidTargets: Ground, Water
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: poof
 		ImpactSounds: sowhercules_payload.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 		
 sowtripler:
 	ReloadDelay: 30
@@ -1169,11 +1169,11 @@ sowtripler:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4Eff: CreateEffect
 		Explosions: small_napalm
 	
@@ -1208,12 +1208,12 @@ sow_gun_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -1253,7 +1253,7 @@ sow_antiair_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud
@@ -1281,11 +1281,11 @@ sow_plasma_tower:
 	Warhead@2Smu: LeaveSmudge
 		Size: 2
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4Eff: CreateEffect
 		Explosions: small_napalm
 
@@ -1324,12 +1324,12 @@ sow_minigun_tower:
 			Concrete: 1
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees, Creep
+		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: xplos.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: small_splash
 		ImpactSounds: cannon_impact.aud
@@ -1369,7 +1369,7 @@ sow_defragmenter_tower:
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
 		ImpactActors: false
-		ValidTargets: Ground, Ship, Trees
+		ValidTargets: Ground, Ship
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
 		ImpactSounds: splash9.aud
@@ -1409,7 +1409,7 @@ sow_vulcano_tower:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Trees
+		InvalidTargets: Vehicle, Structure, Wall, Husk
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: antiair_impact.aud

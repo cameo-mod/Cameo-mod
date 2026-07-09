@@ -172,7 +172,7 @@ wc2paladinholyvision_hit:
 
 # Support power holy vision.
 wc2holyvisionSuper:
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Warhead@Projectiles: FireCluster
 		Weapon: wc2holyvisionSuper_hit
 		Dimensions: 1,1
@@ -249,7 +249,7 @@ wc2paladinhealing:
 
 # Support power healing.
 wc2healingSuper:
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Warhead@Projectiles: FireCluster
 		Weapon: wc2healingSuper_hit
 		Dimensions: 5,5
@@ -257,13 +257,13 @@ wc2healingSuper:
 
 wc2healingSuper_hit:
 	Inherits: wc2paladinhealing
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Warhead@1Dam:
 		Spread: 256
 		Damage: -25000
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 	Warhead@2Eff:
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 
 wc2paladinexorcism:
 	ReloadDelay: 60
@@ -578,12 +578,12 @@ wc2mageBlizzard:
 	ReloadDelay: 50
 	Range: 7c0
 	Report: wc2_icestorm.aud
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 0c1
 		Damage: 1
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 		AffectsParent: True
 		DamageTypes: Prone50Percent, TriggerProne
 	Warhead@InitialSpreader: FireCluster
@@ -593,7 +593,7 @@ wc2mageBlizzard:
 		Footprint: xxxxx____ xxxxx____ xxxxx____ xxxxx____ xxxxx____ _________ _________ _________ _________
 
 wc2mageBlizzard_Spread:
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 0c512
 		Blockable: false
@@ -656,7 +656,7 @@ wc2mageBlizzard_Spread:
 		Footprint: _____ _____ _____ _____ ____x
 
 wc2mageBlizzard_Projectile:
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 0c512
 		Image: wc2_effect_blizzard
@@ -664,7 +664,7 @@ wc2mageBlizzard_Projectile:
 	Warhead@1Dam: SpreadDamage
 		Spread: 333
 		Damage: 3333
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		Versus:
 			None: 123
 			Wood: 77
@@ -692,11 +692,11 @@ wc2mageBlizzard_Projectile:
 
 # Super weapon blizzard.
 wc2blizzardSuper:
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1234
 		Damage: 12345
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		AffectsParent: True
 		DamageTypes: Prone50Percent, TriggerProne
 	Warhead@InitialSpreader1: FireCluster
@@ -780,7 +780,7 @@ wc2blizzardSuper:
 # This spreads a bunch of projectiles out, which then become...
 wc2blizzardSuper_Spread:
 	Range: 5c0
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 0c512
 		Blockable: false
@@ -997,7 +997,7 @@ wc2ogremageRunes_Hit:
 # Spell sound effect goes in a CreateEffectWarhead here because if you put it in the weapon fired by IonCannonPower,
 # the sound will play at the location of the building that fired the power, and not at the impact location.
 wc2runesSuper:
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Warhead@Projectiles: FireCluster
 		Weapon: wc2ogremageRunes_Spread
 		Dimensions: 5,5
@@ -1191,11 +1191,11 @@ wc2deathknightRaiseDead:
 
 # Super weapon death and decay,
 wc2deathanddecaySuper:
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 1c0
 		Damage: 10000
-		ValidTargets: Ground, Water, Air, Trees
+		ValidTargets: Ground, Water, Air
 		AffectsParent: True
 		DamageTypes: Prone50Percent, TriggerProne
 	Warhead@InitialSpreader1: FireCluster
@@ -1267,7 +1267,7 @@ wc2deathanddecaySuper:
 # This spreads a bunch of projectiles out, which then become...
 wc2deathanddecaySuper_Spread:
 	Range: 5c0
-	ValidTargets: Ground, Water, Air, Trees
+	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 		Blockable: false
 		Inaccuracy: 10c0

@@ -648,7 +648,7 @@ WH40KBommaBomb:
 		Spread: 341
 		Damage: 4500
 		Falloff: 1000, 368, 135, 50, 18, 7, 0
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 90
 			Wood: 75
@@ -764,12 +764,12 @@ WH40KSkullprobeZap:
 
 WH40KInquisitionIonCannon:
 	Inherits: IonCannon
-	ValidTargets: Ground, Air, Trees
+	ValidTargets: Ground, Air
 	Warhead@1Dam_impact: SpreadDamage
 		Range: 0, 1c1, 2c1, 2c512
 		Damage: 8000
 		Falloff: 1000, 1000, 250, 100
-		ValidTargets: Ground, Air, Trees
+		ValidTargets: Ground, Air
 		InvalidTargets: Structure, Building
 		AffectsParent: True
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
@@ -785,7 +785,7 @@ WH40KDemonFire:
 	Warhead@1Dam_impact: SpreadDamage
 		Spread: 308
 		Damage: 8000
-		ValidTargets: Ground, Water, Trees
+		ValidTargets: Ground, Water
 		Versus:
 			None: 30
 			Wood: 40
