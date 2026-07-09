@@ -1,0 +1,493 @@
+ts_nod_constructionyard:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x3Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@conyard: ^Conyard
+	Selectable:
+		Bounds: 3072, 2048
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Construction Yard (Nod)
+	Building:
+		Footprint: _xx_ xxxx _xx_
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: ts_nod_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	TransformsIntoMobile:
+		RequiresCondition: factundeploy
+		Locomotor: heavywheeled
+		RequiresForceMove: true
+		RedeployAfterMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: factundeploy
+		CargoType: Vehicle
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: factundeploy
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RequiresForceMove: true
+	TransferTimedExternalConditionOnTransform:
+		Condition: invulnerability
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	BaseProvider:
+		Range: 14c0
+	ProvidesPrerequisite@tsoilderrick:
+		Prerequisite: tsoilderrick
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	WithIdleOverlay@TOP:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-top
+	WithIdleOverlay@SIDE:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-side
+	WithIdleOverlay@FRONT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-front
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@fact.tsnod:
+		Prerequisite: fact.tsnod
+	RenderSprites:
+		Image: tsgtcnst
+		PlayerPalette: playerra2
+
+ts_nod_tiberiumrefinery:
+	Inherits: ts_gdi_tiberiumrefinery
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_powerplant
+		Queue: Building, RABuilding
+	FreeActor:
+		Actor: ts_nod_tiberiumharvester
+		SpawnOffset: 2,2
+		Facing: 256
+	RenderSprites:
+		Image: ts_nod_tiberiumrefinery
+
+ts_nod_tiberiumwastefacility:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	# HitShape:
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -512
+	# 		BottomRight: 1536, 853
+	# HitShape@TOP:
+	# 	Type: Rectangle
+	# 		TopLeft: -512, -1450
+	# 		BottomRight: 896, -512
+	Valued:
+		Cost: 1600
+	Tooltip:
+		Name: Tiberium Waste Facility
+	Buildable:
+		BuildPaletteOrder: 200
+		BuildLimit: 1
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter, ts_nod_upgrade_advancedtiberiumrefinement
+		Queue: Building, RABuilding
+		Description: actor-tsntwast.description
+	Building:
+		Footprint: xx= xx=
+		Dimensions: 3,2
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 100000
+	# Selectable:
+	# 	Bounds: 1280, 1280
+	# 	DecorationBounds: 1280, 1024
+	# CustomSellValue:
+	# 	Value: 500
+	WithIdleOverlay@GLOW:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-glow
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@BIB2:
+		RequiresCondition: !build-incomplete
+		Sequence: bibb
+	#WithDockingOverlay@UNLOAD:
+	#	RequiresCondition: !build-incomplete
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	ResourcePurifier:
+		Modifier: 25
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_powerplant:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Tooltip:
+		Name: Nod Power Plant
+	Valued:
+		Cost: 600
+	Health:
+		HP: 120000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 180
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~ts_nod_constructionyard
+		Description: template-power.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	RevealsShroud:
+		Range: 4c0
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# HitShape:
+	# 	UseTargetableCellsOffsets: false
+	# 	TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+	ProvidesPrerequisite@buildingname:
+		ValidTypes: building ##########
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_advancedpowerplant:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Tooltip:
+		Name: Nod Advanced Power Plant
+	Valued:
+		Cost: 1200
+	Health:
+		HP: 240000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 360
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 110
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
+		Description: template-advpower.description
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	HitShape:
+		TargetableOffsets: -355,-1024,0
+	Selectable:
+		Bounds: 3072, 2048
+	SelectionDecorations:
+	RevealsShroud:
+		Range: 5c0
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: building ##########
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_handof:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Inherits@barr: ^IsBarrack
+	# HitShape:
+	# 	UseTargetableCellsOffsets: false
+	# 	TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
+	# Selectable:
+	# 	Bounds: 1280, 1280
+	# 	DecorationBounds: 1280, 1024
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Hand of Nod
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_powerplant
+		Queue: Building, RABuilding
+		Description: template-barracks.description
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 1,2
+	Exit@1:
+		# SpawnOffset: -426,85,0
+		SpawnOffset: 0,0,0
+		ExitCell: 2,1
+	# Exit@2:
+	# 	# SpawnOffset: 298,298,0
+	# 	SpawnOffset: 0,0,0
+	# 	ExitCell: 2,0
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_warfactory:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^4x3Shape
+	Inherits@weap: ^IsWeaponFactory
+	# HitShape:
+	# 	TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+	# 	Type: Rectangle
+	# 		TopLeft: -1536, -1024
+	# 		BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Nod War Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
+		Queue: Building, RABuilding
+		Description: template-factory.description
+	Building:
+		Footprint: xxx_ xxx= _===
+		Dimensions: 4,3
+		LocalCenterOffset: 0,-512,0
+	# Selectable:
+	# 	Bounds: 3072, 2048
+	# 	DecorationBounds: 3072, 2048
+	SelectionDecorations:
+	RallyPoint:
+		Path: 5,3
+	Exit@1:
+		# SpawnOffset: -512,-512,0
+		SpawnOffset: 0,0,0
+		ExitCell: 2,2
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	ProductionBar@VEHICLEGDI:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEGDI:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_servicedepot:
+	Inherits: ts_gdi_servicedepot
+	Tooltip:
+		Name: Service Depot
+	Buildable:
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_warfactory
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+
+ts_nod_helipad:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	# HitShape:
+	# 	UseTargetableCellsOffsets: false
+	# 	TargetableOffsets: 0,0,0, 768,-512,0, 768,512,0, -281,-512,0, -630,512,0
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Nod Helipad
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
+		Queue: Building, RABuilding
+		Description: Produces, rearms and repairs aircraft.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RepairsUnits:
+		HpPerStep: 1000
+		PlayerExperience: 25
+		StartRepairingNotification: Repairing
+	RallyPoint:
+	ProductionQueue@AIRCRAFT:
+	ProductionBar@AIRCRAFTNOD:
+		ProductionType: Aircraft
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAAIRCRAFTNOD:
+		ProductionType: RAAircraft
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-platform
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2
+
+ts_nod_radar:
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@sell: ^TSSpawnActorsOnSell
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Radar
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
+		Queue: Building, RABuilding
+		Description: actor-tsntradr.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Selectable:
+		Bounds: 2248, 2248
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	ProvidesRadar:
+		RequiresCondition: !jammed && !lowpower
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower
+	SupportPowerChargeBar:
+	Power:
+		Amount: -50
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	WithIdleOverlay@DISH:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		Sequence: idle-dish
+	# DetonateWeaponPower@bribedmutants:
+	# 	Prerequisites:
+	# 		1: mmtsnod
+	# 	Icons:
+	# 		1: mutcommando
+	# 	Names:
+	# 		1: Bribed Mutants
+	# 	ChargeInterval: 6000
+	# 	Descriptions:
+	# 		1: Deploys mutants from the orbit
+	# 	Weapons:
+	# 		1: NODMutantSpawner
+	# 	OrderName: GDI Drop
+	# 	Cursor: ability
+	# 	PauseOnCondition: lowpower
+	# 	InsufficientPowerSpeechNotification: InsufficientPower
+	# 	LaunchSpeechNotification: ReinforcementsArrived
+	# 	IncomingSpeechNotification: EnemyUnitsApproaching
+	# 	SelectTargetSpeechNotification: SelectTarget
+	# 	DisplayBeacon: True
+	# 	DisplayRadarPing: True
+	# 	DisplayTimerStances: Ally, Neutral, Enemy
+	# 	CameraActor: camera.small
+	# 	CameraRemoveDelay: 60
+	# 	AllowMultiple: True
+	RenderSprites:
+		PlayerPalette: playerra2
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+
+ts_nod_techcenter:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 140
+		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
+		Description: Provides Nod advanced technologies.
+	Tooltip:
+		Name: Nod Tech Center
+	# Selectable:
+	# 	Bounds: 2048, 2048
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	Power:
+		Amount: -150
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@factionnod:
+		Prerequisite: mmtsnod
+	ProvidesPrerequisite:
+		Prerequisite: tstek
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	RenderSprites:
+		PlayerPalette: playerra2

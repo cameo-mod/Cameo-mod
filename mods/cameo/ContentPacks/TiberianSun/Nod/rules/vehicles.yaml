@@ -1,0 +1,531 @@
+ts_nod_mobileconstructionvehicle:
+	Inherits: ts_gdi_mobileconstructionvehicle
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		Prerequisites: ~ts_nod_warfactory, ts_nod_servicedepot
+	Tooltip:
+		Name: Nod Mobile Construction Vehicle
+	Transforms:
+		IntoActor: ts_nod_constructionyard
+	RenderVoxels:
+		Image: tsmcvblack
+
+ts_nod_tiberiumharvester:
+	Inherits: ^TDHARV
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
+	Health:
+		HP: 150000
+	Harvester:
+		PipCount: 8
+		Capacity: 35
+	Buildable:
+		Prerequisites: ~ts_nod_warfactory, ts_nod_tiberiumrefinery
+		Queue: Vehicle, RAVehicle
+		Description: Harvests Tiberium for processing
+	WithVoxelBody:
+	WithDockingAnimation:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 500
+	RenderVoxels:
+		Scale: 2
+		Image: dtruck
+	RenderSprites:
+		Image: dtruck
+	WithHarvestOverlay@harvesting:
+		Sequence: harvesting
+		Palette: ra2effect
+	GrantConditionOnPrerequisite@ts_nod_upgrade_advancedtiberiumrefinement:
+		Condition: ts_nod_upgrade_advancedtiberiumrefinement
+		Prerequisites: ts_nod_upgrade_advancedtiberiumrefinement
+	SpeedMultiplier@ts_nod_upgrade_advancedtiberiumrefinement:
+		RequiresCondition: ts_nod_upgrade_advancedtiberiumrefinement
+		Modifier: 150
+	Cloak@ts_nod_upgrade_stealthfieldsimprovements:
+		DetectionTypes: GroundCloak
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		IsPlayerPalette: true
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_stealthfieldsimprovements
+
+ts_nod_subterraneanapc:
+	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@botmicro: ^BotAutoDeployTransport
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@sub: ^SubterraneanVoxelVehicle
+	Inherits@cargo: ^CargoVehicle
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Valued:
+		Cost: 1410
+	Tooltip:
+		Name: Subterranean APC
+	UpdatesPlayerStatistics:
+		OverrideActor: ts_nod_subterraneanapc
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ts_nod_warfactory, ts_nod_radar
+		Queue: Vehicle, RAVehicle
+		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
+	Mobile:
+		Locomotor: subterranean
+		PauseOnCondition: loading || being-captured || disabled
+		Speed: 60
+		TurnSpeed: 40
+	Health:
+		HP: 17500
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Medium
+	Armament@PRIMARY:
+		Weapon: TSSAPCMissiles
+		LocalOffset: -153,-204,509, -153,204,509
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
+	Armament@UPGRADE:
+		Weapon: TSSAPCCoreMissiles
+		LocalOffset: -153,-204,509, -153,204,509
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
+	AttackFrontal:
+		FacingTolerance: 64
+	RevealsShroud:
+		Range: 5c0
+		RequiresCondition: !submerged
+	SelectionDecorations:
+	Selectable:
+		Class: ts_nod_subterraneanapc
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 400
+	Cargo:
+		Types: Infantry, Hacker, Fremen
+		MaxWeight: 5
+		UnloadTerrainTypes: Clear, ClearTemperat, ClearWinter, ClearJungle, ClearSnow, ClearDesert, ClearInterior, Rough, Road, Beach, ClearDune, Dune, Concrete, Sand, SpiceSand, Spice
+		InitialUnits: ts_nod_lightinfantry, ts_nod_lightinfantry, ts_nod_lightinfantry, ts_nod_rocketinfantry, ts_nod_rocketinfantry, ts_nod_elitecadre
+	Targetable@garrisoned:
+		RequiresCondition: loaded && !submerged
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement
+
+ts_nod_attackbuggy:
+	Inherits: ^Vehicle
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@TiberiumLenses: ^TiberiumLenses
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 450
+	Tooltip:
+		Name: Attack Buggy
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~ts_nod_warfactory
+		Queue: Vehicle, RAVehicle
+		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 64
+		Speed: 160
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSRaiderCannon
+		LocalOffset: 0,-30,250, 0,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
+	Armament@UPGRADE:
+		Weapon: TSLaserRaiderCannon
+		LocalOffset: 0,-30,250, 0,30,250
+		Recoil: 128
+		RecoilRecovery: 24
+		MuzzleSequence: muzzle
+		RequiresCondition: ts_nod_upgrade_tiberiumlenses
+	Armament@SECONDARY:
+		Weapon: TSRaiderGrenade
+		LocalOffset: 0,-30,250, 0,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
+	WithMuzzleOverlay:
+	AttackFollow:
+		FacingTolerance: 512
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 250
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
+
+ts_nod_stealthtank:
+	Inherits: ^Tank
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
+	Inherits@TiberiumCoreMissiles: ^TiberiumCoreMissiles
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
+	Valued:
+		Cost: 1750
+	Tooltip:
+		Name: Stealth Tank
+	Buildable:
+		BuildPaletteOrder: 150
+		Prerequisites: ~ts_nod_warfactory, ts_nod_techcenter
+		Queue: Vehicle, RAVehicle
+		Description: Lightly armoured tank equipped with a \nstealth generator. Armed with missiles.\nCan be spotted by infantry at close range.\n  Strong vs Vehicles, Aircraft\n  Weak vs Infantry
+	Mobile:
+		Locomotor: heavywheeled
+		TurnSpeed: 40
+		Speed: 100
+	Health:
+		HP: 80000
+	Repairable:
+		HpPerStep: 4000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Weapon: TSStankTusk
+		LocalOffset: -153,-204,509, -153,204,509
+		RequiresCondition: !ts_nod_upgrade_tiberiumcoremissiles
+	Armament@UPGRADE:
+		Weapon: TSStankTibTusk
+		LocalOffset: -153,-204,509, -153,204,509
+		RequiresCondition: ts_nod_upgrade_tiberiumcoremissiles
+	AttackFrontal:
+		FacingTolerance: 256
+	AutoTarget:
+		InitialStance: HoldFire
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 250
+	WithRangeCircle@GenRangeUpgraded:
+		Range: 1512
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
+	ProximityExternalCondition@StealthGen:
+		Range: 1512
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && ts_nod_upgrade_stealthfieldsimprovements
+	# Cloak:
+	# 	InitialDelay: 90
+	# 	CloakDelay: 90
+	# 	CloakSound: cloak5.aud
+	# 	UncloakSound: cloak5.aud
+	# 	PauseOnCondition: cloak-force-disabled || base-reveal
+	# 	Palette: voxelcloak
+	# 	IsPlayerPalette: true
+	# GrantConditionOnDamageState@UNCLOAK:
+	# 	Condition: cloak-force-disabled
+	# 	ValidDamageStates: Critical
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_stealthfieldsimprovements
+
+ts_nod_mobilerepairvehicle:
+	Inherits: ^Tank
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillImmune
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Mobile Repair Vehicle
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~ts_nod_warfactory, ts_nod_servicedepot
+		Queue: Vehicle, RAVehicle
+		Description: Repairs nearby vehicles.\n  Unarmed
+	Mobile:
+		Locomotor: tracked
+		TurnSpeed: 30
+		Speed: 75
+	Health:
+		HP: 50000
+	Repairable:
+		HpPerStep: 2500
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armor:
+		Type: Heavy
+	Armament:
+		Weapon: ts_nod_mobilerepairvehicle
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	AttackFrontal:
+		FacingTolerance: 0
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 250
+	AutoTargetPriority@DEFAULT:
+		ValidTargets: Vehicles
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement
+
+ts_nod_artillery:
+	Inherits: ^Tank
+	Inherits@Template: ^ArtilleryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@EMP: ^TurretEMP
+	Inherits@vo: ^AttackTurretedVoice
+	Inherits@MobilitySpecialization: ^MobilitySpecialization
+	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 1300
+	Tooltip:
+		Name: Artillery
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ts_nod_warfactory, ts_nod_radar
+		Queue: Vehicle, RAVehicle
+		Description: Mobile artillery.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Mobile:
+		Locomotor: tracked
+		Speed: 60
+		TurnSpeed: 24
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armor:
+		Type: Light
+	Turreted:
+		TurnSpeed: 24
+	Armament@PRIMARY:
+		Weapon: TS155mm
+		LocalOffset: 407,0,362
+		RequiresCondition: !ts_nod_upgrade_auxiliaryweapon
+	Armament@UPGRADE:
+		Weapon: TSAux155mm
+		LocalOffset: 407,0,362
+		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
+	AttackTurreted:
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	WithVoxelBody:
+		RequiresCondition: !immobile
+	WithVoxelTurret:
+	WithVoxelBarrel:
+		RequiresCondition: immobile
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	GrantConditionOnAttack@DEPLOY:
+		Condition: immobile
+		RevokeDelay: 20
+	SpeedMultiplier@DEPLOY:
+		Modifier: 0
+		RequiresCondition: immobile
+	WithFacingSpriteBody@Skin2:
+		Sequence: deploy
+		RequiresCondition: immobile
+		Name: body2
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
+
+ts_nod_devilstongue:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@FireActor: ^FireActor
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@sub: ^SubterraneanVoxelVehicle
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Valued:
+		Cost: 1150
+	Tooltip:
+		Name: Devil's Tongue
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~ts_nod_warfactory, ts_nod_techcenter
+		Queue: Vehicle, RAVehicle
+		Description: Subterranean flame tank.\nIs able to move underground.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks, Aircraft
+	Mobile:
+		Locomotor: subterranean
+		Speed: 70
+		TurnSpeed: 28
+	Health:
+		HP: 100000
+	Repairable:
+		HpPerStep: 5000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Weapon: TSFireballLauncher
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	AcceptsDeliveredExperience: ##########
+		ValidTypes: vehicle ##########
+	AttackFrontal:
+		PauseOnCondition: disabled || submerged
+		FacingTolerance: 0
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 350
+	RenderVoxels:
+		Scale: 15
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement
+
+ts_nod_mobilestealthgenerator:
+	Inherits: ^Tank
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@StealthFieldsImprovements: ^StealthFieldsImprovements
+	ActorStatValues:
+		Upgrades:
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Mobile Stealth Generator
+	Buildable:
+		BuildPaletteOrder: 120
+		Prerequisites: ~ts_nod_warfactory, ts_nod_stealthgenerator
+		Queue: Vehicle, RAVehicle
+		Description: Cloaks nearby buildings and units.\nCan not be cloaked.\n Unarmed
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Wood
+	SelectionDecorations:
+	Selectable:
+	Inherits@EXT: ^ExternalConditions ##########
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	ProximityExternalCondition@StealGen:
+		Range: 5c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && !ts_nod_upgrade_stealthfieldsimprovements
+	ProximityExternalCondition@StealGenUpgraded:
+		Range: 7c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && ts_nod_upgrade_stealthfieldsimprovements
+	-ExternalCondition@CLOAK:
+	-ExternalCondition@TSCLOAK:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+	# DetectCloaked:
+	# 	Range: 7c0
+	WithRangeCircle@GenRange:
+		Range: 5c0
+		RequiresCondition: !ts_nod_upgrade_stealthfieldsimprovements
+	WithRangeCircle@GenRangeUpgraded:
+		Range: 7c0
+		RequiresCondition: ts_nod_upgrade_stealthfieldsimprovements
+	RenderSprites:
+		PlayerPalette: playerra2
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_advancedtiberiumrefinement, ts_nod_upgrade_stealthfieldsimprovements

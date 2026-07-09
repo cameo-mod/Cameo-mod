@@ -1,0 +1,779 @@
+ts_nod_lightinfantry:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: altnode1.shp
+	icon:
+		Filename: tse1gicon.png
+
+ts_nod_chameleonspy:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Filename: tse1.shp
+	icon:
+		Filename: ts_nod_chameleonspy_icon.shp
+
+ts_nod_elitecadre:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Filename: ts_nod_elitecadre.shp
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+		ShadowStart: 292
+	run:
+		Start: 8
+		Length: 6
+		Facings: 8
+		ShadowStart: 300
+	idle1:
+		Start: 56
+		Length: 15
+		ShadowStart: 348
+	idle2:
+		Start: 71
+		Length: 15
+		ShadowStart: 363
+	crippled-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+		ShadowStart: 378
+	crippled-stand:
+		Start: 86
+		Facings: 8
+		Stride: 6
+		ShadowStart: 456
+	attack:
+		Start: 164
+		Length: 6
+		Facings: 8
+		ShadowStart: 456
+	crippled-attack:
+		Start: 212
+		Length: 6
+		Facings: 8
+		ShadowStart: 504
+	icon:
+		Filename: ts_nod_elitecadre_icon.shp
+
+ts_nod_toxintrooper:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Filename: ts_nod_toxintrooper.shp
+	icon:
+		Filename: ts_nod_toxintrooper_icon.png
+
+ts_nod_shotguncommando:
+	Inherits: ^TSBasicInfantry
+	Defaults:
+		Filename: ts_nod_shotguncommando.shp
+		Scale: 1.1
+	icon:
+		Filename: ts_nod_shotguncommando_icon.png
+
+ts_nod_mobilestealthgenerator:
+	Defaults:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_mobilestealthgenerator_icon.shp
+	idle:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_nod_attackbuggy:
+	Defaults:
+		Filename: ts_nod_attackbuggy.shp
+		Scale: 1.25
+	idle:
+		Filename: ts_nod_attackbuggy.shp
+		Facings: 32
+		UseClassicFacings: True
+	icon:
+		Filename: ts_nod_attackbuggy_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_nod_laserfence:
+	Defaults:
+		Filename: ts_nod_laserfence_tspost.shp
+	idle:
+		Start: 0
+	damaged-idle:
+		Start: 1
+	lights-bright:
+		Filename: ts_nod_laserfence_napost_b.shp
+		Frames: 0,1,2,2,2,2,2,2,1,1,1,1,0,0,0
+		Length: 15
+		Tick: 90
+	damaged-lights-bright:
+		Filename: ts_nod_laserfence_napost_b.shp
+		Frames: 0,1,2,2,2,2,2,2,1,1,1,1,0,0,0
+		Length: 15
+		Tick: 90
+	chainoflights:
+		Filename: ts_nod_laserfence_napost_a.shp
+		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
+		Length: 20
+		Tick: 120
+	chainoflights-bright:
+		Filename: ts_nod_laserfence_napost_a.shp
+		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
+		Length: 20
+		Tick: 120
+	damaged-chainoflights:
+		Filename: ts_nod_laserfence_napost_a.shp
+		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
+		Length: 20
+		Tick: 120
+	damaged-chainoflights-bright:
+		Filename: ts_nod_laserfence_napost_a.shp
+		Frames: 0,1,2,3,7,7,7,7,7,7,7,7,7,4,5,6,7,7,7,7
+		Length: 20
+		Tick: 120
+	dead:
+		Start: 2
+		Tick: 400
+	make:
+		Filename: ts_nod_laserfence_tspostmk.shp
+		Start: 0
+		Length: 2
+		Tick: 160
+	icon:
+		Filename: ts_nod_laserfence_icon.shp
+		Offset: 0, 0
+
+# tsnafnce:
+# 	Defaults: tsntfence
+# 	idle:
+# 		Length: 1
+# 	disabled-x:
+# 		Start: 8
+# 		Length: 1
+# 	disabled-y:
+# 		Start: 12
+# 		Length: 1
+# 	enabled-x:
+# 		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
+# 		Length: 16
+# 	enabled-x-bright:
+# 		Frames: 3,3,1,1,3,3,1,1,2,2,0,0,2,2,0,0
+# 		Length: 16
+# 	enabled-y:
+# 		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
+# 		Length: 16
+# 	enabled-y-bright:
+# 		Frames: 7,5,7,5,6,4,6,4,7,5,7,5,6,4,6,4
+# 		Length: 16
+# 	#emp-overlay: emp_fx01
+# 	#	Length: *
+# 	#	Offset: 0, 0, 13
+# 	#	ZOffset: 512
+# 	#	BlendMode: Additive
+# 	icon: tslaserfenceicon
+# 		Offset: 0, 0
+
+ts_nod_stealthtank:
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_stealthtank_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_nod_mobilerepairvehicle:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_mobilerepairvehicle_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_nod_artillery:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_artillery_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	deploy:
+		Filename: ts_nod_artillery.shp
+		ShadowStart: 3
+		Offset: 0, -12, 12
+
+ts_nod_devilstongue:
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_devilstongue_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_nod_subterraneanapc:
+	Defaults:
+		Scale: 1.25
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_subterraneanapc_icon.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+
+ts_nod_powerplant:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Offset: -6, 8, 24
+	idle:
+		Filename: ts_nod_powerplant.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_nod_powerplant.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_nod_powerplant.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: ts_nod_powerplant_a.shp
+		Length: 9
+		Tick: 200
+	damaged-idle-lights:
+		Filename: ts_nod_powerplant_a.shp
+		Start: 9
+		Length: 9
+		Tick: 200
+	make:
+		Filename: ts_nod_powerplant_mk.shp
+	icon:
+		Filename: ts_nod_powerplant_icon.png
+		Offset: 0, 0, 25
+		UseTilesetCode: false
+
+ts_nod_advancedpowerplant:
+	Defaults:
+		Scale: 1.25
+		Offset: 12, -20, 30
+	idle:
+		Filename: ts_nod_advancedpowerplant.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_nod_advancedpowerplant.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_nod_advancedpowerplant.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: ts_nod_advancedpowerplant_a.shp
+		Length: 9
+		Tick: 200
+	damaged-idle-lights:
+		Filename: ts_nod_advancedpowerplant_a.shp
+		Start: 9
+		Length: 9
+		Tick: 200
+	make:
+		Filename: ts_nod_advancedpowerplant_mk.shp
+	icon:
+		Filename: ts_nod_advancedpowerplant_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_nod_handof:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Offset: -12, -15, 30
+	idle:
+		Filename: ts_nod_handof_nthand.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_nod_handof_nthand.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_nod_handof_nthand.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-light:
+		Filename: ts_nod_handof_nthand_a.shp
+		Length: 5
+		Tick: 100
+		ZOffset: 1023
+	damaged-idle-light:
+		Filename: ts_nod_handof_nthand_a.shp
+		Start: 5
+		Length: 5
+		Tick: 100
+		ZOffset: 1023
+	idle-lights:
+		Filename: ts_nod_handof_nthand_b.shp
+		Length: 12
+		Tick: 200
+	damaged-idle-lights:
+		Filename: ts_nod_handof_nthand_b.shp
+		Start: 12
+		Length: 12
+		Tick: 200
+	make:
+		Filename: ts_nod_handof_nthandmk.shp
+	icon:
+		Filename: tshandicon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+	iconcabal:
+		Filename: ts_nod_handof_handofcabalicon.png
+		Offset: 0, 0
+
+ts_nod_warfactory:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Scale: 1.25
+		Offset: -8, -20, 30
+	idle:
+		Filename: ts_nod_warfactory.shp
+		ShadowStart: 2
+		ZOffset: -1024
+		# Offset: -12, -21, 1
+	damaged-idle:
+		Filename: ts_nod_warfactory.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: -1024
+		# Offset: -12, -21, 1
+	idle-roof:
+		Filename: ts_nod_warfactory_2.shp
+		ShadowStart: 2
+		ZOffset: 512
+	damaged-idle-roof:
+		Filename: ts_nod_warfactory_2.shp
+		Start: 1
+		ShadowStart: 3
+		ZOffset: 512
+	dead:
+		Filename: ts_nod_warfactory.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: ts_nod_warfactory_a.shp
+		Length: 16
+		Tick: 100
+		ZOffset: 2048
+	damaged-idle-lights:
+		Filename: ts_nod_warfactory_a.shp
+		Start: 16
+		Length: 16
+		Tick: 100
+		ZOffset: 2048
+	build-door:
+		Filename: ts_nod_warfactory_b.shp
+		Length: 10
+		ShadowStart: 10
+		ZOffset: 512
+	damaged-build-door:
+		Filename: ts_nod_warfactory_b.shp
+		Start: 10
+		Length: 10
+		ShadowStart: 20
+		ZOffset: 512
+	make:
+		Filename: ts_nod_warfactory_mk.shp
+	bib2:
+		Filename: ts_nod_warfactory_bb.shp
+		ZOffset: -1024
+		# Offset: -12, -21, 1
+	damaged-bib2:
+		Filename: ts_nod_warfactory_bb.shp
+		Start: 1
+		ZOffset: -1024
+		# Offset: -12, -21, 1
+	dead-bib2:
+		Filename: ts_nod_warfactory_bb.shp
+		Start: 2
+		ZOffset: -1024
+		# Offset: -12, -21, 1
+	icon:
+		Filename: ts_nod_warfactory_icon.png
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_nod_radar:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ts_nod_radar.shp
+		Scale: 1.25
+		Offset: 0, -12, 12
+	idle:
+		Filename: ts_nod_radar.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_nod_radar.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_nod_radar.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-dish:
+		Filename: ts_nod_radar_a.shp
+		Length: 24
+		Tick: 120
+	active:
+		Filename: invisibleitem.shp
+	damaged-idle-dish:
+		Filename: ts_nod_radar_a.shp
+		Start: 24
+		Length: 24
+		Tick: 120
+	make:
+		Filename: ts_nod_radar_mk.shp
+	icon:
+		Filename: ts_nod_radar_icon.shp
+		Offset: 0, 0
+
+ts_nod_techcenter:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Scale: 1.25
+		Filename: ts_nod_techcenter.shp
+		Offset: 0, -24, 24
+	idle:
+		Filename: ts_nod_techcenter.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_nod_techcenter.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_nod_techcenter.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	idle-lights:
+		Filename: ts_nod_techcenter_a.shp
+		Length: 9
+		Tick: 120
+	damaged-idle-lights:
+		Filename: ts_nod_techcenter_a.shp
+		Length: 9
+		Tick: 120
+	make:
+		Filename: ts_nod_techcenter_mk.shp
+	icon:
+		Filename: ts_nod_techcenter_icon.png
+		Offset: 0, 0
+
+ts_nod_obeliskoflight:
+	Defaults:
+		Filename: ts_nod_obeliskoflight.shp
+		Scale: 1.25
+		Offset: 0, -24, 24
+	idle:
+		Filename: ts_nod_obeliskoflight.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_nod_obeliskoflight.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_nod_obeliskoflight.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	active:
+		Filename: ts_nod_obeliskoflight_b.shp
+		Length: 12
+		Tick: 200
+		ZOffset: 2
+	idle-lights:
+		Filename: ts_nod_obeliskoflight_a.shp
+		Length: 12
+		Tick: 80
+	make:
+		Filename: ts_nod_obeliskoflight_mk.shp
+	icon:
+		Filename: ts_nod_obeliskoflight_icon.png
+		Offset: 0,0
+
+ts_nod_stealthgenerator:
+	Defaults:
+		Filename: ts_nod_stealthgenerator.shp
+		Scale: 1.25
+		Offset: -16, -16, 1
+	idle:
+		Filename: ts_nod_stealthgenerator.shp
+		ShadowStart: 3
+	damaged-idle:
+		Filename: ts_nod_stealthgenerator.shp
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Filename: ts_nod_stealthgenerator.shp
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	pulse:
+		Filename: ts_nod_stealthgenerator_a.shp
+		Length: 4
+		Tick: 480
+	damaged-pulse:
+		Filename: ts_nod_stealthgenerator_a.shp
+		Start: 4
+		Length: 4
+		Tick: 480
+	make:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_stealthgenerator_icon.shp
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_nod_helipad:
+	Defaults:
+		Filename: ts_nod_helipad.shp
+		Scale: 1.25
+		Offset: 0, -24, 0
+	idle:
+		Filename: ts_nod_helipad.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	damaged-idle:
+		Filename: ts_nod_helipad.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+		# Offset: 0, -24, 3
+	dead:
+		Filename: ts_nod_helipad.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+		# Offset: 0, -24, 3
+	idle-platform:
+		Filename: tsnthpadbb.shp
+		ShadowStart: 3
+		ZOffset: -1c511
+	damaged-idle-platform:
+		Filename: tsnthpadbb.shp
+		Start: 1
+		ShadowStart: 4
+		ZOffset: -1c511
+	dead-platform:
+		Filename: tsnthpadbb.shp
+		Start: 2
+		ShadowStart: 5
+		ZOffset: -1c511
+		Tick: 400
+	idle-lights:
+		Filename: ts_nod_helipad_a.shp
+		Length: 46
+		ZOffset: -1c511
+		Tick: 100
+	active:
+		Filename: ts_nod_helipad_a.shp
+		Length: 46
+		ZOffset: -1c511
+		Tick: 100
+	damaged-active:
+		Filename: ts_nod_helipad_a.shp
+		Length: 46
+		ZOffset: -1c511
+		Tick: 100
+	damaged-idle-lights:
+		Filename: ts_nod_helipad_a.shp
+		Start: 46
+		Length: 46
+		Tick: 100
+		ZOffset: -1c511
+	make:
+		Filename: tsnthpadmk.shp
+	icon:
+		Filename: ts_nod_helipad_icon.shp
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_nod_tiberiumrefinery:
+	Inherits: ts_gdi_tiberiumrefinery
+	icon:
+		Filename: ts_nod_tiberiumrefinery_icon.shp
+		Offset: 0, 0
+
+ts_nod_tiberiumwastefacility:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: ts_nod_tiberiumwastefacility.shp
+		Scale: 1.25
+		Offset: 0, 0, 24
+	idle:
+		ShadowStart: 3
+	damaged-idle:
+		Start: 1
+		ShadowStart: 4
+	dead:
+		Start: 2
+		ShadowStart: 5
+		Tick: 400
+	make:
+	idle-glow:
+		Filename: ts_nod_tiberiumwastefacility_a.shp
+		Length: 20
+		ShadowStart: 40
+		Tick: 120
+	damaged-idle-glow:
+		Filename: ts_nod_tiberiumwastefacility_a.shp
+		Start: 20
+		Length: 20
+		ShadowStart: 60
+		Tick: 120
+	idle-lights:
+		Filename: ts_nod_tiberiumwastefacility_b.shp
+		Length: 16
+		Tick: 120
+	damaged-idle-lights:
+		Filename: ts_nod_tiberiumwastefacility_b.shp
+		Start: 16
+		Length: 16
+		Tick: 120
+	bibb:
+		Filename: ts_nod_tiberiumwastefacility_bb.shp
+		ZOffset: -1024
+		# Offset: 0, -36, 3
+	damaged-bibb:
+		Filename: ts_nod_tiberiumwastefacility_bb.shp
+		Start: 1
+		ZOffset: -1024
+		# Offset: 0, -36, 3
+	dead-bibb:
+		Filename: ts_nod_tiberiumwastefacility_bb.shp
+		Start: 2
+		ZOffset: -1024
+		# Offset: 0, -36, 3
+	unload-overlay:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_tiberiumwastefacility_icon.shp
+		Offset: 0, 0
+		UseTilesetCode: false
+
+ts_nod_missilesilo:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: ts_nod_missilesilo.shp
+		Scale: 1.25
+		Offset: -4, -8, 24
+	idle:
+		Filename: ts_nod_missilesilo.shp
+	damaged-idle:
+		Filename: ts_nod_missilesilo.shp
+		Start: 1
+	dead:
+		Filename: ts_nod_missilesilo.shp
+		Start: 2
+		Tick: 400
+	idle-lights:
+		Filename: ts_nod_missilesilo_b.shp
+		Length: 10
+		Tick: 120
+	damaged-idle-lights:
+		Filename: ts_nod_missilesilo_b.shp
+		Start: 10
+		Length: 10
+		Tick: 120
+	make:
+		Filename: ts_nod_missilesilo_mk.shp
+	active:
+		Filename: ts_nod_missilesilo_a.shp
+		Length: 10
+		Tick: 80
+	damaged-active:
+		Filename: ts_nod_missilesilo_a.shp
+		Start: 10
+		Length: 10
+		Tick: 80
+	smoke:
+		Filename: invisibleitem.shp
+	up:
+		Filename: invisibleitem.shp
+	down:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_missilesilo_icon.shp
+		Offset: 0, 0
+
+ts_nod_bansheefighter:
+	idle:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_bansheefighter_icon.shp
+
+ts_nod_laserturret:
+	Defaults:
+		Filename: ts_nod_laserturret.shp
+		Scale: 1.25
+	idle:
+		Filename: ts_nod_laserturret.shp
+	damaged-idle:
+		Filename: ts_nod_laserturret.shp
+		Start: 1
+	critical-idle:
+		Filename: ts_nod_laserturret.shp
+		Start: 2
+	make:
+		Filename: invisibleitem.shp
+	dead:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ts_nod_laserturret_icon.shp
+		Offset: 0,0
+
+ts_nod_samsite:
+	Defaults:
+		Filename: ts_nod_samsite.shp
+		Scale: 1.25
+	idle:
+		Filename: ts_nod_samsite.shp
+	damaged-idle:
+		Filename: ts_nod_samsite.shp
+		Start: 1
+	critical-idle:
+		Filename: ts_nod_samsite.shp
+		Start: 2
+	turret:
+		Filename: tsgtctwr_d.shp
+		Facings: 32
+		UseClassicFacings: True
+		Offset: 0,16
+	make:
+		Filename: invisibleitem.shp
+	dead:
+		Filename: invisibleitem.shp
+	muzzle:
+		Filename: gunfire2.shp
+		Tick: 80
+		Length: *
+	icon:
+		Filename: ts_nod_samsite_icon.shp
+		Offset: 0,0

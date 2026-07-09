@@ -1,0 +1,18 @@
+ts_nod_bansheefighter_husk:
+	Inherits: ^PlaneHusk
+	Inherits@Voxel: ^TSRenderVoxel
+	Tooltip:
+		Name: Banshee Fighter
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 168
+	RevealsShroud:
+		Range: 7c0
+		Type: GroundPosition
+	RenderSprites:
+		Image: ts_nod_bansheefighter
+	RenderVoxels:
+		Image: ts_nod_bansheefighter
+	-WithShadow:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
