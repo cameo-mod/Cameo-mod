@@ -1,0 +1,1020 @@
+NaxiRifleLaser:
+	Inherits: NaxiRifle
+	Inherits: ^RA2LaserWeapon
+	ReloadDelay: 60
+	Range: 4097
+	Report: vpriatta.wav
+	Projectile: Bullet
+		ContrailStartColor: ff2d2d
+		ContrailEndColor: f55105
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Air
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Air
+
+NaxiRifleLaserE:
+	Inherits: NaxiRifleLaser
+	Range: 5097
+	Burst: 2
+	BurstDelays: 3
+
+NaxiBeetleLaser:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^MediumMissile
+	Inherits: ^LaserWeapon
+	Range: 6448
+	ReloadDelay: 60
+	Burst: 2
+	BurstDelays: 4
+	Report: AWMinilaser.wav
+	ValidTargets: Ground, Water, Trees
+	Projectile: LaserZap
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+
+NaxiBeetleLaserAA:
+	Inherits: NaxiBeetleLaser
+	Range: 9672
+	ValidTargets: Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+LunarPanzerCannon:
+	Inherits: ^RA2MediumCannon
+	ReloadDelay: 60
+	Range: 5121
+	Report: vgriatta.wav, vgriattb.wav, vgriattc.wav
+	Projectile: Bullet
+		Speed: 512
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 5
+
+LunarPanzerCannonE:
+	Inherits: LunarPanzerCannon
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 6121
+	Burst: 2
+	BurstDelays: 3
+
+NaxiTank2Laser:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^MediumMissile
+	Inherits: ^LaserWeapon
+	Range: 6500
+	ReloadDelay: 52
+	Burst: 4
+	BurstDelays: 4
+	Report: AWMinilaser.wav
+	ValidTargets: Ground, Water, Trees
+	Projectile: LaserZap
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+
+NaxiTank2LaserAA:
+	Inherits: NaxiTank2Laser
+	Range: 9750
+	ValidTargets: Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+NaxiMP40Laser:
+	Inherits: NaxiMP40
+	Inherits: ^SmallArms
+	Inherits: ^RA2LaserWeapon
+	Report: vpriatta.wav
+	Range: 4384
+	ReloadDelay: 100
+	Burst: 5
+	BurstDelays: 5
+	Projectile: Bullet
+		ContrailStartColor: ff2d2d
+		ContrailEndColor: f55105
+		Width: 25
+	Warhead@Grenade: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+NaxiMP40LaserE:
+	Inherits: NaxiMP40Laser
+	Range: 5384
+	Burst: 10
+	BurstDelays: 3
+
+LunarNaxiJadgDestroyer:
+	Inherits: ^HeavyCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^RA2TankDestroyerCannon
+	ReloadDelay: 90
+	Range: 7379
+	Projectile: Bullet
+		Speed: 737
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 30000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 30000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 15
+
+LunarNaxiJadgDestroyerE:
+	Inherits: LunarNaxiJadgDestroyer
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 8379
+	Burst: 2
+	BurstDelays: 3
+
+LunarTigerCannon:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^RA2MediumCannon
+	ReloadDelay: 80
+	Report: trashcannon.wav
+	Range: 5105
+	Projectile: Bullet
+		Speed: 510
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+
+LunarTigerCannonE:
+	Inherits: LunarTigerCannon
+	Range: 6105
+	Burst: 2
+	BurstDelays: 3
+
+NaxHaenebuQuadCannon:
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^RA2FlakWeapon
+	ReloadDelay: 66
+	Range: 6666
+	Burst: 6
+	BurstDelays: 0
+	Report: nax_aa2.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: 3399FF
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 6000
+		Width: 50
+		Inaccuracy: 666
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+NaxHaenebuQuadCannonE:
+	Inherits: NaxHaenebuQuadCannon
+	Range: 7777
+	Burst: 7
+	Projectile: Bullet
+		ContrailStartColor: FF0000
+		Inaccuracy: 777
+
+DalekCannon:
+	Inherits: ^TeslaWeapon
+	Inherits: ^LaserWeapon
+	Inherits: ^RA2RailgunWeapon
+	ReloadDelay: 76
+	Range: 8060
+	Report: vrobatta.wav
+	ValidTargets: Ground, Water
+	Projectile: Railgun
+		BeamColor: 00EEFF88
+		BeamWidth: 128
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 100000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 50000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 50
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 100000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 50
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 100000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 50
+	Warhead@Scatter: FireShrapnel
+		Weapon: DalekCannonScatter
+		Amount: 3
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: Ground, Water
+	Warhead@Effect: CreateEffect
+		Explosions: blue_building
+		ImpactSounds: psahit00.aud
+		ExplosionPalette: effect
+
+DalekCannonE:
+	Inherits: DalekCannon
+	Range: 9060
+	Projectile: Railgun
+		BeamColor: 4488FFBB
+		BeamWidth: 192
+		Duration: 24
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 200000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 100000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 100
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 200000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 100
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 200000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 100
+	Warhead@Scatter: FireShrapnel
+		Weapon: DalekCannonScatterE
+		Amount: 6
+
+DalekCannonScatter:
+	Inherits: DalekCannon
+	Range: 4030
+	Report: tphfi201.wav, tgofi200.wav
+	-Report:
+	Projectile: LaserZap
+		Color: 00EEFF88
+		Width: 96
+		-HitAnim:
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 50000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 25000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 25
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 50000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 25
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 50000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 25
+	-Warhead@Scatter: FireShrapnel
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship, Trees
+
+DalekCannonScatterE:
+	Inherits: DalekCannonScatter
+	Range: 4530
+
+BlackHoleMaker:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 60
+	Range: 6414
+	Projectile: KKNDLaser
+		Duration: 12
+		Colors: ee000008
+		InnerLightness: 200
+		OuterLightness: 100
+		Radius: 2
+		Distortion: 150
+		DistortionAnimation: 150
+		SegmentLength: 350
+		Inaccuracy: 128
+	ValidTargets: Ground, Water, Air
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 60000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@1Actor: SpawnActor
+		Actors: hole_small.nax2
+		#OwnerType: InternalName
+		#InternalOwner: Creeps
+		Range: 5
+		Image: ra2cmin
+		Sequence: warpout
+		Palette: ra2effect
+		ValidTargets: Air, Ground, Water
+
+BlackHoleMakerE:
+	Inherits: BlackHoleMaker
+	Range: 7414
+	Burst: 2
+	BurstDelays: 3
+	Projectile: KKNDLaser
+		Color: FF8844
+
+NaxiBlackholeShoot:
+	Inherits: ^HeavyCannon
+	Range: 5000
+	ReloadDelay: 5
+	Projectile: InstantHit
+	Warhead@BackEffect: BackFireShrapnel
+		Weapon: BlackHoleSuck
+		ImpactActors: false
+		AirThreshold: 10000
+		ValidTargets: Air, Ground, Water
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1
+
+BlackHoleSuck:
+	Inherits: NanoReturn
+	ValidTargets: BlackHole
+	-Projectile: Bullet
+	Projectile: Missile
+		Inaccuracy: 512
+		Image: ra2debris
+		Sequences: small1, small2, small3, small4, small5, small6, small7, small8, small9
+		Palette: ra2effect
+		Speed: 60
+	Warhead@Heal: SpreadDamage
+		AffectsParent: true
+		Spread: 1000
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Damage: -1000
+		ValidRelationships: Ally
+		ValidTargets: BlackHole
+	Warhead@Effect: CreateEffect
+		ImpactSounds: nax_bh_slurp-01.wav, nax_bh_slurp-02.wav, nax_bh_slurp-03.wav
+
+NaxCorrosionRocket:
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^RA2MediumMissile
+	ReloadDelay: 50
+	Burst: 2
+	BurstDelays: 2
+	Range: 8000
+	MinRange: 1600
+	Report: nax_corrokit.wav
+	SoundVolume: 2.0
+	ValidTargets: Ground, Water, Air, Trees
+	Projectile: Missile
+		Inaccuracy: 600
+		Speed: 600
+		Image: red_dragon
+		TrailImage: red_smokey
+		ContrailColor: e60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 1000
+		ValidRelationships: Neutral, Enemy
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 2000
+		ValidRelationships: Neutral, Enemy
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Trees
+		Damage: 1
+		ValidRelationships: Neutral, Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_ex
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+		ValidTargets: Ground, Ship, Trees
+	Warhead@Condition: GrantExternalCondition
+		Range: 2000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: NaxCorrosionExpand1
+		Amount: 4
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: !corroded
+
+NaxCorrosionExpand1:
+	ReloadDelay: 5
+	Range: 3000
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: NaxCorrosionExpand2
+		Amount: 2
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: !corroded
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_frag
+		ExplosionPalette: ra2effect
+		ImpactSounds: nax_corrosion.wav
+		ValidTargets: corrodible
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+
+NaxCorrosionExpand2:
+	ReloadDelay: 5
+	Range: 3000
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+	Warhead@FireShrapnel: FireShrapnel
+		Weapon: NaxCorrosionExpand3
+		Amount: 1
+		AimChance: 50
+		AimTargetStances: Enemy, Neutral
+		ValidTargets: !corroded
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_frag
+		ExplosionPalette: ra2effect
+		ImpactSounds: nax_corrosion.wav
+		ValidTargets: corrodible
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+
+NaxCorrosionExpand3:
+	ReloadDelay: 5
+	Range: 3000
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+	Warhead@Effect: CreateEffect
+		Explosions: nax_corr_frag
+		ExplosionPalette: ra2effect
+		ImpactSounds: nax_corrosion.wav
+		ValidTargets: corrodible
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+
+NaxCorrosionRocketTrooper:
+	Inherits: NaxCorrosionRocket
+	ReloadDelay: 50
+	Burst: 1
+	Range: 6055
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 2
+
+NaxCorrosionBeast:
+	Inherits: NaxCorrosionRocket
+	Range: 7984
+	ReloadDelay: 34
+	Burst: 8
+	BurstDelays: 2
+	Projectile: Missile
+		Inaccuracy: 400
+
+NaxCorrosionBeastE:
+	Inherits: NaxCorrosionBeast
+	Range: 8984
+	Burst: 16
+
+NaxCrystalLeech:
+	Inherits: ^TeslaWeapon
+	ReloadDelay: 90
+	Range: 7420
+	Burst: 10
+	BurstDelays: 1
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 1000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+NaxCrystalLeechE:
+	Inherits: ^TeslaChargedWeapon
+	Range: 8420
+	Burst: 20
+	BurstDelays: 1
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		Damage: 1000
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+NaxDieGlocke:
+	Inherits: ^HeavyChemicalWeapon
+	Range: 2500
+	MinRange: 500
+	ReloadDelay: 60
+	ValidTargets: Ground, Water, Air
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone75Percent, TriggerProne, RA2VirusDeath
+	Warhead@Effect: CreateEffect
+		Explosions: demotruck_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: vdemdiea.wav
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 25
+		Duration: 512
+		Speed: 8, 32
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+
+ÜbermenschLaser:
+	Inherits: NaxiAlienPistol
+	Range: 5801
+	ReloadDelay: 30
+	Burst: 2
+	BurstDelays: 3
+	ValidTargets: Ground, Water, Trees
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+
+ÜbermenschLaserE:
+	Inherits: ÜbermenschLaser
+	Range: 6801
+	Burst: 4
+	BurstDelays: 3
+
+NaxiCowDrop:
+	Inherits: ^HeavyBomb
+	ReloadDelay: 50
+	Range: 2000
+	Report: vflolo5a.wav, vflolo5b.wav
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 0, 0, -50
+		Acceleration: 0, 0, -10
+		Image: nax_cowprojectile
+		Palette: playerra2
+		IsPlayerPalette: true
+		Shadow: True
+	Warhead@HeavyBomb: SpreadDamage
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Ship, Trees
+		Damage: 10000
+		Spread: 1000
+	Warhead@HeavyBombFriendlyFire: SpreadDamage
+		ValidRelationships: Ally
+		Damage: 1000
+		Spread: 500
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidRelationships: Neutral, Enemy
+		Damage: 10
+		Spread: 1000
+	Warhead@EffectWater: CreateEffect
+		Explosions: large_splash
+		ImpactSounds: gexpwasa.wav
+		ValidTargets: Water, Underwater
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_clsn
+		ExplosionPalette: ra2effect
+		ImpactSounds: gexp14a.wav
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 3
+		Duration: 512
+		Speed: 8, 32
+		TurnRate: 10
+		Image: ra2txgasg
+		Sequences: idle
+		Palette: ra2effect
+		Weapon: RA2Cloud
+		InvalidTargets: Water
+
+Lunar_Green105mm_elite:
+	Inherits: Lunar_Green105mm
+	Range: 6000
+	Burst: 2
+	BurstDelays: 5
+	Report: laser_cannon2_2.wav
+
+Lunar_GreenTigerCannon:
+	Inherits: ^TeslaWeapon
+	Inherits@Cannon: LunarTigerCannon
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenTigerCannonE:
+	Inherits: ^TeslaWeapon
+	Inherits@Cannon: LunarTigerCannonE
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 2000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenJadgDestroyer:
+	Inherits: ^TeslaWeapon
+	Inherits@Cannon: LunarNaxiJadgDestroyer
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 15000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenJadgDestroyerE:
+	Inherits: ^TeslaWeapon
+	Inherits@Cannon: LunarNaxiJadgDestroyerE
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 15000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Report: laser_cannon3_4.wav
+
+Lunar_GreenGrilleArty:
+	Inherits: ^TeslaWeapon
+	Inherits@Cannon: NaxGrilleArty
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 8000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Report: laser_cannon3_2.wav
+
+Lunar_GreenGrilleArtyE:
+	Inherits: ^TeslaWeapon
+	Inherits@Cannon: NaxGrilleArtyE
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 8000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Report: laser_cannon3_2.wav
+
+Lunar_GreenSturmArty:
+	Inherits: ^TeslaWeapon
+	Inherits@Cannon: NaxSturmArty
+	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
+	Report: laser_cannon3_4.wav
+
+Lunar_YellowBeetleLaser:
+	Inherits: NaxiBeetleLaser
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowBeetleLaserAA:
+	Inherits: NaxiBeetleLaserAA
+	Burst: 4
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowRifleLaser:
+	Inherits: NaxiRifleLaser
+	Burst: 2
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowRifleLaserE:
+	Inherits: NaxiRifleLaserE
+	Burst: 4
+	BurstDelays: 3
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowLaserT:
+	Inherits: NaxLaserT
+	Burst: 2
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowMP40Laser:
+	Inherits: NaxiMP40Laser
+	Burst: 10
+	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: f3e021AA
+		ContrailEndColor: f3e021AA
+		Width: 25
+
+Lunar_YellowMP40LaserE:
+	Inherits: NaxiMP40LaserE
+	Burst: 20
+	BurstDelays: 3
+
+Lunar_YellowTank2Laser:
+	Inherits: NaxiTank2Laser
+	Burst: 8
+	Projectile: LaserZap
+		Color: f3e021AA
+
+Lunar_YellowTank2LaserAA:
+	Inherits: NaxiTank2LaserAA
+	Burst: 8
+	Projectile: LaserZap
+		Color: f3e021AA
+
+####################################################################################################
+#		Red Alert 2 Syndicate
+####################################################################################################
+
+NaxisBradleyTarget:
+	ValidTargets: Ground, Air, Water
+	ReloadDelay: 135
+	Burst: 4
+	BurstDelays: 10
+	Range: 17350
+	MinRange: 3470
+	Projectile: InstantHit
+		Inaccuracy: 1735
+
+Naxis_Jagerline:
+	Inherits: ^FlakWeapon
+	Inherits: ^Grenade
+	Inherits: ^HeavyAAWeapon
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Trees
+	ReloadDelay: 60
+	Range: 7825
+	MinRange: 1565
+	Burst: 2
+	BurstDelays: 4
+	TargetActorCenter: true
+	Report: rocket1.aud
+	Projectile: Missile
+		Blockable: false
+		Image: DRAGON
+		Shadow: true
+		TrailImage: smokey
+		Inaccuracy: 400
+		LaunchAngle: 125
+		Speed: 800
+		RangeLimit: 31300
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 8000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4
+	Warhead@Effect: CreateEffect
+		Explosions: med_frag
+		ImpactSounds: kaboom25.aud
+		ValidTargets: Ground, Ship, Trees
+
+Naxis_Jagerline_AA:
+	Inherits: Naxis_Jagerline
+	ValidTargets: Air
+	Range: 11740
+	MinRange: 2348

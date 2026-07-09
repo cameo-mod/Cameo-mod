@@ -1,0 +1,1207 @@
+NaxBrummbarArty:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^RA2MediumCannon
+	ReloadDelay: 140
+	Range: 14000
+	MinRange: 2800
+	Report: vdesatta.wav, vdesattb.wav
+	Projectile: Bullet
+		LaunchAngle: 140
+		Inaccuracy: 1400
+		Speed: 280
+		ContrailLength: 28
+		ContrailStartWidth: 70
+		ContrailEndWidth: 14
+		ContrailStartColor: AAAA4488
+		ContrailEndColor: 22222222
+		TrailImage: black_smokey
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 14000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 14000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 14000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 7000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 14000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 7
+
+NaxBrummbarArtyE:
+	Inherits: NaxBrummbarArty
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 15000
+	Burst: 2
+	BurstDelays: 3
+
+NaxiWW2KübelwagenMachinegun:
+	Inherits: ^RA2SmallArms
+	Inherits: ^RA2Chaingun
+	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	ReloadDelay: 80
+	Burst: 6
+	BurstDelays: 4
+	Range: 5757
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 15
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+		Inaccuracy: 400
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Air
+
+NaxiWW2Machinegun:
+	Inherits: ^RA2SmallArms
+	Inherits: ^RA2Chaingun
+	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	ReloadDelay: 60
+	Burst: 6
+	BurstDelays: 4
+	Range: 5570
+	ValidTargets: Ground, Water, Trees
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 15
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+		Inaccuracy: 400
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Trees
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Trees
+
+NaxiWW2MachinegunAA:
+	Inherits: NaxiWW2Machinegun
+	Range: 8355
+	ValidTargets: Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+NaxiWW2MachinegunSmall:
+	Inherits: NaxiWW2Machinegun
+	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	ReloadDelay: 60
+	Burst: 3
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees
+
+NaxiWW2MachinegunSmallAA:
+	Inherits: NaxiWW2MachinegunSmall
+	Range: 8355
+	ValidTargets: Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+NaxiWW2MachinegunTop:
+	Inherits: NaxiWW2Machinegun
+	Range: 7555
+	Report: nax_mgun3.wav
+
+NaxiWW2MachinegunTopAA:
+	Inherits: NaxiWW2Machinegun
+	Range: 7555
+	Report: nax_mgun3.wav
+	ValidTargets: Air
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+NaxiWW2Machinegunner:
+	Inherits: NaxiWW2Machinegun
+	Range: 8970
+	ReloadDelay: 90
+	Burst: 10
+	BurstDelays: 5
+	Report: nax_mgun3.wav
+
+NaxiWW2MachinegunnerElite:
+	Inherits: NaxiWW2Machinegunner
+	Range: 9970
+	Report: nax_mgun3.wav
+	Burst: 20
+	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: E60000
+		ContrailEndColor: E60000
+
+NaxiWW2MachinegunnerTargeting:
+	Inherits: ^deploytargeting
+	Range: 8970
+
+NaxiRifleE:
+	Inherits: NaxiRifle
+	Range: 6621
+	Burst: 2
+	BurstDelays: 3
+	Report: nax_rifle4.wav , nax_rifle5.wav
+	Projectile: Bullet
+		ContrailStartColor: FFAA55
+
+NaxiRifleT:
+	Inherits: ^SmallArms
+	ReloadDelay: 50
+	Range: 8100
+	Burst: 2
+	BurstDelays: 5
+	Report: nax_rifle4.wav , nax_rifle5.wav
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 6666
+		Width: 55
+	Warhead@SmallArms: SpreadDamage
+		Damage: 32000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 16
+
+NaxiRifleCons:
+	Inherits: ^SmallArms
+	ReloadDelay: 100
+	Range: 5501
+	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav
+	ValidTargets: Ground, Water, Air
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+
+NaxiRifleConsE:
+	Inherits: NaxiRifleCons
+	Range: 6501
+	Burst: 2
+	BurstDelays: 3
+	Report: nax_rifle4.wav , nax_rifle5.wav
+	Projectile: Bullet
+		ContrailStartColor: FFAA55
+
+LunarNaxiDroneLaser:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	Inherits: ^MediumMissile
+	Inherits: ^LaserWeapon
+	Range: 5760
+	ReloadDelay: 100
+	Burst: 4
+	BurstDelays: 3
+	Report: AWMinilaser.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: LaserZap
+		Width: 25
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 2000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+LunarNaxiDroneMissile:
+	Inherits: ^HeavyMissile
+	Inherits: ^HeavyAAWeapon
+	Inherits: ^MediumMissile
+	Inherits: ^FlakWeapon
+	Inherits: ^ArrowWeapon
+	Inherits: ^RA2LightMissile
+	Range: 5760
+	ReloadDelay: 100
+	Burst: 2
+	BurstDelays: 9
+	Report: vifvatta.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Missile
+		Speed: 800
+		Arm: 2
+		Inaccuracy: 400
+		RangeLimit: 16000
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MaximumLaunchSpeed: 400
+		MinimumLaunchSpeed: 400
+		Acceleration: 10
+		ContrailStartColor: EEEE00
+		ContrailEndColor: FFFFFF
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ArrowWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+		DamageTypes: Prone75Percent, TriggerProne, ExplosionDeath
+
+NaxiMP40E:
+	Inherits: NaxiMP40
+	Range: 5000
+	Burst: 20
+	BurstDelays: 3
+	Projectile: Bullet
+		ContrailStartColor: E60000
+		ContrailEndColor: E60000
+
+NaxiFlamerTroop:
+	Inherits: AsianFlamerTurret
+	Range: 4830
+	ReloadDelay: 60
+	Burst: 3
+	BurstDelays: 3
+
+NaxiFlamerTroopE:
+	Inherits: NaxiFlamerTroop
+	Range: 5830
+	Burst: 6
+	BurstDelays: 3
+
+NaxiFlamerTroopExplode:
+	Inherits: AsianFlamerTurret
+	Warhead@LightFlameWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@PhysicalStateLightFlameWeapon: ApplyPhysicalState
+		Amount: 6000
+	Warhead@PhysicalStateLightFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 3000
+
+NaxiSniper:
+	Inherits: ^SniperWeapon
+	ReloadDelay: 120
+	Range: 8281
+	Warhead@SniperWeapon: SpreadDamage
+		Damage: 24000
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		Damage: 24000
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+
+NaxiSniperE:
+	Inherits: NaxiSniper
+	Range: 9281
+	Burst: 2
+	BurstDelays: 3
+
+NaxiShrek:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^Grenade
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^RA2MediumMissile
+	ReloadDelay: 124
+	Range: 6805
+	ValidTargets: Ground, Water, Trees
+	Projectile: Missile
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		Speed: 680
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MinimumLaunchSpeed: 125
+		MaximumLaunchSpeed: 250
+		Acceleration: 10
+		ContrailEndColor: E60000
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@Grenade: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 8000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 4
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+
+NaxiShrekE:
+	Inherits: NaxiShrek
+	Range: 7805
+	Burst: 2
+	BurstDelays: 3
+	Projectile: Missile
+		Image: red_dragon
+		Shadow: true
+		TrailImage: red_smokey
+		ContrailColor: E60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+
+NaxiShrekCons:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^Grenade
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^RA2MediumMissile
+	ReloadDelay: 135
+	Range: 5512
+	ValidTargets: Ground, Water, Trees
+	Projectile: Missile
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		Speed: 680
+		MinimumLaunchAngle: 25
+		MaximumLaunchAngle: 125
+		MinimumLaunchSpeed: 125
+		MaximumLaunchSpeed: 250
+		Acceleration: 10
+		ContrailEndColor: E60000
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@Grenade: SpreadDamage
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 3000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 6000
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 3
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath
+
+NaxiShrekConsE:
+	Inherits: NaxiShrekCons
+	Range: 6512
+	Burst: 2
+	BurstDelays: 3
+	Projectile: Missile
+		Image: red_dragon
+		Shadow: true
+		TrailImage: red_smokey
+		ContrailColor: E60000
+		ContrailStartColor: E60000
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+
+NaxiHetzerDestroyer:
+	Inherits: ^MediumCannon
+	Inherits: ^RA2TankDestroyerCannon
+	ReloadDelay: 80
+	Range: 7132
+	Projectile: Bullet
+		Speed: 713
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 20000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 10
+
+NaxiHetzerDestroyer_elite:
+	Inherits: NaxiHetzerDestroyer
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 6000
+	Burst: 2
+	BurstDelays: 3
+
+NaxiJadgDestroyer:
+	Inherits: ^HeavyCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^RA2TankDestroyerCannon
+	ReloadDelay: 90
+	Range: 7396
+	Projectile: Bullet
+		Speed: 739
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 20000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 20000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 10
+
+NaxiJadgDestroyer_elite:
+	Inherits: NaxiJadgDestroyer
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 8396
+	Burst: 2
+	BurstDelays: 3
+
+NaxiAntiTankCannon:
+	Inherits: ^MediumCannon
+	Inherits: ^RA2TankDestroyerCannon
+	ReloadDelay: 75
+	Range: 7361
+	Report: nax_hotwizer.wav
+	Projectile: Bullet
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 333
+		ContrailLength: 33
+		Speed: 3333
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 14000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 14000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 7
+
+NaxiAntiTankCannonE:
+	Inherits: NaxiAntiTankCannon
+	Range: 8361
+	Burst: 2
+	BurstDelays: 3
+
+NaxMausCannon:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^RA2MediumCannon
+	ReloadDelay: 99
+	Report: aa_bgart.wav
+	Range: 6666
+	MinRange: 1333
+	Projectile: Bullet
+		Blockable: false
+		Speed: 666
+		ContrailLength: 66
+		LaunchAngle: 33
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailStartColor: DDCC99
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailDelay: 0
+		ContrailStartWidth: 111
+		ContrailEndWidth: 22
+		TrailInterval: 1
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 10000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 5
+
+NaxMausCannon_elite:
+	Inherits: NaxMausCannon
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 7777
+	Burst: 2
+	BurstDelays: 3
+
+NaxRatteCannon:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^RA2MediumCannon
+	ReloadDelay: 145
+	Report: aa_bgart.wav
+	Range: 6110
+	MinRange: 1222
+	Burst: 2
+	BurstDelays: 10
+	Projectile: Bullet
+		Blockable: false
+		Speed: 500
+		ContrailLength: 50
+		LaunchAngle: 50
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+		ContrailStartColor: DDCC99
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailDelay: 0
+		ContrailStartWidth: 100
+		ContrailEndWidth: 20
+		TrailInterval: 1
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 25
+
+NaxRatteCannon_elite:
+	Inherits: NaxRatteCannon
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 7110
+	Burst: 4
+	BurstDelays: 3
+
+NaxQuadCannon:
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^Chaingun
+	Inherits: ^RA2FlakWeapon
+	ValidTargets: Ground, Water, Trees
+	ReloadDelay: 47
+	Burst: 6
+	BurstDelays: 4
+	Range: 5368
+	Report: nax_aa1.wav
+	Projectile: Bullet
+		-LaunchAngle:
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 1
+
+NaxQuadCannonE:
+	Inherits: NaxQuadCannon
+	Range: 6368
+	Burst: 8
+	BurstDelays: 3
+
+NaxQuadCannonAA:
+	Inherits: NaxQuadCannon
+	ValidTargets: Air
+	Range: 8052
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: ra2_flak_puff_AA
+		ExplosionPalette: ra2effect
+		ValidTargets: Air
+
+NaxQuadCannonAAE:
+	Inherits: NaxQuadCannonAA
+	Range: 9052
+	Burst: 8
+	BurstDelays: 3
+
+SkyMageCannon:
+	Inherits: NaxQuadCannon
+	Range: 5000
+	ReloadDelay: 26
+	Burst: 6
+	BurstDelays: 4
+
+SkyMageCannonE:
+	Inherits: SkyMageCannon
+	Range: 6000
+	Burst: 8
+	BurstDelays: 3
+
+SkyMageCannonAA:
+	Inherits: NaxQuadCannonAA
+	Range: 7500
+	ReloadDelay: 26
+	Burst: 6
+	BurstDelays: 4
+
+SkyMageCannonAAE:
+	Inherits: SkyMageCannonAA
+	Range: 8500
+	Burst: 8
+	BurstDelays: 3
+
+NaxQuadCannonTargeting:
+	Inherits: ^aadeploytargeting
+	Range: 8888
+
+PortableFlak:
+	Inherits: NaxQuadCannonAA
+	Range: 8888
+
+PortableFlakE:
+	Inherits: NaxQuadCannonAAE
+	Range: 9999
+
+NaxFlakAG:
+	Inherits: NaxQuadCannon
+	ReloadDelay: 88
+	Range: 8800
+	Burst: 8
+	BurstDelays: 0
+	Report: nax_aa2.wav
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 222
+		ContrailLength: 22
+		Speed: 4400
+		Width: 44
+		Inaccuracy: 888
+
+NaxFlakAA:
+	Inherits: NaxQuadCannonAA
+	ReloadDelay: 88
+	Range: 13200
+	Burst: 8
+	BurstDelays: 0
+	Report: nax_aa2.wav
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: 000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 222
+		ContrailLength: 22
+		Speed: 4400
+		Width: 44
+		Inaccuracy: 888
+
+NaxPlanegun:
+	Inherits: ^Grenade
+	Inherits: ^HeavyCannon
+	Inherits: ^RA2Chaingun
+	ReloadDelay: 127
+	Burst: 10
+	BurstDelays: 2
+	Range: 6090
+	Report: bghmga.wav, bghmgb.wav, bghmgc.wav, bghmgd.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FF9933
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 15
+		ContrailLength: 8
+		Speed: 10000
+		Width: 100
+		Inaccuracy: 600
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+
+NaxPlaneRockets:
+	Inherits: ^MediumMissile
+	Inherits: ^D2KRocket
+	ReloadDelay: 100
+	Burst: 2
+	BurstDelays: 9
+	Range: 6090
+	Report: missile7.aud
+	Projectile: Missile
+		Acceleration: 5
+		LaunchAngle: 128
+		Image: d2k_RPG
+		Palette: d2keffect
+		TrailImage: bazooka_trail2
+		ContrailLength: 6
+		ContrailStartColor: 996633
+		TrailInterval: 1
+		TrailDelay: 1
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 10000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 5
+
+NaxiInterceptorGun:
+	Inherits: ^HeavyCannon
+	Inherits: ^FlakWeapon
+	Inherits: ^Chaingun
+	Inherits: ^SmallArms
+	ReloadDelay: 100
+	Burst: 4
+	BurstDelays: 3
+	Range: 6090
+	Report: nax_rifle1.wav, nax_rifle2.wav, nax_rifle3.wav, nax_rifle4.wav , nax_rifle5.wav
+	ValidTargets: Ground, Water, Air
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailStartColor: FFAA55
+		ContrailEndColor: FFFFFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailWidth: 200
+		ContrailLength: 20
+		Speed: 10000
+		Width: 50
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Chaingun: SpreadDamage
+		Damage: 6000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@SmallArms: SpreadDamage
+		Damage: 6000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 3
+
+NaxShoeRocket:
+	Inherits: ^HeavyBomb
+	Inherits: ^RA2Grenade
+	Inherits: ^RA2MediumMissile
+	Report: vaegatta.wav, vaegattb.wav
+	ReloadDelay: 250
+	Range: 12000
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Ship, Submarine
+	-Projectile: Missile
+	Projectile: NukeLaunch
+		MissileWeapon: NaxShoeRocket
+		MissileImage: latin_12_miss
+		MissilePalette: playerra2
+		IsPlayerPalette: true
+		FlightDelay: 75
+		TrailImage: ra2_smokey
+		TrailPalette: ra2effect
+		TrailSequences: idle
+		TrailDelay: 0
+		TrailInterval: 1
+		Inaccuracy: 15000
+	-Warhead@Effect1:
+	-Warhead@Effect2:
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_terrorist_explosion
+		ExplosionPalette: ra2effect
+		ImpactSounds: snukexpl.wav
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 8000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 4
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 8000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 4000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 8000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air, Water, Ship, Submarine
+		Damage: 4
+
+NaxTigerCannon:
+	Inherits: ^RA2MediumCannon
+	Range: 5000
+	ReloadDelay: 50
+	Projectile: Bullet
+		Speed: 500
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 5
+
+NaxTigerCannon_elite:
+	Inherits: NaxTigerCannon
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 6000
+	Burst: 2
+	BurstDelays: 3
+
+KingNaxTigerCannon:
+	Inherits: ^RA2MediumCannon
+	Range: 5000
+	ReloadDelay: 50
+	Projectile: Bullet
+		Speed: 500
+	Report: vrhiatta.wav, vrhiattb.wav, vrhiattc.wav, vrhiattd.wav
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 10
+
+KingNaxTigerCannon_elite:
+	Inherits: KingNaxTigerCannon
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 6000
+	Burst: 2
+	BurstDelays: 3
+
+Nax120mmAssault:
+	Inherits: RA2120mm
+	Range: 5200
+	ReloadDelay: 28
+
+Nax120mmAssault_elite:
+	Inherits: Nax120mmAssault
+	Inherits@Elite: ^RA2EliteEffects
+	Range: 6200
+	Burst: 2
+	BurstDelays: 3
+
+NaxiAlienPistolE:
+	Inherits: NaxiAlienPistol
+	Range: 6136
+	Burst: 4
+	BurstDelays: 3
+
+NaxiMissileUboat:
+	Inherits: ^Grenade
+	Inherits: ^HeavyBomb
+	Inherits: ^RA2MediumMissile
+	ReloadDelay: 125
+	Burst: 2
+	BurstDelays: 6
+	Range: 15000
+	Report: vbleatta.wav, vbleattb.wav
+	ValidTargets: Ground, Water, Air
+	TargetActorCenter: true
+	Projectile: Missile
+		Speed: 400
+		Arm: 2
+		Inaccuracy: 2000
+		RangeLimit: 25000
+		Image: MISSILE
+		TrailImage: large_trail
+		MinimumLaunchAngle: 200
+		MaximumLaunchAngle: 200
+		MaximumLaunchSpeed: 200
+		MinimumLaunchSpeed: 200
+		Acceleration: 10
+	Warhead@Grenade: SpreadDamage
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 8000
+		ValidTargets: Ground, Water, Air
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 8
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 8
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 16000
+		ValidTargets: Ground, Water, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 8
+		ValidTargets: Ground, Water, Air
+
+NaxiSlaveWhip:
+	Range: 2500
+	ReloadDelay: 50
+	ValidTargets: SlaveFaster
+	Projectile: InstantHit
+	Report: nax_slavewhip.wav
+	Warhead@Condition: GrantExternalCondition
+		Range: 1000
+		Condition: SlaveFaster
+		Duration: 300
+		ValidTargets: SlaveFaster
+		ValidRelationships: Ally
+
+NaxisDonnerschlagTarget:
+	ValidTargets: Ground, Air, Water
+	ReloadDelay: 15
+	Range: 20130
+	MinRange: 4026
+	Projectile: InstantHit
+		Inaccuracy: 2013
+
+NaxisDonnerschlagTargetVisualLaser:
+	ReloadDelay: 3
+	Range: 20130
+	MinRange: 4026
+	#Report: 2100rotlsr.wav
+	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
+	TargetActorCenter: true
+	ValidTargets: Ground, Water
+	Projectile: LaserZap
+		Duration: 6
+		Width: 0c64
+		Color: FFBB8844
+	Warhead@Validation: TargetDamage
+
+NaxisSarubianTarget:
+	ValidTargets: Ground, Water
+	ReloadDelay: 40
+	Range: 7800
+	MinRange: 1560
+	Projectile: InstantHit
+		Inaccuracy: 1000

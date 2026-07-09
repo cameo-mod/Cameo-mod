@@ -1,0 +1,1722 @@
+conyard.nax:
+	Defaults:
+		Offset: -8,8
+	idle:
+		Filename: nax_conyard.shp
+		Start: 32
+	make:
+		Filename: nax_conyard.shp
+		Length: 32
+	build:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: nax_conyard.shp
+		Start: 63
+	idle-fans:
+		Filename: invisibleitem.shp
+	damaged-idle-fans:
+		Filename: invisibleitem.shp
+	crane-overlay:
+		Filename: nax_conyard.shp
+		Start: 32
+		Length: 30
+	damaged-crane-overlay:
+		Filename: nax_conyard.shp
+		Start: 63
+		Length: 30
+	dead:
+		Filename: nax_conyard.shp
+		Start: 63
+	icon:
+		Filename: nax_conyard_icon.png
+		Offset: 0,0
+
+weap.nax:
+	Defaults:
+		Offset: -16,16
+	idle:
+		Filename: nax_weap.shp
+		Length: 60
+		ZOffset: 1024
+	damaged-idle:
+		Filename: nax_weap.shp
+		Start: 60
+		Length: 60
+		ZOffset: 1024
+	build-ramp:
+		Filename: invisibleitem.shp
+	damaged-build-ramp:
+		Filename: invisibleitem.shp
+	build-top:
+		Filename: nax_weap.shp
+		Length: 60
+		ZOffset: 1024
+	damaged-build-top:
+		Filename: nax_weap.shp
+		Start: 60
+		Length: 60
+		ZOffset: 1024
+	build-door:
+		Filename: invisibleitem.shp
+	damaged-build-door:
+		Filename: invisibleitem.shp
+	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
+	build-air-open:
+		Filename: invisibleitem.shp
+	damaged-air-open:
+		Filename: invisibleitem.shp
+	build-air-inside:
+		Filename: invisibleitem.shp
+	damaged-air-inside:
+		Filename: invisibleitem.shp
+	bib:
+		Filename: nax_weap_bottom.shp
+		ZOffset: -1024
+	damaged-bib:
+		Filename: nax_weap_bottom.shp
+		ZOffset: -1024
+	idle-flag:
+		Filename: invisibleitem.shp
+	damaged-idle-flag:
+		Filename: invisibleitem.shp
+	overlay-fan:
+		Filename: invisibleitem.shp
+	make:
+		Filename: nax_weap_mk.shp
+		Length: 56
+	dead:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: nax_weap_icon.png
+		Offset: 0,0
+
+naval.nax:
+	Defaults:
+		Offset: 0,-12
+	idle:
+		Filename: nax_naval.shp
+		Start: 33
+	damaged-idle:
+		Filename: nax_naval.shp
+		Start: 33
+	idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	damaged-idle-waves:
+		Filename: ra2_ngyard_c.shp
+		Start: 30
+		Length: 15
+		ShadowStart: 30
+		Tick: 200
+	repair:
+		Filename: nax_naval.shp
+		Length: 15
+		Start: 33
+	damaged-repair:
+		Filename: nax_naval.shp
+		Length: 15
+		Start: 33
+	make:
+		Filename: nax_naval.shp
+		Length: 32
+	dead:
+		Filename: nax_naval.shp
+		Start: 33
+	icon:
+		Filename: ra2nayardicon.shp
+		Offset: 0,0
+
+powr.nax:
+	Defaults:
+		Offset: 0,-2
+	idle:
+		Filename: nax_powr.shp
+		Start: 33
+	damaged-idle:
+		Filename: nax_powr.shp
+		Start: 33
+	make:
+		Filename: nax_powr.shp
+		Length: 32
+	dead:
+		Filename: nax_powr.shp
+		Start: 33
+	icon:
+		Filename: nax_power_icon.png
+		Offset: 0,0
+
+barr.nax:
+	Defaults:
+		Offset: -16,20
+	idle:
+		Filename: nax_barr.shp
+		Start: 33
+	damaged-idle:
+		Filename: nax_barr.shp
+		Start: 33
+	dead:
+		Filename: nax_barr.shp
+		Start: 33
+	make:
+		Filename: nax_barr.shp
+		Length: 32
+	icon:
+		Filename: nax_barr_icon.png
+		Offset: 0,0
+
+refin.nax:
+	Defaults:
+		Offset: -1,-6
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	make:
+		Filename: nax_refin.shp
+		Length: 32
+	idle-bib:
+		Filename: nax_refin.shp
+		Start: 33
+	damaged-idle-bib:
+		Filename: nax_refin.shp
+		Start: 64
+	dead:
+		Filename: nax_refin.shp
+		Start: 64
+	resources:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: nax_refin_icon.png
+		Offset: 0,0
+
+radar.nax:
+	Defaults:
+		Offset: 6,12
+	idle:
+		Filename: nax_radar.shp
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Filename: nax_radar.shp
+		Start: 32
+		Length: 16
+	make:
+		Filename: nax_radar.shp
+		Length: 16
+	dead:
+		Filename: nax_radar.shp
+		Start: 32
+	icon:
+		Filename: nax_radar_icon.png
+		Offset: 0,0
+
+airfield.nax:
+	Defaults:
+		Offset: 0, 24
+	idle:
+		Filename: nax_airfield.shp
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Filename: nax_airfield.shp
+		Start: 32
+		Length: 16
+	make:
+		Filename: nax_airfield.shp
+		Length: 16
+	dead:
+		Filename: nax_airfield.shp
+		Start: 32
+	icon:
+		Filename: nax_airfield_icon.png
+		Offset: 0,0
+
+tech.nax:
+	Defaults:
+		Offset: 0, 0
+	idle:
+		Filename: nax_tech.shp
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Filename: nax_tech.shp
+		Start: 32
+		Length: 16
+	make:
+		Filename: nax_tech.shp
+		Length: 16
+	dead:
+		Filename: nax_tech.shp
+		Start: 32
+	icon:
+		Filename: nax_tech_icon.png
+		Offset: 0,0
+
+tek.nax:
+	Defaults:
+		Offset: -2,24
+	idle:
+		Filename: nax_tek.shp
+		Start: 32
+		Length: 16
+	damaged-idle:
+		Filename: nax_tek.shp
+		Start: 48
+		Length: 16
+	make:
+		Filename: nax_tek.shp
+		Length: 32
+	dead:
+		Filename: nax_tek.shp
+		Start: 32
+	icon:
+		Filename: nax_acade_icon.png
+		Offset: 0,0
+
+beer.nax:
+	Defaults:
+		Offset: 0,-2
+	idle:
+		Filename: nax_beer.shp
+		Start: 33
+	damaged-idle:
+		Filename: nax_beer.shp
+		Start: 33
+	make:
+		Filename: nax_beer.shp
+		Length: 32
+	dead:
+		Filename: nax_beer.shp
+		Start: 33
+	icon:
+		Filename: nax_beer_icon.png
+		Offset: 0,0
+
+sausage.nax:
+	Defaults:
+		Offset: 0,-2
+	idle:
+		Filename: nax_sausage.shp
+		Start: 32
+		Length: 32
+	damaged-idle:
+		Filename: nax_sausage.shp
+		Start: 32
+		Length: 32
+	make:
+		Filename: nax_sausage.shp
+		Length: 32
+	dead:
+		Filename: nax_sausage.shp
+		Start: 33
+	icon:
+		Filename: nax_sausage_icon.png
+		Offset: 0,0
+
+rocket.nax:
+	Defaults:
+		Offset: 0,-10
+		Filename: nax_rocket.shp
+	idle:
+		Start: 16
+	damaged-idle:
+		Start: 16
+	bib:
+		Start: 16
+	damaged-bib:
+		Start: 16
+	critical-idle:
+		Start: 16
+	up:
+		Filename: invisibleitem.shp
+	active:
+		Start: 32
+		Length: 96
+	make:
+		Length: 16
+	dead:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: ra2nuksiloicon.shp
+		Offset: 0,0
+
+twr.nax:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,2
+	idle:
+		Filename: nax_twr.shp
+		Length: 16
+		Start: 16
+	damaged-idle:
+		Filename: nax_twr.shp
+		Length: 16
+		Start: 32
+	critical-idle:
+		Filename: invisibleitem.shp
+	make:
+		Filename: nax_twr.shp
+		Length: 16
+	dead:
+		Filename: invisibleitem.shp
+	turret:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: nax_twr_icon.png
+		Offset: 0,0
+
+flak88.nax:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Offset: 0,-8
+		Scale: 0.8
+	idle:
+		Filename: invisibleitem.shp
+	damaged-idle:
+		Filename: invisibleitem.shp
+	critical-idle:
+		Filename: invisibleitem.shp
+	make:
+		Filename: nax_flak88mk.shp
+		Length: 64
+	dead:
+		Filename: invisibleitem.shp
+	turret:
+		Filename: nax_flak88.shp
+		Facings: 64
+	icon:
+		Filename: nax_flak88_icon.png
+		Offset: 0,0
+
+bunk.nax:
+	Defaults:
+		Offset: 0, 0
+	idle:
+		Filename: nax_bunk.shp
+		Start: 16
+		Length: 16
+	damaged-idle:
+		Filename: nax_bunk.shp
+		Start: 16
+		Length: 16
+	idle-bunkered:
+		Filename: nax_bunk_b.shp
+		Start: 16
+		Length: 16
+	damaged-idle-bunkered:
+		Filename: nax_bunk_b.shp
+		Start: 16
+		Length: 16
+	make:
+		Filename: nax_bunk.shp
+		Length: 16
+	dead:
+		Filename: nax_bunk.shp
+		Start: 16
+		Length: 16
+	icon:
+		Filename: nax_bunk_icon.png
+		Offset: 0,0
+	turret-mort:
+		Filename: nax_bunk_mort.shp
+		Facings: 64
+	turret-aa:
+		Filename: nax_bunk_aa.shp
+		Facings: 64
+	turret-mg:
+		Filename: nax_bunk_mg.shp
+		Facings: 64
+
+rifle.nax:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_rifle.shp
+		Scale: 0.7
+	run:
+		Tick: 120
+	paradrop:
+		Start: 292
+	icon:
+		Filename: nax_rifle_icon.png
+
+mp40.nax:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_mp40.shp
+	run:
+		Tick: 120
+	paradrop:
+		Start: 292
+	icon:
+		Filename: nax_mp40_icon.png
+
+shrek.nax:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Scale: 0.7
+		Filename: nax_shrek.shp
+	run:
+		Tick: 120
+	paradrop:
+		Start: 292
+	icon:
+		Filename: nax_shrek_icon.png
+
+litt.nax:
+	Defaults:
+		Filename: nax_litt_new.shp
+	stand:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	idle1:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	idle2:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	prone-stand:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	prone-run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	die1: # copied from die-air
+		# Start: 134
+		# Length: 14
+		Start: 166
+		Length: 14
+		Facings: 2
+		Tick: 80
+	die2: # copied from die-air
+		# Start: 149
+		# Length: 14
+		Start: 166
+		Length: 14
+		Facings: 2
+		Tick: 80
+	shoot:
+		Start: 164
+		Tick: 80
+	prone-shoot:
+		Start: 212
+		Tick: 80
+	fly:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	die-air:
+		Start: 186
+		Tick: 80
+	shoot-air:
+		Start: 196
+		Length: 6
+		Tick: 80
+		Facings: 8
+	idle-air:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	idle:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	shadow:
+		Filename: parach-shadow.shp
+		Length: 1
+		Facings: 1
+	icon:
+		Filename: nax_mage_icon.png
+
+mcv.nax:
+	Defaults:
+		Filename: nax_mcv.shp
+		Scale: 0.7
+		Offset: 0, 8
+	idle:
+		Facings: 64
+	icon:
+		Filename: nax_mcv_icon.png
+		Offset: 0, 0
+
+panzer.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_panzer.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+	turret:
+		Start: 64
+		Facings: 64
+	icon:
+		Filename: nax_panzer_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+tiger.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_tiger.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_tiger_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+zombietank.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_zombietank.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+	icon:
+		Filename: ra2bficon.shp
+
+wirbelwind.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_wirbelwind.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_wirbelwind_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+car.nax:
+	Inherits: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_car.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_car_icon.png
+
+kingtiger.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_kingtiger.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_kingtiger_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+assault.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_assault.shp
+		Scale: 0.5
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_assault_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+imperial.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_imperial.shp
+		Scale: 0.5
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_imperial_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+maus.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_maus.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_maus_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+ratte.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_ratte.shp
+		Scale: 0.9
+	idle:
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_ratte_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+grille.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_grille.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_grille_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+hetzer.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_hetzer.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_hetzer_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+atankcann.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_atankcann.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_atankcann_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+jagdpanzer.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_jagdpanzer.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_jagdpanzer_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+brummbar.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_brummbar.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_brummbar_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+sturmtiger.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_sturmtiger.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_sturmtiger_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+nokana.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_nokana.shp
+		Scale: 0.7
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_nokana_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+halftrack.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_halftrack.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_halftrack_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+slavemaster.nax:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_litt.shp
+	run:
+		Tick: 120
+	paradrop:
+		Start: 292
+	icon:
+		Filename: ra2e2icon.shp
+
+slav.nax:
+	Inherits: ^RA2BasicInfantry
+	Defaults:
+		Filename: yr_slav.shp
+	idle:
+		Filename: invisibleitem.shp
+	run:
+		Tick: 120
+	harvest:
+		Start: 116
+		Length: 6
+		Tick: 120
+	full-run:
+		Start: 228
+		Length: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 120
+	empty-harvest:
+		Filename: invisibleitem.shp
+	half-harvest:
+		Filename: invisibleitem.shp
+	full-harvest:
+		Filename: invisibleitem.shp
+	shoot:
+		Start: 164
+	dock:
+		Start: 117
+		Length: 5
+	dock-loop:
+		Start: 56
+	cheer:
+		Start: 276
+	die1:
+		Start: 86
+	die2:
+		Start: 101
+	cheer:
+		Start: 276
+	icon:
+		Filename: workericon.png
+
+eng.nax:
+	Inherits: ^RA2GatlingMuzzle
+	Defaults:
+		Filename: nax_eng.shp
+		Offset: 0, 8
+		Scale: 0.9
+	idle:
+		Facings: 64
+		Scale: 0.9
+	turret:
+		Filename: invisibleitem.shp
+	barrel:
+		Filename: invisibleitem.shp
+	icon:
+		Filename: nax_engitruk_icon.png
+		Offset: 0, 0
+
+me262.nax:
+	Defaults:
+		Scale: 0.8
+	idle:
+		Filename: nax_me262.shp
+		Facings: 64
+	move:
+		Filename: nax_me262.shp
+		Facings: 64
+	move-l:
+		Filename: nax_me262.shp
+		Facings: 64
+		Start: 64
+	move-r:
+		Filename: nax_me262.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: nax_me262_icon.png
+
+bf109.nax:
+	Defaults:
+		Scale: 0.8
+	idle:
+		Filename: nax_bf109.shp
+		Facings: 64
+	move:
+		Filename: nax_bf109.shp
+		Facings: 64
+	move-l:
+		Filename: nax_bf109.shp
+		Facings: 64
+	move-r:
+		Filename: nax_bf109.shp
+		Facings: 64
+	icon:
+		Filename: nax_bf109_icon.png
+
+zep.nax:
+	Defaults:
+		Filename: nax_zep.shp
+		Scale: 1
+	idle:
+		Facings: 64
+		Offset: 0,8
+	move:
+		Facings: 64
+		Offset: 0,9
+	icon:
+		Filename: nax_zep_icon.png
+
+nax_horten:
+	Defaults:
+		Filename: nax_horten.shp
+		Scale: 1
+	idle:
+		Facings: 64
+		Offset: 0,0
+	move:
+		Facings: 64
+		Offset: 0,0
+	icon:
+		Filename: nax_horten_icon.png
+
+cplane.nax:
+	Defaults:
+		Filename: nax_cplane.shp
+		Scale: 1
+	idle:
+		Facings: 64
+		Offset: 0,32
+	move:
+		Facings: 64
+		Offset: 0,32
+	icon:
+		Filename: nax_zep_icon.png
+
+drone.nax:
+	Defaults:
+		Scale: 0.5
+	idle:
+		Filename: nax_drone.shp
+		Facings: 64
+	move:
+		Filename: nax_drone.shp
+		Facings: 64
+	move-l:
+		Filename: nax_drone.shp
+		Facings: 64
+		Start: 64
+	move-r:
+		Filename: nax_drone.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: nax_drone_icon.png
+
+interceptor.nax:
+	Defaults:
+		Scale: 0.9
+	idle:
+		Filename: nax_interceptor.shp
+		Facings: 64
+	move:
+		Filename: nax_interceptor.shp
+		Facings: 64
+		Start: 64
+	move-l:
+		Filename: nax_interceptor.shp
+		Facings: 64
+		Start: 128
+	move-r:
+		Filename: nax_interceptor.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: nax_drone_icon.png
+
+brad.nax:
+	Inherits: ^RA2GatlingMuzzle
+	Defaults:
+		Filename: nax_brad.shp
+		Scale: 0.75
+	idle:
+		Facings: 64
+		Offset: 0,20
+	empty-idle:
+		Start: 64
+		Facings: 64
+		Offset: 0,20
+	icon:
+		Filename: nax_brad_icon.png
+
+sarubia.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_sarubia.shp
+		Scale: 0.64
+	idle:
+		Facings: 64
+		Offset: 0,1
+	icon:
+		Filename: nax_sarubia_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+sarubia_bomb.nax:
+	Defaults:
+		Filename: nax_sarubia_bomb.shp
+	up:
+	down:
+	idle:
+		ZOffset: 1023
+		Scale: 0.75
+		InterpolatedFacings: 32
+		Length: 21
+
+shoe.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_shoe.shp
+		Scale: 0.8
+	idle:
+		Facings: 64
+		Offset: 0,5
+	empty-idle:
+		Start: 128
+		Facings: 64
+		Offset: 0,5
+	turret:
+		Start: 64
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_shoe_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+muboat.nax:
+	Defaults:
+		Filename: nax_muboat.shp
+		Scale: 0.9
+	idle:
+		Facings: 64
+	idle-one:
+		Facings: 64
+		Start: 64
+	idle-empty:
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: ra2subicon.shp
+
+tuboat.nax:
+	idle:
+		Scale: 0.65
+		Filename: nax_muboat.shp
+		Facings: 64
+		Start: 128
+	icon:
+		Filename: ra2subicon.shp
+
+frank.nax:
+	Inherits: ^RA2BasicInfantry
+	Defaults:
+		Filename: nax_frank.shp
+	stand:
+		#ShadowStart: 164
+	run:
+		Start: 8
+		Length: 8
+		Tick: 120
+		#ShadowStart: 172
+	shoot:
+		Start: 134
+		Length: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		#ShadowStart: 280
+	idle1:
+		#ShadowStart: 220
+	idle2:
+		#ShadowStart: 235
+	paradrop:
+		Start: 196
+	cheer:
+		Start: 1
+	die1:
+		Start: 102
+		#ShadowStart: 250
+	die2:
+		Start: 117
+		#ShadowStart: 265
+	icon:
+		Filename: nax_frank_icon.png
+
+merc.nax:
+	Inherits: ^RA2ModDafoolWW2Infantry
+	Defaults:
+		Filename: nax_merc.shp
+		Scale: 0.75
+		Offset: 0,0
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: nax_partisan_icon.png
+		Scale: 1
+		Offset: 0,0
+
+cons.nax:
+	Inherits: ^RA2ModDafoolWW2Infantry
+	Defaults:
+		Filename: nax_cons.shp
+		Scale: 0.75
+		Offset: 0,0
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: nax_recruit_icon.png
+		Scale: 1
+		Offset: 0,0
+
+tcons.nax:
+	Inherits: ^RA2ModDafoolWW2Infantry
+	Defaults:
+		Filename: nax_tcons.shp
+		Scale: 0.7
+		Offset: 0,-16
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: nax_recruitshrek_icon.png
+		Scale: 1
+		Offset: 0,0
+
+fcons.nax:
+	Inherits: ^RA2ModDafoolWW2Infantry
+	Defaults:
+		Filename: nax_fcons.shp
+		Scale: 0.75
+		Offset: 0,-16
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: nax_fcons_icon.png
+		Scale: 1
+		Offset: 0,0
+
+hmg.nax:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: nax_hmg.shp
+		Scale: 0.6
+		Offset: 0,-4
+	stand:
+		ShadowStart: 271
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		Tick: 80
+		ShadowStart: 279
+	idle1:
+		Start: 106
+		Length: 15
+		Tick: 120
+		ShadowStart: 377
+	idle2:
+		Start: 106
+		Length: 15
+		Tick: 120
+		ShadowStart: 377
+	shoot:
+		Start: 121
+		Length: 15
+		Facings: 8
+		Tick: 120
+		ShadowStart: 392
+	die1:
+		Start: 241
+		Length: 15
+		ShadowStart: 512
+	die2:
+		Start: 241
+		Length: 15
+		ShadowStart: 512
+	paradrop:
+		Start: 1
+	deployed:
+		Start: 98
+		Facings: 8
+		ShadowStart: 369
+	deploy:
+		Start: 88
+		Length: 10
+		ShadowStart: 359
+	shoot-deployed:
+		Start: 121
+		Length: 15
+		Facings: 8
+		Tick: 120
+		ShadowStart: 392
+	undeploy:
+		Start: 256
+		Length: 15
+		ShadowStart: 527
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: nax_hmg_icon.png
+		Scale: 1
+		Offset: 0,0
+
+quadflak.nax:
+	Inherits: ^RA2ArmedInfantry
+	Defaults:
+		Filename: nax_quadflak.shp
+		Scale: 0.6
+		Offset: 0,-4
+		FlipX: True
+	stand:
+		Start: 8
+		Stride: 10
+		Facings: 8
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		Tick: 80
+	idle1:
+		Start: 8
+		Stride: 10
+		Facings: 8
+	idle2:
+		Start: 8
+		Stride: 10
+		Facings: 8
+	shoot:
+		Start: 88
+		Length: 16
+		Facings: 8
+		Tick: 120
+	die1:
+		Start: 208
+		Length: 15
+	die2:
+		Start: 208
+		Length: 15
+	paradrop:
+		Start: 1
+	deployed:
+		Facings: 8
+	deploy:
+		Start: 8
+		Stride: 10
+		Facings: 8
+	shoot-deployed:
+		Start: 88
+		Length: 16
+		Facings: 8
+		Tick: 120
+	undeploy:
+		Start: 8
+		Stride: 10
+		Facings: 8
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: nax_quadflak_icon.png
+		Scale: 1
+		Offset: 0,0
+
+kubel.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_kubel.shp
+		Scale: 0.9
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_kubel_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+bmwbike.nax:
+	Inherits: ^RA2CannonMuzzle
+	Defaults:
+		Filename: nax_bmwbike.shp
+		Scale: 0.9
+	idle:
+		Facings: 64
+		Offset: 0,5
+	icon:
+		Filename: nax_bmw_icon.png
+	muzzle:
+		Filename: ra2_gunfire.shp
+		Length: *
+	muzzle-2:
+		Filename: ra2_vtmuzzle.shp
+		Length: *
+
+alien.nax:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_alien.shp
+		Scale: 0.75
+		Offset: 0,-16
+	stand:
+	run:
+		Start: 8
+		Length: 12
+		Facings: 8
+		Tick: 90
+	idle1:
+		Start: 304
+		Length: 21
+		Tick: 120
+	idle2:
+		Start: 325
+		Length: 21
+		Tick: 120
+	shoot:
+		Start: 104
+		Length: 15
+		Facings: 8
+		Tick: 80
+	mind:
+		Start: 224
+		Length: 10
+		Facings: 8
+		Tick: 80
+	die1:
+		Start: 367
+		Length: 16
+	die2:
+		Start: 383
+		Length: 21
+	paradrop:
+		Start: 1
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	icon:
+		Filename: nax2_alien_icon.png
+		Scale: 1
+		Offset: 0,0
+
+undead.nax:
+	Inherits: ^RA2ArmedInfantry
+	Inherits@2: ^RA2MachineGunMuzzle
+	Defaults:
+		Filename: nax_undead.shp
+	run:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+	idle1:
+		Start: 88
+	idle2:
+		Start: 103
+	prone-stand:
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Start: 118
+	die1:
+		Start: 166
+	die2:
+		Start: 181
+	shoot:
+		Start: 196
+	prone-shoot:
+		Start: 244
+	paradrop:
+		Start: 324
+	icon:
+		Filename: nax_undead_icon.png
+
+corpse.nax:
+	make:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+		Tick: 15
+	idle:
+		Filename: ra2_death_a.shp
+		Length: 1
+		ZOffset: -512
+	die:
+		Filename: ra2_death_a.shp
+		Length: *
+		ZOffset: -512
+		Tick: 2500
+	icon:
+		Filename: nax_undead_icon.png
+
+corpse_big.nax:
+	Inherits: corpse.nax
+	idle:
+		Filename: ra2_death_b.shp
+	die:
+		Filename: ra2_death_b.shp
+
+miniv2.nax:
+	idle:
+		Filename: nax_miniv2.shp
+		Facings: 64
+		ZOffset: 1023
+
+conehead.nax:
+	Inherits: ^RA2ArmedInfantry
+		Scale: 1
+	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Scale: 0.7
+		Filename: nax_conehead.png
+	run:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Scale: 1
+		Start: 118
+	die1:
+		Scale: 1
+		Start: 166
+	die2:
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
+		Start: 324
+	icon:
+		Filename: nax_conehead_icon.png
+
+conehead2.nax:
+	Inherits: ^RA2ArmedInfantry
+		Scale: 1
+	Inherits@2: ^RA2MachineGunMuzzle
+		Scale: 1
+	Defaults:
+		Scale: 0.7
+		Filename: nax_conehead2.png
+	run:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	walk:
+		Scale: 1
+		Tick: 100
+		Start: 8
+		Length: 10
+		Facings: 8
+	stand:
+		Scale: 1
+	idle1:
+		Scale: 1
+		Start: 88
+	idle2:
+		Scale: 1
+		Start: 103
+	prone-stand:
+		Scale: 1
+		Frames: 122, 126, 132, 137, 143, 149, 155, 161
+		Facings: 8
+	prone-run:
+		Scale: 1
+		Start: 118
+	die1:
+		Scale: 1
+		Start: 166
+	die2:
+		Scale: 1
+		Start: 181
+	shoot:
+		Scale: 1
+		Start: 196
+	prone-shoot:
+		Scale: 1
+		Start: 244
+	paradrop:
+		Scale: 1
+		Start: 324
+	icon:
+		Filename: nax_conehead2_icon.png
+
+##############################################
+#   Red Alert 2 Upgrades
+##############################################
+
+ostfrontexperienceicon:
+	icon:
+		Filename: ostfrontexperienceicon.png
+
+atlantikwallicon:
+	icon:
+		Filename: atlantikwallicon.png
+
+tankarsenalrenovationicon:
+	icon:
+		Filename: tankarsenalrenovationicon.png
+
+massopticsintegrationicon:
+	icon:
+		Filename: massopticsintegrationicon.png
+
+wunderwaffeicon:
+	icon:
+		Filename: wunderwaffeicon.png
+
+blitzkriegicon:
+	icon:
+		Filename: blitzkriegicon.png
