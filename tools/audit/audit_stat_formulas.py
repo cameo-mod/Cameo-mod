@@ -22,14 +22,20 @@ Ordos Raider (raider.ordos).
   F12 each faction needs an anti-air tower on its radar tier (Tier 2);
       additional AA towers gated at tech tier or above are legal
       "advanced AA" (Asian Alliance model)
-  F13 advanced defenses must be gated at tier >= 3 — the tech-tier building
-      or anything later (a Tier 4/5 gate like Syndicate's cgup.latin is fine)
+  F13 advanced defenses must be gated ABOVE the radar tier — the tech-tier
+      building or anything later (a Tier 4/5 gate like Syndicate's
+      cgup.latin is fine)
       Building tiers are computed data-driven from prerequisite chains:
-      conyard = 0, barracks/refinery = 1, radar = 2, tech = 3, post-tech = 4+.
+      conyard = 0, barracks/refinery = 1, radar = 2, tech = 3, post-tech = 4+
+      (faction-relative; checks anchor on the computed radar tier).
       F12/F13 exemptions: factions with only one armed defense (Protoss
       photon cannon style), promotion-gated defenses (transitional; audited
-      once they become regular), factions without an identifiable radar
-      tier, and Terran/Zerg (non-tiered tech trees).
+      once they become regular), an AdvancedDefense with an anti-air weapon
+      holding the radar tier when the faction has no dedicated radar-tier AA
+      (it doubles as the Tier-2 AA — jballistat model), factions without an
+      identifiable radar tier, and Terran/Zerg (non-tiered tech trees).
+      Violations whose fix would strip the faction's ONLY pre-radar defense
+      are listed as DEFERRED (every faction must keep a Tier-1 defense).
 
 Scope: buildable rosters of real factions. Tolerance ±1 on divisions.
 """
@@ -183,14 +189,36 @@ def defense_tier_check(m: Model, rows: dict) -> None:
             continue    # no identifiable radar tier: exempt (WC2-style trees)
         radar_tier = min(tier[r] for r in radars)
 
+        def has_aa_weapon(defense: str) -> bool:
+            res_d = rs.resolve(defense)
+            for arm in res_d.children_named("Armament"):
+                wname = arm.get("Weapon")
+                w = rs.resolve_weapon(wname) if wname else None
+                if w is None:
+                    continue
+                vt = (w.get("ValidTargets") or "").lower()
+                if "air" in vt:
+                    return True
+                for c in w.children:
+                    if c.key.startswith("Warhead") and "air" in (c.get("ValidTargets") or "").lower():
+                        return True
+            return False
+
         # F12: at least one AA tower must sit on the radar tier; extra AA
-        # towers at tech tier or above are legal "advanced AA".
+        # towers at tech tier or above are legal "advanced AA". An
+        # AdvancedDefense with an anti-air weapon sitting on the radar tier
+        # doubles as the faction's Tier-2 AA (jballistat model).
         aa_towers = [d for d in armed_defs
                      if inherits_template(m, d, ("AntiAirDefense",))]
+        adv_towers = [d for d in armed_defs
+                      if inherits_template(m, d, ("AdvancedDefense",))]
+        dual_aa = {d for d in adv_towers if has_aa_weapon(d)
+                   and (gate_info(d)[1] or gate_info(d)[0] == radar_tier)}
         if aa_towers:
             infos = {d: gate_info(d) for d in aa_towers}
             baseline_ok = any(radar_gated or gate == radar_tier
-                              for _, (gate, radar_gated, promo, _) in infos.items())
+                              for _, (gate, radar_gated, promo, _) in infos.items()) \
+                or bool(dual_aa)
             for d, (gate, radar_gated, promo, prereqs) in sorted(infos.items()):
                 if promo:
                     continue
@@ -203,19 +231,34 @@ def defense_tier_check(m: Model, rows: dict) -> None:
                                         f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
                                         "AA below radar tier"])
 
+        # dedicated radar-tier AA present?  (governs the dual-AA exemption)
+        dedicated_radar_aa = any(
+            gate_info(d)[1] or gate_info(d)[0] == radar_tier for d in aa_towers)
+
         # F13: advanced defenses must be gated ABOVE the radar tier (the
         # tech-tier building or any later building — Tier 4/5 gates like
         # Syndicate's cgup.latin are fine).
-        for d in armed_defs:
-            if not inherits_template(m, d, ("AdvancedDefense",)):
-                continue
+        for d in adv_towers:
             gate, radar_gated, promo, prereqs = gate_info(d)
             if promo:
                 continue  # transitional rank-gated defense; re-audited once regular
-            if gate <= radar_tier:
-                rows["F13"].append([f"{fac}: {d}",
-                                    f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
-                                    "advanced defense must be gated above the radar tier (tech+)"])
+            if gate > radar_tier:
+                continue
+            if d in dual_aa and not dedicated_radar_aa:
+                continue  # doubles as the faction's Tier-2 AA (jballistat)
+            # would the fix strip the faction's only pre-radar defense?
+            # (fellow pre-radar AdvancedDefense towers don't count — they
+            # are being regated too)
+            others_early = [o for o in armed_defs if o != d
+                            and gate_info(o)[0] < radar_tier
+                            and not (o in adv_towers and gate_info(o)[0] <= radar_tier)]
+            note = ("advanced defense must be gated above the radar tier (tech+)"
+                    if others_early else
+                    "DEFERRED: valid, but faction's only pre-radar defense — "
+                    "add a Tier-1 defense before regating")
+            rows["F13"].append([f"{fac}: {d}",
+                                f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
+                                note])
 
 
 def main() -> int:
