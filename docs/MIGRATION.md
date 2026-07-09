@@ -46,8 +46,8 @@ commits and reported.
 |---|---|---|---|---|---|
 | Forgotten (TS) | DONE `d7b86798d` | DONE `03ce7e96c` | — | — | — |
 | TS GDI | DONE `9d901fb45` | DONE `dfa00f20f` | — | — | — |
-| TS Nod | **next** | | | | |
-| CABAL | on hold (WIP faction — design call when to rename) | | | | |
+| TS Nod | DONE `8c82ad950` | DONE `a34c80678` | — | — | — |
+| CABAL | **next?** on design hold (WIP faction — call when to rename) | | | | |
 | TS Shared | after TS factions (shared actor ownership decisions) | | | | |
 | TD GDI / TD Nod | rules already packed | weapons+sequences split pending | — | — | — |
 | RA2Mod six, D2k four | rules already packed | weapons+sequences split pending | — | — | — |
