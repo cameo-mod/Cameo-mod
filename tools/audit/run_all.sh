@@ -21,7 +21,7 @@ mkdir -p "$OUT" docs/factions
 failed=0
 
 for a in inherits faction_leaks upgrades upgrade_coverage ai sequences \
-         metadata outliers orphans assets fluent power_budget; do
+         metadata outliers orphans assets fluent power_budget stat_formulas; do
   echo "== audit_$a"
   "$PYTHON" "tools/audit/audit_$a.py" "$@" > "$OUT/$a.md" 2> "$OUT/$a.err" \
     || failed=1

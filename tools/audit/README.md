@@ -32,6 +32,7 @@ suite can gate CI.
 | `audit_assets.py` | B11 | PNG budget; WAV mono/16-bit/22050 Hz norm |
 | `audit_fluent.py` | B12 | unresolved fluent refs; orphaned actor-* keys; coverage |
 | `audit_power_budget.py` | R2 | worst-case stacked multipliers > 2.0× |
+| `audit_stat_formulas.py` | house rules | HpPerStep=HP/20, SelfHeal=HP/2500 (inf /1000), shield regen=2×heal, defense vision=weapon range + DetectCloaked=range/2 + power=-cost/20, vehicle TurnSpeed=Speed/5 (turretless 2×, artillery Archer firing-slow) |
 | `gen_faction_matrix.py` | §5.1 | regenerates `docs/factions/MATRIX.md` |
 | `gen_damage_matrix.py` | §8.1 | armor classes + Versus aggregates |
 | `gen_rename_maps.py` | §9.1 | naming compliance; writes `tools/rename/rename_map_<faction>.yaml` |
