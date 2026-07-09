@@ -1,0 +1,163 @@
+^ForgottenRankDecoration:
+	WithDecoration@RANK-1:
+		Image: forgotrank
+		Sequence: rank-veteran-1
+		Palette: greyscale
+	WithDecoration@RANK-2:
+		Image: forgotrank
+		Sequence: rank-veteran-2
+		Palette: greyscale
+	WithDecoration@RANK-3:
+		Image: forgotrank
+		Sequence: rank-veteran-3
+		Palette: greyscale
+	WithDecoration@RANK-ELITE:
+		Image: forgotrank
+		Sequence: rank-elite
+		Palette: greyscale
+
+^GenomeMapping:
+	GrantConditionOnPrerequisite@forgotten_upgrade_genomemapping:
+		Condition: forgotten_upgrade_genomemapping
+		Prerequisites: forgotten_upgrade_genomemapping
+	RangeMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
+		Modifier: 110
+	RevealsShroudMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
+		Modifier: 110
+	DetectCloakedMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
+		Modifier: 110
+	SpeedMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
+		Modifier: 110
+	DamageMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
+		Modifier: 90
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping
+
+^ChemicalFuel:
+	GrantConditionOnPrerequisite@forgotten_upgrade_chemicalfuel:
+		Condition: forgotten_upgrade_chemicalfuel
+		Prerequisites: forgotten_upgrade_chemicalfuel
+	SpeedMultiplier@forgotten_upgrade_chemicalfuel:
+		RequiresCondition: forgotten_upgrade_chemicalfuel
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalfuel
+
+^MyPetSmall:
+	GrantConditionOnPrerequisite@forgotten_upgrade_friendlywildlife:
+		Condition: forgotten_upgrade_friendlywildlife
+		Prerequisites: forgotten_upgrade_friendlywildlife
+	SpawnActorOnDeath@forgotten_upgrade_friendlywildlife:
+		Probability: 25
+		Actor: forgotten_visceroid
+		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_friendlywildlife
+
+^MyPetMedium:
+	GrantConditionOnPrerequisite@forgotten_upgrade_friendlywildlife:
+		Condition: forgotten_upgrade_friendlywildlife
+		Prerequisites: forgotten_upgrade_friendlywildlife
+	SpawnActorOnDeath@forgotten_upgrade_friendlywildlife:
+		Probability: 50
+		Actor: forgotten_visceroid
+		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_friendlywildlife
+
+^MyPetLarge:
+	GrantConditionOnPrerequisite@forgotten_upgrade_friendlywildlife:
+		Condition: forgotten_upgrade_friendlywildlife
+		Prerequisites: forgotten_upgrade_friendlywildlife
+	SpawnActorOnDeath@forgotten_upgrade_friendlywildlife:
+		Probability: 100
+		Actor: forgotten_visceroid
+		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_friendlywildlife
+
+############## Lab
+
+^JunkArmor:
+	GrantConditionOnPrerequisite@forgotten_upgrade_junkarmor:
+		Condition: forgotten_upgrade_junkarmor
+		Prerequisites: forgotten_upgrade_junkarmor
+	DamageMultiplier@forgotten_upgrade_junkarmor:
+		RequiresCondition: forgotten_upgrade_junkarmor
+		Modifier: 85
+	SpeedMultiplier@forgotten_upgrade_junkarmor:
+		RequiresCondition: forgotten_upgrade_junkarmor
+		Modifier: 115
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_junkarmor
+
+^TiberiumBoosters:
+	GrantConditionOnPrerequisite@forgotten_upgrade_tiberiumboosters:
+		Condition: forgotten_upgrade_tiberiumboosters
+		Prerequisites: forgotten_upgrade_tiberiumboosters
+	RangeMultiplier@forgotten_upgrade_tiberiumboosters:
+		RequiresCondition: forgotten_upgrade_tiberiumboosters
+		Modifier: 115
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_tiberiumboosters
+
+^Unity:
+	GrantConditionOnPrerequisite@forgotten_upgrade_unity:
+		Condition: forgotten_upgrade_unity
+		Prerequisites: forgotten_upgrade_unity
+	ProximityExternalCondition@Unity:
+		Range: 7500
+		ValidRelationships: Ally
+		Condition: Unity
+		RequiresCondition: forgotten_upgrade_unity
+	# WithRangeCircle@Unity:
+	# 	Range: 7500
+	# 	Type: Unity
+	# 	Color: 88888888
+	# 	RequiresCondition: forgotten_upgrade_unity
+	ExternalCondition@Unity:
+		Condition: Unity
+	DamageMultiplier@Unity1:
+		Modifier: 98
+		RequiresCondition: Unity == 1
+	DamageMultiplier@Unity2:
+		Modifier: 96
+		RequiresCondition: Unity == 2
+	DamageMultiplier@Unity3:
+		Modifier: 94
+		RequiresCondition: Unity == 3
+	DamageMultiplier@Unity4:
+		Modifier: 92
+		RequiresCondition: Unity == 4
+	DamageMultiplier@Unity5:
+		Modifier: 90
+		RequiresCondition: Unity == 5
+	DamageMultiplier@Unity6:
+		Modifier: 88
+		RequiresCondition: Unity == 6
+	DamageMultiplier@Unity7:
+		Modifier: 86
+		RequiresCondition: Unity == 7
+	DamageMultiplier@Unity8:
+		Modifier: 84
+		RequiresCondition: Unity == 8
+	DamageMultiplier@Unity9:
+		Modifier: 82
+		RequiresCondition: Unity == 9
+	DamageMultiplier@Unity10:
+		Modifier: 80
+		RequiresCondition: Unity >= 10
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_unity
+
+^ChemicalWeapons:
+	GrantConditionOnPrerequisite@forgotten_upgrade_chemicalweapons:
+		Condition: forgotten_upgrade_chemicalweapons
+		Prerequisites: forgotten_upgrade_chemicalweapons
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons

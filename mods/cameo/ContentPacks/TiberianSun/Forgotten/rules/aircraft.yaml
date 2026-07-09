@@ -1,0 +1,448 @@
+forgotten_carryall:
+	Inherits: ^Helicopter
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Carryall
+	Selectable:
+		Bounds: 1280, 1024
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Aircraft, RAAircraft
+		BuildPaletteOrder: 60
+		Prerequisites: ~forgotten_helipad, forgotten_servicedepot
+		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 149
+		InitialFacing: 0
+		TakeoffSounds: dropup1.aud
+		LandingSounds: dropdwn1.aud
+	Carryall:
+		Voice: Move
+		LocalOffset: 0,0,-317
+		BeforeLoadDelay: 10
+		BeforeUnloadDelay: 10
+	-WithShadow:
+	Health:
+		HP: 17500
+	Armor:
+		Type: Light
+	RenderSprites:
+	SpawnActorOnDeath:
+		Actor: TSTRNSPORT.Husk
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSHeli
+	RenderVoxels:
+		Scale: 15
+		Image: tstrnsport
+	RenderSprites:
+		Image: tstrnsport
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
+
+forgotten_cobracopter:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Cobra Copter
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~forgotten_helipad, ~forgotten_promotion_cobrahelicopter
+		Queue: Aircraft, RAAircraft
+		Description: Anti-armor support gunship.  Strong vs Tanks, Aircraft. Weak vs Anti-air defenses.
+	Aircraft:
+		TurnSpeed: 66
+		Speed: 165
+	Health:
+		HP: 32500
+	Repairable:
+		HpPerStep: 1625
+	ChangesHealth@SelfHealing:
+		Step: 13
+	Armament@PRIMARY:
+		Weapon: TSCobraMissile
+		LocalOffset: 0,121,271, 0,-121,271
+		PauseOnCondition: !ammo
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@SECONDARY:
+		Weapon: TSChemCobraMissile
+		LocalOffset: 0,121,271, 0,-121,271
+		PauseOnCondition: !ammo
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSScrin
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+		ReloadCount: 3
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: forgotten_cobracopter_husk
+	WithIdleOverlay@ROTORAIR:
+		Offset: 42,0,400
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 42,0,400
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	RenderSprites:
+		Image: forgotten_cobracopter
+		PlayerPalette: player_rgba
+	EjectOnDeath:
+		PilotActor: forgotten_mutant
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+forgotten_apache:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Apache
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~forgotten_helipad, ~!forgotten_promotion_cobrahelicopter
+		Queue: Aircraft, RAAircraft
+		Description: Anti-armor support gunship.  Strong vs Tanks, Aircraft. Weak vs Anti-air defenses.
+	Aircraft:
+		TurnSpeed: 64
+		Speed: 160
+	Health:
+		HP: 30000
+	Repairable:
+		HpPerStep: 1500
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Armament@PRIMARY:
+		Weapon: TSApacheMissile
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemApacheMissile
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	-WithShadow:
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 12
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 30
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: forgotten_apache_husk
+	WithIdleOverlay@ROTORAIR:
+		Offset: 42,0,300
+		Sequence: rotor
+		RequiresCondition: airborne
+		PauseOnCondition: disabled
+	WithIdleOverlay@ROTORGROUND:
+		Offset: 42,0,300
+		Sequence: slow-rotor
+		RequiresCondition: !airborne
+		PauseOnCondition: disabled
+	RenderVoxels:
+		Scale: 15
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+forgotten_wasp:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@AntiAir: ^PrioritizeAir
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@eject: ^AircraftEjectOnDeath
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Wasp
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~forgotten_helipad
+		Queue: Aircraft, RAAircraft
+		Description: Anti-personnel support gunship narmed with dual chain guns. Strong vs Infantry. Weak vs Armor, Anti-air defenses.
+	Aircraft:
+		Speed: 200
+		TurnSpeed: 80
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: true
+		TakeOffOnResupply: true
+	Health:
+		HP: 25000
+	Repairable:
+		HpPerStep: 1250
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: TSWaspClaw
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 4
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 8
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: forgotten_wasp_husk
+	EjectOnDeath:
+		PilotActor: forgotten_mutant
+	RenderSprites:
+		PlayerPalette: player_rgba
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	GrantConditionOnPrerequisite@forgotten_promotion_cobrahelicopter:
+		Condition: forgotten_promotion_cobrahelicopter
+		Prerequisites: forgotten_promotion_cobrahelicopter
+	Cloak@forgotten_promotion_cobrahelicopter:
+		DetectionTypes: GroundCloak
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		IsPlayerPalette: true
+		RequiresCondition: forgotten_promotion_cobrahelicopter
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
+
+forgotten_cropplane:
+	Inherits: ^Helicopter
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@reload: ^RearmableAircraft
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Crop Plane
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~forgotten_helipad, forgotten_church, ~!forgotten_promotion_locustbomber
+		Queue: Aircraft, RAAircraft
+		Description: Heavy bomber. Strong vs Buildings. Weak vs Aircraft.
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 64
+		Speed: 160
+		CruisingCondition: cruising
+		TakeoffSounds: oldplane_up.wav
+		LandingSounds: oldplane_down.wav
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 75000
+	Repairable:
+		HpPerStep: 3750
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSCropBomb
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSCropBombChem
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+		PersistentTargeting: false
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 1
+		ReloadCount: 1
+		AmmoCondition: ammo
+	# ReloadAmmoPool:
+	# 	Delay: 25
+	# 	Count: 1
+	SpawnActorOnDeath:
+		Actor: forgotten_cropplane_husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 1
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
+
+forgotten_locustbomber:
+	Inherits: ^Helicopter
+	Inherits@Template: ^BomberTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@reload: ^RearmableAircraft
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@ChemicalFuel: ^ChemicalFuel
+	Inherits@JunkArmor: ^JunkArmor
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Locust Bomber
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~forgotten_helipad, forgotten_church, ~forgotten_promotion_locustbomber
+		Queue: Aircraft, RAAircraft
+		Description: Heavy bomber. Strong vs Buildings. Weak vs Aircraft.
+	Aircraft:
+		CruiseAltitude: 2560
+		TurnSpeed: 12
+		Speed: 180
+		CruisingCondition: cruising
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		CanHover: false
+		CanSlide: false
+	Health:
+		HP: 115000
+	Repairable:
+		HpPerStep: 5750
+	ChangesHealth@SelfHealing:
+		Step: 46
+	Armament@PRIMARY:
+		Weapon: TSLocustBomb
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSLocustBombChem
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+		PersistentTargeting: false
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSHeli
+	AmmoPool:
+		Ammo: 1
+		ReloadCount: 1
+		AmmoCondition: ammo
+	# ReloadAmmoPool:
+	# 	Delay: 25
+	# 	Count: 1
+	SpawnActorOnDeath:
+		Actor: forgotten_locustbomber_husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 1
+	RenderSprites:
+		PlayerPalette: player_rgba
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity

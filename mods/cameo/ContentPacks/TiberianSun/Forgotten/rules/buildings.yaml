@@ -1,0 +1,515 @@
+forgotten_tiberiumspike:
+	Inherits: OILB.TS
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@shape: ^3x4Shape
+	Tooltip:
+		Name: Tiberium Spike
+	Buildable:
+		BuildLimit: 1
+		Queue: Building, RABuilding
+		Prerequisites: ~forgotten_constructionyard, forgotten_church, derricklimit
+	SeedsResource:
+		ResourceType: Tiberium
+		Interval: 50
+		MaxRange: 250
+	-WithIdleOverlay@PLATFORM:
+	WithIdleOverlay@LIGHTS:
+		Sequence: anim
+		Palette: tseffect
+	RenderSprites:
+		Image: tibdrill
+		PlayerPalette: playerra2
+
+#######################################
+# TS MCV
+#######################################
+
+forgotten_constructionyard:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@conyard: ^Conyard
+	Selectable:
+		Bounds: 3072, 2048
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Construction Yard (Forgotten)
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Health:
+		HP: 1000000
+	Armor:
+		Type: Wood
+	Transforms:
+		RequiresCondition: factundeploy
+		PauseOnCondition: being-demolished || build-incomplete
+		IntoActor: forgotten_mobileconstructionvehicle
+		Offset: 1,1
+		Facing: 432
+	TransformsIntoMobile:
+		RequiresCondition: factundeploy
+		Locomotor: heavywheeled
+		RequiresForceMove: true
+		RedeployAfterMove: true
+	TransformsIntoPassenger:
+		RequiresCondition: factundeploy
+		CargoType: Vehicle
+		RequiresForceMove: true
+	TransformsIntoRepairable:
+		RequiresCondition: factundeploy
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2nadept,ra2gadept,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RequiresForceMove: true
+	TransferTimedExternalConditionOnTransform:
+		Condition: invulnerability
+	GrantConditionOnPrerequisite@GLOBALFACTUNDEPLOY:
+		Condition: factundeploy
+		Prerequisites: global-factundeploy
+	WithProductionOverlay@WELDING:
+		RequiresCondition: !build-incomplete
+		Queues: Building, Defence, RABuilding, RADefence
+		Sequence: build
+	BaseProvider:
+		Range: 14c0
+	ProvidesPrerequisite@tsoilderricksuper:
+		Prerequisite: tsoilderricksuper
+	ProvidesPrerequisite@fact.forgotten:
+		Prerequisite: fact.forgotten
+	WithBuildingPlacedOverlay:
+		RequiresCondition: !build-incomplete
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+	Power:
+		Amount: 0
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: forgot_conyard
+		PlayerPalette: player_rgba
+
+forgotten_refinery:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Forgotten Refinery
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
+		Queue: Building, RABuilding
+		Description: Processes raw Tiberium\ninto useable resources
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+	CustomSellValue:
+		Value: 500
+	FreeActor:
+		Actor: forgotten_tiberiumharvester
+		SpawnOffset: 1,2
+		Facing: 256
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		Image: forgot_refin
+		PlayerPalette: player_rgba
+
+forgotten_crystalpowerextractor:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Selectable:
+		Bounds: 2048, 2048
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~forgotten_constructionyard
+		Description: Provides power for other structures.
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Crystal Power Extractor
+	Health:
+		HP: 150000
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Armor:
+		Type: Wood
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: 160
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+	ProvidesPrerequisite@buildingname:
+		ValidTypes: building ##########
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_power
+
+forgotten_barracks:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@barr: ^IsBarrack
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 840,-256,0, 840,512,0, 210,-512,0, -71,512,0
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 640
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Forgotten Barracks
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
+		Queue: Building, RABuilding
+		Description: Trains infantry
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	GrantExternalConditionToProduced:
+		Condition: produced
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	Selectable:
+		Bounds: 1280, 1024
+	RenderSprites:
+		Image: forgot_barracks
+		PlayerPalette: player_rgba
+
+forgotten_warfactory:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Inherits@weap: ^IsWeaponFactory
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+		Type: Rectangle
+			TopLeft: -1536, -1024
+			BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: Forgotten War Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
+		Queue: Building, RABuilding
+		Description: Produces vehicles
+	Building:
+		Footprint: xx= x== ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 1280, 1024
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -512,-512,0
+		ExitCell: 2,1
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	ProductionBar@VEHICLEGDI:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEGDI:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	RenderSprites:
+		Image: forgot_weap
+		PlayerPalette: player_rgba
+
+forgotten_servicedepot:
+	Inherits: tsgtdeptgdi
+	Tooltip:
+		Name: Service Depot
+	Buildable:
+		Prerequisites: ~forgotten_constructionyard, forgotten_warfactory
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+
+forgotten_helipad:
+	Inherits: tsgthpad
+	Tooltip:
+		Name: Helipad (Forgotten)
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
+	ProductionQueue@AIRCRAFT:
+	ProductionBar@AIRCRAFTGDI:
+		ProductionType: Aircraft
+	ProductionBar@RAAIRCRAFTGDI:
+		ProductionType: RAAircraft
+	RenderSprites:
+		Image: tsnthpadmut
+
+forgotten_radar:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@radar: ^RadarBuilding
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Production@Upgrades:
+		Produces: Upgrades
+	ProductionBar@Upgrades:
+		ProductionType: Upgrades
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Radar
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 70
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
+		Queue: Building, RABuilding
+		Description: Provides radar and support powers.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
+	Building:
+		Footprint: X_ xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 2248, 2248
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	WithBuildingBib:
+	ProvidesRadar:
+		RequiresCondition: !jammed && !lowpower
+	RenderDetectionCircle:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower
+	SupportPowerChargeBar:
+	Power:
+		Amount: -50
+	ExternalCondition@JAMMED:
+		Condition: jammed
+	RenderSprites:
+		PlayerPalette: player_rgba
+		Image: forgot_radar
+
+forgotten_church:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 3072, 2048
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
+		Description: Provides Forgotten advanced technologies.\nCan be only built once
+		BuildLimit: 1
+	Tooltip:
+		Name: Forgotten Church
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xxx ===
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	WithBuildingBib:
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite:
+		Prerequisite: tstek
+	RenderSprites:
+		Image: forgot_church
+		PlayerPalette: player_rgba
+
+forgotten_chemicalplant:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Selectable:
+		Bounds: 3072, 2048
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~forgotten_constructionyard, forgotten_church
+		Description: Provides Forgotten advanced technologies.\nCan be only built once
+		BuildLimit: 1
+	Tooltip:
+		Name: Forgotten Chemical Plant
+	Selectable:
+		Bounds: 2048, 2048
+	Building:
+		Footprint: xxx ===
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	Armor:
+		Type: Wood
+	WithBuildingBib:
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	RenderSprites:
+		Image: forgotten_chemicalplant
+		PlayerPalette: player_rgba
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+#######################################
+
+# tsntyard2:
+# 	Inherits: yrygyard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~tsgtcnstgdi
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALYURI:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALYURI:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	RenderSprites:
+# 		Image: yrygyard
+# 		PlayerPalette: playerra2
+
+# tsgtyard:
+# 	Inherits: ra2gayard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~tsgtcnstgdi
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALALLIESRA2:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALALLIESRA2:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	RenderSprites:
+# 		Image: ra2gayard
+# 		PlayerPalette: playerra2
+
+# tsgtyard2:
+# 	Inherits: ra2gayard
+# 	Buildable:
+# 		BuildPaletteOrder: 50
+# 		Prerequisites: ~tsgtcnstgdi
+# 		Queue: Building, RABuilding
+# 		Description: Produces, and\nrepairs boats
+# 	Production@NORMAL:
+# 		Produces: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	Production@CLASSICPRODUCTIONQUEUES:
+# 		Produces: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	ProductionQueue:
+# 		Type: Naval
+# 	ProductionBar@NAVALALLIESRA2:
+# 		ProductionType: Naval
+# 		RequiresCondition: !classicproductionqueues
+# 	ProductionBar@RANAVALALLIESRA2:
+# 		ProductionType: RANaval
+# 		RequiresCondition: classicproductionqueues
+# 	RenderSprites:
+# 		Image: ra2gayard
+# 		PlayerPalette: playerra2
+
+#######################################
+# TS Defensive
+#######################################

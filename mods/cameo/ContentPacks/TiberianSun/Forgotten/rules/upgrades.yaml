@@ -1,0 +1,125 @@
+forgotten_upgrade_genomemapping:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Genome Mapping
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Upgrades
+		Description: Increases damage resistance, range, vision and speed of Forgotten infantry by 10%.
+		Prerequisites: ~forgotten_radar, !forgotten_upgrade_genomemapping
+	RenderSprites:
+		Image: genomemappingicon
+	ProvidesPrerequisite:
+
+forgotten_upgrade_chemicalfuel:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Chemical Fuel
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Upgrades
+		Description: Increases vehicle speed by 20%.
+		Prerequisites: ~forgotten_radar, !forgotten_upgrade_chemicalfuel
+	RenderSprites:
+		Image: chemicalfuelicon
+	ProvidesPrerequisite:
+
+forgotten_upgrade_friendlywildlife:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Friendly Wildlife
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 70
+		Queue: Upgrades
+		Description: Forgotten units spawn visceroids on death.
+		Prerequisites: ~forgotten_radar, !forgotten_upgrade_friendlywildlife
+	RenderSprites:
+		Image: mypeticon
+	ProvidesPrerequisite:
+
+forgotten_upgrade_junkarmor:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Junk Armor
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 50
+		Queue: Research
+		Description: Increases Damage Resistance and Speed of vehicles by 15%.
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_junkarmor
+	RenderSprites:
+		Image: junkarmoricon
+	ProvidesPrerequisite:
+
+forgotten_upgrade_tiberiumboosters:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tiberium Boosters
+	Valued:
+		Cost: 4000
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Research
+		Description: Increases range of Mutant missiles and shells by 15%.
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_tiberiumboosters
+	RenderSprites:
+		Image: tiberiumboostersicon
+	ProvidesPrerequisite:
+
+forgotten_upgrade_unity:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Unity
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 70
+		Queue: Research
+		Description: Every Forgotten unit nearby increases other Forgotten units damage resistance by 2% up to 20%.
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_unity
+	RenderSprites:
+		Image: unityicon
+	ProvidesPrerequisite:
+
+forgotten_upgrade_chemicalweapons:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Chemical Weapons
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 80
+		Queue: Research
+		Description: Adds chemical weapons to many Frogotten units and upgrades existing ones.
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_chemicalweapons
+	RenderSprites:
+		Image: chemicalweaponsicon
+	ProvidesPrerequisite:
+
+forgotten_upgrade_tiberiumadaptability:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Tiberium Adaptability
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Research
+		Description: Increases all units' health regeneration.
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_tiberiumadaptability
+	RenderSprites:
+		Image: tiberiumadaptabilityicon
+	ProvidesPrerequisite:
+	ProvidesTeamProxyActor:
+		Actor: forgotten_upgrade_tiberiumadaptability_proxy_actor
+
+################## CABAL #########################
+
+############ Radar

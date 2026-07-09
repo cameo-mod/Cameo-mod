@@ -1,0 +1,846 @@
+forgotten_tiberianfiend_wild:
+	Inherits: forgotten_tiberianfiend
+	Inherits@2: ^MutSWCreature
+	Buildable:
+		Prerequisites: ~forgotten_tiberianfiend_wild
+	RenderSprites:
+		Image: forgotten_tiberianfiend
+	AttackWander:
+
+forgotten_engineer:
+	Inherits: TSENGINEER
+	Inherits@MC: ^MCImmune
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetSmall
+	Inherits@Unity: ^Unity
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~forgotten_barracks
+	Voiced:
+		VoiceSet: TSInfantry
+	-TemporaryOwnerManager:
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tsengineer
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_rocketinfantry:
+	Inherits: TSE3
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetSmall
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Buildable:
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~forgotten_barracks
+	Armament@PRIMARY: ##########
+		Weapon: TSBazooka
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSBazooka
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE: ##########
+		Weapon: TSChemBazooka
+		LocalOffset: 256,43,341
+		FireDelay: 5
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSChemBazooka
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tse3mut
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+forgotten_mutanthijacker:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXT: ^ExternalConditions
+	Inherits@anim: ^TSInfantry
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@AntiTank: ^PrioritizeTank
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@tibheal: ^TibHealable
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetLarge
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Mutant Hijacker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~forgotten_barracks, forgotten_church
+		BuildLimit: 1
+		Description: Hijacks vehicles. Has buildlimit of 1.
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 25000
+	Passenger:
+		CustomPipType: blue
+	CaptureManager:
+	Captures@CAPTURES:
+		CaptureTypes: vehicle
+		PlayerExperience: 50
+		ConsumedByCapture: true
+	Crushable:
+		WarnProbability: 95
+	Voiced:
+		VoiceSet: TSHijacker
+	-DamagedByTerrain:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_mutantsniper:
+	Inherits: forgotten_mutant
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetMedium
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 650
+	Tooltip:
+		Name: Mutant Sniper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 55
+		Prerequisites: ~forgotten_barracks, forgotten_radar
+		Queue: Infantry, RAInfantry
+		Description: Advanced anti-infantry unit. Strong vs Infantry. Weak vs Everything else.
+	Mobile:
+		Speed: 70
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 10
+	Armament@PRIMARY:
+		Weapon: TSSniper
+	# Armament@ELITE:
+	# 	Weapon: TSSniperE
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+	Voiced:
+		VoiceSet: TSUmagon
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSSniper
+	Selectable:
+		Class: forgotten_mutantsniper
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_mutantsniper_sp:
+	Inherits: forgotten_mutantsniper
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: forgotten_mutantsniper
+	AutoTarget:
+		ScanRadius: 9999
+		InitialStance: AttackAnything
+	-Voiced:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 5
+
+forgotten_ghoststalker:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetLarge
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 4000
+	Tooltip:
+		Name: Ghost Stalker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 120
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_ghoststalker
+		BuildLimit: 1
+		Description: Elite commando infantry, armed with chemical rifle and C4. Strong vs Ground. Weak vs Aircraft.
+	Mobile:
+		Speed: 62
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Armament@PRIMARY:
+		Weapon: TSGhostGun
+		LocalOffset: 256,43,256
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemGhostGun
+		LocalOffset: 256,43,256
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@c4:
+		Weapon: GenericC4
+		Cursor: c4
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSGhostGun
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADEGARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSChemGhostGun
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	-DamagedByTerrain:
+	Selectable:
+		Class: forgotten_ghoststalker
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_ghoststalker_r4:
+	Inherits: forgotten_ghoststalker
+	-Buildable:
+	RenderSprites:
+		Image: forgotten_ghoststalker
+	ProducibleWithLevel:
+		InitialLevels: 4
+	UpdatesPlayerStatistics:
+		OverrideActor: forgotten_ghoststalker
+
+forgotten_mutantsniper_r4:
+	Inherits: forgotten_mutantsniper
+	-Buildable:
+	RenderSprites:
+		Image: forgotten_mutantsniper
+	ProducibleWithLevel:
+		InitialLevels: 4
+	UpdatesPlayerStatistics:
+		OverrideActor: forgotten_mutantsniper
+
+forgotten_ghoststalker_sp:
+	Inherits: forgotten_ghoststalker
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: forgotten_ghoststalker
+	AutoTarget:
+		InitialStance: AttackAnything
+		ScanRadius: 9999
+	-Voiced:
+	-Armament@c4:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 5
+
+forgotten_mutant:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetSmall
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 120
+	Tooltip:
+		Name: Mutant
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~forgotten_barracks, ~!forgotten_chemicalplant
+		Queue: Infantry, RAInfantry
+		Description: Mutant armed with dual pistols. Strong vs Infantry. Weak vs Everything else.
+	Mobile:
+		Speed: 65
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Armament@PRIMARY:
+		Weapon: MutDualWield
+	#	 RequiresCondition: !rank-elite
+	# Armament@ELITE:
+	# 	Weapon: MutDualWieldE
+	# 	RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSInfantry
+	-DamagedByTerrain:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: MutDualWield
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_mutant_sp:
+	Inherits: forgotten_mutant
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: forgotten_mutant
+	AutoTarget:
+		InitialStance: AttackAnything
+		ScanRadius: 9999
+	-Voiced:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 0
+
+forgotten_mutantsoldier:
+	Inherits: ^Soldier
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetSmall
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 250
+	Tooltip:
+		Name: Mutant Soldier
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 10
+		Prerequisites: ~forgotten_barracks, ~forgotten_chemicalplant
+		Queue: Infantry, RAInfantry
+		Description: Mutant armed with a carbine. Strong vs Infantry. Weak vs Everything else.
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: MutAPRifle
+	# 	RequiresCondition: !rank-elite
+	# Armament@aa:
+	# 	Weapon: TSGrenadeAA
+	# 	LocalOffset: 341,0,256
+	# Armament@ELITE:
+	# 	Weapon: MutAPRifleE
+	# 	RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSUmagon
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: MutAPRifle
+	-DamagedByTerrain:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_mutantsoldier_sp:
+	Inherits: forgotten_mutantsoldier
+	-Buildable:
+	RejectsOrders:
+	-MapEditorData:
+	RenderSprites:
+		Image: forgotten_mutantsoldier
+	AutoTarget:
+		InitialStance: AttackAnything
+		ScanRadius: 9999
+	-Voiced:
+	GivesBounty:
+		Percentage: 5
+	GivesExperience:
+		PlayerExperienceModifier: 0
+
+forgotten_mutantsergeant:
+	Inherits: ^Soldier
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetMedium
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Mutant Sergeant
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~forgotten_barracks, forgotten_church
+		Queue: Infantry, RAInfantry
+		Description: Elite mutant infantry. Has Propoganda Aura. Strong vs Infantry. Weak vs Everything else.
+	Mobile:
+		Speed: 75
+	Health:
+		HP: 40000
+	ChangesHealth@SelfHealing:
+		Step: 40
+	# Armament@GRENADE:
+	# 	Weapon: TSGrenade
+	# 	PauseOnCondition: !ammo
+	Armament@PRIMARY:
+		Weapon: TSSergGun
+	# AmmoPool:
+	# 	Ammo: 8
+	# 	AmmoCondition: ammo
+	# ReloadAmmoPool:
+	# 	Delay: 100
+	# 	Count: 1
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSSergGun
+	# Armament@GARRISONED2: ##########
+	# 	Name: garrisoned
+	# 	Weapon: TSGrenadeG
+	ProximityExternalCondition@PropagandaEffect:
+		Range: 3333
+		ValidRelationships: Ally
+		Condition: PropagandaEffect
+	WithRangeCircle@propaganda:
+		Range: 3333
+		Type: propaganda
+		Color: 55BBFF
+		RequiresCondition: !disabled
+	-DamagedByTerrain:
+	Voiced:
+		VoiceSet: TSInfantry
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_zombiemutant:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetMedium
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Zombie Mutant
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~forgotten_barracks, forgotten_radar
+		Queue: Infantry, RAInfantry
+		Description: High mutated human. Not so Intelligent, only attack in Melee. Strong vs Ground. Weak vs Aircraft.
+	Mobile:
+		Speed: 100
+	Health:
+		HP: 45000
+	ChangesHealth@SelfHealing:
+		Step: 45
+	Armament@PRIMARY:
+		Weapon: TSZombieAttack
+	# 	RequiresCondition: !rank-elite
+	# Armament@ELITE:
+	# 	Weapon: TSZombieAttack
+	# 	RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSInfantry
+	-DamagedByTerrain:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSZombieAttack
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_runnershotgal:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetMedium
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 750
+	Tooltip:
+		Name: Runner Shotgal
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 50
+		Prerequisites: ~forgotten_barracks, forgotten_radar, ~forgotten_promotion_runnershotgal
+		Queue: Infantry, RAInfantry
+		Description: Mutant armed with a shotgun. Strong vs Ground. Weak vs Aircraft. Stealthed.
+	Mobile:
+		Speed: 85
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSMutShotgun
+	# 	RequiresCondition: !rank-elite
+	# Armament@ELITE:
+	# 	Weapon: TSShotgun
+	# 	RequiresCondition: rank-elite
+	Voiced:
+		VoiceSet: TSUmagon
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSMutShotgun
+	-DamagedByTerrain:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_chemsprayinfantry:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetLarge
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 700
+	Tooltip:
+		Name: Chem Spray Infantry
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~forgotten_barracks, forgotten_church
+		Queue: Infantry, RAInfantry
+		Description: Mutant soldier with a Tiberium weapon. Strong vs Ground. Weak vs Aircraft.
+	Mobile:
+		Speed: 55
+		Locomotor: chem
+	Health:
+		HP: 64000
+	ChangesHealth@SelfHealing:
+		Step: 64
+	Armament@PRIMARY:
+		Weapon: TSChemspray
+		LocalOffset: 341,0,256
+		MuzzleSequence: muzzle
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSChemsprayUp
+		LocalOffset: 341,0,256
+		MuzzleSequence: muzzle
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	WithInfantryBody:
+		IdleSequences: idle1,idle2
+	Voiced:
+		VoiceSet: TSWeed
+	-DamagedByTerrain:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSChemspray
+		MuzzleSequence: muzzle
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSChemsprayUP
+		MuzzleSequence: muzzle
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	WithMuzzleOverlay:
+	Targetable@Immune:
+		TargetTypes: ToxinImmune
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
+forgotten_visceroid:
+	Inherits: ^DefaultInfantry
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@selection: ^SelectableCombatUnit
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Spray'em
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Mobile:
+		Speed: 80
+		Locomotor: chem
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armament@PRIMARY:
+		Weapon: TSVisceroidSpray
+		LocalOffset: 384,0,0
+		MuzzleSequence: muzzle
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSVisceroidSpray
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSVisceroidSprayUP
+		LocalOffset: 384,0,0
+		MuzzleSequence: muzzle
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSVisceroidSprayUP
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	RevealOnFire:
+	RevealOnDeath:
+	Targetable:
+		TargetTypes: Ground, Creep
+	AttackMove:
+		Voice: Attack
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	BodyOrientation:
+		QuantizedFacings: 8
+	-WithInfantryBody:
+	WithSpriteBody:
+	WithMuzzleOverlay:
+	Voiced:
+		VoiceSet: DinoVoice
+	HitShape:
+		Type: Circle
+			Radius: 427
+	MapEditorData:
+		Categories: Critter
+	GpsDot:
+		String: Infantry
+	RenderSprites:
+		Image: VICE
+		PlayerPalette: player
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_unity
+
+forgotten_tiberianfiend:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetLarge
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 80
+	Valued:
+		Cost: 1000
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~!forgotten_promotion_viniferafiend
+		Queue: Infantry, RAInfantry
+		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
+	Mobile:
+		Speed: 60
+		Locomotor: foot
+	Tooltip:
+		Name: Tiberian Fiend
+	Voiced:
+		VoiceSet: TSFiend
+	-RenderSprites:
+	RenderSprites:
+	Armament@PRIMARY:
+		Weapon: TSFiendShard
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSFiendShard
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSFiendShardUP
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSFiendShardUP
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+forgotten_viniferafiend:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetLarge
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
+	Inherits@Unity: ^Unity
+	Health:
+		HP: 100000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Valued:
+		Cost: 2000
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_viniferafiend
+		Queue: Infantry, RAInfantry
+		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
+	Mobile:
+		Speed: 60
+		Locomotor: foot
+	Tooltip:
+		Name: Vinifera Fiend
+	Voiced:
+		VoiceSet: TSFiend
+	-RenderSprites:
+	RenderSprites:
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSFiendShardBlue
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSFiendShardBlueUP
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSFiendShardBlueUP
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+
+#######################################
+# TS Infantry End
+#######################################

@@ -1,0 +1,1889 @@
+TS70mm:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumCannon
+	ReloadDelay: 24
+	Range: 5566
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+
+TS70mmChem:
+	Inherits: ^TSCannonEffect
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumCannon
+	ReloadDelay: 24
+	Range: 5566
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TS70mmTur:
+	Inherits: ^TSCannonEffect
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	ReloadDelay: 10
+	Range: 6574
+	Projectile: Bullet
+		Speed: 850
+		Blockable: false
+		LaunchAngle: 0
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+
+TS70mmTurChem:
+	Inherits: ^TSCannonEffect
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	ReloadDelay: 10
+	Range: 6574
+	Projectile: Bullet
+		Speed: 850
+		Blockable: false
+		LaunchAngle: 0
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TS120mmx:
+	Inherits: ^TSCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumCannon
+	Range: 5677
+	ReloadDelay: 52
+	Burst: 2
+	BurstDelays: 4
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 30000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 15
+
+TSChem120mmx:
+	Inherits: ^TSCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumCannon
+	Range: 5677
+	ReloadDelay: 52
+	Burst: 2
+	BurstDelays: 4
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 30000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 30000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 15000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 5
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSScoopDual:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumCannon
+	ReloadDelay: 60
+	Burst: 2
+	BurstDelays: 2
+	Range: 6224
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 10
+
+TSScoopDualChem:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^MediumCannon
+	ReloadDelay: 60
+	Burst: 2
+	BurstDelays: 2
+	Range: 6224
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSScoopDualTur:
+	Inherits: ^TSCannonEffect
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyCannon
+	ReloadDelay: 48
+	Burst: 2
+	BurstDelays: 2
+	Range: 6404
+	Projectile: Bullet
+		Speed: 850
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+
+TSScoopDualTurChem:
+	Inherits: ^TSCannonEffect
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyCannon
+	ReloadDelay: 48
+	Burst: 2
+	BurstDelays: 2
+	Range: 6404
+	Projectile: Bullet
+		Speed: 850
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSHighVelocity:
+	Inherits: ^TSCannonEffect
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 90
+	Range: 7701
+	Projectile: Bullet
+		Speed: 850
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 30000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 15
+
+TSHighVelocityChem:
+	Inherits: ^TSCannonEffect
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 90
+	Range: 7701
+	Projectile: Bullet
+		Speed: 850
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 30000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 15
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 15000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 7000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSHighVelocity2:
+	Inherits: ^TSCannonEffect
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 55
+	Range: 8207
+	Projectile: Bullet
+		Speed: 850
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 40000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 20
+
+TSHighVelocity2Chem:
+	Inherits: ^TSCannonEffect
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 55
+	Range: 8207
+	Projectile: Bullet
+		Speed: 850
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 40000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 20
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@MLightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSHighVelocityTur:
+	Inherits: ^TSCannonEffect
+	Inherits: ^TankDestroyerCannon
+	ReloadDelay: 30
+	Range: 9483
+	Projectile: Bullet
+		Speed: 1280
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 48000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 24
+
+TSBusMortar:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 120
+	Range: 7850
+	TargetActorCenter: true
+	Report: trashcannon.wav
+	Projectile: Bullet
+		Speed: 280
+		LaunchAngle: 70
+		ContrailLength: 35
+		ContrailStartWidth: 70
+		ContrailEndWidth: 14
+		ContrailStartColor: AAAA4488
+		ContrailEndColor: 22222222
+		TrailImage: black_smokey
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 32000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 16
+
+TSBusMortarChem:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 120
+	Range: 7850
+	TargetActorCenter: true
+	Report: trashcannon.wav
+	Projectile: Bullet
+		Speed: 280
+		LaunchAngle: 70
+		ContrailLength: 35
+		ContrailStartWidth: 140
+		ContrailEndWidth: 28
+		ContrailStartColor: 22AA4488
+		ContrailEndColor: 11882222
+		TrailImage: green_smokey
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 32000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TS120mmxChem:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyChemicalWeapon
+	Inherits: ^TSCannonEffect
+	ReloadDelay: 60
+	Range: 6172
+	Burst: 2
+	BurstDelays: 4
+	Report: tnkfire4.aud
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 40000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 20
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 40000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 20000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees
+		Damage: 20
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 5
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSJuggerFlakAA:
+	Inherits: ^FlakWeapon
+	Report: jugger1.aud
+	ReloadDelay: 28
+	Burst: 3
+	BurstDelays: 1
+	Range: 11234
+	ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 10000
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Air
+	Warhead@Effect: CreateEffect
+		Explosions: small_poof
+		ImpactSounds: expnew13.aud
+####################################################################################################
+#		Tiberian Sun Energy Weapons
+####################################################################################################
+
+TSChemBazooka:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^LightMissile
+	Report: rketinf1.aud
+	ReloadDelay: 52
+	Range: 6694
+	Projectile: Missile
+		TrailImage: spittrail
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LightMissile: SpreadDamage
+		Damage: 24000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 12
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSVanMissile:
+	Inherits: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Trees
+	Report: missile6.aud
+	ReloadDelay: 32
+	Burst: 2
+	BurstDelays: 8
+	Range: 10460
+	Report: hovrmis1.aud
+	Projectile: Bullet
+		Speed: 256
+		Arm: 2
+		Inaccuracy: 512
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 60
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 24000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 12000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+
+TSChemVanMissile:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Trees
+	Report: missile6.aud
+	ReloadDelay: 32
+	Burst: 2
+	BurstDelays: 8
+	Range: 10460
+	Report: hovrmis1.aud
+	Projectile: Bullet
+		Speed: 256
+		Arm: 2
+		Inaccuracy: 512
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 60
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 24000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 12000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSMLRSMissile:
+	Inherits: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Trees
+	Report: missile6.aud
+	ReloadDelay: 34
+	Burst: 4
+	BurstDelays: 2
+	Range: 11913
+	Report: hovrmis1.aud
+	Projectile: Bullet
+		Speed: 256
+		Arm: 2
+		Inaccuracy: 1600
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 165
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 24000
+	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 12000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+
+TSChemMLRSMissile:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^ShrapnelWeapon
+	ValidTargets: Ground, Water, Trees
+	Report: missile6.aud
+	ReloadDelay: 34
+	Burst: 4
+	BurstDelays: 2
+	Range: 11913
+	Report: hovrmis1.aud
+	Projectile: Bullet
+		Speed: 256
+		Arm: 2
+		Inaccuracy: 1600
+		Image: d2k_missile2
+		Palette: d2keffect
+		TrailImage: large_trail
+		LaunchAngle: 165
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 24000
+	WWarhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 12000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSMammothTuskChem:
+	Inherits: ^HeavyMissile
+	Inherits: ^HeavyChemicalWeapon
+	Range: 6172
+	ReloadDelay: 48
+	Report: misl1.aud
+	Burst: 4
+	BurstDelays: 6
+	ValidTargets: Ground, Water, Trees, Air
+	Projectile: Missile
+		Inaccuracy: 640
+		Speed: 240
+		LockOnProbability: 50
+		LockOnInaccuracy: 480
+		MinimumLaunchAngle: 48
+		MaximumLaunchAngle: 64
+		MinimumLaunchSpeed: 120
+		MaximumLaunchSpeed: 240
+		RangeLimit: 24c0
+		Acceleration: 48
+		HorizontalRateOfTurn: 24
+		VerticalRateOfTurn: 16
+		TrailDelay: 4
+		ContrailLength: 16
+		ContrailColor: 88BB88
+		TrailImage: green_smokey
+	Warhead@2Eff: CreateEffect
+		ImpactActors: false
+		ImpactSounds: expnew07.aud
+	Warhead@3Eff: CreateEffect
+		Explosions: chemball
+		ImpactSounds: xplosml2.aud
+		ImpactActors: false
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 20000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 10
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSMammothTusk:
+	Inherits@glow: ^ImpactGlow
+	Inherits: ^HeavyMissile
+	ValidTargets: Ground, Water, Trees, Air
+	Projectile: Missile
+		Speed: 500
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 25
+		MinimumLaunchAngle: 75
+		Acceleration: 5
+		AllowSnapping: true
+		CloseEnough: 500
+		TrailImage: large_trail
+	Range: 5677
+	ReloadDelay: 62
+	Burst: 2
+	BurstDelays: 8
+	Report: misl1.aud
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 60000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 30
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: small_building
+
+TSRuinerMissile:
+	Inherits: ^Grenade
+	Inherits: ^MediumMissile
+	Range: 5919
+	ReloadDelay: 50
+	Report: misl1.aud
+	Warhead@Grenade: SpreadDamage
+		Damage: 18000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@GrenadeFriendlyFire:
+		Damage: 9000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 9
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 18000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 9
+		ValidTargets: Ground, Water, Trees, Air
+
+TSChemRuinerMissile:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^Grenade
+	Inherits: ^MediumMissile
+	Range: 5919
+	ReloadDelay: 50
+	Report: misl1.aud
+	Projectile: Missile
+		LaunchAngle: 75
+		TrailImage: spittrail
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 10000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 8000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@Grenade: SpreadDamage
+		Damage: 18000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@GrenadeFriendlyFire:
+		Damage: 9000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 9
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 18000
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 9
+		ValidTargets: Ground, Water, Trees, Air
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSApacheMissile:
+	Inherits: ^HeavyCannon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 15
+	Range: 4688
+	Report: orcamis1.aud
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+
+TSChemApacheMissile:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyCannon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 15
+	Range: 4688
+	Report: orcamis1.aud
+	Projectile: Missile
+		TrailImage: spittrail
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 12000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 6000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 6
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 3
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSCobraMissile:
+	Inherits: ^HeavyCannon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 12
+	Range: 5052
+	Report: orcamis1.aud
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+
+TSChemCobraMissile:
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyCannon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^Grenade
+	Inherits: ^HeavyMissile
+	Inherits: ^MediumMissile
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 12
+	Range: 5052
+	Report: orcamis1.aud
+	Projectile: Missile
+		TrailImage: spittrail
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 2
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 12000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 6000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Trees, Air
+		Damage: 6
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 3
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSAdatsMissile:
+	Inherits: ^FlakWeapon
+	Inherits: ^LightMissile
+	Range: 5606
+	Burst: 4
+	BurstDelays: 2
+	ReloadDelay: 54
+	Report: misl1.aud
+	ValidTargets: Ground, Water, Trees
+	Warhead@FlakWeapon: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Trees
+	Warhead@LightMissile: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Water, Trees
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Water, Trees
+
+TSAdatsMissileAA:
+	Inherits: TSAdatsMissile
+	Range: 8409
+	ValidTargets: Air
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@LightMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+MutFlamer:
+	Inherits: ^MediumFlameWeapon
+	ReloadDelay: 50
+	Range: 2386
+	Report: flamtnk1.aud
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 28000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 14000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 14
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 28000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 14000
+
+MutFlamerChem:
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 50
+	Range: 2386
+	Report: flamtnk1.aud
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 28000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 14000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 14
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 28000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 14000
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 14000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 7000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 7
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+MutHFlamer:
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^HeavyFlameWeapon
+	ReloadDelay: 65
+	Range: 2425
+	Report: flamtnk1.aud
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 20000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 10000
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
+		Amount: 20000
+	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 10000
+
+MutHFlamerChem:
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^HeavyFlameWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 65
+	Range: 2425
+	Report: flamtnk1.aud
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@PhysicalStateMediumFlameWeapon: ApplyPhysicalState
+		Amount: 20000
+	Warhead@PhysicalStateMediumFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 10000
+	Warhead@HeavyFlameWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@HeavyFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@PhysicalStateHeavyFlameWeapon: ApplyPhysicalState
+		Amount: 20000
+	Warhead@PhysicalStateHeavyFlameWeaponFriendlyFire: ApplyPhysicalState
+		Amount: 10000
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 4
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSFiendShard:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 36
+	Burst: 3
+	BurstDelays: 2
+	Range: 5690
+	Report: fiend2.aud
+	ValidTargets: Ground, Air
+	Projectile: Missile
+		Speed: 333
+		RangeLimit: 33333
+		Image: ra2txgasg
+		TrailImage: green_smokey
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@3Eff: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ValidTargets: Ground, Air
+
+TSFiendShardUP:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 36
+	Burst: 3
+	BurstDelays: 2
+	Range: 5690
+	Report: fiend2.aud
+	ValidTargets: Ground, Air
+	Projectile: Missile
+		Speed: 333
+		RangeLimit: 33333
+		Image: ra2txgasg
+		TrailImage: green_smokey
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	Warhead@3Eff: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ValidTargets: Ground, Air
+
+TSFiendShardBlue:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 36
+	Burst: 3
+	BurstDelays: 2
+	Range: 6096
+	Report: fiend2.aud
+	ValidTargets: Ground, Air
+	Projectile: Missile
+		Speed: 333
+		RangeLimit: 33333
+		Image: ra2txgasg
+		TrailImage: blue_smokey
+	Warhead@Grenade: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@3Eff: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ValidTargets: Ground, Air
+
+TSFiendShardBlueUP:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyChemicalWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 36
+	Burst: 3
+	BurstDelays: 2
+	Range: 6096
+	Report: fiend2.aud
+	ValidTargets: Ground, Air
+	Projectile: Missile
+		Speed: 333
+		RangeLimit: 33333
+		Image: ra2txgasg
+		TrailImage: blue_smokey
+	Warhead@Grenade: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 3000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 6000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 2
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	Warhead@3Eff: CreateEffect
+		Explosions: sczhsplash
+		ImpactActors: false
+		ValidTargets: Ground, Air
+
+TSZombieAttack:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 20
+	Range: 1127
+	Report: vicer1.aud
+	Projectile: InstantHit
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+
+TSSmoke:
+	Inherits: ^ToxicWeapon
+
+TSChemspray:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 55
+	Range: 3183
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+
+TSChemsprayUP:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 55
+	Range: 3183
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 3
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSVisceroidSpray:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 25
+	Range: 1618
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+
+TSVisceroidSprayUP:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 25
+	Range: 1618
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
+TSCropBomb:
+	Inherits: ^HeavyBomb
+	ReloadDelay: 50
+	Range: 1250
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 72, 0, -90
+		Acceleration: 0, 0, -8
+		Image: 120mm
+		Shadow: true
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 120000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 60
+	Warhead@2Eff: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: expnew09.aud
+		ValidTargets: Ground, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: Crater
+
+TSCropBombChem:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 50
+	Range: 1250
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 72, 0, -90
+		Acceleration: 0, 0, -8
+		Image: 120mm
+		Shadow: true
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 120000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 60
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 60000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 30000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 10
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	Warhead@2Eff: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: expnew09.aud
+		ValidTargets: Ground, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: Crater
+
+TSLocustBombChem:
+	Inherits: ^HeavyBomb
+	Inherits: ^HeavyChemicalWeapon
+	ReloadDelay: 38
+	Burst: 5
+	BurstDelays: 3
+	Range: 1250
+	TargetActorCenter: true
+	Projectile: GravityBomb
+		Velocity: 72, 0, -90
+		Acceleration: 0, 0, -8
+		Image: 120mm
+		Shadow: true
+	Warhead@HeavyBomb: SpreadDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 180000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Ship, Trees
+		Damage: 90
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 90000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 45000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 45
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 15
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+	Warhead@2Eff: CreateEffect
+		Explosions: small_frag
+		ImpactSounds: expnew09.aud
+		ValidTargets: Ground, Air
+	Warhead@3EffWater: CreateEffect
+		Explosions: small_splash
+		ImpactSounds: ssplash3.aud
+		ValidTargets: Water
+		InvalidTargets: Vehicle
+	Warhead@4Smu: LeaveSmudge
+		SmudgeType: Crater
+
+TSMutShotgun:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumCannon
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 32
+	Range: 3112
+	Report: DSDSHTGN.wav
+	ValidTargets: Ground, Water, Trees
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 4000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+
+TSMutVulcanTurret:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ValidTargets: Ground, Water, Trees
+	ReloadDelay: 6
+	Range: 6272
+	Report: tsgun4.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+TSRaiderCarCannon:
+	Inherits: ^SmallArms
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 20
+	Burst: 4
+	BurstDelays: 2
+	Range: 4475
+	Report: chaingn1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+
+TSBowlerCannon:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ValidTargets: Ground, Water, Trees, Air
+	ReloadDelay: 5
+	Range: 6603
+	Report: chaingn1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+
+TSWaspClaw:
+	Inherits: ^Chaingun
+	ReloadDelay: 18
+	Burst: 2
+	BurstDelays: 0
+	Range: 4882
+	Report: cygun1.aud
+	SoundVolume: 0.50
+	ValidTargets: Ground, Air
+	Warhead@Chaingun: SpreadDamage
+		Damage: 4000
+		ValidTargets: Ground, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 2
+		ValidTargets: Ground, Air
+
+TSMutApcCannon:
+	Inherits: ^Chaingun
+	Inherits: ^FlakWeapon
+	ReloadDelay: 12
+	Range: 6147
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@FlakWeapon: SpreadDamage
+	ValidTargets: Ground, Water, Trees, Air
+		Damage: 2000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+	ValidTargets: Ground, Water, Trees, Air
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+	ValidTargets: Ground, Water, Trees, Air
+
+TSNomadGun:
+	Inherits: ^Chaingun
+	ReloadDelay: 6
+	Range: 8301
+	Report: aacanon3.aud
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: FF884400
+		ContrailEndColor: 000000FF
+		ContrailStartWidth: 50
+		ContrailEndWidth: 100
+		ContrailLength: 10
+		Speed: 10000
+	ValidTargets: Ground, Water, Trees
+	Warhead@Chaingun: SpreadDamage
+		Damage: 8000
+		ValidTargets: Ground, Water, Trees
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 4
+		ValidTargets: Ground, Water, Trees
+
+TSSniper:
+	Inherits: ^SniperWeapon
+	ReloadDelay: 25
+	Range: 9557
+	Report: silencer.aud
+	Warhead@SniperWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		Damage: 10000
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+
+TSGhostGun:
+	Inherits: ^LightChemicalWeapon
+	ReloadDelay: 25
+	Range: 9557
+	Report: silencer.aud
+	ValidTargets: Ground, Water, Trees
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: 339933
+		ContrailEndColor: 00000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 25
+		ContrailEndWidth: 50
+		ContrailLength: 50
+		Width: 100
+		Speed: 10000
+		Inaccuracy: 0
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+
+TSChemGhostGun:
+	Inherits: ^LightChemicalWeapon
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 25
+	Range: 9557
+	Report: silencer.aud
+	ValidTargets: Ground, Water, Trees
+	Projectile: Bullet
+		Image: 50CAL
+		ContrailZOffset: 4000
+		ContrailStartColor: 16A632
+		ContrailEndColor: 00000000
+		ContrailEndColorUsePlayerColor: true
+		ContrailStartWidth: 25
+		ContrailEndWidth: 50
+		ContrailLength: 50
+		Width: 100
+		Speed: 10000
+		Inaccuracy: 0
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 10000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 10000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+
+MutAPRifle:
+	Inherits: ^SmallArms
+	ReloadDelay: 8
+	Range: 5146
+	Report: jumpjet1.aud, gostgun1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+
+TSSergGun:
+	Inherits: ^SmallArms
+	Inherits: ^Chaingun
+	ReloadDelay: 8
+	Range: 7406
+	Report: cygun1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Chaingun: SpreadDamage
+		Damage: 2000
+		ValidTargets: Ground, Water, Trees
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Ground, Water, Trees

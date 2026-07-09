@@ -1,0 +1,11 @@
+forgotten_upgrade_tiberiumadaptability_proxy_actor:
+	Inherits: ^researched_upgrade.template
+	ProvidesPrerequisite:
+		Prerequisite: forgotten_upgrade_tiberiumadaptability
+	RenderSprites:
+		Image: tiberiumadaptabilityicon
+	Tooltip:
+		Name: Tiberium Adaptability (Team Upgrade)
+	Buildable:
+		Description: Increases all units' health regeneration.
+	PlayerDisplayUpgrade:
