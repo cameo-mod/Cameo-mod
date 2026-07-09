@@ -268,6 +268,48 @@ class Model:
 
     # ---- classification --------------------------------------------------- #
 
+    # The unit-class templates in defaults.yaml are the authoritative
+    # classification (e.g. scgoliath2 walks and animates like infantry but
+    # inherits ^HighTechTankTemplate => vehicle). Trait heuristics are only
+    # the fallback for actors without a class template.
+    TEMPLATE_CATEGORY = {
+        "antitankantiairinfantrytemplate": "inf", "flyinginfantrytemplate": "inf",
+        "grenadierinfantrytemplate": "inf", "heavyinfantrytemplate": "inf",
+        "heroinfantrytemplate": "inf", "meleeinfantrytemplate": "inf",
+        "mortarinfantrytemplate": "inf", "scoutinfantrytemplate": "inf",
+        "sniperinfantrytemplate": "inf", "dogtemplate": "inf",
+        "medictemplate": "inf", "mechanictemplate": "inf",
+        "artillerytemplate": "veh", "epicvehicletemplate": "veh",
+        "firesupporttemplate": "veh", "harvestertemplate": "veh",
+        "hightechtanktemplate": "veh", "linebreakertemplate": "veh",
+        "mainbattletanktemplate": "veh", "scoutvehicletemplate": "veh",
+        "supportvehicletemplate": "veh",
+        "bombertemplate": "air", "epicairunittemplate": "air",
+        "fightertemplate": "air", "helicoptertemplate": "air",
+        "spaceshiptemplate": "air", "unarmedtransporthelicoptertemplate": "air",
+        "artilleryshiptemplate": "nav", "battleshiptemplate": "nav",
+        "scoutshiptemplate": "nav",
+        "advanceddefensetemplate": "def", "antiairdefensetemplate": "def",
+        "basicdefensetemplate": "def", "bunkertemplate": "def",
+        "superdefensetemplate": "def",
+    }
+
+    def template_category(self, actor_name: str,
+                          _seen: frozenset = frozenset()) -> str | None:
+        """Category from unit-class template ancestry, or None."""
+        node = self.rs.actor(actor_name)
+        if node is None or actor_name.lower() in _seen:
+            return None
+        for _, target in self.rs.inherits_of(node):
+            cat = self.TEMPLATE_CATEGORY.get(target.lstrip("^").lower())
+            if cat:
+                return cat
+        for _, target in self.rs.inherits_of(node):
+            cat = self.template_category(target, _seen | {actor_name.lower()})
+            if cat:
+                return cat
+        return None
+
     def unit_type(self, actor_name: str) -> str:
         """§9.4 structural type: inf/veh/air/nav/bld/def/upg/husk/prop/hero/sup."""
         res = self.rs.resolve(actor_name)
@@ -280,6 +322,9 @@ class Model:
             return "upg"
         if ".husk" in lname or lname.endswith("husk") or res.child("Husk") is not None:
             return "husk"
+        cat = self.template_category(actor_name)
+        if cat is not None:
+            return cat
         if res.child("Building") is not None:
             if "defence" in queue or "defense" in queue:
                 return "def"

@@ -58,10 +58,10 @@ _none found_
 | ChangesHealth.Step | cryoleg.futu | 360 | 20 | 11.5 |
 | ChangesHealth.Step | tortuga.latin | 350 | 20 | 11.1 |
 | ChangesHealth.Step | TSHMEC | 320 | 20 | 10.1 |
-| ChangesHealth.Step | tsnomad | 320 | 20 | 10.1 |
 | ChangesHealth.Step | RA2ZEP | 320 | 20 | 10.1 |
 | ChangesHealth.Step | exorcistoitank | 300 | 20 | 9.4 |
 | ChangesHealth.Step | SCSTARSHIPSOVEREIGN | 300 | 20 | 9.4 |
+| ChangesHealth.Step | SCKERRIGANZERG | 300 | 20 | 9.4 |
 | Health.HP | dieglocke.nax2 | 3750000 | 60000 | 62.2 |
 | Health.HP | shogunexecutioner | 3000000 | 60000 | 49.6 |
 | Health.HP | ratte.nax | 2000000 | 60000 | 32.7 |
@@ -116,10 +116,10 @@ _none found_
 | Repairable.HpPerStep | TSKODK | 45000 | 4000 | 12.3 |
 | Repairable.HpPerStep | tortuga.latin | 43750 | 4000 | 11.9 |
 | Repairable.HpPerStep | TSHMEC | 40000 | 4000 | 10.8 |
-| Repairable.HpPerStep | tsnomad | 40000 | 4000 | 10.8 |
 | Repairable.HpPerStep | exorcistoitank | 37500 | 4000 | 10.0 |
 | Repairable.HpPerStep | SCSTARSHIPSOVEREIGN | 37500 | 4000 | 10.0 |
 | Repairable.HpPerStep | modoitank | 32500 | 4000 | 8.5 |
+| Repairable.HpPerStep | tsnomad | 32500 | 4000 | 8.5 |
 | Repairable.HpPerStep | futu.futu | 32500 | 4000 | 8.5 |
 | Repairable.HpPerStep | 5TNK | 31250 | 4000 | 8.2 |
 | RevealsShroud.Range | bfg10k.steel | 25000 | 2048 | 20.2 |

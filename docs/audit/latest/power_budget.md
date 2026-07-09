@@ -1,6 +1,6 @@
 # audit_power_budget — worst-case stacked multipliers (R2)
 
-Units above the 2.0× effective-power budget: **757**
+Units above the 2.0× effective-power budget: **762**
 
 
 ## Breaches (damage× × surv× = power×), largest first
@@ -122,6 +122,7 @@ Units above the 2.0× effective-power budget: **757**
 | protoss | scphotoncannon | 3.88 | 1.98 | 7.70 | FirepowerMultiplier@upgroundweapons=115; FirepowerMultiplier@upgroundweapons2=135; DamageMultiplier@upgroundarmor=90; DamageMultiplier@upgroundarmor2=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | terran | scmissileturret | 3.88 | 1.98 | 7.70 | FirepowerMultiplier@upmechweapon=115; FirepowerMultiplier@upmechweapon2=135; DamageMultiplier@upmecharmor=90; DamageMultiplier@upmecharmor2=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | terran | scsentinel | 3.88 | 1.98 | 7.70 | FirepowerMultiplier@upmechweapon=115; FirepowerMultiplier@upmechweapon2=135; DamageMultiplier@upmecharmor=90; DamageMultiplier@upmecharmor2=80; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
+| zerg | sccreepcolony | 3.88 | 1.98 | 7.70 | DamageMultiplier@upcarapace=90; DamageMultiplier@upcarapace2=80; FirepowerMultiplier@upzergmissile=115; FirepowerMultiplier@upzergmissile2=135; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | zerg | sccreepcolonydefense | 3.88 | 1.98 | 7.70 | DamageMultiplier@upcarapace=90; DamageMultiplier@upcarapace2=80; FirepowerMultiplier@upzergmissile=115; FirepowerMultiplier@upzergmissile2=135; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | zerg | scsporecolony | 3.88 | 1.98 | 7.70 | DamageMultiplier@upcarapace=90; DamageMultiplier@upcarapace2=80; FirepowerMultiplier@upzergmissile=115; FirepowerMultiplier@upzergmissile2=135; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | zerg | scsunkencolony | 3.88 | 1.98 | 7.70 | DamageMultiplier@upcarapace=90; DamageMultiplier@upcarapace2=80; FirepowerMultiplier@upzergmissile=115; FirepowerMultiplier@upzergmissile2=135; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
@@ -228,6 +229,7 @@ Units above the 2.0× effective-power budget: **757**
 | yuri | yrcaos | 1.80 | 3.27 | 5.88 | DamageMultiplier@ra2_yuri_upgrade_scraparmor=85; DamageMultiplier@ra2_yuri_upgrade_psionicshields=75; DamageMultiplier@ra2_yuri_upgrade_toxicengines=80; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | yuri | yrsmin | 1.80 | 3.27 | 5.88 | DamageMultiplier@ra2_yuri_upgrade_scraparmor=85; DamageMultiplier@ra2_yuri_upgrade_psionicshields=75; DamageMultiplier@ra2_yuri_upgrade_toxicengines=80; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | yuri | yrtele | 1.80 | 3.27 | 5.88 | DamageMultiplier@ra2_yuri_upgrade_scraparmor=85; DamageMultiplier@ra2_yuri_upgrade_psionicshields=75; DamageMultiplier@ra2_yuri_upgrade_toxicengines=80; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
+| yuri | yryarefn | 1.80 | 3.27 | 5.88 | DamageMultiplier@ra2_yuri_upgrade_scraparmor=85; DamageMultiplier@ra2_yuri_upgrade_psionicshields=75; DamageMultiplier@ra2_yuri_upgrade_toxicengines=80; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | gdi | atwr | 3.69 | 1.59 | 5.86 | FirepowerMultiplier@up_longrangesensors=105; FirepowerMultiplier@up_advancedmissiletargeting=115; FirepowerMultiplier@up_cuttingedgeequipment=110; ReloadDelayMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@up_cuttingedgeequipment=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | ra2america | ra2nasam | 3.51 | 1.67 | 5.85 | FirepowerMultiplier@ra2_allies_upgrade_thunderboltmissiles=150; FirepowerMultiplier@ra2_allies_upgrade_tanklasertargeting=130; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | soviet | v2rl | 2.90 | 1.98 | 5.76 | FirepowerMultiplier@ra_upgrade_scorchedearth=125; FirepowerMultiplier@ra_doctrine_inferno=125; DamageMultiplier@ra_doctrine_inferno=80; DamageMultiplier@ra_doctrine_heavyarmor=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -464,6 +466,7 @@ Units above the 2.0× effective-power budget: **757**
 | nod | rmbo.nod | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_advancedguerillatactics=115; FirepowerMultiplier@up_guerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | nod | tsengineer | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_guerillatactics=115; FirepowerMultiplier@up_advancedguerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
 | nod | tsstealthsoldier | 2.73 | 1.59 | 4.33 | FirepowerMultiplier@up_advancedguerillatactics=115; FirepowerMultiplier@up_guerillatactics=115; ReloadDelayMultiplier@up_tiberiuminfusion=90; DamageMultiplier@up_tiberiuminfusion=90; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
+| syndicate | cgpile.latin | 1.80 | 2.38 | 4.29 | DamageMultiplier@up_ngbunk2.latin=70; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | syndicate | ngbunk2.latin | 1.80 | 2.38 | 4.29 | DamageMultiplier@up_ngbunk2.latin=70; DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | tsgdi | tsgtctwrsam | 3.00 | 1.43 | 4.29 | FirepowerMultiplier@up_tsprojectileimprovements=120; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=175; ReloadDelayMultiplier@RANK-3=70 |
 | tsgdi | tsenforcer | 2.23 | 1.90 | 4.24 | DamageMultiplier@up_seretraining=75; FirepowerMultiplier@up_tsprojectileimprovements=120; DamageMultiplier@RANK-3=70; FirepowerMultiplier@RANK-3=130; ReloadDelayMultiplier@RANK-3=70 |
@@ -678,6 +681,7 @@ Units above the 2.0× effective-power budget: **757**
 | futuretech | harv.futu | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | futuretech | harv2.futu | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | lnaxis | aatank.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
+| lnaxis | airfield.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | lnaxis | armor_harv.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | lnaxis | armor_mg.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | lnaxis | bbomb.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
@@ -698,6 +702,7 @@ Units above the 2.0× effective-power budget: **757**
 | lnaxis | piercer.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | lnaxis | twr.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | lnaxis | zep.nax2 | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
+| naxis | airfield.nax | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | naxis | bf109.nax | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | naxis | bmwbike.nax | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |
 | naxis | eng.nax | 1.80 | 1.67 | 3.00 | DamageMultiplier@RANK-4=60; FirepowerMultiplier@RANK-4=180 |

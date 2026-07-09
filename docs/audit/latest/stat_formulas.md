@@ -1,9 +1,9 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **605** across 1834 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **557** across 1834 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
-## F1 — Repairable.HpPerStep ≠ HP/20  (47)
+## F1 — Repairable.HpPerStep ≠ HP/20  (46)
 
 | actor | actual | expected |
 |---|---|---|
@@ -22,7 +22,6 @@ Violations: **605** across 1834 roster actors (reference-clean units: gdiarcher,
 | modcore6 | HpPerStep 15000 | expected 2500 (HP 50000/20) |
 | modcore7 | HpPerStep 15000 | expected 2500 (HP 50000/20) |
 | nokana.nax | HpPerStep 3125 | expected 22500 (HP 450000/20) |
-| plymouth_spider | HpPerStep 2182 | expected 500 (HP 10000/20) |
 | shoe.nax | HpPerStep 10000 | expected 7500 (HP 150000/20) |
 | sturmtiger.nax | HpPerStep 2000 | expected 12500 (HP 250000/20) |
 | t30 | HpPerStep 2637 | expected 20000 (HP 400000/20) |
@@ -56,40 +55,27 @@ Violations: **605** across 1834 roster actors (reference-clean units: gdiarcher,
 | zombietank.nax | HpPerStep 7875 | expected 5500 (HP 110000/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (145)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (99)
 
 | actor | actual | expected |
 |---|---|---|
-| armor_harv.nax2 | Step 30 | expected 75 (HP 75000/1000) |
-| arty.steel | Step 21 | expected 52 (HP 52500/1000) |
 | athena.futu | Step 10 | expected 25 (HP 62500/2500) |
 | bbomb.nax2 | Step 7 | expected 15 (HP 37500/2500) |
 | beetle.nax2 | Step 35 | expected 19 (HP 47500/2500) |
-| beholder.steel | Step 50 | expected 125 (HP 125000/1000) |
 | bf109.nax | Step 30 | expected 24 (HP 60000/2500) |
 | bmwbike.nax | Step 33 | expected 9 (HP 22000/2500) |
 | combat_tank.harkonnen | Step 10 | expected 28 (HP 70000/2500) |
 | conehead.nax | Step 10 | expected 20 (HP 20000/1000) |
 | ctnk | Step 60 | expected 30 (HP 75000/2500) |
-| defender.steel | Step 84 | expected 210 (HP 210000/1000) |
 | dieglocke.nax2 | Step 50 | expected 1500 (HP 3750000/2500) |
 | eden_tiger_acidcloud | Step 10 | expected 24 (HP 60000/2500) |
-| engi.futu | Step 20 | expected 50 (HP 50000/1000) |
-| engi.nax2 | Step 20 | expected 50 (HP 50000/1000) |
-| giant_rk.nax2 | Step 96 | expected 240 (HP 240000/1000) |
 | gravity.nax2 | Step 10 | expected 120 (HP 300000/2500) |
 | harv2.futu | Step 60 | expected 48 (HP 120000/2500) |
 | imperial.nax | Step 10 | expected 33 (HP 82500/2500) |
 | katy.steel | Step 220 | expected 110 (HP 275000/2500) |
 | landcarr.futu | Step 52 | expected 50 (HP 125000/2500) |
-| leech.ordos | Step 20 | expected 50 (HP 50000/1000) |
-| litt.nax | Step 48 | expected 19 (HP 48000/2500) |
 | me262.nax | Step 75 | expected 30 (HP 75000/2500) |
 | mech | Step 10 | expected 8 (HP 7500/1000) |
-| mech_machinegun.futu | Step 128 | expected 320 (HP 320000/1000) |
-| mech_plasma.futu | Step 96 | expected 240 (HP 240000/1000) |
-| mecha.asian | Step 114 | expected 285 (HP 285000/1000) |
-| mega.steel | Step 180 | expected 450 (HP 450000/1000) |
 | modcore | Step 120 | expected 20 (HP 50000/2500) |
 | modcore1 | Step 120 | expected 20 (HP 50000/2500) |
 | modcore2 | Step 120 | expected 20 (HP 50000/2500) |
@@ -100,13 +86,10 @@ Violations: **605** across 1834 roster actors (reference-clean units: gdiarcher,
 | modcore7 | Step 120 | expected 20 (HP 50000/2500) |
 | modhovert | Step 96 | expected 48 (HP 120000/2500) |
 | modkami | Step 30 | expected 12 (HP 30000/2500) |
-| mortarbike.latin | Step 28 | expected 11 (HP 28000/2500) |
 | nokana.nax | Step 10 | expected 180 (HP 450000/2500) |
 | nuketruk.latin | Step 10 | expected 24 (HP 60000/2500) |
 | phal.futu | Step 18 | expected 30 (HP 75000/2500) |
 | piercer.nax2 | Step 7 | expected 15 (HP 37500/2500) |
-| plymouth_scorpion | Step 10 | expected 4 (HP 10000/2500) |
-| plymouth_spider | Step 10 | expected 4 (HP 10000/2500) |
 | plymouth_tiger_emp | Step 10 | expected 24 (HP 60000/2500) |
 | plymouth_tiger_esg | Step 10 | expected 24 (HP 60000/2500) |
 | plymouth_tiger_microwave | Step 10 | expected 24 (HP 60000/2500) |
@@ -114,33 +97,14 @@ Violations: **605** across 1834 roster actors (reference-clean units: gdiarcher,
 | plymouth_tiger_starflare | Step 10 | expected 36 (HP 90000/2500) |
 | plymouth_tiger_stickyfoam | Step 10 | expected 24 (HP 60000/2500) |
 | plymouth_tiger_supernova | Step 10 | expected 48 (HP 120000/2500) |
-| potnk.steel | Step 50 | expected 125 (HP 125000/1000) |
 | ra2adog | Step 2 | expected 5 (HP 5000/1000) |
 | ra2dog | Step 2 | expected 5 (HP 5000/1000) |
-| ra2dron | Step 4 | expected 10 (HP 10000/1000) |
 | ra2falc | Step 72 | expected 29 (HP 72000/2500) |
-| ra2rock | Step 18 | expected 7 (HP 18000/2500) |
 | ra2spy | Step 10 | expected 5 (HP 5000/1000) |
 | raspy | Step 10 | expected 5 (HP 5000/1000) |
-| robot_cannon.futu | Step 32 | expected 80 (HP 80000/1000) |
-| robot_missiles.futu | Step 27 | expected 68 (HP 67500/1000) |
-| robot_shotgun.futu | Step 22 | expected 55 (HP 55000/1000) |
-| rocketangel | Step 24 | expected 10 (HP 24000/2500) |
 | sarubia.nax | Step 10 | expected 25 (HP 62500/2500) |
-| scatreus | Step 100 | expected 250 (HP 250000/1000) |
-| scdragoon | Step 30 | expected 75 (HP 75000/1000) |
-| scgoliath | Step 50 | expected 125 (HP 125000/1000) |
-| scgoliath2 | Step 70 | expected 175 (HP 175000/1000) |
 | scgorekraken | Step 150 | expected 140 (HP 350000/2500) |
-| scgoremaw | Step 60 | expected 150 (HP 150000/1000) |
-| schermit | Step 150 | expected 375 (HP 375000/1000) |
-| sclurker | Step 50 | expected 125 (HP 125000/1000) |
-| scshriek | Step 14 | expected 6 (HP 14000/2500) |
-| scsporemaw | Step 10 | expected 25 (HP 25000/1000) |
-| scswarmling | Step 40 | expected 16 (HP 40000/2500) |
-| scultralisk | Step 160 | expected 400 (HP 400000/1000) |
 | shoe.nax | Step 80 | expected 60 (HP 150000/2500) |
-| shogunexecutioner | Step 1200 | expected 3000 (HP 3000000/1000) |
 | spy.futu | Step 10 | expected 5 (HP 5000/1000) |
 | su57 | Step 52 | expected 26 (HP 65000/2500) |
 | swarmer.ordos | Step 20 | expected 8 (HP 20000/2500) |
@@ -171,71 +135,42 @@ Violations: **605** across 1834 roster actors (reference-clean units: gdiarcher,
 | tscyborg | Step 25 | expected 35 (HP 35000/1000) |
 | tscyborgb | Step 25 | expected 60 (HP 60000/1000) |
 | tsdevout | Step 25 | expected 60 (HP 60000/1000) |
+| tsdissolver | Step 28 | expected 11 (HP 28000/2500) |
+| tsgtcnstcabal | Step 10 | expected 400 (HP 1000000/2500) |
 | tshacker | Step 25 | expected 60 (HP 60000/1000) |
-| tsjumpjet2 | Step 34 | expected 14 (HP 34000/2500) |
 | tslasspid | Step 12 | expected 16 (HP 40000/2500) |
 | tsmhijack | Step 10 | expected 25 (HP 25000/1000) |
+| tsreaper | Step 75 | expected 30 (HP 75000/2500) |
 | tssapc | Step 10 | expected 7 (HP 17500/2500) |
 | tsspddrone | Step 12 | expected 16 (HP 40000/2500) |
-| tst1000 | Step 10 | expected 250 (HP 250000/1000) |
+| tst1000 | Step 10 | expected 100 (HP 250000/2500) |
 | tsttnkcabal | Step 40 | expected 100 (HP 250000/2500) |
 | tszonetrooper | Step 10 | expected 80 (HP 80000/1000) |
 | twister.futu | Step 50 | expected 20 (HP 50000/2500) |
 | twister.steel | Step 50 | expected 20 (HP 50000/2500) |
 | typechiha | Step 104 | expected 52 (HP 130000/2500) |
-| wc2_human_demolitionsquad | Step 16 | expected 40 (HP 40000/1000) |
-| wc2_human_knight | Step 67 | expected 168 (HP 167500/1000) |
-| wc2_human_mcv | Step 120 | expected 300 (HP 300000/1000) |
 | wc2_human_militia2 | Step 8 | expected 20 (HP 20000/1000) |
-| wc2_human_paladin | Step 67 | expected 168 (HP 167500/1000) |
-| wc2_human_peasant | Step 16 | expected 40 (HP 40000/1000) |
-| wc2_orc_goblin_sappers | Step 16 | expected 40 (HP 40000/1000) |
-| wc2_orc_kodo_beast | Step 125 | expected 50 (HP 125000/2500) |
-| wc2_orc_mcv | Step 120 | expected 300 (HP 300000/1000) |
-| wc2_orc_ogre | Step 80 | expected 200 (HP 200000/1000) |
-| wc2_orc_ogremage | Step 80 | expected 200 (HP 200000/1000) |
-| wc2_orc_peon | Step 16 | expected 40 (HP 40000/1000) |
-| wheel.futu | Step 12 | expected 30 (HP 30000/1000) |
 | yak | Step 32 | expected 13 (HP 32000/2500) |
 | yakarmored | Step 80 | expected 32 (HP 80000/2500) |
 | yaknuclear | Step 64 | expected 26 (HP 64000/2500) |
 | yakolev.latin | Step 40 | expected 16 (HP 40000/2500) |
 | yaktesla | Step 64 | expected 26 (HP 64000/2500) |
-| yrlunr | Step 28 | expected 11 (HP 28000/2500) |
 | zep.nax | Step 21 | expected 500 (HP 1250000/2500) |
 | zep.nax2 | Step 21 | expected 540 (HP 1350000/2500) |
 | zombietank.nax | Step 63 | expected 44 (HP 110000/2500) |
 
 
-## F3 — infantry with Repairable  (22)
+## F3 — infantry with Repairable  (4)
 
 | actor | actual | expected |
 |---|---|---|
-| armor_harv.nax2 | infantry declares Repairable locally |  |
 | armor_mg.nax2 | infantry declares Repairable locally |  |
-| arty.steel | infantry declares Repairable locally |  |
-| beholder.steel | infantry declares Repairable locally |  |
-| defender.steel | infantry declares Repairable locally |  |
-| engi.futu | infantry declares Repairable locally |  |
-| engi.nax2 | infantry declares Repairable locally |  |
-| giant_rk.nax2 | infantry declares Repairable locally |  |
-| mech_machinegun.futu | infantry declares Repairable locally |  |
-| mech_plasma.futu | infantry declares Repairable locally |  |
-| mecha.asian | infantry declares Repairable locally |  |
-| mega.steel | infantry declares Repairable locally |  |
-| potnk.steel | infantry declares Repairable locally |  |
-| robot_cannon.futu | infantry declares Repairable locally |  |
-| robot_missiles.futu | infantry declares Repairable locally |  |
-| robot_shotgun.futu | infantry declares Repairable locally |  |
-| scdragoon | infantry declares Repairable locally |  |
-| scgoliath | infantry declares Repairable locally |  |
-| scgoliath2 | infantry declares Repairable locally |  |
-| shogunexecutioner | infantry declares Repairable locally |  |
+| mortarbike.latin | infantry declares Repairable locally |  |
+| plymouth_spider | infantry declares Repairable locally |  |
 | wc2_human_militia2 | infantry declares Repairable locally |  |
-| wheel.futu | infantry declares Repairable locally |  |
 
 
-_248 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
+_231 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
 
 
 ## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (64)
@@ -483,7 +418,7 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | yrygppet | Power -200 | expected -500 (-Cost/20) |
 
 
-## F8 — vehicle TurnSpeed ≠ Speed/5  (32)
+## F8 — vehicle TurnSpeed ≠ Speed/5  (34)
 
 | actor | actual | expected |
 |---|---|---|
@@ -507,10 +442,12 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | plymouth_lynx_supernova | TurnSpeed 10 (Speed 90) | expected 18 = Speed/5 |
 | python.ordos | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 |
 | qmcv.steel | TurnSpeed 15 (Speed 60) | expected 12 = Speed/5 |
+| ra2dron | TurnSpeed 200 (Speed 200) | expected 40 = Speed/5 |
 | ra_heatraytank | TurnSpeed 24 (Speed 60) | expected 12 = Speed/5 |
 | shock_raider.ixian | TurnSpeed 48 (Speed 120) | expected 24 = Speed/5 |
 | shoe.nax | TurnSpeed 30 (Speed 75) | expected 15 = Speed/5 |
 | tsart2 | TurnSpeed 24 (Speed 60) | expected 12 = Speed/5 |
+| tsdissolver | TurnSpeed 396 (Speed 70) | expected 14 = Speed/5 |
 | tshvr | TurnSpeed 40 (Speed 80) | expected 16 = Speed/5 |
 | tsjugg | TurnSpeed 20 (Speed 71) | expected 14 = Speed/5 |
 | tslpst | TurnSpeed 40 (Speed 85) | expected 17 = Speed/5 |
@@ -521,7 +458,7 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | ttnk | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 |
 
 
-## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (48)
+## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (51)
 
 | actor | actual | expected |
 |---|---|---|
@@ -557,6 +494,8 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | ra2htk | Turreted 38 vs Mobile 19 | must match |
 | raapc | Turreted 42 vs Mobile 21 | must match |
 | sccyclone | Turreted 46 vs Mobile 23 | must match |
+| scgoliath | Turreted 36 vs Mobile 18 | must match |
+| scgoliath2 | Turreted 30 vs Mobile 15 | must match |
 | scmatador | Turreted 15 vs Mobile 20 | must match |
 | shoe.nax | Turreted 15 vs Mobile 30 | must match |
 | t72 | Turreted 20 vs Mobile 16 | must match |
@@ -565,6 +504,7 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | tkmmedictruck | Turreted 20 vs Mobile 15 | must match |
 | tkmtrenchtruck | Turreted 15 vs Mobile 12 | must match |
 | tkmzaza | Turreted 30 vs Mobile 15 | must match |
+| tsdissolver | Turreted 40 vs Mobile 396 | must match |
 | tshvr | Turreted 16 vs Mobile 40 | must match |
 | tssapccabal | Turreted 20 vs Mobile 40 | must match |
 | v1truck | Turreted 32 vs Mobile 20 | must match |
@@ -575,7 +515,7 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | yrytnk | Turreted 36 vs Mobile 18 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (45)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (56)
 
 | actor | actual | expected |
 |---|---|---|
@@ -583,24 +523,28 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | brad.nax | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
 | deviator.ordos | TurnSpeed 22 (Speed 55) | expected 11 = Speed/5 (artillery) |
 | gdiexosuit | TurnSpeed 40 (Speed 100) | expected 20 = Speed/5 (artillery) |
+| giant_rk.nax2 | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
 | imperial.nax | TurnSpeed 44 (Speed 110) | expected 22 = Speed/5 (artillery) |
 | lars.latin | TurnSpeed 28 (Speed 70) | expected 14 = Speed/5 (artillery) |
 | manta.steel | TurnSpeed 46 (Speed 115) | expected 23 = Speed/5 (artillery) |
+| mech_machinegun.futu | TurnSpeed 14 (Speed 35) | expected 7 = Speed/5 (artillery) |
 | missile_tank.ixian | TurnSpeed 20 (Speed 50) | expected 10 = Speed/5 (artillery) |
 | mrj | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
-| plymouth_scorpion | TurnSpeed 40 (Speed 140) | expected 56 = 2 x Speed/5 (turretless) |
-| plymouth_spider | TurnSpeed 40 (Speed 140) | expected 56 = 2 x Speed/5 (turretless) |
+| potnk.steel | TurnSpeed 10 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
 | qtnk | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | railt.asian | TurnSpeed 26 (Speed 65) | expected 13 = Speed/5 (artillery) |
 | ramgg | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| robot_missiles.futu | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
 | rtruck.latin | TurnSpeed 30 (Speed 75) | expected 15 = Speed/5 (artillery) |
 | sarubia.nax | TurnSpeed 26 (Speed 65) | expected 13 = Speed/5 (artillery) |
 | savi.steel | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| scdragoon | TurnSpeed 1023 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
 | scdrone | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
 | scoutdrone.ordos | TurnSpeed 58 (Speed 145) | expected 29 = Speed/5 (artillery) |
 | scprobe | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
 | screaver | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
 | scscv | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
+| scsporemaw | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 (artillery) |
 | stnk | TurnSpeed 60 (Speed 150) | expected 30 = Speed/5 (artillery) |
 | sturmtiger.nax | TurnSpeed 6 (Speed 30) | expected 12 = 2 x Speed/5 (turretless) |
 | tkmbattlebus | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
@@ -611,13 +555,20 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | tsarty | TurnSpeed 26 (Speed 65) | expected 13 = Speed/5 (artillery) |
 | tsarty_bus | TurnSpeed 18 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
 | tscheavyspider | TurnSpeed 64 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
+| tsreaper | TurnSpeed 200 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | tssapc | TurnSpeed 40 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | tssmech | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 (artillery) |
 | tstalwolv | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 (artillery) |
 | wc2_human_ballista | TurnSpeed 18 (Speed 45) | expected 9 = Speed/5 (artillery) |
+| wc2_human_knight | TurnSpeed 92 (Speed 115) | expected 46 = 2 x Speed/5 (turretless) |
 | wc2_human_knight2 | TurnSpeed 96 (Speed 120) | expected 48 = 2 x Speed/5 (turretless) |
+| wc2_human_mcv | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| wc2_human_paladin | TurnSpeed 92 (Speed 115) | expected 46 = 2 x Speed/5 (turretless) |
 | wc2_human_siege_engine | TurnSpeed 28 (Speed 70) | expected 14 = Speed/5 (artillery) |
 | wc2_orc_catapult | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
+| wc2_orc_mcv | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| wc2_orc_ogre | TurnSpeed 68 (Speed 85) | expected 34 = 2 x Speed/5 (turretless) |
+| wc2_orc_ogremage | TurnSpeed 68 (Speed 85) | expected 34 = 2 x Speed/5 (turretless) |
 | wc2_orc_siege_engine | TurnSpeed 28 (Speed 70) | expected 14 = Speed/5 (artillery) |
 | wtrt.asian | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | yrbfrt | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
@@ -626,7 +577,7 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | zombietank.nax | TurnSpeed 12 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
 
 
-## F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)  (35)
+## F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)  (36)
 
 | actor | actual | expected |
 |---|---|---|
@@ -653,6 +604,7 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | ra_grad | RevokeDelay 5 | expected 57 (ReloadDelay 115/2) |
 | ra_heatraytank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | sccyclone | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| sclurker | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | shock_raider.ixian | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | storm_raider.ixian | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | tkmstryker | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
@@ -683,8 +635,8 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | ixian: large_gun_turret.ixian | prereqs: construction_yard.ixian, outpost.ixian | must include tech tier: research_centre.ixian |
 | lnaxis: twr.nax2 | prereqs: barr.nax2, conyard.nax2 | must include tech tier: tech.nax2 |
 | modjapan: jballistat | prereqs: dome.japan, rafact.japan | must include tech tier: modjtek |
-| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos | must include tech tier: research_centre.ordos |
 | ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos | must include tech tier: research_centre.ordos |
+| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos | must include tech tier: research_centre.ordos |
 | syndicate: sml.latin | prereqs: cgcnst.latin, cgup.latin | must include tech tier: cgspy.latin |
 | tsgdi: tsntpulsgdi | prereqs: tsgtcnstgdi, tsgtradr | must include tech tier: tsgttech |
 

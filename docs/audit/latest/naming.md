@@ -44,7 +44,7 @@
 | cabal | 10/57 | 17% |
 | consortium | 59/61 | 96% |
 | edenl | 0/43 | 0% |
-| forgotten | 53/76 | 69% |
+| forgotten | 54/76 | 71% |
 | futuretech | 9/57 | 15% |
 | gdi | 7/60 | 11% |
 | human2 | 14/16 | 87% |
