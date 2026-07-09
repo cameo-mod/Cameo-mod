@@ -1,5 +1,18 @@
 # Cameo-mod
 
+## Mission & end goal (never lose sight of this)
+
+Cameo is the ultimate crossover RTS between the classic RTS games and will
+keep growing. The architecture goal is **dynamic faction loading**: load
+only the factions picked in the lobby / needed by the shellmap, instead of
+everything at boot (historical peak: 12 GB RAM — unplayable on 8 GB
+machines). Every faction therefore becomes a fully self-contained
+ContentPack: rules + weapons + sequences + its own ai.yaml + all assets
+(sprites, voxels, icons, sounds) in per-type subfolders, zero cross-pack
+dependencies, shared content only in theme Shared/ packs, and unused files
+audited and deleted. Current progress + the exact runbook to continue:
+**`docs/MIGRATION.md`**.
+
 ## Required reading, in order
 
 1. **`docs/DESIGN.md`** — the binding design contract (naming grammar, stat
