@@ -1,0 +1,1538 @@
+mtnk:
+	Defaults:
+		Filename: mtnk.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	muzzle2:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: mtnkicnh.shp
+
+htnk:
+	Defaults:
+		Filename: htnk.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: htnkicnh.shp
+
+jeep:
+	Defaults:
+		Filename: jeep.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: jeepicnh.shp
+
+msam:
+	Defaults:
+		Filename: msam.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	empty-aim:
+		Start: 64
+		Facings: 32
+		InterpolatedFacings: 64
+	aim:
+		Start: 64
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: msamicnh.shp
+
+td_gdi_boxer:
+	Defaults:
+		Filename: td_gdi_boxer.png
+		Scale: 0.75
+	idle:
+		Scale: 1
+		Facings: 64
+		Offset: 0,9
+	turret:
+		Scale: 1
+		Start: 64
+		Facings: 64
+		Offset: 0,9
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: td_gdi_boxer_icon.png
+
+gdiarcher:
+	Defaults:
+		Filename: gdiarcherchassis.png
+	idle:
+		Facings: 64
+		Offset: 0,10
+	turret:
+		Filename: gdiarchercannon.png
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: gdiarchericon.png
+
+mlrs:
+	Defaults:
+		Filename: mlrs.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	turret1:
+		Start: 64
+		Facings: 32
+		InterpolatedFacings: 64
+	turret0:
+		Start: 96
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: mlrsicnh.shp
+
+apc:
+	Defaults:
+		Filename: apc.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	turret:
+		Filename: apctur.shp
+		Scale: 2.0
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: apcmuz.shp
+		Scale: 2.0
+		Length: 3
+		Stride: 6
+		Facings: 8
+	close:
+		Start: 32
+		Length: 3
+	unload:
+		Start: 32
+	icon:
+		Filename: apcicnh.shp
+
+orca:
+	Defaults:
+		Filename: orca.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	move:
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: orcaicnh.shp
+
+a10:
+	Defaults:
+		Filename: a10.shp
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: a10icnh.shp
+
+a10carrier:
+	Defaults:
+		Filename: a10.shp
+		Scale: 0.5
+	idle:
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: a10icnh.shp
+
+gdifact:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: gdifact.shp
+	build:
+		Start: 4
+		Length: 20
+		Tick: 100
+	idle:
+		Length: 4
+		Tick: 100
+	damaged-idle:
+		Start: 24
+		Length: 4
+		Tick: 100
+	damaged-build:
+		Start: 28
+		Length: 20
+		Tick: 100
+	dead:
+		Start: 48
+		Tick: 800
+	make:
+		Filename: gdifactmake.shp
+		Length: *
+		Tick: 80
+	icon:
+		Filename: facticnh.shp
+	idle-overlay:
+		Filename: customoverlay.shp
+
+pyle:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: pyle.shp
+	idle:
+		Length: 10
+		Tick: 100
+	damaged-idle:
+		Start: 10
+		Length: 10
+		Tick: 100
+	dead:
+		Start: 20
+		Tick: 800
+	make:
+		Filename: pylemake.shp
+		Length: *
+		Tick: 80
+	icon:
+		Filename: pyleicnh.shp
+
+weap:
+	Inherits: ^WithBuildingBib2
+	Defaults:
+		Filename: weap.shp
+		Offset: 0,-12
+	idle:
+		ZOffset: -511
+	damaged-idle:
+		Start: 1
+		ZOffset: -511
+	dead:
+		Start: 2
+		Tick: 800
+	build-top:
+		Filename: weap2.shp
+		Length: 10
+		ZOffset: -1024
+	damaged-build-top:
+		Filename: weap2.shp
+		Start: 10
+		Length: 10
+		ZOffset: -1024
+	customhack:
+		Filename: weap2.shp
+		Length: 1
+	damaged-customhack:
+		Filename: weap2.shp
+		Start: 10
+		Length: 1
+	place:
+		Filename: weapmake.shp
+		Start: 19
+	make:
+		Filename: weapmake.shp
+		Length: *
+		Tick: 80
+	bib:
+		Offset: 0,0
+	icon:
+		Filename: weapicnh.shp
+		Offset: 0,0
+
+eye:
+	Inherits: ^WithBuildingBib3
+	Defaults:
+		Filename: eye.shp
+	idle:
+		Length: 16
+		Tick: 100
+	damaged-idle:
+		Start: 16
+		Length: 16
+		Tick: 100
+	dead:
+		Start: 32
+		Tick: 800
+	make:
+		Filename: eyemake.shp
+		Length: *
+		Tick: 80
+	icon:
+		Filename: eyeicnh.shp
+
+eye.ionc:
+	icon:
+		Filename: addon_ioncannon_icon.png
+		Offset: 0,0
+
+gtwr:
+	Inherits: ^WithBuildingBibGun
+	Defaults:
+		Filename: gtwr.shp
+	idle:
+	damaged-idle:
+		Start: 1
+	dead:
+		Start: 2
+		Tick: 800
+	make:
+		Combine:
+			gtwrmake:
+				Filename: gtwrmake.shp
+				Length: 15
+		Length: 15
+		Tick: 80
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	bib:
+		Offset: -1,-2
+	icon:
+		Filename: gtwricnh.shp
+
+td_gdi_skyshield:
+	Inherits: ^WithBuildingBibGun
+	Defaults:
+		Filename: td_gdi_skyshield.png
+		Offset: 0,-2
+	idle:
+		Facings: 64
+	make:
+		Filename: td_gdi_skyshield_make.png
+		Length: *
+	damaged-idle:
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	dead:
+	bib:
+		Offset: 0,0
+	icon:
+		Filename: td_gdi_skyshield_icon.png
+		Offset: 0,0
+
+atwr:
+	Inherits: ^WithBuildingBibSilo
+	Defaults:
+		Filename: atwr.shp
+		Offset: 0,-26
+	idle:
+	damaged-idle:
+		Start: 1
+	dead:
+		Start: 2
+		Tick: 800
+	make:
+		Filename: atwrmake.shp
+		Length: *
+		Tick: 80
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+		Offset: 0,0
+	bib:
+		Offset: -3,0
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: atwricnh.shp
+		Offset: 0,0
+
+e1:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Filename: e1.shp
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 64
+		Length: 8
+		Facings: 8
+	prone-stand:
+		Start: 144
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 144
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 144
+		Length: 4
+		Facings: 8
+		Tick: 100
+	# stand -> prone transition
+	liedown:
+		Start: 128
+		Length: 2
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 176
+		Length: 2
+		Facings: 8
+	prone-shoot:
+		Start: 192
+		Length: 8
+		Facings: 8
+	idle1:
+		Start: 256
+		Length: 16
+		Tick: 120
+	idle2:
+		Start: 272
+		Length: 16
+		Tick: 120
+	parachute:
+		Start: 377
+	# Shot
+	die1:
+		Start: 288
+		Length: 8
+		Tick: 80
+	# Explode
+	die2:
+		Start: 296
+		Length: 8
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 304
+		Length: 8
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 312
+		Length: 12
+		Tick: 80
+	# Burn
+	die5:
+		Start: 324
+		Length: 18
+		Tick: 80
+	# Tib
+	die6:
+		Start: 296
+		Length: 8
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: e1icnh.shp
+
+e2:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Filename: e2.shp
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Tick: 100
+	throw:
+		Start: 64
+		Length: 20
+		Facings: 8
+	# stand -> prone transition
+	liedown:
+		Start: 224
+		Length: 2
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 272
+		Length: 2
+		Facings: 8
+	prone-stand:
+		Start: 240
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 240
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 240
+		Length: 4
+		Facings: 8
+		Tick: 100
+	prone-throw:
+		Start: 288
+		Length: 12
+		Facings: 8
+	idle1:
+		Start: 384
+		Length: 16
+		Tick: 120
+	idle2:
+		Start: 399
+		Length: 16
+		Tick: 120
+	parachute:
+		Start: 505
+	die1:
+		Start: 416
+		Length: 8
+		Tick: 80
+	die2:
+		Start: 424
+		Length: 8
+		Tick: 80
+	die3:
+		Start: 432
+		Length: 8
+		Tick: 80
+	die4:
+		Start: 440
+		Length: 12
+		Tick: 80
+	die5:
+		Start: 452
+		Length: 18
+		Tick: 80
+	die6:
+		Start: 416
+		Length: 8
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: e2rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	icon:
+		Filename: e2icnh.shp
+
+e3:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Filename: e3.shp
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 64
+		Length: 8
+		Facings: 8
+	# stand -> prone transition
+	liedown:
+		Start: 128
+		Length: 2
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 176
+		Length: 2
+		Facings: 8
+	prone-stand:
+		Start: 144
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 144
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 144
+		Length: 4
+		Facings: 8
+		Tick: 100
+	prone-shoot:
+		Start: 192
+		Length: 10
+		Facings: 8
+	idle1:
+		Start: 272
+		Length: 14
+		Tick: 120
+	idle2:
+		Start: 286
+		Length: 18
+		Tick: 120
+	parachute:
+		Start: 393
+	# Shot
+	die1:
+		Start: 303
+		Length: 9
+		Tick: 80
+	# Explode
+	die2:
+		Start: 312
+		Length: 8
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 320
+		Length: 8
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 328
+		Length: 12
+		Tick: 80
+	# Burn
+	die5:
+		Start: 340
+		Length: 18
+		Tick: 80
+	# Tib
+	die6:
+		Start: 312
+		Length: 8
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: e3rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	icon:
+		Filename: e3icnh.shp
+
+cncpt:
+	Defaults:
+		Filename: cncpt.shp
+	idle:
+		Facings: 16
+		InterpolatedFacings: 64
+	turret:
+		Filename: ssam.shp
+		Facings: 32
+		InterpolatedFacings: 64
+	icon:
+		Filename: GDIMissileCruiserIcon.png
+
+gdicarrier:
+	Defaults:
+		Filename: gdicarrier.shp
+	idle:
+		Facings: 64
+		Offset: 0,32
+		Scale: 0.8
+	icon:
+		Filename: futurecarrier.png
+
+cncca:
+	Defaults:
+	idle:
+		Filename: GdiBattleshipSpritesheet.png
+		Scale: 1.25
+		Facings: 64
+	turret:
+		Filename: GdiBattleshipTurretSpritesheet.png
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: RailgunBattleshipIcon.png
+
+gdiexosuit:
+	Defaults:
+		Filename: newegg.shp
+		Scale: 0.3
+		Offset: 0,-5
+	idle:
+		Facings: -8
+	stand:
+		Facings: -8
+	walk:
+		Start: 8
+		Facings: 8
+		Length: 8
+		Tick: 100
+	shoot:
+		Start: 56
+		Length: 3
+		Facings: 8
+		Tick: 100
+	icon:
+		Filename: exosuit_icon.shp
+		Offset: 0,0
+
+newhumvee:
+	Defaults:
+		Filename: newhumvee.shp
+	idle:
+		Facings: -64
+		Scale: 0.5
+	turret:
+		Filename: newhumvee2.shp
+		Offset: 0,10
+		Start: 64
+		Facings: 64
+	muzzle:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: newhumveeicon.shp
+
+gdiofficer:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Scale: 0.71
+		Filename: modofficer.shp
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 24
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 120
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Start: 16
+		Facings: 8
+	prone-stand2:
+		Start: 16
+		Facings: 8
+	prone-run:
+		Start: 72
+		Length: 6
+		Facings: 8
+		Tick: 100
+	# stand -> prone transition
+	liedown:
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Facings: 8
+		Start: 216
+	prone-shoot:
+		Start: 168
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 224
+		Length: 10
+		Tick: 120
+	idle2:
+		Start: 240
+		Length: 2
+		Tick: 120
+	idle3:
+		Start: 250
+		Length: 10
+		Tick: 120
+	cheer:
+		Start: 8
+	# Dancing
+	idle4:
+		Start: 242
+		Length: 2
+		Tick: 120
+	# Shot
+	die1:
+		Start: 274
+		Length: 20
+		Tick: 80
+	# Explode
+	die2:
+		Start: 330
+		Length: 20
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 305
+		Length: 20
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 305
+		Length: 20
+		Tick: 80
+	# Burn
+	die5:
+		Start: 330
+		Length: 20
+		Tick: 80
+	# Tib
+	die6:
+		Start: 274
+		Length: 20
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: gdiofficericon.shp
+
+gdipredator:
+	Defaults:
+		Filename: gdipredator.shp
+	idle:
+		Facings: -64
+		Scale: 0.25
+	turret:
+		Facings: -64
+		Start: 64
+		Scale: 0.25
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+		Scale: 1.333
+	muzzle2:
+		Filename: minigun.shp
+		Length: 6
+		Facings: 8
+	icon:
+		Filename: gdipredatoricon.shp
+
+gdimammoth3:
+	Defaults:
+		Filename: gdimammoth3.shp
+	idle:
+		Facings: -64
+		Scale: 0.25
+	turret:
+		Facings: -64
+		Start: 64
+		Scale: 0.25
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+		Scale: 1.333
+	icon:
+		Filename: gdimammoth3icon.shp
+
+gdimissilesoldier:
+	Inherits: e3
+	Defaults:
+		Filename: missile_soldier.shp
+	icon:
+		Filename: missile_soldier_icon.shp
+
+gdiempgrenadier:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Filename: tdempgrenadier.shp
+		Scale: 0.96
+	stand:
+		Start: 1
+		Facings: 8
+	stand2:
+		Start: 9
+		Facings: 8
+	run:
+		Start: 25
+		Length: 6
+		Facings: 8
+		Tick: 100
+	throw:
+		Start: 121
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Start: 17
+		Facings: 8
+	prone-stand2:
+		Start: 17
+		Facings: 8
+	prone-run:
+		Start: 73
+		Length: 6
+		Facings: 8
+		Tick: 100
+	# stand -> prone transition
+	liedown:
+		Start: 217
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 217
+		Facings: 8
+	prone-throw:
+		Start: 169
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 225
+		Length: 8
+		Tick: 120
+	idle2:
+		Start: 234
+		Length: 2
+		Tick: 120
+	idle3:
+		Start: 250
+		Length: 12
+		Tick: 120
+	cheer:
+		Start: 217
+		Facings: 8
+	# Dancing
+	idle4:
+		Start: 262
+		Length: 12
+		Tick: 120
+	# Shot
+	die1:
+		Start: 278
+		Length: 16
+		Tick: 80
+	# Explode
+	die2:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 307
+		Length: 17
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Burn
+	die5:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Tib
+	die6:
+		Start: 278
+		Length: 16
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+		Scale: 1.0
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+		Scale: 1.0
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		Scale: 1.0
+	icon:
+		Filename: gdiempgrenadiericon.shp
+
+gdishotgunner:
+	Inherits: ^InfantryOverlays
+	Defaults:
+		Scale: 0.92
+		Filename: tdshotgunner.shp
+	stand:
+		Facings: 8
+	stand2:
+		Start: 8
+		Facings: 8
+	run:
+		Start: 16
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 64
+		Length: 7
+		Facings: 8
+	prone-stand:
+		Start: 136
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 136
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 136
+		Length: 4
+		Facings: 8
+		Tick: 100
+	# stand -> prone transition
+	liedown:
+		Start: 120
+		Length: 2
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 168
+		Length: 2
+		Facings: 8
+	prone-shoot:
+		Start: 184
+		Length: 7
+		Facings: 8
+	idle1:
+		Start: 240
+		Length: 15
+		Tick: 120
+	idle2:
+		Start: 256
+		Length: 15
+		Tick: 120
+	idle3:
+		Start: 240
+		Length: 15
+		Tick: 120
+	cheer:
+		Facings: 8
+	# Dancing
+	idle4:
+		Start: 256
+		Length: 15
+		Tick: 120
+	# Shot
+	die1:
+		Start: 272
+		Length: 8
+		Tick: 80
+	# Explode
+	die2:
+		Start: 280
+		Length: 8
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 288
+		Length: 8
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 296
+		Length: 12
+		Tick: 80
+	# Burn
+	die5:
+		Start: 308
+		Length: 18
+		Tick: 80
+	# Tib
+	die6:
+		Start: 272
+		Length: 8
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: tdshotgunnericon.shp
+
+gdisniper:
+	Defaults:
+		Filename: gdisniper.shp
+		Scale: 0.96
+	Inherits: ^InfantryOverlays
+	stand:
+		Start: 1
+		Facings: 8
+	stand2:
+		Start: 9
+		Facings: 8
+	run:
+		Start: 25
+		Length: 6
+		Facings: 8
+		Tick: 100
+	shoot:
+		Start: 121
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Start: 17
+		Facings: 8
+	prone-stand2:
+		Start: 144
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 73
+		Length: 6
+		Facings: 8
+		Tick: 100
+	# stand -> prone transition
+	liedown:
+		Start: 217
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 217
+		Facings: 8
+	prone-shoot:
+		Start: 169
+		Length: 6
+		Facings: 8
+	idle1:
+		Start: 225
+		Length: 8
+		Tick: 120
+	idle2:
+		Start: 234
+		Length: 2
+		Tick: 120
+	idle3:
+		Start: 250
+		Length: 12
+		Tick: 120
+	cheer:
+		Start: 217
+		Facings: 8
+	# Dancing
+	idle4:
+		Start: 262
+		Length: 12
+		Tick: 120
+	# Shot
+	die1:
+		Start: 278
+		Length: 16
+		Tick: 80
+	# Explode
+	die2:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Fly and explode in air
+	die3:
+		Start: 307
+		Length: 17
+		Tick: 80
+	# Fly through air squish on ground
+	die4:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Burn
+	die5:
+		Start: 331
+		Length: 8
+		Tick: 80
+	# Tib
+	die6:
+		Start: 278
+		Length: 16
+		Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Length: *
+		Scale: 1.0
+	die-crushed:
+		Filename: e1rot.shp
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+		Scale: 1.0
+	garrison-muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		Scale: 1.0
+	icon:
+		Filename: gdisnipericon.shp
+
+gdiassaultapc:
+	Defaults:
+		Filename: newapc.shp
+	idle:
+		Facings: -64
+		Scale: 0.4
+	turret:
+		Filename: jeep.shp
+		Scale: 2
+		Start: 32
+		Facings: 32
+		InterpolatedFacings: 64
+	muzzle:
+		Filename: minigun.shp
+		Scale: 2
+		Length: 6
+		Facings: 8
+	close:
+		Facings: -32
+	unload:
+		Facings: -32
+	icon:
+		Filename: gdiassaultapcicon.shp
+
+gdifirehawk:
+	Defaults:
+		Filename: Firehawk.shp
+		Scale: 2
+	idle:
+		Facings: 64
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: Firehawkicon.shp
+
+gdihavoc:
+	Inherits: ^InfantryOverlays
+	Inherits@2: ^RA2InfantryDeaths
+	Defaults:
+		Filename: havoc.shp
+		Scale: 0.8
+	stand:
+		Facings: 8
+	stand2:
+		Facings: 8
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		Tick: 50
+	shoot:
+		Start: 128
+		Length: 7
+		Facings: 8
+	# stand -> prone transition
+	liedown:
+		Start: 252
+		Length: 2
+		Facings: 8
+	# prone -> stand transition
+	standup:
+		Start: 268
+		Length: 2
+		Facings: 8
+	prone-stand:
+		Start: 244
+		Stride: 4
+		Facings: 8
+	prone-stand2:
+		Start: 112
+		Stride: 4
+		Facings: 8
+	prone-run:
+		Start: 284
+		Length: 10
+		Facings: 8
+		Tick: 50
+	prone-shoot:
+		Start: 364
+		Length: 7
+		Facings: 8
+	idle1:
+		Start: 88
+		Length: 20
+		Tick: 120
+	idle2:
+		Start: 108
+		Length: 20
+		Tick: 120
+	idle3:
+		Start: 224
+		Length: 20
+		Tick: 120
+	cheer:
+		Filename: rmbo.shp
+		Scale: 1
+		Start: 396
+		Length: 3
+		Facings: 8
+		Tick: 120
+	# Shot
+	die1:
+		Start: 184
+		Length: 20
+		Tick: 80
+	# Explode
+	die2:
+		Start: 204
+		Length: 20
+		Tick: 80
+	# Fly and explode in air
+	#die3:
+	#	Start: 500
+	#	Length: 20
+	#	Tick: 80
+	# Fly through air squish on ground
+	#die4:
+	#	Start: 500
+	#	Length: 20
+	#	Tick: 80
+	# Burn
+	#die5:
+	#	Filename: rmbo.shp
+	#	Scale: 1
+	#	Start: 354
+	#	Length: 18
+	#	Tick: 80
+	# Tib
+	#die6:
+	#	Filename: rmbo.shp
+	#	Scale: 1
+	#	Start: 308
+	#	Length: 4
+	#	Tick: 80
+	# Electro
+	die7: ##########
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: e1rot.shp
+		Scale: 1
+		Start: 16
+		Length: 4
+		Tick: 1600
+		ZOffset: -511
+	icon:
+		Filename: havoc_icon.shp
+
+cncsyrd:
+	Defaults:
+		Filename: GdiNavalYardUdSpritesheet.png
+		Scale: 1.25
+	idle:
+		Start: 13
+		Length: 6
+	damaged-idle:
+		Filename: GdiNavalYarddSpritesheet.png
+		Length: *
+	make:
+		Length: 13
+	dead:
+		Filename: GdiNavalYarddSpritesheet.png
+		Length: 1
+	icon:
+		Filename: gdishipyardicon.png
+
+gdirig:
+	Defaults:
+		Filename: GDIRigMobile.png
+		# Scale: 1.25
+		# Offset: 0,8
+	idle:
+		Facings: 64
+	deployed:
+		Filename: GDIRigTower.png
+		Facings: 64
+	damaged-deployed:
+		Filename: GDIRigTower.png
+		Facings: 64
+	turret:
+		Filename: GDIRigPhalanx.png
+		Facings: 64
+		Offset: 0,32
+		Scale: 1.5
+	make:
+		Filename: GDIRigMobile.png
+		Start: 64
+		Length: 11
+		Tick: 110
+	dead:
+		Filename: GDIRigMobile.png
+		Start: 70
+		Tick: 800
+	dot:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	pointdefense:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	targeting:
+		Filename: invisibleitem.shp
+		ZOffset: -9999
+	muzzle:
+		Filename: gunfire2.shp
+		Length: *
+	icon:
+		Filename: gdirigicon.png
+
+gdirigdrone:
+	Defaults:
+		Filename: gdirigdrone.png
+		Offset: 0,24
+	idle:
+		Start: 8
+		Facings: 8
+		InterpolatedFacings: 32
+		Length: 8
+		Tick: 64
+	move:
+		Start: 8
+		Facings: 8
+		InterpolatedFacings: 32
+		Length: 8
+		Tick: 64
+	icon:
+		Filename: steel_scalpel_icon.shp
+	muzzle:
+		Filename: minigun.shp
+		Length: 3
+		Stride: 6
+		Facings: 8
+		InterpolatedFacings: 32
+		Tick: 30
+		Offset: 0,0
+	muzzle2:
+		Filename: steel_energymuzzle.shp
+		Length: 14
+		Offset: 0,0
+
+longrangesensorsicon:
+	icon:
+		Filename: longrangesensorsicon.png
+
+armorpiercingbulletsicon:
+	icon:
+		Filename: armorpiercingbulletsicon.png
+
+aircraftarmorplatingicon:
+	icon:
+		Filename: aircraftarmorplatingicon.png
+
+advancedmissiletargetingicon:
+	icon:
+		Filename: advancedmissiletargetingicon.png
+
+cuttingedgeequipmenticon:
+	icon:
+		Filename: cuttingedgeequipmenticon.png
+
+highvelocitycannonsicon:
+	icon:
+		Filename: highvelocitycannonsicon.png
+
+lightweightarmorplatingicon:
+	icon:
+		Filename: lightweightarmorplatingicon.png
+
+havocexosuit:
+	icon:
+		Filename: havocexosuit.png

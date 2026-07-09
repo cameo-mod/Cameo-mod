@@ -49,7 +49,7 @@ commits and reported.
 | TS Nod | DONE `8c82ad950` | DONE `a34c80678` | — | — | — |
 | CABAL | **next?** on design hold (WIP faction — call when to rename) | | | | |
 | TS Shared | after TS factions (shared actor ownership decisions) | | | | |
-| TD GDI / TD Nod | rules already packed | weapons+sequences split pending | — | — | — |
+| TD GDI / TD Nod | rules packed (ids unrenamed) | DONE incl. weapons+sequences | — | — | — |
 | RA2Mod six, D2k four | rules already packed | weapons+sequences split pending | — | — | — |
 | RA1 (allies/soviet/japan) | maps drafted | monolith | | | |
 | RA2 (america/russia/yuri) | maps drafted | monolith | | | |
