@@ -74,19 +74,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: forgotten
-		BaseActor: tsmcvmutant
+		BaseActor: forgotten_mobileconstructionvehicle
 	StartingUnits@defaultforgotten:
 		Class: light
 		ClassName: Light Support
 		Factions: forgotten
-		BaseActor: tsmcvmutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk
+		BaseActor: forgotten_mobileconstructionvehicle
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank
 	StartingUnits@heavyforgotten:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: forgotten
-		BaseActor: tsmcvmutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk,ts2tnk,ts2tnk,ts2tnk
+		BaseActor: forgotten_mobileconstructionvehicle
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank,forgotten_warriortank,forgotten_warriortank,forgotten_warriortank
 	StartingUnits@mcvonlyracabal:
 		Class: none
 		ClassName: MCV Only
@@ -272,14 +272,14 @@ tsmonstermaker1:
 	SpawnActorOnDeath@monstermaker3:
 		RequiresCondition: monsterbirth
 		Probability: 8
-		Actor: tsdoggiew
+		Actor: forgotten_tiberianfiend_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
 	SpawnActorOnDeath@monstermaker3b:
 		RequiresCondition: monsterbirth
 		Probability: 8
-		Actor: tsdoggiew
+		Actor: forgotten_tiberianfiend_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
@@ -340,7 +340,7 @@ OILB.TS:
 		Image: tibpump
 		PlayerPalette: playerra2
 
-OILB.TS.MUTANT:
+forgotten_tiberiumspike:
 	Inherits: OILB.TS
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
@@ -350,7 +350,7 @@ OILB.TS.MUTANT:
 	Buildable:
 		BuildLimit: 1
 		Queue: Building, RABuilding
-		Prerequisites: ~tsgtcnstmutant, tsfgttech, derricklimit
+		Prerequisites: ~forgotten_constructionyard, forgotten_church, derricklimit
 	SeedsResource:
 		ResourceType: Tiberium
 		Interval: 50
@@ -689,13 +689,13 @@ TSMCVNOD:
 	RenderVoxels:
 		Image: tsmcvblack
 
-TSMCVMUTANT:
+forgotten_mobileconstructionvehicle:
 	Inherits: TSMCVGDI
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~tsgtweapmutant, tsgtdeptmutant
+		Prerequisites: ~forgotten_warfactory, forgotten_servicedepot
 	Transforms:
-		IntoActor: tsgtcnstmutant
+		IntoActor: forgotten_constructionyard
 	RenderVoxels:
 		Image: tsmcvgrey
 
@@ -2415,7 +2415,7 @@ tsgtplug3:
 # TS Building Forgotten
 #######################################
 
-TSGTCNSTMUTANT:
+forgotten_constructionyard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2437,7 +2437,7 @@ TSGTCNSTMUTANT:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvmutant
+		IntoActor: forgotten_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -2479,7 +2479,7 @@ TSGTCNSTMUTANT:
 		Image: forgot_conyard
 		PlayerPalette: player_rgba
 
-tsprocmutant:
+forgotten_refinery:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -2497,7 +2497,7 @@ tsprocmutant:
 		Name: Forgotten Refinery
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtcnstmutant, tsntpowrmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
 		Queue: Building, RABuilding
 		Description: Processes raw Tiberium\ninto useable resources
 	Building:
@@ -2515,7 +2515,7 @@ tsprocmutant:
 	CustomSellValue:
 		Value: 500
 	FreeActor:
-		Actor: TSHARVMUTANT
+		Actor: forgotten_tiberiumharvester
 		SpawnOffset: 1,2
 		Facing: 256
 	Power:
@@ -2531,7 +2531,7 @@ tsprocmutant:
 	RenderSprites:
 		Image: forgot_refin
 		PlayerPalette: player_rgba
-TSNTPOWRMUTANT:
+forgotten_crystalpowerextractor:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2544,7 +2544,7 @@ TSNTPOWRMUTANT:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgtcnstmutant
+		Prerequisites: ~forgotten_constructionyard
 		Description: Provides power for other structures.
 	Valued:
 		Cost: 600
@@ -2569,7 +2569,7 @@ TSNTPOWRMUTANT:
 	RenderSprites:
 		PlayerPalette: player_rgba
 		Image: forgot_power
-TSGTSILOMUTANT:
+forgotten_silo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -2584,7 +2584,7 @@ TSGTSILOMUTANT:
 		BuildPaletteOrder: 100
 		Queue: Defence, RADefence
 		Description: Stores excess Tiberium.
-		Prerequisites: ~tsgtcnstmutant, tsprocmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2615,7 +2615,7 @@ TSGTSILOMUTANT:
 		PlayerPalette: player_rgba
 		Image: forgot_silo
 
-tsgtpile2:
+forgotten_barracks:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@barr: ^IsBarrack
@@ -2632,7 +2632,7 @@ tsgtpile2:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgtcnstmutant, tsntpowrmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
 		Queue: Building, RABuilding
 		Description: Trains infantry
 	Building:
@@ -2658,7 +2658,7 @@ tsgtpile2:
 		Image: forgot_barracks
 		PlayerPalette: player_rgba
 
-TSGTWEAPMUTANT:
+forgotten_warfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
@@ -2675,7 +2675,7 @@ TSGTWEAPMUTANT:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgtcnstmutant, tsprocmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
 		Queue: Building, RABuilding
 		Description: Produces vehicles
 	Building:
@@ -2713,23 +2713,23 @@ TSGTWEAPMUTANT:
 		Image: forgot_weap
 		PlayerPalette: player_rgba
 
-tsgtdeptmutant:
+forgotten_servicedepot:
 	Inherits: tsgtdeptgdi
 	Tooltip:
 		Name: Service Depot
 	Buildable:
-		Prerequisites: ~tsgtcnstmutant, tsgtweapmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_warfactory
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
 
-tsgthpadmutant:
+forgotten_helipad:
 	Inherits: tsgthpad
 	Tooltip:
 		Name: Helipad (Forgotten)
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~tsgtcnstmutant, tsgtradrmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 	ProductionQueue@AIRCRAFT:
 	ProductionBar@AIRCRAFTGDI:
 		ProductionType: Aircraft
@@ -2738,7 +2738,7 @@ tsgthpadmutant:
 	RenderSprites:
 		Image: tsnthpadmut
 
-tsgtradrmutant:
+forgotten_radar:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@radar: ^RadarBuilding
@@ -2759,7 +2759,7 @@ tsgtradrmutant:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~tsgtcnstmutant, tsprocmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
 		Queue: Building, RABuilding
 		Description: Provides radar and support powers.\nUnlocks higher-tech units and buildings.\nRequires power to operate.
 	Building:
@@ -2787,7 +2787,7 @@ tsgtradrmutant:
 		PlayerPalette: player_rgba
 		Image: forgot_radar
 
-tsfgttech:
+forgotten_church:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
@@ -2799,7 +2799,7 @@ tsfgttech:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: ~tsgtcnstmutant, tsgtradrmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 		Description: Provides Forgotten advanced technologies.\nCan be only built once
 		BuildLimit: 1
 	Tooltip:
@@ -2822,7 +2822,7 @@ tsfgttech:
 		Image: forgot_church
 		PlayerPalette: player_rgba
 
-forgot_chemicalplant:
+forgotten_chemicalplant:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
@@ -2834,7 +2834,7 @@ forgot_chemicalplant:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
-		Prerequisites: ~tsgtcnstmutant, tsfgttech
+		Prerequisites: ~forgotten_constructionyard, forgotten_church
 		Description: Provides Forgotten advanced technologies.\nCan be only built once
 		BuildLimit: 1
 	Tooltip:
@@ -2852,7 +2852,7 @@ forgot_chemicalplant:
 		Amount: -100
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
-		Image: forgot_chemicalplant
+		Image: forgotten_chemicalplant
 		PlayerPalette: player_rgba
 #######################################
 #######################################
@@ -2948,7 +2948,7 @@ forgot_chemicalplant:
 # TS Defensive
 #######################################
 
-tsveinhole:
+forgotten_veinhole:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
@@ -2961,7 +2961,7 @@ tsveinhole:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
-		Prerequisites: ~tsgtcnstmutant, tsfgttech, ~techlevel.superweapons, !tsveinhole
+		Prerequisites: ~forgotten_constructionyard, forgotten_church, ~techlevel.superweapons, !forgotten_veinhole
 	Tooltip:
 		Name: Veinhole
 	Armor:
@@ -3024,7 +3024,7 @@ tsveinhole:
 	# 	RequiresCondition: !build-incomplete
 	# 	Sequence: smoke
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: tsveinhole
+		Prerequisite: forgotten_veinhole
 	SupportPowerChargeBar:
 	RenderSprites:
 		PlayerPalette: player
@@ -3283,7 +3283,7 @@ tsgtctwrsam:
 	ActorStatValues:
 		Upgrades: up_tsprojectileimprovements
 
-forgot_tower:
+forgotten_machineguntower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -3297,7 +3297,7 @@ forgot_tower:
 		Name: Machinegun Tower
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtcnstmutant, tsgtpile2
+		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Basic base defense. Strong vs Infantry, Light armor.  Weak vs Aircraft, Tanks.
@@ -3329,7 +3329,7 @@ forgot_tower:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-tsgtctwrsammutant:
+forgotten_juggerflakwall:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -3342,7 +3342,7 @@ tsgtctwrsammutant:
 		Name: Juggerflak Wall
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgtcnstmutant, tsgtradrmutant
+		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 		Queue: Defence, RADefence
 		Description: Forgotten anti-air base defense. Strong vs Aircraft. Does not attack ground.
 	RequiresBuildableArea:
@@ -3374,9 +3374,9 @@ tsgtctwrsammutant:
 		PlayerPalette: player_rgba
 		Image: forgot_juggerflak
 	ActorStatValues:
-		Upgrades: up_tiberiumboosters
+		Upgrades: forgotten_upgrade_tiberiumboosters
 
-forgot_ltnk_tur:
+forgotten_brokenrattytankturret:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -3393,7 +3393,7 @@ forgot_ltnk_tur:
 		Name: Broken Ratty Tank Turret
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgtcnstmutant, tsgtpile2
+		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Basic base defense. Does not require power to operate. Strong vs Armor.  Weak vs Infantry, Aircraft.
@@ -3417,11 +3417,11 @@ forgot_ltnk_tur:
 	Armament@PRIMARY:
 		Weapon: TS70mmTur
 		LocalOffset: 300,60,600
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TS70mmTurChem
 		LocalOffset: 300,60,600
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	AttackTurreted:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
@@ -3434,9 +3434,9 @@ forgot_ltnk_tur:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_junkarmor, up_tiberiumboosters
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters
 
-forgot_mtnk_tur:
+forgotten_brokenwarriortankturret:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -3453,7 +3453,7 @@ forgot_mtnk_tur:
 		Name: Broken Warrior Tank Turret
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tsgtcnstmutant, tsfgttech
+		Prerequisites: ~forgotten_constructionyard, forgotten_church
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Advanced base defense. Does not require power to operate. Strong vs Armor.  Weak vs Infantry, Aircraft.
@@ -3477,11 +3477,11 @@ forgot_mtnk_tur:
 	Armament@PRIMARY:
 		Weapon: TSHighVelocityTur
 		LocalOffset: 300,60,600
-	# 	RequiresCondition: !up_chemicalweapons
+	# 	RequiresCondition: !forgotten_upgrade_chemicalweapons
 	# Armament@UPGRADE:
 	# 	Weapon: TSHighVelocityTurChem
 	# 	LocalOffset: 300,60,600
-	# 	RequiresCondition: up_chemicalweapons
+	# 	RequiresCondition: forgotten_upgrade_chemicalweapons
 	AttackTurreted:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
@@ -3494,9 +3494,9 @@ forgot_mtnk_tur:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_junkarmor, up_tiberiumboosters, #up_chemicalweapons
+		Upgrades: forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, #forgotten_upgrade_chemicalweapons
 
-forgot_htnk_tur:
+forgotten_brokenscoopertankturret:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -3513,7 +3513,7 @@ forgot_htnk_tur:
 		Name: Broken Scooper Tank Turret
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtcnstmutant, tsfgttech
+		Prerequisites: ~forgotten_constructionyard, forgotten_church
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
 		Description: Advanced base defense. Does not require power to operate. Strong vs Ground. Weak vs Aircraft.
@@ -3537,11 +3537,11 @@ forgot_htnk_tur:
 	Armament@PRIMARY:
 		Weapon: TSScoopDualTur
 		LocalOffset: 300,60,600
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSScoopDualTurChem
 		LocalOffset: 300,60,600
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	AttackTurreted:
 	WithSpriteTurret:
 		RequiresCondition: !build-incomplete
@@ -3554,7 +3554,7 @@ forgot_htnk_tur:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_junkarmor, up_tiberiumboosters
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters
 
 tsntsam:
 	Inherits: ^Defense
@@ -4399,7 +4399,7 @@ TSZONETROOPER:
 		LocalOffset: 256,43,256
 		RequiresCondition: up_railgunweaponry
 	Voiced:
-		VoiceSet: TSGhost
+		VoiceSet: forgotten_ghoststalker
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSZoneRailgun
@@ -4413,7 +4413,7 @@ TSZONETROOPER:
 	WithInfantryBody:
 		-StandSequences:
 	Selectable:
-		Class: tsghost
+		Class: forgotten_ghoststalker
 	RenderSprites:
 		PlayerPalette: player_rgba
 	WithDeathAnimation:
@@ -4845,7 +4845,7 @@ TSRAILCOM:
 		LocalOffset: 256,43,256
 		RequiresCondition: up_railgunweaponry
 	Voiced:
-		VoiceSet: TSGhost
+		VoiceSet: forgotten_ghoststalker
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSCommandoRailgun
@@ -4856,7 +4856,7 @@ TSRAILCOM:
 		RequiresCondition: up_railgunweaponry
 	-DamagedByTerrain:
 	Selectable:
-		Class: tsghost
+		Class: forgotten_ghoststalker
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -4881,21 +4881,21 @@ TSRAILCOM:
 	GivesExperience:
 		PlayerExperienceModifier: 0
 
-TSDOGGIEW:
-	Inherits: TSDOGGIE
+forgotten_tiberianfiend_wild:
+	Inherits: forgotten_tiberianfiend
 	Inherits@2: ^MutSWCreature
 	Buildable:
-		Prerequisites: ~tsdoggiew
+		Prerequisites: ~forgotten_tiberianfiend_wild
 	RenderSprites:
-		Image: tsdoggie
+		Image: forgotten_tiberianfiend
 	AttackWander:
 
 TSMUTANTW:
-	Inherits: TSMUTANT
+	Inherits: forgotten_mutant
 	Buildable:
 		Prerequisites: ~TSMUTANTW
 	RenderSprites:
-		Image: tsmutant
+		Image: forgotten_mutant
 	AttackWander:
 
 tsfloater:
@@ -5733,7 +5733,7 @@ TSARND:
 #######################################
 # TS Infantry Forgotten
 #######################################
-TSENGINEERMUTANT:
+forgotten_engineer:
 	Inherits: TSENGINEER
 	Inherits@MC: ^MCImmune
 	Inherits@GenomeMapping: ^GenomeMapping
@@ -5741,7 +5741,7 @@ TSENGINEERMUTANT:
 	Inherits@Unity: ^Unity
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile2
+		Prerequisites: ~forgotten_barracks
 	Voiced:
 		VoiceSet: TSInfantry
 	-TemporaryOwnerManager:
@@ -5749,9 +5749,9 @@ TSENGINEERMUTANT:
 		PlayerPalette: playerra2
 		Image: tsengineer
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-tse3.mutant:
+forgotten_rocketinfantry:
 	Inherits: TSE3
 	Inherits@decoration: ^ForgottenRankDecoration
 	Inherits@ChemicalWeapons: ^ChemicalWeapons
@@ -5761,33 +5761,33 @@ tse3.mutant:
 	Inherits@Unity: ^Unity
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile2
+		Prerequisites: ~forgotten_barracks
 	Armament@PRIMARY: ##########
 		Weapon: TSBazooka
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSBazooka
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE: ##########
 		Weapon: TSChemBazooka
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: TSChemBazooka
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: tse3mut
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_genomemapping, up_mypet, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 
-TSMHIJACK:
+forgotten_mutanthijacker:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXT: ^ExternalConditions
@@ -5812,7 +5812,7 @@ TSMHIJACK:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile2, tsfgttech
+		Prerequisites: ~forgotten_barracks, forgotten_church
 		BuildLimit: 1
 		Description: Hijacks vehicles. Has buildlimit of 1.
 	Mobile:
@@ -5837,10 +5837,10 @@ TSMHIJACK:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-TSUMAGON:
-	Inherits: TSMUTANT
+forgotten_mutantsniper:
+	Inherits: forgotten_mutant
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@GenomeMapping: ^GenomeMapping
 	Inherits@MyPet: ^MyPetMedium
@@ -5853,7 +5853,7 @@ TSUMAGON:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 55
-		Prerequisites: ~tsgtpile2, tsgtradrmutant
+		Prerequisites: ~forgotten_barracks, forgotten_radar
 		Queue: Infantry, RAInfantry
 		Description: Advanced anti-infantry unit. Strong vs Infantry. Weak vs Everything else.
 	Mobile:
@@ -5869,27 +5869,27 @@ TSUMAGON:
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 	Voiced:
-		VoiceSet: TSUmagon
+		VoiceSet: forgotten_mutantsniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSSniper
 	Selectable:
-		Class: tsumagon
+		Class: forgotten_mutantsniper
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-TSUMAGONSP:
-	Inherits: TSUMAGON
+forgotten_mutantsniper_sp:
+	Inherits: forgotten_mutantsniper
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsumagon
+		Image: forgotten_mutantsniper
 	AutoTarget:
 		ScanRadius: 9999
 		InitialStance: AttackAnything
@@ -5899,7 +5899,7 @@ TSUMAGONSP:
 	GivesExperience:
 		PlayerExperienceModifier: 5
 
-TSGHOST:
+forgotten_ghoststalker:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -5923,7 +5923,7 @@ TSGHOST:
 	Buildable:
 		BuildPaletteOrder: 120
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~tsgtpile2, tsfgttech, ~uptsghoststalker
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_ghoststalker
 		BuildLimit: 1
 		Description: Elite commando infantry, armed with chemical rifle and C4. Strong vs Ground. Weak vs Aircraft.
 	Mobile:
@@ -5935,62 +5935,62 @@ TSGHOST:
 	Armament@PRIMARY:
 		Weapon: TSGhostGun
 		LocalOffset: 256,43,256
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemGhostGun
 		LocalOffset: 256,43,256
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Voiced:
-		VoiceSet: TSGhost
+		VoiceSet: forgotten_ghoststalker
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSGhostGun
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADEGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSChemGhostGun
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	-DamagedByTerrain:
 	Selectable:
-		Class: tsghost
+		Class: forgotten_ghoststalker
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-tsghost.r4:
-	Inherits: TSGHOST
+forgotten_ghoststalker_r4:
+	Inherits: forgotten_ghoststalker
 	-Buildable:
 	RenderSprites:
-		Image: tsghost
+		Image: forgotten_ghoststalker
 	ProducibleWithLevel:
 		InitialLevels: 4
 	UpdatesPlayerStatistics:
-		OverrideActor: tsghost
+		OverrideActor: forgotten_ghoststalker
 
-tsumagon.r4:
-	Inherits: TSUMAGON
+forgotten_mutantsniper_r4:
+	Inherits: forgotten_mutantsniper
 	-Buildable:
 	RenderSprites:
-		Image: tsumagon
+		Image: forgotten_mutantsniper
 	ProducibleWithLevel:
 		InitialLevels: 4
 	UpdatesPlayerStatistics:
-		OverrideActor: tsumagon
+		OverrideActor: forgotten_mutantsniper
 
-TSGHOSTSP:
-	Inherits: TSGHOST
+forgotten_ghoststalker_sp:
+	Inherits: forgotten_ghoststalker
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsghost
+		Image: forgotten_ghoststalker
 	AutoTarget:
 		InitialStance: AttackAnything
 		ScanRadius: 9999
@@ -6001,7 +6001,7 @@ TSGHOSTSP:
 	GivesExperience:
 		PlayerExperienceModifier: 5
 
-TSMUTANT:
+forgotten_mutant:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6022,7 +6022,7 @@ TSMUTANT:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgtpile2, ~!forgot_chemicalplant
+		Prerequisites: ~forgotten_barracks, ~!forgotten_chemicalplant
 		Queue: Infantry, RAInfantry
 		Description: Mutant armed with dual pistols. Strong vs Infantry. Weak vs Everything else.
 	Mobile:
@@ -6049,15 +6049,15 @@ TSMUTANT:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-TSMUTANTSP:
-	Inherits: TSMUTANT
+forgotten_mutant_sp:
+	Inherits: forgotten_mutant
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsmutant
+		Image: forgotten_mutant
 	AutoTarget:
 		InitialStance: AttackAnything
 		ScanRadius: 9999
@@ -6067,7 +6067,7 @@ TSMUTANTSP:
 	GivesExperience:
 		PlayerExperienceModifier: 0
 
-TSMWMN:
+forgotten_mutantsoldier:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6088,7 +6088,7 @@ TSMWMN:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgtpile2, ~forgot_chemicalplant
+		Prerequisites: ~forgotten_barracks, ~forgotten_chemicalplant
 		Queue: Infantry, RAInfantry
 		Description: Mutant armed with a carbine. Strong vs Infantry. Weak vs Everything else.
 	Mobile:
@@ -6107,7 +6107,7 @@ TSMWMN:
 	# 	Weapon: MutAPRifleE
 	# 	RequiresCondition: rank-elite
 	Voiced:
-		VoiceSet: TSUmagon
+		VoiceSet: forgotten_mutantsniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: MutAPRifle
@@ -6118,15 +6118,15 @@ TSMWMN:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-TSMWMNSP:
-	Inherits: TSMWMN
+forgotten_mutantsoldier_sp:
+	Inherits: forgotten_mutantsoldier
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsmwmn
+		Image: forgotten_mutantsoldier
 	AutoTarget:
 		InitialStance: AttackAnything
 		ScanRadius: 9999
@@ -6136,7 +6136,7 @@ TSMWMNSP:
 	GivesExperience:
 		PlayerExperienceModifier: 0
 
-TSMUTANT3:
+forgotten_mutantsergeant:
 	Inherits: ^Soldier
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
@@ -6157,7 +6157,7 @@ TSMUTANT3:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtpile2, tsfgttech
+		Prerequisites: ~forgotten_barracks, forgotten_church
 		Queue: Infantry, RAInfantry
 		Description: Elite mutant infantry. Has Propoganda Aura. Strong vs Infantry. Weak vs Everything else.
 	Mobile:
@@ -6201,10 +6201,10 @@ TSMUTANT3:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
 
-TSMUTANT4:
+forgotten_zombiemutant:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6225,7 +6225,7 @@ TSMUTANT4:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgtpile2, tsgtradrmutant
+		Prerequisites: ~forgotten_barracks, forgotten_radar
 		Queue: Infantry, RAInfantry
 		Description: High mutated human. Not so Intelligent, only attack in Melee. Strong vs Ground. Weak vs Aircraft.
 	Mobile:
@@ -6252,9 +6252,9 @@ TSMUTANT4:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-tsshotmut:
+forgotten_runnershotgal:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6277,7 +6277,7 @@ tsshotmut:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~tsgtpile2, tsgtradrmutant, ~uptsrunner
+		Prerequisites: ~forgotten_barracks, forgotten_radar, ~forgotten_promotion_runnershotgal
 		Queue: Infantry, RAInfantry
 		Description: Mutant armed with a shotgun. Strong vs Ground. Weak vs Aircraft. Stealthed.
 	Mobile:
@@ -6293,7 +6293,7 @@ tsshotmut:
 	# 	Weapon: TSShotgun
 	# 	RequiresCondition: rank-elite
 	Voiced:
-		VoiceSet: TSUmagon
+		VoiceSet: forgotten_mutantsniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSMutShotgun
@@ -6304,9 +6304,9 @@ tsshotmut:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-TSWEEDGUY:
+forgotten_chemsprayinfantry:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6328,7 +6328,7 @@ TSWEEDGUY:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgtpile2, tsfgttech
+		Prerequisites: ~forgotten_barracks, forgotten_church
 		Queue: Infantry, RAInfantry
 		Description: Mutant soldier with a Tiberium weapon. Strong vs Ground. Weak vs Aircraft.
 	Mobile:
@@ -6342,12 +6342,12 @@ TSWEEDGUY:
 		Weapon: TSChemspray
 		LocalOffset: 341,0,256
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemsprayUp
 		LocalOffset: 341,0,256
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithInfantryBody:
 		IdleSequences: idle1,idle2
 	Voiced:
@@ -6357,12 +6357,12 @@ TSWEEDGUY:
 		Name: garrisoned
 		Weapon: TSChemspray
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: TSChemsprayUP
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithMuzzleOverlay:
 	Targetable@Immune:
 		TargetTypes: ToxinImmune
@@ -6372,7 +6372,7 @@ TSWEEDGUY:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_genomemapping, up_mypet, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
 RAPT:
 	Inherits: ^DINO
@@ -6384,7 +6384,7 @@ RAPT:
 		Description: Bipedal with enlarged sickle-shaped claw on each hindfoot
 	Inherits@EXT: ^ExternalConditions ##########
 
-TSMutVisceroid:
+forgotten_visceroid:
 	Inherits: ^DefaultInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6413,20 +6413,20 @@ TSMutVisceroid:
 		Weapon: TSVisceroidSpray
 		LocalOffset: 384,0,0
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSVisceroidSpray
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSVisceroidSprayUP
 		LocalOffset: 384,0,0
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: TSVisceroidSprayUP
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
 	RenderSprites:
@@ -6461,9 +6461,9 @@ TSMutVisceroid:
 		Image: VICE
 		PlayerPalette: player
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_genomemapping, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_unity
 
-TSDOGGIE:
+forgotten_tiberianfiend:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6486,7 +6486,7 @@ TSDOGGIE:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtpile2, tsfgttech, ~!uptsbluedog
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~!forgotten_promotion_bluetiberiumfiend
 		Queue: Infantry, RAInfantry
 		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
 	Mobile:
@@ -6500,18 +6500,18 @@ TSDOGGIE:
 	RenderSprites:
 	Armament@PRIMARY:
 		Weapon: TSFiendShard
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSFiendShard
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSFiendShardUP
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: TSFiendShardUP
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Crushable:
 		CrushClasses: vehicle
 	RenderSprites:
@@ -6520,9 +6520,9 @@ TSDOGGIE:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_genomemapping, up_mypet, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-tsdoggieblue:
+forgotten_bluetiberiumfiend:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -6546,7 +6546,7 @@ tsdoggieblue:
 		Cost: 2000
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtpile2, tsfgttech, ~uptsbluedog
+		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_bluetiberiumfiend
 		Queue: Infantry, RAInfantry
 		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
 	Mobile:
@@ -6561,14 +6561,14 @@ tsdoggieblue:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSFiendShardBlue
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSFiendShardBlueUP
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
 		Weapon: TSFiendShardBlueUP
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Crushable:
 		CrushClasses: vehicle
 	RenderSprites:
@@ -6577,7 +6577,7 @@ tsdoggieblue:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_genomemapping, up_mypet, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 #######################################
 # TS Infantry End
@@ -6768,7 +6768,7 @@ TSHARVNOD:
 	ActorStatValues:
 		Upgrades: up_advancedtiberiumrefinement, up_stealthfieldsimprovements
 
-TSHARVMUTANT:
+forgotten_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@ChemicalFuel: ^ChemicalFuel
@@ -6781,7 +6781,7 @@ TSHARVMUTANT:
 		PipCount: 8
 		Capacity: 35
 	Buildable:
-		Prerequisites: ~tsgtweapmutant, tsprocmutant
+		Prerequisites: ~forgotten_warfactory, forgotten_refinery
 		Queue: Vehicle, RAVehicle
 		Description: Harvests Tiberium for processing
 	WithVoxelBody:
@@ -6798,7 +6798,7 @@ TSHARVMUTANT:
 		Sequence: harvesting
 		Palette: ra2effect
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_mypet, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
 TSHARVCABAL:
 	Inherits: ^TDHARV
@@ -8804,7 +8804,7 @@ tslpst:
 # TS Forgotten Vehicles
 #######################################
 
-tssapc.mut:
+forgotten_scarabapc:
 	Inherits: TSSAPC
 	RenderVoxels:
 		Image: tssapc
@@ -8812,13 +8812,13 @@ tssapc.mut:
 		Image: tssapc
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtweapmutant, ~disabled
+		Prerequisites: ~forgotten_warfactory, ~disabled
 	Cargo:
-		InitialUnits: tsmutant, tsmutant, tsmutant, tsmutant, tsmutant3
+		InitialUnits: forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutant, forgotten_mutantsergeant
 	UpdatesPlayerStatistics:
 		OverrideActor: tssapc
 
-TSWINI2:
+forgotten_missilevan:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -8839,7 +8839,7 @@ TSWINI2:
 		Name: Missile Van
 	Buildable:
 		BuildPaletteOrder: 85
-		Prerequisites: ~tsgtweapmutant, tsfgttech, ~!uptsmlrs
+		Prerequisites: ~forgotten_warfactory, forgotten_church, ~!forgotten_promotion_mlrs
 		Queue: Vehicle, RAVehicle
 		Description: Light motor vehicle armed with long range missiles. Strong vs Infantry, Buildings. Weak vs Tanks, Aircraft.
 	Mobile:
@@ -8861,13 +8861,13 @@ TSWINI2:
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemVanMissile
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -8876,9 +8876,9 @@ TSWINI2:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-TSCAR2:
+forgotten_raidercar:
 	# Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -8897,7 +8897,7 @@ TSCAR2:
 		Name: Raider Car
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgtweapmutant, ~!uptsbowler
+		Prerequisites: ~forgotten_warfactory, ~!forgotten_promotion_bowler
 		Queue: Vehicle, RAVehicle
 		Description: Fast raiding vehicle. Strong vs Infantry. Weak vs Tanks.
 	Mobile:
@@ -8921,7 +8921,7 @@ TSCAR2:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	# Cargo:
-	# 	InitialUnits: tsmutant, tsmutant
+	# 	InitialUnits: forgotten_mutant, forgotten_mutant
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -8930,9 +8930,9 @@ TSCAR2:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_mypet, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
-tsbowler:
+forgotten_bowler:
 	# Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -8951,7 +8951,7 @@ tsbowler:
 		Name: Bowler
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgtweapmutant, ~uptsbowler
+		Prerequisites: ~forgotten_warfactory, ~forgotten_promotion_bowler
 		Queue: Vehicle, RAVehicle
 		Description: Fast raiding vehicle. Strong vs Infantry. Weak vs Vehicles.
 	Mobile:
@@ -8975,7 +8975,7 @@ tsbowler:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	# Cargo:
-	# 	InitialUnits: tsmutant, tsmutant, tsmutant
+	# 	InitialUnits: forgotten_mutant, forgotten_mutant, forgotten_mutant
 	WithSpriteTurret:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -8984,9 +8984,9 @@ tsbowler:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_mypet, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
-tsruiner:
+forgotten_ruiner:
 	# Inherits: ^CivilianDriveByVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -9007,7 +9007,7 @@ tsruiner:
 		Name: Ruiner
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgtweapmutant
+		Prerequisites: ~forgotten_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: Fast raiding vehicle. Strong vs Everything.
 	Mobile:
@@ -9027,19 +9027,19 @@ tsruiner:
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 		MuzzleSequence: muzzle
 	Armament@UPGRADE:
 		Weapon: TSChemRuinerMissile
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 0,121,271, 0,-121,271
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
 	# Cargo:
-	# 	InitialUnits: tsmutant, tse3.mutant
+	# 	InitialUnits: forgotten_mutant, forgotten_rocketinfantry
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9047,9 +9047,9 @@ tsruiner:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-TS1TNK:
+forgotten_rattytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9069,7 +9069,7 @@ TS1TNK:
 		Name: Ratty Tank
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgtweapmutant
+		Prerequisites: ~forgotten_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: Forgotten fast main battle tank. Strong vs Armor. Weak vs Infantry, Aircraft.
 	Mobile:
@@ -9090,13 +9090,13 @@ TS1TNK:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TS70mmChem
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithMuzzleOverlay:
 	AttackTurreted:
 	WithSpriteTurret:
@@ -9107,11 +9107,11 @@ TS1TNK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
-	# 	Actor: forgot_ltnk_tur
+	# 	Actor: forgotten_brokenrattytankturret
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-TS2TNK:
+forgotten_warriortank:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9132,7 +9132,7 @@ TS2TNK:
 		Name: Warrior Tank
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tsgtweapmutant, tsfgttech, ~uptswarrior
+		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_warriortank
 		Queue: Vehicle, RAVehicle
 		Description: Forgotten anti-tank heavy vehicle. Strong vs Armor. Weak vs Everything else.
 	Mobile:
@@ -9154,14 +9154,14 @@ TS2TNK:
 		RecoilRecovery: 26
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSHighVelocity2Chem
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithMuzzleOverlay:
 	AttackTurreted:
 	WithSpriteTurret:
@@ -9172,11 +9172,11 @@ TS2TNK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
-	# 	Actor: forgot_mtnk_tur
+	# 	Actor: forgotten_brokenwarriortankturret
 	ActorStatValues:
-		Upgrades:  up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity #, up_chemicalweapons
+		Upgrades:  forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity #, forgotten_upgrade_chemicalweapons
 
-TS3TNK:
+forgotten_scoopertank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9197,7 +9197,7 @@ TS3TNK:
 		Name: Scooper Tank
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~tsgtweapmutant, tsfgttech, ~uptsscooper
+		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_scoopertank
 		Queue: Vehicle, RAVehicle
 		Description: Mutant heavy armor. Strong vs Ground. Weak vs Aircraft.
 	Mobile:
@@ -9221,14 +9221,14 @@ TS3TNK:
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSScoopDualChem
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithMuzzleOverlay:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -9237,11 +9237,11 @@ TS3TNK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	# SpawnActorOnDeath:
-	# 	Actor: forgot_htnk_tur
+	# 	Actor: forgotten_brokenscoopertankturret
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-tsclosh:
+forgotten_closhtank:
 	Inherits: ^Tank
 	Inherits@FireActor: ^FireActor
 	Inherits@Template: ^LineBreakerTemplate
@@ -9260,7 +9260,7 @@ tsclosh:
 		Name: Closh Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtweapmutant, tsgtradrmutant, ~!uptsftnk
+		Prerequisites: ~forgotten_warfactory, forgotten_radar, ~!forgotten_promotion_flametank
 		Queue: Vehicle, RAVehicle
 		Description: Close range tank. Strong vs Buildings, Infantry. Weak vs Armor, Aircraft.
 	Mobile:
@@ -9279,13 +9279,13 @@ tsclosh:
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: MutFlamerChem
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -9296,9 +9296,9 @@ tsclosh:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
-TSFTNK:
+forgotten_flametank:
 	Inherits: ^Tank
 	Inherits@FireActor: ^FireActor
 	Inherits@Template: ^LineBreakerTemplate
@@ -9319,7 +9319,7 @@ TSFTNK:
 		Name: Flame Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtweapmutant, tsfgttech, ~uptsftnk
+		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_flametank
 		Queue: Vehicle, RAVehicle
 		Description: Heavy close range tank. Strong vs Buildings, Infantry. Weak vs Armor, Aircraft.
 	Mobile:
@@ -9337,12 +9337,12 @@ TSFTNK:
 		Weapon: MutHFlamer
 		LocalOffset: 512,128,42, 512,-128,42
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: MutHFlamerChem
 		LocalOffset: 512,128,42, 512,-128,42
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	FireWarheadsOnDeath:
 		Weapon: FlametankExplode
 	AttackFrontal:
@@ -9354,9 +9354,9 @@ TSFTNK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
-TS4TNK:
+forgotten_experimentalmammothtank:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9378,7 +9378,7 @@ TS4TNK:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 190
-		Prerequisites: ~tsgtweapmutant, tsfgttech, ~uptsmammoth
+		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_experimentalmammothtank
 		Queue: Vehicle, RAVehicle
 		Description: Mutant superheavy tank. Strong vs Everything.
 	Mobile:
@@ -9402,14 +9402,14 @@ TS4TNK:
 		Recoil: 170
 		RecoilRecovery: 42
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChem120mmx
 		LocalOffset: 900,85,340, 900,-85,340
 		Recoil: 170
 		RecoilRecovery: 42
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: TSMammothTusk
@@ -9426,9 +9426,9 @@ TS4TNK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-TS4TNK2:
+forgotten_chemicalmammothtank:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9450,7 +9450,7 @@ TS4TNK2:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 200
-		Prerequisites: ~tsgtweapmutant, tsfgttech, ~uptschemmammoth
+		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_chemicalmammothtank
 		Queue: Vehicle, RAVehicle
 		Description: Mutant experimental fire support tank. Strong vs Everything.
 	Mobile:
@@ -9489,13 +9489,13 @@ TS4TNK2:
 		Payload: 900
 	RenderSprites:
 		PlayerPalette: player_rgba
-	FirepowerMultiplier@up_chemicalweapons:
-		RequiresCondition: up_chemicalweapons
+	FirepowerMultiplier@forgotten_upgrade_chemicalweapons:
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 		Modifier: 175
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-TSARTY:
+forgotten_tankkiller:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9515,7 +9515,7 @@ TSARTY:
 		Name: Tank Killer
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~tsgtweapmutant, tsgtradrmutant, ~!uptswarrior
+		Prerequisites: ~forgotten_warfactory, forgotten_radar, ~!forgotten_promotion_warriortank
 		Queue: Vehicle, RAVehicle
 		Description: Mutant long ranged vehicle with heavy sabot shells. Strong vs Vehicles. Weak vs Infantry, Aircraft
 	Mobile:
@@ -9536,14 +9536,14 @@ TSARTY:
 		RecoilRecovery: 26
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSHighVelocityChem
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	# Turreted:
 	WithMuzzleOverlay:
 	AttackFrontal:
@@ -9555,9 +9555,9 @@ TSARTY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity #, up_chemicalweapons
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity #, forgotten_upgrade_chemicalweapons
 
-tsarty_bus:
+forgotten_thumperbus:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9579,7 +9579,7 @@ tsarty_bus:
 		Name: Thumper Bus
 	Buildable:
 		BuildPaletteOrder: 160
-		Prerequisites: ~tsgtweapmutant, tsfgttech
+		Prerequisites: ~forgotten_warfactory, forgotten_church
 		Queue: Vehicle, RAVehicle
 		Description: Mutant heavy brawl vehicle. Infantry can shoot from inside.
 	Mobile:
@@ -9599,14 +9599,14 @@ tsarty_bus:
 		RecoilRecovery: 20
 		LocalOffset: 1200,0,600
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSBusMortarChem
 		Recoil: 200
 		RecoilRecovery: 20
 		LocalOffset: 1200,0,600
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	# Turreted:
 	# 	TurnSpeed: 18 #3
 	# AttackTurreted:
@@ -9618,7 +9618,7 @@ tsarty_bus:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 12
-		InitialUnits: tsmwmn,tsmwmn,tse3.mutant,tse3.mutant,tse3.mutant,tse3.mutant,tsshotmut,tsshotmut,tsshotmut,tsmwmn,tsshotmut,tsmwmn
+		InitialUnits: forgotten_mutantsoldier,forgotten_mutantsoldier,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_runnershotgal,forgotten_runnershotgal,forgotten_runnershotgal,forgotten_mutantsoldier,forgotten_runnershotgal,forgotten_mutantsoldier
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
@@ -9637,9 +9637,9 @@ tsarty_bus:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-tsnomad:
+forgotten_nomadbarracks:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^ForgottenRankDecoration
@@ -9662,7 +9662,7 @@ tsnomad:
 	Buildable:
 		-BuildDuration:
 		BuildPaletteOrder: 160
-		Prerequisites: ~tsgtweapmutant, tsfgttech
+		Prerequisites: ~forgotten_warfactory, forgotten_church
 		Queue: Vehicle, RAVehicle
 		Description: Forgotten moving barracks. Infantry can shoot from inside.
 	Mobile:
@@ -9692,7 +9692,7 @@ tsnomad:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 9
-		InitialUnits: tsmutant,tse3.mutant,tsmwmn,tsmutant3,tsshotmut,tsweedguy,tsdoggie,tsdoggieblue,tsumagon
+		InitialUnits: forgotten_mutant,forgotten_rocketinfantry,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_runnershotgal,forgotten_chemsprayinfantry,forgotten_tiberianfiend,forgotten_bluetiberiumfiend,forgotten_mutantsniper
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
@@ -9723,9 +9723,9 @@ tsnomad:
 		DecorationBounds: 2248, 2248
 	ProductionQueue@INFANTRY:
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-tsmlrs:
+forgotten_mlrs:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9746,7 +9746,7 @@ tsmlrs:
 		Name: Forgotten MLRS
 	Buildable:
 		BuildPaletteOrder: 85
-		Prerequisites: ~tsgtweapmutant, tsfgttech, ~uptsmlrs
+		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_mlrs
 		Queue: Vehicle, RAVehicle
 		Description: Mutant rocket artillery. Strong vs Infantry, Buildings. Weak vs Armor, Aircraft.
 	Mobile:
@@ -9766,14 +9766,14 @@ tsmlrs:
 		RecoilRecovery: 32
 		LocalOffset: 0,121,271, 0,-121,271
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemMLRSMissile
 		Recoil: 64
 		RecoilRecovery: 32
 		LocalOffset: 0,121,271, 0,-121,271
 		MuzzleSequence: muzzle
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Turreted:
 		TurnSpeed: 16
 		Offset: -500,1,1
@@ -9789,9 +9789,9 @@ tsmlrs:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-tsm113:
+forgotten_m113adats:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -9811,10 +9811,10 @@ tsm113:
 	Tooltip:
 		Name: M113 Adats
 	UpdatesPlayerStatistics:
-		OverrideActor: tsm113
+		OverrideActor: forgotten_m113adats
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgtweapmutant, tsgtradrmutant
+		Prerequisites: ~forgotten_warfactory, forgotten_radar
 		Queue: Vehicle, RAVehicle
 		Description: Forgotten anti-air vehicle. Strong vs Aircraft, Light vehicles. Weak vs Everything else.
 	Mobile:
@@ -9833,33 +9833,33 @@ tsm113:
 		Weapon: TSAdatsMissile
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@SECONDARY:
 		Weapon: TSAdatsMissileAA
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSAdatsMissile
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADEAA:
 		Weapon: TSAdatsMissileAA
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Turreted:
 		TurnSpeed: 14
 	WithMuzzleOverlay:
 	AttackTurreted:
 	Selectable:
-		Class: tsm113
+		Class: forgotten_m113adats
 	# Cargo:
 	# 	UnloadVoice: Move
 	# 	Types: Infantry, Hacker, Fremen
 	# 	MaxWeight: 4
-	# 	InitialUnits: TSMUTANT,TSMWMN,TSMUTANT3,TSE3.MUTANT
+	# 	InitialUnits: forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_rocketinfantry
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9871,9 +9871,9 @@ tsm113:
 	# 	Position: BottomLeft
 	# 	RequiresSelection: true
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-tsapctruck:
+forgotten_apctruck:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@botmicro: ^BotAutoDeployTransport
@@ -9894,10 +9894,10 @@ tsapctruck:
 	Tooltip:
 		Name: APC Truck
 	UpdatesPlayerStatistics:
-		OverrideActor: tsm113
+		OverrideActor: forgotten_m113adats
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tsgtweapmutant
+		Prerequisites: ~forgotten_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: Armored troop transport. Strong vs Infantry. Weak vs Armor.
 	Mobile:
@@ -9919,12 +9919,12 @@ tsapctruck:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	Selectable:
-		Class: tsapctruck
+		Class: forgotten_apctruck
 	Cargo:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
-		InitialUnits: TSMUTANT,TSMUTANT,TSMUTANT,TSE3.MUTANT,TSE3.MUTANT,TSE3.MUTANT
+		InitialUnits: forgotten_mutant,forgotten_mutant,forgotten_mutant,forgotten_rocketinfantry,forgotten_rocketinfantry,forgotten_rocketinfantry
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -9936,7 +9936,7 @@ tsapctruck:
 		Position: BottomLeft
 		RequiresSelection: true
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_mypet, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 #######################################
 # TS CABAL Vehicles
@@ -10743,7 +10743,7 @@ TSORCA:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -10834,7 +10834,7 @@ TSZONEORCA:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -11005,7 +11005,7 @@ TSORCAB:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 20
 		ReloadDelay: 10
@@ -11084,7 +11084,7 @@ TSTRNSPORT:
 		Actor: TSTRNSPORT.Husk
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	RenderVoxels:
 		Scale: 15
 	ActorStatValues:
@@ -11150,7 +11150,7 @@ tscarrycabal:
 	SpawnActorOnDeath:
 		Actor: tscarrycabal.Husk
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	RenderSprites:
 		Image: tscarrycabal
 		PlayerPalette: player_rgba
@@ -11178,7 +11178,7 @@ tscarrycabal.Husk:
 		Image: tscarrycabal
 		PlayerPalette: player_rgba
 
-TSTRNSPORTMUTANT:
+forgotten_carryall:
 	Inherits: ^Helicopter
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@ChemicalFuel: ^ChemicalFuel
@@ -11195,7 +11195,7 @@ TSTRNSPORTMUTANT:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~tsgthpadmutant, tsgtdeptmutant
+		Prerequisites: ~forgotten_helipad, forgotten_servicedepot
 		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
 	Aircraft:
 		TurnSpeed: 80
@@ -11218,14 +11218,14 @@ TSTRNSPORTMUTANT:
 		Actor: TSTRNSPORT.Husk
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	RenderVoxels:
 		Scale: 15
 		Image: tstrnsport
 	RenderSprites:
 		Image: tstrnsport
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
 TSSCRIN:
 	Inherits: ^Helicopter
@@ -11508,7 +11508,7 @@ TSAPACHENOD:
 	ActorStatValues:
 		Upgrades: up_mobilityspecialization, up_tiberiumlenses, up_auxiliaryweapon, up_advancedtiberiumrefinement
 
-TSAPACHEMUTANT:
+forgotten_cobracopter:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -11528,7 +11528,7 @@ TSAPACHEMUTANT:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgthpadmutant, ~uptscobra
+		Prerequisites: ~forgotten_helipad, ~forgotten_promotion_cobrahelicopter
 		Queue: Aircraft, RAAircraft
 		Description: Anti-armor support gunship.  Strong vs Tanks, Aircraft. Weak vs Anti-air defenses.
 	Aircraft:
@@ -11544,12 +11544,12 @@ TSAPACHEMUTANT:
 		Weapon: TSCobraMissile
 		LocalOffset: 0,121,271, 0,-121,271
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@SECONDARY:
 		Weapon: TSChemCobraMissile
 		LocalOffset: 0,121,271, 0,-121,271
 		PauseOnCondition: !ammo
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
@@ -11569,7 +11569,7 @@ TSAPACHEMUTANT:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSAPACHEMUTANT.Husk
+		Actor: forgotten_cobracopter_husk
 	WithIdleOverlay@ROTORAIR:
 		Offset: 42,0,400
 		Sequence: rotor
@@ -11585,14 +11585,14 @@ TSAPACHEMUTANT:
 		RequiresSelection: True
 		PipCount: 4
 	RenderSprites:
-		Image: tsapachemutant
+		Image: forgotten_cobracopter
 		PlayerPalette: player_rgba
 	EjectOnDeath:
-		PilotActor: tsmutant
+		PilotActor: forgotten_mutant
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
-TSAPACHEMUTANT.Husk:
+forgotten_cobracopter_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Cobra Copter
@@ -11603,7 +11603,7 @@ TSAPACHEMUTANT.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsapachemutant
+		Image: forgotten_cobracopter
 		PlayerPalette: player_rgba
 
 TSAPACHECABAL:
@@ -11701,7 +11701,7 @@ TSAPACHE.Husk:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSHELI:
+forgotten_apache:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -11721,7 +11721,7 @@ TSHELI:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~tsgthpadmutant, ~!uptscobra
+		Prerequisites: ~forgotten_helipad, ~!forgotten_promotion_cobrahelicopter
 		Queue: Aircraft, RAAircraft
 		Description: Anti-armor support gunship.  Strong vs Tanks, Aircraft. Weak vs Anti-air defenses.
 	Aircraft:
@@ -11737,12 +11737,12 @@ TSHELI:
 		Weapon: TSApacheMissile
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSChemApacheMissile
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
@@ -11755,7 +11755,7 @@ TSHELI:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 12
 		AmmoCondition: ammo
@@ -11763,7 +11763,7 @@ TSHELI:
 		Delay: 30
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSHELI.Husk
+		Actor: forgotten_apache_husk
 	WithIdleOverlay@ROTORAIR:
 		Offset: 42,0,300
 		Sequence: rotor
@@ -11781,10 +11781,10 @@ TSHELI:
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_junkarmor, up_tiberiumboosters, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 
-TSHELI.Husk:
+forgotten_apache_husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -11796,15 +11796,15 @@ TSHELI.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsheli
+		Image: forgotten_apache
 	RenderVoxels:
-		Image: tsheli
+		Image: forgotten_apache
 		Scale: 15
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSHIND:
+forgotten_wasp:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@AntiInf: ^PrioritizeInfantry
@@ -11824,7 +11824,7 @@ TSHIND:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~tsgthpadmutant
+		Prerequisites: ~forgotten_helipad
 		Queue: Aircraft, RAAircraft
 		Description: Anti-personnel support gunship narmed with dual chain guns. Strong vs Infantry. Weak vs Armor, Anti-air defenses.
 	Aircraft:
@@ -11855,7 +11855,7 @@ TSHIND:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 4
 		AmmoCondition: ammo
@@ -11863,19 +11863,19 @@ TSHIND:
 		Delay: 8
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSHIND.Husk
+		Actor: forgotten_wasp_husk
 	EjectOnDeath:
-		PilotActor: tsmutant
+		PilotActor: forgotten_mutant
 	RenderSprites:
 		PlayerPalette: player_rgba
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
-	GrantConditionOnPrerequisite@uptscobra:
-		Condition: uptscobra
-		Prerequisites: uptscobra
-	Cloak@uptscobra:
+	GrantConditionOnPrerequisite@forgotten_promotion_cobrahelicopter:
+		Condition: forgotten_promotion_cobrahelicopter
+		Prerequisites: forgotten_promotion_cobrahelicopter
+	Cloak@forgotten_promotion_cobrahelicopter:
 		DetectionTypes: GroundCloak
 		InitialDelay: 125
 		CloakDelay: 75
@@ -11883,11 +11883,11 @@ TSHIND:
 		UncloakSound: cloak5.aud
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
-		RequiresCondition: uptscobra
+		RequiresCondition: forgotten_promotion_cobrahelicopter
 	ActorStatValues:
-		Upgrades: up_chemicalfuel, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
-TSHIND.Husk:
+forgotten_wasp_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Wasp
@@ -11898,11 +11898,11 @@ TSHIND.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tshind
+		Image: forgotten_wasp
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-tscropplane:
+forgotten_cropplane:
 	Inherits: ^Helicopter
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -11921,7 +11921,7 @@ tscropplane:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgthpadmutant, tsfgttech, ~!uptslocust
+		Prerequisites: ~forgotten_helipad, forgotten_church, ~!forgotten_promotion_locustbomber
 		Queue: Aircraft, RAAircraft
 		Description: Heavy bomber. Strong vs Buildings. Weak vs Aircraft.
 	Aircraft:
@@ -11943,12 +11943,12 @@ tscropplane:
 		Weapon: TSCropBomb
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSCropBombChem
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	AttackAircraft:
 		Voice: Attack
 		FacingTolerance: 80
@@ -11958,7 +11958,7 @@ tscropplane:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 1
 		ReloadCount: 1
@@ -11967,7 +11967,7 @@ tscropplane:
 	# 	Delay: 25
 	# 	Count: 1
 	SpawnActorOnDeath:
-		Actor: tscropplane.Husk
+		Actor: forgotten_cropplane_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -11975,9 +11975,9 @@ tscropplane:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
-tscropplane.Husk:
+forgotten_cropplane_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Crop Plane
@@ -11988,10 +11988,10 @@ tscropplane.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsflocust
+		Image: forgotten_locustbomber
 		PlayerPalette: player_rgba
 
-tsflocust:
+forgotten_locustbomber:
 	Inherits: ^Helicopter
 	Inherits@Template: ^BomberTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -12011,7 +12011,7 @@ tsflocust:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~tsgthpadmutant, tsfgttech, ~uptslocust
+		Prerequisites: ~forgotten_helipad, forgotten_church, ~forgotten_promotion_locustbomber
 		Queue: Aircraft, RAAircraft
 		Description: Heavy bomber. Strong vs Buildings. Weak vs Aircraft.
 	Aircraft:
@@ -12033,12 +12033,12 @@ tsflocust:
 		Weapon: TSLocustBomb
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSLocustBombChem
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	AttackAircraft:
 		Voice: Attack
 		FacingTolerance: 80
@@ -12048,7 +12048,7 @@ tsflocust:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 1
 		ReloadCount: 1
@@ -12057,7 +12057,7 @@ tsflocust:
 	# 	Delay: 25
 	# 	Count: 1
 	SpawnActorOnDeath:
-		Actor: tsflocust.Husk
+		Actor: forgotten_locustbomber_husk
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -12065,9 +12065,9 @@ tsflocust:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_chemicalweapons, up_chemicalfuel, up_junkarmor, up_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
-tsflocust.Husk:
+forgotten_locustbomber_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
 		Name: Locust Bomber
@@ -12078,7 +12078,7 @@ tsflocust.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsflocust
+		Image: forgotten_locustbomber
 		PlayerPalette: player_rgba
 
 tsfsmoker:
@@ -12186,7 +12186,7 @@ TSTRAN:
 		BuildPaletteOrder: 40
 		Queue: Aircraft, RAAircraft
 		Description: Fast infantry transport helicopter.\n Unarmed
-		Prerequisites: ~tsgthpadmutant, ~disabled
+		Prerequisites: ~forgotten_helipad, ~disabled
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 120
@@ -12220,7 +12220,7 @@ TSTRAN:
 		MaxWeight: 10
 		AfterUnloadDelay: 40
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	SpawnActorOnDeath:
 		Actor: TSTRAN.Husk
 	RenderVoxels:
@@ -12892,7 +12892,7 @@ up_willofkane:
 
 ############ Radar
 
-up_genomemapping:
+forgotten_upgrade_genomemapping:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Genome Mapping
@@ -12902,34 +12902,34 @@ up_genomemapping:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
 		Description: Increases damage resistance, range, vision and speed of Forgotten infantry by 10%.
-		Prerequisites: ~tsgtradrmutant, !up_genomemapping
+		Prerequisites: ~forgotten_radar, !forgotten_upgrade_genomemapping
 	RenderSprites:
 		Image: genomemappingicon
 	ProvidesPrerequisite:
 
 ^GenomeMapping:
-	GrantConditionOnPrerequisite@up_genomemapping:
-		Condition: up_genomemapping
-		Prerequisites: up_genomemapping
-	RangeMultiplier@up_genomemapping:
-		RequiresCondition: up_genomemapping
+	GrantConditionOnPrerequisite@forgotten_upgrade_genomemapping:
+		Condition: forgotten_upgrade_genomemapping
+		Prerequisites: forgotten_upgrade_genomemapping
+	RangeMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
 		Modifier: 110
-	RevealsShroudMultiplier@up_genomemapping:
-		RequiresCondition: up_genomemapping
+	RevealsShroudMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
 		Modifier: 110
-	DetectCloakedMultiplier@up_genomemapping:
-		RequiresCondition: up_genomemapping
+	DetectCloakedMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
 		Modifier: 110
-	SpeedMultiplier@up_genomemapping:
-		RequiresCondition: up_genomemapping
+	SpeedMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
 		Modifier: 110
-	DamageMultiplier@up_genomemapping:
-		RequiresCondition: up_genomemapping
+	DamageMultiplier@forgotten_upgrade_genomemapping:
+		RequiresCondition: forgotten_upgrade_genomemapping
 		Modifier: 90
 	ActorStatValues:
-		Upgrades: up_genomemapping
+		Upgrades: forgotten_upgrade_genomemapping
 
-up_chemicalfuel:
+forgotten_upgrade_chemicalfuel:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Chemical Fuel
@@ -12939,22 +12939,22 @@ up_chemicalfuel:
 		BuildPaletteOrder: 60
 		Queue: Upgrades
 		Description: Increases vehicle speed by 20%.
-		Prerequisites: ~tsgtradrmutant, !up_chemicalfuel
+		Prerequisites: ~forgotten_radar, !forgotten_upgrade_chemicalfuel
 	RenderSprites:
 		Image: chemicalfuelicon
 	ProvidesPrerequisite:
 
 ^ChemicalFuel:
-	GrantConditionOnPrerequisite@up_chemicalfuel:
-		Condition: up_chemicalfuel
-		Prerequisites: up_chemicalfuel
-	SpeedMultiplier@up_chemicalfuel:
-		RequiresCondition: up_chemicalfuel
+	GrantConditionOnPrerequisite@forgotten_upgrade_chemicalfuel:
+		Condition: forgotten_upgrade_chemicalfuel
+		Prerequisites: forgotten_upgrade_chemicalfuel
+	SpeedMultiplier@forgotten_upgrade_chemicalfuel:
+		RequiresCondition: forgotten_upgrade_chemicalfuel
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: up_chemicalfuel
+		Upgrades: forgotten_upgrade_chemicalfuel
 
-up_mypet:
+forgotten_upgrade_friendlywildlife:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Friendly Wildlife
@@ -12964,47 +12964,47 @@ up_mypet:
 		BuildPaletteOrder: 70
 		Queue: Upgrades
 		Description: Forgotten units spawn visceroids on death.
-		Prerequisites: ~tsgtradrmutant, !up_mypet
+		Prerequisites: ~forgotten_radar, !forgotten_upgrade_friendlywildlife
 	RenderSprites:
 		Image: mypeticon
 	ProvidesPrerequisite:
 
 ^MyPetSmall:
-	GrantConditionOnPrerequisite@up_mypet:
-		Condition: up_mypet
-		Prerequisites: up_mypet
-	SpawnActorOnDeath@up_mypet:
+	GrantConditionOnPrerequisite@forgotten_upgrade_friendlywildlife:
+		Condition: forgotten_upgrade_friendlywildlife
+		Prerequisites: forgotten_upgrade_friendlywildlife
+	SpawnActorOnDeath@forgotten_upgrade_friendlywildlife:
 		Probability: 25
-		Actor: TSMutVisceroid
-		RequiresCondition: up_mypet && !chronobeamed
+		Actor: forgotten_visceroid
+		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
 	ActorStatValues:
-		Upgrades: up_mypet
+		Upgrades: forgotten_upgrade_friendlywildlife
 
 ^MyPetMedium:
-	GrantConditionOnPrerequisite@up_mypet:
-		Condition: up_mypet
-		Prerequisites: up_mypet
-	SpawnActorOnDeath@up_mypet:
+	GrantConditionOnPrerequisite@forgotten_upgrade_friendlywildlife:
+		Condition: forgotten_upgrade_friendlywildlife
+		Prerequisites: forgotten_upgrade_friendlywildlife
+	SpawnActorOnDeath@forgotten_upgrade_friendlywildlife:
 		Probability: 50
-		Actor: TSMutVisceroid
-		RequiresCondition: up_mypet && !chronobeamed
+		Actor: forgotten_visceroid
+		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
 	ActorStatValues:
-		Upgrades: up_mypet
+		Upgrades: forgotten_upgrade_friendlywildlife
 
 ^MyPetLarge:
-	GrantConditionOnPrerequisite@up_mypet:
-		Condition: up_mypet
-		Prerequisites: up_mypet
-	SpawnActorOnDeath@up_mypet:
+	GrantConditionOnPrerequisite@forgotten_upgrade_friendlywildlife:
+		Condition: forgotten_upgrade_friendlywildlife
+		Prerequisites: forgotten_upgrade_friendlywildlife
+	SpawnActorOnDeath@forgotten_upgrade_friendlywildlife:
 		Probability: 100
-		Actor: TSMutVisceroid
-		RequiresCondition: up_mypet && !chronobeamed
+		Actor: forgotten_visceroid
+		RequiresCondition: forgotten_upgrade_friendlywildlife && !chronobeamed
 	ActorStatValues:
-		Upgrades: up_mypet
+		Upgrades: forgotten_upgrade_friendlywildlife
 
 ############## Lab
 
-up_junkarmor:
+forgotten_upgrade_junkarmor:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Junk Armor
@@ -13014,25 +13014,25 @@ up_junkarmor:
 		BuildPaletteOrder: 50
 		Queue: Research
 		Description: Increases Damage Resistance and Speed of vehicles by 15%.
-		Prerequisites: ~tsfgttech, !up_junkarmor
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_junkarmor
 	RenderSprites:
 		Image: junkarmoricon
 	ProvidesPrerequisite:
 
 ^JunkArmor:
-	GrantConditionOnPrerequisite@up_junkarmor:
-		Condition: up_junkarmor
-		Prerequisites: up_junkarmor
-	DamageMultiplier@up_junkarmor:
-		RequiresCondition: up_junkarmor
+	GrantConditionOnPrerequisite@forgotten_upgrade_junkarmor:
+		Condition: forgotten_upgrade_junkarmor
+		Prerequisites: forgotten_upgrade_junkarmor
+	DamageMultiplier@forgotten_upgrade_junkarmor:
+		RequiresCondition: forgotten_upgrade_junkarmor
 		Modifier: 85
-	SpeedMultiplier@up_junkarmor:
-		RequiresCondition: up_junkarmor
+	SpeedMultiplier@forgotten_upgrade_junkarmor:
+		RequiresCondition: forgotten_upgrade_junkarmor
 		Modifier: 115
 	ActorStatValues:
-		Upgrades: up_junkarmor
+		Upgrades: forgotten_upgrade_junkarmor
 
-up_tiberiumboosters:
+forgotten_upgrade_tiberiumboosters:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Tiberium Boosters
@@ -13042,22 +13042,22 @@ up_tiberiumboosters:
 		BuildPaletteOrder: 60
 		Queue: Research
 		Description: Increases range of Mutant missiles and shells by 15%.
-		Prerequisites: ~tsfgttech, !up_tiberiumboosters
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_tiberiumboosters
 	RenderSprites:
 		Image: tiberiumboostersicon
 	ProvidesPrerequisite:
 
 ^TiberiumBoosters:
-	GrantConditionOnPrerequisite@up_tiberiumboosters:
-		Condition: up_tiberiumboosters
-		Prerequisites: up_tiberiumboosters
-	RangeMultiplier@up_tiberiumboosters:
-		RequiresCondition: up_tiberiumboosters
+	GrantConditionOnPrerequisite@forgotten_upgrade_tiberiumboosters:
+		Condition: forgotten_upgrade_tiberiumboosters
+		Prerequisites: forgotten_upgrade_tiberiumboosters
+	RangeMultiplier@forgotten_upgrade_tiberiumboosters:
+		RequiresCondition: forgotten_upgrade_tiberiumboosters
 		Modifier: 115
 	ActorStatValues:
-		Upgrades: up_tiberiumboosters
+		Upgrades: forgotten_upgrade_tiberiumboosters
 
-up_unity:
+forgotten_upgrade_unity:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Unity
@@ -13067,25 +13067,25 @@ up_unity:
 		BuildPaletteOrder: 70
 		Queue: Research
 		Description: Every Forgotten unit nearby increases other Forgotten units damage resistance by 2% up to 20%.
-		Prerequisites: ~tsfgttech, !up_unity
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_unity
 	RenderSprites:
 		Image: unityicon
 	ProvidesPrerequisite:
 
 ^Unity:
-	GrantConditionOnPrerequisite@up_unity:
-		Condition: up_unity
-		Prerequisites: up_unity
+	GrantConditionOnPrerequisite@forgotten_upgrade_unity:
+		Condition: forgotten_upgrade_unity
+		Prerequisites: forgotten_upgrade_unity
 	ProximityExternalCondition@Unity:
 		Range: 7500
 		ValidRelationships: Ally
 		Condition: Unity
-		RequiresCondition: up_unity
+		RequiresCondition: forgotten_upgrade_unity
 	# WithRangeCircle@Unity:
 	# 	Range: 7500
 	# 	Type: Unity
 	# 	Color: 88888888
-	# 	RequiresCondition: up_unity
+	# 	RequiresCondition: forgotten_upgrade_unity
 	ExternalCondition@Unity:
 		Condition: Unity
 	DamageMultiplier@Unity1:
@@ -13119,9 +13119,9 @@ up_unity:
 		Modifier: 80
 		RequiresCondition: Unity >= 10
 	ActorStatValues:
-		Upgrades: up_unity
+		Upgrades: forgotten_upgrade_unity
 
-up_chemicalweapons:
+forgotten_upgrade_chemicalweapons:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Chemical Weapons
@@ -13131,35 +13131,35 @@ up_chemicalweapons:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: Adds chemical weapons to many Frogotten units and upgrades existing ones.
-		Prerequisites: ~tsfgttech, !up_chemicalweapons
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_chemicalweapons
 	RenderSprites:
 		Image: chemicalweaponsicon
 	ProvidesPrerequisite:
 
 ^ChemicalWeapons:
-	GrantConditionOnPrerequisite@up_chemicalweapons:
-		Condition: up_chemicalweapons
-		Prerequisites: up_chemicalweapons
+	GrantConditionOnPrerequisite@forgotten_upgrade_chemicalweapons:
+		Condition: forgotten_upgrade_chemicalweapons
+		Prerequisites: forgotten_upgrade_chemicalweapons
 	ActorStatValues:
-		Upgrades: up_chemicalweapons
+		Upgrades: forgotten_upgrade_chemicalweapons
 
 ^TiberiumAdaptability:
-	GrantConditionOnPrerequisite@up_tiberiumadaptability:
+	GrantConditionOnPrerequisite@forgotten_upgrade_tiberiumadaptability:
 		Condition: up_wtiberiumadaptability
-		Prerequisites: up_tiberiumadaptability
-	ChangesHealth@up_tiberiumadaptability:
+		Prerequisites: forgotten_upgrade_tiberiumadaptability
+	ChangesHealth@forgotten_upgrade_tiberiumadaptability:
 		PercentageStep: 1
 		Delay: 100
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_tiberiumadaptability
+		RequiresCondition: forgotten_upgrade_tiberiumadaptability
 	ActorStatValues:
-		Upgrades: up_tiberiumadaptability
+		Upgrades: forgotten_upgrade_tiberiumadaptability
 
-team_upgrade.up_tiberiumadaptability:
+forgotten_upgrade_tiberiumadaptability_proxy_actor:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_tiberiumadaptability
+		Prerequisite: forgotten_upgrade_tiberiumadaptability
 	RenderSprites:
 		Image: tiberiumadaptabilityicon
 	Tooltip:
@@ -13168,7 +13168,7 @@ team_upgrade.up_tiberiumadaptability:
 		Description: Increases all units' health regeneration.
 	PlayerDisplayUpgrade:
 
-up_tiberiumadaptability:
+forgotten_upgrade_tiberiumadaptability:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Tiberium Adaptability
@@ -13178,12 +13178,12 @@ up_tiberiumadaptability:
 		BuildPaletteOrder: 120
 		Queue: Research
 		Description: Increases all units' health regeneration.
-		Prerequisites: ~tsfgttech, !up_tiberiumadaptability
+		Prerequisites: ~forgotten_church, !forgotten_upgrade_tiberiumadaptability
 	RenderSprites:
 		Image: tiberiumadaptabilityicon
 	ProvidesPrerequisite:
 	ProvidesTeamProxyActor:
-		Actor: team_upgrade.up_tiberiumadaptability
+		Actor: forgotten_upgrade_tiberiumadaptability_proxy_actor
 
 ################## CABAL #########################
 
@@ -13556,7 +13556,7 @@ uptsdummy4:
 
 # FPRGOTTEN ##############
 
-uptsbowler:
+forgotten_promotion_bowler:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Bowler
@@ -13564,13 +13564,13 @@ uptsbowler:
 		BuildPaletteOrder: 1
 		Queue: Promotions
 		Description: Allows construction of Bowler.
-		Prerequisites: ~fact.forgotten, !uptsbowler, rank1
+		Prerequisites: ~fact.forgotten, !forgotten_promotion_bowler, rank1
 	RenderSprites:
-		Image: tsbowler
+		Image: forgotten_bowler
 	ProvidesPrerequisite:
-		Prerequisite: uptsbowler
+		Prerequisite: forgotten_promotion_bowler
 
-uptsrunner:
+forgotten_promotion_runnershotgal:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Runner Shotgal
@@ -13578,13 +13578,13 @@ uptsrunner:
 		BuildPaletteOrder: 4
 		Queue: Promotions
 		Description: Allows training of Runner Shotgal.
-		Prerequisites: ~fact.forgotten, uptsbowler, !uptsrunner, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_bowler, !forgotten_promotion_runnershotgal, rank1
 	RenderSprites:
-		Image: tsshotmut
+		Image: forgotten_runnershotgal
 	ProvidesPrerequisite:
-		Prerequisite: uptsrunner
+		Prerequisite: forgotten_promotion_runnershotgal
 
-uptsbluedog:
+forgotten_promotion_bluetiberiumfiend:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Blue Tiberium Fiend
@@ -13592,13 +13592,13 @@ uptsbluedog:
 		BuildPaletteOrder: 7
 		Queue: Promotions
 		Description: Allows training of Blue Tiberium Fiend.
-		Prerequisites: ~fact.forgotten, uptsrunner, !uptsbluedog, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_runnershotgal, !forgotten_promotion_bluetiberiumfiend, rank1
 	RenderSprites:
-		Image: tsdoggieblue
+		Image: forgotten_bluetiberiumfiend
 	ProvidesPrerequisite:
-		Prerequisite: uptsbluedog
+		Prerequisite: forgotten_promotion_bluetiberiumfiend
 
-uptsghoststalker:
+forgotten_promotion_ghoststalker:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Ghost Stalker
@@ -13606,13 +13606,13 @@ uptsghoststalker:
 		BuildPaletteOrder: 10
 		Queue: Promotions
 		Description: Allows training of Ghost Stalker.
-		Prerequisites: ~fact.forgotten, uptsbluedog, !uptsghoststalker, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_bluetiberiumfiend, !forgotten_promotion_ghoststalker, rank1
 	RenderSprites:
-		Image: tsghost
+		Image: forgotten_ghoststalker
 	ProvidesPrerequisite:
-		Prerequisite: uptsghoststalker
+		Prerequisite: forgotten_promotion_ghoststalker
 
-uptswarrior:
+forgotten_promotion_warriortank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Warrior Tank
@@ -13620,13 +13620,13 @@ uptswarrior:
 		BuildPaletteOrder: 2
 		Queue: Promotions
 		Description: Allows construction of Warrior Tank.
-		Prerequisites: ~fact.forgotten, !uptswarrior, rank1
+		Prerequisites: ~fact.forgotten, !forgotten_promotion_warriortank, rank1
 	RenderSprites:
-		Image: ts2tnk
+		Image: forgotten_warriortank
 	ProvidesPrerequisite:
-		Prerequisite: uptswarrior
+		Prerequisite: forgotten_promotion_warriortank
 
-uptsscooper:
+forgotten_promotion_scoopertank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Scooper Tank
@@ -13634,13 +13634,13 @@ uptsscooper:
 		BuildPaletteOrder: 5
 		Queue: Promotions
 		Description: Allows construction of Scooper Tank.
-		Prerequisites: ~fact.forgotten, uptswarrior, !uptsscooper, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_warriortank, !forgotten_promotion_scoopertank, rank1
 	RenderSprites:
-		Image: ts3tnk
+		Image: forgotten_scoopertank
 	ProvidesPrerequisite:
-		Prerequisite: uptsscooper
+		Prerequisite: forgotten_promotion_scoopertank
 
-uptsmlrs:
+forgotten_promotion_mlrs:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock MLRS
@@ -13648,13 +13648,13 @@ uptsmlrs:
 		BuildPaletteOrder: 8
 		Queue: Promotions
 		Description: Allows construction of MLRS.
-		Prerequisites: ~fact.forgotten, uptsscooper, !uptsmlrs, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_scoopertank, !forgotten_promotion_mlrs, rank1
 	RenderSprites:
-		Image: tsmlrs
+		Image: forgotten_mlrs
 	ProvidesPrerequisite:
-		Prerequisite: uptsmlrs
+		Prerequisite: forgotten_promotion_mlrs
 
-uptsmammoth:
+forgotten_promotion_experimentalmammothtank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Experimental Mammoth Tank
@@ -13662,13 +13662,13 @@ uptsmammoth:
 		BuildPaletteOrder: 11
 		Queue: Promotions
 		Description: Allows construction of Experimental Mammoth Tank.
-		Prerequisites: ~fact.forgotten, uptsmlrs, !uptsmammoth, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_mlrs, !forgotten_promotion_experimentalmammothtank, rank1
 	RenderSprites:
-		Image: ts4tnk
+		Image: forgotten_experimentalmammothtank
 	ProvidesPrerequisite:
-		Prerequisite: uptsmammoth
+		Prerequisite: forgotten_promotion_experimentalmammothtank
 
-uptscobra:
+forgotten_promotion_cobrahelicopter:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Cobra Helicopter
@@ -13676,13 +13676,13 @@ uptscobra:
 		BuildPaletteOrder: 3
 		Queue: Promotions
 		Description: Allows construction of Cobra Helicopter. Wasps gain Clock.
-		Prerequisites: ~fact.forgotten, !uptscobra, rank1
+		Prerequisites: ~fact.forgotten, !forgotten_promotion_cobrahelicopter, rank1
 	RenderSprites:
-		Image: tsapachemutant
+		Image: forgotten_cobracopter
 	ProvidesPrerequisite:
-		Prerequisite: uptscobra
+		Prerequisite: forgotten_promotion_cobrahelicopter
 
-uptsftnk:
+forgotten_promotion_flametank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Flame Tank
@@ -13690,13 +13690,13 @@ uptsftnk:
 		BuildPaletteOrder: 6
 		Queue: Promotions
 		Description: Allows construction of Flame Tank.
-		Prerequisites: ~fact.forgotten, uptscobra, !uptsftnk, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_cobrahelicopter, !forgotten_promotion_flametank, rank1
 	RenderSprites:
-		Image: tsftnk
+		Image: forgotten_flametank
 	ProvidesPrerequisite:
-		Prerequisite: uptsftnk
+		Prerequisite: forgotten_promotion_flametank
 
-uptslocust:
+forgotten_promotion_locustbomber:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Locust Bomber
@@ -13704,13 +13704,13 @@ uptslocust:
 		BuildPaletteOrder: 9
 		Queue: Promotions
 		Description: Allows construction of Locust Bomber.
-		Prerequisites: ~fact.forgotten, uptsftnk, !uptslocust, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_flametank, !forgotten_promotion_locustbomber, rank1
 	RenderSprites:
-		Image: tsflocust
+		Image: forgotten_locustbomber
 	ProvidesPrerequisite:
-		Prerequisite: uptslocust
+		Prerequisite: forgotten_promotion_locustbomber
 
-uptschemmammoth:
+forgotten_promotion_chemicalmammothtank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Chemical Mammoth Tank
@@ -13718,11 +13718,11 @@ uptschemmammoth:
 		BuildPaletteOrder: 12
 		Queue: Promotions
 		Description: Allows construction of Chemical Mammoth Tank.
-		Prerequisites: ~fact.forgotten, uptslocust, !uptschemmammoth, rank1
+		Prerequisites: ~fact.forgotten, forgotten_promotion_locustbomber, !forgotten_promotion_chemicalmammothtank, rank1
 	RenderSprites:
-		Image: ts4tnk2
+		Image: forgotten_chemicalmammothtank
 	ProvidesPrerequisite:
-		Prerequisite: uptschemmammoth
+		Prerequisite: forgotten_promotion_chemicalmammothtank
 
 ################## CABAL Research #########################
 

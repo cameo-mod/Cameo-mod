@@ -72,19 +72,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: forgotten
-		BaseActor: tsmcvmutant
+		BaseActor: forgotten_mobileconstructionvehicle
 	StartingUnits@defaultforgotten:
 		Class: light
 		ClassName: Light Support
 		Factions: forgotten
-		BaseActor: tsmcvmutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk
+		BaseActor: forgotten_mobileconstructionvehicle
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank
 	StartingUnits@heavyforgotten:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: forgotten
-		BaseActor: tsmcvmutant
-		SupportActors: tsmutant,tsmutant,tsmwmn,tsmutant3,tsmutant3,tscar2,ts1tnk,ts2tnk,ts2tnk,ts2tnk
+		BaseActor: forgotten_mobileconstructionvehicle
+		SupportActors: forgotten_mutant,forgotten_mutant,forgotten_mutantsoldier,forgotten_mutantsergeant,forgotten_mutantsergeant,forgotten_raidercar,forgotten_rattytank,forgotten_warriortank,forgotten_warriortank,forgotten_warriortank
 	StartingUnits@mcvonlyracabal:
 		Class: none
 		ClassName: MCV Only
@@ -216,14 +216,14 @@ tsmonstermaker1:
 	SpawnActorOnDeath@monstermaker3:
 		RequiresCondition: monsterbirth
 		Probability: 8
-		Actor: tsdoggiew
+		Actor: forgotten_tiberianfiend_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
 	SpawnActorOnDeath@monstermaker3b:
 		RequiresCondition: monsterbirth
 		Probability: 8
-		Actor: tsdoggiew
+		Actor: forgotten_tiberianfiend_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
@@ -532,7 +532,7 @@ TSGTCNSTNOD:
 	RenderSprites:
 		Image: tsgtcnst
 
-TSGTCNSTMUTANT:
+forgotten_constructionyard:
 	GrantExternalConditionToOwner@BuildingsOwned:
 		Condition: BuildingsOwned
 	Inherits: ^BaseBuilding
@@ -566,7 +566,7 @@ TSGTCNSTMUTANT:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: tsmcvmutant
+		IntoActor: forgotten_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -766,17 +766,17 @@ tsmcvnod.bot:
 		BuildLimit: 1
 		Prerequisites: ~techlevel.medium, tsgtdept, ~botplayer, allowsMCV
 
-TSMCVMUTANT:
+forgotten_mobileconstructionvehicle:
 	Inherits: TSMCVGDI
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	Transforms:
-		IntoActor: tsgtcnstmutant
+		IntoActor: forgotten_constructionyard
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmmutant
 
 tsmcvmutant.bot:
-	Inherits: TSMCVMUTANT
+	Inherits: forgotten_mobileconstructionvehicle
 	Buildable:
 		BuildPaletteOrder: 100
 		BuildLimit: 1
@@ -1286,7 +1286,7 @@ TSNTHAND2:
 	RenderSprites:
 		Image: tsnthand
 
-TSGTPILE2:
+forgotten_barracks:
 	Inherits: TSNTHAND
 	Tooltip:
 		Name: Hand of Forgotten
@@ -1938,7 +1938,7 @@ tsgtradr2:
 	RenderSprites:
 		Image: tsgtradr
 
-tssapc.mut:
+forgotten_scarabapc:
 	Inherits: TSSAPC
 	-Buildable:
 	RenderVoxels:
@@ -1946,32 +1946,32 @@ tssapc.mut:
 	RenderSprites:
 		Image: tssapc
 	Cargo:
-		InitialUnits: tsghost.r4,tsghost.r4,tsumagon.r4,tsumagon.r4,tsumagon.r4
+		InitialUnits: forgotten_ghoststalker_r4,forgotten_ghoststalker_r4,forgotten_mutantsniper_r4,forgotten_mutantsniper_r4,forgotten_mutantsniper_r4
 	AutoDeployer:
 		DeployChance: 100
 		DeployTicks: 0
 	UpdatesPlayerStatistics:
 		OverrideActor: tssapc
 
-tsghost.r4:
-	Inherits: TSGHOST
+forgotten_ghoststalker_r4:
+	Inherits: forgotten_ghoststalker
 	-Buildable:
 	RenderSprites:
-		Image: tsghost
+		Image: forgotten_ghoststalker
 	ProducibleWithLevel:
 		InitialLevels: 4
 	UpdatesPlayerStatistics:
-		OverrideActor: tsghost
+		OverrideActor: forgotten_ghoststalker
 
-tsumagon.r4:
-	Inherits: TSUMAGON
+forgotten_mutantsniper_r4:
+	Inherits: forgotten_mutantsniper
 	-Buildable:
 	RenderSprites:
-		Image: tsumagon
+		Image: forgotten_mutantsniper
 	ProducibleWithLevel:
 		InitialLevels: 4
 	UpdatesPlayerStatistics:
-		OverrideActor: tsumagon
+		OverrideActor: forgotten_mutantsniper
 
 tsnttech:
 	Inherits: ^BaseBuilding
@@ -2043,7 +2043,7 @@ tsgttech:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
 
-tsfgttech:
+forgotten_church:
 	Inherits: tsgttech
 	Tooltip:
 		Name: Forgotten Tech Center
@@ -2492,7 +2492,7 @@ tsgtyard2:
 # TS Denfesive
 #######################################
 
-tsveinhole:
+forgotten_veinhole:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
 	Inherits@shape: ^2x2Shape
@@ -3556,7 +3556,7 @@ TSCHAMSPY:
 	Voiced:
 		VoiceSet: TSSpy
 
-TSMHIJACK:
+forgotten_mutanthijacker:
 	Inherits: ^Soldier
 	Inherits@EXT: ^ExternalConditions
 	Inherits@anim: ^TSInfantry
@@ -3769,8 +3769,8 @@ TSDissolver:
 	Voiced:
 		VoiceSet: TSCyborg
 
-TSUMAGON:
-	Inherits: TSMUTANT
+forgotten_mutantsniper:
+	Inherits: forgotten_mutant
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -3799,20 +3799,20 @@ TSUMAGON:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSUmagon
+		VoiceSet: forgotten_mutantsniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSSniper
 	Selectable:
-		Class: tsumagon
+		Class: forgotten_mutantsniper
 
-TSUMAGONSP:
-	Inherits: TSUMAGON
+forgotten_mutantsniper_sp:
+	Inherits: forgotten_mutantsniper
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsumagon
+		Image: forgotten_mutantsniper
 	AutoTarget:
 		ScanRadius: 9999
 		InitialStance: AttackAnything
@@ -3822,7 +3822,7 @@ TSUMAGONSP:
 	GivesExperience:
 		PlayerExperienceModifier: 5
 
-TSGHOST:
+forgotten_ghoststalker:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3857,7 +3857,7 @@ TSGHOST:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSGhost
+		VoiceSet: forgotten_ghoststalker
 	Armament@c4:
 		Weapon: GenericC4
 		Cursor: c4
@@ -3866,15 +3866,15 @@ TSGHOST:
 		Weapon: TSMechRailgun
 	-DamagedByTerrain:
 	Selectable:
-		Class: tsghost
+		Class: forgotten_ghoststalker
 
-TSGHOSTSP:
-	Inherits: TSGHOST
+forgotten_ghoststalker_sp:
+	Inherits: forgotten_ghoststalker
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsghost
+		Image: forgotten_ghoststalker
 	AutoTarget:
 		InitialStance: AttackAnything
 		ScanRadius: 9999
@@ -3886,18 +3886,18 @@ TSGHOSTSP:
 		PlayerExperienceModifier: 5
 
 tsghost.mutant:
-	Inherits: TSGHOST
+	Inherits: forgotten_ghoststalker
 	RenderSprites:
-		Image: tsghost
+		Image: forgotten_ghoststalker
 	Valued:
 		Cost: 1100
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildLimit: 0
 	UpdatesPlayerStatistics:
-		OverrideActor: tsghost
+		OverrideActor: forgotten_ghoststalker
 
-TSMUTANT:
+forgotten_mutant:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -3940,13 +3940,13 @@ TSMUTANT:
 		Name: garrisoned
 		Weapon: TSVulcanTower
 
-TSMUTANTSP:
-	Inherits: TSMUTANT
+forgotten_mutant_sp:
+	Inherits: forgotten_mutant
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsmutant
+		Image: forgotten_mutant
 	AutoTarget:
 		InitialStance: AttackAnything
 		ScanRadius: 9999
@@ -3956,8 +3956,8 @@ TSMUTANTSP:
 	GivesExperience:
 		PlayerExperienceModifier: 0
 
-TSMWMN:
-	Inherits: TSMUTANT
+forgotten_mutantsoldier:
+	Inherits: forgotten_mutant
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Valued:
 		Cost: 150
@@ -3991,18 +3991,18 @@ TSMWMN:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	Voiced:
-		VoiceSet: TSUmagon
+		VoiceSet: forgotten_mutantsniper
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSRPGTower
 
-TSMWMNSP:
-	Inherits: TSMWMN
+forgotten_mutantsoldier_sp:
+	Inherits: forgotten_mutantsoldier
 	-Buildable:
 	RejectsOrders:
 	-MapEditorData:
 	RenderSprites:
-		Image: tsmwmn
+		Image: forgotten_mutantsoldier
 	AutoTarget:
 		InitialStance: AttackAnything
 		ScanRadius: 9999
@@ -4012,8 +4012,8 @@ TSMWMNSP:
 	GivesExperience:
 		PlayerExperienceModifier: 0
 
-TSMUTANT3:
-	Inherits: TSMUTANT
+forgotten_mutantsergeant:
+	Inherits: forgotten_mutant
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
@@ -4055,7 +4055,7 @@ TSMUTANT3:
 		Weapon: TSGrenadeG
 
 
-TSWEEDGUY:
+forgotten_chemsprayinfantry:
 	Inherits: ^Soldier
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -4101,7 +4101,7 @@ TSWEEDGUY:
 	Targetable@Immune:
 		TargetTypes: ToxinImmune
 
-# TSDOGGIE:
+# forgotten_tiberianfiend:
 # 	Inherits: RAPT
 # 	Inherits@bounty: ^GlobalBounty ##########
 # 	Inherits@anim: ^TSInfantry
@@ -4155,21 +4155,21 @@ TSWEEDGUY:
 # 	GivesExperience:
 # 		PlayerExperienceModifier: 0
 
-# TSDOGGIEW:
+# forgotten_tiberianfiend_wild:
 # 	Inherits: TSInfantry
 # 	Inherits@2: ^MutSWCreature
 # 	-Buildable:
 # 	-UpdatesPlayerStatistics:
 # 	-ActorLostNotification:
 # 	RenderSprites:
-# 		Image: tsdoggie
+# 		Image: forgotten_tiberianfiend
 # 	AttackWander:
 
 # TSMUTANTW:
-# 	Inherits: TSMUTANT
+# 	Inherits: forgotten_mutant
 # 	-Buildable:
 # 	RenderSprites:
-# 		Image: tsmutant
+# 		Image: forgotten_mutant
 # 	AttackWander:
 
 # tsfloater:
@@ -5750,7 +5750,7 @@ tsmemp:
 # TS Forgotten Vehicles
 #######################################
 
-TSWINI2:
+forgotten_missilevan:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5802,7 +5802,7 @@ TSWINI2:
 	RenderVoxels:
 		Scale: 7.5
 
-TSCAR2:
+forgotten_raidercar:
 	Inherits: ^Vehicle
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5853,7 +5853,7 @@ TSCAR2:
 	RenderVoxels:
 		Scale: 8.5
 
-TS1TNK:
+forgotten_rattytank:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5905,7 +5905,7 @@ TS1TNK:
 	RenderVoxels:
 		Scale: 8.0
 
-TS2TNK:
+forgotten_warriortank:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -5959,7 +5959,7 @@ TS2TNK:
 	RenderVoxels:
 		Scale: 8.8
 
-TS3TNK:
+forgotten_scoopertank:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6013,7 +6013,7 @@ TS3TNK:
 	RenderVoxels:
 		Scale: 9.0
 
-TSFTNK:
+forgotten_flametank:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6057,7 +6057,7 @@ TSFTNK:
 	DeliversCash:
 		Payload: 250
 
-TS4TNK:
+forgotten_experimentalmammothtank:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6126,7 +6126,7 @@ TS4TNK:
 	RenderVoxels:
 		Scale: 9.8
 
-TSARTY:
+forgotten_tankkiller:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6175,7 +6175,7 @@ TSARTY:
 	RenderVoxels:
 		Scale: 7.5
 
-tsmlrs:
+forgotten_mlrs:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6228,7 +6228,7 @@ tsmlrs:
 	RenderVoxels:
 		Scale: 7.5
 
-tsm113:
+forgotten_m113adats:
 	Inherits: ^Tank
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -6242,7 +6242,7 @@ tsm113:
 	Tooltip:
 		Name: M113 APC
 	UpdatesPlayerStatistics:
-		OverrideActor: tsm113
+		OverrideActor: forgotten_m113adats
 	Buildable:
 		BuildPaletteOrder: 160
 		Prerequisites: barracks
@@ -6266,7 +6266,7 @@ tsm113:
 	WithMuzzleOverlay:
 	AttackTurreted:
 	Selectable:
-		Class: tsm113
+		Class: forgotten_m113adats
 	WithVoxelBody:
 	WithVoxelTurret:
 	Cargo:
@@ -6278,20 +6278,20 @@ tsm113:
 	DeliversCash:
 		Payload: 350
 	RenderVoxels:
-		Image: tsm113
+		Image: forgotten_m113adats
 		Scale: 7.5
 	RenderSprites:
-		Image: tsm113
+		Image: forgotten_m113adats
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 
 tsm113.bot1:
-	Inherits: tsm113
+	Inherits: forgotten_m113adats
 	Buildable:
 		Prerequisites: barracks, ~anyhq, ~hardbotplayer
 	Cargo:
-		InitialUnits: tsmutant3, tsmutant, tsmutant, tsmwmn, tsmwmn
+		InitialUnits: forgotten_mutantsergeant, forgotten_mutant, forgotten_mutant, forgotten_mutantsoldier, forgotten_mutantsoldier
 	ProductionCostMultiplier:
 		Multiplier: 200
 	AutoDeployer:
@@ -6301,7 +6301,7 @@ tsm113.bot1:
 tsm113.bot2:
 	Inherits: tsm113.bot1
 	Cargo:
-		InitialUnits: tsdoggie, tsdoggie, tsmutant3
+		InitialUnits: forgotten_tiberianfiend, forgotten_tiberianfiend, forgotten_mutantsergeant
 	ProductionCostMultiplier:
 		Multiplier: 300
 
@@ -6310,7 +6310,7 @@ tsm113.bot3:
 	Buildable:
 		Prerequisites: barracks, ~tek, ~hardbotplayer
 	Cargo:
-		InitialUnits: tsghost.mutant, tsumagon, tsmutant3, tsmutant3, tsweedguy
+		InitialUnits: tsghost.mutant, forgotten_mutantsniper, forgotten_mutantsergeant, forgotten_mutantsergeant, forgotten_chemsprayinfantry
 	ProductionCostMultiplier:
 		Multiplier: 500
 
@@ -6676,7 +6676,7 @@ TSORCA:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 10
 		ReloadCount: 2
@@ -6759,7 +6759,7 @@ TSORCAB:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 20
 		ReloadCount: 10
@@ -6837,7 +6837,7 @@ TSTRNSPORT:
 		Actor: TSTRNSPORT.Husk
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	RenderVoxels:
 		Scale: 7.4
 
@@ -7041,7 +7041,7 @@ TSAPACHE.Husk:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSHELI:
+forgotten_apache:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -7090,7 +7090,7 @@ TSHELI:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 12
 		ReloadCount: 3
@@ -7099,7 +7099,7 @@ TSHELI:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSHELI.Husk
+		Actor: forgotten_apache_husk
 	WithIdleOverlay@ROTORAIR:
 		Offset: 42,0,300
 		Sequence: rotor
@@ -7118,7 +7118,7 @@ TSHELI:
 		PipCount: 4
 
 
-TSHELI.Husk:
+forgotten_apache_husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -7130,15 +7130,15 @@ TSHELI.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tsheli
+		Image: forgotten_apache
 	RenderVoxels:
-		Image: tsheli
+		Image: forgotten_apache
 		Scale: 8.0
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSHIND:
+forgotten_wasp:
 	Inherits: ^Helicopter
 	Inherits@EXPERIENCE: ^GainsExperience
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -7183,7 +7183,7 @@ TSHIND:
 		DecorationBounds: 1536, 1536
 	WithVoxelBody:
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	AmmoPool:
 		Ammo: 12
 		ReloadCount: 3
@@ -7192,7 +7192,7 @@ TSHIND:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSHIND.Husk
+		Actor: forgotten_wasp_husk
 	WithIdleOverlay@ROTORAIR:
 		Offset: 42,0,300
 		Sequence: rotor
@@ -7211,7 +7211,7 @@ TSHIND:
 		PipCount: 4
 
 
-TSHIND.Husk:
+forgotten_wasp_husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -7223,9 +7223,9 @@ TSHIND.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tshind
+		Image: forgotten_wasp
 	RenderVoxels:
-		Image: tshind
+		Image: forgotten_wasp
 		Scale: 8.0
 	-WithShadow:
 	-Cloak@TDcloak:
@@ -7280,7 +7280,7 @@ TSTRAN:
 		MaxWeight: 10
 		AfterUnloadDelay: 40
 	Voiced:
-		VoiceSet: TSHeli
+		VoiceSet: forgotten_apache
 	SpawnActorOnDeath:
 		Actor: TSTRAN.Husk
 	RenderVoxels:

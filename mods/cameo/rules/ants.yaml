@@ -264,7 +264,7 @@ modant3:
 		Amount: -25
 
 antdoggie:
-	Inherits: TSDOGGIE
+	Inherits: forgotten_tiberianfiend
 	Inherits@bounty: ^GlobalBounty ##########
 	Inherits@anim: ^TSInfantry
 	Inherits@autotarget: ^AutoTargetAllAssaultMove
@@ -291,7 +291,7 @@ antdoggie:
 		Prerequisites: evo
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: tsdoggie
+		Image: forgotten_tiberianfiend
 	Power:
 		Amount: -25
 

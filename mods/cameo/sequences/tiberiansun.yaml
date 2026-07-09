@@ -382,15 +382,15 @@ tsriott:
 	icon:
 		Filename: tsriotticon.png
 
-tsumagon:
+forgotten_mutantsniper:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsumagon.shp
+		Filename: forgotten_mutantsniper.shp
 	icon:
-		Filename: tsumagonicon.shp
+		Filename: forgotten_mutantsniper_icon.shp
 
-tsghost:
+forgotten_ghoststalker:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
@@ -407,12 +407,12 @@ tsrailcom:
 	icon:
 		Filename: tsrailcomicon.png
 
-tsmhijack:
+forgotten_mutanthijacker:
 	Inherits: ^TSBasicInfantry
 	Defaults:
 		Filename: tsghost.shp
 	icon:
-		Filename: forgot_hijacker_icon.png
+		Filename: forgotten_mutanthijacker_icon.png
 
 tschamspy:
 	Inherits: ^TSBasicInfantry
@@ -421,29 +421,29 @@ tschamspy:
 	icon:
 		Filename: tsspyicon.shp
 
-tsmutant:
+forgotten_mutant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
 		Filename: tsmutant.shp
 	icon:
-		Filename: forgot_mutant_icon.png
+		Filename: forgotten_mutant_icon.png
 
-tsmwmn:
+forgotten_mutantsoldier:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
 		Filename: tsmutant3.shp
 	icon:
-		Filename: forgot_woman_icon.png
+		Filename: forgotten_mutantsoldier_icon.png
 
-tsmutant3:
+forgotten_mutantsergeant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
 		Filename: tsmutant3.shp
 	icon:
-		Filename: forgot_sarge_icon.png
+		Filename: forgotten_mutantsergeant_icon.png
 
 tstratos:
 	Inherits: ^TSBasicInfantry
@@ -452,9 +452,9 @@ tstratos:
 	icon:
 		Filename: forgot_tratos_icon.png
 
-tsweedguy:
+forgotten_chemsprayinfantry:
 	Defaults:
-		Filename: tsweed.shp
+		Filename: forgotten_chemsprayinfantry.shp
 		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
@@ -559,11 +559,11 @@ tsweedguy:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: tstoxinicon.shp
+		Filename: forgotten_chemsprayinfantry_icon.shp
 
-tsdoggie:
+forgotten_tiberianfiend:
 	Defaults:
-		Filename: tsdoggie.shp
+		Filename: forgotten_tiberianfiend.shp
 		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
@@ -633,11 +633,11 @@ tsdoggie:
 		Length: 10
 		ShadowStart: 218
 	icon:
-		Filename: forgot_fiend_icon.png
+		Filename: forgotten_tiberianfiend_icon.png
 
-tsdoggieblue:
+forgotten_bluetiberiumfiend:
 	Defaults:
-		Filename: tsdoggieblue.shp
+		Filename: forgotten_bluetiberiumfiend.shp
 		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
@@ -707,7 +707,7 @@ tsdoggieblue:
 		Length: 10
 		ShadowStart: 218
 	icon:
-		Filename: forgot_fiend_blue_icon.png
+		Filename: forgotten_bluetiberiumfiend_icon.png
 
 tse3mut:
 	Inherits: ^TSBasicInfantry
@@ -715,7 +715,7 @@ tse3mut:
 	Defaults:
 		Filename: alte3.shp
 	icon:
-		Filename: forgot_missiletroop_icon.png
+		Filename: forgotten_rocketinfantry_icon.png
 
 tsfloater:
 	idle:
@@ -1496,11 +1496,11 @@ tskodk:
 	icon:
 		Filename: tskodkicon.png
 
-tsmutant4:
+forgotten_zombiemutant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsmutant4.shp
+		Filename: forgotten_zombiemutant.shp
 		Tick: 80
 		Offset: 0, 0, 16
 		Scale: 1.1
@@ -1591,15 +1591,15 @@ tsmutant4:
 		BlendMode: Alpha
 		Offset: 0, 0
 	icon:
-		Filename: forgot_mutant4_icon.png
+		Filename: forgotten_zombiemutant_icon.png
 
-tsshotmut:
+forgotten_runnershotgal:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsoxanna.shp
+		Filename: forgotten_runnershotgal.shp
 	icon:
-		Filename: forgot_shotgunner_icon.png
+		Filename: forgotten_runnershotgal_icon.png
 
 # tsweed:
 # 	idle: invisibleitem
@@ -1676,7 +1676,7 @@ tsmemp:
 	icon:
 		Filename: tsmempicon.png
 
-ts1tnk:
+forgotten_rattytank:
 	idle:
 		Filename: forgot_ltnk.png
 		Facings: 64
@@ -1690,64 +1690,64 @@ ts1tnk:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_ltnk_icon.png
-tsclosh:
+		Filename: forgotten_rattytank_icon.png
+forgotten_closhtank:
 	idle:
-		Filename: forgot_closh.png
+		Filename: forgotten_closhtank.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_closh_icon.png
+		Filename: forgotten_closhtank_icon.png
 
-tsarty_bus:
+forgotten_thumperbus:
 	idle:
-		Filename: forgot_arty_bus.png
+		Filename: forgotten_thumperbus.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_arty_bus_icon.png
+		Filename: forgotten_thumperbus_icon.png
 	turret:
 		Filename: invisibleitem.shp
 
-tsnomad:
+forgotten_nomadbarracks:
 	idle:
-		Filename: forgot_nomad.png
+		Filename: forgotten_nomadbarracks.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_nomad_icon.png
+		Filename: forgotten_nomadbarracks_icon.png
 	turret:
 		Filename: invisibleitem.shp
 
-tsarty:
+forgotten_tankkiller:
 	idle:
-		Filename: forgot_arty.png
+		Filename: forgotten_tankkiller.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_arty_icon.png
+		Filename: forgotten_tankkiller_icon.png
 
-tswini2:
+forgotten_missilevan:
 	Defaults:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: forgot_wini.png
+		Filename: forgotten_missilevan.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_wini.png
+		Filename: forgotten_missilevan.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1755,9 +1755,9 @@ tswini2:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_wini_icon.png
+		Filename: forgotten_missilevan_icon.png
 
-tscar2:
+forgotten_raidercar:
 	idle:
 		Filename: forgot_car.png
 		Facings: 64
@@ -1771,14 +1771,14 @@ tscar2:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_car_icon.png
-tsbowler:
+		Filename: forgotten_raidercar_icon.png
+forgotten_bowler:
 	idle:
-		Filename: forgot_bowler.png
+		Filename: forgotten_bowler.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_bowler.png
+		Filename: forgotten_bowler.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1786,19 +1786,19 @@ tsbowler:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_bowler_icon.png
-tsruiner:
+		Filename: forgotten_bowler_icon.png
+forgotten_ruiner:
 	idle:
-		Filename: forgot_ruiner.png
+		Filename: forgotten_ruiner.png
 		Facings: 64
 		Scale: 1
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_ruiner_icon.png
+		Filename: forgotten_ruiner_icon.png
 
-ts2tnk:
+forgotten_warriortank:
 	idle:
 		Filename: forgot_mtnk.png
 		Facings: 64
@@ -1812,9 +1812,9 @@ ts2tnk:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_mtnk_icon.png
+		Filename: forgotten_warriortank_icon.png
 
-ts3tnk:
+forgotten_scoopertank:
 	idle:
 		Filename: forgot_htnk.png
 		Facings: 64
@@ -1828,11 +1828,11 @@ ts3tnk:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_htnk_icon.png
+		Filename: forgotten_scoopertank_icon.png
 
-tsftnk:
+forgotten_flametank:
 	idle:
-		Filename: forgot_ftnk.png
+		Filename: forgotten_flametank.png
 		Facings: 64
 		Scale: 0.5
 	muzzle:
@@ -1871,7 +1871,7 @@ tsftnk:
 				Length: *
 				Offset: -7,8
 	icon:
-		Filename: forgot_ftnk_icon.png
+		Filename: forgotten_flametank_icon.png
 
 tshvr:
 	idle:
@@ -2213,7 +2213,7 @@ tsmcv:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tssmcvicon.shp
+		Filename: forgotten_mobileconstructionvehicle_icon.shp
 
 # tsart2turret:
 # 	idle: tsgtarty
@@ -2254,14 +2254,14 @@ tssapc:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tssubapcicon.shp
+		Filename: forgotten_scarabapc_icon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
-ts4tnk:
+forgotten_experimentalmammothtank:
 	Defaults:
-		Filename: forgot_4tnk.png
+		Filename: forgotten_experimentalmammothtank.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -2270,13 +2270,13 @@ ts4tnk:
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: ts4tnkicon.png
+		Filename: forgotten_experimentalmammothtank_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
-ts4tnk2:
+forgotten_chemicalmammothtank:
 	Defaults:
-		Filename: forgot_4tnk2.png
+		Filename: forgotten_chemicalmammothtank.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -2285,13 +2285,13 @@ ts4tnk2:
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgot_4tnk2_icon.png
+		Filename: forgotten_chemicalmammothtank_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
-tsmlrs:
+forgotten_mlrs:
 	Defaults:
-		Filename: forgot_mlrs.png
+		Filename: forgotten_mlrs.png
 		Scale: 1.25
 	idle:
 		Facings: 64
@@ -2312,10 +2312,10 @@ tsmlrs:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_mlrs_icon.png
-tsm113:
+		Filename: forgotten_mlrs_icon.png
+forgotten_m113adats:
 	Defaults:
-		Filename: forgot_adats.png
+		Filename: forgotten_m113adats.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -2327,10 +2327,10 @@ tsm113:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_adats_icon.png
-tsapctruck:
+		Filename: forgotten_m113adats_icon.png
+forgotten_apctruck:
 	Defaults:
-		Filename: forgot_truck.png
+		Filename: forgotten_apctruck.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -2343,7 +2343,7 @@ tsapctruck:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgot_truck_icon.png
+		Filename: forgotten_apctruck_icon.png
 
 tslasspid:
 	idle:
@@ -2833,7 +2833,7 @@ tsntpowr:
 		Offset: 0, 0, 25
 		UseTilesetCode: false
 
-tsntpowrmutant:
+forgotten_crystalpowerextractor:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Scale: 1.25
@@ -2997,7 +2997,7 @@ tsnthand2:
 		Filename: tsccabalbar.png
 		Offset: 0, 0
 
-tsgtpile2:
+forgotten_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Offset: -12, -15, 30
@@ -3487,7 +3487,7 @@ tsgtradr:
 		Filename: tsgdiradaricon.shp
 		Offset: 0, 0
 
-tsgtradrmutant:
+forgotten_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Filename: tamradr.shp
@@ -3552,7 +3552,7 @@ tsgttech:
 		Filename:  tstechicon.png
 		Offset: 0, 0
 
-tsfgttech:
+forgotten_church:
 	Defaults:
 		Filename: tamtech.shp
 		Offset: -12, -30, 30
@@ -4382,22 +4382,22 @@ tsnthpad:
 		UseTilesetCode: false
 tsnthpadmut:
 	Defaults:
-		Filename: tscgpad.shp
+		Filename: forgotten_helipad.shp
 		Scale: 1
 		Offset: 0, -24, 0
 	idle:
-		Filename: tscgpad.shp
+		Filename: forgotten_helipad.shp
 		ShadowStart: 2
 		ZOffset: -1c511
 		# Offset: 0, -24, 3
 	damaged-idle:
-		Filename: tscgpad.shp
+		Filename: forgotten_helipad.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1c511
 		# Offset: 0, -24, 3
 	dead:
-		Filename: tscgpad.shp
+		Filename: forgotten_helipad.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1c511
@@ -4412,29 +4412,29 @@ tsnthpadmut:
 	dead-platform:
 		Filename: invisibleitem.shp
 	idle-lights:
-		Filename: tscgpad_b.shp
+		Filename: forgotten_helipad_b.shp
 		Start: 8
 		Tick: 100
 		ZOffset: -1c511
 	active:
-		Filename: tscgpad_a.shp
+		Filename: forgotten_helipad_a.shp
 		Length: 28
 		ZOffset: -1c511
 		Tick: 100
 	damaged-active:
-		Filename: tscgpad_a.shp
+		Filename: forgotten_helipad_a.shp
 		Length: 28
 		ZOffset: -1c511
 		Tick: 100
 	damaged-idle-lights:
-		Filename: tscgpad_b.shp
+		Filename: forgotten_helipad_b.shp
 		Start: 8
 		Tick: 100
 		ZOffset: -1c511
 	make:
 		Filename: tsnthpadmk.shp
 	icon:
-		Filename: forgot_hpad_icon.png
+		Filename: forgotten_helipad_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -4551,7 +4551,7 @@ tsprocnod:
 		Filename: tsrefineryicon2.shp
 		Offset: 0, 0
 
-tsprocmutant:
+forgotten_refinery:
 	Inherits: ^WithBuildingBib2
 	Defaults:
 		Scale: 1.25
@@ -4800,99 +4800,99 @@ tsgtsilo.cabal:
 
 tsgtdept:
 	Defaults:
-		Filename: tsgtdept.shp
+		Filename: forgotten_servicedepot.shp
 		Scale: 1.25
 		Offset: 8, -32, 1
 	idle:
-		Filename: tsgtdept.shp
+		Filename: forgotten_servicedepot.shp
 		ShadowStart: 3
 		# Offset: 0, -16, 12
 	damaged-idle:
-		Filename: tsgtdept.shp
+		Filename: forgotten_servicedepot.shp
 		Start: 1
 		ShadowStart: 4
 		# Offset: 0, -16, 12
 	dead:
-		Filename: tsgtdept.shp
+		Filename: forgotten_servicedepot.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 		# Offset: 0, -16, 12
 	ground:
-		Filename: tsgtdeptbb.shp
+		Filename: forgotten_servicedepot_bb.shp
 		ShadowStart: 3
 		ZOffset: -1c611
 	damaged-ground:
-		Filename: tsgtdeptbb.shp
+		Filename: forgotten_servicedepot_bb.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c611
 	dead-ground:
-		Filename: tsgtdeptbb.shp
+		Filename: forgotten_servicedepot_bb.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c611
 		Tick: 400
 	idle-light:
-		Filename: tsgtdept_b.shp
+		Filename: forgotten_servicedepot_b.shp
 		Length: 7
 		Tick: 120
 	damaged-idle-light:
-		Filename: tsgtdept_b.shp
+		Filename: forgotten_servicedepot_b.shp
 		Start: 7
 		Length: 7
 		Tick: 120
 	circuits:
-		Filename: tsgtdept_a.shp
+		Filename: forgotten_servicedepot_a.shp
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	damaged-circuits:
-		Filename: tsgtdept_a.shp
+		Filename: forgotten_servicedepot_a.shp
 		Start: 5
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	crane-start:
-		Filename: tsgtdept_c.shp
+		Filename: forgotten_servicedepot_c.shp
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-loop:
-		Filename: tsgtdept_c.shp
+		Filename: forgotten_servicedepot_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	active:
-		Filename: tsgtdept_c.shp
+		Filename: forgotten_servicedepot_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	damaged-active:
-		Filename: tsgtdept_c.shp
+		Filename: forgotten_servicedepot_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-end:
-		Filename: tsgtdept_c.shp
+		Filename: forgotten_servicedepot_c.shp
 		Start: 10
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	platform:
-		Filename: tsgtdept_d.shp
+		Filename: forgotten_servicedepot_d.shp
 		ZOffset: -1c511
 	damaged-platform:
-		Filename: tsgtdept_d.shp
+		Filename: forgotten_servicedepot_d.shp
 		Start: 2
 		ZOffset: -1c511
 	make:
-		Filename: tsgtdeptmk.shp
+		Filename: forgotten_servicedepot_mk.shp
 	icon:
-		Filename: tsdepticon.png
+		Filename: forgotten_servicedepot_icon.png
 		Offset: 0, 0
 
 tsntmisl:
@@ -5072,7 +5072,7 @@ tstrnsport:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tsotrnicon.png
+		Filename: forgotten_carryall_icon.png
 
 tsscrin:
 	idle:
@@ -5093,13 +5093,13 @@ tsapache:
 		Start: 4
 		Length: 8
 
-tsapachemutant:
+forgotten_cobracopter:
 	idle:
-		Filename: forgot_cobracopter.png
+		Filename: forgotten_cobracopter.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgot_cobracopter_icon.png
+		Filename: forgotten_cobracopter_icon.png
 	rotor:
 		Filename: lrotor.shp
 		Length: 4
@@ -5132,7 +5132,7 @@ tscarrycabal:
 	icon:
 		Filename: cabal_overkill_icon.png
 
-tsheli:
+forgotten_apache:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
@@ -5145,21 +5145,21 @@ tsheli:
 		Start: 4
 		Length: 8
 
-tshind:
+forgotten_wasp:
 	idle:
-		Filename: forgot_wasp.png
+		Filename: forgotten_wasp.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgot_wasp_icon.png
+		Filename: forgotten_wasp_icon.png
 
-tsflocust:
+forgotten_locustbomber:
 	idle:
-		Filename: forgot_locust.png
+		Filename: forgotten_locustbomber.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgot_locust_icon.png
+		Filename: forgotten_locustbomber_icon.png
 tsfsmoker:
 	idle:
 		Filename: forgot_smoker.png
@@ -5168,13 +5168,13 @@ tsfsmoker:
 	icon:
 		Filename: forgot_smoker_icon.png
 
-tscropplane:
+forgotten_cropplane:
 	idle:
-		Filename: forgot_cropplane.png
+		Filename: forgotten_cropplane.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgot_cropplaneicon.png
+		Filename: forgotten_cropplane_icon.png
 
 
 tstran:
@@ -5302,7 +5302,7 @@ tsjumpjet:
 forgot_conyard:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: forgot_conyard.png
+		Filename: forgotten_constructionyard.png
 		Scale: 1
 		Offset: 0, -20, 20
 	idle:
@@ -5357,14 +5357,14 @@ forgot_conyard:
 		Filename: tsgtcnst_b.shp
 		Length: 10
 	icon:
-		Filename: forgot_conyard_icon.png
+		Filename: forgotten_constructionyard_icon.png
 		Offset: 0,0
 
 forgot_power:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Scale: 1
-		Filename: forgot_power.png
+		Filename: forgotten_crystalpowerextractor.png
 	idle:
 		Start: 32
 		Length: 8
@@ -5380,7 +5380,7 @@ forgot_power:
 	make:
 		Length: 32
 	icon:
-		Filename: forgot_power_icon.png
+		Filename: forgotten_crystalpowerextractor_icon.png
 		Offset: 0, 0, 25
 		UseTilesetCode: false
 
@@ -5388,22 +5388,22 @@ forgot_barracks:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 	idle:
-		Filename: forgot_barracks.png
+		Filename: forgotten_barracks.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgot_barracks.png
+		Filename: forgotten_barracks.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgot_barracks.png
+		Filename: forgotten_barracks.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgot_barracks.png
+		Filename: forgotten_barracks.png
 		Length: 16
 	icon:
-		Filename: forgot_barracks_icon.png
+		Filename: forgotten_barracks_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -5412,22 +5412,22 @@ forgot_refin:
 	Defaults:
 		Offset: 0,-12
 	idle:
-		Filename: forgot_refin.png
+		Filename: forgotten_refinery.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgot_refin.png
+		Filename: forgotten_refinery.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgot_refin.png
+		Filename: forgotten_refinery.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgot_refin.png
+		Filename: forgotten_refinery.png
 		Length: 16
 	icon:
-		Filename: forgot_refin_icon.png
+		Filename: forgotten_refinery_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
@@ -5435,66 +5435,66 @@ forgot_radar:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 	idle:
-		Filename: forgot_radar.png
+		Filename: forgotten_radar.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgot_radar.png
+		Filename: forgotten_radar.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgot_radar.png
+		Filename: forgotten_radar.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgot_radar.png
+		Filename: forgotten_radar.png
 		Length: 16
 	icon:
-		Filename: forgot_radar_icon.png
+		Filename: forgotten_radar_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 forgot_church:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 	idle:
-		Filename: forgot_church.png
+		Filename: forgotten_church.png
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: forgot_church.png
+		Filename: forgotten_church.png
 		Start: 48
 		Length: 16
 	dead:
-		Filename: forgot_church.png
+		Filename: forgotten_church.png
 		Start: 48
 		Length: 16
 	make:
-		Filename: forgot_church.png
+		Filename: forgotten_church.png
 		Length: 16
 	icon:
-		Filename: forgot_church_icon.png
+		Filename: forgotten_church_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
-forgot_chemicalplant:
+forgotten_chemicalplant:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 	idle:
-		Filename: forgot_chemicalplant.png
+		Filename: forgotten_chemicalplant.png
 		Start: 40
 		Length: 20
 	damaged-idle:
-		Filename: forgot_chemicalplant.png
+		Filename: forgotten_chemicalplant.png
 		Start: 61
 		Length: 20
 	dead:
-		Filename: forgot_chemicalplant.png
+		Filename: forgotten_chemicalplant.png
 		Start: 61
 		Length: 20
 	make:
-		Filename: forgot_chemicalplant.png
+		Filename: forgotten_chemicalplant.png
 		Length: 40
 	icon:
-		Filename: forgot_chemical_icon.png
+		Filename: forgotten_chemicalplant_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 forgot_weap:
@@ -5505,80 +5505,80 @@ forgot_weap:
 	damaged-idle:
 		Filename: invisibleitem.shp
 	idle-roof:
-		Filename: forgot_weap_top.png
+		Filename: forgotten_warfactory_top.png
 		Length: 16
 		ZOffset: 512
 	damaged-idle-roof:
-		Filename: forgot_weap_top.png
+		Filename: forgotten_warfactory_top.png
 		Start: 16
 		Length: 16
 		ZOffset: 512
 	dead:
-		Filename: forgot_weap_bottom.png
+		Filename: forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
 	build-door:
-		Filename: forgot_weap_door.png
+		Filename: forgotten_warfactory_door.png
 		Length: 16
 		ZOffset: 512
 	damaged-build-door:
-		Filename: forgot_weap_door.png
+		Filename: forgotten_warfactory_door.png
 		Start: 16
 		Length: 16
 		ZOffset: 512
 	make:
-		Filename: forgot_weap_buildup.png
+		Filename: forgotten_warfactory_buildup.png
 		Length: 32
 	bib2:
-		Filename: forgot_weap_bottom.png
+		Filename: forgotten_warfactory_bottom.png
 		ZOffset: -1024
 	damaged-bib2:
-		Filename: forgot_weap_bottom.png
+		Filename: forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
 	dead-bib2:
-		Filename: forgot_weap_bottom.png
+		Filename: forgotten_warfactory_bottom.png
 		Start: 1
 		ZOffset: -1024
 	icon:
-		Filename: forgot_weap_icon.png
+		Filename: forgotten_warfactory_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 
 forgot_silo:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 	idle:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 		Start: 32
 	damaged-idle:
 		Filename: invisibleitem.shp
 	stages:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 		Start: 32
 		Length: 12
 	damaged-stages:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 		Start: 45
 		Length: 12
 	idle-underlay:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 		Start: 32
 		ZOffset: -512
 	damaged-idle-underlay:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 		Start: 45
 		ZOffset: -512
 	dead:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 		Start: 45
 		ZOffset: -512
 	make:
-		Filename: forgot_silo.png
+		Filename: forgotten_silo.png
 		Length: 32
 	icon:
-		Filename: forgot_silo_icon.png
+		Filename: forgotten_silo_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 # tsjumpjet2:
@@ -5592,16 +5592,16 @@ forgot_silo:
 # 		Length: 6
 # 	icon: tsjumpjeticon
 
-tsveinhole:
+forgotten_veinhole:
 	idle:
-		Filename: tsveinhole.shp
+		Filename: forgotten_veinhole.shp
 	recoil:
-		Filename: tsveinhole.shp
+		Filename: forgotten_veinhole.shp
 		Length: 12
 	damaged-idle:
-		Filename: tsveinhole.shp
+		Filename: forgotten_veinhole.shp
 	damaged-recoil:
-		Filename: tsveinhole.shp
+		Filename: forgotten_veinhole.shp
 		Length: 12
 	make:
 		Filename: gunmake.shp
@@ -5611,7 +5611,7 @@ tsveinhole:
 		Filename: napalm2.shp
 		Length: *
 	icon:
-		Filename: gunicnh.tem
+		Filename: forgotten_veinhole_icon.tem
 
 tsveinsmoke:
 	idle:
@@ -5803,7 +5803,7 @@ tsntsam:
 		Offset: 0,0
 
 
-forgot_tower:
+forgotten_machineguntower:
 	Defaults:
 		Filename: invisibleitem.shp
 	idle:
@@ -5813,12 +5813,12 @@ forgot_tower:
 	critical-idle:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: forgot_tower.png
+		Filename: forgotten_machineguntower.png
 		Facings: 64
 		Start: 64
 		Offset: 0,0
 	make:
-		Filename: forgot_tower.png
+		Filename: forgotten_machineguntower.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -5827,7 +5827,7 @@ forgot_tower:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgot_tower_icon.png
+		Filename: forgotten_machineguntower_icon.png
 		Offset: 0,0
 
 forgot_juggerflak:
@@ -5840,12 +5840,12 @@ forgot_juggerflak:
 	critical-idle:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: forgot_juggerflak.png
+		Filename: forgotten_juggerflakwall.png
 		Facings: 64
 		Start: 64
 		Offset: 0,0
 	make:
-		Filename: forgot_juggerflak.png
+		Filename: forgotten_juggerflakwall.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -5854,10 +5854,10 @@ forgot_juggerflak:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgot_juggerflak_icon.png
+		Filename: forgotten_juggerflakwall_icon.png
 		Offset: 0,0
 
-forgot_mtnk_tur:
+forgotten_brokenwarriortankturret:
 	Defaults:
 		Filename: forgot_mtnk_tur.png
 	idle:
@@ -5884,20 +5884,20 @@ forgot_mtnk_tur:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgot_mtnk_tur_icon.png
+		Filename: forgotten_brokenwarriortankturret_icon.png
 		Offset: 0,0
 
-forgot_ltnk_tur:
+forgotten_brokenrattytankturret:
 	Defaults:
-		Filename: forgot_ltnk_turret.png
+		Filename: forgotten_brokenrattytankturret.png
 	idle:
-		Filename: forgot_ltnk_turret.png
+		Filename: forgotten_brokenrattytankturret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgot_ltnk_turret.png
+		Filename: forgotten_brokenrattytankturret.png
 		Start: 63
 	critical-idle:
-		Filename: forgot_ltnk_turret.png
+		Filename: forgotten_brokenrattytankturret.png
 		Start: 63
 	turret:
 		Filename: forgot_ltnk.png
@@ -5905,7 +5905,7 @@ forgot_ltnk_tur:
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgot_ltnk_turret.png
+		Filename: forgotten_brokenrattytankturret.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -5914,9 +5914,9 @@ forgot_ltnk_tur:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgot_ltnk_tur_icon.png
+		Filename: forgotten_brokenrattytankturret_icon.png
 		Offset: 0,0
-forgot_htnk_tur:
+forgotten_brokenscoopertankturret:
 	Defaults:
 		Filename: forgot_mtnk_tur.png
 	idle:
@@ -5943,7 +5943,7 @@ forgot_htnk_tur:
 		Tick: 80
 		Length: *
 	icon:
-		Filename: forgot_htnk_tur_icon.png
+		Filename: forgotten_brokenscoopertankturret_icon.png
 		Offset: 0,0
 # tstacticalmissile:
 # 	Defaults:
@@ -6249,7 +6249,7 @@ tibpump:
 
 tibdrill:
 	Defaults:
-		Filename: tibdrill_a.shp
+		Filename: forgotten_tiberiumspike_a.shp
 	idle:
 		Length: 164
 		Offset: 0,0, 60
@@ -6262,12 +6262,12 @@ tibdrill:
 		Tick: 60
 		ShadowStart: 494
 	anim:
-		Filename: tibdrill_b.shp
+		Filename: forgotten_tiberiumspike_b.shp
 		Length: 164
 		Offset: 0,0, 60
 		Tick: 60
 	damaged-anim:
-		Filename: tibdrill_b.shp
+		Filename: forgotten_tiberiumspike_b.shp
 		Start: 164
 		Length: 165
 		Offset: 0,0, 60
@@ -6470,32 +6470,32 @@ tsgdidummyicon:
 
 genomemappingicon:
 	icon:
-		Filename: genomemappingicon.png
+		Filename: forgotten_upgrade_genomemapping_icon.png
 
 chemicalfuelicon:
 	icon:
-		Filename: chemicalfuelicon.png
+		Filename: forgotten_upgrade_chemicalfuel_icon.png
 
 mypeticon:
 	icon:
-		Filename: mypeticon.png
+		Filename: forgotten_upgrade_friendlywildlife_icon.png
 
 junkarmoricon:
 	icon:
-		Filename: junkarmoricon.png
+		Filename: forgotten_upgrade_junkarmor_icon.png
 
 tiberiumboostersicon:
 	icon:
-		Filename: tiberiumboostersicon.png
+		Filename: forgotten_upgrade_tiberiumboosters_icon.png
 
 unityicon:
 	icon:
-		Filename: unityicon.png
+		Filename: forgotten_upgrade_unity_icon.png
 
 chemicalweaponsicon:
 	icon:
-		Filename: chemicalweaponsicon.png
+		Filename: forgotten_upgrade_chemicalweapons_icon.png
 
 tiberiumadaptabilityicon:
 	icon:
-		Filename: tiberiumadaptabilityicon.png
+		Filename: forgotten_upgrade_tiberiumadaptability_proxy_actor_icon.png
