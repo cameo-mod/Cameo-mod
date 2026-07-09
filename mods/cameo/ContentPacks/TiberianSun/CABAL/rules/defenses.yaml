@@ -1,0 +1,167 @@
+cabal_silo:
+	Inherits: TSGTSILO
+	Tooltip:
+		Name: Silo
+	Buildable:
+		Prerequisites: ~cabal_constructionyard, cabal_refinery
+	RenderSprites:
+		Image: tsgtsilo.cabal
+
+cabal_missilesilo:
+	Inherits: ts_nod_missilesilo
+	Buildable:
+		Prerequisites: ~cabal_constructionyard, cabal_core, !ts_nod_missilesilo, ~techlevel.superweapons
+		Description: actor-tsntmisl.description
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: ts_nod_missilesilo
+	Armament@superweapon1:
+		Name: superweapon
+		Weapon: TSTacticalMissile
+		RequiresCondition: !cabal_upgrade_clusterwarhead
+	Armament@superweapon2:
+		Name: superweapon
+		Weapon: TSTacticalNeutronMissile
+		RequiresCondition: cabal_upgrade_clusterwarhead
+	GrantConditionOnPrerequisite@cabal_upgrade_clusterwarhead:
+		Condition: cabal_upgrade_clusterwarhead
+		Prerequisites: cabal_upgrade_clusterwarhead
+
+cabal_stealthgenerator:
+	Inherits: ts_nod_stealthgenerator
+	Buildable:
+		Prerequisites: ~cabal_constructionyard, cabal_techcenter
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: cabal_stealthgenerator
+
+cabal_heavycabalobelisk:
+	Inherits: ts_nod_obeliskoflight
+	Buildable:
+		Prerequisites: ~cabal_constructionyard, cabal_techcenter
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: cabal_heavycabalobelisk
+	Tooltip:
+		Name: Heavy Cabal Obelisk
+	Valued:
+		Cost: 2600
+	Health:
+		HP: 300000
+	Armament@PRIMARY:
+		Weapon: TSCABALObeliskLaserFire
+		LocalOffset: 0,0,1956
+	WithChargeOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: playerra2
+		IsPlayerPalette: true
+
+cabal_obeliskofdarkness:
+	Inherits: ^Defense
+	Inherits@Template: ^AntiAirDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAir
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Valued:
+		Cost: 1350
+	Tooltip:
+		Name: Obelisk of Darkness
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~cabal_constructionyard, cabal_radar
+		Queue: Defence, RADefence
+		BuildDurationModifier: 40
+		Description: Advanced air defense.\nRequires power to operate.\n  Strong vs aircraft\n  Weak vs ground units
+	Building:
+		Footprint: x
+	Selectable:
+		Bounds: 2048, 2048
+	SelectionDecorations:
+	Health:
+		HP: 242500
+	Armor:
+		Type: Heavy
+	RevealsShroud:
+		Range: 7c0
+	WithSpriteBody:
+	Armament:
+		Weapon: DarkObeliskLaser
+		LocalOffset: 0,0,2000
+	AttackCharges:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		ChargeLevel: 30
+		ChargingCondition: charging
+	AmbientSound:
+		RequiresCondition: charging
+		SoundFiles: obelpowr.aud
+		Interval: 30, 40
+	-SpawnActorsOnSell:
+	DetectCloaked:
+		Range: 7c0
+		RequiresCondition: !lowpower && !disabled
+	WithChargeOverlay:
+		RequiresCondition: !build-incomplete
+		Palette: playerra2
+		IsPlayerPalette: true
+	WithIdleOverlay:
+		Sequence: idle-overlay
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	Power:
+		Amount: -75
+	RenderSprites:
+		PlayerPalette: playerra2
+
+cabal_pillbox:
+	Inherits: ^RA2Defense
+	Inherits@cargo: ^ClearableGarrisonNeutronOnly
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAll
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Selectable:
+		Bounds: 1024, 1024
+	Tooltip:
+		Name: Pillbox
+	Building:
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 40
+		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory
+		Description: actor-pbox.description
+	Valued:
+		Cost: 600
+	Health:
+		HP: 110000
+	Turreted:
+		TurnSpeed: 1023
+	-QuantizeFacingsFromSequence:
+	BodyOrientation:
+		QuantizedFacings: 8
+	Cargo:
+		Types: Infantry
+		MaxWeight: 1
+		InitialUnits: cabal_cyborginfantry
+	AttackGarrisoned:
+		RequiresCondition: !build-incomplete
+		Armaments: garrisoned
+		PortOffsets: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
+		PortYaws: 0, 176, 341, 512, 682, 853
+		PortCones: 88, 88, 88, 88, 88, 88
+		PauseOnCondition: disabled
+	Power:
+		Amount: -25
+	RevealsShroud:
+		Range: 6583
+	WithCargoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+	ActorStatValues:
+		Damage: 120
+		ReloadDelay: 24
+		Range: 6583
+
+#######################################
+# TS Infantry Reporting!
+#######################################

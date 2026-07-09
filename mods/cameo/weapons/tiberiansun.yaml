@@ -118,17 +118,6 @@ TS90mm:
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 3
 
-TS90mm_bluenuke:
-	Inherits: ^TSCannonEffect
-	Inherits: ^MediumCannon
-	Range: 5319
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 12000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 6
-	Warhead@3Eff: CreateEffect
-		Explosions: magicnuke_micro
-
 TS90mmDep:
 	Inherits: TS90mm
 	ReloadDelay: 22
@@ -404,24 +393,6 @@ TSGrenadeG:
 	ReloadDelay: 45
 	Range: 6c512
 
-TSReaperTrap:
-	Inherits: ^TSCannon
-	Report: fireweb1.aud
-	ReloadDelay: 250
-	Projectile: Bullet
-		Speed: 800
-		Image: DRAGON
-	ValidTargets: Infantry
-	Warhead@1Dam: TargetDamage
-		Damage: 200
-		ValidTargets: Infantry
-	Warhead@2Con: GrantExternalCondition
-		Condition: ReaperTrap
-		Duration: 100
-		Range: 1c0
-		ValidTargets: Infantry
-		ValidRelationships: Enemy
-
 TS105mm:
 	Inherits: ^TSCannon
 	ReloadDelay: 70
@@ -501,47 +472,6 @@ MammothTankCannon:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: small_frag
 		InvalidTargets: Vehicle, Building, Wall
-
-TSCyCannon:
-	Inherits: ^TSEnergyBlast
-	ReloadDelay: 60
-	Range: 6c0
-	Projectile: Missile
-		MaximumLaunchSpeed: 192
-		Blockable: false
-		HorizontalRateOfTurn: 8
-		Shadow: true
-		Image:
-		MinimumLaunchSpeed: 75
-		Speed: 384
-		RangeLimit: 8c0
-		TerrainHeightAware: true
-	Warhead@1Dam: SpreadDamage
-		Spread: 0c64
-		Damage: 9000
-		Versus:
-			None: 350
-			Wood: 260
-			Light: 205
-			Medium: 175
-			Heavy: 150
-			Concrete: 80
-		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-	Warhead@1Dam: SpreadDamage
-		Spread: 0c384
-		Damage: 3000
-		Versus:
-			None: 350
-			Wood: 260
-			Light: 205
-			Medium: 175
-			Heavy: 150
-			Concrete: 80
-		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-	Warhead@1ClustF: FireShrapnel
-		InvalidTargets: FireImmune
-		Weapon: TSCyCannonCluster
-		Amount: 1
 
 TSTurretLaser:
 	Inherits: ^Chaingun
@@ -705,33 +635,6 @@ ObeliskLaserFragment:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 20
 
-DarkObeliskLaser:
-	Inherits: ^TSLaser
-	Report: obelmod1.aud
-	Range: 12c0
-	ReloadDelay: 50
-	ValidTargets: Air
-	Projectile: LaserZap
-		Width: 125
-		Duration: 38
-	Warhead@1Dam: SpreadDamage
-		Damage: 35000
-		Spread: 250
-		ValidTargets: Air
-	Warhead@2Dam: HealthPercentageDamage
-		Damage: 5
-		Spread: 500
-		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
-		ValidTargets: Air
-
 TSLaserFence:
 	TargetActorCenter: true
 	Projectile: InstantHit
@@ -739,125 +642,6 @@ TSLaserFence:
 		DebugOverlayColor: FF0000
 		Damage: 10000000
 		DamageTypes: FireDeath
-
-TSCoreLaser:
-	Inherits: ^SmallArms
-	Inherits: ^Chaingun
-	Inherits: ^HeavyCannon
-	Inherits: ^LightFlameWeapon
-	Inherits: ^FlakWeapon
-	Inherits: ^LaserWeapon
-	Burst: 2
-	BurstDelays: 75
-	ReloadDelay: 20
-	Range: 6800
-	Report: corefir1.aud
-	ValidTargets: Ground, Water
-	Projectile: LaserZap
-		Width: 125
-		Duration: 9
-		ZOffset: 2047
-		Color: FF000080
-		SecondaryBeam: true
-		SecondaryBeamWidth: 75
-		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: FFFFFF
-	Warhead@SmallArms: SpreadDamage
-		Damage: 5000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Chaingun: SpreadDamage
-		Damage: 5000
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 5000
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 5000
-	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 12500
-	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@FlakWeapon: SpreadDamage
-		Damage: 5000
-	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 5000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-
-TSCobraLasers:
-	Inherits: ^SmallArms
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
-	Report: obelray1.aud
-	Projectile: LaserZap
-		Width: 36
-		Duration: 8
-		SecondaryBeamWidth: 18
-	ValidTargets: Ground, Water, Trees, Air
-	ReloadDelay: 20
-	Burst: 3
-	BurstDelays: 2
-	Range: 4964
-	Report: chaingn1.aud
-	Warhead@SmallArms: SpreadDamage
-		Damage: 6000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 3
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 6000
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 3
-
-TSSuperCyCannon:
-	Inherits: TSCyCannon
-	Burst: 3
-	BurstDelays: 2
-
-TSCABALObeliskLaserFire:
-	Inherits: TSObeliskLaserFire
-	Report: obelcor3.aud
-	Projectile:
-		Color: 0040FF80
-		SecondaryBeamColor: 80C0FF
-
-TSHunterKillerLasers:
-	Inherits: ^Chaingun
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
-	ReloadDelay: 24
-	Burst: 5
-	BurstDelays: 5
-	Range: 4882
-	Report: lastur1.aud
-	SoundVolume: 0.25
-	ValidTargets: Ground, Air
-	Projectile: LaserZap
-		Width: 36
-		Duration: 8
-		SecondaryBeamWidth: 18
-		-HitAnim:
-		Color: 0040FF80
-		SecondaryBeamColor: 80C0FF
-	Warhead@Chaingun: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Air
-	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 2
-		ValidTargets: Ground, Air
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 4000
-		ValidTargets: Ground, Air
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-		ValidTargets: Ground, Air
-####################################################################################################
-#		Tiberian Sun Heal Weapons
-####################################################################################################
 
 ^TSHealWeapon:
 	Inherits: Heal
@@ -1217,32 +1001,6 @@ TSChemAdatsMissileAA:
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 3
 
-TSTwinBazooka:
-	Inherits: ^LightMissile
-	Burst: 2
-	BurstDelays: 8
-	Report: rketinf1.aud
-	ReloadDelay: 52
-	Range: 6694
-	Projectile: Missile
-	Warhead@LightMissile: SpreadDamage
-		Damage: 24000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 12
-
-TSQuadBazooka:
-	Inherits: TSTwinBazooka
-	Burst: 4
-	BurstDelays: 8
-
-TSHellfireTwin:
-	Inherits: TSHellfire
-	Burst: 2
-	BurstDelays: 8
-####################################################################################################
-#		Tiberian Sun Other
-####################################################################################################
-
 TSSlimeAttack:
 	ReloadDelay: 80
 	Range: 1c384
@@ -1368,37 +1126,6 @@ TSLocustBomb:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
 
-TSRobotHackingControl:
-	ReloadDelay: 50
-	Report: tsrobothacking.wav
-	Range: 9500
-	TargetActorCenter: true
-	ValidTargets: HackableRobot, Cyborg
-	InvalidTargets: Hero
-	Projectile: InstantHit
-	Warhead@1Dam: TargetDamage
-		Damage: 0
-
-TSMechanicalHackingControl:
-	ReloadDelay: 50
-	Report: tsrobothacking.wav
-	Range: 9500
-	TargetActorCenter: true
-	ValidTargets: Vehicle
-	InvalidTargets: Hero, MCImmune
-	Projectile: InstantHit
-	Warhead@1Dam: TargetDamage
-		Damage: 0
-####################################################################################################
-#		Tiberian Sun MGS
-####################################################################################################
-
-# ^TSMGEffect:
-# 	Report: gun8.aud
-# 	Projectile: Bullet
-# 		Speed: 2000
-# 		Inaccuracy: 200
-
 ^TSMG:
 	Inherits: ^SmallArms
 	ReloadDelay: 20
@@ -1440,23 +1167,6 @@ TSVulcan2:
 	Report: tsgun4.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
-
-TSVulcan3:
-	Inherits: ^TSMG
-	ReloadDelay: 40
-	Burst: 3
-	Report: cygun1.aud
-	Range: 4512
-	Warhead@1Dam: SpreadDamage
-		Damage: 1200
-
-TSVulcanTower:
-	Inherits: ^TSMG
-	ReloadDelay: 26
-	Range: 6c0
-	Report: chaingn1.aud
-	Warhead@1Dam: SpreadDamage
-		Damage: 1800
 
 TSAssaultCannon:
 	Inherits: ^FlakWeapon
@@ -1561,47 +1271,6 @@ MutAPRifleE:
 	ReloadDelay: 30
 	Range: 6c0
 
-TSDevoutChainguns:
-	Inherits: ^TSMG
-	ReloadDelay: 40
-	Burst: 6
-	Report: cygun1.aud
-	Range: 4512
-	Warhead@1Dam: SpreadDamage
-		Damage: 1200
-
-TSDevoutChaingunsUpgraded:
-	Inherits: ^TSMG
-	Inherits: ^LaserWeapon
-	Inherits: ^TSLaserEffect
-	Projectile: LaserZap
-		Width: 36
-		Duration: 8
-		SecondaryBeamWidth: 18
-	ReloadDelay: 40
-	Burst: 12
-	Report: cygun1.aud
-	Range: 4512
-	Warhead@1Dam: SpreadDamage
-		Damage: 1200
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 1200
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 3
-
-TSVulcanTowerTwin:
-	Inherits: ^TSMG
-	ReloadDelay: 26
-	Burst: 2
-	Range: 6c0
-	Report: chaingn1.aud
-	Warhead@1Dam: SpreadDamage
-		Damage: 1800
-
-####################################################################################################
-#		Tiberian Sun Superweapon
-####################################################################################################
-
 TSTacticalMissile:
 	Inherits: ^TSDefaultMissile
 	Report: samshot1.aud
@@ -1696,20 +1365,6 @@ TSMissileBomblet:
 	Warhead@4Smu: LeaveSmudge
 		SmudgeType: Crater
 
-TSTacticalNeutronMissile:
-	Inherits: TSTacticalMissile
-	Warhead@1Dam: FireFragment
-		Weapon: TSTacticalNeutronMissileDamage
-
-TSTacticalNeutronMissileDamage:
-	Inherits: TSTacticalMissileDamage
-	Warhead@Cluster2: FireRadius
-		Weapon: TSMissileBomblet
-		ImpactActors: false
-		Amount: 8
-		ValidTargets: Infantry, Vehicle, Building, Wall, Ground, Water, Air
-		AirThreshold: 8c0
-
 TSTacticalChemMissile:
 	Inherits: TSTacticalMissile
 	Projectile: Missile
@@ -1750,16 +1405,6 @@ TSChemBomblet:
 		Palette: tseffect
 		AirThreshold: 8c0
 		ImpactActors: false
-		ValidTargets: Ground, Water, Air
-
-TSHSeekerLaunch:
-	Range: 9999c0
-	MinRange: 1c0
-	ReloadDelay: 50
-	ValidTargets: Ground, Water, Air
-	TargetActorCenter: true
-	Projectile: InstantHit
-	Warhead@1: TargetDamage
 		ValidTargets: Ground, Water, Air
 
 TSHSeekerBomb:
@@ -2066,60 +1711,3 @@ TunnelDisappear:
 		ExplosionPalette: tseffect
 		ImpactSounds: subdril1.aud
 		ImpactActors: false
-
-cabal_dissolver:
-	ReloadDelay: 16
-	Burst: 4
-	BurstDelays: 2
-	Range: 5c512
-	StartBurstReport: tsdissolver.wav
-	ValidTargets: Ground
-	Projectile: Bullet
-		Speed: 256
-		Blockable: false
-		Image: tsdissolvereffect
-		Palette: alpha50
-		Inaccuracy: 512
-	Warhead@1Dam: SpreadDamage
-		Spread: 512
-		Damage: 512
-		ValidTargets: Ground
-		Versus:
-			None: 25
-			Wood: 50
-			Light: 150
-			Medium: 200
-			Heavy: 250
-			Concrete: 100
-
-Eliminator-Blades:
-	ReloadDelay: 25
-	Range: 2c0
-	Burst: 2
-	BurstDelays: 5
-	Report: pzehit00.aud
-	Projectile: Bullet
-		Speed: 1c682
-	Warhead@1Dam: SpreadDamage
-		Spread: 125
-		Damage: 12500
-		Versus:
-			None: 150
-			Wood: 50
-			Light: 125
-			Medium: 100
-			Heavy: 75
-			Concrete: 25
-		DamageTypes: RippedApartDeath
-	Warhead@2Dam: HealthPercentageDamage
-		Damage: 5
-		Spread: 25
-		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50

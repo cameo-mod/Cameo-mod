@@ -47,8 +47,8 @@ commits and reported.
 | Forgotten (TS) | DONE `d7b86798d` | DONE `03ce7e96c` | — | — | — |
 | TS GDI | DONE `9d901fb45` | DONE `dfa00f20f` | — | — | — |
 | TS Nod | DONE `8c82ad950` | DONE `a34c80678` | — | — | — |
-| CABAL | **in progress** (greenlit 2026-07-09) | | | | |
-| TS Shared | after TS factions (shared actor ownership decisions) | | | | |
+| CABAL | DONE | DONE | — | — | — |
+| TS Shared | **next** (shared actor ownership decisions) | | | | |
 | TD GDI / TD Nod | rules packed (ids unrenamed) | DONE incl. weapons+sequences | — | — | — |
 | RA2Mod six, D2k four | rules packed (ids unrenamed) | DONE incl. weapons+sequences | — | — | — |
 | RA1 (allies/soviet/japan) | maps drafted | monolith | | | |

@@ -1,0 +1,394 @@
+cabal_refinery:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@ref: ^Refinery
+	HitShape:
+		Type: Rectangle
+			TopLeft: -1536, -512
+			BottomRight: 1536, 853
+	HitShape@TOP:
+		Type: Rectangle
+			TopLeft: -512, -1450
+			BottomRight: 896, -512
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: CABAL Refinery
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_constructionyard, cabal_powerplant
+		Queue: Building, RABuilding
+		Description: Processes raw Tiberium\ninto useable resources
+	Building:
+		Footprint: _x_ xxx === ===
+		Dimensions: 3,4
+		LocalCenterOffset: 0,-512,0
+	Refinery:
+	DockHost:
+		DockAngle: 680
+		DockOffset: 1c0, 1c0, 0
+	StoresResources:
+		Capacity: 1000
+	Selectable:
+		Bounds: 3072, 2560, 0, 0
+	CustomSellValue:
+		Value: 500
+	FreeActor:
+		Actor: cabal_tiberiumharvester
+		SpawnOffset: 1,2
+		Facing: 256
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	GivesBuildableArea: ##########
+		AreaTypes: building, cityi
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 10
+	RenderSprites:
+		Image: cabal_refinery
+		PlayerPalette: player_rgba
+
+cabal_powerplant:
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@power: ^PowerPlant
+	Tooltip:
+		Name: CABAL Power Plant
+	Valued:
+		Cost: 800
+	Health:
+		HP: 160000
+	Armor:
+		Type: Wood
+	Power:
+		Amount: 240
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 10
+		Prerequisites: ~cabal_constructionyard
+		Description: template-power.description
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 2048, 2048
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 640,-384,0, 640,512,0, -710,-512,0, -710,512,0
+	RevealsShroud:
+		Range: 4c0
+	ScalePowerWithHealth:
+	AcceptsDeliveredExperience: ##########
+	ProvidesPrerequisite@buildingname:
+		ValidTypes: building ##########
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	WithIdleOverlay@RAY:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-electro
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: tscrys
+
+cabal_cyborgfactory:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^2x2Shape
+	Inherits@barr: ^IsBarrack
+	HitShape:
+		UseTargetableCellsOffsets: false
+		TargetableOffsets: 0,0,0, 630,-512,0, 355,512,0, -281,-512,0, -630,512,0
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Cyborg Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_constructionyard, cabal_powerplant
+		Queue: Building, RABuilding
+		Description: template-barracks.description
+		IconPalette: windows256
+	Building:
+		Footprint: xx xx ==
+		Dimensions: 2,3
+		LocalCenterOffset: 0,-512,0
+	RallyPoint:
+		Path: 1,2
+	Exit@1:
+		SpawnOffset: -426,85,0
+		ExitCell: 0,1
+	Exit@2:
+		SpawnOffset: 298,298,0
+		ExitCell: 1,1
+	ProductionQueue@INFANTRY:
+	Power:
+		Amount: -20
+	ProvidesPrerequisite@buildingname:
+	Selectable:
+		Bounds: 1280, 1024
+	SelectionDecorations:
+	WithProductionOverlay:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-produce
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	RenderSprites:
+		PlayerPalette: playerra2
+
+cabal_mechfactory:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@shape: ^3x2Shape
+	Inherits@weap: ^IsWeaponFactory
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
+		Type: Rectangle
+			TopLeft: -1536, -1024
+			BottomRight: 1536, 512
+	Valued:
+		Cost: 2000
+	Tooltip:
+		Name: CABAL Mech Factory
+	ProvidesPrerequisite@buildingname:
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~cabal_constructionyard, cabal_refinery
+		Queue: Building, RABuilding
+		Description: template-factory.description
+	Building:
+		Footprint: xx= x== ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 3072, 2048
+	SelectionDecorations:
+	RallyPoint:
+		Path: 0,2
+	Exit@1:
+		SpawnOffset: -512,-512,0
+		ExitCell: 2,1
+		ExitDelay: 3
+	ProductionQueue@VEHICLE:
+	ProductionBar@VEHICLEGDI:
+		ProductionType: Vehicle
+		RequiresCondition: !classicproductionqueues
+	ProductionBar@RAVEHICLEGDI:
+		ProductionType: RAVehicle
+		RequiresCondition: classicproductionqueues
+	Power:
+		Amount: -40
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@ROOF:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-roof
+	WithProductionDoorOverlay@DOOR:
+		RequiresCondition: !build-incomplete
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	WithIdleOverlay@BIB:
+		RequiresCondition: !build-incomplete
+		Sequence: bib2
+	RenderSprites:
+		PlayerPalette: playerra2
+
+cabal_servicedepot:
+	Inherits: ts_gdi_servicedepot
+	Tooltip:
+		Name: Service Depot
+	Buildable:
+		Prerequisites: ~cabal_constructionyard, cabal_mechfactory
+	RenderSprites:
+		Image: tsgtdept
+		PlayerPalette: playerra2
+
+cabal_helipad:
+	Inherits: ts_nod_helipad
+	Tooltip:
+		Name: CABAL Helipad
+	Buildable:
+		Queue: Building, RABuilding
+		Prerequisites: ~cabal_constructionyard, cabal_radar
+	ProductionQueue@AIRCRAFT:
+	ProductionBar@AIRCRAFTNOD:
+		ProductionType: Aircraft
+	ProductionBar@RAAIRCRAFTNOD:
+		ProductionType: RAAircraft
+	RenderSprites:
+		Image: tsnthpadcabal
+
+cabal_radar:
+	Inherits: ts_nod_radar
+	Buildable:
+		Prerequisites: ~cabal_constructionyard, cabal_refinery
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: cabal_radar
+	ProvidesPrerequisite@robotcontrol:
+		Prerequisite: robotcontrol
+		RequiresCondition: !disabled
+	SupportPowerChargeBar:
+	SpawnActorPower@radarhack:
+		PauseOnCondition: disabled
+		OrderName: SovietRA2SpyPlane
+		Prerequisites:
+			1: cabal_upgrade_radarhack
+		Icons:
+			1: icon
+		ChargeInterval: 4500
+		Names:
+			1: Satellite Hack
+		Descriptions:
+			1: power-ra2psireveal.description
+		SelectTargetSpeechNotification: SelectTarget
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: SpyPlaneReady
+		Actors:
+			1: camera.psireveal
+		IconImage: cabal_upgrade_radarhack
+		LifeTime: 250
+		DeploySound: spysreve.wav
+		LaunchSound: spysreve.wav
+		IncomingSound: spysreve.wav
+		SupportPowerPaletteOrder: 10
+		EffectSequence: idle
+		BlockedCursor: move-blocked
+
+cabal_techcenter:
+	Inherits: ts_gdi_techcenter
+	Tooltip:
+		Name: Cabal Tech Center
+	Selectable:
+		Bounds: 2048, 2048
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~cabal_constructionyard, cabal_radar
+		Description: actor-tscabaltech.description
+		BuildLimit: 1
+	SupportPowerChargeBar:
+	Exit@1:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,2
+	Exit@2:
+		SpawnOffset: -704,768,0
+		ExitCell: -1,3
+	Exit@3:
+		SpawnOffset: -704,768,0
+		ExitCell: 0,3
+	RenderSprites:
+		Image: cabal_techcenter
+		PlayerPalette: playerra2
+	ProduceActorPower@sabot:
+		Prerequisites: cabal_upgrade_handof
+			1: cabal_upgrade_handof
+		Names:
+			1: Give Hackers
+		Descriptions:
+			1: Produces Hackers
+		Icons:
+			1: icon
+		IconImage: cabal_upgrade_handof
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Actors: cabal_hackercyborg
+		Type: Hackers
+		ChargeInterval: 1500
+		AutoFire: true
+		OrderName: cabal_hackercyborg
+		SupportPowerPaletteOrder: 20
+		RequiresCondition: cabalhandoflegion_tech
+	RallyPoint:
+	GrantConditionOnPrerequisite@cabalhandoflegion_tech:
+		Condition: cabalhandoflegion_tech
+		Prerequisites: cabal_upgrade_handof
+	Production@Saboteurs:
+		Produces: Hackers
+# tsnttmpl:
+# 	Inherits: ^BaseBuilding
+# 	Inherits@sell: ^TSSpawnActorsOnSell
+# 	Inherits@tech: ^IsTechnoBuilding
+# 	Inherits@shape: ^3x2Shape
+# 	# Inherits@hunterseeker: ^HunterSeekersPower
+# 	Selectable:
+# 		Bounds: 3072, 2048
+# 	HitShape:
+# 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+# 	Buildable:
+# 		Queue: Building, RABuilding
+# 		BuildPaletteOrder: 150
+# 		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar, ts_nod_techcenter
+# 		Description: Provides Nod advanced technologies.\nProvides Hunter-Seeker support power.
+# 	Tooltip:
+# 		Name: Nod Temple
+# 	Building:
+# 		Footprint: xxx xxx ===
+# 		Dimensions: 3,3
+# 		LocalCenterOffset: 0,-512,0
+# 	Selectable:
+# 		Bounds: 2048, 2048
+# 	Armor:
+# 		Type: Wood
+# 	RevealsShroud:
+# 		Range: 5c0
+# 	Power:
+# 		Amount: -100
+# 	ProvidesPrerequisite@buildingname:
+# 	WithIdleOverlay@LIGHTS:
+# 		RequiresCondition: !build-incomplete && !disabled
+# 		Sequence: idle-lights
+# 	SupportPowerChargeBar:
+# 	RenderSprites:
+# 		PlayerPalette: playerra2
+
+cabal_core:
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@hunterseeker: ^HunterSeekersPower
+	Selectable:
+		Bounds: 1280, 1024
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
+	Buildable:
+		Queue: Building, RABuilding
+		BuildPaletteOrder: 150
+		Prerequisites: ~cabal_constructionyard, cabal_techcenter
+		Description: actor-tscore.description
+	Tooltip:
+		Name: CABAL Core
+	Building:
+		Footprint: xxx xxx ===
+		Dimensions: 3,3
+		LocalCenterOffset: 0,-512,0
+	Selectable:
+		Bounds: 1280, 1280
+	Armor:
+		Type: Wood
+	Power:
+		Amount: -100
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+	WithIdleOverlay@LIGHTS2:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights2
+	WithIdleOverlay@LIGHTS2:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights3
+	SupportPowerChargeBar:
+	RenderSprites:
+		PlayerPalette: playerra2

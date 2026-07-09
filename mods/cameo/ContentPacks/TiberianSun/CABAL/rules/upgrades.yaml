@@ -1,0 +1,237 @@
+cabal_upgrade_mobilitymatrix:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Mobility Matrix
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Walkers moves 25% faster, and ads 10% of armor.
+		Prerequisites: ~cabal_radar, !cabal_upgrade_mobilitymatrix
+	RenderSprites:
+		Image: cabal_upgrade_mobilitymatrix
+	ProvidesPrerequisite:
+
+cabal_upgrade_darkarmament:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Dark Armament
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Infantry Unlocks extra weapons, 10% reload faster.
+		Prerequisites: ~cabal_radar, !cabal_upgrade_darkarmament
+	RenderSprites:
+		Image: cabal_upgrade_darkarmament
+	ProvidesPrerequisite:
+
+cabal_upgrade_neutronnuclearcatalyst:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Neutron Nuclear Catalyst
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Artillery and Tarantula Unlocks neutron shells.
+		Prerequisites: ~cabal_radar, !cabal_upgrade_neutronnuclearcatalyst
+	RenderSprites:
+		Image: cabal_upgrade_neutronnuclearcatalyst
+	ProvidesPrerequisite:
+
+cabal_upgrade_radarhack:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Radar Hack
+	Valued:
+		Cost: 2500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: Unlocks Radar Hack Support Power, reveals map location.
+		Prerequisites: ~cabal_radar, !cabal_upgrade_radarhack
+	RenderSprites:
+		Image: cabal_upgrade_radarhack
+	ProvidesPrerequisite:
+
+cabal_upgrade_networkedcombatprotocols:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Networked Combat Protocols
+	Valued:
+		Cost: 3500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Upgrades
+		Description: CABAL's assimilated network coordinates targeting across all units.\n  All units gain 8% firepower and 5% faster reload.
+		Prerequisites: ~cabal_radar, !cabal_upgrade_networkedcombatprotocols
+	RenderSprites:
+		Image: cabal_upgrade_radarhack
+	ProvidesPrerequisite:
+############### Lab
+
+cabal_upgrade_backupsystems:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Backup Systems
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Heavy Vehicles turns in Husks when dies, if Husk arent destroyed, it wakes up again.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_backupsystems
+	RenderSprites:
+		Image: cabal_upgrade_backupsystems
+	ProvidesPrerequisite:
+
+cabal_upgrade_handof:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Hand of CABAL
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Spawns free Hackers from Tech Center, Hackers upgrade speed.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_handof
+	RenderSprites:
+		Image: cabal_upgrade_handof
+	ProvidesPrerequisite:
+
+cabal_upgrade_dataworm:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Data Worm
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Unlocks the Data Worm support power at CABAL Core.\nHijacks a Hunter-Seeker droid and launches it at a target, instantly destroying mobile units.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_dataworm
+	RenderSprites:
+		Image: cabal_upgrade_dataworm
+	ProvidesPrerequisite:
+
+cabal_upgrade_firewallprotocol:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Firewall Protocol
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: CABAL units become resistant to enemy mind control and vehicle hijacking.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_firewallprotocol
+	RenderSprites:
+		Image: cabal_upgrade_radarhack
+	ProvidesPrerequisite:
+
+cabal_upgrade_clusterwarhead:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cluster Warhead
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Retrofits the Missile Silo with a neutron cluster warhead,\nspreading its payload across a wider area on impact.
+		Prerequisites: ~cabal_core, !cabal_upgrade_clusterwarhead
+	RenderSprites:
+		Image: cabal_upgrade_neutronnuclearcatalyst
+	ProvidesPrerequisite:
+
+
+##########################
+# Promotions #############
+##########################
+
+# GDI ####################
+
+cabal_upgrade_reinforcedchassis:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reinforced Chassis
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Laser Spider, Mantis and Spider Tank Drone gain 15% armor.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reinforcedchassis
+	RenderSprites:
+		Image: cabal_upgrade_mobilitymatrix
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_reinforcedchassis
+
+cabal_upgrade_overchargedservos:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Overcharged Servos
+	Valued:
+		Cost: 7500
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Heavy Spider, Artillery Spider and Tarantula reload 15% faster.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_overchargedservos
+	RenderSprites:
+		Image: cabal_upgrade_darkarmament
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_overchargedservos
+
+cabal_upgrade_neuraluplink:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Neural Uplink
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Hacker Cyborg hacking attacks reload 20% faster.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_neuraluplink
+	RenderSprites:
+		Image: cabal_upgrade_handof
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_neuraluplink
+
+cabal_upgrade_reclamationprotocols:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Reclamation Protocols
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: Cyborg Infantry and Plated Armor Cyborg self-repair faster.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reclamationprotocols
+	RenderSprites:
+		Image: cabal_upgrade_backupsystems
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_reclamationprotocols
+
+cabal_upgrade_fullassimilation:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Full Assimilation
+	Valued:
+		Cost: 10000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Description: CABAL's assimilated network extends unit sensor range and cloak detection by 20%.
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_fullassimilation
+	RenderSprites:
+		Image: cabal_upgrade_dataworm
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_fullassimilation
