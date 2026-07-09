@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **595** across 1834 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **605** across 1834 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (47)
@@ -665,4 +665,26 @@ _248 further infantry inherit Repairable from the infantry base template (^Defau
 | ttnk | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | v1truck | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | yrtele | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+
+
+## F12 — anti-air defense not gated by the faction's radar tier  (2)
+
+| actor | actual | expected |
+|---|---|---|
+| asianalliance: cghype.asian | prereqs: cgcnst.asian, cgmiac.asian | must include radar tier: cgradr.asian |
+| tkm: tkmbunkerquadturret | prereqs: tkmbarracks, tkmcommandcenter | must include radar tier: tkmradar |
+
+
+## F13 — advanced defense not gated by the faction's tech tier  (8)
+
+| actor | actual | expected |
+|---|---|---|
+| allies: modartyturret | prereqs: rafact.allies, upbastion | must include tech tier: atek |
+| ixian: large_gun_turret.ixian | prereqs: construction_yard.ixian, outpost.ixian | must include tech tier: research_centre.ixian |
+| lnaxis: twr.nax2 | prereqs: barr.nax2, conyard.nax2 | must include tech tier: tech.nax2 |
+| modjapan: jballistat | prereqs: dome.japan, rafact.japan | must include tech tier: modjtek |
+| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos | must include tech tier: research_centre.ordos |
+| ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos | must include tech tier: research_centre.ordos |
+| syndicate: sml.latin | prereqs: cgcnst.latin, cgup.latin | must include tech tier: cgspy.latin |
+| tsgdi: tsntpulsgdi | prereqs: tsgtcnstgdi, tsgtradr | must include tech tier: tsgttech |
 

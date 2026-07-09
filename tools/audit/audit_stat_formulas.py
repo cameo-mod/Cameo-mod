@@ -19,6 +19,13 @@ Ordos Raider (raider.ordos).
       firing-slow pattern — GrantConditionOnAttack(firing) with
       RevokeDelay == weapon ReloadDelay / 2 and Speed/TurnSpeed/
       TurretTurnSpeed multipliers at 50
+  F12 each faction's anti-air defense tower must be gated by the faction's
+      radar-tier (Tier 2) building
+  F13 each faction's advanced defense must be gated by the faction's
+      tech-tier (Tier 3) building
+      F12/F13 exemptions: factions with only one armed defense (Protoss
+      photon cannon style), factions without identifiable radar/tech tier
+      buildings, and Terran/Zerg (non-tiered tech trees).
 
 Scope: buildable rosters of real factions. Tolerance ±1 on divisions.
 """
@@ -89,11 +96,69 @@ def inherits_template(m, name, needles) -> bool:
     return walk(node)
 
 
+TIER_EXEMPT_FACTIONS = {"terran", "zerg"}   # non-tiered tech trees
+
+
+def defense_tier_check(m: Model, rows: dict) -> None:
+    """F12/F13 — AA defense gated by radar tier; advanced defense by tech tier."""
+    rs = m.rs
+    for fac in sorted(f.internal for f in m.real_factions()):
+        if fac in TIER_EXEMPT_FACTIONS:
+            continue
+        roster = m.buildable_roster(fac)
+
+        radars, techs, armed_defs = set(), set(), []
+        radar_tokens, tech_tokens = set(), set()
+        for lname in roster:
+            res = rs.resolve(lname)
+            if res is None:
+                continue
+            b = res.child("Buildable")
+            queue = (b.get("Queue") or "").lower() if b else ""
+            if res.child("Building") is not None:
+                toks = m._provider_tokens(lname, res)
+                if inherits_template(m, lname, ("RadarBuilding",)):
+                    radars.add(lname)
+                    radar_tokens |= toks
+                if inherits_template(m, lname, ("IsTechnoBuilding",)):
+                    techs.add(lname)
+                    tech_tokens |= toks
+            if ("defence" in queue or "defense" in queue) \
+                    and res.children_named("Armament"):
+                armed_defs.append(lname)
+
+        # single-armed-defense factions (photon cannon style) are exempt
+        if len(armed_defs) <= 1:
+            continue
+
+        for lname, needles, tier_tokens, tier_names, key, tier_label in (
+            *[(d, ("AntiAirDefense",), radar_tokens, radars, "F12", "radar tier")
+              for d in armed_defs],
+            *[(d, ("AdvancedDefense",), tech_tokens, techs, "F13", "tech tier")
+              for d in armed_defs],
+        ):
+            if not inherits_template(m, lname, needles):
+                continue
+            if not tier_names:
+                rows[key].append([f"{fac}: {lname}",
+                                  f"no {tier_label} building identified",
+                                  "needs human decision"])
+                continue
+            res = rs.resolve(lname)
+            prereqs = set(m.positive_prereqs(res))
+            if not (prereqs & tier_tokens):
+                rows[key].append([f"{fac}: {lname}",
+                                  f"prereqs: {', '.join(sorted(prereqs)) or '(none)'}",
+                                  f"must include {tier_label}: "
+                                  f"{', '.join(sorted(tier_names))}"])
+
+
 def main() -> int:
     m = Model()
     rs = m.rs
     rows = {k: [] for k in
-            ("F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11")}
+            ("F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10",
+             "F11", "F12", "F13")}
 
     names: set[str] = set()
     for f in m.real_factions():
@@ -214,6 +279,8 @@ def main() -> int:
                         rows["F11"].append([lname, f"RevokeDelay {rd}",
                                             f"expected {reload_d//2} (ReloadDelay {reload_d}/2)"])
 
+    defense_tier_check(m, rows)
+
     total = sum(len(v) for v in rows.values())
     print(h1("audit_stat_formulas — house stat formulas"))
     print(f"Violations: **{total}** across {len(names)} roster actors "
@@ -230,6 +297,8 @@ def main() -> int:
         "F9": "F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed",
         "F10": "F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)",
         "F11": "F11 — turreted artillery missing/incorrect firing-slow (Archer pattern)",
+        "F12": "F12 — anti-air defense not gated by the faction's radar tier",
+        "F13": "F13 — advanced defense not gated by the faction's tech tier",
     }
     for k in rows:
         print(h2(f"{titles[k]}  ({len(rows[k])})"))
