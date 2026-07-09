@@ -190,7 +190,7 @@ forgotten_ghoststalker:
 	Valued:
 		Cost: 4000
 	Tooltip:
-		Name: Ghost Stalker
+		Name: actor-forgotten_ghoststalker.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -198,7 +198,7 @@ forgotten_ghoststalker:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_ghoststalker
 		BuildLimit: 1
-		Description: Elite commando infantry, armed with chemical rifle and C4. Strong vs Ground. Weak vs Aircraft.
+		Description: actor-forgotten_ghoststalker.description
 	Mobile:
 		Speed: 62
 	Health:

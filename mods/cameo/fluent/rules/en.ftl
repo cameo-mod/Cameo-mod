@@ -925,6 +925,16 @@ actor-cabal_core =
    .description = Provides CABAL advanced technologies.
    Provides Data Worm support power.
 
+actor-forgotten_ghoststalker =
+   .name = Ghost Stalker
+   .description = Elite commando armed with a silenced long-range chemical rifle and C4 charges.
+      Demolishes buildings instantly with C4.
+      Detects nearby cloaked enemies.
+      Chemical Weapons research loads heavier chemical rounds into the rifle.
+      Maximum 1 can be trained.
+      Strong vs Ground
+      Weak vs Aircraft
+
 actor-ts_nod_missilesilo =
    .name = Missile Silo
    .description = Constructs and launches long-range missiles as support power.

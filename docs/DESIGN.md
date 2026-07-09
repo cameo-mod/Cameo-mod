@@ -160,6 +160,11 @@ cheapest provider wins).
   unlocked unit.
 - Every description is **verified against resolved traits, weapons, and
   upgrades** — it says what the unit does and the unit does what it says.
+  Trait PRESENCE is not ability: a trait gated on RequiresCondition
+  (crate cloaks, stealth-gen fields, spell states) is not an innate
+  capability and must not be described as one. Weapon claims come from the
+  weapon definition (inherits, warheads, reports), never from source-game
+  lore — the Ghost Stalker's "railgun" was a lore error the code refuted.
 - Rollout is incremental: one actor → review → one faction → review → all.
   Renames come FIRST so fluent keys are minted against final ids.
 
