@@ -1,6 +1,6 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **557** across 1834 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **554** across 1834 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
 ## F1 — Repairable.HpPerStep ≠ HP/20  (46)
@@ -619,24 +619,21 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | yrtele | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 
 
-## F12 — anti-air defense not gated by the faction's radar tier  (2)
+## F12 — anti-air defense not gated by the faction's radar tier  (1)
 
 | actor | actual | expected |
 |---|---|---|
-| asianalliance: cghype.asian | prereqs: cgcnst.asian, cgmiac.asian | must include radar tier: cgradr.asian |
-| tkm: tkmbunkerquadturret | prereqs: tkmbarracks, tkmcommandcenter | must include radar tier: tkmradar |
+| tkm: tkmbunkerquadturret | prereqs: tkmbarracks, tkmcommandcenter (gate 2, radar tier 4) | no AA on radar tier: tkmradar |
 
 
-## F13 — advanced defense not gated by the faction's tech tier  (8)
+## F13 — advanced defense not gated by the faction's tech tier  (6)
 
 | actor | actual | expected |
 |---|---|---|
-| allies: modartyturret | prereqs: rafact.allies, upbastion | must include tech tier: atek |
-| ixian: large_gun_turret.ixian | prereqs: construction_yard.ixian, outpost.ixian | must include tech tier: research_centre.ixian |
-| lnaxis: twr.nax2 | prereqs: barr.nax2, conyard.nax2 | must include tech tier: tech.nax2 |
-| modjapan: jballistat | prereqs: dome.japan, rafact.japan | must include tech tier: modjtek |
-| ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos | must include tech tier: research_centre.ordos |
-| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos | must include tech tier: research_centre.ordos |
-| syndicate: sml.latin | prereqs: cgcnst.latin, cgup.latin | must include tech tier: cgspy.latin |
-| tsgdi: tsntpulsgdi | prereqs: tsgtcnstgdi, tsgtradr | must include tech tier: tsgttech |
+| ixian: large_gun_turret.ixian | prereqs: construction_yard.ixian, outpost.ixian (gate 3, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
+| lnaxis: twr.nax2 | prereqs: barr.nax2, conyard.nax2 (gate 2, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
+| modjapan: jballistat | prereqs: dome.japan, rafact.japan (gate 3, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
+| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
+| ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
+| tsgdi: tsntpulsgdi | prereqs: tsgtcnstgdi, tsgtradr (gate 3, radar tier 3) | advanced defense must be gated above the radar tier (tech+) |
 

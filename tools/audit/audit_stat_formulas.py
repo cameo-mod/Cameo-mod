@@ -19,13 +19,17 @@ Ordos Raider (raider.ordos).
       firing-slow pattern — GrantConditionOnAttack(firing) with
       RevokeDelay == weapon ReloadDelay / 2 and Speed/TurnSpeed/
       TurretTurnSpeed multipliers at 50
-  F12 each faction's anti-air defense tower must be gated by the faction's
-      radar-tier (Tier 2) building
-  F13 each faction's advanced defense must be gated by the faction's
-      tech-tier (Tier 3) building
+  F12 each faction needs an anti-air tower on its radar tier (Tier 2);
+      additional AA towers gated at tech tier or above are legal
+      "advanced AA" (Asian Alliance model)
+  F13 advanced defenses must be gated at tier >= 3 — the tech-tier building
+      or anything later (a Tier 4/5 gate like Syndicate's cgup.latin is fine)
+      Building tiers are computed data-driven from prerequisite chains:
+      conyard = 0, barracks/refinery = 1, radar = 2, tech = 3, post-tech = 4+.
       F12/F13 exemptions: factions with only one armed defense (Protoss
-      photon cannon style), factions without identifiable radar/tech tier
-      buildings, and Terran/Zerg (non-tiered tech trees).
+      photon cannon style), promotion-gated defenses (transitional; audited
+      once they become regular), factions without an identifiable radar
+      tier, and Terran/Zerg (non-tiered tech trees).
 
 Scope: buildable rosters of real factions. Tolerance ±1 on divisions.
 """
@@ -107,22 +111,29 @@ def defense_tier_check(m: Model, rows: dict) -> None:
             continue
         roster = m.buildable_roster(fac)
 
-        radars, techs, armed_defs = set(), set(), []
-        radar_tokens, tech_tokens = set(), set()
+        radars, armed_defs = set(), []
+        radar_tokens: set[str] = set()
+        buildings: dict[str, set[str]] = {}          # building -> provided tokens
+        promo_tokens: set[str] = set()
         for lname in roster:
             res = rs.resolve(lname)
             if res is None:
                 continue
             b = res.child("Buildable")
             queue = (b.get("Queue") or "").lower() if b else ""
-            if res.child("Building") is not None:
-                toks = m._provider_tokens(lname, res)
+            toks = m._provider_tokens(lname, res)
+            if "promotion" in queue:
+                promo_tokens |= toks
+            # D2k-style delivered refineries have no Building trait, so
+            # Building-queue membership also qualifies for the tier graph.
+            is_building = (bool(res.children_named("Building"))
+                           or "building" in queue or "defence" in queue
+                           or "defense" in queue)
+            if is_building:
+                buildings[lname] = toks
                 if inherits_template(m, lname, ("RadarBuilding",)):
                     radars.add(lname)
                     radar_tokens |= toks
-                if inherits_template(m, lname, ("IsTechnoBuilding",)):
-                    techs.add(lname)
-                    tech_tokens |= toks
             if ("defence" in queue or "defense" in queue) \
                     and res.children_named("Armament"):
                 armed_defs.append(lname)
@@ -131,26 +142,80 @@ def defense_tier_check(m: Model, rows: dict) -> None:
         if len(armed_defs) <= 1:
             continue
 
-        for lname, needles, tier_tokens, tier_names, key, tier_label in (
-            *[(d, ("AntiAirDefense",), radar_tokens, radars, "F12", "radar tier")
-              for d in armed_defs],
-            *[(d, ("AdvancedDefense",), tech_tokens, techs, "F13", "tech tier")
-              for d in armed_defs],
-        ):
-            if not inherits_template(m, lname, needles):
+        # data-driven building tiers: conyard(no building prereqs)=0,
+        # barracks/refinery=1, radar=2, tech=3, post-tech=4/5...
+        # A token's tier is the CHEAPEST provider (alternate providers like
+        # advanced power plants must not inflate or cycle the chain), so
+        # tiers are solved as a monotone fixpoint rather than by recursion.
+        token_providers: dict[str, set[str]] = {}
+        for bld, toks in buildings.items():
+            for t in toks:
+                token_providers.setdefault(t, set()).add(bld)
+        bld_prereqs = {bld: [t for t in m.positive_prereqs(rs.resolve(bld))
+                             if token_providers.get(t, set()) - {bld}]
+                       for bld in buildings}
+        tier = {bld: 0 for bld in buildings}
+        for _ in range(len(buildings)):
+            changed = False
+            for bld, toks in bld_prereqs.items():
+                new = 0
+                for tok in toks:
+                    provs = token_providers[tok] - {bld}
+                    new = max(new, 1 + min(tier[p] for p in provs))
+                if new > tier[bld]:
+                    tier[bld] = new
+                    changed = True
+            if not changed:
+                break
+
+        def gate_info(defense: str) -> tuple[int, bool, bool, set[str]]:
+            """(gate tier, radar_gated, promotion_gated, prereqs) of a defense."""
+            res_d = rs.resolve(defense)
+            prereqs = set(m.positive_prereqs(res_d))
+            gate = 0
+            for tok in prereqs:
+                providers = token_providers.get(tok, ())
+                if providers:
+                    gate = max(gate, min(tier[p] for p in providers))
+            return gate, bool(prereqs & radar_tokens), bool(prereqs & promo_tokens), prereqs
+
+        if not radars:
+            continue    # no identifiable radar tier: exempt (WC2-style trees)
+        radar_tier = min(tier[r] for r in radars)
+
+        # F12: at least one AA tower must sit on the radar tier; extra AA
+        # towers at tech tier or above are legal "advanced AA".
+        aa_towers = [d for d in armed_defs
+                     if inherits_template(m, d, ("AntiAirDefense",))]
+        if aa_towers:
+            infos = {d: gate_info(d) for d in aa_towers}
+            baseline_ok = any(radar_gated or gate == radar_tier
+                              for _, (gate, radar_gated, promo, _) in infos.items())
+            for d, (gate, radar_gated, promo, prereqs) in sorted(infos.items()):
+                if promo:
+                    continue
+                if not baseline_ok:
+                    rows["F12"].append([f"{fac}: {d}",
+                                        f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
+                                        f"no AA on radar tier: {', '.join(sorted(radars))}"])
+                elif not radar_gated and gate < radar_tier:
+                    rows["F12"].append([f"{fac}: {d}",
+                                        f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
+                                        "AA below radar tier"])
+
+        # F13: advanced defenses must be gated ABOVE the radar tier (the
+        # tech-tier building or any later building — Tier 4/5 gates like
+        # Syndicate's cgup.latin are fine).
+        for d in armed_defs:
+            if not inherits_template(m, d, ("AdvancedDefense",)):
                 continue
-            if not tier_names:
-                rows[key].append([f"{fac}: {lname}",
-                                  f"no {tier_label} building identified",
-                                  "needs human decision"])
-                continue
-            res = rs.resolve(lname)
-            prereqs = set(m.positive_prereqs(res))
-            if not (prereqs & tier_tokens):
-                rows[key].append([f"{fac}: {lname}",
-                                  f"prereqs: {', '.join(sorted(prereqs)) or '(none)'}",
-                                  f"must include {tier_label}: "
-                                  f"{', '.join(sorted(tier_names))}"])
+            gate, radar_gated, promo, prereqs = gate_info(d)
+            if promo:
+                continue  # transitional rank-gated defense; re-audited once regular
+            if gate <= radar_tier:
+                rows["F13"].append([f"{fac}: {d}",
+                                    f"prereqs: {', '.join(sorted(prereqs)) or '(none)'} (gate {gate}, radar tier {radar_tier})",
+                                    "advanced defense must be gated above the radar tier (tech+)"])
 
 
 def main() -> int:
