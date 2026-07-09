@@ -734,7 +734,7 @@ tkmbunkerquadturret:
 		Name: TKM Quad Turret Bunker
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~tkmcommandcenter, tkmbarracks
+		Prerequisites: ~tkmcommandcenter, tkmradar
 		Queue: Defence, RADefence
 		Description: template-anti-infantry-defense.description
 	Building:
