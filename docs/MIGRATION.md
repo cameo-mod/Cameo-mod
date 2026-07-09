@@ -31,9 +31,13 @@ nothing references.
                 --sequences ...
             # verify: actor/weapon/sequence registries identical, resolved
             # closure diff empty.  Commit.
-3. LATER PHASES (per pack): own ai.yaml; move assets into the pack in
-   per-type subfolders; unused-file audit + deletion; per-faction fluent
-   descriptions (DESIGN.md §7) on top of final ids.
+3. DESCRIBE  Part of EVERY faction split: rework the faction's actor,
+   upgrade, and promotion descriptions into Fluent (DESIGN.md §7 — the
+   Tarantula model: derived from resolved traits/weapons/upgrades, RA1
+   layout, Strong/Weak vs). One sample actor goes to design review first,
+   then the faction is batched.
+4. LATER PHASES (per pack): own ai.yaml; move assets into the pack in
+   per-type subfolders; unused-file audit + deletion.
 ```
 
 Every step is behavior-preserving by proof, never by hope. Balance changes
