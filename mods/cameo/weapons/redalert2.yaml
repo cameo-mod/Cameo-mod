@@ -138,7 +138,8 @@
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 500
 ^RA2TeslaWeapon:
 	Inherits: ^TeslaWeapon
 	Warhead@Effect: CreateEffect
@@ -1748,7 +1749,8 @@ RA2ThermobaricFlame:
 		Damage: 600
 		Versus:
 			Wood: 20
-
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Spread: 125
 RA2FLOATER:
 	ReloadDelay: 45
 	Range: 4096

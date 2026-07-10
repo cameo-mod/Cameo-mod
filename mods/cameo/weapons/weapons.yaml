@@ -1490,7 +1490,7 @@
 		ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		Spread: 250
-		Damage: 1000
+		Damage: 500
 		Falloff: 111, 33, 11, 3
 		Versus:
 			HAZMAT: 25
@@ -1618,7 +1618,7 @@
 		ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		Spread: 375
-		Damage: 1000
+		Damage: 500
 		Falloff: 111, 33, 11, 3
 		Versus:
 			HAZMAT: 25
@@ -1744,7 +1744,7 @@
 		ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		Spread: 500
-		Damage: 1000
+		Damage: 500
 		Falloff: 111, 33, 11, 3
 		Versus:
 			HAZMAT: 50
@@ -1873,7 +1873,7 @@
 		ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		Spread: 175
-		Damage: 1000
+		Damage: 500
 		Falloff: 99, 66, 33
 		Versus:
 			HAZMAT: 25
@@ -1979,7 +1979,7 @@
 		ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		Spread: 350
-		Damage: 1000
+		Damage: 500
 		Falloff: 99, 66, 33
 		Versus:
 			HAZMAT: 25
@@ -2088,7 +2088,7 @@
 		ValidTargets: Ground, Water
 		InvalidTargets: Wall
 		Spread: 525
-		Damage: 1000
+		Damage: 500
 		Falloff: 99, 66, 33
 		Versus:
 			HAZMAT: 25
@@ -2198,7 +2198,7 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 200
-		Damage: 1000
+		Damage: 500
 		Falloff: 100, 50, 33, 25, 20
 		Versus:
 			HAZMAT: 25
@@ -2312,7 +2312,7 @@
 		ValidRelationships: Ally
 		ValidTargets: Ground, Water
 		Spread: 300
-		Damage: 1000
+		Damage: 500
 		Falloff: 100, 75, 50, 25
 		Versus:
 			HAZMAT: 25
@@ -2611,7 +2611,7 @@
 		ValidTargets: Ground, Water
 		Falloff: 100, 50
 		Spread: 160
-		Damage: 1000
+		Damage: 500
 		Versus:
 			Shield: 125
 			None: 100
@@ -4790,7 +4790,7 @@ CHFlame:
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Spread: 250
+		Spread: 125
 		Falloff: 100, 75, 50, 25
 		Damage: 1000
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
@@ -4811,7 +4811,8 @@ CHFlameBlue:
 			Medium: 80
 			Heavy: 75
 			Concrete: 20
-
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Spread: 125
 GLTunnelWeap:
 	Inherits: MachineGun
 	Burst: 9
@@ -4882,7 +4883,7 @@ AnthraxCloudLarge:
 	Warhead@ToxicWeapon: SpreadDamage
 		Spread: 666
 	Warhead@ToxicWeaponFriendlyFire: SpreadDamage
-		Spread: 666
+		Spread: 333
 	Warhead@ToxicWeaponPercentage: HealthPercentageDamage
 		Spread: 666
 
@@ -4953,7 +4954,7 @@ AnthraxCloudBlueLarge:
 	Warhead@ToxicWeapon: SpreadDamage
 		Spread: 666
 	Warhead@ToxicWeaponFriendlyFire: SpreadDamage
-		Spread: 666
+		Spread: 333
 	Warhead@ToxicWeaponPercentage: HealthPercentageDamage
 		Spread: 666
 
@@ -5024,7 +5025,7 @@ AnthraxCloudPurpleLarge:
 	Warhead@ToxicWeapon: SpreadDamage
 		Spread: 666
 	Warhead@ToxicWeaponFriendlyFire: SpreadDamage
-		Spread: 666
+		Spread: 333
 	Warhead@ToxicWeaponPercentage: HealthPercentageDamage
 		Spread: 666
 
@@ -5139,7 +5140,7 @@ TSTurretLaserFire:
 	Warhead@LightFlameWeapon: SpreadDamage
 		Damage: 1000
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1500
+		Damage: 500
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Damage: 1
 	Warhead@FlakWeapon: SpreadDamage
@@ -5615,7 +5616,8 @@ ThermobaricFlame:
 		Damage: 2000
 		Versus:
 			Wood: 20
-
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Spread: 125
 RA2IMP:
 	ReloadDelay: 85
 	Range: 5120

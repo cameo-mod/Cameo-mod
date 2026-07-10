@@ -886,7 +886,8 @@ Lunar_GreenSturmArty:
 	Inherits@Cannon: NaxSturmArty
 	Inherits@Upgraded: ^LunarNaxisUpgradedCannons
 	Report: laser_cannon3_4.wav
-
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 10000
 Lunar_YellowBeetleLaser:
 	Inherits: NaxiBeetleLaser
 	Burst: 4
