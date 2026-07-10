@@ -22,7 +22,7 @@ gren.asian:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 52
 	Health:
@@ -93,7 +93,7 @@ tkiller.asian:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
-		Description: template-antitank-antiair-infantry.description
+		Description: template_antitank_antiair_infantry.description
 	Mobile:
 		Speed: 51
 	Health:
@@ -165,7 +165,7 @@ plast.asian:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cgbrck.asian, up_plast.asian, cgtech.asian
 		Queue: Infantry, RAInfantry
-		Description: template-antitank-infantry.description
+		Description: template_antitank_infantry.description
 	Mobile:
 		Speed: 42
 	Health:
@@ -216,7 +216,7 @@ flam.asian:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cgbrck.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
-		Description: actor-e4.description
+		Description: actor_e4.description
 	Mobile:
 		Speed: 53
 	Health:
@@ -281,7 +281,7 @@ japrif.asian:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cgbrck.asian, up_japrif.asian
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 63
 	Health:
@@ -342,7 +342,7 @@ samurai.asian:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cgbrck.asian, up_samurai.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
-		Description: actor-rasamurai.description
+		Description: actor_rasamurai.description
 	Mobile:
 		Speed: 72
 	Health:
@@ -386,7 +386,7 @@ archer.asian:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cgbrck.asian, up_archer.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
-		Description: template-antitank-antiair-infantry.description
+		Description: template_antitank_antiair_infantry.description
 	Mobile:
 		Speed: 68
 	Health:
@@ -439,7 +439,7 @@ shinobi.asian:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cgbrck.asian, cgradr.asian
 		Queue: Infantry, RAInfantry
-		Description: actor-aashinobi.description
+		Description: actor_aashinobi.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -516,7 +516,7 @@ alligator.asian:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgbrck.asian
 		Queue: Infantry, RAInfantry
-		Description: actor-alligator.description
+		Description: actor_alligator.description
 	Mobile:
 		Speed: 108
 	Health:
@@ -596,7 +596,7 @@ asdf.asian:
 		BuildPaletteOrder: 120
 		Prerequisites: ~cgbrck.asian, up_asdf.asian, cgmiac.asian
 		Queue: Infantry, RAInfantry
-		Description: actor-boris.description
+		Description: actor_boris.description
 		IconPalette: ra2cameo
 	Health:
 		HP: 40000
@@ -678,7 +678,7 @@ commando.asian:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cgbrck.asian, cgmiac.asian
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2snipe.description
+		Description: actor_ra2snipe.description
 		BuildLimit: 1
 	Mobile:
 		Speed: 75

@@ -96,7 +96,7 @@ d2k_munitions.ixian:
 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 310
-		Description: actor-d2k_munitions.description
+		Description: actor_d2k_munitions.description
 		IconPalette: player
 	D2kActorPreviewPlaceBuildingPreview:
 	Valued:
@@ -256,7 +256,7 @@ heavy_factory.ixian:
 		Image: heavy.mercenary
 	Buildable:
 		Prerequisites: ~construction_yard.ixian, refinery.ixian
-		Description: template-factory.description
+		Description: template_factory.description
 		IconPalette: player
 	ProductionQueue@VEHICLE:
 		BuildDurationModifier: 75
@@ -444,9 +444,9 @@ supercomputer.ixian:
 			1: abomb
 		ChargeInterval: 10500
 		Names:
-			1: power-nuke.d2kname
+			1: power_nuke.d2kname
 		Descriptions:
-			1: power-nuke.d2kdescription
+			1: power_nuke.d2kdescription
 		SelectTargetSpeechNotification: SelectTarget
 		SelectTargetTextNotification: Select target.
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -539,7 +539,7 @@ machine_gun_turret.ixian:
 		Queue: Defence, RADefence
 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
 		BuildPaletteOrder: 550
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 600
@@ -615,7 +615,7 @@ medium_gun_turret.ixian:
 		Queue: Defence, RADefence
 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
 		BuildPaletteOrder: 550
-		Description: template-anti-vehicle-defense.description
+		Description: template_anti_vehicle_defense.description
 		IconPalette: d2kunit
 	Health:
 		HP: 125000
@@ -678,7 +678,7 @@ large_gun_turret.ixian:
 		Queue: Defence, RADefence
 		Prerequisites: ~construction_yard.ixian, outpost.ixian
 		BuildPaletteOrder: 610
-		Description: actor-large_gun_turret.description
+		Description: actor_large_gun_turret.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 1500
@@ -1083,7 +1083,7 @@ storm_lasher.ixian:
 		Queue: Defence, RADefence
 		Prerequisites: ~construction_yard.ixian, up_stormlasher.ixian, research_centre.ixian
 		BuildPaletteOrder: 750
-		Description: actor-storm_lasher.description
+		Description: actor_storm_lasher.description
 		IconPalette: player
 	Valued:
 		Cost: 5000

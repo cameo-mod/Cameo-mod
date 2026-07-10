@@ -93,7 +93,7 @@ beetle.nax2:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax2
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -172,7 +172,7 @@ panzer.nax2:
 		BuildPaletteOrder: 40
 		Prerequisites: ~weap.nax2
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: hover
 		Speed: 90
@@ -256,7 +256,7 @@ tiger.nax2:
 		BuildPaletteOrder: 40
 		Prerequisites: ~weap.nax2, radar.nax2
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: hover
 		Speed: 80
@@ -340,7 +340,7 @@ jager.nax2:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
-		Description: actor-aaquas.description
+		Description: actor_aaquas.description
 	Mobile:
 		Locomotor: hover
 		Speed: 45
@@ -411,7 +411,7 @@ grille.nax2:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax2, radar.nax2
 		Queue: Vehicle, RAVehicle
-		Description: actor-aaquas.description
+		Description: actor_aaquas.description
 	Mobile:
 		Locomotor: hover
 		Speed: 90
@@ -486,7 +486,7 @@ giant_rk.nax2:
 		BuildPaletteOrder: 75
 		Prerequisites: ~weap.nax2, radar.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
-		Description: actor-aamecha.description
+		Description: actor_aamecha.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -540,7 +540,7 @@ crystal.nax2:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
-		Description: actor-aaquas.description
+		Description: actor_aaquas.description
 	Mobile:
 		Locomotor: hover
 		Speed: 60
@@ -617,7 +617,7 @@ bradley.nax2:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
 		Prerequisites: ~weap.nax2, radar.nax2
-		Description: actor-v3.description
+		Description: actor_v3.description
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -694,7 +694,7 @@ aatank.nax2:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
 		Prerequisites: ~weap.nax2, radar.nax2
-		Description: actor-v3.description
+		Description: actor_v3.description
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -781,7 +781,7 @@ lasert.nax2:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax2
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 70
 		TurnSpeed: 14
@@ -868,7 +868,7 @@ gravity.nax2:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax2, radar.nax2, tech.nax2
 		Queue: Vehicle, RAVehicle
-		Description: actor-aaquas.description
+		Description: actor_aaquas.description
 	Mobile:
 		Locomotor: hover
 		Speed: 40

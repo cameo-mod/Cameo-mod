@@ -48,7 +48,7 @@ commits and reported.
 
 | faction | rename | pack split | own ai.yaml | assets in pack | fluent descriptions |
 |---|---|---|---|---|---|
-| Forgotten (TS) | DONE `d7b86798d` | DONE `03ce7e96c` | — | — | — |
+| Forgotten (TS) | DONE `d7b86798d` | DONE `03ce7e96c` | — | — | DONE `d723a6b78` |
 | TS GDI | DONE `9d901fb45` | DONE `dfa00f20f` | — | — | — |
 | TS Nod | DONE `8c82ad950` | DONE `a34c80678` | — | — | — |
 | CABAL | DONE | DONE | — | — | — |

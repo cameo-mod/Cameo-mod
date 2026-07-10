@@ -15,7 +15,7 @@ uber.nax2:
 		BuildPaletteOrder: 30
 		Prerequisites: ~barr.nax2, tech.nax2
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 64
 	Health:
@@ -63,7 +63,7 @@ parv.nax2:
 		BuildPaletteOrder: 100
 		Prerequisites: ~barr.nax2, tech.nax2
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -118,7 +118,7 @@ armor_mg.nax2:
 		BuildPaletteOrder: 75
 		Prerequisites: ~barr.nax2, radar.nax2
 		Queue: Infantry, RAInfantry
-		Description: actor-aamecha.description
+		Description: actor_aamecha.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -187,7 +187,7 @@ armor_harv.nax2:
 		BuildPaletteOrder: 75
 		Prerequisites: ~refin.nax2
 		Queue: Infantry, RAInfantry
-		Description: actor-aamecha.description
+		Description: actor_aamecha.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -261,7 +261,7 @@ engi.nax2:
 		BuildPaletteOrder: 75
 		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
-		Description: actor-aamecha.description
+		Description: actor_aamecha.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -333,7 +333,7 @@ lunar.nax2:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -393,7 +393,7 @@ lunar2.nax2:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax2
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 60
 	Health:

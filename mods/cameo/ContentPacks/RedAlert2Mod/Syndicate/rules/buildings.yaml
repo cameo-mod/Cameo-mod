@@ -12,7 +12,7 @@ cgpow.latin:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cgcnst.latin
 		Queue: Building, RABuilding
-		Description: actor-nanrct.description
+		Description: actor_nanrct.description
 	Building:
 		Footprint: xxx xxx ___
 		Dimensions: 3,3
@@ -139,7 +139,7 @@ radar.latin:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		BuildLimit: 1
-		Description: actor-latin_radar.description
+		Description: actor_latin_radar.description
 		Prerequisites: ~cgcnst.latin, cgauto.latin
 	Tooltip:
 		Name: Latin EMP Radar
@@ -168,7 +168,7 @@ radar.latin:
 		Weapons:
 			1: SteelEmpBomb
 		Descriptions:
-			1: power-ioncannon.description
+			1: power_ioncannon.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeSound:
@@ -197,7 +197,7 @@ cgair.latin:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~cgcnst.latin, radar.latin
-		Description: actor-gaairc.description
+		Description: actor_gaairc.description
 	Tooltip:
 		Name: Air Station
 	Building:
@@ -236,9 +236,9 @@ cgair.latin:
 			1: icon
 		ChargeInterval: 4500
 		Names:
-			1: power-ra2spyplane.name
+			1: power_ra2spyplane.name
 		Descriptions:
-			1: power-ra2spyplane.description
+			1: power_ra2spyplane.description
 		SelectTargetSpeechNotification: SelectTarget
 		EndChargeSpeechNotification: SpyPlaneReady
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -340,7 +340,7 @@ cgup.latin:
 	Buildable:
 		BuildLimit: 1
 		Prerequisites: ~cgcnst.latin, cgspy.latin, derricklimit
-		Description: actor-oilb.description
+		Description: actor_oilb.description
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -391,7 +391,7 @@ cgte.latin:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		BuildLimit: 1
-		Description: actor-latin_cgte.description
+		Description: actor_latin_cgte.description
 		Prerequisites: ~cgcnst.latin, cgup.latin, derricklimit
 	Tooltip:
 		Name: Recycling Center
@@ -454,7 +454,7 @@ ca12hit.latin:
 		BuildDurationModifier: 100
 		Prerequisites: ~cgcnst.latin, cgspy.latin, !ra2topolstrike, ~techlevel.superweapons
 		Queue: Defence, RADefence
-		Description: actor-latin_ca12hit.description
+		Description: actor_latin_ca12hit.description
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -475,7 +475,7 @@ ca12hit.latin:
 		Names:
 			1: Topol Strike
 		Descriptions:
-			1: power-lightningstorm.description
+			1: power_lightningstorm.description
 		Weapons:
 			1: 12MissilesActivate
 		EndChargeSound: snukread.wav
@@ -554,7 +554,7 @@ ngdshktur.latin:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgcnst.latin, cgpile.latin
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -625,7 +625,7 @@ ngbunk2.latin:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~cgcnst.latin, cgpile.latin
-		Description: actor-nabnkr.description
+		Description: actor_nabnkr.description
 	Valued:
 		Cost: 600
 	Health:
@@ -677,7 +677,7 @@ sml.latin:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
 		Prerequisites: ~cgcnst.latin, cgup.latin
-		Description: actor-latin_sml.description
+		Description: actor_latin_sml.description
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -744,7 +744,7 @@ aatur.latin:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
 		Prerequisites: ~cgcnst.latin, radar.latin
-		Description: template-anti-aircraft-defense.description
+		Description: template_anti_aircraft_defense.description
 	Valued:
 		Cost: 1500
 	Tooltip:

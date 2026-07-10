@@ -16,7 +16,7 @@ gdicarrier:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cncsyrd, eye
 		Queue: Naval, RANaval
-		Description: actor-japancarrier.description
+		Description: actor_japancarrier.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:
@@ -70,7 +70,7 @@ CNCPT:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncsyrd
 		Queue: Naval, RANaval
-		Description: actor-pt.description
+		Description: actor_pt.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -131,7 +131,7 @@ CNCCA:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cncsyrd, hq.gdi
 		Queue: Naval, RANaval
-		Description: actor-ca.description
+		Description: actor_ca.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10

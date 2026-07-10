@@ -20,7 +20,7 @@ air_drone.ixian:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
 		Prerequisites: ~launchpad.ixian
-		Description: actor-air_drone.description
+		Description: actor_air_drone.description
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -201,7 +201,7 @@ drone.ixian:
 		BuildPaletteOrder: 20
 		Prerequisites: up_drone.ixian, ~high_tech_factory.ixian
 		Queue: Aircraft, RAAircraft
-		Description: actor-venom.description
+		Description: actor_venom.description
 	Aircraft:
 		TurnSpeed: 34
 		Speed: 170
@@ -281,7 +281,7 @@ drone_husk.ixian:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 10
 # 		Prerequisites: ~upixians_airdrone, outpost.ixian
-# 		Description: actor-air_drone.description
+# 		Description: actor_air_drone.description
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
@@ -417,7 +417,7 @@ bomber.ixian:
 		BuildPaletteOrder: 20
 		Prerequisites: up_bomber.ixian, ~launchpad.ixian, research_centre.ixian
 		Queue: Aircraft, RAAircraft
-		Description: actor-venom.description
+		Description: actor_venom.description
 	Aircraft:
 		TurnSpeed: 10
 		Speed: 145
@@ -483,7 +483,7 @@ resonance_drone.ixian:
 		BuildPaletteOrder: 20
 		Prerequisites: up_resonance_drone.ixian, ~high_tech_factory.ixian, research_centre.ixian
 		Queue: Aircraft, RAAircraft
-		Description: actor-venom.description
+		Description: actor_venom.description
 	Aircraft:
 		TurnSpeed: 25
 		Speed: 125
@@ -589,7 +589,7 @@ farasha.ixian:
 		Prerequisites: up_farasha.ixian, ~high_tech_factory.ixian, research_centre.ixian
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
-		Description: actor-farasha.description
+		Description: actor_farasha.description
 		IconPalette: ra2
 	Aircraft:
 		InitialFacing: 896
@@ -722,7 +722,7 @@ farasha_drone.ixian:
 	Tooltip:
 		Name: Alfayrus
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Hovers:
 	Aircraft:
 		InitialFacing: 896

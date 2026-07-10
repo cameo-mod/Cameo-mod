@@ -1,10 +1,10 @@
 ZRobotVoice:
 	DefaultVariant: .wav
 	Voices:
-		Select: zselected_00-01,zselected_00-02,zselected_00-03,zselected_00-04,,zselected_00-05,zselected_00-06
-		Attack: acknowledge_00-01,acknowledge_00-02,acknowledge_00-03,acknowledge_00-04,acknowledge_00-05,acknowledge_00-06,acknowledge_00-07,acknowledge_00-08,acknowledge_00-09, acknowledge_00-11,acknowledge_00-12
-		Action: acknowledge_00-01,acknowledge_00-02,acknowledge_00-03,acknowledge_00-04,acknowledge_00-05,acknowledge_00-06,acknowledge_00-07,acknowledge_00-08,acknowledge_00-09, acknowledge_00-11,acknowledge_00-12
-		Move: acknowledge_00-01,acknowledge_00-02,acknowledge_00-03,acknowledge_00-04,acknowledge_00-05,acknowledge_00-06,acknowledge_00-07,acknowledge_00-08,acknowledge_00-09, acknowledge_00-11,acknowledge_00-12
+		Select: zselected_00_01,zselected_00_02,zselected_00_03,zselected_00_04,,zselected_00_05,zselected_00_06
+		Attack: acknowledge_00_01,acknowledge_00_02,acknowledge_00_03,acknowledge_00_04,acknowledge_00_05,acknowledge_00_06,acknowledge_00_07,acknowledge_00_08,acknowledge_00_09, acknowledge_00_11,acknowledge_00_12
+		Action: acknowledge_00_01,acknowledge_00_02,acknowledge_00_03,acknowledge_00_04,acknowledge_00_05,acknowledge_00_06,acknowledge_00_07,acknowledge_00_08,acknowledge_00_09, acknowledge_00_11,acknowledge_00_12
+		Move: acknowledge_00_01,acknowledge_00_02,acknowledge_00_03,acknowledge_00_04,acknowledge_00_05,acknowledge_00_06,acknowledge_00_07,acknowledge_00_08,acknowledge_00_09, acknowledge_00_11,acknowledge_00_12
 		Die: zexplosion_00, zexplosion_01,zexplosion_02,zexplosion_03,zexplosion_04
 		Build:
 		Burned:
@@ -14,29 +14,29 @@ ZRobotVoice:
 ZGruntVoice:
 	Inherits: ZRobotVoice
 	Voices:
-		Select: zselected_00-01,zselected_00-02,zselected_00-03,zselected_00-04,,zselected_00-05,zselected_00-06,selected_grunt
+		Select: zselected_00_01,zselected_00_02,zselected_00_03,zselected_00_04,,zselected_00_05,zselected_00_06,selected_grunt
 
 ZLaserVoice:
 	Inherits: ZRobotVoice
 	Voices:
-		Select: zselected_00-01,zselected_00-02,zselected_00-03,zselected_00-04,,zselected_00-05,zselected_00-06,selected_laser
+		Select: zselected_00_01,zselected_00_02,zselected_00_03,zselected_00_04,,zselected_00_05,zselected_00_06,selected_laser
 
 ZPsycoVoice:
 	Inherits: ZRobotVoice
 	Voices:
-		Select: zselected_00-01,zselected_00-02,zselected_00-03,zselected_00-04,,zselected_00-05,zselected_00-06,selected_psycho
+		Select: zselected_00_01,zselected_00_02,zselected_00_03,zselected_00_04,,zselected_00_05,zselected_00_06,selected_psycho
 
 ZPyroVoice:
 	Inherits: ZRobotVoice
 	Voices:
-		Select: zselected_00-01,zselected_00-02,zselected_00-03,zselected_00-04,,zselected_00-05,zselected_00-06,selected_pyro
+		Select: zselected_00_01,zselected_00_02,zselected_00_03,zselected_00_04,,zselected_00_05,zselected_00_06,selected_pyro
 
 ZSniperVoice:
 	Inherits: ZRobotVoice
 	Voices:
-		Select: zselected_00-01,zselected_00-02,zselected_00-03,zselected_00-04,,zselected_00-05,zselected_00-06,selected_sniper
+		Select: zselected_00_01,zselected_00_02,zselected_00_03,zselected_00_04,,zselected_00_05,zselected_00_06,selected_sniper
 
 ZToughVoice:
 	Inherits: ZRobotVoice
 	Voices:
-		Select: zselected_00-01,zselected_00-02,zselected_00-03,zselected_00-04,,zselected_00-05,zselected_00-06,selected_tough
+		Select: zselected_00_01,zselected_00_02,zselected_00_03,zselected_00_04,,zselected_00_05,zselected_00_06,selected_tough

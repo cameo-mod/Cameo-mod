@@ -54,9 +54,9 @@ ts_gdi_upgradecenter:
 		EffectSequence: targeting
 		EffectPalette: ra2effect
 		Names:
-			1: power-ioncannon.name
+			1: power_ioncannon.name
 		Descriptions:
-			1: power-ioncannon.description
+			1: power_ioncannon.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeTextNotification: Ion Cannon ready.
@@ -88,10 +88,10 @@ ts_gdi_upgradecenter:
 	#	Condition: plugupgrade
 	#GrantConditionOnProduction@ic:
 	#	Condition: ioncannon
-	#	Actors: tsgtplug2
+	#	Actors: ts_gdi_upgrade_ioncannonuplink
 	#GrantConditionOnProduction@hs:
 	#	Condition: hunterseeker
-	#	Actors: tsgtplug3
+	#	Actors: ts_gdi_upgrade_seekercontrol
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -317,7 +317,7 @@ ts_gdi_empulsecannon:
 		Weapons:
 			1: SteelEmpBomb
 		Descriptions:
-			1: power-ioncannon.description
+			1: power_ioncannon.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeSound:

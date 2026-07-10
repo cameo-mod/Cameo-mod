@@ -136,34 +136,34 @@
 Player:
 	Inherits@aidifficulties: ^AIDifficulties
 	ModularBot@EasiestAI:
-		Name: bot-ai.easiest
+		Name: bot_ai.easiest
 		Type: easiest
 	ModularBot@VeryEasyAI:
-		Name: bot-ai.veryeasy
+		Name: bot_ai.veryeasy
 		Type: veryeasy
 	ModularBot@EasyAI:
-		Name: bot-ai.easy
+		Name: bot_ai.easy
 		Type: easy
 	ModularBot@MediumAI:
-		Name: bot-ai.medium
+		Name: bot_ai.medium
 		Type: medium
 	ModularBot@HardAI:
-		Name: bot-ai.hard
+		Name: bot_ai.hard
 		Type: hard
 	ModularBot@VeryHardAI:
-		Name: bot-ai.veryhard
+		Name: bot_ai.veryhard
 		Type: veryhard
 	ModularBot@BrutalAI:
-		Name: bot-ai.brutal
+		Name: bot_ai.brutal
 		Type: brutal
 	ModularBot@ChallengerAI:
-		Name: bot-ai.challenger
+		Name: bot_ai.challenger
 		Type: challenger
 	ModularBot@UnbeatableAI:
-		Name: bot-ai.unbeatable
+		Name: bot_ai.unbeatable
 		Type: unbeatable
 	ModularBot@CameoGodAI:
-		Name: bot-ai.cameogod
+		Name: bot_ai.cameogod
 		Type: cameogod
 	ProvidesPrerequisite@botplayer:
 		Prerequisite: botplayer
@@ -3683,7 +3683,7 @@ Player:
 			ts_nod_missilesilo: 9000
 			cabal_missilesilo: 9000
 			ts_gdi_upgradecenter: 9000
-			tsgtplug2: 9000
+			ts_gdi_upgrade_ioncannonuplink: 9000
 			mslo: 9000
 			iron: 9000
 			pdox: 9000
@@ -3802,7 +3802,7 @@ Player:
 			ts_gdi_upgradecenter: 1
 			ts_nod_tiberiumwastefacility: 1
 			tsgtdept: 1
-			tsgtsilo: 1
+			ts_gdi_silo: 1
 			#################### BuildingLimits TS Nod
 			ts_nod_tiberiumrefinery: 10
 			ts_nod_handof: 10
@@ -4299,7 +4299,7 @@ Player:
 			forgotten_church: 1
 			#################### BuildingFractions TS CABAL
 			cabal_refinery: 20
-			tsntlasrcabal: 5
+			cabal_plasmaturret: 5
 			cabal_cyborgfactory: 5
 			cabal_mechfactory: 10
 			cabal_helipad: 3
@@ -5165,7 +5165,7 @@ Player:
 			forgotten_promotion_scoopertank: 1
 			forgotten_promotion_mlrs: 1
 			forgotten_promotion_experimentalmammothtank: 1
-			forgotten_promotion_cobrahelicopter: 1
+			forgotten_promotion_cobracopter: 1
 			forgotten_promotion_flametank: 1
 			forgotten_promotion_locustbomber: 1
 			forgotten_promotion_chemicalmammothtank: 1
@@ -5181,7 +5181,7 @@ Player:
 			cabal_eliminator800: 10
 			cabal_eliminator1000: 1
 			cabal_coredefender: 1
-			tssgencabal: 1
+			cabal_mobilestealthgenerator: 1
 			cabal_hunterkillermk2: 3
 			cabal_hunterkillermk1: 3
 			cabal_laserspider: 5
@@ -6755,7 +6755,7 @@ Player:
 			forgotten_ghoststalker: 1
 			ts_gdi_amphibiousapc: 2
 			ts_nod_mobilestealthgenerator: 1
-			tssgencabal: 1
+			cabal_mobilestealthgenerator: 1
 			dtharv: 20
 			#################### UnitLimits ALLIESRA2
 			ra2cmin: 20

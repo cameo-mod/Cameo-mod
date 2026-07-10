@@ -16,7 +16,7 @@ phoenix.asian:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cgairf.asian, cgtech.asian
 		Queue: Aircraft, RAAircraft
-		Description: actor-aaphoenix.description
+		Description: actor_aaphoenix.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 12
@@ -105,7 +105,7 @@ pelican.asian:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgairf.asian
-		Description: actor-aapelican.description
+		Description: actor_aapelican.description
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -209,7 +209,7 @@ kami.asian:
 	Tooltip:
 		Name: Kamikaze
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Aircraft:
 		AltitudeVelocity: 160
 		InitialFacing: 768
@@ -304,7 +304,7 @@ kami_asdf.asian:
 	Tooltip:
 		Name: Airstrike Kamikaze
 	Buildable:
-		Description: template-airstrike-slave.description
+		Description: template_airstrike_slave.description
 	-CarrierSlave:
 	-AutoTarget:
 	-AmmoPool:

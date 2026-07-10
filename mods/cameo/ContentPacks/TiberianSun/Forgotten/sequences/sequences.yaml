@@ -117,36 +117,36 @@ forgotten_chemsprayinfantry:
 		Tick: 1000
 	muzzle:
 		Combine:
-			chem-n:
-				Filename: chem-n.shp
+			chem_n:
+				Filename: chem_n.shp
 				Length: *
 				Offset: 1,2
-			chem-nw:
-				Filename: chem-nw.shp
+			chem_nw:
+				Filename: chem_nw.shp
 				Length: *
 				Offset: 8,2
-			chem-w:
-				Filename: chem-w.shp
+			chem_w:
+				Filename: chem_w.shp
 				Length: *
 				Offset: 8,-3
-			chem-sw:
-				Filename: chem-sw.shp
+			chem_sw:
+				Filename: chem_sw.shp
 				Length: *
 				Offset: 7,-6
-			chem-s:
-				Filename: chem-s.shp
+			chem_s:
+				Filename: chem_s.shp
 				Length: *
 				Offset: 1,-6
-			chem-se:
-				Filename: chem-se.shp
+			chem_se:
+				Filename: chem_se.shp
 				Length: *
 				Offset: -5,-6
-			chem-e:
-				Filename: chem-e.shp
+			chem_e:
+				Filename: chem_e.shp
 				Length: *
 				Offset: -7,-3
-			chem-ne:
-				Filename: chem-ne.shp
+			chem_ne:
+				Filename: chem_ne.shp
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -407,11 +407,11 @@ forgotten_runnershotgal:
 	icon:
 		Filename: forgotten_runnershotgal_icon.png
 
-forgotten_mortarman:
+forgotten_mutantmortarman:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_mortarman.shp
+		Filename: forgotten_mutantmortarman.shp
 		Tick: 80
 	stand:
 		Start: 126
@@ -508,7 +508,7 @@ forgotten_mortarman:
 		Facings: 8
 		ShadowStart: 268
 	icon:
-		Filename: forgotten_mortarmanicon.shp
+		Filename: forgotten_mutantmortarman_icon.shp
 
 # tsweed:
 # 	idle: invisibleitem
@@ -519,11 +519,11 @@ forgotten_mortarman:
 
 forgotten_rattytank:
 	idle:
-		Filename: forgot_ltnk.png
+		Filename: forgotten_rattytank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_ltnk.png
+		Filename: forgotten_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -644,11 +644,11 @@ forgotten_ruiner:
 
 forgotten_warriortank:
 	idle:
-		Filename: forgot_mtnk.png
+		Filename: forgotten_warriortank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_mtnk.png
+		Filename: forgotten_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -660,11 +660,11 @@ forgotten_warriortank:
 
 forgotten_scoopertank:
 	idle:
-		Filename: forgot_htnk.png
+		Filename: forgotten_scoopertank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_htnk.png
+		Filename: forgotten_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -682,36 +682,36 @@ forgotten_flametank:
 	muzzle:
 		IgnoreWorldTint: true
 		Combine:
-			flame-n:
-				Filename: flame-n.shp
+			flame_n:
+				Filename: flame_n.shp
 				Length: *
 				Offset: 3,6
-			flame-nw:
-				Filename: flame-nw.shp
+			flame_nw:
+				Filename: flame_nw.shp
 				Length: *
 				Offset: 8,7
-			flame-w:
-				Filename: flame-w.shp
+			flame_w:
+				Filename: flame_w.shp
 				Length: *
 				Offset: 8,2
-			flame-sw:
-				Filename: flame-sw.shp
+			flame_sw:
+				Filename: flame_sw.shp
 				Length: *
 				Offset: 7,-2
-			flame-s:
-				Filename: flame-s.shp
+			flame_s:
+				Filename: flame_s.shp
 				Length: *
 				Offset: 3,-2
-			flame-se:
-				Filename: flame-se.shp
+			flame_se:
+				Filename: flame_se.shp
 				Length: *
 				Offset: -5,-2
-			flame-e:
-				Filename: flame-e.shp
+			flame_e:
+				Filename: flame_e.shp
 				Length: *
 				Offset: -7,2
-			flame-ne:
-				Filename: flame-ne.shp
+			flame_ne:
+				Filename: flame_ne.shp
 				Length: *
 				Offset: -7,8
 	icon:
@@ -1120,23 +1120,23 @@ forgotten_machineguntower:
 
 forgotten_brokenwarriortankturret:
 	Defaults:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 	idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	critical-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	turret:
-		Filename: forgot_mtnk.png
+		Filename: forgotten_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -1161,7 +1161,7 @@ forgotten_brokenrattytankturret:
 		Filename: forgotten_brokenrattytankturret.png
 		Start: 63
 	turret:
-		Filename: forgot_ltnk.png
+		Filename: forgotten_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1180,23 +1180,23 @@ forgotten_brokenrattytankturret:
 
 forgotten_brokenscoopertankturret:
 	Defaults:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 	idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	critical-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	turret:
-		Filename: forgot_htnk.png
+		Filename: forgotten_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -1210,15 +1210,15 @@ forgotten_brokenscoopertankturret:
 # tstacticalmissile:
 # 	Defaults:
 # 		ZOffset: 1023
-# 	up: mltimisl-placeholder # TODO: use voxel
-# 	down: mltimisl-placeholder # TODO: use voxel
+# 	up: mltimisl_placeholder # TODO: use voxel
+# 	down: mltimisl_placeholder # TODO: use voxel
 # 		Start: 1
 
 # tschemtacticalmissile:
 # 	Defaults:
 # 		ZOffset: 1023
-# 	up: mltimisl-placeholder # TODO: use voxel
-# 	down: mltimisl-placeholder # TODO: use voxel
+# 	up: mltimisl_placeholder # TODO: use voxel
+# 	down: mltimisl_placeholder # TODO: use voxel
 # 		Start: 1
 
 # invisibleplane:

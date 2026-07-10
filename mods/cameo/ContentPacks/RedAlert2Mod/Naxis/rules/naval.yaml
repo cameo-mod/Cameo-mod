@@ -16,7 +16,7 @@ tuboat.nax:
 		BuildPaletteOrder: 20
 		Prerequisites: ~naval.nax
 		Queue: Naval, RANaval
-		Description: actor-ra2sub.description
+		Description: actor_ra2sub.description
 	Mobile:
 		Speed: 78
 		TurnSpeed: 32
@@ -69,7 +69,7 @@ muboat.nax:
 		BuildPaletteOrder: 50
 		Prerequisites: ~naval.nax, tech.nax
 		Queue: Naval, RANaval
-		Description: actor-msub.description
+		Description: actor_msub.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24

@@ -200,8 +200,8 @@ Container@DISPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
-									Text: checkbox-flash-transients-container.label
-									TooltipText: checkbox-flash-transients-container.tooltip
+									Text: checkbox_flash_transients_container.label
+									TooltipText: checkbox_flash_transients_container.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
@@ -250,7 +250,7 @@ Container@DISPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
-									Text: ui-theme-label
+									Text: ui_theme_label
 								DropDownButton@UI_THEME_DROP_DOWN:
 									Y: 25
 									Width: PARENT_WIDTH
@@ -265,7 +265,7 @@ Container@DISPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 25
 									Font: Regular
-									Text: ui-theme-restart-hint
+									Text: ui_theme_restart_hint
 				Container@SPACER:
 				Background@VIDEO_SECTION_HEADER:
 					X: 5

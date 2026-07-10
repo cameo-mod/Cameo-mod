@@ -237,14 +237,14 @@ tsmonstermaker1:
 	SpawnActorOnDeath@monstermaker4:
 		RequiresCondition: monsterbirth
 		Probability: 10
-		Actor: tsmutantw
+		Actor: forgotten_mutant_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
 	SpawnActorOnDeath@monstermaker4b:
 		RequiresCondition: monsterbirth
 		Probability: 10
-		Actor: tsmutantw
+		Actor: forgotten_mutant_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
@@ -1059,7 +1059,7 @@ ts_nod_advancedpowerplant:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
 
-TSGTSILO:
+ts_gdi_silo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -1367,12 +1367,6 @@ ts_gdi_warfactory:
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ProductionBar@VEHICLEGDI:
-		ProductionType: Vehicle
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAVEHICLEGDI:
-		ProductionType: RAVehicle
-		RequiresCondition: classicproductionqueues
 	Power:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
@@ -1451,12 +1445,6 @@ ts_nod_warfactory:
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ProductionBar@VEHICLEGDI:
-		ProductionType: Vehicle
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAVEHICLEGDI:
-		ProductionType: RAVehicle
-		RequiresCondition: classicproductionqueues
 	Power:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
@@ -1624,12 +1612,6 @@ ts_gdi_helipad:
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ProductionBar@AIRCRAFTGDI:
-		ProductionType: Aircraft
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAAIRCRAFTGDI:
-		ProductionType: RAAircraft
-		RequiresCondition: classicproductionqueues
 	Power:
 		Amount: -10
 	ProvidesPrerequisite@buildingname:
@@ -1712,12 +1694,6 @@ ts_nod_helipad:
 		QueuedAudio: Training
 		OnHoldAudio: OnHold
 		CancelledAudio: Cancelled
-	ProductionBar@AIRCRAFTNOD:
-		ProductionType: Aircraft
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAAIRCRAFTNOD:
-		ProductionType: RAAircraft
-		RequiresCondition: classicproductionqueues
 	Power:
 		Amount: -10
 	ProvidesPrerequisite@buildingname:
@@ -1741,10 +1717,6 @@ cabal_helipad:
 		Produces: RAAircraft
 	ProductionQueue:
 		Type: Aircraft
-	ProductionBar@AIRCRAFTNOD:
-		ProductionType: Aircraft
-	ProductionBar@RAAIRCRAFTNOD:
-		ProductionType: RAAircraft
 	RenderSprites:
 		Image: ts_nod_helipad
 
@@ -2363,12 +2335,12 @@ ts_gdi_upgradecenter:
 	#	Condition: plugupgrade
 	#GrantConditionOnProduction@ic:
 	#	Condition: ioncannon
-	#	Actors: tsgtplug2
+	#	Actors: ts_gdi_upgrade_ioncannonuplink
 	#GrantConditionOnProduction@hs:
 	#	Condition: hunterseeker
-	#	Actors: tsgtplug3
+	#	Actors: ts_gdi_upgrade_seekercontrol
 
-tsgtplug2:
+ts_gdi_upgrade_ioncannonuplink:
 	Tooltip:
 		Name: Ion Cannon Uplink
 	Buildable:
@@ -2381,7 +2353,7 @@ tsgtplug2:
 	KillsSelf:
 		RemoveInstead: true
 
-tsgtplug3:
+ts_gdi_upgrade_seekercontrol:
 	Tooltip:
 		Name: Seeker Control
 	Buildable:
@@ -3201,7 +3173,7 @@ TSJUMPJET:
 		TargetTypes: Air, Aircraft
 		RequiresCondition: airborne && !chronobeamed
 	#SpawnActorOnDeath@airborne:
-	#	Actor: TSJUMPJET.Husk
+	#	Actor: ts_gdi_jumpjetinfantry_husk
 	#	RequiresCondition: airborne
 	DeathSounds@airborne:
 		RequiresCondition: airborne
@@ -3303,7 +3275,7 @@ ts_gdi_jumpjetinfantry:
 		Condition: hospitalheal
 	WithDecoration@REDCROSS:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: hospitalheal
 		BlinkInterval: 32
@@ -3315,7 +3287,7 @@ ts_gdi_jumpjetinfantry:
 		TransformSounds:
 		NoTransformNotification: BuildingCannotPlaceAudio
 
-TSJUMPJET.Husk:
+ts_gdi_jumpjetinfantry_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Jumpjet Infantry
@@ -4165,7 +4137,7 @@ forgotten_chemsprayinfantry:
 # 		Image: forgotten_tiberianfiend
 # 	AttackWander:
 
-# TSMUTANTW:
+# forgotten_mutant_wild:
 # 	Inherits: forgotten_mutant
 # 	-Buildable:
 # 	RenderSprites:
@@ -4256,7 +4228,7 @@ forgotten_chemsprayinfantry:
 # 	LineBuild:
 # 		Range: 10
 # 		NodeTypes: laserfencenode
-# 		SegmentType: tsnafnce
+# 		SegmentType: ts_nod_laserfence_segment
 # 		SegmentsRequireNode: true
 # 	LineBuildNode:
 # 		Types: laserfencenode
@@ -4281,7 +4253,7 @@ forgotten_chemsprayinfantry:
 # 		RequiresCondition: !build-incomplete && !disabled
 # 		Condition: active-posts
 
-tsnafnce:
+ts_nod_laserfence_segment:
 	Inherits: ^Wall
 	Tooltip:
 		Name: Laser Fence
@@ -6475,7 +6447,7 @@ cabal_coredefender:
 		RequiresCondition: ontiberium
 	WithDecoration@REDCROSS2:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: ontiberium
 		BlinkInterval: 32
@@ -7002,7 +6974,7 @@ TSAPACHE:
 		Delay: 25
 		Count: 1
 	SpawnActorOnDeath:
-		Actor: TSAPACHE.Husk
+		Actor: ts_nod_harpy_husk
 	WithIdleOverlay@ROTORAIR:
 		Offset: 42,0,300
 		Sequence: rotor
@@ -7021,7 +6993,7 @@ TSAPACHE:
 		PipCount: 4
 
 
-TSAPACHE.Husk:
+ts_nod_harpy_husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -7231,7 +7203,7 @@ forgotten_wasp_husk:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
 
-TSTRAN:
+forgotten_chinook:
 	Inherits: ^Helicopter
 	Inherits@Voxel: ^TSRenderVoxel
 	Valued:
@@ -7282,14 +7254,14 @@ TSTRAN:
 	Voiced:
 		VoiceSet: TSHeli
 	SpawnActorOnDeath:
-		Actor: TSTRAN.Husk
+		Actor: forgotten_chinook_husk
 	RenderVoxels:
 		Scale: 8.0
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 
-TSTRAN.Husk:
+forgotten_chinook_husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -7301,9 +7273,9 @@ TSTRAN.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tstran
+		Image: forgotten_chinook
 	RenderVoxels:
-		Image: tstran
+		Image: forgotten_chinook
 		Scale: 8.0
 
 TSCLOUD1:

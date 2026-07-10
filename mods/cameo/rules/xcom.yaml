@@ -70,7 +70,7 @@ xcomassaultranger:
 		BuildPaletteOrder: 1
 		Prerequisites: ~xcomhq
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 75
 	Health:
@@ -329,7 +329,7 @@ xcomheavygrenadier:
 		BuildPaletteOrder: 2
 		Prerequisites: ~xcomhq
 		Queue: Infantry, RAInfantry
-		Description: actor-ggi.description
+		Description: actor_ggi.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -498,7 +498,7 @@ xcomsharpshooter:
 		BuildPaletteOrder: 3
 		Prerequisites: ~xcomhq
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2snipe.description
+		Description: actor_ra2snipe.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -809,7 +809,7 @@ XCOMHQ:
 		OneShot: true
 		ChargeInterval: 10500
 		Names:
-			1: power-gps.name
+			1: power_gps.name
 		Descriptions:
 			1: power.gps-description
 		RevealDelay: 375
@@ -823,9 +823,9 @@ XCOMHQ:
 		Icons:
 			1: gps
 		Names:
-			1: power-ra2spysat.name
+			1: power_ra2spysat.name
 		Descriptions:
-			1: power-ra2spysat.description
+			1: power_ra2spysat.description
 		Actors: camera.gpssat
 		Type: SpySatellite
 		ChargeInterval: 4500
@@ -875,7 +875,7 @@ medium_gun_turret.xcom:
 		Prerequisites: ~xcom_defense_matrix
 		BuildPaletteOrder: 550
 		BuildLimit: 2
-		Description: template-anti-vehicle-defense.description
+		Description: template_anti_vehicle_defense.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 2000
@@ -955,7 +955,7 @@ large_gun_turret.xcom:
 		Prerequisites: ~xcom_quad_turrets
 		BuildPaletteOrder: 610
 		BuildLimit: 2
-		Description: actor-large_gun_turret.description
+		Description: actor_large_gun_turret.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 3000
@@ -1034,7 +1034,7 @@ xcom_power_generator:
 		BuildPaletteOrder: 1
 		Prerequisites: ~xcomhq
 		Queue: Building, RABuilding
-		Description: upgrade-wind_trap.description
+		Description: upgrade_wind_trap.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 600
@@ -1049,7 +1049,7 @@ xcom_mining_bay:
 		BuildPaletteOrder: 2
 		Prerequisites: ~xcom_power_generator
 		Queue: Building, RABuilding
-		Description: upgrade-spice_sifter.description
+		Description: upgrade_spice_sifter.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 1000
@@ -1064,7 +1064,7 @@ xcom_barracks:
 		BuildPaletteOrder: 3
 		Prerequisites: ~xcom_power_generator
 		Queue: Building, RABuilding
-		Description: upgrade-spice_sifter.description
+		Description: upgrade_spice_sifter.description
 	Valued:
 		Cost: 500
 	RenderSprites:
@@ -1269,7 +1269,7 @@ xcom_builder:
 		Queue: Vehicle
 		BuildPaletteOrder: 100
 		Prerequisites: ~xcomhq
-		Description: template-mcv.description
+		Description: template_mcv.description
 	Valued:
 		Cost: 1000
 	Tooltip:

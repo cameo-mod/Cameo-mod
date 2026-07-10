@@ -58,11 +58,11 @@ ts_nod_elitecadre:
 	icon:
 		Filename: ts_nod_elitecadre_icon.shp
 
-ts_nod_shadteam:
+ts_nod_shadowteam:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: ts_nod_shadteam.shp
+		Filename: ts_nod_shadowteam.shp
 		Tick: 80
 	stand:
 		Facings: 8
@@ -72,14 +72,14 @@ ts_nod_shadteam:
 	prone-shoot:
 		IgnoreWorldTint: true
 	fly:
-		Filename: ts_nod_shadteamair.shp
+		Filename: ts_nod_shadowteam_air.shp
 		Facings: 16
 	shadow:
-		Filename: parach-shadow.shp
+		Filename: parach_shadow.shp
 		Length: 1
 		Facings: 1
 	icon:
-		Filename: ts_nod_shadteamicon.shp
+		Filename: ts_nod_shadowteam_icon.shp
 		Offset: 0, 0
 
 ts_nod_toxintrooper:
@@ -171,7 +171,7 @@ ts_nod_laserfence:
 		Filename: ts_nod_laserfence_icon.shp
 		Offset: 0, 0
 
-# tsnafnce:
+# ts_nod_laserfence_segment:
 # 	Defaults: tsntfence
 # 	idle:
 # 		Length: 1

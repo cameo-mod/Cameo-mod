@@ -16,7 +16,7 @@ zep.nax2:
 		BuildPaletteOrder: 20
 		Prerequisites: ~weap.nax2, airfield.nax2, radar.nax2
 		Queue: Aircraft, RAAircraft, Vehicle
-		Description: actor-shad.description
+		Description: actor_shad.description
 	Aircraft:
 		TurnSpeed: 35
 		Speed: 35
@@ -123,7 +123,7 @@ bbomb.nax2:
 		BuildPaletteOrder: 100
 		Prerequisites: ~airfield.nax2, tech.nax2
 		Queue: Aircraft, RAAircraft
-		Description: actor-nax_piercer.description
+		Description: actor_nax_piercer.description
 	Health:
 		HP: 37500
 	ChangesHealth@SelfHealing:
@@ -229,7 +229,7 @@ haunebu.nax2:
 		BuildPaletteOrder: 120
 		Prerequisites: ~airfield.nax2
 		Queue: Aircraft, RAAircraft
-		Description: actor-nax_haunebu.description
+		Description: actor_nax_haunebu.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 66
@@ -314,7 +314,7 @@ haunebu2.nax2:
 		BuildPaletteOrder: 120
 		Prerequisites: ~airfield.nax2, tech.nax2
 		Queue: Aircraft, RAAircraft
-		Description: actor-nax_haunebu2.description
+		Description: actor_nax_haunebu2.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 55
@@ -402,7 +402,7 @@ piercer.nax2:
 		BuildPaletteOrder: 100
 		Prerequisites: ~airfield.nax2, tech.nax2
 		Queue: Aircraft, RAAircraft
-		Description: actor-nax_piercer.description
+		Description: actor_nax_piercer.description
 	Health:
 		HP: 37500
 	ChangesHealth@SelfHealing:
@@ -488,7 +488,7 @@ dieglocke.nax2:
 		Prerequisites: ~airfield.nax2, tech.nax2
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
-		Description: actor-nax_dieglocke.description
+		Description: actor_nax_dieglocke.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 40

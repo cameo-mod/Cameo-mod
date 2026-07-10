@@ -1,0 +1,26 @@
+# rename_map_tsshared.yaml — curated (DESIGN.md §1)
+# TS Shared triage: strays in rules/tiberiansun.yaml whose prerequisites
+# prove single-faction ownership get faction names; genuinely shared
+# actors (TSE1, critters, OILB.TS, ...) keep their ids for now and move
+# to ContentPacks/TiberianSun/Shared unrenamed.
+actors:
+	tsntlasrcabal: cabal_plasmaturret
+	tssgencabal: cabal_mobilestealthgenerator
+	tscheavyspider_backup: cabal_heavyspider_backup
+	tsart2cabal_backup: cabal_artilleryspider_backup
+	tsttnkcabal_backup: cabal_tarantula_backup
+	TSMUTANTW: forgotten_mutant_wild
+	TSTRAN: forgotten_chinook
+	TSTRAN.Husk: forgotten_chinook_husk
+	TSGTSILO: ts_gdi_silo
+	tsgtplug2: ts_gdi_upgrade_ioncannonuplink
+	tsgtplug3: ts_gdi_upgrade_seekercontrol
+	uptsdummy1: ts_gdi_promotion_dummy1
+	uptsdummy2: ts_gdi_promotion_dummy2
+	uptsdummy3: ts_gdi_promotion_dummy3
+	uptsdummy4: ts_gdi_promotion_dummy4
+	TSJUMPJET.Husk: ts_gdi_jumpjetinfantry_husk
+	TSAPACHE.Husk: ts_nod_harpy_husk
+	tsnafnce: ts_nod_laserfence_segment
+	team_upgrade.up_modernfirecontrolsystems: ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor
+	team_upgrade.up_willofkane: ts_nod_upgrade_willofkane_proxy_actor

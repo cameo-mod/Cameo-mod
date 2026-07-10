@@ -1,29 +1,29 @@
 World:
 	FactionCA@RA2America:
-		Name: Allies RA2 #faction-ra2-allies.name
+		Name: Allies RA2 #faction_ra2_allies.name
 		InternalName: ra2america
 		Game: Red Alert 2
 		Side: Red Alert 2
-		Description: faction-ra2-allies.description
+		Description: faction_ra2_allies.description
 	FactionCA@ra2russia:
-		Name: Soviets RA2 #faction-ra2-soviets.name
+		Name: Soviets RA2 #faction_ra2_soviets.name
 		InternalName: ra2russia
 		Game: Red Alert 2
 		Side: Red Alert 2
-		Description: faction-ra2-soviets.description
+		Description: faction_ra2_soviets.description
 	FactionCA@yuri:
-		Name: Yuri #faction-ra2-yuri.name
+		Name: Yuri #faction_ra2_yuri.name
 		InternalName: yuri
 		Game: Red Alert 2
 		Side: Red Alert 2
-		Description: faction-ra2-yuri.description
+		Description: faction_ra2_yuri.description
 	FactionCA@Randomra2:
-		Name: Random RA2 #faction-ra2-random.name
+		Name: Random RA2 #faction_ra2_random.name
 		InternalName: Randomra2
 		RandomFactionMembers: ra2america, ra2russia, yuri
 		Game: Red Alert 2
 		Side: Random
-		Description: faction-ra2-random.description
+		Description: faction_ra2_random.description
 	####################################################################################################
 	#		MPSTARTUNITS
 	####################################################################################################
@@ -140,7 +140,7 @@ Player:
 #######################################
 ^RA2Parachutes:
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: ra2parach
 		Sequence: idle
@@ -534,7 +534,7 @@ OILB.RA2:
 		Name: RA2 Oil Derrick
 	Buildable:
 		Prerequisites: ~ra2oilderrick, ra2tek, derricklimit
-		Description: actor-oilb.description
+		Description: actor_oilb.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -637,7 +637,7 @@ ra2gapowr:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~ra2gacnst
 	Building:
 		Footprint: xx xx
@@ -734,7 +734,7 @@ ra2gaairc:
 		BuildDuration: 750
 		BuildDurationModifier: 100
 		Prerequisites: ~ra2gacnst, ra2garefn
-		Description: actor-gaairc.description
+		Description: actor_gaairc.description
 	Valued:
 		Cost: 2000
 	Power:
@@ -764,7 +764,7 @@ ra2gaairc:
 		Names:
 			1: Airborne
 		Descriptions:
-			1: power-paratroopers.description
+			1: power_paratroopers.description
 		DropItems:
 			1: RA2E1,YRGGI,RA2E1,YRGGI,RA2E1,RA2E1,YRGGI,RA2E1,YRGGI,RA2E1,RA2E1,YRGGI,RA2E1,YRGGI,RA2E1
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
@@ -826,7 +826,7 @@ ra2gaorep:
 		BuildPaletteOrder: 120
 		Prerequisites: ~ra2gacnst, ra2gatech
 		Queue: Building, RABuilding
-		Description: actor-gaorep.description
+		Description: actor_gaorep.description
 		BuildLimit: 1
 	Building:
 		Footprint: xxx xxx
@@ -894,9 +894,9 @@ ra2gatech:
 			1: forceshield
 		ChargeInterval: 4500
 		Names:
-			1: power-forceshield.name
+			1: power_forceshield.name
 		Descriptions:
-			1: power-forceshield.description
+			1: power_forceshield.description
 		Durations:
 			1: 375
 		Conditions:
@@ -931,7 +931,7 @@ ra2gaspysat:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Prerequisites: ~ra2gacnst, ra2gatech
-		Description: actor-gaspysat.description
+		Description: actor_gaspysat.description
 	Valued:
 		Cost: 2000
 	Health:
@@ -952,9 +952,9 @@ ra2gaspysat:
 		Icons:
 			1: gps
 		Names:
-			1: power-ra2spysat.name
+			1: power_ra2spysat.name
 		Descriptions:
-			1: power-ra2spysat.description
+			1: power_ra2spysat.description
 		Actors: camera.gpssat
 		Type: SpySatellite
 		ChargeInterval: 4500
@@ -994,7 +994,7 @@ ra2gagap:
 		BuildDurationModifier: 100
 		Queue: Defence, RADefence
 		Prerequisites: ~ra2gacnst, ra2gatech
-		Description: actor-gap.description
+		Description: actor_gap.description
 	Selectable:
 		Bounds: 1024, 2048, 0, -512
 	SelectionDecorations:
@@ -1046,7 +1046,7 @@ ra2gaweat:
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Buildable:
 		Prerequisites: ~ra2gacnst, ra2gatech, !weatherstorm, ~techlevel.superweapons
-		Description: actor-gaweat.description
+		Description: actor_gaweat.description
 	Tooltip:
 		Name: Weather Control Center
 	Building:
@@ -1066,9 +1066,9 @@ ra2gaweat:
 		ActivationDelay: 50
 		ActivationSequence:
 		Names:
-			1: power-lightningstorm.name
+			1: power_lightningstorm.name
 		Descriptions:
-			1: power-lightningstorm.description
+			1: power_lightningstorm.description
 		Weapons:
 			1: LightningStorm
 		BeginChargeSpeechNotification: IonCannonCharging
@@ -1108,7 +1108,7 @@ ra2gacsph:
 	Inherits@sell: ^RA2ASpawnActorsOnSell
 	Buildable:
 		Prerequisites: ~ra2gacnst, ra2gatech, ~techlevel.superweapons
-		Description: actor-pdox.description
+		Description: actor_pdox.description
 	Tooltip:
 		Name: Chronosphere
 	Building:
@@ -1124,9 +1124,9 @@ ra2gacsph:
 			1: icon2
 		ChargeInterval: 4500
 		Names:
-			1: power-chronoshift.name
+			1: power_chronoshift.name
 		Descriptions:
-			1: power-chronoshift.description
+			1: power_chronoshift.description
 		Dimensions:
 			1: 5,5
 		Footprints:
@@ -1162,11 +1162,11 @@ ra2gacsph:
 		Cursor: ability
 		ChargeInterval: 6000
 		Names:
-			1: power-chronoshift.name
+			1: power_chronoshift.name
 		ActivationDelay: 25
 		ActivationSequence:
 		Descriptions:
-			1: power-chronoshift.description
+			1: power_chronoshift.description
 		Weapons:
 			1: RA2ChronoAI
 		CameraActor: camera.placeholderhack
@@ -1205,7 +1205,7 @@ ra2gapill:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2gacnst, ra2gapile
-		Description: actor-pbox.description
+		Description: actor_pbox.description
 	Valued:
 		Cost: 500
 	Health:
@@ -1254,7 +1254,7 @@ ra2nasam:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2gacnst, ra2gaairc
-		Description: actor-sam.description
+		Description: actor_sam.description
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -1314,7 +1314,7 @@ ra2atesla:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Prerequisites: ~ra2gacnst, ra2gatech
-		Description: actor-atesla.description
+		Description: actor_atesla.description
 	Valued:
 		Cost: 2200
 	Tooltip:
@@ -1412,7 +1412,7 @@ ra2gtgcan:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
 		Prerequisites: ~ra2gacnst, ra2gatech
-		Description: actor-gtgcan.description
+		Description: actor_gtgcan.description
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -1601,7 +1601,7 @@ ra2napowr:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~ra2nacnst
 	Building:
 		Footprint: xxx xxx
@@ -1636,7 +1636,7 @@ ra2nanrct:
 		Prerequisites: ~ra2nacnst, ra2natech
 		BuildPaletteOrder: 200
 		Queue: Building, RABuilding
-		Description: actor-nanrct.description
+		Description: actor_nanrct.description
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -1754,9 +1754,9 @@ ra2naradr:
 			1: icon
 		ChargeInterval: 4500
 		Names:
-			1: power-ra2spyplane.name
+			1: power_ra2spyplane.name
 		Descriptions:
-			1: power-ra2spyplane.description
+			1: power_ra2spyplane.description
 		SelectTargetSpeechNotification: SelectTarget
 		EndChargeSpeechNotification: SpyPlaneReady
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -1828,7 +1828,7 @@ ra2natech:
 		Names:
 			1: Airborne
 		Descriptions:
-			1: power-paratroopers.description
+			1: power_paratroopers.description
 		DropItems:
 			1: RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
@@ -1933,7 +1933,7 @@ ra2namisl:
 		BuildPaletteOrder: 100
 		Prerequisites: ~ra2nacnst, ra2natech, !ra2nuke, ~techlevel.superweapons
 		Queue: Defence, RADefence
-		Description: actor-namisl.description
+		Description: actor_namisl.description
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -1950,9 +1950,9 @@ ra2namisl:
 		Cursor: nuke
 		ChargeInterval: 10500
 		Names:
-			1: power-ra2nuke.name
+			1: power_ra2nuke.name
 		Descriptions:
-			1: power-ra2nuke.description
+			1: power_ra2nuke.description
 		EndChargeSound: snukread.wav
 		EndChargeSpeechNotification: NuclearWeaponAvailable
 		EndChargeTextNotification: Nuclear Missile ready.
@@ -1998,7 +1998,7 @@ ra2nairon:
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Buildable:
 		Prerequisites: ~ra2nacnst, ra2natech, ~techlevel.superweapons
-		Description: actor-iron.description
+		Description: actor_iron.description
 	Tooltip:
 		Name: Iron Curtain
 	Building:
@@ -2065,7 +2065,7 @@ yrngbnkr:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2nacnst, ra2nahand
-		Description: actor-nabnkr.description
+		Description: actor_nabnkr.description
 	Valued:
 		Cost: 800
 	Health:
@@ -2114,7 +2114,7 @@ ra2nalasr:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2nacnst, ra2nahand
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -2166,7 +2166,7 @@ ra2naflak:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2nacnst, ra2naradr
-		Description: actor-agun.description
+		Description: actor_agun.description
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -2220,7 +2220,7 @@ ra2tesla:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Prerequisites: ~ra2nacnst, ra2natech
-		Description: actor-ra2tesla.description
+		Description: actor_ra2tesla.description
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -2441,7 +2441,7 @@ yryapowr:
 		BuildPaletteOrder: 10
 		Prerequisites: ~yrnacnst
 		Queue: Building, RABuilding
-		Description: actor-yapowr.description
+		Description: actor_yapowr.description
 	Building:
 		Footprint: xX xx __
 		Dimensions: 2,3
@@ -2566,7 +2566,7 @@ yryarefn:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Prerequisites: ~yrnacnst, yryapowr
-		Description: actor-yarefn.description
+		Description: actor_yarefn.description
 	Building:
 		Footprint: xx x+
 		Dimensions: 2,2
@@ -2678,7 +2678,7 @@ ra2napsis:
 		Name: Psychic Sensor
 	Buildable:
 		Prerequisites: ~yrnacnst, yryarefn
-		Description: actor-napsis.description
+		Description: actor_napsis.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -2697,9 +2697,9 @@ ra2napsis:
 			1: ra2psirev
 		ChargeInterval: 4500
 		Names:
-			1: power-ra2psireveal.name
+			1: power_ra2psireveal.name
 		Descriptions:
-			1: power-ra2psireveal.description
+			1: power_ra2psireveal.description
 		SelectTargetSpeechNotification: SelectTarget
 		InsufficientPowerSpeechNotification: InsufficientPower
 		EndChargeSpeechNotification: SpyPlaneReady
@@ -2776,7 +2776,7 @@ yrygcomd:
 		BuildLimit: 1
 		BuildPaletteOrder: 150
 		Prerequisites: ~yrnacnst, yrygtech, derricklimit
-		Description: template-airfield.description
+		Description: template_airfield.description
 	Building:
 		Footprint: =xx= xxxx xxxx
 		Dimensions: 4,3
@@ -2863,7 +2863,7 @@ yrygppet:
 		Name: Psychic Dominator
 	Buildable:
 		Prerequisites: ~yrnacnst, yrygtech, !psydom, ~techlevel.superweapons
-		Description: actor-yappet.description
+		Description: actor_yappet.description
 	Building:
 		Footprint: =x= xxx xxx
 		Dimensions: 3,3
@@ -2881,9 +2881,9 @@ yrygppet:
 		ActivationDelay: 25
 		ActivationSequence:
 		Names:
-			1: power-psychicdominator.name
+			1: power_psychicdominator.name
 		Descriptions:
-			1: power-psychicdominator.description
+			1: power_psychicdominator.description
 		EndChargeSpeechNotification: NuclearWeaponAvailable
 		EndChargeTextNotification: Psychic Dominator ready.
 		EndChargeSound: spsyopen.wav
@@ -2941,7 +2941,7 @@ yryggntc:
 		Name: Genetic Mutator
 	Buildable:
 		Prerequisites: ~yrnacnst, yrygtech, ~techlevel.superweapons
-		Description: actor-yagntc.description
+		Description: actor_yagntc.description
 	Building:
 		Footprint: =x= xxx xxx
 		Dimensions: 3,3
@@ -2962,11 +2962,11 @@ yryggntc:
 		ActivationDelay: 10
 		ActivationSequence:
 		Names:
-			1: power-mutate.name
+			1: power_mutate.name
 		Weapons:
 			1: RA2Mutate
 		Descriptions:
-			1: power-mutate.description
+			1: power_mutate.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeSound: sgenopen.wav
@@ -3003,7 +3003,7 @@ yrngtbnk:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~yrnacnst, yrygweap
-		Description: actor-natbnk.description
+		Description: actor_natbnk.description
 	Valued:
 		Cost: 1000
 	Health:
@@ -3072,7 +3072,7 @@ yrygggun:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~yrnacnst, yryabrck
-		Description: actor-yaggun.description
+		Description: actor_yaggun.description
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -3174,7 +3174,7 @@ yrygpsyt:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Prerequisites: ~yrnacnst, yrygtech
-		Description: actor-yapsyt.description
+		Description: actor_yapsyt.description
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -3276,7 +3276,7 @@ RA2ADOG:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
 		Prerequisites: ~ra2gapile
-		Description: actor-dog.description
+		Description: actor_dog.description
 	Valued:
 		Cost: 200
 	Tooltip:
@@ -3392,7 +3392,7 @@ RA2E1:
 		BuildPaletteOrder: 10
 		Prerequisites: ~ra2gapile
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2e1.description
+		Description: actor_ra2e1.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -3511,7 +3511,7 @@ YRGGI:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2gapile
 		Queue: Infantry, RAInfantry
-		Description: actor-ggi.description
+		Description: actor_ggi.description
 	Mobile:
 		Speed: 45
 	Health:
@@ -3652,7 +3652,7 @@ RA2CLEG:
 		BuildPaletteOrder: 140
 		Prerequisites: ~ra2gapile, ra2gatech
 		Queue: Infantry, RAInfantry
-		Description: actor-cleg.description
+		Description: actor_cleg.description
 	Mobile:
 		Speed: 35
 	Health:
@@ -3743,7 +3743,7 @@ RA2SNIPE:
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2gapile, ra2gatech
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2snipe.description
+		Description: actor_ra2snipe.description
 	Mobile:
 		Speed: 56
 	Health:
@@ -3834,7 +3834,7 @@ RA2TANY:
 		BuildPaletteOrder: 120
 		Prerequisites: ~ra2gapile, ra2gatech
 		BuildLimit: 1
-		Description: template-commando.description
+		Description: template_commando.description
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -3922,7 +3922,7 @@ RA2SEAL:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
 		Prerequisites: ~ra2gaairc
-		Description: actor-seal.description
+		Description: actor_seal.description
 	Armament@PRIMARY:
 		Weapon: RA2MP5
 		RequiresCondition: !rank-elite
@@ -3984,7 +3984,7 @@ RA2SPY:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 90
 		Prerequisites: ~ra2gaairc
-		Description: actor-ra2spy.description
+		Description: actor_ra2spy.description
 	Valued:
 		Cost: 500
 	-Tooltip:
@@ -4038,7 +4038,7 @@ RA2DOG:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
 		Prerequisites: ~ra2nahand
-		Description: actor-dog.description
+		Description: actor_dog.description
 	Valued:
 		Cost: 200
 	Tooltip:
@@ -4152,7 +4152,7 @@ RA2E2:
 		BuildPaletteOrder: 10
 		Prerequisites: ~ra2nahand
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 57
 	Health:
@@ -4224,7 +4224,7 @@ RA2flakt:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2nahand
 		Queue: Infantry, RAInfantry
-		Description: actor-flakt.description
+		Description: actor_flakt.description
 	Mobile:
 		Speed: 45
 	Health:
@@ -4312,7 +4312,7 @@ RA2IVAN:
 		BuildPaletteOrder: 90
 		Prerequisites: ~ra2naradr
 		Queue: Infantry, RAInfantry
-		Description: actor-ivan.description
+		Description: actor_ivan.description
 	Mobile:
 		Speed: 100
 	Health:
@@ -4376,7 +4376,7 @@ ra2shk:
 		Prerequisites: ~ra2naradr
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Description: actor-shk.description
+		Description: actor_shk.description
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -4506,7 +4506,7 @@ RA2DESO:
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2nahand, ra2natech
 		Queue: Infantry, RAInfantry
-		Description: actor-deso.description
+		Description: actor_deso.description
 	Mobile:
 		Speed: 59
 	Health:
@@ -4585,7 +4585,7 @@ YRBORIS:
 		BuildPaletteOrder: 120
 		Prerequisites: ~ra2nahand, ra2natech
 		BuildLimit: 1
-		Description: actor-boris.description
+		Description: actor_boris.description
 	Valued:
 		Cost: 3000
 	Tooltip:
@@ -4677,7 +4677,7 @@ YRINIT:
 		BuildPaletteOrder: 10
 		Prerequisites: ~yryabrck
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 66
 	Health:
@@ -4747,7 +4747,7 @@ YRBRUTE:
 		BuildPaletteOrder: 20
 		Prerequisites: ~yryabrck
 		Queue: Infantry, RAInfantry
-		Description: actor-brute.description
+		Description: actor_brute.description
 	Mobile:
 		Speed: 80
 	Health:
@@ -4917,7 +4917,7 @@ YRVIRUS:
 		BuildPaletteOrder: 50
 		Prerequisites: ~ra2napsis
 		Queue: Infantry, RAInfantry
-		Description: actor-virus.description
+		Description: actor_virus.description
 	Mobile:
 		Speed: 52
 	Health:
@@ -4997,7 +4997,7 @@ YRYURI:
 		BuildPaletteOrder: 45
 		Prerequisites: ~ra2napsis
 		Queue: Infantry, RAInfantry
-		Description: actor-yuri.description
+		Description: actor_yuri.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -5091,13 +5091,13 @@ YRYURIX:
 	Valued:
 		Cost: 4000
 	Tooltip:
-		Name: actor-yurix.name
+		Name: actor_yurix.name
 	Buildable:
 		BuildPaletteOrder: 150
 		Prerequisites: ~yryabrck, yrygcomd
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		Description: actor-yurix.description
+		Description: actor_yurix.description
 	Mobile:
 		Speed: 100
 		Locomotor: hover
@@ -5259,7 +5259,7 @@ YRGTRP:
 		Prerequisites: ~yryabrck, yrygtech
 		Queue: Infantry, RAInfantry
 		IconPalette: ra2cameo
-		Description: actor-gtrp.description
+		Description: actor_gtrp.description
 	Mobile:
 		Speed: 45
 	Health:
@@ -5341,7 +5341,7 @@ yrbiot:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
 		Prerequisites: ~yryabrck, ra2yclon
-		Description: actor-biot.description
+		Description: actor_biot.description
 	Valued:
 		Cost: 400
 	Tooltip:
@@ -5467,7 +5467,7 @@ RA2CMIN:
 	Buildable:
 		Prerequisites: ~ra2garefn
 		Queue: Vehicle, RAVehicle
-		Description: actor-cmin.description
+		Description: actor_cmin.description
 	WithHarvestAnimation:
 	WithDockingAnimation:
 	DockClientManager:
@@ -5513,7 +5513,7 @@ RA2MTNK:
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2gaweap
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 95
@@ -5584,7 +5584,7 @@ RA2TNKD:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2gaairc
 		Queue: Vehicle, RAVehicle
-		Description: actor-ra2tnkd.description
+		Description: actor_ra2tnkd.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 65
@@ -5646,13 +5646,13 @@ RA2FV:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: actor-fv.name
+		Name: actor_fv.name
 		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~ra2gaweap
 		Queue: Vehicle, RAVehicle
-		Description: actor-fv.description
+		Description: actor_fv.description
 	Mobile:
 		Locomotor: wheeled
 		Speed: 150
@@ -6047,7 +6047,7 @@ RA2SREF:
 		BuildPaletteOrder: 80
 		Prerequisites: ~ra2gaweap, ra2gatech
 		Queue: Vehicle, RAVehicle
-		Description: actor-sref.description
+		Description: actor_sref.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
@@ -6137,7 +6137,7 @@ RA2MGTK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2gaweap, ra2gatech, ~!ra2_allies_upgrade_heavymiragetank
 		Queue: Vehicle, RAVehicle
-		Description: actor-mgtk.description
+		Description: actor_mgtk.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 90
@@ -6227,7 +6227,7 @@ RA2HMGTK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2gaweap, ~ra2_allies_upgrade_heavymiragetank, ra2gatech
 		Queue: Vehicle, RAVehicle
-		Description: actor-mgtk.description
+		Description: actor_mgtk.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -6316,7 +6316,7 @@ yrbfrt:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2gaweap, ra2gatech
 		Queue: Vehicle, RAVehicle
-		Description: template-opentopped.description
+		Description: template_opentopped.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -6453,7 +6453,7 @@ RA2HTNK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2naweap
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -6581,7 +6581,7 @@ RA2HTK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2naweap
 		Queue: Vehicle, RAVehicle
-		Description: actor-htk.description
+		Description: actor_htk.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 95
@@ -6667,7 +6667,7 @@ RA2APOC:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2naweap, ra2natech
 		Queue: Vehicle, RAVehicle
-		Description: actor-htnk.description
+		Description: actor_htnk.description
 	Mobile:
 		Speed: 55
 		TurnSpeed: 11
@@ -6804,7 +6804,7 @@ RA2V3:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
 		Prerequisites: ~ra2naradr
-		Description: actor-v3.description
+		Description: actor_v3.description
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -6968,7 +6968,7 @@ RA2TTNK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2naradr
 		Queue: Vehicle, RAVehicle
-		Description: actor-ttnk.description
+		Description: actor_ttnk.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -7035,7 +7035,7 @@ RA2HARV:
 	Buildable:
 		Prerequisites: ~ra2naweap
 		Queue: Vehicle, RAVehicle
-		Description: actor-ra2harv.description
+		Description: actor_ra2harv.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -7092,7 +7092,7 @@ ra2dron:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2naradr
 		Queue: Vehicle, RAVehicle
-		Description: actor-dron.description
+		Description: actor_dron.description
 	Mobile:
 		Speed: 200
 		TurnSpeed: 200
@@ -7213,7 +7213,7 @@ YRSMIN:
 		BuildDurationModifier: 100
 		Prerequisites: ~yrygweap
 		Queue: Vehicle, RAVehicle
-		Description: actor-smin.description
+		Description: actor_smin.description
 	Selectable:
 		Priority: 4
 		DecorationBounds: 1536, 1536
@@ -7313,7 +7313,7 @@ YRYTNK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~yrygweap
 		Queue: Vehicle, RAVehicle
-		Description: actor-ytnk.description
+		Description: actor_ytnk.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 18
@@ -7400,7 +7400,7 @@ YRLTNK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~yrygweap
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 105
@@ -7495,7 +7495,7 @@ YRTELE:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2napsis
 		Queue: Vehicle, RAVehicle
-		Description: actor-tele.description
+		Description: actor_tele.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 65
@@ -7578,7 +7578,7 @@ YRCAOS:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ra2napsis
 		Queue: Vehicle, RAVehicle
-		Description: actor-caos.description
+		Description: actor_caos.description
 	Mobile:
 		Speed: 140
 		TurnSpeed: 28
@@ -7648,7 +7648,7 @@ YRMIND:
 		BuildPaletteOrder: 60
 		Prerequisites: ~yrygweap, yrygtech
 		Queue: Vehicle, RAVehicle
-		Description: actor-mind.description
+		Description: actor_mind.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 120
@@ -7858,14 +7858,14 @@ ra2sqd:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: actor-sqd.name
+		Name: actor_sqd.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~yrygyard
 		Queue: Naval, RANaval
-		Description: actor-sqd.description
+		Description: actor_sqd.description
 	Mobile:
 		Speed: 120
 		TurnSpeed: 48
@@ -7936,14 +7936,14 @@ ra2dlph:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: actor-dlph.name
+		Name: actor_dlph.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~ra2gayard, ra2gatech
 		Queue: Naval, RANaval
-		Description: actor-dlph.description
+		Description: actor_dlph.description
 	Mobile:
 		TurnSpeed: 48
 		Speed: 120
@@ -7992,14 +7992,14 @@ ra2dest:
 	Valued:
 		Cost: 1700
 	Tooltip:
-		Name: actor-dest.name
+		Name: actor_dest.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~ra2gayard
 		Queue: Naval, RANaval
-		Description: actor-dest.description
+		Description: actor_dest.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:
@@ -8070,7 +8070,7 @@ ra2asw:
 	Tooltip:
 		Name: Osprey
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Aircraft:
 		AltitudeVelocity: 240
 		InitialFacing: 768
@@ -8134,14 +8134,14 @@ ra2aegis:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: actor-aegis.name
+		Name: actor_aegis.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~ra2gaairc
 		Queue: Naval, RANaval
-		Description: actor-aegis.description
+		Description: actor_aegis.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:
@@ -8185,14 +8185,14 @@ ra2carrier:
 	Valued:
 		Cost: 2500
 	Tooltip:
-		Name: actor-ra2carrier.name
+		Name: actor_ra2carrier.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~ra2gayard, ra2gatech
 		Queue: Naval, RANaval
-		Description: actor-ra2carrier.description
+		Description: actor_ra2carrier.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:
@@ -8233,7 +8233,7 @@ ra2hornet:
 	Tooltip:
 		Name: Hornet
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Aircraft:
 		AltitudeVelocity: 250
 		InitialFacing: 768
@@ -8293,14 +8293,14 @@ ra2sub:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: actor-ra2sub.name
+		Name: actor_ra2sub.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2nayard
 		Queue: Naval, RANaval
-		Description: actor-ra2sub.description
+		Description: actor_ra2sub.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 36
@@ -8352,14 +8352,14 @@ ra2hyd:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: actor-hyd.name
+		Name: actor_hyd.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~ra2naradr
 		Queue: Naval, RANaval
-		Description: actor-hyd.description
+		Description: actor_hyd.description
 	Mobile:
 		Speed: 120
 		TurnSpeed: 48
@@ -8403,14 +8403,14 @@ ra2dred:
 	Valued:
 		Cost: 4000
 	Tooltip:
-		Name: actor-dred.name
+		Name: actor_dred.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~ra2nayard, ra2natech
 		Queue: Naval, RANaval
-		Description: actor-dred.description
+		Description: actor_dred.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:
@@ -8493,14 +8493,14 @@ yrbsub:
 	Valued:
 		Cost: 3350
 	Tooltip:
-		Name: actor-bsub.name
+		Name: actor_bsub.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2napsis
 		Queue: Naval, RANaval
-		Description: actor-bsub.description
+		Description: actor_bsub.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -8617,7 +8617,7 @@ RA2ZEP:
 		BuildPaletteOrder: 99
 		Prerequisites: ~ra2naweap, ra2natech
 		Queue: Vehicle, Aircraft, RAAircraft
-		Description: actor-zep.description
+		Description: actor_zep.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 12
@@ -8698,7 +8698,7 @@ yrschp:
 		BuildPaletteOrder: 98
 		Prerequisites: ~ra2naradr
 		Queue: Vehicle, Aircraft, RAAircraft
-		Description: actor-schp.description
+		Description: actor_schp.description
 	Aircraft:
 		TurnSpeed: 30
 		Speed: 150
@@ -8840,7 +8840,7 @@ yrbpln:
 	Tooltip:
 		Name: MiG Bomber
 	Buildable:
-		Description: template-airstrike-slave.description
+		Description: template_airstrike_slave.description
 	Valued:
 		Cost: 5000
 	Health:
@@ -8949,7 +8949,7 @@ yrbpln1:
 		BuildPaletteOrder: 100
 		Prerequisites: ~ra2naairf, ra2natech
 		Queue: Aircraft, RAAircraft
-		Description: actor-bpln.description
+		Description: actor_bpln.description
 	Health:
 		HP: 57500
 	Repairable:
@@ -9098,7 +9098,7 @@ ra2_tzep:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2naradr
 		Queue: Aircraft, RAAircraft, Vehicle
-		Description: actor-shad.description
+		Description: actor_shad.description
 	Aircraft:
 		TurnSpeed: 14
 		Speed: 35
@@ -9185,7 +9185,7 @@ RA2FALC:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2gaairc
 		Queue: Aircraft, RAAircraft
-		Description: actor-falc.description
+		Description: actor_falc.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 12
@@ -9268,7 +9268,7 @@ RA2BEAG:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2gaairc, ra2gatech
 		Queue: Aircraft, RAAircraft
-		Description: actor-beag.description
+		Description: actor_beag.description
 	Valued:
 		Cost: 3000
 	Health:
@@ -9371,7 +9371,7 @@ ra2shad:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2gaairc
 		Queue: Aircraft, RAAircraft
-		Description: actor-shad.description
+		Description: actor_shad.description
 	Aircraft:
 		TurnSpeed: 24
 		Speed: 120
@@ -9453,7 +9453,7 @@ YRDISK:
 		BuildPaletteOrder: 120
 		Prerequisites: ~yrygweap, yrygtech
 		Queue: Vehicle, Aircraft, RAAircraft
-		Description: actor-disk.description
+		Description: actor_disk.description
 	Aircraft:
 		TurnSpeed: 80
 		Speed: 80
@@ -9576,7 +9576,7 @@ ra2rock:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ra2gaairc
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2rock.description
+		Description: actor_ra2rock.description
 	Aircraft:
 		TurnSpeed: 36
 		Speed: 180
@@ -9691,7 +9691,7 @@ yrlunr:
 		BuildPaletteOrder: 20
 		Queue: Aircraft, RAAircraft
 		Prerequisites: ~yrygcomd
-		Description: actor-ra2rock.description
+		Description: actor_ra2rock.description
 	Aircraft:
 		TurnSpeed: 33
 		Speed: 165
@@ -10133,9 +10133,9 @@ ra2caairp:
 			2: Airborne
 			3: Airborne
 		Descriptions:
-			1: power-paratroopers.description
-			2: power-paratroopers.description
-			3: power-paratroopers.description
+			1: power_paratroopers.description
+			2: power_paratroopers.description
+			3: power_paratroopers.description
 		DropItems:
 			1: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind
 			2: ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2e2.black,ra2e2.black,ra2e2.black,ra2sidewind,ra2sidewind,ra2tany.black,ra2e2.black,ra2e2.black,ra2e2.black,ra2e2.black
@@ -10363,7 +10363,7 @@ ra2e2.black:
 		BuildPaletteOrder: 10
 		Prerequisites: ~disable
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Health:
 		HP: 25000
 	ReloadDelayMultiplier@b:
@@ -10388,7 +10388,7 @@ ra2sidewind:
 		BuildPaletteOrder: 20
 		Prerequisites: ~disable
 		Queue: Infantry, RAInfantry
-		Description: actor-e3.description
+		Description: actor_e3.description
 	Mobile:
 		Speed: 45
 	Health:
@@ -10447,7 +10447,7 @@ ra2leopard:
 		BuildPaletteOrder: 60
 		Prerequisites: ~disable
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 70
 		TurnSpeed: 16
@@ -10520,7 +10520,7 @@ ra2_c_ifv:
 		BuildPaletteOrder: 40
 		Prerequisites: ~disable
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 100
@@ -10599,7 +10599,7 @@ ra2_c_hum:
 		BuildPaletteOrder: 40
 		Prerequisites: ~disable
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 100
@@ -10667,7 +10667,7 @@ ra2_c_abram:
 		BuildPaletteOrder: 60
 		Prerequisites: ~disable
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 16
@@ -12888,7 +12888,7 @@ ra2_soviets_upgrade_reactivearmor:
 		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
 	WithDecoration@HAZMAT:
 		Image: pips
-		Sequence: pip-hazmat
+		Sequence: pip_hazmat
 		Position: BottomRight
 		RequiresCondition: ra2_soviets_upgrade_reactivearmor
 	SpeedMultiplier@ra2_soviets_upgrade_reactivearmor:
@@ -13532,7 +13532,7 @@ ra2_allies_upgrade_reflectivearmorplating:
 		RequiresCondition: ra2_allies_upgrade_reflectivearmorplating
 	WithDecoration@REFLECTOR:
 		Image: pips
-		Sequence: pip-reflectivearmor
+		Sequence: pip_reflectivearmor
 		Position: BottomRight
 		RequiresCondition: ra2_allies_upgrade_reflectivearmorplating
 	DamageMultiplier@ra2_allies_upgrade_reflectivearmorplating:
@@ -15411,7 +15411,7 @@ ra2_tractor_driveby:
 # 		BuildPaletteOrder: 60
 # 		Prerequisites: ~ra2natech
 # 		Queue: Vehicle, RAVehicle
-# 		Description: actor-htnk.description
+# 		Description: actor_htnk.description
 # 	Mobile:
 # 		Speed: 55
 # 		TurnSpeed: 11
@@ -15517,7 +15517,7 @@ ra2_tractor_driveby:
 # 		BuildPaletteOrder: 60
 # 		Prerequisites: ~ra2natech
 # 		Queue: Vehicle, RAVehicle
-# 		Description: actor-htnk.description
+# 		Description: actor_htnk.description
 # 	Mobile:
 # 		Speed: 55
 # 		TurnSpeed: 11
@@ -15614,7 +15614,7 @@ ra2_tractor_driveby:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 80
 # 		Prerequisites: ~ra2natech
-# 		Description: actor-latin_burrito.description
+# 		Description: actor_latin_burrito.description
 # 	Valued:
 # 		Cost: 1200
 # 	Tooltip:
@@ -15680,7 +15680,7 @@ ra2_tractor_driveby:
 # 		BuildPaletteOrder: 20
 # 		Prerequisites: ~ra2natech
 # 		Queue: Vehicle, RAVehicle
-# 		Description: actor-jeep.description
+# 		Description: actor_jeep.description
 # 	Mobile:
 # 		Speed: 75
 # 		TurnSpeed: 15
@@ -15759,7 +15759,7 @@ ra2_tractor_driveby:
 # 		BuildPaletteOrder: 60
 # 		Prerequisites: ~ra2naradr
 # 		Queue: Vehicle, RAVehicle
-# 		Description: actor-ttnk.description
+# 		Description: actor_ttnk.description
 # 	Mobile:
 # 		Speed: 75
 # 		TurnSpeed: 15
@@ -15823,7 +15823,7 @@ ra2_tractor_driveby:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
 # 		Prerequisites: ~ra2naairf
-# 		Description: actor-yak.description
+# 		Description: actor_yak.description
 # 	Valued:
 # 		Cost: 3200
 # 	Tooltip:

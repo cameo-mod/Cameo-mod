@@ -131,11 +131,11 @@ upblackhandflamer:
 upstealthsoldier:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: upgrade-upnodstealth.name
+		Name: upgrade_upnodstealth.name
 	Buildable:
 		BuildPaletteOrder: 6
 		Queue: Promotions
-		Description: upgrade-upnodstealth.description
+		Description: upgrade_upnodstealth.description
 		Prerequisites: ~fact.nod, !upstealthsoldier, upblackhandflamer, rank1
 	RenderSprites:
 		Image: stealthtech
@@ -159,11 +159,11 @@ upnodspecter:
 upnodvenom:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: upgrade-upnodvenom.name
+		Name: upgrade_upnodvenom.name
 	Buildable:
 		BuildPaletteOrder: 12
 		Queue: Promotions
-		Description: upgrade-upnodvenom.description
+		Description: upgrade_upnodvenom.description
 		Prerequisites: ~fact.nod, !upnodvenom, upnodspecter, rank1
 	RenderSprites:
 		Image: nodvenomlaser

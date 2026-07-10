@@ -154,7 +154,7 @@ ts_nod_harpy:
 		Delay: 32
 		Count: 20
 	SpawnActorOnDeath:
-		Actor: TSAPACHE.Husk
+		Actor: ts_nod_harpy_husk
 	WithIdleOverlay@ROTORAIR:
 		Offset: 42,0,300
 		Sequence: rotor

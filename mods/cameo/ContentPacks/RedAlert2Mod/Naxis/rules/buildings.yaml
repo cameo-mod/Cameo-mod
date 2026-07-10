@@ -37,7 +37,7 @@ powr.nax:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~conyard.nax
 	Building:
 		Footprint: xxx xxx
@@ -116,7 +116,7 @@ weap.nax:
 		BuildPaletteOrder: 40
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Description: template-factory.description
+		Description: template_factory.description
 		Prerequisites: ~conyard.nax, refin.nax
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
@@ -164,7 +164,7 @@ radar.nax:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~conyard.nax, refin.nax
-		Description: template-radar.description
+		Description: template_radar.description
 	Tooltip:
 		Name: Naxis Radar
 	Building:
@@ -197,7 +197,7 @@ airfield.nax:
 		BuildDurationModifier: 100
 		Prerequisites: ~conyard.nax, radar.nax
 		Queue: Building, RABuilding
-		Description: actor-nax_airfield.description
+		Description: actor_nax_airfield.description
 	Building:
 		Footprint: =xxx xxxx xxx=
 		Dimensions: 4,3
@@ -243,12 +243,12 @@ airfield.nax:
 			1: paratroopers
 			2: paratroopers
 		Names:
-			1: power-paratroopers.name
-			2: power-paratroopers.name
+			1: power_paratroopers.name
+			2: power_paratroopers.name
 		ChargeInterval: 6000
 		Descriptions:
-			1: power-paratroopers.description
-			2: power-paratroopers.description
+			1: power_paratroopers.description
+			2: power_paratroopers.description
 		DropItems:
 			1: panzer.nax, panzer.nax, panzer.nax, car.nax, car.nax, atankcann.nax, atankcann.nax
 			2: tiger.nax, tiger.nax, panzer.nax, panzer.nax, panzer.nax, wirbelwind.nax, wirbelwind.nax, car.nax, car.nax, car.nax, atankcann.nax, atankcann.nax
@@ -283,13 +283,13 @@ airfield.nax:
 			3: airstrike
 		ChargeInterval: 7500
 		Names:
-			1: power-parabombs.name
-			2: power-parabombs.name
-			3: power-parabombs.name
+			1: power_parabombs.name
+			2: power_parabombs.name
+			3: power_parabombs.name
 		Descriptions:
-			1: power-parabombs.description
-			2: power-parabombs.description
-			3: power-parabombs.description
+			1: power_parabombs.description
+			2: power_parabombs.description
+			3: power_parabombs.description
 		SelectTargetSpeechNotification: SelectTarget
 		CameraActor: camera
 		CameraRemoveDelay: 150
@@ -433,7 +433,7 @@ twr.nax:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~conyard.nax, barr.nax
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -486,7 +486,7 @@ flak88.nax:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~conyard.nax, weap.nax
-		Description: actor-nax_flak88.description
+		Description: actor_nax_flak88.description
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -548,7 +548,7 @@ bunk.nax:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
 		Prerequisites: ~conyard.nax, barr.nax
-		Description: actor-nabnkr.description
+		Description: actor_nabnkr.description
 	Valued:
 		Cost: 1000
 	Health:
@@ -688,7 +688,7 @@ rocket.nax:
 		BuildDurationModifier: 100
 		Prerequisites: ~conyard.nax, tech.nax, !rocket.nax, ~techlevel.superweapons
 		Queue: Defence, RADefence
-		Description: actor-nax_rocket.description
+		Description: actor_nax_rocket.description
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3
@@ -705,9 +705,9 @@ rocket.nax:
 		Cursor: nuke
 		ChargeInterval: 10500
 		Names:
-			1: power-nuke.tdname
+			1: power_nuke.tdname
 		Descriptions:
-			1: power-nuke.description
+			1: power_nuke.description
 		EndChargeSpeechNotification: NuclearWeaponAvailable
 		EndChargeTextNotification: V1 Strike ready.
 		SelectTargetSpeechNotification: SelectTarget

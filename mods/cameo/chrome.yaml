@@ -11,8 +11,8 @@ logos:
 
 ^Glyphs:
 	Image: glyphs.png
-	Image2x: glyphs-2x.png
-	Image3x: glyphs-3x.png
+	Image2x: glyphs_2x.png
+	Image3x: glyphs_3x.png
 
 editor:
 	Inherits: ^Glyphs
@@ -244,8 +244,8 @@ strategic:
 
 ^Flags:
 	Image: flags.png
-	Image2x: flags-2x.png
-	Image3x: flags-3x.png
+	Image2x: flags_2x.png
+	Image3x: flags_3x.png
 
 games:
 	Inherits: ^Flags
@@ -1160,13 +1160,13 @@ mainmenu-border:
 	PanelRegion: 650, 389, 39, 39, 38, 38, 39, 39
 	PanelSides: Edges
 
-# Cyberintel main-menu reskin (placeholder art in uibits/cyberintel-ui.png). These regions are
+# Cyberintel main-menu reskin (placeholder art in uibits/cyberintel_ui.png). These regions are
 # referenced only from chrome/mainmenu.yaml (the menu-specific neon panels/buttons). The rest of the
 # shared UI is re-themed separately by recolouring dialog.png itself; the in-game sidebar and HUD
 # glyphs live in other sheets and stay untouched. Swap the png for final art; the 9-slice metrics
 # below are sized to the 256x256 placeholder sheet layout.
 ^Cyberintel:
-	Image: cyberintel-ui.png
+	Image: cyberintel_ui.png
 
 cyberintel-panel:
 	Inherits: ^Cyberintel
@@ -1224,7 +1224,7 @@ separator:
 
 # RA1
 ^SidebarRA:
-	Image: sidebar-ra.png
+	Image: sidebar_ra.png
 sidebar-allies:
 	Inherits: ^SidebarRA
 	Regions:
@@ -1298,7 +1298,7 @@ sidebar-button-soviet-highlighted-disabled:
 # RA1 Japan
 
 ^Sidebarmodjapan:
-	Image: sidebar-modjapan.png
+	Image: sidebar_modjapan.png
 sidebar-modjapan:
 	Inherits: sidebar
 	Inherits@2: ^Sidebarmodjapan
@@ -1326,7 +1326,7 @@ sidebar-button-modjapan-highlighted-disabled:
 
 # TD
 ^SidebarTD:
-	Image: sidebar-td.png
+	Image: sidebar_td.png
 sidebar-gdi:
 	Inherits: ^SidebarTD
 	Regions:
@@ -1398,7 +1398,7 @@ sidebar-button-nod-highlighted-disabled:
 	Inherits: sidebar-button-gdi-disabled
 
 ^SidebarTKM:
-	Image: sidebar-tkm.png
+	Image: sidebar_tkm.png
 sidebar-tkm:
 	Inherits: ^SidebarTKM
 	Regions:
@@ -1457,7 +1457,7 @@ sidebar-button-generic-highlighted-disabled:
 # RA2 Allies
 
 ^SidebarRA2A:
-	Image: sidebar-ra2allies.png
+	Image: sidebar_ra2allies.png
 sidebar-ra2allies:
 	Inherits: sidebar
 	Inherits@2: ^SidebarRA2A
@@ -1486,7 +1486,7 @@ sidebar-button-ra2allies-highlighted-disabled:
 # RA2 Soviet
 
 ^SidebarRA2S:
-	Image: sidebar-ra2soviet.png
+	Image: sidebar_ra2soviet.png
 sidebar-ra2soviet:
 	Inherits: sidebar
 	Inherits@2: ^SidebarRA2S
@@ -1515,7 +1515,7 @@ sidebar-button-ra2soviet-highlighted-disabled:
 # RA2 Yuri
 
 ^SidebarRA2Y:
-	Image: sidebar-ra2yuri.png
+	Image: sidebar_ra2yuri.png
 sidebar-ra2yuri:
 	Inherits: sidebar
 	Inherits@2: ^SidebarRA2Y
@@ -1544,7 +1544,7 @@ sidebar-button-ra2yuri-highlighted-disabled:
 # RA2 Asian Alliance
 
 ^SidebarRA2AA:
-	Image: sidebar-asianalliance.png
+	Image: sidebar_asianalliance.png
 sidebar-asianalliance:
 	Inherits: sidebar
 	Inherits@2: ^SidebarRA2AA
@@ -1573,7 +1573,7 @@ sidebar-button-asianalliance-highlighted-disabled:
 # Steel Consortium
 
 ^SidebarSteelConsortium:
-	Image: sidebar-consortium.png
+	Image: sidebar_consortium.png
 sidebar-consortium:
 	Inherits: sidebar
 	Inherits@2: ^SidebarSteelConsortium
@@ -1602,7 +1602,7 @@ sidebar-button-consortium-highlighted-disabled:
 # FutureTech
 
 ^SidebarFutureTech:
-	Image: sidebar-futuretech.png
+	Image: sidebar_futuretech.png
 sidebar-futuretech:
 	Inherits: sidebar
 	Inherits@2: ^SidebarFutureTech
@@ -1631,7 +1631,7 @@ sidebar-button-futuretech-highlighted-disabled:
 # 2100
 
 ^Sidebar2100:
-	Image: sidebar-2100.png
+	Image: sidebar_2100.png
 sidebar-2100:
 	Inherits: sidebar
 	Inherits@2: ^Sidebar2100
@@ -1660,7 +1660,7 @@ sidebar-button-2100-highlighted-disabled:
 # USA
 
 ^SidebarUSA:
-	Image: sidebar-usa.png
+	Image: sidebar_usa.png
 sidebar-USA:
 	Inherits: sidebar
 	Inherits@2: ^SidebarUSA
@@ -1689,7 +1689,7 @@ sidebar-button-USA-highlighted-disabled:
 # GLA
 
 ^SidebarGLA:
-	Image: sidebar-gla.png
+	Image: sidebar_gla.png
 sidebar-gla:
 	Inherits: sidebar
 	Inherits@2: ^SidebarGLA
@@ -1718,7 +1718,7 @@ sidebar-button-gla-highlighted-disabled:
 # China
 
 ^SidebarCHI:
-	Image: sidebar-china.png
+	Image: sidebar_china.png
 sidebar-china:
 	Inherits: sidebar
 	Inherits@2: ^SidebarCHI
@@ -1747,7 +1747,7 @@ sidebar-button-china-highlighted-disabled:
 # Dune Generic
 
 ^SidebarDune:
-	Image: sidebar-dune.png
+	Image: sidebar_dune.png
 sidebar-dune:
 	Inherits: sidebar
 	Inherits@2: ^SidebarDune
@@ -1776,7 +1776,7 @@ sidebar-button-dune-highlighted-disabled:
 # Dune atreides
 
 ^Sidebaratreides:
-	Image: sidebar-atreides.png
+	Image: sidebar_atreides.png
 sidebar-atreides:
 	Inherits: sidebar
 	Inherits@2: ^Sidebaratreides
@@ -1805,7 +1805,7 @@ sidebar-button-atreides-highlighted-disabled:
 # Dune Harkonen
 
 ^SidebarHarkonen:
-	Image: sidebar-harkonen.png
+	Image: sidebar_harkonen.png
 sidebar-harkonen:
 	Inherits: sidebar
 	Inherits@2: ^SidebarHarkonen
@@ -1834,7 +1834,7 @@ sidebar-button-harkonen-highlighted-disabled:
 # Dune Ordos
 
 ^SidebarOrdos:
-	Image: sidebar-ordos.png
+	Image: sidebar_ordos.png
 sidebar-ordos:
 	Inherits: sidebar
 	Inherits@2: ^SidebarOrdos
@@ -1863,7 +1863,7 @@ sidebar-button-ordos-highlighted-disabled:
 # Dune atreides New
 
 ^SidebaratreidesNew:
-	Image: sidebar-atreidesnew.png
+	Image: sidebar_atreidesnew.png
 sidebar-atreidesnew:
 	Inherits: sidebar
 	Inherits@2: ^SidebaratreidesNew
@@ -1892,7 +1892,7 @@ sidebar-button-atreidesnew-highlighted-disabled:
 # Dune Harkonen New
 
 ^SidebarHarkonenNew:
-	Image: sidebar-harkonennew.png
+	Image: sidebar_harkonennew.png
 sidebar-harkonennew:
 	Inherits: sidebar
 	Inherits@2: ^SidebarHarkonenNew
@@ -1921,7 +1921,7 @@ sidebar-button-harkonennew-highlighted-disabled:
 # Dune Ordos New
 
 ^SidebarOrdosNew:
-	Image: sidebar-ordosnew.png
+	Image: sidebar_ordosnew.png
 sidebar-ordosnew:
 	Inherits: sidebar
 	Inherits@2: ^SidebarOrdosNew
@@ -1950,7 +1950,7 @@ sidebar-button-ordosnew-highlighted-disabled:
 # Dune Mercenary
 
 ^SidebarMercenary:
-	Image: sidebar-mercenaries.png
+	Image: sidebar_mercenaries.png
 sidebar-mercenary:
 	Inherits: sidebar
 	Inherits@2: ^SidebarMercenary
@@ -1979,7 +1979,7 @@ sidebar-button-mercenary-highlighted-disabled:
 # Dune Tleilaxu
 
 ^SidebarTleilaxu:
-	Image: sidebar-tleilaxu.png
+	Image: sidebar_tleilaxu.png
 sidebar-tleilaxu:
 	Inherits: sidebar
 	Inherits@2: ^SidebarTleilaxu
@@ -2008,7 +2008,7 @@ sidebar-button-tleilaxu-highlighted-disabled:
 # Dune Fremen
 
 ^SidebarFremen:
-	Image: sidebar-fremen.png
+	Image: sidebar_fremen.png
 sidebar-fremen:
 	Inherits: sidebar
 	Inherits@2: ^SidebarFremen
@@ -2037,7 +2037,7 @@ sidebar-button-fremen-highlighted-disabled:
 # Dune Fremen
 
 ^SidebarFremen:
-	Image: sidebar-fremen.png
+	Image: sidebar_fremen.png
 sidebar-fremen:
 	Inherits: sidebar
 	Inherits@2: ^SidebarFremen
@@ -2066,7 +2066,7 @@ sidebar-button-fremen-highlighted-disabled:
 # Dune Ixian
 
 ^SidebarIxian:
-	Image: sidebar-ixian.png
+	Image: sidebar_ixian.png
 sidebar-ixian:
 	Inherits: sidebar
 	Inherits@2: ^SidebarIxian
@@ -2095,7 +2095,7 @@ sidebar-button-ixian-highlighted-disabled:
 # Dune Corrino
 
 ^SidebarCorrino:
-	Image: sidebar-corrino.png
+	Image: sidebar_corrino.png
 sidebar-corrino:
 	Inherits: sidebar
 	Inherits@2: ^SidebarCorrino
@@ -2124,7 +2124,7 @@ sidebar-button-corrino-highlighted-disabled:
 # Dune Space Guild
 
 ^SidebarGuild:
-	Image: sidebar-guild.png
+	Image: sidebar_guild.png
 sidebar-guild:
 	Inherits: sidebar
 	Inherits@2: ^SidebarGuild
@@ -2153,7 +2153,7 @@ sidebar-button-guild-highlighted-disabled:
 # Dune Smugglers
 
 ^SidebarSmugglers:
-	Image: sidebar-smugglers.png
+	Image: sidebar_smugglers.png
 sidebar-smugglers:
 	Inherits: sidebar
 	Inherits@2: ^SidebarSmugglers
@@ -2182,7 +2182,7 @@ sidebar-button-smugglers-highlighted-disabled:
 # AW Orange Star
 
 ^SidebarOrangeStar:
-	Image: sidebar-orangestar.png
+	Image: sidebar_orangestar.png
 sidebar-orangestar:
 	Inherits: sidebar
 	Inherits@2: ^SidebarOrangeStar
@@ -2211,7 +2211,7 @@ sidebar-button-orangestar-highlighted-disabled:
 # AW Blue Moon
 
 ^SidebarBlueMoon:
-	Image: sidebar-bluemoon.png
+	Image: sidebar_bluemoon.png
 sidebar-bluemoon:
 	Inherits: sidebar
 	Inherits@2: ^SidebarBlueMoon
@@ -2240,7 +2240,7 @@ sidebar-button-bluemoon-highlighted-disabled:
 # AW Green Earth
 
 ^SidebarGreenEarth:
-	Image: sidebar-greenearth.png
+	Image: sidebar_greenearth.png
 sidebar-greenearth:
 	Inherits: sidebar
 	Inherits@2: ^SidebarGreenEarth
@@ -2269,7 +2269,7 @@ sidebar-button-greenearth-highlighted-disabled:
 # AW Yellow Comet
 
 ^SidebarYellowComet:
-	Image: sidebar-yellowcomet.png
+	Image: sidebar_yellowcomet.png
 sidebar-yellowcomet:
 	Inherits: sidebar
 	Inherits@2: ^SidebarYellowComet
@@ -2298,7 +2298,7 @@ sidebar-button-yellowcomet-highlighted-disabled:
 # AW Black Hole
 
 ^SidebarBlackHole:
-	Image: sidebar-blackhole.png
+	Image: sidebar_blackhole.png
 sidebar-blackhole:
 	Inherits: sidebar
 	Inherits@2: ^SidebarBlackHole
@@ -2327,7 +2327,7 @@ sidebar-button-blackhole-highlighted-disabled:
 # AW Rubinelle
 
 ^SidebarRubinelle:
-	Image: sidebar-rubinelle.png
+	Image: sidebar_rubinelle.png
 sidebar-rubinelle:
 	Inherits: sidebar
 	Inherits@2: ^SidebarRubinelle
@@ -2356,7 +2356,7 @@ sidebar-button-rubinelle-highlighted-disabled:
 # AW Lazurian
 
 ^SidebarLazurian:
-	Image: sidebar-lazurian.png
+	Image: sidebar_lazurian.png
 sidebar-lazurian:
 	Inherits: sidebar
 	Inherits@2: ^SidebarLazurian
@@ -2385,7 +2385,7 @@ sidebar-button-lazurian-highlighted-disabled:
 # AW NRA
 
 ^SidebarNRA:
-	Image: sidebar-nra.png
+	Image: sidebar_nra.png
 sidebar-nra:
 	Inherits: sidebar
 	Inherits@2: ^SidebarNRA
@@ -2414,7 +2414,7 @@ sidebar-button-nra-highlighted-disabled:
 # AW IDS
 
 ^SidebarIDS:
-	Image: sidebar-ids.png
+	Image: sidebar_ids.png
 sidebar-ids:
 	Inherits: sidebar
 	Inherits@2: ^SidebarIDS
@@ -2443,7 +2443,7 @@ sidebar-button-ids-highlighted-disabled:
 # WC ORC
 
 ^SidebarOrc:
-	Image: sidebar-orc.png
+	Image: sidebar_orc.png
 sidebar-orc:
 	Inherits: sidebar
 	Inherits@2: ^SidebarOrc
@@ -2472,7 +2472,7 @@ sidebar-button-orc-highlighted-disabled:
 # WC HUMAN
 
 ^SidebarHuman:
-	Image: sidebar-human.png
+	Image: sidebar_human.png
 sidebar-human:
 	Inherits: sidebar
 	Inherits@2: ^SidebarHuman
@@ -2501,7 +2501,7 @@ sidebar-button-human-highlighted-disabled:
 # Dark Reign
 
 ^SidebarDR:
-	Image: sidebar-darkreign.png
+	Image: sidebar_darkreign.png
 sidebar-darkreign:
 	Inherits: sidebar
 	Inherits@2: ^SidebarDR
@@ -2530,7 +2530,7 @@ sidebar-button-darkreign-highlighted-disabled:
 # TS GDI
 
 ^SidebarTSGDI:
-	Image: sidebar-tsgdi.png
+	Image: sidebar_tsgdi.png
 sidebar-tsgdi:
 	Inherits: sidebar
 	Inherits@2: ^SidebarTSGDI
@@ -2559,7 +2559,7 @@ sidebar-button-tsgdi-highlighted-disabled:
 # TS Nod
 
 ^SidebarTSNod:
-	Image: sidebar-tsnod.png
+	Image: sidebar_tsnod.png
 sidebar-tsnod:
 	Inherits: sidebar
 	Inherits@2: ^SidebarTSNod
@@ -2588,7 +2588,7 @@ sidebar-button-tsnod-highlighted-disabled:
 # TS CABAL
 
 ^SidebarTSCABAL:
-	Image: sidebar-cabal.png
+	Image: sidebar_cabal.png
 sidebar-cabal:
 	Inherits: sidebar
 	Inherits@2: ^SidebarTSCABAL
@@ -2616,7 +2616,7 @@ sidebar-button-cabal-highlighted-disabled:
 # TS Forgotten
 
 ^SidebarForgotten:
-	Image: sidebar-forgotten.png
+	Image: sidebar_forgotten.png
 sidebar-forgotten:
 	Inherits: sidebar
 	Inherits@2: ^SidebarForgotten
@@ -2644,7 +2644,7 @@ sidebar-button-forgotten-highlighted-disabled:
 
 # Star Wars
 ^SidebarStarWars:
-	Image: sidebar-starwars.png
+	Image: sidebar_starwars.png
 sidebar-swempire:
 	Inherits: sidebar-allies
 	Inherits: ^SidebarStarWars
@@ -2696,7 +2696,7 @@ sidebar-button-swrebels-highlighted-disabled:
 
 # Star Wars (CIS Hutt)
 ^SidebarStarWars2:
-	Image: sidebar-starwars.png
+	Image: sidebar_starwars.png
 sidebar-swseparatist:
 	Inherits: sidebar-allies
 	Inherits: ^SidebarStarWars2
@@ -2749,7 +2749,7 @@ sidebar-button-swhutt-highlighted-disabled:
 # Star Wars Republic
 
 ^SidebarRepublic:
-	Image: sidebar-republic.png
+	Image: sidebar_republic.png
 sidebar-republic:
 	Inherits: sidebar
 	Inherits@2: ^SidebarRepublic
@@ -2778,7 +2778,7 @@ sidebar-button-republic-highlighted-disabled:
 # Starcraft Protoss
 
 ^SidebarProtoss:
-	Image: sidebar-protoss.png
+	Image: sidebar_protoss.png
 sidebar-protoss:
 	Inherits: sidebar
 	Inherits@2: ^SidebarProtoss
@@ -2807,7 +2807,7 @@ sidebar-button-protoss-highlighted-disabled:
 # Starcraft Terran
 
 ^SidebarTerran:
-	Image: sidebar-terran.png
+	Image: sidebar_terran.png
 sidebar-terran:
 	Inherits: sidebar
 	Inherits@2: ^SidebarTerran
@@ -2836,7 +2836,7 @@ sidebar-button-terran-highlighted-disabled:
 # Starcraft Zerg
 
 ^SidebarZerg:
-	Image: sidebar-zerg.png
+	Image: sidebar_zerg.png
 sidebar-zerg:
 	Inherits: sidebar
 	Inherits@2: ^SidebarZerg
@@ -2865,7 +2865,7 @@ sidebar-button-zerg-highlighted-disabled:
 # Actibliz
 
 ^SidebarActibliz:
-	Image: sidebar-actibliz.png
+	Image: sidebar_actibliz.png
 sidebar-actibliz:
 	Inherits: sidebar
 	Inherits@2: ^SidebarActibliz
@@ -2894,7 +2894,7 @@ sidebar-button-actibliz-highlighted-disabled:
 # Warhammer40k Chaos
 
 ^SidebarWH40KChaos:
-	Image: sidebar-wh40kchaos.png
+	Image: sidebar_wh40kchaos.png
 sidebar-wh40kchaos:
 	Inherits: sidebar
 	Inherits@2: ^SidebarWH40KChaos
@@ -2923,7 +2923,7 @@ sidebar-button-wh40kchaos-highlighted-disabled:
 # Warhammer40k ImperialGuard
 
 ^SidebarWH40KImperialGuard:
-	Image: sidebar-wh40kimperial.png
+	Image: sidebar_wh40kimperial.png
 sidebar-wh40kimperial:
 	Inherits: sidebar
 	Inherits@2: ^SidebarWH40KImperialGuard
@@ -2952,7 +2952,7 @@ sidebar-button-wh40kimperial-highlighted-disabled:
 # Warhammer40k Marines
 
 ^SidebarWH40KMarines:
-	Image: sidebar-wh40kmarines.png
+	Image: sidebar_wh40kmarines.png
 sidebar-wh40kmarines:
 	Inherits: sidebar
 	Inherits@2: ^SidebarWH40KMarines
@@ -2981,7 +2981,7 @@ sidebar-button-wh40kmarines-highlighted-disabled:
 # Warhammer40k Orkz
 
 ^SidebarWH40KOrkz:
-	Image: sidebar-wh40kork.png
+	Image: sidebar_wh40kork.png
 sidebar-wh40kork:
 	Inherits: sidebar
 	Inherits@2: ^SidebarWH40KOrkz
@@ -3012,7 +3012,7 @@ sidebar-button-wh40kork-highlighted-disabled:
 
 
 ^SidebarNaxis:
-	Image: sidebar-naxis.png
+	Image: sidebar_naxis.png
 sidebar-naxis:
 	Inherits: sidebar
 	Inherits@2: ^SidebarNaxis
@@ -3043,7 +3043,7 @@ sidebar-button-naxis-highlighted-disabled:
 
 
 ^SidebarSyndicate:
-	Image: sidebar-syndicate.png
+	Image: sidebar_syndicate.png
 sidebar-syndicate:
 	Inherits: sidebar
 	Inherits@2: ^SidebarSyndicate
@@ -3073,33 +3073,33 @@ sidebar-button-syndicate-highlighted-disabled:
 # ---- Main Menu External Resources
 
 discord-icon:
-	Image: external-resources.png
+	Image: external_resources.png
 	PanelRegion: 0, 0, 0, 0, 32, 32, 0, 0
 
 discord-icon-hover:
-	Image: external-resources.png
+	Image: external_resources.png
 	PanelRegion: 0, 32, 0, 0, 32, 32, 0, 0
 
 discord-icon-pressed:
 	Inherits: discord-icon
 
 youtube-icon:
-	Image: external-resources.png
+	Image: external_resources.png
 	PanelRegion: 32, 0, 0, 0, 32, 32, 0, 0
 
 youtube-icon-hover:
-	Image: external-resources.png
+	Image: external_resources.png
 	PanelRegion: 32, 32, 0, 0, 32, 32, 0, 0
 
 youtube-icon-pressed:
 	Inherits: youtube-icon
 
 moddb-icon:
-	Image: external-resources.png
+	Image: external_resources.png
 	PanelRegion: 224, 0, 0, 0, 32, 32, 0, 0
 
 moddb-icon-hover:
-	Image: external-resources.png
+	Image: external_resources.png
 	PanelRegion: 224, 32, 0, 0, 32, 32, 0, 0
 
 moddb-icon-pressed:

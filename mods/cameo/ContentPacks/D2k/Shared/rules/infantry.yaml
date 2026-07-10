@@ -21,7 +21,7 @@ light_inf:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 		IconPalette: d2kunit
 		Prerequisites: ~d2k_barracks
 	Health:
@@ -76,7 +76,7 @@ trooper:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		Prerequisites: ~d2k_barracks, ~!up_aatrooper.ordos, ~!up_twin_rocket_trooper.ixian
-		Description: template-antitank-antiair-infantry.description
+		Description: template_antitank_antiair_infantry.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 300

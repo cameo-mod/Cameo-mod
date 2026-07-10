@@ -7,7 +7,7 @@ forgotten_carryall:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: Carryall
+		Name: actor_forgotten_carryall.name
 	Selectable:
 		Bounds: 1280, 1024
 	UpdatesPlayerStatistics:
@@ -16,7 +16,7 @@ forgotten_carryall:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_helipad, forgotten_servicedepot
-		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
+		Description: actor_forgotten_carryall.description
 	Aircraft:
 		TurnSpeed: 80
 		Speed: 149
@@ -62,14 +62,14 @@ forgotten_cobracopter:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Cobra Copter
+		Name: actor_forgotten_cobracopter.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~forgotten_helipad, ~forgotten_promotion_cobrahelicopter
+		Prerequisites: ~forgotten_helipad, ~forgotten_promotion_cobracopter
 		Queue: Aircraft, RAAircraft
-		Description: Anti-armor support gunship.  Strong vs Tanks, Aircraft. Weak vs Anti-air defenses.
+		Description: actor_forgotten_cobracopter.description
 	Aircraft:
 		TurnSpeed: 66
 		Speed: 165
@@ -146,14 +146,14 @@ forgotten_apache:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Apache
+		Name: actor_forgotten_apache.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~forgotten_helipad, ~!forgotten_promotion_cobrahelicopter
+		Prerequisites: ~forgotten_helipad, ~!forgotten_promotion_cobracopter
 		Queue: Aircraft, RAAircraft
-		Description: Anti-armor support gunship.  Strong vs Tanks, Aircraft. Weak vs Anti-air defenses.
+		Description: actor_forgotten_apache.description
 	Aircraft:
 		TurnSpeed: 64
 		Speed: 160
@@ -228,14 +228,14 @@ forgotten_wasp:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Wasp
+		Name: actor_forgotten_wasp.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~forgotten_helipad
 		Queue: Aircraft, RAAircraft
-		Description: Anti-personnel support gunship narmed with dual chain guns. Strong vs Infantry. Weak vs Armor, Anti-air defenses.
+		Description: actor_forgotten_wasp.description
 	Aircraft:
 		Speed: 200
 		TurnSpeed: 80
@@ -281,10 +281,10 @@ forgotten_wasp:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
-	GrantConditionOnPrerequisite@forgotten_promotion_cobrahelicopter:
-		Condition: forgotten_promotion_cobrahelicopter
-		Prerequisites: forgotten_promotion_cobrahelicopter
-	Cloak@forgotten_promotion_cobrahelicopter:
+	GrantConditionOnPrerequisite@forgotten_promotion_cobracopter:
+		Condition: forgotten_promotion_cobracopter
+		Prerequisites: forgotten_promotion_cobracopter
+	Cloak@forgotten_promotion_cobracopter:
 		DetectionTypes: GroundCloak
 		InitialDelay: 125
 		CloakDelay: 75
@@ -292,7 +292,7 @@ forgotten_wasp:
 		UncloakSound: cloak5.aud
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
-		RequiresCondition: forgotten_promotion_cobrahelicopter
+		RequiresCondition: forgotten_promotion_cobracopter
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
 
@@ -310,14 +310,14 @@ forgotten_cropplane:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Crop Plane
+		Name: actor_forgotten_cropplane.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_helipad, forgotten_church, ~!forgotten_promotion_locustbomber
 		Queue: Aircraft, RAAircraft
-		Description: Heavy bomber. Strong vs Buildings. Weak vs Aircraft.
+		Description: actor_forgotten_cropplane.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 64
@@ -386,14 +386,14 @@ forgotten_locustbomber:
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Locust Bomber
+		Name: actor_forgotten_locustbomber.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_helipad, forgotten_church, ~forgotten_promotion_locustbomber
 		Queue: Aircraft, RAAircraft
-		Description: Heavy bomber. Strong vs Buildings. Weak vs Aircraft.
+		Description: actor_forgotten_locustbomber.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 12

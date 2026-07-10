@@ -449,6 +449,8 @@ TSInfantryMortarChem:
 	Inherits: TSInfantryMortar
 	Inherits@2: ^MediumChemicalWeapon
 	Inherits@3: ^HeavyChemicalWeapon
+	Range: 10830
+	ReloadDelay: 88
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		Damage: 16000
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage

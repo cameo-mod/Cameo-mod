@@ -20,6 +20,22 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
 
 - The **name is ONE lowercase group without separators**: `ra_heatraytank`,
   `forgotten_ghoststalker`, `forgotten_experimentalmammothtank`.
+- **The only separator is the underscore — hyphens are banned in ALL
+  naming we own** (design 2026-07-10): actor ids, asset file names
+  (`cabal_dissolver_weapon.shp`, never `cabal_dissolver-weapon.shp`),
+  fluent keys (`actor_forgotten_scoopertank`, never `actor-…`), and every
+  yaml reference to them. Hyphens double as token boundaries in tooling
+  and caused the rename crash class. Exception: identifiers the ENGINE
+  defines or derives (built-in condition names like `build-incomplete`,
+  engine chrome/fluent keys) stay as the engine spells them.
+  **C#-derived names count as engine-owned**: fluent keys composed in
+  code (`actor-stats-label-prefix.*`, `label-armor-class.*`,
+  `checkbox-*` graphics options, `support-power-timer`, ...) and chrome
+  collections composed in code (`sidebar-<faction>`) keep their hyphens
+  even when defined in our files — scan ALL assemblies (engine mods AND
+  OpenRA.Mods.CA/Cameo in-repo) for string literals before renaming any
+  key family. A no-exception global rename was considered and rejected
+  (2026-07-11): it would require C# changes, which are out of bounds.
 - **Game prefix only on actual collisions** (`td_gdi` vs `ts_gdi`,
   `ra1_soviet` vs `ra2_soviet`). Unique factions (cabal, forgotten, yuri,
   ordos, terran…) take no game prefix. Prefixes are added the day a
@@ -60,6 +76,10 @@ mods/cameo/ContentPacks/<Theme>/<Faction>/
   sequences/sequences.yaml# ONE file per faction
 ```
 
+- **naval.yaml holds ALL naval content: every ship AND the naval yards**,
+  even though naval yards normally count as buildings. The lobby option
+  that unlocks the naval prerequisite can then also dynamically load (or
+  skip) the whole naval asset set based on the lobby setting.
 - Weapons move into a pack only when used **exclusively** by that faction
   (computed through warhead sub-weapon and Inherits closure); shared
   weapons stay in the theme/shared files.
@@ -95,9 +115,11 @@ Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
 | AA / advanced defense detection | `DetectCloaked.Range = weapon range / 2` |
 | Defense power | `Power.Amount = -(Cost / 20)` |
 | Vehicle turning | `Mobile.TurnSpeed = Speed / 5`; `Turreted.TurnSpeed` equals it |
-| Turretless (AttackFrontal) vehicles | `TurnSpeed = 2 × Speed / 5` — artillery-template units keep `Speed / 5` |
+| Turretless (AttackFrontal) vehicles | `TurnSpeed = 2 × Speed / 5` — the former artillery exception was dropped 2026-07-10 (data check: turretless artillery split 24 at 2×, 18 at 1× — no real pattern) |
 | Turreted artillery / fire support | Archer firing-slow: `GrantConditionOnAttack(firing)`, 50% Speed/Turn/TurretTurn multipliers, `RevokeDelay = weapon ReloadDelay / 2` |
 | Fighters & bombers (by template) | `Aircraft.TurnSpeed = Speed / 15` (frontal-weapon craft 2×) |
+| Helicopters & spaceships (by template) | `Aircraft.TurnSpeed = Speed / 5`, like vehicles (design 2026-07-10; 45 of ~55 helicopters already comply) |
+| AA support vehicles | anti-air weapon range = **1.5 × anti-ground range** (forgotten_m113adats is reference-clean: 5606 / 8409) |
 | AA weapons | a weapon whose ValidTargets include Air must have ≥1 damage warhead that hits Air (inheritance-resolved) |
 
 Unit classification is authoritative from the **class templates in
@@ -224,7 +246,65 @@ cheapest provider wins).
   Imperial Scoutsman, M113 Adats-style condition typos).
 - **G3: garrisoned armaments never carry a FireDelay.**
 
-## 12. Map props (Obstacle target type)
+## 12. Balance formula — the Cameo Armor System workbook
+
+_Source: `C:\Users\AedisToru\OneDrive\Dokumente\Cameo Armor System.xlsx`
+(sheets: Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
+Defenses; Tabelle2/3 are scratch). 333ggg's CABAL concept
+(`Downloads\cabal.xlsx`) uses the same sheet layout. Tooling: openpyxl
+reads AND writes these — formula changes can be re-applied to every
+unit programmatically. Research 2026-07-11; open questions marked ❓._
+
+**The cost identity.** Every unit sheet computes three cost estimates
+from the stats and averages them; the design workflow INVERTS this:
+
+```
+DPS  = Damage / ReloadDelay × WeaponClass                 (column J)
+O    = (HP/100000 + Speed/100 + Range·K/5 + DPS/200) × 200 × L × M
+P    = (HP·Speed/25000 + Range·K·DPS/2.5) × L × M
+Q    = HP·Speed·Range·K·DPS·L·M / 12 500 000
+Cost = (O + P + Q) / 3                                    (column R = S)
+```
+
+O is linear in each stat, P pairwise (survivability × mobility and
+reach × damage), Q the full product — so cost grows superlinearly when
+everything is high at once. **Workflow: the price S is set FIRST** (last
+column); Range is then solved from the identity (column F formula), so
+tuning HP/Speed/Damage/Reload auto-rebalances Range to hold the price.
+Range and DPS cells are never hand-edited.
+
+**Column semantics** (values observed; meanings to confirm):
+- `WeaponClass` H ∈ {0.75, 0.875, 1, 1.05, 1.125, 1.25, 1.5} — a weapon
+  quality multiplier on DPS. ❓ exact mapping to the Weapon Types sheet.
+- `Special` K ∈ {0.75, 1, 1.25, 1.5, 1.75, 2} — ability premium.
+  ❓ which abilities cost which factor.
+- `UnitClass` L — per-section class factor (infantry sections 0.4–1,
+  vehicles 0.25–1.25, defenses 0.225/0.325/0.35). ❓ table of sections.
+- `TechTier` M ∈ {1, 0.75, 0.5} — appears to DISCOUNT stats for
+  higher-tech units. ❓ which tier maps to which value.
+- ❓ Defenses have no movement — what goes in their Speed column?
+
+**Armor & versus system (hypothesis to verify in yaml).** 20 armor
+classes in 4 categories (Infantry: None/Flak/Plate/Hero; Vehicles:
+Scout/Light/Medium/Heavy/Superheavy; Aircraft: Fighter/Bomber/
+Helicopter/Spaceship; Buildings: Wood/Concrete/Steel) with a base
+ladder in ~4% steps (None 100 … Wood 56 … Spaceship 4?) and two armor
+ORDERINGS. Weapon Types carry: effectiveness ranks 1–4 vs
+Infantry/Vehicle/Aircraft/Building, a weapon band (light/medium/heavy),
+and SCALING tables — six bands (SmallArms/Light/Medium/Heavy/
+Superheavy/Superweapon) with per-rank percentage columns starting at
+100 and stepping by 6/5/4/3/2/1 per rank, plus a low table starting at
+15–40. ❓ hypothesis: a weapon's `Versus` per armor = scaling table
+value at that armor's rank in the ordering matching the weapon band —
+needs one worked example to confirm before generating yaml.
+
+**Definition of Done for a formula unit:** stats from the sheet map to
+yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (cells)→weapon
+`Range` (×1024 wdist), Damage→warhead `Damage`, ReloadDelay→weapon
+`ReloadDelay` (ticks); versus table per the armor system; every new
+unit gets its own unique weapon (§10).
+
+## 13. Map props (Obstacle target type)
 
 - Trees, rocks, utility poles and other decorations carry
   `TargetTypes: Ground, Obstacle` (templates `^Tree ^TreeHusk ^Rock ^Box`).

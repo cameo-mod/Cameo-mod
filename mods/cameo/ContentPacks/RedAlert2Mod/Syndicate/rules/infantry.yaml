@@ -16,7 +16,7 @@ mili.latin:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
-		Description: actor-latin_mili.description
+		Description: actor_latin_mili.description
 	Mobile:
 		Speed: 52
 	Health:
@@ -94,7 +94,7 @@ tkiller.latin:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
-		Description: template-antitank-antiair-infantry.description
+		Description: template_antitank_antiair_infantry.description
 	Mobile:
 		Speed: 53
 	Health:
@@ -145,7 +145,7 @@ monkey.latin:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
-		Description: actor-latin_monkey.description
+		Description: actor_latin_monkey.description
 	Mobile:
 		Speed: 80
 	Health:
@@ -227,7 +227,7 @@ fthrow.latin:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cgpile.latin, cgspy.latin
 		Queue: Infantry, RAInfantry
-		Description: actor-latin_fthrow.description
+		Description: actor_latin_fthrow.description
 	Mobile:
 		Speed: 55
 	Health:
@@ -292,7 +292,7 @@ narco.latin:
 		BuildPaletteOrder: 80
 		Prerequisites: ~cgpile.latin, up_narco.latin, radar.latin
 		Queue: Infantry, RAInfantry
-		Description: actor-latin_narco.description
+		Description: actor_latin_narco.description
 	Mobile:
 		Speed: 70
 	Health:
@@ -398,7 +398,7 @@ fftr.latin:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgpile.latin, cgspy.latin
 		BuildLimit: 1
-		Description: actor-latin_fftr.description
+		Description: actor_latin_fftr.description
 	Mobile:
 		Speed: 55
 	Health:
@@ -511,7 +511,7 @@ ra2terror.latin:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cgpile.latin, up_ra2terror.latin
 		Queue: Infantry, RAInfantry
-		Description: actor-terror.description
+		Description: actor_terror.description
 	Mobile:
 		Speed: 75
 	Health:

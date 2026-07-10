@@ -2046,7 +2046,7 @@ wh40kproc.e1:
 		Condition: hordeeffect
 	WithDecoration@HordeEffect:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: TopRight
 		RequiresCondition: hordeeffect >= 5
 		BlinkInterval: 32
@@ -11400,7 +11400,7 @@ wh40kcultist:
 		RequiresCondition: wh40kunholysight
 		Modifier: 110
 	SoundOnDamageTransition:
-		DamagedSounds: cultistcharge-02.aud, cultistcharge-01.aud, cultistpanic-01.aud, cultistpanic-02.aud, cultistpanic-03.aud, cultistpanic-04.aud	
+		DamagedSounds: cultistcharge_02.aud, cultistcharge_01.aud, cultistpanic_01.aud, cultistpanic_02.aud, cultistpanic_03.aud, cultistpanic_04.aud	
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True

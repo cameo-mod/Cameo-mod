@@ -39,7 +39,7 @@ qapowr.steel:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~qacst.steel
 	Building:
 		Footprint: == xx
@@ -317,7 +317,7 @@ qatech.steel:
 		Weapons:
 			1: SteelEmpBomb
 		Descriptions:
-			1: power-ioncannon.description
+			1: power_ioncannon.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeSound:
@@ -346,7 +346,7 @@ qaorbit.steel:
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
 		Prerequisites: ~qacst.steel, qatech.steel, !qaorbit.steel, ~techlevel.superweapons
-		Description: actor-cgionc.description
+		Description: actor_cgionc.description
 	Tooltip:
 		Name: Orbital Cannon Activator
 	Building:
@@ -368,9 +368,9 @@ qaorbit.steel:
 		EffectSequence: targeting
 		EffectPalette: ra2effect
 		Names:
-			1: power-ioncannon.name
+			1: power_ioncannon.name
 		Descriptions:
-			1: power-ioncannon.description
+			1: power_ioncannon.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeTextNotification: Ion Cannon ready.
@@ -415,7 +415,7 @@ fedturret.steel:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~qacst.steel, qabarr.steel
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -478,7 +478,7 @@ fedaa.steel:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~qacst.steel, qtradr.steel
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -548,7 +548,7 @@ qcannon.steel:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
 		Prerequisites: ~qacst.steel, qatech.steel
-		Description: actor-cgplas.description
+		Description: actor_cgplas.description
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -633,7 +633,7 @@ bfg10k.steel:
 		BuildPaletteOrder: 70
 		BuildLimit: 1
 		Prerequisites: ~qacst.steel, qatech.steel, ~techlevel.superweapons
-		Description: actor-gun.description
+		Description: actor_gun.description
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -697,9 +697,9 @@ bfg10k.steel:
 		TargetCircleRange: 4c0
 		ChargeInterval: 7500
 		Names:
-			1: power-ioncannon.name
+			1: power_ioncannon.name
 		Descriptions:
-			1: power-ioncannon.description
+			1: power_ioncannon.description
 		SelectTargetSpeechNotification: SelectTarget
 		SelectTargetTextNotification: Select target.
 		InsufficientPowerSpeechNotification: InsufficientPower

@@ -1275,18 +1275,18 @@ missile_tank_husk.ixian:
 mongoose_d2k_a:
 	Defaults:
 	idle:
-		Filename: AtrMongooseSpritesheet-256.png
+		Filename: AtrMongooseSpritesheet_256.png
 		Start: 0
 		Facings: 32
 		Remap: 54F94B
 	run:
-		Filename: AtrMongooseSpritesheet-256.png
+		Filename: AtrMongooseSpritesheet_256.png
 		Start: 32
 		Facings: 32
 		Length: 7
 		Tick: 140
 	turret:
-		Filename: AtrMongooseMissileSpritesheet-32.png
+		Filename: AtrMongooseMissileSpritesheet_32.png
 		Facings: 32
 		Remap: 54F94B
 	muzzle:
@@ -1521,3 +1521,26 @@ up_twin_rocket_trooper.ixian:
 up_needleguns.ixian:
 	icon:
 		Filename: needlegunsicon.png
+
+rocket_raider.ixian:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2421
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4278
+		Offset: -30,-24

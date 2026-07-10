@@ -14,6 +14,7 @@ forgotten_engineer:
 	Inherits@MyPet: ^MyPetSmall
 	Inherits@Unity: ^Unity
 	Buildable:
+		Description: actor_forgotten_engineer.description
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~forgotten_barracks
 	Voiced:
@@ -24,6 +25,8 @@ forgotten_engineer:
 		Image: tsengineer
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+	Tooltip:
+		Name: actor_forgotten_engineer.name
 
 forgotten_rocketinfantry:
 	Inherits: TSE3
@@ -34,6 +37,7 @@ forgotten_rocketinfantry:
 	Inherits@TiberiumBoosters: ^TiberiumBoosters
 	Inherits@Unity: ^Unity
 	Buildable:
+		Description: actor_forgotten_rocketinfantry.description
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~forgotten_barracks
 	Armament@PRIMARY: ##########
@@ -59,6 +63,8 @@ forgotten_rocketinfantry:
 		Image: tse3mut
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
+	Tooltip:
+		Name: actor_forgotten_rocketinfantry.name
 
 forgotten_mutanthijacker:
 	Inherits: ^Soldier
@@ -79,7 +85,7 @@ forgotten_mutanthijacker:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: Mutant Hijacker
+		Name: actor_forgotten_mutanthijacker.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -87,7 +93,7 @@ forgotten_mutanthijacker:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~forgotten_barracks, forgotten_church
 		BuildLimit: 1
-		Description: Hijacks vehicles. Has buildlimit of 1.
+		Description: actor_forgotten_mutanthijacker.description
 	Mobile:
 		Speed: 100
 	Health:
@@ -121,14 +127,14 @@ forgotten_mutantsniper:
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: Mutant Sniper
+		Name: actor_forgotten_mutantsniper.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 55
 		Prerequisites: ~forgotten_barracks, forgotten_radar
 		Queue: Infantry, RAInfantry
-		Description: Advanced anti-infantry unit. Strong vs Infantry. Weak vs Everything else.
+		Description: actor_forgotten_mutantsniper.description
 	Mobile:
 		Speed: 70
 	Health:
@@ -190,7 +196,7 @@ forgotten_ghoststalker:
 	Valued:
 		Cost: 4000
 	Tooltip:
-		Name: actor-forgotten_ghoststalker.name
+		Name: actor_forgotten_ghoststalker.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -198,7 +204,7 @@ forgotten_ghoststalker:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_ghoststalker
 		BuildLimit: 1
-		Description: actor-forgotten_ghoststalker.description
+		Description: actor_forgotten_ghoststalker.description
 	Mobile:
 		Speed: 62
 	Health:
@@ -290,14 +296,14 @@ forgotten_mutant:
 	Valued:
 		Cost: 120
 	Tooltip:
-		Name: Mutant
+		Name: actor_forgotten_mutant.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~forgotten_barracks, ~!forgotten_chemicalplant
 		Queue: Infantry, RAInfantry
-		Description: Mutant armed with dual pistols. Strong vs Infantry. Weak vs Everything else.
+		Description: actor_forgotten_mutant.description
 	Mobile:
 		Speed: 65
 	Health:
@@ -356,14 +362,14 @@ forgotten_mutantsoldier:
 	Valued:
 		Cost: 250
 	Tooltip:
-		Name: Mutant Soldier
+		Name: actor_forgotten_mutantsoldier.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~forgotten_barracks, ~forgotten_chemicalplant
 		Queue: Infantry, RAInfantry
-		Description: Mutant armed with a carbine. Strong vs Infantry. Weak vs Everything else.
+		Description: actor_forgotten_mutantsoldier.description
 	Mobile:
 		Speed: 75
 	Health:
@@ -425,14 +431,14 @@ forgotten_mutantsergeant:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: Mutant Sergeant
+		Name: actor_forgotten_mutantsergeant.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_barracks, forgotten_church
 		Queue: Infantry, RAInfantry
-		Description: Elite mutant infantry. Has Propoganda Aura. Strong vs Infantry. Weak vs Everything else.
+		Description: actor_forgotten_mutantsergeant.description
 	Mobile:
 		Speed: 75
 	Health:
@@ -492,14 +498,14 @@ forgotten_zombiemutant:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Zombie Mutant
+		Name: actor_forgotten_zombiemutant.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~forgotten_barracks, forgotten_radar
 		Queue: Infantry, RAInfantry
-		Description: High mutated human. Not so Intelligent, only attack in Melee. Strong vs Ground. Weak vs Aircraft.
+		Description: actor_forgotten_zombiemutant.description
 	Mobile:
 		Speed: 100
 	Health:
@@ -544,14 +550,14 @@ forgotten_runnershotgal:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: Runner Shotgal
+		Name: actor_forgotten_runnershotgal.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~forgotten_barracks, forgotten_radar, ~forgotten_promotion_runnershotgal
 		Queue: Infantry, RAInfantry
-		Description: Mutant armed with a shotgun. Strong vs Ground. Weak vs Aircraft. Stealthed.
+		Description: actor_forgotten_runnershotgal.description
 	Mobile:
 		Speed: 85
 	Health:
@@ -595,14 +601,14 @@ forgotten_chemsprayinfantry:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: Chem Spray Infantry
+		Name: actor_forgotten_chemsprayinfantry.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_barracks, forgotten_church
 		Queue: Infantry, RAInfantry
-		Description: Mutant soldier with a Tiberium weapon. Strong vs Ground. Weak vs Aircraft.
+		Description: actor_forgotten_chemsprayinfantry.description
 	Mobile:
 		Speed: 55
 		Locomotor: chem
@@ -646,7 +652,7 @@ forgotten_chemsprayinfantry:
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-forgotten_mortarman:
+forgotten_mutantmortarman:
 	Inherits: ^Soldier
 	Inherits@Template: ^MortarInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -659,18 +665,19 @@ forgotten_mortarman:
 	Inherits@ChemicalWeapons: ^ChemicalWeapons
 	Inherits@GenomeMapping: ^GenomeMapping
 	Inherits@MyPet: ^MyPetLarge
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
 	Inherits@Unity: ^Unity
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Mutant Mortarman
+		Name: actor_forgotten_mutantmortarman.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 130
 		Prerequisites: ~forgotten_barracks, forgotten_radar
 		Queue: Infantry, RAInfantry
-		Description: actor-forgotten_mortarman.description
+		Description: actor_forgotten_mutantmortarman.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -679,10 +686,10 @@ forgotten_mortarman:
 		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSInfantryMortar
-	 	RequiresCondition: !forgotten_upgrade_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSInfantryMortarChem
-	 	RequiresCondition: forgotten_upgrade_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
@@ -700,7 +707,7 @@ forgotten_mortarman:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 forgotten_visceroid:
 	Inherits: ^DefaultInfantry
@@ -806,12 +813,12 @@ forgotten_tiberianfiend:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_barracks, forgotten_church, ~!forgotten_promotion_viniferafiend
 		Queue: Infantry, RAInfantry
-		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
+		Description: actor_forgotten_tiberianfiend.description
 	Mobile:
 		Speed: 60
 		Locomotor: foot
 	Tooltip:
-		Name: Tiberian Fiend
+		Name: actor_forgotten_tiberianfiend.name
 	Voiced:
 		VoiceSet: TSFiend
 	-RenderSprites:
@@ -866,12 +873,12 @@ forgotten_viniferafiend:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_barracks, forgotten_church, ~forgotten_promotion_viniferafiend
 		Queue: Infantry, RAInfantry
-		Description: Canine mutant that hurls Tiberium shards. Strong vs Everything.
+		Description: actor_forgotten_viniferafiend.description
 	Mobile:
 		Speed: 60
 		Locomotor: foot
 	Tooltip:
-		Name: Vinifera Fiend
+		Name: actor_forgotten_viniferafiend.name
 	Voiced:
 		VoiceSet: TSFiend
 	-RenderSprites:

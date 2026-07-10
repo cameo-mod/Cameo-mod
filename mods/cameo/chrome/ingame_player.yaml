@@ -1,4 +1,4 @@
-﻿Container@PERF_WIDGETS:
+Container@PERF_WIDGETS:
 	Logic: PerfDebugLogic
 	Children:
 		Label@PERF_TEXT:
@@ -303,8 +303,8 @@ Container@PLAYER_WIDGETS:
 					VisualHeight: 0
 					Background: command-button
 					DisableKeySound: true
-					TooltipText: button-command-bar-force-move.tooltip
-					TooltipDesc: button-command-bar-force-move.tooltipdesc
+					TooltipText: button_command_bar_force_move.tooltip
+					TooltipDesc: button_command_bar_force_move.tooltipdesc
 					TooltipContainer: TOOLTIP_CONTAINER
 					TooltipTemplate: BUTTON_WITH_DESC_HIGHLIGHT_TOOLTIP
 					Children:
@@ -320,8 +320,8 @@ Container@PLAYER_WIDGETS:
 					VisualHeight: 0
 					Background: command-button
 					DisableKeySound: true
-					TooltipText: button-command-bar-force-attack.tooltip
-					TooltipDesc: button-command-bar-force-attack.tooltipdesc
+					TooltipText: button_command_bar_force_attack.tooltip
+					TooltipDesc: button_command_bar_force_attack.tooltipdesc
 					TooltipContainer: TOOLTIP_CONTAINER
 					TooltipTemplate: BUTTON_WITH_DESC_HIGHLIGHT_TOOLTIP
 					Children:
@@ -356,8 +356,8 @@ Container@PLAYER_WIDGETS:
 					Key: Deploy
 					DisableKeyRepeat: true
 					DisableKeySound: true
-					TooltipText: button-command-bar-deploy.tooltip
-					TooltipDesc: button-command-bar-deploy.tooltipdesc
+					TooltipText: button_command_bar_deploy.tooltip
+					TooltipDesc: button_command_bar_deploy.tooltipdesc
 					TooltipContainer: TOOLTIP_CONTAINER
 					Children:
 						Image@ICON:
@@ -540,7 +540,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							Background: sidebar-button
 							Key: PlaceBeacon
-							TooltipText: button-top-buttons-beacon-tooltip
+							TooltipText: button_top_buttons_beacon_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							VisualHeight: 0
 							Children:
@@ -555,7 +555,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							Background: sidebar-button
 							Key: Sell
-							TooltipText: button-top-buttons-sell-tooltip
+							TooltipText: button_top_buttons_sell_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							VisualHeight: 0
 							Children:
@@ -570,7 +570,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							Background: sidebar-button
 							Key: PowerDown
-							TooltipText: button-top-buttons-power-tooltip
+							TooltipText: button_top_buttons_power_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							VisualHeight: 0
 							Children:
@@ -585,7 +585,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							Background: sidebar-button
 							Key: Repair
-							TooltipText: button-top-buttons-repair-tooltip
+							TooltipText: button_top_buttons_repair_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							VisualHeight: 0
 							Children:
@@ -711,7 +711,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-building-tooltip
+							TooltipText: button_production_types_building_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Building
 							Key: ProductionTypeBuilding
@@ -727,7 +727,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-defense-tooltip
+							TooltipText: button_production_types_defense_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Defence
 							Key: ProductionTypeDefense
@@ -743,7 +743,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-infantry-tooltip
+							TooltipText: button_production_types_infantry_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Infantry
 							Key: ProductionTypeInfantry
@@ -759,7 +759,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-vehicle-tooltip
+							TooltipText: button_production_types_vehicle_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Vehicle
 							Key: ProductionTypeVehicle
@@ -775,7 +775,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-aircraft-tooltip
+							TooltipText: button_production_types_aircraft_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Aircraft
 							Key: ProductionTypeAircraft
@@ -791,7 +791,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-naval-tooltip
+							TooltipText: button_production_types_naval_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Ship
 							Key: ProductionTypeNaval
@@ -807,7 +807,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-addon-tooltip
+							TooltipText: button_production_types_addon_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Addon
 							Key: ProductionTypeAddon
@@ -823,7 +823,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-upgrade-tooltip
+							TooltipText: button_production_types_upgrade_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Upgrade
 							Key: ProductionTypeUpgrade
@@ -841,7 +841,7 @@ Container@PLAYER_WIDGETS:
 							Height: 28
 							VisualHeight: 0
 							Background: sidebar-button
-							TooltipText: button-production-types-promotion-tooltip
+							TooltipText: button_production_types_promotion_tooltip
 							TooltipContainer: TOOLTIP_CONTAINER
 							ProductionGroup: Promotion
 							Key: ProductionTypePromotion

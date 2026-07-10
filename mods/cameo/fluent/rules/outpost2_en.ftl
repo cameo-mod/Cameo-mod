@@ -1,4 +1,4 @@
-faction-outpost2-plymouth =
+faction_outpost2_plymouth =
    .description = Features:
    - Splinter Colony
    - High tech faction from NewTerra
@@ -7,7 +7,7 @@ faction-outpost2-plymouth =
 
    Support powers: Supernova Missile
 
-faction-outpost2-eden =
+faction_outpost2_eden =
    .description = Features:
    - Primary Colony
    - High tech faction from NewTerra
@@ -16,330 +16,330 @@ faction-outpost2-eden =
 
    Support powers: Supernova Missile
 
-support-supernova-missile =
+support_supernova_missile =
   .description = Launch a tactical missile.
     Applies heavy damage over a large area.
 
-actor-tokamak =
+actor_tokamak =
   .description = Generates power
     Releases Emp Shockwave on death
 
-actor-eden-residence =
+actor_eden_residence =
   .description = Colony Building
   Needed along with Agridome for Vehicle Factory
   Provides Radar
 
   Limited to 1.
 
-actor-eden-lab-basic =
+actor_eden_lab_basic =
   .description = Basic Laboratory
     Needed along with Nursery and University for Standard Lab
 
-actor-eden-factory-vehicle =
+actor_eden_factory_vehicle =
   .description = Manufactures vehicles.
     Requires Residence and Agridome
 
-actor-eden-garage =
+actor_eden_garage =
   .description = Repairs vehicles.
     Allows construction of MCVs
 
-eden-smelter-common =
+eden_smelter_common =
   .description = Processes resources
 
-eden-agridome =
+eden_agridome =
   .description = Colony Building
   Needed with Residence for Vehicle Factory
 
   Limited to 1.
 
-eden-nursery =
+eden_nursery =
   .description = Colony Building
   Needed with University and Basic Lab for Standard Lab
 
   Limited to 1.
 
-eden-university =
+eden_university =
   .description = Colony Building
   Needed with Nursery and Basic Lab for Standard Lab
 
   Limited to 1.
 
-eden-lab-standard =
+eden_lab_standard =
   .description = Colony Building
   Needed for DIRT, Consumer Factory, GORF, and Advanced Lab
 
   Limited to 1.
 
-eden-dirt =
+eden_dirt =
   .description = Provides Force Shield
 
-eden-rcc =
+eden_rcc =
   .description = Colony Building
   Needed for Consumer Factory
 
   Limited to 1.
 
-eden-factory-consumer =
+eden_factory_consumer =
   .description = Manufactures Consumer Goods
 
-eden-gorf =
+eden_gorf =
   .description = Increases income from Common Ore Smelter
 
-eden-lab-advanced =
+eden_lab_advanced =
   .description = Colony Building
   Needed for Space Port, Rare Ore Smelter
 
   Limited to 1.
 
-eden-spaceport =
+eden_spaceport =
   .description = Needed for Solar Power Array
    Launches Supernova Missiles.
 
-eden-solar-array =
+eden_solar_array =
   .description = Generates power
    Releases Emp Shockwave on
    Death
 
-eden-smelter-rare =
+eden_smelter_rare =
   .description = Needed for Tigers
 
-eden-light-tower =
+eden_light_tower =
   .description = Provides sight and detection.
 
-eden-mine-common =
+eden_mine_common =
   .description = Provides passive income.
    spawns common ore
 
-eden-storage-common =
+eden_storage_common =
   .description = Stores processed Tiberium
 
-eden-gp-laser =
+eden_gp_laser =
   .description = Laser defense.
    Strong vs Tanks, vehicles
    Weak vs Infantry
 
-eden-gp-emp =
+eden_gp_emp =
   .description = EMP defense.
    Strong vs Tanks, vehicles
    Weak vs Infantry
 
-eden-gp-railgun =
+eden_gp_railgun =
   .description = Railgun defense.
    Strong vs Tanks, vehicles
    Weak vs Infantry
 
-consumer-items-impulse =
+consumer_items_impulse =
   .description = Cheap Items - Returns $600
 
-consumer-items-wares =
+consumer_items_wares =
   .description = Basic Items - Returns $1100
 
-consumer-items-luxury-wares =
+consumer_items_luxury_wares =
   .description = Luxury Items - Returns $2300
 
 # PLYMOUTH localizations (mirror of Eden)
-plymouth-smelter-common =
+plymouth_smelter_common =
   .description = Processes resources
 
-plymouth-agridome =
+plymouth_agridome =
   .description = Colony Building
   Needed with Residence for Vehicle Factory
 
   Limited to 1.
 
-plymouth-nursery =
+plymouth_nursery =
   .description = Colony Building
   Needed with University and Basic Lab for Standard Lab
 
   Limited to 1.
 
-plymouth-university =
+plymouth_university =
   .description = Colony Building
   Needed with Nursery and Basic Lab for Standard Lab
 
   Limited to 1.
 
-plymouth-lab-standard =
+plymouth_lab_standard =
   .description = Colony Building
   Needed for DIRT, Consumer Factory, GORF, and Advanced Lab
 
   Limited to 1.
 
-plymouth-dirt =
+plymouth_dirt =
   .description = Provides Force Shield
 
-plymouth-rcc =
+plymouth_rcc =
   .description = Colony Building
   Needed for Consumer Factory
 
   Limited to 1.
 
-plymouth-factory-consumer =
+plymouth_factory_consumer =
   .description = Manufactures Consumer Goods
 
-plymouth-gorf =
+plymouth_gorf =
   .description = Increases income from Common Ore Smelter
 
-plymouth-lab-advanced =
+plymouth_lab_advanced =
   .description = Colony Building
   Needed for Space Port, Rare Ore Smelter
 
   Limited to 1.
 
-plymouth-spaceport =
+plymouth_spaceport =
   .description = Needed for Solar Power Array
    Launches Supernova Missiles.
 
-plymouth-solar-array =
+plymouth_solar_array =
   .description = Generates power
    Releases Emp Shockwave on
    Death
 
-plymouth-smelter-rare =
+plymouth_smelter_rare =
   .description = Needed for Tigers
 
-plymouth-light-tower =
+plymouth_light_tower =
   .description = Provides sight and detection.
 
-plymouth-mine-common =
+plymouth_mine_common =
   .description = Provides passive income.
    spawns common ore
 
-plymouth-storage-common =
+plymouth_storage_common =
   .description = Stores processed Tiberium
 
-plymouth-gp-microwave =
+plymouth_gp_microwave =
   .description = Microwave defense.
    Strong vs Tanks, vehicles
    Weak vs Infantry
 
-plymouth-gp-stickyfoam =
+plymouth_gp_stickyfoam =
   .description = Stickyfoam defense.
    Strong vs Tanks, vehicles
    Weak vs Infantry
 
-plymouth-gp-rpg =
+plymouth_gp_rpg =
   .description = RPG defense.
    Strong vs Tanks, vehicles
    Doubles as Anti-air
 
-plymouth-convec-structure-factory =
+plymouth_convec_structure_factory =
   .description = Deploys into a Structure Factory.
    Unarmed
 
-plymouth-scout =
+plymouth_scout =
   .description = Fast scout armed with a machine gun
 
-plymouth-lynx-microwave =
+plymouth_lynx_microwave =
   .description = Fast microwave vehicle
 
-plymouth-tiger-microwave =
+plymouth_tiger_microwave =
   .description = Slow and strong microwave vehicle
 
-plymouth-lynx-rpg =
+plymouth_lynx_rpg =
   .description = Fast rpg vehicle
 
-plymouth-tiger-rpg =
+plymouth_tiger_rpg =
   .description = Slow and strong RPG vehicle
 
-plymouth-lynx-emp =
+plymouth_lynx_emp =
   .description = Fast EMP vehicle
 
-plymouth-tiger-emp =
+plymouth_tiger_emp =
   .description = Slow and strong EMP vehicle
 
-plymouth-lynx-stickyfoam =
+plymouth_lynx_stickyfoam =
   .description = Fast Stickyfoam vehicle
 
-plymouth-tiger-stickyfoam =
+plymouth_tiger_stickyfoam =
   .description = Slow and strong Stickyfoam vehicle
 
-plymouth-lynx-esg =
+plymouth_lynx_esg =
   .description = Fast ESG vehicle
 
-plymouth-tiger-esg =
+plymouth_tiger_esg =
   .description = Slow and strong ESG vehicle
 
-plymouth-lynx-starflare =
+plymouth_lynx_starflare =
   .description = Fast starflare vehicle
 
-plymouth-tiger-starflare =
+plymouth_tiger_starflare =
   .description = Slow and strong Starflare vehicle
 
-plymouth-lynx-supernova =
+plymouth_lynx_supernova =
   .description = Fast supernova vehicle
 
-plymouth-tiger-supernova =
+plymouth_tiger_supernova =
   .description = Slow and strong Supernova vehicle
 
-eden-convec-structure-factory =
+eden_convec_structure_factory =
   .description = Deploys into another Command Center.
    Unarmed
 
-eden-scout =
+eden_scout =
   .description = Fast scout armed with a machine gun
 
-eden-lynx-laser =
+eden_lynx_laser =
   .description = Fast laser vehicle
 
-eden-tiger-microwave =
+eden_tiger_microwave =
   .description = Slow and strong laser vehicle
 
-eden-lynx-railgun =
+eden_lynx_railgun =
   .description = Fast railgun vehicle
 
-eden-tiger-railgun =
+eden_tiger_railgun =
   .description = Slow and strong railgun vehicle
 
-eden-lynx-emp =
+eden_lynx_emp =
   .description = Fast EMP vehicle
 
-eden-tiger-emp =
+eden_tiger_emp =
   .description = Slow and strong EMP vehicle
 
-eden-lynx-acidcloud =
+eden_lynx_acidcloud =
   .description = Fast AcidCloud vehicle
 
-eden-tiger-acidcloud =
+eden_tiger_acidcloud =
   .description = Slow and strong AcidCloud vehicle
 
-eden-lynx-starflare =
+eden_lynx_starflare =
   .description = Fast starflare vehicle
 
-eden-tiger-starflare =
+eden_tiger_starflare =
   .description = Slow and strong Starflare vehicle
 
-eden-lynx-thorshammer =
+eden_lynx_thorshammer =
   .description = Fast ThorsHammer vehicle
 
-eden-tiger-thorshammer =
+eden_tiger_thorshammer =
   .description = Slow and strong ThorsHammer vehicle
 
-plymouth-residence =
+plymouth_residence =
   .description = Colony Building
   Needed with Agridome for Vehicle Factory
   Provides Radar
 
   Limited to 1.
 
-plymouth-basic-lab =
+plymouth_basic_lab =
   .description = Colony Building
   Needed with Nursery and University for Standard Lab
 
   Limited to 1.
 
-plymouth-factory-vehicle =
+plymouth_factory_vehicle =
   .description = Constructs Vehicles
 
-plymouth-garage =
+plymouth_garage =
   .description = Repairs vehicles.
    Allows construction of MCVs
 
-plymouth-factory-arachnid =
+plymouth_factory_arachnid =
   .description = Constructs Arachnids
 
-plymouth-spider =
+plymouth_spider =
   .description = Arachnid capable of repair and capturing vehicles
 
-plymouth-scorpion =
+plymouth_scorpion =
   .description = Arachnid armed with laser

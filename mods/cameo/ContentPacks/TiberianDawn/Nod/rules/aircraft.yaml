@@ -10,7 +10,7 @@ tran.nod:
 		BuildPaletteOrder: 10
 		Prerequisites: ~hpad.nod
 		Queue: Aircraft, RAAircraft
-		Description: actor-tran.description
+		Description: actor_tran.description
 	EjectOnDeath:
 		PilotActor: e1.nod
 	Cargo:
@@ -42,7 +42,7 @@ HELI:
 		BuildPaletteOrder: 20
 		Prerequisites: ~hpad.nod
 		Queue: Aircraft, RAAircraft
-		Description: actor-heli.description
+		Description: actor_heli.description
 	Aircraft:
 		Speed: 160
 		TurnSpeed: 32
@@ -139,7 +139,7 @@ nodvenom:
 		BuildPaletteOrder: 20
 		Prerequisites: ~hpad.nod, td_nod_templeprime, ~upnodvenom
 		Queue: Aircraft, RAAircraft
-		Description: actor-venom.description
+		Description: actor_venom.description
 	Aircraft:
 		TurnSpeed: 40
 		Speed: 200

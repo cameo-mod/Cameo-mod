@@ -1,5 +1,5 @@
 ts_nod_silo:
-	Inherits: TSGTSILO
+	Inherits: ts_gdi_silo
 	Tooltip:
 		Name: Silo
 	Buildable:
@@ -59,11 +59,11 @@ ts_nod_missilesilo:
 		TargetCircleRange: 5c0
 		ChargeInterval: 7500
 		Names:
-			1: power-clustermissile.name
-			2: power-chemicalmissile.name
+			1: power_clustermissile.name
+			2: power_chemicalmissile.name
 		Descriptions:
-			1: power-clustermissile.description
-			2: power-chemicalmissile.description
+			1: power_clustermissile.description
+			2: power_chemicalmissile.description
 		SelectTargetSpeechNotification: SelectTarget
 		SelectTargetTextNotification: Select target.
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -399,7 +399,7 @@ ts_nod_laserfence:
 	LineBuild:
 		Range: 10
 		NodeTypes: laserfencenode
-		SegmentType: tsnafnce
+		SegmentType: ts_nod_laserfence_segment
 		SegmentsRequireNode: true
 	LineBuildNode:
 		Types: laserfencenode

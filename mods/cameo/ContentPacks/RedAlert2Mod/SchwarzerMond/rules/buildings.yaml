@@ -37,7 +37,7 @@ powr.nax2:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~conyard.nax2
 	Building:
 		Footprint: xxx xxx
@@ -116,7 +116,7 @@ radar.nax2:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~conyard.nax2, refin.nax2
-		Description: template-radar.description
+		Description: template_radar.description
 	Tooltip:
 		Name: Schwarzer Mond Radar
 	Building:
@@ -196,7 +196,7 @@ twr.nax2:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~conyard.nax2, barr.nax2
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -255,7 +255,7 @@ sturmcann.nax2:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~conyard.nax2, weap.nax2
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -305,7 +305,7 @@ tech.nax2:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~conyard.nax2, radar.nax2
-		Description: template-radar.description
+		Description: template_radar.description
 	Tooltip:
 		Name: Schwarzer Mond Tech Center
 	Building:
@@ -324,7 +324,7 @@ weap.nax2:
 		BuildPaletteOrder: 40
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Description: template-factory.description
+		Description: template_factory.description
 		Prerequisites: ~conyard.nax2, refin.nax2
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
@@ -349,7 +349,7 @@ meteorray.nax2:
 		BuildPaletteOrder: 100
 		Prerequisites: ~conyard.nax2, tech.nax2, !meteorray.nax2, ~techlevel.superweapons
 		Queue: Defence, RADefence
-		Description: actor-namisl.description
+		Description: actor_namisl.description
 	Building:
 		Footprint: xxx xxx xxx
 		Dimensions: 3,3

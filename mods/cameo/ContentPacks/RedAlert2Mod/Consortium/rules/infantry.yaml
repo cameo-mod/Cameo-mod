@@ -18,7 +18,7 @@ fedinf.steel:
 		BuildPaletteOrder: 10
 		Prerequisites: ~qabarr.steel
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 57
 	Health:
@@ -92,7 +92,7 @@ board_inf.steel:
 		BuildPaletteOrder: 20
 		Prerequisites: ~qabarr.steel, qtradr.steel
 		Queue: Infantry, RAInfantry
-		Description: actor-steel_board_inf.description
+		Description: actor_steel_board_inf.description
 	Mobile:
 		Locomotor: hover
 		Speed: 130
@@ -182,7 +182,7 @@ qinf.steel:
 		BuildPaletteOrder: 20
 		Prerequisites: ~qabarr.steel, qatech.steel
 		Queue: Infantry, RAInfantry
-		Description: actor-ggi.description
+		Description: actor_ggi.description
 	Mobile:
 		Speed: 48
 	Health:
@@ -356,7 +356,7 @@ runner.steel:
 		BuildPaletteOrder: 120
 		Prerequisites: ~qabarr.steel, qatech.steel
 		BuildLimit: 1
-		Description: template-commando.description
+		Description: template_commando.description
 	Health:
 		HP: 60000
 	ChangesHealth@SelfHealing:

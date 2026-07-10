@@ -23,7 +23,7 @@ katy.steel:
 		BuildPaletteOrder: 75
 		Prerequisites: ~qaweap.steel, up_katy.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_katy.description
+		Description: actor_steel_katy.description
 	Mobile:
 		Locomotor: amphibius
 		Speed: 45
@@ -222,7 +222,7 @@ stalker.steel:
 		BuildPaletteOrder: 75
 		Prerequisites: ~qaweap.steel, up_stalker.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_beholder.description
+		Description: actor_steel_beholder.description
 	Mobile:
 		Locomotor: hover
 		Speed: 80
@@ -317,7 +317,7 @@ white_rabbit.steel:
 		BuildPaletteOrder: 75
 		Prerequisites: ~qaweap.steel, up_white_rabbit.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_beholder.description
+		Description: actor_steel_beholder.description
 	Mobile:
 		Locomotor: hover
 		Speed: 50
@@ -403,7 +403,7 @@ cougar.steel:
 		BuildPaletteOrder: 60
 		Prerequisites: ~qaweap.steel, ~disabled
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Mobile:
 		Speed: 150
 		TurnSpeed: 30
@@ -462,7 +462,7 @@ hummer.steel:
 		BuildPaletteOrder: 60
 		Prerequisites: ~qaweap.steel, ~disabled
 		Queue: Vehicle, RAVehicle
-		Description: actor-aaquas.description
+		Description: actor_aaquas.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 110
@@ -523,7 +523,7 @@ oldqtnk.steel:
 		BuildPaletteOrder: 60
 		Prerequisites: ~qaweap.steel, qatech.steel, ~disabled
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -588,7 +588,7 @@ cobra.steel:
 		BuildPaletteOrder: 60
 		Prerequisites: ~qaweap.steel, qatech.steel, ~disabled
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 55
 		TurnSpeed: 22
@@ -649,7 +649,7 @@ savi.steel:
 		BuildPaletteOrder: 40
 		Prerequisites: ~qaweap.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_savi.description
+		Description: actor_steel_savi.description
 	Mobile:
 		Locomotor: amphibius
 		Speed: 75
@@ -769,7 +769,7 @@ qmin.steel:
 	Buildable:
 		Prerequisites: ~qref.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-cmin.description
+		Description: actor_cmin.description
 	WithHarvestAnimation:
 	WithDockingAnimation:
 	DockClientManager:
@@ -813,7 +813,7 @@ mako.steel:
 		BuildPaletteOrder: 30
 		Prerequisites: ~qaweap.steel, ~!up_quantumtank.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_mako.description
+		Description: actor_steel_mako.description
 	Mobile:
 		Locomotor: hover
 		Speed: 85
@@ -892,7 +892,7 @@ quantumtank.steel:
 		BuildPaletteOrder: 30
 		Prerequisites: ~qaweap.steel, ~up_quantumtank.steel
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: amphibius
 		Speed: 100
@@ -975,7 +975,7 @@ manta.steel:
 		BuildPaletteOrder: 40
 		Prerequisites: ~qaweap.steel, ~!up_manta_hunt.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_manta.description
+		Description: actor_steel_manta.description
 	Mobile:
 		Locomotor: hover
 		Speed: 115
@@ -1210,7 +1210,7 @@ mega.steel:
 		BuildPaletteOrder: 50
 		Prerequisites: ~qaweap.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_mega.description
+		Description: actor_steel_mega.description
 	Mobile:
 		Locomotor: amphibius
 		Speed: 65
@@ -1382,7 +1382,7 @@ potnk.steel:
 		BuildPaletteOrder: 75
 		Prerequisites: ~qaweap.steel, qtradr.steel
 		Queue: Vehicle, RAVehicle
-		Description: template-opentopped.description
+		Description: template_opentopped.description
 	Mobile:
 		Locomotor: amphibius
 		Speed: 50
@@ -1454,7 +1454,7 @@ dagger.steel:
 		BuildPaletteOrder: 60
 		Prerequisites: ~qaweap.steel, up_dagger.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-aahowi.description
+		Description: actor_aahowi.description
 	Mobile:
 		Locomotor: hover
 		Speed: 100
@@ -1512,7 +1512,7 @@ beholder.steel:
 		BuildPaletteOrder: 75
 		Prerequisites: ~qaweap.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_beholder.description
+		Description: actor_steel_beholder.description
 	Mobile:
 		Locomotor: hover
 		Speed: 125

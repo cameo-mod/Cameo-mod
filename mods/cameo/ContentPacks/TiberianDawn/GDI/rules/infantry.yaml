@@ -10,7 +10,7 @@ E1.GDI:
 		BuildPaletteOrder: 10
 		Prerequisites: ~pyle
 		Queue: Infantry, RAInfantry
-		Description: actor-e1.description
+		Description: actor_e1.description
 	Armament@PRIMARY: ##########
 		Weapon: M16
 		RequiresCondition: !up_armorpiercingbullets
@@ -58,7 +58,7 @@ E2:
 		BuildPaletteOrder: 40
 		Prerequisites: ~pyle, ~!upgdiempgrenadier
 		Queue: Infantry, RAInfantry
-		Description: actor-e2.description
+		Description: actor_e2.description
 	Mobile:
 		Speed: 75
 	Health:
@@ -179,7 +179,7 @@ gdiempgrenadier:
 		BuildPaletteOrder: 40
 		Prerequisites: ~pyle, ~upgdiempgrenadier
 		Queue: Infantry, RAInfantry
-		Description: actor-empgrenadier.description
+		Description: actor_empgrenadier.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -235,7 +235,7 @@ gdimissilesoldier:
 		BuildPaletteOrder: 20
 		Prerequisites: ~pyle, ~upgdimissilesoldier
 		Queue: Infantry, RAInfantry
-		Description: actor-e3.description
+		Description: actor_e3.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -279,7 +279,7 @@ gdisniper:
 		BuildPaletteOrder: 40
 		Prerequisites: ~pyle, hq.gdi, upgdisniper
 		Queue: Infantry, RAInfantry
-		Description: actor-gdisniper.description
+		Description: actor_gdisniper.description
 	Mobile:
 		Speed: 78
 	Health:
@@ -321,7 +321,7 @@ gdishotgunner:
 		BuildPaletteOrder: 10
 		Prerequisites: ~pyle, upgdishotgunner
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 75
 	Health:
@@ -372,7 +372,7 @@ gdiofficer:
 	Buildable:
 		Prerequisites: ~pyle, hq.gdi, upgdiofficer
 		Queue: Infantry, RAInfantry
-		Description: actor-gdiofficer.description
+		Description: actor_gdiofficer.description
 	Armament@PRIMARY:
 		Weapon: OfficerMachineGun
 		LocalOffset: 128,0,256
@@ -443,7 +443,7 @@ gdihavoc:
 		BuildPaletteOrder: 50
 		Prerequisites: ~pyle, eye, ~upgdihavoc
 		Queue: Infantry, RAInfantry
-		Description: actor-havoc.description
+		Description: actor_havoc.description
 	RenderSprites:
 		PlayerPalette: playerra2
 	Mobile:

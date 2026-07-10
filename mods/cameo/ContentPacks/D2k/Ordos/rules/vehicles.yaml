@@ -186,7 +186,7 @@ harv.ordos:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~spice_refinery, ~heavy_factory.ordos
 		BuildPaletteOrder: 10
-		Description: template-harvester.description
+		Description: template_harvester.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 500
@@ -1614,7 +1614,7 @@ combat_tank.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Description: template-mbt.description
+		Description: template_mbt.description
 		IconPalette: d2kunit
 		Prerequisites: ~heavy_factory.ordos, ~!up_heavycombattank.ordos
 	UpdatesPlayerStatistics:
@@ -1672,7 +1672,7 @@ heavycombattank.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Description: template-mbt.description
+		Description: template_mbt.description
 		IconPalette: d2kunit
 		Prerequisites: ~heavy_factory.ordos, ~up_heavycombattank.ordos
 	UpdatesPlayerStatistics:

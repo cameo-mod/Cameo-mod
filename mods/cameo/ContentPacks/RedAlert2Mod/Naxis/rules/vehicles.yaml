@@ -78,7 +78,7 @@ halftrack.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-apc.description
+		Description: actor_apc.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 115
@@ -135,7 +135,7 @@ kubel.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_kubel.description
+		Description: actor_nax_kubel.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 115
@@ -188,7 +188,7 @@ wirbelwind.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_wirbelwind.description
+		Description: actor_nax_wirbelwind.description
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -295,7 +295,7 @@ tiger.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, ~!up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -358,7 +358,7 @@ kingtiger.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -422,7 +422,7 @@ maus.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, tech.nax, up_sturmtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -488,7 +488,7 @@ ratte.nax:
 		BuildLimit: 1
 		Prerequisites: ~weap.nax, tech.nax, up_ratte.nax
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 35
 		TurnSpeed: 7
@@ -568,7 +568,7 @@ grille.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax, ~!up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_grille.description
+		Description: actor_nax_grille.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 80
@@ -620,7 +620,7 @@ brummbar.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_brummbar.description
+		Description: actor_nax_brummbar.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 60
@@ -671,7 +671,7 @@ sturmtiger.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, tech.nax, up_sturmtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_sturmtiger.description
+		Description: actor_nax_sturmtiger.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 30
@@ -718,7 +718,7 @@ hetzer.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax, ~!up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_hetzer.description
+		Description: actor_nax_hetzer.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 75
@@ -772,7 +772,7 @@ jagdpanzer.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_jagdpanzer.description
+		Description: actor_nax_jagdpanzer.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 50
@@ -824,7 +824,7 @@ eng.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, powr.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_eng.description
+		Description: actor_nax_eng.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -891,7 +891,7 @@ brad.nax:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
 		Prerequisites: ~weap.nax, tech.nax, up_brad.nax
-		Description: actor-nax_brad.description
+		Description: actor_nax_brad.description
 	Valued:
 		Cost: 2300
 	Tooltip:
@@ -991,7 +991,7 @@ sarubia.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, tech.nax, up_sarubia.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_sarubia.description
+		Description: actor_nax_sarubia.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 65
@@ -1043,7 +1043,7 @@ shoe.nax:
 		BuildPaletteOrder: 70
 		Prerequisites: ~weap.nax, tech.nax, up_shoe.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_shoe.description
+		Description: actor_nax_shoe.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -1131,7 +1131,7 @@ nokana.nax:
 		BuildLimit: 1
 		Prerequisites: ~weap.nax, tech.nax, up_nokana.nax
 		Queue: Vehicle, RAVehicle
-		Description: actor-nax_nokana.description
+		Description: actor_nax_nokana.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
@@ -1206,7 +1206,7 @@ zombietank.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax
 		Queue: Vehicle, RAVehicle
-		Description: template-opentopped.description
+		Description: template_opentopped.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 12
@@ -1280,7 +1280,7 @@ assault.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, ~disabled, ~up_kingtiger.nax
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 18
@@ -1349,7 +1349,7 @@ imperial.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax, !disabled
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 110
@@ -1414,7 +1414,7 @@ panzer.nax:
 		BuildPaletteOrder: 40
 		Prerequisites: ~weap.nax, ~disabled
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 100
@@ -1479,7 +1479,7 @@ car.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap.nax, radar.nax, ~disabled
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17

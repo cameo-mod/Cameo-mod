@@ -17,7 +17,7 @@ panth.asian:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cgyard.asian
 		Queue: Naval, RANaval
-		Description: actor-aapanth.description
+		Description: actor_aapanth.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -89,7 +89,7 @@ ksub.asian:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgyard.asian
 		Queue: Naval, RANaval
-		Description: actor-aaksub.description
+		Description: actor_aaksub.description
 	Mobile:
 		Speed: 125
 		TurnSpeed: 50
@@ -153,7 +153,7 @@ gunb.asian:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cgyard.asian
 		Queue: Naval, RANaval
-		Description: actor-aagunb.description
+		Description: actor_aagunb.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 36
@@ -233,7 +233,7 @@ lsub.asian:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgyard.asian, cgradr.asian
 		Queue: Naval, RANaval
-		Description: actor-ra2sub.description
+		Description: actor_ra2sub.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -287,7 +287,7 @@ quasfrig.asian:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cgyard.asian, cgradr.asian
 		Queue: Naval, RANaval
-		Description: actor-aaquasfrig.description
+		Description: actor_aaquasfrig.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 30
@@ -351,7 +351,7 @@ karrier.asian:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cgyard.asian, cgtech.asian, ~!up_tsunami.asian
 		Queue: Naval, RANaval
-		Description: actor-aacarrier.description
+		Description: actor_aacarrier.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:
@@ -400,7 +400,7 @@ tsun.asian:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cgyard.asian, cgmiac.asian, ~up_tsunami.asian
 		Queue: Naval, RANaval
-		Description: actor-aatsun.description
+		Description: actor_aatsun.description
 	Selectable:
 		DecorationBounds: 2048, 2048
 	Mobile:

@@ -22,7 +22,7 @@ Container@GAMEPLAY_PANEL:
 							Height: PARENT_HEIGHT
 							Font: TinyBold
 							Align: Center
-							Text: label-game-play-section-header
+							Text: label_game_play_section_header
 				Container@ROW:
 					Width: PARENT_WIDTH - 24
 					Height: 50
@@ -49,7 +49,7 @@ Container@GAMEPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
-									Text: auto-save-nr-label
+									Text: auto_save_nr_label
 								DropDownButton@AUTO_SAVE_FILE_NUMBER_DROP_DOWN:
 									Y: 25
 									Width: PARENT_WIDTH
@@ -67,6 +67,6 @@ Container@GAMEPLAY_PANEL:
 									Width: PARENT_WIDTH
 									Height: 20
 									Font: Regular
-									Text: checkbox-quota-mode.label
-									TooltipText: checkbox-quota-mode.tooltip
+									Text: checkbox_quota_mode.label
+									TooltipText: checkbox_quota_mode.tooltip
 									TooltipContainer: SETTINGS_TOOLTIP_CONTAINER

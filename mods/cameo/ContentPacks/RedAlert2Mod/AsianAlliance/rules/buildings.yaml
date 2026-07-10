@@ -43,7 +43,7 @@ cgapwr.asian:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~cgcnst.asian
 	Building:
 		Footprint: xx xx
@@ -230,7 +230,7 @@ cgtech.asian:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Prerequisites: ~cgcnst.asian, cgradr.asian
-		Description: template-tech-center.description
+		Description: template_tech_center.description
 	Tooltip:
 		Name: Asian Battle Lab
 	Building:
@@ -534,7 +534,7 @@ cgflam.asian:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgcnst.asian, cgbrck.asian
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -583,7 +583,7 @@ cgpnch.asian:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgyard.asian
-		Description: actor-cgpnch.description
+		Description: actor_cgpnch.description
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -645,7 +645,7 @@ cgpuls.asian:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
 		Prerequisites: ~cgcnst.asian, cgradr.asian
-		Description: template-anti-aircraft-power-defense.description
+		Description: template_anti_aircraft_power_defense.description
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -696,7 +696,7 @@ cgrail.asian:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
 		Prerequisites: ~cgcnst.asian, cgtech.asian
-		Description: template-anti-vehicle-defense.description
+		Description: template_anti_vehicle_defense.description
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -762,7 +762,7 @@ cgchtw.asian:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Prerequisites: ~cgcnst.asian, cgmiac.asian
-		Description: actor-cgchtw.description
+		Description: actor_cgchtw.description
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -817,7 +817,7 @@ cgplas.asian:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
 		Prerequisites: ~cgcnst.asian, cgmiac.asian
-		Description: actor-cgplas.description
+		Description: actor_cgplas.description
 	Valued:
 		Cost: 4000
 	Tooltip:
@@ -870,7 +870,7 @@ cghype.asian:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgcnst.asian, cgmiac.asian
-		Description: actor-cghype.description
+		Description: actor_cghype.description
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -922,7 +922,7 @@ cgtnkr.asian:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Building, RABuilding
-		Description: actor-cgtnkr.description
+		Description: actor_cgtnkr.description
 		Prerequisites: ~cgcnst.asian, cgtech.asian
 	Building:
 		Footprint: xxx =x=
@@ -967,7 +967,7 @@ cgionc.asian:
 	Inherits@sell: ^AASpawnActorsOnSell
 	Buildable:
 		Prerequisites: ~cgcnst.asian, cgtech.asian, !cgionc.asian, ~techlevel.superweapons
-		Description: actor-cgionc.description
+		Description: actor_cgionc.description
 	Tooltip:
 		Name: Advanced Communication Center
 	Building:
@@ -989,9 +989,9 @@ cgionc.asian:
 		EffectSequence: targeting
 		EffectPalette: ra2effect
 		Names:
-			1: power-ioncannon.name
+			1: power_ioncannon.name
 		Descriptions:
-			1: power-ioncannon.description
+			1: power_ioncannon.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeTextNotification: Ion Cannon ready.
@@ -1023,7 +1023,7 @@ cgchao.asian:
 		Name: Chaos Storm Inductor
 	Buildable:
 		Prerequisites: ~cgcnst.asian, cgtech.asian, ~techlevel.superweapons
-		Description: actor-cgchao.description
+		Description: actor_cgchao.description
 	Building:
 		Footprint: =x= xxx xxx
 		Dimensions: 3,3
@@ -1042,11 +1042,11 @@ cgchao.asian:
 		ActivationDelay: 25
 		ActivationSequence:
 		Names:
-			1: power-chaos.name
+			1: power_chaos.name
 		Weapons:
 			1: AsianChaosSuperweapon
 		Descriptions:
-			1: power-chaos.description
+			1: power_chaos.description
 		BeginChargeSpeechNotification: IonCannonCharging
 		EndChargeSpeechNotification: IonCannonReady
 		EndChargeSound: sgenopen.wav

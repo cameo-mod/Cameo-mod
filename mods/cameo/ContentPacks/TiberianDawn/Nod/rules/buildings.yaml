@@ -83,7 +83,7 @@ AFLD:
 		BuildDuration: 375
 		BuildDurationModifier: 100
 		Prerequisites: ~fact.nod, proc.nod
-		Description: actor-afld.description
+		Description: actor_afld.description
 	Building:
 		Footprint: XXX+ xxx+ ====
 		Dimensions: 4,3
@@ -238,7 +238,7 @@ TMPL:
 		BuildPaletteOrder: 100
 		Prerequisites: ~fact.nod, hq.nod
 		Queue: Building, RABuilding
-		Description: actor-tmpl.description
+		Description: actor_tmpl.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -259,9 +259,9 @@ TMPL:
 		Cursor: nuke
 		ChargeInterval: 10500
 		Names:
-			1: power-nuke.tdname
+			1: power_nuke.tdname
 		Descriptions:
-			1: power-nuke.description
+			1: power_nuke.description
 		EndChargeSpeechNotification: NuclearWeaponAvailable
 		EndChargeTextNotification: Nuclear Missile ready.
 		SelectTargetSpeechNotification: SelectTarget
@@ -334,7 +334,7 @@ tmpl.nuke:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Prerequisites: ~fact.nod, tmpl, !nodnuke, ~techlevel.superweapons
-		Description: actor-tmpl.nuke-description
+		Description: actor_tmpl.nuke-description
 	Power:
 		Amount: -100
 	Plug:
@@ -362,7 +362,7 @@ td_nod_templeprime:
 		BuildPaletteOrder: 100
 		Prerequisites: ~fact.nod, tmpl
 		Queue: Building, RABuilding
-		Description: actor-tmpl.description
+		Description: actor_tmpl.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -397,7 +397,7 @@ GUN:
 		BuildPaletteOrder: 45
 		Prerequisites: ~fact.nod, hand
 		Queue: Defence, RADefence
-		Description: actor-gun.description
+		Description: actor_gun.description
 	Building:
 	Health:
 		HP: 150000
@@ -453,7 +453,7 @@ NodLaserTurret:
 		BuildPaletteOrder: 45
 		Prerequisites: ~fact.nod, hand
 		Queue: Defence, RADefence
-		Description: actor-nalasr.description
+		Description: actor_nalasr.description
 	Building:
 	Health:
 		HP: 72500
@@ -499,7 +499,7 @@ SAM:
 		BuildPaletteOrder: 50
 		Prerequisites: ~fact.nod, hand, hq.nod
 		Queue: Defence, RADefence
-		Description: actor-sam.description
+		Description: actor_sam.description
 	Building:
 		Footprint: xx
 		Dimensions: 2,1
@@ -549,7 +549,7 @@ OBLI:
 		BuildPaletteOrder: 60
 		Prerequisites: ~fact.nod, tmpl
 		Queue: Defence, RADefence
-		Description: actor-obli.description
+		Description: actor_obli.description
 	Selectable:
 		Bounds: 1024, 1792, 0, -512
 	SelectionDecorations:

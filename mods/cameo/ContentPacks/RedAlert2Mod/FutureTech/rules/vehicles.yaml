@@ -8,7 +8,7 @@ mcv.futu:
 		Name: FutureTech Mobile Construction Vehicle
 	Buildable:
 		Prerequisites: ~egweap2.futu, egtf.futu
-		Description: actor-futu_mcv.description
+		Description: actor_futu_mcv.description
 	Transforms:
 		IntoActor: egcnst.futu
 		Offset: -1,-1
@@ -45,7 +45,7 @@ mech_machinegun.futu:
 		BuildPaletteOrder: 75
 		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-future_mech_machinegun.description
+		Description: actor_future_mech_machinegun.description
 	Mobile:
 		Speed: 35
 		TurnSpeed: 14
@@ -102,7 +102,7 @@ mech_plasma.futu:
 		BuildPaletteOrder: 75
 		Prerequisites: ~egweap2.futu, egshock.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-future_mech_plasma.description
+		Description: actor_future_mech_plasma.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -156,7 +156,7 @@ ifv.futu:
 	Buildable:
 		Prerequisites: ~egweap2.futu, ~up_salamander.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_ifv.description
+		Description: actor_futu_ifv.description
 	Mobile:
 		Speed: 150
 		TurnSpeed: 30
@@ -195,7 +195,7 @@ yrrobo.futu:
 		BuildPaletteOrder: 70
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_robot_tank.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-robo.description
+		Description: actor_robo.description
 	Mobile:
 		Locomotor: hover
 		Speed: 130
@@ -276,7 +276,7 @@ mbt.futu:
 		BuildPaletteOrder: 40
 		Prerequisites: ~egweap2.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_mbt.description
+		Description: actor_futu_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 85
@@ -375,7 +375,7 @@ hvrt.futu:
 		BuildPaletteOrder: 60
 		Prerequisites: ~egweap2.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_hvrt.description
+		Description: actor_futu_hvrt.description
 	Mobile:
 		Speed: 105
 		TurnSpeed: 21
@@ -440,7 +440,7 @@ phal.futu:
 		BuildPaletteOrder: 60
 		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_phal.description
+		Description: actor_futu_phal.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 19
@@ -509,7 +509,7 @@ landcarr.futu:
 		BuildPaletteOrder: 75
 		Prerequisites: ~egweap2.futu, egshock.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_landcarr.description
+		Description: actor_futu_landcarr.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 45
@@ -586,7 +586,7 @@ orion.futu:
 		BuildPaletteOrder: 80
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_orion.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_orion.description
+		Description: actor_futu_orion.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
@@ -676,7 +676,7 @@ harv.futu:
 	Buildable:
 		Prerequisites: ~egrefn.futu, ~!up_prospector.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_harv.description
+		Description: actor_futu_harv.description
 	WithHarvestAnimation:
 	WithDockingAnimation:
 	DockClientManager:
@@ -728,7 +728,7 @@ harv2.futu:
 	Buildable:
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_prospector.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_harv2.description
+		Description: actor_futu_harv2.description
 	WithHarvestAnimation:
 	WithDockingAnimation:
 	DockClientManager:
@@ -777,7 +777,7 @@ athena.futu:
 		BuildPaletteOrder: 60
 		Prerequisites: ~egweap2.futu, egtf.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_athena.description
+		Description: actor_futu_athena.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
@@ -836,7 +836,7 @@ coiler.futu:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 170
 		Prerequisites: ~egweap2.futu, egshock.futu
-		Description: actor-futu_coiler.description
+		Description: actor_futu_coiler.description
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -902,7 +902,7 @@ futu.futu:
 		BuildLimit: 1
 		Prerequisites: ~egweap2.futu, egshock.futu, yrgarobo.futu, ~up_futuretank.futu
 		Queue: Vehicle, RAVehicle
-		Description: actor-futu_futu.description
+		Description: actor_futu_futu.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 45

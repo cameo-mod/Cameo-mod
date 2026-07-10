@@ -16,7 +16,7 @@ CNCSS:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cncspen
 		Queue: Naval, RANaval
-		Description: actor-ss.description
+		Description: actor_ss.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -75,7 +75,7 @@ ssmsub:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cncspen, hq.nod
 		Queue: Naval, RANaval
-		Description: actor-msub.description
+		Description: actor_msub.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 24
@@ -141,7 +141,7 @@ nodlasercorvette:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cncspen, tmpl
 		Queue: Naval, RANaval
-		Description: actor-nodlasercorvette.description
+		Description: actor_nodlasercorvette.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12

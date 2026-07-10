@@ -190,7 +190,7 @@ ts_nod_toxintrooper:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-ts_nod_shadteam:
+ts_nod_shadowteam:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -206,14 +206,14 @@ ts_nod_shadteam:
 	Valued:
 		Cost: 900
 	Tooltip:
-		Name: Shadow Team
+		Name: actor_ts_nod_shadowteam.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOsrder: 90
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
-		Description: actor-ts_nod_shadteam.description
+		Description: actor_ts_nod_shadowteam.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -247,12 +247,12 @@ ts_nod_shadteam:
 		PlayerPalette: playerra2
 	-Cloak@ts_nod_upgrade_infiltrationkit: # has cloak on by default
 	Transforms:
-		IntoActor: ts_nod_shadteam.air
+		IntoActor: ts_nod_shadowteam_air
 		#RequiresCondition: ts_nod_upgrade_infiltrationkit
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_infiltrationkit
 
-ts_nod_shadteam.air:
+ts_nod_shadowteam_air:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -261,15 +261,15 @@ ts_nod_shadteam.air:
 	Inherits@detect: ^GenericAirDetector
 	#Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
-		Name: Shadow Team
+		Name: actor_ts_nod_shadowteam.name
 	Valued:
 		Cost: 900
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ts_nod_shadteam
+		OverrideActor: ts_nod_shadowteam
 	Buildable:
 		BuildPaletteOrder: 90
-		Description: actor-ts_nod_shadteam.description
+		Description: actor_ts_nod_shadowteam.description
 	Aircraft:
 		TurnSpeed: 36
 		Speed: 180
@@ -297,6 +297,8 @@ ts_nod_shadteam.air:
 		Sequence: stand
 	Selectable:
 		Bounds: 512, 768
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_infiltrationkit
 	WithSpriteBody@shadow:
 		Name: shadow
 		Sequence: shadow
@@ -306,9 +308,9 @@ ts_nod_shadteam.air:
 	Voiced:
 		VoiceSet: TSSpy
 	Transforms:
-		IntoActor: ts_nod_shadteam
+		IntoActor: ts_nod_shadowteam
 	RenderSprites:
-		Image: ts_nod_shadteam
+		Image: ts_nod_shadowteam
 		PlayerPalette: playerra2
 
 ts_nod_shotguncommando:

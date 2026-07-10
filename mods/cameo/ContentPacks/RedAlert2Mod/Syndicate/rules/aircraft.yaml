@@ -15,7 +15,7 @@ ra2hind.latin:
 		Prerequisites: ~cgair.latin
 		Queue: Aircraft, RAAircraft
 		IconPalette: ra2cameo
-		Description: actor-ra2hind.description
+		Description: actor_ra2hind.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Aircraft:
@@ -98,7 +98,7 @@ yakolev.latin:
 		BuildPaletteOrder: 100
 		Prerequisites: ~cgair.latin
 		Queue: Aircraft, RAAircraft
-		Description: actor-latin_yakovlev.description
+		Description: actor_latin_yakovlev.description
 	Health:
 		HP: 40000
 	Repairable:
@@ -208,7 +208,7 @@ mig.latin:
 		BuildPaletteOrder: 100
 		Prerequisites: ~cgair.latin, cgspy.latin
 		Queue: Aircraft, RAAircraft
-		Description: actor-bpln.description
+		Description: actor_bpln.description
 	Health:
 		HP: 50000
 	Repairable:

@@ -922,13 +922,13 @@ World:
 		ProductionTabsWidget: PRODUCTION_TABS
 	LobbySystemActorConditionDropdown@WEATHER:
 		ID: weather
-		Label: dropdown-weather.label
-		Description: dropdown-weather.description
+		Label: dropdown_weather.label
+		Description: dropdown_weather.description
 		Default: none
 		DisplayOrder: 23
 		Values:
-			none: dropdown-weather.choice-none
-			weather: dropdown-weather.choice-weather
+			none: dropdown_weather.choice-none
+			weather: dropdown_weather.choice-weather
 		TileSetConditions:
 			TEMPERAT: weather-rain
 			RA_TEMPERAT: weather-rain

@@ -41,7 +41,7 @@ twister.steel:
 		BuildPaletteOrder: 100
 		Prerequisites: ~conpad.steel
 		Queue: Aircraft, RAAircraft
-		Description: actor-falc.description
+		Description: actor_falc.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 10
@@ -158,7 +158,7 @@ cargoship.steel:
 		BuildPaletteOrder: 20
 		Prerequisites: ~conpad.steel
 		Queue: Aircraft, RAAircraft
-		Description: actor-shad.description
+		Description: actor_shad.description
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 100
@@ -301,7 +301,7 @@ inspect.steel:
 		Prerequisites: ~conpad.steel, qatech.steel
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
-		Description: actor-steel_inspect.description
+		Description: actor_steel_inspect.description
 	Aircraft:
 		InitialFacing: 896
 		TurnSpeed: 25
@@ -366,7 +366,7 @@ grun.steel:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 110
 		Prerequisites: ~conpad.steel, qatech.steel
-		Description: actor-steel_grun.description
+		Description: actor_steel_grun.description
 	Valued:
 		Cost: 4500
 	Tooltip:
@@ -463,7 +463,7 @@ cruiser.steel:
 		BuildPaletteOrder: 20
 		Prerequisites: ~conpad.steel, qoil.steel, up_cruiser.steel
 		Queue: Aircraft, RAAircraft
-		Description: actor-shad.description
+		Description: actor_shad.description
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 50
@@ -552,7 +552,7 @@ cruiser_f.steel:
 	Tooltip:
 		Name: Cruiser Fighter
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Aircraft:
 		AltitudeVelocity: 250
 		InitialFacing: 768

@@ -12,7 +12,7 @@ E1.NOD:
 		BuildPaletteOrder: 10
 		Prerequisites: ~hand
 		Queue: Infantry, RAInfantry
-		Description: actor-e1.description
+		Description: actor_e1.description
 	Armament@PRIMARY: ##########
 		Weapon: M16
 		RequiresCondition: !up_blackmarketupgrades
@@ -71,7 +71,7 @@ E4:
 		BuildPaletteOrder: 40
 		Prerequisites: ~hand, hq.nod, ~!upblackhandflamer
 		Queue: Infantry, RAInfantry
-		Description: actor-e4.description
+		Description: actor_e4.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -126,7 +126,7 @@ E5:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hand, tmpl
 		Queue: Infantry, RAInfantry
-		Description: actor-e5.description
+		Description: actor_e5.description
 	Mobile:
 		Speed: 48
 		Locomotor: chem
@@ -209,7 +209,7 @@ cheme3:
 		BuildPaletteOrder: 30
 		Prerequisites: ~hand, ~upchemicalrocket
 		Queue: Infantry, RAInfantry
-		Description: actor-cheme3.description
+		Description: actor_cheme3.description
 	Armament@PRIMARY: ##########
 		Weapon: ChemRockets
 		LocalOffset: 256,43,341
@@ -258,7 +258,7 @@ tsblackhandlaser:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
 		Prerequisites: ~hand, td_nod_templeprime, upblackhandlaser
-		Description: actor-blackhandlaser.description
+		Description: actor_blackhandlaser.description
 	Valued:
 		Cost: 700
 	Tooltip:
@@ -308,7 +308,7 @@ tsblackhandflamer:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
 		Prerequisites: ~hand, hq.nod, ~upblackhandflamer
-		Description: actor-blackhandflamer.description
+		Description: actor_blackhandflamer.description
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -365,7 +365,7 @@ tsstealthsoldier:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
 		Prerequisites: ~hand, tmpl, ~upstealthsoldier
-		Description: actor-stealthsoldier.description
+		Description: actor_stealthsoldier.description
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -432,7 +432,7 @@ nodlasercommando:
 		BuildPaletteOrder: 50
 		Prerequisites: ~hand, td_nod_templeprime, ~upnodvenom
 		Queue: Infantry, RAInfantry
-		Description: actor-lasercommando.description
+		Description: actor_lasercommando.description
 	RenderSprites:
 		PlayerPalette: playerra2
 	Mobile:
