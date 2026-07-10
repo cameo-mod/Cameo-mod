@@ -42,6 +42,15 @@
 		Modifier: 125
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_infiltrationkit
+	Cloak@ts_nod_upgrade_infiltrationkit:
+		DetectionTypes: GroundCloak
+		InitialDelay: 125
+		CloakDelay: 75
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
+		IsPlayerPalette: true
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
 
 ^StealthFieldsImprovements:
 	GrantConditionOnPrerequisite@ts_nod_upgrade_stealthfieldsimprovements:

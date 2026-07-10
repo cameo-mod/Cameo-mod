@@ -417,6 +417,61 @@ TSBusMortarChem:
 		Weapon: TSSmoke
 		InvalidTargets: Water
 
+TSInfantryMortar:
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^HeavyBomb
+	ReloadDelay: 88
+	Range: 10830
+	MinRange: 2166
+	TargetActorCenter: true
+	Report: trashcannon.wav
+	Projectile: Bullet
+		Speed: 175
+		Inaccuracy: 750
+		LaunchAngle: 125
+		ContrailLength: 30
+		ContrailStartWidth: 60
+		ContrailEndWidth: 15
+		ContrailStartColor: AAAA4488
+		ContrailEndColor: 22222222
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@HeavyBomb: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyBombPercentage: HealthPercentageDamage
+		Damage: 8
+
+TSInfantryMortarChem:
+	Inherits: TSInfantryMortar
+	Inherits@2: ^MediumChemicalWeapon
+	Inherits@3: ^HeavyChemicalWeapon
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@HeavyChemicalWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@HeavyChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 8
+	Warhead@Cloud: SpawnSmokeParticle
+		Count: 1
+		Duration: 50
+		Speed: 12, 25
+		TurnRate: 12
+		Image: tsveinsmoke
+		Sequences: idle
+		Palette: player
+		Weapon: TSSmoke
+		InvalidTargets: Water
+
 TS120mmxChem:
 	Inherits: ^HeavyBomb
 	Inherits: ^HeavyChemicalWeapon

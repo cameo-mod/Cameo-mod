@@ -21,15 +21,6 @@ ts_nod_lightinfantry:
 		Name: garrisoned
 		Weapon: TSLasergun
 		RequiresCondition: ts_nod_upgrade_tiberiumlenses
-	Cloak@ts_nod_upgrade_infiltrationkit:
-		DetectionTypes: GroundCloak
-		InitialDelay: 125
-		CloakDelay: 75
-		CloakSound: cloak5.aud
-		UncloakSound: cloak5.aud
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
-		IsPlayerPalette: true
-		RequiresCondition: ts_nod_upgrade_infiltrationkit
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: ts_nod_lightinfantry
@@ -199,6 +190,127 @@ ts_nod_toxintrooper:
 	RenderSprites:
 		PlayerPalette: playerra2
 
+ts_nod_shadteam:
+	Inherits: ^Soldier
+	Inherits@Template: ^MeleeInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@CLOAK: ^CloakedVehicle
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	#Inherits@vo: ^AttackFrontalVoice
+	Inherits@InfiltrationKit: ^InfiltrationKit
+	Valued:
+		Cost: 900
+	Tooltip:
+		Name: Shadow Team
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOsrder: 90
+		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
+		Queue: Infantry, RAInfantry
+		Description: actor-ts_nod_shadteam.description
+	Mobile:
+		Speed: 60
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSShadowTeamPistols
+		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSShadowTeamPistols
+	Armament@C4:
+		Weapon: TSShadowTeamAttach
+		Name: secondary
+		Cursor: c4
+		OutsideRangeCursor: c4
+	WithInfantryBody:
+		-DefaultAttackSequence:
+		AttackSequences:
+			primary: shoot
+	TakeCover:
+		ProneOffset: 180,0,-200
+	Cloak:
+		UncloakOn: Attack, Damage
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+	Voiced:
+		VoiceSet: TSSpy
+	RenderSprites:
+		PlayerPalette: playerra2
+	-Cloak@ts_nod_upgrade_infiltrationkit: # has cloak on by default
+	Transforms:
+		IntoActor: ts_nod_shadteam.air
+		#RequiresCondition: ts_nod_upgrade_infiltrationkit
+	ActorStatValues:
+		Upgrades: ts_nod_upgrade_infiltrationkit
+
+ts_nod_shadteam.air:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^GDIRankDecoration
+	Inherits@CLOAK: ^CloakedAircraft
+	Inherits@detect: ^GenericAirDetector
+	#Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Tooltip:
+		Name: Shadow Team
+	Valued:
+		Cost: 900
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+		OverrideActor: ts_nod_shadteam
+	Buildable:
+		BuildPaletteOrder: 90
+		Description: actor-ts_nod_shadteam.description
+	Aircraft:
+		TurnSpeed: 36
+		Speed: 180
+		CanForceLand: false
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	#Armament@PRIMARY:
+	#	Weapon: TSShadowTeamTargeting
+	#AttackAircraft:
+	#	FacingTolerance: 10
+	#	AttackType: Hover
+	DeathSounds:
+	-WithShadow:
+	WithInfantryBody@Air:
+		StandSequences: fly
+		MoveSequence: fly
+		RequiresCondition: airborne
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: shoot
+		RequiresCondition: !airborne
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	Selectable:
+		Bounds: 512, 768
+	WithSpriteBody@shadow:
+		Name: shadow
+		Sequence: shadow
+		ForceToGround: true
+		RequiresCondition: airborne
+	-SpawnActorOnDeath:
+	Voiced:
+		VoiceSet: TSSpy
+	Transforms:
+		IntoActor: ts_nod_shadteam
+	RenderSprites:
+		Image: ts_nod_shadteam
+		PlayerPalette: playerra2
+
 ts_nod_shotguncommando:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
@@ -239,15 +351,6 @@ ts_nod_shotguncommando:
 		ProneOffset: 180,0,-200
 	Voiced:
 		VoiceSet: TSRocket
-	Cloak@ts_nod_upgrade_infiltrationkit:
-		DetectionTypes: GroundCloak
-		InitialDelay: 125
-		CloakDelay: 75
-		CloakSound: cloak5.aud
-		UncloakSound: cloak5.aud
-		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
-		IsPlayerPalette: true
-		RequiresCondition: ts_nod_upgrade_infiltrationkit
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -261,6 +364,7 @@ ts_nod_chameleonspy:
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@cloak: ^CloakedVehicle
+	Inherits@detect: ^GenericGroundDetector
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@InfiltrationKit: ^InfiltrationKit
 	Buildable:
@@ -292,7 +396,6 @@ ts_nod_chameleonspy:
 		Types: SpyInfiltrate
 		Notification: BuildingInfiltrated
 		PlayerExperience: 50
-		RequiresCondition: ts_nod_upgrade_infiltrationkit
 	IgnoresDisguise:
 	AttackMove:
 		Voice: Move
@@ -303,5 +406,10 @@ ts_nod_chameleonspy:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
+	Cloak:
+		UncloakOn: Attack, Damage, Infiltrate
+		CloakSound: cloak5.aud
+		UncloakSound: cloak5.aud
+	-Cloak@ts_nod_upgrade_infiltrationkit: # has cloak on by default
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_infiltrationkit
