@@ -1,9 +1,9 @@
 mod_title = Cameo
 mod_windowtitle = OpenRA - Cameo
 
-map_generator_classic = Map Generator
-map_generator_clear = Clear Terrain
-map_generator_d2k = Map Generator
+map-generator-classic = Map Generator
+map-generator-clear = Clear Terrain
+map-generator-d2k = Map Generator
 
 dropdown_weather =
    .label = Weather
@@ -53,13 +53,13 @@ label_minimal_stats_power_header = Power
 label_minimal_stats_points_header = Points
 label_minimal_stats_harvesters_header = Harv.
 
-promotion_counter =
+promotion-counter =
     .rank = Current Rank:
     .points = Promotion Points:
     .progress = Progress to next rank:
     .progress-max = Max rank achieved
 
-commander_tree =
+commander-tree =
     .title = Promotions
     .points-label = Available Points
     .close = Close
@@ -80,7 +80,7 @@ statistics =
     .col-kills = Kills
     .col-destroyed = Destroyed
 
-actor_stats_label_prefix =
+actor-stats-label-prefix =
     .armor = Armor:
     .sight = Sight:
     .speed = Speed:
@@ -102,7 +102,7 @@ actor_stats_label_prefix =
     .kills = Kills:
     .experience = Experience:
 
-label_armor_class =
+label-armor-class =
     .no-armor = None
     .None = None
     .Flak = Flak
@@ -122,7 +122,7 @@ label_armor_class =
     .Superheavy = Superheavy
     .Shield = Shield
 
-loadscreen_loading = Drag to set a formation for units when attack-moving$
+loadscreen-loading = Drag to set a formation for units when attack-moving$
    Access your Promotions tab through the star button on the sidebar$
    The promotions counter at the top edge of the screen displays your points and progress toward earning them$
    Multiple production buildings can be cycled through using their categories' respective hotkeys$
@@ -297,15 +297,15 @@ bot_ai =
    .unbeatable = Unbeatable AI
    .cameogod = Cameo God AI
 
-support_power_timer = { $player }'s { $support-power }: { $time }
+support-power-timer = { $player }'s { $support-power }: { $time }
 
 ## settings_display.yaml
-checkbox_laser_glow = Weapon Glow Effects
-checkbox_tank_muzzle_flashes = Tank muzzle flashes
-checkbox_heat_distortion = Heat Distortion Effects
-checkbox_shockwave = Shockwave Distortion Effects
-checkbox_screen_shake = Screen Shake Effects
-checkbox_ground_fire_smoke = Ground Fire Smoke Effects
+checkbox-laser-glow = Weapon Glow Effects
+checkbox-tank-muzzle-flashes = Tank muzzle flashes
+checkbox-heat-distortion = Heat Distortion Effects
+checkbox-shockwave = Shockwave Distortion Effects
+checkbox-screen-shake = Screen Shake Effects
+checkbox-ground-fire-smoke = Ground Fire Smoke Effects
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
 checkbox_flash_transients_container =
     .label = Flash Priority Notifications
@@ -313,7 +313,7 @@ checkbox_flash_transients_container =
 
 ## settings_gameplay.yaml
 label_game_play_section_header = Gameplay
-auto_save_interval_label = Auto-save interval
+auto-save-interval-label = Auto-save interval
 auto_save_nr_label = Auto-save files
 auto-save-interval =
     .disabled = Disabled
@@ -336,7 +336,7 @@ ui_theme_restart_hint = Applies after restart
 
 ## Map Generator (from OpenRA RA)
 ## map_generators.yaml
-label_random_map = Random Map
+label-random-map = Random Map
 label_clear_map_generator_option_tile = Tile
 label_clear_map_generator_choice_tile_clear =
    .label = Clear
@@ -502,7 +502,7 @@ label_ra_map_generator_choice_civilian_density_very_high =
 label_ra_map_generator_choice_civilian_density_max =
    .label = Maximum
 
-map_generator_d2k = Map Generator
+map-generator-d2k = Map Generator
 
 ## D2k map_generators.yaml
 label_clear_map_generator_choice_tile_sand =

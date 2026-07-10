@@ -28,6 +28,14 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   and caused the rename crash class. Exception: identifiers the ENGINE
   defines or derives (built-in condition names like `build-incomplete`,
   engine chrome/fluent keys) stay as the engine spells them.
+  **C#-derived names count as engine-owned**: fluent keys composed in
+  code (`actor-stats-label-prefix.*`, `label-armor-class.*`,
+  `checkbox-*` graphics options, `support-power-timer`, ...) and chrome
+  collections composed in code (`sidebar-<faction>`) keep their hyphens
+  even when defined in our files — scan ALL assemblies (engine mods AND
+  OpenRA.Mods.CA/Cameo in-repo) for string literals before renaming any
+  key family. A no-exception global rename was considered and rejected
+  (2026-07-11): it would require C# changes, which are out of bounds.
 - **Game prefix only on actual collisions** (`td_gdi` vs `ts_gdi`,
   `ra1_soviet` vs `ra2_soviet`). Unique factions (cabal, forgotten, yuri,
   ordos, terran…) take no game prefix. Prefixes are added the day a

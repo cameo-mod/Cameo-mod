@@ -1,7 +1,7 @@
 ^MapGenerators:
 	ClassicMapGenerator@classic:
 		Type: classic
-		Name: map_generator_classic
+		Name: map-generator-classic
 		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, JUNGLE, BARREN
 		Settings:
 			MultiChoiceOption@hidden_defaults:
@@ -517,7 +517,7 @@
 				Priority: 1
 	D2kMapGenerator@d2k:
 		Type: d2k
-		Name: map_generator_d2k
+		Name: map-generator-d2k
 		Tilesets: ARRAKIS
 		Settings:
 			MultiChoiceOption@hidden_defaults:
@@ -812,7 +812,7 @@
 						PlayerCountEntityBonus: 0
 	ClearMapGenerator@clear:
 		Type: clear
-		Name: map_generator_clear
+		Name: map-generator-clear
 		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, RA_INTERIOR, ARRAKIS, TEMPERAT, DESERT
 		Settings:
 			MultiChoiceOption@Tile:
