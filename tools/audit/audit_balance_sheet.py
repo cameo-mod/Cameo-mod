@@ -97,10 +97,18 @@ def main() -> int:
             by_name.setdefault(norm(tt), set()).add(lname)
 
     def game_stats(lname):
+        """Sheet convention: Damage = SUM over the BASELINE loadout — all
+        armaments named 'primary' whose condition is absent or negated
+        (upgrade-gated weapons excluded); the GDI Battle Tank's cannon
+        8000 + missiles 8000 = sheet 16000 is the reference case.
+        Reload/Range come from the first (main) armament; a differing
+        reload across armaments is flagged for case review."""
         res = rs.resolve(lname)
         hp = res.get("Health", "HP")
         spd = res.get("Mobile", "Speed") or res.get("Aircraft", "Speed")
-        best = None
+        total_dmg = 0
+        main = None
+        reloads = set()
         for arm in res.children_named("Armament"):
             w = arm.get("Weapon")
             if not w or w.lower() in UTILITY:
@@ -114,9 +122,6 @@ def main() -> int:
             ww = rs.resolve_weapon(w)
             if ww is None:
                 continue
-            # sheet convention: damage warheads SUM (combined light/medium/
-            # heavy warheads all hit); friendly-fire mirrors and percentage
-            # warheads do not count
             dmg = 0
             for c in ww.children:
                 kl = c.key.lower()
@@ -140,10 +145,13 @@ def main() -> int:
                 bdel = 5
             reload_ = int(ww.get("ReloadDelay") or 40)
             eff_reload = reload_ + (burst - 1) * bdel
-            rng = sheet_range(ww.get("Range"))
-            cand = (dmg * burst, eff_reload, rng)
-            if best is None or cand[0] > best[0]:
-                best = cand
+            reloads.add(eff_reload)
+            total_dmg += dmg * burst
+            if main is None:
+                main = (eff_reload, sheet_range(ww.get("Range")))
+        best = None
+        if total_dmg and main:
+            best = (total_dmg, main[0], main[1], len(reloads) > 1)
         return (int(hp) if hp else None,
                 int(spd) if spd else None, best)
 
@@ -181,11 +189,12 @@ def main() -> int:
                     and abs(gspd - spd) > 1:
                 diffs.append(f"Speed {spd} vs game {gspd}")
             if weap:
-                gdmg, grel, grng = weap
+                gdmg, grel, grng, mixed_reload = weap
                 if isinstance(dmg, (int, float)) and dmg and                         abs(gdmg - dmg) / max(dmg, 1) > 0.02:
                     diffs.append(f"Damage {dmg} vs game {gdmg}")
                 if isinstance(rel, (int, float)) and abs(grel - rel) > 1:
-                    diffs.append(f"Reload {rel} vs game {grel}")
+                    diffs.append(f"Reload {rel} vs game {grel}"
+                                 + (" [multi-reload]" if mixed_reload else ""))
                 if isinstance(rng, (int, float)) and grng is not None \
                         and abs(grng - rng) > 0.15:
                     diffs.append(f"Range {rng:.2f} vs game {grng:.2f}")

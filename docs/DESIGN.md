@@ -333,15 +333,49 @@ Infantry/Vehicle/Aircraft/Building, a weapon band (light/medium/heavy),
 and SCALING tables — six bands (SmallArms/Light/Medium/Heavy/
 Superheavy/Superweapon) with per-rank percentage columns starting at
 100 and stepping by 6/5/4/3/2/1 per rank, plus a low table starting at
-15–40. ❓ hypothesis: a weapon's `Versus` per armor = scaling table
-value at that armor's rank in the ordering matching the weapon band —
-needs one worked example to confirm before generating yaml.
+15–40. The scaling tables are the DESIGN REFERENCE that generated the
+in-yaml Versus tables; in the game they are realized once inside the
+weapon class templates and never re-derived per weapon.
+
+**Weapon construction law (design 2026-07-11).** The Versus tables live
+ONLY in the ~30 class templates of the central `weapons/weapons.yaml`
+(`^SmallArms ^Chaingun ^FlakWeapon ^MediumCannon ^HeavyMissile
+^LaserWeapon ^LightChemicalWeapon …`) and are **never modified without
+an explicit design order**. A new weapon:
+
+```
+MyWeapon:
+	Inherits: ^MediumCannon          # primary class: versus/projectile/sound
+	Inherits@2: ^HeavyCannon         # optional mix -> WeaponClass averages
+	ReloadDelay: 50
+	Range: 5000
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 8000                  # EVEN SPREAD — always identical values
+```
+
+- **Mixed class warheads always carry the SAME Damage** (even spread;
+  1,023 weapons comply, 49 violations flagged — mostly the imported
+  chem-upgrade weapons like TSChemBazooka 6000/24000; fix on order).
+- Template auxiliaries (`LaserExtraDamage` 600, `RailgunExtraDamage`,
+  `ShrapnelWeapon`, Tesla charged twins) ride along at fixed values and
+  are NOT part of the even-spread accounting or the sheet Damage.
+- ❓ FriendlyFire twins: some templates default them EQUAL to the main
+  damage (^MediumChemicalWeapon 1000/1000), some HALF (^LightFlameWeapon
+  2000/1000); the override convention needs a design ruling.
+- **Multi-weapon units**: the sheet Damage is the SUM over the baseline
+  loadout — every `primary` armament not gated behind an upgrade (GDI
+  Battle Tank: cannon 8000 + missiles 8000 = sheet 16000).
 
 **Definition of Done for a formula unit:** stats from the sheet map to
 yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (wdist/1000)→weapon
-`Range` (×1000, written as a plain integer like `5000`), Damage→warhead `Damage`, ReloadDelay→weapon
-`ReloadDelay` (ticks); versus table per the armor system; every new
-unit gets its own unique weapon (§10).
+`Range` (×1000, written as a plain integer like `5000`), Damage→class
+warheads per the even-spread law, ReloadDelay→weapon `ReloadDelay`
+(ticks, burst rule applied); every new unit gets its own unique weapon
+(§10) inheriting the sealed class templates. **On any sheet↔game
+mismatch the balance sheet wins**; audit_balance_sheet.py is the
+detector and fixes land as ordered batches, never silently.
 
 ## 13. Map props (Obstacle target type)
 
