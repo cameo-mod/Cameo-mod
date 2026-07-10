@@ -266,23 +266,59 @@ Q    = HP·Speed·Range·K·DPS·L·M / 12 500 000
 Cost = (O + P + Q) / 3                                    (column R = S)
 ```
 
-O is linear in each stat, P pairwise (survivability × mobility and
-reach × damage), Q the full product — so cost grows superlinearly when
-everything is high at once. **Workflow: the price S is set FIRST** (last
-column); Range is then solved from the identity (column F formula), so
-tuning HP/Speed/Damage/Reload auto-rebalances Range to hold the price.
-Range and DPS cells are never hand-edited.
+O is linear in each stat, P pairwise — by design intent the CHASSIS
+(HP·Speed) plus the TURRET (Range·DPS) — Q the full product. Pure
+linear made one-weak-stat units undercosted, pure product made the
+same units overcosted, so the average of all three was chosen. This is
+the FIRST iteration: it does not yet price anti-air capability,
+projectile speed, or area of effect — those must be added in a future
+revision (how is an open design question). **Workflow: the price S is
+set FIRST** (last column); Range is then solved from the identity
+(column F formula), so tuning HP/Speed/Damage/Reload auto-rebalances
+Range to hold the price. Range and DPS cells are never hand-edited.
 
-**Column semantics** (values observed; meanings to confirm):
-- `WeaponClass` H ∈ {0.75, 0.875, 1, 1.05, 1.125, 1.25, 1.5} — a weapon
-  quality multiplier on DPS. ❓ exact mapping to the Weapon Types sheet.
-- `Special` K ∈ {0.75, 1, 1.25, 1.5, 1.75, 2} — ability premium.
-  ❓ which abilities cost which factor.
+**Column semantics** (confirmed by design 2026-07-11):
+- `WeaponClass` H — from the weapons yaml warhead classes. Every weapon
+  family exists as **Light / Medium / Heavy** warheads: Light = 0.75,
+  Medium = 1.0, Heavy = 1.25. Combining warheads AVERAGES the classes:
+  Light+Medium = 0.875, Medium+Heavy = 1.125.
+- `Special` K — **+0.25 per special ability** (C4, EMP, stealth, point
+  defense laser, …). Example: Nod laser commando = C4 + Stealth + PDL =
+  1.75. Some over-strong kits are simply set to 2. FUTURE: replace the
+  flat +0.25 with per-ability values that represent each ability's real
+  power.
+- `TechTier` M — cost discount for late tech: **Tier 3 = 0.75, Tier 4/5
+  = 0.5** (rewards the tech-center investment). The rule was introduced
+  late, so many rows are missing it — correcting those gaps is standing
+  work; always cross-reference sheet vs in-game stats and ASK on any
+  mismatch.
+- **Burst rule**: sheet Damage = single-burst damage × bursts; sheet
+  ReloadDelay = weapon ReloadDelay + (bursts − 1) × BurstDelay (the
+  weapon only reloads after the full burst).
 - `UnitClass` L — per-section class factor (infantry sections 0.4–1,
   vehicles 0.25–1.25, defenses 0.225/0.325/0.35). ❓ table of sections.
-- `TechTier` M ∈ {1, 0.75, 0.5} — appears to DISCOUNT stats for
-  higher-tech units. ❓ which tier maps to which value.
-- ❓ Defenses have no movement — what goes in their Speed column?
+- **Defenses use Speed = 100 always** — immobility is priced through
+  their LOW UnitClass factors instead, keeping the formula uniform.
+
+**The baseline unit (design 2026-07-11): the Naxis Tiger Tank** —
+100 000 HP, 100 Speed, 10 000 damage, 5.0 cells range (`5c0`),
+50 reload, all modifiers 1 → DPS 200 and **O = P = Q = Cost = 800
+exactly**. Every stat trade in the system is anchored on these round
+numbers.
+
+**Known limitation — the low end breaks (second iteration planned).**
+The formula has no intercept: cost → 0 forces every stat toward 0
+simultaneously, so very cheap units (Minigunner at 100, Naxi Rifle
+Recruit at 50) come out unusably weak — a unit's fixed "cost of
+existing" (pathing, pop slot, minimum viable rifle) is not priced.
+Stopgap in game: strong damage-reduction multipliers on the scout
+infantry template. Design direction instead: **one baseline unit per
+unit class** (scout/basic/heavy/hero infantry, each with Tiger-style
+round numbers), and price by normalized deviation from the class
+anchor: `Cost = Cost₀ × (O/O₀ + P/P₀ + Q/Q₀) / 3`. At each anchor the
+identity is exact (like the Tiger's 800); below it, stats degrade far
+more gently than the global formula, which fixes the low end. The
+UnitClass column is then absorbed into the class baselines.
 
 **Armor & versus system (hypothesis to verify in yaml).** 20 armor
 classes in 4 categories (Infantry: None/Flak/Plate/Hero; Vehicles:
