@@ -246,7 +246,65 @@ cheapest provider wins).
   Imperial Scoutsman, M113 Adats-style condition typos).
 - **G3: garrisoned armaments never carry a FireDelay.**
 
-## 12. Map props (Obstacle target type)
+## 12. Balance formula — the Cameo Armor System workbook
+
+_Source: `C:\Users\AedisToru\OneDrive\Dokumente\Cameo Armor System.xlsx`
+(sheets: Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
+Defenses; Tabelle2/3 are scratch). 333ggg's CABAL concept
+(`Downloads\cabal.xlsx`) uses the same sheet layout. Tooling: openpyxl
+reads AND writes these — formula changes can be re-applied to every
+unit programmatically. Research 2026-07-11; open questions marked ❓._
+
+**The cost identity.** Every unit sheet computes three cost estimates
+from the stats and averages them; the design workflow INVERTS this:
+
+```
+DPS  = Damage / ReloadDelay × WeaponClass                 (column J)
+O    = (HP/100000 + Speed/100 + Range·K/5 + DPS/200) × 200 × L × M
+P    = (HP·Speed/25000 + Range·K·DPS/2.5) × L × M
+Q    = HP·Speed·Range·K·DPS·L·M / 12 500 000
+Cost = (O + P + Q) / 3                                    (column R = S)
+```
+
+O is linear in each stat, P pairwise (survivability × mobility and
+reach × damage), Q the full product — so cost grows superlinearly when
+everything is high at once. **Workflow: the price S is set FIRST** (last
+column); Range is then solved from the identity (column F formula), so
+tuning HP/Speed/Damage/Reload auto-rebalances Range to hold the price.
+Range and DPS cells are never hand-edited.
+
+**Column semantics** (values observed; meanings to confirm):
+- `WeaponClass` H ∈ {0.75, 0.875, 1, 1.05, 1.125, 1.25, 1.5} — a weapon
+  quality multiplier on DPS. ❓ exact mapping to the Weapon Types sheet.
+- `Special` K ∈ {0.75, 1, 1.25, 1.5, 1.75, 2} — ability premium.
+  ❓ which abilities cost which factor.
+- `UnitClass` L — per-section class factor (infantry sections 0.4–1,
+  vehicles 0.25–1.25, defenses 0.225/0.325/0.35). ❓ table of sections.
+- `TechTier` M ∈ {1, 0.75, 0.5} — appears to DISCOUNT stats for
+  higher-tech units. ❓ which tier maps to which value.
+- ❓ Defenses have no movement — what goes in their Speed column?
+
+**Armor & versus system (hypothesis to verify in yaml).** 20 armor
+classes in 4 categories (Infantry: None/Flak/Plate/Hero; Vehicles:
+Scout/Light/Medium/Heavy/Superheavy; Aircraft: Fighter/Bomber/
+Helicopter/Spaceship; Buildings: Wood/Concrete/Steel) with a base
+ladder in ~4% steps (None 100 … Wood 56 … Spaceship 4?) and two armor
+ORDERINGS. Weapon Types carry: effectiveness ranks 1–4 vs
+Infantry/Vehicle/Aircraft/Building, a weapon band (light/medium/heavy),
+and SCALING tables — six bands (SmallArms/Light/Medium/Heavy/
+Superheavy/Superweapon) with per-rank percentage columns starting at
+100 and stepping by 6/5/4/3/2/1 per rank, plus a low table starting at
+15–40. ❓ hypothesis: a weapon's `Versus` per armor = scaling table
+value at that armor's rank in the ordering matching the weapon band —
+needs one worked example to confirm before generating yaml.
+
+**Definition of Done for a formula unit:** stats from the sheet map to
+yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (cells)→weapon
+`Range` (×1024 wdist), Damage→warhead `Damage`, ReloadDelay→weapon
+`ReloadDelay` (ticks); versus table per the armor system; every new
+unit gets its own unique weapon (§10).
+
+## 13. Map props (Obstacle target type)
 
 - Trees, rocks, utility poles and other decorations carry
   `TargetTypes: Ground, Obstacle` (templates `^Tree ^TreeHusk ^Rock ^Box`).
