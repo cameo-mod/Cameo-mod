@@ -261,12 +261,6 @@ forgotten_warfactory:
 		ExitCell: 2,1
 		ExitDelay: 3
 	ProductionQueue@VEHICLE:
-	ProductionBar@VEHICLEGDI:
-		ProductionType: Vehicle
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAVEHICLEGDI:
-		ProductionType: RAVehicle
-		RequiresCondition: classicproductionqueues
 	Power:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
@@ -302,10 +296,6 @@ forgotten_helipad:
 		Queue: Building, RABuilding
 		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 	ProductionQueue@AIRCRAFT:
-	ProductionBar@AIRCRAFTGDI:
-		ProductionType: Aircraft
-	ProductionBar@RAAIRCRAFTGDI:
-		ProductionType: RAAircraft
 	RenderSprites:
 		Image: tsnthpadmut
 

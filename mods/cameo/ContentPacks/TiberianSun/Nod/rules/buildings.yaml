@@ -300,12 +300,6 @@ ts_nod_warfactory:
 		ExitCell: 2,2
 		ExitDelay: 3
 	ProductionQueue@VEHICLE:
-	ProductionBar@VEHICLEGDI:
-		ProductionType: Vehicle
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAVEHICLEGDI:
-		ProductionType: RAVehicle
-		RequiresCondition: classicproductionqueues
 	Power:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
@@ -364,12 +358,6 @@ ts_nod_helipad:
 		StartRepairingNotification: Repairing
 	RallyPoint:
 	ProductionQueue@AIRCRAFT:
-	ProductionBar@AIRCRAFTNOD:
-		ProductionType: Aircraft
-		RequiresCondition: !classicproductionqueues
-	ProductionBar@RAAIRCRAFTNOD:
-		ProductionType: RAAircraft
-		RequiresCondition: classicproductionqueues
 	Power:
 		Amount: -10
 	ProvidesPrerequisite@buildingname:
