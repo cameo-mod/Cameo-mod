@@ -1,6 +1,6 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **4333** — unresolved fluent refs in rules: **20**, orphaned actor-* messages: **229**
+Fluent messages loaded: **4342** — unresolved fluent refs in rules: **16**, orphaned actor-* messages: **229**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
@@ -14,8 +14,6 @@ Fluent messages loaded: **4333** — unresolved fluent refs in rules: **20**, or
 | cabal_radar | Buildable.Description | actor-tsntradr.description |
 | cabal_stealthgenerator | Buildable.Description | actor-tsntstlh.description |
 | cabal_techcenter | Buildable.Description | actor-tscabaltech.description |
-| forgotten_mortarman | Buildable.Description | actor-forgotten_mortarman.description |
-| ra_upgrade_shtoradefensesystem | Buildable.Description | ra_upgrade_shtoradefensesystem.description |
 | ts_gdi_empulsecannon | Buildable.Description | actor-tsntpulsgdi.description |
 | ts_gdi_radar | Buildable.Description | actor-tsgtradr.description |
 | ts_gdi_upgradecenter | Buildable.Description | actor-tsgtplug.description |
@@ -23,8 +21,6 @@ Fluent messages loaded: **4333** — unresolved fluent refs in rules: **20**, or
 | ts_nod_missilesilo | Buildable.Description | actor-tsntmisl.description |
 | ts_nod_radar | Buildable.Description | actor-tsntradr.description |
 | ts_nod_samsite | Buildable.Description | actor-tsntsam.description |
-| ts_nod_shadteam | Buildable.Description | actor-ts_nod_shadteam.description |
-| ts_nod_shadteam.air | Buildable.Description | actor-ts_nod_shadteam.description |
 | ts_nod_stealthgenerator | Buildable.Description | actor-tsntstlh.description |
 | ts_nod_tiberiumwastefacility | Buildable.Description | actor-tsntwast.description |
 
@@ -273,7 +269,7 @@ Fluent messages loaded: **4333** — unresolved fluent refs in rules: **20**, or
 | cabal | 0/64 | 0% |
 | consortium | 0/65 | 0% |
 | edenl | 0/47 | 0% |
-| forgotten | 76/81 | 93% |
+| forgotten | 77/81 | 95% |
 | futuretech | 0/60 | 0% |
 | gdi | 1/71 | 1% |
 | human2 | 0/73 | 0% |
@@ -293,7 +289,7 @@ Fluent messages loaded: **4333** — unresolved fluent refs in rules: **20**, or
 | terran | 0/81 | 0% |
 | tkm | 1/76 | 1% |
 | tsgdi | 0/67 | 0% |
-| tsnod | 0/52 | 0% |
+| tsnod | 1/52 | 1% |
 | yuri | 2/68 | 2% |
 | zerg | 0/79 | 0% |
 

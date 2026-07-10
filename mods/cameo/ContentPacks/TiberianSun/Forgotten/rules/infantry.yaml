@@ -652,7 +652,7 @@ forgotten_chemsprayinfantry:
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
-forgotten_mortarman:
+forgotten_mutantmortarman:
 	Inherits: ^Soldier
 	Inherits@Template: ^MortarInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -665,18 +665,19 @@ forgotten_mortarman:
 	Inherits@ChemicalWeapons: ^ChemicalWeapons
 	Inherits@GenomeMapping: ^GenomeMapping
 	Inherits@MyPet: ^MyPetLarge
+	Inherits@TiberiumBoosters: ^TiberiumBoosters
 	Inherits@Unity: ^Unity
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Mutant Mortarman
+		Name: actor_forgotten_mutantmortarman.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 130
 		Prerequisites: ~forgotten_barracks, forgotten_radar
 		Queue: Infantry, RAInfantry
-		Description: actor-forgotten_mortarman.description
+		Description: actor_forgotten_mutantmortarman.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -685,10 +686,10 @@ forgotten_mortarman:
 		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSInfantryMortar
-	 	RequiresCondition: !forgotten_upgrade_chemicalweapons
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSInfantryMortarChem
-	 	RequiresCondition: forgotten_upgrade_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########
@@ -706,7 +707,7 @@ forgotten_mortarman:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 	ActorStatValues:
-		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_tiberiumboosters, forgotten_upgrade_unity
 
 forgotten_visceroid:
 	Inherits: ^DefaultInfantry

@@ -925,6 +925,22 @@ actor_cabal_core =
    .description = Provides CABAL advanced technologies.
    Provides Data Worm support power.
 
+actor_ts_nod_shadowteam =
+   .name = Shadow Team
+   .description = Nod special forces armed with machine pistols and demolition charges.
+      Cloaked; uncloaks briefly to fire.
+      Can only target infantry, and picks them out of garrisoned structures.
+      Plants explosive charges on buildings.
+      Detects nearby cloaked enemies.
+      Transforms into an unarmed stealth glider for rapid redeployment.
+      Strong vs Infantry, Buildings
+      Weak vs Vehicles, Aircraft
+
+ra_upgrade_shtoradefensesystem =
+   .name = Shtora Defense System
+   .description = Tech Upgrade (Only affects units of own faction)
+      Hammer Tanks mount the Shtora countermeasure suite: a defensive laser that periodically blinds a nearby enemy, cutting its weapon range, vision and cloak detection to 20% for a short time.
+
 actor_forgotten_mutant =
    .name = Mutant
    .description = Cheap mutant scavenger armed with dual pistols.
@@ -966,6 +982,14 @@ actor_forgotten_chemsprayinfantry =
       Chemical Weapons research loads a stronger mixture.
       Strong vs Ground
       Weak vs Aircraft
+
+actor_forgotten_mutantmortarman =
+   .name = Mutant Mortarman
+   .description = Mutant artillery infantry lobbing mortar shells from long range.
+      Chemical Weapons research loads chemical shells.
+      Detects nearby cloaked enemies.
+      Strong vs Infantry, Buildings
+      Weak vs Tanks, Aircraft
 
 actor_forgotten_mutantsergeant =
    .name = Mutant Sergeant

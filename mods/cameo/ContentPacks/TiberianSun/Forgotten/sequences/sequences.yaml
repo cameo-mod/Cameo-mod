@@ -407,11 +407,11 @@ forgotten_runnershotgal:
 	icon:
 		Filename: forgotten_runnershotgal_icon.png
 
-forgotten_mortarman:
+forgotten_mutantmortarman:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_mortarman.shp
+		Filename: forgotten_mutantmortarman.shp
 		Tick: 80
 	stand:
 		Start: 126
@@ -508,7 +508,7 @@ forgotten_mortarman:
 		Facings: 8
 		ShadowStart: 268
 	icon:
-		Filename: forgotten_mortarmanicon.shp
+		Filename: forgotten_mutantmortarman_icon.shp
 
 # tsweed:
 # 	idle: invisibleitem
