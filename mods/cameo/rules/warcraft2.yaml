@@ -3771,6 +3771,9 @@ wc2_human_mortarteam2:
 	Armament:
 		Weapon: MortarTeamArtilleryShell
 		FireDelay: 25
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: MortarTeamArtilleryShell
 	GrantConditionOnAttack@CatapultCooldown:
 		Condition: cond_catapult_cooldown
 		RevokeDelay: 25

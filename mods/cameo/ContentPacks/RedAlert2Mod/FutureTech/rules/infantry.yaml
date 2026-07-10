@@ -403,6 +403,9 @@ cryoleg.futu:
 		LocalOffset: 128,100,350
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CryoLegionnaireAttack
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 50
 	AttackFrontal:
