@@ -519,11 +519,11 @@ forgotten_mortarman:
 
 forgotten_rattytank:
 	idle:
-		Filename: forgot_ltnk.png
+		Filename: forgotten_rattytank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_ltnk.png
+		Filename: forgotten_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -644,11 +644,11 @@ forgotten_ruiner:
 
 forgotten_warriortank:
 	idle:
-		Filename: forgot_mtnk.png
+		Filename: forgotten_warriortank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_mtnk.png
+		Filename: forgotten_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -660,11 +660,11 @@ forgotten_warriortank:
 
 forgotten_scoopertank:
 	idle:
-		Filename: forgot_htnk.png
+		Filename: forgotten_scoopertank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_htnk.png
+		Filename: forgotten_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1120,23 +1120,23 @@ forgotten_machineguntower:
 
 forgotten_brokenwarriortankturret:
 	Defaults:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 	idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	critical-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	turret:
-		Filename: forgot_mtnk.png
+		Filename: forgotten_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -1161,7 +1161,7 @@ forgotten_brokenrattytankturret:
 		Filename: forgotten_brokenrattytankturret.png
 		Start: 63
 	turret:
-		Filename: forgot_ltnk.png
+		Filename: forgotten_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1180,23 +1180,23 @@ forgotten_brokenrattytankturret:
 
 forgotten_brokenscoopertankturret:
 	Defaults:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 	idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	critical-idle:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Start: 63
 	turret:
-		Filename: forgot_htnk.png
+		Filename: forgotten_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgot_mtnk_tur.png
+		Filename: forgotten_warriortank_turret.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
