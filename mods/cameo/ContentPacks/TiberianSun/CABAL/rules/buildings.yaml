@@ -70,7 +70,7 @@ cabal_powerplant:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_constructionyard
-		Description: template-power.description
+		Description: template_power.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -113,7 +113,7 @@ cabal_cyborgfactory:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_constructionyard, cabal_powerplant
 		Queue: Building, RABuilding
-		Description: template-barracks.description
+		Description: template_barracks.description
 		IconPalette: windows256
 	Building:
 		Footprint: xx xx ==
@@ -165,7 +165,7 @@ cabal_mechfactory:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_constructionyard, cabal_refinery
 		Queue: Building, RABuilding
-		Description: template-factory.description
+		Description: template_factory.description
 	Building:
 		Footprint: xx= x== ===
 		Dimensions: 3,3
@@ -250,7 +250,7 @@ cabal_radar:
 		Names:
 			1: Satellite Hack
 		Descriptions:
-			1: power-ra2psireveal.description
+			1: power_ra2psireveal.description
 		SelectTargetSpeechNotification: SelectTarget
 		InsufficientPowerSpeechNotification: InsufficientPower
 		EndChargeSpeechNotification: SpyPlaneReady

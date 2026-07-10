@@ -7289,7 +7289,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Description: template-mcv.description
+		Description: template_mcv.description
 	Valued:
 		Cost: 5000
 	Armor:
@@ -7323,7 +7323,7 @@ CPQDEBUGDUMMY:
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
 	Tooltip:
-		Name: template-mcv.name
+		Name: template_mcv.name
 	Selectable:
 		Priority: 4
 		Bounds: 1536, 1536
@@ -7461,7 +7461,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 20
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Description: template-refinery.description
+		Description: template_refinery.description
 	Valued:
 		Cost: 3000
 	Health:
@@ -7545,7 +7545,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 30
 		BuildDuration: 250
 		BuildDurationModifier: 100
-		Description: template-barracks.description
+		Description: template_barracks.description
 	Valued:
 		Cost: 1000
 	Health:
@@ -7683,7 +7683,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 40
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Description: template-factory.description
+		Description: template_factory.description
 	Valued:
 		Cost: 2000
 	Health:
@@ -7790,7 +7790,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 50
 		BuildDuration: 375
 		BuildDurationModifier: 100
-		Description: template-airfield.description
+		Description: template_airfield.description
 	Valued:
 		Cost: 1500
 	Health:
@@ -7876,7 +7876,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 50
 		BuildDuration: 250
 		BuildDurationModifier: 100
-		Description: template-shipyard.description
+		Description: template_shipyard.description
 	Valued:
 		Cost: 3000
 	Health:
@@ -7968,7 +7968,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 60
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Description: template-service-depot.description
+		Description: template_service_depot.description
 	Valued:
 		Cost: 1000
 	Health:
@@ -7994,7 +7994,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 70
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Description: template-radar.description
+		Description: template_radar.description
 	Valued:
 		Cost: 2500
 	Health:
@@ -8050,7 +8050,7 @@ CPQDEBUGDUMMY:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Description: template-tech-center.description
+		Description: template_tech_center.description
 	Valued:
 		Cost: 5000
 	Health:
@@ -8374,7 +8374,7 @@ CPQDEBUGDUMMY:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Prerequisites: ~oilderrick, techcenter, derricklimit
-		Description: actor-oilb.description
+		Description: actor_oilb.description
 	Valued:
 		Cost: 2500
 	Health:

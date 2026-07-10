@@ -1,13 +1,13 @@
 forgotten_upgrade_genomemapping:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_genomemapping.name
+		Name: actor_forgotten_upgrade_genomemapping.name
 	Valued:
 		Cost: 3500
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Upgrades
-		Description: actor-forgotten_upgrade_genomemapping.description
+		Description: actor_forgotten_upgrade_genomemapping.description
 		Prerequisites: ~forgotten_radar, !forgotten_upgrade_genomemapping
 	RenderSprites:
 		Image: genomemappingicon
@@ -16,13 +16,13 @@ forgotten_upgrade_genomemapping:
 forgotten_upgrade_chemicalfuel:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_chemicalfuel.name
+		Name: actor_forgotten_upgrade_chemicalfuel.name
 	Valued:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Upgrades
-		Description: actor-forgotten_upgrade_chemicalfuel.description
+		Description: actor_forgotten_upgrade_chemicalfuel.description
 		Prerequisites: ~forgotten_radar, !forgotten_upgrade_chemicalfuel
 	RenderSprites:
 		Image: chemicalfuelicon
@@ -31,13 +31,13 @@ forgotten_upgrade_chemicalfuel:
 forgotten_upgrade_friendlywildlife:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_friendlywildlife.name
+		Name: actor_forgotten_upgrade_friendlywildlife.name
 	Valued:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 70
 		Queue: Upgrades
-		Description: actor-forgotten_upgrade_friendlywildlife.description
+		Description: actor_forgotten_upgrade_friendlywildlife.description
 		Prerequisites: ~forgotten_radar, !forgotten_upgrade_friendlywildlife
 	RenderSprites:
 		Image: mypeticon
@@ -46,13 +46,13 @@ forgotten_upgrade_friendlywildlife:
 forgotten_upgrade_junkarmor:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_junkarmor.name
+		Name: actor_forgotten_upgrade_junkarmor.name
 	Valued:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: actor-forgotten_upgrade_junkarmor.description
+		Description: actor_forgotten_upgrade_junkarmor.description
 		Prerequisites: ~forgotten_church, !forgotten_upgrade_junkarmor
 	RenderSprites:
 		Image: junkarmoricon
@@ -61,13 +61,13 @@ forgotten_upgrade_junkarmor:
 forgotten_upgrade_tiberiumboosters:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_tiberiumboosters.name
+		Name: actor_forgotten_upgrade_tiberiumboosters.name
 	Valued:
 		Cost: 4000
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Research
-		Description: actor-forgotten_upgrade_tiberiumboosters.description
+		Description: actor_forgotten_upgrade_tiberiumboosters.description
 		Prerequisites: ~forgotten_church, !forgotten_upgrade_tiberiumboosters
 	RenderSprites:
 		Image: tiberiumboostersicon
@@ -76,13 +76,13 @@ forgotten_upgrade_tiberiumboosters:
 forgotten_upgrade_unity:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_unity.name
+		Name: actor_forgotten_upgrade_unity.name
 	Valued:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 70
 		Queue: Research
-		Description: actor-forgotten_upgrade_unity.description
+		Description: actor_forgotten_upgrade_unity.description
 		Prerequisites: ~forgotten_church, !forgotten_upgrade_unity
 	RenderSprites:
 		Image: unityicon
@@ -91,13 +91,13 @@ forgotten_upgrade_unity:
 forgotten_upgrade_chemicalweapons:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_chemicalweapons.name
+		Name: actor_forgotten_upgrade_chemicalweapons.name
 	Valued:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: actor-forgotten_upgrade_chemicalweapons.description
+		Description: actor_forgotten_upgrade_chemicalweapons.description
 		Prerequisites: ~forgotten_church, !forgotten_upgrade_chemicalweapons
 	RenderSprites:
 		Image: chemicalweaponsicon
@@ -106,13 +106,13 @@ forgotten_upgrade_chemicalweapons:
 forgotten_upgrade_tiberiumadaptability:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
-		Name: actor-forgotten_upgrade_tiberiumadaptability.name
+		Name: actor_forgotten_upgrade_tiberiumadaptability.name
 	Valued:
 		Cost: 10000
 	Buildable:
 		BuildPaletteOrder: 120
 		Queue: Research
-		Description: actor-forgotten_upgrade_tiberiumadaptability.description
+		Description: actor_forgotten_upgrade_tiberiumadaptability.description
 		Prerequisites: ~forgotten_church, !forgotten_upgrade_tiberiumadaptability
 	RenderSprites:
 		Image: tiberiumadaptabilityicon

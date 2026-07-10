@@ -16,7 +16,7 @@ twin_rocket_trooper.ixian:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		Prerequisites: ~d2k_barracks.ixian, ~up_twin_rocket_trooper.ixian
-		Description: template-antitank-antiair-infantry.description
+		Description: template_antitank_antiair_infantry.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 600
@@ -67,7 +67,7 @@ shock_infantry.ixian:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
-		Description: actor-shock_infantry.description
+		Description: actor_shock_infantry.description
 		IconPalette: d2kunit
 		Prerequisites: ~d2k_barracks.ixian, research_centre.ixian, ~!up_storm_infantry.ixian
 	Health:
@@ -118,7 +118,7 @@ storm_infantry.ixian:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
-		Description: actor-shock_infantry.description
+		Description: actor_shock_infantry.description
 		IconPalette: d2kunit
 		Prerequisites: ~d2k_barracks.ixian, research_centre.ixian, ~up_storm_infantry.ixian
 	Mobile:
@@ -169,7 +169,7 @@ heavy_inf.ixian:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 		IconPalette: d2kunit
 		Prerequisites: ~d2k_barracks.ixian, up_heavy_inf.ixian
 	Mobile:

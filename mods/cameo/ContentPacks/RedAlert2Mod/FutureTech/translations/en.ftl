@@ -1,4 +1,4 @@
-actor-robo =
+actor_robo =
    .name = Robot Tank
    .description = Light unmanned tank.
       Can hover over water.
@@ -6,7 +6,7 @@ actor-robo =
       Requires Robot Control to operate.
         Strong vs Vehicles
 
-faction-ra2-futuretech =
+faction_ra2_futuretech =
    .name = FutureTech
    .description = FutureTech: High-End Robotics and Experimental Weaponry
 

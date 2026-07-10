@@ -1,4 +1,4 @@
-faction-ra2-lnaxis =
+faction_ra2_lnaxis =
    .name = Schwarzer Mond
    .description = Schwarzer Mond custom faction in Red Alert 2 style.
       The Schwarzer Mond (Black Moon) is the elite, space-faring branch of the Naxis,

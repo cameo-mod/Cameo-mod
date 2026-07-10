@@ -44,7 +44,7 @@ OILB.d2k:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Buildable:
 		Prerequisites: ~construction_yard, research_centre, derricklimit
-		Description: actor-oilb.description
+		Description: actor_oilb.description
 		IconPalette: d2kunit
 	Building:
 		BuildSounds: BUILD1.WAV

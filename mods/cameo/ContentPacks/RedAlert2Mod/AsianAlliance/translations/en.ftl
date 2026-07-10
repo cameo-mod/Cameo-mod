@@ -1,80 +1,80 @@
-actor-aacarrier =
+actor_aacarrier =
    .description = Aircraft carrier that deploys 4 fighters
       armed with machine guns.
 
-actor-aagunb =
+actor_aagunb =
    .description = Fast gunboat armed with a cannon and a flak gun.
       Can attack air.
 
-actor-aaksub =
+actor_aaksub =
    .description = Suicide bomber submarine.
 
-actor-aaoilt =
+actor_aaoilt =
    .description = Truck carrying fuel.
       Explodes violently when destroyed or deployed.
 
-actor-aapanth =
+actor_aapanth =
    .description = Amphibious transport armed with a cannon.
 
-actor-aapelican =
+actor_aapelican =
    .description = Helicopter armed with missiles.
       Can attack air.
 
-actor-aaphoenix =
+actor_aaphoenix =
    .description = Multirole fighter-bomber.
       Can attack air.
 
-actor-aapulv =
+actor_aapulv =
    .description = Armed with a gatling cannon.
        Strong vs Infantry, Air
 
-actor-aaquasfrig =
+actor_aaquasfrig =
    .description = Warship armed with plasma cannons.
       Can attack air.
 
-actor-aashinobi =
+actor_aashinobi =
    .description = Stealth soldier.
       Can infiltrate buildings.
 
-actor-aatsun =
+actor_aatsun =
    .description = Aircraft carrier that deploys 3 fighters
       armed with chemical bombs.
 
-actor-aaviper =
+actor_aaviper =
    .description = Hovering mobile artillery.
       Attacks leave toxin clouds.
 
-actor-alligator =
+actor_alligator =
    .description = Large reptile.
        Strong vs Infantry, Vehicles
        Weak vs Defenses, Aircraft
 
-actor-cgchao =
+actor_cgchao =
    .description = Provides Chaos Storm support power.
       Requires power to operate.
 
-actor-cgchtw =
+actor_cgchtw =
    .description = Defense that dispenses chaos gas.
       Requires power to operate
 
-actor-cghype =
+actor_cghype =
    .description = Anti-aircraft tractor beam.
       Requires power to operate.
        Strong vs Air
 
-actor-cgpnch =
+actor_cgpnch =
    .description = Defense buildable on water.
       Can detect submarines.
        Strong vs Ships, Submarines
 
-actor-cgtnkr =
+actor_cgtnkr =
    .description = Fill with Oil Trucks to generate more power.
 
 asian_upgrade_celestialpower =
    .description = Increases Firepower and Range of Quasar Weapons and Railguns by 25%.
       Increases EMP Effect of Quasar Weapons by 100%
 
-faction-ra2-asianalliance =
+faction_ra2_asianalliance =
    .name = Asian Alliance
    .description = Asian Alliance from Eagle Red Mod
       Asian Alliance is a massive high-tech coalition of China, Japan, and Korea.
@@ -84,6 +84,6 @@ faction-ra2-asianalliance =
 
       Support powers: Chaos Storm, Ion Cannon
 
-template-anti-aircraft-power-defense =
+template_anti_aircraft_power_defense =
    .description = Anti-aircraft defense.
       Requires power to operate.

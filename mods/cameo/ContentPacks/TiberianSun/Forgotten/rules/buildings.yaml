@@ -4,9 +4,9 @@ forgotten_tiberiumspike:
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Inherits@shape: ^3x4Shape
 	Tooltip:
-		Name: actor-forgotten_tiberiumspike.name
+		Name: actor_forgotten_tiberiumspike.name
 	Buildable:
-		Description: actor-forgotten_tiberiumspike.description
+		Description: actor_forgotten_tiberiumspike.description
 		BuildLimit: 1
 		Queue: Building, RABuilding
 		Prerequisites: ~forgotten_constructionyard, forgotten_church, derricklimit
@@ -36,9 +36,9 @@ forgotten_constructionyard:
 	Valued:
 		Cost: 2500
 	Tooltip:
-		Name: actor-forgotten_constructionyard.name
+		Name: actor_forgotten_constructionyard.name
 	Buildable:
-		Description: actor-forgotten_constructionyard.description
+		Description: actor_forgotten_constructionyard.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -107,12 +107,12 @@ forgotten_refinery:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: actor-forgotten_refinery.name
+		Name: actor_forgotten_refinery.name
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
 		Queue: Building, RABuilding
-		Description: actor-forgotten_refinery.description
+		Description: actor_forgotten_refinery.description
 	Building:
 		Footprint: _x_ xxx === ===
 		Dimensions: 3,4
@@ -159,11 +159,11 @@ forgotten_crystalpowerextractor:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
 		Prerequisites: ~forgotten_constructionyard
-		Description: actor-forgotten_crystalpowerextractor.description
+		Description: actor_forgotten_crystalpowerextractor.description
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: actor-forgotten_crystalpowerextractor.name
+		Name: actor_forgotten_crystalpowerextractor.name
 	Health:
 		HP: 150000
 	Building:
@@ -197,13 +197,13 @@ forgotten_barracks:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: actor-forgotten_barracks.name
+		Name: actor_forgotten_barracks.name
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_constructionyard, forgotten_crystalpowerextractor
 		Queue: Building, RABuilding
-		Description: actor-forgotten_barracks.description
+		Description: actor_forgotten_barracks.description
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -240,13 +240,13 @@ forgotten_warfactory:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: actor-forgotten_warfactory.name
+		Name: actor_forgotten_warfactory.name
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
 		Queue: Building, RABuilding
-		Description: actor-forgotten_warfactory.description
+		Description: actor_forgotten_warfactory.description
 	Building:
 		Footprint: xx= x== ===
 		Dimensions: 3,3
@@ -285,9 +285,9 @@ forgotten_warfactory:
 forgotten_servicedepot:
 	Inherits: ts_gdi_servicedepot
 	Tooltip:
-		Name: actor-forgotten_servicedepot.name
+		Name: actor_forgotten_servicedepot.name
 	Buildable:
-		Description: actor-forgotten_servicedepot.description
+		Description: actor_forgotten_servicedepot.description
 		Prerequisites: ~forgotten_constructionyard, forgotten_warfactory
 	RenderSprites:
 		Image: tsgtdept
@@ -296,9 +296,9 @@ forgotten_servicedepot:
 forgotten_helipad:
 	Inherits: ts_gdi_helipad
 	Tooltip:
-		Name: actor-forgotten_helipad.name
+		Name: actor_forgotten_helipad.name
 	Buildable:
-		Description: actor-forgotten_helipad.description
+		Description: actor_forgotten_helipad.description
 		Queue: Building, RABuilding
 		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 	ProductionQueue@AIRCRAFT:
@@ -326,13 +326,13 @@ forgotten_radar:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: actor-forgotten_radar.name
+		Name: actor_forgotten_radar.name
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 70
 		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
 		Queue: Building, RABuilding
-		Description: actor-forgotten_radar.description
+		Description: actor_forgotten_radar.description
 	Building:
 		Footprint: X_ xx ==
 		Dimensions: 2,3
@@ -371,10 +371,10 @@ forgotten_church:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
 		Prerequisites: ~forgotten_constructionyard, forgotten_radar
-		Description: actor-forgotten_church.description
+		Description: actor_forgotten_church.description
 		BuildLimit: 1
 	Tooltip:
-		Name: actor-forgotten_church.name
+		Name: actor_forgotten_church.name
 	Selectable:
 		Bounds: 2048, 2048
 	Building:
@@ -406,10 +406,10 @@ forgotten_chemicalplant:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
 		Prerequisites: ~forgotten_constructionyard, forgotten_church
-		Description: actor-forgotten_chemicalplant.description
+		Description: actor_forgotten_chemicalplant.description
 		BuildLimit: 1
 	Tooltip:
-		Name: actor-forgotten_chemicalplant.name
+		Name: actor_forgotten_chemicalplant.name
 	Selectable:
 		Bounds: 2048, 2048
 	Building:

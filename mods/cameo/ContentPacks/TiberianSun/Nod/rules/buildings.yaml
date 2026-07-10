@@ -154,7 +154,7 @@ ts_nod_powerplant:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
 		Prerequisites: ~ts_nod_constructionyard
-		Description: template-power.description
+		Description: template_power.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -195,7 +195,7 @@ ts_nod_advancedpowerplant:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 110
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
-		Description: template-advpower.description
+		Description: template_advpower.description
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -235,7 +235,7 @@ ts_nod_handof:
 		BuildPaletteOrder: 30
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_powerplant
 		Queue: Building, RABuilding
-		Description: template-barracks.description
+		Description: template_barracks.description
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -283,7 +283,7 @@ ts_nod_warfactory:
 		BuildPaletteOrder: 40
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
 		Queue: Building, RABuilding
-		Description: template-factory.description
+		Description: template_factory.description
 	Building:
 		Footprint: xxx_ xxx= _===
 		Dimensions: 4,3

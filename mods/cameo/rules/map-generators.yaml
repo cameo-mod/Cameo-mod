@@ -1,7 +1,7 @@
 ^MapGenerators:
 	ClassicMapGenerator@classic:
 		Type: classic
-		Name: map-generator-classic
+		Name: map_generator_classic
 		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, JUNGLE, BARREN
 		Settings:
 			MultiChoiceOption@hidden_defaults:
@@ -108,22 +108,22 @@
 						LandTile: 255
 						WaterTile: 1
 			IntegerOption@Seed:
-				Label: label-ra-map-generator-option-seed
+				Label: label_ra_map_generator_option_seed
 				Parameter: Seed
 				Default: 0
 			MultiChoiceOption@TerrainType:
-				Label: label-ra-map-generator-option-terrain-type
+				Label: label_ra_map_generator_option_terrain_type
 				Priority: 2
 				Default: Plots
 				Choice@Lakes:
-					Label: label-ra-map-generator-choice-terrain-type-lakes
+					Label: label_ra_map_generator_choice_terrain_type_lakes
 					Settings:
 				Choice@Puddles:
-					Label: label-ra-map-generator-choice-terrain-type-puddles
+					Label: label_ra_map_generator_choice_terrain_type_puddles
 					Settings:
 						Water: 100
 				Choice@Gardens:
-					Label: label-ra-map-generator-choice-terrain-type-gardens
+					Label: label_ra_map_generator_choice_terrain_type_gardens
 					Settings:
 						Water: 50
 						Forests: 300
@@ -132,7 +132,7 @@
 						RoadSpacing: 3
 						RoadShrink: 4
 				Choice@Plots:
-					Label: label-ra-map-generator-choice-terrain-type-plots
+					Label: label_ra_map_generator_choice_terrain_type_plots
 					Settings:
 						TerrainFeatureSize: 10240
 						ForestFeatureSize: 10240
@@ -148,18 +148,18 @@
 						RoadShrink: 4
 						CivilianBuildings: 100
 				Choice@Plains:
-					Label: label-ra-map-generator-choice-terrain-type-plains
+					Label: label_ra_map_generator_choice_terrain_type_plains
 					Settings:
 						Water: 0
 						CivilianBuildings: 100
 				Choice@Parks:
-					Label: label-ra-map-generator-choice-terrain-type-parks
+					Label: label_ra_map_generator_choice_terrain_type_parks
 					Settings:
 						Water: 0
 						Forests: 100
 						CivilianBuildings: 100
 				Choice@Woodlands:
-					Label: label-ra-map-generator-choice-terrain-type-woodlands
+					Label: label_ra_map_generator_choice_terrain_type_woodlands
 					Settings:
 						Water: 0
 						Forests: 400
@@ -168,7 +168,7 @@
 						RoadSpacing: 3
 						RoadShrink: 4
 				Choice@Overgrown:
-					Label: label-ra-map-generator-choice-terrain-type-overgrown
+					Label: label_ra_map_generator_choice_terrain_type_overgrown
 					Settings:
 						Water: 0
 						Forests: 500
@@ -176,7 +176,7 @@
 						Mountains: 500
 						Roughness: 250
 				Choice@Rocky:
-					Label: label-ra-map-generator-choice-terrain-type-rocky
+					Label: label_ra_map_generator_choice_terrain_type_rocky
 					Settings:
 						Water: 0
 						Forests: 300
@@ -187,40 +187,40 @@
 						RoadSpacing: 3
 						RoadShrink: 4
 				Choice@Mountains:
-					Label: label-ra-map-generator-choice-terrain-type-mountains
+					Label: label_ra_map_generator_choice_terrain_type_mountains
 					Settings:
 						Water: 0
 						Mountains: 900
 						Roughness: 600
 				Choice@MountainLakes:
-					Label: label-ra-map-generator-choice-terrain-type-mountain-lakes
+					Label: label_ra_map_generator_choice_terrain_type_mountain_lakes
 					Settings:
 						Water: 200
 						Mountains: 900
 						Roughness: 850
 				Choice@Oceanic:
-					Label: label-ra-map-generator-choice-terrain-type-oceanic
+					Label: label_ra_map_generator_choice_terrain_type_oceanic
 					Settings:
 						Water: 800
 						Forests: 0
 						MinimumSpawnRadius: 4
 				Choice@LargeIslands:
-					Label: label-ra-map-generator-choice-terrain-type-large-islands
+					Label: label_ra_map_generator_choice_terrain_type_large_islands
 					Settings:
 						Water: 750
 						TerrainFeatureSize: 51200
 						Forests: 0
 				Choice@Continents:
-					Label: label-ra-map-generator-choice-terrain-type-continents
+					Label: label_ra_map_generator_choice_terrain_type_continents
 					Settings:
 						Water: 500
 						TerrainFeatureSize: 102400
 				Choice@Wetlands:
-					Label: label-ra-map-generator-choice-terrain-type-wetlands
+					Label: label_ra_map_generator_choice_terrain_type_wetlands
 					Settings:
 						Water: 500
 				Choice@NarrowWetlands:
-					Label: label-ra-map-generator-choice-terrain-type-narrow-wetlands
+					Label: label_ra_map_generator_choice_terrain_type_narrow_wetlands
 					Settings:
 						Water: 500
 						TerrainFeatureSize: 5120
@@ -228,95 +228,95 @@
 						SpawnBuildSize: 6
 						MinimumSpawnRadius: 4
 			MultiChoiceOption@Shape:
-				Label: label-ra-map-generator-option-shape
+				Label: label_ra_map_generator_option_shape
 				Default: Square
 				Priority: 1
 				Choice@Square:
-					Label: label-ra-map-generator-choice-shape-square
+					Label: label_ra_map_generator_choice_shape_square
 					Settings:
 						ExternalCircularBias: 0
 				Choice@CircleMountain:
-					Label: label-ra-map-generator-choice-shape-circle-mountain
+					Label: label_ra_map_generator_choice_shape_circle_mountain
 					Settings:
 						ExternalCircularBias: 1
 				Choice@CircleWater:
-					Label: label-ra-map-generator-choice-shape-circle-water
+					Label: label_ra_map_generator_choice_shape_circle_water
 					Settings:
 						ExternalCircularBias: -1
 			MultiIntegerChoiceOption@Players:
-				Label: label-ra-map-generator-option-players
+				Label: label_ra_map_generator_option_players
 				Parameter: Players
 				Choices: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 				Default: 2
 				Priority: 1
 			MultiChoiceOption@Symmetry:
-				Label: label-ra-map-generator-option-symmetry
+				Label: label_ra_map_generator_option_symmetry
 				Default: 2Rotations
 				Priority: 1
 				Choice@None:
-					Label: label-ra-map-generator-choice-mirror-none
+					Label: label_ra_map_generator_choice_mirror_none
 					Settings:
 						Mirror: None
 				Choice@LeftMatchesRight:
-					Label: label-ra-map-generator-choice-symmetry-mirror-horizontal
+					Label: label_ra_map_generator_choice_symmetry_mirror_horizontal
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: LeftMatchesRight
 				Choice@TopLeftMatchesBottomRight:
-					Label: label-ra-map-generator-choice-symmetry-mirror-diagonal-tl
+					Label: label_ra_map_generator_choice_symmetry_mirror_diagonal_tl
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: TopLeftMatchesBottomRight
 				Choice@TopMatchesBottom:
-					Label: label-ra-map-generator-choice-symmetry-mirror-vertical
+					Label: label_ra_map_generator_choice_symmetry_mirror_vertical
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: TopMatchesBottom
 				Choice@TopRightMatchesBottomLeft:
-					Label: label-ra-map-generator-choice-symmetry-mirror-diagonal-tr
+					Label: label_ra_map_generator_choice_symmetry_mirror_diagonal_tr
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: TopRightMatchesBottomLeft
 				Choice@2Rotations:
-					Label: label-ra-map-generator-choice-symmetry-mirror-2-rotations
+					Label: label_ra_map_generator_choice_symmetry_mirror_2_rotations
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Rotations: 2
 				Choice@3Rotations:
-					Label: label-ra-map-generator-choice-symmetry-mirror-3-rotations
+					Label: label_ra_map_generator_choice_symmetry_mirror_3_rotations
 					Players: 3, 6, 9, 12, 15
 					Settings:
 						Rotations: 3
 				Choice@4Rotations:
-					Label: label-ra-map-generator-choice-symmetry-mirror-4-rotations
+					Label: label_ra_map_generator_choice_symmetry_mirror_4_rotations
 					Players: 4, 8, 12, 16
 					Settings:
 						Rotations: 4
 				Choice@5Rotations:
-					Label: label-ra-map-generator-choice-symmetry-mirror-5-rotations
+					Label: label_ra_map_generator_choice_symmetry_mirror_5_rotations
 					Players: 5, 10, 15
 					Settings:
 						Rotations: 5
 				Choice@6Rotations:
-					Label: label-ra-map-generator-choice-symmetry-mirror-6-rotations
+					Label: label_ra_map_generator_choice_symmetry_mirror_6_rotations
 					Players: 6, 12
 					Settings:
 						Rotations: 6
 				Choice@7Rotations:
-					Label: label-ra-map-generator-choice-symmetry-mirror-7-rotations
+					Label: label_ra_map_generator_choice_symmetry_mirror_7_rotations
 					Players: 7, 14
 					Settings:
 						Rotations: 7
 				Choice@8Rotations:
-					Label: label-ra-map-generator-choice-symmetry-mirror-8-rotations
+					Label: label_ra_map_generator_choice_symmetry_mirror_8_rotations
 					Players: 8, 16
 					Settings:
 						Rotations: 8
 			MultiChoiceOption@Resources:
-				Label: label-ra-map-generator-option-resources
+				Label: label_ra_map_generator_option_resources
 				Default: Medium
 				Choice@None:
-					Label: label-ra-map-generator-choice-resources-none
+					Label: label_ra_map_generator_choice_resources_none
 					Settings:
 						SpawnResourceSpawns: 0
 						ResourcesPerPlayer: 0
@@ -325,7 +325,7 @@
 						MaximumExpansionResourceSpawns: 0
 						MaximumResourceSpawnsPerExpansion: 1
 				Choice@Low:
-					Label: label-ra-map-generator-choice-resources-low
+					Label: label_ra_map_generator_choice_resources_low
 					Settings:
 						SpawnResourceSpawns: 2
 						ResourcesPerPlayer: 18750
@@ -340,7 +340,7 @@
 						MaximumExpansionResourceSpawns: 3
 						MaximumResourceSpawnsPerExpansion: 1
 				Choice@Medium:
-					Label: label-ra-map-generator-choice-resources-medium
+					Label: label_ra_map_generator_choice_resources_medium
 					Settings:
 						SpawnResourceSpawns: 3
 						ResourcesPerPlayer: 37500
@@ -355,7 +355,7 @@
 						MaximumExpansionResourceSpawns: 5
 						MaximumResourceSpawnsPerExpansion: 2
 				Choice@High:
-					Label: label-ra-map-generator-choice-resources-high
+					Label: label_ra_map_generator_choice_resources_high
 					Settings:
 						SpawnResourceSpawns: 3
 						ResourcesPerPlayer: 56250
@@ -370,7 +370,7 @@
 						MaximumExpansionResourceSpawns: 8
 						MaximumResourceSpawnsPerExpansion: 3
 				Choice@VeryHigh:
-					Label: label-ra-map-generator-choice-resources-very-high
+					Label: label_ra_map_generator_choice_resources_very_high
 					Settings:
 						SpawnResourceSpawns: 4
 						ResourcesPerPlayer: 75000
@@ -385,7 +385,7 @@
 						MaximumExpansionResourceSpawns: 10
 						MaximumResourceSpawnsPerExpansion: 3
 				Choice@Full:
-					Label: label-ra-map-generator-choice-resources-full
+					Label: label_ra_map_generator_choice_resources_full
 					Settings:
 						SpawnResourceSpawns: 0
 						ResourcesPerPlayer: 1000000000
@@ -394,16 +394,16 @@
 						MaximumExpansionResourceSpawns: 0
 						MaximumResourceSpawnsPerExpansion: 1
 			MultiChoiceOption@Buildings:
-				Label: label-ra-map-generator-option-buildings
+				Label: label_ra_map_generator_option_buildings
 				Default: Standard
 				Choice@None:
-					Label: label-ra-map-generator-choice-buildings-none
+					Label: label_ra_map_generator_choice_buildings_none
 					Settings:
 						MinimumBuildings: 0
 						MaximumBuildings: 0
 						BuildingWeights:
 				Choice@Standard:
-					Label: label-ra-map-generator-choice-buildings-standard
+					Label: label_ra_map_generator_choice_buildings_standard
 					Settings:
 						MinimumBuildings: 0
 						MaximumBuildings: 3
@@ -412,7 +412,7 @@
 							miss: 1
 							oilb: 9
 				Choice@Extra:
-					Label: label-ra-map-generator-choice-buildings-extra
+					Label: label_ra_map_generator_choice_buildings_extra
 					Settings:
 						MinimumBuildings: 3
 						MaximumBuildings: 6
@@ -422,102 +422,102 @@
 							miss: 1
 							oilb: 9
 				Choice@OilOnly:
-					Label: label-ra-map-generator-choice-buildings-oil-only
+					Label: label_ra_map_generator_choice_buildings_oil_only
 					Settings:
 						MinimumBuildings: 0
 						MaximumBuildings: 3
 						BuildingWeights:
 							oilb: 1
 				Choice@OilRush:
-					Label: label-ra-map-generator-choice-buildings-oil-rush
+					Label: label_ra_map_generator_choice_buildings_oil_rush
 					Settings:
 						MinimumBuildings: 8
 						MaximumBuildings: 10
 						BuildingWeights:
 							oilb: 1
 			MultiChoiceOption@Density:
-				Label: label-ra-map-generator-option-density
+				Label: label_ra_map_generator_option_density
 				Default: Players
 				Priority: 1
 				Choice@Players:
-					Label: label-ra-map-generator-choice-density-players
+					Label: label_ra_map_generator_choice_density_players
 					Settings:
 						AreaEntityBonus: 0
 						PlayerCountEntityBonus: 1000000
 				Choice@AreaAndPlayers:
-					Label: label-ra-map-generator-choice-density-area-and-players
+					Label: label_ra_map_generator_choice_density_area_and_players
 					Settings:
 						AreaEntityBonus: 200
 						PlayerCountEntityBonus: 500000
 				Choice@AreaVeryLow:
-					Label: label-ra-map-generator-choice-density-area-very-low
+					Label: label_ra_map_generator_choice_density_area_very_low
 					Settings:
 						AreaEntityBonus: 100
 						PlayerCountEntityBonus: 0
 				Choice@AreaLow:
-					Label: label-ra-map-generator-choice-density-area-low
+					Label: label_ra_map_generator_choice_density_area_low
 					Settings:
 						AreaEntityBonus: 200
 						PlayerCountEntityBonus: 0
 				Choice@AreaMedium:
-					Label: label-ra-map-generator-choice-density-area-medium
+					Label: label_ra_map_generator_choice_density_area_medium
 					Settings:
 						AreaEntityBonus: 400
 						PlayerCountEntityBonus: 0
 				Choice@AreaHigh:
-					Label: label-ra-map-generator-choice-density-area-high
+					Label: label_ra_map_generator_choice_density_area_high
 					Settings:
 						AreaEntityBonus: 600
 						PlayerCountEntityBonus: 0
 				Choice@AreaVeryHigh:
-					Label: label-ra-map-generator-choice-density-area-very-high
+					Label: label_ra_map_generator_choice_density_area_very_high
 					Settings:
 						AreaEntityBonus: 800
 						PlayerCountEntityBonus: 0
 			MultiChoiceOption@CivilianDensity:
-				Label: label-ra-map-generator-option-civilian-density
+				Label: label_ra_map_generator_option_civilian_density
 				Default: Default
 				Priority: 3
 				Choice@Default:
-					Label: label-ra-map-generator-choice-civilian-density-default
+					Label: label_ra_map_generator_choice_civilian_density_default
 					Settings:
 				Choice@None:
-					Label: label-ra-map-generator-choice-civilian-density-none
+					Label: label_ra_map_generator_choice_civilian_density_none
 					Settings:
 						CivilianBuildings: 0
 				Choice@Low:
-					Label: label-ra-map-generator-choice-civilian-density-low
+					Label: label_ra_map_generator_choice_civilian_density_low
 					Settings:
 						CivilianBuildings: 75
 				Choice@Medium:
-					Label: label-ra-map-generator-choice-civilian-density-medium
+					Label: label_ra_map_generator_choice_civilian_density_medium
 					Settings:
 						CivilianBuildings: 125
 				Choice@High:
-					Label: label-ra-map-generator-choice-civilian-density-high
+					Label: label_ra_map_generator_choice_civilian_density_high
 					Settings:
 						CivilianBuildings: 250
 				Choice@VeryHigh:
-					Label: label-ra-map-generator-choice-civilian-density-very-high
+					Label: label_ra_map_generator_choice_civilian_density_very_high
 					Settings:
 						CivilianBuildings: 500
 				Choice@Max:
-					Label: label-ra-map-generator-choice-civilian-density-max
+					Label: label_ra_map_generator_choice_civilian_density_max
 					Settings:
 						CivilianBuildings: 1000
 			BooleanOption@DenyWalledArea:
-				Label: label-ra-map-generator-option-deny-walled-areas
+				Label: label_ra_map_generator_option_deny_walled_areas
 				Parameter: DenyWalledAreas
 				Default: True
 				Priority: 1
 			BooleanOption@Roads:
-				Label: label-ra-map-generator-option-roads
+				Label: label_ra_map_generator_option_roads
 				Parameter: Roads
 				Default: False
 				Priority: 1
 	D2kMapGenerator@d2k:
 		Type: d2k
-		Name: map-generator-d2k
+		Name: map_generator_d2k
 		Tilesets: ARRAKIS
 		Settings:
 			MultiChoiceOption@hidden_defaults:
@@ -589,15 +589,15 @@
 						SandDetailBrushes: Rough-Sand-Detail
 						DuneBrushes: Dune
 			IntegerOption@Seed:
-				Label: label-d2k-map-generator-option-seed
+				Label: label_d2k_map_generator_option_seed
 				Parameter: Seed
 				Default: 0
 			MultiChoiceOption@TerrainType:
-				Label: label-d2k-map-generator-option-terrain-type
+				Label: label_d2k_map_generator_option_terrain_type
 				Priority: 2
 				Default: Rocky
 				Choice@Rocky:
-					Label: label-d2k-map-generator-choice-terrain-type-rocky
+					Label: label_d2k_map_generator_choice_terrain_type_rocky
 					Settings:
 						TerrainFeatureSize: 10240
 						SandDetailFeatureSize: 10240
@@ -609,7 +609,7 @@
 						Dunes: 200
 						SandDetail: 200
 				Choice@Rough:
-					Label: label-d2k-map-generator-choice-terrain-type-rough
+					Label: label_d2k_map_generator_choice_terrain_type_rough
 					Settings:
 						TerrainFeatureSize: 10240
 						SandDetailFeatureSize: 10240
@@ -621,7 +621,7 @@
 						Dunes: 200
 						SandDetail: 200
 				Choice@Flat:
-					Label: label-d2k-map-generator-choice-terrain-type-flat
+					Label: label_d2k_map_generator_choice_terrain_type_flat
 					Settings:
 						TerrainFeatureSize: 10240
 						SandDetailFeatureSize: 10240
@@ -633,7 +633,7 @@
 						Dunes: 200
 						SandDetail: 50
 				Choice@Pockets:
-					Label: label-d2k-map-generator-choice-terrain-type-pockets
+					Label: label_d2k_map_generator_choice_terrain_type_pockets
 					Settings:
 						TerrainFeatureSize: 10240
 						SandDetailFeatureSize: 10240
@@ -645,260 +645,260 @@
 						Dunes: 0
 						SandDetail: 50
 			MultiIntegerChoiceOption@Players:
-				Label: label-d2k-map-generator-option-players
+				Label: label_d2k_map_generator_option_players
 				Parameter: Players
 				Choices: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16
 				Default: 2
 				Priority: 1
 			MultiChoiceOption@Symmetry:
-				Label: label-d2k-map-generator-option-symmetry
+				Label: label_d2k_map_generator_option_symmetry
 				Default: 2Rotations
 				Priority: 1
 				Choice@None:
-					Label: label-d2k-map-generator-choice-mirror-none
+					Label: label_d2k_map_generator_choice_mirror_none
 					Settings:
 						Mirror: None
 				Choice@LeftMatchesRight:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-horizontal
+					Label: label_d2k_map_generator_choice_symmetry_mirror_horizontal
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: LeftMatchesRight
 				Choice@TopLeftMatchesBottomRight:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-diagonal-tl
+					Label: label_d2k_map_generator_choice_symmetry_mirror_diagonal_tl
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: TopLeftMatchesBottomRight
 				Choice@TopMatchesBottom:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-vertical
+					Label: label_d2k_map_generator_choice_symmetry_mirror_vertical
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: TopMatchesBottom
 				Choice@TopRightMatchesBottomLeft:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-diagonal-tr
+					Label: label_d2k_map_generator_choice_symmetry_mirror_diagonal_tr
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Mirror: TopRightMatchesBottomLeft
 				Choice@2Rotations:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-2-rotations
+					Label: label_d2k_map_generator_choice_symmetry_mirror_2_rotations
 					Players: 2, 4, 6, 8, 10, 12, 14, 16
 					Settings:
 						Rotations: 2
 				Choice@3Rotations:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-3-rotations
+					Label: label_d2k_map_generator_choice_symmetry_mirror_3_rotations
 					Players: 3, 6, 9, 12, 15
 					Settings:
 						Rotations: 3
 				Choice@4Rotations:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-4-rotations
+					Label: label_d2k_map_generator_choice_symmetry_mirror_4_rotations
 					Players: 4, 8, 12, 16
 					Settings:
 						Rotations: 4
 				Choice@5Rotations:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-5-rotations
+					Label: label_d2k_map_generator_choice_symmetry_mirror_5_rotations
 					Players: 5, 10, 15
 					Settings:
 						Rotations: 5
 				Choice@6Rotations:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-6-rotations
+					Label: label_d2k_map_generator_choice_symmetry_mirror_6_rotations
 					Players: 6, 12
 					Settings:
 						Rotations: 6
 				Choice@7Rotations:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-7-rotations
+					Label: label_d2k_map_generator_choice_symmetry_mirror_7_rotations
 					Players: 7, 14
 					Settings:
 						Rotations: 7
 				Choice@8Rotations:
-					Label: label-d2k-map-generator-choice-symmetry-mirror-8-rotations
+					Label: label_d2k_map_generator_choice_symmetry_mirror_8_rotations
 					Players: 8, 16
 					Settings:
 						Rotations: 8
 			MultiChoiceOption@Resources:
-				Label: label-d2k-map-generator-option-resources
+				Label: label_d2k_map_generator_option_resources
 				Default: Medium
 				Choice@None:
-					Label: label-d2k-map-generator-choice-resources-none
+					Label: label_d2k_map_generator_choice_resources_none
 					Settings:
 						BiasedResourceSpawns: 0
 						UnbiasedResourceSpawns: 0
 						ResourcesPerPlayer: 0
 				Choice@Low:
-					Label: label-d2k-map-generator-choice-resources-low
+					Label: label_d2k_map_generator_choice_resources_low
 					Settings:
 						BiasedResourceSpawns: 1
 						UnbiasedResourceSpawns: 2
 						ResourcesPerPlayer: 75000
 				Choice@Medium:
-					Label: label-d2k-map-generator-choice-resources-medium
+					Label: label_d2k_map_generator_choice_resources_medium
 					Settings:
 						BiasedResourceSpawns: 2
 						UnbiasedResourceSpawns: 4
 						ResourcesPerPlayer: 125000
 				Choice@High:
-					Label: label-d2k-map-generator-choice-resources-high
+					Label: label_d2k_map_generator_choice_resources_high
 					Settings:
 						BiasedResourceSpawns: 3
 						UnbiasedResourceSpawns: 6
 						ResourcesPerPlayer: 150000
 				Choice@VeryHigh:
-					Label: label-d2k-map-generator-choice-resources-very-high
+					Label: label_d2k_map_generator_choice_resources_very_high
 					Settings:
 						BiasedResourceSpawns: 4
 						UnbiasedResourceSpawns: 8
 						ResourcesPerPlayer: 200000
 				Choice@Full:
-					Label: label-d2k-map-generator-choice-resources-full
+					Label: label_d2k_map_generator_choice_resources_full
 					Settings:
 						BiasedResourceSpawns: 1
 						UnbiasedResourceSpawns: 1000000
 						ResourcesPerPlayer: 1000000000
 			MultiChoiceOption@Worms:
-				Label: label-d2k-map-generator-option-worms
+				Label: label_d2k_map_generator_option_worms
 				Default: Low
 				Choice@None:
-					Label: label-d2k-map-generator-choice-worms-none
+					Label: label_d2k_map_generator_choice_worms_none
 					Settings:
 						WormSpawns: 0
 				Choice@Low:
-					Label: label-d2k-map-generator-choice-worms-low
+					Label: label_d2k_map_generator_choice_worms_low
 					Settings:
 						WormSpawns: 1
 				Choice@Medium:
-					Label: label-d2k-map-generator-choice-worms-medium
+					Label: label_d2k_map_generator_choice_worms_medium
 					Settings:
 						WormSpawns: 2
 				Choice@High:
-					Label: label-d2k-map-generator-choice-worms-high
+					Label: label_d2k_map_generator_choice_worms_high
 					Settings:
 						WormSpawns: 4
 			MultiChoiceOption@Density:
-				Label: label-d2k-map-generator-option-density
+				Label: label_d2k_map_generator_option_density
 				Default: Players
 				Priority: 1
 				Choice@Players:
-					Label: label-d2k-map-generator-choice-density-players
+					Label: label_d2k_map_generator_choice_density_players
 					Settings:
 						AreaEntityBonus: 0
 						PlayerCountEntityBonus: 1000000
 				Choice@AreaAndPlayers:
-					Label: label-d2k-map-generator-choice-density-area-and-players
+					Label: label_d2k_map_generator_choice_density_area_and_players
 					Settings:
 						AreaEntityBonus: 200
 						PlayerCountEntityBonus: 500000
 				Choice@AreaVeryLow:
-					Label: label-d2k-map-generator-choice-density-area-very-low
+					Label: label_d2k_map_generator_choice_density_area_very_low
 					Settings:
 						AreaEntityBonus: 100
 						PlayerCountEntityBonus: 0
 				Choice@AreaLow:
-					Label: label-d2k-map-generator-choice-density-area-low
+					Label: label_d2k_map_generator_choice_density_area_low
 					Settings:
 						AreaEntityBonus: 200
 						PlayerCountEntityBonus: 0
 				Choice@AreaMedium:
-					Label: label-d2k-map-generator-choice-density-area-medium
+					Label: label_d2k_map_generator_choice_density_area_medium
 					Settings:
 						AreaEntityBonus: 400
 						PlayerCountEntityBonus: 0
 				Choice@AreaHigh:
-					Label: label-d2k-map-generator-choice-density-area-high
+					Label: label_d2k_map_generator_choice_density_area_high
 					Settings:
 						AreaEntityBonus: 600
 						PlayerCountEntityBonus: 0
 				Choice@AreaVeryHigh:
-					Label: label-d2k-map-generator-choice-density-area-very-high
+					Label: label_d2k_map_generator_choice_density_area_very_high
 					Settings:
 						AreaEntityBonus: 800
 						PlayerCountEntityBonus: 0
 	ClearMapGenerator@clear:
 		Type: clear
-		Name: map-generator-clear
+		Name: map_generator_clear
 		Tilesets: RA_TEMPERAT, RA_SNOW, RA_DESERT, RA_INTERIOR, ARRAKIS, TEMPERAT, DESERT
 		Settings:
 			MultiChoiceOption@Tile:
-				Label: label-clear-map-generator-option-tile
+				Label: label_clear_map_generator_option_tile
 				Choice@DesertClear:
-					Label: label-clear-map-generator-choice-tile-clear
+					Label: label_clear_map_generator_choice_tile_clear
 					Tileset: RA_DESERT
 					Settings:
 						Tile: 255
 				Choice@DesertWater:
-					Label: label-clear-map-generator-choice-tile-water
+					Label: label_clear_map_generator_choice_tile_water
 					Tileset: RA_DESERT
 					Settings:
 						Tile: 256
 				Choice@SnowClear:
-					Label: label-clear-map-generator-choice-tile-clear
+					Label: label_clear_map_generator_choice_tile_clear
 					Tileset: RA_SNOW
 					Settings:
 						Tile: 255
 				Choice@SnowWater:
-					Label: label-clear-map-generator-choice-tile-water
+					Label: label_clear_map_generator_choice_tile_water
 					Tileset: RA_SNOW
 					Settings:
 						Tile: 1
 				Choice@TemperatClear:
-					Label: label-clear-map-generator-choice-tile-clear
+					Label: label_clear_map_generator_choice_tile_clear
 					Tileset: RA_TEMPERAT
 					Settings:
 						Tile: 255
 				Choice@TemperatWater:
-					Label: label-clear-map-generator-choice-tile-water
+					Label: label_clear_map_generator_choice_tile_water
 					Tileset: RA_TEMPERAT
 					Settings:
 						Tile: 1
 				Choice@InteriorClear:
-					Label: label-clear-map-generator-choice-tile-clear
+					Label: label_clear_map_generator_choice_tile_clear
 					Tileset: RA_INTERIOR
 					Settings:
 						Tile: 275
 				Choice@InteriorEmpty:
-					Label: label-clear-map-generator-choice-tile-empty
+					Label: label_clear_map_generator_choice_tile_empty
 					Tileset: RA_INTERIOR
 					Settings:
 						Tile: 255
 				Choice@TemperatTDClear:
-					Label: label-clear-map-generator-choice-tile-clear
+					Label: label_clear_map_generator_choice_tile_clear
 					Tileset: TEMPERAT
 					Settings:
 						Tile: 255
 				Choice@TemperatTDWater:
-					Label: label-clear-map-generator-choice-tile-water
+					Label: label_clear_map_generator_choice_tile_water
 					Tileset: TEMPERAT
 					Settings:
 						Tile: 1
 				Choice@DesertTDClear:
-					Label: label-clear-map-generator-choice-tile-clear
+					Label: label_clear_map_generator_choice_tile_clear
 					Tileset: DESERT
 					Settings:
 						Tile: 255
 				Choice@DesertTDWater:
-					Label: label-clear-map-generator-choice-tile-water
+					Label: label_clear_map_generator_choice_tile_water
 					Tileset: DESERT
 					Settings:
 						Tile: 1
 				Choice@ArrakisSand:
-					Label: label-clear-map-generator-choice-tile-sand
+					Label: label_clear_map_generator_choice_tile_sand
 					Tileset: ARRAKIS
 					Settings:
 						Tile: 0
 				Choice@ArrakisConcrete:
-					Label: label-clear-map-generator-choice-tile-concrete
+					Label: label_clear_map_generator_choice_tile_concrete
 					Tileset: ARRAKIS
 					Settings:
 						Tile: 88
 				Choice@ArrakisDune:
-					Label: label-clear-map-generator-choice-tile-dune
+					Label: label_clear_map_generator_choice_tile_dune
 					Tileset: ARRAKIS
 					Settings:
 						Tile: 241
 				Choice@ArrakisRock:
-					Label: label-clear-map-generator-choice-tile-rock
+					Label: label_clear_map_generator_choice_tile_rock
 					Tileset: ARRAKIS
 					Settings:
 						Tile: 266
 				Choice@ArrakisPlatform:
-					Label: label-clear-map-generator-choice-tile-platform
+					Label: label_clear_map_generator_choice_tile_platform
 					Tileset: ARRAKIS
 					Settings:
 						Tile: 1017

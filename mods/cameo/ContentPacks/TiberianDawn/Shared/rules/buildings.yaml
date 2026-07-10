@@ -13,7 +13,7 @@ NUKE:
 		BuildPaletteOrder: 10
 		Prerequisites: ~fact
 		Queue: Building, RABuilding
-		Description: actor-nuke.description
+		Description: actor_nuke.description
 	Building:
 		Footprint: xX xx ==
 		Dimensions: 2,3
@@ -45,7 +45,7 @@ NUK2:
 		BuildPaletteOrder: 80
 		Prerequisites: ~fact, anytdhq
 		Queue: Building, RABuilding
-		Description: actor-nuk2.description
+		Description: actor_nuk2.description
 	Building:
 		Footprint: xX xx ==
 		Dimensions: 2,3
@@ -75,7 +75,7 @@ SILO:
 		BuildPaletteOrder: 10
 		Prerequisites: ~fact, proc
 		Queue: Defence, RADefence
-		Description: template-silo.description
+		Description: template_silo.description
 	Building:
 		Footprint: xx
 		Dimensions: 2,1
@@ -110,7 +110,7 @@ SBAG:
 		BuildPaletteOrder: 0
 		Prerequisites: ~sandbagbarrier
 		Queue: Defence, RADefence
-		Description: actor-sbag.description
+		Description: actor_sbag.description
 	Armor:
 		Type: Medium
 	Health:
@@ -134,7 +134,7 @@ CYCL:
 		BuildPaletteOrder: 0
 		Prerequisites: ~chainlinkfence
 		Queue: Defence, RADefence
-		Description: actor-cycl.description
+		Description: actor_cycl.description
 	Armor:
 		Type: Heavy
 	Health:
@@ -158,7 +158,7 @@ FENC:
 		BuildPaletteOrder: 0
 		Prerequisites: ~wirefence
 		Queue: Defence, RADefence
-		Description: actor-cycl.description
+		Description: actor_cycl.description
 	Armor:
 		Type: Light
 	Health:
@@ -184,7 +184,7 @@ BRIK:
 		BuildPaletteOrder: 0
 		Prerequisites: ~concretebarrier
 		Queue: Defence, RADefence
-		Description: actor-brik.description
+		Description: actor_brik.description
 	Health:
 		HP: 100000
 	Armor:

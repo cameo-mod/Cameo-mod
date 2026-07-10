@@ -19,7 +19,7 @@ enforcer.futu:
 		BuildPaletteOrder: 20
 		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-futu_enforcer.description
+		Description: actor_futu_enforcer.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -147,7 +147,7 @@ javelinsoldier.futu:
 		BuildPaletteOrder: 20
 		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-futu_javelinsoldier.description
+		Description: actor_futu_javelinsoldier.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -257,7 +257,7 @@ fedeng.futu:
 	Buildable:
 		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-futu_fedeng.description
+		Description: actor_futu_fedeng.description
 	RenderSprites:
 		Image: fedeng.futu
 	-TakeCover:
@@ -274,7 +274,7 @@ spy.futu:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 90
 		Prerequisites: ~egpile.futu, egtech.futu
-		Description: actor-ra2spy.description
+		Description: actor_ra2spy.description
 	Valued:
 		Cost: 1000
 	-Tooltip:
@@ -331,7 +331,7 @@ blackwidow.futu:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
 		Prerequisites: ~egpile.futu, egtech.futu, ~up_blackwidow.futu
-		Description: actor-futu_blackwidow.description
+		Description: actor_futu_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
 		RequiresCondition: !rank-elite
@@ -385,7 +385,7 @@ cryoleg.futu:
 		BuildPaletteOrder: 121
 		Prerequisites: ~egpile.futu, egshock.futu, ~up_cryoleg.futu
 		BuildLimit: 1
-		Description: actor-futu_cryoleg.description
+		Description: actor_futu_cryoleg.description
 	RenderSprites:
 		PlayerPalette: playerra2
 	Valued:
@@ -442,7 +442,7 @@ engi.futu:
 		BuildPaletteOrder: 75
 		Prerequisites: ~egpile.futu, yrgarobo.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-futu_engi.description
+		Description: actor_futu_engi.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -521,7 +521,7 @@ wheel.futu:
 		BuildPaletteOrder: 10
 		Prerequisites: ~egpile.futu, yrgarobo.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-futu_wheel.description
+		Description: actor_futu_wheel.description
 	Mobile:
 		Speed: 70
 		TurnSpeed: 28
@@ -584,7 +584,7 @@ robot_shotgun.futu:
 		BuildPaletteOrder: 75
 		Prerequisites: ~egpile.futu, yrgarobo.futu, egtf.futu, ~up_shotgun_droid.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-future_robot_shotgun.description
+		Description: actor_future_robot_shotgun.description
 	Mobile:
 		Speed: 55
 		TurnSpeed: 22
@@ -652,7 +652,7 @@ robot_missiles.futu:
 		BuildPaletteOrder: 75
 		Prerequisites: ~egpile.futu, yrgarobo.futu, egtech.futu, ~up_missile_droid.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-future_robot_missiles.description
+		Description: actor_future_robot_missiles.description
 	Mobile:
 		Speed: 40
 		TurnSpeed: 16
@@ -721,7 +721,7 @@ robot_cannon.futu:
 		BuildPaletteOrder: 75
 		Prerequisites: ~egpile.futu, yrgarobo.futu, egshock.futu, ~up_cannon_droid.futu
 		Queue: Infantry, RAInfantry
-		Description: actor-future_robot_cannon.description
+		Description: actor_future_robot_cannon.description
 	Mobile:
 		Speed: 35
 		TurnSpeed: 14

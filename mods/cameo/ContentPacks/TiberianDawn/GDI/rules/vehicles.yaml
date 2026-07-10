@@ -20,7 +20,7 @@ HARV.GDI:
 	Buildable:
 		Prerequisites: ~weap, proc.gdi
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Tooltip:
 		Name: GDI Tiberium Harvester
 	ActorStatValues:
@@ -50,7 +50,7 @@ APC:
 		BuildPaletteOrder: 30
 		Prerequisites: ~weap, pyle, ~!upgdiassaultapc
 		Queue: Vehicle, RAVehicle
-		Description: actor-apc.description
+		Description: actor_apc.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -117,7 +117,7 @@ JEEP:
 		BuildPaletteOrder: 20
 		Prerequisites: ~weap, ~!upgdihumvee
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Mobile:
 		Speed: 150
 		TurnSpeed: 30
@@ -170,7 +170,7 @@ MTNK:
 		BuildPaletteOrder: 40
 		Prerequisites: ~weap, ~!upgdipredator
 		Queue: Vehicle, RAVehicle
-		Description: actor-mtnk.description
+		Description: actor_mtnk.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -261,7 +261,7 @@ HTNK:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap, eye, ~!upgdimammoth3
 		Queue: Vehicle, RAVehicle
-		Description: actor-htnk.description
+		Description: actor_htnk.description
 	Mobile:
 		Locomotor: heavytracked
 		Speed: 60
@@ -349,7 +349,7 @@ td_gdi_boxer:
 		BuildPaletteOrder: 50
 		Prerequisites: ~weap, hq.gdi
 		Queue: Vehicle, RAVehicle
-		Description: actor-heavyaatank.description
+		Description: actor_heavyaatank.description
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -419,7 +419,7 @@ MLRS:
 		BuildPaletteOrder: 50
 		Prerequisites: ~weap, hq.gdi
 		Queue: Vehicle, RAVehicle
-		Description: actor-mlrs.description
+		Description: actor_mlrs.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -487,7 +487,7 @@ gdiarcher:
 		BuildPaletteOrder: 50
 		Prerequisites: ~weap, eye
 		Queue: Vehicle, RAVehicle
-		Description: actor-mlrs.description
+		Description: actor_mlrs.description
 	Mobile:
 		Speed: 70
 		TurnSpeed: 14
@@ -551,7 +551,7 @@ gdiassaultapc:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
 		Prerequisites: ~weap, eye, ~upgdiassaultapc
-		Description: template-opentopped.description
+		Description: template_opentopped.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -635,7 +635,7 @@ gdihumvee:
 		BuildPaletteOrder: 20
 		Prerequisites: ~weap, ~upgdihumvee
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Valued:
 		Cost: 600
 	Mobile:
@@ -728,7 +728,7 @@ gdipredator:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap, ~upgdipredator
 		Queue: Vehicle, RAVehicle
-		Description: actor-gdipredator.description
+		Description: actor_gdipredator.description
 	Mobile:
 		Locomotor: heavytracked
 		Speed: 70
@@ -828,7 +828,7 @@ gdimammoth3:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap, eye, ~upgdimammoth3
 		Queue: Vehicle, RAVehicle
-		Description: actor-htnk.description
+		Description: actor_htnk.description
 	Mobile:
 		Locomotor: heavytracked
 		Speed: 55
@@ -915,7 +915,7 @@ gdiexosuit:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
 		Prerequisites: ~weap, eye, ~upgdihavoc
-		Description: actor-exosuit.description
+		Description: actor_exosuit.description
 	Mobile:
 		TurnSpeed: 40
 		Speed: 100
@@ -994,7 +994,7 @@ gdirig:
 		BuildPaletteOrder: 60
 		Prerequisites: ~weap, eye, upgdidefenserig
 		Queue: Vehicle, RAVehicle
-		Description: actor-htnk.description
+		Description: actor_htnk.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12

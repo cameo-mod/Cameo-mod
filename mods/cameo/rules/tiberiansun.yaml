@@ -4,34 +4,34 @@ World:
 		InternalName: tsgdi
 		Game: Tiberian Sun
 		Side: Tiberian Sun
-		Description: faction-ts-gdi.description
+		Description: faction_ts_gdi.description
 	FactionCA@tsnod:
 		Name: Nod TS
 		InternalName: tsnod
 		Game: Tiberian Sun
 		Side: Tiberian Sun
-		Description: faction-ts-nod.description
+		Description: faction_ts_nod.description
 	FactionCA@forgotten:
 		Selectable: true
 		Name: Forgotten TS
 		InternalName: forgotten
 		Game: Tiberian Sun
 		Side: Tiberian Sun
-		Description: faction-ts-forgotten.description
+		Description: faction_ts_forgotten.description
 	FactionCA@cabal:
 		Selectable: true
 		Name: CABAL TS (WIP)
 		InternalName: cabal
 		Game: Tiberian Sun
 		Side: Tiberian Sun
-		Description: faction-ts-cabal.description
+		Description: faction_ts_cabal.description
 	FactionCA@RandomTS:
 		Name: Random TS
 		InternalName: RandomTS
 		RandomFactionMembers: tsnod, tsgdi, forgotten, cabal
 		Game: Tiberian Sun
 		Side: Random
-		Description: faction-ts-random.description
+		Description: faction_ts_random.description
 
 	####################################################################################################
 	#		MPSTARTUNITS
@@ -331,7 +331,7 @@ ts_gdi_silo:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Defence, RADefence
-		Description: template-silo.description
+		Description: template_silo.description
 		Prerequisites: ~ts_gdi_constructionyard, tsproc
 	Building:
 		Footprint: xx xx
@@ -1562,7 +1562,7 @@ ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor:
 	Tooltip:
 		Name: Modern Fire Control Systems
 	Buildable:
-		Description: upgrade-modernfirecontrolsystems.description
+		Description: upgrade_modernfirecontrolsystems.description
 	PlayerDisplayUpgrade:
 
 ^ModernFireControlSystems:

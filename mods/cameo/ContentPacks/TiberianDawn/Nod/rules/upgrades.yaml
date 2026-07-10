@@ -181,7 +181,7 @@ up_guerillatactics:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
-		Description: upgrade-guerillatactics.description
+		Description: upgrade_guerillatactics.description
 		Prerequisites: ~hq.nod, !up_guerillatactics
 	RenderSprites:
 		Image: guerillatacticsicon
@@ -196,7 +196,7 @@ up_tiberiuminfusion:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
-		Description: upgrade-tiberiuminfusion.description
+		Description: upgrade_tiberiuminfusion.description
 		Prerequisites: ~hq.nod, !up_tiberiuminfusion
 	RenderSprites:
 		Image: tiberiuminfusionicon
@@ -211,7 +211,7 @@ up_improvedartilleries:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
-		Description: upgrade-improvedartilleries.description
+		Description: upgrade_improvedartilleries.description
 		Prerequisites: ~hq.nod, !up_improvedartilleries
 	RenderSprites:
 		Image: improvedartilleriesicon
@@ -226,7 +226,7 @@ up_blackmarketupgrades:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-blackmarketupgrades.description
+		Description: upgrade_blackmarketupgrades.description
 		Prerequisites: ~tmpl, !up_blackmarketupgrades
 	RenderSprites:
 		Image: blackmarketupgradesicon
@@ -241,7 +241,7 @@ up_elementalwarfare:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-elementalwarfare.description
+		Description: upgrade_elementalwarfare.description
 		Prerequisites: ~tmpl, !up_elementalwarfare
 	RenderSprites:
 		Image: elementalwarfareicon
@@ -256,7 +256,7 @@ up_elitecapacitors:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-elitecapacitors.description
+		Description: upgrade_elitecapacitors.description
 		Prerequisites: ~tmpl, td_nod_templeprime, !up_elitecapacitors
 	RenderSprites:
 		Image: elitecapacitorsicon
@@ -271,7 +271,7 @@ up_cyberneticmodifications:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-cyberneticmodifications.description
+		Description: upgrade_cyberneticmodifications.description
 		Prerequisites: ~tmpl, td_nod_templeprime, !up_cyberneticmodifications
 	RenderSprites:
 		Image: cyberneticmodificationsicon
@@ -286,7 +286,7 @@ up_advancedguerillatactics:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-advancedguerillatactics.description
+		Description: upgrade_advancedguerillatactics.description
 		Prerequisites: ~tmpl, td_nod_templeprime, up_guerillatactics, !up_advancedguerillatactics
 	RenderSprites:
 		Image: advancedguerillatacticsicon
@@ -303,5 +303,5 @@ team_upgrade.up_advancedguerillatactics:
 	Tooltip:
 		Name: Advanced Guerrilla Tactics
 	Buildable:
-		Description: upgrade-advancedguerillatactics.description
+		Description: upgrade_advancedguerillatactics.description
 	PlayerDisplayUpgrade:

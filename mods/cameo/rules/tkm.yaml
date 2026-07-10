@@ -680,7 +680,7 @@ tkmbunker:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tkmcommandcenter, tkmbarracks
 		Queue: Defence, RADefence
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Building:
 	Health:
 		HP: 120000
@@ -736,7 +736,7 @@ tkmbunkerquadturret:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tkmcommandcenter, tkmradar
 		Queue: Defence, RADefence
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Building:
 	Health:
 		HP: 85000
@@ -785,7 +785,7 @@ tkmbunkertankturret:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tkmcommandcenter, tkmbarracks
 		Queue: Defence, RADefence
-		Description: template-anti-infantry-defense.description
+		Description: template_anti_infantry_defense.description
 	Building:
 	Health:
 		HP: 100000
@@ -1348,7 +1348,7 @@ tkmsniper:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tkmbarracks, ~upberezkacloak, tkmradar
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2snipe.description
+		Description: actor_ra2snipe.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -1398,7 +1398,7 @@ tkmvon:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tkmbarracks, tkmtechcenter
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2snipe.description
+		Description: actor_ra2snipe.description
 		BuildLimit: 1
 	Mobile:
 		Speed: 75
@@ -1487,7 +1487,7 @@ tkmvan:
 		BuildPaletteOrder: 40
 		Prerequisites: ~tkmbarracks, tkmradar, ~!tkmvon, ~disabled
 		Queue: Infantry, RAInfantry
-		Description: actor-ra2snipe.description
+		Description: actor_ra2snipe.description
 		BuildLimit: 1
 	Mobile:
 		Speed: 75
@@ -1537,7 +1537,7 @@ tkmspetsnaz:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
 		Prerequisites: ~tkmbarracks, ~uptitanarsenal, tkmradar
-		Description: actor-seal.description
+		Description: actor_seal.description
 	Armament@PRIMARY:
 		Weapon: tkmsmg
 	#	RequiresCondition: !rank-elite
@@ -1591,11 +1591,11 @@ tkmharv:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~tkmfactory, ~tkmrefinery
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Valued:
 		Cost: 1000 #1100
 	Tooltip:
-		Name: template-harvester.raname
+		Name: template_harvester.raname
 	SelectionDecorations:
 	Harvester:
 		BaleLoadDelay: 3
@@ -1657,7 +1657,7 @@ tkmas42:
 		BuildPaletteOrder: 20
 		Prerequisites: ~tkmfactory
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description3
+		Description: actor_jeep.description3
 	Mobile:
 		Speed: 150
 		TurnSpeed: 60
@@ -1737,7 +1737,7 @@ tkmtechnical:
 		BuildPaletteOrder: 20
 		Prerequisites: ~tkmfactory
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Mobile:
 		Speed: 175
 		TurnSpeed: 35
@@ -1872,7 +1872,7 @@ tkmquadtruck:
 		BuildPaletteOrder: 22
 		Prerequisites: ~tkmfactory, ~upberezkacloak, tkmradar
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 18
@@ -1923,7 +1923,7 @@ tkmzaza:
 		BuildPaletteOrder: 22
 		Prerequisites: ~tkmfactory, ~uptitanarsenal, tkmtechcenter
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -2009,7 +2009,7 @@ tkmstryker:
 		BuildPaletteOrder: 22
 		Prerequisites: ~tkmfactory, ~upnatoarsenal, tkmradar
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Mobile:
 		Speed: 105
 		TurnSpeed: 21
@@ -2308,7 +2308,7 @@ tkmkatyushalauncher:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 24
 		Prerequisites: ~tkmfactory, tkmtechcenter
-		Description: actor-latin_burrito.description
+		Description: actor_latin_burrito.description
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -2390,7 +2390,7 @@ tkmhuey:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
 		Prerequisites: ~tkmairpad
-		Description: actor-hind.description
+		Description: actor_hind.description
 	Valued:
 		Cost: 1800
 	Tooltip:
@@ -2551,7 +2551,7 @@ tkmviper:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
 		Prerequisites: ~tkmairpad, tkmtechcenter, upviper
-		Description: actor-yak.description
+		Description: actor_yak.description
 	Valued:
 		Cost: 1750
 	Tooltip:
@@ -2739,7 +2739,7 @@ tkmradartruck:
 		BuildPaletteOrder: 25
 		Prerequisites: ~tkmfactory, upradartruck
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -2786,7 +2786,7 @@ tkmrepairtruck:
 		BuildPaletteOrder: 26
 		Prerequisites: ~tkmfactory, uprepairtruck
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Armament@repair:
 		Name: repair
 		Weapon: RA2IFVRepair
@@ -2850,7 +2850,7 @@ tkmmedictruck:
 		BuildPaletteOrder: 27
 		Prerequisites: ~tkmfactory, upmedictruck
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Armament@Heal:
 		Weapon: TKMMedicHeal
 		TargetRelationships: Ally
@@ -2910,7 +2910,7 @@ tkmdronepodtruck:
 		BuildPaletteOrder: 26
 		Prerequisites: ~tkmfactory, updronepodtruck, tkmtechcenter
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Armament:
 		Weapon: DronePodTruckLaser
 		LocalOffset: 240,160,240
@@ -3212,7 +3212,7 @@ tkmbattlebus:
 		BuildPaletteOrder: 30
 		Prerequisites: ~tkmfactory, tkmtechcenter, upbattlebus
 		Queue: Vehicle, RAVehicle
-		Description: template-opentopped.description
+		Description: template_opentopped.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -3274,7 +3274,7 @@ tkmbattlebus:
 # 		BuildPaletteOrder: 30
 # 		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~upberezkacloak, ~upbattlebus
 # 		Queue: Vehicle, RAVehicle
-# 		Description: template-opentopped.description
+# 		Description: template_opentopped.description
 # 	Cargo:
 # 		UnloadVoice: Move
 # 		Types: Infantry, Hacker, Fremen
@@ -3295,7 +3295,7 @@ tkmbattlebus:
 # 		BuildPaletteOrder: 30
 # 		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~uptitanarsenal, ~upbattlebus
 # 		Queue: Vehicle, RAVehicle
-# 		Description: template-opentopped.description
+# 		Description: template_opentopped.description
 # 	Cargo:
 # 		UnloadVoice: Move
 # 		Types: Infantry, Hacker, Fremen
@@ -3316,7 +3316,7 @@ tkmbattlebus:
 # 		BuildPaletteOrder: 30
 # 		Prerequisites: ~tkmfactory, ~tkmtechcenter, ~upnatoarsenal, ~upbattlebus
 # 		Queue: Vehicle, RAVehicle
-# 		Description: template-opentopped.description
+# 		Description: template_opentopped.description
 # 	Cargo:
 # 		UnloadVoice: Move
 # 		Types: Infantry, Hacker, Fremen
@@ -3503,7 +3503,7 @@ tkmratflak:
 		BuildPaletteOrder: 25
 		Prerequisites: ~tkmfactory, upflakbus, tkmtechcenter
 		Queue: Vehicle, RAVehicle
-		Description: actor-jeep.description
+		Description: actor_jeep.description
 	Transforms:
 		IntoActor: tkmratflakdeployed
 		Offset: 0,0

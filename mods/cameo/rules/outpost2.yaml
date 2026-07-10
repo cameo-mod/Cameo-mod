@@ -4,7 +4,7 @@ World:
 		InternalName: plymouthl
 		Game: Outpost 2
 		Side: Outpost 2
-		Description: faction-outpost2-plymouth.description
+		Description: faction_outpost2_plymouth.description
 
 	#Starting units
 	StartingUnits@mcvonlyplymouthl:
@@ -32,7 +32,7 @@ World:
 		InternalName: edenl
 		Game: Outpost 2
 		Side: Outpost 2
-		Description: faction-outpost2-eden.description
+		Description: faction_outpost2_eden.description
 
 	#Starting units
 	StartingUnits@mcvonlyedenl:
@@ -535,9 +535,9 @@ op2_commonore_beacon_3bar:
 			1: forceshield
 		ChargeInterval: 4500
 		Names:
-			1: power-forceshield.name
+			1: power_forceshield.name
 		Descriptions:
-			1: power-forceshield.description
+			1: power_forceshield.description
 		Durations:
 			1: 375
 		Conditions:
@@ -661,7 +661,7 @@ op2_commonore_beacon_3bar:
 		Cursor: nuke
 		ChargeInterval: 9000
 		Description: Supernova Missile
-		LongDesc: support-supernova-missile.description
+		LongDesc: support_supernova_missile.description
 		EndChargeSpeechNotification: NuclearWeaponAvailable
 		SelectTargetSpeechNotification: SelectTarget
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -869,7 +869,7 @@ EDEN_TOKAMAK:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure
-		Description: actor-tokamak.description
+		Description: actor_tokamak.description
 	Building:
 		Footprint: xX xx ==
 		Dimensions: 2,3
@@ -885,7 +885,7 @@ EDEN_SMELTER_COMMON:
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, eden_tokamak
-		Description: eden-smelter-common.description
+		Description: eden_smelter_common.description
 	FreeActor:
 		Actor: eden_cargotruck_empty
 		SpawnOffset: 1,2
@@ -907,7 +907,7 @@ EDEN_AGRIDOME:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
 		BuildDuration: 50
-		Description: eden-agridome.description
+		Description: eden_agridome.description
 
 EDEN_RESIDENCE:
 	Inherits: ^op2base_residence
@@ -921,7 +921,7 @@ EDEN_RESIDENCE:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
 		BuildDuration: 50
-		Description: actor-eden-residence.description
+		Description: actor_eden_residence.description
 
 EDEN_LAB_BASIC:
 	Inherits: ^op2base_basic_lab
@@ -935,7 +935,7 @@ EDEN_LAB_BASIC:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
 		BuildDuration: 25
-		Description: actor-eden-lab-basic.description
+		Description: actor_eden_lab_basic.description
 
 EDEN_FACTORY_VEHICLE:
 	Inherits: ^op2base_factory_vehicle
@@ -947,7 +947,7 @@ EDEN_FACTORY_VEHICLE:
 		BuildPaletteOrder: 50
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE, EDEN_AGRIDOME
-		Description: actor-eden-factory-vehicle.description
+		Description: actor_eden_factory_vehicle.description
 
 EDEN_GARAGE:
 	Inherits: ^op2base_garage
@@ -956,7 +956,7 @@ EDEN_GARAGE:
 		Prerequisites: ~eden_factory_structure, EDEN_FACTORY_VEHICLE
 		BuildPaletteOrder: 55
 		BuildDuration: 375
-		Description: actor-eden-garage.description
+		Description: actor_eden_garage.description
 
 EDEN_NURSERY:
 	Inherits: ^op2base_nursery
@@ -970,7 +970,7 @@ EDEN_NURSERY:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE
 		BuildDuration: 50
-		Description: eden-nursery.description
+		Description: eden_nursery.description
 
 EDEN_UNIVERSITY:
 	Inherits: ^op2base_university
@@ -984,7 +984,7 @@ EDEN_UNIVERSITY:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RESIDENCE
 		BuildDuration: 50
-		Description: eden-university.description
+		Description: eden_university.description
 
 EDEN_LAB_STANDARD:
 	Inherits: ^op2base_lab_standard
@@ -998,7 +998,7 @@ EDEN_LAB_STANDARD:
 		BuildPaletteOrder: 80
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_BASIC_LAB,EDEN_NURSERY,EDEN_UNIVERSITY
-		Description: eden-lab-standard.description
+		Description: eden_lab_standard.description
 
 EDEN_DIRT:
 	Inherits: ^op2base_dirt
@@ -1010,7 +1010,7 @@ EDEN_DIRT:
 		BuildPaletteOrder: 90
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
-		Description: eden-dirt.description
+		Description: eden_dirt.description
 
 EDEN_RCC:
 	Inherits: ^op2base_rcc
@@ -1024,7 +1024,7 @@ EDEN_RCC:
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
 		BuildDuration: 125
-		Description: eden-rcc.description
+		Description: eden_rcc.description
 
 EDEN_FACTORY_CONSUMER:
 	Inherits: ^BaseBuilding
@@ -1047,7 +1047,7 @@ EDEN_FACTORY_CONSUMER:
 		BuildPaletteOrder: 100
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_RCC
-		Description: eden-factory-consumer.description
+		Description: eden_factory_consumer.description
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -1114,7 +1114,7 @@ EDEN_GORF:
 		BuildPaletteOrder: 110
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
-		Description: eden-gorf.description
+		Description: eden_gorf.description
 
 EDEN_LAB_ADVANCED:
 	Inherits: ^op2base_lab_advanced
@@ -1129,7 +1129,7 @@ EDEN_LAB_ADVANCED:
 		BuildDuration: 250
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_STANDARD
-		Description: eden-lab-advanced.description
+		Description: eden_lab_advanced.description
 
 EDEN_SPACEPORT:
 	Inherits: ^op2base_spaceport
@@ -1142,7 +1142,7 @@ EDEN_SPACEPORT:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
-		Description: eden-spaceport.description
+		Description: eden_spaceport.description
 
 EDEN_SOLAR_ARRAY:
 	Inherits: ^op2base_solararray
@@ -1154,7 +1154,7 @@ EDEN_SOLAR_ARRAY:
 		BuildPaletteOrder: 140
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_SPACEPORT
-		Description: eden-solar-array.description
+		Description: eden_solar_array.description
 
 EDEN_SMELTER_RARE:
 	Inherits: ^op2base_smelter_rare
@@ -1167,7 +1167,7 @@ EDEN_SMELTER_RARE:
 		BuildPaletteOrder: 150
 		Queue: Building, RABuilding
 		Prerequisites: ~eden_factory_structure, EDEN_LAB_ADVANCED
-		Description: eden-smelter-rare.description
+		Description: eden_smelter_rare.description
 # ####################################################################################################
 # #		DEFENCE EDEN
 # ####################################################################################################
@@ -1177,7 +1177,7 @@ EDEN_LIGHT_TOWER:
 		BuildPaletteOrder: 5
 		Prerequisites: ~eden_factory_structure
 		Queue: Defence, RADefence
-		Description: eden-light-tower.description
+		Description: eden_light_tower.description
 
 EDEN_MINE_COMMON:
 	Inherits: ^op2base_mine_common
@@ -1189,7 +1189,7 @@ EDEN_MINE_COMMON:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
 		Prerequisites: ~eden_factory_structure, EDEN_TOKAMAK
-		Description: eden-mine-common.description
+		Description: eden_mine_common.description
 
 EDEN_STORAGE_COMMON:
 	Inherits: ^op2base_storage_common
@@ -1197,7 +1197,7 @@ EDEN_STORAGE_COMMON:
 		BuildPaletteOrder: 5
 		Prerequisites: ~eden_factory_structure, EDEN_SMELTER_COMMON
 		Queue: Defence, RADefence
-		Description: eden-storage-common.description
+		Description: eden_storage_common.description
 
 EDEN_GP_LASER:
 	Inherits: ^Defense
@@ -1215,7 +1215,7 @@ EDEN_GP_LASER:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: eden-gp-laser.description
+		Description: eden_gp_laser.description
 	Building:
 	Health:
 		HP: 41000
@@ -1261,7 +1261,7 @@ EDEN_GP_EMP:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: eden-gp-emp.description
+		Description: eden_gp_emp.description
 	Building:
 	Health:
 		HP: 41000
@@ -1307,7 +1307,7 @@ EDEN_GP_RAILGUN:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: eden-gp-railgun.description
+		Description: eden_gp_railgun.description
 	Building:
 	Health:
 		HP: 41000
@@ -1354,7 +1354,7 @@ CONSUMER_ITEMS_IMPULSE:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
-		Description: consumer-items-impulse.description
+		Description: consumer_items_impulse.description
 	WithMoveAnimation:
 	Health:
 		HP: 1
@@ -1378,7 +1378,7 @@ CONSUMER_ITEMS_WARES:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 800
 		BuildDurationModifier: 40
-		Description: consumer-items-wares.description
+		Description: consumer_items_wares.description
 	WithMoveAnimation:
 	Health:
 		HP: 1
@@ -1402,7 +1402,7 @@ CONSUMER_ITEMS_LUXURY_WARES:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 1000
 		BuildDurationModifier: 40
-		Description: consumer-items-luxury-wares.description
+		Description: consumer_items_luxury_wares.description
 	WithMoveAnimation:
 	Health:
 		HP: 1
@@ -1426,7 +1426,7 @@ EDEN_CONVEC_STRUCTURE_FACTORY:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, eden_university
 		Queue: Vehicle, RAVehicle
-		Description: eden-convec-structure-factory.description
+		Description: eden_convec_structure_factory.description
 	Transforms:
 		IntoActor: eden_factory_structure
 		Offset: -1,-1
@@ -1451,7 +1451,7 @@ EDEN_CARGOTRUCK_EMPTY:
 		BuildPaletteOrder: 10
 		Prerequisites: ~eden_factory_vehicle, eden_smelter_common
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Harvester:
 		BaleLoadDelay: 5
 		BaleUnloadDelay: 1
@@ -1502,7 +1502,7 @@ EDEN_SCOUT:
 		BuildPaletteOrder: 10
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
-		Description: eden-scout.description
+		Description: eden_scout.description
 	Selectable:
 		Bounds: 1024,1024
 	Mobile:
@@ -1542,7 +1542,7 @@ EDEN_LYNX_LASER:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
-		Description: eden-lynx-laser.description
+		Description: eden_lynx_laser.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -1582,7 +1582,7 @@ EDEN_TIGER_LASER:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: eden-tiger-microwave.description
+		Description: eden_tiger_microwave.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -1620,7 +1620,7 @@ EDEN_LYNX_RAILGUN:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
-		Description: eden-lynx-railgun.description
+		Description: eden_lynx_railgun.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -1659,7 +1659,7 @@ EDEN_TIGER_RAILGUN:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: eden-tiger-railgun.description
+		Description: eden_tiger_railgun.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -1698,7 +1698,7 @@ EDEN_LYNX_EMP:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle
 		Queue: Vehicle, RAVehicle
-		Description: eden-lynx-emp.description
+		Description: eden_lynx_emp.description
 	Mobile:
 		Speed: 85
 		TurnSpeed: 17
@@ -1741,7 +1741,7 @@ EDEN_TIGER_EMP:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: eden-tiger-emp.description
+		Description: eden_tiger_emp.description
 	Mobile:
 		Speed: 70
 		TurnSpeed: 14
@@ -1786,7 +1786,7 @@ EDEN_LYNX_ACIDCLOUD:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: eden-lynx-acidcloud.description
+		Description: eden_lynx_acidcloud.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -1821,7 +1821,7 @@ EDEN_TIGER_ACIDCLOUD:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: eden-tiger-acidcloud.description
+		Description: eden_tiger_acidcloud.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -1850,7 +1850,7 @@ EDEN_LYNX_STARFLARE:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_GORF
 		Queue: Vehicle, RAVehicle
-		Description: eden-lynx-starflare.description
+		Description: eden_lynx_starflare.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -1903,7 +1903,7 @@ EDEN_TIGER_STARFLARE:
 		BuildPaletteOrder: 80
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_GORF
 		Queue: Vehicle, RAVehicle
-		Description: eden-tiger-starflare.description
+		Description: eden_tiger_starflare.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -1955,7 +1955,7 @@ EDEN_LYNX_THORSHAMMER:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: eden-lynx-thorshammer.description
+		Description: eden_lynx_thorshammer.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 18
@@ -1994,7 +1994,7 @@ EDEN_TIGER_THORSHAMMER:
 	Buildable:
 		Prerequisites: ~eden_factory_vehicle, EDEN_SMELTER_RARE, EDEN_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: eden-tiger-thorshammer.description
+		Description: eden_tiger_thorshammer.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -2086,7 +2086,7 @@ PLYMOUTH_TOKAMAK:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY
-		Description: actor-tokamak.description
+		Description: actor_tokamak.description
 
 PLYMOUTH_SMELTER_COMMON:
 	Inherits: ^op2base_smelter_common
@@ -2098,7 +2098,7 @@ PLYMOUTH_SMELTER_COMMON:
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, plymouth_tokamak
-		Description: plymouth-smelter-common.description
+		Description: plymouth_smelter_common.description
 	FreeActor:
 		Actor: plymouth_cargotruck_empty
 		SpawnOffset: 1,2
@@ -2116,7 +2116,7 @@ PLYMOUTH_AGRIDOME:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
 		BuildDuration: 100
-		Description: plymouth-agridome.description
+		Description: plymouth_agridome.description
 
 PLYMOUTH_RESIDENCE:
 	Inherits: ^op2base_residence
@@ -2130,7 +2130,7 @@ PLYMOUTH_RESIDENCE:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
 		BuildDuration: 100
-		Description: plymouth-residence.description
+		Description: plymouth_residence.description
 
 PLYMOUTH_BASIC_LAB:
 	Inherits: ^op2base_basic_lab
@@ -2144,7 +2144,7 @@ PLYMOUTH_BASIC_LAB:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_TOKAMAK
 		BuildDuration: 25
-		Description: plymouth-basic-lab.description
+		Description: plymouth_basic_lab.description
 
 PLYMOUTH_FACTORY_VEHICLE:
 	Inherits: ^op2base_factory_vehicle
@@ -2157,7 +2157,7 @@ PLYMOUTH_FACTORY_VEHICLE:
 		BuildDuration: 600
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE, PLYMOUTH_AGRIDOME
-		Description: plymouth-factory-vehicle.description
+		Description: plymouth_factory_vehicle.description
 
 PLYMOUTH_GARAGE:
 	Inherits: ^op2base_garage
@@ -2166,7 +2166,7 @@ PLYMOUTH_GARAGE:
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_FACTORY_VEHICLE
 		BuildPaletteOrder: 55
 		BuildDuration: 375
-		Description: plymouth-garage.description
+		Description: plymouth_garage.description
 
 PLYMOUTH_NURSERY:
 	Inherits: ^op2base_nursery
@@ -2180,7 +2180,7 @@ PLYMOUTH_NURSERY:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
 		BuildDuration: 50
-		Description: plymouth-nursery.description
+		Description: plymouth_nursery.description
 
 PLYMOUTH_UNIVERSITY:
 	Inherits: ^op2base_university
@@ -2194,7 +2194,7 @@ PLYMOUTH_UNIVERSITY:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_RESIDENCE
 		BuildDuration: 50
-		Description: plymouth-university.description
+		Description: plymouth_university.description
 
 PLYMOUTH_LAB_STANDARD:
 	Inherits: ^op2base_lab_standard
@@ -2207,7 +2207,7 @@ PLYMOUTH_LAB_STANDARD:
 		BuildPaletteOrder: 80
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY, PLYMOUTH_BASIC_LAB,PLYMOUTH_NURSERY,PLYMOUTH_UNIVERSITY
-		Description: plymouth-lab-standard.description
+		Description: plymouth_lab_standard.description
 
 PLYMOUTH_DIRT:
 	Inherits: ^op2base_dirt
@@ -2219,7 +2219,7 @@ PLYMOUTH_DIRT:
 		BuildPaletteOrder: 90
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
-		Description: plymouth-dirt.description
+		Description: plymouth_dirt.description
 
 PLYMOUTH_RCC:
 	Inherits: ^op2base_rcc
@@ -2233,7 +2233,7 @@ PLYMOUTH_RCC:
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
 		BuildDuration: 125
-		Description: plymouth-rcc.description
+		Description: plymouth_rcc.description
 
 PLYMOUTH_FACTORY_ARACHNID:
 	Inherits: ^BaseBuilding
@@ -2254,7 +2254,7 @@ PLYMOUTH_FACTORY_ARACHNID:
 		BuildPaletteOrder: 100
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_RCC
-		Description: plymouth-factory-arachnid.description
+		Description: plymouth_factory_arachnid.description
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -2286,7 +2286,7 @@ PLYMOUTH_GORF:
 		BuildPaletteOrder: 110
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
-		Description: plymouth-gorf.description
+		Description: plymouth_gorf.description
 
 PLYMOUTH_LAB_ADVANCED:
 	Inherits: ^op2base_lab_advanced
@@ -2301,7 +2301,7 @@ PLYMOUTH_LAB_ADVANCED:
 		BuildDuration: 250
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_STANDARD
-		Description: plymouth-lab-advanced.description
+		Description: plymouth_lab_advanced.description
 
 PLYMOUTH_SPACEPORT:
 	Inherits: ^op2base_spaceport
@@ -2314,7 +2314,7 @@ PLYMOUTH_SPACEPORT:
 		BuildPaletteOrder: 130
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
-		Description: plymouth-spaceport.description
+		Description: plymouth_spaceport.description
 
 PLYMOUTH_SOLARARRAY:
 	Inherits: ^op2base_solararray
@@ -2326,7 +2326,7 @@ PLYMOUTH_SOLARARRAY:
 		BuildPaletteOrder: 140
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SPACEPORT
-		Description: plymouth-solar-array.description
+		Description: plymouth_solar_array.description
 
 PLYMOUTH_SMELTER_RARE:
 	Inherits: ^op2base_smelter_rare
@@ -2339,7 +2339,7 @@ PLYMOUTH_SMELTER_RARE:
 		BuildPaletteOrder: 150
 		Queue: Building, RABuilding
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_LAB_ADVANCED
-		Description: plymouth-smelter-rare.description
+		Description: plymouth_smelter_rare.description
 
 
 # ####################################################################################################
@@ -2351,7 +2351,7 @@ PLYMOUTH_LIGHT_TOWER:
 		BuildPaletteOrder: 5
 		Prerequisites: ~plymouth_structure_factory
 		Queue: Defence, RADefence
-		Description: plymouth-light-tower.description
+		Description: plymouth_light_tower.description
 
 PLYMOUTH_MINE_COMMON:
 	Inherits: ^op2base_mine_common
@@ -2363,7 +2363,7 @@ PLYMOUTH_MINE_COMMON:
 		BuildPaletteOrder: 110
 		Queue: Defence, RADefence
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_TOKAMAK
-		Description: plymouth-mine-common.description
+		Description: plymouth_mine_common.description
 
 PLYMOUTH_STORAGE_COMMON:
 	Inherits: ^op2base_storage_common
@@ -2371,7 +2371,7 @@ PLYMOUTH_STORAGE_COMMON:
 		BuildPaletteOrder: 5
 		Prerequisites: ~PLYMOUTH_STRUCTURE_FACTORY,PLYMOUTH_SMELTER_COMMON
 		Queue: Defence, RADefence
-		Description: plymouth-storage-common.description
+		Description: plymouth_storage_common.description
 
 PLYMOUTH_GP_MICROWAVE:
 	Inherits: ^Defense
@@ -2389,7 +2389,7 @@ PLYMOUTH_GP_MICROWAVE:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: plymouth-gp-microwave.description
+		Description: plymouth_gp_microwave.description
 	Building:
 	Health:
 		HP: 41000
@@ -2435,7 +2435,7 @@ PLYMOUTH_GP_STICKYFOAM:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: plymouth-gp-stickyfoam.description
+		Description: plymouth_gp_stickyfoam.description
 	Building:
 	Health:
 		HP: 41000
@@ -2481,7 +2481,7 @@ PLYMOUTH_GP_RPG:
 		Queue: Defence, RADefence
 		BuildDuration: 600
 		BuildDurationModifier: 40
-		Description: plymouth-gp-rpg.description
+		Description: plymouth_gp_rpg.description
 	Building:
 	Health:
 		HP: 41000
@@ -2525,7 +2525,7 @@ PLYMOUTH_CONVEC_STRUCTURE_FACTORY:
 	Buildable:
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, plymouth_university
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-convec-structure-factory.description
+		Description: plymouth_convec_structure_factory.description
 	Selectable:
 		Bounds: 1024,1024
 	Voiced:
@@ -2552,7 +2552,7 @@ PLYMOUTH_CARGOTRUCK_EMPTY:
 		BuildPaletteOrder: 10
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, plymouth_smelter_common
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Harvester:
 		BaleLoadDelay: 4
 		BaleUnloadDelay: 1
@@ -2603,7 +2603,7 @@ PLYMOUTH_SCOUT:
 		BuildPaletteOrder: 10
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-scout.description
+		Description: plymouth_scout.description
 	Selectable:
 		Bounds: 1024,1024
 	Mobile:
@@ -2679,7 +2679,7 @@ PLYMOUTH_SPIDER:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
-		Description: plymouth-spider.description
+		Description: plymouth_spider.description
 	Selectable:
 		Bounds: 512,512
 	Mobile:
@@ -2727,7 +2727,7 @@ PLYMOUTH_SCORPION:
 		Queue: Infantry, RAInfantry
 		BuildDuration: 500
 		BuildDurationModifier: 40
-		Description: plymouth-scorpion.description
+		Description: plymouth_scorpion.description
 	Selectable:
 		Bounds: 512,512
 	Mobile:
@@ -2798,7 +2798,7 @@ PLYMOUTH_LYNX_MICROWAVE:
 		BuildPaletteOrder: 50
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-lynx-microwave.description
+		Description: plymouth_lynx_microwave.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -2834,7 +2834,7 @@ PLYMOUTH_TIGER_MICROWAVE:
 		BuildPaletteOrder: 100
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE,PLYMOUTH_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-tiger-microwave.description
+		Description: plymouth_tiger_microwave.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -2867,7 +2867,7 @@ PLYMOUTH_LYNX_RPG:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-lynx-rpg.description
+		Description: plymouth_lynx_rpg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -2904,7 +2904,7 @@ PLYMOUTH_TIGER_RPG:
 		BuildPaletteOrder: 110
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE,PLYMOUTH_SMELTER_RARE
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-tiger-rpg.description
+		Description: plymouth_tiger_rpg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -2937,7 +2937,7 @@ PLYMOUTH_LYNX_EMP:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_STANDARD
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-lynx-emp.description
+		Description: plymouth_lynx_emp.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -2974,7 +2974,7 @@ PLYMOUTH_TIGER_EMP:
 		BuildPaletteOrder: 120
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_STANDARD
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-tiger-emp.description
+		Description: plymouth_tiger_emp.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3007,7 +3007,7 @@ PLYMOUTH_LYNX_STICKYFOAM:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_RESIDENCE
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-lynx-stickyfoam.description
+		Description: plymouth_lynx_stickyfoam.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -3044,7 +3044,7 @@ PLYMOUTH_TIGER_STICKYFOAM:
 		BuildPaletteOrder: 130
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_RESIDENCE
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-tiger-stickyfoam.description
+		Description: plymouth_tiger_stickyfoam.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3077,7 +3077,7 @@ PLYMOUTH_LYNX_ESG:
 		BuildPaletteOrder: 60
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-lynx-esg.description
+		Description: plymouth_lynx_esg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -3114,7 +3114,7 @@ PLYMOUTH_TIGER_ESG:
 		BuildPaletteOrder: 140
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-tiger-esg.description
+		Description: plymouth_tiger_esg.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3147,7 +3147,7 @@ PLYMOUTH_LYNX_STARFLARE:
 		BuildPaletteOrder: 80
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_GORF
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-lynx-starflare.description
+		Description: plymouth_lynx_starflare.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -3196,7 +3196,7 @@ PLYMOUTH_TIGER_STARFLARE:
 		BuildPaletteOrder: 150
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_GORF
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-tiger-starflare.description
+		Description: plymouth_tiger_starflare.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45
@@ -3229,7 +3229,7 @@ PLYMOUTH_LYNX_SUPERNOVA:
 		BuildPaletteOrder: 90
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-lynx-supernova.description
+		Description: plymouth_lynx_supernova.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 90
@@ -3277,7 +3277,7 @@ PLYMOUTH_TIGER_SUPERNOVA:
 		BuildPaletteOrder: 160
 		Prerequisites: ~PLYMOUTH_FACTORY_VEHICLE, PLYMOUTH_SMELTER_RARE, PLYMOUTH_LAB_ADVANCED
 		Queue: Vehicle, RAVehicle
-		Description: plymouth-tiger-supernova.description
+		Description: plymouth_tiger_supernova.description
 	Mobile:
 		TurnSpeed: 10
 		Speed: 45

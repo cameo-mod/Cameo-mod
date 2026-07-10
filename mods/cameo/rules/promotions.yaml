@@ -29,8 +29,8 @@ Player:
 		NotificationType: Sounds
 		LevelUpNotification: World
 		LevelUpTextNotification: promotions.text-notification
-		FlavorTextNotifications: promotions-flavor.notification-01, promotions-flavor.notification-02, promotions-flavor.notification-03, promotions-flavor.notification-04, promotions-flavor.notification-05
-		FlavorTextPrefix: promotions-flavor.prefix
+		FlavorTextNotifications: promotions_flavor.notification-01, promotions_flavor.notification-02, promotions_flavor.notification-03, promotions_flavor.notification-04, promotions_flavor.notification-05
+		FlavorTextPrefix: promotions_flavor.prefix
 	ProvidesPrerequisite@has_points:
 		Prerequisite: rank1
 		RequiresCondition: haspoints

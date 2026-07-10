@@ -6,7 +6,7 @@ egcnst.futu:
 	Tooltip:
 		Name: FutureTech Construction Yard
 	Buildable:
-		Description: actor-futu_egcnst.description
+		Description: actor_futu_egcnst.description
 	Building:
 		Footprint: =xxx= xxxxx =xxx=
 		Dimensions: 5,3
@@ -49,7 +49,7 @@ ggpowr.futu:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~egcnst.futu
 	Building:
 		Footprint: xx xx
@@ -82,7 +82,7 @@ egrefn.futu:
 		Name: FutureTech Refinery
 	Buildable:
 		Prerequisites: ~egcnst.futu, ggpowr.futu
-		Description: actor-futu_egrefn.description
+		Description: actor_futu_egrefn.description
 	Building:
 		Footprint: xxx= xxx= x+==
 		Dimensions: 4,3
@@ -117,7 +117,7 @@ egpile.futu:
 		Name: Troop Gate
 	Buildable:
 		Prerequisites: ~egcnst.futu, ggpowr.futu
-		Description: actor-futu_egpile.description
+		Description: actor_futu_egpile.description
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -152,7 +152,7 @@ egweap2.futu:
 		Name: Warp Gate
 	Buildable:
 		Prerequisites: ~egcnst.futu, egrefn.futu
-		Description: actor-futu_egweap2.description
+		Description: actor_futu_egweap2.description
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -191,7 +191,7 @@ yrgarobo.futu:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 140
 		Prerequisites: ~egcnst.futu, egweap2.futu
-		Description: actor-yrgarobo.description
+		Description: actor_yrgarobo.description
 	Building:
 		Footprint: == xx
 		Dimensions: 2,2
@@ -213,7 +213,7 @@ egtf.futu:
 		Name: Transmission Center
 	Buildable:
 		Prerequisites: ~egcnst.futu, egrefn.futu
-		Description: actor-futu_egtf.description
+		Description: actor_futu_egtf.description
 	Building:
 		Footprint: === xxx xxx
 		Dimensions: 3,3
@@ -246,7 +246,7 @@ launchpad.futu:
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~egcnst.futu, egtf.futu
-		Description: actor-gaairc.description
+		Description: actor_gaairc.description
 	Tooltip:
 		Name: FutureTech Launch Pad
 	Building:
@@ -282,7 +282,7 @@ launchpad.futu:
 		Names:
 			1: Airborne
 		Descriptions:
-			1: power-paratroopers.description
+			1: power_paratroopers.description
 		DropItems:
 			1: wheel.futu,robot_cannon.futu,wheel.futu,robot_missiles.futu,wheel.futu,robot_shotgun.futu,wheel.futu,robot_cannon.futu,wheel.futu,robot_missiles.futu,wheel.futu,robot_shotgun.futu,wheel.futu
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
@@ -332,7 +332,7 @@ egtech.futu:
 		Bounds: 3072, 2048, 0, -256
 	Buildable:
 		Prerequisites: ~egcnst.futu, egtf.futu
-		Description: actor-futu_egtech.description
+		Description: actor_futu_egtech.description
 	Tooltip:
 		Name: FutureTech Battle Lab
 	Building:
@@ -367,7 +367,7 @@ egshock.futu:
 		BuildDuration: 1500
 		BuildDurationModifier: 100
 		Queue: Building, RABuilding
-		Description: actor-futu_egshock.description
+		Description: actor_futu_egshock.description
 	Selectable:
 		Bounds: 4096, 3072, 0, -256
 	Building:
@@ -409,7 +409,7 @@ gggun.futu:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~egcnst.futu, egtech.futu
-		Description: actor-futu_gggun.description
+		Description: actor_futu_gggun.description
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -463,7 +463,7 @@ ggmlt.futu:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~egcnst.futu, egpile.futu
-		Description: actor-futu_ggmlt.description
+		Description: actor_futu_ggmlt.description
 	Valued:
 		Cost: 800
 	Tooltip:

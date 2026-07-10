@@ -17,7 +17,7 @@ triton.latin:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cgyard.latin
 		Queue: Naval, RANaval
-		Description: actor-hyd.description
+		Description: actor_hyd.description
 	Mobile:
 		Speed: 125
 		TurnSpeed: 50
@@ -97,7 +97,7 @@ sub.latin:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgyard.latin, cgspy.latin
 		Queue: Naval, RANaval
-		Description: actor-ra2sub.description
+		Description: actor_ra2sub.description
 	Mobile:
 		Speed: 55
 		TurnSpeed: 22

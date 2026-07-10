@@ -13,7 +13,7 @@ mortarbike.latin:
 		Queue: Vehicle, RAVehicle, Infantry, RAInfantry
 		BuildPaletteOrder: 30
 		Prerequisites: ~cgweap.latin, up_mortarbike.latin
-		Description: actor-latin_mortarbike.description
+		Description: actor_latin_mortarbike.description
 	Tooltip:
 		Name: Mortar Bike
 	Valued:
@@ -176,7 +176,7 @@ buggy.latin:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgweap.latin, up_buggy.latin
 		Queue: Vehicle, RAVehicle
-		Description: actor-latin_buggy.description
+		Description: actor_latin_buggy.description
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
@@ -264,7 +264,7 @@ tortuga.latin:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cgweap.latin, cgte.latin
 		Queue: Vehicle, RAVehicle
-		Description: actor-latin_buggy.description
+		Description: actor_latin_buggy.description
 	Mobile:
 		Speed: 45
 		TurnSpeed: 9
@@ -339,7 +339,7 @@ ltnk.latin:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.latin, ~!up_mtnk.latin
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
@@ -428,7 +428,7 @@ mtnk.latin:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.latin, ~up_mtnk.latin
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 95
 		TurnSpeed: 19
@@ -534,7 +534,7 @@ diablo.latin:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cgweap.latin
 		Queue: Vehicle, RAVehicle
-		Description: actor-latin_diablo.description
+		Description: actor_latin_diablo.description
 	Mobile:
 		Speed: 125
 		TurnSpeed: 25
@@ -653,7 +653,7 @@ apc.latin:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.latin, up_apc.latin, cgspy.latin
 		Queue: Vehicle, RAVehicle
-		Description: actor-latin_apc.description
+		Description: actor_latin_apc.description
 	Mobile:
 		Locomotor: amphibius
 		Speed: 90
@@ -806,7 +806,7 @@ humvee.latin:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.latin, cgspy.latin, ~!up_cartel.latin
 		Queue: Vehicle, RAVehicle
-		Description: actor-latin_humvee.description
+		Description: actor_latin_humvee.description
 	Mobile:
 		Locomotor: wheeled
 		Speed: 110
@@ -890,7 +890,7 @@ cartel.latin:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.latin, cgspy.latin, ~up_cartel.latin
 		Queue: Vehicle, RAVehicle
-		Description: actor-latin_humvee.description
+		Description: actor_latin_humvee.description
 	Mobile:
 		Locomotor: wheeled
 		Speed: 70
@@ -967,7 +967,7 @@ rtruck.latin:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
 		Prerequisites: ~cgweap.latin, radar.latin, ~!up_burrito.latin
-		Description: actor-mssm.description
+		Description: actor_mssm.description
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -1040,7 +1040,7 @@ burrito.latin:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
 		Prerequisites: ~cgweap.latin, cgup.latin, ~up_burrito.latin
-		Description: actor-latin_burrito.description
+		Description: actor_latin_burrito.description
 	Tooltip:
 		Name: Burrito
 	Valued:
@@ -1111,7 +1111,7 @@ lars.latin:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
 		Prerequisites: ~cgweap.latin, up_lars.latin, cgup.latin
-		Description: actor-latin_lars.description
+		Description: actor_latin_lars.description
 	Valued:
 		Cost: 1300
 	Tooltip:
@@ -1189,7 +1189,7 @@ harv.latin:
 	Buildable:
 		Prerequisites: ~cgauto.latin
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
@@ -1316,7 +1316,7 @@ topol.latin:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~cgweap.latin, up_topol.latin, cgup.latin
-		Description: actor-latin_topol.description
+		Description: actor_latin_topol.description
 		BuildLimit: 1
 	Health:
 		HP: 100000

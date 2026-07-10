@@ -17,7 +17,7 @@ rifle.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -70,7 +70,7 @@ cons.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 45
 	Health:
@@ -123,7 +123,7 @@ mp40.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax, radar.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_mp40.description
+		Description: actor_nax_mp40.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -176,7 +176,7 @@ fcons.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-e4.description
+		Description: actor_e4.description
 	Mobile:
 		Speed: 48
 	Health:
@@ -232,7 +232,7 @@ merc.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax, radar.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_merc.description
+		Description: actor_nax_merc.description
 	Mobile:
 		Speed: 60
 	Health:
@@ -284,7 +284,7 @@ shrek.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
-		Description: template-antitank-infantry.description
+		Description: template_antitank_infantry.description
 	Mobile:
 		Speed: 42
 	Health:
@@ -336,7 +336,7 @@ tcons.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
-		Description: template-antitank-infantry.description
+		Description: template_antitank_infantry.description
 	Mobile:
 		Speed: 46
 	Health:
@@ -386,7 +386,7 @@ litt.nax:
 		BuildPaletteOrder: 80
 		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_litt.description
+		Description: actor_nax_litt.description
 	Aircraft:
 		TurnSpeed: 32
 		Speed: 160
@@ -461,7 +461,7 @@ slavemaster.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax, refin.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_slavemaster.description
+		Description: actor_nax_slavemaster.description
 	Mobile:
 		Speed: 90
 		Locomotor: chem
@@ -514,7 +514,7 @@ slav.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax, refin.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_slavemaster.description
+		Description: actor_nax_slavemaster.description
 	Targetable@SlaveFaster:
 		TargetTypes: SlaveFaster
 		RequiresCondition: SlaveFaster <= 3 && !untargetable
@@ -550,7 +550,7 @@ frank.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~disabled
 		Queue: Infantry, RAInfantry
-		Description: actor-brute.description
+		Description: actor_brute.description
 	Mobile:
 		Speed: 61
 	Health:
@@ -598,7 +598,7 @@ hmg.nax:
 		BuildPaletteOrder: 50
 		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_hmg.description
+		Description: actor_nax_hmg.description
 	Mobile:
 		Speed: 55
 	Health:
@@ -712,7 +712,7 @@ quadflak.nax:
 		BuildPaletteOrder: 50
 		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_quadflak.description
+		Description: actor_nax_quadflak.description
 	Mobile:
 		Speed: 55
 	Health:
@@ -824,7 +824,7 @@ undead.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~disabled
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 50
 	Health:
@@ -878,7 +878,7 @@ conehead.nax:
 		Prerequisites: ~barr.nax, tek.nax
 		Queue: Infantry, RAInfantry
 		AdditionalActors: conehead.nax, conehead.nax, conehead.nax, conehead.nax, conehead2.nax
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 90
 	Health:
@@ -928,7 +928,7 @@ conehead2.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax, ~disabled
 		Queue: Infantry, RAInfantry
-		Description: template-scout-infantry.description
+		Description: template_scout_infantry.description
 	Mobile:
 		Speed: 90
 	Health:
@@ -985,7 +985,7 @@ atankcann.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_atankcann.description
+		Description: actor_nax_atankcann.description
 	Mobile:
 		Locomotor: wheeled
 		Speed: 30
@@ -1038,7 +1038,7 @@ bmwbike.nax:
 		BuildPaletteOrder: 60
 		Prerequisites: ~barr.nax, weap.nax
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_bmwbike.description
+		Description: actor_nax_bmwbike.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 125
@@ -1116,7 +1116,7 @@ alien.nax:
 		BuildPaletteOrder: 10
 		Prerequisites: ~barr.nax, ~disabled
 		Queue: Infantry, RAInfantry
-		Description: actor-nax_alien.description
+		Description: actor_nax_alien.description
 	Mobile:
 		Speed: 40
 	Health:

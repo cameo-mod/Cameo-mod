@@ -21,7 +21,7 @@ nodspecter:
 		Prerequisites: ~afld, hq.nod, ~upnodspecter
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
-		Description: actor-specter.description
+		Description: actor_specter.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -100,7 +100,7 @@ HARV.NOD:
 	Buildable:
 		Prerequisites: ~afld, proc.nod, ~!upstealthsoldier
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Tooltip:
 		Name: Nod Tiberium Harvester
 	ActorStatValues:
@@ -123,7 +123,7 @@ ARTY:
 		BuildPaletteOrder: 60
 		Prerequisites: ~afld, hq.nod, ~!upnodspecter
 		Queue: Vehicle, RAVehicle
-		Description: actor-arty.description
+		Description: actor_arty.description
 	Mobile:
 		Speed: 55
 		TurnSpeed: 11
@@ -183,7 +183,7 @@ FTNK:
 		BuildPaletteOrder: 50
 		Prerequisites: ~afld, hq.nod, ~!upnodftnk2
 		Queue: Vehicle, RAVehicle
-		Description: actor-ftnk.description
+		Description: actor_ftnk.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -227,7 +227,7 @@ BGGY:
 		BuildPaletteOrder: 20
 		Prerequisites: ~afld, ~!upnodbuggy2
 		Queue: Vehicle, RAVehicle
-		Description: actor-bggy.description
+		Description: actor_bggy.description
 	Mobile:
 		Speed: 200
 		TurnSpeed: 40
@@ -278,7 +278,7 @@ BIKE:
 		BuildPaletteOrder: 30
 		Prerequisites: ~afld, ~!upchemicalbike
 		Queue: Vehicle, RAVehicle
-		Description: actor-bike.description
+		Description: actor_bike.description
 	Mobile:
 		Speed: 200
 		TurnSpeed: 80
@@ -334,7 +334,7 @@ LTNK:
 		BuildPaletteOrder: 40
 		Prerequisites: ~afld, ~!upnodltnk2
 		Queue: Vehicle, RAVehicle
-		Description: actor-ltnk.description
+		Description: actor_ltnk.description
 	Mobile:
 		Speed: 110
 		TurnSpeed: 22
@@ -395,7 +395,7 @@ MSSM:
 		BuildPaletteOrder: 100
 		Prerequisites: ~afld, tmpl, ~!upchemicalssmlauncher
 		Queue: Vehicle, RAVehicle
-		Description: actor-mssm.description
+		Description: actor_mssm.description
 		Icon: icon
 	Mobile:
 		Speed: 100
@@ -471,7 +471,7 @@ STNK:
 		BuildPaletteOrder: 90
 		Prerequisites: ~afld, tmpl, ~!upchemicalstealthtank
 		Queue: Vehicle, RAVehicle
-		Description: actor-stnk.description
+		Description: actor_stnk.description
 	Mobile:
 		Locomotor: heavywheeled
 		Speed: 150
@@ -559,7 +559,7 @@ chembike:
 		BuildPaletteOrder: 30
 		Prerequisites: ~afld, ~upchemicalbike
 		Queue: Vehicle, RAVehicle
-		Description: actor-bike.description
+		Description: actor_bike.description
 	Mobile:
 		Speed: 175
 		TurnSpeed: 70
@@ -636,7 +636,7 @@ chemstnk:
 		BuildPaletteOrder: 100
 		Prerequisites: ~afld, tmpl, ~upchemicalstealthtank
 		Queue: Vehicle, RAVehicle
-		Description: actor-stnk.description
+		Description: actor_stnk.description
 	Armament:
 		Weapon: ChemicalStealthTankMissiles
 		LocalOffset: -128,0,256
@@ -677,7 +677,7 @@ chemssm:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
-		Description: actor-mssm.description
+		Description: actor_mssm.description
 		Prerequisites: ~afld, td_nod_templeprime, ~upchemicalssmlauncher
 	Valued:
 		Cost: 1200
@@ -827,7 +827,7 @@ nodltnk2:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
 		Prerequisites: ~afld, ~upnodltnk2
-		Description: actor-ltnk2.description
+		Description: actor_ltnk2.description
 	Mobile:
 		Speed: 100
 		TurnSpeed: 20
@@ -893,7 +893,7 @@ nodftnk2:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
 		Prerequisites: ~afld, hq.nod, ~upnodftnk2
-		Description: actor-ftnk.description
+		Description: actor_ftnk.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15

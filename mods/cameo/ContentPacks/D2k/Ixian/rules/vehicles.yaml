@@ -35,7 +35,7 @@ harvester.ixian:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~spice_refinery, ~heavy_factory.ixian
 		BuildPaletteOrder: 10
-		Description: template-harvester.description
+		Description: template_harvester.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 500
@@ -102,7 +102,7 @@ siege_tank.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
 		Prerequisites: ~heavy_factory.ixian, up_siegetank.ixian, outpost.ixian
-		Description: actor-siege_tank.description
+		Description: actor_siege_tank.description
 		IconPalette: ra2
 	Health:
 		HP: 60000
@@ -190,7 +190,7 @@ missile_tank.ixian:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~heavy_factory.ixian, research_centre.ixian
 		BuildPaletteOrder: 60
-		Description: actor-missile_tank.description
+		Description: actor_missile_tank.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 2250
@@ -451,7 +451,7 @@ rocket_raider.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
 		Prerequisites: ~heavy_factory.ixian, ~!up_raider.ixian
-		Description: actor-rocket_raider.description
+		Description: actor_rocket_raider.description
 	Tooltip:
 		Name: Ix Raider
 	Valued:
@@ -543,7 +543,7 @@ shock_raider.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
 		Prerequisites: ~heavy_factory.ixian, research_centre.ixian, ~!up_stormraider.ixian
-		Description: actor-shock_raider.description
+		Description: actor_shock_raider.description
 		IconPalette: player
 	Valued:
 		Cost: 1300
@@ -657,7 +657,7 @@ combat_tank.ixian:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Description: template-mbt.description
+		Description: template_mbt.description
 		IconPalette: d2kunit
 		Prerequisites: ~heavy_factory.ixian, ~!d2k_duelist_tank_upgrade
 	Valued:
@@ -926,7 +926,7 @@ storm_raider.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
 		Prerequisites: ~heavy_factory.ixian, research_centre.ixian, ~up_stormraider.ixian
-		Description: actor-shock_raider.description
+		Description: actor_shock_raider.description
 		IconPalette: player
 	Valued:
 		Cost: 2200
@@ -1003,7 +1003,7 @@ heavy_rocket_raider.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
 		Prerequisites: ~heavy_factory.ixian, ~up_raider.ixian
-		Description: actor-rocket_raider.description
+		Description: actor_rocket_raider.description
 	Tooltip:
 		Name: Heavy Ix Raider
 	Valued:
@@ -1109,7 +1109,7 @@ combat_siege_tank.ixian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
 		IconPalette: d2kunit
-		Description: actor-siege_tank.description
+		Description: actor_siege_tank.description
 		Prerequisites: ~heavy_factory.ixian, outpost.ixian
 	Valued:
 		Cost: 1200
@@ -1277,7 +1277,7 @@ jammer.ixian:
 		BuildLimit: 1
 		BuildPaletteOrder: 60
 		Prerequisites: ~heavy_factory.ixian, up_projector.ixian, research_centre.ixian
-		Description: actor-ixprojector.description
+		Description: actor_ixprojector.description
 		IconPalette: windows256
 	Health:
 		HP: 100000
@@ -1444,7 +1444,7 @@ apparition.ixian:
 # 		BuildLimit: 1
 # 		BuildPaletteOrder: 90
 # 		Prerequisites: ~upixians_quaketank, research_centre.ixian
-# 		Description: actor-quake_tank.description
+# 		Description: actor_quake_tank.description
 # 		IconPalette: d2kunit
 # 	Valued:
 # 		Cost: 5000
@@ -1535,7 +1535,7 @@ duelist_tank.ixian:
 		BuildPaletteOrder: 40
 		IconPalette: d2kunit
 		Prerequisites: ~heavy_factory.ixian, research_centre.ixian
-		Description: actor-duelist_tank.description
+		Description: actor_duelist_tank.description
 	Valued:
 		Cost: 1800
 	Tooltip:

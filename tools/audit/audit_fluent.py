@@ -24,7 +24,8 @@ FLUENT_FIELDS = ("Name", "Description", "ReadyTextNotification", "Label")
 
 
 def looks_like_fluent(value: str) -> bool:
-    return bool(_fluent_ref.fullmatch(value.strip())) and "-" in value
+    v = value.strip()
+    return bool(_fluent_ref.fullmatch(v)) and ("-" in v or "_" in v)
 
 
 def main() -> int:
@@ -61,7 +62,8 @@ def main() -> int:
             if looks_like_fluent(tt):
                 slot[0] += 1
 
-    actor_keys = [k for k in keys if k.startswith("actor-") and "." not in k]
+    actor_keys = [k for k in keys
+                  if k.startswith(("actor-", "actor_")) and "." not in k]
     f2 = []
     for k in sorted(actor_keys):
         actor_id = k[len("actor-"):]

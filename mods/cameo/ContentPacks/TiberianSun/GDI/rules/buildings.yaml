@@ -88,7 +88,7 @@ ts_gdi_tiberiumrefinery:
 		BuildPaletteOrder: 20
 		Prerequisites: ~ts_gdi_constructionyard, ts_gdi_powerplant
 		Queue: Building, RABuilding
-		Description: template-refinery.description
+		Description: template_refinery.description
 	Building:
 		Footprint: xxx_ xxx= _===
 		Dimensions: 4,3
@@ -149,7 +149,7 @@ ts_gdi_powerplant:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
-		Description: template-power.description
+		Description: template_power.description
 		Prerequisites: ~ts_gdi_constructionyard
 	Building:
 		Footprint: == xx
@@ -230,7 +230,7 @@ ts_gdi_barracks:
 		BuildPaletteOrder: 30
 		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_powerplant
 		Queue: Building, RABuilding
-		Description: template-barracks.description
+		Description: template_barracks.description
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -281,7 +281,7 @@ ts_gdi_warfactory:
 		BuildPaletteOrder: 40
 		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_tiberiumrefinery
 		Queue: Building, RABuilding
-		Description: template-factory.description
+		Description: template_factory.description
 	Building:
 		Footprint: xxx_ xxx= _===
 		Dimensions: 4,3
@@ -346,7 +346,7 @@ ts_gdi_servicedepot:
 		BuildPaletteOrder: 60
 		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_warfactory
 		Queue: Building, RABuilding
-		Description: template-service-depot.description
+		Description: template_service_depot.description
 	Building:
 		Footprint: x++ +++
 		Dimensions: 3,2

@@ -19,7 +19,7 @@ up_mili.latin:
 	Tooltip:
 		Name: Elite Guerillas
 	Buildable:
-		Description: upgrade-uplatin_mili.description
+		Description: upgrade_uplatin_mili.description
 		Prerequisites: ~radar.latin, !up_mili.latin
 	RenderSprites:
 		Image: mili.latin
@@ -30,7 +30,7 @@ up_cartelrockets.latin:
 	Tooltip:
 		Name: Cartel Rockets
 	Buildable:
-		Description: upgrade-uplatin_cartelrockets.description
+		Description: upgrade_uplatin_cartelrockets.description
 		Prerequisites: ~radar.latin, !up_cartelrockets.latin
 	RenderSprites:
 		Image: up_cartelrockets.latin
@@ -41,7 +41,7 @@ up_ngbunk2.latin:
 	Tooltip:
 		Name: Lightposts
 	Buildable:
-		Description: upgrade-uplatin_ngbunk2.description
+		Description: upgrade_uplatin_ngbunk2.description
 		Prerequisites: ~radar.latin, !up_ngbunk2.latin
 	RenderSprites:
 		Image: ngbunk2.latin
@@ -58,7 +58,7 @@ up_team_ngbunk2.latin:
 	Tooltip:
 		Name: Lightposts
 	Buildable:
-		Description: upgrade-uplatin_ngbunk2.description
+		Description: upgrade_uplatin_ngbunk2.description
 	PlayerDisplayUpgrade:
 
 up_emp.latin:
@@ -82,7 +82,7 @@ up_chaingun.latin:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: upgrade-latin_up_chaingun.description
+		Description: upgrade_latin_up_chaingun.description
 		Prerequisites: ~cgspy.latin, !up_chaingun.latin
 	RenderSprites:
 		Image: up_chaingun.latin
@@ -97,7 +97,7 @@ up_industrial.latin:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: upgrade-latin_up_industrial.description
+		Description: upgrade_latin_up_industrial.description
 		Prerequisites: ~cgspy.latin, !up_industrial.latin
 	RenderSprites:
 		Image: up_industrial.latin
@@ -112,7 +112,7 @@ up_alliedstolentech.latin:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: upgrade-uplatin_alliedstolentech.description
+		Description: upgrade_uplatin_alliedstolentech.description
 		Prerequisites: ~cgspy.latin, !up_alliedstolentech.latin
 	RenderSprites:
 		Image: latin_up_miraging
@@ -127,7 +127,7 @@ up_hotfire.latin:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: upgrade-latin_up_hotfire.description
+		Description: upgrade_latin_up_hotfire.description
 		Prerequisites: ~cgspy.latin, !up_hotfire.latin
 	RenderSprites:
 		Image: up_hotfire.latin
@@ -142,7 +142,7 @@ up_cashrecover.latin:
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Research
-		Description: upgrade-uplatin_cashrecover.description
+		Description: upgrade_uplatin_cashrecover.description
 		Prerequisites: ~cgspy.latin, !up_cashrecover.latin
 	RenderSprites:
 		Image: latin_up_tech2
@@ -159,7 +159,7 @@ up_team_cashrecover.latin:
 	Tooltip:
 		Name: Cash Recovery
 	Buildable:
-		Description: upgrade-uplatin_cashrecover.description
+		Description: upgrade_uplatin_cashrecover.description
 	PlayerDisplayUpgrade:
 
 deathcash.latin:

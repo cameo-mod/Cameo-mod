@@ -678,7 +678,7 @@
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
-		Description: template-power.description
+		Description: template_power.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 500
@@ -788,7 +788,7 @@
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 310
-		Description: template-silo.description
+		Description: template_silo.description
 		IconPalette: d2kunit
 	Valued:
 		Cost: 150
@@ -874,7 +874,7 @@
 	Inherits@shape: ^3x3Shape
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
-		Description: actor-high_tech_factory.description
+		Description: actor_high_tech_factory.description
 		IconPalette: d2kunit
 	Building:
 		BuildPaletteOrder: 160

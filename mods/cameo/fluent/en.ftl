@@ -1,35 +1,35 @@
-mod-title = Cameo
-mod-windowtitle = OpenRA - Cameo
+mod_title = Cameo
+mod_windowtitle = OpenRA - Cameo
 
-map-generator-classic = Map Generator
-map-generator-clear = Clear Terrain
-map-generator-d2k = Map Generator
+map_generator_classic = Map Generator
+map_generator_clear = Clear Terrain
+map_generator_d2k = Map Generator
 
-dropdown-weather =
+dropdown_weather =
    .label = Weather
    .description = Adds a tileset-appropriate weather overlay and ambient sounds.
    .choice-none = None
    .choice-weather = Enabled
 
-button-tab-container-asengine = Attacque Supérior
+button_tab_container_asengine = Attacque Supérior
 
 ## ingame-observer.yaml
-button-observer-widgets-pause-tooltip = Pause
-button-observer-widgets-play-tooltip = Play
+button_observer_widgets_pause_tooltip = Pause
+button_observer_widgets_play_tooltip = Play
 
-button-observer-widgets-slow =
+button_observer_widgets_slow =
    .tooltip = Slow speed
    .label = 50%
 
-button-observer-widgets-regular =
+button_observer_widgets_regular =
    .tooltip = Regular speed
    .label = 100%
 
-button-observer-widgets-fast =
+button_observer_widgets_fast =
    .tooltip = Fast speed
    .label = 200%
 
-button-observer-widgets-maximum =
+button_observer_widgets_maximum =
    .tooltip = Maximum speed
    .label = MAX
 
@@ -47,19 +47,19 @@ options-observer-stats =
     .earnings-graph = Earnings (graph)
     .army-graph = Army (graph)
 
-label-minimal-stats-player-header = Player
-label-minimal-stats-cash-header = Cash
-label-minimal-stats-power-header = Power
-label-minimal-stats-points-header = Points
-label-minimal-stats-harvesters-header = Harv.
+label_minimal_stats_player_header = Player
+label_minimal_stats_cash_header = Cash
+label_minimal_stats_power_header = Power
+label_minimal_stats_points_header = Points
+label_minimal_stats_harvesters_header = Harv.
 
-promotion-counter =
+promotion_counter =
     .rank = Current Rank:
     .points = Promotion Points:
     .progress = Progress to next rank:
     .progress-max = Max rank achieved
 
-commander-tree =
+commander_tree =
     .title = Promotions
     .points-label = Available Points
     .close = Close
@@ -80,7 +80,7 @@ statistics =
     .col-kills = Kills
     .col-destroyed = Destroyed
 
-actor-stats-label-prefix =
+actor_stats_label_prefix =
     .armor = Armor:
     .sight = Sight:
     .speed = Speed:
@@ -102,7 +102,7 @@ actor-stats-label-prefix =
     .kills = Kills:
     .experience = Experience:
 
-label-armor-class =
+label_armor_class =
     .no-armor = None
     .None = None
     .Flak = Flak
@@ -122,7 +122,7 @@ label-armor-class =
     .Superheavy = Superheavy
     .Shield = Shield
 
-loadscreen-loading = Drag to set a formation for units when attack-moving$
+loadscreen_loading = Drag to set a formation for units when attack-moving$
    Access your Promotions tab through the star button on the sidebar$
    The promotions counter at the top edge of the screen displays your points and progress toward earning them$
    Multiple production buildings can be cycled through using their categories' respective hotkeys$
@@ -177,7 +177,7 @@ button-command-bar-attack-move =
 
     Left-click icon then right-click on target location.
 
-button-command-bar-force-move =
+button_command_bar_force_move =
    .tooltip = Force Move
    .tooltipdesc = Selected units will move to the desired location
      - Default activity for the target is suppressed
@@ -187,7 +187,7 @@ button-command-bar-force-move =
     Left-click icon then right-click on target.
     Hold <(Alt)> to activate temporarily while commanding units.
 
-button-command-bar-force-attack =
+button_command_bar_force_attack =
    .tooltip = Force Attack
    .tooltipdesc = Selected units will attack the targeted unit or location
      - Default activity for the target is suppressed
@@ -204,7 +204,7 @@ button-command-bar-guard =
 
     Left-click icon then right-click on target unit.
 
-button-command-bar-deploy =
+button_command_bar_deploy =
    .tooltip = Deploy
    .tooltipdesc = Selected units will perform their default deploy activity
      - MCVs will unpack into a Construction Yard
@@ -264,28 +264,28 @@ button-stance-bar-holdfire =
      - Units will not fire upon enemies
      - Units will not move or pursue enemies
 
-button-top-buttons-beacon-tooltip = Place Beacon
-button-top-buttons-sell-tooltip = Sell
-button-top-buttons-power-tooltip = Power Down
-button-top-buttons-repair-tooltip = Repair
+button_top_buttons_beacon_tooltip = Place Beacon
+button_top_buttons_sell_tooltip = Sell
+button_top_buttons_power_tooltip = Power Down
+button_top_buttons_repair_tooltip = Repair
 
 productionpalette-sidebar-production-palette =
    .ready = READY
    .hold = ON HOLD
 
-button-production-types-building-tooltip = Buildings
-button-production-types-defense-tooltip = Defense
-button-production-types-infantry-tooltip = Infantry
-button-production-types-vehicle-tooltip = Vehicles
-button-production-types-aircraft-tooltip = Aircraft
-button-production-types-naval-tooltip = Naval
-button-production-types-addon-tooltip = Building Addons
-button-production-types-upgrade-tooltip = Upgrades
-button-production-types-promotion-tooltip = Open Promotions
+button_production_types_building_tooltip = Buildings
+button_production_types_defense_tooltip = Defense
+button_production_types_infantry_tooltip = Infantry
+button_production_types_vehicle_tooltip = Vehicles
+button_production_types_aircraft_tooltip = Aircraft
+button_production_types_naval_tooltip = Naval
+button_production_types_addon_tooltip = Building Addons
+button_production_types_upgrade_tooltip = Upgrades
+button_production_types_promotion_tooltip = Open Promotions
 button-production-types-scroll-up-tooltip = Scroll up
 button-production-types-scroll-down-tooltip = Scroll down
 
-bot-ai =
+bot_ai =
    .easiest = Easiest AI
    .veryeasy = Very Easy AI
    .easy = Easy AI
@@ -297,24 +297,24 @@ bot-ai =
    .unbeatable = Unbeatable AI
    .cameogod = Cameo God AI
 
-support-power-timer = { $player }'s { $support-power }: { $time }
+support_power_timer = { $player }'s { $support-power }: { $time }
 
 ## settings-display.yaml
-checkbox-laser-glow = Weapon Glow Effects
-checkbox-tank-muzzle-flashes = Tank muzzle flashes
-checkbox-heat-distortion = Heat Distortion Effects
-checkbox-shockwave = Shockwave Distortion Effects
-checkbox-screen-shake = Screen Shake Effects
-checkbox-ground-fire-smoke = Ground Fire Smoke Effects
+checkbox_laser_glow = Weapon Glow Effects
+checkbox_tank_muzzle_flashes = Tank muzzle flashes
+checkbox_heat_distortion = Heat Distortion Effects
+checkbox_shockwave = Shockwave Distortion Effects
+checkbox_screen_shake = Screen Shake Effects
+checkbox_ground_fire_smoke = Ground Fire Smoke Effects
 checkbox-cross-map-sprite-cache-container = Reuse sprite atlases between maps (faster map loads)
-checkbox-flash-transients-container =
+checkbox_flash_transients_container =
     .label = Flash Priority Notifications
     .tooltip = Flash important game-event notifications (base/unit under attack, superweapons) to draw attention
 
 ## settings-gameplay.yaml
-label-game-play-section-header = Gameplay
-auto-save-interval-label = Auto-save interval
-auto-save-nr-label = Auto-save files
+label_game_play_section_header = Gameplay
+auto_save_interval_label = Auto-save interval
+auto_save_nr_label = Auto-save files
 auto-save-interval =
     .disabled = Disabled
     .options = { $seconds } seconds
@@ -326,270 +326,270 @@ auto-save-max-file-number = { $saves ->
     [one] 1 save
    *[other] { $saves } saves
 }
-checkbox-quota-mode =
+checkbox_quota_mode =
     .label = Quota Mode
     .tooltip = Production buildings automatically re-queue units to maintain target alive counts per type.
         Left-click a unit in the production panel to set its target; right-click to lower it.
         Due to its instability, this feature is currently single-player only, and disabled in multiplayer.
-ui-theme-label = UI Colour Theme
-ui-theme-restart-hint = Applies after restart
+ui_theme_label = UI Colour Theme
+ui_theme_restart_hint = Applies after restart
 
 ## Map Generator (from OpenRA RA)
 ## map-generators.yaml
-label-random-map = Random Map
-label-clear-map-generator-option-tile = Tile
-label-clear-map-generator-choice-tile-clear =
+label_random_map = Random Map
+label_clear_map_generator_option_tile = Tile
+label_clear_map_generator_choice_tile_clear =
    .label = Clear
-label-clear-map-generator-choice-tile-water =
+label_clear_map_generator_choice_tile_water =
    .label = Water
-label-clear-map-generator-choice-tile-empty =
+label_clear_map_generator_choice_tile_empty =
    .label = Empty space
 
-label-ra-map-generator-option-seed = Seed
+label_ra_map_generator_option_seed = Seed
 
-label-ra-map-generator-option-terrain-type = Terrain Type
-label-ra-map-generator-choice-terrain-type-lakes =
+label_ra_map_generator_option_terrain_type = Terrain Type
+label_ra_map_generator_choice_terrain_type_lakes =
    .label = Lakes
    .description = Open spaces with moderately sized lakes
-label-ra-map-generator-choice-terrain-type-puddles =
+label_ra_map_generator_choice_terrain_type_puddles =
    .label = Puddles
    .description = Open spaces with small ponds
-label-ra-map-generator-choice-terrain-type-gardens =
+label_ra_map_generator_choice_terrain_type_gardens =
    .label = Gardens
    .description = Densely-packed terrain with ponds, cliffs, and forests
-label-ra-map-generator-choice-terrain-type-plots =
+label_ra_map_generator_choice_terrain_type_plots =
    .label = Plots
    .description = Loosely-packed terrain with ponds, cliffs, and forests
-label-ra-map-generator-choice-terrain-type-plains =
+label_ra_map_generator_choice_terrain_type_plains =
    .label = Plains
    .description = Open spaces with sparse trees and cliffs
-label-ra-map-generator-choice-terrain-type-parks =
+label_ra_map_generator_choice_terrain_type_parks =
    .label = Parks
    .description = Open spaces with light forestry and occasional cliffs
-label-ra-map-generator-choice-terrain-type-woodlands =
+label_ra_map_generator_choice_terrain_type_woodlands =
    .label = Woodlands
    .description = Moderate forestry with occasional cliffs
-label-ra-map-generator-choice-terrain-type-overgrown =
+label_ra_map_generator_choice_terrain_type_overgrown =
    .label = Overgrown
    .description = Narrow passages, dense forestry and moderate cliffs
-label-ra-map-generator-choice-terrain-type-rocky =
+label_ra_map_generator_choice_terrain_type_rocky =
    .label = Rocky
    .description = Moderate cliffs with light forestry
-label-ra-map-generator-choice-terrain-type-mountains =
+label_ra_map_generator_choice_terrain_type_mountains =
    .label = Mountains
    .description = Many long cliffs
-label-ra-map-generator-choice-terrain-type-mountain-lakes =
+label_ra_map_generator_choice_terrain_type_mountain_lakes =
    .label = Mountain Lakes
    .description = Lakes and many long cliffs
-label-ra-map-generator-choice-terrain-type-oceanic =
+label_ra_map_generator_choice_terrain_type_oceanic =
    .label = Oceanic
    .description = Small islands separated by an ocean
-label-ra-map-generator-choice-terrain-type-large-islands =
+label_ra_map_generator_choice_terrain_type_large_islands =
    .label = Large Islands
    .description = Large islands separated by an ocean
-label-ra-map-generator-choice-terrain-type-continents =
+label_ra_map_generator_choice_terrain_type_continents =
    .label = Continents
    .description = Large bodies of land and water
-label-ra-map-generator-choice-terrain-type-wetlands =
+label_ra_map_generator_choice_terrain_type_wetlands =
    .label = Wetlands
    .description = Loose mixtures of land and water
-label-ra-map-generator-choice-terrain-type-narrow-wetlands =
+label_ra_map_generator_choice_terrain_type_narrow_wetlands =
    .label = Narrow Wetlands
    .description = Tight mixtures of land and water
 
-label-ra-map-generator-option-symmetry = Symmetry
-label-ra-map-generator-choice-mirror-none =
+label_ra_map_generator_option_symmetry = Symmetry
+label_ra_map_generator_choice_mirror_none =
    .label = None
-label-ra-map-generator-choice-symmetry-mirror-horizontal =
+label_ra_map_generator_choice_symmetry_mirror_horizontal =
    .label = Mirror Horizontal
-label-ra-map-generator-choice-symmetry-mirror-vertical =
+label_ra_map_generator_choice_symmetry_mirror_vertical =
    .label = Mirror Vertical
-label-ra-map-generator-choice-symmetry-mirror-diagonal-tl =
+label_ra_map_generator_choice_symmetry_mirror_diagonal_tl =
    .label = Mirror Diagonal (Top-Left)
-label-ra-map-generator-choice-symmetry-mirror-diagonal-tr =
+label_ra_map_generator_choice_symmetry_mirror_diagonal_tr =
    .label = Mirror Diagonal (Top-Right)
-label-ra-map-generator-choice-symmetry-mirror-2-rotations =
+label_ra_map_generator_choice_symmetry_mirror_2_rotations =
    .label = 2 Rotations
-label-ra-map-generator-choice-symmetry-mirror-3-rotations =
+label_ra_map_generator_choice_symmetry_mirror_3_rotations =
    .label = 3 Rotations
-label-ra-map-generator-choice-symmetry-mirror-4-rotations =
+label_ra_map_generator_choice_symmetry_mirror_4_rotations =
    .label = 4 Rotations
-label-ra-map-generator-choice-symmetry-mirror-5-rotations =
+label_ra_map_generator_choice_symmetry_mirror_5_rotations =
    .label = 5 Rotations
-label-ra-map-generator-choice-symmetry-mirror-6-rotations =
+label_ra_map_generator_choice_symmetry_mirror_6_rotations =
    .label = 6 Rotations
-label-ra-map-generator-choice-symmetry-mirror-7-rotations =
+label_ra_map_generator_choice_symmetry_mirror_7_rotations =
    .label = 7 Rotations
-label-ra-map-generator-choice-symmetry-mirror-8-rotations =
+label_ra_map_generator_choice_symmetry_mirror_8_rotations =
    .label = 8 Rotations
 
-label-ra-map-generator-option-shape = Boundary Shape
-label-ra-map-generator-choice-shape-square =
+label_ra_map_generator_option_shape = Boundary Shape
+label_ra_map_generator_choice_shape_square =
    .label = Rectangle
    .description = Playable area is the full map
-label-ra-map-generator-choice-shape-circle-mountain =
+label_ra_map_generator_choice_shape_circle_mountain =
    .label = Circle in mountains
    .description = Playable area is contained within a circular mountain range
-label-ra-map-generator-choice-shape-circle-water =
+label_ra_map_generator_choice_shape_circle_water =
    .label = Circle in water
    .description = Playable area is a circular island
 
-label-ra-map-generator-option-players = Players
+label_ra_map_generator_option_players = Players
 
-label-ra-map-generator-option-resources = Resources
-label-ra-map-generator-choice-resources-none =
+label_ra_map_generator_option_resources = Resources
+label_ra_map_generator_choice_resources_none =
    .label = None
-label-ra-map-generator-choice-resources-low =
+label_ra_map_generator_choice_resources_low =
    .label = Low
-label-ra-map-generator-choice-resources-medium =
+label_ra_map_generator_choice_resources_medium =
    .label = Medium
-label-ra-map-generator-choice-resources-high =
+label_ra_map_generator_choice_resources_high =
    .label = High
-label-ra-map-generator-choice-resources-very-high =
+label_ra_map_generator_choice_resources_very_high =
    .label = Very High
-label-ra-map-generator-choice-resources-full =
+label_ra_map_generator_choice_resources_full =
    .label = Oreful
 
-label-ra-map-generator-option-buildings = Tech Structures
-label-ra-map-generator-choice-buildings-none =
+label_ra_map_generator_option_buildings = Tech Structures
+label_ra_map_generator_choice_buildings_none =
    .label = None
    .description = No tech structures
-label-ra-map-generator-choice-buildings-standard =
+label_ra_map_generator_choice_buildings_standard =
    .label = Standard
    .description = Oil Derricks, Hospitals, and Communication Centers
-label-ra-map-generator-choice-buildings-extra =
+label_ra_map_generator_choice_buildings_extra =
    .label = Extra
    .description = Oil Derricks, Hospitals, Communication Centers, Forward Command Posts
-label-ra-map-generator-choice-buildings-oil-only =
+label_ra_map_generator_choice_buildings_oil_only =
    .label = Oil Only
    .description = Oil Derricks only
-label-ra-map-generator-choice-buildings-oil-rush =
+label_ra_map_generator_choice_buildings_oil_rush =
    .label = Oil Rush
    .description = Lots of Oil Derricks
 
-label-ra-map-generator-option-density = Expansion Opportunities
-label-ra-map-generator-choice-density-players =
+label_ra_map_generator_option_density = Expansion Opportunities
+label_ra_map_generator_choice_density_players =
    .label = Scale with players
-label-ra-map-generator-choice-density-area-and-players =
+label_ra_map_generator_choice_density_area_and_players =
    .label = Scale with size and players
-label-ra-map-generator-choice-density-area-very-low =
+label_ra_map_generator_choice_density_area_very_low =
    .label = Very Low
-label-ra-map-generator-choice-density-area-low =
+label_ra_map_generator_choice_density_area_low =
    .label = Low
-label-ra-map-generator-choice-density-area-medium =
+label_ra_map_generator_choice_density_area_medium =
    .label = Medium
-label-ra-map-generator-choice-density-area-high =
+label_ra_map_generator_choice_density_area_high =
    .label = High
-label-ra-map-generator-choice-density-area-very-high =
+label_ra_map_generator_choice_density_area_very_high =
    .label = Very High
 
-label-ra-map-generator-option-roads = Roads
-label-ra-map-generator-option-deny-walled-areas = Obstruct walled areas
+label_ra_map_generator_option_roads = Roads
+label_ra_map_generator_option_deny_walled_areas = Obstruct walled areas
 
-label-ra-map-generator-option-civilian-density = Civilian Density
-label-ra-map-generator-choice-civilian-density-default =
+label_ra_map_generator_option_civilian_density = Civilian Density
+label_ra_map_generator_choice_civilian_density_default =
    .label = Default
-label-ra-map-generator-choice-civilian-density-none =
+label_ra_map_generator_choice_civilian_density_none =
    .label = None
-label-ra-map-generator-choice-civilian-density-low =
+label_ra_map_generator_choice_civilian_density_low =
    .label = Low
-label-ra-map-generator-choice-civilian-density-medium =
+label_ra_map_generator_choice_civilian_density_medium =
    .label = Medium
-label-ra-map-generator-choice-civilian-density-high =
+label_ra_map_generator_choice_civilian_density_high =
    .label = High
-label-ra-map-generator-choice-civilian-density-very-high =
+label_ra_map_generator_choice_civilian_density_very_high =
    .label = Very High
-label-ra-map-generator-choice-civilian-density-max =
+label_ra_map_generator_choice_civilian_density_max =
    .label = Maximum
 
-map-generator-d2k = Map Generator
+map_generator_d2k = Map Generator
 
 ## D2k map-generators.yaml
-label-clear-map-generator-choice-tile-sand =
+label_clear_map_generator_choice_tile_sand =
    .label = Sand
-label-clear-map-generator-choice-tile-concrete =
+label_clear_map_generator_choice_tile_concrete =
    .label = Concrete
-label-clear-map-generator-choice-tile-dune =
+label_clear_map_generator_choice_tile_dune =
    .label = Dune
-label-clear-map-generator-choice-tile-rock =
+label_clear_map_generator_choice_tile_rock =
    .label = Rock
-label-clear-map-generator-choice-tile-platform =
+label_clear_map_generator_choice_tile_platform =
    .label = Platform
 
-label-d2k-map-generator-option-seed = Seed
-label-d2k-map-generator-option-terrain-type = Terrain Type
-label-d2k-map-generator-choice-terrain-type-rocky =
+label_d2k_map_generator_option_seed = Seed
+label_d2k_map_generator_option_terrain_type = Terrain Type
+label_d2k_map_generator_choice_terrain_type_rocky =
    .label = Rocky
-label-d2k-map-generator-choice-terrain-type-rough =
+label_d2k_map_generator_choice_terrain_type_rough =
    .label = Rough
-label-d2k-map-generator-choice-terrain-type-flat =
+label_d2k_map_generator_choice_terrain_type_flat =
    .label = Flat
-label-d2k-map-generator-choice-terrain-type-pockets =
+label_d2k_map_generator_choice_terrain_type_pockets =
    .label = Pockets
-label-d2k-map-generator-option-players = Players
+label_d2k_map_generator_option_players = Players
 
-label-d2k-map-generator-option-symmetry = Symmetry
-label-d2k-map-generator-choice-mirror-none =
+label_d2k_map_generator_option_symmetry = Symmetry
+label_d2k_map_generator_choice_mirror_none =
    .label = None
-label-d2k-map-generator-choice-symmetry-mirror-horizontal =
+label_d2k_map_generator_choice_symmetry_mirror_horizontal =
    .label = Mirror Horizontal
-label-d2k-map-generator-choice-symmetry-mirror-vertical =
+label_d2k_map_generator_choice_symmetry_mirror_vertical =
    .label = Mirror Vertical
-label-d2k-map-generator-choice-symmetry-mirror-diagonal-tl =
+label_d2k_map_generator_choice_symmetry_mirror_diagonal_tl =
    .label = Mirror Diagonal (Top-Left)
-label-d2k-map-generator-choice-symmetry-mirror-diagonal-tr =
+label_d2k_map_generator_choice_symmetry_mirror_diagonal_tr =
    .label = Mirror Diagonal (Top-Right)
-label-d2k-map-generator-choice-symmetry-mirror-2-rotations =
+label_d2k_map_generator_choice_symmetry_mirror_2_rotations =
    .label = 2 Rotations
-label-d2k-map-generator-choice-symmetry-mirror-3-rotations =
+label_d2k_map_generator_choice_symmetry_mirror_3_rotations =
    .label = 3 Rotations
-label-d2k-map-generator-choice-symmetry-mirror-4-rotations =
+label_d2k_map_generator_choice_symmetry_mirror_4_rotations =
    .label = 4 Rotations
-label-d2k-map-generator-choice-symmetry-mirror-5-rotations =
+label_d2k_map_generator_choice_symmetry_mirror_5_rotations =
    .label = 5 Rotations
-label-d2k-map-generator-choice-symmetry-mirror-6-rotations =
+label_d2k_map_generator_choice_symmetry_mirror_6_rotations =
    .label = 6 Rotations
-label-d2k-map-generator-choice-symmetry-mirror-7-rotations =
+label_d2k_map_generator_choice_symmetry_mirror_7_rotations =
    .label = 7 Rotations
-label-d2k-map-generator-choice-symmetry-mirror-8-rotations =
+label_d2k_map_generator_choice_symmetry_mirror_8_rotations =
    .label = 8 Rotations
 
-label-d2k-map-generator-option-resources = Resources
-label-d2k-map-generator-choice-resources-none =
+label_d2k_map_generator_option_resources = Resources
+label_d2k_map_generator_choice_resources_none =
    .label = None
-label-d2k-map-generator-choice-resources-low =
+label_d2k_map_generator_choice_resources_low =
    .label = Low
-label-d2k-map-generator-choice-resources-medium =
+label_d2k_map_generator_choice_resources_medium =
    .label = Medium
-label-d2k-map-generator-choice-resources-high =
+label_d2k_map_generator_choice_resources_high =
    .label = High
-label-d2k-map-generator-choice-resources-very-high =
+label_d2k_map_generator_choice_resources_very_high =
    .label = Very High
-label-d2k-map-generator-choice-resources-full =
+label_d2k_map_generator_choice_resources_full =
    .label = Full
 
-label-d2k-map-generator-option-worms = Worms
-label-d2k-map-generator-choice-worms-none =
+label_d2k_map_generator_option_worms = Worms
+label_d2k_map_generator_choice_worms_none =
    .label = None
-label-d2k-map-generator-choice-worms-low =
+label_d2k_map_generator_choice_worms_low =
    .label = Low
-label-d2k-map-generator-choice-worms-medium =
+label_d2k_map_generator_choice_worms_medium =
    .label = Medium
-label-d2k-map-generator-choice-worms-high =
+label_d2k_map_generator_choice_worms_high =
    .label = High
 
-label-d2k-map-generator-option-density = Density
-label-d2k-map-generator-choice-density-players =
+label_d2k_map_generator_option_density = Density
+label_d2k_map_generator_choice_density_players =
    .label = Scale with players
-label-d2k-map-generator-choice-density-area-and-players =
+label_d2k_map_generator_choice_density_area_and_players =
    .label = Scale with size and players
-label-d2k-map-generator-choice-density-area-very-low =
+label_d2k_map_generator_choice_density_area_very_low =
    .label = Very Low
-label-d2k-map-generator-choice-density-area-low =
+label_d2k_map_generator_choice_density_area_low =
    .label = Low
-label-d2k-map-generator-choice-density-area-medium =
+label_d2k_map_generator_choice_density_area_medium =
    .label = Medium
-label-d2k-map-generator-choice-density-area-high =
+label_d2k_map_generator_choice_density_area_high =
    .label = High
-label-d2k-map-generator-choice-density-area-very-high =
+label_d2k_map_generator_choice_density_area_very_high =
    .label = Very High

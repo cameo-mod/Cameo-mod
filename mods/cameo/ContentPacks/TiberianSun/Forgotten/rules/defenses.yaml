@@ -7,12 +7,12 @@ forgotten_silo:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: actor-forgotten_silo.name
+		Name: actor_forgotten_silo.name
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Defence, RADefence
-		Description: actor-forgotten_silo.description
+		Description: actor_forgotten_silo.description
 		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
 	Building:
 		Footprint: xx xx
@@ -55,12 +55,12 @@ forgotten_veinhole:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Buildable:
-		Description: actor-forgotten_veinhole.description
+		Description: actor_forgotten_veinhole.description
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
 		Prerequisites: ~forgotten_constructionyard, forgotten_church, ~techlevel.superweapons, !forgotten_veinhole
 	Tooltip:
-		Name: actor-forgotten_veinhole.name
+		Name: actor_forgotten_veinhole.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -82,9 +82,9 @@ forgotten_veinhole:
 			1: abomb
 		ChargeInterval: 10500
 		Names:
-			1: power-nuke.raname
+			1: power_nuke.raname
 		Descriptions:
-			1: power-nuke.description
+			1: power_nuke.description
 		SelectTargetSpeechNotification: SelectTarget
 		SelectTargetTextNotification: Select target.
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -162,13 +162,13 @@ forgotten_machineguntower:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: actor-forgotten_machineguntower.name
+		Name: actor_forgotten_machineguntower.name
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: actor-forgotten_machineguntower.description
+		Description: actor_forgotten_machineguntower.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -207,12 +207,12 @@ forgotten_juggerflakwall:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: actor-forgotten_juggerflakwall.name
+		Name: actor_forgotten_juggerflakwall.name
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 		Queue: Defence, RADefence
-		Description: actor-forgotten_juggerflakwall.description
+		Description: actor_forgotten_juggerflakwall.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -258,13 +258,13 @@ forgotten_brokenrattytankturret:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: actor-forgotten_brokenrattytankturret.name
+		Name: actor_forgotten_brokenrattytankturret.name
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: actor-forgotten_brokenrattytankturret.description
+		Description: actor_forgotten_brokenrattytankturret.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -318,13 +318,13 @@ forgotten_brokenwarriortankturret:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: actor-forgotten_brokenwarriortankturret.name
+		Name: actor_forgotten_brokenwarriortankturret.name
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~forgotten_constructionyard, forgotten_church
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: actor-forgotten_brokenwarriortankturret.description
+		Description: actor_forgotten_brokenwarriortankturret.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -378,13 +378,13 @@ forgotten_brokenscoopertankturret:
 	Valued:
 		Cost: 1750
 	Tooltip:
-		Name: actor-forgotten_brokenscoopertankturret.name
+		Name: actor_forgotten_brokenscoopertankturret.name
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_constructionyard, forgotten_church
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: actor-forgotten_brokenscoopertankturret.description
+		Description: actor_forgotten_brokenscoopertankturret.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:

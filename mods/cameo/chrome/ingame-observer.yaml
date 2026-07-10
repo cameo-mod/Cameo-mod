@@ -326,7 +326,7 @@ Container@OBSERVER_WIDGETS:
 					Height: 28
 					Background: sidebar-button-observer
 					Key: Pause
-					TooltipText: button-observer-widgets-pause-tooltip
+					TooltipText: button_observer_widgets_pause_tooltip
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
 					Children:
@@ -342,7 +342,7 @@ Container@OBSERVER_WIDGETS:
 					Height: 28
 					Background: sidebar-button-observer
 					Key: Pause
-					TooltipText: button-observer-widgets-play-tooltip
+					TooltipText: button_observer_widgets_play_tooltip
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
 					Children:
@@ -358,10 +358,10 @@ Container@OBSERVER_WIDGETS:
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedSlow
-					TooltipText: button-observer-widgets-slow.tooltip
+					TooltipText: button_observer_widgets_slow.tooltip
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button-observer-widgets-slow.label
+					Text: button_observer_widgets_slow.label
 					Font: TinyBold
 				Button@BUTTON_REGULAR:
 					X: 95
@@ -370,10 +370,10 @@ Container@OBSERVER_WIDGETS:
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedRegular
-					TooltipText: button-observer-widgets-regular.tooltip
+					TooltipText: button_observer_widgets_regular.tooltip
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button-observer-widgets-regular.label
+					Text: button_observer_widgets_regular.label
 					Font: TinyBold
 				Button@BUTTON_FAST:
 					X: 141
@@ -382,10 +382,10 @@ Container@OBSERVER_WIDGETS:
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedFast
-					TooltipText: button-observer-widgets-fast.tooltip
+					TooltipText: button_observer_widgets_fast.tooltip
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button-observer-widgets-fast.label
+					Text: button_observer_widgets_fast.label
 					Font: TinyBold
 				Button@BUTTON_MAXIMUM:
 					X: 187
@@ -394,10 +394,10 @@ Container@OBSERVER_WIDGETS:
 					Height: 22
 					Background: sidebar-button-observer
 					Key: ReplaySpeedMax
-					TooltipText: button-observer-widgets-maximum.tooltip
+					TooltipText: button_observer_widgets_maximum.tooltip
 					TooltipContainer: TOOLTIP_CONTAINER
 					VisualHeight: 0
-					Text: button-observer-widgets-maximum.label
+					Text: button_observer_widgets_maximum.label
 					Font: TinyBold
 		Container@INGAME_OBSERVERSTATS_BG:
 			Logic: CameoObserverStatsLogic
@@ -460,7 +460,7 @@ Container@OBSERVER_WIDGETS:
 									Width: 120
 									Height: PARENT_HEIGHT
 									Font: Bold
-									Text: label-minimal-stats-player-header
+									Text: label_minimal_stats_player_header
 									Align: Left
 									Shadow: True
 								Label@CASH_HEADER:
@@ -469,7 +469,7 @@ Container@OBSERVER_WIDGETS:
 									Width: 80
 									Height: PARENT_HEIGHT
 									Font: Bold
-									Text: label-minimal-stats-cash-header
+									Text: label_minimal_stats_cash_header
 									Align: Right
 									Shadow: True
 								Label@POWER_HEADER:
@@ -478,7 +478,7 @@ Container@OBSERVER_WIDGETS:
 									Width: 80
 									Height: PARENT_HEIGHT
 									Font: Bold
-									Text: label-minimal-stats-power-header
+									Text: label_minimal_stats_power_header
 									Align: Center
 									Shadow: True
 								Label@PROMOTIONS_HEADER:
@@ -487,7 +487,7 @@ Container@OBSERVER_WIDGETS:
 									Width: 80
 									Height: PARENT_HEIGHT
 									Font: Bold
-									Text: label-minimal-stats-points-header
+									Text: label_minimal_stats_points_header
 									Align: Right
 									Shadow: True
 								Label@HARVESTERS_HEADER:
@@ -495,7 +495,7 @@ Container@OBSERVER_WIDGETS:
 									Width: 80
 									Height: PARENT_HEIGHT
 									Font: Bold
-									Text: label-minimal-stats-harvesters-header
+									Text: label_minimal_stats_harvesters_header
 									Align: Right
 									Shadow: True
 						Container@BASIC_STATS_HEADERS:

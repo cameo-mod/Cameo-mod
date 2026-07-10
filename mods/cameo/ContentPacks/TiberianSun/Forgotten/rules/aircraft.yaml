@@ -7,7 +7,7 @@ forgotten_carryall:
 	Valued:
 		Cost: 750
 	Tooltip:
-		Name: actor-forgotten_carryall.name
+		Name: actor_forgotten_carryall.name
 	Selectable:
 		Bounds: 1280, 1024
 	UpdatesPlayerStatistics:
@@ -16,7 +16,7 @@ forgotten_carryall:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_helipad, forgotten_servicedepot
-		Description: actor-forgotten_carryall.description
+		Description: actor_forgotten_carryall.description
 	Aircraft:
 		TurnSpeed: 80
 		Speed: 149
@@ -62,14 +62,14 @@ forgotten_cobracopter:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: actor-forgotten_cobracopter.name
+		Name: actor_forgotten_cobracopter.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~forgotten_helipad, ~forgotten_promotion_cobracopter
 		Queue: Aircraft, RAAircraft
-		Description: actor-forgotten_cobracopter.description
+		Description: actor_forgotten_cobracopter.description
 	Aircraft:
 		TurnSpeed: 66
 		Speed: 165
@@ -146,14 +146,14 @@ forgotten_apache:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: actor-forgotten_apache.name
+		Name: actor_forgotten_apache.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~forgotten_helipad, ~!forgotten_promotion_cobracopter
 		Queue: Aircraft, RAAircraft
-		Description: actor-forgotten_apache.description
+		Description: actor_forgotten_apache.description
 	Aircraft:
 		TurnSpeed: 64
 		Speed: 160
@@ -228,14 +228,14 @@ forgotten_wasp:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: actor-forgotten_wasp.name
+		Name: actor_forgotten_wasp.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~forgotten_helipad
 		Queue: Aircraft, RAAircraft
-		Description: actor-forgotten_wasp.description
+		Description: actor_forgotten_wasp.description
 	Aircraft:
 		Speed: 200
 		TurnSpeed: 80
@@ -310,14 +310,14 @@ forgotten_cropplane:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: actor-forgotten_cropplane.name
+		Name: actor_forgotten_cropplane.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_helipad, forgotten_church, ~!forgotten_promotion_locustbomber
 		Queue: Aircraft, RAAircraft
-		Description: actor-forgotten_cropplane.description
+		Description: actor_forgotten_cropplane.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 64
@@ -386,14 +386,14 @@ forgotten_locustbomber:
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: actor-forgotten_locustbomber.name
+		Name: actor_forgotten_locustbomber.name
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_helipad, forgotten_church, ~forgotten_promotion_locustbomber
 		Queue: Aircraft, RAAircraft
-		Description: actor-forgotten_locustbomber.description
+		Description: actor_forgotten_locustbomber.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 12

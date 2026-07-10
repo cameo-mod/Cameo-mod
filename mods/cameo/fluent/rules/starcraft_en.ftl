@@ -1,6 +1,6 @@
 ## starcraft.yaml
 
-faction-terran =
+faction_terran =
    .description = The Terrans from the StarCraft universe
 
    The Terrans are humans living in the Koprulu Sector of the Milky Way.
@@ -13,7 +13,7 @@ faction-terran =
    - Buildings are modular and can be lifted
    - Can deploy the Nuclear Strike.
 
-faction-protoss =
+faction_protoss =
    .description = The Protoss from the StarCraft universe
 
    The Protoss are sapient humanoid species native to the Koprulu Sector of the Milky Way.
@@ -26,7 +26,7 @@ faction-protoss =
    - Can build area shield generators
    - Can deploy the Purifier Beam.
 
-faction-zerg =
+faction_zerg =
    .description = The Zerg from the StarCraft universe
 
    The Zerg are sapient, biologically advanced, arthropodal aliens native to the Koprulu Sector of the Milky Way.
@@ -38,824 +38,824 @@ faction-zerg =
    - Buildings and defenses do not require power to operate
    - Relatively powerful units, with various support units
 
-faction-randomsc =
+faction_randomsc =
    .description = Random Faction (StarCraft)
         A random faction from StarCraft will be chosen when the game starts.
 
-actor-scsupplydepot =
+actor_scsupplydepot =
    .description = Provides supply and stores resources
 
-actor-supplydepotexpand =
+actor_supplydepotexpand =
    .description = Increase the size of the supply depot by 100%
 
-actor-screfinery =
+actor_screfinery =
    .description = Processes raw Tiberium
         into useable resources
 
-actor-sctvespenegascollector =
+actor_sctvespenegascollector =
    .description = The Refinery generates Vespene gas Capsules and passive income.
 
-actor-scbarracks =
+actor_scbarracks =
    .description = Produces infantry
 
-actor-scacademy =
+actor_scacademy =
    .description = Unlocks Jim Raynor, Firebat and Medic. Researches infantry upgrades.
 
-actor-scengineeringbay =
+actor_scengineeringbay =
    .description = Unlocks Siege Tanks, Missile Turret and Infantry Upgrades.
 
-actor-scbunker =
+actor_scbunker =
    .description = Static defense with fireports for up to 4 garrisoned soldiers.
 
-actor-scmissileturret =
+actor_scmissileturret =
    .description = Anti-aircraft base defense. Can detect cloaked units.
 
-actor-scfactory =
+actor_scfactory =
    .description = Produces vehicles
 
-actor-scarmory =
+actor_scarmory =
    .description = Unlocks Goliath and Vehicle and Ship Upgrades.
 
-actor-scstarport =
+actor_scstarport =
    .description = Produces aircraft
 
-actor-scsciencefacility =
+actor_scsciencefacility =
    .description = Unlocks Battlecruiser, Ghost and Jim Raynor.
 
-actor-scpylon =
+actor_scpylon =
    .description = Provides supply and stores resources
 
-actor-scassimilator =
+actor_scassimilator =
    .description = Processes raw Tiberium
         into useable resources
 
-actor-scpvespenegascollector =
+actor_scpvespenegascollector =
    .description = The Assimilator generates Vespene gas Capsules and passive income.
 
-actor-scgateway =
+actor_scgateway =
    .description = Produces infantry
 
-actor-scforge =
+actor_scforge =
    .description = Unlocks Photon Cannon. Researches infantry upgrades.
 
-actor-scphotoncannon =
+actor_scphotoncannon =
    .description = Basic Base defense. Can detect cloaked units.
 
-actor-sccyberneticscore =
+actor_sccyberneticscore =
    .description = Unlocks Dragoon.
 
-actor-scshieldbattery =
+actor_scshieldbattery =
    .description = Automatically heals nearby units.
 
-actor-scroboticsfacility =
+actor_scroboticsfacility =
    .description = Produces vehicles
 
-actor-scstargate =
+actor_scstargate =
    .description = Produces aircraft
 
-actor-sccitadelofadun =
+actor_sccitadelofadun =
    .description = Unlocks Zeratul and Dark Templar.
 
-actor-scroboticssupportbay =
+actor_scroboticssupportbay =
    .description = Unlocks Reaver.
 
-actor-scfleetbeacon =
+actor_scfleetbeacon =
    .description = Unlocks Carrier and Purifier Beam support power.
 
-actor-sctemplararchives =
+actor_sctemplararchives =
    .description = Unlocks High Templar & Archon.
 
-actor-scobservatory =
+actor_scobservatory =
    .description = Unlocks Observer.
 
-actor-scarbitertribunal =
+actor_scarbitertribunal =
    .description = Unlocks Arbiter.
 
-actor-sclair =
+actor_sclair =
    .description = Unlocks Spire and Queen's Nest
 
-actor-schive =
+actor_schive =
    .description = Unlocks Ultralisk Cavern and Defiler Mound
 
-actor-sccreepcolony =
+actor_sccreepcolony =
    .description = Expands Zerg buildable area. Can be upgraded to Sunken or Spore Colonies.
 
-actor-scsporecolonyupgrade =
+actor_scsporecolonyupgrade =
    .description = Zerg Ground Base Defense. Expands Zerg buildable area.
 
-actor-scsunkencolonyupgrade =
+actor_scsunkencolonyupgrade =
    .description = Zerg Anti Air Base Defense. Expands Zerg buildable area.
 
-actor-scsunkencolony =
+actor_scsunkencolony =
    .description = Zerg Ground Base Defense. Expands Zerg buildable area.
 
-actor-scsporecolony =
+actor_scsporecolony =
    .description = Zerg Anti Air Base Defense. Expands Zerg buildable area.
 
-actor-scextractor =
+actor_scextractor =
    .description = Processes raw resources into usable credits.
 
-actor-sczvespenegascollector =
+actor_sczvespenegascollector =
    .description = The Extractor generates Vespene gas capsules and passive income.
 
-actor-scspawningpool =
+actor_scspawningpool =
    .description = Unlocks Zergling and hatchery upgrades.
 
-actor-scevolutionchamber =
+actor_scevolutionchamber =
    .description = Unlocks upgrades and enables creation of Zerg Hatchery Drone.
 
-actor-schydraliskden =
+actor_schydraliskden =
    .description = Unlocks Hydralisk.
 
-actor-scqueensnest =
+actor_scqueensnest =
    .description = Unlocks Queen and Kerrigan.
 
-actor-scspire =
+actor_scspire =
    .description = Unlocks Mutalisk.
 
-actor-scgreaterspire =
+actor_scgreaterspire =
    .description = Unlocks multiple zerg air units.
 
-actor-scultraliskcavern =
+actor_scultraliskcavern =
    .description = Unlocks Ultralisk.
 
-actor-scdefilermound =
+actor_scdefilermound =
    .description = Unlocks Defiler.
 
-actor-scnyduscanal =
+actor_scnyduscanal =
    .description = Instantaneously transports units to another exit.
 
-actor-scovermind =
+actor_scovermind =
    .description = Doubles Supply Limit. All Zerg cost half and produce twice as fast. Gives passive income.
 
-actor-scinfestedcommandcenter =
+actor_scinfestedcommandcenter =
    .description = Unlocks Siege Tanks.
 
-actor-scscv =
+actor_scscv =
    .description = Collects resources.
         Can repair mechanical units and buildings.
 
-actor-scmarine =
+actor_scmarine =
    .description = Basic Terran infantry.
         Strong vs Infantry
         Weak vs Vehicles
         Can attack aircraft
         Uncrushable
 
-actor-screaper =
+actor_screaper =
    .description = Basic Terran infantry.
         Strong vs Infantry
         Weak vs Vehicles
         Can attack aircraft
         Uncrushable
 
-actor-scmadcap =
+actor_scmadcap =
    .description = Basic Terran infantry.
         Strong vs Infantry
         Weak vs Vehicles
         Can attack aircraft
         Uncrushable
 
-actor-scfirebat =
+actor_scfirebat =
    .description = Terran flamethrower infantry.
         Strong vs Infantry, Buildings
         Weak vs Vehicles
         Uncrushable
 
-actor-scharakan =
+actor_scharakan =
    .description = Terran flamethrower infantry.
         Strong vs Infantry, Buildings
         Weak vs Vehicles
         Uncrushable
 
-actor-scmarauder =
+actor_scmarauder =
    .description = Terran tankbuster infantry.
         Strong vs Vehicles, Buildings
         Weak vs Infantry
         Uncrushable
 
-actor-scghost =
+actor_scghost =
    .description = Terran stealth assassin.
         Strong vs Infantry, Vehicles
         Can attack aircraft
         Can temporarily disable vehicles
         Uncrushable
 
-actor-scsilvertongue =
+actor_scsilvertongue =
    .description = Terran stealth assassin.
         Strong vs Infantry, Vehicles
         Can attack aircraft
         Can temporarily disable vehicles
         Uncrushable
 
-actor-scmedic =
+actor_scmedic =
    .description = Heals nearby infantry.
         Unarmed
         Uncrushable
 
-actor-scjimraynor =
+actor_scjimraynor =
    .description = Heroic Terran Unit
         Can Stimpack
         Extremely Durable
         Strong vs Everything
 
-actor-scvulture =
+actor_scvulture =
    .description = Fast scout vehicle, armed with
         grenades.
         Strong vs Infantry
         Weak vs Vehicles, Aircraft
         Can cross water
 
-actor-scsiegetank =
+actor_scsiegetank =
    .description = Terran mobile artillery.
         Strong vs Infantry, Buildings
         Weak vs Vehicles, Aircraft
         Can deploy for increased range and splash damage
 
-actor-scmatador =
+actor_scmatador =
    .description = Terran mobile artillery.
         Strong vs Infantry, Buildings
         Weak vs Vehicles, Aircraft
         Can deploy for increased range and splash damage
 
-actor-sccyclone =
+actor_sccyclone =
    .description = Terran mobile artillery.
         Strong vs Infantry, Buildings
         Weak vs Vehicles, Aircraft
         Can deploy for increased range and splash damage
 
-actor-scgoliath =
+actor_scgoliath =
    .description = Versatile Terran combat walker, armed with
         autocannons and AA missiles.
         Strong vs Infantry, Aircraft
         Weak vs Vehicles
 
-actor-scgoliath2 =
+actor_scgoliath2 =
    .description = Versatile Terran combat walker, armed with
         autocannons and AA missiles.
         Strong vs Infantry, Aircraft
         Weak vs Vehicles
 
-actor-scwarhound =
+actor_scwarhound =
    .description = Colossal Terran Mech.
         Strong vs Everything, Buildings
         Weak vs Air
         Uncrushable
 
-actor-scwraith =
+actor_scwraith =
    .description = Light Terran attack aircraft, armed
         with lasers and AA missiles.
         Strong vs Infantry, Aircraft
         Weak vs Buildings, Vehicles
 
-actor-scsundog =
+actor_scsundog =
    .description = Light Terran attack aircraft, armed
         with lasers and AA missiles.
         Strong vs Infantry, Aircraft
         Weak vs Buildings, Vehicles
 
-actor-scvalkyrie =
+actor_scvalkyrie =
    .description = Air Superiority Fighter that fires a burst of 8 missiles. Can only attack air.
 
-actor-scwyvern =
+actor_scwyvern =
    .description = Air Superiority Fighter that fires a burst of 8 missiles. Can only attack air.
 
-actor-scraven =
+actor_scraven =
    .description = Light Terran attack aircraft, armed
         with lasers and AA missiles.
         Strong vs Infantry, Aircraft
         Weak vs Buildings, Vehicles
 
-actor-scdropship =
+actor_scdropship =
    .description = Fast transport for all ground units.
         Unarmed
 
-actor-scpythean =
+actor_scpythean =
    .description = A slow moving garrison transport for all ground units.
         Extremely Durable
         Strong vs Everything
 
-actor-scmedivac =
+actor_scmedivac =
    .description = Fast transport for all ground units.
         Unarmed
 
-actor-scbattlecruiser =
+actor_scbattlecruiser =
    .description = Terran capital ship.
         Strong vs Everything
 
-actor-scphobos =
+actor_scphobos =
    .description = Terran capital ship.
         Strong vs Everything
 
-actor-scsciencevessel =
+actor_scsciencevessel =
    .description = Terran capital ship.
         Strong vs Everything
 
-actor-sctmcv =
+actor_sctmcv =
    .description = Builds structures and provides radar.
 
-actor-upmadcap =
+actor_upmadcap =
    .description = An upgrade to the marine.
 
-actor-upharakan =
+actor_upharakan =
    .description = Allows construction of the Harakan and the Matador.
 
-actor-upsilvertongue =
+actor_upsilvertongue =
    .description = Unlocks the Spectre and Medivac.
 
-actor-uppythean =
+actor_uppythean =
    .description = Allows construction of the Pythean, a colossal transport.
 
-actor-upmatador =
+actor_upmatador =
    .description = Unlocks a Flamethrower Siege Tank.
 
-actor-upsccyclone =
+actor_upsccyclone =
    .description = Allows construction of the Cyclone.
 
-actor-upgoliathmk2 =
+actor_upgoliathmk2 =
    .description = Unlocks the Goliath Mk2.
 
-actor-upwarhound =
+actor_upwarhound =
    .description = Unlocks the Warhound.
 
-actor-upsundog =
+actor_upsundog =
    .description = Allows training of the Sundog.
 
-actor-upraven =
+actor_upraven =
    .description = Allows construction of the Raven.
 
-actor-upwyvern =
+actor_upwyvern =
    .description = Allows training of the Desolator. Infantry becomes immune to radiation.
 
-actor-upphobos =
+actor_upphobos =
    .description = Allows construction of the Phobos.
 
-actor-uptalon =
+actor_uptalon =
    .description = Unlocks an upgrade for the zergling.
 
-actor-upspithid =
+actor_upspithid =
    .description = Unlocks Spithids.
 
-actor-upshriek =
+actor_upshriek =
    .description = Unlocks the shriek, a flying swarming zerg.
 
-actor-upswarmling =
+actor_upswarmling =
    .description = Unlocks the Swarmling, a swarming artillery type flying unit.
 
-actor-upsporemaw =
+actor_upsporemaw =
    .description = Unlocks the Sporemaw.
 
-actor-upgoremaw =
+actor_upgoremaw =
    .description = Unlocks the Goremaw.
 
-actor-upgorekraken =
+actor_upgorekraken =
    .description = Unlocks the Gorekraken.
 
-actor-uphermit =
+actor_uphermit =
    .description = Allows spawning of the Hermit.
 
-actor-upbroodweaver =
+actor_upbroodweaver =
    .description = Allows spawning of the Broodweaver.
 
-actor-upcorruptor =
+actor_upcorruptor =
    .description = Unlocks the Corruptor.
 
-actor-updreadshroud =
+actor_updreadshroud =
    .description = Allows spawning of the Dreadshroud.
 
-actor-upbehemoth =
+actor_upbehemoth =
    .description = Allows spawning of the Behemoth.
 
-actor-scprobe =
+actor_scprobe =
    .description = Collects resources. Can repair mechanical units and buildings. Can capture buildings.
 
-actor-sczealot =
+actor_sczealot =
    .description = Protoss infantry, attacks in close combat.
         Strong vs Infantry
         Weak vs Vehicles, Aircraft
         Uncrushable
 
-actor-scadept =
+actor_scadept =
    .description = Protoss infantry.
         Can deploy to create an invulnerable shade.
         Teleports to the shade.
    .shade-description = A shade cast by an Adept.
         Deploy to cancel the shade teleport.
 
-actor-scdragoon =
+actor_scdragoon =
    .description = Protoss assault walker. Can attack air.
 
-actor-scmanifold =
+actor_scmanifold =
    .description = Protoss anti air support vehicle. Can lockon enemy units.
 
-actor-scanalogue =
+actor_scanalogue =
    .description = Protoss mobile shield generator. Can repair vehicles and buildings.
 
-actor-scidol =
+actor_scidol =
    .description = Protoss support vehicle.
 
-actor-schightemplar =
+actor_schightemplar =
    .description = Protoss psionic warrior.
         Casts psionic storm for massive splash damage
         Strong vs clustered units
         Uncrushable
 
-actor-scdarktemplar =
+actor_scdarktemplar =
    .description = Protoss stealth warrior, attacks in close combat.
         Strong vs ground targets
         Uncrushable
 
-actor-scshuttle =
+actor_scshuttle =
    .description = Fast transport for all ground units.
         Unarmed
 
-actor-screaver =
+actor_screaver =
    .description = Long-range rocket artillery.
         Strong vs Vehicles, Buildings
         Weak vs Aircraft
 
-actor-scobserver =
+actor_scobserver =
    .description = Stealth scout.
         Unarmed
 
-actor-scarchon =
+actor_scarchon =
    .description = Powerful heavy protoss warrior.
         Strong vs Everything
 
-actor-scscout =
+actor_scscout =
    .description = Protoss fighter aircraft.
         Strong vs Aircraft
 
-actor-scepigraph =
+actor_scepigraph =
    .description = Protoss fighter aircraft.
         Strong vs Aircraft
 
-actor-sclanifect =
+actor_sclanifect =
    .description = Protoss fighter aircraft that can blind enemies.
 
-actor-scgladius =
+actor_scgladius =
    .description = Protoss artillery aircraft.
         Strong vs everything
 
-actor-sccorsair =
+actor_sccorsair =
    .description = Protoss fighter aircraft.
         Strong vs Aircraft
 
-actor-sccarrier =
+actor_sccarrier =
    .description = Heavy protoss warship, deploys
         5 interceptor craft.
         Strong vs Vehicles, Aircraft
 
-actor-scstarshipsovereign =
+actor_scstarshipsovereign =
    .description = Heavy protoss warship, deploys
         5 interceptor craft.
         Strong vs Vehicles, Aircraft
 
-actor-scarbiter =
+actor_scarbiter =
    .description = Protoss support vessel.
         Cloaks nearby friendly units
         Can cast a stasis field to freeze units
         Can recall units to its position
 
-actor-scpmcv =
+actor_scpmcv =
    .description = Transforms into a Nexus. Builds structures and provides radar.
 
-actor-sczeratul =
+actor_sczeratul =
    .description = Protoss Hero. Is pretty mobile, durable and has powerful splash melee attack
         Strong vs Ground
         Weak vs Air
 
-actor-scamaranth =
+actor_scamaranth =
    .description = Protoss stealth warrior, attacks in close combat.
         Strong vs ground targets
         Uncrushable
 
-actor-scatreus =
+actor_scatreus =
    .description = Protoss assault walker.
         Strong vs Vehicles
         Weak vs Infantry
 
-actor-scpositron =
+actor_scpositron =
    .description = Fast scout vehicle, armed with
         grenades.
         Strong vs Infantry
         Weak vs Vehicles, Aircraft
         Can cross water
 
-actor-sclegionnaire =
+actor_sclegionnaire =
    .description = Protoss infantry, attacks in close combat.
         Strong vs Infantry
         Weak vs Vehicles, Aircraft
         Uncrushable
 
-actor-scpatriarch =
+actor_scpatriarch =
    .description = Protoss psionic warrior.
         Shoots psionic storm for massive splash damage
         Strong vs clustered units
         Uncrushable
 
-actor-uplegionnaire =
+actor_uplegionnaire =
    .description = Unlocks the Legionnaire.
 
-actor-upatreus =
+actor_upatreus =
    .description = Unlocks the Atreus.
 
-actor-upamaranth =
+actor_upamaranth =
    .description = Unlocks the Amaranth.
 
-actor-uppatriarch =
+actor_uppatriarch =
    .description = Unlocks the Patriarch.
 
-actor-upepigraph =
+actor_upepigraph =
    .description = Unlocks the Epigraph.
 
-actor-uplanifect =
+actor_uplanifect =
    .description = Unlocks the Lanifect.
 
-actor-upgladius =
+actor_upgladius =
    .description = Unlocks the Gladius.
 
-actor-upstarsovereign =
+actor_upstarsovereign =
    .description = Unlocks the Star Sovereign.
 
-actor-uppositron =
+actor_uppositron =
    .description =  nlocks the Positron.
 
-actor-upanalogue =
+actor_upanalogue =
    .description = Unlocks the Analogue.
 
-actor-upmanifold =
+actor_upmanifold =
    .description = Unlocks the Manifold.
 
-actor-upidol =
+actor_upidol =
    .description = Unlocks the Idol.
 
-actor-scdrone =
+actor_scdrone =
    .description = Collects resources.
 
-actor-sc_zerg_larva =
+actor_sc_zerg_larva =
    .description = Spawns Zerg units.
 
-actor-scoverlord =
+actor_scoverlord =
    .description = Provides supply and stores resources
         Can transport 8 units
 
-actor-scbroodweaver =
+actor_scbroodweaver =
    .description = Heals nearby units.
 
-actor-sczergling =
+actor_sczergling =
    .description = Fast Zerg basic assault strain.
         Strong vs Infantry
         Weak vs Vehicles, Aircraft
 
-actor-sctalon =
+actor_sctalon =
    .description = Fast Zerg basic assault strain.
         Strong vs Infantry
         Weak vs Vehicles, Aircraft
 
-actor-scsporemaw =
+actor_scsporemaw =
    .description = Zerg artillery strain.
         Strong vs Infantry, Vehicles
         Weak vs Aircraft
 
-actor-schydralisk =
+actor_schydralisk =
    .description = Zerg armored assault strain.
         Strong vs Infantry, Vehicles, Aircraft
         Weak vs Siege
 
-actor-scspithid =
+actor_scspithid =
    .description = Zerg armored assault strain.
         Strong vs Infantry, Vehicles, Aircraft
         Weak vs Siege
 
-actor-scdreadshroud =
+actor_scdreadshroud =
    .description = Airborne Zerg creature.
         Strong vs Infantry, Aircraft
 
-actor-sccorruptor =
+actor_sccorruptor =
    .description = Airborne Zerg creature can snare enemy units.
 
-actor-scswarmling =
+actor_scswarmling =
    .description = Airborne Zerg creature.
         Strong vs Everything in group
 
-actor-scshriek =
+actor_scshriek =
    .description = Airborne melee Zerg creature.
         Strong vs Infantry, Aircraft
 
-actor-scmutalisk =
+actor_scmutalisk =
    .description = Airborne Zerg creature.
         Strong vs Infantry, Aircraft
 
-actor-scdevourer =
+actor_scdevourer =
    .description = Airborne Zerg creature.
         Strong vs Aircraft
 
-actor-scscourge =
+actor_scscourge =
    .description = Aerial suicide bomber.
         Strong vs Aircraft
 
-actor-scqueen =
+actor_scqueen =
    .description = Defensive Air Unit
         Can breed Broodlings
         Can attack air and ground
         Detector
 
-actor-scguardian =
+actor_scguardian =
    .description = Heavy Zerg bomber.
         Strong vs Vehicles, Buildings
         Weak vs Aircraft
 
-actor-scultralisk =
+actor_scultralisk =
    .description = Heavy Zerg assault strain.
         Strong vs Vehicles
         Weak vs Aircraft
 
-actor-scgorekraken =
+actor_scgorekraken =
    .description = Heavy Zerg bomber.
         Strong vs Vehicles, Buildings
         Weak vs Aircraft
 
-actor-schermit =
+actor_schermit =
    .description = Heavy Zerg assault strain.
         Strong vs Vehicles
         Weak vs Aircraft
 
-actor-scgoremaw =
+actor_scgoremaw =
    .description = Heavy Zerg assault strain.
         Strong vs Vehicles
         Weak vs Aircraft
 
-actor-sclurker =
+actor_sclurker =
    .description = Zerg ambush strain.
         Needs to deploy to attack
         Strong vs Infantry
 
-actor-scinfestedterran =
+actor_scinfestedterran =
    .description = Suicide bomber infantry.
         Strong vs clustered units
         Does no damage if killed
 
-actor-scdefiler =
+actor_scdefiler =
    .description = Zerg support strain.
         Attack reduces targets' health over time
         Strong vs clustered units
         Special Ability: Dark Swarm
 
-actor-sckerriganzerg =
+actor_sckerriganzerg =
    .description = Queen Of Blades
         Powerful melee attack
         Can Breed Zergs
 
-actor-sczmcv =
+actor_sczmcv =
    .description = Builds structures, creates Zerg units, and provides radar.
 
-actor-scbehemoth =
+actor_scbehemoth =
    .description = A slow moving garrison transport for all ground units.
         Extremely Durable
         Strong vs Everything
 
-actor-updragoonrange =
+actor_updragoonrange =
    .description = Increases Range of Photon Cannons, Dragoons, Atreuses, Positrons, Manifolds, Analogues and Idols by 20%.
 
-actor-uppylon1 =
+actor_uppylon1 =
    .description = Increases Energy of Pylons by 100%.
 
-actor-uppylon2 =
+actor_uppylon2 =
    .description = Increases Energy of Pylons by 100%.
 
-actor-upplasmashield =
+actor_upplasmashield =
    .description = Increases Shield Strength and Regeneration by 20%.
 
-actor-upreavercapacity =
+actor_upreavercapacity =
    .description = Doubles Reaver capacity.
 
-actor-upairspeed =
+actor_upairspeed =
    .description = Increases Speed of flying Protoss Units by 20%.
 
-actor-upgroundweapons =
+actor_upgroundweapons =
    .description = Increases Firepower of all Protoss ground units by 15%.
 
-actor-upgroundweapons2 =
+actor_upgroundweapons2 =
    .description = Increases Firepower of all Protoss ground units by 35%.
 
-actor-upgroundarmor =
+actor_upgroundarmor =
    .description = Increases Armor of all Protoss ground units by 10%.
 
-actor-upgroundarmor2 =
+actor_upgroundarmor2 =
    .description = Increases Armor of all Protoss ground units by 20%.
 
-actor-upairweapons =
+actor_upairweapons =
    .description = Increases Firepower of all Protoss air units by 15%.
 
-actor-upairweapons2 =
+actor_upairweapons2 =
    .description = Increases Firepower of all Protoss air units by 35%.
 
-actor-upairarmor =
+actor_upairarmor =
    .description = Increases Armor of all Protoss air units by 10%.
 
-actor-upairarmor2 =
+actor_upairarmor2 =
    .description = Increases Armor of all Protoss air units by 20%.
 
-actor-upstimpack =
+actor_upstimpack =
    .description = Marines and Firebats can use the Stim Pack ability.
 
-actor-upmarinerange =
+actor_upmarinerange =
    .description = Increases range of Marines, Mad Caps and Jim Raynor by 20%.
 
-actor-upsupplydepot1 =
+actor_upsupplydepot1 =
    .description = Increases Energy of Supply Depots by 100%.
 
-actor-upsupplydepot2 =
+actor_upsupplydepot2 =
    .description = Increases Energy of Supply Depots by 100%.
 
-actor-upghostcloak =
+actor_upghostcloak =
    .description = Enables Cloak for Ghosts, Spectres, Wraiths, Sundogs and the Pythean.
 
-actor-upsiegemode =
+actor_upsiegemode =
    .description = Increases Siege Mode Range by 10% and Vision by 20%
 
-actor-upyamatocannon =
+actor_upyamatocannon =
    .description = Allows the use of the Yamato Cannon and Tactical Jump for the Battle Cruiser and Phobos. Increases Battlecruiser Range by 15%.
 
-actor-upinfweapon =
+actor_upinfweapon =
    .description = Increases Firepower of all Terran Infantry by 15%.
 
-actor-upinfweapon2 =
+actor_upinfweapon2 =
    .description = Increases Firepower of all Terran Infantry by 35%.
 
-actor-upinfarmor =
+actor_upinfarmor =
    .description = Increases Armor of all Terran Infantry by 10%.
 
-actor-upinfarmor2 =
+actor_upinfarmor2 =
    .description = Increases Armor of all Terran Infantry by 20%.
 
-actor-upmechweapon =
+actor_upmechweapon =
    .description = Increases Firepower of all Terran Vehicles by 15%.
 
-actor-upmechweapon2 =
+actor_upmechweapon2 =
    .description = Increases Firepower of all Terran Vehicles by 35%.
 
-actor-upmecharmor =
+actor_upmecharmor =
    .description = Increases Armor of all Terran Vehicles by 10%.
 
-actor-upmecharmor2 =
+actor_upmecharmor2 =
    .description = Increases Armor of all Terran Vehicles by 20%.
 
-actor-upshipweapon =
+actor_upshipweapon =
    .description = Increases Firepower of all Terran Aircraft by 15%.
 
-actor-upshipweapon2 =
+actor_upshipweapon2 =
    .description = Increases Firepower of all Terran Aircraft by 35%.
 
-actor-upshiparmor =
+actor_upshiparmor =
    .description = Increases Armor of all Terran Aircraft by 10%.
 
-actor-upshiparmor2 =
+actor_upshiparmor2 =
    .description = Increases Armor of all Terran Aircraft by 20%.
 
-actor-upoverlordspeed =
+actor_upoverlordspeed =
    .description = Increases Speed of Overlords and Broodweavers by 50%.
 
-actor-uplingspeed =
+actor_uplingspeed =
    .description = Increases Speed of Zerglings, Talons, Shrieks and Kerrigan by 33%.
 
-actor-uplingattack =
+actor_uplingattack =
    .description = Increases Attack Speed of Zerglings, Talons, Shrieks and Kerrigan by 33%.
 
-actor-upzergrange =
+actor_upzergrange =
    .description = Increases Range of Hydralisks, Lurkers, and Spithids by 20%.
 
-actor-upzergmelee =
+actor_upzergmelee =
    .description = Increases Attack Damage of all melee Zerg units by 15%.
 
-actor-upzergmelee2 =
+actor_upzergmelee2 =
    .description = Increases Attack Damage of all melee Zerg units by 35%.
 
-actor-upzergmissile =
+actor_upzergmissile =
    .description = Increases Attack Damage of all ranged Zerg ground units by 15%.
 
-actor-upzergmissile2 =
+actor_upzergmissile2 =
    .description = Increases Attack Damage of all ranged Zerg ground units by 35%.
 
-actor-upcarapace =
+actor_upcarapace =
    .description = Increases Armor of all Zerg ground units by 10%.
 
-actor-upcarapace2 =
+actor_upcarapace2 =
    .description = Increases Armor of all Zerg ground units by 20%.
 
-actor-upflyerattack =
+actor_upflyerattack =
    .description = Increases Attack Damage of all Ranged Flying Zerg units by 15%.
 
-actor-upflyerattack2 =
+actor_upflyerattack2 =
    .description = Increases Attack Damage of all Ranged Flying Zerg units by 35%.
 
-actor-upflyerarmor =
+actor_upflyerarmor =
    .description = Increases Armor of all Flying Zerg units by 10%.
 
-actor-upflyerarmor2 =
+actor_upflyerarmor2 =
    .description = Increases Armor of all Flying Zerg units by 20%.
 
-power-recall =
+power_recall =
    .name = Recall
    .description = Teleports units to the recaller.

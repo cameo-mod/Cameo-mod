@@ -10,7 +10,7 @@ tran.gdi:
 		BuildPaletteOrder: 10
 		Prerequisites: ~hpad.gdi
 		Queue: Aircraft, RAAircraft
-		Description: actor-tran.description
+		Description: actor_tran.description
 	Buildable:
 		Prerequisites: ~hpad.gdi
 		Queue: Aircraft, RAAircraft
@@ -48,7 +48,7 @@ ORCA:
 		BuildPaletteOrder: 20
 		Prerequisites: ~hpad.gdi
 		Queue: Aircraft, RAAircraft
-		Description: actor-orca.description
+		Description: actor_orca.description
 	Aircraft:
 		Speed: 175
 		TurnSpeed: 35
@@ -164,7 +164,7 @@ A10Carrier:
 	Tooltip:
 		Name: A10 Bomber
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Aircraft:
 		AltitudeVelocity: 120
 		InitialFacing: 768
@@ -262,7 +262,7 @@ gdifirehawk:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
 		Prerequisites: ~hpad.gdi, eye, upgdifirehawk
-		Description: actor-firehawk.description
+		Description: actor_firehawk.description
 	Health:
 		HP: 180000
 	Repairable:
@@ -375,7 +375,7 @@ gdirigdrone:
 	Tooltip:
 		Name: Scalpel
 	Buildable:
-		Description: template-drone-slave.description
+		Description: template_drone_slave.description
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:

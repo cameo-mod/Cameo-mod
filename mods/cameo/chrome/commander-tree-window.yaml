@@ -37,7 +37,7 @@ Container@COMMANDER_TREE_OVERLAY:
 					X: 4
 					Y: 18
 					Font: Bold
-					Text: commander-tree.title
+					Text: commander_tree.title
 				Container@HEADER_STATS:
 					X: 4
 					Y: 56
@@ -47,7 +47,7 @@ Container@COMMANDER_TREE_OVERLAY:
 						Label@RANK_LABEL:
 							Width: 165
 							Font: Bold
-							Text: promotion-counter.rank
+							Text: promotion_counter.rank
 						Label@RANK_VALUE:
 							X: 165
 							Width: PARENT_WIDTH - 165
@@ -56,7 +56,7 @@ Container@COMMANDER_TREE_OVERLAY:
 							Y: 24
 							Width: 165
 							Font: Bold
-							Text: commander-tree.points-label
+							Text: commander_tree.points-label
 						Label@POINTS_VALUE:
 							Y: 24
 							X: 165
@@ -66,7 +66,7 @@ Container@COMMANDER_TREE_OVERLAY:
 							Y: 48
 							Width: 165
 							Font: Bold
-							Text: promotion-counter.progress
+							Text: promotion_counter.progress
 						Label@PROGRESS_VALUE:
 							Y: 48
 							X: 165
@@ -78,7 +78,7 @@ Container@COMMANDER_TREE_OVERLAY:
 					Width: 32
 					Height: 32
 					Background: button
-					TooltipText: commander-tree.close
+					TooltipText: commander_tree.close
 					Children:
 						Label@TEXT:
 							Width: PARENT_WIDTH

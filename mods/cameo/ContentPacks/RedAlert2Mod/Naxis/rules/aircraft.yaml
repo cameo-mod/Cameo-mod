@@ -7,7 +7,7 @@ interceptor.nax:
 	Tooltip:
 		Name: Interceptor
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Aircraft:
 		AltitudeVelocity: 3000
 		InitialFacing: 768
@@ -116,7 +116,7 @@ drone.nax:
 	Tooltip:
 		Name: Drone
 	Buildable:
-		Description: template-carrier-slave.description
+		Description: template_carrier_slave.description
 	Aircraft:
 		AltitudeVelocity: 150
 		InitialFacing: 768
@@ -230,7 +230,7 @@ bf109.nax:
 		BuildPaletteOrder: 100
 		Prerequisites: ~airfield.nax, radar.nax, ~!up_me262.nax
 		Queue: Aircraft, RAAircraft
-		Description: actor-bpln.description
+		Description: actor_bpln.description
 	Health:
 		HP: 60000
 	Repairable:
@@ -316,7 +316,7 @@ me262.nax:
 		BuildPaletteOrder: 100
 		Prerequisites: ~airfield.nax, ~up_me262.nax
 		Queue: Aircraft, RAAircraft
-		Description: actor-bpln.description
+		Description: actor_bpln.description
 	Health:
 		HP: 75000
 	Repairable:
@@ -426,7 +426,7 @@ zep.nax:
 		BuildPaletteOrder: 20
 		Prerequisites: ~weap.nax, radar.nax
 		Queue: Aircraft, RAAircraft, Vehicle
-		Description: actor-shad.description
+		Description: actor_shad.description
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 35

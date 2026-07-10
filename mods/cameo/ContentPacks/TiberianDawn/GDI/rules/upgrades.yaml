@@ -131,7 +131,7 @@ up_longrangesensors:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
-		Description: upgrade-longrangesensors.description
+		Description: upgrade_longrangesensors.description
 		Prerequisites: ~hq.gdi, !up_longrangesensors
 	RenderSprites:
 		Image: longrangesensorsicon
@@ -146,7 +146,7 @@ up_armorpiercingbullets:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
-		Description: upgrade-armorpiercingbullets.description
+		Description: upgrade_armorpiercingbullets.description
 		Prerequisites: ~hq.gdi, !up_armorpiercingbullets
 	RenderSprites:
 		Image: armorpiercingbulletsicon
@@ -161,7 +161,7 @@ up_a10airstrike:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
-		Description: upgrade-a10airstrike.description
+		Description: upgrade_a10airstrike.description
 		Prerequisites: ~hq.gdi, !up_a10airstrike
 	RenderSprites:
 		Image: a10
@@ -176,7 +176,7 @@ up_heavyaircraftarmorplating:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-heavyaircraftarmorplating.description
+		Description: upgrade_heavyaircraftarmorplating.description
 		Prerequisites: ~eye, !up_heavyaircraftarmorplating
 	RenderSprites:
 		Image: aircraftarmorplatingicon
@@ -191,7 +191,7 @@ up_advancedmissiletargeting:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-advancedmissiletargeting.description
+		Description: upgrade_advancedmissiletargeting.description
 		Prerequisites: ~eye, !up_advancedmissiletargeting
 	RenderSprites:
 		Image: advancedmissiletargetingicon
@@ -206,7 +206,7 @@ up_cuttingedgeequipment:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-cuttingedgeequipment.description
+		Description: upgrade_cuttingedgeequipment.description
 		Prerequisites: ~eye, !up_cuttingedgeequipment
 	RenderSprites:
 		Image: cuttingedgeequipmenticon
@@ -221,7 +221,7 @@ up_highvelocitycannons:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-highvelocitycannons.description
+		Description: upgrade_highvelocitycannons.description
 		Prerequisites: ~eye, !up_highvelocitycannons
 	RenderSprites:
 		Image: highvelocitycannonsicon
@@ -236,7 +236,7 @@ up_lightweightarmorplating:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-lightweightarmorplating.description
+		Description: upgrade_lightweightarmorplating.description
 		Prerequisites: ~eye, !up_lightweightarmorplating
 	RenderSprites:
 		Image: lightweightarmorplatingicon
@@ -253,5 +253,5 @@ team_upgrade.up_lightweightarmorplating:
 	Tooltip:
 		Name: Lightweight Armor Plating
 	Buildable:
-		Description: upgrade-lightweightarmorplating.description
+		Description: upgrade_lightweightarmorplating.description
 	PlayerDisplayUpgrade:

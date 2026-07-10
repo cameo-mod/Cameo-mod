@@ -20,6 +20,14 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
 
 - The **name is ONE lowercase group without separators**: `ra_heatraytank`,
   `forgotten_ghoststalker`, `forgotten_experimentalmammothtank`.
+- **The only separator is the underscore — hyphens are banned in ALL
+  naming we own** (design 2026-07-10): actor ids, asset file names
+  (`cabal_dissolver_weapon.shp`, never `cabal_dissolver-weapon.shp`),
+  fluent keys (`actor_forgotten_scoopertank`, never `actor-…`), and every
+  yaml reference to them. Hyphens double as token boundaries in tooling
+  and caused the rename crash class. Exception: identifiers the ENGINE
+  defines or derives (built-in condition names like `build-incomplete`,
+  engine chrome/fluent keys) stay as the engine spells them.
 - **Game prefix only on actual collisions** (`td_gdi` vs `ts_gdi`,
   `ra1_soviet` vs `ra2_soviet`). Unique factions (cabal, forgotten, yuri,
   ordos, terran…) take no game prefix. Prefixes are added the day a

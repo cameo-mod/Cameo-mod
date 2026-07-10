@@ -14,7 +14,7 @@ twister.futu:
 		BuildPaletteOrder: 100
 		Prerequisites: ~launchpad.futu
 		Queue: Aircraft, RAAircraft
-		Description: actor-future_twister.description
+		Description: actor_future_twister.description
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 10
@@ -89,7 +89,7 @@ cryo.futu:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
 		BuildPaletteOrder: 20
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_cryocopter.futu
-		Description: actor-futu_cryo.description
+		Description: actor_futu_cryo.description
 	Valued:
 		Cost: 1350
 	Tooltip:
@@ -194,7 +194,7 @@ harbinger.futu:
 		BuildPaletteOrder: 100
 		Prerequisites: ~launchpad.futu, egshock.futu, ~up_harbinger.futu
 		Queue: Aircraft, RAAircraft
-		Description: actor-future_harbinger.description
+		Description: actor_future_harbinger.description
 	Aircraft:
 		CruiseAltitude: 3840
 		TurnSpeed: 8

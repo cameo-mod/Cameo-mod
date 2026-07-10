@@ -59,7 +59,7 @@ quas.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian
 		Queue: Vehicle, RAVehicle
-		Description: actor-aaquas.description
+		Description: actor_aaquas.description
 	Mobile:
 		Locomotor: lighttracked
 		Speed: 125
@@ -124,7 +124,7 @@ dragonfly.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian
 		Queue: Vehicle, RAVehicle
-		Description: template-opentopped.description
+		Description: template_opentopped.description
 	Mobile:
 		Locomotor: hover
 		Speed: 100
@@ -182,7 +182,7 @@ lynx.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 90
@@ -261,7 +261,7 @@ oilt.asian:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
 		Prerequisites: ~cgweap.asian, cgradr.asian, cgtnkr.asian
-		Description: actor-aaoilt.description
+		Description: actor_aaoilt.description
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -329,7 +329,7 @@ drmn.asian:
 		BuildDurationModifier: 100
 		Prerequisites: ~cgrefn.asian
 		Queue: Vehicle, RAVehicle
-		Description: template-harvester.description
+		Description: template_harvester.description
 	Health:
 		HP: 25000
 	Repairable:
@@ -385,7 +385,7 @@ pulv.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian, cgradr.asian, ~!up_mecha.asian
 		Queue: Vehicle, RAVehicle
-		Description: actor-aapulv.description
+		Description: actor_aapulv.description
 	Mobile:
 		Speed: 65
 		TurnSpeed: 13
@@ -442,7 +442,7 @@ ptnk.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian, up_ptnk.asian, cgtech.asian
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -500,7 +500,7 @@ viper.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian, cgradr.asian
 		Queue: Vehicle, RAVehicle
-		Description: actor-aaviper.description
+		Description: actor_aaviper.description
 	Mobile:
 		Locomotor: hover
 		Speed: 125
@@ -561,7 +561,7 @@ mlrs.asian:
 		BuildPaletteOrder: 80
 		Prerequisites: ~cgweap.asian, up_mlrs.asian, cgtech.asian
 		Queue: Vehicle, RAVehicle
-		Description: actor-mlrs.description
+		Description: actor_mlrs.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -613,7 +613,7 @@ hotwi.asian:
 		BuildPaletteOrder: 90
 		Prerequisites: ~cgweap.asian, up_howitzer.asian, cgmiac.asian
 		Queue: Vehicle, RAVehicle
-		Description: actor-aahowi.description
+		Description: actor_aahowi.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
@@ -689,7 +689,7 @@ ftnk.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian, up_ftnk.asian
 		Queue: Vehicle, RAVehicle
-		Description: actor-ftnk.description
+		Description: actor_ftnk.description
 	Mobile:
 		Speed: 85
 		TurnSpeed: 34
@@ -753,7 +753,7 @@ mecha.asian:
 		BuildPaletteOrder: 75
 		Prerequisites: ~cgweap.asian, cgtech.asian, ~up_mecha.asian
 		Queue: Vehicle, RAVehicle
-		Description: actor-aamecha.description
+		Description: actor_aamecha.description
 	Mobile:
 		Speed: 55
 		TurnSpeed: 22
@@ -817,7 +817,7 @@ railt.asian:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cgweap.asian, cgtech.asian, ~!up_railt2.asian
 		Queue: Vehicle, RAVehicle
-		Description: template-mbt.description
+		Description: template_mbt.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 65
@@ -905,7 +905,7 @@ wtrt.asian:
 		BuildPaletteOrder: 80
 		Prerequisites: ~cgweap.asian, up_warturtle.asian, cgmiac.asian
 		Queue: Vehicle, RAVehicle
-		Description: template-opentopped.description
+		Description: template_opentopped.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15

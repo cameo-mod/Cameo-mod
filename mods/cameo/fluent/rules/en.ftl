@@ -1,19 +1,19 @@
-power-ioncannon =
+power_ioncannon =
    .name = Ion Cannon
    .description = Initiate an Ion Cannon strike.
       Applies instant damage to a small area.
 
-power-clustermissile =
+power_clustermissile =
    .name = Cluster Missile
    .description = Tactical cluster missile.
    Deals heavy damage in an area.
 
-power-chemicalmissile =
+power_chemicalmissile =
    .name = Chemical Missile
    .description = Tactical cluster missile with additional Tiberium-based warheads.
    Deals heavy damage in an area and leaves harmful corrosive clouds.
 
-power-nuke =
+power_nuke =
    .tdname = Nuclear Strike
    .raname = Atomic Bomb
    .d2kname = Nuclear Weapon
@@ -22,31 +22,31 @@ power-nuke =
    .d2kdescription = Launches a missile which payload releases a shockwave that devastates a large area,
    while electro-magnetic pulse disables buildings around the target for some time.
 
-actor-gtwr =
+actor_gtwr =
    .name = Guard Tower
 
-actor-dog =
+actor_dog =
    .name = Attack Dog
    .description = Can detect cloaked and disguised units.
       Strong vs Infantry
 
-actor-rasniper =
+actor_rasniper =
    .name = Allied Sniper
    .description = Camouflaged soldier that can detect cloaked units.
         Strong vs Infantry
 
-actor-medi =
+actor_medi =
    .description = Heals nearby infantry.
         Unarmed
    .name = Medic
 
-actor-mech =
+actor_mech =
    .description = Repairs nearby vehicles and restores
       husks to working condition by capturing them.
       Unarmed
    .name = Mechanic
 
-actor-spy =
+actor_spy =
    .description = Infiltrates enemy structures for intel or
     sabotage. Exact effect depends on the
     building infiltrated.
@@ -55,66 +55,66 @@ actor-spy =
    .disguisetooltip-name = Spy
    .disguisetooltip-generic-name = Soldier
 
-actor-v1truck =
+actor_v1truck =
    .description = Dumb fire rocket artillery.
       Strong vs. Infantry, Buildings.
       Weak vs. Aircraft, Tanks
    .name = V1 Truck
 
-actor-v2rl =
+actor_v2rl =
    .description = Long-range rocket artillery.
       Strong vs Infantry, Buildings
       Weak vs Vehicles, Aircraft
    .name = V2 Rocket Launcher
 
-actor-2tnk =
+actor_2tnk =
    .description = Allied main battle tank.
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
    .name = Allied Medium Tank
 
-actor-heavyaatank =
+actor_heavyaatank =
    .description = Allied heavy anti air tank.
       Strong vs Aircraft
       Weak vs Tanks
    .name = Allied Heavy AA Tank
 
-actor-3tnk =
+actor_3tnk =
    .description = Soviet main battle tank armed with dual cannons.
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
    .name = Soviet Heavy Tank
 
-actor-mnly =
+actor_mnly =
    .description = Lays mines to destroy unwary enemy units.
       Can detect and clear mines.
       Unarmed.
    .name = Minelayer
 
-actor-ttnk =
+actor_ttnk =
    .description = Tank with mounted Tesla coil.
       Strong vs Ground
       Weak vs Aircraft
    .name = Tesla Tank
 
-actor-ftrk =
+actor_ftrk =
    .description = Mobile unit with mounted Flak cannon.
       Strong vs Infantry, Light armor, Aircraft
       Weak vs Tanks
    .name = Mobile Flak
 
-actor-dtrk =
+actor_dtrk =
    .description = Truck with actively armed nuclear
     explosives. Has very weak armor.
    .name = Demolition Truck
 
-actor-ctnk =
+actor_ctnk =
    .description = Armed with missiles.
     Can teleport anywhere.
       Strong vs Everything
    .name = Chrono Tank
 
-actor-qtnk =
+actor_qtnk =
    .description = Deals seismic damage to nearby vehicles
     and structures.
       Strong vs Vehicles, Buildings
@@ -122,230 +122,230 @@ actor-qtnk =
    .name = MAD Tank
    .generic-name = Tank
 
-actor-mgg =
+actor_mgg =
    .description = Regenerates the shroud nearby,
     obscuring the area.
         Unarmed
    .name = Mobile Gap Generator
 
-actor-mrj =
+actor_mrj =
    .name = Mobile Radar Jammer
    .description = Jams nearby enemy radar domes
     and deflects incoming missiles.
         Unarmed
 
-actor-tiger =
+actor_tiger =
    .name = Tiger Heavy Tank
    .description = Advanced main battle tank.
       Immune to EMP.
 
-actor-tnkd =
+actor_tnkd =
    .name = Tank Destroyer
    .description = Strong vs Vehicles
         Weak vs Infantry, Aircraft
 
-actor-sapc =
+actor_sapc =
    .description = Lightly armored infantry transport which
     can cloak. Armed with anti-ground missiles.
         Strong vs Light armor
         Weak vs Infantry, Tanks, Aircraft
    .name = Phase Transport
 
-actor-sheridan =
+actor_sheridan =
    .description = General-purpose light tank.
       Can attack air with missiles.
         Strong vs Infantry, vehicles
    .name = Sheridan
 
-actor-rapierjumpjet =
+actor_rapierjumpjet =
    .description = Fast multirole fighter-bomber.
      Strong vs Aircraft, Buildings
    .name = Rapier Jumpjet
 
-upgrade-gapgen =
+upgrade_gapgen =
    .description = Allows construction of the Gap Generator
       and the Mobile Gap Generator and the Phase Transport.
    .name = Unlock Gap Generator Technology
 
-actor-mortarsoldier =
+actor_mortarsoldier =
    .name = Mortar Soldier
    .description = Long range siege infantry.
         Strong vs Infantry, Buildings
         Weak vs Aircraft
 
-actor-shok =
+actor_shok =
    .description = Elite infantry with portable Tesla coils.
         Strong vs Infantry, Vehicles
         Weak vs Aircraft
    .name = Shock Trooper
 
-actor-volkov =
+actor_volkov =
    .description = Soviet Experimental Cyborg Super Soldier
    armed with a magnetic pistol and exploding bullets.
         Strong vs Infantry, Vehicles
         Weak vs Aircraft
    .name = Volkov
 
-actor-gtnk =
+actor_gtnk =
    .description = Mobile unit with mounted gatling cannon.
         Strong vs Infantry, Light armor, Aircraft
         Weak vs Tanks
    .name = Gatling Tank
 
-actor-ttnk2 =
+actor_ttnk2 =
    .description = Tank with mounted tesla coil.
       Can shoot down missiles.
       Strong vs Ground
    .name = Heavy Tesla Tank
 
-actor-monstertank =
+actor_monstertank =
    .description = Remote-controlled supertank, armed
       with nuclear cannons and heavy missiles.
       Almost indestructible.
         Strong vs Everything
    .name = Monster Tank
 
-actor-btr =
+actor_btr =
    .description = NBC-protected infantry transport,
       armed with an autocannon.
       Can attack air.
    .name = BTR-80
 
-actor-kotin =
+actor_kotin =
    .description = Tank armed with nuclear shells.
       Attacks leave radiation.
         Strong vs Vehicles
    .name = Kotin Nuclear Tank
 
-actor-mignuke =
+actor_mignuke =
    .description = Fast nuclear bomber.
         Strong vs Buildings
    .name = Supersonic Nuclear Bomber
 
-actor-mig =
+actor_mig =
    .description = Multirole fighter.
       Strong vs Vehicles, Aircraft
       Weak vs air defenses
    .name = MiG
 
-actor-yak =
+actor_yak =
    .description = Attack plane armed with
     dual machine guns.
       Strong vs infantry, Light armor
       Weak vs air defenses
    .name = Yak
 
-actor-su57 =
+actor_su57 =
    .description = Multirole fighter-bomber.
         Strong vs Everything
    .name = Su-57 Attack Bomber
 
-actor-raheli =
+actor_raheli =
    .description = Helicopter gunship armed
     with multi-purpose missiles.
       Strong vs Buildings, Vehicles, Aircraft
       Weak vs infantry, air defenses
    .name = Longbow
 
-actor-hind =
+actor_hind =
    .description = Helicopter gunship armed
     with dual chainguns.
       Strong vs infantry, Light armor
       Weak vs air defenses
    .name = Hind
 
-actor-mh60 =
+actor_mh60 =
    .description = Helicopter gunship armed
     with dual chainguns.
       Strong vs infantry, Light armor
       Weak vs air defenses
    .name = Black Hawk
 
-actor-raafld =
+actor_raafld =
    .description = Produces aircraft.
       Provides Spy Plane, Paratroopers, and Parabombs.
    .name = Soviet Airfield
 
-actor-atek =
+actor_atek =
    .description = Provides advanced technologies
       and a GPS satellite.
 
-power-gps =
+power_gps =
    .name = GPS Satellite
    .description = Reveals locations of enemy units.
       Requires power to operate.
 
-power-spyplane =
+power_spyplane =
    .description = Reveals an area of the map and cloaked enemy units.
    .name = Spy Plane
 
-power-paratroopers =
+power_paratroopers =
    .description = Drops infantry at the targeted location.
    .name = Paratroopers
 
-power-reinforcements =
+power_reinforcements =
    .description = Drops infantry and vehicles at the targeted location.
    .name = Rapid Reinforcements
 
-power-parabombs =
+power_parabombs =
    .description = Badgers drop bombs at the targeted location.
    .name = Parabombs
 
-power-super-bombers =
+power_super_bombers =
    .description = Super Bombers drop bombs at the targeted location.
    .name = Super Bomber Airstrike
 
-actor-mslo =
+actor_mslo =
    .description = Provides an atomic bomb.
       Requires power to operate.
    .name = Missile Silo
 
-actor-iron =
+actor_iron =
    .description = Makes vehicles temporarily invincible.
       Requires power to operate.
    .name = Iron Curtain
 
-power-ironcurtain =
+power_ironcurtain =
    .description = Makes a group of units temporarily invulnerable.
    .name = Invulnerability
 
-actor-pdox =
+actor_pdox =
    .description = Teleports vehicles across the map.
       Requires power to operate.
    .name = Chronosphere
 
-power-chronoshift =
+power_chronoshift =
    .description = Teleports a group of units across the map.
    .name = Chronoshift
 
-actor-pbox =
+actor_pbox =
    .name = Pillbox
    .description = Static defense with a fireport for
     a garrisoned soldier.
 
-actor-hbox =
+actor_hbox =
    .name = Camo Pillbox
    .description = Camouflaged static defense with a fireport
     for 2 garrisoned soldiers.
     Can detect cloaked units.
 
-actor-agun =
+actor_agun =
    .description = Anti-air base defense.
     Requires power to operate.
    .name = AA Gun
 
-actor-gap =
+actor_gap =
    .name = Gap Generator
    .description = Obscures the enemy's view with shroud.
     Requires power to operate.
 
-actor-ftur =
+actor_ftur =
    .description = Anti-Infantry base defense.
       Strong vs Infantry, Light armor
       Weak vs Tanks, Aircraft
    .name = Flame Tower
 
-actor-tsla =
+actor_tsla =
    .description = Advanced base defense.
     Requires power to operate.
     Can detect cloaked units.
@@ -353,43 +353,43 @@ actor-tsla =
       Weak vs Aircraft
    .name = Tesla Coil
 
-actor-bastion =
+actor_bastion =
    .description = Bunker with a cannon and fireports
       for 3 garrisoned soldiers.
    .name = Bastion Artillery Bunker
 
-actor-mgnest =
+actor_mgnest =
    .description = Basic base defense.
       Can attack aircraft.
         Strong vs Infantry, Aircraft
         Weak vs Tanks
    .name = MG Nest
 
-actor-waveforceturret =
+actor_waveforceturret =
    .description = Advanced base defense that
       damages enemies in a line.
         Strong vs Ground
    .name = Waveforce Turret
 
-actor-rasamurai =
+actor_rasamurai =
    .description = Melee warrior armed with a katana.
         Strong vs Infantry
         Weak vs Aircraft
    .name = Samurai
 
-actor-ramaid =
+actor_ramaid =
    .description = Artillery and anti-air infantry.
         Strong vs Infantry, Aircraft
         Weak vs Tanks
    .name = Archer Maiden
 
-actor-rocketangel =
+actor_rocketangel =
    .description = Airborne soldier.
         Strong vs Infantry, Aircraft
         Weak vs air defenses
    .name = Rocket Angel
 
-actor-hakurei =
+actor_hakurei =
    .description = Shrine maiden specializing in
    exterminating youkai.
    Can deploy to cast a spell card
@@ -398,25 +398,25 @@ actor-hakurei =
      Strong vs Heroes
    .name = Exorcist
 
-actor-typeigo =
+actor_typeigo =
    .name = I-Go Medium Tank
 
-actor-typechiha =
+actor_typechiha =
    .name = Chi-Ha Heavy Tank
 
-actor-nanobggy =
+actor_nanobggy =
    .description = Remote control vehicle for a nanite swarm.
    Attacks bounce and heal nearby units.
         Strong vs Infantry
         Weak vs Tanks, Aircraft
    .name = Nanodrone Buggy
 
-actor-jphover =
+actor_jphover =
    .description = Amphibious infantry transport.
       Can attack air.
    .name = Hovercraft
 
-actor-jpcore =
+actor_jpcore =
    .name-factory = Core (War Factory)
    .description-factory = Deploys into a War Factory.
       Amphibious
@@ -442,37 +442,37 @@ actor-jpcore =
    .description-tech-center = Deploys into a Tech Center.
       Amphibious
 
-actor-waveforcetank =
+actor_waveforcetank =
    .name = Waveforce Tank
    .description = Tank that damages enemies in a line.
       Strong vs Vehicles, Infantry
       Weak vs Aircraft
 
-actor-waveforcearty =
+actor_waveforcearty =
    .name = Waveforce Artillery
    .description = Artillery that damages enemies in a line.
       Strong vs Ground
       Weak vs Aircraft
 
-actor-jpbggy =
+actor_jpbggy =
    .name = Grenade Buggy
    .description = Fast scout and anti-infantry vehicle.
       Strong vs Infantry
       Weak vs Tanks
 
-actor-jphovert =
+actor_jphovert =
    .name = Hovercraft Flametank
    .description = Amphibious flamethrower.
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
-actor-jpbomber =
+actor_jpbomber =
    .name = Japanese Bomber
    .description = Aircraft equipped with machine guns and bombs.
       Strong vs Infantry, Buildings
       Weak vs Air Defense, Aircraft
 
-actor-oitank =
+actor_oitank =
    .name = O-I Tank
    .description = Superheavy tank with multiple turrets.
         Strong vs Ground Targets
@@ -482,26 +482,26 @@ actor-oitank =
    an onboard exorcist.
         Strong vs Everything
 
-actor-dd =
+actor_dd =
    .description = Fast multi-role ship.
     Can detect submarines.
       Strong vs Naval units, Vehicles, Aircraft
       Weak vs Infantry
    .name = Destroyer
 
-actor-ca =
+actor_ca =
    .description = Very slow long-range ship.
       Strong vs Buildings, Ground units
       Weak vs Naval units, Aircraft
    .name = Cruiser
 
-actor-lst =
+actor_lst =
    .description = General-purpose naval transport.
     Can carry infantry and tanks.
       Unarmed
    .name = Transport
 
-actor-jpspeedboat =
+actor_jpspeedboat =
    .description = Fast attack craft armed with
       gatling cannons.
       Can attack air.
@@ -509,21 +509,21 @@ actor-jpspeedboat =
         Weak vs Ships
    .name = Japanese Speedboat
 
-actor-yamatobattleship =
+actor_yamatobattleship =
    .description = Very slow long-range ship.
       Can attack air.
         Strong vs Buildings, Ground units
         Weak vs Naval units, Aircraft
    .name = Yamato Battleship
 
-actor-ra2e1 =
+actor_ra2e1 =
    .name = G. I.
    .description = General-purpose infantry.
    Can deploy for additional firepower.
         Strong vs Infantry
         Weak vs Air
 
-actor-ggi =
+actor_ggi =
    .name = Guardian GI
    .description = Anti-vehicle infantry.
    Can deploy to use anti-tank
@@ -531,450 +531,450 @@ actor-ggi =
         Strong vs Vehicles
         Weak vs Infantry
 
-actor-cleg =
+actor_cleg =
    .name = Chrono Legionnaire
    .description = Freezes targets in time
    and erases them.
         Strong vs single targets
         Weak vs Aircraft
 
-actor-ra2snipe =
+actor_ra2snipe =
    .name = Sniper
    .description = Strong vs Infantry
 
-actor-seal =
+actor_seal =
    .name = SEAL
    .description = Elite amphibious infantry.
       Can demolish buildings and ships.
         Strong vs Infantry, Buildings, Ships
         Weak vs Vehicles
 
-actor-ra2spy =
+actor_ra2spy =
    .description = Infiltrates enemy structures for intel or
     sabotage. Exact effect depends on the
     building infiltrated.
     Can detect spies.
    .name = Spy
 
-actor-ra2rock =
+actor_ra2rock =
    .description = Flying infantry.
         Strong vs Infantry, Aircraft
         Weak vs Air Defense
    .name = Rocketeer
 
-actor-cmin =
+actor_cmin =
    .name = Chrono Miner
    .description = Collects resources and teleports to refinery when full.
 
-actor-fv =
+actor_fv =
    .name = Infantry Fighting Vehicle
    .description = Changes turret with passenger.
 
-actor-sref =
+actor_sref =
    .name = Prism Tank
    .description = Armed with a prism cannon.
         Strong vs Infantry, Buildings
         Weak vs Tanks, Aircraft
 
-actor-mgtk =
+actor_mgtk =
    .name = Mirage Tank
    .description = Disguises when stationary.
         Strong vs Infantry, Vehicles
         Weak vs Aircraft
 
-actor-ra2tnkd =
+actor_ra2tnkd =
    .name = Tank Destroyer
    .description = Armed with a sabot cannon.
         Strong vs Vehicles
 
-actor-shad =
+actor_shad =
    .name = Night Hawk
    .description = Transport helicopter armed with a machine gun.
 
-actor-falc =
+actor_falc =
    .name = Harrier
    .description = VTOL fighter armed with missiles.
         Strong vs Vehicles, Aircraft
         Weak vs Air Defense
 
-actor-beag =
+actor_beag =
    .name = Black Eagle
    .description = VTOL heavy bomber.
       Strong vs Ground
         Weak vs Aircraft, Air Defense
 
-actor-dest =
+actor_dest =
    .name = Destroyer
    .description = Armed with a cannon.
       Can deploy an Osprey against submarines.
         Strong vs Ships
         Weak vs Air
 
-actor-aegis =
+actor_aegis =
    .name = Aegis Cruiser
    .description = Anti-aircraft missile warship.
         Strong vs Air
         Weak vs Ships
 
-actor-ra2carrier =
+actor_ra2carrier =
    .name = Aircraft Carrier
    .description = Deploys fighters against targets.
         Strong vs Ground
         Weak vs Aircraft, Ships
 
-actor-dlph =
+actor_dlph =
    .name = Dolphin
    .description = Armed with a sonic beam.
       Can remove squids from ships.
         Strong vs Ships
 
-actor-flakt =
+actor_flakt =
    .name = Flak Trooper
    .description = Anti-air infantry.
         Strong vs Infantry, Aircraft
         Weak vs Vehicles
 
-actor-shk =
+actor_shk =
    .description = Heavy infantry with portable Tesla coils.
       Can charge tesla coils.
         Strong vs Infantry, Vehicles
         Weak vs Aircraft
    .name = Tesla Trooper
 
-actor-ra2harv =
+actor_ra2harv =
    .name = War Miner
    .description = Collects resources.
       Armed with a machinegun.
 
-actor-deso =
+actor_deso =
    .name = Desolator
    .description = Armed with a radiation weapon.
       Can deploy to irradiate area.
         Strong vs Infantry
 
-actor-ivan =
+actor_ivan =
    .name = Crazy Ivan
    .description = Plants time bombs on targets.
       Explodes when killed
 
-actor-boris =
+actor_boris =
    .name = Boris
    .description = Commando armed with a rifle.
       Can send airstrikes against buildings.
         Strong vs Ground
 
-actor-htk =
+actor_htk =
    .name = Flak Track
    .description = Troop transport armed with a flak cannon.
         Strong vs Infantry, Aircraft
         Weak vs Vehicles
 
-actor-v3 =
+actor_v3 =
    .name = V3 Rocket Launcher
    .description = Long-range rocket artillery.
       Rockets can be shot down
         Strong vs Buildings
         Weak vs Air
 
-actor-dron =
+actor_dron =
    .name = Terror Drone
    .description = Infects and damages vehicles.
       Instantly kills infantry.
 
-actor-schp =
+actor_schp =
    .name = Siege Chopper
    .description = Helicopter that can deploy into a cannon.
         Strong vs Infantry when airborne
         Strong vs Buildings when deployed
         Weak vs Aircraft, Air Defense
 
-actor-zep =
+actor_zep =
    .name = Kirov Airship
    .description = Heavy bomber airship.
         Strong vs Ground
         Weak vs Air
 
-actor-bpln =
+actor_bpln =
    .name = MiG Bomber
    .description = Fast multirole fighter-bomber.
         Strong vs Ground, Aircraft
         Weak vs Air Defense
 
-actor-ra2sub =
+actor_ra2sub =
    .name = Typhoon Attack Sub
    .description = Armed with torpedoes.
         Strong vs Ships
 
-actor-hyd =
+actor_hyd =
    .name = Sea Scorpion
    .description = Armed with a flak cannon.
         Strong vs Air
         Weak vs Ships
 
-actor-dred =
+actor_dred =
    .name = Dreadnought
    .description = Siege warship armed with missiles.
       Missiles can be shot down.
         Strong vs Ground
         Weak vs Ships, Air
 
-actor-sqd =
+actor_sqd =
    .name = Giant Squid
    .description = Can entangle ships.
         Strong vs Ships
 
-actor-brute =
+actor_brute =
    .name = Brute
    .description = Melee infantry.
         Strong vs Infantry, Vehicles
 
-actor-virus =
+actor_virus =
    .name = Virus
    .description = Armed with a toxin rifle.
       Victims explode and release toxins
         Strong vs Infantry
 
-actor-yuri =
+actor_yuri =
    .name = Yuri Clone
    .description = Can mind-control enemy units.
       Can deploy to unleash a psychic blast.
         Weak vs Aircraft, Robots
 
-actor-yurix =
+actor_yurix =
    .name = Yuri Prime
    .description = Can mind-control enemy units and buildings.
       Can deploy to unleash a psychic blast.
         Weak vs Aircraft, Robots
 
-actor-gtrp =
+actor_gtrp =
    .name = Gatling Trooper
    .description = Armed with a gatling gun.
         Strong vs Infantry, Aircraft
 
-actor-biot =
+actor_biot =
    .name = Bio Trooper
    .description = Armed with a toxin spray.
         Strong vs Infantry, Buildings
 
-actor-ytnk =
+actor_ytnk =
    .name = Gatling Tank
    .description = Tank armed with dual gatling cannons.
       Firepower increases during sustained firing
         Strong vs Infantry, Aircraft
         Weak vs heavy vehicles
 
-actor-tele =
+actor_tele =
    .name = Magnetron
    .description = Immobilizes and disables vehicles.
         Strong vs Vehicles, Buildings
         Weak vs Infantry, Aircraft
 
-actor-caos =
+actor_caos =
    .name = Chaos Drone
    .description = Releases a gas that causes units
       to go berserk and attack each other.
 
-actor-mind =
+actor_mind =
    .name = Master Mind
    .description = Can mind control up to 3 units
       without damaging self.
 
-actor-disk =
+actor_disk =
    .name = Floating Disc
    .description = Flying saucer armed with lasers.
       Can shut down power plants and defenses when overhead
       Can steal resources from refineries and silos
         Strong vs Everything
 
-actor-bsub =
+actor_bsub =
    .name = Boomer
    .description = Submarine armed with torpedoes
       and cruise missiles.
       Missiles can be shot down.
         Strong vs Everything
 
-actor-smin =
+actor_smin =
    .name = Mobile Slave Miner
    .description = Deploys into a Slave Miner.
       Armed with a machine-gun.
 
-actor-yarefn =
+actor_yarefn =
    .name = Slave Miner
    .description = Processes resources.
       Armed with a machine-gun.
 
-actor-gaairc =
+actor_gaairc =
    .name = Airforce Command HQ
    .description = Produces aircraft and provides radar.
 
-actor-atesla =
+actor_atesla =
    .name = Prism Tower
    .description = Advanced base defense.
    Requires power to operate.
         Strong vs Ground
 
-actor-gtgcan =
+actor_gtgcan =
    .name = Grand Cannon
    .description = Long-range base defense.
    Requires power to operate.
         Strong vs Ground
 
-actor-gaorep =
+actor_gaorep =
    .name = Ore Purifier
    .description = Increases income from minerals by 25%.
 
-actor-garobo =
+actor_garobo =
    .name = Robot Control Center
    .description = Unlocks and controls Robot Tanks.
 
-actor-gaweat =
+actor_gaweat =
    .name = Weather Control Center
    .description = Provides Lightning Storm power.
       Requires power to operate.
 
-actor-gaspysat =
+actor_gaspysat =
    .name = Spy Satellite Uplink
    .description = Provides Spy Satellite scans.
 
-actor-nanrct =
+actor_nanrct =
    .name = Nuclear Reactor
    .description = Generates power.
       Explodes violently when destroyed.
 
-actor-nabnkr =
+actor_nabnkr =
    .name = Battle Bunker
    .description = Defense with fireports for
       6 garrisoned soldiers.
 
-actor-ra2tesla =
+actor_ra2tesla =
    .name = Tesla Coil
    .description = Advanced base defense.
       Can be charged by up to 3 tesla troopers.
       Strong vs Ground
 
-actor-namisl =
+actor_namisl =
    .name = Nuclear Missile Silo
    .description = Provides a nuclear missile.
       Requires power to operate.
 
-actor-yapowr =
+actor_yapowr =
    .name = Bio Reactor
    .description = Generates power.
       Can be loaded to increase output.
       Explodes violently if destroyed when loaded.
 
-actor-napsis =
+actor_napsis =
    .name = Psychic Sensor
    .description = Provides radar and Psychic Reveal power.
       Requires power to operate.
 
-actor-natbnk =
+actor_natbnk =
    .name = Tank Bunker
    .description = Defense with a fireport for a
       garrisoned tank.
 
-actor-yaggun =
+actor_yaggun =
    .name = Gatling Cannon
    .description = Anti-infantry and anti-aircraft defense.
       Requires power to operate
 
-actor-yapsyt =
+actor_yapsyt =
    .name = Psychic Tower
    .description = Can mind-control units.
       Can detect cloaked units.
       Requires power to operate.
 
-actor-yappet =
+actor_yappet =
    .name = Psychic Dominator
    .description = Provides Psychic Dominator power.
       Requires power to operate.
 
-actor-yagntc =
+actor_yagntc =
    .name = Genetic Mutator
    .description = Provides Genetic Mutator power.
       Requires power to operate.
 
-actor-ts_nod_tiberiumwastefacility =
+actor_ts_nod_tiberiumwastefacility =
    .name = Tiberium Waste Facility
    .description = Increases income from minerals by 25%.
    Unlocks Chemical Missile for the Missile Silo.
 
-actor-ts_nod_powerplant =
+actor_ts_nod_powerplant =
    .name = Power Plant
    .description = Provides power for other structures.
 
-actor-ts_nod_radar =
+actor_ts_nod_radar =
    .name = Radar
    .description = Provides radar.
    Unlocks higher-tech units and buildings.
    Requires power to operate.
 
-actor-ts_gdi_radar =
+actor_ts_gdi_radar =
    .name = Radar
    .description = Provides radar.
    Unlocks higher-tech units and buildings.
    Requires power to operate.
 
-actor-cabal_techcenter =
+actor_cabal_techcenter =
    .name = Cabal Tech Center
    .description = Provides CABAL advanced technologies.
    Only one may be built at a time.
 
-actor-cabal_core =
+actor_cabal_core =
    .name = CABAL Core
    .description = Provides CABAL advanced technologies.
    Provides Data Worm support power.
 
-actor-forgotten_mutant =
+actor_forgotten_mutant =
    .name = Mutant
    .description = Cheap mutant scavenger armed with dual pistols.
       Replaced by the Mutant Soldier once a Chemical Plant is built.
       Strong vs Infantry
       Weak vs Vehicles, Aircraft
 
-actor-forgotten_mutantsoldier =
+actor_forgotten_mutantsoldier =
    .name = Mutant Soldier
    .description = Mutant rifleman armed with an armor-piercing carbine.
       Requires a Chemical Plant and replaces the basic Mutant.
       Strong vs Infantry
       Weak vs Tanks, Aircraft
 
-actor-forgotten_rocketinfantry =
+actor_forgotten_rocketinfantry =
    .name = Rocket Infantry
    .description = Mutant missile trooper effective against vehicles and aircraft.
       Chemical Weapons research loads chemical warheads.
       Strong vs Vehicles, Aircraft
       Weak vs Infantry
 
-actor-forgotten_zombiemutant =
+actor_forgotten_zombiemutant =
    .name = Zombie Mutant
    .description = Shambling, heavily mutated brute that tears enemies apart at close quarters.
       Melee only; cannot attack aircraft.
       Strong vs Ground
       Weak vs Aircraft
 
-actor-forgotten_mutantsniper =
+actor_forgotten_mutantsniper =
    .name = Mutant Sniper
    .description = Long-range marksman.
       Can only target infantry, and picks them out of garrisoned structures.
       Strong vs Infantry
       Weak vs Vehicles, Aircraft
 
-actor-forgotten_chemsprayinfantry =
+actor_forgotten_chemsprayinfantry =
    .name = Chem Spray Infantry
    .description = Mutant soldier who hoses targets down with liquid Tiberium.
       Chemical Weapons research loads a stronger mixture.
       Strong vs Ground
       Weak vs Aircraft
 
-actor-forgotten_mutantsergeant =
+actor_forgotten_mutantsergeant =
    .name = Mutant Sergeant
    .description = Elite mutant officer whose gun also reaches aircraft.
       Propaganda aura: nearby friendly units gain 10% firepower and speed, take 10% less damage, reload 10% faster, slowly heal and cannot be mind-controlled.
       Strong vs Infantry
       Weak vs Tanks
 
-actor-forgotten_runnershotgal =
+actor_forgotten_runnershotgal =
    .name = Runner Shotgal
    .description = Cloaked mutant skirmisher armed with a heavy shotgun.
       Uncloaks briefly when firing.
@@ -982,28 +982,28 @@ actor-forgotten_runnershotgal =
       Strong vs Ground
       Weak vs Aircraft
 
-actor-forgotten_mutanthijacker =
+actor_forgotten_mutanthijacker =
    .name = Mutant Hijacker
    .description = Cloaked thief who commandeers enemy vehicles.
       Unarmed; consumed when stealing a vehicle.
       Can also enter abandoned vehicles and drive them out.
       Maximum 1 can be trained.
 
-actor-forgotten_tiberianfiend =
+actor_forgotten_tiberianfiend =
    .name = Tiberian Fiend
    .description = Canine Tiberium predator that hurls razor-sharp shards at ground and air targets.
       Chemical Weapons research sharpens the shards.
       Replaced by the Vinifera Fiend after that promotion.
       Strong vs Everything
 
-actor-forgotten_viniferafiend =
+actor_forgotten_viniferafiend =
    .name = Vinifera Fiend
    .description = Vinifera-fed fiend hurling blue Tiberium shards at ground and air targets.
       Chemical Weapons research sharpens the shards.
       Requires the Vinifera Fiend promotion and replaces the Tiberian Fiend.
       Strong vs Everything
 
-actor-forgotten_engineer =
+actor_forgotten_engineer =
    .name = Engineer
    .description = Mutant field engineer armed with a light pistol.
       Captures enemy structures; consumed on capture.
@@ -1011,7 +1011,7 @@ actor-forgotten_engineer =
       Defuses explosives and removes parasites.
       Can enter abandoned vehicles and drive them out.
 
-actor-forgotten_ghoststalker =
+actor_forgotten_ghoststalker =
    .name = Ghost Stalker
    .description = Elite commando armed with a silenced long-range chemical rifle and C4 charges.
       Demolishes buildings instantly with C4.
@@ -1021,34 +1021,34 @@ actor-forgotten_ghoststalker =
       Strong vs Ground
       Weak vs Aircraft
 
-actor-forgotten_raidercar =
+actor_forgotten_raidercar =
    .name = Raider Car
    .description = Fast scout car whose machine gun can also strafe aircraft.
       Replaced by the Bowler after that promotion.
       Strong vs Infantry
       Weak vs Tanks
 
-actor-forgotten_ruiner =
+actor_forgotten_ruiner =
    .name = Ruiner
    .description = Fast raiding buggy firing light missiles at ground and air targets.
       Chemical Weapons research loads chemical missiles.
       Strong vs Everything
 
-actor-forgotten_rattytank =
+actor_forgotten_rattytank =
    .name = Ratty Tank
    .description = Fast, expendable battle tank welded together from scrap.
       Chemical Weapons research loads chemical shells.
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
 
-actor-forgotten_bowler =
+actor_forgotten_bowler =
    .name = Bowler
    .description = Armored raiding car whose cannon also reaches aircraft.
       Requires the Bowler promotion and replaces the Raider Car.
       Strong vs Infantry
       Weak vs Tanks
 
-actor-forgotten_tankkiller =
+actor_forgotten_tankkiller =
    .name = Tank Killer
    .description = Tank destroyer firing long-range sabot shells.
       Chemical Weapons research loads chemical shells.
@@ -1056,13 +1056,13 @@ actor-forgotten_tankkiller =
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
 
-actor-forgotten_m113adats =
+actor_forgotten_m113adats =
    .name = M113 Adats
    .description = Tracked missile carrier with a dedicated long-range anti-air battery.
       Strong vs Aircraft, Light vehicles
       Weak vs Tanks
 
-actor-forgotten_closhtank =
+actor_forgotten_closhtank =
    .name = Closh Tank
    .description = Close-assault flame tank.
       Chemical Weapons research loads a hotter Tiberium mixture.
@@ -1070,19 +1070,19 @@ actor-forgotten_closhtank =
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
-actor-forgotten_tiberiumharvester =
+actor_forgotten_tiberiumharvester =
    .name = Tiberium Harvester
    .description = Harvests Tiberium and returns it to the Refinery.
       Unarmed
 
-actor-forgotten_apctruck =
+actor_forgotten_apctruck =
    .name = APC Truck
    .description = Armored transport truck for six infantry.
       Its cannon reaches ground and air targets.
       Strong vs Infantry
       Weak vs Tanks
 
-actor-forgotten_missilevan =
+actor_forgotten_missilevan =
    .name = Missile Van
    .description = Fragile van hurling missiles from extreme range.
       Chemical Weapons research loads chemical missiles.
@@ -1090,7 +1090,7 @@ actor-forgotten_missilevan =
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
-actor-forgotten_flametank =
+actor_forgotten_flametank =
    .name = Flame Tank
    .description = Heavy flame tank.
       Chemical Weapons research loads a hotter Tiberium mixture.
@@ -1098,7 +1098,7 @@ actor-forgotten_flametank =
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
-actor-forgotten_warriortank =
+actor_forgotten_warriortank =
    .name = Warrior Tank
    .description = Heavy tank destroyer with a high-velocity cannon.
       Chemical Weapons research loads chemical shells.
@@ -1106,7 +1106,7 @@ actor-forgotten_warriortank =
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
 
-actor-forgotten_scoopertank =
+actor_forgotten_scoopertank =
    .name = Scooper Tank
    .description = Heavily armored assault tank with twin cannons.
       Chemical Weapons research loads chemical shells.
@@ -1114,7 +1114,7 @@ actor-forgotten_scoopertank =
       Strong vs Ground
       Weak vs Aircraft
 
-actor-forgotten_mlrs =
+actor_forgotten_mlrs =
    .name = Forgotten MLRS
    .description = Mutant rocket artillery.
       Chemical Weapons research loads chemical rockets.
@@ -1122,7 +1122,7 @@ actor-forgotten_mlrs =
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
-actor-forgotten_chemicalmammothtank =
+actor_forgotten_chemicalmammothtank =
    .name = Chemical Mammoth Tank
    .description = Experimental mammoth tank converted to fire liquid Tiberium; its Tusk missiles also strike aircraft.
       Chemical Weapons research boosts its firepower by 75%.
@@ -1130,7 +1130,7 @@ actor-forgotten_chemicalmammothtank =
       Maximum 1 can be built.
       Strong vs Everything
 
-actor-forgotten_experimentalmammothtank =
+actor_forgotten_experimentalmammothtank =
    .name = Experimental Mammoth Tank
    .description = Colossal salvaged mammoth prototype; twin cannons plus Tusk missiles against aircraft.
       Chemical Weapons research loads chemical shells.
@@ -1138,7 +1138,7 @@ actor-forgotten_experimentalmammothtank =
       Maximum 1 can be built.
       Strong vs Everything
 
-actor-forgotten_thumperbus =
+actor_forgotten_thumperbus =
    .name = Thumper Bus
    .description = Armored battle bus mounting a Thumper mortar.
       Carries twelve infantry who fire from inside.
@@ -1146,30 +1146,30 @@ actor-forgotten_thumperbus =
       Strong vs Ground
       Weak vs Aircraft
 
-actor-forgotten_nomadbarracks =
+actor_forgotten_nomadbarracks =
    .name = Nomad Barracks
    .description = Rolling barracks that trains infantry anywhere on the map.
       Nine garrisoned infantry fire from inside; its own gun covers the approaches.
       Maximum 1 can be built.
 
-actor-forgotten_mobileconstructionvehicle =
+actor_forgotten_mobileconstructionvehicle =
    .name = Mobile Construction Vehicle
    .description = Deploys into the Forgotten Construction Yard.
       Unarmed
 
-actor-forgotten_carryall =
+actor_forgotten_carryall =
    .name = Carryall
    .description = VTOL crane that lifts and ferries vehicles.
       Unarmed
 
-actor-forgotten_wasp =
+actor_forgotten_wasp =
    .name = Wasp
    .description = Light gunship whose twin chainguns shred infantry and aircraft alike.
       Gains a cloaking device with the Cobra Copter promotion.
       Strong vs Infantry
       Weak vs Tanks, Anti-air defenses
 
-actor-forgotten_apache =
+actor_forgotten_apache =
    .name = Apache
    .description = Missile gunship.
       Chemical Weapons research loads chemical missiles.
@@ -1177,7 +1177,7 @@ actor-forgotten_apache =
       Strong vs Tanks, Aircraft
       Weak vs Anti-air defenses
 
-actor-forgotten_cobracopter =
+actor_forgotten_cobracopter =
    .name = Cobra Copter
    .description = Heavy missile gunship.
       Chemical Weapons research loads chemical missiles.
@@ -1185,7 +1185,7 @@ actor-forgotten_cobracopter =
       Strong vs Tanks, Aircraft
       Weak vs Anti-air defenses
 
-actor-forgotten_cropplane =
+actor_forgotten_cropplane =
    .name = Crop Plane
    .description = Converted crop duster carrying heavy bombs.
       Chemical Weapons research loads chemical bombs.
@@ -1193,7 +1193,7 @@ actor-forgotten_cropplane =
       Strong vs Buildings
       Weak vs Anti-air defenses
 
-actor-forgotten_locustbomber =
+actor_forgotten_locustbomber =
    .name = Locust Bomber
    .description = Heavy bomber.
       Chemical Weapons research loads chemical bombs.
@@ -1201,78 +1201,78 @@ actor-forgotten_locustbomber =
       Strong vs Buildings
       Weak vs Anti-air defenses
 
-actor-forgotten_constructionyard =
+actor_forgotten_constructionyard =
    .name = Construction Yard (Forgotten)
    .description = Builds Forgotten structures.
       Undeploys back into a Mobile Construction Vehicle.
 
-actor-forgotten_crystalpowerextractor =
+actor_forgotten_crystalpowerextractor =
    .name = Crystal Power Extractor
    .description = Taps buried Tiberium crystals to provide power for other structures.
 
-actor-forgotten_barracks =
+actor_forgotten_barracks =
    .name = Forgotten Barracks
    .description = Trains Forgotten infantry.
 
-actor-forgotten_refinery =
+actor_forgotten_refinery =
    .name = Forgotten Refinery
    .description = Processes raw Tiberium into credits and stores the surplus.
       Comes with a free Tiberium Harvester.
 
-actor-forgotten_warfactory =
+actor_forgotten_warfactory =
    .name = Forgotten War Factory
    .description = Builds Forgotten vehicles.
 
-actor-forgotten_radar =
+actor_forgotten_radar =
    .name = Radar
    .description = Provides the radar minimap.
       Unlocks mid-tier Forgotten forces and the Forgotten Church.
       Requires power to operate.
 
-actor-forgotten_helipad =
+actor_forgotten_helipad =
    .name = Helipad (Forgotten)
    .description = Produces, rearms and repairs Forgotten aircraft.
 
-actor-forgotten_servicedepot =
+actor_forgotten_servicedepot =
    .name = Service Depot
    .description = Repairs vehicles and aircraft.
 
-actor-forgotten_silo =
+actor_forgotten_silo =
    .name = Silo
    .description = Stores excess refined Tiberium.
 
-actor-forgotten_church =
+actor_forgotten_church =
    .name = Forgotten Church
    .description = Ruined church sheltering the Forgotten's research labs.
       Unlocks the faction's elite arsenal, advanced defenses and Tech Upgrades.
       Maximum 1 can be built.
 
-actor-forgotten_chemicalplant =
+actor_forgotten_chemicalplant =
    .name = Forgotten Chemical Plant
    .description = Refines liquid-Tiberium munitions.
       Its stockpile arms the Mutant Soldier, replacing the basic Mutant.
       Maximum 1 can be built.
 
-actor-forgotten_tiberiumspike =
+actor_forgotten_tiberiumspike =
    .name = Tiberium Spike
    .description = Deep borehole tapping a pressurized Tiberium vein.
       Generates 500 credits every 10 seconds; gains ranks that raise its output up to double.
       Maximum 1 can be built.
 
-actor-forgotten_veinhole =
+actor_forgotten_veinhole =
    .name = Veinhole
    .description = The Forgotten superweapon: a corrupted Veinhole that hurls a devastating warhead anywhere on the map.
       7:00 charge time. Requires power to operate.
       Maximum 1 can be built.
 
-actor-forgotten_machineguntower =
+actor_forgotten_machineguntower =
    .name = Machinegun Tower
    .description = Scrap-built machine gun tower.
       Detects nearby cloaked enemies.
       Strong vs Infantry, Light vehicles
       Weak vs Tanks, Aircraft
 
-actor-forgotten_brokenrattytankturret =
+actor_forgotten_brokenrattytankturret =
    .name = Broken Ratty Tank Turret
    .description = Salvaged Ratty Tank turret on a concrete mount.
       Does not require power to operate.
@@ -1281,13 +1281,13 @@ actor-forgotten_brokenrattytankturret =
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
 
-actor-forgotten_juggerflakwall =
+actor_forgotten_juggerflakwall =
    .name = Juggerflak Wall
    .description = Wall-mounted Juggernaut flak battery.
       Cannot engage ground targets.
       Strong vs Aircraft
 
-actor-forgotten_brokenwarriortankturret =
+actor_forgotten_brokenwarriortankturret =
    .name = Broken Warrior Tank Turret
    .description = Salvaged Warrior Tank turret firing long-range sabot shells.
       Does not require power to operate.
@@ -1295,7 +1295,7 @@ actor-forgotten_brokenwarriortankturret =
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
 
-actor-forgotten_brokenscoopertankturret =
+actor_forgotten_brokenscoopertankturret =
    .name = Broken Scooper Tank Turret
    .description = Salvaged Scooper Tank turret with twin cannons.
       Does not require power to operate.
@@ -1304,300 +1304,300 @@ actor-forgotten_brokenscoopertankturret =
       Strong vs Ground
       Weak vs Aircraft
 
-actor-forgotten_upgrade_chemicalfuel =
+actor_forgotten_upgrade_chemicalfuel =
    .name = Chemical Fuel
    .description = Tech Upgrade (Only affects units of own faction)
       Increases the speed of all Forgotten vehicles and aircraft by 20%.
 
-actor-forgotten_upgrade_genomemapping =
+actor_forgotten_upgrade_genomemapping =
    .name = Genome Mapping
    .description = Tech Upgrade (Only affects units of own faction)
       Forgotten infantry take 10% less damage and gain 10% weapon range, speed, vision and cloak detection.
 
-actor-forgotten_upgrade_friendlywildlife =
+actor_forgotten_upgrade_friendlywildlife =
    .name = Friendly Wildlife
    .description = Tech Upgrade (Only affects units of own faction)
       Forgotten ground units release a friendly Visceroid when they die.
 
-actor-forgotten_upgrade_tiberiumboosters =
+actor_forgotten_upgrade_tiberiumboosters =
    .name = Tiberium Boosters
    .description = Tech Upgrade (Only affects units of own faction)
       Increases the weapon range of Forgotten missile and shell units, including the salvaged tank turrets, by 15%.
 
-actor-forgotten_upgrade_chemicalweapons =
+actor_forgotten_upgrade_chemicalweapons =
    .name = Chemical Weapons
    .description = Tech Upgrade (Only affects units of own faction)
       Loads chemical ammunition into nearly every Forgotten weapon, adding Tiberium damage.
       The Chemical Mammoth Tank instead gains 75% firepower.
 
-actor-forgotten_upgrade_junkarmor =
+actor_forgotten_upgrade_junkarmor =
    .name = Junk Armor
    .description = Tech Upgrade (Only affects units of own faction)
       Forgotten vehicles, aircraft and salvaged tank turrets take 15% less damage and move 15% faster.
 
-actor-forgotten_upgrade_unity =
+actor_forgotten_upgrade_unity =
    .name = Unity
    .description = Tech Upgrade (Only affects units of own faction)
       Every Forgotten unit projects a solidarity aura: each nearby friendly Forgotten unit reduces damage taken by 2%, stacking up to 20%.
 
-actor-forgotten_upgrade_tiberiumadaptability =
+actor_forgotten_upgrade_tiberiumadaptability =
    .name = Tiberium Adaptability
    .description = Tech Upgrade (Only affects units of own faction)
       All Forgotten units regenerate 1% of their health every 4 seconds.
 
-actor-forgotten_promotion_bowler =
+actor_forgotten_promotion_bowler =
    .name = Unlock Bowler
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Bowler, an armored raiding car, replacing the Raider Car.
 
-actor-forgotten_promotion_runnershotgal =
+actor_forgotten_promotion_runnershotgal =
    .name = Unlock Runner Shotgal
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows training of the Runner Shotgal, a cloaked shotgun skirmisher.
       Follows the Bowler promotion.
 
-actor-forgotten_promotion_viniferafiend =
+actor_forgotten_promotion_viniferafiend =
    .name = Unlock Vinifera Fiend
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows training of the Vinifera Fiend, a stronger blue-Tiberium fiend, replacing the Tiberian Fiend.
       Follows the Runner Shotgal promotion.
 
-actor-forgotten_promotion_ghoststalker =
+actor_forgotten_promotion_ghoststalker =
    .name = Unlock Ghost Stalker
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows training of the Ghost Stalker, the Forgotten commando.
       Follows the Vinifera Fiend promotion.
 
-actor-forgotten_promotion_cobracopter =
+actor_forgotten_promotion_cobracopter =
    .name = Unlock Cobra Copter
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Cobra Copter, a heavy gunship, replacing the Apache.
       Wasps gain a cloaking device.
 
-actor-forgotten_promotion_flametank =
+actor_forgotten_promotion_flametank =
    .name = Unlock Flame Tank
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Flame Tank, replacing the Closh Tank.
       Follows the Cobra Copter promotion.
 
-actor-forgotten_promotion_locustbomber =
+actor_forgotten_promotion_locustbomber =
    .name = Unlock Locust Bomber
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Locust Bomber, replacing the Crop Plane.
       Follows the Flame Tank promotion.
 
-actor-forgotten_promotion_chemicalmammothtank =
+actor_forgotten_promotion_chemicalmammothtank =
    .name = Unlock Chemical Mammoth Tank
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Chemical Mammoth Tank, an experimental liquid-Tiberium mammoth.
       Follows the Locust Bomber promotion.
 
-actor-forgotten_promotion_warriortank =
+actor_forgotten_promotion_warriortank =
    .name = Unlock Warrior Tank
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Warrior Tank, a heavy tank destroyer, replacing the Tank Killer.
 
-actor-forgotten_promotion_scoopertank =
+actor_forgotten_promotion_scoopertank =
    .name = Unlock Scooper Tank
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Scooper Tank, a heavily armored twin-cannon assault tank.
       Follows the Warrior Tank promotion.
 
-actor-forgotten_promotion_mlrs =
+actor_forgotten_promotion_mlrs =
    .name = Unlock MLRS
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Forgotten MLRS rocket artillery, replacing the Missile Van.
       Follows the Scooper Tank promotion.
 
-actor-forgotten_promotion_experimentalmammothtank =
+actor_forgotten_promotion_experimentalmammothtank =
    .name = Unlock Experimental Mammoth Tank
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Experimental Mammoth Tank, a colossal mammoth prototype.
       Follows the MLRS promotion.
 
-actor-ts_nod_missilesilo =
+actor_ts_nod_missilesilo =
    .name = Missile Silo
    .description = Constructs and launches long-range missiles as support power.
 
-actor-ts_gdi_upgradecenter =
+actor_ts_gdi_upgradecenter =
    .name = Upgrade Center
    .description = Provides Hunter-Seeker and Ion Cannon support powers.
 
-actor-ts_nod_laserturret =
+actor_ts_nod_laserturret =
    .name = Laser Turret
    .description = Basic base defense.
    Strong vs Ground units.
    Cannot attack Aircraft.
 
-actor-ts_nod_samsite =
+actor_ts_nod_samsite =
    .name = SAM Site
    .description = Anti-aircraft missile battery.
    Requires power to operate.
    Strong vs Aircraft.
    Cannot attack Ground units.
 
-actor-ts_nod_stealthgenerator =
+actor_ts_nod_stealthgenerator =
    .name = Stealth Generator
    .description = Generates a cloaking field to hide your forces from the enemy.
    Only one can be built at a time.
 
-actor-ts_gdi_empulsecannon =
+actor_ts_gdi_empulsecannon =
    .name = E.M. Pulse Cannon
    .description = Launches electro-magnetic pulse that disables mechanical units in an area.
    Requires power to operate.
 
-actor-ts_nod_obeliskoflight =
+actor_ts_nod_obeliskoflight =
    .description = Advanced base defense.
    Requires power to operate.
    Strong vs Ground units.
    Cannot attack Aircraft.
 
-power-ra2spysat =
+power_ra2spysat =
    .name = Spy Satellite
    .description = Periodically reveals the entire map.
    Activated automatically.
 
-power-ra2spyplane =
+power_ra2spyplane =
    .name = Spy Plane
    .description = Reveals area along a line.
       Does not detect cloaked units.
 
-power-ra2psireveal =
+power_ra2psireveal =
    .name = Psychic Reveal
    .description = Reveals an area of the map and cloaked enemy units.
 
-power-lightningstorm =
+power_lightningstorm =
    .name = Lightning Storm
    .description = Creates a lightning storm.
       Applies heavy damage over a large area.
 
-power-ra2nuke =
+power_ra2nuke =
    .name = Nuclear Missile
    .description = Launches a devastating nuclear missile.
       Applies heavy damage and radiation over a large area.
 
-power-psychicdominator =
+power_psychicdominator =
    .name = Psychic Dominator
    .description = Unleashes a wave of psionic energy.
       Applies heavy damage to buildings.
       Mind-controls units.
 
-power-mutate =
+power_mutate =
    .name = Genetic Mutator
    .description = Mutates infantry in an area
       into Brutes.
 
-power-forceshield =
+power_forceshield =
    .name = Force Shield
    .description = Makes selected buildings temporarily invulnerable.
 
-actor-aamecha =
+actor_aamecha =
    .description = Robot armed with machine guns.
       Can attack air.
 
-power-chaos =
+power_chaos =
    .name = Chaos Storm
    .description = Releases chaos gas on a target area.
 
-actor-steel_qtank =
+actor_steel_qtank =
    .description = Main battle tank.
     Deploy to switch to an artillery gun.
 
-actor-latin_burrito =
+actor_latin_burrito =
    .description = Incendiary heavy rocket artillery.
 
-actor-nax_me262 =
+actor_nax_me262 =
    .description = Multirole fighter armed with machineguns.
 
-actor-nax_dieglocke =
+actor_nax_dieglocke =
    .description = Superheavy spaceship.
       Creates massive toxin clouds.
       Only attacks targets below.
 
-actor-shock_infantry =
+actor_shock_infantry =
    .description = Armed with a shock gun.
        Damages enemies in a line.
        Strong vs Infantry, Vehicles
 
-actor-rocket_raider =
+actor_rocket_raider =
    .description = Fast raider armed with rockets.
       Can carry 4 passengers.
        Strong vs Infantry, Light Vehicles, Air
 
-actor-shock_raider =
+actor_shock_raider =
    .description = Fast raider armed with a shock gun.
       Strong vs Tanks
 
-actor-missile_tank =
+actor_missile_tank =
    .description = Long-range rocket artillery.
        Strong vs Vehicles, Buildings
 
-actor-siege_tank =
+actor_siege_tank =
    .description = Long-range artillery gun.
        Strong vs Infantry, Buildings
 
-actor-duelist_tank =
+actor_duelist_tank =
    .description = Heavy tank.
       Strong vs Vehicles
 
-actor-quake_tank =
+actor_quake_tank =
    .description = Deals seismic damage to vehicles and structures.
 
-actor-carryall =
+actor_carryall =
    .description = Automatically transports harvesters.
 
-actor-air_drone =
+actor_air_drone =
    .description = Multirole light fighter armed with napalm rockets.
        Strong vs Infantry, Aircraft
 
-actor-farasha =
+actor_farasha =
    .description = Carrier spaceship.
       Armed with a laser.
       Carries 5 Alfayrus drones.
        Strong vs Everything
 
-actor-ixprojector =
+actor_ixprojector =
    .description =  Ultimate Ixian unit for causing chaos and distraction among enemy forces
       Jams enemy radars and disables enemy units and buildings with an EMP beam.
       Can make fake projections giving impression there is a larger army present.
       Projections disappears when too far away from Projector
       Special Abilities: Invisibility, Projections, Detector
 
-actor-d2k_munitions =
+actor_d2k_munitions =
    .description = Increases firing speed of nearby units.
       Effect can stack.
       Explodes when destroyed
 
-actor-storm_lasher =
+actor_storm_lasher =
    .description = Long-range defensive structure.
       Deals massive splash damage.
        Strong vs Ground
 
-actor-large_gun_turret =
+actor_large_gun_turret =
    .description = Requires power to operate.
        Strong vs Infantry, Air
        Weak vs Tanks
 
-actor-high_tech_factory =
+actor_high_tech_factory =
    .description = Unlocks advanced technologies.
       Produces aircraft.
 
-actor-oilb =
+actor_oilb =
    .name = Oil Derrick
    .description = Provides passive income.
       Levels up over time.
       Build limit: 3
 
-upgrade-conscription =
+upgrade_conscription =
    .description = Decreases cost and training time for all infantry Flak Tracks, BTRs and Hip Transports by 25%.
    Unlocks the "Paratroopers" Support power from the Soviet Airfield.
    All Infantry and Troop Transports deal 10% more damage and have 10% more armor.
 
-upgrade-nuclearengines =
+upgrade_nuclearengines =
    .description = Increases speed of tanks by 20%.
    Tank damage is also increased by 10%
 
-upgrade-rocketenhancements =
+upgrade_rocketenhancements =
    .description = Increases weapon and vision range and damage of all ballistic rockets:
    V1 Truck: 25%
    V2 Launcher: 20%
@@ -1605,124 +1605,124 @@ upgrade-rocketenhancements =
    Missile Submarine, SAM Site and Hind: 10%
    Mammoth Tank, Monster Tank and Volkov: 5%
 
-upgrade-advancedthermobarics =
+upgrade_advancedthermobarics =
    .description = Increases damage of all fire and nuclear weapons by 25%.
    Adds Napalm Warheads to the V1 Truck, Mig, Su-57 and all tanks.
    V2 Launcher and Nuclear V2 Launcher increase damage by 100%.
    Adds Incendiary Bullets to the Rifle Infantry, Yak, Hind and Gatling Tank.
    Increases Armor of Grenadiers, Flamethrowers, Fire Rocket Soldiers and Mortar Soldiers by 50%
 
-upgrade-experimentalteslaweaponry =
+upgrade_experimentalteslaweaponry =
    .description = Increases damage of tesla weapons by 50%
    and adds an EMP effect that will stun vehicles and buildings after several hits.
    Unlocks the "Parabombs" Support power from the Soviet Airfield.
 
-upgrade-sovietautoloaders =
+upgrade_sovietautoloaders =
    .description = Reduces the Reload Delay of Tanks, Hinds and Volkov by 40%.
 
-upgrade-sovietsteel =
+upgrade_sovietsteel =
    .description = TEAM UPGRADE
    Increases armor of all tanks in your team by 40% but makes them 10% slower.
    For Soviets it will also increase the armor of most other vehicles, submarines, helicopters and defenses.
    Dogs are turned into cybernetic monstrosities that are much more durable.
 
-upgrade-advancedradarsystems =
+upgrade_advancedradarsystems =
    .description = Increases Radar Dome detection and vision range by 50%.
    Increases damage, fire rate, accuracy, vision, detection and weapon range of all units and defenses by 10%.
 
-upgrade-infantryarmorplating =
+upgrade_infantryarmorplating =
    .description = Increases armor of all infantry units by 30%.
    Also reduces Reload Delay by 10%.
 
-upgrade-reinforcedstructures =
+upgrade_reinforcedstructures =
    .description = Increases armor of all buildings and defenses by 25%.
    Also reduces Cost and Build Time by 25%.
 
-upgrade-cryomissiles =
+upgrade_cryomissiles =
    .description = Adds cryo warheads to all missiles and bombs that freezes enemy units and buildings.
    Reduces Firepower by 25%
    Each hit slows down the enemy target by 10%, increases damage taken by 10% and stacks 10 times.
    Each stack lasts 5 seconds and on 10 stacks the unit is completely disabled.
    Artillery, Bastion and Rapier Jumpjet get cryo bombs with double the cryo effect radius of effect.
 
-upgrade-lasertargetingsystems =
+upgrade_lasertargetingsystems =
    .description = Increases damage of all units and defenses by 25%
 
-upgrade-airsuperioritydoctrine =
+upgrade_airsuperioritydoctrine =
    .description = Increases damage, rate of fire, armor, speed, range and accuracy of aircraft and the Heavy AA Tank by 15%.
 
-upgrade-chronoarmor =
+upgrade_chronoarmor =
    .description = After taking damage, tanks will activate a chrono field
    which increases armor and fire rate by 35% and speed by 50%
    Unlocks Chrono Reinforcements from the Chronosphere.
 
-upgrade-gpssatellitesupport =
+upgrade_gpssatellitesupport =
    .description = TEAM UPGRADE
    Launches a GPS Satellite that instantly reveals all enemy units and buildings on the map.
    Increases accuracy, vision, detection and weapon range of all units and defenses by 10%.
 
-upgrade-bushidodiscipline =
+upgrade_bushidodiscipline =
    .description = Increases damage, rate of fire, armor, speed, range and accuracy by 10% and gives self healing.
    When wounded the effect is tripled.
 
-upgrade-waveforcebullets =
+upgrade_waveforcebullets =
    .description = Increases range and damage of all bullets by 10% and makes them more effective against armor.
 
-upgrade-divinewindprotocol =
+upgrade_divinewindprotocol =
    .description = Increases damage, rate of fire, armor and speed, of all air units by 10%
 
-upgrade-stealthsuitintegration =
+upgrade_stealthsuitintegration =
    .description = All Infantry come equipped with a stealth suit, that makes them invisible when not attacking or moving.
    Increases speed and armor by 10% and gives a personal shield generator.
 
-upgrade-energizedarrows =
+upgrade_energizedarrows =
    .description = Increases damage of arrows by 25%.
    Arrows are upgraded with an electric charge that deals bonus damamge to infantry and disables vehicles and structures.
 
-upgrade-superiorwarengines =
+upgrade_superiorwarengines =
    .description = Increases speed, fire rate and armor of all vehicles by 20%
    The effect is halfed for Ballistas, Waveforce Tanks and Waveforce artilleries.
 
-upgrade-advancedplasmaweapons =
+upgrade_advancedplasmaweapons =
    .description = Increases the damage, fire rate and range of all plasma weapons by 10%.
 
-upgrade-nanotechrepairs =
+upgrade_nanotechrepairs =
    .description = TEAM UPGRADE
    Increases armor of all vehicles in your team by 10% and makes them regnerate faster.
    For Japan the effect is also applied to all aircrafts and buildings.
    Japanese Fire Support Vehicles and Tanks also get a nanodrone shield
    for 0.2 seconds after taking damage that increases armor by 20%.
 
-upgrade-wind_trap =
+upgrade_wind_trap =
    .description = Increases power output of Wind Traps by 100%.
    Additionally, Wind Traps have their cost and build time reduced by 50%.
 
-upgrade-d2k_upgrade_needleguns =
+upgrade_d2k_upgrade_needleguns =
    .description = Increases damage of machine guns by 25% and range by 10%.
    Tungsten Needles are more effective against vehicles and buildings and can hit air units.
 
-upgrade-d2k_general_purpose_armor =
+upgrade_d2k_general_purpose_armor =
    .description = General Purpose Armor.
    Increases armor of all infantry, vehicles and aircraft by 20%.
 
-upgrade-personal_shield =
+upgrade_personal_shield =
    .description = Gives personal shield generators to all infantry units.
 
-upgrade-d2k_siege_range_upgrade =
+upgrade_d2k_siege_range_upgrade =
    .description = All Tanks, Gun Turrets and Artillery gain increased range and damage.
    Gun Turret, Ix Combat Tanks and Duelist Tanks: 10% higher range and 25% more damage.
    Ix Siege Tank: 25% higher range and 50% more damage.
    Ix Combat Siege: 50% higher range and 100% more damage.
 
-upgrade-d2k_heavy_missile_upgrade =
+upgrade_d2k_heavy_missile_upgrade =
    .description = All missile based weapons deal 20% more damage and have 20% more range.
 
-upgrade-spice_sifter =
+upgrade_spice_sifter =
    .description = Decreases amount of Spice filtered
       out incorrectly from Spice Sifters and Refineries.
       Increases Spice Sifter and Spice Refinery income by 25%.
 
-upgrade-d2k_advanced_ixian_technology =
+upgrade_d2k_advanced_ixian_technology =
    .description = TEAM UPGRADE
       Gives Stealth Generators to all Harvesters in your team and increases artillery damage by 25% and range by 10%.
       For Ixians:
@@ -1761,22 +1761,22 @@ asian_team_upgrade_dragonway =
 asian_team_upgrade_diplomacy =
    .description = Through clever diplomacy all the units in your team are 10% cheaper.
 
-upgrade-infweapon =
+upgrade_infweapon =
    .description = Increases firepower of all Terran infantry by 25%
 
-upgrade-infarmor =
+upgrade_infarmor =
    .description = Increases armor of all Terran infantry by 20%
 
-upgrade-mechweapon =
+upgrade_mechweapon =
    .description = Increases firepower of all Terran vehicles by 25%
 
-upgrade-mecharmor =
+upgrade_mecharmor =
    .description = Increases armor of all Terran vehicles by 20%
 
-upgrade-shipweapon =
+upgrade_shipweapon =
    .description = Increases firepower of all Terran aircraft by 25%
 
-upgrade-shiparmor =
+upgrade_shiparmor =
    .description = Increases armor of all Terran aircraft by 20%
 
 ra_doctrine_conscription =
@@ -1956,58 +1956,58 @@ ordos_upgrade_contraband =
       Upgrades any non biological weapons with new contraband versions.
       Increases Firepower by 25%.
 
-upgrade-seretraining =
+upgrade_seretraining =
    .name = SERE Training
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage Resistance of infantry by 25%
       Increases Speed by 20%.
 
-upgrade-sonicweaponry =
+upgrade_sonicweaponry =
    .name = Sonic Weaponry
    .description = Tech Upgrade (Only affects units of own faction)
       Greately increases Disruptor damage
       Equips Orcas, Vulcan Towers, Disc Throwers and the Kodiak with Sonic weapons.
 
-upgrade-tsprojectileimprovements =
+upgrade_tsprojectileimprovements =
    .name = Projectile Improvements
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage and Range of Enforcers, Pitbulls, Hover MLRS and SAM Towers by 20%
 
-upgrade-mechengineering =
+upgrade_mechengineering =
    .name = Mech Engineering
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage Resistance of walkers by 20%.
       Increases Speed by 25%.
 
-upgrade-railgunweaponry =
+upgrade_railgunweaponry =
    .name = Railgun Weaponry
    .description = Tech Upgrade (Only affects units of own faction)
       Increases damage for Railgun Commando and Mammoth Prototype.
       Equips Enforcer, Titan and RPG Tower with Railgun weapons.
 
-upgrade-mechanicalreliability =
+upgrade_mechanicalreliability =
    .name = Mechanical Reliability
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage Resistance and Speed of all vehicles, tanks and aircraft by 10%.
       Also gives them additional health regeneration of 1% per second.
 
-upgrade-ceramicarmor =
+upgrade_ceramicarmor =
    .name = Ceramic Armor
    .description = Tech Upgrade (Only affects units of own faction)
       Increases Damage Resistance of aircraft by 25%.
       Increases Speed by 10%.
 
-upgrade-modernfirecontrolsystems =
+upgrade_modernfirecontrolsystems =
    .description = Team Upgrade (Also affects units of your teammates)
       Increases Accuracy and Rate Of Fire of all vehicles in your team by 10%
       Increases Vision, Detection and Weapon Range by 5%.
 
-template-mcv =
+template_mcv =
    .description = Deploys into another Construction Yard.
       Unarmed
    .name = Mobile Construction Vehicle
 
-template-refinery =
+template_refinery =
    .description = Processes resources into cash.
    .tdname = Tiberium Refinery
    .raname = Ore Refinery
@@ -2015,13 +2015,13 @@ template-refinery =
    .ra2-allies = Allied Ore Refinery
    .ra2-soviet = Soviet Ore Refinery
 
-template-power =
+template_power =
    .description = Generates power.
 
-template-advpower =
+template_advpower =
    .description = Generates more power compared to the standard power generator.
 
-template-barracks =
+template_barracks =
    .description = Trains infantry.
    .td-gdi = GDI Barracks
    .td-nod = Hand of Nod
@@ -2032,7 +2032,7 @@ template-barracks =
    .ra2-allies = Allied Barracks
    .ra2-yuri = Yuri Barracks
 
-template-factory =
+template_factory =
    .description = Produces vehicles.
    .td-gdi = Weapons Factory
    .ra-allies = Allied War Factory
@@ -2042,7 +2042,7 @@ template-factory =
    .ra2-soviet = Soviet War Factory
    .ra2-yuri = Yuri War Factory
 
-template-radar =
+template_radar =
    .description = Provides radar and unlocks technologies.
       Requires power to operate.
    .td-nod = Nod Communications Center
@@ -2051,7 +2051,7 @@ template-radar =
    .ra-japan = Japanese Radar Array
    .ra2-soviet = Soviet Radar
 
-template-service-depot =
+template_service_depot =
    .description = Repairs vehicles.
    .td-gdi = GDI Repair Facility
    .td-nod = Nod Repair Facility
@@ -2061,13 +2061,13 @@ template-service-depot =
    .ra2-allies = Allied Service Depot
    .ra2-soviet = Soviet Service Depot
 
-template-airfield =
+template_airfield =
    .description = Produces aircraft.
    .td-gdi = GDI Helipad
    .td-nod = Nod Helipad
    .ra-allies = Allied Helipad
 
-template-shipyard =
+template_shipyard =
    .description = Produces and repairs ships.
    .td-gdi = GDI Naval Yard
    .td-nod = Nod Sub Pen
@@ -2078,7 +2078,7 @@ template-shipyard =
    .ra2-soviet = Soviet Shipyard
    .ra2-yuri = Yuri Sub Pen
 
-template-tech-center =
+template_tech_center =
    .description = Provides advanced technologies.
    .ra-allies = Allied Tech Center
    .ra-soviet = Soviet Tech Center
@@ -2087,43 +2087,43 @@ template-tech-center =
    .ra2-soviet = Soviet Battle Lab
    .ra2-yuri = Yuri Battle Lab
 
-template-anti-vehicle-defense =
+template_anti_vehicle_defense =
    .description = Anti-vehicle defense.
 
-template-scout-infantry =
+template_scout_infantry =
    .description = General-purpose infantry.
       Strong vs Infantry
       Weak vs Vehicles, Aircraft
 
-template-antitank-antiair-infantry =
+template_antitank_antiair_infantry =
    .description = Anti-vehicle infantry.
       Strong vs Vehicles, Aircraft
       Weak vs Infantry
 
-template-mbt =
+template_mbt =
    .description = Main battle tank.
       Strong vs Vehicles
       Weak vs Infantry, Aircraft
 
-template-commando =
+template_commando =
    .description = Elite commando infantry.
       Can demolish buildings.
       Strong vs Infantry, Buildings
       Weak vs Vehicles, Aircraft
 
-template-unarmed-transport =
+template_unarmed_transport =
    .description = Unarmed troop transport.
 
-template-carrier-slave =
+template_carrier_slave =
    .description = Deployed by an aircraft carrier.
 
-template-airstrike-slave =
+template_airstrike_slave =
    .description = Called in to conduct an airstrike.
 
-template-drone-slave =
+template_drone_slave =
    .description = Deployed as an escort drone.
 
-template-mob-slave =
+template_mob_slave =
    .description = Member of a mob or squad unit.
 
 promotions =
@@ -2142,7 +2142,7 @@ promotions =
    .rank10 = Level 9
    .rank11 = Level 10
 
-promotions-flavor =
+promotions_flavor =
    .prefix = General Staff
    .notification-01 = You have been promoted. Review the Promotions tab for access to new technologies.
    .notification-02 = Congratulations on your field promotion! Purchase a Promotional upgrade to bolster your forces.
@@ -2150,82 +2150,82 @@ promotions-flavor =
    .notification-04 = You've been authorized to purchase a Promotional upgrade. Fight on to earn more points and expand your arsenal.
    .notification-05 = A Promotional upgrade is now available to you. Unlock new units and powers or augment your existing ones.
 
-faction-random =
+faction_random =
    .name = Any
    .description = Random faction
       A random faction from any game will be chosen when the game starts.
 
-faction-ra-random =
+faction_ra_random =
    .name = Any
    .description = Random faction
       A random faction from Red Alert will be chosen when the game starts.
 
-faction-ra-allies =
+faction_ra_allies =
    .name = Allies RA
    .description = Allies from Red Alert
       Support powers: GPS, Chronosphere, Chrono Vortex
 
-faction-ra-soviets =
+faction_ra_soviets =
    .name = Soviets RA
    .description = Soviets from Red Alert
       Support powers: Parabombs, Iron Curtain, Atomic Bomb
 
-faction-ra-japan =
+faction_ra_japan =
    .name = Japan RA
    .description = Japan custom faction in Red Alert 1 style.
       Support powers: Super Bomber Airstrike, Magic Orb Hailstorm
 
-faction-ts-random =
+faction_ts_random =
    .name = Any
    .description = Random faction
       A random faction from Tiberian Sun will be chosen when the game starts.
 
-faction-ts-gdi =
+faction_ts_gdi =
    .name = GDI TS
    .description = GDI from Tiberian Sun
       Support powers: Drop Pods, Ion Cannon
 
-faction-ts-nod =
+faction_ts_nod =
    .name = Nod TS
    .description = Nod from Tiberian Sun
       Support powers: Chemical Missile
 
-faction-ts-forgotten =
+faction_ts_forgotten =
    .name = Forgotten
    .description = Forgotten from Tiberian Sun
       Support powers: Tiberian Wildlife Rampage
 
-faction-ts-cabal =
+faction_ts_cabal =
    .name = CABAL
    .description = CABAL from Tiberian Sun
       Support powers: Data Worm, Satellite Hack
 
-faction-ra2-random =
+faction_ra2_random =
    .name = Any
    .description = Random faction
       A random faction from Red Alert 2 will be chosen when the game starts.
 
-faction-ra2-allies =
+faction_ra2_allies =
    .name = Allies RA2
    .description = Allies from Red Alert 2
       Support powers: Chronosphere, Lightning Storm
 
-faction-ra2-soviets =
+faction_ra2_soviets =
    .name = Soviets RA2
    .description = Soviets from Red Alert 2
       Support powers: Iron Curtain, Nuclear Missile
 
-faction-ra2-yuri =
+faction_ra2_yuri =
    .name = Yuri
    .description = Yuri from Yuri's Revenge
       Support powers: Genetic Mutator, Psychic Dominator
 
-faction-d2k-random =
+faction_d2k_random =
    .name = Any
    .description = Random faction
       A random faction from the Dune Universe will be chosen when the game starts.
 
-faction-d2k-ixian =
+faction_d2k_ixian =
    .name = Ixians
    .description = Ixians from the Dune Universe
       The enigmatic Ixians of the industrial world Ix
@@ -2247,7 +2247,7 @@ faction-d2k-ixian =
       Team Upgrades: Advanced Ixian Technology
       Support powers: Pulse Missile
 
-faction-d2k-ordos =
+faction_d2k_ordos =
    .name = House Ordos
    .description = House Ordos from the Dune Universe
       The insidious Ordos of the icy planet Sigma Draconis IV

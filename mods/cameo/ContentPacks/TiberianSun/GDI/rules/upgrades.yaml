@@ -7,7 +7,7 @@ ts_gdi_upgrade_seretraining:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
-		Description: upgrade-seretraining.description
+		Description: upgrade_seretraining.description
 		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_seretraining
 	RenderSprites:
 		Image: seretrainingicon
@@ -22,7 +22,7 @@ ts_gdi_upgrade_projectileimprovements:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
-		Description: upgrade-tsprojectileimprovements.description
+		Description: upgrade_tsprojectileimprovements.description
 		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_projectileimprovements
 	RenderSprites:
 		Image: tsprojectileimprovementsicon
@@ -37,7 +37,7 @@ ts_gdi_upgrade_mechanicalreliability:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Upgrades
-		Description: upgrade-mechanicalreliability.description
+		Description: upgrade_mechanicalreliability.description
 		Prerequisites: ~ts_gdi_radar, !ts_gdi_upgrade_mechanicalreliability
 	RenderSprites:
 		Image: mechanicalreliabilityicon
@@ -52,7 +52,7 @@ ts_gdi_upgrade_ceramicarmor:
 	Buildable:
 		BuildPaletteOrder: 110
 		Queue: Research
-		Description: upgrade-ceramicarmor.description
+		Description: upgrade_ceramicarmor.description
 		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_ceramicarmor
 	RenderSprites:
 		Image: ceramicarmoricon
@@ -67,7 +67,7 @@ ts_gdi_upgrade_mechengineering:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: Research
-		Description: upgrade-mechengineering.description
+		Description: upgrade_mechengineering.description
 		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_mechengineering
 	RenderSprites:
 		Image: mechengineeringicon
@@ -82,7 +82,7 @@ ts_gdi_upgrade_sonicweaponry:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: upgrade-sonicweaponry.description
+		Description: upgrade_sonicweaponry.description
 		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_sonicweaponry
 	RenderSprites:
 		Image: sonicweaponryicon
@@ -97,7 +97,7 @@ ts_gdi_upgrade_railgunweaponry:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: upgrade-railgunweaponry.description
+		Description: upgrade_railgunweaponry.description
 		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_railgunweaponry
 	RenderSprites:
 		Image: railgunweaponryicon
@@ -112,7 +112,7 @@ ts_gdi_upgrade_modernfirecontrolsystems:
 	Buildable:
 		BuildPaletteOrder: 120
 		Queue: Research
-		Description: upgrade-modernfirecontrolsystems.description
+		Description: upgrade_modernfirecontrolsystems.description
 		Prerequisites: ~ts_gdi_techcenter, !ts_gdi_upgrade_modernfirecontrolsystems
 	RenderSprites:
 		Image: modernfirecontrolsystemsicon

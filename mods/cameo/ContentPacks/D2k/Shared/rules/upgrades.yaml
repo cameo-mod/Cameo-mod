@@ -80,7 +80,7 @@ d2k_wind_trap_upgrade:
 		BuildPaletteOrder: 200
 		Prerequisites: ~outpost.d2k, !d2k_wind_trap_upgrade
 		Queue: Upgrades
-		Description: upgrade-wind_trap.description
+		Description: upgrade_wind_trap.description
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: power.atreides
@@ -97,7 +97,7 @@ d2k_spice_sifter_upgrade:
 		BuildPaletteOrder: 200
 		Prerequisites: ~research_centre, !d2k_spice_sifter_upgrade
 		Queue: Research
-		Description: upgrade-spice_sifter.description
+		Description: upgrade_spice_sifter.description
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: d2k_spice_sifter
