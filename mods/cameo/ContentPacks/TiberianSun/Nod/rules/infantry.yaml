@@ -210,6 +210,7 @@ ts_nod_shadowteam:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
+		IconPalette: ra2
 		BuildPaletteOsrder: 90
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
@@ -268,6 +269,7 @@ ts_nod_shadowteam_air:
 		AddToArmyValue: true
 		OverrideActor: ts_nod_shadowteam
 	Buildable:
+		IconPalette: ra2
 		BuildPaletteOrder: 90
 		Description: actor_ts_nod_shadowteam.description
 	Aircraft:
