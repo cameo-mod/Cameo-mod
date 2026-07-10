@@ -207,14 +207,14 @@ tsmonstermaker1:
 	SpawnActorOnDeath@monstermaker4:
 		RequiresCondition: monsterbirth
 		Probability: 10
-		Actor: tsmutantw
+		Actor: forgotten_mutant_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
 	SpawnActorOnDeath@monstermaker4b:
 		RequiresCondition: monsterbirth
 		Probability: 10
-		Actor: tsmutantw
+		Actor: forgotten_mutant_wild
 		OwnerType: InternalName
 		InternalOwner: Creeps
 		RequiresLobbyCreeps: true
@@ -317,7 +317,7 @@ TSGTCNST:
 	Buildable:
 		Description: Builds structures
 
-TSGTSILO:
+ts_gdi_silo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TSSpawnActorsOnSell
@@ -400,7 +400,7 @@ tsctarmr:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtplug2:
+ts_gdi_upgrade_ioncannonuplink:
 	Tooltip:
 		Name: Ion Cannon Uplink
 	Buildable:
@@ -415,7 +415,7 @@ tsgtplug2:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-tsgtplug3:
+ts_gdi_upgrade_seekercontrol:
 	Tooltip:
 		Name: Seeker Control
 	Buildable:
@@ -435,7 +435,7 @@ tsgtplug3:
 # TS Building Forgotten
 #######################################
 
-tsntlasrcabal:
+cabal_plasmaturret:
 	Inherits: ts_nod_laserturret
 	Tooltip:
 		Name: Plasma Turret
@@ -556,7 +556,7 @@ TSE2PARA:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-TSJUMPJET.Husk:
+ts_gdi_jumpjetinfantry_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
 		Name: Jumpjet Infantry
@@ -630,10 +630,10 @@ TSE3:
 	GivesExperience:
 		PlayerExperienceModifier: 0
 
-TSMUTANTW:
+forgotten_mutant_wild:
 	Inherits: forgotten_mutant
 	Buildable:
-		Prerequisites: ~TSMUTANTW
+		Prerequisites: ~forgotten_mutant_wild
 	RenderSprites:
 		Image: forgotten_mutant
 	AttackWander:
@@ -712,7 +712,7 @@ RAPT:
 		Description: Bipedal with enlarged sickle-shaped claw on each hindfoot
 	Inherits@EXT: ^ExternalConditions ##########
 
-tsnafnce:
+ts_nod_laserfence_segment:
 	Inherits: ^Wall
 	Tooltip:
 		Name: Laser Fence
@@ -1190,7 +1190,7 @@ TSTTNK:
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
 
-tssgencabal:
+cabal_mobilestealthgenerator:
 	Inherits: ts_nod_mobilestealthgenerator
 	Buildable:
 		Prerequisites: ~cabal_mechfactory, cabal_stealthgenerator, ~disabled
@@ -1200,7 +1200,7 @@ tssgencabal:
 	RenderVoxels:
 		Image: ts_nod_mobilestealthgenerator
 
-tscheavyspider_backup:
+cabal_heavyspider_backup:
 	Inherits: cabal_heavyspider
 	Valued:
 		Cost: 1200
@@ -1245,7 +1245,7 @@ tscheavyspider_backup:
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-tsart2cabal_backup:
+cabal_artilleryspider_backup:
 	Inherits: cabal_artilleryspider
 	Valued:
 		Cost: 1600
@@ -1284,7 +1284,7 @@ tsart2cabal_backup:
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-tsttnkcabal_backup:
+cabal_tarantula_backup:
 	Inherits: cabal_tarantula
 	Valued:
 		Cost: 1500
@@ -1328,7 +1328,7 @@ tsttnkcabal_backup:
 	WithColoredOverlay@backup:
 		Color: 000000b4
 
-TSAPACHE.Husk:
+ts_nod_harpy_husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -1440,7 +1440,7 @@ tsfsmoker.husk:
 		PlayerPalette: player_rgba
 	-RevealOnDeath:
 
-TSTRAN:
+forgotten_chinook:
 	Inherits: ^Helicopter
 	Inherits@Voxel: ^TSRenderVoxel
 	Valued:
@@ -1489,14 +1489,14 @@ TSTRAN:
 	Voiced:
 		VoiceSet: TSHeli
 	SpawnActorOnDeath:
-		Actor: TSTRAN.Husk
+		Actor: forgotten_chinook_husk
 	RenderVoxels:
 		Scale: 15
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 
-TSTRAN.Husk:
+forgotten_chinook_husk:
 	Inherits: ^HelicopterHusk
 	Inherits@Voxel: ^TSRenderVoxel
 	Tooltip:
@@ -1508,9 +1508,9 @@ TSTRAN.Husk:
 		Range: 7c0
 		Type: GroundPosition
 	RenderSprites:
-		Image: tstran
+		Image: forgotten_chinook
 	RenderVoxels:
-		Image: tstran
+		Image: forgotten_chinook
 		Scale: 15
 
 ^TSProjectileImprovements:
@@ -1553,7 +1553,7 @@ TSTRAN.Husk:
 
 ########## LAB ##########
 
-team_upgrade.up_modernfirecontrolsystems:
+ts_gdi_upgrade_modernfirecontrolsystems_proxy_actor:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
 		Prerequisite: ts_gdi_upgrade_modernfirecontrolsystems
@@ -1687,7 +1687,7 @@ team_upgrade.up_modernfirecontrolsystems:
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_willofkane
 
-team_upgrade.up_willofkane:
+ts_nod_upgrade_willofkane_proxy_actor:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
 		Prerequisite: ts_nod_upgrade_willofkane
@@ -1719,7 +1719,7 @@ team_upgrade.up_willofkane:
 	ActorStatValues:
 		Upgrades: cabal_upgrade_radarhack
 
-uptsdummy1:
+ts_gdi_promotion_dummy1:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: dummy
@@ -1731,7 +1731,7 @@ uptsdummy1:
 	RenderSprites:
 		Image: tsgdidummyicon
 
-uptsdummy2:
+ts_gdi_promotion_dummy2:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: dummy
@@ -1739,11 +1739,11 @@ uptsdummy2:
 		BuildPaletteOrder: 6
 		Queue: Promotions
 		Description: dummy
-		Prerequisites: ~fact.tsgdi, disabled, rank1, uptsdummy1
+		Prerequisites: ~fact.tsgdi, disabled, rank1, ts_gdi_promotion_dummy1
 	RenderSprites:
 		Image: tsgdidummyicon
 
-uptsdummy3:
+ts_gdi_promotion_dummy3:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: dummy
@@ -1751,11 +1751,11 @@ uptsdummy3:
 		BuildPaletteOrder: 9
 		Queue: Promotions
 		Description: dummy
-		Prerequisites: ~fact.tsgdi, disabled, rank1, uptsdummy2
+		Prerequisites: ~fact.tsgdi, disabled, rank1, ts_gdi_promotion_dummy2
 	RenderSprites:
 		Image: tsgdidummyicon
 
-uptsdummy4:
+ts_gdi_promotion_dummy4:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: dummy
@@ -1763,7 +1763,7 @@ uptsdummy4:
 		BuildPaletteOrder: 12
 		Queue: Promotions
 		Description: dummy
-		Prerequisites: ~fact.tsgdi, disabled, rank1, uptsdummy3
+		Prerequisites: ~fact.tsgdi, disabled, rank1, ts_gdi_promotion_dummy3
 	RenderSprites:
 		Image: tsgdidummyicon
 

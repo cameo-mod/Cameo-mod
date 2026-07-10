@@ -912,7 +912,7 @@ ts_gdi_juggernaut:
 # 	icon: tslaserfenceicon
 # 		Offset: 0, 0
 
-# tsnafnce:
+# ts_nod_laserfence_segment:
 # 	Defaults: tsntfence
 # 	idle:
 # 		Length: 1
@@ -2665,11 +2665,11 @@ tsgtsilo.gdi:
 # 	icon: tsupgradecentericon
 # 		Offset: 0, 0
 
-# tsgtplug2:
+# ts_gdi_upgrade_ioncannonuplink:
 # 	Inherits: ts_gdi_upgradecenter
 # 	icon: tsioncannonuplinkicon
 
-# tsgtplug3:
+# ts_gdi_upgrade_seekercontrol:
 # 	Inherits: ts_gdi_upgradecenter
 # 	icon: tsseekcontrolicon
 
@@ -2716,7 +2716,7 @@ tsgtsilo.gdi:
 # 		Start: 4
 # 		Length: 8
 
-# tstran:
+# forgotten_chinook:
 # 	idle: invisibleitem
 # 	icon: tsotrnicon
 # 	rotor: lrotor

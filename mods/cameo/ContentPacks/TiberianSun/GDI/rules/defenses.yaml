@@ -88,10 +88,10 @@ ts_gdi_upgradecenter:
 	#	Condition: plugupgrade
 	#GrantConditionOnProduction@ic:
 	#	Condition: ioncannon
-	#	Actors: tsgtplug2
+	#	Actors: ts_gdi_upgrade_ioncannonuplink
 	#GrantConditionOnProduction@hs:
 	#	Condition: hunterseeker
-	#	Actors: tsgtplug3
+	#	Actors: ts_gdi_upgrade_seekercontrol
 	RenderSprites:
 		PlayerPalette: playerra2
 

@@ -720,12 +720,12 @@ tsnodmmsil:
 		Filename: glgadfly_missile.shp
 		Facings: -32
 
-tsgtplug2:
+ts_gdi_upgrade_ioncannonuplink:
 	Inherits: ts_gdi_upgradecenter
 	icon:
 		Filename: tsioncannonuplinkicon.shp
 
-tsgtplug3:
+ts_gdi_upgrade_seekercontrol:
 	Inherits: ts_gdi_upgradecenter
 	icon:
 		Filename: tsseekcontrolicon.shp
@@ -751,7 +751,7 @@ tsfsmoker:
 	icon:
 		Filename: forgot_smoker_icon.png
 
-tstran:
+forgotten_chinook:
 	idle:
 		Filename: invisibleitem.shp
 	icon:

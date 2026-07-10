@@ -1,5 +1,5 @@
 ts_nod_silo:
-	Inherits: TSGTSILO
+	Inherits: ts_gdi_silo
 	Tooltip:
 		Name: Silo
 	Buildable:
@@ -399,7 +399,7 @@ ts_nod_laserfence:
 	LineBuild:
 		Range: 10
 		NodeTypes: laserfencenode
-		SegmentType: tsnafnce
+		SegmentType: ts_nod_laserfence_segment
 		SegmentsRequireNode: true
 	LineBuildNode:
 		Types: laserfencenode

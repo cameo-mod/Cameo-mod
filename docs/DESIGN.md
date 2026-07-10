@@ -60,6 +60,10 @@ mods/cameo/ContentPacks/<Theme>/<Faction>/
   sequences/sequences.yaml# ONE file per faction
 ```
 
+- **naval.yaml holds ALL naval content: every ship AND the naval yards**,
+  even though naval yards normally count as buildings. The lobby option
+  that unlocks the naval prerequisite can then also dynamically load (or
+  skip) the whole naval asset set based on the lobby setting.
 - Weapons move into a pack only when used **exclusively** by that faction
   (computed through warhead sub-weapon and Inherits closure); shared
   weapons stay in the theme/shared files.

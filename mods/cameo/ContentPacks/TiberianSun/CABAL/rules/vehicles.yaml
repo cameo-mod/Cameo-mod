@@ -488,7 +488,7 @@ cabal_heavyspider:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
  	SpawnActorOnDeath@backup:
- 		Actor: tscheavyspider_backup
+ 		Actor: cabal_heavyspider_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_artilleryspider:
@@ -553,7 +553,7 @@ cabal_artilleryspider:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
  	SpawnActorOnDeath@backup:
- 		Actor: tsart2cabal_backup
+ 		Actor: cabal_artilleryspider_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_tarantula:
@@ -629,7 +629,7 @@ cabal_tarantula:
 		PlayerPalette: player_rgba
 		Image: tstnkspid
  	SpawnActorOnDeath@backup:
- 		Actor: tsttnkcabal_backup
+ 		Actor: cabal_tarantula_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_scarabapc:
