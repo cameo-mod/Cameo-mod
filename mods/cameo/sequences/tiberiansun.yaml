@@ -1233,22 +1233,22 @@ tsdig:
 # 	die: tscloud2d
 
 tsdroppod:
- 	idle:
+	idle:
 		Filename: ra2_pod.shp
- 		Length: 1
+		Length: 1
 		Facing: 2
 	fade1:
 		Filename: ra2_droppod2.shp
- 		Length: *
- 		Tick: 200
+		Length: *
+		Tick: 200
 	fade2:
 		Filename: ra2_droppod.shp
- 		Length: *
- 		Tick: 200
+		Length: *
+		Tick: 200
 	ring:
 		Filename: ra2_podring.shp
- 		Length: *
- 		ZOffset: 256
+		Length: *
+		ZOffset: 256
 
 # tsdroppod:
 # 	idle:
