@@ -1,0 +1,43 @@
+# Garrison-weapon design exceptions — DESIGN.md §12.
+# Infantry listed here are ALLOWED to have no `Name: garrisoned` armament;
+# audit_garrison_weapons.py skips them. One `- id` per line; the category
+# headers are documentation. Decided by design 2026-07-10: melee,
+# suicide/bomb attackers, and casters/mind-control do not fire from
+# garrisons. Commandos and ranged shooters ALWAYS get a garrison weapon
+# (the Ordos Face Dancer is a commando in Cameo — not an exception).
+
+melee:  # blades, claws, jaws, fists cannot fire from windows
+  - sczealot
+  - scdarktemplar
+  - sczeratul
+  - scamaranth
+  - sclegionnaire
+  - sctalon
+  - sczergling
+  - sckerriganzerg
+  - wc2_human_footman
+  - wc2_human_footman2
+  - wc2_orc_grunt
+  - wc2_orc_grunt2
+  - samurai.asian
+  - alligator.asian
+  - yrbrute
+  - ts_nod_chameleonspy
+  - dog
+  - cyberdog
+  - ra2adog
+
+suicide:  # one-shot mechanics make no sense from a window
+  - ra2terror.latin
+  - scinfestedterran
+  - ra2ivan
+  - saboteur.ordos
+
+casters:  # special-mechanic attacks (mind control, spells, spy work)
+  - yryuri
+  - yryurix
+  - schightemplar
+  - scdefiler
+  - raspy
+  - wc2_human_high_elf_priest
+  - wc2_human_high_elf_sorceress

@@ -192,3 +192,42 @@ cheapest provider wins).
    ai.yaml wiring, roster-wide upgrade hooks, class template, sequences
    that resolve, and a changelog line (Definition of Done,
    MASTER_REPORT Appendix D).
+
+## 10. Actor & faction uniqueness (design north star)
+
+- **No two units or defenses use identical weapons.** Every armed actor
+  owns its own weapon entries (`audit_weapon_uniqueness.py`). Sharing is
+  legal only inside one actor's own variant family (`_sp`/`_elite`/husk/
+  paradrop twins, garrisoned armaments of the same actor) and for
+  systemic utility weapons (C4, DefuseKit, capture/heal/repair tools).
+- Beyond weapons, every actor should be **unique in its own stats and its
+  weapons' stats** — each actor has its own character and feeling. No two
+  actors of a faction may feel the same, and especially no two actors of
+  DIFFERENT factions may feel the same. Factions express identity through
+  themed actors; uniqueness is a faction-identity feature, not polish.
+- Weapon-dedup findings are **balance/design work**, never mechanical
+  auto-fixes: propose per-actor stat divergence options, let design
+  choose, then implement.
+
+## 11. Garrison weapons (audit_garrison_weapons.py)
+
+- **Every garrison-capable infantry with a damaging weapon carries a
+  garrisoned armament** (`Name: garrisoned`) — commandos included (the
+  Ordos Face Dancer is a commando in Cameo, so he fires from garrisons).
+- Design exceptions live in `docs/design/garrison_exceptions.yaml`:
+  melee, suicide/bomb attackers, and casters/mind-control do not fire
+  from garrisons. Engineers without combat weapons and units garrisons
+  cannot accept (non-Infantry CargoType) are auto-exempt.
+- **G2 miswire class**: an `Armament@GARRISONED`-style block WITHOUT
+  `Name: garrisoned` silently becomes a second primary — double-fire in
+  the open, silence in bunkers (live cases: TS engineer pistol, RA1
+  Imperial Scoutsman, M113 Adats-style condition typos).
+- **G3: garrisoned armaments never carry a FireDelay.**
+
+## 12. Map props (Obstacle target type)
+
+- Trees, rocks, utility poles and other decorations carry
+  `TargetTypes: Ground, Obstacle` (templates `^Tree ^TreeHusk ^Rock ^Box`).
+- `Obstacle` exists for AI logic (minelayer bot ignores it), **never for
+  weapons**: no weapon lists Obstacle in Valid/InvalidTargets — props are
+  hit as plain Ground.
