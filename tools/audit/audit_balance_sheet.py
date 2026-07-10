@@ -117,8 +117,8 @@ def main() -> int:
             if rc and not rc.startswith("!"):
                 continue                      # upgraded/elite variants
             name = (arm.get("Name") or "primary").lower()
-            if name != "primary":
-                continue
+            if name not in ("primary", "secondary"):
+                continue                      # garrisoned/targeting/etc.
             ww = rs.resolve_weapon(w)
             if ww is None:
                 continue
