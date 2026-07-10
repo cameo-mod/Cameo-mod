@@ -1,11 +1,28 @@
 # audit_fluent — localization drift (B12)
 
-Fluent messages loaded: **4105** — unresolved fluent refs in rules: **0**, orphaned actor-* messages: **233**
+Fluent messages loaded: **4333** — unresolved fluent refs in rules: **16**, orphaned actor-* messages: **233**
 
 
 ## F1 — rules reference fluent keys that don't exist (shows raw key in-game)
 
-_none found_
+| actor | field | missing key |
+|---|---|---|
+| arty.steel | Buildable.Description | actor-steel_arty.description |
+| cabal_core | Buildable.Description | actor-tscore.description |
+| cabal_missilesilo | Buildable.Description | actor-tsntmisl.description |
+| cabal_radar | Buildable.Description | actor-tsntradr.description |
+| cabal_stealthgenerator | Buildable.Description | actor-tsntstlh.description |
+| cabal_techcenter | Buildable.Description | actor-tscabaltech.description |
+| ts_gdi_empulsecannon | Buildable.Description | actor-tsntpulsgdi.description |
+| ts_gdi_radar | Buildable.Description | actor-tsgtradr.description |
+| ts_gdi_upgradecenter | Buildable.Description | actor-tsgtplug.description |
+| ts_nod_laserturret | Buildable.Description | actor-tsntlasr.description |
+| ts_nod_missilesilo | Buildable.Description | actor-tsntmisl.description |
+| ts_nod_radar | Buildable.Description | actor-tsntradr.description |
+| ts_nod_samsite | Buildable.Description | actor-tsntsam.description |
+| ts_nod_stealthgenerator | Buildable.Description | actor-tsntstlh.description |
+| ts_nod_tiberiumwastefacility | Buildable.Description | actor-tsntwast.description |
+| tsntlasrcabal | Buildable.Description | actor-tsntlasr.description |
 
 
 ## F2 — fluent actor-* messages for actors that no longer exist
@@ -256,7 +273,7 @@ _none found_
 | cabal | 0/64 | 0% |
 | consortium | 0/65 | 0% |
 | edenl | 0/47 | 0% |
-| forgotten | 0/80 | 0% |
+| forgotten | 76/80 | 95% |
 | futuretech | 0/60 | 0% |
 | gdi | 1/71 | 1% |
 | human2 | 0/73 | 0% |
@@ -271,7 +288,7 @@ _none found_
 | protoss | 0/76 | 0% |
 | ra2america | 7/70 | 10% |
 | ra2russia | 1/61 | 1% |
-| soviet | 2/118 | 1% |
+| soviet | 2/120 | 1% |
 | syndicate | 0/72 | 0% |
 | terran | 0/81 | 0% |
 | tkm | 1/76 | 1% |

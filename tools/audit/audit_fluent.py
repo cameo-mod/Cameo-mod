@@ -19,7 +19,7 @@ from cameo_model import Model
 from miniyaml import load_fluent_keys
 from report import h1, h2, table
 
-_fluent_ref = re.compile(r"^[a-z0-9][a-z0-9-]*(\.[a-z0-9-]+)+$")
+_fluent_ref = re.compile(r"^[a-z0-9][a-z0-9_-]*(\.[a-z0-9_-]+)+$")
 FLUENT_FIELDS = ("Name", "Description", "ReadyTextNotification", "Label")
 
 
