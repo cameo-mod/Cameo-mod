@@ -107,9 +107,11 @@ Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
 | AA / advanced defense detection | `DetectCloaked.Range = weapon range / 2` |
 | Defense power | `Power.Amount = -(Cost / 20)` |
 | Vehicle turning | `Mobile.TurnSpeed = Speed / 5`; `Turreted.TurnSpeed` equals it |
-| Turretless (AttackFrontal) vehicles | `TurnSpeed = 2 × Speed / 5` — artillery-template units keep `Speed / 5` |
+| Turretless (AttackFrontal) vehicles | `TurnSpeed = 2 × Speed / 5` — the former artillery exception was dropped 2026-07-10 (data check: turretless artillery split 24 at 2×, 18 at 1× — no real pattern) |
 | Turreted artillery / fire support | Archer firing-slow: `GrantConditionOnAttack(firing)`, 50% Speed/Turn/TurretTurn multipliers, `RevokeDelay = weapon ReloadDelay / 2` |
 | Fighters & bombers (by template) | `Aircraft.TurnSpeed = Speed / 15` (frontal-weapon craft 2×) |
+| Helicopters & spaceships (by template) | `Aircraft.TurnSpeed = Speed / 5`, like vehicles (design 2026-07-10; 45 of ~55 helicopters already comply) |
+| AA support vehicles | anti-air weapon range = **1.5 × anti-ground range** (forgotten_m113adats is reference-clean: 5606 / 8409) |
 | AA weapons | a weapon whose ValidTargets include Air must have ≥1 damage warhead that hits Air (inheritance-resolved) |
 
 Unit classification is authoritative from the **class templates in

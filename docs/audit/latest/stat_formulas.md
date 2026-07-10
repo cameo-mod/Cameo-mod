@@ -1,15 +1,23 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **788** across 1838 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
-## F1 — Repairable.HpPerStep ≠ HP/20  (46)
+## F1 — Repairable.HpPerStep ≠ HP/20  (47)
 
 | actor | actual | expected |
 |---|---|---|
 | beetle.nax2 | HpPerStep 4375 | expected 2375 (HP 47500/20) |
 | bmwbike.nax | HpPerStep 4125 | expected 1100 (HP 22000/20) |
 | bomber.ixian | HpPerStep 5555 | expected 5550 (HP 111000/20) |
+| cabal_artilleryspider | HpPerStep 1500 | expected 10000 (HP 200000/20) |
+| cabal_heavyspider | HpPerStep 1500 | expected 4000 (HP 80000/20) |
+| cabal_laserspider | HpPerStep 1500 | expected 2000 (HP 40000/20) |
+| cabal_mantis | HpPerStep 1500 | expected 2000 (HP 40000/20) |
+| cabal_scarabapc | HpPerStep 2637 | expected 1500 (HP 30000/20) |
+| cabal_spidertankdrone | HpPerStep 1500 | expected 2000 (HP 40000/20) |
+| cabal_tarantula | HpPerStep 5000 | expected 12500 (HP 250000/20) |
+| forgotten_scoopertank | HpPerStep 10000 | expected 12500 (HP 250000/20) |
 | gravity.nax2 | HpPerStep 3125 | expected 15000 (HP 300000/20) |
 | imperial.nax | HpPerStep 3125 | expected 4125 (HP 82500/20) |
 | landcarr.futu | HpPerStep 6500 | expected 6250 (HP 125000/20) |
@@ -23,6 +31,7 @@ Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher,
 | modcore7 | HpPerStep 15000 | expected 2500 (HP 50000/20) |
 | nokana.nax | HpPerStep 3125 | expected 22500 (HP 450000/20) |
 | shoe.nax | HpPerStep 10000 | expected 7500 (HP 150000/20) |
+| sovstalinfist | HpPerStep 15000 | expected 5000 (HP 100000/20) |
 | sturmtiger.nax | HpPerStep 2000 | expected 12500 (HP 250000/20) |
 | t30 | HpPerStep 2637 | expected 20000 (HP 400000/20) |
 | t72 | HpPerStep 2637 | expected 5000 (HP 100000/20) |
@@ -38,24 +47,16 @@ Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher,
 | tkmstryker | HpPerStep 1375 | expected 4000 (HP 80000/20) |
 | tkmtrenchtank | HpPerStep 2637 | expected 10000 (HP 200000/20) |
 | tkmtrenchtruck | HpPerStep 2637 | expected 5000 (HP 100000/20) |
-| ts3tnk | HpPerStep 10000 | expected 12500 (HP 250000/20) |
-| tsart2cabal | HpPerStep 1500 | expected 10000 (HP 200000/20) |
+| ts_gdi_mobilesensorarray | HpPerStep 2637 | expected 3000 (HP 60000/20) |
+| ts_nod_mobilestealthgenerator | HpPerStep 2637 | expected 1000 (HP 20000/20) |
+| ts_nod_subterraneanapc | HpPerStep 2637 | expected 875 (HP 17500/20) |
 | tsbike | HpPerStep 100 | expected 1000 (HP 20000/20) |
-| tscabalcobra | HpPerStep 1500 | expected 2000 (HP 40000/20) |
-| tscheavyspider | HpPerStep 1500 | expected 4000 (HP 80000/20) |
-| tslasspid | HpPerStep 1500 | expected 2000 (HP 40000/20) |
-| tslpst | HpPerStep 2637 | expected 3000 (HP 60000/20) |
-| tssapc | HpPerStep 2637 | expected 875 (HP 17500/20) |
-| tssapccabal | HpPerStep 2637 | expected 1500 (HP 30000/20) |
-| tssgen | HpPerStep 2637 | expected 1000 (HP 20000/20) |
-| tsspddrone | HpPerStep 1500 | expected 2000 (HP 40000/20) |
-| tsttnkcabal | HpPerStep 5000 | expected 12500 (HP 250000/20) |
 | zep.nax | HpPerStep 2625 | expected 62500 (HP 1250000/20) |
 | zep.nax2 | HpPerStep 2625 | expected 67500 (HP 1350000/20) |
 | zombietank.nax | HpPerStep 7875 | expected 5500 (HP 110000/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (99)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (100)
 
 | actor | actual | expected |
 |---|---|---|
@@ -64,11 +65,30 @@ Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher,
 | beetle.nax2 | Step 35 | expected 19 (HP 47500/2500) |
 | bf109.nax | Step 30 | expected 24 (HP 60000/2500) |
 | bmwbike.nax | Step 33 | expected 9 (HP 22000/2500) |
+| cabal_artilleryspider | Step 12 | expected 80 (HP 200000/2500) |
+| cabal_ascended | Step 25 | expected 60 (HP 60000/1000) |
+| cabal_constructionyard | Step 10 | expected 400 (HP 1000000/2500) |
+| cabal_cyborgcommandov2 | Step 200 | expected 400 (HP 400000/1000) |
+| cabal_cyborginfantry | Step 25 | expected 35 (HP 35000/1000) |
+| cabal_cyborgreaper | Step 75 | expected 30 (HP 75000/2500) |
+| cabal_devout | Step 25 | expected 60 (HP 60000/1000) |
+| cabal_dissolver | Step 28 | expected 11 (HP 28000/2500) |
+| cabal_eliminator1000 | Step 10 | expected 100 (HP 250000/2500) |
+| cabal_eliminator800 | Step 10 | expected 16 (HP 16000/1000) |
+| cabal_hackercyborg | Step 25 | expected 60 (HP 60000/1000) |
+| cabal_heavyspider | Step 12 | expected 32 (HP 80000/2500) |
+| cabal_laserspider | Step 12 | expected 16 (HP 40000/2500) |
+| cabal_mantis | Step 12 | expected 16 (HP 40000/2500) |
+| cabal_platedarmorcyborg | Step 25 | expected 60 (HP 60000/1000) |
+| cabal_spidertankdrone | Step 12 | expected 16 (HP 40000/2500) |
+| cabal_tarantula | Step 40 | expected 100 (HP 250000/2500) |
 | combat_tank.harkonnen | Step 10 | expected 28 (HP 70000/2500) |
 | conehead.nax | Step 10 | expected 20 (HP 20000/1000) |
 | ctnk | Step 60 | expected 30 (HP 75000/2500) |
 | dieglocke.nax2 | Step 50 | expected 1500 (HP 3750000/2500) |
 | eden_tiger_acidcloud | Step 10 | expected 24 (HP 60000/2500) |
+| forgotten_mutanthijacker | Step 10 | expected 25 (HP 25000/1000) |
+| forgotten_scoopertank | Step 80 | expected 100 (HP 250000/2500) |
 | gravity.nax2 | Step 10 | expected 120 (HP 300000/2500) |
 | harv2.futu | Step 60 | expected 48 (HP 120000/2500) |
 | imperial.nax | Step 10 | expected 33 (HP 82500/2500) |
@@ -105,6 +125,7 @@ Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher,
 | sarubia.nax | Step 10 | expected 25 (HP 62500/2500) |
 | scgorekraken | Step 150 | expected 140 (HP 350000/2500) |
 | shoe.nax | Step 80 | expected 60 (HP 150000/2500) |
+| sovstalinfist | Step 120 | expected 40 (HP 100000/2500) |
 | spy.futu | Step 10 | expected 5 (HP 5000/1000) |
 | su57 | Step 52 | expected 26 (HP 65000/2500) |
 | swarmer.ordos | Step 20 | expected 8 (HP 20000/2500) |
@@ -124,28 +145,9 @@ Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher,
 | tkmtrenchtank | Step 10 | expected 80 (HP 200000/2500) |
 | tkmtrenchtruck | Step 10 | expected 40 (HP 100000/2500) |
 | tkmzaza | Step 11 | expected 50 (HP 125000/2500) |
-| ts3tnk | Step 80 | expected 100 (HP 250000/2500) |
-| tsarnd | Step 10 | expected 16 (HP 16000/1000) |
-| tsart2cabal | Step 12 | expected 80 (HP 200000/2500) |
-| tsascended | Step 25 | expected 60 (HP 60000/1000) |
-| tscabalcobra | Step 12 | expected 16 (HP 40000/2500) |
-| tsccommando | Step 200 | expected 400 (HP 400000/1000) |
-| tschamspy | Step 10 | expected 30 (HP 30000/1000) |
-| tscheavyspider | Step 12 | expected 32 (HP 80000/2500) |
-| tscyborg | Step 25 | expected 35 (HP 35000/1000) |
-| tscyborgb | Step 25 | expected 60 (HP 60000/1000) |
-| tsdevout | Step 25 | expected 60 (HP 60000/1000) |
-| tsdissolver | Step 28 | expected 11 (HP 28000/2500) |
-| tsgtcnstcabal | Step 10 | expected 400 (HP 1000000/2500) |
-| tshacker | Step 25 | expected 60 (HP 60000/1000) |
-| tslasspid | Step 12 | expected 16 (HP 40000/2500) |
-| tsmhijack | Step 10 | expected 25 (HP 25000/1000) |
-| tsreaper | Step 75 | expected 30 (HP 75000/2500) |
-| tssapc | Step 10 | expected 7 (HP 17500/2500) |
-| tsspddrone | Step 12 | expected 16 (HP 40000/2500) |
-| tst1000 | Step 10 | expected 100 (HP 250000/2500) |
-| tsttnkcabal | Step 40 | expected 100 (HP 250000/2500) |
-| tszonetrooper | Step 10 | expected 80 (HP 80000/1000) |
+| ts_gdi_zonetrooper | Step 10 | expected 80 (HP 80000/1000) |
+| ts_nod_chameleonspy | Step 10 | expected 30 (HP 30000/1000) |
+| ts_nod_subterraneanapc | Step 10 | expected 7 (HP 17500/2500) |
 | twister.futu | Step 50 | expected 20 (HP 50000/2500) |
 | twister.steel | Step 50 | expected 20 (HP 50000/2500) |
 | typechiha | Step 104 | expected 52 (HP 130000/2500) |
@@ -170,7 +172,7 @@ Violations: **752** across 1833 roster actors (reference-clean units: gdiarcher,
 | wc2_human_militia2 | infantry declares Repairable locally |  |
 
 
-_231 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
+_233 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
 
 
 ## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (64)
@@ -181,6 +183,8 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | autogun_tank.ordos | RegenAmount 96 | expected 128 (2 x SelfHealing 64) |
 | autogun_tank_small.ordos | RegenAmount 48 | expected 76 (2 x SelfHealing 38) |
 | bomber.ixian | RegenAmount 76 | expected 88 (2 x SelfHealing 44) |
+| cabal_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
+| cabal_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | chem_troop.ordos | RegenAmount 10 | expected 60 (2 x SelfHealing 30) |
 | cheme3 | RegenAmount 25 | expected 36 (2 x SelfHealing 18) |
 | contaminator.ordos | RegenAmount 10 | expected 150 (2 x SelfHealing 75) |
@@ -192,6 +196,8 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | e5 | RegenAmount 25 | expected 96 (2 x SelfHealing 48) |
 | eden_cargotruck_empty | RegenAmount 10 | expected 88 (2 x SelfHealing 44) |
 | face_dancer.ordos | RegenAmount 10 | expected 180 (2 x SelfHealing 90) |
+| forgotten_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
+| forgotten_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | harv.futu | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | harv.gdi | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | harv.latin | RegenAmount 10 | expected 68 (2 x SelfHealing 34) |
@@ -219,16 +225,12 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | tanodharv | RegenAmount 10 | expected 100 (2 x SelfHealing 50) |
 | tkmharv | RegenAmount 10 | expected 80 (2 x SelfHealing 40) |
 | trooper | RegenAmount 10 | expected 24 (2 x SelfHealing 12) |
+| ts_gdi_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
+| ts_gdi_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
+| ts_nod_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
+| ts_nod_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | tsblackhandflamer | RegenAmount 25 | expected 72 (2 x SelfHealing 36) |
 | tsblackhandlaser | RegenAmount 25 | expected 120 (2 x SelfHealing 60) |
-| tsengineecabal | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
-| tsengineer.gdi | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
-| tsengineer2 | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
-| tsengineermutant | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
-| tsharv | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
-| tsharvcabal | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
-| tsharvmutant | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
-| tsharvnod | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | tsstealthsoldier | RegenAmount 25 | expected 50 (2 x SelfHealing 25) |
 | twin_rocket_trooper.ixian | RegenAmount 10 | expected 48 (2 x SelfHealing 24) |
 | wc2_human_militia2 | RegenAmount 10 | expected 16 (2 x SelfHealing 8) |
@@ -249,16 +251,19 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 |---|---|---|
 | bfg10k.steel | RevealsShroud 25000 | weapon range 10238976 |
 | bunk.nax | RevealsShroud 6666 | weapon range 12345 |
+| cabal_heavycabalobelisk | RevealsShroud 7168 | weapon range 10435 |
+| cabal_missilesilo | RevealsShroud 5120 | weapon range 10238976 |
+| cabal_obeliskofdarkness | RevealsShroud 7168 | weapon range 12288 |
 | eden_gp_emp | RevealsShroud 6144 | weapon range 5500 |
 | eden_gp_laser | RevealsShroud 6144 | weapon range 6656 |
 | eden_gp_railgun | RevealsShroud 6144 | weapon range 7168 |
 | fedaa.steel | RevealsShroud 12000 | weapon range 15000 |
 | fedturret.steel | RevealsShroud 6666 | weapon range 15000 |
 | flak88.nax | RevealsShroud 6666 | weapon range 13200 |
-| forgot_htnk_tur | RevealsShroud 7168 | weapon range 6404 |
-| forgot_ltnk_tur | RevealsShroud 7168 | weapon range 6574 |
-| forgot_mtnk_tur | RevealsShroud 7168 | weapon range 9483 |
-| forgot_tower | RevealsShroud 7168 | weapon range 6272 |
+| forgotten_brokenrattytankturret | RevealsShroud 7168 | weapon range 6574 |
+| forgotten_brokenscoopertankturret | RevealsShroud 7168 | weapon range 6404 |
+| forgotten_brokenwarriortankturret | RevealsShroud 7168 | weapon range 9483 |
+| forgotten_machineguntower | RevealsShroud 7168 | weapon range 6272 |
 | ngdshktur.latin | RevealsShroud 6666 | weapon range 7777 |
 | plymouth_gp_microwave | RevealsShroud 6144 | weapon range 6656 |
 | plymouth_gp_rpg | RevealsShroud 6144 | weapon range 7168 |
@@ -272,15 +277,12 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | scsunkencolony | RevealsShroud 5000 | weapon range 10160 |
 | sturmcann.nax2 | RevealsShroud 6666 | weapon range 14000 |
 | tkmbunkerquadturret | RevealsShroud 6720 | weapon range 11604 |
-| tsgtctwrmg | RevealsShroud 7168 | weapon range 6809 |
-| tsgtctwrrpg | RevealsShroud 7168 | weapon range 8544 |
-| tsntlasr | RevealsShroud 7168 | weapon range 6992 |
-| tsntmisl | RevealsShroud 5120 | weapon range 10238976 |
-| tsntmislcabal | RevealsShroud 5120 | weapon range 10238976 |
-| tsntobel | RevealsShroud 7168 | weapon range 10435 |
-| tsntobelcabal | RevealsShroud 7168 | weapon range 10435 |
-| tsntpulsgdi | RevealsShroud 7168 | weapon range 10205 |
-| tsobl2 | RevealsShroud 7168 | weapon range 12288 |
+| ts_gdi_empulsecannon | RevealsShroud 7168 | weapon range 10205 |
+| ts_gdi_rpgtower | RevealsShroud 7168 | weapon range 8544 |
+| ts_gdi_vulcantower | RevealsShroud 7168 | weapon range 6809 |
+| ts_nod_laserturret | RevealsShroud 7168 | weapon range 6992 |
+| ts_nod_missilesilo | RevealsShroud 5120 | weapon range 10238976 |
+| ts_nod_obeliskoflight | RevealsShroud 7168 | weapon range 10435 |
 | twr.nax | RevealsShroud 6666 | weapon range 8100 |
 | wc2_human_cannon_tower | RevealsShroud 5000 | weapon range 10500 |
 | wc2_human_guard_tower | RevealsShroud 5000 | weapon range 10500 |
@@ -296,23 +298,23 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | actor | actual | expected |
 |---|---|---|
 | bfg10k.steel | DetectCloaked 12500 | expected 5119488 (range/2) |
+| cabal_heavycabalobelisk | DetectCloaked 5120 | expected 5217 (range/2) |
+| cabal_obeliskofdarkness | DetectCloaked 7168 | expected 6144 (range/2) |
 | fedaa.steel | DetectCloaked 6000 | expected 7500 (range/2) |
-| forgot_htnk_tur | DetectCloaked 3072 | expected 3202 (range/2) |
-| forgot_mtnk_tur | DetectCloaked 3072 | expected 4741 (range/2) |
+| forgotten_brokenscoopertankturret | DetectCloaked 3072 | expected 3202 (range/2) |
+| forgotten_brokenwarriortankturret | DetectCloaked 3072 | expected 4741 (range/2) |
+| forgotten_juggerflakwall | DetectCloaked 4096 | expected 5617 (range/2) |
 | qcannon.steel | DetectCloaked 4444 | expected 7500 (range/2) |
 | ra2tesla | DetectCloaked 5000 | expected 4421 (range/2) |
 | sam | DetectCloaked 6294 | expected 6096 (range/2) |
 | scphotoncannon | DetectCloaked 4224 | expected 4114 (range/2) |
 | sml.latin | DetectCloaked 7000 | expected 7500 (range/2) |
 | tkmbunkerquadturret | DetectCloaked 6000 | expected 5802 (range/2) |
-| tsgtctwrrpg | DetectCloaked 3072 | expected 4272 (range/2) |
-| tsgtctwrsam | DetectCloaked 4096 | expected 6220 (range/2) |
-| tsgtctwrsammutant | DetectCloaked 4096 | expected 5617 (range/2) |
-| tsntobel | DetectCloaked 5120 | expected 5217 (range/2) |
-| tsntobelcabal | DetectCloaked 5120 | expected 5217 (range/2) |
-| tsntpulsgdi | DetectCloaked missing | expected 5102 |
-| tsntsam | DetectCloaked 4096 | expected 6588 (range/2) |
-| tsobl2 | DetectCloaked 7168 | expected 6144 (range/2) |
+| ts_gdi_empulsecannon | DetectCloaked missing | expected 5102 |
+| ts_gdi_rpgtower | DetectCloaked 3072 | expected 4272 (range/2) |
+| ts_gdi_samtower | DetectCloaked 4096 | expected 6220 (range/2) |
+| ts_nod_obeliskoflight | DetectCloaked 5120 | expected 5217 (range/2) |
+| ts_nod_samsite | DetectCloaked 4096 | expected 6588 (range/2) |
 | yrygpsyt | DetectCloaked 5000 | expected 4000 (range/2) |
 
 
@@ -325,6 +327,12 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | brik | Power missing | expected -10 |
 | bunk.nax | Power missing | expected -50 |
 | ca12hit.latin | Power -200 | expected -500 (-Cost/20) |
+| cabal_heavycabalobelisk | Power -100 | expected -130 (-Cost/20) |
+| cabal_missilesilo | Power -150 | expected -500 (-Cost/20) |
+| cabal_obeliskofdarkness | Power -75 | expected -67 (-Cost/20) |
+| cabal_pillbox | Power -25 | expected -30 (-Cost/20) |
+| cabal_silo | Power -10 | expected -7 (-Cost/20) |
+| cabal_stealthgenerator | Power -150 | expected -125 (-Cost/20) |
 | cgchao.asian | Power -200 | expected -250 (-Cost/20) |
 | cgflam.asian | Power -25 | expected -40 (-Cost/20) |
 | cgionc.asian | Power -200 | expected -500 (-Cost/20) |
@@ -341,10 +349,13 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | fedaa.steel | Power -45 | expected -50 (-Cost/20) |
 | fenc | Power missing | expected -1 |
 | flak88.nax | Power -40 | expected -60 (-Cost/20) |
-| forgot_htnk_tur | Power 0 | expected -87 (-Cost/20) |
-| forgot_ltnk_tur | Power 0 | expected -40 (-Cost/20) |
-| forgot_mtnk_tur | Power 0 | expected -75 (-Cost/20) |
-| forgot_tower | Power -20 | expected -30 (-Cost/20) |
+| forgotten_brokenrattytankturret | Power 0 | expected -40 (-Cost/20) |
+| forgotten_brokenscoopertankturret | Power 0 | expected -87 (-Cost/20) |
+| forgotten_brokenwarriortankturret | Power 0 | expected -75 (-Cost/20) |
+| forgotten_juggerflakwall | Power -40 | expected -50 (-Cost/20) |
+| forgotten_machineguntower | Power -20 | expected -30 (-Cost/20) |
+| forgotten_silo | Power -10 | expected -15 (-Cost/20) |
+| forgotten_veinhole | Power -150 | expected -500 (-Cost/20) |
 | iron | Power -200 | expected -250 (-Cost/20) |
 | jshrine | Power -200 | expected -500 (-Cost/20) |
 | meteorray.nax2 | Power -200 | expected -500 (-Cost/20) |
@@ -382,26 +393,17 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | tkmbunker | Power missing | expected -30 |
 | tkmbunkerquadturret | Power -25 | expected -45 (-Cost/20) |
 | tkmbunkertankturret | Power -25 | expected -40 (-Cost/20) |
-| tscbunk | Power -25 | expected -30 (-Cost/20) |
-| tsgtctwrmg | Power -20 | expected -30 (-Cost/20) |
-| tsgtctwrrpg | Power -20 | expected -70 (-Cost/20) |
-| tsgtctwrsam | Power -30 | expected -40 (-Cost/20) |
-| tsgtctwrsammutant | Power -40 | expected -50 (-Cost/20) |
-| tsgtplug | Power -200 | expected -500 (-Cost/20) |
-| tsgtsilocabal | Power -10 | expected -7 (-Cost/20) |
-| tsgtsilomutant | Power -10 | expected -15 (-Cost/20) |
-| tsgtsilonod | Power -10 | expected -7 (-Cost/20) |
-| tsnapost | Power -25 | expected -10 (-Cost/20) |
-| tsntlasr | Power -20 | expected -40 (-Cost/20) |
-| tsntmisl | Power -150 | expected -500 (-Cost/20) |
-| tsntmislcabal | Power -150 | expected -500 (-Cost/20) |
-| tsntobel | Power -100 | expected -110 (-Cost/20) |
-| tsntobelcabal | Power -100 | expected -130 (-Cost/20) |
-| tsntsam | Power -30 | expected -40 (-Cost/20) |
-| tsntstlh | Power -150 | expected -125 (-Cost/20) |
-| tsntstlhcabal | Power -150 | expected -125 (-Cost/20) |
-| tsobl2 | Power -75 | expected -67 (-Cost/20) |
-| tsveinhole | Power -150 | expected -500 (-Cost/20) |
+| ts_gdi_rpgtower | Power -20 | expected -70 (-Cost/20) |
+| ts_gdi_samtower | Power -30 | expected -40 (-Cost/20) |
+| ts_gdi_upgradecenter | Power -200 | expected -500 (-Cost/20) |
+| ts_gdi_vulcantower | Power -20 | expected -30 (-Cost/20) |
+| ts_nod_laserfence | Power -25 | expected -10 (-Cost/20) |
+| ts_nod_laserturret | Power -20 | expected -40 (-Cost/20) |
+| ts_nod_missilesilo | Power -150 | expected -500 (-Cost/20) |
+| ts_nod_obeliskoflight | Power -100 | expected -110 (-Cost/20) |
+| ts_nod_samsite | Power -30 | expected -40 (-Cost/20) |
+| ts_nod_silo | Power -10 | expected -7 (-Cost/20) |
+| ts_nod_stealthgenerator | Power -150 | expected -125 (-Cost/20) |
 | twr.nax | Power -25 | expected -32 (-Cost/20) |
 | wall | Power missing | expected -6 |
 | wc2_human_cannon_tower | Power missing | expected -75 |
@@ -418,13 +420,15 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | yrygppet | Power -200 | expected -500 (-Cost/20) |
 
 
-## F8 — vehicle TurnSpeed ≠ Speed/5  (34)
+## F8 — vehicle TurnSpeed ≠ Speed/5  (35)
 
 | actor | actual | expected |
 |---|---|---|
 | autogun_tank.ordos | TurnSpeed 30 (Speed 75) | expected 15 = Speed/5 |
 | bike | TurnSpeed 80 (Speed 200) | expected 40 = Speed/5 |
 | bmwbike.nax | TurnSpeed 16 (Speed 125) | expected 25 = Speed/5 |
+| cabal_dissolver | TurnSpeed 396 (Speed 70) | expected 14 = Speed/5 |
+| cabal_scarabapc | TurnSpeed 40 (Speed 75) | expected 15 = Speed/5 |
 | chembike | TurnSpeed 70 (Speed 175) | expected 35 = Speed/5 |
 | cobra.ordos | TurnSpeed 18 (Speed 45) | expected 9 = Speed/5 |
 | coiler.futu | TurnSpeed 20 (Speed 50) | expected 10 = Speed/5 |
@@ -446,19 +450,18 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | ra_heatraytank | TurnSpeed 24 (Speed 60) | expected 12 = Speed/5 |
 | shock_raider.ixian | TurnSpeed 48 (Speed 120) | expected 24 = Speed/5 |
 | shoe.nax | TurnSpeed 30 (Speed 75) | expected 15 = Speed/5 |
-| tsart2 | TurnSpeed 24 (Speed 60) | expected 12 = Speed/5 |
-| tsdissolver | TurnSpeed 396 (Speed 70) | expected 14 = Speed/5 |
-| tshvr | TurnSpeed 40 (Speed 80) | expected 16 = Speed/5 |
-| tsjugg | TurnSpeed 20 (Speed 71) | expected 14 = Speed/5 |
-| tslpst | TurnSpeed 40 (Speed 85) | expected 17 = Speed/5 |
-| tsmemp | TurnSpeed 40 (Speed 100) | expected 20 = Speed/5 |
-| tssapccabal | TurnSpeed 40 (Speed 75) | expected 15 = Speed/5 |
-| tssgen | TurnSpeed 40 (Speed 56) | expected 11 = Speed/5 |
+| sovgorynych | TurnSpeed 12 (Speed 70) | expected 14 = Speed/5 |
+| ts_gdi_hovermlrs | TurnSpeed 40 (Speed 80) | expected 16 = Speed/5 |
+| ts_gdi_juggernaut | TurnSpeed 20 (Speed 71) | expected 14 = Speed/5 |
+| ts_gdi_mobileemp | TurnSpeed 40 (Speed 100) | expected 20 = Speed/5 |
+| ts_gdi_mobilesensorarray | TurnSpeed 40 (Speed 85) | expected 17 = Speed/5 |
+| ts_nod_artillery | TurnSpeed 24 (Speed 60) | expected 12 = Speed/5 |
+| ts_nod_mobilestealthgenerator | TurnSpeed 40 (Speed 56) | expected 11 = Speed/5 |
 | tsttnk | TurnSpeed 32 (Speed 90) | expected 18 = Speed/5 |
 | ttnk | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 |
 
 
-## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (51)
+## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (52)
 
 | actor | actual | expected |
 |---|---|---|
@@ -468,6 +471,8 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | apc.ordos | Turreted 42 vs Mobile 21 | must match |
 | autogun_tank.ordos | Turreted 12 vs Mobile 30 | must match |
 | beetle.nax2 | Turreted 34 vs Mobile 17 | must match |
+| cabal_dissolver | Turreted 40 vs Mobile 396 | must match |
+| cabal_scarabapc | Turreted 20 vs Mobile 40 | must match |
 | chemstnk | Turreted 25 vs Mobile 24 | must match |
 | diablo.latin | Turreted 36 vs Mobile 25 | must match |
 | eden_tiger_thorshammer | Turreted 18 vs Mobile 16 | must match |
@@ -498,15 +503,14 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | scgoliath2 | Turreted 30 vs Mobile 15 | must match |
 | scmatador | Turreted 15 vs Mobile 20 | must match |
 | shoe.nax | Turreted 15 vs Mobile 30 | must match |
+| sovgorynych | Turreted 20 vs Mobile 12 | must match |
 | t72 | Turreted 20 vs Mobile 16 | must match |
 | td_gdi_boxer | Turreted 32 vs Mobile 16 | must match |
 | tiger.nax2 | Turreted 20 vs Mobile 16 | must match |
 | tkmmedictruck | Turreted 20 vs Mobile 15 | must match |
 | tkmtrenchtruck | Turreted 15 vs Mobile 12 | must match |
 | tkmzaza | Turreted 30 vs Mobile 15 | must match |
-| tsdissolver | Turreted 40 vs Mobile 396 | must match |
-| tshvr | Turreted 16 vs Mobile 40 | must match |
-| tssapccabal | Turreted 20 vs Mobile 40 | must match |
+| ts_gdi_hovermlrs | Turreted 16 vs Mobile 40 | must match |
 | v1truck | Turreted 32 vs Mobile 20 | must match |
 | wirbelwind.nax | Turreted 34 vs Mobile 17 | must match |
 | yrcaos | Turreted 2000 vs Mobile 28 | must match |
@@ -515,61 +519,55 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | yrytnk | Turreted 36 vs Mobile 18 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (56)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (50)
 
 | actor | actual | expected |
 |---|---|---|
-| atankcann.nax | TurnSpeed 12 (Speed 30) | expected 6 = Speed/5 (artillery) |
-| brad.nax | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
-| deviator.ordos | TurnSpeed 22 (Speed 55) | expected 11 = Speed/5 (artillery) |
-| gdiexosuit | TurnSpeed 40 (Speed 100) | expected 20 = Speed/5 (artillery) |
-| giant_rk.nax2 | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
-| imperial.nax | TurnSpeed 44 (Speed 110) | expected 22 = Speed/5 (artillery) |
-| lars.latin | TurnSpeed 28 (Speed 70) | expected 14 = Speed/5 (artillery) |
-| manta.steel | TurnSpeed 46 (Speed 115) | expected 23 = Speed/5 (artillery) |
-| mech_machinegun.futu | TurnSpeed 14 (Speed 35) | expected 7 = Speed/5 (artillery) |
-| missile_tank.ixian | TurnSpeed 20 (Speed 50) | expected 10 = Speed/5 (artillery) |
+| arty | TurnSpeed 11 (Speed 55) | expected 22 = 2 x Speed/5 (turretless) |
+| arty.steel | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
+| athena.futu | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| brummbar.nax | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| burrito.latin | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
+| cabal_cyborgreaper | TurnSpeed 200 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| cabal_heavyspider | TurnSpeed 64 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
+| chemssm | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| dagger.steel | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
+| forgotten_thumperbus | TurnSpeed 18 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
+| grille.nax | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
+| jballista | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
 | mrj | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
+| nodspecter | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
+| nokana.nax | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | potnk.steel | TurnSpeed 10 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
 | qtnk | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
-| railt.asian | TurnSpeed 26 (Speed 65) | expected 13 = Speed/5 (artillery) |
+| ra2v3 | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| raarty | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| railt2.asian | TurnSpeed 10 (Speed 50) | expected 20 = 2 x Speed/5 (turretless) |
 | ramgg | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
-| robot_missiles.futu | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
-| rtruck.latin | TurnSpeed 30 (Speed 75) | expected 15 = Speed/5 (artillery) |
-| sarubia.nax | TurnSpeed 26 (Speed 65) | expected 13 = Speed/5 (artillery) |
 | savi.steel | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | scdragoon | TurnSpeed 1023 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
 | scdrone | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
-| scoutdrone.ordos | TurnSpeed 58 (Speed 145) | expected 29 = Speed/5 (artillery) |
 | scprobe | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
-| screaver | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
 | scscv | TurnSpeed 100 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
-| scsporemaw | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 (artillery) |
-| stnk | TurnSpeed 60 (Speed 150) | expected 30 = Speed/5 (artillery) |
+| siege_tank.ixian | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | sturmtiger.nax | TurnSpeed 6 (Speed 30) | expected 12 = 2 x Speed/5 (turretless) |
 | tkmbattlebus | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
-| tkmdronepodtruck | TurnSpeed 24 (Speed 60) | expected 12 = Speed/5 (artillery) |
+| tkmkatyushalauncher | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
 | tkmradartruck | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | tkmrepairtruck | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | topol.latin | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
-| tsarty | TurnSpeed 26 (Speed 65) | expected 13 = Speed/5 (artillery) |
-| tsarty_bus | TurnSpeed 18 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
-| tscheavyspider | TurnSpeed 64 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
-| tsreaper | TurnSpeed 200 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
-| tssapc | TurnSpeed 40 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
-| tssmech | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 (artillery) |
-| tstalwolv | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 (artillery) |
-| wc2_human_ballista | TurnSpeed 18 (Speed 45) | expected 9 = Speed/5 (artillery) |
+| ts_gdi_juggernautmkii | TurnSpeed 14 (Speed 70) | expected 28 = 2 x Speed/5 (turretless) |
+| ts_nod_subterraneanapc | TurnSpeed 40 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
+| v2rl | TurnSpeed 17 (Speed 85) | expected 34 = 2 x Speed/5 (turretless) |
+| v2rlnuke | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
+| viper.asian | TurnSpeed 25 (Speed 125) | expected 50 = 2 x Speed/5 (turretless) |
 | wc2_human_knight | TurnSpeed 92 (Speed 115) | expected 46 = 2 x Speed/5 (turretless) |
 | wc2_human_knight2 | TurnSpeed 96 (Speed 120) | expected 48 = 2 x Speed/5 (turretless) |
 | wc2_human_mcv | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | wc2_human_paladin | TurnSpeed 92 (Speed 115) | expected 46 = 2 x Speed/5 (turretless) |
-| wc2_human_siege_engine | TurnSpeed 28 (Speed 70) | expected 14 = Speed/5 (artillery) |
-| wc2_orc_catapult | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 (artillery) |
 | wc2_orc_mcv | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | wc2_orc_ogre | TurnSpeed 68 (Speed 85) | expected 34 = 2 x Speed/5 (turretless) |
 | wc2_orc_ogremage | TurnSpeed 68 (Speed 85) | expected 34 = 2 x Speed/5 (turretless) |
-| wc2_orc_siege_engine | TurnSpeed 28 (Speed 70) | expected 14 = Speed/5 (artillery) |
 | wtrt.asian | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | yrbfrt | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | yrbfrt.bot | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
@@ -590,6 +588,9 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | eden_lynx_thorshammer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_tiger_railgun | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | eden_tiger_thorshammer | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| forgotten_missilevan | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| forgotten_mlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| forgotten_warriortank | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | grille.nax2 | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | landcarr.futu | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | mlrs | RevokeDelay 5 | expected 55 (ReloadDelay 111/2) |
@@ -608,12 +609,9 @@ _231 further infantry inherit Repairable from the infantry base template (^Defau
 | shock_raider.ixian | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | storm_raider.ixian | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | tkmstryker | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| ts2tnk | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| tsart2 | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| tshvr | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| tsjugg | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| tsmlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
-| tswini2 | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| ts_gdi_hovermlrs | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| ts_gdi_juggernaut | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
+| ts_nod_artillery | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | ttnk | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | v1truck | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
 | yrtele | firing-slow pattern missing | see gdiarcher (GrantConditionOnAttack + 50% multipliers) |
@@ -655,10 +653,10 @@ _none found_
 | tsnod: defaulttsnod | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | forgotten: defaultforgotten | total cost 2890 | target ~2000 (±15%) |
 | forgotten: defaultforgotten | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| forgotten: defaultforgotten | tsmutant3 (cost 750) x2 vs tsmwmn (cost 250) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: defaultforgotten | tsmutant3 (cost 750) x2 vs tscar2 (cost 300) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: defaultforgotten | tsmutant3 (cost 750) x2 vs ts1tnk (cost 600) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: defaultforgotten | tsmutant3, tsmwmn | light support must be Tier-1 only (producer-building prereqs only) |
+| forgotten: defaultforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_mutantsoldier (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: defaultforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_raidercar (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: defaultforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_rattytank (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: defaultforgotten | forgotten_mutantsergeant, forgotten_mutantsoldier | light support must be Tier-1 only (producer-building prereqs only) |
 | cabal: defaultcabal | 3 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | ra2america: defaultra2allies | total cost 2650 | target ~2000 (±15%) |
 | ra2america: defaultra2allies | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
@@ -736,25 +734,25 @@ _none found_
 | modjapan: heavymodjapan | all units are Tier 1 | heavy support should mix all tiers |
 | tsgdi: heavytsgdi | total cost 5310 | target ~10000 (±15%) |
 | tsgdi: heavytsgdi | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
-| tsgdi: heavytsgdi | tsmmch (cost 950) x4 vs tse1 (cost 120) x3 | pricier units must not outnumber cheaper ones |
-| tsgdi: heavytsgdi | tsmmch (cost 950) x4 vs tse2 (cost 300) x2 | pricier units must not outnumber cheaper ones |
-| tsgdi: heavytsgdi | tsmmch (cost 950) x4 vs tssmech (cost 550) x1 | pricier units must not outnumber cheaper ones |
+| tsgdi: heavytsgdi | ts_gdi_titan (cost 950) x4 vs tse1 (cost 120) x3 | pricier units must not outnumber cheaper ones |
+| tsgdi: heavytsgdi | ts_gdi_titan (cost 950) x4 vs ts_gdi_discthrower (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| tsgdi: heavytsgdi | ts_gdi_titan (cost 950) x4 vs ts_gdi_wolverine (cost 550) x1 | pricier units must not outnumber cheaper ones |
 | tsgdi: heavytsgdi | all units are Tier 1 | heavy support should mix all tiers |
 | tsnod: heavytsnod | total cost 4610 | target ~10000 (±15%) |
 | tsnod: heavytsnod | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
 | tsnod: heavytsnod | tsttnk (cost 800) x4 vs tse1 (cost 120) x3 | pricier units must not outnumber cheaper ones |
-| tsnod: heavytsnod | tsttnk (cost 800) x4 vs tse3.nod (cost 300) x2 | pricier units must not outnumber cheaper ones |
-| tsnod: heavytsnod | tsttnk (cost 800) x4 vs tsbggy (cost 450) x1 | pricier units must not outnumber cheaper ones |
+| tsnod: heavytsnod | tsttnk (cost 800) x4 vs ts_nod_rocketinfantry (cost 300) x2 | pricier units must not outnumber cheaper ones |
+| tsnod: heavytsnod | tsttnk (cost 800) x4 vs ts_nod_attackbuggy (cost 450) x1 | pricier units must not outnumber cheaper ones |
 | tsnod: heavytsnod | all units are Tier 1 | heavy support should mix all tiers |
 | forgotten: heavyforgotten | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
-| forgotten: heavyforgotten | tsmutant3 (cost 750) x2 vs tsmwmn (cost 250) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: heavyforgotten | tsmutant3 (cost 750) x2 vs tscar2 (cost 300) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: heavyforgotten | tsmutant3 (cost 750) x2 vs ts1tnk (cost 600) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tsmutant (cost 120) x2 | pricier units must not outnumber cheaper ones |
-| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tsmwmn (cost 250) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tsmutant3 (cost 750) x2 | pricier units must not outnumber cheaper ones |
-| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs tscar2 (cost 300) x1 | pricier units must not outnumber cheaper ones |
-| forgotten: heavyforgotten | ts2tnk (cost 2000) x3 vs ts1tnk (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_mutantsoldier (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_raidercar (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_rattytank (cost 600) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_mutant (cost 120) x2 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_mutantsoldier (cost 250) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_mutantsergeant (cost 750) x2 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_raidercar (cost 300) x1 | pricier units must not outnumber cheaper ones |
+| forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_rattytank (cost 600) x1 | pricier units must not outnumber cheaper ones |
 | cabal: heavycabal | total cost 4400 | target ~10000 (±15%) |
 | cabal: heavycabal | 3 infantry : 5 vehicles | want ~5 infantry per vehicle |
 | cabal: heavycabal | tsttnk (cost 800) x3 vs tsbike (cost 550) x2 | pricier units must not outnumber cheaper ones |
@@ -830,11 +828,11 @@ _none found_
 |---|---|---|
 | aa_mine.ordos | TurnSpeed 8 (Speed 35) | expected 2 = Speed/15 |
 | bbomb.nax2 | TurnSpeed 10 (Speed 75) | expected 5 = Speed/15 |
+| cabal_hunterkillermk2 | TurnSpeed 29 (Speed 145) | expected 10 = Speed/15 |
+| forgotten_cropplane | TurnSpeed 64 (Speed 160) | expected 11 = Speed/15 |
 | mignuke | TurnSpeed 15 (Speed 200) | expected 13 = Speed/15 |
 | scscourge | TurnSpeed 40 (Speed 200) | expected 13 = Speed/15 |
 | tkmviper | TurnSpeed 25 (Speed 150) | expected 10 = Speed/15 |
-| tscropplane | TurnSpeed 64 (Speed 160) | expected 11 = Speed/15 |
-| tsscrincabal | TurnSpeed 29 (Speed 145) | expected 10 = Speed/15 |
 
 
 ## F18 — weapons targeting Air whose damage warheads can't hit Air  (21)
@@ -851,15 +849,65 @@ _none found_
 | pdlaserltnk2 | Warhead@1Dam | targets Air but no damage warhead hits Air (used by nodltnk2) |
 | sciencevesseldefensematrix | Warhead@1 | targets Air but no damage warhead hits Air (used by scsciencevessel) |
 | tkmpdlaser | Warhead@1Dam | targets Air but no damage warhead hits Air (used by t72) |
-| tsassaultcannon | Warhead@FlakWeapon, Warhead@FlakWeaponPercentage, Warhead@Concrete, Warhead@Chaingun | targets Air but no damage warhead hits Air (used by tscheavyspider, tssmech) |
-| tsassaultcannontal | Warhead@Chaingun, Warhead@ChaingunPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tstalwolv) |
-| tsfiendshard | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggie) |
-| tsfiendshardblue | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggieblue) |
-| tsfiendshardblueup | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggieblue) |
-| tsfiendshardup | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsdoggie) |
-| tstacticalchemmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsntmisl) |
-| tstacticalmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsntmisl, tsntmislcabal) |
-| tstacticalneutronmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by tsntmislcabal) |
+| tsassaultcannon | Warhead@FlakWeapon, Warhead@FlakWeaponPercentage, Warhead@Concrete, Warhead@Chaingun | targets Air but no damage warhead hits Air (used by cabal_heavyspider, ts_gdi_wolverine) |
+| tsassaultcannontal | Warhead@Chaingun, Warhead@ChaingunPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_gdi_wolverinemkii) |
+| tsfiendshard | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
+| tsfiendshardblue | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_viniferafiend) |
+| tsfiendshardblueup | Warhead@Grenade, Warhead@GrenadeFriendlyFire, Warhead@GrenadePercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_viniferafiend) |
+| tsfiendshardup | Warhead@LightChemicalWeapon, Warhead@LightChemicalWeaponFriendlyFire, Warhead@LightChemicalWeaponPercentage, Warhead@Concrete | targets Air but no damage warhead hits Air (used by forgotten_tiberianfiend) |
+| tstacticalchemmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by ts_nod_missilesilo) |
+| tstacticalmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by cabal_missilesilo, ts_nod_missilesilo) |
+| tstacticalneutronmissile | Warhead@Concrete | targets Air but no damage warhead hits Air (used by cabal_missilesilo) |
 | wc2deathknightdeathanddecay | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_orc_deathknight) |
 | wc2mageblizzard | Warhead@1Dam_impact | targets Air but no damage warhead hits Air (used by wc2_human_archmage, wc2_human_mage) |
+
+
+## F19 — helicopter/spaceship TurnSpeed ≠ Speed/5  (32)
+
+| actor | actual | expected |
+|---|---|---|
+| cruiser.steel | TurnSpeed 20 (Speed 50) | expected 10 = Speed/5 |
+| dieglocke.nax2 | TurnSpeed 40 (Speed 40) | expected 8 = Speed/5 |
+| farasha.ixian | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 |
+| forgotten_apache | TurnSpeed 64 (Speed 160) | expected 32 = Speed/5 |
+| forgotten_cobracopter | TurnSpeed 66 (Speed 165) | expected 33 = Speed/5 |
+| forgotten_wasp | TurnSpeed 80 (Speed 200) | expected 40 = Speed/5 |
+| harbinger.futu | TurnSpeed 8 (Speed 125) | expected 25 = Speed/5 |
+| haunebu.nax2 | TurnSpeed 66 (Speed 66) | expected 13 = Speed/5 |
+| haunebu2.nax2 | TurnSpeed 55 (Speed 55) | expected 11 = Speed/5 |
+| inspect.steel | TurnSpeed 25 (Speed 25) | expected 5 = Speed/5 |
+| modhip | TurnSpeed 10 (Speed 100) | expected 20 = Speed/5 |
+| ra2_tzep | TurnSpeed 14 (Speed 35) | expected 7 = Speed/5 |
+| ra2zep | TurnSpeed 12 (Speed 30) | expected 6 = Speed/5 |
+| scarbiter | TurnSpeed 28 (Speed 75) | expected 15 = Speed/5 |
+| scbattlecruiser | TurnSpeed 12 (Speed 30) | expected 6 = Speed/5 |
+| scbehemoth | TurnSpeed 12 (Speed 30) | expected 6 = Speed/5 |
+| sccarrier | TurnSpeed 18 (Speed 45) | expected 9 = Speed/5 |
+| scphobos | TurnSpeed 10 (Speed 25) | expected 5 = Speed/5 |
+| scpythean | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 |
+| scsciencevessel | TurnSpeed 28 (Speed 66) | expected 13 = Speed/5 |
+| scshuttle | TurnSpeed 20 (Speed 150) | expected 30 = Speed/5 |
+| scstarshipsovereign | TurnSpeed 16 (Speed 40) | expected 8 = Speed/5 |
+| tran.gdi | TurnSpeed 20 (Speed 150) | expected 30 = Speed/5 |
+| tran.nod | TurnSpeed 20 (Speed 150) | expected 30 = Speed/5 |
+| ts_nod_harpy | TurnSpeed 56 (Speed 140) | expected 28 = Speed/5 |
+| wc2_human_gnomish_flying_machine | TurnSpeed 28 (Speed 165) | expected 33 = Speed/5 |
+| wc2_human_gyrocopter2 | TurnSpeed 28 (Speed 165) | expected 33 = Speed/5 |
+| wc2_orc_goblin_zeppelin | TurnSpeed 28 (Speed 165) | expected 33 = Speed/5 |
+| wraith.ordos | TurnSpeed 45 (Speed 45) | expected 9 = Speed/5 |
+| yrdisk | TurnSpeed 80 (Speed 80) | expected 16 = Speed/5 |
+| zep.nax | TurnSpeed 20 (Speed 35) | expected 7 = Speed/5 |
+| zep.nax2 | TurnSpeed 35 (Speed 35) | expected 7 = Speed/5 |
+
+
+## F20 — AA support vehicle: air range ≠ 1.5 × ground range  (6)
+
+| actor | actual | expected |
+|---|---|---|
+| apc.latin | AA range 9610 vs ground 6740 | expected 10110 = 1.5 x ground range |
+| diablo.latin | AA range 10450 vs ground 7300 | expected 10950 = 1.5 x ground range |
+| ra2htk | AA range 9292 vs ground 6528 | expected 9792 = 1.5 x ground range |
+| scanalogue | AA range 2000 vs ground 1500 | expected 2250 = 1.5 x ground range |
+| tleilax_labcrawl.ordos | AA range 6500 vs ground 6500 | expected 9750 = 1.5 x ground range |
+| wirbelwind.nax | AA range 9052 vs ground 6368 | expected 9552 = 1.5 x ground range |
 

@@ -13,8 +13,8 @@ Ordos Raider (raider.ordos).
   F7  defenses: Power.Amount == -(Cost / 20)
   F8  vehicles: Mobile.TurnSpeed == Speed / 5
   F9  turreted vehicles: Turreted.TurnSpeed == Mobile.TurnSpeed
-  F10 turretless (AttackFrontal*) vehicles: TurnSpeed == 2 x Speed / 5,
-      EXCEPT artillery-template units (plain Speed / 5)
+  F10 turretless (AttackFrontal*) vehicles: TurnSpeed == 2 x Speed / 5
+      (artillery exception dropped 2026-07-10: data showed no such pattern)
   F11 artillery / fire-support vehicles WITH a turret: must carry the Archer
       firing-slow pattern — GrantConditionOnAttack(firing) with
       RevokeDelay == weapon ReloadDelay / 2 and Speed/TurnSpeed/
@@ -44,6 +44,11 @@ Ordos Raider (raider.ordos).
       least one above-Tier-1 unit (an all-tier mix)
   F17 fighters and bombers (by class template): Aircraft.TurnSpeed ==
       Speed / 15 (frontal-weapon craft: 2x), e.g. Speed 180 -> TurnSpeed 12
+  F19 helicopters and spaceships (by class template): Aircraft.TurnSpeed ==
+      Speed / 5, like vehicles (design 2026-07-10)
+  F20 AA-capable support vehicles: anti-air weapon range == 1.5 x
+      anti-ground weapon range (design 2026-07-10; forgotten_m113adats
+      is reference-clean: 5606 ground / 8409 air)
   F18 anti-air weapons: a weapon whose ValidTargets include Air must have at
       least one damage warhead whose ValidTargets include Air (inherited
       warheads resolved) — otherwise it fires at aircraft but deals nothing
@@ -435,7 +440,8 @@ def main() -> int:
     rs = m.rs
     rows = {k: [] for k in
             ("F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10",
-             "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18")}
+             "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18",
+             "F19", "F20")}
 
     names: set[str] = set()
     for f in m.real_factions():
@@ -522,11 +528,12 @@ def main() -> int:
             if spd:
                 base = round(spd / 5)
                 if turret is None and frontal:
-                    want = base if arty else 2 * base
-                    label = "Speed/5 (artillery)" if arty else "2 x Speed/5 (turretless)"
+                    # artillery exception dropped 2026-07-10: data showed
+                    # turretless artillery split 24 (2x) vs 18 (1x) — no rule
+                    want = 2 * base
                     if ts is not None and not close(ts, want):
                         rows["F10"].append([lname, f"TurnSpeed {ts} (Speed {spd})",
-                                            f"expected {want} = {label}"])
+                                            f"expected {want} = 2 x Speed/5 (turretless)"])
                 elif ts is not None and not close(ts, base):
                     rows["F8"].append([lname, f"TurnSpeed {ts} (Speed {spd})",
                                        f"expected {base} = Speed/5"])
@@ -569,6 +576,41 @@ def main() -> int:
                     rows["F17"].append([lname, f"TurnSpeed {ats} (Speed {spd})",
                                         f"expected {want} = {label}"])
 
+        # F19: helicopters & spaceships turn like vehicles (Speed/5)
+        if ut == "air" and inherits_template(
+                m, lname, ("HelicopterTemplate",
+                           "UnarmedTransportHelicopterTemplate",
+                           "SpaceshipTemplate")):
+            spd = ivalue(res, "Aircraft", "Speed")
+            ats = ivalue(res, "Aircraft", "TurnSpeed")
+            if spd and ats is not None and not close(ats, round(spd / 5)):
+                rows["F19"].append([lname, f"TurnSpeed {ats} (Speed {spd})",
+                                    f"expected {round(spd/5)} = Speed/5"])
+
+        # F20: AA support vehicles: anti-air range = 1.5 x anti-ground range
+        if ut == "veh" and inherits_template(m, lname, ("SupportVehicleTemplate",)):
+            air_r, gnd_r = [], []
+            for arm in res.children_named("Armament"):
+                w = arm.get("Weapon")
+                ww = m.rs.resolve_weapon(w) if w else None
+                if ww is None:
+                    continue
+                vt = (ww.get("ValidTargets") or "").lower()
+                r = cell_value(ww.get("Range") or "")
+                r = r[0] if r else None
+                if r is None:
+                    continue
+                if "air" in vt and "ground" not in vt:
+                    air_r.append(r)
+                elif "ground" in vt and "air" not in vt:
+                    gnd_r.append(r)
+            if air_r and gnd_r:
+                want = round(max(gnd_r) * 3 / 2)
+                if not close(max(air_r), want, tol=10):
+                    rows["F20"].append([lname,
+                                        f"AA range {max(air_r)} vs ground {max(gnd_r)}",
+                                        f"expected {want} = 1.5 x ground range"])
+
     defense_tier_check(m, rows)
     starting_units_check(m, rows)
     aa_warhead_check(m, rows)
@@ -596,6 +638,8 @@ def main() -> int:
         "F16": "F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)",
         "F17": "F17 — fighter/bomber TurnSpeed ≠ Speed/15 (frontal: 2×)",
         "F18": "F18 — weapons targeting Air whose damage warheads can't hit Air",
+        "F19": "F19 — helicopter/spaceship TurnSpeed ≠ Speed/5",
+        "F20": "F20 — AA support vehicle: air range ≠ 1.5 × ground range",
     }
     for k in rows:
         print(h2(f"{titles[k]}  ({len(rows[k])})"))
