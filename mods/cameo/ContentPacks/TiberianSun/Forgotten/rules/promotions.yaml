@@ -1,11 +1,11 @@
 forgotten_promotion_bowler:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Bowler
+		Name: actor-forgotten_promotion_bowler.name
 	Buildable:
 		BuildPaletteOrder: 1
 		Queue: Promotions
-		Description: Allows construction of Bowler.
+		Description: actor-forgotten_promotion_bowler.description
 		Prerequisites: ~fact.forgotten, !forgotten_promotion_bowler, rank1
 	RenderSprites:
 		Image: forgotten_bowler
@@ -15,11 +15,11 @@ forgotten_promotion_bowler:
 forgotten_promotion_runnershotgal:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Runner Shotgal
+		Name: actor-forgotten_promotion_runnershotgal.name
 	Buildable:
 		BuildPaletteOrder: 4
 		Queue: Promotions
-		Description: Allows training of Runner Shotgal.
+		Description: actor-forgotten_promotion_runnershotgal.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_bowler, !forgotten_promotion_runnershotgal, rank1
 	RenderSprites:
 		Image: forgotten_runnershotgal
@@ -29,11 +29,11 @@ forgotten_promotion_runnershotgal:
 forgotten_promotion_viniferafiend:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Vinifera Fiend
+		Name: actor-forgotten_promotion_viniferafiend.name
 	Buildable:
 		BuildPaletteOrder: 7
 		Queue: Promotions
-		Description: Allows training of Vinifera Fiends.
+		Description: actor-forgotten_promotion_viniferafiend.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_runnershotgal, !forgotten_promotion_viniferafiend, rank1
 	RenderSprites:
 		Image: forgotten_viniferafiend
@@ -43,11 +43,11 @@ forgotten_promotion_viniferafiend:
 forgotten_promotion_ghoststalker:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Ghost Stalker
+		Name: actor-forgotten_promotion_ghoststalker.name
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Promotions
-		Description: Allows training of Ghost Stalker.
+		Description: actor-forgotten_promotion_ghoststalker.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_viniferafiend, !forgotten_promotion_ghoststalker, rank1
 	RenderSprites:
 		Image: forgotten_ghoststalker
@@ -57,11 +57,11 @@ forgotten_promotion_ghoststalker:
 forgotten_promotion_warriortank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Warrior Tank
+		Name: actor-forgotten_promotion_warriortank.name
 	Buildable:
 		BuildPaletteOrder: 2
 		Queue: Promotions
-		Description: Allows construction of Warrior Tank.
+		Description: actor-forgotten_promotion_warriortank.description
 		Prerequisites: ~fact.forgotten, !forgotten_promotion_warriortank, rank1
 	RenderSprites:
 		Image: forgotten_warriortank
@@ -71,11 +71,11 @@ forgotten_promotion_warriortank:
 forgotten_promotion_scoopertank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Scooper Tank
+		Name: actor-forgotten_promotion_scoopertank.name
 	Buildable:
 		BuildPaletteOrder: 5
 		Queue: Promotions
-		Description: Allows construction of Scooper Tank.
+		Description: actor-forgotten_promotion_scoopertank.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_warriortank, !forgotten_promotion_scoopertank, rank1
 	RenderSprites:
 		Image: forgotten_scoopertank
@@ -85,11 +85,11 @@ forgotten_promotion_scoopertank:
 forgotten_promotion_mlrs:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock MLRS
+		Name: actor-forgotten_promotion_mlrs.name
 	Buildable:
 		BuildPaletteOrder: 8
 		Queue: Promotions
-		Description: Allows construction of MLRS.
+		Description: actor-forgotten_promotion_mlrs.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_scoopertank, !forgotten_promotion_mlrs, rank1
 	RenderSprites:
 		Image: forgotten_mlrs
@@ -99,40 +99,40 @@ forgotten_promotion_mlrs:
 forgotten_promotion_experimentalmammothtank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Experimental Mammoth Tank
+		Name: actor-forgotten_promotion_experimentalmammothtank.name
 	Buildable:
 		BuildPaletteOrder: 11
 		Queue: Promotions
-		Description: Allows construction of Experimental Mammoth Tank.
+		Description: actor-forgotten_promotion_experimentalmammothtank.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_mlrs, !forgotten_promotion_experimentalmammothtank, rank1
 	RenderSprites:
 		Image: forgotten_experimentalmammothtank
 	ProvidesPrerequisite:
 		Prerequisite: forgotten_promotion_experimentalmammothtank
 
-forgotten_promotion_cobrahelicopter:
+forgotten_promotion_cobracopter:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Cobra Helicopter
+		Name: actor-forgotten_promotion_cobracopter.name
 	Buildable:
 		BuildPaletteOrder: 3
 		Queue: Promotions
-		Description: Allows construction of Cobra Helicopter. Wasps gain Clock.
-		Prerequisites: ~fact.forgotten, !forgotten_promotion_cobrahelicopter, rank1
+		Description: actor-forgotten_promotion_cobracopter.description
+		Prerequisites: ~fact.forgotten, !forgotten_promotion_cobracopter, rank1
 	RenderSprites:
 		Image: forgotten_cobracopter
 	ProvidesPrerequisite:
-		Prerequisite: forgotten_promotion_cobrahelicopter
+		Prerequisite: forgotten_promotion_cobracopter
 
 forgotten_promotion_flametank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Flame Tank
+		Name: actor-forgotten_promotion_flametank.name
 	Buildable:
 		BuildPaletteOrder: 6
 		Queue: Promotions
-		Description: Allows construction of Flame Tank.
-		Prerequisites: ~fact.forgotten, forgotten_promotion_cobrahelicopter, !forgotten_promotion_flametank, rank1
+		Description: actor-forgotten_promotion_flametank.description
+		Prerequisites: ~fact.forgotten, forgotten_promotion_cobracopter, !forgotten_promotion_flametank, rank1
 	RenderSprites:
 		Image: forgotten_flametank
 	ProvidesPrerequisite:
@@ -141,11 +141,11 @@ forgotten_promotion_flametank:
 forgotten_promotion_locustbomber:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Locust Bomber
+		Name: actor-forgotten_promotion_locustbomber.name
 	Buildable:
 		BuildPaletteOrder: 9
 		Queue: Promotions
-		Description: Allows construction of Locust Bomber.
+		Description: actor-forgotten_promotion_locustbomber.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_flametank, !forgotten_promotion_locustbomber, rank1
 	RenderSprites:
 		Image: forgotten_locustbomber
@@ -155,11 +155,11 @@ forgotten_promotion_locustbomber:
 forgotten_promotion_chemicalmammothtank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Chemical Mammoth Tank
+		Name: actor-forgotten_promotion_chemicalmammothtank.name
 	Buildable:
 		BuildPaletteOrder: 12
 		Queue: Promotions
-		Description: Allows construction of Chemical Mammoth Tank.
+		Description: actor-forgotten_promotion_chemicalmammothtank.description
 		Prerequisites: ~fact.forgotten, forgotten_promotion_locustbomber, !forgotten_promotion_chemicalmammothtank, rank1
 	RenderSprites:
 		Image: forgotten_chemicalmammothtank

@@ -925,6 +925,92 @@ actor-cabal_core =
    .description = Provides CABAL advanced technologies.
    Provides Data Worm support power.
 
+actor-forgotten_mutant =
+   .name = Mutant
+   .description = Cheap mutant scavenger armed with dual pistols.
+      Replaced by the Mutant Soldier once a Chemical Plant is built.
+      Strong vs Infantry
+      Weak vs Vehicles, Aircraft
+
+actor-forgotten_mutantsoldier =
+   .name = Mutant Soldier
+   .description = Mutant rifleman armed with an armor-piercing carbine.
+      Requires a Chemical Plant and replaces the basic Mutant.
+      Strong vs Infantry
+      Weak vs Tanks, Aircraft
+
+actor-forgotten_rocketinfantry =
+   .name = Rocket Infantry
+   .description = Mutant missile trooper effective against vehicles and aircraft.
+      Chemical Weapons research loads chemical warheads.
+      Strong vs Vehicles, Aircraft
+      Weak vs Infantry
+
+actor-forgotten_zombiemutant =
+   .name = Zombie Mutant
+   .description = Shambling, heavily mutated brute that tears enemies apart at close quarters.
+      Melee only; cannot attack aircraft.
+      Strong vs Ground
+      Weak vs Aircraft
+
+actor-forgotten_mutantsniper =
+   .name = Mutant Sniper
+   .description = Long-range marksman.
+      Can only target infantry, and picks them out of garrisoned structures.
+      Strong vs Infantry
+      Weak vs Vehicles, Aircraft
+
+actor-forgotten_chemsprayinfantry =
+   .name = Chem Spray Infantry
+   .description = Mutant soldier who hoses targets down with liquid Tiberium.
+      Chemical Weapons research loads a stronger mixture.
+      Strong vs Ground
+      Weak vs Aircraft
+
+actor-forgotten_mutantsergeant =
+   .name = Mutant Sergeant
+   .description = Elite mutant officer whose gun also reaches aircraft.
+      Propaganda aura: nearby friendly units gain 10% firepower and speed, take 10% less damage, reload 10% faster, slowly heal and cannot be mind-controlled.
+      Strong vs Infantry
+      Weak vs Tanks
+
+actor-forgotten_runnershotgal =
+   .name = Runner Shotgal
+   .description = Cloaked mutant skirmisher armed with a heavy shotgun.
+      Uncloaks briefly when firing.
+      Requires the Runner Shotgal promotion.
+      Strong vs Ground
+      Weak vs Aircraft
+
+actor-forgotten_mutanthijacker =
+   .name = Mutant Hijacker
+   .description = Cloaked thief who commandeers enemy vehicles.
+      Unarmed; consumed when stealing a vehicle.
+      Can also enter abandoned vehicles and drive them out.
+      Maximum 1 can be trained.
+
+actor-forgotten_tiberianfiend =
+   .name = Tiberian Fiend
+   .description = Canine Tiberium predator that hurls razor-sharp shards at ground and air targets.
+      Chemical Weapons research sharpens the shards.
+      Replaced by the Vinifera Fiend after that promotion.
+      Strong vs Everything
+
+actor-forgotten_viniferafiend =
+   .name = Vinifera Fiend
+   .description = Vinifera-fed fiend hurling blue Tiberium shards at ground and air targets.
+      Chemical Weapons research sharpens the shards.
+      Requires the Vinifera Fiend promotion and replaces the Tiberian Fiend.
+      Strong vs Everything
+
+actor-forgotten_engineer =
+   .name = Engineer
+   .description = Mutant field engineer armed with a light pistol.
+      Captures enemy structures; consumed on capture.
+      Instantly repairs friendly structures and bridges.
+      Defuses explosives and removes parasites.
+      Can enter abandoned vehicles and drive them out.
+
 actor-forgotten_ghoststalker =
    .name = Ghost Stalker
    .description = Elite commando armed with a silenced long-range chemical rifle and C4 charges.
@@ -934,6 +1020,400 @@ actor-forgotten_ghoststalker =
       Maximum 1 can be trained.
       Strong vs Ground
       Weak vs Aircraft
+
+actor-forgotten_raidercar =
+   .name = Raider Car
+   .description = Fast scout car whose machine gun can also strafe aircraft.
+      Replaced by the Bowler after that promotion.
+      Strong vs Infantry
+      Weak vs Tanks
+
+actor-forgotten_ruiner =
+   .name = Ruiner
+   .description = Fast raiding buggy firing light missiles at ground and air targets.
+      Chemical Weapons research loads chemical missiles.
+      Strong vs Everything
+
+actor-forgotten_rattytank =
+   .name = Ratty Tank
+   .description = Fast, expendable battle tank welded together from scrap.
+      Chemical Weapons research loads chemical shells.
+      Strong vs Vehicles
+      Weak vs Infantry, Aircraft
+
+actor-forgotten_bowler =
+   .name = Bowler
+   .description = Armored raiding car whose cannon also reaches aircraft.
+      Requires the Bowler promotion and replaces the Raider Car.
+      Strong vs Infantry
+      Weak vs Tanks
+
+actor-forgotten_tankkiller =
+   .name = Tank Killer
+   .description = Tank destroyer firing long-range sabot shells.
+      Chemical Weapons research loads chemical shells.
+      Replaced by the Warrior Tank after that promotion.
+      Strong vs Vehicles
+      Weak vs Infantry, Aircraft
+
+actor-forgotten_m113adats =
+   .name = M113 Adats
+   .description = Tracked missile carrier with a dedicated long-range anti-air battery.
+      Strong vs Aircraft, Light vehicles
+      Weak vs Tanks
+
+actor-forgotten_closhtank =
+   .name = Closh Tank
+   .description = Close-assault flame tank.
+      Chemical Weapons research loads a hotter Tiberium mixture.
+      Replaced by the Flame Tank after that promotion.
+      Strong vs Infantry, Buildings
+      Weak vs Tanks, Aircraft
+
+actor-forgotten_tiberiumharvester =
+   .name = Tiberium Harvester
+   .description = Harvests Tiberium and returns it to the Refinery.
+      Unarmed
+
+actor-forgotten_apctruck =
+   .name = APC Truck
+   .description = Armored transport truck for six infantry.
+      Its cannon reaches ground and air targets.
+      Strong vs Infantry
+      Weak vs Tanks
+
+actor-forgotten_missilevan =
+   .name = Missile Van
+   .description = Fragile van hurling missiles from extreme range.
+      Chemical Weapons research loads chemical missiles.
+      Replaced by the MLRS after that promotion.
+      Strong vs Infantry, Buildings
+      Weak vs Tanks, Aircraft
+
+actor-forgotten_flametank =
+   .name = Flame Tank
+   .description = Heavy flame tank.
+      Chemical Weapons research loads a hotter Tiberium mixture.
+      Requires the Flame Tank promotion and replaces the Closh Tank.
+      Strong vs Infantry, Buildings
+      Weak vs Tanks, Aircraft
+
+actor-forgotten_warriortank =
+   .name = Warrior Tank
+   .description = Heavy tank destroyer with a high-velocity cannon.
+      Chemical Weapons research loads chemical shells.
+      Requires the Warrior Tank promotion and replaces the Tank Killer.
+      Strong vs Vehicles
+      Weak vs Infantry, Aircraft
+
+actor-forgotten_scoopertank =
+   .name = Scooper Tank
+   .description = Heavily armored assault tank with twin cannons.
+      Chemical Weapons research loads chemical shells.
+      Requires the Scooper Tank promotion.
+      Strong vs Ground
+      Weak vs Aircraft
+
+actor-forgotten_mlrs =
+   .name = Forgotten MLRS
+   .description = Mutant rocket artillery.
+      Chemical Weapons research loads chemical rockets.
+      Requires the MLRS promotion and replaces the Missile Van.
+      Strong vs Infantry, Buildings
+      Weak vs Tanks, Aircraft
+
+actor-forgotten_chemicalmammothtank =
+   .name = Chemical Mammoth Tank
+   .description = Experimental mammoth tank converted to fire liquid Tiberium; its Tusk missiles also strike aircraft.
+      Chemical Weapons research boosts its firepower by 75%.
+      Requires the Chemical Mammoth Tank promotion.
+      Maximum 1 can be built.
+      Strong vs Everything
+
+actor-forgotten_experimentalmammothtank =
+   .name = Experimental Mammoth Tank
+   .description = Colossal salvaged mammoth prototype; twin cannons plus Tusk missiles against aircraft.
+      Chemical Weapons research loads chemical shells.
+      Requires the Experimental Mammoth Tank promotion.
+      Maximum 1 can be built.
+      Strong vs Everything
+
+actor-forgotten_thumperbus =
+   .name = Thumper Bus
+   .description = Armored battle bus mounting a Thumper mortar.
+      Carries twelve infantry who fire from inside.
+      Chemical Weapons research loads chemical mortar rounds.
+      Strong vs Ground
+      Weak vs Aircraft
+
+actor-forgotten_nomadbarracks =
+   .name = Nomad Barracks
+   .description = Rolling barracks that trains infantry anywhere on the map.
+      Nine garrisoned infantry fire from inside; its own gun covers the approaches.
+      Maximum 1 can be built.
+
+actor-forgotten_mobileconstructionvehicle =
+   .name = Mobile Construction Vehicle
+   .description = Deploys into the Forgotten Construction Yard.
+      Unarmed
+
+actor-forgotten_carryall =
+   .name = Carryall
+   .description = VTOL crane that lifts and ferries vehicles.
+      Unarmed
+
+actor-forgotten_wasp =
+   .name = Wasp
+   .description = Light gunship whose twin chainguns shred infantry and aircraft alike.
+      Gains a cloaking device with the Cobra Copter promotion.
+      Strong vs Infantry
+      Weak vs Tanks, Anti-air defenses
+
+actor-forgotten_apache =
+   .name = Apache
+   .description = Missile gunship.
+      Chemical Weapons research loads chemical missiles.
+      Replaced by the Cobra Copter after that promotion.
+      Strong vs Tanks, Aircraft
+      Weak vs Anti-air defenses
+
+actor-forgotten_cobracopter =
+   .name = Cobra Copter
+   .description = Heavy missile gunship.
+      Chemical Weapons research loads chemical missiles.
+      Requires the Cobra Copter promotion and replaces the Apache.
+      Strong vs Tanks, Aircraft
+      Weak vs Anti-air defenses
+
+actor-forgotten_cropplane =
+   .name = Crop Plane
+   .description = Converted crop duster carrying heavy bombs.
+      Chemical Weapons research loads chemical bombs.
+      Replaced by the Locust Bomber after that promotion.
+      Strong vs Buildings
+      Weak vs Anti-air defenses
+
+actor-forgotten_locustbomber =
+   .name = Locust Bomber
+   .description = Heavy bomber.
+      Chemical Weapons research loads chemical bombs.
+      Requires the Locust Bomber promotion and replaces the Crop Plane.
+      Strong vs Buildings
+      Weak vs Anti-air defenses
+
+actor-forgotten_constructionyard =
+   .name = Construction Yard (Forgotten)
+   .description = Builds Forgotten structures.
+      Undeploys back into a Mobile Construction Vehicle.
+
+actor-forgotten_crystalpowerextractor =
+   .name = Crystal Power Extractor
+   .description = Taps buried Tiberium crystals to provide power for other structures.
+
+actor-forgotten_barracks =
+   .name = Forgotten Barracks
+   .description = Trains Forgotten infantry.
+
+actor-forgotten_refinery =
+   .name = Forgotten Refinery
+   .description = Processes raw Tiberium into credits and stores the surplus.
+      Comes with a free Tiberium Harvester.
+
+actor-forgotten_warfactory =
+   .name = Forgotten War Factory
+   .description = Builds Forgotten vehicles.
+
+actor-forgotten_radar =
+   .name = Radar
+   .description = Provides the radar minimap.
+      Unlocks mid-tier Forgotten forces and the Forgotten Church.
+      Requires power to operate.
+
+actor-forgotten_helipad =
+   .name = Helipad (Forgotten)
+   .description = Produces, rearms and repairs Forgotten aircraft.
+
+actor-forgotten_servicedepot =
+   .name = Service Depot
+   .description = Repairs vehicles and aircraft.
+
+actor-forgotten_silo =
+   .name = Silo
+   .description = Stores excess refined Tiberium.
+
+actor-forgotten_church =
+   .name = Forgotten Church
+   .description = Ruined church sheltering the Forgotten's research labs.
+      Unlocks the faction's elite arsenal, advanced defenses and Tech Upgrades.
+      Maximum 1 can be built.
+
+actor-forgotten_chemicalplant =
+   .name = Forgotten Chemical Plant
+   .description = Refines liquid-Tiberium munitions.
+      Its stockpile arms the Mutant Soldier, replacing the basic Mutant.
+      Maximum 1 can be built.
+
+actor-forgotten_tiberiumspike =
+   .name = Tiberium Spike
+   .description = Deep borehole tapping a pressurized Tiberium vein.
+      Generates 500 credits every 10 seconds; gains ranks that raise its output up to double.
+      Maximum 1 can be built.
+
+actor-forgotten_veinhole =
+   .name = Veinhole
+   .description = The Forgotten superweapon: a corrupted Veinhole that hurls a devastating warhead anywhere on the map.
+      7:00 charge time. Requires power to operate.
+      Maximum 1 can be built.
+
+actor-forgotten_machineguntower =
+   .name = Machinegun Tower
+   .description = Scrap-built machine gun tower.
+      Detects nearby cloaked enemies.
+      Strong vs Infantry, Light vehicles
+      Weak vs Tanks, Aircraft
+
+actor-forgotten_brokenrattytankturret =
+   .name = Broken Ratty Tank Turret
+   .description = Salvaged Ratty Tank turret on a concrete mount.
+      Does not require power to operate.
+      Chemical Weapons research loads chemical shells.
+      Detects nearby cloaked enemies.
+      Strong vs Vehicles
+      Weak vs Infantry, Aircraft
+
+actor-forgotten_juggerflakwall =
+   .name = Juggerflak Wall
+   .description = Wall-mounted Juggernaut flak battery.
+      Cannot engage ground targets.
+      Strong vs Aircraft
+
+actor-forgotten_brokenwarriortankturret =
+   .name = Broken Warrior Tank Turret
+   .description = Salvaged Warrior Tank turret firing long-range sabot shells.
+      Does not require power to operate.
+      Detects nearby cloaked enemies.
+      Strong vs Vehicles
+      Weak vs Infantry, Aircraft
+
+actor-forgotten_brokenscoopertankturret =
+   .name = Broken Scooper Tank Turret
+   .description = Salvaged Scooper Tank turret with twin cannons.
+      Does not require power to operate.
+      Chemical Weapons research loads chemical shells.
+      Detects nearby cloaked enemies.
+      Strong vs Ground
+      Weak vs Aircraft
+
+actor-forgotten_upgrade_chemicalfuel =
+   .name = Chemical Fuel
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases the speed of all Forgotten vehicles and aircraft by 20%.
+
+actor-forgotten_upgrade_genomemapping =
+   .name = Genome Mapping
+   .description = Tech Upgrade (Only affects units of own faction)
+      Forgotten infantry take 10% less damage and gain 10% weapon range, speed, vision and cloak detection.
+
+actor-forgotten_upgrade_friendlywildlife =
+   .name = Friendly Wildlife
+   .description = Tech Upgrade (Only affects units of own faction)
+      Forgotten ground units release a friendly Visceroid when they die.
+
+actor-forgotten_upgrade_tiberiumboosters =
+   .name = Tiberium Boosters
+   .description = Tech Upgrade (Only affects units of own faction)
+      Increases the weapon range of Forgotten missile and shell units, including the salvaged tank turrets, by 15%.
+
+actor-forgotten_upgrade_chemicalweapons =
+   .name = Chemical Weapons
+   .description = Tech Upgrade (Only affects units of own faction)
+      Loads chemical ammunition into nearly every Forgotten weapon, adding Tiberium damage.
+      The Chemical Mammoth Tank instead gains 75% firepower.
+
+actor-forgotten_upgrade_junkarmor =
+   .name = Junk Armor
+   .description = Tech Upgrade (Only affects units of own faction)
+      Forgotten vehicles, aircraft and salvaged tank turrets take 15% less damage and move 15% faster.
+
+actor-forgotten_upgrade_unity =
+   .name = Unity
+   .description = Tech Upgrade (Only affects units of own faction)
+      Every Forgotten unit projects a solidarity aura: each nearby friendly Forgotten unit reduces damage taken by 2%, stacking up to 20%.
+
+actor-forgotten_upgrade_tiberiumadaptability =
+   .name = Tiberium Adaptability
+   .description = Tech Upgrade (Only affects units of own faction)
+      All Forgotten units regenerate 1% of their health every 4 seconds.
+
+actor-forgotten_promotion_bowler =
+   .name = Unlock Bowler
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Bowler, an armored raiding car, replacing the Raider Car.
+
+actor-forgotten_promotion_runnershotgal =
+   .name = Unlock Runner Shotgal
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows training of the Runner Shotgal, a cloaked shotgun skirmisher.
+      Follows the Bowler promotion.
+
+actor-forgotten_promotion_viniferafiend =
+   .name = Unlock Vinifera Fiend
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows training of the Vinifera Fiend, a stronger blue-Tiberium fiend, replacing the Tiberian Fiend.
+      Follows the Runner Shotgal promotion.
+
+actor-forgotten_promotion_ghoststalker =
+   .name = Unlock Ghost Stalker
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows training of the Ghost Stalker, the Forgotten commando.
+      Follows the Vinifera Fiend promotion.
+
+actor-forgotten_promotion_cobracopter =
+   .name = Unlock Cobra Copter
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Cobra Copter, a heavy gunship, replacing the Apache.
+      Wasps gain a cloaking device.
+
+actor-forgotten_promotion_flametank =
+   .name = Unlock Flame Tank
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Flame Tank, replacing the Closh Tank.
+      Follows the Cobra Copter promotion.
+
+actor-forgotten_promotion_locustbomber =
+   .name = Unlock Locust Bomber
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Locust Bomber, replacing the Crop Plane.
+      Follows the Flame Tank promotion.
+
+actor-forgotten_promotion_chemicalmammothtank =
+   .name = Unlock Chemical Mammoth Tank
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Chemical Mammoth Tank, an experimental liquid-Tiberium mammoth.
+      Follows the Locust Bomber promotion.
+
+actor-forgotten_promotion_warriortank =
+   .name = Unlock Warrior Tank
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Warrior Tank, a heavy tank destroyer, replacing the Tank Killer.
+
+actor-forgotten_promotion_scoopertank =
+   .name = Unlock Scooper Tank
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Scooper Tank, a heavily armored twin-cannon assault tank.
+      Follows the Warrior Tank promotion.
+
+actor-forgotten_promotion_mlrs =
+   .name = Unlock MLRS
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Forgotten MLRS rocket artillery, replacing the Missile Van.
+      Follows the Scooper Tank promotion.
+
+actor-forgotten_promotion_experimentalmammothtank =
+   .name = Unlock Experimental Mammoth Tank
+   .description = Promotion Upgrade (Only affects units of own faction)
+      Allows construction of the Experimental Mammoth Tank, a colossal mammoth prototype.
+      Follows the MLRS promotion.
 
 actor-ts_nod_missilesilo =
    .name = Missile Silo

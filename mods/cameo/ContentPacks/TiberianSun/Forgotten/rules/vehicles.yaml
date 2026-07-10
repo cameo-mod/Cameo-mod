@@ -1,12 +1,15 @@
 forgotten_mobileconstructionvehicle:
 	Inherits: ts_gdi_mobileconstructionvehicle
 	Buildable:
+		Description: actor-forgotten_mobileconstructionvehicle.description
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~forgotten_warfactory, forgotten_servicedepot
 	Transforms:
 		IntoActor: forgotten_constructionyard
 	RenderVoxels:
 		Image: tsmcvgrey
+	Tooltip:
+		Name: actor-forgotten_mobileconstructionvehicle.name
 
 forgotten_tiberiumharvester:
 	Inherits: ^TDHARV
@@ -23,7 +26,7 @@ forgotten_tiberiumharvester:
 	Buildable:
 		Prerequisites: ~forgotten_warfactory, forgotten_refinery
 		Queue: Vehicle, RAVehicle
-		Description: Harvests Tiberium for processing
+		Description: actor-forgotten_tiberiumharvester.description
 	WithVoxelBody:
 	WithDockingAnimation:
 	Voiced:
@@ -39,6 +42,8 @@ forgotten_tiberiumharvester:
 		Palette: ra2effect
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalfuel, forgotten_upgrade_friendlywildlife, forgotten_upgrade_junkarmor, forgotten_upgrade_unity
+	Tooltip:
+		Name: actor-forgotten_tiberiumharvester.name
 
 forgotten_scarabapc:
 	Inherits: ts_nod_subterraneanapc
@@ -72,12 +77,12 @@ forgotten_missilevan:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: Missile Van
+		Name: actor-forgotten_missilevan.name
 	Buildable:
 		BuildPaletteOrder: 85
 		Prerequisites: ~forgotten_warfactory, forgotten_church, ~!forgotten_promotion_mlrs
 		Queue: Vehicle, RAVehicle
-		Description: Light motor vehicle armed with long range missiles. Strong vs Infantry, Buildings. Weak vs Tanks, Aircraft.
+		Description: actor-forgotten_missilevan.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -130,12 +135,12 @@ forgotten_raidercar:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Raider Car
+		Name: actor-forgotten_raidercar.name
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~forgotten_warfactory, ~!forgotten_promotion_bowler
 		Queue: Vehicle, RAVehicle
-		Description: Fast raiding vehicle. Strong vs Infantry. Weak vs Tanks.
+		Description: actor-forgotten_raidercar.description
 	Mobile:
 		Speed: 180
 		TurnSpeed: 36
@@ -184,12 +189,12 @@ forgotten_bowler:
 	Valued:
 		Cost: 850
 	Tooltip:
-		Name: Bowler
+		Name: actor-forgotten_bowler.name
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: ~forgotten_warfactory, ~forgotten_promotion_bowler
 		Queue: Vehicle, RAVehicle
-		Description: Fast raiding vehicle. Strong vs Infantry. Weak vs Vehicles.
+		Description: actor-forgotten_bowler.description
 	Mobile:
 		Speed: 120
 		TurnSpeed: 24
@@ -240,12 +245,12 @@ forgotten_ruiner:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Ruiner
+		Name: actor-forgotten_ruiner.name
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~forgotten_warfactory
 		Queue: Vehicle, RAVehicle
-		Description: Fast raiding vehicle. Strong vs Everything.
+		Description: actor-forgotten_ruiner.description
 	Mobile:
 		Speed: 150
 		TurnSpeed: 30
@@ -302,12 +307,12 @@ forgotten_rattytank:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Ratty Tank
+		Name: actor-forgotten_rattytank.name
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_warfactory
 		Queue: Vehicle, RAVehicle
-		Description: Forgotten fast main battle tank. Strong vs Armor. Weak vs Infantry, Aircraft.
+		Description: actor-forgotten_rattytank.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 18
@@ -365,12 +370,12 @@ forgotten_warriortank:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Warrior Tank
+		Name: actor-forgotten_warriortank.name
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_warriortank
 		Queue: Vehicle, RAVehicle
-		Description: Forgotten anti-tank heavy vehicle. Strong vs Armor. Weak vs Everything else.
+		Description: actor-forgotten_warriortank.description
 	Mobile:
 		Speed: 75
 		TurnSpeed: 15
@@ -430,12 +435,12 @@ forgotten_scoopertank:
 	Valued:
 		Cost: 2250
 	Tooltip:
-		Name: Scooper Tank
+		Name: actor-forgotten_scoopertank.name
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_scoopertank
 		Queue: Vehicle, RAVehicle
-		Description: Mutant heavy armor. Strong vs Ground. Weak vs Aircraft.
+		Description: actor-forgotten_scoopertank.description
 	Mobile:
 		Speed: 65
 		TurnSpeed: 13
@@ -493,12 +498,12 @@ forgotten_closhtank:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Closh Tank
+		Name: actor-forgotten_closhtank.name
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_warfactory, forgotten_radar, ~!forgotten_promotion_flametank
 		Queue: Vehicle, RAVehicle
-		Description: Close range tank. Strong vs Buildings, Infantry. Weak vs Armor, Aircraft.
+		Description: actor-forgotten_closhtank.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -552,12 +557,12 @@ forgotten_flametank:
 	Valued:
 		Cost: 1300
 	Tooltip:
-		Name: Flame Tank
+		Name: actor-forgotten_flametank.name
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_flametank
 		Queue: Vehicle, RAVehicle
-		Description: Heavy close range tank. Strong vs Buildings, Infantry. Weak vs Armor, Aircraft.
+		Description: actor-forgotten_flametank.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 32
@@ -610,13 +615,13 @@ forgotten_experimentalmammothtank:
 	Valued:
 		Cost: 6000
 	Tooltip:
-		Name: Experimental Mammoth Tank
+		Name: actor-forgotten_experimentalmammothtank.name
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 190
 		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_experimentalmammothtank
 		Queue: Vehicle, RAVehicle
-		Description: Mutant superheavy tank. Strong vs Everything.
+		Description: actor-forgotten_experimentalmammothtank.description
 	Mobile:
 		Speed: 50
 		TurnSpeed: 10
@@ -682,13 +687,13 @@ forgotten_chemicalmammothtank:
 	Valued:
 		Cost: 5000
 	Tooltip:
-		Name: Chemical Mammoth Tank
+		Name: actor-forgotten_chemicalmammothtank.name
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 200
 		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_chemicalmammothtank
 		Queue: Vehicle, RAVehicle
-		Description: Mutant experimental fire support tank. Strong vs Everything.
+		Description: actor-forgotten_chemicalmammothtank.description
 	Mobile:
 		Speed: 60
 		TurnSpeed: 12
@@ -748,12 +753,12 @@ forgotten_tankkiller:
 	Valued:
 		Cost: 900
 	Tooltip:
-		Name: Tank Killer
+		Name: actor-forgotten_tankkiller.name
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~forgotten_warfactory, forgotten_radar, ~!forgotten_promotion_warriortank
 		Queue: Vehicle, RAVehicle
-		Description: Mutant long ranged vehicle with heavy sabot shells. Strong vs Vehicles. Weak vs Infantry, Aircraft
+		Description: actor-forgotten_tankkiller.description
 	Mobile:
 		Speed: 65
 		TurnSpeed: 26
@@ -812,12 +817,12 @@ forgotten_thumperbus:
 	Valued:
 		Cost: 5200
 	Tooltip:
-		Name: Thumper Bus
+		Name: actor-forgotten_thumperbus.name
 	Buildable:
 		BuildPaletteOrder: 160
 		Prerequisites: ~forgotten_warfactory, forgotten_church
 		Queue: Vehicle, RAVehicle
-		Description: Mutant heavy brawl vehicle. Infantry can shoot from inside.
+		Description: actor-forgotten_thumperbus.description
 	Mobile:
 		Speed: 90
 		TurnSpeed: 18
@@ -894,13 +899,13 @@ forgotten_nomadbarracks:
 	Valued:
 		Cost: 6500
 	Tooltip:
-		Name: Nomad Barracks
+		Name: actor-forgotten_nomadbarracks.name
 	Buildable:
 		-BuildDuration:
 		BuildPaletteOrder: 160
 		Prerequisites: ~forgotten_warfactory, forgotten_church
 		Queue: Vehicle, RAVehicle
-		Description: Forgotten moving barracks. Infantry can shoot from inside.
+		Description: actor-forgotten_nomadbarracks.description
 	Mobile:
 		Speed: 65
 		TurnSpeed: 13
@@ -979,12 +984,12 @@ forgotten_mlrs:
 	Valued:
 		Cost: 2750
 	Tooltip:
-		Name: Forgotten MLRS
+		Name: actor-forgotten_mlrs.name
 	Buildable:
 		BuildPaletteOrder: 85
 		Prerequisites: ~forgotten_warfactory, forgotten_church, ~forgotten_promotion_mlrs
 		Queue: Vehicle, RAVehicle
-		Description: Mutant rocket artillery. Strong vs Infantry, Buildings. Weak vs Armor, Aircraft.
+		Description: actor-forgotten_mlrs.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16
@@ -1045,14 +1050,14 @@ forgotten_m113adats:
 	Valued:
 		Cost: 950
 	Tooltip:
-		Name: M113 Adats
+		Name: actor-forgotten_m113adats.name
 	UpdatesPlayerStatistics:
 		OverrideActor: forgotten_m113adats
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_warfactory, forgotten_radar
 		Queue: Vehicle, RAVehicle
-		Description: Forgotten anti-air vehicle. Strong vs Aircraft, Light vehicles. Weak vs Everything else.
+		Description: actor-forgotten_m113adats.description
 	Mobile:
 		Speed: 70
 		TurnSpeed: 14
@@ -1128,14 +1133,14 @@ forgotten_apctruck:
 	Valued:
 		Cost: 1260
 	Tooltip:
-		Name: APC Truck
+		Name: actor-forgotten_apctruck.name
 	UpdatesPlayerStatistics:
 		OverrideActor: forgotten_m113adats
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~forgotten_warfactory
 		Queue: Vehicle, RAVehicle
-		Description: Armored troop transport. Strong vs Infantry. Weak vs Armor.
+		Description: actor-forgotten_apctruck.description
 	Mobile:
 		Speed: 80
 		TurnSpeed: 16

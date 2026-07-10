@@ -7,12 +7,12 @@ forgotten_silo:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Silo
+		Name: actor-forgotten_silo.name
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Defence, RADefence
-		Description: Stores excess Tiberium.
+		Description: actor-forgotten_silo.description
 		Prerequisites: ~forgotten_constructionyard, forgotten_refinery
 	Building:
 		Footprint: xx xx
@@ -55,11 +55,12 @@ forgotten_veinhole:
 		Footprint: xx xx
 		Dimensions: 2,2
 	Buildable:
+		Description: actor-forgotten_veinhole.description
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
 		Prerequisites: ~forgotten_constructionyard, forgotten_church, ~techlevel.superweapons, !forgotten_veinhole
 	Tooltip:
-		Name: Veinhole
+		Name: actor-forgotten_veinhole.name
 	Armor:
 		Type: Wood
 	RevealsShroud:
@@ -161,13 +162,13 @@ forgotten_machineguntower:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Machinegun Tower
+		Name: actor-forgotten_machineguntower.name
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: Basic base defense. Strong vs Infantry, Light armor.  Weak vs Aircraft, Tanks.
+		Description: actor-forgotten_machineguntower.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -206,12 +207,12 @@ forgotten_juggerflakwall:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Juggerflak Wall
+		Name: actor-forgotten_juggerflakwall.name
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~forgotten_constructionyard, forgotten_radar
 		Queue: Defence, RADefence
-		Description: Forgotten anti-air base defense. Strong vs Aircraft. Does not attack ground.
+		Description: actor-forgotten_juggerflakwall.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -257,13 +258,13 @@ forgotten_brokenrattytankturret:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Broken Ratty Tank Turret
+		Name: actor-forgotten_brokenrattytankturret.name
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~forgotten_constructionyard, forgotten_barracks
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: Basic base defense. Does not require power to operate. Strong vs Armor.  Weak vs Infantry, Aircraft.
+		Description: actor-forgotten_brokenrattytankturret.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -317,13 +318,13 @@ forgotten_brokenwarriortankturret:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Broken Warrior Tank Turret
+		Name: actor-forgotten_brokenwarriortankturret.name
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~forgotten_constructionyard, forgotten_church
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: Advanced base defense. Does not require power to operate. Strong vs Armor.  Weak vs Infantry, Aircraft.
+		Description: actor-forgotten_brokenwarriortankturret.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -377,13 +378,13 @@ forgotten_brokenscoopertankturret:
 	Valued:
 		Cost: 1750
 	Tooltip:
-		Name: Broken Scooper Tank Turret
+		Name: actor-forgotten_brokenscoopertankturret.name
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~forgotten_constructionyard, forgotten_church
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: Advanced base defense. Does not require power to operate. Strong vs Ground. Weak vs Aircraft.
+		Description: actor-forgotten_brokenscoopertankturret.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
