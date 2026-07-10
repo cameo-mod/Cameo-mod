@@ -1521,3 +1521,26 @@ up_twin_rocket_trooper.ixian:
 up_needleguns.ixian:
 	icon:
 		Filename: needlegunsicon.png
+
+rocket_raider.ixian:
+	Defaults:
+	idle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 2421
+		Facings: -32
+	muzzle:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
+	icon:
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 4278
+		Offset: -30,-24

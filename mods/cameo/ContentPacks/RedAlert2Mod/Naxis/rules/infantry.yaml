@@ -121,7 +121,7 @@ mp40.nax:
 		Name: SS Soldier
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, radar.nax
+		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_mp40.description
 	Mobile:
@@ -174,7 +174,7 @@ fcons.nax:
 		Name: Naxi Flamer
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax
+		Prerequisites: ~barr.nax, radar.nax
 		Queue: Infantry, RAInfantry
 		Description: actor_e4.description
 	Mobile:
@@ -230,7 +230,7 @@ merc.nax:
 		Name: Naxi Mercenary Sniper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~barr.nax, radar.nax
+		Prerequisites: ~barr.nax
 		Queue: Infantry, RAInfantry
 		Description: actor_nax_merc.description
 	Mobile:
