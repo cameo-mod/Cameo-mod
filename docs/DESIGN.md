@@ -345,15 +345,21 @@ an explicit design order**. A new weapon:
 
 ```
 MyWeapon:
-	Inherits: ^MediumCannon          # primary class: versus/projectile/sound
-	Inherits@2: ^HeavyCannon         # optional mix -> WeaponClass averages
-	ReloadDelay: 50
+	Inherits: ^MediumCannon          # contributes its class warhead (versus)
+	Inherits@2: ^HeavyCannon         # LAST inherit WINS for the shared fields:
+	                                 # projectile, sounds, effects, defaults
+	                                 # all come from ^HeavyCannon here; the
+	                                 # warheads of BOTH accumulate
+	ReloadDelay: 50                  # own overrides beat every template
 	Range: 5000
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 8000
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 8000                  # EVEN SPREAD — always identical values
 ```
+
+Order the inherits so the template whose projectile/sound/feel you want
+comes LAST; the earlier inherits only contribute their warheads.
 
 - **Mixed class warheads always carry the SAME Damage** (even spread;
   1,023 weapons comply, 49 violations flagged — mostly the imported
