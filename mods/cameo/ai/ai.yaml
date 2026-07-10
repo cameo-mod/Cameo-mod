@@ -3431,7 +3431,7 @@ Player:
 	MinelayerBotModule:
 		RequiresCondition: genericbot
 		MinelayingActorTypes: mnly
-		IgnoredEnemyTargetTypes: Structure, Defense, Air
+		IgnoredEnemyTargetTypes: Structure, Defense, Air, Obstacle
 		UseEnemyLocationTargetTypes: Structure, Defense
 		AwayFromAlliedTargetTypes: Structure, Defense
 		AwayFromEnemyTargetTypes: Structure, Defense

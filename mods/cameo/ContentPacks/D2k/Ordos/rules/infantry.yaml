@@ -296,6 +296,9 @@ face_dancer.ordos:
 	Armament:
 		Weapon: facedancer_grenade
 		LocalOffset: 128,0,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: facedancer_grenade
 	FirepowerMultiplier@up_toxin.ordos:
 		RequiresCondition: up_toxin.ordos
 		Modifier: 150

@@ -20,6 +20,8 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 | B11 | asset norms | 3,632 / 8,776 WAVs off-norm (mono/16-bit/22050 Hz); 131 PNGs over budget | hygiene |
 | B12 | localization | 3 player-visible raw keys, 233 orphaned messages, ≤10% Fluent coverage | cosmetic |
 | R2 | stacked multipliers | **757** units over the 2.0× budget; worst 36× (RA2 Allies) | balance |
+| W | weapon uniqueness (DESIGN §10) | 36 same-faction + 42 cross-faction shared weapons; 95 carrier-only (IFV borrow, informational) | design/identity |
+| G | garrison weapons (DESIGN §11) | **clean** (G1/G2/G3 = 0 after 2026-07-10 fixes; 30 design exceptions) | crash-free/balance |
 
 ## Top 20 findings
 

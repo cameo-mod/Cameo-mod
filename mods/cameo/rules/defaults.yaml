@@ -4131,7 +4131,7 @@
 	Armor:
 		Type: Wood
 	Targetable:
-		TargetTypes: Ground
+		TargetTypes: Ground, Obstacle
 	WithDamageOverlay@SmallBurn:
 		DamageTypes: Incendiary
 		Image: burn-s
@@ -4177,7 +4177,7 @@
 	Armor:
 		Type: Wood
 	Targetable:
-		TargetTypes: Ground
+		TargetTypes: Ground, Obstacle
 	HiddenUnderShroud:
 	ScriptTriggers:
 	HitShape:
@@ -4232,7 +4232,7 @@
 	Armor:
 		Type: Concrete
 	Targetable:
-		TargetTypes: Ground
+		TargetTypes: Ground, Obstacle
 	HitShape:
 	FireWarheadsOnDeath:
 		Type: Footprint
@@ -5608,7 +5608,7 @@
 	Health:
 		HP: 10000
 	Targetable:
-		TargetTypes: Ground
+		TargetTypes: Ground, Obstacle
 	MapEditorData:
 		Categories: Decoration
 

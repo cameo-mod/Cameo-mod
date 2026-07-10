@@ -1079,12 +1079,12 @@ forgotten_m113adats:
 		Weapon: TSAdatsMissile
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: !forgotten_upgrade_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@UPGRADEAA:
 		Weapon: TSAdatsMissileAA
 		LocalOffset: 85,0,171
 		MuzzleSequence: muzzle
-		RequiresCondition: !forgotten_upgrade_chemicalweapons
+		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Turreted:
 		TurnSpeed: 14
 	WithMuzzleOverlay:
