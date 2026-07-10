@@ -3,7 +3,7 @@ Thunderweapon:
 	ReloadDelay: 50
 	Burst: 6
 	BurstDelays: 4
-	Range: 8c0
+	Range: 8192
 	Report: tesla1.aud
 	Projectile: TeslaZap
 	Warhead@1Dam: SpreadDamage
@@ -38,8 +38,8 @@ SC2KFireTruck:
 sc2kmoblotov:
 	Inherits: d2k_grenade
 	ReloadDelay: 85
-	MinRange: 1c0
-	Range: 7c256
+	MinRange: 1024
+	Range: 7424
 	ValidTargets: Ground, Infantry, Structure, Air, Vehicle
 	Projectile: Bullet
 		Speed: 160
@@ -66,7 +66,7 @@ sc2kmoblotov:
 
 sc2ktornado:
 	ReloadDelay: 20
-	Range: 0c64
+	Range: 64
 	Projectile: InstantExplode
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c0
@@ -82,19 +82,19 @@ sc2ktornado:
 			Heavy: 100
 			Concrete: 200
 	Warhead@stuninf: GrantExternalCondition
-		Range: 1c0
+		Range: 1024
 		Duration: 10
 		Condition: leaflet
 		ValidTargets: Infantry
 	Warhead@stunvehicle: GrantExternalCondition
 		Condition: empdisable
 		Duration: 10
-		Range: 1c0
+		Range: 1024
 		ValidTargets: Ground
 
 sc2kfire:
 	ReloadDelay: 25
-	Range: 0c64
+	Range: 64
 	Projectile: InstantExplode
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c768
@@ -115,34 +115,34 @@ sc2kfire:
 		Amount: 2
 
 SpawnActor_SimcityMob:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@2: SpawnActor
 		Actors: sc2kmob,sc2kmob,sc2kmob,sc2kmob,sc2kmob
 		Delay: 5
 
 SpawnActor_Fire:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@2: SpawnActor
 		Actors: sc2kfirea,sc2kfirea,sc2kfirea,sc2kfirea
 		Delay: 5
 
 SpawnActor_Tornado:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@2: SpawnActor
 		Actors: SC2KTORNADOA
 		Delay: 5
 
 SpawnActor_Thundercloud:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@2: SpawnActor
 		Actors: sc2k_thundercloud_maina,sc2k_thundercloud_maina
 		Delay: 5
 SpawnActor_SimcityUFO:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@2: SpawnActor
 		Actors: sc2k_ufo
@@ -150,7 +150,7 @@ SpawnActor_SimcityUFO:
 StreetSimcity_Missile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 45
-	Range: 6c0
+	Range: 6144
 	Report: streetsimcity_missile.WAV
 	Burst: 4
 	BurstDelays: 10
@@ -177,7 +177,7 @@ StreetSimcity_Missile:
 StreetSimcity_Crash:
 	Report: carland4.WAV
 	ReloadDelay: 140
-	Range: 2c0
+	Range: 2048
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: TargetDamage

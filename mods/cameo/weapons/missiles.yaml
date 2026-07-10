@@ -3,8 +3,8 @@
 ^MissileWeapon:
     Inherits: ^AnyMissile
 	ReloadDelay: 50
-	Range: 6c0
-	MinRange: 0c512
+	Range: 6144
+	MinRange: 512
 	Report: bazook1.aud
 	ValidTargets: Ground, Air
 	Projectile: MissileCA
@@ -48,7 +48,7 @@
 Dragon:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 20
-	Range: 10c0
+	Range: 10240
 	Report: rocket2.aud
 	ValidTargets: Air
 	Burst: 2
@@ -73,7 +73,7 @@ BikeRockets:
 	Inherits: ^MissileWeapon
 	Burst: 2
 	BurstDelays: 10
-    Range: 5c256
+    Range: 5376
     ValidTargets: Ground
 	Projectile: MissileCA
 		HorizontalRateOfTurn: 10
@@ -91,7 +91,7 @@ BikeRocketsAA:
     ValidTargets: Air
  	Projectile: MissileCA 
         HorizontalRateOfTurn: 16
-        Range: 7c512
+        Range: 7680
         Speed: 268
         RangeLimit: 10c512     
     Warhead@1Dam: SpreadDamage
@@ -101,8 +101,8 @@ BikeRocketsAA:
 OrcaAGMissiles:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 12
-	Range: 5c0
-	MinRange: 1c256
+	Range: 5120
+	MinRange: 1280
 	ValidTargets: Ground
 	Projectile: MissileCA
 		Arm: 1
@@ -136,7 +136,7 @@ OrcaAAMissiles:
 MammothMissiles:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 45
-	Range: 5c0
+	Range: 5120
 	Report: rocket1.aud
 	Burst: 2
 	BurstDelays: 15
@@ -163,8 +163,8 @@ MammothMissiles:
 227mm:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 100
-	Range: 11c0
-	MinRange: 3c0
+	Range: 11264
+	MinRange: 3072
 	Burst: 4
 	BurstDelays: 4
 	Report: rocket1.aud
@@ -196,7 +196,7 @@ MammothMissiles:
 227mm.stnk:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 70
-	Range: 7c512
+	Range: 7680
 	Report: rocket1.aud
 	Burst: 2
 	BurstDelays: 10
@@ -220,7 +220,7 @@ MammothMissiles:
 BoatMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 35
-	Range: 8c0
+	Range: 8192
 	Burst: 2
 	BurstDelays: 10
 	Report: rocket2.aud
@@ -247,7 +247,7 @@ BoatMissile:
 TowerMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 15
-	Range: 7c0
+	Range: 7168
 	Report: rocket2.aud
 	ValidTargets: Ground
 	Projectile: MissileCA
@@ -271,7 +271,7 @@ TowerMissile:
 TowerAAMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 15
-	Range: 8c0
+	Range: 8192
 	Report: rocket2.aud
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -296,8 +296,8 @@ TowerAAMissile:
 Patriot:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 25
-	Range: 9c0
-	MinRange: 1c0
+	Range: 9216
+	MinRange: 1024
 	Report: rocket2.aud
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -323,8 +323,8 @@ HonestJohn:
 	ReloadDelay: 240
 	Burst: 2
 	BurstDelays: 25
-	Range: 12c0
-	MinRange: 4c0
+	Range: 12288
+	MinRange: 4096
 	Report: rocket2.aud
 	Projectile: Bullet
 		Blockable: false
@@ -359,15 +359,15 @@ HonestJohn:
         
 HonestJohnCamea:   
     Inherits: HonestJohn
-    Range: 14c256
+    Range: 14592
 ####################################################################################################
 #		RA
 ####################################################################################################
 
 ^AntiGroundMissile:
 	ReloadDelay: 50
-	Range: 5c0
-	MinRange: 0c512
+	Range: 5120
+	MinRange: 512
 	Report: missile6.aud
 	Projectile: MissileCA
 		Speed: 213
@@ -418,7 +418,7 @@ HonestJohnCamea:
 HellfireAG:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 60
-	MinRange: 1c256
+	MinRange: 1280
 	Burst: 4
 	BurstDelays: 14
 	Projectile: MissileCA
@@ -436,7 +436,7 @@ HellfireAG:
 HellfireAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 60
-	MinRange: 1c256
+	MinRange: 1280
 	Burst: 2
 	BurstDelays: 10
 	Projectile: MissileCA
@@ -456,7 +456,7 @@ HellfireAA:
 MammothTusk:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 60
-	Range: 6c512
+	Range: 6656
 	Burst: 2
 	ValidTargets: Air, Infantry
 	Projectile: MissileCA
@@ -498,7 +498,7 @@ APCRocket.AA:
 Nike:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 15
-	Range: 7c512
+	Range: 7680
 	Report: missile1.aud
 	Projectile: MissileCA
 		Arm: 3
@@ -519,8 +519,8 @@ Nike:
 SCUD:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 300
-	Range: 10c0
-	MinRange: 4c0
+	Range: 10240
+	MinRange: 4096
 	Report: missile1.aud
 	-Projectile:
 	Projectile: Bullet
@@ -555,8 +555,8 @@ SCUD:
 Maverick:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 30
-	Range: 9c0
-	MinRange: 3c0
+	Range: 9216
+	MinRange: 3072
 	Report: missile7.aud
 	Burst: 2
 	BurstDelays: 7
@@ -578,7 +578,7 @@ Maverick:
 Aphid:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 30
-	Range: 10c0
+	Range: 10240
 	Report: missile7.aud
 	Burst: 2
 	BurstDelays: 7
@@ -598,7 +598,7 @@ APTusk:
 	Inherits: ^AntiGroundMissile
 	Burst: 2
 	ReloadDelay: 60
-	Range: 6c0
+	Range: 6144
 	Projectile: MissileCA
 		Speed: 298
 		TrailImage: smokey

@@ -1,6 +1,6 @@
 ^BallisticWeapon:
 	ReloadDelay: 40
-	Range: 4c768
+	Range: 4864
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -33,7 +33,7 @@
 70mm:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 30
-	Range: 4c0
+	Range: 4096
 	Report: tnkfire3.aud
 	Projectile: Bullet
 		Speed: 853
@@ -58,7 +58,7 @@
 TurretGun:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 20
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Speed: 853
 	Warhead@1Dam: SpreadDamage
@@ -71,8 +71,8 @@ TurretGun:
 ArtilleryShell:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 65
-	Range: 11c0
-	MinRange: 3c0
+	Range: 11264
+	MinRange: 3072
 	Report: tnkfire2.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -100,7 +100,7 @@ ArtilleryShell:
 Grenade:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
-	Range: 4c0
+	Range: 4096
 	Report: toss1.aud
 	Projectile: Bullet
 		Speed: 140
@@ -127,7 +127,7 @@ Grenade:
 
 ^Cannon:
 	ReloadDelay: 50
-	Range: 4c768
+	Range: 4864
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 682
@@ -161,7 +161,7 @@ Grenade:
 25mm:
 	Inherits: ^Cannon
 	ReloadDelay: 21
-	Range: 4c768
+	Range: 4864
 	Report: cannon2.aud
 	Projectile: Bullet
 		Speed: 853
@@ -213,7 +213,7 @@ ragal120mm:
 RATurretGun:
 	Inherits: ^Cannon
 	ReloadDelay: 30
-	Range: 7c0
+	Range: 7168
 	Report: turret1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
@@ -224,7 +224,7 @@ RATurretGun:
 ^Artillery:
 	Inherits: ^Cannon
 	ReloadDelay: 75
-	Range: 12c0
+	Range: 12288
 	Projectile: Bullet
 		Speed: 204
 		Blockable: false
@@ -249,7 +249,7 @@ RATurretGun:
 155mm:
 	Inherits: ^Artillery
     ReloadDelay: 90
-	MinRange: 4c0
+	MinRange: 4096
 	Report: tank5.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -264,7 +264,7 @@ RATurretGun:
 BuggyGrenade:
 	Inherits: Grenade
 	ReloadDelay: 21
-	Range: 4c768
+	Range: 4864
 	Report: M203.aud
 	Projectile: Bullet
 		Speed: 400
@@ -272,7 +272,7 @@ BuggyGrenade:
 Bomb.Kamikaze:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 5
-	Range: 2c512
+	Range: 2560
 	Report: vmigweaa.wav, vmigweab.wav
 	-Projectile:
 	Projectile: Bullet

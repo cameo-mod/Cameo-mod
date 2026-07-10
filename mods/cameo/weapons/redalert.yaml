@@ -7465,7 +7465,7 @@ MADTankThump:
 
 DT120mm:
 	Inherits: ra120mm
-	Range: 5c555
+	Range: 5675
 	ReloadDelay: 55
 
 ragal120mm:
@@ -7475,7 +7475,7 @@ ragal120mm:
 MammothTuskGal:
 	Inherits: MammothTusk
 	ReloadDelay: 55
-	Range: 5c555
+	Range: 5675
 	ValidTargets: Air, Ground
 
 DT120mm1:
@@ -7687,15 +7687,15 @@ JHighVWaveforce:
 
 RocketsG:
 	Inherits: ^MissileWeapon
-	Range: 7c0
+	Range: 7168
 
 RocketsG:
 	Inherits: ^MissileWeapon
-	Range: 7c0
+	Range: 7168
 
 ^AACannon:
 	ReloadDelay: 10
-	Range: 8c0
+	Range: 8192
 	Report: aacanon3.aud
 	ValidTargets: Air
 	Projectile: Bullet
@@ -7719,7 +7719,7 @@ RocketsG:
 
 ^RAHeavyMG:
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Report: gun13.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -7757,7 +7757,7 @@ RocketsG:
 
 ^SnipeWeapon:
 	ReloadDelay: 80
-	Range: 2c512
+	Range: 2560
 	Report: gun5.aud
 	ValidTargets: Ground, Infantry, Ant
 	InvalidTargets: Vehicle, Water, Structure, Wall, Husk, Mine
@@ -7806,7 +7806,7 @@ Colt45:
 RASniper:
 	Inherits: ^SnipeWeapon
 	ReloadDelay: 70
-	Range: 10c0
+	Range: 10240
 	Warhead@1Dam: SpreadDamage
 		Damage: 14000
 

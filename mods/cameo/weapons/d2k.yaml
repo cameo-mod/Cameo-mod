@@ -28,7 +28,7 @@
 Debris:
 	Inherits: ^Grenade
 	ReloadDelay: 60
-	Range: 2c768
+	Range: 2816
 	Report: d2khc.wav
 	Projectile: Bullet
 		Speed: 32, 64
@@ -174,7 +174,7 @@ D2K70mmH:
 	ReloadDelay: 90
 	-Report:
 	StartBurstReport: d2k_buzzsaw_att.wav
-	Range: 4c256
+	Range: 4352
 	Burst: 2
 	BurstDelays: 0
 	Warhead@1Dam: SpreadDamage
@@ -276,7 +276,7 @@ D2K_155mm:
 
 D2K_SiegeQuad:
 	Inherits: D2K_155mm
-	Range: 7c512
+	Range: 7680
 	Report: d2khc.wav
 	ReloadDelay: 100
 	Projectile: Bullet
@@ -335,7 +335,7 @@ D2K_SiegeQuad:
 
 D2K_Bazooka:
 	Inherits: ^D2KRocket
-	Range: 4c512
+	Range: 4608
 	ValidTargets: Ground, Air
 	Warhead@1Dam: SpreadDamage
 		Damage: 6000
@@ -344,7 +344,7 @@ D2K_Bazooka:
 D2K_Rocket:
 	Inherits: ^D2KRocket
 	ReloadDelay: 30
-	Range: 4c512
+	Range: 4608
 	Projectile: Bullet
 		Speed: 400
 	Warhead@Concrete: DamagesConcrete
@@ -366,7 +366,7 @@ D2K_Rocket_AA:
 		TrailImage: bazooka_trail2
 		TrailPalette: effect75alpha
 		TrailInterval: 1
-		MinRange: 0c256
+		MinRange: 256
 		Image: d2k_RPG
 		RangeLimit: 24c0
 	Warhead@1Dam: SpreadDamage
@@ -414,7 +414,7 @@ D2K_Rocket_Trooper:
 
 D2K_Combat_Fleet:
 	Inherits: ^D2KRocket
-	Range: 10c0
+	Range: 10240
 	Burst: 10
 	BurstDelays: 2
 	ReloadDelay: 50
@@ -436,7 +436,7 @@ mtank_pri:
 	ReloadDelay: 150
 	Burst: 4
 	BurstDelays: 25
-	Range: 10c0
+	Range: 10240
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		RangeLimit: 30c0
@@ -451,7 +451,7 @@ d2k_tyrant:
 	Inherits: ^D2KMissile
 	ReloadDelay: 130
 	Burst: 1
-	Range: 6c0
+	Range: 6144
 	Report: tyrantshot.wav
 	ValidTargets: Ground
 	Projectile: Missile
@@ -476,7 +476,7 @@ Rocket.stealth:
 	Report: d2k_buggy_rocket.wav
 	Burst: 2
 	BurstDelays: 15
-	Range: 9c0
+	Range: 9216
 	Projectile: Bullet
 		Inaccuracy: 64
 	Warhead@1Dam: SpreadDamage
@@ -539,7 +539,7 @@ d2k_APCo.AA:
 
 D2K_Annihilator:
 	ReloadDelay: 50
-	Range: 6c512
+	Range: 6656
 	Report: tesla1.aud
 	Projectile: LightningZap
 	Warhead@1Dam: SpreadDamage
@@ -556,7 +556,7 @@ D2K_Annihilator:
 
 D2K_Annihilator.AA:
 	Inherits: MammothTusk
-	Range: 10c0
+	Range: 10240
 	Burst: 6
 	BurstDelays: 3
 	ReloadDelay: 100
@@ -711,7 +711,7 @@ Sound:
 
 Sound2:
 	Inherits: Sound
-	Range: 5c512
+	Range: 5632
 	ReloadDelay: 40
 	Projectile: AreaBeam
 		Speed: 0c256
@@ -726,13 +726,13 @@ Sound2:
 
 Combat_Tank_F_Sound:
 	Inherits: Sound
-	Range: 5c512
+	Range: 5632
 	ReloadDelay: 135
 
 facedancer_attack:
 	ReloadDelay: 20
 	Report: zulhit00.aud
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
@@ -804,14 +804,14 @@ LeechSpit:
 WormJaw:
 	ReloadDelay: 10
 	InvalidTargets: Structure
-	Range: 1c512
+	Range: 1536
 	Warhead@NeededForTargeting: TargetDamage
 		InvalidTargets: Structure
 
 WormSwallow:
 	ReloadDelay: 150
 	Report: WORM.WAV
-	Range: 1c768
+	Range: 1792
 	InvalidTargets: Structure, Air, DevourImmune
 	Projectile: InstantHit
 	Warhead@1Dam: HealthPercentageDamage
@@ -916,7 +916,7 @@ DeathHand:
 
 DeathHandCluster:
 	Inherits: Debris2
-	Range: 7c0
+	Range: 7168
 	Projectile: Bullet
 		Image: 120mm
 		TrailImage: small_trail2
@@ -1265,7 +1265,7 @@ D2K_Personal_Shield_Impact:
 		Inaccuracy: 0c128
 		ImpactSounds: d2k_personal_shield_1_heavy.aud, d2k_personal_shield_2_heavy.aud, d2k_personal_shield_3_heavy.aud, d2k_personal_shield_4_heavy.aud, d2k_personal_shield_5_heavy.aud, d2k_personal_shield_6_heavy.aud, d2k_personal_shield_7_heavy.aud
 	Warhead@PersonalShieldHits: GrantExternalCondition
-		Range: 0c128
+		Range: 128
 		Condition: SmallCaliberShieldHits
 		Duration: 300
 		ValidTargets: PersonalShielded, PersonalShieldedSard, PersonalShieldedHeavy
@@ -1335,7 +1335,7 @@ M_LMG:
 LMG_burst:
 	Inherits: LMG
 	Burst: 3
-	Range: 3c768
+	Range: 3840
 	BurstDelays: 3
 	ReloadDelay: 34
 	Report: hmgo1.wav, hmgo2.wav
@@ -1361,7 +1361,7 @@ M_HMG_H:
 
 d2k_shotgun:
 	Inherits: LMG
-	Range: 3c256
+	Range: 3328
 	-Report:
 	StartBurstReport: shtgunboom.wav
 	Burst: 3
@@ -1382,7 +1382,7 @@ d2k25mm:
 	Inherits: ^D2K_Cannon
 	Report: TURRET1.WAV
 	ReloadDelay: 30
-	Range: 3c256
+	Range: 3328
 	InvalidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
@@ -1399,7 +1399,7 @@ Fremen_Upg:
 	Inherits: M_HMG
 	Report: FREMODD1.WAV
 	ReloadDelay: 30
-	Range: 3c0
+	Range: 3072
 	ValidTargets: Infantry
 	InvalidTargets: Air, Vehicle, Structure
 	Warhead@1Dam: SpreadDamage
@@ -1430,7 +1430,7 @@ Arrakis_Tanya_Guns:
 Fremen_RPG:
 	Inherits: ^D2KMissile
 	ReloadDelay: 45
-	Range: 4c768
+	Range: 4864
 	ValidTargets: Air, Vehicle, Structure
 	InvalidTargets: Infantry
 	Projectile: Missile
@@ -1457,7 +1457,7 @@ HMG:
 	Inherits: ^Chaingun
 	Inherits: ^SmallArms
 	ReloadDelay: 20
-	Range: 3c0
+	Range: 3072
 	Report: 20MMGUN1.WAV
 	Warhead@1Dam: SpreadDamage
 		Damage: 2000
@@ -1480,7 +1480,7 @@ HMG_tleilaxu:
 	ReloadDelay: 80
 	Burst: 6
 	BurstDelays: 2
-	Range: 4c0
+	Range: 4096
 	Warhead@1Dam: SpreadDamage
 		Damage: 2500
 		Versus:
@@ -1564,7 +1564,7 @@ OrniGunC:
 
 Rocketeer:
 	Inherits: ^MG
-	Range: 4c512
+	Range: 4608
 	Warhead@1Dam: SpreadDamage
 		Damage: 1500
 		DamageTypes: TriggerProne, SmallExplosionDeath
@@ -1580,7 +1580,7 @@ Rocketeer:
 Rocketeer_o:
 	Inherits: HMG
 	ReloadDelay: 18
-	Range: 2c512
+	Range: 2560
 	ValidTargets: Ground
 	Warhead@1Dam: SpreadDamage
 		Damage: 2250
@@ -1597,7 +1597,7 @@ Rocketeer_o:
 Rocketeer_t:
 	Inherits: Rocketeer_o
 	Burst: 4
-	Range: 3c768
+	Range: 3840
 	BurstDelays: 4
 	ReloadDelay: 40
 	ValidTargets: Ground, Air
@@ -1606,7 +1606,7 @@ Rocketeer_t:
 
 DroneJump:
 	ReloadDelay: 45
-	Range: 3c512
+	Range: 3584
 	Report: vteratta.aud
 	Projectile: InstantHit
 	InvalidTargets: Structure
@@ -1627,7 +1627,7 @@ DroneJump:
 DroneJumpH:
 	Inherits: DroneJump
 	ReloadDelay: 60
-	Range: 2c256
+	Range: 2304
 	InvalidTargets: Vehicle, Tank, Structure
 	Warhead@1Dam: SpreadDamage
 		InvalidTargets: Vehicle, Tank, Structure
@@ -1656,7 +1656,7 @@ D2KBuggyExplosion:
 D2KSniperRifle:
 	Report: TURRET1.WAV
 	ReloadDelay: 120
-	Range: 12c0
+	Range: 12288
 	ValidTargets: Ground, Air
 	InvalidTargets: Water, Structure, Wall, Husk
 	Projectile: Bullet
@@ -1683,7 +1683,7 @@ D2KSniperRifle:
 D2KMarksmanRifle:
 	Inherits: D2KSniperRifle
 	ReloadDelay: 45
-	Range: 6c512
+	Range: 6656
 	Report: d2k_marksman.wav
 	InvalidTargets: Water
 	Projectile: Bullet
@@ -1704,7 +1704,7 @@ emperor_sardaukar_chief_c4:
 d2kFlamegun:
 	Inherits: Flamer
 	ReloadDelay: 6
-	Range: 2c0
+	Range: 2048
 	Report: FLAMER1.WAV
 	Projectile: Bullet
 		Speed: 1c256
@@ -1730,7 +1730,7 @@ d2kFlamegun:
 d2kFlameTurret:
 	Inherits: d2kFlamegun
 	ReloadDelay: 10
-	Range: 4c256
+	Range: 4352
 	Projectile: Bullet
 		Blockable: false
 	Warhead@1Dam: SpreadDamage
@@ -1741,7 +1741,7 @@ d2k_flame_tank:
 	ValidTargets: Ground, Water
 	InvalidTargets: Wall
 	ReloadDelay: 5
-	Range: 4c0
+	Range: 4096
 	Report: d2k_flame_tank.wav
 	Projectile: Bullet
 		Speed: 300
@@ -1775,7 +1775,7 @@ PhoenixRocket:
 	Inherits: ^D2KMissile
 	ReloadDelay: 100
 	Burst: 8
-	Range: 4c512
+	Range: 4608
 	BurstDelays: 10
 	Projectile: Missile
 		Inaccuracy: 96
@@ -1949,7 +1949,7 @@ d2k_kwny_fighter:
 
 d2k_laser_aa:
 	Inherits: d2k_laser
-	Range: 8c0
+	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
@@ -1959,7 +1959,7 @@ d2k_laser_qafza:
 	StartBurstReport: d2k_laser.wav
 	Burst: 1
 	ReloadDelay: 12
-	Range: 6c0
+	Range: 6144
 	Warhead@1Dam: SpreadDamage
 		Damage: 2500
 		Versus:
@@ -1972,7 +1972,7 @@ d2k_laser_qafza:
 
 d2k_laser_qafza_aa:
 	Inherits: d2k_laser_qafza
-	Range: 8c0
+	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Air
@@ -1980,7 +1980,7 @@ d2k_laser_qafza_aa:
 D2K_buzzsaw:
 	ValidTargets: Infantry
 	ReloadDelay: 1
-	Range: 1c256
+	Range: 1280
 	TargetActorCenter: true
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
@@ -2000,7 +2000,7 @@ d2k_sandworm_electricity:
 		Damage: 2000
 
 d2k_chaos_lightning:
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	ValidTargets: Ground, Air
 	Warhead@3Eff: CreateEffect
@@ -2029,7 +2029,7 @@ d2k_chaos_lightning:
 		Size: 1
 		Delay: 3
 	Warhead@3: GrantExternalCondition
-		Range: 5c256
+		Range: 5376
 		Delay: 10
 		Condition: chaosgas
 		Duration: 750
@@ -2039,7 +2039,7 @@ d2k_chaos_lightning:
 
 d2k_airdefenseplatform:
 	Inherits: HMG_turret
-	Range: 6c0
+	Range: 6144
 	Burst: 2
 	BurstDelays: 0
 	ReloadDelay: 8
@@ -2059,7 +2059,7 @@ d2k_airdefenseplatform:
 D2KTheVoice:
 	ReloadDelay: 200
 	Report: d2k_the_voice.wav
-	Range: 6c0
+	Range: 6144
 	TargetActorCenter: true
 	ValidTargets: MindControl
 	InvalidTargets: Hero, MCImmune
@@ -2070,7 +2070,7 @@ D2KTheVoice:
 D2KGomJabbar:
 	Report: d2k_gom_jabbar.wav
 	ReloadDelay: 50
-	Range: 1c226
+	Range: 1250
 	ValidTargets: Infantry
 	Projectile: InstantHit
 	Warhead@1Dam: HealthPercentageDamage
@@ -2090,7 +2090,7 @@ d2k_aircraft_eater:
 	Report: d2k_aircraft_eater.wav
 	ValidTargets: Air
 	ReloadDelay: 500
-	Range: 1c0
+	Range: 1024
 	Projectile: InstantHit
 	Warhead@1Dam: HealthPercentageDamage
 		Damage: 100
@@ -2107,7 +2107,7 @@ d2k_aircraft_eater:
 
 d2k_sard_heatblade:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	InvalidTargets: Infantry
 	Warhead@1: CreateEffect
@@ -2128,7 +2128,7 @@ d2k_sard_heatblade:
 
 d2k_sard_crossbow:
 	ReloadDelay: 35
-	Range: 5c0
+	Range: 5120
 	Report: d2k_sardaukar_assassin_crossbow.wav
 	Projectile: InstantHit
 	ValidTargets: Infantry
@@ -2149,7 +2149,7 @@ d2k_sard_crossbow:
 	Warhead@1Con: GrantExternalCondition
 		Condition: poisoned
 		Duration: 750
-		Range: 0c60
+		Range: 60
 ###################################################
 #       OG DUNE 2000
 ###################################################
@@ -2157,7 +2157,7 @@ d2k_sard_crossbow:
 ^oCannon:
 	Inherits: ^MediumCannon
 	ReloadDelay: 50
-	Range: 4c0
+	Range: 4096
 	Report: MEDTANK1.WAV
 	Projectile: Bullet
 		Speed: 562
@@ -2180,7 +2180,7 @@ d2k_sard_crossbow:
 o110mm_Gun:
 	Inherits: ^oCannon
 	ReloadDelay: 35
-	Range: 5c0
+	Range: 5120
 	Report: TURRET1.WAV
 	Projectile: Bullet
 		Speed: 875
@@ -2231,7 +2231,7 @@ oDevBullet:
 o155mm:
 	Inherits: ^oCannon
 	ReloadDelay: 80
-	Range: 5c512
+	Range: 5632
 	Report: MORTAR1.WAV
 	Projectile: Bullet
 		Speed: 192
@@ -2265,7 +2265,7 @@ o155mm:
 
 ^oRocket:
 	ReloadDelay: 40
-	Range: 3c0
+	Range: 3072
 	Report: ROCKET1.WAV
 	Projectile: Bullet
 		Blockable: false
@@ -2342,7 +2342,7 @@ oBazooka:
 oRocket:
 	Inherits: ^oRocket
 	ReloadDelay: 30
-	Range: 3c512
+	Range: 3584
 	Projectile: Bullet
 		Speed: 352
 	Warhead@1Dam: SpreadDamage
@@ -2380,7 +2380,7 @@ omtank_pri:
 	ReloadDelay: 115
 	Burst: 2
 	BurstDelays: 115
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Ground, Air
 	Projectile: Missile
 		Inaccuracy: 96
@@ -2394,7 +2394,7 @@ omtank_pri:
 oDeviatorMissile:
 	Inherits: ^oMissile
 	ReloadDelay: 160
-	Range: 5c0
+	Range: 5120
 	Report: MISSLE1.WAV
 	Projectile: Missile
 		RangeLimit: 6c0
@@ -2427,7 +2427,7 @@ oDeviatorMissile:
 
 oSound:
 	ReloadDelay: 90
-	Range: 5c0
+	Range: 5120
 	Report: SONIC1.WAV
 	Projectile: AreaBeam
 		Speed: 0c128
@@ -2474,7 +2474,7 @@ oOrniBomb:
 	ReloadDelay: 25
 	Burst: 3
 	BurstDelays: 6
-	Range: 3c0
+	Range: 3072
 	Projectile: GravityBomb
 		Image: d2k_bombs
 		Palette: d2keffect
@@ -2540,7 +2540,7 @@ oDeathHand:
 
 oDeathHandCluster:
 	Inherits: Debris2
-	Range: 7c0
+	Range: 7168
 	Projectile: Bullet
 		Image: 120mm
 		TrailImage: small_trail2
@@ -2607,7 +2607,7 @@ oWallExplode:
 
 ogrenade:
 	ReloadDelay: 50
-	Range: 4c0
+	Range: 4096
 	Projectile: Bullet
 		Speed: 160
 		Blockable: false
@@ -2710,7 +2710,7 @@ oPlasmaExplosion:
 
 ^oMG:
 	ReloadDelay: 30
-	Range: 2c512
+	Range: 2560
 	Report: MGUN2.WAV
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -2755,7 +2755,7 @@ oM_LMG_H:
 oM_HMG:
 	Inherits: ^oMG
 	ReloadDelay: 40
-	Range: 3c512
+	Range: 3584
 	Report: 20MMGUN1.WAV
 	Warhead@1Dam: SpreadDamage
 		Spread: 192
@@ -2787,7 +2787,7 @@ oFremen_L:
 oHMG:
 	Inherits: ^oMG
 	ReloadDelay: 20
-	Range: 3c0
+	Range: 3072
 	Report: 20MMGUN1.WAV
 	Warhead@1Dam: SpreadDamage
 		Spread: 160
@@ -2802,7 +2802,7 @@ oHMGo:
 
 oHMG_muzzle:
 	ReloadDelay: 16
-	Range: 3c0
+	Range: 3072
 	Burst: 3
 	BurstDelays: 2
 	Projectile: InstantHit
@@ -2814,7 +2814,7 @@ oHMGo_muzzle:
 
 oDebris:
 	ReloadDelay: 60
-	Range: 2c768
+	Range: 2816
 	Projectile: Bullet
 		Speed: 32, 64
 		Blockable: false

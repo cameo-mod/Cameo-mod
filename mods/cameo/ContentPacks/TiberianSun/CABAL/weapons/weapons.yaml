@@ -23,14 +23,14 @@ TSReaperTrap:
 	Warhead@2Con: GrantExternalCondition
 		Condition: ReaperTrap
 		Duration: 100
-		Range: 1c0
+		Range: 1024
 		ValidTargets: Infantry
 		ValidRelationships: Enemy
 
 TSCyCannon:
 	Inherits: ^TSEnergyBlast
 	ReloadDelay: 60
-	Range: 6c0
+	Range: 6144
 	Projectile: Missile
 		MaximumLaunchSpeed: 192
 		Blockable: false
@@ -71,7 +71,7 @@ TSCyCannon:
 DarkObeliskLaser:
 	Inherits: ^TSLaser
 	Report: obelmod1.aud
-	Range: 12c0
+	Range: 12288
 	ReloadDelay: 50
 	ValidTargets: Air
 	Projectile: LaserZap
@@ -283,7 +283,7 @@ TSVulcan3:
 TSVulcanTower:
 	Inherits: ^TSMG
 	ReloadDelay: 26
-	Range: 6c0
+	Range: 6144
 	Report: chaingn1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 1800
@@ -320,7 +320,7 @@ TSVulcanTowerTwin:
 	Inherits: ^TSMG
 	ReloadDelay: 26
 	Burst: 2
-	Range: 6c0
+	Range: 6144
 	Report: chaingn1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 1800
@@ -344,8 +344,8 @@ TSTacticalNeutronMissileDamage:
 		AirThreshold: 8c0
 
 TSHSeekerLaunch:
-	Range: 9999c0
-	MinRange: 1c0
+	Range: 10238976
+	MinRange: 1024
 	ReloadDelay: 50
 	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
@@ -357,7 +357,7 @@ cabal_dissolver:
 	ReloadDelay: 16
 	Burst: 4
 	BurstDelays: 2
-	Range: 5c512
+	Range: 5632
 	StartBurstReport: tsdissolver.wav
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -380,7 +380,7 @@ cabal_dissolver:
 
 Eliminator-Blades:
 	ReloadDelay: 25
-	Range: 2c0
+	Range: 2048
 	Burst: 2
 	BurstDelays: 5
 	Report: pzehit00.aud

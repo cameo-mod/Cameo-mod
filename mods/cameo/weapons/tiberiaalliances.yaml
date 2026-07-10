@@ -3,8 +3,8 @@
 ####################################################################################################
 TASmokegrenade:
 	Inherits: Grenade
-	Range: 7c384
-	MinRange: 0c512
+	Range: 7552
+	MinRange: 512
 	ReloadDelay: 210
 	ValidTargets: Infantry, Garrisoned, Structure
 	Projectile: Bullet
@@ -26,13 +26,13 @@ TASmokegrenade:
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
 		Duration: 120
-		Range: 1c0
+		Range: 1024
 		ValidTargets: Structure
 		
 TAFlashbanggrenade:
 	Inherits: Grenade
-	Range: 8c384
-	MinRange: 0c512
+	Range: 8576
+	MinRange: 512
 	ReloadDelay: 210
 	ValidTargets: Infantry, Garrisoned, Structure
 	Projectile: Bullet
@@ -54,19 +54,19 @@ TAFlashbanggrenade:
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
 		Duration: 120
-		Range: 1c0
+		Range: 1024
 		ValidTargets: Infantry
 TAThumper:
 	Inherits: ^TSArtilleryWeapon
 	ReloadDelay: 222
-	Range: 15c0
+	Range: 15360
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 222
 		LaunchAngle: 165
 		ContrailLength: 30
 		ContrailWidth: 12
-	MinRange: 5c0
+	MinRange: 5120
 	Warhead@1Dam: SpreadDamage
 		Damage: 44000
 		Spread: 1c0
@@ -93,7 +93,7 @@ TAFalconMissiles:
 	Burst: 24
 	BurstDelays: 1
 	ReloadDelay: 500
-	Range: 1000c0
+	Range: 1024000
 	Projectile: Bullet
 		Inaccuracy: 12c0
 
@@ -101,7 +101,7 @@ TAEyeofKaneAA:
 	Inherits: ^MissileWeapon
 	Burst: 24
 	BurstDelays: 1
-	Range: 1000c0
+	Range: 1024000
 	Report: rocket2.aud
 	Projectile: MissileCA
 		Image: MISSILE
@@ -134,14 +134,14 @@ TAChemBazooka:
 
 TAChemBazookaG:
 	Inherits: TAChemBazooka
-	Range: 9c0
+	Range: 9216
 
 TAFistRocket:
 	Inherits: TankKiller
 	Burst: 1
 	ReloadDelay: 188
-	Range: 6c0
-	MinRange: 1c0
+	Range: 6144
+	MinRange: 1024
 	Report: vscowe2a.wav, vscowe2b.wav
 	Projectile: MissileCA
 		Image: scorpionrocket
@@ -177,8 +177,8 @@ TAFistofKane:
 	ReloadDelay: 20
 	Burst: 25
 	BurstDelays: 1
-	Range: 1000c0
-	MinRange: 0c768
+	Range: 1024000
+	MinRange: 768
 	Report: gun5.aud
 	FirstBurstTargetOffset: -2984,0,0
 	FollowingBurstTargetOffset: 746,0,0
@@ -202,7 +202,7 @@ TAFistofKane:
 		ExplosionPalette: effect75alpha
 TAReaperVulcan:
 	Inherits: TSVulcan2
-	Range: 7c0
+	Range: 7168
 ####################################################################################################
 #		Tiberian Sun Superweapon
 ####################################################################################################

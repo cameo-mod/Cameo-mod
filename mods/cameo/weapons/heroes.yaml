@@ -1,6 +1,6 @@
 LinkSword1:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Ground, Water
 	InvalidTargets: Air
 	Report: linksword1.aud
@@ -41,7 +41,7 @@ LinkSword4:
 
 BlazerSword1:
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Ground, Water
 	InvalidTargets: Air
 	Report: blazerattack.aud
@@ -78,7 +78,7 @@ BlazerSword4:
 
 hammer:
 	ReloadDelay: 40
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Ground, Water
 	InvalidTargets: Air, Structure
 	Report: jackhammer.aud
@@ -101,7 +101,7 @@ hammer:
 
 axe:
 	ReloadDelay: 40
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Structure
 	InvalidTargets: Air, Infantry, Vehicle, Wall
 	Report: jackaxe.aud
@@ -124,7 +124,7 @@ axe:
 
 hammer2:
 	ReloadDelay: 40
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Ground, Water
 	InvalidTargets: Air, Structure
 	Report: jackhammer2.aud
@@ -147,7 +147,7 @@ hammer2:
 
 axe2:
 	ReloadDelay: 40
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Structure
 	InvalidTargets: Air, Infantry, Vehicle, Wall
 	Report: jackaxe.aud
@@ -183,7 +183,7 @@ vvshoot1:
 	ReloadDelay: 15
 	Burst: 2
 	BurstDelays: 4
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: vvshoot1
@@ -202,7 +202,7 @@ vvshoot1:
 vvshoot2:
 	Report: vvshoot2.aud
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Ground, Water, Air
 	Projectile: LaserZap
 		Color: 1111FF
@@ -275,7 +275,7 @@ vvshoot2:
 
 vvmissile:
 	ReloadDelay: 50
-	Range: 6c0
+	Range: 6144
 	Report: bazook1.aud
 	ValidTargets: Ground, Water
 	Projectile: MissileCA
@@ -307,7 +307,7 @@ axelayshoot1:
 	ReloadDelay: 20
 	Burst: 4
 	BurstDelays: 3
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: axelayshoot1
@@ -328,7 +328,7 @@ axelayshoot2:
 	ReloadDelay: 15
 	Burst: 6
 	BurstDelays: 4
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Image: axelayshoot2
@@ -348,7 +348,7 @@ axelaymissile:
 	ReloadDelay: 30 #50
 	Burst: 4
 	BurstDelays: 3
-	Range: 6c0
+	Range: 6144
 	Report: axelaymissile.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: MissileCA
@@ -377,7 +377,7 @@ axelaymm:
 	ReloadDelay: 30 #50
 	Burst: 4
 	BurstDelays: 4
-	Range: 6c0
+	Range: 6144
 	Report: axelaymm.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: MissileCA
@@ -403,7 +403,7 @@ axelaymm:
 
 angelarrow:
 	ReloadDelay: 20
-	Range: 6c0
+	Range: 6144
 	Report: angelshoot.aud
 	ValidTargets: Air
 	Projectile: Missile
@@ -423,7 +423,7 @@ angelarrow:
 
 angellightning:
 	ReloadDelay: 2200
-	Range: 20c0
+	Range: 20480
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Delay: 20
@@ -552,7 +552,7 @@ smashgun:
 	Inherits: ^LightMG
 	ReloadDelay: 7
 	Report: smashgun.aud
-	Range: 5c0
+	Range: 5120
 	ValidTargets: Ground, Water, Air
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -577,7 +577,7 @@ smashgun2:
 PsiStormGiegue:
 	Inherits: PsiStorm
 	ReloadDelay: 140
-	Range: 11c0
+	Range: 11264
 	-InvalidTargets:
 	Warhead@2Dis: GrantExternalCondition
 		Range: 600
@@ -591,7 +591,7 @@ PsiStormGiegue:
 giegue_lightning:
 	Inherits: d2k_chaos_lightning
 	ReloadDelay: 150
-	Range: 10c0
+	Range: 10240
 	Projectile: Bullet
 		Image: d2k_chaos_effect
 		
@@ -642,7 +642,7 @@ RA2VolkovGun:
 AncientViceroid:
 	Report: zulhit00.aud
 	ReloadDelay: 25
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 		Spread: 64
@@ -658,7 +658,7 @@ AncientViceroid:
 	
 AncientViceroidSpawn:
 	ReloadDelay: 150
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@spawn: SpawnActor
 		Actors: spawnedvisceroid, spawnedvisceroid
@@ -706,14 +706,14 @@ McNealGL:
 		Spread: 0c768
 		Damage: 6000
 	Warhead@stuninf: GrantExternalCondition
-		Range: 1c0
+		Range: 1024
 		Duration: 30
 		Condition: leaflet
 		ValidTargets: Infantry
 	Warhead@stunvehicle: GrantExternalCondition
 		Condition: empdisable
 		Duration: 30
-		Range: 1c0
+		Range: 1024
 		ValidTargets: Ground
 
 McNealGL1:
@@ -737,7 +737,7 @@ McNealWolveringMG:
 	Burst: 2
 	BurstDelays: 3
 	ReloadDelay: 24
-	Range: 6c512
+	Range: 6656
 	Report: tsgun4.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 4000
@@ -754,7 +754,7 @@ McNealWolveringMissile:
 	ReloadDelay: 100
 	BurstDelays: 3
 	Burst: 5
-	Range: 10c0
+	Range: 10240
 	Projectile: MissileCA
 		HorizontalRateOfTurn: 16
 		RangeLimit: 13c0
@@ -772,14 +772,14 @@ McNealWolveringMissile:
 			
 McNealMechDropSpawner:
 	Projectile: InstantExplode
-	Range: 4c0
+	Range: 4096
 	Warhead@1: FireShrapnel
 		InvalidTargets: FireImmune
 		Weapon: McNealMechDrop
 		Amount: 1
 		
 McNealMechDrop:
-	Range: 1c0
+	Range: 1024
 	Projectile: AthenaProjectile
 		Altitude: 8000
 	Warhead@Dam: TargetDamage
@@ -856,7 +856,7 @@ McNealWolverinSuicide:
 TSNashwaLaser:
 	Inherits: ^TSLaser
 	ReloadDelay: 2
-	Range: 7c0
+	Range: 7168
 	Report: nashwalaserloop.wav
 	Projectile: LaserZap
 		Width: 36
@@ -867,7 +867,7 @@ TSNashwaLaser:
 
 TSBikeMissileNashwa:
 	Inherits: TSBikeMissile
-	Range: 5c0
+	Range: 5120
 	Burst: 2
 	Report: misl1.aud
 	Projectile: MissileCA
@@ -895,7 +895,7 @@ TSBikeMissileNashwaElite:
 	Inherits: TSHoverMissile
 	ReloadDelay: 68
 	Burst: 2
-	Range: 8c0
+	Range: 8192
 	Report: hovrmis1.aud
 	Projectile: MissileCA
 		RangeLimit: 12c0
@@ -922,7 +922,7 @@ TSBikeMissileNashwaElite:
 		Amount: 2
 		
 SeverusFlachetteSMG:
-	Range: 6c0
+	Range: 6144
 	Burst: 4
 	BurstDelays: 5
 	ReloadDelay: 40
@@ -953,7 +953,7 @@ SeverusFlachetteSMG:
 		Explosions: piffs
 		
 SeverusCircleDamage:
-	Range: 0c0
+	Range: 0
 	ReloadDelay: 3
 	ValidTargets: Ground
 	ValidStances: Enemy, Neutral
@@ -966,7 +966,7 @@ SeverusCircleDamage:
 		DamageTypes: TiberiumDeath
 		
 SeverusCircleHeal:
-	Range: 0c0
+	Range: 0
 	ReloadDelay: 3
 	ValidTargets: Ground
 	ValidStances: Ally
@@ -989,7 +989,7 @@ SeverusCircleHealBuff:
 		Damage: -150
 			
 SeverusCircleDamageCABAL:
-	Range: 0c0
+	Range: 0
 	ReloadDelay: 125
 	ValidTargets: Ground
 	ValidStances: Enemy, Neutral
@@ -1002,7 +1002,7 @@ SeverusCircleDamageCABAL:
 		DamageTypes: TiberiumDeath
 		
 SeverusCircleHealCABAL:
-	Range: 0c0
+	Range: 0
 	ReloadDelay: 125
 	ValidTargets: Ground
 	ValidStances: Ally
@@ -1081,7 +1081,7 @@ KurtMachinegun:
 	Report: mdkmg.wav, mdkmg.wav, mdkrico.wav, mdkrico2.wav, mdkrico3.wav, mdkmg.wav
 	InvalidTargets: Structure, Bridge, Wall
 	ValidTargets: Ground, Air
-	Range: 7c768
+	Range: 7936
 	ReloadDelay: 4
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
@@ -1106,7 +1106,7 @@ KurtSniper:
 	Inherits: ^LightMG
 	Report: mdksniper.wav
 	InvalidTargets: Structure, Bridge, Wall
-	Range: 14c768
+	Range: 15104
 	ReloadDelay: 60
 	Warhead@1Dam: SpreadDamage
 		Spread: 100
@@ -1124,7 +1124,7 @@ KurtGrenade:
 	Inherits: Grenade
 	ValidTargets: Structure, Bridge, Wall
 	ReloadDelay: 70 #50
-	MinRange: 1c0
+	MinRange: 1024
 	Range: 7c0 #4c0
 	Projectile: Bullet
 		Speed: 400
@@ -1150,7 +1150,7 @@ KurtGrenade2:
 	Inherits: KurtGrenade
 	ValidTargets: Vehicle
 	ReloadDelay: 200 #50
-	MinRange: 1c0
+	MinRange: 1024
 	Range: 7c0 #4c0
 
 KurtMortar:
@@ -1158,7 +1158,7 @@ KurtMortar:
 	ValidTargets: Structure, Bridge, Wall
 	Report: mdksniper.wav
 	ReloadDelay: 75
-	Range: 14c768
+	Range: 15104
 	Projectile: Bullet
 		Speed: 504
 		Blockable: false
@@ -1184,7 +1184,7 @@ KurtMortar:
 KurtMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 120
-	Range: 14c768
+	Range: 15104
 	Report: mdksniper.wav
 	ValidTargets: Vehicle, Air
 	Projectile: MissileCA

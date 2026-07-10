@@ -8,7 +8,7 @@
 footmanslice:
 	Inherits: ^WC1Melee
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -37,7 +37,7 @@ footmanslice:
 knightslice:
 	Inherits: ^WC1Melee
 	ReloadDelay: 25
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 160
@@ -66,7 +66,7 @@ knightslice:
 ogreBash:
 	Inherits: footmanslice
 	ReloadDelay: 45
-	Range: 1c768
+	Range: 1792
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 164
@@ -78,7 +78,7 @@ ogreBash:
 brigandSlice:
 	Inherits: footmanslice
 	ReloadDelay: 22
-	Range: 1c256
+	Range: 1280
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 96
@@ -90,7 +90,7 @@ brigandSlice:
 spearFire:
 	Inherits: bowFire
 	ReloadDelay: 40
-	Range: 4c0
+	Range: 4096
 	Report: bowfire.aud
 	ValidTargets: Ground
 	Projectile: Missile
@@ -106,7 +106,7 @@ spearFire:
 
 wc_tower_fire_aa:
 	Inherits: bowFireAA
-	Range: 9c512
+	Range: 9728
 	Projectile: Missile
 		RangeLimit: 19c0
 		HorizontalRateOfTurn: 100
@@ -135,7 +135,7 @@ wc_tower_fire_aa:
 scorpionslice:
 	Inherits: ^WC1Melee
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -164,7 +164,7 @@ scorpionslice:
 spiderslice:
 	Inherits: ^WC1Melee
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -193,7 +193,7 @@ spiderslice:
 SlimeJump:
 	Report: zulhit00.aud
 	ReloadDelay: 80
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 		Spread: 64
@@ -261,7 +261,7 @@ catapultfire:
 clericheal:
 	Report: tmedheal.aud
 	ReloadDelay: 18
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Heal
 	Projectile: Bullet
 		Speed: 1c682
@@ -274,7 +274,7 @@ clericheal:
 clericrestore:
 	Report: tmedheal.aud
 	ReloadDelay: 40
-	Range: 2c512
+	Range: 2560
 	ValidTargets: lockdowned, plagued, ivanattached
 	Projectile: InstantHit
 	Warhead@Dam: TargetDamage
@@ -293,7 +293,7 @@ clericrestore:
 	
 fireballcleric:
 	ReloadDelay: 40
-	Range: 3c0
+	Range: 3072
 	Report: wcfireball.aud
 	Projectile: Bullet
 		Speed: 0c512
@@ -331,7 +331,7 @@ fireballcleric:
 		
 fireballconjurer:
 	ReloadDelay: 40
-	Range: 4c0
+	Range: 4096
 	Report: wcfireball.aud
 	ValidTargets: Ground, Air
 	Projectile: Bullet
@@ -370,7 +370,7 @@ fireballconjurer:
 fireballFireElemental:
 	Inherits: fireballcleric
 	ReloadDelay: 20
-	Range: 4c0
+	Range: 4096
 	Warhead@1Dam: SpreadDamage
 		Spread: 0c384
 		Damage: 6000
@@ -382,7 +382,7 @@ waterelementalFire:
 	Inherits@DamageFire: ^ExtraDamageVsFire
 	Inherits@EMPElectricity: ^EMPVsElectricity
 	ReloadDelay: 30
-	Range: 4c0
+	Range: 4096
 	Report: wcfireball.aud
 	ValidTargets: Ground, Air
 	Projectile: Bullet
@@ -420,7 +420,7 @@ waterelementalFire:
 
 rainoffire:
 	ReloadDelay: 5
-	Range: 100c0
+	Range: 102400
 	Projectile: GravityBomb
 		Image: rainoffire
 		Velocity: 0, 0, -230
@@ -465,7 +465,7 @@ rainoffire:
 	
 poisoncloud:
 	ReloadDelay: 2
-	Range: 100c0
+	Range: 102400
 	Projectile: InstantHit
 		Inaccuracy: 5c0
 	Warhead@1Eff_impact: CreateEffect
@@ -503,46 +503,46 @@ poisoncloud:
 		
 summon1_conjurer:
 	ReloadDelay: 160
-	Range: 4c0
+	Range: 4096
 	Projectile: InstantHit
 	Warhead@spawn: SpawnActor
 		Actors: wc_h_scorpion
 
 summon1_spider:
 	ReloadDelay: 200
-	Range: 4c0
+	Range: 4096
 	Projectile: InstantHit
 	Warhead@spawn: SpawnActor
 		Actors: wc_o_spider
 
 summon2_elemental:
 	ReloadDelay: 1000
-	Range: 4c0
+	Range: 4096
 	Projectile: InstantHit
 	Warhead@spawn: SpawnActor
 		Actors: wc_h_waterelemental
 
 summon2_daemon:
 	ReloadDelay: 1200
-	Range: 4c0
+	Range: 4096
 	Projectile: InstantHit
 	Warhead@spawn: SpawnActor
 		Actors: wc_o_demon
 	
 fireballnecrolyte:
 	Inherits: fireballcleric
-	Range: 4c0
+	Range: 4096
 	Projectile: Bullet
 		
 fireballwarlock:
 	Inherits: fireballconjurer
-	Range: 3c0
+	Range: 3072
 	Projectile: Bullet
 		
 demonslice:
 	Inherits: ^WC1Melee
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 128
@@ -571,7 +571,7 @@ demonslice:
 skeletonSlice:
 	Inherits: ^WC1Melee
 	ReloadDelay: 27
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Spread: 128

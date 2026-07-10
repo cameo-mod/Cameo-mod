@@ -7,7 +7,7 @@
 
 ^SmallArms:
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: gun8.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -87,7 +87,7 @@
 ^SniperWeapon:
 	ValidTargets: Infantry, Monster, Garrisoned
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: ramgun2.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -202,7 +202,7 @@
 ^Chaingun:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: gun8.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -283,7 +283,7 @@
 ^FlakWeapon:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: aacanon3.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -369,7 +369,7 @@
 ^HeavyAAWeapon:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: aacanon3.aud
 	Projectile: Bullet
 		Image: 50CAL
@@ -455,7 +455,7 @@
 ^LightMissile:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
@@ -559,7 +559,7 @@
 ^MediumMissile:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: bazook1.aud
 	Projectile: Missile
 		Arm: 0
@@ -663,7 +663,7 @@
 ^HeavyMissile:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: missile6.aud
 	Projectile: Missile
 		Arm: 0
@@ -773,7 +773,7 @@
 ^TankDestroyerCannon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: cannon1.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -868,7 +868,7 @@
 ^MediumCannon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -963,7 +963,7 @@
 ^HeavyCannon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: tnkfire6.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -1056,7 +1056,7 @@
 
 ^LaserWeapon:
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: obelray1.aud
 	Projectile: LaserZap
 		Width: 100
@@ -1165,7 +1165,7 @@
 
 ^RailgunWeapon:
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: bigggun1.aud
 	Projectile: Railgun
 		Duration: 16
@@ -1267,7 +1267,7 @@
 	Inherits@EMP: ^EMPDamage
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: tesla1.aud
 	Projectile: LightningZap
 	Warhead@TeslaWeapon: SpreadDamage
@@ -1360,7 +1360,7 @@
 	Inherits@EMP: ^EMPDamage
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: tesla1.aud
 	Projectile: LightningZap
 		Image: litning2
@@ -1452,7 +1452,7 @@
 ^LightFlameWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -1581,7 +1581,7 @@
 ^MediumFlameWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -1708,7 +1708,7 @@
 ^HeavyFlameWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -1835,7 +1835,7 @@
 ^LightChemicalWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall
 	Report: flamer2.aud
 	TargetActorCenter: true
@@ -1941,7 +1941,7 @@
 ^MediumChemicalWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall
 	Report: flamer2.aud
 	TargetActorCenter: true
@@ -2050,7 +2050,7 @@
 ^HeavyChemicalWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall
 	Report: flamer2.aud
 	TargetActorCenter: true
@@ -2159,7 +2159,7 @@
 ^Grenade:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: M203.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -2279,7 +2279,7 @@
 ^ShrapnelWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: M203.aud
 	TargetActorCenter: true
 	Warhead@ShrapnelWeapon: SpreadDamage
@@ -2393,7 +2393,7 @@
 ^HeavyBomb:
 	ValidTargets: Ground, Water
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	TargetActorCenter: true
 	Warhead@HeavyBomb: SpreadDamage
 		ValidTargets: Ground, Ship
@@ -2493,7 +2493,7 @@
 	ValidTargets: Ground, Water
 	Report: nukemisl.aud
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Warhead@NuclearWarhead: SpreadDamage
 		ValidTargets: Ground, Air, Water
 		AffectsParent: True
@@ -2579,7 +2579,7 @@
 ^SwordWeapon:
 	ValidTargets: Ground
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Projectile: InstantHit
 	Warhead@SwordWeapon: SpreadDamage
 		ValidRelationships: Neutral, Enemy
@@ -2671,7 +2671,7 @@
 ^ArrowWeapon:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall
 	Report: dune2smalllaser.aud
 	Projectile: Missile
@@ -2752,7 +2752,7 @@
 ^MagicWeapon:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: 2100rotlsr.wav
 	Projectile: Missile
 		HorizontalRateOfTurn: 33
@@ -2869,7 +2869,7 @@
 ^ToxicWeapon:
 	ValidTargets: Ground, Water, Air
 	ReloadDelay: 1
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: Wall, Mine, ToxinImmune
 	Projectile: InstantExplode
 	Warhead@ToxicWeapon: SpreadDamage
@@ -2958,7 +2958,7 @@
 
 ^HealingWeapon:
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Report: TMedHeal.aud
 	ValidTargets: Heal, lockdowned, plagued, ivanattached
 	ValidRelationships: Ally
@@ -3081,7 +3081,7 @@
 
 ^RepairWeapon:
 	ReloadDelay: 25
-	Range: 5c0
+	Range: 5120
 	Burst: 10
 	BurstDelays: 1
 	StartBurstReport: vifvrepa.wav
@@ -3233,7 +3233,7 @@ DefuseKit:
 	Projectile: InstantHit
 	TargetActorCenter: true
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	ValidTargets: ivanattached, terrordroned
 	Report: gdefuse.wav
 
@@ -3276,7 +3276,7 @@ DefuseKit:
 
 ^Cannon:
 	ReloadDelay: 50
-	Range: 5c0
+	Range: 5120
 	Report: cannon1.aud
 	Projectile: Bullet
 		Speed: 750
@@ -3320,7 +3320,7 @@ DefuseKit:
 	Inherits: ^Cannon
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 75
-	Range: 12c5
+	Range: 12293
 	Projectile: Bullet
 		Speed: 333
 		Blockable: false
@@ -3345,7 +3345,7 @@ DefuseKit:
 
 ^MissileWeapon:
 	ReloadDelay: 50
-	Range: 6c0
+	Range: 6144
 	Report: bazook1.aud
 	ValidTargets: Ground, Air
 	Projectile: Missile
@@ -3412,12 +3412,12 @@ DefuseKit:
 ^AnyMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 75
-	Range: 7c512
+	Range: 7680
 
 ^AntiGroundMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 50
-	Range: 5c0
+	Range: 5120
 	Report: missile6.aud
 	ValidTargets: Ground, Water
 	Projectile: Missile
@@ -3538,7 +3538,7 @@ RockExplode:
 RockDebris:
 	ValidTargets: Ground, Water
 	ReloadDelay: 60
-	Range: 2c768
+	Range: 2816
 	Report: d2khc.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -3711,7 +3711,7 @@ BoatMissile:
 	Inherits: ^MissileWeapon
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 33
-	Range: 8c0
+	Range: 8192
 	Burst: 2
 	BurstDelays: 6
 	Report: rocket2.aud
@@ -3732,8 +3732,8 @@ BoatMissile:
 Patriot:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 25
-	Range: 9c0
-	MinRange: 1c0
+	Range: 9216
+	MinRange: 1024
 	Report: rocket2.aud
 	ValidTargets: Air
 	Projectile: Missile
@@ -3757,7 +3757,7 @@ Patriot:
 ^FireWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 65
-	Range: 5c0
+	Range: 5120
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Water
 		InvalidTargets: FireActor, WaterActor
@@ -3833,7 +3833,7 @@ C4:
 ^FlameWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 55
-	Range: 2c512
+	Range: 2560
 	InvalidTargets: Wall
 	Report: flamer2.aud
 	Projectile: Bullet
@@ -3864,7 +3864,7 @@ C4:
 
 ^DinoWeapon:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -3911,7 +3911,7 @@ Demolish:
 
 ^HeavyMG:
 	ReloadDelay: 25
-	Range: 6c0
+	Range: 6144
 	Report: gun8.aud
 	Projectile: Bullet
 		Speed: 2000
@@ -3939,7 +3939,7 @@ Demolish:
 Pistol:
 	Inherits: ^LightMG
 	ReloadDelay: 7
-	Range: 3c0
+	Range: 3072
 	Report: gun18.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 100
@@ -3949,7 +3949,7 @@ Pistol:
 ^LightMG:
 	Inherits: ^HeavyMG
 	ReloadDelay: 20
-	Range: 4c0
+	Range: 4096
 	InvalidTargets: Wall
 	Report: mgun2.aud
 	Warhead@1Dam: SpreadDamage
@@ -4591,7 +4591,7 @@ DemoTruckTargeting:
 
 SuicideBomberTargeting:
 	Inherits: DemoTruckTargeting
-	Range: 1c512
+	Range: 1536
 
 MADTankTargeting:
 	Inherits: DemoTruckTargeting
@@ -4656,7 +4656,7 @@ GLBarrelExplode:
 
 GLBarrelExplode2:
 	ReloadDelay: 350
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantExplode
 	Warhead@1Dam: SpreadDamage
 		Spread: 2c512
@@ -4676,7 +4676,7 @@ GLBarrelExplode2:
 GLDemolitionExplode:
 	Inherits: RA2Terrorist
 	ReloadDelay: 250
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantExplode
 	Warhead@1Dam: SpreadDamage
 		Spread: 1000
@@ -4716,7 +4716,7 @@ GLTerroristExplosive2:
 
 BloomExplosion:
 	Report: EXPLMD1.WAV
-	Range: 0c8
+	Range: 8
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
@@ -4735,8 +4735,8 @@ BloomExplosion:
 
 TSEMPulseCannon:
 	ReloadDelay: 100
-	Range: 40c0
-	MinRange: 5c0
+	Range: 40960
+	MinRange: 5120
 	Report: plsecan2.aud
 	Projectile: Bullet
 		Speed: 425
@@ -4755,7 +4755,7 @@ TSEMPulseCannon:
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
 		Duration: 360
-		Range: 6c0
+		Range: 6144
 
 CHFlameRadiation:
 	Warhead@Cloud: SpawnSmokeParticle
@@ -4815,7 +4815,7 @@ CHFlameBlue:
 GLTunnelWeap:
 	Inherits: MachineGun
 	Burst: 9
-	Range: 8c0
+	Range: 8192
 	Report: vtecweaa.wav, vtecweab.wav, vtecweac.wav, vtecwead.wav
 	Warhead@1Dam: SpreadDamage
 		Damage: 900
@@ -5031,8 +5031,8 @@ AnthraxCloudPurpleLarge:
 GiantArtilleryTurret:
 	Inherits: ^Cannon
 	ReloadDelay: 240
-	Range: 12c34
-	MinRange: 3c333
+	Range: 12322
+	MinRange: 3405
 	Report: tnkfire2.aud
 	Projectile: Bullet
 		Speed: 123
@@ -5063,8 +5063,8 @@ GiantBowlingTurret:
 		Damage: 8000
 
 BowlingTrail:
-	Range: 12c0
-	MinRange: 4c0
+	Range: 12288
+	MinRange: 4096
 	ReloadDelay: 240
 	Projectile: WarheadTrailProjectile
 		Weapon: GiantBowlingTurret
@@ -5079,14 +5079,14 @@ BowlingTrail:
 LeechDisinfect:
 	Projectile: InstantHit
 	ReloadDelay: 100
-	Range: 1c512
+	Range: 1536
 	Report: vterdiea.aud, vterdieb.aud
 	ValidTargets: LeechEggLaid
 	InvalidTargets: LeechEggKill
 	Warhead@2Ext: GrantExternalCondition
 		Condition: LeechEggKill
 		Duration: 0
-		Range: 0c512
+		Range: 512
 		ValidTargets: LeechEggLaid
 		InvalidTargets: LeechEggKill
 
@@ -5154,7 +5154,7 @@ TSTurretLaserFire:
 BHBombs:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 4
-	Range: 2c0
+	Range: 2048
 	Burst: 6
 	BurstDelays: 2
 	-Projectile:
@@ -5174,12 +5174,12 @@ BHBombs:
 	Warhead@2Con: GrantExternalCondition
 		Condition: empdisable
 		Duration: 100
-		Range: 2c0
+		Range: 2048
 		ValidTargets: Vehicle
 
 AngryMobTargeting:
 	ReloadDelay: 50
-	Range: 6c0
+	Range: 6144
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 
@@ -5213,7 +5213,7 @@ AngryMobTargeting:
 BigChemSpray:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 50
-	Range: 3c512
+	Range: 3584
 	Projectile: Bullet
 		Speed: 341
 	Burst: 2
@@ -5235,7 +5235,7 @@ BigChemSpray:
 Spit:
 	Inherits: ^FireWeapon
 	ValidTargets: Ground, Water
-	Range: 6c6
+	Range: 6150
 	ReloadDelay: 66
 	Burst: 1
 	Projectile: Missile
@@ -5309,9 +5309,9 @@ GLBombTruckToxExplosive2:
 
 GLASCUD:
 	Inherits: SCUD
-	MinRange: 4c0
+	MinRange: 4096
 	ReloadDelay: 250
-	Range: 17c0
+	Range: 17408
 	Report: vscuweaa.wav
 	-Projectile:
 	Projectile: Missile
@@ -5341,7 +5341,7 @@ GLASCUDPOWER:
 	Burst: 9
 	BurstDelays: 10
 	ReloadDelay: 500
-	Range: 1000c0
+	Range: 1024000
 	-Projectile:
 	Projectile: Bullet
 		Speed: 256
@@ -5411,7 +5411,7 @@ GLStingerTargeting:
 GLStingerSiteMissile:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 50
-	Range: 7c512
+	Range: 7680
 	Report: missile6.aud
 	Projectile: Missile
 		RangeLimit: 30c0
@@ -5422,7 +5422,7 @@ GLStingerSiteMissileToxin:
 
 JetExplosion:
 	ValidTargets: Ground
-	Range: 1c512
+	Range: 1536
 	Projectile: Missile
 		Speed: 600
 		Image: DRAGON
@@ -5478,7 +5478,7 @@ GLToxinExplodeClust3:
 GLToxinCluster:
 	Inherits@Contaminated: TractorGLAnthraxGreen
 	Burst: 1
-	Range: 3c0
+	Range: 3072
 	Projectile: Bullet
 		Speed: 50
 		Blockable: false
@@ -5488,7 +5488,7 @@ GLToxinCluster:
 GLToxinClusterSmall:
 	Inherits: GLAnthraxLarge
 	Burst: 1
-	Range: 4c512
+	Range: 4608
 	Projectile: Bullet
 		Speed: 100
 		Blockable: false
@@ -5538,7 +5538,7 @@ GLToxinExplodeBlue:
 GLToxinBomb:
 	Inherits: ParaBomb
 	ReloadDelay: 100
-	Range: 1c0
+	Range: 1024
 	Warhead@1Dam: SpreadDamage
 		Spread: 1c512
 		Damage: 50000
@@ -5599,7 +5599,7 @@ TractorGLAnthraxPurple:
 
 TSCyCannonCluster:
 	Inherits: CHFlameRadiation
-	Range: 0c512
+	Range: 512
 	Projectile: Bullet
 		Speed: 255
 		Blockable: false
@@ -5618,7 +5618,7 @@ ThermobaricFlame:
 
 RA2IMP:
 	ReloadDelay: 85
-	Range: 5c0
+	Range: 5120
 	Burst: 4
 	BurstDelays: 3
 	Report: dsplasma.aud
@@ -5647,7 +5647,7 @@ RA2IMP:
 
 PlasmaPuff:
 	ReloadDelay: 85
-	Range: 5c0
+	Range: 5120
 	Burst: 4
 	BurstDelays: 3
 	Report: dsplasma.aud
@@ -5675,16 +5675,16 @@ PlasmaPuff:
 
 Short8Inch:
 	Inherits: 8Inch
-	MinRange: 3c0
+	MinRange: 3072
 	ReloadDelay: 60
 	Projectile: Bullet
 		Inaccuracy: 1c300
-	Range: 8c512
+	Range: 8704
 	Burst: 2
 
 bowFireAA:
 	ReloadDelay: 40
-	Range: 7c512
+	Range: 7680
 	Report: bowfire.aud
 	ValidTargets: Air
 	Projectile: Missile
@@ -5724,7 +5724,7 @@ bowFireAA:
 bowFire:
 	Inherits: bowFireAA
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: bowfire.aud
 	ValidTargets: Ground
 	Warhead@1Dam: SpreadDamage
@@ -5738,7 +5738,7 @@ bowFire:
 
 wc_tower_fire:
 	Inherits: bowFire
-	Range: 8c512
+	Range: 8704
 	Projectile: Missile
 		RangeLimit: 17c0
 		HorizontalRateOfTurn: 100
@@ -5767,7 +5767,7 @@ wc_tower_fire:
 ^DRPlasmaWeapon:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 21
-	Range: 5c0
+	Range: 5120
 	Report: drgxpltwc0.wav
 	Projectile: Bullet
 		Image: drplasma1
@@ -5813,7 +5813,7 @@ SWLaser:
 SWLaserG:
 	Inherits: SWLaser
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Burst: 6
 
 
@@ -5822,8 +5822,8 @@ USALaserCannonAG:
 	Burst: 3
 	BurstDelays: 6
 	ReloadDelay: 50
-	Range: 7c0
-	MinRange: 0c0
+	Range: 7168
+	MinRange: 0
 	Report: vpalwe2d.aud
 	-Projectile:
 	Projectile: LaserZap
@@ -5854,7 +5854,7 @@ SWGreenLaser:
 SWGreenLaserG:
 	Inherits: SWGreenLaser
 	ReloadDelay: 75
-	Range: 7c0
+	Range: 7168
 
 
 
@@ -5862,7 +5862,7 @@ SWrBigRedLaser:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 75
 	Report: swrocket1.aud
-	Range: 7c0
+	Range: 7168
 	Projectile: Missile
 		Image: swmissile
 		ContrailLength: 1
@@ -5873,7 +5873,7 @@ SWrBigRedLaser:
 
 SWGBigRedLaserG:
 	Inherits: SWrBigRedLaser
-	Range: 8c0
+	Range: 8192
 
 
 GLRebelToxin:
@@ -5882,7 +5882,7 @@ GLRebelToxin:
 	ReloadDelay: 30
 	Burst: 2
 	BurstDelays: 5
-	Range: 3c256
+	Range: 3328
 	Report: flamer2.aud, firebl3.aud, flmthrow.aud, DSSLOP.wav
 	Projectile: RadBeam
 		Amplitude: 120
@@ -5911,7 +5911,7 @@ GLRebelToxin:
 
 GLRebelToxinGarrison:
 	Inherits: GLRebelToxin
-	Range: 6c0
+	Range: 6144
 	Warhead@1Dam: SpreadDamage
 		Damage: 800
 
@@ -5930,7 +5930,7 @@ GLTrooperRPGMissileG:
 ^MG:
 	Inherits: ^LightMG
 	ReloadDelay: 30
-	Range: 4c0
+	Range: 4096
 	Report: MGUN2.WAV
 	Projectile: InstantHit
 		Inaccuracy: 0c128
@@ -5958,7 +5958,7 @@ GLTrooperRPGMissileG:
 M_HMG:
 	Inherits: ^MG
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: hmgo1.wav, hmgo2.wav
 	ValidTargets: Vehicle, Structure
 	InvalidTargets: Infantry
@@ -5983,7 +5983,7 @@ Fremen_L:
 	ReloadDelay: 25
 	ValidTargets: Vehicle, Structure
 	InvalidTargets: Infantry
-	Range: 2c512
+	Range: 2560
 	Warhead@1Dam: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, SmallExplosionDeath
 		ValidTargets: Vehicle, Structure
@@ -6001,7 +6001,7 @@ Fremen_L:
 
 TSSonicZap:
 	ReloadDelay: 60
-	Range: 6c0
+	Range: 6144
 	Report: sonic4.aud
 	Projectile: AreaBeam
 		Speed: 0c256

@@ -4,7 +4,7 @@
 ########################################################
 InfectZClaw1:
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -21,7 +21,7 @@ InfectZClaw1:
 
 InfectZClaw2:
 	ReloadDelay: 25
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -38,7 +38,7 @@ InfectZClaw2:
 
 InfectZClaw3:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -64,7 +64,7 @@ InfectAmbushSpawner:
 		Delay: 50
 
 InfectAmbushCloud:
-	Range: 5c0
+	Range: 5120
 	ReloadDelay: 8
 	ValidTargets: Ground, Water, Air
 	Projectile: AthenaProjectile
@@ -97,8 +97,8 @@ InfectAmbush:
 InfectToxicSpawner:
 	Inherits: ArtilleryShell
 	ReloadDelay: 250
-	MinRange: 2c512
-	Range: 12c512
+	MinRange: 2560
+	Range: 12800
 	Report: vinfweaa.wav, vinfweab.wav, vinfweac.wav
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -133,7 +133,7 @@ ZToxinExplodeClust1:
 ZToxinClusterSmall:
 	Inherits: ZAnthraxGreen
 	Burst: 1
-	Range: 5c0
+	Range: 5120
 	Projectile: Bullet
 		Speed: 100
 		Blockable: false
@@ -184,7 +184,7 @@ InfectAmbushSpawner2:
 		Delay: 75
 
 InfectAmbushCloud2:
-	Range: 5c0
+	Range: 5120
 	ReloadDelay: 8
 	ValidTargets: Ground, Water, Air
 	Projectile: AthenaProjectile
@@ -216,7 +216,7 @@ InfectAmbush2:
 ZBrutePunch:
 	ReloadDelay: 60
 	Report: galiatta.wav, galiattb.wav
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000

@@ -23,7 +23,7 @@
 		
 ^EMPVsElectricity:
 	Warhead@EMPElectricity: GrantExternalCondition
-		Range: 0c256
+		Range: 256
 		Duration: 100
 		Condition: empdisable
 		ValidTargets: Cyborg, vehicle

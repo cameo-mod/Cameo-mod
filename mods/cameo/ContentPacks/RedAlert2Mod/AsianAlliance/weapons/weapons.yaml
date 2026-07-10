@@ -799,7 +799,7 @@ AsianQuasarBoatAG:
 	ValidTargets: Ground, Water
 	ReloadDelay: 22
 	Burst: 3
-	Range: 7c0
+	Range: 7168
 	Projectile: Missile
 		RangeLimit: 12c0
 		MinimumLaunchAngle: 75
@@ -813,7 +813,7 @@ AsianQuasarBoatAA:
 	ValidTargets: Air
 	ReloadDelay: 22
 	Burst: 3
-	Range: 7c0
+	Range: 7168
 	Projectile: Missile
 		RangeLimit: 12c0
 		MinimumLaunchAngle: 75
@@ -1306,7 +1306,7 @@ AAHyperionMagnet:
 
 AsianTSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 	Inherits: IonCannon
-	Range: 12c0
+	Range: 12288
 	AirThreshold: 8c0
 	ValidTargets: Ground, Water, Air
 	Warhead@6BeamEff: FireFragment
@@ -1399,7 +1399,7 @@ AsianIonBeamMiniStart:
 
 AsianIonBeamMini:
 	Inherits: ^AsianIonBeam
-	Range: 4c768
+	Range: 4864
 	AirThreshold: 8c0
 	Projectile: SpriteAthenaLaser
 		Sequence: ionbeamstart
@@ -1453,7 +1453,7 @@ AsianMineSpawner:
 
 AsianMineBomb2:
 	ReloadDelay: 100
-	Range: 1c0
+	Range: 1024
 	Report: chute1.aud
 	Projectile: InstantExplode
 	Warhead@1: FireCluster
