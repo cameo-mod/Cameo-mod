@@ -330,36 +330,36 @@ forgotten_chemsprayinfantry:
 		Tick: 1000
 	muzzle:
 		Combine:
-			chem-n:
-				Filename: chem-n.shp
+			chem_n:
+				Filename: chem_n.shp
 				Length: *
 				Offset: 1,2
-			chem-nw:
-				Filename: chem-nw.shp
+			chem_nw:
+				Filename: chem_nw.shp
 				Length: *
 				Offset: 8,2
-			chem-w:
-				Filename: chem-w.shp
+			chem_w:
+				Filename: chem_w.shp
 				Length: *
 				Offset: 8,-3
-			chem-sw:
-				Filename: chem-sw.shp
+			chem_sw:
+				Filename: chem_sw.shp
 				Length: *
 				Offset: 7,-6
-			chem-s:
-				Filename: chem-s.shp
+			chem_s:
+				Filename: chem_s.shp
 				Length: *
 				Offset: 1,-6
-			chem-se:
-				Filename: chem-se.shp
+			chem_se:
+				Filename: chem_se.shp
 				Length: *
 				Offset: -5,-6
-			chem-e:
-				Filename: chem-e.shp
+			chem_e:
+				Filename: chem_e.shp
 				Length: *
 				Offset: -7,-3
-			chem-ne:
-				Filename: chem-ne.shp
+			chem_ne:
+				Filename: chem_ne.shp
 				Length: *
 				Offset: -3,2
 		Facings: 8
@@ -2996,15 +2996,15 @@ tsjumpjet:
 # tstacticalmissile:
 # 	Defaults:
 # 		ZOffset: 1023
-# 	up: mltimisl-placeholder # TODO: use voxel
-# 	down: mltimisl-placeholder # TODO: use voxel
+# 	up: mltimisl_placeholder # TODO: use voxel
+# 	down: mltimisl_placeholder # TODO: use voxel
 # 		Start: 1
 
 # tschemtacticalmissile:
 # 	Defaults:
 # 		ZOffset: 1023
-# 	up: mltimisl-placeholder # TODO: use voxel
-# 	down: mltimisl-placeholder # TODO: use voxel
+# 	up: mltimisl_placeholder # TODO: use voxel
+# 	down: mltimisl_placeholder # TODO: use voxel
 # 		Start: 1
 
 # invisibleplane:
@@ -3118,7 +3118,7 @@ cabal_dissolver:
 
 tsdissolvereffect:
 	idle:
-		Filename: cabal_dissolver-weapon.shp
+		Filename: cabal_dissolver_weapon.shp
 		Length: *
 		Tick: 90
 

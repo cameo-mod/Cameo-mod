@@ -140,7 +140,7 @@ Player:
 #######################################
 ^RA2Parachutes:
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: ra2parach
 		Sequence: idle
@@ -12888,7 +12888,7 @@ ra2_soviets_upgrade_reactivearmor:
 		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
 	WithDecoration@HAZMAT:
 		Image: pips
-		Sequence: pip-hazmat
+		Sequence: pip_hazmat
 		Position: BottomRight
 		RequiresCondition: ra2_soviets_upgrade_reactivearmor
 	SpeedMultiplier@ra2_soviets_upgrade_reactivearmor:
@@ -13532,7 +13532,7 @@ ra2_allies_upgrade_reflectivearmorplating:
 		RequiresCondition: ra2_allies_upgrade_reflectivearmorplating
 	WithDecoration@REFLECTOR:
 		Image: pips
-		Sequence: pip-reflectivearmor
+		Sequence: pip_reflectivearmor
 		Position: BottomRight
 		RequiresCondition: ra2_allies_upgrade_reflectivearmorplating
 	DamageMultiplier@ra2_allies_upgrade_reflectivearmorplating:

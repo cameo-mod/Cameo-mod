@@ -1756,9 +1756,9 @@ fire_building:
 		ZOffset: 1023
 		Scale: 1.5
 
-burn-l:
+burn_l:
 	Defaults:
-		Filename: burn-l.shp
+		Filename: burn_l.shp
 		IgnoreWorldTint: true
 	idle:
 		Length: *
@@ -1772,9 +1772,9 @@ burn-l:
 		Length: 6
 		ZOffset: 512
 
-burn-m:
+burn_m:
 	Defaults:
-		Filename: burn-m.shp
+		Filename: burn_m.shp
 		IgnoreWorldTint: true
 	idle:
 		Length: *
@@ -1788,9 +1788,9 @@ burn-m:
 		Length: 6
 		ZOffset: 512
 
-burn-s:
+burn_s:
 	Defaults:
-		Filename: burn-s.shp
+		Filename: burn_s.shp
 		IgnoreWorldTint: true
 	idle:
 		Length: *
@@ -1834,7 +1834,7 @@ smoke_m:
 
 laserfire:
 	idle:
-		Filename: veh-hit3.shp
+		Filename: veh_hit3.shp
 		Length: *
 		ZOffset: 511
 
@@ -2219,17 +2219,17 @@ explosion:
 	big_tibnapalm:
 		Filename: chemball3.shp
 	small_frag: #light cannon
-		Filename: veh-hit3.shp
+		Filename: veh_hit3.shp
 	med_frag:
 		Filename: frag1.shp
 	big_frag:
 		Filename: frag3.shp
 	small_poof:
-		Filename: veh-hit2.shp
+		Filename: veh_hit2.shp
 	poof:
-		Filename: art-exp1.shp
+		Filename: art_exp1.shp
 	small_building:
-		Filename: veh-hit1.shp
+		Filename: veh_hit1.shp
 	building:
 		Filename: fball1.shp
 	building_napalm:
@@ -2242,17 +2242,17 @@ explosion:
 	water_piffs:
 		Filename: wpifpif.shp
 	small_explosion:
-		Filename: veh-hit3.shp
+		Filename: veh_hit3.shp
 	med_explosion:
-		Filename: veh-hit2.shp
+		Filename: veh_hit2.shp
 	flak_explosion_ground:
 		Filename: flak.shp
 	small_explosion_air:
 		Filename: flak.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
 	med_explosion_air:
-		Filename: veh-hit2.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
+		Filename: veh_hit2.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
 	big_explosion_air:
-		Filename: veh-hit1.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
+		Filename: veh_hit1.shp # only used by AA weapons, so a high ZOffset to overlay buildings isn't needed
 	ra2_flak_explosion_ground:
 		Filename: ra2_flak.shp
 	ra2_flak_explosion_air:
@@ -2264,9 +2264,9 @@ explosion:
 	med_splash:
 		Filename: h2o_exp2.shp
 	self_destruct:
-		Filename: art-exp1.shp
+		Filename: art_exp1.shp
 	artillery_explosion:
-		Filename: art-exp1.shp
+		Filename: art_exp1.shp
 	small_splash:
 		Filename: h2o_exp3.shp
 	large_explosion:
@@ -2280,7 +2280,7 @@ explosion:
 	cryo_blast:
 		Filename: cryo_blast1.shp
 	cryo_artillery:
-		Filename: cryo_art-exp1.shp
+		Filename: cryo_art_exp1.shp
 	corpse:
 		Filename: corpse1.tem
 		TilesetFilenames:
@@ -2324,7 +2324,7 @@ explosion:
 	blue_small_fire:
 		Filename: blue_napalm.shp
 	blue_poof:
-		Filename: blue_art-exp1.shp
+		Filename: blue_art_exp1.shp
 	blue_building:
 		Filename: blue_fball1.shp
 	blue_building_napalm:
@@ -2333,7 +2333,7 @@ explosion:
 	blue_med_frag:
 		Filename: blue_frag1.shp
 	blue_small_building:
-		Filename: blue_veh-hit1.shp
+		Filename: blue_veh_hit1.shp
 	blue_big_frag:
 		Filename: blue_frag3.shp
 	green_small_fire:
@@ -3285,19 +3285,19 @@ pips:
 		Start: 4
 	pip-blue:
 		Start: 5
-	pip-heal:
-		Filename: pip-heal.shp
+	pip_heal:
+		Filename: pip_heal.shp
 		Offset: -1, 1
 	groups:
 		Filename: pdigits.shp
 		Length: *
 		Offset: 9, 5
 		Frames: 1, 2, 3, 4, 5, 6, 7, 8, 9, 0
-	pip-hazmat:
-		Filename: pip-hazmat.png
+	pip_hazmat:
+		Filename: pip_hazmat.png
 		Offset: -3, 0
-	pip-reflectivearmor:
-		Filename: pip-reflectivearmor.png
+	pip_reflectivearmor:
+		Filename: pip_reflectivearmor.png
 		Offset: -3, 0
 	tag-primary:
 		Filename: rapips.shp
@@ -3307,8 +3307,8 @@ pips:
 		Filename: rapips.shp
 		Start: 18
 		Offset: 0, 2
-	pip-disguise:
-		Filename: pip-disguise.shp
+	pip_disguise:
+		Filename: pip_disguise.shp
 		Length: *
 		Tick: 300
 		Offset: 0, -6
@@ -3910,8 +3910,8 @@ rapips:
 	pip-blue:
 		Filename: pips2.shp
 		Start: 5
-	pip-disguise:
-		Filename: pip-disguise.shp
+	pip_disguise:
+		Filename: pip_disguise.shp
 		Length: *
 		Tick: 300
 		Offset: 0, -6
@@ -4086,9 +4086,9 @@ ra2parach:
 		Start: 40
 		Length: 30
 
-parach-shadow:
+parach_shadow:
 	idle:
-		Filename: parach-shadow.shp
+		Filename: parach_shadow.shp
 		Length: *
 
 mine:

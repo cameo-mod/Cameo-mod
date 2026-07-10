@@ -2122,7 +2122,7 @@
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -2912,7 +2912,7 @@
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -3030,7 +3030,7 @@
 		Condition: hazmatsuits
 	WithDecoration@HAZMAT:
 		Image: pips
-		Sequence: pip-hazmat
+		Sequence: pip_hazmat
 		Position: BottomRight
 		RequiresCondition: hazmatsuits
 	SpawnActorOnDeath:
@@ -4134,17 +4134,17 @@
 		TargetTypes: Ground, Obstacle
 	WithDamageOverlay@SmallBurn:
 		DamageTypes: Incendiary
-		Image: burn-s
+		Image: burn_s
 		MinimumDamageState: Light
 		MaximumDamageState: Medium
 	WithDamageOverlay@MediumBurn:
 		DamageTypes: Incendiary
-		Image: burn-m
+		Image: burn_m
 		MinimumDamageState: Medium
 		MaximumDamageState: Heavy
 	WithDamageOverlay@LargeBurn:
 		DamageTypes: Incendiary
-		Image: burn-l
+		Image: burn_l
 		MinimumDamageState: Heavy
 		MaximumDamageState: Dead
 	HiddenUnderShroud:
@@ -4636,7 +4636,7 @@
 		RequiresCondition: PropagandaEffect && upsubliminal
 	WithDecoration@PROPAGANDAHEAL:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: TopRight
 		RequiresCondition: PropagandaEffect
 		BlinkInterval: 25
@@ -5266,7 +5266,7 @@
 		Color: 98765432
 	WithDecoration@HealingField:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: TopRight
 		RequiresCondition: HealingField
 		BlinkInterval: 25
@@ -6918,7 +6918,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: ontiberium
 	WithDecoration@REDCROSS2:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: ontiberium
 		BlinkInterval: 32
@@ -6939,7 +6939,7 @@ CPQDEBUGDUMMY:
 		Condition: hospitalheal
 	WithDecoration@REDCROSS:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: hospitalheal
 		BlinkInterval: 32
@@ -9189,7 +9189,7 @@ CPQDEBUGDUMMY:
 	WithDisguiseTargetPalette:
 	WithDecoration@disguise:
 		Image: pips
-		Sequence: pip-disguise
+		Sequence: pip_disguise
 		Palette: effect
 		Position: TopRight
 		RequiresCondition: disguise

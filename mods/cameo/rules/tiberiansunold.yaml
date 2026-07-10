@@ -3303,7 +3303,7 @@ ts_gdi_jumpjetinfantry:
 		Condition: hospitalheal
 	WithDecoration@REDCROSS:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: hospitalheal
 		BlinkInterval: 32
@@ -6475,7 +6475,7 @@ cabal_coredefender:
 		RequiresCondition: ontiberium
 	WithDecoration@REDCROSS2:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: ontiberium
 		BlinkInterval: 32

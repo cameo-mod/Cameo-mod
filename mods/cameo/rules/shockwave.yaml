@@ -3444,7 +3444,7 @@ susapopuppatriot:
 susapopupturret.para:
 	Inherits: ^Vehicle
 	WithParachute:
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -7209,7 +7209,7 @@ susaamdggrenade.para:
 		Sequence: idle-ground
 		RequiresCondition: !parachute
 	WithParachute:
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -9958,7 +9958,7 @@ sglscrapcrate:
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle
@@ -10768,7 +10768,7 @@ sgltrapdrop:
 		WaterCorpseSequence: small_splash
 		ParachutingCondition: parachute
 	WithParachute: ##########
-		ShadowImage: parach-shadow
+		ShadowImage: parach_shadow
 		ShadowSequence: idle
 		Image: parach
 		Sequence: idle

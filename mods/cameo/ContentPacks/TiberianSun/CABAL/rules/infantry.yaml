@@ -694,7 +694,7 @@ cabal_coredefender:
 		RequiresCondition: ontiberium
 	WithDecoration@REDCROSS2:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: ontiberium
 		BlinkInterval: 32

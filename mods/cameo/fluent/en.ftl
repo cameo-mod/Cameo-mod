@@ -13,7 +13,7 @@ dropdown_weather =
 
 button_tab_container_asengine = Attacque Supérior
 
-## ingame-observer.yaml
+## ingame_observer.yaml
 button_observer_widgets_pause_tooltip = Pause
 button_observer_widgets_play_tooltip = Play
 
@@ -158,11 +158,11 @@ loadscreen_loading = Drag to set a formation for units when attack-moving$
 # Double-tapping Q to select all of your combat units on the map$
 # Q followed with F is the quickest way to deploy the MCV at the start of the game
 
-## ingame-observer.yaml, ingame-player.yaml
+## ingame_observer.yaml, ingame_player.yaml
 label-mute-indicator = Audio Muted
 button-top-buttons-options-tooltip = Options
 
-## ingame-player.yaml
+## ingame_player.yaml
 supportpowers-support-powers-palette =
    .ready = READY
    .hold = ON HOLD
@@ -299,7 +299,7 @@ bot_ai =
 
 support_power_timer = { $player }'s { $support-power }: { $time }
 
-## settings-display.yaml
+## settings_display.yaml
 checkbox_laser_glow = Weapon Glow Effects
 checkbox_tank_muzzle_flashes = Tank muzzle flashes
 checkbox_heat_distortion = Heat Distortion Effects
@@ -311,7 +311,7 @@ checkbox_flash_transients_container =
     .label = Flash Priority Notifications
     .tooltip = Flash important game-event notifications (base/unit under attack, superweapons) to draw attention
 
-## settings-gameplay.yaml
+## settings_gameplay.yaml
 label_game_play_section_header = Gameplay
 auto_save_interval_label = Auto-save interval
 auto_save_nr_label = Auto-save files
@@ -335,7 +335,7 @@ ui_theme_label = UI Colour Theme
 ui_theme_restart_hint = Applies after restart
 
 ## Map Generator (from OpenRA RA)
-## map-generators.yaml
+## map_generators.yaml
 label_random_map = Random Map
 label_clear_map_generator_option_tile = Tile
 label_clear_map_generator_choice_tile_clear =
@@ -504,7 +504,7 @@ label_ra_map_generator_choice_civilian_density_max =
 
 map_generator_d2k = Map Generator
 
-## D2k map-generators.yaml
+## D2k map_generators.yaml
 label_clear_map_generator_choice_tile_sand =
    .label = Sand
 label_clear_map_generator_choice_tile_concrete =

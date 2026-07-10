@@ -95,7 +95,7 @@ LINK:
 		RequiresCondition: bottledfairy && !herohealblock
 	WithDecoration@bottledfairy:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			bottledfairy: -4,0
@@ -366,7 +366,7 @@ BLAZER:
 		RequiresCondition: blazermh && !herohealblock
 	WithDecoration@blazermh:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			blazermh: -4,0
@@ -2007,7 +2007,7 @@ VICVIPER:
 		RequiresCondition: vvup && !herohealblock
 	WithDecoration@vvup:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			vvup: -4,0
@@ -2197,7 +2197,7 @@ AXELAY:
 		RequiresCondition: axelayup && !herohealblock
 	WithDecoration@axelayup:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			axelayup: -4,0
@@ -2768,7 +2768,7 @@ SMASH:
 		RequiresCondition: bonuslife && !herohealblock
 	WithDecoration@bonuslife:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		Offsets:
 			bonuslife: -4,0
@@ -3237,7 +3237,7 @@ mdkmissile:
 		RequiresCondition: !herohealblock
 	WithDecoration@healdefault:
 		Image: pips
-		Sequence: pip-heal
+		Sequence: pip_heal
 		Position: BottomRight
 		RequiresCondition: !herohealblock
 	GrantConditionOnAttack@herohealblock:

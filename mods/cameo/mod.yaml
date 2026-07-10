@@ -147,14 +147,14 @@ Rules:
 	cameo|rules/misc.yaml
 	cameo|rules/player.yaml
 	cameo|rules/world.yaml
-	cameo|rules/map-generators.yaml
+	cameo|rules/map_generators.yaml
 	cameo|rules/music.yaml
 	cameo|rules/palettes.yaml
 	cameo|rules/defaults.yaml
 	cameo|rules/shared.yaml
 	cameo|rules/trees.yaml
 	cameo|rules/civilian.yaml
-	cameo|rules/civilian-desert.yaml
+	cameo|rules/civilian_desert.yaml
 	cameo|rules/tech.yaml
 	cameo|rules/husks.yaml
 	cameo|rules/promotions.yaml
@@ -340,7 +340,7 @@ ChromeLayout:
 	common|chrome/load-game-browser.yaml
 	common|chrome/gamesave-loading.yaml
 	common|chrome/ingame.yaml
-	cameo|chrome/ingame-chat.yaml
+	cameo|chrome/ingame_chat.yaml
 	common|chrome/ingame-debug.yaml
 	common|chrome/ingame-debug-hpf.yaml
 	common|chrome/ingame-debuginfo.yaml
@@ -353,17 +353,17 @@ ChromeLayout:
 	common|chrome/ingame-infoscripterror.yaml
 	common|chrome/ingame-infostats.yaml
 	common|chrome/ingame-menu.yaml
-	cameo|chrome/ingame-observer.yaml
-	cameo|chrome/ingame-player.yaml
-	cameo|chrome/ingame-transients.yaml
-	cameo|chrome/commander-tree-window.yaml
-	cameo|chrome/statistics-window.yaml
+	cameo|chrome/ingame_observer.yaml
+	cameo|chrome/ingame_player.yaml
+	cameo|chrome/ingame_transients.yaml
+	cameo|chrome/commander_tree_window.yaml
+	cameo|chrome/statistics_window.yaml
 	cameo|chrome/lobby.yaml
 	common|chrome/lobby-kickdialogs.yaml
 	common|chrome/lobby-mappreview.yaml
-	cameo|chrome/lobby-music.yaml
-	cameo|chrome/lobby-options.yaml
-	cameo|chrome/lobby-players.yaml
+	cameo|chrome/lobby_music.yaml
+	cameo|chrome/lobby_options.yaml
+	cameo|chrome/lobby_players.yaml
 	common|chrome/lobby-servers.yaml
 	cameo|chrome/mainmenu.yaml
 	common|chrome/mainmenu-prompts.yaml
@@ -379,9 +379,9 @@ ChromeLayout:
 	common|chrome/settings.yaml
 	common|chrome/settings-advanced.yaml
 	common|chrome/settings-audio.yaml
-	cameo|chrome/settings-display.yaml
+	cameo|chrome/settings_display.yaml
 	common|chrome/settings-hotkeys.yaml
-	cameo|chrome/settings-gameplay.yaml
+	cameo|chrome/settings_gameplay.yaml
 	common|chrome/settings-input.yaml
 	common|chrome/text-notifications.yaml
 	cameo|chrome/tooltips.yaml
@@ -450,7 +450,7 @@ Hotkeys:
 	cameo|hotkeys.yaml
 
 LoadScreen: FitImageLoadScreen
-	SplashImage: cameo|uibits/splash-screen.png
+	SplashImage: cameo|uibits/splash_screen.png
 	Image: cameo|uibits/loadscreen2.png,cameo|uibits/loadscreen3.png,cameo|uibits/loadscreen4.png,cameo|uibits/loadscreen5.png,cameo|uibits/loadscreen6.png,cameo|uibits/loadscreen7.png,cameo|uibits/loadscreen8.png,cameo|uibits/loadscreen9.png,cameo|uibits/loadscreen10.png,cameo|uibits/loadscreen11.png,cameo|uibits/loadscreen12.png,cameo|uibits/loadscreen13.png,cameo|uibits/loadscreen14.png,cameo|uibits/loadscreen15.png,cameo|uibits/loadscreen16.png,cameo|uibits/loadscreen17.png,cameo|uibits/loadscreen18.png,cameo|uibits/loadscreen19.png,cameo|uibits/loadscreen20.png,cameo|uibits/loadscreen21.png,cameo|uibits/loadscreen22.png,cameo|uibits/loadscreen23.png,cameo|uibits/loadscreen24.png,cameo|uibits/loadscreen25.png,cameo|uibits/loadscreen26.png,cameo|uibits/loadscreen27.png
 
 WebServices:
@@ -470,43 +470,43 @@ ChromeMetrics:
 
 Fonts:
 	Tiny:
-		Font: cameo|fonts/JudouSansHans-Regular.ttf
+		Font: cameo|fonts/JudouSansHans_Regular.ttf
 		Size: 10
 		Ascender: 8
 	TinyBold:
-		Font: cameo|fonts/JudouSansHans-Bold.ttf
+		Font: cameo|fonts/JudouSansHans_Bold.ttf
 		Size: 10
 		Ascender: 8
 	Small:
-		Font: cameo|fonts/JudouSansHans-Regular.ttf
+		Font: cameo|fonts/JudouSansHans_Regular.ttf
 		Size: 12
 		Ascender: 9
 	SmallBold:
-		Font: cameo|fonts/JudouSansHans-Bold.ttf
+		Font: cameo|fonts/JudouSansHans_Bold.ttf
 		Size: 12
 		Ascender: 9
 	Regular:
-		Font: cameo|fonts/JudouSansHans-Regular.ttf
+		Font: cameo|fonts/JudouSansHans_Regular.ttf
 		Size: 14
 		Ascender: 11
 	Symbols:
-		Font: cameo|fonts/JudouSansHans-Regular.ttf
+		Font: cameo|fonts/JudouSansHans_Regular.ttf
 		Size: 14
 		Ascender: 11
 	Bold:
-		Font: cameo|fonts/JudouSansHans-Bold.ttf
+		Font: cameo|fonts/JudouSansHans_Bold.ttf
 		Size: 14
 		Ascender: 11
 	MediumBold:
-		Font: cameo|fonts/JudouSansHans-Bold.ttf
+		Font: cameo|fonts/JudouSansHans_Bold.ttf
 		Size: 18
 		Ascender: 14
 	BigBold:
-		Font: cameo|fonts/JudouSansHans-Bold.ttf
+		Font: cameo|fonts/JudouSansHans_Bold.ttf
 		Size: 24
 		Ascender: 18
 	Title:
-		Font: cameo|fonts/JudouSansHans-Bold.ttf
+		Font: cameo|fonts/JudouSansHans_Bold.ttf
 		Size: 32
 		Ascender: 24
 
