@@ -820,6 +820,9 @@ forgotten_viniferafiend:
 		VoiceSet: TSFiend
 	-RenderSprites:
 	RenderSprites:
+	Armament@PRIMARY:
+		Weapon: TSFiendShardBlue
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSFiendShardBlue
