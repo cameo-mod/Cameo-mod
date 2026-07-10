@@ -301,7 +301,8 @@ Range to hold the price. Range and DPS cells are never hand-edited.
   their LOW UnitClass factors instead, keeping the formula uniform.
 
 **The baseline unit (design 2026-07-11): the Naxis Tiger Tank** —
-100 000 HP, 100 Speed, 10 000 damage, 5.0 cells range (`5c0`),
+100 000 HP, 100 Speed, 10 000 damage, range 5.0 (= 5000 wdist —
+the sheet's Range unit is wdist/1000, NOT cells: one cell is 1024),
 50 reload, all modifiers 1 → DPS 200 and **O = P = Q = Cost = 800
 exactly**. Every stat trade in the system is anchored on these round
 numbers.
@@ -335,8 +336,8 @@ value at that armor's rank in the ordering matching the weapon band —
 needs one worked example to confirm before generating yaml.
 
 **Definition of Done for a formula unit:** stats from the sheet map to
-yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (cells)→weapon
-`Range` (×1024 wdist), Damage→warhead `Damage`, ReloadDelay→weapon
+yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (wdist/1000)→weapon
+`Range` (×1000 wdist), Damage→warhead `Damage`, ReloadDelay→weapon
 `ReloadDelay` (ticks); versus table per the armor system; every new
 unit gets its own unique weapon (§10).
 

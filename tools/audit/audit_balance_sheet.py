@@ -8,7 +8,7 @@ by display name and compare:
   Speed   vs Mobile.Speed / Aircraft.Speed
   Damage  vs main weapon warhead damage x Burst        (burst rule)
   Reload  vs ReloadDelay + (Burst-1) x BurstDelay      (burst rule)
-  Range   vs weapon range in cells (sheet stores cells)
+  Range   vs weapon range in sheet units (wdist/1000, NOT cells)
 
 Mismatches are reported for design review — the sheet is the intended
 truth, but per design every mismatch is ASKED about, never auto-fixed.
@@ -33,14 +33,16 @@ UTILITY = {"genericc4", "defusekit", "leechdisinfect", "repair", "heal",
            "medikit", "dogjaw"}
 
 
-def cells(v: str | None) -> float | None:
+def sheet_range(v: str | None) -> float | None:
+    """Game range -> sheet units. The sheet stores wdist/1000 (NOT cells:
+    a cell is 1024 wdist, so in-game 5c0 = 5120 wdist = sheet 5.12)."""
     if not v:
         return None
     v = str(v)
     if "c" in v:
         c, _, sub = v.partition("c")
-        return int(c) + int(sub or 0) / 1024
-    return int(v) / 1024
+        return (int(c) * 1024 + int(sub or 0)) / 1000
+    return int(v) / 1000
 
 
 def norm(name: str) -> str:
@@ -138,7 +140,7 @@ def main() -> int:
                 bdel = 5
             reload_ = int(ww.get("ReloadDelay") or 40)
             eff_reload = reload_ + (burst - 1) * bdel
-            rng = cells(ww.get("Range"))
+            rng = sheet_range(ww.get("Range"))
             cand = (dmg * burst, eff_reload, rng)
             if best is None or cand[0] > best[0]:
                 best = cand
