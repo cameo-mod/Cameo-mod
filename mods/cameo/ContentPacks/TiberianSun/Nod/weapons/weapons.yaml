@@ -353,6 +353,53 @@ ChamBlade:
 	Warhead@SniperWeaponPercentage: HealthPercentageDamage
 		Damage: 25
 
+TSShadowTeamPistols:
+	Inherits: ^SniperWeapon
+	Report: itanatta.wav, itanattb.wav
+	ReloadDelay: 12
+	Burst: 2
+	BurstDelays: 3
+	Range: 8000
+	Projectile: Bullet
+		ContrailStartColor: 77777777
+		ContrailEndColor: 33333333
+		ContrailStartWidth: 33
+		ContrailEndWidth: 77
+		ContrailLength: 7
+		ContrailEndColorUsePlayerColor: false
+	Warhead@SniperWeapon: SpreadDamage
+		Damage: 7000
+	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
+		Damage: 7000
+	Warhead@SniperWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+
+TSShadowTeamAttach:
+	Projectile: InstantHit
+	TargetActorCenter: true
+	Report: icraatta.wav
+	ReloadDelay: 20
+	Range: 2000
+	ValidTargets: demolishable
+	InvalidTargets: ivanattached
+	Warhead@1: AttachDelayedWeapon
+		Weapon: TSShadowTeamBomb
+		Type: ivanbomb
+		TriggerTime: 150
+		Range: 1
+		ValidTargets: demolishable
+	Warhead@2: TargetDamage
+
+TSShadowTeamBomb:
+	Projectile: InstantHit
+	Warhead@1Dam: HealthPercentageDamage
+		ValidTargets: demolishable
+		Spread: 1000
+		Damage: 100
+	Warhead@2Eff: CreateEffect
+		Explosions: self_destruct
+		ImpactSounds: gexpcraa.wav
+
 TSRaiderCannon:
 	Inherits: ^SmallArms
 	ValidTargets: Ground, Water, Air

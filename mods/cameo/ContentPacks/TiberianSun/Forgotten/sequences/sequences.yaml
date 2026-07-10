@@ -407,6 +407,109 @@ forgotten_runnershotgal:
 	icon:
 		Filename: forgotten_runnershotgal_icon.png
 
+forgotten_mortarman:
+	Inherits: ^TSBasicInfantry
+	Inherits@attack: ^TSBasicInfantryAttack
+	Defaults:
+		Filename: forgotten_mortarman.shp
+		Tick: 80
+	stand:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	liedown:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	cheer:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	run:
+		Start: 0
+		Length: 6
+		Facings: 8
+		ShadowStart: 142
+	idle1:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+		Tick: 500
+	idle2:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+		Tick: 500
+	prone-run:
+		Start: 48
+		Length: 6
+		Facings: 8
+		ShadowStart: 190
+	prone-stand:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+	prone-stand2:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+	die1:
+		Start: 96
+		Length: 15
+		ShadowStart: 238
+	die2:
+		Start: 111
+		Length: 15
+		ShadowStart: 253
+	die6:
+		Start: 111
+		Length: 15
+		ShadowStart: 253
+	die-crushed:
+		Start: 122
+		Length: 4
+		ShadowStart: 264
+		Tick: 1000
+		ZOffset: -511
+	shoot:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+		Tick: 300
+		IgnoreWorldTint: true
+	prone-shoot:
+		Start: 127
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 269
+		Tick: 300
+		IgnoreWorldTint: true
+	standup:
+		Start: 126
+		Length: 1
+		Stride: 2
+		Facings: 8
+		ShadowStart: 268
+	icon:
+		Filename: forgotten_mortarmanicon.shp
+
 # tsweed:
 # 	idle: invisibleitem
 # 	dock: invisibleitem

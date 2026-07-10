@@ -3182,7 +3182,7 @@ SCNYDUSCANAL:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 8010
-		Prerequisites: ~wip-content
+		Prerequisites: ~schatchery, schive
 		Queue: Building, RABuilding
 		Description: actor-scnyduscanal.description
 	Building:
@@ -3201,6 +3201,9 @@ SCNYDUSCANAL:
 		Path: 1,1
 		IsPlayerPalette: true
 	Exit:
+	TeleportNetworkPrimaryExit:
+	TeleportNetwork:
+		Type: nydus
 	-WithDeathAnimation:
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING

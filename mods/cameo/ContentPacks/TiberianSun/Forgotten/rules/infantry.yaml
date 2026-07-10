@@ -652,6 +652,62 @@ forgotten_chemsprayinfantry:
 	ActorStatValues:
 		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
 
+forgotten_mortarman:
+	Inherits: ^Soldier
+	Inherits@Template: ^MortarInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^ForgottenRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@tibheal: ^TibHealable
+	Inherits@ChemicalWeapons: ^ChemicalWeapons
+	Inherits@GenomeMapping: ^GenomeMapping
+	Inherits@MyPet: ^MyPetLarge
+	Inherits@Unity: ^Unity
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Mutant Mortarman
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 130
+		Prerequisites: ~forgotten_barracks, forgotten_radar
+		Queue: Infantry, RAInfantry
+		Description: actor-forgotten_mortarman.description
+	Mobile:
+		Speed: 50
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: TSInfantryMortar
+	 	RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@UPGRADE:
+		Weapon: TSInfantryMortarChem
+	 	RequiresCondition: forgotten_upgrade_chemicalweapons
+	Voiced:
+		VoiceSet: TSGhost
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: TSInfantryMortar
+		RequiresCondition: !forgotten_upgrade_chemicalweapons
+	Armament@GARRISONEDUPGRADE: ##########
+		Name: garrisoned
+		Weapon: TSInfantryMortarChem
+		RequiresCondition: forgotten_upgrade_chemicalweapons
+	-DamagedByTerrain:
+	RenderSprites:
+		PlayerPalette: playerra2
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
+	ActorStatValues:
+		Upgrades: forgotten_upgrade_chemicalweapons, forgotten_upgrade_genomemapping, forgotten_upgrade_friendlywildlife, forgotten_upgrade_unity
+
 forgotten_visceroid:
 	Inherits: ^DefaultInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
