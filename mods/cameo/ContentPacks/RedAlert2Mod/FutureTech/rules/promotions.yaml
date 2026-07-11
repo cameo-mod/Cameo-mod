@@ -129,7 +129,7 @@ up_blackwidow.futu:
 		BuildPaletteOrder: 105
 		Queue: Promotions
 		Description: Enables construction of the Black Widow.
-		Prerequisites: ~egcnst.futu, up_prospector.futu, egtech.futu, !up_blackwidow.futu, rank1
+		Prerequisites: ~egcnst.futu, up_prospector.futu, egtf.futu, !up_blackwidow.futu, rank1
 	RenderSprites:
 		Image: blackwidow.futu
 	ProvidesPrerequisite:

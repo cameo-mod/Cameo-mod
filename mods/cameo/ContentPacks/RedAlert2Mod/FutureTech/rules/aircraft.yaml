@@ -88,7 +88,7 @@ cryo.futu:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
-		BuildPaletteOrder: 20
+		BuildPaletteOrder: 405
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_cryocopter.futu
 		Description: actor_futu_cryo.description
 	Valued:
@@ -193,7 +193,7 @@ harbinger.futu:
 		AddToArmyValue: true
 	Buildable:
 		BuildAtProductionType: harbinger.futu
-		BuildPaletteOrder: 100
+		BuildPaletteOrder: 510
 		Prerequisites: ~launchpad.futu, egshock.futu, ~up_harbinger.futu
 		Queue: Aircraft, RAAircraft
 		Description: actor_future_harbinger.description
