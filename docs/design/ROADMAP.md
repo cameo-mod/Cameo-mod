@@ -9,8 +9,8 @@ completed item gets its commit hash; every new order lands here first._
 
 - [x] Voice-set rename crashes — 29 refs fixed, A4 audit guards the
   class (`1616a26d2`, root cause of tjk-ws's `fa99c28db`)
-- [ ] **Pink main-menu text** — no wiring fault found; needs
-  `Documents\OpenRA\Logs\ui.log` after next launch (S, blocked on log)
+- [x] Pink main-menu text — resolved by the C#-derived chrome/fluent
+  key reverts (`e956d2280`); confirmed fixed in-game 2026-07-11
 
 ## P1 — Quick wins (S effort, high value)
 
