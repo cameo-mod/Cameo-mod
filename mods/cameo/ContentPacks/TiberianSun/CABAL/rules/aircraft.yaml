@@ -86,7 +86,7 @@ cabal_hunterkillermk2:
 	ChangesHealth@SelfHealing:
 		Step: 120
 	Armament@PRIMARY:
-		Weapon: TSHunterKillerLasers
+		Weapon: CabalHunterKillerHeavyLaser
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 	Armament@PRIMARY2:
@@ -152,7 +152,7 @@ cabal_hunterkillermk1:
 	Armor:
 		Type: Light
 	Armament@PRIMARY:
-		Weapon: TSHunterKillerLasers
+		Weapon: CabalHunterKillerLasers
 		LocalOffset: 0,0,0
 		PauseOnCondition: !ammo
 	AttackAircraft:

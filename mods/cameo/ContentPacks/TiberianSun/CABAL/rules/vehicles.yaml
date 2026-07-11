@@ -120,7 +120,9 @@ cabal_cyborgreaper:
 		TurnSpeed: 13
 		Speed: 65
 	Armament:
-		Weapon: TSReaperTusk
+		Weapon: CabalReaperMissiles
+	Armament@AA:
+		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
 		Weapon: TSReaperTrap
 	Voiced:
@@ -155,6 +157,7 @@ cabal_cyborgreaper:
 		CrushedSequencePalette: ra2effect
 
 cabal_dissolver:
+	Inherits@CLOAK: ^CloakedVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EMP: ^TurretEMP
@@ -186,7 +189,7 @@ cabal_dissolver:
 		TurnSpeed: 10
 		Offset: 0,0,25
 	Armament:
-		Weapon: cabal_dissolver
+		Weapon: CabalDissolverSpray
 		LocalOffset: 200,0,0
 	RenderSprites:
 	QuantizeFacingsFromSequence:
@@ -293,7 +296,7 @@ cabal_laserspider:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	Armament@PRIMARY:
-		Weapon: TSLaserRaiderCannon
+		Weapon: CabalSpiderLaser
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -399,7 +402,7 @@ cabal_spidertankdrone:
 	ChangesHealth@SelfHealing:
 		Step: 18
 	Armament@PRIMARY:
-		Weapon: TS90mm
+		Weapon: CabalDroneCannon
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -524,7 +527,7 @@ cabal_artilleryspider:
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Armament@PRIMARY:
-		Weapon: TS155mm
+		Weapon: CabalArtilleryWalkerShell
 		LocalOffset: -125,1,250, -125,1,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -594,7 +597,7 @@ cabal_tarantula:
 		TurnSpeed: 14
 		Offset: -500,1,1
 	Armament@PRIMARY:
-		Weapon: TS120mm
+		Weapon: CabalTarantulaCannon
 		Recoil: 128
 		RecoilRecovery: 32
 		LocalOffset: 800, 300, 700

@@ -47,7 +47,7 @@ cabal_cyborginfantry:
 	ChangesHealth@SelfHealing:
 		Step: 45
 	Armament@PRIMARY:
-		Weapon: TSVulcan3
+		Weapon: CabalCyborgChaingun
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
@@ -465,7 +465,7 @@ cabal_cyborgcommando:
 	ChangesHealth@SelfHealing:
 		Step: 250
 	Armament@PRIMARY:
-		Weapon: TSCyCannon
+		Weapon: CabalCommandoPlasma
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -500,7 +500,7 @@ cabal_cyborgcommandov2:
 	ChangesHealth@SelfHealing:
 		Step: 400
 	Armament@PRIMARY:
-		Weapon: TSSuperCyCannon
+		Weapon: CabalCommandoPlasmaMk2
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -549,7 +549,7 @@ cabal_eliminator800:
 		Delay: 15
 		Count: 1
 	Armament@1:
-		Weapon: RA2GattlingMG1
+		Weapon: CabalEliminatorGatling
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 64
@@ -663,10 +663,10 @@ cabal_coredefender:
 	DetectCloaked:
 		Range: 6c0
 	Armament:
-		Weapon: TSCoreLaser
+		Weapon: CabalCoreDefenderLaser
 		LocalOffset: 1150,-750,410, 1300,750,510
 	Armament@LASER3:
-		Weapon: TSCoreLaser
+		Weapon: CabalCoreDefenderLaser
 		LocalOffset: 1150,750,410, 1300,-750,510
 	AttackFrontal:
 		FacingTolerance: 12
@@ -678,6 +678,10 @@ cabal_coredefender:
 		Name: Core Defender
 	Health:
 		HP: 1500000
+	ChangesHealth@SelfHealing:
+		Step: 1500
+		Delay: 1
+		StartIfBelow: 100
 	Armor:
 		Type: Heavy
 	DamageMultiplier@superheavy:
