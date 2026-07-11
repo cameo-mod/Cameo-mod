@@ -83,7 +83,7 @@ cabal_mobileconstructionvehicle:
 	Transforms:
 		IntoActor: cabal_constructionyard
 	Voiced:
-		VoiceSet: cabal_cyborgreaper
+		VoiceSet: TSReaper
 	RenderVoxels:
 		Image: tsmcvblack
 
@@ -126,7 +126,7 @@ cabal_cyborgreaper:
 	Armament@TRAP:
 		Weapon: TSReaperTrap
 	Voiced:
-		VoiceSet: cabal_cyborgreaper
+		VoiceSet: TSReaper
 	Tooltip:
 		Name: Cyborg Reaper
 	UpdatesPlayerStatistics:

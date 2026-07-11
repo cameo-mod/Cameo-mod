@@ -46,11 +46,11 @@ _none found_
 | mods/cameo/sequences/darkreign.yaml:4782 | .shp |
 | mods/cameo/sequences/darkreign.yaml:4872 | drshrederfake.shp |
 | mods/cameo/sequences/iok.yaml:521 | iokscud.shp |
-| mods/cameo/sequences/redalert2.yaml:6327 | cra2cmin.shp |
-| mods/cameo/sequences/redalert2.yaml:6362 | ra2ltnk.shp |
-| mods/cameo/sequences/redalert2.yaml:6384 | ra2howi.shp |
-| mods/cameo/sequences/redalert2.yaml:6397 | ra2arty.shp |
-| mods/cameo/sequences/redalert2.yaml:6635 | yrcaos.shp |
+| mods/cameo/sequences/redalert2.yaml:6332 | cra2cmin.shp |
+| mods/cameo/sequences/redalert2.yaml:6367 | ra2ltnk.shp |
+| mods/cameo/sequences/redalert2.yaml:6389 | ra2howi.shp |
+| mods/cameo/sequences/redalert2.yaml:6402 | ra2arty.shp |
+| mods/cameo/sequences/redalert2.yaml:6640 | yrcaos.shp |
 | mods/cameo/sequences/starcraft.yaml:685 | zergsoilmaker.shp |
 | mods/cameo/sequences/starcraft.yaml:711 | zergsoilmaker2.shp |
 | mods/cameo/sequences/starcraft.yaml:3639 | scztruck.shp |
@@ -74,4 +74,9 @@ _none found_
 | mods/cameo/sequences/tiberiandawn.yaml:1439 | explosion.shp |
 | mods/cameo/sequences/warcraft1.yaml:562 | wc_h_peasant_engineer.shp |
 | mods/cameo/sequences/warcraft1.yaml:1102 | wc_o_catapult.shp |
+
+
+## A4 — VoiceSet without definition (0) — CRASH
+
+_none found_
 

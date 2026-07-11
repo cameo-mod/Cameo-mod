@@ -9,6 +9,9 @@
      moved sprites/icons but voxel filenames are implicit in the key)
   A3 informational: file references missing loose with no rename mapping
      (may live inside archives; verify before touching)
+  A4 VoiceSet references that no audio yaml defines — the voice-set
+     rename crash class (VoiceSets named like actor ids got swept by
+     early renames; fa99c28db was the live fix)
 
 Run after EVERY rename pass. A1/A2 findings are launch crashes.
 """
@@ -109,7 +112,27 @@ def main() -> int:
     print(table(["location", "image", "expected file"], a2))
     print(h2(f"A3 — missing loose, no rename mapping ({len(a3)})"))
     print(table(["location", "referenced"], a3))
-    return 1 if (a1 or a2) else 0
+
+    defined = set()
+    for pa in (MOD / "audio").rglob("*.yaml"):
+        for ln in pa.read_text(encoding="utf-8-sig", errors="replace").split("\n"):
+            if ln and ln[0] not in "\t #" and ":" in ln:
+                defined.add(ln.split(":")[0].strip().lower())
+    a4 = []
+    for pr in MOD.rglob("*.yaml"):
+        if "audio" in pr.parts or pr.name == "tiberiansunold.yaml":
+            continue
+        top = None
+        for i, ln in enumerate(
+                pr.read_text(encoding="utf-8-sig", errors="replace").split("\n"), 1):
+            if ln and ln[0] not in "\t #" and ":" in ln:
+                top = ln.split(":")[0].strip()
+            mo = re.match(r"\s*VoiceSet:\s*([\w.\-]+)", ln)
+            if mo and mo.group(1).lower() not in defined:
+                a4.append([f"{pr.relative_to(ROOT).as_posix()}:{i}", top, mo.group(1)])
+    print(h2(f"A4 — VoiceSet without definition ({len(a4)}) — CRASH"))
+    print(table(["location", "actor", "voice set"], a4))
+    return 1 if (a1 or a2 or a4) else 0
 
 
 if __name__ == "__main__":
