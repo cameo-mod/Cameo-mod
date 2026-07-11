@@ -12,7 +12,7 @@ LoveDoublePistols:
 
 lovebowFire:
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: bowfire.aud
 	ValidTargets: MindControl
 	InvalidTargets: Hero, MCImmune
@@ -50,7 +50,7 @@ LoveHeliAAGun:
 LovebowFireAAB:
 	ReloadDelay: 25
 	Burst: 2
-	Range: 7c512
+	Range: 7680
 	Report: bowfire.aud
 	ValidTargets: Air
 	Projectile: Missile
@@ -79,7 +79,7 @@ LovebowFireAAB:
 LovebowFireB:
 	ReloadDelay: 25
 	Burst: 2
-	Range: 7c512
+	Range: 7680
 	Report: bowfire.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -107,7 +107,7 @@ LovebowFireB:
 
 CupidoAK47:
 	Inherits: LovebowFireB
-	Range: 12c512
+	Range: 12800
 	Burst: 2
 	ReloadDelay: 1
 	Report: irebweaa.wav, irebweab.wav, irebweac.wav, irebwead.wav, irebweae.wav, irebweaf.wav, irebweag.wav
@@ -117,7 +117,7 @@ CupidoAK47:
 
 CupidoAK47AA:
 	Inherits: LovebowFireAAB
-	Range: 12c512
+	Range: 12800
 	Burst: 2
 	ReloadDelay: 1
 	Report: irebweaa.wav, irebweab.wav, irebweac.wav, irebwead.wav, irebweae.wav, irebweaf.wav, irebweag.wav
@@ -125,7 +125,7 @@ CupidoAK47AA:
 AlienMobClawz:
 	Report: svsavoice1.aud, svsavoice2.aud
 	ReloadDelay: 5
-	Range: 1c256
+	Range: 1280
 	Projectile: Bullet
 		Speed: 2c0
 	Warhead@1Dam: TargetDamage
@@ -142,7 +142,7 @@ AlienMobClawz:
 
 TeletubbyLaser:
 	ReloadDelay: 75
-	Range: 7c512
+	Range: 7680
 	Report: val_fireLaser.aud
 	Projectile: LaserZap
 		#pink
@@ -191,7 +191,7 @@ ValentineTowerDouble:
 	Inherits: LovebowFireB
 	ReloadDelay: 12
 	Report: vpalwe2d.aud
-	Range: 8c0
+	Range: 8192
 	-Projectile:
 	Projectile: LaserZap
 		Width: 125
@@ -214,7 +214,7 @@ ValentineTowerDouble:
 
 sweetHeartsFire:
 	ReloadDelay: 77
-	Range: 5c555
+	Range: 5675
 	Report: bowfire.aud
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -247,7 +247,7 @@ sweetHeartsFire:
 planBFire:
 	Inherits: SWPatriot
 	ReloadDelay: 33
-	Range: 7c512
+	Range: 7680
 	Report: vpalwe2d.aud
 	ValidTargets: Air
 	Projectile: MissileCA
@@ -279,7 +279,7 @@ planBFire:
 valentine_bullethell:
 	ReloadDelay: 60
 	Report: bowfire.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -320,7 +320,7 @@ valentine_bullethell:
 valentine_bullethell2:
 	ReloadDelay: 70
 	Report: svsavoice1.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -358,7 +358,7 @@ valentine_bullethell2:
 valentine_bullethell3:
 	ReloadDelay: 80
 	Report: svsavoice2.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -399,7 +399,7 @@ valentine_bullethell3:
 valentine_bullethell4:
 	ReloadDelay: 90
 	Report: vpalwe2d.aud
-	Range: 7c512
+	Range: 7680
 	ValidTargets: Ground
 	InvalidTargets: Ally
 	Projectile: MissileCA
@@ -442,7 +442,7 @@ SwanAttack:
 CuteKirovBomb:
 	Inherits: RA2KirovBomb
 	ReloadDelay: 125
-	Range: 5c0
+	Range: 5120
 	Warhead@3Eff: CreateEffect
 		Delay: 5
 		Explosions: napalm
@@ -484,14 +484,14 @@ CuteKirovBomb:
 		Delay: 30
 	Warhead@2Own: ChangeOwner
 		Duration: 250
-		Range: 5c0
+		Range: 5120
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Infantry, Vehicle, Water
 		InvalidTargets: Hero
 		Delay: 35
 	Warhead@3Own: GrantExternalCondition
 		Duration: 250
-		Range: 5c0
+		Range: 5120
 		Condition: prevent-mindcontrol
 		Delay: 35
 		ValidRelationships: Ally, Neutral, Enemy

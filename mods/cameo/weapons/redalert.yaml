@@ -4037,7 +4037,7 @@ ZeroFighterChainGunWaveforce:
 		Damage: 2
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 4000
+		Damage: 500
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -4100,7 +4100,7 @@ JHindChainGun:
 		-LaunchAngle:
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 500
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
@@ -4115,7 +4115,8 @@ JHindChainGunWaveforce:
 	Inherits: ^WaveforceBulletWarhead
 	Inherits: JHindChainGun
 	Inherits: ^WaveforceBulletProjectile
-
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 500
 JHindCannon:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^TankDestroyerCannon
@@ -7465,7 +7466,7 @@ MADTankThump:
 
 DT120mm:
 	Inherits: ra120mm
-	Range: 5c555
+	Range: 5675
 	ReloadDelay: 55
 
 ragal120mm:
@@ -7475,7 +7476,7 @@ ragal120mm:
 MammothTuskGal:
 	Inherits: MammothTusk
 	ReloadDelay: 55
-	Range: 5c555
+	Range: 5675
 	ValidTargets: Air, Ground
 
 DT120mm1:
@@ -7687,15 +7688,15 @@ JHighVWaveforce:
 
 RocketsG:
 	Inherits: ^MissileWeapon
-	Range: 7c0
+	Range: 7168
 
 RocketsG:
 	Inherits: ^MissileWeapon
-	Range: 7c0
+	Range: 7168
 
 ^AACannon:
 	ReloadDelay: 10
-	Range: 8c0
+	Range: 8192
 	Report: aacanon3.aud
 	ValidTargets: Air
 	Projectile: Bullet
@@ -7719,7 +7720,7 @@ RocketsG:
 
 ^RAHeavyMG:
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 	Report: gun13.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -7757,7 +7758,7 @@ RocketsG:
 
 ^SnipeWeapon:
 	ReloadDelay: 80
-	Range: 2c512
+	Range: 2560
 	Report: gun5.aud
 	ValidTargets: Ground, Infantry, Ant
 	InvalidTargets: Vehicle, Water, Structure, Wall, Husk, Mine
@@ -7806,7 +7807,7 @@ Colt45:
 RASniper:
 	Inherits: ^SnipeWeapon
 	ReloadDelay: 70
-	Range: 10c0
+	Range: 10240
 	Warhead@1Dam: SpreadDamage
 		Damage: 14000
 
@@ -8255,8 +8256,8 @@ NanoArtilleryAG:
 		Damage: 7777
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Spread: 777
-		Damage: 7777
+		Spread: 388
+		Damage: 3888
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Spread: 777
@@ -8267,8 +8268,8 @@ NanoArtilleryAG:
 		Damage: 7777
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Spread: 777
-		Damage: 7777
+		Spread: 388
+		Damage: 3888
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		Spread: 777
@@ -8345,8 +8346,8 @@ NanoSmokeAG:
 		Damage: 3333
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
-		Spread: 333
-		Damage: 3333
+		Spread: 166
+		Damage: 1666
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Spread: 333
@@ -8357,8 +8358,8 @@ NanoSmokeAG:
 		Damage: 3333
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Spread: 333
-		Damage: 3333
+		Spread: 166
+		Damage: 1666
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
 		Spread: 333

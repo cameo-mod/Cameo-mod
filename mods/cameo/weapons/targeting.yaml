@@ -1,12 +1,12 @@
 DemoTruckTargeting:
 	ValidTargets: Structure, Infantry, Vehicle
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 
 SuicideBomberTargeting:
 	Inherits: DemoTruckTargeting
-	Range: 1c512
+	Range: 1536
 
 ^deploytargeting:
 	ValidTargets: Ground
@@ -22,7 +22,7 @@ SuicideBomberTargeting:
 
 deploytargeting.5c0:
 	Inherits: ^deploytargeting
-	Range: 5c0
+	Range: 5120
 
 aadeploytargeting.6c0:
-	Range: 6c0
+	Range: 6144

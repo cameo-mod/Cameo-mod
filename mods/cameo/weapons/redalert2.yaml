@@ -138,7 +138,8 @@
 		Explosions: ra2_small_watersplash
 		ExplosionPalette: ra2effect
 		ImpactSounds: gexpwasa.wav
-
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 500
 ^RA2TeslaWeapon:
 	Inherits: ^TeslaWeapon
 	Warhead@Effect: CreateEffect
@@ -1536,14 +1537,14 @@ RA2KirovBomb_nuclear_Elite:
 
 RA2IMPAA:
 	Inherits: RA2IMP
-	Range: 8c0
+	Range: 8192
 	ValidTargets: Air
 	Warhead@1Dam_impact: SpreadDamage
 		ValidTargets: Air
 
 RA2TRIPODLAZER:
 	ReloadDelay: 5
-	Range: 12c0
+	Range: 12288
 	Report: raycharge.aud
 	ValidTargets: Air
 	InvalidTargets: Ground
@@ -1568,7 +1569,7 @@ RA2TRIPODLAZER:
 RA2TRIPODPLAZMA:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 100
-	Range: 5c0
+	Range: 5120
 	BurstDelays: 2
 	Burst: 6
 	Report: dsplasma.aud
@@ -1596,7 +1597,7 @@ RA2TRIPODPLAZMA:
 
 RA2REVENANT:
 	ReloadDelay: 75
-	Range: 10c0
+	Range: 10240
 	Report: dsfirsht.aud
 	Projectile: Bullet
 		Speed: 270
@@ -1623,8 +1624,8 @@ RA2REVENANT:
 RA2REVENANTAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 75
-	Range: 10c0
-	MinRange: 0c512
+	Range: 10240
+	MinRange: 512
 	Report: turret1.aud
 	Projectile: Missile
 		Arm: 3
@@ -1652,7 +1653,7 @@ RA2REVENANTAA:
 
 RA2PINKY:
 	ReloadDelay: 150
-	Range: 12c0
+	Range: 12288
 	Report: DemonShoot.aud
 	Projectile: Bullet
 		Blockable: false
@@ -1683,7 +1684,7 @@ RA2PINKY:
 
 RA2ZEPDOOM:
 	Inherits: RA2PINKY
-	Range: 2c0
+	Range: 2048
 	ReloadDelay: 8
 	Projectile: Bullet
 		Velocity: 0, 0, -224
@@ -1696,7 +1697,7 @@ RA2ZEPDOOM:
 
 RA2MUTA:
 	ReloadDelay: 60
-	Range: 3c0
+	Range: 3072
 	Report: DemonShoot.aud
 	ValidTargets: Ground, Air
 	Projectile: Bullet
@@ -1732,7 +1733,7 @@ RA2MUTA:
 
 RA2FlameCluster:
 	Inherits: CHFlameRadiation
-	Range: 0c512
+	Range: 512
 	Projectile: Bullet
 		Speed: 255
 		Blockable: false
@@ -1748,10 +1749,11 @@ RA2ThermobaricFlame:
 		Damage: 600
 		Versus:
 			Wood: 20
-
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Spread: 125
 RA2FLOATER:
 	ReloadDelay: 45
-	Range: 4c0
+	Range: 4096
 	Report: DemonShoot.aud
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -2408,9 +2410,9 @@ RA2155mm_elite:
 
 RA28Inch:
 	Inherits: ^RA2HeavyCannon
-	MinRange: 1c0
+	MinRange: 1024
 	ReloadDelay: 1
-	Range: 3c0
+	Range: 3072
 	Report: turret1.aud
 	TargetActorCenter: true
 	Projectile: Bullet
@@ -3123,7 +3125,7 @@ RA2BrutePunchE:
 
 SquidPunch:
 	ReloadDelay: 32
-	Range: 1c856
+	Range: 1880
 	Report: vsquat1a.wav
 	ValidTargets: Water, Underwater
 	InvalidTargets: SquidGrab, SquidGrabbed
@@ -3134,7 +3136,7 @@ SquidPunch:
 
 SquidGrab:
 	ReloadDelay: 32
-	Range: 1c856
+	Range: 1880
 	ValidTargets: SquidGrab
 	InvalidTargets: SquidGrabbed
 	Projectile: InstantHit
@@ -4117,7 +4119,7 @@ RA2TorpTube_elite:
 ^RA2MG:
 	Inherits: ^RA2SmallArms
 	ReloadDelay: 20
-	Range: 4c0
+	Range: 4096
 	Report: igiat1a.wav, igiat1b.wav, igiat1c.wav
 	Projectile: InstantHit
 		Blockable: true
@@ -4268,7 +4270,7 @@ BlackHawkCannon:
 
 RA2ZOMBIE:
 	ReloadDelay: 45
-	Range: 1c256
+	Range: 1280
 	Report: zulhit00.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -4285,7 +4287,7 @@ RA2ZOMBIE:
 
 RA2SKELETON:
 	ReloadDelay: 25
-	Range: 1c512
+	Range: 1536
 	Report: sword1.aud,sword2.aud,sword3.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -5168,7 +5170,7 @@ RA2Atomic:
 RA2MODTrackMG:
 	Inherits: ^RA2MG
 	Burst: 4
-	Range: 5c512
+	Range: 5632
 	Report: vwaratta.wav, vwarattb.wav
 	ValidTargets: Ground, Air
 	Warhead@SmallArms: SpreadDamage
@@ -5337,7 +5339,7 @@ LightningBolt:
 		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
 
 psireveal:
-	Range: 1c0
+	Range: 1024
 	ReloadDelay: 25
 	Projectile: InstantExplode
 	ValidTargets: Ground, Water, Air
@@ -5429,7 +5431,7 @@ IvanBombAir:
 
 IFVAttach:
 	Inherits: IvanAttach
-	Range: 4c512
+	Range: 4608
 
 TanyaAttach:
 	Inherits: IvanAttach
@@ -5645,7 +5647,7 @@ ChronoMinerTeleportImpact:
 		ValidTargets: Ground, Water, Air
 
 RA2SpyCamera:
-	Range: 12c0
+	Range: 12288
 	ReloadDelay: 25
 	Report: vspysnap.wav
 	Projectile: InstantExplode
@@ -5672,7 +5674,7 @@ ForceShield:
 
 RA2SpiderSlice:
 	ReloadDelay: 15
-	Range: 1c0
+	Range: 1024
 	Report: sword1.aud,sword2.aud,sword3.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -5759,7 +5761,7 @@ RA2CorpseThrower:
 		Amount: 1
 
 RA2Debris:
-	Range: 3c512
+	Range: 3584
 	Projectile: BulletAS
 		Speed: 60, 120
 		LaunchAngle: 70, 190
@@ -5787,7 +5789,7 @@ RA2LargeDebris:
 RA2FlyingBody:
 	Inherits: RA2Debris
 	Inherits@2: RA2CorpseSpawner
-	Range: 3c0
+	Range: 3072
 	Projectile: BulletAS
 		Speed: 30, 90
 		Sequences: flyingbody

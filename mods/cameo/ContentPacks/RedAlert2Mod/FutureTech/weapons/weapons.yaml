@@ -33,7 +33,7 @@ Future_MBT_DebuffLaser:
 	Warhead@2Con: GrantExternalCondition
 		Condition: CommandoDebuff
 		Duration: 22
-		Range: 0c172
+		Range: 172
 		ValidTargets: Ground, Water, Structure, Wall
 	Warhead@Validation: TargetDamage
 

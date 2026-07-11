@@ -15,7 +15,7 @@ D2K_Personal_Shield_Impact:
         Inaccuracy: 0c128
         ImpactSounds: d2k_personal_shield_1_heavy.aud, d2k_personal_shield_2_heavy.aud, d2k_personal_shield_3_heavy.aud, d2k_personal_shield_4_heavy.aud, d2k_personal_shield_5_heavy.aud, d2k_personal_shield_6_heavy.aud, d2k_personal_shield_7_heavy.aud
     Warhead@PersonalShieldHits: GrantExternalCondition
-		Range: 0c128
+		Range: 128
 		Condition: SmallCaliberShieldHits
 		Duration: 300
 		ValidTargets: PersonalShielded, PersonalShieldedSard, PersonalShieldedHeavy
@@ -25,7 +25,7 @@ Sniper:
 	ValidTargets: Ground, Infantry
 	InvalidTargets: Vehicle, Water, Structure, Wall, Husk
 	ReloadDelay: 40
-	Range: 8c0
+	Range: 8192
 	Projectile: Bullet
 		Speed: 5c682
 	Warhead@1Dam: SpreadDamage
@@ -38,12 +38,12 @@ Sniper:
 camea_sniper:
     Inherits: Sniper
     ReloadDelay: 60
-    Range: 11c0
+    Range: 11264
     
 ^HeavyMG:
     Inherits@personalshield: D2K_Personal_Shield_Impact
 	ReloadDelay: 25
-	Range: 6c0
+	Range: 6144
 	Report: gun8.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -65,7 +65,7 @@ HighV:
 
 Vulcan:
 	Inherits: ^HeavyMG
-	Range: 8c0
+	Range: 8192
 	Burst: 9
 	BurstDelays: 2
 	FirstBurstTargetOffset: -2984,0,0
@@ -86,8 +86,8 @@ HeliAGGun:
 	ReloadDelay: 20
 	Burst: 2
 	BurstDelays: 0
-	Range: 4c0
-	MinRange: 0c768
+	Range: 4096
+	MinRange: 768
 	Report: gun5.aud
 	Projectile: Bullet
 		Blockable: false
@@ -114,7 +114,7 @@ HeliAAGun:
 Pistol:
 	Inherits: ^LightMG
 	ReloadDelay: 7
-	Range: 3c0
+	Range: 3072
 	Report: gun18.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 100
@@ -124,7 +124,7 @@ Pistol:
 ^LightMG:
 	Inherits: ^HeavyMG
 	ReloadDelay: 20
-	Range: 4c0
+	Range: 4096
 	InvalidTargets: Wall
 	Report: mgun2.aud
 	Warhead@1Dam: SpreadDamage
@@ -163,7 +163,7 @@ MachineGunH:
 
 APCGun:
 	ReloadDelay: 18
-	Range: 5c0
+	Range: 5120
 	Report: gun20.aud
 	Projectile: Bullet
 		Speed: 900
@@ -183,7 +183,7 @@ APCGun:
 
 APCGun.AA:
 	Inherits: APCGun
-	Range: 6c0
+	Range: 6144
 	ValidTargets: Air
 	Projectile: Bullet
 		Speed: 2c0

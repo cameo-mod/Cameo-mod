@@ -386,7 +386,7 @@ NaxiFlamerTroopExplode:
 NaxiSniper:
 	Inherits: ^SniperWeapon
 	ReloadDelay: 120
-	Range: 8281
+	Range: 7777
 	Warhead@SniperWeapon: SpreadDamage
 		Damage: 24000
 	Warhead@SniperWeaponExtraDamage: OpenToppedDamage
@@ -396,7 +396,7 @@ NaxiSniper:
 
 NaxiSniperE:
 	Inherits: NaxiSniper
-	Range: 9281
+	Range: 8888
 	Burst: 2
 	BurstDelays: 3
 

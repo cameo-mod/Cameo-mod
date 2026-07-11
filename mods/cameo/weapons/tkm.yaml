@@ -921,7 +921,8 @@ HueyFireMissiles:
 	Warhead@EffectAir: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
-
+	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 500
 HueyCryoMissiles:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon

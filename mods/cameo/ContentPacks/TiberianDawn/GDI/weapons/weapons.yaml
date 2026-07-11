@@ -1695,7 +1695,7 @@ GunboatMissileAMT:
 	Inherits: ^AMTProjectile
 
 TDIonCannon:
-	Range: 12c0
+	Range: 12288
 	AirThreshold: 99c0
 	ValidTargets: Ground, Water, Air
  	## Hack: using Bullet, Beam image will disappear at 11 tick and its warheads play at 12 tick, which has 1 tick blank
@@ -1735,7 +1735,7 @@ TDIonCannon:
 
 TDIonCannonLaunch:
 	AirThreshold: 99c0
-	Range: 99c0
+	Range: 101376
 	ValidTargets: Ground, Water, Air
 	Projectile: AthenaProjectile
 		Altitude: 22856
@@ -1748,7 +1748,7 @@ TDIonCannonLaunch:
 
 TDIonBeam:
 	AirThreshold: 99c0
-	Range: 99c0
+	Range: 101376
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 2159

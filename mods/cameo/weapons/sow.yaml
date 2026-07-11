@@ -57,8 +57,8 @@
 	Inherits: ^sow_antiair
 	InvalidTargets: Ground
 	ValidTargets: Air
-	Range: 7c512
-	MinRange: 0c256
+	Range: 7680
+	MinRange: 256
 	Report: antiair_shoot.aud
 	Projectile: MissileCA
 		Arm: 5
@@ -114,7 +114,7 @@
 sow_lt_cannon:
 	Inherits: ^sow_cannon
 	ReloadDelay: 30
-	Range: 5c0
+	Range: 5120
 	Report: lt_cannon_shoot.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
@@ -129,7 +129,7 @@ sow_lt_cannon:
 sow_lt_flame:
 	Inherits: ^sow_flame
 	ReloadDelay: 7
-	Range: 3c512
+	Range: 3584
 	Report: lt_flame.aud
 	Projectile: Bullet
 		Speed: 225
@@ -166,7 +166,7 @@ sow_lt_antiair:
 sow_lt_special:
 	Inherits: ^sow_special
 	ReloadDelay: 50
-	Range: 4c0
+	Range: 4096
 	Report: lt_special_shoot.aud
 	Projectile: Bullet
 		Image: sowlightspecial_shot
@@ -185,7 +185,7 @@ sow_lt_special:
 sow_lt_siege:
 	Inherits: ^sow_siege
 	ReloadDelay: 50
-	Range: 7c512
+	Range: 7680
 	Report: lt_siege_shoot.aud
 	Projectile: Bullet
 		Speed: 500
@@ -208,7 +208,7 @@ sow_mt_cannon:
 	ReloadDelay: 40
 	Burst: 2
 	BurstDelays: 5
-	Range: 7c512
+	Range: 7680
 	StartBurstReport: mt_cannon_shoot.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 7500
@@ -223,7 +223,7 @@ sow_mt_cannon:
 sow_mt_flame:
 	Inherits: ^sow_flame
 	ReloadDelay: 7
-	Range: 5c0
+	Range: 5120
 	Report: lt_flame.aud
 	Projectile: Bullet
 		Speed: 225
@@ -261,7 +261,7 @@ sow_mt_special:
 	ReloadDelay: 75
 	Burst: 2
 	BurstDelays: 5
-	Range: 5c0
+	Range: 5120
 	Report: mt_special_shoot.aud
 	Projectile: Bullet
 		Image: sowmedspecial_shot
@@ -280,8 +280,8 @@ sow_mt_special:
 sow_mt_siege:
 	Inherits: ^sow_siege
 	ReloadDelay: 50
-	Range: 10c0
-	MinRange: 0c768
+	Range: 10240
+	MinRange: 768
 	Report: mt_siege_shoot.aud
 	Projectile: Bullet
 		Speed: 400
@@ -304,7 +304,7 @@ sow_ht_cannon:
 	ReloadDelay: 50
 	Burst: 3
 	BurstDelays: 5
-	Range: 10c0
+	Range: 10240
 	StartBurstReport: ht_cannon_shoot.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 10000
@@ -321,7 +321,7 @@ sow_ht_flame:
 	ReloadDelay: 7
 	Burst: 2
 	BurstDelays: 0
-	Range: 6c512
+	Range: 6656
 	Report: lt_flame.aud
 	Projectile: Bullet
 		Speed: 225
@@ -360,8 +360,8 @@ sow_ht_siege:
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 15
-	Range: 12c512
-	MinRange: 1c0
+	Range: 12800
+	MinRange: 1024
 	Report: ht_siege_shoot.aud
 	Projectile: Bullet
 		Speed: 325
@@ -384,7 +384,7 @@ sow_ht_special:
 	ReloadDelay: 100
 	Burst: 3
 	BurstDelays: 10
-	Range: 6c0
+	Range: 6144
 	Report: ht_special_shoot.aud
 	Projectile: Bullet
 		Image: sowheavyspecial_shot
@@ -412,8 +412,8 @@ sow_ht_special:
 		
 sow_mech_avenger:
 	ReloadDelay: 64
-	Range: 12c512
-	MinRange: 0c768
+	Range: 12800
+	MinRange: 768
 	Report: turret6_shoot.aud
 	ValidTargets: Air
 	Burst: 8
@@ -453,8 +453,8 @@ sow_mech_avenger_mk2:
 	ReloadDelay: 128
 	Burst: 16
 	BurstDelays: 4
-	Range: 25c0
-	MinRange: 3c0
+	Range: 25600
+	MinRange: 3072
 	Report: tripler_payload.aud
 	Projectile: MissileCA
 		Speed: 600
@@ -470,7 +470,7 @@ sow_mech_kodiak:
 	ReloadDelay: 15
 	Burst: 2
 	BurstDelays: 3
-	Range: 9c0
+	Range: 9216
 	StartBurstReport: kodiak_shoot.aud
 	InvalidTargets: Air
 	ValidTargets: Ground
@@ -500,8 +500,8 @@ sow_mech_kodiak_mk2:
 	BurstDelays: 5
 	-StartBurstReport:
 	Report: kodiak_shoot.aud
-	Range: 10c0
-	MinRange: 2c0
+	Range: 10240
+	MinRange: 2048
 	Projectile: LaserZap
 		Width: 300
 		HitAnim: laserfire
@@ -530,7 +530,7 @@ sow_mech_kodiak_mk2:
 		
 sow_mech_gatling:
 	ReloadDelay: 5
-	Range: 11c0
+	Range: 11264
 	StartBurstReport: cannon_impact.aud
 	Burst: 2
 	BurstDelays: 1
@@ -571,7 +571,7 @@ sow_mech_gatling_mk2:
 	Inherits: sow_mech_gatling
 	ReloadDelay: 4
 	ValidTargets: Air, Ground
-	Range: 12c0
+	Range: 12288
 	Warhead@1Dam: SpreadDamage
 		ValidTargets: Ground, Air
 		Spread: 400
@@ -581,7 +581,7 @@ sow_mech_jaguar:
 	ReloadDelay: 64
 	Burst: 4
 	BurstDelays: 4
-	Range: 7c0
+	Range: 7168
 	Report: plasma_robot_shoot.aud
 	Projectile: Bullet
 		Image: sowmechjaguar_shot
@@ -621,7 +621,7 @@ sow_mech_jaguar_mk2:
 	ReloadDelay: 40
 	Burst: 4
 	BurstDelays: 4
-	Range: 8c0
+	Range: 8192
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 40000
@@ -636,7 +636,7 @@ sow_mech_jaguar_mk2:
 
 sow_mech_achilles:
 	ReloadDelay: 10
-	Range: 2c512
+	Range: 2560
 	Report: karate_robot_shoot.aud
 	ValidTargets: Infantry, Building, Vehicle, Ground
 	TargetActorCenter: true
@@ -657,7 +657,7 @@ sow_mech_achilles:
 	
 sow_advancer:
 	ReloadDelay: 130
-	Range: 9c0
+	Range: 9216
 	Report: advancer_shoot.aud
 	ValidTargets: Vehicle, Infantry, Air
 	ValidStances: Enemy
@@ -686,7 +686,7 @@ sow_advancer:
 sow_advancer_mk2:
 	Inherits: sow_advancer
 	ReloadDelay: 100
-	Range: 10c0
+	Range: 10240
 	Report: advancer_shoot.aud
 	ValidStances: Enemy
 	Projectile: LaserZap
@@ -706,7 +706,7 @@ sow_advancer_mk2:
 		
 sow_advancer_repair:
 	ReloadDelay: 14
-	Range: 2c0
+	Range: 2048
 	ValidTargets: Repairing, ivanattached, lockdowned
 	ValidStances: Ally
 	Report: advancer_repair.aud
@@ -736,7 +736,7 @@ sow_advancer_repair:
 	
 sow_advancer_capture:
 	ReloadDelay: 16
-	Range: 1c0
+	Range: 1024
 	ValidTargets: Structure, Defense, Building
 	ValidStances: Enemy, Neutral
 	Report: advancer_capture.aud
@@ -762,7 +762,7 @@ sow_advancer_capture:
 		
 sow_advancer_capture_mk2:
 	Inherits: sow_advancer_capture
-	Range: 2c0
+	Range: 2048
 	ReloadDelay: 12
 	Projectile: LaserZap
 		Width: 360
@@ -773,7 +773,7 @@ sow_advancer_capture_mk2:
 		
 ^sow_advancer_upgradebeam:
 	ReloadDelay: 14
-	Range: 0c128
+	Range: 128
 	ValidTargets: sowupgrade, sowupgrade_1, sowupgrade_2, sowupgrade_3
 	ValidStances: Ally
 	Duration: 15
@@ -785,7 +785,7 @@ sow_advancer_capture_mk2:
 sow_advancer_upgrade:
 	Inherits: ^sow_advancer_upgradebeam
 	Warhead@sowupgrade: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade
 		ValidTargets: sowupgrade
 		Delay: 350
@@ -793,7 +793,7 @@ sow_advancer_upgrade:
 sow_advancer_upgrade_1:
 	Inherits: ^sow_advancer_upgradebeam
 	Warhead@sowupgrade_1: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade_1
 		ValidTargets: sowupgrade_1
 		Delay: 350
@@ -801,7 +801,7 @@ sow_advancer_upgrade_1:
 sow_advancer_upgrade_2:
 	Inherits: ^sow_advancer_upgradebeam
 	Warhead@sowupgrade_2: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade_2
 		ValidTargets: sowupgrade_2
 		Delay: 350
@@ -809,7 +809,7 @@ sow_advancer_upgrade_2:
 sow_advancer_upgrade_3:
 	Inherits: ^sow_advancer_upgradebeam
 	Warhead@sowupgrade_3: GrantExternalCondition
-		Range: 2c512
+		Range: 2560
 		Condition: sowupgrade_3
 		ValidTargets: sowupgrade_3
 		Delay: 350
@@ -979,7 +979,7 @@ sow_fighter_husk:
 		
 sowasteroid:
 	ReloadDelay: 75
-	Range: 100c0
+	Range: 102400
 	Projectile: GravityBomb
 		Image: sowasteroid
 		Velocity: 0, 0, -230
@@ -1011,7 +1011,7 @@ sowasteroid:
 		
 sowasteroid_b:
 	Inherits: sowasteroid
-	Range: 130c0
+	Range: 133120
 	ReloadDelay: 25
 	Projectile: GravityBomb
 		Image: sowasteroid_b
@@ -1028,7 +1028,7 @@ sowasteroid_b:
 			
 sowasteroid_c:
 	Inherits: sowasteroid
-	Range: 80c0
+	Range: 81920
 	ReloadDelay: 50
 	Projectile: GravityBomb
 		Image: sowasteroid_c
@@ -1045,7 +1045,7 @@ sowasteroid_c:
 			
 satelliteprotection:
 	ReloadDelay: 100
-	Range: 1c512
+	Range: 1536
 	Report: satelliteprotection.aud
 	ValidStances: Enemy
 	ValidTargets: Air
@@ -1073,7 +1073,7 @@ satelliteprotection:
 satelliteprotection_mk2:
 	Inherits: satelliteprotection
 	ReloadDelay: 50
-	Range: 3c0
+	Range: 3072
 	Projectile: LaserZap
 		Width: 500
 		HitAnim: laserfire
@@ -1088,7 +1088,7 @@ sowfighter:
 	ReloadDelay: 100
 	Burst: 5
 	BurstDelay: 1
-	Range: 5c0
+	Range: 5120
 	Projectile: GravityBomb
 		Image: PARABOMB
 		OpenSequence: open
@@ -1117,7 +1117,7 @@ sowfighter:
 	
 sowbomber:
 	ReloadDelay: 2
-	Range: 7c512
+	Range: 7680
 	Projectile: GravityBomb
 		Image: sowbomber_bomb
 		OpenSequence: open
@@ -1146,7 +1146,7 @@ sowbomber:
 		
 sowtripler:
 	ReloadDelay: 30
-	Range: 3c0
+	Range: 3072
 	Report: tripler_payload.aud
 	Projectile: GravityBomb
 		Image: tripler_payload
@@ -1223,7 +1223,7 @@ sow_gun_tower:
 sow_antiair_tower:
 	ReloadDelay: 64
 	Range: 12345
-	MinRange: 0c512
+	MinRange: 512
 	Report: turret2_shoot.aud
 	InvalidTargets: Ground
 	ValidTargets: Air
@@ -1340,7 +1340,7 @@ sow_defragmenter_tower:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 123
 	Range: 12345
-	MinRange: 2c0
+	MinRange: 2048
 	Burst: 6
 	BurstDelays: 6
 	StartBurstReport: turret5_shoot.aud
@@ -1378,10 +1378,10 @@ sow_defragmenter_tower:
 
 sow_vulcano_tower:
 	ReloadDelay: 64
-	Range: 16c0
+	Range: 16384
 	Burst: 8
 	BurstDelays: 4
-	MinRange: 1c0
+	MinRange: 1024
 	Report: turret6_shoot.aud
 	InvalidTargets: Ground
 	ValidTargets: Air

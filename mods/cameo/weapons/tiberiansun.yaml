@@ -21,7 +21,7 @@
 ^TSCannon:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 50
-	Range: 6c0
+	Range: 6144
 	Report: 120mmf.aud
 	Projectile: Bullet
 		Speed: 682
@@ -46,7 +46,7 @@
 
 ^TSCannonEffect:
 	ReloadDelay: 50
-	Range: 6c0
+	Range: 6144
 	Report: 120mmf.aud
 	Projectile: Bullet
 		Image: 120MM
@@ -265,7 +265,7 @@ TS155mm_bluenuke:
 	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 60000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 39000
+		Damage: 30000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 30
 	Warhead@HeavyBomb: SpreadDamage
@@ -391,7 +391,7 @@ TSGrenadeAA:
 TSGrenadeG:
 	Inherits: TSGrenade
 	ReloadDelay: 45
-	Range: 6c512
+	Range: 6656
 
 TS105mm:
 	Inherits: ^TSCannon
@@ -411,8 +411,8 @@ TS105mm:
 
 TS152mm:
 	Inherits: ^TSCannon
-	Range: 10c512
-	MinRange: 3c512
+	Range: 10752
+	MinRange: 3584
 	ReloadDelay: 70
 	Projectile: Bullet
 		Blockable: true
@@ -455,7 +455,7 @@ MammothTankCannon:
 
 ^TSEnergyBlast:
 	ReloadDelay: 50
-	Range: 7c0
+	Range: 7168
 	Report: scrin5b.aud
 	ValidTargets: Ground
 	Warhead@1Dam: SpreadDamage
@@ -646,7 +646,7 @@ TSLaserFence:
 ^TSHealWeapon:
 	Inherits: Heal
 	ReloadDelay: 80
-	Range: 2c849
+	Range: 2897
 	Report: healer1.aud
 	TargetActorCenter: true
 	Projectile: InstantHit
@@ -705,12 +705,12 @@ TSBazooka:
 
 TSBazookaG:
 	Inherits: TSBazooka
-	Range: 9c0
+	Range: 9216
 
 TSReaperTusk:
 	Inherits: ^TSDefaultMissile
 	ReloadDelay: 77
-	Range: 7c777
+	Range: 7945
 	Burst: 2
 	BurstDelays: 7
 	Report: samshot1.aud
@@ -751,7 +751,7 @@ TSReaperTusk:
 TSAegisMissile:
 	Inherits: ^TSDefaultMissile
 	Burst: 2
-	Range: 9c0
+	Range: 9216
 	Report: vaegatta.wav, vaegattb.wav
 	Projectile: Missile
 		RangeLimit: 18c0
@@ -761,7 +761,7 @@ TSAegisMissile:
 TSMammothTusk_elite:
 	Inherits: TSMammothTusk2
 	Burst: 8
-	Range: 9c0
+	Range: 9216
 
 TSBikeMissile:
 	Inherits: ^LightMissile
@@ -1003,7 +1003,7 @@ TSChemAdatsMissileAA:
 
 TSSlimeAttack:
 	ReloadDelay: 80
-	Range: 1c384
+	Range: 1408
 	Report: vicer1.aud
 	Projectile: InstantHit
 	InvalidTargets: Wall, Bridge
@@ -1019,7 +1019,7 @@ TSSlimeAttack:
 
 TSTentacle:
 	ReloadDelay: 80
-	Range: 1c384
+	Range: 1408
 	Report: floatk1.aud
 	Projectile: InstantHit
 	InvalidTargets: Wall, Bridge
@@ -1037,7 +1037,7 @@ TSTentacle:
 
 ZClaw3:
 	ReloadDelay: 80
-	Range: 1c384
+	Range: 1408
 	Report: floatk1.aud
 	Projectile: InstantHit
 	InvalidTargets: Wall, Bridge
@@ -1063,7 +1063,7 @@ TSVeins:
 
 TSVeinholeSmoke:
 	Inherits: ^MissileWeapon
-	Range: 7c0
+	Range: 7168
 	Report: Munchymunchy.aud
 	ReloadDelay: 20
 	Burst: 3
@@ -1085,7 +1085,7 @@ TSVeinholeSmoke:
 
 TSEMPLimpetBomb:
 	ReloadDelay: 50
-	Range: 1c512
+	Range: 1536
 	ValidTargets: Vehicle
 	Projectile: InstantExplode
 	Warhead@1: TargetDamage
@@ -1094,7 +1094,7 @@ TSEMPLimpetBomb:
 		ValidTargets: Vehicle
 		ValidRelationships: Enemy
 		Duration: 240
-		Range: 1c512
+		Range: 1536
 
 TSLocustBomb:
 	Inherits: ^HeavyBomb
@@ -1163,7 +1163,7 @@ TSVulcan2:
 	Inherits: ^TSMG
 	ReloadDelay: 50
 	Burst: 3
-	Range: 6c0
+	Range: 6144
 	Report: tsgun4.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 5000
@@ -1217,7 +1217,7 @@ TSLaserRaiderCannon:
 
 TSPistola:
 	Inherits: ^TSMG
-	Range: 3c0
+	Range: 3072
 	Report: gun18.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 200
@@ -1242,7 +1242,7 @@ TSEngineerPistol:
 TSSniperE:
 	Inherits: TSSniper
 	ReloadDelay: 45
-	Range: 8c512
+	Range: 8704
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			Light: 40
@@ -1264,19 +1264,19 @@ MutDualWield:
 MutDualWieldE:
 	Inherits: MutDualWield
 	Burst: 4
-	Range: 5c0
+	Range: 5120
 
 MutAPRifleE:
 	Inherits: MutAPRifle
 	ReloadDelay: 30
-	Range: 6c0
+	Range: 6144
 
 TSTacticalMissile:
 	Inherits: ^TSDefaultMissile
 	Report: samshot1.aud
 	ValidTargets: Ground, Water, Air
-	Range: 9999c0
-	MinRange: 3c0
+	Range: 10238976
+	MinRange: 3072
 	AirThreshold: 11c0
 	Projectile: Missile
 		RangeLimit: -1
@@ -1340,7 +1340,7 @@ TSTacticalMissileDamage:
 TSMissileBomblet:
 	AirThreshold: 11c0
 	ValidTargets: Ground, Water, Air
-	Range: 7c0
+	Range: 7168
 	Projectile: Bullet
 		Image: 120mm
 		TrailImage: smokey
@@ -1408,7 +1408,7 @@ TSChemBomblet:
 		ValidTargets: Ground, Water, Air
 
 TSHSeekerBomb:
-	Range: 0c128
+	Range: 128
 	ReloadDelay: 120
 	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
@@ -1440,7 +1440,7 @@ TSHSeekerBomb:
 
 TSHSeekerTargeting:
 	ReloadDelay: 30
-	Range: 4c0
+	Range: 4096
 	ValidTargets: Ground, Water, Air
 	TargetActorCenter: true
 	Projectile: InstantHit
@@ -1480,7 +1480,7 @@ TSCloud:
 TSDroppodSpawner:
 	Projectile: InstantExplode
 	ValidTargets: Ground, Water, Air
-	Range: 4c0
+	Range: 4096
 	Warhead@1: FireShrapnel
 		InvalidTargets: FireImmune
 		ValidTargets: Ground, Water, Air
@@ -1497,7 +1497,7 @@ TSDroppodSpawner:
 		AirThreshold: 8c0
 
 TSDroppod1:
-	Range: 1c0
+	Range: 1024
 	Projectile: AthenaProjectile
 		Altitude: 25460
 	Warhead@Dam: TargetDamage
@@ -1681,7 +1681,7 @@ NODMutant4:
 		Delay: 10
 
 FloaterSpawner:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@1: CreateEffect
 		Image: tsdig

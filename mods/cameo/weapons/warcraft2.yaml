@@ -201,7 +201,7 @@ wc2knightslice:
 
 wc2paladinholyvision:
 	ReloadDelay: 60
-	Range: 500c0
+	Range: 512000
 	Report: wc2_holyvisn.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -222,7 +222,7 @@ wc2paladinholyvision:
 
 wc2paladinholyvision_hit:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: wc2_holyvisn.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -298,7 +298,7 @@ wc2holyvisionSuper_hit:
 # Just gonna leave it as able to target vehicles in general for now. If we make a "vanilla" wc2 human faction, we can re-implement this.
 wc2paladinhealing:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: wc2_heal.aud
 	ValidTargets: Heal, Healing
 	# InvalidTargets: wc2_ballista
@@ -324,7 +324,7 @@ wc2paladinhealing:
 
 wc2priesthealing:
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: wc2_heal.aud
 	ValidTargets: Heal, Healing
 	# InvalidTargets: wc2_ballista
@@ -369,7 +369,7 @@ wc2healingSuper_hit:
 
 wc2paladinexorcism:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: wc2_exorcism.aud
 	ValidTargets: undeadtarget
 	Projectile: InstantHit
@@ -625,7 +625,7 @@ wc2demolitionsquadMelee:
 
 wc2demolitionsquadTargeting:
 	ValidTargets: Ground, Water
-	Range: 1c512
+	Range: 1536
 	Projectile: InstantHit
 		Blockable: false
 	Warhead@1Dam: TargetDamage
@@ -942,7 +942,7 @@ wc2mageSlow:
 	Warhead@Condition: GrantExternalCondition
 		Condition: wc2_cond_slow
 		Duration: 600
-		Range: 0c341
+		Range: 341
 		ValidTargets: Ground, Water, Air
 
 wc2magePolymorph:
@@ -964,7 +964,7 @@ wc2magePolymorph:
 	Warhead@Polymorph: GrantExternalCondition
 		Condition: wc2_cond_polymorph
 		Duration: 1
-		Range: 0c341
+		Range: 341
 		ValidTargets: Ground, Water, Air
 
 # Mage version of Blizzard.
@@ -1237,7 +1237,7 @@ wc2blizzardSuper:
 
 # This spreads a bunch of projectiles out, which then become...
 wc2blizzardSuper_Spread:
-	Range: 5c0
+	Range: 5120
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
 		Speed: 0c512
@@ -1387,7 +1387,7 @@ wc2ogrepunch:
 
 wc2ogremageEyeOfKilrogg:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: eye_of_killrog.aud
 	ValidTargets: Ground
 	Projectile: InstantHit
@@ -1411,7 +1411,7 @@ wc2ogremageEyeOfKilrogg:
 
 wc2ogremageBloodlust:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: wc2_blodlust.aud
 	ValidTargets: bloodlust_target
 	Projectile: Missile
@@ -1438,12 +1438,12 @@ wc2ogremageBloodlust:
 	Warhead@Condition: GrantExternalCondition
 		Condition: wc2_cond_bloodlust
 		Duration: 600
-		Range: 0c341
+		Range: 341
 		ValidTargets: bloodlust_target
 
 wc2ogremageRunes:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: wc2_runes.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -1463,7 +1463,7 @@ wc2ogremageRunes:
 		Footprint: _X_ XXX _X_
 
 wc2ogremageRunes_Spread:
-	Range: 5c0
+	Range: 5120
 	InvalidTargets: wc2_runes
 	Projectile: InstantHit
 	Warhead@Mines: SpawnActor
@@ -1590,7 +1590,7 @@ wc2deathknightDeathCoilScatter_Right:
 
 wc2deathknightHaste:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: wc2_haste.aud
 	ValidTargets: haste_target
 	Projectile: Missile
@@ -1618,7 +1618,7 @@ wc2deathknightHaste:
 	Warhead@Condition: GrantExternalCondition
 		Condition: wc2_cond_haste
 		Duration: 600
-		Range: 0c341
+		Range: 341
 		ValidTargets: haste_target
 
 wc2deathknightDeathAndDecay:
@@ -1718,7 +1718,7 @@ wc2deathknightDeathAndDecay_Hit:
 
 wc2deathknightRaiseDead:
 	ReloadDelay: 60
-	Range: 5c0
+	Range: 5120
 	Report: wc2_raise_dead.aud
 	ValidTargets: Ground
 	Projectile: InstantHit
@@ -1817,7 +1817,7 @@ wc2deathanddecaySuper:
 
 # This spreads a bunch of projectiles out, which then become...
 wc2deathanddecaySuper_Spread:
-	Range: 5c0
+	Range: 5120
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantHit
 		Blockable: false
@@ -2139,7 +2139,7 @@ wc2cannontowerFire:
 		Damage: 4000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 3000
+		Damage: 2000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2
@@ -2166,7 +2166,7 @@ wc2cannontowerFire:
 # 2-35 WC2 damage. 35 Base, 0 Pierce.
 wc2lightshipFire:
 	ReloadDelay: 70
-	Range: 5c0
+	Range: 5120
 	Report: wc2_fireball.aud
 	ValidTargets: Ground, Water, Air
 	Projectile: Bullet
@@ -2205,7 +2205,7 @@ wc2lightshipFire:
 # 50-130 WC2 damage. 130 Base, 0 Pierce.
 wc2heavyshipFire:
 	ReloadDelay: 130
-	Range: 7c512
+	Range: 7680
 	Report: wc2_fireball.aud
 	ValidTargets: Ground, Water
 	Projectile: Bullet
@@ -2243,7 +2243,7 @@ wc2heavyshipFire:
 # 10-50 WC2 damage. 50 Base, 0 Pierce.
 wc2submarineFire:
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: wc2_fireball.aud
 	ValidTargets: Water
 	Projectile: Bullet
@@ -2280,7 +2280,7 @@ wc2submarineFire:
 
 wc2tornadoTest:
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: bowfire.aud
 	ValidTargets: Ground
 	Projectile: Bullet
@@ -2320,7 +2320,7 @@ wc2tornadoTest:
 # 2-12 WC2 damage. 8 Base, 4 Pierce.
 wc2daemonFire:
 	ReloadDelay: 40
-	Range: 5c0
+	Range: 5120
 	Report: wc2_fireball.aud
 	ValidTargets: Ground
 	Projectile: Bullet

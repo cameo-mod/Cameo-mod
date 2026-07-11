@@ -266,23 +266,62 @@ Q    = HP·Speed·Range·K·DPS·L·M / 12 500 000
 Cost = (O + P + Q) / 3                                    (column R = S)
 ```
 
-O is linear in each stat, P pairwise (survivability × mobility and
-reach × damage), Q the full product — so cost grows superlinearly when
-everything is high at once. **Workflow: the price S is set FIRST** (last
-column); Range is then solved from the identity (column F formula), so
-tuning HP/Speed/Damage/Reload auto-rebalances Range to hold the price.
-Range and DPS cells are never hand-edited.
+O is linear in each stat, P pairwise — by design intent the CHASSIS
+(HP·Speed) plus the TURRET (Range·DPS) — Q the full product. Pure
+linear made one-weak-stat units undercosted, pure product made the
+same units overcosted, so the average of all three was chosen. This is
+the FIRST iteration: it does not yet price anti-air capability,
+projectile speed, or area of effect — those must be added in a future
+revision (how is an open design question). **Workflow: the price S is
+set FIRST** (last column); Range is then solved from the identity
+(column F formula), so tuning HP/Speed/Damage/Reload auto-rebalances
+Range to hold the price. Range and DPS cells are never hand-edited.
 
-**Column semantics** (values observed; meanings to confirm):
-- `WeaponClass` H ∈ {0.75, 0.875, 1, 1.05, 1.125, 1.25, 1.5} — a weapon
-  quality multiplier on DPS. ❓ exact mapping to the Weapon Types sheet.
-- `Special` K ∈ {0.75, 1, 1.25, 1.5, 1.75, 2} — ability premium.
-  ❓ which abilities cost which factor.
+**Column semantics** (confirmed by design 2026-07-11):
+- `WeaponClass` H — from the weapons yaml warhead classes. Every weapon
+  family exists as **Light / Medium / Heavy** warheads: Light = 0.75,
+  Medium = 1.0, Heavy = 1.25. Combining warheads AVERAGES the classes:
+  Light+Medium = 0.875, Medium+Heavy = 1.125.
+- `Special` K — **+0.25 per special ability** (C4, EMP, stealth, point
+  defense laser, …). Example: Nod laser commando = C4 + Stealth + PDL =
+  1.75. Some over-strong kits are simply set to 2. FUTURE: replace the
+  flat +0.25 with per-ability values that represent each ability's real
+  power.
+- `TechTier` M — cost discount for late tech: **Tier 3 = 0.75, Tier 4/5
+  = 0.5** (rewards the tech-center investment). The rule was introduced
+  late, so many rows are missing it — correcting those gaps is standing
+  work; always cross-reference sheet vs in-game stats and ASK on any
+  mismatch.
+- **Burst rule**: sheet Damage = single-burst damage × bursts; sheet
+  ReloadDelay = weapon ReloadDelay + (bursts − 1) × BurstDelay (the
+  weapon only reloads after the full burst).
 - `UnitClass` L — per-section class factor (infantry sections 0.4–1,
   vehicles 0.25–1.25, defenses 0.225/0.325/0.35). ❓ table of sections.
-- `TechTier` M ∈ {1, 0.75, 0.5} — appears to DISCOUNT stats for
-  higher-tech units. ❓ which tier maps to which value.
-- ❓ Defenses have no movement — what goes in their Speed column?
+- **Defenses use Speed = 100 always** — immobility is priced through
+  their LOW UnitClass factors instead, keeping the formula uniform.
+
+**The baseline unit (design 2026-07-11): the Naxis Tiger Tank** —
+100 000 HP, 100 Speed, 10 000 damage, range 5.0 (= 5000 wdist,
+written literally as `Range: 5000` in the weapons yaml — Cameo uses
+plain wdist integers, never OpenRA's `4c904` c-notation; the sheet's
+Range unit is wdist/1000, NOT cells since a cell is 1024),
+50 reload, all modifiers 1 → DPS 200 and **O = P = Q = Cost = 800
+exactly**. Every stat trade in the system is anchored on these round
+numbers.
+
+**Known limitation — the low end breaks (second iteration planned).**
+The formula has no intercept: cost → 0 forces every stat toward 0
+simultaneously, so very cheap units (Minigunner at 100, Naxi Rifle
+Recruit at 50) come out unusably weak — a unit's fixed "cost of
+existing" (pathing, pop slot, minimum viable rifle) is not priced.
+Stopgap in game: strong damage-reduction multipliers on the scout
+infantry template. Design direction instead: **one baseline unit per
+unit class** (scout/basic/heavy/hero infantry, each with Tiger-style
+round numbers), and price by normalized deviation from the class
+anchor: `Cost = Cost₀ × (O/O₀ + P/P₀ + Q/Q₀) / 3`. At each anchor the
+identity is exact (like the Tiger's 800); below it, stats degrade far
+more gently than the global formula, which fixes the low end. The
+UnitClass column is then absorbed into the class baselines.
 
 **Armor & versus system (hypothesis to verify in yaml).** 20 armor
 classes in 4 categories (Infantry: None/Flak/Plate/Hero; Vehicles:
@@ -294,15 +333,55 @@ Infantry/Vehicle/Aircraft/Building, a weapon band (light/medium/heavy),
 and SCALING tables — six bands (SmallArms/Light/Medium/Heavy/
 Superheavy/Superweapon) with per-rank percentage columns starting at
 100 and stepping by 6/5/4/3/2/1 per rank, plus a low table starting at
-15–40. ❓ hypothesis: a weapon's `Versus` per armor = scaling table
-value at that armor's rank in the ordering matching the weapon band —
-needs one worked example to confirm before generating yaml.
+15–40. The scaling tables are the DESIGN REFERENCE that generated the
+in-yaml Versus tables; in the game they are realized once inside the
+weapon class templates and never re-derived per weapon.
+
+**Weapon construction law (design 2026-07-11).** The Versus tables live
+ONLY in the ~30 class templates of the central `weapons/weapons.yaml`
+(`^SmallArms ^Chaingun ^FlakWeapon ^MediumCannon ^HeavyMissile
+^LaserWeapon ^LightChemicalWeapon …`) and are **never modified without
+an explicit design order**. A new weapon:
+
+```
+MyWeapon:
+	Inherits: ^MediumCannon          # contributes its class warhead (versus)
+	Inherits@2: ^HeavyCannon         # LAST inherit WINS for the shared fields:
+	                                 # projectile, sounds, effects, defaults
+	                                 # all come from ^HeavyCannon here; the
+	                                 # warheads of BOTH accumulate
+	ReloadDelay: 50                  # own overrides beat every template
+	Range: 5000
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 8000                  # EVEN SPREAD — always identical values
+```
+
+Order the inherits so the template whose projectile/sound/feel you want
+comes LAST; the earlier inherits only contribute their warheads.
+
+- **Mixed class warheads always carry the SAME Damage** (even spread;
+  1,023 weapons comply, 49 violations flagged — mostly the imported
+  chem-upgrade weapons like TSChemBazooka 6000/24000; fix on order).
+- Template auxiliaries (`LaserExtraDamage` 600, `RailgunExtraDamage`,
+  `ShrapnelWeapon`, Tesla charged twins) ride along at fixed values and
+  are NOT part of the even-spread accounting or the sheet Damage.
+- ❓ FriendlyFire twins: some templates default them EQUAL to the main
+  damage (^MediumChemicalWeapon 1000/1000), some HALF (^LightFlameWeapon
+  2000/1000); the override convention needs a design ruling.
+- **Multi-weapon units**: the sheet Damage is the SUM over the baseline
+  loadout — every `primary` armament not gated behind an upgrade (GDI
+  Battle Tank: cannon 8000 + missiles 8000 = sheet 16000).
 
 **Definition of Done for a formula unit:** stats from the sheet map to
-yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (cells)→weapon
-`Range` (×1024 wdist), Damage→warhead `Damage`, ReloadDelay→weapon
-`ReloadDelay` (ticks); versus table per the armor system; every new
-unit gets its own unique weapon (§10).
+yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (wdist/1000)→weapon
+`Range` (×1000, written as a plain integer like `5000`), Damage→class
+warheads per the even-spread law, ReloadDelay→weapon `ReloadDelay`
+(ticks, burst rule applied); every new unit gets its own unique weapon
+(§10) inheriting the sealed class templates. **On any sheet↔game
+mismatch the balance sheet wins**; audit_balance_sheet.py is the
+detector and fixes land as ordered batches, never silently.
 
 ## 13. Map props (Obstacle target type)
 

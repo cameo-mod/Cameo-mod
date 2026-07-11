@@ -4,7 +4,7 @@ PDLaser:
 	ReloadDelay: 5
 	ValidTargets: Ground, Air, Missile, BulletCA, BallisticMissile
 	InvalidTargets: Infantry, Vehicle, Tank, Structure, Wall
-	Range: 2c512
+	Range: 2560
 	Projectile: LaserZap
 		Width: 30
 		Duration: 3
@@ -24,7 +24,7 @@ GenericC4:
 	TargetActorCenter: true
 	Report: icraatta.wav
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	ValidTargets: demolishable
 	InvalidTargets: ivanattached
 	Warhead@1: AttachDelayedWeapon
@@ -48,7 +48,7 @@ C4:
 ^FlameWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 55
-	Range: 2c512
+	Range: 2560
 	InvalidTargets: Wall
 	Report: flamer2.aud
 	Projectile: Bullet
@@ -79,7 +79,7 @@ Flamethrower:
 BigFlamer:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 50
-	Range: 3c512
+	Range: 3584
 	Projectile: Bullet
 		Speed: 341
 	Burst: 2
@@ -99,7 +99,7 @@ BigFlamer:
 Chemspray:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 65
-	Range: 3c0
+	Range: 3072
 	InvalidTargets:
 	Warhead@1Dam: SpreadDamage
 		Spread: 256
@@ -119,7 +119,7 @@ Chemspray:
 Napalm:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 4
-	Range: 2c0
+	Range: 2048
 	Burst: 2
 	BurstDelays: 2
 	-Projectile:
@@ -138,7 +138,7 @@ Napalm:
 
 Laser:
 	ReloadDelay: 40
-	Range: 7c512
+	Range: 7680
 	Report: obelray1.aud
 	Projectile: LaserZap
 		Width: 85
@@ -156,7 +156,7 @@ Laser:
 
 ^DinoWeapon:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -204,7 +204,7 @@ Demolish:
 ^FireWeapon:
 	ValidTargets: Ground, Water
 	ReloadDelay: 65
-	Range: 5c0
+	Range: 5120
 	Warhead@1Dam: SpreadDamage
 		Spread: 213
 		Damage: 15000
@@ -230,7 +230,7 @@ FireballLauncher:
 	Inherits: ^FireWeapon
 	Burst: 2
 	BurstDelays: 20
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Speed: 250
 		TrailImage: fb2
@@ -266,7 +266,7 @@ Flamer:
 
 ^TeslaWeapon:
 	ReloadDelay: 3
-	Range: 8c0
+	Range: 8192
 	Report: tesla1.aud
 	Projectile: LightningZap
 	Warhead@1Dam: SpreadDamage
@@ -285,7 +285,7 @@ TeslaZap:
 PortaTesla:
 	Inherits: ^TeslaWeapon
 	ReloadDelay: 70
-	Range: 6c0
+	Range: 6144
 	Report: shktrop1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 4500
@@ -296,13 +296,13 @@ PortaTesla:
 TTankZap:
 	Inherits: ^TeslaWeapon
 	ReloadDelay: 120
-	Range: 7c0
+	Range: 7168
 
 DogJaw:
 	ValidTargets: Infantry
 	InvalidTargets: DogImmune
 	ReloadDelay: 10
-	Range: 2c0
+	Range: 2048
 	Report: dogg5p.aud
 	TargetActorCenter: true
 	Projectile: InstantHit
@@ -314,7 +314,7 @@ DogJaw:
 
 Heal:
 	ReloadDelay: 80
-	Range: 4c0
+	Range: 4096
 	Report: heal2.aud
 	ValidTargets: Heal, plagued
 	Projectile: InstantExplode
@@ -348,7 +348,7 @@ Repair:
 
 SuicideBomberTargeting:
 	Inherits: DemoTruckTargeting
-	Range: 1c512
+	Range: 1536
 
 MADTankThump:
 	InvalidTargets: MADTank, Infantry
@@ -378,7 +378,7 @@ HealBuilding:
 	ReloadDelay: 5
 	Burst: 2
 	BurstDelays: 3
-	Range: 3c512
+	Range: 3584
 	ValidTargets: Repairing, ivanattached
 	Projectile: LaserZap
 		Color: 8888FF
@@ -395,7 +395,7 @@ HealBuilding:
 
 HealUnit:
 	ReloadDelay: 5
-	Range: 2c512
+	Range: 2560
 	ValidTargets: Healing, ivanattached
 	Projectile: LaserZap
 		Color: 99FF99
@@ -412,7 +412,7 @@ HealUnit:
 
 HealUnitFix:
 	ReloadDelay: 5
-	Range: 3c512
+	Range: 3584
 	ValidTargets: Healing, ivanattached
 	Projectile: LaserZap
 		Color: 99FF99
@@ -429,7 +429,7 @@ HealUnitFix:
 
 FlamerBunker:
 	Inherits: ^FlameWeapon
-	Range: 4c512
+	Range: 4608
 	Report: flmthrow.aud
 	Projectile: Bullet
 		Speed: 350
@@ -468,7 +468,7 @@ FiretruckFlamer:
 
 RASpiderSlice:
 	ReloadDelay: 15
-	Range: 1c0
+	Range: 1024
 	Report: sword1.aud,sword2.aud,sword3.aud
 	Projectile: InstantHit
 	Warhead@1Dam: SpreadDamage
@@ -485,7 +485,7 @@ RASpiderSlice:
         
 ZClaw1:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -502,7 +502,7 @@ ZClaw1:
 
 ZClaw2:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -519,7 +519,7 @@ ZClaw2:
 
 ZClaw3:
 	ReloadDelay: 30
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -605,7 +605,7 @@ AntFireball:
 	ReloadDelay: 50
 	Burst: 2
 	BurstDelays: 20
-	Range: 4c0
+	Range: 4096
 	Projectile: Bullet
 		Speed: 200
 	Warhead@1Dam: SpreadDamage
@@ -621,7 +621,7 @@ AntFireball:
 
 Tail2:
 	ReloadDelay: 30
-	Range: 1c0
+	Range: 1024
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -639,7 +639,7 @@ Tail2:
 
 Horn2:
 	ReloadDelay: 20
-	Range: 1c0
+	Range: 1024
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -658,7 +658,7 @@ Horn2:
 Teeth2:
 	ReloadDelay: 30
 	ValidTargets: Ground, Water, Air
-	Range: 2c0
+	Range: 2048
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -677,7 +677,7 @@ Teeth2:
 
 Claw2:
 	ReloadDelay: 20
-	Range: 1c0
+	Range: 1024
 	Report: dinoatk1.aud
 	Projectile: Bullet
 		Speed: 1c682
@@ -696,7 +696,7 @@ Claw2:
 Munch:
 	Report: Munchymunchy.aud
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -713,7 +713,7 @@ Punch:
 	Inherits: ^Cannon
 	Report: Munchymunchy.aud
 	ReloadDelay: 20
-	Range: 1c512
+	Range: 1536
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@1Dam: SpreadDamage
@@ -731,7 +731,7 @@ CannonBall:
 	Inherits: ^Cannon
 	ReloadDelay: 60
 	Burst: 3
-	Range: 4c0
+	Range: 4096
 	Report: turret1.aud
 	Projectile: Bullet
 		Speed: 200
@@ -756,7 +756,7 @@ CannonBall:
 
 Fireball:
 	ReloadDelay: 75
-	Range: 7c0
+	Range: 7168
 	Report: dsfirsht.aud
 	Projectile: Bullet
 		Speed: 250
@@ -783,8 +783,8 @@ Fireball:
 FireballAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 75
-	Range: 7c0
-	MinRange: 0c512
+	Range: 7168
+	MinRange: 512
 	Report: turret1.aud
 	Projectile: Missile
 		Arm: 3
@@ -812,7 +812,7 @@ FireballAA:
 
 PlasmaPuff:
 	ReloadDelay: 85
-	Range: 5c0
+	Range: 5120
 	Burst: 4
 	BurstDelays: 3
 	Report: dsplasma.aud
@@ -840,7 +840,7 @@ PlasmaPuff:
 
 FireBurst:
 	ReloadDelay: 120
-	Range: 7c0
+	Range: 7168
 	Report: DemonShoot.aud
 	Projectile: Bullet
 		Blockable: false
@@ -871,7 +871,7 @@ FireBurst:
         
 PlasmaBurst:
 	ReloadDelay: 100
-	Range: 7c0
+	Range: 7168
 	Report: dsfirsht.aud
 	Projectile: Bullet
 		Speed: 100
@@ -916,7 +916,7 @@ PlasmaBurst:
 Flamethrower2:
 	Inherits: ^Cannon
 	ReloadDelay: 4
-	Range: 5c0
+	Range: 5120
 	Burst: 2
 	BurstDelays: 2
 	Projectile: Bullet
@@ -961,7 +961,7 @@ Flamethrower2:
 Flamethrower3:
     Inherits: Flamethrower2
  	ReloadDelay: 4  
-    Range: 9c0
+    Range: 9216
     Burst: 1
 	BurstDelays: 0
  	Warhead@1Dam_impact: SpreadDamage
@@ -979,7 +979,7 @@ Flamethrower3:
         
 MiniGun:
 	ReloadDelay: 5
-	Range: 7c0
+	Range: 7168
 	Report: RedeemerGun.aud
 	Projectile: Bullet
 		Speed: 682
@@ -1006,7 +1006,7 @@ MiniGun:
 ShockShell:
 	Inherits: ^Artillery
 	ReloadDelay: 120
-	Range: 13c0
+	Range: 13312
 	Burst: 1
 	BurstDelays: 10
 	Report: AA.aud
@@ -1046,7 +1046,7 @@ ShockShell:
 EliminatorAA:
 	Inherits: ^AACannon
 	ReloadDelay: 100
-	Range: 12c0
+	Range: 12288
 	Report: EliminatorGun.aud
 	ValidTargets: Air
 	Projectile: Bullet
@@ -1072,7 +1072,7 @@ EliminatorAA:
 
 Lazer:
 	ReloadDelay: 150
-	Range: 12c0
+	Range: 12288
 	Report: raycharge.aud
 	Projectile: LaserZap
 		Width: 4
@@ -1093,7 +1093,7 @@ Lazer:
 
 Electricity:
 	ReloadDelay: 150
-	Range: 12c0
+	Range: 12288
 	Projectile: LightningZap
 	Warhead@1Dam: SpreadDamage
 		Spread: 42
@@ -1109,7 +1109,7 @@ Electricity:
 TripodPlasmaPuff:
 	Inherits: ^AntiGroundMissile
 	ReloadDelay: 15
-	Range: 10c0
+	Range: 10240
 	BurstDelays: 3
 	Report: dsplasma.aud
 	Projectile: Missile
@@ -1137,8 +1137,8 @@ TripodPlasmaPuff:
 TripodPlasmaballAA:
 	Inherits: ^AntiAirMissile
 	ReloadDelay: 15
-	Range: 12c0
-	MinRange: 0c512
+	Range: 12288
+	MinRange: 512
 	Report: dsfirsht.aud
 	Projectile: Missile
 		Arm: 3
@@ -1257,7 +1257,7 @@ TripodExplosion:
 
 NikoTeslaRed:
 	ReloadDelay: 3
-	Range: 8c0
+	Range: 8192
 	Report: tesla1.aud
 	Projectile: TeslaZap
 		Image: niko_teslazap_red

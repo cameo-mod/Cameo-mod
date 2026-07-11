@@ -4,7 +4,7 @@
 
 OP2bombchassisTargeting:
 	ValidTargets: Structure, Infantry, Vehicle
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 
@@ -103,7 +103,7 @@ edenMobileLaserTiger:
 edenMobileDefenceLaser:
 	Inherits: edenMobileLaserTiger
 	ReloadDelay: 10
-	Range: 6c512
+	Range: 6656
 
 edenRailgun:
 	Inherits: ^RailgunWeapon
@@ -168,7 +168,7 @@ edenTigerRailgun:
 
 edenDefenceRailgun:
 	Inherits: edenTigerRailgun
-	Range: 7c0
+	Range: 7168
 	ReloadDelay: 50
 
 edenEMP:
@@ -305,7 +305,7 @@ edenEMPGP:
 	Warhead@2Ext: GrantExternalCondition
 		Condition: empdisable
 		Duration: 150
-		Range: 0c768
+		Range: 768
 		ValidTargets: Vehicle
 
 edenMobileThorsHammer:
@@ -328,7 +328,7 @@ edenMobileThorsHammerTiger:
 ####################################################################################################
 plymouthMobileMicrowave:
 	ReloadDelay: 20
-	Range: 5c512
+	Range: 5632
 	Report: fireMicrowave.wav
 	Projectile: LaserZap
 		Color: FFFFFFFF
@@ -352,11 +352,11 @@ plymouthMobileTigerMicrowave:
 plymouthMobileDefenceMicrowave:
 	Inherits: plymouthMobileMicrowave
 	ReloadDelay: 10
-	Range: 6c512
+	Range: 6656
 
 plymouthScorpion:
 	ReloadDelay: 20
-	Range: 5c512
+	Range: 5632
 	Report: fireLaser.wav
 	Projectile: LaserZap
 		Color: 0000FFFF
@@ -379,8 +379,8 @@ plymouthScorpion:
 
 plymouthRPG:
 	ReloadDelay: 80
-	Range: 6c0
-	MinRange: 0c512
+	Range: 6144
+	MinRange: 512
 	Report: bazook1.aud
 	ValidTargets: Ground, Air
 	Projectile: Missile
@@ -424,7 +424,7 @@ plymouthTigerRPG:
 
 plymouthDefenceRPG:
 	Inherits: plymouthRPG
-	Range: 7c0
+	Range: 7168
 	ReloadDelay: 50
 
 plymouthSticky:
@@ -514,7 +514,7 @@ plymouthStickyDefence:
 	Inherits: ^HeavyCannon
 	Inherits: plymouthStickyTiger
 	ReloadDelay: 65
-	Range: 6c512
+	Range: 6656
 	Warhead@LightChemicalWeapon: SpreadDamage
 		Damage: 2000
 		DamageTypes: Prone75Percent, TriggerProne, TiberiumDeath
@@ -581,7 +581,7 @@ plymouthTigerRPGMines:
 	ReloadDelay: 50
 
 plymouthMineSpawner:
-	Range: 4c0
+	Range: 4096
 	ReloadDelay: 30
 	InvalidTargets: plymouth_minv
 	Projectile: Bullet
@@ -599,7 +599,7 @@ PLYMineExplosive:
 	Inherits@glow: ^ImpactGlow
 	ReloadDelay: 350
 	Projectile: InstantExplode
-	Range: 1c512
+	Range: 1536
 	Warhead@1Dam: SpreadDamage
 		Spread: 512
 		Damage: 30000
@@ -740,7 +740,7 @@ plymouthEMPTiger:
 	Warhead@2Ext: GrantExternalCondition
 		Condition: empdisable
 		Duration: 150
-		Range: 0c768
+		Range: 768
 		ValidTargets: Vehicle
 
 MiniNova:

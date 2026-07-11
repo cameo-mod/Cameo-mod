@@ -1,7 +1,7 @@
 Skunkspray:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 65
-	Range: 3c0
+	Range: 3072
 	Report: skunkSpray.wav
 	InvalidTargets:
 	Warhead@1Dam: SpreadDamage
@@ -20,7 +20,7 @@ Skunkspray:
 
 DemoTruckTargeting:
 	ValidTargets: Structure, Infantry, Vehicle
-	Range: 2c0
+	Range: 2048
 	Projectile: InstantHit
 	Warhead@1Dam: TargetDamage
 		
@@ -110,7 +110,7 @@ SheepExplode:
 Flamingsheep:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 4
-	Range: 2c0
+	Range: 2048
 	Burst: 2
 	BurstDelays: 2
 	-Projectile:
@@ -178,13 +178,13 @@ WormsGrenade:
 WormsPirateCannon:
 	Inherits: WormsGrenade
 	Report: tnkfire3.aud
-	Range: 8c0
+	Range: 8192
 	Warhead@2DamExtra: SpreadDamage
 		Spread: 341
 		Damage: 7500
 WormsMoaiRock:
 	Inherits: WormsGrenade
-	Range: 8c0
+	Range: 8192
 	Projectile: Bullet
 		Image: worms_moai_rock
 
@@ -274,7 +274,7 @@ SheepExplode:
 Flamingsheep:
 	Inherits: ^FlameWeapon
 	ReloadDelay: 4
-	Range: 2c0
+	Range: 2048
 	Burst: 2
 	BurstDelays: 2
 	-Projectile:
@@ -448,7 +448,7 @@ WormsFireballLauncher:
 	Inherits: FireballLauncher
 	Burst: 2
 	BurstDelays: 20
-	Range: 6c0
+	Range: 6144
 	Projectile: Bullet
 		Speed: 250
 		TrailImage: fb2

@@ -1,8 +1,8 @@
 Halloween_ClownBalloon:
 	Inherits: ^MissileWeapon
 	ReloadDelay: 40
-	Range: 6c0
-	MinRange: 0c512
+	Range: 6144
+	MinRange: 512
 	Report: halloween_clown_balloninflate2.wav
 	ValidTargets: Ground, Air
 	Projectile: MissileCA
@@ -34,7 +34,7 @@ Halloween_ClownHammer:
 Halloween_SmallRock:
 	Inherits: Grenade
 	ReloadDelay: 25
-	Range: 4c0
+	Range: 4096
 	Report: toss1.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 341
@@ -43,7 +43,7 @@ Halloween_SmallRock:
 Halloween_BigRock:
 	Inherits: Grenade
 	ReloadDelay: 35
-	Range: 8c0
+	Range: 8192
 	Report: toss1.aud
 	Warhead@1Dam: SpreadDamage
 		Spread: 341
@@ -72,7 +72,7 @@ halloween_ghost_spawner_bigunit:
 
 halloween_bat_blood:
 	ReloadDelay: 20
-	Range: 4c0
+	Range: 4096
 	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 1c682
@@ -106,7 +106,7 @@ halloween_bat_blood_AA:
 		ValidTargets: Air
 
 halloween_skeleton_roasting:
-	Range: 3c0
+	Range: 3072
 	Projectile: InstantHit
 	Warhead@1: CreateEffect
 		Image: explosion
@@ -271,7 +271,7 @@ halloween_SlimeChomp:
 		ImpactSounds: halloween_chomp.wav
 halloween_blob_debris:
 	ReloadDelay: 50
-	Range: 2c768
+	Range: 2816
 	Projectile: Bullet
 		Speed: 32, 64
 		Blockable: false

@@ -35,7 +35,7 @@ Dune2HarkQuadLaser:
 Dune2Trooper:
 	Inherits: ^BallisticWeapon
 	ReloadDelay: 40
-	Range: 4c0
+	Range: 4096
 	Report: dune2longlaser.aud
 	Projectile: Bullet
 		Speed: 853
@@ -65,7 +65,7 @@ Dune2TankDual:
 Dune2TurretGun:
 	Inherits: Dune2Tank
 	ReloadDelay: 20
-	Range: 6c0
+	Range: 6144
 	Warhead@1Dam: SpreadDamage
 		Versus:
 			None: 20
@@ -104,8 +104,8 @@ Dune2Artillery:
 Dune2OrniBomb:
 	Inherits: Dune2Artillery
 	ReloadDelay: 4
-	Range: 2c0
-	MinRange: 0c0
+	Range: 2048
+	MinRange: 0
 	Burst: 2
 	BurstDelays: 2
 	-Projectile:
@@ -122,7 +122,7 @@ Dune2OrniBomb:
 
 Dune2oSound:
 	Inherits: oSound
-	Range: 6c0
+	Range: 6144
 	Projectile: AreaBeam
 		Speed: 0c140
 		Duration: 4 # Has a length of 0c512
