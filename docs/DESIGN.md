@@ -284,6 +284,21 @@ set FIRST** (last column); Range is then solved from the identity
 (column F formula), so tuning HP/Speed/Damage/Reload auto-rebalances
 Range to hold the price. Range and DPS cells are never hand-edited.
 
+**Sheet-and-yaml dual write (LAW, design 2026-07-11).** Every balance
+change lands in BOTH the workbook and the yaml in the same pass —
+never in only one of them. Prices are outputs, never inputs: to
+re-price a unit (e.g. after a tier move), edit the tier multiplier M
+in the unit's row FIRST, let O/P/Q recompute, compare every stat
+column against the yaml, then make the yaml match the sheet. Scaling
+an existing yaml cost by a relative factor (old × new_M/old_M) is
+FORBIDDEN — it bakes in whatever error the old value had (this
+produced the Cannon Attack Robot 400-vs-350 miss). If the Excel lock
+file `~$cameo_armor_system.xlsx` exists the workbook is open on
+design's machine: queue the sheet edit, do not write the file.
+Standing long-term goal: a fresh, clean workbook whose row names are
+the exact in-game tooltips and whose stat cells are exactly the values
+the formula consumes.
+
 **Column semantics** (confirmed by design 2026-07-11):
 - `WeaponClass` H — from the weapons yaml warhead classes. Every weapon
   family exists as **Light / Medium / Heavy** warheads: Light = 0.75,

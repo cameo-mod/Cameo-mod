@@ -11,6 +11,11 @@ completed item gets its commit hash; every new order lands here first._
   class (`1616a26d2`, root cause of tjk-ws's `fa99c28db`)
 - [x] Pink main-menu text — resolved by the C#-derived chrome/fluent
   key reverts (`e956d2280`); confirmed fixed in-game 2026-07-11
+- [x] Boot crashes 2026-07-11 (`28ae47612`): cabal_crab junk trait
+  line from the rebuild script; ts_nod_shadowteam Buildable mangled in
+  the 793281117 merge resolution; stale DLLs after tjk-ws's
+  TakeOffOnMake (rebuild needed). LAW since: launch-game.cmd must
+  reach the main menu before EVERY commit (see CLAUDE.md commit gate).
 
 ## P1 — Quick wins (S effort, high value)
 
@@ -78,8 +83,19 @@ completed item gets its commit hash; every new order lands here first._
   leech / drone hijack / turret takeover) (M/L)
 - [ ] **TS authenticity pass**: Shattered Paradise as reference for all
   TS projectiles/explosions/sounds/trails (classic rocket trail to all
-  TS rockets; green plasma ball for Commando/Mk2/new turret) — needs
-  the SP zip locally (repo reachable but raw-file browsing is slow) (M)
+  TS rockets; green plasma ball for Commando/Mk2/new turret) — SDK is
+  now local; exact recipes decoded in
+  **docs/design/shattered_paradise_research.md §3** (trail =
+  `TrailImage: small_smoke_trail` + `TrailSequences: idle2`; plasma =
+  MissileTA/BulletAS + greenplasma2 + jascgreen + green contrail;
+  lasers deep blue 1122FF88 + white core). Assets CC BY-NC — add SP to
+  credits.txt when the first asset lands (M)
+- [ ] **SP engine-trait ports** (research doc §4; needs design's
+  priority pick): ArmamentsChargeBar (Hacker/Projector charge bar),
+  SpreadDamageWithCondition (webs/slows/corrosion), GuardsSelection,
+  InstantHitWithFakeBullets, nanomachine corpse pair, FirestromSP,
+  WeaponWeather/CloudSpawner ion storms, SpawnSparks, garrison/AI bits
+  (S each, GPL-compatible)
 - [ ] **FutureTech promotion-tier audit**: every promotion unit's tech
   requirement must equal its promotion tier (prospector mk2 currently
   needs battle lab = lockout bug — drop to war factory + promotion);
@@ -91,6 +107,14 @@ completed item gets its commit hash; every new order lands here first._
   chain shifted, promotions tier-matched, prospector lockout fixed,
   ^RobotControllable already carried the robot buff (no new template
   needed), energizers on all robots, M-discount cost cuts applied
+- [ ] **FutureTech re-pricing per the sheet** (❓ blocked on design):
+  my restructure costs were relative scalings of old yaml values — the
+  FORBIDDEN method (DESIGN §12 dual-write law, learned 2026-07-11).
+  Sheet says Cannon Droid = 350 (M=0.5) vs my 400. Open question for
+  design: Naxis T3 got M=0.75, Cannon Droid T3 gets M=0.5 — is the
+  rule "promotion units get one tier deeper discount", a new T3=0.5
+  table, or per-unit? Then re-derive ALL restructured costs from the
+  workbook rows (sheet first, yaml second).
 - [ ] **FutureTech follow-ups**: rename pass (.futu -> futuretech_
   grammar) + fluent descriptions (ordered 2026-07-11); StartingUnits
   fix (robots in Light Support violate Tier-1-only + cost targets,
