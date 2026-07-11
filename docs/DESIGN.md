@@ -353,6 +353,13 @@ is ALWAYS at least Tier 2 (some Tier 3, e.g. the GDI Archer); fire
 supports and line breakers usually Tier 2; flamethrower infantry
 Tier 2 (exception: Japan); heavy infantry and snipers usually Tier 2.
 
+**Promotion units carry a hidden yaml-side buff** the spreadsheet does
+NOT model: every promotion-gated unit inherits `^PromotionUnitBuff`
+(defaults.yaml) — +10% firepower, −10% damage taken, −10% reload, +5%
+speed/range/vision/cloak detection, −10% inaccuracy. The sheet always
+holds the unbuffed base stats; the buff is the promotions' flat bonus
+on top, applied only through the yaml inner workings.
+
 **Special ability catalog (K = 1 + 0.25 per special; overpowered kits
 set straight to 2 until per-ability values exist):**
 - COUNTS: cloak; auras (propaganda effect); vampire heal-on-attack
