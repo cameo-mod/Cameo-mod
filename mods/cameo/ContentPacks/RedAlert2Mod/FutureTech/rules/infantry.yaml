@@ -317,7 +317,7 @@ blackwidow.futu:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Valued:
-		Cost: 800
+		Cost: 600
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -580,12 +580,12 @@ robot_shotgun.futu:
 	Tooltip:
 		Name: Shotgun Droid
 	Valued:
-		Cost: 300
+		Cost: 400
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egpile.futu, yrgarobo.futu, egtf.futu, ~up_shotgun_droid.futu
+		Prerequisites: ~egpile.futu, yrgarobo.futu, ~up_shotgun_droid.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_shotgun.description
 	Mobile:
@@ -649,7 +649,7 @@ robot_missiles.futu:
 	Tooltip:
 		Name: Missile Droid
 	Valued:
-		Cost: 400
+		Cost: 300
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
@@ -718,12 +718,12 @@ robot_cannon.futu:
 	Tooltip:
 		Name: Cannon Droid
 	Valued:
-		Cost: 525
+		Cost: 400
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 75
-		Prerequisites: ~egpile.futu, yrgarobo.futu, egshock.futu, ~up_cannon_droid.futu
+		Prerequisites: ~egpile.futu, yrgarobo.futu, egtf.futu, ~up_cannon_droid.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_cannon.description
 	Mobile:

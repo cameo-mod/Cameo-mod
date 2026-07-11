@@ -189,12 +189,12 @@ yrrobo.futu:
 	Inherits@RobotControllable: ^RobotControllable
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Valued:
-		Cost: 800
+		Cost: 1200
 	Tooltip:
 		Name: Robot Tank
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~egweap2.futu, egtech.futu, ~up_robot_tank.futu
+		Prerequisites: ~egweap2.futu, yrgarobo.futu, ~up_robot_tank.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_robo.description
 	Mobile:
@@ -582,7 +582,7 @@ orion.futu:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Valued:
-		Cost: 2400
+		Cost: 1800
 	Tooltip:
 		Name: Orion Tank
 	Buildable:

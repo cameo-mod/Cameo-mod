@@ -8,7 +8,7 @@ up_shotgun_droid.futu:
 		BuildPaletteOrder: 100
 		Queue: Promotions
 		Description: Enables construction of the Shotgun Droid.
-		Prerequisites: ~egcnst.futu, egtf.futu, !up_shotgun_droid.futu, rank1
+		Prerequisites: ~egcnst.futu, yrgarobo.futu, !up_shotgun_droid.futu, rank1
 	RenderSprites:
 		Image: robot_shotgun.futu
 	ProvidesPrerequisite:
@@ -21,7 +21,7 @@ up_cannon_droid.futu:
 		BuildPaletteOrder: 103
 		Queue: Promotions
 		Description: Enables construction of the Cannon Droid.
-		Prerequisites: ~egcnst.futu, up_shotgun_droid.futu, egshock.futu, !up_cannon_droid.futu, rank1
+		Prerequisites: ~egcnst.futu, up_shotgun_droid.futu, egtf.futu, !up_cannon_droid.futu, rank1
 	RenderSprites:
 		Image: robot_cannon.futu
 	ProvidesPrerequisite:
@@ -75,7 +75,7 @@ up_robot_tank.futu:
 		BuildPaletteOrder: 104
 		Queue: Promotions
 		Description: Enables construction of the Robot Tank.
-		Prerequisites: ~egcnst.futu, up_salamander.futu, egtech.futu, !up_robot_tank.futu, rank1
+		Prerequisites: ~egcnst.futu, up_salamander.futu, yrgarobo.futu, !up_robot_tank.futu, rank1
 	RenderSprites:
 		Image: yrrobo
 	ProvidesPrerequisite:
