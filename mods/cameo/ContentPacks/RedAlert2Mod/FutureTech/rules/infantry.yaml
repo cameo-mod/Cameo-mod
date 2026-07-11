@@ -305,6 +305,7 @@ spy.futu:
 		VoiceSet: RA2SpyVoice
 
 blackwidow.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -316,7 +317,7 @@ blackwidow.futu:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Valued:
-		Cost: 1200
+		Cost: 800
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -369,6 +370,7 @@ blackwidow.futu:
 		Upgrades: up_equalizer_x1.futu, up_equalizer_x2.futu, up_equalizer_x3.futu
 
 cryoleg.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -564,6 +566,7 @@ wheel.futu:
 		Condition: ifv-mg
 
 robot_shotgun.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -577,7 +580,7 @@ robot_shotgun.futu:
 	Tooltip:
 		Name: Shotgun Droid
 	Valued:
-		Cost: 400
+		Cost: 300
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
@@ -632,6 +635,7 @@ robot_shotgun.futu:
 		Condition: ifv-mg
 
 robot_missiles.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -645,7 +649,7 @@ robot_missiles.futu:
 	Tooltip:
 		Name: Missile Droid
 	Valued:
-		Cost: 600
+		Cost: 400
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
@@ -700,9 +704,9 @@ robot_missiles.futu:
 		Condition: ifv-miss
 
 robot_cannon.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove

@@ -146,6 +146,7 @@ mech_plasma.futu:
 		PlayerPalette: playerra2
 
 ifv.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: RA2FV
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
@@ -177,10 +178,10 @@ ifv.futu:
 		VoiceSet: FutureIFVVoice
 
 yrrobo.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
@@ -188,7 +189,7 @@ yrrobo.futu:
 	Inherits@RobotControllable: ^RobotControllable
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Valued:
-		Cost: 1200
+		Cost: 800
 	Tooltip:
 		Name: Robot Tank
 	Buildable:
@@ -256,7 +257,8 @@ yrrobo.futu:
 	RenderSprites:
 		Image: yrrobo
 		PlayerPalette: playerra2
-
+	Targetable@ENERGIZER:
+		TargetTypes: RobotEnergizable
 mbt.futu:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
@@ -566,6 +568,7 @@ landcarr.futu:
 		Facing: 0
 
 orion.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^HighTechTankTemplate
@@ -579,7 +582,7 @@ orion.futu:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Valued:
-		Cost: 3600
+		Cost: 2400
 	Tooltip:
 		Name: Orion Tank
 	Buildable:
@@ -691,6 +694,7 @@ harv.futu:
 		Palette: ra2effect
 
 harv2.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -726,7 +730,7 @@ harv2.futu:
 		BobDistance: -64
 		InitialHeight: 384
 	Buildable:
-		Prerequisites: ~egweap2.futu, egtech.futu, ~up_prospector.futu
+		Prerequisites: ~egweap2.futu, ~up_prospector.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_harv2.description
 	WithHarvestAnimation:
@@ -882,6 +886,7 @@ coiler.futu:
 		PlayerPalette: player_rgba
 
 futu.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
@@ -951,7 +956,8 @@ futu.futu:
 		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
-
+	Targetable@ENERGIZER:
+		TargetTypes: RobotEnergizable
 ####################################################################################################
 #		Red Alert 2 Future Aircraft
 ####################################################################################################

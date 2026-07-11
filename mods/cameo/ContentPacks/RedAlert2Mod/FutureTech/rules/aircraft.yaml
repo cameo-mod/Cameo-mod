@@ -78,6 +78,7 @@ twister.futu:
 		PlayerPalette: playerra2cons
 
 cryo.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -91,7 +92,7 @@ cryo.futu:
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_cryocopter.futu
 		Description: actor_futu_cryo.description
 	Valued:
-		Cost: 1350
+		Cost: 900
 	Tooltip:
 		Name: Cryocopter
 	UpdatesPlayerStatistics:
@@ -176,6 +177,7 @@ cryo_husk.futu:
 		PlayerPalette: player_rgba
 
 harbinger.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
