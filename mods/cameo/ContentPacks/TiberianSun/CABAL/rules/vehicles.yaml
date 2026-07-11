@@ -454,12 +454,6 @@ cabal_crab:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	Armament@PRIMARY:
-		Weapon: TSAssaultCannon
-		LocalOffset: 350,-90,250, 350,90,250
-		Recoil: 128
-		RecoilRecovery: 26
-		MuzzleSequence: muzzle
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: CabalCrabClaws
