@@ -49,6 +49,10 @@ Ordos Raider (raider.ordos).
   F20 AA-capable support vehicles: anti-air weapon range == 1.5 x
       anti-ground weapon range (design 2026-07-10; forgotten_m113adats
       is reference-clean: 5606 ground / 8409 air)
+  F22 promotions must carry the same TECH requirement as the unit they
+      unlock (tier counted from tech buildings only, transitively;
+      production buildings and refineries never count) — the FutureTech
+      Prospector Mk2 lockout class
   F18 anti-air weapons: a weapon whose ValidTargets include Air must have at
       least one damage warhead whose ValidTargets include Air (inherited
       warheads resolved) — otherwise it fires at aircraft but deals nothing
@@ -401,6 +405,67 @@ def starting_units_check(m: Model, rows: dict) -> None:
                                         "heavy support should mix all tiers"])
 
 
+def promotion_tier_check(m, rows):
+    """F22: a promotion's tech gates must match its unlocked unit's."""
+    rs = m.rs
+
+    def is_tech(bld):
+        res = rs.resolve(bld)
+        if res is None:
+            return False
+        for c in res.children:
+            base = c.key.split("@")[0]
+            if base in ("ProductionQueue", "Production", "Refinery"):
+                return False
+        return True
+
+    for fac in sorted(f.internal for f in m.real_factions()):
+        if fac in TIER_EXEMPT_FACTIONS:
+            continue
+        tc = TierContext(m, fac)
+        if not tc.radars:
+            continue
+
+        def tech_tier(res):
+            best = 0
+            for tok in m.positive_prereqs(res):
+                provs = [b for b in tc.token_providers.get(tok, set())
+                         if is_tech(b)]
+                if provs:
+                    best = max(best, min(tc.tier[b] for b in provs))
+            return best
+
+        roster = m.buildable_roster(fac)
+        promos = {}
+        for lname in roster:
+            res = rs.resolve(lname)
+            if res is None:
+                continue
+            b = res.child("Buildable")
+            if b and "promotion" in (b.get("Queue") or "").lower():
+                for c in res.children:
+                    if c.key.split("@")[0] == "ProvidesPrerequisite":
+                        tok = c.get("Prerequisite") or lname
+                        promos[tok.lower()] = (lname, tech_tier(res))
+        for lname in sorted(roster):
+            res = rs.resolve(lname)
+            if res is None or lname.lower() in promos.values():
+                continue
+            b = res.child("Buildable")
+            if b is None:
+                continue
+            toks = [t.lower() for t in m.positive_prereqs(res)]
+            for tok in toks:
+                if tok in promos:
+                    pname, ptier = promos[tok]
+                    utier = tech_tier(res)
+                    if utier != ptier:
+                        rows["F22"].append(
+                            [f"{fac}: {lname}",
+                             f"unit tech tier {utier}",
+                             f"promotion {pname} tier {ptier} — must match"])
+
+
 def aa_warhead_check(m: Model, rows: dict) -> None:
     """F18 — weapons that target Air but whose damage warheads can't hit Air."""
     rs = m.rs
@@ -441,7 +506,8 @@ def main() -> int:
     rows = {k: [] for k in
             ("F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10",
              "F11", "F12", "F13", "F14", "F15", "F16", "F17", "F18",
-             "F19", "F20")}
+             "F19", "F20", "F21", "F22")}
+    seen_f21 = set()
 
     names: set[str] = set()
     for f in m.real_factions():
@@ -613,6 +679,7 @@ def main() -> int:
 
     defense_tier_check(m, rows)
     starting_units_check(m, rows)
+    promotion_tier_check(m, rows)
     aa_warhead_check(m, rows)
 
     total = sum(len(v) for v in rows.values())
@@ -640,6 +707,8 @@ def main() -> int:
         "F18": "F18 — weapons targeting Air whose damage warheads can't hit Air",
         "F19": "F19 — helicopter/spaceship TurnSpeed ≠ Speed/5",
         "F20": "F20 — AA support vehicle: air range ≠ 1.5 × ground range",
+        "F21": "F21 — RA2 XP elite weapon range ≠ regular + 1000",
+        "F22": "F22 — promotion tech gate ≠ unlocked unit's tech gate",
     }
     for k in rows:
         print(h2(f"{titles[k]}  ({len(rows[k])})"))

@@ -1,22 +1,17 @@
 # audit_stat_formulas — house stat formulas
 
-Violations: **788** across 1838 roster actors (reference-clean units: gdiarcher, raider.ordos)
+Violations: **787** across 1836 roster actors (reference-clean units: gdiarcher, raider.ordos)
 
 
-## F1 — Repairable.HpPerStep ≠ HP/20  (47)
+## F1 — Repairable.HpPerStep ≠ HP/20  (42)
 
 | actor | actual | expected |
 |---|---|---|
 | beetle.nax2 | HpPerStep 4375 | expected 2375 (HP 47500/20) |
 | bmwbike.nax | HpPerStep 4125 | expected 1100 (HP 22000/20) |
 | bomber.ixian | HpPerStep 5555 | expected 5550 (HP 111000/20) |
-| cabal_artilleryspider | HpPerStep 1500 | expected 10000 (HP 200000/20) |
 | cabal_heavyspider | HpPerStep 1500 | expected 4000 (HP 80000/20) |
-| cabal_laserspider | HpPerStep 1500 | expected 2000 (HP 40000/20) |
-| cabal_mantis | HpPerStep 1500 | expected 2000 (HP 40000/20) |
 | cabal_scarabapc | HpPerStep 2637 | expected 1500 (HP 30000/20) |
-| cabal_spidertankdrone | HpPerStep 1500 | expected 2000 (HP 40000/20) |
-| cabal_tarantula | HpPerStep 5000 | expected 12500 (HP 250000/20) |
 | forgotten_scoopertank | HpPerStep 10000 | expected 12500 (HP 250000/20) |
 | gravity.nax2 | HpPerStep 3125 | expected 15000 (HP 300000/20) |
 | imperial.nax | HpPerStep 3125 | expected 4125 (HP 82500/20) |
@@ -56,7 +51,7 @@ Violations: **788** across 1838 roster actors (reference-clean units: gdiarcher,
 | zombietank.nax | HpPerStep 7875 | expected 5500 (HP 110000/20) |
 
 
-## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (100)
+## F2 — SelfHealing Step ≠ HP/2500 (inf: HP/1000)  (90)
 
 | actor | actual | expected |
 |---|---|---|
@@ -65,23 +60,13 @@ Violations: **788** across 1838 roster actors (reference-clean units: gdiarcher,
 | beetle.nax2 | Step 35 | expected 19 (HP 47500/2500) |
 | bf109.nax | Step 30 | expected 24 (HP 60000/2500) |
 | bmwbike.nax | Step 33 | expected 9 (HP 22000/2500) |
-| cabal_artilleryspider | Step 12 | expected 80 (HP 200000/2500) |
 | cabal_ascended | Step 25 | expected 60 (HP 60000/1000) |
 | cabal_constructionyard | Step 10 | expected 400 (HP 1000000/2500) |
-| cabal_cyborgcommandov2 | Step 200 | expected 400 (HP 400000/1000) |
-| cabal_cyborginfantry | Step 25 | expected 35 (HP 35000/1000) |
-| cabal_cyborgreaper | Step 75 | expected 30 (HP 75000/2500) |
 | cabal_devout | Step 25 | expected 60 (HP 60000/1000) |
-| cabal_dissolver | Step 28 | expected 11 (HP 28000/2500) |
 | cabal_eliminator1000 | Step 10 | expected 100 (HP 250000/2500) |
-| cabal_eliminator800 | Step 10 | expected 16 (HP 16000/1000) |
-| cabal_hackercyborg | Step 25 | expected 60 (HP 60000/1000) |
+| cabal_eliminator800 | Step 10 | expected 85 (HP 85000/1000) |
 | cabal_heavyspider | Step 12 | expected 32 (HP 80000/2500) |
-| cabal_laserspider | Step 12 | expected 16 (HP 40000/2500) |
-| cabal_mantis | Step 12 | expected 16 (HP 40000/2500) |
 | cabal_platedarmorcyborg | Step 25 | expected 60 (HP 60000/1000) |
-| cabal_spidertankdrone | Step 12 | expected 16 (HP 40000/2500) |
-| cabal_tarantula | Step 40 | expected 100 (HP 250000/2500) |
 | combat_tank.harkonnen | Step 10 | expected 28 (HP 70000/2500) |
 | conehead.nax | Step 10 | expected 20 (HP 20000/1000) |
 | ctnk | Step 60 | expected 30 (HP 75000/2500) |
@@ -172,7 +157,7 @@ Violations: **788** across 1838 roster actors (reference-clean units: gdiarcher,
 | wc2_human_militia2 | infantry declares Repairable locally |  |
 
 
-_233 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
+_232 further infantry inherit Repairable from the infantry base template (^DefaultInfantry RepairActors: drfghosp… — unloaded Dark Reign hospitals). One template-line fix covers them all._
 
 
 ## F4 — upgrade shield RegenAmount ≠ 2×SelfHealing Step  (64)
@@ -183,7 +168,7 @@ _233 further infantry inherit Repairable from the infantry base template (^Defau
 | autogun_tank.ordos | RegenAmount 96 | expected 128 (2 x SelfHealing 64) |
 | autogun_tank_small.ordos | RegenAmount 48 | expected 76 (2 x SelfHealing 38) |
 | bomber.ixian | RegenAmount 76 | expected 88 (2 x SelfHealing 44) |
-| cabal_engineer | RegenAmount 25 | expected 20 (2 x SelfHealing 10) |
+| cabal_engineer | RegenAmount 25 | expected 40 (2 x SelfHealing 20) |
 | cabal_tiberiumharvester | RegenAmount 10 | expected 120 (2 x SelfHealing 60) |
 | chem_troop.ordos | RegenAmount 10 | expected 60 (2 x SelfHealing 30) |
 | cheme3 | RegenAmount 25 | expected 36 (2 x SelfHealing 18) |
@@ -327,10 +312,10 @@ _233 further infantry inherit Repairable from the infantry base template (^Defau
 | brik | Power missing | expected -10 |
 | bunk.nax | Power missing | expected -50 |
 | ca12hit.latin | Power -200 | expected -500 (-Cost/20) |
-| cabal_heavycabalobelisk | Power -100 | expected -130 (-Cost/20) |
+| cabal_heavycabalobelisk | Power -100 | expected -120 (-Cost/20) |
 | cabal_missilesilo | Power -150 | expected -500 (-Cost/20) |
-| cabal_obeliskofdarkness | Power -75 | expected -67 (-Cost/20) |
-| cabal_pillbox | Power -25 | expected -30 (-Cost/20) |
+| cabal_obeliskofdarkness | Power -75 | expected -60 (-Cost/20) |
+| cabal_pillbox | Power -25 | expected -40 (-Cost/20) |
 | cabal_silo | Power -10 | expected -7 (-Cost/20) |
 | cabal_stealthgenerator | Power -150 | expected -125 (-Cost/20) |
 | cgchao.asian | Power -200 | expected -250 (-Cost/20) |
@@ -420,14 +405,13 @@ _233 further infantry inherit Repairable from the infantry base template (^Defau
 | yrygppet | Power -200 | expected -500 (-Cost/20) |
 
 
-## F8 — vehicle TurnSpeed ≠ Speed/5  (35)
+## F8 — vehicle TurnSpeed ≠ Speed/5  (34)
 
 | actor | actual | expected |
 |---|---|---|
 | autogun_tank.ordos | TurnSpeed 30 (Speed 75) | expected 15 = Speed/5 |
 | bike | TurnSpeed 80 (Speed 200) | expected 40 = Speed/5 |
 | bmwbike.nax | TurnSpeed 16 (Speed 125) | expected 25 = Speed/5 |
-| cabal_dissolver | TurnSpeed 396 (Speed 70) | expected 14 = Speed/5 |
 | cabal_scarabapc | TurnSpeed 40 (Speed 75) | expected 15 = Speed/5 |
 | chembike | TurnSpeed 70 (Speed 175) | expected 35 = Speed/5 |
 | cobra.ordos | TurnSpeed 18 (Speed 45) | expected 9 = Speed/5 |
@@ -461,7 +445,7 @@ _233 further infantry inherit Repairable from the infantry base template (^Defau
 | ttnk | TurnSpeed 32 (Speed 80) | expected 16 = Speed/5 |
 
 
-## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (52)
+## F9 — Turreted.TurnSpeed ≠ Mobile.TurnSpeed  (51)
 
 | actor | actual | expected |
 |---|---|---|
@@ -471,7 +455,6 @@ _233 further infantry inherit Repairable from the infantry base template (^Defau
 | apc.ordos | Turreted 42 vs Mobile 21 | must match |
 | autogun_tank.ordos | Turreted 12 vs Mobile 30 | must match |
 | beetle.nax2 | Turreted 34 vs Mobile 17 | must match |
-| cabal_dissolver | Turreted 40 vs Mobile 396 | must match |
 | cabal_scarabapc | Turreted 20 vs Mobile 40 | must match |
 | chemstnk | Turreted 25 vs Mobile 24 | must match |
 | diablo.latin | Turreted 36 vs Mobile 25 | must match |
@@ -519,7 +502,7 @@ _233 further infantry inherit Repairable from the infantry base template (^Defau
 | yrytnk | Turreted 36 vs Mobile 18 | must match |
 
 
-## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (50)
+## F10 — turretless TurnSpeed ≠ 2×Speed/5 (artillery: Speed/5)  (54)
 
 | actor | actual | expected |
 |---|---|---|
@@ -528,8 +511,12 @@ _233 further infantry inherit Repairable from the infantry base template (^Defau
 | athena.futu | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | brummbar.nax | TurnSpeed 12 (Speed 60) | expected 24 = 2 x Speed/5 (turretless) |
 | burrito.latin | TurnSpeed 16 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
-| cabal_cyborgreaper | TurnSpeed 200 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
+| cabal_artilleryspider | TurnSpeed 14 (Speed 70) | expected 28 = 2 x Speed/5 (turretless) |
+| cabal_cyborgreaper | TurnSpeed 13 (Speed 65) | expected 26 = 2 x Speed/5 (turretless) |
 | cabal_heavyspider | TurnSpeed 64 (Speed 80) | expected 32 = 2 x Speed/5 (turretless) |
+| cabal_laserspider | TurnSpeed 14 (Speed 70) | expected 28 = 2 x Speed/5 (turretless) |
+| cabal_mantis | TurnSpeed 24 (Speed 120) | expected 48 = 2 x Speed/5 (turretless) |
+| cabal_spidertankdrone | TurnSpeed 24 (Speed 120) | expected 48 = 2 x Speed/5 (turretless) |
 | chemssm | TurnSpeed 15 (Speed 75) | expected 30 = 2 x Speed/5 (turretless) |
 | dagger.steel | TurnSpeed 20 (Speed 100) | expected 40 = 2 x Speed/5 (turretless) |
 | forgotten_thumperbus | TurnSpeed 18 (Speed 90) | expected 36 = 2 x Speed/5 (turretless) |
@@ -627,8 +614,8 @@ _none found_
 | actor | actual | expected |
 |---|---|---|
 | lnaxis: twr.nax2 | prereqs: barr.nax2, conyard.nax2 (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
-| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 | ordos: autogun_turret.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
+| ordos: artillery_platform.ordos | prereqs: construction_yard.ordos, d2k_barracks.ordos (gate 2, radar tier 3) | DEFERRED: valid, but faction's only pre-radar defense — add a Tier-1 defense before regating |
 
 
 ## F14 — StartingUnits referencing nonexistent actors (crash class)  (0)
@@ -636,7 +623,7 @@ _none found_
 _none found_
 
 
-## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (62)
+## F15 — Light Support composition (Tier-1 only, ~2000, 5:1 inf:veh)  (63)
 
 | actor | actual | expected |
 |---|---|---|
@@ -657,6 +644,7 @@ _none found_
 | forgotten: defaultforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_raidercar (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | forgotten: defaultforgotten | forgotten_mutantsergeant (cost 750) x2 vs forgotten_rattytank (cost 600) x1 | pricier units must not outnumber cheaper ones |
 | forgotten: defaultforgotten | forgotten_mutantsergeant, forgotten_mutantsoldier | light support must be Tier-1 only (producer-building prereqs only) |
+| cabal: defaultcabal | total cost 2850 | target ~2000 (±15%) |
 | cabal: defaultcabal | 3 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | ra2america: defaultra2allies | total cost 2650 | target ~2000 (±15%) |
 | ra2america: defaultra2allies | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
@@ -677,12 +665,12 @@ _none found_
 | syndicate: defaultsyndicate | fftr.latin (cost 3000) x2 vs wirbelwind.nax (cost 1800) x1 | pricier units must not outnumber cheaper ones |
 | syndicate: defaultsyndicate | fftr.latin (cost 3000) x2 vs tiger.nax (cost 800) x1 | pricier units must not outnumber cheaper ones |
 | syndicate: defaultsyndicate | fftr.latin | light support must be Tier-1 only (producer-building prereqs only) |
-| naxis: defaultnaxis | total cost 3900 | target ~2000 (±15%) |
+| naxis: defaultnaxis | total cost 3650 | target ~2000 (±15%) |
 | naxis: defaultnaxis | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
 | naxis: defaultnaxis | mp40.nax | light support must be Tier-1 only (producer-building prereqs only) |
 | lnaxis: defaultlnaxis | total cost 2710 | target ~2000 (±15%) |
 | lnaxis: defaultlnaxis | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
-| futuretech: defaultfuturetech | total cost 2850 | target ~2000 (±15%) |
+| futuretech: defaultfuturetech | total cost 2450 | target ~2000 (±15%) |
 | futuretech: defaultfuturetech | 0 infantry : 7 vehicles | want ~5 infantry per vehicle |
 | futuretech: defaultfuturetech | robot_cannon.futu, robot_missiles.futu, wheel.futu | light support must be Tier-1 only (producer-building prereqs only) |
 | tkm: defaulttstkm | 5 infantry : 2 vehicles | want ~5 infantry per vehicle |
@@ -704,7 +692,7 @@ _none found_
 | edenl: defaultedenl | eden_lynx_railgun (cost 900) x2 vs eden_scout (cost 300) x1 | pricier units must not outnumber cheaper ones |
 
 
-## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (112)
+## F16 — Heavy Support composition (all tiers, ~10000, 5:1 inf:veh)  (113)
 
 | actor | actual | expected |
 |---|---|---|
@@ -753,7 +741,7 @@ _none found_
 | forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_mutantsergeant (cost 750) x2 | pricier units must not outnumber cheaper ones |
 | forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_raidercar (cost 300) x1 | pricier units must not outnumber cheaper ones |
 | forgotten: heavyforgotten | forgotten_warriortank (cost 2000) x3 vs forgotten_rattytank (cost 600) x1 | pricier units must not outnumber cheaper ones |
-| cabal: heavycabal | total cost 4400 | target ~10000 (±15%) |
+| cabal: heavycabal | total cost 5000 | target ~10000 (±15%) |
 | cabal: heavycabal | 3 infantry : 5 vehicles | want ~5 infantry per vehicle |
 | cabal: heavycabal | tsttnk (cost 800) x3 vs tsbike (cost 550) x2 | pricier units must not outnumber cheaper ones |
 | cabal: heavycabal | all units are Tier 1 | heavy support should mix all tiers |
@@ -783,17 +771,18 @@ _none found_
 | syndicate: heavysyndicate | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
 | syndicate: heavysyndicate | fftr.latin (cost 3000) x2 vs ptnk.asian (cost 2400) x1 | pricier units must not outnumber cheaper ones |
 | naxis: heavynaxis | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
-| naxis: heavynaxis | wirbelwind.nax (cost 1800) x3 vs mp40.nax (cost 500) x2 | pricier units must not outnumber cheaper ones |
-| naxis: heavynaxis | tiger.nax (cost 800) x3 vs mp40.nax (cost 500) x2 | pricier units must not outnumber cheaper ones |
+| naxis: heavynaxis | wirbelwind.nax (cost 1800) x3 vs mp40.nax (cost 375) x2 | pricier units must not outnumber cheaper ones |
+| naxis: heavynaxis | tiger.nax (cost 800) x3 vs mp40.nax (cost 375) x2 | pricier units must not outnumber cheaper ones |
 | lnaxis: heavylnaxis | total cost 5640 | target ~10000 (±15%) |
 | lnaxis: heavylnaxis | 5 infantry : 6 vehicles | want ~5 infantry per vehicle |
 | lnaxis: heavylnaxis | lunar2.nax2 (cost 350) x3 vs lunar.nax2 (cost 120) x2 | pricier units must not outnumber cheaper ones |
 | lnaxis: heavylnaxis | beetle.nax2 (cost 700) x3 vs lunar.nax2 (cost 120) x2 | pricier units must not outnumber cheaper ones |
 | lnaxis: heavylnaxis | beetle.nax2 (cost 700) x3 vs panzer.nax2 (cost 650) x2 | pricier units must not outnumber cheaper ones |
 | lnaxis: heavylnaxis | all units are Tier 1 | heavy support should mix all tiers |
-| futuretech: heavyfuturetech | total cost 5025 | target ~10000 (±15%) |
+| futuretech: heavyfuturetech | total cost 4425 | target ~10000 (±15%) |
 | futuretech: heavyfuturetech | 0 infantry : 11 vehicles | want ~5 infantry per vehicle |
 | futuretech: heavyfuturetech | robot_cannon.futu (cost 525) x5 vs wheel.futu (cost 200) x3 | pricier units must not outnumber cheaper ones |
+| futuretech: heavyfuturetech | robot_cannon.futu (cost 525) x5 vs robot_missiles.futu (cost 400) x3 | pricier units must not outnumber cheaper ones |
 | tkm: heavytstkm | total cost 3060 | target ~10000 (±15%) |
 | tkm: heavytstkm | 5 infantry : 5 vehicles | want ~5 infantry per vehicle |
 | tkm: heavytstkm | tkmtechnical (cost 400) x4 vs tkmrifleman (cost 120) x3 | pricier units must not outnumber cheaper ones |
@@ -828,7 +817,7 @@ _none found_
 |---|---|---|
 | aa_mine.ordos | TurnSpeed 8 (Speed 35) | expected 2 = Speed/15 |
 | bbomb.nax2 | TurnSpeed 10 (Speed 75) | expected 5 = Speed/15 |
-| cabal_hunterkillermk2 | TurnSpeed 29 (Speed 145) | expected 10 = Speed/15 |
+| cabal_hunterkillermk2 | TurnSpeed 10 (Speed 50) | expected 3 = Speed/15 |
 | forgotten_cropplane | TurnSpeed 64 (Speed 160) | expected 11 = Speed/15 |
 | mignuke | TurnSpeed 15 (Speed 200) | expected 13 = Speed/15 |
 | scscourge | TurnSpeed 40 (Speed 200) | expected 13 = Speed/15 |
@@ -910,4 +899,25 @@ _none found_
 | scanalogue | AA range 2000 vs ground 1500 | expected 2250 = 1.5 x ground range |
 | tleilax_labcrawl.ordos | AA range 6500 vs ground 6500 | expected 9750 = 1.5 x ground range |
 | wirbelwind.nax | AA range 9052 vs ground 6368 | expected 9552 = 1.5 x ground range |
+
+
+## F21 — RA2 XP elite weapon range ≠ regular + 1000  (0)
+
+_none found_
+
+
+## F22 — promotion tech gate ≠ unlocked unit's tech gate  (10)
+
+| actor | actual | expected |
+|---|---|---|
+| consortium: cruiser.steel | unit tech tier 5 | promotion up_cruiser.steel tier 0 — must match |
+| futuretech: up_cannon_droid.futu | unit tech tier 7 | promotion up_shotgun_droid.futu tier 0 — must match |
+| futuretech: up_cryoleg.futu | unit tech tier 7 | promotion up_missile_droid.futu tier 0 — must match |
+| futuretech: up_futuretank.futu | unit tech tier 7 | promotion up_orion.futu tier 0 — must match |
+| futuretech: up_harbinger.futu | unit tech tier 7 | promotion up_cryocopter.futu tier 0 — must match |
+| futuretech: up_missile_droid.futu | unit tech tier 0 | promotion up_cannon_droid.futu tier 7 — must match |
+| syndicate: burrito.latin | unit tech tier 5 | promotion up_burrito.latin tier 0 — must match |
+| syndicate: lars.latin | unit tech tier 5 | promotion up_lars.latin tier 0 — must match |
+| syndicate: topol.latin | unit tech tier 5 | promotion up_topol.latin tier 0 — must match |
+| tsgdi: ts_gdi_kodiakcommandship | unit tech tier 5 | promotion ts_gdi_promotion_unlockkodiak tier 0 — must match |
 

@@ -43,6 +43,9 @@ completed item gets its commit hash; every new order lands here first._
 
 ## P2 — Medium projects (M effort)
 
+- [ ] CABAL new-unit art: Crab art EXISTS at bits/ants/crab.shp (+icon);
+  Heavy Reaper candidate = tsreapicon.shp + reuse cyborgreaper body;
+  only Widow and Avatar need placeholders (design 2026-07-11)
 - [ ] **CABAL Batch 2b remainder**: platedarmorcyborg→cabal_rocketcyborg
   rename (devout = its promotion upgrade); new units Crab/Widow/Avatar/
   Heavy Reaper on placeholder art; cnc4/T1000/V2 researches;
@@ -84,13 +87,18 @@ completed item gets its commit hash; every new order lands here first._
 
 ## P3 — Large projects (L effort)
 
-- [ ] **FutureTech T5 restructure** (clean commit before starting):
-  robot control center becomes T2 (required by transmission center);
-  all 3 tech buildings shift a tier up; promotions re-matched;
-  formula M-discounts recomputed on tier changes; NEW separate inherit
-  for the robot low-power/control-center disable effect (was reusing
-  ^PromotionUnitBuff — can't inherit twice); energizers work on ALL
-  robots, not just droids
+- [x] FutureTech T5 restructure (`1e902df9a`): robot control = T2,
+  chain shifted, promotions tier-matched, prospector lockout fixed,
+  ^RobotControllable already carried the robot buff (no new template
+  needed), energizers on all robots, M-discount cost cuts applied
+- [ ] **FutureTech follow-ups**: rename pass (.futu -> futuretech_
+  grammar) + fluent descriptions (ordered 2026-07-11); StartingUnits
+  fix (robots in Light Support violate Tier-1-only + cost targets,
+  aggravated by the new costs); F22 refinement (skip promo-to-promo
+  chain pairs, debug promo-side tier=0)
+- [ ] **F22 findings in other factions**: Consortium up_cruiser,
+  Syndicate up_burrito/up_lars/up_topol, TS GDI unlockkodiak — same
+  Prospector class: promotions without their unit's tech gate
 - [ ] **Balance normalization passes** (sheet wins): 165 sheet↔game
   mismatches; TechTier M auto-fix under the nice-number law; turn-speed
   normalization (51 F10 + 33 F19); F11 firing-slow injection for
