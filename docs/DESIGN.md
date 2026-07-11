@@ -359,6 +359,16 @@ is ALWAYS at least Tier 2 (some Tier 3, e.g. the GDI Archer); fire
 supports and line breakers usually Tier 2; flamethrower infantry
 Tier 2 (exception: Japan); heavy infantry and snipers usually Tier 2.
 
+**Repair/engineering units (design 2026-07-11):** the repair beam is
+its own weapon class — **H = 1.5** — and engineering kits (capture +
+repair + defuse) are the maxed special **K = 2**. Reference trio in the
+workbook: IFV (Engineer), Engineering Armor, Engineering Truck (all
+20000 @ 50, H 1.5, K 2, L 0.5); the CABAL repair engineer added its own
+unique row (16000 @ eff. 40, HP 20000, Cost 800). H above 1.5 exists
+once by design: the **TOPOL-M (H = 5) is a mobile superweapon**. The
+"Consortium Artillery Tank" workbook row is the HAMMERHEAD (stale name)
+— one of the sacred meme units.
+
 **Promotion units carry a hidden yaml-side buff** the spreadsheet does
 NOT model: every promotion-gated unit inherits `^PromotionUnitBuff`
 (defaults.yaml) — +10% firepower, −10% damage taken, −10% reload, +5%
