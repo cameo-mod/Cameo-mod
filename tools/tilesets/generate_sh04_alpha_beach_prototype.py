@@ -28,6 +28,8 @@ GLOW_DEPTH = 6.0
 CONTOUR_JITTER = 2.0
 DEFAULT_OUT_DIR = Path.home() / "Documents/agents/volcanic-theater/shorelines/workbench"
 BACKGROUND = (73, 86, 99)
+# sh55-sh64 use the historical sh prefix but are Debris/Rock templates, not Beach.
+SHORE_TEMPLATES = tuple(f"sh{index:02d}" for index in range(1, 55))
 
 
 @dataclass(frozen=True)
@@ -41,13 +43,13 @@ class TemplateSpec:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
-    parser.add_argument("--template", choices=("sh01", "sh04"), default="sh04")
+    parser.add_argument("--template", choices=SHORE_TEMPLATES, default="sh04")
     args = parser.parse_args()
     out_dir = resolve(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.template == "sh01":
-        return generate_sh01(out_dir)
+    if args.template != "sh04":
+        return generate_sparse_shore(out_dir, args.template)
 
     temperate_bits = ROOT / "mods/cameo/bits/temp"
     volcanic_bits = ROOT / "mods/cameo/bits/volcanic"
@@ -76,6 +78,19 @@ def main() -> int:
     ground_region, lava_region, lava_selector, edge_roles = phase_regions(largest_mask)
     base_rgb = np.where(lava_selector[:, :, None], lava_rgb, ground_rgb)
 
+    legacy_rgb, _, legacy_heat_rgb, legacy_metrics = thermal_shore_texture(
+        lava_indices,
+        lava_rgb,
+        ground_rgb,
+        ground_region,
+        lava_region,
+        largest_mask,
+        seed=0x7E4D1A,
+    )
+    legacy_overlay_rgb = base_rgb.copy()
+    legacy_overlay_rgb[largest_mask] = legacy_rgb[largest_mask]
+    legacy_composite_rgb = linear_alpha_composite(base_rgb, legacy_overlay_rgb, alpha)
+
     thermal_rgb, thermal_field_rgb, crack_heat_rgb, thermal_metrics = thermal_shore_texture(
         lava_indices,
         lava_rgb,
@@ -84,6 +99,11 @@ def main() -> int:
         lava_region,
         largest_mask,
         seed=0x7E4D1A,
+        glow_depth=24.0,
+        plate_intensity=0.02,
+        contact_pixels=1.0,
+        red_seepage=True,
+        red_seepage_strength=0.78,
     )
     overlay_rgb = base_rgb.copy()
     overlay_rgb[largest_mask] = thermal_rgb[largest_mask]
@@ -113,6 +133,8 @@ def main() -> int:
     thermal_material_image = Image.fromarray(thermal_rgb, mode="RGB")
     thermal_field_image = Image.fromarray(thermal_field_rgb, mode="RGB")
     crack_heat_image = Image.fromarray(crack_heat_rgb, mode="RGB")
+    legacy_composite_image = Image.fromarray(legacy_composite_rgb, mode="RGB")
+    legacy_heat_image = Image.fromarray(legacy_heat_rgb, mode="RGB")
     baseline_image = Image.fromarray(baseline_rgb, mode="RGB")
     edge_role_image = edge_role_preview(
         ground_region,
@@ -121,21 +143,24 @@ def main() -> int:
         edge_roles,
     )
 
-    donor_image.save(out_dir / "sh04-temperate-donor.png")
-    seed_image.save(out_dir / "sh04-beach-color-seed-mask.png")
-    region_image.save(out_dir / "sh04-beach-largest-region.png")
-    alpha_image.save(out_dir / "sh04-beach-alpha-feather.png")
-    overlay_image.save(out_dir / "sh04-basalt-overlay-rgba.png")
-    checker_image.save(out_dir / "sh04-basalt-overlay-checker.png")
-    base_image.save(out_dir / "sh04-ground-lava-underlay.png")
-    composite_image.save(out_dir / "sh04-alpha-composite.png")
-    thermal_material_image.save(out_dir / "sh04-thermal-material.png")
-    thermal_field_image.save(out_dir / "sh04-thermal-field.png")
-    crack_heat_image.save(out_dir / "sh04-crack-heat-map.png")
-    edge_role_image.save(out_dir / "sh04-edge-role-map.png")
+    donor_image.save(out_dir / "temperate_donor_sh04.png")
+    seed_image.save(out_dir / "beach_color_seed_mask_sh04.png")
+    region_image.save(out_dir / "selected_beach_region_sh04.png")
+    alpha_image.save(out_dir / "beach_alpha_feather_sh04.png")
+    overlay_image.save(out_dir / "basalt_overlay_rgba_sh04.png")
+    checker_image.save(out_dir / "basalt_overlay_checker_sh04.png")
+    base_image.save(out_dir / "ground_lava_underlay_sh04.png")
+    composite_image.save(out_dir / "lava_seepage_composite_sh04.png")
+    composite_image.save(out_dir / "lava_seepage_promoted_24px_sh04.png")
+    thermal_material_image.save(out_dir / "thermal_material_sh04.png")
+    thermal_field_image.save(out_dir / "thermal_zones_sh04.png")
+    crack_heat_image.save(out_dir / "crack_heat_map_sh04.png")
+    legacy_composite_image.save(out_dir / "lava_seepage_legacy_6px_sh04.png")
+    legacy_heat_image.save(out_dir / "crack_heat_legacy_6px_sh04.png")
+    edge_role_image.save(out_dir / "edge_role_map_sh04.png")
 
     write_review_sheet(
-        out_dir / "sh04-transition-comparison.png",
+        out_dir / "transition_comparison_sh04.png",
         [
             ("Before: independent cold bank + 4px feather", baseline_image),
             ("After: continuous thermal crack field + 2px feather", composite_image),
@@ -144,7 +169,18 @@ def main() -> int:
     )
 
     write_review_sheet(
-        out_dir / "sh04-alpha-beach-review.png",
+        out_dir / "lava_seepage_comparison_sh04.png",
+        [
+            ("Former primary: 6px", legacy_composite_image),
+            ("Promoted primary: 24px dim-red", composite_image),
+            ("Former 6px crack reach", legacy_heat_image),
+            ("Promoted 24px crack reach", crack_heat_image),
+        ],
+        columns=2,
+    )
+
+    write_review_sheet(
+        out_dir / "alpha_beach_review_sh04.png",
         [
             ("Temperate donor", donor_image),
             ("Largest connected region", region_image),
@@ -176,17 +212,31 @@ def main() -> int:
         **thermal_metrics,
         **component_metrics,
     }
-    (out_dir / "metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
+    (out_dir / "metrics_sh04.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
+    (out_dir / "lava_seepage_metrics_sh04.json").write_text(
+        json.dumps(
+            {
+                "template": "sh04",
+                "preview_only": True,
+                "primary": "promoted_24px_dim_red",
+                "former_primary_retained": True,
+                "former_primary_6px": legacy_metrics,
+                "promoted_24px_dim_red": thermal_metrics,
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
-    print((out_dir / "sh04-alpha-beach-review.png").resolve())
-    print((out_dir / "sh04-alpha-composite.png").resolve())
-    print((out_dir / "sh04-basalt-overlay-rgba.png").resolve())
+    print((out_dir / "alpha_beach_review_sh04.png").resolve())
+    print((out_dir / "lava_seepage_composite_sh04.png").resolve())
+    print((out_dir / "basalt_overlay_rgba_sh04.png").resolve())
     print(json.dumps(metrics, indent=2))
     return 0
 
 
-def generate_sh01(out_dir: Path) -> int:
-    """Generate sh01 using occupied-subtile semantics instead of box edges."""
+def generate_sparse_shore(out_dir: Path, template: str) -> int:
+    """Generate a sparse shore using occupied-subtile semantics instead of box edges."""
 
     temperate_bits = ROOT / "mods/cameo/bits/temp"
     volcanic_bits = ROOT / "mods/cameo/bits/volcanic"
@@ -194,11 +244,11 @@ def generate_sh01(out_dir: Path) -> int:
     volcanic_palette = read_palette(volcanic_bits / "volcanic.pal")
     temperate_spec = read_template_spec(
         ROOT / "mods/cameo/tilesets/ra_temperat.yaml",
-        "sh01.tem",
+        f"{template}.tem",
     )
     volcanic_spec = read_template_spec(
         ROOT / "mods/cameo/tilesets/volcanic.yaml",
-        "sh01.vol",
+        f"{template}.vol",
     )
     if (
         temperate_spec.columns,
@@ -209,7 +259,7 @@ def generate_sh01(out_dir: Path) -> int:
         volcanic_spec.rows,
         volcanic_spec.terrain,
     ):
-        raise ValueError("Temperate and Volcanic sh01 template topology differs")
+        raise ValueError(f"Temperate and Volcanic {template} template topology differs")
 
     donor, domain = read_sparse_composite(temperate_bits / temperate_spec.image, temperate_spec)
     donor_rgb = indices_rgb(donor, temperate_palette)
@@ -269,7 +319,7 @@ def generate_sh01(out_dir: Path) -> int:
         ground_region,
         lava_region,
         largest_mask,
-        seed=0x5017E,
+        seed=shore_seed(template),
         domain=domain,
     )
     thermal_rgb[~domain] = BACKGROUND
@@ -281,10 +331,10 @@ def generate_sh01(out_dir: Path) -> int:
     composite_rgb = linear_alpha_composite(base_rgb, overlay_rgb, alpha)
     composite_rgb[~domain] = BACKGROUND
     if np.any(alpha[~domain]):
-        raise ValueError("alpha leaked into blank sh01 subtiles")
+        raise ValueError(f"alpha leaked into blank {template} subtiles")
     unmasked_phase = domain & ~largest_mask
     if not np.array_equal(composite_rgb[unmasked_phase], base_rgb[unmasked_phase]):
-        raise ValueError("thermal overlay altered unmasked sh01 phase pixels")
+        raise ValueError(f"thermal overlay altered unmasked {template} phase pixels")
 
     deep_thermal_rgb, deep_field_rgb, deep_crack_heat_rgb, deep_metrics = thermal_shore_texture(
         lava_indices,
@@ -293,13 +343,13 @@ def generate_sh01(out_dir: Path) -> int:
         ground_region,
         lava_region,
         largest_mask,
-        seed=0x5017E,
+        seed=shore_seed(template),
         domain=domain,
         glow_depth=16.0,
-        core_intensity=0.35,
-        shoulder_intensity=0.15,
-        plate_intensity=0.06,
+        plate_intensity=0.04,
         contact_pixels=1.0,
+        red_seepage=True,
+        red_seepage_strength=1.0,
     )
     deep_thermal_rgb[~domain] = BACKGROUND
     deep_field_rgb[~domain] = BACKGROUND
@@ -309,7 +359,32 @@ def generate_sh01(out_dir: Path) -> int:
     deep_composite_rgb = linear_alpha_composite(base_rgb, deep_overlay_rgb, alpha)
     deep_composite_rgb[~domain] = BACKGROUND
     if not np.array_equal(deep_composite_rgb[unmasked_phase], base_rgb[unmasked_phase]):
-        raise ValueError("deep seepage comparison altered unmasked sh01 phase pixels")
+        raise ValueError(f"deep seepage comparison altered unmasked {template} phase pixels")
+
+    very_deep_rgb, very_deep_field_rgb, very_deep_heat_rgb, very_deep_metrics = thermal_shore_texture(
+        lava_indices,
+        lava_rgb,
+        ground_rgb,
+        ground_region,
+        lava_region,
+        largest_mask,
+        seed=shore_seed(template),
+        domain=domain,
+        glow_depth=24.0,
+        plate_intensity=0.02,
+        contact_pixels=1.0,
+        red_seepage=True,
+        red_seepage_strength=0.78,
+    )
+    very_deep_rgb[~domain] = BACKGROUND
+    very_deep_field_rgb[~domain] = BACKGROUND
+    very_deep_heat_rgb[~domain] = BACKGROUND
+    very_deep_overlay_rgb = base_rgb.copy()
+    very_deep_overlay_rgb[largest_mask] = very_deep_rgb[largest_mask]
+    very_deep_composite_rgb = linear_alpha_composite(base_rgb, very_deep_overlay_rgb, alpha)
+    very_deep_composite_rgb[~domain] = BACKGROUND
+    if not np.array_equal(very_deep_composite_rgb[unmasked_phase], base_rgb[unmasked_phase]):
+        raise ValueError(f"very-deep seepage comparison altered unmasked {template} phase pixels")
 
     phase_image = semantic_phase_preview(ground_region, lava_region, largest_mask, domain)
     edge_image, edge_signatures, seam_metrics = subtile_edge_preview(
@@ -343,45 +418,72 @@ def generate_sh01(out_dir: Path) -> int:
     deep_composite_image = Image.fromarray(deep_composite_rgb, mode="RGB")
     deep_field_image = Image.fromarray(deep_field_rgb, mode="RGB")
     deep_crack_heat_image = Image.fromarray(deep_crack_heat_rgb, mode="RGB")
+    very_deep_composite_image = Image.fromarray(very_deep_composite_rgb, mode="RGB")
+    very_deep_field_image = Image.fromarray(very_deep_field_rgb, mode="RGB")
+    very_deep_heat_image = Image.fromarray(very_deep_heat_rgb, mode="RGB")
+    promoted_overlay_rgba = np.dstack((very_deep_overlay_rgb, alpha)).astype(np.uint8)
+    promoted_overlay_image = Image.fromarray(promoted_overlay_rgba, mode="RGBA")
+    promoted_checker_image = checker_composite(promoted_overlay_rgba)
+    promoted_material_image = Image.fromarray(very_deep_rgb, mode="RGB")
 
-    donor_image.save(out_dir / "sh01-temperate-donor.png")
-    occupancy_image.save(out_dir / "sh01-subtile-occupancy.png")
-    phase_source_image.save(out_dir / "sh01-phase-source-edges.png")
-    seed_image.save(out_dir / "sh01-beach-color-seed-mask.png")
-    region_image.save(out_dir / "sh01-beach-largest-region.png")
-    alpha_image.save(out_dir / "sh01-beach-alpha-feather.png")
-    overlay_image.save(out_dir / "sh01-basalt-overlay-rgba.png")
-    checker_image.save(out_dir / "sh01-basalt-overlay-checker.png")
-    base_image.save(out_dir / "sh01-ground-lava-underlay.png")
-    composite_image.save(out_dir / "sh01-alpha-composite.png")
-    thermal_material_image.save(out_dir / "sh01-thermal-material.png")
-    thermal_field_image.save(out_dir / "sh01-thermal-field.png")
-    crack_heat_image.save(out_dir / "sh01-crack-heat-map.png")
-    deep_composite_image.save(out_dir / "sh01-seepage-deep-dim.png")
-    deep_field_image.save(out_dir / "sh01-seepage-deep-dim-thermal-field.png")
-    deep_crack_heat_image.save(out_dir / "sh01-seepage-deep-dim-crack-heat.png")
-    phase_image.save(out_dir / "sh01-phase-connectivity.png")
-    edge_image.save(out_dir / "sh01-subtile-edge-map.png")
+    donor_image.save(out_dir / f"temperate_donor_{template}.png")
+    occupancy_image.save(out_dir / f"subtile_occupancy_{template}.png")
+    phase_source_image.save(out_dir / f"phase_source_edges_{template}.png")
+    seed_image.save(out_dir / f"beach_color_seed_mask_{template}.png")
+    region_image.save(out_dir / f"selected_beach_region_{template}.png")
+    alpha_image.save(out_dir / f"beach_alpha_feather_{template}.png")
+    promoted_overlay_image.save(out_dir / f"basalt_overlay_rgba_{template}.png")
+    promoted_checker_image.save(out_dir / f"basalt_overlay_checker_{template}.png")
+    base_image.save(out_dir / f"ground_lava_underlay_{template}.png")
+    very_deep_composite_image.save(out_dir / f"lava_seepage_composite_{template}.png")
+    promoted_material_image.save(out_dir / f"thermal_material_{template}.png")
+    very_deep_field_image.save(out_dir / f"thermal_zones_{template}.png")
+    very_deep_heat_image.save(out_dir / f"crack_heat_map_{template}.png")
+    composite_image.save(out_dir / f"lava_seepage_legacy_6px_{template}.png")
+    crack_heat_image.save(out_dir / f"crack_heat_legacy_6px_{template}.png")
+    deep_composite_image.save(out_dir / f"lava_seepage_16px_red_{template}.png")
+    deep_field_image.save(out_dir / f"thermal_zones_16px_red_{template}.png")
+    deep_crack_heat_image.save(out_dir / f"crack_heat_16px_{template}.png")
+    very_deep_composite_image.save(out_dir / f"lava_seepage_24px_dim_red_{template}.png")
+    very_deep_composite_image.save(out_dir / f"lava_seepage_promoted_24px_{template}.png")
+    very_deep_field_image.save(out_dir / f"thermal_zones_24px_dim_red_{template}.png")
+    very_deep_heat_image.save(out_dir / f"crack_heat_24px_{template}.png")
+    phase_image.save(out_dir / f"phase_connectivity_{template}.png")
+    edge_image.save(out_dir / f"subtile_edge_map_{template}.png")
 
     write_review_sheet(
-        out_dir / "sh01-transition-comparison.png",
+        out_dir / f"transition_comparison_{template}.png",
         [
             ("RA Temperate donor", donor_image),
-            ("Volcanic thermal shoreline", composite_image),
+            ("Volcanic shoreline: promoted 24px dim-red seepage", very_deep_composite_image),
         ],
         columns=2,
         scale=2,
     )
 
     write_review_sheet(
-        out_dir / "sh01-seepage-comparison.png",
+        out_dir / f"lava_seepage_comparison_{template}.png",
         [
-            ("Current: 6px full-strength beach heat", composite_image),
-            ("Proposed: 16px deep, 35% core / 15% shoulder", deep_composite_image),
-            ("Current crack-heat reach", crack_heat_image),
-            ("Proposed deeper crack-heat reach", deep_crack_heat_image),
+            ("Former primary: 6px", composite_image),
+            ("Promoted primary: 24px dim-red", very_deep_composite_image),
+            ("Former 6px crack reach", crack_heat_image),
+            ("Promoted 24px crack reach", very_deep_heat_image),
         ],
         columns=2,
+        scale=2,
+    )
+
+    write_review_sheet(
+        out_dir / f"lava_seepage_range_comparison_{template}.png",
+        [
+            ("Current: 6px full strength", composite_image),
+            ("Deep: 16px red-cooling ramp", deep_composite_image),
+            ("Very deep: 24px dim-red ramp", very_deep_composite_image),
+            ("Current 6px crack reach", crack_heat_image),
+            ("Deep 16px crack reach", deep_crack_heat_image),
+            ("Very-deep 24px crack reach", very_deep_heat_image),
+        ],
+        columns=3,
         scale=2,
     )
 
@@ -393,17 +495,27 @@ def generate_sh01(out_dir: Path) -> int:
         min(height, int(mask_y.max()) + 9),
     )
     write_review_sheet(
-        out_dir / "sh01-seepage-closeup-comparison.png",
+        out_dir / f"lava_seepage_closeup_comparison_{template}.png",
         [
             ("Current beach heat close-up", composite_image.crop(crop_box)),
-            ("16px deep / dim seepage close-up", deep_composite_image.crop(crop_box)),
+            ("Promoted 24px dim-red close-up", very_deep_composite_image.crop(crop_box)),
         ],
         columns=2,
         scale=4,
     )
+    write_review_sheet(
+        out_dir / f"lava_seepage_range_closeup_{template}.png",
+        [
+            ("6px current", composite_image.crop(crop_box)),
+            ("16px red cooling", deep_composite_image.crop(crop_box)),
+            ("24px dim-red cooling", very_deep_composite_image.crop(crop_box)),
+        ],
+        columns=3,
+        scale=2,
+    )
 
     write_review_sheet(
-        out_dir / "sh01-alpha-beach-review.png",
+        out_dir / f"alpha_beach_review_{template}.png",
         [
             ("Temperate donor", donor_image),
             ("Occupied subtiles and terrain", occupancy_image),
@@ -411,19 +523,40 @@ def generate_sh01(out_dir: Path) -> int:
             ("Selected connected beach", region_image),
             ("Ground/beach/lava components", phase_image),
             ("Per-subtile edge runs", edge_image),
-            ("Thermal zones and crack heat", thermal_field_image),
+            ("Promoted 24px thermal zones", very_deep_field_image),
             ("True 2px alpha feather", alpha_image.convert("RGB")),
             ("Semantic ground/lava underlay", base_image),
-            ("Connected crack heat", crack_heat_image),
-            ("Thermal material on checker", checker_image),
-            ("Thermal RGBA overlay composited", composite_image),
+            ("Promoted connected crack heat", very_deep_heat_image),
+            ("Promoted material on checker", promoted_checker_image),
+            ("Promoted thermal overlay composited", very_deep_composite_image),
         ],
         columns=4,
         scale=2,
     )
 
+    family_panels: list[tuple[str, Image.Image]] = []
+    for family_template, status in (
+        ("sh01", "approved"),
+        ("sh02", "candidate"),
+        ("sh04", "approved"),
+    ):
+        family_path = out_dir / f"lava_seepage_composite_{family_template}.png"
+        if not family_path.is_file():
+            continue
+        with Image.open(family_path) as family_image:
+            family_panels.append(
+                (f"{family_template} {status}", family_image.convert("RGB"))
+            )
+    if len(family_panels) == 3:
+        write_review_sheet(
+            out_dir / "lava_seepage_family_review_sh01_sh02_sh04.png",
+            family_panels,
+            columns=3,
+            scale=2,
+        )
+
     metrics = {
-        "template": "sh01",
+        "template": template,
         "preview_only": True,
         "palette_conversion_deferred": True,
         "template_size_subtiles": [temperate_spec.columns, temperate_spec.rows],
@@ -445,32 +578,40 @@ def generate_sh01(out_dir: Path) -> int:
         **phase_source_metrics,
         **phase_metrics,
         **seam_metrics,
-        **thermal_metrics,
+        **very_deep_metrics,
         **component_metrics,
     }
-    (out_dir / "sh01-metrics.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
+    (out_dir / f"metrics_{template}.json").write_text(json.dumps(metrics, indent=2), encoding="utf-8")
     seepage_metrics = {
-        "template": "sh01",
+        "template": template,
         "preview_only": True,
-        "accepted_baseline_unchanged": True,
-        "current": {
+        "primary": "promoted_24px_dim_red",
+        "former_primary_retained": True,
+        "former_primary_6px": {
             "glow_fade_pixels": thermal_metrics["glow_fade_pixels"],
             "core_intensity": 1.0,
             "shoulder_intensity": 0.78,
             "plate_intensity": 0.22,
         },
-        "deep_dim_proposal": deep_metrics,
+        "deep_16px_reference": deep_metrics,
+        "promoted_24px_dim_red": very_deep_metrics,
     }
-    (out_dir / "sh01-seepage-metrics.json").write_text(
+    (out_dir / f"lava_seepage_metrics_{template}.json").write_text(
         json.dumps(seepage_metrics, indent=2),
         encoding="utf-8",
     )
 
-    print((out_dir / "sh01-alpha-beach-review.png").resolve())
-    print((out_dir / "sh01-alpha-composite.png").resolve())
-    print((out_dir / "sh01-subtile-edge-map.png").resolve())
+    print((out_dir / f"alpha_beach_review_{template}.png").resolve())
+    print((out_dir / f"lava_seepage_composite_{template}.png").resolve())
+    print((out_dir / f"subtile_edge_map_{template}.png").resolve())
     print(json.dumps(metrics, indent=2))
     return 0
+
+
+def shore_seed(template: str) -> int:
+    """Return a stable per-template seed while preserving approved sh01/sh02 output."""
+
+    return 0x5007E + int(template[2:]) * 0x100
 
 
 def resolve(path: Path) -> Path:
@@ -1017,6 +1158,8 @@ def thermal_shore_texture(
     shoulder_intensity: float = 0.78,
     plate_intensity: float = 0.22,
     contact_pixels: float = 0.0,
+    red_seepage: bool = False,
+    red_seepage_strength: float = 1.0,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, dict[str, object]]:
     """Cool the installed clear-lava crack graph across the beach band.
 
@@ -1086,22 +1229,52 @@ def thermal_shore_texture(
     )
     cold_material[core_mask] = (13.0, 9.0, 9.0)
 
-    # Intact plates receive only restrained contact warmth.  Crack shoulders
-    # cool sooner than their cores, while the approved bright junction/core
-    # values survive closest to lava.
     plate_mix = plate_intensity * plate_heat
-    shoulder_mix = shoulder_intensity * np.power(crack_heat, 1.55)
-    core_mix = core_intensity * np.power(crack_heat, 0.90)
-    if contact_pixels > 0.0:
-        contact = 1.0 - smoothstep_array(0.0, contact_pixels, raw_lava_distance)
-        shoulder_mix = np.maximum(shoulder_mix, 0.55 * contact)
-        core_mix = np.maximum(core_mix, contact)
-    hot_mix = plate_mix.copy()
-    hot_mix[shoulder_only] = np.maximum(plate_mix[shoulder_only], shoulder_mix[shoulder_only])
-    hot_mix[core_mask] = np.maximum(plate_mix[core_mask], core_mix[core_mask])
-    hot_mix = np.clip(hot_mix, 0.0, 1.0)
-
-    material = lerp_array(cold_material, lava_float, hot_mix[:, :, None])
+    if red_seepage:
+        # Seeping lava cools by losing luminance while retaining its red hue.
+        # Do not interpolate the active fissure directly toward a black crack:
+        # use an explicit orange-red -> ember-red ramp, then let only the
+        # exhausted end return to the cold material.
+        material = lerp_array(cold_material, lava_float, plate_mix[:, :, None])
+        active = crack_heat > 0.001
+        core_ramp = red_seepage_color(crack_heat, red_seepage_strength)
+        shoulder_ramp = red_seepage_color(
+            np.clip(crack_heat * 0.68, 0.0, 1.0),
+            red_seepage_strength * 0.82,
+        )
+        active_shoulders = shoulder_only & active
+        active_cores = core_mask & active
+        material[active_shoulders] = shoulder_ramp[active_shoulders]
+        material[active_cores] = core_ramp[active_cores]
+        if contact_pixels > 0.0:
+            contact = 1.0 - smoothstep_array(0.0, contact_pixels, raw_lava_distance)
+            shoulder_contact = (0.55 * contact)[:, :, None]
+            core_contact = contact[:, :, None]
+            material[shoulder_only] = lerp_array(
+                material[shoulder_only],
+                lava_float[shoulder_only],
+                shoulder_contact[shoulder_only],
+            )
+            material[core_mask] = lerp_array(
+                material[core_mask],
+                lava_float[core_mask],
+                core_contact[core_mask],
+            )
+    else:
+        # Intact plates receive only restrained contact warmth.  Crack
+        # shoulders cool sooner than their cores, while approved bright
+        # junction/core values survive closest to lava.
+        shoulder_mix = shoulder_intensity * np.power(crack_heat, 1.55)
+        core_mix = core_intensity * np.power(crack_heat, 0.90)
+        if contact_pixels > 0.0:
+            contact = 1.0 - smoothstep_array(0.0, contact_pixels, raw_lava_distance)
+            shoulder_mix = np.maximum(shoulder_mix, 0.55 * contact)
+            core_mix = np.maximum(core_mix, contact)
+        hot_mix = plate_mix.copy()
+        hot_mix[shoulder_only] = np.maximum(plate_mix[shoulder_only], shoulder_mix[shoulder_only])
+        hot_mix[core_mask] = np.maximum(plate_mix[core_mask], core_mix[core_mask])
+        hot_mix = np.clip(hot_mix, 0.0, 1.0)
+        material = lerp_array(cold_material, lava_float, hot_mix[:, :, None])
     material = lerp_array(material, ground_float, ground_merge[:, :, None])
     material = np.clip(np.rint(material), 0, 255).astype(np.uint8)
 
@@ -1140,12 +1313,42 @@ def thermal_shore_texture(
         or shoulder_intensity != 0.78
         or plate_intensity != 0.22
         or contact_pixels != 0.0
+        or red_seepage
+        or red_seepage_strength != 1.0
     ):
-        metrics["seepage_core_intensity_cap"] = core_intensity
-        metrics["seepage_shoulder_intensity_cap"] = shoulder_intensity
         metrics["seepage_plate_intensity"] = plate_intensity
         metrics["seepage_contact_pixels"] = contact_pixels
+        if red_seepage:
+            metrics["seepage_color_mode"] = "red cooling ramp"
+            metrics["seepage_red_strength"] = red_seepage_strength
+            metrics["seepage_red_color_stops"] = {
+                "contact": [190, 55, 16],
+                "middle": [125, 25, 12],
+                "deep": [65, 12, 9],
+                "extinguished": [18, 8, 8],
+            }
+        else:
+            metrics["seepage_core_intensity_cap"] = core_intensity
+            metrics["seepage_shoulder_intensity_cap"] = shoulder_intensity
     return material, field_preview, crack_preview, metrics
+
+
+def red_seepage_color(heat: np.ndarray, strength: float) -> np.ndarray:
+    stops = np.array((0.0, 0.20, 0.55, 1.0), dtype=np.float32)
+    colors = np.array(
+        (
+            (18.0, 8.0, 8.0),
+            (65.0, 12.0, 9.0),
+            (125.0, 25.0, 12.0),
+            (190.0, 55.0, 16.0),
+        ),
+        dtype=np.float32,
+    )
+    result = np.empty((*heat.shape, 3), dtype=np.float32)
+    for channel in range(3):
+        result[:, :, channel] = np.interp(heat, stops, colors[:, channel])
+    ember_floor = colors[0]
+    return lerp_array(ember_floor, result, np.clip(strength, 0.0, 1.0))
 
 
 def coherent_contour_noise(width: int, height: int, seed: int) -> np.ndarray:
