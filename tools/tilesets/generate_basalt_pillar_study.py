@@ -22,6 +22,7 @@ NATIVE_SIZE = 144
 SCALE = 2
 RENDER_SIZE = NATIVE_SIZE * SCALE
 HEIGHT_SCALE = 0.5
+ORIGINAL_HEIGHT_SCALE = 1.0
 CAST_SHADOW_COLOR = (32, 20, 20)
 GROUND_CAST_SHADOW_OPACITY = 2.0
 GROUND_CAST_SHADOW_ALPHA_CAP = 230
@@ -41,18 +42,47 @@ class Column:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
+    parser.add_argument(
+        "--seed",
+        type=lambda value: int(value, 0),
+        default=0xBA5A17,
+        help="Deterministic forest seed; decimal and 0x-prefixed values are accepted.",
+    )
+    parser.add_argument(
+        "--render-style",
+        choices=("original", "modern"),
+        default="original",
+        help="Use the unrestricted original formation or the later compact renderer.",
+    )
     args = parser.parse_args()
     out_dir = args.out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    columns = build_column_forest(seed=0xBA5A17)
-    sprite, height_diagnostic, footprint_diagnostic = render_forest(columns)
-    lava_sprite, _, _ = render_forest(columns, lava_contact=True)
-    clean_columns, _, _ = render_forest(columns, include_shadow=False)
+    height_scale = (
+        ORIGINAL_HEIGHT_SCALE
+        if args.render_style == "original"
+        else HEIGHT_SCALE
+    )
+    columns = build_column_forest(seed=args.seed, height_scale=height_scale)
+    sprite, height_diagnostic, footprint_diagnostic = render_forest(
+        columns,
+        render_style=args.render_style,
+    )
+    lava_sprite, _, _ = render_forest(
+        columns,
+        lava_contact=True,
+        render_style=args.render_style,
+    )
+    clean_columns, _, _ = render_forest(
+        columns,
+        include_shadow=False,
+        render_style=args.render_style,
+    )
     glowing_columns, _, _ = render_forest(
         columns,
         lava_contact=True,
         include_shadow=False,
+        render_style=args.render_style,
     )
     sprite.save(out_dir / "basalt_hex_column_cluster_standalone.png")
     lava_sprite.save(out_dir / "basalt_hex_column_cluster_lava_standalone.png")
@@ -134,7 +164,11 @@ def main() -> int:
     return 0
 
 
-def build_column_forest(seed: int) -> list[Column]:
+def build_column_forest(
+    seed: int,
+    *,
+    height_scale: float = HEIGHT_SCALE,
+) -> list[Column]:
     rng = Random(seed)
     columns: list[Column] = []
     center_x = 70.0
@@ -166,17 +200,17 @@ def build_column_forest(seed: int) -> list[Column]:
                     x=x + rng.uniform(-1.6, 1.6),
                     base_y=base_y + rng.uniform(-1.0, 1.0),
                     radius=radius,
-                    height=max(10.0, min(89.0, height * 0.87)) * HEIGHT_SCALE,
+                    height=max(10.0, min(89.0, height * 0.87)) * height_scale,
                     seed=seed + serial * 977,
                 )
             )
             serial += 1
 
     detached = (
-        Column(13.0, 120.0, 6.0, 19.0 * HEIGHT_SCALE, seed ^ 0x101),
-        Column(122.0, 122.0, 7.0, 23.0 * HEIGHT_SCALE, seed ^ 0x102),
-        Column(115.0, 104.0, 4.5, 14.0 * HEIGHT_SCALE, seed ^ 0x103),
-        Column(21.0, 100.0, 4.5, 13.0 * HEIGHT_SCALE, seed ^ 0x104),
+        Column(13.0, 120.0, 6.0, 19.0 * height_scale, seed ^ 0x101),
+        Column(122.0, 122.0, 7.0, 23.0 * height_scale, seed ^ 0x102),
+        Column(115.0, 104.0, 4.5, 14.0 * height_scale, seed ^ 0x103),
+        Column(21.0, 100.0, 4.5, 13.0 * height_scale, seed ^ 0x104),
     )
     columns.extend(detached)
     return columns
@@ -187,22 +221,29 @@ def render_forest(
     lava_contact: bool = False,
     include_shadow: bool = True,
     material: str = "basalt",
+    render_style: str = "modern",
 ) -> tuple[Image.Image, Image.Image, Image.Image]:
     canvas = Image.new("RGBA", (RENDER_SIZE, RENDER_SIZE), (0, 0, 0, 0))
     if include_shadow:
-        shadow_layer = forest_shadow(
-            columns,
-            opacity_scale=(
-                LAVA_CAST_SHADOW_OPACITY
-                if lava_contact
-                else GROUND_CAST_SHADOW_OPACITY
-            ),
-            alpha_cap=(
-                LAVA_CAST_SHADOW_ALPHA_CAP
-                if lava_contact
-                else GROUND_CAST_SHADOW_ALPHA_CAP
-            ),
-        )
+        if render_style == "original":
+            shadow_layer = original_forest_shadow(
+                columns,
+                opacity_scale=0.28 if lava_contact else 0.66,
+            )
+        else:
+            shadow_layer = forest_shadow(
+                columns,
+                opacity_scale=(
+                    LAVA_CAST_SHADOW_OPACITY
+                    if lava_contact
+                    else GROUND_CAST_SHADOW_OPACITY
+                ),
+                alpha_cap=(
+                    LAVA_CAST_SHADOW_ALPHA_CAP
+                    if lava_contact
+                    else GROUND_CAST_SHADOW_ALPHA_CAP
+                ),
+            )
         canvas.alpha_composite(shadow_layer)
 
     for column in sorted(columns, key=lambda item: (item.base_y, item.x)):
@@ -211,20 +252,29 @@ def render_forest(
             column,
             lava_contact=lava_contact,
             material=material,
+            render_style=render_style,
         )
 
-    native = resize_native_rgba(canvas)
+    native = resize_native_rgba(
+        canvas,
+        sharpen=render_style != "original",
+    )
     return native, height_map(columns), footprint_map(columns)
 
 
-def resize_native_rgba(image: Image.Image) -> Image.Image:
+def resize_native_rgba(
+    image: Image.Image,
+    *,
+    sharpen: bool = True,
+) -> Image.Image:
     native = image.resize((NATIVE_SIZE, NATIVE_SIZE), Image.Resampling.LANCZOS)
-    alpha = native.getchannel("A")
-    sharpened_rgb = native.convert("RGB").filter(
-        ImageFilter.UnsharpMask(radius=0.55, percent=55, threshold=4)
-    )
-    native = sharpened_rgb.convert("RGBA")
-    native.putalpha(alpha)
+    if sharpen:
+        alpha = native.getchannel("A")
+        sharpened_rgb = native.convert("RGB").filter(
+            ImageFilter.UnsharpMask(radius=0.55, percent=55, threshold=4)
+        )
+        native = sharpened_rgb.convert("RGBA")
+        native.putalpha(alpha)
     native_rgba = np.asarray(native, dtype=np.uint8).copy()
     margin = 2
     native_rgba[:margin, :, :] = 0
@@ -332,6 +382,46 @@ def forest_shadow(
     return Image.fromarray(rgba, mode="RGBA")
 
 
+def original_forest_shadow(
+    columns: list[Column],
+    opacity_scale: float,
+) -> Image.Image:
+    """Reproduce the compact southeast shadow used by the approved original."""
+    mask = Image.new("L", (RENDER_SIZE, RENDER_SIZE), 0)
+    draw = ImageDraw.Draw(mask)
+    for column in columns:
+        base = hex_points(
+            column.x,
+            column.base_y,
+            column.radius * 1.08,
+            column.seed,
+        )
+        offset = 4.0 + column.height * 0.10
+        shadow = [
+            (
+                round((x + offset) * SCALE),
+                round((y + offset * 0.56) * SCALE),
+            )
+            for x, y in base
+        ]
+        draw.polygon(
+            shadow,
+            fill=min(185, round(70 + column.height * 0.85)),
+        )
+    blurred = ndimage.gaussian_filter(
+        np.asarray(mask, dtype=np.float32),
+        sigma=2.2 * SCALE,
+    )
+    rgba = np.zeros((RENDER_SIZE, RENDER_SIZE, 4), dtype=np.uint8)
+    rgba[:, :, :3] = np.asarray((17, 15, 14), dtype=np.uint8)
+    rgba[:, :, 3] = np.clip(
+        np.rint(blurred * opacity_scale),
+        0,
+        125,
+    ).astype(np.uint8)
+    return Image.fromarray(rgba, mode="RGBA")
+
+
 def convex_hull(
     points: list[tuple[float, float]],
 ) -> list[tuple[float, float]]:
@@ -367,6 +457,7 @@ def render_column(
     column: Column,
     lava_contact: bool,
     material: str,
+    render_style: str,
 ) -> None:
     base = hex_points(column.x, column.base_y, column.radius, column.seed)
     lean = min(2.2, column.height * 0.018)
@@ -377,7 +468,15 @@ def render_column(
         column.seed,
     )
 
-    if material == "ground_rock":
+    if render_style == "original":
+        if material != "basalt":
+            raise ValueError("the original renderer only supports basalt")
+        visible_faces = (
+            (0, (34, 34, 35), 0x21),
+            (1, (43, 41, 39), 0x43),
+            (2, (52, 49, 45), 0x65),
+        )
+    elif material == "ground_rock":
         visible_faces = (
             (0, (31, 32, 34), 0x21),
             (1, (36, 36, 37), 0x43),
@@ -402,6 +501,7 @@ def render_column(
             top_y=min(top[edge][1], top[next_edge][1]),
             bottom_y=max(base[edge][1], base[next_edge][1]),
             lava_contact=lava_contact,
+            render_style=render_style,
         )
 
     cap_rng = Random(column.seed ^ 0xCA9)
@@ -426,6 +526,7 @@ def render_column(
         top_y=min(y for _, y in top),
         bottom_y=max(y for _, y in top),
         lava_contact=False,
+        render_style=render_style,
     )
     add_cap_fractures(canvas, top, column.seed)
 
@@ -439,6 +540,7 @@ def textured_polygon(
     top_y: float,
     bottom_y: float,
     lava_contact: bool,
+    render_style: str,
 ) -> None:
     scaled = [(round(x * SCALE), round(y * SCALE)) for x, y in points]
     mask_image = Image.new("L", canvas.size, 0)
@@ -477,7 +579,12 @@ def textured_polygon(
 
     if vertical and lava_contact:
         distance_from_base = bottom_y - yy / SCALE
-        contact = np.clip((9.0 - distance_from_base) / 9.0, 0.0, 1.0) * mask
+        glow_height = 5.5 if render_style == "original" else 9.0
+        contact = np.clip(
+            (glow_height - distance_from_base) / glow_height,
+            0.0,
+            1.0,
+        ) * mask
         contact *= 0.96
         hot = np.clip((1.75 - distance_from_base) / 1.75, 0.0, 1.0) * mask
         target = np.zeros((RENDER_SIZE, RENDER_SIZE, 3), dtype=np.float32)
