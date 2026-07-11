@@ -587,3 +587,12 @@ CabalEngineerRepairBeam:
 	Range: 6128
 	Warhead@RepairWeapon: SpreadDamage
 		Damage: -1600
+
+CabalCrabClaws:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 25
+	Range: 1603
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 8

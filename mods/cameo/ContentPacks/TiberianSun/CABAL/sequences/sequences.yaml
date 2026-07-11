@@ -652,33 +652,33 @@ cabal_spidertankdrone:
 		Scale: 1
 		ShadowStart: 426
 
-cabal_heavyspider:
+cabal_crab:
 	idle:
-		Filename: cabal_heavyspider.shp
+		Filename: cabal_crab.shp
 		Start: 336
 		Facings: -8
 		Scale: 1
 		ShadowStart: 680
 	icon:
-		Filename: cabal_heavyspider_icon.png
+		Filename: cabal_crab_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: cabal_heavyspider.shp
+		Filename: cabal_crab.shp
 		Start: 336
 		Facings: -8
 		Scale: 1
 		ShadowStart: 680
 	walk:
-		Filename: cabal_heavyspider.shp
+		Filename: cabal_crab.shp
 		Length: 21
 		Facings: -8
 		Tick: 60
 		Scale: 1
 		ShadowStart: 344
 	shoot:
-		Filename: cabal_heavyspider.shp
+		Filename: cabal_crab.shp
 		Facings: -8
 		Start: 168
 		Length: 21

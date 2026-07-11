@@ -423,7 +423,7 @@ cabal_spidertankdrone:
 		ValidMovementTypes: Horizontal, Turn
 	DeathSounds:
 
-cabal_heavyspider:
+cabal_crab:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -436,9 +436,9 @@ cabal_heavyspider:
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
-		Cost: 1200
+		Cost: 675
 	Tooltip:
-		Name: Heavy Spider
+		Name: Crab
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory
@@ -446,14 +446,14 @@ cabal_heavyspider:
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 64
-		Speed: 80
+		TurnSpeed: 20
+		Speed: 100
 	Health:
-		HP: 80000
+		HP: 50000
 	Repairable:
-		HpPerStep: 1500
+		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 20
 	Armament@PRIMARY:
 		Weapon: TSAssaultCannon
 		LocalOffset: 350,-90,250, 350,90,250
@@ -462,7 +462,7 @@ cabal_heavyspider:
 		MuzzleSequence: muzzle
 	Armament@SECONDARY:
 		Name: secondary
-		Weapon: TSReaperTusk
+		Weapon: CabalCrabClaws
 		LocalOffset: -350,90,340, -350,-90,340
 		LocalYaw: -100, 100
 		Recoil: 10
@@ -480,8 +480,10 @@ cabal_heavyspider:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+	Turreted(?:@[\w.]+)?:
+		TurnSpeed: 20
  	SpawnActorOnDeath@backup:
- 		Actor: cabal_heavyspider_backup
+ 		Actor: cabal_crab_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_artilleryspider:
