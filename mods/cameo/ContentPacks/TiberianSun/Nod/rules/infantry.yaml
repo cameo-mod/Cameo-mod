@@ -92,7 +92,7 @@ ts_nod_elitecadre:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOsrder: 50
+		BuildPaletteOrder: 50
 		Prerequisites: ~ts_nod_handof, ts_nod_radar
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Air, Vehicles\n  Weak vs Siege, Heavy armor
@@ -167,7 +167,7 @@ ts_nod_toxintrooper:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOsrder: 80
+		BuildPaletteOrder: 80
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
@@ -211,7 +211,7 @@ ts_nod_shadowteam:
 		AddToArmyValue: true
 	Buildable:
 		IconPalette: ra2
-		BuildPaletteOsrder: 90
+		BuildPaletteOrder: 90
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: actor_ts_nod_shadowteam.description
@@ -334,7 +334,7 @@ ts_nod_shotguncommando:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOsrder: 100
+		BuildPaletteOrder: 100
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
