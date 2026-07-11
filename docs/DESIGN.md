@@ -166,6 +166,12 @@ cheapest provider wins).
 - Roster-wide upgrades must cover the full roster (audit_upgrade_coverage).
 - Worst-case stack budget ≤ 2.0× fresh-self effective power
   (audit_power_budget; veterancy ladders are exclusive, count best rank).
+- **Stat-modifier philosophy** (design 2026-07-11, modeled by
+  ^PromotionUnitBuff's +5%/+10% steps): speed and range are only ever
+  increased MODERATELY (never big jumps); damage-taken multipliers may
+  stack, but the COMBINED product must never drop below **50%** — below
+  that units feel undamageable. Hard floor; audit extension TODO
+  (worst-case stacked DamageMultiplier per unit < 0.5 = finding).
 - AA gating, defense tiers, and tech trees per §4.
 
 ## 7. Descriptions & localization (rollout in progress)
