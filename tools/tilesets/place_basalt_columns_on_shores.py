@@ -21,6 +21,21 @@ import scan_shore_decoration_anchors as anchor_scanner
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_WORKBENCH = Path.home() / "Documents/agents/volcanic-theater/shorelines/workbench"
 FAMILY_SCALES = {"tiny": 1.0, "small": 1.0, "medium": 0.82, "large": 0.68}
+PLACEMENT_NUDGE_OFFSETS = (
+    (0, 0),
+    (-4, 0),
+    (4, 0),
+    (0, -4),
+    (0, 4),
+    (-8, 0),
+    (8, 0),
+    (0, -8),
+    (0, 8),
+    (-12, 0),
+    (12, 0),
+    (0, -12),
+    (0, 12),
+)
 FAMILY_DOWNGRADE = {
     "large": ("large", "medium", "small", "tiny"),
     "medium": ("medium", "small", "tiny"),
@@ -48,7 +63,10 @@ def main() -> int:
     )
     parser.add_argument("--approved-dir", type=Path, default=DEFAULT_WORKBENCH)
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_WORKBENCH)
+    parser.add_argument("--page-size", type=int, default=4)
     args = parser.parse_args()
+    if args.page_size < 1:
+        raise ValueError("page size must be at least 1")
     out_dir = args.out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
     manifest = json.loads(args.manifest.read_text(encoding="utf-8"))
@@ -85,6 +103,21 @@ def main() -> int:
     range_name = "_".join(args.templates)
     review_path = out_dir / f"basalt_placement_review_{range_name}.png"
     shore.write_review_sheet(review_path, review_panels, columns=3, scale=2)
+    page_paths: list[Path] = []
+    if len(args.templates) > args.page_size:
+        for start in range(0, len(args.templates), args.page_size):
+            page_templates = args.templates[start : start + args.page_size]
+            panel_start = start * 3
+            panel_end = panel_start + len(page_templates) * 3
+            page_name = "_".join(page_templates)
+            page_path = out_dir / f"basalt_placement_review_{page_name}.png"
+            shore.write_review_sheet(
+                page_path,
+                review_panels[panel_start:panel_end],
+                columns=3,
+                scale=2,
+            )
+            page_paths.append(page_path)
     audit = {
         "preview_only": True,
         "vol_files_written": False,
@@ -95,6 +128,8 @@ def main() -> int:
     audit_path = out_dir / f"basalt_placement_audit_{range_name}.json"
     audit_path.write_text(json.dumps(audit, indent=2), encoding="utf-8")
     print(review_path.resolve())
+    for page_path in page_paths:
+        print(page_path.resolve())
     print(audit_path.resolve())
     return 0
 
@@ -241,6 +276,39 @@ def place_template(
 
 
 def fit_candidate(
+    candidate: dict[str, object],
+    domain: np.ndarray,
+    background_rgb: np.ndarray,
+    occupied: np.ndarray,
+    families: dict[str, list[pillars.Column]],
+    sprites: dict[str, dict[str, dict[str, Image.Image]]],
+) -> dict[str, object] | None:
+    requested_anchor = candidate["anchor"]
+    for nudge_x, nudge_y in PLACEMENT_NUDGE_OFFSETS:
+        adjusted = dict(candidate)
+        adjusted["anchor"] = {
+            "x": int(requested_anchor["x"]) + nudge_x,
+            "y": int(requested_anchor["y"]) + nudge_y,
+        }
+        chosen = fit_candidate_at_anchor(
+            adjusted,
+            domain,
+            background_rgb,
+            occupied,
+            families,
+            sprites,
+        )
+        if chosen is not None:
+            chosen["requested_anchor"] = {
+                "x": int(requested_anchor["x"]),
+                "y": int(requested_anchor["y"]),
+            }
+            chosen["anchor_nudge"] = {"x": nudge_x, "y": nudge_y}
+            return chosen
+    return None
+
+
+def fit_candidate_at_anchor(
     candidate: dict[str, object],
     domain: np.ndarray,
     background_rgb: np.ndarray,

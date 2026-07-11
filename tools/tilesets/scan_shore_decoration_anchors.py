@@ -449,7 +449,7 @@ def anchor_overlay(
         draw.line((x, y - 4, x, y + 4), fill=(255, 255, 255), width=1)
         draw.text((x + 3, max(0, y - 11)), candidate["id"], fill=(255, 255, 255))
     if not candidates:
-        draw.text((4, 4), "No Rock semantic anchors", fill=(235, 235, 235))
+        draw.text((4, 4), "No decoration anchors", fill=(235, 235, 235))
     return image
 
 
