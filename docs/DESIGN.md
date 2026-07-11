@@ -337,7 +337,9 @@ building requirements — production buildings (barracks, war factory,
 helipad, naval yard) and refineries NEVER count. No tech requirement =
 Tier 1 (war-factory units without a radar requirement are still T1);
 radar tech (or equivalent) = Tier 2; tech center = Tier 3; beyond =
-Tier 4/5. M: T1/T2 = 1.0, T3 = 0.75, T4/5 = 0.5. Auto-correcting the
+Tier 4/5. Tech gates count TRANSITIVELY through the production chain:
+the helipad/airfield itself requires radar, so **ALL aircraft are at
+least Tier 2**. M: T1/T2 = 1.0, T3 = 0.75, T4/5 = 0.5. Auto-correcting the
 missing discounts across the sheets is approved — under the nice-number
 law above.
 
