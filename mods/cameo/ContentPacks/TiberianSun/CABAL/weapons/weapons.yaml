@@ -580,3 +580,10 @@ CabalCoreDefenderLaser:
 		Damage: 160000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 80
+
+CabalEngineerRepairBeam:
+	Inherits: ^RepairWeapon
+	ReloadDelay: 31
+	Range: 6128
+	Warhead@RepairWeapon: SpreadDamage
+		Damage: -1600

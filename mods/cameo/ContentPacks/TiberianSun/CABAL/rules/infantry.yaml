@@ -13,7 +13,30 @@ cabal_engineer:
 	-TakeCover:
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
-
+	Valued:
+		Cost: 800
+	Health:
+		HP: 20000
+	Mobile:
+		Speed: 50
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@REPAIRBEAM:
+		Name: primary
+		Weapon: CabalEngineerRepairBeam
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
 cabal_cyborginfantry:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate

@@ -64,3 +64,33 @@ in sheet); descriptions per §7 as part of the pass.
 5. **Rocket Cyborg**: is cabal_devout the intended base, or a new unit?
 6. **Dissolver K=1.5**: add the missing innate cloak (vampire is
    already implemented), or drop the sheet to K=1.25?
+
+
+## Batch 2b work order (design 2026-07-11)
+
+- **Engineer**: gets the repair beam + ammo system per the Naxis
+  engineering truck / Schwarzer Mond repair bot / Terran SCV pattern.
+- **Rocket Cyborg**: cabal_platedarmorcyborg RENAMES to
+  cabal_rocketcyborg (sheet row 650/45k/24000@60); **cabal_devout is
+  its promotion upgrade** (cnc4 Rocket row 900/60k/24000@50).
+- **Hacker**: weak Ixian-projector-style disabling weapon (charge-up
+  first), ~10 range, low attack speed, formula-priced. Sound: the GDI
+  Predator laser targeting sound, NOT tesla. Additional hacking
+  mechanic: open brainstorm (vehicle mind-control too Yuri-like).
+- **Ixian Projector rework** (D2k Ixian): predator-laser sound; DOUBLE
+  damage on weapon and EMP; holograms become carrier-master/slave
+  drones (aircraft-carrier logic on a ground unit — experiment):
+  projector damages + EMP-disables + marks the target, holograms
+  attack it. Replaces deploy + mob-spawner.
+- **New units**: Crab/Widow/Avatar/Heavy Reaper launch with placeholder
+  art from base units (no art yet).
+- **Pillbox**: it is a BUNKER (building + infantry inside; the
+  garrison's weapon is the defense; cost = initial load). References:
+  RA2 Soviet Battle Bunker, Terran bunker, RA1/RA2 pillboxes. Options
+  for a unique CABAL version to be proposed.
+- **New early turret**: Nod Laser Turret art, fires the CLASSIC GREEN
+  PLASMA BALL. The same green plasma projectile goes on Cyborg
+  Commando and Commando Mk2 (asset exists somewhere in the files).
+- **TS authenticity pass**: find the classic TS rocket trail(s), apply
+  to all TS rocket units; reference the Shattered Paradise mod for
+  correct TS projectile/explosion/sound effects across all TS units.

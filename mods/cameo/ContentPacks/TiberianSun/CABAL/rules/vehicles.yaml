@@ -255,16 +255,6 @@ cabal_tiberiumharvester:
 #	Valued:
 #		Cost: 1100
 
-cabal_mobilerepairvehicle:
-	Inherits: ts_nod_mobilerepairvehicle
-	Buildable:
-		Prerequisites: ~cabal_mechfactory, cabal_servicedepot
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: ts_nod_mobilerepairvehicle
-	RenderVoxels:
-		Image: ts_nod_mobilerepairvehicle
-
 cabal_laserspider:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
