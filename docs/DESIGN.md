@@ -248,8 +248,9 @@ cheapest provider wins).
 
 ## 12. Balance formula — the Cameo Armor System workbook
 
-_Source: `C:\Users\AedisToru\OneDrive\Dokumente\Cameo Armor System.xlsx`
-(sheets: Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
+_Source of truth: **`docs/design/cameo_armor_system.xlsx`** (the repo
+working copy; design's private master is synced into it; sheets:
+Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
 Defenses; Tabelle2/3 are scratch). 333ggg's CABAL concept
 (`Downloads\cabal.xlsx`) uses the same sheet layout. Tooling: openpyxl
 reads AND writes these — formula changes can be re-applied to every
@@ -370,6 +371,11 @@ comes LAST; the earlier inherits only contribute their warheads.
 - ❓ FriendlyFire twins: some templates default them EQUAL to the main
   damage (^MediumChemicalWeapon 1000/1000), some HALF (^LightFlameWeapon
   2000/1000); the override convention needs a design ruling.
+- **MEME UNITS ARE SACRED (design 2026-07-11).** `NanoArtilleryAG` /
+  `NanoSmokeAG` (everything 7s and 3s) and `HammerheadArtillery`
+  (everything 1s) are deliberate joke stat lines and are NEVER touched
+  by any formula, rule sweep or rebalance — no matter how the balance
+  formula changes. Audits list them as exempt, never as findings.
 - **Multi-weapon units**: the sheet Damage is the SUM over the baseline
   loadout — every `primary` armament not gated behind an upgrade (GDI
   Battle Tank: cannon 8000 + missiles 8000 = sheet 16000).

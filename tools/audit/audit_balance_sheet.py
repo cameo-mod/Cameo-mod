@@ -14,7 +14,7 @@ Mismatches are reported for design review — the sheet is the intended
 truth, but per design every mismatch is ASKED about, never auto-fixed.
 
 Usage: python audit_balance_sheet.py [--xlsx PATH]
-Default workbook: C:/Users/AedisToru/OneDrive/Dokumente/Cameo Armor System.xlsx
+Default workbook: docs/design/cameo_armor_system.xlsx (repo copy)
 """
 
 from __future__ import annotations
@@ -27,8 +27,10 @@ import sys
 from cameo_model import Model
 from report import h1, h2, table
 
-DEFAULT_XLSX = r"C:/Users/AedisToru/OneDrive/Dokumente/Cameo Armor System.xlsx"
+DEFAULT_XLSX = str(pathlib.Path(__file__).resolve().parents[2]
+                   / "docs/design/cameo_armor_system.xlsx")
 UNIT_SHEETS = ("Infantry", "Tanks", "Vehicles", "Aircraft", "Defenses")
+MEME_EXEMPT = {"nanoartilleryag", "nanosmokeag", "hammerheadartillery"}
 UTILITY = {"genericc4", "defusekit", "leechdisinfect", "repair", "heal",
            "medikit", "dogjaw"}
 
