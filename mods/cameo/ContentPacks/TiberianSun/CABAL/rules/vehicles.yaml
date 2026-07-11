@@ -209,7 +209,7 @@ cabal_dissolver:
 		Sequence: shoot
 		RequiresCondition: attack
 	Voiced:
-		VoiceSet: cabal_cyborginfantry
+		VoiceSet: TSCyborg
 
 cabal_tiberiumharvester:
 	Inherits: ^TDHARV
@@ -757,7 +757,7 @@ cabal_eliminator1000:
 		Condition: hospital
 		Prerequisites: machshop
 	Voiced:
-		VoiceSet: cabal_cyborginfantry
+		VoiceSet: TSCyborg
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle

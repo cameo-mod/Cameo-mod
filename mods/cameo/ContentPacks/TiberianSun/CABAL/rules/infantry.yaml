@@ -5,7 +5,7 @@ cabal_engineer:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
 	Voiced:
-		VoiceSet: cabal_cyborginfantry
+		VoiceSet: TSCyborg
 	-TemporaryOwnerManager:
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -57,7 +57,7 @@ cabal_cyborginfantry:
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
 	Voiced:
-		VoiceSet: cabal_cyborginfantry
+		VoiceSet: TSCyborg
 	-TakeCover:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
