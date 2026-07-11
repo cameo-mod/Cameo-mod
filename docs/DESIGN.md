@@ -377,8 +377,9 @@ set straight to 2 until per-ability values exist):**
   carry K below 1 (TD Obelisk of Light K=0.75, CABAL Obelisk Prime
   K=0.75). Mobile units with charge delays do NOT get the discount.
   The discount applies only to LONG charge-ups (Obelisk-class); brief
-  charges (Tesla Coil, Prism, Waveforce) are not significant enough —
-  those keep their specials premium (K=1.25) undiscounted.
+  charges (Tesla Coil, Prism, Waveforce) are not significant enough.
+  The Tesla Coil's K=1.25 is its inherent EMP effect counting as the
+  special (+0.25), undiscounted by its short charge.
 
 **The baseline unit (design 2026-07-11): the Naxis Tiger Tank** —
 100 000 HP, 100 Speed, 10 000 damage, range 5.0 (= 5000 wdist,
