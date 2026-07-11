@@ -10,6 +10,7 @@ from random import Random
 
 import numpy as np
 from PIL import Image, ImageDraw
+from scipy import ndimage
 
 import generate_basalt_pillar_study as pillars
 import generate_sh04_alpha_beach_prototype as shore
@@ -160,25 +161,38 @@ def render_ground_sprite(
     *,
     family_name: str,
     variant: str,
+    companion_count: int | None = None,
+    companion_seed_salt: int | None = None,
+    companion_radius_scale: float = 1.0,
+    companion_height_scale: float = 1.0,
+    companion_outset: float = 0.0,
+    unified_shadow: bool = False,
+    body_clip_bounds: tuple[int, int, int, int] | None = None,
+    shadow_clip_bounds: tuple[int, int, int, int] | None = None,
 ) -> tuple[Image.Image, list[pillars.Column]]:
     main, _, _ = pillars.render_forest(
         columns,
         lava_contact=False,
         include_shadow=False,
     )
+    main = clip_body(main, body_clip_bounds)
     rocks = build_companion_rocks(
         columns,
         family_name=family_name,
         variant=variant,
+        companion_count=companion_count,
+        companion_seed_salt=companion_seed_salt,
+        radius_scale=companion_radius_scale,
+        height_scale=companion_height_scale,
+        outward_offset=companion_outset,
     )
     if not rocks:
-        shadow = pillars.resize_native_rgba(
-            pillars.forest_shadow(
-                columns,
-                opacity_scale=pillars.GROUND_CAST_SHADOW_OPACITY,
-                alpha_cap=pillars.GROUND_CAST_SHADOW_ALPHA_CAP,
-            )
+        shadow = ground_shadow(
+            columns,
+            unified=unified_shadow,
+            fit_bounds=shadow_clip_bounds,
         )
+        shadow = clip_body(shadow, shadow_clip_bounds)
         result = shadow.copy()
         result.alpha_composite(main)
         return result, rocks
@@ -188,17 +202,104 @@ def render_ground_sprite(
         include_shadow=False,
         material="ground_rock",
     )
-    shadow = pillars.resize_native_rgba(
-        pillars.forest_shadow(
-            columns + rocks,
-            opacity_scale=pillars.GROUND_CAST_SHADOW_OPACITY,
-            alpha_cap=pillars.GROUND_CAST_SHADOW_ALPHA_CAP,
-        )
+    rock_layer = clip_body(rock_layer, body_clip_bounds)
+    shadow = ground_shadow(
+        columns + rocks,
+        unified=unified_shadow,
+        fit_bounds=shadow_clip_bounds,
     )
+    shadow = clip_body(shadow, shadow_clip_bounds)
     result = shadow.copy()
     result.alpha_composite(main)
     result.alpha_composite(rock_layer)
     return result, rocks
+
+
+def clip_body(
+    image: Image.Image,
+    bounds: tuple[int, int, int, int] | None,
+) -> Image.Image:
+    if bounds is None:
+        return image
+    left, top, right, bottom = bounds
+    rgba = np.asarray(image.convert("RGBA"), dtype=np.uint8).copy()
+    keep = np.zeros(rgba.shape[:2], dtype=bool)
+    keep[max(0, top) : min(keep.shape[0], bottom + 1), max(0, left) : min(keep.shape[1], right + 1)] = True
+    rgba[~keep, 3] = 0
+    return Image.fromarray(rgba, mode="RGBA")
+
+
+def ground_shadow(
+    columns: list[pillars.Column],
+    *,
+    unified: bool,
+    fit_bounds: tuple[int, int, int, int] | None = None,
+) -> Image.Image:
+    raw = pillars.resize_native_rgba(
+        pillars.forest_shadow(
+            columns,
+            opacity_scale=pillars.GROUND_CAST_SHADOW_OPACITY,
+            alpha_cap=pillars.GROUND_CAST_SHADOW_ALPHA_CAP,
+        )
+    )
+    if unified:
+        rgba = np.asarray(raw, dtype=np.uint8).copy()
+        alpha = rgba[:, :, 3]
+        body = alpha > 10
+        body = ndimage.binary_closing(
+            body,
+            structure=np.ones((5, 11), dtype=bool),
+            iterations=2,
+        )
+        body = ndimage.binary_fill_holes(body)
+        softened = ndimage.gaussian_filter(body.astype(np.float32), sigma=0.9)
+        rgba[:, :, :3] = np.asarray(pillars.CAST_SHADOW_COLOR, dtype=np.uint8)
+        rgba[:, :, 3] = np.clip(
+            np.rint(softened * pillars.GROUND_CAST_SHADOW_ALPHA_CAP),
+            0,
+            pillars.GROUND_CAST_SHADOW_ALPHA_CAP,
+        ).astype(np.uint8)
+        raw = Image.fromarray(rgba, mode="RGBA")
+    return fit_shadow_inside(raw, fit_bounds)
+
+
+def fit_shadow_inside(
+    shadow: Image.Image,
+    bounds: tuple[int, int, int, int] | None,
+) -> Image.Image:
+    """Shrink and shift the complete soft shadow inside its footprint."""
+    if bounds is None:
+        return shadow
+    alpha = shadow.getchannel("A")
+    source = alpha.getbbox()
+    if source is None:
+        return shadow
+    left, top, right, bottom = bounds
+    inset = 1
+    available_width = max(1, right - left + 1 - inset * 2)
+    available_height = max(1, bottom - top + 1 - inset * 2)
+    source_width = source[2] - source[0]
+    source_height = source[3] - source[1]
+    scale_x = min(1.0, available_width / source_width)
+    scale_y = min(1.0, available_height / source_height)
+    fitted_width = max(1, round(source_width * scale_x))
+    fitted_height = max(1, round(source_height * scale_y))
+    fitted_alpha = alpha.crop(source).resize(
+        (fitted_width, fitted_height),
+        Image.Resampling.LANCZOS,
+    )
+    original_center_x = (source[0] + source[2] - 1) / 2
+    original_center_y = (source[1] + source[3] - 1) / 2
+    fitted_left = round(original_center_x - (fitted_width - 1) / 2)
+    fitted_top = round(original_center_y - (fitted_height - 1) / 2)
+    fitted_left = min(max(fitted_left, left + inset), right - inset - fitted_width + 1)
+    fitted_top = min(max(fitted_top, top + inset), bottom - inset - fitted_height + 1)
+    canvas = Image.new("RGBA", shadow.size, (*pillars.CAST_SHADOW_COLOR, 0))
+    canvas.putalpha(Image.new("L", shadow.size, 0))
+    alpha_canvas = canvas.getchannel("A")
+    alpha_canvas.paste(fitted_alpha, (fitted_left, fitted_top))
+    canvas.putalpha(alpha_canvas)
+    return canvas
 
 
 def build_companion_rocks(
@@ -206,11 +307,25 @@ def build_companion_rocks(
     *,
     family_name: str,
     variant: str,
+    companion_count: int | None = None,
+    companion_seed_salt: int | None = None,
+    radius_scale: float = 1.0,
+    height_scale: float = 1.0,
+    outward_offset: float = 0.0,
 ) -> list[pillars.Column]:
-    count = COMPANION_COUNTS[family_name]
+    count = (
+        COMPANION_COUNTS[family_name]
+        if companion_count is None
+        else companion_count
+    )
     if count == 0:
         return []
-    seed = SEED ^ FAMILY_SEED_SALTS[family_name]
+    salt = (
+        FAMILY_SEED_SALTS[family_name]
+        if companion_seed_salt is None
+        else companion_seed_salt
+    )
+    seed = SEED ^ salt
     if variant == "shorter":
         seed ^= 0x5A07
     rng = Random(seed)
@@ -227,14 +342,17 @@ def build_companion_rocks(
         x = rng.uniform(segment_left, segment_right)
         contour_x = int(np.clip(round(x), left, right))
         y = float(contour[contour_x])
-        radius = max(0.85, average_radius * rng.uniform(0.30, 0.48))
-        y -= radius * rng.uniform(0.08, 0.42)
+        radius = max(0.85, average_radius * rng.uniform(0.30, 0.48) * radius_scale)
+        y += radius * (outward_offset - rng.uniform(0.08, 0.42))
         x = float(np.clip(x, 3.0 + radius, pillars.NATIVE_SIZE - 4.0 - radius))
         y = float(np.clip(y, 3.0 + radius, pillars.NATIVE_SIZE - 4.0 - radius))
         height_low = max(0.8, radius * 1.05)
         height_high = min(radius * 2.15, maximum_height * 0.58)
         height_high = max(height_low + 0.15, height_high)
-        height = min(rng.uniform(height_low, height_high), maximum_height * 0.72)
+        height = min(
+            rng.uniform(height_low, height_high) * height_scale,
+            maximum_height * 0.72,
+        )
         rocks.append(
             pillars.Column(
                 x=x,

@@ -5,6 +5,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 from pathlib import Path
 
 import numpy as np
@@ -47,6 +48,13 @@ ASSET_TO_FAMILY = {
     "medium_column_cluster": "medium",
     "approved_large_column_cluster": "large",
 }
+GROUND_LOCOMOTORS = (
+    "foot",
+    "wheeled",
+    "lighttracked",
+    "tracked",
+    "heavytracked",
+)
 
 
 def main() -> int:
@@ -123,6 +131,16 @@ def main() -> int:
         "vol_files_written": False,
         "manifest": str(args.manifest.resolve()),
         "approved_dir": str(args.approved_dir.resolve()),
+        "accessibility_rule": (
+            "column base must be at least 80 percent supported by terrain "
+            "blocking every representative ground locomotor"
+        ),
+        "representative_ground_locomotors": list(GROUND_LOCOMOTORS),
+        "ground_passable_terrains": sorted(
+            ground_locomotor_passable_terrains(
+                ROOT / "mods/cameo/rules/world.yaml"
+            )
+        ),
         "templates": audit_templates,
     }
     audit_path = out_dir / f"basalt_placement_audit_{range_name}.json"
@@ -169,6 +187,12 @@ def place_template(
         ROOT / "mods/cameo/tilesets/ra_temperat.yaml",
         f"{template}.tem",
     )
+    volcanic_spec = shore.read_template_spec(
+        ROOT / "mods/cameo/tilesets/volcanic.yaml",
+        f"{template}.vol",
+    )
+    if (spec.columns, spec.rows) != (volcanic_spec.columns, volcanic_spec.rows):
+        raise ValueError(f"{template}: donor and Volcanic template sizes differ")
     donor, domain = shore.read_sparse_composite(
         ROOT / "mods/cameo/bits/temp" / spec.image,
         spec,
@@ -189,6 +213,14 @@ def place_template(
     )
 
     background_rgb = np.asarray(approved, dtype=np.uint8)
+    ground_passable = ground_locomotor_passable_terrains(
+        ROOT / "mods/cameo/rules/world.yaml"
+    )
+    blocking_mask = blocking_terrain_mask(
+        volcanic_spec,
+        domain,
+        ground_passable,
+    )
     occupied = np.zeros(domain.shape, dtype=bool)
     placed: list[dict[str, object]] = []
     rejected: list[dict[str, object]] = []
@@ -203,6 +235,8 @@ def place_template(
         chosen = fit_candidate(
             candidate,
             domain,
+            blocking_mask,
+            volcanic_spec,
             background_rgb,
             occupied,
             families,
@@ -212,7 +246,10 @@ def place_template(
             rejected.append(
                 {
                     "candidate": candidate["id"],
-                    "reason": "no family fit passed sparse-domain and overlap limits",
+                    "reason": (
+                        "no family fit passed sparse-domain, ground-blocking, "
+                        "and overlap limits"
+                    ),
                 }
             )
             continue
@@ -278,6 +315,8 @@ def place_template(
 def fit_candidate(
     candidate: dict[str, object],
     domain: np.ndarray,
+    blocking_mask: np.ndarray,
+    volcanic_spec: shore.TemplateSpec,
     background_rgb: np.ndarray,
     occupied: np.ndarray,
     families: dict[str, list[pillars.Column]],
@@ -293,6 +332,8 @@ def fit_candidate(
         chosen = fit_candidate_at_anchor(
             adjusted,
             domain,
+            blocking_mask,
+            volcanic_spec,
             background_rgb,
             occupied,
             families,
@@ -311,6 +352,8 @@ def fit_candidate(
 def fit_candidate_at_anchor(
     candidate: dict[str, object],
     domain: np.ndarray,
+    blocking_mask: np.ndarray,
+    volcanic_spec: shore.TemplateSpec,
     background_rgb: np.ndarray,
     occupied: np.ndarray,
     families: dict[str, list[pillars.Column]],
@@ -318,6 +361,11 @@ def fit_candidate_at_anchor(
 ) -> dict[str, object] | None:
     preferred = preferred_family(candidate)
     anchor = candidate["anchor"]
+    anchor_terrain = terrain_at_anchor(volcanic_spec, anchor)
+    if anchor_terrain is None or not blocking_mask[
+        int(anchor["y"]), int(anchor["x"])
+    ]:
+        return None
     for family_name in FAMILY_DOWNGRADE[preferred]:
         scale = FAMILY_SCALES[family_name]
         for variant in ("normal", "shorter"):
@@ -344,10 +392,15 @@ def fit_candidate_at_anchor(
                     domain,
                 )
             required_clearance = 6.0 if treatment == "glowing" else 2.0
+            base_pixels = int(np.count_nonzero(base_mask))
+            blocking_base_fraction = int(
+                np.count_nonzero(base_mask & blocking_mask)
+            ) / max(1, base_pixels)
             if (
                 visible_pixels == 0
                 or coverage < 0.90
                 or envelope_edge_clearance < required_clearance
+                or blocking_base_fraction < 0.80
             ):
                 continue
             overlap_pixels = int(np.count_nonzero(column_mask & occupied))
@@ -362,6 +415,8 @@ def fit_candidate_at_anchor(
                 "variant": variant,
                 "scale": scale,
                 "treatment": treatment,
+                "anchor_terrain": anchor_terrain,
+                "blocking_base_fraction": round(blocking_base_fraction, 3),
                 "domain_coverage": round(coverage, 3),
                 "domain_edge_clearance": round(edge_clearance, 3),
                 "complete_envelope_edge_clearance": round(
@@ -488,6 +543,99 @@ def pool_layer_for_base(base_mask: np.ndarray, domain: np.ndarray) -> Image.Imag
         np.dstack((np.clip(np.rint(rgb), 0, 255).astype(np.uint8), alpha)),
         mode="RGBA",
     )
+
+
+def locomotor_passable_terrains(path: Path) -> dict[str, set[str]]:
+    """Parse active locomotor terrain-speed entries from world rules."""
+    speeds: dict[str, set[str]] = {}
+    current_name: str | None = None
+    trait_indent: int | None = None
+    speeds_indent: int | None = None
+    terrain_indent: int | None = None
+    current_speeds: set[str] = set()
+
+    def finish() -> None:
+        nonlocal current_name, current_speeds
+        if current_name is not None:
+            speeds[current_name] = set(current_speeds)
+        current_name = None
+        current_speeds = set()
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        content = raw_line.split("#", 1)[0].rstrip()
+        if not content:
+            continue
+        stripped = content.lstrip()
+        indent = len(content) - len(stripped)
+        if re.match(r"Locomotor@[^:]+:$", stripped):
+            finish()
+            trait_indent = indent
+            speeds_indent = None
+            terrain_indent = None
+            continue
+        if trait_indent is None:
+            continue
+        if indent <= trait_indent:
+            finish()
+            trait_indent = None
+            speeds_indent = None
+            terrain_indent = None
+            continue
+        if stripped.startswith("Name:"):
+            current_name = stripped.split(":", 1)[1].strip()
+            continue
+        if stripped == "TerrainSpeeds:":
+            speeds_indent = indent
+            terrain_indent = None
+            continue
+        if speeds_indent is None or indent <= speeds_indent:
+            continue
+        if terrain_indent is None:
+            terrain_indent = indent
+        if indent != terrain_indent:
+            continue
+        match = re.match(r"([A-Za-z0-9_-]+):\s*[0-9]+", stripped)
+        if match:
+            current_speeds.add(match.group(1))
+    finish()
+
+    return speeds
+
+
+def ground_locomotor_passable_terrains(path: Path) -> set[str]:
+    """Return terrain traversable by at least one representative land locomotor."""
+    speeds = locomotor_passable_terrains(path)
+    missing = [name for name in GROUND_LOCOMOTORS if name not in speeds]
+    if missing:
+        raise ValueError(f"missing ground locomotors in {path}: {missing}")
+    return set().union(*(speeds[name] for name in GROUND_LOCOMOTORS))
+
+
+def blocking_terrain_mask(
+    spec: shore.TemplateSpec,
+    domain: np.ndarray,
+    passable: set[str],
+) -> np.ndarray:
+    mask = np.zeros_like(domain)
+    for index, terrain in spec.terrain.items():
+        if terrain in passable:
+            continue
+        x0 = index % spec.columns * shore.TILE
+        y0 = index // spec.columns * shore.TILE
+        mask[y0 : y0 + shore.TILE, x0 : x0 + shore.TILE] = True
+    return mask & domain
+
+
+def terrain_at_anchor(
+    spec: shore.TemplateSpec,
+    anchor: dict[str, object],
+) -> str | None:
+    x = int(anchor["x"])
+    y = int(anchor["y"])
+    if x < 0 or y < 0 or x >= spec.columns * shore.TILE or y >= spec.rows * shore.TILE:
+        return None
+    index = y // shore.TILE * spec.columns + x // shore.TILE
+    return spec.terrain.get(index)
 
 
 def resolve_treatment(
