@@ -1,5 +1,6 @@
 swarmer.ordos:
 	Inherits: ^RANeutralPlane
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^FighterTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -765,6 +766,7 @@ eye_husk.ordos:
 
 carryall_reinforce.ordos:
 	Inherits: carryall.reinforce
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: Advanced Carryall
@@ -791,6 +793,7 @@ carryall_reinforce.ordos:
 		Upgrades: up_laserguns.ordos
 carryall.ordos:
 	Inherits: carryall
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
 		Queue: Aircraft, RAAircraft
