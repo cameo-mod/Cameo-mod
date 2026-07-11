@@ -332,11 +332,14 @@ per class, identical for every unit of that class:
 | Helicopter 1.0 · Fighter 1.0 · Spaceship 1.0 | aircraft |
 | Basic Defense 0.35 · AA Defense 0.225 · Advanced Defense 0.325 | defenses |
 
-**Tier counting for the M discount**: Tier 2 = radar tech OR war
-factory (**refinery requirements never count** toward the tier); tech
-center = Tier 3. T1/T2 = 1.0, T3 = 0.75, T4/5 = 0.5. Auto-correcting
-the missing discounts across the sheets is approved — under the
-nice-number law above.
+**Tier counting for the M discount**: the tier is set ONLY by TECH
+building requirements — production buildings (barracks, war factory,
+helipad, naval yard) and refineries NEVER count. No tech requirement =
+Tier 1 (war-factory units without a radar requirement are still T1);
+radar tech (or equivalent) = Tier 2; tech center = Tier 3; beyond =
+Tier 4/5. M: T1/T2 = 1.0, T3 = 0.75, T4/5 = 0.5. Auto-correcting the
+missing discounts across the sheets is approved — under the nice-number
+law above.
 
 **Early-vs-late philosophy**: upgrades boost cheap early-game units
 proportionally MORE than late units; late units are compensated through
