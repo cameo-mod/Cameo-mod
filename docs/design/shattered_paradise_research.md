@@ -3,10 +3,17 @@
 _Research 2026-07-11 against the local SDK checkout
 (`C:\Users\AedisToru\Downloads\Shattered-Paradise-SDK-bleed`, bleed).
 SP is the reference-quality OpenRA TS total conversion. License: code
-GPLv3 (traits are portable into our GPL assemblies with attribution),
-ALL art/audio assets CC BY-NC 4.0 — usable in Cameo (free mod) with
-credit in `mods/cameo/credits.txt`. tjk-ws has already started mining
-it: `TakeOffOnMake.cs` in OpenRA.Mods.Cameo is SP's trait verbatim._
+GPLv3 (traits are portable into our GPL assemblies with attribution).
+**ASSET LAW (design 2026-07-11): take NO art or sound from SP** — no
+icons, no sprites, no audio that doesn't exist in base Tiberian Sun.
+Use only TS assets Cameo already has, or create new ones. Effects are
+to be REBUILT to look almost the same (contrail colors, palettes,
+beam settings are yaml parameters, not assets — freely reusable as
+recipes; the sprite images they reference are not). Goal: heavy SP
+inspiration for ALL TS factions — CABAL first, then GDI, Nod,
+Forgotten, and eventually the upcoming Scrin. tjk-ws has already
+started mining the code side: `TakeOffOnMake.cs` in OpenRA.Mods.Cameo
+is SP's trait verbatim._
 
 ## 1. Layout differences vs Cameo
 
@@ -65,7 +72,7 @@ SP's Cyborg Commando `CyCannon`:
 ```
 Projectile: MissileTA            # we HAVE MissileTA (Mods.AS)
 	Palette: jascgreen
-	Image: greenplasma2          # SP asset, CC BY-NC — copy with credit
+	Image: greenplasma2          # SP asset — do NOT copy; recreate ours
 	ContrailLength: 32
 	ContrailStartColor: 0CD95740 (alpha 64) → ContrailEndColor: 0CD95710 (alpha 16)
 	ContrailStartWidth: 0c172
@@ -86,8 +93,9 @@ Projectile: MissileTA
 	TrailSequences: idle2
 ```
 That single pair IS the classic white TS smoke trail (CyborgRocket,
-ReaperScythe, every SP rocket). Our TS rockets should adopt it
-verbatim; asset `small_smoke_trail` from sp-content if we lack one.
+ReaperScythe, every SP rocket). Our TS rockets should adopt the
+recipe; if we lack an equivalent trail sprite, create our own (SP's
+asset itself is off-limits per the asset law).
 
 **CABAL laser identity** (we ruled dark blue/purple): SP agrees —
 Minotaur `PalaLazor`: LaserZap `Color: 1122FF88` + `SecondaryBeam`
@@ -156,5 +164,9 @@ High value, small ports:
 - CABAL weapon quality pass: use §3 recipes; Drone Host chain for
   ideas; keep our workbook stats.
 - Engine port shortlist (§4) — needs design's priority pick.
-- credits.txt must gain an SP attribution line the moment the first
-  SP asset lands in-repo.
+- Reaper web upgrade (design 2026-07-11): SP's Improved Reaper Nets
+  equivalent, implemented Cameo-style — a warhead that applies the
+  existing `snared` condition (`^Snareable`, the Zerg Corruptor
+  pattern) as a CABAL upgrade research improving TSReaperTrap.
+- NO SP assets ever (asset law in the header) — recreate effects and
+  sounds; only base-TS material or newly created work.

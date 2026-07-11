@@ -122,6 +122,22 @@ Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
 | AA support vehicles | anti-air weapon range = **1.5 × anti-ground range** (forgotten_m113adats is reference-clean: 5606 / 8409) |
 | AA weapons | a weapon whose ValidTargets include Air must have ≥1 damage warhead that hits Air (inheritance-resolved) |
 
+**The dual-weapon AA law (design 2026-07-11).** A SEPARATE anti-air
+weapon is allowed ONLY on support vehicles (`^SupportVehicleTemplate`
+family / AA-support class) — sole exception: the Ordos Anti Air
+Trooper, a dedicated AA special. Whenever a unit carries both a ground
+weapon and an AA weapon, the two must be **mutually exclusive in
+ValidTargets** (ground weapon: `Ground, Water` only — never Air;
+AA weapon: `Air` only), otherwise the missile templates (whose
+ValidTargets already include Air) double-dip and the unit deals twice
+the intended anti-air damage. Reference-clean pattern: the RA1 Soviet
+Flak Truck. Rocket INFANTRY never gets a second AA weapon — the
+missile class templates already target Ground+Air with one weapon
+(TS rocket infantry pattern). Support vehicles get the 1.5× AA range
+(rule above); a non-support dual-role unit (line breaker, e.g. CABAL
+Manticore) uses the SAME range, weapon class, reload, and DPS for
+both weapons.
+
 Unit classification is authoritative from the **class templates in
 defaults.yaml** (`^HighTechTankTemplate` ⇒ vehicle, whatever the render
 traits say). Power plant vision currently: 4c0 small / 5c0 advanced —
@@ -319,6 +335,14 @@ the formula consumes.
   weapon only reloads after the full burst).
 - `UnitClass` L — per-section class factor (infantry sections 0.4–1,
   vehicles 0.25–1.25, defenses 0.225/0.325/0.35). ❓ table of sections.
+- **Epic units (design 2026-07-11): UnitClass L = 0.3, TechTier M = 1.0,
+  regardless of actual tech tier.** Historically epic rows carried
+  L = 0.4 × M = 0.75 (same product 0.3); the new convention folds the
+  whole epic effect into L so that M stays a pure function of the tech
+  tier everywhere (no "0.75 at T5" rows that look like mistakes).
+  Relabeling legacy epic rows (Core, GDI Rig, Future Tank, …) is
+  price-neutral — only the two cells change. Epics are never
+  re-discounted when tiers move.
 - **Defenses use Speed = 100 always** — immobility is priced through
   their LOW UnitClass factors instead, keeping the formula uniform.
 

@@ -94,3 +94,67 @@ in sheet); descriptions per §7 as part of the pass.
 - **TS authenticity pass**: find the classic TS rocket trail(s), apply
   to all TS rocket units; reference the Shattered Paradise mod for
   correct TS projectile/explosion/sound effects across all TS units.
+
+## Appendix: 333ggg's cell annotations (extracted 2026-07-11)
+
+cabal.xlsx carries 26 cell comments — the design intent per unit.
+Key ones (Лист1 tree unless noted):
+- Cyborg (B2): "basic heavy infantry, probably manual vision range
+  needed"; its pillbox neighbor (E2): "tankier but less dps ts laser
+  turret" → pillbox = laser-turret style.
+- Rocket Cyborg (B3): "basic anti-air anti-tank heavy infantry" ✓.
+- Mantis (C3): "scout without turret, slightly better stats than
+  average scout" ✓ (ranged frontal gun, NOT melee — confirmed by
+  design 2026-07-11 after a brief melee detour).
+- Crab (C4): "fast melee vehicle" ✓ (regular unit, zergling↔ultralisk).
+- Dissolver (B5): "heavy anti-tank infantry, TD warhead and lifesteal".
+- Tarantula (C5): "heavy main battle tank with heavy but slow gun".
+- Scarab APC (C6): "apc. I leave its balance to you".
+- Hacker (B7): "heavy infantry with emp weapon".
+- Artillery Spider (C7): "heavy artillery. Maybe tier 3?" — ❓ open.
+- HK mk1 (D7): "another MG helicopter"; Obelisk of Darkness (E7):
+  "fast hitscan flak aa defense with laser projectile".
+- Heavy Reaper (C8): "sturdy anti-air cyborg with root mechanic" ✓
+  (root = TSReaperTrap web).
+- cnc4 Spider (C9): "longer range fire support laser unit. Can enter
+  widow to boost its laser. Potentially web laser mechanic".
+- T1000 (B10): "heavy infantry with plasma (tesla+chemical maybe?)";
+  Avatar (C10): "heavy walker with plasma(?) weaponry"; HK mk2 (D10):
+  "medium spaceship with beam cannons, plasma upgrade"; Obelisk Prime
+  (E10): "heavy defense with td+laser warhead".
+- Commando V2 (B11): plasma tesla+chem; Widow (C11): "heavy fire
+  support vehicle. Laser can be boosted by up to 4 spiders inside";
+  superweapon (E11): "dune emp nuke would fit".
+- Tier IV (C12): "Superheavy walker"; stealth generator (E12):
+  "should give some kind of buff rather than stealth around self".
+- Лист2 B26/B33: both Spider variants "similar to cnc4" / "beam cannon".
+
+Plasma class ruling from the annotations: plasma ≈ Tesla + Chemical
+warhead mix (B10/B11) — use for T1000, Commando plasma, Avatar.
+
+## Appendix 2: design screenshots 2026-07-11 — promotion trees + upgrades
+
+Promotion tree (right column = empty placeholders like TS GDI):
+
+| left (infantry) | middle (vehicles) | right |
+|---|---|---|
+| Devout (1) | Spider CNC4 (2) | - |
+| Ascended (4) | Heavy Reaper -> Manticore (5) | - |
+| T1000 (7) | Widow (8) | - |
+| CybCom v2 (10) | Core Defender (11) | - |
+
+Upgrade suite "Networked Cabal Protocol":
+- Radar tier: Backup Systems (reclaim vehicles from husks),
+  Reclamation Protocol (gives HP and regen), Neutron Nuclear Catalyst
+  (KEEP the existing neutron-shell twins unchanged — design praise —
+  optionally extend to more units).
+- Lab tier: Mobility Matrix (speed+HP of walkers), Advanced Beam
+  Cannons (upgrade: defenses, HK mk2, spider, mantis, widow; new to:
+  MG cyborgs, tarantula, spider tank drone, HK mk1), Proton
+  Dissolution (upgrade: cyborg commando, T800/1000, avatar; gives
+  weapon to: HK mk2, artillery, rocket cyborgs, reapers), Overcharged
+  Servos (attack speed: reapers, avatar, HK mk2, tarantula, artillery,
+  rocket cyborgs, T800/100, cyborg commando).
+
+Sequencing ruling: prerequisites + stats FIRST (faction fully in
+game), effects and art AFTER (SP-behaviour recipes, own art only).
