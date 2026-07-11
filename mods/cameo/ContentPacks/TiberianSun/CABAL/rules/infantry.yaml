@@ -56,7 +56,7 @@ cabal_cyborginfantry:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cabal_cyborgfactory
+		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_devout
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
@@ -91,7 +91,7 @@ cabal_cyborginfantry:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-cabal_platedarmorcyborg:
+cabal_rocketcyborg:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -107,29 +107,30 @@ cabal_platedarmorcyborg:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
-		Cost: 600
+		Cost: 650
 	Tooltip:
-		Name: Plated Armor Cyborg
+		Name: Rocket Cyborg
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cabal_cyborgfactory
+		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
-		Speed: 46
+		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
 		Type: Plate
 	Health:
-		HP: 60000
+		HP: 45000
 	ChangesHealth@SelfHealing:
 		Step: 25
 	Armament@PRIMARY:
-		Weapon: TSVulcan3
-	Armament@GRENADE:
-		Weapon: TSGrenade
+		Weapon: CabalRocketCyborgRockets
+		RequiresCondition: !cabal_upgrade_darkarmament
+	Armament@Upgraded:
+		Weapon: CabalRocketCyborgRocketsUpgraded
 		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
@@ -171,7 +172,7 @@ cabal_platedarmorcyborg:
 		CrushClasses: vehicle
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: TSVulcanTower
+		Weapon: CabalRocketCyborgRockets
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -180,6 +181,7 @@ cabal_platedarmorcyborg:
 
 cabal_devout:
 	Inherits: ^Soldier
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -201,11 +203,11 @@ cabal_devout:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cabal_cyborgfactory
+		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_devout
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
-		Speed: 56
+		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
 		Type: Plate
@@ -270,6 +272,7 @@ cabal_devout:
 
 cabal_ascended:
 	Inherits: ^Soldier
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -284,18 +287,18 @@ cabal_ascended:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
-		Cost: 750
+		Cost: 900
 	Tooltip:
 		Name: Ascended
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cabal_cyborgfactory
+		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
-		Speed: 56
+		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
 		Type: Plate
@@ -304,11 +307,11 @@ cabal_ascended:
 	ChangesHealth@SelfHealing:
 		Step: 25
 	Armament@PRIMARY:
-		Weapon: TSTwinBazooka
+		Weapon: CabalAscendedRockets
 		LocalOffset: 0,20,90, 0,-20,90
 		RequiresCondition: !cabal_upgrade_darkarmament
 	Armament@Upgraded:
-		Weapon: TSQuadBazooka
+		Weapon: CabalAscendedRocketsUpgraded
 		LocalOffset: 0,-20,90, 0,20,90
 		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
@@ -351,7 +354,7 @@ cabal_ascended:
 		CrushClasses: vehicle
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: TSTwinBazooka
+		Weapon: CabalAscendedRockets
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:

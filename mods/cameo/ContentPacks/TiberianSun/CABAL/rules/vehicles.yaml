@@ -309,7 +309,7 @@ cabal_laserspider:
 
 cabal_mantis:
 	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -319,14 +319,14 @@ cabal_mantis:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
-		Cost: 500
+		Cost: 875
 	Tooltip:
 		Name: Mantis
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: Turretless fire support strider with a frontal beam cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 24
@@ -338,7 +338,7 @@ cabal_mantis:
 	ChangesHealth@SelfHealing:
 		Step: 14
 	Armament@PRIMARY:
-		Weapon: TSCobraLasers
+		Weapon: CabalMantisGun
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -360,7 +360,7 @@ cabal_mantis:
 
 	DeathSounds:
 
-cabal_spidertankdrone:
+cabal_crab:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -370,41 +370,28 @@ cabal_spidertankdrone:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
-		Cost: 900
+		Cost: 675
 	Tooltip:
-		Name: Spider Tank Drone
+		Name: Crab
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: Assault walker that crushes enemies with its claws.\n  Strong vs Vehicles, Infantry\n  Weak vs Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 24
-		Speed: 120
+		TurnSpeed: 20
+		Speed: 100
 	Health:
-		HP: 45000
+		HP: 50000
 	Repairable:
-		HpPerStep: 2250
+		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
-		Step: 18
+		Step: 20
 	Armament@PRIMARY:
-		Weapon: CabalDroneCannon
-		LocalOffset: 350,-30,250, 350,30,250
-		Recoil: 128
-		RecoilRecovery: 26
-		MuzzleSequence: muzzle
-		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
-	Armament@UPGRADED:
-		Weapon: TS90mm_bluenuke
-		LocalOffset: 350,-30,250, 350,30,250
-		Recoil: 128
-		RecoilRecovery: 26
-		MuzzleSequence: muzzle
-		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+		Weapon: CabalCrabClaws
 	Armor:
 		Type: Heavy
 	WithMuzzleOverlay:
@@ -423,8 +410,9 @@ cabal_spidertankdrone:
 		ValidMovementTypes: Horizontal, Turn
 	DeathSounds:
 
-cabal_crab:
+cabal_manticore:
 	Inherits: ^Vehicle
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -436,35 +424,35 @@ cabal_crab:
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
-		Cost: 675
+		Cost: 1400
 	Tooltip:
-		Name: Crab
+		Name: Manticore
 	Buildable:
-		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_mechfactory
-		Queue: Vehicle, RAVehicle
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		BuildPaletteOrder: 145
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, ~cabal_promotion_manticore
+		Queue: Infantry, RAInfantry
+		Description: Line-breaker walker armed with heavy rocket batteries and nets.\n  Strong vs Vehicles, Aircraft\n  Can immobilize infantry
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 20
-		Speed: 100
+		TurnSpeed: 13
+		Speed: 65
 	Health:
-		HP: 50000
+		HP: 100000
 	Repairable:
-		HpPerStep: 2500
+		HpPerStep: 5000
 	ChangesHealth@SelfHealing:
-		Step: 20
-	Armament@SECONDARY:
-		Name: secondary
-		Weapon: CabalCrabClaws
-		LocalOffset: -350,90,340, -350,-90,340
-		LocalYaw: -100, 100
-		Recoil: 10
+		Step: 40
+	Armament@PRIMARY:
+		Weapon: CabalManticoreMissiles
+	Armament@AA:
+		Weapon: CabalManticoreMissilesAA
+	Armament@TRAP:
+		Weapon: TSReaperTrap
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
 	Voiced:
-		VoiceSet: TSCABALVehicles
+		VoiceSet: TSReaper
 	DeliversCash:
 		Payload: 250
 	RenderSprites:
@@ -475,7 +463,7 @@ cabal_crab:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
 	SpawnActorOnDeath@backup:
-		Actor: cabal_crab_backup
+		Actor: cabal_manticore_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_artilleryspider:
@@ -659,7 +647,7 @@ cabal_scarabapc:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
-		InitialUnits: cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_platedarmorcyborg, cabal_devout, cabal_ascended, cabal_ascended, cabal_hackercyborg, cabal_hackercyborg
+		InitialUnits: cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_rocketcyborg, cabal_devout, cabal_ascended, cabal_ascended, cabal_hackercyborg, cabal_hackercyborg
 	Targetable@garrisoned:
 		RequiresCondition: loaded && !submerged
 	WithCargoPipsDecoration:

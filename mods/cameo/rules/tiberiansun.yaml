@@ -1200,12 +1200,12 @@ cabal_mobilestealthgenerator:
 	RenderVoxels:
 		Image: ts_nod_mobilestealthgenerator
 
-cabal_crab_backup:
-	Inherits: cabal_crab
+cabal_manticore_backup:
+	Inherits: cabal_manticore
 	Valued:
-		Cost: 675
+		Cost: 1400
 	Tooltip:
-		Name: Crab (Backup Mode)
+		Name: Manticore (Backup Mode)
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory, ~disabled
@@ -1216,7 +1216,7 @@ cabal_crab_backup:
 		TurnSpeed: 0
 		Speed: 0
 	Health:
-		HP: 100000
+		HP: 200000
 	Repairable:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
@@ -1232,7 +1232,7 @@ cabal_crab_backup:
 		ValidMovementTypes: Horizontal, Turn
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: cabal_crab
+		Image: cabal_manticore
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
@@ -1240,7 +1240,7 @@ cabal_crab_backup:
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
-		IntoActor: cabal_crab
+		IntoActor: cabal_manticore
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4
