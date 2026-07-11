@@ -75,3 +75,14 @@ After the two exports are present, Codex will:
 5. Use filenames `manual_lava_cutout_shXX.png` and `manual_composite_shXX.png` in `exports`.
 
 The standardized names let the same validation and production-conversion process handle every river-delta tile.
+
+## GIMP 3 batch helpers
+
+`create_gimp_project.py` runs inside GIMP 3's `python-fu-eval` batch
+interpreter. It creates a layered XCF containing a visible editable lava layer,
+a hidden untouched lava backup, and the approved cracked base. Its
+`inspect_xcf` helper reports canvas size, layer order, visibility, and offsets.
+
+`export_gimp_project.py` exports the named editable lava layer and the visible
+composite. It deliberately ignores extra hidden layers that GIMP or the artist
+may add during manual editing.

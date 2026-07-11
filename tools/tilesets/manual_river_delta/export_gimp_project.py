@@ -16,11 +16,17 @@ def export_xcf(xcf_path, lava_path, composite_path):
     if len(visible) < 2:
         raise RuntimeError("expected visible edited lava and base layers")
 
+    lava_name = select_lava_layer(layers).get_name()
+
     lava_image = image.duplicate()
     lava_layers = list(lava_image.get_layers())
-    for layer in lava_layers[1:]:
-        lava_image.remove_layer(layer)
-    lava_layers[0].set_visible(True)
+    lava_layer = next(
+        layer for layer in lava_layers if layer.get_name() == lava_name
+    )
+    for layer in lava_layers:
+        if layer != lava_layer:
+            lava_image.remove_layer(layer)
+    lava_layer.set_visible(True)
     if not Gimp.file_save(
         Gimp.RunMode.NONINTERACTIVE,
         lava_image,
@@ -41,3 +47,17 @@ def export_xcf(xcf_path, lava_path, composite_path):
 
     print(f"EXPORTED_LAVA {lava_path}")
     print(f"EXPORTED_COMPOSITE {composite_path}")
+
+
+def select_lava_layer(layers):
+    for preferred_name in (
+        "Editable donor lava cutout",
+        "Donor lava cutout",
+    ):
+        for layer in layers:
+            if layer.get_name() == preferred_name:
+                return layer
+    for layer in layers:
+        if layer.get_visible() and "base" not in layer.get_name().lower():
+            return layer
+    raise RuntimeError("could not identify the editable lava layer")
