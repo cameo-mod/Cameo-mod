@@ -1222,3 +1222,73 @@ d2k_chemgun:
 # 		Actors: fremen,fremen
 # 		Range: 4
 # 		Delay: 10
+
+HMGo_upgrade:
+	Inherits: ^LaserWeapon
+	Inherits@2: HMGo
+	Report: LaserTankAttack.wav
+	-Projectile:
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+HMGstealth_upgrade:
+	Inherits: ^LaserWeapon
+	Inherits@2: HMGstealth
+	Report: LaserTankAttack.wav
+	-Projectile:
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+autogun_tank_upgrade:
+	Inherits: ^LaserWeapon
+	Inherits@2: autogun_tank
+	Report: LaserTankAttack.wav
+	-Projectile:
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+d2kChainGun_upgrade:
+	Inherits: ^LaserWeapon
+	Inherits@2: d2kChainGun
+	Report: LaserTankAttack.wav
+	-Projectile:
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+d2kCarryallChainGun_upgrade:
+	Inherits: ^LaserWeapon
+	Inherits@2: d2kCarryallChainGun
+	Report: LaserTankAttack.wav
+	-Projectile:
+	Projectile: LaserZap
+		Width: 55
+		ZOffset: 2047
+		Color: 00ffbb
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1

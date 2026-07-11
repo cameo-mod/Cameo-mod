@@ -1421,6 +1421,13 @@ raider.ordos:
 		LocalOffset: 140,90,50, 140,-90,50
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle
+		RequiresCondition: !up_laserguns.ordos
+	Armament@damageLaser:
+		Weapon: HMGo_upgrade
+		LocalOffset: 140,90,50, 140,-90,50
+		MuzzlePalette: d2keffect
+		MuzzleSequence: muzzle
+		RequiresCondition: up_laserguns.ordos
 	AttackFrontal:
 		FacingTolerance: 0
 	FireWarheadsOnDeath:
@@ -1433,7 +1440,7 @@ raider.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_laserguns.ordos
 
 stealth_raider.ordos:
 	Inherits: raider.ordos
@@ -1460,13 +1467,18 @@ stealth_raider.ordos:
 		InitialStanceAI: ReturnFire
 	Armament@damage:
 		Weapon: HMGstealth
+		RequiresCondition: !up_laserguns.ordos
+	Armament@damageLaser:
+		Weapon: HMGstealth_upgrade
+		RequiresCondition: up_laserguns.ordos
 	-MustBeDestroyed:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
 		InitialUnits: light_inf, chem_troop.ordos, trooper, aatrooper.ordos
 		LoadingCondition: notmobile
-
+	ActorStatValues:
+		Upgrades: up_laserguns.ordos
 scoutdrone.ordos:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -1821,6 +1833,13 @@ autogun_tank.ordos:
 		LocalOffset: 500,-150,200, 500,150,200
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
+		RequiresCondition: !up_laserguns.ordos
+	Armament@Laser:
+		Weapon: autogun_tank_upgrade
+		LocalOffset: 500,-150,200, 500,150,200
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: up_laserguns.ordos
 	FirepowerMultiplier@MultiWeapon:
 		Modifier: 40
 	WithMuzzleOverlay:
@@ -1835,7 +1854,7 @@ autogun_tank.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_laserguns.ordos
 
 combat_tank_stealth.ordos:
 	Inherits@D2KT: ^D2KTank

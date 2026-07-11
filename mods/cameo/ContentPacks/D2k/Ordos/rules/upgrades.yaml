@@ -93,3 +93,17 @@ up_contraband.ordos:
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: ordos_upgrade_para
+
+up_laserguns.ordos:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Laser Cartridges
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Upgrades
+		Prerequisites: ~outpost.ordos, !up_laserguns.ordos
+		Description: All Ordos bullet weapons fire a supplementary laser, using Laser Tank technology.
+	RenderSprites:
+		Image: laser_tank.ordos
