@@ -106,19 +106,19 @@ cabal_cyborgreaper:
 	Armor:
 		Type: Medium #Wood
 	Valued:
-		Cost: 1000
+		Cost: 1100
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Description: Cyborg walker armed with missiles and nets.\n Strong vs vehicles\n Can immobilize infantry
 	Health:
-		HP: 75000
+		HP: 70000
 	ChangesHealth@SelfHealing:
-		Step: 75
+		Step: 28
 	Mobile:
-		TurnSpeed: 200
-		Speed: 75
+		TurnSpeed: 13
+		Speed: 65
 	Armament:
 		Weapon: TSReaperTusk
 	Armament@TRAP:
@@ -161,7 +161,7 @@ cabal_dissolver:
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@HackableRobot: ^HackableRobot
 	Valued:
-		Cost: 750
+		Cost: 725
 	Tooltip:
 		Name: Dissolver
 	Buildable:
@@ -173,17 +173,17 @@ cabal_dissolver:
 	Selectable:
 		Class: cabal_dissolver
 	Mobile:
-		TurnSpeed: 396
-		Speed: 70
+		TurnSpeed: 10
+		Speed: 50
 		Locomotor: foot
 	Health:
-		HP: 28000
+		HP: 50000
 	ChangesHealth@SelfHealing:
-		Step: 28
+		Step: 20
 	Armor:
 		Type: Plate
 	Turreted:
-		TurnSpeed: 40
+		TurnSpeed: 10
 		Offset: 0,0,25
 	Armament:
 		Weapon: cabal_dissolver
@@ -274,7 +274,7 @@ cabal_laserspider:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
-		Cost: 600
+		Cost: 1200
 	Tooltip:
 		Name: Laser Spider
 	Buildable:
@@ -284,14 +284,14 @@ cabal_laserspider:
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 64
-		Speed: 160
+		TurnSpeed: 14
+		Speed: 70
 	Health:
 		HP: 40000
 	Repairable:
-		HpPerStep: 1500
+		HpPerStep: 2000
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 16
 	Armament@PRIMARY:
 		Weapon: TSLaserRaiderCannon
 		LocalOffset: 350,-30,250, 350,30,250
@@ -326,7 +326,7 @@ cabal_mantis:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
-		Cost: 600
+		Cost: 500
 	Tooltip:
 		Name: Mantis
 	Buildable:
@@ -336,14 +336,14 @@ cabal_mantis:
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 64
-		Speed: 160
+		TurnSpeed: 24
+		Speed: 120
 	Health:
-		HP: 40000
+		HP: 35000
 	Repairable:
-		HpPerStep: 1500
+		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 14
 	Armament@PRIMARY:
 		Weapon: TSCobraLasers
 		LocalOffset: 350,-30,250, 350,30,250
@@ -380,7 +380,7 @@ cabal_spidertankdrone:
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
-		Cost: 600
+		Cost: 900
 	Tooltip:
 		Name: Spider Tank Drone
 	Buildable:
@@ -390,14 +390,14 @@ cabal_spidertankdrone:
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 64
-		Speed: 160
+		TurnSpeed: 24
+		Speed: 120
 	Health:
-		HP: 40000
+		HP: 45000
 	Repairable:
-		HpPerStep: 1500
+		HpPerStep: 2250
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 18
 	Armament@PRIMARY:
 		Weapon: TS90mm
 		LocalOffset: 350,-30,250, 350,30,250
@@ -505,7 +505,7 @@ cabal_artilleryspider:
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
-		Cost: 1600
+		Cost: 1250
 	Tooltip:
 		Name: Artillery Spider
 	Buildable:
@@ -515,14 +515,14 @@ cabal_artilleryspider:
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		Locomotor: tracked
-		Speed: 60
-		TurnSpeed: 24
+		Speed: 70
+		TurnSpeed: 14
 	Health:
-		HP: 200000
+		HP: 50000
 	Repairable:
-		HpPerStep: 1500
+		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
-		Step: 12
+		Step: 20
 	Armament@PRIMARY:
 		Weapon: TS155mm
 		LocalOffset: -125,1,250, -125,1,250
@@ -570,7 +570,7 @@ cabal_tarantula:
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
-		Cost: 1500
+		Cost: 1000
 	Tooltip:
 		Name: Tarantula
 	Buildable:
@@ -580,18 +580,18 @@ cabal_tarantula:
 		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
 	Mobile:
 		Locomotor: tracked
-		Speed: 75
-		TurnSpeed: 15
+		Speed: 70
+		TurnSpeed: 14
 	Health:
-		HP: 250000
+		HP: 110000
 	Repairable:
-		HpPerStep: 5000
+		HpPerStep: 5500
 	ChangesHealth@SelfHealing:
-		Step: 40
+		Step: 44
 	Armor:
 		Type: Heavy
 	Turreted:
-		TurnSpeed: 15
+		TurnSpeed: 14
 		Offset: -500,1,1
 	Armament@PRIMARY:
 		Weapon: TS120mm

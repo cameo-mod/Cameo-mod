@@ -372,6 +372,12 @@ set straight to 2 until per-ability values exist):**
   (the Dissolver's `ChangesHealth` on `GrantConditionOnAttack`).
 - DOES NOT COUNT: cloak detection (near-ubiquitous); deploy/transform;
   anti-air capability — AA belongs in a future formula term, not in K.
+- **Charge-delay drawback −0.25 — DEFENSES ONLY** (design 2026-07-11):
+  a defense that must charge before firing (others shoot instantly) may
+  carry K below 1 (TD Obelisk of Light K=0.75, CABAL Obelisk Prime
+  K=0.75). Mobile units with charge delays do NOT get the discount.
+  ❓ open: Tesla Coils / Prism / Waveforce charge too but sit at K=1.25
+  (specials premium, drawback uncounted) — net to 1.0 or keep?
 
 **The baseline unit (design 2026-07-11): the Naxis Tiger Tank** —
 100 000 HP, 100 Speed, 10 000 damage, range 5.0 (= 5000 wdist,
