@@ -78,6 +78,7 @@ twister.futu:
 		PlayerPalette: playerra2cons
 
 cryo.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -87,11 +88,11 @@ cryo.futu:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
-		BuildPaletteOrder: 20
+		BuildPaletteOrder: 405
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_cryocopter.futu
 		Description: actor_futu_cryo.description
 	Valued:
-		Cost: 1350
+		Cost: 675
 	Tooltip:
 		Name: Cryocopter
 	UpdatesPlayerStatistics:
@@ -176,6 +177,7 @@ cryo_husk.futu:
 		PlayerPalette: player_rgba
 
 harbinger.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -191,7 +193,7 @@ harbinger.futu:
 		AddToArmyValue: true
 	Buildable:
 		BuildAtProductionType: harbinger.futu
-		BuildPaletteOrder: 100
+		BuildPaletteOrder: 510
 		Prerequisites: ~launchpad.futu, egshock.futu, ~up_harbinger.futu
 		Queue: Aircraft, RAAircraft
 		Description: actor_future_harbinger.description

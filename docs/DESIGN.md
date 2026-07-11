@@ -166,6 +166,12 @@ cheapest provider wins).
 - Roster-wide upgrades must cover the full roster (audit_upgrade_coverage).
 - Worst-case stack budget ≤ 2.0× fresh-self effective power
   (audit_power_budget; veterancy ladders are exclusive, count best rank).
+- **Stat-modifier philosophy** (design 2026-07-11, modeled by
+  ^PromotionUnitBuff's +5%/+10% steps): speed and range are only ever
+  increased MODERATELY (never big jumps); damage-taken multipliers may
+  stack, but the COMBINED product must never drop below **50%** — below
+  that units feel undamageable. Hard floor; audit extension TODO
+  (worst-case stacked DamageMultiplier per unit < 0.5 = finding).
 - AA gating, defense tiers, and tech trees per §4.
 
 ## 7. Descriptions & localization (rollout in progress)
@@ -248,8 +254,9 @@ cheapest provider wins).
 
 ## 12. Balance formula — the Cameo Armor System workbook
 
-_Source: `C:\Users\AedisToru\OneDrive\Dokumente\Cameo Armor System.xlsx`
-(sheets: Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
+_Source of truth: **`docs/design/cameo_armor_system.xlsx`** (the repo
+working copy; design's private master is synced into it; sheets:
+Armor Types, Weapon Types, Infantry, Tanks, Vehicles, Aircraft,
 Defenses; Tabelle2/3 are scratch). 333ggg's CABAL concept
 (`Downloads\cabal.xlsx`) uses the same sheet layout. Tooling: openpyxl
 reads AND writes these — formula changes can be re-applied to every
@@ -299,6 +306,90 @@ Range to hold the price. Range and DPS cells are never hand-edited.
   vehicles 0.25–1.25, defenses 0.225/0.325/0.35). ❓ table of sections.
 - **Defenses use Speed = 100 always** — immobility is priced through
   their LOW UnitClass factors instead, keeping the formula uniform.
+
+**The nice-number law (design 2026-07-11).** Every stat moves in fixed
+steps so the house formulas stay integral:
+- **Prices: 25-credit steps** — never 387-style numbers; if the formula
+  lands off-grid, adjust unit stats until the price fits.
+- **Damage: 2000-steps.** The HealthPercentageDamage twin is always
+  **1 per 2000** main damage (16000 -> Percentage 8); FriendlyFire twins
+  are always **50% damage and 50% spread**; all class warheads carry the
+  identical (even-spread) value.
+- **HP: 2500-steps** for vehicles/aircraft/ships (self-heal HP/2500,
+  repair HP/20); **1000-steps for infantry** (self-heal HP/1000);
+  defenses may use either (their self-heal is a flat 10).
+- **Speed: steps of 5** (TurnSpeed = Speed/5 stays integral).
+- ReloadDelay: any integer.
+- **Beautiful ranges are kept**: if Range is exactly 6.000 or 7.500,
+  adjust the other stats, not the range.
+- **Preserve the unit's feel**: never double damage and reload together
+  just to make the math easy.
+
+**UnitClass L is bound to the defaults.yaml class template** — one value
+per class, identical for every unit of that class:
+
+| class (sheet section) | L |
+|---|---|
+| Scout Infantry 0.5 · Grenadier 0.4 · Mortar 0.6 · Anti-Tank/Anti-Air 0.5 | infantry |
+| Heavy Infantry 0.8 · Melee 0.75 · Sniper 0.75 · Hero 1.0 | infantry |
+| Main Battle Tank 1.0 · High Tech Tank 1.0 · Epic 0.4 | tanks |
+| Scout Vehicle 0.333 · Advanced Scout 0.5 · Transport/Support 1.25 | vehicles |
+| AA Support 1.0 · Fire Support 1.0 · Artillery 0.5 | vehicles |
+| Helicopter 1.0 · Fighter 1.0 · Spaceship 1.0 | aircraft |
+| Basic Defense 0.35 · AA Defense 0.225 · Advanced Defense 0.325 | defenses |
+
+**Tier counting for the M discount**: the tier is set ONLY by TECH
+building requirements — production buildings (barracks, war factory,
+helipad, naval yard) and refineries NEVER count. No tech requirement =
+Tier 1 (war-factory units without a radar requirement are still T1);
+radar tech (or equivalent) = Tier 2; tech center = Tier 3; beyond =
+Tier 4/5. Tech gates count TRANSITIVELY through the production chain:
+the helipad/airfield itself requires radar, so **ALL aircraft are at
+least Tier 2**. M: T1/T2 = 1.0, T3 = 0.75, T4/5 = 0.5. Auto-correcting the
+missing discounts across the sheets is approved — under the nice-number
+law above.
+
+**Early-vs-late philosophy**: upgrades boost cheap early-game units
+proportionally MORE than late units; late units are compensated through
+the tech-tier discount instead. Tier 2 is the stopgap tier — units too
+strong for T1 but not strong enough for T3.
+
+**Tier placement themes** (initial; deep research ongoing): artillery
+is ALWAYS at least Tier 2 (some Tier 3, e.g. the GDI Archer); fire
+supports and line breakers usually Tier 2; flamethrower infantry
+Tier 2 (exception: Japan); heavy infantry and snipers usually Tier 2.
+
+**Repair/engineering units (design 2026-07-11):** the repair beam is
+its own weapon class — **H = 1.5** — and engineering kits (capture +
+repair + defuse) are the maxed special **K = 2**. Reference trio in the
+workbook: IFV (Engineer), Engineering Armor, Engineering Truck (all
+20000 @ 50, H 1.5, K 2, L 0.5); the CABAL repair engineer added its own
+unique row (16000 @ eff. 40, HP 20000, Cost 800). H above 1.5 exists
+once by design: the **TOPOL-M (H = 5) is a mobile superweapon**. The
+"Consortium Artillery Tank" workbook row is the HAMMERHEAD (stale name)
+— one of the sacred meme units.
+
+**Promotion units carry a hidden yaml-side buff** the spreadsheet does
+NOT model: every promotion-gated unit inherits `^PromotionUnitBuff`
+(defaults.yaml) — +10% firepower, −10% damage taken, −10% reload, +5%
+speed/range/vision/cloak detection, −10% inaccuracy. The sheet always
+holds the unbuffed base stats; the buff is the promotions' flat bonus
+on top, applied only through the yaml inner workings.
+
+**Special ability catalog (K = 1 + 0.25 per special; overpowered kits
+set straight to 2 until per-ability values exist):**
+- COUNTS: cloak; auras (propaganda effect); vampire heal-on-attack
+  (the Dissolver's `ChangesHealth` on `GrantConditionOnAttack`).
+- DOES NOT COUNT: cloak detection (near-ubiquitous); deploy/transform;
+  anti-air capability — AA belongs in a future formula term, not in K.
+- **Charge-delay drawback −0.25 — DEFENSES ONLY** (design 2026-07-11):
+  a defense that must charge before firing (others shoot instantly) may
+  carry K below 1 (TD Obelisk of Light K=0.75, CABAL Obelisk Prime
+  K=0.75). Mobile units with charge delays do NOT get the discount.
+  The discount applies only to LONG charge-ups (Obelisk-class); brief
+  charges (Tesla Coil, Prism, Waveforce) are not significant enough.
+  The Tesla Coil's K=1.25 is its inherent EMP effect counting as the
+  special (+0.25), undiscounted by its short charge.
 
 **The baseline unit (design 2026-07-11): the Naxis Tiger Tank** —
 100 000 HP, 100 Speed, 10 000 damage, range 5.0 (= 5000 wdist,
@@ -370,6 +461,11 @@ comes LAST; the earlier inherits only contribute their warheads.
 - ❓ FriendlyFire twins: some templates default them EQUAL to the main
   damage (^MediumChemicalWeapon 1000/1000), some HALF (^LightFlameWeapon
   2000/1000); the override convention needs a design ruling.
+- **MEME UNITS ARE SACRED (design 2026-07-11).** `NanoArtilleryAG` /
+  `NanoSmokeAG` (everything 7s and 3s) and `HammerheadArtillery`
+  (everything 1s) are deliberate joke stat lines and are NEVER touched
+  by any formula, rule sweep or rebalance — no matter how the balance
+  formula changes. Audits list them as exempt, never as findings.
 - **Multi-weapon units**: the sheet Damage is the SUM over the baseline
   loadout — every `primary` armament not gated behind an upgrade (GDI
   Battle Tank: cannon 8000 + missiles 8000 = sheet 16000).

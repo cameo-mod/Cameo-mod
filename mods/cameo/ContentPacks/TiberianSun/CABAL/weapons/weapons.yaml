@@ -104,8 +104,8 @@ TSCoreLaser:
 	Inherits: ^LaserWeapon
 	Burst: 2
 	BurstDelays: 75
-	ReloadDelay: 20
-	Range: 6800
+	ReloadDelay: 70
+	Range: 6332
 	Report: corefir1.aud
 	ValidTargets: Ground, Water
 	Projectile: LaserZap
@@ -118,31 +118,31 @@ TSCoreLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: FFFFFF
 	Warhead@SmallArms: SpreadDamage
-		Damage: 5000
+		Damage: 26666
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 13
 	Warhead@Chaingun: SpreadDamage
-		Damage: 5000
+		Damage: 26666
 	Warhead@ChaingunPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 13
 	Warhead@HeavyCannon: SpreadDamage
-		Damage: 5000
+		Damage: 26666
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 13
 	Warhead@LightFlameWeapon: SpreadDamage
-		Damage: 5000
+		Damage: 26666
 	Warhead@LightFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 2500
+		Damage: 13333
 	Warhead@LightFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 13
 	Warhead@FlakWeapon: SpreadDamage
-		Damage: 5000
+		Damage: 26666
 	Warhead@FlakWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 13
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 5000
+		Damage: 26666
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 13
 
 TSCobraLasers:
 	Inherits: ^SmallArms
@@ -154,19 +154,19 @@ TSCobraLasers:
 		Duration: 8
 		SecondaryBeamWidth: 18
 	ValidTargets: Ground, Water, Air
-	ReloadDelay: 20
+	ReloadDelay: 40
 	Burst: 3
 	BurstDelays: 2
-	Range: 4964
+	Range: 7115
 	Report: chaingn1.aud
 	Warhead@SmallArms: SpreadDamage
-		Damage: 6000
+		Damage: 12000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 6
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 6000
+		Damage: 12000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 6
 
 TSSuperCyCannon:
 	Inherits: TSCyCannon
@@ -174,12 +174,17 @@ TSSuperCyCannon:
 	BurstDelays: 2
 
 TSCABALObeliskLaserFire:
+	Range: 10378
+	ReloadDelay: 90
 	Inherits: TSObeliskLaserFire
 	Report: obelcor3.aud
 	Projectile:
 		Color: 0040FF80
 		SecondaryBeamColor: 80C0FF
-
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 70000
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 70000
 TSHunterKillerLasers:
 	Inherits: ^Chaingun
 	Inherits: ^LaserWeapon
@@ -409,3 +414,185 @@ Eliminator-Blades:
 			Medium: 90
 			Heavy: 100
 			Concrete: 50
+
+CabalCyborgChaingun:
+	Inherits: ^SmallArms
+	Inherits@2: ^Chaingun
+	ReloadDelay: 60
+	Range: 6231
+	Warhead@SmallArms: SpreadDamage
+		Damage: 10000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 5
+	Warhead@Chaingun: SpreadDamage
+		Damage: 10000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 5
+
+CabalEliminatorGatling:
+	Inherits: ^Chaingun
+	ReloadDelay: 32
+	Range: 6167
+	Warhead@Chaingun: SpreadDamage
+		Damage: 32000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 16
+
+CabalTarantulaCannon:
+	Inherits: ^MediumCannon
+	ReloadDelay: 48
+	Range: 5278
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 16000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 8
+
+CabalReaperMissiles:
+	Inherits: ^LightMissile
+	Inherits@2: ^MediumMissile
+	ReloadDelay: 32
+	Range: 5153
+	Warhead@LightMissile: SpreadDamage
+		Damage: 8000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 8000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 4
+
+CabalReaperMissilesAA:
+	Inherits: ^LightMissile
+	Inherits@2: ^MediumMissile
+	ReloadDelay: 32
+	Range: 7730
+	ValidTargets: Air
+	Warhead@LightMissile: SpreadDamage
+		Damage: 8000
+		ValidTargets: Air
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 8000
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 4
+
+CabalArtilleryWalkerShell:
+	Inherits: ^Grenade
+	ReloadDelay: 64
+	Range: 11582
+	Warhead@Grenade: SpreadDamage
+		Damage: 48000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 24
+
+CabalHunterKillerLasers:
+	Inherits: ^SmallArms
+	Inherits@2: ^LaserWeapon
+	ReloadDelay: 24
+	Range: 5318
+	Warhead@SmallArms: SpreadDamage
+		Damage: 8000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+
+CabalHunterKillerHeavyLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 26
+	Range: 6170
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 20000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 10
+
+CabalSpiderLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 4
+	Range: 6147
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+
+CabalDroneCannon:
+	Inherits: ^MediumCannon
+	Inherits@2: ^HeavyCannon
+	ReloadDelay: 24
+	Range: 6181
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 4
+
+CabalDissolverSpray:
+	Inherits: ^LightChemicalWeapon
+	ReloadDelay: 4
+	Range: 5142
+	Warhead@LightChemicalWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@LightChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+
+CabalCommandoPlasma:
+	Inherits: ^MediumCannon
+	Inherits@2: ^HeavyCannon
+	ReloadDelay: 50
+	Range: 5219
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 25
+
+CabalCommandoPlasmaMk2:
+	Inherits: ^MediumCannon
+	Inherits@2: ^HeavyCannon
+	ReloadDelay: 40
+	Range: 6264
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 50000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 25
+
+CabalCoreDefenderLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 70
+	Range: 6332
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 160000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 80
+
+CabalEngineerRepairBeam:
+	Inherits: ^RepairWeapon
+	ReloadDelay: 31
+	Range: 6128
+	Warhead@RepairWeapon: SpreadDamage
+		Damage: -1600
+
+CabalCrabClaws:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 25
+	Range: 1603
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 16000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 8

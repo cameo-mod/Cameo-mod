@@ -1200,8 +1200,8 @@ cabal_mobilestealthgenerator:
 	RenderVoxels:
 		Image: ts_nod_mobilestealthgenerator
 
-cabal_heavyspider_backup:
-	Inherits: cabal_heavyspider
+cabal_crab_backup:
+	Inherits: cabal_crab
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -1232,7 +1232,7 @@ cabal_heavyspider_backup:
 		ValidMovementTypes: Horizontal, Turn
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: cabal_heavyspider
+		Image: cabal_crab
  	-SpawnActorOnDeath@backup:
 	GrantPeriodicCondition@rebuild:
 		Condition: buildingrebirth
@@ -1240,7 +1240,7 @@ cabal_heavyspider_backup:
 		PauseOnCondition: chronobeamed
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
-		IntoActor: cabal_heavyspider
+		IntoActor: cabal_crab
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4

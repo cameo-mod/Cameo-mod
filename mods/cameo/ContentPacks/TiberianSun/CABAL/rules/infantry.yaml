@@ -5,7 +5,7 @@ cabal_engineer:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
 	Voiced:
-		VoiceSet: cabal_cyborginfantry
+		VoiceSet: TSCyborg
 	-TemporaryOwnerManager:
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -13,7 +13,30 @@ cabal_engineer:
 	-TakeCover:
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
-
+	Valued:
+		Cost: 800
+	Health:
+		HP: 20000
+	Mobile:
+		Speed: 50
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@REPAIRBEAM:
+		Name: primary
+		Weapon: CabalEngineerRepairBeam
+		TargetRelationships: Ally
+		ForceTargetRelationships: None
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 10
+		AmmoCondition: ammo
+	ReloadAmmoPool:
+		Delay: 10
+		Count: 1
+		ResetOnFire: true
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
 cabal_cyborginfantry:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -26,7 +49,7 @@ cabal_cyborginfantry:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
-		Cost: 300
+		Cost: 500
 	Tooltip:
 		Name: Cyborg Infantry
 	UpdatesPlayerStatistics:
@@ -37,16 +60,17 @@ cabal_cyborginfantry:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
-		Speed: 56
+		TurnSpeed: 10
+		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
 		Type: Flak
 	Health:
-		HP: 35000
+		HP: 45000
 	ChangesHealth@SelfHealing:
-		Step: 25
+		Step: 45
 	Armament@PRIMARY:
-		Weapon: TSVulcan3
+		Weapon: CabalCyborgChaingun
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
@@ -56,7 +80,7 @@ cabal_cyborginfantry:
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
 	Voiced:
-		VoiceSet: cabal_cyborginfantry
+		VoiceSet: TSCyborg
 	-TakeCover:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
@@ -350,7 +374,7 @@ cabal_hackercyborg:
 	Inherits@EMP: ^UnitDisable
 	Inherits@HAND: ^cabal_upgrade_handof
 	Valued:
-		Cost: 1200
+		Cost: 1250
 	Tooltip:
 		Name: Hacker Cyborg
 	UpdatesPlayerStatistics:
@@ -361,14 +385,15 @@ cabal_hackercyborg:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
-		Speed: 56
+		TurnSpeed: 16
+		Speed: 80
 		PauseOnCondition: disabled
 	Armor:
 		Type: Plate
 	Health:
-		HP: 60000
+		HP: 30000
 	ChangesHealth@SelfHealing:
-		Step: 25
+		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSRobotHackingControl
 		LocalOffset: 0,0,90
@@ -444,7 +469,7 @@ cabal_cyborgcommando:
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
 	Valued:
-		Cost: 4000
+		Cost: 5000
 	Tooltip:
 		Name: Cyborg Commando
 	UpdatesPlayerStatistics:
@@ -456,13 +481,14 @@ cabal_cyborgcommando:
 		BuildLimit: 1
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
-		Speed: 52
+		TurnSpeed: 10
+		Speed: 50
 	Health:
-		HP: 200000
+		HP: 250000
 	ChangesHealth@SelfHealing:
-		Step: 200
+		Step: 250
 	Armament@PRIMARY:
-		Weapon: TSCyCannon
+		Weapon: CabalCommandoPlasma
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -478,7 +504,7 @@ cabal_cyborgcommandov2:
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
 	Valued:
-		Cost: 8000
+		Cost: 10000
 	Tooltip:
 		Name: Cyborg Commando V2
 	UpdatesPlayerStatistics:
@@ -490,13 +516,14 @@ cabal_cyborgcommandov2:
 		BuildLimit: 1
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
-		Speed: 58
+		TurnSpeed: 10
+		Speed: 50
 	Health:
 		HP: 400000
 	ChangesHealth@SelfHealing:
-		Step: 200
+		Step: 400
 	Armament@PRIMARY:
-		Weapon: TSSuperCyCannon
+		Weapon: CabalCommandoPlasmaMk2
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -519,7 +546,7 @@ cabal_eliminator800:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Valued:
-		Cost: 1000
+		Cost: 1250
 	Tooltip:
 		Name: Eliminator 800
 	Buildable:
@@ -528,9 +555,10 @@ cabal_eliminator800:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Health:
-		HP: 16000
+		HP: 85000
 	Mobile:
-		Speed: 71
+		TurnSpeed: 10
+		Speed: 50
 		Voice: Move
 	Guard:
 		Voice: Move
@@ -544,7 +572,7 @@ cabal_eliminator800:
 		Delay: 15
 		Count: 1
 	Armament@1:
-		Weapon: RA2GattlingMG1
+		Weapon: CabalEliminatorGatling
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 64
@@ -641,7 +669,7 @@ cabal_coredefender:
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
-		Cost: 10000
+		Cost: 12500
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -651,16 +679,17 @@ cabal_coredefender:
 		Prerequisites: ~cabal_mechfactory, cabal_core
 		Description: Superheavy CABAL epic unit.\n Strong vs ground targets
 	Mobile:
+		TurnSpeed: 10
 		Speed: 50
 	Passenger:
 		Weight: 12
 	DetectCloaked:
 		Range: 6c0
 	Armament:
-		Weapon: TSCoreLaser
+		Weapon: CabalCoreDefenderLaser
 		LocalOffset: 1150,-750,410, 1300,750,510
 	Armament@LASER3:
-		Weapon: TSCoreLaser
+		Weapon: CabalCoreDefenderLaser
 		LocalOffset: 1150,750,410, 1300,-750,510
 	AttackFrontal:
 		FacingTolerance: 12
@@ -671,7 +700,11 @@ cabal_coredefender:
 	Tooltip:
 		Name: Core Defender
 	Health:
-		HP: 1000000
+		HP: 1500000
+	ChangesHealth@SelfHealing:
+		Step: 1500
+		Delay: 1
+		StartIfBelow: 100
 	Armor:
 		Type: Heavy
 	DamageMultiplier@superheavy:

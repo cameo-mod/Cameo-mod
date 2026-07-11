@@ -106,9 +106,6 @@ ts_nod_subterraneanapc:
 	SelectionDecorations:
 	Selectable:
 		Class: ts_nod_subterraneanapc
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -184,9 +181,6 @@ ts_nod_attackbuggy:
 		FacingTolerance: 512
 	SelectionDecorations:
 	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -246,11 +240,6 @@ ts_nod_stealthtank:
 		FacingTolerance: 256
 	AutoTarget:
 		InitialStance: HoldFire
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -324,9 +313,6 @@ ts_nod_mobilerepairvehicle:
 		ResetOnFire: true
 	AttackFrontal:
 		FacingTolerance: 0
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle
@@ -344,22 +330,28 @@ ts_nod_artillery:
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@EMP: ^TurretEMP
 	Inherits@vo: ^AttackTurretedVoice
 	Inherits@MobilitySpecialization: ^MobilitySpecialization
 	Inherits@AuxiliaryWeapon: ^AuxiliaryWeapon
 	Inherits@AdvancedTiberiumRefinement: ^AdvancedTiberiumRefinement
+	Inherits@deploy: ^LurkerMode
+	Inherits@bot: ^SiegeModeVehicle
 	Valued:
 		Cost: 1300
 	Tooltip:
 		Name: Artillery
+		RequiresCondition: !deployed
+	Tooltip@DEPLOYED:
+		Name: Artillery (deployed)
+		RequiresCondition: deployed
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ts_nod_warfactory, ts_nod_radar
 		Queue: Vehicle, RAVehicle
-		Description: Mobile artillery.\nImmobile when firing.\n  Strong vs Ground units\n  Weak vs Aircraft
+		Description: actor-ts_nod_artillery.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
@@ -374,39 +366,47 @@ ts_nod_artillery:
 		Type: Light
 	Turreted:
 		TurnSpeed: 24
-	Armament@PRIMARY:
+		InitialFacing: 384
+	Armament@Dummy:
+		Weapon: TSArtyTargeting
+	Armament@Deployed:
 		Weapon: TS155mm
 		LocalOffset: 407,0,362
-		RequiresCondition: !ts_nod_upgrade_auxiliaryweapon
-	Armament@UPGRADE:
+		RequiresCondition: (deployed || undeployed) && !ts_nod_upgrade_auxiliaryweapon
+	Armament@DeployedUpgrade:
+		Name: deployed
+		Turret: deploy
 		Weapon: TSAux155mm
 		LocalOffset: 407,0,362
-		RequiresCondition: ts_nod_upgrade_auxiliaryweapon
+		PauseOnCondition: undeployed
+		RequiresCondition: (deployed || undeployed) && ts_nod_upgrade_auxiliaryweapon
 	AttackTurreted:
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
+		Voice: Attack
+		TargetFrozenActors: True
+		ForceFireIgnoresActors: True
+		OutsideRangeRequiresForceFire: True
+	GrantConditionOnDeploy:
+		Facing: 384
+		DeploySounds: place2.aud
+		UndeploySounds: clicky1.aud
+		Voice: Move
+	GrantCondition@PREVIEWWORKAROUND:
+		Condition: real-actor
 	WithVoxelBody:
-		RequiresCondition: !immobile
+		RequiresCondition: undeployed
+	WithFacingSpriteBody:
+		Sequence: deploy
+		RequiresCondition: !undeployed && real-actor
 	WithVoxelTurret:
+		Turret: deploy
+		RequiresCondition: !undeployed
 	WithVoxelBarrel:
-		RequiresCondition: immobile
+		Armament: deployed
+		RequiresCondition: !undeployed
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
 		Payload: 350
-	GrantConditionOnAttack@DEPLOY:
-		Condition: immobile
-		RevokeDelay: 20
-	SpeedMultiplier@DEPLOY:
-		Modifier: 0
-		RequiresCondition: immobile
-	WithFacingSpriteBody@Skin2:
-		Sequence: deploy
-		RequiresCondition: immobile
-		Name: body2
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
@@ -447,11 +447,6 @@ ts_nod_devilstongue:
 		Type: Heavy
 	Armament@PRIMARY:
 		Weapon: TSFireballLauncher
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
-	AcceptsDeliveredExperience: ##########
-		ValidTypes: vehicle ##########
 	AttackFrontal:
 		PauseOnCondition: disabled || submerged
 		FacingTolerance: 0
@@ -491,9 +486,6 @@ ts_nod_mobilestealthgenerator:
 		HpPerStep: 2637
 	Armor:
 		Type: Wood
-	SelectionDecorations:
-	Selectable:
-	Inherits@EXT: ^ExternalConditions ##########
 	WithVoxelBody:
 	Voiced:
 		VoiceSet: TSVehicle

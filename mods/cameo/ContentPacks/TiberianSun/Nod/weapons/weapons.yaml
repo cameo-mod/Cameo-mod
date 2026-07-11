@@ -4,6 +4,14 @@ TSAux155mm:
 		Weapon: TS155mmFrag
 		Amount: 2
 
+TSArtyTargeting:
+	Range: 13083
+	MinRange: 2616
+	ReloadDelay: 33
+	ValidTargets: Ground
+	Projectile: InstantHit
+	Warhead@Dummy: Dummy
+
 TS155mmFrag:
 	Inherits: ^ShrapnelWeapon
 	Projectile: Bullet
@@ -355,7 +363,7 @@ ChamBlade:
 
 TSShadowTeamPistols:
 	Inherits: ^SniperWeapon
-	Report: itanatta.wav, itanattb.wav
+	Report: silencer.aud
 	ReloadDelay: 12
 	Burst: 2
 	BurstDelays: 3
@@ -399,6 +407,23 @@ TSShadowTeamBomb:
 	Warhead@2Eff: CreateEffect
 		Explosions: self_destruct
 		ImpactSounds: gexpcraa.wav
+
+TSShadowTeamTargeting:
+	ReloadDelay: 500
+	Range: 12000
+	ValidTargets: lockable
+	Projectile: LaserZap
+		Width: 36
+		Duration: 20
+		SecondaryBeamWidth: 96
+		SecondaryBeamColor: FF000030
+	Warhead@1: TargetDamage
+	Warhead@Condition: GrantExternalCondition
+		Range: 7500
+		Duration: 400
+		Condition: lockon
+		ValidTargets: lockable
+		ValidRelationships: Enemy
 
 TSRaiderCannon:
 	Inherits: ^SmallArms

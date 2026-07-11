@@ -16,7 +16,7 @@ enforcer.futu:
 	Valued:
 		Cost: 300
 	Buildable:
-		BuildPaletteOrder: 20
+		BuildPaletteOrder: 105
 		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_enforcer.description
@@ -144,7 +144,7 @@ javelinsoldier.futu:
 	Valued:
 		Cost: 400
 	Buildable:
-		BuildPaletteOrder: 20
+		BuildPaletteOrder: 110
 		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_javelinsoldier.description
@@ -257,6 +257,7 @@ fedeng.futu:
 	Buildable:
 		Prerequisites: ~egpile.futu
 		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 100
 		Description: actor_futu_fedeng.description
 	RenderSprites:
 		Image: fedeng.futu
@@ -272,7 +273,7 @@ spy.futu:
 	Inherits@pip: ^WithSpecialCargoPip
 	Buildable:
 		Queue: Infantry, RAInfantry
-		BuildPaletteOrder: 90
+		BuildPaletteOrder: 445
 		Prerequisites: ~egpile.futu, egtech.futu
 		Description: actor_ra2spy.description
 	Valued:
@@ -305,6 +306,7 @@ spy.futu:
 		VoiceSet: RA2SpyVoice
 
 blackwidow.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -316,7 +318,7 @@ blackwidow.futu:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Valued:
-		Cost: 1200
+		Cost: 900
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -329,8 +331,8 @@ blackwidow.futu:
 		AddToArmyValue: true
 	Buildable:
 		Queue: Infantry, RAInfantry
-		BuildPaletteOrder: 120
-		Prerequisites: ~egpile.futu, egtech.futu, ~up_blackwidow.futu
+		BuildPaletteOrder: 335
+		Prerequisites: ~egpile.futu, egtf.futu, ~up_blackwidow.futu
 		Description: actor_futu_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
@@ -369,6 +371,7 @@ blackwidow.futu:
 		Upgrades: up_equalizer_x1.futu, up_equalizer_x2.futu, up_equalizer_x3.futu
 
 cryoleg.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -382,7 +385,7 @@ cryoleg.futu:
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Buildable:
 		Queue: Infantry, RAInfantry
-		BuildPaletteOrder: 121
+		BuildPaletteOrder: 550
 		Prerequisites: ~egpile.futu, egshock.futu, ~up_cryoleg.futu
 		BuildLimit: 1
 		Description: actor_futu_cryoleg.description
@@ -439,7 +442,7 @@ engi.futu:
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
-		BuildPaletteOrder: 75
+		BuildPaletteOrder: 225
 		Prerequisites: ~egpile.futu, yrgarobo.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_engi.description
@@ -518,7 +521,7 @@ wheel.futu:
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 215
 		Prerequisites: ~egpile.futu, yrgarobo.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_wheel.description
@@ -564,6 +567,7 @@ wheel.futu:
 		Condition: ifv-mg
 
 robot_shotgun.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -581,8 +585,8 @@ robot_shotgun.futu:
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
-		BuildPaletteOrder: 75
-		Prerequisites: ~egpile.futu, yrgarobo.futu, egtf.futu, ~up_shotgun_droid.futu
+		BuildPaletteOrder: 220
+		Prerequisites: ~egpile.futu, yrgarobo.futu, ~up_shotgun_droid.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_shotgun.description
 	Mobile:
@@ -632,6 +636,7 @@ robot_shotgun.futu:
 		Condition: ifv-mg
 
 robot_missiles.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -645,11 +650,11 @@ robot_missiles.futu:
 	Tooltip:
 		Name: Missile Droid
 	Valued:
-		Cost: 600
+		Cost: 300
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
-		BuildPaletteOrder: 75
+		BuildPaletteOrder: 440
 		Prerequisites: ~egpile.futu, yrgarobo.futu, egtech.futu, ~up_missile_droid.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_missiles.description
@@ -700,9 +705,9 @@ robot_missiles.futu:
 		Condition: ifv-miss
 
 robot_cannon.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@anim: ^RA2Vehicle
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -714,12 +719,12 @@ robot_cannon.futu:
 	Tooltip:
 		Name: Cannon Droid
 	Valued:
-		Cost: 525
+		Cost: 400
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
-		BuildPaletteOrder: 75
-		Prerequisites: ~egpile.futu, yrgarobo.futu, egshock.futu, ~up_cannon_droid.futu
+		BuildPaletteOrder: 330
+		Prerequisites: ~egpile.futu, yrgarobo.futu, egtf.futu, ~up_cannon_droid.futu
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_cannon.description
 	Mobile:

@@ -45,9 +45,9 @@ cabal_heavycabalobelisk:
 	Tooltip:
 		Name: Heavy Cabal Obelisk
 	Valued:
-		Cost: 2600
+		Cost: 2400
 	Health:
-		HP: 300000
+		HP: 220000
 	Armament@PRIMARY:
 		Weapon: TSCABALObeliskLaserFire
 		LocalOffset: 0,0,1956
@@ -62,7 +62,7 @@ cabal_obeliskofdarkness:
 	Inherits@AUTOTARGET: ^AutoTargetAir
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Valued:
-		Cost: 1350
+		Cost: 1200
 	Tooltip:
 		Name: Obelisk of Darkness
 	Buildable:
@@ -77,7 +77,7 @@ cabal_obeliskofdarkness:
 		Bounds: 2048, 2048
 	SelectionDecorations:
 	Health:
-		HP: 242500
+		HP: 120000
 	Armor:
 		Type: Heavy
 	RevealsShroud:
@@ -131,9 +131,9 @@ cabal_pillbox:
 		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory
 		Description: actor_pbox.description
 	Valued:
-		Cost: 600
+		Cost: 800
 	Health:
-		HP: 110000
+		HP: 85000
 	Turreted:
 		TurnSpeed: 1023
 	-QuantizeFacingsFromSequence:

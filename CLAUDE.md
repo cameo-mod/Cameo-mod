@@ -19,7 +19,12 @@ audited and deleted. Current progress + the exact runbook to continue:
    formulas, tech tiers, content-pack layout, description scheme, agent
    operating rules). Read it before touching any yaml.
 2. **`docs/audit/SUMMARY.md`** — current known-issue state by bug class.
-3. `docs/MASTER_REPORT.md` — long-form analysis, bug taxonomy (B1–B12),
+3. `docs/Cameo_Knowledge_Base_Manual.md` — the ENGINE/CODE reference
+   (v0.1 by kmoney): custom traits, assemblies (OpenRA.Mods.Cameo/CA),
+   activities, bot modules, UI internals. Consult it for any C#-side
+   question (it lists code-derived identifiers!); verify against source
+   when in doubt — it is a contributor document, not the binding contract.
+4. `docs/MASTER_REPORT.md` — long-form analysis, bug taxonomy (B1–B12),
    roadmap; consult §9/§10/§13 when DESIGN.md is not enough.
 
 ## Tooling
@@ -34,3 +39,18 @@ audited and deleted. Current progress + the exact runbook to continue:
 ## Memory
 
 Before running any shell command that has a corresponding memory file (build commands, engine sync, git operations), **read that memory file in full before executing**.
+
+## Work queue & token efficiency
+
+- The ordered work queue lives in **`docs/design/ROADMAP.md`** — pick
+  from the top (crashes always jump the queue), update it as you go.
+- Model/effort cannot be switched by the agent itself (the user picks
+  the model). To spend fewer tokens WITHOUT losing quality:
+  - batch mechanical sweeps into scripts over the model/registry, never
+    file-by-file reading;
+  - keep rules in DESIGN.md and plans in ROADMAP.md instead of
+    re-deriving them each session; read them FIRST;
+  - bundle many small design orders into one implementation pass;
+  - verify with the audit suite (cheap) rather than re-reading yaml;
+  - subagents on cheaper models are only worth it for self-contained
+    batch jobs big enough to amortize their cold-start context.

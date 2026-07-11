@@ -33,8 +33,6 @@ ts_nod_engineer:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~ts_nod_handof
-	RenderSprites:
-		Image: tsengineer
 	Voiced:
 		VoiceSet: TSInfantry
 	-TemporaryOwnerManager:
@@ -92,7 +90,7 @@ ts_nod_elitecadre:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOsrder: 50
+		BuildPaletteOrder: 50
 		Prerequisites: ~ts_nod_handof, ts_nod_radar
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Air, Vehicles\n  Weak vs Siege, Heavy armor
@@ -167,7 +165,7 @@ ts_nod_toxintrooper:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOsrder: 80
+		BuildPaletteOrder: 80
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor
@@ -210,8 +208,9 @@ ts_nod_shadowteam:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		IconPalette: ra2
-		BuildPaletteOsrder: 90
+	IconPalette: tscameo
+	BuildPaletteOrder: 90
+
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: actor_ts_nod_shadowteam.description
@@ -249,7 +248,7 @@ ts_nod_shadowteam:
 	-Cloak@ts_nod_upgrade_infiltrationkit: # has cloak on by default
 	Transforms:
 		IntoActor: ts_nod_shadowteam_air
-		#RequiresCondition: ts_nod_upgrade_infiltrationkit
+		RequiresCondition: ts_nod_upgrade_infiltrationkit
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_infiltrationkit
 
@@ -259,8 +258,8 @@ ts_nod_shadowteam_air:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^GDIRankDecoration
 	Inherits@CLOAK: ^CloakedAircraft
-	Inherits@detect: ^GenericAirDetector
-	#Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Tooltip:
 		Name: actor_ts_nod_shadowteam.name
 	Valued:
@@ -269,22 +268,30 @@ ts_nod_shadowteam_air:
 		AddToArmyValue: true
 		OverrideActor: ts_nod_shadowteam
 	Buildable:
-		IconPalette: ra2
+		IconPalette: tscameo
 		BuildPaletteOrder: 90
 		Description: actor_ts_nod_shadowteam.description
 	Aircraft:
-		TurnSpeed: 36
-		Speed: 180
+		TurnSpeed: 20
+		Speed: 150
+		VTOL: false
+		CanHover: false
 		CanForceLand: false
+	TakeOffOnMake:
 	Health:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
-	#Armament@PRIMARY:
-	#	Weapon: TSShadowTeamTargeting
-	#AttackAircraft:
-	#	FacingTolerance: 10
-	#	AttackType: Hover
+	Armament@PRIMARY:
+		Weapon: TSShadowTeamTargeting
+		ReloadingCondition: reloading
+	ReloadArmamentsBar:
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Default
+		PersistentTargeting: false
+		OpportunityFire: false
+		RequiresCondition: !reloading
 	DeathSounds:
 	-WithShadow:
 	WithInfantryBody@Air:
@@ -334,7 +341,7 @@ ts_nod_shotguncommando:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOsrder: 100
+		BuildPaletteOrder: 100
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: Elite Infantry of NOD used to fight high technology enemies \n  Strong vs Infantry, Vehicles\n  Weak vs Siege, Heavy armor

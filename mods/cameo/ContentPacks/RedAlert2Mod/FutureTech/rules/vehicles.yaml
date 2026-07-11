@@ -42,7 +42,7 @@ mech_machinegun.futu:
 	Selectable:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
-		BuildPaletteOrder: 75
+		BuildPaletteOrder: 440
 		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_future_mech_machinegun.description
@@ -99,7 +99,7 @@ mech_plasma.futu:
 	Selectable:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
-		BuildPaletteOrder: 75
+		BuildPaletteOrder: 560
 		Prerequisites: ~egweap2.futu, egshock.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_future_mech_plasma.description
@@ -146,6 +146,7 @@ mech_plasma.futu:
 		PlayerPalette: playerra2
 
 ifv.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: RA2FV
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
@@ -156,6 +157,7 @@ ifv.futu:
 	Buildable:
 		Prerequisites: ~egweap2.futu, ~up_salamander.futu
 		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 105
 		Description: actor_futu_ifv.description
 	Mobile:
 		Speed: 150
@@ -177,10 +179,10 @@ ifv.futu:
 		VoiceSet: FutureIFVVoice
 
 yrrobo.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackTurretedVoice
@@ -192,8 +194,8 @@ yrrobo.futu:
 	Tooltip:
 		Name: Robot Tank
 	Buildable:
-		BuildPaletteOrder: 70
-		Prerequisites: ~egweap2.futu, egtech.futu, ~up_robot_tank.futu
+		BuildPaletteOrder: 225
+		Prerequisites: ~egweap2.futu, yrgarobo.futu, ~up_robot_tank.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_robo.description
 	Mobile:
@@ -256,7 +258,8 @@ yrrobo.futu:
 	RenderSprites:
 		Image: yrrobo
 		PlayerPalette: playerra2
-
+	Targetable@ENERGIZER:
+		TargetTypes: RobotEnergizable
 mbt.futu:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
@@ -273,7 +276,7 @@ mbt.futu:
 	Tooltip:
 		Name: Guardian Tank
 	Buildable:
-		BuildPaletteOrder: 40
+		BuildPaletteOrder: 100
 		Prerequisites: ~egweap2.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_mbt.description
@@ -372,7 +375,7 @@ hvrt.futu:
 	Tooltip:
 		Name: Riptide ACV
 	Buildable:
-		BuildPaletteOrder: 60
+		BuildPaletteOrder: 120
 		Prerequisites: ~egweap2.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_hvrt.description
@@ -437,7 +440,7 @@ phal.futu:
 	Tooltip:
 		Name: Phalanx (WIP)
 	Buildable:
-		BuildPaletteOrder: 60
+		BuildPaletteOrder: 445
 		Prerequisites: ~egweap2.futu, egtech.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_phal.description
@@ -506,7 +509,7 @@ landcarr.futu:
 	Tooltip:
 		Name: Beehive Drone Carrier
 	Buildable:
-		BuildPaletteOrder: 75
+		BuildPaletteOrder: 555
 		Prerequisites: ~egweap2.futu, egshock.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_landcarr.description
@@ -566,6 +569,7 @@ landcarr.futu:
 		Facing: 0
 
 orion.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^HighTechTankTemplate
@@ -579,11 +583,11 @@ orion.futu:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Valued:
-		Cost: 3600
+		Cost: 1800
 	Tooltip:
 		Name: Orion Tank
 	Buildable:
-		BuildPaletteOrder: 80
+		BuildPaletteOrder: 435
 		Prerequisites: ~egweap2.futu, egtech.futu, ~up_orion.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_orion.description
@@ -676,6 +680,7 @@ harv.futu:
 	Buildable:
 		Prerequisites: ~egrefn.futu, ~!up_prospector.futu
 		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 110
 		Description: actor_futu_harv.description
 	WithHarvestAnimation:
 	WithDockingAnimation:
@@ -691,6 +696,7 @@ harv.futu:
 		Palette: ra2effect
 
 harv2.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -726,8 +732,9 @@ harv2.futu:
 		BobDistance: -64
 		InitialHeight: 384
 	Buildable:
-		Prerequisites: ~egweap2.futu, egtech.futu, ~up_prospector.futu
+		Prerequisites: ~egweap2.futu, ~up_prospector.futu
 		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 115
 		Description: actor_futu_harv2.description
 	WithHarvestAnimation:
 	WithDockingAnimation:
@@ -774,7 +781,7 @@ athena.futu:
 	Tooltip:
 		Name: Athena Cannon
 	Buildable:
-		BuildPaletteOrder: 60
+		BuildPaletteOrder: 330
 		Prerequisites: ~egweap2.futu, egtf.futu
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_athena.description
@@ -834,7 +841,7 @@ coiler.futu:
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		BuildPaletteOrder: 170
+		BuildPaletteOrder: 550
 		Prerequisites: ~egweap2.futu, egshock.futu
 		Description: actor_futu_coiler.description
 	Valued:
@@ -882,6 +889,7 @@ coiler.futu:
 		PlayerPalette: player_rgba
 
 futu.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^EpicVehicleTemplate
@@ -898,7 +906,7 @@ futu.futu:
 	Tooltip:
 		Name: Future Tank
 	Buildable:
-		BuildPaletteOrder: 200
+		BuildPaletteOrder: 565
 		BuildLimit: 1
 		Prerequisites: ~egweap2.futu, egshock.futu, yrgarobo.futu, ~up_futuretank.futu
 		Queue: Vehicle, RAVehicle
@@ -951,7 +959,8 @@ futu.futu:
 		Payload: 350
 	RenderSprites:
 		PlayerPalette: player_rgba
-
+	Targetable@ENERGIZER:
+		TargetTypes: RobotEnergizable
 ####################################################################################################
 #		Red Alert 2 Future Aircraft
 ####################################################################################################
