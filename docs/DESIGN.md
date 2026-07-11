@@ -301,6 +301,60 @@ Range to hold the price. Range and DPS cells are never hand-edited.
 - **Defenses use Speed = 100 always** — immobility is priced through
   their LOW UnitClass factors instead, keeping the formula uniform.
 
+**The nice-number law (design 2026-07-11).** Every stat moves in fixed
+steps so the house formulas stay integral:
+- **Prices: 25-credit steps** — never 387-style numbers; if the formula
+  lands off-grid, adjust unit stats until the price fits.
+- **Damage: 2000-steps.** The HealthPercentageDamage twin is always
+  **1 per 2000** main damage (16000 -> Percentage 8); FriendlyFire twins
+  are always **50% damage and 50% spread**; all class warheads carry the
+  identical (even-spread) value.
+- **HP: 2500-steps** for vehicles/aircraft/ships (self-heal HP/2500,
+  repair HP/20); **1000-steps for infantry** (self-heal HP/1000);
+  defenses may use either (their self-heal is a flat 10).
+- **Speed: steps of 5** (TurnSpeed = Speed/5 stays integral).
+- ReloadDelay: any integer.
+- **Beautiful ranges are kept**: if Range is exactly 6.000 or 7.500,
+  adjust the other stats, not the range.
+- **Preserve the unit's feel**: never double damage and reload together
+  just to make the math easy.
+
+**UnitClass L is bound to the defaults.yaml class template** — one value
+per class, identical for every unit of that class:
+
+| class (sheet section) | L |
+|---|---|
+| Scout Infantry 0.5 · Grenadier 0.4 · Mortar 0.6 · Anti-Tank/Anti-Air 0.5 | infantry |
+| Heavy Infantry 0.8 · Melee 0.75 · Sniper 0.75 · Hero 1.0 | infantry |
+| Main Battle Tank 1.0 · High Tech Tank 1.0 · Epic 0.4 | tanks |
+| Scout Vehicle 0.333 · Advanced Scout 0.5 · Transport/Support 1.25 | vehicles |
+| AA Support 1.0 · Fire Support 1.0 · Artillery 0.5 | vehicles |
+| Helicopter 1.0 · Fighter 1.0 · Spaceship 1.0 | aircraft |
+| Basic Defense 0.35 · AA Defense 0.225 · Advanced Defense 0.325 | defenses |
+
+**Tier counting for the M discount**: Tier 2 = radar tech OR war
+factory (**refinery requirements never count** toward the tier); tech
+center = Tier 3. T1/T2 = 1.0, T3 = 0.75, T4/5 = 0.5. Auto-correcting
+the missing discounts across the sheets is approved — under the
+nice-number law above.
+
+**Early-vs-late philosophy**: upgrades boost cheap early-game units
+proportionally MORE than late units; late units are compensated through
+the tech-tier discount instead. Tier 2 is the stopgap tier — units too
+strong for T1 but not strong enough for T3.
+
+**Tier placement themes** (initial; deep research ongoing): artillery
+is ALWAYS at least Tier 2 (some Tier 3, e.g. the GDI Archer); fire
+supports and line breakers usually Tier 2; flamethrower infantry
+Tier 2 (exception: Japan); heavy infantry and snipers usually Tier 2.
+
+**Special ability catalog (K = 1 + 0.25 per special; overpowered kits
+set straight to 2 until per-ability values exist):**
+- COUNTS: cloak; auras (propaganda effect); vampire heal-on-attack
+  (the Dissolver's `ChangesHealth` on `GrantConditionOnAttack`).
+- DOES NOT COUNT: cloak detection (near-ubiquitous); deploy/transform;
+  anti-air capability — AA belongs in a future formula term, not in K.
+
 **The baseline unit (design 2026-07-11): the Naxis Tiger Tank** —
 100 000 HP, 100 Speed, 10 000 damage, range 5.0 (= 5000 wdist,
 written literally as `Range: 5000` in the weapons yaml — Cameo uses
