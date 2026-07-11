@@ -474,10 +474,8 @@ cabal_crab:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
-	Turreted(?:@[\w.]+)?:
-		TurnSpeed: 20
- 	SpawnActorOnDeath@backup:
- 		Actor: cabal_crab_backup
+	SpawnActorOnDeath@backup:
+		Actor: cabal_crab_backup
 		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_artilleryspider:

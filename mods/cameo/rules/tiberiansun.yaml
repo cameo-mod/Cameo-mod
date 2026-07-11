@@ -1203,9 +1203,9 @@ cabal_mobilestealthgenerator:
 cabal_crab_backup:
 	Inherits: cabal_crab
 	Valued:
-		Cost: 1200
+		Cost: 675
 	Tooltip:
-		Name: Heavy Spider (Backup Mode)
+		Name: Crab (Backup Mode)
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory, ~disabled
@@ -1216,7 +1216,7 @@ cabal_crab_backup:
 		TurnSpeed: 0
 		Speed: 0
 	Health:
-		HP: 160000
+		HP: 100000
 	Repairable:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:

@@ -208,9 +208,8 @@ ts_nod_shadowteam:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-	IconPalette: tscameo
-	BuildPaletteOrder: 90
-
+		IconPalette: tscameo
+		BuildPaletteOrder: 90
 		Prerequisites: ~ts_nod_handof, ts_nod_techcenter
 		Queue: Infantry, RAInfantry
 		Description: actor_ts_nod_shadowteam.description
