@@ -420,6 +420,7 @@ TSBusMortarChem:
 TSInfantryMortar:
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^HeavyBomb
+	Inherits: ^TSCannonEffect
 	ReloadDelay: 88
 	Range: 10830
 	MinRange: 2166

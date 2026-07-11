@@ -677,7 +677,7 @@ forgotten_mutantmortarman:
 		BuildPaletteOrder: 130
 		Prerequisites: ~forgotten_barracks, forgotten_radar
 		Queue: Infantry, RAInfantry
-		IconPalette: ra2
+		IconPalette: tscameo
 		Description: actor_forgotten_mutantmortarman.description
 	Mobile:
 		Speed: 50
@@ -688,9 +688,11 @@ forgotten_mutantmortarman:
 	Armament@PRIMARY:
 		Weapon: TSInfantryMortar
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
+		FireDelay: 15
 	Armament@UPGRADE:
 		Weapon: TSInfantryMortarChem
 		RequiresCondition: forgotten_upgrade_chemicalweapons
+		FireDelay: 15
 	Voiced:
 		VoiceSet: TSGhost
 	Armament@GARRISONED: ##########

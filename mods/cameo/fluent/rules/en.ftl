@@ -987,7 +987,6 @@ actor_forgotten_mutantmortarman =
    .name = Mutant Mortarman
    .description = Mutant artillery infantry lobbing mortar shells from long range.
       Chemical Weapons research loads chemical shells.
-      Detects nearby cloaked enemies.
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 

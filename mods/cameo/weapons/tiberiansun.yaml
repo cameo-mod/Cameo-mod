@@ -49,15 +49,10 @@
 	Range: 6144
 	Report: 120mmf.aud
 	Projectile: Bullet
-		Image: 120MM
-		Speed: 666
-		Shadow: true
-	Projectile: Bullet
 		Speed: 682
 		Image: 120MM
 		Shadow: true
 		LaunchAngle: 75
-		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: expnew14.aud
 		ValidTargets: Ground, Air
