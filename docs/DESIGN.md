@@ -289,6 +289,23 @@ cheapest provider wins).
   `RenderSprites.Image` points at that same name — do not leave an
   upgrade borrowing a unit cameo.
 - Voice sets are shared resources named for the VOICE, not a unit.
+- **Custom animated effects (explosions, muzzle flashes, projectile
+  trails) are authored as RGBA PngSheets** (design 2026-07-12; the
+  proven pattern used by the neutron-shell `magicnuke.png` and the
+  CABAL rocket trail `cabal_rockettrail.png`). A single horizontal PNG
+  strip of equal-size frames carries two PNG `tEXt` chunks —
+  `FrameSize: W,H` and `FrameAmount: N` — and a sequence references it
+  with `Filename:`, `Length: N`, optional `Scale`, `Tick`. **An RGBA
+  sheet renders in true colour with NO palette** — omit
+  `TrailPalette`/`ExplosionPalette` entirely (this is why magicnuke
+  looks right and why the smoke below broke when a palette was forced
+  onto it). Keep effect frame counts small for trails (≤10, fading to
+  transparent so each puff dies on its own).
+- **Palette pitfall for indexed `x_smokey` trails**: they use the
+  **`effect`** palette. `effect75alpha` is a D2K/Dune alpha palette
+  (`PaletteFromPaletteWithAlpha`) — forcing it onto a non-Dune sprite
+  like `blue_smokey` re-tints it (blue → dark green). Use `effect` for
+  indexed trails, or an RGBA PngSheet (no palette) for full colour.
 
 ## 9. Operating rules for agents
 

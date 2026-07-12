@@ -583,37 +583,37 @@ cabal_eliminator800:
 	Armament@1:
 		Weapon: CabalEliminatorGatling
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 64
 		LocalOffset: 544,100,256
 	Armament@2:
 		Weapon: RA2GattlingMG2
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
 		LocalOffset: 544,100,256
 	Armament@3:
 		Weapon: RA2GattlingMG3
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo >= 9
 		LocalOffset: 544,100,256
 	Armament@1AA:
 		Weapon: RA2GattlingMG1AA
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 64
 		LocalOffset: 544,100,256
 	Armament@2AA:
 		Weapon: RA2GattlingMG2AA
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
 		LocalOffset: 544,100,256
 	Armament@3AA:
 		Weapon: RA2GattlingMG3AA
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo >= 9
 		LocalOffset: 544,100,256
 	Armament@GARRISONED:
