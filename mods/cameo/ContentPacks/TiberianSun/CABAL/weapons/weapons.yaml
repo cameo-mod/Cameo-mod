@@ -13,7 +13,10 @@
 		TerrainHeightAware: true
 		TrailImage: cabal_rockettrail
 		TrailInterval: 1
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_missileexplosion
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Ship, Air
 TS90mm_bluenuke:
 	Inherits: ^TSCannonEffect
 	Inherits: ^MediumCannon
@@ -304,7 +307,10 @@ TSTwinBazooka:
 		Damage: 24000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 12
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_missileexplosion
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Ship, Air
 TSQuadBazooka:
 	Inherits: TSTwinBazooka
 	Burst: 4
@@ -818,7 +824,7 @@ CabalManticoreMissiles:
 	ReloadDelay: 30
 	Range: 5358
 	ValidTargets: Ground, Water
-	Report: rketinf1.aud
+	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
