@@ -24,6 +24,7 @@ cabal_engineer:
 	Armament@REPAIRBEAM:
 		Name: primary
 		Weapon: CabalEngineerRepairBeam
+		LocalOffset: 128,0,256
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 		PauseOnCondition: !ammo
@@ -71,6 +72,7 @@ cabal_cyborginfantry:
 		Step: 45
 	Armament@PRIMARY:
 		Weapon: CabalCyborgChaingun
+		LocalOffset: 128,0,256
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
@@ -128,9 +130,11 @@ cabal_rocketcyborg:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: CabalRocketCyborgRockets
+		LocalOffset: 128,0,256
 		RequiresCondition: !cabal_upgrade_darkarmament
 	Armament@Upgraded:
 		Weapon: CabalRocketCyborgRocketsUpgraded
+		LocalOffset: 128,0,256
 		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
@@ -492,6 +496,7 @@ cabal_cyborgcommando:
 		Step: 250
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasma
+		LocalOffset: 128,0,256
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -527,6 +532,7 @@ cabal_cyborgcommandov2:
 		Step: 400
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasmaMk2
+		LocalOffset: 128,0,256
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:

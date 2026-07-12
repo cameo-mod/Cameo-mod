@@ -458,6 +458,10 @@ CabalReaperMissiles:
 	ValidTargets: Ground, Water
 	Report: rketinf1.aud
 	Projectile: Missile
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -481,6 +485,12 @@ CabalReaperMissiles:
 CabalReaperMissilesAA:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
+	Projectile: Missile
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
+
 	ReloadDelay: 32
 	Range: 7730
 	ValidTargets: Air
@@ -645,6 +655,10 @@ CabalManticoreMissiles:
 	ValidTargets: Ground, Water
 	Report: rketinf1.aud
 	Projectile: Missile
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -668,6 +682,12 @@ CabalManticoreMissiles:
 CabalManticoreMissilesAA:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
+	Projectile: Missile
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
+
 	ReloadDelay: 30
 	Range: 5358
 	ValidTargets: Air
@@ -690,6 +710,10 @@ CabalRocketCyborgRockets:
 	ReloadDelay: 52
 	Range: 7438
 	Projectile: Missile
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -712,6 +736,10 @@ CabalAscendedRockets:
 	ReloadDelay: 42
 	Range: 8468
 	Projectile: Missile
+		MinimumLaunchAngle: 255
+		MaximumLaunchAngle: 255
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage

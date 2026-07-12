@@ -138,6 +138,33 @@ missile class templates already target Ground+Air with one weapon
 Manticore) uses the SAME range, weapon class, reload, and DPS for
 both weapons.
 
+**Weapon mount offsets (design 2026-07-11 — always apply).** Every
+firing armament needs a `LocalOffset` so the muzzle sits at the barrel,
+not the actor's ground-center. For INFANTRY the default is
+**`LocalOffset: 128,0,256`** (128 forward, 0 sideways, 256 up ≈ chest
+height) — the mod-wide most common value. Apply it to every non-garrison
+infantry armament that has no offset of its own; garrison armaments
+(`Name: garrisoned`) keep none (they fire from the building's port).
+A missing offset is not cosmetic for arcing/launched projectiles: the
+round spawns at ground level and can explode under the unit's feet —
+this is why the CABAL Rocket Cyborg could not shoot. When creating or
+editing ANY infantry, set the offset. Vehicles/aircraft use
+weapon-specific `LocalOffset`s at their barrels (not this default).
+
+**TS rocket projectiles — launch straight up (design 2026-07-11,
+replicating Shattered Paradise).** Tiberian-Sun-style rockets fire
+near-vertically then home down onto the target. On the `Missile`
+projectile set **`MinimumLaunchAngle: 255` and `MaximumLaunchAngle:
+255`** (255 ≈ 90° in our WAngle scale; SP uses the same 255 = "90
+degrees"). A steep launch overshoots close targets unless the missile
+can turn fast enough, so ALWAYS pair it with a high turn rate —
+**`HorizontalRateOfTurn: 128` / `VerticalRateOfTurn: 128`** (SP's
+value; our `^LightMissile` default of 40 is too slow and causes the
+overshoot). The Guardian GI's rocket was the reference bug: launch 200
+with the default turn 40 always overshot at short range; fixed by
+raising its turn to 128. Set both angle and turn per-weapon (never edit
+the shared `^*Missile` templates, which serve all factions).
+
 Unit classification is authoritative from the **class templates in
 defaults.yaml** (`^HighTechTankTemplate` ⇒ vehicle, whatever the render
 traits say). Power plant vision currently: 4c0 small / 5c0 advanced —
@@ -216,6 +243,13 @@ cheapest provider wins).
 
 - WAV norm: **mono / 16-bit / 22050 Hz** (audit_assets prints ffmpeg fixes).
 - Sprites named per §1; icons end `_icon`.
+- **Cameo/build/upgrade icons are always 64×48 px** (RGBA or RGB PNG;
+  the mod-wide dominant size — design 2026-07-11). Any new icon,
+  including upgrade research icons, is authored at 64×48. An upgrade
+  actor's icon comes from a `sequences` entry named for the actor with
+  an `icon:` sub-node (`Filename: <name>.png`), and the actor's
+  `RenderSprites.Image` points at that same name — do not leave an
+  upgrade borrowing a unit cameo.
 - Voice sets are shared resources named for the VOICE, not a unit.
 
 ## 9. Operating rules for agents

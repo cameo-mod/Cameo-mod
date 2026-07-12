@@ -227,6 +227,7 @@ ts_nod_shadowteam:
 		Weapon: TSShadowTeamPistols
 	Armament@C4:
 		Weapon: TSShadowTeamAttach
+		LocalOffset: 128,0,256
 		Name: secondary
 		Cursor: c4
 		OutsideRangeCursor: c4
@@ -283,6 +284,7 @@ ts_nod_shadowteam_air:
 		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSShadowTeamTargeting
+		LocalOffset: 128,0,256
 		ReloadingCondition: reloading
 	ReloadArmamentsBar:
 	AttackAircraft:
@@ -399,6 +401,7 @@ ts_nod_chameleonspy:
 	RenderDetectionCircle:
 	Armament@PRIMARY:
 		Weapon: ChamBlade
+		LocalOffset: 128,0,256
 	Passenger:
 		CustomPipType: blue
 		Voice: Move

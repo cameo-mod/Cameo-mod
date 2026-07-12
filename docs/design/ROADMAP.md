@@ -89,6 +89,17 @@ Everything stat/tech-side finished BEFORE any effects work.
 
 ## Phase C — Balance & consistency (parallelizable with B)
 
+- [ ] **Infantry offset sweep beyond TS** (S): 15 non-TS infantry
+  armaments still lack `LocalOffset` (DESIGN §3 rule); apply the
+  128,0,256 default. Offenders: contaminator/saboteur/fremen_creep
+  (D2k), samurai/alligator/fedinf/engi.futu/litt/frank/conehead/
+  engi.nax2/mili/ra2terror + hmg/quadflak dummies (RA2Mod). Skip pure
+  Targeting dummies where meaningless.
+- [ ] **TS rocket launch-angle sweep beyond CABAL** (M): apply the
+  vertical-launch + turn-128 recipe (DESIGN §3) to all TS-theme rocket
+  weapons (Nod/GDI/Forgotten), each needing its turn rate checked so
+  it doesn't overshoot close targets like the Guardian GI did.
+
 - [x] FutureTech re-pricing per sheet, T3 = 0.75 confirmed; epics
   L=0.3 / M=1.0 (DESIGN §12). Queued sheet-cell edits (Excel was
   open): Tanks!M47=0.75,S47=525; M94=1.0,S94=400; M97=1.0,S97=1600;
