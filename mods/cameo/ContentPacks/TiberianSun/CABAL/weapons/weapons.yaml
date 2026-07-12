@@ -625,12 +625,12 @@ CabalHunterKillerHeavyLaser:
 CabalSpiderLaser:
 	Inherits: ^LaserWeapon
 	Report: obelray1.aud
-	ReloadDelay: 4
+	ReloadDelay: 90
 	Range: 6147
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 44000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 22
 
 CabalDroneCannon:
 	Inherits: ^MediumCannon

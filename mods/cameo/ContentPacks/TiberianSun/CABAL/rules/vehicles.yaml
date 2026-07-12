@@ -258,7 +258,7 @@ cabal_tiberiumharvester:
 
 cabal_laserspider:
 	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -278,7 +278,7 @@ cabal_laserspider:
 		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 14
+		TurnSpeed: 28
 		Speed: 70
 	Health:
 		HP: 40000
@@ -293,7 +293,7 @@ cabal_laserspider:
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
-	AttackFollow:
+	AttackFrontal:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
@@ -330,7 +330,7 @@ cabal_mantis:
 		Description: Turretless fire support strider with a frontal beam cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 24
+		TurnSpeed: 48
 		Speed: 120
 	Health:
 		HP: 35000
@@ -345,7 +345,7 @@ cabal_mantis:
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
-	AttackFollow:
+	AttackFrontal:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
