@@ -12,9 +12,9 @@ using OpenRA.Primitives;
 namespace OpenRA.Mods.Cameo
 {
 	// Shared helper for the cyberintel UI colour theme. The baked variants ship in the tracked
-	// uibits/cyberintel-themes/<name>-ui.png + <name>-dialog.png. Applying a theme copies the chosen
+	// uibits/cyberintel_themes/<name>_ui.png + <name>_dialog.png. Applying a theme copies the chosen
 	// pair into a writable SupportDir folder (Content/cameo/theme) that mod.yaml mounts AFTER
-	// cameo|uibits, so the copies shadow the shipped cyberintel-ui.png / dialog.png by bare name
+	// cameo|uibits, so the copies shadow the shipped cyberintel_ui.png / dialog.png by bare name
 	// without ever touching the tracked files. Chrome is loaded once at launch, so a write only takes
 	// visible effect on a boot where the override file already existed at mount time — i.e. the next
 	// restart for a dropdown pick, and (for "random") from the second boot onward.
@@ -69,17 +69,17 @@ namespace OpenRA.Mods.Cameo
 			try
 			{
 				// Anchor on a uibits-only top-level file (cameologo.png) to find the tracked preset
-				// source folder — resolving via cyberintel-ui.png would return the SupportDir override
+				// source folder — resolving via cyberintel_ui.png would return the SupportDir override
 				// once it exists, not uibits.
 				if (!fileSystem.TryGetPackageContaining("cameologo.png", out var package, out _) || package is not Folder uibits)
 					return;
 
-				var themeDir = Path.Combine(uibits.Name, "cyberintel-themes");
+				var themeDir = Path.Combine(uibits.Name, "cyberintel_themes");
 				var outDir = Platform.ResolvePath("^SupportDir|Content/cameo/theme");
 				Directory.CreateDirectory(outDir);
 
-				File.Copy(Path.Combine(themeDir, theme + "-ui.png"), Path.Combine(outDir, "cyberintel-ui.png"), true);
-				File.Copy(Path.Combine(themeDir, theme + "-dialog.png"), Path.Combine(outDir, "dialog.png"), true);
+				File.Copy(Path.Combine(themeDir, theme + "_ui.png"), Path.Combine(outDir, "cyberintel_ui.png"), true);
+				File.Copy(Path.Combine(themeDir, theme + "_dialog.png"), Path.Combine(outDir, "dialog.png"), true);
 			}
 			catch (Exception e)
 			{
