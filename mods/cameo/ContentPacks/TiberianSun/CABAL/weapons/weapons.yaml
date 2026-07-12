@@ -436,6 +436,7 @@ Eliminator-Blades:
 CabalCyborgChaingun:
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
+	Report: cygun1.aud
 	ReloadDelay: 60
 	Range: 6231
 	Warhead@SmallArms: SpreadDamage
@@ -449,6 +450,7 @@ CabalCyborgChaingun:
 
 CabalEliminatorGatling:
 	Inherits: ^Chaingun
+	Report: chaingn1.aud
 	ReloadDelay: 32
 	Range: 6167
 	Warhead@Chaingun: SpreadDamage
@@ -458,6 +460,7 @@ CabalEliminatorGatling:
 
 CabalTarantulaCannon:
 	Inherits: ^MediumCannon
+	Report: tsgun4.aud
 	ReloadDelay: 48
 	Range: 5278
 	Warhead@MediumCannon: SpreadDamage
@@ -523,6 +526,7 @@ CabalReaperMissilesAA:
 
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
+	Report: orcamis1.aud
 	ReloadDelay: 64
 	Range: 11582
 	Warhead@Grenade: SpreadDamage
@@ -555,6 +559,7 @@ CabalHunterKillerLasers:
 
 CabalHunterKillerHeavyLaser:
 	Inherits: ^LaserWeapon
+	Report: obelcor3.aud
 	ReloadDelay: 26
 	Range: 6170
 	Warhead@LaserWeapon: SpreadDamage
@@ -564,6 +569,7 @@ CabalHunterKillerHeavyLaser:
 
 CabalSpiderLaser:
 	Inherits: ^LaserWeapon
+	Report: obelray1.aud
 	ReloadDelay: 4
 	Range: 6147
 	Warhead@LaserWeapon: SpreadDamage
@@ -587,6 +593,7 @@ CabalDroneCannon:
 
 CabalDissolverSpray:
 	Inherits: ^LightChemicalWeapon
+	Report: tsdissolver.wav
 	ReloadDelay: 4
 	Range: 5142
 	Projectile: Bullet
@@ -605,6 +612,7 @@ CabalDissolverSpray:
 CabalCommandoPlasma:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
+	Report: obelmod1.aud
 	ReloadDelay: 50
 	Range: 5219
 	Warhead@MediumCannon: SpreadDamage
@@ -619,6 +627,7 @@ CabalCommandoPlasma:
 CabalCommandoPlasmaMk2:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
+	Report: obelmod1.aud
 	ReloadDelay: 40
 	Range: 6264
 	Warhead@MediumCannon: SpreadDamage
@@ -632,6 +641,7 @@ CabalCommandoPlasmaMk2:
 
 CabalCoreDefenderLaser:
 	Inherits: ^LaserWeapon
+	Report: corefir1.aud
 	ReloadDelay: 70
 	Range: 6332
 	Warhead@LaserWeapon: SpreadDamage
@@ -784,4 +794,4 @@ CabalRavagerPlasma:
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 16
 	Warhead@Effect: CreateEffect
-		Explosions: cabal_plasmabullet
+		Explosions: magicnuke_micro

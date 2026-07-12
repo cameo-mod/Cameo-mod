@@ -1089,54 +1089,6 @@
 	Voiced:
 		VoiceSet: D2KCombatTank
 
-^VehicleShieldsUpgradeOrdos:
-	GrantConditionOnPrerequisite@up_shield.ordos:
-		Condition: up_shield.ordos
-		Prerequisites: up_shield.ordos
-	GrantCondition@shieldpermanent:
-		Condition: shieldpermanent
-		RequiresCondition: up_shield.ordos
-	Shielded:
-		DamageRegenDelay: 125
-		RegenAmount: 10
-		RegenInterval: 1
-		ShieldsUpCondition: shielded
-		SelectionBarColor: 8888FFFF
-		RequiresCondition: !disabled && (up_shield.ordos || shieldgen || shielded)
-	ChangesShield@shielddischarge:
-		Delay: 10
-	ActorStatValues:
-		Upgrades: up_shield.ordos
-	Armor@shielded:
-		Type: Shield
-		RequiresCondition: shielded
-
-^BiologicalWarfareUpgradeOrdos:
-	ReloadDelayMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
-		Modifier: 90
-	SpeedMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
-		Modifier: 110
-	DamageMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
-		Modifier: 90
-	GrantConditionOnPrerequisite@up_toxin.ordos:
-		Condition: up_toxin.ordos
-		Prerequisites: up_toxin.ordos
-	ActorStatValues:
-		Upgrades: up_toxin.ordos
-
-^ContrabandUpgradeOrdos:
-	FirepowerMultiplier@up_contraband.ordos:
-		RequiresCondition: up_contraband.ordos
-		Modifier: 125
-	GrantConditionOnPrerequisite@up_contraband.ordos:
-		Condition: up_contraband.ordos
-		Prerequisites: up_contraband.ordos
-	ActorStatValues:
-		Upgrades: up_contraband.ordos
-
 # d2k_ornithopter_upgrade:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:

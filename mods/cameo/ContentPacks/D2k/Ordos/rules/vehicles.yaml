@@ -1741,7 +1741,6 @@ heavycombattank.ordos:
 
 autogun_tank_small.ordos:
 	Inherits@D2KT: ^D2KTank
-	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1750,6 +1749,7 @@ autogun_tank_small.ordos:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
 	Tooltip:
 		Name: Combat Autogun Tank
 	Valued:
@@ -1797,7 +1797,6 @@ autogun_tank_small.ordos:
 
 autogun_tank.ordos:
 	Inherits@D2KT: ^D2KTank
-	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
@@ -1806,6 +1805,7 @@ autogun_tank.ordos:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
 	Tooltip:
 		Name: Heavy Autogun Tank
 	Valued:

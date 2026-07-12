@@ -99,7 +99,7 @@ up_laserguns.ordos:
 	Tooltip:
 		Name: Laser Cartridges
 	Valued:
-		Cost: 1500
+		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Upgrades
@@ -111,14 +111,11 @@ up_laserguns.ordos:
 up_armorpiercing.ordos:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
-		Name: Armor-Piercing Rounds
-	Valued:
-		Cost: 2000
+		Name: Rapid Fire Armor-Piercing Belts
 	Buildable:
 		Queue: Research
-		Description: Autogun Tanks load armor-piercing belts: +30% firepower against armor.
+		Description: Autoguns gain +10% firepower and 10% higher rate of fire and 5% higher range.
 		Prerequisites: ~research_centre.ordos, !up_armorpiercing.ordos
-		IconPalette: ra2
 	RenderSprites:
 		Image: up_armorpiercing.ordos
 
@@ -126,12 +123,9 @@ up_hoverdrive.ordos:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Hover Drive
-	Valued:
-		Cost: 1500
 	Buildable:
 		Queue: Research
-		Description: All Ordos hovercraft gain +20% movement speed.
+		Description: All Ordos hovercraft gain +20% movement speed and turn rate and +10% damage resistance.
 		Prerequisites: ~research_centre.ordos, !up_hoverdrive.ordos
-		IconPalette: ra2
 	RenderSprites:
 		Image: up_hoverdrive.ordos
