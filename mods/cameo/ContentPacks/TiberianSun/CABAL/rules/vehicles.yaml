@@ -360,56 +360,6 @@ cabal_mantis:
 
 	DeathSounds:
 
-cabal_crab:
-	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EMP: ^FrontalEMP
-	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Valued:
-		Cost: 2125
-	Tooltip:
-		Name: Crab
-	Buildable:
-		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_mechfactory
-		Queue: Vehicle, RAVehicle
-		Description: Assault walker that crushes enemies with its claws.\n  Strong vs Vehicles, Infantry\n  Weak vs Aircraft
-	Mobile:
-		Locomotor: wheeled
-		TurnSpeed: 24
-		Speed: 120
-	Health:
-		HP: 90000
-	Repairable:
-		HpPerStep: 4500
-	ChangesHealth@SelfHealing:
-		Step: 36
-	Armament@PRIMARY:
-		Weapon: CabalCrabClaws
-	Armor:
-		Type: Heavy
-	WithMuzzleOverlay:
-	AttackFollow:
-		FacingTolerance: 512
-	Voiced:
-		VoiceSet: TSCobra
-	DeliversCash:
-		Payload: 250
-	RenderSprites:
-		PlayerPalette: playerra2
-	WithFacingSpriteBody:
-		Sequence: stand
-	WithMoveAnimation:
-		MoveSequence: walk
-		ValidMovementTypes: Horizontal, Turn
-	DeathSounds:
-
 cabal_manticore:
 	Inherits: ^Vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff

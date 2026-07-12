@@ -646,15 +646,6 @@ CabalEngineerRepairBeam:
 	Warhead@RepairWeapon: SpreadDamage
 		Damage: -1600
 
-CabalCrabClaws:
-	Inherits: ^SwordWeapon
-	ReloadDelay: 20
-	Range: 1603
-	Warhead@SwordWeapon: SpreadDamage
-		Damage: 36000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
-		Damage: 18
-
 CabalMantisGun:
 	Inherits: ^SmallArms
 	Inherits@2: ^LaserWeapon
@@ -777,3 +768,20 @@ CabalAscendedRockets:
 CabalAscendedRocketsUpgraded:
 	Inherits: CabalAscendedRockets
 	Burst: 4
+
+CabalRavagerPlasma:
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 30
+	Range: 3000
+	Report: corefir1.aud
+	Projectile: Bullet
+		Speed: 341
+		Blockable: false
+		Shadow: false
+		Image: cabal_plasmabullet
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_plasmabullet

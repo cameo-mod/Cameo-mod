@@ -93,6 +93,47 @@ cabal_cyborginfantry:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
+cabal_ravager:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Ravager
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 15
+		Prerequisites: ~cabal_cyborgfactory
+		Queue: Infantry, RAInfantry
+		Description: Short-range plasma line breaker with heavy firepower.\n  Strong vs Vehicles, Buildings, Infantry\n  Weak vs Aircraft
+	Mobile:
+		Speed: 60
+	Armor:
+		Type: Heavy
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Armament@PRIMARY:
+		Weapon: CabalRavagerPlasma
+		LocalOffset: 128,0,256
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: CabalRavagerPlasma
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	RenderSprites:
+		PlayerPalette: playerra2
+
 cabal_rocketcyborg:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate

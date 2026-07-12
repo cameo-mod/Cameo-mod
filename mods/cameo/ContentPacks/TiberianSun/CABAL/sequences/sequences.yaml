@@ -620,37 +620,51 @@ cabal_mantis:
 		ShadowStart: 416
 		Scale: 1
 
-cabal_crab:
-	idle:
-		Filename: cabal_crab.shp
+cabal_ravager:
+	Defaults:
+		Filename: cabal_ravager.shp
+		Tick: 80
+		Offset: 0, 0, 16
+	stand:
 		Facings: 8
-		Scale: 1
 		ShadowStart: 258
-	icon:
-		Filename: cabal_crab_icon.png
+	run:
+		Start: 8
+		Length: 10
+		Facings: 8
+		ShadowStart: 266
+	idle1:
+		Facings: 8
+	idle2:
+		Facings: 8
+	attack:
+		Start: 168
+		Length: 10
+		Facings: 8
+		ShadowStart: 426
+	die1:
+		Start: 8
+		Length: 10
+	die2:
+		Start: 8
+		Length: 10
+	die3:
+		Start: 8
+		Length: 10
+	die4:
+		Start: 8
+		Length: 10
+	die5:
+		Start: 8
+		Length: 10
+	die6:
+		Start: 8
+		Length: 10
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
-	stand:
-		Filename: cabal_crab.shp
-		Facings: 8
-		Scale: 1
-		ShadowStart: 258
-	walk:
-		Filename: cabal_crab.shp
-		Length: 10
-		Facings: 8
-		Start: 8
-		Tick: 60
-		Scale: 1
-		ShadowStart: 266
-	shoot:
-		Filename: cabal_crab.shp
-		Facings: 8
-		Start: 168
-		Length: 10
-		Scale: 1
-		ShadowStart: 426
+	icon:
+		Filename: cabal_ravager_icon.png
 
 cabal_manticore:
 	idle:
@@ -1931,3 +1945,9 @@ cabal_rockettrail:
 		Tick: 40
 
 # Civilian Cars
+
+cabal_plasmabullet:
+	idle:
+		Filename: cabal_plasmabullet.png
+		Length: 10
+		Tick: 30
