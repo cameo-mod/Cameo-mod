@@ -18,6 +18,7 @@ cabal_engineer:
 	Health:
 		HP: 20000
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 	ChangesHealth@SelfHealing:
 		Step: 20
@@ -62,6 +63,7 @@ cabal_cyborginfantry:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
+		TurnSpeed: 20
 		# TurnSpeed: 10
 		Speed: 50
 		PauseOnCondition: disabled
@@ -114,6 +116,7 @@ cabal_ravager:
 		Queue: Infantry, RAInfantry
 		Description: Short-range plasma line breaker with heavy firepower.\n  Strong vs Vehicles, Buildings, Infantry\n  Weak vs Aircraft
 	Mobile:
+		TurnSpeed: 24
 		Speed: 60
 	Armor:
 		Type: Heavy
@@ -160,6 +163,7 @@ cabal_rocketcyborg:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
@@ -251,6 +255,7 @@ cabal_devout:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
@@ -342,6 +347,7 @@ cabal_ascended:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
@@ -435,6 +441,7 @@ cabal_hackercyborg:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
+		TurnSpeed: 32
 		Speed: 80
 		PauseOnCondition: disabled
 	Armor:
@@ -538,7 +545,7 @@ cabal_cyborgcommando:
 		BuildLimit: 1
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 	Health:
 		HP: 250000
@@ -574,7 +581,7 @@ cabal_cyborgcommandov2:
 		BuildLimit: 1
 		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 	Health:
 		HP: 400000
@@ -617,7 +624,7 @@ cabal_eliminator800:
 	Health:
 		HP: 85000
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 		Voice: Move
 	Guard:
@@ -714,7 +721,7 @@ cabal_coredefender:
 		Prerequisites: ~cabal_mechfactory, cabal_core
 		Description: Superheavy CABAL epic unit.\n Strong vs ground targets
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 	Passenger:
 		Weight: 12
