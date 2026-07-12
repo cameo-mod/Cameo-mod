@@ -318,7 +318,7 @@ blackwidow.futu:
 	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Valued:
-		Cost: 900
+		Cost: 1200
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
@@ -535,6 +535,13 @@ wheel.futu:
 		HpPerStep: 1500
 	ChangesHealth@SelfHealing:
 		Step: 12
+	Armor:
+		Type: None
+		-RequiresCondition:
+	Armor@Scout:
+		Type: Scout
+	DamageMultiplier@Scout:
+		Modifier: 200
 	Armament@PRIMARY:
 		Weapon: Future_Wheel_MG
 		LocalOffset: 200,200,600, 200,-200,600
@@ -600,7 +607,12 @@ robot_shotgun.futu:
 	ChangesHealth@SelfHealing:
 		Step: 22
 	Armor:
+		Type: Plate
+		-RequiresCondition:
+	Armor@Heavy:
 		Type: Heavy
+	DamageMultiplier@Heavy:
+		Modifier: 200
 	Armament@PRIMARY:
 		Weapon: ShotgunAttackRobotGun
 		LocalOffset: 400,125,175
@@ -635,75 +647,6 @@ robot_shotgun.futu:
 	GrantExternalConditionToTransport:
 		Condition: ifv-mg
 
-robot_missiles.futu:
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits: ^Walker
-	Inherits@Template: ^FireSupportTemplate
-	Inherits@anim: ^RA2Vehicle
-	Inherits@EXPERIENCE: ^GainsExperienceRA2
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@detect: ^GenericGroundDetector
-	Inherits@vo: ^AttackFrontalVoice
-	Inherits@EMP: ^FrontalEMP
-	Inherits@FE: ^FutureRobotEnergizable
-	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
-	Tooltip:
-		Name: Missile Droid
-	Valued:
-		Cost: 300
-	Selectable:
-		Bounds: 600, 600, 0, -125
-	Buildable:
-		BuildPaletteOrder: 440
-		Prerequisites: ~egpile.futu, yrgarobo.futu, egtech.futu, ~up_missile_droid.futu
-		Queue: Infantry, RAInfantry
-		Description: actor_future_robot_missiles.description
-	Mobile:
-		Speed: 40
-		TurnSpeed: 16
-		Locomotor: chem
-	Health:
-		HP: 67500
-	Repairable:
-		HpPerStep: 3375
-	ChangesHealth@SelfHealing:
-		Step: 27
-	Armor:
-		Type: Flak
-	Armament@PRIMARY:
-		Weapon: MissileAttackRobotGun
-		LocalOffset: 200,150,400, 200,-150,400
-		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite
-	Armament@ELITE:
-		Weapon: MissileAttackRobotGunE
-		LocalOffset: 200,150,400, 200,-150,400
-		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite
-	WithMuzzleOverlay:
-	AttackFrontal:
-		FacingTolerance: 20
-		PauseOnCondition: !robotcontrol || disabled
-	WithInfantryBody:
-		IdleSequences: idle1, idle2
-		MinIdleDelay: 90
-		MaxIdleDelay: 270
-		DefaultAttackSequence: shoot
-	BodyOrientation:
-		QuantizedFacings: 32
-	-QuantizeFacingsFromSequence:
-	Passenger:
-		Weight: 1
-		CargoType: Infantry
-	Voiced:
-		VoiceSet: FutureRobotVoice
-	RenderSprites:
-		PlayerPalette: playerra2
-	GrantExternalConditionToTransport:
-		Condition: ifv-miss
-
 robot_cannon.futu:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
@@ -719,7 +662,7 @@ robot_cannon.futu:
 	Tooltip:
 		Name: Cannon Droid
 	Valued:
-		Cost: 400
+		Cost: 525
 	Selectable:
 		Bounds: 600, 600, 0, -125
 	Buildable:
@@ -739,6 +682,11 @@ robot_cannon.futu:
 		Step: 32
 	Armor:
 		Type: Plate
+		-RequiresCondition:
+	Armor@Medium:
+		Type: Medium
+	DamageMultiplier@Medium:
+		Modifier: 200
 	Armament@PRIMARY:
 		Weapon: CannonAttackRobotGun
 		LocalOffset: 400,125,175
@@ -772,3 +720,77 @@ robot_cannon.futu:
 		PlayerPalette: playerra2
 	GrantExternalConditionToTransport:
 		Condition: ifv-cannon
+
+robot_missiles.futu:
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits: ^Walker
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@anim: ^RA2Vehicle
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@FE: ^FutureRobotEnergizable
+	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
+	Tooltip:
+		Name: Missile Droid
+	Valued:
+		Cost: 700
+	Selectable:
+		Bounds: 600, 600, 0, -125
+	Buildable:
+		BuildPaletteOrder: 440
+		Prerequisites: ~egpile.futu, yrgarobo.futu, egtech.futu, ~up_missile_droid.futu
+		Queue: Infantry, RAInfantry
+		Description: actor_future_robot_missiles.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 16
+		Locomotor: chem
+	Health:
+		HP: 67500
+	Repairable:
+		HpPerStep: 3375
+	ChangesHealth@SelfHealing:
+		Step: 27
+	Armor:
+		Type: Flak
+		-RequiresCondition:
+	Armor@Light:
+		Type: Light
+	DamageMultiplier@Light:
+		Modifier: 200
+	Armament@PRIMARY:
+		Weapon: MissileAttackRobotGun
+		LocalOffset: 200,150,400, 200,-150,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: !rank-elite
+	Armament@ELITE:
+		Weapon: MissileAttackRobotGunE
+		LocalOffset: 200,150,400, 200,-150,400
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		RequiresCondition: rank-elite
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 20
+		PauseOnCondition: !robotcontrol || disabled
+	WithInfantryBody:
+		IdleSequences: idle1, idle2
+		MinIdleDelay: 90
+		MaxIdleDelay: 270
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 1
+		CargoType: Infantry
+	Voiced:
+		VoiceSet: FutureRobotVoice
+	RenderSprites:
+		PlayerPalette: playerra2
+	GrantExternalConditionToTransport:
+		Condition: ifv-miss

@@ -20,23 +20,6 @@ ACV_Machinegun:
 		ValidTargets: Ground, Water
 		Damage: 1
 
-Future_MBT_DebuffLaser:
-	ReloadDelay: 4
-	Range: 5000
-	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
-	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, Wall
-	Projectile: LaserZap
-		Duration: 22
-		Width: 0c64
-		Color: 83B9FC
-	Warhead@2Con: GrantExternalCondition
-		Condition: CommandoDebuff
-		Duration: 22
-		Range: 172
-		ValidTargets: Ground, Water, Structure, Wall
-	Warhead@Validation: TargetDamage
-
 Future_Cryocopter_Rocket:
 	Inherits: ^Grenade
 	Inherits: ^D2KRocket
@@ -916,77 +899,6 @@ Future_Wheel_MGE:
 	Range: 6806
 	Burst: 8
 
-CannonAttackRobotGun:
-	Inherits: ^TankDestroyerCannon
-	Inherits: ^MediumFlameWeapon
-	Inherits: ^RA2RailgunWeapon
-	Inherits: ^SteelMediumCannon
-	Range: 6000
-	ReloadDelay: 25
-	Report: steel_quantumfire.wav
-	Projectile: Bullet
-		Speed: 600
-	Warhead@TankDestroyerCannon: SpreadDamage
-		Damage: 2000
-	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumFlameWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
-		Damage: 1000
-	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 2000
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 2000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 1
-	Warhead@Effect: CreateEffect
-		ExplosionPalette: ra2effect
-		ImpactSounds: makoexplose.wav
-
-CannonAttackRobotGunE:
-	Inherits: CannonAttackRobotGun
-	Range: 7000
-	Burst: 2
-	BurstDelays: 3
-
-MissileAttackRobotGun:
-	Inherits: ^MediumMissile
-	Inherits: ^SteelLightMissile
-	Range: 9260
-	ReloadDelay: 50
-	Burst: 2
-	BurstDelays: 5
-	Report: vifvatta.wav
-	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
-	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_small_grey_explosion
-		ImpactSounds: gexpifva.wav
-
-MissileAttackRobotGunE:
-	Inherits: MissileAttackRobotGun
-	Range: 10260
-	Burst: 4
-	Projectile: Missile
-		Image: red_dragon
-		Shadow: true
-		TrailImage: red_smokey
-		ContrailStartColor: e60000
-	Warhead@Effect: CreateEffect
-		Explosions: ra2_medium_grey_explosion
-		ImpactSounds: gexp15a.wav
-
 ShotgunAttackRobotGun:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
@@ -1033,6 +945,77 @@ ShotgunAttackRobotGunE:
 	Range: 5110
 	Burst: 2
 	BurstDelays: 3
+
+CannonAttackRobotGun:
+	Inherits: ^TankDestroyerCannon
+	Inherits: ^MediumFlameWeapon
+	Inherits: ^RA2RailgunWeapon
+	Inherits: ^SteelMediumCannon
+	Range: 6000
+	ReloadDelay: 25
+	Report: steel_quantumfire.wav
+	Projectile: Bullet
+		Speed: 600
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 2000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 1000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 2000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 2000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Effect: CreateEffect
+		ExplosionPalette: ra2effect
+		ImpactSounds: makoexplose.wav
+
+CannonAttackRobotGunE:
+	Inherits: CannonAttackRobotGun
+	Range: 7000
+	Burst: 2
+	BurstDelays: 3
+
+MissileAttackRobotGun:
+	Inherits: ^MediumMissile
+	Inherits: ^SteelLightMissile
+	Range: 8000
+	ReloadDelay: 65
+	Burst: 2
+	BurstDelays: 5
+	Report: vifvatta.wav
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 12000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@LightMissile: SpreadDamage
+		Damage: 12000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_small_grey_explosion
+		ImpactSounds: gexpifva.wav
+
+MissileAttackRobotGunE:
+	Inherits: MissileAttackRobotGun
+	Range: 9000
+	Burst: 4
+	Projectile: Missile
+		Image: red_dragon
+		Shadow: true
+		TrailImage: red_smokey
+		ContrailStartColor: e60000
+	Warhead@Effect: CreateEffect
+		Explosions: ra2_medium_grey_explosion
+		ImpactSounds: gexp15a.wav
 
 FutureMechGatling:
 	Inherits: ^TankDestroyerCannon
@@ -1146,6 +1129,27 @@ GuardianTankCannonE:
 	Range: 8820
 	Burst: 2
 	BurstDelays: 3
+
+Future_MBT_DebuffLaser:
+	ReloadDelay: 4
+	Range: 7820
+	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
+	TargetActorCenter: true
+	ValidTargets: Ground, Water, Structure, Wall
+	Projectile: LaserZap
+		Duration: 22
+		Width: 0c64
+		Color: 83B9FC
+	Warhead@2Con: GrantExternalCondition
+		Condition: CommandoDebuff
+		Duration: 22
+		Range: 172
+		ValidTargets: Ground, Water, Structure, Wall
+	Warhead@Validation: TargetDamage
+
+Future_MBT_DebuffLaserE:
+	Inherits: Future_MBT_DebuffLaser
+	Range: 8820
 
 FutureTankCannons:
 	Inherits: ^MediumFlameWeapon
