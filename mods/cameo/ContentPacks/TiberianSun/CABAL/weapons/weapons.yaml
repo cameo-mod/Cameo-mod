@@ -115,8 +115,10 @@ DarkObeliskLaser:
 			Heavy: 100
 			Concrete: 50
 		ValidTargets: Air
-
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_m
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 TSCABALEMPDisable.anim:
 	ReloadDelay: 3
 	Range: 20000
@@ -282,6 +284,10 @@ TSHunterKillerLasers:
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 5
 		ValidTargets: Ground, Air
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_s
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 ####################################################################################################
 #		Tiberian Sun Heal Weapons
 ####################################################################################################
@@ -648,7 +654,10 @@ CabalHunterKillerHeavyLaser:
 		Damage: 20000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 10
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_m
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalSpiderLaser:
 	Inherits: ^LaserWeapon
 	Report: obelmod1.aud
@@ -666,7 +675,10 @@ CabalSpiderLaser:
 		Damage: 44000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 22
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalDroneCannon:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
@@ -760,7 +772,10 @@ CabalCoreDefenderLaser:
 		Damage: 160000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 80
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalEngineerRepairBeam:
 	Inherits: ^RepairWeapon
 	ReloadDelay: 31
@@ -790,7 +805,10 @@ CabalMantisGun:
 		Damage: 6000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 3
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_s
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalManticoreMissiles:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -927,3 +945,7 @@ CabalManticoreLaser:
 		Damage: 8000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 4
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_s
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
