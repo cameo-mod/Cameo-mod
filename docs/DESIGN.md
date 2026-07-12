@@ -306,6 +306,24 @@ cheapest provider wins).
   (`PaletteFromPaletteWithAlpha`) — forcing it onto a non-Dune sprite
   like `blue_smokey` re-tints it (blue → dark green). Use `effect` for
   indexed trails, or an RGBA PngSheet (no palette) for full colour.
+- **Per-frame randomness in animated effects (design 2026-07-12).** A
+  new effect must NOT be identical geometry every frame — the first
+  CABAL rocket trail came out as near-perfect spheres and read as
+  low-quality. Give each frame small random offsets, distortion, and
+  lobe variation (seeded, so it's reproducible) while still expanding
+  and fading over time. Build soft fields with numpy gaussians, not PIL
+  ImageDraw (which replaces pixels), and VERIFY the rendered preview
+  before committing — a blank or bland sprite loads without error.
+- **Effect-warhead naming LAW (design 2026-07-12).** Every
+  `CreateEffect` warhead is named **`Warhead@Effect`** — never
+  `@2Eff`, `@3Eff`, `@DissolveEffect`, `@EffectAir`, etc. Sole
+  exception: the HeavyBomb template, which legitimately fires two
+  distinct effects. Rationale: OpenRA overwrites same-named trait/
+  warhead nodes across inheritance, so naming them all `Effect`
+  guarantees exactly ONE impact effect survives (the most-derived one)
+  and a weapon can never stack two overlapping impact effects. When a
+  weapon inherits several class templates each carrying `Warhead@
+  Effect`, only the last wins — which is the intent.
 
 ## 9. Operating rules for agents
 
