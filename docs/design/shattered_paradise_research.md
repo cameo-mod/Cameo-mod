@@ -95,7 +95,14 @@ Projectile: MissileTA
 That single pair IS the classic white TS smoke trail (CyborgRocket,
 ReaperScythe, every SP rocket). Our TS rockets should adopt the
 recipe; if we lack an equivalent trail sprite, create our own (SP's
-asset itself is off-limits per the asset law).
+asset itself is off-limits per the asset law). **Our equivalent
+trails already exist**: `smokey` (generic white TS smoke, 71 uses),
+`blue_smokey` (blue — used for CABAL's blue identity, e.g.
+`^CabalMissile`), `black_smokey`/`red_smokey`. Config: `TrailImage:
+blue_smokey` + `TrailPalette: effect75alpha` + `TrailInterval: 1`
+(the Ixian pattern; the sprite's default `idle` sequence is used, no
+`TrailSequences` needed). Use these in place of SP's `small_smoke_
+trail`.
 
 **CABAL laser identity** (we ruled dark blue/purple): SP agrees —
 Minotaur `PalaLazor`: LaserZap `Color: 1122FF88` + `SecondaryBeam`

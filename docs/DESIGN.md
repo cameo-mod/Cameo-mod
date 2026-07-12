@@ -166,6 +166,29 @@ this is why the CABAL Rocket Cyborg could not shoot. When creating or
 editing ANY infantry, set the offset. Vehicles/aircraft use
 weapon-specific `LocalOffset`s at their barrels (not this default).
 
+**Alternating (twin-muzzle) offsets.** A `LocalOffset` with TWO triplets
+(six values), e.g. **`LocalOffset: 128,-64,256, 128,64,256`**, gives two
+fire points that the weapon alternates between — the left barrel
+(`-64` sideways) then the right (`+64`). Use it for any dual-weapon /
+twin-barrel unit (the CABAL Devout's twin chainguns, gatling arms, etc.)
+so bursts visibly alternate left/right instead of stacking on one point.
+The single-triplet default `128,0,256` is for one centred muzzle.
+**Match a unit to its analogue.** When two units share a weapon family,
+copy the reference unit's offset AND muzzle setup wholesale (the CABAL
+T800 gatling was aligned to the Yuri Gatling Trooper's `544,100,256`).
+Note the muzzle style can differ: the Gatling Trooper shows a visible
+tracer projectile and no `WithMuzzleOverlay`, whereas the T800 carries
+`WithMuzzleOverlay` + `MuzzleSequence: muzzle` (a sprite muzzle flash) —
+pick one style per look and keep the pair consistent.
+
+**Preserve a unit's unique projectile when reforging its weapon.** A new
+weapon that only `Inherits:` a class template (e.g. `^LightChemical
+Weapon`) takes that template's plain projectile and DROPS any custom
+`Projectile:` the old weapon had (Image/Speed/Palette/Inaccuracy). The
+CABAL Dissolver lost its `tsdissolvereffect` spray this way in the Batch
+2a rebuild. Always carry the old `Projectile:` block over (or restore it
+from git) when replacing a unit's signature weapon.
+
 **TS rocket projectiles — launch straight up (design 2026-07-11,
 replicating Shattered Paradise).** Tiberian-Sun-style rockets fire
 near-vertically then home down onto the target. On the `Missile`

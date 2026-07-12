@@ -221,11 +221,11 @@ cabal_devout:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
-		LocalOffset: 0,-20,90, 0,20,90
+		LocalOffset: 128,-64,256, 128,64,256
 		RequiresCondition: !cabal_upgrade_darkarmament
 	Armament@Upgraded:
 		Weapon: TSDevoutChaingunsUpgraded
-		LocalOffset: 0,-20,90, 0,20,90
+		LocalOffset: 128,-64,256, 128,64,256
 		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
@@ -585,37 +585,37 @@ cabal_eliminator800:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 64
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@2:
 		Weapon: RA2GattlingMG2
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@3:
 		Weapon: RA2GattlingMG3
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo >= 9
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@1AA:
 		Weapon: RA2GattlingMG1AA
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 64
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@2AA:
 		Weapon: RA2GattlingMG2AA
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@3AA:
 		Weapon: RA2GattlingMG3AA
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo >= 9
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2DoublePistols
