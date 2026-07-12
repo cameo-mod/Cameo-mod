@@ -528,6 +528,8 @@ CabalReaperMissiles:
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^CabalMissile
 	ReloadDelay: 32
+	Burst: 2
+	BurstDelays: 4
 	Range: 5153
 	ValidTargets: Ground, Water
 	Report: rketinf1.aud
@@ -792,7 +794,7 @@ CabalRocketCyborgRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^CabalMissile
-	Burst: 2
+	Burst: 1
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 52
@@ -848,3 +850,23 @@ CabalRavagerPlasma:
 		Damage: 16
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_micro
+
+CabalManticoreLaser:
+	Inherits: ^LaserWeapon
+	Burst: 2
+	BurstDelays: 3
+	ReloadDelay: 30
+	Range: 5358
+	Report: lastur1.aud
+	Projectile: LaserZap
+		Width: 30
+		ZOffset: 2047
+		Color: 1122FFCC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 12
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 55FFFFF0
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 4

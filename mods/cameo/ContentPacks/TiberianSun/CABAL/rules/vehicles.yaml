@@ -121,6 +121,7 @@ cabal_cyborgreaper:
 		Speed: 65
 	Armament:
 		Weapon: CabalReaperMissiles
+		LocalOffset: 128,-100,350, 128,100,350
 	Armament@AA:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
@@ -393,7 +394,8 @@ cabal_manticore:
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Armament@PRIMARY:
-		Weapon: CabalManticoreMissiles
+		Weapon: CabalManticoreLaser
+		LocalOffset: 128,-100,350, 128,100,350
 	Armament@AA:
 		Weapon: CabalManticoreMissilesAA
 	Armament@TRAP:

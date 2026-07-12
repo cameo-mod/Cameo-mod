@@ -128,7 +128,7 @@ cabal_ravager:
 		Name: garrisoned
 		Weapon: CabalRavagerPlasma
 	Voiced:
-		VoiceSet: TSCyborg
+		VoiceSet: TSCobra
 	-TakeCover:
 	RenderSprites:
 		PlayerPalette: playerra2
@@ -352,7 +352,7 @@ cabal_ascended:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
-		LocalOffset: 0,20,90, 0,-20,90
+		LocalOffset: 128,-64,256, 128,64,256
 	# 	RequiresCondition: !cabal_upgrade_darkarmament
 	# Armament@Upgraded:
 	# 	Weapon: CabalAscendedRocketsUpgraded
