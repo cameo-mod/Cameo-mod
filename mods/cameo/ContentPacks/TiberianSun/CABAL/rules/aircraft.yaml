@@ -1,5 +1,6 @@
 cabal_overkillcarryall:
 	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -32,8 +33,6 @@ cabal_overkillcarryall:
 		BeforeUnloadDelay: 10
 	Health:
 		HP: 47500
-	Armor:
-		Type: Light
 	RenderSprites:
 	SpawnActorOnDeath:
 		Actor: cabal_overkillcarryall_husk
@@ -52,77 +51,9 @@ cabal_overkillcarryall:
 		PauseOnCondition: disabled
 		AttackType: Hover
 
-cabal_hunterkillermk2:
-	Inherits: ^Helicopter
-	Inherits@reload: ^RearmableAircraft
-	Inherits@Template: ^BomberTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
-	Valued:
-		Cost: 3000
-	Tooltip:
-		Name: Hunter Killer MK2
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_helipad, cabal_techcenter
-		Queue: Aircraft, RAAircraft
-		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
-	Aircraft:
-		Speed: 50
-		TurnSpeed: 10
-		TakeoffSounds: orcaup1.aud
-		LandingSounds: orcadwn1.aud
-		AltitudeVelocity: 128
-		CanSlide: false
-		TakeOffOnResupply: true
-	Health:
-		HP: 300000
-	Repairable:
-		HpPerStep: 15000
-	ChangesHealth@SelfHealing:
-		Step: 120
-	Armament@PRIMARY:
-		Weapon: CabalHunterKillerHeavyLaser
-		LocalOffset: 0,0,0
-		PauseOnCondition: !ammo
-	Armament@PRIMARY2:
-		Weapon: TSHellfireTwin
-		LocalOffset: 25,-100,0, 25,100,0
-		PauseOnCondition: !ammo
-	AttackAircraft:
-		Voice: Attack
-		FacingTolerance: 80
-		PersistentTargeting: false
-		PauseOnCondition: disabled
-	SelectionDecorations:
-	Selectable:
-		DecorationBounds: 1536, 1536
-	Voiced:
-		VoiceSet: TSScrin
-	AmmoPool:
-		Ammo: 24
-		ReloadCount: 4
-		AmmoCondition: ammo
-	DeathSounds:
-		VolumeMultiplier: 2
-	SpawnActorOnDeath:
-		Actor: cabal_hunterkillermk2_husk
-	WithAmmoPipsDecoration:
-		Position: BottomLeft
-		RequiresSelection: True
-		PipCount: 4
-	ActorStatValues:
-		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
-	RenderSprites:
-		Image: cabal_hunterkillermk2
-		PlayerPalette: player_rgba
-
 cabal_hunterkillermk1:
 	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -149,8 +80,6 @@ cabal_hunterkillermk1:
 		TakeOffOnResupply: true
 	Health:
 		HP: 35000
-	Armor:
-		Type: Light
 	Armament@PRIMARY:
 		Weapon: CabalHunterKillerLasers
 		LocalOffset: 0,0,0
@@ -181,4 +110,74 @@ cabal_hunterkillermk1:
 		PipCount: 4
 	RenderSprites:
 		Image: cabal_hunterkillermk1
+		PlayerPalette: player_rgba
+
+cabal_hunterkillermk2:
+	Inherits: ^Helicopter
+	# Inherits@reload: ^RearmableAircraft
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Hunter Killer MK2
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_helipad, cabal_techcenter
+		Queue: Aircraft, RAAircraft
+		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
+	Aircraft:
+		Speed: 50
+		TurnSpeed: 10
+		# TakeoffSounds: orcaup1.aud
+		# LandingSounds: orcadwn1.aud
+		# AltitudeVelocity: 128
+		# CanSlide: false
+		# TakeOffOnResupply: true
+	Health:
+		HP: 300000
+	Repairable:
+		HpPerStep: 15000
+	ChangesHealth@SelfHealing:
+		Step: 120
+	Armament@PRIMARY:
+		Weapon: CabalHunterKillerHeavyLaser
+		LocalOffset: 0,0,0
+		# PauseOnCondition: !ammo
+	Armament@PRIMARY2:
+		Weapon: TSHellfireTwin
+		LocalOffset: 25,-100,0, 25,100,0
+		# PauseOnCondition: !ammo
+		RequiresCondition: up_plasmaweapons
+	AttackAircraft:
+		Voice: Attack
+		FacingTolerance: 80
+		PersistentTargeting: false
+		PauseOnCondition: disabled
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSScrin
+	# AmmoPool:
+	# 	Ammo: 24
+	# 	ReloadCount: 4
+	# 	AmmoCondition: ammo
+	DeathSounds:
+		VolumeMultiplier: 2
+	SpawnActorOnDeath:
+		Actor: cabal_hunterkillermk2_husk
+	# WithAmmoPipsDecoration:
+	# 	Position: BottomLeft
+	# 	RequiresSelection: True
+	# 	PipCount: 4
+	# ActorStatValues:
+	# 	Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
+	RenderSprites:
+		Image: cabal_hunterkillermk2
 		PlayerPalette: player_rgba

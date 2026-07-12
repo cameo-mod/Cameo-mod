@@ -38,9 +38,10 @@ cabal_engineer:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
+
 cabal_cyborginfantry:
 	Inherits: ^Soldier
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -61,11 +62,9 @@ cabal_cyborginfantry:
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
-		TurnSpeed: 10
+		# TurnSpeed: 10
 		Speed: 50
 		PauseOnCondition: disabled
-	Armor:
-		Type: Flak
 	Health:
 		HP: 45000
 	ChangesHealth@SelfHealing:
@@ -86,7 +85,7 @@ cabal_cyborginfantry:
 	-TakeCover:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: TSVulcanTower
+		Weapon: CabalCyborgChaingun
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -156,7 +155,7 @@ cabal_rocketcyborg:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
@@ -227,7 +226,7 @@ cabal_rocketcyborg:
 cabal_devout:
 	Inherits: ^Soldier
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -263,11 +262,14 @@ cabal_devout:
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
 		LocalOffset: 128,-64,256, 128,64,256
-		RequiresCondition: !cabal_upgrade_darkarmament
-	Armament@Upgraded:
-		Weapon: TSDevoutChaingunsUpgraded
-		LocalOffset: 128,-64,256, 128,64,256
-		RequiresCondition: cabal_upgrade_darkarmament
+	# 	RequiresCondition: !cabal_upgrade_darkarmament
+	# Armament@Upgraded:
+	# 	Weapon: TSDevoutChaingunsUpgraded
+	# 	LocalOffset: 128,-64,256, 128,64,256
+	# 	RequiresCondition: cabal_upgrade_darkarmament
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSDevoutChainguns
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -306,9 +308,6 @@ cabal_devout:
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
-	Armament@GARRISONED: ##########
-		Name: garrisoned
-		Weapon: TSVulcanTowerTwin
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -338,7 +337,7 @@ cabal_ascended:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
@@ -354,11 +353,14 @@ cabal_ascended:
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
 		LocalOffset: 0,20,90, 0,-20,90
-		RequiresCondition: !cabal_upgrade_darkarmament
-	Armament@Upgraded:
-		Weapon: CabalAscendedRocketsUpgraded
-		LocalOffset: 0,-20,90, 0,20,90
-		RequiresCondition: cabal_upgrade_darkarmament
+	# 	RequiresCondition: !cabal_upgrade_darkarmament
+	# Armament@Upgraded:
+	# 	Weapon: CabalAscendedRocketsUpgraded
+	# 	LocalOffset: 0,-20,90, 0,20,90
+	# 	RequiresCondition: cabal_upgrade_darkarmament
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CabalAscendedRockets
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -408,7 +410,7 @@ cabal_ascended:
 
 cabal_hackercyborg:
 	Inherits: ^Soldier
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -428,12 +430,11 @@ cabal_hackercyborg:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 50
 		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
 	Mobile:
-		TurnSpeed: 16
 		Speed: 80
 		PauseOnCondition: disabled
 	Armor:
@@ -442,12 +443,20 @@ cabal_hackercyborg:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armament@PRIMARY:
-		Weapon: TSRobotHackingControl
-		LocalOffset: 0,0,90
-	Armament@Vehicle:
-		Weapon: TSMechanicalHackingControl
-		LocalOffset: 0,0,90
+	Armament@Anim:
+		Weapon: TSCABALempdisable.anim
+		RequiresCondition: end_disable == 0
+		LocalOffset: -128,0,256
+	Armament@End:
+		Weapon: TSCABALempdisable.end
+		RequiresCondition: end_disable >= 1
+		LocalOffset: -128,0,256
+	# Armament@PRIMARY:
+	# 	Weapon: TSRobotHackingControl
+	# 	LocalOffset: 0,0,90
+	# Armament@Vehicle:
+	# 	Weapon: TSMechanicalHackingControl
+	# 	LocalOffset: 0,0,90
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack

@@ -111,6 +111,50 @@ DarkObeliskLaser:
 			Concrete: 50
 		ValidTargets: Air
 
+
+TSCABALEMPDisable.anim:
+	ReloadDelay: 3
+	Range: 20000
+	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Width: 60
+		Duration: 3
+		Color: 00FF0070
+		SecondaryBeam: true
+		SecondaryBeamWidth: 90
+		SecondaryBeamColor: FF000035
+	Warhead@Damage: TargetDamage
+		ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
+		Damage: 1
+
+TSCABALEMPDisable.end:
+	Inherits: ^TeslaChargedWeapon
+	ReloadDelay: 4
+	Range: 10359
+	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Width: 64
+		Duration: 4
+		Color: 4444FF88
+		SecondaryBeam: true
+		SecondaryBeamWidth: 96
+		SecondaryBeamColor: FFFF8844
+	Warhead@TeslaChargedWeapon: TargetDamage
+		Damage: 2000
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		Damage: 1000
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 2000
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
+
 TSCoreLaser:
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
@@ -310,16 +354,6 @@ TSVulcanTower:
 	Warhead@1Dam: SpreadDamage
 		Damage: 1800
 
-TSDevoutChainguns:
-	Inherits: ^TSMG
-	ReloadDelay: 38
-	BurstDelays: 2
-	Burst: 6
-	Report: cygun1.aud
-	Range: 6359
-	Warhead@1Dam: SpreadDamage
-		Damage: 4000
-
 TSDevoutChaingunsUpgraded:
 	Inherits: ^TSMG
 	Inherits: ^LaserWeapon
@@ -448,6 +482,23 @@ CabalCyborgChaingun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 5
 
+TSDevoutChainguns:
+	Inherits: ^SmallArms
+	Inherits@2: ^Chaingun
+	Report: cygun1.aud
+	ReloadDelay: 45
+	Burst: 2
+	BurstDelays: 3
+	Range: 6359
+	Warhead@SmallArms: SpreadDamage
+		Damage: 12000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Chaingun: SpreadDamage
+		Damage: 12000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 6
+
 CabalEliminatorGatling:
 	Inherits: ^Chaingun
 	Report: chaingn1.aud
@@ -467,6 +518,8 @@ CabalTarantulaCannon:
 		Damage: 16000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 8
+
+
 
 CabalReaperMissiles:
 	Inherits: ^Grenade
