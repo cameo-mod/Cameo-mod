@@ -61,9 +61,9 @@ Everything stat/tech-side finished BEFORE any effects work.
   tarantula/artillery/rocket cyborgs/T800:100/commando). Existing
   upgrades not in the table (dark armament, radar hack, …): ❓ map or
   retire — ask design.
-- [ ] **StartingUnits fix** (S): CABAL light/heavy support still spawn
-  tsbike/tsttnk (Nod placeholders) — swap to mantis/crab per "Mantis
-  is a regular starting unit".
+- [x] **StartingUnits fix** (2026-07-12): CABAL light/heavy support
+  now spawn cabal_mantis + cabal_tarantula instead of the tsbike/
+  tsttnk Nod placeholders (scout+MBT composition preserved).
 - [ ] **Descriptions pass** (fluent keys) + **AI wiring** (squads,
   upgrades, promotions) (M).
 - [ ] ❓ open design picks: Artillery Spider tier (333ggg: "maybe
