@@ -224,6 +224,14 @@ inspiration, always through the workbook for stats.
 - SP engine-trait ports (research §4): ArmamentsChargeBar,
   SpreadDamageWithCondition, InstantHitWithFakeBullets, GuardsSelection,
   corpse pair, FirestromSP, WeaponWeather/CloudSpawner, SpawnSparks, AI.
+- **Port `AttackGarrisonedSP` (one fire port per passenger)** and
+  convert EVERY unit currently using `AttackGarrisoned` / `AttackOpen
+  Topped` to it — each passenger gets its own fire port AND its own
+  independent target (not all passengers firing at the same target).
+  Suspected blocker: those units rely on `AttackFollow`, which allows
+  only one instance, so per-passenger independent targeting needs the
+  SP trait's per-port attack logic. (End of the queue — Ordos + CABAL
+  stay priority #1; ordered here 2026-07-12.)
 - TS Shared pack move (script ready); remaining theme renames + splits
   (RA1, RA2, SC, WC2, TKM, Outpost2) with A1–A4 audits.
 - Formula v2: per-class baselines, AA/projectile-speed/AoE pricing,
