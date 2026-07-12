@@ -599,6 +599,7 @@ cabal_eliminator800:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@GATLING: ^GatlingSpeedUpUnitBehavior
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -624,47 +625,17 @@ cabal_eliminator800:
 	Passenger:
 		CustomPipType: red
 		Voice: Move
-	AmmoPool:
-		Ammo: 96
-		AmmoCondition: ammo
-	ReloadAmmoPool:
-		Delay: 15
-		Count: 1
-	Armament@1:
+	Armament@PRIMARY:
+		Name: primary
 		Weapon: CabalEliminatorGatling
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 64
 		LocalOffset: 544,100,256
-	Armament@2:
-		Weapon: RA2GattlingMG2
+	Armament@AA:
+		Name: aa
+		Weapon: CabalEliminatorGatlingAA
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 544,100,256
-	Armament@3:
-		Weapon: RA2GattlingMG3
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo >= 9
-		LocalOffset: 544,100,256
-	Armament@1AA:
-		Weapon: RA2GattlingMG1AA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 64
-		LocalOffset: 544,100,256
-	Armament@2AA:
-		Weapon: RA2GattlingMG2AA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 544,100,256
-	Armament@3AA:
-		Weapon: RA2GattlingMG3AA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo >= 9
 		LocalOffset: 544,100,256
 	Armament@GARRISONED:
 		Name: garrisoned
@@ -704,7 +675,12 @@ cabal_eliminator800:
 		UseDeathTypeSuffix: false
 	RenderSprites:
 		PlayerPalette: playerra2
-
+	GrantConditionOnAttack@gatling:
+		ArmamentNames: primary, aa, garrisoned
+		RevokeDelay: 80
+	GrantConditionOnAttack@elitegatling:
+		ArmamentNames: primary, aa, garrisoned
+		RevokeDelay: 80
 
 #######################################
 # TS Infantry Forgotten
