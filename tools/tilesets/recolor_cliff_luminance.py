@@ -161,6 +161,7 @@ def recolor(
     palette: list[tuple[int, int, int]],
     clear_frame: bytes,
     normalization: str,
+    preserve_ground_shadows: bool = True,
 ) -> tuple[Image.Image, list[int]]:
     ground_indices = [1, 2, 3, *range(10, 22), 192, 194, 198]
     rock_indices = [3, *range(10, 50), 192, 194, 198]
@@ -219,7 +220,7 @@ def recolor(
             # then retain only broad donor shadow close to the cliff contact.
             index = clear_frame[(y % TILE) * TILE + (x % TILE)]
             distance = rock_distance[i]
-            if distance <= 8:
+            if preserve_ground_shadows and distance <= 8:
                 shadow = max(0.0, ground_shadow_baseline - broad_luma[i])
                 taper = (9 - distance) / 8
                 target_luma = luminance(palette[index]) - min(28.0, shadow * 0.72 * taper)

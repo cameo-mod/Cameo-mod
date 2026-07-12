@@ -21,6 +21,10 @@ from shptd import read_shptd, write_shptd
 ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_OUT_DIR = Path.home() / "Documents/agents/volcanic-theater/inland-rivers/workbench"
 RIVERS = tuple(f"rv{number:02d}" for number in range(1, 16))
+EXTENDED_WATER_INDICES = np.asarray(
+    [46, 47, 62, 63, 64, 65, 66, 67, 68, 72, 96, 97, 98, 99, 100, 101, 102, 166, 178],
+    dtype=np.uint8,
+)
 
 
 def main() -> int:
@@ -29,10 +33,20 @@ def main() -> int:
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument("--page-size", type=int, default=5)
     parser.add_argument(
+        "--water-mask-dir",
+        type=Path,
+        help="optional RGBA masks named <template>.png; nonzero alpha is water",
+    )
+    parser.add_argument(
         "--canonical-liquid-w1",
         type=Path,
         required=True,
         help="approved one-frame 48px proper-liquid VOL used phase-aligned everywhere",
+    )
+    parser.add_argument(
+        "--omit-generated-shadows",
+        action="store_true",
+        help="skip the Gaussian/local-darkness cast-shadow reconstruction pass",
     )
     args = parser.parse_args()
     out_dir = args.out_dir.resolve()
@@ -83,19 +97,51 @@ def main() -> int:
         )
         rock_mask_image = classify_river_cliff(donor_rgba, snow_rgba, domain)
         rock_mask = np.asarray(rock_mask_image, dtype=np.uint8) >= 128
+        rock_mask_image = Image.fromarray(
+            np.where(rock_mask, 255, 0).astype(np.uint8), mode="L"
+        )
+        recolor_donor_rgba = donor_rgba
+        if template in {"f02", "f03"}:
+            recolor_donor_rgba = repair_horizontal_connector_edge(
+                recolor_donor_rgba, domain, edge="top"
+            )
+        if template in {"f01", "f02"}:
+            recolor_donor_rgba = repair_horizontal_connector_edge(
+                recolor_donor_rgba, domain, edge="bottom"
+            )
+        if template in {"f05", "f06"}:
+            recolor_donor_rgba = repair_vertical_connector_edge(
+                recolor_donor_rgba, domain, edge="left"
+            )
+        if template in {"f04", "f05"}:
+            recolor_donor_rgba = repair_vertical_connector_edge(
+                recolor_donor_rgba, domain, edge="right"
+            )
         cliff_image, _ = cliff.recolor(
-            Image.fromarray(donor_rgba, mode="RGBA"),
+            Image.fromarray(recolor_donor_rgba, mode="RGBA"),
             rock_mask_image,
             volcanic_palette,
             clear.tobytes(),
             "family",
+            preserve_ground_shadows=not args.omit_generated_shadows,
         )
         cliff_rgb = np.asarray(cliff_image.convert("RGB"), dtype=np.uint8).copy()
         clear_canvas = repeat_rgb_tile(clear_rgb, spec.columns, spec.rows)
         cliff_rgb[domain & ~rock_mask] = clear_canvas[domain & ~rock_mask]
-        raw_water = domain & np.isin(donor, list(water_indices))
+        if args.water_mask_dir is not None:
+            mask_path = args.water_mask_dir.resolve() / f"{template}.png"
+            rgba = np.asarray(Image.open(mask_path).convert("RGBA"))
+            if rgba.shape[:2] != domain.shape:
+                raise ValueError(f"{template}: water mask geometry differs")
+            raw_water = domain & (rgba[:, :, 3] > 0)
+        elif template.startswith("f"):
+            raw_water = extended_ford_water(donor, donor_rgb, domain)
+        else:
+            raw_water = domain & np.isin(donor, list(water_indices))
         water = lava_donor.clean_water_mask(raw_water, domain)
         water = remove_small_components(water, minimum_pixels=48)
+        if template.startswith("f"):
+            water = remove_ford_liquid_edge_spots(water, domain)
         liquid_indices = repeat_tile(
             canonical_liquid, spec.columns, spec.rows
         )
@@ -104,7 +150,13 @@ def main() -> int:
             donor_rgb, domain, water, liquid, clear_rgb
         )
         candidate = cliff_aware_candidate(
-            cliff_rgb, donor_rgb, domain, water, rock_mask, liquid
+            cliff_rgb,
+            donor_rgb,
+            domain,
+            water,
+            rock_mask,
+            liquid,
+            restore_generated_shadows=not args.omit_generated_shadows,
         )
         indexed_image, candidate_indices = quantize(
             Image.fromarray(candidate, mode="RGB"), volcanic_palette
@@ -224,6 +276,7 @@ def cliff_aware_candidate(
     water: np.ndarray,
     rock: np.ndarray,
     liquid: np.ndarray,
+    restore_generated_shadows: bool = True,
 ) -> np.ndarray:
     result = cliff_rgb.astype(np.float32).copy()
     land = domain & ~water
@@ -254,36 +307,39 @@ def cliff_aware_candidate(
     )
 
     # Restore real donor cast shadows without restoring vegetation texture.
-    donor = donor_rgb.astype(np.float32)
-    donor_luma = (
-        donor[:, :, 0] * 0.2126
-        + donor[:, :, 1] * 0.7152
-        + donor[:, :, 2] * 0.0722
-    )
-    broad_luma = ndimage.gaussian_filter(donor_luma, sigma=3.0)
-    local_darkness = np.clip((broad_luma - donor_luma - 2.0) / 24.0, 0.0, 1.0)
-    rock_distance = ndimage.distance_transform_edt(~rock)
-    absolute_darkness = np.clip((43.0 - donor_luma) / 23.0, 0.0, 1.0)
-    directional_reach = east_southeast_projection(rock, maximum=10)
-    shadow_region = (
-        land
-        & ~rock
-        & directional_reach
-        & (rock_distance > 0.0)
-        & (rock_distance <= 10.0)
-        & ((local_darkness >= 0.12) | (absolute_darkness >= 0.12))
-    )
-    labels, count = ndimage.label(shadow_region)
-    if count:
-        sizes = np.bincount(labels.ravel())
-        keep = sizes >= 7
-        keep[0] = False
-        shadow_region = keep[labels]
-    shadow_strength = np.maximum(local_darkness, absolute_darkness * 0.82)
-    shadow_strength *= shadow_region
-    shadow_basalt = np.asarray((20.0, 18.0, 20.0), dtype=np.float32)
-    weight = (0.72 * shadow_strength)[:, :, None]
-    result = result * (1.0 - weight) + shadow_basalt * weight
+    if restore_generated_shadows:
+        donor = donor_rgb.astype(np.float32)
+        donor_luma = (
+            donor[:, :, 0] * 0.2126
+            + donor[:, :, 1] * 0.7152
+            + donor[:, :, 2] * 0.0722
+        )
+        broad_luma = ndimage.gaussian_filter(donor_luma, sigma=3.0)
+        local_darkness = np.clip(
+            (broad_luma - donor_luma - 2.0) / 24.0, 0.0, 1.0
+        )
+        rock_distance = ndimage.distance_transform_edt(~rock)
+        absolute_darkness = np.clip((43.0 - donor_luma) / 23.0, 0.0, 1.0)
+        directional_reach = east_southeast_projection(rock, maximum=10)
+        shadow_region = (
+            land
+            & ~rock
+            & directional_reach
+            & (rock_distance > 0.0)
+            & (rock_distance <= 10.0)
+            & ((local_darkness >= 0.12) | (absolute_darkness >= 0.12))
+        )
+        labels, count = ndimage.label(shadow_region)
+        if count:
+            sizes = np.bincount(labels.ravel())
+            keep = sizes >= 7
+            keep[0] = False
+            shadow_region = keep[labels]
+        shadow_strength = np.maximum(local_darkness, absolute_darkness * 0.82)
+        shadow_strength *= shadow_region
+        shadow_basalt = np.asarray((20.0, 18.0, 20.0), dtype=np.float32)
+        weight = (0.72 * shadow_strength)[:, :, None]
+        result = result * (1.0 - weight) + shadow_basalt * weight
 
     # Heat the ordinary bank without erasing donor cliff geometry.
     bank = land & ~rock
@@ -353,7 +409,14 @@ def classify_river_cliff(
     near_seed = ndimage.binary_dilation(seed, iterations=1)
     shadow_face = domain & ~vegetation & (tl >= 26.0) & (sl < 125.0)
     mask = seed | (near_seed & shadow_face)
-    mask = ndimage.binary_closing(mask, structure=np.ones((3, 3), dtype=bool))
+    # SciPy otherwise treats pixels beyond the image as False during erosion,
+    # which falsely strips rock classification from every outer edge.
+    padded = np.pad(mask, 1, mode="edge")
+    padded = ndimage.binary_closing(
+        padded,
+        structure=np.ones((3, 3), dtype=bool),
+    )
+    mask = padded[1:-1, 1:-1] & domain
 
     labels, count = ndimage.label(mask)
     if count:
@@ -417,6 +480,78 @@ def remove_small_components(mask: np.ndarray, minimum_pixels: int) -> np.ndarray
     keep = sizes >= minimum_pixels
     keep[0] = False
     return keep[labels]
+
+
+def remove_ford_liquid_edge_spots(
+    water: np.ndarray,
+    domain: np.ndarray,
+) -> np.ndarray:
+    """Fill small dark remnants trapped in Ford side-entry liquid contours."""
+    closed = ndimage.binary_closing(
+        water,
+        structure=np.ones((5, 5), dtype=bool),
+    )
+    edge_band = np.zeros_like(water)
+    width = min(12, water.shape[1] // 4, water.shape[0] // 4)
+    edge_band[:, :width] = True
+    edge_band[:, -width:] = True
+    edge_band[:width, :] = True
+    edge_band[-width:, :] = True
+    repaired = water | (closed & edge_band & domain)
+    return repaired
+
+
+def repair_horizontal_connector_edge(
+    rgba: np.ndarray,
+    domain: np.ndarray,
+    edge: str,
+) -> np.ndarray:
+    """Replace artificial dark connector rows from nearby donor interior."""
+    repaired = rgba.copy()
+    if edge == "top":
+        targets = ((0, 3), (1, 3))
+    elif edge == "bottom":
+        last = rgba.shape[0] - 1
+        targets = ((last - 1, last - 3), (last, last - 3))
+    else:
+        raise ValueError(f"unsupported connector edge: {edge}")
+    for target_y, source_y in targets:
+        valid = domain[target_y] & domain[source_y]
+        repaired[target_y, valid, :3] = rgba[source_y, valid, :3]
+    return repaired
+
+
+def repair_vertical_connector_edge(
+    rgba: np.ndarray,
+    domain: np.ndarray,
+    edge: str,
+) -> np.ndarray:
+    """Replace artificial dark west-east connector columns from the interior."""
+    repaired = rgba.copy()
+    if edge == "left":
+        targets = ((0, 3), (1, 3))
+    elif edge == "right":
+        last = rgba.shape[1] - 1
+        targets = ((last - 1, last - 3), (last, last - 3))
+    else:
+        raise ValueError(f"unsupported connector edge: {edge}")
+    for target_x, source_x in targets:
+        valid = domain[:, target_x] & domain[:, source_x]
+        repaired[valid, target_x, :3] = rgba[valid, source_x, :3]
+    return repaired
+
+
+def extended_ford_water(
+    donor: np.ndarray,
+    donor_rgb: np.ndarray,
+    domain: np.ndarray,
+) -> np.ndarray:
+    rgb = donor_rgb.astype(np.int16)
+    blue = (
+        (rgb[:, :, 2] >= rgb[:, :, 0] + 6)
+        & (rgb[:, :, 2] >= rgb[:, :, 1] - 4)
+    )
+    return domain & (np.isin(donor, EXTENDED_WATER_INDICES) | blue)
 
 
 def edge_contacts(mask: np.ndarray) -> dict[str, int]:
