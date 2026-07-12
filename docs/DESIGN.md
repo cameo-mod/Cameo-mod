@@ -314,16 +314,19 @@ cheapest provider wins).
   and fading over time. Build soft fields with numpy gaussians, not PIL
   ImageDraw (which replaces pixels), and VERIFY the rendered preview
   before committing — a blank or bland sprite loads without error.
-- **Effect-warhead naming LAW (design 2026-07-12).** Every
-  `CreateEffect` warhead is named **`Warhead@Effect`** — never
-  `@2Eff`, `@3Eff`, `@DissolveEffect`, `@EffectAir`, etc. Sole
-  exception: the HeavyBomb template, which legitimately fires two
-  distinct effects. Rationale: OpenRA overwrites same-named trait/
-  warhead nodes across inheritance, so naming them all `Effect`
-  guarantees exactly ONE impact effect survives (the most-derived one)
-  and a weapon can never stack two overlapping impact effects. When a
-  weapon inherits several class templates each carrying `Warhead@
-  Effect`, only the last wins — which is the intent.
+- **Effect-warhead naming LAW (design 2026-07-12).** The ground/default
+  `CreateEffect` warhead is named **`Warhead@Effect`** — never `@2Eff`,
+  `@3Eff`, `@DissolveEffect`, etc. Rationale: OpenRA overwrites same-
+  named warhead nodes across inheritance, so a single canonical name
+  guarantees exactly ONE impact effect survives (the most-derived) and
+  a weapon can never stack two overlapping impacts on the same surface.
+  **Allowed surface-specific siblings** (they hit DIFFERENT surfaces, so
+  they never overlap): **`Warhead@EffectAir`** when the weapon can hit
+  air, **`Warhead@EffectWater`** when it can hit water. The HeavyBomb
+  template's two effects are the other sanctioned exception. So the full
+  legal set per weapon is at most: `Effect` (ground) + `EffectAir` +
+  `EffectWater`. Rename anything else (`@2Eff`, `@DissolveEffect`, …) to
+  the matching one of these.
 
 ## 9. Operating rules for agents
 

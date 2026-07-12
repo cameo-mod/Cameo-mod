@@ -24,9 +24,8 @@ Every content pack gets the SAME shape — one folder per faction:
 ```
 ContentPacks/<Theme>/<Faction>/
   content.yaml          # the central include dictionary (stays at root)
-  <yaml-folder>/        # ALL MiniYaml: rules + weapons + sequences merged
-                        #   (❓ folder name undecided — candidates: yaml,
-                        #    defs, definitions, data)
+  yaml/                 # ALL MiniYaml: rules + weapons + sequences merged
+                        #   (folder name decided 2026-07-12: `yaml`)
   files/               # ALL assets: sprites, voxels, sounds, icons
                         #   (created empty now; asset migration is later)
 ```

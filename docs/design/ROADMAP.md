@@ -89,11 +89,12 @@ lands here first. Goal stated 2026-07-12: **finish the CABAL faction**._
 
 ### CE. Effect-warhead naming sweep (M) — LAW, see DESIGN
 
-- [ ] Rename EVERY `CreateEffect` warhead to **`Warhead@Effect`** across
-  all weapons (currently `@2Eff`, `@3Eff`, `@DissolveEffect`, etc.).
-  Sole exception: the HeavyBomb template's two effects. Same-named
-  traits overwrite, so this guarantees ONE effect per weapon and no
-  doubled/overlapping impacts. (Rule recorded in DESIGN.)
+- [ ] Rename EVERY `CreateEffect` warhead to **`Warhead@Effect`** (the
+  ground/default one) across all weapons (currently `@2Eff`, `@3Eff`,
+  `@DissolveEffect`, etc.). Allowed siblings: `@EffectAir` (weapon hits
+  air), `@EffectWater` (weapon hits water); HeavyBomb's two are the
+  other exception. Same-named warheads overwrite, so this guarantees
+  ONE impact per surface — no doubled effects. (Rule in DESIGN §8.)
 
 ### CF. Formula rebalance of ALL CABAL unit stats (L)
 
@@ -157,8 +158,8 @@ lands here first. Goal stated 2026-07-12: **finish the CABAL faction**._
   all yaml (rules + weapons + sequences merged — the current
   rules/ + weapons/ + sequences/ split collapses into it) + an (empty
   for now) `files/` folder for sprites/voxels/sounds/icons.
-  - ❓ **Decide the yaml-folder name** (suggestions to design — see the
-    turn's final message).
+  - Yaml-folder name = **`yaml`** (design decision 2026-07-12); sibling
+    asset folder = **`files`**.
   - Shared assets go in a per-GAME `Shared/files/` folder.
   - NOW: only create the yaml folder + move yaml into it + keep
     content.yaml at root; create empty `files/`; leave the asset
