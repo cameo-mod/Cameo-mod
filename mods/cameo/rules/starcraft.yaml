@@ -1,4 +1,4 @@
-World:
+﻿World:
 	FactionCA@terran:
 		Name: Terran SC
 		InternalName: terran
@@ -6408,7 +6408,7 @@ SCZEALOT:
 SCADEPT:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
-	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@shadow: ^SCSmallShadow
@@ -6419,9 +6419,9 @@ SCADEPT:
 	Tooltip:
 		Name: Adept
 	Valued:
-		Cost: 500
+		Cost: 650
 	Power:
-		Amount: -25
+		Amount: -30
 	Buildable:
 		BuildPaletteOrder: 25
 		Prerequisites: ~scgateway
@@ -6430,11 +6430,11 @@ SCADEPT:
 	Mobile:
 		Speed: 70
 	Health:
-		HP: 36000
+		HP: 30000
 	ChangesHealth@SelfHealing:
-		Step: 36
+		Step: 30
 	Shielded:
-		RegenAmount: 72
+		RegenAmount: 60
 	Armament:
 		Weapon: GlaveCanon
 	Armament@GARRISONED:
