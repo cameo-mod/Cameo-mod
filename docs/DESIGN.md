@@ -138,6 +138,21 @@ missile class templates already target Ground+Air with one weapon
 Manticore) uses the SAME range, weapon class, reload, and DPS for
 both weapons.
 
+**AA weapon construction — always inherit the ground twin (house
+rule, codified 2026-07-12; 76 existing AA weapons follow it).** An AA
+weapon is NEVER redefined from scratch. It `Inherits: <the ground
+weapon>` and then only overrides what differs: `ValidTargets: Air`,
+the AA `Range`, and each damage warhead flipped to `ValidTargets:
+Air` (the DamagesConcrete / CreateEffect / smudge warheads are left
+alone). This keeps the AA's damage, class mix, reload, projectile and
+trail identical to the ground weapon by construction — never
+hand-copied. Reference: `ArmoredCarMGAA: Inherits: ArmoredCarMG`.
+Corollary: shared projectile behaviour (launch angle, turn rate,
+trail — §3 rocket rules) belongs in ONE faction/family missile
+template that the ground weapons inherit last, so the AA twin picks it
+up automatically through the ground weapon (e.g. `^CabalMissile`).
+Never copy a projectile block across weapons.
+
 **Weapon mount offsets (design 2026-07-11 — always apply).** Every
 firing armament needs a `LocalOffset` so the muzzle sits at the barrel,
 not the actor's ground-center. For INFANTRY the default is
