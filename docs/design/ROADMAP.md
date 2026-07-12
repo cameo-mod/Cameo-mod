@@ -89,12 +89,13 @@ lands here first. Goal stated 2026-07-12: **finish the CABAL faction**._
 
 ### CE. Effect-warhead naming sweep (M) — LAW, see DESIGN
 
-- [ ] Rename EVERY `CreateEffect` warhead to **`Warhead@Effect`** (the
-  ground/default one) across all weapons (currently `@2Eff`, `@3Eff`,
-  `@DissolveEffect`, etc.). Allowed siblings: `@EffectAir` (weapon hits
-  air), `@EffectWater` (weapon hits water); HeavyBomb's two are the
-  other exception. Same-named warheads overwrite, so this guarantees
-  ONE impact per surface — no doubled effects. (Rule in DESIGN §8.)
+- [ ] Rename EVERY `CreateEffect` warhead to its per-surface canonical
+  name — **`Warhead@Effect`** (ground/default), and the allowed
+  siblings `@EffectAir` (hits air), `@EffectWater` (hits water),
+  `@ShieldHitEffect` (ValidTargets: Shielded); HeavyBomb's two are the
+  last exception. Fix `@2Eff`/`@3Eff`/`@DissolveEffect`/etc. Same-named
+  warheads overwrite → one impact per surface, no doubled effects.
+  (DESIGN §8.)
 
 ### CF. Formula rebalance of ALL CABAL unit stats (L)
 
