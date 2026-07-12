@@ -348,6 +348,8 @@ cabal_core:
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@hunterseeker: ^HunterSeekersPower
+	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
+	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Selectable:
 		Bounds: 1280, 1024
 	HitShape:
