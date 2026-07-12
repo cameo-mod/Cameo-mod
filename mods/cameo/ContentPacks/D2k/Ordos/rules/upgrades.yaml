@@ -120,7 +120,7 @@ up_depleteduranium.ordos:
 		Prerequisites: ~research_centre.ordos, !up_depleteduranium.ordos
 		IconPalette: ra2
 	RenderSprites:
-		Image: autogun_tank.ordos
+		Image: up_depleteduranium.ordos
 
 up_hoverdrive.ordos:
 	Inherits: ^tech_upgrade_template
@@ -134,4 +134,4 @@ up_hoverdrive.ordos:
 		Prerequisites: ~research_centre.ordos, !up_hoverdrive.ordos
 		IconPalette: ra2
 	RenderSprites:
-		Image: laser_tank.ordos
+		Image: up_hoverdrive.ordos
