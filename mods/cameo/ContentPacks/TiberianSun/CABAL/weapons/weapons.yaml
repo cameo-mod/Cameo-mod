@@ -648,12 +648,15 @@ CabalDroneCannon:
 
 CabalDissolverSpray:
 	Inherits: ^LightChemicalWeapon
+	Inherits@TANKDESTROYER: ^TankDestroyerCannon
 	Report: tsdissolver.wav
 	ReloadDelay: 4
 	Range: 5142
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 256
 		Blockable: false
+		Shadow: false
 		Image: tsdissolvereffect
 		Palette: alpha50
 		Inaccuracy: 512
@@ -663,7 +666,18 @@ CabalDissolverSpray:
 		Damage: 1
 	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
-
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 2000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@corroded: GrantExternalCondition
+		Range: 1500
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_dissolveimpact
 CabalCommandoPlasma:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon

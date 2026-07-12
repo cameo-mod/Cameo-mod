@@ -158,7 +158,6 @@ cabal_cyborgreaper:
 		CrushedSequencePalette: ra2effect
 
 cabal_dissolver:
-	Inherits@CLOAK: ^CloakedVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EMP: ^TurretEMP
