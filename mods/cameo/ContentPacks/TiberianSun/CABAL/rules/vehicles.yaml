@@ -75,6 +75,7 @@ cabal_constructionyard:
 
 cabal_mobileconstructionvehicle:
 	Inherits: ts_gdi_mobileconstructionvehicle
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~cabal_mechfactory, cabal_servicedepot
@@ -103,6 +104,7 @@ cabal_cyborgreaper:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Armor:
 		Type: Medium #Wood
 	Valued:
@@ -163,6 +165,7 @@ cabal_dissolver:
 	Inherits@EMP: ^TurretEMP
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@HackableRobot: ^HackableRobot
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 725
 	Tooltip:
@@ -214,6 +217,7 @@ cabal_dissolver:
 cabal_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Health:
 		HP: 150000
 	Harvester:
@@ -266,6 +270,7 @@ cabal_laserspider:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -318,6 +323,7 @@ cabal_mantis:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 875
 	Tooltip:
@@ -372,7 +378,7 @@ cabal_manticore:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -429,7 +435,7 @@ cabal_artilleryspider:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -494,7 +500,7 @@ cabal_tarantula:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -564,6 +570,7 @@ cabal_scarabapc:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@cargo: ^CargoVehicle
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 2600
 	Tooltip:
@@ -623,6 +630,7 @@ cabal_eliminator1000:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
 	Valued:

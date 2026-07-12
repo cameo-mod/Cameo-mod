@@ -181,7 +181,8 @@ cabal_upgrade_overchargedservos:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Heavy Spider, Artillery Spider and Tarantula reload 15% faster.
+		Description: Overcharged servos: all CABAL units move and turn faster and reload quicker.
+  Infantry +40% speed/turn, 30% faster reload; vehicles +20% speed/turn, 15% faster reload.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_overchargedservos
 	RenderSprites:
 		Image: cabal_upgrade_darkarmament

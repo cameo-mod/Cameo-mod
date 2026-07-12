@@ -178,12 +178,33 @@
 	GrantConditionOnPrerequisite@cabal_upgrade_overchargedservos:
 		Condition: cabal_upgrade_overchargedservos
 		Prerequisites: cabal_upgrade_overchargedservos
+	SpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 140
+	TurnSpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 140
+	ReloadDelayMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 70
+	ActorStatValues:
+		Upgrades: cabal_upgrade_overchargedservos
+
+^cabal_upgrade_overchargedservos_vehicle:
+	GrantConditionOnPrerequisite@cabal_upgrade_overchargedservos:
+		Condition: cabal_upgrade_overchargedservos
+		Prerequisites: cabal_upgrade_overchargedservos
+	SpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 120
+	TurnSpeedMultiplier@cabal_upgrade_overchargedservos:
+		RequiresCondition: cabal_upgrade_overchargedservos
+		Modifier: 120
 	ReloadDelayMultiplier@cabal_upgrade_overchargedservos:
 		RequiresCondition: cabal_upgrade_overchargedservos
 		Modifier: 85
 	ActorStatValues:
 		Upgrades: cabal_upgrade_overchargedservos
-
 ^cabal_upgrade_neuraluplink:
 	GrantConditionOnPrerequisite@cabal_upgrade_neuraluplink:
 		Condition: cabal_upgrade_neuraluplink

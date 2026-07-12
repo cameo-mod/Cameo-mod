@@ -1,6 +1,7 @@
 cabal_engineer:
 	Inherits: TSENGINEER
 	Inherits@Cyborg: ^TSCyborgs
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
@@ -51,6 +52,7 @@ cabal_cyborginfantry:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -105,6 +107,7 @@ cabal_ravager:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -157,6 +160,7 @@ cabal_rocketcyborg:
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -249,6 +253,7 @@ cabal_devout:
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -341,6 +346,7 @@ cabal_ascended:
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -435,6 +441,7 @@ cabal_hackercyborg:
 	Inherits@UPLINK: ^cabal_upgrade_neuraluplink
 	Inherits@EMP: ^UnitDisable
 	Inherits@HAND: ^cabal_upgrade_handof
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -539,6 +546,7 @@ cabal_cyborgcommando:
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -581,6 +589,7 @@ cabal_cyborgcommandov2:
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -630,6 +639,7 @@ cabal_eliminator800:
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1250
 	Tooltip:
