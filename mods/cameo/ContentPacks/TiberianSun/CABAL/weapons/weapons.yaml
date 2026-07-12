@@ -648,12 +648,12 @@ CabalEngineerRepairBeam:
 
 CabalCrabClaws:
 	Inherits: ^SwordWeapon
-	ReloadDelay: 25
+	ReloadDelay: 20
 	Range: 1603
 	Warhead@SwordWeapon: SpreadDamage
-		Damage: 16000
+		Damage: 36000
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
-		Damage: 8
+		Damage: 18
 
 CabalMantisGun:
 	Inherits: ^SmallArms

@@ -372,7 +372,7 @@ cabal_crab:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Valued:
-		Cost: 675
+		Cost: 2125
 	Tooltip:
 		Name: Crab
 	Buildable:
@@ -382,14 +382,14 @@ cabal_crab:
 		Description: Assault walker that crushes enemies with its claws.\n  Strong vs Vehicles, Infantry\n  Weak vs Aircraft
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 20
-		Speed: 100
+		TurnSpeed: 24
+		Speed: 120
 	Health:
-		HP: 50000
+		HP: 90000
 	Repairable:
-		HpPerStep: 2500
+		HpPerStep: 4500
 	ChangesHealth@SelfHealing:
-		Step: 20
+		Step: 36
 	Armament@PRIMARY:
 		Weapon: CabalCrabClaws
 	Armor:
