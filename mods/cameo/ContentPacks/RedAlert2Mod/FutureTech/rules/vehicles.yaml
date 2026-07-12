@@ -190,7 +190,7 @@ yrrobo.futu:
 	Inherits@RobotControllable: ^RobotControllable
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Valued:
-		Cost: 1200
+		Cost: 1600
 	Tooltip:
 		Name: Robot Tank
 	Buildable:
@@ -318,7 +318,7 @@ mbt.futu:
 		LocalOffset: 1720,0,440
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite
+		RequiresCondition: !deployed && !rank-elite
 	Armament@elite:
 		Name: primary
 		Weapon: GuardianTankCannonE
@@ -327,12 +327,17 @@ mbt.futu:
 		LocalOffset: 1720,0,440
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite
+		RequiresCondition: !deployed && rank-elite
 	Armament@debuff:
 		Name: primary
 		Weapon: Future_MBT_DebuffLaser
 		LocalOffset: 160,0,700
-		RequiresCondition: deployed
+		RequiresCondition: deployed && !rank-elite
+	Armament@debuffelite:
+		Name: primary
+		Weapon: Future_MBT_DebuffLaserE
+		LocalOffset: 160,0,700
+		RequiresCondition: deployed && rank-elite
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -353,10 +358,7 @@ mbt.futu:
 		Voice: Move
 	SpeedMultiplier@Laser:
 		RequiresCondition: deployed
-		Modifier: 90
-	ReloadDelayMultiplier@Laser:
-		RequiresCondition: deployed
-		Modifier: 150
+		Modifier: 75
 
 hvrt.futu:
 	Inherits: ^Tank
@@ -583,7 +585,7 @@ orion.futu:
 	Inherits@AntiVeh: ^PrioritizeVehicle
 	Inherits@AntiTank: ^PrioritizeTank
 	Valued:
-		Cost: 1800
+		Cost: 2400
 	Tooltip:
 		Name: Orion Tank
 	Buildable:

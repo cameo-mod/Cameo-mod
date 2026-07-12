@@ -1,5 +1,6 @@
 swarmer.ordos:
 	Inherits: ^RANeutralPlane
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^FighterTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -35,6 +36,14 @@ swarmer.ordos:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: !ammo
+		RequiresCondition: !up_laserguns.ordos
+	Armament@PRIMARYLaser:
+		Weapon: d2kChainGun_upgrade
+		LocalOffset: 256,-213,0, 256,213,0
+		MuzzleSequence: muzzle
+		MuzzlePalette: ra2effect
+		PauseOnCondition: !ammo
+		RequiresCondition: up_laserguns.ordos
 	Aircraft:
 		CruiseAltitude: 1920
 		Speed: 260
@@ -65,7 +74,7 @@ swarmer.ordos:
 		RequiresSelection: True
 		PipCount: 10
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_laserguns.ordos
 
 aa_mine.ordos:
 	Inherits: ^RANeutralPlane
@@ -757,6 +766,7 @@ eye_husk.ordos:
 
 carryall_reinforce.ordos:
 	Inherits: carryall.reinforce
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
 		Name: Advanced Carryall
@@ -774,9 +784,16 @@ carryall_reinforce.ordos:
 	Armament@PRIMARY:
 		Weapon: d2kCarryallChainGun
 		LocalOffset: 128,-213,-85, 128,213,-85
-
+		RequiresCondition: !up_laserguns.ordos
+	Armament@PRIMARYLaser:
+		Weapon: d2kCarryallChainGun_upgrade
+		LocalOffset: 128,-213,-85, 128,213,-85
+		RequiresCondition: up_laserguns.ordos
+	ActorStatValues:
+		Upgrades: up_laserguns.ordos
 carryall.ordos:
 	Inherits: carryall
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
 		Queue: Aircraft, RAAircraft
@@ -798,7 +815,13 @@ carryall.ordos:
 	Armament@PRIMARY:
 		Weapon: d2kCarryallChainGun
 		LocalOffset: 128,-213,-85, 128,213,-85
-
+		RequiresCondition: !up_laserguns.ordos
+	Armament@PRIMARYLaser:
+		Weapon: d2kCarryallChainGun_upgrade
+		LocalOffset: 128,-213,-85, 128,213,-85
+		RequiresCondition: up_laserguns.ordos
+	ActorStatValues:
+		Upgrades: up_laserguns.ordos
 carryall_husk.ordos:
 	Inherits: ^PlaneHusk
 	Tooltip:

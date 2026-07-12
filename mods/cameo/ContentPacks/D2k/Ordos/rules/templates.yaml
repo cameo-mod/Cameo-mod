@@ -1,0 +1,28 @@
+## Ordos-local upgrade templates (condition grants + effects).
+## Units inherit these; the matching up_*.ordos research provides the
+## prerequisite that flips the condition on.
+
+^Ordos_LaserGuns:
+	GrantConditionOnPrerequisite@up_laserguns.ordos:
+		Condition: up_laserguns.ordos
+		Prerequisites: up_laserguns.ordos
+
+^Ordos_DepletedUranium:
+	GrantConditionOnPrerequisite@up_depleteduranium.ordos:
+		Condition: up_depleteduranium.ordos
+		Prerequisites: up_depleteduranium.ordos
+	FirepowerMultiplier@up_depleteduranium.ordos:
+		RequiresCondition: up_depleteduranium.ordos
+		Modifier: 130
+	ActorStatValues:
+		Upgrades: up_depleteduranium.ordos
+
+^Ordos_HoverDrive:
+	GrantConditionOnPrerequisite@up_hoverdrive.ordos:
+		Condition: up_hoverdrive.ordos
+		Prerequisites: up_hoverdrive.ordos
+	SpeedMultiplier@up_hoverdrive.ordos:
+		RequiresCondition: up_hoverdrive.ordos
+		Modifier: 120
+	ActorStatValues:
+		Upgrades: up_hoverdrive.ordos

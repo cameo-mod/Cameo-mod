@@ -182,12 +182,12 @@ cabal_ascended:
 	icon:
 		Filename: cabal_ascended_icon.png
 
-cabal_platedarmorcyborg:
+cabal_rocketcyborg:
 	Inherits: ^TSBasicInfantry
 	Defaults:
 		Tick: 80
 		Offset: 0, 0, 16
-		Filename: cabal_platedarmorcyborg.shp
+		Filename: cabal_rocketcyborg.shp
 	stand:
 		Facings: 8
 		ShadowStart: 370
@@ -225,7 +225,7 @@ cabal_platedarmorcyborg:
 		Facings: 8
 		ShadowStart: 582
 	icon:
-		Filename: cabal_platedarmorcyborg_icon.png
+		Filename: cabal_rocketcyborg_icon.png
 
 cabal_hackercyborg:
 	Inherits: ^TSBasicInfantry
@@ -620,45 +620,12 @@ cabal_mantis:
 		ShadowStart: 416
 		Scale: 1
 
-cabal_spidertankdrone:
-	idle:
-		Filename: cabal_spidertankdrone.shp
-		Facings: 8
-		Scale: 1
-		ShadowStart: 258
-	icon:
-		Filename: cabal_spidertankdrone_icon.png
-	muzzle:
-		Filename: gunfire2.shp
-		Length: 5
-	stand:
-		Filename: cabal_spidertankdrone.shp
-		Facings: 8
-		Scale: 1
-		ShadowStart: 258
-	walk:
-		Filename: cabal_spidertankdrone.shp
-		Length: 10
-		Facings: 8
-		Start: 8
-		Tick: 60
-		Scale: 1
-		ShadowStart: 266
-	shoot:
-		Filename: cabal_spidertankdrone.shp
-		Facings: 8
-		Start: 168
-		Length: 10
-		Scale: 1
-		ShadowStart: 426
-
 cabal_crab:
 	idle:
 		Filename: cabal_crab.shp
-		Start: 336
-		Facings: -8
+		Facings: 8
 		Scale: 1
-		ShadowStart: 680
+		ShadowStart: 258
 	icon:
 		Filename: cabal_crab_icon.png
 	muzzle:
@@ -666,19 +633,52 @@ cabal_crab:
 		Length: 5
 	stand:
 		Filename: cabal_crab.shp
+		Facings: 8
+		Scale: 1
+		ShadowStart: 258
+	walk:
+		Filename: cabal_crab.shp
+		Length: 10
+		Facings: 8
+		Start: 8
+		Tick: 60
+		Scale: 1
+		ShadowStart: 266
+	shoot:
+		Filename: cabal_crab.shp
+		Facings: 8
+		Start: 168
+		Length: 10
+		Scale: 1
+		ShadowStart: 426
+
+cabal_manticore:
+	idle:
+		Filename: cabal_manticore.shp
+		Start: 336
+		Facings: -8
+		Scale: 1
+		ShadowStart: 680
+	icon:
+		Filename: cabal_manticore_icon.png
+	muzzle:
+		Filename: gunfire2.shp
+		Length: 5
+	stand:
+		Filename: cabal_manticore.shp
 		Start: 336
 		Facings: -8
 		Scale: 1
 		ShadowStart: 680
 	walk:
-		Filename: cabal_crab.shp
+		Filename: cabal_manticore.shp
 		Length: 21
 		Facings: -8
 		Tick: 60
 		Scale: 1
 		ShadowStart: 344
 	shoot:
-		Filename: cabal_crab.shp
+		Filename: cabal_manticore.shp
 		Facings: -8
 		Start: 168
 		Length: 21

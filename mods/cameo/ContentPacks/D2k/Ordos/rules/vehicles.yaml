@@ -1,5 +1,6 @@
 apc.ordos:
 	Inherits: ^D2KTank
+	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -58,7 +59,7 @@ apc.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_hoverdrive.ordos
 
 tleilax_labcrawl.ordos:
 	Inherits: ^D2KTank
@@ -988,6 +989,7 @@ python.ordos:
 
 laser_tank.ordos:
 	Inherits: ^D2KTank
+	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
@@ -1045,10 +1047,11 @@ laser_tank.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_hoverdrive.ordos
 
 deviatormk2.ordos:
 	Inherits: ^D2KTank
+	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
@@ -1109,7 +1112,7 @@ deviatormk2.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_toxin.ordos
+		Upgrades: up_shield.ordos, up_toxin.ordos, up_hoverdrive.ordos
 
 # d2k_qafza:
 # 	Inherits: ^D2KTank
@@ -1384,6 +1387,7 @@ deviatormk2.ordos:
 
 raider.ordos:
 	Inherits@D2KV: ^D2KVehicle
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1421,6 +1425,13 @@ raider.ordos:
 		LocalOffset: 140,90,50, 140,-90,50
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle
+		RequiresCondition: !up_laserguns.ordos
+	Armament@damageLaser:
+		Weapon: HMGo_upgrade
+		LocalOffset: 140,90,50, 140,-90,50
+		MuzzlePalette: d2keffect
+		MuzzleSequence: muzzle
+		RequiresCondition: up_laserguns.ordos
 	AttackFrontal:
 		FacingTolerance: 0
 	FireWarheadsOnDeath:
@@ -1433,10 +1444,11 @@ raider.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_laserguns.ordos
 
 stealth_raider.ordos:
 	Inherits: raider.ordos
+	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@CLOAK: ^CloakedVehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1460,13 +1472,18 @@ stealth_raider.ordos:
 		InitialStanceAI: ReturnFire
 	Armament@damage:
 		Weapon: HMGstealth
+		RequiresCondition: !up_laserguns.ordos
+	Armament@damageLaser:
+		Weapon: HMGstealth_upgrade
+		RequiresCondition: up_laserguns.ordos
 	-MustBeDestroyed:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
 		InitialUnits: light_inf, chem_troop.ordos, trooper, aatrooper.ordos
 		LoadingCondition: notmobile
-
+	ActorStatValues:
+		Upgrades: up_laserguns.ordos
 scoutdrone.ordos:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^FireSupportTemplate
@@ -1724,6 +1741,7 @@ heavycombattank.ordos:
 
 autogun_tank_small.ordos:
 	Inherits@D2KT: ^D2KTank
+	Inherits@DepletedUranium: ^Ordos_DepletedUranium
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1775,10 +1793,11 @@ autogun_tank_small.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_depleteduranium.ordos
 
 autogun_tank.ordos:
 	Inherits@D2KT: ^D2KTank
+	Inherits@DepletedUranium: ^Ordos_DepletedUranium
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
@@ -1835,7 +1854,7 @@ autogun_tank.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_depleteduranium.ordos
 
 combat_tank_stealth.ordos:
 	Inherits@D2KT: ^D2KTank

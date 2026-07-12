@@ -36,6 +36,28 @@ audited and deleted. Current progress + the exact runbook to continue:
 - `tools/audit/dump_resolved.py` — resolved-ruleset snapshots; refactors
   must diff empty.
 
+## Commit gate (absolute — no exceptions)
+
+**Never commit without booting the game first.** Run `launch-game.cmd`
+and confirm it reaches the main menu with NO new `exception-*.log` in
+`%APPDATA%/OpenRA/Logs` (snapshot the log list BEFORE launching; menu
+proof: perf.log ends with `MenuPostProcessEffect.PostWorldLoaded`).
+The Python resolver does not catch junk trait nodes — only the engine
+does, and it parses every faction at boot. If C# sources changed or
+were pulled, rebuild first (`dotnet build -c Release --nologo
+-p:TargetPlatform=win-x64`); stale DLLs crash the boot with
+`Cannot locate type: …Info`. Commit with scoped `git add <files>`,
+never `git add -A` — the maintainer usually has live uncommitted edits.
+
+## Balance changes: sheet first, yaml second
+
+`docs/design/cameo_armor_system.xlsx` is the single source of truth.
+Set the price/tier multiplier in the unit's row FIRST, let O/P/Q
+recompute, compare every stat column, and only then make the yaml
+match (both edits land in the same pass — never adjust a cost directly
+in yaml). If `~$cameo_armor_system.xlsx` exists, the workbook is open
+in Excel: don't write it; queue the sheet edit and say so.
+
 ## Memory
 
 Before running any shell command that has a corresponding memory file (build commands, engine sync, git operations), **read that memory file in full before executing**.

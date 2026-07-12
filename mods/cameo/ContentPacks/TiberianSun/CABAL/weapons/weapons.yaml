@@ -295,12 +295,13 @@ TSVulcanTower:
 
 TSDevoutChainguns:
 	Inherits: ^TSMG
-	ReloadDelay: 40
+	ReloadDelay: 38
+	BurstDelays: 2
 	Burst: 6
 	Report: cygun1.aud
-	Range: 4512
+	Range: 6359
 	Warhead@1Dam: SpreadDamage
-		Damage: 1200
+		Damage: 4000
 
 TSDevoutChaingunsUpgraded:
 	Inherits: ^TSMG
@@ -313,7 +314,7 @@ TSDevoutChaingunsUpgraded:
 	ReloadDelay: 40
 	Burst: 12
 	Report: cygun1.aud
-	Range: 4512
+	Range: 6359
 	Warhead@1Dam: SpreadDamage
 		Damage: 1200
 	Warhead@LaserWeapon: SpreadDamage
@@ -448,19 +449,35 @@ CabalTarantulaCannon:
 		Damage: 8
 
 CabalReaperMissiles:
-	Inherits: ^LightMissile
-	Inherits@2: ^MediumMissile
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
 	ReloadDelay: 32
 	Range: 5153
+	ValidTargets: Ground, Water
+	Report: rketinf1.aud
+	Projectile: Missile
 	Warhead@LightMissile: SpreadDamage
-		Damage: 8000
+		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 2
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 8000
+		Damage: 4000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 4
-
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
 CabalReaperMissilesAA:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
@@ -596,3 +613,114 @@ CabalCrabClaws:
 		Damage: 16000
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
 		Damage: 8
+
+CabalMantisGun:
+	Inherits: ^SmallArms
+	Inherits@2: ^LaserWeapon
+	ReloadDelay: 40
+	Range: 7082
+	Projectile: LaserZap
+		Width: 60
+		ZOffset: 2047
+		Color: 1122FFCC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 20
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 55FFFFF0
+	Warhead@SmallArms: SpreadDamage
+		Damage: 6000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 6000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 3
+CabalManticoreMissiles:
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^LightMissile
+	Inherits@4: ^MediumMissile
+	ReloadDelay: 30
+	Range: 5358
+	ValidTargets: Ground, Water
+	Report: rketinf1.aud
+	Projectile: Missile
+	Warhead@LightMissile: SpreadDamage
+		Damage: 4000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+CabalManticoreMissilesAA:
+	Inherits: ^LightMissile
+	Inherits@2: ^MediumMissile
+	ReloadDelay: 30
+	Range: 5358
+	ValidTargets: Air
+	Warhead@LightMissile: SpreadDamage
+		Damage: 8000
+		ValidTargets: Air
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 8000
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 4
+CabalRocketCyborgRockets:
+	Inherits: ^LightMissile
+	Inherits@2: ^MediumMissile
+	Burst: 2
+	BurstDelays: 8
+	Report: rketinf1.aud
+	ReloadDelay: 52
+	Range: 7438
+	Projectile: Missile
+	Warhead@LightMissile: SpreadDamage
+		Damage: 6000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 6000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 3
+
+CabalRocketCyborgRocketsUpgraded:
+	Inherits: CabalRocketCyborgRockets
+	Burst: 4
+
+CabalAscendedRockets:
+	Inherits: ^LightMissile
+	Inherits@2: ^MediumMissile
+	Burst: 2
+	BurstDelays: 8
+	Report: rketinf1.aud
+	ReloadDelay: 42
+	Range: 8468
+	Projectile: Missile
+	Warhead@LightMissile: SpreadDamage
+		Damage: 6000
+	Warhead@LightMissilePercentage: HealthPercentageDamage
+		Damage: 3
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 6000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 3
+
+CabalAscendedRocketsUpgraded:
+	Inherits: CabalAscendedRockets
+	Burst: 4

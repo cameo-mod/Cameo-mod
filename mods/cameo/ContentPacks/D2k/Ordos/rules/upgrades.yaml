@@ -93,3 +93,45 @@ up_contraband.ordos:
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: ordos_upgrade_para
+
+up_laserguns.ordos:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Laser Cartridges
+	Valued:
+		Cost: 1500
+	Buildable:
+		BuildPaletteOrder: 60
+		Queue: Upgrades
+		Prerequisites: ~outpost.ordos, !up_laserguns.ordos
+		Description: All Ordos bullet weapons fire a supplementary laser, using Laser Tank technology.
+	RenderSprites:
+		Image: laser_tank.ordos
+
+up_depleteduranium.ordos:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Depleted Uranium Rounds
+	Valued:
+		Cost: 2000
+	Buildable:
+		Queue: Research
+		Description: Autogun Tanks fire depleted-uranium rounds: +30% armor-piercing firepower.
+		Prerequisites: ~research_centre.ordos, !up_depleteduranium.ordos
+		IconPalette: ra2
+	RenderSprites:
+		Image: autogun_tank.ordos
+
+up_hoverdrive.ordos:
+	Inherits: ^tech_upgrade_template
+	Tooltip:
+		Name: Hover Drive
+	Valued:
+		Cost: 1500
+	Buildable:
+		Queue: Research
+		Description: All Ordos hovercraft gain +20% movement speed.
+		Prerequisites: ~research_centre.ordos, !up_hoverdrive.ordos
+		IconPalette: ra2
+	RenderSprites:
+		Image: laser_tank.ordos
