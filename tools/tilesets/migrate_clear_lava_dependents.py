@@ -38,6 +38,11 @@ def main() -> int:
     parser.add_argument("--clear-lava-dir", type=Path, required=True)
     parser.add_argument("--projects-root", type=Path, required=True)
     parser.add_argument("--approved-shores-root", type=Path, required=True)
+    parser.add_argument(
+        "--clear1-vol",
+        type=Path,
+        default=ROOT / "mods/cameo/bits/volcanic/clear1.vol",
+    )
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--install", action="store_true")
     args = parser.parse_args()
@@ -45,6 +50,7 @@ def main() -> int:
     clear_lava_dir = args.clear_lava_dir.resolve()
     projects_root = args.projects_root.resolve()
     approved_root = args.approved_shores_root.resolve()
+    clear1_vol = args.clear1_vol.resolve()
     out_dir = args.out_dir.resolve()
     candidate_dir = out_dir / "candidate-vols"
     regenerated_dir = out_dir / "regenerated-shore-bases"
@@ -67,7 +73,7 @@ def main() -> int:
     changed_targets = ["w1.vol", "w2.vol"]
     for ordinal, tile in enumerate(SHORE_TEMPLATES, start=1):
         print(f"[{ordinal:02d}/54] regenerating {tile}", flush=True)
-        generate_shore_base(regenerated_dir, tile, w1_candidate)
+        generate_shore_base(regenerated_dir, tile, w1_candidate, clear1_vol)
         spec = read_template_spec(tileset, f"{tile}.vol")
         regenerated = regenerated_dir / f"lava_seepage_composite_{tile}.png"
         candidate = candidate_dir / f"{tile}.vol"
@@ -165,7 +171,12 @@ def main() -> int:
     return 0
 
 
-def generate_shore_base(out_dir: Path, tile: str, w1_vol: Path) -> None:
+def generate_shore_base(
+    out_dir: Path,
+    tile: str,
+    w1_vol: Path,
+    clear1_vol: Path,
+) -> None:
     if tile == "sh04":
         command = [
             sys.executable,
@@ -174,13 +185,15 @@ def generate_shore_base(out_dir: Path, tile: str, w1_vol: Path) -> None:
             tile,
             "--w1-vol",
             str(w1_vol),
+            "--clear1-vol",
+            str(clear1_vol),
             "--out-dir",
             str(out_dir),
         ]
         subprocess.run(command, check=True, stdout=subprocess.DEVNULL)
         return
     with contextlib.redirect_stdout(io.StringIO()):
-        generate_sparse_shore(out_dir, tile, w1_vol)
+        generate_sparse_shore(out_dir, tile, w1_vol, clear1_vol)
 
 
 def build_standard_shore(

@@ -50,13 +50,20 @@ def main() -> int:
         default=ROOT / "mods/cameo/bits/volcanic/w1.vol",
         help="canonical cracked-lava tile used to build the shoreline phases",
     )
+    parser.add_argument(
+        "--clear1-vol",
+        type=Path,
+        default=ROOT / "mods/cameo/bits/volcanic/clear1.vol",
+        help="canonical clear-ground tile used to build the shoreline phases",
+    )
     args = parser.parse_args()
     out_dir = resolve(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     w1_vol = resolve(args.w1_vol)
+    clear1_vol = resolve(args.clear1_vol)
 
     if args.template != "sh04":
-        return generate_sparse_shore(out_dir, args.template, w1_vol)
+        return generate_sparse_shore(out_dir, args.template, w1_vol, clear1_vol)
 
     temperate_bits = ROOT / "mods/cameo/bits/temp"
     volcanic_bits = ROOT / "mods/cameo/bits/volcanic"
@@ -77,7 +84,7 @@ def main() -> int:
     largest_mask, component_metrics = largest_beach_region(seed_mask)
     alpha = feather_alpha(largest_mask, FEATHER)
 
-    clear1 = unique_frame(volcanic_bits / "clear1.vol", expected_frames=16)
+    clear1 = unique_frame(clear1_vol, expected_frames=16)
     w1 = unique_frame(w1_vol, expected_frames=1)
     ground_rgb = indices_rgb(np.tile(clear1, (3, 3)), volcanic_palette)
     lava_indices = np.tile(w1, (3, 3))
@@ -246,6 +253,7 @@ def generate_sparse_shore(
     out_dir: Path,
     template: str,
     w1_vol: Path,
+    clear1_vol: Path | None = None,
 ) -> int:
     """Generate a sparse shore using occupied-subtile semantics instead of box edges."""
 
@@ -314,7 +322,10 @@ def generate_sparse_shore(
         raw_lava_seed,
     )
     height, width = donor.shape
-    clear1 = unique_frame(volcanic_bits / "clear1.vol", expected_frames=16)
+    clear1 = unique_frame(
+        clear1_vol or volcanic_bits / "clear1.vol",
+        expected_frames=16,
+    )
     w1 = unique_frame(w1_vol, expected_frames=1)
     ground_indices_image = tile_frame(clear1, width, height)
     lava_indices = tile_frame(w1, width, height)
