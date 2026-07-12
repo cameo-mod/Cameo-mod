@@ -350,6 +350,7 @@ cabal_core:
 	Inherits@hunterseeker: ^HunterSeekersPower
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
+	Inherits@SW: ^PrimarySuperweapon
 	Selectable:
 		Bounds: 1280, 1024
 	HitShape:
@@ -382,5 +383,47 @@ cabal_core:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights3
 	SupportPowerChargeBar:
+	NukePowerCA:
+		OrderName: CabalMagicNuke
+		AllowMultiple: True
+		PauseOnCondition: disabled
+		Prerequisites:
+			1: ts_nod_missilesilo
+		Cursor: nuke
+		Icons:
+			1: abomb
+		ChargeInterval: 10500
+		Names:
+			1: power_nuke.d2kname
+		Descriptions:
+			1: power_nuke.d2kdescription
+		SelectTargetSpeechNotification: SelectTarget
+		SelectTargetTextNotification: Select target.
+		InsufficientPowerSpeechNotification: InsufficientPower
+		EndChargeSpeechNotification: NuclearWeaponAvailable
+		EndChargeTextNotification: Nuclear weapon ready.
+		LaunchSpeechNotification: NuclearWeaponLaunched
+		LaunchTextNotification: Warning: Nuclear weapon launched.
+		IncomingSpeechNotification: NuclearWarheadApproaching
+		IncomingTextNotification: Warning: Nuclear weapon impact imminent.
+		MissileWeapons:
+			1: CabalMagicNuke
+		MissileDelay: 25
+		SpawnOffset: 0,0,1024
+		DisplayTimerRelationships: Ally, Neutral, Enemy
+		ArrowSequence: arrow
+		ClockSequence: clocklarge
+		CircleSequence: circles
+		DisplayBeacon: true
+		DisplayRadarPing: True
+		BeaconPosters:
+			1: atomic
+		CameraRange: 10000
+		CameraRemoveDelay: 125
+		CircleRanges:
+			1: 10000
+		SupportPowerPaletteOrder: 70
+		MissileImage: raatomic
+		BeaconActor: BLASTRADIUS.atomic
 	RenderSprites:
 		PlayerPalette: playerra2

@@ -15,18 +15,10 @@ cabal_missilesilo:
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: ts_nod_missilesilo
-	Armament@superweapon1:
-		Name: superweapon
-		Weapon: TSTacticalMissile
-		RequiresCondition: !cabal_upgrade_clusterwarhead
-	Armament@superweapon2:
-		Name: superweapon
-		Weapon: TSTacticalNeutronMissile
-		RequiresCondition: cabal_upgrade_clusterwarhead
-	GrantConditionOnPrerequisite@cabal_upgrade_clusterwarhead:
-		Condition: cabal_upgrade_clusterwarhead
-		Prerequisites: cabal_upgrade_clusterwarhead
-
+	-FireArmamentPower:
+	-AttackFollow:
+	-Armament@superweapon1:
+	-Armament@superweapon2:
 cabal_stealthgenerator:
 	Inherits: ts_nod_stealthgenerator
 	Buildable:

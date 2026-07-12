@@ -955,3 +955,8 @@ CabalManticoreLaser:
 		Explosions: cabal_laserimpact_s
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+
+CabalMagicNuke:
+	Inherits: PulseMissile
+	Warhead@2Eff_impact: CreateEffect
+		Explosions: magicnuke
