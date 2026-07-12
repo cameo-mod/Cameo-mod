@@ -138,6 +138,71 @@ missile class templates already target Ground+Air with one weapon
 Manticore) uses the SAME range, weapon class, reload, and DPS for
 both weapons.
 
+**AA weapon construction — always inherit the ground twin (house
+rule, codified 2026-07-12; 76 existing AA weapons follow it).** An AA
+weapon is NEVER redefined from scratch. It `Inherits: <the ground
+weapon>` and then only overrides what differs: `ValidTargets: Air`,
+the AA `Range`, and each damage warhead flipped to `ValidTargets:
+Air` (the DamagesConcrete / CreateEffect / smudge warheads are left
+alone). This keeps the AA's damage, class mix, reload, projectile and
+trail identical to the ground weapon by construction — never
+hand-copied. Reference: `ArmoredCarMGAA: Inherits: ArmoredCarMG`.
+Corollary: shared projectile behaviour (launch angle, turn rate,
+trail — §3 rocket rules) belongs in ONE faction/family missile
+template that the ground weapons inherit last, so the AA twin picks it
+up automatically through the ground weapon (e.g. `^CabalMissile`).
+Never copy a projectile block across weapons.
+
+**Weapon mount offsets (design 2026-07-11 — always apply).** Every
+firing armament needs a `LocalOffset` so the muzzle sits at the barrel,
+not the actor's ground-center. For INFANTRY the default is
+**`LocalOffset: 128,0,256`** (128 forward, 0 sideways, 256 up ≈ chest
+height) — the mod-wide most common value. Apply it to every non-garrison
+infantry armament that has no offset of its own; garrison armaments
+(`Name: garrisoned`) keep none (they fire from the building's port).
+A missing offset is not cosmetic for arcing/launched projectiles: the
+round spawns at ground level and can explode under the unit's feet —
+this is why the CABAL Rocket Cyborg could not shoot. When creating or
+editing ANY infantry, set the offset. Vehicles/aircraft use
+weapon-specific `LocalOffset`s at their barrels (not this default).
+
+**Alternating (twin-muzzle) offsets.** A `LocalOffset` with TWO triplets
+(six values), e.g. **`LocalOffset: 128,-64,256, 128,64,256`**, gives two
+fire points that the weapon alternates between — the left barrel
+(`-64` sideways) then the right (`+64`). Use it for any dual-weapon /
+twin-barrel unit (the CABAL Devout's twin chainguns, gatling arms, etc.)
+so bursts visibly alternate left/right instead of stacking on one point.
+The single-triplet default `128,0,256` is for one centred muzzle.
+**Match a unit to its analogue.** When two units share a weapon family,
+copy the reference unit's offset AND muzzle setup wholesale (the CABAL
+T800 gatling was aligned to the Yuri Gatling Trooper's `544,100,256`).
+Note the muzzle style can differ: the Gatling Trooper shows a visible
+tracer projectile and no `WithMuzzleOverlay`, whereas the T800 carries
+`WithMuzzleOverlay` + `MuzzleSequence: muzzle` (a sprite muzzle flash) —
+pick one style per look and keep the pair consistent.
+
+**Preserve a unit's unique projectile when reforging its weapon.** A new
+weapon that only `Inherits:` a class template (e.g. `^LightChemical
+Weapon`) takes that template's plain projectile and DROPS any custom
+`Projectile:` the old weapon had (Image/Speed/Palette/Inaccuracy). The
+CABAL Dissolver lost its `tsdissolvereffect` spray this way in the Batch
+2a rebuild. Always carry the old `Projectile:` block over (or restore it
+from git) when replacing a unit's signature weapon.
+
+**TS rocket projectiles — launch straight up (design 2026-07-11,
+replicating Shattered Paradise).** Tiberian-Sun-style rockets fire
+near-vertically then home down onto the target. On the `Missile`
+projectile set **`MinimumLaunchAngle: 255` and `MaximumLaunchAngle:
+255`** (255 ≈ 90° in our WAngle scale; SP uses the same 255 = "90
+degrees"). A steep launch overshoots close targets unless the missile
+can turn fast enough, so ALWAYS pair it with a high turn rate —
+**`HorizontalRateOfTurn: 128` / `VerticalRateOfTurn: 128`** (SP's
+value; our `^LightMissile` default of 40 is too slow and causes the
+overshoot). The Guardian GI's rocket was the reference bug: launch 200
+with the default turn 40 always overshot at short range; fixed by
+raising its turn to 128. Set both angle and turn per-weapon (never edit
+the shared `^*Missile` templates, which serve all factions).
+
 Unit classification is authoritative from the **class templates in
 defaults.yaml** (`^HighTechTankTemplate` ⇒ vehicle, whatever the render
 traits say). Power plant vision currently: 4c0 small / 5c0 advanced —
@@ -216,7 +281,31 @@ cheapest provider wins).
 
 - WAV norm: **mono / 16-bit / 22050 Hz** (audit_assets prints ffmpeg fixes).
 - Sprites named per §1; icons end `_icon`.
+- **Cameo/build/upgrade icons are always 64×48 px** (RGBA or RGB PNG;
+  the mod-wide dominant size — design 2026-07-11). Any new icon,
+  including upgrade research icons, is authored at 64×48. An upgrade
+  actor's icon comes from a `sequences` entry named for the actor with
+  an `icon:` sub-node (`Filename: <name>.png`), and the actor's
+  `RenderSprites.Image` points at that same name — do not leave an
+  upgrade borrowing a unit cameo.
 - Voice sets are shared resources named for the VOICE, not a unit.
+- **Custom animated effects (explosions, muzzle flashes, projectile
+  trails) are authored as RGBA PngSheets** (design 2026-07-12; the
+  proven pattern used by the neutron-shell `magicnuke.png` and the
+  CABAL rocket trail `cabal_rockettrail.png`). A single horizontal PNG
+  strip of equal-size frames carries two PNG `tEXt` chunks —
+  `FrameSize: W,H` and `FrameAmount: N` — and a sequence references it
+  with `Filename:`, `Length: N`, optional `Scale`, `Tick`. **An RGBA
+  sheet renders in true colour with NO palette** — omit
+  `TrailPalette`/`ExplosionPalette` entirely (this is why magicnuke
+  looks right and why the smoke below broke when a palette was forced
+  onto it). Keep effect frame counts small for trails (≤10, fading to
+  transparent so each puff dies on its own).
+- **Palette pitfall for indexed `x_smokey` trails**: they use the
+  **`effect`** palette. `effect75alpha` is a D2K/Dune alpha palette
+  (`PaletteFromPaletteWithAlpha`) — forcing it onto a non-Dune sprite
+  like `blue_smokey` re-tints it (blue → dark green). Use `effect` for
+  indexed trails, or an RGBA PngSheet (no palette) for full colour.
 
 ## 9. Operating rules for agents
 
@@ -236,6 +325,15 @@ cheapest provider wins).
    ai.yaml wiring, roster-wide upgrade hooks, class template, sequences
    that resolve, and a changelog line (Definition of Done,
    MASTER_REPORT Appendix D).
+9. **Always separate top-level elements with a single blank line** —
+   every actor, weapon, template, and sequence block is followed by an
+   empty line before the next one, so it is easy to see where one ends
+   and the next begins. A comment block stays attached (no blank line)
+   to the element it documents. Scripted edits must preserve the blank
+   line (a common bug: a block-replace that drops the trailing blank).
+10. **All icons carry the `_icon` suffix** (§1/§8), including upgrade
+   research icons: `ordos_upgrade_hoverdrive_icon.png`, never
+   `ordos_upgrade_hoverdrive.png`.
 
 ## 10. Actor & faction uniqueness (design north star)
 

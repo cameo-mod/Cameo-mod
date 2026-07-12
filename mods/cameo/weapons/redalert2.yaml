@@ -196,6 +196,8 @@ RA2GIRocketsG:
 	Projectile: Missile
 		Speed: 500
 		MinimumLaunchAngle: 200
+		HorizontalRateOfTurn: 128
+		VerticalRateOfTurn: 128
 		Acceleration: 5
 	Warhead@LightMissile: SpreadDamage
 		Damage: 24000

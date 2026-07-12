@@ -143,6 +143,7 @@ forgotten_mutantsniper:
 		Step: 10
 	Armament@PRIMARY:
 		Weapon: TSSniper
+		LocalOffset: 128,0,256
 	# Armament@ELITE:
 	# 	Weapon: TSSniperE
 	WithInfantryBody:
@@ -223,6 +224,7 @@ forgotten_ghoststalker:
 		VoiceSet: TSGhost
 	Armament@c4:
 		Weapon: GenericC4
+		LocalOffset: 128,0,256
 		Cursor: c4
 	Armament@GARRISONED: ##########
 		Name: garrisoned
@@ -312,6 +314,7 @@ forgotten_mutant:
 		Step: 18
 	Armament@PRIMARY:
 		Weapon: MutDualWield
+		LocalOffset: 128,0,256
 	#	 RequiresCondition: !rank-elite
 	# Armament@ELITE:
 	# 	Weapon: MutDualWieldE
@@ -378,6 +381,7 @@ forgotten_mutantsoldier:
 		Step: 30
 	Armament@PRIMARY:
 		Weapon: MutAPRifle
+		LocalOffset: 128,0,256
 	# 	RequiresCondition: !rank-elite
 	# Armament@aa:
 	# 	Weapon: TSGrenadeAA
@@ -450,6 +454,7 @@ forgotten_mutantsergeant:
 	# 	PauseOnCondition: !ammo
 	Armament@PRIMARY:
 		Weapon: TSSergGun
+		LocalOffset: 128,0,256
 	# AmmoPool:
 	# 	Ammo: 8
 	# 	AmmoCondition: ammo
@@ -514,6 +519,7 @@ forgotten_zombiemutant:
 		Step: 45
 	Armament@PRIMARY:
 		Weapon: TSZombieAttack
+		LocalOffset: 128,0,256
 	# 	RequiresCondition: !rank-elite
 	# Armament@ELITE:
 	# 	Weapon: TSZombieAttack
@@ -566,6 +572,7 @@ forgotten_runnershotgal:
 		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSMutShotgun
+		LocalOffset: 128,0,256
 	# 	RequiresCondition: !rank-elite
 	# Armament@ELITE:
 	# 	Weapon: TSShotgun
@@ -687,10 +694,12 @@ forgotten_mutantmortarman:
 		Step: 30
 	Armament@PRIMARY:
 		Weapon: TSInfantryMortar
+		LocalOffset: 128,0,256
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 		FireDelay: 15
 	Armament@UPGRADE:
 		Weapon: TSInfantryMortarChem
+		LocalOffset: 128,0,256
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 		FireDelay: 15
 	Voiced:
@@ -828,6 +837,7 @@ forgotten_tiberianfiend:
 	RenderSprites:
 	Armament@PRIMARY:
 		Weapon: TSFiendShard
+		LocalOffset: 128,0,256
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@GARRISONED: ##########
 		Name: garrisoned
@@ -835,6 +845,7 @@ forgotten_tiberianfiend:
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSFiendShardUP
+		LocalOffset: 128,0,256
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned
@@ -888,6 +899,7 @@ forgotten_viniferafiend:
 	RenderSprites:
 	Armament@PRIMARY:
 		Weapon: TSFiendShardBlue
+		LocalOffset: 128,0,256
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@GARRISONED: ##########
 		Name: garrisoned
@@ -895,6 +907,7 @@ forgotten_viniferafiend:
 		RequiresCondition: !forgotten_upgrade_chemicalweapons
 	Armament@UPGRADE:
 		Weapon: TSFiendShardBlueUP
+		LocalOffset: 128,0,256
 		RequiresCondition: forgotten_upgrade_chemicalweapons
 	Armament@GARRISONEDUPGRADE: ##########
 		Name: garrisoned

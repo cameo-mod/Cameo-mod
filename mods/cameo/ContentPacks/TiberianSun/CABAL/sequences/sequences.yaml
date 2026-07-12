@@ -1842,8 +1842,13 @@ cabal_eliminator800:
 	Defaults:
 		Filename: arnd.shp
 	muzzle:
-		Filename: ra2_gunfire.shp
-		Length: *
+		Filename: DATA.R16
+		Scale: 1.5
+		Remap: 54F94B
+		Start: 3996
+		Tick: 50
+		Facings: -32
+		BlendMode: Additive
 	run:
 		Tick: 120
 	paradrop:
@@ -1919,4 +1924,10 @@ cabal_upgrade_radarhack:
 cabal_upgrade_dataworm:
 	icon:
 		Filename: cabal_upgrade_dataworm_icon.png
+cabal_rockettrail:
+	idle:
+		Filename: cabal_rockettrail.png
+		Length: 10
+		Tick: 40
+
 # Civilian Cars

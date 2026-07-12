@@ -24,6 +24,7 @@ cabal_engineer:
 	Armament@REPAIRBEAM:
 		Name: primary
 		Weapon: CabalEngineerRepairBeam
+		LocalOffset: 128,0,256
 		TargetRelationships: Ally
 		ForceTargetRelationships: None
 		PauseOnCondition: !ammo
@@ -71,6 +72,7 @@ cabal_cyborginfantry:
 		Step: 45
 	Armament@PRIMARY:
 		Weapon: CabalCyborgChaingun
+		LocalOffset: 128,0,256
 	GrantConditionOnDamageState@damaged:
 		Condition: cydamaged
 		ValidDamageStates: Critical
@@ -128,9 +130,11 @@ cabal_rocketcyborg:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: CabalRocketCyborgRockets
+		LocalOffset: 128,0,256
 		RequiresCondition: !cabal_upgrade_darkarmament
 	Armament@Upgraded:
 		Weapon: CabalRocketCyborgRocketsUpgraded
+		LocalOffset: 128,0,256
 		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
@@ -217,11 +221,11 @@ cabal_devout:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
-		LocalOffset: 0,-20,90, 0,20,90
+		LocalOffset: 128,-64,256, 128,64,256
 		RequiresCondition: !cabal_upgrade_darkarmament
 	Armament@Upgraded:
 		Weapon: TSDevoutChaingunsUpgraded
-		LocalOffset: 0,-20,90, 0,20,90
+		LocalOffset: 128,-64,256, 128,64,256
 		RequiresCondition: cabal_upgrade_darkarmament
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
@@ -492,6 +496,7 @@ cabal_cyborgcommando:
 		Step: 250
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasma
+		LocalOffset: 128,0,256
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -527,6 +532,7 @@ cabal_cyborgcommandov2:
 		Step: 400
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasmaMk2
+		LocalOffset: 128,0,256
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -577,39 +583,39 @@ cabal_eliminator800:
 	Armament@1:
 		Weapon: CabalEliminatorGatling
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 64
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@2:
 		Weapon: RA2GattlingMG2
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@3:
 		Weapon: RA2GattlingMG3
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo >= 9
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@1AA:
 		Weapon: RA2GattlingMG1AA
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 64
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@2AA:
 		Weapon: RA2GattlingMG2AA
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@3AA:
 		Weapon: RA2GattlingMG3AA
 		MuzzleSequence: muzzle
-		MuzzlePalette: ra2effect
+		MuzzlePalette: d2keffect
 		PauseOnCondition: ammo >= 9
-		LocalOffset: 85,90,299, 85,-90,299
+		LocalOffset: 544,100,256
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2DoublePistols

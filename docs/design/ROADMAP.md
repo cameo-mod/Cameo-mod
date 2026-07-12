@@ -61,9 +61,9 @@ Everything stat/tech-side finished BEFORE any effects work.
   tarantula/artillery/rocket cyborgs/T800:100/commando). Existing
   upgrades not in the table (dark armament, radar hack, …): ❓ map or
   retire — ask design.
-- [ ] **StartingUnits fix** (S): CABAL light/heavy support still spawn
-  tsbike/tsttnk (Nod placeholders) — swap to mantis/crab per "Mantis
-  is a regular starting unit".
+- [x] **StartingUnits fix** (2026-07-12): CABAL light/heavy support
+  now spawn cabal_mantis + cabal_tarantula instead of the tsbike/
+  tsttnk Nod placeholders (scout+MBT composition preserved).
 - [ ] **Descriptions pass** (fluent keys) + **AI wiring** (squads,
   upgrades, promotions) (M).
 - [ ] ❓ open design picks: Artillery Spider tier (333ggg: "maybe
@@ -88,6 +88,17 @@ Everything stat/tech-side finished BEFORE any effects work.
   pattern) as a CABAL research (SP: Improved Reaper Nets).
 
 ## Phase C — Balance & consistency (parallelizable with B)
+
+- [ ] **Infantry offset sweep beyond TS** (S): 15 non-TS infantry
+  armaments still lack `LocalOffset` (DESIGN §3 rule); apply the
+  128,0,256 default. Offenders: contaminator/saboteur/fremen_creep
+  (D2k), samurai/alligator/fedinf/engi.futu/litt/frank/conehead/
+  engi.nax2/mili/ra2terror + hmg/quadflak dummies (RA2Mod). Skip pure
+  Targeting dummies where meaningless.
+- [ ] **TS rocket launch-angle sweep beyond CABAL** (M): apply the
+  vertical-launch + turn-128 recipe (DESIGN §3) to all TS-theme rocket
+  weapons (Nod/GDI/Forgotten), each needing its turn rate checked so
+  it doesn't overshoot close targets like the Guardian GI did.
 
 - [x] FutureTech re-pricing per sheet, T3 = 0.75 confirmed; epics
   L=0.3 / M=1.0 (DESIGN §12). Queued sheet-cell edits (Excel was
