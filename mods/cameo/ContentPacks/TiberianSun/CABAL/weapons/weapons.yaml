@@ -7,8 +7,10 @@
 	Projectile: Missile
 		MinimumLaunchAngle: 255
 		MaximumLaunchAngle: 255
-		HorizontalRateOfTurn: 128
-		VerticalRateOfTurn: 128
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 80
+		CruiseAltitude: 6000
+		TerrainHeightAware: true
 		TrailImage: cabal_rockettrail
 		TrailInterval: 1
 
@@ -532,6 +534,15 @@ CabalHunterKillerLasers:
 	Inherits: ^SmallArms
 	Inherits@2: ^LaserWeapon
 	ReloadDelay: 24
+	Projectile: LaserZap
+		Width: 24
+		ZOffset: 2047
+		Color: 1122FFCC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 10
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 55FFFFF0
+	Report: lastur1.aud
 	Range: 5318
 	Warhead@SmallArms: SpreadDamage
 		Damage: 8000
@@ -648,6 +659,7 @@ CabalMantisGun:
 	Inherits: ^SmallArms
 	Inherits@2: ^LaserWeapon
 	ReloadDelay: 40
+	Report: lastur1.aud
 	Range: 7082
 	Projectile: LaserZap
 		Width: 60
