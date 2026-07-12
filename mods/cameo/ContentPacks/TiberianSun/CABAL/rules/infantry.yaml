@@ -532,6 +532,7 @@ cabal_cyborgcommando:
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -554,6 +555,11 @@ cabal_cyborgcommando:
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasma
 		LocalOffset: 128,0,256
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@Upgraded:
+		Weapon: CabalCommandoPlasmaNeutron
+		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -568,6 +574,7 @@ cabal_cyborgcommandov2:
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -590,6 +597,11 @@ cabal_cyborgcommandov2:
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasmaMk2
 		LocalOffset: 128,0,256
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@Upgraded:
+		Weapon: CabalCommandoPlasmaMk2Neutron
+		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:

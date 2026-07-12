@@ -734,9 +734,17 @@ CabalDissolverSpray:
 CabalCommandoPlasma:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
 	Report: obelcor3.aud
-	ReloadDelay: 50
+	ReloadDelay: 90
 	Range: 5219
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: cabal_greenplasma
+		Speed: 320
+		Shadow: false
+		Blockable: false
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 50000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -745,13 +753,28 @@ CabalCommandoPlasma:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_greenplasmaimpact
+		ImpactSounds: expnew09.aud
 
 CabalCommandoPlasmaMk2:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
 	Report: obelcor3.aud
-	ReloadDelay: 40
+	ReloadDelay: 90
 	Range: 6264
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: cabal_greenplasma
+		Speed: 320
+		Shadow: false
+		Blockable: false
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 50000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -760,6 +783,13 @@ CabalCommandoPlasmaMk2:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_greenplasmaimpact
+		ImpactSounds: expnew09.aud
 
 CabalCoreDefenderLaser:
 	Inherits: ^LaserWeapon
@@ -960,3 +990,49 @@ CabalMagicNuke:
 	Inherits: PulseMissile
 	Warhead@2Eff_impact: CreateEffect
 		Explosions: magicnuke
+
+CabalCommandoPlasmaNeutron:
+	Inherits: CabalCommandoPlasma
+	Projectile: Bullet
+		Image: cabal_plasmabullet
+		Speed: 320
+		Shadow: false
+		Blockable: false
+	Warhead@Tesla: SpreadDamage
+		Spread: 500
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
+	Warhead@Magic: SpreadDamage
+		Spread: 500
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@Railgun: SpreadDamage
+		Spread: 0
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@Effect: CreateEffect
+		Explosions: magicnuke_med
+		ImpactSounds: expnew12.aud
+
+CabalCommandoPlasmaMk2Neutron:
+	Inherits: CabalCommandoPlasmaMk2
+	Projectile: Bullet
+		Image: cabal_plasmabullet
+		Speed: 320
+		Shadow: false
+		Blockable: false
+	Warhead@Tesla: SpreadDamage
+		Spread: 500
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
+	Warhead@Magic: SpreadDamage
+		Spread: 500
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
+	Warhead@Railgun: SpreadDamage
+		Spread: 0
+		Damage: 12000
+		DamageTypes: Prone50Percent, TriggerProne, BulletDeath
+	Warhead@Effect: CreateEffect
+		Explosions: magicnuke_med
+		ImpactSounds: expnew12.aud
