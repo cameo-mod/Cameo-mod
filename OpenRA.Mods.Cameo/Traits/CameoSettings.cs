@@ -20,7 +20,7 @@ namespace OpenRA.Mods.Cameo.Traits
 		public bool QuotaModeEnabled = false;
 
 		[Desc("Selected cyberintel UI colour theme. On change, the matching baked chrome sheets are ",
-			"copied over the active ones (applies after restart). Options live in uibits/cyberintel-themes/. ",
+			"copied over the active ones (applies after restart). Options live in uibits/cyberintel_themes/. ",
 			"\"random\" re-picks a colour on every boot.")]
 		public string UITheme = "random";
 	}
