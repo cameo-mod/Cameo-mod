@@ -4018,6 +4018,7 @@ SCVULTURE:
 	Inherits@SHADOWS: ^Shadows
 	Inherits@armor: ^TerranVehiclesWeaponUpgrades
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
+	Inherits@bot: ^BotAutoDeployTimedAbility
 	Tooltip:
 		Name: Vulture
 	Valued:
@@ -4042,12 +4043,33 @@ SCVULTURE:
 	Armament:
 		Weapon: VultureGrenade
 		LocalOffset: 600,0,0
+		# AmmoUsage: 0
 	AttackFrontal:
 		FacingTolerance: 0
 	Passenger:
 		Weight: 2
 		CustomPipType: blue
+	# AmmoPool@ammo:
+	# 	Ammo: 3
+	# 	AmmoCondition: ammo
+	# WithAmmoPipsDecoration:
+	# 	Position: BottomLeft
+	# 	RequiresSelection: True
+	# 	PipCount: 3
 	Hovers:
+	GrantTimedConditionOnDeploy:
+		StartsFullyCharged: true
+		DeployedTicks: 5
+		CooldownTicks: 500
+		DeployedCondition: summon
+		ShowSelectionBar: true
+		ExclusiveDeploy: true
+		DeployType: Summon
+		PauseOnCondition: disabled #|| !ammo
+	PeriodicExplosion@projections:
+		Weapon: SCVULTURESUMMON
+		RequiresCondition: summon
+		# AmmoPoolName: ammo
 	Voiced:
 		VoiceSet: SCVultureVoice
 	DeathSounds:
@@ -4058,6 +4080,86 @@ SCVULTURE:
 		PlayerPalette: player_rgba
 	ActorStatValues:
 		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+
+SCSPIDERMINE:
+	Inherits: ^Walker
+	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@cloak: ^CloakedVehicle
+	Valued:
+		Cost: 50
+	Tooltip:
+		Name: Spider Mine
+	Mobile:
+		Speed: 200
+		TurnSpeed: 200
+	Crushable:
+		CrushClasses: vehicle
+	RenderSprites:
+		Image: ra2dron
+		PlayerPalette: playerra2
+	Health:
+		HP: 10000
+	ChangesHealth@SelfHealing:
+		Step: 4
+	AutoTarget:
+		ScanRadius: 4
+		InitialStance: AttackAnything
+	WithInfantryBody:
+		DefaultAttackSequence: jump
+		RequiresCondition: !jousting
+	WithFacingSpriteBody:
+		Sequence: shoot
+		RequiresCondition: jousting
+	FireWarheadsOnDeathCA@bomb:
+		Weapon: SCSPIDEREXPLOSION
+		EmptyWeapon: SCSPIDEREXPLOSION
+		RequiresCondition: !disabled
+	AttackFrontal:
+		FacingTolerance: 512
+	# Armament@PRIMARY:
+	# 	Weapon: SCSpiderTargeting
+	# 	PauseOnCondition: !ammo
+	Armament@SECONDARY:
+		Weapon: SCSpiderEngage
+	# AttackLeap:
+	# 	Voice: Attack
+	# 	PauseOnCondition: attacking || attack-cooldown
+	# AmmoPool:
+	# 	Ammo: 1
+	# 	AmmoCondition: ammo
+	# WithAmmoPipsDecoration:
+	# 	Position: BottomLeft
+	# 	RequiresSelection: True
+	# 	PipCount: 1
+	GrantConditionOnAttack:
+		Condition: triggered
+		RequiresCondition: !disabled
+	KillsSelf:
+		RequiresCondition: triggered && !disabled
+		Delay: 5
+	-InfectableCA:
+	RejectsOrders:
+	# SpeedMultiplier@TRIGGERED:
+	# 	Modifier: 0
+	# 	RequiresCondition: !triggered
+	Targetable:
+		RequiresCondition: !parachute && !untargetable
+	AutoTarget:
+		InitialStance: AttackAnything
+	Voiced:
+		VoiceSet: TerrorDroneVoice
+	Targetable@vehicleexplodedamage:
+		TargetTypes: TerrorDrone
+	Targetable@dog:
+		TargetTypes: DogImmune
+	GrantConditionOnMovement:
+		Condition: unborrow
+	Cloak:
+		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || unborrow
+	-TemporaryOwnerManager:
 
 SCSIEGETANK:
 	Inherits: ^Tank
