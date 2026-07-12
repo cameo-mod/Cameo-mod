@@ -1741,7 +1741,7 @@ heavycombattank.ordos:
 
 autogun_tank_small.ordos:
 	Inherits@D2KT: ^D2KTank
-	Inherits@DepletedUranium: ^Ordos_DepletedUranium
+	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -1793,11 +1793,11 @@ autogun_tank_small.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_depleteduranium.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_armorpiercing.ordos
 
 autogun_tank.ordos:
 	Inherits@D2KT: ^D2KTank
-	Inherits@DepletedUranium: ^Ordos_DepletedUranium
+	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@exp: ^GainsExperienceRA
@@ -1854,7 +1854,7 @@ autogun_tank.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_depleteduranium.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_armorpiercing.ordos
 
 combat_tank_stealth.ordos:
 	Inherits@D2KT: ^D2KTank

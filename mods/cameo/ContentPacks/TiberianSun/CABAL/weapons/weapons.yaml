@@ -200,6 +200,7 @@ TSCABALObeliskLaserFire:
 		Damage: 70000
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 70000
+
 TSHunterKillerLasers:
 	Inherits: ^Chaingun
 	Inherits: ^LaserWeapon
@@ -493,6 +494,7 @@ CabalReaperMissiles:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 2
+
 CabalReaperMissilesAA:
 	Inherits: CabalReaperMissiles
 	Range: 7730
@@ -517,6 +519,7 @@ CabalReaperMissilesAA:
 		ValidTargets: Air
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
+
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
 	ReloadDelay: 64
@@ -657,6 +660,7 @@ CabalMantisGun:
 		Damage: 6000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 3
+
 CabalManticoreMissiles:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -687,6 +691,7 @@ CabalManticoreMissiles:
 		Damage: 2000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		Damage: 2
+
 CabalManticoreMissilesAA:
 	Inherits: CabalManticoreMissiles
 	Range: 5358
@@ -711,6 +716,7 @@ CabalManticoreMissilesAA:
 		ValidTargets: Air
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
+
 CabalRocketCyborgRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile

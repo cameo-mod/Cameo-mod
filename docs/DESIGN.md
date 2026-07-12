@@ -285,6 +285,15 @@ cheapest provider wins).
    ai.yaml wiring, roster-wide upgrade hooks, class template, sequences
    that resolve, and a changelog line (Definition of Done,
    MASTER_REPORT Appendix D).
+9. **Always separate top-level elements with a single blank line** —
+   every actor, weapon, template, and sequence block is followed by an
+   empty line before the next one, so it is easy to see where one ends
+   and the next begins. A comment block stays attached (no blank line)
+   to the element it documents. Scripted edits must preserve the blank
+   line (a common bug: a block-replace that drops the trailing blank).
+10. **All icons carry the `_icon` suffix** (§1/§8), including upgrade
+   research icons: `ordos_upgrade_hoverdrive_icon.png`, never
+   `ordos_upgrade_hoverdrive.png`.
 
 ## 10. Actor & faction uniqueness (design north star)
 
