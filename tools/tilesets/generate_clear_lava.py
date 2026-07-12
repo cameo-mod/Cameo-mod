@@ -15,13 +15,17 @@ from shptd import read_shptd, write_shptd
 
 
 ROOT = Path(__file__).resolve().parents[2]
-TILE = 48
-BASE_PERIOD = TILE
-VARIANT_PERIOD = TILE * 2
+AUTHOR_TILE = 24
+OUTPUT_TILE = 48
+UPSCALE = OUTPUT_TILE // AUTHOR_TILE
+BASE_PERIOD = AUTHOR_TILE
+VARIANT_PERIOD = AUTHOR_TILE * 2
+OUTPUT_VARIANT_PERIOD = OUTPUT_TILE * 2
 BASE_SEED = 0xC1EA4A7A
 VARIANT_SEED = 0xB45A17
-OUTER_MATCH_BAND = 16
-DEFAULT_JUNCTION_WIDENING = 4.5
+AUTHOR_OUTER_MATCH_BAND = 8
+OUTPUT_OUTER_MATCH_BAND = AUTHOR_OUTER_MATCH_BAND * UPSCALE
+DEFAULT_JUNCTION_WIDENING = 2.25
 
 
 def main() -> int:
@@ -51,7 +55,7 @@ def main() -> int:
         "--junction-widening",
         type=float,
         default=DEFAULT_JUNCTION_WIDENING,
-        help="additional Voronoi fissure width near three-way vertices",
+        help="additional Voronoi fissure width near three-way vertices, in 24x24 authoring pixels",
     )
     parser.add_argument(
         "--bright-cores",
@@ -67,57 +71,101 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
 
     base_sites = make_sites(BASE_PERIOD, 7, BASE_SEED)
-    baseline_w1_indices = render_base(base_sites, 0.0, False)
-    junction_only_w1_indices = render_base(base_sites, args.junction_widening, False)
-    w1_indices = render_base(base_sites, args.junction_widening, args.bright_cores)
-    repeated_w1_indices = repeat_indices(w1_indices, VARIANT_PERIOD)
-    w2_indices = (
-        repeated_w1_indices
+    baseline_w1_source = render_base(base_sites, 0.0, False)
+    junction_only_w1_source = render_base(base_sites, args.junction_widening, False)
+    w1_source = render_base(base_sites, args.junction_widening, args.bright_cores)
+    repeated_w1_source = repeat_indices(w1_source, VARIANT_PERIOD)
+    w2_source = (
+        repeated_w1_source
         if args.stage == "proof"
         else render_variant(
             base_sites,
-            w1_indices,
+            w1_source,
             args.junction_widening,
             args.bright_cores,
         )
     )
 
+    baseline_w1_indices = upscale_indices(baseline_w1_source, BASE_PERIOD, UPSCALE)
+    junction_only_w1_indices = upscale_indices(junction_only_w1_source, BASE_PERIOD, UPSCALE)
+    w1_indices = upscale_indices(w1_source, BASE_PERIOD, UPSCALE)
+    repeated_w1_indices = upscale_indices(repeated_w1_source, VARIANT_PERIOD, UPSCALE)
+    w2_indices = upscale_indices(w2_source, VARIANT_PERIOD, UPSCALE)
+
     w1_path = out_dir / "w1-clear-lava-preview.vol"
     w2_path = out_dir / "w2-clear-lava-preview.vol"
-    write_shptd(w1_path, TILE, TILE, [bytes(w1_indices)])
-    write_shptd(w2_path, TILE, TILE, slice_frames(w2_indices, VARIANT_PERIOD))
+    write_shptd(w1_path, OUTPUT_TILE, OUTPUT_TILE, [bytes(w1_indices)])
+    write_shptd(
+        w2_path,
+        OUTPUT_TILE,
+        OUTPUT_TILE,
+        slice_frames(w2_indices, OUTPUT_VARIANT_PERIOD),
+    )
     verify_vol(w1_path, 1)
     verify_vol(w2_path, 4)
     _, _, roundtrip_w2_frames = read_shptd(w2_path)
     roundtrip_w2_indices = compose_frame_indices(roundtrip_w2_frames, 2)
 
-    w1 = indices_image(w1_indices, TILE, TILE, palette)
-    w2 = indices_image(w2_indices, VARIANT_PERIOD, VARIANT_PERIOD, palette)
+    w1 = indices_image(w1_indices, OUTPUT_TILE, OUTPUT_TILE, palette)
+    w2 = indices_image(
+        w2_indices,
+        OUTPUT_VARIANT_PERIOD,
+        OUTPUT_VARIANT_PERIOD,
+        palette,
+    )
     w1.save(out_dir / "w1-preview.png")
     w2.save(out_dir / "w2-preview.png")
+    w1_author = indices_image(
+        w1_source,
+        AUTHOR_TILE,
+        AUTHOR_TILE,
+        palette,
+    )
+    w2_author = indices_image(
+        w2_source,
+        VARIANT_PERIOD,
+        VARIANT_PERIOD,
+        palette,
+    )
+    w1_author.save(out_dir / "w1-author-24px.png")
+    w2_author.save(out_dir / "w2-author-48px-composite.png")
 
     current_w1, current_w1_tiles = decode_composite(resolve(args.current_w1), 1, palette)
     current_w2, current_w2_tiles = decode_composite(resolve(args.current_w2), 2, palette)
     preview_w2_tiles = split_tiles(w2)
 
-    w1_mask = crack_mask_image(w1_indices, TILE, TILE)
-    w2_mask = crack_mask_image(w2_indices, VARIANT_PERIOD, VARIANT_PERIOD)
+    w1_mask = crack_mask_image(w1_indices, OUTPUT_TILE, OUTPUT_TILE)
+    w2_mask = crack_mask_image(
+        w2_indices,
+        OUTPUT_VARIANT_PERIOD,
+        OUTPUT_VARIANT_PERIOD,
+    )
 
     current_repeat, current_mixed = build_repeat_layouts(current_w1, current_w2)
     preview_repeat, preview_mixed = build_repeat_layouts(w1, w2)
-    baseline_w1 = indices_image(baseline_w1_indices, TILE, TILE, palette)
+    baseline_w1 = indices_image(
+        baseline_w1_indices,
+        OUTPUT_TILE,
+        OUTPUT_TILE,
+        palette,
+    )
     baseline_w2 = indices_image(
-        repeat_indices(baseline_w1_indices, VARIANT_PERIOD),
-        VARIANT_PERIOD,
-        VARIANT_PERIOD,
+        repeat_output_indices(baseline_w1_indices, OUTPUT_VARIANT_PERIOD),
+        OUTPUT_VARIANT_PERIOD,
+        OUTPUT_VARIANT_PERIOD,
         palette,
     )
     baseline_repeat, _ = build_repeat_layouts(baseline_w1, baseline_w2)
-    junction_only_w1 = indices_image(junction_only_w1_indices, TILE, TILE, palette)
+    junction_only_w1 = indices_image(
+        junction_only_w1_indices,
+        OUTPUT_TILE,
+        OUTPUT_TILE,
+        palette,
+    )
     junction_only_w2 = indices_image(
-        repeat_indices(junction_only_w1_indices, VARIANT_PERIOD),
-        VARIANT_PERIOD,
-        VARIANT_PERIOD,
+        repeat_output_indices(junction_only_w1_indices, OUTPUT_VARIANT_PERIOD),
+        OUTPUT_VARIANT_PERIOD,
+        OUTPUT_VARIANT_PERIOD,
         palette,
     )
     junction_only_repeat, _ = build_repeat_layouts(junction_only_w1, junction_only_w2)
@@ -223,9 +271,20 @@ def main() -> int:
         "mixed_layout_total_pixels": preview_mixed.width * preview_mixed.height,
         "mixed_mask_exact_repeat_pixels": exact_image_pixels(mask_mixed, mask_repeat),
         "mixed_mask_total_pixels": mask_mixed.width * mask_mixed.height,
-        "outer_match_band": OUTER_MATCH_BAND,
-        "w2_outer_band_exact_pixels": outer_band_exact(w1_indices, w2_indices, VARIANT_PERIOD),
-        "w2_outer_band_total_pixels": outer_band_total(),
+        "author_tile_size": AUTHOR_TILE,
+        "output_tile_size": OUTPUT_TILE,
+        "nearest_neighbor_upscale": UPSCALE,
+        "outer_match_band": OUTPUT_OUTER_MATCH_BAND,
+        "w2_outer_band_exact_pixels": outer_band_exact(
+            w1_indices,
+            w2_indices,
+            OUTPUT_VARIANT_PERIOD,
+            OUTPUT_OUTER_MATCH_BAND,
+        ),
+        "w2_outer_band_total_pixels": outer_band_total(
+            OUTPUT_VARIANT_PERIOD,
+            OUTPUT_OUTER_MATCH_BAND,
+        ),
         "palette_exact": True,
         "w1_frames": 1,
         "w2_frames": 4,
@@ -302,12 +361,32 @@ def render_base(
 
 
 def repeat_indices(indices: list[int], width: int) -> list[int]:
-    if len(indices) != TILE * TILE or width % TILE:
-        raise ValueError("repeat source must be one 48x48 tile and width a tile multiple")
+    if len(indices) != AUTHOR_TILE * AUTHOR_TILE or width % AUTHOR_TILE:
+        raise ValueError("repeat source must be one 24x24 author tile and width a tile multiple")
     return [
-        indices[(y % TILE) * TILE + (x % TILE)]
+        indices[(y % AUTHOR_TILE) * AUTHOR_TILE + (x % AUTHOR_TILE)]
         for y in range(width)
         for x in range(width)
+    ]
+
+
+def repeat_output_indices(indices: list[int], width: int) -> list[int]:
+    if len(indices) != OUTPUT_TILE * OUTPUT_TILE or width % OUTPUT_TILE:
+        raise ValueError("repeat source must be one 48x48 output tile and width a tile multiple")
+    return [
+        indices[(y % OUTPUT_TILE) * OUTPUT_TILE + (x % OUTPUT_TILE)]
+        for y in range(width)
+        for x in range(width)
+    ]
+
+
+def upscale_indices(indices: list[int], width: int, factor: int) -> list[int]:
+    if len(indices) != width * width:
+        raise ValueError("upscale source dimensions do not match its pixel count")
+    return [
+        indices[(y // factor) * width + (x // factor)]
+        for y in range(width * factor)
+        for x in range(width * factor)
     ]
 
 
@@ -321,8 +400,10 @@ def render_variant(
     for y in range(VARIANT_PERIOD):
         for x in range(VARIANT_PERIOD):
             border = min(x, y, VARIANT_PERIOD - 1 - x, VARIANT_PERIOD - 1 - y)
-            if border < OUTER_MATCH_BAND:
-                result.append(base_indices[(y % TILE) * TILE + (x % TILE)])
+            if border < AUTHOR_OUTER_MATCH_BAND:
+                result.append(
+                    base_indices[(y % AUTHOR_TILE) * AUTHOR_TILE + (x % AUTHOR_TILE)]
+                )
                 continue
 
             weight = deformation_weight(float(x), float(y))
@@ -351,12 +432,12 @@ def deformation(x: float, y: float, weight: float) -> tuple[float, float]:
     # One smooth 96x96 displacement field. It is exactly zero near the outer
     # boundary, so w1 cracks continue into w2 before gradually bending inside.
     dx = (
-        5.0 * math.sin(math.tau * y / VARIANT_PERIOD + 0.35)
-        + 2.4 * math.sin(math.tau * (x + y) / VARIANT_PERIOD)
+        2.5 * math.sin(math.tau * y / VARIANT_PERIOD + 0.35)
+        + 1.2 * math.sin(math.tau * (x + y) / VARIANT_PERIOD)
     ) * weight
     dy = (
-        4.2 * math.sin(math.tau * x / VARIANT_PERIOD + 1.1)
-        - 2.1 * math.sin(math.tau * (x - y) / VARIANT_PERIOD)
+        2.1 * math.sin(math.tau * x / VARIANT_PERIOD + 1.1)
+        - 1.05 * math.sin(math.tau * (x - y) / VARIANT_PERIOD)
     ) * weight
     return dx, dy
 
@@ -364,8 +445,8 @@ def deformation(x: float, y: float, weight: float) -> tuple[float, float]:
 def deformation_weight(x: float, y: float) -> float:
     border = min(x, y, VARIANT_PERIOD - 1 - x, VARIANT_PERIOD - 1 - y)
     return smoothstep(
-        OUTER_MATCH_BAND,
-        OUTER_MATCH_BAND + 16,
+        AUTHOR_OUTER_MATCH_BAND,
+        AUTHOR_OUTER_MATCH_BAND + 8,
         border,
     )
 
@@ -405,18 +486,18 @@ def deformation_metrics() -> dict[str, float | int | bool]:
     vertical_internal_steps = []
     horizontal_internal_steps = []
     for coordinate in range(VARIANT_PERIOD):
-        ax, ay = displacement_at(TILE - 1, coordinate)
-        bx, by = displacement_at(TILE, coordinate)
+        ax, ay = displacement_at(AUTHOR_TILE - 1, coordinate)
+        bx, by = displacement_at(AUTHOR_TILE, coordinate)
         vertical_internal_steps.append(math.hypot(bx - ax, by - ay))
-        ax, ay = displacement_at(coordinate, TILE - 1)
-        bx, by = displacement_at(coordinate, TILE)
+        ax, ay = displacement_at(coordinate, AUTHOR_TILE - 1)
+        bx, by = displacement_at(coordinate, AUTHOR_TILE)
         horizontal_internal_steps.append(math.hypot(bx - ax, by - ay))
 
     collar_displacements = []
     for y in range(VARIANT_PERIOD):
         for x in range(VARIANT_PERIOD):
             border = min(x, y, VARIANT_PERIOD - 1 - x, VARIANT_PERIOD - 1 - y)
-            if border < OUTER_MATCH_BAND:
+            if border < AUTHOR_OUTER_MATCH_BAND:
                 dx, dy = displacement_at(x, y)
                 collar_displacements.append(math.hypot(dx, dy))
 
@@ -465,13 +546,13 @@ def field_values(
 ) -> tuple[float, float, float, float]:
     qx = (
         x
-        + 2.7 * math.sin(math.tau * y / period)
-        + 1.2 * math.sin(math.tau * (x + y) / period)
+        + 1.35 * math.sin(math.tau * y / period)
+        + 0.6 * math.sin(math.tau * (x + y) / period)
     ) % period
     qy = (
         y
-        + 2.2 * math.sin(math.tau * x / period + 0.7)
-        - 1.1 * math.sin(math.tau * (x - y) / period)
+        + 1.1 * math.sin(math.tau * x / period + 0.7)
+        - 0.55 * math.sin(math.tau * (x - y) / period)
     ) % period
     distances = []
     for index, (sx, sy, tone) in enumerate(sites):
@@ -487,24 +568,24 @@ def field_values(
     # centerline and every cell boundary unchanged.
     third_gap = third[0] - first[0]
     widening = max(0.0, junction_widening)
-    junction = 1.0 - smoothstep(0.18, 3.20, third_gap)
-    fissure_width = 1.55 + widening * junction * junction
+    junction = 1.0 - smoothstep(0.09, 1.60, third_gap)
+    fissure_width = 0.775 + widening * junction * junction
 
     # The Voronoi boundary is the magma fissure. Keep a one-pixel hot core,
     # a thin orange shoulder, and a restrained dark-red heat halo.
-    heat = 1.0 - smoothstep(0.10, fissure_width, gap)
+    heat = 1.0 - smoothstep(0.05, fissure_width, gap)
     junction_pool = 0.0
     if widening > 0.0:
         # A direct, softly graded molten pocket makes the vertex expansion
         # survive 48x48 rasterization and palette quantization.  The pocket is
         # driven only by three-site proximity, so ordinary two-way fissures do
         # not become uniformly thicker.
-        junction_pool = 1.0 - smoothstep(0.18, 0.18 + widening, third_gap)
+        junction_pool = 1.0 - smoothstep(0.09, 0.09 + widening, third_gap)
         heat = max(heat, junction_pool)
     crust = (
         0.57 * periodic_value_noise(x, y, period, period // 4, seed ^ 0x13579)
         + 0.28 * periodic_value_noise(x, y, period, period // 6, seed ^ 0x2468A)
-        + 0.15 * periodic_value_noise(x, y, period, max(4, period // 12), seed ^ 0xACE1)
+        + 0.15 * periodic_value_noise(x, y, period, max(2, period // 12), seed ^ 0xACE1)
     )
     center_shade = min(1.0, first[0] / max(1.0, period * 0.22))
     crust = clamp(0.72 * crust + 0.28 * center_shade, 0.0, 1.0)
@@ -591,12 +672,15 @@ def clamp(value: int | float, low: int | float, high: int | float):
 
 def slice_frames(indices: list[int], width: int) -> list[bytes]:
     frames = []
-    for cell_y in range(width // TILE):
-        for cell_x in range(width // TILE):
+    for cell_y in range(width // OUTPUT_TILE):
+        for cell_x in range(width // OUTPUT_TILE):
             frame = bytearray()
-            for y in range(TILE):
-                start = (cell_y * TILE + y) * width + cell_x * TILE
-                frame.extend(indices[start : start + TILE])
+            for y in range(OUTPUT_TILE):
+                start = (
+                    (cell_y * OUTPUT_TILE + y) * width
+                    + cell_x * OUTPUT_TILE
+                )
+                frame.extend(indices[start : start + OUTPUT_TILE])
             frames.append(bytes(frame))
     return frames
 
@@ -605,23 +689,28 @@ def compose_frame_indices(frames: list[bytes], columns: int) -> list[int]:
     if not frames or len(frames) % columns:
         raise ValueError("frame count must be a nonzero multiple of the column count")
     rows = len(frames) // columns
-    width = columns * TILE
-    result = [0] * (width * rows * TILE)
+    width = columns * OUTPUT_TILE
+    result = [0] * (width * rows * OUTPUT_TILE)
     for index, frame in enumerate(frames):
-        if len(frame) != TILE * TILE:
+        if len(frame) != OUTPUT_TILE * OUTPUT_TILE:
             raise ValueError(f"frame {index} is not 48x48")
         cell_x = index % columns
         cell_y = index // columns
-        for y in range(TILE):
-            source = y * TILE
-            target = (cell_y * TILE + y) * width + cell_x * TILE
-            result[target : target + TILE] = frame[source : source + TILE]
+        for y in range(OUTPUT_TILE):
+            source = y * OUTPUT_TILE
+            target = (
+                (cell_y * OUTPUT_TILE + y) * width
+                + cell_x * OUTPUT_TILE
+            )
+            result[target : target + OUTPUT_TILE] = frame[
+                source : source + OUTPUT_TILE
+            ]
     return result
 
 
 def verify_vol(path: Path, expected_frames: int) -> None:
     width, height, frames = read_shptd(path)
-    if (width, height) != (TILE, TILE) or len(frames) != expected_frames:
+    if (width, height) != (OUTPUT_TILE, OUTPUT_TILE) or len(frames) != expected_frames:
         raise ValueError(
             f"{path.name}: decoded {width}x{height}/{len(frames)} frames, expected 48x48/{expected_frames}"
         )
@@ -665,19 +754,19 @@ def decode_composite(
 
 def split_tiles(image: Image.Image) -> list[Image.Image]:
     return [
-        image.crop((x, y, x + TILE, y + TILE))
-        for y in range(0, image.height, TILE)
-        for x in range(0, image.width, TILE)
+        image.crop((x, y, x + OUTPUT_TILE, y + OUTPUT_TILE))
+        for y in range(0, image.height, OUTPUT_TILE)
+        for x in range(0, image.width, OUTPUT_TILE)
     ]
 
 
 def build_repeat_layouts(w1: Image.Image, w2: Image.Image) -> tuple[Image.Image, Image.Image]:
-    repeat = Image.new("RGB", (TILE * 4, TILE * 4))
-    for y in range(0, repeat.height, TILE):
-        for x in range(0, repeat.width, TILE):
+    repeat = Image.new("RGB", (OUTPUT_TILE * 4, OUTPUT_TILE * 4))
+    for y in range(0, repeat.height, OUTPUT_TILE):
+        for x in range(0, repeat.width, OUTPUT_TILE):
             repeat.paste(w1, (x, y))
     mixed = repeat.copy()
-    mixed.paste(w2, (TILE, TILE))
+    mixed.paste(w2, (OUTPUT_TILE, OUTPUT_TILE))
     return repeat, mixed
 
 
@@ -702,36 +791,49 @@ def continuity_metrics(w1: Image.Image, w2: list[Image.Image]) -> dict[str, floa
 
 def vertical_delta(left: Image.Image, right: Image.Image) -> float:
     return sum(
-        abs(luminance(left.getpixel((TILE - 1, y))) - luminance(right.getpixel((0, y))))
-        for y in range(TILE)
-    ) / TILE
+        abs(
+            luminance(left.getpixel((OUTPUT_TILE - 1, y)))
+            - luminance(right.getpixel((0, y)))
+        )
+        for y in range(OUTPUT_TILE)
+    ) / OUTPUT_TILE
 
 
 def horizontal_delta(top: Image.Image, bottom: Image.Image) -> float:
     return sum(
-        abs(luminance(top.getpixel((x, TILE - 1))) - luminance(bottom.getpixel((x, 0))))
-        for x in range(TILE)
-    ) / TILE
+        abs(
+            luminance(top.getpixel((x, OUTPUT_TILE - 1)))
+            - luminance(bottom.getpixel((x, 0)))
+        )
+        for x in range(OUTPUT_TILE)
+    ) / OUTPUT_TILE
 
 
 def luminance(color: tuple[int, int, int]) -> float:
     return 0.299 * color[0] + 0.587 * color[1] + 0.114 * color[2]
 
 
-def outer_band_exact(shared: list[int], candidate: list[int], width: int) -> int:
+def outer_band_exact(
+    shared: list[int],
+    candidate: list[int],
+    width: int,
+    band: int,
+) -> int:
     exact = 0
     for y in range(width):
         for x in range(width):
             border = min(x, y, width - 1 - x, width - 1 - y)
-            if border >= OUTER_MATCH_BAND:
+            if border >= band:
                 continue
-            expected = shared[(y % TILE) * TILE + (x % TILE)]
+            expected = shared[
+                (y % OUTPUT_TILE) * OUTPUT_TILE + (x % OUTPUT_TILE)
+            ]
             exact += int(candidate[y * width + x] == expected)
     return exact
 
 
-def outer_band_total(width: int = VARIANT_PERIOD) -> int:
-    inner = width - 2 * OUTER_MATCH_BAND
+def outer_band_total(width: int, band: int) -> int:
+    inner = width - 2 * band
     return width * width - inner * inner
 
 
@@ -739,17 +841,27 @@ def join_strip(
     first: Image.Image,
     second: Image.Image,
     orientation: str,
-    band: int = OUTER_MATCH_BAND,
+    band: int = OUTPUT_OUTER_MATCH_BAND,
 ) -> Image.Image:
     if orientation == "vertical":
-        strip = Image.new("RGB", (band * 2, TILE))
-        strip.paste(first.crop((TILE - band, 0, TILE, TILE)), (0, 0))
-        strip.paste(second.crop((0, 0, band, TILE)), (band, 0))
+        strip = Image.new("RGB", (band * 2, OUTPUT_TILE))
+        strip.paste(
+            first.crop(
+                (OUTPUT_TILE - band, 0, OUTPUT_TILE, OUTPUT_TILE)
+            ),
+            (0, 0),
+        )
+        strip.paste(second.crop((0, 0, band, OUTPUT_TILE)), (band, 0))
         return strip
     if orientation == "horizontal":
-        strip = Image.new("RGB", (TILE, band * 2))
-        strip.paste(first.crop((0, TILE - band, TILE, TILE)), (0, 0))
-        strip.paste(second.crop((0, 0, TILE, band)), (0, band))
+        strip = Image.new("RGB", (OUTPUT_TILE, band * 2))
+        strip.paste(
+            first.crop(
+                (0, OUTPUT_TILE - band, OUTPUT_TILE, OUTPUT_TILE)
+            ),
+            (0, 0),
+        )
+        strip.paste(second.crop((0, 0, OUTPUT_TILE, band)), (0, band))
         return strip
     raise ValueError(f"unknown seam orientation: {orientation}")
 
@@ -827,8 +939,8 @@ def write_seam_strip_review(
     scale = 5
     columns = 2
     header = 24
-    cell_width = TILE * scale
-    cell_height = TILE * scale
+    cell_width = OUTPUT_TILE * scale
+    cell_height = OUTPUT_TILE * scale
     rows = (len(panels) + columns - 1) // columns
     sheet = Image.new(
         "RGB",
@@ -849,10 +961,10 @@ def write_seam_strip_review(
         paste_y = cell_y + header + (cell_height - resized.height) // 2
         sheet.paste(resized, (paste_x, paste_y))
         if "V " == label[:2]:
-            seam_x = paste_x + OUTER_MATCH_BAND * scale
+            seam_x = paste_x + OUTPUT_OUTER_MATCH_BAND * scale
             draw.line((seam_x, paste_y, seam_x, paste_y + resized.height - 1), fill=(0, 255, 255))
         else:
-            seam_y = paste_y + OUTER_MATCH_BAND * scale
+            seam_y = paste_y + OUTPUT_OUTER_MATCH_BAND * scale
             draw.line((paste_x, seam_y, paste_x + resized.width - 1, seam_y), fill=(0, 255, 255))
     sheet.save(path)
 
@@ -864,8 +976,8 @@ def write_continuity_review(
 ) -> None:
     scale = 4
     header = 28
-    panel_width = TILE * 4 * scale
-    panel_height = TILE * 4 * scale
+    panel_width = OUTPUT_TILE * 4 * scale
+    panel_height = OUTPUT_TILE * 4 * scale
     rows = (len(panels) + columns - 1) // columns
     sheet = Image.new(
         "RGB",

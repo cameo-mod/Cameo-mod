@@ -44,12 +44,19 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--out-dir", type=Path, default=DEFAULT_OUT_DIR)
     parser.add_argument("--template", choices=SHORE_TEMPLATES, default="sh04")
+    parser.add_argument(
+        "--w1-vol",
+        type=Path,
+        default=ROOT / "mods/cameo/bits/volcanic/w1.vol",
+        help="canonical cracked-lava tile used to build the shoreline phases",
+    )
     args = parser.parse_args()
     out_dir = resolve(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
+    w1_vol = resolve(args.w1_vol)
 
     if args.template != "sh04":
-        return generate_sparse_shore(out_dir, args.template)
+        return generate_sparse_shore(out_dir, args.template, w1_vol)
 
     temperate_bits = ROOT / "mods/cameo/bits/temp"
     volcanic_bits = ROOT / "mods/cameo/bits/volcanic"
@@ -71,7 +78,7 @@ def main() -> int:
     alpha = feather_alpha(largest_mask, FEATHER)
 
     clear1 = unique_frame(volcanic_bits / "clear1.vol", expected_frames=16)
-    w1 = unique_frame(volcanic_bits / "w1.vol", expected_frames=1)
+    w1 = unique_frame(w1_vol, expected_frames=1)
     ground_rgb = indices_rgb(np.tile(clear1, (3, 3)), volcanic_palette)
     lava_indices = np.tile(w1, (3, 3))
     lava_rgb = indices_rgb(lava_indices, volcanic_palette)
@@ -235,7 +242,11 @@ def main() -> int:
     return 0
 
 
-def generate_sparse_shore(out_dir: Path, template: str) -> int:
+def generate_sparse_shore(
+    out_dir: Path,
+    template: str,
+    w1_vol: Path,
+) -> int:
     """Generate a sparse shore using occupied-subtile semantics instead of box edges."""
 
     temperate_bits = ROOT / "mods/cameo/bits/temp"
@@ -304,7 +315,7 @@ def generate_sparse_shore(out_dir: Path, template: str) -> int:
     )
     height, width = donor.shape
     clear1 = unique_frame(volcanic_bits / "clear1.vol", expected_frames=16)
-    w1 = unique_frame(volcanic_bits / "w1.vol", expected_frames=1)
+    w1 = unique_frame(w1_vol, expected_frames=1)
     ground_indices_image = tile_frame(clear1, width, height)
     lava_indices = tile_frame(w1, width, height)
     ground_rgb = indices_rgb(ground_indices_image, volcanic_palette)
