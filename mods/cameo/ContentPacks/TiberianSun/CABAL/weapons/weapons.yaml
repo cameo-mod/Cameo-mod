@@ -86,13 +86,18 @@ TSCyCannon:
 
 DarkObeliskLaser:
 	Inherits: ^TSLaser
-	Report: obelmod1.aud
+	Report: obelcor3.aud
 	Range: 12288
 	ReloadDelay: 50
 	ValidTargets: Air
 	Projectile: LaserZap
-		Width: 125
-		Duration: 38
+		Width: 84
+		ZOffset: 2047
+		Color: 5522CCD0
+		SecondaryBeam: true
+		SecondaryBeamWidth: 38
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: AA88FFF0
 	Warhead@1Dam: SpreadDamage
 		Damage: 35000
 		Spread: 250
@@ -258,12 +263,13 @@ TSHunterKillerLasers:
 	SoundVolume: 0.25
 	ValidTargets: Ground, Air
 	Projectile: LaserZap
-		Width: 36
-		Duration: 8
-		SecondaryBeamWidth: 18
-		-HitAnim:
-		Color: 0040FF80
-		SecondaryBeamColor: 80C0FF
+		Width: 73
+		ZOffset: 2047
+		Color: 3322AAC0
+		SecondaryBeam: true
+		SecondaryBeamWidth: 33
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 8866EEE8
 	Warhead@Chaingun: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Air
@@ -284,7 +290,7 @@ TSTwinBazooka:
 	Inherits: ^LightMissile
 	Burst: 2
 	BurstDelays: 8
-	Report: rketinf1.aud
+	Report: samshot1.aud
 	ReloadDelay: 52
 	Range: 6694
 	Projectile: Missile
@@ -545,7 +551,7 @@ CabalReaperMissiles:
 	BurstDelays: 4
 	Range: 5153
 	ValidTargets: Ground, Water
-	Report: rketinf1.aud
+	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -630,6 +636,14 @@ CabalHunterKillerHeavyLaser:
 	Report: obelcor3.aud
 	ReloadDelay: 26
 	Range: 6170
+	Projectile: LaserZap
+		Width: 77
+		ZOffset: 2047
+		Color: 5522CCD0
+		SecondaryBeam: true
+		SecondaryBeamWidth: 35
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: AA88FFF0
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 20000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
@@ -637,9 +651,17 @@ CabalHunterKillerHeavyLaser:
 
 CabalSpiderLaser:
 	Inherits: ^LaserWeapon
-	Report: obelray1.aud
+	Report: obelmod1.aud
 	ReloadDelay: 90
 	Range: 6147
+	Projectile: LaserZap
+		Width: 88
+		ZOffset: 2047
+		Color: 7722EEE8
+		SecondaryBeam: true
+		SecondaryBeamWidth: 40
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: CCB0FFFF
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 44000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
@@ -694,7 +716,7 @@ CabalDissolverSpray:
 CabalCommandoPlasma:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
-	Report: obelmod1.aud
+	Report: obelcor3.aud
 	ReloadDelay: 50
 	Range: 5219
 	Warhead@MediumCannon: SpreadDamage
@@ -709,7 +731,7 @@ CabalCommandoPlasma:
 CabalCommandoPlasmaMk2:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
-	Report: obelmod1.aud
+	Report: obelcor3.aud
 	ReloadDelay: 40
 	Range: 6264
 	Warhead@MediumCannon: SpreadDamage
@@ -726,6 +748,14 @@ CabalCoreDefenderLaser:
 	Report: corefir1.aud
 	ReloadDelay: 70
 	Range: 6332
+	Projectile: LaserZap
+		Width: 92
+		ZOffset: 2047
+		Color: 7722EEE8
+		SecondaryBeam: true
+		SecondaryBeamWidth: 41
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: CCB0FFFF
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 160000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
@@ -745,13 +775,13 @@ CabalMantisGun:
 	Report: lastur1.aud
 	Range: 7082
 	Projectile: LaserZap
-		Width: 60
+		Width: 71
 		ZOffset: 2047
-		Color: 1122FFCC
+		Color: 3322AAC0
 		SecondaryBeam: true
-		SecondaryBeamWidth: 20
+		SecondaryBeamWidth: 32
 		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: 55FFFFF0
+		SecondaryBeamColor: 8866EEE8
 	Warhead@SmallArms: SpreadDamage
 		Damage: 6000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
@@ -886,13 +916,13 @@ CabalManticoreLaser:
 	Range: 5358
 	Report: lastur1.aud
 	Projectile: LaserZap
-		Width: 30
+		Width: 72
 		ZOffset: 2047
-		Color: 1122FFCC
+		Color: 3322AAC0
 		SecondaryBeam: true
-		SecondaryBeamWidth: 12
+		SecondaryBeamWidth: 32
 		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: 55FFFFF0
+		SecondaryBeamColor: 8866EEE8
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 8000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage

@@ -185,7 +185,7 @@ ts_gdi_riottrooper:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 45
-		Prerequisites: ~ts_gdi_barracks, ts_gdi_empulsecannon, ts_gdi_radar
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_radar
 		Queue: Infantry, RAInfantry
 		Description: Heavy infantry. Effective vs Infantry.
 	Mobile:

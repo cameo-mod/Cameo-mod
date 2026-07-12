@@ -189,6 +189,32 @@ CABAL Dissolver lost its `tsdissolvereffect` spray this way in the Batch
 2a rebuild. Always carry the old `Projectile:` block over (or restore it
 from git) when replacing a unit's signature weapon.
 
+**Laser beams — two colours, scaled by damage (design 2026-07-13).**
+Every `LaserZap`/beam weapon uses **two colours**: a `Color` (outer beam)
+and a `SecondaryBeam` (`SecondaryBeamColor`, inner core). Never a single
+thin line. **Both the beam width AND the colours scale with the weapon's
+damage** — a bigger-damage beam is thicker and reads as more dangerous
+(brighter/hotter core, deeper outer). Rough CABAL ladder: turret-class
+lasers `Width ~18–24` / secondary `~8–12`; heavy single-shot lasers
+(Core Defender) thicker still, but even the heaviest keeps scaling rather
+than maxing out. **CABAL beams are a mix of purple + dark blue** (e.g.
+outer `~6622CCCC`, inner `~9977FFEE`) — never too thin. Dual-beam units
+(Manticore) must **spread the two beam offsets apart** so the pair reads
+as two beams, not one. Pair every beam with a colour-matched impact
+effect (3 damage-scaled ground-impact levels for CABAL lasers) + a sound.
+
+**Obelisk / laser sound map (design 2026-07-13).** The three obelisk
+reports are NOT interchangeable:
+- **`obelmod1.aud`** = Tiberian **Sun** obelisk — the Obelisk of Light,
+  the Obelisk of Darkness, and the CABAL Obelisk building weapon, and the
+  Laser Spider.
+- **`obelcor3.aud`** = the Core Defender's weapon; also DarkObeliskLaser
+  and both Commando plasma weapons (do not change these).
+- **`obelray1.aud`** = Tiberian **Dawn** obelisk — **NOT allowed on any
+  TS unit** unless explicitly specified. A weapon that only
+  `Inherits: ^LaserWeapon` is using this TD version; override it for TS.
+- Smaller/turret lasers use the laser-turret report **`lastur1.aud`**.
+
 **TS rocket projectiles — launch straight up (design 2026-07-11,
 replicating Shattered Paradise).** Tiberian-Sun-style rockets fire
 near-vertically then home down onto the target. On the `Missile`
@@ -328,6 +354,22 @@ cheapest provider wins).
     effect (shield-impact sound), present in the class templates.
   - The HeavyBomb template's two effects are the last sanctioned case.
   Rename anything outside this set to the matching surface name.
+- **Effect + sound are always defined TOGETHER (design 2026-07-13).**
+  A weapon with a bespoke impact/projectile effect must ALSO define its
+  own `Report`/`ImpactSounds` — never leave either the effect or the
+  sound to fall back to the class template's default. Falling back makes
+  two different weapons look/sound identical and erodes each faction's
+  identity; the goal is for every weapon (and especially every NEW impact
+  animation) to be as unique as possible. When authoring a new effect,
+  author (or assign a unique existing) sound in the same pass. Prefer new
+  custom audio; cross-check Shattered Paradise for a fitting reference;
+  only reuse a generic template sound as a last resort, and flag it.
+- **Effect frame-fit check (design 2026-07-13).** An expanding effect
+  drawn larger than its frame is clipped to a hard square in game
+  (`cabal_dissolveimpact` v1 did this). Size radii/sigmas to fit, clamp
+  each gaussian centre so `2.5*sigma` stays within a margin of the edge,
+  and ASSERT the 2px border alpha is 0 on every frame. Render the preview
+  with the frame border drawn (a red box) and Read it before committing.
 
 ## 9. Operating rules for agents
 

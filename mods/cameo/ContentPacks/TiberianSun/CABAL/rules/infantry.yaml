@@ -266,7 +266,7 @@ cabal_devout:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
-		LocalOffset: 128,-64,256, 128,64,256
+		LocalOffset: 128,-128,256, 128,128,256
 	# 	RequiresCondition: !cabal_upgrade_darkarmament
 	# Armament@Upgraded:
 	# 	Weapon: TSDevoutChaingunsUpgraded
@@ -358,7 +358,7 @@ cabal_ascended:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
-		LocalOffset: 128,-64,256, 128,64,256
+		LocalOffset: 128,-128,256, 128,128,256
 	# 	RequiresCondition: !cabal_upgrade_darkarmament
 	# Armament@Upgraded:
 	# 	Weapon: CabalAscendedRocketsUpgraded
@@ -729,10 +729,10 @@ cabal_coredefender:
 		Range: 6c0
 	Armament:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1150,-750,1150, 1300,750,1300
+		LocalOffset: 1300,-750,1600, 1300,750,1600
 	Armament@LASER3:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1150,750,1150, 1300,-750,1300
+		LocalOffset: 1300,750,1600, 1300,-750,1600
 	AttackFrontal:
 		FacingTolerance: 12
 	Voiced:
