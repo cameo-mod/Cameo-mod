@@ -134,11 +134,12 @@ def main() -> int:
             if rgba.shape[:2] != domain.shape:
                 raise ValueError(f"{template}: water mask geometry differs")
             raw_water = domain & (rgba[:, :, 3] > 0)
-        elif template.startswith("f"):
-            raw_water = extended_ford_water(donor, donor_rgb, domain)
+            water = lava_donor.clean_water_mask(raw_water, domain)
         else:
             raw_water = domain & np.isin(donor, list(water_indices))
-        water = lava_donor.clean_water_mask(raw_water, domain)
+            # Automatic masks obey the authoritative Temperate water-index set
+            # exactly. Do not grow into chromatically similar ground pixels.
+            water = raw_water.copy()
         water = remove_small_components(water, minimum_pixels=48)
         if template.startswith("f"):
             water = remove_ford_liquid_edge_spots(water, domain)
