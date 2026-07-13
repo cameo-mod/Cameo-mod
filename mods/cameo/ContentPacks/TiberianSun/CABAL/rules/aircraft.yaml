@@ -1,6 +1,6 @@
 cabal_overkillcarryall:
 	Inherits: ^Helicopter
-	Inherits@Template: ^HelicopterTemplate
+	Inherits@Template: ^UnarmedTransportHelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos

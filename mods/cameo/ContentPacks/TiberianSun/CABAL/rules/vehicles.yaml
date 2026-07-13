@@ -530,9 +530,9 @@ cabal_tarantula:
 
 cabal_scarabapc:
 	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
-	Inherits@cargo: ^CargoVehicle
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:

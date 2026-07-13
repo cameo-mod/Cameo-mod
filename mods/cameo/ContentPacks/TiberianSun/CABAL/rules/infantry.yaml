@@ -2,7 +2,7 @@ cabal_engineer:
 	Inherits: ^Soldier
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@anim: ^TSInfantry
-	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@Template: ^MechanicTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -749,7 +749,7 @@ cabal_cyborgcommandov2:
 
 cabal_eliminator800:
 	Inherits: ^Soldier
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
