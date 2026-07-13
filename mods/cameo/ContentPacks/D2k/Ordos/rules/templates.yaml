@@ -55,21 +55,21 @@
 		Condition: up_laserguns.ordos
 		Prerequisites: up_laserguns.ordos
 
-^Ordos_ArmorPiercing:
-	GrantConditionOnPrerequisite@up_armorpiercing.ordos:
-		Condition: up_armorpiercing.ordos
-		Prerequisites: up_armorpiercing.ordos
-	FirepowerMultiplier@up_armorpiercing.ordos:
+^Ordos_RapidFireArmorPiercingBelts:
+	GrantConditionOnPrerequisite@up_rapidfirearmorpiercingbelts.ordos:
+		Condition: up_rapidfirearmorpiercingbelts.ordos
+		Prerequisites: up_rapidfirearmorpiercingbelts.ordos
+	FirepowerMultiplier@up_rapidfirearmorpiercingbelts.ordos:
 		Modifier: 110
-		RequiresCondition: up_armorpiercing.ordos
-	ReloadDelayMultiplier@up_armorpiercing.ordos:
+		RequiresCondition: up_rapidfirearmorpiercingbelts.ordos
+	ReloadDelayMultiplier@up_rapidfirearmorpiercingbelts.ordos:
 		Modifier: 90
-		RequiresCondition: up_armorpiercing.ordos
-	RangeMultiplier@up_armorpiercing.ordos:
+		RequiresCondition: up_rapidfirearmorpiercingbelts.ordos
+	RangeMultiplier@up_rapidfirearmorpiercingbelts.ordos:
 		Modifier: 105
-		RequiresCondition: up_armorpiercing.ordos
+		RequiresCondition: up_rapidfirearmorpiercingbelts.ordos
 	ActorStatValues:
-		Upgrades: up_armorpiercing.ordos
+		Upgrades: up_rapidfirearmorpiercingbelts.ordos
 
 ^Ordos_HoverDrive:
 	DamageMultiplier@up_hoverdrive.ordos:

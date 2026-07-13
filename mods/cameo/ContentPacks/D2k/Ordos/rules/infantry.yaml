@@ -47,6 +47,104 @@ aatrooper.ordos:
 	ActorStatValues:
 		Upgrades: up_toxin.ordos, up_contraband.ordos
 
+ordos_lightinfantry:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^ScoutInfantryTemplate
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Inherits@LaserGuns: ^Ordos_LaserGuns
+	Tooltip:
+		Name: Ordos Light Infantry
+	Valued:
+		Cost: 150
+	Buildable:
+		BuildPaletteOrder: 10
+		Queue: Infantry, RAInfantry
+		Description: actor_ordos_lightinfantry.description
+		IconPalette: d2kunit
+		Prerequisites: ~d2k_barracks.ordos
+	Health:
+		HP: 18000
+	ChangesHealth@SelfHealing:
+		Step: 18
+	Mobile:
+		Speed: 52
+	Armament@PRIMARY: ##########
+		Weapon: LMG
+		LocalOffset: 128,0,256
+		RequiresCondition: !up_laserguns.ordos
+	Armament@Upgrade: ##########
+		Weapon: LMG_ordos_upgrade
+		LocalOffset: 128,0,256
+		RequiresCondition: up_laserguns.ordos
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: LMG
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: !up_laserguns.ordos
+	Armament@UpgradeGARRISONED: ##########
+		Name: garrisoned
+		Weapon: LMG_ordos_upgrade
+		MuzzleSequence: garrison-muzzle
+		MuzzlePalette: d2keffect
+		RequiresCondition: up_laserguns.ordos
+	WithInfantryBody:
+		IdleSequences: idle1,idle2,idle3,idle4
+		DefaultAttackSequence: shoot
+	Parachutable:
+	RenderSprites:
+		Image: light_inf
+	ActorStatValues:
+		Upgrades: up_toxin.ordos, up_contraband.ordos, up_laserguns.ordos
+
+ordos_rockettrooper:
+	Inherits: ^D2KInfantry
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@anim: ^D2KPaletteRenderInfantry
+	Inherits@exp: ^GainsExperienceRA
+	Inherits@AntiVeh: ^PrioritizeVehicle
+	Inherits@BiologicalWarfareUpgradeOrdos: ^BiologicalWarfareUpgradeOrdos
+	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
+	Buildable:
+		Queue: Infantry, RAInfantry
+		BuildPaletteOrder: 20
+		Prerequisites: ~d2k_barracks.ordos, ~!up_aatrooper.ordos
+		Description: actor_ordos_rockettrooper.description
+		IconPalette: d2kunit
+	Valued:
+		Cost: 300
+	Tooltip:
+		Name: Ordos Rocket Trooper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 12000
+	ChangesHealth@SelfHealing:
+		Step: 12
+	Mobile:
+		Speed: 48
+	Armament:
+		Weapon: D2K_Rocket_Trooper
+		LocalOffset: 128,0,256
+	Armament@garrisoned:
+		Name: garrisoned
+		Weapon: D2K_Rocket_Trooper
+	TakeCover:
+		ProneOffset: 320,0,-128
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+	RenderSprites:
+		Image: trooper
+	ActorStatValues:
+		Upgrades: up_toxin.ordos, up_contraband.ordos
+
 chem_troop.ordos:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^HeavyInfantryTemplate

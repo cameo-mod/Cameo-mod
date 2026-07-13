@@ -23,7 +23,7 @@ light_inf:
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_barracks
+		Prerequisites: ~d2k_barracks, ~!faction.ordos, ~!faction.ixian
 	Health:
 		HP: 18000
 	ChangesHealth@SelfHealing:
@@ -75,7 +75,7 @@ trooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks, ~!up_aatrooper.ordos, ~!up_twin_rocket_trooper.ixian
+		Prerequisites: ~d2k_barracks, ~!up_aatrooper.ordos, ~!up_twin_rocket_trooper.ixian, ~!faction.ordos, ~!faction.ixian
 		Description: template_antitank_antiair_infantry.description
 		IconPalette: d2kunit
 	Valued:

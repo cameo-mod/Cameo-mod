@@ -539,7 +539,7 @@ autogun_turret.ordos:
 	Inherits@AntiAir: ^PrioritizeAir
 	Inherits@gat: ^GatlingSpeedUpTurretBehavior
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
-	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
+	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
 	Tooltip:
 		Name: Autogun Turret
 	Valued:
@@ -596,7 +596,7 @@ autogun_turret.ordos:
 	DetectCloaked:
 		Range: 3855
 	ActorStatValues:
-		Upgrades: up_contraband.ordos, up_armorpiercing.ordos
+		Upgrades: up_contraband.ordos, up_rapidfirearmorpiercingbelts.ordos
 
 # flame_turret:
 # 	Inherits: medium_gun_turret.ixian

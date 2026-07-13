@@ -53,7 +53,7 @@ apc.ordos:
 	Voiced:
 		VoiceSet: EBFDOAPC
 	Cargo:
-		InitialUnits: light_inf, light_inf, light_inf, light_inf, trooper, trooper, aatrooper.ordos, aatrooper.ordos
+		InitialUnits: ordos_lightinfantry, ordos_lightinfantry, ordos_lightinfantry, ordos_lightinfantry, ordos_rockettrooper, ordos_rockettrooper, aatrooper.ordos, aatrooper.ordos
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 	RenderSprites:
@@ -118,7 +118,7 @@ tleilax_labcrawl.ordos:
 	Voiced:
 		VoiceSet: EBFDOAPC
 	Cargo:
-		InitialUnits: contaminator.ordos, contaminator.ordos, chem_troop.ordos, chem_troop.ordos, mortar.ordos, mortar.ordos, aatrooper.ordos, aatrooper.ordos, trooper, trooper
+		InitialUnits: contaminator.ordos, contaminator.ordos, chem_troop.ordos, chem_troop.ordos, mortar.ordos, mortar.ordos, aatrooper.ordos, aatrooper.ordos, ordos_rockettrooper, ordos_rockettrooper
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 	RenderSprites:
@@ -1480,7 +1480,7 @@ stealth_raider.ordos:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
-		InitialUnits: light_inf, chem_troop.ordos, trooper, aatrooper.ordos
+		InitialUnits: ordos_lightinfantry, chem_troop.ordos, ordos_rockettrooper, aatrooper.ordos
 		LoadingCondition: notmobile
 	ActorStatValues:
 		Upgrades: up_laserguns.ordos
@@ -1749,7 +1749,7 @@ autogun_tank_small.ordos:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
-	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
+	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
 	Tooltip:
 		Name: Combat Autogun Tank
 	Valued:
@@ -1793,7 +1793,7 @@ autogun_tank_small.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_armorpiercing.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_rapidfirearmorpiercingbelts.ordos
 
 autogun_tank.ordos:
 	Inherits@D2KT: ^D2KTank
@@ -1805,7 +1805,7 @@ autogun_tank.ordos:
 	Inherits@gat: ^GatlingSpeedUpUnitBehavior
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
-	Inherits@ArmorPiercing: ^Ordos_ArmorPiercing
+	Inherits@RapidFireArmorPiercingBelts: ^Ordos_RapidFireArmorPiercingBelts
 	Tooltip:
 		Name: Heavy Autogun Tank
 	Valued:
@@ -1854,7 +1854,7 @@ autogun_tank.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_armorpiercing.ordos
+		Upgrades: up_shield.ordos, up_contraband.ordos, up_rapidfirearmorpiercingbelts.ordos
 
 combat_tank_stealth.ordos:
 	Inherits@D2KT: ^D2KTank

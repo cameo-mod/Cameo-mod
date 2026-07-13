@@ -1293,3 +1293,32 @@ d2kCarryallChainGun_upgrade:
 		Damage: 2000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 1
+
+LMG_ordos_upgrade:
+	Inherits: ^LaserWeapon
+	Inherits@2: LMG
+	Report: LaserTankAttack.wav
+	-Projectile:
+	Projectile: LaserZap
+		Width: 40
+		ZOffset: 2047
+		Color: 00ffbb
+	ValidTargets: Ground, Water, Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@SmallArms: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 1

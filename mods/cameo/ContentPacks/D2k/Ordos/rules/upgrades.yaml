@@ -22,7 +22,7 @@ up_aatrooper.ordos:
 		Name: Anti Air Trooper Upgrade
 	Buildable:
 		Queue: Upgrades
-		Description: Upgrades the Rocket Trooper to the Anti Air Trooper
+		Description: upgrade_ordos_aatrooper.description
 		Prerequisites: ~outpost.ordos, !up_aatrooper.ordos
 	RenderSprites:
 		Image: aatrooper.ordos
@@ -108,16 +108,16 @@ up_laserguns.ordos:
 	RenderSprites:
 		Image: up_laserguns.ordos
 
-up_armorpiercing.ordos:
+up_rapidfirearmorpiercingbelts.ordos:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Rapid Fire Armor-Piercing Belts
 	Buildable:
 		Queue: Research
-		Description: Autoguns gain +10% firepower and 10% higher rate of fire and 5% higher range.
-		Prerequisites: ~research_centre.ordos, !up_armorpiercing.ordos
+		Description: upgrade_ordos_rapidfirearmorpiercingbelts.description
+		Prerequisites: ~research_centre.ordos, !up_rapidfirearmorpiercingbelts.ordos
 	RenderSprites:
-		Image: up_armorpiercing.ordos
+		Image: up_rapidfirearmorpiercingbelts.ordos
 
 up_hoverdrive.ordos:
 	Inherits: ^tech_upgrade_template
