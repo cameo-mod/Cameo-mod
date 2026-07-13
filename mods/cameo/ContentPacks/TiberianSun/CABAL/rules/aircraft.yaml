@@ -69,7 +69,7 @@ cabal_hunterkillermk1:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_helipad
+		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
 		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Aircraft:
@@ -132,7 +132,7 @@ cabal_hunterkillermk2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_helipad, cabal_techcenter
+		Prerequisites: ~cabal_helipad, cabal_techcenter, !cabal_promotion_hunterkillermk2omega
 		Queue: Aircraft, RAAircraft
 		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Aircraft:
@@ -201,7 +201,7 @@ cabal_wasp:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 5
-		Prerequisites: ~cabal_cyborgfactory, cabal_radar
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_waspstriker
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_wasp.description
 	Aircraft:
@@ -282,7 +282,7 @@ cabal_mothership:
 		Name: Mothership
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_helipad, cabal_core
+		Prerequisites: ~cabal_helipad, cabal_core, !cabal_promotion_mothershipomega
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_mothership.description
 	Health:

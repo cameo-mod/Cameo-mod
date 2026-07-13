@@ -130,7 +130,7 @@ cabal_cyborgreaper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
-		Prerequisites: ~cabal_cyborgfactory
+		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_heavyreaper
 		Description: actor_cabal_cyborgreaper.description
 	Health:
 		HP: 70000
@@ -244,7 +244,7 @@ cabal_laserspider:
 		Name: Laser Spider
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_mechfactory
+		Prerequisites: ~cabal_mechfactory, !cabal_promotion_spidercnc4
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_laserspider.description
 	Mobile:
@@ -714,7 +714,7 @@ cabal_avatar:
 		Name: Avatar
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_mechfactory, cabal_techcenter
+		Prerequisites: ~cabal_mechfactory, cabal_techcenter, !cabal_promotion_widow
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_avatar.description
 	Mobile:
@@ -759,7 +759,7 @@ cabal_legion:
 		Name: Legion
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~cabal_mechfactory, cabal_core
+		Prerequisites: ~cabal_mechfactory, cabal_core, !cabal_promotion_coredefender
 		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_legion.description
 	Mobile:

@@ -622,7 +622,7 @@ cabal_cyborgcommando:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, !cabal_promotion_cyborgcommandov2
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor_cabal_cyborgcommando.description
@@ -671,7 +671,7 @@ cabal_cyborgcommandov2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, cabal_promotion_cyborgcommandov2
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor_cabal_cyborgcommandov2.description
@@ -726,7 +726,7 @@ cabal_eliminator800:
 		Name: Eliminator 800
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cabal_cyborgfactory
+		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_t1000
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_eliminator800.description
 	Health:
