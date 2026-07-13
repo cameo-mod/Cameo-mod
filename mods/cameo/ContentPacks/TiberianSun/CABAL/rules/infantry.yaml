@@ -773,7 +773,7 @@ cabal_eliminator800:
 		Name: Eliminator 800
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_t1000
+		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_eliminator800.description
 	Health:

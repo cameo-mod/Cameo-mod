@@ -64,7 +64,7 @@ cabal_hunterkillermk1:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Hunter Killer MK1
+		Name: Hunter Killer
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -127,7 +127,7 @@ cabal_hunterkillermk2:
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Hunter Killer MK2
+		Name: Overkill Fortress
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -272,6 +272,7 @@ cabal_wasp_striker:
 cabal_mothership:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -284,7 +285,6 @@ cabal_mothership:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_helipad, cabal_core
 		Queue: Aircraft, RAAircraft
-		BuildLimit: 1
 		Description: actor_cabal_mothership.description
 	Health:
 		HP: 500000
@@ -321,7 +321,7 @@ cabal_hunterkillermk1_elite:
 	Valued:
 		Cost: 2250
 	Tooltip:
-		Name: Hunter Killer MK1 Elite
+		Name: Super Hunter Killer
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
