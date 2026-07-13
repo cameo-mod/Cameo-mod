@@ -603,13 +603,23 @@ cabal_hackercyborg:
 		Modifier: 125
 
 cabal_cyborgcommando:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@Template: ^HeroInfantryTemplate
-	Inherits: cabal_cyborginfantry
+	Inherits@Cyborg: ^TSCyborgs
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@vo: ^AttackFrontalVoice
 	Inherits@tibheal: ^TibHealable
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Armor:
 		Type: Hero
+		-RequiresCondition:
 	Armor@Secondary:
 		Type: Heavy
 	DamageMultiplier@Secondary:
@@ -628,7 +638,9 @@ cabal_cyborgcommando:
 		Description: actor_cabal_cyborgcommando.description
 	Mobile:
 		TurnSpeed: 12
+		# TurnSpeed: 10
 		Speed: 40
+		PauseOnCondition: disabled
 	Health:
 		HP: 250000
 	ChangesHealth@SelfHealing:
@@ -643,22 +655,44 @@ cabal_cyborgcommando:
 		Weapon: CabalCommandoPlasmaNeutron
 		LocalOffset: 128,0,256
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
 	Voiced:
 		VoiceSet: TSCyborgCommando
+	-TakeCover:
 	Selectable:
 		Class: cabal_cyborgcommando
+	RenderSprites:
+		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
 cabal_cyborgcommandov2:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@Template: ^HeroInfantryTemplate
-	Inherits: cabal_cyborginfantry
+	Inherits@Cyborg: ^TSCyborgs
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@vo: ^AttackFrontalVoice
 	Inherits@tibheal: ^TibHealable
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Armor:
 		Type: Hero
+		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
 	DamageMultiplier@Secondary:
@@ -677,7 +711,9 @@ cabal_cyborgcommandov2:
 		Description: actor_cabal_cyborgcommandov2.description
 	Mobile:
 		TurnSpeed: 12
+		# TurnSpeed: 10
 		Speed: 40
+		PauseOnCondition: disabled
 	Health:
 		HP: 400000
 	ChangesHealth@SelfHealing:
@@ -692,10 +728,21 @@ cabal_cyborgcommandov2:
 		Weapon: CabalCommandoPlasmaMk2Neutron
 		LocalOffset: 128,0,256
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
+	SpeedMultiplier@damaged:
+		Modifier: 50
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
 	Voiced:
 		VoiceSet: TSCyborgCommando
+	-TakeCover:
 	Selectable:
 		Class: cabal_cyborgcommando
+	RenderSprites:
+		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
@@ -846,8 +893,26 @@ cabal_dissolver:
 		VoiceSet: TSCyborg
 
 cabal_t1000:
-	Inherits: cabal_eliminator800
+	Inherits: ^Soldier
+	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@GATLING: ^GatlingSpeedUpUnitBehavior
+	Inherits@EMPfrontal: ^FrontalEMP
+	Inherits@EMP: ^UnitDisable
+	Inherits@EXPERIENCE: ^GainsExperienceRA2
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Armor:
+		Type: Hero
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Light
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -857,18 +922,78 @@ cabal_t1000:
 		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_t1000
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_t1000.description
+	Health:
+		HP: 85000
+	ChangesHealth@SelfHealing:
+		Step: 85
+	Shielded:
+		RegenAmount: 170
 	Mobile:
-		Speed: 40
 		TurnSpeed: 12
-	Armor:
-		Type: Hero
-	Armor@Secondary:
-		Type: Light
-	DamageMultiplier@Secondary:
-		Modifier: 200
+		Speed: 40
+		Voice: Move
+	Guard:
+		Voice: Move
+	Passenger:
+		CustomPipType: red
+		Voice: Move
+	Armament@PRIMARY:
+		Name: primary
+		Weapon: CabalEliminatorGatling
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		LocalOffset: 544,100,256
+	Armament@AA:
+		Name: aa
+		Weapon: CabalEliminatorGatlingAA
+		MuzzleSequence: muzzle
+		MuzzlePalette: d2keffect
+		LocalOffset: 544,100,256
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: RA2DoublePistols
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 0
+	WithInfantryBody:
+		DefaultAttackSequence: shoot
+		StandSequences: stand
+	DetectCloaked:
+		DetectionTypes: Cloak, Hijacker
+	Voiced:
+		VoiceSet: TSE800
+	DeliversCash:
+		Payload: 600
+	GainsExperience:
+		LevelUpNotification: LevelUpRA2
+	ExternalCondition@EMP:
+		TotalCap: 1
+		Condition: empdisable
+	TimedConditionBar@EMP:
+		Condition: empdisable
+		Color: FFFFFF
+	GrantCondition@disable:
+		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
+	WithColoredOverlay@leaflet:
+		RequiresCondition: leaflet || empdisable
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
 	RenderSprites:
 		Image: cabal_eliminator800
 		PlayerPalette: playerra2
+	GrantConditionOnAttack@gatling:
+		ArmamentNames: primary, aa, garrisoned
+		RevokeDelay: 80
+	GrantConditionOnAttack@elitegatling:
+		ArmamentNames: primary, aa, garrisoned
+		RevokeDelay: 80
 
 #######################################
 # TS Aircraft

@@ -670,7 +670,17 @@ cabal_berserker:
 		Image: cabal_berserker
 
 cabal_spidercnc4:
-	Inherits: cabal_laserspider
+	Inherits: ^Vehicle
+	Inherits@Template: ^FireSupportTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EMP: ^FrontalEMP
+	Inherits@AntiInf: ^PrioritizeInfantry
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
 		Cost: 1500
@@ -679,25 +689,108 @@ cabal_spidercnc4:
 	Buildable:
 		BuildPaletteOrder: 11
 		Prerequisites: ~cabal_mechfactory, cabal_promotion_spidercnc4
+		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_spidercnc4.description
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 28
+		Speed: 70
+	Health:
+		HP: 40000
+	Repairable:
+		HpPerStep: 2000
+	ChangesHealth@SelfHealing:
+		Step: 16
+	Armament@PRIMARY:
+		Weapon: CabalSpiderLaser
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 512
+	Voiced:
+		VoiceSet: TSCobra
+	DeliversCash:
+		Payload: 250
 	RenderSprites:
 		Image: cabal_laserspider
 		PlayerPalette: player_rgba
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	DeathSounds:
 
 cabal_heavyreaper:
-	Inherits: cabal_cyborgreaper
+	Inherits: ^Walker
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@MC: ^MCImmune
+	Inherits@HackableRobot: ^HackableRobot
+	Inherits@EMP: ^FrontalEMP
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@snipe: ^DriverKillAndNeutronImmune
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Armor:
+		Type: Medium #Wood
 	Valued:
 		Cost: 1650
 	Tooltip:
 		Name: Heavy Reaper
 	Buildable:
+		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 12
 		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_heavyreaper
 		Description: actor_cabal_heavyreaper.description
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 28
+	Mobile:
+		TurnSpeed: 26
+		Speed: 65
+	Armament:
+		Weapon: CabalReaperMissiles
+		LocalOffset: 128,-200,350, 128,200,350
+	Armament@AA:
+		Weapon: CabalReaperMissilesAA
+	Armament@TRAP:
+		Weapon: TSReaperTrap
+	Voiced:
+		VoiceSet: TSReaper
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	WithDeathAnimation:
+		UseDeathTypeSuffix: false
+	DeathSounds:
+	AttackMove:
+		Voice: Attack
+	AttackFrontal:
+		Voice: Attack
+		FacingTolerance: 0
+	Selectable:
+		DecorationBounds: 1280, 1280, 0, -128
+		Class: cabal_cyborgreaper
+	Capturable:
+		Types: thiefproof
+	ChangesHealth:
+		Step: 30
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
 	RenderSprites:
 		Image: cabal_cyborgreaper
 		PlayerPalette: player_rgba
+	WithDeathAnimation:
+		DeathSequencePalette: ra2player
+		CrushedSequencePalette: ra2effect
 
 cabal_avatar:
 	Inherits: ^Vehicle
@@ -732,7 +825,14 @@ cabal_avatar:
 		PlayerPalette: player_rgba
 
 cabal_widow:
-	Inherits: cabal_avatar
+	Inherits: ^Vehicle
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
 		Cost: 3000
@@ -741,7 +841,21 @@ cabal_widow:
 	Buildable:
 		BuildPaletteOrder: 31
 		Prerequisites: ~cabal_mechfactory, cabal_promotion_widow
+		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_widow.description
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 14
+		Speed: 70
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament@PRIMARY:
+		Weapon: CabalRavagerPlasma
+	RenderSprites:
+		Image: cabal_manticore
+		PlayerPalette: player_rgba
 
 cabal_legion:
 	Inherits: ^Vehicle
