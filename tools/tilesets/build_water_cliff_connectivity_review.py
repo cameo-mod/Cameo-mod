@@ -76,8 +76,10 @@ CHAINS = (
     ("Up family: beach -> WaterCliff.U -> beach", ("wc14", "wc09", "wc10", "wc11", "wc12", "wc13", "wc08")),
     ("Right family: beach -> WaterCliff.R -> beach", ("wc15", "wc16", "wc17", "wc18", "wc19", "wc20", "wc21")),
     ("Down family: beach -> WaterCliff.D -> beach", ("wc22", "wc23", "wc24", "wc25", "wc26", "wc27", "wc28")),
-    ("Clockwise turn loop", ("wc29", "wc30", "wc31", "wc32")),
-    ("Counter-clockwise turn loop", ("wc33", "wc34", "wc35", "wc36")),
+    # Straight pieces separate the four corners. Without them, matching corner
+    # anchors share the same origin and a review compositor stacks the sprites.
+    ("Clockwise turn loop", ("wc29", "wc10", "wc30", "wc17", "wc31", "wc24", "wc32", "wc03")),
+    ("Counter-clockwise turn loop", ("wc33", "wc17", "wc36", "wc10", "wc35", "wc03", "wc34", "wc24")),
 )
 
 
@@ -106,6 +108,23 @@ def main() -> int:
         path = out / f"{slug:02d}_{names[0]}_to_{names[-1]}_connectivity.png"
         image.save(path)
         panels.append((label, image))
+
+    clockwise_grid = render_grid(("wc29", "wc30", "wc31", "wc32"), sprites)
+    clockwise_grid.save(out / "07_clockwise_corners_individual.png")
+    panels.append(
+        (
+            "Clockwise corners individually: wc29, wc30, wc31, wc32",
+            clockwise_grid,
+        )
+    )
+    counter_grid = render_grid(("wc33", "wc34", "wc35", "wc36"), sprites)
+    counter_grid.save(out / "08_counter_clockwise_corners_individual.png")
+    panels.append(
+        (
+            "Counter-clockwise corners individually: wc33, wc34, wc35, wc36",
+            counter_grid,
+        )
+    )
 
     standalone = Image.new("RGBA", (TILE * 4, TILE * 2), (0, 0, 0, 0))
     standalone.alpha_composite(sprites["wc37"], (0, 0))
@@ -153,6 +172,29 @@ def render_chain(names: tuple[str, ...], sprites: dict[str, Image.Image]) -> Ima
     canvas = Image.new("RGBA", (max_x - min_x, max_y - min_y), (0, 0, 0, 0))
     for (x, y), name in zip(origins, names):
         canvas.alpha_composite(sprites[name], (x - min_x, y - min_y))
+    return canvas
+
+
+def render_grid(names: tuple[str, ...], sprites: dict[str, Image.Image]) -> Image.Image:
+    cell_width = max(sprites[name].width for name in names)
+    label_height = 18
+    sprite_height = max(sprites[name].height for name in names)
+    cell_height = sprite_height + label_height
+    canvas = Image.new("RGBA", (cell_width * len(names), cell_height), (0, 0, 0, 0))
+    draw = ImageDraw.Draw(canvas)
+    font = ImageFont.load_default()
+    for column, name in enumerate(names):
+        image = sprites[name]
+        x = column * cell_width
+        draw.rectangle((x, 0, x + cell_width - 1, label_height - 1), fill=(*BACKGROUND, 255))
+        draw.text((x + 5, 4), name, fill="white", font=font)
+        canvas.alpha_composite(
+            image,
+            (
+                x + (cell_width - image.width) // 2,
+                label_height + (sprite_height - image.height) // 2,
+            ),
+        )
     return canvas
 
 
