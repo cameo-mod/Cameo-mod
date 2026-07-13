@@ -166,12 +166,14 @@ factions, everything through the balance workbook._
 
 ## Dune factions (D2K) — split + naming + upgrades (P2)
 
-- [ ] **Split dune Light Infantry + Rocket Trooper per faction** (neutral
+- [x] **Split dune Light Infantry + Rocket Trooper per faction** (neutral
   base template → per-faction Ixian/Ordos actors) so upgrades apply
-  separately.
-- [ ] **Ordos Light Infantry gets Laser Cartridges** once it's its own actor.
-- [ ] **Rename Ordos "Armor-Piercing Rounds" → "Rapid Fire Armor-Piercing
-  Belts"** (actor id, template, condition, sequence, icon — full rename).
+  separately (`b180aef36`).
+- [x] **Ordos Light Infantry gets Laser Cartridges** once it's its own actor
+  (`b180aef36`).
+- [x] **Rename Ordos "Armor-Piercing Rounds" → "Rapid Fire Armor-Piercing
+  Belts"** (actor id, template, condition, sequence, icon — full rename)
+  (`b180aef36`).
 - [ ] No-hyphen naming scheme across all dune factions.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
