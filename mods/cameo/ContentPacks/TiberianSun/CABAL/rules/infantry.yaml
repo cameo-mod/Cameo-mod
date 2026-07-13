@@ -618,10 +618,10 @@ cabal_cyborgcommando:
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Armor:
-		Type: Hero
+		Type: Heroic
 		-RequiresCondition:
 	Armor@Secondary:
-		Type: Heavy
+		Type: Superheavy
 	DamageMultiplier@Secondary:
 		Modifier: 200
 	Valued:
@@ -691,7 +691,7 @@ cabal_cyborgcommandov2:
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Armor:
-		Type: Hero
+		Type: Heroic
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
