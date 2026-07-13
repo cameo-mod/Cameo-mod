@@ -119,9 +119,13 @@ factions, everything through the balance workbook._
   damage), applied to ALL laser weapons; each needs a new sound.
 
 ### N6. New CABAL effects + sounds
-- [ ] **New explosion effect for ALL CABAL missiles** (+ new sound).
-- [ ] Laser impact effects (N5) + green plasma impact (N1) each need a
-  paired new sound (DESIGN: effect + sound always defined together).
+- [x] Audio audit: all CABAL weapons have Report + ImpactSounds (via
+  inheritance or direct). Only CabalOverkillDroneLauncher was missing
+  a Report — fixed (`5437d4f63`).
+- [x] Effect-warhead naming: CABAL had 1 violation (CabalBerserkerBlades
+  @3Eff -> @Effect) — fixed (`63c859fde`).
+- [ ] New explosion effect for ALL CABAL missiles (+ new sound) — needs
+  custom art/audio from maintainer.
 - [ ] Plasma-weapon sounds: prefer NEW/unique; cross-check Shattered
   Paradise references. (Cannot synthesize quality .wav here — assign
   unique existing mod sounds and flag any that truly need new custom
@@ -175,11 +179,14 @@ factions, everything through the balance workbook._
 - [x] AI wiring: all CABAL units in UnitsToBuild list with weights.
 
 ### CE (carried). Effect-warhead naming sweep, mod-wide
-- [ ] Beyond CABAL: rename stray `CreateEffect` warheads to the
-  per-surface canonical set (`@Effect` / `@EffectAir` / `@EffectWater` /
-  `@ShieldHitEffect`). NOTE: a child that overrides its template's own
-  effect-warhead name (e.g. `@3Eff` from `^TSCannonEffect`) is CORRECT,
-  not a violation. DESIGN §8.
+- [x] CABAL: 1 violation fixed (CabalBerserkerBlades @3Eff -> @Effect,
+  `63c859fde`). CABAL is fully compliant.
+- [ ] Beyond CABAL: ~998 violations remain across other factions.
+  Rename stray `CreateEffect` warheads to the per-surface canonical
+  set (`@Effect` / `@EffectAir` / `@EffectWater` / `@ShieldHitEffect`).
+  NOTE: a child that overrides its template's own effect-warhead name
+  (e.g. `@3Eff` from `^TSCannonEffect`) is CORRECT, not a violation.
+  DESIGN §8. Large mechanical sweep — batch via script.
 
 ---
 
