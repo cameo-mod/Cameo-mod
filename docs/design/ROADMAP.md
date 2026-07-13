@@ -89,25 +89,33 @@ factions, everything through the balance workbook._
   and it **also counts as an Oil Derrick** (provides that prerequisite /
   captured-tech behavior). It also launches the N2 superweapon.
 
-### N4. Commando plasma weapons (high-impact + warhead combos)
-- [ ] DarkObeliskLaser, CabalCommandoPlasma, CabalCommandoPlasmaMk2: keep
-  **obelcor3.aud** (do NOT change the sound). Make all three **high
-  impact: long ReloadDelay + heavy Damage**.
-- [ ] The **two Commando plasma weapons** get extra large-AoE warheads:
+### N4. Commando plasma weapons + CABAL Obelisk plasma-laser (high-impact + warhead combos)
+- [x] DarkObeliskLaser, CabalCommandoPlasma, CabalCommandoPlasmaMk2: keep
+  **obelcor3.aud** (do NOT change the sound). All three already use **long
+  ReloadDelay + heavy Damage**.
+- [x] The **two Commando plasma weapons** already carry the large-AoE triad:
   base = **Cannon + Flame + Chemical**; on the **neutron-shell upgrade**
-  add **Tesla + Magic + Railgun** warheads.
+  they add **Tesla + Magic + Railgun** warheads.
+- [x] **CABAL Heavy Obelisk** (`TSCABALObeliskLaserFire`) made unique from
+  TS Nod Obelisk: converted to **plasma-laser** = **Laser + Flame + Chemical**
+  with matching percentage twins; removed inherited TS Nod upgrade armament;
+  paired `cabal_laserimpact_l` effect + `obelmod1.aud`/`drtelectro.wav` sound.
+- [x] Warhead audit pass: fixed `CabalMagicNuke`/`TS90mm_bluenuke` effect
+  warhead naming, duplicate `Warhead@1Dam` in `TSCyCannon`, and incorrect
+  `HealthPercentageDamage` twin on `TSHunterKillerLasers`.
 
-### N5. Laser beam visual rework (DESIGN law — see below)
-- [ ] Every CABAL laser: **two beam colors** (inner + outer), a **mix of
+### N5. Laser beam visual rework (DESIGN law — see below) (`6f43f5639`)
+- [x] Every CABAL laser: **two beam colors** (inner + outer), a **mix of
   purple + dark blue**, **not too thin**. Beam **width scales with
   damage** (Mantis + all others currently too thin; Core Defender a touch
   too thick but must still scale). **Color also scales with damage**
   (scale BOTH colors so bigger damage looks more dangerous).
-- [ ] **Laser Spider → obelmod1.aud** (TS Obelisk sound) — FIX from the
+- [x] **Laser Spider → obelmod1.aud** (TS Obelisk sound) — FIX from the
   obelray1.aud I set. Smaller lasers → **laser turret sounds** (lastur1.aud).
-- [ ] **Manticore double laser**: too thin → **spread the two beams out
-  more**; rebalance with **more range + more armor**.
-- [ ] **3 levels of laser ground-impact effect** (purple/blue, scaled by
+- [x] **Manticore double laser**: too thin → **spread the two beams out
+  more**; rebalance with **more range + more armor** (range/armor deferred to
+  balance sheet per DESIGN §3).
+- [x] **3 levels of laser ground-impact effect** (purple/blue, scaled by
   damage), applied to ALL laser weapons; each needs a new sound.
 
 ### N6. New CABAL effects + sounds

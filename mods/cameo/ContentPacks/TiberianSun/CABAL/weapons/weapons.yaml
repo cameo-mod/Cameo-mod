@@ -25,7 +25,7 @@ TS90mm_bluenuke:
 		Damage: 12000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@3Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_micro
 
 TSReaperTrap:
@@ -71,7 +71,7 @@ TSCyCannon:
 			Heavy: 150
 			Concrete: 80
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-	Warhead@1Dam: SpreadDamage
+	Warhead@2Dam: SpreadDamage
 		Spread: 0c384
 		Damage: 3000
 		Versus:
@@ -247,7 +247,9 @@ TSCABALObeliskLaserFire:
 	Range: 10378
 	ReloadDelay: 90
 	Inherits: TSObeliskLaserFire
-	Report: obelcor3.aud
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
+	Report: obelmod1.aud
 	Projectile:
 		Width: 110
 		Duration: 38
@@ -258,8 +260,30 @@ TSCABALObeliskLaserFire:
 		-HitAnim:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 70000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 35
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 70000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 70000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 35000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 70000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 35000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	-Warhead@2Eff:
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 
 TSHunterKillerLasers:
 	Inherits: ^Chaingun
@@ -290,7 +314,7 @@ TSHunterKillerLasers:
 		Damage: 4000
 		ValidTargets: Ground, Air
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 5
+		Damage: 2
 		ValidTargets: Ground, Air
 	Warhead@Effect: CreateEffect
 		Explosions: cabal_laserimpact_s
@@ -1011,8 +1035,11 @@ CabalManticoreLaser:
 
 CabalMagicNuke:
 	Inherits: PulseMissile
-	Warhead@2Eff_impact: CreateEffect
+	-Warhead@2Eff_impact:
+	Warhead@Effect: CreateEffect
 		Explosions: magicnuke
+		ImpactSounds: nukexplo.aud
+		ImpactActors: false
 
 CabalCommandoPlasmaNeutron:
 	Inherits: CabalCommandoPlasma

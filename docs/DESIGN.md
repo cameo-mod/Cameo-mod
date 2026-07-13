@@ -671,6 +671,18 @@ comes LAST; the earlier inherits only contribute their warheads.
   loadout — every `primary` armament not gated behind an upgrade (GDI
   Battle Tank: cannon 8000 + missiles 8000 = sheet 16000).
 
+**Plasma weapons (design 2026-07-13).** A CABAL "plasma" weapon is a
+signature triad: a base weapon class plus a **Fire** warhead and a
+**Chemical** warhead. The base class determines the projectile look and
+report; the flame and chemical warheads add the plasma burn/corrosion
+signature. Examples:
+- **Plasma cannon** = Cannon + Fire + Chemical.
+- **Plasma rocket** = Missile + Fire + Chemical.
+- **Plasma laser** = Laser + Fire + Chemical.
+All class warheads follow the even-spread law (same damage) and carry
+matching percentage twins. The impact effect and sound are authored or
+assigned together and kept unique to the weapon.
+
 **Definition of Done for a formula unit:** stats from the sheet map to
 yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (wdist/1000)→weapon
 `Range` (×1000, written as a plain integer like `5000`), Damage→class
