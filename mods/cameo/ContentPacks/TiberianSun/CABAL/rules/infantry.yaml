@@ -124,7 +124,7 @@ cabal_cyborginfantry:
 
 cabal_ravager:
 	Inherits: ^Soldier
-	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -149,8 +149,8 @@ cabal_ravager:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 15
-		Prerequisites: ~cabal_cyborgfactory
-		Queue: Infantry, RAInfantry
+		Prerequisites: ~cabal_mechfactory
+		Queue: Vehicle, RAVehicle
 		Description: actor_cabal_ravager.description
 	Mobile:
 		TurnSpeed: 12
