@@ -1655,7 +1655,7 @@ PositronGrenade:
 	Range: 5044
 	Report: tvuFir00.aud
 	Projectile: Bullet
-		Image: scdragoonprojectile
+		Image: scsmalldragoonprojectile
 		TrailImage: blue_smokey
 		TrailInterval: 1
 		Speed: 750
@@ -3020,6 +3020,48 @@ SCQUEENSUMMON:
 		Delay: 15
 		ValidTargets: Air, Ground, Water
 
+SCVULTURESUMMON:
+	ReloadDelay: 5
+	Projectile: InstantExplode
+	Warhead@2: SpawnActor
+		Actors: SCSPIDERMINE
+		Range: 5
+		Delay: 5
+		ValidTargets: Air, Ground, Water
+
+# SCSpiderTargeting:
+# 	Inherits: DemoTruckTargeting
+# 	ValidTargets: Infantry, Vehicle
+# 	ReloadDelay: 1
+# 	Range: 4096
+
+SCSpiderEngage:
+	Inherits: DemoTruckTargeting
+	ValidTargets: Infantry, Vehicle
+	ReloadDelay: 1
+	Range: 1536
+
+SCSPIDEREXPLOSION:
+	Inherits: ^MediumChemicalWeapon
+	-Report:
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 80000
+		Spread: 2048
+		Falloff: 100, 25, 0
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 40000
+		Spread: 2048
+		Falloff: 100, 25, 0
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 40
+		Spread: 2048
+		Falloff: 100, 25, 0
+	-Warhead@Effect:
+	Warhead@Effect: CreateEffect
+		Explosions: scsiegetanksiegeexplosion
+		ImpactSounds: ExploLrg.aud
+		ExplosionPalette: greyscale
+
 MedicHeal:
 	Inherits: ^HealingWeapon
 	ReloadDelay: 10
@@ -3237,7 +3279,7 @@ GlaveCanon:
 	Inherits: ^Grenade
 	Inherits: ^RailgunWeapon
 	ReloadDelay: 40
-	Range: 5472
+	Range: 5250
 	Report: tphfi201.wav, tgofi200.wav
 	ValidTargets: Ground, Water
 	Projectile: Missile
@@ -3249,19 +3291,19 @@ GlaveCanon:
 		AllowSnapping: true
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 10000
+		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 5000
+		Damage: 4000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
-		Damage: 5
+		Damage: 4
 	Warhead@RailgunWeapon: SpreadDamage
 		ValidTargets: Ground, Water
-		Damage: 10000
+		Damage: 8000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water
-		Damage: 5
+		Damage: 4
 
 Psi-blades:
 	Inherits: ^SwordWeapon

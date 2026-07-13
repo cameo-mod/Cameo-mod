@@ -514,8 +514,8 @@ rocket_raider.ixian:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: light_inf, light_inf, trooper, trooper, trooper
-		#InitialUnits: light_inf, trooper, shock_infantry.ixian
+		InitialUnits: ixian_lightinfantry, ixian_lightinfantry, ixian_rockettrooper, ixian_rockettrooper, ixian_rockettrooper
+		#InitialUnits: ixian_lightinfantry, ixian_rockettrooper, shock_infantry.ixian
 		LoadingCondition: notmobile
 	WithCargoPipsDecoration:
 		Position: BottomLeft

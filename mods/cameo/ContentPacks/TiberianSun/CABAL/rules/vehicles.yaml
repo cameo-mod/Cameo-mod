@@ -75,6 +75,7 @@ cabal_constructionyard:
 
 cabal_mobileconstructionvehicle:
 	Inherits: ts_gdi_mobileconstructionvehicle
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~cabal_mechfactory, cabal_servicedepot
@@ -103,6 +104,7 @@ cabal_cyborgreaper:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@snipe: ^DriverKillAndNeutronImmune
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Armor:
 		Type: Medium #Wood
 	Valued:
@@ -111,7 +113,7 @@ cabal_cyborgreaper:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
-		Description: Cyborg walker armed with missiles and nets.\n Strong vs vehicles\n Can immobilize infantry
+		Description: actor_cabal_cyborgreaper.description
 	Health:
 		HP: 70000
 	ChangesHealth@SelfHealing:
@@ -121,6 +123,7 @@ cabal_cyborgreaper:
 		Speed: 65
 	Armament:
 		Weapon: CabalReaperMissiles
+		LocalOffset: 128,-200,350, 128,200,350
 	Armament@AA:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
@@ -157,12 +160,12 @@ cabal_cyborgreaper:
 		CrushedSequencePalette: ra2effect
 
 cabal_dissolver:
-	Inherits@CLOAK: ^CloakedVehicle
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EMP: ^TurretEMP
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@HackableRobot: ^HackableRobot
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 725
 	Tooltip:
@@ -170,9 +173,9 @@ cabal_dissolver:
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
-		Description: Anti-Tank Walker\nDissolves mechanical parts to regenerate itself
 		Prerequisites: ~cabal_cyborgfactory
 		IconPalette: ra2
+		Description: actor_cabal_dissolver.description
 	Selectable:
 		Class: cabal_dissolver
 	Mobile:
@@ -214,6 +217,7 @@ cabal_dissolver:
 cabal_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Health:
 		HP: 150000
 	Harvester:
@@ -222,7 +226,7 @@ cabal_tiberiumharvester:
 	Buildable:
 		Prerequisites: ~cabal_mechfactory, cabal_refinery
 		Queue: Vehicle, RAVehicle
-		Description: Harvests Tiberium for processing
+		Description: actor_cabal_tiberiumharvester.description
 	WithVoxelBody:
 	WithDockingAnimation:
 	Voiced:
@@ -257,7 +261,7 @@ cabal_tiberiumharvester:
 
 cabal_laserspider:
 	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -266,6 +270,7 @@ cabal_laserspider:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -274,10 +279,10 @@ cabal_laserspider:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_laserspider.description
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 14
+		TurnSpeed: 28
 		Speed: 70
 	Health:
 		HP: 40000
@@ -292,7 +297,7 @@ cabal_laserspider:
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
-	AttackFollow:
+	AttackFrontal:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
@@ -318,6 +323,7 @@ cabal_mantis:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 875
 	Tooltip:
@@ -326,10 +332,10 @@ cabal_mantis:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
-		Description: Turretless fire support strider with a frontal beam cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+		Description: actor_cabal_mantis.description
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 24
+		TurnSpeed: 48
 		Speed: 120
 	Health:
 		HP: 35000
@@ -344,7 +350,7 @@ cabal_mantis:
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 	WithMuzzleOverlay:
-	AttackFollow:
+	AttackFrontal:
 		FacingTolerance: 512
 	Voiced:
 		VoiceSet: TSCobra
@@ -358,56 +364,6 @@ cabal_mantis:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
 
-	DeathSounds:
-
-cabal_crab:
-	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EMP: ^FrontalEMP
-	Inherits@AntiInf: ^PrioritizeInfantry
-	Inherits@vo: ^AttackFrontalVoice
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Valued:
-		Cost: 675
-	Tooltip:
-		Name: Crab
-	Buildable:
-		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_mechfactory
-		Queue: Vehicle, RAVehicle
-		Description: Assault walker that crushes enemies with its claws.\n  Strong vs Vehicles, Infantry\n  Weak vs Aircraft
-	Mobile:
-		Locomotor: wheeled
-		TurnSpeed: 20
-		Speed: 100
-	Health:
-		HP: 50000
-	Repairable:
-		HpPerStep: 2500
-	ChangesHealth@SelfHealing:
-		Step: 20
-	Armament@PRIMARY:
-		Weapon: CabalCrabClaws
-	Armor:
-		Type: Heavy
-	WithMuzzleOverlay:
-	AttackFollow:
-		FacingTolerance: 512
-	Voiced:
-		VoiceSet: TSCobra
-	DeliversCash:
-		Payload: 250
-	RenderSprites:
-		PlayerPalette: playerra2
-	WithFacingSpriteBody:
-		Sequence: stand
-	WithMoveAnimation:
-		MoveSequence: walk
-		ValidMovementTypes: Horizontal, Turn
 	DeathSounds:
 
 cabal_manticore:
@@ -422,7 +378,7 @@ cabal_manticore:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -431,7 +387,7 @@ cabal_manticore:
 		BuildPaletteOrder: 145
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, ~cabal_promotion_manticore
 		Queue: Infantry, RAInfantry
-		Description: Line-breaker walker armed with heavy rocket batteries and nets.\n  Strong vs Vehicles, Aircraft\n  Can immobilize infantry
+		Description: actor_cabal_manticore.description
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 13
@@ -443,7 +399,8 @@ cabal_manticore:
 	ChangesHealth@SelfHealing:
 		Step: 40
 	Armament@PRIMARY:
-		Weapon: CabalManticoreMissiles
+		Weapon: CabalManticoreLaser
+		LocalOffset: 128,-350,350, 128,350,350
 	Armament@AA:
 		Weapon: CabalManticoreMissilesAA
 	Armament@TRAP:
@@ -478,7 +435,7 @@ cabal_artilleryspider:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -487,7 +444,7 @@ cabal_artilleryspider:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory, cabal_radar
 		Queue: Vehicle, RAVehicle
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_artilleryspider.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 70
@@ -543,7 +500,7 @@ cabal_tarantula:
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@BACKUP: ^cabal_upgrade_backupsystems
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 1000
 	Tooltip:
@@ -552,7 +509,7 @@ cabal_tarantula:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~cabal_mechfactory, cabal_radar
-		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+		Description: actor_cabal_tarantula.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 70
@@ -613,6 +570,7 @@ cabal_scarabapc:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@cargo: ^CargoVehicle
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 2600
 	Tooltip:
@@ -623,7 +581,7 @@ cabal_scarabapc:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_mechfactory, cabal_radar
 		Queue: Vehicle, RAVehicle
-		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
+		Description: actor_cabal_scarabapc.description
 	Mobile:
 		Speed: 75
 		Locomotor: hover
@@ -672,6 +630,7 @@ cabal_eliminator1000:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Selectable:
 		Bounds: 3072, 2560, 0, 0
 	Valued:
@@ -683,9 +642,9 @@ cabal_eliminator1000:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
-		BuildLimit: 1
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		BuildLimit: 1
+		Description: actor_cabal_eliminator1000.description
 	Mobile:
 		Speed: 80
 		PauseOnCondition: disabled

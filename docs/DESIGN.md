@@ -189,6 +189,32 @@ CABAL Dissolver lost its `tsdissolvereffect` spray this way in the Batch
 2a rebuild. Always carry the old `Projectile:` block over (or restore it
 from git) when replacing a unit's signature weapon.
 
+**Laser beams — two colours, scaled by damage (design 2026-07-13).**
+Every `LaserZap`/beam weapon uses **two colours**: a `Color` (outer beam)
+and a `SecondaryBeam` (`SecondaryBeamColor`, inner core). Never a single
+thin line. **Both the beam width AND the colours scale with the weapon's
+damage** — a bigger-damage beam is thicker and reads as more dangerous
+(brighter/hotter core, deeper outer). Rough CABAL ladder: turret-class
+lasers `Width ~18–24` / secondary `~8–12`; heavy single-shot lasers
+(Core Defender) thicker still, but even the heaviest keeps scaling rather
+than maxing out. **CABAL beams are a mix of purple + dark blue** (e.g.
+outer `~6622CCCC`, inner `~9977FFEE`) — never too thin. Dual-beam units
+(Manticore) must **spread the two beam offsets apart** so the pair reads
+as two beams, not one. Pair every beam with a colour-matched impact
+effect (3 damage-scaled ground-impact levels for CABAL lasers) + a sound.
+
+**Obelisk / laser sound map (design 2026-07-13).** The three obelisk
+reports are NOT interchangeable:
+- **`obelmod1.aud`** = Tiberian **Sun** obelisk — the Obelisk of Light,
+  the Obelisk of Darkness, and the CABAL Obelisk building weapon, and the
+  Laser Spider.
+- **`obelcor3.aud`** = the Core Defender's weapon; also DarkObeliskLaser
+  and both Commando plasma weapons (do not change these).
+- **`obelray1.aud`** = Tiberian **Dawn** obelisk — **NOT allowed on any
+  TS unit** unless explicitly specified. A weapon that only
+  `Inherits: ^LaserWeapon` is using this TD version; override it for TS.
+- Smaller/turret lasers use the laser-turret report **`lastur1.aud`**.
+
 **TS rocket projectiles — launch straight up (design 2026-07-11,
 replicating Shattered Paradise).** Tiberian-Sun-style rockets fire
 near-vertically then home down onto the target. On the `Missile`
@@ -306,6 +332,44 @@ cheapest provider wins).
   (`PaletteFromPaletteWithAlpha`) — forcing it onto a non-Dune sprite
   like `blue_smokey` re-tints it (blue → dark green). Use `effect` for
   indexed trails, or an RGBA PngSheet (no palette) for full colour.
+- **Per-frame randomness in animated effects (design 2026-07-12).** A
+  new effect must NOT be identical geometry every frame — the first
+  CABAL rocket trail came out as near-perfect spheres and read as
+  low-quality. Give each frame small random offsets, distortion, and
+  lobe variation (seeded, so it's reproducible) while still expanding
+  and fading over time. Build soft fields with numpy gaussians, not PIL
+  ImageDraw (which replaces pixels), and VERIFY the rendered preview
+  before committing — a blank or bland sprite loads without error.
+- **Effect-warhead naming LAW (design 2026-07-12).** The principle is
+  **ONE `CreateEffect` warhead per impact surface**, named by that
+  surface — because OpenRA overwrites same-named warhead nodes across
+  inheritance, a canonical per-surface name guarantees exactly one
+  effect survives and a weapon can never stack two overlapping impacts
+  on the same surface. The legal names are:
+  - **`Warhead@Effect`** — the ground/default impact (always this name,
+    never `@2Eff`, `@3Eff`, `@DissolveEffect`, …).
+  - **`Warhead@EffectAir`** — only when the weapon can hit air.
+  - **`Warhead@EffectWater`** — only when the weapon can hit water.
+  - **`Warhead@ShieldHitEffect`** — the `ValidTargets: Shielded` hit
+    effect (shield-impact sound), present in the class templates.
+  - The HeavyBomb template's two effects are the last sanctioned case.
+  Rename anything outside this set to the matching surface name.
+- **Effect + sound are always defined TOGETHER (design 2026-07-13).**
+  A weapon with a bespoke impact/projectile effect must ALSO define its
+  own `Report`/`ImpactSounds` — never leave either the effect or the
+  sound to fall back to the class template's default. Falling back makes
+  two different weapons look/sound identical and erodes each faction's
+  identity; the goal is for every weapon (and especially every NEW impact
+  animation) to be as unique as possible. When authoring a new effect,
+  author (or assign a unique existing) sound in the same pass. Prefer new
+  custom audio; cross-check Shattered Paradise for a fitting reference;
+  only reuse a generic template sound as a last resort, and flag it.
+- **Effect frame-fit check (design 2026-07-13).** An expanding effect
+  drawn larger than its frame is clipped to a hard square in game
+  (`cabal_dissolveimpact` v1 did this). Size radii/sigmas to fit, clamp
+  each gaussian centre so `2.5*sigma` stays within a margin of the edge,
+  and ASSERT the 2px border alpha is 0 on every frame. Render the preview
+  with the frame border drawn (a red box) and Read it before committing.
 
 ## 9. Operating rules for agents
 
@@ -606,6 +670,18 @@ comes LAST; the earlier inherits only contribute their warheads.
 - **Multi-weapon units**: the sheet Damage is the SUM over the baseline
   loadout — every `primary` armament not gated behind an upgrade (GDI
   Battle Tank: cannon 8000 + missiles 8000 = sheet 16000).
+
+**Plasma weapons (design 2026-07-13).** A CABAL "plasma" weapon is a
+signature triad: a base weapon class plus a **Fire** warhead and a
+**Chemical** warhead. The base class determines the projectile look and
+report; the flame and chemical warheads add the plasma burn/corrosion
+signature. Examples:
+- **Plasma cannon** = Cannon + Fire + Chemical.
+- **Plasma rocket** = Missile + Fire + Chemical.
+- **Plasma laser** = Laser + Fire + Chemical.
+All class warheads follow the even-spread law (same damage) and carry
+matching percentage twins. The impact effect and sound are authored or
+assigned together and kept unique to the weapon.
 
 **Definition of Done for a formula unit:** stats from the sheet map to
 yaml as HP→`Health.HP`, Speed→`Mobile.Speed`, Range (wdist/1000)→weapon

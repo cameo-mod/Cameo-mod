@@ -1,9 +1,11 @@
 cabal_engineer:
 	Inherits: TSENGINEER
 	Inherits@Cyborg: ^TSCyborgs
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
+		Description: actor_cabal_engineer.description
 	Voiced:
 		VoiceSet: TSCyborg
 	-TemporaryOwnerManager:
@@ -18,6 +20,7 @@ cabal_engineer:
 	Health:
 		HP: 20000
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 	ChangesHealth@SelfHealing:
 		Step: 20
@@ -38,9 +41,10 @@ cabal_engineer:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
+
 cabal_cyborginfantry:
 	Inherits: ^Soldier
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -49,6 +53,7 @@ cabal_cyborginfantry:
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -59,13 +64,12 @@ cabal_cyborginfantry:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_devout
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_cyborginfantry.description
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
+		# TurnSpeed: 10
 		Speed: 50
 		PauseOnCondition: disabled
-	Armor:
-		Type: Flak
 	Health:
 		HP: 45000
 	ChangesHealth@SelfHealing:
@@ -86,12 +90,61 @@ cabal_cyborginfantry:
 	-TakeCover:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
-		Weapon: TSVulcanTower
+		Weapon: CabalCyborgChaingun
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
+
+cabal_ravager:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Ravager
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 15
+		Prerequisites: ~cabal_cyborgfactory
+		Queue: Infantry, RAInfantry
+		Description: actor_cabal_ravager.description
+	Mobile:
+		TurnSpeed: 24
+		Speed: 60
+	Armor:
+		Type: Heavy
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Armament@PRIMARY:
+		Weapon: CabalRavagerPlasma
+		LocalOffset: 128,0,256
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@Upgraded:
+		Weapon: CabalRavagerPlasmaNeutron
+		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	Armament@GARRISONED: ##########
+		Name: garrisoned
+		Weapon: CabalRavagerPlasma
+	Voiced:
+		VoiceSet: TSCobra
+	-TakeCover:
+	RenderSprites:
+		PlayerPalette: playerra2
 
 cabal_rocketcyborg:
 	Inherits: ^Soldier
@@ -108,6 +161,7 @@ cabal_rocketcyborg:
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -115,11 +169,12 @@ cabal_rocketcyborg:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_rocketcyborg.description
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
@@ -186,7 +241,7 @@ cabal_rocketcyborg:
 cabal_devout:
 	Inherits: ^Soldier
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -199,6 +254,7 @@ cabal_devout:
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -209,8 +265,9 @@ cabal_devout:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_devout
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_devout.description
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
@@ -221,12 +278,15 @@ cabal_devout:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
-		LocalOffset: 128,-64,256, 128,64,256
-		RequiresCondition: !cabal_upgrade_darkarmament
-	Armament@Upgraded:
-		Weapon: TSDevoutChaingunsUpgraded
-		LocalOffset: 128,-64,256, 128,64,256
-		RequiresCondition: cabal_upgrade_darkarmament
+		LocalOffset: 128,-256,256, 128,256,256
+	# 	RequiresCondition: !cabal_upgrade_darkarmament
+	# Armament@Upgraded:
+	# 	Weapon: TSDevoutChaingunsUpgraded
+	# 	LocalOffset: 128,-64,256, 128,64,256
+	# 	RequiresCondition: cabal_upgrade_darkarmament
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: TSDevoutChainguns
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -265,9 +325,6 @@ cabal_devout:
 	-TakeCover:
 	Crushable:
 		CrushClasses: vehicle
-	Armament@GARRISONED: ##########
-		Name: garrisoned
-		Weapon: TSVulcanTowerTwin
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
@@ -290,6 +347,7 @@ cabal_ascended:
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -297,11 +355,12 @@ cabal_ascended:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_ascended.description
 	Mobile:
+		TurnSpeed: 20
 		Speed: 50
 		PauseOnCondition: disabled
 	Armor:
@@ -312,12 +371,15 @@ cabal_ascended:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
-		LocalOffset: 0,20,90, 0,-20,90
-		RequiresCondition: !cabal_upgrade_darkarmament
-	Armament@Upgraded:
-		Weapon: CabalAscendedRocketsUpgraded
-		LocalOffset: 0,-20,90, 0,20,90
-		RequiresCondition: cabal_upgrade_darkarmament
+		LocalOffset: 128,-256,256, 128,256,256
+	# 	RequiresCondition: !cabal_upgrade_darkarmament
+	# Armament@Upgraded:
+	# 	Weapon: CabalAscendedRocketsUpgraded
+	# 	LocalOffset: 0,-20,90, 0,20,90
+	# 	RequiresCondition: cabal_upgrade_darkarmament
+	Armament@GARRISONED:
+		Name: garrisoned
+		Weapon: CabalAscendedRockets
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -367,7 +429,7 @@ cabal_ascended:
 
 cabal_hackercyborg:
 	Inherits: ^Soldier
-	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
+	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -380,6 +442,7 @@ cabal_hackercyborg:
 	Inherits@UPLINK: ^cabal_upgrade_neuraluplink
 	Inherits@EMP: ^UnitDisable
 	Inherits@HAND: ^cabal_upgrade_handof
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -387,12 +450,12 @@ cabal_hackercyborg:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 10
+		BuildPaletteOrder: 50
 		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_hackercyborg.description
 	Mobile:
-		TurnSpeed: 16
+		TurnSpeed: 32
 		Speed: 80
 		PauseOnCondition: disabled
 	Armor:
@@ -401,12 +464,20 @@ cabal_hackercyborg:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
-	Armament@PRIMARY:
-		Weapon: TSRobotHackingControl
-		LocalOffset: 0,0,90
-	Armament@Vehicle:
-		Weapon: TSMechanicalHackingControl
-		LocalOffset: 0,0,90
+	Armament@Anim:
+		Weapon: TSCABALempdisable.anim
+		RequiresCondition: end_disable == 0
+		LocalOffset: -128,0,256
+	Armament@End:
+		Weapon: TSCABALempdisable.end
+		RequiresCondition: end_disable >= 1
+		LocalOffset: -128,0,256
+	# Armament@PRIMARY:
+	# 	Weapon: TSRobotHackingControl
+	# 	LocalOffset: 0,0,90
+	# Armament@Vehicle:
+	# 	Weapon: TSMechanicalHackingControl
+	# 	LocalOffset: 0,0,90
 	WithInfantryBody:
 		RequiresCondition: !cydamaged
 		DefaultAttackSequence: attack
@@ -475,6 +546,8 @@ cabal_cyborgcommando:
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -486,9 +559,9 @@ cabal_cyborgcommando:
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+		Description: actor_cabal_cyborgcommando.description
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 	Health:
 		HP: 250000
@@ -497,6 +570,11 @@ cabal_cyborgcommando:
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasma
 		LocalOffset: 128,0,256
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@Upgraded:
+		Weapon: CabalCommandoPlasmaNeutron
+		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -511,6 +589,8 @@ cabal_cyborgcommandov2:
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits: cabal_cyborginfantry
 	Inherits@tibheal: ^TibHealable
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -522,9 +602,9 @@ cabal_cyborgcommandov2:
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+		Description: actor_cabal_cyborgcommandov2.description
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 	Health:
 		HP: 400000
@@ -533,6 +613,11 @@ cabal_cyborgcommandov2:
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasmaMk2
 		LocalOffset: 128,0,256
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@Upgraded:
+		Weapon: CabalCommandoPlasmaMk2Neutron
+		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	Voiced:
 		VoiceSet: TSCyborgCommando
 	Selectable:
@@ -549,11 +634,13 @@ cabal_eliminator800:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@GATLING: ^GatlingSpeedUpUnitBehavior
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -562,11 +649,11 @@ cabal_eliminator800:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+		Description: actor_cabal_eliminator800.description
 	Health:
 		HP: 85000
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 		Voice: Move
 	Guard:
@@ -574,47 +661,17 @@ cabal_eliminator800:
 	Passenger:
 		CustomPipType: red
 		Voice: Move
-	AmmoPool:
-		Ammo: 96
-		AmmoCondition: ammo
-	ReloadAmmoPool:
-		Delay: 15
-		Count: 1
-	Armament@1:
+	Armament@PRIMARY:
+		Name: primary
 		Weapon: CabalEliminatorGatling
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 64
 		LocalOffset: 544,100,256
-	Armament@2:
-		Weapon: RA2GattlingMG2
+	Armament@AA:
+		Name: aa
+		Weapon: CabalEliminatorGatlingAA
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 544,100,256
-	Armament@3:
-		Weapon: RA2GattlingMG3
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo >= 9
-		LocalOffset: 544,100,256
-	Armament@1AA:
-		Weapon: RA2GattlingMG1AA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 64
-		LocalOffset: 544,100,256
-	Armament@2AA:
-		Weapon: RA2GattlingMG2AA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo <= 8 && ammo >= 65
-		LocalOffset: 544,100,256
-	Armament@3AA:
-		Weapon: RA2GattlingMG3AA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		PauseOnCondition: ammo >= 9
 		LocalOffset: 544,100,256
 	Armament@GARRISONED:
 		Name: garrisoned
@@ -654,7 +711,12 @@ cabal_eliminator800:
 		UseDeathTypeSuffix: false
 	RenderSprites:
 		PlayerPalette: playerra2
-
+	GrantConditionOnAttack@gatling:
+		ArmamentNames: primary, aa, garrisoned
+		RevokeDelay: 80
+	GrantConditionOnAttack@elitegatling:
+		ArmamentNames: primary, aa, garrisoned
+		RevokeDelay: 80
 
 #######################################
 # TS Infantry Forgotten
@@ -686,9 +748,9 @@ cabal_coredefender:
 		BuildPaletteOrder: 140
 		BuildLimit: 1
 		Prerequisites: ~cabal_mechfactory, cabal_core
-		Description: Superheavy CABAL epic unit.\n Strong vs ground targets
+		Description: actor_cabal_coredefender.description
 	Mobile:
-		TurnSpeed: 10
+		TurnSpeed: 20
 		Speed: 50
 	Passenger:
 		Weight: 12
@@ -696,10 +758,10 @@ cabal_coredefender:
 		Range: 6c0
 	Armament:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1150,-750,410, 1300,750,510
+		LocalOffset: 1300,-750,1600, 1300,750,1600
 	Armament@LASER3:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1150,750,410, 1300,-750,510
+		LocalOffset: 1300,750,1600, 1300,-750,1600
 	AttackFrontal:
 		FacingTolerance: 12
 	Voiced:

@@ -1,144 +1,245 @@
-# Cameo Roadmap — phased long-term plan (rewritten 2026-07-11 per design order)
+# Cameo Roadmap — detailed work queue (rebuilt 2026-07-13)
 
-_The living work queue. Rule zero: crashes and bugs ALWAYS jump the
-queue. Phases run in order; inside a phase, items are sorted by
-importance then effort (S < 1h, M = one session, L = multi-session).
-Every completed item gets its commit hash; every new order lands here
-first. Current focus ruling: **"Right now we just want to have the
-faction [CABAL] in game with all prerequisites and stats. The effects
-will come after that."**_
+_The living work queue, resumable by any agent. Rule zero: crashes and
+bugs ALWAYS jump the queue. Ordering within a section: **quickest wins
+first, then by severity**. Effort: S < 1h, M = one session, L = multi-
+session. Every completed item gets its commit hash; every new order
+lands here first. Goal: **finish the CABAL faction**, then the dune
+factions, everything through the balance workbook._
 
-## P0 — Crashes / bugs (always first)
+> **Multi-agent repo.** Three contributors touch this tree: the
+> maintainer (AedisToru), **333ggg** (i333ggg@yandex.ru — works Starcraft
+> vultures, TS GDI riot troopers, `cabal.xlsx` rows), and **Devin AI**
+> (leaves a log at `C:\Users\AedisToru\Documents\DevinCameoProject\
+> DEVELOPMENT_LOG.md`). ALWAYS `git add <files>` scoped, never `-A`.
+> Verify others' commits before building on them. Devin's 2026-07-12
+> sound pass (obelcor3/samshot1 fixes) was reviewed and TRUSTED
+> 2026-07-13; keep it. 333ggg's mine commits are self-contained (SC +
+> GDI), unrelated to CABAL.
 
-- [x] Voice-set rename crashes — 29 refs fixed, A4 audit guards the
-  class (`1616a26d2`, root cause of tjk-ws's `fa99c28db`)
-- [x] Pink main-menu text — C#-derived chrome/fluent reverts
-  (`e956d2280`), confirmed in-game 2026-07-11
-- [x] Boot crashes 2026-07-11 (`28ae47612`): cabal_crab junk trait;
-  ts_nod_shadowteam merge mangle; stale DLLs after TakeOffOnMake.
-  LAW since: launch-game.cmd to main menu before EVERY commit
-  (CLAUDE.md commit gate).
+---
 
-## Phase A — CABAL complete in game: prerequisites + stats (NOW, L)
+## P0 — Crashes (always first)
 
-Everything stat/tech-side finished BEFORE any effects work.
+- [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);
+  boot crashes crab-junk/shadowteam/stale-DLL (`28ae47612`). LAW:
+  launch-game.cmd to menu before EVERY commit (CLAUDE.md gate).
 
-- [x] **Reshuffle round 1+2** (2026-07-11): Mantis = fire support
-  875 (SmallArms+Laser mix H=1.0, CABAL blue zap, Manta anchor);
-  Crab = regular fast-tanky melee 675; Rocket Cyborg 650 (single
-  dual-role rocket weapon per the AA law); Ascended 900 = its
-  promotion; Devout 750 = Cyborg Infantry promotion (cnc4-mg row);
-  Manticore 1400 = NEW line-breaker unit via promotion (Advanced
-  Reaper row; missile+grenade+shrapnel mix, Air-only AA at SAME
-  range/class/reload/DPS; keeps the net = its K=1.25); Cyborg Reaper
-  ground missiles Ground-only + grenade/shrapnel mix (support AA keeps
-  1.5× range). Promotions in GDI column layout (left: Devout 1 →
-  Ascended 4; middle: Manticore 5). DUAL-WEAPON AA LAW in DESIGN §3.
-- [ ] **Promotion trees completion** (M) — target layout (design
-  screenshot 2026-07-11; right tree stays empty like TS GDI):
-  left (infantry): Devout 1 → Ascended 4 → T1000 7 → CybCom v2 10;
-  middle (vehicles): Spider CNC4 2 → Manticore 5 → Widow 8 →
-  Core Defender 11. Needs the missing units first (below). Chain
-  middle column once Spider CNC4 exists (Manticore currently
-  chainless at 5).
-- [ ] **Missing units** (M/L, stats from 333ggg rows + annotations):
-  cnc4 Spider (fire support laser, can enter Widow, r33 = 1200),
-  Widow (carrier boosted by ≤4 spiders inside, r34 = 2400),
-  T1000 (replaces T800/eliminator800 via promotion, r9 = 1500),
-  Commando V2 promotion wiring (unit exists), Avatar (r20 = 2250,
-  placeholder art), Core Defender promotion (unit exists, 12500).
-- [ ] **Upgrade suite restructure** per the design table (M):
-  radar tier = Backup Systems (reclaim vehicles from husks),
-  Reclamation Protocol (HP + regen), Neutron Nuclear Catalyst (KEEP
-  the current neutron-shell weapon twins unchanged — design praise —
-  optionally extend to more units); lab tier = Mobility Matrix
-  (walker speed+HP), **Advanced Beam Cannons** (NEW: upgrades
-  defenses/HK mk2/spider/mantis/widow beams; ADDS beams to MG
-  cyborgs, tarantula, spider tank drone, HK mk1), **Proton
-  Dissolution** (NEW: upgrades plasma of commando/T800/T1000/avatar;
-  ADDS plasma to HK mk2, artillery, rocket cyborgs, reapers),
-  Overcharged Servos (attack speed for reapers/avatar/HK mk2/
-  tarantula/artillery/rocket cyborgs/T800:100/commando). Existing
-  upgrades not in the table (dark armament, radar hack, …): ❓ map or
-  retire — ask design.
-- [x] **StartingUnits fix** (2026-07-12): CABAL light/heavy support
-  now spawn cabal_mantis + cabal_tarantula instead of the tsbike/
-  tsttnk Nod placeholders (scout+MBT composition preserved).
-- [ ] **Descriptions pass** (fluent keys) + **AI wiring** (squads,
-  upgrades, promotions) (M).
-- [ ] ❓ open design picks: Artillery Spider tier (333ggg: "maybe
-  T3?"); pillbox flavor (annotation: "tankier but less dps ts laser
-  turret"); Ordos light infantry laser twin (shared d2k trooper —
-  cross-pack condition or Ordos-own actor?); T5-promotion pricing
-  (Cryo Legionaire 3500 @ 0.75).
+---
 
-## Phase B — CABAL effects & art (after A, M/L)
+## CABAL — recently completed (this push)
 
-- SP-recipe projectiles on every CABAL weapon (LaunchAngle, contrail
-  colors/lengths, palettes — behaviour identical to SP, art OUR OWN;
-  docs/design/shattered_paradise_research.md §3 has the recipes;
-  ASSET LAW: nothing taken from SP, TS-base or new art only).
-- New art: plasma ball sprites, smoke-trail sprite if base TS lacks
-  one, Ordos laser upgrade icon (currently reuses the laser tank
-  icon), CABAL promotion icons where units are placeholders.
-- CABAL color identity: dark blue/purple lasers everywhere, Archer
-  cone contrails on artillery, unique impact effects per weapon.
-- Sound pass: recreate SP-like reports from TS-base material.
-- Reaper web upgrade (snared-condition warhead, Zerg Corruptor
-  pattern) as a CABAL research (SP: Improved Reaper Nets).
+- [x] Confident quick fixes: missile arc, HK mk1 blue laser, Core
+  Defender offset, Mantis sound (`87a716b41`).
+- [x] Crab → **Ravager** infantry plasma line-breaker + plasma bullet
+  effect (`e4ac0ce40`, `b31113a6d`). Crab id retired.
+- [x] CABAL weapons get their own firing sounds (`1281a71f5`).
+- [x] Rocket-launcher offsets/counts + Manticore dual laser (`c4691e758`).
+- [x] Mantis + Laser Spider → AttackFrontal fire support (`cc6a290db`).
+- [x] Dissolver: cloak → corrosion (`corroded` cond) + TankDestroyer +
+  LightChemical combo + new `cabal_dissolveimpact` effect (`de25b469d`);
+  effect re-rendered to fit its frame (`45b8f0caa`).
+- [x] Eliminator 800: real `^GatlingSpeedUpUnitBehavior` spin-up (drop
+  the AmmoPool hack), single ground + Air-only twin, dune autogun muzzle
+  @3671 (`33c13a553`).
+- [x] All CABAL infantry: vehicle-style turn rate 2×Speed/5 (`f98bf8155`).
+- [x] Devin sound pass (uncommitted, verified, keep): DarkObeliskLaser /
+  CabalCommandoPlasma / Mk2 → obelcor3.aud; Reaper/TwinBazooka/rocket
+  weapons → samshot1.aud; Core Defender offset raise; magicnuke Tick tune.
+- [x] Effect-naming: CABAL authored weapons already clean. `TS90mm_bluenuke`
+  `@3Eff` is NOT a violation — it overrides `^TSCannonEffect`'s own
+  `@3Eff`. Mod-wide sweep still pending (CE).
 
-## Phase C — Balance & consistency (parallelizable with B)
+---
 
-- [ ] **Infantry offset sweep beyond TS** (S): 15 non-TS infantry
-  armaments still lack `LocalOffset` (DESIGN §3 rule); apply the
-  128,0,256 default. Offenders: contaminator/saboteur/fremen_creep
-  (D2k), samurai/alligator/fedinf/engi.futu/litt/frank/conehead/
-  engi.nax2/mili/ra2terror + hmg/quadflak dummies (RA2Mod). Skip pure
-  Targeting dummies where meaningless.
-- [ ] **TS rocket launch-angle sweep beyond CABAL** (M): apply the
-  vertical-launch + turn-128 recipe (DESIGN §3) to all TS-theme rocket
-  weapons (Nod/GDI/Forgotten), each needing its turn rate checked so
-  it doesn't overshoot close targets like the Guardian GI did.
+## CABAL — new orders 2026-07-13 (the big batch)
 
-- [x] FutureTech re-pricing per sheet, T3 = 0.75 confirmed; epics
-  L=0.3 / M=1.0 (DESIGN §12). Queued sheet-cell edits (Excel was
-  open): Tanks!M47=0.75,S47=525; M94=1.0,S94=400; M97=1.0,S97=1600;
-  M103=0.5,S103=2400; Vehicles!M162=0.5,S162=400;
-  Aircraft!M51:M52=0.5,S51:S52=900; epic relabel Tanks!L121=0.3,
-  M121=1.0; Harbinger rows flagged (L=1/M=0.75 ≠ epic 0.3).
-- [ ] **Clean workbook** (M): fresh xlsx, rows named EXACTLY like
-  in-game tooltips, stats = formula inputs; port 333ggg's CABAL rows
-  (incl. restated Mantis: L=1 fire support, 875, 12000@40, R 7.082).
-- [ ] Balance normalization passes (165 sheet↔game mismatches, F10/F19
-  turn speeds, F11 firing-slow, 30 non-TS even-spread violations,
-  CABAL selfheal step grid) (L).
-- [ ] F22 findings other factions: Consortium up_cruiser, Syndicate
-  up_burrito/up_lars/up_topol, TS GDI unlockkodiak (S each).
-- [ ] FutureTech follow-ups: rename pass (.futu → futuretech_) +
-  fluent descriptions (ordered); StartingUnits fix; F22 refinement (M).
-- [ ] Soviet units: Gorynych + Stalin Fist (M); Hacker/Ixian Projector
-  rework (M/L); neutron shells reload clarification (S).
+### N1. Green-plasma / neutron-shell gating (`7a0d0025d`)
+- [x] New art: `cabal_greenplasma.png` (weak green plasma projectile) +
+  `cabal_greenplasmaimpact.png` (green impact burst), both border-safe
+  RGBA PngSheets.
+- [x] **Neutron-shell gates every magicnuke weapon.** Non-upgraded
+  (`!cabal_upgrade_neutronnuclearcatalyst`) = green plasma projectile +
+  green impact; upgraded = the blue magicnuke. Pattern already on
+  Artillery Spider + Tarantula (basic armament `!cond`, `Armament@Upgraded`
+  `cond`); extend the same split to Cyborg Commando, Commando Mk2, and
+  the Ravager. Consider updating the upgrade description (it now empowers
+  the whole plasma line, not just Artillery+Tarantula).
+- [x] **Magicnuke sizes scaled to power, all 4 used** (`magicnuke_micro`
+  0.2 < `_small` 0.25 < `_med` 0.5 < `magicnuke` 1.0):
+  - micro → TS90mm_bluenuke (~12k)
+  - small → TS120mm_bluenuke (Tarantula, ~24k), CabalRavagerPlasma (~32k)
+  - med   → Commando plasma (~50k), TS155mm_bluenuke (Artillery, ~60k)
+  - **magicnuke (biggest) → the new CABAL superweapon ONLY** (below).
+
+### N2. CABAL superweapon (biggest magicnuke) (`1f8b58820`)
+- [x] New nuke support power, **same values as the Ixian EMP Nuke**
+  (`supercomputer.ixian` `NukePowerCA` firing `PulseMissile`:
+  ChargeInterval 10500, MissileWeapons PulseMissile, MissileDelay 25,
+  CameraRange/CircleRanges 10000, etc.) but with the **biggest magicnuke**
+  as the missile/impact animation (+ a new sound, see S-rules).
+- [x] **Fired from the CABAL Core**, using **TD Nod Temple of Nod logic**,
+  **plus an add-on that adds the missile silo**. (Find the Temple-of-Nod
+  NukePower pattern; the "add-on = missile silo" is a prerequisite
+  building/attachment that unlocks or houses the silo.)
+
+### N3. CABAL Core = money structure (`7a0d0025d`)
+- [x] Turn the CABAL Core into a **special money-generator structure like
+  the Asian Military Academy**: **double the income of the Oil Derrick**,
+  and it **also counts as an Oil Derrick** (provides that prerequisite /
+  captured-tech behavior). It also launches the N2 superweapon.
+
+### N4. Commando plasma weapons + CABAL Obelisk plasma-laser (high-impact + warhead combos)
+- [x] DarkObeliskLaser, CabalCommandoPlasma, CabalCommandoPlasmaMk2: keep
+  **obelcor3.aud** (do NOT change the sound). All three already use **long
+  ReloadDelay + heavy Damage**.
+- [x] The **two Commando plasma weapons** already carry the large-AoE triad:
+  base = **Cannon + Flame + Chemical**; on the **neutron-shell upgrade**
+  they add **Tesla + Magic + Railgun** warheads.
+- [x] **CABAL Heavy Obelisk** (`TSCABALObeliskLaserFire`) made unique from
+  TS Nod Obelisk: converted to **plasma-laser** = **Laser + Flame + Chemical**
+  with matching percentage twins; removed inherited TS Nod upgrade armament;
+  paired `cabal_laserimpact_l` effect + `obelmod1.aud`/`drtelectro.wav` sound.
+- [x] Warhead audit pass: fixed `CabalMagicNuke`/`TS90mm_bluenuke` effect
+  warhead naming, duplicate `Warhead@1Dam` in `TSCyCannon`, and incorrect
+  `HealthPercentageDamage` twin on `TSHunterKillerLasers`.
+
+### N5. Laser beam visual rework (DESIGN law — see below) (`6f43f5639`)
+- [x] Every CABAL laser: **two beam colors** (inner + outer), a **mix of
+  purple + dark blue**, **not too thin**. Beam **width scales with
+  damage** (Mantis + all others currently too thin; Core Defender a touch
+  too thick but must still scale). **Color also scales with damage**
+  (scale BOTH colors so bigger damage looks more dangerous).
+- [x] **Laser Spider → obelmod1.aud** (TS Obelisk sound) — FIX from the
+  obelray1.aud I set. Smaller lasers → **laser turret sounds** (lastur1.aud).
+- [x] **Manticore double laser**: too thin → **spread the two beams out
+  more**; rebalance with **more range + more armor** (range/armor deferred to
+  balance sheet per DESIGN §3).
+- [x] **3 levels of laser ground-impact effect** (purple/blue, scaled by
+  damage), applied to ALL laser weapons; each needs a new sound.
+
+### N6. New CABAL effects + sounds
+- [ ] **New explosion effect for ALL CABAL missiles** (+ new sound).
+- [ ] Laser impact effects (N5) + green plasma impact (N1) each need a
+  paired new sound (DESIGN: effect + sound always defined together).
+- [ ] Plasma-weapon sounds: prefer NEW/unique; cross-check Shattered
+  Paradise references. (Cannot synthesize quality .wav here — assign
+  unique existing mod sounds and flag any that truly need new custom
+  audio for the maintainer to source.)
+
+### N7. Weapon-mount offsets (`7a0d0025d`)
+- [x] **Ascended + Devout**: increase the **second (Y) value** of each
+  triple offset ~**2×** so their weapons sit further left/right.
+
+### N8. Armor combo (was CC; still pending, sheet-coupled)
+- [ ] Give every CABAL infantry the **FutureTech-droid dual-armor combo**:
+  base infantry `Armor:` (`-RequiresCondition:` to stay on) + a second
+  vehicle-class `Armor@X:` + `DamageMultiplier@X: 200` (damage ×2). Pick
+  the vehicle class per unit by role. Doubling incoming damage halves
+  effective HP → must be re-priced with the formula (couple with N9).
+  Reference: Cannon/Missile/Scout/Shotgun Droid in FutureTech infantry.yaml.
+
+### N9. Role + tier + promotion rebalance (L, sheet-first)
+- [ ] **Every CABAL unit maps to exactly ONE template role** from
+  `defaults.yaml` (^ScoutVehicleTemplate, ^FireSupportTemplate,
+  ^MainBattleTankTemplate, ^HeavyInfantryTemplate, etc.). Assign the role,
+  set stats from the workbook, apply the number (sheet-first dual-write).
+- [ ] **Tech tiers**: better units = higher tier; **fill every tier
+  evenly, none empty**. Promotions increase in tech level; **promotion
+  trees make sense and are grouped thematically** (see design screenshot;
+  left = infantry column, middle = vehicles).
+- [ ] Missing units to slot into the tiers/promotions: cnc4 Spider
+  (fire-support laser → Widow), Widow (carrier boosted by ≤4 spiders),
+  T1000 (promo of Eliminator 800), Commando V2 wiring, Avatar, Core
+  Defender promo. Stats from 333ggg's cabal.xlsx rows.
+
+### N10. Upgrades audit
+- [x] Reviewed every CABAL upgrade for meaningful consumption. Removed the
+  meaningless `cabal_upgrade_clusterwarhead` (no actor, building, or
+  template consumed it; also removed its Fluent description and AI entry).
+  All other upgrades are wired: conditions granted by templates are
+  inherited and used by at least one actor or support power. Kept the
+  neutron-shell twins untouched.
+
+### N11. Descriptions + AI
+- [ ] Fluent descriptions for all CABAL units (DESIGN description scheme);
+  AI wiring (squads, upgrades, promotions).
+
+### CE (carried). Effect-warhead naming sweep, mod-wide
+- [ ] Beyond CABAL: rename stray `CreateEffect` warheads to the
+  per-surface canonical set (`@Effect` / `@EffectAir` / `@EffectWater` /
+  `@ShieldHitEffect`). NOTE: a child that overrides its template's own
+  effect-warhead name (e.g. `@3Eff` from `^TSCannonEffect`) is CORRECT,
+  not a violation. DESIGN §8.
+
+---
+
+## Dune factions (D2K) — split + naming + upgrades (P2)
+
+- [x] **Split dune Light Infantry + Rocket Trooper per faction** (neutral
+  base template → per-faction Ixian/Ordos actors) so upgrades apply
+  separately (`b180aef36`).
+- [x] **Ordos Light Infantry gets Laser Cartridges** once it's its own actor
+  (`b180aef36`).
+- [x] **Rename Ordos "Armor-Piercing Rounds" → "Rapid Fire Armor-Piercing
+  Belts"** (actor id, template, condition, sequence, icon — full rename)
+  (`b180aef36`).
+- [ ] No-hyphen naming scheme across all dune factions.
+- Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
+
+---
+
+## Content-pack folder restructure (P2/P3, L)
+
+- [ ] Every content pack: `content.yaml` at root + one **`yaml`** folder
+  (rules+weapons+sequences merged) + an empty **`files`** folder. Shared
+  assets → per-GAME `Shared/files/`. NOW: only make the yaml folder + move
+  yaml in + empty files/; asset migration later. Runbook: docs/MIGRATION.md.
+
+## Cross-faction shared-effect independence (LONG-TERM, L)
+
+- [ ] Give each faction its own effects, or share only PER GAME. Prereq
+  for true dynamic per-faction loading. DESIGN + MIGRATION.
+
+---
+
+## Phase B — CABAL effects & art polish
+- SP-recipe projectiles/contrails (art our own); dark-blue/purple identity;
+  promotion icons for placeholders; SP-like reports from TS material.
+
+## Phase C — Balance & consistency (other factions)
+- Infantry offset sweep beyond TS; TS rocket launch-angle sweep beyond
+  CABAL; clean workbook (port CABAL rows); 165 sheet↔game mismatches;
+  FutureTech .futu→futuretech_ rename; Soviet Gorynych/Stalin Fist.
 
 ## Phase D — SP-ification of the other TS factions (after CABAL)
-
-Order per design 2026-07-11: **CABAL first, then TS GDI, Nod,
-Forgotten — and the Scrin faction once it exists.** Per faction:
-weapon/effect recipes from the SP research doc, authenticity pass
-(classic rocket trails, plasma/laser identities), mechanics
-inspiration (corpse/husk feedback, ion storms), always through the
-Armor System workbook for stats.
+- TS GDI, Nod, Forgotten, then Scrin — SP-recipe weapons/effects, workbook stats.
 
 ## Phase E — Platform & engine (background, L)
+- **Port `AttackGarrisonedSP`** (one fire port per passenger) + convert all
+  `AttackGarrisoned`/`AttackOpenTopped` units to per-passenger independent
+  targeting (blocker: they use single-instance `AttackFollow`). End of queue.
+- SP engine-trait ports; TS Shared pack move; Formula v2; dynamic faction
+  loading end-game (per-pack ai.yaml, assets into packs, unused-file audit).
 
-- SP engine-trait ports (research §4; priority pick pending):
-  ArmamentsChargeBar, SpreadDamageWithCondition,
-  InstantHitWithFakeBullets, GuardsSelection, corpse pair,
-  FirestromSP, WeaponWeather/CloudSpawner, SpawnSparks, AI modules.
-- TS Shared pack move (script ready); TS GDI/Nod description passes;
-  remaining theme renames + splits (RA1, RA2, SC, WC2, TKM, Outpost2)
-  with A1–A4 after every pass.
-- Formula v2: per-class baselines, AA/projectile-speed/AoE pricing,
-  per-ability special values.
-- Dynamic faction loading end-game: per-pack ai.yaml, assets into
-  packs, unused-file audit (docs/MIGRATION.md runbook).
-- Deferred: Latin Syndicate engineer-terrorist merge (DESIGN §13).
+---
+
+## Standing rules recorded (see DESIGN.md / memory)
+
+- **Effect + sound are always defined together** (DESIGN §8): every new
+  impact/projectile effect gets BOTH a new effect sprite AND a new Report/
+  ImpactSound — never fall back to the template's default for either.
+  Unique-per-faction is the goal.
+- **Effect frame-fit**: every rendered effect must sit INSIDE its frame
+  (2px border alpha 0) or it clips to a square. Verify with a bordered
+  preview. (memory: cameo-custom-effects-pngsheet)
+- **Laser beams (DESIGN §3)**: two colors (inner+outer), width AND color
+  scale with damage; CABAL = purple + dark blue, never too thin.
+- **Obelisk/laser sound map (DESIGN §3)**: obelmod1.aud = TS Obelisk of
+  Light / Obelisk of Darkness / CABAL Obelisk; obelcor3.aud = Core
+  Defender + DarkObeliskLaser + Commando plasma; obelray1.aud = Tiberian
+  DAWN obelisk — NOT allowed on TS units unless specified (SP `^LaserWeapon`
+  inherit = the TD version); smaller lasers = lastur1.aud turret sounds.
+- **Effect-warhead naming**: one `CreateEffect` per impact surface.
+- **Per-frame randomness** on new animated effects.
+- **Content-pack structure**: yaml folder + files folder + content.yaml.

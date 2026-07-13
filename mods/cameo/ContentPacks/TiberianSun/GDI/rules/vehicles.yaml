@@ -194,7 +194,7 @@ ts_gdi_mobileemp:
 		Name: Mobile EMP
 	Buildable:
 		BuildPaletteOrder: 110
-		Prerequisites: ~ts_gdi_warfactory, ts_gdi_empulsecannon, ts_gdi_radar
+		Prerequisites: ~ts_gdi_warfactory, ts_gdi_radar
 		Queue: Vehicle, RAVehicle
 		Description: Shuts down vehicles with an EMP blast.\n  Strong vs Vehicles, Cyborgs
 	Mobile:

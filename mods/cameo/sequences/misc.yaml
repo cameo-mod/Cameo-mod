@@ -69,7 +69,7 @@
 			OUTPOST2: bib3.tem
 			INTERIOR: bib3.tem
 		Length: *
-        
+
 ^WithBuildingBibGun:
 	bib:
 		Filename: mbGUN.tem
@@ -85,7 +85,7 @@
 			ARRAKIS: mbGUN.des
 			ARRAKIS2: mbGUN.des
 		Length: *
-        
+
 ^WithBuildingBibFix:
 	bib:
 		Filename: mbFIX.tem
@@ -2847,17 +2847,17 @@ explosion:
 		Filename: magicnuke.png
 		Scale: 0.5
 		Length: 64
-		Tick: 80
+		Tick: 40
 	magicnuke_small:
 		Filename: magicnuke.png
 		Scale: 0.25
 		Length: 64
-		Tick: 80
+		Tick: 20
 	magicnuke_micro:
 		Filename: magicnuke.png
-		Scale: 0.15
+		Scale: 0.2
 		Length: 64
-		Tick: 80
+		Tick: 16
 
 rank:
 	Defaults:

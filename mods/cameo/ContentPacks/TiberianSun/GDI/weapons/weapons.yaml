@@ -417,6 +417,32 @@ TSEMPZapWeapon:
 		ValidRelationships: Neutral, Enemy
 		ValidTargets: Ground, Water
 
+TSEMPMine:
+	Inherits: ^TeslaWeapon
+	Report: mineblo1.aud
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 10000
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 5000
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 50000
+		ValidRelationships: Neutral, Enemy
+		ValidTargets: Ground, Water
+	Warhead@Effect: CreateEffect
+		Explosions: large_explosion
+		ImpactSounds: mineblo1.aud
+	Warhead@Smudge: LeaveSmudge
+		SmudgeType: Crater
+		InvalidTargets: Structure, Wall
+
 TSMechRailgun:
 	Inherits: ^RailgunWeapon
 	Range: 8409

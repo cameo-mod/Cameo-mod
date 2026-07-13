@@ -8,25 +8,25 @@ cabal_silo:
 		Image: tsgtsilo.cabal
 
 cabal_missilesilo:
-	Inherits: ts_nod_missilesilo
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: CABAL Missile Silo
+	Valued:
+		Cost: 5000
 	Buildable:
-		Prerequisites: ~cabal_constructionyard, cabal_core, !ts_nod_missilesilo, ~techlevel.superweapons
-		Description: actor-tsntmisl.description
+		Queue: BuildingAddons
+		BuildPaletteOrder: 100
+		BuildDuration: 1500
+		BuildDurationModifier: 100
+		Prerequisites: ~cabal_core, cabal_core, !cabalnuke, ~techlevel.superweapons
+		Description: actor_cabal_missilesilo.description
+	Power:
+		Amount: -100
+	Plug:
+		Type: cabalcore_silo
 	RenderSprites:
 		PlayerPalette: playerra2
-		Image: ts_nod_missilesilo
-	Armament@superweapon1:
-		Name: superweapon
-		Weapon: TSTacticalMissile
-		RequiresCondition: !cabal_upgrade_clusterwarhead
-	Armament@superweapon2:
-		Name: superweapon
-		Weapon: TSTacticalNeutronMissile
-		RequiresCondition: cabal_upgrade_clusterwarhead
-	GrantConditionOnPrerequisite@cabal_upgrade_clusterwarhead:
-		Condition: cabal_upgrade_clusterwarhead
-		Prerequisites: cabal_upgrade_clusterwarhead
-
+		Image: tsgtsilo.cabal
 cabal_stealthgenerator:
 	Inherits: ts_nod_stealthgenerator
 	Buildable:
@@ -48,6 +48,7 @@ cabal_heavycabalobelisk:
 		Cost: 2400
 	Health:
 		HP: 220000
+	-Armament@UPGRADE:
 	Armament@PRIMARY:
 		Weapon: TSCABALObeliskLaserFire
 		LocalOffset: 0,0,1956

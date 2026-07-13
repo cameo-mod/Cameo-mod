@@ -7,11 +7,16 @@
 	Projectile: Missile
 		MinimumLaunchAngle: 255
 		MaximumLaunchAngle: 255
-		HorizontalRateOfTurn: 128
-		VerticalRateOfTurn: 128
+		HorizontalRateOfTurn: 80
+		VerticalRateOfTurn: 80
+		CruiseAltitude: 6000
+		TerrainHeightAware: true
 		TrailImage: cabal_rockettrail
 		TrailInterval: 1
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_missileexplosion
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Ship, Air
 TS90mm_bluenuke:
 	Inherits: ^TSCannonEffect
 	Inherits: ^MediumCannon
@@ -20,7 +25,7 @@ TS90mm_bluenuke:
 		Damage: 12000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 6
-	Warhead@3Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_micro
 
 TSReaperTrap:
@@ -66,7 +71,7 @@ TSCyCannon:
 			Heavy: 150
 			Concrete: 80
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
-	Warhead@1Dam: SpreadDamage
+	Warhead@2Dam: SpreadDamage
 		Spread: 0c384
 		Damage: 3000
 		Versus:
@@ -84,13 +89,18 @@ TSCyCannon:
 
 DarkObeliskLaser:
 	Inherits: ^TSLaser
-	Report: obelmod1.aud
+	Report: obelcor3.aud
 	Range: 12288
 	ReloadDelay: 50
 	ValidTargets: Air
 	Projectile: LaserZap
-		Width: 125
-		Duration: 38
+		Width: 95
+		ZOffset: 2047
+		Color: 88DD22DD
+		SecondaryBeam: true
+		SecondaryBeamWidth: 40
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 333366EE
 	Warhead@1Dam: SpreadDamage
 		Damage: 35000
 		Spread: 250
@@ -108,6 +118,52 @@ DarkObeliskLaser:
 			Heavy: 100
 			Concrete: 50
 		ValidTargets: Air
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_m
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
+TSCABALEMPDisable.anim:
+	ReloadDelay: 3
+	Range: 20000
+	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Width: 60
+		Duration: 3
+		Color: 00FF0070
+		SecondaryBeam: true
+		SecondaryBeamWidth: 90
+		SecondaryBeamColor: FF000035
+	Warhead@Damage: TargetDamage
+		ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
+		Damage: 1
+
+TSCABALEMPDisable.end:
+	Inherits: ^TeslaChargedWeapon
+	ReloadDelay: 4
+	Range: 10359
+	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
+	TargetActorCenter: true
+	Projectile: LaserZap
+		Width: 64
+		Duration: 4
+		Color: 4444FF88
+		SecondaryBeam: true
+		SecondaryBeamWidth: 96
+		SecondaryBeamColor: FFFF8844
+	Warhead@TeslaChargedWeapon: TargetDamage
+		Damage: 2000
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		Damage: 1000
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 2000
+	Warhead@Effect: CreateEffect
+		Explosions: blue_med_frag
+		ImpactSounds: xplos.aud
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 
 TSCoreLaser:
 	Inherits: ^SmallArms
@@ -191,14 +247,43 @@ TSCABALObeliskLaserFire:
 	Range: 10378
 	ReloadDelay: 90
 	Inherits: TSObeliskLaserFire
-	Report: obelcor3.aud
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
+	Report: obelmod1.aud
 	Projectile:
-		Color: 0040FF80
-		SecondaryBeamColor: 80C0FF
+		Width: 110
+		Duration: 38
+		Color: AADD22FF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 45
+		SecondaryBeamColor: 444488FF
+		-HitAnim:
 	Warhead@TankDestroyerCannon: SpreadDamage
 		Damage: 70000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 35
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 70000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 70000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 35000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 70000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 35000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 35
+	-Warhead@2Eff:
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ImpactActors: false
+		ValidTargets: Ground, Ship
 
 TSHunterKillerLasers:
 	Inherits: ^Chaingun
@@ -212,12 +297,13 @@ TSHunterKillerLasers:
 	SoundVolume: 0.25
 	ValidTargets: Ground, Air
 	Projectile: LaserZap
-		Width: 36
-		Duration: 8
-		SecondaryBeamWidth: 18
-		-HitAnim:
-		Color: 0040FF80
-		SecondaryBeamColor: 80C0FF
+		Width: 73
+		ZOffset: 2047
+		Color: 3322AAC0
+		SecondaryBeam: true
+		SecondaryBeamWidth: 33
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 8866EEE8
 	Warhead@Chaingun: SpreadDamage
 		Damage: 4000
 		ValidTargets: Ground, Air
@@ -228,8 +314,12 @@ TSHunterKillerLasers:
 		Damage: 4000
 		ValidTargets: Ground, Air
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 5
+		Damage: 2
 		ValidTargets: Ground, Air
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_s
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 ####################################################################################################
 #		Tiberian Sun Heal Weapons
 ####################################################################################################
@@ -238,7 +328,7 @@ TSTwinBazooka:
 	Inherits: ^LightMissile
 	Burst: 2
 	BurstDelays: 8
-	Report: rketinf1.aud
+	Report: samshot1.aud
 	ReloadDelay: 52
 	Range: 6694
 	Projectile: Missile
@@ -246,7 +336,10 @@ TSTwinBazooka:
 		Damage: 24000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
 		Damage: 12
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_missileexplosion
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Ship, Air
 TSQuadBazooka:
 	Inherits: TSTwinBazooka
 	Burst: 4
@@ -307,16 +400,6 @@ TSVulcanTower:
 	Report: chaingn1.aud
 	Warhead@1Dam: SpreadDamage
 		Damage: 1800
-
-TSDevoutChainguns:
-	Inherits: ^TSMG
-	ReloadDelay: 38
-	BurstDelays: 2
-	Burst: 6
-	Report: cygun1.aud
-	Range: 6359
-	Warhead@1Dam: SpreadDamage
-		Damage: 4000
 
 TSDevoutChaingunsUpgraded:
 	Inherits: ^TSMG
@@ -434,6 +517,7 @@ Eliminator-Blades:
 CabalCyborgChaingun:
 	Inherits: ^SmallArms
 	Inherits@2: ^Chaingun
+	Report: cygun1.aud
 	ReloadDelay: 60
 	Range: 6231
 	Warhead@SmallArms: SpreadDamage
@@ -445,23 +529,57 @@ CabalCyborgChaingun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 5
 
+TSDevoutChainguns:
+	Inherits: ^SmallArms
+	Inherits@2: ^Chaingun
+	Report: cygun1.aud
+	ReloadDelay: 45
+	Burst: 2
+	BurstDelays: 3
+	Range: 6359
+	Warhead@SmallArms: SpreadDamage
+		Damage: 12000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Chaingun: SpreadDamage
+		Damage: 12000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		Damage: 6
+
 CabalEliminatorGatling:
 	Inherits: ^Chaingun
+	Report: chaingn1.aud
 	ReloadDelay: 32
 	Range: 6167
+	ValidTargets: Ground, Water
 	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Ground, Water
 		Damage: 32000
 	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
 		Damage: 16
 
+CabalEliminatorGatlingAA:
+	Inherits: CabalEliminatorGatling
+	Range: 6167
+	ValidTargets: Air
+	Warhead@Chaingun: SpreadDamage
+		ValidTargets: Air
+		Damage: 16000
+	Warhead@ChaingunPercentage: HealthPercentageDamage
+		ValidTargets: Air
+		Damage: 8
 CabalTarantulaCannon:
 	Inherits: ^MediumCannon
+	Report: tsgun4.aud
 	ReloadDelay: 48
 	Range: 5278
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 16000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 8
+
+
 
 CabalReaperMissiles:
 	Inherits: ^Grenade
@@ -470,9 +588,11 @@ CabalReaperMissiles:
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^CabalMissile
 	ReloadDelay: 32
+	Burst: 2
+	BurstDelays: 4
 	Range: 5153
 	ValidTargets: Ground, Water
-	Report: rketinf1.aud
+	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -521,6 +641,7 @@ CabalReaperMissilesAA:
 
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
+	Report: orcamis1.aud
 	ReloadDelay: 64
 	Range: 11582
 	Warhead@Grenade: SpreadDamage
@@ -532,6 +653,15 @@ CabalHunterKillerLasers:
 	Inherits: ^SmallArms
 	Inherits@2: ^LaserWeapon
 	ReloadDelay: 24
+	Projectile: LaserZap
+		Width: 50
+		ZOffset: 2047
+		Color: 66CC22BB
+		SecondaryBeam: true
+		SecondaryBeamWidth: 22
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 222244CC
+	Report: lastur1.aud
 	Range: 5318
 	Warhead@SmallArms: SpreadDamage
 		Damage: 8000
@@ -544,22 +674,46 @@ CabalHunterKillerLasers:
 
 CabalHunterKillerHeavyLaser:
 	Inherits: ^LaserWeapon
+	Report: obelcor3.aud
 	ReloadDelay: 26
 	Range: 6170
+	Projectile: LaserZap
+		Width: 85
+		ZOffset: 2047
+		Color: 77DD22CC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 36
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 2A2A55DD
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 20000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 10
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_m
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalSpiderLaser:
 	Inherits: ^LaserWeapon
-	ReloadDelay: 4
+	Report: obelmod1.aud
+	ReloadDelay: 90
 	Range: 6147
+	Projectile: LaserZap
+		Width: 100
+		ZOffset: 2047
+		Color: 99DD22EE
+		SecondaryBeam: true
+		SecondaryBeamWidth: 42
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 3D3D77FF
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 44000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
-
+		Damage: 22
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalDroneCannon:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
@@ -576,11 +730,15 @@ CabalDroneCannon:
 
 CabalDissolverSpray:
 	Inherits: ^LightChemicalWeapon
+	Inherits@TANKDESTROYER: ^TankDestroyerCannon
+	Report: tsdissolver.wav
 	ReloadDelay: 4
 	Range: 5142
+	ValidTargets: Ground, Water
 	Projectile: Bullet
 		Speed: 256
 		Blockable: false
+		Shadow: false
 		Image: tsdissolvereffect
 		Palette: alpha50
 		Inaccuracy: 512
@@ -590,12 +748,32 @@ CabalDissolverSpray:
 		Damage: 1
 	Warhead@LightChemicalWeaponFriendlyFire: SpreadDamage
 		Damage: 1000
-
+	Warhead@TankDestroyerCannon: SpreadDamage
+		Damage: 2000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@corroded: GrantExternalCondition
+		Range: 1500
+		Condition: corroded
+		Duration: 100
+		ValidTargets: corrodible
+		ValidRelationships: Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_dissolveimpact
 CabalCommandoPlasma:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
-	ReloadDelay: 50
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
+	Report: obelcor3.aud
+	ReloadDelay: 90
 	Range: 5219
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: cabal_greenplasma
+		Speed: 320
+		Shadow: false
+		Blockable: false
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 50000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -604,12 +782,36 @@ CabalCommandoPlasma:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_greenplasmaimpact
+		ImpactSounds: expnew09.aud
 
 CabalCommandoPlasmaMk2:
 	Inherits: ^MediumCannon
 	Inherits@2: ^HeavyCannon
-	ReloadDelay: 40
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
+	Report: obelcor3.aud
+	ReloadDelay: 90
 	Range: 6264
+	ValidTargets: Ground, Water
+	Projectile: Bullet
+		Image: cabal_greenplasma
+		Speed: 320
+		Shadow: false
+		Blockable: false
 	Warhead@MediumCannon: SpreadDamage
 		Damage: 50000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
@@ -618,16 +820,43 @@ CabalCommandoPlasmaMk2:
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
 		Damage: 25
+	Warhead@MediumFlameWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 25000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_greenplasmaimpact
+		ImpactSounds: expnew09.aud
 
 CabalCoreDefenderLaser:
 	Inherits: ^LaserWeapon
+	Report: corefir1.aud
 	ReloadDelay: 70
 	Range: 6332
+	Projectile: LaserZap
+		Width: 115
+		ZOffset: 2047
+		Color: CCDD22FF
+		SecondaryBeam: true
+		SecondaryBeamWidth: 50
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 5555AAFF
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 160000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 80
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_l
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalEngineerRepairBeam:
 	Inherits: ^RepairWeapon
 	ReloadDelay: 31
@@ -635,28 +864,20 @@ CabalEngineerRepairBeam:
 	Warhead@RepairWeapon: SpreadDamage
 		Damage: -1600
 
-CabalCrabClaws:
-	Inherits: ^SwordWeapon
-	ReloadDelay: 25
-	Range: 1603
-	Warhead@SwordWeapon: SpreadDamage
-		Damage: 16000
-	Warhead@SwordWeaponPercentage: HealthPercentageDamage
-		Damage: 8
-
 CabalMantisGun:
 	Inherits: ^SmallArms
 	Inherits@2: ^LaserWeapon
 	ReloadDelay: 40
+	Report: lastur1.aud
 	Range: 7082
 	Projectile: LaserZap
-		Width: 60
+		Width: 70
 		ZOffset: 2047
-		Color: 1122FFCC
+		Color: 66CC22BB
 		SecondaryBeam: true
-		SecondaryBeamWidth: 20
+		SecondaryBeamWidth: 30
 		SecondaryBeamZOffset: 2047
-		SecondaryBeamColor: 55FFFFF0
+		SecondaryBeamColor: 222244CC
 	Warhead@SmallArms: SpreadDamage
 		Damage: 6000
 	Warhead@SmallArmsPercentage: HealthPercentageDamage
@@ -665,7 +886,10 @@ CabalMantisGun:
 		Damage: 6000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		Damage: 3
-
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_s
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalManticoreMissiles:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -675,7 +899,7 @@ CabalManticoreMissiles:
 	ReloadDelay: 30
 	Range: 5358
 	ValidTargets: Ground, Water
-	Report: rketinf1.aud
+	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
 		Damage: 4000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -726,7 +950,7 @@ CabalRocketCyborgRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^CabalMissile
-	Burst: 2
+	Burst: 1
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 52
@@ -765,3 +989,117 @@ CabalAscendedRockets:
 CabalAscendedRocketsUpgraded:
 	Inherits: CabalAscendedRockets
 	Burst: 4
+
+CabalRavagerPlasma:
+	Inherits: ^MediumChemicalWeapon
+	ReloadDelay: 30
+	Range: 3000
+	Report: corefir1.aud
+	Projectile: Bullet
+		Speed: 341
+		Blockable: false
+		Shadow: false
+		Image: cabal_greenplasma
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 32000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 16000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 16
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_greenplasmaimpact
+		ImpactSounds: expnew09.aud
+CabalManticoreLaser:
+	Inherits: ^LaserWeapon
+	Burst: 2
+	BurstDelays: 3
+	ReloadDelay: 30
+	Range: 5358
+	Report: lastur1.aud
+	Projectile: LaserZap
+		Width: 70
+		ZOffset: 2047
+		Color: 66CC22BB
+		SecondaryBeam: true
+		SecondaryBeamWidth: 30
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 222244CC
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@Effect: CreateEffect
+		Explosions: cabal_laserimpact_s
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
+
+CabalMagicNuke:
+	Inherits: PulseMissile
+	-Warhead@2Eff_impact:
+	Warhead@Effect: CreateEffect
+		Explosions: magicnuke
+		ImpactSounds: nukexplo.aud
+		ImpactActors: false
+
+CabalCommandoPlasmaNeutron:
+	Inherits: CabalCommandoPlasma
+	Inherits@TESLA: ^TeslaWeapon
+	Inherits@MAGIC: ^MagicWeapon
+	Inherits@RAIL: ^RailgunWeapon
+	Projectile: Bullet
+		Image: cabal_plasmabullet
+		Speed: 320
+		Shadow: false
+		Blockable: false
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MagicWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: magicnuke_med
+		ImpactSounds: expnew12.aud
+
+CabalCommandoPlasmaMk2Neutron:
+	Inherits: CabalCommandoPlasmaMk2
+	Inherits@TESLA: ^TeslaWeapon
+	Inherits@MAGIC: ^MagicWeapon
+	Inherits@RAIL: ^RailgunWeapon
+	Projectile: Bullet
+		Image: cabal_plasmabullet
+		Speed: 320
+		Shadow: false
+		Blockable: false
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@MagicWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 50000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 25
+	Warhead@Effect: CreateEffect
+		Explosions: magicnuke_med
+		ImpactSounds: expnew12.aud
+
+CabalRavagerPlasmaNeutron:
+	Inherits: CabalRavagerPlasma
+	Projectile: Bullet
+		Speed: 341
+		Blockable: false
+		Shadow: false
+		Image: cabal_plasmabullet
+	Warhead@Effect: CreateEffect
+		Explosions: magicnuke_small
+		ImpactSounds: expnew12.aud

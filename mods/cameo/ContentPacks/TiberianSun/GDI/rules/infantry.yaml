@@ -185,7 +185,7 @@ ts_gdi_riottrooper:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 45
-		Prerequisites: ~ts_gdi_barracks, ts_gdi_empulsecannon, ts_gdi_radar
+		Prerequisites: ~ts_gdi_barracks, ts_gdi_radar
 		Queue: Infantry, RAInfantry
 		Description: Heavy infantry. Effective vs Infantry.
 	Mobile:
@@ -200,6 +200,19 @@ ts_gdi_riottrooper:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: TSShotgun
+	Minelayer:
+		Mine: TSRiotTrooperMine
+		TileUnknownName: build-invalid
+	AmmoPool:
+		Ammo: 6
+		RearmSound: minelay1.aud
+	ReloadAmmoPool:
+		Delay: 400
+		Count: 1
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 6
 	TakeCover:
 		ProneOffset: 300,0,-227
 	WithInfantryBody:
@@ -210,8 +223,27 @@ ts_gdi_riottrooper:
 		VoiceSet: TSInfantry
 	RenderSprites:
 		PlayerPalette: playerra2
+	# GrantTimedConditionOnDeploy:
+	# 	StartsFullyCharged: true
+	# 	DeployedTicks: 5
+	# 	CooldownTicks: 500
+	# 	DeployedCondition: summon
+	# 	ShowSelectionBar: true
+	# 	ExclusiveDeploy: true
+	# 	DeployType: Summon
+	# 	PauseOnCondition: disabled
+	# PeriodicExplosion@projections:
+	# 	Weapon: TSRIOTSUMMON
+	# 	RequiresCondition: summon
 	ActorStatValues:
 		Upgrades: ts_gdi_upgrade_seretraining
+
+TSRiotTrooperMine:
+	Inherits: ^Mine
+	RenderSprites:
+		Image: minv
+	FireWarheadsOnDeath:
+		Weapon: TSEMPMine
 
 ts_gdi_zonetrooper:
 	Inherits: ^Soldier

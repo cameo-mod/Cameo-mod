@@ -17,6 +17,34 @@ per-type subfolders — with zero cross-pack dependencies, shared content
 only in theme `Shared/` packs or core, and an audit that deletes files
 nothing references.
 
+## Target content-pack folder structure (design 2026-07-12)
+
+Every content pack gets the SAME shape — one folder per faction:
+
+```
+ContentPacks/<Theme>/<Faction>/
+  content.yaml          # the central include dictionary (stays at root)
+  yaml/                 # ALL MiniYaml: rules + weapons + sequences merged
+                        #   (folder name decided 2026-07-12: `yaml`)
+  files/               # ALL assets: sprites, voxels, sounds, icons
+                        #   (created empty now; asset migration is later)
+```
+
+This replaces the current `rules/ + weapons/ + sequences/` split (they
+collapse into the single yaml folder). Shared assets live in a per-GAME
+`Shared/files/` folder. **Do the yaml-folder move first** (create the
+folder, move the yaml, keep `content.yaml` at root, update the
+`content.yaml` include paths, create an empty `files/`); the asset
+migration into `files/` comes later. Research one already-split pack and
+apply the identical structure everywhere.
+
+**Cross-faction shared effects — long-term de-sharing.** Factions now
+cross-reference each other's effect sprites/weapons heavily. The
+end-state needs each faction's effects to be its own, or at minimum
+shared only PER GAME (never across games), so a pack loads without
+pulling another faction's assets. This is a LONG-TERM goal, not a quick
+fix — flagged here, in DESIGN, and in the roadmap.
+
 ## The per-faction pipeline (proven, verified, repeatable)
 
 ```
