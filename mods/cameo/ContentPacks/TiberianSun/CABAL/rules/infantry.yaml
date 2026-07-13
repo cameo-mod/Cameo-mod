@@ -1,5 +1,11 @@
 cabal_engineer:
-	Inherits: TSENGINEER
+	Inherits: ^Soldier
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@anim: ^TSInfantry
+	Inherits@Template: ^SniperInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Cyborg: ^TSCyborgs
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Buildable:

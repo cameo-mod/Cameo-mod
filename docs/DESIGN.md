@@ -122,6 +122,21 @@ Reference-clean units: **TD GDI Archer** (`gdiarcher`), **Ordos Raider**
 | AA support vehicles | anti-air weapon range = **1.5 × anti-ground range** (forgotten_m113adats is reference-clean: 5606 / 8409) |
 | AA weapons | a weapon whose ValidTargets include Air must have ≥1 damage warhead that hits Air (inheritance-resolved) |
 
+**Building stat templates (design 2026-07-13).** All non-defense
+buildings must derive their core stats from the appropriate template in
+`mods/cameo/rules/defaults.yaml` (`^BaseBuilding`, `^RadarBuilding`,
+`^IsTechnoBuilding`, `^IsAircraftFactory`, `^RepairFacility`, etc.). A
+child actor must **not** duplicate a value that its template already
+provides (e.g., `Armor`, `Power`, `Health`, `RevealsShroud`,
+`DetectCloaked`). Overrides are allowed **only when justified by a
+special faction mechanic** (for example, the TD Nod Temple of Nod or the
+GDI Advanced Communications Center count as a tech building but gain an
+add-on that turns them into a superweapon, so they use the lower
+`^IsTechnoBuilding` health and then apply a 50% damage reduction to end
+up equivalent to the `^Superweapon` template). Defenses are exempt because
+each faction's defenses are individually balanced against their
+weapons and roles, but they still obey the **defense power** rule above.
+
 **The dual-weapon AA law (design 2026-07-11).** A SEPARATE anti-air
 weapon is allowed ONLY on support vehicles (`^SupportVehicleTemplate`
 family / AA-support class) — sole exception: the Ordos Anti Air

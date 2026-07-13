@@ -74,19 +74,35 @@ cabal_constructionyard:
 		PlayerPalette: playerra2
 
 cabal_mobileconstructionvehicle:
-	Inherits: ts_gdi_mobileconstructionvehicle
+	Inherits: ^Vehicle
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@selection: ^SelectableSupportUnit
+	Inherits@mcv: ^MCV
+	Inherits@MechanicalReliability: ^MechanicalReliability
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~cabal_mechfactory, cabal_servicedepot
+		Description: Deploys into a Construction Yard.\n  Strong vs Nothing\n  Weak vs Everything
 	Tooltip:
 		Name: CABAL Mobile Construction Vehicle
 	Transforms:
 		IntoActor: cabal_constructionyard
+		Offset: -1,-1
+		Facing: 384
+		TransformSounds: tsplace2.aud
+		NoTransformNotification: BuildingCannotPlaceAudio
+	SelectionDecorations:
 	Voiced:
 		VoiceSet: TSReaper
+	RenderSprites:
+		Image: tsmcvblack
+		PlayerPalette: playerra2
 	RenderVoxels:
 		Image: tsmcvblack
+		Scale: 18
+	-ActorStatValues:
 
 #######################################
 # TS Building
