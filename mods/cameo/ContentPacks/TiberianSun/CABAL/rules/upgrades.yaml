@@ -134,22 +134,6 @@ cabal_upgrade_firewallprotocol:
 		Image: cabal_upgrade_radarhack
 	ProvidesPrerequisite:
 
-cabal_upgrade_clusterwarhead:
-	Inherits: ^researched_upgrade.template
-	Tooltip:
-		Name: Cluster Warhead
-	Valued:
-		Cost: 5000
-	Buildable:
-		BuildPaletteOrder: 90
-		Queue: Research
-		Prerequisites: ~cabal_core, !cabal_upgrade_clusterwarhead
-		Description: actor_cabal_upgrade_clusterwarhead.description
-	RenderSprites:
-		Image: cabal_upgrade_neutronnuclearcatalyst
-	ProvidesPrerequisite:
-
-
 ##########################
 # Promotions #############
 ##########################

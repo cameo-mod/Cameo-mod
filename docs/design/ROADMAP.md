@@ -154,10 +154,12 @@ factions, everything through the balance workbook._
   Defender promo. Stats from 333ggg's cabal.xlsx rows.
 
 ### N10. Upgrades audit
-- [ ] Review EVERY CABAL upgrade: does it do something meaningful? Remove
-  or repurpose the meaningless ones. Keep the praised neutron-shell twins.
-  Confirm each granted condition is actually consumed (cf. the Ordos
-  laser-upgrade no-op bug).
+- [x] Reviewed every CABAL upgrade for meaningful consumption. Removed the
+  meaningless `cabal_upgrade_clusterwarhead` (no actor, building, or
+  template consumed it; also removed its Fluent description and AI entry).
+  All other upgrades are wired: conditions granted by templates are
+  inherited and used by at least one actor or support power. Kept the
+  neutron-shell twins untouched.
 
 ### N11. Descriptions + AI
 - [ ] Fluent descriptions for all CABAL units (DESIGN description scheme);

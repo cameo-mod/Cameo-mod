@@ -202,12 +202,6 @@ actor_cabal_upgrade_firewallprotocol =
    .description = Tech Upgrade (Only affects units of own faction)
       CABAL units become immune to enemy mind control and vehicle hijacking.
 
-actor_cabal_upgrade_clusterwarhead =
-   .name = Cluster Warhead
-   .description = Tech Upgrade (Only affects units of own faction)
-      Replaces the Missile Silo warhead with a neutron cluster warhead.
-      Spreads damage across a wider area on impact.
-
 actor_cabal_upgrade_reinforcedchassis =
    .name = Reinforced Chassis
    .description = Tech Upgrade (Only affects units of own faction)
