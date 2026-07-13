@@ -140,9 +140,9 @@ actor_cabal_scarabapc =
 
 actor_cabal_berserker =
    .name = Berserker
-   .description = Epic melee walker armed with devastating blade weapons.
+   .description = Hero melee cyborg armed with devastating blade weapons.
       Regenerates health quickly.
-      Maximum 1 can be built.
+      Maximum 1 can be trained.
       Requires CABAL Core.
       Strong vs Infantry, Vehicles, Buildings
       Weak vs Aircraft

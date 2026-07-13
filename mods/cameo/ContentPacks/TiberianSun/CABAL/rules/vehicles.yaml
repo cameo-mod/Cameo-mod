@@ -581,89 +581,75 @@ cabal_scarabapc:
 		Image: cabal_scarabapc
 
 cabal_berserker:
-	Inherits: ^Vehicle
-	Inherits@Template: ^EpicVehicleTemplate
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits: ^Soldier
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^HeroInfantryTemplate
+	Inherits@DualArmor: ^TSCyborgDualArmorHeavy
+	Inherits@Cyborg: ^TSCyborgs
 	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
+	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@announce: ^AnnounceGlobal
-	Inherits@EMP: ^FrontalEMP
-	Inherits@detect: ^GenericGroundDetector
-	Inherits@ND: ^NotDevourable
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@tibheal: ^TibHealable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Selectable:
+		Bounds: 600, 600, 0, 0
 	Valued:
 		Cost: 10000
+	Tooltip:
+		Name: Berserker
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Queue: Vehicle, RAVehicle
-		BuildPaletteOrder: 130
+		BuildPaletteOrder: 90
+		Prerequisites: ~cabal_cyborgfactory, cabal_core
+		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		Prerequisites: ~cabal_mechfactory, cabal_core
 		Description: actor_cabal_berserker.description
 	Mobile:
-		TurnSpeed: 20
 		Speed: 60
+		TurnSpeed: 12
 		PauseOnCondition: disabled
 	Health:
-		HP: 1000000
+		HP: 800000
 	ChangesHealth@SelfHealing:
 		Step: 400
 		Delay: 1
 		StartIfBelow: 100
-	ChangesHealth@1:
-		Step: 300
-		Delay: 1
-		StartIfBelow: 100
-		DamageCooldown: 1
-	ChangesHealth@TIBREPAIR:
-		Step: 300
-		Delay: 1
-		StartIfBelow: 100
-		DamageCooldown: 1
-		RequiresCondition: ontiberium
+	Shielded:
+		RegenAmount: 500
 	Armament@PRIMARY:
 		Weapon: CabalBerserkerBlades
-		LocalOffset: 600,0,256
-	AttackFrontal:
-		FacingTolerance: 12
-	Voiced:
-		VoiceSet: TSCyborg
-	Tooltip:
-		Name: Berserker
-	HitShape:
-		UseTargetableCellsOffsets: false
-		Type: Rectangle
-			TopLeft: -768, -768
-			BottomRight: 768, 768
-	Selectable:
-		Bounds: 1536, 1536
-	WithFacingSpriteBody:
-		Sequence: stand
-	WithMoveAnimation:
-		MoveSequence: run
-		ValidMovementTypes: Horizontal, Turn
-	WithAttackAnimation:
-		AttackSequence: attack
-		ValidTargets: Ground, Infantry, Vehicle, Building
-	GrantConditionOnDamageState@EpicBurning:
-		Condition: epic-wounded
-		ValidDamageStates: Heavy, Critical
+	WithInfantryBody:
+		DefaultAttackSequence: attack
+		RequiresCondition: !cydamaged
+	WithInfantryBody@damaged:
+		MoveSequence: crippled-run
+		DefaultAttackSequence: crippled-attack
+		StandSequences: crippled-stand
+		RequiresCondition: cydamaged
+	GrantConditionOnDamageState@damaged:
+		Condition: cydamaged
+		ValidDamageStates: Critical
 	SpeedMultiplier@damaged:
 		Modifier: 50
-		RequiresCondition: epic-wounded
-	WithDecoration@REDCROSS2:
-		Image: pips
-		Sequence: pip_heal
-		Position: BottomRight
-		RequiresCondition: ontiberium
-		BlinkInterval: 32
-		BlinkPattern: On, Off
+		RequiresCondition: cydamaged
+	-DamagedByTerrain:
+	-SpawnActorOnDeath:
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
+	Targetable@HEAL:
+		TargetTypes: Heal, Repair, Healing
+	Targetable:
+		TargetTypes: Ground, Infantry, Cyborg
+	GrantConditionOnPrerequisite@MACHINESHOP:
+		Condition: hospital
+		Prerequisites: machshop
 	DeathSounds:
 		VolumeMultiplier: 2
 	RenderSprites:
