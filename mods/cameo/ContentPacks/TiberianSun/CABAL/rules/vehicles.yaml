@@ -538,7 +538,7 @@ cabal_scarabapc:
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
-		Cost: 8325
+		Cost: 6275
 	Tooltip:
 		Name: Scarab APC
 	UpdatesPlayerStatistics:
@@ -569,8 +569,8 @@ cabal_scarabapc:
 		Payload: 400
 	Cargo:
 		Types: Infantry, Hacker, Fremen
-		MaxWeight: 9
-		InitialUnits: cabal_cyborginfantry, cabal_rocketcyborg, cabal_devout, cabal_dissolver, cabal_engineer, cabal_ascended, cabal_eliminator800, cabal_hackercyborg, cabal_ravager
+		MaxWeight: 7
+		InitialUnits: cabal_cyborginfantry, cabal_rocketcyborg, cabal_devout, cabal_dissolver, cabal_ascended, cabal_eliminator800, cabal_ravager
 		ExclusiveDeploy: false
 		DeployType: vehicle
 	Targetable@garrisoned:
