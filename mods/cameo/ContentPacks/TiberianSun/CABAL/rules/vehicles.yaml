@@ -669,6 +669,72 @@ cabal_berserker:
 	RenderSprites:
 		Image: cabal_berserker
 
+cabal_beholder:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Beholder
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 27
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, cabal_promotion_beholder
+		Queue: Infantry, RAInfantry
+		Description: actor_cabal_beholder.description
+	Mobile:
+		Locomotor: hover
+		Speed: 125
+		TurnSpeed: 50
+		PauseOnCondition: disabled
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Weapon: CabalBeholderLaser
+		LocalOffset: 777,-222,-333, 777,222,-333
+	AttackFrontal:
+		FacingTolerance: 10
+	WithInfantryBody:
+		IdleSequences: idle
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 4
+	Selectable:
+		Bounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSScrin
+	RenderSprites:
+		Image: cabal_beholder
+		PlayerPalette: player_rgba
+
+
 cabal_spidercnc4:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate

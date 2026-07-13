@@ -1687,6 +1687,135 @@ cabal_overkillcarryall:
 	icon:
 		Filename: cabal_overkillcarryall_icon.png
 
+cabal_mothership:
+	idle:
+		Filename: cabal_mothership.png
+		FrameSize: 96, 96
+		Length: 3
+		Facings: 64
+		Tick: 200
+		Scale: 1
+	icon:
+		Filename: cabal_mothership_icon.png
+
+cabal_mothership_omega:
+	idle:
+		Filename: cabal_mothership.png
+		FrameSize: 96, 96
+		Length: 3
+		Facings: 64
+		Tick: 200
+		Scale: 1
+	icon:
+		Filename: cabal_mothership_icon.png
+
+cabal_wasp:
+	Defaults:
+		Filename: cabal_wasp.shp
+		Scale: 0.8
+		Tick: 200
+		Offset: 0, 0, 16
+	stand:
+		Facings: 8
+	run:
+		Start: 70
+		Length: 10
+		Facings: 8
+		Tick: 200
+	idle:
+		Start: 8
+		Length: 31
+	idle1:
+		Start: 8
+		Length: 31
+	idle2:
+		Start: 39
+		Length: 31
+	prone-run:
+		Start: 86
+		Length: 6
+		Facings: 8
+	prone-stand:
+		Facings: 8
+	flying:
+		Start: 150
+		Length: 10
+		Facings: 8
+	die1:
+		Start: 470
+		Length: 20
+		Tick: 50
+	die-falling:
+		Start: 470
+		Length: 20
+		Tick: 40
+	die2:
+		Start: 470
+		Length: 20
+		Tick: 50
+	die3:
+		Start: 470
+		Length: 20
+		Tick: 50
+	die4:
+		Start: 470
+		Length: 20
+		Tick: 50
+	attack:
+		Start: 230
+		Length: 6
+		Facings: 8
+	flying-attack:
+		Start: 350
+		Facings: 8
+		Length: 15
+		Tick: 100
+	prone-attack:
+		Start: 212
+		Length: 6
+		Facings: 8
+	standup:
+		Start: 260
+		Length: 2
+		Facings: 8
+	cheer:
+		Facings: 8
+	die5:
+		Filename: e1.shp
+		Scale: 1
+		Start: 324
+		Length: 18
+		Tick: 80
+	die6:
+		Filename: e1.shp
+		Scale: 1
+		Start: 324
+		Length: 18
+		Tick: 80
+	die7:
+		Filename: electro.shp
+		Scale: 1
+		Length: *
+	die-crushed:
+		Filename: corpse1.shp
+		Scale: 1
+		Length: 6
+		Tick: 1600
+		ZOffset: -511
+	garrison-muzzle:
+		Filename: minigun.shp
+		Scale: 1
+		Length: 3
+		Stride: 6
+		Facings: 8
+	icon:
+		Filename: cabal_wasp_icon.png
+
+cabal_wasp_striker:
+	Inherits: cabal_wasp
+	icon:
+		Filename: cabal_wasp_icon.png
+
 cabal_obeliskofdarkness:
 	Defaults:
 		Filename: cabal_obeliskofdarkness.shp
@@ -1759,7 +1888,7 @@ cabal_dissolver:
 	icon:
 		Filename: cabal_dissolver_icon.shp
 
-cabal_eliminator1000:
+cabal_berserker:
 	Defaults:
 		Filename: cabal_eliminator1000.shp
 		Tick: 80
@@ -1922,6 +2051,10 @@ cabal_upgrade_darkarmament:
 	icon:
 		Filename: cabal_upgrade_darkarmament_icon.png
 
+cabal_upgrade_cyberneticplating:
+	icon:
+		Filename: cabal_upgrade_darkarmament_icon.png
+
 cabal_upgrade_mobilitymatrix:
 	icon:
 		Filename: cabal_upgrade_mobilitymatrix_icon.png
@@ -1992,3 +2125,33 @@ cabal_greenplasmaimpact:
 		Filename: cabal_greenplasmaimpact.png
 		Length: 10
 		Tick: 30
+
+cabal_beholder:
+	Defaults:
+		Filename: cabal_beholder.shp
+		Offset: 0,48
+	idle:
+		Filename: invisibleitem.shp
+	stand:
+		Length: 17
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 408
+	run:
+		Start: 136
+		Length: 17
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 80
+		ShadowStart: 544
+	shoot:
+		Start: 272
+		Length: 17
+		Facings: -8
+		InterpolatedFacings: 32
+		Tick: 32
+		ShadowStart: 680
+	icon:
+		Filename: cabal_beholder_icon.shp
+		Offset: 0,0

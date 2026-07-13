@@ -138,8 +138,8 @@ actor_cabal_scarabapc =
       Can move over water.
       Unarmed.
 
-actor_cabal_eliminator1000 =
-   .name = Eliminator 1000
+actor_cabal_berserker =
+   .name = Berserker
    .description = Heavy melee hero cyborg armed with blade weapons.
       Regenerates health quickly.
       Maximum 1 can be trained.
@@ -157,6 +157,86 @@ actor_cabal_upgrade_darkarmament =
    .description = Tech Upgrade (Only affects units of own faction)
       Reloads infantry weapons 10% faster.
       Upgrades Rocket Cyborg rockets for increased burst size.
+
+actor_cabal_upgrade_cyberneticplating =
+   .name = Cybernetic Plating
+   .description = Tech Upgrade (Only affects units of own faction)
+      Cyborg infantry gain a shield and medium armor plating.
+      Increases speed by 20%.
+
+actor_cabal_wasp =
+   .name = Wasp
+   .description = Flying infantry unit armed with anti-personnel rockets.
+      Strong vs Infantry, Light armor
+      Weak vs Aircraft
+
+actor_cabal_wasp_striker =
+   .name = Wasp Striker
+   .description = Promoted Wasp with enhanced speed and firepower.
+      Strong vs Infantry, Light armor
+      Weak vs Aircraft
+
+actor_cabal_mothership =
+   .name = Mothership
+   .description = Heavy CABAL aircraft armed with a powerful plasma cannon.
+      Requires a CABAL Core.
+      Strong vs Vehicles, Buildings
+      Weak vs Aircraft
+
+actor_cabal_mothership_omega =
+   .name = Mothership Omega
+   .description = Promoted Mothership with enhanced weapons and durability.
+      Strong vs Vehicles, Buildings
+      Weak vs Aircraft
+
+actor_cabal_beholder =
+   .name = Beholder
+   .description = Tech-center promotion hover drone armed with a heavy laser.
+      Strong vs Vehicles, Buildings
+      Can move over water.
+      Weak vs Infantry
+
+actor_cabal_hunterkillermk1_elite =
+   .name = Hunter Killer MK1 Elite
+   .description = Promoted anti-personnel gunship with improved weapons.
+      Strong vs Infantry, Light armor, Aircraft
+      Weak vs Vehicles
+
+actor_cabal_hunterkillermk2_omega =
+   .name = Hunter Killer MK2 Omega
+   .description = Promoted advanced fighter-bomber with heavier plasma cannons.
+      Strong vs Buildings, Vehicles
+      Weak vs Infantry, Aircraft
+
+actor_cabal_spidercnc4 =
+   .name = Spider CNC4
+   .description = Promoted laser spider with improved firepower and range.
+      Strong vs Vehicles, Infantry
+      Weak vs Aircraft
+
+actor_cabal_heavyreaper =
+   .name = Heavy Reaper
+   .description = Promoted Cyborg Reaper with heavier missile web traps.
+      Strong vs Aircraft, Vehicles
+      Weak vs Infantry
+
+actor_cabal_avatar =
+   .name = Avatar
+   .description = High-tech plasma walker.
+      Strong vs Vehicles, Buildings
+      Weak vs Aircraft
+
+actor_cabal_widow =
+   .name = Widow
+   .description = Promoted Avatar with enhanced plasma weapons and armor.
+      Strong vs Vehicles, Buildings
+      Weak vs Aircraft
+
+actor_cabal_legion =
+   .name = Legion
+   .description = Heavy assault walker. Requires a CABAL Core.
+      Strong vs Vehicles, Buildings
+      Weak vs Aircraft
 
 actor_cabal_missilesilo =
    .name = CABAL Missile Silo
@@ -239,7 +319,61 @@ actor_cabal_promotion_ascended =
    .description = Promotion Upgrade.
       Replaces Rocket Cyborg with the Ascended anti-armor walker.
 
-actor_cabal_promotion_manticore =
-   .name = Unlock Manticore
-   .description = Promotion Upgrade.
-      Enables construction of the Manticore heavy walker.
+actor_cabal_promotion_t1000 =
+   .name = Unlock T1000
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_cyborgcommandov2 =
+   .name = Unlock Cyborg Commando V2
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_spidercnc4 =
+   .name = Unlock Spider CNC4
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_heavyreaper =
+   .name = Unlock Heavy Reaper
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_widow =
+   .name = Unlock Widow
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_coredefender =
+   .name = Unlock Core Defender
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_waspstriker =
+   .name = Unlock Wasp Striker
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_hunterkillermk1elite =
+   .name = Unlock Hunter Killer MK1 Elite
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_hunterkillermk2omega =
+   .name = Unlock Hunter Killer MK2 Omega
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_mothershipomega =
+   .name = Unlock Mothership Omega
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor-cabal_core =
+   .description = CABAL Core.
+      Unlocks Tier 4 units and the CABAL superweapon.
+      Generates income and counts as a captured tech structure.
+
+actor-cabal_techcenter =
+   .description = CABAL Tech Center.
+      Required for advanced units and upgrades.
