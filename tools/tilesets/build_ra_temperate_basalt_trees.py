@@ -25,7 +25,7 @@ FOOTPRINTS = {
     "t15": ("___", "xx_"),
 }
 ACTOR_DIMENSIONS = {"t08": (2, 1), "t15": (3, 2)}
-PRODUCTION_BOXES = {"t08": (96, 96), "t15": (144, 96)}
+PRODUCTION_BOXES = {"t15": (144, 96)}
 BODY_TARGETS_24 = {
     # Explicit tree-replacement heights from the authored design guide.
     # Coordinates use half-open bounds in the 48x48 authoring canvas.
@@ -34,13 +34,34 @@ BODY_TARGETS_24 = {
     "t05": (2, 15, 23, 45),   # 30px = 1.25 tiles, low terraced
     "t06": (1, 7, 23, 45),    # 38px = 1.583 tiles, mountainous
     "t07": (1, 14, 23, 45),   # 31px = 1.292 tiles, terraced
-    "t08": (0, 9, 24, 45),    # up to 36px, full 1-tile width in taller sprite box
+    # t08 has a 2x1 sprite box but only a 1x1 collision footprint. Keep the
+    # formation inside the left tile; the second tile is only shadow clearance.
+    "t08": (0, 0, 24, 22),
     "t12": (1, 4, 24, 45),    # 41px = 1.708 tiles, mountainous
     "t13": (1, 13, 23, 45),   # 32px = 1.333 tiles, terraced
     "t14": (1, 7, 23, 45),    # 38px = 1.583 tiles, mountainous
     "t16": (1, 14, 23, 45),   # 31px = 1.292 tiles, terraced
     "t17": (1, 4, 24, 45),    # 41px = 1.708 tiles, mountainous
 }
+
+# Requested placement adjustments, expressed as fractions of the authoring
+# sprite box. Positive X moves east; positive Y moves north.
+PLACEMENT_OFFSETS = {
+    "t06": (0.05, 0.10),
+    "t07": (0.05, 0.05),
+    "t12": (0.05, 0.10),
+    "t13": (0.10, 0.05),
+    "t14": (0.10, 0.05),
+    "t16": (0.05, 0.10),
+    "t17": (0.10, 0.05),
+}
+
+
+def shifted_target(actor: str, target: tuple[int, int, int, int], size: tuple[int, int]):
+    east, north = PLACEMENT_OFFSETS.get(actor, (0.0, 0.0))
+    dx = round(size[0] * east)
+    dy = round(size[1] * north)
+    return (target[0] + dx, target[1] - dy, target[2] + dx, target[3] - dy)
 
 
 def footprint(actor: str) -> tuple[str, ...]:
@@ -207,11 +228,14 @@ def main() -> int:
         source = Image.open(args.source_dir / f"{actor}_basalt_body_source_transparent.png").convert("RGBA")
         production_size = PRODUCTION_BOXES.get(actor, tuple(audit["sprite_box"]))
         authoring_size = (production_size[0] // 2, production_size[1] // 2)
+        target = BODY_TARGETS_24.get(actor)
+        if target is not None:
+            target = shifted_target(actor, target, authoring_size)
         body, shadow, combined, package = author(
             source,
             audit["body_bounds_excluding_shadow"],
             authoring_size,
-            BODY_TARGETS_24.get(actor),
+            target,
         )
         body2 = body.resize(production_size, Image.Resampling.NEAREST)
         shadow2 = shadow.resize(production_size, Image.Resampling.NEAREST)
@@ -227,6 +251,10 @@ def main() -> int:
             "production_size": list(production_size), "uniform_2x2_blocks": uniform,
             "palette_encoding": palette_audit, "bounds_violations": 0,
             "frame_count": audit["frame_count"], "profile": profiles[actor],
+            "placement_offset_percent": [
+                round(PLACEMENT_OFFSETS.get(actor, (0.0, 0.0))[0] * 100),
+                round(PLACEMENT_OFFSETS.get(actor, (0.0, 0.0))[1] * 100),
+            ],
             "design_guide": str(Path.home() / "Documents/agents/volcanic-theater/basalt-formation-requirements.md"),
             "husk_status": "deferred; later cracked/fractured derivative of this geometry",
         })
