@@ -201,7 +201,7 @@ cabal_wasp:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 5
-		Prerequisites: ~cabal_cyborgfactory
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_wasp.description
 	Aircraft:
@@ -249,7 +249,7 @@ cabal_wasp_striker:
 		FireDelay: 10
 	Buildable:
 		BuildPaletteOrder: 6
-		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_waspstriker
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, cabal_promotion_waspstriker
 		Description: actor_cabal_wasp_striker.description
 
 cabal_mothership:
