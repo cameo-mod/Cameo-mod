@@ -373,6 +373,8 @@ cabal_core:
 	Power:
 		Amount: -100
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@tsoilderrick:
+		Prerequisite: tsoilderrick
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights

@@ -161,7 +161,7 @@ actor_cabal_upgrade_darkarmament =
 actor_cabal_upgrade_neutronnuclearcatalyst =
    .name = Neutron Nuclear Catalyst
    .description = Tech Upgrade (Only affects units of own faction)
-      Replaces conventional weapons with neutron shells on Ravager, Cyborg Commando, Artillery Spider, and Tarantula.
+      Replaces conventional weapons with neutron shells on Ravager, Cyborg Commando, Cyborg Commando V2, Artillery Spider, and Tarantula.
 
 actor_cabal_upgrade_radarhack =
    .name = Radar Hack

@@ -278,7 +278,7 @@ cabal_devout:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
-		LocalOffset: 128,-128,256, 128,128,256
+		LocalOffset: 128,-256,256, 128,256,256
 	# 	RequiresCondition: !cabal_upgrade_darkarmament
 	# Armament@Upgraded:
 	# 	Weapon: TSDevoutChaingunsUpgraded
@@ -371,7 +371,7 @@ cabal_ascended:
 		Step: 25
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
-		LocalOffset: 128,-128,256, 128,128,256
+		LocalOffset: 128,-256,256, 128,256,256
 	# 	RequiresCondition: !cabal_upgrade_darkarmament
 	# Armament@Upgraded:
 	# 	Weapon: CabalAscendedRocketsUpgraded
