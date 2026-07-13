@@ -234,6 +234,19 @@ cabal_wasp_striker:
 		Cost: 1000
 	Tooltip:
 		Name: Wasp Striker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Aircraft:
+		TurnSpeed: 30
+		Speed: 150
+	Armament@PRIMARY:
+		Weapon: CabalWaspLaserStriker
+		LocalOffset: 512,-512,512, 512,512,512
+		FireDelay: 10
 	Buildable:
 		BuildPaletteOrder: 6
 		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_waspstriker
@@ -281,9 +294,22 @@ cabal_mothership_omega:
 	Inherits: cabal_mothership
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
-		Cost: 15000
+		Cost: 7500
 	Tooltip:
 		Name: Mothership Omega
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Health:
+		HP: 600000
+	ChangesHealth@SelfHealing:
+		Step: 240
+	Aircraft:
+		TurnSpeed: 11
+		Speed: 55
+	RevealsShroud:
+		Range: 16c0
+	DetectCloaked:
+		Range: 10c0
 	Buildable:
 		BuildPaletteOrder: 31
 		Prerequisites: ~cabal_helipad, cabal_promotion_mothershipomega

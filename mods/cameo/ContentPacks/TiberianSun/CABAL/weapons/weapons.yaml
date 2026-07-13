@@ -781,6 +781,13 @@ CabalWaspLaser:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
+CabalWaspLaserStriker:
+	Inherits: CabalWaspLaser
+	ReloadDelay: 18
+	Range: 5000
+	Burst: 2
+	BurstDelays: 3
+
 CabalAscendedRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
