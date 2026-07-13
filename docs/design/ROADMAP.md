@@ -131,13 +131,12 @@ factions, everything through the balance workbook._
 - [x] **Ascended + Devout**: increase the **second (Y) value** of each
   triple offset ~**2×** so their weapons sit further left/right.
 
-### N8. Armor combo (was CC; sheet-coupled, mostly done)
+### N8. Armor combo (was CC; DONE)
 - [x] Cyborg Commando + V2: Heroic/Superheavy dual-armor applied.
 - [x] Eliminator 800: Flak/Heavy dual-armor applied.
 - [x] Berserker: Heroic/Superheavy via `^HeroInfantryTemplate` + `^TSCyborgDualArmorHeavy`.
-- [ ] Remaining infantry: verify all have the FutureTech-droid dual-armor
-  combo (base infantry `Armor:` + vehicle-class `Armor@X:` + `DamageMultiplier@X: 200`).
-  Reference: Cannon/Missile/Scout/Shotgun Droid in FutureTech infantry.yaml.
+- [x] All 11 CABAL infantry verified: every unit has Armor@Secondary +
+  DamageMultiplier@Secondary: 200 (some via `^TSCyborgDualArmor*` templates).
 
 ### N9. Role + tier + promotion rebalance (L, sheet-first) — MOSTLY DONE
 - [x] **3×4 promotion grid fully populated**: Devout, Ascended, Beholder,
@@ -157,10 +156,9 @@ factions, everything through the balance workbook._
 - [x] **Husk names fixed** (Carryall, Hunter Killer, Overkill Fortress,
   Overkill Drone).
 - [x] **Design doc updated** (CABAL_FACTION_DESIGN.md reflects all changes).
-- [ ] **Template role audit**: verify every CABAL unit maps to exactly
-  ONE class template from defaults.yaml. Some still use wrong templates
-  (Artillery Spider=^ScoutVehicle→^ArtilleryTemplate, etc. — see design
-  doc §4 notes).
+- [x] **Template role audit**: fixed Engineer→^MechanicTemplate,
+  Eliminator 800→^HeavyInfantryTemplate, Carryall→^UnarmedTransportHelicopterTemplate,
+  Scarab APC→^SupportVehicleTemplate + ^CargoVehicle (`81bad88d2`).
 - [ ] **Open question**: Overkill Fortress vs Overkill Carrier final name.
 
 ### N10. Upgrades audit
