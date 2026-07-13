@@ -170,8 +170,9 @@ factions, everything through the balance workbook._
   neutron-shell twins untouched.
 
 ### N11. Descriptions + AI
-- [ ] Fluent descriptions for all CABAL units (DESIGN description scheme);
-  AI wiring (squads, upgrades, promotions).
+- [x] All CABAL units have Fluent descriptions (converted 8 inline \n
+  descriptions to Fluent keys per DESIGN.md §7, `1f580f6e0`).
+- [x] AI wiring: all CABAL units in UnitsToBuild list with weights.
 
 ### CE (carried). Effect-warhead naming sweep, mod-wide
 - [ ] Beyond CABAL: rename stray `CreateEffect` warheads to the
