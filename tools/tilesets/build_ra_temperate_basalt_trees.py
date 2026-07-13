@@ -244,7 +244,7 @@ def main() -> int:
         combined.save(out / f"{actor}_basalt_combined_24px.png")
         indices, palette_preview, palette_audit = encode_volcanic_sprite(body2, shadow2, palette)
         palette_preview.save(out / f"{actor}_basalt_production_palette.png")
-        write_shptd(out / f"{actor}.tem", *production_size, [bytes(indices)] * audit["frame_count"])
+        write_shptd(out / f"{actor}.vol", *production_size, [bytes(indices)] * audit["frame_count"])
         rgba = np.asarray(palette_preview)
         uniform = all(np.array_equal(rgba[0::2, 0::2], part) for part in (rgba[0::2, 1::2], rgba[1::2, 0::2], rgba[1::2, 1::2]))
         package.update({
