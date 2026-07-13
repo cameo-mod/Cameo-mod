@@ -158,6 +158,11 @@ actor_cabal_upgrade_darkarmament =
       Reloads infantry weapons 10% faster.
       Upgrades Rocket Cyborg rockets for increased burst size.
 
+actor_cabal_missilesilo =
+   .name = CABAL Missile Silo
+   .description = Add-on for the CABAL Core that arms the Cabal Magic Nuke superweapon.
+      Requires a CABAL Core and tech level superweapons.
+
 actor_cabal_upgrade_neutronnuclearcatalyst =
    .name = Neutron Nuclear Catalyst
    .description = Tech Upgrade (Only affects units of own faction)

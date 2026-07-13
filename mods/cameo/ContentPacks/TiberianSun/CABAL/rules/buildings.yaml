@@ -351,6 +351,7 @@ cabal_core:
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
 	Inherits@cashtricklerlimit: ^CashTricklerLimited
 	Inherits@SW: ^PrimarySuperweapon
+	Inherits@plugproducer: ^BuildingPlugProducer
 	Selectable:
 		Bounds: 1280, 1024
 	HitShape:
@@ -385,12 +386,22 @@ cabal_core:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights3
 	SupportPowerChargeBar:
+	Pluggable:
+		Offset: 1,0
+		Conditions:
+			cabalcore_silo: cabalnuke
+		Requirements:
+			cabalcore_silo: !build-incomplete && !cabalnuke
+	ProvidesPrerequisite@cabalnuke:
+		Prerequisite: cabalnuke
+		RequiresCondition: cabalnuke
 	NukePowerCA:
 		OrderName: CabalMagicNuke
 		AllowMultiple: True
 		PauseOnCondition: disabled
+		RequiresCondition: cabalnuke
 		Prerequisites:
-			1: ts_nod_missilesilo
+			1: ~techlevel.superweapons
 		Cursor: nuke
 		Icons:
 			1: abomb
