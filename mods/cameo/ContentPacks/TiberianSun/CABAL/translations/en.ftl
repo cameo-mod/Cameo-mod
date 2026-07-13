@@ -343,17 +343,7 @@ actor_cabal_promotion_waspstriker =
       Unlocks the promoted unit for production.
 
 actor_cabal_promotion_hunterkillermk1elite =
-   .name = Unlock Hunter Killer MK1 Elite
-   .description = Promotion
-      Unlocks the promoted unit for production.
-
-actor_cabal_promotion_hunterkillermk2omega =
-   .name = Unlock Hunter Killer MK2 Omega
-   .description = Promotion
-      Unlocks the promoted unit for production.
-
-actor_cabal_promotion_mothershipomega =
-   .name = Unlock Mothership Omega
+   .name = Unlock Super Hunter Killer
    .description = Promotion
       Unlocks the promoted unit for production.
 
