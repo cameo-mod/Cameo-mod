@@ -1193,6 +1193,7 @@ harv.latin:
 	Mobile:
 		Speed: 115
 		TurnSpeed: 23
+		Voice: Move
 	Health:
 		HP: 85000
 	Repairable:
@@ -1200,7 +1201,7 @@ harv.latin:
 	ChangesHealth@SelfHealing:
 		Step: 34
 	Harvester:
-		Voice: Harvest
+		HarvestVoice: Harvest
 		BaleLoadDelay: 3
 		BaleUnloadDelay: 2
 		EmptyCondition: no-tiberium
