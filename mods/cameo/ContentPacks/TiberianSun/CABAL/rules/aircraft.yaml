@@ -132,7 +132,7 @@ cabal_hunterkillermk2:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_helipad, cabal_techcenter, !cabal_promotion_hunterkillermk2omega
+		Prerequisites: ~cabal_helipad, cabal_techcenter
 		Queue: Aircraft, RAAircraft
 		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
 	Aircraft:
@@ -282,8 +282,9 @@ cabal_mothership:
 		Name: Mothership
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_helipad, cabal_core, !cabal_promotion_mothershipomega
+		Prerequisites: ~cabal_helipad, cabal_core
 		Queue: Aircraft, RAAircraft
+		BuildLimit: 1
 		Description: actor_cabal_mothership.description
 	Health:
 		HP: 500000
@@ -307,44 +308,6 @@ cabal_mothership:
 		Image: cabal_mothership
 		PlayerPalette: player_rgba
 
-cabal_mothership_omega:
-	Inherits: ^Helicopter
-	Inherits@Template: ^SpaceshipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Valued:
-		Cost: 7500
-	Tooltip:
-		Name: Mothership Omega
-	Buildable:
-		BuildPaletteOrder: 31
-		Prerequisites: ~cabal_helipad, cabal_core, cabal_promotion_mothershipomega
-		Queue: Aircraft, RAAircraft
-		Description: actor_cabal_mothership_omega.description
-	Health:
-		HP: 600000
-	ChangesHealth@SelfHealing:
-		Step: 240
-	Aircraft:
-		Speed: 55
-		TurnSpeed: 11
-	Armament@PRIMARY:
-		Weapon: CabalHunterKillerHeavyLaser
-	Armament@ROCKETS:
-		Weapon: CabalMothershipRockets
-		LocalOffset: 512,-512,512, 512,512,512
-		FireDelay: 10
-	AttackAircraft:
-		FacingTolerance: 80
-		PersistentTargeting: false
-		AttackType: Hover
-	-SpawnActorOnDeath:
-	RenderSprites:
-		Image: cabal_mothership
-		PlayerPalette: player_rgba
 
 cabal_hunterkillermk1_elite:
 	Inherits: ^Helicopter
@@ -410,73 +373,3 @@ cabal_hunterkillermk1_elite:
 		Image: cabal_hunterkillermk1
 		PlayerPalette: player_rgba
 
-cabal_hunterkillermk2_omega:
-	Inherits: ^Helicopter
-	# Inherits@reload: ^RearmableAircraft
-	Inherits@Template: ^SpaceshipTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Valued:
-		Cost: 4500
-	Tooltip:
-		Name: Hunter Killer MK2 Omega
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildPaletteOrder: 22
-		Prerequisites: ~cabal_helipad, cabal_techcenter, cabal_promotion_hunterkillermk2omega
-		Queue: Aircraft, RAAircraft
-		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
-	Aircraft:
-		Speed: 53
-		TurnSpeed: 10
-		# TakeoffSounds: orcaup1.aud
-		# LandingSounds: orcadwn1.aud
-		# AltitudeVelocity: 128
-		# CanSlide: false
-		# TakeOffOnResupply: true
-	Health:
-		HP: 360000
-	Repairable:
-		HpPerStep: 15000
-	ChangesHealth@SelfHealing:
-		Step: 144
-	Armament@PRIMARY:
-		Weapon: CabalHunterKillerHeavyLaser
-		LocalOffset: 0,0,0
-		# PauseOnCondition: !ammo
-	Armament@PRIMARY2:
-		Weapon: TSHellfireTwin
-		LocalOffset: 25,-100,0, 25,100,0
-		# PauseOnCondition: !ammo
-		RequiresCondition: up_plasmaweapons
-	AttackAircraft:
-		Voice: Attack
-		FacingTolerance: 80
-		PersistentTargeting: false
-		PauseOnCondition: disabled
-	SelectionDecorations:
-	Selectable:
-		DecorationBounds: 1536, 1536
-	Voiced:
-		VoiceSet: TSScrin
-	# AmmoPool:
-	# 	Ammo: 24
-	# 	ReloadCount: 4
-	# 	AmmoCondition: ammo
-	DeathSounds:
-		VolumeMultiplier: 2
-	SpawnActorOnDeath:
-		Actor: cabal_hunterkillermk2_husk
-	# WithAmmoPipsDecoration:
-	# 	Position: BottomLeft
-	# 	RequiresSelection: True
-	# 	PipCount: 4
-	# ActorStatValues:
-	# 	Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
-	RenderSprites:
-		Image: cabal_hunterkillermk2
-		PlayerPalette: player_rgba

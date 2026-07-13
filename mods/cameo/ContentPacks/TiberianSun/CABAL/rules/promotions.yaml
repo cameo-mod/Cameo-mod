@@ -122,26 +122,3 @@ cabal_promotion_hunterkillermk1elite:	Inherits: ^promotion_upgrade.template
 		Image: cabal_hunterkillermk1
 	ProvidesPrerequisite:
 
-cabal_promotion_hunterkillermk2omega:	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: Unlock Hunter Killer MK2 Omega
-	Buildable:
-		BuildPaletteOrder: 9
-		Queue: Promotions
-		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk2omega, cabal_techcenter, cabal_promotion_hunterkillermk1elite, rank3
-		Description: actor_cabal_promotion_hunterkillermk2omega.description
-	RenderSprites:
-		Image: cabal_hunterkillermk2
-	ProvidesPrerequisite:
-
-cabal_promotion_mothershipomega:	Inherits: ^promotion_upgrade.template
-	Tooltip:
-		Name: Unlock Mothership Omega
-	Buildable:
-		BuildPaletteOrder: 12
-		Queue: Promotions
-		Prerequisites: ~cabal_helipad, !cabal_promotion_mothershipomega, cabal_promotion_hunterkillermk2omega, cabal_core, rank4
-		Description: actor_cabal_promotion_mothershipomega.description
-	RenderSprites:
-		Image: cabal_mothership
-	ProvidesPrerequisite:
