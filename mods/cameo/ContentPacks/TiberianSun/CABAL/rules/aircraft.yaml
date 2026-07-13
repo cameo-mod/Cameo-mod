@@ -16,7 +16,7 @@ cabal_overkillcarryall:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_helipad
-		Description: VTOL aircraft capable of lifting\nand transporting vehicles.\n  Unarmed
+		Description: actor_cabal_overkillcarryall.description
 	Aircraft:
 		TurnSpeed: 29
 		Speed: 149
@@ -60,7 +60,7 @@ cabal_hunterkillermk1:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
-		Description: Support gunship armed with\ndual rockets and small dual lasers.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+		Description: actor_cabal_hunterkillermk1.description
 	Aircraft:
 		Speed: 160
 		TurnSpeed: 32
@@ -126,7 +126,7 @@ cabal_hunterkillermk2:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_helipad, cabal_techcenter
 		Queue: Aircraft, RAAircraft
-		Description: Heavy carrier with drone swarm\nand a big moving laser.\n  Strong vs Vehicles, Buildings\n  Weak vs Infantry, Aircraft
+		Description: actor_cabal_hunterkillermk2.description
 	Aircraft:
 		Speed: 50
 		TurnSpeed: 10
@@ -391,7 +391,7 @@ cabal_hunterkillermk1_elite:
 		BuildPaletteOrder: 21
 		Prerequisites: ~cabal_helipad, cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
-		Description: Promoted support gunship armed with\ndual rockets and small dual lasers.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+		Description: actor_cabal_hunterkillermk1_elite.description
 	Aircraft:
 		Speed: 168
 		TurnSpeed: 32

@@ -356,3 +356,52 @@ actor-cabal_core =
 actor-cabal_techcenter =
    .description = CABAL Tech Center.
       Required for advanced units and upgrades.
+
+actor_cabal_overkillcarryall =
+   .name = Carryall
+   .description = VTOL aircraft capable of lifting and transporting vehicles.
+      Unarmed.
+
+actor_cabal_hunterkillermk1 =
+   .name = Hunter Killer
+   .description = Support gunship armed with dual rockets and small dual lasers.
+      Strong vs Infantry, Light armor, Aircraft
+      Weak vs Vehicles
+
+actor_cabal_hunterkillermk2 =
+   .name = Overkill Fortress
+   .description = Heavy carrier with drone swarm and a big moving laser.
+      Strong vs Vehicles, Buildings
+      Weak vs Infantry, Aircraft
+
+actor_cabal_hunterkillermk1_elite =
+   .name = Super Hunter Killer
+   .description = Promoted support gunship armed with dual rockets and small dual lasers.
+      Strong vs Infantry, Light armor, Aircraft
+      Weak vs Vehicles
+
+actor_cabal_silo =
+   .name = Silo
+   .description = Stores resources.
+      Strong vs Nothing
+      Weak vs Everything
+
+actor_cabal_stealthgenerator =
+   .name = Stealth Generator
+   .description = Advanced base defense that generates a cloaking field.
+      Strong vs Nothing
+      Weak vs Everything
+
+actor_cabal_heavycabalobelisk =
+   .name = Heavy Cabal Obelisk
+   .description = Advanced base defense with a powerful plasma-laser.
+      Requires power to operate.
+      Strong vs Ground units
+      Weak vs Aircraft
+
+actor_cabal_obeliskofdarkness =
+   .name = Obelisk of Darkness
+   .description = Advanced air defense laser tower.
+      Requires power to operate.
+      Strong vs Aircraft
+      Weak vs Ground units
