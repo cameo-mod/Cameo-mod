@@ -72,13 +72,13 @@ factions, everything through the balance workbook._
   - med   → Commando plasma (~50k), TS155mm_bluenuke (Artillery, ~60k)
   - **magicnuke (biggest) → the new CABAL superweapon ONLY** (below).
 
-### N2. CABAL superweapon (biggest magicnuke)
-- [ ] New nuke support power, **same values as the Ixian EMP Nuke**
+### N2. CABAL superweapon (biggest magicnuke) (`1f8b58820`)
+- [x] New nuke support power, **same values as the Ixian EMP Nuke**
   (`supercomputer.ixian` `NukePowerCA` firing `PulseMissile`:
   ChargeInterval 10500, MissileWeapons PulseMissile, MissileDelay 25,
   CameraRange/CircleRanges 10000, etc.) but with the **biggest magicnuke**
   as the missile/impact animation (+ a new sound, see S-rules).
-- [ ] **Fired from the CABAL Core**, using **TD Nod Temple of Nod logic**,
+- [x] **Fired from the CABAL Core**, using **TD Nod Temple of Nod logic**,
   **plus an add-on that adds the missile silo**. (Find the Temple-of-Nod
   NukePower pattern; the "add-on = missile silo" is a prerequisite
   building/attachment that unlocks or houses the silo.)
