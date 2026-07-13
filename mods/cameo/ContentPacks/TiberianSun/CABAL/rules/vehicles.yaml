@@ -531,6 +531,8 @@ cabal_tarantula:
 cabal_scarabapc:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
@@ -569,6 +571,8 @@ cabal_scarabapc:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 9
 		InitialUnits: cabal_cyborginfantry, cabal_rocketcyborg, cabal_devout, cabal_dissolver, cabal_engineer, cabal_ascended, cabal_eliminator800, cabal_hackercyborg, cabal_ravager
+		ExclusiveDeploy: false
+		DeployType: vehicle
 	Targetable@garrisoned:
 		RequiresCondition: loaded && !submerged
 	WithCargoPipsDecoration:
