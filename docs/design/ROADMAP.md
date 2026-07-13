@@ -131,27 +131,37 @@ factions, everything through the balance workbook._
 - [x] **Ascended + Devout**: increase the **second (Y) value** of each
   triple offset ~**2×** so their weapons sit further left/right.
 
-### N8. Armor combo (was CC; still pending, sheet-coupled)
-- [ ] Give every CABAL infantry the **FutureTech-droid dual-armor combo**:
-  base infantry `Armor:` (`-RequiresCondition:` to stay on) + a second
-  vehicle-class `Armor@X:` + `DamageMultiplier@X: 200` (damage ×2). Pick
-  the vehicle class per unit by role. Doubling incoming damage halves
-  effective HP → must be re-priced with the formula (couple with N9).
+### N8. Armor combo (was CC; sheet-coupled, mostly done)
+- [x] Cyborg Commando + V2: Heroic/Superheavy dual-armor applied.
+- [x] Eliminator 800: Flak/Heavy dual-armor applied.
+- [x] Berserker: Heroic/Superheavy via `^HeroInfantryTemplate` + `^TSCyborgDualArmorHeavy`.
+- [ ] Remaining infantry: verify all have the FutureTech-droid dual-armor
+  combo (base infantry `Armor:` + vehicle-class `Armor@X:` + `DamageMultiplier@X: 200`).
   Reference: Cannon/Missile/Scout/Shotgun Droid in FutureTech infantry.yaml.
 
-### N9. Role + tier + promotion rebalance (L, sheet-first)
-- [ ] **Every CABAL unit maps to exactly ONE template role** from
-  `defaults.yaml` (^ScoutVehicleTemplate, ^FireSupportTemplate,
-  ^MainBattleTankTemplate, ^HeavyInfantryTemplate, etc.). Assign the role,
-  set stats from the workbook, apply the number (sheet-first dual-write).
-- [ ] **Tech tiers**: better units = higher tier; **fill every tier
-  evenly, none empty**. Promotions increase in tech level; **promotion
-  trees make sense and are grouped thematically** (see design screenshot;
-  left = infantry column, middle = vehicles).
-- [ ] Missing units to slot into the tiers/promotions: cnc4 Spider
-  (fire-support laser → Widow), Widow (carrier boosted by ≤4 spiders),
-  T1000 (promo of Eliminator 800), Commando V2 wiring, Avatar, Core
-  Defender promo. Stats from 333ggg's cabal.xlsx rows.
+### N9. Role + tier + promotion rebalance (L, sheet-first) — MOSTLY DONE
+- [x] **3×4 promotion grid fully populated**: Devout, Ascended, Beholder,
+  CCV2 (infantry); Spider CNC4, Heavy Reaper, Widow, Core Defender
+  (vehicles); Wasp Striker, Super Hunter Killer, Overkill Fortress,
+  Mothership (aircraft).
+- [x] **T1000 removed**; Beholder moved from Consortium to CABAL.
+- [x] **All Omega variants removed** (HK2 Omega, Mothership Omega).
+- [x] **Berserker refactored** to hero infantry (`^HeroInfantryTemplate`),
+  T4, HP 800k, DPS 7500, cost 10000, from Cyborg Factory, requires Core.
+- [x] **Overkill Fortress rebuilt** as Farasha-style carrier with drones.
+- [x] **HK1 + Super Hunter Killer**: dual rockets + dual lasers.
+- [x] **Carryall renamed**, unarmed transport.
+- [x] **Spreadsheet synced**: 35 rows, all TechTier/UnitClass/Special
+  values legal per DESIGN.md (1.0/0.75/0.5, epic=1.0/0.3), obsolete rows
+  deleted, missing units added, names updated.
+- [x] **Husk names fixed** (Carryall, Hunter Killer, Overkill Fortress,
+  Overkill Drone).
+- [x] **Design doc updated** (CABAL_FACTION_DESIGN.md reflects all changes).
+- [ ] **Template role audit**: verify every CABAL unit maps to exactly
+  ONE class template from defaults.yaml. Some still use wrong templates
+  (Artillery Spider=^ScoutVehicle→^ArtilleryTemplate, etc. — see design
+  doc §4 notes).
+- [ ] **Open question**: Overkill Fortress vs Overkill Carrier final name.
 
 ### N10. Upgrades audit
 - [x] Reviewed every CABAL upgrade for meaningful consumption. Removed the
