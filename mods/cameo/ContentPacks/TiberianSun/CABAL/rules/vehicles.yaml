@@ -17,6 +17,8 @@ cabal_constructionyard:
 		LocalCenterOffset: 0,-512,0
 	Health:
 		HP: 1000000
+	ChangesHealth@SelfHealing:
+		Step: 400
 	Armor:
 		Type: Wood
 	Transforms:
@@ -97,7 +99,7 @@ cabal_mobileconstructionvehicle:
 	Voiced:
 		VoiceSet: TSReaper
 	RenderSprites:
-		Image: tsmcvblack
+		Image: tsmcv
 		PlayerPalette: playerra2
 	RenderVoxels:
 		Image: tsmcvblack
@@ -110,7 +112,7 @@ cabal_mobileconstructionvehicle:
 
 cabal_cyborgreaper:
 	Inherits: ^Walker
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -128,14 +130,14 @@ cabal_cyborgreaper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
-		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
+		Prerequisites: ~cabal_cyborgfactory
 		Description: actor_cabal_cyborgreaper.description
 	Health:
 		HP: 70000
 	ChangesHealth@SelfHealing:
 		Step: 28
 	Mobile:
-		TurnSpeed: 13
+		TurnSpeed: 26
 		Speed: 65
 	Armament:
 		Weapon: CabalReaperMissiles
@@ -175,67 +177,16 @@ cabal_cyborgreaper:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
 
-cabal_dissolver:
-	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
-	Inherits@EMP: ^TurretEMP
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@HackableRobot: ^HackableRobot
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
-	Valued:
-		Cost: 725
-	Tooltip:
-		Name: Dissolver
-	Buildable:
-		BuildPaletteOrder: 20
-		Queue: Infantry, RAInfantry
-		Prerequisites: ~cabal_cyborgfactory
-		IconPalette: ra2
-		Description: actor_cabal_dissolver.description
-	Selectable:
-		Class: cabal_dissolver
-	Mobile:
-		TurnSpeed: 10
-		Speed: 50
-		Locomotor: foot
-	Health:
-		HP: 50000
-	ChangesHealth@SelfHealing:
-		Step: 20
-	Armor:
-		Type: Plate
-	Turreted:
-		TurnSpeed: 10
-		Offset: 0,0,25
-	Armament:
-		Weapon: CabalDissolverSpray
-		LocalOffset: 200,0,0
-	RenderSprites:
-	QuantizeFacingsFromSequence:
-		Sequence: stand
-	-WithFacingSpriteBody:
-	WithInfantryBody:
-	ChangesHealth:
-		Step: 500
-		Delay: 15
-		StartIfBelow: 150
-		RequiresCondition: attack
-	GrantConditionOnAttack:
-		Condition: attack
-	WithSpriteTurret:
-		RequiresCondition: !attack
-	WithSpriteTurret@1:
-		Sequence: shoot
-		RequiresCondition: attack
-	Voiced:
-		VoiceSet: TSCyborg
-
 cabal_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@Voxel: ^TSRenderVoxel
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Health:
 		HP: 150000
+	ChangesHealth@SelfHealing:
+		Step: 60
+	Shielded:
+		RegenAmount: 120
 	Harvester:
 		PipCount: 8
 		Capacity: 35
@@ -341,7 +292,7 @@ cabal_mantis:
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
-		Cost: 875
+		Cost: 500
 	Tooltip:
 		Name: Mantis
 	Buildable:
@@ -355,6 +306,8 @@ cabal_mantis:
 		Speed: 120
 	Health:
 		HP: 35000
+	Armor:
+		Type: Scout
 	Repairable:
 		HpPerStep: 1750
 	ChangesHealth@SelfHealing:
@@ -384,8 +337,7 @@ cabal_mantis:
 
 cabal_manticore:
 	Inherits: ^Vehicle
-	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -401,12 +353,12 @@ cabal_manticore:
 		Name: Manticore
 	Buildable:
 		BuildPaletteOrder: 145
-		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, ~cabal_promotion_manticore
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_manticore.description
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 13
+		TurnSpeed: 26
 		Speed: 65
 	Health:
 		HP: 100000
@@ -441,12 +393,10 @@ cabal_manticore:
 
 cabal_artilleryspider:
 	Inherits: ^Vehicle
-	Inherits@Template: ^ScoutVehicleTemplate
+	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@EMP: ^FrontalEMP
-	Inherits@AntiInf: ^PrioritizeInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
@@ -464,7 +414,7 @@ cabal_artilleryspider:
 	Mobile:
 		Locomotor: tracked
 		Speed: 70
-		TurnSpeed: 14
+		TurnSpeed: 28
 	Health:
 		HP: 50000
 	Repairable:
@@ -486,8 +436,6 @@ cabal_artilleryspider:
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	WithMuzzleOverlay:
-	AttackFollowFrontal:
-		FacingTolerance: 45
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	DeliversCash:
@@ -602,18 +550,17 @@ cabal_scarabapc:
 		Speed: 75
 		Locomotor: hover
 		RequiresCondition: !notmobile && !disabled
+		TurnSpeed: 15
 	Hovers:
 	Health:
 		HP: 30000
 	Repairable:
-		HpPerStep: 2637
+		HpPerStep: 1500
 	Armor:
 		Type: Heavy
 	RevealsShroud:
 		Range: 5c0
 		RequiresCondition: !submerged
-	Turreted:
-		TurnSpeed: 20
 	Voiced:
 		VoiceSet: TSVehicle
 	DeliversCash:
@@ -633,10 +580,11 @@ cabal_scarabapc:
 		PlayerPalette: player_rgba
 		Image: cabal_scarabapc
 
-cabal_eliminator1000:
+cabal_berserker:
+	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
 	Inherits: ^Soldier
-	Inherits@Template: ^ScoutVehicleTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@DualArmor: ^TSCyborgDualArmorHeavy
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@MC: ^MCImmune
@@ -646,13 +594,13 @@ cabal_eliminator1000:
 	Inherits@EMPfrontal: ^FrontalEMP
 	Inherits@EMP: ^UnitDisable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Selectable:
-		Bounds: 3072, 2560, 0, 0
+		Bounds: 600, 600, 0, 0
 	Valued:
 		Cost: 5000
 	Tooltip:
-		Name: Eliminator 1000
+		Name: Berserker
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -660,14 +608,16 @@ cabal_eliminator1000:
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		Description: actor_cabal_eliminator1000.description
+		Description: actor_cabal_berserker.description
 	Mobile:
 		Speed: 80
 		PauseOnCondition: disabled
-	Armor:
-		Type: Light
 	Health:
 		HP: 250000
+	ChangesHealth@SelfHealing:
+		Step: 100
+	Shielded:
+		RegenAmount: 200
 	Armament@PRIMARY:
 		Weapon: Eliminator-Blades
 	WithInfantryBody:
@@ -717,5 +667,216 @@ cabal_eliminator1000:
 		StartIfBelow: 100
 		DamageCooldown: 1
 	RenderSprites:
-		Image: cabal_eliminator1000
+		Image: cabal_berserker
+
+cabal_spidercnc4:
+	Inherits: cabal_laserspider
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Spider CNC4
+	Buildable:
+		BuildPaletteOrder: 11
+		Prerequisites: ~cabal_mechfactory, cabal_promotion_spidercnc4
+		Description: actor_cabal_spidercnc4.description
+	RenderSprites:
+		Image: cabal_laserspider
+		PlayerPalette: player_rgba
+
+cabal_heavyreaper:
+	Inherits: cabal_cyborgreaper
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 1650
+	Tooltip:
+		Name: Heavy Reaper
+	Buildable:
+		BuildPaletteOrder: 12
+		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_heavyreaper
+		Description: actor_cabal_heavyreaper.description
+	RenderSprites:
+		Image: cabal_cyborgreaper
+		PlayerPalette: player_rgba
+
+cabal_avatar:
+	Inherits: ^Vehicle
+	Inherits@Template: ^HighTechTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Valued:
+		Cost: 2250
+	Tooltip:
+		Name: Avatar
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_mechfactory, cabal_techcenter
+		Queue: Vehicle, RAVehicle
+		Description: actor_cabal_avatar.description
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 14
+		Speed: 70
+	Health:
+		HP: 80000
+	ChangesHealth@SelfHealing:
+		Step: 32
+	Armament@PRIMARY:
+		Weapon: CabalRavagerPlasma
+	RenderSprites:
+		Image: cabal_manticore
+		PlayerPalette: player_rgba
+
+cabal_widow:
+	Inherits: cabal_avatar
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 3000
+	Tooltip:
+		Name: Widow
+	Buildable:
+		BuildPaletteOrder: 31
+		Prerequisites: ~cabal_mechfactory, cabal_promotion_widow
+		Description: actor_cabal_widow.description
+
+cabal_legion:
+	Inherits: ^Vehicle
+	Inherits@Template: ^MainBattleTankTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@BACKUP: ^cabal_upgrade_backupsystems
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: Legion
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~cabal_mechfactory, cabal_core
+		Queue: Vehicle, RAVehicle
+		Description: actor_cabal_legion.description
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 24
+		Speed: 60
+	Health:
+		HP: 120000
+	ChangesHealth@SelfHealing:
+		Step: 48
+	Armament@PRIMARY:
+		Weapon: CabalMantisGun
+		LocalOffset: 350,-30,250, 350,30,250
+		Recoil: 128
+		RecoilRecovery: 26
+		MuzzleSequence: muzzle
+	WithMuzzleOverlay:
+	AttackFrontal:
+		FacingTolerance: 512
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: tstnkspid
+		PlayerPalette: player_rgba
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+
+cabal_coredefender:
+	Inherits: ^Vehicle
+	Inherits@Template: ^EpicVehicleTemplate
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@VOICES: ^WithFeedbackVoiceLines
+	Inherits@announce: ^AnnounceGlobal
+	Inherits@EMP: ^FrontalEMP
+	Inherits@detect: ^GenericGroundDetector
+	Inherits@ND: ^NotDevourable
+	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
+	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Valued:
+		Cost: 12500
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		Queue: Vehicle, RAVehicle
+		BuildPaletteOrder: 140
+		BuildLimit: 1
+		Prerequisites: ~cabal_mechfactory, cabal_core
+		Description: actor_cabal_coredefender.description
+	Mobile:
+		TurnSpeed: 20
+		Speed: 50
+	DetectCloaked:
+		Range: 6c0
+	Armament:
+		Weapon: CabalCoreDefenderLaser
+		LocalOffset: 1300,-750,1600, 1300,750,1600
+	Armament@LASER3:
+		Weapon: CabalCoreDefenderLaser
+		LocalOffset: 1300,750,1600, 1300,-750,1600
+	AttackFrontal:
+		FacingTolerance: 12
+	Voiced:
+		VoiceSet: TSCABALCore
+	VoiceAnnouncement:
+		Voice: CoreDefenderBuild
+	Tooltip:
+		Name: Core Defender
+	Health:
+		HP: 1500000
+	ChangesHealth@SelfHealing:
+		Step: 600
+		Delay: 1
+		StartIfBelow: 100
+	ChangesHealth@1:
+		Step: 400
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+	ChangesHealth@2:
+		PercentageStep: 1
+		Delay: 25
+		StartIfBelow: 100
+		DamageCooldown: 25
+	ChangesHealth@TIBREPAIR:
+		Step: 400
+		Delay: 1
+		StartIfBelow: 100
+		DamageCooldown: 1
+		RequiresCondition: ontiberium
+	WithDecoration@REDCROSS2:
+		Image: pips
+		Sequence: pip_heal
+		Position: BottomRight
+		RequiresCondition: ontiberium
+		BlinkInterval: 32
+		BlinkPattern: On, Off
+	HitShape:
+		UseTargetableCellsOffsets: false
+		Type: Rectangle
+			TopLeft: -1024, -1024
+			BottomRight: 1024, 1024
+	Selectable:
+		Bounds: 2248, 2248
+	Capturable:
+		Types: thiefproof
+	RenderSprites:
 		PlayerPalette: playerra2
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: run
+		ValidMovementTypes: Horizontal, Turn
+	DeathSounds:

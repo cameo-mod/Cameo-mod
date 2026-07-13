@@ -7,7 +7,15 @@ cabal_engineer:
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@Cyborg: ^TSCyborgs
+	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: None
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Scout
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
@@ -26,10 +34,12 @@ cabal_engineer:
 	Health:
 		HP: 20000
 	Mobile:
-		TurnSpeed: 20
-		Speed: 50
+		TurnSpeed: 12
+		Speed: 40
 	ChangesHealth@SelfHealing:
 		Step: 20
+	Shielded:
+		RegenAmount: 40
 	Armament@REPAIRBEAM:
 		Name: primary
 		Weapon: CabalEngineerRepairBeam
@@ -60,6 +70,13 @@ cabal_cyborginfantry:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Plate
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Medium
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -72,14 +89,16 @@ cabal_cyborginfantry:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_cyborginfantry.description
 	Mobile:
-		TurnSpeed: 20
+		TurnSpeed: 12
 		# TurnSpeed: 10
-		Speed: 50
+		Speed: 40
 		PauseOnCondition: disabled
 	Health:
 		HP: 45000
 	ChangesHealth@SelfHealing:
 		Step: 45
+	Shielded:
+		RegenAmount: 90
 	Armament@PRIMARY:
 		Weapon: CabalCyborgChaingun
 		LocalOffset: 128,0,256
@@ -115,6 +134,13 @@ cabal_ravager:
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Plate
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Superheavy
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -127,14 +153,14 @@ cabal_ravager:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_ravager.description
 	Mobile:
-		TurnSpeed: 24
-		Speed: 60
-	Armor:
-		Type: Heavy
+		TurnSpeed: 12
+		Speed: 40
 	Health:
 		HP: 70000
 	ChangesHealth@SelfHealing:
 		Step: 70
+	Shielded:
+		RegenAmount: 140
 	Armament@PRIMARY:
 		Weapon: CabalRavagerPlasma
 		LocalOffset: 128,0,256
@@ -168,6 +194,13 @@ cabal_rocketcyborg:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Flak
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Light
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -180,15 +213,15 @@ cabal_rocketcyborg:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_rocketcyborg.description
 	Mobile:
-		TurnSpeed: 20
-		Speed: 50
+		TurnSpeed: 12
+		Speed: 40
 		PauseOnCondition: disabled
-	Armor:
-		Type: Plate
 	Health:
 		HP: 45000
 	ChangesHealth@SelfHealing:
-		Step: 25
+		Step: 45
+	Shielded:
+		RegenAmount: 90
 	Armament@PRIMARY:
 		Weapon: CabalRocketCyborgRockets
 		LocalOffset: 128,0,256
@@ -261,6 +294,13 @@ cabal_devout:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Plate
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Heavy
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -273,15 +313,15 @@ cabal_devout:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_devout.description
 	Mobile:
-		TurnSpeed: 20
-		Speed: 50
+		TurnSpeed: 12
+		Speed: 40
 		PauseOnCondition: disabled
-	Armor:
-		Type: Plate
 	Health:
 		HP: 60000
 	ChangesHealth@SelfHealing:
-		Step: 25
+		Step: 60
+	Shielded:
+		RegenAmount: 120
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
 		LocalOffset: 128,-256,256, 128,256,256
@@ -354,6 +394,13 @@ cabal_ascended:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Flak
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Medium
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -366,15 +413,15 @@ cabal_ascended:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_ascended.description
 	Mobile:
-		TurnSpeed: 20
-		Speed: 50
+		TurnSpeed: 12
+		Speed: 40
 		PauseOnCondition: disabled
-	Armor:
-		Type: Plate
 	Health:
 		HP: 60000
 	ChangesHealth@SelfHealing:
-		Step: 25
+		Step: 60
+	Shielded:
+		RegenAmount: 120
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
 		LocalOffset: 128,-256,256, 128,256,256
@@ -449,6 +496,13 @@ cabal_hackercyborg:
 	Inherits@EMP: ^UnitDisable
 	Inherits@HAND: ^cabal_upgrade_handof
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: None
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Scout
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -464,12 +518,12 @@ cabal_hackercyborg:
 		TurnSpeed: 32
 		Speed: 80
 		PauseOnCondition: disabled
-	Armor:
-		Type: Plate
 	Health:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
+	Shielded:
+		RegenAmount: 60
 	Armament@Anim:
 		Weapon: TSCABALempdisable.anim
 		RequiresCondition: end_disable == 0
@@ -554,6 +608,12 @@ cabal_cyborgcommando:
 	Inherits@tibheal: ^TibHealable
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Hero
+	Armor@Secondary:
+		Type: Heavy
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -567,12 +627,14 @@ cabal_cyborgcommando:
 		BuildLimit: 1
 		Description: actor_cabal_cyborgcommando.description
 	Mobile:
-		TurnSpeed: 20
-		Speed: 50
+		TurnSpeed: 12
+		Speed: 40
 	Health:
 		HP: 250000
 	ChangesHealth@SelfHealing:
 		Step: 250
+	Shielded:
+		RegenAmount: 500
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasma
 		LocalOffset: 128,0,256
@@ -588,8 +650,6 @@ cabal_cyborgcommando:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-	Armor:
-		Type: Heroic
 
 cabal_cyborgcommandov2:
 	Inherits@Template: ^HeroInfantryTemplate
@@ -597,6 +657,12 @@ cabal_cyborgcommandov2:
 	Inherits@tibheal: ^TibHealable
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Hero
+	Armor@Secondary:
+		Type: Superheavy
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -610,12 +676,14 @@ cabal_cyborgcommandov2:
 		BuildLimit: 1
 		Description: actor_cabal_cyborgcommandov2.description
 	Mobile:
-		TurnSpeed: 20
-		Speed: 50
+		TurnSpeed: 12
+		Speed: 40
 	Health:
 		HP: 400000
 	ChangesHealth@SelfHealing:
 		Step: 400
+	Shielded:
+		RegenAmount: 800
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasmaMk2
 		LocalOffset: 128,0,256
@@ -631,8 +699,6 @@ cabal_cyborgcommandov2:
 	WithDeathAnimation:
 		DeathSequencePalette: ra2player
 		CrushedSequencePalette: ra2effect
-	Armor:
-		Type: Heroic
 
 cabal_eliminator800:
 	Inherits: ^Soldier
@@ -647,6 +713,13 @@ cabal_eliminator800:
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Flak
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Heavy
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -658,9 +731,13 @@ cabal_eliminator800:
 		Description: actor_cabal_eliminator800.description
 	Health:
 		HP: 85000
+	ChangesHealth@SelfHealing:
+		Step: 85
+	Shielded:
+		RegenAmount: 170
 	Mobile:
-		TurnSpeed: 20
-		Speed: 50
+		TurnSpeed: 12
+		Speed: 40
 		Voice: Move
 	Guard:
 		Voice: Move
@@ -724,114 +801,74 @@ cabal_eliminator800:
 		ArmamentNames: primary, aa, garrisoned
 		RevokeDelay: 80
 
-#######################################
-# TS Infantry Forgotten
-#######################################
-
-cabal_coredefender:
-	Inherits: ^Tank
-	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@vo: ^AttackFrontalVoice
-	Inherits@VOICES: ^WithFeedbackVoiceLines
-	Inherits@announce: ^AnnounceGlobal
-	Inherits@MC: ^MCImmune
-	Inherits@EMP: ^FrontalEMP
-	Inherits@crush: ^VehicleCrusher
-	Inherits@detect: ^GenericGroundDetector
-	Inherits@snipe: ^DriverKillImmune
-	Inherits@ND: ^NotDevourable
-	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
-	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+cabal_dissolver:
+	Inherits: ^Soldier
+	Inherits@Template: ^HeavyInfantryTemplate
+	Inherits@Cyborg: ^TSCyborgs
+	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
-	Valued:
-		Cost: 12500
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		Queue: Vehicle, RAVehicle
-		BuildPaletteOrder: 140
-		BuildLimit: 1
-		Prerequisites: ~cabal_mechfactory, cabal_core
-		Description: actor_cabal_coredefender.description
-	Mobile:
-		TurnSpeed: 20
-		Speed: 50
-	Passenger:
-		Weight: 12
-	DetectCloaked:
-		Range: 6c0
-	Armament:
-		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1300,-750,1600, 1300,750,1600
-	Armament@LASER3:
-		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1300,750,1600, 1300,-750,1600
-	AttackFrontal:
-		FacingTolerance: 12
-	Voiced:
-		VoiceSet: TSCABALCore
-	VoiceAnnouncement:
-		Voice: CoreDefenderBuild
-	Tooltip:
-		Name: Core Defender
-	Health:
-		HP: 1500000
-	ChangesHealth@SelfHealing:
-		Step: 1500
-		Delay: 1
-		StartIfBelow: 100
 	Armor:
-		Type: Heavy
-	DamageMultiplier@superheavy:
-		Modifier: 50
-	ChangesHealth@1:
-		Step: 400
-		Delay: 1
-		StartIfBelow: 100
-		DamageCooldown: 1
-	ChangesHealth@2:
-		PercentageStep: 1
-		Delay: 25
-		StartIfBelow: 100
-		DamageCooldown: 25
-	ChangesHealth@TIBREPAIR:
-		Step: 400
-		Delay: 1
-		StartIfBelow: 100
-		DamageCooldown: 1
-		RequiresCondition: ontiberium
-	WithDecoration@REDCROSS2:
-		Image: pips
-		Sequence: pip_heal
-		Position: BottomRight
-		RequiresCondition: ontiberium
-		BlinkInterval: 32
-		BlinkPattern: On, Off
+		Type: Flak
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Superheavy
+	DamageMultiplier@Secondary:
+		Modifier: 200
+	Valued:
+		Cost: 725
+	Tooltip:
+		Name: Dissolver
+	Buildable:
+		BuildPaletteOrder: 20
+		Queue: Infantry, RAInfantry
+		Prerequisites: ~cabal_cyborgfactory
+		Description: actor_cabal_dissolver.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 12
+	Health:
+		HP: 50000
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Shielded:
+		RegenAmount: 100
+	Turreted:
+		TurnSpeed: 10
+		Offset: 0,0,25
+	Armament:
+		Weapon: CabalDissolverSpray
+		LocalOffset: 200,0,0
+	WithSpriteTurret:
+	RenderSprites:
 	QuantizeFacingsFromSequence:
 		Sequence: stand
-	WithInfantryBody:
-		DefaultAttackSequence: attack
-	WithDeathAnimation:
-		DeathSequencePalette: tseffect
-		DeathPaletteIsPlayerPalette: false
-		UseDeathTypeSuffix: false
-	# Explodes:
-	# 	Weapon: MiniNuke
-	# 	EmptyWeapon: MiniNuke
-	HitShape:
-		UseTargetableCellsOffsets: false
-		Type: Rectangle
-			TopLeft: -1024, -1024
-			BottomRight: 1024, 1024
-	Selectable:
-		Bounds: 2248, 2248
-	Capturable:
-		Types: thiefproof
+	Voiced:
+		VoiceSet: TSCyborg
+
+cabal_t1000:
+	Inherits: cabal_eliminator800
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: T1000
+	Buildable:
+		BuildPaletteOrder: 26
+		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_t1000
+		Queue: Infantry, RAInfantry
+		Description: actor_cabal_t1000.description
+	Mobile:
+		Speed: 40
+		TurnSpeed: 12
+	Armor:
+		Type: Hero
+	Armor@Secondary:
+		Type: Light
+	DamageMultiplier@Secondary:
+		Modifier: 200
 	RenderSprites:
+		Image: cabal_eliminator800
 		PlayerPalette: playerra2
-	DeathSounds:
 
 #######################################
 # TS Aircraft
