@@ -1,5 +1,9 @@
 #!/usr/bin/env python
-"""Generate the first-pass VOLCANIC theater scaffold and procedural tile art."""
+"""LEGACY: generate the original Barren-derived VOLCANIC scaffold.
+
+Current Volcanic production uses RA Temperate donors. This historical tool is
+disabled by default because running it can overwrite approved production art.
+"""
 
 from __future__ import annotations
 
@@ -46,9 +50,19 @@ TERRAIN_COLORS = {
 
 def main() -> int:
     parser = argparse.ArgumentParser()
+    parser.add_argument(
+        "--allow-legacy-barren",
+        action="store_true",
+        help="Explicitly allow the obsolete Barren-derived scaffold generator",
+    )
     parser.add_argument("--skip-tileset", action="store_true", help="Only regenerate art from the existing volcanic.yaml")
     parser.add_argument("--no-preview", action="store_true", help="Skip optional PNG preview output")
     args = parser.parse_args()
+
+    if not args.allow_legacy_barren:
+        parser.error(
+            "legacy Barren workflow is disabled; current Volcanic work must use RA Temperate donors"
+        )
 
     VOLCANIC_BITS.mkdir(parents=True, exist_ok=True)
 

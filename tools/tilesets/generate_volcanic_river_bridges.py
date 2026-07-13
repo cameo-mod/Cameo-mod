@@ -27,6 +27,7 @@ BRIDGES = (
     "sbridge2", "sbridge2d", "sbridge2h", "sbridge2x",
     "sbridge3", "sbridge3d", "sbridge3h", "sbridge3x",
     "sbridge4", "sbridge4d", "sbridge4h", "sbridge4x",
+    "sbridge5", "sbridge5d", "sbridge5h", "sbridge5x",
     "fjord1", "fjord2",
 )
 WATER_INDICES = np.asarray(
@@ -76,9 +77,7 @@ def main() -> int:
     panels: list[tuple[str, Image.Image]] = []
     records = []
     for name in args.templates:
-        spec = shore.read_template_spec(
-            ROOT / "mods/cameo/tilesets/ra_temperat.yaml", f"{name}.tem"
-        )
+        spec = read_bridge_donor_spec(name)
         donor, domain = shore.read_sparse_composite(
             ROOT / "mods/cameo/bits/temp" / spec.image, spec
         )
@@ -160,6 +159,27 @@ def main() -> int:
     return 0
 
 
+def read_bridge_donor_spec(name: str) -> shore.TemplateSpec:
+    """Read RA Temperate geometry, using Volcanic metadata only when needed."""
+    try:
+        return shore.read_template_spec(
+            ROOT / "mods/cameo/tilesets/ra_temperat.yaml", f"{name}.tem"
+        )
+    except ValueError:
+        # Some shared .tem bridge art is not declared by RA Temperate itself.
+        # The active Volcanic template supplies only layout and terrain; all
+        # visible donor pixels still come from RA Temperate .tem artwork.
+        spec = shore.read_template_spec(
+            ROOT / "mods/cameo/tilesets/volcanic.yaml", f"{name}.vol"
+        )
+        return shore.TemplateSpec(
+            image=f"{name}.tem",
+            columns=spec.columns,
+            rows=spec.rows,
+            terrain=spec.terrain,
+        )
+
+
 def recolor_bridge(
     donor_rgb: np.ndarray,
     clear_rgb: np.ndarray,
@@ -179,10 +199,13 @@ def recolor_bridge(
     form = np.clip((luma - low) / max(1.0, high - low), 0.0, 1.0)
     target = 20.0 + 92.0 * form + detail * 0.38
 
-    warm = (source[:, :, 0] >= source[:, :, 1] - 2.0) & (source[:, :, 0] >= source[:, :, 2] + 5.0)
-    neutral = np.stack((target * 1.08, target * 0.80, target * 0.69), axis=2)
-    rust = np.stack((target * 1.14, target * 0.72, target * 0.58), axis=2)
-    structure = np.where(warm[:, :, None], rust, neutral)
+    # Bridge decks, abutments, and surrounding ground all use the theater's
+    # neutral basalt-gray language. Preserve donor luminance geometry without
+    # carrying Temperate warmth into the Volcanic material.
+    structure = np.stack(
+        (target * 0.96, target * 0.91, target * 0.87),
+        axis=2,
+    )
 
     result = clear_rgb.astype(np.float32).copy()
     result[land] = structure[land]

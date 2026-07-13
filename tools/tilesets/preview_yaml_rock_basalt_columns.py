@@ -203,16 +203,11 @@ def load_template(
     temperate_palette: list[tuple[int, int, int]],
 ) -> tuple[Image.Image, Image.Image, np.ndarray, shore.TemplateSpec]:
     volcanic_yaml = ROOT / "mods/cameo/tilesets/volcanic.yaml"
-    if volcanic_yaml.exists():
-        spec = shore.read_template_spec(volcanic_yaml, f"{template}.vol")
-    else:
-        # Volcanic metadata is mechanically derived from Barren.  This
-        # read-only fallback keeps review generation available when GitHub
-        # Desktop temporarily removes newly added volcanic files during an
-        # upstream update/stash cycle.
-        spec = shore.read_template_spec(
-            ROOT / "mods/cameo/tilesets/barren.yaml", f"{template}.bar"
+    if not volcanic_yaml.exists():
+        raise FileNotFoundError(
+            "Volcanic placement metadata is required; refusing to fall back to Barren"
         )
+    spec = shore.read_template_spec(volcanic_yaml, f"{template}.vol")
     with Image.open(approved_source) as source:
         base = source.convert("RGB")
     expected_size = (spec.columns * shore.TILE, spec.rows * shore.TILE)

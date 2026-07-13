@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-"""Export template PNGs for hand-painted volcanic semantic masks."""
+"""Export RA Temperate template PNGs for volcanic semantic-mask reviews."""
 
 from __future__ import annotations
 
@@ -14,10 +14,10 @@ from shptd import read_shptd
 
 
 ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_TILESET = ROOT / "mods/cameo/tilesets/barren.yaml"
-DEFAULT_BITS = ROOT / "mods/cameo/bits/barren"
-DEFAULT_PAL = DEFAULT_BITS / "barren.pal"
-DEFAULT_OUT_DIR = ROOT / ".vs/docs/volcanic-theater-previews/barren-mask-sources"
+DEFAULT_TILESET = ROOT / "mods/cameo/tilesets/ra_temperat.yaml"
+DEFAULT_BITS = ROOT / "mods/cameo/bits/temp"
+DEFAULT_PAL = ROOT / "mods/cameo/bits/ratemperat/ra_temperat.pal"
+DEFAULT_OUT_DIR = ROOT / ".vs/docs/volcanic-theater-previews/ra-temperate-mask-sources"
 TILE = 48
 TRANSPARENT = (0, 0, 0, 0)
 
@@ -318,7 +318,7 @@ def write_metadata(metadata: list[dict[str, object]], out_dir: Path) -> None:
 
 def write_readme(scale: int, exported: list[Path], skipped: list[tuple[str, str]], out_dir: Path) -> None:
     lines = [
-        "# Barren Mask Sources",
+        "# RA Temperate Mask Sources",
         "",
         f"Scale: {scale}x nearest-neighbor.",
         "",

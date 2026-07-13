@@ -9,8 +9,8 @@ import zlib
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
-from generate_volcanic_tileset import CLEAR_BASE_SEED, base_clear_index, build_palette, noise, write_pal
-from shptd import write_shptd
+from volcanic_art_utils import CLEAR_BASE_SEED, base_clear_index, build_palette, noise
+from shptd import write_pal, write_shptd
 
 
 ROOT = Path(__file__).resolve().parents[2]
