@@ -192,7 +192,7 @@ actor_cabal_beholder =
 
 actor_cabal_hunterkillermk1_elite =
    .name = Super Hunter Killer
-   .description = Promoted anti-personnel gunship with improved weapons.
+   .description = Promoted support gunship with dual rockets and dual lasers.
       Strong vs Infantry, Light armor, Aircraft
       Weak vs Vehicles
 

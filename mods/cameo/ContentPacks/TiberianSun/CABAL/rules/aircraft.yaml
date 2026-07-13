@@ -391,7 +391,7 @@ cabal_hunterkillermk1_elite:
 		BuildPaletteOrder: 21
 		Prerequisites: ~cabal_helipad, cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
-		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+		Description: Promoted support gunship armed with\ndual rockets and small dual lasers.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Aircraft:
 		Speed: 168
 		TurnSpeed: 32
@@ -407,6 +407,10 @@ cabal_hunterkillermk1_elite:
 	Armament@PRIMARY:
 		Weapon: CabalHunterKillerLasers
 		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	Armament@ROCKETS:
+		Weapon: TSHellfireTwin
+		LocalOffset: 25,-100,0, 25,100,0
 		PauseOnCondition: !ammo
 	AttackAircraft:
 		FacingTolerance: 80
