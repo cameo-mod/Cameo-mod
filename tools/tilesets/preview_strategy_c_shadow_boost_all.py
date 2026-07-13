@@ -12,13 +12,14 @@ from PIL import Image
 import generate_sh04_alpha_beach_prototype as shore
 import preview_strategy_c_all_worked_tiles as full
 import prototype_donor_recolored_bridge_ground as strategy
+import volcanic_art_utils as art
 from manual_river_delta.prepare_production import quantize
 from shptd import read_shptd
 
 
 OUT = Path.home() / "Documents/agents/volcanic-theater/ground/strategy-c-shadow-boost-full-family-review-01"
-SHADOW_STRENGTH = 0.38
-SHADOW_PERCENTILE = 35.0
+SHADOW_STRENGTH = art.APPROVED_SHADOW_STRENGTH
+SHADOW_PERCENTILE = art.APPROVED_SHADOW_PERCENTILE
 
 
 def main() -> int:
@@ -97,32 +98,12 @@ def main() -> int:
 
 def darken_shadows(image: Image.Image, palette) -> Image.Image:
     rgb = np.asarray(image.convert("RGB"), dtype=np.uint8)
-    source = rgb.astype(np.float32)
-    luma = strategy.luma(source)
-    hot = (source[:, :, 0] > 95.0) & (
-        source[:, :, 0] > source[:, :, 1] + 24.0
-    )
     visible = ~np.all(
         rgb == np.asarray(shore.BACKGROUND, dtype=np.uint8), axis=2
     )
-    eligible = visible & ~hot
-    values = luma[eligible]
-    if not values.size:
-        return image.copy()
-    low = float(np.percentile(values, 3.0))
-    threshold = float(np.percentile(values, SHADOW_PERCENTILE))
-    weight = np.clip(
-        (threshold - luma) / max(1.0, threshold - low),
-        0.0,
-        1.0,
-    ) * SHADOW_STRENGTH
-    weight *= eligible
-    target = np.asarray((12.0, 8.0, 8.0), dtype=np.float32)
-    darkened = source * (1.0 - weight[:, :, None]) + target * weight[:, :, None]
-    darkened = np.clip(np.rint(darkened), 0, 255).astype(np.uint8)
+    darkened = art.apply_approved_shadow_boost(rgb, visible=visible)
     quantized, _ = quantize(Image.fromarray(darkened, mode="RGB"), palette)
     result = np.asarray(quantized.convert("RGB"), dtype=np.uint8).copy()
-    result[hot] = rgb[hot]
     result[~visible] = rgb[~visible]
     return Image.fromarray(result, mode="RGB")
 

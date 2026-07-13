@@ -14,6 +14,7 @@ from scipy import ndimage
 import generate_lava_river_donor_layer as lava_donor
 import generate_sh04_alpha_beach_prototype as shore
 import recolor_cliff_luminance as cliff
+import volcanic_art_utils as art
 from manual_river_delta.prepare_production import quantize
 from shptd import read_shptd, write_shptd
 
@@ -48,6 +49,16 @@ def main() -> int:
         action="store_true",
         help="skip the Gaussian/local-darkness cast-shadow reconstruction pass",
     )
+    parser.add_argument(
+        "--approved-shadow-boost",
+        action="store_true",
+        help="apply the shared approved Strategy C +38%% final shadow remap",
+    )
+    parser.add_argument(
+        "--strict-2x-cadence",
+        action="store_true",
+        help="author at 24px density and upscale exactly 2x for production",
+    )
     args = parser.parse_args()
     out_dir = args.out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -60,7 +71,10 @@ def main() -> int:
     volcanic_palette = shore.read_palette(
         ROOT / "mods/cameo/bits/volcanic/volcanic.pal"
     )
-    clear = shore.unique_frame(
+    # Strategy C intentionally gives clear1 sixteen distinct variants. Use the
+    # canonical first frame as the phase-stable ground anchor instead of
+    # requiring all variants to be byte-identical.
+    clear = first_frame(
         ROOT / "mods/cameo/bits/volcanic/clear1.vol", expected_frames=16
     )
     clear_rgb = shore.indices_rgb(clear, volcanic_palette)
@@ -140,7 +154,13 @@ def main() -> int:
             # Automatic masks obey the authoritative Temperate water-index set
             # exactly. Do not grow into chromatically similar ground pixels.
             water = raw_water.copy()
-        water = remove_small_components(water, minimum_pixels=48)
+        # Water Cliffs use the authoritative river-delta rule without any
+        # post-classification cleanup: every donor pixel whose palette index
+        # occurs in Temperate w1/w2 is water, and no other pixel is water.
+        # River/ford cleanup remains unchanged for its existing workflows.
+        if not template.startswith("wc"):
+            water = remove_small_components(water, minimum_pixels=48)
+        classified_water = water.copy()
         if template.startswith("f"):
             water = remove_ford_liquid_edge_spots(water, domain)
         liquid_indices = repeat_tile(
@@ -166,6 +186,42 @@ def main() -> int:
         candidate_indices[~domain] = 0
         indexed_rgb = shore.indices_rgb(candidate_indices, volcanic_palette)
         indexed_rgb[~domain] = shore.BACKGROUND
+        before_shadow_image = Image.fromarray(indexed_rgb, mode="RGB")
+        if args.strict_2x_cadence:
+            source24 = downsample_rgb_2x(indexed_rgb)
+            domain24 = downsample_mask_2x(domain, threshold=1)
+            water24 = downsample_mask_2x(water, threshold=2)
+            if args.approved_shadow_boost:
+                source24 = art.apply_approved_shadow_boost(
+                    source24,
+                    visible=domain24,
+                    protected=water24,
+                )
+            _, indices24 = quantize(
+                Image.fromarray(source24, mode="RGB"), volcanic_palette
+            )
+            liquid24 = liquid_indices[::2, ::2]
+            indices24[water24] = liquid24[water24]
+            indices24[~domain24] = 0
+            candidate_indices = np.repeat(
+                np.repeat(indices24, 2, axis=0), 2, axis=1
+            )
+            water = np.repeat(np.repeat(water24, 2, axis=0), 2, axis=1)
+            indexed_rgb = shore.indices_rgb(candidate_indices, volcanic_palette)
+            indexed_rgb[~domain] = shore.BACKGROUND
+        elif args.approved_shadow_boost:
+            shadow_rgb = art.apply_approved_shadow_boost(
+                indexed_rgb,
+                visible=domain,
+                protected=water,
+            )
+            _, candidate_indices = quantize(
+                Image.fromarray(shadow_rgb, mode="RGB"), volcanic_palette
+            )
+            candidate_indices[water] = liquid_indices[water]
+            candidate_indices[~domain] = 0
+            indexed_rgb = shore.indices_rgb(candidate_indices, volcanic_palette)
+            indexed_rgb[~domain] = shore.BACKGROUND
         candidate_image = Image.fromarray(indexed_rgb, mode="RGB")
         candidate_path = candidate_dir / f"{template}.vol"
         write_template_vol(candidate_path, candidate_indices, spec)
@@ -185,7 +241,14 @@ def main() -> int:
             (
                 (f"{template}: Temperate donor", donor_image),
                 (f"{template}: plain-bank liquid", plain_image),
-                (f"{template}: cliff-aware liquid", candidate_image),
+                (
+                    f"{template}: cliff-aware before +38% shadows",
+                    before_shadow_image,
+                ),
+                (
+                    f"{template}: cliff-aware +38% shadows",
+                    candidate_image,
+                ),
             )
         )
         audit["templates"].append(
@@ -193,21 +256,44 @@ def main() -> int:
                 "template": template,
                 "size": [spec.columns, spec.rows],
                 "water_pixels": int(np.count_nonzero(water)),
+                "raw_authoritative_water_pixels": int(np.count_nonzero(raw_water)),
+                "water_pixels_added_after_classification": int(
+                    np.count_nonzero(classified_water & ~raw_water)
+                ),
+                "water_pixels_removed_after_classification": int(
+                    np.count_nonzero(raw_water & ~classified_water)
+                ),
+                "water_pixels_added_by_24px_rasterization": int(
+                    np.count_nonzero(water & ~classified_water)
+                ),
+                "water_pixels_removed_by_24px_rasterization": int(
+                    np.count_nonzero(classified_water & ~water)
+                ),
+                "water_rule": (
+                    "exact-ra-temperate-w1-w2-indices-no-cleanup"
+                    if template.startswith("wc")
+                    else "exact-ra-temperate-w1-w2-indices-with-family-cleanup"
+                ),
                 "rock_pixels": int(np.count_nonzero(rock_mask & domain & ~water)),
                 "canonical_liquid_exact_pixels": int(
                     np.count_nonzero(candidate_indices[water] == liquid_indices[water])
                 ),
                 "candidate_vol": str(candidate_path.resolve()),
                 "candidate_roundtrip_exact": True,
+                "approved_shadow_boost": args.approved_shadow_boost,
+                "approved_shadow_strength": art.APPROVED_SHADOW_STRENGTH,
+                "approved_shadow_percentile": art.APPROVED_SHADOW_PERCENTILE,
+                "approved_shadow_target_rgb": list(art.APPROVED_SHADOW_TARGET),
+                "strict_2x_cadence": args.strict_2x_cadence,
                 "edge_contacts": edge_contacts(water),
             }
         )
 
     for start in range(0, len(args.templates), args.page_size):
         names = args.templates[start : start + args.page_size]
-        page = panels[start * 3 : (start + len(names)) * 3]
+        page = panels[start * 4 : (start + len(names)) * 4]
         path = out_dir / f"inland_lava_river_review_{'_'.join(names)}.png"
-        shore.write_review_sheet(path, page, columns=3, scale=2)
+        shore.write_review_sheet(path, page, columns=4, scale=2)
         print(path.resolve())
     audit_path = out_dir / "inland_lava_river_preview_audit.json"
     audit_path.write_text(json.dumps(audit, indent=2), encoding="utf-8")
@@ -217,6 +303,38 @@ def main() -> int:
 
 def repeat_tile(tile: np.ndarray, columns: int, rows: int) -> np.ndarray:
     return np.tile(tile, (rows, columns))
+
+
+def downsample_rgb_2x(rgb: np.ndarray) -> np.ndarray:
+    if rgb.shape[0] % 2 or rgb.shape[1] % 2:
+        raise ValueError(f"RGB raster is not divisible by 2: {rgb.shape}")
+    source = rgb.astype(np.float32)
+    reduced = source.reshape(
+        source.shape[0] // 2, 2, source.shape[1] // 2, 2, 3
+    ).mean(axis=(1, 3))
+    return np.clip(np.rint(reduced), 0, 255).astype(np.uint8)
+
+
+def downsample_mask_2x(mask: np.ndarray, threshold: int) -> np.ndarray:
+    if mask.shape[0] % 2 or mask.shape[1] % 2:
+        raise ValueError(f"mask is not divisible by 2: {mask.shape}")
+    counts = mask.reshape(
+        mask.shape[0] // 2, 2, mask.shape[1] // 2, 2
+    ).sum(axis=(1, 3))
+    return counts >= threshold
+
+
+def first_frame(path: Path, expected_frames: int) -> np.ndarray:
+    width, height, frames = read_shptd(path)
+    if (width, height, len(frames)) != (
+        shore.TILE,
+        shore.TILE,
+        expected_frames,
+    ):
+        raise ValueError(f"{path.name}: unexpected geometry")
+    return np.frombuffer(frames[0], dtype=np.uint8).reshape(
+        (shore.TILE, shore.TILE)
+    ).copy()
 
 
 def repeat_rgb_tile(tile: np.ndarray, columns: int, rows: int) -> np.ndarray:

@@ -5,13 +5,67 @@ from __future__ import annotations
 
 import math
 
+import numpy as np
+
 
 TILE = 48
 CLEAR_BASE_SEED = 0xC1EA1200
+APPROVED_SHADOW_STRENGTH = 0.38
+APPROVED_SHADOW_PERCENTILE = 35.0
+APPROVED_SHADOW_TARGET = (12.0, 8.0, 8.0)
 
 
 def clamp(value: int, low: int, high: int) -> int:
     return max(low, min(high, value))
+
+
+def apply_approved_shadow_boost(
+    rgb: np.ndarray,
+    *,
+    visible: np.ndarray | None = None,
+    protected: np.ndarray | None = None,
+) -> np.ndarray:
+    """Apply the approved Strategy C +38% shadow remap to an RGB raster.
+
+    Hot lava is protected by default. Callers may provide additional protected
+    pixels (for example, an authoritative liquid mask) to keep them byte-exact.
+    """
+    source_u8 = np.asarray(rgb, dtype=np.uint8)
+    source = source_u8.astype(np.float32)
+    luma = (
+        0.2126 * source[:, :, 0]
+        + 0.7152 * source[:, :, 1]
+        + 0.0722 * source[:, :, 2]
+    )
+    hot = (source[:, :, 0] > 95.0) & (
+        source[:, :, 0] > source[:, :, 1] + 24.0
+    )
+    if visible is None:
+        visible = np.ones(source_u8.shape[:2], dtype=bool)
+    else:
+        visible = np.asarray(visible, dtype=bool)
+    if protected is None:
+        protected = hot
+    else:
+        protected = hot | np.asarray(protected, dtype=bool)
+
+    eligible = visible & ~protected
+    values = luma[eligible]
+    if not values.size:
+        return source_u8.copy()
+    low = float(np.percentile(values, 3.0))
+    threshold = float(np.percentile(values, APPROVED_SHADOW_PERCENTILE))
+    weight = np.clip(
+        (threshold - luma) / max(1.0, threshold - low),
+        0.0,
+        1.0,
+    ) * APPROVED_SHADOW_STRENGTH
+    weight *= eligible
+    target = np.asarray(APPROVED_SHADOW_TARGET, dtype=np.float32)
+    result = source * (1.0 - weight[:, :, None]) + target * weight[:, :, None]
+    result = np.clip(np.rint(result), 0, 255).astype(np.uint8)
+    result[~eligible] = source_u8[~eligible]
+    return result
 
 
 def fill_gradient(
