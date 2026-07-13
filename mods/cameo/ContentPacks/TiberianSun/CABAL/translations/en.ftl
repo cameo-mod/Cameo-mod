@@ -183,12 +183,6 @@ actor_cabal_mothership =
       Strong vs Vehicles, Buildings
       Weak vs Aircraft
 
-actor_cabal_mothership_omega =
-   .name = Mothership Omega
-   .description = Promoted Mothership with enhanced weapons and durability.
-      Strong vs Vehicles, Buildings
-      Weak vs Aircraft
-
 actor_cabal_beholder =
    .name = Beholder
    .description = Tech-center promotion hover drone armed with a heavy laser.
@@ -197,16 +191,10 @@ actor_cabal_beholder =
       Weak vs Infantry
 
 actor_cabal_hunterkillermk1_elite =
-   .name = Hunter Killer MK1 Elite
+   .name = Super Hunter Killer
    .description = Promoted anti-personnel gunship with improved weapons.
       Strong vs Infantry, Light armor, Aircraft
       Weak vs Vehicles
-
-actor_cabal_hunterkillermk2_omega =
-   .name = Hunter Killer MK2 Omega
-   .description = Promoted advanced fighter-bomber with heavier plasma cannons.
-      Strong vs Buildings, Vehicles
-      Weak vs Infantry, Aircraft
 
 actor_cabal_spidercnc4 =
    .name = Spider CNC4
@@ -319,8 +307,8 @@ actor_cabal_promotion_ascended =
    .description = Promotion Upgrade.
       Replaces Rocket Cyborg with the Ascended anti-armor walker.
 
-actor_cabal_promotion_t1000 =
-   .name = Unlock T1000
+actor_cabal_promotion_beholder =
+   .name = Unlock Beholder
    .description = Promotion
       Unlocks the promoted unit for production.
 
