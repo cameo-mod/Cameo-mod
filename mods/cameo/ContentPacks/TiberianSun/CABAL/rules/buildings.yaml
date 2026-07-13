@@ -198,37 +198,138 @@ cabal_mechfactory:
 		PlayerPalette: playerra2
 
 cabal_servicedepot:
-	Inherits: ts_gdi_servicedepot
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^3x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@repair: ^RepairsUnits
+	Inherits@repair: ^RepairFacility
+	Valued:
+		Cost: 800
 	Tooltip:
 		Name: Service Depot
 	Buildable:
+		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_constructionyard, cabal_mechfactory
+		Queue: Building, RABuilding
+		Description: Repairs vehicles and aircraft.
+	Building:
+		Footprint: x++ +++
+		Dimensions: 3,2
+	SelectionDecorations:
+	Reservable:
+	RallyPoint:
+	ProvidesPrerequisite@buildingname:
+	GivesBuildableArea:
+		AreaTypes: building, cityi
+	WithIdleOverlay@LIGHT:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-light
+	WithIdleOverlay@GROUND:
+		RequiresCondition: !build-incomplete
+		Sequence: ground
+	WithIdleOverlay@CIRCUITS:
+		RequiresCondition: !build-incomplete
+		Sequence: circuits
+	WithRepairOverlay@CRANE:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: disabled
+		StartSequence: crane-start
+		Sequence: crane-loop
+		EndSequence: crane-end
+	WithRepairOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: platform
+	WithDeathAnimation@BIB:
+		DeathSequence: dead-ground
+		UseDeathTypeSuffix: false
+	WithResupplyAnimation:
+		RequiresCondition: !build-incomplete
 	RenderSprites:
 		Image: tsgtdept
 		PlayerPalette: playerra2
 
 cabal_helipad:
-	Inherits: ts_nod_helipad
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@hpad: ^IsAircraftFactory
+	Valued:
+		Cost: 1000
 	Tooltip:
 		Name: CABAL Helipad
 	Buildable:
+		BuildPaletteOrder: 50
 		Queue: Building, RABuilding
 		Prerequisites: ~cabal_constructionyard, cabal_radar
+		Description: Produces, rearms and repairs aircraft.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Exit@1:
+		SpawnOffset: 0,-256,0
+	Reservable:
+	RepairsUnits:
+		HpPerStep: 1000
+		PlayerExperience: 25
+		StartRepairingNotification: Repairing
+	RallyPoint:
 	ProductionQueue@AIRCRAFT:
+	Power:
+		Amount: -10
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@PLATFORM:
+		RequiresCondition: !build-incomplete && !damaged
+		Sequence: idle-platform
+	WithIdleOverlay@PLATFORM-damaged:
+		RequiresCondition: !build-incomplete && damaged
+		Sequence: damaged-idle-platform
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
 	RenderSprites:
+		PlayerPalette: playerra2
 		Image: tsnthpadcabal
 
 cabal_radar:
-	Inherits: ts_nod_radar
+	Inherits: ^BaseBuilding
+	Inherits@radar: ^RadarBuilding
+	Inherits@spy: ^InfiltrateForSupportPowerReset
+	Inherits@sell: ^TSSpawnActorsOnSell
+	HitShape:
+		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
+		Type: Rectangle
+			TopLeft: -1024, -384
+			BottomRight: 1024, 1024
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Radar
+	ProvidesPrerequisite@buildingname:
 	Buildable:
+		BuildPaletteOrder: 70
 		Prerequisites: ~cabal_constructionyard, cabal_refinery
+		Queue: Building, RABuilding
+		Description: Provides radar and advanced technologies.
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Selectable:
+		Bounds: 2248, 2248
+	SelectionDecorations:
+	WithSpriteBody:
+		PauseOnCondition: lowpower
+	ProvidesRadar:
+		RequiresCondition: !jammed && !lowpower
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower
+	SupportPowerChargeBar:
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: cabal_radar
 	ProvidesPrerequisite@robotcontrol:
 		Prerequisite: robotcontrol
 		RequiresCondition: !disabled
-	SupportPowerChargeBar:
 	SpawnActorPower@radarhack:
 		PauseOnCondition: disabled
 		OrderName: SovietRA2SpyPlane
@@ -256,17 +357,30 @@ cabal_radar:
 		BlockedCursor: move-blocked
 
 cabal_techcenter:
-	Inherits: ts_gdi_techcenter
-	Tooltip:
-		Name: Cabal Tech Center
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@tech: ^IsTechnoBuilding
+	Inherits@shape: ^3x2Shape
 	Selectable:
 		Bounds: 2048, 2048
+	HitShape:
+		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
 		Prerequisites: ~cabal_constructionyard, cabal_radar
 		Description: actor-tscabaltech.description
 		BuildLimit: 1
+	Tooltip:
+		Name: Cabal Tech Center
+	Building:
+		Footprint: xxx =x=
+		Dimensions: 3,2
+		LocalCenterOffset: 0,0,0
+	ProvidesPrerequisite@buildingname:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
 	SupportPowerChargeBar:
 	Exit@1:
 		SpawnOffset: -704,768,0

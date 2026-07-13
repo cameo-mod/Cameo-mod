@@ -436,19 +436,51 @@ ts_gdi_upgrade_seekercontrol:
 #######################################
 
 cabal_plasmaturret:
-	Inherits: ts_nod_laserturret
+	Inherits: ^Defense
+	Inherits@Template: ^BasicDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@RenderVoxel: ^TSRenderVoxel
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@EMP: ^TurretEMP
+	Buildable:
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 20
+		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory, ~disabled
+		Description: Advanced base defense.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Valued:
+		Cost: 800
+	Power:
+		Amount: -40
 	Tooltip:
 		Name: Plasma Turret
-	Buildable:
-		Prerequisites: ~cabal_constructionyard, cabal_cyborgfactory, ~disabled
+	Building:
+		Footprint: x
+		Dimensions: 1,1
+	Health:
+		HP: 60000
+	RevealsShroud:
+		Range: 7c0
+	Selectable:
+		Bounds: 1024, 1024
+	Turreted:
+		TurnSpeed: 40
+		InitialFacing: 896
+		Offset: 160,20,3
+	AttackTurreted:
 	Armament@PRIMARY:
 		Weapon: TSCABALPlasmaFire
-		RequiresCondition: !ts_nod_upgrade_tiberiumlenses
-	RenderVoxels:
-		Image: ts_nod_laserturret
+	BodyOrientation:
+		QuantizedFacings: 16
+	WithVoxelTurret:
+	AutoTarget:
+	DetectCloaked:
+		Range: 3c0
+	-WithVoxelBody:
+	-Cloak@TDcloak:
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: ts_nod_laserturret
+	-ActorStatValues:
 
 TSE1:
 	Inherits: ^Soldier
@@ -1191,14 +1223,49 @@ TSTTNK:
 		Upgrades: ts_nod_upgrade_tiberiumlenses, ts_nod_upgrade_auxiliaryweapon, ts_nod_upgrade_advancedtiberiumrefinement
 
 cabal_mobilestealthgenerator:
-	Inherits: ts_nod_mobilestealthgenerator
+	Inherits: ^Tank
+	Inherits@Voxel: ^TSRenderVoxel
+	Inherits@detect: ^GenericGroundDetector
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Mobile Stealth Generator
 	Buildable:
+		BuildPaletteOrder: 120
 		Prerequisites: ~cabal_mechfactory, cabal_stealthgenerator, ~disabled
+		Queue: Vehicle, RAVehicle
+		Description: Cloaks nearby buildings and units.\nCan not be cloaked.\n Unarmed
+	Mobile:
+		Speed: 56
+	Health:
+		HP: 20000
+	Repairable:
+		HpPerStep: 2637
+	Armor:
+		Type: Wood
+	WithVoxelBody:
+	Voiced:
+		VoiceSet: TSVehicle
+	DeliversCash:
+		Payload: 650
+	RenderVoxels:
+		Scale: 15
+	ProximityExternalCondition@StealGen:
+		Range: 5c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled
+	-ExternalCondition@CLOAK:
+	-ExternalCondition@TSCLOAK:
+	-Cloak@TDcloak:
+	-Cloak@TScloak:
+	WithRangeCircle@GenRange:
+		Range: 5c0
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: ts_nod_mobilestealthgenerator
-	RenderVoxels:
-		Image: ts_nod_mobilestealthgenerator
+	-ActorStatValues:
 
 cabal_manticore_backup:
 	Inherits: cabal_manticore

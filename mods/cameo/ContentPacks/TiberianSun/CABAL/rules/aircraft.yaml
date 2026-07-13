@@ -33,6 +33,8 @@ cabal_overkillcarryall:
 		BeforeUnloadDelay: 10
 	Health:
 		HP: 47500
+	ChangesHealth@SelfHealing:
+		Step: 19
 	RenderSprites:
 	SpawnActorOnDeath:
 		Actor: cabal_overkillcarryall_husk
@@ -62,12 +64,12 @@ cabal_hunterkillermk1:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Hunter Killer MK1
+		Name: Hunter Killer
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cabal_helipad
+		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
 		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Aircraft:
@@ -80,6 +82,8 @@ cabal_hunterkillermk1:
 		TakeOffOnResupply: true
 	Health:
 		HP: 35000
+	ChangesHealth@SelfHealing:
+		Step: 14
 	Armament@PRIMARY:
 		Weapon: CabalHunterKillerLasers
 		LocalOffset: 0,0,0
@@ -123,7 +127,7 @@ cabal_hunterkillermk2:
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Hunter Killer MK2
+		Name: Overkill Fortress
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -181,3 +185,191 @@ cabal_hunterkillermk2:
 	RenderSprites:
 		Image: cabal_hunterkillermk2
 		PlayerPalette: player_rgba
+
+cabal_wasp:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Valued:
+		Cost: 600
+	Tooltip:
+		Name: Wasp
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 5
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_waspstriker
+		Queue: Infantry, RAInfantry
+		Description: actor_cabal_wasp.description
+	Aircraft:
+		TurnSpeed: 28
+		Speed: 140
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 25
+	Armament@PRIMARY:
+		Weapon: CabalWaspLaser
+		LocalOffset: 512,-512,512, 512,512,512
+		FireDelay: 10
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	Voiced:
+		VoiceSet: TSCobra
+	WithInfantryBody:
+		IdleSequences: idle2
+	-SpawnActorOnDeath:
+	RenderSprites:
+		Image: cabal_wasp
+		PlayerPalette: player_rgba
+
+cabal_wasp_striker:
+	Inherits: ^JumpjetInfantry
+	Inherits@Template: ^FlyingInfantryTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Wasp Striker
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 6
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, cabal_promotion_waspstriker
+		Queue: Infantry, RAInfantry
+		Description: actor_cabal_wasp_striker.description
+	Aircraft:
+		TurnSpeed: 30
+		Speed: 150
+	Health:
+		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 30
+	Armament@PRIMARY:
+		Weapon: CabalWaspLaserStriker
+		LocalOffset: 512,-512,512, 512,512,512
+		FireDelay: 10
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+	Voiced:
+		VoiceSet: TSCobra
+	WithInfantryBody:
+		IdleSequences: idle2
+	-SpawnActorOnDeath:
+	RenderSprites:
+		Image: cabal_wasp
+		PlayerPalette: player_rgba
+
+cabal_mothership:
+	Inherits: ^Helicopter
+	Inherits@Template: ^SpaceshipTemplate
+	Inherits@Epic: ^EpicAirUnitTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Valued:
+		Cost: 10000
+	Tooltip:
+		Name: Mothership
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_helipad, cabal_core
+		Queue: Aircraft, RAAircraft
+		Description: actor_cabal_mothership.description
+	Health:
+		HP: 500000
+	ChangesHealth@SelfHealing:
+		Step: 200
+	Aircraft:
+		Speed: 50
+		TurnSpeed: 10
+	Armament@PRIMARY:
+		Weapon: CabalHunterKillerHeavyLaser
+	Armament@ROCKETS:
+		Weapon: CabalMothershipRockets
+		LocalOffset: 512,-512,512, 512,512,512
+		FireDelay: 10
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		AttackType: Hover
+	-SpawnActorOnDeath:
+	RenderSprites:
+		Image: cabal_mothership
+		PlayerPalette: player_rgba
+
+
+cabal_hunterkillermk1_elite:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Inherits@reload: ^RearmableAircraft
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Valued:
+		Cost: 2250
+	Tooltip:
+		Name: Super Hunter Killer
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 21
+		Prerequisites: ~cabal_helipad, cabal_promotion_hunterkillermk1elite
+		Queue: Aircraft, RAAircraft
+		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+	Aircraft:
+		Speed: 168
+		TurnSpeed: 32
+		TakeoffSounds: orcaup1.aud
+		LandingSounds: orcadwn1.aud
+		AltitudeVelocity: 128
+		CanSlide: false
+		TakeOffOnResupply: true
+	Health:
+		HP: 42500
+	ChangesHealth@SelfHealing:
+		Step: 17
+	Armament@PRIMARY:
+		Weapon: CabalHunterKillerLasers
+		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSScrin
+	AmmoPool:
+		Ammo: 16
+		AmmoCondition: ammo
+		ReloadCount: 3
+	ReloadAmmoPool:
+		Delay: 25
+		Count: 1
+	SpawnActorOnDeath:
+		Actor: cabal_hunterkillermk1_husk
+	WithAmmoPipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: True
+		PipCount: 4
+	RenderSprites:
+		Image: cabal_hunterkillermk1
+		PlayerPalette: player_rgba
+

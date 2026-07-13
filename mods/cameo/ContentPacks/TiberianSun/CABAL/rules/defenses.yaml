@@ -1,10 +1,48 @@
 cabal_silo:
-	Inherits: ts_gdi_silo
+	Inherits: ^BaseBuilding
+	Inherits@shape: ^2x2Shape
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Selectable:
+		Bounds: 2048, 2048
+	Valued:
+		Cost: 150
 	Tooltip:
 		Name: Silo
+	ProvidesPrerequisite@buildingname:
 	Buildable:
+		BuildPaletteOrder: 100
+		Queue: Defence, RADefence
+		Description: Stores resources.\n  Strong vs Nothing\n  Weak vs Everything
 		Prerequisites: ~cabal_constructionyard, cabal_refinery
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	Health:
+		HP: 100000
+	RevealsShroud:
+		Range: 4c0
+	Power:
+		Amount: -8
+	ProvidesPrerequisite@buildingname:
+	SelectionDecorations:
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete
+		Sequence: idle-lights
+	StoresResources:
+		Capacity: 8000
+	WithResourceLevelOverlay@FILLSTAGE:
+		RequiresCondition: !build-incomplete
+		Sequence: stages
+	WithSpriteBody:
+		Sequence: idle-underlay
+	MustBeDestroyed:
+		RequiredForShortGame: false
+	WithResourceStoragePipsDecoration:
+		Position: BottomLeft
+		RequiresSelection: true
+		PipCount: 5
 	RenderSprites:
+		PlayerPalette: playerra2
 		Image: tsgtsilo.cabal
 
 cabal_missilesilo:
@@ -28,34 +66,108 @@ cabal_missilesilo:
 		PlayerPalette: playerra2
 		Image: tsgtsilo.cabal
 cabal_stealthgenerator:
-	Inherits: ts_nod_stealthgenerator
+	Inherits: ^BaseBuilding
+	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@SHAPE: ^3x2Shape
+	Inherits@cloak: ^CloakedVehicle
+	Inherits@cloakanim: ^TiberiumCloakAnimation
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Stealth Generator
 	Buildable:
+		BuildLimit: 1
+		Queue: Defence, RADefence
+		BuildPaletteOrder: 170
 		Prerequisites: ~cabal_constructionyard, cabal_techcenter
+		Description: Advanced base defense.\nGenerates a cloaking field.\n  Strong vs Nothing\n  Weak vs Everything
+	Building:
+		Footprint: xxx xxx
+		Dimensions: 3,2
+	Health:
+		HP: 100000
+	Armor:
+		Type: Concrete
+	RevealsShroud:
+		Range: 6c0
+	Power:
+		Amount: -125
+	WithIdleOverlay@pulse:
+		RequiresCondition: !disabled && !lowpower && !damaged
+		Sequence: pulse
+	WithIdleOverlay@pulse-damaged:
+		RequiresCondition: !disabled && !lowpower && damaged
+		Sequence: damaged-pulse
+	ProximityExternalCondition@StealthGen:
+		Range: 12c0
+		Condition: tscloak
+		EnableSound: cloak5.aud
+		DisableSound: cloak5.aud
+		RequiresCondition: !disabled && !lowpower
+	ProvidesPrerequisite@buildingname:
+	WithRangeCircle@GenRange:
+		Range: 12c0
+		RequiresCondition: !disabled
 	RenderSprites:
 		PlayerPalette: playerra2
 		Image: cabal_stealthgenerator
 
 cabal_heavycabalobelisk:
-	Inherits: ts_nod_obeliskoflight
-	Buildable:
-		Prerequisites: ~cabal_constructionyard, cabal_techcenter
-	RenderSprites:
-		PlayerPalette: playerra2
-		Image: cabal_heavycabalobelisk
-	Tooltip:
-		Name: Heavy Cabal Obelisk
+	Inherits: ^Defense
+	Inherits@shape: ^2x2Shape
+	Inherits@Template: ^AdvancedDefenseTemplate
+	Inherits@AUTOTARGET: ^AutoTargetGround
+	Inherits@sell: ^TSSpawnActorsOnSell
 	Valued:
 		Cost: 2400
+	Tooltip:
+		Name: Heavy Cabal Obelisk
+	Buildable:
+		BuildPaletteOrder: 60
+		Prerequisites: ~cabal_constructionyard, cabal_techcenter
+		Queue: Defence, RADefence
+		Description: Advanced base defense.\nRequires power to operate.\n  Strong vs Ground units\n  Weak vs Aircraft
+	Building:
+		Footprint: xx xx
+		Dimensions: 2,2
+	SelectionDecorations:
 	Health:
 		HP: 220000
-	-Armament@UPGRADE:
+	RevealsShroud:
+		Range: 7c0
+	-WithSpriteBody:
+	WithChargeSpriteBody:
+		Sequence: idle
 	Armament@PRIMARY:
 		Weapon: TSCABALObeliskLaserFire
 		LocalOffset: 0,0,1956
+	AttackCharges:
+		RequiresCondition: !build-incomplete
+		PauseOnCondition: lowpower || disabled
+		ChargeLevel: 50
+		ChargingCondition: charging
+	AmbientSound:
+		RequiresCondition: charging
+		SoundFiles: obelpowr.aud
+		Interval: 30, 40
+	-SpawnActorsOnSell:
+	DetectCloaked:
+		Range: 5c0
+		RequiresCondition: !lowpower && !disabled
 	WithChargeOverlay:
 		RequiresCondition: !build-incomplete
 		Palette: playerra2
 		IsPlayerPalette: true
+	WithIdleOverlay@LIGHTS:
+		RequiresCondition: !build-incomplete && !disabled
+		Sequence: idle-lights
+		Palette: playerra2
+		IsPlayerPalette: true
+	Power:
+		Amount: -120
+	RenderSprites:
+		PlayerPalette: playerra2
+		Image: cabal_heavycabalobelisk
 
 cabal_obeliskofdarkness:
 	Inherits: ^Defense
@@ -110,7 +222,7 @@ cabal_obeliskofdarkness:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
 	Power:
-		Amount: -75
+		Amount: -60
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -152,7 +264,7 @@ cabal_pillbox:
 		PortCones: 88, 88, 88, 88, 88, 88
 		PauseOnCondition: disabled
 	Power:
-		Amount: -25
+		Amount: -40
 	RevealsShroud:
 		Range: 6583
 	WithCargoPipsDecoration:
