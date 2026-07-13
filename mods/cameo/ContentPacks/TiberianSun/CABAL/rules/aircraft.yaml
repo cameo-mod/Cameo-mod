@@ -60,7 +60,7 @@ cabal_hunterkillermk1:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite
 		Queue: Aircraft, RAAircraft
-		Description: Anti-personnel support gunship\narmed with dual chain guns.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+		Description: Support gunship armed with\ndual rockets and small dual lasers.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
 	Aircraft:
 		Speed: 160
 		TurnSpeed: 32
@@ -76,6 +76,10 @@ cabal_hunterkillermk1:
 	Armament@PRIMARY:
 		Weapon: CabalHunterKillerLasers
 		LocalOffset: 0,0,0
+		PauseOnCondition: !ammo
+	Armament@ROCKETS:
+		Weapon: TSHellfireTwin
+		LocalOffset: 25,-100,0, 25,100,0
 		PauseOnCondition: !ammo
 	AttackAircraft:
 		FacingTolerance: 80
@@ -107,7 +111,6 @@ cabal_hunterkillermk1:
 
 cabal_hunterkillermk2:
 	Inherits: ^Helicopter
-	# Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
@@ -123,56 +126,127 @@ cabal_hunterkillermk2:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_helipad, cabal_techcenter
 		Queue: Aircraft, RAAircraft
-		Description: Advanced fighter-bomber craft\nwith twin plasma cannons.\n  Strong vs Buildings, Vehicles\n  Weak vs Infantry, Aircraft
+		Description: Heavy carrier with drone swarm\nand a big moving laser.\n  Strong vs Vehicles, Buildings\n  Weak vs Infantry, Aircraft
 	Aircraft:
 		Speed: 50
 		TurnSpeed: 10
-		# TakeoffSounds: orcaup1.aud
-		# LandingSounds: orcadwn1.aud
-		# AltitudeVelocity: 128
-		# CanSlide: false
-		# TakeOffOnResupply: true
 	Health:
 		HP: 300000
 	Repairable:
 		HpPerStep: 15000
 	ChangesHealth@SelfHealing:
 		Step: 120
-	Armament@PRIMARY:
-		Weapon: CabalHunterKillerHeavyLaser
-		LocalOffset: 0,0,0
-		# PauseOnCondition: !ammo
-	Armament@PRIMARY2:
-		Weapon: TSHellfireTwin
-		LocalOffset: 25,-100,0, 25,100,0
-		# PauseOnCondition: !ammo
-		RequiresCondition: up_plasmaweapons
+	CarrierMaster:
+		ArmamentNames: primary
+		Actors: cabal_hunterkillermk2_drone, cabal_hunterkillermk2_drone, cabal_hunterkillermk2_drone
+		RearmTicks: 25
+		RespawnTicks: 75
+		InstaRepair: true
+		SlaveDisposalOnKill: KillSlaves
+		SpawnAllAtOnce: false
+	Armament@drones:
+		Name: primary
+		Weapon: CabalOverkillDroneLauncher
+	Armament@charge:
+		Name: charge
+		Weapon: CabalOverkillCharge
+		LocalOffset: 1500,0,-250
+		PauseOnCondition: discharged
+	Armament:
+		Name: secondary
+		Weapon: CabalOverkillLaser
+		LocalOffset: 1500,0,-250
+		PauseOnCondition: !charged
+		ReloadingCondition: discharged
+	AmmoPool:
+		Armaments: secondary
+		Ammo: 100
+		InitialAmmo: 0
+		AmmoCondition: charged
+	ReloadAmmoPoolCA@charged:
+		Count: 100
+		Delay: 50
+		RequiresCondition: charging
+	ReloadAmmoPoolCA@discharge:
+		Count: -1
+		Delay: 1
+		RequiresCondition: charged && !charging
+	GrantConditionOnAttack@charged:
+		Condition: charging
+		RequiredShotsPerInstance: 1
+		ArmamentNames: charge
+		RevokeDelay: 50
+		RevokeOnNewTarget: true
+	WithAmmoPipsDecoration:
+		PipCount: 10
+		FullSequence: pip-red
+		Position: BottomLeft
+		RequiresSelection: true
+	Turreted:
 	AttackAircraft:
+		Armaments: primary, secondary, charge
 		Voice: Attack
-		FacingTolerance: 80
-		PersistentTargeting: false
+		FacingTolerance: 40
 		PauseOnCondition: disabled
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	Voiced:
 		VoiceSet: TSScrin
-	# AmmoPool:
-	# 	Ammo: 24
-	# 	ReloadCount: 4
-	# 	AmmoCondition: ammo
 	DeathSounds:
 		VolumeMultiplier: 2
 	SpawnActorOnDeath:
 		Actor: cabal_hunterkillermk2_husk
-	# WithAmmoPipsDecoration:
-	# 	Position: BottomLeft
-	# 	RequiresSelection: True
-	# 	PipCount: 4
-	# ActorStatValues:
-	# 	Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_advancedtiberiumrefinement
 	RenderSprites:
 		Image: cabal_hunterkillermk2
+		PlayerPalette: player_rgba
+
+cabal_hunterkillermk2_drone:
+	Inherits: ^RANeutralPlane
+	Inherits@Template: ^BomberTemplate
+	Inherits@exp: ^GainsExperienceTD
+	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
+	Valued:
+		Cost: 500
+	Tooltip:
+		Name: Overkill Drone
+	Buildable:
+		Description: template_carrier_slave.description
+	Hovers:
+	Aircraft:
+		TurnSpeed: 32
+		Speed: 180
+		Repulsable: false
+		VTOL: false
+		CruiseAltitude: 1c256
+		TakeUpCellWhenLand: false
+	Targetable:
+		TargetTypes: Air
+	CarrierSlave:
+		LandingDistance: 6400
+	HasParent:
+	Health:
+		HP: 15000
+	ChangesHealth@SelfHealing:
+		Step: 8
+	Armament@PRIMARY:
+		Weapon: CabalOverkillDroneLaser
+		LocalOffset: 150,0,0
+	AttackAircraft:
+		FacingTolerance: 40
+	Voiced:
+		VoiceSet: TSScrin
+	RejectsOrders:
+	-ActorLostNotification:
+	-UpdatesPlayerStatistics:
+	HitShape:
+	-MapEditorData:
+	SpawnActorOnDeath:
+		Actor: cabal_hunterkillermk2_drone_husk
+		OwnerType: InternalName
+		EffectiveOwnerFromOwner: true
+	RenderSprites:
+		Image: cabal_hunterkillermk2_drone
 		PlayerPalette: player_rgba
 
 cabal_wasp:

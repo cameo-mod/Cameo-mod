@@ -941,3 +941,86 @@ CabalBeholderLaser:
 	Warhead@1Percentage: HealthPercentageDamage
 		Damage: 5
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+
+CabalOverkillDroneLauncher:
+	ReloadDelay: 25
+	Range: 6400
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		ValidTargets: Ground, Air, Water
+
+CabalOverkillCharge:
+	ReloadDelay: 125
+	Range: 6400
+	ValidTargets: Ground, Water, Air
+	Report: obelcor3.aud
+	Projectile: LaserZap
+		Width: 72
+		Duration: 60
+		SecondaryBeamWidth: 96
+		SecondaryBeamColor: 88DD2230
+		TrackTarget: false
+	Warhead@1Dam: SpreadDamage
+		Damage: 25000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@1Percentage: HealthPercentageDamage
+		Damage: 8
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+
+CabalOverkillLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 50
+	Range: 6400
+	Burst: 50
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		Width: 60
+		ZOffset: 2047
+		Color: 77DD22CC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 30
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 2A2A55DD
+		TrackTarget: false
+	Warhead@1Dam: SpreadDamage
+		Damage: 1500
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@1Percentage: HealthPercentageDamage
+		Damage: 2
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_l
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
+
+CabalOverkillDroneLaser:
+	Inherits: ^SmallArms
+	Inherits@2: ^LaserWeapon
+	ReloadDelay: 30
+	Range: 4096
+	Projectile: LaserZap
+		Width: 40
+		ZOffset: 2047
+		Color: 66CC22BB
+		SecondaryBeam: true
+		SecondaryBeamWidth: 18
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 222244CC
+	Report: lastur1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_s
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
