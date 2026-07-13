@@ -54,18 +54,18 @@ factions, everything through the balance workbook._
 
 ## CABAL — new orders 2026-07-13 (the big batch)
 
-### N1. Green-plasma / neutron-shell gating (in progress)
+### N1. Green-plasma / neutron-shell gating (`7a0d0025d`)
 - [x] New art: `cabal_greenplasma.png` (weak green plasma projectile) +
   `cabal_greenplasmaimpact.png` (green impact burst), both border-safe
-  RGBA PngSheets. (Built, uncommitted.)
-- [ ] **Neutron-shell gates every magicnuke weapon.** Non-upgraded
+  RGBA PngSheets.
+- [x] **Neutron-shell gates every magicnuke weapon.** Non-upgraded
   (`!cabal_upgrade_neutronnuclearcatalyst`) = green plasma projectile +
   green impact; upgraded = the blue magicnuke. Pattern already on
   Artillery Spider + Tarantula (basic armament `!cond`, `Armament@Upgraded`
   `cond`); extend the same split to Cyborg Commando, Commando Mk2, and
   the Ravager. Consider updating the upgrade description (it now empowers
   the whole plasma line, not just Artillery+Tarantula).
-- [ ] **Magicnuke sizes scaled to power, all 4 used** (`magicnuke_micro`
+- [x] **Magicnuke sizes scaled to power, all 4 used** (`magicnuke_micro`
   0.2 < `_small` 0.25 < `_med` 0.5 < `magicnuke` 1.0):
   - micro → TS90mm_bluenuke (~12k)
   - small → TS120mm_bluenuke (Tarantula, ~24k), CabalRavagerPlasma (~32k)
@@ -83,8 +83,8 @@ factions, everything through the balance workbook._
   NukePower pattern; the "add-on = missile silo" is a prerequisite
   building/attachment that unlocks or houses the silo.)
 
-### N3. CABAL Core = money structure
-- [ ] Turn the CABAL Core into a **special money-generator structure like
+### N3. CABAL Core = money structure (`7a0d0025d`)
+- [x] Turn the CABAL Core into a **special money-generator structure like
   the Asian Military Academy**: **double the income of the Oil Derrick**,
   and it **also counts as an Oil Derrick** (provides that prerequisite /
   captured-tech behavior). It also launches the N2 superweapon.
@@ -119,8 +119,8 @@ factions, everything through the balance workbook._
   unique existing mod sounds and flag any that truly need new custom
   audio for the maintainer to source.)
 
-### N7. Weapon-mount offsets
-- [ ] **Ascended + Devout**: increase the **second (Y) value** of each
+### N7. Weapon-mount offsets (`7a0d0025d`)
+- [x] **Ascended + Devout**: increase the **second (Y) value** of each
   triple offset ~**2×** so their weapons sit further left/right.
 
 ### N8. Armor combo (was CC; still pending, sheet-coupled)
