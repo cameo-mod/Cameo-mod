@@ -113,7 +113,7 @@ cabal_cyborgreaper:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 140
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
-		Description: Cyborg walker armed with missiles and nets.\n Strong vs vehicles\n Can immobilize infantry
+		Description: actor_cabal_cyborgreaper.description
 	Health:
 		HP: 70000
 	ChangesHealth@SelfHealing:
@@ -173,9 +173,9 @@ cabal_dissolver:
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
-		Description: Anti-Tank Walker\nDissolves mechanical parts to regenerate itself
 		Prerequisites: ~cabal_cyborgfactory
 		IconPalette: ra2
+		Description: actor_cabal_dissolver.description
 	Selectable:
 		Class: cabal_dissolver
 	Mobile:
@@ -226,7 +226,7 @@ cabal_tiberiumharvester:
 	Buildable:
 		Prerequisites: ~cabal_mechfactory, cabal_refinery
 		Queue: Vehicle, RAVehicle
-		Description: Harvests Tiberium for processing
+		Description: actor_cabal_tiberiumharvester.description
 	WithVoxelBody:
 	WithDockingAnimation:
 	Voiced:
@@ -279,7 +279,7 @@ cabal_laserspider:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_laserspider.description
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 28
@@ -332,7 +332,7 @@ cabal_mantis:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory
 		Queue: Vehicle, RAVehicle
-		Description: Turretless fire support strider with a frontal beam cannon.\n  Strong vs Infantry, Light armor\n  Weak vs Aircraft
+		Description: actor_cabal_mantis.description
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 48
@@ -387,7 +387,7 @@ cabal_manticore:
 		BuildPaletteOrder: 145
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, ~cabal_promotion_manticore
 		Queue: Infantry, RAInfantry
-		Description: Line-breaker walker armed with heavy rocket batteries and nets.\n  Strong vs Vehicles, Aircraft\n  Can immobilize infantry
+		Description: actor_cabal_manticore.description
 	Mobile:
 		Locomotor: wheeled
 		TurnSpeed: 13
@@ -444,7 +444,7 @@ cabal_artilleryspider:
 		BuildPaletteOrder: 30
 		Prerequisites: ~cabal_mechfactory, cabal_radar
 		Queue: Vehicle, RAVehicle
-		Description: Fast scout and anti-infantry vehicle.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_artilleryspider.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 70
@@ -509,7 +509,7 @@ cabal_tarantula:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~cabal_mechfactory, cabal_radar
-		Description: General purpose mechanized walker.\n  Strong vs Vehicles\n  Weak vs Infantry, Aircraft
+		Description: actor_cabal_tarantula.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 70
@@ -581,7 +581,7 @@ cabal_scarabapc:
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_mechfactory, cabal_radar
 		Queue: Vehicle, RAVehicle
-		Description: Troop transport that can move\nunderground to avoid detection.\n  Unarmed
+		Description: actor_cabal_scarabapc.description
 	Mobile:
 		Speed: 75
 		Locomotor: hover
@@ -642,9 +642,9 @@ cabal_eliminator1000:
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
-		BuildLimit: 1
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		BuildLimit: 1
+		Description: actor_cabal_eliminator1000.description
 	Mobile:
 		Speed: 80
 		PauseOnCondition: disabled

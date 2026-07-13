@@ -5,6 +5,7 @@ cabal_engineer:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
+		Description: actor_cabal_engineer.description
 	Voiced:
 		VoiceSet: TSCyborg
 	-TemporaryOwnerManager:
@@ -63,7 +64,7 @@ cabal_cyborginfantry:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_devout
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_cyborginfantry.description
 	Mobile:
 		TurnSpeed: 20
 		# TurnSpeed: 10
@@ -118,7 +119,7 @@ cabal_ravager:
 		BuildPaletteOrder: 15
 		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
-		Description: Short-range plasma line breaker with heavy firepower.\n  Strong vs Vehicles, Buildings, Infantry\n  Weak vs Aircraft
+		Description: actor_cabal_ravager.description
 	Mobile:
 		TurnSpeed: 24
 		Speed: 60
@@ -171,7 +172,7 @@ cabal_rocketcyborg:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Medium armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_rocketcyborg.description
 	Mobile:
 		TurnSpeed: 20
 		Speed: 50
@@ -264,7 +265,7 @@ cabal_devout:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_devout
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_devout.description
 	Mobile:
 		TurnSpeed: 20
 		Speed: 50
@@ -357,7 +358,7 @@ cabal_ascended:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_cyborgfactory, ~cabal_promotion_ascended
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_ascended.description
 	Mobile:
 		TurnSpeed: 20
 		Speed: 50
@@ -452,7 +453,7 @@ cabal_hackercyborg:
 		BuildPaletteOrder: 50
 		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic infantry unit.\n  Strong vs Infantry, Light armor\n  Weak vs Vehicles, Aircraft
+		Description: actor_cabal_hackercyborg.description
 	Mobile:
 		TurnSpeed: 32
 		Speed: 80
@@ -558,7 +559,7 @@ cabal_cyborgcommando:
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+		Description: actor_cabal_cyborgcommando.description
 	Mobile:
 		TurnSpeed: 20
 		Speed: 50
@@ -601,7 +602,7 @@ cabal_cyborgcommandov2:
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
-		Description: Elite cybernetic infantry unit.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Aircraft
+		Description: actor_cabal_cyborgcommandov2.description
 	Mobile:
 		TurnSpeed: 20
 		Speed: 50
@@ -648,7 +649,7 @@ cabal_eliminator800:
 		BuildPaletteOrder: 10
 		Prerequisites: ~cabal_cyborgfactory
 		Queue: Infantry, RAInfantry
-		Description: Cybernetic-Biologic infantry unit.\n  Strong vs Infantry, Light armor, Aircraft\n  Weak vs Vehicles
+		Description: actor_cabal_eliminator800.description
 	Health:
 		HP: 85000
 	Mobile:
@@ -747,7 +748,7 @@ cabal_coredefender:
 		BuildPaletteOrder: 140
 		BuildLimit: 1
 		Prerequisites: ~cabal_mechfactory, cabal_core
-		Description: Superheavy CABAL epic unit.\n Strong vs ground targets
+		Description: actor_cabal_coredefender.description
 	Mobile:
 		TurnSpeed: 20
 		Speed: 50

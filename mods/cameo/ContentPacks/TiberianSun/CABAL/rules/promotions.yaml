@@ -5,8 +5,8 @@ cabal_promotion_devout:
 	Buildable:
 		BuildPaletteOrder: 1
 		Queue: Promotions
-		Description: Replaces the Cyborg Infantry with the Devout.
 		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_devout, rank1
+		Description: actor_cabal_promotion_devout.description
 	RenderSprites:
 		Image: cabal_devout
 	ProvidesPrerequisite:
@@ -18,8 +18,8 @@ cabal_promotion_ascended:
 	Buildable:
 		BuildPaletteOrder: 4
 		Queue: Promotions
-		Description: Replaces the Rocket Cyborg with the Ascended.
 		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_devout, !cabal_promotion_ascended, rank1
+		Description: actor_cabal_promotion_ascended.description
 	RenderSprites:
 		Image: cabal_ascended
 	ProvidesPrerequisite:
@@ -31,8 +31,8 @@ cabal_promotion_manticore:
 	Buildable:
 		BuildPaletteOrder: 5
 		Queue: Promotions
-		Description: Enables construction of the Manticore.
 		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, !cabal_promotion_manticore, rank1
+		Description: actor_cabal_promotion_manticore.description
 	RenderSprites:
 		Image: cabal_manticore
 	ProvidesPrerequisite:

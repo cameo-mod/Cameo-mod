@@ -7,8 +7,8 @@ cabal_upgrade_mobilitymatrix:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
-		Description: Walkers moves 25% faster, and ads 10% of armor.
 		Prerequisites: ~cabal_radar, !cabal_upgrade_mobilitymatrix
+		Description: actor_cabal_upgrade_mobilitymatrix.description
 	RenderSprites:
 		Image: cabal_upgrade_mobilitymatrix
 	ProvidesPrerequisite:
@@ -22,8 +22,8 @@ cabal_upgrade_darkarmament:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
-		Description: Infantry Unlocks extra weapons, 10% reload faster.
 		Prerequisites: ~cabal_radar, !cabal_upgrade_darkarmament
+		Description: actor_cabal_upgrade_darkarmament.description
 	RenderSprites:
 		Image: cabal_upgrade_darkarmament
 	ProvidesPrerequisite:
@@ -37,8 +37,8 @@ cabal_upgrade_neutronnuclearcatalyst:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
-		Description: Artillery and Tarantula Unlocks neutron shells.
 		Prerequisites: ~cabal_radar, !cabal_upgrade_neutronnuclearcatalyst
+		Description: actor_cabal_upgrade_neutronnuclearcatalyst.description
 	RenderSprites:
 		Image: cabal_upgrade_neutronnuclearcatalyst
 	ProvidesPrerequisite:
@@ -52,8 +52,8 @@ cabal_upgrade_radarhack:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
-		Description: Unlocks Radar Hack Support Power, reveals map location.
 		Prerequisites: ~cabal_radar, !cabal_upgrade_radarhack
+		Description: actor_cabal_upgrade_radarhack.description
 	RenderSprites:
 		Image: cabal_upgrade_radarhack
 	ProvidesPrerequisite:
@@ -67,8 +67,8 @@ cabal_upgrade_networkedcombatprotocols:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Upgrades
-		Description: CABAL's assimilated network coordinates targeting across all units.\n  All units gain 8% firepower and 5% faster reload.
 		Prerequisites: ~cabal_radar, !cabal_upgrade_networkedcombatprotocols
+		Description: actor_cabal_upgrade_networkedcombatprotocols.description
 	RenderSprites:
 		Image: cabal_upgrade_radarhack
 	ProvidesPrerequisite:
@@ -83,8 +83,8 @@ cabal_upgrade_backupsystems:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Heavy Vehicles turns in Husks when dies, if Husk arent destroyed, it wakes up again.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_backupsystems
+		Description: actor_cabal_upgrade_backupsystems.description
 	RenderSprites:
 		Image: cabal_upgrade_backupsystems
 	ProvidesPrerequisite:
@@ -98,8 +98,8 @@ cabal_upgrade_handof:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Spawns free Hackers from Tech Center, Hackers upgrade speed.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_handof
+		Description: actor_cabal_upgrade_handof.description
 	RenderSprites:
 		Image: cabal_upgrade_handof
 	ProvidesPrerequisite:
@@ -113,8 +113,8 @@ cabal_upgrade_dataworm:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Unlocks the Data Worm support power at CABAL Core.\nHijacks a Hunter-Seeker droid and launches it at a target, instantly destroying mobile units.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_dataworm
+		Description: actor_cabal_upgrade_dataworm.description
 	RenderSprites:
 		Image: cabal_upgrade_dataworm
 	ProvidesPrerequisite:
@@ -128,8 +128,8 @@ cabal_upgrade_firewallprotocol:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: CABAL units become resistant to enemy mind control and vehicle hijacking.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_firewallprotocol
+		Description: actor_cabal_upgrade_firewallprotocol.description
 	RenderSprites:
 		Image: cabal_upgrade_radarhack
 	ProvidesPrerequisite:
@@ -143,8 +143,8 @@ cabal_upgrade_clusterwarhead:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Retrofits the Missile Silo with a neutron cluster warhead,\nspreading its payload across a wider area on impact.
 		Prerequisites: ~cabal_core, !cabal_upgrade_clusterwarhead
+		Description: actor_cabal_upgrade_clusterwarhead.description
 	RenderSprites:
 		Image: cabal_upgrade_neutronnuclearcatalyst
 	ProvidesPrerequisite:
@@ -165,8 +165,8 @@ cabal_upgrade_reinforcedchassis:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Laser Spider, Mantis and Spider Tank Drone gain 15% armor.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reinforcedchassis
+		Description: actor_cabal_upgrade_reinforcedchassis.description
 	RenderSprites:
 		Image: cabal_upgrade_mobilitymatrix
 	ProvidesPrerequisite:
@@ -181,9 +181,8 @@ cabal_upgrade_overchargedservos:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Overcharged servos: all CABAL units move and turn faster and reload quicker.
-  Infantry +40% speed/turn, 30% faster reload; vehicles +20% speed/turn, 15% faster reload.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_overchargedservos
+		Description: actor_cabal_upgrade_overchargedservos.description
 	RenderSprites:
 		Image: cabal_upgrade_darkarmament
 	ProvidesPrerequisite:
@@ -198,8 +197,8 @@ cabal_upgrade_neuraluplink:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Hacker Cyborg hacking attacks reload 20% faster.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_neuraluplink
+		Description: actor_cabal_upgrade_neuraluplink.description
 	RenderSprites:
 		Image: cabal_upgrade_handof
 	ProvidesPrerequisite:
@@ -214,8 +213,8 @@ cabal_upgrade_reclamationprotocols:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: Cyborg Infantry and Plated Armor Cyborg self-repair faster.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_reclamationprotocols
+		Description: actor_cabal_upgrade_reclamationprotocols.description
 	RenderSprites:
 		Image: cabal_upgrade_backupsystems
 	ProvidesPrerequisite:
@@ -230,8 +229,8 @@ cabal_upgrade_fullassimilation:
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
-		Description: CABAL's assimilated network extends unit sensor range and cloak detection by 20%.
 		Prerequisites: ~cabal_techcenter, !cabal_upgrade_fullassimilation
+		Description: actor_cabal_upgrade_fullassimilation.description
 	RenderSprites:
 		Image: cabal_upgrade_dataworm
 	ProvidesPrerequisite:
