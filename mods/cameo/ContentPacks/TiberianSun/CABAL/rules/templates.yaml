@@ -87,6 +87,12 @@
 		RequiresCondition: cabal_upgrade_networkedcombatprotocols
 		Modifier: 95
 
+^TSCyborgDualArmorHeavy:
+	Armor:
+		Type: Heavy
+	Armor@Secondary:
+		Type: Shield
+
 ^TSCyborgs:
 	Inherits@MC: ^MCImmune
 	Inherits@HackableRobot: ^HackableRobot
@@ -163,6 +169,16 @@
 		Prerequisites: cabal_upgrade_handof
 	ActorStatValues:
 		Upgrades: cabal_upgrade_handof
+
+^cabal_upgrade_cyberneticplating:
+	GrantConditionOnPrerequisite@cabal_upgrade_cyberneticplating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
+	DamageMultiplier@cabal_upgrade_cyberneticplating:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		Modifier: 75
+	ActorStatValues:
+		Upgrades: cabal_upgrade_cyberneticplating
 
 ^cabal_upgrade_reinforcedchassis:
 	GrantConditionOnPrerequisite@cabal_upgrade_reinforcedchassis:
