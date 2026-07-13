@@ -59,6 +59,11 @@ def main() -> int:
         action="store_true",
         help="author at 24px density and upscale exactly 2x for production",
     )
+    parser.add_argument(
+        "--exact-water-mask",
+        action="store_true",
+        help="keep every authoritative Temperate w1/w2 water-index pixel before 24px rasterization",
+    )
     args = parser.parse_args()
     out_dir = args.out_dir.resolve()
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -99,10 +104,18 @@ def main() -> int:
         donor, domain, spec = read_donor(template)
         donor_rgb = shore.indices_rgb(donor, temperate_palette)
         donor_rgb[~domain] = shore.BACKGROUND
-        snow, snow_domain, _ = read_donor(template, theater="snow")
-        if not np.array_equal(domain, snow_domain):
-            raise ValueError(f"{template}: Temperate and Snow sparse domains differ")
-        snow_rgb = shore.indices_rgb(snow, snow_palette)
+        try:
+            snow, snow_domain, _ = read_donor(template, theater="snow")
+            if not np.array_equal(domain, snow_domain):
+                raise ValueError(f"{template}: Temperate and Snow sparse domains differ")
+            snow_rgb = shore.indices_rgb(snow, snow_palette)
+            rock_classifier = "ra-temperate-plus-ra-snow"
+        except (FileNotFoundError, ValueError):
+            # Some RA Temperate-only specials have no Snow counterpart. The
+            # classifier's warm-face path remains useful when both inputs use
+            # the Temperate donor, and is preferable to inventing geometry.
+            snow_rgb = donor_rgb.copy()
+            rock_classifier = "ra-temperate-only-fallback"
         donor_rgba = np.dstack(
             [donor_rgb, np.where(domain, 255, 0).astype(np.uint8)]
         )
@@ -158,7 +171,8 @@ def main() -> int:
         # post-classification cleanup: every donor pixel whose palette index
         # occurs in Temperate w1/w2 is water, and no other pixel is water.
         # River/ford cleanup remains unchanged for its existing workflows.
-        if not template.startswith("wc"):
+        exact_water_mask = args.exact_water_mask or template.startswith("wc")
+        if not exact_water_mask:
             water = remove_small_components(water, minimum_pixels=48)
         classified_water = water.copy()
         if template.startswith("f"):
@@ -271,10 +285,11 @@ def main() -> int:
                 ),
                 "water_rule": (
                     "exact-ra-temperate-w1-w2-indices-no-cleanup"
-                    if template.startswith("wc")
+                    if exact_water_mask
                     else "exact-ra-temperate-w1-w2-indices-with-family-cleanup"
                 ),
                 "rock_pixels": int(np.count_nonzero(rock_mask & domain & ~water)),
+                "rock_classifier": rock_classifier,
                 "canonical_liquid_exact_pixels": int(
                     np.count_nonzero(candidate_indices[water] == liquid_indices[water])
                 ),
