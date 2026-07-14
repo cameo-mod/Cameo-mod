@@ -65,14 +65,6 @@ DarkObeliskLaser:
 		Damage: 18
 		Spread: 500
 		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_m
@@ -317,39 +309,11 @@ Eliminator-Blades:
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@SwordWeapon: SpreadDamage
-		Spread: 125
 		Damage: 12000
-		Versus:
-			None: 150
-			Wood: 50
-			Light: 125
-			Medium: 100
-			Heavy: 75
-			Concrete: 25
-		DamageTypes: RippedApartDeath
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Spread: 62
 		Damage: 6000
-		Versus:
-			None: 150
-			Wood: 50
-			Light: 125
-			Medium: 100
-			Heavy: 75
-			Concrete: 25
-		DamageTypes: RippedApartDeath
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
 		Damage: 6
-		Spread: 25
-		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
 	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: pzehit00.aud
@@ -365,39 +329,11 @@ CabalBerserkerBlades:
 	Projectile: Bullet
 		Speed: 1c682
 	Warhead@SwordWeapon: SpreadDamage
-		Spread: 256
 		Damage: 74000
-		Versus:
-			None: 150
-			Wood: 50
-			Light: 125
-			Medium: 100
-			Heavy: 100
-			Concrete: 50
-		DamageTypes: RippedApartDeath
 	Warhead@SwordWeaponFriendlyFire: SpreadDamage
-		Spread: 128
 		Damage: 37000
-		Versus:
-			None: 150
-			Wood: 50
-			Light: 125
-			Medium: 100
-			Heavy: 100
-			Concrete: 50
-		DamageTypes: RippedApartDeath
 	Warhead@SwordWeaponPercentage: HealthPercentageDamage
 		Damage: 37
-		Spread: 64
-		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
 	Warhead@Effect: CreateEffect
 		Image: explosions
 		Explosions: poof
@@ -910,67 +846,51 @@ CabalMothershipRockets:
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 2000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 1
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@EMPUnit: AffectsIntegrity
 		Damage: 6000
 		Spread: 600
@@ -1747,10 +1667,8 @@ CabalOverkillCharge:
 		TrackTarget: false
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 24000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		Damage: 12
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_l
 		Explosions: idle

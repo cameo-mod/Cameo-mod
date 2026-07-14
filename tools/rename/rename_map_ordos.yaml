@@ -53,11 +53,14 @@ actors:
 	up_heavy_autogun_tank.ordos: ordos_upgrade_heavyautoguntankupgrade
 	up_heavycombattank.ordos: ordos_upgrade_heavycombattankupgrade
 	up_heavycombattank_rockets.ordos: ordos_upgrade_heavycombattankrocketsupgrade
+	up_hoverdrive.ordos: ordos_upgrade_hoverdrive
 	up_laser_tank.ordos: ordos_promotion_unlocklasertank
+	up_laserguns.ordos: ordos_upgrade_lasercartridges
 	up_leech.ordos: ordos_promotion_unlockleecher
 	up_light.ordos: ordos_upgrade_lightfactoryupgrade
 	up_mortar.ordos: ordos_promotion_unlockmortartroopers
 	up_python.ordos: ordos_promotion_unlockpython
+	up_rapidfirearmorpiercingbelts.ordos: ordos_upgrade_rapidfirearmorpiercingbelts
 	up_scoutdrone.ordos: ordos_promotion_unlockdustdrone
 	up_shield.ordos: ordos_upgrade_shields
 	up_stealth_raider.ordos: ordos_promotion_unlockstealthraider
@@ -79,6 +82,7 @@ files:
 	d2k_autogun_turret_icon.shp: ordos_autogunturret_icon.shp
 	d2k_ct_striped.shp: ordos_combatautoguntank_d2k_ct_striped.shp
 	d2k_heavyautoguntankicon.png: ordos_upgrade_heavyautoguntankupgrade_icon.png
+	d2k_mercenary_inf_icon.shp: ordos_lightinfantry_d2k_mercenary_inf_icon.shp
 	d2k_ordos_heavycombattank_chassis.png: ordos_upgrade_heavycombattankupgrade_d2k_ordos_heavycombattank_chassis.png
 	d2k_ordos_heavycombattank_icon.png: ordos_upgrade_heavycombattankupgrade_icon.png
 	d2k_ordos_heavycombattank_turret.png: ordos_upgrade_heavycombattankupgrade_d2k_ordos_heavycombattank_turret.png
@@ -114,6 +118,7 @@ files:
 	ordos_swarmer_icon.png: ordos_swarmerdrone_icon.png
 	ordos_tnkd.png: ordos_tankdestroyer_ordos_tnkd.png
 	ordos_tnkd_icon.png: ordos_tankdestroyer_icon.png
+	ordos_upgrade_armorpiercing_icon.png: ordos_upgrade_rapidfirearmorpiercingbelts_icon.png
 	ordos_upgrade_para.png: ordos_upgrade_contraband_icon.png
 	ordos_upgrade_shield.png: ordos_upgrade_shields_icon.png
 	ordos_upgrade_toxin.png: ordos_upgrade_biologicalwarfare_icon.png
