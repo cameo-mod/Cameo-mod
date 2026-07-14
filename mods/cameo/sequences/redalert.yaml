@@ -793,7 +793,7 @@ ra1_soviet_attackdog:
 ra1_soviet_cyberdog:
 	Inherits: ra1_soviet_attackdog
 	Defaults:
-		Filename: ra1_soviet_promotion_unlockcyberdog_cyberdog.shp
+		Filename: ra1_soviet_promotion_unlockcyberdog.shp
 		Scale: 1.25
 	icon:
 		Filename: ra1_soviet_promotion_unlockcyberdog_icon.png
@@ -1030,7 +1030,7 @@ ra1_soviet_ak47conscript:
 		Scale: 1
 	Defaults:
 		Scale: 0.59
-		Filename: ra1_soviet_ak47conscript_ra_cons_ak.png
+		Filename: ra1_soviet_ak47conscript.png
 		#Scale: 0.75
 	run:
 		Scale: 1
@@ -1192,7 +1192,7 @@ ra1_soviet_commissar:
 		Scale: 1
 	Defaults:
 		Scale: 0.61
-		Filename: ra1_soviet_upgrade_unlockcommissar_ra_commissar.png
+		Filename: ra1_soviet_upgrade_unlockcommissar.png
 	run:
 		Scale: 1
 		Tick: 48
@@ -1725,7 +1725,7 @@ japan_archermaiden:
 japan_shogunexecutioner:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: japan_promotion_unlockshogunexecutioner_executioner.shp
+		Filename: japan_promotion_unlockshogunexecutioner.shp
 		Scale: 2
 		Offset: 0, 18
 	idle:
@@ -1980,7 +1980,7 @@ ra1_soviet_grad:
 				FlipX: True
 				Frames: 31, 30, 29, 28, 27, 26, 25, 24, 23, 22, 21, 20, 19, 18, 17, 16, 15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0
 	turret:
-		Filename: ra1_soviet_grad_ra_gradturret.png
+		Filename: ra1_soviet_grad_gradturret.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
@@ -2421,7 +2421,7 @@ japan_hovercraftflametank:
 
 japan_oitank:
 	Defaults:
-		Filename: japan_oitank_oitank.shp
+		Filename: japan_oitank.shp
 		Offset: 0,12
 	idle:
 		Facings: 64
@@ -2440,7 +2440,7 @@ japan_oitank:
 
 japan_exorcistoitank:
 	Defaults:
-		Filename: japan_oitank_oitank.shp
+		Filename: japan_oitank.shp
 		Offset: 0,12
 	idle:
 		Filename: japan_exorcistoitank.shp
@@ -2769,7 +2769,7 @@ kenn:
 dome:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ra1_allies_alliedradardome_dome.shp
+		Filename: ra1_allies_alliedradardome.shp
 	idle:
 		Offset: 0,-8
 	damaged-idle:
@@ -2958,27 +2958,27 @@ ra1_soviet_largesovietairfield:
 		ZOffset: -1023
 		Offset: 0,-6
 	active:
-		Filename: ra1_soviet_largesovietairfield_ra_largeairfield_light.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_light.shp
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	damaged-active:
-		Filename: ra1_soviet_largesovietairfield_ra_largeairfield_light.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_light.shp
 		Start: 8
 		Length: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	flag:
-		Filename: ra1_soviet_largesovietairfield_ra_largeairfield_flag.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_flag.shp
 		Length: 8
 		ShadowStart: 8
 		Tick: 160
 		ZOffset: -1023
 		Offset: 0,-6
 	make:
-		Filename: ra1_soviet_largesovietairfield_ra_largeairfield_make.shp
+		Filename: ra1_soviet_largesovietairfield_largeairfield_make.shp
 		Length: *
 		Offset: 0,-6
 	dead:
@@ -3709,7 +3709,7 @@ ra1_soviet_supersonicnuclearbomber:
 
 ra1_soviet_yakscoutplane:
 	Defaults:
-		Filename: ra1_soviet_nuclearyak_yak.shp
+		Filename: ra1_soviet_nuclearyak.shp
 	idle:
 		Facings: 16
 		InterpolatedFacings: 64
@@ -3722,7 +3722,7 @@ ra1_soviet_yakscoutplane:
 
 ra1_soviet_teslayak:
 	Defaults:
-		Filename: ra1_soviet_teslayak_ra1_soviets_yaktesla.png
+		Filename: ra1_soviet_teslayak_soviets_yaktesla.png
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -3735,7 +3735,7 @@ ra1_soviet_teslayak:
 
 ra1_soviet_armoredyak:
 	Defaults:
-		Filename: ra1_soviet_armoredyak_ra1_soviets_yakarmored.png
+		Filename: ra1_soviet_armoredyak_soviets_yakarmored.png
 	idle:
 		Facings: 16
 		Length: 3
@@ -3749,7 +3749,7 @@ ra1_soviet_armoredyak:
 
 ra1_soviet_nuclearyak:
 	Defaults:
-		Filename: ra1_soviet_nuclearyak_yak.shp
+		Filename: ra1_soviet_nuclearyak.shp
 		Scale: 1.25
 	idle:
 		Facings: 16
@@ -3847,7 +3847,7 @@ ra1_soviet_kamovattackhelicopter:
 
 ra1_soviet_hiptransport:
 	Defaults:
-		Filename: ra1_soviet_hiptransport_ra_hip.png
+		Filename: ra1_soviet_hiptransport.png
 	idle:
 		Facings: 64
 	rotor:
@@ -5064,7 +5064,7 @@ japan_armoredcar:
 
 japan_zerofighter:
 	Defaults:
-		Filename: japan_zerofighter_zerofighter.shp
+		Filename: japan_zerofighter.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5076,7 +5076,7 @@ japan_zerofighter:
 
 japan_japanesebomber:
 	Defaults:
-		Filename: japan_japanesebomber_japanesebomber.shp
+		Filename: japan_japanesebomber.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5097,7 +5097,7 @@ jsuperbomber:
 modkamimini:
 	Defaults:
 		Scale: 0.5
-		Filename: japan_zerofighter_zerofighter.shp
+		Filename: japan_zerofighter.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5282,7 +5282,7 @@ japan_chihaheavytank:
 
 japan_shrine_minitank:
 	Defaults:
-		Filename: japan_promotion_unlockshrinetank_japan_shrine_minitank.png
+		Filename: japan_promotion_unlockshrinetank_minitank.png
 		Offset: 0, -8
 	idle:
 		Facings: 64
@@ -5358,7 +5358,7 @@ ra1_soviet_gorynychtank:
 		
 japan_rocketangel:
 	Defaults:
-		Filename: japan_promotion_unlockrocketangel_rocketangel.shp
+		Filename: japan_promotion_unlockrocketangel.shp
 		Scale: 0.8
 		Tick: 200
 		Offset: 0, 0, 16

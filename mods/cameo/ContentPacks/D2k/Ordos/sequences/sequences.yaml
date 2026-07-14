@@ -35,7 +35,7 @@ ordos_artilleryplatform:
 		Length: 7
 		Offset: -16,16
 	turret:
-		Filename: ordos_artilleryplatform_artillery_platform_turret.shp
+		Filename: ordos_artilleryplatform_turret.shp
 		Facings: -32
 		Offset: 0,-16
 		Scale: 1.5
@@ -999,7 +999,7 @@ ordos_facedancer:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Scale: 1.47
-		Filename: ordos_facedancer_facedancer.shp
+		Filename: ordos_facedancer.shp
 	invisible:
 		Filename: DATA.R16
 		Scale: 1.4
@@ -1170,7 +1170,7 @@ ordos_mortartrooper:
 		Scale: 1
 	Defaults:
 		Scale: 0.71
-		Filename: ordos_promotion_unlockmortartroopers_ordos_mortar.png
+		Filename: ordos_promotion_unlockmortartroopers.png
 	run:
 		Scale: 1
 		Tick: 100
@@ -1219,7 +1219,7 @@ ordos_mortartrooper:
 ordos_swarmerdrone:
 	Defaults:
 	idle:
-		Filename: ordos_swarmerdrone_ordos_swarmer.png
+		Filename: ordos_swarmerdrone.png
 		Facings: 64
 		Scale: 1
 		Offset: 0,24
@@ -1234,11 +1234,11 @@ ordos_swarmerdrone:
 ordos_banshee:
 	Defaults:
 	idle:
-		Filename: ordos_promotion_unlockbanshees_ordos_banshee.png
+		Filename: ordos_promotion_unlockbanshees.png
 		Facings: 64
 		Scale: 1
 	move:
-		Filename: ordos_promotion_unlockbanshees_ordos_banshee.png
+		Filename: ordos_promotion_unlockbanshees.png
 		Facings: 64
 		Start: 64
 		Scale: 1
@@ -1252,7 +1252,7 @@ ordos_banshee:
 
 ordos_wraith:
 	Defaults:
-		Filename: ordos_promotion_unlockwraith_ordos_wraith.png
+		Filename: ordos_promotion_unlockwraith.png
 	idle:
 		Length: 64
 		Tick: 64
@@ -1271,7 +1271,7 @@ ordos_wraith:
 ordos_eyeinthesky:
 	Defaults:
 	idle:
-		Filename: ordos_eyeinthesky_ordos_eye.png
+		Filename: ordos_eyeinthesky.png
 		Facings: 64
 		Scale: 1
 	muzzle:
@@ -1293,12 +1293,12 @@ swarmer_husk.ordos:
 ordos_spiceharvester:
 	Defaults:
 	idle:
-		Filename: ordos_spiceharvester_ordos_harv.png
+		Filename: ordos_spiceharvester.png
 		Scale: 1
 		Start: 64
 		Facings: 64
 	move:
-		Filename: ordos_spiceharvester_ordos_harv.png
+		Filename: ordos_spiceharvester.png
 		Length: 8
 		Facings: 8
 		Scale: 1
@@ -1313,13 +1313,13 @@ ordos_spiceharvester:
 		ZOffset: 1
 		BlendMode: Multiply
 	dock:
-		Filename: ordos_spiceharvester_ordos_harv.png
+		Filename: ordos_spiceharvester.png
 		Scale: 1
 		Start: 168
 		Facings: 1
 		Length: 6
 	dock-loop:
-		Filename: ordos_spiceharvester_ordos_harv.png
+		Filename: ordos_spiceharvester.png
 		Scale: 1
 		Start: 170
 		Facings: 1
@@ -1328,7 +1328,7 @@ ordos_spiceharvester:
 
 ordos_cobratank:
 	Defaults:
-		Filename: ordos_cobratank_ordos_cobra.png
+		Filename: ordos_cobratank.png
 	idle:
 		Start: 64
 		Facings: 64
@@ -1354,7 +1354,7 @@ ordos_cobratank:
 
 ordos_pythontank:
 	Defaults:
-		Filename: ordos_promotion_unlockpython_ordos_python.png
+		Filename: ordos_promotion_unlockpython.png
 	idle:
 		Start: 64
 		Facings: 64
@@ -1380,12 +1380,12 @@ ordos_pythontank:
 
 ordos_lasertank:
 	idle:
-		Filename: ordos_promotion_unlocklasertank_ordos_lasertank.png
+		Filename: ordos_promotion_unlocklasertank.png
 		Start: 0
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ordos_promotion_unlocklasertank_ordos_lasertank.png
+		Filename: ordos_promotion_unlocklasertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1394,12 +1394,12 @@ ordos_lasertank:
 
 ordos_deviatortank:
 	idle:
-		Filename: ordos_promotion_unlockdeviatortank_ordos_deviatormk2.png
+		Filename: ordos_promotion_unlockdeviatortank_deviatormk2.png
 		Start: 0
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ordos_promotion_unlockdeviatortank_ordos_deviatormk2.png
+		Filename: ordos_promotion_unlockdeviatortank_deviatormk2.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1430,7 +1430,7 @@ ordos_laboratorycrawler:
 
 ordos_airmine:
 	idle:
-		Filename: ordos_airmine_ordos_aamine.png
+		Filename: ordos_airmine_aamine.png
 		Facings: 64
 		Scale: 1
 	icon:
@@ -1505,7 +1505,7 @@ combat_tank_husk.ordos:
 
 d2k_ordos_stealth_tank:
 	idle:
-		Filename: ordos_tankdestroyer_ordos_tnkd.png
+		Filename: ordos_tankdestroyer_tnkd.png
 		Scale: 1.25
 		Facings: 64
 	muzzle:
@@ -1570,12 +1570,12 @@ ordos_stealthraider:
 ordos_dustdrone:
 	Defaults:
 	idle:
-		Filename: ordos_promotion_unlockdustdrone_ordos_scoutdrone.png
+		Filename: ordos_promotion_unlockdustdrone_scoutdrone.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	move:
-		Filename: ordos_promotion_unlockdustdrone_ordos_scoutdrone.png
+		Filename: ordos_promotion_unlockdustdrone_scoutdrone.png
 		Length: 8
 		Facings: 8
 		Scale: 1
@@ -1633,7 +1633,7 @@ deviator_husk.ordos:
 ordos_advancedcarryall:
 	Defaults:
 	idle:
-		Filename: ordos_advancedcarryall_ordos_carryall.png
+		Filename: ordos_advancedcarryall.png
 		Facings: 64
 	icon:
 		Filename: ordos_advancedcarryall_icon.png

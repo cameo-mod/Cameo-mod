@@ -22,7 +22,7 @@ mcv.destroyed:
 
 harv:
 	Defaults:
-		Filename: td_nod_tiberiumharvester_harv.shp
+		Filename: td_nod_tiberiumharvester.shp
 	idle:
 		Facings: 32
 		UseClassicFacings: True
@@ -42,7 +42,7 @@ harv:
 
 harv.destroyed:
 	idle:
-		Filename: td_nod_tiberiumharvester_harv.shp
+		Filename: td_nod_tiberiumharvester.shp
 		Facings: 32
 		UseClassicFacings: True
 		ZOffset: -512
@@ -199,7 +199,7 @@ c17:
 
 tran:
 	Defaults:
-		Filename: td_nod_chinooktransport_tran.shp
+		Filename: td_nod_chinooktransport.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64

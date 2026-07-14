@@ -691,7 +691,7 @@ eden_impulseitems_2:
 ####Eden Convec Structure Factory
 eden_convec:
 	Defaults:
-		Filename: eden_convec_structure_factory_eden_convec.shp
+		Filename: eden_convec_structure_factory.shp
 	idle:
 		Start: 0
 		Length: 1
@@ -783,7 +783,7 @@ eden_lynx_laser:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_lynx_laser_eden_mobile_laser.shp
+		Filename: eden_lynx_laser_mobile_laser.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -803,7 +803,7 @@ eden_tiger_laser:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_tiger_laser_eden_mobile_laser_tiger.shp
+		Filename: eden_tiger_laser_mobile_laser_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -823,7 +823,7 @@ eden_lynx_railgun:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_lynx_railgun_eden_mobile_railgun.shp
+		Filename: eden_lynx_railgun_mobile_railgun.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -843,7 +843,7 @@ eden_tiger_railgun:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_tiger_railgun_eden_mobile_railgun_tiger.shp
+		Filename: eden_tiger_railgun_mobile_railgun_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -863,7 +863,7 @@ eden_lynx_emp:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_lynx_emp_eden_mobile_emp.shp
+		Filename: eden_lynx_emp_mobile_emp.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -883,7 +883,7 @@ eden_tiger_emp:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_tiger_emp_eden_mobile_emp_tiger.shp
+		Filename: eden_tiger_emp_mobile_emp_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -903,7 +903,7 @@ eden_lynx_acidcloud:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_lynx_acidcloud_eden_mobile_acidcloud.shp
+		Filename: eden_lynx_acidcloud_mobile_acidcloud.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -923,7 +923,7 @@ eden_tiger_acidcloud:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_tiger_acidcloud_eden_mobile_acidcloud_tiger.shp
+		Filename: eden_tiger_acidcloud_mobile_acidcloud_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -943,7 +943,7 @@ eden_lynx_starflare:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_lynx_starflare_eden_mobile_starflare.shp
+		Filename: eden_lynx_starflare_mobile_starflare.shp
 		Start: 0
 		Facings: 1
 	icon:
@@ -963,7 +963,7 @@ eden_tiger_starflare:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_tiger_starflare_eden_mobile_starflare_tiger.shp
+		Filename: eden_tiger_starflare_mobile_starflare_tiger.shp
 		Start: 0
 		Facings: 1
 	icon:
@@ -983,7 +983,7 @@ eden_lynx_thorshammer:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_lynx_thorshammer_eden_mobile_thorshammer.shp
+		Filename: eden_lynx_thorshammer_mobile_thorshammer.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -1003,7 +1003,7 @@ eden_tiger_thorshammer:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_tiger_thorshammer_eden_mobile_thorshammer_tiger.shp
+		Filename: eden_tiger_thorshammer_mobile_thorshammer_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -1622,7 +1622,7 @@ plymouth_gp_rpg:
 ####Plymouth Convec Command Center
 plymouth_convec_structure_factory:
 	Defaults:
-		Filename: plymouth_convec_structure_factory_plymouth_convec.shp
+		Filename: plymouth_convec_structure_factory.shp
 	idle:
 		Start: 0
 		Length: 1
@@ -1655,11 +1655,11 @@ plymouth_cargotruck_empty:
 		Facings: -8
 		Length: 3
 	dock:
-		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_commonore.shp
 		Start: 17
 		Length: 1
 	dock-loop:
-		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_commonore.shp
 		Start: 17
 		Length: 1
 	icon:
@@ -1669,7 +1669,7 @@ plymouth_cargotruck_commonore:
 	Defaults: plymouth_cargotruck_empty
 	Inherits: plymouth_cargotruck_empty
 	idle:
-		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_commonore.shp
 		Start: 0
 		Length: 1
 		Facings: -8
@@ -1678,7 +1678,7 @@ plymouth_cargotruck_commonore:
 		Facings: -8
 		Length: 3
 	die:
-		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_commonore.shp
 		Start: 0
 		Length: 1
 
@@ -1810,7 +1810,7 @@ plymouth_lynx_microwave:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_lynx_microwave_plymouth_mobile_microwave.shp
+		Filename: plymouth_lynx_microwave_mobile_microwave.shp
 		Start: 0
 		Facings: -16
 	#muzzle: minigun
@@ -1833,7 +1833,7 @@ plymouth_tiger_microwave:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_microwave_plymouth_mobile_tiger_microwave.shp
+		Filename: plymouth_tiger_microwave_mobile_tiger_microwave.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -1853,7 +1853,7 @@ plymouth_lynx_rpg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_lynx_rpg_plymouth_mobile_rpg.shp
+		Filename: plymouth_lynx_rpg_mobile_rpg.shp
 		Start: 0
 		Facings: -16
 		Offset: 0,2
@@ -1877,7 +1877,7 @@ plymouth_tiger_rpg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_rpg_plymouth_mobile_tiger_rpg.shp
+		Filename: plymouth_tiger_rpg_mobile_tiger_rpg.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -1897,7 +1897,7 @@ plymouth_lynx_emp:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_lynx_emp_plymouth_mobile_emp.shp
+		Filename: plymouth_lynx_emp_mobile_emp.shp
 		Start: 0
 		Facings: -16
 		Offset: 0,2
@@ -1921,7 +1921,7 @@ plymouth_tiger_emp:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_emp_plymouth_mobile_tiger_emp.shp
+		Filename: plymouth_tiger_emp_mobile_tiger_emp.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -1941,7 +1941,7 @@ plymouth_lynx_stickyfoam:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_lynx_stickyfoam_plymouth_mobile_stickyfoam.shp
+		Filename: plymouth_lynx_stickyfoam_mobile_stickyfoam.shp
 		Start: 0
 		Facings: 16
 		Offset: 0,2
@@ -1965,7 +1965,7 @@ plymouth_tiger_stickyfoam:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_stickyfoam_plymouth_mobile_tiger_stickyfoam.shp
+		Filename: plymouth_tiger_stickyfoam_mobile_tiger_stickyfoam.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -1985,7 +1985,7 @@ plymouth_lynx_esg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_lynx_esg_plymouth_mobile_esg.shp
+		Filename: plymouth_lynx_esg_mobile_esg.shp
 		Start: 0
 		Facings: 16
 		Offset: 0,2
@@ -2009,7 +2009,7 @@ plymouth_tiger_esg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_esg_plymouth_mobile_tiger_esg.shp
+		Filename: plymouth_tiger_esg_mobile_tiger_esg.shp
 		Start: 0
 		Facings: 16
 	icon:
@@ -2029,7 +2029,7 @@ plymouth_lynx_starflare:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_starflare_plymouth_mobile_starflare.shp
+		Filename: plymouth_tiger_starflare_mobile_starflare.shp
 		Start: 0
 		Facings: 1
 	#muzzle: minigun
@@ -2052,7 +2052,7 @@ plymouth_tiger_starflare:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_starflare_plymouth_mobile_starflare.shp
+		Filename: plymouth_tiger_starflare_mobile_starflare.shp
 		Start: 0
 		Facings: 1
 	icon:
@@ -2072,7 +2072,7 @@ plymouth_lynx_supernova:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_supernova_plymouth_mobile_supernova.shp
+		Filename: plymouth_tiger_supernova_mobile_supernova.shp
 		Start: 0
 		Facings: -16
 	#muzzle: minigun
@@ -2095,7 +2095,7 @@ plymouth_tiger_supernova:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_tiger_supernova_plymouth_mobile_supernova.shp
+		Filename: plymouth_tiger_supernova_mobile_supernova.shp
 		Start: 0
 		Facings: 16
 	icon:

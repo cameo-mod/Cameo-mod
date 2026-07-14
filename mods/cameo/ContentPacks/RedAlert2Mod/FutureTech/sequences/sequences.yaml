@@ -10,36 +10,36 @@ futuretech_constructionyard:
 	Defaults:
 		Offset: 2,-40
 	idle:
-		Filename: futuretech_constructionyard_futu_egcnst.shp
+		Filename: futuretech_constructionyard_egcnst.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: futuretech_constructionyard_futu_egcnst.shp
+		Filename: futuretech_constructionyard_egcnst.shp
 		Start: 1
 		ShadowStart: 3
 	idle-fans:
-		Filename: futuretech_constructionyard_futu_egcnst_a.shp
+		Filename: futuretech_constructionyard_egcnst_a.shp
 		Length: 6
 		Tick: 150
 	damaged-idle-fans:
-		Filename: futuretech_constructionyard_futu_egcnst_a.shp
+		Filename: futuretech_constructionyard_egcnst_a.shp
 		Length: 6
 		Tick: 150
 	crane-overlay:
-		Filename: futuretech_constructionyard_futu_egcnst_working.shp
+		Filename: futuretech_constructionyard_egcnst_working.shp
 		Length: 42
 		Tick: 100
 	damaged-crane-overlay:
-		Filename: futuretech_constructionyard_futu_egcnst_working.shp
+		Filename: futuretech_constructionyard_egcnst_working.shp
 		Length: 42
 		Tick: 100
 	make:
-		Filename: futuretech_constructionyard_futu_egcnstmk.shp
+		Filename: futuretech_constructionyard_egcnstmk.shp
 		Length: 41
 		ShadowStart: 41
 	build:
 		Filename: invisibleitem.shp
 	dead:
-		Filename: futuretech_constructionyard_futu_egcnst.shp
+		Filename: futuretech_constructionyard_egcnst.shp
 		ShadowStart: 3
 	icon:
 		Filename: futuretech_constructionyard_icon.png
@@ -49,29 +49,29 @@ futuretech_thermalpowerplant:
 	Defaults:
 		Offset: 0,-16
 	idle:
-		Filename: futuretech_thermalpowerplant_futu_ggpowr.shp
+		Filename: futuretech_thermalpowerplant_ggpowr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: futuretech_thermalpowerplant_futu_ggpowr.shp
+		Filename: futuretech_thermalpowerplant_ggpowr.shp
 		Start: 1
 		ShadowStart: 4
 	idle-glow:
-		Filename: futuretech_thermalpowerplant_futu_ggpowr_a.shp
+		Filename: futuretech_thermalpowerplant_ggpowr_a.shp
 		Length: 8
 		ShadowStart: 16
 		Tick: 150
 	damaged-idle-glow:
-		Filename: futuretech_thermalpowerplant_futu_ggpowr_a.shp
+		Filename: futuretech_thermalpowerplant_ggpowr_a.shp
 		Start: 8
 		Length: 8
 		ShadowStart: 24
 		Tick: 150
 	make:
-		Filename: futuretech_thermalpowerplant_futu_ggpowrmk.shp
+		Filename: futuretech_thermalpowerplant_ggpowrmk.shp
 		Length: 19
 		ShadowStart: 19
 	dead:
-		Filename: futuretech_thermalpowerplant_futu_ggpowr.shp
+		Filename: futuretech_thermalpowerplant_ggpowr.shp
 		Start: 1
 	icon:
 		Filename: futuretech_thermalpowerplant_icon.png
@@ -83,17 +83,17 @@ futuretech_troopgate:
 	build:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: futuretech_troopgate_futu_egpile.shp
+		Filename: futuretech_troopgate_egpile.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: futuretech_troopgate_futu_egpile.shp
+		Filename: futuretech_troopgate_egpile.shp
 		Start: 1
 		ShadowStart: 3
 	idle-light:
-		Filename: futuretech_troopgate_futu_egpile_b.shp
+		Filename: futuretech_troopgate_egpile_b.shp
 		Length: 9
 	damaged-idle-light:
-		Filename: futuretech_troopgate_futu_egpile_b.shp
+		Filename: futuretech_troopgate_egpile_b.shp
 		Length: 9
 	idle-tele:
 		Combine:
@@ -120,11 +120,11 @@ futuretech_troopgate:
 				Length: 1
 		Length: 18
 	make:
-		Filename: futuretech_troopgate_futu_egpilemk.shp
+		Filename: futuretech_troopgate_egpilemk.shp
 		Length: 42
 		ShadowStart: 42
 	dead:
-		Filename: futuretech_troopgate_futu_egpile.shp # SHP broken & unused
+		Filename: futuretech_troopgate_egpile.shp # SHP broken & unused
 		Start: 1
 		ShadowStart: 3
 	icon:
@@ -135,69 +135,69 @@ futuretech_warpgate:
 	Defaults:
 		Offset: -24,-36
 	idle:
-		Filename: futuretech_warpgate_futu_egweap2.shp
+		Filename: futuretech_warpgate_egweap2.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-idle:
-		Filename: futuretech_warpgate_futu_egweap2.shp
+		Filename: futuretech_warpgate_egweap2.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
 	build-door:
-		Filename: futuretech_warpgate_futu_egweap2_1.shp
+		Filename: futuretech_warpgate_egweap2_1.shp
 		ShadowStart: 2
 	damaged-build-door:
-		Filename: futuretech_warpgate_futu_egweap2_1.shp
+		Filename: futuretech_warpgate_egweap2_1.shp
 		Start: 1
 		ShadowStart: 3
 	build-top:
-		Filename: futuretech_warpgate_futu_egweap2_2.shp
+		Filename: futuretech_warpgate_egweap2_2.shp
 	damaged-build-top:
-		Filename: futuretech_warpgate_futu_egweap2_2.shp
+		Filename: futuretech_warpgate_egweap2_2.shp
 	#TODO: ggweap_3 and ggweap_4 are used for producing flying actors
 	build-air-open:
-		Filename: futuretech_warpgate_futu_egweap2_2.shp
+		Filename: futuretech_warpgate_egweap2_2.shp
 	damaged-air-open:
-		Filename: futuretech_warpgate_futu_egweap2_2.shp
+		Filename: futuretech_warpgate_egweap2_2.shp
 	build-air-inside:
-		Filename: futuretech_warpgate_futu_egweap2_2.shp
+		Filename: futuretech_warpgate_egweap2_2.shp
 	damaged-air-inside:
-		Filename: futuretech_warpgate_futu_egweap2_2.shp
+		Filename: futuretech_warpgate_egweap2_2.shp
 	bib:
-		Filename: futuretech_warpgate_futu_egweap2bb.shp
+		Filename: futuretech_warpgate_egweap2bb.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-bib:
-		Filename: futuretech_warpgate_futu_egweap2bb.shp
+		Filename: futuretech_warpgate_egweap2bb.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	idle-flag:
-		Filename: futuretech_warpgate_futu_egweap2_a.shp
+		Filename: futuretech_warpgate_egweap2_a.shp
 		Length: 7
 		ZOffset: -768
 	damaged-idle-flag:
-		Filename: futuretech_warpgate_futu_egweap2_ad.shp
+		Filename: futuretech_warpgate_egweap2_ad.shp
 		Length: 7
 		ZOffset: -768
 	idle-flag2:
-		Filename: futuretech_warpgate_futu_egweap2_b.shp
+		Filename: futuretech_warpgate_egweap2_b.shp
 		Length: 7
 		ZOffset: -775
 	damaged-idle-flag2:
-		Filename: futuretech_warpgate_futu_egweap2_bd.shp
+		Filename: futuretech_warpgate_egweap2_bd.shp
 		Length: 7
 		ZOffset: -775
 	overlay-fan:
-		Filename: futuretech_warpgate_futu_egweap2_c.shp
+		Filename: futuretech_warpgate_egweap2_c.shp
 		Length: 24
 		ZOffset: 0
 		ShadowStart: -1
 	make:
-		Filename: futuretech_warpgate_futu_egweap2mk.shp
+		Filename: futuretech_warpgate_egweap2mk.shp
 		Length: 58
 		ShadowStart: 58
 	dead:
-		Filename: futuretech_warpgate_futu_egweap2.shp
+		Filename: futuretech_warpgate_egweap2.shp
 		Start: 1
 		ZOffset: -1024
 	idle-tele:
@@ -232,11 +232,11 @@ futuretech_launchpad:
 	Defaults:
 		Offset: -32,-48 #12
 	idle:
-		Filename: futuretech_launchpad_futu_ggairc.shp
+		Filename: futuretech_launchpad_ggairc.shp
 		Length: 1
 		ShadowStart: 2
 	damaged-idle:
-		Filename: futuretech_launchpad_futu_ggairc.shp
+		Filename: futuretech_launchpad_ggairc.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 3
@@ -246,38 +246,38 @@ futuretech_launchpad:
 	# 	ShadowStart: 16
 	# 	Tick: 150
 	idle-bottom:
-		Filename: futuretech_launchpad_futu_ggaircbb.shp
+		Filename: futuretech_launchpad_ggaircbb.shp
 		Length: 1
 		ShadowStart: 2
 		ZOffset: -1c512
 	damaged-idle-bottom:
-		Filename: futuretech_launchpad_futu_ggaircbb.shp
+		Filename: futuretech_launchpad_ggaircbb.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 3
 		ZOffset: -1c512
 	idle-dish:
-		Filename: futuretech_launchpad_futu_ggairc_a.shp
+		Filename: futuretech_launchpad_ggairc_a.shp
 		Length: *
 		Tick: 34
 	damaged-idle-dish:
-		Filename: futuretech_launchpad_futu_ggairc_a.shp
+		Filename: futuretech_launchpad_ggairc_a.shp
 		Length: 1
 	idle-mid:
-		Filename: futuretech_launchpad_futu_ggairc_b.shp
+		Filename: futuretech_launchpad_ggairc_b.shp
 		Length: *
 		Tick: 62
 		ZOffset: -1c512
 	damaged-idle-mid:
-		Filename: futuretech_launchpad_futu_ggairc_b.shp
+		Filename: futuretech_launchpad_ggairc_b.shp
 		Length: 1
 		ZOffset: -1c512
 	make:
-		Filename: futuretech_launchpad_futu_gtaircmk.shp
+		Filename: futuretech_launchpad_gtaircmk.shp
 		Length: 62
 		ShadowStart: 62
 	dead:
-		Filename: futuretech_launchpad_futu_ggairc.shp
+		Filename: futuretech_launchpad_ggairc.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 3
@@ -285,7 +285,7 @@ futuretech_launchpad:
 		Filename: futuretech_launchpad_icon.png
 		Offset: 0,0
 	icon2:
-		Filename: ra2_allies_airforcecommandhq_ra2_p_airborne.shp
+		Filename: ra2_allies_airforcecommandhq_p_airborne.shp
 		Offset: 0,0
 
 futuretech_transmissioncenter:
@@ -294,42 +294,42 @@ futuretech_transmissioncenter:
 	build:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: futuretech_transmissioncenter_futu_egtf.shp
+		Filename: futuretech_transmissioncenter_egtf.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: futuretech_transmissioncenter_futu_egtf.shp
+		Filename: futuretech_transmissioncenter_egtf.shp
 		Start: 1
 		ShadowStart: 3
 	idle-light:
-		Filename: futuretech_transmissioncenter_futu_egtf_d.shp
+		Filename: futuretech_transmissioncenter_egtf_d.shp
 		Length: 11
 	damaged-idle-light:
-		Filename: futuretech_transmissioncenter_futu_egtf_d.shp
+		Filename: futuretech_transmissioncenter_egtf_d.shp
 		Length: 11
 	idle-light2:
-		Filename: futuretech_transmissioncenter_futu_egtf_c.shp
+		Filename: futuretech_transmissioncenter_egtf_c.shp
 		Length: 18
 	damaged-idle-light2:
-		Filename: futuretech_transmissioncenter_futu_egtf_cd.shp
+		Filename: futuretech_transmissioncenter_egtf_cd.shp
 		Length: 18
 	idle-lighta:
-		Filename: futuretech_transmissioncenter_futu_egtf_a.shp
+		Filename: futuretech_transmissioncenter_egtf_a.shp
 		Length: 18
 	damaged-idle-lighta:
-		Filename: futuretech_transmissioncenter_futu_egtf_a.shp
+		Filename: futuretech_transmissioncenter_egtf_a.shp
 		Length: 18
 	idle-lightb:
-		Filename: futuretech_transmissioncenter_futu_egtf_b.shp
+		Filename: futuretech_transmissioncenter_egtf_b.shp
 		Length: 18
 	damaged-idle-lightb:
-		Filename: futuretech_transmissioncenter_futu_egtf_b.shp
+		Filename: futuretech_transmissioncenter_egtf_b.shp
 		Length: 18
 	make:
-		Filename: futuretech_transmissioncenter_futu_egtfmk.shp
+		Filename: futuretech_transmissioncenter_egtfmk.shp
 		Length: 44
 		ShadowStart: 44
 	dead:
-		Filename: futuretech_transmissioncenter_futu_egtf.shp # SHP broken & unused
+		Filename: futuretech_transmissioncenter_egtf.shp # SHP broken & unused
 		Start: 1
 		ShadowStart: 3
 	icon:
@@ -340,36 +340,36 @@ futuretech_refinery:
 	Defaults:
 		Offset: -10,-26
 	idle:
-		Filename: futuretech_refinery_futu_egrefn.shp
+		Filename: futuretech_refinery_egrefn.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: futuretech_refinery_futu_egrefn.shp
+		Filename: futuretech_refinery_egrefn.shp
 		Start: 1
 		ShadowStart: 3
 	make:
-		Filename: futuretech_refinery_futu_egrefnmk.shp
+		Filename: futuretech_refinery_egrefnmk.shp
 		Length: 39
 		ShadowStart: 39
 	dead:
-		Filename: futuretech_refinery_futu_egrefn.shp
+		Filename: futuretech_refinery_egrefn.shp
 		Start: 1
 	idle-drill:
-		Filename: futuretech_refinery_futu_egrefn_a.shp
+		Filename: futuretech_refinery_egrefn_a.shp
 		Length: 15
 		ZOffset: -512
 	idle-bib:
-		Filename: futuretech_refinery_futu_egrefnbb.shp
+		Filename: futuretech_refinery_egrefnbb.shp
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: futuretech_refinery_futu_egrefnbb.shp
+		Filename: futuretech_refinery_egrefnbb.shp
 		Start: 1
 		ZOffset: -512
 	idle-chim:
-		Filename: futuretech_refinery_futu_egrefn_c.shp
+		Filename: futuretech_refinery_egrefn_c.shp
 		Length: 8
 		ZOffset: 128
 	damaged-idle-chim:
-		Filename: futuretech_refinery_futu_egrefn_cd.shp
+		Filename: futuretech_refinery_egrefn_cd.shp
 		Length: 8
 		ZOffset: 128
 	docking-overlay:
@@ -382,30 +382,30 @@ futuretech_battlelab:
 	Defaults:
 		Offset: -12,4
 	idle:
-		Filename: futuretech_battlelab_futu_egtech.shp
+		Filename: futuretech_battlelab_egtech.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: futuretech_battlelab_futu_egtech.shp
+		Filename: futuretech_battlelab_egtech.shp
 		Start: 1
 		ShadowStart: 3
 	idle-lights:
-		Filename: futuretech_battlelab_futu_egtech_a.shp
+		Filename: futuretech_battlelab_egtech_a.shp
 		Length: 15
 	damaged-idle-lights:
-		Filename: futuretech_battlelab_futu_egtech_a.shp
+		Filename: futuretech_battlelab_egtech_a.shp
 		Length: 15
 	idle-lights2:
-		Filename: futuretech_battlelab_futu_egtech_b.shp
+		Filename: futuretech_battlelab_egtech_b.shp
 		Length: 2
 	damaged-idle-lights2:
-		Filename: futuretech_battlelab_futu_egtech_b.shp
+		Filename: futuretech_battlelab_egtech_b.shp
 		Length: 2
 	make:
-		Filename: futuretech_battlelab_futu_egtechmk.shp
+		Filename: futuretech_battlelab_egtechmk.shp
 		Length: 54
 		ShadowStart: 54
 	dead:
-		Filename: futuretech_battlelab_futu_egtech.shp
+		Filename: futuretech_battlelab_egtech.shp
 		Start: 1
 	icon:
 		Filename: futuretech_battlelab_icon.png
@@ -415,42 +415,42 @@ futuretech_hypercore:
 	Defaults:
 		Offset: -8,-32
 	idle:
-		Filename: futuretech_hypercore_futu_egshock.shp
+		Filename: futuretech_hypercore_egshock.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: futuretech_hypercore_futu_egshock.shp
+		Filename: futuretech_hypercore_egshock.shp
 		Start: 1
 		ShadowStart: 3
 	critical-idle:
-		Filename: futuretech_hypercore_futu_egshock.shp
+		Filename: futuretech_hypercore_egshock.shp
 		Start: 1
 		ShadowStart: 3
 	idle-lights:
-		Filename: futuretech_hypercore_futu_egshock_a.shp
+		Filename: futuretech_hypercore_egshock_a.shp
 		Length: 10
 		Tick: 150
 	damaged-idle-lights:
-		Filename: futuretech_hypercore_futu_egshock_ad.shp
+		Filename: futuretech_hypercore_egshock_ad.shp
 		Length: 10
 		Tick: 150
 	critical-idle-lights:
-		Filename: futuretech_hypercore_futu_egshock_ad.shp
+		Filename: futuretech_hypercore_egshock_ad.shp
 		Length: 10
 		Tick: 150
 	idle-charge:
-		Filename: futuretech_hypercore_futu_egshock_g.shp
+		Filename: futuretech_hypercore_egshock_g.shp
 		Length: 25
 		Tick: 150
 	damaged-idle-charge:
-		Filename: futuretech_hypercore_futu_egshock_gd.shp
+		Filename: futuretech_hypercore_egshock_gd.shp
 		Length: 25
 		Tick: 150
 	make:
-		Filename: futuretech_hypercore_futu_egshockmk.shp
+		Filename: futuretech_hypercore_egshockmk.shp
 		Length: 49
 		ShadowStart: 49
 	dead:
-		Filename: futuretech_hypercore_futu_egshock.shp
+		Filename: futuretech_hypercore_egshock.shp
 		Start: 1
 		ShadowStart: 3
 	icon:
@@ -488,19 +488,19 @@ futuretech_multiturretsystem:
 	Defaults:
 		Offset: 0,-4
 	idle:
-		Filename: futuretech_multiturretsystem_futu_ggmltgtur.shp
+		Filename: futuretech_multiturretsystem_ggmltgtur.shp
 		Facings: 32
 		ShadowStart: 32
 	damaged-idle:
-		Filename: futuretech_multiturretsystem_futu_ggmltgtur_d.shp
+		Filename: futuretech_multiturretsystem_ggmltgtur_d.shp
 		Facings: 32
 		ShadowStart: 32
 	make:
-		Filename: futuretech_multiturretsystem_futu_ggmltgmk.shp
+		Filename: futuretech_multiturretsystem_ggmltgmk.shp
 		Length: 22
 		ShadowStart: 22
 	dead:
-		Filename: futuretech_multiturretsystem_futu_ggmltgtur_d.shp
+		Filename: futuretech_multiturretsystem_ggmltgtur_d.shp
 		Facings: 32
 		ShadowStart: 32
 	muzzle:
@@ -520,7 +520,7 @@ futuretech_multiturretsystem:
 futuretech_enforcer:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: futuretech_enforcer_futu_enforcer.shp
+		Filename: futuretech_enforcer.shp
 	dot:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
@@ -559,7 +559,7 @@ futuretech_javelinsoldier:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Scale: 0.7
-		Filename: futuretech_javelinsoldier_futu_javelinsoldier.shp
+		Filename: futuretech_javelinsoldier.shp
 	dot:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
@@ -645,7 +645,7 @@ futuretech_repairdroid:
 
 futuretech_scoutdroid:
 	Defaults:
-		Filename: futuretech_scoutdroid_futu_wheel.shp
+		Filename: futuretech_scoutdroid_wheel.shp
 	idle1:
 		Facings: 32
 	idle2:
@@ -669,7 +669,7 @@ futuretech_scoutdroid:
 
 futuretech_cannondroid:
 	Defaults:
-		Filename: futuretech_promotion_unlockcannondroid_future_robot_cannon.shp
+		Filename: futuretech_promotion_unlockcannondroid_robot_cannon.shp
 		Scale: 0.4
 	idle1:
 		Facings: 32
@@ -701,7 +701,7 @@ futuretech_cannondroid:
 
 futuretech_missiledroid:
 	Defaults:
-		Filename: futuretech_promotion_unlockmissiledroid_future_robot_missiles.shp
+		Filename: futuretech_promotion_unlockmissiledroid_robot_missiles.shp
 		Scale: 0.4
 	idle1:
 		Facings: 32
@@ -733,7 +733,7 @@ futuretech_missiledroid:
 
 futuretech_shotgundroid:
 	Defaults:
-		Filename: futuretech_promotion_unlockshotgundroid_future_robot_shotgun.shp
+		Filename: futuretech_promotion_unlockshotgundroid_robot_shotgun.shp
 		Scale: 0.4
 	idle1:
 		Facings: 32
@@ -867,7 +867,7 @@ futuretech_cryolegionnaire:
 
 futuretech_gunstrider:
 	Defaults:
-		Filename: futuretech_gunstrider_future_mech_machinegun.shp
+		Filename: futuretech_gunstrider_mech_machinegun.shp
 		Scale: 0.8
 	idle1:
 		Facings: 32
@@ -891,7 +891,7 @@ futuretech_gunstrider:
 
 futuretech_plasmastrider:
 	Defaults:
-		Filename: futuretech_plasmastrider_future_mech_plasma.shp
+		Filename: futuretech_plasmastrider_mech_plasma.shp
 		Scale: 0.8
 	idle1:
 		Facings: 32
@@ -933,7 +933,7 @@ futuretech_salamanderifv:
 		Filename: ra2_allies_ifv_repair_ra2ifv.shp
 		Scale: 0.7
 	idle:
-		Filename: futuretech_promotion_unlocksalamanderifv_futu_ifv.shp
+		Filename: futuretech_promotion_unlocksalamanderifv.shp
 		Facings: 64
 		Scale: 0.9
 	turret-missile:
@@ -1041,7 +1041,7 @@ futuretech_riptideacv:
 	Inherits: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
-		Filename: futuretech_riptideacv_futu_acv.png
+		Filename: futuretech_riptideacv.png
 		Scale: 0.9
 	idle:
 		Scale: 1
@@ -1058,7 +1058,7 @@ futuretech_riptideacv:
 futuretech_cryocopter:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: futuretech_promotion_unlockcryocopter_futu_cryo.png
+		Filename: futuretech_promotion_unlockcryocopter.png
 	idle:
 		Facings: 32
 		Length: 4
@@ -1075,7 +1075,7 @@ futuretech_cryocopter:
 
 futuretech_prospector:
 	Defaults:
-		Filename: futuretech_prospector_futu_harv.png
+		Filename: futuretech_prospector_harv.png
 		Scale: 0.9
 	idle:
 		Scale: 1
@@ -1097,7 +1097,7 @@ futuretech_prospector:
 
 futuretech_prospectormk2:
 	Defaults:
-		Filename: futuretech_promotion_unlockprospectormk2_futu_harv2.png
+		Filename: futuretech_promotion_unlockprospectormk2_harv2.png
 		Scale: 0.9
 	idle:
 		Scale: 1
@@ -1121,7 +1121,7 @@ futuretech_phalanxwip:
 	Inherits: ^RA2CannonMuzzle
 		Scale: 1
 	Defaults:
-		Filename: futuretech_phalanxwip_futu_phal.png
+		Filename: futuretech_phalanxwip.png
 		Scale: 0.95
 	idle:
 		Filename: invisibleitem.shp
@@ -1140,9 +1140,9 @@ futuretech_phalanxwip:
 futuretech_athenacannon:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: futuretech_athenacannon_futu_antena.png
+		Filename: futuretech_athenacannon_antena.png
 	idle:
-		Filename: futuretech_athenacannon_futu_antena.png
+		Filename: futuretech_athenacannon_antena.png
 		Scale: 1
 		Facings: 64
 		Offset: 0,5
@@ -1151,7 +1151,7 @@ futuretech_athenacannon:
 
 futuretech_energizer:
 	Defaults:
-		Filename: futuretech_energizer_futu_coiler.png
+		Filename: futuretech_energizer_coiler.png
 		Scale: 0.7
 	idle:
 		Scale: 1
@@ -1162,9 +1162,9 @@ futuretech_energizer:
 futuretech_futuretank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: futuretech_promotion_unlockfuturetank_futu_futu.png
+		Filename: futuretech_promotion_unlockfuturetank.png
 	idle:
-		Filename: futuretech_promotion_unlockfuturetank_futu_futu.png
+		Filename: futuretech_promotion_unlockfuturetank.png
 		Scale: 0.5
 		Facings: 64
 		Offset: 0,5
@@ -1179,7 +1179,7 @@ futuretech_futuretank:
 futuretech_spyfutu:
 	Inherits: ^RA2Infantry
 	Defaults:
-		Filename: ra2_allies_ra2spy_ra2_spy.shp
+		Filename: ra2_allies_ra2spy.shp
 	liedown:
 		Start: 164
 	standup:
@@ -1247,12 +1247,12 @@ futuretech_blackwidow:
 
 futuretech_twister:
 	idle:
-		Filename: steel_consortium_twister_steel_twister.shp
+		Filename: steel_consortium_twister.shp
 		Facings: -8
 		#InterpolatedFacings: 16
 		Length: 12
 	move:
-		Filename: steel_consortium_twister_steel_twister.shp
+		Filename: steel_consortium_twister.shp
 		Facings: -8
 		#InterpolatedFacings: 16
 		Length: 12
@@ -1261,7 +1261,7 @@ futuretech_twister:
 
 futuretech_harbingergunship:
 	Defaults:
-		Filename: futuretech_promotion_unlockharbingergunship_future_harbinger.png
+		Filename: futuretech_promotion_unlockharbingergunship.png
 	idle:
 		Facings: 64
 	icon:

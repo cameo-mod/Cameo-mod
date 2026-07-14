@@ -185,7 +185,7 @@ ts_gdi_falconenforcer:
 
 ts_gdi_zonetrooper:
 	Defaults:
-		Filename: ts_gdi_promotion_unlockzonetrooper_ts_gdi_zonetrooper.png
+		Filename: ts_gdi_promotion_unlockzonetrooper.png
 		Scale: 0.6
 		Offset: 0,-24
 	stand:
@@ -309,7 +309,7 @@ ts_gdi_titan:
 
 ts_gdi_titanmkii:
 	idle:
-		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii.png
+		Filename: ts_gdi_promotion_unlocktitanmkii.png
 		Facings: 32
 		Scale: 1
 	icon:
@@ -318,23 +318,23 @@ ts_gdi_titanmkii:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii.png
+		Filename: ts_gdi_promotion_unlocktitanmkii.png
 		Facings: 32
 		Scale: 1
 	walk:
-		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii_run.png
+		Filename: ts_gdi_promotion_unlocktitanmkii_run.png
 		Length: 14
 		Facings: 32
 		Tick: 60
 		Scale: 1
 	turret:
-		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii_tur.png
+		Filename: ts_gdi_promotion_unlocktitanmkii_tur.png
 		Facings: 32
 		Scale: 1
 
 ts_gdi_juggernautmkii:
 	idle:
-		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii.shp
 		Facings: -8
 		Scale: 0.8
 	icon:
@@ -343,16 +343,16 @@ ts_gdi_juggernautmkii:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii.shp
 		Facings: -8
 	walk:
-		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii.shp
 		Length: 17
 		Start: 8
 		Facings: -8
 		# Tick: 60
 	shoot:
-		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii.shp
 		Facings: -8
 		Start: 144
 		Length: 7
@@ -377,7 +377,7 @@ ts_gdi_tiberiumharvester:
 
 ts_gdi_kodiakcommandship:
 	Defaults:
-		Filename: ts_gdi_promotion_unlockkodiak_ts_gdi_kodiakcommandship.shp
+		Filename: ts_gdi_promotion_unlockkodiak_kodiakcommandship.shp
 		Scale: 1.25
 		Offset: 0,0,64
 		ZRamp: 1
@@ -470,16 +470,16 @@ ts_gdi_wolverinemkii:
 	idle:
 		Filename: invisibleitem.shp
 	Defaults:
-		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii.png
 	stand:
-		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii.png
 		Facings: 64
 	walk:
-		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii_run.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii_run.png
 		Facings: 64
 		Length: 8
 	shoot:
-		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii.png
 		Facings: 64
 	icon:
 		Filename: ts_gdi_promotion_unlockwolverinemkii_icon.png
@@ -500,14 +500,14 @@ ts_gdi_mammothmkii:
 	Defaults:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: ts_gdi_promotion_unlockmammothmkii_ts_gdi_mammothmkii_idle.png
+		Filename: ts_gdi_promotion_unlockmammothmkii_idle.png
 		Facings: -32
 	walk:
-		Filename: ts_gdi_promotion_unlockmammothmkii_ts_gdi_mammothmkii_walk.png
+		Filename: ts_gdi_promotion_unlockmammothmkii_walk.png
 		Length: 20
 		Facings: -8
 	shoot:
-		Filename: ts_gdi_promotion_unlockmammothmkii_ts_gdi_mammothmkii_atk.png
+		Filename: ts_gdi_promotion_unlockmammothmkii_atk.png
 		Length: 3
 		Facings: -32
 	icon:
@@ -1053,14 +1053,14 @@ ts_gdi_orcafighter:
 
 ts_gdi_zoneorcafighter:
 	idle:
-		Filename: ts_gdi_promotion_unlockzoneorca_ts_gdi_zoneorcafighter.png
+		Filename: ts_gdi_promotion_unlockzoneorca_zoneorcafighter.png
 		Facings: 64
 	icon:
 		Filename: ts_gdi_promotion_unlockzoneorca_icon.png
 
 ts_gdi_hammerhead:
 	idle:
-		Filename: ts_gdi_promotion_unlockhammerhead_ts_gdi_hammerhead.png
+		Filename: ts_gdi_promotion_unlockhammerhead.png
 		Facings: 64
 	lrotor: lrotor
 		Filename: lrotor.shp

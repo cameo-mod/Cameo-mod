@@ -48,7 +48,7 @@ cabal_devout:
 	Defaults:
 		Tick: 80
 		Offset: 0, 0, 16
-		Filename: cabal_promotion_devout_cabal_devout.shp
+		Filename: cabal_promotion_devout.shp
 		Scale: 1
 	stand:
 		Start: 0
@@ -566,7 +566,7 @@ cabal_tiberiumharvester:
 
 cabal_laserspider:
 	idle:
-		Filename: cabal_promotion_spidercnc4_cabal_laserspider.png
+		Filename: cabal_promotion_spidercnc4_laserspider.png
 		Facings: 64
 		Start: 64
 		Scale: 1
@@ -576,12 +576,12 @@ cabal_laserspider:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: cabal_promotion_spidercnc4_cabal_laserspider.png
+		Filename: cabal_promotion_spidercnc4_laserspider.png
 		Facings: 64
 		Start: 64
 		Scale: 1
 	walk:
-		Filename: cabal_promotion_spidercnc4_cabal_laserspider.png
+		Filename: cabal_promotion_spidercnc4_laserspider.png
 		Length: 8
 		Facings: 8
 		Tick: 60
@@ -668,7 +668,7 @@ cabal_ravager:
 
 cabal_manticore:
 	idle:
-		Filename: cabal_avatar_cabal_manticore.shp
+		Filename: cabal_avatar_manticore.shp
 		Start: 336
 		Facings: -8
 		Scale: 1
@@ -679,20 +679,20 @@ cabal_manticore:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: cabal_avatar_cabal_manticore.shp
+		Filename: cabal_avatar_manticore.shp
 		Start: 336
 		Facings: -8
 		Scale: 1
 		ShadowStart: 680
 	walk:
-		Filename: cabal_avatar_cabal_manticore.shp
+		Filename: cabal_avatar_manticore.shp
 		Length: 21
 		Facings: -8
 		Tick: 60
 		Scale: 1
 		ShadowStart: 344
 	shoot:
-		Filename: cabal_avatar_cabal_manticore.shp
+		Filename: cabal_avatar_manticore.shp
 		Facings: -8
 		Start: 168
 		Length: 21
@@ -1943,7 +1943,7 @@ cabal_dissolver:
 
 cabal_berserker:
 	Defaults:
-		Filename: cabal_berserker_cabal_eliminator1000.shp
+		Filename: cabal_berserker_eliminator1000.shp
 		Tick: 80
 		Offset: 0, 0, 16
 	stand:

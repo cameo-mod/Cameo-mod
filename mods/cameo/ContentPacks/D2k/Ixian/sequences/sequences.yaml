@@ -7,11 +7,11 @@ ixian_machinegunturret:
 		Remap: 54F94B
 		Start: 38
 	idle:
-		Filename: ixian_machinegunturret_machine_gun_tower.shp
+		Filename: ixian_machinegunturret_tower.shp
 		Frames: 0, 3, 1, 11, 4, 5, 15, 8, 2, 12, 6, 7, 13, 9, 10, 14
 		Length: 16
 	damaged-idle:
-		Filename: ixian_machinegunturret_machine_gun_tower.shp
+		Filename: ixian_machinegunturret_tower.shp
 		Frames: 0, 3, 1, 11, 4, 5, 15, 8, 2, 12, 6, 7, 13, 9, 10, 14
 		Length: 16
 	make:
@@ -301,7 +301,7 @@ barracks.ixian:
 	Defaults:
 		Scale: 1.5
 	idle:
-		Filename: ixian_barracks_ix_barracks.shp
+		Filename: ixian_barracks.shp
 	make:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -319,7 +319,7 @@ barracks.ixian:
 		Offset: -32,64
 		Tick: 100
 	damaged-idle:
-		Filename: ixian_barracks_ix_barracks.shp
+		Filename: ixian_barracks.shp
 		Start: 1
 	bib:
 		Filename: BLOXBASE.R8
@@ -363,7 +363,7 @@ outpost.atreides:
 		Start: 2770
 		Offset: -48,64
 	idle-dish:
-		Filename: ixian_outpost_outpost_atreides_dish.png
+		Filename: ixian_outpost_atreides_dish.png
 		Length: 30
 		Scale: 1
 		Offset: 15,-4
@@ -1174,7 +1174,7 @@ harvester_husk.ixian:
 
 ix_siege_tank:
 	idle:
-		Filename: ixian_promotion_unlockixsiegetank_ix_siege_tank.shp
+		Filename: ixian_promotion_unlockixsiegetank.shp
 		Scale: 1.5
 		Start: 0
 		Facings: -32
@@ -1190,7 +1190,7 @@ ix_siege_tank:
 
 ix_missile_tank:
 	idle:
-		Filename: ixian_upgrade_heavymissiles_ix_missile_tank.shp
+		Filename: ixian_upgrade_heavymissiles_tank.shp
 		Start: 0
 		Facings: -32
 		Scale: 1.2

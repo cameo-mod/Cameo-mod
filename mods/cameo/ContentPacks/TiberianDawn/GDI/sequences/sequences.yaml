@@ -176,7 +176,7 @@ td_gdi_orca:
 
 a10:
 	Defaults:
-		Filename: td_gdi_upgrade_unlocka10airstrike_a10.shp
+		Filename: td_gdi_upgrade_unlocka10airstrike.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -189,7 +189,7 @@ a10:
 
 a10carrier:
 	Defaults:
-		Filename: td_gdi_upgrade_unlocka10airstrike_a10.shp
+		Filename: td_gdi_upgrade_unlocka10airstrike.shp
 		Scale: 0.5
 	idle:
 		Facings: 32
@@ -918,7 +918,7 @@ td_gdi_mammothtankmkiii:
 td_gdi_sonicmissilesoldier:
 	Inherits: e3
 	Defaults:
-		Filename: td_gdi_promotion_unlockmissilesoldier_missile_soldier.shp
+		Filename: td_gdi_promotion_unlockmissilesoldier.shp
 	icon:
 		Filename: td_gdi_promotion_unlockmissilesoldier_icon.shp
 
@@ -1304,7 +1304,7 @@ td_gdi_havoc:
 	Inherits: ^InfantryOverlays
 	Inherits@2: ^RA2InfantryDeaths
 	Defaults:
-		Filename: td_gdi_havoc_havoc.shp
+		Filename: td_gdi_havoc.shp
 		Scale: 0.8
 	stand:
 		Facings: 8

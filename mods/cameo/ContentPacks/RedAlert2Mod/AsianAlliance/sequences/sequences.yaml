@@ -77,11 +77,11 @@ asian_alliance_asianbarracks:
 		Start: 1
 		ShadowStart: 4
 	idle-flag:
-		Filename: ra2_allies_alliedbarracks_ra2_ggpile_a.shp
+		Filename: ra2_allies_alliedbarracks_ggpile_a.shp
 		Length: 16
 		Offset: -10,-16
 	damaged-idle-flag:
-		Filename: ra2_allies_alliedbarracks_ra2_ggpile_a.shp
+		Filename: ra2_allies_alliedbarracks_ggpile_a.shp
 		Start: 16
 		Length: 16
 		ShadowStart: 48
@@ -194,7 +194,7 @@ asian_alliance_asianwarfactory:
 		Filename: asian_alliance_asianwarfactory_aa_cgweap_a.shp
 		Length: 8
 	overlay-fan:
-		Filename: ra2_allies_alliedwarfactory_ra2_ggweap_b.shp
+		Filename: ra2_allies_alliedwarfactory_ggweap_b.shp
 		Length: 5
 		ShadowStart: 6
 	make:
@@ -202,7 +202,7 @@ asian_alliance_asianwarfactory:
 		Length: 32
 		ShadowStart: 32
 	dead:
-		Filename: ra2_allies_alliedwarfactory_ra2_ggweap.shp
+		Filename: ra2_allies_alliedwarfactory_ggweap.shp
 		Start: 1
 		ZOffset: -1024
 	icon:
@@ -1188,7 +1188,7 @@ asian_alliance_asdf:
 asian_alliance_asiancommando:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: ra2_allies_sniper_ra2_snipe.shp
+		Filename: ra2_allies_sniper.shp
 	paradrop:
 		Start: 292
 	icon:

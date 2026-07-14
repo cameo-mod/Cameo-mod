@@ -2,30 +2,30 @@ naxis_constructionyard:
 	Defaults:
 		Offset: -8,8
 	idle:
-		Filename: naxis_constructionyard_nax_conyard.shp
+		Filename: naxis_constructionyard_conyard.shp
 		Start: 32
 	make:
-		Filename: naxis_constructionyard_nax_conyard.shp
+		Filename: naxis_constructionyard_conyard.shp
 		Length: 32
 	build:
 		Filename: invisibleitem.shp
 	damaged-idle:
-		Filename: naxis_constructionyard_nax_conyard.shp
+		Filename: naxis_constructionyard_conyard.shp
 		Start: 63
 	idle-fans:
 		Filename: invisibleitem.shp
 	damaged-idle-fans:
 		Filename: invisibleitem.shp
 	crane-overlay:
-		Filename: naxis_constructionyard_nax_conyard.shp
+		Filename: naxis_constructionyard_conyard.shp
 		Start: 32
 		Length: 30
 	damaged-crane-overlay:
-		Filename: naxis_constructionyard_nax_conyard.shp
+		Filename: naxis_constructionyard_conyard.shp
 		Start: 63
 		Length: 30
 	dead:
-		Filename: naxis_constructionyard_nax_conyard.shp
+		Filename: naxis_constructionyard_conyard.shp
 		Start: 63
 	icon:
 		Filename: naxis_constructionyard_icon.png
@@ -35,11 +35,11 @@ naxis_warfactory:
 	Defaults:
 		Offset: -16,16
 	idle:
-		Filename: naxis_warfactory_nax_weap.shp
+		Filename: naxis_warfactory_weap.shp
 		Length: 60
 		ZOffset: 1024
 	damaged-idle:
-		Filename: naxis_warfactory_nax_weap.shp
+		Filename: naxis_warfactory_weap.shp
 		Start: 60
 		Length: 60
 		ZOffset: 1024
@@ -48,11 +48,11 @@ naxis_warfactory:
 	damaged-build-ramp:
 		Filename: invisibleitem.shp
 	build-top:
-		Filename: naxis_warfactory_nax_weap.shp
+		Filename: naxis_warfactory_weap.shp
 		Length: 60
 		ZOffset: 1024
 	damaged-build-top:
-		Filename: naxis_warfactory_nax_weap.shp
+		Filename: naxis_warfactory_weap.shp
 		Start: 60
 		Length: 60
 		ZOffset: 1024
@@ -70,10 +70,10 @@ naxis_warfactory:
 	damaged-air-inside:
 		Filename: invisibleitem.shp
 	bib:
-		Filename: naxis_warfactory_nax_weap_bottom.shp
+		Filename: naxis_warfactory_weap_bottom.shp
 		ZOffset: -1024
 	damaged-bib:
-		Filename: naxis_warfactory_nax_weap_bottom.shp
+		Filename: naxis_warfactory_weap_bottom.shp
 		ZOffset: -1024
 	idle-flag:
 		Filename: invisibleitem.shp
@@ -82,7 +82,7 @@ naxis_warfactory:
 	overlay-fan:
 		Filename: invisibleitem.shp
 	make:
-		Filename: naxis_warfactory_nax_weap_mk.shp
+		Filename: naxis_warfactory_weap_mk.shp
 		Length: 56
 	dead:
 		Filename: invisibleitem.shp
@@ -132,16 +132,16 @@ naxis_naxpetrolplant:
 	Defaults:
 		Offset: 0,-2
 	idle:
-		Filename: naxis_naxpetrolplant_nax_powr.shp
+		Filename: naxis_naxpetrolplant_powr.shp
 		Start: 33
 	damaged-idle:
-		Filename: naxis_naxpetrolplant_nax_powr.shp
+		Filename: naxis_naxpetrolplant_powr.shp
 		Start: 33
 	make:
-		Filename: naxis_naxpetrolplant_nax_powr.shp
+		Filename: naxis_naxpetrolplant_powr.shp
 		Length: 32
 	dead:
-		Filename: naxis_naxpetrolplant_nax_powr.shp
+		Filename: naxis_naxpetrolplant_powr.shp
 		Start: 33
 	icon:
 		Filename: naxis_naxpetrolplant_icon.png
@@ -151,16 +151,16 @@ naxis_barracks:
 	Defaults:
 		Offset: -16,20
 	idle:
-		Filename: naxis_barracks_nax_barr.shp
+		Filename: naxis_barracks.shp
 		Start: 33
 	damaged-idle:
-		Filename: naxis_barracks_nax_barr.shp
+		Filename: naxis_barracks.shp
 		Start: 33
 	dead:
-		Filename: naxis_barracks_nax_barr.shp
+		Filename: naxis_barracks.shp
 		Start: 33
 	make:
-		Filename: naxis_barracks_nax_barr.shp
+		Filename: naxis_barracks.shp
 		Length: 32
 	icon:
 		Filename: naxis_barracks_icon.png
@@ -174,16 +174,16 @@ naxis_orerefinery:
 	damaged-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: naxis_orerefinery_nax_refin.shp
+		Filename: naxis_orerefinery.shp
 		Length: 32
 	idle-bib:
-		Filename: naxis_orerefinery_nax_refin.shp
+		Filename: naxis_orerefinery.shp
 		Start: 33
 	damaged-idle-bib:
-		Filename: naxis_orerefinery_nax_refin.shp
+		Filename: naxis_orerefinery.shp
 		Start: 64
 	dead:
-		Filename: naxis_orerefinery_nax_refin.shp
+		Filename: naxis_orerefinery.shp
 		Start: 64
 	resources:
 		Filename: invisibleitem.shp
@@ -195,18 +195,18 @@ naxis_radar:
 	Defaults:
 		Offset: 6,12
 	idle:
-		Filename: naxis_radar_nax_radar.shp
+		Filename: naxis_radar.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: naxis_radar_nax_radar.shp
+		Filename: naxis_radar.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: naxis_radar_nax_radar.shp
+		Filename: naxis_radar.shp
 		Length: 16
 	dead:
-		Filename: naxis_radar_nax_radar.shp
+		Filename: naxis_radar.shp
 		Start: 32
 	icon:
 		Filename: naxis_radar_icon.png
@@ -216,18 +216,18 @@ naxis_airfield:
 	Defaults:
 		Offset: 0, 24
 	idle:
-		Filename: naxis_airfield_nax_airfield.shp
+		Filename: naxis_airfield.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: naxis_airfield_nax_airfield.shp
+		Filename: naxis_airfield.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: naxis_airfield_nax_airfield.shp
+		Filename: naxis_airfield.shp
 		Length: 16
 	dead:
-		Filename: naxis_airfield_nax_airfield.shp
+		Filename: naxis_airfield.shp
 		Start: 32
 	icon:
 		Filename: naxis_airfield_icon.png
@@ -237,18 +237,18 @@ naxis_techcenter:
 	Defaults:
 		Offset: 0, 0
 	idle:
-		Filename: naxis_techcenter_nax_tech.shp
+		Filename: naxis_techcenter.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: naxis_techcenter_nax_tech.shp
+		Filename: naxis_techcenter.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: naxis_techcenter_nax_tech.shp
+		Filename: naxis_techcenter.shp
 		Length: 16
 	dead:
-		Filename: naxis_techcenter_nax_tech.shp
+		Filename: naxis_techcenter.shp
 		Start: 32
 	icon:
 		Filename: naxis_techcenter_icon.png
@@ -258,18 +258,18 @@ naxis_academy:
 	Defaults:
 		Offset: -2,24
 	idle:
-		Filename: naxis_academy_nax_tek.shp
+		Filename: naxis_academy_tek.shp
 		Start: 32
 		Length: 16
 	damaged-idle:
-		Filename: naxis_academy_nax_tek.shp
+		Filename: naxis_academy_tek.shp
 		Start: 48
 		Length: 16
 	make:
-		Filename: naxis_academy_nax_tek.shp
+		Filename: naxis_academy_tek.shp
 		Length: 32
 	dead:
-		Filename: naxis_academy_nax_tek.shp
+		Filename: naxis_academy_tek.shp
 		Start: 32
 	icon:
 		Filename: naxis_academy_icon.png
@@ -279,16 +279,16 @@ naxis_beerfactory:
 	Defaults:
 		Offset: 0,-2
 	idle:
-		Filename: naxis_beerfactory_nax_beer.shp
+		Filename: naxis_beerfactory.shp
 		Start: 33
 	damaged-idle:
-		Filename: naxis_beerfactory_nax_beer.shp
+		Filename: naxis_beerfactory.shp
 		Start: 33
 	make:
-		Filename: naxis_beerfactory_nax_beer.shp
+		Filename: naxis_beerfactory.shp
 		Length: 32
 	dead:
-		Filename: naxis_beerfactory_nax_beer.shp
+		Filename: naxis_beerfactory.shp
 		Start: 33
 	icon:
 		Filename: naxis_beerfactory_icon.png
@@ -298,18 +298,18 @@ naxis_sausagefactory:
 	Defaults:
 		Offset: 0,-2
 	idle:
-		Filename: naxis_sausagefactory_nax_sausage.shp
+		Filename: naxis_sausagefactory.shp
 		Start: 32
 		Length: 32
 	damaged-idle:
-		Filename: naxis_sausagefactory_nax_sausage.shp
+		Filename: naxis_sausagefactory.shp
 		Start: 32
 		Length: 32
 	make:
-		Filename: naxis_sausagefactory_nax_sausage.shp
+		Filename: naxis_sausagefactory.shp
 		Length: 32
 	dead:
-		Filename: naxis_sausagefactory_nax_sausage.shp
+		Filename: naxis_sausagefactory.shp
 		Start: 33
 	icon:
 		Filename: naxis_sausagefactory_icon.png
@@ -318,7 +318,7 @@ naxis_sausagefactory:
 naxis_naxirocketsilo:
 	Defaults:
 		Offset: 0,-10
-		Filename: naxis_naxirocketsilo_nax_rocket.shp
+		Filename: naxis_naxirocketsilo.shp
 	idle:
 		Start: 16
 	damaged-idle:
@@ -347,17 +347,17 @@ naxis_rifletower:
 	Defaults:
 		Offset: 0,2
 	idle:
-		Filename: naxis_rifletower_nax_twr.shp
+		Filename: naxis_rifletower_twr.shp
 		Length: 16
 		Start: 16
 	damaged-idle:
-		Filename: naxis_rifletower_nax_twr.shp
+		Filename: naxis_rifletower_twr.shp
 		Length: 16
 		Start: 32
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: naxis_rifletower_nax_twr.shp
+		Filename: naxis_rifletower_twr.shp
 		Length: 16
 	dead:
 		Filename: invisibleitem.shp
@@ -379,12 +379,12 @@ naxis_flak88:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: naxis_flak88_nax_flak88mk.shp
+		Filename: naxis_flak88_flak88mk.shp
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: naxis_flak88_nax_flak88.shp
+		Filename: naxis_flak88.shp
 		Facings: 64
 	icon:
 		Filename: naxis_flak88_icon.png
@@ -394,11 +394,11 @@ naxis_naxibunker:
 	Defaults:
 		Offset: 0, 0
 	idle:
-		Filename: naxis_mortarbunkeraddon_nax_bunk.shp
+		Filename: naxis_mortarbunkeraddon.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: naxis_mortarbunkeraddon_nax_bunk.shp
+		Filename: naxis_mortarbunkeraddon.shp
 		Start: 16
 		Length: 16
 	idle-bunkered:
@@ -410,10 +410,10 @@ naxis_naxibunker:
 		Start: 16
 		Length: 16
 	make:
-		Filename: naxis_mortarbunkeraddon_nax_bunk.shp
+		Filename: naxis_mortarbunkeraddon.shp
 		Length: 16
 	dead:
-		Filename: naxis_mortarbunkeraddon_nax_bunk.shp
+		Filename: naxis_mortarbunkeraddon.shp
 		Start: 16
 		Length: 16
 	icon:
@@ -423,17 +423,17 @@ naxis_naxibunker:
 		Filename: naxis_mortarbunkeraddon_nax_bunk_mort.shp
 		Facings: 64
 	turret-aa:
-		Filename: naxis_mortarbunkeraddon_nax_bunk_aa.shp
+		Filename: naxis_mortarbunkeraddon_aa.shp
 		Facings: 64
 	turret-mg:
-		Filename: naxis_mortarbunkeraddon_nax_bunk_mg.shp
+		Filename: naxis_mortarbunkeraddon_mg.shp
 		Facings: 64
 
 naxis_naxiriflesoldier:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: naxis_naxiriflesoldier_nax_rifle.shp
+		Filename: naxis_naxiriflesoldier.shp
 		Scale: 0.7
 	run:
 		Tick: 120
@@ -446,7 +446,7 @@ naxis_sssoldier:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: naxis_sssoldier_nax_mp40.shp
+		Filename: naxis_sssoldier_mp40.shp
 	run:
 		Tick: 120
 	paradrop:
@@ -459,7 +459,7 @@ naxis_panzerschreck:
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
 		Scale: 0.7
-		Filename: naxis_promotion_shrek_nax_shrek.shp
+		Filename: naxis_promotion_shrek.shp
 	run:
 		Tick: 120
 	paradrop:
@@ -469,7 +469,7 @@ naxis_panzerschreck:
 
 naxis_skymage:
 	Defaults:
-		Filename: naxis_skymage_nax_litt_new.shp
+		Filename: naxis_skymage_litt_new.shp
 	stand:
 		Tick: 100
 		Start: 8
@@ -552,7 +552,7 @@ naxis_skymage:
 
 naxis_naximobileconstructionvehicle:
 	Defaults:
-		Filename: naxis_naximobileconstructionvehicle_nax_mcv.shp
+		Filename: naxis_naximobileconstructionvehicle_mcv.shp
 		Scale: 0.7
 		Offset: 0, 8
 	idle:
@@ -583,7 +583,7 @@ panzer.nax:
 tiger.nax:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_promotion_betterparatanks_nax_tiger.shp
+		Filename: naxis_promotion_betterparatanks_tiger.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -604,7 +604,7 @@ tiger.nax:
 naxis_oldtank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_oldtank_nax_zombietank.shp
+		Filename: naxis_oldtank_zombietank.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -650,7 +650,7 @@ car.nax:
 naxis_kingtigerheavytank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_promotion_generationiitanks_nax_kingtiger.shp
+		Filename: naxis_promotion_generationiitanks_kingtiger.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -692,7 +692,7 @@ assault.nax:
 naxis_imperialturbotank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_imperialturbotank_nax_imperial.shp
+		Filename: naxis_imperialturbotank.shp
 		Scale: 0.5
 	idle:
 		Facings: 64
@@ -709,7 +709,7 @@ naxis_imperialturbotank:
 naxis_maus:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_maus_nax_maus.shp
+		Filename: naxis_maus.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -730,7 +730,7 @@ naxis_maus:
 naxis_ratte:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_promotion_theratte_nax_ratte.shp
+		Filename: naxis_promotion_theratte.shp
 		Scale: 0.9
 	idle:
 		Facings: 64
@@ -751,7 +751,7 @@ naxis_ratte:
 naxis_grille:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_grille_nax_grille.shp
+		Filename: naxis_grille.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -768,7 +768,7 @@ naxis_grille:
 naxis_hetzer:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_hetzer_nax_hetzer.shp
+		Filename: naxis_hetzer.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -785,7 +785,7 @@ naxis_hetzer:
 naxis_antitankcannon:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_antitankcannon_nax_atankcann.shp
+		Filename: naxis_antitankcannon_atankcann.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -802,7 +802,7 @@ naxis_antitankcannon:
 naxis_jagdpanzer:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_jagdpanzer_nax_jagdpanzer.shp
+		Filename: naxis_jagdpanzer.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -819,7 +819,7 @@ naxis_jagdpanzer:
 naxis_brummbr:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_brummbr_nax_brummbar.shp
+		Filename: naxis_brummbr_brummbar.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -836,7 +836,7 @@ naxis_brummbr:
 naxis_sturmtiger:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_promotion_heavyvehicles_nax_sturmtiger.shp
+		Filename: naxis_promotion_heavyvehicles_sturmtiger.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -853,7 +853,7 @@ naxis_sturmtiger:
 naxis_nokana:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_promotion_bossestanks_nax_nokana.shp
+		Filename: naxis_promotion_bossestanks_nokana.shp
 		Scale: 0.7
 	idle:
 		Facings: 64
@@ -870,7 +870,7 @@ naxis_nokana:
 naxis_halftrack:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_halftrack_nax_halftrack.shp
+		Filename: naxis_halftrack.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -888,7 +888,7 @@ naxis_slaveoverseer:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: naxis_slaveoverseer_nax_litt.shp
+		Filename: naxis_slaveoverseer_litt.shp
 	run:
 		Tick: 120
 	paradrop:
@@ -941,7 +941,7 @@ naxis_slave:
 naxis_engineeringtruck:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: naxis_engineeringtruck_nax_eng.shp
+		Filename: naxis_engineeringtruck.shp
 		Offset: 0, 8
 		Scale: 0.9
 	idle:
@@ -959,17 +959,17 @@ naxis_me262:
 	Defaults:
 		Scale: 0.8
 	idle:
-		Filename: naxis_upgrade_unlockme262_nax_me262.shp
+		Filename: naxis_upgrade_unlockme262.shp
 		Facings: 64
 	move:
-		Filename: naxis_upgrade_unlockme262_nax_me262.shp
+		Filename: naxis_upgrade_unlockme262.shp
 		Facings: 64
 	move-l:
-		Filename: naxis_upgrade_unlockme262_nax_me262.shp
+		Filename: naxis_upgrade_unlockme262.shp
 		Facings: 64
 		Start: 64
 	move-r:
-		Filename: naxis_upgrade_unlockme262_nax_me262.shp
+		Filename: naxis_upgrade_unlockme262.shp
 		Facings: 64
 		Start: 128
 	icon:
@@ -979,23 +979,23 @@ naxis_bf109:
 	Defaults:
 		Scale: 0.8
 	idle:
-		Filename: naxis_bf109_nax_bf109.shp
+		Filename: naxis_bf109.shp
 		Facings: 64
 	move:
-		Filename: naxis_bf109_nax_bf109.shp
+		Filename: naxis_bf109.shp
 		Facings: 64
 	move-l:
-		Filename: naxis_bf109_nax_bf109.shp
+		Filename: naxis_bf109.shp
 		Facings: 64
 	move-r:
-		Filename: naxis_bf109_nax_bf109.shp
+		Filename: naxis_bf109.shp
 		Facings: 64
 	icon:
 		Filename: naxis_bf109_icon.png
 
 naxis_transportzeppelin:
 	Defaults:
-		Filename: naxis_transportzeppelin_nax_zep.shp
+		Filename: naxis_transportzeppelin.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -1008,7 +1008,7 @@ naxis_transportzeppelin:
 
 nax_horten:
 	Defaults:
-		Filename: naxis_promotion_hortenbomberstrike_2_nax_horten.shp
+		Filename: naxis_promotion_hortenbomberstrike_2.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -1076,7 +1076,7 @@ interceptor.nax:
 naxis_donnerschlag:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: naxis_promotion_donnerschlagmodelandotheradvancedmissiles_nax_brad.shp
+		Filename: naxis_promotion_donnerschlagmodelandotheradvancedmissiles_brad.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -1091,7 +1091,7 @@ naxis_donnerschlag:
 naxis_nop03sarubia:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_promotion_sarubiamodel_nax_sarubia.shp
+		Filename: naxis_promotion_sarubiamodel.shp
 		Scale: 0.64
 	idle:
 		Facings: 64
@@ -1119,7 +1119,7 @@ sarubia_bomb.nax:
 naxis_shoekarn:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_promotion_shoekarnandking_nax_shoe.shp
+		Filename: naxis_promotion_shoekarnandking.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -1202,7 +1202,7 @@ frank.nax:
 naxis_naximercenarysniper:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
-		Filename: naxis_promotion_partisans_nax_merc.shp
+		Filename: naxis_promotion_partisans_merc.shp
 		Scale: 0.75
 		Offset: 0,0
 	garrison-muzzle:
@@ -1221,7 +1221,7 @@ naxis_naximercenarysniper:
 naxis_naxiriflerecruit:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
-		Filename: naxis_naxiriflerecruit_nax_cons.shp
+		Filename: naxis_naxiriflerecruit_cons.shp
 		Scale: 0.75
 		Offset: 0,0
 	garrison-muzzle:
@@ -1240,7 +1240,7 @@ naxis_naxiriflerecruit:
 naxis_panzerfausttrooper:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
-		Filename: naxis_panzerfausttrooper_nax_tcons.shp
+		Filename: naxis_panzerfausttrooper_tcons.shp
 		Scale: 0.7
 		Offset: 0,-16
 	garrison-muzzle:
@@ -1259,7 +1259,7 @@ naxis_panzerfausttrooper:
 naxis_naxiflamer:
 	Inherits: ^RA2ModDafoolWW2Infantry
 	Defaults:
-		Filename: naxis_naxiflamer_nax_fcons.shp
+		Filename: naxis_naxiflamer_fcons.shp
 		Scale: 0.75
 		Offset: 0,-16
 	garrison-muzzle:
@@ -1278,7 +1278,7 @@ naxis_naxiflamer:
 naxis_naximachinegunners:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: naxis_naximachinegunners_nax_hmg.shp
+		Filename: naxis_naximachinegunners_hmg.shp
 		Scale: 0.6
 		Offset: 0,-4
 	stand:
@@ -1360,7 +1360,7 @@ naxis_naximachinegunners:
 naxis_portableflak:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: naxis_portableflak_nax_quadflak.shp
+		Filename: naxis_portableflak_quadflak.shp
 		Scale: 0.6
 		Offset: 0,-4
 		FlipX: True
@@ -1436,7 +1436,7 @@ naxis_portableflak:
 naxis_kbelwagen:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_kbelwagen_nax_kubel.shp
+		Filename: naxis_kbelwagen_kubel.shp
 		Scale: 0.9
 	idle:
 		Facings: 64
@@ -1453,7 +1453,7 @@ naxis_kbelwagen:
 naxis_bmwbike:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: naxis_bmwbike_nax_bmwbike.shp
+		Filename: naxis_bmwbike.shp
 		Scale: 0.9
 	idle:
 		Facings: 64
@@ -1594,7 +1594,7 @@ naxis_coneheadsknights:
 		Scale: 1
 	Defaults:
 		Scale: 0.7
-		Filename: naxis_coneheadsknights_nax_conehead.png
+		Filename: naxis_coneheadsknights.png
 	run:
 		Scale: 1
 		Tick: 100
