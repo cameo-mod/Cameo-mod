@@ -1,5 +1,5 @@
 General:
-	Name: Volcanic (prototype)
+	Name: Volcanic
 	Id: VOLCANIC
 	TileSize: 48,48
 	SheetSize: 1024
@@ -5565,10 +5565,7 @@ MultiBrushCollections:
 		FromActors@1: t01,t02,t03,t05,t06,t07,t08,t10,t11,t12,t13,t14,t15,t16,t17,tc01,tc02,tc03,tc04,tc05
 			Weight: 100
 	Obstructions:
-		FromTemplates@1: 97,98,99,217,218,219,220,221,222,223,224,225,226,103,104,109,110
-		FromTemplates@2: 105,106
-			Weight: 50
-		FromActors@3: t01,t02,t03,t05,t06,t07,t08,t10,t11,t12,t13,t14,t15,t16,t17
+		FromActors@1: t01,t02,t03,t05,t06,t07,t08,t10,t11,t12,t13,t14,t15,t16,t17
 			BackingTile: 255,0
 			Weight: 100
 	CivilianBuildings:
