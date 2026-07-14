@@ -20,17 +20,17 @@ cabal_overkill_gunship:
 		Prerequisites: ~cabal_helipad, cabal_promotion_overkillgunship
 		Description: actor_cabal_overkill_gunship.description
 	Aircraft:
-		TurnSpeed: 29
-		Speed: 149
+		TurnSpeed: 30
+		Speed: 150
 		InitialFacing: 0
 		TakeoffSounds: dropup1.aud
 		LandingSounds: dropdwn1.aud
 		TakeOffOnResupply: true
 		CanSlide: false
 	Health:
-		HP: 47500
+		HP: 45000
 	ChangesHealth@SelfHealing:
-		Step: 19
+		Step: 18
 	Armament@LEFT:
 		Weapon: CabalOverkillGunshipLaser
 		LocalOffset: 0,-512,0
@@ -418,7 +418,7 @@ cabal_hunterkillermk1_elite:
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
-		Cost: 2250
+		Cost: 3000
 	Tooltip:
 		Name: Super Hunter Killer
 	UpdatesPlayerStatistics:
@@ -429,8 +429,8 @@ cabal_hunterkillermk1_elite:
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_hunterkillermk1_elite.description
 	Aircraft:
-		Speed: 168
-		TurnSpeed: 32
+		Speed: 170
+		TurnSpeed: 34
 		TakeoffSounds: orcaup1.aud
 		LandingSounds: orcadwn1.aud
 		AltitudeVelocity: 128

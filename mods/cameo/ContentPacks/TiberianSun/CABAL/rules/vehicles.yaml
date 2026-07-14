@@ -142,7 +142,7 @@ cabal_cyborgreaper:
 	Armament:
 		Weapon: CabalReaperMissiles
 		LocalOffset: 128,-200,350, 128,200,350
-	Armament@AA:
+	Armament@SECONDARY:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
 		Weapon: CabalReaperTrap
@@ -369,7 +369,7 @@ cabal_manticore:
 	Armament@PRIMARY:
 		Weapon: CabalManticoreLaser
 		LocalOffset: 128,-350,350, 128,350,350
-	Armament@AA:
+	Armament@SECONDARY:
 		Weapon: CabalManticoreMissilesAA
 	Armament@TRAP:
 		Weapon: CabalManticoreTrap
@@ -553,7 +553,7 @@ cabal_scarabapc:
 		Speed: 75
 		Locomotor: hover
 		RequiresCondition: !notmobile && !disabled
-		TurnSpeed: 15
+		TurnSpeed: 30
 	Hovers:
 	Health:
 		HP: 30000
@@ -617,7 +617,7 @@ cabal_berserker:
 		Description: actor_cabal_berserker.description
 	Mobile:
 		Speed: 60
-		TurnSpeed: 12
+		TurnSpeed: 24
 		PauseOnCondition: disabled
 	Health:
 		HP: 800000
@@ -810,17 +810,17 @@ cabal_heavyreaper:
 		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_heavyreaper
 		Description: actor_cabal_heavyreaper.description
 	Health:
-		HP: 70000
+		HP: 75000
 	ChangesHealth@SelfHealing:
-		Step: 28
+		Step: 30
 	Mobile:
 		TurnSpeed: 26
 		Speed: 65
 	Armament:
-		Weapon: CabalReaperMissiles
+		Weapon: CabalHeavyReaperMissiles
 		LocalOffset: 128,-200,350, 128,200,350
-	Armament@AA:
-		Weapon: CabalReaperMissilesAA
+	Armament@SECONDARY:
+		Weapon: CabalHeavyReaperMissilesAA
 	Armament@TRAP:
 		Weapon: CabalHeavyReaperTrap
 	Voiced:
@@ -908,7 +908,7 @@ cabal_widow:
 		Description: actor_cabal_widow.description
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 14
+		TurnSpeed: 28
 		Speed: 70
 	Health:
 		HP: 80000

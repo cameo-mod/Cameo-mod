@@ -22,7 +22,7 @@ TSReaperTrap:
 	Inherits: ^SmallArms
 	Report: fireweb1.aud
 	ReloadDelay: 250
-	Projectile: Bullet
+	Projectile: Missile
 		Speed: 800
 		Image: DRAGON
 	ValidTargets: Infantry
@@ -425,36 +425,36 @@ CabalReaperMissiles:
 	Inherits@3: ^LightMissile
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^CabalMissile
-	ReloadDelay: 32
+	ReloadDelay: 24
 	Burst: 2
-	BurstDelays: 4
-	Range: 5153
+	BurstDelays: 12
+	Range: 5785
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 4
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 4
 	Warhead@Grenade: SpreadDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 4
 
 CabalReaperMissilesAA:
 	Inherits: CabalReaperMissiles
-	Range: 7730
+	Range: 8680
 	ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air
@@ -477,10 +477,67 @@ CabalReaperMissilesAA:
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
 
+CabalHeavyReaperMissiles:
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^CabalMissile
+	ReloadDelay: 30
+	Range: 6085
+	ValidTargets: Ground, Water
+	Report: samshot1.aud
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 12000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 12000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Grenade: SpreadDamage
+		Damage: 12000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+
+CabalHeavyReaperMissilesAA:
+	Inherits: CabalHeavyReaperMissiles
+	Range: 9130
+	ValidTargets: Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Air
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^MediumCannon
+	Inherits: ^HeavyCannon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
 	Range: 11582
@@ -498,21 +555,25 @@ CabalArtilleryWalkerShell:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 	Warhead@Grenade: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MediumCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@HeavyCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 
 CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^Grenade
@@ -540,37 +601,43 @@ CabalArtilleryWalkerShellUpgraded:
 		TrailImage: green_smokey
 		TrailPalette: effect75alpha
 	Warhead@Grenade: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MediumCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@HeavyCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@TeslaChargedWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MagicWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 
 CabalHunterKillerLasers:
 	Inherits: ^LaserWeapon
@@ -606,21 +673,44 @@ CabalHunterKillerLasers:
 		ValidTargets: Ground, Water, Air
 
 CabalHunterKillerLasersElite:
-	Inherits: CabalHunterKillerLasers
+	Inherits: ^LaserWeapon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyMissile
 	ReloadDelay: 20
 	Range: 6000
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
+	ValidTargets: Ground, Water, Air
+	Projectile: LaserZap
+		Width: 60
+		ZOffset: 2047
+		Color: 77DD22CC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 28
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 2A2A55DD
+	Report: lastur1.aud
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_m
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
 
 CabalHunterKillerHeavyLaser:
 	Inherits: ^LaserWeapon
@@ -666,10 +756,30 @@ CabalSpiderLaser:
 		Explosions: idle
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+
 CabalSpiderCnc4Laser:
-	Inherits: CabalSpiderLaser
+	Inherits: ^LaserWeapon
+	Report: obelmod1.aud
 	ReloadDelay: 80
 	Range: 7000
+	Projectile: LaserZap
+		Width: 100
+		ZOffset: 2047
+		Color: 99DD22EE
+		SecondaryBeam: true
+		SecondaryBeamWidth: 42
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 3D3D77FF
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 44000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 22
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_l
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
+
 CabalDissolverSpray:
 	Inherits: ^LightChemicalWeapon
 	Inherits@TANKDESTROYER: ^TankDestroyerCannon
@@ -703,10 +813,9 @@ CabalDissolverSpray:
 	Warhead@Effect: CreateEffect
 		Image: cabal_dissolveimpact
 		Explosions: idle
-		ImpactSounds: chemtrooper_att1.aud
+		ImpactSounds: drtelectro.wav
 CabalCommandoPlasma:
-	Inherits: ^MediumCannon
-	Inherits@2: ^HeavyCannon
+	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
 	Report: obelcor3.aud
@@ -718,10 +827,6 @@ CabalCommandoPlasma:
 		Speed: 320
 		Shadow: false
 		Blockable: false
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 50000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 25
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
@@ -744,8 +849,7 @@ CabalCommandoPlasma:
 		ImpactSounds: expnew09.aud
 
 CabalCommandoPlasmaMk2:
-	Inherits: ^MediumCannon
-	Inherits@2: ^HeavyCannon
+	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
 	Report: obelcor3.aud
@@ -757,10 +861,6 @@ CabalCommandoPlasmaMk2:
 		Speed: 320
 		Shadow: false
 		Blockable: false
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 50000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 25
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
@@ -872,29 +972,31 @@ CabalManticoreMissiles:
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^CabalMissile
 	ReloadDelay: 30
+	Burst: 2
+	BurstDelays: 3
 	Range: 5358
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
+		Damage: 12000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 6
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
+		Damage: 12000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 6
 	Warhead@Grenade: SpreadDamage
-		Damage: 4000
+		Damage: 12000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
+		Damage: 6000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 6
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 4000
+		Damage: 12000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
+		Damage: 6000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 6
 
 CabalManticoreMissilesAA:
 	Inherits: CabalManticoreMissiles
@@ -1169,9 +1271,9 @@ CabalManticoreLaser:
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 222244CC
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 10000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 5
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_s
 		Explosions: idle
