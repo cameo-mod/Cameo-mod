@@ -241,6 +241,7 @@ cabal_servicedepot:
 		Sequence: platform
 	WithDeathAnimation@BIB:
 		DeathSequence: dead-ground
+		DeathSequencePalette: ra2player
 		UseDeathTypeSuffix: false
 	WithResupplyAnimation:
 		RequiresCondition: !build-incomplete
