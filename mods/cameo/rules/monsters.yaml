@@ -239,7 +239,7 @@ RA2ZOMBIE:
 	ProducibleWithLevel:
 		Prerequisites: barracks.upgraded
 RA2MUTALISK:
-	Inherits: SCMUTALISK
+	Inherits: zerg_mutalisk
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -262,7 +262,7 @@ RA2MUTALISK:
 		Weapon: RA2MUTA
 		LocalOffset: 0,0,0
 	RenderSprites:
-		Image: SCMUTALISK
+		Image: zerg_mutalisk
 	Power:
 		Amount: 0
 
@@ -614,7 +614,7 @@ RA2CREEPCOLONY:
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Selectable:
 		Bounds: 1877, 1877
-		Class: sccreepcolony
+		Class: zerg_creepcolony
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -657,7 +657,7 @@ RA2CREEPCOLONY:
 		Range: 6c0
 		RequiresCondition: !disabled
 	RenderSprites:
-		Image: SCCREEPCOLONY
+		Image: zerg_creepcolony
 
 RA2ZEPDOOM:
 	Inherits: ra2_soviets_kirovairship

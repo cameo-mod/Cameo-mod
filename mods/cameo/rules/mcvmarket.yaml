@@ -209,13 +209,13 @@ MMSCPMCV:
 		Prerequisite: mmprotoss
 
 MMSCZMCV:
-	Inherits@MCV: SCZMCV
+	Inherits@MCV: zerg_hatcherydrone
 	Buildable:
 		Icon: mmicon
 	RenderSprites:
-		Image: SCZMCV
+		Image: zerg_hatcherydrone
 	Transforms:
-		IntoActor: schatchery
+		IntoActor: zerg_hatchery
 	Buildable:
 		BuildPaletteOrder: 120
 		Prerequisites: !mmzerg

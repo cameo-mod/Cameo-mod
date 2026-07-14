@@ -486,7 +486,7 @@ scbunker.actibliz.full2:
 	Cargo:
 		InitialUnits: scmarine.actibliz, scmarauder.actibliz, drguardian.actibliz, drbion.actibliz
 scinfestedcom.actibliz:
-	Inherits: SCINFESTEDCOMMANDCENTER
+	Inherits: zerg_infestedcommandcenter
 	Valued:
 		Cost: 2500
 	Buildable:
@@ -495,7 +495,7 @@ scinfestedcom.actibliz:
 		Queue: Building, RABuilding
 		Description: Unlocks Zerg Stuff.
 	RenderSprites:
-		Image: scinfestedcommandcenter
+		Image: zerg_infestedcommandcenter
 	MobSpawnerMaster@1:
 		Actors: sc_zerg_larva
 		Offset: 1000,255,0
@@ -784,11 +784,11 @@ scscout.actibliz:
 		Image: actiscout
 
 scbotoverlord.actibliz:
-	Inherits: SCOVERLORD
+	Inherits: zerg_overlord
 	UpdatesPlayerStatistics:
-		OverrideActor: scoverlord
+		OverrideActor: zerg_overlord
 	RenderSprites:
-		Image: SCOVERLORD
+		Image: zerg_overlord
 	Buildable:
 		BuildPaletteOrder: 1020
 		Queue: Defence, RADefence

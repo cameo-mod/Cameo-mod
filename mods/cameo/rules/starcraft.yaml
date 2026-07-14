@@ -71,20 +71,20 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: zerg
-		BaseActor: sczmcv
-		SupportActors: scoverlord
+		BaseActor: zerg_hatcherydrone
+		SupportActors: zerg_overlord
 	StartingUnits@defaultzerg:
 		Class: light
 		ClassName: Light Support
 		Factions: zerg
-		BaseActor: sczmcv
-		SupportActors: scoverlord, sczergling, sczergling, sczergling, sczergling, schydralisk, schydralisk
+		BaseActor: zerg_hatcherydrone
+		SupportActors: zerg_overlord, zerg_zergling, zerg_zergling, zerg_zergling, zerg_zergling, zerg_hydralisk, zerg_hydralisk
 	StartingUnits@heavyzerg:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: zerg
-		BaseActor: sczmcv
-		SupportActors: scoverlord, sczergling, sczergling, sczergling, sczergling, sczergling, sczergling, sczergling, sczergling, schydralisk, schydralisk, schydralisk, schydralisk
+		BaseActor: zerg_hatcherydrone
+		SupportActors: zerg_overlord, zerg_zergling, zerg_zergling, zerg_zergling, zerg_zergling, zerg_zergling, zerg_zergling, zerg_zergling, zerg_zergling, zerg_hydralisk, zerg_hydralisk, zerg_hydralisk, zerg_hydralisk
 
 ^SCSmallShadow:
 	# WithIdleOverlay@Shadow:
@@ -425,108 +425,108 @@ World:
 ####################################################################################################
 
 ^ZergSwarmerUpgrades:
-	ReloadDelayMultiplier@uplingattack:
+	ReloadDelayMultiplier@zerg_upgrade_adrenalglands:
 		Modifier: 75
-		RequiresCondition: uplingattack
-	GrantConditionOnPrerequisite@uplingattack:
-		Condition: uplingattack
-		Prerequisites: uplingattack
-	SpeedMultiplier@uplingspeed:
+		RequiresCondition: zerg_upgrade_adrenalglands
+	GrantConditionOnPrerequisite@zerg_upgrade_adrenalglands:
+		Condition: zerg_upgrade_adrenalglands
+		Prerequisites: zerg_upgrade_adrenalglands
+	SpeedMultiplier@zerg_upgrade_metabolicboost:
 		Modifier: 133
-		RequiresCondition: uplingspeed
-	GrantConditionOnPrerequisite@uplingspeed:
-		Condition: uplingspeed
-		Prerequisites: uplingspeed
+		RequiresCondition: zerg_upgrade_metabolicboost
+	GrantConditionOnPrerequisite@zerg_upgrade_metabolicboost:
+		Condition: zerg_upgrade_metabolicboost
+		Prerequisites: zerg_upgrade_metabolicboost
 
 ^ZergMeleeWeaponUpgrades:
-	FirepowerMultiplier@upzergmelee:
+	FirepowerMultiplier@zerg_upgrade_meleeattackslevel1:
 		Modifier: 115
-		RequiresCondition: upzergmelee && !upzergmelee2
-	GrantConditionOnPrerequisite@upzergmelee:
-		Condition: upzergmelee
-		Prerequisites: upzergmelee
-	FirepowerMultiplier@upzergmelee2:
+		RequiresCondition: zerg_upgrade_meleeattackslevel1 && !zerg_upgrade_meleeattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_meleeattackslevel1:
+		Condition: zerg_upgrade_meleeattackslevel1
+		Prerequisites: zerg_upgrade_meleeattackslevel1
+	FirepowerMultiplier@zerg_upgrade_meleeattackslevel2:
 		Modifier: 135
-		RequiresCondition: upzergmelee2
-	GrantConditionOnPrerequisite@upzergmelee2:
-		Condition: upzergmelee2
-		Prerequisites: upzergmelee2
+		RequiresCondition: zerg_upgrade_meleeattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_meleeattackslevel2:
+		Condition: zerg_upgrade_meleeattackslevel2
+		Prerequisites: zerg_upgrade_meleeattackslevel2
 	ActorStatValues:
-		Upgrades: upzergmelee
+		Upgrades: zerg_upgrade_meleeattackslevel1
 
 ^ZergMissileWeaponUpgrades:
-	FirepowerMultiplier@upzergmissile:
+	FirepowerMultiplier@zerg_upgrade_missileattackslevel1:
 		Modifier: 115
-		RequiresCondition: upzergmissile && !upzergmissile2
-	GrantConditionOnPrerequisite@upzergmissile:
-		Condition: upzergmissile
-		Prerequisites: upzergmissile
-	FirepowerMultiplier@upzergmissile2:
+		RequiresCondition: zerg_upgrade_missileattackslevel1 && !zerg_upgrade_missileattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_missileattackslevel1:
+		Condition: zerg_upgrade_missileattackslevel1
+		Prerequisites: zerg_upgrade_missileattackslevel1
+	FirepowerMultiplier@zerg_upgrade_missileattackslevel2:
 		Modifier: 135
-		RequiresCondition: upzergmissile2
-	GrantConditionOnPrerequisite@upzergmissile2:
-		Condition: upzergmissile2
-		Prerequisites: upzergmissile2
+		RequiresCondition: zerg_upgrade_missileattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_missileattackslevel2:
+		Condition: zerg_upgrade_missileattackslevel2
+		Prerequisites: zerg_upgrade_missileattackslevel2
 	ActorStatValues:
-		Upgrades: upzergmissile
+		Upgrades: zerg_upgrade_missileattackslevel1
 
 ^ZergGroundArmorUpgrades:
-	DamageMultiplier@upcarapace:
+	DamageMultiplier@zerg_upgrade_carapacelevel1:
 		Modifier: 90
-		RequiresCondition: upcarapace && !upcarapace2
-	GrantConditionOnPrerequisite@upcarapace:
-		Condition: upcarapace
-		Prerequisites: upcarapace
-	DamageMultiplier@upcarapace2:
+		RequiresCondition: zerg_upgrade_carapacelevel1 && !zerg_upgrade_carapacelevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_carapacelevel1:
+		Condition: zerg_upgrade_carapacelevel1
+		Prerequisites: zerg_upgrade_carapacelevel1
+	DamageMultiplier@zerg_upgrade_carapacelevel2:
 		Modifier: 80
-		RequiresCondition: upcarapace2
-	GrantConditionOnPrerequisite@upcarapace2:
-		Condition: upcarapace2
-		Prerequisites: upcarapace2
+		RequiresCondition: zerg_upgrade_carapacelevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_carapacelevel2:
+		Condition: zerg_upgrade_carapacelevel2
+		Prerequisites: zerg_upgrade_carapacelevel2
 	ActorStatValues:
-		Upgrades: upcarapace
+		Upgrades: zerg_upgrade_carapacelevel1
 
 ^ZergFlyerWeaponUpgrades:
-	FirepowerMultiplier@upflyerattack:
+	FirepowerMultiplier@zerg_upgrade_flyerattackslevel1:
 		Modifier: 115
-		RequiresCondition: upflyerattack && !upflyerattack2
-	GrantConditionOnPrerequisite@upflyerattack:
-		Condition: upflyerattack
-		Prerequisites: upflyerattack
-	FirepowerMultiplier@upflyerattack2:
+		RequiresCondition: zerg_upgrade_flyerattackslevel1 && !zerg_upgrade_flyerattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyerattackslevel1:
+		Condition: zerg_upgrade_flyerattackslevel1
+		Prerequisites: zerg_upgrade_flyerattackslevel1
+	FirepowerMultiplier@zerg_upgrade_flyerattackslevel2:
 		Modifier: 135
-		RequiresCondition: upflyerattack2
-	GrantConditionOnPrerequisite@upflyerattack2:
-		Condition: upflyerattack2
-		Prerequisites: upflyerattack2
+		RequiresCondition: zerg_upgrade_flyerattackslevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyerattackslevel2:
+		Condition: zerg_upgrade_flyerattackslevel2
+		Prerequisites: zerg_upgrade_flyerattackslevel2
 	ActorStatValues:
-		Upgrades: upflyerattack
+		Upgrades: zerg_upgrade_flyerattackslevel1
 
 ^ZergFlyerArmorUpgrades:
-	DamageMultiplier@upflyerarmor:
+	DamageMultiplier@zerg_upgrade_flyercarapacelevel1:
 		Modifier: 90
-		RequiresCondition: upflyerarmor && !upflyerarmor2
-	GrantConditionOnPrerequisite@upflyerarmor:
-		Condition: upflyerarmor
-		Prerequisites: upflyerarmor
-	DamageMultiplier@upflyerarmor2:
+		RequiresCondition: zerg_upgrade_flyercarapacelevel1 && !zerg_upgrade_flyercarapacelevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyercarapacelevel1:
+		Condition: zerg_upgrade_flyercarapacelevel1
+		Prerequisites: zerg_upgrade_flyercarapacelevel1
+	DamageMultiplier@zerg_upgrade_flyercarapacelevel2:
 		Modifier: 80
-		RequiresCondition: upflyerarmor2
-	GrantConditionOnPrerequisite@upflyerarmor2:
-		Condition: upflyerarmor2
-		Prerequisites: upflyerarmor2
+		RequiresCondition: zerg_upgrade_flyercarapacelevel2
+	GrantConditionOnPrerequisite@zerg_upgrade_flyercarapacelevel2:
+		Condition: zerg_upgrade_flyercarapacelevel2
+		Prerequisites: zerg_upgrade_flyercarapacelevel2
 	ActorStatValues:
-		Upgrades: upflyerarmor
+		Upgrades: zerg_upgrade_flyercarapacelevel1
 
 ^GroovedSpinesUpgrade:
-	RangeMultiplier@upzergrange:
-		RequiresCondition: upzergrange
+	RangeMultiplier@zerg_upgrade_groovedspines:
+		RequiresCondition: zerg_upgrade_groovedspines
 		Modifier: 120
-	GrantConditionOnPrerequisite@upzergrange:
-		Condition: upzergrange
-		Prerequisites: upzergrange
+	GrantConditionOnPrerequisite@zerg_upgrade_groovedspines:
+		Condition: zerg_upgrade_groovedspines
+		Prerequisites: zerg_upgrade_groovedspines
 	ActorStatValues:
-		Upgrades: upzergrange
+		Upgrades: zerg_upgrade_groovedspines
 
 ####################################################################################################
 #		BUILDING TERRAN
@@ -2218,7 +2218,7 @@ SCARBITERTRIBUNAL:
 		Multiplier: 75
 		Queue: SCZergInfantry
 
-SCHATCHERY:
+zerg_hatchery:
 	Inherits: ^BaseBuildingZerg
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
@@ -2228,51 +2228,51 @@ SCHATCHERY:
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Hatchery
-		RequiresCondition: !sclair && !schive
+		RequiresCondition: !zerg_lair && !zerg_hive
 	Tooltip@2:
 		Name: Lair
-		RequiresCondition: sclair && !schive
+		RequiresCondition: zerg_lair && !zerg_hive
 	Tooltip@3:
 		Name: Hive
-		RequiresCondition: schive
+		RequiresCondition: zerg_hive
 	Selectable:
 		Bounds: 3072, 2048
 		DecorationBounds: 3300, 2448, 0, 0
 	ProvidesPrerequisite@buildingname:
-	ProvidesPrerequisite@sclair:
-		Prerequisite: sclair
-		RequiresCondition: sclair
-	ProvidesPrerequisite@schive:
-		Prerequisite: schive
-		RequiresCondition: schive
+	ProvidesPrerequisite@zerg_lair:
+		Prerequisite: zerg_lair
+		RequiresCondition: zerg_lair
+	ProvidesPrerequisite@zerg_hive:
+		Prerequisite: zerg_hive
+		RequiresCondition: zerg_hive
 	ProvidesPrerequisite@lairupgradeavailable:
 		Prerequisite: lairupgradeavailable
-		RequiresCondition: !sclair
+		RequiresCondition: !zerg_lair
 	ProvidesPrerequisite@hiveupgradeavailable:
 		Prerequisite: hiveupgradeavailable
-		RequiresCondition: sclair && !schive
+		RequiresCondition: zerg_lair && !zerg_hive
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			schatchery: sclair
+			zerg_hatchery: zerg_lair
 		Requirements:
-			schatchery: !sclair
+			zerg_hatchery: !zerg_lair
 	Pluggable@2:
 		Offset: 0,0
 		Conditions:
-			sclair: schive
+			zerg_lair: zerg_hive
 		Requirements:
-			sclair: sclair && !schive
+			zerg_lair: zerg_lair && !zerg_hive
 	WithSpriteBody:
-		RequiresCondition: !sclair && !schive
+		RequiresCondition: !zerg_lair && !zerg_hive
 	WithSpriteBody@lair:
 		Sequence: lair
 		Name: lair
-		RequiresCondition: sclair && !schive
+		RequiresCondition: zerg_lair && !zerg_hive
 	WithSpriteBody@hive:
 		Sequence: hive
 		Name: hive
-		RequiresCondition: schive
+		RequiresCondition: zerg_hive
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -2281,10 +2281,10 @@ SCHATCHERY:
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
 	DamageMultiplier@lair:
 		Modifier: 75
-		RequiresCondition: sclair && !schive
+		RequiresCondition: zerg_lair && !zerg_hive
 	DamageMultiplier@hive:
 		Modifier: 50
-		RequiresCondition: schive
+		RequiresCondition: zerg_hive
 	RallyPoint: ##########
 		Path: 1,2
 	PrimaryBuilding:
@@ -2373,13 +2373,13 @@ SCHATCHERY:
 		PipCount: 10
 		FullSequence: pip-yellow
 	Transforms:
-		IntoActor: sczmcv
+		IntoActor: zerg_hatcherydrone
 	WithCreepOverlay:
 		Adjacent: 5
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-sclair:
+zerg_lair:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Lair
@@ -2388,14 +2388,14 @@ sclair:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites: ~schatchery, scspawningpool, lairupgradeavailable
+		Prerequisites: ~zerg_hatchery, zerg_spawningpool, lairupgradeavailable
 		Description: actor_sclair.description
 	Plug:
-		Type: schatchery
+		Type: zerg_hatchery
 	RenderSprites:
-		Image: sclair
+		Image: zerg_lair
 
-schive:
+zerg_hive:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Hive
@@ -2404,12 +2404,12 @@ schive:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites: ~schatchery, sclair, hiveupgradeavailable
+		Prerequisites: ~zerg_hatchery, zerg_lair, hiveupgradeavailable
 		Description: actor_schive.description
 	Plug:
-		Type: sclair
+		Type: zerg_lair
 	RenderSprites:
-		Image: schive
+		Image: zerg_hive
 
 sc_zerg_larva:
 	Inherits: ^Soldier
@@ -2451,7 +2451,7 @@ sc_zerg_larva:
 	Voiced:
 		VoiceSet: SCBroodlingVoice
 	-DeathSounds@NORMAL:
-	-SpawnActorOnDeath@SCSWARMLING:
+	-SpawnActorOnDeath@zerg_swarmling:
 	-WithDeathAnimation:
 	-DamagedByTerrain:
 	-Crushable:
@@ -2482,7 +2482,7 @@ sc_zerg_larva:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCCREEPCOLONY:
+zerg_creepcolony:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
@@ -2518,7 +2518,7 @@ SCCREEPCOLONY:
 		IsCircular: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~schatchery
+		Prerequisites: ~zerg_hatchery
 		Queue: Building, RABuilding
 		Description: actor_sccreepcolony.description
 	Building:
@@ -2549,9 +2549,9 @@ SCCREEPCOLONY:
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			sccreepcolony: sunken
+			zerg_creepcolony: sunken
 		Requirements:
-			sccreepcolony: !sunken && !spore
+			zerg_creepcolony: !sunken && !spore
 	Pluggable@2:
 		Offset: 0,0
 		Conditions:
@@ -2610,17 +2610,17 @@ SCCREEPCOLONY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
 
-SCCREEPCOLONYDEFENSE:
-	Inherits: SCCREEPCOLONY
+zerg_creepcolony_2:
+	Inherits: zerg_creepcolony
 	Buildable:
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: SCCREEPCOLONY
+		Image: zerg_creepcolony
 		PlayerPalette: player_rgba
 
-scsporecolonyupgrade:
+zerg_sunkencolony:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Sunken Colony
@@ -2628,14 +2628,14 @@ scsporecolonyupgrade:
 		Cost: 500
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~schatchery, creepcolonyupgradeavailable
+		Prerequisites: ~zerg_hatchery, creepcolonyupgradeavailable
 		Description: actor_scsporecolonyupgrade.description
 	Plug:
-		Type: sccreepcolony
+		Type: zerg_creepcolony
 	RenderSprites:
-		Image: scsunkencolony
+		Image: zerg_sunkencolony_2
 
-scsunkencolonyupgrade:
+zerg_sporecolony_2:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Spore Colony
@@ -2643,15 +2643,15 @@ scsunkencolonyupgrade:
 		Cost: 500
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~schatchery, creepcolonyupgradeavailable
+		Prerequisites: ~zerg_hatchery, creepcolonyupgradeavailable
 		Description: actor_scsunkencolonyupgrade.description
 	Plug:
 		Type: sccreepcolony2
 	RenderSprites:
-		Image: scsporecolony
+		Image: zerg_sporecolony
 
-scsunkencolony:
-	Inherits: SCCREEPCOLONY
+zerg_sunkencolony_2:
+	Inherits: zerg_creepcolony
 	-ProductionCostMultiplier@guardtower:
 	Tooltip:
 		Name: Sunken Colony
@@ -2659,17 +2659,17 @@ scsunkencolony:
 		Cost: 1250
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~schatchery
+		Prerequisites: ~zerg_hatchery
 		Description: actor_scsunkencolony.description
 	GrantCondition:
 		Condition: sunken
 	Selectable:
-		Class: sccreepcolony
+		Class: zerg_creepcolony
 	RenderSprites:
-		Image: scsunkencolony
+		Image: zerg_sunkencolony_2
 
-scsporecolony:
-	Inherits: SCCREEPCOLONY
+zerg_sporecolony:
+	Inherits: zerg_creepcolony
 	-ProductionCostMultiplier@guardtower:
 	Tooltip:
 		Name: Spore Colony
@@ -2677,16 +2677,16 @@ scsporecolony:
 		Cost: 1250
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~schatchery
+		Prerequisites: ~zerg_hatchery
 		Description: actor_scsporecolony.description
 	GrantCondition:
 		Condition: spore
 	Selectable:
-		Class: sccreepcolony
+		Class: zerg_creepcolony
 	RenderSprites:
-		Image: scsporecolony
+		Image: zerg_sporecolony
 
-SCEXTRACTOR:
+zerg_extractor:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^SCRefineryCommon
@@ -2702,7 +2702,7 @@ SCEXTRACTOR:
 		IsCircular: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~schatchery
+		Prerequisites: ~zerg_hatchery
 		Queue: Building, RABuilding
 		Description: actor_scextractor.description
 	Building:
@@ -2710,11 +2710,11 @@ SCEXTRACTOR:
 		Dimensions: 3,3
 		BuildSounds: zchrdy00.aud
 	FreeActor@1:
-		Actor: scdrone
+		Actor: zerg_drone
 		SpawnOffset: 0,2
 		Facing: 540
 	FreeActor@2:
-		Actor: scdrone
+		Actor: zerg_drone
 		SpawnOffset: 0,2
 		Facing: 540
 	SelectionDecorations:
@@ -2749,17 +2749,17 @@ SCEXTRACTOR:
 	Pluggable:
 		Offset: 1,0
 		Conditions:
-			scextractor: extractorupg
+			zerg_extractor: extractorupg
 		Requirements:
-			scextractor: !build-incomplete && !extractorupg
+			zerg_extractor: !build-incomplete && !extractorupg
 	WithCreepOverlay:
 		Adjacent: 0
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: sczvespenegascollector
+		Upgrades: zerg_vespenegascollector
 
-sczvespenegascollector:
+zerg_vespenegascollector:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Vespene Gas Collector
@@ -2767,14 +2767,14 @@ sczvespenegascollector:
 		Cost: 2500
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~schatchery, sczrefineryupgradeavailable
+		Prerequisites: ~zerg_hatchery, sczrefineryupgradeavailable
 		Description: actor_sczvespenegascollector.description
 	Plug:
-		Type: scextractor
+		Type: zerg_extractor
 	RenderSprites:
 		Image: upscrefinery3
 
-SCSPAWNINGPOOL:
+zerg_spawningpool:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	-WithMakeAnimation:
@@ -2795,7 +2795,7 @@ SCSPAWNINGPOOL:
 		BuildPaletteOrder: 40
 		BuildDuration: 375
 		BuildDurationModifier: 100
-		Prerequisites: ~schatchery
+		Prerequisites: ~zerg_hatchery
 		Queue: Building, RABuilding
 		Description: actor_scspawningpool.description
 	Building:
@@ -2824,7 +2824,7 @@ SCSPAWNINGPOOL:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCEVOLUTIONCHAMBER:
+zerg_evolutionchamber:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -2842,7 +2842,7 @@ SCEVOLUTIONCHAMBER:
 		BuildPaletteOrder: 50
 		BuildDuration: 625
 		BuildDurationModifier: 100
-		Prerequisites: ~schatchery
+		Prerequisites: ~zerg_hatchery
 		Queue: Building, RABuilding
 		Description: actor_scevolutionchamber.description
 	Building:
@@ -2874,7 +2874,7 @@ SCEVOLUTIONCHAMBER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCHYDRALISKDEN:
+zerg_hydraliskden:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -2892,7 +2892,7 @@ SCHYDRALISKDEN:
 		BuildPaletteOrder: 60
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~schatchery, scspawningpool
+		Prerequisites: ~zerg_hatchery, zerg_spawningpool
 		Queue: Building, RABuilding
 		Description: actor_schydraliskden.description
 	Building:
@@ -2924,7 +2924,7 @@ SCHYDRALISKDEN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCQUEENSNEST:
+zerg_queensnest:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -2941,7 +2941,7 @@ SCQUEENSNEST:
 	Buildable:
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~schatchery, sclair
+		Prerequisites: ~zerg_hatchery, zerg_lair
 		Queue: Building, RABuilding
 		Description: actor_scqueensnest.description
 	Building:
@@ -2975,7 +2975,7 @@ SCQUEENSNEST:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSPIRE:
+zerg_spire:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Inherits@bot: ^BotMicromanageable
@@ -2995,14 +2995,14 @@ SCSPIRE:
 	Power:
 		Amount: 0
 	ProvidesPrerequisite@buildingname:
-	ProvidesPrerequisite@scgreaterspire:
-		Prerequisite: scgreaterspire
-		RequiresCondition: scgreaterspire
+	ProvidesPrerequisite@zerg_greaterspire:
+		Prerequisite: zerg_greaterspire
+		RequiresCondition: zerg_greaterspire
 	Buildable:
 		BuildPaletteOrder: 80
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~schatchery, sclair
+		Prerequisites: ~zerg_hatchery, zerg_lair
 		Queue: Building, RABuilding
 		Description: actor_scspire.description
 	Building:
@@ -3021,23 +3021,23 @@ SCSPIRE:
 		Duration: 2000
 		BodyNames: body, greaterspire
 	WithSpriteBody:
-		RequiresCondition: !scgreaterspire
+		RequiresCondition: !zerg_greaterspire
 	WithSpriteBody@greaterspire:
 		Sequence: greaterspire
 		Name: greaterspire
-		RequiresCondition: scgreaterspire
+		RequiresCondition: zerg_greaterspire
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			scspire: scgreaterspire
+			zerg_spire: zerg_greaterspire
 		Requirements:
-			scspire: !scgreaterspire
-	DamageMultiplier@scgreaterspire:
-		RequiresCondition: scgreaterspire
+			zerg_spire: !zerg_greaterspire
+	DamageMultiplier@zerg_greaterspire:
+		RequiresCondition: zerg_greaterspire
 		Modifier: 50
 	ProvidesPrerequisite:
 		Prerequisite: greaterspireupgradeavailable
-		RequiresCondition: !scgreaterspire
+		RequiresCondition: !zerg_greaterspire
 	SpawnActorOnDeath@death1:
 		Actor: SCBROODLING
 	SpawnActorOnDeath@death2:
@@ -3049,7 +3049,7 @@ SCSPIRE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCGREATERSPIRE:
+zerg_greaterspire:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Greater Spire
@@ -3060,14 +3060,14 @@ SCGREATERSPIRE:
 		BuildDuration: 500
 		BuildDurationModifier: 100
 		Queue: BuildingAddons
-		Prerequisites: ~schatchery, sclair, greaterspireupgradeavailable
+		Prerequisites: ~zerg_hatchery, zerg_lair, greaterspireupgradeavailable
 		Description: actor_scgreaterspire.description
 	Plug:
-		Type: scspire
+		Type: zerg_spire
 	RenderSprites:
-		Image: scgreaterspire
+		Image: zerg_greaterspire
 
-SCULTRALISKCAVERN:
+zerg_ultraliskcavern:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -3085,7 +3085,7 @@ SCULTRALISKCAVERN:
 		BuildPaletteOrder: 90
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~schatchery, schive
+		Prerequisites: ~zerg_hatchery, zerg_hive
 		Queue: Building, RABuilding
 		Description: actor_scultraliskcavern.description
 	Building:
@@ -3129,7 +3129,7 @@ SCULTRALISKCAVERN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCDEFILERMOUND:
+zerg_defilermound:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -3146,7 +3146,7 @@ SCDEFILERMOUND:
 	Buildable:
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~schatchery, schive
+		Prerequisites: ~zerg_hatchery, zerg_hive
 		Queue: Building, RABuilding
 		Description: actor_scdefilermound.description
 	Building:
@@ -3172,7 +3172,7 @@ SCDEFILERMOUND:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCNYDUSCANAL:
+zerg_nyduscanal:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Valued:
@@ -3182,7 +3182,7 @@ SCNYDUSCANAL:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 8010
-		Prerequisites: ~schatchery, schive
+		Prerequisites: ~zerg_hatchery, zerg_hive
 		Queue: Building, RABuilding
 		Description: actor_scnyduscanal.description
 	Building:
@@ -3214,7 +3214,7 @@ SCNYDUSCANAL:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCOVERMIND:
+zerg_overmind:
 	Inherits: ^BaseBuildingZerg
 	Inherits@radar: ^RadarBuilding
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -3229,7 +3229,7 @@ SCOVERMIND:
 		Capacity: 10000
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		Prerequisites: ~schatchery, schive, derricklimit
+		Prerequisites: ~zerg_hatchery, zerg_hive, derricklimit
 		Queue: Building, RABuilding
 		Description: actor_scovermind.description
 		IconPalette: windows256
@@ -3256,13 +3256,13 @@ SCOVERMIND:
 	-WithDeathAnimation:
 	-ToggleConditionOnOrder:
 	SpawnActorOnDeath@death1:
-		Actor: SCOVERLORD
+		Actor: zerg_overlord
 	SpawnActorOnDeath@death2:
-		Actor: SCOVERLORD
+		Actor: zerg_overlord
 	SpawnActorOnDeath@death3:
-		Actor: SCOVERLORD
+		Actor: zerg_overlord
 
-SCINFESTEDCOMMANDCENTER:
+zerg_infestedcommandcenter:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Inherits@supply: ^SCUnitProduction
@@ -3278,7 +3278,7 @@ SCINFESTEDCOMMANDCENTER:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 8020
-		Prerequisites: ~schatchery, scovermind
+		Prerequisites: ~zerg_hatchery, zerg_overmind
 		Queue: Building, RABuilding
 		Description: actor_scinfestedcommandcenter.description
 		IconPalette: windows256
@@ -6168,7 +6168,7 @@ terran_promotion_unlockphobos:
 
 ### Assault Tree
 
-uptalon:
+zerg_promotion_unlocktalon:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Talon
@@ -6176,12 +6176,12 @@ uptalon:
 		BuildPaletteOrder: 8045
 		Queue: Promotions
 		Description: actor_uptalon.description
-		Prerequisites: ~schatchery, !uptalon, rank1
+		Prerequisites: ~zerg_hatchery, !zerg_promotion_unlocktalon, rank1
 	RenderSprites:
-		Image: sctalon
+		Image: zerg_talon
 	ProvidesPrerequisite:
 
-upspithid:
+zerg_promotion_unlockspithid:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Spithid
@@ -6189,12 +6189,12 @@ upspithid:
 		BuildPaletteOrder: 8048
 		Queue: Promotions
 		Description: actor_upspithid.description
-		Prerequisites: ~schatchery, uptalon, !upspithid, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlocktalon, !zerg_promotion_unlockspithid, rank1
 	RenderSprites:
-		Image: scspithid
+		Image: zerg_spithid
 	ProvidesPrerequisite:
 
-upshriek:
+zerg_promotion_unlockshriek:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Shriek
@@ -6202,12 +6202,12 @@ upshriek:
 		BuildPaletteOrder: 8051
 		Queue: Promotions
 		Description: actor_upshriek.description
-		Prerequisites: ~schatchery, upspithid, !upshriek, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockspithid, !zerg_promotion_unlockshriek, rank1
 	RenderSprites:
-		Image: scshriek
+		Image: zerg_shriek
 	ProvidesPrerequisite:
 
-upswarmling:
+zerg_promotion_unlockswarmling:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Swarmling
@@ -6215,14 +6215,14 @@ upswarmling:
 		BuildPaletteOrder: 8054
 		Queue: Promotions
 		Description: actor_upswarmling.description
-		Prerequisites: ~schatchery, upshriek, !upswarmling, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockshriek, !zerg_promotion_unlockswarmling, rank1
 	RenderSprites:
-		Image: scswarmling
+		Image: zerg_swarmling
 	ProvidesPrerequisite:
 
 ### Assault Tree
 
-upsporemaw:
+zerg_promotion_unlocksporemaw:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Sporemaw
@@ -6230,12 +6230,12 @@ upsporemaw:
 		BuildPaletteOrder: 8046
 		Queue: Promotions
 		Description: actor_upsporemaw.description
-		Prerequisites: ~schatchery, !upsporemaw, rank1
+		Prerequisites: ~zerg_hatchery, !zerg_promotion_unlocksporemaw, rank1
 	RenderSprites:
-		Image: scsporemaw
+		Image: zerg_sporemaw
 	ProvidesPrerequisite:
 
-upgoremaw:
+zerg_promotion_unlockgoremaw:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Goremaw
@@ -6243,12 +6243,12 @@ upgoremaw:
 		BuildPaletteOrder: 8049
 		Queue: Promotions
 		Description: actor_upgoremaw.description
-		Prerequisites: ~schatchery, upsporemaw, !upgoremaw, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlocksporemaw, !zerg_promotion_unlockgoremaw, rank1
 	RenderSprites:
-		Image: scgoremaw
+		Image: zerg_goremaw
 	ProvidesPrerequisite:
 
-upgorekraken:
+zerg_promotion_unlockgorekraken:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Gorekraken
@@ -6256,12 +6256,12 @@ upgorekraken:
 		BuildPaletteOrder: 8052
 		Queue: Promotions
 		Description: actor_upgorekraken.description
-		Prerequisites: ~schatchery, upgoremaw, !upgorekraken, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockgoremaw, !zerg_promotion_unlockgorekraken, rank1
 	RenderSprites:
-		Image: scgorekraken
+		Image: zerg_gorekraken
 	ProvidesPrerequisite:
 
-uphermit:
+zerg_promotion_unlockhermit:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Hermit
@@ -6269,14 +6269,14 @@ uphermit:
 		BuildPaletteOrder: 8055
 		Queue: Promotions
 		Description: actor_uphermit.description
-		Prerequisites: ~schatchery, upgorekraken, !uphermit, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockgorekraken, !zerg_promotion_unlockhermit, rank1
 	RenderSprites:
-		Image: schermit
+		Image: zerg_hermit
 	ProvidesPrerequisite:
 
 ### Support Tree
 
-upbroodweaver:
+zerg_promotion_unlockbroodweaver:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Broodweaver
@@ -6284,12 +6284,12 @@ upbroodweaver:
 		BuildPaletteOrder: 8047
 		Queue: Promotions
 		Description: actor_upbroodweaver.description
-		Prerequisites: ~schatchery, !upbroodweaver, rank1
+		Prerequisites: ~zerg_hatchery, !zerg_promotion_unlockbroodweaver, rank1
 	RenderSprites:
-		Image: scbroodweaver
+		Image: zerg_broodweaver
 	ProvidesPrerequisite:
 
-upcorruptor:
+zerg_promotion_unlockcorruptor:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Corruptor
@@ -6297,12 +6297,12 @@ upcorruptor:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
 		Description: actor_upcorruptor.description
-		Prerequisites: ~schatchery, upbroodweaver, !upcorruptor, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockbroodweaver, !zerg_promotion_unlockcorruptor, rank1
 	RenderSprites:
-		Image: sccorruptor
+		Image: zerg_corruptor
 	ProvidesPrerequisite:
 
-updreadshroud:
+zerg_promotion_unlockdreadshroud:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Dreadshroud
@@ -6310,12 +6310,12 @@ updreadshroud:
 		BuildPaletteOrder: 8053
 		Queue: Promotions
 		Description: actor_updreadshroud.description
-		Prerequisites: ~schatchery, upcorruptor, !updreadshroud, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockcorruptor, !zerg_promotion_unlockdreadshroud, rank1
 	RenderSprites:
-		Image: scdreadshroud
+		Image: zerg_dreadshroud
 	ProvidesPrerequisite:
 
-upbehemoth:
+zerg_promotion_unlockbehemoth:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Behemoth
@@ -6323,9 +6323,9 @@ upbehemoth:
 		BuildPaletteOrder: 8056
 		Queue: Promotions
 		Description: actor_upbehemoth.description
-		Prerequisites: ~schatchery, updreadshroud, !upbehemoth, rank1
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockdreadshroud, !zerg_promotion_unlockbehemoth, rank1
 	RenderSprites:
-		Image: scbehemoth
+		Image: zerg_behemoth
 	ProvidesPrerequisite:
 
 ####################################################################################################
@@ -8676,9 +8676,9 @@ upidol:
 		Multiplier: 1000
 		Prerequisites: supplylimit
 		Queue: SCZergInfantry
-	ProductionTimeMultiplier@scovermind:
+	ProductionTimeMultiplier@zerg_overmind:
 		Multiplier: 50
-		Prerequisites: scovermind
+		Prerequisites: zerg_overmind
 		Queue: SCZergInfantry
 	Mobile:
 		Locomotor: chem
@@ -8732,12 +8732,12 @@ upidol:
 		Multiplier: 1000
 		Prerequisites: supplylimit
 		Queue: SCZergInfantry
-	ProductionTimeMultiplier@scovermind:
+	ProductionTimeMultiplier@zerg_overmind:
 		Multiplier: 50
-		Prerequisites: scovermind
+		Prerequisites: zerg_overmind
 		Queue: SCZergInfantry
 
-SCDRONE:
+zerg_drone:
 	Inherits: ^Vehicle
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -8753,7 +8753,7 @@ SCDRONE:
 		Name: Zerg Drone
 	Buildable:
 		Queue: SCZergInfantry
-		Prerequisites: ~scextractor
+		Prerequisites: ~zerg_extractor
 		Description: actor_scdrone.description
 	WithDeathAnimation:
 		UseDeathTypeSuffix: false
@@ -8768,11 +8768,11 @@ SCDRONE:
 		RequiresCondition: undeployed
 	WithIdleOverlay@deployed:
 		RequiresCondition: deployed
-		Image: scdrone
+		Image: zerg_drone
 		Sequence: deployed
 		Palette: greyscale
 	WithHarvesterSpriteBody:
-		ImageByFullness: scdrone, scdronefull
+		ImageByFullness: zerg_drone, scdronefull
 	-WithFacingSpriteBody:
 	-WithInfantryBody:
 	-Targetable@disguise:
@@ -8788,9 +8788,9 @@ SCDRONE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
-SCOVERLORD:
+zerg_overlord:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -8806,7 +8806,7 @@ SCOVERLORD:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 0
-		Prerequisites: ~schatchery
+		Prerequisites: ~zerg_hatchery
 		Queue: SCZergInfantry
 		Description: actor_scoverlord.description
 	Aircraft:
@@ -8830,18 +8830,18 @@ SCOVERLORD:
 		Amount: 200
 	StoresResources:
 		Capacity: 1000
-	PowerMultiplier@scovermind:
+	PowerMultiplier@zerg_overmind:
 		Modifier: 200
-		RequiresCondition: scovermind
-	GrantConditionOnPrerequisite@scovermind:
-		Condition: scovermind
-		Prerequisites: scovermind
+		RequiresCondition: zerg_overmind
+	GrantConditionOnPrerequisite@zerg_overmind:
+		Condition: zerg_overmind
+		Prerequisites: zerg_overmind
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
 		Priority: 5
 		PriorityModifiers: Ctrl, Alt
-		Class: scoverlord
+		Class: zerg_overlord
 	Voiced:
 		VoiceSet: SCOverlordVoice
 	Wanders:
@@ -8859,12 +8859,12 @@ SCOVERLORD:
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
-	GrantConditionOnPrerequisite@upoverlordspeed:
-		Condition: upoverlordspeed
-		Prerequisites: upoverlordspeed
-	SpeedMultiplier@upoverlordspeed:
+	GrantConditionOnPrerequisite@zerg_upgrade_pneumatizedcarapace:
+		Condition: zerg_upgrade_pneumatizedcarapace
+		Prerequisites: zerg_upgrade_pneumatizedcarapace
+	SpeedMultiplier@zerg_upgrade_pneumatizedcarapace:
 		Modifier: 150
-		RequiresCondition: upoverlordspeed
+		RequiresCondition: zerg_upgrade_pneumatizedcarapace
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -8876,9 +8876,9 @@ SCOVERLORD:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerarmor, upflyerarmor2, upoverlordspeed, scovermind
+		Upgrades: zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_pneumatizedcarapace, zerg_overmind
 
-SCBROODWEAVER:
+zerg_broodweaver:
 	Inherits: ^AirZerg
 	Inherits@Template: ^UnarmedTransportHelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -8899,10 +8899,10 @@ SCBROODWEAVER:
 		Amount: 200
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: scoverlord
+		OverrideActor: zerg_overlord
 	Buildable:
 		BuildPaletteOrder: 0
-		Prerequisites: ~schatchery, upbroodweaver
+		Prerequisites: ~zerg_hatchery, zerg_promotion_unlockbroodweaver
 		Queue: SCZergInfantry
 		Description: actor_scbroodweaver.description
 	Aircraft:
@@ -8962,30 +8962,30 @@ SCBROODWEAVER:
 	StoresResources:
 		Capacity: 1000
 	Selectable:
-		Class: scoverlord
+		Class: zerg_overlord
 		DecorationBounds: 1280, 1280, 0, 0
 	Voiced:
 		VoiceSet: SCOverlordVoice
 	RenderSprites:
-		Image: scbroodweaver
+		Image: zerg_broodweaver
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 	WithCargoSounds:
 		EnterSounds: scoverlordgetin.wav
 		ExitSounds: scoverlordgetout.wav
-	GrantConditionOnPrerequisite@upoverlordspeed:
-		Condition: upoverlordspeed
-		Prerequisites: upoverlordspeed
-	SpeedMultiplier@upoverlordspeed:
+	GrantConditionOnPrerequisite@zerg_upgrade_pneumatizedcarapace:
+		Condition: zerg_upgrade_pneumatizedcarapace
+		Prerequisites: zerg_upgrade_pneumatizedcarapace
+	SpeedMultiplier@zerg_upgrade_pneumatizedcarapace:
 		Modifier: 150
-		RequiresCondition: upoverlordspeed
+		RequiresCondition: zerg_upgrade_pneumatizedcarapace
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerarmor, upflyerarmor2, upoverlordspeed, scovermind
+		Upgrades: zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_pneumatizedcarapace, zerg_overmind
 
-SCZERGLING:
+zerg_zergling:
 	Inherits@zerg: ^BasicZerg
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -9007,9 +9007,9 @@ SCZERGLING:
 		Amount: -10
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scspawningpool, ~!uptalon
+		Prerequisites: ~zerg_spawningpool, ~!zerg_promotion_unlocktalon
 		Queue: SCZergInfantry
-		AdditionalActors: sczergling
+		AdditionalActors: zerg_zergling
 		Description: actor_sczergling.description
 	Mobile:
 		Speed: 110
@@ -9028,13 +9028,13 @@ SCZERGLING:
 	# 	Offset: 0,0,-250
 	Voiced:
 		VoiceSet: SCZerglingVoice
-	-SpawnActorOnDeath@SCSWARMLING:
+	-SpawnActorOnDeath@zerg_swarmling:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
 
-SCTALON:
+zerg_talon:
 	Inherits@zerg: ^BasicZerg
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -9057,9 +9057,9 @@ SCTALON:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scspawningpool, ~uptalon
+		Prerequisites: ~zerg_spawningpool, ~zerg_promotion_unlocktalon
 		Queue: SCZergInfantry
-		AdditionalActors: sczergling, sczergling
+		AdditionalActors: zerg_zergling, zerg_zergling
 		Description: actor_sctalon.description
 	Mobile:
 		Speed: 160
@@ -9077,13 +9077,13 @@ SCTALON:
 	# 	Offset: 0,0,-250
 	Voiced:
 		VoiceSet: SCZerglingVoice
-	-SpawnActorOnDeath@SCSWARMLING:
+	-SpawnActorOnDeath@zerg_swarmling:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
 
-SCSPOREMAW:
+zerg_sporemaw:
 	Inherits@zerg: ^LargeZerg
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9104,7 +9104,7 @@ SCSPOREMAW:
 		Amount: -50
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~sclair, upsporemaw
+		Prerequisites: ~zerg_lair, zerg_promotion_unlocksporemaw
 		Queue: SCZergInfantry
 		Description: actor_scsporemaw.description
 	Mobile:
@@ -9138,9 +9138,9 @@ SCSPOREMAW:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
-SCHYDRALISK:
+zerg_hydralisk:
 	Inherits@zerg: ^LargeZerg
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9161,7 +9161,7 @@ SCHYDRALISK:
 		Amount: -25
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~schydraliskden
+		Prerequisites: ~zerg_hydraliskden
 		Queue: SCZergInfantry
 		Description: actor_schydralisk.description
 	Mobile:
@@ -9192,9 +9192,9 @@ SCHYDRALISK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
 
-SCSPITHID:
+zerg_spithid:
 	Inherits@zerg: ^BasicZerg
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^ScoutInfantryTemplate
@@ -9217,7 +9217,7 @@ SCSPITHID:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~schydraliskden, ~upspithid
+		Prerequisites: ~zerg_hydraliskden, ~zerg_promotion_unlockspithid
 		Queue: SCZergInfantry
 		Description: actor_scspithid.description
 	Mobile:
@@ -9251,9 +9251,9 @@ SCSPITHID:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
 
-SCDREADSHROUD:
+zerg_dreadshroud:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9272,7 +9272,7 @@ SCDREADSHROUD:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~scspire,, ~updreadshroud
+		Prerequisites: ~zerg_spire,, ~zerg_promotion_unlockdreadshroud
 		Queue: SCZergInfantry
 		Description: actor_scdreadshroud.description
 	Aircraft:
@@ -9300,9 +9300,9 @@ SCDREADSHROUD:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCCORRUPTOR:
+zerg_corruptor:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9321,7 +9321,7 @@ SCCORRUPTOR:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~scgreaterspire, ~upcorruptor
+		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_unlockcorruptor
 		Queue: SCZergInfantry
 		Description: actor_sccorruptor.description
 	Aircraft:
@@ -9355,9 +9355,9 @@ SCCORRUPTOR:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCSWARMLING:
+zerg_swarmling:
 	Inherits: ^AirZerg
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9376,7 +9376,7 @@ SCSWARMLING:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: scgreaterspire, ~schive, upswarmling
+		Prerequisites: zerg_greaterspire, ~zerg_hive, zerg_promotion_unlockswarmling
 		Queue: SCZergInfantry
 		Description: actor_scswarmling.description
 	Aircraft:
@@ -9602,9 +9602,9 @@ SCSWARMLING:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCSHRIEK:
+zerg_shriek:
 	Inherits: ^AirZerg
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^FlyingInfantryTemplate
@@ -9625,7 +9625,7 @@ SCSHRIEK:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~scspire, ~upshriek
+		Prerequisites: ~zerg_spire, ~zerg_promotion_unlockshriek
 		Queue: SCZergInfantry
 		Description: actor_scshriek.description
 	Aircraft:
@@ -9660,9 +9660,9 @@ SCSHRIEK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upflyerarmor, upflyerarmor2, uplingattack, uplingspeed
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
 
-SCMUTALISK:
+zerg_mutalisk:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9680,7 +9680,7 @@ SCMUTALISK:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~scspire
+		Prerequisites: ~zerg_spire
 		Queue: SCZergInfantry
 		Description: actor_scmutalisk.description
 	Aircraft:
@@ -9722,9 +9722,9 @@ SCMUTALISK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCDEVOURER:
+zerg_devourer:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9743,7 +9743,7 @@ SCDEVOURER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~scgreaterspire
+		Prerequisites: ~zerg_greaterspire
 		Queue: SCZergInfantry
 		Description: actor_scdevourer.description
 	Aircraft:
@@ -9769,9 +9769,9 @@ SCDEVOURER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCSCOURGE:
+zerg_scourge:
 	Inherits: ^AirZerg
 	Inherits@ZergDoubleSpawner: ^ZergDoubleSpawner
 	Inherits@Template: ^FighterTemplate
@@ -9794,7 +9794,7 @@ SCSCOURGE:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~scspire
+		Prerequisites: ~zerg_spire
 		Queue: SCZergInfantry
 		Description: actor_scscourge.description
 	Aircraft:
@@ -9827,9 +9827,9 @@ SCSCOURGE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCQUEEN:
+zerg_queen:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9846,7 +9846,7 @@ SCQUEEN:
 		Amount: -60
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~scqueensnest
+		Prerequisites: ~zerg_queensnest
 		Queue: SCZergInfantry
 		Description: actor_scqueen.description
 	Aircraft:
@@ -9885,9 +9885,9 @@ SCQUEEN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCGUARDIAN:
+zerg_guardian:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -9904,7 +9904,7 @@ SCGUARDIAN:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scgreaterspire
+		Prerequisites: ~zerg_greaterspire
 		Queue: SCZergInfantry
 		Description: actor_scguardian.description
 	Aircraft:
@@ -9929,9 +9929,9 @@ SCGUARDIAN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCULTRALISK:
+zerg_ultralisk:
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -9950,7 +9950,7 @@ SCULTRALISK:
 		Amount: -220
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~scultraliskcavern
+		Prerequisites: ~zerg_ultraliskcavern
 		Queue: SCZergInfantry
 		Description: actor_scultralisk.description
 	Mobile:
@@ -9985,9 +9985,9 @@ SCULTRALISK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
-SCGOREKRAKEN:
+zerg_gorekraken:
 	Inherits: ^AirZerg
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -10005,7 +10005,7 @@ SCGOREKRAKEN:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scgreaterspire, ~upgorekraken
+		Prerequisites: ~zerg_greaterspire, ~zerg_promotion_unlockgorekraken
 		Queue: SCZergInfantry
 		Description: actor_scgorekraken.description
 	Aircraft:
@@ -10037,9 +10037,9 @@ SCGOREKRAKEN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
-SCHERMIT:
+zerg_hermit:
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -10061,7 +10061,7 @@ SCHERMIT:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 80
-		Prerequisites: ~scultraliskcavern, ~uphermit
+		Prerequisites: ~zerg_ultraliskcavern, ~zerg_promotion_unlockhermit
 		Queue: SCZergInfantry
 		Description: actor_schermit.description
 	Mobile:
@@ -10101,9 +10101,9 @@ SCHERMIT:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2, upzergrange
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
 
-SCGOREMAW:
+zerg_goremaw:
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -10125,7 +10125,7 @@ SCGOREMAW:
 		Amount: -75
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: scultraliskcavern, ~schive, upgoremaw
+		Prerequisites: zerg_ultraliskcavern, ~zerg_hive, zerg_promotion_unlockgoremaw
 		Queue: SCZergInfantry
 		Description: actor_scgoremaw.description
 	Mobile:
@@ -10164,9 +10164,9 @@ SCGOREMAW:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
 
-SCLURKER:
+zerg_lurker:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@zerg: ^VeryLargeZerg
 	Inherits@Template: ^FireSupportTemplate
@@ -10187,7 +10187,7 @@ SCLURKER:
 		Amount: -65
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: schydraliskden, scevolutionchamber, ~sclair
+		Prerequisites: zerg_hydraliskden, zerg_evolutionchamber, ~zerg_lair
 		Queue: SCZergInfantry
 		Description: actor_sclurker.description
 	Mobile:
@@ -10247,9 +10247,9 @@ SCLURKER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, upzergrange
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_groovedspines
 
-SCINFESTEDTERRAN:
+zerg_infestedterranbomber:
 	Inherits@zerg: ^BasicZerg
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -10266,7 +10266,7 @@ SCINFESTEDTERRAN:
 		Amount: -20
 	Buildable:
 		BuildPaletteOrder: 8010
-		Prerequisites: ~scinfestedcommandcenter
+		Prerequisites: ~zerg_infestedcommandcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_scinfestedterran.description
 	Mobile:
@@ -10299,9 +10299,9 @@ SCINFESTEDTERRAN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
-SCDEFILER:
+zerg_defiler:
 	Inherits: ^LargeZerg
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -10320,7 +10320,7 @@ SCDEFILER:
 		Amount: -70
 	Buildable:
 		BuildPaletteOrder: 8020
-		Prerequisites: ~scdefilermound
+		Prerequisites: ~zerg_defilermound
 		Queue: SCZergInfantry
 		Description: actor_scdefiler.description
 	Mobile:
@@ -10356,7 +10356,7 @@ SCDEFILER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmissile, upzergmissile2, upcarapace, upcarapace2
+		Upgrades: zerg_upgrade_missileattackslevel1, zerg_upgrade_missileattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
 DARKSWARM:
 	Inherits@1: ^ExistsInWorld
@@ -10429,13 +10429,13 @@ SCBROODLING:
 		Delay: 1
 		StartIfBelow: 150
 	-ActorLostNotification:
-	-SpawnActorOnDeath@SCSWARMLING:
+	-SpawnActorOnDeath@zerg_swarmling:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
-SCKERRIGANZERG:
+zerg_kerrigan:
 	Inherits: ^LargeZerg
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -10452,7 +10452,7 @@ SCKERRIGANZERG:
 		Amount: -200
 	Buildable:
 		BuildPaletteOrder: 8040
-		Prerequisites: ~scqueensnest
+		Prerequisites: ~zerg_queensnest
 		Queue: SCZergInfantry
 		Description: actor_sckerriganzerg.description
 		BuildLimit: 1
@@ -10467,7 +10467,7 @@ SCKERRIGANZERG:
 		ScanRadius: 10
 		InitialStance: AttackAnything
 	Armament:
-		Weapon: SCKERRIGANZERG
+		Weapon: zerg_kerrigan
 		LocalOffset: 341,-120,128
 		FireDelay: 3
 		MuzzleSequence: muzzle
@@ -10496,9 +10496,9 @@ SCKERRIGANZERG:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upzergmelee, upzergmelee2, upcarapace, upcarapace2, uplingattack, uplingspeed
+		Upgrades: zerg_upgrade_meleeattackslevel1, zerg_upgrade_meleeattackslevel2, zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2, zerg_upgrade_adrenalglands, zerg_upgrade_metabolicboost
 
-SCZMCV:
+zerg_hatcherydrone:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
@@ -10507,14 +10507,14 @@ SCZMCV:
 	Buildable:
 		Queue: SCZergInfantry
 		Description: actor_sczmcv.description
-		Prerequisites: ~scevolutionchamber
+		Prerequisites: ~zerg_evolutionchamber
 	Tooltip:
 		Name: Zerg Hatchery Drone
 	Selectable:
 		Priority: 4
 		DecorationBounds: 1536, 1536
 	Transforms:
-		IntoActor: schatchery
+		IntoActor: zerg_hatchery
 		Offset: -1,-1
 		Facing: 432
 		TransformSounds: zchrdy00.aud
@@ -10528,9 +10528,9 @@ SCZMCV:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upcarapace, upcarapace2
+		Upgrades: zerg_upgrade_carapacelevel1, zerg_upgrade_carapacelevel2
 
-SCBEHEMOTH:
+zerg_behemoth:
 	Inherits: ^AirZerg
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
@@ -10554,7 +10554,7 @@ SCBEHEMOTH:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 20
-		Prerequisites: ~sclair, upbehemoth
+		Prerequisites: ~zerg_lair, zerg_promotion_unlockbehemoth
 		Queue: SCZergInfantry
 		Description: actor_scbehemoth.description
 	Aircraft:
@@ -10578,7 +10578,7 @@ SCBEHEMOTH:
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 0
 		LoadedCondition: loaded
-		InitialUnits: scspithid, schydralisk, schydralisk, scspithid, scspithid, schydralisk, schydralisk, scspithid
+		InitialUnits: zerg_spithid, zerg_hydralisk, zerg_hydralisk, zerg_spithid, zerg_spithid, zerg_hydralisk, zerg_hydralisk, zerg_spithid
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
@@ -10598,7 +10598,7 @@ SCBEHEMOTH:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: schydralisk
+		PilotActor: zerg_hydralisk
 	SpawnActorOnDeath:
 		Actor: SCBEHEMOTH.Husk
 	Selectable:
@@ -10608,7 +10608,7 @@ SCBEHEMOTH:
 		VoiceSet: SCOverlordVoice
 	DeathSounds:
 	RenderSprites:
-		Image: scbehemoth
+		Image: zerg_behemoth
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -10620,7 +10620,7 @@ SCBEHEMOTH:
 		EnterSounds: scoverlordgetin.wav
 		ExitSounds: scoverlordgetout.wav
 	ActorStatValues:
-		Upgrades: upflyerattack, upflyerattack2, upflyerarmor, upflyerarmor2
+		Upgrades: zerg_upgrade_flyerattackslevel1, zerg_upgrade_flyerattackslevel2, zerg_upgrade_flyercarapacelevel1, zerg_upgrade_flyercarapacelevel2
 
 SCBEHEMOTH.Husk:
 	Inherits: ^PlaneHusk
@@ -10644,11 +10644,11 @@ SCBEHEMOTH.Husk:
 		Explosion: HermitExplode
 	WithShadow:
 	RenderSprites:
-		Image: SCBEHEMOTH
+		Image: zerg_behemoth
 		PlayerPalette: player_rgba
 
 SCSCOURGEDRONE:
-	Inherits: SCSCOURGE
+	Inherits: zerg_scourge
 	SelectionDecorations:
 	Tooltip:
 		Name: Scourge Drone
@@ -11212,7 +11212,7 @@ terran_upgrade_shipplatinglevel2:
 	#		Upgrades Zerg
 	####################################################################################################
 
-upoverlordspeed:
+zerg_upgrade_pneumatizedcarapace:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Pneumatized Carapace
@@ -11222,12 +11222,12 @@ upoverlordspeed:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upoverlordspeed.description
-		Prerequisites: ~schatchery, ~!upoverlordspeed
+		Prerequisites: ~zerg_hatchery, ~!zerg_upgrade_pneumatizedcarapace
 	RenderSprites:
-		Image: upoverlordspeed
+		Image: zerg_upgrade_pneumatizedcarapace
 	ProvidesPrerequisite:
 
-uplingspeed:
+zerg_upgrade_metabolicboost:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Metabolic Boost
@@ -11237,12 +11237,12 @@ uplingspeed:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_uplingspeed.description
-		Prerequisites: ~scspawningpool, scevolutionchamber, ~!uplingspeed
+		Prerequisites: ~zerg_spawningpool, zerg_evolutionchamber, ~!zerg_upgrade_metabolicboost
 	RenderSprites:
-		Image: uplingspeed
+		Image: zerg_upgrade_metabolicboost
 	ProvidesPrerequisite:
 
-uplingattack:
+zerg_upgrade_adrenalglands:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Adrenal Glands
@@ -11252,12 +11252,12 @@ uplingattack:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_uplingattack.description
-		Prerequisites: ~scevolutionchamber, ~!uplingattack
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_adrenalglands
 	RenderSprites:
-		Image: uplingattack
+		Image: zerg_upgrade_adrenalglands
 	ProvidesPrerequisite:
 
-upzergrange:
+zerg_upgrade_groovedspines:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Grooved Spines
@@ -11267,12 +11267,12 @@ upzergrange:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upzergrange.description
-		Prerequisites: ~schydraliskden, ~!upzergrange
+		Prerequisites: ~zerg_hydraliskden, ~!zerg_upgrade_groovedspines
 	RenderSprites:
-		Image: upzergrange
+		Image: zerg_upgrade_groovedspines
 	ProvidesPrerequisite:
 
-upzergmelee:
+zerg_upgrade_meleeattackslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Melee Attacks Level 1
@@ -11282,12 +11282,12 @@ upzergmelee:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upzergmelee.description
-		Prerequisites: ~scevolutionchamber, ~!upzergmelee
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_meleeattackslevel1
 	RenderSprites:
-		Image: upzergmelee
+		Image: zerg_upgrade_meleeattackslevel1
 	ProvidesPrerequisite:
 
-upzergmelee2:
+zerg_upgrade_meleeattackslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Melee Attacks Level 2
@@ -11297,12 +11297,12 @@ upzergmelee2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upzergmelee2.description
-		Prerequisites: scevolutionchamber, ~schive, upzergmelee, ~!upzergmelee2
+		Prerequisites: zerg_evolutionchamber, ~zerg_hive, zerg_upgrade_meleeattackslevel1, ~!zerg_upgrade_meleeattackslevel2
 	RenderSprites:
-		Image: upzergmelee
+		Image: zerg_upgrade_meleeattackslevel1
 	ProvidesPrerequisite:
 
-upzergmissile:
+zerg_upgrade_missileattackslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Missile Attacks Level 1
@@ -11312,12 +11312,12 @@ upzergmissile:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upzergmissile.description
-		Prerequisites: ~scevolutionchamber, ~!upzergmissile
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_missileattackslevel1
 	RenderSprites:
-		Image: upzergmissile
+		Image: zerg_upgrade_missileattackslevel1
 	ProvidesPrerequisite:
 
-upzergmissile2:
+zerg_upgrade_missileattackslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Missile Attacks Level 2
@@ -11327,12 +11327,12 @@ upzergmissile2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upzergmissile2.description
-		Prerequisites: scevolutionchamber, ~schive, upzergmissile, ~!upzergmissile2
+		Prerequisites: zerg_evolutionchamber, ~zerg_hive, zerg_upgrade_missileattackslevel1, ~!zerg_upgrade_missileattackslevel2
 	RenderSprites:
-		Image: upzergmissile
+		Image: zerg_upgrade_missileattackslevel1
 	ProvidesPrerequisite:
 
-upcarapace:
+zerg_upgrade_carapacelevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Carapace Level 1
@@ -11342,12 +11342,12 @@ upcarapace:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upcarapace.description
-		Prerequisites: ~scevolutionchamber, ~!upcarapace
+		Prerequisites: ~zerg_evolutionchamber, ~!zerg_upgrade_carapacelevel1
 	RenderSprites:
-		Image: upcarapace
+		Image: zerg_upgrade_carapacelevel1
 	ProvidesPrerequisite:
 
-upcarapace2:
+zerg_upgrade_carapacelevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Carapace Level 2
@@ -11357,12 +11357,12 @@ upcarapace2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upcarapace2.description
-		Prerequisites: scevolutionchamber, ~schive, upcarapace, ~!upcarapace2
+		Prerequisites: zerg_evolutionchamber, ~zerg_hive, zerg_upgrade_carapacelevel1, ~!zerg_upgrade_carapacelevel2
 	RenderSprites:
-		Image: upcarapace
+		Image: zerg_upgrade_carapacelevel1
 	ProvidesPrerequisite:
 
-upflyerattack:
+zerg_upgrade_flyerattackslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Flyer Attacks Level 1
@@ -11372,12 +11372,12 @@ upflyerattack:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upflyerattack.description
-		Prerequisites: ~scspire, ~!upflyerattack
+		Prerequisites: ~zerg_spire, ~!zerg_upgrade_flyerattackslevel1
 	RenderSprites:
-		Image: upflyerattack
+		Image: zerg_upgrade_flyerattackslevel1
 	ProvidesPrerequisite:
 
-upflyerattack2:
+zerg_upgrade_flyerattackslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Flyer Attacks Level 2
@@ -11387,12 +11387,12 @@ upflyerattack2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upflyerattack2.description
-		Prerequisites: scspire, ~schive, upflyerattack, ~!upflyerattack2
+		Prerequisites: zerg_spire, ~zerg_hive, zerg_upgrade_flyerattackslevel1, ~!zerg_upgrade_flyerattackslevel2
 	RenderSprites:
-		Image: upflyerattack
+		Image: zerg_upgrade_flyerattackslevel1
 	ProvidesPrerequisite:
 
-upflyerarmor:
+zerg_upgrade_flyercarapacelevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Flyer Carapace Level 1
@@ -11402,12 +11402,12 @@ upflyerarmor:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upflyerarmor.description
-		Prerequisites: ~scspire, ~!upflyerarmor
+		Prerequisites: ~zerg_spire, ~!zerg_upgrade_flyercarapacelevel1
 	RenderSprites:
-		Image: upflyerarmor
+		Image: zerg_upgrade_flyercarapacelevel1
 	ProvidesPrerequisite:
 
-upflyerarmor2:
+zerg_upgrade_flyercarapacelevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Flyer Carapace Level 2
@@ -11417,9 +11417,9 @@ upflyerarmor2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upflyerarmor2.description
-		Prerequisites: scspire, ~schive, upflyerarmor, ~!upflyerarmor2
+		Prerequisites: zerg_spire, ~zerg_hive, zerg_upgrade_flyercarapacelevel1, ~!zerg_upgrade_flyercarapacelevel2
 	RenderSprites:
-		Image: upflyerarmor
+		Image: zerg_upgrade_flyercarapacelevel1
 	ProvidesPrerequisite:
 ####################################################################################################
 #		XELNAGA BOSS

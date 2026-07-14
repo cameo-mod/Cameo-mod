@@ -2055,8 +2055,8 @@
 		Probability: 100
 		OwnerType: Killer
 		DeathType: QueenBroodlingSpawn
-	SpawnActorOnDeath@SCSWARMLING:
-		Actor: SCSWARMLING
+	SpawnActorOnDeath@zerg_swarmling:
+		Actor: zerg_swarmling
 		Probability: 100
 		OwnerType: Killer
 		DeathType: SwarmlingSpawn
@@ -2883,7 +2883,7 @@
 			shoe.nax: battlefortresspassenger
 			steel_consortium_poseidontank: battlefortresspassenger
 			terran_pythean: battlefortresspassenger
-			scbehemoth: battlefortresspassenger
+			zerg_behemoth: battlefortresspassenger
 			forgotten_m113adats: battlefortresspassenger
 			tkmbattlebus: battlefortresspassenger
 			forgotten_nomadbarracks: battlefortresspassenger
@@ -8833,7 +8833,7 @@ CPQDEBUGDUMMY:
 			# tscyborgc: fv-hvmg
 			# forgotten_mutant: ifv-mg
 			# forgotten_mutantsoldier: ifv-mg
-			# sczergling: ifv-mg
+			# zerg_zergling: ifv-mg
 			# gle1: ifv-mg
 			# che1: ifv-mg
 			# usae1: ifv-mg
@@ -8928,7 +8928,7 @@ CPQDEBUGDUMMY:
 			# ra2_allies_chronolegionnaire: ifv-chrono
 			# ra2_soviets_crazyivan: ifv-demo
 			# ra2terror: ifv-demo
-			# scinfestedterran: ifv-demo
+			# zerg_infestedterranbomber: ifv-demo
 			# glterror: ifv-demo
 			# swe1: ifv-litlaser
 			# swe1troop: ifv-litlaser

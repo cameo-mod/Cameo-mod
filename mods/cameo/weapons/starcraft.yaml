@@ -2204,7 +2204,7 @@ ScourgeExplosion:
 	Range: 2000
 	Projectile: Missile
 		Speed: 200
-		Image: scscourge
+		Image: zerg_scourge
 	Warhead@Effect: CreateEffect
 		Explosions: scscourgeexplosion
 		ValidTargets: Air
@@ -2252,7 +2252,7 @@ ScourgeDroneExplosion:
 	Range: 2000
 	Projectile: Missile
 		Speed: 200
-		Image: scscourge
+		Image: zerg_scourge
 	Warhead@Effect: CreateEffect
 		Explosions: scscourgeexplosion
 		ValidTargets: Ground, Water, Air
@@ -2989,7 +2989,7 @@ InterceptorCannon:
 		ValidTargets: Ground, Water, Air
 		Damage: 2
 
-SCKERRIGANZERG:
+zerg_kerrigan:
 	Inherits: ^SwordWeapon
 	Range: 2225
 	ReloadDelay: 20
