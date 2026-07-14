@@ -573,8 +573,8 @@ CabalArtilleryWalkerShellUpgraded:
 		Damage: 4
 
 CabalHunterKillerLasers:
-	Inherits: ^SmallArms
-	Inherits@2: ^LaserWeapon
+	Inherits: ^LaserWeapon
+	Inherits@2: ^MediumMissile
 	ReloadDelay: 24
 	Projectile: LaserZap
 		Width: 50
@@ -586,19 +586,41 @@ CabalHunterKillerLasers:
 		SecondaryBeamColor: 222244CC
 	Report: lastur1.aud
 	Range: 5318
-	Warhead@SmallArms: SpreadDamage
+	ValidTargets: Ground, Water, Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
-	Warhead@SmallArmsPercentage: HealthPercentageDamage
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 8000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
 		Damage: 4
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_s
 		Explosions: idle
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
+
+CabalHunterKillerLasersElite:
+	Inherits: CabalHunterKillerLasers
+	ReloadDelay: 20
+	Range: 6000
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@LaserWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
 
 CabalHunterKillerHeavyLaser:
 	Inherits: ^LaserWeapon
