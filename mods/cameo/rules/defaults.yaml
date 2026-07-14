@@ -2881,7 +2881,7 @@
 			scrapcar2_driveby.latin: battlefortresspassenger
 			zombietank.nax: battlefortresspassenger
 			shoe.nax: battlefortresspassenger
-			potnk.steel: battlefortresspassenger
+			steel_consortium_poseidontank: battlefortresspassenger
 			scpythean: battlefortresspassenger
 			scbehemoth: battlefortresspassenger
 			forgotten_m113adats: battlefortresspassenger
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2_allies_airforcecommandhq,ra2_soviet_airfield,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2_allies_airforcecommandhq,ra2_soviet_airfield,cgairf.asian,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -7085,12 +7085,12 @@ CPQDEBUGDUMMY:
 	DamageMultiplier@shielded:
 		RequiresCondition: shielded && !shieldpermanent
 		Modifier: 150
-	DamageMultiplier@up_shielresistance.steel:
-		RequiresCondition: up_shielresistance.steel && shielded
+	DamageMultiplier@steel_consortium_upgrade_shieldresistance:
+		RequiresCondition: steel_consortium_upgrade_shieldresistance && shielded
 		Modifier: 75
-	GrantConditionOnPrerequisite@up_shielresistance.steel:
-		Condition: up_shielresistance.steel
-		Prerequisites: up_shielresistance.steel
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_shieldresistance:
+		Condition: steel_consortium_upgrade_shieldresistance
+		Prerequisites: steel_consortium_upgrade_shieldresistance
 	ExternalCondition@shieldhit:
 		Condition: shieldhit
 	WithIdleOverlay@shield1:

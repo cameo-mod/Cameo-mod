@@ -632,7 +632,7 @@ javelinsoldier.futu:
 		Filename: futu_javelinsoldiericon.png
 
 fedeng.futu:
-	Inherits: fedeng.steel
+	Inherits: steel_consortium_engineer
 	icon:
 		Filename: futu_engiicon.png
 		Scale: 1
@@ -1247,17 +1247,17 @@ blackwidow.futu:
 
 twister.futu:
 	idle:
-		Filename: steel_twister.shp
+		Filename: steel_consortium_twister_steel_twister.shp
 		Facings: -8
 		#InterpolatedFacings: 16
 		Length: 12
 	move:
-		Filename: steel_twister.shp
+		Filename: steel_consortium_twister_steel_twister.shp
 		Facings: -8
 		#InterpolatedFacings: 16
 		Length: 12
 	icon:
-		Filename: steel_twister_icon.shp
+		Filename: steel_consortium_twister_icon.shp
 
 harbinger.futu:
 	Defaults:

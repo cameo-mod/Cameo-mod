@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: consortium
-		BaseActor: qmcv.steel
+		BaseActor: steel_consortium_consortiummobileconstructionvehicle
 	StartingUnits@defaultconsortium:
 		Class: light
 		ClassName: Light Support
 		Factions: consortium
-		BaseActor: qmcv.steel
-		SupportActors: fedinf.steel,fedinf.steel,fedinf.steel,qinf.steel,qinf.steel,manta.steel,arty.steel
+		BaseActor: steel_consortium_consortiummobileconstructionvehicle
+		SupportActors: steel_consortium_clonetrooper,steel_consortium_clonetrooper,steel_consortium_clonetrooper,steel_consortium_quantummissiletrooper,steel_consortium_quantummissiletrooper,steel_consortium_manta,steel_consortium_hammerheadartillerytank
 	StartingUnits@heavyconsortium:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: consortium
-		BaseActor: qmcv.steel
-		SupportActors: fedinf.steel,fedinf.steel,fedinf.steel,qinf.steel,qinf.steel,manta.steel,quantumtank.steel,quantumtank.steel,quantumtank.steel,quantumtank.steel,manta.steel
+		BaseActor: steel_consortium_consortiummobileconstructionvehicle
+		SupportActors: steel_consortium_clonetrooper,steel_consortium_clonetrooper,steel_consortium_clonetrooper,steel_consortium_quantummissiletrooper,steel_consortium_quantummissiletrooper,steel_consortium_manta,steel_consortium_quantumtank,steel_consortium_quantumtank,steel_consortium_quantumtank,steel_consortium_quantumtank,steel_consortium_manta

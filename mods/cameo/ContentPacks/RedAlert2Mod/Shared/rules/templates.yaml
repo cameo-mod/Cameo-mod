@@ -343,7 +343,7 @@
 ##############################################
 ^ConsortiumSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: fedeng.steel, fedinf.steel, fedinf.steel, qinf.steel
+		ActorTypes: steel_consortium_engineer, steel_consortium_clonetrooper, steel_consortium_clonetrooper, steel_consortium_quantummissiletrooper
 		RequiresCondition: !in_water
 
 ^SteelUnderwaterStructure:
@@ -364,7 +364,7 @@
 	Building:
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,Water ##########
 	SpawnActorsOnSell@in_water:
-		ActorTypes: board_inf.steel, board_inf.steel, manta.steel
+		ActorTypes: steel_consortium_hoverboardgrenadier, steel_consortium_hoverboardgrenadier, steel_consortium_manta
 		RequiresCondition: in_water
 	GrantConditionOnTerrain@Water:
 		TerrainTypes: Water
@@ -374,24 +374,24 @@
 	Armament@DroneTargeting:
 		Name: secondary
 		Weapon: GLStingerTargeting
-		RequiresCondition: up_scalpel.steel
+		RequiresCondition: steel_consortium_upgrade_scalpeldefenders
 	RenderRangeCircleCA@targeting:
 		Armaments: secondary
 		Color: FF0000
-		#RequiresCondition: up_scalpel.steel
+		#RequiresCondition: steel_consortium_upgrade_scalpeldefenders
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: scalpelMG.steel
 		ArmamentNames: secondary
 		RespawnTicks: 500
-		PauseOnCondition: disabled || !up_scalpel.steel
-		RequiresCondition: up_scalpel.steel
+		PauseOnCondition: disabled || !steel_consortium_upgrade_scalpeldefenders
+		RequiresCondition: steel_consortium_upgrade_scalpeldefenders
 		FollowAfterAttackDelay: 25
 		ShouldSpawnInitialLoad: false
-	GrantConditionOnPrerequisite@up_scalpel.steel:
-		Condition: up_scalpel.steel
-		Prerequisites: up_scalpel.steel
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_scalpeldefenders:
+		Condition: steel_consortium_upgrade_scalpeldefenders
+		Prerequisites: steel_consortium_upgrade_scalpeldefenders
 	ActorStatValues:
-		Upgrades: up_scalpel.steel
+		Upgrades: steel_consortium_upgrade_scalpeldefenders
 
 ^SteelUnderwaterTransit:
 	Cloak@underwater:
@@ -457,81 +457,81 @@
 		PlayerPalette: playerra2rot
 		Image: steel_scalpel
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
 ^SteelConsortiumPulseWeapons:
-	FirepowerMultiplier@up_pulseweapons.steel:
-		RequiresCondition: up_pulseweapons.steel
+	FirepowerMultiplier@steel_consortium_upgrade_pulseweapons:
+		RequiresCondition: steel_consortium_upgrade_pulseweapons
 		Modifier: 130
-	RangeMultiplier@up_pulseweapons.steel:
-		RequiresCondition: up_pulseweapons.steel
+	RangeMultiplier@steel_consortium_upgrade_pulseweapons:
+		RequiresCondition: steel_consortium_upgrade_pulseweapons
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_pulseweapons.steel:
-		Condition: up_pulseweapons.steel
-		Prerequisites: up_pulseweapons.steel
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_pulseweapons:
+		Condition: steel_consortium_upgrade_pulseweapons
+		Prerequisites: steel_consortium_upgrade_pulseweapons
 	ActorStatValues:
-		Upgrades: up_pulseweapons.steel
+		Upgrades: steel_consortium_upgrade_pulseweapons
 
 ^SteelConsortiumNaniteInfusion:
-	DamageMultiplier@up_naniteinfusion.steel:
-		RequiresCondition: up_naniteinfusion.steel
+	DamageMultiplier@steel_consortium_upgrade_naniteinfusion:
+		RequiresCondition: steel_consortium_upgrade_naniteinfusion
 		Modifier: 95
-	ChangesHealth@up_naniteinfusion.steel:
+	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
 		PercentageStep: 1
 		Delay: 80
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_naniteinfusion.steel
-	ChangesHealth@up_naniteinfusion.steel:
+		RequiresCondition: steel_consortium_upgrade_naniteinfusion
+	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
 		Step: 25
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: up_naniteinfusion.steel
-	GrantConditionOnPrerequisite@up_naniteinfusion.steel:
-		Condition: up_naniteinfusion.steel
-		Prerequisites: up_naniteinfusion.steel
+		RequiresCondition: steel_consortium_upgrade_naniteinfusion
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_naniteinfusion:
+		Condition: steel_consortium_upgrade_naniteinfusion
+		Prerequisites: steel_consortium_upgrade_naniteinfusion
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion
 
 ^SteelConsortiumNaniteInfusionInfantry:
 	Inherits: ^SteelConsortiumNaniteInfusion
-	DamageMultiplier@up_naniteinfusion.steel:
+	DamageMultiplier@steel_consortium_upgrade_naniteinfusion:
 		Modifier: 90
-	ChangesHealth@up_naniteinfusion.steel:
+	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
 		Delay: 40
-	ChangesHealth@up_naniteinfusion.steel:
+	ChangesHealth@steel_consortium_upgrade_naniteinfusion:
 		Step: 50
 
 ^SteelConsortiumFerrocrete:
-	DamageMultiplier@up_ferrocrete.steel:
-		RequiresCondition: up_ferrocrete.steel
+	DamageMultiplier@steel_consortium_upgrade_ferrocretecurtain:
+		RequiresCondition: steel_consortium_upgrade_ferrocretecurtain
 		Modifier: 85
-	GrantConditionOnPrerequisite@up_ferrocrete.steel:
-		Condition: up_ferrocrete.steel
-		Prerequisites: up_ferrocrete.steel
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_ferrocretecurtain:
+		Condition: steel_consortium_upgrade_ferrocretecurtain
+		Prerequisites: steel_consortium_upgrade_ferrocretecurtain
 	ActorStatValues:
-		Upgrades: up_ferrocrete.steel
+		Upgrades: steel_consortium_upgrade_ferrocretecurtain
 
 ^SteelConsortiumResonanceAmmo:
-	FirepowerMultiplier@up_resonanceammo.steel:
-		RequiresCondition: up_resonanceammo.steel
+	FirepowerMultiplier@steel_consortium_upgrade_resonanceammo:
+		RequiresCondition: steel_consortium_upgrade_resonanceammo
 		Modifier: 50
-	RangeMultiplier@up_resonanceammo.steel:
-		RequiresCondition: up_resonanceammo.steel
+	RangeMultiplier@steel_consortium_upgrade_resonanceammo:
+		RequiresCondition: steel_consortium_upgrade_resonanceammo
 		Modifier: 110
-	GrantConditionOnPrerequisite@up_resonanceammo.steel:
-		Condition: up_resonanceammo.steel
-		Prerequisites: up_resonanceammo.steel
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_resonanceammo:
+		Condition: steel_consortium_upgrade_resonanceammo
+		Prerequisites: steel_consortium_upgrade_resonanceammo
 	ActorStatValues:
-		Upgrades: up_resonanceammo.steel
+		Upgrades: steel_consortium_upgrade_resonanceammo
 
 ^QuantumWeaponsEMP:
-	GrantConditionOnPrerequisite@up_empquantumweapons.steel:
-		Condition: up_empquantumweapons.steel
-		Prerequisites: up_empquantumweapons.steel
+	GrantConditionOnPrerequisite@steel_consortium_upgrade_quantumweaponpower:
+		Condition: steel_consortium_upgrade_quantumweaponpower
+		Prerequisites: steel_consortium_upgrade_quantumweaponpower
 	ActorStatValues:
-		Upgrades: up_empquantumweapons.steel
+		Upgrades: steel_consortium_upgrade_quantumweaponpower
 
 ^NaxisSpawnActorsOnSell:
 	SpawnActorsOnSell:

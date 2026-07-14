@@ -1,4 +1,4 @@
-qacst.steel:
+steel_consortium_consortiumconstructionyard:
 	Inherits: ra2_allies_alliedconstructionyard
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@shape: ^4x3Shape
@@ -11,11 +11,11 @@ qacst.steel:
 		Dimensions: 4,3
 		LocalCenterOffset: 0,-1024,0
 	Transforms:
-		IntoActor: qmcv.steel
+		IntoActor: steel_consortium_consortiummobileconstructionvehicle
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_shieldresistance
 	Targetable@TechStealerInfiltrate:
 		TargetTypes: TechStealerInfiltrate
 	InfiltrateForSupportPower:
@@ -23,9 +23,9 @@ qacst.steel:
 		Types: TechStealerInfiltrate
 	-ProvidesPrerequisite@ra2oilderrick:
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qapowr.steel:
+steel_consortium_consortiumpowerplant:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@water: ^SteelUnderwaterStructure
@@ -40,7 +40,7 @@ qapowr.steel:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template_power.description
-		Prerequisites: ~qacst.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard
 	Building:
 		Footprint: == xx
 		Dimensions: 2,2
@@ -62,9 +62,9 @@ qapowr.steel:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qref.steel:
+steel_consortium_consortiumrefinery:
 	Inherits: ^RA2Building
 	Inherits@ref: ^Refinery
 	Inherits@water: ^SteelUnderwaterStructure
@@ -74,7 +74,7 @@ qref.steel:
 	Tooltip:
 		Name: Consortium Refinery
 	Buildable:
-		Prerequisites: ~qacst.steel, qapowr.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumpowerplant
 	Building:
 		Footprint: xxx= xxxx =xx=
 		Dimensions: 4,3
@@ -86,7 +86,7 @@ qref.steel:
 		DockOffset: 1086,1086,0
 	DrawLineToTarget:
 	FreeActor:
-		Actor: qmin.steel
+		Actor: steel_consortium_consortiumminer
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
@@ -99,9 +99,9 @@ qref.steel:
 	WithIdleOverlay@bib:
 		Sequence: idle-bib
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qabarr.steel:
+steel_consortium_steelbarracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
@@ -112,7 +112,7 @@ qabarr.steel:
 	Tooltip:
 		Name: Steel Barracks
 	Buildable:
-		Prerequisites: ~qacst.steel, qapowr.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumpowerplant
 	Building:
 		Footprint: xx ==
 		Dimensions: 2,2
@@ -127,9 +127,9 @@ qabarr.steel:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qtradr.steel:
+steel_consortium_consortiumradar:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@radar: ^RadarBuilding
@@ -146,7 +146,7 @@ qtradr.steel:
 	Tooltip:
 		Name: Consortium Radar
 	Buildable:
-		Prerequisites: ~qacst.steel, qref.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumrefinery
 	Building:
 		Footprint: === xxx xxx
 		Dimensions: 3,3
@@ -162,10 +162,10 @@ qtradr.steel:
 	DetonateWeaponPower@SteelSupportSpawner:
 		OrderName: SteelSupportSpawner
 		Prerequisites:
-			1: up_conssupp1.steel
-			2: up_conssupp2.steel
-			3: up_conssupp3.steel
-			4: up_conssupp4.steel
+			1: steel_consortium_promotion_unlocksupportlvl1
+			2: steel_consortium_promotion_unlocksupportlvl2
+			3: steel_consortium_promotion_unlocksupportlvl3
+			4: steel_consortium_promotion_unlocksupportlvl4
 		PauseOnCondition: disabled
 		Icons:
 			1: conssupp1
@@ -201,9 +201,9 @@ qtradr.steel:
 		LaunchSound: schrmov.wav
 		IncomingSound: schrmov.wav
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qaclone.steel:
+steel_consortium_cloningvats:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^ConsortiumSpawnActorsOnSell
@@ -216,7 +216,7 @@ qaclone.steel:
 		Name: Cloning Vats
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~qacst.steel, qatech.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumbattlelab
 		Queue: Building, RABuilding
 		Description: Clones produced infantry.
 		BuildLimit: 1
@@ -246,9 +246,9 @@ qaclone.steel:
 	WithIdleOverlay@top:
 		Sequence: idle-top
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qaweap.steel:
+steel_consortium_consortiumwarfactory:
 	Inherits: ^RA2DefaultWeap
 	Inherits@water: ^SteelUnderwaterStructure
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
@@ -256,7 +256,7 @@ qaweap.steel:
 	Tooltip:
 		Name: Consortium War Factory
 	Buildable:
-		Prerequisites: ~qacst.steel, qref.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumrefinery
 	Building:
 		Footprint: =x== xxx= =x==
 		Dimensions: 4,3
@@ -276,9 +276,9 @@ qaweap.steel:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qatech.steel:
+steel_consortium_consortiumbattlelab:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@tech: ^IsTechnoBuilding
@@ -288,7 +288,7 @@ qatech.steel:
 	Selectable:
 		Bounds: 3072, 2048, 0, 0
 	Buildable:
-		Prerequisites: ~qacst.steel, qtradr.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumradar
 	Tooltip:
 		Name: Consortium Battle Lab
 	Building:
@@ -304,8 +304,8 @@ qatech.steel:
 		OrderName: SteelEmpCannon
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: up_emp.steel
-		IconImage: qatech.steel
+			1: steel_consortium_upgrade_unlockempcannon
+		IconImage: steel_consortium_consortiumbattlelab
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -335,9 +335,9 @@ qatech.steel:
 		IncomingSound:
 	SupportPowerChargeBar:
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel, up_emp.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance, steel_consortium_upgrade_unlockempcannon
 
-qaorbit.steel:
+steel_consortium_orbitalcannonactivator:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -345,7 +345,7 @@ qaorbit.steel:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
-		Prerequisites: ~qacst.steel, qatech.steel, !qaorbit.steel, ~techlevel.superweapons
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumbattlelab, !steel_consortium_orbitalcannonactivator, ~techlevel.superweapons
 		Description: actor_cgionc.description
 	Tooltip:
 		Name: Orbital Cannon Activator
@@ -357,7 +357,7 @@ qaorbit.steel:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: qaorbit.steel
+		IconImage: steel_consortium_orbitalcannonactivator
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -390,16 +390,16 @@ qaorbit.steel:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: qaorbit.steel
+		Prerequisite: steel_consortium_orbitalcannonactivator
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-fedturret.steel:
+steel_consortium_consortiumsentryturret:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -414,7 +414,7 @@ fedturret.steel:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~qacst.steel, qabarr.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_steelbarracks
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 700
@@ -445,7 +445,7 @@ fedturret.steel:
 		LocalOffset: 400,0,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: up_resonanceammo.steel
+		RequiresCondition: steel_consortium_upgrade_resonanceammo
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -461,9 +461,9 @@ fedturret.steel:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_scalpel.steel, up_pulseweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_resonanceammo.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_scalpeldefenders, steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_resonanceammo, steel_consortium_upgrade_shieldresistance
 
-fedaa.steel:
+steel_consortium_antiairquantummissileturret:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -477,7 +477,7 @@ fedaa.steel:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~qacst.steel, qtradr.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumradar
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 1000
@@ -502,14 +502,14 @@ fedaa.steel:
 		LocalOffset: 125,225,250, 125,-225,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !up_empquantumweapons.steel
+		RequiresCondition: !steel_consortium_upgrade_quantumweaponpower
 	Armament@Upgrade:
 		Name: primary
 		Weapon: ConsortiumMissileSystemEMP
 		LocalOffset: 125,225,250, 125,-225,250
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: up_empquantumweapons.steel
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -529,9 +529,9 @@ fedaa.steel:
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: scalpelAA.steel
 	ActorStatValues:
-		Upgrades: up_scalpel.steel, up_empquantumweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_scalpeldefenders, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qcannon.steel:
+steel_consortium_quantumcannon:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -547,7 +547,7 @@ qcannon.steel:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~qacst.steel, qatech.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumbattlelab
 		Description: actor_cgplas.description
 	Valued:
 		Cost: 2000
@@ -572,28 +572,28 @@ qcannon.steel:
 		LocalOffset: 600,300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !up_empquantumweapons.steel
+		RequiresCondition: !steel_consortium_upgrade_quantumweaponpower
 	Armament@2:
 		Name: primary
 		Weapon: SteelQuantumTurretRail
 		LocalOffset: 600,-300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !up_empquantumweapons.steel
+		RequiresCondition: !steel_consortium_upgrade_quantumweaponpower
 	Armament@Upgrade1:
 		Name: primary
 		Weapon: SteelQuantumTurretRailEMP
 		LocalOffset: 600,300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: up_empquantumweapons.steel
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
 	Armament@Upgrade2:
 		Name: primary
 		Weapon: SteelQuantumTurretRailEMP
 		LocalOffset: 600,-300,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: up_empquantumweapons.steel
+		RequiresCondition: steel_consortium_upgrade_quantumweaponpower
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -615,9 +615,9 @@ qcannon.steel:
 	DroneSpawnerMaster@steel_scalpel:
 		Actors: scalpelQuantumCannon.steel
 	ActorStatValues:
-		Upgrades: up_scalpel.steel, up_empquantumweapons.steel, up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_scalpeldefenders, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-bfg10k.steel:
+steel_consortium_bfg10000:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -632,7 +632,7 @@ bfg10k.steel:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
 		BuildLimit: 1
-		Prerequisites: ~qacst.steel, qatech.steel, ~techlevel.superweapons
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumbattlelab, ~techlevel.superweapons
 		Description: actor_gun.description
 	Valued:
 		Cost: 10000
@@ -691,7 +691,7 @@ bfg10k.steel:
 		Prerequisites:
 			1: ~techlevel.superweapons
 		Cursor: nuke
-		IconImage: bfg10k.steel
+		IconImage: steel_consortium_bfg10000
 		Icons:
 			1: icon
 		TargetCircleRange: 4c0
@@ -731,9 +731,9 @@ bfg10k.steel:
 	DetectCloaked:
 		Range: 12500
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-conpad.steel:
+steel_consortium_consortiumairpad:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -742,7 +742,7 @@ conpad.steel:
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusion
 	Inherits@SteelConsortiumFerrocrete: ^SteelConsortiumFerrocrete
 	Buildable:
-		Prerequisites: ~qacst.steel, qtradr.steel
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumradar
 	Tooltip:
 		Name: Consortium Airpad
 	Building:
@@ -766,9 +766,9 @@ conpad.steel:
 		Sequence: idle-dish
 		PauseOnCondition: lowpower
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
-qoil.steel:
+steel_consortium_geothermalreactor:
 	Inherits: ^RA2Building
 	Inherits@power: ^PowerPlant
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -786,7 +786,7 @@ qoil.steel:
 		BuildPaletteOrder: 999
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~qacst.steel, qatech.steel, derricklimit
+		Prerequisites: ~steel_consortium_consortiumconstructionyard, steel_consortium_consortiumbattlelab, derricklimit
 		Description: Super Income Building. Produces 3x the income of an oil derrick.
 	Building:
 		Footprint: xxx xxx xxx
@@ -802,7 +802,7 @@ qoil.steel:
 	ExperienceTrickler@1:
 		Amount: 750
 	RenderSprites:
-		Image: qoil.steel
+		Image: steel_consortium_geothermalreactor
 		PlayerPalette: player_rgba
 	-WithDeathAnimation:
 	-ToggleConditionOnOrder:
@@ -815,7 +815,7 @@ qoil.steel:
 		#PauseOnCondition: lowpower
 		RequiresCondition: !build-incomplete && !in_water
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_ferrocrete.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_ferrocretecurtain, steel_consortium_upgrade_shieldresistance
 
 ##############################################
 #   Red Alert 2 Underwater Structure

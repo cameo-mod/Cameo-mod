@@ -1,4 +1,4 @@
-fedinf.steel:
+steel_consortium_clonetrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -16,7 +16,7 @@ fedinf.steel:
 		Name: Clone Trooper
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~qabarr.steel
+		Prerequisites: ~steel_consortium_steelbarracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -45,25 +45,25 @@ fedinf.steel:
 		RequiresCondition: rank-elite
 	Armament@UpgradePRIMARY:
 		Weapon: SteelCloneGunResonance
-		RequiresCondition: !rank-elite && up_resonanceammo.steel
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_resonanceammo
 	Armament@UpgradeELITE:
 		Weapon: SteelCloneGunEResonance
-		RequiresCondition: rank-elite && up_resonanceammo.steel
+		RequiresCondition: rank-elite && steel_consortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: SteelCloneGunResonance
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && up_resonanceammo.steel
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelCloneGunEResonance
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && up_resonanceammo.steel
-	FirepowerMultiplier@up_pulseweapons.steel:
+		RequiresCondition: rank-elite && steel_consortium_upgrade_resonanceammo
+	FirepowerMultiplier@steel_consortium_upgrade_pulseweapons:
 		Modifier: 160
-	RangeMultiplier@up_pulseweapons.steel:
+	RangeMultiplier@steel_consortium_upgrade_pulseweapons:
 		Modifier: 130
 	AttackFrontal:
 		FacingTolerance: 0
@@ -72,9 +72,9 @@ fedinf.steel:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_resonanceammo.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_resonanceammo, steel_consortium_upgrade_shieldresistance
 
-board_inf.steel:
+steel_consortium_hoverboardgrenadier:
 	Inherits: ^Soldier
 	Inherits@Template: ^GrenadierInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -90,7 +90,7 @@ board_inf.steel:
 		Name: Hover Board Grenadier
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~qabarr.steel, qtradr.steel
+		Prerequisites: ~steel_consortium_steelbarracks, steel_consortium_consortiumradar
 		Queue: Infantry, RAInfantry
 		Description: actor_steel_board_inf.description
 	Mobile:
@@ -106,43 +106,43 @@ board_inf.steel:
 	Armament@PRIMARY:
 		Weapon: SteelMakoGun
 		LocalOffset: 300,200,800
-		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@ELITE:
 		Weapon: SteelMakoGunE
 		LocalOffset: 300,200,800
-		RequiresCondition: rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: SteelMakoGun
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelMakoGunE
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
 		Weapon: SteelMakoGunEMP
 		LocalOffset: 300,200,800
-		RequiresCondition: !rank-elite && up_empquantumweapons.steel
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradeELITE:
 		Weapon: SteelMakoGunEMPE
 		LocalOffset: 300,200,800
-		RequiresCondition: rank-elite && up_empquantumweapons.steel
+		RequiresCondition: rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: SteelMakoGunEMP
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && up_empquantumweapons.steel
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelMakoGunEMPE
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && up_empquantumweapons.steel
+		RequiresCondition: rank-elite && steel_consortium_upgrade_quantumweaponpower
 	FirepowerMultiplier@Freed:
 		Modifier: 550
 	ReloadDelayMultiplier@Freed:
@@ -157,9 +157,9 @@ board_inf.steel:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_empquantumweapons.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
 
-qinf.steel:
+steel_consortium_quantummissiletrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -180,7 +180,7 @@ qinf.steel:
 		Name: Quantum Missile Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~qabarr.steel, qatech.steel
+		Prerequisites: ~steel_consortium_steelbarracks, steel_consortium_consortiumbattlelab
 		Queue: Infantry, RAInfantry
 		Description: actor_ggi.description
 	Mobile:
@@ -204,19 +204,19 @@ qinf.steel:
 	Armament@PRIMARY:
 		Weapon: SteelInfRailgun
 		LocalOffset: 384,64,384
-		RequiresCondition: !deployed && !rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: !deployed && !rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@PRIMARYELITE:
 		Weapon: SteelInfRailgunE
 		LocalOffset: 384,64,384
-		RequiresCondition: !deployed && rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: !deployed && rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARY:
 		Weapon: SteelInfRailgunEMP
 		LocalOffset: 384,64,384
-		RequiresCondition: !deployed && !rank-elite && up_empquantumweapons.steel
+		RequiresCondition: !deployed && !rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradePRIMARYELITE:
 		Weapon: SteelInfRailgunEMPE
 		LocalOffset: 384,64,384
-		RequiresCondition: !deployed && rank-elite && up_empquantumweapons.steel
+		RequiresCondition: !deployed && rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@BOTAA:
 		Weapon: aadeploytargeting.8c0
 		Name: targeting
@@ -226,41 +226,41 @@ qinf.steel:
 		Weapon: SteelInfRailgun
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && !rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: deployed && !rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@DEPLOYEDELITE:
 		Name: deployed
 		Weapon: SteelInfRailgunE
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: deployed && rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradeDEPLOYED:
 		Name: deployed
 		Weapon: SteelInfRailgunEMP
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && !rank-elite && up_empquantumweapons.steel
+		RequiresCondition: deployed && !rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradeDEPLOYEDELITE:
 		Name: deployed
 		Weapon: SteelInfRailgunEMPE
 		Turret: deploy
 		LocalOffset: 384,64,384
-		RequiresCondition: deployed && rank-elite && up_empquantumweapons.steel
+		RequiresCondition: deployed && rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: SteelInfRailgun
-		RequiresCondition: !rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: !rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelInfRailgunE
-		RequiresCondition: rank-elite && !up_empquantumweapons.steel
+		RequiresCondition: rank-elite && !steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: SteelInfRailgunEMP
-		RequiresCondition: !rank-elite && up_empquantumweapons.steel
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_quantumweaponpower
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelInfRailgunEMPE
-		RequiresCondition: rank-elite && up_empquantumweapons.steel
+		RequiresCondition: rank-elite && steel_consortium_upgrade_quantumweaponpower
 	AttackFrontal:
 		Armaments: primary, targeting
 		RequiresCondition: undeployed
@@ -318,23 +318,23 @@ qinf.steel:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_empquantumweapons.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_quantumweaponpower, steel_consortium_upgrade_shieldresistance
 
-fedeng.steel:
+steel_consortium_engineer:
 	Inherits: ra2_allies_engineer
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
 	Buildable:
-		Prerequisites: ~qabarr.steel
+		Prerequisites: ~steel_consortium_steelbarracks
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: fedeng.steel
+		Image: steel_consortium_engineer
 	-TakeCover:
 	Voiced:
 		VoiceSet: SteelEngVoice
 	ActorStatValues:
-		Upgrades: up_naniteinfusion.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_shieldresistance
 
-runner.steel:
+steel_consortium_steelrunner:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -354,7 +354,7 @@ runner.steel:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~qabarr.steel, qatech.steel
+		Prerequisites: ~steel_consortium_steelbarracks, steel_consortium_consortiumbattlelab
 		BuildLimit: 1
 		Description: template_commando.description
 	Health:
@@ -382,22 +382,22 @@ runner.steel:
 		RequiresCondition: rank-elite
 	Armament@UpgradePRIMARY:
 		Weapon: SteelRunnerPistolsResonance
-		RequiresCondition: !rank-elite && up_resonanceammo.steel
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_resonanceammo
 	Armament@UpgradeELITE:
 		Weapon: SteelRunnerPistolsEResonance
-		RequiresCondition: rank-elite && up_resonanceammo.steel
+		RequiresCondition: rank-elite && steel_consortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: SteelRunnerPistolsResonance
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && up_resonanceammo.steel
+		RequiresCondition: !rank-elite && steel_consortium_upgrade_resonanceammo
 	Armament@UpgradeGARRISONEDELITE:
 		Name: garrisoned
 		Weapon: SteelRunnerPistolsEResonance
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && up_resonanceammo.steel
+		RequiresCondition: rank-elite && steel_consortium_upgrade_resonanceammo
 	AttackFrontal:
 		FacingTolerance: 0
 	WithInfantryBody:
@@ -411,4 +411,4 @@ runner.steel:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_pulseweapons.steel, up_naniteinfusion.steel, up_resonanceammo.steel, up_shielresistance.steel
+		Upgrades: steel_consortium_upgrade_pulseweapons, steel_consortium_upgrade_naniteinfusion, steel_consortium_upgrade_resonanceammo, steel_consortium_upgrade_shieldresistance
