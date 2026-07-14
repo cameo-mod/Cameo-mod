@@ -37,36 +37,36 @@
 ##############################################
 ^AASpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: ra2engineer.asian, gren.asian, gren.asian, tkiller.asian
+		ActorTypes: asian_alliance_engineer, asian_alliance_asianmilitia, asian_alliance_asianmilitia, asian_alliance_asiantankkiller
 
 ^InfantrySpecUpgrade:
-	DamageMultiplier@up_infantryspec.asian:
+	DamageMultiplier@asian_alliance_doctrine_modernizedinfantryequipment:
 		Modifier: 95
-		RequiresCondition: up_infantryspec.asian
-	FirepowerMultiplier@up_infantryspec.asian:
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+	FirepowerMultiplier@asian_alliance_doctrine_modernizedinfantryequipment:
 		Modifier: 105
-		RequiresCondition: up_infantryspec.asian
-	RangeMultiplier@up_infantryspec.asian:
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+	RangeMultiplier@asian_alliance_doctrine_modernizedinfantryequipment:
 		Modifier: 105
-		RequiresCondition: up_infantryspec.asian
-	GrantConditionOnPrerequisite@up_infantryspec.asian:
-		Condition: up_infantryspec.asian
-		Prerequisites: up_infantryspec.asian
+		RequiresCondition: asian_alliance_doctrine_modernizedinfantryequipment
+	GrantConditionOnPrerequisite@asian_alliance_doctrine_modernizedinfantryequipment:
+		Condition: asian_alliance_doctrine_modernizedinfantryequipment
+		Prerequisites: asian_alliance_doctrine_modernizedinfantryequipment
 	ActorStatValues:
-		Upgrades: up_infantryspec.asian
+		Upgrades: asian_alliance_doctrine_modernizedinfantryequipment
 
 ^PulverizerUpgrades:
-	FirepowerMultiplier@up_pulverizer.asian:
+	FirepowerMultiplier@asian_alliance_doctrine_heavypulverizerweapons:
 		Modifier: 75
-		RequiresCondition: up_pulverizer.asian
-	RangeMultiplier@up_pulverizer.asian:
+		RequiresCondition: asian_alliance_doctrine_heavypulverizerweapons
+	RangeMultiplier@asian_alliance_doctrine_heavypulverizerweapons:
 		Modifier: 115
-		RequiresCondition: up_pulverizer.asian
-	GrantConditionOnPrerequisite@up_pulverizer.asian:
-		Condition: up_pulverizer.asian
-		Prerequisites: up_pulverizer.asian
+		RequiresCondition: asian_alliance_doctrine_heavypulverizerweapons
+	GrantConditionOnPrerequisite@asian_alliance_doctrine_heavypulverizerweapons:
+		Condition: asian_alliance_doctrine_heavypulverizerweapons
+		Prerequisites: asian_alliance_doctrine_heavypulverizerweapons
 	ActorStatValues:
-		Upgrades: up_pulverizer.asian
+		Upgrades: asian_alliance_doctrine_heavypulverizerweapons
 
 ^AsianPhalanxUpgrade:
 	ExternalCondition@AsianPhalanx:
@@ -116,49 +116,49 @@
 	WithColoredOverlay@AsianPhalanx5:
 		Color: 88888840
 		RequiresCondition: AsianPhalanx >= 5
-	DamageMultiplier@up_phalanx.asian:
+	DamageMultiplier@asian_alliance_doctrine_asianphalanx:
 		Modifier: 90
-		RequiresCondition: up_phalanx.asian
-	GrantConditionOnPrerequisite@up_phalanx.asian:
-		Condition: up_phalanx.asian
-		Prerequisites: up_phalanx.asian
+		RequiresCondition: asian_alliance_doctrine_asianphalanx
+	GrantConditionOnPrerequisite@asian_alliance_doctrine_asianphalanx:
+		Condition: asian_alliance_doctrine_asianphalanx
+		Prerequisites: asian_alliance_doctrine_asianphalanx
 	ActorStatValues:
-		Upgrades: up_phalanx.asian
+		Upgrades: asian_alliance_doctrine_asianphalanx
 
 ^DragonFireUpgrades:
-	FirepowerMultiplier@up_dragonfire.asian:
+	FirepowerMultiplier@asian_alliance_upgrade_dragonfire:
 		Modifier: 150
-		RequiresCondition: up_dragonfire.asian
-	GrantConditionOnPrerequisite@up_dragonfire.asian:
-		Condition: up_dragonfire.asian
-		Prerequisites: up_dragonfire.asian
+		RequiresCondition: asian_alliance_upgrade_dragonfire
+	GrantConditionOnPrerequisite@asian_alliance_upgrade_dragonfire:
+		Condition: asian_alliance_upgrade_dragonfire
+		Prerequisites: asian_alliance_upgrade_dragonfire
 	ActorStatValues:
-		Upgrades: up_dragonfire.asian
+		Upgrades: asian_alliance_upgrade_dragonfire
 
 ^CelestialPowerUpgrades:
-	FirepowerMultiplier@up_celestialpower.asian:
+	FirepowerMultiplier@asian_alliance_upgrade_celestialpower:
 		Modifier: 125
-		RequiresCondition: up_celestialpower.asian
-	RangeMultiplier@up_celestialpower.asian:
+		RequiresCondition: asian_alliance_upgrade_celestialpower
+	RangeMultiplier@asian_alliance_upgrade_celestialpower:
 		Modifier: 125
-		RequiresCondition: up_celestialpower.asian
-	GrantConditionOnPrerequisite@up_celestialpower.asian:
-		Condition: up_celestialpower.asian
-		Prerequisites: up_celestialpower.asian
+		RequiresCondition: asian_alliance_upgrade_celestialpower
+	GrantConditionOnPrerequisite@asian_alliance_upgrade_celestialpower:
+		Condition: asian_alliance_upgrade_celestialpower
+		Prerequisites: asian_alliance_upgrade_celestialpower
 	ActorStatValues:
-		Upgrades: up_celestialpower.asian
+		Upgrades: asian_alliance_upgrade_celestialpower
 
 ^KamikazeMode:
-	GrantConditionOnPrerequisite@up_banzai.asian:
-		Condition: up_banzai.asian
-		Prerequisites: up_banzai.asian
+	GrantConditionOnPrerequisite@asian_alliance_upgrade_banzaimode:
+		Condition: asian_alliance_upgrade_banzaimode
+		Prerequisites: asian_alliance_upgrade_banzaimode
 	GrantConditionOnDamageState@BanzaiHeavy:
 		ValidDamageStates: Heavy
 		Condition: BanzaiHeavy
-		RequiresCondition: up_banzai.asian
+		RequiresCondition: asian_alliance_upgrade_banzaimode
 	GrantCondition@KamikazeHeavy:
 		Condition: KamikazeHeavy
-		RequiresCondition: BanzaiHeavy && up_banzai.asian
+		RequiresCondition: BanzaiHeavy && asian_alliance_upgrade_banzaimode
 	DamageMultiplier@KamikazeHeavy:
 		Modifier: 75
 		RequiresCondition: KamikazeHeavy
@@ -190,10 +190,10 @@
 	GrantConditionOnDamageState@BanzaiCritical:
 		ValidDamageStates: Critical
 		Condition: BanzaiCritical
-		RequiresCondition: up_banzai.asian
+		RequiresCondition: asian_alliance_upgrade_banzaimode
 	GrantCondition@KamikazeCritical:
 		Condition: KamikazeCritical
-		RequiresCondition: BanzaiCritical && up_banzai.asian
+		RequiresCondition: BanzaiCritical && asian_alliance_upgrade_banzaimode
 	DamageMultiplier@KamikazeCritical:
 		Modifier: 50
 		RequiresCondition: KamikazeCritical
@@ -225,7 +225,7 @@
 	#RejectsOrders@KamikazeCritical:
 	#	RequiresCondition: KamikazeCritical
 	ActorStatValues:
-		Upgrades: up_banzai.asian
+		Upgrades: asian_alliance_upgrade_banzaimode
 
 ^WayOfTheDragon:
 	DamageMultiplier@dragonwaydamage:
@@ -237,25 +237,25 @@
 	SpeedMultiplier@dragonwaydamage:
 		RequiresCondition: dragonwaydamage
 		Modifier: 105
-	GrantConditionOnDamage@up_team_dragonway.asian:
-		RequiresCondition: up_team_dragonway.asian
+	GrantConditionOnDamage@asian_alliance_upgrade_wayofthedragon:
+		RequiresCondition: asian_alliance_upgrade_wayofthedragon
 		Condition: dragonwaydamage
 		Duration: 25
 		PlayerRelationship: Ally, Neutral, Enemy
-	DamageMultiplier@up_team_dragonway.asian:
+	DamageMultiplier@asian_alliance_upgrade_wayofthedragon:
 		Modifier: 95
-		RequiresCondition: up_team_dragonway.asian
-	FirepowerMultiplier@up_team_dragonway.asian:
+		RequiresCondition: asian_alliance_upgrade_wayofthedragon
+	FirepowerMultiplier@asian_alliance_upgrade_wayofthedragon:
 		Modifier: 105
-		RequiresCondition: up_team_dragonway.asian
-	SpeedMultiplier@up_team_dragonway.asian:
+		RequiresCondition: asian_alliance_upgrade_wayofthedragon
+	SpeedMultiplier@asian_alliance_upgrade_wayofthedragon:
 		Modifier: 105
-		RequiresCondition: up_team_dragonway.asian
-	GrantConditionOnPrerequisite@up_team_dragonway.asian:
-		Condition: up_team_dragonway.asian
-		Prerequisites: up_team_dragonway.asian
+		RequiresCondition: asian_alliance_upgrade_wayofthedragon
+	GrantConditionOnPrerequisite@asian_alliance_upgrade_wayofthedragon:
+		Condition: asian_alliance_upgrade_wayofthedragon
+		Prerequisites: asian_alliance_upgrade_wayofthedragon
 	ActorStatValues:
-		Upgrades: up_team_dragonway.asian
+		Upgrades: asian_alliance_upgrade_wayofthedragon
 
 ^SyndicateSpawnActorsOnSell:
 	SpawnActorsOnSell:

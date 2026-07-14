@@ -1,4 +1,4 @@
-phoenix.asian:
+asian_alliance_phoenix:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -14,7 +14,7 @@ phoenix.asian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cgairf.asian, cgtech.asian
+		Prerequisites: ~asian_alliance_asianairforcecommand, asian_alliance_asianbattlelab
 		Queue: Aircraft, RAAircraft
 		Description: actor_aaphoenix.description
 	Aircraft:
@@ -92,9 +92,9 @@ phoenix.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_team_diplomacy.asian, up_phalanx.asian, up_dragonfire.asian
+		Upgrades: asian_alliance_upgrade_asiandiplomacy, asian_alliance_doctrine_asianphalanx, asian_alliance_upgrade_dragonfire
 
-pelican.asian:
+asian_alliance_pelican:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -104,7 +104,7 @@ pelican.asian:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgairf.asian
+		Prerequisites: ~asian_alliance_asianairforcecommand
 		Description: actor_aapelican.description
 	Valued:
 		Cost: 2000
@@ -138,16 +138,16 @@ pelican.asian:
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: up_phalanx.asian && !rank-elite
+		RequiresCondition: asian_alliance_doctrine_asianphalanx && !rank-elite
 	Armament@MGelite:
 		Weapon: AsianPelicanMG_elite
 		LocalOffset: 85,-213,-85, 85,213,-85
 		MuzzleSequence: muzzle-mg
 		MuzzlePalette: ra2effect
 		PauseOnCondition: ammo < 2
-		RequiresCondition: up_phalanx.asian && rank-elite
-	ReloadAmmoDelayMultiplier@up_phalanx.asian:
-		RequiresCondition: up_phalanx.asian
+		RequiresCondition: asian_alliance_doctrine_asianphalanx && rank-elite
+	ReloadAmmoDelayMultiplier@asian_alliance_doctrine_asianphalanx:
+		RequiresCondition: asian_alliance_doctrine_asianphalanx
 		Modifier: 50
 	AttackAircraft:
 		FacingTolerance: 80
@@ -198,7 +198,7 @@ pelican.asian:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_phalanx.asian
+		Upgrades: asian_alliance_doctrine_asianphalanx
 
 kami.asian:
 	Inherits: ^RANeutralPlane
@@ -399,7 +399,7 @@ phoenix_husk.asian:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: phoenix.asian
+		Image: asian_alliance_phoenix
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -411,7 +411,7 @@ pelican_husk.asian:
 		TurnSpeed: 24
 		Speed: 120
 	RenderSprites:
-		Image: pelican.asian
+		Image: asian_alliance_pelican
 		PlayerPalette: playerra2
 
 bomber_minebomb.asian:

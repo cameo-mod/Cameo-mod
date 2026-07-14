@@ -2873,8 +2873,8 @@
 			ngbunk2.latin: biggarrisoned
 			td_gdi_assaultapc: battlefortresspassenger
 			ra2_allies_battlefortress: battlefortresspassenger
-			dragonfly.asian: battlefortresspassenger
-			wtrt.asian: battlefortresspassenger
+			asian_alliance_dragonfly: battlefortresspassenger
+			asian_alliance_warturtle: battlefortresspassenger
 			humvee.latin: battlefortresspassenger
 			cartel.latin: battlefortresspassenger
 			scrapcar_driveby.latin: battlefortresspassenger
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,cgairf.asian,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -8822,7 +8822,7 @@ CPQDEBUGDUMMY:
 			# ra1_soviet_rifleinfantry: ifv-mg
 			# ra2_allies_gi: ifv-mg
 			# ra2_soviets_conscript: ifv-mg
-			# gren.asian: ifv-mg
+			# asian_alliance_asianmilitia: ifv-mg
 			# 2100scav: ifv-mg
 			# 2100scav2: ifv-mg
 			# terran_marine: ifv-mg
@@ -8843,7 +8843,7 @@ CPQDEBUGDUMMY:
 			# sglrebel: ifv-mg
 			# sglcamorebel: ifv-mg
 			# sgldemorebel: ifv-mg
-			# japrif.asian: ifv-mg
+			# asian_alliance_fanatic: ifv-mg
 			# td_gdi_grenadier: ifv-cannon
 			# ra1_soviet_grenadier: ifv-cannon
 			# ts_gdi_discthrower: ifv-cannon
@@ -8851,7 +8851,7 @@ CPQDEBUGDUMMY:
 			# forgotten_mutantsergeant: ifv-cannon
 			# che2: ifv-cannon
 			# leange2: ifv-cannon
-			# plast.asian: ifv-cannon
+			# asian_alliance_plasmatrooper: ifv-cannon
 			# e6: ifv-repair
 			# rae6: ifv-repair
 			# ra1_allies_medic: ifv-healer
@@ -8875,7 +8875,7 @@ CPQDEBUGDUMMY:
 			# rae3: ifv-miss
 			# ra1_soviet_rocketsoldier: ifv-miss
 			# ra2_allies_guardiangi: ifv-miss
-			# tkiller.asian: ifv-miss
+			# asian_alliance_asiantankkiller: ifv-miss
 			# tse3: ifv-miss
 			# gle3: ifv-miss
 			# che3: ifv-miss
@@ -8892,7 +8892,7 @@ CPQDEBUGDUMMY:
 			# ra1_soviet_flamethrower: ifv-fire
 			# japan_japaneseflamethrower: ifv-fire
 			# yuri_initiate: ifv-fire
-			# flam.asian: ifv-fire
+			# asian_alliance_asianflametrooper: ifv-fire
 			# terran_firebat: ifv-fire
 			# td_nod_chemicalwarrior: ifv-chem
 			# ra2_soviets_desolator: ifv-chem
@@ -8916,7 +8916,7 @@ CPQDEBUGDUMMY:
 			# yuri_virus: ifv-ra1_allies_alliedsniper
 			# ra1_allies_raspy: ifv-spy
 			# ra2_allies_ra2spy: ifv-spy
-			# shinobi.asian: ifv-spy
+			# asian_alliance_shinobi: ifv-spy
 			# ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
 			# forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
 			# glkell: ifv-ra1_allies_alliedsniper
@@ -9068,7 +9068,7 @@ CPQDEBUGDUMMY:
 			# japan_imperialscoutsman: ifv-mg
 			# japan_tankbuster: ifv-miss
 			# japan_archermaiden: ifv-archermaiden
-			# archer.asian: ifv-archermaiden
+			# asian_alliance_veteranarcher: ifv-archermaiden
 			# ra1_allies_alliedsniper: ifv-ra1_allies_alliedsniper
 			# wc_h_footman: ifv-archer
 			# wc_h_archer: ifv-archer

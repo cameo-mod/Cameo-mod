@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: asianalliance
-		BaseActor: acv.asian
+		BaseActor: asian_alliance_asianmobileconstructionvehicle
 	StartingUnits@defaultasianalliance:
 		Class: light
 		ClassName: Light Support
 		Factions: asianalliance
-		BaseActor: acv.asian
-		SupportActors: gren.asian,gren.asian,gren.asian,tkiller.asian,tkiller.asian,quas.asian,lynx.asian
+		BaseActor: asian_alliance_asianmobileconstructionvehicle
+		SupportActors: asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asiantankkiller,asian_alliance_quasar,asian_alliance_lynxtank
 	StartingUnits@heavyasianalliance:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: asianalliance
-		BaseActor: acv.asian
-		SupportActors: gren.asian,gren.asian,gren.asian,tkiller.asian,tkiller.asian,quas.asian,lynx.asian,lynx.asian,lynx.asian,ptnk.asian,quas.asian
+		BaseActor: asian_alliance_asianmobileconstructionvehicle
+		SupportActors: asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asiantankkiller,asian_alliance_quasar,asian_alliance_lynxtank,asian_alliance_lynxtank,asian_alliance_lynxtank,ptnk.asian,asian_alliance_quasar

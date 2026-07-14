@@ -1,4 +1,4 @@
-cgcnst.asian:
+asian_alliance_asianconstructionyard:
 	Inherits: ^RA2Building
 	Inherits@conyard: ^Conyard
 	Inherits@shape: ^4x3Shape
@@ -9,7 +9,7 @@ cgcnst.asian:
 		Footprint: xxxx xxxx xxxx
 		Dimensions: 4,3
 	Transforms:
-		IntoActor: acv.asian
+		IntoActor: asian_alliance_asianmobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 		RequiresCondition: factundeploy
@@ -31,7 +31,7 @@ cgcnst.asian:
 		Proxy: cgcnst_infiltrated.asian
 		Types: TechStealerInfiltrate
 
-cgapwr.asian:
+asian_alliance_asianpetrolplant:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -44,7 +44,7 @@ cgapwr.asian:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template_power.description
-		Prerequisites: ~cgcnst.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -61,7 +61,7 @@ cgapwr.asian:
 		Sequence: idle-glow
 	ProvidesPrerequisite@buildingname:
 
-cgbrck.asian:
+asian_alliance_asianbarracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -69,7 +69,7 @@ cgbrck.asian:
 	Tooltip:
 		Name: Asian Barracks
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgapwr.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianpetrolplant
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -88,7 +88,7 @@ cgbrck.asian:
 	Voiced:
 		VoiceSet: PRCBarracksVoice
 
-cgrefn.asian:
+asian_alliance_asianorerefinery:
 	Inherits: ^RA2Building
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -96,7 +96,7 @@ cgrefn.asian:
 	Tooltip:
 		Name: Asian Ore Refinery
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgapwr.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianpetrolplant
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -108,19 +108,19 @@ cgrefn.asian:
 		MaxQueueLength: 15
 	DrawLineToTarget:
 	FreeActor@1:
-		Actor: drmn.asian
+		Actor: asian_alliance_droneminer
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@2:
-		Actor: drmn.asian
+		Actor: asian_alliance_droneminer
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@3:
-		Actor: drmn.asian
+		Actor: asian_alliance_droneminer
 		SpawnOffset: 2,2
 		Facing: 256
 	FreeActor@4:
-		Actor: drmn.asian
+		Actor: asian_alliance_droneminer
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
@@ -131,13 +131,13 @@ cgrefn.asian:
 	Voiced:
 		VoiceSet: PRCSupplyVoice
 
-cgweap.asian:
+asian_alliance_asianwarfactory:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^AASpawnActorsOnSell
 	Tooltip:
 		Name: Asian War Factory
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgrefn.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianorerefinery
 	WithIdleOverlay@flag:
 		Sequence: idle-flag
 		RequiresCondition: !build-incomplete
@@ -150,7 +150,7 @@ cgweap.asian:
 	Voiced:
 		VoiceSet: PRCWarFactoryVoice
 
-cgdept.asian:
+asian_alliance_asianservicedepot:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -163,7 +163,7 @@ cgdept.asian:
 	Tooltip:
 		Name: Asian Service Depot
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgweap.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianwarfactory
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -181,7 +181,7 @@ cgdept.asian:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-cgradr.asian:
+asian_alliance_asianradar:
 	Inherits: ^RA2Building
 	Inherits@radar: ^RadarBuilding
 	Inherits@shape: ^2x2Shape
@@ -194,7 +194,7 @@ cgradr.asian:
 	ProvidesPrerequisite:
 		Prerequisite: anyhq
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgrefn.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianorerefinery
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -217,7 +217,7 @@ cgradr.asian:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-cgtech.asian:
+asian_alliance_asianbattlelab:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -229,7 +229,7 @@ cgtech.asian:
 		BuildPaletteOrder: 140
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~cgcnst.asian, cgradr.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianradar
 		Description: template_tech_center.description
 	Tooltip:
 		Name: Asian Battle Lab
@@ -243,7 +243,7 @@ cgtech.asian:
 	Production@Research:
 		Produces: Research
 
-cgmiac.asian:
+asian_alliance_militaryacademy:
 	Inherits: ^RA2Building
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@cashtrickler: ^LargeCashTricklerWithExperience
@@ -255,7 +255,7 @@ cgmiac.asian:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 140
 		BuildLimit: 1
-		Prerequisites: ~cgcnst.asian, cgtech.asian, derricklimit
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianbattlelab, derricklimit
 		Description: Upgrades the Veterancy of Troops.
 	Tooltip:
 		Name: Military Academy
@@ -310,13 +310,13 @@ cgmiac.asian:
 	Voiced:
 		VoiceSet: CHPropagandaCenterVoice
 
-cgairf.asian:
+asian_alliance_asianairforcecommand:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgradr.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianradar
 	Tooltip:
 		Name: Asian Airforce Command
 	Building:
@@ -335,8 +335,8 @@ cgairf.asian:
 		OrderName: AAClusterBomb
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: up_clusterbombs.asian
-			2: up_chaosbombs.asian
+			1: asian_alliance_upgrade_unlockclusterbombs
+			2: asian_alliance_upgrade_unlockchaosbombs
 		IconImage: tankmine.asian
 		Icons:
 			1: icon
@@ -374,20 +374,20 @@ cgairf.asian:
 		OrderName: aaparatroopers
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: up_massparadrop.asian
-			2: up_massparadrop.asian, up_japrif.asian
-			3: up_massparadrop.asian, up_plast.asian
-			4: up_massparadrop.asian, up_samurai.asian
-			5: up_massparadrop.asian, up_japrif.asian, up_plast.asian
-			6: up_massparadrop.asian, up_plast.asian, up_samurai.asian
-			7: up_massparadrop.asian, up_japrif.asian, up_samurai.asian
-			8: up_massparadrop.asian, up_japrif.asian, up_plast.asian, up_samurai.asian
-			9: up_massparadrop.asian, up_plast.asian, up_samurai.asian, up_archer.asian
-			10: up_massparadrop.asian, up_japrif.asian, up_samurai.asian, up_archer.asian
-			11: up_massparadrop.asian, up_japrif.asian, up_plast.asian, up_samurai.asian, up_archer.asian
-			12: up_massparadrop.asian, up_plast.asian, up_samurai.asian, up_archer.asian, up_asdf.asian
-			13: up_massparadrop.asian, up_japrif.asian, up_samurai.asian, up_archer.asian, up_asdf.asian
-			14: up_massparadrop.asian, up_japrif.asian, up_plast.asian, up_samurai.asian, up_archer.asian, up_asdf.asian
+			1: asian_alliance_upgrade_unlockmassparadrop
+			2: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic
+			3: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockplasmatrooper
+			4: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlocksamurai
+			5: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlockplasmatrooper
+			6: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_promotion_unlocksamurai
+			7: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlocksamurai
+			8: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_promotion_unlocksamurai
+			9: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_promotion_unlocksamurai, asian_alliance_promotion_unlockveteranarchers
+			10: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlocksamurai, asian_alliance_promotion_unlockveteranarchers
+			11: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_promotion_unlocksamurai, asian_alliance_promotion_unlockveteranarchers
+			12: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_promotion_unlocksamurai, asian_alliance_promotion_unlockveteranarchers, asian_alliance_promotion_unlockasdf
+			13: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlocksamurai, asian_alliance_promotion_unlockveteranarchers, asian_alliance_promotion_unlockasdf
+			14: asian_alliance_upgrade_unlockmassparadrop, asian_alliance_promotion_unlockfanatic, asian_alliance_promotion_unlockplasmatrooper, asian_alliance_promotion_unlocksamurai, asian_alliance_promotion_unlockveteranarchers, asian_alliance_promotion_unlockasdf
 		Icons:
 			1: paratroopers
 			2: paratroopers
@@ -435,20 +435,20 @@ cgairf.asian:
 			13: Deploys 3 ultimate squads including Fanatics, Samurai, Archers, and the ASDF specialist.
 			14: Deploys 3 supreme squads featuring the full might of the Alliance, including the ASDF specialist.
 		DropItems:
-			1: alligator.asian,gren.asian,tkiller.asian,flam.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian
-			2: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian
-			3: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian
-			4: alligator.asian,gren.asian,tkiller.asian,flam.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,samurai.asian
-			5: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian
-			6: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian
-			7: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian
-			8: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian
-			9: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian
-			10: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian
-			11: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian
-			12: alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,plast.asian,samurai.asian,archer.asian,asdf.asian
-			13: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,samurai.asian,archer.asian,asdf.asian
-			14: alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,asdf.asian,alligator.asian,gren.asian,tkiller.asian,flam.asian,japrif.asian,plast.asian,samurai.asian,archer.asian,asdf.asian
+			1: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper
+			2: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic
+			3: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper
+			4: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_japanesesamurai
+			5: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper
+			6: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai
+			7: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai
+			8: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai
+			9: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher
+			10: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_veteranarcher
+			11: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher
+			12: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf
+			13: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf
+			14: asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf,asian_alliance_alligator,asian_alliance_asianmilitia,asian_alliance_asiantankkiller,asian_alliance_asianflametrooper,asian_alliance_fanatic,asian_alliance_plasmatrooper,asian_alliance_japanesesamurai,asian_alliance_veteranarcher,asian_alliance_asdf
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
 		SelectTargetSpeechNotification: SelectTarget
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -521,7 +521,7 @@ cgairf.asian:
 	Voiced:
 		VoiceSet: PRCAirfieldVoice
 
-cgflam.asian:
+asian_alliance_asiansentryflamer:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@FireActor: ^FireActor
@@ -533,7 +533,7 @@ cgflam.asian:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgcnst.asian, cgbrck.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianbarracks
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 800
@@ -570,7 +570,7 @@ cgflam.asian:
 		Range: 6666
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: up_dragonfire.asian
+		Upgrades: asian_alliance_upgrade_dragonfire
 
 cgpnch.asian:
 	Inherits: ^RA2Defense
@@ -608,13 +608,13 @@ cgpnch.asian:
 		LocalOffset: 350,22,100, 350,-22,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !up_celestialpower.asian
+		RequiresCondition: !asian_alliance_upgrade_celestialpower
 	Armament@Upgrade:
 		Weapon: AsianPunisherAGEMP
 		LocalOffset: 350,22,100, 350,-22,100
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: up_celestialpower.asian
+		RequiresCondition: asian_alliance_upgrade_celestialpower
 	WithMuzzleOverlay:
 	BodyOrientation:
 		QuantizedFacings: 16
@@ -631,9 +631,9 @@ cgpnch.asian:
 		DetectionTypes: Underwater
 		Range: 6000
 	ActorStatValues:
-		Upgrades: up_celestialpower.asian
+		Upgrades: asian_alliance_upgrade_celestialpower
 
-cgpuls.asian:
+asian_alliance_pulsar:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -644,7 +644,7 @@ cgpuls.asian:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 70
-		Prerequisites: ~cgcnst.asian, cgradr.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianradar
 		Description: template_anti_aircraft_power_defense.description
 	Valued:
 		Cost: 900
@@ -660,11 +660,11 @@ cgpuls.asian:
 	Armament:
 		Weapon: AsianPhotonCannon
 		LocalOffset: 0,0,400
-		RequiresCondition: !up_celestialpower.asian
+		RequiresCondition: !asian_alliance_upgrade_celestialpower
 	Armament@Upgrade:
 		Weapon: AsianPhotonCannonEMP
 		LocalOffset: 0,0,400
-		RequiresCondition: up_celestialpower.asian
+		RequiresCondition: asian_alliance_upgrade_celestialpower
 	AttackTurreted:
 	Turreted:
 	Sellable:
@@ -682,9 +682,9 @@ cgpuls.asian:
 	DetectCloaked:
 		Range: 7000
 	ActorStatValues:
-		Upgrades: up_celestialpower.asian
+		Upgrades: asian_alliance_upgrade_celestialpower
 
-cgrail.asian:
+asian_alliance_railtower:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -695,7 +695,7 @@ cgrail.asian:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: ~cgcnst.asian, cgtech.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianbattlelab
 		Description: template_anti_vehicle_defense.description
 	Valued:
 		Cost: 2500
@@ -746,9 +746,9 @@ cgrail.asian:
 	DetectCloaked:
 		Range: 4800
 	ActorStatValues:
-		Upgrades: up_celestialpower.asian
+		Upgrades: asian_alliance_upgrade_celestialpower
 
-cgchtw.asian:
+asian_alliance_chaostower:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -761,7 +761,7 @@ cgchtw.asian:
 		BuildPaletteOrder: 80
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~cgcnst.asian, cgmiac.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_militaryacademy
 		Description: actor_cgchtw.description
 	Valued:
 		Cost: 1000
@@ -803,7 +803,7 @@ cgchtw.asian:
 	DetectCloaked:
 		Range: 2500
 
-cgplas.asian:
+asian_alliance_plasmacannon:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -816,7 +816,7 @@ cgplas.asian:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~cgcnst.asian, cgmiac.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_militaryacademy
 		Description: actor_cgplas.description
 	Valued:
 		Cost: 4000
@@ -856,9 +856,9 @@ cgplas.asian:
 	DetectCloaked:
 		Range: 7000
 	ActorStatValues:
-		Upgrades: up_dragonfire.asian
+		Upgrades: asian_alliance_upgrade_dragonfire
 
-cghype.asian:
+asian_alliance_hyperionprojector:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -869,7 +869,7 @@ cghype.asian:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgcnst.asian, cgmiac.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_militaryacademy
 		Description: actor_cghype.description
 	Valued:
 		Cost: 1000
@@ -904,9 +904,9 @@ cghype.asian:
 	DetectCloaked:
 		Range: 4500
 	ActorStatValues:
-		Upgrades: up_celestialpower.asian
+		Upgrades: asian_alliance_upgrade_celestialpower
 
-cgtnkr.asian:
+asian_alliance_tankreactor:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^AASpawnActorsOnSell
@@ -918,12 +918,12 @@ cgtnkr.asian:
 	Tooltip:
 		Name: Tank Reactor
 	ProvidesPrerequisite:
-		Prerequisite: cgtnkr.asian
+		Prerequisite: asian_alliance_tankreactor
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Building, RABuilding
 		Description: actor_cgtnkr.description
-		Prerequisites: ~cgcnst.asian, cgtech.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianbattlelab
 	Building:
 		Footprint: xxx =x=
 		Dimensions: 3,2
@@ -960,13 +960,13 @@ cgtnkr.asian:
 		Position: BottomLeft
 		RequiresSelection: true
 
-cgionc.asian:
+asian_alliance_advancedcommunicationcenter:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^AASpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgtech.asian, !cgionc.asian, ~techlevel.superweapons
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianbattlelab, !asian_alliance_advancedcommunicationcenter, ~techlevel.superweapons
 		Description: actor_cgionc.description
 	Tooltip:
 		Name: Advanced Communication Center
@@ -978,7 +978,7 @@ cgionc.asian:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: cgionc.asian
+		IconImage: asian_alliance_advancedcommunicationcenter
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -1011,9 +1011,9 @@ cgionc.asian:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: cgionc.asian
+		Prerequisite: asian_alliance_advancedcommunicationcenter
 
-cgchao.asian:
+asian_alliance_chaosstorminductor:
 	Inherits: ^RA2Building
 	Inherits@sell: ^AASpawnActorsOnSell
 	Inherits@SW: ^Superweapon
@@ -1022,7 +1022,7 @@ cgchao.asian:
 	Tooltip:
 		Name: Chaos Storm Inductor
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgtech.asian, ~techlevel.superweapons
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianbattlelab, ~techlevel.superweapons
 		Description: actor_cgchao.description
 	Building:
 		Footprint: =x= xxx xxx
@@ -1034,7 +1034,7 @@ cgchao.asian:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: cgchao.asian
+		IconImage: asian_alliance_chaosstorminductor
 		Icons:
 			1: icon2
 		Cursor: ioncannon
@@ -1074,7 +1074,7 @@ cgyard.asian:
 	Tooltip:
 		Name: Asian Naval Yard
 	Buildable:
-		Prerequisites: ~cgcnst.asian, cgrefn.asian, ~globalnaval
+		Prerequisites: ~asian_alliance_asianconstructionyard, asian_alliance_asianorerefinery, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -1091,19 +1091,19 @@ cgyard.asian:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 
-awall.asian:
+asian_alliance_concretebarrier:
 	Inherits: BRIK
 	RenderSprites:
-		Image: awall.asian
+		Image: asian_alliance_concretebarrier
 		Palette: ra2
 		PlayerPalette: playerra2
 	Buildable:
-		Prerequisites: ~cgcnst.asian
+		Prerequisites: ~asian_alliance_asianconstructionyard
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2
 		PlayerPalette: playerra2
-		Type: awall.asian
+		Type: asian_alliance_concretebarrier
 
 ##############################################
 ##############################################
