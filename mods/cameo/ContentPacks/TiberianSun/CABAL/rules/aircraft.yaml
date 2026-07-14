@@ -1,13 +1,15 @@
-cabal_overkillcarryall:
+cabal_overkill_gunship:
 	Inherits: ^Helicopter
-	Inherits@Template: ^UnarmedTransportHelicopterTemplate
+	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@reload: ^RearmableAircraft
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
 		Cost: 1750
 	Tooltip:
-		Name: Carryall
+		Name: Overkill Gunship
 	Selectable:
 		Bounds: 1280, 1024
 	UpdatesPlayerStatistics:
@@ -16,7 +18,7 @@ cabal_overkillcarryall:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
 		Prerequisites: ~cabal_helipad
-		Description: actor_cabal_overkillcarryall.description
+		Description: actor_cabal_overkill_gunship.description
 	Aircraft:
 		TurnSpeed: 29
 		Speed: 149
@@ -25,21 +27,28 @@ cabal_overkillcarryall:
 		LandingSounds: dropdwn1.aud
 		TakeOffOnResupply: true
 		CanSlide: false
-	Carryall:
-		Voice: Move
-		LocalOffset: 0,0,-317
-		BeforeLoadDelay: 10
-		BeforeUnloadDelay: 10
 	Health:
 		HP: 47500
 	ChangesHealth@SelfHealing:
 		Step: 19
-	SpawnActorOnDeath:
-		Actor: cabal_overkillcarryall_husk
+	Armament@PRIMARY:
+		Weapon: CabalOverkillGunshipLaser
+		LocalOffset: 0,0,0
+	AttackAircraft:
+		FacingTolerance: 80
+		PersistentTargeting: false
+		Voice: Attack
+		PauseOnCondition: disabled
+		AttackType: Hover
+	SelectionDecorations:
+	Selectable:
+		DecorationBounds: 1536, 1536
 	Voiced:
 		VoiceSet: TSHeli
+	SpawnActorOnDeath:
+		Actor: cabal_overkill_gunship_husk
 	RenderSprites:
-		Image: cabal_overkillcarryall
+		Image: cabal_overkill_gunship
 		PlayerPalette: player_rgba
 
 cabal_hunterkillermk1:
@@ -109,7 +118,7 @@ cabal_hunterkillermk1:
 		Image: cabal_hunterkillermk1
 		PlayerPalette: player_rgba
 
-cabal_hunterkillermk2:
+cabal_hunter_drone_carrier:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -119,14 +128,14 @@ cabal_hunterkillermk2:
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Overkill Fortress
+		Name: Hunter Drone Carrier
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_helipad, cabal_techcenter
 		Queue: Aircraft, RAAircraft
-		Description: actor_cabal_hunterkillermk2.description
+		Description: actor_cabal_hunter_drone_carrier.description
 	Aircraft:
 		Speed: 50
 		TurnSpeed: 10
@@ -138,7 +147,7 @@ cabal_hunterkillermk2:
 		Step: 120
 	CarrierMaster:
 		ArmamentNames: primary
-		Actors: cabal_hunterkillermk2_drone, cabal_hunterkillermk2_drone, cabal_hunterkillermk2_drone
+		Actors: cabal_hunter_drone, cabal_hunter_drone, cabal_hunter_drone
 		RearmTicks: 25
 		RespawnTicks: 75
 		InstaRepair: true
@@ -196,12 +205,12 @@ cabal_hunterkillermk2:
 	DeathSounds:
 		VolumeMultiplier: 2
 	SpawnActorOnDeath:
-		Actor: cabal_hunterkillermk2_husk
+		Actor: cabal_hunter_drone_carrier_husk
 	RenderSprites:
-		Image: cabal_hunterkillermk2
+		Image: cabal_hunter_drone_carrier
 		PlayerPalette: player_rgba
 
-cabal_hunterkillermk2_drone:
+cabal_hunter_drone:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -209,7 +218,7 @@ cabal_hunterkillermk2_drone:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Overkill Drone
+		Name: Hunter Drone
 	Buildable:
 		Description: template_carrier_slave.description
 	Hovers:
@@ -242,14 +251,14 @@ cabal_hunterkillermk2_drone:
 	HitShape:
 	-MapEditorData:
 	SpawnActorOnDeath:
-		Actor: cabal_hunterkillermk2_drone_husk
+		Actor: cabal_hunter_drone_husk
 		OwnerType: InternalName
 		EffectiveOwnerFromOwner: true
 	RenderSprites:
-		Image: cabal_hunterkillermk2_drone
+		Image: cabal_hunter_drone
 		PlayerPalette: player_rgba
 
-cabal_wasp:
+cabal_orb_drone:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -259,14 +268,14 @@ cabal_wasp:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Wasp
+		Name: Orb Drone
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 5
-		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_waspstriker
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_cyborgassassin
 		Queue: Infantry, RAInfantry
-		Description: actor_cabal_wasp.description
+		Description: actor_cabal_orb_drone.description
 	Aircraft:
 		TurnSpeed: 28
 		Speed: 140
@@ -287,10 +296,10 @@ cabal_wasp:
 		IdleSequences: idle2
 	-SpawnActorOnDeath:
 	RenderSprites:
-		Image: cabal_wasp
+		Image: cabal_orb_drone
 		PlayerPalette: player_rgba
 
-cabal_wasp_striker:
+cabal_cyborg_assassin:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -301,14 +310,14 @@ cabal_wasp_striker:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Wasp Striker
+		Name: Cyborg Assassin
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 6
-		Prerequisites: ~cabal_cyborgfactory, cabal_radar, cabal_promotion_waspstriker
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, cabal_promotion_cyborgassassin
 		Queue: Infantry, RAInfantry
-		Description: actor_cabal_wasp_striker.description
+		Description: actor_cabal_cyborg_assassin.description
 	Aircraft:
 		TurnSpeed: 30
 		Speed: 150
@@ -329,7 +338,7 @@ cabal_wasp_striker:
 		IdleSequences: idle2
 	-SpawnActorOnDeath:
 	RenderSprites:
-		Image: cabal_wasp
+		Image: cabal_cyborg_assassin
 		PlayerPalette: player_rgba
 
 cabal_mothership:

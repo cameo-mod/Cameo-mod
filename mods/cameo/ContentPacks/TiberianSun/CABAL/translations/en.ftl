@@ -165,15 +165,15 @@ actor_cabal_upgrade_cyberneticplating =
       Cyborg infantry gain a shield and medium armor plating.
       Increases speed by 20%.
 
-actor_cabal_wasp =
-   .name = Wasp
-   .description = Flying infantry unit armed with anti-personnel rockets.
+actor_cabal_orb_drone =
+   .name = Orb Drone
+   .description = Flying drone armed with a light laser.
       Strong vs Infantry, Light armor
       Weak vs Aircraft
 
-actor_cabal_wasp_striker =
-   .name = Wasp Striker
-   .description = Promoted Wasp with enhanced speed and firepower.
+actor_cabal_cyborg_assassin =
+   .name = Cyborg Assassin
+   .description = Promoted flying cyborg assassin with enhanced speed and firepower.
       Strong vs Infantry, Light armor
       Weak vs Aircraft
 
@@ -338,8 +338,8 @@ actor_cabal_promotion_coredefender =
    .description = Promotion
       Unlocks the promoted unit for production.
 
-actor_cabal_promotion_waspstriker =
-   .name = Unlock Wasp Striker
+actor_cabal_promotion_cyborgassassin =
+   .name = Unlock Cyborg Assassin
    .description = Promotion
       Unlocks the promoted unit for production.
 
@@ -357,10 +357,11 @@ actor-cabal_techcenter =
    .description = CABAL Tech Center.
       Required for advanced units and upgrades.
 
-actor_cabal_overkillcarryall =
-   .name = Carryall
-   .description = VTOL aircraft capable of lifting and transporting vehicles.
-      Unarmed.
+actor_cabal_overkill_gunship =
+   .name = Overkill Gunship
+   .description = Long-range laser artillery gunship.
+      Strong vs Vehicles, Buildings
+      Weak vs Infantry, Aircraft
 
 actor_cabal_hunterkillermk1 =
    .name = Hunter Killer
@@ -368,9 +369,9 @@ actor_cabal_hunterkillermk1 =
       Strong vs Infantry, Light armor, Aircraft
       Weak vs Vehicles
 
-actor_cabal_hunterkillermk2 =
-   .name = Overkill Fortress
-   .description = Heavy carrier with drone swarm and a big moving laser.
+actor_cabal_hunter_drone_carrier =
+   .name = Hunter Drone Carrier
+   .description = Heavy carrier with hunter drone swarm and a big moving laser.
       Strong vs Vehicles, Buildings
       Weak vs Infantry, Aircraft
 

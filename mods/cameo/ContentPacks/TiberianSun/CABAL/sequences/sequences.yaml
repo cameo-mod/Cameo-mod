@@ -1671,27 +1671,27 @@ cabal_hunterkillermk1:
 	icon:
 		Filename: cabal_hunterkillermk1_icon.png
 
-cabal_hunterkillermk2:
+cabal_hunter_drone_carrier:
 	idle:
-		Filename: cabal_hunterkillermk2.png
+		Filename: cabal_hunter_drone_carrier.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: cabal_hunterkillermk2_icon.png
+		Filename: cabal_hunter_drone_carrier_icon.png
 
-cabal_hunterkillermk2_drone:
+cabal_hunter_drone:
 	idle:
 		Filename: cabal_hunterkillermk2_drone.png
 		Facings: 32
 		Scale: 0.5
 
-cabal_overkillcarryall:
+cabal_overkill_gunship:
 	idle:
-		Filename: cabal_overkillcarryall.png
+		Filename: cabal_overkill_gunship.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: cabal_overkillcarryall_icon.png
+		Filename: cabal_overkill_gunship_icon.png
 
 cabal_mothership:
 	idle:
@@ -1704,10 +1704,40 @@ cabal_mothership:
 	icon:
 		Filename: cabal_mothership_icon.png
 
-cabal_wasp:
+cabal_orb_drone:
 	Defaults:
-		Filename: cabal_wasp.shp
-		Scale: 0.8
+		Filename: cabal_orb_drone.png
+		FrameSize: 64, 64
+		Scale: 1
+		Tick: 200
+	stand:
+		Facings: 64
+		Length: 1
+	run:
+		Facings: 64
+		Length: 1
+	flying:
+		Facings: 64
+		Length: 1
+	idle:
+		Facings: 64
+		Length: 1
+	idle1:
+		Facings: 64
+		Length: 1
+	idle2:
+		Facings: 64
+		Length: 1
+	attack:
+		Facings: 64
+		Length: 1
+	icon:
+		Filename: cabal_wasp_icon.png
+
+cabal_cyborg_assassin:
+	Defaults:
+		Filename: cabal_cyborg_assassin.shp
+		Scale: 1
 		Tick: 200
 		Offset: 0, 0, 16
 	stand:
@@ -1804,12 +1834,7 @@ cabal_wasp:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: cabal_wasp_icon.png
-
-cabal_wasp_striker:
-	Inherits: cabal_wasp
-	icon:
-		Filename: cabal_wasp_icon.png
+		Filename: cabal_assassin_icon.png
 
 cabal_obeliskofdarkness:
 	Defaults:

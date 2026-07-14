@@ -3185,12 +3185,12 @@ Player:
 		ConstructionYardTypes: fact.gdi, fact.nod, rafact.allies, rafact.soviet, rafact.japan, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, sccommandcenter, scnexus, schatchery, sclair, schive, glcommand, chcommand, usacommand, construction_yard.ixian, construction_yard.ordos, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, cgcnst.latin, qacst.steel, conyard.nax, conyard.nax2, egcnst.futu, tkmcommandcenter
 		NavalUnitsTypes: ss, msub, dd, ca, pt, japanspeedboat, japancarrier, yamatobattleship, cncss, nodlasercorvette, ssmsub, cncdd, cncca, cncpt, ra2sqd, ra2dlph, ra2dest, ra2aegis, ra2sub, ra2hyd, ra2dred, ra2carrier, yrbsub, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, gunb.asian, lsub.asian, quasfrig.asian, karrier.asian, tsun.asian, ksub.asian, triton.latin, sub.latin, tuboat.nax, muboat.nax, rammax.latin
 		NavalProductionTypes: raspen, ra1syrd, ra1jsyrd, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, cgyard.asian, cgyard.latin, naval.nax
-		AirUnitsTypes: gdifirehawk, mig, su57, mignuke, rapierjumpjet, modbomber, ra2falc, ra2beag, yrbpln1, phoenix.asian, twister.steel, grun.steel, mig.latin, air_drone.ixian, bomber.ixian, eye.ordos, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunterkillermk2, cabal_mothership, cabal_overkillcarryall, cabal_wasp, cabal_wasp_striker
+		AirUnitsTypes: gdifirehawk, mig, su57, mignuke, rapierjumpjet, modbomber, ra2falc, ra2beag, yrbpln1, phoenix.asian, twister.steel, grun.steel, mig.latin, air_drone.ixian, bomber.ixian, eye.ordos, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunter_drone_carrier, cabal_mothership, cabal_overkill_gunship, cabal_orb_drone, cabal_cyborg_assassin
 		StaticAntiAirTypes: sam, td_gdi_skyshield, atwr, agun, rasam, jmgnest, jballistat, ra2nasam, ra2naflak, yrygggun, yrngbnkr, yrngtbnk, large_gun_turret.ixian, cgpuls.asian, fedaa.steel, aatur.latin, flak88.nax, scmissileturret, sccreepcolony, sccreepcolonydefense, scphotoncannon, cabal_obeliskofdarkness
 		HighValueTargetTypes: fact.gdi, fact.nod, proc.gdi, proc.nod, weap, afld, hq.gdi, hq.nod, eye, tmpl, td_nod_templeprime, rafact.allies, rafact.soviet, rafact.japan, raproc.allies, raproc.soviet, jproc, raweap, ra_gigafactory, raweapa, modraweapj, dome.allies, dome.soviet, dome.japan, atek, stek, modjtek, gap, mslo, iron, pdox, jshrine, ra2gacnst, ra2nacnst, yrnacnst, ra2garefn, ra2narefn, yryarefn, ra2gaweap, ra2naweap, yrygweap, ra2gaairc, ra2naradr, ra2napsis, ra2gatech, ra2natech, yrygtech, yrygcomd, ra2gaweat, ra2gacsph, ra2namisl, ra2nairon, yrygppet, yryggntc, cgcnst.asian, cgrefn.asian, cgweap.asian, cgradr.asian, cgtech.asian, cgionc.asian, cgchao.asian, qacst.steel, qref.steel, qaweap.steel, qatech.steel, qaorbit.steel, cgcnst.latin, cgauto.latin, cgweap.latin, cgspy.latin, ca12hit.latin, conyard.nax, refin.nax, weap.nax, radar.nax, tek.nax, tech.nax, rocket.nax, conyard.nax2, refin.nax2; weap.nax2, radar.nax2, tech.nax2, meteorray.nax2, gcore.nax2, egcnst.futu, egrefn.futu, egweap2.futu, egtf.futu, egtech.futu, construction_yard.ixian, refinery.ixian, heavy_factory.ixian, outpost.ixian research_centre.ixian, starport.ixian, supercomputer.ixian, construction_yard.ordos, refinery.ordos, heavy_factory.ordos, outpost.ordos research_centre.ordos, starport.ordos, ts_nod_missilesilo, cabal_missilesilo, ts_gdi_upgradecenter
 		HighValueTargetPriority: 50
 		AirToAirPriority: 25
-		BigAirThreats: gdifirehawk, mignuke, modbomber, rapierjumpjet, ra2beag, yrbpln1, ra2zep, yrdisk, phoenix.asian, inspect.steel, cruiser.steel, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, dieglocke.nax2, piercer.nax2, cryo.futu, harbinger.futu, farasha.ixian, bomber.ixian, eye.ordos, wraith.ordos, scbattlecruiser, scwyvern, sccarrier, scgladius, scguardian, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon, cabal_hunterkillermk2, cabal_mothership
+		BigAirThreats: gdifirehawk, mignuke, modbomber, rapierjumpjet, ra2beag, yrbpln1, ra2zep, yrdisk, phoenix.asian, inspect.steel, cruiser.steel, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, dieglocke.nax2, piercer.nax2, cryo.futu, harbinger.futu, farasha.ixian, bomber.ixian, eye.ordos, wraith.ordos, scbattlecruiser, scwyvern, sccarrier, scgladius, scguardian, scdevourer, scpythean, scphobos, scbehemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon, cabal_hunter_drone_carrier, cabal_mothership
 		AirSquadTargetTypes:
 			heli: Aircraft, Ground, Naval
 			orca: Aircraft, Ground, Naval
@@ -5191,13 +5191,13 @@ Player:
 			cabal_rocketcyborg: 7
 			cabal_tiberiumharvester: 2
 			cabal_mothership: 1
-			cabal_overkillcarryall: 1
+			cabal_overkill_gunship: 1
 			cabal_spidercnc4: 1
-			cabal_wasp: 5
-			cabal_wasp_striker: 3
+			cabal_orb_drone: 5
+			cabal_cyborg_assassin: 3
 			tsprobe: 1
 			cabal_mobilestealthgenerator: 1
-			cabal_hunterkillermk2: 3
+			cabal_hunter_drone_carrier: 3
 			cabal_hunterkillermk1: 3
 			cabal_laserspider: 5
 			cabal_mantis: 5

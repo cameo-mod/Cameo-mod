@@ -1752,6 +1752,32 @@ CabalOverkillCharge:
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Water, Air
 
+CabalOverkillGunshipLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 80
+	Range: 10000
+	Projectile: LaserZap
+		Width: 80
+		ZOffset: 2047
+		Color: 77DD22CC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 40
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 2A2A55DD
+		TrackTarget: false
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 5000
+		Spread: 256
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_l
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
+
 CabalOverkillLaser:
 	Inherits: ^LaserWeapon
 	ReloadDelay: 50

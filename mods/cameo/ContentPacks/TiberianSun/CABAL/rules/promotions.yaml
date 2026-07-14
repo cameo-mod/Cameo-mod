@@ -99,16 +99,16 @@ cabal_promotion_coredefender:
 		Image: cabal_coredefender
 	ProvidesPrerequisite:
 
-cabal_promotion_waspstriker:	Inherits: ^promotion_upgrade.template
+cabal_promotion_cyborgassassin:	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Wasp Striker
+		Name: Unlock Cyborg Assassin
 	Buildable:
 		BuildPaletteOrder: 3
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_waspstriker, rank1
-		Description: actor_cabal_promotion_waspstriker.description
+		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_cyborgassassin, rank1
+		Description: actor_cabal_promotion_cyborgassassin.description
 	RenderSprites:
-		Image: cabal_wasp
+		Image: cabal_cyborg_assassin
 	ProvidesPrerequisite:
 
 cabal_promotion_hunterkillermk1elite:	Inherits: ^promotion_upgrade.template
@@ -117,7 +117,7 @@ cabal_promotion_hunterkillermk1elite:	Inherits: ^promotion_upgrade.template
 	Buildable:
 		BuildPaletteOrder: 6
 		Queue: Promotions
-		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite, cabal_promotion_waspstriker, rank2
+		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite, cabal_promotion_cyborgassassin, rank2
 		Description: actor_cabal_promotion_hunterkillermk1elite.description
 	RenderSprites:
 		Image: cabal_hunterkillermk1
