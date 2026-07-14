@@ -425,9 +425,9 @@ CabalReaperMissiles:
 	Inherits@3: ^LightMissile
 	Inherits@4: ^MediumMissile
 	Inherits@5: ^CabalMissile
-	ReloadDelay: 32
+	ReloadDelay: 24
 	Burst: 2
-	BurstDelays: 4
+	BurstDelays: 12
 	Range: 5785
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
@@ -537,6 +537,7 @@ CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
 	Inherits: ^ShrapnelWeapon
 	Inherits: ^MediumCannon
+	Inherits: ^HeavyCannon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
 	Range: 11582
@@ -554,21 +555,25 @@ CabalArtilleryWalkerShell:
 		TrailImage: black_smokey
 		TrailPalette: effect75alpha
 	Warhead@Grenade: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MediumCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@HeavyCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 
 CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^Grenade
@@ -596,37 +601,43 @@ CabalArtilleryWalkerShellUpgraded:
 		TrailImage: green_smokey
 		TrailPalette: effect75alpha
 	Warhead@Grenade: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@ShrapnelWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MediumCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@HeavyCannon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MediumChemicalWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		Damage: 21000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@TeslaChargedWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@MagicWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@MagicWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 8000
+		Damage: 42000
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		Damage: 4
+		Damage: 21
 
 CabalHunterKillerLasers:
 	Inherits: ^LaserWeapon
@@ -802,7 +813,7 @@ CabalDissolverSpray:
 	Warhead@Effect: CreateEffect
 		Image: cabal_dissolveimpact
 		Explosions: idle
-		ImpactSounds: chemtrooper_att1.aud
+		ImpactSounds: drtelectro.wav
 CabalCommandoPlasma:
 	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
