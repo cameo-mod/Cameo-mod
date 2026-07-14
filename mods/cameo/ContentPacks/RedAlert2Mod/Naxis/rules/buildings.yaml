@@ -564,7 +564,7 @@ bunk.nax:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
-		#InitialUnits: ra2e2
+		#InitialUnits: ra2_soviet_conscript
 	WithSpriteBody:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
@@ -699,7 +699,7 @@ rocket.nax:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: ra2namisl
+		IconImage: ra2_soviet_nuclearmissilesilo
 		Icons:
 			1: icon2
 		Cursor: nuke

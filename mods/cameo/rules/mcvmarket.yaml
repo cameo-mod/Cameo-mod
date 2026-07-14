@@ -123,9 +123,9 @@ MMRA2AMCV:
 		Prerequisite: mmalliesra2
 
 MMRA2SMCV:
-	Inherits@MCV: RA2SMCV
+	Inherits@MCV: ra2_soviet_mobileconstructionvehicle
 	Transforms:
-		IntoActor: ra2nacnst
+		IntoActor: ra2_soviet_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (SovietRA2)
 	Buildable:
@@ -133,7 +133,7 @@ MMRA2SMCV:
 		-Description:
 		Prerequisites: !mmsovietra2
 	RenderSprites:
-		Image: ra2smcv
+		Image: ra2_soviet_mobileconstructionvehicle
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmsovietra2
 

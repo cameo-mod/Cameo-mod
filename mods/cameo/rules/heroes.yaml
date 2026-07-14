@@ -636,7 +636,7 @@ volkovcc:
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 140
-		Prerequisites: ra2naweap, ra2natech, ~techlevel.high, ~anysovietsallra, !1hero
+		Prerequisites: ra2_soviet_warfactory, ra2_soviet_battlelab, ~techlevel.high, ~anysovietsallra, !1hero
 		Description: Controls and provides ra1_soviet_volkov\nBuilding must be sold and rebuilt for another ra1_soviet_volkov to appear
 		IconPalette: ra2
 		BuildLimit: 1
@@ -723,7 +723,7 @@ ra1_soviet_volkov:
 		Range: 5c0
 		
 CHITZKOI:
-	Inherits: RA2DOG
+	Inherits: ra2_soviet_attackdog
 	-Buildable:
 	-DeliversCash:
 	-Cloneable:
@@ -739,7 +739,7 @@ CHITZKOI:
 	Health:
 		HP: 7200
 	RenderSprites:
-		Image: ra2dog
+		Image: ra2_soviet_attackdog
 	MobSpawnerSlave:
 	WithColoredOverlay@IDISABLE:
 		RequiresCondition: nocc

@@ -36,7 +36,7 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: ra2russia, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
-		BaseActor: ra2smcv
+		BaseActor: ra2_soviet_mobileconstructionvehicle
 	StartingUnits@mcvyuri:
 		Class: none
 		ClassName: MCV Only
@@ -58,14 +58,14 @@ World:
 		Class: light
 		ClassName: Light Support
 		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
-		BaseActor: ra2smcv
-		SupportActors: ra2e2,ra2e2,ra2e2,ra2flakt,ra2flakt,ra2htnk,ra2htk
+		BaseActor: ra2_soviet_mobileconstructionvehicle
+		SupportActors: ra2_soviet_conscript,ra2_soviet_conscript,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_flaktrooper,ra2_soviet_rhinoheavytank,ra2_soviet_flaktrack
 	StartingUnits@heavyra2soviet:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: ra2russia #, ra2doom, ra2cuba, ra2cubaaddon, ra2libyan, ra2iraq, ra2psicorps, ra2iraqaddon
-		BaseActor: ra2smcv
-		SupportActors: ra2e2,ra2e2,ra2e2,ra2flakt,ra2flakt,ra2htnk,ra2htk,ra2htnk,ra2apoc
+		BaseActor: ra2_soviet_mobileconstructionvehicle
+		SupportActors: ra2_soviet_conscript,ra2_soviet_conscript,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_flaktrooper,ra2_soviet_rhinoheavytank,ra2_soviet_flaktrack,ra2_soviet_rhinoheavytank,ra2_soviet_apocalypsetank
 	StartingUnits@defaultyuri:
 		Class: light
 		ClassName: Light Support
@@ -514,7 +514,7 @@ RA2Flameguy:
 
 ^RA2SSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: ra2engineer.soviet, ra2e2, ra2e2, ra2flakt
+		ActorTypes: ra2_soviet_engineer, ra2_soviet_conscript, ra2_soviet_conscript, ra2_soviet_flaktrooper
 
 ^RA2YSpawnActorsOnSell:
 	SpawnActorsOnSell:
@@ -1508,19 +1508,19 @@ ra2_allies_concretebarrier:
 		PlayerPalette: playerra2
 		Type: ra2_allies_concretebarrier
 
-ra2_swall:
+ra2_soviet_concretebarrier:
 	Inherits: BRIK
 	RenderSprites:
-		Image: ra2_swall
+		Image: ra2_soviet_concretebarrier
 		Palette: ra2
 		PlayerPalette: playerra2
 	Buildable:
-		Prerequisites: ~ra2nacnst
+		Prerequisites: ~ra2_soviet_constructionyard
 	WithWallSpriteBody:
 		IsPlayerPalette: True
 		Palette: playerra2
 		PlayerPalette: playerra2
-		Type: ra2_swall
+		Type: ra2_soviet_concretebarrier
 
 ra2_ywall:
 	Inherits: BRIK
@@ -1540,13 +1540,13 @@ ra2_ywall:
 ##############################################
 #   Red Alert 2 Soviet Structures
 ##############################################
-ra2nacnst:
+ra2_soviet_constructionyard:
 	Inherits: ra2_allies_alliedconstructionyard
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Tooltip:
 		Name: Soviet Construction Yard
 	Transforms:
-		IntoActor: ra2smcv
+		IntoActor: ra2_soviet_mobileconstructionvehicle
 	-WithIdleOverlay@fans:
 	WithIdleOverlay@top:
 		Sequence: idle-top
@@ -1572,24 +1572,24 @@ ra2nacnst.infiltrated:
 		Description:
 	RenderSprites:
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: ra2nacnst
+		Prerequisite: ra2_soviet_constructionyard
 	RenderSprites:
-		Image: ra2nacnst
+		Image: ra2_soviet_constructionyard
 
-ra2naweap:
+ra2_soviet_warfactory:
 	Inherits: ^RA2DefaultWeap
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Tooltip:
 		Name: Soviet War Factory
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2narefn
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_orerefinery
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
 	WithIdleOverlay@bib:
 		Sequence: bib
 
-ra2napowr:
+ra2_soviet_teslareactor:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
@@ -1602,7 +1602,7 @@ ra2napowr:
 		BuildPaletteOrder: 10
 		Queue: Building, RABuilding
 		Description: template_power.description
-		Prerequisites: ~ra2nacnst
+		Prerequisites: ~ra2_soviet_constructionyard
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2
@@ -1622,7 +1622,7 @@ ra2napowr:
 		RequiresCondition: !build-incomplete
 	ProvidesPrerequisite@buildingname:
 
-ra2nanrct:
+ra2_soviet_nuclearreactor:
 	Inherits: ^RA2Building
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
@@ -1633,7 +1633,7 @@ ra2nanrct:
 	Tooltip:
 		Name: Nuclear Reactor
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2natech
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_battlelab
 		BuildPaletteOrder: 200
 		Queue: Building, RABuilding
 		Description: actor_nanrct.description
@@ -1660,9 +1660,9 @@ ra2nanrct:
 		Weapon: ReactorNuke
 		RequiresCondition: !chronobeamed
 	ProvidesPrerequisite@buildingname:
-		Prerequisite: ra2napowr
+		Prerequisite: ra2_soviet_teslareactor
 
-ra2nahand:
+ra2_soviet_barracks:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
@@ -1675,7 +1675,7 @@ ra2nahand:
 	ProvidesPrerequisite:
 		Prerequisite: RA2Barracks
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2napowr
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_teslareactor
 		Queue: Building, RABuilding
 	Building:
 		Footprint: xx xx ==
@@ -1689,7 +1689,7 @@ ra2nahand:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-ra2narefn:
+ra2_soviet_orerefinery:
 	Inherits: ^RA2Building
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Inherits@ref: ^Refinery
@@ -1699,7 +1699,7 @@ ra2narefn:
 	Tooltip:
 		Name: Soviet Ore Refinery
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2napowr
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_teslareactor
 	Building:
 		Footprint: xxx= xxx= xxx=
 		Dimensions: 4,3
@@ -1710,7 +1710,7 @@ ra2narefn:
 		DockOffset: 1086,1086,0
 	DrawLineToTarget:
 	FreeActor:
-		Actor: ra2harv
+		Actor: ra2_soviet_warminer
 		SpawnOffset: 2,2
 		Facing: 256
 	SelectionDecorations:
@@ -1719,7 +1719,7 @@ ra2narefn:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-ra2naradr:
+ra2_soviet_radar:
 	Inherits: ^RA2Building
 	Inherits@shape: ^2x2Shape
 	Inherits@radar: ^RadarBuilding
@@ -1734,7 +1734,7 @@ ra2naradr:
 	Tooltip:
 		Name: Soviet Radar
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2narefn
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_orerefinery
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2
@@ -1776,7 +1776,7 @@ ra2naradr:
 		SupportPowerPaletteOrder: 10
 	SupportPowerChargeBar:
 
-ra2nadept:
+ra2_soviet_servicedepot:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
@@ -1789,7 +1789,7 @@ ra2nadept:
 	Tooltip:
 		Name: Soviet Service Depot
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2naweap
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_warfactory
 	Building:
 		Footprint: Xx_ === _=_
 		Dimensions: 3,3
@@ -1805,13 +1805,13 @@ ra2nadept:
 	GivesBuildableArea:
 		AreaTypes: building, cityi
 
-ra2natech:
+ra2_soviet_battlelab:
 	Inherits: ^RA2Building
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2naradr
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_radar
 	Tooltip:
 		Name: Soviet Battle Lab
 	ProvidesPrerequisite:
@@ -1830,7 +1830,7 @@ ra2natech:
 		Descriptions:
 			1: power_paratroopers.description
 		DropItems:
-			1: RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt,RA2E2,ra2flakt
+			1: ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_conscript,ra2_soviet_flaktrooper,ra2_soviet_conscript,ra2_soviet_flaktrooper
 		ReinforcementsArrivedSpeechNotification: ReinforcementsArrived
 		SelectTargetSpeechNotification: SelectTarget
 		IncomingSpeechNotification: EnemyUnitsApproaching
@@ -1852,7 +1852,7 @@ ra2natech:
 			1:
 		DirectionArrowAnimation: airstrikedirection
 
-ra2naairf:
+ra2_soviet_airfield:
 	Inherits: ^RA2Building
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
@@ -1862,7 +1862,7 @@ ra2naairf:
 	Tooltip:
 		Name: Soviet Airfield
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2naradr
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_radar
 		Queue: Building, RABuilding
 		Description: Produces aircraft.
 	Building:
@@ -1894,7 +1894,7 @@ ra2naairf:
 		PauseOnCondition: disabled
 	ProvidesPrerequisite@buildingname:
 
-yrngindp:
+ra2_soviet_industrialplant:
 	Inherits: ^RA2Building
 	Inherits@shape: ^4x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
@@ -1907,7 +1907,7 @@ yrngindp:
 		Name: Industrial Plant
 	Buildable:
 		BuildPaletteOrder: 200
-		Prerequisites: ~ra2nacnst, ra2natech
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_battlelab
 		Queue: Building, RABuilding
 		BuildLimit: 1
 		Description: Reduces cost of vehicles by 25%.
@@ -1922,7 +1922,7 @@ yrngindp:
 		Sequence: idle-lights
 		RequiresCondition: !build-incomplete
 
-ra2namisl:
+ra2_soviet_nuclearmissilesilo:
 	Inherits: ^RA2Building
 	Inherits@SW: ^PrimarySuperweapon
 	Inherits@shape: ^3x3Shape
@@ -1931,7 +1931,7 @@ ra2namisl:
 		Name: Nuclear Missile Silo
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra2nacnst, ra2natech, !ra2nuke, ~techlevel.superweapons
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_battlelab, !ra2nuke, ~techlevel.superweapons
 		Queue: Defence, RADefence
 		Description: actor_namisl.description
 	Building:
@@ -1944,7 +1944,7 @@ ra2namisl:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: ra2namisl
+		IconImage: ra2_soviet_nuclearmissilesilo
 		Icons:
 			1: icon2
 		Cursor: nuke
@@ -1991,13 +1991,13 @@ ra2namisl:
 	ProvidesPrerequisite@swlimit:
 		Prerequisite: ra2nuke
 
-ra2nairon:
+ra2_soviet_ironcurtain:
 	Inherits: ^RA2Building
 	Inherits@SW: ^Superweapon
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^RA2SSpawnActorsOnSell
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2natech, ~techlevel.superweapons
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_battlelab, ~techlevel.superweapons
 		Description: actor_iron.description
 	Tooltip:
 		Name: ra1_soviet_ironcurtain Curtain
@@ -2012,7 +2012,7 @@ ra2nairon:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: ra2nairon
+		IconImage: ra2_soviet_ironcurtain
 		Icons:
 			1: icon2
 		ChargeInterval: 4500
@@ -2045,7 +2045,7 @@ ra2nairon:
 	MustBeDestroyed:
 		RequiredForShortGame: false
 
-yrngbnkr:
+ra2_soviet_battlebunker:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BunkerTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -2064,7 +2064,7 @@ yrngbnkr:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2nacnst, ra2nahand
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_barracks
 		Description: actor_nabnkr.description
 	Valued:
 		Cost: 800
@@ -2080,7 +2080,7 @@ yrngbnkr:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 6
-		#InitialUnits: ra2e2
+		#InitialUnits: ra2_soviet_conscript
 	WithSpriteBody:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
@@ -2094,11 +2094,11 @@ yrngbnkr:
 	RevealsShroud:
 		Range: 6666
 	Selectable:
-		Class: yrngbnkr
+		Class: ra2_soviet_battlebunker
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining
 
-ra2nalasr:
+ra2_soviet_sentrygun:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -2113,7 +2113,7 @@ ra2nalasr:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2nacnst, ra2nahand
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_barracks
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 500
@@ -2151,9 +2151,9 @@ ra2nalasr:
 	RevealsShroud:
 		Range: 6577
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining
 
-ra2naflak:
+ra2_soviet_flakcannon:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -2165,7 +2165,7 @@ ra2naflak:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2nacnst, ra2naradr
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_radar
 		Description: actor_agun.description
 	Valued:
 		Cost: 700
@@ -2205,9 +2205,9 @@ ra2naflak:
 	DetectCloaked:
 		Range: 6468
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavycannons
+		Upgrades: ra2_soviet_upgrade_heavycannons
 
-ra2tesla:
+ra2_soviet_teslacoil:
 	Inherits: ^RA2Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -2219,7 +2219,7 @@ ra2tesla:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra2nacnst, ra2natech
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_battlelab
 		Description: actor_ra2tesla.description
 	Valued:
 		Cost: 2000
@@ -2234,27 +2234,27 @@ ra2tesla:
 	Armament:
 		Weapon: RA2CoilBolt
 		LocalOffset: 120,0,1100
-		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (!ra2_soviet_upgrade_teslaoverload && !rank-elite)
 	Armament@2:
 		Weapon: RA2CoilBolt2
 		LocalOffset: 120,0,1100
-		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviet_upgrade_teslaoverload && !rank-elite) || (!ra2_soviet_upgrade_teslaoverload && rank-elite)
 	Armament@3:
 		Weapon: RA2CoilBolt3
 		LocalOffset: 120,0,1100
-		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: ((!TeslaCoilCharge && !unpowered) || (TeslaCoilCharge == 1 && unpowered)) && (ra2_soviet_upgrade_teslaoverload && rank-elite)
 	Armament@Charged1:
 		Weapon: RA2OPCoilBolt1
 		LocalOffset: 120,0,1100
-		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (!ra2_soviet_upgrade_teslaoverload && !rank-elite)
 	Armament@Charged2:
 		Weapon: RA2OPCoilBolt2
 		LocalOffset: 120,0,1100
-		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviet_upgrade_teslaoverload && !rank-elite) || (!ra2_soviet_upgrade_teslaoverload && rank-elite)
 	Armament@Charged3:
 		Weapon: RA2OPCoilBolt3
 		LocalOffset: 120,0,1100
-		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: ((TeslaCoilCharge && !unpowered) || (TeslaCoilCharge > 1 && unpowered)) && (ra2_soviet_upgrade_teslaoverload && rank-elite)
 	AttackTesla:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: disabled
@@ -2315,7 +2315,7 @@ ra2tesla:
 		Actors: ra2teslaUpgrade
 	GrantConditionOnPrerequisite@teslaChargeUpgrade:
 		Condition: teslaChargeUpgrade
-		Prerequisites: ra2_soviets_upgrade_coilchargers
+		Prerequisites: ra2_soviet_upgrade_teslacoilchargers
 	Power:
 		Amount: -100
 	RevealsShroud:
@@ -2324,7 +2324,7 @@ ra2tesla:
 		Range: 5000
 		RequiresCondition: !disabled
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_teslaoverload, ra2_soviets_upgrade_coilchargers
+		Upgrades: ra2_soviet_upgrade_teslaoverload, ra2_soviet_upgrade_teslacoilchargers
 
 ra2teslaupgrade:
 	Tooltip:
@@ -2334,12 +2334,12 @@ ra2teslaupgrade:
 		Queue: ra2tesla.upgrade
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Prerequisites: !ra2_soviets_upgrade_coilchargers
+		Prerequisites: !ra2_soviet_upgrade_teslacoilchargers
 		Description: A group of Tesla Troopers will charge this Tesla Coil
 	Valued:
 		Cost: 2000
 	RenderSprites:
-		Image: ra2shk
+		Image: ra2_soviet_teslatrooper
 	Interactable:
 	KillsSelf:
 		RemoveInstead: true
@@ -2354,7 +2354,7 @@ ra2nayard:
 	Tooltip:
 		Name: Soviet Shipyard
 	Buildable:
-		Prerequisites: ~ra2nacnst, ra2narefn, ~globalnaval
+		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_orerefinery, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -3793,10 +3793,10 @@ ra2_allies_engineer:
 	DeliversCash:
 		Payload: 250
 
-ra2engineer.soviet:
+ra2_soviet_engineer:
 	Inherits: ra2_allies_engineer
 	Buildable:
-		Prerequisites: ~ra2nahand
+		Prerequisites: ~ra2_soviet_barracks
 		Queue: Infantry, RAInfantry
 	RenderSprites:
 		Image: ra2_allies_engineer
@@ -4023,7 +4023,7 @@ ra2_allies_ra2spy:
 #   Red Alert 2 Soviet Infantry
 ##############################################
 
-RA2DOG:
+ra2_soviet_attackdog:
 	Inherits: ^DefaultInfantry
 	Inherits@2: ^AffectedByTiberium
 	Inherits@detect: ^GenericGroundDetector
@@ -4038,7 +4038,7 @@ RA2DOG:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 29
-		Prerequisites: ~ra2nahand
+		Prerequisites: ~ra2_soviet_barracks
 		Description: actor_dog.description
 	Valued:
 		Cost: 200
@@ -4131,9 +4131,9 @@ RA2DOG:
 	Voiced:
 		VoiceSet: RA2DogVoice
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining
 
-RA2E2:
+ra2_soviet_conscript:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -4151,7 +4151,7 @@ RA2E2:
 		Name: Conscript
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~ra2nahand
+		Prerequisites: ~ra2_soviet_barracks
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -4187,24 +4187,24 @@ RA2E2:
 		Modifier: 80
 	ReloadDelayMultiplier@global_conscription_buff:
 		Modifier: 80
-	ChangesHealth@ra2_soviets_upgrade_infantryconditioning:
+	ChangesHealth@ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
 		Step: 20
-	DamageMultiplier@ra2_soviets_upgrade_infantryconditioning:
+	DamageMultiplier@ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
 		Modifier: 50
-	SpeedMultiplier@ra2_soviets_upgrade_infantryconditioning:
+	SpeedMultiplier@ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
 		Modifier: 110
-	RangeMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+	RangeMultiplier@ra2_soviet_doctrine_shocktroopertraining:
 		Modifier: 130
-	FirepowerMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+	FirepowerMultiplier@ra2_soviet_doctrine_shocktroopertraining:
 		Modifier: 130
-	SpeedMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+	SpeedMultiplier@ra2_soviet_doctrine_shocktroopertraining:
 		Modifier: 130
 	Voiced:
 		VoiceSet: ConscriptVoice
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining
 
-RA2flakt:
+ra2_soviet_flaktrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -4223,7 +4223,7 @@ RA2flakt:
 		Name: Flak Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2nahand
+		Prerequisites: ~ra2_soviet_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_flakt.description
 	Mobile:
@@ -4292,9 +4292,9 @@ RA2flakt:
 	GrantExternalConditionToTransport:
 		Condition: ifv-flak
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining, ra2_soviets_upgrade_heavycannons
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining, ra2_soviet_upgrade_heavycannons
 
-RA2IVAN:
+ra2_soviet_crazyivan:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -4311,7 +4311,7 @@ RA2IVAN:
 		Name: Crazy Ivan
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Queue: Infantry, RAInfantry
 		Description: actor_ivan.description
 	Mobile:
@@ -4345,9 +4345,9 @@ RA2IVAN:
 	GrantExternalConditionToTransport:
 		Condition: ifv-demo
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining
 
-ra2shk:
+ra2_soviet_teslatrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -4374,7 +4374,7 @@ ra2shk:
 		ValidRelationships: Enemy
 		Priority: 90
 	Buildable:
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		Description: actor_shk.description
@@ -4392,15 +4392,15 @@ ra2shk:
 	Armament@PRIMARY:
 		Weapon: RA2PortaTesla
 		LocalOffset: 427,0,341
-		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+		RequiresCondition: (!ra2_soviet_upgrade_teslaoverload && !rank-elite)
 	Armament@PRIMARY2:
 		Weapon: RA2PortaTesla2
 		LocalOffset: 427,0,341
-		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: (ra2_soviet_upgrade_teslaoverload && !rank-elite) || (!ra2_soviet_upgrade_teslaoverload && rank-elite)
 	Armament@PRIMARY3:
 		Weapon: RA2PortaTesla3
 		LocalOffset: 427,0,341
-		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: (ra2_soviet_upgrade_teslaoverload && rank-elite)
 	Armament@TeslaCoilCharge:
 		Weapon: RA2TeslaCoilCharge
 		Cursor: ability
@@ -4410,15 +4410,15 @@ ra2shk:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2PortaTesla
-		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+		RequiresCondition: (!ra2_soviet_upgrade_teslaoverload && !rank-elite)
 	Armament@GARRISONED2:
 		Name: garrisoned
 		Weapon: RA2PortaTesla2
-		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: (ra2_soviet_upgrade_teslaoverload && !rank-elite) || (!ra2_soviet_upgrade_teslaoverload && rank-elite)
 	Armament@GARRISONED3:
 		Name: garrisoned
 		Weapon: RA2PortaTesla3
-		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: (ra2_soviet_upgrade_teslaoverload && rank-elite)
 	TakeCover:
 		ProneOffset: 227,0,-245
 	AttackFrontal:
@@ -4430,7 +4430,7 @@ ra2shk:
 	DeliversCash:
 		Payload: 250
 	Selectable:
-		Class: ra2shk
+		Class: ra2_soviet_teslatrooper
 	GrantConditionOnPrerequisite@EMPTesla:
 		Condition: emptesla
 		Prerequisites: upemptesla
@@ -4439,10 +4439,10 @@ ra2shk:
 	GrantExternalConditionToTransport:
 		Condition: ifv-tesla
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining, ra2_soviets_upgrade_teslaoverload
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining, ra2_soviet_upgrade_teslaoverload
 
 ra2shk.bot:
-	Inherits: ra2shk
+	Inherits: ra2_soviet_teslatrooper
 	Buildable:
 		-Queue:
 	-MapEditorData:
@@ -4482,12 +4482,12 @@ ra2shk.bot:
 		MasterDeadCondition: nocoil
 		DamageTypes: DefaultDeath
 	TransformOnCondition:
-		IntoActor: ra2shk
+		IntoActor: ra2_soviet_teslatrooper
 		RequiresCondition: nocoil
 	RejectsOrders:
 	WithInfantryBody:
 
-RA2DESO:
+ra2_soviet_desolator:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -4505,7 +4505,7 @@ RA2DESO:
 		Name: Desolator
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~ra2nahand, ra2natech
+		Prerequisites: ~ra2_soviet_barracks, ra2_soviet_battlelab
 		Queue: Infantry, RAInfantry
 		Description: actor_deso.description
 	Mobile:
@@ -4565,9 +4565,9 @@ RA2DESO:
 	GrantExternalConditionToTransport:
 		Condition: ifv-chem
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining
 
-YRBORIS:
+ra2_soviet_boris:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -4584,7 +4584,7 @@ YRBORIS:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 120
-		Prerequisites: ~ra2nahand, ra2natech
+		Prerequisites: ~ra2_soviet_barracks, ra2_soviet_battlelab
 		BuildLimit: 1
 		Description: actor_boris.description
 	Valued:
@@ -4648,7 +4648,7 @@ YRBORIS:
 		MarkSound: Action
 	KeepsDistance:
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription, ra2_soviets_upgrade_infantryconditioning, ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_conscription, ra2_soviet_doctrine_harshenvironmentinfantryconditioning, ra2_soviet_doctrine_shocktroopertraining
 
 ##############################################
 #   Red Alert 2 Yuri Infantry
@@ -6398,7 +6398,7 @@ ra2_allies_battlefortress_3:
 #   Red Alert 2 Soviet Vehicles
 ##############################################
 
-RA2SMCV:
+ra2_soviet_mobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -6412,9 +6412,9 @@ RA2SMCV:
 	Tooltip:
 		Name: Soviet Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~ra2naweap, ra2nadept
+		Prerequisites: ~ra2_soviet_warfactory, ra2_soviet_servicedepot
 	Transforms:
-		IntoActor: ra2nacnst
+		IntoActor: ra2_soviet_constructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -6427,9 +6427,9 @@ RA2SMCV:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_upgrade_grindertanktreads, ra2_soviet_upgrade_terrordronesurprise
 
-RA2HTNK:
+ra2_soviet_rhinoheavytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -6452,7 +6452,7 @@ RA2HTNK:
 		Cost: 850
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2naweap
+		Prerequisites: ~ra2_soviet_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: template_mbt.description
 	Mobile:
@@ -6477,7 +6477,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+		RequiresCondition: !rank-elite && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions
 	Armament@PRIMARYRad:
 		Name: primary
 		Weapon: RA2120mm_rad
@@ -6486,7 +6486,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_nuclearmunitions
 	Armament@PRIMARYFire:
 		Name: primary
 		Weapon: RA2120mm_fire
@@ -6495,7 +6495,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_firemunitions
 	Armament@PRIMARYTesla:
 		Name: primary
 		Weapon: RA2120mm_tesla
@@ -6504,7 +6504,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_teslamunitions
 	Armament@PRIMARYELITE:
 		Name: primary
 		Weapon: RA2120mm_elite
@@ -6513,7 +6513,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite  && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+		RequiresCondition: rank-elite  && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
 		Weapon: RA2120mm_elite_rad
@@ -6522,7 +6522,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_nuclearmunitions
 	Armament@PRIMARYELITEFire:
 		Name: primary
 		Weapon: RA2120mm_elite_fire
@@ -6531,7 +6531,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_firemunitions
 	Armament@PRIMARYELITETesla:
 		Name: primary
 		Weapon: RA2120mm_elite_tesla
@@ -6540,7 +6540,7 @@ RA2HTNK:
 		LocalOffset: 1024,0,80
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_teslamunitions
 	AttackTurreted:
 	WithMuzzleOverlay:
 	SelectionDecorations:
@@ -6554,9 +6554,9 @@ RA2HTNK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions, ra2_soviet_upgrade_heavycannons, ra2_soviet_upgrade_grindertanktreads, ra2_soviet_upgrade_terrordronesurprise
 
-RA2HTK:
+ra2_soviet_flaktrack:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -6577,10 +6577,10 @@ RA2HTK:
 	Tooltip:
 		Name: Flak Track
 	UpdatesPlayerStatistics:
-		OverrideActor: ra2htk
+		OverrideActor: ra2_soviet_flaktrack
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2naweap
+		Prerequisites: ~ra2_soviet_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: actor_htk.description
 	Mobile:
@@ -6629,7 +6629,7 @@ RA2HTK:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: ra2htk
+		Image: ra2_soviet_flaktrack
 		PlayerPalette: playerra2
 	WithSpriteTurret:
 	Voiced:
@@ -6637,11 +6637,11 @@ RA2HTK:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: ra2e2, ra2e2, ra2e2, ra2flakt, ra2flakt
+		InitialUnits: ra2_soviet_conscript, ra2_soviet_conscript, ra2_soviet_conscript, ra2_soviet_flaktrooper, ra2_soviet_flaktrooper
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_upgrade_heavycannons, ra2_soviet_upgrade_grindertanktreads, ra2_soviet_upgrade_terrordronesurprise
 
-RA2APOC:
+ra2_soviet_apocalypsetank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -6666,7 +6666,7 @@ RA2APOC:
 		Payload: 500
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2naweap, ra2natech
+		Prerequisites: ~ra2_soviet_warfactory, ra2_soviet_battlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:
@@ -6692,7 +6692,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+		RequiresCondition: !rank-elite && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions
 	Armament@PRIMARYRad:
 		Name: primary
 		Weapon: RA2120xmm_rad
@@ -6701,7 +6701,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_nuclearmunitions
 	Armament@PRIMARYFire:
 		Name: primary
 		Weapon: RA2120xmm_fire
@@ -6710,7 +6710,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_firemunitions
 	Armament@PRIMARYTesla:
 		Name: primary
 		Weapon: RA2120xmm_tesla
@@ -6719,7 +6719,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_teslamunitions
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: RA2MammothTusk
@@ -6735,7 +6735,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite  && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+		RequiresCondition: rank-elite  && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
 		Weapon: RA2120xmm_elite_rad
@@ -6744,7 +6744,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_nuclearmunitions
 	Armament@PRIMARYELITEFire:
 		Name: primary
 		Weapon: RA2120xmm_elite_fire
@@ -6753,7 +6753,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_firemunitions
 	Armament@PRIMARYELITETesla:
 		Name: primary
 		Weapon: RA2120xmm_elite_tesla
@@ -6762,7 +6762,7 @@ RA2APOC:
 		LocalOffset: 768,85,90, 768,-85,90
 		MuzzleSequence: muzzle-2
 		MuzzlePalette: ra2effect
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_teslamunitions
 	Armament@SECONDARYELITE:
 		Name: secondary
 		Weapon: RA2MammothTusk_elite
@@ -6770,7 +6770,7 @@ RA2APOC:
 		LocalYaw: -100, 100
 		Recoil: 10
 		RequiresCondition: rank-elite
-	FirepowerMultiplier@ra2_soviets_upgrade_radiationshells:
+	FirepowerMultiplier@ra2_soviet_doctrine_nuclearmunitions:
 		Modifier: 125
 		Types: primary
 	AttackTurreted:
@@ -6784,9 +6784,9 @@ RA2APOC:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_heavycannons, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions, ra2_soviet_upgrade_heavycannons, ra2_soviet_upgrade_grindertanktreads, ra2_soviet_upgrade_terrordronesurprise
 
-RA2V3:
+ra2_soviet_v3rocketlauncher:
 	Inherits: ^Vehicle
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^ArtilleryTemplate
@@ -6804,7 +6804,7 @@ RA2V3:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 80
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Description: actor_v3.description
 	Valued:
 		Cost: 900
@@ -6849,12 +6849,12 @@ RA2V3:
 		Modifier: 175
 	FirepowerMultiplier@RANK-ELITE:
 		Modifier: 200
-	RangeMultiplier@ra2_soviets_upgrade_kirovgastroburners:
+	RangeMultiplier@ra2_soviet_upgrade_gastroburners:
 		Modifier: 115
-		RequiresCondition: ra2_soviets_upgrade_kirovgastroburners
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovgastroburners:
-		Condition: ra2_soviets_upgrade_kirovgastroburners
-		Prerequisites: ra2_soviets_upgrade_kirovgastroburners
+		RequiresCondition: ra2_soviet_upgrade_gastroburners
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_gastroburners:
+		Condition: ra2_soviet_upgrade_gastroburners
+		Prerequisites: ra2_soviet_upgrade_gastroburners
 	SelectionDecorations:
 	FireWarheadsOnDeath:
 		Weapon: V3Explode
@@ -6873,7 +6873,7 @@ RA2V3:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovgastroburners
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions, ra2_soviet_upgrade_terrordronesurprise, ra2_soviet_upgrade_kirovarmorplatings, ra2_soviet_upgrade_gastroburners
 
 ra2v3rocket:
 	Inherits: ^ShootableMissile
@@ -6906,32 +6906,32 @@ ra2v3rocket:
 	-DamagedByTintedCells@rad:
 	-DamagedByTintedCells@genrad:
 	-DamagedByTintedCells@tib:
-	-SpeedMultiplier@ra2_soviets_upgrade_heavyarmorplatings:
-	-SpeedMultiplier@ra2_soviets_upgrade_reactivearmor:
+	-SpeedMultiplier@ra2_soviet_doctrine_heavyarmorplatings:
+	-SpeedMultiplier@ra2_soviet_doctrine_reactivearmor:
 	-SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1:
 	-SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor2:
 	SpawnedExplodes:
 		Weapon: RA2SCUD
 		EmptyWeapon: RA2SCUD
-		RequiresCondition: !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells && !airborne
+		RequiresCondition: !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions && !airborne
 	SpawnedExplodes@rad:
 		Weapon: RA2SCUD_rad
 		EmptyWeapon: RA2SCUD_rad
-		RequiresCondition: ra2_soviets_upgrade_radiationshells && !airborne
+		RequiresCondition: ra2_soviet_doctrine_nuclearmunitions && !airborne
 	SpawnedExplodes@fire:
 		Weapon: RA2SCUD_fire
 		EmptyWeapon: RA2SCUD_fire
-		RequiresCondition: ra2_soviets_upgrade_fireshells && !airborne
+		RequiresCondition: ra2_soviet_doctrine_firemunitions && !airborne
 	SpawnedExplodes@tesla:
 		Weapon: RA2SCUD_tesla
 		EmptyWeapon: RA2SCUD_tesla
-		RequiresCondition: ra2_soviets_upgrade_teslashells && !airborne
+		RequiresCondition: ra2_soviet_doctrine_teslamunitions && !airborne
 	RenderSprites:
 		Image: ra2v3rocket
 		PlayerPalette: playerra2
 	WithFacingSpriteBody:
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovgastroburners, ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells
+		Upgrades: ra2_soviet_upgrade_kirovarmorplatings, ra2_soviet_upgrade_gastroburners, ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions
 
 ra2v3rocketelite:
 	Inherits: ra2v3rocket
@@ -6945,7 +6945,7 @@ ra2v3rocketelite:
 		-RequiresCondition:
 	-SpawnedExplodes@rad:
 
-RA2TTNK:
+ra2_soviet_teslatank:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -6967,7 +6967,7 @@ RA2TTNK:
 		Name: Tesla Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Queue: Vehicle, RAVehicle
 		Description: actor_ttnk.description
 	Mobile:
@@ -6988,19 +6988,19 @@ RA2TTNK:
 		LocalOffset: 600,200,200, 600,-200,200
 		Recoil: 175
 		RecoilRecovery: 35
-		RequiresCondition: (!ra2_soviets_upgrade_teslaoverload && !rank-elite)
+		RequiresCondition: (!ra2_soviet_upgrade_teslaoverload && !rank-elite)
 	Armament@PRIMARY2:
 		Weapon: RA2TankBolt2
 		LocalOffset: 600,200,200, 600,-200,200
 		Recoil: 175
 		RecoilRecovery: 35
-		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && !rank-elite) || (!ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: (ra2_soviet_upgrade_teslaoverload && !rank-elite) || (!ra2_soviet_upgrade_teslaoverload && rank-elite)
 	Armament@PRIMARY3:
 		Weapon: RA2TankBolt3
 		LocalOffset: 600,200,200, 600,-200,200
 		Recoil: 175
 		RecoilRecovery: 35
-		RequiresCondition: (ra2_soviets_upgrade_teslaoverload && rank-elite)
+		RequiresCondition: (ra2_soviet_upgrade_teslaoverload && rank-elite)
 	AttackTurreted:
 	SelectionDecorations:
 	Selectable:
@@ -7011,9 +7011,9 @@ RA2TTNK:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_teslaoverload, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_upgrade_teslaoverload, ra2_soviet_upgrade_grindertanktreads, ra2_soviet_upgrade_terrordronesurprise
 
-RA2HARV:
+ra2_soviet_warminer:
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -7034,7 +7034,7 @@ RA2HARV:
 	Tooltip:
 		Name: War Miner
 	Buildable:
-		Prerequisites: ~ra2naweap
+		Prerequisites: ~ra2_soviet_warfactory
 		Queue: Vehicle, RAVehicle
 		Description: actor_ra2harv.description
 	Mobile:
@@ -7073,9 +7073,9 @@ RA2HARV:
 		Palette: ra2effect
 	ActorStatValues:
 		Stats: Armor, Sight, Speed, Damage, ReloadDelay, MaxRange, Kills, Harvester
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_grindertanktreads, ra2_soviets_upgrade_terrordronesurprise
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_upgrade_grindertanktreads, ra2_soviet_upgrade_terrordronesurprise
 
-ra2dron:
+ra2_soviet_terrordrone:
 	Inherits: ^Walker
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -7091,7 +7091,7 @@ ra2dron:
 		Name: Terror Drone
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Queue: Vehicle, RAVehicle
 		Description: actor_dron.description
 	Mobile:
@@ -7154,7 +7154,7 @@ ra2dron:
 		TargetTypes: DogImmune
 	-TemporaryOwnerManager:
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor
 
 ##############################################
 #   Red Alert 2 Yuri Vehicles
@@ -8343,7 +8343,7 @@ ra2sub:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-ra2hyd:
+ra2_soviet_seascorpion:
 	Inherits: ^BoatUnit
 	Inherits@effects: ^RA2Vehicle
 	Inherits@Template: ^BattleShipTemplate
@@ -8358,7 +8358,7 @@ ra2hyd:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Queue: Naval, RANaval
 		Description: actor_hyd.description
 	Mobile:
@@ -8409,7 +8409,7 @@ ra2dred:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra2nayard, ra2natech
+		Prerequisites: ~ra2nayard, ra2_soviet_battlelab
 		Queue: Naval, RANaval
 		Description: actor_dred.description
 	Selectable:
@@ -8592,7 +8592,7 @@ yrbsubmisl:
 #		Red Alert 2 Aircraft
 ####################################################################################################
 
-RA2ZEP:
+ra2_soviet_kirovairship:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -8616,7 +8616,7 @@ RA2ZEP:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 99
-		Prerequisites: ~ra2naweap, ra2natech
+		Prerequisites: ~ra2_soviet_warfactory, ra2_soviet_battlelab
 		Queue: Vehicle, Aircraft, RAAircraft
 		Description: actor_zep.description
 	Aircraft:
@@ -8632,27 +8632,27 @@ RA2ZEP:
 	Armament@PRIMARY:
 		Weapon: RA2KirovBomb
 		LocalOffset: 256,0,-512
-		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells && !ra2_soviets_upgrade_kirovnuclearshells
+		RequiresCondition: !rank-elite && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions && !ra2_soviet_upgrade_kirovatomicbombs
 	Armament@PRIMARYRad:
 		Weapon: RA2KirovBomb_rad
 		LocalOffset: 256,0,-512
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_kirovnuclearshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_upgrade_kirovatomicbombs
 	Armament@PRIMARYFire:
 		Weapon: RA2KirovBomb_fire
 		LocalOffset: 256,0,-512
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_kirovnuclearshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_firemunitions && !ra2_soviet_upgrade_kirovatomicbombs
 	Armament@PRIMARYTesla:
 		Weapon: RA2KirovBomb_tesla
 		LocalOffset: 256,0,-512
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells && !ra2_soviets_upgrade_kirovnuclearshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_teslamunitions && !ra2_soviet_upgrade_kirovatomicbombs
 	Armament@PRIMARYNuclear:
 		Weapon: RA2KirovBomb_nuclear
 		LocalOffset: 256,0,-512
-		RequiresCondition: (rank-elite && !ra2_soviets_upgrade_kirovnuclearshells) || (!rank-elite && ra2_soviets_upgrade_kirovnuclearshells)
+		RequiresCondition: (rank-elite && !ra2_soviet_upgrade_kirovatomicbombs) || (!rank-elite && ra2_soviet_upgrade_kirovatomicbombs)
 	Armament@PRIMARYNuclearELITE:
 		Weapon: RA2KirovBomb_nuclear_Elite
 		LocalOffset: 256,0,-512
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_kirovnuclearshells
+		RequiresCondition: rank-elite && ra2_soviet_upgrade_kirovatomicbombs
 	AttackAircraft:
 		Voice: Attack
 		AttackType: Strafe #Hover
@@ -8673,9 +8673,9 @@ RA2ZEP:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovgastroburners, ra2_soviets_upgrade_kirovnuclearshells
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions, ra2_soviet_upgrade_kirovarmorplatings, ra2_soviet_upgrade_gastroburners, ra2_soviet_upgrade_kirovatomicbombs
 
-yrschp:
+ra2_soviet_siegechopper:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -8697,7 +8697,7 @@ yrschp:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 98
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Queue: Vehicle, Aircraft, RAAircraft
 		Description: actor_schp.description
 	Aircraft:
@@ -8726,49 +8726,49 @@ yrschp:
 		Name: deployed
 		Weapon: RA160mm
 		LocalOffset: 410,0,650
-		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells && deployed
+		RequiresCondition: !rank-elite && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedRad:
 		Name: deployed
 		Weapon: RA160mm_rad
 		LocalOffset: 410,0,650
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells && deployed
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_nuclearmunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedFire:
 		Name: deployed
 		Weapon: RA160mm_fire
 		LocalOffset: 410,0,650
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells && deployed
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_firemunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedTesla:
 		Name: deployed
 		Weapon: RA160mm_tesla
 		LocalOffset: 410,0,650
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells && deployed
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_teslamunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedElite:
 		Name: deployed
 		Weapon: RA160mmE_elite
 		LocalOffset: 410,0,650
-		RequiresCondition: rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells && deployed
+		RequiresCondition: rank-elite && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedEliteRad:
 		Name: deployed
 		Weapon: RA160mmE_elite_rad
 		LocalOffset: 410,0,650
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells && deployed
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_nuclearmunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedEliteFire:
 		Name: deployed
 		Weapon: RA160mmE_elite_fire
 		LocalOffset: 410,0,650
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells && deployed
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_firemunitions && deployed
 		Voice: DeployedAttack
 	Armament@DeployedEliteTesla:
 		Name: deployed
 		Weapon: RA160mmE_elite_tesla
 		LocalOffset: 410,0,650
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells && deployed
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_teslamunitions && deployed
 		Voice: DeployedAttack
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 50
@@ -8824,7 +8824,7 @@ yrschp:
 	-DamagedByTintedCells@genrad:
 	-DamagedByTintedCells@tib:
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions
 
 yrbpln:
 	Inherits: ^AirstrikePlane
@@ -8866,29 +8866,29 @@ yrbpln:
 		Weapon: MigMissiles
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
-		RequiresCondition: !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+		RequiresCondition: !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions
 	Armament@rad:
 		Name: primary
 		Weapon: MigMissiles_rad
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
-		RequiresCondition: ra2_soviets_upgrade_radiationshells
+		RequiresCondition: ra2_soviet_doctrine_nuclearmunitions
 	Armament@fire:
 		Name: primary
 		Weapon: MigMissiles_fire
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
-		RequiresCondition: ra2_soviets_upgrade_fireshells
+		RequiresCondition: ra2_soviet_doctrine_firemunitions
 	Armament@tesla:
 		Name: primary
 		Weapon: MigMissiles_tesla
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
-		RequiresCondition: ra2_soviets_upgrade_teslashells
-	FirepowerMultiplier@ra2_soviets_upgrade_radiationshells:
+		RequiresCondition: ra2_soviet_doctrine_teslamunitions
+	FirepowerMultiplier@ra2_soviet_doctrine_nuclearmunitions:
 		Modifier: 125
 	Rearmable:
-		RearmActors: YRBORIS
+		RearmActors: ra2_soviet_boris
 	AmmoPool:
 		Ammo: 4
 	WithMuzzleOverlay:
@@ -8926,9 +8926,9 @@ yrbpln:
 		Image: yrbpln
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions
 
-yrbpln1:
+ra2_soviet_migbomber:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -8948,7 +8948,7 @@ yrbpln1:
 		Cost: 2000
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~ra2naairf, ra2natech
+		Prerequisites: ~ra2_soviet_airfield, ra2_soviet_battlelab
 		Queue: Aircraft, RAAircraft
 		Description: actor_bpln.description
 	Health:
@@ -8977,7 +8977,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 2
 		PauseOnCondition: !ammo
-		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+		RequiresCondition: !rank-elite && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions
 	Armament@rad:
 		Name: primary
 		Weapon: MigMissiles_rad
@@ -8985,7 +8985,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 2
 		PauseOnCondition: !ammo
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_nuclearmunitions
 	Armament@fire:
 		Name: primary
 		Weapon: MigMissiles_fire
@@ -8993,7 +8993,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 2
 		PauseOnCondition: !ammo
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_fireshells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_firemunitions
 	Armament@tesla:
 		Name: primary
 		Weapon: MigMissiles_tesla
@@ -9001,7 +9001,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 2
 		PauseOnCondition: !ammo
-		RequiresCondition: !rank-elite && ra2_soviets_upgrade_teslashells
+		RequiresCondition: !rank-elite && ra2_soviet_doctrine_teslamunitions
 	Armament@PRIMARYELITE:
 		Name: primary
 		Weapon: MigMissilesE
@@ -9009,7 +9009,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
 		PauseOnCondition: !ammo
-		RequiresCondition: rank-elite  && !ra2_soviets_upgrade_radiationshells && !ra2_soviets_upgrade_fireshells && !ra2_soviets_upgrade_teslashells
+		RequiresCondition: rank-elite  && !ra2_soviet_doctrine_nuclearmunitions && !ra2_soviet_doctrine_firemunitions && !ra2_soviet_doctrine_teslamunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
 		Weapon: MigMissilesE_rad
@@ -9017,7 +9017,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
 		PauseOnCondition: !ammo
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_nuclearmunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
 		Weapon: MigMissilesE_fire
@@ -9025,7 +9025,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
 		PauseOnCondition: !ammo
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_fireshells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_firemunitions
 	Armament@PRIMARYELITERad:
 		Name: primary
 		Weapon: MigMissilesE_tesla
@@ -9033,7 +9033,7 @@ yrbpln1:
 		LocalYaw: 50, -50, 25, -25
 		AmmoUsage: 1
 		PauseOnCondition: !ammo
-		RequiresCondition: rank-elite && ra2_soviets_upgrade_teslashells
+		RequiresCondition: rank-elite && ra2_soviet_doctrine_teslamunitions
 	Armament@AA:
 		Name: secondary
 		Weapon: MigMissiles_AA
@@ -9074,9 +9074,9 @@ yrbpln1:
 		Image: yrbpln
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_fireshells, ra2_soviets_upgrade_teslashells
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_firemunitions, ra2_soviet_doctrine_teslamunitions
 
-ra2_tzep:
+ra2_soviet_transportkirov:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -9094,10 +9094,10 @@ ra2_tzep:
 		Name: Transport Kirov
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: ra2_tzep
+		OverrideActor: ra2_soviet_transportkirov
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ra2naradr
+		Prerequisites: ~ra2_soviet_radar
 		Queue: Aircraft, RAAircraft, Vehicle
 		Description: actor_shad.description
 	Aircraft:
@@ -9117,7 +9117,7 @@ ra2_tzep:
 		MuzzlePalette: ra2effect
 	WithMuzzleOverlay:
 	Cargo:
-		InitialUnits: ra2e2, ra2e2, ra2e2, ra2e2, RA2flakt, RA2flakt, ra2shk, ra2shk, RA2HTNK, RA2HTNK
+		InitialUnits: ra2_soviet_conscript, ra2_soviet_conscript, ra2_soviet_conscript, ra2_soviet_conscript, ra2_soviet_flaktrooper, ra2_soviet_flaktrooper, ra2_soviet_teslatrooper, ra2_soviet_teslatrooper, ra2_soviet_rhinoheavytank, ra2_soviet_rhinoheavytank
 		Types: Infantry, Hacker, Fremen, Vehicle
 		MaxWeight: 14
 		AfterLoadDelay: 0
@@ -9132,7 +9132,7 @@ ra2_tzep:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	RenderSprites:
-		Image: ra2_tzep
+		Image: ra2_soviet_transportkirov
 		PlayerPalette: playerra2
 	Voiced:
 		VoiceSet: KirovVoice
@@ -9141,7 +9141,7 @@ ra2_tzep:
 	-DamagedByTintedCells@genrad:
 	-DamagedByTintedCells@tib:
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor, ra2_soviets_upgrade_kirovarmorplatings, ra2_soviets_upgrade_kirovgastroburners
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor, ra2_soviet_upgrade_kirovarmorplatings, ra2_soviet_upgrade_gastroburners
 
 ra2_tzep.Husk:
 	Inherits: ^PlaneHusk
@@ -9159,7 +9159,7 @@ ra2_tzep.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: ra2_tzep
+		Image: ra2_soviet_transportkirov
 	ShakeOnDeath:
 	FallsToEarth:
 		Moves: false
@@ -9791,7 +9791,7 @@ yrspyp:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings
 
 ra2cplane:
 	Inherits: ^AirstrikePlane
@@ -9914,7 +9914,7 @@ ra2cplanesov:
 		Image: ra2cplanesov
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings, ra2_soviets_upgrade_reactivearmor, ra2_soviets_upgrade_tesladischargearmor
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings, ra2_soviet_doctrine_reactivearmor, ra2_soviet_doctrine_tesladischargearmor
 
 ####################################################################################################
 #		Red Alert 2 TechBuilding
@@ -10355,7 +10355,7 @@ ra2_ctoutp.husk:
 
 # Black Operation Soldiers
 ra2e2.black:
-	Inherits: RA2E2
+	Inherits: ra2_soviet_conscript
 	Valued:
 		Cost: 150
 	Tooltip:
@@ -10502,7 +10502,7 @@ ra2leopard:
 	RenderSprites:
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_heavyarmorplatings
+		Upgrades: ra2_soviet_upgrade_terrordronesurprise, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_heavyarmorplatings
 
 ra2_c_ifv:
 	Inherits: ^Tank
@@ -12288,7 +12288,7 @@ RA2ZEP.Husk:
 		Explosion: KirovExplode
 	WithShadow:
 	RenderSprites:
-		Image: ra2zep
+		Image: ra2_soviet_kirovairship
 		PlayerPalette: playerra2
 
 ra2hornet.Husk:
@@ -12391,9 +12391,9 @@ yrschp.Husk:
 		TurnSpeed: 16
 		Speed: 200
 	RenderSprites:
-		Image: yrschp
+		Image: ra2_soviet_siegechopper
 	RenderVoxels:
-		Image: yrschp
+		Image: ra2_soviet_siegechopper
 	-WithShadow:
 	-Cloak@TDcloak:
 	-Cloak@TScloak:
@@ -12536,9 +12536,9 @@ RA2TXGASG:
 		InitialDelay: 4
 
 ra2shkhero:
-	Inherits: ra2shk
+	Inherits: ra2_soviet_teslatrooper
 	RenderSprites:
-		Image: ra2shk
+		Image: ra2_soviet_teslatrooper
 	-Buildable:
 	Valued:
 		Cost: 1000
@@ -12573,9 +12573,9 @@ ra2shkhero:
 # 		BuildPaletteOrder: 61
 # 		Queue: Promotions
 # 		Description: Tesla weapons will shut down vehicles.
-# 		Prerequisites: ~ra2nacnst, !upemptesla, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, !upemptesla, rank1
 # 	RenderSprites:
-# 		Image: ra2shk
+# 		Image: ra2_soviet_teslatrooper
 # 	ProvidesPrerequisite:
 
 # upra2ttnk:
@@ -12586,9 +12586,9 @@ ra2shkhero:
 # 		BuildPaletteOrder: 64
 # 		Queue: Promotions
 # 		Description: Allows construction of the Tesla Tank.
-# 		Prerequisites: ~ra2nacnst, upemptesla, !upra2ttnk, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, upemptesla, !upra2ttnk, rank1
 # 	RenderSprites:
-# 		Image: ra2ttnk
+# 		Image: ra2_soviet_teslatank
 # 	ProvidesPrerequisite:
 
 # uparctesla:
@@ -12599,9 +12599,9 @@ ra2shkhero:
 # 		BuildPaletteOrder: 67
 # 		Queue: Promotions
 # 		Description: Allows tesla bolts to jump to nearby targets.
-# 		Prerequisites: ~ra2nacnst, upra2ttnk, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, upra2ttnk, rank1
 # 	RenderSprites:
-# 		Image: ra2ttnk
+# 		Image: ra2_soviet_teslatank
 # 	ProvidesPrerequisite:
 
 # ^RA2TeslaOverload:
@@ -12609,7 +12609,7 @@ ra2shkhero:
 # 		Condition: arctesla
 # 		Prerequisites: uparctesla
 
-# ra2_soviets_upgrade_coilchargers:
+# ra2_soviet_upgrade_teslacoilchargers:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Tesla Coil Chargers
@@ -12617,9 +12617,9 @@ ra2shkhero:
 # 		BuildPaletteOrder: 70
 # 		Queue: Promotions
 # 		Description: Provide all Tesla Coils with chargers.
-# 		Prerequisites: ~ra2nacnst, uparctesla, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, uparctesla, rank1
 # 	RenderSprites:
-# 		Image: ra2tesla
+# 		Image: ra2_soviet_teslacoil
 # 	ProvidesPrerequisite:
 
 # ### Radiation tree
@@ -12632,7 +12632,7 @@ ra2shkhero:
 # 		BuildPaletteOrder: 62
 # 		Queue: Promotions
 # 		Description: Allows training of the Terrorist.
-# 		Prerequisites: ~ra2nacnst, !upra2terror, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, !upra2terror, rank1
 # 	RenderSprites:
 # 		Image: ra2terror
 # 	ProvidesPrerequisite:
@@ -12645,9 +12645,9 @@ ra2shkhero:
 # 		BuildPaletteOrder: 65
 # 		Queue: Promotions
 # 		Description: Allows training of the Desolator. Infantry becomes immune to radiation.
-# 		Prerequisites: ~ra2nacnst, upra2terror, !upra2deso, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, upra2terror, !upra2deso, rank1
 # 	RenderSprites:
-# 		Image: ra2deso
+# 		Image: ra2_soviet_desolator
 # 	ProvidesPrerequisite:
 
 # upra2dtruck:
@@ -12658,12 +12658,12 @@ ra2shkhero:
 # 		BuildPaletteOrder: 68
 # 		Queue: Promotions
 # 		Description: Allows construction of the Demo Truck.
-# 		Prerequisites: ~ra2nacnst, upra2deso, !upra2dtruck, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, upra2deso, !upra2dtruck, rank1
 # 	RenderSprites:
 # 		Image: ra2dtruck
 # 	ProvidesPrerequisite:
 
-# ra2_soviets_upgrade_radiationshells:
+# ra2_soviet_doctrine_nuclearmunitions:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Nuclear Munitions
@@ -12671,19 +12671,19 @@ ra2shkhero:
 # 		BuildPaletteOrder: 71
 # 		Queue: Promotions
 # 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons leave radiation.
-# 		Prerequisites: ~ra2nacnst, upra2dtruck, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, upra2dtruck, rank1
 # 	RenderSprites:
 # 	ProvidesPrerequisite:
 
 # ^RA2SovietRadShells:
 # 	GrantConditionOnPrerequisite@RadShells:
-# 		Condition: ra2_soviets_upgrade_radiationshells
-# 		Prerequisites: ra2_soviets_upgrade_radiationshells
+# 		Condition: ra2_soviet_doctrine_nuclearmunitions
+# 		Prerequisites: ra2_soviet_doctrine_nuclearmunitions
 # 	FirepowerMultiplier@RadShells:
 # 		Modifier: 120
-# 		RequiresCondition: ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: ra2_soviet_doctrine_nuclearmunitions
 # 	ActorStatValues:
-# 		Upgrades: ra2_soviets_upgrade_radiationshells
+# 		Upgrades: ra2_soviet_doctrine_nuclearmunitions
 
 # ### Industry tree
 
@@ -12695,12 +12695,12 @@ ra2shkhero:
 # 		BuildPaletteOrder: 63
 # 		Queue: Promotions
 # 		Description: Allows construction of the ra1_soviet_migattackbomber Bomber.
-# 		Prerequisites: ~ra2nacnst, !upra2mig, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, !upra2mig, rank1
 # 	RenderSprites:
 # 		Image: yrbpln
 # 	ProvidesPrerequisite:
 
-# ra2_soviets_upgrade_terrordronesurprise:
+# ra2_soviet_upgrade_terrordronesurprise:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Terror Drone Surprise
@@ -12708,21 +12708,21 @@ ra2shkhero:
 # 		BuildPaletteOrder: 66
 # 		Queue: Promotions
 # 		Description: Vehicles have a chance of releasing a Terror Drone on destruction.
-# 		Prerequisites: ~ra2nacnst, upra2mig, !ra2_soviets_upgrade_terrordronesurprise, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, upra2mig, !ra2_soviet_upgrade_terrordronesurprise, rank1
 # 	RenderSprites:
-# 		Image: ra2dron
+# 		Image: ra2_soviet_terrordrone
 # 	ProvidesPrerequisite:
 
 # ^TerrorDroneSurprise:
 # 	GrantConditionOnPrerequisite@DroneSurprise:
 # 		Condition: dronesurprise
-# 		Prerequisites: ra2_soviets_upgrade_terrordronesurprise
+# 		Prerequisites: ra2_soviet_upgrade_terrordronesurprise
 # 	SpawnActorOnDeath@DroneSurprise:
 # 		Probability: 75
-# 		Actor: ra2dron
+# 		Actor: ra2_soviet_terrordrone
 # 		RequiresCondition: dronesurprise && !chronobeamed
 # 	ActorStatValues:
-# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise
+# 		Upgrades: ra2_soviet_upgrade_terrordronesurprise
 
 # upyrngindp:
 # 	Inherits: ^promotion_upgrade.template
@@ -12732,12 +12732,12 @@ ra2shkhero:
 # 		BuildPaletteOrder: 69
 # 		Queue: Promotions
 # 		Description: Enables construction of the Industrial Plant.
-# 		Prerequisites: ~ra2nacnst, ra2_soviets_upgrade_terrordronesurprise, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, ra2_soviet_upgrade_terrordronesurprise, rank1
 # 	RenderSprites:
-# 		Image: yrngindp
+# 		Image: ra2_soviet_industrialplant
 # 	ProvidesPrerequisite:
 
-# ra2_soviets_upgrade_heavyarmorplatings:
+# ra2_soviet_doctrine_heavyarmorplatings:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Heavy Soviet Armor
@@ -12745,9 +12745,9 @@ ra2shkhero:
 # 		BuildPaletteOrder: 72
 # 		Queue: Promotions
 # 		Description: All Soviet vehicles and aircraft take 20% less damage.
-# 		Prerequisites: ~ra2nacnst, upyrngindp, rank1
+# 		Prerequisites: ~ra2_soviet_constructionyard, upyrngindp, rank1
 # 	RenderSprites:
-# 		Image: ra2apoc
+# 		Image: ra2_soviet_apocalypsetank
 # 	ProvidesPrerequisite:
 
 ####################################################################################################
@@ -12756,163 +12756,163 @@ ra2shkhero:
 
 ### Radar ###
 
-ra2_soviets_upgrade_conscription:
+ra2_soviet_doctrine_conscription:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Conscription
 	Buildable:
 		Description: All Soviet Infantry costs 25% less und train 25% faster.
-		Prerequisites: ~ra2naradr, !ra2_soviet_doctrine_1, !global_conscription_buff
+		Prerequisites: ~ra2_soviet_radar, !ra2_soviet_doctrine_1, !global_conscription_buff
 	RenderSprites:
-		Image: ra2_soviets_upgrade_conscription
+		Image: ra2_soviet_doctrine_conscription
 	ProvidesPrerequisite@ra2_soviet_doctrine_1:
 		Prerequisite: ra2_soviet_doctrine_1
 	ProvidesPrerequisite@global_conscription_buff:
 		Prerequisite: global_conscription_buff
 
 ^RA2SovietConscription:
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_conscription:
-		Condition: ra2_soviets_upgrade_conscription
-		Prerequisites: ra2_soviets_upgrade_conscription
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_conscription:
+		Condition: ra2_soviet_doctrine_conscription
+		Prerequisites: ra2_soviet_doctrine_conscription
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_conscription
+		Upgrades: ra2_soviet_doctrine_conscription
 
-ra2_soviets_upgrade_infantryconditioning:
+ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Harsh Environment Infantry Conditioning
 	Buildable:
 		Description: All Soviet Infantry can survive harsh environmental conditions and take 50% less damage from fire, nuclear or chemical weapons and gain extra regeneration.
-		Prerequisites: ~ra2naradr, !ra2_soviet_doctrine_1
+		Prerequisites: ~ra2_soviet_radar, !ra2_soviet_doctrine_1
 	RenderSprites:
-		Image: ra2_soviets_upgrade_infantryconditioning
+		Image: ra2_soviet_doctrine_harshenvironmentinfantryconditioning
 	ProvidesPrerequisite@ra1_soviet_upgrade_hazmatsuits:
 		Prerequisite: ra1_soviet_upgrade_hazmatsuits
 	ProvidesPrerequisite@ra2_soviet_doctrine_1:
 		Prerequisite: ra2_soviet_doctrine_1
 
 ^RA2SovietInfantryConditioning:
-	ChangesHealth@ra2_soviets_upgrade_infantryconditioning:
+	ChangesHealth@ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
 		Step: 15
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: ra2_soviets_upgrade_infantryconditioning
-	DamageMultiplier@ra2_soviets_upgrade_infantryconditioning:
+		RequiresCondition: ra2_soviet_doctrine_harshenvironmentinfantryconditioning
+	DamageMultiplier@ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
 		Modifier: 75
-		RequiresCondition: ra2_soviets_upgrade_infantryconditioning
-	SpeedMultiplier@ra2_soviets_upgrade_infantryconditioning:
+		RequiresCondition: ra2_soviet_doctrine_harshenvironmentinfantryconditioning
+	SpeedMultiplier@ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
 		Modifier: 105
-		RequiresCondition: ra2_soviets_upgrade_infantryconditioning
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_infantryconditioning:
-		Condition: ra2_soviets_upgrade_infantryconditioning
-		Prerequisites: ra2_soviets_upgrade_infantryconditioning
+		RequiresCondition: ra2_soviet_doctrine_harshenvironmentinfantryconditioning
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_harshenvironmentinfantryconditioning:
+		Condition: ra2_soviet_doctrine_harshenvironmentinfantryconditioning
+		Prerequisites: ra2_soviet_doctrine_harshenvironmentinfantryconditioning
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_infantryconditioning
+		Upgrades: ra2_soviet_doctrine_harshenvironmentinfantryconditioning
 
-ra2_soviets_upgrade_shocktroopertraining:
+ra2_soviet_doctrine_shocktroopertraining:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Shock Trooper Training
 	Buildable:
 		Description: All Soviet Infantry start at veteran rank and gain 15% more Range, Speed and Firepower.
-		Prerequisites: ~ra2naradr, !ra2_soviet_doctrine_1
+		Prerequisites: ~ra2_soviet_radar, !ra2_soviet_doctrine_1
 	RenderSprites:
-		Image: ra2_soviets_upgrade_shocktroopertraining
-	ProvidesPrerequisite@ra2_soviets_upgrade_shocktroopertraining:
+		Image: ra2_soviet_doctrine_shocktroopertraining
+	ProvidesPrerequisite@ra2_soviet_doctrine_shocktroopertraining:
 		Prerequisite: infantry.upgraded
 	ProvidesPrerequisite@ra2_soviet_doctrine_1:
 		Prerequisite: ra2_soviet_doctrine_1
 
 ^RA2SovietShockTrooperTraining:
-	RangeMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+	RangeMultiplier@ra2_soviet_doctrine_shocktroopertraining:
 		Modifier: 115
-		RequiresCondition: ra2_soviets_upgrade_shocktroopertraining
-	FirepowerMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		RequiresCondition: ra2_soviet_doctrine_shocktroopertraining
+	FirepowerMultiplier@ra2_soviet_doctrine_shocktroopertraining:
 		Modifier: 115
-		RequiresCondition: ra2_soviets_upgrade_shocktroopertraining
-	SpeedMultiplier@ra2_soviets_upgrade_shocktroopertraining:
+		RequiresCondition: ra2_soviet_doctrine_shocktroopertraining
+	SpeedMultiplier@ra2_soviet_doctrine_shocktroopertraining:
 		Modifier: 115
-		RequiresCondition: ra2_soviets_upgrade_shocktroopertraining
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_shocktroopertraining:
-		Condition: ra2_soviets_upgrade_shocktroopertraining
-		Prerequisites: ra2_soviets_upgrade_shocktroopertraining
+		RequiresCondition: ra2_soviet_doctrine_shocktroopertraining
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_shocktroopertraining:
+		Condition: ra2_soviet_doctrine_shocktroopertraining
+		Prerequisites: ra2_soviet_doctrine_shocktroopertraining
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_shocktroopertraining
+		Upgrades: ra2_soviet_doctrine_shocktroopertraining
 
-ra2_soviets_upgrade_heavyarmorplatings:
+ra2_soviet_doctrine_heavyarmorplatings:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Heavy Armor Platings
 	Buildable:
 		Description: All Soviet Vehicles and Aircraft have 25% more Damage Resistance but move 10% slower.
-		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
-		Image: ra2_soviets_upgrade_heavyarmorplatings
+		Image: ra2_soviet_doctrine_heavyarmorplatings
 	ProvidesPrerequisite@ra2_soviet_doctrine_2:
 		Prerequisite: ra2_soviet_doctrine_2
 
 ^RA2SovietArmorPlatings:
-	SpeedMultiplier@ra2_soviets_upgrade_heavyarmorplatings:
+	SpeedMultiplier@ra2_soviet_doctrine_heavyarmorplatings:
 		Modifier: 90
-		RequiresCondition: ra2_soviets_upgrade_heavyarmorplatings
-	DamageMultiplier@ra2_soviets_upgrade_heavyarmorplatings:
+		RequiresCondition: ra2_soviet_doctrine_heavyarmorplatings
+	DamageMultiplier@ra2_soviet_doctrine_heavyarmorplatings:
 		Modifier: 70
-		RequiresCondition: ra2_soviets_upgrade_heavyarmorplatings
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_heavyarmorplatings:
-		Condition: ra2_soviets_upgrade_heavyarmorplatings
-		Prerequisites: ra2_soviets_upgrade_heavyarmorplatings
+		RequiresCondition: ra2_soviet_doctrine_heavyarmorplatings
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_heavyarmorplatings:
+		Condition: ra2_soviet_doctrine_heavyarmorplatings
+		Prerequisites: ra2_soviet_doctrine_heavyarmorplatings
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavyarmorplatings
+		Upgrades: ra2_soviet_doctrine_heavyarmorplatings
 
-ra2_soviets_upgrade_reactivearmor:
+ra2_soviet_doctrine_reactivearmor:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Reactive Armor
 	Buildable:
 		Description: Tanks gain gain 50% Damage Resistance to Area of Effect weapons and 10% Damage Resistance against everything else but move 5% slower.
-		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
-		Image: ra2_soviets_upgrade_reactivearmor
+		Image: ra2_soviet_doctrine_reactivearmor
 	ProvidesPrerequisite@ra2_soviet_doctrine_2:
 		Prerequisite: ra2_soviet_doctrine_2
 
 ^RA2SovietReactiveArmor:
 	Armor@HAZMAT:
 		Type: HAZMAT
-		RequiresCondition: ra2_soviets_upgrade_reactivearmor
+		RequiresCondition: ra2_soviet_doctrine_reactivearmor
 	DamagedByTintedCells@rad:
-		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
+		RequiresCondition: !ra2_soviet_doctrine_reactivearmor
 	DamagedByTintedCells@genrad:
-		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
+		RequiresCondition: !ra2_soviet_doctrine_reactivearmor
 	DamagedByTintedCells@tib:
-		RequiresCondition: !ra2_soviets_upgrade_reactivearmor
+		RequiresCondition: !ra2_soviet_doctrine_reactivearmor
 	WithDecoration@HAZMAT:
 		Image: pips
 		Sequence: pip_hazmat
 		Position: BottomRight
-		RequiresCondition: ra2_soviets_upgrade_reactivearmor
-	SpeedMultiplier@ra2_soviets_upgrade_reactivearmor:
+		RequiresCondition: ra2_soviet_doctrine_reactivearmor
+	SpeedMultiplier@ra2_soviet_doctrine_reactivearmor:
 		Modifier: 95
-		RequiresCondition: ra2_soviets_upgrade_reactivearmor
-	DamageMultiplier@ra2_soviets_upgrade_reactivearmor:
-		RequiresCondition: ra2_soviets_upgrade_reactivearmor
+		RequiresCondition: ra2_soviet_doctrine_reactivearmor
+	DamageMultiplier@ra2_soviet_doctrine_reactivearmor:
+		RequiresCondition: ra2_soviet_doctrine_reactivearmor
 		Modifier: 90
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_reactivearmor:
-		Condition: ra2_soviets_upgrade_reactivearmor
-		Prerequisites: ra2_soviets_upgrade_reactivearmor
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_reactivearmor:
+		Condition: ra2_soviet_doctrine_reactivearmor
+		Prerequisites: ra2_soviet_doctrine_reactivearmor
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_reactivearmor
+		Upgrades: ra2_soviet_doctrine_reactivearmor
 
-ra2_soviets_upgrade_tesladischargearmor:
+ra2_soviet_doctrine_tesladischargearmor:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Tesla Discharge Armor
 	Buildable:
 		Description: Causes Armor to slowly charge up once enemies are nearby. When fully charged Tesla Arcs discharge upon taking damage. Gives 15% more Damage Resistance. While Tesla Armor is charging up Speed is reduced by 15% but increased by 15% if out of combat.
-		Prerequisites: ~ra2natech, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_doctrine_1, !ra2_soviet_doctrine_2
 	RenderSprites:
-		Image: ra2_soviets_upgrade_tesladischargearmor
+		Image: ra2_soviet_doctrine_tesladischargearmor
 	ProvidesPrerequisite@ra2_soviet_doctrine_2:
 		Prerequisite: ra2_soviet_doctrine_2
 
@@ -12920,13 +12920,13 @@ ra2_soviets_upgrade_tesladischargearmor:
 	Inherits@EnemyInProximity: ^EnemyInProximity
 	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor1:
 		Modifier: 85
-		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor && EnemyInProximity
+		RequiresCondition: ra2_soviet_doctrine_tesladischargearmor && EnemyInProximity
 	SpeedMultiplier@ra2_soviets_upgrade_tesladischargearmor2:
 		Modifier: 115
-		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor && !EnemyInProximity
-	DamageMultiplier@ra2_soviets_upgrade_tesladischargearmor:
+		RequiresCondition: ra2_soviet_doctrine_tesladischargearmor && !EnemyInProximity
+	DamageMultiplier@ra2_soviet_doctrine_tesladischargearmor:
 		Modifier: 85
-		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor
+		RequiresCondition: ra2_soviet_doctrine_tesladischargearmor
 	FireWarheads@Tesla:
 		Weapons: TeslaArmorDischargeDummy
 		Interval: 1
@@ -12937,7 +12937,7 @@ ra2_soviets_upgrade_tesladischargearmor:
 		Condition: tesladischargearmorcooldown
 		Duration: 5
 	GrantConditionOnDamage@tesladischargearmor:
-		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor && !disabled
+		RequiresCondition: ra2_soviet_doctrine_tesladischargearmor && !disabled
 		Condition: tesladischargearmor
 		Duration: 10
 		PlayerRelationship: Ally, Neutral, Enemy
@@ -12947,162 +12947,162 @@ ra2_soviets_upgrade_tesladischargearmor:
 		Delay: 1
 		RequiresCondition: tesladischargearmor && !tesladischargearmorcooldown && EnemyInMaxProximity
 	PhysicalStateBar@EnemyProximity:
-		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor
+		RequiresCondition: ra2_soviet_doctrine_tesladischargearmor
 	WithPhysicalStateColoredOverlay@EnemyProximity:
-		RequiresCondition: ra2_soviets_upgrade_tesladischargearmor
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_tesladischargearmor:
-		Condition: ra2_soviets_upgrade_tesladischargearmor
-		Prerequisites: ra2_soviets_upgrade_tesladischargearmor
+		RequiresCondition: ra2_soviet_doctrine_tesladischargearmor
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_tesladischargearmor:
+		Condition: ra2_soviet_doctrine_tesladischargearmor
+		Prerequisites: ra2_soviet_doctrine_tesladischargearmor
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_tesladischargearmor
+		Upgrades: ra2_soviet_doctrine_tesladischargearmor
 
-ra2_soviets_upgrade_fireshells:
+ra2_soviet_doctrine_firemunitions:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Fire Munitions
 	Buildable:
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons spread fire and deal 25% more damage.
-		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_industrialplant, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
-		Image: ra2_soviets_upgrade_fireshells
+		Image: ra2_soviet_doctrine_firemunitions
 	ProvidesPrerequisite@ra2_soviet_doctrine_3:
 		Prerequisite: ra2_soviet_doctrine_3
 
 ^RA2SovietFireShells:
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_fireshells:
-		Condition: ra2_soviets_upgrade_fireshells
-		Prerequisites: ra2_soviets_upgrade_fireshells
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_firemunitions:
+		Condition: ra2_soviet_doctrine_firemunitions
+		Prerequisites: ra2_soviet_doctrine_firemunitions
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_fireshells
+		Upgrades: ra2_soviet_doctrine_firemunitions
 
-ra2_soviets_upgrade_radiationshells:
+ra2_soviet_doctrine_nuclearmunitions:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Nuclear Munitions
 	Buildable:
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons leave radiation and deal 25% more damage.
-		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_industrialplant, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
-		Image: ra2_soviets_upgrade_radiationshells
+		Image: ra2_soviet_doctrine_nuclearmunitions
 	ProvidesPrerequisite@ra2_soviet_doctrine_3:
 		Prerequisite: ra2_soviet_doctrine_3
 
 ^RA2SovietRadShells:
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_radiationshells:
-		Condition: ra2_soviets_upgrade_radiationshells
-		Prerequisites: ra2_soviets_upgrade_radiationshells
-	FirepowerMultiplier@ra2_soviets_upgrade_radiationshells:
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_nuclearmunitions:
+		Condition: ra2_soviet_doctrine_nuclearmunitions
+		Prerequisites: ra2_soviet_doctrine_nuclearmunitions
+	FirepowerMultiplier@ra2_soviet_doctrine_nuclearmunitions:
 		Modifier: 105
-		RequiresCondition: ra2_soviets_upgrade_radiationshells
+		RequiresCondition: ra2_soviet_doctrine_nuclearmunitions
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_radiationshells
+		Upgrades: ra2_soviet_doctrine_nuclearmunitions
 
-ra2_soviets_upgrade_teslashells:
+ra2_soviet_doctrine_teslamunitions:
 	Inherits: ^doctrine_template
 	Tooltip:
 		Name: Tesla Munitions
 	Buildable:
 		Description: Rhino, Apocalypse, V3, Kirov, and Siege Chopper weapons zap nearby targets on impact and deal 25% more damage.
-		Prerequisites: ~ra2natech, yrngindp, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_industrialplant, ra2_soviet_doctrine_2, !ra2_soviet_doctrine_3
 	RenderSprites:
-		Image: ra2_soviets_upgrade_teslashells
+		Image: ra2_soviet_doctrine_teslamunitions
 	ProvidesPrerequisite@ra2_soviet_doctrine_3:
 		Prerequisite: ra2_soviet_doctrine_3
 
 ^RA2SovietTeslaShells:
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_teslashells:
-		Condition: ra2_soviets_upgrade_teslashells
-		Prerequisites: ra2_soviets_upgrade_teslashells
+	GrantConditionOnPrerequisite@ra2_soviet_doctrine_teslamunitions:
+		Condition: ra2_soviet_doctrine_teslamunitions
+		Prerequisites: ra2_soviet_doctrine_teslamunitions
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_teslashells
+		Upgrades: ra2_soviet_doctrine_teslamunitions
 
-ra2_soviets_upgrade_terrordronesurprise:
+ra2_soviet_upgrade_terrordronesurprise:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Terror Drone Surprise
 	Buildable:
 		Description: Vehicles have a 75% chance of releasing a Terror Drone on destruction.
-		Prerequisites: ~ra2naradr, !ra2_soviets_upgrade_terrordronesurprise
+		Prerequisites: ~ra2_soviet_radar, !ra2_soviet_upgrade_terrordronesurprise
 	RenderSprites:
-		Image: ra2dron
+		Image: ra2_soviet_terrordrone
 
 ^TerrorDroneSurprise:
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_terrordronesurprise:
-		Condition: ra2_soviets_upgrade_terrordronesurprise
-		Prerequisites: ra2_soviets_upgrade_terrordronesurprise
-	SpawnActorOnDeath@ra2_soviets_upgrade_terrordronesurprise:
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_terrordronesurprise:
+		Condition: ra2_soviet_upgrade_terrordronesurprise
+		Prerequisites: ra2_soviet_upgrade_terrordronesurprise
+	SpawnActorOnDeath@ra2_soviet_upgrade_terrordronesurprise:
 		Probability: 75
-		Actor: ra2dron
-		RequiresCondition: ra2_soviets_upgrade_terrordronesurprise && !chronobeamed
+		Actor: ra2_soviet_terrordrone
+		RequiresCondition: ra2_soviet_upgrade_terrordronesurprise && !chronobeamed
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_terrordronesurprise
+		Upgrades: ra2_soviet_upgrade_terrordronesurprise
 
-ra2_soviets_upgrade_coilchargers:
+ra2_soviet_upgrade_teslacoilchargers:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Tesla Coil Chargers
 	Buildable:
 		Queue: Research
 		Description: Provide all Tesla Coils with chargers.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_coilchargers
+		Prerequisites: ~ra2_soviet_battlelab, !ra2_soviet_upgrade_teslacoilchargers
 	RenderSprites:
-		Image: ra2tesla
+		Image: ra2_soviet_teslacoil
 	ProvidesPrerequisite:
 
 ### Battle Lab ###
 
-ra2_soviets_upgrade_teslaoverload:
+ra2_soviet_upgrade_teslaoverload:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Tesla Overload
 	Buildable:
 		Description: Allows tesla bolts to jump to nearby targets and cause EMP damage. Increases Firepower by 25%.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_teslaoverload
+		Prerequisites: ~ra2_soviet_battlelab, !ra2_soviet_upgrade_teslaoverload
 	RenderSprites:
-		Image: ra2_soviets_upgrade_teslaoverload
+		Image: ra2_soviet_upgrade_teslaoverload
 
 ^RA2TeslaOverload:
-	FirepowerMultiplier@ra2_soviets_upgrade_teslaoverload:
-		RequiresCondition: ra2_soviets_upgrade_teslaoverload
+	FirepowerMultiplier@ra2_soviet_upgrade_teslaoverload:
+		RequiresCondition: ra2_soviet_upgrade_teslaoverload
 		Modifier: 125
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_teslaoverload:
-		Condition: ra2_soviets_upgrade_teslaoverload
-		Prerequisites: ra2_soviets_upgrade_teslaoverload
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_teslaoverload:
+		Condition: ra2_soviet_upgrade_teslaoverload
+		Prerequisites: ra2_soviet_upgrade_teslaoverload
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_teslaoverload
+		Upgrades: ra2_soviet_upgrade_teslaoverload
 
-ra2_soviets_upgrade_heavycannons:
+ra2_soviet_upgrade_heavycannons:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Heavy Cannons
 	Buildable:
 		Description: Increases Tank Cannon and Flak Firepower by 30% and Range by 15%.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_heavycannons
+		Prerequisites: ~ra2_soviet_battlelab, !ra2_soviet_upgrade_heavycannons
 	RenderSprites:
-		Image: ra2_soviets_upgrade_heavycannons
+		Image: ra2_soviet_upgrade_heavycannons
 
 ^RA2HeavyCannons:
-	FirepowerMultiplier@ra2_soviets_upgrade_heavycannons:
+	FirepowerMultiplier@ra2_soviet_upgrade_heavycannons:
 		Modifier: 130
-		RequiresCondition: ra2_soviets_upgrade_heavycannons
-	RangeMultiplier@ra2_soviets_upgrade_heavycannons:
+		RequiresCondition: ra2_soviet_upgrade_heavycannons
+	RangeMultiplier@ra2_soviet_upgrade_heavycannons:
 		Modifier: 115
-		RequiresCondition: ra2_soviets_upgrade_heavycannons
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_heavycannons:
-		Condition: ra2_soviets_upgrade_heavycannons
-		Prerequisites: ra2_soviets_upgrade_heavycannons
+		RequiresCondition: ra2_soviet_upgrade_heavycannons
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_heavycannons:
+		Condition: ra2_soviet_upgrade_heavycannons
+		Prerequisites: ra2_soviet_upgrade_heavycannons
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_heavycannons
+		Upgrades: ra2_soviet_upgrade_heavycannons
 
-ra2_soviets_upgrade_grindertanktreads:
+ra2_soviet_upgrade_grindertanktreads:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Grinder Tank Treads
 	Buildable:
 		Description: All Soviet Tanks and tracked Vehicles gain 15% more Speed and Damage Resistance and faster Regeneration.
-		Prerequisites: ~ra2natech, !ra2_soviets_upgrade_grindertanktreads
+		Prerequisites: ~ra2_soviet_battlelab, !ra2_soviet_upgrade_grindertanktreads
 	RenderSprites:
-		Image: ra2_soviets_upgrade_grindertanktreads
+		Image: ra2_soviet_upgrade_grindertanktreads
 
 ^RA2GrinderTankTreads:
 	ChangesHealth@ra2_soviets_upgrade_grindertanktreads1:
@@ -13110,81 +13110,81 @@ ra2_soviets_upgrade_grindertanktreads:
 		Delay: 40
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
+		RequiresCondition: ra2_soviet_upgrade_grindertanktreads
 	ChangesHealth@ra2_soviets_upgrade_grindertanktreads2:
 		Step: 50
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 50
-		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
-	SpeedMultiplier@ra2_soviets_upgrade_grindertanktreads:
+		RequiresCondition: ra2_soviet_upgrade_grindertanktreads
+	SpeedMultiplier@ra2_soviet_upgrade_grindertanktreads:
 		Modifier: 115
-		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
-	DamageMultiplier@ra2_soviets_upgrade_grindertanktreads:
+		RequiresCondition: ra2_soviet_upgrade_grindertanktreads
+	DamageMultiplier@ra2_soviet_upgrade_grindertanktreads:
 		Modifier: 85
-		RequiresCondition: ra2_soviets_upgrade_grindertanktreads
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_grindertanktreads:
-		Condition: ra2_soviets_upgrade_grindertanktreads
-		Prerequisites: ra2_soviets_upgrade_grindertanktreads
+		RequiresCondition: ra2_soviet_upgrade_grindertanktreads
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_grindertanktreads:
+		Condition: ra2_soviet_upgrade_grindertanktreads
+		Prerequisites: ra2_soviet_upgrade_grindertanktreads
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_grindertanktreads
+		Upgrades: ra2_soviet_upgrade_grindertanktreads
 
-ra2_soviets_upgrade_kirovarmorplatings:
+ra2_soviet_upgrade_kirovarmorplatings:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Kirov Armor Platings
 	Buildable:
 		Description: Increases Damage Resistance of Kirovs and V3 Rockets by 25%.
-		Prerequisites: ~ra2natech, yrngindp, !ra2_soviets_upgrade_kirovarmorplatings
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_industrialplant, !ra2_soviet_upgrade_kirovarmorplatings
 	RenderSprites:
-		Image: ra2_soviets_upgrade_kirovarmorplatings
+		Image: ra2_soviet_upgrade_kirovarmorplatings
 
 ^RA2KirovArmorPlatings:
-	DamageMultiplier@ra2_soviets_upgrade_kirovarmorplatings:
+	DamageMultiplier@ra2_soviet_upgrade_kirovarmorplatings:
 		Modifier: 75
-		RequiresCondition: ra2_soviets_upgrade_kirovarmorplatings
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovarmorplatings:
-		Condition: ra2_soviets_upgrade_kirovarmorplatings
-		Prerequisites: ra2_soviets_upgrade_kirovarmorplatings
+		RequiresCondition: ra2_soviet_upgrade_kirovarmorplatings
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_kirovarmorplatings:
+		Condition: ra2_soviet_upgrade_kirovarmorplatings
+		Prerequisites: ra2_soviet_upgrade_kirovarmorplatings
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_kirovarmorplatings
+		Upgrades: ra2_soviet_upgrade_kirovarmorplatings
 
-ra2_soviets_upgrade_kirovgastroburners:
+ra2_soviet_upgrade_gastroburners:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Gastroburners
 	Buildable:
 		Description: Increases Speed of Kirovs by 25% and V3 Range by 15%.
-		Prerequisites: ~ra2natech, yrngindp, !ra2_soviets_upgrade_kirovgastroburners
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_industrialplant, !ra2_soviet_upgrade_gastroburners
 	RenderSprites:
-		Image: ra2_soviets_upgrade_kirovgastroburners
+		Image: ra2_soviet_upgrade_gastroburners
 
 ^RA2KirovGastroburners:
-	SpeedMultiplier@ra2_soviets_upgrade_kirovgastroburners:
+	SpeedMultiplier@ra2_soviet_upgrade_gastroburners:
 		Modifier: 125
-		RequiresCondition: ra2_soviets_upgrade_kirovgastroburners
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovgastroburners:
-		Condition: ra2_soviets_upgrade_kirovgastroburners
-		Prerequisites: ra2_soviets_upgrade_kirovgastroburners
+		RequiresCondition: ra2_soviet_upgrade_gastroburners
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_gastroburners:
+		Condition: ra2_soviet_upgrade_gastroburners
+		Prerequisites: ra2_soviet_upgrade_gastroburners
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_kirovgastroburners
+		Upgrades: ra2_soviet_upgrade_gastroburners
 
-ra2_soviets_upgrade_kirovnuclearshells:
+ra2_soviet_upgrade_kirovatomicbombs:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Kirov Atomic Bombs
 	Buildable:
 		Description: Replaces the Kirov Bombs with Atomic Bombs
-		Prerequisites: ~ra2natech, yrngindp, ra2namisl, !ra2_soviets_upgrade_kirovnuclearshells
+		Prerequisites: ~ra2_soviet_battlelab, ra2_soviet_industrialplant, ra2_soviet_nuclearmissilesilo, !ra2_soviet_upgrade_kirovatomicbombs
 	RenderSprites:
-		Image: ra2_soviets_upgrade_kirovnuclearshells
+		Image: ra2_soviet_upgrade_kirovatomicbombs
 
 ^RA2KirovAtomicBombs:
-	GrantConditionOnPrerequisite@ra2_soviets_upgrade_kirovnuclearshells:
-		Condition: ra2_soviets_upgrade_kirovnuclearshells
-		Prerequisites: ra2_soviets_upgrade_kirovnuclearshells
+	GrantConditionOnPrerequisite@ra2_soviet_upgrade_kirovatomicbombs:
+		Condition: ra2_soviet_upgrade_kirovatomicbombs
+		Prerequisites: ra2_soviet_upgrade_kirovatomicbombs
 	ActorStatValues:
-		Upgrades: ra2_soviets_upgrade_kirovnuclearshells
+		Upgrades: ra2_soviet_upgrade_kirovatomicbombs
 
 ####################################################################################################
 #		Promotions Allies
@@ -15410,7 +15410,7 @@ ra2_tractor_driveby:
 # 		Name: Union Tank
 # 	Buildable:
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: ~ra2natech
+# 		Prerequisites: ~ra2_soviet_battlelab
 # 		Queue: Vehicle, RAVehicle
 # 		Description: actor_htnk.description
 # 	Mobile:
@@ -15437,7 +15437,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: !rank-elite && !ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@PRIMARYRAD:
 # 		Name: primary
 # 		Weapon: RA2120xmm_rad
@@ -15446,7 +15446,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: !rank-elite && ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@SECONDARY:
 # 		Name: secondary
 # 		Weapon: RA2MammothTusk
@@ -15462,7 +15462,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle-2
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: rank-elite && !ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: rank-elite && !ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@PRIMARYELITERAD:
 # 		Name: primary
 # 		Weapon: RA2120xmm_elite_rad
@@ -15471,7 +15471,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle-2
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: rank-elite && ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@SECONDARYELITE:
 # 		Name: secondary
 # 		Weapon: RA2MammothTusk_elite
@@ -15494,7 +15494,7 @@ ra2_tractor_driveby:
 # 	FirepowerMultiplier@RadShells:
 # 		Types: primary
 # 	ActorStatValues:
-# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_heavyarmorplatings
+# 		Upgrades: ra2_soviet_upgrade_terrordronesurprise, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_heavyarmorplatings
 # 	RenderSprites:
 # 		Image: ra2uniontank
 # 		PlayerPalette: player_rgba
@@ -15516,7 +15516,7 @@ ra2_tractor_driveby:
 # 		Name: Apocalypse Tank
 # 	Buildable:
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: ~ra2natech
+# 		Prerequisites: ~ra2_soviet_battlelab
 # 		Queue: Vehicle, RAVehicle
 # 		Description: actor_htnk.description
 # 	Mobile:
@@ -15543,7 +15543,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: !rank-elite && !ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: !rank-elite && !ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@PRIMARYRAD:
 # 		Name: primary
 # 		Weapon: RA2120xmm_rad
@@ -15552,7 +15552,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: !rank-elite && ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: !rank-elite && ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@SECONDARY:
 # 		Name: secondary
 # 		Weapon: RA2MammothTusk
@@ -15568,7 +15568,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle-2
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: rank-elite && !ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: rank-elite && !ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@PRIMARYELITERAD:
 # 		Name: primary
 # 		Weapon: RA2120xmm_elite_rad
@@ -15577,7 +15577,7 @@ ra2_tractor_driveby:
 # 		LocalOffset: 768,85,90, 768,-85,90
 # 		MuzzleSequence: muzzle-2
 # 		MuzzlePalette: ra2effect
-# 		RequiresCondition: rank-elite && ra2_soviets_upgrade_radiationshells
+# 		RequiresCondition: rank-elite && ra2_soviet_doctrine_nuclearmunitions
 # 	Armament@SECONDARYELITE:
 # 		Name: secondary
 # 		Weapon: RA2MammothTusk_elite
@@ -15598,7 +15598,7 @@ ra2_tractor_driveby:
 # 	RenderSprites:
 # 		PlayerPalette: playerra2
 # 	ActorStatValues:
-# 		Upgrades: ra2_soviets_upgrade_terrordronesurprise, ra2_soviets_upgrade_radiationshells, ra2_soviets_upgrade_heavyarmorplatings
+# 		Upgrades: ra2_soviet_upgrade_terrordronesurprise, ra2_soviet_doctrine_nuclearmunitions, ra2_soviet_doctrine_heavyarmorplatings
 # 	RenderSprites:
 # 		Image: ra2superapocalypse
 # 		PlayerPalette: player_rgba
@@ -15614,7 +15614,7 @@ ra2_tractor_driveby:
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 80
-# 		Prerequisites: ~ra2natech
+# 		Prerequisites: ~ra2_soviet_battlelab
 # 		Description: actor_latin_burrito.description
 # 	Valued:
 # 		Cost: 1200
@@ -15679,7 +15679,7 @@ ra2_tractor_driveby:
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~ra2natech
+# 		Prerequisites: ~ra2_soviet_battlelab
 # 		Queue: Vehicle, RAVehicle
 # 		Description: actor_jeep.description
 # 	Mobile:
@@ -15758,7 +15758,7 @@ ra2_tractor_driveby:
 # 		Name: Advance Tesla Tank
 # 	Buildable:
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: ~ra2naradr
+# 		Prerequisites: ~ra2_soviet_radar
 # 		Queue: Vehicle, RAVehicle
 # 		Description: actor_ttnk.description
 # 	Mobile:
@@ -15810,7 +15810,7 @@ ra2_tractor_driveby:
 # 		Image: ra2advanceteslatank
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: uparctesla, ra2_soviets_upgrade_terrordronesurprise
+# 		Upgrades: uparctesla, ra2_soviet_upgrade_terrordronesurprise
 
 # ra2mig:
 # 	Inherits: ^RANeutralPlane
@@ -15823,7 +15823,7 @@ ra2_tractor_driveby:
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 30
-# 		Prerequisites: ~ra2naairf
+# 		Prerequisites: ~ra2_soviet_airfield
 # 		Description: actor_yak.description
 # 	Valued:
 # 		Cost: 3200
