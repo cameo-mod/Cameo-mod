@@ -515,7 +515,7 @@ cabal_hackercyborg:
 		Condition: end_disable
 		RequiredShotsPerInstance: 25
 		MaximumInstances: 1
-		RevokeDelay: 5
+		RevokeDelay: 10
 		RevokeAll: false
 		IsCyclic: false
 	# Armament@PRIMARY:
@@ -575,13 +575,13 @@ cabal_hackercyborg:
 	MindControllerCA:
 		ArmamentNames: primary
 		ExperienceFromControl: 100
-		TicksToControl: 120
+		TicksToControl: 125
 		TicksToRevoke: 25
 		Capacity: 8
 		RequiresCondition: !disabled
 		ControllingCondition: controlling
 	WithRangeCircle@MC:
-		Range: 9500
+		Range: 8000
 		Type: mindcontrol
 		Color: 663399b0
 	SpeedMultiplier@cabal_upgrade_handof:
@@ -885,6 +885,13 @@ cabal_dissolver:
 	Armament:
 		Weapon: CabalDissolverSpray
 		LocalOffset: 200,0,0
+	ChangesHealth@AttackHeal:
+		Step: 500
+		Delay: 15
+		StartIfBelow: 150
+		RequiresCondition: attack
+	GrantConditionOnAttack:
+		Condition: attack
 	WithSpriteTurret:
 	RenderSprites:
 		PlayerPalette: playerra2
