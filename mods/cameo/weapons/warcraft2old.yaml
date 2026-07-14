@@ -188,31 +188,31 @@ wc2holyvisionSuper_hit:
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-n
 		ImpactSounds: wc2_holyvisn.aud
-	Warhead@2Eff2: CreateEffect
+	Warhead@Effect: CreateEffect
 		Delay: 13
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-ne
-	Warhead@2Eff3: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Delay: 16
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-e
-	Warhead@2Eff4: CreateEffect
+	Warhead@Effect3: CreateEffect
 		Delay: 19
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-se
-	Warhead@2Eff5: CreateEffect
+	Warhead@Effect4: CreateEffect
 		Delay: 22
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-s
-	Warhead@2Eff6: CreateEffect
+	Warhead@Effect5: CreateEffect
 		Delay: 25
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-sw
-	Warhead@2Eff7: CreateEffect
+	Warhead@Effect6: CreateEffect
 		Delay: 28
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-w
-	Warhead@2Eff8: CreateEffect
+	Warhead@Effect7: CreateEffect
 		Delay: 31
 		Image: wc2_effect_sparkle_circle
 		Explosions: idle-nw
@@ -1566,7 +1566,7 @@ wc2visualexplode:
 		ImpactSounds: explode.aud
 
 wc2buildingexplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: wc2_building_collapse
 		Explosions: idle
 		Delay: 1

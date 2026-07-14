@@ -1209,36 +1209,6 @@ stalker.steel:
 		Filename: steel_stalker_icon.png
 		Offset: 0,0
 
-beholder.steel:
-	Defaults:
-		Filename: steel_beholder.shp
-		Offset: 0,48
-	idle:
-		Filename: invisibleitem.shp
-	stand:
-		Length: 17
-		Facings: -8
-		InterpolatedFacings: 32
-		Tick: 80
-		ShadowStart: 408
-	run:
-		Start: 136
-		Length: 17
-		Facings: -8
-		InterpolatedFacings: 32
-		Tick: 80
-		ShadowStart: 544
-	shoot:
-		Start: 272
-		Length: 17
-		Facings: -8
-		InterpolatedFacings: 32
-		Tick: 32
-		ShadowStart: 680
-	icon:
-		Filename: steel_beholder_icon.shp
-		Offset: 0,0
-
 white_rabbit.steel:
 	Defaults:
 		Filename: white_rabbit.shp

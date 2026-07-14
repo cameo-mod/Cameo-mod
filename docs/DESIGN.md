@@ -168,6 +168,26 @@ template that the ground weapons inherit last, so the AA twin picks it
 up automatically through the ground weapon (e.g. `^CabalMissile`).
 Never copy a projectile block across weapons.
 
+**Weapon grouping order in YAML (design 2026-07-13).** Within a
+faction's `weapons.yaml`, every weapon family must be kept in a strict
+order so upgrades and twins are easy to audit and impossible to miss:
+
+1. **Basic weapon** (the unupgraded ground version).
+2. **Elite / veteran twin** if any.
+3. **Anti-air twin** (inherits the basic weapon, only changes
+   `ValidTargets` and AA range).
+4. **Upgrade variants** in the order they are unlocked — if a unit has
+   multiple upgrades, list the combined versions after the single
+   upgrades. Reference pattern: the Consortium Quantum Missile Trooper
+   weapons show the full progression of basic → elite → anti-air →
+   upgrade → combined upgrade.
+
+The same rule applies inside an actor's `Armament` blocks: the basic
+`Armament@PRIMARY` must come first, then the upgraded armament directly
+below it (e.g., `Armament@UPGRADE` right after `Armament@PRIMARY`), then
+garrison variants, then anti-air variants. Never scatter related weapons
+across the file.
+
 **Weapon mount offsets (design 2026-07-11 — always apply).** Every
 firing armament needs a `LocalOffset` so the muzzle sits at the barrel,
 not the actor's ground-center. For INFANTRY the default is
@@ -714,3 +734,66 @@ detector and fixes land as ordered batches, never silently.
 - `Obstacle` exists for AI logic (minelayer bot ignores it), **never for
   weapons**: no weapon lists Obstacle in Valid/InvalidTargets — props are
   hit as plain Ground.
+
+---
+
+## 14. CABAL faction design rules
+
+The full CABAL faction design lives in the local document
+`C:\Users\AedisToru\Documents\DevinCameoProject\CABAL_FACTION_DESIGN.md`.
+This section binds the rules that affect YAML-level auditing.
+
+**Faction identity.** CABAL is a self-contained cybernetic collective: every
+unit is a machine, cyborg, or drone. No cross-faction inheritance. The
+faction owns two ground production queues — the Cyborg Factory builds
+infantry and light walkers, the Mech Factory builds heavier vehicles.
+
+**No dead tiers.** Infantry, vehicles, and aircraft must each have a
+meaningful, non-limited, buildable unit at every tier in the regular tech
+tree. Promotions are *better* versions of those base units, not the only
+option at a tier. A promotion tier maps directly to a tech tier (rank 1–4
+= Tier 1–4) and chains from the previous promotion in its column.
+
+**3×4 promotion grid.** CABAL uses three promotion columns: Infantry,
+Vehicles, Aircraft. Each column has four tiers. The aircraft column is
+filled by adding a Tier-1 flying drone (`cabal_wasp`) produced from the
+Cyborg Factory and a Tier-4 command ship (`cabal_mothership`), because the
+Helipad is gated behind Radar and cannot provide a T1 aircraft by itself.
+The **CABAL Core** is the Tier 4 technology unlock; all T4 units (base
+and promotion) and the Core Defender require it.
+
+**Class-template mapping.** Every CABAL actor must map to a single
+`defaults.yaml` class template. Known mismatches to fix are bugs, not
+style: `cabal_dissolver` must be `^HeavyInfantryTemplate`, `cabal_artilleryspider`
+must be `^ArtilleryTemplate`, `cabal_cyborgreaper` and `cabal_manticore` must be
+`^SupportVehicleTemplate`, `cabal_coredefender` must be `^EpicVehicleTemplate`.
+
+**Cyborg dual-armor rule.** All CABAL cyborg infantry use the Future Tech
+droid recipe: the base `Armor` from the infantry class template stays active,
+a secondary vehicle `Armor@<role>` is added, and a `DamageMultiplier@<role>:
+Modifier: 200` is applied to the secondary armor. This makes cyborgs count as
+both infantry and vehicles for weapon Versus tables while keeping them brittle
+against dedicated anti-vehicle fire. True vehicles and walkers do not use this
+pattern.
+
+**Upgrade tiers.** Tier 2 (Radar, `Upgrades` queue): Overcharged Servos,
+Cybernetic Plating, Dark Armament, Radar Hack. Tier 3 (Tech Center, `Research`):
+Mobility Matrix, Neutron Nuclear Catalyst, Reinforced Chassis, Neural Uplink,
+Reclamation Protocols, Networked Combat Protocols. Tier 4 (Tech Center + Core,
+`Research`): Backup Systems, Hand of CABAL, Data Worm, Firewall Protocol, and
+Full Assimilation as the team upgrade. The strongest and team-wide upgrades
+sit at Tier 4.
+
+**Weapon identity.** CABAL plasma weapons are the signature triad from
+§12: Cannon/Missile/Laser + Fire + Chemical warheads with even spread.
+CABAL lasers are purple/dark-blue outer beams with a near-white cyan core,
+scaled by damage. Weapon sounds follow the obelisk/laser sound map in §3.
+
+**Unique stat rule.** Every CABAL actor must carry at least one stat or
+ability that no other actor shares (cost, speed, range, weapon class,
+special K, or role). Two units may not feel identical.
+
+**Balance workflow.** All CABAL rebalances start in
+`docs/design/cameo_armor_system.xlsx` (or the CABAL concept sheet) and
+land in YAML in the same pass. The workbook wins on mismatch. Promotions
+add `^PromotionUnitBuff` on top of the sheet stats.

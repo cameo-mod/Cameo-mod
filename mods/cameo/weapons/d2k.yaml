@@ -1130,7 +1130,7 @@ CrateExplosion:
 
 D2KUnitExplodeSmall:
 	Inherits: ^Explosion
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_self_destruct
 		ImpactSounds: EXPLSML1.WAV
 		ImpactActors: false
@@ -1138,7 +1138,7 @@ D2KUnitExplodeSmall:
 
 D2KUnitExplodeMed:
 	Inherits: ^DamagingExplosion
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_building
 		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false
@@ -1146,7 +1146,7 @@ D2KUnitExplodeMed:
 
 D2KUnitExplodeLarge:
 	Inherits: ^DamagingExplosionHE
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLLG2.WAV, fey_expllg1.wav, fey_expllg3.wav, fey_expllg4.wav, fey_expllg5.wav
 		ImpactActors: false
@@ -1154,7 +1154,7 @@ D2KUnitExplodeLarge:
 
 D2kBuildingExplode:
 	Inherits: ^DamagingExplosionHE
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -1170,7 +1170,7 @@ D2kBuildingExplodeH:
 		ValidRelationships: Enemy, Neutral
 
 WallExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_wall_explosion
 		ImpactSounds: EXPLHG1.WAV, fey_explhg2.wav
 		ImpactActors: false
@@ -1249,17 +1249,17 @@ d2k_munitions_explosion_h:
 ##########################
 
 D2K_Personal_Shield_Impact:
-	Warhead@PersonalShielded: CreateEffect
+	Warhead@ShieldHitEffect: CreateEffect
 		Explosions: ixian_personal_shield
 		ValidTargets: PersonalShielded
 		Inaccuracy: 0c128
 		ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
-	Warhead@PersonalShieldedSard: CreateEffect
+	Warhead@ShieldHitEffect2: CreateEffect
 		Explosions: ixian_personal_shield_sard
 		ValidTargets: PersonalShieldedSard
 		Inaccuracy: 0c128
 		ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
-	Warhead@PersonalShieldedHeavy: CreateEffect
+	Warhead@ShieldHitEffect3: CreateEffect
 		Explosions: ixian_personal_shield_heavy
 		ValidTargets: PersonalShieldedHeavy
 		Inaccuracy: 0c128
@@ -2572,34 +2572,34 @@ oDeathHandCluster:
 		Damage: 4500
 
 oUnitExplodeSmall:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_self_destruct
 		ImpactSounds: EXPLSML1.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
 
 oUnitExplodeMed:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_building
 		ImpactSounds: EXPLSML2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
 
 oUnitExplodeLarge:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_large_explosion
 		ImpactSounds: EXPLLG2.WAV
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
 
 oBuildingExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
 
 oWallExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: d2k_wall_explosion
 		ImpactSounds: EXPLHG1.WAV
 		ImpactActors: false
@@ -2963,7 +2963,7 @@ PulseMissile:
 		ValidTargets: Ground, Water, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: pulse_missile_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -3021,7 +3021,7 @@ PulseMissile:
 		InvalidTargets: Vehicle, Structure, Wall
 		Size: 5
 		Delay: 3
-	Warhead@6Eff_areanukea: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: xplobig4.aud
 		Delay: 3
 		ImpactActors: false

@@ -19,25 +19,32 @@
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Ship, Air
 TSReaperTrap:
-	Inherits: ^TSCannon
+	Inherits: ^SmallArms
 	Report: fireweb1.aud
 	ReloadDelay: 250
 	Projectile: Bullet
 		Speed: 800
 		Image: DRAGON
 	ValidTargets: Infantry
-	Warhead@1Dam: TargetDamage
-		Damage: 200
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
 		ValidTargets: Infantry
-	Warhead@2Con: GrantExternalCondition
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+		ValidTargets: Infantry
+	Warhead@Snare: GrantExternalCondition
 		Condition: ReaperTrap
 		Duration: 100
 		Range: 1024
 		ValidTargets: Infantry
 		ValidRelationships: Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: methit1.aud
+		ValidTargets: Ground, Water
 
 DarkObeliskLaser:
-	Inherits: ^TSLaser
+	Inherits: ^LaserWeapon
 	Report: obelcor3.aud
 	Range: 12288
 	ReloadDelay: 50
@@ -50,22 +57,14 @@ DarkObeliskLaser:
 		SecondaryBeamWidth: 40
 		SecondaryBeamZOffset: 2047
 		SecondaryBeamColor: 333366EE
-	Warhead@1Dam: SpreadDamage
-		Damage: 35000
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 36000
 		Spread: 250
 		ValidTargets: Air
-	Warhead@2Dam: HealthPercentageDamage
-		Damage: 5
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 18
 		Spread: 500
 		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
 		ValidTargets: Air
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_m
@@ -118,13 +117,17 @@ TSCABALEMPDisable.end:
 TSCABALObeliskLaserFire:
 	Range: 10378
 	ReloadDelay: 90
-	Inherits: TSObeliskLaserFire
+	Inherits: ^TankDestroyerCannon
+	Inherits@LASER: ^LaserWeapon
+	Inherits@EFFECT: ^TSLaserEffect
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
+	ValidTargets: Ground, Water
 	Report: obelmod1.aud
 	Projectile:
 		Width: 110
 		Duration: 38
+		-HitAnim:
 		Color: AADD22FF
 		SecondaryBeam: true
 		SecondaryBeamWidth: 45
@@ -149,7 +152,7 @@ TSCABALObeliskLaserFire:
 		Damage: 35000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		Damage: 35
-	-Warhead@2Eff:
+	-Warhead@EffectAir:
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_l
 		Explosions: idle
@@ -198,10 +201,60 @@ TSHunterKillerLasers:
 ####################################################################################################
 
 TSHellfireTwin:
-	Inherits: TSHellfire
+	Inherits: ^HeavyCannon
+	Inherits@TD: ^TankDestroyerCannon
+	Inherits@SHRAP: ^ShrapnelWeapon
+	Inherits@GRENADE: ^Grenade
+	Inherits@HMISSILE: ^HeavyMissile
+	Inherits@MMISSILE: ^MediumMissile
+	ValidTargets: Ground, Water, Air
+	ReloadDelay: 32
+	Range: 5740
 	Burst: 2
 	BurstDelays: 8
 	Report: rketinf1.aud
+	Warhead@HeavyCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 4000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 2
 	Warhead@Effect: CreateEffect
 		Image: cabal_missileexplosion
 		Explosions: idle
@@ -227,8 +280,14 @@ TSVulcanTower:
 	ReloadDelay: 26
 	Range: 6144
 	Report: chaingn1.aud
-	Warhead@1Dam: SpreadDamage
-		Damage: 1800
+	Warhead@SmallArms: SpreadDamage
+		Damage: 2000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 1
+	Warhead@Effect: CreateEffect
+		Explosions: piffs
+		ImpactSounds: methit1.aud
+		ValidTargets: Ground, Water, Air
 
 TSHSeekerLaunch:
 	Range: 10238976
@@ -241,6 +300,7 @@ TSHSeekerLaunch:
 		ValidTargets: Ground, Water, Air
 
 Eliminator-Blades:
+	Inherits: ^SwordWeapon
 	ReloadDelay: 25
 	Range: 2048
 	Burst: 2
@@ -248,29 +308,37 @@ Eliminator-Blades:
 	Report: pzehit00.aud
 	Projectile: Bullet
 		Speed: 1c682
-	Warhead@1Dam: SpreadDamage
-		Spread: 125
-		Damage: 12500
-		Versus:
-			None: 150
-			Wood: 50
-			Light: 125
-			Medium: 100
-			Heavy: 75
-			Concrete: 25
-		DamageTypes: RippedApartDeath
-	Warhead@2Dam: HealthPercentageDamage
-		Damage: 5
-		Spread: 25
-		Delay: 5
-		DamageTypes: Prone100Percent, TriggerProne, FireDeath, Incendiary
-		Versus:
-			None: 70
-			Wood: 60
-			Light: 80
-			Medium: 90
-			Heavy: 100
-			Concrete: 50
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: pzehit00.aud
+		ValidTargets: Ground, Water
+
+CabalBerserkerBlades:
+	Inherits: ^SwordWeapon
+	ReloadDelay: 30
+	Range: 2048
+	Burst: 3
+	BurstDelays: 5
+	Report: pzehit00.aud
+	Projectile: Bullet
+		Speed: 1c682
+	Warhead@SwordWeapon: SpreadDamage
+		Damage: 74000
+	Warhead@SwordWeaponFriendlyFire: SpreadDamage
+		Damage: 37000
+	Warhead@SwordWeaponPercentage: HealthPercentageDamage
+		Damage: 37
+	Warhead@Effect: CreateEffect
+		Image: explosions
+		Explosions: poof
+		ImpactSounds: expnew12.aud
+		ValidTargets: Ground, Water
 
 CabalCyborgChaingun:
 	Inherits: ^SmallArms
@@ -664,6 +732,33 @@ CabalMantisGun:
 		Explosions: idle
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+CabalLegionGun:
+	Inherits: ^SmallArms
+	Inherits@2: ^LaserWeapon
+	ReloadDelay: 40
+	Report: lastur1.aud
+	Range: 6813
+	Projectile: LaserZap
+		Width: 80
+		ZOffset: 2047
+		Color: 66CC22BB
+		SecondaryBeam: true
+		SecondaryBeamWidth: 40
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 222244CC
+	Warhead@SmallArms: SpreadDamage
+		Damage: 60000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 60000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_s
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalManticoreMissiles:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -724,11 +819,11 @@ CabalRocketCyborgRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^CabalMissile
-	Burst: 1
+	Burst: 3
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 52
-	Range: 7438
+	Range: 8753
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -743,19 +838,104 @@ CabalRocketCyborgRocketsUpgraded:
 	Burst: 4
 
 CabalMothershipRockets:
-	Inherits: RocketAngelRockets
+	Inherits: ^TeslaWeapon
+	Inherits@HEAVYMISSILE: ^HeavyMissile
+	Inherits@FLAME: ^MediumFlameWeapon
+	Inherits@CHEM: ^MediumChemicalWeapon
+	Inherits@GRENADE: ^Grenade
+	Inherits@ARROW: ^ArrowWeapon
+	ReloadDelay: 34
+	Burst: 4
+	BurstDelays: 2
+	Range: 5846
+	MinRange: 920
 	Report: rketinf1.aud
+	Projectile: Missile
+		HorizontalRateOfTurn: 25
+		VerticalRateOfTurn: 25
+		Speed: 2500
+		Acceleration: 5
+		Arm: 2
+		CruiseAltitude: 2500
+		Inaccuracy: 500
+		RangeLimit: 25000
+		Image: DRAGON
+		TrailImage: blue_smokey
+		TrailInterval: 1
+		MinimumLaunchAngle: 125
+		MaximumLaunchAngle: 125
+		MaximumLaunchSpeed: 125
+		MinimumLaunchSpeed: 125
+		ContrailLength: 15
+		ContrailStartColor: 77CCFF
+		ContrailEndColorUsePlayerColor: true
+		ContrailEndColor: FFFFFF
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@MediumFlameWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@ArrowWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@EMPUnit: AffectsIntegrity
+		Damage: 30000
+		Spread: 600
 	Warhead@Effect: CreateEffect
 		Image: cabal_missileexplosion
 		Explosions: idle
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Water, Air
+	Warhead@EffectAir: CreateEffect
+		Explosions: drplasmaex2
+		ImpactSounds: kaboom12.aud
+		ValidTargets: Air
 
 CabalWaspLaser:
 	Inherits: ^LaserWeapon
 	Report: cygun1.aud
 	ReloadDelay: 20
-	Range: 4600
+	Range: 6420
 	Projectile: LaserZap
 		Width: 36
 		Duration: 5
@@ -767,13 +947,13 @@ CabalWaspLaser:
 		SecondaryBeamColor: 444488FF
 	ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserExtraDamage: SpreadDamage
-		Damage: 1000
+		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_s
@@ -784,7 +964,7 @@ CabalWaspLaser:
 CabalWaspLaserStriker:
 	Inherits: CabalWaspLaser
 	ReloadDelay: 18
-	Range: 5000
+	Range: 6309
 	Burst: 2
 	BurstDelays: 3
 
@@ -796,15 +976,15 @@ CabalAscendedRockets:
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 42
-	Range: 8468
+	Range: 6349
 	Warhead@LightMissile: SpreadDamage
-		Damage: 6000
+		Damage: 12000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 6
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 6000
+		Damage: 12000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 6
 
 CabalRavagerPlasma:
 	Inherits: ^MediumChemicalWeapon
@@ -852,8 +1032,551 @@ CabalManticoreLaser:
 		ValidTargets: Ground, Ship
 
 CabalMagicNuke:
-	Inherits: PulseMissile
-	-Warhead@2Eff_impact:
+	Inherits: ^TeslaChargedWeapon
+	Inherits@TESLA: ^TeslaWeapon
+	ValidTargets: Ground, Air
+	Report: nukemisl.aud
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Spread: 1000
+		Damage: 100000
+		Delay: 0
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Spread: 2000
+		Damage: 50000
+		Delay: 1
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Shielded
+		Falloff: 100, 0
+		Spread: 10000
+		Damage: 10
+		Delay: 2
+	Warhead@TeslaChargedExtraDamage: SpreadDamage
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Spread: 1000
+		Damage: 100000
+		Delay: 3
+	Warhead@TeslaWeapon: SpreadDamage
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Spread: 1000
+		Damage: 100000
+		Delay: 4
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Shielded
+		Falloff: 100, 0
+		Spread: 10000
+		Damage: 10
+		Delay: 5
+	Warhead@TeslaExtraDamage: SpreadDamage
+		ValidTargets: Shielded
+		Falloff: 100, 90, 80, 70, 60, 50, 40, 30, 20, 10
+		Spread: 1000
+		Damage: 100000
+		Delay: 6
+	Warhead@1Dam_impact: SpreadDamage
+		Spread: 1000
+		Damage: 20000
+		Falloff: 1000, 500, 250, 125, 50, 25, 5, 0
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 0
+		ValidTargets: Ground, Water, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@GroundFireArea: SpawnActorInArea
+		Actor: groundfire
+		Range: 5
+		Chance: 50
+		ImpactActors: false
+		OwnerType: InternalName
+		InternalOwner: Neutral
+	Warhead@Distort: HeatDistortion
+		Scale: 2.0
+		FadeFrames: 420
+		FadeInFrames: 15
+	Warhead@Shock: Shockwave
+		Scale: 2.0
+		FadeFrames: 120
+		FadeInFrames: 0
+	Warhead@4Dam_areanuke1: SpreadDamage
+		Spread: 2000
+		Damage: 17500
+		Falloff: 1000, 500, 250, 125, 50, 25, 0
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 3
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@4Res_areanukea: DestroyResource
+		Size: 3
+		Delay: 3
+		ResourceAmount: 3
+	Warhead@5Smu_areanukea: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+		Size: 5
+		Delay: 3
+	Warhead@Effect2: CreateEffect
+		ImpactSounds: xplobig4.aud
+		Delay: 3
+		ImpactActors: false
+	Warhead@7Dam_areanuke2: SpreadDamage
+		Spread: 3000
+		Damage: 15000
+		Falloff: 1000, 500, 250, 125, 50, 0
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 6
+		ValidTargets: Ground, Water, Underwater, Air
+		AffectsParent: true
+		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
+	Warhead@8Res_areanukeb: DestroyResource
+		Size: 6
+		Delay: 6
+		ResourceAmount: 6
+	Warhead@9Smu_areanukeb: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+		Size: 7
+		Delay: 6
+	Warhead@8Dam_areanuke2: SpreadDamage
+		Spread: 4000
+		Damage: 12500
+		Falloff: 1000, 500, 250, 125, 0
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 9
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@11Res_areanukec: DestroyResource
+		Size: 9
+		Delay: 9
+		ResourceAmount: 9
+	Warhead@12Smu_areanukec: LeaveSmudge
+		SmudgeType: Scorch
+		InvalidTargets: Vehicle, Structure, Wall
+		Size: 9
+		Delay: 9
+	Warhead@10Dam_areanuke3: SpreadDamage
+		Spread: 5000
+		Damage: 10000
+		Falloff: 1000, 500, 250, 0
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 12
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@11Dam_areanuke3: SpreadDamage
+		Spread: 6000
+		Damage: 7500
+		Falloff: 1000, 500, 0
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 15
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage1: HealthPercentageDamage
+		Spread: 10000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage2: HealthPercentageDamage
+		Spread: 9000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage3: HealthPercentageDamage
+		Spread: 8000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage4: HealthPercentageDamage
+		Spread: 7000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage5: HealthPercentageDamage
+		Spread: 6000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage6: HealthPercentageDamage
+		Spread: 5000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage7: HealthPercentageDamage
+		Spread: 4000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage8: HealthPercentageDamage
+		Spread: 3000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage9: HealthPercentageDamage
+		Spread: 2000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@NuclearMissilePercentage10: HealthPercentageDamage
+		Spread: 1000
+		Damage: 10
+		Versus:
+			Shield: 150
+			None: 100
+			Flak: 96
+			Plate: 92
+			Heroic: 88
+			Superheavy: 84
+			Heavy: 80
+			Medium: 76
+			Light: 72
+			Scout: 68
+			Steel: 64
+			Concrete: 60
+			Wood: 56
+			Spaceship: 52
+			Helicopter: 48
+			Bomber: 44
+			Fighter: 40
+		Delay: 18
+		AffectsParent: true
+		ValidTargets: Ground, Water, Underwater, Air
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@EMP1: AffectsIntegrity
+		Damage: 1000000
+		Spread: 2000
+		Delay: 2
+	Warhead@EMP2: AffectsIntegrity
+		Damage: 900000
+		Spread: 4000
+		Delay: 4
+	Warhead@EMP3: AffectsIntegrity
+		Damage: 800000
+		Spread: 6000
+		Delay: 6
+	Warhead@EMP4: AffectsIntegrity
+		Damage: 700000
+		Spread: 8000
+		Delay: 8
+	Warhead@EMP5: AffectsIntegrity
+		Damage: 600000
+		Spread: 10000
+		Delay: 10
+	Warhead@EMP6: AffectsIntegrity
+		Damage: 500000
+		Spread: 12000
+		Delay: 12
+	Warhead@EMP7: AffectsIntegrity
+		Damage: 400000
+		Spread: 14000
+		Delay: 14
+	Warhead@EMP8: AffectsIntegrity
+		Damage: 300000
+		Spread: 16000
+		Delay: 16
+	Warhead@EMP9: AffectsIntegrity
+		Damage: 200000
+		Spread: 18000
+		Delay: 18
+	Warhead@EMP10: AffectsIntegrity
+		Damage: 100000
+		Spread: 20000
+		Delay: 20
+	Warhead@13Shake: ShakeScreen
+		Duration: 20
+		Intensity: 5
+		Multiplier: 1,1
+	Warhead@FlashEffect: FlashEffect
+		Duration: 20
+		FlashType: PulseWeapon
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke
 		ImpactSounds: nukexplo.aud
@@ -921,3 +1644,141 @@ CabalRavagerPlasmaNeutron:
 	Warhead@Effect: CreateEffect
 		Explosions: magicnuke_small
 		ImpactSounds: expnew12.aud
+
+CabalBeholderLaser:
+	Inherits: ^HeavyCannon
+	Inherits: ^TeslaWeapon
+	Inherits: ^RailgunWeapon
+	Inherits: ^LaserWeapon
+	Report: obelcor3.aud
+	ReloadDelay: 50
+	Range: 2500
+	Burst: 2
+	BurstDelays: 5
+	Projectile: LaserZap
+		Width: 80
+		ZOffset: 2047
+		Color: 88DD22DD
+		SecondaryBeam: true
+		SecondaryBeamWidth: 30
+		SecondaryBeamZOffset: 2047
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 5000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_s
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
+
+CabalOverkillDroneLauncher:
+	ReloadDelay: 25
+	Range: 6400
+	Report: samshot1.aud
+	ValidTargets: Ground, Air, Water
+	Projectile: InstantHit
+	Warhead@1Dam: TargetDamage
+		ValidTargets: Ground, Air, Water
+
+CabalOverkillCharge:
+	Inherits: ^TeslaWeapon
+	ReloadDelay: 125
+	Range: 6400
+	ValidTargets: Ground, Water, Air
+	Report: obelcor3.aud
+	Projectile: LaserZap
+		Width: 72
+		Duration: 60
+		SecondaryBeamWidth: 96
+		SecondaryBeamColor: 88DD2230
+		TrackTarget: false
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 24000
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 12
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_l
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
+
+CabalOverkillLaser:
+	Inherits: ^LaserWeapon
+	ReloadDelay: 50
+	Range: 6400
+	Burst: 50
+	BurstDelays: 1
+	FirstBurstTargetOffset: -500,0,0
+	FollowingBurstTargetOffset: 100,0,0
+	Projectile: LaserZap
+		Width: 60
+		ZOffset: 2047
+		Color: 77DD22CC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 30
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 2A2A55DD
+		TrackTarget: false
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 2000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 1
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_l
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
+
+CabalOverkillDroneLaser:
+	Inherits: ^SmallArms
+	Inherits@2: ^LaserWeapon
+	ReloadDelay: 30
+	Range: 4096
+	Projectile: LaserZap
+		Width: 40
+		ZOffset: 2047
+		Color: 66CC22BB
+		SecondaryBeam: true
+		SecondaryBeamWidth: 18
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 222244CC
+	Report: lastur1.aud
+	Warhead@SmallArms: SpreadDamage
+		Damage: 4000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 4000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 2
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_s
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air

@@ -7272,9 +7272,9 @@ JapanCarrierTarget:
 
 RAAtomic:
 	Inherits: Atomic
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: kaboom1.aud
-	Warhead@6Eff_areanukea: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: kaboom22.aud
 
 SpyPlaneTargeting:
@@ -7314,7 +7314,7 @@ DTMutate:
 		InvalidTargets: Vehicle, Structure, Wall, Husk, TerrorDrone
 		AffectsParent: True
 		DamageTypes: QuestionMutate
-	Warhead@2eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: controlwave
 		ExplosionPalette: ra2effect
 		ImpactSounds: sgenon.wav
@@ -7323,7 +7323,7 @@ DTMutate:
 DTAtomic:
 	Inherits: Atomic
 	Report: nukemisl.aud
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: dt_nuke_explosion
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust1
@@ -7332,7 +7332,7 @@ DTAtomic:
 
 ChemTibAtomic:
 	Inherits: Atomic
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: chem_nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -7890,7 +7890,7 @@ CrateNuke:
 		AffectsParent: true
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	#Warhead@2Res_impact: DestroyResource
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
@@ -7907,7 +7907,7 @@ CrateNuke:
 	Warhead@5Res_areanuke1: DestroyResource
 		Size: 4
 		Delay: 5
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: kaboom22.aud
 		Delay: 5
 		ImpactActors: false
@@ -7975,7 +7975,7 @@ MiniNuke:
 		ValidTargets: Ground, Water, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_small
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
@@ -8013,7 +8013,7 @@ MiniNuke:
 		InvalidTargets: Vehicle, Structure, Wall
 		Size: 1
 		Delay: 3
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: kaboom22.aud
 		Delay: 5
 		ImpactActors: false

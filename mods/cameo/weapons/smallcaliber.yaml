@@ -1,15 +1,15 @@
 D2K_Personal_Shield_Impact:
-	Warhead@PersonalShielded: CreateEffect
+	Warhead@ShieldHitEffect: CreateEffect
 		Explosions: ixian_personal_shield
 		ValidTargets: PersonalShielded
         Inaccuracy: 0c128
         ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
-	Warhead@PersonalShieldedSard: CreateEffect
+	Warhead@ShieldHitEffect2: CreateEffect
 		Explosions: ixian_personal_shield_sard
 		ValidTargets: PersonalShieldedSard
         Inaccuracy: 0c128
         ImpactSounds: d2k_personal_shield_1.aud, d2k_personal_shield_2.aud, d2k_personal_shield_3.aud, d2k_personal_shield_4.aud, d2k_personal_shield_5.aud, d2k_personal_shield_6.aud, d2k_personal_shield_7.aud
-	Warhead@PersonalShieldedHeavy: CreateEffect
+	Warhead@ShieldHitEffect3: CreateEffect
 		Explosions: ixian_personal_shield_heavy
 		ValidTargets: PersonalShieldedHeavy
         Inaccuracy: 0c128

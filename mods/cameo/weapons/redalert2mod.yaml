@@ -764,7 +764,7 @@ NaxZombieSpawner:
 		ExplosionPalette: ra2effect
 		ImpactSounds: gvirexpa.wav, gvirexpb.wav
 		ValidTargets: Ground, Air
-	Warhead@1eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
@@ -809,7 +809,7 @@ NaxZombieSupportWeaponZombies:
 	#ValidTargets: Building
 	InvalidTargets: Water, Air
 	Projectile: InstantHit
-	Warhead@1eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
@@ -826,7 +826,7 @@ NaxZombieSupportWeaponFranks:
 	Range: 10000
 	#ValidTargets: Building
 	Projectile: InstantHit
-	Warhead@1eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
@@ -843,7 +843,7 @@ NaxZombieSupportWeaponTanks:
 	Range: 10000
 	#ValidTargets: Building
 	Projectile: InstantHit
-	Warhead@1eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		AffectsParent: true
 		ImpactActors: false
 		ImpactSounds: nax_zmove1.wav, nax_zmove2.wav
@@ -922,7 +922,7 @@ NaxiV1Rocket:
 		TrailDelay: 0
 		TrailInterval: 1
 		SkipAscent: true
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -1171,7 +1171,7 @@ NaxisBlackBombSmaller:
 		Damage: 25000
 	Warhead@MediumCannonPercentage: HealthPercentageDamage
 		Damage: 10
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -1528,7 +1528,7 @@ LatinBuggyRocketE:
 		LayerName: ra2radiation
 
 RA2TraitorPower:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: controlwave_small
 		ExplosionPalette: ra2effect
 		ImpactSounds: flare1.aud

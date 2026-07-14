@@ -1419,7 +1419,7 @@ TSHSeekerBomb:
 		Falloff: 100, 100
 		DamageTypes: Prone100Percent, TriggerProne, FireDeath
 		ValidTargets: Structure
-	Warhead@Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: verylarge_twlt
 		ExplosionPalette: tseffect
 		ImpactSounds: expnew09.aud, expnew06.aud
@@ -1501,7 +1501,7 @@ TSDroppod1:
 		RandomClusterCount: 1
 		Dimensions: 5,5
 		Footprint: _____ x____ x____ x____ _xxx_
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: meteor1.aud, meteor2.aud
 		ValidTargets: Ground, Air, Water
 
@@ -1522,7 +1522,7 @@ E1Droppod:
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: tsdroppod
 		Explosions: ring
 		ExplosionPalette: tseffect
@@ -1530,7 +1530,7 @@ E1Droppod:
 		ValidTargets: Ground, Air, Water
 		ImpactActors: false
 		AirThreshold: 8c0
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Image: tsdroppod
 		Explosions: fade1, fade2
 		ExplosionPalette: tseffect
@@ -1559,7 +1559,7 @@ MutSAPCSpawner:
 MutSAPC:
 	InvalidTargets: Vehicle, Structure
 	Projectile: InstantHit
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect
@@ -1635,7 +1635,7 @@ NODMutantSpawner:
 NODMutant:
 	InvalidTargets: Vehicle, Structure
 	Projectile: InstantHit
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: tsdig
 		Explosions: idle
 		ExplosionPalette: tseffect

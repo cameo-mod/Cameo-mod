@@ -24,16 +24,17 @@ cabal_promotion_ascended:
 		Image: cabal_ascended
 	ProvidesPrerequisite:
 
-cabal_promotion_t1000:	Inherits: ^promotion_upgrade.template
+cabal_promotion_beholder:
+	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock T1000
+		Name: Unlock Beholder
 	Buildable:
 		BuildPaletteOrder: 7
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_t1000, cabal_promotion_ascended, rank3
-		Description: actor_cabal_promotion_t1000.description
+		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_beholder, cabal_promotion_ascended, cabal_techcenter, rank3
+		Description: actor_cabal_promotion_beholder.description
 	RenderSprites:
-		Image: cabal_eliminator800
+		Image: cabal_beholder
 	ProvidesPrerequisite:
 
 cabal_promotion_cyborgcommandov2:
@@ -43,7 +44,7 @@ cabal_promotion_cyborgcommandov2:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_cyborgcommandov2, cabal_promotion_t1000, cabal_core, rank4
+		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_cyborgcommandov2, cabal_promotion_beholder, cabal_core, rank4
 		Description: actor_cabal_promotion_cyborgcommandov2.description
 	RenderSprites:
 		Image: cabal_cyborgcommandov2
@@ -112,7 +113,7 @@ cabal_promotion_waspstriker:	Inherits: ^promotion_upgrade.template
 
 cabal_promotion_hunterkillermk1elite:	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Hunter Killer MK1 Elite
+		Name: Unlock Super Hunter Killer
 	Buildable:
 		BuildPaletteOrder: 6
 		Queue: Promotions

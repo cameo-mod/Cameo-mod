@@ -267,7 +267,7 @@ HighVAP:
 
 ChemTibAtomic:
 	Inherits: Atomic
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: chem_nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
