@@ -378,6 +378,8 @@ cabal_techcenter:
 		Dimensions: 3,2
 		LocalCenterOffset: 0,0,0
 	ProvidesPrerequisite@buildingname:
+	ProvidesPrerequisite@tstek:
+		Prerequisite: tstek
 	WithIdleOverlay@LIGHTS:
 		RequiresCondition: !build-incomplete && !disabled
 		Sequence: idle-lights
