@@ -1,4 +1,4 @@
-twister.futu:
+futuretech_twister:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -12,7 +12,7 @@ twister.futu:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~launchpad.futu
+		Prerequisites: ~futuretech_launchpad
 		Queue: Aircraft, RAAircraft
 		Description: actor_future_twister.description
 	Aircraft:
@@ -77,7 +77,7 @@ twister.futu:
 	RenderSprites:
 		PlayerPalette: playerra2cons
 
-cryo.futu:
+futuretech_cryocopter:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
@@ -89,7 +89,7 @@ cryo.futu:
 	Buildable:
 		Queue: Aircraft, RAAircraft, Vehicle, RAVehicle
 		BuildPaletteOrder: 405
-		Prerequisites: ~egweap2.futu, egtech.futu, ~up_cryocopter.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_battlelab, ~futuretech_promotion_unlockcryocopter
 		Description: actor_futu_cryo.description
 	Valued:
 		Cost: 900
@@ -173,10 +173,10 @@ cryo_husk.futu:
 		TurnSpeed: 15
 		Speed: 75
 	RenderSprites:
-		Image: cryo.futu
+		Image: futuretech_cryocopter
 		PlayerPalette: player_rgba
 
-harbinger.futu:
+futuretech_harbingergunship:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^SpaceshipTemplate
@@ -192,9 +192,9 @@ harbinger.futu:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildAtProductionType: harbinger.futu
+		BuildAtProductionType: futuretech_harbingergunship
 		BuildPaletteOrder: 510
-		Prerequisites: ~launchpad.futu, egshock.futu, ~up_harbinger.futu
+		Prerequisites: ~futuretech_launchpad, futuretech_hypercore, ~futuretech_promotion_unlockharbingergunship
 		Queue: Aircraft, RAAircraft
 		Description: actor_future_harbinger.description
 	Aircraft:
@@ -304,7 +304,7 @@ harbinger_husk.futu:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: harbinger.futu
+		Image: futuretech_harbingergunship
 		PlayerPalette: player_rgba
 
 landcarr_drone.futu:

@@ -1,4 +1,4 @@
-enforcer.futu:
+futuretech_enforcer:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -17,7 +17,7 @@ enforcer.futu:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 105
-		Prerequisites: ~egpile.futu
+		Prerequisites: ~futuretech_troopgate
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_enforcer.description
 	Mobile:
@@ -126,7 +126,7 @@ enforcer.futu:
 	ActorStatValues:
 		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
 
-javelinsoldier.futu:
+futuretech_javelinsoldier:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -145,7 +145,7 @@ javelinsoldier.futu:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 110
-		Prerequisites: ~egpile.futu
+		Prerequisites: ~futuretech_troopgate
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_javelinsoldier.description
 	Mobile:
@@ -252,18 +252,18 @@ javelinsoldier.futu:
 	ActorStatValues:
 		Upgrades: ra2_allies_upgrade_assaultsquadtraining, ra2_allies_upgrade_vanguardtraining, ra2_allies_upgrade_infiltratorstraining, ra2_allies_upgrade_elitegi, ra2_allies_upgrade_thunderboltmissiles
 
-fedeng.futu:
+futuretech_engineer:
 	Inherits: ra2_allies_engineer
 	Buildable:
-		Prerequisites: ~egpile.futu
+		Prerequisites: ~futuretech_troopgate
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
 		Description: actor_futu_fedeng.description
 	RenderSprites:
-		Image: fedeng.futu
+		Image: futuretech_engineer
 	-TakeCover:
 
-spy.futu:
+futuretech_spyfutu:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2Infantry
 	Inherits@template: ^ScoutInfantryTemplate
@@ -274,7 +274,7 @@ spy.futu:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 445
-		Prerequisites: ~egpile.futu, egtech.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_battlelab
 		Description: actor_ra2spy.description
 	Valued:
 		Cost: 1000
@@ -306,7 +306,7 @@ spy.futu:
 	Voiced:
 		VoiceSet: RA2SpyVoice
 
-blackwidow.futu:
+futuretech_blackwidow:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -333,7 +333,7 @@ blackwidow.futu:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 335
-		Prerequisites: ~egpile.futu, egtf.futu, ~up_blackwidow.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_transmissioncenter, ~futuretech_promotion_unlockblackwidow
 		Description: actor_futu_blackwidow.description
 	Armament@PRIMARY:
 		Weapon: BlackWidowPistols
@@ -369,9 +369,9 @@ blackwidow.futu:
 	Voiced:
 		VoiceSet: BlackWidowVoice
 	ActorStatValues:
-		Upgrades: up_equalizer_x1.futu, up_equalizer_x2.futu, up_equalizer_x3.futu
+		Upgrades: futuretech_doctrine_equalizerx1, futuretech_doctrine_equalizerx2, futuretech_doctrine_equalizerx3
 
-cryoleg.futu:
+futuretech_cryolegionnaire:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
@@ -387,7 +387,7 @@ cryoleg.futu:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 550
-		Prerequisites: ~egpile.futu, egshock.futu, ~up_cryoleg.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_hypercore, ~futuretech_promotion_unlockcryolegionnaire
 		BuildLimit: 1
 		Description: actor_futu_cryoleg.description
 	RenderSprites:
@@ -427,7 +427,7 @@ cryoleg.futu:
 #		Red Alert 2 Future Vehicles
 ####################################################################################################
 
-engi.futu:
+futuretech_repairdroid:
 	Inherits: ^Walker
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -444,7 +444,7 @@ engi.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 225
-		Prerequisites: ~egpile.futu, yrgarobo.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_engi.description
 	Mobile:
@@ -502,9 +502,9 @@ engi.futu:
 		EnterBlockedCursor: move-blocked
 		Voice: Move
 	RenderSprites:
-		Image: engi.futu
+		Image: futuretech_repairdroid
 
-wheel.futu:
+futuretech_scoutdroid:
 	Inherits: ^Walker
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -523,7 +523,7 @@ wheel.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 215
-		Prerequisites: ~egpile.futu, yrgarobo.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter
 		Queue: Infantry, RAInfantry
 		Description: actor_futu_wheel.description
 	Mobile:
@@ -574,7 +574,7 @@ wheel.futu:
 	GrantExternalConditionToTransport:
 		Condition: ifv-mg
 
-robot_shotgun.futu:
+futuretech_shotgundroid:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^LineBreakerTemplate
@@ -594,7 +594,7 @@ robot_shotgun.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 220
-		Prerequisites: ~egpile.futu, yrgarobo.futu, ~up_shotgun_droid.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, ~futuretech_promotion_unlockshotgundroid
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_shotgun.description
 	Mobile:
@@ -648,7 +648,7 @@ robot_shotgun.futu:
 	GrantExternalConditionToTransport:
 		Condition: ifv-mg
 
-robot_cannon.futu:
+futuretech_cannondroid:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^MainBattleTankTemplate
@@ -668,7 +668,7 @@ robot_cannon.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 330
-		Prerequisites: ~egpile.futu, yrgarobo.futu, egtf.futu, ~up_cannon_droid.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, futuretech_transmissioncenter, ~futuretech_promotion_unlockcannondroid
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_cannon.description
 	Mobile:
@@ -722,7 +722,7 @@ robot_cannon.futu:
 	GrantExternalConditionToTransport:
 		Condition: ifv-cannon
 
-robot_missiles.futu:
+futuretech_missiledroid:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Walker
 	Inherits@Template: ^FireSupportTemplate
@@ -742,7 +742,7 @@ robot_missiles.futu:
 		Bounds: 600, 600, 0, -125
 	Buildable:
 		BuildPaletteOrder: 440
-		Prerequisites: ~egpile.futu, yrgarobo.futu, egtech.futu, ~up_missile_droid.futu
+		Prerequisites: ~futuretech_troopgate, futuretech_robotcontrolcenter, futuretech_battlelab, ~futuretech_promotion_unlockmissiledroid
 		Queue: Infantry, RAInfantry
 		Description: actor_future_robot_missiles.description
 	Mobile:

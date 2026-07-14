@@ -287,7 +287,7 @@ nax_cowprojectile:
 
 futu_manticore:
 	Defaults:
-		Filename: future_mech_plasma.shp
+		Filename: futuretech_plasmastrider_future_mech_plasma.shp
 		Scale: 0.8
 	idle1:
 		Facings: 32
@@ -312,7 +312,7 @@ futu_manticore:
 yrrobo:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: yr_robo.shp
+		Filename: futuretech_robottank_yr_robo.shp
 	idle:
 		Facings: 64
 		Offset: 0,20
@@ -325,7 +325,7 @@ yrrobo:
 	muzzle-2:
 		Offset: 0,20
 	icon:
-		Filename: yrroboicon.png
+		Filename: futuretech_robottank_icon.png
 
 aa_banzai:
 	Defaults:

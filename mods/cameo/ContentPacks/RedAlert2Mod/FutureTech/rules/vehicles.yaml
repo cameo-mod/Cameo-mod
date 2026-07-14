@@ -1,4 +1,4 @@
-mcv.futu:
+futuretech_mobileconstructionvehicle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -7,10 +7,10 @@ mcv.futu:
 	Tooltip:
 		Name: FutureTech Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~egweap2.futu, egtf.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_transmissioncenter
 		Description: actor_futu_mcv.description
 	Transforms:
-		IntoActor: egcnst.futu
+		IntoActor: futuretech_constructionyard
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: uplace.wav
@@ -23,7 +23,7 @@ mcv.futu:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-mech_machinegun.futu:
+futuretech_gunstrider:
 	Inherits: ^Walker
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -43,7 +43,7 @@ mech_machinegun.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 440
-		Prerequisites: ~egweap2.futu, egtech.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_battlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_future_mech_machinegun.description
 	Mobile:
@@ -81,7 +81,7 @@ mech_machinegun.futu:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-mech_plasma.futu:
+futuretech_plasmastrider:
 	Inherits: ^Walker
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -100,7 +100,7 @@ mech_plasma.futu:
 		Bounds: 1440, 1440, 0, -144
 	Buildable:
 		BuildPaletteOrder: 560
-		Prerequisites: ~egweap2.futu, egshock.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_hypercore
 		Queue: Vehicle, RAVehicle
 		Description: actor_future_mech_plasma.description
 	Mobile:
@@ -145,7 +145,7 @@ mech_plasma.futu:
 	RenderSprites:
 		PlayerPalette: playerra2
 
-ifv.futu:
+futuretech_salamanderifv:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ra2_allies_ifv
 	Inherits@announce: ^AnnounceOnBuild
@@ -155,7 +155,7 @@ ifv.futu:
 	Valued:
 		Cost: 950
 	Buildable:
-		Prerequisites: ~egweap2.futu, ~up_salamander.futu
+		Prerequisites: ~futuretech_warpgate, ~futuretech_promotion_unlocksalamanderifv
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 105
 		Description: actor_futu_ifv.description
@@ -168,17 +168,17 @@ ifv.futu:
 		HpPerStep: 2500
 	ChangesHealth@SelfHealing:
 		Step: 20
-	FirepowerMultiplier@ifv.futu:
+	FirepowerMultiplier@futuretech_salamanderifv:
 		Modifier: 150
 	Turreted:
 		TurnSpeed: 30
 		Offset: -270,0,1
 	Selectable:
-		Class: ifv.futu
+		Class: futuretech_salamanderifv
 	Voiced:
 		VoiceSet: FutureIFVVoice
 
-yrrobo.futu:
+futuretech_robottank:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
@@ -195,7 +195,7 @@ yrrobo.futu:
 		Name: Robot Tank
 	Buildable:
 		BuildPaletteOrder: 225
-		Prerequisites: ~egweap2.futu, yrgarobo.futu, ~up_robot_tank.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_robotcontrolcenter, ~futuretech_promotion_unlockrobottank
 		Queue: Vehicle, RAVehicle
 		Description: actor_robo.description
 	Mobile:
@@ -260,7 +260,7 @@ yrrobo.futu:
 		PlayerPalette: playerra2
 	Targetable@ENERGIZER:
 		TargetTypes: RobotEnergizable
-mbt.futu:
+futuretech_guardiantank:
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
 	Inherits@Template: ^MainBattleTankTemplate
@@ -277,7 +277,7 @@ mbt.futu:
 		Name: Guardian Tank
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~egweap2.futu
+		Prerequisites: ~futuretech_warpgate
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_mbt.description
 	Mobile:
@@ -360,7 +360,7 @@ mbt.futu:
 		RequiresCondition: deployed
 		Modifier: 75
 
-hvrt.futu:
+futuretech_riptideacv:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -378,7 +378,7 @@ hvrt.futu:
 		Name: Riptide ACV
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~egweap2.futu
+		Prerequisites: ~futuretech_warpgate
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_hvrt.description
 	Mobile:
@@ -416,7 +416,7 @@ hvrt.futu:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: hvrt.futu
+		Image: futuretech_riptideacv
 		PlayerPalette: player_rgba
 	WithSpriteTurret:
 	Voiced:
@@ -424,9 +424,9 @@ hvrt.futu:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: enforcer.futu, enforcer.futu, enforcer.futu, javelinsoldier.futu, javelinsoldier.futu
+		InitialUnits: futuretech_enforcer, futuretech_enforcer, futuretech_enforcer, futuretech_javelinsoldier, futuretech_javelinsoldier
 
-phal.futu:
+futuretech_phalanxwip:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -443,7 +443,7 @@ phal.futu:
 		Name: Phalanx (WIP)
 	Buildable:
 		BuildPaletteOrder: 445
-		Prerequisites: ~egweap2.futu, egtech.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_battlelab
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_phal.description
 	Mobile:
@@ -483,7 +483,7 @@ phal.futu:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: phal.futu
+		Image: futuretech_phalanxwip
 		PlayerPalette: player_rgba
 	WithSpriteTurret:
 	Voiced:
@@ -494,7 +494,7 @@ phal.futu:
 		FlashScreen: true
 		ChronoshiftSound: chrono2.aud
 
-landcarr.futu:
+futuretech_beehivedronecarrier:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -512,7 +512,7 @@ landcarr.futu:
 		Name: Beehive Drone Carrier
 	Buildable:
 		BuildPaletteOrder: 555
-		Prerequisites: ~egweap2.futu, egshock.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_hypercore
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_landcarr.description
 	Mobile:
@@ -570,7 +570,7 @@ landcarr.futu:
 		SpawnOffset: 0,0,0
 		Facing: 0
 
-orion.futu:
+futuretech_oriontank:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
@@ -590,7 +590,7 @@ orion.futu:
 		Name: Orion Tank
 	Buildable:
 		BuildPaletteOrder: 435
-		Prerequisites: ~egweap2.futu, egtech.futu, ~up_orion.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_battlelab, ~futuretech_promotion_unlockoriontank
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_orion.description
 	Mobile:
@@ -649,7 +649,7 @@ orion.futu:
 	Voiced:
 		VoiceSet: OrionTankVoice
 
-harv.futu:
+futuretech_prospector:
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -680,7 +680,7 @@ harv.futu:
 		Speed: 100
 		TurnSpeed: 20
 	Buildable:
-		Prerequisites: ~egrefn.futu, ~!up_prospector.futu
+		Prerequisites: ~futuretech_refinery, ~!futuretech_promotion_unlockprospectormk2
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 110
 		Description: actor_futu_harv.description
@@ -691,13 +691,13 @@ harv.futu:
 	Voiced:
 		VoiceSet: ChronoMinerVoice
 	RenderSprites:
-		Image: harv.futu
+		Image: futuretech_prospector
 		PlayerPalette: player_rgba
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
 		Palette: ra2effect
 
-harv2.futu:
+futuretech_prospectormk2:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@Template: ^HarvesterTemplate
@@ -734,7 +734,7 @@ harv2.futu:
 		BobDistance: -64
 		InitialHeight: 384
 	Buildable:
-		Prerequisites: ~egweap2.futu, ~up_prospector.futu
+		Prerequisites: ~futuretech_warpgate, ~futuretech_promotion_unlockprospectormk2
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 115
 		Description: actor_futu_harv2.description
@@ -745,7 +745,7 @@ harv2.futu:
 	Voiced:
 		VoiceSet: ChronoMinerVoice
 	RenderSprites:
-		Image: harv2.futu
+		Image: futuretech_prospectormk2
 		PlayerPalette: player_rgba
 	WithHarvestOverlay@harvesting:
 		Sequence: harvesting
@@ -768,7 +768,7 @@ harv2.futu:
 		Color: FF000088
 		RequiresCondition: !disabled
 
-athena.futu:
+futuretech_athenacannon:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@anim: ^RA2Vehicle
@@ -784,7 +784,7 @@ athena.futu:
 		Name: Athena Cannon
 	Buildable:
 		BuildPaletteOrder: 330
-		Prerequisites: ~egweap2.futu, egtf.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_transmissioncenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_athena.description
 	Mobile:
@@ -833,7 +833,7 @@ athena.futu:
 	Voiced:
 		VoiceSet: FutureAnthenaVoice
 
-coiler.futu:
+futuretech_energizer:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -844,7 +844,7 @@ coiler.futu:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 550
-		Prerequisites: ~egweap2.futu, egshock.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_hypercore
 		Description: actor_futu_coiler.description
 	Valued:
 		Cost: 1000
@@ -890,7 +890,7 @@ coiler.futu:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-futu.futu:
+futuretech_futuretank:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits: ^Tank
 	Inherits@anim: ^RA2Vehicle
@@ -910,7 +910,7 @@ futu.futu:
 	Buildable:
 		BuildPaletteOrder: 565
 		BuildLimit: 1
-		Prerequisites: ~egweap2.futu, egshock.futu, yrgarobo.futu, ~up_futuretank.futu
+		Prerequisites: ~futuretech_warpgate, futuretech_hypercore, futuretech_robotcontrolcenter, ~futuretech_promotion_unlockfuturetank
 		Queue: Vehicle, RAVehicle
 		Description: actor_futu_futu.description
 	Mobile:

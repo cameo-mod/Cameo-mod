@@ -1486,7 +1486,7 @@ ra2gayard:
 	Targetable:
 		TargetTypes: Ground, Water, C4, Structure
 
-RA2BRIK:
+futuretech_concretebarrier:
 	Inherits: BRIK
 	RenderSprites:
 		Image: BRIK
@@ -15915,7 +15915,7 @@ ra2_tractor_driveby:
 # 		PlayerPalette: raplayer
 
 # Robot Tank copy for the redalert2 theme (spawned by a SpawnActorWarhead in weapons/redalert2.yaml).
-# Not Buildable: the FutureTech content pack has the real buildable copy (yrrobo.futu); this one
+# Not Buildable: the FutureTech content pack has the real buildable copy (futuretech_robottank); this one
 # previously carried a stray Buildable block that duplicated it in FutureTech's build palette.
 yrrobo:
 	Inherits: ^Tank

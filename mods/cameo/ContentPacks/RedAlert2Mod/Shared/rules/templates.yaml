@@ -696,7 +696,7 @@
 
 ^FutureTechSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: fedeng.futu, enforcer.futu, enforcer.futu, javelinsoldier.futu
+		ActorTypes: futuretech_engineer, futuretech_enforcer, futuretech_enforcer, futuretech_javelinsoldier
 
 ^FutureRobotEnergizable:
 	Inherits@RobotControllable: ^RobotControllable
@@ -768,41 +768,41 @@
 		Modifier: 90
 
 ^FutureTechEqualizerUpgrades:
-	FirepowerMultiplier@up_equalizer_x1.futu:
+	FirepowerMultiplier@futuretech_doctrine_equalizerx1:
 		Modifier: 110
-		RequiresCondition: up_equalizer_x1.futu
-	ReloadDelayMultiplier@up_equalizer_x1.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx1
+	ReloadDelayMultiplier@futuretech_doctrine_equalizerx1:
 		Modifier: 90
-		RequiresCondition: up_equalizer_x1.futu
-	RangeMultiplier@up_equalizer_x1.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx1
+	RangeMultiplier@futuretech_doctrine_equalizerx1:
 		Modifier: 105
-		RequiresCondition: up_equalizer_x1.futu
-	GrantConditionOnPrerequisite@up_equalizer_x1.futu:
-		Condition: up_equalizer_x1.futu
-		Prerequisites: up_equalizer_x1.futu
-	FirepowerMultiplier@up_equalizer_x2.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx1
+	GrantConditionOnPrerequisite@futuretech_doctrine_equalizerx1:
+		Condition: futuretech_doctrine_equalizerx1
+		Prerequisites: futuretech_doctrine_equalizerx1
+	FirepowerMultiplier@futuretech_doctrine_equalizerx2:
 		Modifier: 110
-		RequiresCondition: up_equalizer_x2.futu
-	ReloadDelayMultiplier@up_equalizer_x2.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx2
+	ReloadDelayMultiplier@futuretech_doctrine_equalizerx2:
 		Modifier: 90
-		RequiresCondition: up_equalizer_x2.futu
-	RangeMultiplier@up_equalizer_x2.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx2
+	RangeMultiplier@futuretech_doctrine_equalizerx2:
 		Modifier: 105
-		RequiresCondition: up_equalizer_x2.futu
-	GrantConditionOnPrerequisite@up_equalizer_x2.futu:
-		Condition: up_equalizer_x2.futu
-		Prerequisites: up_equalizer_x2.futu
-	FirepowerMultiplier@up_equalizer_x3.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx2
+	GrantConditionOnPrerequisite@futuretech_doctrine_equalizerx2:
+		Condition: futuretech_doctrine_equalizerx2
+		Prerequisites: futuretech_doctrine_equalizerx2
+	FirepowerMultiplier@futuretech_doctrine_equalizerx3:
 		Modifier: 110
-		RequiresCondition: up_equalizer_x3.futu
-	ReloadDelayMultiplier@up_equalizer_x3.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx3
+	ReloadDelayMultiplier@futuretech_doctrine_equalizerx3:
 		Modifier: 90
-		RequiresCondition: up_equalizer_x3.futu
-	RangeMultiplier@up_equalizer_x3.futu:
+		RequiresCondition: futuretech_doctrine_equalizerx3
+	RangeMultiplier@futuretech_doctrine_equalizerx3:
 		Modifier: 105
-		RequiresCondition: up_equalizer_x3.futu
-	GrantConditionOnPrerequisite@up_equalizer_x3.futu:
-		Condition: up_equalizer_x3.futu
-		Prerequisites: up_equalizer_x3.futu
+		RequiresCondition: futuretech_doctrine_equalizerx3
+	GrantConditionOnPrerequisite@futuretech_doctrine_equalizerx3:
+		Condition: futuretech_doctrine_equalizerx3
+		Prerequisites: futuretech_doctrine_equalizerx3
 	ActorStatValues:
-		Upgrades: up_equalizer_x1.futu, up_equalizer_x2.futu, up_equalizer_x3.futu
+		Upgrades: futuretech_doctrine_equalizerx1, futuretech_doctrine_equalizerx2, futuretech_doctrine_equalizerx3

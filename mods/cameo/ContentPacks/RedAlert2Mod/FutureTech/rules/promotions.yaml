@@ -1,6 +1,6 @@
 ### Droid tree
 
-up_shotgun_droid.futu:
+futuretech_promotion_unlockshotgundroid:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Shotgun Droid
@@ -8,12 +8,12 @@ up_shotgun_droid.futu:
 		BuildPaletteOrder: 100
 		Queue: Promotions
 		Description: Enables construction of the Shotgun Droid.
-		Prerequisites: ~egcnst.futu, yrgarobo.futu, !up_shotgun_droid.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_robotcontrolcenter, !futuretech_promotion_unlockshotgundroid, rank1
 	RenderSprites:
-		Image: robot_shotgun.futu
+		Image: futuretech_shotgundroid
 	ProvidesPrerequisite:
 
-up_cannon_droid.futu:
+futuretech_promotion_unlockcannondroid:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Cannon Droid
@@ -21,12 +21,12 @@ up_cannon_droid.futu:
 		BuildPaletteOrder: 103
 		Queue: Promotions
 		Description: Enables construction of the Cannon Droid.
-		Prerequisites: ~egcnst.futu, up_shotgun_droid.futu, egtf.futu, !up_cannon_droid.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockshotgundroid, futuretech_transmissioncenter, !futuretech_promotion_unlockcannondroid, rank1
 	RenderSprites:
-		Image: robot_cannon.futu
+		Image: futuretech_cannondroid
 	ProvidesPrerequisite:
 
-up_missile_droid.futu:
+futuretech_promotion_unlockmissiledroid:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Missile Droid
@@ -34,12 +34,12 @@ up_missile_droid.futu:
 		BuildPaletteOrder: 106
 		Queue: Promotions
 		Description: Enables construction of the Missile Droid.
-		Prerequisites: ~egcnst.futu, up_cannon_droid.futu, egtech.futu, !up_missile_droid.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockcannondroid, futuretech_battlelab, !futuretech_promotion_unlockmissiledroid, rank1
 	RenderSprites:
-		Image: robot_missiles.futu
+		Image: futuretech_missiledroid
 	ProvidesPrerequisite:
 
-up_cryoleg.futu:
+futuretech_promotion_unlockcryolegionnaire:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Cryo Legionnaire
@@ -47,14 +47,14 @@ up_cryoleg.futu:
 		BuildPaletteOrder: 109
 		Queue: Promotions
 		Description: Enables construction of the Cryo Legionnaire.
-		Prerequisites: ~egcnst.futu, up_missile_droid.futu, egshock.futu, !up_cryoleg.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockmissiledroid, futuretech_hypercore, !futuretech_promotion_unlockcryolegionnaire, rank1
 	RenderSprites:
-		Image: cryoleg.futu
+		Image: futuretech_cryolegionnaire
 	ProvidesPrerequisite:
 
 ### Armor tree
 
-up_salamander.futu:
+futuretech_promotion_unlocksalamanderifv:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Salamander IFV
@@ -62,12 +62,12 @@ up_salamander.futu:
 		BuildPaletteOrder: 101
 		Queue: Promotions
 		Description: Enables construction of the Salamander IFV.
-		Prerequisites: ~egcnst.futu, !up_salamander.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, !futuretech_promotion_unlocksalamanderifv, rank1
 	RenderSprites:
-		Image: ifv.futu
+		Image: futuretech_salamanderifv
 	ProvidesPrerequisite:
 
-up_robot_tank.futu:
+futuretech_promotion_unlockrobottank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Robot Tank
@@ -75,12 +75,12 @@ up_robot_tank.futu:
 		BuildPaletteOrder: 104
 		Queue: Promotions
 		Description: Enables construction of the Robot Tank.
-		Prerequisites: ~egcnst.futu, up_salamander.futu, yrgarobo.futu, !up_robot_tank.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlocksalamanderifv, futuretech_robotcontrolcenter, !futuretech_promotion_unlockrobottank, rank1
 	RenderSprites:
 		Image: yrrobo
 	ProvidesPrerequisite:
 
-up_orion.futu:
+futuretech_promotion_unlockoriontank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Orion Tank
@@ -88,12 +88,12 @@ up_orion.futu:
 		BuildPaletteOrder: 107
 		Queue: Promotions
 		Description: Enables construction of the Orion Tank.
-		Prerequisites: ~egcnst.futu, up_robot_tank.futu, egtech.futu, !up_orion.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockrobottank, futuretech_battlelab, !futuretech_promotion_unlockoriontank, rank1
 	RenderSprites:
-		Image: orion.futu
+		Image: futuretech_oriontank
 	ProvidesPrerequisite:
 
-up_futuretank.futu:
+futuretech_promotion_unlockfuturetank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Future Tank
@@ -101,14 +101,14 @@ up_futuretank.futu:
 		BuildPaletteOrder: 110
 		Queue: Promotions
 		Description: Enables construction of the Future Tank.
-		Prerequisites: ~egcnst.futu, up_orion.futu, egshock.futu, !up_futuretank.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockoriontank, futuretech_hypercore, !futuretech_promotion_unlockfuturetank, rank1
 	RenderSprites:
-		Image: futu.futu
+		Image: futuretech_futuretank
 	ProvidesPrerequisite:
 
 ### Strider tree
 
-up_prospector.futu:
+futuretech_promotion_unlockprospectormk2:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Prospector MK2
@@ -116,12 +116,12 @@ up_prospector.futu:
 		BuildPaletteOrder: 102
 		Queue: Promotions
 		Description: Enables construction of the Prospector MK2.
-		Prerequisites: ~egcnst.futu, !up_prospector.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, !futuretech_promotion_unlockprospectormk2, rank1
 	RenderSprites:
-		Image: harv2.futu
+		Image: futuretech_prospectormk2
 	ProvidesPrerequisite:
 
-up_blackwidow.futu:
+futuretech_promotion_unlockblackwidow:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Black Widow
@@ -129,12 +129,12 @@ up_blackwidow.futu:
 		BuildPaletteOrder: 105
 		Queue: Promotions
 		Description: Enables construction of the Black Widow.
-		Prerequisites: ~egcnst.futu, up_prospector.futu, egtf.futu, !up_blackwidow.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockprospectormk2, futuretech_transmissioncenter, !futuretech_promotion_unlockblackwidow, rank1
 	RenderSprites:
-		Image: blackwidow.futu
+		Image: futuretech_blackwidow
 	ProvidesPrerequisite:
 
-up_cryocopter.futu:
+futuretech_promotion_unlockcryocopter:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Cryocopter
@@ -142,12 +142,12 @@ up_cryocopter.futu:
 		BuildPaletteOrder: 108
 		Queue: Promotions
 		Description: Enables construction of the Cryocopter.
-		Prerequisites: ~egcnst.futu, up_blackwidow.futu, egtech.futu, !up_cryocopter.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockblackwidow, futuretech_battlelab, !futuretech_promotion_unlockcryocopter, rank1
 	RenderSprites:
-		Image: cryo.futu
+		Image: futuretech_cryocopter
 	ProvidesPrerequisite:
 
-up_harbinger.futu:
+futuretech_promotion_unlockharbingergunship:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Harbinger Gunship
@@ -155,7 +155,7 @@ up_harbinger.futu:
 		BuildPaletteOrder: 111
 		Queue: Promotions
 		Description: Enables construction of the Harbinger Gunship.
-		Prerequisites: ~egcnst.futu, up_cryocopter.futu, egshock.futu, !up_harbinger.futu, rank1
+		Prerequisites: ~futuretech_constructionyard, futuretech_promotion_unlockcryocopter, futuretech_hypercore, !futuretech_promotion_unlockharbingergunship, rank1
 	RenderSprites:
-		Image: harbinger.futu
+		Image: futuretech_harbingergunship
 	ProvidesPrerequisite:
