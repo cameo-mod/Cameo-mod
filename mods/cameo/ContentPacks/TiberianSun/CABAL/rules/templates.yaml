@@ -240,3 +240,8 @@
 		RequiresCondition: cabal_upgrade_reclamationprotocols
 	ActorStatValues:
 		Upgrades: cabal_upgrade_reclamationprotocols
+
+^CABALSpawnActorsOnSell:
+	Inherits: ^TSSpawnActorsOnSell
+	SpawnActorsOnSell:
+		ActorTypes: cabal_cyborginfantry

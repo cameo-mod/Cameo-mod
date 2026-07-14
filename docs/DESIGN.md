@@ -776,9 +776,19 @@ both infantry and vehicles for weapon Versus tables while keeping them brittle
 against dedicated anti-vehicle fire. True vehicles and walkers do not use this
 pattern.
 
+**Cybernetic Plating shield rule.** CABAL cyborg infantry do NOT have an
+innate `Shielded` trait. Instead, the `cabal_upgrade_cyberneticplating`
+research upgrade (Tier 3, Tech Center) grants every cyborg infantry unit a
+yellow shield bar (`SelectionBarColor: FFFF88FF`). The shield is gated by the
+upgrade condition, uses `ShieldsUpCondition: armored`, and recharges slowly
+with a low flat `RegenAmount` equal to twice the unit's self-heal step. The
+base `Armor` type never changes: the upgrade adds plating as a shield pool,
+not as an armor-type swap. This mirrors the Tiberian Dawn Nod cybernetics
+upgrade behavior and must not be reverted to unconditional shields.
+
 **Upgrade tiers.** Tier 2 (Radar, `Upgrades` queue): Overcharged Servos,
-Cybernetic Plating, Dark Armament, Radar Hack. Tier 3 (Tech Center, `Research`):
-Mobility Matrix, Neutron Nuclear Catalyst, Reinforced Chassis, Neural Uplink,
+Dark Armament, Radar Hack. Tier 3 (Tech Center, `Research`):
+Mobility Matrix, Neutron Nuclear Catalyst, Cybernetic Plating, Reinforced Chassis, Neural Uplink,
 Reclamation Protocols, Networked Combat Protocols. Tier 4 (Tech Center + Core,
 `Research`): Backup Systems, Hand of CABAL, Data Worm, Firewall Protocol, and
 Full Assimilation as the team upgrade. The strongest and team-wide upgrades

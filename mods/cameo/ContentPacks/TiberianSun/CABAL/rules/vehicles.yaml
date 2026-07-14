@@ -1,7 +1,7 @@
 cabal_constructionyard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@conyard: ^Conyard
@@ -424,14 +424,14 @@ cabal_artilleryspider:
 		Step: 20
 	Armament@PRIMARY:
 		Weapon: CabalArtilleryWalkerShell
-		LocalOffset: -125,1,250, -125,1,250
+		LocalOffset: -500,0,250, -500,0,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: CabalArtilleryWalkerShellUpgraded
-		LocalOffset: -125,1,250, -125,1,250
+		LocalOffset: -500,0,250, -500,0,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
@@ -494,14 +494,14 @@ cabal_tarantula:
 		Weapon: CabalTarantulaCannon
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: -800, 300, 700
+		LocalOffset: -700, 0, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: -800, 300, 700
+		LocalOffset: -700, 0, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	AttackTurreted:
@@ -1002,10 +1002,10 @@ cabal_coredefender:
 		Range: 6c0
 	Armament:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 100,-500,1100
+		LocalOffset: 0,-500,1100
 	Armament@RIGHT:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 100,500,1100
+		LocalOffset: 0,500,1100
 	AttackFrontal:
 		FacingTolerance: 12
 	Voiced:

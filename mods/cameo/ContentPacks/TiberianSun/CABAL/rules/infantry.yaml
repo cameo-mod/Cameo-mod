@@ -38,7 +38,17 @@ cabal_engineer:
 		Speed: 40
 	ChangesHealth@SelfHealing:
 		Step: 20
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 40
 	Armament@REPAIRBEAM:
 		Name: primary
@@ -100,7 +110,17 @@ cabal_cyborginfantry:
 		HP: 45000
 	ChangesHealth@SelfHealing:
 		Step: 45
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 90
 	Armament@PRIMARY:
 		Weapon: CabalCyborgChaingun
@@ -162,7 +182,17 @@ cabal_ravager:
 		HP: 70000
 	ChangesHealth@SelfHealing:
 		Step: 70
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 140
 	Armament@PRIMARY:
 		Weapon: CabalRavagerPlasma
@@ -223,7 +253,17 @@ cabal_rocketcyborg:
 		HP: 45000
 	ChangesHealth@SelfHealing:
 		Step: 45
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 90
 	Armament@PRIMARY:
 		Weapon: CabalRocketCyborgRockets
@@ -323,7 +363,17 @@ cabal_devout:
 		HP: 60000
 	ChangesHealth@SelfHealing:
 		Step: 60
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 120
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
@@ -423,7 +473,17 @@ cabal_ascended:
 		HP: 60000
 	ChangesHealth@SelfHealing:
 		Step: 60
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 120
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
@@ -525,7 +585,17 @@ cabal_hackercyborg:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 60
 	Armament@Anim:
 		Weapon: TSCABALempdisable.anim
@@ -648,7 +718,17 @@ cabal_cyborgcommando:
 		HP: 250000
 	ChangesHealth@SelfHealing:
 		Step: 250
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 500
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasma
@@ -721,7 +801,17 @@ cabal_cyborgcommandov2:
 		HP: 400000
 	ChangesHealth@SelfHealing:
 		Step: 400
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 800
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasmaMk2
@@ -783,7 +873,17 @@ cabal_eliminator800:
 		HP: 85000
 	ChangesHealth@SelfHealing:
 		Step: 85
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 170
 	Mobile:
 		TurnSpeed: 12
@@ -880,7 +980,17 @@ cabal_dissolver:
 		HP: 50000
 	ChangesHealth@SelfHealing:
 		Step: 50
+	GrantConditionOnPrerequisite@CyberneticPlating:
+		Condition: cabal_upgrade_cyberneticplating
+		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
+		RequiresCondition: cabal_upgrade_cyberneticplating
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 100
 	Turreted:
 		TurnSpeed: 10

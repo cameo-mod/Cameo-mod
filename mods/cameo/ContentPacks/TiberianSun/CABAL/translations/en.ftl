@@ -298,6 +298,12 @@ actor_cabal_upgrade_fullassimilation =
       Increases unit sight range by 20%.
       Increases cloak detection range by 20%.
 
+actor_cabal_upgrade_cyberneticplating =
+   .name = Cybernetic Plating
+   .description = Tech Upgrade (Only affects units of own faction)
+      Adds a yellow armor plating shield bar to all CABAL infantry.
+      Shields regenerate slowly when out of combat.
+
 actor_cabal_promotion_devout =
    .name = Unlock Devout
    .description = Promotion Upgrade.
