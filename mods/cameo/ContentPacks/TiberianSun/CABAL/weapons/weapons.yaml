@@ -784,8 +784,7 @@ CabalDissolverSpray:
 		Explosions: idle
 		ImpactSounds: chemtrooper_att1.aud
 CabalCommandoPlasma:
-	Inherits: ^MediumCannon
-	Inherits@2: ^HeavyCannon
+	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
 	Report: obelcor3.aud
@@ -797,10 +796,6 @@ CabalCommandoPlasma:
 		Speed: 320
 		Shadow: false
 		Blockable: false
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 50000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 25
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
@@ -823,8 +818,7 @@ CabalCommandoPlasma:
 		ImpactSounds: expnew09.aud
 
 CabalCommandoPlasmaMk2:
-	Inherits: ^MediumCannon
-	Inherits@2: ^HeavyCannon
+	Inherits: ^HeavyCannon
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
 	Report: obelcor3.aud
@@ -836,10 +830,6 @@ CabalCommandoPlasmaMk2:
 		Speed: 320
 		Shadow: false
 		Blockable: false
-	Warhead@MediumCannon: SpreadDamage
-		Damage: 50000
-	Warhead@MediumCannonPercentage: HealthPercentageDamage
-		Damage: 25
 	Warhead@HeavyCannon: SpreadDamage
 		Damage: 50000
 	Warhead@HeavyCannonPercentage: HealthPercentageDamage
