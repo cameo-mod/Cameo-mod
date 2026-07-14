@@ -57,6 +57,9 @@ cabal_engineer:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
 
 cabal_cyborginfantry:
 	Inherits: ^Soldier

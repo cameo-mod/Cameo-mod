@@ -984,7 +984,7 @@ cabal_coredefender:
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
-		Cost: 12500
+		Cost: 15000
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -1000,10 +1000,10 @@ cabal_coredefender:
 		Range: 6c0
 	Armament:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1300,-750,1600, 1300,750,1600
+		LocalOffset: 700,-400,900, 700,400,900
 	Armament@LASER3:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1300,750,1600, 1300,-750,1600
+		LocalOffset: 700,400,900, 700,-400,900
 	AttackFrontal:
 		FacingTolerance: 12
 	Voiced:
@@ -1013,7 +1013,7 @@ cabal_coredefender:
 	Tooltip:
 		Name: Core Defender
 	Health:
-		HP: 1500000
+		HP: 2000000
 	ChangesHealth@SelfHealing:
 		Step: 600
 		Delay: 1

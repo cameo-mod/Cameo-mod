@@ -372,8 +372,8 @@ actor_cabal_hunterkillermk1 =
 actor_cabal_hunter_drone_carrier =
    .name = Hunter Drone Carrier
    .description = Heavy carrier with hunter drone swarm and a big moving laser.
-      Strong vs Vehicles, Buildings
-      Weak vs Infantry, Aircraft
+      Strong vs Ground targets
+      Weak vs Aircraft
 
 actor_cabal_hunterkillermk1_elite =
    .name = Super Hunter Killer
