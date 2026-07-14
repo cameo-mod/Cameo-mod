@@ -498,6 +498,13 @@ CabalArtilleryWalkerShell:
 	Report: orcamis1.aud
 	ReloadDelay: 64
 	Range: 11582
+	Projectile: Bullet
+		Image: BOMB
+		Speed: 300
+		LaunchAngle: 62
+		ContrailLength: 12
+		ContrailStartWidth: 128
+		ContrailEndWidth: 44
 	Warhead@Grenade: SpreadDamage
 		Damage: 48000
 	Warhead@GrenadePercentage: HealthPercentageDamage

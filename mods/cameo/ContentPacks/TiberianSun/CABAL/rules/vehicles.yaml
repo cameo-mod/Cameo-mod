@@ -494,14 +494,14 @@ cabal_tarantula:
 		Weapon: CabalTarantulaCannon
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: 800, 300, 700
+		LocalOffset: -800, 300, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: 800, 300, 700
+		LocalOffset: -800, 300, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	AttackTurreted:
@@ -1000,10 +1000,10 @@ cabal_coredefender:
 		Range: 6c0
 	Armament:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 700,-400,900, 700,400,900
-	Armament@LASER3:
+		LocalOffset: 100,-500,1100
+	Armament@RIGHT:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 700,400,900, 700,-400,900
+		LocalOffset: 100,500,1100
 	AttackFrontal:
 		FacingTolerance: 12
 	Voiced:
