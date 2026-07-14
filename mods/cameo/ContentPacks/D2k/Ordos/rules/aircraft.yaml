@@ -769,7 +769,7 @@ carryall_reinforce.ordos:
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Tooltip:
-		Name: Advanced Carryall
+		Name: Advanced ixian_autonomouscarryall
 	SpawnActorOnDeath@CRUISING:
 		Actor: carryall_husk.ordos
 		RequiresCondition: cruising
@@ -792,7 +792,7 @@ carryall_reinforce.ordos:
 	ActorStatValues:
 		Upgrades: ordos_upgrade_lasercartridges
 ordos_advancedcarryall:
-	Inherits: carryall
+	Inherits: ixian_autonomouscarryall
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
@@ -800,7 +800,7 @@ ordos_advancedcarryall:
 		BuildPaletteOrder: 120
 		Prerequisites: ~ordos_hightechfactory
 	Tooltip:
-		Name: Advanced Carryall
+		Name: Advanced ixian_autonomouscarryall
 	SpawnActorOnDeath@CRUISING:
 		Actor: carryall_husk.ordos
 		RequiresCondition: cruising
@@ -825,7 +825,7 @@ ordos_advancedcarryall:
 carryall_husk.ordos:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Advanced Carryall
+		Name: Advanced ixian_autonomouscarryall
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 144
@@ -840,7 +840,7 @@ carryall_husk.ordos:
 carryall_huskvtol.ordos:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Advanced Carryall
+		Name: Advanced ixian_autonomouscarryall
 	FallsToEarth:
 		Moves: False
 		Velocity: 0c128

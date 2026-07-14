@@ -569,7 +569,7 @@ ordos_contaminator:
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShieldedSard
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 15
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 15
 
 # mpsardaukar:
 # 	Inherits: sardaukar
@@ -649,7 +649,7 @@ ordos_contaminator:
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShieldedHeavy
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 25
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 25
 
 # d2k_sardaukar_assassin:
 # 	Inherits: sardaukar
@@ -1090,7 +1090,7 @@ ordos_leech:
 # 		Modifier: 0
 # 		RequiresCondition: deployed
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 0
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 0
 
 # d2k_marksman:
 # 	Inherits: d2k_sniper
@@ -1124,7 +1124,7 @@ ordos_leech:
 # 		Modifier: 200
 # 		RequiresCondition: deployed
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 2
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 2
 
 # flamethrower:
 # 	Inherits: ^D2KInfantry
@@ -1235,7 +1235,7 @@ ordos_leech:
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 0
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 0
 
 # d2k_mechanic:
 # 	Inherits: ^D2KInfantry
@@ -1296,7 +1296,7 @@ ordos_leech:
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 2
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 2
 
 # bene_gesserit:
 # 	Inherits: ^D2KInfantry
@@ -1367,7 +1367,7 @@ ordos_leech:
 # 	ProducibleWithLevel:
 # 		Prerequisites: barracks.upgraded
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 15
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 15
 
 # d2k_light_tank:
 # 	Inherits@D2KT: ^D2KTank

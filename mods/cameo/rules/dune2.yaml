@@ -646,7 +646,7 @@ duneharv:
 		CarriedCondition: notmobile
 		ReservedCondition: carryall-reserved
 		LockedCondition: notmobile
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		RequiresCondition: carryall-reserved
@@ -2005,7 +2005,7 @@ dunespaceport:
 		Icon: dune2carry
 		ChargeInterval: 3000
 		Name: Reinforcement
-		Description: Spawns a Carryall with Vehicles.
+		Description: Spawns a ixian_autonomouscarryall with Vehicles.
 		SelectTargetSpeechNotification: SelectTarget
 		InsufficientPowerSpeechNotification: InsufficientPower
 		EndChargeSpeechNotification: SpyPlaneReady
@@ -2149,7 +2149,7 @@ dunepalace:
 dunecarryall.starport:
 	Inherits: ^Plane
 	Tooltip:
-		Name: Carryall
+		Name: ixian_autonomouscarryall
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 326
@@ -2181,7 +2181,7 @@ dunecarryall.reinforce:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Autonomous Carryall
+		Name: Autonomous ixian_autonomouscarryall
 	Health:
 		HP: 160000
 	Armor:
@@ -2271,7 +2271,7 @@ dunecarryall.buy:
 dunecarryall.husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: Carryall
+		Name: ixian_autonomouscarryall
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 149
@@ -2288,7 +2288,7 @@ dunecarryall.husk:
 dunecarryall.huskair:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Carryall
+		Name: ixian_autonomouscarryall
 	Aircraft:
 		TurnSpeed: 20
 		Speed: 186

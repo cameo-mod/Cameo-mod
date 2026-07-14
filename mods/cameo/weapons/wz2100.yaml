@@ -91,7 +91,7 @@ AssaultGun:
 	Range: 7680
 	Report: asltmg.aud
 	Warhead@1Dam: SpreadDamage
-		InvalidTargets: Wall
+		InvalidTargets: ixian_concretewall
 		Versus:
 		DamageTypes: Prone50Percent, TriggerProne, RippedApartDeath, 2100ResearchSteal
 	Warhead@2Eff: CreateEffect
@@ -109,7 +109,7 @@ TwinAssaultGun:
 	Inherits: AssaultGun
 	Warhead@1Dam: SpreadDamage
 		Damage: 6666 #1520
-		InvalidTargets: Wall
+		InvalidTargets: ixian_concretewall
 
 TwinAssaultGunAA:
 	Inherits: AssaultGunAA
@@ -188,7 +188,7 @@ CommandoGun:
 	Range: 9216
 	Report: 2100rotlsr.wav
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, Wall
+	ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Projectile: LaserZap
 		Duration: 13
 		Width: 0c64
@@ -197,7 +197,7 @@ CommandoGun:
 		Condition: CommandoDebuff
 		Duration: 13
 		Range: 172
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Warhead@Validation: TargetDamage
 
 CommandoGunAA:
@@ -210,7 +210,7 @@ CommandoGunAA:
 	Range: 12288
 	Report: 2100rotlsr.wav
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, Wall
+	ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Projectile: LaserZap
 		Duration: 1
 		Width: 0c32
@@ -219,7 +219,7 @@ CommandoGunAA:
 		Condition: CommandoDebuff
 		Duration: 13
 		Range: 172
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Warhead@Validation: TargetDamage
 
 ####################################################################################################
@@ -395,7 +395,7 @@ PepperpotShell:
 	Warhead@1DamDefenses: SpreadDamage
 		Spread: 56
 		Damage: 15000
-		ValidTargets: Defense, Wall
+		ValidTargets: Defense, ixian_concretewall
 		Versus:
 			None: 50
 			Wood: 75
@@ -610,7 +610,7 @@ IceCreamMortar:
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath, 2100ResearchSteal
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: small_frag
 		ImpactSounds: mpodexpl.aud
@@ -742,7 +742,7 @@ TankKiller:
 	Warhead@1DamDefenses: SpreadDamage
 		Spread: 56
 		Damage: 25000
-		ValidTargets: Defense, Wall
+		ValidTargets: Defense, ixian_concretewall
 		Versus:
 			None: 50
 			Wood: 75

@@ -1812,13 +1812,13 @@ ra1_soviet_commissar:
 		Type: propaganda
 		Color: 55BBFF
 		RequiresCondition: !disabled
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral
@@ -11485,7 +11485,7 @@ ra1_allies_mobileradarjammer:
 	GuardsSelection:
 	KeepsDistance:
 		Distance: 10000
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral
@@ -13955,7 +13955,7 @@ typechiha:
 		Type: propaganda
 		Color: 55BBFF
 		RequiresCondition: !disabled
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral
@@ -14578,7 +14578,7 @@ exorcistoitank:
 		Type: propaganda
 		Color: 55BBFF
 		RequiresCondition: !disabled
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral

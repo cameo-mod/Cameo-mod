@@ -894,7 +894,7 @@ d2kStormLasher:
 		Delay: 13
 	Warhead@Smudge2: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 2
 		Delay: 16
 	Warhead@Effect: CreateEffect
@@ -1006,7 +1006,7 @@ D2K_StormGun:
 		Delay: 8
 	Warhead@Smudge2: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 2
 		Delay: 11
 	Warhead@Effect: CreateEffect
@@ -1279,7 +1279,7 @@ d2k_farasha_charge:
 		SecondaryBeamColor: FF000030
 		TrackTarget: false
 
-farasha.ixian:
+ixian_farasha:
 	Inherits: ^TeslaWeapon
 	Inherits: ^HeavyFlameWeapon
 	Inherits: ^RailgunWeapon
@@ -1341,7 +1341,7 @@ farasha.ixian:
 		InvalidTargets: Vehicle, Structure
 
 d2k_farasha_aa:
-	Inherits: farasha.ixian
+	Inherits: ixian_farasha
 	-FirstBurstTargetOffset:
 	-FollowingBurstTargetOffset:
 	Projectile: LaserZap
@@ -1491,7 +1491,7 @@ d2k_basq_AA:
 # 	ReloadDelay: 1
 # 	Projectile: InstantExplode
 # 	Warhead@1Actor: SpawnActor
-# 		Actors: d2k_kwny_fighter, d2k_kwny_fighter, d2k_kwny_fighter, farasha.ixian
+# 		Actors: d2k_kwny_fighter, d2k_kwny_fighter, d2k_kwny_fighter, ixian_farasha
 # 		Range: 5
 # 		Image: ra2_allies_chronominer
 # 		Sequence: warpout

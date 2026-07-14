@@ -180,7 +180,7 @@ TeletubbyLaser:
 			Concrete: 50
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: big_napalm
 		#ImpactSounds: firebl3.aud
@@ -497,7 +497,7 @@ CuteKirovBomb:
 		ValidRelationships: Ally, Neutral, Enemy
 	Warhead@2Smu_areanuke: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 5
 		Delay: 40
 

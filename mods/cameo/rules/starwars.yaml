@@ -4039,7 +4039,7 @@ SWATWR:
 		Amount: -150
 
 SWSBAG:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -4062,7 +4062,7 @@ SWSBAG:
 	RenderSprites:
 		Image: sbag
 SWCYCL:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -4085,7 +4085,7 @@ SWCYCL:
 	RenderSprites:
 		Image: cycl
 SWBRIK:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 150
 	CustomSellValue:

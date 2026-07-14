@@ -18,7 +18,7 @@ concreteb:
 		Start: 4317
 		Offset: -30,-24
 
-wall:
+ixian_concretewall:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -309,7 +309,7 @@ power.atreides:
 		Start: 2772
 		Offset: -32,64
 	idle-zaps:
-		Filename: power_atreides_zaps.png
+		Filename: ixian_windtrap_power_atreides_zaps.png
 		Length: 10
 		Scale: 1
 		Offset: 7,-2
@@ -2161,25 +2161,25 @@ plates: # TODO: unused
 d2k_munitions.harkonnen:
 	Inherits: d2k_munitions.atreides
 	idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 0
 	damaged-idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 1
 	icon:
-		Filename: d2k_munitions_icon.shp
+		Filename: ixian_munitionssilo_icon.shp
 		Start: 0
 
 d2k_munitions.ordos:
 	Inherits: d2k_munitions.atreides
 	idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 4
 	damaged-idle:
-		Filename: d2k_munitions.shp
+		Filename: ixian_munitionssilo_d2k_munitions.shp
 		Start: 5
 	icon:
-		Filename: d2k_munitions_icon.shp
+		Filename: ixian_munitionssilo_icon.shp
 		Start: 1
 
 ####################################################
@@ -3949,7 +3949,7 @@ d2k_drone:
 
 d2k_ixdroneprojectile:
 	idle:
-		Filename: IxRailgun.png
+		Filename: ixian_promotion_unlockixrailgundrone_ixrailgun.png
 		Start: 64
 		Facings: 8
 		InterpolatedFacings: 64
@@ -4835,7 +4835,7 @@ d2k_heavy_air_drone:
 		Scale: 2
 		Facings: -32
 	icon:
-		Filename: d2k_air_drone_icon.shp
+		Filename: ixian_airdrone_icon.shp
 
 sandworm:
 	Defaults:
@@ -5355,7 +5355,7 @@ d2k_autogun_tank.husk:
 		Filename: ordos_upgrade_heavyautoguntankupgrade_d2k_autogun_tank.shp
 		Facings: -32
 
-carryall:
+ixian_autonomouscarryall:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -5371,7 +5371,7 @@ carryall:
 		Offset: -30,-24
 
 carryall.reinforce:
-	Inherits: carryall
+	Inherits: ixian_autonomouscarryall
 
 oornithopter:
 	Inherits: ornithopter

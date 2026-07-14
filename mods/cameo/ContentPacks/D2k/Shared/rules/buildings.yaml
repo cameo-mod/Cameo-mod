@@ -218,7 +218,7 @@ light_factory:
 		Prerequisites: ordos_upgrade_lightfactoryupgrade
 	-WithDeathAnimation:
 
-wall:
+ixian_concretewall:
 	Inherits@spriteactor: ^SpriteActor
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Interactable:
@@ -229,7 +229,7 @@ wall:
 		Action: ChangeOwner
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ixian
+		Prerequisites: ~ixian_constructionyard
 		BuildPaletteOrder: 410
 		BuildDuration: 62
 		BuildDurationModifier: 100
@@ -242,7 +242,7 @@ wall:
 	UpdatesPlayerStatistics:
 		AddToAssetsValue: false
 	Tooltip:
-		Name: Concrete Wall
+		Name: Concrete ixian_concretewall
 		GenericName: Structure
 	AppearsOnRadar:
 	D2kActorPreviewPlaceBuildingPreview:
@@ -259,14 +259,14 @@ wall:
 	RevealsShroud:
 		Range: 1c768
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 	BlocksProjectiles:
 		Height: 512
 	LineBuild:
 		Range: 5
-		NodeTypes: wall, turret
+		NodeTypes: ixian_concretewall, turret
 	LineBuildNode:
-		Types: wall
+		Types: ixian_concretewall
 	Targetable:
 		TargetTypes: Ground, Structure
 	WithWallSpriteBody:

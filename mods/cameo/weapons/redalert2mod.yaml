@@ -361,7 +361,7 @@ SteelIonCannonDamage:
 	AirThreshold: 8c0
 	Warhead@3Smu_area: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Building, Wall
+		InvalidTargets: Vehicle, Building, ixian_concretewall
 		Size: 3
 		Delay: 3
 

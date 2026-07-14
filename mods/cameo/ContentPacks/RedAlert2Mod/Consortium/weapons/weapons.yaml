@@ -1434,12 +1434,12 @@ SteelInspectorIonCannonDamage:
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@Smudge1: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 		Size: 1
 		Delay: 3
 	Warhead@Smudge2: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 		Size: 2,1
 		Delay: 6
 	Warhead@Effect: CreateEffect

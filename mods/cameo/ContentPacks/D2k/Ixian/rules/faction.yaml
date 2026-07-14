@@ -8,13 +8,13 @@ World:
 	StartingUnits@ixian:
 		Class: none
 		ClassName: MCV Only
-		BaseActor: d2k_mcv.ixian
+		BaseActor: ixian_mobileconstructionvehicle
 		Factions: atreides, harkonnen, corrino, ixian
 	StartingUnits@ixian_L:
 		Class: light
 		ClassName: Light Support
 		Factions: atreides, harkonnen, corrino
-		BaseActor: d2k_mcv.ixian
+		BaseActor: ixian_mobileconstructionvehicle
 		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, combat_tank.ixian
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
@@ -22,7 +22,7 @@ World:
 		Class: light
 		ClassName: Light Support
 		Factions: ixian
-		BaseActor: d2k_mcv.ixian
+		BaseActor: ixian_mobileconstructionvehicle
 		SupportActors: ixian_lightinfantry, ixian_lightinfantry, heavy_inf.ixian, ixian_rockettrooper, ixian_rockettrooper, rocket_raider.ixian, combat_tank.ixian
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
@@ -30,7 +30,7 @@ World:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: atreides, harkonnen, corrino
-		BaseActor: d2k_mcv.ixian
+		BaseActor: ixian_mobileconstructionvehicle
 		SupportActors: light_inf, light_inf, heavy_inf.ixian, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, combat_tank.ixian, duelist_tank.ixian
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5
@@ -38,7 +38,7 @@ World:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: ixian
-		BaseActor: d2k_mcv.ixian
+		BaseActor: ixian_mobileconstructionvehicle
 		SupportActors: ixian_lightinfantry, ixian_lightinfantry, heavy_inf.ixian, ixian_rockettrooper, ixian_rockettrooper, rocket_raider.ixian, heavy_rocket_raider.ixian, combat_tank.ixian, duelist_tank.ixian
 		InnerSupportRadius: 3
 		OuterSupportRadius: 5

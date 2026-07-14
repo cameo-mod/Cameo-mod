@@ -99,7 +99,7 @@ SILO:
 		PipCount: 10
 
 SBAG:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 50
 	CustomSellValue:
@@ -123,7 +123,7 @@ SBAG:
 		Type: sandbag
 
 CYCL:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 75
 	CustomSellValue:
@@ -147,7 +147,7 @@ CYCL:
 		Type: chain
 
 FENC:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 25
 	CustomSellValue:
@@ -173,7 +173,7 @@ FENC:
 		Palette: td_temperat
 
 BRIK:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 200
 	CustomSellValue:

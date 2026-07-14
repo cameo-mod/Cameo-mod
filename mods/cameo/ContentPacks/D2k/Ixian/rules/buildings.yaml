@@ -1,20 +1,20 @@
-construction_yard.ixian:
+ixian_constructionyard:
 	Inherits: ^construction_yard
 	Tooltip:
 		Name: Ixian Construction Yard
 	Transforms:
-		IntoActor: d2k_mcv.ixian
+		IntoActor: ixian_mobileconstructionvehicle
 	RenderSprites:
 		Image: conyard.atreides
 
-wind_trap.ixian:
+ixian_windtrap:
 	Inherits: ^wind_trap
 	Buildable:
-		Prerequisites: ~construction_yard.ixian
+		Prerequisites: ~ixian_constructionyard
 	RenderSprites:
 		Image: power.atreides
 
-d2k_barracks.ixian:
+ixian_barracks:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -22,7 +22,7 @@ d2k_barracks.ixian:
 	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_windtrap
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Barracks
@@ -60,42 +60,42 @@ d2k_barracks.ixian:
 		Pieces: 1, 2
 		Range: 1c512, 2c768
 
-refinery.ixian:
+ixian_refineryixian:
 	Inherits: ^refinery
 	Tooltip:
 		Name: Refinery
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_windtrap
 	FreeActor:
-		Actor: harvester.ixian
+		Actor: ixian_spiceharvester
 		SpawnOffset: 0,2
 		Facing: 160
 	FreeActorWithDelivery@1:
-		Actor: harvester.ixian
+		Actor: ixian_spiceharvester
 		DeliveryOffset: 2,2
 		DeliveringActor: carryall.reinforce
 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harvester.ixian
+	# 	Actor: ixian_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall.reinforce
 	# 	Facing: 160
 	RenderSprites:
 		Image: refinery.atreides
 
-d2k_silo.ixian:
+ixian_storagesilo:
 	Inherits: ^d2k_silo
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, refinery.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 	RenderSprites:
 		Image: silo.atreides
 
-d2k_munitions.ixian:
+ixian_munitionssilo:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^1x1Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_barracks
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 310
 		Description: actor_d2k_munitions.description
@@ -244,7 +244,7 @@ d2k_munitions.ixian:
 	# ProductionBar@upgrade:
 	# 	ProductionType: Upgrade
 
-heavy_factory.ixian:
+ixian_advancedheavyfactory:
 	Inherits: heavy_factory
 	Tooltip:
 		Name: Ixian Advanced Heavy Factory
@@ -257,7 +257,7 @@ heavy_factory.ixian:
 	RenderSprites:
 		Image: heavy.mercenary
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, refinery.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 		Description: template_factory.description
 		IconPalette: player
 	ProductionQueue@VEHICLE:
@@ -267,14 +267,14 @@ heavy_factory.ixian:
 	# ProvidesPrerequisite@upgrade_heavy:
 	# 	Prerequisite: upgrade_heavy
 
-repair_pad.ixian:
+ixian_repairpad:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
 	Inherits@repair: ^RepairFacility
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, heavy_factory.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Repair Pad
@@ -306,13 +306,13 @@ repair_pad.ixian:
 	SpawnActorOnDeath@death2:
 		Actor: light_inf
 
-outpost.ixian:
+ixian_outpost:
 	Inherits: ^D2KBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, refinery.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ixian Outpost
@@ -345,7 +345,7 @@ outpost.ixian:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-launchpad.ixian:
+ixian_launchpad:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -353,7 +353,7 @@ launchpad.ixian:
 	Tooltip:
 		Name: Ixian Launchpad
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, outpost.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_outpost
 	Building:
 		BuildSounds: BUILD1.WAV
 		Footprint: xx xx
@@ -395,38 +395,38 @@ launchpad.ixian:
 	SpawnActorOnDeath@death4:
 		Actor: trooper
 
-research_centre.ixian:
+ixian_ixresearchcenter:
 	Inherits: ^research_centre
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, outpost.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_outpost
 	RenderSprites:
 		Image: research.gold
 
-high_tech_factory.ixian:
+ixian_hightechfactory:
 	Inherits: ^high_tech_factory
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
 	RenderSprites:
 		Image: hightech.atreides
 
 # Generic starport. Common traits here; each faction actor sets its build
 # prerequisite and sprite image.
 
-starport.ixian:
+ixian_starport:
 	Inherits: ^starport
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian, derricklimit
+		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
 	RenderSprites:
 		Image: starport.smuggler
 
-supercomputer.ixian:
+ixian_supercomputer:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^4x3Shape
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
-		Prerequisites: ~construction_yard.ixian, research_centre.ixian, !supercomputer.ixian, ~techlevel.superweapons
+		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, !ixian_supercomputer, ~techlevel.superweapons
 		Description: Provides a nuclear weapon support power.
 		IconPalette: player
 	Tooltip:
@@ -482,10 +482,10 @@ supercomputer.ixian:
 		RequiresCondition: !build-incomplete
 	-WithDeathAnimation:
 	RenderSprites:
-		Image: supercomputer.ixian
+		Image: ixian_supercomputer
 		Palette: td_temperat
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: supercomputer.ixian
+		Prerequisite: ixian_supercomputer
 	-WithCrumbleOverlay:
 
 # starport_smuggler:
@@ -525,7 +525,7 @@ supercomputer.ixian:
 # 	Valued:
 # 		Cost: 2500
 
-machine_gun_turret.ixian:
+ixian_machinegunturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
@@ -539,7 +539,7 @@ machine_gun_turret.ixian:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_barracks
 		BuildPaletteOrder: 550
 		Description: template_anti_infantry_defense.description
 		IconPalette: d2kunit
@@ -567,13 +567,13 @@ machine_gun_turret.ixian:
 		LocalOffset: 256,0,576
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@Upgrade: ##########
 		Weapon: HMG_turret_upgrade
 		LocalOffset: 256,0,576
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	Replacement:
 		ReplaceableTypes: Tower
 	WithWallSpriteBody:
@@ -595,9 +595,9 @@ machine_gun_turret.ixian:
 	RevealsShroud:
 		Range: 7394
 	ActorStatValues:
-		Upgrades: up_needleguns.ixian, up_general_purpose_armor.ixian
+		Upgrades: ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor
 
-medium_gun_turret.ixian:
+ixian_gunturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
@@ -615,7 +615,7 @@ medium_gun_turret.ixian:
 		Cost: 1000
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_barracks
 		BuildPaletteOrder: 550
 		Description: template_anti_vehicle_defense.description
 		IconPalette: d2kunit
@@ -655,15 +655,15 @@ medium_gun_turret.ixian:
 	SpawnActorOnDeath@death1:
 		Actor: light_inf
 	RenderSprites:
-		Image: medium_gun_turret.ixian
+		Image: ixian_gunturret
 	Power:
 		Amount: -50
 	RevealsShroud:
 		Range: 7979
 	ActorStatValues:
-		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian
+		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor
 
-large_gun_turret.ixian:
+ixian_rocketturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -678,7 +678,7 @@ large_gun_turret.ixian:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ixian, outpost.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_outpost
 		BuildPaletteOrder: 610
 		Description: actor_large_gun_turret.description
 		IconPalette: d2kunit
@@ -726,7 +726,7 @@ large_gun_turret.ixian:
 	DetectCloaked:
 		Range: 5342
 	ActorStatValues:
-		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian
+		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor
 
 # d2k_mine_ap:
 # 	Inherits: ^D2KMine
@@ -1069,7 +1069,7 @@ large_gun_turret.ixian:
 # 	SpawnActorOnDeath@death4:
 # 		Actor: trooper
 
-storm_lasher.ixian:
+ixian_stormlasher:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@selection: ^AdvancedDefenseTemplate
@@ -1083,7 +1083,7 @@ storm_lasher.ixian:
 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ixian, up_stormlasher.ixian, research_centre.ixian
+		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockstormlasher, ixian_ixresearchcenter
 		BuildPaletteOrder: 750
 		Description: actor_storm_lasher.description
 		IconPalette: player
@@ -1098,9 +1098,9 @@ storm_lasher.ixian:
 		HP: 200000
 	Shielded:
 		RegenAmount: 160
-	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 		Modifier: 200
-		RequiresCondition: up_advanced_ixian_technology.ixian
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
 	BodyOrientation:
 		QuantizedFacings: 32
 	WithMuzzleOverlay:
@@ -1149,7 +1149,7 @@ storm_lasher.ixian:
 	DetectCloaked:
 		Range: 5692
 	ActorStatValues:
-		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 
 	### Armor Tree

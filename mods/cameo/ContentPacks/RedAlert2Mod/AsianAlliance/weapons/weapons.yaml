@@ -297,7 +297,7 @@ AsianMaidenBowE:
 		Spread: 125
 AsianNinjaStar:
 	Inherits: ^SwordWeapon
-	InvalidTargets: Structure, Wall, Husk
+	InvalidTargets: Structure, ixian_concretewall, Husk
 	Report: toss1.aud
 	ReloadDelay: 25
 	Range: 4560
@@ -540,7 +540,7 @@ AsianPhotonCannon:
 		ExplosionPalette: ra2effect
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk
 
 AsianPhotonCannonEMP:
 	Inherits: AsianPhotonCannon
@@ -1789,7 +1789,7 @@ ASDFGun:
 	ReloadDelay: 16
 	Burst: 3
 	BurstDelays: 2
-	InvalidTargets: Structure, Bridge, Wall
+	InvalidTargets: Structure, Bridge, ixian_concretewall
 	ValidTargets: Ground, Water, Air
 	Warhead@SmallArms: SpreadDamage
 		ValidTargets: Ground, Water, Air
@@ -1817,7 +1817,7 @@ ASDFGun2:
 ASDFKamikazeTargeting:
 	Range: 7250
 	ReloadDelay: 100
-	ValidTargets: Structure, Bridge, Wall
+	ValidTargets: Structure, Bridge, ixian_concretewall
 	TargetActorCenter: true
 	Projectile: LaserZap
 		Width: 36

@@ -21,7 +21,7 @@ ixian_lightinfantry:
 		Queue: Infantry, RAInfantry
 		Description: actor_ixian_lightinfantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_barracks.ixian
+		Prerequisites: ~ixian_barracks
 	Health:
 		HP: 18000
 	ChangesHealth@SelfHealing:
@@ -31,23 +31,23 @@ ixian_lightinfantry:
 	Armament@PRIMARY: ##########
 		Weapon: LMG
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@Upgrade: ##########
 		Weapon: LMG_upgrade
 		LocalOffset: 128,0,256
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: LMG
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: LMG_upgrade
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 		DefaultAttackSequence: shoot
@@ -55,7 +55,7 @@ ixian_lightinfantry:
 	RenderSprites:
 		Image: light_inf
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 ixian_rockettrooper:
 	Inherits: ^D2KInfantry
@@ -73,7 +73,7 @@ ixian_rockettrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks.ixian, ~!up_twin_rocket_trooper.ixian
+		Prerequisites: ~ixian_barracks, ~!ixian_upgrade_twinbazookaupgrade
 		Description: actor_ixian_rockettrooper.description
 		IconPalette: d2kunit
 	Valued:
@@ -101,9 +101,9 @@ ixian_rockettrooper:
 	RenderSprites:
 		Image: trooper
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
-twin_rocket_trooper.ixian:
+ixian_twinrockettrooper:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -120,7 +120,7 @@ twin_rocket_trooper.ixian:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks.ixian, ~up_twin_rocket_trooper.ixian
+		Prerequisites: ~ixian_barracks, ~ixian_upgrade_twinbazookaupgrade
 		Description: template_antitank_antiair_infantry.description
 		IconPalette: d2kunit
 	Valued:
@@ -152,9 +152,9 @@ twin_rocket_trooper.ixian:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
-shock_infantry.ixian:
+ixian_shockinfantry:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -174,7 +174,7 @@ shock_infantry.ixian:
 		Queue: Infantry, RAInfantry
 		Description: actor_shock_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_barracks.ixian, research_centre.ixian, ~!up_storm_infantry.ixian
+		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~!ixian_promotion_unlockstorminfantry
 	Health:
 		HP: 36000
 	ChangesHealth@SelfHealing:
@@ -189,9 +189,9 @@ shock_infantry.ixian:
 		Weapon: D2K_ShockGunInf
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 		Modifier: 200
-		RequiresCondition: up_advanced_ixian_technology.ixian
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
 	WithInfantryBody:
 		-IdleSequences: idle1,idle2
 		DefaultAttackSequence: shoot
@@ -202,9 +202,9 @@ shock_infantry.ixian:
 		Image: shockgunner
 		PlayerPalette: player
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-storm_infantry.ixian:
+ixian_storminfantry:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -225,7 +225,7 @@ storm_infantry.ixian:
 		Queue: Infantry, RAInfantry
 		Description: actor_shock_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_barracks.ixian, research_centre.ixian, ~up_storm_infantry.ixian
+		Prerequisites: ~ixian_barracks, ixian_ixresearchcenter, ~ixian_promotion_unlockstorminfantry
 	Mobile:
 		Speed: 44
 	Health:
@@ -240,9 +240,9 @@ storm_infantry.ixian:
 		Weapon: D2K_StormGunInf
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 		Modifier: 200
-		RequiresCondition: up_advanced_ixian_technology.ixian
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
 	WithInfantryBody:
 		-IdleSequences: idle1,idle2
 		DefaultAttackSequence: shoot
@@ -252,7 +252,7 @@ storm_infantry.ixian:
 	RenderSprites:
 		PlayerPalette: player
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 heavy_inf.ixian:
 	Inherits: ^D2KInfantry
@@ -276,7 +276,7 @@ heavy_inf.ixian:
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_barracks.ixian, up_heavy_inf.ixian
+		Prerequisites: ~ixian_barracks, ixian_promotion_unlockrashidan
 	Mobile:
 		Speed: 50
 	Health:
@@ -286,24 +286,24 @@ heavy_inf.ixian:
 	Armament@PRIMARY: ##########
 		Weapon: RashinanGun
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 		MuzzlePalette: d2keffect
 	Armament@Upgrade: ##########
 		Weapon: RashinanGun_upgrade
 		LocalOffset: 128,0,256
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 		MuzzlePalette: d2keffect
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: RashinanGun
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 		MuzzlePalette: d2keffect
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: RashinanGun_upgrade
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 		MuzzlePalette: d2keffect
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4,idle5,idle6,idle7,idle8
@@ -316,4 +316,4 @@ heavy_inf.ixian:
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology

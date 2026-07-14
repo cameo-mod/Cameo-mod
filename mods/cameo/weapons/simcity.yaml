@@ -110,7 +110,7 @@ PatriotFireTruck:
 		DamageTypes: Prone50Percent, TriggerProne, SmallExplosionDeath
 	Warhead@2Smu: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 	Warhead@3Eff: CreateEffect
 		Explosions: blue_poof
 		ImpactSounds: xplos.aud

@@ -2,7 +2,7 @@
 #		Promotion Units Ixians
 ####################################################################################################
 
-up_heavy_inf.ixian:
+ixian_promotion_unlockrashidan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Rashidan
@@ -11,12 +11,12 @@ up_heavy_inf.ixian:
 		Queue: Promotions
 		IconPalette: d2kunit
 		Description: Allows training of Rashidans.
-		Prerequisites: ~construction_yard.ixian, !up_heavy_inf.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockrashidan, rank1
 	RenderSprites:
 		Image: heavy_inf.ixian
 	ProvidesPrerequisite:
 
-up_storm_infantry.ixian:
+ixian_promotion_unlockstorminfantry:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Storm Infantry
@@ -25,12 +25,12 @@ up_storm_infantry.ixian:
 		Queue: Promotions
 		IconPalette: d2kunit
 		Description: Allows training of Storm Infantry.
-		Prerequisites: ~construction_yard.ixian, !up_storm_infantry.ixian, up_heavy_inf.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstorminfantry, ixian_promotion_unlockrashidan, rank1
 	RenderSprites:
-		Image: storm_infantry.ixian
+		Image: ixian_storminfantry
 	ProvidesPrerequisite:
 
-up_stormraider.ixian:
+ixian_promotion_unlockstormraider:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Storm Raider
@@ -39,12 +39,12 @@ up_stormraider.ixian:
 		Queue: Promotions
 		IconPalette: d2kunit
 		Description: Enables construction of Storm Raiders.
-		Prerequisites: ~construction_yard.ixian, !up_stormraider.ixian, up_storm_infantry.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormraider, ixian_promotion_unlockstorminfantry, rank1
 	RenderSprites:
-		Image: storm_raider.ixian
+		Image: ixian_stormraider
 	ProvidesPrerequisite:
 
-up_stormlasher.ixian:
+ixian_promotion_unlockstormlasher:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Storm Lasher
@@ -53,14 +53,14 @@ up_stormlasher.ixian:
 		Queue: Promotions
 		IconPalette: player
 		Description: Enables construction of Storm Lashers.
-		Prerequisites: ~construction_yard.ixian, !up_stormlasher.ixian, up_stormraider.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormlasher, ixian_promotion_unlockstormraider, rank1
 	RenderSprites:
-		Image: storm_lasher.ixian
+		Image: ixian_stormlasher
 	ProvidesPrerequisite:
 
 	### Military tree
 
-up_raider.ixian:
+ixian_promotion_unlockheavyixraider:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Heavy Ix Raider
@@ -69,12 +69,12 @@ up_raider.ixian:
 		Queue: Promotions
 		#IconPalette: d2kunit
 		Description: Enables construction of Ix Raiders.
-		Prerequisites: ~construction_yard.ixian, !up_raider.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockheavyixraider, rank1
 	RenderSprites:
-		Image: shock_raider.ixian
+		Image: ixian_shockraider
 	ProvidesPrerequisite:
 
-up_siegetank.ixian:
+ixian_promotion_unlockixsiegetank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Ix Siege Tank
@@ -83,12 +83,12 @@ up_siegetank.ixian:
 		Queue: Promotions
 		IconPalette: ra2
 		Description: Enables construction of Ix Siege Tanks.
-		Prerequisites: ~construction_yard.ixian, up_raider.ixian, !up_siegetank.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockheavyixraider, !ixian_promotion_unlockixsiegetank, rank1
 	RenderSprites:
 		Image: ix_siege_tank
 	ProvidesPrerequisite:
 
-up_neocymek.ixian:
+ixian_promotion_unlockneocymek:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Neo Cymek
@@ -97,12 +97,12 @@ up_neocymek.ixian:
 		Queue: Promotions
 		IconPalette: d2kunit
 		Description: Enables construction of Neo Cymeks.
-		Prerequisites: ~construction_yard.ixian, up_siegetank.ixian, !up_neocymek.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixsiegetank, !ixian_promotion_unlockneocymek, rank1
 	RenderSprites:
-		Image: neocymek.ixian
+		Image: ixian_neocymek
 	ProvidesPrerequisite:
 
-up_projector.ixian:
+ixian_promotion_unlockixprojector:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Ix Projector
@@ -111,14 +111,14 @@ up_projector.ixian:
 		Queue: Promotions
 		IconPalette: windows256
 		Description: Enables construction of the Ix Projector.
-		Prerequisites: ~construction_yard.ixian, up_neocymek.ixian, !up_projector.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockneocymek, !ixian_promotion_unlockixprojector, rank1
 	RenderSprites:
 		Image: d2k_projector
 	ProvidesPrerequisite:
 
 	### Support tree
 
-up_drone.ixian:
+ixian_promotion_unlockixrailgundrone:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Ix Railgun Drone
@@ -126,12 +126,12 @@ up_drone.ixian:
 		BuildPaletteOrder: 111
 		Queue: Promotions
 		Description: Enables construction of Ix Railgun Drones.
-		Prerequisites: ~construction_yard.ixian, !up_drone.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockixrailgundrone, rank1
 	RenderSprites:
-		Image: drone.ixian
+		Image: ixian_railgundrone
 	ProvidesPrerequisite:
 
-up_bomber.ixian:
+ixian_promotion_unlockixianempbomber:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Ixian EMP Bomber
@@ -140,12 +140,12 @@ up_bomber.ixian:
 		Queue: Promotions
 		IconPalette: ra2
 		Description: Enables construction of Ixian EMP Bombers.
-		Prerequisites: ~construction_yard.ixian, up_drone.ixian, !up_bomber.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixrailgundrone, !ixian_promotion_unlockixianempbomber, rank1
 	RenderSprites:
-		Image: bomber.ixian
+		Image: ixian_empbomber
 	ProvidesPrerequisite:
 
-up_resonance_drone.ixian:
+ixian_promotion_unlockixresonancedrone:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Ix Resonance Drone
@@ -154,12 +154,12 @@ up_resonance_drone.ixian:
 		Queue: Promotions
 		IconPalette: d2kunit
 		Description: Enables construction of  Ix Resonance Drones.
-		Prerequisites: ~construction_yard.ixian, up_bomber.ixian, !up_resonance_drone.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixianempbomber, !ixian_promotion_unlockixresonancedrone, rank1
 	RenderSprites:
-		Image: resonance_drone.ixian
+		Image: ixian_resonancedrone
 	ProvidesPrerequisite:
 
-up_farasha.ixian:
+ixian_promotion_unlockfarasha:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Farasha
@@ -168,7 +168,7 @@ up_farasha.ixian:
 		Queue: Promotions
 		IconPalette: ra2
 		Description: Enables construction of the Farasha.
-		Prerequisites: ~construction_yard.ixian, up_resonance_drone.ixian, !up_farasha.ixian, rank1
+		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixresonancedrone, !ixian_promotion_unlockfarasha, rank1
 	RenderSprites:
-		Image: farasha.ixian
+		Image: ixian_farasha
 	ProvidesPrerequisite:

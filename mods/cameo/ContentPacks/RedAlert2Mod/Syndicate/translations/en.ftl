@@ -64,7 +64,7 @@ actor_latin_yakovlev =
 
 actor_ra2hind =
    .name = ra1_soviet_hindattackhelicopter Transport
-   .description = Carryall helicopter armed with a machine gun.
+   .description = ixian_autonomouscarryall helicopter armed with a machine gun.
 
 actor_terror =
    .name = Terrorist

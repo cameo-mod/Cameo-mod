@@ -662,13 +662,13 @@ WIN98_AERIAL_UPLINK:
 #       WIN98 DEFENSE
 ####################################################################################################
 WIN98_CRT_WALL:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 100
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: CRT Wall
+		Name: CRT ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: WIN98_BARRACKS

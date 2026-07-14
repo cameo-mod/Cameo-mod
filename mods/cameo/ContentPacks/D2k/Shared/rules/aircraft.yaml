@@ -4,7 +4,7 @@ carryall.reinforce:
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@selection: ^SelectableEconomicUnit
 	Tooltip:
-		Name: Autonomous Carryall
+		Name: Autonomous ixian_autonomouscarryall
 	Valued:
 		Cost: 5000
 	Health:
@@ -34,7 +34,7 @@ carryall.reinforce:
 		BeforeUnloadDelay: 15
 		LocalOffset: 0, 0, -128
 	RenderSprites:
-		Image: carryall
+		Image: ixian_autonomouscarryall
 	ChangesHealth:
 		Step: 50
 		Delay: 3
@@ -65,7 +65,7 @@ carryall.reinforce:
 		Pieces: 3, 6
 		Range: 1c512, 2c512
 
-carryall:
+ixian_autonomouscarryall:
 	Inherits: carryall.reinforce
 	Health:
 		HP: 200000
@@ -89,7 +89,7 @@ carryall:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 120
-		Prerequisites: ~high_tech_factory.ixian
+		Prerequisites: ~ixian_hightechfactory
 
 carryall.paradrop:
 	Inherits: carryall.reinforce
@@ -152,14 +152,14 @@ frigate.paradrop:
 carryall.husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Carryall
+		Name: ixian_autonomouscarryall
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 144
 		CanSlide: True
 		VTOL: true
 	RenderSprites:
-		Image: carryall
+		Image: ixian_autonomouscarryall
 		PlayerPalette: playerd2k
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
@@ -167,7 +167,7 @@ carryall.husk:
 carryall.huskVTOL:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Carryall
+		Name: ixian_autonomouscarryall
 	FallsToEarth:
 		Moves: False
 		Velocity: 0c128
@@ -176,7 +176,7 @@ carryall.huskVTOL:
 		CanSlide: True
 		VTOL: true
 	RenderSprites:
-		Image: carryall
+		Image: ixian_autonomouscarryall
 		PlayerPalette: playerd2k
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge

@@ -64,7 +64,7 @@ AWSuperSupport:
 			Wood: 72
 			Light: 100
 			Heavy: 80
-		ValidTargets: Vehicle, Wall
+		ValidTargets: Vehicle, ixian_concretewall
 		DamageTypes: Prone50Percent, TriggerProne, ExplosionDeath
 	Warhead@2Dam: SpreadDamage
 		Damage: 5000
@@ -81,7 +81,7 @@ AWSuperSupport:
 			Light: 100
 			Heavy: 80
 		ValidTargets: Ground
-		InvalidTargets: Vehicle, Wall
+		InvalidTargets: Vehicle, ixian_concretewall
 	Warhead@2Eff: CreateEffect
 		Explosions: awexplosion2
 		ValidTargets: Ground, Water, Air
@@ -892,7 +892,7 @@ AWTsunamiWater:
 	Warhead@1Dam: SpreadDamage
 		Spread: 426
 		Damage: 15000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: ixian_concretewall, Building, Structure
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
 		Damage: 1500
@@ -920,7 +920,7 @@ AWTsunamiWater2:
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 7000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: ixian_concretewall, Building, Structure
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
 		Damage: 1500
@@ -1204,7 +1204,7 @@ AWKindleSelectBuilding:
 		Weapon: AWKindleMobSpawn
 		ValidRelationships: Enemy, Neutral
 		ValidTargets: Building, Structure
-		InvalidTargets: Wall, Defense
+		InvalidTargets: ixian_concretewall, Defense
 
 AWKindleMobSpawn:
 	Range: 3072
@@ -1280,7 +1280,7 @@ AWHawkeWater:
 	Warhead@1Dam: SpreadDamage
 		Spread: 426
 		Damage: 15000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: ixian_concretewall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
@@ -1312,7 +1312,7 @@ AWHawkeWaterB:
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 7000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: ixian_concretewall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
@@ -1392,7 +1392,7 @@ AWHawkeWater2:
 	Warhead@1Dam: SpreadDamage
 		Spread: 426
 		Damage: 25000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: ixian_concretewall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400
@@ -1424,7 +1424,7 @@ AWHawkeWaterB2:
 	Warhead@1Dam: SpreadDamage
 		Spread: 400
 		Damage: 14000
-		InvalidTargets: Wall, Building, Structure
+		InvalidTargets: ixian_concretewall, Building, Structure
 		ValidRelationships: Enemy, Neutral
 	Warhead@2Dam: SpreadDamage
 		Spread: 400

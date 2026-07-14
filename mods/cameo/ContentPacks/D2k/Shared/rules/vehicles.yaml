@@ -60,12 +60,12 @@ siege_tank:
 		EffectiveOwnerFromOwner: true
 	AttractsWorms:
 		Intensity: 600
-	GrantConditionOnPrerequisite@up_siege_range.ixian:
-		Condition: up_siege_range.ixian
-		Prerequisites: up_siege_range.ixian
-	RangeMultiplier@up_siege_range.ixian:
+	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
+		Condition: ixian_upgrade_reinforcedbarrel
+		Prerequisites: ixian_upgrade_reinforcedbarrel
+	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 		Modifier: 150
-		RequiresCondition: up_siege_range.ixian
+		RequiresCondition: ixian_upgrade_reinforcedbarrel
 	Voiced:
 		VoiceSet: D2KSiegeTank
 

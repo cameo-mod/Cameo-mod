@@ -10,16 +10,16 @@ refinery.atreides:
 	Buildable:
 		Prerequisites: ~construction_yard.atreides, wind_trap.atreides
 	FreeActor:
-		Actor: harvester.ixian
+		Actor: ixian_spiceharvester
 		SpawnOffset: 0,2
 		Facing: 160
 	FreeActorWithDelivery@1:
-		Actor: harvester.ixian
+		Actor: ixian_spiceharvester
 		DeliveryOffset: 2,2
 		DeliveringActor: carryall.reinforce
 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harvester.ixian
+	# 	Actor: ixian_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall.reinforce
 	# 	Facing: 160

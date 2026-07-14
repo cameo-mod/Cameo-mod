@@ -58,8 +58,8 @@ Terrain:
 		Type: Tree
 		TargetTypes: Ground
 		Color: 1C2024
-	TerrainType@Wall:
-		Type: Wall
+	TerrainType@ixian_concretewall:
+		Type: ixian_concretewall
 		TargetTypes: Ground
 		AcceptsSmudgeType: Crater, Scorch
 		Color: D0C0A0
@@ -971,7 +971,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: ixian_concretewall
 	Template@68:
 		Id: 68
 		Images: p02.jun
@@ -979,7 +979,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: ixian_concretewall
 	Template@69:
 		Id: 69
 		Images: p03.jun
@@ -987,7 +987,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: ixian_concretewall
 	Template@70:
 		Id: 70
 		Images: p04.jun
@@ -995,7 +995,7 @@ Templates:
 		Size: 1,1
 		Categories: Debris
 		Tiles:
-			0: Wall
+			0: ixian_concretewall
 	Template@73:
 		Id: 73
 		Images: p07.jun
@@ -1031,12 +1031,12 @@ Templates:
 		Size: 3,2
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
-			2: Wall
-			3: Wall
+			0: ixian_concretewall
+			1: ixian_concretewall
+			2: ixian_concretewall
+			3: ixian_concretewall
 			4: Clear
-			5: Wall
+			5: ixian_concretewall
 	Template@80:
 		Id: 80
 		Images: p14.jun
@@ -1044,8 +1044,8 @@ Templates:
 		Size: 2,1
 		Categories: Debris
 		Tiles:
-			0: Wall
-			1: Wall
+			0: ixian_concretewall
+			1: ixian_concretewall
 	Template@82:
 		Id: 82
 		Images: b1.jun
@@ -1228,7 +1228,7 @@ Templates:
 			5: Road
 			6: Road
 			7: Clear
-			10: Wall
+			10: ixian_concretewall
 			11: Road
 	Template@106:
 		Id: 106
@@ -1240,7 +1240,7 @@ Templates:
 			1: Clear
 			2: Road
 			3: Clear
-			4: Wall
+			4: ixian_concretewall
 			5: Road
 			6: Road
 			7: Road
@@ -1275,7 +1275,7 @@ Templates:
 			5: Road
 			6: Road
 			7: Clear
-			8: Wall
+			8: ixian_concretewall
 	Template@109:
 		Id: 109
 		Images: d17.jun
@@ -1304,7 +1304,7 @@ Templates:
 			5: Clear
 			6: Clear
 			7: Road
-			8: Wall
+			8: ixian_concretewall
 	Template@111:
 		Id: 111
 		Images: d19.jun
@@ -1566,7 +1566,7 @@ Templates:
 		Size: 2,2
 		Categories: Road
 		Tiles:
-			0: Wall
+			0: ixian_concretewall
 			2: Road
 			3: Clear
 	Template@134:
@@ -1608,7 +1608,7 @@ Templates:
 			12: River
 			13: Rock
 			14: River
-			16: Wall
+			16: ixian_concretewall
 			17: Clear
 	Template@137:
 		Id: 137
@@ -1657,7 +1657,7 @@ Templates:
 		Size: 4,4
 		Categories: River
 		Tiles:
-			2: Wall
+			2: ixian_concretewall
 			3: Clear
 			5: Clear
 			6: River
@@ -1866,12 +1866,12 @@ Templates:
 			2: Clear
 			3: Road
 			4: River
-			5: Wall
+			5: ixian_concretewall
 			6: Bridge
-			7: Wall
+			7: ixian_concretewall
 			8: River
 			9: Bridge
-			10: Wall
+			10: ixian_concretewall
 			11: River
 			12: Road
 			13: Clear
@@ -1887,9 +1887,9 @@ Templates:
 			2: Clear
 			3: Road
 			4: River
-			5: Wall
-			6: Wall
-			7: Wall
+			5: ixian_concretewall
+			6: ixian_concretewall
+			7: ixian_concretewall
 			8: River
 			9: River
 			10: River
@@ -1909,15 +1909,15 @@ Templates:
 			1: Clear
 			2: Clear
 			4: Clear
-			5: Wall
+			5: ixian_concretewall
 			6: Bridge
-			7: Wall
+			7: ixian_concretewall
 			8: River
 			9: River
 			10: River
-			11: Wall
+			11: ixian_concretewall
 			12: Bridge
-			13: Wall
+			13: ixian_concretewall
 			14: Clear
 			15: River
 			16: Clear
@@ -1937,8 +1937,8 @@ Templates:
 			1: Clear
 			2: Clear
 			4: Clear
-			5: Wall
-			6: Wall
+			5: ixian_concretewall
+			6: ixian_concretewall
 			7: River
 			8: River
 			9: River

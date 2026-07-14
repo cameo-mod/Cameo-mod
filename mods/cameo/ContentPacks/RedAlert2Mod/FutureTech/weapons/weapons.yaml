@@ -1135,7 +1135,7 @@ Future_MBT_DebuffLaser:
 	Range: 7820
 	Report: AUGuard_beamLoopa.wav, AUGuard_beamLoopb.wav, AUGuard_beamLoopc.wav
 	TargetActorCenter: true
-	ValidTargets: Ground, Water, Structure, Wall
+	ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Projectile: LaserZap
 		Duration: 22
 		Width: 0c64
@@ -1144,7 +1144,7 @@ Future_MBT_DebuffLaser:
 		Condition: CommandoDebuff
 		Duration: 22
 		Range: 172
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Warhead@Validation: TargetDamage
 
 Future_MBT_DebuffLaserE:

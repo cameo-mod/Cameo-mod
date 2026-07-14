@@ -4094,7 +4094,7 @@
 	ActorStatValues:
 		Stats: Armor, Sight, Cargo
 
-^Wall:
+^ixian_concretewall:
 	Inherits@1: ^SpriteActor
 	Inherits@shape: ^1x1Shape
 	Inherits@cloak: ^StealthGenCloakable
@@ -4115,15 +4115,15 @@
 		AreaTypes: building
 		Adjacent: 5
 	Targetable:
-		TargetTypes: Ground, Wall
+		TargetTypes: Ground, ixian_concretewall
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 		CrushSound: sandbag2.aud
 	LineBuild:
 		Range: 10
-		NodeTypes: wall
+		NodeTypes: ixian_concretewall
 	LineBuildNode:
-		Types: wall
+		Types: ixian_concretewall
 	WithWallSpriteBody:
 	GivesExperience:
 		PlayerExperienceModifier: 100
@@ -4135,11 +4135,11 @@
 	Health:
 		HP: 10000
 	AppearsOnMapPreview:
-		Terrain: Wall
+		Terrain: ixian_concretewall
 	RadarColorFromTerrain:
-		Terrain: Wall
+		Terrain: ixian_concretewall
 	MapEditorData:
-		Categories: Wall
+		Categories: ixian_concretewall
 	Cloak@TScloak:
 		PauseOnCondition: cloak-force-disabled || base-reveal
 	RenderSprites:
@@ -6496,7 +6496,7 @@ CPQDEBUGDUMMY:
 		CloakDelay: 75
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 		CloakedCondition: cloaked
-		RequiresCondition: !disabled && (stealthed || up_advanced_ixian_technology.ixian)
+		RequiresCondition: !disabled && (stealthed || ixian_upgrade_advancedixiantechnology)
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled
 		IsPlayerPalette: true
 	WithColoredSelectionBox:
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2_allies_airforcecommandhq,ra2_soviet_airfield,cgairf.asian,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviet_airfield,cgairf.asian,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -9361,7 +9361,7 @@ CPQDEBUGDUMMY:
 	-ChangesHealth@DRIVER_DEAD:
 	-Capturable@DRIVER_DEAD:
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 	Voiced:
 		VoiceSet: RA2CarVoice
 	MapEditorData:
@@ -9412,7 +9412,7 @@ CPQDEBUGDUMMY:
 	KillsSelf:
 		RequiresCondition: !disabled && triggered
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 	MapEditorData:
 		Categories: Civilian Vehicle
 	WithColoredSelectionBox:
@@ -9479,7 +9479,7 @@ CPQDEBUGDUMMY:
 	Voiced:
 		VoiceSet: RA2CarVoice
 	Crushable:
-		CrushClasses: wall
+		CrushClasses: ixian_concretewall
 	MapEditorData:
 		Categories: Civilian Vehicle
 	WithColoredSelectionBox:

@@ -1097,12 +1097,12 @@ Player:
 ####################################################################################################
 2100WALL:
 	Inherits@1: ^ExistsInWorld
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 200
 	Tooltip:
-		Name: Wall
+		Name: ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Defence, RADefence
@@ -1195,7 +1195,7 @@ Player:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Wall with Machinegun
+		Name: ixian_concretewall with Machinegun
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: 2100FY1, ~up2100upwall1
@@ -1216,7 +1216,7 @@ Player:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Wall with Light Cannon
+		Name: ixian_concretewall with Light Cannon
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: 2100FY1, ~up2100upwall1, ~up2100uplcannon1
@@ -1234,7 +1234,7 @@ Player:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Wall with Medium Cannon
+		Name: ixian_concretewall with Medium Cannon
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: 2100FY1, ~up2100upwall1, up2100upmcannon1
@@ -1254,7 +1254,7 @@ Player:
 	Valued:
 		Cost: 1000
 	Tooltip:
-		Name: Wall with Heavy Cannon
+		Name: ixian_concretewall with Heavy Cannon
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: 2100FY1, ~up2100upwall1, ~up2100uphcannon1
@@ -2242,12 +2242,12 @@ psc2100factory2:
 		RequiresCondition: !chronobeamed
 2100SCAVWALL:
 	Inherits@1: ^ExistsInWorld
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Inherits@AP: ^2100ConcreteArmorUpgrades
 	Valued:
 		Cost: 150
 	Tooltip:
-		Name: Wall
+		Name: ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Defence, RADefence
@@ -3529,7 +3529,7 @@ psc2100chopshop2:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	AutoTargetPriority@DEFAULT:
-		ValidTargets: Defence, Defense, Wall
+		ValidTargets: Defence, Defense, ixian_concretewall
 ^2100LightFlamer:
 	Inherits: ^2100VEHICLE
 	Inherits@@EXPERIENCE: ^GainsExperienceVehicle
@@ -9106,7 +9106,7 @@ up2100upengineer2:
 up2100upwall1:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Wall Research
+		Name: ixian_concretewall Research
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research

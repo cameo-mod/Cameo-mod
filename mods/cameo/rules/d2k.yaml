@@ -44,13 +44,13 @@
 # 	StartingUnits@ixian:
 # 		Class: none
 # 		ClassName: MCV Only
-# 		BaseActor: d2k_mcv.ixian
+# 		BaseActor: ixian_mobileconstructionvehicle
 # 		Factions: atreides, harkonnen, corrino, ixian
 # 	StartingUnits@ixian_L:
 # 		Class: light
 # 		ClassName: Light Support
 # 		Factions: atreides, harkonnen, corrino, ixian
-# 		BaseActor: d2k_mcv.ixian
+# 		BaseActor: ixian_mobileconstructionvehicle
 # 		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, combat_tank.ixian
 # 		InnerSupportRadius: 3
 # 		OuterSupportRadius: 5
@@ -58,7 +58,7 @@
 # 		Class: heavy
 # 		ClassName: Heavy Support
 # 		Factions: atreides, harkonnen, corrino, ixian
-# 		BaseActor: d2k_mcv.ixian
+# 		BaseActor: ixian_mobileconstructionvehicle
 # 		SupportActors: light_inf, light_inf, heavy_inf, trooper, trooper, rocket_raider.ixian, heavy_rocket_raider.ixian, combat_tank.ixian, duelist_tank
 # 		InnerSupportRadius: 3
 # 		OuterSupportRadius: 5
@@ -142,17 +142,17 @@
 # 		DamageRegenDelay: 125
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
-# 		RequiresCondition: !disabled && (up_personal_shield.ixian || shieldgen || shielded)
+# 		RequiresCondition: !disabled && (ixian_upgrade_personalshield || shieldgen || shielded)
 # 		SelectionBarColor: 8888FFFF
 # 	GrantCondition@shieldpermanent:
 # 		Condition: shieldpermanent
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	ChangesShield@personal_shield:
 # 		Step: 40
 # 		Delay: 1
 # 		StartIfBelow: 100
 # 		DamageCooldown: 125
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	Armor:
 # 		RequiresCondition: !shielded
 # 	Armor@shielded:
@@ -161,107 +161,107 @@
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShielded
 # 		RequiresCondition: shielded
-# 	DamageMultiplier@up_advanced_ixian_technology.ixian:
+# 	DamageMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 50
-# 		RequiresCondition: up_personal_shield.ixian && up_advanced_ixian_technology.ixian && shielded
-# 	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-# 		Condition: up_advanced_ixian_technology.ixian
-# 		Prerequisites: up_advanced_ixian_technology.ixian
-# 	DamageMultiplier@up_personal_shield.ixian:
+# 		RequiresCondition: ixian_upgrade_personalshield && ixian_upgrade_advancedixiantechnology && shielded
+# 	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+# 		Condition: ixian_upgrade_advancedixiantechnology
+# 		Prerequisites: ixian_upgrade_advancedixiantechnology
+# 	DamageMultiplier@ixian_upgrade_personalshield:
 # 		Modifier: 80
-# 		RequiresCondition: up_personal_shield.ixian && !shielded
-# 	SpeedMultiplier@up_personal_shield.ixian:
+# 		RequiresCondition: ixian_upgrade_personalshield && !shielded
+# 	SpeedMultiplier@ixian_upgrade_personalshield:
 # 		Modifier: 125
-# 		RequiresCondition: up_personal_shield.ixian && shielded
-# 	GrantConditionOnPrerequisite@up_personal_shield.ixian:
-# 		Condition: up_personal_shield.ixian
-# 		Prerequisites: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield && shielded
+# 	GrantConditionOnPrerequisite@ixian_upgrade_personalshield:
+# 		Condition: ixian_upgrade_personalshield
+# 		Prerequisites: ixian_upgrade_personalshield
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian
+# 		Upgrades: ixian_upgrade_personalshield
 
 # ^D2K_HeavyMissilesUpgrade:
-# 	RangeMultiplier@up_heavy_missile.ixian:
+# 	RangeMultiplier@ixian_upgrade_heavymissiles:
 # 		Modifier: 120
-# 		RequiresCondition: up_heavy_missile.ixian
-# 	FirepowerMultiplier@up_heavy_missile.ixian:
+# 		RequiresCondition: ixian_upgrade_heavymissiles
+# 	FirepowerMultiplier@ixian_upgrade_heavymissiles:
 # 		Modifier: 120
-# 		RequiresCondition: up_heavy_missile.ixian
-# 	GrantConditionOnPrerequisite@up_heavy_missile.ixian:
-# 		Condition: up_heavy_missile.ixian
-# 		Prerequisites: up_heavy_missile.ixian
+# 		RequiresCondition: ixian_upgrade_heavymissiles
+# 	GrantConditionOnPrerequisite@ixian_upgrade_heavymissiles:
+# 		Condition: ixian_upgrade_heavymissiles
+# 		Prerequisites: ixian_upgrade_heavymissiles
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles
 
 # ^D2K_ReinforcedBarrel:
-# 	RangeMultiplier@up_siege_range.ixian:
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 110
-# 		RequiresCondition: up_siege_range.ixian
-# 	FirepowerMultiplier@up_siege_range.ixian:
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 125
-# 		RequiresCondition: up_siege_range.ixian
-# 	GrantConditionOnPrerequisite@up_siege_range.ixian:
-# 		Condition: up_siege_range.ixian
-# 		Prerequisites: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
+# 		Condition: ixian_upgrade_reinforcedbarrel
+# 		Prerequisites: ixian_upgrade_reinforcedbarrel
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel
 
 # ^D2K_NeedleGuns:
-# 	RangeMultiplier@up_needleguns.ixian:
+# 	RangeMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 110
-# 		RequiresCondition: up_needleguns.ixian
-# 	FirepowerMultiplier@up_needleguns.ixian:
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
+# 	FirepowerMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 125
-# 		RequiresCondition: up_needleguns.ixian
-# 	GrantConditionOnPrerequisite@up_needleguns.ixian:
-# 		Condition: up_needleguns.ixian
-# 		Prerequisites: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
+# 	GrantConditionOnPrerequisite@ixian_upgrade_tungstenneedleguns:
+# 		Condition: ixian_upgrade_tungstenneedleguns
+# 		Prerequisites: ixian_upgrade_tungstenneedleguns
 # 	ActorStatValues:
-# 		Upgrades: up_needleguns.ixian
+# 		Upgrades: ixian_upgrade_tungstenneedleguns
 
 # ^D2K_GeneralPurposeArmor:
-# 	DamageMultiplier@up_general_purpose_armor.ixian:
+# 	DamageMultiplier@ixian_upgrade_generalpurposearmor:
 # 		Modifier: 80
-# 		RequiresCondition: up_general_purpose_armor.ixian
-# 	GrantConditionOnPrerequisite@up_general_purpose_armor.ixian:
-# 		Condition: up_general_purpose_armor.ixian
-# 		Prerequisites: up_general_purpose_armor.ixian
+# 		RequiresCondition: ixian_upgrade_generalpurposearmor
+# 	GrantConditionOnPrerequisite@ixian_upgrade_generalpurposearmor:
+# 		Condition: ixian_upgrade_generalpurposearmor
+# 		Prerequisites: ixian_upgrade_generalpurposearmor
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor
 
 # ^D2K_AdvancedIxianTechnology:
-# 	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-# 		Condition: up_advanced_ixian_technology.ixian
-# 		Prerequisites: up_advanced_ixian_technology.ixian
+# 	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+# 		Condition: ixian_upgrade_advancedixiantechnology
+# 		Prerequisites: ixian_upgrade_advancedixiantechnology
 # 	GrantCondition@shieldpermanent:
 # 		Condition: shieldpermanent
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	Shielded:
 # 		DamageRegenDelay: 125
 # 		RegenAmount: 10
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && (up_advanced_ixian_technology.ixian || shieldgen || shielded)
+# 		RequiresCondition: !disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)
 # 	ChangesShield@shielddischarge:
 # 		Delay: 10
 # 	ActorStatValues:
-# 		Upgrades: up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_advancedixiantechnology
 # 	Armor@shielded:
 # 		Type: Shield
 # 		RequiresCondition: shielded
 
 # ^D2K_AdvancedIxianTechnologyTeamUpgrade:
-# 	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-# 		Condition: up_advanced_ixian_technology.ixian
-# 		Prerequisites: up_advanced_ixian_technology.ixian
-# 	RangeMultiplier@up_advanced_ixian_technology.ixian:
+# 	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+# 		Condition: ixian_upgrade_advancedixiantechnology
+# 		Prerequisites: ixian_upgrade_advancedixiantechnology
+# 	RangeMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 110
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 125
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	ActorStatValues:
-# 		Upgrades: up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_advancedixiantechnology
 
 # ^BulletImmune:
 	#Targetable@BulletImmune:
@@ -322,11 +322,11 @@
 # 	Crushable:
 # 		CrushSound: CRUSH1.WAV
 # 		WarnProbability: 75
-# 		RequiresCondition: !up_personal_shield.ixian
+# 		RequiresCondition: !ixian_upgrade_personalshield
 # 	Crushable@shield:
 # 		CrushSound: CRUSH1.WAV
 # 		WarnProbability: 15
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	Guard:
 # 		Voice: Guard
 # 	Guardable:
@@ -345,7 +345,7 @@
 # 		Duration: 100
 # 	AttractsWorms@personalshield:
 # 		Intensity: 1000
-# 		RequiresCondition: up_personal_shield.ixian
+# 		RequiresCondition: ixian_upgrade_personalshield
 # 	HitShape:
 # 		Type: Circle
 # 			Radius: 96
@@ -509,12 +509,12 @@
 # 		VoiceSet: D2kVehicleVoice
 # 	AutoCarryable:
 # 		CarriedCondition: notmobile
-# 		ReservedCondition: carryall-reserved
+# 		ReservedCondition: ixian_autonomouscarryall-reserved
 # 		LockedCondition: notmobile
-# 	WithDecoration@CARRYALL:
+# 	WithDecoration@ixian_autonomouscarryall:
 # 		Image: d2k_pips
 # 		Sequence: pickup-indicator
-# 		RequiresCondition: carryall-reserved
+# 		RequiresCondition: ixian_autonomouscarryall-reserved
 # 	RevealOnFire:
 # 	RevealOnDeath:
 # 		Duration: 125
@@ -875,12 +875,12 @@
 # 	FreeActor@CPQDEBUGDUMMY:
 # 		-RequiresCondition:
 
-# construction_yard.ixian:
+# ixian_constructionyard:
 # 	Inherits: ^construction_yard
 # 	Tooltip:
 # 		Name: Ixian Construction Yard
 # 	Transforms:
-# 		IntoActor: d2k_mcv.ixian
+# 		IntoActor: ixian_mobileconstructionvehicle
 # 	RenderSprites:
 # 		Image: conyard.atreides
 
@@ -957,10 +957,10 @@
 # 	RenderSprites:
 # 		Image: power.atreides
 
-# wind_trap.ixian:
+# ixian_windtrap:
 # 	Inherits: ^wind_trap
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian
+# 		Prerequisites: ~ixian_constructionyard
 # 	RenderSprites:
 # 		Image: power.atreides
 
@@ -982,7 +982,7 @@
 # 		BuildDurationModifier: 100
 # 		Description: Provides power for other structures.\nTakes a lot less space than regular Wind Trap
 # 		IconPalette: player
-# 		Prerequisites: ~construction_yard.ixian
+# 		Prerequisites: ~ixian_constructionyard
 # 	Valued:
 # 		Cost: 150
 # 	Tooltip:
@@ -1030,7 +1030,7 @@
 # 	ProvidesPrerequisite@windtrap:
 # 		Prerequisite: wind_trap
 
-# d2k_barracks.ixian:
+# ixian_barracks:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 # 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1038,7 +1038,7 @@
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^2x2Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Barracks
@@ -1261,7 +1261,7 @@
 # 	-WithDeathAnimation:
 
 # Generic spice refinery template. Common traits here; each faction actor below sets
-# its build prerequisite, its harvester.ixian/delivery actors, and its sprite image.
+# its build prerequisite, its ixian_spiceharvester/delivery actors, and its sprite image.
 # ^refinery:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -1322,37 +1322,37 @@
 # 	Buildable:
 # 		Prerequisites: ~construction_yard.atreides, wind_trap.atreides
 # 	FreeActor:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		SpawnOffset: 0,2
 # 		Facing: 160
 # 	FreeActorWithDelivery@1:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		DeliveryOffset: 2,2
 # 		DeliveringActor: carryall.reinforce
 # 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harvester.ixian
+	# 	Actor: ixian_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall.reinforce
 	# 	Facing: 160
 # 	RenderSprites:
 # 		Image: refinery.atreides
 
-# refinery.ixian:
+# ixian_refineryixian:
 # 	Inherits: ^refinery
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_windtrap
 # 	FreeActor:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		SpawnOffset: 0,2
 # 		Facing: 160
 # 	FreeActorWithDelivery@1:
-# 		Actor: harvester.ixian
+# 		Actor: ixian_spiceharvester
 # 		DeliveryOffset: 2,2
 # 		DeliveringActor: carryall.reinforce
 # 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harvester.ixian
+	# 	Actor: ixian_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall.reinforce
 	# 	Facing: 160
@@ -1429,10 +1429,10 @@
 # 	RenderSprites:
 # 		Image: silo.atreides
 
-# d2k_silo.ixian:
+# ixian_storagesilo:
 # 	Inherits: ^d2k_silo
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, refinery.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 # 	RenderSprites:
 # 		Image: silo.atreides
 
@@ -1442,12 +1442,12 @@
 # 		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 # 	RenderSprites:
 # 		Image: silo.ordos
-# d2k_munitions.ixian:
+# ixian_munitionssilo:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^1x1Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_barracks
 # 		Queue: Defence, RADefence
 # 		BuildPaletteOrder: 310
 # 		Description: actor_d2k_munitions.description
@@ -1741,7 +1741,7 @@
 # 		Description: template_factory.description
 # 		IconPalette: player
 
-# heavy_factory.ixian:
+# ixian_advancedheavyfactory:
 # 	Inherits: heavy_factory
 # 	Tooltip:
 # 		Name: Ixian Advanced Heavy Factory
@@ -1754,7 +1754,7 @@
 # 	RenderSprites:
 # 		Image: heavy.mercenary
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, refinery.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 # 		Description: template_factory.description
 # 		IconPalette: player
 # 	ProductionQueue@VEHICLE:
@@ -1775,14 +1775,14 @@
 # 		Description: template_factory.description
 # 		IconPalette: player
 
-# repair_pad.ixian:
+# ixian_repairpad:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Inherits@repair: ^RepairsUnits
 # 	Inherits@repair: ^RepairFacility
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, heavy_factory.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_advancedheavyfactory
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Repair Pad
@@ -1855,13 +1855,13 @@
 # 	ProvidesPrerequisite@repair_pad:
 # 		Prerequisite: ordos_repairpad
 
-# outpost.ixian:
+# ixian_outpost:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@radar: ^RadarBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@shape: ^3x3Shape
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, refinery.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_refineryixian
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Outpost
@@ -1964,7 +1964,7 @@
 # 			1: 3
 # 		SquadOffset: 1792,1792,0
 
-# launchpad.ixian:
+# ixian_launchpad:
 # 	Inherits: ^BaseBuilding
 # 	Inherits@shape: ^2x2Shape
 # 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -1972,7 +1972,7 @@
 # 	Tooltip:
 # 		Name: Ixian Launchpad
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 # 	Building:
 # 		BuildSounds: BUILD1.WAV
 # 		Footprint: xx xx
@@ -2069,10 +2069,10 @@
 # 	SpawnActorOnDeath@death4:
 # 		Actor: trooper
 
-# research_centre.ixian:
+# ixian_ixresearchcenter:
 # 	Inherits: ^research_centre
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 # 	RenderSprites:
 # 		Image: research.gold
 
@@ -2160,10 +2160,10 @@
 # 	SpawnActorOnDeath@death4:
 # 		Actor: trooper
 
-# high_tech_factory.ixian:
+# ixian_hightechfactory:
 # 	Inherits: ^high_tech_factory
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
 # 	RenderSprites:
 # 		Image: hightech.atreides
 
@@ -2269,10 +2269,10 @@
 # 	SpawnActorOnDeath@death2:
 # 		Actor: light_inf
 
-# starport.ixian:
+# ixian_starport:
 # 	Inherits: ^starport
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, research_centre.ixian, derricklimit
+# 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter, derricklimit
 # 	RenderSprites:
 # 		Image: starport.smuggler
 
@@ -2283,14 +2283,14 @@
 # 	RenderSprites:
 # 		Image: ordos_starport
 
-# supercomputer.ixian:
+# ixian_supercomputer:
 # 	Inherits: ^D2KBuilding
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^4x3Shape
 # 	Inherits@SW: ^PrimarySuperweapon
 # 	Buildable:
-# 		Prerequisites: ~construction_yard.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_ixresearchcenter
 # 		Description: Provides a nuclear weapon support power.
 # 		IconPalette: player
 # 	Tooltip:
@@ -2346,7 +2346,7 @@
 # 		RequiresCondition: !build-incomplete
 # 	-WithDeathAnimation:
 # 	RenderSprites:
-# 		Image: supercomputer.ixian
+# 		Image: ixian_supercomputer
 # 		Palette: td_temperat
 # 	-WithCrumbleOverlay:
 
@@ -2387,7 +2387,7 @@
 # 	Valued:
 # 		Cost: 2500
 
-# wall:
+# ixian_concretewall:
 # 	Inherits@spriteactor: ^SpriteActor
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Interactable:
@@ -2398,7 +2398,7 @@
 # 		Action: ChangeOwner
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian
+# 		Prerequisites: ~ixian_constructionyard
 # 		BuildPaletteOrder: 410
 # 		BuildDuration: 62
 # 		BuildDurationModifier: 100
@@ -2411,7 +2411,7 @@
 # 	UpdatesPlayerStatistics:
 # 		AddToAssetsValue: false
 # 	Tooltip:
-# 		Name: Concrete Wall
+# 		Name: Concrete ixian_concretewall
 # 		GenericName: Structure
 # 	AppearsOnRadar:
 # 	D2kActorPreviewPlaceBuildingPreview:
@@ -2428,14 +2428,14 @@
 # 	RevealsShroud:
 # 		Range: 1c768
 # 	Crushable:
-# 		CrushClasses: wall
+# 		CrushClasses: ixian_concretewall
 # 	BlocksProjectiles:
 # 		Height: 512
 # 	LineBuild:
 # 		Range: 5
-# 		NodeTypes: wall, turret
+# 		NodeTypes: ixian_concretewall, turret
 # 	LineBuildNode:
-# 		Types: wall
+# 		Types: ixian_concretewall
 # 	Targetable:
 # 		TargetTypes: Ground, Structure
 # 	WithWallSpriteBody:
@@ -2459,7 +2459,7 @@
 # 	Replaceable:
 # 		Types: Tower
 
-# machine_gun_turret.ixian:
+# ixian_machinegunturret:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^BasicDefenseTemplate
@@ -2472,7 +2472,7 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_barracks
 # 		BuildPaletteOrder: 550
 # 		Description: template_anti_infantry_defense.description
 # 		IconPalette: d2kunit
@@ -2500,13 +2500,13 @@
 # 		LocalOffset: 256,0,576
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: HMG_turret_upgrade
 # 		LocalOffset: 256,0,576
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Replacement:
 # 		ReplaceableTypes: Tower
 # 	WithWallSpriteBody:
@@ -2528,9 +2528,9 @@
 # 	RevealsShroud:
 # 		Range: 7394
 # 	ActorStatValues:
-# 		Upgrades: up_needleguns.ixian, up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor
 
-# medium_gun_turret.ixian:
+# ixian_gunturret:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^BasicDefenseTemplate
@@ -2547,7 +2547,7 @@
 # 		Cost: 1000
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian, d2k_barracks.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_barracks
 # 		BuildPaletteOrder: 550
 # 		Description: template_anti_vehicle_defense.description
 # 		IconPalette: d2kunit
@@ -2587,13 +2587,13 @@
 # 	SpawnActorOnDeath@death1:
 # 		Actor: light_inf
 # 	RenderSprites:
-# 		Image: medium_gun_turret.ixian
+# 		Image: ixian_gunturret
 # 	Power:
 # 		Amount: -50
 # 	RevealsShroud:
 # 		Range: 7979
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor
 
 # ordos_artilleryplatform:
 # 	Inherits: ^D2KDefense
@@ -2737,7 +2737,7 @@
 # 		Upgrades: ordos_upgrade_contraband
 
 # flame_turret:
-# 	Inherits: medium_gun_turret.ixian
+# 	Inherits: ixian_gunturret
 # 	Inherits@AntiInf: ^PrioritizeInfantry
 # 	AutoTargetPriority@INFANTRY:
 # 		Priority: 50
@@ -2757,7 +2757,7 @@
 # 	Armament:
 # 		Weapon: d2kFlameTurret
 
-# large_gun_turret.ixian:
+# ixian_rocketturret:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -2772,7 +2772,7 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~construction_yard.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_constructionyard, ixian_outpost
 # 		BuildPaletteOrder: 610
 # 		Description: actor_large_gun_turret.description
 # 		IconPalette: d2kunit
@@ -2820,7 +2820,7 @@
 # 	DetectCloaked:
 # 		Range: 5342
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor
 
 # d2k_mine_ap:
 # 	Inherits: ^D2KMine
@@ -3507,9 +3507,9 @@
 # 			2: Strike Team Paradrop II
 # 			3: Strike Team Paradrop III
 # 		Descriptions:
-# 			1: Carryall planes drops a Small Mercenary strike team\nanywhere on the map.
-# 			2: Carryall planes drops a Mercenary strike team\nanywhere on the map.
-# 			3: Carryall planes drops a Mercenary army\nanywhere on the map.
+# 			1: ixian_autonomouscarryall planes drops a Small Mercenary strike team\nanywhere on the map.
+# 			2: ixian_autonomouscarryall planes drops a Mercenary strike team\nanywhere on the map.
+# 			3: ixian_autonomouscarryall planes drops a Mercenary army\nanywhere on the map.
 # 		DropItems:
 # 			1: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper
 # 			2: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trike, trike, quad
@@ -3720,29 +3720,29 @@
 # 	Armament@PRIMARY: ##########
 # 		Weapon: LMG
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: LMG_upgrade
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Armament@GARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: LMG
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@UpgradeGARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: LMG_upgrade
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	WithInfantryBody:
 # 		IdleSequences: idle1,idle2,idle3,idle4
 # 		DefaultAttackSequence: shoot
 # 	Parachutable:
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # engineer:
 # 	Inherits: E6
@@ -3830,7 +3830,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~d2k_barracks, ~!ordos_upgrade_antiairtrooperupgrade, ~!up_twin_rocket_trooper.ixian
+# 		Prerequisites: ~d2k_barracks, ~!ordos_upgrade_antiairtrooperupgrade, ~!ixian_upgrade_twinbazookaupgrade
 # 		Description: template_antitank_antiair_infantry.description
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -3856,9 +3856,9 @@
 # 	WithInfantryBody:
 # 		DefaultAttackSequence: shoot
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
-# twin_rocket_trooper.ixian:
+# ixian_twinrockettrooper:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -3875,7 +3875,7 @@
 # 	Buildable:
 # 		Queue: Infantry, RAInfantry
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_twin_rocket_trooper.ixian
+# 		Prerequisites: ~ixian_upgrade_twinbazookaupgrade
 # 		Description: template_antitank_antiair_infantry.description
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -3907,7 +3907,7 @@
 # 	WithInfantryBody:
 # 		DefaultAttackSequence: shoot
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
 # ordos_antiairtrooper:
 # 	Inherits: ^Soldier
@@ -3958,7 +3958,7 @@
 # 	ActorStatValues:
 # 		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
-# shock_infantry.ixian:
+# ixian_shockinfantry:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^HeavyInfantryTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -3978,7 +3978,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: actor_shock_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~research_centre.ixian, ~!up_storm_infantry.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_unlockstorminfantry
 # 	Health:
 # 		HP: 36000
 # 	ChangesHealth@SelfHealing:
@@ -3993,9 +3993,9 @@
 # 		Weapon: D2K_ShockGunInf
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	WithInfantryBody:
 # 		-IdleSequences: idle1,idle2
 # 		DefaultAttackSequence: shoot
@@ -4006,7 +4006,7 @@
 # 		Image: shockgunner
 # 		PlayerPalette: player
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # ordos_chemicaltrooper:
 # 	Inherits: ^D2KInfantry
@@ -4429,7 +4429,7 @@
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShieldedSard
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 15
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 15
 
 # mpsardaukar:
 # 	Inherits: sardaukar
@@ -4509,7 +4509,7 @@
 # 	Targetable@PersonalShielded:
 # 		TargetTypes: PersonalShieldedHeavy
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 25
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 25
 
 # d2k_sardaukar_assassin:
 # 	Inherits: sardaukar
@@ -5157,7 +5157,7 @@
 # 		Modifier: 0
 # 		RequiresCondition: deployed
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 0
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 0
 
 # d2k_marksman:
 # 	Inherits: d2k_sniper
@@ -5191,7 +5191,7 @@
 # 		Modifier: 200
 # 		RequiresCondition: deployed
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 2
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 2
 
 # flamethrower:
 # 	Inherits: ^D2KInfantry
@@ -5302,7 +5302,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 0
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 0
 
 # d2k_mechanic:
 # 	Inherits: ^D2KInfantry
@@ -5363,7 +5363,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 2
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 2
 
 # bene_gesserit:
 # 	Inherits: ^D2KInfantry
@@ -5434,7 +5434,7 @@
 # 	ProducibleWithLevel:
 # 		Prerequisites: barracks.upgraded
 # 	GrantCondition@ixian_personal_shield_disabled:
-# 		RequiresCondition: up_personal_shield.ixian && SmallCaliberShieldHits > 15
+# 		RequiresCondition: ixian_upgrade_personalshield && SmallCaliberShieldHits > 15
 
 # d2k_light_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -6179,14 +6179,14 @@
 # 	ActorStatValues:
 # 		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-# d2k_mcv.ixian:
+# ixian_mobileconstructionvehicle:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^SupportVehicleTemplate
 # 	Inherits@selection: ^SelectableSupportUnit
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@mcv: ^MCV
 # 	Buildable:
-# 		Prerequisites: ~repair_pad.ixian
+# 		Prerequisites: ~ixian_repairpad
 # 		IconPalette: d2kunit
 # 	Tooltip:
 # 		Name: Ixian Mobile Construction Vehicle
@@ -6194,7 +6194,7 @@
 # 		Weapon: D2KUnitExplodeLarge
 # 		EmptyWeapon: D2KUnitExplodeLarge
 # 	Transforms:
-# 		IntoActor: construction_yard.ixian
+# 		IntoActor: ixian_constructionyard
 # 		Offset: -1,-1
 # 		TransformSounds: BUILD1.WAV
 # 		Facing: 64
@@ -6249,9 +6249,9 @@
 # 	Tooltip:
 # 		Name: Destroyed Ix Projector
 # 	TransformOnCapture:
-# 		IntoActor: jammer.ixian
+# 		IntoActor: ixian_ixprojector
 # 	InfiltrateForTransform:
-# 		IntoActor: jammer.ixian
+# 		IntoActor: ixian_ixprojector
 # 	RenderSprites:
 # 		Image: d2k_projector.husk
 
@@ -6763,7 +6763,7 @@
 # 	Aircraft:
 # 		Speed: 156
 
-# air_drone.ixian:
+# ixian_airdrone:
 # 	Inherits: ^RANeutralPlane
 # 	Inherits@reload: ^RearmableAircraft
 # 	Inherits@Template: ^BomberTemplate
@@ -6784,7 +6784,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~launchpad.ixian
+# 		Prerequisites: ~ixian_launchpad
 # 		Description: actor_air_drone.description
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -6808,7 +6808,7 @@
 # 	AttackAircraft:
 # 		FacingTolerance: 64
 # 	Armament:
-# 		Weapon: air_drone.ixian
+# 		Weapon: ixian_airdrone
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		LocalYaw: 64, -64
 # 		MuzzleSequence: muzzle
@@ -6819,14 +6819,14 @@
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 		PauseOnCondition: !ammo
 # 	Armament@Upgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 		PauseOnCondition: !ammo
 # 	Aircraft:
 # 		CruiseAltitude: 1800
@@ -6842,11 +6842,11 @@
 # 	SpawnActorOnDeath:
 # 		Actor: air_drone_husk.ixian
 # 	EjectOnDeath:
-# 		PilotActor: shock_infantry.ixian
+# 		PilotActor: ixian_shockinfantry
 # 	Voiced:
 # 		VoiceSet: D2KVehicleVoice
 # 	RenderSprites:
-# 		Image: air_drone.ixian
+# 		Image: ixian_airdrone
 # 	MapEditorData:
 # 		Categories: Aircraft
 # 	FireProjectilesOnDeath:
@@ -6858,7 +6858,7 @@
 # 		UncloakSound: trans1.aud
 # 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_needleguns.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
 
 # air_drone_husk.ixian:
 # 	Inherits: ^PlaneHusk
@@ -6868,7 +6868,7 @@
 # 		TurnSpeed: 8
 # 		Speed: 165
 # 	RenderSprites:
-# 		Image: air_drone.ixian
+# 		Image: ixian_airdrone
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeSmall
 
@@ -7188,7 +7188,7 @@
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 
-# harvester.ixian:
+# ixian_spiceharvester:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^HarvesterTemplate
 # 	Inherits@selection: ^SelectableEconomicUnit
@@ -7197,7 +7197,7 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~spice_refinery, ~heavy_factory.ixian
+# 		Prerequisites: ~spice_refinery, ~ixian_advancedheavyfactory
 # 		BuildPaletteOrder: 10
 # 		Description: template_harvester.description
 # 		IconPalette: d2kunit
@@ -7226,7 +7226,7 @@
 # 	Shielded:
 # 		RegenAmount: 160
 # 	Cloak:
-# 		RequiresCondition: !disabled && (stealthed || up_advanced_ixian_technology.ixian || shieldgen || shielded)
+# 		RequiresCondition: !disabled && (stealthed || ixian_upgrade_advancedixiantechnology || shieldgen || shielded)
 # 	Mobile:
 # 		Speed: 45
 # 		TurnSpeed: 9
@@ -7246,7 +7246,7 @@
 # 	Voiced:
 # 		VoiceSet: D2KHarvester
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # ordos_spiceharvester:
 # 	Inherits@D2KT: ^D2KTank
@@ -7908,12 +7908,12 @@
 # 		EffectiveOwnerFromOwner: true
 # 	AttractsWorms:
 # 		Intensity: 600
-# 	GrantConditionOnPrerequisite@up_siege_range.ixian:
-# 		Condition: up_siege_range.ixian
-# 		Prerequisites: up_siege_range.ixian
-# 	RangeMultiplier@up_siege_range.ixian:
+# 	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
+# 		Condition: ixian_upgrade_reinforcedbarrel
+# 		Prerequisites: ixian_upgrade_reinforcedbarrel
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 150
-# 		RequiresCondition: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
 # 	Voiced:
 # 		VoiceSet: D2KSiegeTank
 
@@ -8121,7 +8121,7 @@
 # 	ActorStatValues:
 # 		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-# siege_tank.ixian:
+# ixian_ixsiegetank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^ArtilleryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -8138,7 +8138,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 50
-# 		Prerequisites: ~up_siegetank.ixian, outpost.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixsiegetank, ixian_outpost
 # 		Description: actor_siege_tank.description
 # 		IconPalette: ra2
 # 	Health:
@@ -8185,19 +8185,19 @@
 # 		ResetOnFire: true
 # 	AttractsWorms:
 # 		Intensity: 600
-# 	FirepowerMultiplier@up_siege_range.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 150
-# 		RequiresCondition: up_siege_range.ixian
-# 	RangeMultiplier@up_siege_range.ixian:
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 125
-# 		RequiresCondition: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
 # 	Voiced:
 # 		VoiceSet: D2KSiegeTank
 # 	Cloak:
 # 		CloakSound: trans1.aud
 # 		UncloakSound: appear1.aud
 # 		UncloakOn: Attack, Damage
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
 # 		Image: ix_siege_tank
 # 		PlayerPalette: player
@@ -8205,7 +8205,7 @@
 # 		Offset: 128, 128, 0
 # 		ZOffset: -512
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # duelist_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -8223,7 +8223,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 40
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~research_centre.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter
 # 		Description: actor_duelist_tank.description
 # 	Valued:
 # 		Cost: 1800
@@ -8259,17 +8259,17 @@
 # 		LocalOffset: 128,-128,128, 128,128,128
 # 		MuzzleSequence: muzzle2
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: HMG_Duelist_upgrade
 # 		LocalOffset: 128,-128,128, 128,128,128
 # 		MuzzleSequence: muzzle2
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	FirepowerMultiplier@DualWeapon:
 # 		Modifier: 50
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel
 # 	AttackTurreted:
 # 	WithMuzzleOverlay:
 # 	WithSpriteTurret:
@@ -8281,14 +8281,14 @@
 # 	Cloak@TDcloak:
 # 	Voiced:
 # 		VoiceSet: D2KDuelistTank
-# 	RangeMultiplier@up_needleguns.ixian:
+# 	RangeMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 105
-# 	FirepowerMultiplier@up_needleguns.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_tungstenneedleguns:
 # 		Modifier: 110
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# missile_tank.ixian:
+# ixian_ixmissiletank:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -8306,7 +8306,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~research_centre.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter
 # 		BuildPaletteOrder: 60
 # 		Description: actor_missile_tank.description
 # 		IconPalette: d2kunit
@@ -8359,7 +8359,7 @@
 # 		UncloakOn: Attack, infiltrate, damage
 # 		IsPlayerPalette: true
 # 		CloakedCondition: cloaked
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	ReloadAmmoDelayMultiplier@RANK-1:
 # 		RequiresCondition: rank-veteran == 1
 # 		Modifier: 95
@@ -8376,7 +8376,7 @@
 # 		Image: ix_missile_tank
 # 		PlayerPalette: player
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
 # missile_tank:
 # 	Inherits@D2KT: ^D2KTank
@@ -9129,7 +9129,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~heavy_factory.ixian, ~!up_raider.ixian
+# 		Prerequisites: ~ixian_advancedheavyfactory, ~!ixian_promotion_unlockheavyixraider
 # 		Description: actor_rocket_raider.description
 # 	Tooltip:
 # 		Name: Ix Raider
@@ -9194,17 +9194,17 @@
 # 		Types: Infantry, Hacker, Fremen
 # 		MaxWeight: 5
 # 		InitialUnits: light_inf, light_inf, trooper, trooper, trooper
-		#InitialUnits: light_inf, trooper, shock_infantry.ixian
+		#InitialUnits: light_inf, trooper, ixian_shockinfantry
 # 		LoadingCondition: notmobile
 # 	WithCargoPipsDecoration:
 # 		Position: BottomLeft
 # 		RequiresSelection: true
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
 # 		Image: ordos_raider
 
-# shock_raider.ixian:
+# ixian_shockraider:
 # 	Inherits@D2KV: ^D2KVehicle
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -9221,7 +9221,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~research_centre.ixian, ~!up_stormraider.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, ~!ixian_promotion_unlockstormraider
 # 		Description: actor_shock_raider.description
 # 		IconPalette: player
 # 	Valued:
@@ -9249,9 +9249,9 @@
 # 	Armament@damage:
 # 		Weapon: D2K_ShockGun
 # 		LocalOffset: 170,0,0
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	AttackFrontal:
 # 		FacingTolerance: 0
 # 	FireWarheadsOnDeath:
@@ -9268,7 +9268,7 @@
 # 	RenderSprites:
 # 		Image: ordos_stealthraider
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # ordos_deviatorartillery:
 # 	Inherits@D2KT: ^D2KTank
@@ -9385,7 +9385,7 @@
 # 	Armament:
 # 		Weapon: 80mm_A
 
-# mongoose.ixian:
+# ixian_mongoose:
 # 	Inherits: ^Vehicle
 # 	Inherits@Template: ^MainBattleTankTemplate
 # 	Inherits@exp: ^GainsExperienceTD
@@ -9400,7 +9400,7 @@
 # 		Bounds: 1280, 1280
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~heavy_factory.ixian
+# 		Prerequisites: ~ixian_advancedheavyfactory
 # 		BuildPaletteOrder: 30
 # 	Mobile:
 # 		Speed: 75
@@ -9799,7 +9799,7 @@
 # 		BuildPaletteOrder: 40
 # 		Description: template_mbt.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~heavy_factory.ixian, ~!d2k_duelist_tank_upgrade
+# 		Prerequisites: ~ixian_advancedheavyfactory, ~!d2k_duelist_tank_upgrade
 # 	Valued:
 # 		Cost: 800
 # 	Tooltip:
@@ -9839,7 +9839,7 @@
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # combat_tank_corrino:
 # 	Inherits: combat_tank.harkonnen
@@ -10035,7 +10035,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@selection: ^SelectableEconomicUnit
 # 	Tooltip:
-# 		Name: Autonomous Carryall
+# 		Name: Autonomous ixian_autonomouscarryall
 # 	Valued:
 # 		Cost: 5000
 # 	Health:
@@ -10060,12 +10060,12 @@
 # 	SpawnActorOnDeath@LANDING:
 # 		Actor: carryall.huskVTOL
 # 		RequiresCondition: !cruising
-# 	Carryall:
+# 	ixian_autonomouscarryall:
 # 		BeforeLoadDelay: 10
 # 		BeforeUnloadDelay: 15
 # 		LocalOffset: 0, 0, -128
 # 	RenderSprites:
-# 		Image: carryall
+# 		Image: ixian_autonomouscarryall
 # 	ChangesHealth:
 # 		Step: 50
 # 		Delay: 3
@@ -10096,13 +10096,13 @@
 # 		Pieces: 3, 6
 # 		Range: 1c512, 2c512
 
-# carryall:
+# ixian_autonomouscarryall:
 # 	Inherits: carryall.reinforce
 # 	Health:
 # 		HP: 200000
 # 	Valued:
 # 		Cost: 2000
-# 	-Carryall:
+# 	-ixian_autonomouscarryall:
 # 	AutoCarryall:
 # 		BeforeLoadDelay: 10
 # 		BeforeUnloadDelay: 15
@@ -10120,7 +10120,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 120
-# 		Prerequisites: ~high_tech_factory.ixian
+# 		Prerequisites: ~ixian_hightechfactory
 
 # carryall.paradrop:
 # 	Inherits: carryall.reinforce
@@ -10135,7 +10135,7 @@
 # 	Inherits: carryall.reinforce
 # 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	SpawnActorOnDeath@CRUISING:
 # 		Actor: carryall_husk.ordos
 # 		RequiresCondition: cruising
@@ -10152,14 +10152,14 @@
 # 		LocalOffset: 128,-213,-85, 128,213,-85
 
 # ordos_advancedcarryall:
-# 	Inherits: carryall
+# 	Inherits: ixian_autonomouscarryall
 # 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 120
 # 		Prerequisites: ~ordos_hightechfactory
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	SpawnActorOnDeath@CRUISING:
 # 		Actor: carryall_husk.ordos
 # 		RequiresCondition: cruising
@@ -10239,21 +10239,21 @@
 # carryall.husk:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Carryall
+# 		Name: ixian_autonomouscarryall
 # 	Aircraft:
 # 		TurnSpeed: 16
 # 		Speed: 144
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: carryall
+# 		Image: ixian_autonomouscarryall
 # 		PlayerPalette: playerd2k
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 # carryall.huskVTOL:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Carryall
+# 		Name: ixian_autonomouscarryall
 # 	FallsToEarth:
 # 		Moves: False
 # 		Velocity: 0c128
@@ -10262,14 +10262,14 @@
 # 		CanSlide: True
 # 		VTOL: true
 # 	RenderSprites:
-# 		Image: carryall
+# 		Image: ixian_autonomouscarryall
 # 		PlayerPalette: playerd2k
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
 # carryall_husk.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	Aircraft:
 # 		TurnSpeed: 16
 # 		Speed: 144
@@ -10283,7 +10283,7 @@
 # carryall_huskvtol.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Advanced Carryall
+# 		Name: Advanced ixian_autonomouscarryall
 # 	FallsToEarth:
 # 		Moves: False
 # 		Velocity: 0c128
@@ -10610,19 +10610,19 @@
 
 #   Ixian Upgrades
 
-# up_twin_rocket_trooper.ixian:
+# ixian_upgrade_twinbazookaupgrade:
 # 	Inherits: ^unit_upgrade_template
 # 	Tooltip:
 # 		Name: Twin Bazooka Upgrade
 # 	Buildable:
 # 		Queue: Upgrades
 # 		Description: Upgrades Rocket Troopers with Twin Rocket Troopers
-# 		Prerequisites: ~outpost.ixian, !up_twin_rocket_trooper.ixian
-		# Prerequisites: ~outpost.d2k, !up_twin_rocket_trooper.ixian
+# 		Prerequisites: ~ixian_outpost, !ixian_upgrade_twinbazookaupgrade
+		# Prerequisites: ~outpost.d2k, !ixian_upgrade_twinbazookaupgrade
 # 	RenderSprites:
-# 		Image: up_twin_rocket_trooper.ixian
+# 		Image: ixian_upgrade_twinbazookaupgrade
 
-# up_needleguns.ixian:
+# ixian_upgrade_tungstenneedleguns:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Tungsten Needle Guns
@@ -10630,14 +10630,14 @@
 # 		Cost: 5000
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~outpost.ixian, !up_needleguns.ixian
+# 		Prerequisites: ~ixian_outpost, !ixian_upgrade_tungstenneedleguns
 # 		Queue: Upgrades
 # 		Description: upgrade_d2k_upgrade_needleguns.description
 # 		IconPalette: d2kunit
 # 	RenderSprites:
-# 		Image: up_needleguns.ixian
+# 		Image: ixian_upgrade_tungstenneedleguns
 
-# up_personal_shield.ixian:
+# ixian_upgrade_personalshield:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Personal Shield
@@ -10647,12 +10647,12 @@
 # 		BuildPaletteOrder: 200
 # 		Queue: Upgrades
 # 		Description: upgrade_personal_shield.description
-# 		Prerequisites: ~outpost.ixian, !up_personal_shield.ixian
+# 		Prerequisites: ~ixian_outpost, !ixian_upgrade_personalshield
 # 		IconPalette: ra2
 # 	RenderSprites:
 # 		Image: ixian_personal_shield_icon
 
-# up_general_purpose_armor.ixian:
+# ixian_upgrade_generalpurposearmor:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: General Purpose Armor
@@ -10660,14 +10660,14 @@
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~research_centre.ixian, !up_general_purpose_armor.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_generalpurposearmor
 # 		Queue: Research
 # 		Description: upgrade_d2k_general_purpose_armor.description
 # 		IconPalette: d2kunit
 # 	RenderSprites:
 # 		Image: combat_tank.ixian
 
-# up_siege_range.ixian:
+# ixian_upgrade_reinforcedbarrel:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Reinforced Barrel
@@ -10675,13 +10675,13 @@
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~research_centre.ixian, !up_siege_range.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_reinforcedbarrel
 # 		Queue: Research
 # 		Description: upgrade_d2k_siege_range_upgrade.description
 # 	RenderSprites:
 # 		Image: d2k_siege_tank_higher_range
 
-# up_heavy_missile.ixian:
+# ixian_upgrade_heavymissiles:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Heavy Missiles
@@ -10689,13 +10689,13 @@
 # 		Cost: 7500
 # 	Buildable:
 # 		BuildPaletteOrder: 200
-# 		Prerequisites: ~research_centre.ixian, !up_heavy_missile.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, !ixian_upgrade_heavymissiles
 # 		Queue: Research
 # 		Description: upgrade_d2k_heavy_missile_upgrade.description
 # 	RenderSprites:
 # 		Image: ix_missile_tank
 
-# up_advanced_ixian_technology.ixian:
+# ixian_upgrade_advancedixiantechnology:
 # 	Inherits: ^upgrade.template
 # 	Tooltip:
 # 		Name: Advanced Ixian Technology
@@ -10705,9 +10705,9 @@
 # 		BuildPaletteOrder: 200
 # 		Queue: Research
 # 		Description: upgrade_d2k_advanced_ixian_technology.description
-# 		Prerequisites: ~research_centre.ixian, up_personal_shield.ixian, !up_advanced_ixian_technology.ixian
+# 		Prerequisites: ~ixian_ixresearchcenter, ixian_upgrade_personalshield, !ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 	#ProvidesPrerequisite:
 # 	ProvidesTeamProxyActor:
 # 		Actor: team_upgrade.d2k_advanced_ixian_technology
@@ -10715,13 +10715,13 @@
 # team_upgrade.d2k_advanced_ixian_technology:
 # 	Inherits: ^researched_upgrade.template
 # 	ProvidesPrerequisite:
-# 		Prerequisite: up_advanced_ixian_technology.ixian
+# 		Prerequisite: ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 # 	Tooltip:
 # 		Name: Advanced Ixian Technology
 # 	Buildable:
-# 		Description: upgrade_d2k_advanced_ixian_technology.description, ~research_centre.ixian
+# 		Description: upgrade_d2k_advanced_ixian_technology.description, ~ixian_ixresearchcenter
 # 	PlayerDisplayUpgrade:
 
 #   Ordos Upgrades
@@ -10888,7 +10888,7 @@
 # 	Tooltip:
 # 		Name: Spice Harvester (Destroyed)
 # 	TransformOnCapture:
-# 		IntoActor: harvester.ixian
+# 		IntoActor: ixian_spiceharvester
 
 # siege_tank.husk:
 # 	Inherits: ^D2KVehicleHusk
@@ -12474,7 +12474,7 @@
 ##############################################
 #                Upgrade Ix
 ##############################################
-# up_heavy_inf.ixian:
+# ixian_promotion_unlockrashidan:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Rashidan
@@ -12483,12 +12483,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Allows training of Rashidans.
-# 		Prerequisites: ~construction_yard.ixian, !up_heavy_inf.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockrashidan, rank1
 # 	RenderSprites:
 # 		Image: heavy_inf
 # 	ProvidesPrerequisite:
 
-# up_storm_infantry.ixian:
+# ixian_promotion_unlockstorminfantry:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Infantry
@@ -12497,12 +12497,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Allows training of Storm Infantry.
-# 		Prerequisites: ~construction_yard.ixian, !up_storm_infantry.ixian, up_heavy_inf.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstorminfantry, ixian_promotion_unlockrashidan, rank1
 # 	RenderSprites:
-# 		Image: storm_infantry.ixian
+# 		Image: ixian_storminfantry
 # 	ProvidesPrerequisite:
 
-# up_stormraider.ixian:
+# ixian_promotion_unlockstormraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Raider
@@ -12511,12 +12511,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Storm Raiders.
-# 		Prerequisites: ~construction_yard.ixian, !up_stormraider.ixian, up_storm_infantry.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormraider, ixian_promotion_unlockstorminfantry, rank1
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 # 	ProvidesPrerequisite:
 
-# up_stormlasher.ixian:
+# ixian_promotion_unlockstormlasher:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Storm Lasher
@@ -12525,14 +12525,14 @@
 # 		Queue: Promotions
 # 		IconPalette: player
 # 		Description: Enables construction of Storm Lashers.
-# 		Prerequisites: ~construction_yard.ixian, !up_stormlasher.ixian, up_stormraider.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockstormlasher, ixian_promotion_unlockstormraider, rank1
 # 	RenderSprites:
-# 		Image: storm_lasher.ixian
+# 		Image: ixian_stormlasher
 # 	ProvidesPrerequisite:
 
 	### Military tree
 
-# up_raider.ixian:
+# ixian_promotion_unlockheavyixraider:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Heavy Ix Raider
@@ -12541,12 +12541,12 @@
 # 		Queue: Promotions
 		#IconPalette: d2kunit
 # 		Description: Enables construction of Ix Raiders.
-# 		Prerequisites: ~construction_yard.ixian, !up_raider.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockheavyixraider, rank1
 # 	RenderSprites:
-# 		Image: shock_raider.ixian
+# 		Image: ixian_shockraider
 # 	ProvidesPrerequisite:
 
-# up_siegetank.ixian:
+# ixian_promotion_unlockixsiegetank:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Siege Tank
@@ -12555,12 +12555,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Ix Siege Tanks.
-# 		Prerequisites: ~construction_yard.ixian, up_raider.ixian, !up_siegetank.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockheavyixraider, !ixian_promotion_unlockixsiegetank, rank1
 # 	RenderSprites:
 # 		Image: ix_siege_tank
 # 	ProvidesPrerequisite:
 
-# up_neocymek.ixian:
+# ixian_promotion_unlockneocymek:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Neo Cymek
@@ -12569,12 +12569,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of Neo Cymeks.
-# 		Prerequisites: ~construction_yard.ixian, up_siegetank.ixian, !up_neocymek.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixsiegetank, !ixian_promotion_unlockneocymek, rank1
 # 	RenderSprites:
-# 		Image: neocymek.ixian
+# 		Image: ixian_neocymek
 # 	ProvidesPrerequisite:
 
-# up_projector.ixian:
+# ixian_promotion_unlockixprojector:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Projector
@@ -12583,14 +12583,14 @@
 # 		Queue: Promotions
 # 		IconPalette: windows256
 # 		Description: Enables construction of the Ix Projector.
-# 		Prerequisites: ~construction_yard.ixian, up_neocymek.ixian, !up_projector.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockneocymek, !ixian_promotion_unlockixprojector, rank1
 # 	RenderSprites:
 # 		Image: d2k_projector
 # 	ProvidesPrerequisite:
 
 	### Support tree
 
-# up_drone.ixian:
+# ixian_promotion_unlockixrailgundrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Railgun Drone
@@ -12598,12 +12598,12 @@
 # 		BuildPaletteOrder: 111
 # 		Queue: Promotions
 # 		Description: Enables construction of Ix Railgun Drones.
-# 		Prerequisites: ~construction_yard.ixian, !up_drone.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, !ixian_promotion_unlockixrailgundrone, rank1
 # 	RenderSprites:
-# 		Image: drone.ixian
+# 		Image: ixian_railgundrone
 # 	ProvidesPrerequisite:
 
-# up_bomber.ixian:
+# ixian_promotion_unlockixianempbomber:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ixian EMP Bomber
@@ -12612,12 +12612,12 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of Ixian EMP Bombers.
-# 		Prerequisites: ~construction_yard.ixian, up_drone.ixian, !up_bomber.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixrailgundrone, !ixian_promotion_unlockixianempbomber, rank1
 # 	RenderSprites:
-# 		Image: bomber.ixian
+# 		Image: ixian_empbomber
 # 	ProvidesPrerequisite:
 
-# up_resonance_drone.ixian:
+# ixian_promotion_unlockixresonancedrone:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Ix Resonance Drone
@@ -12626,12 +12626,12 @@
 # 		Queue: Promotions
 # 		IconPalette: d2kunit
 # 		Description: Enables construction of  Ix Resonance Drones.
-# 		Prerequisites: ~construction_yard.ixian, up_bomber.ixian, !up_resonance_drone.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixianempbomber, !ixian_promotion_unlockixresonancedrone, rank1
 # 	RenderSprites:
-# 		Image: resonance_drone.ixian
+# 		Image: ixian_resonancedrone
 # 	ProvidesPrerequisite:
 
-# up_farasha.ixian:
+# ixian_promotion_unlockfarasha:
 # 	Inherits: ^promotion_upgrade.template
 # 	Tooltip:
 # 		Name: Unlock Farasha
@@ -12640,9 +12640,9 @@
 # 		Queue: Promotions
 # 		IconPalette: ra2
 # 		Description: Enables construction of the Farasha.
-# 		Prerequisites: ~construction_yard.ixian, up_resonance_drone.ixian, !up_farasha.ixian, rank1
+# 		Prerequisites: ~ixian_constructionyard, ixian_promotion_unlockixresonancedrone, !ixian_promotion_unlockfarasha, rank1
 # 	RenderSprites:
-# 		Image: farasha.ixian
+# 		Image: ixian_farasha
 # 	ProvidesPrerequisite:
 
 	####################################################################################################
@@ -12846,7 +12846,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: template_scout_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~up_heavy_inf.ixian
+# 		Prerequisites: ~ixian_promotion_unlockrashidan
 # 	Mobile:
 # 		Speed: 50
 # 	Health:
@@ -12856,24 +12856,24 @@
 # 	Armament@PRIMARY: ##########
 # 		Weapon: RashinanGun
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	Armament@Upgrade: ##########
 # 		Weapon: RashinanGun_upgrade
 # 		LocalOffset: 128,0,256
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	Armament@GARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: RashinanGun
 # 		MuzzleSequence: garrison-muzzle
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	Armament@UpgradeGARRISONED: ##########
 # 		Name: garrisoned
 # 		Weapon: RashinanGun_upgrade
 # 		MuzzleSequence: garrison-muzzle
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 		MuzzlePalette: d2keffect
 # 	WithInfantryBody:
 # 		IdleSequences: idle1,idle2,idle3,idle4,idle5,idle6,idle7,idle8
@@ -12886,9 +12886,9 @@
 # 	WithDeathAnimation:
 # 		DeathSequencePalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# storm_infantry.ixian:
+# ixian_storminfantry:
 # 	Inherits: ^D2KInfantry
 # 	Inherits@Template: ^HeavyInfantryTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -12909,7 +12909,7 @@
 # 		Queue: Infantry, RAInfantry
 # 		Description: actor_shock_infantry.description
 # 		IconPalette: d2kunit
-# 		Prerequisites: ~up_storm_infantry.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockstorminfantry, ixian_ixresearchcenter
 # 	Mobile:
 # 		Speed: 44
 # 	Health:
@@ -12924,9 +12924,9 @@
 # 		Weapon: D2K_StormGunInf
 # 		MuzzleSequence: garrison-muzzle
 # 		MuzzlePalette: d2keffect
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	WithInfantryBody:
 # 		-IdleSequences: idle1,idle2
 # 		DefaultAttackSequence: shoot
@@ -12936,9 +12936,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player
 # 	ActorStatValues:
-# 		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# storm_raider.ixian:
+# ixian_stormraider:
 # 	Inherits@D2KV: ^D2KVehicle
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -12956,7 +12956,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~up_stormraider.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockstormraider, ixian_ixresearchcenter
 # 		Description: actor_shock_raider.description
 # 		IconPalette: player
 # 	Valued:
@@ -12991,9 +12991,9 @@
 # 		LocalOffset: -300,0,300
 # 	FirepowerMultiplier@StormEffect:
 # 		Modifier: 50
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	FireWarheadsOnDeath:
 # 		Weapon: D2KUnitExplodeSmall
 # 		EmptyWeapon: D2KUnitExplodeSmall
@@ -13007,12 +13007,12 @@
 # 	Voiced:
 # 		VoiceSet: D2KShockRaider
 # 	RenderSprites:
-# 		Image: storm_raider.ixian
+# 		Image: ixian_stormraider
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# storm_lasher.ixian:
+# ixian_stormlasher:
 # 	Inherits: ^D2KDefense
 # 	Inherits@exp: ^GainsExperienceRABuilding
 # 	Inherits@selection: ^AdvancedDefenseTemplate
@@ -13026,7 +13026,7 @@
 # 	Inherits@IxianTechnology: ^D2K_AdvancedIxianTechnology
 # 	Buildable:
 # 		Queue: Defence, RADefence
-# 		Prerequisites: ~up_stormlasher.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockstormlasher, ixian_ixresearchcenter
 # 		BuildPaletteOrder: 750
 # 		Description: actor_storm_lasher.description
 # 		IconPalette: player
@@ -13041,9 +13041,9 @@
 # 		HP: 200000
 # 	Shielded:
 # 		RegenAmount: 160
-# 	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 # 		Modifier: 200
-# 		RequiresCondition: up_advanced_ixian_technology.ixian
+# 		RequiresCondition: ixian_upgrade_advancedixiantechnology
 # 	BodyOrientation:
 # 		QuantizedFacings: 32
 # 	WithMuzzleOverlay:
@@ -13092,7 +13092,7 @@
 # 	DetectCloaked:
 # 		Range: 5692
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 
 	### Armor Tree
@@ -13118,7 +13118,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~up_raider.ixian
+# 		Prerequisites: ~ixian_promotion_unlockheavyixraider
 # 		Description: actor_rocket_raider.description
 # 	Tooltip:
 # 		Name: Heavy Ix Raider
@@ -13175,13 +13175,13 @@
 # 		LocalOffset: 256,0,256
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: RaiderGuns_upgrade
 # 		LocalOffset: 256,0,256
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	FirepowerMultiplier@DualWeapon:
 # 		Modifier: 50
 # 	ReloadAmmoDelayMultiplier@RANK-1:
@@ -13202,15 +13202,15 @@
 # 	Cargo:
 # 		Types: Infantry, Hacker, Fremen
 # 		MaxWeight: 5
-# 		InitialUnits: heavy_inf, heavy_inf, heavy_inf, twin_rocket_trooper.ixian, shock_infantry.ixian
+# 		InitialUnits: heavy_inf, heavy_inf, heavy_inf, ixian_twinrockettrooper, ixian_shockinfantry
 # 		LoadingCondition: notmobile
 # 	WithCargoPipsDecoration:
 # 		Position: BottomLeft
 # 		RequiresSelection: true
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# combat_siege_tank.ixian:
+# ixian_ixcombatsiege:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^FireSupportTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -13226,7 +13226,7 @@
 # 		BuildPaletteOrder: 40
 # 		IconPalette: d2kunit
 # 		Description: actor_siege_tank.description
-# 		Prerequisites: ~outpost.ixian
+# 		Prerequisites: ~ixian_outpost
 # 	Valued:
 # 		Cost: 1200
 # 	Tooltip:
@@ -13256,14 +13256,14 @@
 # 		LocalOffset: 256,0,320
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
-# 	FirepowerMultiplier@up_siege_range.ixian:
+# 	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 200
-# 		RequiresCondition: up_siege_range.ixian
-# 	RangeMultiplier@up_siege_range.ixian:
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
+# 	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 # 		Modifier: 150
-# 		RequiresCondition: up_siege_range.ixian
+# 		RequiresCondition: ixian_upgrade_reinforcedbarrel
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel
 # 	AttackTurreted:
 # 	WithMuzzleOverlay:
 # 	WithSpriteTurret:
@@ -13276,9 +13276,9 @@
 # 	Voiced:
 # 		VoiceSet: D2KCombatTank
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# neocymek.ixian:
+# ixian_neocymek:
 # 	Inherits: ^Vehicle
 # 	Inherits@Template: ^LineBreakerTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -13297,7 +13297,7 @@
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_neocymek.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockneocymek, ixian_ixresearchcenter
 # 		Description: Colossal Ixian Mech.
 # 	Mobile:
 # 		Speed: 45
@@ -13370,9 +13370,9 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
-# jammer.ixian:
+# ixian_ixprojector:
 # 	Inherits@D2KT: ^D2KTank
 # 	Inherits@Template: ^EpicVehicleTemplate
 # 	Inherits@exp: ^GainsExperienceRA
@@ -13392,7 +13392,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildLimit: 1
 # 		BuildPaletteOrder: 60
-# 		Prerequisites: ~up_projector.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixprojector, ixian_ixresearchcenter
 # 		Description: actor_ixprojector.description
 # 		IconPalette: windows256
 # 	Health:
@@ -13479,7 +13479,7 @@
 # 		FollowAfterAttackDelay: 25
 # 		ShouldSpawnInitialLoad: false
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # ^D2KVordelProxyUnit:
 # 	GrantConditionOnPowerState@LOWPOWER:
@@ -13601,7 +13601,7 @@
 # 		Queue: Vehicle, RAVehicle
 # 		BuildLimit: 1
 # 		BuildPaletteOrder: 90
-# 		Prerequisites: ~upixians_quaketank, research_centre.ixian
+# 		Prerequisites: ~upixians_quaketank, ixian_ixresearchcenter
 # 		Description: actor_quake_tank.description
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -13622,7 +13622,7 @@
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && up_advanced_ixian_technology.ixian
+# 		RequiresCondition: !disabled && ixian_upgrade_advancedixiantechnology
 # 	Mobile:
 # 		Speed: 50
 # 		TurnSpeed: 10
@@ -13641,7 +13641,7 @@
 # 		ThumpInterval: 25
 # 		ChargeDelay: 125
 # 		DetonationDelay: 25
-# 		DriverActor: shock_infantry.ixian
+# 		DriverActor: ixian_shockinfantry
 # 		DeployedCondition: deployed
 # 		DetonationWeapon: d2k_quake_boom
 # 		ThumpDamageWeapon: d2k_quake_thump
@@ -13672,11 +13672,11 @@
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 	### Artillery and Air Tree
 
-# drone.ixian:
+# ixian_railgundrone:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^HelicopterTemplate
 # 	Inherits@exp: ^GainsExperienceTD
@@ -13700,7 +13700,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_drone.ixian, high_tech_factory.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixrailgundrone, ixian_hightechfactory
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13743,7 +13743,7 @@
 # 		UncloakOn: Attack, Damage
 # 		CloakStyle: Alpha
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	WithAttackAnimation:
 # 		Sequence: shoot
 # 	RenderSprites:
@@ -13757,7 +13757,7 @@
 # 		TurnSpeed: 16
 # 		Speed: 186
 # 	RenderSprites:
-# 		Image: drone.ixian
+# 		Image: ixian_railgundrone
 # 		PlayerPalette: player_rgba
 
 # d2k_heavy_air_drone:
@@ -13781,7 +13781,7 @@
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~upixians_airdrone, outpost.ixian
+# 		Prerequisites: ~upixians_airdrone, ixian_outpost
 # 		Description: actor_air_drone.description
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -13798,7 +13798,7 @@
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && up_advanced_ixian_technology.ixian
+# 		RequiresCondition: !disabled && ixian_upgrade_advancedixiantechnology
 # 	AmmoPool:
 # 		Name: primary
 # 		Ammo: 8
@@ -13827,28 +13827,28 @@
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@SECONDARY: ##########
 # 		Weapon: d2k_air_drone_guns
 # 		LocalOffset: 0,256,0, 0,-256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Armament@SECONDARYUpgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,256,0, 0,-256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Aircraft:
 # 		CruiseAltitude: 1800
 # 		Speed: 165
@@ -13859,12 +13859,12 @@
 # 		TurnSpeed: 11
 # 	WithFacingSpriteBody:
 # 	Selectable:
-# 		Class: air_drone.ixian
+# 		Class: ixian_airdrone
 # 		Bounds: 1536, 1280, 0, 0
 # 	SpawnActorOnDeath:
 # 		Actor: d2k_heavy_air_drone.husk
 # 	EjectOnDeath:
-# 		PilotActor: storm_infantry.ixian
+# 		PilotActor: ixian_storminfantry
 # 	Voiced:
 # 		VoiceSet: D2KVehicleVoice
 # 	RenderSprites:
@@ -13882,7 +13882,7 @@
 # 		UncloakSound: appear1.aud
 # 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_needleguns.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
 
 # d2k_heavy_air_drone.husk:
 # 	Inherits: air_drone_husk.ixian
@@ -13897,7 +13897,7 @@
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeMed
 
-# bomber.ixian:
+# ixian_empbomber:
 # 	Inherits: ^RANeutralPlane
 # 	Inherits@reload: ^RearmableAircraft
 # 	Inherits@Template: ^BomberTemplate
@@ -13916,7 +13916,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_bomber.ixian, launchpad.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixianempbomber, ixian_launchpad, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -13956,7 +13956,7 @@
 # 		UncloakOn: Attack, Damage
 # 		CloakStyle: Alpha
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 
@@ -13968,10 +13968,10 @@
 # 		TurnSpeed: 16
 # 		Speed: 186
 # 	RenderSprites:
-# 		Image: bomber.ixian
+# 		Image: ixian_empbomber
 # 		PlayerPalette: player_rgba
 
-# resonance_drone.ixian:
+# ixian_resonancedrone:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^HelicopterTemplate
 # 	Inherits@exp: ^GainsExperienceTD
@@ -13993,7 +13993,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~up_resonance_drone.ixian, high_tech_factory.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockixresonancedrone, ixian_hightechfactory, ixian_ixresearchcenter
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_venom.description
 # 	Aircraft:
@@ -14018,7 +14018,7 @@
 # 		Type: heal
 # 		Color: 55BBFF
 # 		RequiresCondition: !disabled
-# 	WithDecoration@CARRYALL:
+# 	WithDecoration@ixian_autonomouscarryall:
 # 		Image: d2k_pips
 # 		Sequence: pickup-indicator
 # 		ValidRelationships: Ally, Enemy, Neutral
@@ -14059,7 +14059,7 @@
 # 		UncloakOn: Attack, Damage
 # 		CloakStyle: Alpha
 # 	ActorStatValues:
-# 		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 # 	WithAttackAnimation:
 # 		Sequence: shoot
 # 	RenderSprites:
@@ -14073,10 +14073,10 @@
 # 		TurnSpeed: 16
 # 		Speed: 186
 # 	RenderSprites:
-# 		Image: resonance_drone.ixian
+# 		Image: ixian_resonancedrone
 # 		PlayerPalette: player_rgba
 
-# farasha.ixian:
+# ixian_farasha:
 # 	Inherits: ^Helicopter
 # 	Inherits@Template: ^SpaceshipTemplate
 # 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -14098,7 +14098,7 @@
 # 		AddToArmyValue: true
 # 	Buildable:
 # 		BuildPaletteOrder: 180
-# 		Prerequisites: ~up_farasha.ixian, high_tech_factory.ixian, research_centre.ixian
+# 		Prerequisites: ~ixian_promotion_unlockfarasha, ixian_hightechfactory, ixian_ixresearchcenter
 # 		BuildLimit: 1
 # 		Queue: Aircraft, RAAircraft
 # 		Description: actor_farasha.description
@@ -14137,7 +14137,7 @@
 # 		PauseOnCondition: discharged
 # 	Armament:
 # 		Name: secondary
-# 		Weapon: farasha.ixian
+# 		Weapon: ixian_farasha
 # 		LocalOffset: 1500,0,-250
 # 		PauseOnCondition: !charged
 # 		ReloadingCondition: discharged
@@ -14196,7 +14196,7 @@
 # 	RenderSprites:
 # 		PlayerPalette: player_rgba
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # farasha_husk.ixian:
 # 	Inherits: ^PlaneHusk
@@ -14206,7 +14206,7 @@
 # 		TurnSpeed: 15
 # 		Speed: 40
 # 	RenderSprites:
-# 		Image: farasha.ixian
+# 		Image: ixian_farasha
 # 		PlayerPalette: player_rgba
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeLarge
@@ -14267,7 +14267,7 @@
 # 		Pieces: 1, 2
 # 		Range: 1c0, 3c0
 # 	ActorStatValues:
-# 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 # d2k_farasha_drone.husk:
 # 	Inherits: ^PlaneHusk

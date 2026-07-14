@@ -2894,13 +2894,13 @@ wc2_human_cannon_tower:
 # 	RenderSprites:
 
 wc2_human_wall:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 300
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: Wall
+		Name: ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~wc2_human_townhall

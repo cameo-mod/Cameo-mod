@@ -2970,7 +2970,7 @@ RA2PortaTesla3:
 TeslaFragmentWeak:
 	Inherits: ^TeslaWeapon
 	Range: 1555
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -2983,7 +2983,7 @@ TeslaFragmentWeak:
 TeslaFragment:
 	Inherits: ^TeslaWeapon
 	Range: 2074
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 8000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -2996,7 +2996,7 @@ TeslaFragment:
 TeslaFragment2:
 	Inherits: ^TeslaWeapon
 	Range: 3111
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 12000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -3049,7 +3049,7 @@ RA2TankBolt3:
 TeslaTankFragment:
 	Inherits: ^TeslaWeapon
 	Range: 2500
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 4000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -3062,7 +3062,7 @@ TeslaTankFragment:
 TeslaTankFragment2:
 	Inherits: ^TeslaWeapon
 	Range: 3750
-	ValidTargets: Infantry, Vehicle, Ship, Structure, Wall
+	ValidTargets: Infantry, Vehicle, Ship, Structure, ixian_concretewall
 	Warhead@TeslaWeapon: SpreadDamage
 		Damage: 6000
 	Warhead@TeslaExtraDamage: SpreadDamage
@@ -3175,28 +3175,28 @@ IonPulseDischarge:
 		Duration: 10
 		Delay: 1
 		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Warhead@Condition2: GrantExternalCondition
 		Condition: CommandoDebuff
 		Range: 8000
 		Duration: 20
 		Delay: 2
 		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Warhead@Condition3: GrantExternalCondition
 		Condition: CommandoDebuff
 		Range: 6000
 		Duration: 30
 		Delay: 3
 		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 	Warhead@Condition4: GrantExternalCondition
 		Condition: CommandoDebuff
 		Range: 4000
 		Duration: 40
 		Delay: 4
 		ValidRelationships: Enemy, Neutral
-		ValidTargets: Ground, Water, Structure, Wall
+		ValidTargets: Ground, Water, Structure, ixian_concretewall
 
 
 ####################################################################################################
@@ -3485,7 +3485,7 @@ RA2PSIAtomicDamage:
 		Delay: 50
 	Warhead@2Smu_areanuke: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall
+		InvalidTargets: Vehicle, Structure, ixian_concretewall
 		Size: 5
 		AirThreshold: 11c0
 		Delay: 60
@@ -5007,7 +5007,7 @@ RA2CosmonautLaser:
 	Warhead@Smudge: LeaveSmudge
 		SmudgeType: Scorch
 		Chance: 15
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 	-Warhead@EffectWater:
 
 RA220mmrapid:
@@ -5040,7 +5040,7 @@ RA2Mutate:
 		Spread: 4c0
 		Damage: 300
 		ValidTargets: Infantry
-		InvalidTargets: Vehicle, Structure, Wall, Husk, TerrorDrone, Hero, MCImmune
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, TerrorDrone, Hero, MCImmune
 		AffectsParent: True
 		DamageTypes: BruteMutate
 	Warhead@Effect: CreateEffect
@@ -5137,7 +5137,7 @@ RA2Terrorist:
 		DamageTypes: Prone75Percent, TriggerProne, DefaultDeath
 	Warhead@Smu: LeaveSmudge
 		SmudgeType: Crater
-		InvalidTargets: Structure, Wall
+		InvalidTargets: Structure, ixian_concretewall
 
 RA2Atomic:
 	Inherits: Atomic
@@ -5338,7 +5338,7 @@ LightningBolt:
 		ValidTargets: Ground, Air, Water
 	Warhead@6Eff: LeaveSmudge
 		SmudgeType: Scorch
-		InvalidTargets: Vehicle, Structure, Wall, Husk, Creep
+		InvalidTargets: Vehicle, Structure, ixian_concretewall, Husk, Creep
 
 psireveal:
 	Range: 1024
@@ -5538,7 +5538,7 @@ BorisAKM:
 	Inherits: ^RA2Chaingun
 	Report: iboratta.wav, iborattb.wav
 	ValidTargets: Ground, Water
-	InvalidTargets: Structure, Bridge, Wall
+	InvalidTargets: Structure, Bridge, ixian_concretewall
 	Range: 8167
 	ReloadDelay: 18
 	Burst: 4
@@ -5563,12 +5563,12 @@ BorisAKME:
 
 BorisAKM2:
 	Inherits: BorisAKM
-	ValidTargets: Structure, Bridge, Wall
+	ValidTargets: Structure, Bridge, ixian_concretewall
 	-InvalidTargets:
 	Range: 9167
 
 MigTarget:
-	ValidTargets: Structure, Bridge, Wall
+	ValidTargets: Structure, Bridge, ixian_concretewall
 	Range: 9167
 	Burst: 3
 	BurstDelays: 15

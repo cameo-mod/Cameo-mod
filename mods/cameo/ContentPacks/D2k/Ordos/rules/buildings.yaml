@@ -28,7 +28,7 @@ ordos_windtrap:
 # 		BuildDurationModifier: 100
 # 		Description: Provides power for other structures.\nTakes a lot less space than regular Wind Trap
 # 		IconPalette: player
-# 		Prerequisites: ~construction_yard.ixian
+# 		Prerequisites: ~ixian_constructionyard
 # 	Valued:
 # 		Cost: 150
 # 	Tooltip:
@@ -261,7 +261,7 @@ ordos_barracks:
 # 	-WithDeathAnimation:
 
 # Generic spice refinery template. Common traits here; each faction actor below sets
-# its build prerequisite, its harvester.ixian/delivery actors, and its sprite image.
+# its build prerequisite, its ixian_spiceharvester/delivery actors, and its sprite image.
 
 ordos_refineryordos:
 	Inherits: ^refinery
@@ -601,7 +601,7 @@ ordos_autogunturret:
 		Upgrades: ordos_upgrade_contraband, ordos_upgrade_rapidfirearmorpiercingbelts
 
 # flame_turret:
-# 	Inherits: medium_gun_turret.ixian
+# 	Inherits: ixian_gunturret
 # 	Inherits@AntiInf: ^PrioritizeInfantry
 # 	AutoTargetPriority@INFANTRY:
 # 		Priority: 50
@@ -965,9 +965,9 @@ ordos_palace:
 # 			2: Strike Team Paradrop II
 # 			3: Strike Team Paradrop III
 # 		Descriptions:
-# 			1: Carryall planes drops a Small Mercenary strike team\nanywhere on the map.
-# 			2: Carryall planes drops a Mercenary strike team\nanywhere on the map.
-# 			3: Carryall planes drops a Mercenary army\nanywhere on the map.
+# 			1: ixian_autonomouscarryall planes drops a Small Mercenary strike team\nanywhere on the map.
+# 			2: ixian_autonomouscarryall planes drops a Mercenary strike team\nanywhere on the map.
+# 			3: ixian_autonomouscarryall planes drops a Mercenary army\nanywhere on the map.
 # 		DropItems:
 # 			1: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper
 # 			2: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trike, trike, quad

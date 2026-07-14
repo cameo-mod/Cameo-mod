@@ -1,4 +1,4 @@
-air_drone.ixian:
+ixian_airdrone:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -19,7 +19,7 @@ air_drone.ixian:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 10
-		Prerequisites: ~launchpad.ixian
+		Prerequisites: ~ixian_launchpad
 		Description: actor_air_drone.description
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
@@ -43,7 +43,7 @@ air_drone.ixian:
 	AttackAircraft:
 		FacingTolerance: 64
 	Armament:
-		Weapon: air_drone.ixian
+		Weapon: ixian_airdrone
 		LocalOffset: 0,-256,0, 0,256,0
 		LocalYaw: 64, -64
 		MuzzleSequence: muzzle
@@ -54,14 +54,14 @@ air_drone.ixian:
 		LocalOffset: 0,-256,0, 0,256,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 		PauseOnCondition: !ammo
 	Armament@Upgrade: ##########
 		Weapon: d2k_air_drone_guns_upgrade
 		LocalOffset: 0,-256,0, 0,256,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 		PauseOnCondition: !ammo
 	Aircraft:
 		CruiseAltitude: 1800
@@ -77,11 +77,11 @@ air_drone.ixian:
 	SpawnActorOnDeath:
 		Actor: air_drone_husk.ixian
 	EjectOnDeath:
-		PilotActor: shock_infantry.ixian
+		PilotActor: ixian_shockinfantry
 	Voiced:
 		VoiceSet: D2KVehicleVoice
 	RenderSprites:
-		Image: air_drone.ixian
+		Image: ixian_airdrone
 	MapEditorData:
 		Categories: Aircraft
 	FireProjectilesOnDeath:
@@ -93,7 +93,7 @@ air_drone.ixian:
 		UncloakSound: trans1.aud
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 	ActorStatValues:
-		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_needleguns.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
 
 air_drone_husk.ixian:
 	Inherits: ^PlaneHusk
@@ -103,7 +103,7 @@ air_drone_husk.ixian:
 		TurnSpeed: 8
 		Speed: 165
 	RenderSprites:
-		Image: air_drone.ixian
+		Image: ixian_airdrone
 	FallsToEarth:
 		Explosion: D2KUnitExplodeSmall
 
@@ -175,7 +175,7 @@ air_drone_husk.ixian:
 # 		Pieces: 2, 3
 # 		Range: 2c0, 4c0
 
-drone.ixian:
+ixian_railgundrone:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -199,7 +199,7 @@ drone.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: up_drone.ixian, ~high_tech_factory.ixian
+		Prerequisites: ixian_promotion_unlockixrailgundrone, ~ixian_hightechfactory
 		Queue: Aircraft, RAAircraft
 		Description: actor_venom.description
 	Aircraft:
@@ -242,7 +242,7 @@ drone.ixian:
 		UncloakOn: Attack, Damage
 		CloakStyle: Alpha
 	ActorStatValues:
-		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 	WithAttackAnimation:
 		Sequence: shoot
 	RenderSprites:
@@ -256,7 +256,7 @@ drone_husk.ixian:
 		TurnSpeed: 16
 		Speed: 186
 	RenderSprites:
-		Image: drone.ixian
+		Image: ixian_railgundrone
 		PlayerPalette: player_rgba
 
 # d2k_heavy_air_drone:
@@ -280,7 +280,7 @@ drone_husk.ixian:
 # 	Buildable:
 # 		Queue: Aircraft, RAAircraft
 # 		BuildPaletteOrder: 10
-# 		Prerequisites: ~upixians_airdrone, outpost.ixian
+# 		Prerequisites: ~upixians_airdrone, ixian_outpost
 # 		Description: actor_air_drone.description
 # 		IconPalette: windows256
 # 	UpdatesPlayerStatistics:
@@ -297,7 +297,7 @@ drone_husk.ixian:
 # 		RegenInterval: 1
 # 		ShieldsUpCondition: shielded
 # 		SelectionBarColor: 8888FFFF
-# 		RequiresCondition: !disabled && up_advanced_ixian_technology.ixian
+# 		RequiresCondition: !disabled && ixian_upgrade_advancedixiantechnology
 # 	AmmoPool:
 # 		Name: primary
 # 		Ammo: 8
@@ -326,28 +326,28 @@ drone_husk.ixian:
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@SECONDARY: ##########
 # 		Weapon: d2k_air_drone_guns
 # 		LocalOffset: 0,256,0, 0,-256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: !up_needleguns.ixian
+# 		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 # 	Armament@Upgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,-256,0, 0,256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Armament@SECONDARYUpgrade: ##########
 # 		Weapon: d2k_air_drone_guns_upgrade
 # 		LocalOffset: 0,256,0, 0,-256,0
 # 		MuzzleSequence: muzzle
 # 		MuzzlePalette: d2keffect
 # 		AmmoUsage: 0
-# 		RequiresCondition: up_needleguns.ixian
+# 		RequiresCondition: ixian_upgrade_tungstenneedleguns
 # 	Aircraft:
 # 		CruiseAltitude: 1800
 # 		Speed: 165
@@ -358,12 +358,12 @@ drone_husk.ixian:
 # 		TurnSpeed: 11
 # 	WithFacingSpriteBody:
 # 	Selectable:
-# 		Class: air_drone.ixian
+# 		Class: ixian_airdrone
 # 		Bounds: 1536, 1280, 0, 0
 # 	SpawnActorOnDeath:
 # 		Actor: d2k_heavy_air_drone.husk
 # 	EjectOnDeath:
-# 		PilotActor: storm_infantry.ixian
+# 		PilotActor: ixian_storminfantry
 # 	Voiced:
 # 		VoiceSet: D2KVehicleVoice
 # 	RenderSprites:
@@ -381,7 +381,7 @@ drone_husk.ixian:
 # 		UncloakSound: appear1.aud
 # 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 # 	ActorStatValues:
-# 		Upgrades: up_heavy_missile.ixian, up_general_purpose_armor.ixian, up_needleguns.ixian, up_advanced_ixian_technology.ixian
+# 		Upgrades: ixian_upgrade_heavymissiles, ixian_upgrade_generalpurposearmor, ixian_upgrade_tungstenneedleguns, ixian_upgrade_advancedixiantechnology
 
 # d2k_heavy_air_drone.husk:
 # 	Inherits: air_drone_husk.ixian
@@ -396,7 +396,7 @@ drone_husk.ixian:
 # 	FallsToEarth:
 # 		Explosion: D2KUnitExplodeMed
 
-bomber.ixian:
+ixian_empbomber:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -415,7 +415,7 @@ bomber.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: up_bomber.ixian, ~launchpad.ixian, research_centre.ixian
+		Prerequisites: ixian_promotion_unlockixianempbomber, ~ixian_launchpad, ixian_ixresearchcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_venom.description
 	Aircraft:
@@ -455,11 +455,11 @@ bomber.ixian:
 		UncloakOn: Attack, Damage
 		CloakStyle: Alpha
 	ActorStatValues:
-		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-resonance_drone.ixian:
+ixian_resonancedrone:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -481,7 +481,7 @@ resonance_drone.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: up_resonance_drone.ixian, ~high_tech_factory.ixian, research_centre.ixian
+		Prerequisites: ixian_promotion_unlockixresonancedrone, ~ixian_hightechfactory, ixian_ixresearchcenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_venom.description
 	Aircraft:
@@ -506,7 +506,7 @@ resonance_drone.ixian:
 		Type: heal
 		Color: 55BBFF
 		RequiresCondition: !disabled
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		ValidRelationships: Ally, Enemy, Neutral
@@ -547,7 +547,7 @@ resonance_drone.ixian:
 		UncloakOn: Attack, Damage
 		CloakStyle: Alpha
 	ActorStatValues:
-		Upgrades: up_siege_range.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_reinforcedbarrel, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 	WithAttackAnimation:
 		Sequence: shoot
 	RenderSprites:
@@ -561,10 +561,10 @@ resonance_drone_husk.ixian:
 		TurnSpeed: 16
 		Speed: 186
 	RenderSprites:
-		Image: resonance_drone.ixian
+		Image: ixian_resonancedrone
 		PlayerPalette: player_rgba
 
-farasha.ixian:
+ixian_farasha:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -586,7 +586,7 @@ farasha.ixian:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 180
-		Prerequisites: up_farasha.ixian, ~high_tech_factory.ixian, research_centre.ixian
+		Prerequisites: ixian_promotion_unlockfarasha, ~ixian_hightechfactory, ixian_ixresearchcenter
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor_farasha.description
@@ -625,7 +625,7 @@ farasha.ixian:
 		PauseOnCondition: discharged
 	Armament:
 		Name: secondary
-		Weapon: farasha.ixian
+		Weapon: ixian_farasha
 		LocalOffset: 1500,0,-250
 		PauseOnCondition: !charged
 		ReloadingCondition: discharged
@@ -684,7 +684,7 @@ farasha.ixian:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 farasha_husk.ixian:
 	Inherits: ^PlaneHusk
@@ -694,7 +694,7 @@ farasha_husk.ixian:
 		TurnSpeed: 15
 		Speed: 40
 	RenderSprites:
-		Image: farasha.ixian
+		Image: ixian_farasha
 		PlayerPalette: player_rgba
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
@@ -707,7 +707,7 @@ heavydrone_husk.ixian:
 		TurnSpeed: 16
 		Speed: 186
 	RenderSprites:
-		Image: bomber.ixian
+		Image: ixian_empbomber
 		PlayerPalette: player_rgba
 
 farasha_drone.ixian:
@@ -766,7 +766,7 @@ farasha_drone.ixian:
 		Pieces: 1, 2
 		Range: 1c0, 3c0
 	ActorStatValues:
-		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 farasha_drone_husk.ixian:
 	Inherits: ^PlaneHusk

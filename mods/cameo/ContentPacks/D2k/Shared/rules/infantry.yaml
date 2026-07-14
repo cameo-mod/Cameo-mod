@@ -33,29 +33,29 @@ light_inf:
 	Armament@PRIMARY: ##########
 		Weapon: LMG
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@Upgrade: ##########
 		Weapon: LMG_upgrade
 		LocalOffset: 128,0,256
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: LMG
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: !up_needleguns.ixian
+		RequiresCondition: !ixian_upgrade_tungstenneedleguns
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: LMG_upgrade
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 		DefaultAttackSequence: shoot
 	Parachutable:
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_needleguns.ixian, up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_tungstenneedleguns, ixian_upgrade_generalpurposearmor, ixian_upgrade_advancedixiantechnology
 
 trooper:
 	Inherits: ^D2KInfantry
@@ -75,7 +75,7 @@ trooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks, ~!ordos_upgrade_antiairtrooperupgrade, ~!up_twin_rocket_trooper.ixian, ~!faction.ordos, ~!faction.ixian
+		Prerequisites: ~d2k_barracks, ~!ordos_upgrade_antiairtrooperupgrade, ~!ixian_upgrade_twinbazookaupgrade, ~!faction.ordos, ~!faction.ixian
 		Description: template_antitank_antiair_infantry.description
 		IconPalette: d2kunit
 	Valued:
@@ -101,7 +101,7 @@ trooper:
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian, up_general_purpose_armor.ixian, up_heavy_missile.ixian, up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_personalshield, ixian_upgrade_generalpurposearmor, ixian_upgrade_heavymissiles, ixian_upgrade_advancedixiantechnology
 
 fremen_creep:
 	Inherits: ^D2KInfantry

@@ -23,17 +23,17 @@
 		DamageRegenDelay: 125
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
-		RequiresCondition: !disabled && (up_personal_shield.ixian || shieldgen || shielded)
+		RequiresCondition: !disabled && (ixian_upgrade_personalshield || shieldgen || shielded)
 		SelectionBarColor: 8888FFFF
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
-		RequiresCondition: up_personal_shield.ixian
+		RequiresCondition: ixian_upgrade_personalshield
 	ChangesShield@personal_shield:
 		Step: 40
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 125
-		RequiresCondition: up_personal_shield.ixian
+		RequiresCondition: ixian_upgrade_personalshield
 	Armor:
 		RequiresCondition: !shielded
 	Armor@shielded:
@@ -42,107 +42,107 @@
 	Targetable@PersonalShielded:
 		TargetTypes: PersonalShielded
 		RequiresCondition: shielded
-	DamageMultiplier@up_advanced_ixian_technology.ixian:
+	DamageMultiplier@ixian_upgrade_advancedixiantechnology:
 		Modifier: 50
-		RequiresCondition: up_personal_shield.ixian && up_advanced_ixian_technology.ixian && shielded
-	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-		Condition: up_advanced_ixian_technology.ixian
-		Prerequisites: up_advanced_ixian_technology.ixian
-	DamageMultiplier@up_personal_shield.ixian:
+		RequiresCondition: ixian_upgrade_personalshield && ixian_upgrade_advancedixiantechnology && shielded
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	DamageMultiplier@ixian_upgrade_personalshield:
 		Modifier: 80
-		RequiresCondition: up_personal_shield.ixian && !shielded
-	SpeedMultiplier@up_personal_shield.ixian:
+		RequiresCondition: ixian_upgrade_personalshield && !shielded
+	SpeedMultiplier@ixian_upgrade_personalshield:
 		Modifier: 125
-		RequiresCondition: up_personal_shield.ixian && shielded
-	GrantConditionOnPrerequisite@up_personal_shield.ixian:
-		Condition: up_personal_shield.ixian
-		Prerequisites: up_personal_shield.ixian
+		RequiresCondition: ixian_upgrade_personalshield && shielded
+	GrantConditionOnPrerequisite@ixian_upgrade_personalshield:
+		Condition: ixian_upgrade_personalshield
+		Prerequisites: ixian_upgrade_personalshield
 	ActorStatValues:
-		Upgrades: up_personal_shield.ixian
+		Upgrades: ixian_upgrade_personalshield
 
 ^D2K_HeavyMissilesUpgrade:
-	RangeMultiplier@up_heavy_missile.ixian:
+	RangeMultiplier@ixian_upgrade_heavymissiles:
 		Modifier: 120
-		RequiresCondition: up_heavy_missile.ixian
-	FirepowerMultiplier@up_heavy_missile.ixian:
+		RequiresCondition: ixian_upgrade_heavymissiles
+	FirepowerMultiplier@ixian_upgrade_heavymissiles:
 		Modifier: 120
-		RequiresCondition: up_heavy_missile.ixian
-	GrantConditionOnPrerequisite@up_heavy_missile.ixian:
-		Condition: up_heavy_missile.ixian
-		Prerequisites: up_heavy_missile.ixian
+		RequiresCondition: ixian_upgrade_heavymissiles
+	GrantConditionOnPrerequisite@ixian_upgrade_heavymissiles:
+		Condition: ixian_upgrade_heavymissiles
+		Prerequisites: ixian_upgrade_heavymissiles
 	ActorStatValues:
-		Upgrades: up_heavy_missile.ixian
+		Upgrades: ixian_upgrade_heavymissiles
 
 ^D2K_ReinforcedBarrel:
-	RangeMultiplier@up_siege_range.ixian:
+	RangeMultiplier@ixian_upgrade_reinforcedbarrel:
 		Modifier: 110
-		RequiresCondition: up_siege_range.ixian
-	FirepowerMultiplier@up_siege_range.ixian:
+		RequiresCondition: ixian_upgrade_reinforcedbarrel
+	FirepowerMultiplier@ixian_upgrade_reinforcedbarrel:
 		Modifier: 125
-		RequiresCondition: up_siege_range.ixian
-	GrantConditionOnPrerequisite@up_siege_range.ixian:
-		Condition: up_siege_range.ixian
-		Prerequisites: up_siege_range.ixian
+		RequiresCondition: ixian_upgrade_reinforcedbarrel
+	GrantConditionOnPrerequisite@ixian_upgrade_reinforcedbarrel:
+		Condition: ixian_upgrade_reinforcedbarrel
+		Prerequisites: ixian_upgrade_reinforcedbarrel
 	ActorStatValues:
-		Upgrades: up_siege_range.ixian
+		Upgrades: ixian_upgrade_reinforcedbarrel
 
 ^D2K_NeedleGuns:
-	RangeMultiplier@up_needleguns.ixian:
+	RangeMultiplier@ixian_upgrade_tungstenneedleguns:
 		Modifier: 110
-		RequiresCondition: up_needleguns.ixian
-	FirepowerMultiplier@up_needleguns.ixian:
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	FirepowerMultiplier@ixian_upgrade_tungstenneedleguns:
 		Modifier: 125
-		RequiresCondition: up_needleguns.ixian
-	GrantConditionOnPrerequisite@up_needleguns.ixian:
-		Condition: up_needleguns.ixian
-		Prerequisites: up_needleguns.ixian
+		RequiresCondition: ixian_upgrade_tungstenneedleguns
+	GrantConditionOnPrerequisite@ixian_upgrade_tungstenneedleguns:
+		Condition: ixian_upgrade_tungstenneedleguns
+		Prerequisites: ixian_upgrade_tungstenneedleguns
 	ActorStatValues:
-		Upgrades: up_needleguns.ixian
+		Upgrades: ixian_upgrade_tungstenneedleguns
 
 ^D2K_GeneralPurposeArmor:
-	DamageMultiplier@up_general_purpose_armor.ixian:
+	DamageMultiplier@ixian_upgrade_generalpurposearmor:
 		Modifier: 80
-		RequiresCondition: up_general_purpose_armor.ixian
-	GrantConditionOnPrerequisite@up_general_purpose_armor.ixian:
-		Condition: up_general_purpose_armor.ixian
-		Prerequisites: up_general_purpose_armor.ixian
+		RequiresCondition: ixian_upgrade_generalpurposearmor
+	GrantConditionOnPrerequisite@ixian_upgrade_generalpurposearmor:
+		Condition: ixian_upgrade_generalpurposearmor
+		Prerequisites: ixian_upgrade_generalpurposearmor
 	ActorStatValues:
-		Upgrades: up_general_purpose_armor.ixian
+		Upgrades: ixian_upgrade_generalpurposearmor
 
 ^D2K_AdvancedIxianTechnology:
-	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-		Condition: up_advanced_ixian_technology.ixian
-		Prerequisites: up_advanced_ixian_technology.ixian
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
-		RequiresCondition: up_advanced_ixian_technology.ixian
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
 	Shielded:
 		DamageRegenDelay: 125
 		RegenAmount: 10
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
 		SelectionBarColor: 8888FFFF
-		RequiresCondition: !disabled && (up_advanced_ixian_technology.ixian || shieldgen || shielded)
+		RequiresCondition: !disabled && (ixian_upgrade_advancedixiantechnology || shieldgen || shielded)
 	ChangesShield@shielddischarge:
 		Delay: 10
 	ActorStatValues:
-		Upgrades: up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_advancedixiantechnology
 	Armor@shielded:
 		Type: Shield
 		RequiresCondition: shielded
 
 ^D2K_AdvancedIxianTechnologyTeamUpgrade:
-	GrantConditionOnPrerequisite@up_advanced_ixian_technology.ixian:
-		Condition: up_advanced_ixian_technology.ixian
-		Prerequisites: up_advanced_ixian_technology.ixian
-	RangeMultiplier@up_advanced_ixian_technology.ixian:
+	GrantConditionOnPrerequisite@ixian_upgrade_advancedixiantechnology:
+		Condition: ixian_upgrade_advancedixiantechnology
+		Prerequisites: ixian_upgrade_advancedixiantechnology
+	RangeMultiplier@ixian_upgrade_advancedixiantechnology:
 		Modifier: 110
-		RequiresCondition: up_advanced_ixian_technology.ixian
-	FirepowerMultiplier@up_advanced_ixian_technology.ixian:
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
+	FirepowerMultiplier@ixian_upgrade_advancedixiantechnology:
 		Modifier: 125
-		RequiresCondition: up_advanced_ixian_technology.ixian
+		RequiresCondition: ixian_upgrade_advancedixiantechnology
 	ActorStatValues:
-		Upgrades: up_advanced_ixian_technology.ixian
+		Upgrades: ixian_upgrade_advancedixiantechnology
 
 ^BulletImmune:
 	#Targetable@BulletImmune:
@@ -203,11 +203,11 @@
 	Crushable:
 		CrushSound: CRUSH1.WAV
 		WarnProbability: 75
-		RequiresCondition: !up_personal_shield.ixian
+		RequiresCondition: !ixian_upgrade_personalshield
 	Crushable@shield:
 		CrushSound: CRUSH1.WAV
 		WarnProbability: 15
-		RequiresCondition: up_personal_shield.ixian
+		RequiresCondition: ixian_upgrade_personalshield
 	Guard:
 		Voice: Guard
 	Guardable:
@@ -226,7 +226,7 @@
 		Duration: 100
 	AttractsWorms@personalshield:
 		Intensity: 1000
-		RequiresCondition: up_personal_shield.ixian
+		RequiresCondition: ixian_upgrade_personalshield
 	HitShape:
 		Type: Circle
 			Radius: 96
@@ -392,7 +392,7 @@
 		CarriedCondition: notmobile
 		ReservedCondition: carryall-reserved
 		LockedCondition: notmobile
-	WithDecoration@CARRYALL:
+	WithDecoration@Carryall:
 		Image: d2k_pips
 		Sequence: pickup-indicator
 		RequiresCondition: carryall-reserved

@@ -4857,13 +4857,13 @@ awcityids:
 #	AW Defence
 ########################################################            
 awpipe:
-	Inherits: ^Wall
+	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 150
 	CustomSellValue:
 		Value: 0
 	Tooltip:
-		Name: Wall Pipe
+		Name: ixian_concretewall Pipe
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: vehicleproduction
@@ -12068,7 +12068,7 @@ awuptiberium:
 awupwall:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Durable Wall Research
+		Name: Durable ixian_concretewall Research
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research

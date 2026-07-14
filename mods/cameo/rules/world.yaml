@@ -232,7 +232,7 @@
 			Rails: 80
 	Locomotor@LIGHTTRACKED:
 		Name: lighttracked
-		Crushes: wall, mine, crate
+		Crushes: ixian_concretewall, mine, crate
 		TerrainSpeeds:
 			Clear: 80
 			ClearTemperat: 80 ##########
@@ -269,7 +269,7 @@
 			Rails: 80
 	Locomotor@TRACKED:
 		Name: tracked
-		Crushes: wall, crate, infantry, mine
+		Crushes: ixian_concretewall, crate, infantry, mine
 		TerrainSpeeds:
 			Clear: 80
 			ClearTemperat: 80 ##########
@@ -306,7 +306,7 @@
 			Rails: 80
 	Locomotor@HEAVYTRACKED:
 		Name: heavytracked
-		Crushes: wall, heavywall, crate, infantry, mine, vehicle
+		Crushes: ixian_concretewall, heavywall, crate, infantry, mine, vehicle
 		TerrainSpeeds:
 			Clear: 80
 			ClearTemperat: 80 ##########
@@ -394,7 +394,7 @@
 		TerrainSpeeds:
 	Locomotor@HOVERS:
 		Name: hover
-		Crushes: wall, crate, mine
+		Crushes: ixian_concretewall, crate, mine
 		TerrainSpeeds:
 			Clear: 90
 			ClearTemperat: 90 ##########
@@ -454,7 +454,7 @@
 			Cliff: 100
 			Ice: 100
 			Tree: 100
-			Wall: 100
+			ixian_concretewall: 100
 			ClearNoSmudges: 100
 			RoughDune: 100
 			Tiberium: 100
@@ -483,7 +483,7 @@
 			Rails: 100
 	Locomotor@AMPHIBIUS:
 		Name: amphibius
-		Crushes: wall, crate, infantry, mine
+		Crushes: ixian_concretewall, crate, infantry, mine
 		TerrainSpeeds:
 			Clear: 80
 			ClearTemperat: 80 ##########
@@ -522,7 +522,7 @@
 			Rails: 80
 	SubterraneanLocomotor@SUBTERRANEAN:
 		Name: subterranean
-		Crushes: wall, crate, infantry
+		Crushes: ixian_concretewall, crate, infantry
 		TerrainSpeeds:
 			Clear: 80
 				PathingCost: 150

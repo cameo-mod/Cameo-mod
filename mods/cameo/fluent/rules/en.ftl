@@ -1188,7 +1188,7 @@ actor_forgotten_mobileconstructionvehicle =
       Unarmed
 
 actor_forgotten_carryall =
-   .name = Carryall
+   .name = ixian_autonomouscarryall
    .description = VTOL crane that lifts and ferries vehicles.
       Unarmed
 
@@ -1312,8 +1312,8 @@ actor_forgotten_brokenrattytankturret =
       Weak vs Infantry, Aircraft
 
 actor_forgotten_juggerflakwall =
-   .name = Juggerflak Wall
-   .description = Wall-mounted Juggernaut flak battery.
+   .name = Juggerflak ixian_concretewall
+   .description = ixian_concretewall-mounted Juggernaut flak battery.
       Cannot engage ground targets.
       Strong vs Aircraft
 
