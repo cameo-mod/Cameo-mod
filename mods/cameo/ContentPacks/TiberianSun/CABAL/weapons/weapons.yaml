@@ -1754,8 +1754,8 @@ CabalOverkillCharge:
 
 CabalOverkillGunshipLaser:
 	Inherits: ^LaserWeapon
-	ReloadDelay: 80
-	Range: 10000
+	ReloadDelay: 40
+	Range: 6000
 	Projectile: LaserZap
 		Width: 80
 		ZOffset: 2047
@@ -1766,7 +1766,7 @@ CabalOverkillGunshipLaser:
 		SecondaryBeamColor: 2A2A55DD
 		TrackTarget: false
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 5000
+		Damage: 12500
 		Spread: 256
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage

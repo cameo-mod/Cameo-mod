@@ -7,7 +7,7 @@ cabal_overkill_gunship:
 	Inherits@reload: ^RearmableAircraft
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Valued:
-		Cost: 1750
+		Cost: 1000
 	Tooltip:
 		Name: Overkill Gunship
 	Selectable:
@@ -331,8 +331,9 @@ cabal_cyborg_assassin:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_cyborg_assassin.description
 	Aircraft:
-		TurnSpeed: 30
-		Speed: 150
+		TurnSpeed: 36
+		Speed: 180
+		Voice: Move
 	Health:
 		HP: 30000
 	ChangesHealth@SelfHealing:
@@ -342,13 +343,27 @@ cabal_cyborg_assassin:
 		LocalOffset: 512,-512,512, 512,512,512
 		FireDelay: 10
 	AttackAircraft:
+		Voice: Attack
 		FacingTolerance: 10
 		AttackType: Hover
 	Voiced:
 		VoiceSet: TSCobra
+	QuantizeFacingsFromSequence:
+		Sequence: stand
+	WithInfantryBody@Air:
+		StandSequences: flying
+		MoveSequence: flying
+		DefaultAttackSequence: flying-attack
+		IdleSequences: flying
+		RequiresCondition: airborne
 	WithInfantryBody:
-		IdleSequences: idle2
-	-SpawnActorOnDeath:
+		IdleSequences: idle1, idle2
+		DefaultAttackSequence: attack
+		RequiresCondition: !airborne
+	Selectable:
+		Bounds: 512, 768
+	SpawnActorOnDeath:
+		Actor: cabal_cyborg_assassin_husk
 	RenderSprites:
 		Image: cabal_cyborg_assassin
 		PlayerPalette: player_rgba

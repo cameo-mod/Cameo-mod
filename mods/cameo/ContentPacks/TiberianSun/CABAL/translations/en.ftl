@@ -359,7 +359,7 @@ actor-cabal_techcenter =
 
 actor_cabal_overkill_gunship =
    .name = Overkill Gunship
-   .description = Long-range laser artillery gunship.
+   .description = Twin laser gunship with heavy side-mounted cannons.
       Strong vs Vehicles, Buildings
       Weak vs Infantry, Aircraft
 

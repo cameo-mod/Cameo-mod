@@ -49,3 +49,14 @@ cabal_hunterkillermk1_husk:
 		Type: GroundPosition
 	RenderSprites:
 		Image: cabal_hunterkillermk1
+
+cabal_cyborg_assassin_husk:
+	Inherits: ^HelicopterHusk
+	Tooltip:
+		Name: Cyborg Assassin
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RenderSprites:
+		Image: cabal_cyborg_assassin
+		PlayerPalette: player_rgba
