@@ -265,6 +265,8 @@ d2k_barracks.ordos:
 
 refinery.ordos:
 	Inherits: ^refinery
+	Tooltip:
+		Name: Refinery
 	Buildable:
 		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
 	FreeActor:

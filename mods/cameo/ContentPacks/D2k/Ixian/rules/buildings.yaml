@@ -62,6 +62,8 @@ d2k_barracks.ixian:
 
 refinery.ixian:
 	Inherits: ^refinery
+	Tooltip:
+		Name: Refinery
 	Buildable:
 		Prerequisites: ~construction_yard.ixian, wind_trap.ixian
 	FreeActor:
