@@ -993,7 +993,7 @@ cabal_coredefender:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
 		BuildLimit: 1
-		Prerequisites: ~cabal_mechfactory, cabal_core
+		Prerequisites: ~cabal_mechfactory, cabal_core, cabal_promotion_coredefender
 		Description: actor_cabal_coredefender.description
 	Mobile:
 		TurnSpeed: 20

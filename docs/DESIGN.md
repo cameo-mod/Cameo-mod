@@ -516,7 +516,10 @@ the formula consumes.
 - `WeaponClass` H — from the weapons yaml warhead classes. Every weapon
   family exists as **Light / Medium / Heavy** warheads: Light = 0.75,
   Medium = 1.0, Heavy = 1.25. Combining warheads AVERAGES the classes:
-  Light+Medium = 0.875, Medium+Heavy = 1.125.
+  Light+Medium = 0.875, Medium+Heavy = 1.125. **Prefer balanced class
+  combinations**: 3×Light, or 2×Light + 2×Medium, or 1×Light + 1×Medium +
+  1×Heavy. Avoid lopsided mixes such as 1×Heavy + 2×Medium. The final
+  weapon class is the arithmetic mean of the individual class values.
 - `Special` K — **+0.25 per special ability** (C4, EMP, stealth, point
   defense laser, …). Example: Nod laser commando = C4 + Stealth + PDL =
   1.75. Some over-strong kits are simply set to 2. FUTURE: replace the
@@ -545,8 +548,13 @@ the formula consumes.
 
 **The nice-number law (design 2026-07-11).** Every stat moves in fixed
 steps so the house formulas stay integral:
-- **Prices: 25-credit steps** — never 387-style numbers; if the formula
-  lands off-grid, adjust unit stats until the price fits.
+- **Prices: 10-credit steps** (was 25) — never 387-style numbers. If the
+  target cost is not already occupied by another unit of the same class
+  (same UnitClass/template role), prefer coarser **100-credit steps**. Use
+  10-credit granularity only when the 100-grid slot is already taken by a
+  sibling unit. If many units of the same class converge on the same price,
+  equally spread them across the available 100-grid slots first, then fall
+  back to 10-grid only when necessary. Prices are outputs, never inputs.
 - **Damage: 2000-steps.** The HealthPercentageDamage twin is always
   **1 per 2000** main damage (16000 -> Percentage 8); FriendlyFire twins
   are always **50% damage and 50% spread**; all class warheads carry the
@@ -554,7 +562,14 @@ steps so the house formulas stay integral:
 - **HP: 2500-steps** for vehicles/aircraft/ships (self-heal HP/2500,
   repair HP/20); **1000-steps for infantry** (self-heal HP/1000);
   defenses may use either (their self-heal is a flat 10).
-- **Speed: steps of 5** (TurnSpeed = Speed/5 stays integral).
+- **Speed: steps of 5**.
+- **TurnSpeed (vehicles & fixed-weapon units):** units without a turret or
+  with a forward-facing fixed weapon turn at **`TurnSpeed = 2 × Speed / 5`**;
+  turreted units turn at **`TurnSpeed = Speed / 5`**. Infantry normally turns
+  instantly, but CABAL cyborg infantry use the vehicle fixed-weapon rule
+  because they carry forward-facing weapons.
+- **TurnSpeed (aircraft):** helicopters use **`Speed / 5`**; spaceships use
+  **`2 × Speed / 5`**.
 - ReloadDelay: any integer.
 - **Beautiful ranges are kept**: if Range is exactly 6.000 or 7.500,
   adjust the other stats, not the range.
@@ -799,9 +814,83 @@ sit at Tier 4.
 CABAL lasers are purple/dark-blue outer beams with a near-white cyan core,
 scaled by damage. Weapon sounds follow the obelisk/laser sound map in §3.
 
+**Promotion visibility rule.** CABAL promotions must be globally visible
+as soon as the player has `rank1`. A promotion's `Buildable.Prerequisites`
+contains only `rank1`, the prerequisite that unlocks the promotion
+(`!self`), and the previous promotion in its column. Production buildings
+(`~cabal_cyborgfactory`, `~cabal_mechfactory`, `~cabal_helipad`) and tech
+structures (`cabal_radar`, `cabal_techcenter`, `cabal_core`) must NEVER
+gate whether a promotion appears in the Promotions tab. Those buildings
+belong on the *unit* that the promotion unlocks. This keeps the 3x4 grid
+always populated and lets players plan their promotion path regardless of
+which production structures they have built.
+
+**Weapon minimum-range rule.** Any weapon with a `MinRange` must keep
+`MinRange = round(Range / 5)` rounded to the nearest multiple of 5
+(`expected = round(Range / 25.0) * 5`). This applies to artillery,
+aircraft, and any other actor that uses a minimum firing distance.
+Violations are caught by `tools/audit/audit_min_range.py`.
+
 **Unique stat rule.** Every CABAL actor must carry at least one stat or
 ability that no other actor shares (cost, speed, range, weapon class,
 special K, or role). Two units may not feel identical.
+
+**Armament naming and count.** Every unit uses only three canonical
+armament slots: `Armament` (or `Armament@PRIMARY`), `Armament@SECONDARY`,
+and `Armament@GARRISONED` for garrison logic. Never create `Armament@AA`,
+`Armament@AntiAir`, or role-specific names; anti-air capability is handled
+by `ValidTargets` on the same primary/secondary weapon, not by a separate
+armament node. A unit that has a primary weapon should not receive a
+separate garrison-only pistol; the garrison armament reuses the same weapon
+as the primary.
+
+**No weapon inheritance between units.** A weapon definition must never
+`Inherits:` from another unit-unique weapon (e.g. `CabalSpiderCnc4Laser`
+inherting `CabalSpiderLaser`). If two units need similar firepower,
+create a shared base weapon in the faction weapons file and inherit from
+that base, or copy the stats explicitly. Unit-unique weapons are not
+stable extension points.
+
+**Effect inheritance order.** Visual effect templates such as
+`^TSLaserEffect`, `^TSSparkEffect`, or faction laser-trail templates
+must be inherited **last** in the `Inherits@` chain, after all weapon and
+armor templates. Otherwise their trait definitions are overwritten by
+later inherits and the intended effect is lost.
+
+**Reusable engineer rule.** Engineers that can capture structures must not
+be consumed on capture. Use an engineer armor template that grants the
+`CaptureManager` / `Captures` behavior without `Consumed:` true, matching
+the Schwarzer Mond "Engineering armor" pattern. CABAL's `cabal_engineer`
+uses this reusable pattern.
+
+**Promotion unit stat superiority.** A promotion-unlocked unit must be
+strictly better than the base unit it replaces in every meaningful stat.
+Allowed exceptions: (a) Speed may be lower only if HP increases
+significantly to convey a heavier chassis; (b) ReloadDelay may be longer
+only if total damage per salvo increases significantly. **Range must never
+be lower** on a promotion unit. Promotion weapons must use stronger
+warhead classes than the base unit (e.g. base medium → promotion heavy).
+Audit this with `tools/audit/audit_promotion_superiority.py`.
+
+**Linebreaker / mutual-weapon design (CABAL Manticore).** A unit whose
+primary and anti-air weapons are mutually exclusive (e.g. a turret that
+switches modes or a unit that fires only one weapon at a time) does NOT
+add their DPS for balance purposes. Both weapons must be tuned to the
+same final values (damage, reload, range) so the spreadsheet sees two
+equivalent options, not a doubled output. For the Manticore this means a
+ground laser and an air missile with identical range and comparable
+throughput, using laser+railgun warheads on the ground weapon and heavy
+missile+heavy AA warheads on the air weapon.
+
+**Reaper net weapon (CABAL).** The Cyborg Reaper's net weapon copies the
+Zerg Corruptor snare effect: a missile projectile that applies a slow/
+snare condition to all valid snareable targets. The net shares the ground
+weapon's range; the dedicated anti-air weapon receives the standard +50%
+range increase over the ground weapon.
+
+**Hunter Killer weapon identity.** Hunter Killer aircraft are powerful
+attackers, not light infantry. Their weapon must use laser / missile
+warheads appropriate to their role, never `^SmallArms`.
 
 **Balance workflow.** All CABAL rebalances start in
 `docs/design/cameo_armor_system.xlsx` (or the CABAL concept sheet) and

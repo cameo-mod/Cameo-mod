@@ -14,8 +14,6 @@ cabal_engineer:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Scout
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
@@ -38,11 +36,8 @@ cabal_engineer:
 		Speed: 40
 	ChangesHealth@SelfHealing:
 		Step: 20
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -70,6 +65,7 @@ cabal_engineer:
 	Captures:
 		CaptureTypes: building, tech
 		PlayerExperience: 500
+		ConsumedByCapture: False
 
 cabal_cyborginfantry:
 	Inherits: ^Soldier
@@ -88,8 +84,6 @@ cabal_cyborginfantry:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Medium
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -110,11 +104,8 @@ cabal_cyborginfantry:
 		HP: 45000
 	ChangesHealth@SelfHealing:
 		Step: 45
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -162,8 +153,6 @@ cabal_ravager:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -182,11 +171,8 @@ cabal_ravager:
 		HP: 70000
 	ChangesHealth@SelfHealing:
 		Step: 70
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -232,8 +218,6 @@ cabal_rocketcyborg:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Light
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -253,11 +237,8 @@ cabal_rocketcyborg:
 		HP: 45000
 	ChangesHealth@SelfHealing:
 		Step: 45
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -342,8 +323,6 @@ cabal_devout:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Heavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 1400
 	Tooltip:
@@ -363,11 +342,8 @@ cabal_devout:
 		HP: 60000
 	ChangesHealth@SelfHealing:
 		Step: 60
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -452,8 +428,6 @@ cabal_ascended:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Medium
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -473,11 +447,8 @@ cabal_ascended:
 		HP: 60000
 	ChangesHealth@SelfHealing:
 		Step: 60
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -564,8 +535,6 @@ cabal_hackercyborg:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Scout
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -585,11 +554,8 @@ cabal_hackercyborg:
 		HP: 30000
 	ChangesHealth@SelfHealing:
 		Step: 30
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -605,6 +571,13 @@ cabal_hackercyborg:
 		Weapon: TSCABALempdisable.end
 		RequiresCondition: end_disable >= 1
 		LocalOffset: -128,0,256
+	GrantConditionOnAttack@End:
+		Condition: end_disable
+		RequiredShotsPerInstance: 25
+		MaximumInstances: 1
+		RevokeDelay: 5
+		RevokeAll: false
+		IsCyclic: false
 	# Armament@PRIMARY:
 	# 	Weapon: TSRobotHackingControl
 	# 	LocalOffset: 0,0,90
@@ -695,8 +668,6 @@ cabal_cyborgcommando:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -718,11 +689,8 @@ cabal_cyborgcommando:
 		HP: 250000
 	ChangesHealth@SelfHealing:
 		Step: 250
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -778,8 +746,6 @@ cabal_cyborgcommandov2:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -801,11 +767,8 @@ cabal_cyborgcommandov2:
 		HP: 400000
 	ChangesHealth@SelfHealing:
 		Step: 400
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -858,8 +821,6 @@ cabal_eliminator800:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Heavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -873,11 +834,8 @@ cabal_eliminator800:
 		HP: 85000
 	ChangesHealth@SelfHealing:
 		Step: 85
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
@@ -900,15 +858,9 @@ cabal_eliminator800:
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
 		LocalOffset: 544,100,256
-	Armament@AA:
-		Name: aa
-		Weapon: CabalEliminatorGatlingAA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		LocalOffset: 544,100,256
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: CabalEliminatorGarrisonPistols
+		Weapon: CabalEliminatorGatling
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -962,8 +914,6 @@ cabal_dissolver:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 725
 	Tooltip:
@@ -980,11 +930,8 @@ cabal_dissolver:
 		HP: 50000
 	ChangesHealth@SelfHealing:
 		Step: 50
-	GrantConditionOnPrerequisite@CyberneticPlating:
-		Condition: cabal_upgrade_cyberneticplating
-		Prerequisites: cabal_upgrade_cyberneticplating
 	Shielded:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		ShieldsUpCondition: armored
 		SelectionBarColor: FFFF88FF
 		InitialPercentageStrength: 100
