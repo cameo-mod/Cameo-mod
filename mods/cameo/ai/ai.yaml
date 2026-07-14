@@ -3126,17 +3126,17 @@ Player:
 		MaxHarvesters: 24
 		AdditionalHarvesters: 1
 		ScanForIdleHarvestersInterval: 1000
-		HarvesterTypes: td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra2_allies_chronominer, ra2_soviets_warminer, ixian_spiceharvester, ordos_spiceharvester, drmn.asian, harv.latin, steel_consortium_consortiumminer, slav.nax, armor_harv.nax2, futuretech_prospector, terran_scv, scprobe, zerg_drone, wc2_orc_peon, wc2_human_peasant, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester
-		RefineryTypes: td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, ra1_allies_alliedorerefinery, ra1_soviet_orerefinery, jproc, ra2_soviets_orerefinery, ra2_allies_alliedorerefinery, yryarefn, cgrefn.asian, steel_consortium_consortiumrefinery, cgauto.latin, refin.nax, futuretech_refinery, terran_refinery, scassimilator, zerg_extractor, ts_gdi_tiberiumrefinery, ts_nod_tiberiumrefinery, forgotten_refinery, cabal_refinery, glsupply, chsupply, usasupply, refinery, ixian_refineryixian, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, tkmrefinery
+		HarvesterTypes: td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra2_allies_chronominer, ra2_soviets_warminer, ixian_spiceharvester, ordos_spiceharvester, drmn.asian, harv.latin, steel_consortium_consortiumminer, slav.nax, armor_harv.nax2, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_orc_peon, wc2_human_peasant, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester
+		RefineryTypes: td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, ra1_allies_alliedorerefinery, ra1_soviet_orerefinery, jproc, ra2_soviets_orerefinery, ra2_allies_alliedorerefinery, yryarefn, cgrefn.asian, steel_consortium_consortiumrefinery, cgauto.latin, refin.nax, futuretech_refinery, terran_refinery, protoss_assimilator, zerg_extractor, ts_gdi_tiberiumrefinery, ts_nod_tiberiumrefinery, forgotten_refinery, cabal_refinery, glsupply, chsupply, usasupply, refinery, ixian_refineryixian, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, tkmrefinery
 	BuildingRepairBotModule:
 		RequiresCondition: genericbot
 	BuildingRepairBotModuleCA:
 		RequiresCondition: genericbot
 	McvExpansionManagerBotModule:
 		RequiresCondition: genericbot
-		McvTypes: td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_alliedmobileconstructionvehicle, ra1_soviet_mobileconstructionvehicle, ramcv.japan, ra2_allies_alliedmobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yrpcv, yrsmin, modcore, modcore1, modcore2, modcore3, modcore4, modcore5, modcore6, modcore7, acv.asian, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, steel_consortium_consortiummobileconstructionvehicle, mcv.latin, mcv.nax, mcv.nax2, futuretech_mobileconstructionvehicle, terran_mobilecommandcenter, scpmcv, zerg_hatcherydrone, wc2_human_mcv, wc2_orc_mcv, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, tkmmcv
-		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, scnexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, steel_consortium_consortiumconstructionyard, cgcnst.latin, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter, td_gdi_defenserig
-		McvFactoryTypes: td_gdi_weaponsfactory, td_nod_airstrip, ra1_soviet_warfactory, ra1_soviet_largefactory, ra1_allies_alliedwarfactory, modraweapj, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, cgweap.asian, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, zerg_hatchery, scnexus, terran_commandcenter, terran_weaponsfactory, scroboticsfacility, glcommand, chcommand, usacommand, ixian_advancedheavyfactory, ordos_heavyfactory, ixian_starport, ordos_starport, sc_zerg_larva, wc2_human_townhall, wc2_orc_greathall, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, tkmcommandcenter
+		McvTypes: td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_allies_alliedmobileconstructionvehicle, ra1_soviet_mobileconstructionvehicle, ramcv.japan, ra2_allies_alliedmobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yrpcv, yrsmin, modcore, modcore1, modcore2, modcore3, modcore4, modcore5, modcore6, modcore7, acv.asian, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, steel_consortium_consortiummobileconstructionvehicle, mcv.latin, mcv.nax, mcv.nax2, futuretech_mobileconstructionvehicle, terran_mobilecommandcenter, protoss_mobilenexus, zerg_hatcherydrone, wc2_human_mcv, wc2_orc_mcv, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, tkmmcv
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, steel_consortium_consortiumconstructionyard, cgcnst.latin, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter, td_gdi_defenserig
+		McvFactoryTypes: td_gdi_weaponsfactory, td_nod_airstrip, ra1_soviet_warfactory, ra1_soviet_largefactory, ra1_allies_alliedwarfactory, modraweapj, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, cgweap.asian, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, zerg_hatchery, protoss_nexus, terran_commandcenter, terran_weaponsfactory, protoss_roboticsfacility, glcommand, chcommand, usacommand, ixian_advancedheavyfactory, ordos_heavyfactory, ixian_starport, ordos_starport, sc_zerg_larva, wc2_human_townhall, wc2_orc_greathall, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, tkmcommandcenter
 		MinimumConstructionYardCount: 2
 		AdditionalConstructionYardCount: 2
 		BuildAdditionalMCVCashAmount: 1500
@@ -3154,7 +3154,7 @@ Player:
 		RequiresCondition: genericbot && !easiestbot # && nobase no conyard condition defined in player.yaml
 		ScanForCratesInterval: 300
 		CheckTargetsForVisibility: false
-		ExcludedUnitTypes: e6, rae6, ra2_allies_engineer, ra2_soviets_engineer, ra2engineer.yuri, ra2engineer.asian, ra2engineer.latin, steel_consortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra1_allies_alliedmobileconstructionvehicle, ra1_soviet_mobileconstructionvehicle, ramcv.japan, ra1_allies_minelayer, modcore, modcore1, modcore2, modcore3, modcore4, modcore5, modcore6, modcore7, ra2_allies_chronominer, ra2_soviets_warminer, yrslav, yrsmin, drmn.asian, zerg_overlord, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ra2_allies_alliedmobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yrpcv, acv.asian, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, glworker, chharv, usahook, chhacker, ixian_spiceharvester, ixian_autonomouscarryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviet_nukedemotruck, ra1_allies_chronotank, ra1_soviet_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_alliedchinooktransport, ra1_soviet_hiptransport, ra2_allies_nighthawk, ra2hind.latin, shinobi.asian, oilt.asian, steel_consortium_consortiummobileconstructionvehicle, steel_consortium_consortiumminer, mcv.latin, harv.latin, mcv.nax, mcv.nax2, armor_harv.nax2, slavemaster.nax, slav.nax, ra2terror.latin, ra2dtruck.latin, nuketruk.latin, futuretech_mobileconstructionvehicle, futuretech_prospector, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, scpmcv, terran_mobilecommandcenter, terran_scv, scprobe, zerg_drone, terran_dropship, terran_medivac, scshuttle, wc2_human_mcv, wc2_orc_mcv, wc2_human_peasant, wc2_orc_peon, wc2_human_demolitionsquad, wc2_orc_goblin_sappers, ordos_spiceharvester, tkmmcv, tkmharv, tkmengineer, tkmradartruck, tkmworker
+		ExcludedUnitTypes: e6, rae6, ra2_allies_engineer, ra2_soviets_engineer, ra2engineer.yuri, ra2engineer.asian, ra2engineer.latin, steel_consortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra1_allies_alliedmobileconstructionvehicle, ra1_soviet_mobileconstructionvehicle, ramcv.japan, ra1_allies_minelayer, modcore, modcore1, modcore2, modcore3, modcore4, modcore5, modcore6, modcore7, ra2_allies_chronominer, ra2_soviets_warminer, yrslav, yrsmin, drmn.asian, zerg_overlord, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ra2_allies_alliedmobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yrpcv, acv.asian, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, glworker, chharv, usahook, chhacker, ixian_spiceharvester, ixian_autonomouscarryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviet_nukedemotruck, ra1_allies_chronotank, ra1_soviet_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_alliedchinooktransport, ra1_soviet_hiptransport, ra2_allies_nighthawk, ra2hind.latin, shinobi.asian, oilt.asian, steel_consortium_consortiummobileconstructionvehicle, steel_consortium_consortiumminer, mcv.latin, harv.latin, mcv.nax, mcv.nax2, armor_harv.nax2, slavemaster.nax, slav.nax, ra2terror.latin, ra2dtruck.latin, nuketruk.latin, futuretech_mobileconstructionvehicle, futuretech_prospector, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_scv, protoss_probe, zerg_drone, terran_dropship, terran_medivac, protoss_shuttle, wc2_human_mcv, wc2_orc_mcv, wc2_human_peasant, wc2_orc_peon, wc2_human_demolitionsquad, wc2_orc_goblin_sappers, ordos_spiceharvester, tkmmcv, tkmharv, tkmengineer, tkmradartruck, tkmworker
 	ExternalBotOrdersManager:
 		RequiresCondition: genericbot
 	SquadManagerBotModuleCA@generic:
@@ -3181,16 +3181,16 @@ Player:
 		IgnoredEnemyTargetTypes: TechHusk, DisguisedSpy
 		SuggestedGroundLeaderLocomotor: foot, wheeled, tracked, heavytracked
 		SuggestedNavyLeaderLocomotor: naval
-		ExcludeFromSquadsTypes: e6, rae6, ra2_allies_engineer, ra2_soviets_engineer, ra2engineer.yuri, ra2engineer.asian, ra2engineer.latin, steel_consortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra1_allies_alliedmobileconstructionvehicle, ra1_soviet_mobileconstructionvehicle, ramcv.japan, ra1_allies_minelayer, modcore, modcore1, modcore2, modcore3, modcore4, modcore5, modcore6, modcore7, ra2_allies_chronominer, ra2_soviets_warminer, yrslav, yrsmin, drmn.asian, zerg_overlord, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ra2_allies_alliedmobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yrpcv, acv.asian, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, glworker, chharv, usahook, chhacker, ixian_spiceharvester, ixian_autonomouscarryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviet_nukedemotruck, ra1_allies_chronotank, ra1_soviet_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_alliedchinooktransport, ra1_soviet_hiptransport, ra2_allies_nighthawk, ra2hind.latin, shinobi.asian, oilt.asian, steel_consortium_consortiummobileconstructionvehicle, steel_consortium_consortiumminer, mcv.latin, harv.latin, mcv.nax, mcv.nax2, armor_harv.nax2, slavemaster.nax, slav.nax, ra2terror.latin, ra2dtruck.latin, nuketruk.latin, futuretech_mobileconstructionvehicle, futuretech_prospector, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, scpmcv, terran_mobilecommandcenter, terran_scv, scprobe, zerg_drone, terran_dropship, terran_medivac, scshuttle, wc2_human_mcv, wc2_orc_mcv, wc2_human_peasant, wc2_orc_peon, wc2_human_demolitionsquad, wc2_orc_goblin_sappers, ordos_spiceharvester, tkmmcv, tkmharv, tkmengineer, tkmradartruck, tkmworker
-		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, scnexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, cgcnst.latin, steel_consortium_consortiumconstructionyard, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter
+		ExcludeFromSquadsTypes: e6, rae6, ra2_allies_engineer, ra2_soviets_engineer, ra2engineer.yuri, ra2engineer.asian, ra2engineer.latin, steel_consortium_engineer, tsengineer, ts_nod_engineer, engineer, td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, td_gdi_mobileconstructionvehicle, td_nod_mobileconstructionvehicle, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra1_allies_alliedmobileconstructionvehicle, ra1_soviet_mobileconstructionvehicle, ramcv.japan, ra1_allies_minelayer, modcore, modcore1, modcore2, modcore3, modcore4, modcore5, modcore6, modcore7, ra2_allies_chronominer, ra2_soviets_warminer, yrslav, yrsmin, drmn.asian, zerg_overlord, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester, ra2_allies_alliedmobileconstructionvehicle, ra2_soviets_mobileconstructionvehicle, yrpcv, acv.asian, ts_gdi_mobileconstructionvehicle, ts_nod_mobileconstructionvehicle, forgotten_mobileconstructionvehicle, cabal_mobileconstructionvehicle, glworker, chharv, usahook, chhacker, ixian_spiceharvester, ixian_autonomouscarryall, carryall.reinforce, ixian_mobileconstructionvehicle, ordos_mobileconstructionvehicle, ra1_allies_raspy, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra1_soviet_nukedemotruck, ra1_allies_chronotank, ra1_soviet_madtank, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_allies_alliedchinooktransport, ra1_soviet_hiptransport, ra2_allies_nighthawk, ra2hind.latin, shinobi.asian, oilt.asian, steel_consortium_consortiummobileconstructionvehicle, steel_consortium_consortiumminer, mcv.latin, harv.latin, mcv.nax, mcv.nax2, armor_harv.nax2, slavemaster.nax, slav.nax, ra2terror.latin, ra2dtruck.latin, nuketruk.latin, futuretech_mobileconstructionvehicle, futuretech_prospector, futuretech_engineer, futuretech_spyfutu, zerg_hatcherydrone, protoss_mobilenexus, terran_mobilecommandcenter, terran_scv, protoss_probe, zerg_drone, terran_dropship, terran_medivac, protoss_shuttle, wc2_human_mcv, wc2_orc_mcv, wc2_human_peasant, wc2_orc_peon, wc2_human_demolitionsquad, wc2_orc_goblin_sappers, ordos_spiceharvester, tkmmcv, tkmharv, tkmengineer, tkmradartruck, tkmworker
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, cgcnst.latin, steel_consortium_consortiumconstructionyard, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter
 		NavalUnitsTypes: ss, msub, dd, ca, pt, japanspeedboat, japancarrier, yamatobattleship, cncss, nodlasercorvette, ssmsub, cncdd, cncca, cncpt, ra2sqd, ra2dlph, ra2dest, ra2_allies_aegiscruiser, ra2sub, ra2_soviets_seascorpion, ra2dred, ra2carrier, yrbsub, glgunboat, chflameboat, usagunboat, usabattleship, usacarrier, gunb.asian, lsub.asian, quasfrig.asian, karrier.asian, tsun.asian, ksub.asian, triton.latin, sub.latin, tuboat.nax, muboat.nax, rammax.latin
 		NavalProductionTypes: raspen, ra1syrd, ra1jsyrd, cncsyrd, cncspen, yrygyard, ra2gayard, ra2nayard, glsyrd, chsyrd, usasyrd, cgyard.asian, cgyard.latin, naval.nax
 		AirUnitsTypes: td_gdi_firehawk, ra1_soviet_migattackbomber, ra1_soviet_su57attackbomber, ra1_soviet_supersonicnuclearbomber, ra1_allies_rapierjumpjet, modbomber, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_migbomber, phoenix.asian, steel_consortium_twister, steel_consortium_skyhammer, mig.latin, ixian_airdrone, ixian_empbomber, ordos_eyeinthesky, ts_gdi_orcabomber, ts_nod_bansheefighter, cabal_hunterkillermk1, cabal_hunter_drone_carrier, cabal_mothership, cabal_overkill_gunship, cabal_orb_drone, cabal_cyborg_assassin
-		StaticAntiAirTypes: td_nod_samsite, td_gdi_skyshield, td_gdi_advancedguardtower, ra1_allies_alliedaagun, ra1_soviet_samsite, jmgnest, jballistat, ra2_allies_patriotmissilesystem, ra2_soviets_flakcannon, yrygggun, ra2_soviets_battlebunker, yrngtbnk, ixian_rocketturret, cgpuls.asian, steel_consortium_antiairquantummissileturret, aatur.latin, flak88.nax, terran_missileturret, zerg_creepcolony, zerg_creepcolony_2, scphotoncannon, cabal_obeliskofdarkness
+		StaticAntiAirTypes: td_nod_samsite, td_gdi_skyshield, td_gdi_advancedguardtower, ra1_allies_alliedaagun, ra1_soviet_samsite, jmgnest, jballistat, ra2_allies_patriotmissilesystem, ra2_soviets_flakcannon, yrygggun, ra2_soviets_battlebunker, yrngtbnk, ixian_rocketturret, cgpuls.asian, steel_consortium_antiairquantummissileturret, aatur.latin, flak88.nax, terran_missileturret, zerg_creepcolony, zerg_creepcolony_2, protoss_photoncannon, cabal_obeliskofdarkness
 		HighValueTargetTypes: td_gdi_constructionyard, td_nod_constructionyard, td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, td_gdi_weaponsfactory, td_nod_airstrip, td_gdi_communicationscenter, td_nod_communicationscenter, td_gdi_advancedcommunicationscenter, td_nod_templeofnod, td_nod_templeprime, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra1_allies_alliedorerefinery, ra1_soviet_orerefinery, jproc, ra1_soviet_warfactory, ra1_soviet_largefactory, ra1_allies_alliedwarfactory, modraweapj, ra1_allies_alliedradardome, ra1_soviet_radardome, dome.japan, ra1_allies_alliedtechcenter, ra1_soviet_techcenter, modjtek, ra1_allies_gapgenerator, ra1_soviet_missilesilo, ra1_soviet_ironcurtain, ra1_allies_chronosphere, jshrine, ra2_allies_alliedconstructionyard, ra2_soviets_constructionyard, yrnacnst, ra2_allies_alliedorerefinery, ra2_soviets_orerefinery, yryarefn, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, ra2_allies_airforcecommandhq, ra2_soviets_radar, ra2napsis, ra2_allies_alliedbattlelab, ra2_soviets_battlelab, yrygtech, yrygcomd, ra2_allies_weathercontrolcenter, ra2_allies_chronosphere, ra2_soviets_nuclearmissilesilo, ra2_soviets_ironcurtain, yrygppet, yryggntc, cgcnst.asian, cgrefn.asian, cgweap.asian, cgradr.asian, cgtech.asian, cgionc.asian, cgchao.asian, steel_consortium_consortiumconstructionyard, steel_consortium_consortiumrefinery, steel_consortium_consortiumwarfactory, steel_consortium_consortiumbattlelab, steel_consortium_orbitalcannonactivator, cgcnst.latin, cgauto.latin, cgweap.latin, cgspy.latin, ca12hit.latin, conyard.nax, refin.nax, weap.nax, radar.nax, tek.nax, tech.nax, rocket.nax, conyard.nax2, refin.nax2; weap.nax2, radar.nax2, tech.nax2, meteorray.nax2, gcore.nax2, futuretech_constructionyard, futuretech_refinery, futuretech_warpgate, futuretech_transmissioncenter, futuretech_battlelab, ixian_constructionyard, ixian_refineryixian, ixian_advancedheavyfactory, ixian_outpost ixian_ixresearchcenter, ixian_starport, ixian_supercomputer, ordos_constructionyard, ordos_refineryordos, ordos_heavyfactory, ordos_outpost ordos_ixresearchcenter, ordos_starport, ts_nod_missilesilo, cabal_missilesilo, ts_gdi_upgradecenter
 		HighValueTargetPriority: 50
 		AirToAirPriority: 25
-		BigAirThreats: td_gdi_firehawk, ra1_soviet_supersonicnuclearbomber, modbomber, ra1_allies_rapierjumpjet, ra2_allies_blackeagle, ra2_soviets_migbomber, ra2_soviets_kirovairship, yrdisk, phoenix.asian, steel_consortium_empressstation, steel_consortium_cloudbreaker, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, dieglocke.nax2, piercer.nax2, futuretech_cryocopter, futuretech_harbingergunship, ixian_farasha, ixian_empbomber, ordos_eyeinthesky, ordos_wraith, terran_battlecruiser, terran_wyvern, sccarrier, scgladius, zerg_guardian, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon, cabal_hunter_drone_carrier, cabal_mothership
+		BigAirThreats: td_gdi_firehawk, ra1_soviet_supersonicnuclearbomber, modbomber, ra1_allies_rapierjumpjet, ra2_allies_blackeagle, ra2_soviets_migbomber, ra2_soviets_kirovairship, yrdisk, phoenix.asian, steel_consortium_empressstation, steel_consortium_cloudbreaker, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, dieglocke.nax2, piercer.nax2, futuretech_cryocopter, futuretech_harbingergunship, ixian_farasha, ixian_empbomber, ordos_eyeinthesky, ordos_wraith, terran_battlecruiser, terran_wyvern, protoss_carrier, protoss_gladius, zerg_guardian, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon, cabal_hunter_drone_carrier, cabal_mothership
 		AirSquadTargetTypes:
 			td_nod_apacheattackhelicopter: Aircraft, Ground, Naval
 			td_gdi_orca: Aircraft, Ground, Naval
@@ -3224,7 +3224,7 @@ Player:
 			ordos_eyeinthesky: Ground
 			ts_gdi_orcabomber: Ground, Naval
 			ts_nod_bansheefighter: Aircraft, Ground, Naval
-		GuerrillaTypes: td_gdi_defenserig, td_gdi_commando, td_nod_commando, td_gdi_apc, td_nod_buggy, td_nod_reconbike, td_nod_lighttank, td_nod_flametank, td_gdi_humvee, td_gdi_battletank, td_gdi_mlrs, td_gdi_archerartillery, td_nod_ssmlauncher, td_nod_stealthtank, td_gdi_orca, td_nod_apacheattackhelicopter, td_nod_venom, td_nod_chemicalattackbike, td_nod_chemicalstealthtank, td_nod_buggymkii, td_nod_lighttankmkii, td_nod_flametankmkii, td_nod_specterartillery, td_nod_lasercommando, td_gdi_assaultapc, td_gdi_humveemkii, td_gdi_predatortank, td_gdi_exosuit, td_gdi_havoc, ra1_soviet_attackdog, ra1_soviet_cyberdog, ra1_allies_alliedsniper, ra1_allies_tanya, ra1_soviet_grad, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_soviet_heavytank, ra1_soviet_hammertank, ra1_soviet_heavyteslatank, ra1_soviet_kotinnucleartank, ra1_allies_ranger, raapc, ra1_soviet_flaktruck, modkubel, modtypej, modhover, ra1_allies_longbow, ra1_allies_blackhawk, ra1_soviet_yakscoutplane, ra1_soviet_teslayak, ra1_soviet_armoredyak, ra1_soviet_nuclearyak, ra1_soviet_hindattackhelicopter, ra1_soviet_kamovattackhelicopter, jhind, modkami,  ra1_allies_reconranger, ra1_allies_alliedtigerheavytank, ra1_allies_chronotank, ra1_allies_phasetransport, ra1_soviet_volkov, ra1_soviet_gatlingtank, ra1_soviet_monstertank, ra1_soviet_btr80, rasamurai, rocketangel, hakurei, modcarr, typechiha, modhovert,  modbggy, ra2_allies_attackdog, ra2_allies_rocketeer, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra2_allies_seal, ra2_allies_tanyaii, ra2_allies_grizzlytank, ra2_allies_ifv, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_hmg, ra2_allies_ifv_chrono, ra2_allies_prismtank, ra2_allies_miragetank, ra2_allies_heavymiragetank, ra2_allies_battlefortress, ra2_allies_battlefortress_3, ra2_allies_harrier, ra2_soviets_attackdog, ra2_soviets_crazyivan, ra2_soviets_desolator, ra2_soviets_boris, ra2_soviets_rhinoheavytank, ra2_soviets_flaktrack, ra2_soviets_teslatank, ra2_soviets_terrordrone, ra2_soviets_kirovairship, ra2_soviets_siegechopper, yrbrute, yrbiot, yrlunr, yryuri, yryurix, yrltnk, yrytnk, yrcaos, yrmind, yrdisk, yrmind, rocket_raider.ixian, ixian_shockraider, combat_tank.ixian, ixian_stormraider, heavy_rocket_raider.ixian, ixian_ixcombatsiege, ixian_airdrone, d2k_heavy_air_drone, ordos_apc, ordos_banshee, ordos_wraith, ordos_deviatortank, ordos_dustdrone, ordos_laboratorycrawler, ordos_contaminator, ordos_leech, ordos_swarmerdrone, ordos_airmine, ordos_lasertank, ordos_combattank, ordos_tankdestroyer, ordos_heavyautoguntank, ixian_mongoose, alligator.asian, samurai.asian, shinobi.asian, asdf.asian, commando.asian, dragonfly.asian, lynx.asian, pulv.asian, ptnk.asian, viper.asian, ftnk.asian, hotwi.asian, pelican.asian, wtrt.asian, mlrs.asian, steel_consortium_mako, pelican.asian, monkey.latin, ltnk.latin, diablo.latin, buggy.latin, mortarbike.latin, apc.latin, rtruck.latin, yakolev.latin, narco.latin, humvee.latin, cartel.latin, fftr.latin, mtnk.latin, burrito.latin, lars.latin, ra2hind.latin, yrrobo, zerg_zergling, zerg_talon, zerg_sporemaw, zerg_hydralisk, zerg_spithid, zerg_swarmling, zerg_shriek, zerg_mutalisk, zerg_scourge, zerg_queen, zerg_ultralisk, zerg_gorekraken, zerg_hermit, zerg_goremaw, zerg_lurker, zerg_infestedterranbomber, zerg_defiler, scbroodling, zerg_kerrigan, zerg_behemoth, terran_marine, terran_reaper, terran_madcap, terran_firebat, terran_harakan, terran_marauder, terran_ghost, terran_specter, terran_jimraynor, terran_vulture, terran_siegetank, terran_matador, terran_cyclone, terran_goliath, terran_goliathmk2, terran_warhound, terran_wraith, terran_sundog, terran_wyvern, terran_pythean, terran_battlecruiser, terran_phobos, sczealot, scadept, scdragoon, scidol, schightemplar, scdarktemplar, screaver, scobserver, scarchon, scscout, scepigraph, scgladius, sccorsair, sccarrier, scstarshipsovereign, scarbiter, sczeratul, scamaranth, scatreus, scpositron, sclegionnaire, scpatriarch, wc2_human_footman, wc2_human_footman2, wc2_human_elven_archer, wc2_human_elven_ranger, wc2_human_high_elf_archer, wc2_human_knight, wc2_human_knight2, wc2_human_paladin, wc2_human_siege_engine, wc2_human_mortarteam2, wc2_human_mage, wc2_human_archmage, wc2_human_high_elf_priest, wc2_human_high_elf_sorceress, wc2_human_gnomish_flying_machine, wc2_human_gryphon_rider, wc2_orc_grunt, wc2_orc_troll_axethrower, wc2_orc_troll_berserker, wc2_orc_ogre, wc2_orc_ogremage, wc2_orc_deathknight, wc2_orc_goblin_zeppelin, wc2_orc_dragon
+		GuerrillaTypes: td_gdi_defenserig, td_gdi_commando, td_nod_commando, td_gdi_apc, td_nod_buggy, td_nod_reconbike, td_nod_lighttank, td_nod_flametank, td_gdi_humvee, td_gdi_battletank, td_gdi_mlrs, td_gdi_archerartillery, td_nod_ssmlauncher, td_nod_stealthtank, td_gdi_orca, td_nod_apacheattackhelicopter, td_nod_venom, td_nod_chemicalattackbike, td_nod_chemicalstealthtank, td_nod_buggymkii, td_nod_lighttankmkii, td_nod_flametankmkii, td_nod_specterartillery, td_nod_lasercommando, td_gdi_assaultapc, td_gdi_humveemkii, td_gdi_predatortank, td_gdi_exosuit, td_gdi_havoc, ra1_soviet_attackdog, ra1_soviet_cyberdog, ra1_allies_alliedsniper, ra1_allies_tanya, ra1_soviet_grad, ra1_allies_alliedlighttank, ra1_allies_alliedmediumtank, ra1_soviet_heavytank, ra1_soviet_hammertank, ra1_soviet_heavyteslatank, ra1_soviet_kotinnucleartank, ra1_allies_ranger, raapc, ra1_soviet_flaktruck, modkubel, modtypej, modhover, ra1_allies_longbow, ra1_allies_blackhawk, ra1_soviet_yakscoutplane, ra1_soviet_teslayak, ra1_soviet_armoredyak, ra1_soviet_nuclearyak, ra1_soviet_hindattackhelicopter, ra1_soviet_kamovattackhelicopter, jhind, modkami,  ra1_allies_reconranger, ra1_allies_alliedtigerheavytank, ra1_allies_chronotank, ra1_allies_phasetransport, ra1_soviet_volkov, ra1_soviet_gatlingtank, ra1_soviet_monstertank, ra1_soviet_btr80, rasamurai, rocketangel, hakurei, modcarr, typechiha, modhovert,  modbggy, ra2_allies_attackdog, ra2_allies_rocketeer, ra2_allies_ra2spy, ra2_allies_chronolegionnaire, ra2_allies_seal, ra2_allies_tanyaii, ra2_allies_grizzlytank, ra2_allies_ifv, ra2_allies_ifv_mg, ra2_allies_ifv_missile, ra2_allies_ifv_hmg, ra2_allies_ifv_chrono, ra2_allies_prismtank, ra2_allies_miragetank, ra2_allies_heavymiragetank, ra2_allies_battlefortress, ra2_allies_battlefortress_3, ra2_allies_harrier, ra2_soviets_attackdog, ra2_soviets_crazyivan, ra2_soviets_desolator, ra2_soviets_boris, ra2_soviets_rhinoheavytank, ra2_soviets_flaktrack, ra2_soviets_teslatank, ra2_soviets_terrordrone, ra2_soviets_kirovairship, ra2_soviets_siegechopper, yrbrute, yrbiot, yrlunr, yryuri, yryurix, yrltnk, yrytnk, yrcaos, yrmind, yrdisk, yrmind, rocket_raider.ixian, ixian_shockraider, combat_tank.ixian, ixian_stormraider, heavy_rocket_raider.ixian, ixian_ixcombatsiege, ixian_airdrone, d2k_heavy_air_drone, ordos_apc, ordos_banshee, ordos_wraith, ordos_deviatortank, ordos_dustdrone, ordos_laboratorycrawler, ordos_contaminator, ordos_leech, ordos_swarmerdrone, ordos_airmine, ordos_lasertank, ordos_combattank, ordos_tankdestroyer, ordos_heavyautoguntank, ixian_mongoose, alligator.asian, samurai.asian, shinobi.asian, asdf.asian, commando.asian, dragonfly.asian, lynx.asian, pulv.asian, ptnk.asian, viper.asian, ftnk.asian, hotwi.asian, pelican.asian, wtrt.asian, mlrs.asian, steel_consortium_mako, pelican.asian, monkey.latin, ltnk.latin, diablo.latin, buggy.latin, mortarbike.latin, apc.latin, rtruck.latin, yakolev.latin, narco.latin, humvee.latin, cartel.latin, fftr.latin, mtnk.latin, burrito.latin, lars.latin, ra2hind.latin, yrrobo, zerg_zergling, zerg_talon, zerg_sporemaw, zerg_hydralisk, zerg_spithid, zerg_swarmling, zerg_shriek, zerg_mutalisk, zerg_scourge, zerg_queen, zerg_ultralisk, zerg_gorekraken, zerg_hermit, zerg_goremaw, zerg_lurker, zerg_infestedterranbomber, zerg_defiler, scbroodling, zerg_kerrigan, zerg_behemoth, terran_marine, terran_reaper, terran_madcap, terran_firebat, terran_harakan, terran_marauder, terran_ghost, terran_specter, terran_jimraynor, terran_vulture, terran_siegetank, terran_matador, terran_cyclone, terran_goliath, terran_goliathmk2, terran_warhound, terran_wraith, terran_sundog, terran_wyvern, terran_pythean, terran_battlecruiser, terran_phobos, protoss_zealot, protoss_adept, protoss_dragoon, protoss_idol, protoss_hightemplar, protoss_darktemplar, protoss_reaver, protoss_observer, protoss_archon, protoss_scout, protoss_epigraph, protoss_gladius, protoss_corsair, protoss_carrier, protoss_starshipsovereign, protoss_arbiter, protoss_zeratul, protoss_amaranth, protoss_atreus, protoss_positron, protoss_legionnaire, protoss_patriarch, wc2_human_footman, wc2_human_footman2, wc2_human_elven_archer, wc2_human_elven_ranger, wc2_human_high_elf_archer, wc2_human_knight, wc2_human_knight2, wc2_human_paladin, wc2_human_siege_engine, wc2_human_mortarteam2, wc2_human_mage, wc2_human_archmage, wc2_human_high_elf_priest, wc2_human_high_elf_sorceress, wc2_human_gnomish_flying_machine, wc2_human_gryphon_rider, wc2_orc_grunt, wc2_orc_troll_axethrower, wc2_orc_troll_berserker, wc2_orc_ogre, wc2_orc_ogremage, wc2_orc_deathknight, wc2_orc_goblin_zeppelin, wc2_orc_dragon
 		IndirectRouteChance: 30
 	SendUnitToAttackBotModule:
 		RequiresCondition: genericbot
@@ -3334,7 +3334,7 @@ Player:
 				AttackOrderName: Unload
 				MoveBackOrderName: Move
 				AttackRequires: CargoLoaded
-			scshuttle:
+			protoss_shuttle:
 				AttackDesireOfEach: 100
 				MoveToOrderName: Move
 				AttackOrderName: Unload
@@ -3409,7 +3409,7 @@ Player:
 			tkmbunker: All
 			terran_dropship: All
 			terran_medivac: All
-			scshuttle: All
+			protoss_shuttle: All
 			miss: All
 			ramiss: All
 			fcom: All
@@ -3439,10 +3439,10 @@ Player:
 		RequiresCondition: genericbot
 		ResourceCreatorTypes: ra2gmine, ra2smine, ra2cmine, mine, gmine, split2, split3, splitblue, splitred, splitgold, spicebloom
 		ValuableResourceTypes: Tiberium, BlueTiberium, RedTiberium, GoldTiberium, Ore, Gems, RA2Ore, RA2Gems, RA2Silver, RA2Copper, SCMinerals, SCGas, SCGas2, SCGas3, Spice
-		HarvesterTypes: td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra2_allies_chronominer, ra2_soviets_warminer, ixian_spiceharvester, ordos_spiceharvester, drmn.asian, harv.latin, steel_consortium_consortiumminer, slavemaster.nax, slav.nax, armor_harv.nax2, futuretech_prospector, terran_scv, scprobe, zerg_drone, wc2_orc_peon, wc2_human_peasant, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester
-		RefineryTypes: td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, ra1_allies_alliedorerefinery, ra1_soviet_orerefinery, jproc, ra2_soviets_orerefinery, ra2_allies_alliedorerefinery, yryarefn, ts_gdi_tiberiumrefinery, ts_nod_tiberiumrefinery, forgotten_refinery, cabal_refinery, terran_refinery, scassimilator, zerg_extractor, glsupply, chsupply, usasupply, refinery, ixian_refineryixian, ordos_refineryordos, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, wc2_human_townhall, wc2_orc_greathall, cgrefn.asian, steel_consortium_consortiumrefinery, cgauto.latin, refin.nax, refin.nax2, futuretech_refinery, tkmrefinery
+		HarvesterTypes: td_gdi_tiberiumharvester, td_nod_tiberiumharvester, td_nod_stealthharvester, ra1_soviet_oretruck, ra1_allies_alliedoretruck, raharv.japan, ra2_allies_chronominer, ra2_soviets_warminer, ixian_spiceharvester, ordos_spiceharvester, drmn.asian, harv.latin, steel_consortium_consortiumminer, slavemaster.nax, slav.nax, armor_harv.nax2, futuretech_prospector, terran_scv, protoss_probe, zerg_drone, wc2_orc_peon, wc2_human_peasant, ts_gdi_tiberiumharvester, ts_nod_tiberiumharvester, forgotten_tiberiumharvester, cabal_tiberiumharvester
+		RefineryTypes: td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, ra1_allies_alliedorerefinery, ra1_soviet_orerefinery, jproc, ra2_soviets_orerefinery, ra2_allies_alliedorerefinery, yryarefn, ts_gdi_tiberiumrefinery, ts_nod_tiberiumrefinery, forgotten_refinery, cabal_refinery, terran_refinery, protoss_assimilator, zerg_extractor, glsupply, chsupply, usasupply, refinery, ixian_refineryixian, ordos_refineryordos, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, wc2_human_townhall, wc2_orc_greathall, cgrefn.asian, steel_consortium_consortiumrefinery, cgauto.latin, refin.nax, refin.nax2, futuretech_refinery, tkmrefinery
 		# construction yards, defenses, producers
-		EnemyBaseBuildingTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, scnexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, steel_consortium_consortiumconstructionyard, cgcnst.latin, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter, td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_alliedgunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviet_flametower, ra1_soviet_teslacoil, modpillboxfort, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yrygggun, yrngtbnk, cgflam.asian, cgpnch.asian, cgrail.asian, cgchtw.asian, cgplas.asian, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steel_consortium_consortiumsentryturret, steel_consortium_quantumcannon, steel_consortium_bfg10000, ngdshktur.latin, ngbunk2.latin, cgup.latin, sml.latin, twr.nax, flak88.nax, twr.nax2, sturmcann.nax2, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_2, scphotoncannon, wc2_human_scout_tower, wc2_human_sunwell, wc2_orc_watch_tower, tkmbunker, tkmbunkertankturret, td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviet_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yryabrck, terran_barracks, scgateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_human_barracks, wc2_orc_barracks, cgbrck.asian, steel_consortium_steelbarracks, cgpile.latin, barr.nax, barr.nax2, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviet_warfactory, ra1_soviet_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, terran_weaponsfactory, scroboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, cgweap.asian, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_alliedhelipad, ra1_soviet_airfield, ra1_soviet_largesovietairfield, modraafld, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, cgairf.asian, cgair.latin, airfield.nax, airfield.nax2, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkmbarracks, tkmfactory, tkmairpad
+		EnemyBaseBuildingTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, steel_consortium_consortiumconstructionyard, cgcnst.latin, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter, td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_alliedgunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviet_flametower, ra1_soviet_teslacoil, modpillboxfort, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yrygggun, yrngtbnk, cgflam.asian, cgpnch.asian, cgrail.asian, cgchtw.asian, cgplas.asian, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steel_consortium_consortiumsentryturret, steel_consortium_quantumcannon, steel_consortium_bfg10000, ngdshktur.latin, ngbunk2.latin, cgup.latin, sml.latin, twr.nax, flak88.nax, twr.nax2, sturmcann.nax2, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_2, protoss_photoncannon, wc2_human_scout_tower, wc2_human_sunwell, wc2_orc_watch_tower, tkmbunker, tkmbunkertankturret, td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviet_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yryabrck, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_human_barracks, wc2_orc_barracks, cgbrck.asian, steel_consortium_steelbarracks, cgpile.latin, barr.nax, barr.nax2, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviet_warfactory, ra1_soviet_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, cgweap.asian, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_alliedhelipad, ra1_soviet_airfield, ra1_soviet_largesovietairfield, modraafld, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, cgairf.asian, cgair.latin, airfield.nax, airfield.nax2, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkmbarracks, tkmfactory, tkmairpad
 	BaseBuilderBotModuleCA@generic:
 		RequiresCondition: genericbot
 		InititalMinimumRefineryCount: 1
@@ -3468,16 +3468,16 @@ Player:
 		DefenseProductionMinCashRequirement: 1500
 		BuildingQueues: Building, RABuilding, BuildingAddons
 		DefenseQueues: Defence, RADefence, BuildingAddons
-		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, scnexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, steel_consortium_consortiumconstructionyard, cgcnst.latin, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter
-		RefineryTypes: td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, ra1_allies_alliedorerefinery, ra1_soviet_orerefinery, jproc, ra2_soviets_orerefinery, ra2_allies_alliedorerefinery, yryarefn, ts_gdi_tiberiumrefinery, ts_nod_tiberiumrefinery, forgotten_refinery, cabal_refinery, terran_refinery, scassimilator, zerg_extractor, glsupply, chsupply, usasupply, refinery, ixian_refineryixian, ordos_refineryordos, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, wc2_human_townhall, wc2_orc_greathall, cgrefn.asian, steel_consortium_consortiumrefinery, cgauto.latin, refin.nax, refin.nax2, futuretech_refinery, tkmrefinery
-		PowerTypes: nuke, nuk2, powr, apwr, jpwr, ra2_soviets_teslareactor, ra2_allies_alliedpowerplant, ra2_soviets_nuclearreactor, yryapowr, terran_supplydepot, scpylon, scbotoverlord, ts_gdi_powerplant, forgotten_crystalpowerextractor, cabal_powerplant, ts_nod_powerplant, ts_nod_advancedpowerplant, chpower, chpower2, usapower, wind_trap, ixian_windtrap, ordos_windtrap, d2k_mini_windtrap, wc2_human_farm, wc2_orc_pigfarm, cgapwr.asian, cgtnkr.asian, steel_consortium_consortiumpowerplant, cgpow.latin, powr.nax, powr.nax2, futuretech_thermalpowerplant, zerg_overlord, tkmpowerplant
-		BarracksTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviet_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yryabrck, terran_barracks, scgateway, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, ordos_barracks, wc2_human_barracks, wc2_orc_barracks, cgbrck.asian, steel_consortium_steelbarracks, cgpile.latin, barr.nax, barr.nax2, futuretech_troopgate, tkmbarracks
-		VehiclesFactoryTypes: td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviet_warfactory, ra1_soviet_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, terran_weaponsfactory, scroboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, ordos_heavyfactory, ordos_starport, ordos_lightfactory, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, cgweap.asian, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, ts_nod_warfactory, cabal_mechfactory, forgotten_warfactory, tkmfactory
-		ProductionTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviet_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yryabrck, terran_barracks, scgateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_human_barracks, wc2_orc_barracks, cgbrck.asian, steel_consortium_steelbarracks, cgpile.latin, barr.nax, barr.nax2, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviet_warfactory, ra1_soviet_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, terran_weaponsfactory, scroboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, cgweap.asian, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_alliedhelipad, ra1_soviet_airfield, ra1_soviet_largesovietairfield, modraafld, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, cgairf.asian, cgair.latin, airfield.nax, airfield.nax2, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkmbarracks, tkmfactory, tkmairpad
+		ConstructionYardTypes: td_gdi_constructionyard, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, rafact.japan, ra2_soviets_constructionyard, ra2_allies_alliedconstructionyard, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, terran_commandcenter, protoss_nexus, zerg_hatchery, zerg_lair, zerg_hive, glcommand, chcommand, usacommand, ixian_constructionyard, ordos_constructionyard, wc2_human_townhall, wc2_orc_greathall, cgcnst.asian, steel_consortium_consortiumconstructionyard, cgcnst.latin, conyard.nax, conyard.nax2, futuretech_constructionyard, tkmcommandcenter
+		RefineryTypes: td_gdi_tiberiumrefinery, td_nod_tiberiumrefinery, ra1_allies_alliedorerefinery, ra1_soviet_orerefinery, jproc, ra2_soviets_orerefinery, ra2_allies_alliedorerefinery, yryarefn, ts_gdi_tiberiumrefinery, ts_nod_tiberiumrefinery, forgotten_refinery, cabal_refinery, terran_refinery, protoss_assimilator, zerg_extractor, glsupply, chsupply, usasupply, refinery, ixian_refineryixian, ordos_refineryordos, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, wc2_human_townhall, wc2_orc_greathall, cgrefn.asian, steel_consortium_consortiumrefinery, cgauto.latin, refin.nax, refin.nax2, futuretech_refinery, tkmrefinery
+		PowerTypes: nuke, nuk2, powr, apwr, jpwr, ra2_soviets_teslareactor, ra2_allies_alliedpowerplant, ra2_soviets_nuclearreactor, yryapowr, terran_supplydepot, protoss_pylon, scbotoverlord, ts_gdi_powerplant, forgotten_crystalpowerextractor, cabal_powerplant, ts_nod_powerplant, ts_nod_advancedpowerplant, chpower, chpower2, usapower, wind_trap, ixian_windtrap, ordos_windtrap, d2k_mini_windtrap, wc2_human_farm, wc2_orc_pigfarm, cgapwr.asian, cgtnkr.asian, steel_consortium_consortiumpowerplant, cgpow.latin, powr.nax, powr.nax2, futuretech_thermalpowerplant, zerg_overlord, tkmpowerplant
+		BarracksTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviet_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yryabrck, terran_barracks, protoss_gateway, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, ordos_barracks, wc2_human_barracks, wc2_orc_barracks, cgbrck.asian, steel_consortium_steelbarracks, cgpile.latin, barr.nax, barr.nax2, futuretech_troopgate, tkmbarracks
+		VehiclesFactoryTypes: td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviet_warfactory, ra1_soviet_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, ordos_heavyfactory, ordos_starport, ordos_lightfactory, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, cgweap.asian, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, ts_nod_warfactory, cabal_mechfactory, forgotten_warfactory, tkmfactory
+		ProductionTypes: td_gdi_barracks, td_nod_handofnod, ra1_allies_alliedbarracks, ra1_soviet_barracks, ra2_allies_alliedbarracks, ra2_soviets_barracks, yryabrck, terran_barracks, protoss_gateway, zerg_spawningpool, ts_gdi_barracks, forgotten_barracks, ts_nod_handof, cabal_cyborgfactory, glbarracks, chbarracks, usabarracks, d2k_barracks, ixian_barracks, wc2_human_barracks, wc2_orc_barracks, cgbrck.asian, steel_consortium_steelbarracks, cgpile.latin, barr.nax, barr.nax2, futuretech_troopgate, td_gdi_weaponsfactory, td_nod_airstrip, ra1_allies_alliedwarfactory, ra1_soviet_warfactory, ra1_soviet_largefactory, ra2_allies_alliedwarfactory, ra2_soviets_warfactory, yrygweap, terran_weaponsfactory, protoss_roboticsfacility, zerg_hatchery, zerg_lair, zerg_hive, ts_gdi_warfactory, forgotten_warfactory, ts_nod_warfactory, cabal_mechfactory, glweap, chweap, usaweap, ixian_advancedheavyfactory, ixian_starport, wc2_human_gnomish_inventor, wc2_orc_goblin_alchemist, cgweap.asian, steel_consortium_consortiumwarfactory, cgweap.latin, weap.nax, weap.nax2, futuretech_warpgate, td_gdi_helipad, ts_nod_helipad, ts_nod_helipad, forgotten_helipad, ts_gdi_helipad, td_nod_helipad, ra1_allies_alliedhelipad, ra1_soviet_airfield, ra1_soviet_largesovietairfield, modraafld, ra2_allies_airforcecommandhq, ra2_soviets_airfield, ixian_hightechfactory, cgairf.asian, cgair.latin, airfield.nax, airfield.nax2, futuretech_launchpad, ordos_heavyfactory, ordos_starport, ordos_lightfactory, ordos_barracks, ordos_barracks, tkmbarracks, tkmfactory, tkmairpad
 		NavalProductionTypes: cncsyrd, cncspen, raspen, ra1syrd, ra1jsyrd, yrygyard, ra2gayard, ra2nayard, cgyard.asian, cgyard.latin, naval.nax
-		SiloTypes: silo, rasilo, terran_supplydepot, scpylon, zerg_overlord, d2k_silo, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, tkmpowerplant
+		SiloTypes: silo, rasilo, terran_supplydepot, protoss_pylon, zerg_overlord, d2k_silo, wc2_human_elven_lumber_mill, wc2_orc_troll_lumber_mill, tkmpowerplant
 		AntiAirTypes: td_nod_samsite, td_gdi_skyshield, td_gdi_advancedguardtower, ra1_allies_alliedaagun, ra1_soviet_samsite, ra1_allies_camopillbox, jmgnest, ra2_allies_patriotmissilesystem, ra2_soviets_flakcannon, yrygggun, yrngbnkr.bot, ixian_rocketturret, cgpuls.asian, cghype.asian, steel_consortium_antiairquantummissileturret, sml.latin, aatur.latin, flak88.nax, twr.nax2, futuretech_multiturretsystem, terran_missileturret, zerg_creepcolony, zerg_creepcolony_2, tkmbunkerquadturret
-		DefenseTypes: td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_alliedgunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviet_flametower, ra1_soviet_teslacoil, modpillboxfort, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yrygggun, yrngtbnk, cgflam.asian, cgpnch.asian, cgrail.asian, cgchtw.asian, cgplas.asian, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steel_consortium_consortiumsentryturret, steel_consortium_quantumcannon, steel_consortium_bfg10000, ngdshktur.latin, ngbunk2.latin, cgup.latin, sml.latin, twr.nax, flak88.nax, twr.nax2, sturmcann.nax2, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_2, scphotoncannon, wc2_human_scout_tower, wc2_human_sunwell, wc2_orc_watch_tower, tkmbunker, tkmbunkertankturret
+		DefenseTypes: td_gdi_guardtower, td_gdi_advancedguardtower, td_nod_gunturret, td_nod_laserturret, td_nod_obeliskoflight, ra1_allies_pillbox, ra1_allies_camopillbox, ra1_allies_alliedgunturret, ra1_allies_gapgenerator, ra1_allies_bastionartillerybunker, ra1_soviet_flametower, ra1_soviet_teslacoil, modpillboxfort, ra2_allies_pillbox, ra2_allies_prismtower, ra2_allies_grandcannon, ra2_soviets_battlebunker, ra2_soviets_sentrygun, ra2_soviets_flakcannon, ra2_soviets_teslacoil, yrygggun, yrngtbnk, cgflam.asian, cgpnch.asian, cgrail.asian, cgchtw.asian, cgplas.asian, ixian_machinegunturret, ixian_gunturret, ixian_rocketturret, ixian_stormlasher, steel_consortium_consortiumsentryturret, steel_consortium_quantumcannon, steel_consortium_bfg10000, ngdshktur.latin, ngbunk2.latin, cgup.latin, sml.latin, twr.nax, flak88.nax, twr.nax2, sturmcann.nax2, futuretech_multiturretsystem, futuretech_frostbiteturret, terran_bunker, zerg_creepcolony, zerg_creepcolony_2, protoss_photoncannon, wc2_human_scout_tower, wc2_human_sunwell, wc2_orc_watch_tower, tkmbunker, tkmbunkertankturret
 		FragileTypes: td_gdi_communicationscenter, td_nod_communicationscenter, td_gdi_advancedcommunicationscenter, td_nod_templeofnod, td_nod_templeprime, ra1_allies_alliedradardome, ra1_soviet_radardome, dome.japan, ra1_allies_alliedtechcenter, ra1_soviet_techcenter, modjtek, jshrine, ra1_soviet_missilesilo, ra1_allies_chronosphere, ra1_soviet_ironcurtain, ra1_allies_reinforcementpad, ra2_allies_airforcecommandhq, ra2_soviets_radar, ra2napsis, ra2_allies_alliedbattlelab, ra2_soviets_battlelab, yrygtech, yrygcomd, ra2_allies_orepurifier, ra2_allies_spysatelliteuplink, futuretech_robotcontrolcenter, ra2_soviets_nuclearreactor, ra2_soviets_industrialplant, ra2yclon, ra2_allies_weathercontrolcenter, ra2_allies_chronosphere, ra2_soviets_nuclearmissilesilo, ra2_soviets_ironcurtain, yrygppet, yryggntc, cgradr.asian, cgtech.asian, cgionc.asian, cgchao.asian, cgmiac.asian, ixian_outpost, ordos_outpost, ixian_ixresearchcenter, ixian_starport, ordos_ixresearchcenter, ordos_starport, ixian_supercomputer, oilb.building, oilb.ra2, oilb.d2k, steel_consortium_consortiumradar, steel_consortium_consortiumbattlelab, radar.latin, cgspy.latin, cgup.latin, cgte.latin, ca12hit.latin, radar.nax, tek.nax, tech.nax, sausage.nax, beer.nax, rocket.nax, radar.nax2, tech.nax2, dairy.nax2, meteorray.nax2, futuretech_transmissioncenter, futuretech_battlelab, futuretech_hypercore, terran_engineeringbay, terran_academy, terran_armory, terran_sciencefacility, terran_missilesilo, wc2_human_goldmine.bot, wc2_orc_goldmine.bot, tkmradar, tkmtechcenter
 		BuildingIntervals:
 		#Refinery
@@ -3502,7 +3502,7 @@ Player:
 			refin.nax2: 1500
 			futuretech_refinery: 1500
 			terran_refinery: 1500
-			scassimilator: 1500
+			protoss_assimilator: 1500
 			zerg_extractor: 1500
 			wc2_human_elven_lumber_mill: 1500
 			wc2_orc_troll_lumber_mill: 1500
@@ -3529,7 +3529,7 @@ Player:
 			barr.nax2: 1500
 			futuretech_troopgate: 1500
 			terran_barracks: 1500
-			scgateway: 1500
+			protoss_gateway: 1500
 			wc2_human_barracks: 1500
 			wc2_orc_barracks: 1500
 			tkmbarracks: 1500
@@ -3557,7 +3557,7 @@ Player:
 			weap.nax2: 1500
 			futuretech_warpgate: 1500
 			terran_weaponsfactory: 1500
-			scroboticsfacility: 1500
+			protoss_roboticsfacility: 1500
 			wc2_human_gnomish_inventor: 1500
 			wc2_orc_goblin_alchemist: 1500
 		#Airfield
@@ -3654,14 +3654,14 @@ Player:
 			terran_engineeringbay: 3000
 			terran_armory: 3000
 			terran_sciencefacility: 6000
-			scforge: 1500
-			sccyberneticscore: 1500
-			sccitadelofadun: 3000
-			scroboticssupportbay: 4500
-			sctemplararchives: 4500
-			scobservatory: 6000
-			scarbitertribunal: 7500
-			scfleetbeacon: 9000
+			protoss_forge: 1500
+			protoss_cyberneticscore: 1500
+			protoss_citadelofadun: 3000
+			protoss_roboticssupportbay: 4500
+			protoss_templararchives: 4500
+			protoss_observatory: 6000
+			protoss_arbitertribunal: 7500
+			protoss_fleetbeacon: 9000
 			zerg_lair: 1500
 			zerg_greaterspire: 4500
 			zerg_hive: 3000
@@ -3930,20 +3930,20 @@ Player:
 			terran_armory: 1
 			terran_sciencefacility: 2
 			#################### BuildingLimits PROTOSS
-			scprobe: 50
-			scassimilator: 10
-			scgateway: 10
-			scroboticsfacility: 10
-			scstargate: 10
-			scforge: 1
-			sccyberneticscore: 1
-			scshieldbattery: 1
-			sccitadelofadun: 1
-			scroboticssupportbay: 1
-			scfleetbeacon: 1
-			sctemplararchives: 1
-			scobservatory: 1
-			scarbitertribunal: 1
+			protoss_probe: 50
+			protoss_assimilator: 10
+			protoss_gateway: 10
+			protoss_roboticsfacility: 10
+			protoss_stargate: 10
+			protoss_forge: 1
+			protoss_cyberneticscore: 1
+			protoss_shieldbattery: 1
+			protoss_citadelofadun: 1
+			protoss_roboticssupportbay: 1
+			protoss_fleetbeacon: 1
+			protoss_templararchives: 1
+			protoss_observatory: 1
+			protoss_arbitertribunal: 1
 			#################### BuildingLimits ZERG
 			zerg_drone: 50
 			zerg_extractor: 10
@@ -4458,32 +4458,32 @@ Player:
 			terran_sentinel: 15
 			terran_bunker: 15
 			#################### BuildingFractions PROTOSS
-			scnexus: 5
-			scprobe: 10
-			#scpylon: 15
-			scassimilator: 20
-			scpvespenegascollector: 1
-			scgateway: 20
-			scroboticsfacility: 20
-			scstargate: 20
-			scforge: 1
-			sccyberneticscore: 1
-			scshieldbattery: 5
-			sccitadelofadun: 1
-			scroboticssupportbay: 1
-			scfleetbeacon: 1
-			sctemplararchives: 1
-			scobservatory: 1
-			scarbitertribunal: 1
-			scphotoncannon: 40
-			upgroundweapons: 1
-			upgroundarmor: 1
-			upairweapons: 1
-			upairarmor: 1
-			upplasmashield: 1
-			updragoonrange: 1
-			upairspeed: 1
-			upreavercapacity: 1
+			protoss_nexus: 5
+			protoss_probe: 10
+			#protoss_pylon: 15
+			protoss_assimilator: 20
+			protoss_vespenegascollector: 1
+			protoss_gateway: 20
+			protoss_roboticsfacility: 20
+			protoss_stargate: 20
+			protoss_forge: 1
+			protoss_cyberneticscore: 1
+			protoss_shieldbattery: 5
+			protoss_citadelofadun: 1
+			protoss_roboticssupportbay: 1
+			protoss_fleetbeacon: 1
+			protoss_templararchives: 1
+			protoss_observatory: 1
+			protoss_arbitertribunal: 1
+			protoss_photoncannon: 40
+			protoss_upgrade_groundweaponslevel1: 1
+			protoss_upgrade_groundarmorlevel1: 1
+			protoss_upgrade_airweaponslevel1: 1
+			protoss_upgrade_airarmorlevel1: 1
+			protoss_upgrade_plasmashields: 1
+			protoss_upgrade_singularitycharge: 1
+			protoss_upgrade_graviticpropulsion: 1
+			protoss_upgrade_reavercapacity: 1
 			upreaverdamage: 1
 			#################### BuildingFractions ZERG
 			zerg_hatcherydrone: 4
@@ -4782,8 +4782,8 @@ Player:
 		MaxAircraft: 25
 		MaintainAirSuperiority: true
 		MaxAirSuperiority: 25
-		AirToAirUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, ra1_soviet_yakscoutplane, ra1_soviet_teslayak, ra1_soviet_armoredyak, ra1_soviet_nuclearyak, ra1_soviet_migattackbomber, ra1_soviet_su57attackbomber, ra1_allies_longbow, ra1_allies_rapierjumpjet, modkami, ra2_allies_harrier, ra2_soviets_siegechopper, ra2_soviets_migbomber, ra2hind.latin, yrdisk, ra2_allies_nighthawk, phoenix.asian, pelican.asian, ixian_airdrone, d2k_heavy_air_drone, ixian_farasha, steel_consortium_twister, steel_consortium_skyhammer, steel_consortium_cloudbreaker, yakolev.latin, mig.latin, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, piercer.nax2, dieglocke.nax2, bf109.nax, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, scscout, scepigraph, sccarrier, scgladius, scvoidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
-		AirThreatUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_soviet_yakscoutplane, ra1_soviet_teslayak, ra1_soviet_armoredyak, ra1_soviet_nuclearyak, ra1_soviet_migattackbomber, ra1_soviet_su57attackbomber, ra1_soviet_supersonicnuclearbomber, ra1_soviet_hindattackhelicopter, ra1_allies_longbow, ra1_allies_blackhawk, ra1_allies_rapierjumpjet, modkami, modbomber, ra1_soviet_hiptransport, ra1_allies_alliedchinooktransport, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_siegechopper, ra2_soviets_migbomber, ra2hind.latin, ra2_soviets_kirovairship, yrdisk, ra2_allies_nighthawk, phoenix.asian, pelican.asian, ixian_airdrone, d2k_heavy_air_drone, ixian_farasha, steel_consortium_empressstation, steel_consortium_twister, steel_consortium_skyhammer, steel_consortium_cargoship, steel_consortium_cloudbreaker, yakolev.latin, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, dieglocke.nax2, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, scscout, scepigraph, sccarrier, scgladius, scvoidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, scstarshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragonwc2_orc_dragon
+		AirToAirUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, ra1_soviet_yakscoutplane, ra1_soviet_teslayak, ra1_soviet_armoredyak, ra1_soviet_nuclearyak, ra1_soviet_migattackbomber, ra1_soviet_su57attackbomber, ra1_allies_longbow, ra1_allies_rapierjumpjet, modkami, ra2_allies_harrier, ra2_soviets_siegechopper, ra2_soviets_migbomber, ra2hind.latin, yrdisk, ra2_allies_nighthawk, phoenix.asian, pelican.asian, ixian_airdrone, d2k_heavy_air_drone, ixian_farasha, steel_consortium_twister, steel_consortium_skyhammer, steel_consortium_cloudbreaker, yakolev.latin, mig.latin, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, piercer.nax2, dieglocke.nax2, bf109.nax, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragon
+		AirThreatUnits: td_nod_apacheattackhelicopter, td_gdi_orca, td_nod_venom, td_gdi_firehawk, td_gdi_chinooktransport, td_nod_chinooktransport, ra1_soviet_yakscoutplane, ra1_soviet_teslayak, ra1_soviet_armoredyak, ra1_soviet_nuclearyak, ra1_soviet_migattackbomber, ra1_soviet_su57attackbomber, ra1_soviet_supersonicnuclearbomber, ra1_soviet_hindattackhelicopter, ra1_allies_longbow, ra1_allies_blackhawk, ra1_allies_rapierjumpjet, modkami, modbomber, ra1_soviet_hiptransport, ra1_allies_alliedchinooktransport, ra2_allies_harrier, ra2_allies_blackeagle, ra2_soviets_siegechopper, ra2_soviets_migbomber, ra2hind.latin, ra2_soviets_kirovairship, yrdisk, ra2_allies_nighthawk, phoenix.asian, pelican.asian, ixian_airdrone, d2k_heavy_air_drone, ixian_farasha, steel_consortium_empressstation, steel_consortium_twister, steel_consortium_skyhammer, steel_consortium_cargoship, steel_consortium_cloudbreaker, yakolev.latin, mig.latin, zep.nax, zep.nax2, haunebu.nax2, haunebu2.nax2, me262.nax, bf109.nax, piercer.nax2, dieglocke.nax2, futuretech_twister, futuretech_cryocopter, futuretech_harbingergunship, terran_wraith, terran_sundog, terran_battlecruiser, terran_valkyrie, terran_wyvern, protoss_scout, protoss_epigraph, protoss_carrier, protoss_gladius, protoss_voidray, zerg_mutalisk, zerg_devourer, terran_pythean, terran_phobos, zerg_behemoth, protoss_starshipsovereign, wc2_human_gryphon_rider, wc2_orc_dragonwc2_orc_dragon
 		#UnitBuilderMinCredits: 0
 		UnitQueues: Infantry, RAInfantry, SCZergInfantry, Vehicle, RAVehicle, Aircraft, RAAircraft, Naval, RANaval, Addons, Upgrades, Research, Promotions
 		UnitDelays:
@@ -4807,7 +4807,7 @@ Player:
 			futuretech_mobileconstructionvehicle: 5000
 			ixian_mobileconstructionvehicle: 5000
 			terran_mobilecommandcenter: 5000
-			scpmcv: 5000
+			protoss_mobilenexus: 5000
 			zerg_hatcherydrone: 2500
 			wc2_human_mcv: 5000
 			wc2_orc_mcv: 5000
@@ -4844,7 +4844,7 @@ Player:
 			futuretech_mobileconstructionvehicle: 2500
 			ixian_mobileconstructionvehicle: 2500
 			terran_mobilecommandcenter: 2500
-			scpmcv: 2500
+			protoss_mobilenexus: 2500
 			zerg_hatcherydrone: 1500
 			wc2_human_mcv: 2500
 			wc2_orc_mcv: 2500
@@ -6064,60 +6064,60 @@ Player:
 			terran_wyvern: 1
 			terran_phobos: 1
 			#################### UnitsToBuild PROTOSS
-			scprobe: 10
-			sczealot: 3
-			scadept: 3
-			scdragoon: 5
-			scmanifold: 1
-			scanalogue: 3
-			scidol: 1
-			schightemplar: 3
-			scdarktemplar: 5
-			screaver: 3
-			scshuttle: 1
-			scobserver: 1
-			scarchon: 5
-			scscout: 5
-			scepigraph: 5
-			scvoidray: 3
-			scgladius: 3
-			sccorsair: 1
-			sccarrier: 5
-			scstarshipsovereign: 1
-			scarbiter: 1
-			sczeratul: 1
-			scamaranth: 1
-			scatreus: 5
-			scpositron: 5
-			sclegionnaire: 5
-			scpatriarch: 1
-			updragoonrange: 1
-			upgroundweapons: 1
-			upgroundweapons2: 1
-			upgroundarmor: 1
-			upgroundarmor2: 1
-			upairweapons: 1
-			upairweapons2: 1
-			upairarmor: 1
-			upairarmor2: 1
-			uppylon1: 1
-			uppylon2: 1
-			upplasmashield: 1
-			upreavercapacity: 1
-			upglaves: 1
-			upairspeed: 1
-			uplegionnaire: 1
-			upatreus: 1
-			upamaranth: 1
-			uppatriarch: 1
-			upepigraph: 1
+			protoss_probe: 10
+			protoss_zealot: 3
+			protoss_adept: 3
+			protoss_dragoon: 5
+			protoss_manifold: 1
+			protoss_analogue: 3
+			protoss_idol: 1
+			protoss_hightemplar: 3
+			protoss_darktemplar: 5
+			protoss_reaver: 3
+			protoss_shuttle: 1
+			protoss_observer: 1
+			protoss_archon: 5
+			protoss_scout: 5
+			protoss_epigraph: 5
+			protoss_voidray: 3
+			protoss_gladius: 3
+			protoss_corsair: 1
+			protoss_carrier: 5
+			protoss_starshipsovereign: 1
+			protoss_arbiter: 1
+			protoss_zeratul: 1
+			protoss_amaranth: 1
+			protoss_atreus: 5
+			protoss_positron: 5
+			protoss_legionnaire: 5
+			protoss_patriarch: 1
+			protoss_upgrade_singularitycharge: 1
+			protoss_upgrade_groundweaponslevel1: 1
+			protoss_upgrade_groundweaponslevel2: 1
+			protoss_upgrade_groundarmorlevel1: 1
+			protoss_upgrade_groundarmorlevel2: 1
+			protoss_upgrade_airweaponslevel1: 1
+			protoss_upgrade_airweaponslevel2: 1
+			protoss_upgrade_airarmorlevel1: 1
+			protoss_upgrade_airarmorlevel2: 1
+			protoss_upgrade_upgradepylonlevel1: 1
+			protoss_upgrade_upgradepylonlevel2: 1
+			protoss_upgrade_plasmashields: 1
+			protoss_upgrade_reavercapacity: 1
+			protoss_upgrade_resonatingglaves: 1
+			protoss_upgrade_graviticpropulsion: 1
+			protoss_promotion_unlocklegionnaire: 1
+			protoss_promotion_unlockatreus: 1
+			protoss_promotion_unlockamaranth: 1
+			protoss_promotion_unlockpatriarch: 1
+			protoss_promotion_unlockepigraph: 1
 			uplanifect: 1
-			upgladius: 1
-			upstarsovereign: 1
-			uppositron: 1
-			upanalogue: 1
-			upmanifold: 1
-			upidol: 1
+			protoss_promotion_unlockgladius: 1
+			protoss_promotion_unlockstarsovereign: 1
+			protoss_promotion_unlockpositron: 1
+			protoss_promotion_unlockanalogue: 1
+			protoss_promotion_unlockmanifold: 1
+			protoss_promotion_unlockidol: 1
 			scpylonexpand: 100
 			#################### UnitsToBuild ZERG
 			zerg_overlord: 10
@@ -6781,10 +6781,10 @@ Player:
 			terran_scv: 50
 			terran_medic: 3
 			#################### UnitLimits PROTOSS
-			scprobe: 50
-			scobserver: 1
-			scarbiter: 1
-			sccorsair: 1
+			protoss_probe: 50
+			protoss_observer: 1
+			protoss_arbiter: 1
+			protoss_corsair: 1
 			scshuttle.reaver: 1
 			scshuttle.reaver2: 1
 			scshuttle.hightemplar: 1

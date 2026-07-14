@@ -51,19 +51,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: protoss
-		BaseActor: scpmcv
+		BaseActor: protoss_mobilenexus
 	StartingUnits@defaultprotoss:
 		Class: light
 		ClassName: Light Support
 		Factions: protoss
-		BaseActor: scpmcv
-		SupportActors: sczealot, scdragoon
+		BaseActor: protoss_mobilenexus
+		SupportActors: protoss_zealot, protoss_dragoon
 	StartingUnits@heavyprotoss:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: protoss
-		BaseActor: scpmcv
-		SupportActors: sczealot, sczealot, scdragoon, scdragoon
+		BaseActor: protoss_mobilenexus
+		SupportActors: protoss_zealot, protoss_zealot, protoss_dragoon, protoss_dragoon
 	####################################################################################################
 	#		SC ZERG
 	####################################################################################################
@@ -329,93 +329,93 @@ World:
 ####################################################################################################
 
 ^SingularityChargeUpgrade:
-	RangeMultiplier@updragoonrange:
-		RequiresCondition: updragoonrange
+	RangeMultiplier@protoss_upgrade_singularitycharge:
+		RequiresCondition: protoss_upgrade_singularitycharge
 		Modifier: 120
-	GrantConditionOnPrerequisite@updragoonrange:
-		Condition: updragoonrange
-		Prerequisites: updragoonrange
+	GrantConditionOnPrerequisite@protoss_upgrade_singularitycharge:
+		Condition: protoss_upgrade_singularitycharge
+		Prerequisites: protoss_upgrade_singularitycharge
 	ActorStatValues:
-		Upgrades: updragoonrange
+		Upgrades: protoss_upgrade_singularitycharge
 
 ^ResonatingGlaves:
-	ReloadDelayMultiplier@upglaves:
-		RequiresCondition: upglaves
+	ReloadDelayMultiplier@protoss_upgrade_resonatingglaves:
+		RequiresCondition: protoss_upgrade_resonatingglaves
 		Modifier: 60
-	GrantConditionOnPrerequisite@upglaves:
-		Condition: upglaves
-		Prerequisites: upglaves
+	GrantConditionOnPrerequisite@protoss_upgrade_resonatingglaves:
+		Condition: protoss_upgrade_resonatingglaves
+		Prerequisites: protoss_upgrade_resonatingglaves
 	ActorStatValues:
-		Upgrades: upglaves
+		Upgrades: protoss_upgrade_resonatingglaves
 
 ^ProtossGroundWeaponUpgrades:
-	FirepowerMultiplier@upgroundweapons:
+	FirepowerMultiplier@protoss_upgrade_groundweaponslevel1:
 		Modifier: 115
-		RequiresCondition: upgroundweapons && !upgroundweapons2
-	GrantConditionOnPrerequisite@upgroundweapons:
-		Condition: upgroundweapons
-		Prerequisites: upgroundweapons
-	FirepowerMultiplier@upgroundweapons2:
+		RequiresCondition: protoss_upgrade_groundweaponslevel1 && !protoss_upgrade_groundweaponslevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundweaponslevel1:
+		Condition: protoss_upgrade_groundweaponslevel1
+		Prerequisites: protoss_upgrade_groundweaponslevel1
+	FirepowerMultiplier@protoss_upgrade_groundweaponslevel2:
 		Modifier: 135
-		RequiresCondition: upgroundweapons2
-	GrantConditionOnPrerequisite@upgroundweapons2:
-		Condition: upgroundweapons2
-		Prerequisites: upgroundweapons2
+		RequiresCondition: protoss_upgrade_groundweaponslevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundweaponslevel2:
+		Condition: protoss_upgrade_groundweaponslevel2
+		Prerequisites: protoss_upgrade_groundweaponslevel2
 	ActorStatValues:
-		Upgrades: upgroundweapons
+		Upgrades: protoss_upgrade_groundweaponslevel1
 
 ^ProtossGroundArmorUpgrades:
-	DamageMultiplier@upgroundarmor:
+	DamageMultiplier@protoss_upgrade_groundarmorlevel1:
 		Modifier: 90
-		RequiresCondition: upgroundarmor && !upgroundarmor2
-	GrantConditionOnPrerequisite@upgroundarmor:
-		Condition: upgroundarmor
-		Prerequisites: upgroundarmor
-	DamageMultiplier@upgroundarmor2:
+		RequiresCondition: protoss_upgrade_groundarmorlevel1 && !protoss_upgrade_groundarmorlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundarmorlevel1:
+		Condition: protoss_upgrade_groundarmorlevel1
+		Prerequisites: protoss_upgrade_groundarmorlevel1
+	DamageMultiplier@protoss_upgrade_groundarmorlevel2:
 		Modifier: 80
-		RequiresCondition: upgroundarmor2
-	GrantConditionOnPrerequisite@upgroundarmor2:
-		Condition: upgroundarmor2
-		Prerequisites: upgroundarmor2
+		RequiresCondition: protoss_upgrade_groundarmorlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_groundarmorlevel2:
+		Condition: protoss_upgrade_groundarmorlevel2
+		Prerequisites: protoss_upgrade_groundarmorlevel2
 	ActorStatValues:
-		Upgrades: upgroundarmor
+		Upgrades: protoss_upgrade_groundarmorlevel1
 
 ^ProtossAirWeaponUpgrades:
-	FirepowerMultiplier@upairweapons:
+	FirepowerMultiplier@protoss_upgrade_airweaponslevel1:
 		Modifier: 115
-		RequiresCondition: upairweapons && !upairweapons2
-	GrantConditionOnPrerequisite@upairweapons:
-		Condition: upairweapons
-		Prerequisites: upairweapons
-	FirepowerMultiplier@upairweapons2:
+		RequiresCondition: protoss_upgrade_airweaponslevel1 && !protoss_upgrade_airweaponslevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_airweaponslevel1:
+		Condition: protoss_upgrade_airweaponslevel1
+		Prerequisites: protoss_upgrade_airweaponslevel1
+	FirepowerMultiplier@protoss_upgrade_airweaponslevel2:
 		Modifier: 135
-		RequiresCondition: upairweapons2
-	GrantConditionOnPrerequisite@upairweapons2:
-		Condition: upairweapons2
-		Prerequisites: upairweapons2
+		RequiresCondition: protoss_upgrade_airweaponslevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_airweaponslevel2:
+		Condition: protoss_upgrade_airweaponslevel2
+		Prerequisites: protoss_upgrade_airweaponslevel2
 	ActorStatValues:
-		Upgrades: upairweapons
+		Upgrades: protoss_upgrade_airweaponslevel1
 
 ^ProtossAirArmorUpgrades:
-	DamageMultiplier@upairarmor:
+	DamageMultiplier@protoss_upgrade_airarmorlevel1:
 		Modifier: 90
-		RequiresCondition: upairarmor && !upairarmor2
-	GrantConditionOnPrerequisite@upairarmor:
-		Condition: upairarmor
-		Prerequisites: upairarmor
-	DamageMultiplier@upairarmor2:
+		RequiresCondition: protoss_upgrade_airarmorlevel1 && !protoss_upgrade_airarmorlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_airarmorlevel1:
+		Condition: protoss_upgrade_airarmorlevel1
+		Prerequisites: protoss_upgrade_airarmorlevel1
+	DamageMultiplier@protoss_upgrade_airarmorlevel2:
 		Modifier: 80
-		RequiresCondition: upairarmor2
-	GrantConditionOnPrerequisite@upairarmor2:
-		Condition: upairarmor2
-		Prerequisites: upairarmor2
+		RequiresCondition: protoss_upgrade_airarmorlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_airarmorlevel2:
+		Condition: protoss_upgrade_airarmorlevel2
+		Prerequisites: protoss_upgrade_airarmorlevel2
 	ActorStatValues:
-		Upgrades: upairarmor
+		Upgrades: protoss_upgrade_airarmorlevel1
 
 ^GraviticUpgrade:
 	GrantConditionOnPrerequisite@grav:
 		Condition: upspeed
-		Prerequisites: upairspeed
+		Prerequisites: protoss_upgrade_graviticpropulsion
 	SpeedMultiplier@grav:
 		Modifier: 120
 		RequiresCondition: upspeed
@@ -1364,7 +1364,7 @@ terran_missilesilo:
 	Inherits: ^BaseBuilding
 	-ChangesShield@shielddischarge:
 
-SCNEXUS:
+protoss_nexus:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
@@ -1441,11 +1441,11 @@ SCNEXUS:
 		Queues: Building, Defence, RABuilding, RADefence
 		Sequence: build
 	Transforms:
-		IntoActor: scpmcv
+		IntoActor: protoss_mobilenexus
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCPYLON:
+protoss_pylon:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
@@ -1460,7 +1460,7 @@ SCPYLON:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~scnexus
+		Prerequisites: ~protoss_nexus
 		Queue: Building, RABuilding
 		Description: actor_scpylon.description
 	Building:
@@ -1473,18 +1473,18 @@ SCPYLON:
 		Capacity: 5000
 	RevealsShroud:
 		Range: 5c0
-	GrantConditionOnPrerequisite@uppylon1:
-		Condition: uppylon1
-		Prerequisites: uppylon1
-	Power@uppylon1:
+	GrantConditionOnPrerequisite@protoss_upgrade_upgradepylonlevel1:
+		Condition: protoss_upgrade_upgradepylonlevel1
+		Prerequisites: protoss_upgrade_upgradepylonlevel1
+	Power@protoss_upgrade_upgradepylonlevel1:
 		Amount: 150
-		RequiresCondition: uppylon1 && !uppylon2
-	GrantConditionOnPrerequisite@uppylon2:
-		Condition: uppylon2
-		Prerequisites: uppylon2
-	Power@uppylon2:
+		RequiresCondition: protoss_upgrade_upgradepylonlevel1 && !protoss_upgrade_upgradepylonlevel2
+	GrantConditionOnPrerequisite@protoss_upgrade_upgradepylonlevel2:
+		Condition: protoss_upgrade_upgradepylonlevel2
+		Prerequisites: protoss_upgrade_upgradepylonlevel2
+	Power@protoss_upgrade_upgradepylonlevel2:
 		Amount: 200
-		RequiresCondition: uppylon2
+		RequiresCondition: protoss_upgrade_upgradepylonlevel2
 	WithResourceStoragePipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -1493,9 +1493,9 @@ SCPYLON:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: uppylon1, uppylon2
+		Upgrades: protoss_upgrade_upgradepylonlevel1, protoss_upgrade_upgradepylonlevel2
 
-SCASSIMILATOR:
+protoss_assimilator:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^SCRefineryCommon
@@ -1507,7 +1507,7 @@ SCASSIMILATOR:
 	Power:
 		Amount: 0
 	Buildable:
-		Prerequisites: ~scnexus
+		Prerequisites: ~protoss_nexus
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
 		Description: actor_scassimilator.description
@@ -1516,11 +1516,11 @@ SCASSIMILATOR:
 		BuildSounds: pshbld03.aud
 		Dimensions: 3,3
 	FreeActor@1:
-		Actor: scprobe
+		Actor: protoss_probe
 		SpawnOffset: 0,2
 		Facing: 540
 	FreeActor@2:
-		Actor: scprobe
+		Actor: protoss_probe
 		SpawnOffset: 0,2
 		Facing: 540
 	SelectionDecorations:
@@ -1547,17 +1547,17 @@ SCASSIMILATOR:
 	Pluggable:
 		Offset: 1,0
 		Conditions:
-			scassimilator: assimilatorupg
+			protoss_assimilator: assimilatorupg
 		Requirements:
-			scassimilator: !build-incomplete && !assimilatorupg
+			protoss_assimilator: !build-incomplete && !assimilatorupg
 	Voiced:
 		VoiceSet: SCRefineryVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: scpvespenegascollector
+		Upgrades: protoss_vespenegascollector
 
-scpvespenegascollector:
+protoss_vespenegascollector:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Vespene Gas Collector
@@ -1565,14 +1565,14 @@ scpvespenegascollector:
 		Cost: 2500
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~scnexus, scprefineryupgradeavailable
+		Prerequisites: ~protoss_nexus, scprefineryupgradeavailable
 		Description: actor_scpvespenegascollector.description
 	Plug:
-		Type: scassimilator
+		Type: protoss_assimilator
 	RenderSprites:
 		Image: upscrefinery2
 
-SCGATEWAY:
+protoss_gateway:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
@@ -1585,7 +1585,7 @@ SCGATEWAY:
 		Amount: 0
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scnexus
+		Prerequisites: ~protoss_nexus
 		Queue: Building, RABuilding
 		Description: actor_scgateway.description
 	Building:
@@ -1615,7 +1615,7 @@ SCGATEWAY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCFORGE:
+protoss_forge:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -1635,7 +1635,7 @@ SCFORGE:
 		BuildPaletteOrder: 40
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~scnexus
+		Prerequisites: ~protoss_nexus
 		Queue: Building, RABuilding
 		Description: actor_scforge.description
 	Building:
@@ -1658,7 +1658,7 @@ SCFORGE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCPHOTONCANNON:
+protoss_photoncannon:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
@@ -1678,7 +1678,7 @@ SCPHOTONCANNON:
 		Amount: -100
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~scnexus, scforge
+		Prerequisites: ~protoss_nexus, protoss_forge
 		Queue: Defence, RADefence
 		Description: actor_scphotoncannon.description
 	Building:
@@ -1713,9 +1713,9 @@ SCPHOTONCANNON:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
 
-SCCYBERNETICSCORE:
+protoss_cyberneticscore:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -1735,7 +1735,7 @@ SCCYBERNETICSCORE:
 		BuildPaletteOrder: 50
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~scnexus, scgateway
+		Prerequisites: ~protoss_nexus, protoss_gateway
 		Queue: Building, RABuilding
 		Description: actor_sccyberneticscore.description
 	Building:
@@ -1758,7 +1758,7 @@ SCCYBERNETICSCORE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSHIELDBATTERY:
+protoss_shieldbattery:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@EMP: ^TurretEMP
@@ -1774,7 +1774,7 @@ SCSHIELDBATTERY:
 		BuildSounds: pshbld03.aud
 	Buildable:
 		BuildPaletteOrder: 140
-		Prerequisites: ~scnexus, scgateway
+		Prerequisites: ~protoss_nexus, protoss_gateway
 		Queue: Building, RABuilding
 		Description: actor_scshieldbattery.description
 	Selectable:
@@ -1818,13 +1818,13 @@ SCSHIELDBATTERY:
 	-WithSpriteBody:
 	-GivesBuildableArea:
 	-WithDeathAnimation:
-	FirepowerMultiplier@upplasmashield:
+	FirepowerMultiplier@protoss_upgrade_plasmashields:
 		Modifier: 200
-		RequiresCondition: upplasmashield
+		RequiresCondition: protoss_upgrade_plasmashields
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCROBOTICSFACILITY:
+protoss_roboticsfacility:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
@@ -1837,7 +1837,7 @@ SCROBOTICSFACILITY:
 		Amount: 0
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~scnexus, sccyberneticscore
+		Prerequisites: ~protoss_nexus, protoss_cyberneticscore
 		Queue: Building, RABuilding
 		Description: actor_scroboticsfacility.description
 	Building:
@@ -1867,7 +1867,7 @@ SCROBOTICSFACILITY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSTARGATE:
+protoss_stargate:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
@@ -1880,7 +1880,7 @@ SCSTARGATE:
 		Amount: 0
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~scnexus, sccyberneticscore
+		Prerequisites: ~protoss_nexus, protoss_cyberneticscore
 		Queue: Building, RABuilding
 		Description: actor_scstargate.description
 	Building:
@@ -1903,7 +1903,7 @@ SCSTARGATE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCCITADELOFADUN:
+protoss_citadelofadun:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -1923,7 +1923,7 @@ SCCITADELOFADUN:
 		BuildPaletteOrder: 80
 		BuildDuration: 625
 		BuildDurationModifier: 100
-		Prerequisites: ~scnexus, sccyberneticscore
+		Prerequisites: ~protoss_nexus, protoss_cyberneticscore
 		Queue: Building, RABuilding
 		Description: actor_sccitadelofadun.description
 	Building:
@@ -1946,7 +1946,7 @@ SCCITADELOFADUN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCROBOTICSSUPPORTBAY:
+protoss_roboticssupportbay:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -1966,7 +1966,7 @@ SCROBOTICSSUPPORTBAY:
 		BuildPaletteOrder: 90
 		BuildDuration: 625
 		BuildDurationModifier: 100
-		Prerequisites: ~scnexus, scroboticsfacility
+		Prerequisites: ~protoss_nexus, protoss_roboticsfacility
 		Queue: Building, RABuilding
 		Description: actor_scroboticssupportbay.description
 	Building:
@@ -1989,7 +1989,7 @@ SCROBOTICSSUPPORTBAY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCFLEETBEACON:
+protoss_fleetbeacon:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -2000,7 +2000,7 @@ SCFLEETBEACON:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 130
-		Prerequisites: ~scnexus, scstargate, !SCPurifierStrike
+		Prerequisites: ~protoss_nexus, protoss_stargate, !SCPurifierStrike
 		Queue: Building, RABuilding
 		Description: actor_scfleetbeacon.description
 	Building:
@@ -2058,7 +2058,7 @@ SCFLEETBEACON:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCTEMPLARARCHIVES:
+protoss_templararchives:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -2078,7 +2078,7 @@ SCTEMPLARARCHIVES:
 		BuildPaletteOrder: 110
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Prerequisites: ~scnexus, sccitadelofadun, scgateway
+		Prerequisites: ~protoss_nexus, protoss_citadelofadun, protoss_gateway
 		Queue: Building, RABuilding
 		Description: actor_sctemplararchives.description
 	Building:
@@ -2101,7 +2101,7 @@ SCTEMPLARARCHIVES:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCOBSERVATORY:
+protoss_observatory:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@radar: ^RadarBuilding
@@ -2122,7 +2122,7 @@ SCOBSERVATORY:
 		BuildPaletteOrder: 100
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~scnexus, scroboticsfacility
+		Prerequisites: ~protoss_nexus, protoss_roboticsfacility
 		Queue: Building, RABuilding
 		Description: actor_scobservatory.description
 	Building:
@@ -2145,7 +2145,7 @@ SCOBSERVATORY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCARBITERTRIBUNAL:
+protoss_arbitertribunal:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^2x2Shape
 	Inherits@explode: ^BuildingExplodeProtoss
@@ -2165,7 +2165,7 @@ SCARBITERTRIBUNAL:
 		BuildPaletteOrder: 120
 		BuildDuration: 750
 		BuildDurationModifier: 100
-		Prerequisites: ~scnexus, scstargate, sctemplararchives
+		Prerequisites: ~protoss_nexus, protoss_stargate, protoss_templararchives
 		Queue: Building, RABuilding
 		Description: actor_scarbitertribunal.description
 	Building:
@@ -6351,7 +6351,7 @@ zerg_promotion_unlockbehemoth:
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 125
-		RequiresCondition: upplasmashield
+		RequiresCondition: protoss_upgrade_plasmashields
 	Armor:
 		RequiresCondition: !shielded
 	Armor@shielded:
@@ -6360,14 +6360,14 @@ zerg_promotion_unlockbehemoth:
 	Targetable@PersonalShielded:
 		TargetTypes: PersonalShielded
 		RequiresCondition: shielded
-	DamageMultiplier@upplasmashield:
+	DamageMultiplier@protoss_upgrade_plasmashields:
 		Modifier: 80
-		RequiresCondition: upplasmashield && shielded
-	GrantConditionOnPrerequisite@upplasmashield:
-		Condition: upplasmashield
-		Prerequisites: upplasmashield
+		RequiresCondition: protoss_upgrade_plasmashields && shielded
+	GrantConditionOnPrerequisite@protoss_upgrade_plasmashields:
+		Condition: protoss_upgrade_plasmashields
+		Prerequisites: protoss_upgrade_plasmashields
 	ActorStatValues:
-		Upgrades: upplasmashield
+		Upgrades: protoss_upgrade_plasmashields
 
 ^BasicProtoss: #ONLY USE FOR UNITS THAT INHERIT ^SOLDIER
 	Inherits: ^DefaultSoldier
@@ -6432,7 +6432,7 @@ zerg_promotion_unlockbehemoth:
 		Weapon: UnitExplodeSmallProtoss
 		EmptyWeapon: UnitExplodeSmallProtoss
 
-SCPROBE:
+protoss_probe:
 	Inherits: ^ProtossVehicle
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@explode: ^UnitExplodeSmallProtoss
@@ -6446,7 +6446,7 @@ SCPROBE:
 	Tooltip:
 		Name: Protoss Probe
 	Buildable:
-		Prerequisites: ~scassimilator
+		Prerequisites: ~protoss_assimilator
 		Description: actor_scprobe.description
 	Armament:
 		Weapon: ProbeAttack
@@ -6459,7 +6459,7 @@ SCPROBE:
 		VoiceSet: SCProbeVoice
 	DeathSounds:
 	WithHarvesterSpriteBody:
-		ImageByFullness: scprobe, scprobefull
+		ImageByFullness: protoss_probe, scprobefull
 	-WithFacingSpriteBody:
 	WithShadow:
 		Offset: 128, 128, 0
@@ -6467,7 +6467,7 @@ SCPROBE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCZEALOT:
+protoss_zealot:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -6484,7 +6484,7 @@ SCZEALOT:
 		Amount: -15
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scgateway, ~!uplegionnaire
+		Prerequisites: ~protoss_gateway, ~!protoss_promotion_unlocklegionnaire
 		Queue: Infantry, RAInfantry
 		Description: actor_sczealot.description
 	Mobile:
@@ -6503,11 +6503,11 @@ SCZEALOT:
 	Voiced:
 		VoiceSet: SCZealotVoice
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCADEPT:
+protoss_adept:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -6526,7 +6526,7 @@ SCADEPT:
 		Amount: -30
 	Buildable:
 		BuildPaletteOrder: 25
-		Prerequisites: ~scgateway
+		Prerequisites: ~protoss_gateway
 		Queue: Infantry, RAInfantry
 		Description: actor_scadept.description
 	Mobile:
@@ -6566,12 +6566,12 @@ SCADEPT:
 	Voiced:
 		VoiceSet: SCZealotVoice
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, upglaves
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_resonatingglaves
 	RenderSprites:
 		PlayerPalette: player_rgba
 
 scadept.shade:
-	Inherits: SCADEPT
+	Inherits: protoss_adept
 	-UpdatesPlayerStatistics:
 	-MapEditorData:
 	-ActorLostNotification:
@@ -6619,9 +6619,9 @@ scadept.shade:
 		ValidRelationships: Enemy
 		TargetDistance: Furthest
 	RenderSprites:
-		Image: scadept
+		Image: protoss_adept
 
-SCDRAGOON:
+protoss_dragoon:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MainBattleTankTemplate
@@ -6640,7 +6640,7 @@ SCDRAGOON:
 	Power:
 		Amount: -60
 	Buildable:
-		Prerequisites: ~sccyberneticscore
+		Prerequisites: ~protoss_cyberneticscore
 		Queue: Infantry, RAInfantry
 		Description: actor_scdragoon.description
 	Mobile:
@@ -6679,9 +6679,9 @@ SCDRAGOON:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
 
-SCMANIFOLD:
+protoss_manifold:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SupportVehicleTemplate
@@ -6701,7 +6701,7 @@ SCMANIFOLD:
 	Power:
 		Amount: -30
 	Buildable:
-		Prerequisites: ~sccyberneticscore, ~upmanifold
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockmanifold
 		Queue: Vehicle, RAVehicle
 		Description: actor_scmanifold.description
 	Mobile:
@@ -6753,9 +6753,9 @@ SCMANIFOLD:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
 
-SCANALOGUE:
+protoss_analogue:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SupportVehicleTemplate
@@ -6776,7 +6776,7 @@ SCANALOGUE:
 	Power:
 		Amount: -60
 	Buildable:
-		Prerequisites: ~sccyberneticscore, ~upanalogue
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockanalogue
 		Queue: Vehicle, RAVehicle
 		Description: actor_scanalogue.description
 	Mobile:
@@ -6834,9 +6834,9 @@ SCANALOGUE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
 
-SCIDOL:
+protoss_idol:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^EpicVehicleTemplate
@@ -6857,7 +6857,7 @@ SCIDOL:
 	Power:
 		Amount: -140
 	Buildable:
-		Prerequisites: ~sccyberneticscore, ~upidol
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockidol
 		Queue: Vehicle, RAVehicle
 		BuildLimit: 1
 		Description: actor_scidol.description
@@ -6931,9 +6931,9 @@ SCIDOL:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
 
-SCHIGHTEMPLAR:
+protoss_hightemplar:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -6951,7 +6951,7 @@ SCHIGHTEMPLAR:
 		Amount: -40
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~sctemplararchives
+		Prerequisites: ~protoss_templararchives
 		Queue: Infantry, RAInfantry
 		Description: actor_schightemplar.description
 	Mobile:
@@ -7030,13 +7030,13 @@ SCHIGHTEMPLAR:
 		FacingTolerance: 0
 	WithInfantryBody:
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 	Voiced:
 		VoiceSet: SCHighTemplarVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCDARKTEMPLAR:
+protoss_darktemplar:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -7055,7 +7055,7 @@ SCDARKTEMPLAR:
 		Amount: -30
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~sccitadelofadun, ~!upamaranth
+		Prerequisites: ~protoss_citadelofadun, ~!protoss_promotion_unlockamaranth
 		Queue: Infantry, RAInfantry
 		Description: actor_scdarktemplar.description
 	Mobile:
@@ -7077,11 +7077,11 @@ SCDARKTEMPLAR:
 	Cloak:
 		CloakStyle: Alpha
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSHUTTLE:
+protoss_shuttle:
 	Inherits: ^AirProtoss
 	Inherits@Template: ^UnarmedTransportHelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -7100,10 +7100,10 @@ SCSHUTTLE:
 		Amount: -300
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: scshuttle
+		OverrideActor: protoss_shuttle
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scroboticsfacility
+		Prerequisites: ~protoss_roboticsfacility
 		Queue: Vehicle, RAVehicle
 		Description: actor_scshuttle.description
 	Aircraft:
@@ -7124,13 +7124,13 @@ SCSHUTTLE:
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 0
 		LoadedCondition: loaded
-		InitialUnits: sczealot, sclegionnaire, scdragoon, scatreus, schightemplar, scdarktemplar
+		InitialUnits: protoss_zealot, protoss_legionnaire, protoss_dragoon, protoss_atreus, protoss_hightemplar, protoss_darktemplar
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scdarktemplar
+		PilotActor: protoss_darktemplar
 	Selectable:
 		Class: terran_dropship
 		DecorationBounds: 1280, 1280, 0, 0
@@ -7138,19 +7138,19 @@ SCSHUTTLE:
 		VoiceSet: SCShuttleVoice
 	DeathSounds:
 	RenderSprites:
-		Image: scshuttle
+		Image: protoss_shuttle
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	WithCargoSounds:
 		EnterSounds: tdrtra00.wav
 		ExitSounds: tdrtra00.wav
 
-SCREAVER:
+protoss_reaver:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^FireSupportTemplate
@@ -7169,7 +7169,7 @@ SCREAVER:
 		Amount: -135
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scroboticssupportbay
+		Prerequisites: ~protoss_roboticssupportbay
 		Queue: Vehicle, RAVehicle
 		Description: actor_screaver.description
 	Mobile:
@@ -7194,7 +7194,7 @@ SCREAVER:
 		Name: secondary
 		Weapon: ScarabLaunchDummy
 		LocalOffset: 512,0,256
-		RequiresCondition: !upreavercapacity
+		RequiresCondition: !protoss_upgrade_reavercapacity
 		PauseOnCondition: !ammo
 	AttackFrontal:
 		FacingTolerance: 0
@@ -7224,15 +7224,15 @@ SCREAVER:
 		PipCount: 10
 	Selectable:
 		DecorationBounds: 1280, 1280
-	GrantConditionOnPrerequisite@upreavercapacity:
-		Condition: upreavercapacity
-		Prerequisites: upreavercapacity
+	GrantConditionOnPrerequisite@protoss_upgrade_reavercapacity:
+		Condition: protoss_upgrade_reavercapacity
+		Prerequisites: protoss_upgrade_reavercapacity
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, upreavercapacity
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_reavercapacity
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCOBSERVER:
+protoss_observer:
 	Inherits: ^AirProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -7252,7 +7252,7 @@ SCOBSERVER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scobservatory
+		Prerequisites: ~protoss_observatory
 		Queue: Vehicle, RAVehicle
 		Description: actor_scobserver.description
 	Aircraft:
@@ -7296,11 +7296,11 @@ SCOBSERVER:
 	Cloak:
 		CloakStyle: Alpha
 	ActorStatValues:
-		Upgrades: upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCARCHON:
+protoss_archon:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^LineBreakerTemplate
@@ -7319,7 +7319,7 @@ SCARCHON:
 		Amount: -280
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~sctemplararchives
+		Prerequisites: ~protoss_templararchives
 		Queue: Vehicle, RAVehicle
 		Description: actor_scarchon.description
 	Mobile:
@@ -7371,9 +7371,9 @@ SCARCHON:
 		IsPlayerPalette: true
 		PauseOnCondition: chronobeamed
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 
-SCSCOUT:
+protoss_scout:
 	Inherits: ^AirProtoss
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -7396,7 +7396,7 @@ SCSCOUT:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstargate, ~!upepigraph
+		Prerequisites: ~protoss_stargate, ~!protoss_promotion_unlockepigraph
 		Queue: Aircraft, RAAircraft
 		Description: actor_scscout.description
 	Aircraft:
@@ -7455,9 +7455,9 @@ SCSCOUT:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 
-SCEPIGRAPH:
+protoss_epigraph:
 	Inherits: ^AirProtoss
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -7481,7 +7481,7 @@ SCEPIGRAPH:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstargate, ~upepigraph
+		Prerequisites: ~protoss_stargate, ~protoss_promotion_unlockepigraph
 		Queue: Aircraft, RAAircraft
 		Description: actor_scepigraph.description
 	Aircraft:
@@ -7527,13 +7527,13 @@ SCEPIGRAPH:
 		RequiresSelection: True
 		PipCount: 8
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	Voiced:
 		VoiceSet: SCScoutVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCvoidray:
+protoss_voidray:
 	Inherits: ^AirProtoss
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -7558,7 +7558,7 @@ SCvoidray:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstargate, ~upvoidray
+		Prerequisites: ~protoss_stargate, ~protoss_promotion_unlockvoidray
 		Queue: Aircraft, RAAircraft
 		Description: Aerial assault craft whose prismatic beam intensifies while it stays on target.
 	Aircraft:
@@ -7601,13 +7601,13 @@ SCvoidray:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	Voiced:
 		VoiceSet: SCScoutVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCGLADIUS:
+protoss_gladius:
 	Inherits: ^AirProtoss
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -7631,7 +7631,7 @@ SCGLADIUS:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstargate, ~upgladius
+		Prerequisites: ~protoss_stargate, ~protoss_promotion_unlockgladius
 		Queue: Aircraft, RAAircraft
 		Description: actor_scgladius.description
 	Aircraft:
@@ -7660,13 +7660,13 @@ SCGLADIUS:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	Voiced:
 		VoiceSet: SCScoutVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCCORSAIR:
+protoss_corsair:
 	Inherits: ^AirProtoss
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -7689,7 +7689,7 @@ SCCORSAIR:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstargate
+		Prerequisites: ~protoss_stargate
 		Queue: Aircraft, RAAircraft
 		Description: actor_sccorsair.description
 	Aircraft:
@@ -7726,13 +7726,13 @@ SCCORSAIR:
 	Selectable:
 		DecorationBounds: 1280, 1024
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	Voiced:
 		VoiceSet: SCCorsairVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCCARRIER:
+protoss_carrier:
 	Inherits: ^AirProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
@@ -7753,7 +7753,7 @@ SCCARRIER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scfleetbeacon
+		Prerequisites: ~protoss_fleetbeacon
 		Queue: Aircraft, RAAircraft
 		Description: actor_sccarrier.description
 	Aircraft:
@@ -7790,7 +7790,7 @@ SCCARRIER:
 	Voiced:
 		VoiceSet: SCCarrierVoice
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -7816,7 +7816,7 @@ SCCARRIER.Husk:
 		Explosion: GladiusCannon
 	WithShadow:
 	RenderSprites:
-		Image: SCCARRIER
+		Image: protoss_carrier
 		PlayerPalette: player_rgba
 
 SCINTERCEPTOR:
@@ -7876,7 +7876,7 @@ SCINTERCEPTOR:
 	Voiced:
 		VoiceSet: SCCarrierVoice
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	HitShape:
 		UseTargetableCellsOffsets: true
 		Type: Rectangle
@@ -7885,7 +7885,7 @@ SCINTERCEPTOR:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSTARSHIPSOVEREIGN:
+protoss_starshipsovereign:
 	Inherits: ^AirProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
@@ -7909,7 +7909,7 @@ SCSTARSHIPSOVEREIGN:
 	Buildable:
 		BuildPaletteOrder: 20
 		BuildLimit: 1
-		Prerequisites: ~scfleetbeacon, ~upstarsovereign
+		Prerequisites: ~protoss_fleetbeacon, ~protoss_promotion_unlockstarsovereign
 		Queue: Aircraft, RAAircraft
 		Description: actor_scstarshipsovereign.description
 	Aircraft:
@@ -7951,7 +7951,7 @@ SCSTARSHIPSOVEREIGN:
 	Voiced:
 		VoiceSet: SCCarrierVoice
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	ChangesHealth:
 		Step: 32
 		Delay: 1
@@ -7982,10 +7982,10 @@ SCSTARSHIPSOVEREIGN.Husk:
 		Explosion: GladiusCannon
 	WithShadow:
 	RenderSprites:
-		Image: SCSTARSHIPSOVEREIGN
+		Image: protoss_starshipsovereign
 		PlayerPalette: player_rgba
 
-SCARBITER:
+protoss_arbiter:
 	Inherits: ^AirProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -8007,7 +8007,7 @@ SCARBITER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scarbitertribunal
+		Prerequisites: ~protoss_arbitertribunal
 		Queue: Aircraft, RAAircraft
 		Description: actor_scarbiter.description
 	Aircraft:
@@ -8087,11 +8087,11 @@ SCARBITER:
 		ValidRelationships: Ally
 		#DisplayTimerRelationships: Ally, Neutral, Enemy
 	ActorStatValues:
-		Upgrades: upairweapons, upairweapons2, upairarmor, upairarmor2, upplasmashield, upairspeed
+		Upgrades: protoss_upgrade_airweaponslevel1, protoss_upgrade_airweaponslevel2, protoss_upgrade_airarmorlevel1, protoss_upgrade_airarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_graviticpropulsion
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCPMCV:
+protoss_mobilenexus:
 	Inherits: ^ProtossVehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
@@ -8101,12 +8101,12 @@ SCPMCV:
 	Inherits@armor: ^ProtossGroundArmorUpgrades
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~scroboticsfacility
+		Prerequisites: ~protoss_roboticsfacility
 		Description: actor_scpmcv.description
 	Tooltip:
 		Name: Protoss Mobile Nexus
 	Transforms:
-		IntoActor: scnexus
+		IntoActor: protoss_nexus
 		Offset: -1,-1
 		Facing: 432
 		TransformSounds: pshbld03.aud
@@ -8120,9 +8120,9 @@ SCPMCV:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 
-SCZERATUL:
+protoss_zeratul:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
@@ -8138,7 +8138,7 @@ SCZERATUL:
 		Amount: -200
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~sccitadelofadun
+		Prerequisites: ~protoss_citadelofadun
 		Queue: Infantry, RAInfantry
 		Description: actor_sczeratul.description
 		BuildLimit: 1
@@ -8165,11 +8165,11 @@ SCZERATUL:
 	Voiced:
 		VoiceSet: SCZealotVoice
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCAMARANTH:
+protoss_amaranth:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -8190,7 +8190,7 @@ SCAMARANTH:
 		Amount: -60
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~sccitadelofadun, ~upamaranth
+		Prerequisites: ~protoss_citadelofadun, ~protoss_promotion_unlockamaranth
 		Queue: Infantry, RAInfantry
 		Description: actor_scamaranth.description
 	Mobile:
@@ -8222,11 +8222,11 @@ SCAMARANTH:
 	Voiced:
 		VoiceSet: SCDarkTemplarVoice
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCATREUS:
+protoss_atreus:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HighTechTankTemplate
@@ -8247,7 +8247,7 @@ SCATREUS:
 		Amount: -120
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~sccyberneticscore, ~upatreus
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockatreus
 		Queue: Infantry, RAInfantry
 		Description: actor_scatreus.description
 	Mobile:
@@ -8287,11 +8287,11 @@ SCATREUS:
 		Offset: 64, 64, 0
 		ZOffset: -512
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCPOSITRON:
+protoss_positron:
 	Inherits: ^LargeProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -8310,7 +8310,7 @@ SCPOSITRON:
 	Power:
 		Amount: -60
 	Buildable:
-		Prerequisites: ~sccyberneticscore, ~uppositron
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_promotion_unlockpositron
 		Queue: Vehicle, RAVehicle
 		Description: actor_scpositron.description
 	Mobile:
@@ -8353,9 +8353,9 @@ SCPOSITRON:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield, updragoonrange
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields, protoss_upgrade_singularitycharge
 
-SCLEGIONNAIRE:
+protoss_legionnaire:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -8374,7 +8374,7 @@ SCLEGIONNAIRE:
 		Amount: -35
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scgateway, ~uplegionnaire
+		Prerequisites: ~protoss_gateway, ~protoss_promotion_unlocklegionnaire
 		Queue: Infantry, RAInfantry
 		Description: actor_sclegionnaire.description
 	Mobile:
@@ -8394,11 +8394,11 @@ SCLEGIONNAIRE:
 	Voiced:
 		VoiceSet: SCZealotVoice
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCPATRIARCH:
+protoss_patriarch:
 	Inherits@protoss: ^BasicProtoss
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
@@ -8416,7 +8416,7 @@ SCPATRIARCH:
 		Amount: -200
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~sctemplararchives, ~uppatriarch
+		Prerequisites: ~protoss_templararchives, ~protoss_promotion_unlockpatriarch
 		Queue: Infantry, RAInfantry
 		Description: actor_scpatriarch.description
 		BuildLimit: 1
@@ -8448,7 +8448,7 @@ SCPATRIARCH:
 	Voiced:
 		VoiceSet: SCHighTemplarVoice
 	ActorStatValues:
-		Upgrades: upgroundweapons, upgroundweapons2, upgroundarmor, upgroundarmor2, upplasmashield
+		Upgrades: protoss_upgrade_groundweaponslevel1, protoss_upgrade_groundweaponslevel2, protoss_upgrade_groundarmorlevel1, protoss_upgrade_groundarmorlevel2, protoss_upgrade_plasmashields
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -8458,7 +8458,7 @@ SCPATRIARCH:
 
 ### Assault Tree
 
-uplegionnaire:
+protoss_promotion_unlocklegionnaire:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Legionnaire
@@ -8466,12 +8466,12 @@ uplegionnaire:
 		BuildPaletteOrder: 8045
 		Queue: Promotions
 		Description: actor_uplegionnaire.description
-		Prerequisites: ~scnexus, !uplegionnaire, rank1
+		Prerequisites: ~protoss_nexus, !protoss_promotion_unlocklegionnaire, rank1
 	RenderSprites:
-		Image: sclegionnaire
+		Image: protoss_legionnaire
 	ProvidesPrerequisite:
 
-upatreus:
+protoss_promotion_unlockatreus:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Atreus
@@ -8479,12 +8479,12 @@ upatreus:
 		BuildPaletteOrder: 8048
 		Queue: Promotions
 		Description: actor_upatreus.description
-		Prerequisites: ~scnexus, uplegionnaire, !upatreus, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlocklegionnaire, !protoss_promotion_unlockatreus, rank1
 	RenderSprites:
-		Image: scatreus
+		Image: protoss_atreus
 	ProvidesPrerequisite:
 
-upamaranth:
+protoss_promotion_unlockamaranth:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Amaranth
@@ -8492,12 +8492,12 @@ upamaranth:
 		BuildPaletteOrder: 8051
 		Queue: Promotions
 		Description: actor_upamaranth.description
-		Prerequisites: ~scnexus, upatreus, !upamaranth, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockatreus, !protoss_promotion_unlockamaranth, rank1
 	RenderSprites:
-		Image: scamaranth
+		Image: protoss_amaranth
 	ProvidesPrerequisite:
 
-uppatriarch:
+protoss_promotion_unlockpatriarch:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Patriarch
@@ -8505,14 +8505,14 @@ uppatriarch:
 		BuildPaletteOrder: 8054
 		Queue: Promotions
 		Description: actor_uppatriarch.description
-		Prerequisites: ~scnexus, upamaranth, !uppatriarch, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockamaranth, !protoss_promotion_unlockpatriarch, rank1
 	RenderSprites:
-		Image: scpatriarch
+		Image: protoss_patriarch
 	ProvidesPrerequisite:
 
 ### Assault Tree
 
-upepigraph:
+protoss_promotion_unlockepigraph:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Epigraph
@@ -8520,12 +8520,12 @@ upepigraph:
 		BuildPaletteOrder: 8047
 		Queue: Promotions
 		Description: actor_upepigraph.description
-		Prerequisites: ~scnexus, !upepigraph, rank1
+		Prerequisites: ~protoss_nexus, !protoss_promotion_unlockepigraph, rank1
 	RenderSprites:
-		Image: scepigraph
+		Image: protoss_epigraph
 	ProvidesPrerequisite:
 
-upvoidray:
+protoss_promotion_unlockvoidray:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Void Ray
@@ -8533,12 +8533,12 @@ upvoidray:
 		BuildPaletteOrder: 8050
 		Queue: Promotions
 		Description: Allows construction of Void Rays.
-		Prerequisites: ~scnexus, upepigraph, !upgladius, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockepigraph, !protoss_promotion_unlockgladius, rank1
 	RenderSprites:
-		Image: scvoidray
+		Image: protoss_voidray
 	ProvidesPrerequisite:
 
-upgladius:
+protoss_promotion_unlockgladius:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Gladius
@@ -8546,12 +8546,12 @@ upgladius:
 		BuildPaletteOrder: 8053
 		Queue: Promotions
 		Description: actor_upgladius.description
-		Prerequisites: ~scnexus, upvoidray, !upgladius, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockvoidray, !protoss_promotion_unlockgladius, rank1
 	RenderSprites:
-		Image: scgladius
+		Image: protoss_gladius
 	ProvidesPrerequisite:
 
-upstarsovereign:
+protoss_promotion_unlockstarsovereign:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Star Sovereign
@@ -8559,14 +8559,14 @@ upstarsovereign:
 		BuildPaletteOrder: 8056
 		Queue: Promotions
 		Description: actor_upstarsovereign.description
-		Prerequisites: ~scnexus, upgladius, !upstarsovereign, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockgladius, !protoss_promotion_unlockstarsovereign, rank1
 	RenderSprites:
-		Image: scstarshipsovereign
+		Image: protoss_starshipsovereign
 	ProvidesPrerequisite:
 
 ### Support Tree
 
-uppositron:
+protoss_promotion_unlockpositron:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Positron
@@ -8574,12 +8574,12 @@ uppositron:
 		BuildPaletteOrder: 8046
 		Queue: Promotions
 		Description: actor_uppositron.description
-		Prerequisites: ~scnexus, !uppositron, rank1
+		Prerequisites: ~protoss_nexus, !protoss_promotion_unlockpositron, rank1
 	RenderSprites:
-		Image: scpositron
+		Image: protoss_positron
 	ProvidesPrerequisite:
 
-upanalogue:
+protoss_promotion_unlockanalogue:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Analogue
@@ -8587,12 +8587,12 @@ upanalogue:
 		BuildPaletteOrder: 8049
 		Queue: Promotions
 		Description: actor_upanalogue.description
-		Prerequisites: ~scnexus, uppositron , !upanalogue, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockpositron , !protoss_promotion_unlockanalogue, rank1
 	RenderSprites:
-		Image: scanalogue
+		Image: protoss_analogue
 	ProvidesPrerequisite:
 
-upmanifold:
+protoss_promotion_unlockmanifold:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Manifold
@@ -8600,12 +8600,12 @@ upmanifold:
 		BuildPaletteOrder: 8052
 		Queue: Promotions
 		Description: actor_upmanifold.description
-		Prerequisites: ~scnexus, upanalogue, !upmanifold, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockanalogue, !protoss_promotion_unlockmanifold, rank1
 	RenderSprites:
-		Image: scmanifold
+		Image: protoss_manifold
 	ProvidesPrerequisite:
 
-upidol:
+protoss_promotion_unlockidol:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Idol
@@ -8613,9 +8613,9 @@ upidol:
 		BuildPaletteOrder: 8055
 		Queue: Promotions
 		Description: actor_upidol.description
-		Prerequisites: ~scnexus, upmanifold, !upidol, rank1
+		Prerequisites: ~protoss_nexus, protoss_promotion_unlockmanifold, !protoss_promotion_unlockidol, rank1
 	RenderSprites:
-		Image: scidol
+		Image: protoss_idol
 	ProvidesPrerequisite:
 
 ####################################################################################################
@@ -10677,7 +10677,7 @@ SCSCOURGEDRONE:
 	#		Upgrades Protoss
 	####################################################################################################
 
-updragoonrange:
+protoss_upgrade_singularitycharge:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Singularity Charge
@@ -10685,15 +10685,15 @@ updragoonrange:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_updragoonrange.description
-		Prerequisites: ~sccyberneticscore, ~!updragoonrange
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_singularitycharge
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: updragoonrange
+		Image: protoss_upgrade_singularitycharge
 	ProvidesPrerequisite:
-		Prerequisite: updragoonrange
+		Prerequisite: protoss_upgrade_singularitycharge
 
-upglaves:
+protoss_upgrade_resonatingglaves:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Resonating Glaves
@@ -10701,15 +10701,15 @@ upglaves:
 		BuildPaletteOrder: 85
 		Queue: Upgrades
 		Description: actor_updragoonrange.description
-		Prerequisites: ~sccitadelofadun, ~!upglaves
+		Prerequisites: ~protoss_citadelofadun, ~!protoss_upgrade_resonatingglaves
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: upglaves
+		Image: protoss_upgrade_resonatingglaves
 	ProvidesPrerequisite:
-		Prerequisite: upglaves
+		Prerequisite: protoss_upgrade_resonatingglaves
 
-uppylon1:
+protoss_upgrade_upgradepylonlevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Upgrade Pylon Level 1
@@ -10719,12 +10719,12 @@ uppylon1:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_uppylon1.description
-		Prerequisites: ~scforge, ~!uppylon1
+		Prerequisites: ~protoss_forge, ~!protoss_upgrade_upgradepylonlevel1
 	RenderSprites:
-		Image: scpylon
+		Image: protoss_pylon
 	ProvidesPrerequisite:
 
-uppylon2:
+protoss_upgrade_upgradepylonlevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Upgrade Pylon Level 2
@@ -10734,12 +10734,12 @@ uppylon2:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_uppylon2.description
-		Prerequisites: ~sccyberneticscore, ~uppylon1, ~!uppylon2
+		Prerequisites: ~protoss_cyberneticscore, ~protoss_upgrade_upgradepylonlevel1, ~!protoss_upgrade_upgradepylonlevel2
 	RenderSprites:
-		Image: scpylon
+		Image: protoss_pylon
 	ProvidesPrerequisite:
 
-upplasmashield:
+protoss_upgrade_plasmashields:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Plasma Shields
@@ -10747,15 +10747,15 @@ upplasmashield:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upplasmashield.description
-		Prerequisites: ~sccyberneticscore, ~!upplasmashield
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_plasmashields
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: upplasmashield
+		Image: protoss_upgrade_plasmashields
 	ProvidesPrerequisite:
-		Prerequisite: upplasmashield
+		Prerequisite: protoss_upgrade_plasmashields
 
-upreavercapacity:
+protoss_upgrade_reavercapacity:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Reaver Capacity
@@ -10763,15 +10763,15 @@ upreavercapacity:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upreavercapacity.description
-		Prerequisites: ~scroboticssupportbay
+		Prerequisites: ~protoss_roboticssupportbay
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: upreavercapacity
+		Image: protoss_upgrade_reavercapacity
 	ProvidesPrerequisite:
-		Prerequisite: upreavercapacity
+		Prerequisite: protoss_upgrade_reavercapacity
 
-upairspeed:
+protoss_upgrade_graviticpropulsion:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Gravitic Propulsion
@@ -10779,15 +10779,15 @@ upairspeed:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upairspeed.description
-		Prerequisites: ~scroboticssupportbay, ~!upairspeed
+		Prerequisites: ~protoss_roboticssupportbay, ~!protoss_upgrade_graviticpropulsion
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: upairspeed
+		Image: protoss_upgrade_graviticpropulsion
 	ProvidesPrerequisite:
-		Prerequisite: upairspeed
+		Prerequisite: protoss_upgrade_graviticpropulsion
 
-upgroundweapons:
+protoss_upgrade_groundweaponslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ground Weapons Level 1
@@ -10795,15 +10795,15 @@ upgroundweapons:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upgroundweapons.description
-		Prerequisites: ~scforge, ~!upgroundweapons
+		Prerequisites: ~protoss_forge, ~!protoss_upgrade_groundweaponslevel1
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: upgroundweapons
+		Image: protoss_upgrade_groundweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: upgroundweapons
+		Prerequisite: protoss_upgrade_groundweaponslevel1
 
-upgroundweapons2:
+protoss_upgrade_groundweaponslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ground Weapons Level 2
@@ -10811,15 +10811,15 @@ upgroundweapons2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upgroundweapons2.description
-		Prerequisites: ~sctemplararchives, ~upgroundweapons, ~!upgroundweapons2
+		Prerequisites: ~protoss_templararchives, ~protoss_upgrade_groundweaponslevel1, ~!protoss_upgrade_groundweaponslevel2
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: upgroundweapons
+		Image: protoss_upgrade_groundweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: upgroundweapons
+		Prerequisite: protoss_upgrade_groundweaponslevel1
 
-upgroundarmor:
+protoss_upgrade_groundarmorlevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ground Armor Level 1
@@ -10827,15 +10827,15 @@ upgroundarmor:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upgroundarmor.description
-		Prerequisites: ~scforge, ~!upgroundarmor
+		Prerequisites: ~protoss_forge, ~!protoss_upgrade_groundarmorlevel1
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: upgroundarmor
+		Image: protoss_upgrade_groundarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: upgroundarmor
+		Prerequisite: protoss_upgrade_groundarmorlevel1
 
-upgroundarmor2:
+protoss_upgrade_groundarmorlevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ground Armor Level 2
@@ -10843,15 +10843,15 @@ upgroundarmor2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upgroundarmor2.description
-		Prerequisites: ~sctemplararchives, ~upgroundarmor, ~!upgroundarmor2
+		Prerequisites: ~protoss_templararchives, ~protoss_upgrade_groundarmorlevel1, ~!protoss_upgrade_groundarmorlevel2
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: upgroundarmor
+		Image: protoss_upgrade_groundarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: upgroundarmor
+		Prerequisite: protoss_upgrade_groundarmorlevel1
 
-upairweapons:
+protoss_upgrade_airweaponslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Air Weapons Level 1
@@ -10859,15 +10859,15 @@ upairweapons:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upairweapons.description
-		Prerequisites: ~sccyberneticscore, ~!upairweapons
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_airweaponslevel1
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: upairweapons
+		Image: protoss_upgrade_airweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: upairweapons
+		Prerequisite: protoss_upgrade_airweaponslevel1
 
-upairweapons2:
+protoss_upgrade_airweaponslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Air Weapons Level 2
@@ -10875,15 +10875,15 @@ upairweapons2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upairweapons2.description
-		Prerequisites: ~scfleetbeacon, ~upairweapons, ~!upairweapons2
+		Prerequisites: ~protoss_fleetbeacon, ~protoss_upgrade_airweaponslevel1, ~!protoss_upgrade_airweaponslevel2
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: upairweapons
+		Image: protoss_upgrade_airweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: upairweapons
+		Prerequisite: protoss_upgrade_airweaponslevel1
 
-upairarmor:
+protoss_upgrade_airarmorlevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Air Armor Level 1
@@ -10891,15 +10891,15 @@ upairarmor:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upairarmor.description
-		Prerequisites: ~sccyberneticscore, ~!upairarmor
+		Prerequisites: ~protoss_cyberneticscore, ~!protoss_upgrade_airarmorlevel1
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: upairarmor
+		Image: protoss_upgrade_airarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: upairarmor
+		Prerequisite: protoss_upgrade_airarmorlevel1
 
-upairarmor2:
+protoss_upgrade_airarmorlevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Air Armor Level 2
@@ -10907,13 +10907,13 @@ upairarmor2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upairarmor2.description
-		Prerequisites: ~scfleetbeacon, ~upairarmor, ~!upairarmor2
+		Prerequisites: ~protoss_fleetbeacon, ~protoss_upgrade_airarmorlevel1, ~!protoss_upgrade_airarmorlevel2
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: upairarmor
+		Image: protoss_upgrade_airarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: upairarmor
+		Prerequisite: protoss_upgrade_airarmorlevel1
 
 	####################################################################################################
 	#		Upgrades Terrans

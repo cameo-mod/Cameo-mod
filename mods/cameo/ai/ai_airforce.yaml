@@ -201,13 +201,13 @@ Player:
 			scdropship.marine: 1
 			scdropship.mech: 1
 			#################### UnitsToBuild PROTOSS
-			scprobe: 40
-			schightemplar: 1
-			scobserver: 1
-			scarchon: 10
-			scscout: 60
-			sccarrier: 40
-			scarbiter: 1
+			protoss_probe: 40
+			protoss_hightemplar: 1
+			protoss_observer: 1
+			protoss_archon: 10
+			protoss_scout: 60
+			protoss_carrier: 40
+			protoss_arbiter: 1
 			scshuttle.reaver: 2
 			scshuttle.reaver2: 1
 			scshuttle.hightemplar: 1
@@ -425,8 +425,8 @@ Player:
 			#################### UnitLimits TERRAN
 			terran_scv: 40
 			#################### UnitLimits PROTOSS
-			scprobe: 40
-			scobserver: 2
+			protoss_probe: 40
+			protoss_observer: 2
 			#################### UnitLimits ZERG
 			scbotdrone: 40
 			zerg_scourge: 1

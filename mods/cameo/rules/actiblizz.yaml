@@ -419,7 +419,7 @@ scacademy.actibliz:
 		
 sctemplararchives.actibliz:
 	Inherits: ^actiblizzprotoss
-	Inherits: SCTEMPLARARCHIVES
+	Inherits: protoss_templararchives
 	Valued:
 		Cost: 1600
 	Tooltip:
@@ -435,7 +435,7 @@ sctemplararchives.actibliz:
 		Image: actitemplararchives
 
 scfleetbeacon.actibliz:
-	Inherits: SCFLEETBEACON
+	Inherits: protoss_fleetbeacon
 	Valued:
 		Cost: 2000
 	Tooltip:
@@ -451,7 +451,7 @@ scfleetbeacon.actibliz:
 		Image: actifleetbeacon
 
 scroboticssupportbay.actibliz:
-	Inherits: SCROBOTICSSUPPORTBAY
+	Inherits: protoss_roboticssupportbay
 	Valued:
 		Cost: 1500
 	Tooltip:
@@ -622,13 +622,13 @@ drext.actibliz:
 		Image: drext
 
 scdarktemplar.actibliz:
-	Inherits: SCDARKTEMPLAR
+	Inherits: protoss_darktemplar
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
 		Prerequisites: barracks, dribarr2, actiblizzprotoss
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: scdarktemplar
+		Image: protoss_darktemplar
 
 drguardian.actibliz:
 	Inherits: drguardian
@@ -743,7 +743,7 @@ drhades.actibliz:
 		Image: drhades
 
 scdragoon.actibliz:
-	Inherits: SCDRAGOON
+	Inherits: protoss_dragoon
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
 		Prerequisites: actiblizzprotoss, ~techlevel.medium
@@ -751,7 +751,7 @@ scdragoon.actibliz:
 	RenderSprites:
 		Image: actidragoon
 screaver.actibliz:
-	Inherits: SCREAVER
+	Inherits: protoss_reaver
 	Inherits@SCUPGRADES: ^SCDRUPGRADES1
 	Buildable:
 		Prerequisites: Robotics Support Bay, driweap2, ~techlevel.medium
@@ -760,7 +760,7 @@ screaver.actibliz:
 		Image: actireaver
 
 sccarrier.actibliz:
-	Inherits: SCCARRIER
+	Inherits: protoss_carrier
 	Buildable:
 		Prerequisites: Fleet Beacon, drihq3, ~techlevel.high
 		Queue: Aircraft, RAAircraft
@@ -768,7 +768,7 @@ sccarrier.actibliz:
 		Image: acticarrier
 
 scscout.actibliz:
-	Inherits: SCSCOUT
+	Inherits: protoss_scout
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -938,4 +938,4 @@ scdropship.actibliz.templar:
 		Prerequisites: ~hardbotplayer, dribarr2, actiblizzprotoss
 		Queue: Aircraft, RAAircraft
 	Cargo:
-		InitialUnits: scdarktemplar, scdarktemplar, scdarktemplar, scdarktemplar
+		InitialUnits: protoss_darktemplar, protoss_darktemplar, protoss_darktemplar, protoss_darktemplar
