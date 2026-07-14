@@ -748,12 +748,12 @@ CHITZKOI:
 		Condition: nocc
 		
 RA2HTANY:
-	Inherits: RA2TANY
+	Inherits: ra2_allies_tanyaii
 	Inherits@HEROES: ^Heroes
 	Buildable:
 		Queue: Heroes
 		BuildPaletteOrder: 120
-		Prerequisites: ra2gatech, ~anyalliesallra, !1hero
+		Prerequisites: ra2_allies_alliedbattlelab, ~anyalliesallra, !1hero
 		BuildLimit: 1
 		Description: Elite amphibious commando infantry with dual laser guns, C4 and Knife.\nCan plant timed bombs on vehicles\nCan demolish buildings with C4\nCan use Chrono teleportation\nMaximum 1 can be trained\n Strong vs Infantry, Buildings, Vehicles\n Weak vs Aircraft\n\nTip:\nClick or use F key to switch weaponry\nUse Alt+Click for chrono teleportation
 		Icon: iconchrono
@@ -791,7 +791,7 @@ RA2HTANY:
 		Armaments: primary, c4
 		FacingTolerance: 0
 	RenderSprites:
-		Image: RA2TANY
+		Image: ra2_allies_tanyaii
 	Cloak:
 		InitialDelay: 40
 		CloakDelay: 40

@@ -321,7 +321,7 @@ qinf.steel:
 		Upgrades: up_naniteinfusion.steel, up_empquantumweapons.steel, up_shielresistance.steel
 
 fedeng.steel:
-	Inherits: RA2ENGINEER
+	Inherits: ra2_allies_engineer
 	Inherits@SteelConsortiumNaniteInfusion: ^SteelConsortiumNaniteInfusionInfantry
 	Buildable:
 		Prerequisites: ~qabarr.steel

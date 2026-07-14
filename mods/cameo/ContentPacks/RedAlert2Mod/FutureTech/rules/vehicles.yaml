@@ -147,7 +147,7 @@ mech_plasma.futu:
 
 ifv.futu:
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
-	Inherits: RA2FV
+	Inherits: ra2_allies_ifv
 	Inherits@announce: ^AnnounceOnBuild
 	Inherits@FutureTechEqualizerUpgrades: ^FutureTechEqualizerUpgrades
 	Tooltip:

@@ -1,6 +1,6 @@
 mcv.futu:
 	Defaults:
-		Filename: ra2mcv.shp
+		Filename: ra2_allies_alliedmobileconstructionvehicle_ra2mcv.shp
 	idle:
 		Facings: 64
 	icon:
@@ -285,7 +285,7 @@ launchpad.futu:
 		Filename: futu_launchpadicon.png
 		Offset: 0,0
 	icon2:
-		Filename: ra2_p_airborne.shp
+		Filename: ra2_allies_airforcecommandhq_ra2_p_airborne.shp
 		Offset: 0,0
 
 egtf.futu:
@@ -930,7 +930,7 @@ orion.futu:
 
 ifv.futu:
 	Defaults:
-		Filename: ra2ifv.shp
+		Filename: ra2_allies_ifv_repair_ra2ifv.shp
 		Scale: 0.7
 	idle:
 		Filename: futu_ifv.shp
@@ -1179,7 +1179,7 @@ futu.futu:
 spy.futu:
 	Inherits: ^RA2Infantry
 	Defaults:
-		Filename: ra2_spy.shp
+		Filename: ra2_allies_ra2spy_ra2_spy.shp
 	liedown:
 		Start: 164
 	standup:
@@ -1236,10 +1236,10 @@ blackwidow.futu:
 		Start: 134
 		Length: 15
 	icon_gun:
-		Filename: tanyamodes.shp
+		Filename: ra2_allies_tanyaii_tanyamodes.shp
 		Start: 0
 	icon_c4:
-		Filename: tanyamodes.shp
+		Filename: ra2_allies_tanyaii_tanyamodes.shp
 		Start: 1
 	icon:
 		Filename: futu_blackwidowicon.png

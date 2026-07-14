@@ -4,9 +4,9 @@
 ####################################################################################################
 
 # from redalert2.yaml
-ra2cmin:
+ra2_allies_chronominer:
 	Defaults:
-		Filename: ra2cmin.shp
+		Filename: ra2_allies_chronominer.shp
 	idle:
 		Facings: 64
 	dock:
@@ -16,14 +16,14 @@ ra2cmin:
 		Start: 64
 		Facings: 64
 	warpout:
-		Filename: warpout.shp
+		Filename: ra2_allies_chronominer_warpout.shp
 		Length: *
 	harvesting:
 		Filename: ra2_oregath.shp
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: ra2cminicon.shp
+		Filename: ra2_allies_chronominer_icon.shp
 
 ra2txgasg:
 	idle:

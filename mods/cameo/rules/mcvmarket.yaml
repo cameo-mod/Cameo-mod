@@ -108,9 +108,9 @@ MM2RAMCV:
 		Image: mm2ramcv
 
 MMRA2AMCV:
-	Inherits@MCV: RA2AMCV
+	Inherits@MCV: ra2_allies_alliedmobileconstructionvehicle
 	Transforms:
-		IntoActor: ra2gacnst
+		IntoActor: ra2_allies_alliedconstructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (AlliesRA2)
 	Buildable:
@@ -118,7 +118,7 @@ MMRA2AMCV:
 		-Description:
 		Prerequisites: !mmalliesra2
 	RenderSprites:
-		Image: ra2amcv
+		Image: ra2_allies_alliedmobileconstructionvehicle
 	ProvidesPrerequisite@faction:
 		Prerequisite: mmalliesra2
 

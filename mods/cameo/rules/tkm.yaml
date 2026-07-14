@@ -943,7 +943,7 @@ tkmmarine:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 	RenderSprites:
-		Image: ra2seal
+		Image: ra2_allies_seal
 
 tkmjug:
 	Inherits: ^Soldier
@@ -1372,7 +1372,7 @@ tkmsniper:
 	Voiced:
 		VoiceSet: TSInfantry
 	RenderSprites:
-		Image: ra2snipe
+		Image: ra2_allies_sniper
 
 tkmvon:
 	Inherits: ^Soldier
@@ -3201,7 +3201,7 @@ tkmbattlebus:
 	Tooltip:
 		Name: Battle Bus
 	UpdatesPlayerStatistics:
-		OverrideActor: yrbfrt
+		OverrideActor: ra2_allies_battlefortress
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: ~tkmfactory, tkmtechcenter, upbattlebus

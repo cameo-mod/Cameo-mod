@@ -2864,7 +2864,7 @@
 			ra1_allies_pillbox: garrisoned
 			ra1_allies_camopillbox: garrisoned
 			ra1_allies_bastionartillerybunker: garrisoned
-			ra2gapill: garrisoned
+			ra2_allies_pillbox: garrisoned
 			yrngbnkr: garrisoned
 			bunk.nax: garrisoned
 			scbunker: garrisoned
@@ -2872,7 +2872,7 @@
 			cgup.latin: biggarrisoned
 			ngbunk2.latin: biggarrisoned
 			td_gdi_assaultapc: battlefortresspassenger
-			yrbfrt: battlefortresspassenger
+			ra2_allies_battlefortress: battlefortresspassenger
 			dragonfly.asian: battlefortresspassenger
 			wtrt.asian: battlefortresspassenger
 			humvee.latin: battlefortresspassenger
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2_allies_airforcecommandhq,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -8397,7 +8397,7 @@ CPQDEBUGDUMMY:
 		RequiresCondition: owned
 	GrantConditionOnPrerequisite@purifier:
 		Condition: orepurifier
-		Prerequisites: ra2gaorep
+		Prerequisites: ra2_allies_orepurifier
 	CashTricklerMultiplier@purifier:
 		Modifier: 125
 		RequiresCondition: orepurifier
@@ -8759,7 +8759,7 @@ CPQDEBUGDUMMY:
 
 ^Chronoshiftable:
 	RA2Chronoshiftable:
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		WarpInSequence: warpout
 		WarpOutSequence: warpout
 		RequiresCondition: !untargetable
@@ -8768,7 +8768,7 @@ CPQDEBUGDUMMY:
 ^Recallable:
 	RA2Chronoshiftable@Recall:
 		TeleportType: SCRecall
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		WarpInSequence: warpout
 		WarpOutSequence: warpout
 		RequiresCondition: !untargetable
@@ -8820,7 +8820,7 @@ CPQDEBUGDUMMY:
 			# e1: ifv-mg
 			# rae1: ifv-mg
 			# ra1_soviet_rifleinfantry: ifv-mg
-			# ra2e1: ifv-mg
+			# ra2_allies_gi: ifv-mg
 			# ra2e2: ifv-mg
 			# gren.asian: ifv-mg
 			# 2100scav: ifv-mg
@@ -8857,7 +8857,7 @@ CPQDEBUGDUMMY:
 			# ra1_allies_medic: ifv-healer
 			# ra1_allies_mechanic: ifv-repair
 			# scscv: ifv-repair
-			# ra2engineer: ifv-repair
+			# ra2_allies_engineer: ifv-repair
 			# ra2engineer.soviet: ifv-repair
 			# ra2engineer.yuri: ifv-repair
 			# yrslav: ifv-repair
@@ -8874,7 +8874,7 @@ CPQDEBUGDUMMY:
 			# e3: ifv-miss
 			# rae3: ifv-miss
 			# ra1_soviet_rocketsoldier: ifv-miss
-			# yrggi: ifv-miss
+			# ra2_allies_guardiangi: ifv-miss
 			# tkiller.asian: ifv-miss
 			# tse3: ifv-miss
 			# gle3: ifv-miss
@@ -8900,10 +8900,10 @@ CPQDEBUGDUMMY:
 			# gle1toxin: ifv-thrax
 			# rmbo: ifv-hero
 			# ra1_allies_tanya: ifv-hero
-			# ra2tany: ifv-hero
+			# ra2_allies_tanyaii: ifv-hero
 			# cityswat: ifv-hero
 			# yrboris: ifv-hero
-			# ra2seal: ifv-hero
+			# ra2_allies_seal: ifv-hero
 			# cabal_cyborgcommando: ifv-hero
 			# tscyc2.cabal: ifv-hero
 			# forgotten_ghoststalker: ifv-hero
@@ -8912,10 +8912,10 @@ CPQDEBUGDUMMY:
 			# susaburton: ifv-hero
 			# leangburton: ifv-hero
 			# scghost: ifv-ra1_allies_alliedsniper
-			# ra2snipe: ifv-ra1_allies_alliedsniper
+			# ra2_allies_sniper: ifv-ra1_allies_alliedsniper
 			# yrvirus: ifv-ra1_allies_alliedsniper
 			# ra1_allies_raspy: ifv-spy
-			# ra2spy: ifv-spy
+			# ra2_allies_ra2spy: ifv-spy
 			# shinobi.asian: ifv-spy
 			# ts_nod_chameleonspy: ifv-ra1_allies_alliedsniper
 			# forgotten_mutantsniper: ifv-ra1_allies_alliedsniper
@@ -8925,7 +8925,7 @@ CPQDEBUGDUMMY:
 			# usapath: ifv-ra1_allies_alliedsniper
 			# susapath: ifv-ra1_allies_alliedsniper
 			# leangpath: ifv-ra1_allies_alliedsniper
-			# ra2cleg: ifv-chrono
+			# ra2_allies_chronolegionnaire: ifv-chrono
 			# ra2ivan: ifv-demo
 			# ra2terror: ifv-demo
 			# scinfestedterran: ifv-demo
@@ -9235,7 +9235,7 @@ CPQDEBUGDUMMY:
 			ra1_allies_tanya: hero
 			ra1_soviet_volkov: hero
 			hakurei: hero
-			ra2tany: hero
+			ra2_allies_tanyaii: hero
 			yrboris: hero
 			yryurix: hero
 	WithDisguisingInfantryBody:

@@ -72,10 +72,10 @@ Player:
 			#################### UnitsToBuild CABAL
 			tssubtank2: 1
 			#################### UnitsToBuild RA2
-			ra2cmin: 10
-			ra2rock: 80
-			ra2falc: 60
-			ra2beag: 60
+			ra2_allies_chronominer: 10
+			ra2_allies_rocketeer: 80
+			ra2_allies_harrier: 60
+			ra2_allies_blackeagle: 60
 			ra2shad.bot1: 1
 			ra2shad.bot2: 4
 			ra2shad.bot3: 1
@@ -100,7 +100,7 @@ Player:
 			ra2sqd: 5
 			ra2dlph: 5
 			ra2dest: 10
-			ra2aegis: 8
+			ra2_allies_aegiscruiser: 8
 			ra2sub: 10
 			ra2hyd: 10
 			ra2dred: 10
@@ -409,11 +409,11 @@ Player:
 			forgotten_ghoststalker: 1
 			ts_gdi_amphibiousapc: 2
 			#################### UnitLimits ALLIESRA2
-			ra2tany: 1
-			ra2seal: 2
-			ra2cmin: 8
-			ra2fvbotrep: 4
-			yrbfrt.bot: 5
+			ra2_allies_tanyaii: 1
+			ra2_allies_seal: 2
+			ra2_allies_chronominer: 8
+			ra2_allies_ifv_repair: 4
+			ra2_allies_battlefortress_2: 5
 			#################### UnitLimits SOVIETRA2
 			ra2harv: 8
 			#################### UnitLimits YURI
@@ -444,7 +444,7 @@ Player:
 			#################### UnitLimits ENGINEERS & TECH
 			e6: 1
 			rae6: 1
-			ra2engineer: 1
+			ra2_allies_engineer: 1
 			2100e6: 1
 			scte6: 1
 			citye6: 1

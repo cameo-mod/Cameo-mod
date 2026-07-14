@@ -526,7 +526,7 @@ SteelSupportSpawner1:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -538,7 +538,7 @@ SteelSupportSpawner2:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -550,7 +550,7 @@ SteelSupportSpawner3:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water
@@ -562,7 +562,7 @@ SteelSupportSpawner4:
 	Warhead@1Actor: SpawnActor
 		Actors: cougar.steel, cougar.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, hummer.steel, oldqtnk.steel, oldqtnk.steel, cobra.steel
 		Range: 5
-		Image: ra2cmin
+		Image: ra2_allies_chronominer
 		Sequence: warpout
 		Palette: ra2effect
 		ValidTargets: Air, Ground, Water

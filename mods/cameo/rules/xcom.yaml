@@ -400,7 +400,7 @@ xcomheavygrenadier:
 	Power:
 		Amount: -1
 	RenderSprites:
-		Image: yrggi
+		Image: ra2_allies_guardiangi
 RocketLauncherUpgrade:
 	Tooltip:
 		Name: Rocket Launcher Upgrade
@@ -546,7 +546,7 @@ xcomsharpshooter:
 	Power:
 		Amount: -1
 	RenderSprites:
-		Image: ra2snipe
+		Image: ra2_allies_sniper
 AutoSniperUpgrade:
 	Tooltip:
 		Name: Auto ra1_allies_alliedsniper Upgrade
@@ -558,7 +558,7 @@ AutoSniperUpgrade:
 	Valued:
 		Cost: 800
 	RenderSprites:
-		Image: ra2snipe
+		Image: ra2_allies_sniper
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: AutoSniperUpgrade
@@ -1068,7 +1068,7 @@ xcom_barracks:
 	Valued:
 		Cost: 500
 	RenderSprites:
-		Image: ra2gapile
+		Image: ra2_allies_alliedbarracks
 
 xcom_officer_training_school:
 	Inherits: ^researched_upgrade.template
@@ -1154,7 +1154,7 @@ xcom_satellite_nexus:
 	Valued:
 		Cost: 2800
 	RenderSprites:
-		Image: ra2gaspysat
+		Image: ra2_allies_spysatelliteuplink
 
 ####################################################################################################
 #		Vehicles

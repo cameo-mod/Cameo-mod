@@ -105,7 +105,7 @@ CRATE:
 	GiveBaseBuilderCrateAction@ra2america:
 		SelectionShares: 0
 		NoBaseSelectionShares: 10000
-		Units: ra2amcv
+		Units: ra2_allies_alliedmobileconstructionvehicle
 		ValidFactions: ra2america
 	GiveBaseBuilderCrateAction@ra2russia:
 		SelectionShares: 0
@@ -617,7 +617,7 @@ camera.gpssat:
 		IncludeAllies: true
 	GrantConditionOnPrerequisite@UPLINK:
 		Condition: uplinkavailable
-		Prerequisites: ra2gaspysat
+		Prerequisites: ra2_allies_spysatelliteuplink
 	KillsSelf:
 		RemoveInstead: true
 		Delay: 375

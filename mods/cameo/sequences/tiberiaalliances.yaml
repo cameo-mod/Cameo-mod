@@ -191,8 +191,8 @@ taconfessor:
 		AddExtension: False
 
 tanodcommando:
-	Inherits: ra2tany
-	Defaults: ra2tany
+	Inherits: ra2_allies_tanyaii
+	Defaults: ra2_allies_tanyaii
 	icon: td_nod_lasercommando_icon.shp
 		AddExtension: False
 
@@ -208,8 +208,8 @@ tatrooper:
 		AddExtension: False
 
 tasnipe:
-	Inherits: ra2snipe
-	Defaults: ra2snipe
+	Inherits: ra2_allies_sniper
+	Defaults: ra2_allies_sniper
 	icon: tasnipericon
 tamutsnipe:
 	Inherits: forgotten_mutantsniper

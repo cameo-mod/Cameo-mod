@@ -273,19 +273,19 @@
 # Support power icons and stuff.
 icon:
 	wc2_arrow:
-		Filename: wc2_cursor_arrow.png
+		Filename: ra2_allies_upgrade_paratroopers_wc2_cursor_arrow.png
 		Start: 4
 		Offset: 1,-12
 	circles:
-		Filename: fpls.shp
+		Filename: ra2_allies_upgrade_paratroopers_fpls.shp
 		Length: *
 		ZOffset: 2047
 	clock:
-		Filename: beaconclock.shp
+		Filename: ra2_allies_upgrade_paratroopers_beaconclock.shp
 		Length: *
 		Offset: 0,-42
 	kilrogg_beacon:
-		Filename: wc2_icons_beacons.png
+		Filename: ra2_allies_upgrade_paratroopers_wc2_icons_beacons.png
 		Start: 0
 		Offset: 0,-42
 	kilrogg:
@@ -322,7 +322,7 @@ icon:
 # WC2 style arrows for directional paradrops and airstrikes.
 wc2_airstrikedirection:
 	Defaults:
-		Filename: wc2_cursor_arrow.png
+		Filename: ra2_allies_upgrade_paratroopers_wc2_cursor_arrow.png
 	arrow-t:
 		Start: 0
 		Offset: 0, -18, 0

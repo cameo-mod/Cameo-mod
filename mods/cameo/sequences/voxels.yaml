@@ -1,7 +1,7 @@
 #
 # Red Alert 2
 #
-ra2aegis:
+ra2_allies_aegiscruiser:
 	idle:
 
 ra2asw:
@@ -26,7 +26,7 @@ ra2naflak:
 	idle: ra2flaktur
 	turret: ra2flaktur
 
-ra2gtgcan:
+ra2_allies_grandcannon:
 	turret: ra2gtgcantur
 	barrel: ra2gtgcanbarl
 
@@ -49,14 +49,14 @@ ra2caoutp: #Tech outpost td_nod_samsite
 ra2pdplane: #Paradrop plane
 	idle:
 
-ra2nasam:
+ra2_allies_patriotmissilesystem:
 	idle: td_nod_samsite
 	turret: td_nod_samsite
 
 ra2sapc:
 	idle:
 
-ra2shad: #Nighthawk
+ra2_allies_nighthawk: #Nighthawk
 	idle:
 
 ra2sub: #Typhoon Attack Sub
@@ -65,7 +65,7 @@ ra2sub: #Typhoon Attack Sub
 ra2subt: #Sub Torpedo needs voxel projectiles
 	idle:
 
-ra2nasam:
+ra2_allies_patriotmissilesystem:
 	turret: td_nod_samsite
 
 #

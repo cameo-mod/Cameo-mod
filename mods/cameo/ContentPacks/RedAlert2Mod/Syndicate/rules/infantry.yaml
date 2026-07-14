@@ -480,14 +480,14 @@ fftr.latin:
 		Upgrades: up_mili.latin, up_chaingun.latin, up_alliedstolentech.latin, up_hotfire.latin
 
 ra2engineer.latin:
-	Inherits: RA2ENGINEER
+	Inherits: ra2_allies_engineer
 	Buildable:
 		Prerequisites: ~cgpile.latin
 		Queue: Infantry, RAInfantry
 	Voiced:
 		VoiceSet: LatinEngVoice
 	RenderSprites:
-		Image: ra2engineer
+		Image: ra2_allies_engineer
 	Captures:
 		Voice: Attack
 	Captures@REUSABLE:
