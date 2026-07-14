@@ -57,7 +57,7 @@ actor_nax_litt =
       Black holes damage nearby enemies and can be targeted
 
 actor_nax_merc =
-   .description = Sniper Infantry with long range.
+   .description = ra1_allies_alliedsniper Infantry with long range.
 
 actor_nax_mp40 =
    .description = Elite assault infantry.

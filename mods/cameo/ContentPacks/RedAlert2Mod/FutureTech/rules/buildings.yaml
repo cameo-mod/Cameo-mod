@@ -468,13 +468,13 @@ ggmlt.futu:
 		Cost: 800
 	Tooltip:
 		Name: Multi Turret System
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono
 	Tooltip@MISS:
 		Name: Javelin Turret System
 		RequiresCondition: ifv-miss || ifv-flak
 	Tooltip@FRAG:
 		Name: Frag Turret System
-		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-sniper || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono
 	Tooltip@Sigma:
 		Name: Sigma Turret System
 		RequiresCondition: ifv-hero
@@ -517,8 +517,8 @@ ggmlt.futu:
 		Condition: ifv-chem
 	ExternalCondition@hero:
 		Condition: ifv-hero
-	ExternalCondition@sniper:
-		Condition: ifv-sniper
+	ExternalCondition@ra1_allies_alliedsniper:
+		Condition: ifv-ra1_allies_alliedsniper
 	ExternalCondition@spy:
 		Condition: ifv-spy
 	ExternalCondition@chrono:
@@ -539,7 +539,7 @@ ggmlt.futu:
 		Name: primary
 		Weapon: Future_MultiMissile
 		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
-		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-sniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief
+		RequiresCondition: !ifv-mg && !ifv-hmg && !ifv-repair && !ifv-ra1_allies_alliedsniper && !ifv-flak && !ifv-tesla && !ifv-hero && !ifv-chem && !ifv-fire && !ifv-cannon && !ifv-miss && !ifv-deso && !ifv-demo && !ifv-healer && !ifv-chrono && !ifv-spy && !ifv-thief
 		MuzzleSequence: muzzle
 	Armament@MISS:
 		Name: primary
@@ -550,7 +550,7 @@ ggmlt.futu:
 	Armament@FRAG:
 		Name: primary
 		Weapon: Future_MultiMissile_Frag
-		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-sniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief
+		RequiresCondition: ifv-mg || ifv-hmg || ifv-repair || ifv-ra1_allies_alliedsniper || ifv-flak || ifv-tesla || ifv-chem || ifv-fire || ifv-cannon || ifv-deso || ifv-demo || ifv-healer || ifv-chrono || ifv-spy || ifv-thief
 		LocalOffset: 600,100,300, 600,-100,300, 600,0,300
 		MuzzleSequence: muzzle
 	Armament@Sigma:

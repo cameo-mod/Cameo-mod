@@ -8,7 +8,7 @@ ts_gdi_lightinfantry:
 		Upgrades: ts_gdi_upgrade_seretraining
 
 ts_gdi_medic:
-	Inherits: MEDI
+	Inherits: ra1_allies_medic
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@SERETraining: ^SERETraining

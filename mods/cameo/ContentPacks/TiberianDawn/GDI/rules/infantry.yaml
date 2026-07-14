@@ -140,12 +140,12 @@ RMBO.GDI:
 	Buildable:
 		Prerequisites: ~pyle, eye, ~!upgdihavoc
 	Armament:
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 		LocalOffset: 128,0,256
 		RequiresCondition: !up_armorpiercingbullets
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: Sniper
+		Weapon: ra1_allies_alliedsniper
 		RequiresCondition: !up_armorpiercingbullets
 	Armament@Upgrade: ##########
 		Weapon: SniperAP
@@ -274,7 +274,7 @@ gdisniper:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: GDI Heavy Sniper
+		Name: GDI Heavy ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~pyle, hq.gdi, upgdisniper
@@ -461,7 +461,7 @@ gdihavoc:
 		Voice: Move
 	ProducibleWithLevel:
 		InitialLevels: 1
-	Armament@Sniper:
+	Armament@ra1_allies_alliedsniper:
 		Weapon: CommandoSniper
 		LocalOffset: 256,64,512
 		AmmoUsage: 5
