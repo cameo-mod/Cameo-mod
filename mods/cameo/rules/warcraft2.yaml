@@ -2736,22 +2736,7 @@ wc2_human_scout_tower:
 wchumancannontowerupgrade:
 	Inherits: ^BuildingPlug
 	Tooltip:
-		Name: Guard Tower
-	Valued:
-		Cost: 600
-	Buildable:
-		Queue: BuildingAddons
-		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill, scouttowerupgradeavailable
-		Description: Guard tower, attacks land, sea, and air with fast arrows.
-	Plug:
-		Type: wcscouttower
-	RenderSprites:
-		Image: wc2_human_guard_tower
-
-wchumanguardtowerupgrade:
-	Inherits: ^BuildingPlug
-	Tooltip:
-		Name: Cannon Tower
+		Name: Upgraded Cannon Tower
 	Valued:
 		Cost: 600
 	Buildable:
@@ -2762,6 +2747,21 @@ wchumanguardtowerupgrade:
 		Type: wcscouttower2
 	RenderSprites:
 		Image: wc2_human_cannon_tower
+
+wchumanguardtowerupgrade:
+	Inherits: ^BuildingPlug
+	Tooltip:
+		Name: Upgraded Guard Tower
+	Valued:
+		Cost: 600
+	Buildable:
+		Queue: BuildingAddons
+		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill, scouttowerupgradeavailable
+		Description: Guard tower, attacks land, sea, and air with fast arrows.
+	Plug:
+		Type: wcscouttower
+	RenderSprites:
+		Image: wc2_human_guard_tower
 
 wc2_human_guard_tower:
 	Inherits: wc2_human_scout_tower
@@ -5250,7 +5250,7 @@ wc2_orc_watch_tower:
 wcorcguardtowerupgrade:
 	Inherits: ^BuildingPlug
 	Tooltip:
-		Name: Guard Tower
+		Name: Upgraded Guard Tower
 	Valued:
 		Cost: 600
 	Buildable:
@@ -5265,7 +5265,7 @@ wcorcguardtowerupgrade:
 wcorccannontowerupgrade:
 	Inherits: ^BuildingPlug
 	Tooltip:
-		Name: Cannon Tower
+		Name: Upgraded Cannon Tower
 	Valued:
 		Cost: 600
 	Buildable:
