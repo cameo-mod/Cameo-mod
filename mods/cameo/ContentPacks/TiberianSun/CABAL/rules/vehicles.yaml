@@ -174,7 +174,7 @@ cabal_cyborgreaper:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_tiberiumharvester:
@@ -847,7 +847,7 @@ cabal_heavyreaper:
 		Image: cabal_cyborgreaper
 		PlayerPalette: player_rgba
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: player_rgba
 		CrushedSequencePalette: ra2effect
 
 cabal_avatar:
