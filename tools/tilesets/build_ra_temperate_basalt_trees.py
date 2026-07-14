@@ -23,8 +23,17 @@ FOOTPRINTS = {
     "t10": ("__", "xx"),
     "t11": ("__", "xx"),
     "t15": ("___", "xx_"),
+    "tc01": ("___", "xx_"),
+    "tc02": ("_x_", "xx_"),
+    "tc03": ("_x_", "xx_"),
+    "tc04": ("____", "xxx_", "x___"),
+    "tc05": ("__x_", "xxx_", "_xx_"),
 }
-ACTOR_DIMENSIONS = {"t08": (2, 1), "t15": (3, 2)}
+ACTOR_DIMENSIONS = {
+    "t08": (2, 1), "t15": (3, 2),
+    "tc01": (3, 2), "tc02": (3, 2), "tc03": (3, 2),
+    "tc04": (4, 3), "tc05": (4, 3),
+}
 PRODUCTION_BOXES = {"t15": (144, 96)}
 BODY_TARGETS_24 = {
     # Explicit tree-replacement heights from the authored design guide.
@@ -42,6 +51,15 @@ BODY_TARGETS_24 = {
     "t14": (1, 7, 23, 45),    # 38px = 1.583 tiles, mountainous
     "t16": (1, 14, 23, 45),   # 31px = 1.292 tiles, terraced
     "t17": (1, 4, 24, 45),    # 41px = 1.708 tiles, mountainous
+    # tc01 blocks the bottom-left 2x1 cells of a 3x2 sprite box. The spare
+    # eastern cell contains the bundled shadow.
+    "tc01": (1, 3, 49, 45),
+    "tc02": (1, 2, 49, 45),
+    "tc03": (1, 5, 49, 45),
+    # The 4x3 clusters use the left/center three tiles for their geological
+    # mass and reserve the outer east side for the bundled shadow.
+    "tc04": (1, 3, 73, 69),
+    "tc05": (1, 5, 73, 69),
 }
 
 # Requested placement adjustments, expressed as fractions of the authoring
@@ -141,19 +159,23 @@ def author(source: Image.Image, donor_bounds: list[int], size: tuple[int, int], 
 
 
 def checker_panel(image: Image.Image, canvas=(96, 96)) -> Image.Image:
+    canvas = (max(canvas[0], image.width), max(canvas[1], image.height))
     panel = forest.checkerboard(canvas)
     panel.alpha_composite(image, ((canvas[0] - image.width) // 2, canvas[1] - image.height))
     return panel
 
 
 def make_review(results: list[dict]) -> Image.Image:
-    columns = 3
-    panel = 192
+    columns = 2
+    scale = 2
+    max_width = max(result["basalt"].width for result in results)
+    max_height = max(result["basalt"].height for result in results)
+    panel = (max_width * scale, max_height * scale)
     label = 24
     margin = 12
     header = 48
     rows = (len(results) + columns - 1) // columns
-    sheet = Image.new("RGB", (margin + columns * (panel + margin), header + margin + rows * (panel + label + margin)), (42, 47, 52))
+    sheet = Image.new("RGB", (margin + columns * (panel[0] + margin), header + margin + rows * (panel[1] + label + margin)), (42, 47, 52))
     draw = ImageDraw.Draw(sheet)
     font = ImageFont.load_default()
     draw.rectangle((0, 0, sheet.width, header), fill=(73, 86, 99))
@@ -161,27 +183,35 @@ def make_review(results: list[dict]) -> Image.Image:
     draw.text((margin, 27), "MD design guide | 24px authoring -> exact 2x nearest | due-west light | bounded due-east shadow", fill=(214, 222, 228), font=font)
     for index, result in enumerate(results):
         column, row = index % columns, index // columns
-        x = margin + column * (panel + margin)
-        y = header + margin + row * (panel + label + margin)
-        preview = checker_panel(result["basalt"])
-        sheet.paste(preview.resize((panel, panel), Image.Resampling.NEAREST).convert("RGB"), (x, y))
-        draw.rectangle((x, y, x + panel - 1, y + panel - 1), outline=(225, 225, 225))
-        draw.text((x + 4, y + panel + 6), f"{result['actor']} | {result['profile']}", fill="white", font=font)
+        x = margin + column * (panel[0] + margin)
+        y = header + margin + row * (panel[1] + label + margin)
+        preview = checker_panel(result["basalt"], (max_width, max_height))
+        preview = preview.resize(panel, Image.Resampling.NEAREST)
+        sheet.paste(preview.convert("RGB"), (x, y))
+        draw.rectangle((x, y, x + panel[0] - 1, y + panel[1] - 1), outline=(225, 225, 225))
+        draw.text((x + 4, y + panel[1] + 6), f"{result['actor']} | {result['profile']}", fill="white", font=font)
     return sheet
 
 
-def make_donor_comparison(results: list[dict]) -> Image.Image:
+def make_donor_comparison(results: list[dict], show_footprints=False, show_temperate_footprint=False) -> Image.Image:
     scale = 2
-    panel = (288, 192)
+    max_columns = max(ACTOR_DIMENSIONS.get(result["actor"], (2, 2))[0] for result in results)
+    max_rows = max(ACTOR_DIMENSIONS.get(result["actor"], (2, 2))[1] for result in results)
+    panel = (max_columns * 48 * scale, max_rows * 48 * scale)
     gap = 12
     label = 24
     header = 48
-    sheet = Image.new("RGB", (panel[0] * 2 + gap * 3, header + len(results) * (panel[1] + label + gap)), (42, 47, 52))
+    sheet = Image.new("RGB", (panel[0] * 3 + gap * 4, header + len(results) * (panel[1] + label + gap)), (42, 47, 52))
     draw = ImageDraw.Draw(sheet)
     font = ImageFont.load_default()
     draw.rectangle((0, 0, sheet.width, header), fill=(73, 86, 99))
     draw.text((gap, 9), "RA Temperate donor trees vs Volcanic basalt replacements", fill="white", font=font)
-    draw.text((gap, 27), "cyan = collision footprint | intact actors only | husks deferred", fill=(214, 222, 228), font=font)
+    subtitle = "intact actors only | husks deferred"
+    if show_footprints:
+        subtitle = "cyan = collision footprint | " + subtitle
+    elif show_temperate_footprint:
+        subtitle = "cyan = Temperate collision footprint | " + subtitle
+    draw.text((gap, 27), subtitle, fill=(214, 222, 228), font=font)
     for row, result in enumerate(results):
         actor = result["actor"]
         columns, rows = ACTOR_DIMENSIONS.get(actor, (2, 2))
@@ -192,10 +222,18 @@ def make_donor_comparison(results: list[dict]) -> Image.Image:
         basalt_ground = forest.ground_mosaic(columns, rows).convert("RGBA")
         basalt = result["basalt"]
         basalt_ground.alpha_composite(basalt, ((native[0] - basalt.width) // 2, native[1] - basalt.height))
-        forest.draw_footprint(donor_ground, footprint(actor))
-        forest.draw_footprint(basalt_ground, footprint(actor))
+        basalt_transparent = checker_panel(basalt, native)
+        if show_footprints or show_temperate_footprint:
+            forest.draw_footprint(donor_ground, footprint(actor))
+        if show_footprints:
+            forest.draw_footprint(basalt_ground, footprint(actor))
         y = header + row * (panel[1] + label + gap)
-        for column, (title, image) in enumerate((("Temperate donor", donor_ground), ("Volcanic basalt", basalt_ground))):
+        panels = (
+            ("Temperate tree", donor_ground),
+            ("Basalt formation on terrain", basalt_ground),
+            ("Basalt formation on transparent", basalt_transparent),
+        )
+        for column, (title, image) in enumerate(panels):
             x = gap + column * (panel[0] + gap)
             scaled = image.resize((image.width * scale, image.height * scale), Image.Resampling.NEAREST)
             canvas = Image.new("RGB", panel, (73, 86, 99))
@@ -210,6 +248,8 @@ def main() -> int:
     parser.add_argument("--source-dir", type=Path, required=True)
     parser.add_argument("--out-dir", type=Path, required=True)
     parser.add_argument("--actors", nargs="+", default=list(ACTORS))
+    parser.add_argument("--show-footprints", action="store_true")
+    parser.add_argument("--show-temperate-footprint", action="store_true")
     args = parser.parse_args()
     out = args.out_dir.resolve()
     out.mkdir(parents=True, exist_ok=True)
@@ -222,6 +262,11 @@ def main() -> int:
         "t11": "mountain / 1 peak", "t12": "mountain / 2 peaks", "t13": "terraced",
         "t14": "mountain / 1 peak", "t15": "mountain / 2 peaks", "t16": "terraced",
         "t17": "mountain / 2 peaks",
+        "tc01": "wide mountain / 2 unequal peaks",
+        "tc02": "mountain / 1 dominant peak",
+        "tc03": "broad terraced / 2 modest peaks",
+        "tc04": "large mountain / 2 unequal peaks",
+        "tc05": "large terraced mountain / off-center peak",
     }
     for actor in args.actors:
         donor, audit = decode_donor(actor)
@@ -263,9 +308,9 @@ def main() -> int:
         results.append({"actor": actor, "donor": donor, "basalt": palette_preview, "profile": profiles[actor]})
     review = make_review(results)
     review.save(out / "ra_temperate_intact_basalt_family_review.png")
-    comparison = make_donor_comparison(results)
+    comparison = make_donor_comparison(results, args.show_footprints, args.show_temperate_footprint)
     comparison.save(out / "ra_temperate_donor_vs_basalt_review.png")
-    (out / "family_manifest.json").write_text(json.dumps({"actors": args.actors, "excluded": ["t04", "t09", "t18", "tc01-tc05", "all husks"], "status": "review only; not installed"}, indent=2) + "\n", encoding="utf-8")
+    (out / "family_manifest.json").write_text(json.dumps({"actors": args.actors, "excluded": ["t04", "t09", "t18", "all husks"], "status": "review only; not installed"}, indent=2) + "\n", encoding="utf-8")
     print(out / "ra_temperate_intact_basalt_family_review.png")
     return 0
 

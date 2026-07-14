@@ -241,7 +241,7 @@ def draw_footprint(image, footprint):
             draw.rectangle(
                 (x0, y0, x0 + 47, y0 + 47),
                 outline=(0, 230, 220, 255),
-                width=2,
+                width=1,
             )
 
 
