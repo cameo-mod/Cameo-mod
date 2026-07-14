@@ -145,7 +145,7 @@ cabal_cyborgreaper:
 	Armament@AA:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
-		Weapon: TSReaperTrap
+		Weapon: CabalReaperTrap
 	Voiced:
 		VoiceSet: TSReaper
 	Tooltip:
@@ -372,7 +372,7 @@ cabal_manticore:
 	Armament@AA:
 		Weapon: CabalManticoreMissilesAA
 	Armament@TRAP:
-		Weapon: TSReaperTrap
+		Weapon: CabalManticoreTrap
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
@@ -759,7 +759,7 @@ cabal_spidercnc4:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	Armament@PRIMARY:
-		Weapon: CabalSpiderLaser
+		Weapon: CabalSpiderCnc4Laser
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -819,7 +819,7 @@ cabal_heavyreaper:
 	Armament@AA:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
-		Weapon: TSReaperTrap
+		Weapon: CabalHeavyReaperTrap
 	Voiced:
 		VoiceSet: TSReaper
 	UpdatesPlayerStatistics:
@@ -876,7 +876,7 @@ cabal_avatar:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Armament@PRIMARY:
-		Weapon: CabalRavagerPlasma
+		Weapon: CabalAvatarPlasma
 	RenderSprites:
 		Image: cabal_manticore
 		PlayerPalette: player_rgba
@@ -909,7 +909,7 @@ cabal_widow:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Armament@PRIMARY:
-		Weapon: CabalRavagerPlasma
+		Weapon: CabalWidowPlasma
 	RenderSprites:
 		Image: cabal_manticore
 		PlayerPalette: player_rgba

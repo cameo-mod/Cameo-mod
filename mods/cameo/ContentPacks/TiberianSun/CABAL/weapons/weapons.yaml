@@ -18,6 +18,9 @@
 		Explosions: idle
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Ship, Air
+CabalEliminatorGarrisonPistols:
+	Inherits: RA2DoublePistols
+	Range: 8001
 TSReaperTrap:
 	Inherits: ^SmallArms
 	Report: fireweb1.aud
@@ -42,6 +45,14 @@ TSReaperTrap:
 		Explosions: poof
 		ImpactSounds: methit1.aud
 		ValidTargets: Ground, Water
+CabalReaperTrap:
+	Inherits: TSReaperTrap
+CabalHeavyReaperTrap:
+	Inherits: TSReaperTrap
+	ReloadDelay: 200
+CabalManticoreTrap:
+	Inherits: TSReaperTrap
+	ReloadDelay: 300
 
 DarkObeliskLaser:
 	Inherits: ^LaserWeapon
@@ -564,6 +575,10 @@ CabalSpiderLaser:
 		Explosions: idle
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+CabalSpiderCnc4Laser:
+	Inherits: CabalSpiderLaser
+	ReloadDelay: 80
+	Range: 7000
 CabalDissolverSpray:
 	Inherits: ^LightChemicalWeapon
 	Inherits@TANKDESTROYER: ^TankDestroyerCannon
@@ -1006,6 +1021,14 @@ CabalRavagerPlasma:
 		Image: cabal_greenplasmaimpact
 		Explosions: idle
 		ImpactSounds: expnew09.aud
+CabalAvatarPlasma:
+	Inherits: CabalRavagerPlasma
+	ReloadDelay: 35
+	Range: 3500
+CabalWidowPlasma:
+	Inherits: CabalRavagerPlasma
+	ReloadDelay: 30
+	Range: 5938
 CabalManticoreLaser:
 	Inherits: ^LaserWeapon
 	Burst: 2

@@ -163,6 +163,11 @@ factions, everything through the balance workbook._
 - [x] **Template role audit**: fixed Engineer→^MechanicTemplate,
   Eliminator 800→^HeavyInfantryTemplate, Carryall→^UnarmedTransportHelicopterTemplate,
   Scarab APC→^SupportVehicleTemplate + ^CargoVehicle (`81bad88d2`).
+- [x] **Balance formula audit**: all 30 CABAL units [OK] — 0 ABSURD, 0 HIGH,
+  0 formula-broken. Fixed 7 problem units (Legion, Mothership, RocketCyborg,
+  Wasp, WaspStriker, Ascended, Beholder) + dissolver crash (missing crippled
+  sequences + wrong icon palette) (`50f3db5e4`); fixed 3 formula-broken
+  workbook rows 27-29 (`160a6491a`).
 - [ ] **Open question**: Overkill Fortress vs Overkill Carrier final name.
 
 ### N10. Upgrades audit
