@@ -10,14 +10,14 @@ forgotten_ghoststalker:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsghost.shp
+		Filename: forgotten_promotion_ghoststalker_tsghost.shp
 	icon:
 		Filename: ra2_allies_upgrade_paratroopers_tsghosticon.shp
 
 forgotten_mutanthijacker:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: tsghost.shp
+		Filename: forgotten_promotion_ghoststalker_tsghost.shp
 	icon:
 		Filename: forgotten_mutanthijacker_icon.png
 
@@ -25,7 +25,7 @@ forgotten_mutant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsmutant.shp
+		Filename: forgotten_mutant_tsmutant.shp
 	icon:
 		Filename: forgotten_mutant_icon.png
 
@@ -33,7 +33,7 @@ forgotten_mutantsoldier:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsmutant3.shp
+		Filename: forgotten_mutantsoldier_tsmutant3.shp
 	icon:
 		Filename: forgotten_mutantsoldier_icon.png
 
@@ -41,7 +41,7 @@ forgotten_mutantsergeant:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tsmutant3.shp
+		Filename: forgotten_mutantsoldier_tsmutant3.shp
 	icon:
 		Filename: forgotten_mutantsergeant_icon.png
 
@@ -230,7 +230,7 @@ forgotten_tiberianfiend:
 
 forgotten_viniferafiend:
 	Defaults:
-		Filename: forgotten_viniferafiend.shp
+		Filename: forgotten_promotion_viniferafiend_forgotten_viniferafiend.shp
 		Scale: 1.25
 		Tick: 80
 		Offset: 0, 0, 16
@@ -300,7 +300,7 @@ forgotten_viniferafiend:
 		Length: 10
 		ShadowStart: 218
 	icon:
-		Filename: forgotten_viniferafiend_icon.png
+		Filename: forgotten_promotion_viniferafiend_icon.png
 
 forgotten_zombiemutant:
 	Inherits: ^TSBasicInfantry
@@ -403,9 +403,9 @@ forgotten_runnershotgal:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: forgotten_runnershotgal.shp
+		Filename: forgotten_promotion_runnershotgal_forgotten_runnershotgal.shp
 	icon:
-		Filename: forgotten_runnershotgal_icon.png
+		Filename: forgotten_promotion_runnershotgal_icon.png
 
 forgotten_mutantmortarman:
 	Inherits: ^TSBasicInfantry
@@ -519,11 +519,11 @@ forgotten_mutantmortarman:
 
 forgotten_rattytank:
 	idle:
-		Filename: forgotten_rattytank.png
+		Filename: forgotten_brokenrattytankturret_forgotten_rattytank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_rattytank.png
+		Filename: forgotten_brokenrattytankturret_forgotten_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -601,11 +601,11 @@ forgotten_missilevan:
 
 forgotten_raidercar:
 	idle:
-		Filename: forgot_car.png
+		Filename: forgotten_raidercar_forgot_car.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_car.png
+		Filename: forgotten_raidercar_forgot_car.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -617,11 +617,11 @@ forgotten_raidercar:
 
 forgotten_bowler:
 	idle:
-		Filename: forgotten_bowler.png
+		Filename: forgotten_promotion_bowler_forgotten_bowler.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_bowler.png
+		Filename: forgotten_promotion_bowler_forgotten_bowler.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -629,7 +629,7 @@ forgotten_bowler:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_bowler_icon.png
+		Filename: forgotten_promotion_bowler_icon.png
 
 forgotten_ruiner:
 	idle:
@@ -644,11 +644,11 @@ forgotten_ruiner:
 
 forgotten_warriortank:
 	idle:
-		Filename: forgotten_warriortank.png
+		Filename: forgotten_promotion_warriortank_forgotten_warriortank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_warriortank.png
+		Filename: forgotten_promotion_warriortank_forgotten_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -656,15 +656,15 @@ forgotten_warriortank:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_warriortank_icon.png
+		Filename: forgotten_promotion_warriortank_icon.png
 
 forgotten_scoopertank:
 	idle:
-		Filename: forgotten_scoopertank.png
+		Filename: forgotten_promotion_scoopertank_forgotten_scoopertank.png
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgotten_scoopertank.png
+		Filename: forgotten_promotion_scoopertank_forgotten_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -672,11 +672,11 @@ forgotten_scoopertank:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_scoopertank_icon.png
+		Filename: forgotten_promotion_scoopertank_icon.png
 
 forgotten_flametank:
 	idle:
-		Filename: forgotten_flametank.png
+		Filename: forgotten_promotion_flametank_forgotten_flametank.png
 		Facings: 64
 		Scale: 0.5
 	muzzle:
@@ -715,11 +715,11 @@ forgotten_flametank:
 				Length: *
 				Offset: -7,8
 	icon:
-		Filename: forgotten_flametank_icon.png
+		Filename: forgotten_promotion_flametank_icon.png
 
 forgotten_experimentalmammothtank:
 	Defaults:
-		Filename: forgotten_experimentalmammothtank.png
+		Filename: forgotten_promotion_experimentalmammothtank_forgotten_experimentalmammothtank.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -728,14 +728,14 @@ forgotten_experimentalmammothtank:
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_experimentalmammothtank_icon.png
+		Filename: forgotten_promotion_experimentalmammothtank_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
 forgotten_chemicalmammothtank:
 	Defaults:
-		Filename: forgotten_chemicalmammothtank.png
+		Filename: forgotten_promotion_chemicalmammothtank_forgotten_chemicalmammothtank.png
 	idle:
 		Facings: 64
 		Scale: 1
@@ -744,14 +744,14 @@ forgotten_chemicalmammothtank:
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_chemicalmammothtank_icon.png
+		Filename: forgotten_promotion_chemicalmammothtank_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
 forgotten_mlrs:
 	Defaults:
-		Filename: forgotten_mlrs.png
+		Filename: forgotten_promotion_mlrs_forgotten_mlrs.png
 		Scale: 1.25
 	idle:
 		Facings: 64
@@ -772,7 +772,7 @@ forgotten_mlrs:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: forgotten_mlrs_icon.png
+		Filename: forgotten_promotion_mlrs_icon.png
 
 forgotten_m113adats:
 	Defaults:
@@ -797,7 +797,7 @@ forgotten_apctruck:
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: forgot_car.png
+		Filename: forgotten_raidercar_forgot_car.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -997,11 +997,11 @@ forgotten_refinery:
 
 forgotten_cobracopter:
 	idle:
-		Filename: forgotten_cobracopter.png
+		Filename: forgotten_promotion_cobracopter_forgotten_cobracopter.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_cobracopter_icon.png
+		Filename: forgotten_promotion_cobracopter_icon.png
 	rotor:
 		Filename: lrotor.shp
 		Length: 4
@@ -1033,11 +1033,11 @@ forgotten_wasp:
 
 forgotten_locustbomber:
 	idle:
-		Filename: forgotten_locustbomber.png
+		Filename: forgotten_promotion_locustbomber_forgotten_locustbomber.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: forgotten_locustbomber_icon.png
+		Filename: forgotten_promotion_locustbomber_icon.png
 
 forgotten_cropplane:
 	idle:
@@ -1120,23 +1120,23 @@ forgotten_machineguntower:
 
 forgotten_brokenwarriortankturret:
 	Defaults:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 	idle:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Start: 63
 	critical-idle:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Start: 63
 	turret:
-		Filename: forgotten_warriortank.png
+		Filename: forgotten_promotion_warriortank_forgotten_warriortank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp
@@ -1161,7 +1161,7 @@ forgotten_brokenrattytankturret:
 		Filename: forgotten_brokenrattytankturret.png
 		Start: 63
 	turret:
-		Filename: forgotten_rattytank.png
+		Filename: forgotten_brokenrattytankturret_forgotten_rattytank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
@@ -1180,23 +1180,23 @@ forgotten_brokenrattytankturret:
 
 forgotten_brokenscoopertankturret:
 	Defaults:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 	idle:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Start: 63
 	damaged-idle:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Start: 63
 	critical-idle:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Start: 63
 	turret:
-		Filename: forgotten_scoopertank.png
+		Filename: forgotten_promotion_scoopertank_forgotten_scoopertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	make:
-		Filename: forgotten_warriortank_turret.png
+		Filename: forgotten_brokenwarriortankturret_forgotten_warriortank_turret.png
 		Length: 64
 	dead:
 		Filename: invisibleitem.shp

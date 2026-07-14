@@ -128,13 +128,13 @@ eden_gp_railgun =
    Strong vs Tanks, vehicles
    Weak vs Infantry
 
-consumer_items_impulse =
+eden_impulseitems =
   .description = Cheap Items - Returns $600
 
-consumer_items_wares =
+eden_impulseitems_3 =
   .description = Basic Items - Returns $1100
 
-consumer_items_luxury_wares =
+eden_impulseitems_2 =
   .description = Luxury Items - Returns $2300
 
 # PLYMOUTH localizations (mirror of Eden)

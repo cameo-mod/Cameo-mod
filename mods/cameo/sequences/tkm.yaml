@@ -2,109 +2,109 @@
 # TKM Buildings
 #######################################
 
-tkmcommandcenter:
+tkm_constructionyard:
 	Defaults:
-		Filename: sgcnst.shp
+		Filename: tkm_constructionyard_sgcnst.shp
 	idle:
-		Filename: sgcnst.shp
+		Filename: tkm_constructionyard_sgcnst.shp
 		Length: 1
 		ShadowStart: 3
 		Tick: 150
 	dead:
-		Filename: sgcnst.shp
+		Filename: tkm_constructionyard_sgcnst.shp
 		Length: 1
 		ShadowStart: 3
 		Tick: 150
 	damaged-idle:
-		Filename: sgcnst.shp
+		Filename: tkm_constructionyard_sgcnst.shp
 		Start: 1
 		ShadowStart: 4
 		Length: 1
 		Tick: 150
 	idle-front:
-		Filename: sgcnst_a.shp
+		Filename: tkm_constructionyard_sgcnst_a.shp
 		Length: 20
 	damaged-idle-front:
-		Filename: sgcnst_a.shp
+		Filename: tkm_constructionyard_sgcnst_a.shp
 		Length: 20
 	make:
-		Filename: sgcnstmk.shp
+		Filename: tkm_constructionyard_sgcnstmk.shp
 		Length: 18
 		ShadowStart: 18
 	icon:
-		Filename: tkmconstructionyard.png
+		Filename: tkm_mobileconstructionvehicletkm_icon.png
 		Offset: 0,0
 
-tkmbarracks:
+tkm_barracks:
 	Defaults:
-		Filename: ugbarr.shp
+		Filename: tkm_barracks_ugbarr.shp
 	build:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: ugbarr.shp
+		Filename: tkm_barracks_ugbarr.shp
 		ShadowStart: 3
 	dead:
-		Filename: ugbarr.shp
+		Filename: tkm_barracks_ugbarr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ugbarr.shp
+		Filename: tkm_barracks_ugbarr.shp
 		Start: 1
 		ShadowStart: 4
 	make:
-		Filename: ugbarrmk.shp
+		Filename: tkm_barracks_ugbarrmk.shp
 		Length: 10
 		ShadowStart: 10
 	icon:
-		Filename: glabarracksicon.png
+		Filename: tkm_barracks_icon.png
 		Offset: 0,0
 
-tkmpowerplant:
+tkm_powerplant:
 	Defaults:
-		Filename: ugpowr.shp
+		Filename: tkm_powerplant_ugpowr.shp
 	build:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: ugpowr.shp
+		Filename: tkm_powerplant_ugpowr.shp
 		ShadowStart: 3
 	dead:
-		Filename: ugpowr.shp
+		Filename: tkm_powerplant_ugpowr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ugpowr.shp
+		Filename: tkm_powerplant_ugpowr.shp
 		Start: 1
 		ShadowStart: 4
 	make:
-		Filename: ugpowrmk.shp
+		Filename: tkm_powerplant_ugpowrmk.shp
 		Length: 16
 		ShadowStart: 16
 	icon:
-		Filename: tkmpowerplanticon.png
+		Filename: tkm_powerplant_icon.png
 		Offset: 0,0
 
-tkmrefinery:
+tkm_orerefinery:
 	Defaults:
-		Filename: tkmsupplycenter.png
+		Filename: tkm_supportlabor_tkmsupplycenter.png
 		Scale: 0.4
 	idle:
 		Scale: 1
-		Filename: tkmsupplycenter.png
+		Filename: tkm_supportlabor_tkmsupplycenter.png
 		Length: *
 	damaged-idle:
 		Scale: 1
-		Filename: tkmsupplycenter.png
+		Filename: tkm_supportlabor_tkmsupplycenter.png
 		Length: *
 	dead:
 		Scale: 1
-		Filename: tkmsupplycenter.png
+		Filename: tkm_supportlabor_tkmsupplycenter.png
 		Length: 1
 	make:
 		Scale: 1
-		Filename: tkmsupplycentermake.png
+		Filename: tkm_supportlabor_tkmsupplycentermake.png
 		Length: 20
 	resources:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: glasupplycentericon.png
+		Filename: tkm_supportlabor_icon.png
 		Offset: 0,0
 
 tkmworker:
@@ -155,87 +155,87 @@ tkmworker:
 	icon:
 		Filename: naxis_slave_icon.png
 
-tkmfactory:
+tkm_warfactory:
 	Defaults:
-		Filename: ugarms.shp
+		Filename: tkm_warfactory_ugarms.shp
 	idle:
-		Filename: ugarms.shp
+		Filename: tkm_warfactory_ugarms.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ugarms.shp
+		Filename: tkm_warfactory_ugarms.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: ugarms.shp
+		Filename: tkm_warfactory_ugarms.shp
 		Start: 1
 		ShadowStart: 4
 		Tick: 400
 	build-door:
-		Filename: ugarms_1.shp
+		Filename: tkm_warfactory_ugarms_1.shp
 		Length: 1
 		ShadowStart: 2
 	damaged-build-door:
-		Filename: ugarms_1.shp
+		Filename: tkm_warfactory_ugarms_1.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 3
 	make:
-		Filename: ugarmsmk.shp
+		Filename: tkm_warfactory_ugarmsmk.shp
 		Length: 16
 		ShadowStart: 16
 	icon:
-		Filename: glaarmsdealericon.png
+		Filename: tkm_warfactory_icon.png
 		Offset: 0, 0
 
-tkmradar:
+tkm_observationvan:
 	Defaults:
-		Filename: ugrvan.shp
+		Filename: tkm_observationvan_ugrvan.shp
 	build:
-		Filename: ugrvan.shp
+		Filename: tkm_observationvan_ugrvan.shp
 	idle:
-		Filename: ugrvan.shp
+		Filename: tkm_observationvan_ugrvan.shp
 		ShadowStart: 3
 	dead:
-		Filename: ugrvan.shp
+		Filename: tkm_observationvan_ugrvan.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ugrvan.shp
+		Filename: tkm_observationvan_ugrvan.shp
 		Start: 1
 		ShadowStart: 4
 	make:
-		Filename: ugrvanmk.shp
+		Filename: tkm_observationvan_ugrvanmk.shp
 		Length: 15
 		ShadowStart: 15
 	icon:
-		Filename: glaradarvan.png
+		Filename: tkm_observationvan_icon.png
 		Offset: 0,0
 
-tkmtechcenter:
+tkm_techcenter:
 	Defaults:
-		Filename: ugpala.shp
+		Filename: tkm_techcenter_ugpala.shp
 	build:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: ugpala.shp
+		Filename: tkm_techcenter_ugpala.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ugpala.shp
+		Filename: tkm_techcenter_ugpala.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: ugpala.shp
+		Filename: tkm_techcenter_ugpala.shp
 		ShadowStart: 3
 	make:
-		Filename: ugpalamk.shp
+		Filename: tkm_techcenter_ugpalamk.shp
 		Length: 13
 		ShadowStart: 13
 	icon:
-		Filename: glapalaceicon.png
+		Filename: tkm_techcenter_icon.png
 		Offset: 0,0
 
-tkmbunker:
+tkm_bunker:
 	Defaults:
-		Filename: tkmbunker.png
+		Filename: tkm_tankturretbunker_tkmbunker.png
 		Scale: 0.7
 	idle:
 		Scale: 1
@@ -273,12 +273,12 @@ tkmbunker:
 		Length: *
 		Offset: -1,-2
 	icon:
-		Filename: tkmbunkericon.png
+		Filename: tkm_bunker_icon.png
 
-tkmairpad:
+tkm_airpad:
 	Defaults:
 		Scale: 0.8
-		Filename: tkmairpad.png
+		Filename: tkm_airpad.png
 	idle:
 		Scale: 1
 		Start: 25
@@ -291,11 +291,11 @@ tkmairpad:
 		Start: 25
 		Tick: 800
 	icon:
-		Filename: tkmairpadicon.png
+		Filename: tkm_airpad_icon.png
 
-tkmbunkerquadturret:
+tkm_quadturretbunker:
 	Defaults:
-		Filename: tkmbunker.png
+		Filename: tkm_tankturretbunker_tkmbunker.png
 		Scale: 0.5
 	idle:
 		Scale: 0.7143
@@ -333,15 +333,15 @@ tkmbunkerquadturret:
 		Length: *
 		Offset: -1,-2
 	turret:
-		Filename: tkmquadtruckturret.png
+		Filename: tkm_quadtruck_tkmquadtruckturret.png
 		Facings: -32
 		Scale: 1
 	icon:
-		Filename: tkmquadturreticon.png
+		Filename: tkm_quadturretbunker_icon.png
 
-tkmbunkertankturret:
+tkm_tankturretbunker:
 	Defaults:
-		Filename: tkmbunker.png
+		Filename: tkm_tankturretbunker_tkmbunker.png
 		Scale: 0.7
 	idle:
 		Scale: 1
@@ -383,15 +383,15 @@ tkmbunkertankturret:
 		Facings: -32
 		Scale: 1
 	icon:
-		Filename: tkmtankturreticon.png
+		Filename: tkm_tankturretbunker_icon.png
 
 #######################################
 # TKM Infantry Reporting!
 #######################################
 
-tkmrifleman:
+tkm_rifleman:
 	Defaults:
-		Filename: poncho.shp
+		Filename: tkm_rifleman_poncho.shp
 		Scale: 1
 	stand:
 		Facings: 8
@@ -465,12 +465,12 @@ tkmrifleman:
 		Tick: 30
 		Offset: 0,0
 	icon:
-		Filename: tkmriflemanicon.png
+		Filename: tkm_rifleman_icon.png
 
-tkmtrooper:
-	Inherits: tkmrifleman
+tkm_trooper:
+	Inherits: tkm_rifleman
 	Defaults:
-		Filename: tkmtrooper.shp
+		Filename: tkm_trooper.shp
 		Scale: 1
 	stand:
 		Facings: 8
@@ -537,89 +537,89 @@ tkmtrooper:
 		Tick: 30
 		Offset: 0,0
 	icon:
-		Filename: tkmtroopericon.png
+		Filename: tkm_trooper_icon.png
 
-tkmspetsnaz:
+tkm_spetsnaz:
 	Defaults:
-		Filename: spetsnazidle.png
+		Filename: tkm_spetsnaz_spetsnazidle.png
 		Scale: 0.6
 	stand:
 		Scale: 1
-		Filename: spetsnazidle.png
+		Filename: tkm_spetsnaz_spetsnazidle.png
 		Facings: 8
 		Length: 1
 	run:
 		Scale: 1
-		Filename: spetsnazwalk.png
+		Filename: tkm_spetsnaz_spetsnazwalk.png
 		Length: 10
 		Facings: 8
 		Tick: 80
 	idle:
 		Scale: 1
-		Filename: spetsnazidle.png
+		Filename: tkm_spetsnaz_spetsnazidle.png
 		Length: 1
 		Facings: 8
 	idle1:
 		Scale: 1
-		Filename: spetsnazidle2.png
+		Filename: tkm_spetsnaz_spetsnazidle2.png
 		Length: 15
 		Facings: 1
 		Tick: 80
 	idle2:
 		Scale: 1
-		Filename: spetsnazidle2.png
+		Filename: tkm_spetsnaz_spetsnazidle2.png
 		Length: 15
 		Facings: 1
 		Tick: 80
 	shoot:
 		Scale: 1
-		Filename: spetsnazshoot.png
+		Filename: tkm_spetsnaz_spetsnazshoot.png
 		Length: 15
 		Facings: 8
 		Tick: 80
 	die:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die1:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die2:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die3:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die4:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die5:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die6:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die7:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	die-crushed:
 		Scale: 1
-		Filename: spetsnazdie.png
+		Filename: tkm_spetsnaz_spetsnazdie.png
 		Length: 15
 		Tick: 80
 	garrison-muzzle:
@@ -631,11 +631,11 @@ tkmspetsnaz:
 		Tick: 30
 		Offset: 0,0
 	icon:
-		Filename: tkmspetsnazicon.png
+		Filename: tkm_spetsnaz_icon.png
 
-tkmrocketeer:
+tkm_rocketeer:
 	Defaults:
-		Filename: nodrocket.shp
+		Filename: tkm_rocketeer_nodrocket.shp
 		Scale: 1
 	stand:
 		Facings: 8
@@ -709,11 +709,11 @@ tkmrocketeer:
 		BlendMode: Additive
 		Offset: 0,0
 	icon:
-		Filename: tkmrocketeericon.png
+		Filename: tkm_rocketeer_icon.png
 
-tkmjug:
+tkm_juggernaut:
 	Defaults:
-		Filename: tkmjug.shp
+		Filename: tkm_promotion_unlockjuggernaut_tkmjug.shp
 		Scale: 0.9
 	stand:
 		Facings: 8
@@ -787,10 +787,10 @@ tkmjug:
 		Tick: 30
 		Offset: 0,0
 	icon:
-		Filename: tkmjuggernauticon.png
+		Filename: tkm_promotion_unlockjuggernaut_icon.png
 
-tkmthermonaut:
-	Inherits: tkmjug
+tkm_thermonaut:
+	Inherits: tkm_juggernaut
 	muzzle:
 		IgnoreWorldTint: true
 		Combine:
@@ -831,74 +831,12 @@ tkmthermonaut:
 	icon:
 		Filename: td_nod_promotion_unlockblackhandflamer_icon.shp
 
-tkmengineer:
-	Defaults:
-		Filename: hijacker.shp
-		Scale: 0.9
-	stand:
-		Facings: 8
-		Length: 1
-		ShadowStart: 189
-	idle:
-		Facings: 8
-		Length: 1
-		ShadowStart: 189
-	run:
-		Start: 8
-		Length: 10
-		Facings: 8
-		Tick: 80
-		ShadowStart: 197
-	die:
-		Start: 88
-		Facings: 1
-		Length: 20
-		ShadowStart: 277
-	die1:
-		Start: 88
-		Facings: 1
-		Length: 20
-		ShadowStart: 277
-	die2:
-		Start: 88
-		Facings: 1
-		Length: 20
-		ShadowStart: 277
-	die3:
-		Start: 88
-		Facings: 1
-		Length: 20
-		ShadowStart: 277
-	die4:
-		Filename: frag3.shp
-		Length: *
-	die5: flameguy
-		Start: 44
-		Length: 104
-		Tick: 50
-	die6:
-		Start: 88
-		Facings: 1
-		Length: 20
-		ShadowStart: 277
-	die7: electro
-		Length: *
-	die-crushed:
-		Filename: blue_frag3.shp
-		Length: *
-		Scale: 1.5
-	idle1:
-		Facings: 8
-		Length: 1
-		ShadowStart: 189
-	idle2:
-		Facings: 8
-		Length: 1
-		ShadowStart: 189
+tkm_engineer:
+	Inherits: tkm_rifleman
 	icon:
-		Filename: tkmengineericon.png
+		Filename: tkm_engineer_icon.png
 
-tkmvon:
+tkm_von:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
 		Scale: 0.81
@@ -906,32 +844,32 @@ tkmvon:
 	paradrop:
 		Start: 292
 	icon:
-		Filename: tkmvonicon.png
+		Filename: tkm_von_icon.png
 
 #######################################
 # TKM Vehicles
 #######################################
 
-tkmmcv:
+tkm_mobileconstructionvehicletkm:
 	Defaults:
-		Filename: umcv.shp
+		Filename: tkm_mobileconstructionvehicletkm_umcv.shp
 	idle:
-		Filename: umcv.shp
+		Filename: tkm_mobileconstructionvehicletkm_umcv.shp
 		Facings: -32
 		ShadowStart: 32
 		Tick: 150
 	icon:
-		Filename: tkmconstructionyard.png
+		Filename: tkm_mobileconstructionvehicletkm_icon.png
 
-tkmharv:
+tkm_templateharvesterraname:
 	Defaults:
 		Scale: 0.3
-		Filename: tkmsupplytruck.png
+		Filename: tkm_templateharvesterraname_tkmsupplytruck.png
 	idle:
 		Scale: 1
 		Facings: -32
 	icon:
-		Filename: tkmsupplytruckicon.png
+		Filename: tkm_templateharvesterraname_icon.png
 
 tkmharvfull:
 	Defaults:
@@ -945,11 +883,11 @@ tkmharvfull:
 
 tkmt72:
 	idle:
-		Filename: tkmt72body.png
+		Filename: tkm_t72m_tkmt72body.png
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: tkmt72tur.png
+		Filename: tkm_t72m_tkmt72tur.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -957,14 +895,14 @@ tkmt72:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmt72icon.png
+		Filename: tkm_t72m_icon.png
 
 tkmt30:
 	idle:
-		Filename: tkmt30body.png
+		Filename: tkm_promotion_unlockt30_tkmt30body.png
 		Facings: -32
 	turret:
-		Filename: tkmt30tur.png
+		Filename: tkm_promotion_unlockt30_tkmt30tur.png
 		Offset: 0,0,-500
 		Facings: -32
 		Scale: 1
@@ -973,15 +911,15 @@ tkmt30:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmt30icon.png
+		Filename: tkm_promotion_unlockt30_icon.png
 
-tkmabrams:
+tkm_abrams:
 	idle:
-		Filename: tkmabramsbody.png
+		Filename: tkm_abrams_tkmabramsbody.png
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: tkmabramstur.png
+		Filename: tkm_abrams_tkmabramstur.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -989,34 +927,34 @@ tkmabrams:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmabramsicon.png
+		Filename: tkm_abrams_icon.png
 
 tkmtechnicaltruck:
 	Defaults:
-		Filename: tkmquadtruck.png
+		Filename: tkm_quadtruck.png
 		Scale: 0.5
 	idle:
 		Scale: 1
 		Facings: -32
 	turret:
 		Scale: 1
-		Filename: tkmquadtruckturret.png
+		Filename: tkm_quadtruck_tkmquadtruckturret.png
 		Facings: -32
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmquadcannonicon.png
+		Filename: tkm_quadtruck_icon.png
 
-tkmstryker:
+tkm_stryker:
 	Defaults:
-		Filename: tkmstrykerbody.png
+		Filename: tkm_stryker_tkmstrykerbody.png
 	idle:
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: tkmstrykerturret.png
+		Filename: tkm_stryker_tkmstrykerturret.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -1024,15 +962,15 @@ tkmstryker:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmstrykericon.png
+		Filename: tkm_stryker_icon.png
 
-tkmzaza:
+tkm_zaza:
 	idle:
-		Filename: zazabody.png
+		Filename: tkm_zaza_zazabody.png
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: zazaturret.png
+		Filename: tkm_zaza_zazaturret.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -1040,42 +978,42 @@ tkmzaza:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmzazaicon.png
+		Filename: tkm_zaza_icon.png
 
-tkmas42:
+tkm_as42:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: tkmas42.png
+		Filename: tkm_as42.png
 		Facings: -32
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmas42icon.png
+		Filename: tkm_as42_icon.png
 
-tkmkatyushalauncher:
+tkm_tornadoglauncher:
 	Inherits: ^RA2GatlingMuzzle
 		Scale: 1
 	Defaults:
-		Filename: tkmkatyushalauncher.png
+		Filename: tkm_tornadoglauncher.png
 		Scale: 0.4
 	idle:
 		Scale: 1
 		Facings: -32
 		Offset: 0,8
 	icon:
-		Filename: tkmtornadogicon.png
+		Filename: tkm_tornadoglauncher_icon.png
 
-tkmtechnical:
+tkm_technical:
 	idle:
-		Filename: technicalbody.png
+		Filename: tkm_technical_technicalbody.png
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: technicalturret.png
+		Filename: tkm_technical_technicalturret.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -1083,11 +1021,11 @@ tkmtechnical:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmtechnical.png
+		Filename: tkm_technical_icon.png
 
 technicaltank:
 	idle:
-		Filename: technicaltankbody.png
+		Filename: tkm_technicaltank_technicaltankbody.png
 		Facings: -32
 		Scale: 1
 	turret:
@@ -1099,27 +1037,27 @@ technicaltank:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmtechnicaltank.png
+		Filename: tkm_technicaltank_icon.png
 
-tkmradartruck:
+tkm_radartruck:
 	Defaults:
 		Scale: 0.6
 	idle:
 		Scale: 1
-		Filename: tkmradartruck.png
+		Filename: tkm_promotion_unlockradartruck_tkmradartruck.png
 		Facings: 32
 	icon:
-		Filename: tkmradartruckicon.png
+		Filename: tkm_promotion_unlockradartruck_icon.png
 
-tkmratflak:
+tkm_flakbus:
 	Defaults:
 		Scale: 0.2
 	idle:
 		Scale: 1
-		Filename: tkmflakbus.png
+		Filename: tkm_promotion_unlockflakbus_tkmflakbus.png
 		Facings: -32
 	icon:
-		Filename: tkmflakbusicon.png
+		Filename: tkm_promotion_unlockflakbus_icon.png
 
 tkmratflakdeployed:
 	Defaults:
@@ -1165,71 +1103,71 @@ tkmratflakdeployed:
 		Facings: 32
 		Scale: 1
 	icon:
-		Filename: tkmflakbusicon.png
+		Filename: tkm_promotion_unlockflakbus_icon.png
 
-tkmrepairtruck:
+tkm_repairtruck:
 	Defaults:
 		Scale: 0.4
 	idle:
 		Scale: 1
-		Filename: tkmrepairtruck.png
+		Filename: tkm_promotion_unlockrepairtruck_tkmrepairtruck.png
 		Facings: -32
 	icon:
-		Filename: tkmrepairtruckicon.png
+		Filename: tkm_promotion_unlockrepairtruck_icon.png
 
-tkmbattlebus:
+tkm_battlebus:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: tkmbattlebus.png
+		Filename: tkm_promotion_unlockbattlebus_tkmbattlebus.png
 		Facings: 32
 	muzzle:
 		Filename: minigun.shp
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmbattlebusicon.png
+		Filename: tkm_promotion_unlockbattlebus_icon.png
 
-tkmmedictruck:
+tkm_medictruck:
 	Defaults:
 		Scale: 0.4
 	idle:
 		Scale: 1
-		Filename: tkmmedictruckbody.png
+		Filename: tkm_promotion_unlockmedictruck_tkmmedictruckbody.png
 		Facings: -32
 	turret:
 		Scale: 1
-		Filename: tkmmedictruckturret.png
+		Filename: tkm_promotion_unlockmedictruck_tkmmedictruckturret.png
 		Facings: -32
 	icon:
-		Filename: tkmmedictruckicon.png
+		Filename: tkm_promotion_unlockmedictruck_icon.png
 
-tkmsandmarine:
+tkm_sandmarine:
 	Defaults:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: tkmsandmarine.png
+		Filename: tkm_promotion_unlockthesandmarine_tkmsandmarine.png
 		Facings: -32
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
 	icon:
-		Filename: tkmsandmarineicon.png
+		Filename: tkm_promotion_unlockthesandmarine_icon.png
 
-tkmbigshiee:
+tkm_bigshiee:
 	Defaults:
 		Scale: 0.7
 	idle:
 		Scale: 1
-		Filename: tkmbigshiee.png
+		Filename: tkm_promotion_unlockthebigshiee_tkmbigshiee.png
 		Facings: 32
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
 	icon:
-		Filename: tkmbigshieeicon.png
+		Filename: tkm_promotion_unlockthebigshiee_icon.png
 
 tkmdiglarge:
 	idle:
@@ -1240,19 +1178,19 @@ tkmdiglarge:
 		ZOffset: -1200
 		Offset: 0, 0, 256
 
-tkmdronepodtruck:
+tkm_dronepodtruck:
 	Defaults:
 		Scale: 0.6
 	idle:
 		Scale: 1
-		Filename: tkmdronepodtruck.png
+		Filename: tkm_promotion_unlockdronepodtruck_tkmdronepodtruck.png
 		Facings: -32
 	icon:
-		Filename: tkmdronepodtruckicon.png
+		Filename: tkm_promotion_unlockdronepodtruck_icon.png
 
-tkmtrenchtank:
+tkm_trenchtank:
 	idle:
-		Filename: tkmtrenchtankbody.png
+		Filename: tkm_promotion_unlocktrenchtank_tkmtrenchtankbody.png
 		Facings: -32
 		Scale: 1
 	turret:
@@ -1264,11 +1202,11 @@ tkmtrenchtank:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmtrenchtankicon.png
+		Filename: tkm_promotion_unlocktrenchtank_icon.png
 
 tkmtrenchtankdeployed:
 	Defaults:
-		Filename: tkmtrenchtankdeployed.png
+		Filename: tkm_trenchtruckdeployed_tkmtrenchtankdeployed.png
 		Scale: 0.2
 	idle:
 		Scale: 1
@@ -1310,7 +1248,7 @@ tkmtrenchtankdeployed:
 		Facings: -32
 		Scale: 0.75
 	icon:
-		Filename: tkmtrenchtankicon.png
+		Filename: tkm_promotion_unlocktrenchtank_icon.png
 
 ####################################################################################################
 #		TKM Upgrade Icons
@@ -1318,76 +1256,76 @@ tkmtrenchtankdeployed:
 
 berezkaupgradeicon:
 	icon:
-		Filename: berezkacamoupgradeicon.png
+		Filename: tkm_upgrade_berezkaarsenalupgrade_icon.png
 		Length: 1
 
 titanplatingupgradeicon:
 	icon:
-		Filename: titanplatingupgradeicon.png
+		Filename: tkm_upgrade_titanarsenalupgrade_icon.png
 		Length: 1
 
 natoupgradeicon:
 	icon:
-		Filename: natoupgradeicon.png
+		Filename: tkm_upgrade_natoarsenalupgrade_icon.png
 		Length: 1
 
 tkmsemiicon:
 	icon:
-		Filename: tkmsemiicon.png
+		Filename: tkm_upgrade_semiautoriflesupgrade_icon.png
 		Length: 1
 
 tkmapbullets:
 	icon:
-		Filename: tkmapbullets.png
+		Filename: tkm_upgrade_titanarmorpiercingbulletsupgrade_icon.png
 		Length: 1
 
 tkmtwinrocketlauncher:
 	icon:
-		Filename: tkmtwinrocketlauncher.png
+		Filename: tkm_upgrade_twinrocketsupgrade_icon.png
 		Length: 1
 
 tkmincendiaryrockets:
 	icon:
-		Filename: tkmincendiaryrockets.png
+		Filename: tkm_upgrade_incendiaryrocketsupgrade_icon.png
 		Length: 1
 
-upm16m203:
+tkm_upgrade_m203upgrade:
 	icon:
-		Filename: upm16m203.png
+		Filename: tkm_upgrade_m203upgrade_icon.png
 		Length: 1
 
 cryorocketicon:
 	icon:
-		Filename: cryorocketicon.png
+		Filename: tkm_upgrade_cryorocketsupgrade_icon.png
 		Length: 1
 
 tkmpointdefensesystem:
 	icon:
-		Filename: tkmpointdefensesystem.png
+		Filename: tkm_upgrade_pointdefensesystem_icon.png
 		Length: 1
 
-tkmrocketaddon:
+tkm_upgrade_technicaltankrocketaddon:
 	icon:
-		Filename: tkmrocketaddon.png
+		Filename: tkm_upgrade_technicaltankrocketaddon_icon.png
 		Length: 1
 
-tkmheavydutyarmor:
+tkm_upgrade_heavytitanplating:
 	icon:
-		Filename: tkmheavydutyarmor.png
+		Filename: tkm_upgrade_heavytitanplating_icon.png
 		Length: 1
 
 tkminfantryupgradeicon:
 	icon:
-		Filename: tkminfantryupgradeicon.png
+		Filename: tkm_upgrade_infantryupgrade_icon.png
 		Length: 1
 
 ####################################################################################################
 #		TKM Aircrafts
 ####################################################################################################
 
-tkmviper:
+tkm_viper:
 	Defaults:
-		Filename: tkmviper.png
+		Filename: tkm_promotion_unlockviper_tkmviper.png
 		Scale: 0.15
 	idle:
 		Scale: 1
@@ -1398,7 +1336,7 @@ tkmviper:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmvipericon.png
+		Filename: tkm_promotion_unlockviper_icon.png
 
 tkmdrone:
 	Defaults:
@@ -1413,9 +1351,9 @@ tkmdrone:
 	icon:
 		Filename: tkmdroneicon.png
 
-tkmhuey:
+tkm_iroquois:
 	Defaults:
-		Filename: tkmhuey.png
+		Filename: tkm_iroquois.png
 		Scale: 0.25
 	idle:
 		Scale: 1
@@ -1435,4 +1373,4 @@ tkmhuey:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: tkmiroquoiicon.png
+		Filename: tkm_iroquois_icon.png

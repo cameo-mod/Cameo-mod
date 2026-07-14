@@ -2885,7 +2885,7 @@
 			terran_pythean: battlefortresspassenger
 			zerg_behemoth: battlefortresspassenger
 			forgotten_m113adats: battlefortresspassenger
-			tkmbattlebus: battlefortresspassenger
+			tkm_battlebus: battlefortresspassenger
 			forgotten_nomadbarracks: battlefortresspassenger
 			forgotten_thumperbus: battlefortresspassenger
 	MassEntersCargo:
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,latin_syndicate_airstation,naxis_airfield,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,latin_syndicate_airstation,naxis_airfield,tkm_airpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:

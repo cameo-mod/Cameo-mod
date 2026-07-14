@@ -85,7 +85,7 @@ eden_factory_structure:
 		Start: 1
 		Length: 1
 	icon:
-		Filename: edenUIfactorystructure.png
+		Filename: eden_factory_structure_icon.png
 
 eden_tokamak:
 	Inherits: ^OP2Building
@@ -107,7 +107,7 @@ eden_tokamak:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUITokamak.png
+		Filename: eden_tokamak_icon.png
 
 eden_smelter_common:
 	Inherits: ^OP2Building
@@ -129,9 +129,9 @@ eden_smelter_common:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUISmelterCommonOre.png
+		Filename: eden_smelter_common_icon.png
 	idle-anim2:
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 		Start: 49
 		Length: 42
 		Offset: -1, -56
@@ -157,7 +157,7 @@ eden_agridome:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIAgridome.png
+		Filename: eden_agridome_icon.png
 
 eden_residence:
 	Inherits: ^OP2Building
@@ -179,7 +179,7 @@ eden_residence:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIResidence.png
+		Filename: eden_residence_icon.png
 
 eden_lab_basic:
 	Inherits: ^OP2Building
@@ -201,7 +201,7 @@ eden_lab_basic:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUILabBasic.png
+		Filename: eden_lab_basic_icon.png
 
 eden_factory_vehicle:
 	Inherits: ^OP2Building
@@ -223,7 +223,7 @@ eden_factory_vehicle:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIFactoryVehicle.png
+		Filename: eden_factory_vehicle_icon.png
 
 eden_garage:
 	Inherits: ^OP2Building
@@ -248,7 +248,7 @@ eden_garage:
 	damaged-active:
 		Start: 0
 	icon:
-		Filename: edenUIGarage.png
+		Filename: eden_garage_icon.png
 
 eden_nursery:
 	Inherits: ^OP2Building
@@ -270,7 +270,7 @@ eden_nursery:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUINursery.png
+		Filename: eden_nursery_icon.png
 
 eden_university:
 	Inherits: ^OP2Building
@@ -292,7 +292,7 @@ eden_university:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIUniversity.png
+		Filename: eden_university_icon.png
 
 eden_lab_standard:
 	Inherits: ^OP2Building
@@ -314,7 +314,7 @@ eden_lab_standard:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUILabStandard.png
+		Filename: eden_lab_standard_icon.png
 
 eden_dirt:
 	Inherits: ^OP2Building
@@ -336,7 +336,7 @@ eden_dirt:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIDIRT.png
+		Filename: eden_dirt_icon.png
 
 eden_rcc:
 	Inherits: ^OP2Building
@@ -358,7 +358,7 @@ eden_rcc:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIRobotCommandCenter.png
+		Filename: eden_rcc_icon.png
 
 eden_factory_consumer:
 	Inherits: ^OP2Building
@@ -380,21 +380,21 @@ eden_factory_consumer:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIConsumerFactory.png
+		Filename: eden_factory_consumer_icon.png
 	idle-anim2:
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 		Start: 49
 		Length: 42
 		Offset: 23, -41
 		Tick: 175
 	idle-anim3:
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 		Start: 49
 		Length: 42
 		Offset: 23, -21
 		Tick: 175
 	idle-anim4:
-		Filename: glstructuresmoke.shp
+		Filename: eden_smelter_common_glstructuresmoke.shp
 		Start: 49
 		Length: 42
 		Offset: 23, -1
@@ -420,7 +420,7 @@ eden_gorf:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUIGorf.png
+		Filename: eden_gorf_icon.png
 
 eden_lab_advanced:
 	Inherits: ^OP2Building
@@ -442,7 +442,7 @@ eden_lab_advanced:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUILabAdvanced.png
+		Filename: eden_lab_advanced_icon.png
 
 eden_spaceport:
 	Inherits: ^OP2Building
@@ -467,7 +467,7 @@ eden_spaceport:
 		Start: 1
 		Length: 1
 	icon:
-		Filename: edenUISpacePort.png
+		Filename: eden_spaceport_icon.png
 
 eden_solar_array:
 	Inherits: ^OP2Building
@@ -489,7 +489,7 @@ eden_solar_array:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUISolarPowerArray.png
+		Filename: eden_solar_array_icon.png
 
 eden_smelter_rare:
 	Inherits: ^OP2Building
@@ -511,7 +511,7 @@ eden_smelter_rare:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: edenUISmelterRareOre.png
+		Filename: eden_smelter_rare_icon.png
 ####################################################################################################
 #		DEFENCE EDEN
 ####################################################################################################
@@ -535,7 +535,7 @@ eden_mine_common:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: ui_eden_mine.png
+		Filename: eden_mine_common_icon.png
 
 eden_light_tower:
 	Inherits: ^OP2Building
@@ -545,14 +545,14 @@ eden_light_tower:
 	statusred:
 		Offset: -24, -24
 	Defaults:
-		Filename: edenLightTower.shp
+		Filename: eden_light_tower_edenlighttower.shp
 	idle:
 		Length: *
 	damaged-idle:
 	dead:
 	make:
 	icon:
-		Filename: edenUIlighttower.png
+		Filename: eden_light_tower_icon.png
 
 eden_storage_common:
 	Inherits: ^OP2Building
@@ -580,7 +580,7 @@ eden_storage_common:
 		Length: *
 		Offset: 0,1
 	icon:
-		Filename: edenUICommonStorage.png
+		Filename: eden_storage_common_icon.png
 
 eden_gp_laser:
 	Inherits: ^OP2Building
@@ -604,7 +604,7 @@ eden_gp_laser:
 	muzzle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: edenUIGuardPostLaser.png
+		Filename: eden_gp_laser_icon.png
 
 eden_gp_emp:
 	Inherits: ^OP2Building
@@ -628,7 +628,7 @@ eden_gp_emp:
 	muzzle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: edenUIGuardPostEMP.png
+		Filename: eden_gp_emp_icon.png
 
 eden_gp_railgun:
 	Inherits: ^OP2Building
@@ -652,38 +652,38 @@ eden_gp_railgun:
 	muzzle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: edenUIGuardPostRailgun.png
+		Filename: eden_gp_railgun_icon.png
 
 ####################################################################################################
 #		WARES EDEN
 ####################################################################################################
 
-consumer_items_impulse:
+eden_impulseitems:
 	Defaults:
-		Filename: consumer_items.shp
+		Filename: eden_impulseitems_3_consumer_items.shp
 	idle:
 	move:
 	die:
 	icon:
-		Filename: consumer_items_impulse.shp
+		Filename: eden_impulseitems_icon.shp
 
-consumer_items_wares:
+eden_impulseitems_3:
 	Defaults:
-		Filename: consumer_items.shp
+		Filename: eden_impulseitems_3_consumer_items.shp
 	idle:
 	move:
 	die:
 	icon:
-		Filename: consumer_items_wares.shp
+		Filename: eden_impulseitems_3_icon.shp
 
-consumer_items_luxury_wares:
+eden_impulseitems_2:
 	Defaults:
-		Filename: consumer_items.shp
+		Filename: eden_impulseitems_3_consumer_items.shp
 	idle:
 	move:
 	die:
 	icon:
-		Filename: consumer_items_luxury_wares.shp
+		Filename: eden_impulseitems_2_icon.shp
 
 ####################################################################################################
 #		UNITS EDEN
@@ -691,7 +691,7 @@ consumer_items_luxury_wares:
 ####Eden Convec Structure Factory
 eden_convec:
 	Defaults:
-		Filename: eden_convec.shp
+		Filename: eden_convec_structure_factory_eden_convec.shp
 	idle:
 		Start: 0
 		Length: 1
@@ -707,7 +707,7 @@ eden_convec:
 		Length: 1
 		Tick: 100
 	icon:
-		Filename: edenUIConvec.png
+		Filename: eden_convec_structure_factory_icon.png
 
 eden_cargotruck_empty:
 	Defaults:
@@ -730,7 +730,7 @@ eden_cargotruck_empty:
 		Start: 17
 		Length: 1
 	icon:
-		Filename: edenUICargoTruck.png
+		Filename: eden_cargotruck_empty_icon.png
 
 eden_cargotruck_commonore:
 	Defaults:
@@ -767,7 +767,7 @@ eden_scout:
 		Length: 1
 		Tick: 100
 	icon:
-		Filename: edenUIScout.png
+		Filename: eden_scout_icon.png
 
 eden_lynx_laser:
 	Defaults:
@@ -783,11 +783,11 @@ eden_lynx_laser:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_laser.shp
+		Filename: eden_lynx_laser_eden_mobile_laser.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUILynxLaser.png
+		Filename: eden_lynx_laser_icon.png
 
 eden_tiger_laser:
 	Defaults:
@@ -803,11 +803,11 @@ eden_tiger_laser:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_laser_tiger.shp
+		Filename: eden_tiger_laser_eden_mobile_laser_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUITigerLaser.png
+		Filename: eden_tiger_laser_icon.png
 
 eden_lynx_railgun:
 	Defaults:
@@ -823,11 +823,11 @@ eden_lynx_railgun:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_railgun.shp
+		Filename: eden_lynx_railgun_eden_mobile_railgun.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUILynxRailgun.png
+		Filename: eden_lynx_railgun_icon.png
 
 eden_tiger_railgun:
 	Defaults:
@@ -843,11 +843,11 @@ eden_tiger_railgun:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_railgun_tiger.shp
+		Filename: eden_tiger_railgun_eden_mobile_railgun_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUITigerRailgun.png
+		Filename: eden_tiger_railgun_icon.png
 
 eden_lynx_emp:
 	Defaults:
@@ -863,11 +863,11 @@ eden_lynx_emp:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_emp.shp
+		Filename: eden_lynx_emp_eden_mobile_emp.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUILynxEMP.png
+		Filename: eden_lynx_emp_icon.png
 
 eden_tiger_emp:
 	Defaults:
@@ -883,11 +883,11 @@ eden_tiger_emp:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_emp_tiger.shp
+		Filename: eden_tiger_emp_eden_mobile_emp_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUITigerEMP.png
+		Filename: eden_tiger_emp_icon.png
 
 eden_lynx_acidcloud:
 	Defaults:
@@ -903,11 +903,11 @@ eden_lynx_acidcloud:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_acidcloud.shp
+		Filename: eden_lynx_acidcloud_eden_mobile_acidcloud.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUILynxAcidCloud.png
+		Filename: eden_lynx_acidcloud_icon.png
 
 eden_tiger_acidcloud:
 	Defaults:
@@ -923,11 +923,11 @@ eden_tiger_acidcloud:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_acidcloud_tiger.shp
+		Filename: eden_tiger_acidcloud_eden_mobile_acidcloud_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUITigerAcidCloud.png
+		Filename: eden_tiger_acidcloud_icon.png
 
 eden_lynx_starflare:
 	Defaults:
@@ -943,11 +943,11 @@ eden_lynx_starflare:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_starflare.shp
+		Filename: eden_lynx_starflare_eden_mobile_starflare.shp
 		Start: 0
 		Facings: 1
 	icon:
-		Filename: edenUILynxStarflare.png
+		Filename: eden_lynx_starflare_icon.png
 
 eden_tiger_starflare:
 	Defaults:
@@ -963,11 +963,11 @@ eden_tiger_starflare:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_starflare_tiger.shp
+		Filename: eden_tiger_starflare_eden_mobile_starflare_tiger.shp
 		Start: 0
 		Facings: 1
 	icon:
-		Filename: edenUITigerStarflare.png
+		Filename: eden_tiger_starflare_icon.png
 
 eden_lynx_thorshammer:
 	Defaults:
@@ -983,11 +983,11 @@ eden_lynx_thorshammer:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_thorshammer.shp
+		Filename: eden_lynx_thorshammer_eden_mobile_thorshammer.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUILynxThorsHammer.png
+		Filename: eden_lynx_thorshammer_icon.png
 
 eden_tiger_thorshammer:
 	Defaults:
@@ -1003,11 +1003,11 @@ eden_tiger_thorshammer:
 		Facings: 8
 		Tick: 100
 	turret:
-		Filename: eden_mobile_thorshammer_tiger.shp
+		Filename: eden_tiger_thorshammer_eden_mobile_thorshammer_tiger.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: edenUITigerThorsHammer.png
+		Filename: eden_tiger_thorshammer_icon.png
 
 ####################################################################################################
 #		BUILDINGS PLYMOUTH
@@ -1044,7 +1044,7 @@ plymouth_structure_factory:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: plymouthUIfactorystructure.png
+		Filename: plymouth_structure_factory_icon.png
 
 plymouth_tokamak:
 	Inherits: ^OP2Building
@@ -1067,7 +1067,7 @@ plymouth_tokamak:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_tokamak.shp
+		Filename: plymouth_tokamak_icon.shp
 
 plymouth_smelter_common:
 	Inherits: ^OP2Building
@@ -1090,7 +1090,7 @@ plymouth_smelter_common:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_smeltercommonore.shp
+		Filename: plymouth_smelter_common_icon.shp
 
 plymouth_agridome:
 	Inherits: ^OP2Building
@@ -1113,7 +1113,7 @@ plymouth_agridome:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_agridome.shp
+		Filename: plymouth_agridome_icon.shp
 
 plymouth_residence:
 	Inherits: ^OP2Building
@@ -1136,7 +1136,7 @@ plymouth_residence:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_residence.shp
+		Filename: plymouth_residence_icon.shp
 
 plymouth_basic_lab:
 	Inherits: ^OP2Building
@@ -1159,7 +1159,7 @@ plymouth_basic_lab:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_basic_lab.shp
+		Filename: plymouth_basic_lab_icon.shp
 
 plymouth_nursery:
 	Inherits: ^OP2Building
@@ -1182,7 +1182,7 @@ plymouth_nursery:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_nursery.shp
+		Filename: plymouth_nursery_icon.shp
 
 plymouth_university:
 	Inherits: ^OP2Building
@@ -1205,7 +1205,7 @@ plymouth_university:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_university.shp
+		Filename: plymouth_university_icon.shp
 
 plymouth_lab_standard:
 	Inherits: ^OP2Building
@@ -1228,7 +1228,7 @@ plymouth_lab_standard:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_labstandard.shp
+		Filename: plymouth_lab_standard_icon.shp
 
 plymouth_dirt:
 	Inherits: ^OP2Building
@@ -1251,7 +1251,7 @@ plymouth_dirt:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_dirt.shp
+		Filename: plymouth_dirt_icon.shp
 
 plymouth_gorf:
 	Inherits: ^OP2Building
@@ -1274,7 +1274,7 @@ plymouth_gorf:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_gorf.shp
+		Filename: plymouth_gorf_icon.shp
 
 plymouth_lab_advanced:
 	Inherits: ^OP2Building
@@ -1297,7 +1297,7 @@ plymouth_lab_advanced:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_labadvanced.shp
+		Filename: plymouth_lab_advanced_icon.shp
 
 plymouth_spaceport:
 	Inherits: ^OP2Building
@@ -1323,7 +1323,7 @@ plymouth_spaceport:
 		Start: 1
 		Length: 1
 	icon:
-		Filename: cameo_plymouth_building_spaceport.shp
+		Filename: plymouth_spaceport_icon.shp
 
 plymouth_solararray:
 	Inherits: ^OP2Building
@@ -1346,7 +1346,7 @@ plymouth_solararray:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_solarpowerarray.shp
+		Filename: plymouth_solararray_icon.shp
 
 plymouth_smelter_rare:
 	Inherits: ^OP2Building
@@ -1369,7 +1369,7 @@ plymouth_smelter_rare:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_smelterrareore.shp
+		Filename: plymouth_smelter_rare_icon.shp
 
 plymouth_factory_vehicle:
 	Inherits: ^OP2Building
@@ -1392,7 +1392,7 @@ plymouth_factory_vehicle:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_factoryvehicle.shp
+		Filename: plymouth_factory_vehicle_icon.shp
 
 plymouth_garage:
 	Inherits: ^OP2Building
@@ -1417,7 +1417,7 @@ plymouth_garage:
 	damaged-active:
 		Start: 0
 	icon:
-		Filename: cameo_plymouth_garage.shp
+		Filename: plymouth_garage_icon.shp
 
 plymouth_rcc:
 	Inherits: ^OP2Building
@@ -1440,7 +1440,7 @@ plymouth_rcc:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_rcc.shp
+		Filename: plymouth_rcc_icon.shp
 
 plymouth_factory_arachnid:
 	Inherits: ^OP2Building
@@ -1463,7 +1463,7 @@ plymouth_factory_arachnid:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_building_factoryarachnid.shp
+		Filename: plymouth_factory_arachnid_icon.shp
 
 plymouth_esg_mine:
 	idle:
@@ -1496,7 +1496,7 @@ plymouth_mine_common:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: cameo_plymouth_mine_common.shp
+		Filename: plymouth_mine_common_icon.shp
 
 plymouth_light_tower:
 	Inherits: ^OP2Building
@@ -1512,7 +1512,7 @@ plymouth_light_tower:
 	dead:
 	make:
 	icon:
-		Filename: plymouthUIlighttower.png
+		Filename: plymouth_light_tower_icon.png
 
 plymouth_storage_common:
 	Inherits: ^OP2Building
@@ -1542,7 +1542,7 @@ plymouth_storage_common:
 		Length: *
 		Offset: 0,1
 	icon:
-		Filename: cameo_plymouth_storage_common.shp
+		Filename: plymouth_storage_common_icon.shp
 
 plymouth_gp_microwave:
 	Inherits: ^OP2Building
@@ -1566,7 +1566,7 @@ plymouth_gp_microwave:
 	muzzle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: cameo_plymouth_guardpost_microwave.shp
+		Filename: plymouth_gp_microwave_icon.shp
 
 plymouth_gp_stickyfoam:
 	Inherits: ^OP2Building
@@ -1590,7 +1590,7 @@ plymouth_gp_stickyfoam:
 	muzzle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: cameo_plymouth_guardpost_stickyfoam.shp
+		Filename: plymouth_gp_stickyfoam_icon.shp
 
 plymouth_gp_rpg:
 	Inherits: ^OP2Building
@@ -1614,7 +1614,7 @@ plymouth_gp_rpg:
 	muzzle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: cameo_plymouth_guardpost_rpg.shp
+		Filename: plymouth_gp_rpg_icon.shp
 
 ####################################################################################################
 #		UNITS PLYMOUTH
@@ -1622,7 +1622,7 @@ plymouth_gp_rpg:
 ####Plymouth Convec Command Center
 plymouth_convec_structure_factory:
 	Defaults:
-		Filename: plymouth_convec.shp
+		Filename: plymouth_convec_structure_factory_plymouth_convec.shp
 	idle:
 		Start: 0
 		Length: 1
@@ -1638,7 +1638,7 @@ plymouth_convec_structure_factory:
 		Length: 1
 		Tick: 100
 	icon:
-		Filename: cameo_plymouth_convec.shp
+		Filename: plymouth_convec_structure_factory_icon.shp
 
 plymouth_cargotruck_empty:
 	Defaults:
@@ -1655,21 +1655,21 @@ plymouth_cargotruck_empty:
 		Facings: -8
 		Length: 3
 	dock:
-		Filename: plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
 		Start: 17
 		Length: 1
 	dock-loop:
-		Filename: plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
 		Start: 17
 		Length: 1
 	icon:
-		Filename: cameo_plymouth_cargotruck.shp
+		Filename: plymouth_cargotruck_empty_icon.shp
 
 plymouth_cargotruck_commonore:
 	Defaults: plymouth_cargotruck_empty
 	Inherits: plymouth_cargotruck_empty
 	idle:
-		Filename: plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
 		Start: 0
 		Length: 1
 		Facings: -8
@@ -1678,7 +1678,7 @@ plymouth_cargotruck_commonore:
 		Facings: -8
 		Length: 3
 	die:
-		Filename: plymouth_cargotruck_commonore.shp
+		Filename: plymouth_cargotruck_empty_plymouth_cargotruck_commonore.shp
 		Start: 0
 		Length: 1
 
@@ -1700,7 +1700,7 @@ plymouth_spider:
 		Length: 1
 		Tick: 100
 	icon:
-		Filename: cameo_plymouth_spider.shp
+		Filename: plymouth_spider_icon.shp
 
 plymouth_scorpion:
 	Defaults:
@@ -1720,7 +1720,7 @@ plymouth_scorpion:
 		Length: 1
 		Tick: 100
 	icon:
-		Filename: cameo_plymouth_scorpion.shp
+		Filename: plymouth_scorpion_icon.shp
 
 plymouth_scout:
 	Defaults:
@@ -1740,7 +1740,7 @@ plymouth_scout:
 		Length: 1
 		Tick: 100
 	icon:
-		Filename: cameo_plymouth_scout.shp
+		Filename: plymouth_scout_icon.shp
 
 # plymouth_tech_platform:
 # 	stand:
@@ -1810,14 +1810,14 @@ plymouth_lynx_microwave:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_microwave.shp
+		Filename: plymouth_lynx_microwave_plymouth_mobile_microwave.shp
 		Start: 0
 		Facings: -16
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
 	icon:
-		Filename: cameo_plymouth_lynx_microwave.shp
+		Filename: plymouth_lynx_microwave_icon.shp
 
 plymouth_tiger_microwave:
 	Defaults:
@@ -1833,11 +1833,11 @@ plymouth_tiger_microwave:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_tiger_microwave.shp
+		Filename: plymouth_tiger_microwave_plymouth_mobile_tiger_microwave.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: cameo_plymouth_tiger_microwave.shp
+		Filename: plymouth_tiger_microwave_icon.shp
 
 plymouth_lynx_rpg:
 	Defaults:
@@ -1853,7 +1853,7 @@ plymouth_lynx_rpg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_rpg.shp
+		Filename: plymouth_lynx_rpg_plymouth_mobile_rpg.shp
 		Start: 0
 		Facings: -16
 		Offset: 0,2
@@ -1861,7 +1861,7 @@ plymouth_lynx_rpg:
 	#	Length: 6
 	#	Facings: 8
 	icon:
-		Filename: cameo_plymouth_lynx_rpg.shp
+		Filename: plymouth_lynx_rpg_icon.shp
 
 plymouth_tiger_rpg:
 	Defaults:
@@ -1877,11 +1877,11 @@ plymouth_tiger_rpg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_tiger_rpg.shp
+		Filename: plymouth_tiger_rpg_plymouth_mobile_tiger_rpg.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: cameo_plymouth_tiger_rpg.shp
+		Filename: plymouth_tiger_rpg_icon.shp
 
 plymouth_lynx_emp:
 	Defaults:
@@ -1897,7 +1897,7 @@ plymouth_lynx_emp:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_emp.shp
+		Filename: plymouth_lynx_emp_plymouth_mobile_emp.shp
 		Start: 0
 		Facings: -16
 		Offset: 0,2
@@ -1905,7 +1905,7 @@ plymouth_lynx_emp:
 	#	Length: 6
 	#	Facings: 8
 	icon:
-		Filename: cameo_plymouth_lynx_emp.shp
+		Filename: plymouth_lynx_emp_icon.shp
 
 plymouth_tiger_emp:
 	Defaults:
@@ -1921,11 +1921,11 @@ plymouth_tiger_emp:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_tiger_emp.shp
+		Filename: plymouth_tiger_emp_plymouth_mobile_tiger_emp.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: cameo_plymouth_tiger_emp.shp
+		Filename: plymouth_tiger_emp_icon.shp
 
 plymouth_lynx_stickyfoam:
 	Defaults:
@@ -1941,7 +1941,7 @@ plymouth_lynx_stickyfoam:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_stickyfoam.shp
+		Filename: plymouth_lynx_stickyfoam_plymouth_mobile_stickyfoam.shp
 		Start: 0
 		Facings: 16
 		Offset: 0,2
@@ -1949,7 +1949,7 @@ plymouth_lynx_stickyfoam:
 	#	Length: 6
 	#	Facings: 8
 	icon:
-		Filename: cameo_plymouth_lynx_stickyfoam.shp
+		Filename: plymouth_lynx_stickyfoam_icon.shp
 
 plymouth_tiger_stickyfoam:
 	Defaults:
@@ -1965,11 +1965,11 @@ plymouth_tiger_stickyfoam:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_tiger_stickyfoam.shp
+		Filename: plymouth_tiger_stickyfoam_plymouth_mobile_tiger_stickyfoam.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: cameo_plymouth_tiger_stickyfoam.shp
+		Filename: plymouth_tiger_stickyfoam_icon.shp
 
 plymouth_lynx_esg:
 	Defaults:
@@ -1985,7 +1985,7 @@ plymouth_lynx_esg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_esg.shp
+		Filename: plymouth_lynx_esg_plymouth_mobile_esg.shp
 		Start: 0
 		Facings: 16
 		Offset: 0,2
@@ -1993,7 +1993,7 @@ plymouth_lynx_esg:
 	#	Length: 6
 	#	Facings: 8
 	icon:
-		Filename: cameo_plymouth_lynx_esg.shp
+		Filename: plymouth_lynx_esg_icon.shp
 
 plymouth_tiger_esg:
 	Defaults:
@@ -2009,11 +2009,11 @@ plymouth_tiger_esg:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_tiger_esg.shp
+		Filename: plymouth_tiger_esg_plymouth_mobile_tiger_esg.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: cameo_plymouth_tiger_esg.shp
+		Filename: plymouth_tiger_esg_icon.shp
 
 plymouth_lynx_starflare:
 	Defaults:
@@ -2029,14 +2029,14 @@ plymouth_lynx_starflare:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_starflare.shp
+		Filename: plymouth_tiger_starflare_plymouth_mobile_starflare.shp
 		Start: 0
 		Facings: 1
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
 	icon:
-		Filename: cameo_plymouth_lynx_starflare.shp
+		Filename: plymouth_lynx_starflare_icon.shp
 
 plymouth_tiger_starflare:
 	Defaults:
@@ -2052,11 +2052,11 @@ plymouth_tiger_starflare:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_starflare.shp
+		Filename: plymouth_tiger_starflare_plymouth_mobile_starflare.shp
 		Start: 0
 		Facings: 1
 	icon:
-		Filename: cameo_plymouth_tiger_starflare.shp
+		Filename: plymouth_tiger_starflare_icon.shp
 
 plymouth_lynx_supernova:
 	Defaults:
@@ -2072,14 +2072,14 @@ plymouth_lynx_supernova:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_supernova.shp
+		Filename: plymouth_tiger_supernova_plymouth_mobile_supernova.shp
 		Start: 0
 		Facings: -16
 	#muzzle: minigun
 	#	Length: 6
 	#	Facings: 8
 	icon:
-		Filename: cameo_plymouth_lynx_supernova.shp
+		Filename: plymouth_lynx_supernova_icon.shp
 
 plymouth_tiger_supernova:
 	Defaults:
@@ -2095,11 +2095,11 @@ plymouth_tiger_supernova:
 		Facings: -8
 		Tick: 100
 	turret:
-		Filename: plymouth_mobile_supernova.shp
+		Filename: plymouth_tiger_supernova_plymouth_mobile_supernova.shp
 		Start: 0
 		Facings: 16
 	icon:
-		Filename: cameo_plymouth_tiger_supernova.shp
+		Filename: plymouth_tiger_supernova_icon.shp
 
 ####################################################################################################
 #		DEPRECATED
@@ -2161,7 +2161,7 @@ plymouth_tiger_supernova:
 # 		Start: 32
 # 		Length: 3
 # 		Tick: 100
-# 	icon: edenUIConvec.png
+# 	icon: eden_convec_structure_factory_icon.png
 # ####Eden Lynx Laser
 # ellaser:
 # 	idle: echassislynx.png
@@ -2178,4 +2178,4 @@ plymouth_tiger_supernova:
 # 	#muzzle: minigun
 # 	#	Length: 6
 # 	#	Facings: 8
-# 	icon: edenUILynxLaser.png
+# 	icon: eden_lynx_laser_icon.png

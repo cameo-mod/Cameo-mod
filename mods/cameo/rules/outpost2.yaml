@@ -1341,7 +1341,7 @@ EDEN_GP_RAILGUN:
 # #		WARES EDEN
 # ####################################################################################################
 
-CONSUMER_ITEMS_IMPULSE:
+eden_impulseitems:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -1365,7 +1365,7 @@ CONSUMER_ITEMS_IMPULSE:
 		Delay: 3
 		RemoveInstead: true
 
-CONSUMER_ITEMS_WARES:
+eden_impulseitems_3:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:
@@ -1389,7 +1389,7 @@ CONSUMER_ITEMS_WARES:
 		Delay: 3
 		RemoveInstead: true
 
-CONSUMER_ITEMS_LUXURY_WARES:
+eden_impulseitems_2:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Valued:

@@ -51,35 +51,35 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: human2
-		BaseActor: wc2_human_mcv
+		BaseActor: humans_mobileconstructionvehiclehuman
 	StartingUnits@mcvonlyorc2:
 		Class: none
 		ClassName: MCV Only
 		Factions: orc2
-		BaseActor: wc2_orc_mcv
+		BaseActor: orcs_mobileconstructionvehicleorc
 	StartingUnits@defaulthuman2a:
 		Class: light
 		ClassName: Light Support
 		Factions: human2
-		BaseActor: wc2_human_mcv
+		BaseActor: humans_mobileconstructionvehiclehuman
 		SupportActors:
 	StartingUnits@defaultorc2a:
 		Class: light
 		ClassName: Light Support
 		Factions: orc2
-		BaseActor: wc2_orc_mcv
+		BaseActor: orcs_mobileconstructionvehicleorc
 		SupportActors:
 	StartingUnits@heavyhuman2a:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: human2
-		BaseActor: wc2_human_mcv
+		BaseActor: humans_mobileconstructionvehiclehuman
 		SupportActors:
 	StartingUnits@heavyorc2a:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: orc2
-		BaseActor: wc2_orc_mcv
+		BaseActor: orcs_mobileconstructionvehicleorc
 		SupportActors:
 
 Player:
@@ -377,8 +377,8 @@ Player:
 		CargoType: Worker
 		CustomPipType: blue
 		CargoConditions:
-			wc2_human_goldmine: indoors
-			wc2_orc_goldmine: indoors
+			humans_humangoldmine: indoors
+			orcs_orcgoldmine: indoors
 	WithHarvestAnimation:
 	WithDockingAnimation:
 
@@ -554,13 +554,13 @@ Player:
 # WC2 HUMAN INHERITABLES
 ###############################################################
 
-^wc2_h_str_sword:
+^humans_upgrade_swordstrength:
 	GrantConditionOnPrerequisite@WC2SwordUpg:
 		Condition: wc2sword_upg
-		Prerequisites: wc2_h_str_sword
+		Prerequisites: humans_upgrade_swordstrength
 	GrantConditionOnPrerequisite@WC2SwordUpg2:
 		Condition: wc2sword_upg2
-		Prerequisites: wc2_h_str_sword2
+		Prerequisites: humans_upgrade_swordstrengthii
 	FirepowerMultiplier@WC2SwordUpg:
 		Modifier: 115
 		RequiresCondition: wc2sword_upg && !wc2sword_upg2
@@ -568,13 +568,13 @@ Player:
 		Modifier: 135
 		RequiresCondition: wc2sword_upg2
 
-^wc2_h_str_shield:
+^humans_upgrade_armorstrength:
 	GrantConditionOnPrerequisite@WC2HShieldUpg:
 		Condition: wc2hshield_upg
-		Prerequisites: wc2_h_str_shield
+		Prerequisites: humans_upgrade_armorstrength
 	GrantConditionOnPrerequisite@WC2HShieldUpg2:
 		Condition: wc2hshield_upg2
-		Prerequisites: wc2_h_str_shield2
+		Prerequisites: humans_upgrade_armorstrengthii
 	DamageMultiplier@WC2HShieldUpg:
 		Modifier: 90
 		RequiresCondition: wc2hshield_upg && !wc2hshield_upg2
@@ -582,13 +582,13 @@ Player:
 		Modifier: 80
 		RequiresCondition: wc2hshield_upg2
 
-^wc2_h_str_arrow:
+^humans_upgrade_arrowstrength:
 	GrantConditionOnPrerequisite@WC2ArrowUpg:
 		Condition: wc2arrow_upg
-		Prerequisites: wc2_h_str_arrow
+		Prerequisites: humans_upgrade_arrowstrength
 	GrantConditionOnPrerequisite@WC2ArrowUpg2:
 		Condition: wc2arrow_upg2
-		Prerequisites: wc2_h_str_arrow2
+		Prerequisites: humans_upgrade_arrowstrengthii
 	FirepowerMultiplier@WC2ArrowUpg:
 		Modifier: 115
 		RequiresCondition: wc2arrow_upg && !wc2arrow_upg2
@@ -596,13 +596,13 @@ Player:
 		Modifier: 135
 		RequiresCondition: wc2arrow_upg2
 
-^wc2_h_str_ballista:
+^humans_upgrade_ballistastrength:
 	GrantConditionOnPrerequisite@BallUpg:
 		Condition: ballista_upg
-		Prerequisites: wc2_h_str_ballista
+		Prerequisites: humans_upgrade_ballistastrength
 	GrantConditionOnPrerequisite@BallUpg2:
 		Condition: ballista_upg2
-		Prerequisites: wc2_h_str_ballista2
+		Prerequisites: humans_upgrade_ballistastrengthii
 	FirepowerMultiplier@BallUpg:
 		Modifier: 115
 		RequiresCondition: ballista_upg && !ballista_upg2
@@ -610,13 +610,13 @@ Player:
 		Modifier: 135
 		RequiresCondition: ballista_upg2
 
-^wc2_h_str_cannon:
+^humans_upgrade_cannondamage:
 	GrantConditionOnPrerequisite@HCannonUpg:
 		Condition: hcannon_upg
-		Prerequisites: wc2_h_str_cannon
+		Prerequisites: humans_upgrade_cannondamage
 	GrantConditionOnPrerequisite@HCannonUpg2:
 		Condition: hcannon_upg2
-		Prerequisites: wc2_h_str_cannon2
+		Prerequisites: humans_upgrade_cannondamageii
 	FirepowerMultiplier@HCannonUpg:
 		Modifier: 115
 		RequiresCondition: hcannon_upg && !hcannon_upg2
@@ -638,42 +638,42 @@ Player:
 		Modifier: 80
 		RequiresCondition: hnavyshield_upg2
 
-^wc2_h_rangerupg:
+^humans_upgrade_ranger:
 	GrantConditionOnPrerequisite@RangerUpg:
 		Condition: ranger_upg
-		Prerequisites: wc2_h_rangerupg
+		Prerequisites: humans_upgrade_ranger
 	DamageMultiplier@RangerUpg:
 		Modifier: 80
 		RequiresCondition: ranger_upg
 
-^wc2_h_ranger_longbow:
+^humans_upgrade_rangerlongbow:
 	GrantConditionOnPrerequisite@RLongBowUpg:
 		Condition: rangerlb_upg
-		Prerequisites: wc2_h_ranger_longbow
+		Prerequisites: humans_upgrade_rangerlongbow
 	RangeMultiplier@RLongBowUpg:
 		Modifier: 120
 		RequiresCondition: rangerlb_upg
 
-^wc2_h_ranger_scouting:
+^humans_upgrade_rangerscouting:
 	GrantConditionOnPrerequisite@RScoutUpg:
 		Condition: rangersc_upg
-		Prerequisites: wc2_h_ranger_scouting
+		Prerequisites: humans_upgrade_rangerscouting
 	RevealsShroudMultiplier@RScoutUpg:
 		Modifier: 120
 		RequiresCondition: rangersc_upg
 
-^wc2_h_ranger_marksman:
+^humans_upgrade_rangermarksman:
 	GrantConditionOnPrerequisite@RMarksmanUpg:
 		Condition: rangermm_upg
-		Prerequisites: wc2_h_ranger_marksman
+		Prerequisites: humans_upgrade_rangermarksman
 	FirepowerMultiplier@RMarksmanUpg:
 		Modifier: 125
 		RequiresCondition: rangermm_upg
 
-^wc2_h_paladinupg:
+^humans_upgrade_paladin:
 	GrantConditionOnPrerequisite@PalUpg:
 		Condition: paladin_upg
-		Prerequisites: wc2_h_paladinupg
+		Prerequisites: humans_upgrade_paladin
 	DamageMultiplier@PalUpg:
 		Modifier: 90
 		RequiresCondition: paladin_upg
@@ -687,39 +687,39 @@ Player:
 ^wc2_h_paladin_healing:
 	GrantConditionOnPrerequisite@PHealingUpg:
 		Condition: paladinhealing_upg
-		Prerequisites: wc2_h_healingupg
+		Prerequisites: humans_upgrade_healing
 
 ^wc2_h_paladin_exorcism:
 	GrantConditionOnPrerequisite@PExorcismUpg:
 		Condition: paladinexorcism_upg
-		Prerequisites: wc2_h_exorcismupg
+		Prerequisites: humans_upgrade_exorcism
 
 ^wc2_h_mage_slow:
 	GrantConditionOnPrerequisite@MSlowUpg:
 		Condition: mageslow_upg
-		Prerequisites: wc2_h_slowupg
+		Prerequisites: humans_upgrade_slow
 
 ^wc2_h_mage_polymorph:
 	GrantConditionOnPrerequisite@MPolymorphUpg:
 		Condition: magepolymorph_upg
-		Prerequisites: wc2_h_polymorphupg
+		Prerequisites: humans_upgrade_polymorph
 
 ^wc2_h_mage_blizzard:
 	GrantConditionOnPrerequisite@MBlizzardUpg:
 		Condition: mageblizzard_upg
-		Prerequisites: wc2_h_blizzardupg
+		Prerequisites: humans_upgrade_blizzard
 
 ###############################################################
 # WC2 ORC INHERITABLES
 ###############################################################
 
-^wc2_o_str_axe:
+^orcs_upgrade_axestrength:
 	GrantConditionOnPrerequisite@WC2AxeUpg:
 		Condition: wc2axe_upg
-		Prerequisites: wc2_o_str_axe
+		Prerequisites: orcs_upgrade_axestrength
 	GrantConditionOnPrerequisite@WC2AxeUpg2:
 		Condition: wc2axe_upg2
-		Prerequisites: wc2_o_str_axe2
+		Prerequisites: orcs_upgrade_axestrengthii
 	FirepowerMultiplier@WC2AxeUpg:
 		Modifier: 115
 		RequiresCondition: wc2axe_upg && !wc2axe_upg2
@@ -727,13 +727,13 @@ Player:
 		Modifier: 135
 		RequiresCondition: wc2axe_upg2
 
-^wc2_o_str_shield:
+^orcs_upgrade_armorstrength:
 	GrantConditionOnPrerequisite@WC2OShieldUpg:
 		Condition: wc2oshield_upg
-		Prerequisites: wc2_o_str_shield
+		Prerequisites: orcs_upgrade_armorstrength
 	GrantConditionOnPrerequisite@WC2OShieldUpg2:
 		Condition: wc2oshield_upg2
-		Prerequisites: wc2_o_str_shield2
+		Prerequisites: orcs_upgrade_armorstrengthii
 	DamageMultiplier@WC2OShieldUpg:
 		Modifier: 90
 		RequiresCondition: wc2oshield_upg && !wc2oshield_upg2
@@ -741,13 +741,13 @@ Player:
 		Modifier: 80
 		RequiresCondition: wc2oshield_upg2
 
-^wc2_o_str_throwaxe:
+^orcs_upgrade_throwingaxestrength:
 	GrantConditionOnPrerequisite@TAxeUpg:
 		Condition: throwaxe_upg
-		Prerequisites: wc2_o_str_throwaxe
+		Prerequisites: orcs_upgrade_throwingaxestrength
 	GrantConditionOnPrerequisite@TAxeUpg2:
 		Condition: throwaxe_upg2
-		Prerequisites: wc2_o_str_throwaxe2
+		Prerequisites: orcs_upgrade_throwingaxestrengthii
 	FirepowerMultiplier@TAxeUpg:
 		Modifier: 115
 		RequiresCondition: throwaxe_upg && !throwaxe_upg2
@@ -755,13 +755,13 @@ Player:
 		Modifier: 135
 		RequiresCondition: throwaxe_upg2
 
-^wc2_o_str_catapult:
+^orcs_upgrade_catapultstrength:
 	GrantConditionOnPrerequisite@CatUpg:
 		Condition: cat_upg
-		Prerequisites: wc2_o_str_catapult
+		Prerequisites: orcs_upgrade_catapultstrength
 	GrantConditionOnPrerequisite@CatUpg2:
 		Condition: cat_upg2
-		Prerequisites: wc2_o_str_catapult2
+		Prerequisites: orcs_upgrade_catapultstrengthii
 	FirepowerMultiplier@CatUpg:
 		Modifier: 115
 		RequiresCondition: cat_upg && !cat_upg2
@@ -769,13 +769,13 @@ Player:
 		Modifier: 135
 		RequiresCondition: cat_upg2
 
-^wc2_o_str_cannon:
+^orcs_upgrade_cannondamage:
 	GrantConditionOnPrerequisite@OCannonUpg:
 		Condition: ocannon_upg
-		Prerequisites: wc2_o_str_cannon
+		Prerequisites: orcs_upgrade_cannondamage
 	GrantConditionOnPrerequisite@OCannonUpg2:
 		Condition: ocannon_upg2
-		Prerequisites: wc2_o_str_cannon2
+		Prerequisites: orcs_upgrade_cannondamageii
 	FirepowerMultiplier@OCannonUpg:
 		Modifier: 115
 		RequiresCondition: ocannon_upg && !ocannon_upg2
@@ -797,34 +797,34 @@ Player:
 		Modifier: 80
 		RequiresCondition: onavyshield_upg2
 
-^wc2_o_berserkerupg:
+^orcs_upgrade_berserker:
 	GrantConditionOnPrerequisite@BerserkerUpg:
 		Condition: berserker_upg
-		Prerequisites: wc2_o_berserkerupg
+		Prerequisites: orcs_upgrade_berserker
 	DamageMultiplier@BerserkerUpg:
 		Modifier: 80
 		RequiresCondition: berserker_upg
 
-^wc2_o_berserker_lighteraxes:
+^orcs_upgrade_berserkerlightaxes:
 	GrantConditionOnPrerequisite@BLighterUpg:
 		Condition: berserkerla_upg
-		Prerequisites: wc2_o_berserker_lighteraxes
+		Prerequisites: orcs_upgrade_berserkerlightaxes
 	RangeMultiplier@BLighterUpg:
 		Modifier: 120
 		RequiresCondition: berserkerla_upg
 
-^wc2_o_berserker_scouting:
+^orcs_upgrade_berserkerscouting:
 	GrantConditionOnPrerequisite@BScoutUpg:
 		Condition: berserkersc_upg
-		Prerequisites: wc2_o_berserker_scouting
+		Prerequisites: orcs_upgrade_berserkerscouting
 	RevealsShroudMultiplier@BScoutUpg:
 		Modifier: 120
 		RequiresCondition: berserkersc_upg
 
-^wc2_o_berserker_regen:
+^orcs_upgrade_berserkerregeneration:
 	GrantConditionOnPrerequisite@BRegenUpg:
 		Condition: berserkerregen_upg
-		Prerequisites: wc2_o_berserker_regen
+		Prerequisites: orcs_upgrade_berserkerregeneration
 	DamageMultiplier@BRegenUpg:
 		Modifier: 80
 		RequiresCondition: berserkerregen_upg
@@ -835,10 +835,10 @@ Player:
 		DamageCooldown: 5
 		RequiresCondition: berserkerregen_upg
 
-^wc2_o_ogremageupg:
+^orcs_upgrade_ogremage:
 	GrantConditionOnPrerequisite@OMUpg:
 		Condition: ogremage_upg
-		Prerequisites: wc2_o_ogremageupg
+		Prerequisites: orcs_upgrade_ogremage
 	DamageMultiplier@OMUpg:
 		Modifier: 90
 		RequiresCondition: ogremage_upg
@@ -852,27 +852,27 @@ Player:
 ^wc2_o_ogremage_bloodlust:
 	GrantConditionOnPrerequisite@OBloodlustUpg:
 		Condition: ogremagebloodlust_upg
-		Prerequisites: wc2_o_bloodlustupg
+		Prerequisites: orcs_upgrade_bloodlust
 
 ^wc2_o_ogremage_runes:
 	GrantConditionOnPrerequisite@ORunesUpg:
 		Condition: ogremagerunes_upg
-		Prerequisites: wc2_o_runesupg
+		Prerequisites: orcs_upgrade_runes
 
 ^wc2_o_deathknight_haste:
 	GrantConditionOnPrerequisite@DHasteUpg:
 		Condition: deathknighthaste_upg
-		Prerequisites: wc2_o_hasteupg
+		Prerequisites: orcs_upgrade_haste
 
 ^wc2_o_deathknight_deathanddecay:
 	GrantConditionOnPrerequisite@DDeathAndDecayUpg:
 		Condition: deathknightdeathanddecay_upg
-		Prerequisites: wc2_o_deathanddecayupg
+		Prerequisites: orcs_upgrade_deathanddecay
 
 ^wc2_o_deathknight_raisedead:
 	GrantConditionOnPrerequisite@DRaiseDeadUpg:
 		Condition: deathknightraisedead_upg
-		Prerequisites: wc2_o_raisedeadupg
+		Prerequisites: orcs_upgrade_raisedead
 
 ###################################################################################################
 # WC2 SPELL/STATUS EFFECT INHERITABLES
@@ -1914,7 +1914,7 @@ Player:
 # WC2 HUMAN BUILDINGS
 ####################################################################################################
 
-wc2_human_townhall:
+humans_townhall:
 	Inherits: ^BaseBuilding
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^3x2Shape
@@ -1922,13 +1922,13 @@ wc2_human_townhall:
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Town Hall
-		RequiresCondition: !wc2_human_keep && !wc2_human_castle
+		RequiresCondition: !humans_keep && !humans_castle
 	Tooltip@2:
 		Name: Keep
-		RequiresCondition: wc2_human_keep && !wc2_human_castle
+		RequiresCondition: humans_keep && !humans_castle
 	Tooltip@3:
 		Name: Castle
-		RequiresCondition: wc2_human_castle
+		RequiresCondition: humans_castle
 	Production@INFANTRY:
 		Produces: Infantry
 		PauseOnCondition: disabled
@@ -1962,40 +1962,40 @@ wc2_human_townhall:
 	Selectable:
 		Bounds: 3072, 2048
 	ProvidesPrerequisite@buildingname:
-	ProvidesPrerequisite@wc2_human_keep:
-		Prerequisite: wc2_human_keep
-		RequiresCondition: wc2_human_keep
-	ProvidesPrerequisite@wc2_human_castle:
-		Prerequisite: wc2_human_castle
-		RequiresCondition: wc2_human_castle
+	ProvidesPrerequisite@humans_keep:
+		Prerequisite: humans_keep
+		RequiresCondition: humans_keep
+	ProvidesPrerequisite@humans_castle:
+		Prerequisite: humans_castle
+		RequiresCondition: humans_castle
 	ProvidesPrerequisite@keepupgradeavailable:
 		Prerequisite: keepupgradeavailable
-		RequiresCondition: !wc2_human_keep
+		RequiresCondition: !humans_keep
 	ProvidesPrerequisite@castleupgradeavailable:
 		Prerequisite: castleupgradeavailable
-		RequiresCondition: wc2_human_keep && !wc2_human_castle
+		RequiresCondition: humans_keep && !humans_castle
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			wc2_human_townhall: wc2_human_keep
+			humans_townhall: humans_keep
 		Requirements:
-			wc2_human_townhall: !wc2_human_keep
+			humans_townhall: !humans_keep
 	Pluggable@2:
 		Offset: 0,0
 		Conditions:
-			wc2_human_keep: wc2_human_castle
+			humans_keep: humans_castle
 		Requirements:
-			wc2_human_keep: wc2_human_keep && !wc2_human_castle
+			humans_keep: humans_keep && !humans_castle
 	WithSpriteBody@keep:
-		RequiresCondition: !wc2_human_keep && !wc2_human_castle
+		RequiresCondition: !humans_keep && !humans_castle
 	WithSpriteBody@keep:
-		Sequence: wc2_human_keep
+		Sequence: humans_keep
 		Name: keep
-		RequiresCondition: wc2_human_keep && !wc2_human_castle
+		RequiresCondition: humans_keep && !humans_castle
 	WithSpriteBody@castle:
-		Sequence: wc2_human_castle
+		Sequence: humans_castle
 		Name: castle
-		RequiresCondition: wc2_human_castle
+		RequiresCondition: humans_castle
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -2004,10 +2004,10 @@ wc2_human_townhall:
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
 	DamageMultiplier@keep:
 		Modifier: 75
-		RequiresCondition: wc2_human_townhall && !wc2_human_castle
+		RequiresCondition: humans_townhall && !humans_castle
 	DamageMultiplier@castle:
 		Modifier: 50
-		RequiresCondition: wc2_human_castle
+		RequiresCondition: humans_castle
 	GrantConditionOnPowerState@supply:
 		Condition: lowpower
 		ValidPowerStates: Low, Critical
@@ -2055,9 +2055,9 @@ wc2_human_townhall:
 		PipCount: 10
 		FullSequence: pip-yellow
 	Transforms:
-		IntoActor: wc2_human_mcv
+		IntoActor: humans_mobileconstructionvehiclehuman
 
-wc2_human_keep:
+humans_keep:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Keep
@@ -2066,12 +2066,12 @@ wc2_human_keep:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites:  ~wc2_human_townhall, keepupgradeavailable, wc2_human_blacksmith
+		Prerequisites:  ~humans_townhall, keepupgradeavailable, humans_blacksmith
 		Description: Unlocks more advanced buildings.
 	Plug:
-		Type: wc2_human_townhall
+		Type: humans_townhall
 
-wc2_human_castle:
+humans_castle:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Castle
@@ -2080,12 +2080,12 @@ wc2_human_castle:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites: ~wc2_human_townhall, wc2_human_keep, castleupgradeavailable, wc2_human_gnomish_inventor, wc2_human_stables
+		Prerequisites: ~humans_townhall, humans_keep, castleupgradeavailable, humans_gnomishinventor, humans_stables
 		Description: Unlocks more advanced buildings.
 	Plug:
-		Type: wc2_human_keep
+		Type: humans_keep
 
-# wc2_human_keep:
+# humans_keep:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Keep
@@ -2093,14 +2093,14 @@ wc2_human_castle:
 # 		Cost: 5000
 # 	Buildable:
 # 		BuildPaletteOrder: 20
-# 		Prerequisites: ~!wc2_human_keep, ~wc2_human_barracks
+# 		Prerequisites: ~!humans_keep, ~humans_barracks
 # 		Queue: Addons
 # 		Description: Unlocks more advanced buildings.
 # 		Icon: icon
 # 	RenderSprites:
 # 	ProvidesPrerequisite:
 
-# wc2_human_castle:
+# humans_castle:
 # 	Inherits: ^researched_upgrade.template
 # 	Tooltip:
 # 		Name: Castle
@@ -2108,14 +2108,14 @@ wc2_human_castle:
 # 		Cost: 5000
 # 	Buildable:
 # 		BuildPaletteOrder: 21
-# 		Prerequisites: ~wc2_human_keep, wc2_human_elven_lumber_mill, wc2_human_blacksmith, wc2_human_stables
+# 		Prerequisites: ~humans_keep, humans_elvenlumbermill, humans_blacksmith, humans_stables
 # 		Queue: Addons
 # 		Description: Unlocks even more advanced buildings.
 # 		Icon: icon
 # 	RenderSprites:
 # 	ProvidesPrerequisite:
 
-wc2_human_farm:
+humans_farm:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_farm: ^wc2_farm
 	Tooltip:
@@ -2129,50 +2129,50 @@ wc2_human_farm:
 	Health:
 		HP: 300000
 	Buildable:
-		Prerequisites: ~wc2_human_townhall
+		Prerequisites: ~humans_townhall
 		Queue: Building, RABuilding
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: wc2humanfarmvoice
 	### Upgrade stuff ###
 	# Un upgraded sprite
 	WithSpriteBody:
-		RequiresCondition: !wc2_human_betterfarm && !wc2_human_bestfarm
+		RequiresCondition: !humans_upgrade_betterfarm && !humans_upgrade_bestfarm
 
 	# Better Farm Upgrade
 	GrantConditionOnPrerequisite@betterfarm:
-		Condition: wc2_human_betterfarm
-		Prerequisites: wc2_human_betterfarm
+		Condition: humans_upgrade_betterfarm
+		Prerequisites: humans_upgrade_betterfarm
 	WithSpriteBody@betterfarm:
-		Sequence: wc2_human_betterfarm
-		RequiresCondition: wc2_human_betterfarm && !wc2_human_bestfarm
+		Sequence: humans_upgrade_betterfarm
+		RequiresCondition: humans_upgrade_betterfarm && !humans_upgrade_bestfarm
 	PowerMultiplier@betterfarm:
 		Modifier: 150
-		RequiresCondition: wc2_human_betterfarm && !wc2_human_bestfarm
+		RequiresCondition: humans_upgrade_betterfarm && !humans_upgrade_bestfarm
 	DamageMultiplier@betterfarm:
 		Modifier: 66
-		RequiresCondition: wc2_human_betterfarm && !wc2_human_bestfarm
+		RequiresCondition: humans_upgrade_betterfarm && !humans_upgrade_bestfarm
 
 	# Best Farm Upgrade
 	GrantConditionOnPrerequisite@bestfarm:
-		Condition: wc2_human_bestfarm
-		Prerequisites: wc2_human_bestfarm
+		Condition: humans_upgrade_bestfarm
+		Prerequisites: humans_upgrade_bestfarm
 	WithSpriteBody@bestfarm:
-		Sequence: wc2_human_bestfarm
-		RequiresCondition: wc2_human_bestfarm
+		Sequence: humans_upgrade_bestfarm
+		RequiresCondition: humans_upgrade_bestfarm
 	PowerMultiplier@bestfarm:
 		Modifier: 200
-		RequiresCondition: wc2_human_bestfarm
+		RequiresCondition: humans_upgrade_bestfarm
 	DamageMultiplier@bestfarm:
 		Modifier: 50
-		RequiresCondition: wc2_human_bestfarm
+		RequiresCondition: humans_upgrade_bestfarm
 	SpawnActorsOnSell@bestfarm:
 		ActorTypes: wc2_critter_sheep
 		ValuePercent: 4
-		RequiresCondition: wc2_human_bestfarm
+		RequiresCondition: humans_upgrade_bestfarm
 
-wc2_human_betterfarm:
+humans_upgrade_betterfarm:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Better Farm
@@ -2180,14 +2180,14 @@ wc2_human_betterfarm:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~!wc2_human_betterfarm, ~wc2_human_farm, wc2_human_keep
+		Prerequisites: ~!humans_upgrade_betterfarm, ~humans_farm, humans_keep
 		Queue: Research
 		Description: Gives Farms +50% Supply and HP (150% total)
 		Icon: icon
 	RenderSprites:
 	ProvidesPrerequisite:
 
-wc2_human_bestfarm:
+humans_upgrade_bestfarm:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Best Farm
@@ -2195,14 +2195,14 @@ wc2_human_bestfarm:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_betterfarm, ~wc2_human_farm, wc2_human_castle
+		Prerequisites: ~humans_upgrade_betterfarm, ~humans_farm, humans_castle
 		Queue: Research
 		Description: Gives Farms +100% Supply and HP (200% total)
 		Icon: icon
 	RenderSprites:
 	ProvidesPrerequisite:
 
-wc2_human_barracks:
+humans_barracks:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_barracks: ^wc2_barracks
 	Tooltip:
@@ -2210,27 +2210,27 @@ wc2_human_barracks:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Warriors of the Alliance live and train here.\nProduces many Human units.
-		Prerequisites: ~wc2_human_townhall, wc2_human_farm
+		Prerequisites: ~humans_townhall, humans_farm
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: humanbarracksvoice
 
-wc2_human_elven_lumber_mill:
+humans_elvenlumbermill:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
 	Tooltip:
 		Name: Elven Lumber Mill
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_farm
+		Prerequisites: ~humans_townhall, humans_farm
 		Queue: Building, RABuilding
 		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resources.\nProduces bows enabling Archers.\nProvides arrow upgrades for archers and guard towers.
 	FreeActor@1:
-		Actor: wc2_human_peasant
+		Actor: humans_peasant
 	FreeActor@2:
-		Actor: wc2_human_peasant
+		Actor: humans_peasant
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_elven_archer
+		ActorTypes: humans_elvenarcher
 	Refinery:
 	DockHost:
 		Type: Unload
@@ -2250,60 +2250,60 @@ wc2_human_elven_lumber_mill:
 	Voiced:
 		VoiceSet: wc2humanlumbermillvoice
 
-wc2_human_blacksmith:
+humans_blacksmith:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_blacksmith: ^wc2_blacksmith
 	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_barracks
+		Prerequisites: ~humans_townhall, humans_barracks
 		Queue: Building, RABuilding
 		Description: Enables Ballista and upgrading Scout Towers to Cannon Towers.\nEnables upgrades to units.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: humanblacksmithvoice
 
-wc2_human_gnomish_inventor:
+humans_gnomishinventor:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_inventor: ^wc2_inventor
 	Tooltip:
 		Name: Gnomish Inventor
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_keep
+		Prerequisites: ~humans_townhall, humans_keep
 		Queue: Building, RABuilding
 		Description: Here Dwarves and Gnomes invent marvels.\nProvides Radar.\nTrains Demo Squads and Gnomish Flying Machines.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: wc2gnomishinventorvoice
 
-wc2_human_stables:
+humans_stables:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_stables: ^wc2_stables
 	Tooltip:
 		Name: Stables
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_keep
+		Prerequisites: ~humans_townhall, humans_keep
 		Queue: Building, RABuilding
 		Description: Stables the horses for Knights, allowing their production in the Barracks.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: humanstablevoice
 
-wc2_human_church:
+humans_church:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_church: ^wc2_church
 	Tooltip:
 		Name: Church
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_castle
+		Prerequisites: ~humans_townhall, humans_castle
 		Queue: Building, RABuilding
 		Description: Allows Knights to upgrade to Paladins and trains them in holy magicks.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: humanchurchvoice
 	# Support powers
@@ -2361,7 +2361,7 @@ wc2_human_church:
 		Effect: wc2_effect_sparkle
 		EffectSequence: idle-longer
 
-wc2_human_sunwell:
+humans_sunwell:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
@@ -2378,7 +2378,7 @@ wc2_human_sunwell:
 		Type: Wood
 	Buildable:
 		BuildPaletteOrder: 999
-		Prerequisites: ~wc2_human_townhall, wc2_human_church
+		Prerequisites: ~humans_townhall, humans_church
 		BuildLimit: 1
 		Queue: Building, RABuilding
 		Description: Increases Speed, Damage Resistance, Firepower and Rate of Fire by 10% and gives addtional Regeneration.
@@ -2399,7 +2399,7 @@ wc2_human_sunwell:
 	Selectable:
 		Bounds: 2048, 2048, 0, -512
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: humanchurchvoice
 	SoundOnDamageTransition:
@@ -2441,17 +2441,17 @@ wc2_camera_scanner:
 		CooldownDuration: 15
 		StartsGranted: False
 
-wc2_human_mage_tower:
+humans_magetower:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_temple: ^wc2_temple
 	Tooltip:
 		Name: Mage Tower
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_castle
+		Prerequisites: ~humans_townhall, humans_castle
 		Queue: Building, RABuilding
 		Description: Teaches men in arcane magicks.\nTrains Mages.\nUnlocks Blizzard superweapon.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: wc2magetowervoice
 	# Support powers
@@ -2533,17 +2533,17 @@ wc2_human_mage_tower:
 		Effect: wc2_effect_blizzard
 		EffectSequence: hit
 
-wc2_human_gryphon_aviary:
+humans_gryphonaviary:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_nest: ^wc2_nest
 	Tooltip:
 		Name: Gryphon Aviary
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_castle
+		Prerequisites: ~humans_townhall, humans_castle
 		Queue: Building, RABuilding
 		Description: A great Gryphon Matriarch lives here.\nTrains formidable Gryphon Riders.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_human_footman
+		ActorTypes: humans_footman
 	Voiced:
 		VoiceSet: wc2gryphonaviaryvoice
 
@@ -2553,7 +2553,7 @@ wc2_human_shipyard:
 	Tooltip:
 		Name: Shipyard
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill, ~globalnaval
+		Prerequisites: ~humans_townhall, humans_elvenlumbermill, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Produces and repairs ships.
 	Voiced:
@@ -2565,7 +2565,7 @@ wc2_human_foundry:
 	Tooltip:
 		Name: Foundry
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_shipyard, ~globalnaval
+		Prerequisites: ~humans_townhall, wc2_human_shipyard, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Unlocks production of the Transport and the Battleship\nProvides upgrades for naval units.
 	Voiced:
@@ -2577,7 +2577,7 @@ wc2_human_oil_refinery:
 	Tooltip:
 		Name: Oil Refinery
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_shipyard, ~globalnaval
+		Prerequisites: ~humans_townhall, wc2_human_shipyard, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Unlocks the construction of Oil Platforms for passive income.
 	Voiced:
@@ -2589,13 +2589,13 @@ wc2_human_oil_platform:
 	Tooltip:
 		Name: Oil Platform
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_oil_refinery, ~globalnaval
+		Prerequisites: ~humans_townhall, wc2_human_oil_refinery, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Provides passive income.\nOil tankers can drill here for further income boost.
 	Voiced:
 		VoiceSet: wc2orcoilplatformvoice
 
-wc2_human_scout_tower:
+humans_humanscouttower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	-WithTurretSearchlight:
@@ -2603,7 +2603,7 @@ wc2_human_scout_tower:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Human Scout Tower
@@ -2623,7 +2623,7 @@ wc2_human_scout_tower:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_human_townhall, wc2_human_barracks
+		Prerequisites: ~humans_townhall, humans_barracks
 		Queue: Defence, RADefence
 		Description: Can be upgraded to Guard or Cannon Tower.
 	Building:
@@ -2708,10 +2708,10 @@ wc2_human_scout_tower:
 		Bounds: 2048, 2048
 	GrantConditionOnPrerequisite@WC2ArrowUpg:
 		Condition: wc2arrow_upg
-		Prerequisites: wc2_h_str_arrow
+		Prerequisites: humans_upgrade_arrowstrength
 	GrantConditionOnPrerequisite@WC2ArrowUpg2:
 		Condition: wc2arrow_upg2
-		Prerequisites: wc2_h_str_arrow2
+		Prerequisites: humans_upgrade_arrowstrengthii
 	FirepowerMultiplier@WC2ArrowUpg:
 		Modifier: 125
 		RequiresCondition: wc2arrow_upg && guard
@@ -2720,10 +2720,10 @@ wc2_human_scout_tower:
 		RequiresCondition: wc2arrow_upg2 && guard
 	GrantConditionOnPrerequisite@HCannonUpg:
 		Condition: hcannon_upg
-		Prerequisites: wc2_h_str_cannon
+		Prerequisites: humans_upgrade_cannondamage
 	GrantConditionOnPrerequisite@HCannonUpg2:
 		Condition: hcannon_upg2
-		Prerequisites: wc2_h_str_cannon2
+		Prerequisites: humans_upgrade_cannondamageii
 	FirepowerMultiplier@HCannonUpg:
 		Modifier: 125
 		RequiresCondition: hcannon_upg && cannon
@@ -2731,9 +2731,9 @@ wc2_human_scout_tower:
 		Modifier: 125
 		RequiresCondition: hcannon_upg2 && cannon
 	ActorStatValues:
-		Upgrades: wc2_h_str_arrow, wc2_h_str_arrow2, wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_arrowstrength, humans_upgrade_arrowstrengthii, humans_upgrade_cannondamage, humans_upgrade_cannondamageii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wchumancannontowerupgrade:
+humans_guardtower_2:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Cannon Tower
@@ -2741,14 +2741,14 @@ wchumancannontowerupgrade:
 		Cost: 600
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith, scouttowerupgradeavailable
+		Prerequisites: ~humans_townhall, humans_blacksmith, scouttowerupgradeavailable
 		Description: Cannon tower, attacks land. Has huge splash damage.
 	Plug:
 		Type: wcscouttower2
 	RenderSprites:
-		Image: wc2_human_cannon_tower
+		Image: humans_cannontower
 
-wchumanguardtowerupgrade:
+humans_cannontower_2:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Guard Tower
@@ -2756,48 +2756,48 @@ wchumanguardtowerupgrade:
 		Cost: 600
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill, scouttowerupgradeavailable
+		Prerequisites: ~humans_townhall, humans_elvenlumbermill, scouttowerupgradeavailable
 		Description: Guard tower, attacks land, sea, and air with fast arrows.
 	Plug:
 		Type: wcscouttower
 	RenderSprites:
-		Image: wc2_human_guard_tower
+		Image: humans_guardtower
 
-wc2_human_guard_tower:
-	Inherits: wc2_human_scout_tower
+humans_guardtower:
+	Inherits: humans_humanscouttower
 	-ProductionCostMultiplier@guardtower:
 	Tooltip:
 		Name: Guard Tower
 	Valued:
 		Cost: 1500
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill
+		Prerequisites: ~humans_townhall, humans_elvenlumbermill
 		Description: Guard tower, attacks land, sea, and air with fast arrows.
 	GrantCondition:
 		Condition: guard
 	Selectable:
-		Class: wc2_human_scout_tower
+		Class: humans_humanscouttower
 	RenderSprites:
-		Image: wc2_human_guard_tower
+		Image: humans_guardtower
 
-wc2_human_cannon_tower:
-	Inherits: wc2_human_scout_tower
+humans_cannontower:
+	Inherits: humans_humanscouttower
 	-ProductionCostMultiplier@guardtower:
 	Tooltip:
 		Name: Cannon Tower
 	Valued:
 		Cost: 1500
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith
+		Prerequisites: ~humans_townhall, humans_blacksmith
 		Description: Cannon tower, attacks land. Has huge splash damage.
 	GrantCondition:
 		Condition: cannon
 	Selectable:
-		Class: wc2_human_scout_tower
+		Class: humans_humanscouttower
 	RenderSprites:
-		Image: wc2_human_cannon_tower
+		Image: humans_cannontower
 
-# wc2_human_scout_tower:
+# humans_humanscouttower:
 # 	Inherits@WC2BUILDING: ^WC2HumanDefense
 # 	Inherits@wc2_watch_tower: ^wc2_watch_tower
 # 	# Don't declare AutoTarget stuff before AttackBase stuff or an annoying bug with WithSpriteBody will occur.
@@ -2805,7 +2805,7 @@ wc2_human_cannon_tower:
 # 	Tooltip:
 # 		Name: Scout Tower
 # 	Buildable:
-# 		Prerequisites: ~wc2_human_barracks
+# 		Prerequisites: ~humans_barracks
 # 		Queue: Defence, RADefence
 # 		Description: Upgradable defense building\nDetector
 # 	Voiced:
@@ -2838,17 +2838,17 @@ wc2_human_cannon_tower:
 # 		ItemLimit: 1
 # 	GrantConditionOnProduction@guardtower:
 # 		Condition: humanguardtowerupg
-# 		Actors: wc2_human_guard_tower
+# 		Actors: humans_guardtower
 # 	GrantConditionOnProduction@cannontower:
 # 		Condition: humancannontowerupg
-# 		Actors: wc2_human_cannon_tower
+# 		Actors: humans_cannontower
 # 	WithSpriteBody:
 # 		RequiresCondition: !humanguardtowerupg && !humancannontowerupg
 # 	WithSpriteBody@guardtower:
-# 		Sequence: wc2_human_guard_tower
+# 		Sequence: humans_guardtower
 # 		RequiresCondition: humanguardtowerupg
 # 	WithSpriteBody@cannontower:
-# 		Sequence: wc2_human_cannon_tower
+# 		Sequence: humans_cannontower
 # 		RequiresCondition: humancannontowerupg
 # 	DamageMultiplier@guardtower:
 # 		Modifier: 75
@@ -2857,12 +2857,12 @@ wc2_human_cannon_tower:
 # 		Modifier: 67
 # 		RequiresCondition: humancannontowerupg
 
-# wc2_human_guard_tower:
+# humans_guardtower:
 # 	Tooltip:
 # 		Name: Guard Tower
 # 	Buildable:
 # 		BuildPaletteOrder: 1
-# 		Prerequisites: ~wc2_human_elven_lumber_mill
+# 		Prerequisites: ~humans_elvenlumbermill
 # 		Queue: Towerupgrade.human2
 # 		BuildDuration: 3500
 # 		BuildDurationModifier: 12
@@ -2875,12 +2875,12 @@ wc2_human_cannon_tower:
 # 		RemoveInstead: true
 # 	RenderSprites:
 
-# wc2_human_cannon_tower:
+# humans_cannontower:
 # 	Tooltip:
 # 		Name: Cannon Tower
 # 	Buildable:
 # 		BuildPaletteOrder: 1
-# 		Prerequisites: ~wc2_human_blacksmith
+# 		Prerequisites: ~humans_blacksmith
 # 		Queue: Towerupgrade.human2
 # 		BuildDuration: 4750
 # 		BuildDurationModifier: 12
@@ -2893,7 +2893,7 @@ wc2_human_cannon_tower:
 # 		RemoveInstead: true
 # 	RenderSprites:
 
-wc2_human_wall:
+humans_wall:
 	Inherits: ^ixian_concretewall
 	Valued:
 		Cost: 300
@@ -2903,7 +2903,7 @@ wc2_human_wall:
 		Name: ixian_concretewall
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_human_townhall
+		Prerequisites: ~humans_townhall
 		Queue: Defence, RADefence
 		Description: Stops infantry and most tanks.\nBlocks some projectiles.
 	Health:
@@ -2919,11 +2919,11 @@ wc2_human_wall:
 	# WithMakeAnimation:
 	# 	Condition: build-incomplete
 	LineBuild:
-		NodeTypes: wc2_human_wall
+		NodeTypes: humans_wall
 	LineBuildNode:
-		Types: wc2_human_wall
+		Types: humans_wall
 	WithWallSpriteBody:
-		Type: wc2_human_wall
+		Type: humans_wall
 		RequiresCondition: !cond_timer
 	WithIdleOverlay@wc2walltimer:
 		Sequence: make
@@ -2935,7 +2935,7 @@ wc2_human_wall:
 	RenderSprites:
 		Palette: player
 
-wc2_human_goldmine:
+humans_humangoldmine:
 	Inherits@WC2BUILDING: ^WC2HumanBuilding
 	Inherits@wc2_goldmine: ^wc2_goldmine
 	Tooltip:
@@ -2943,37 +2943,37 @@ wc2_human_goldmine:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Send workers inside to provide passive income.\nMiners progressively get experience and work more efficiently.
-		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith, derricklimit
+		Prerequisites: ~humans_townhall, humans_blacksmith, derricklimit
 	Voiced:
 		VoiceSet: neutralgoldminevoice
 	RenderSprites:
-		Image: wc2_human_goldmine
+		Image: humans_humangoldmine
 
-wc2_human_goldmine.bot:
-	Inherits@WC2BUILDING: wc2_human_goldmine
+humans_humangoldmine_2:
+	Inherits@WC2BUILDING: humans_humangoldmine
 	Valued:
 		Cost: 15000
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_blacksmith, derricklimit, ~botplayer
+		Prerequisites: ~humans_townhall, humans_blacksmith, derricklimit, ~botplayer
 	Cargo:
-		InitialUnits: wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant, wc2_human_peasant
+		InitialUnits: humans_peasant, humans_peasant, humans_peasant, humans_peasant, humans_peasant, humans_peasant, humans_peasant, humans_peasant, humans_peasant, humans_peasant
 	RenderSprites:
-		Image: wc2_human_goldmine
+		Image: humans_humangoldmine
 
 ###################################################################################################
 # WC2 HUMAN UNITS
 ###################################################################################################
 
-wc2_human_mcv:
+humans_mobileconstructionvehiclehuman:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
 	Inherits@WC2Template: ^wc2_mcv
 	Buildable:
-		Prerequisites: ~wc2_human_blacksmith
+		Prerequisites: ~humans_blacksmith
 		Description: Transforms into a Town Hall.
 	Tooltip:
 		Name: Mobile Construction Vehicle (Human)
 	Transforms:
-		IntoActor: wc2_human_townhall
+		IntoActor: humans_townhall
 		Offset: -1,-1
 		Facing: 432
 		TransformSounds:
@@ -2989,34 +2989,34 @@ wc2_human_mcv:
 		StandSequences: idle
 		MoveSequence: run
 
-wc2_human_peasant:
+humans_peasant:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_peasant
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Peasant
 	Buildable:
-		Prerequisites: ~wc2_human_townhall, wc2_human_elven_lumber_mill
+		Prerequisites: ~humans_townhall, humans_elvenlumbermill
 		Description: Harvester.
 	Armament:
 		Weapon: wc2peasantsmack
 		FireDelay: 7
 	-WithInfantryBody:
 	WithHarvesterSpriteBody:
-		ImageByFullness: wc2_human_peasant, wc2_human_peasantgold
+		ImageByFullness: humans_peasant, wc2_human_peasantgold
 	WithMoveAnimation:
 		MoveSequence: run
 	Voiced:
 		VoiceSet: wc2voicehumanpeasant
 	-DamagedByTerrain:
 	ActorStatValues:
-		Upgrades: wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_militia2:
+humans_militiapeasant:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^MeleeInfantryTemplate
-	Inherits@WC2SwordUpg: ^wc2_h_str_sword
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2SwordUpg: ^humans_upgrade_swordstrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits@WC2Template: ^wc2_peasant
 	Tooltip:
 		Name: Militia Peasant
@@ -3041,7 +3041,7 @@ wc2_human_militia2:
 		Capacity: 4
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_barracks
+		Prerequisites: ~humans_barracks
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage.
 	Armament:
@@ -3057,22 +3057,22 @@ wc2_human_militia2:
 		PlayerPalette: player_rgba
 	-WithInfantryBody:
 	WithHarvesterSpriteBody:
-		ImageByFullness: wc2_human_militia2, wc2_human_militia2
+		ImageByFullness: humans_militiapeasant, humans_militiapeasant
 	WithMoveAnimation:
 		MoveSequence: run
 	Voiced:
 		VoiceSet: wc2voicehumanpeasant
 	-DamagedByTerrain:
 	ActorStatValues:
-		Upgrades: wc2_h_str_sword, wc2_h_str_sword2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_swordstrength, humans_upgrade_swordstrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_footman:
+humans_footman:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_h_str_sword
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2SwordUpg: ^humans_upgrade_swordstrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Footman
 	Valued:
@@ -3087,7 +3087,7 @@ wc2_human_footman:
 		Speed: 75
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_barracks, ~!wc2_upgrade_footman
+		Prerequisites: ~humans_barracks, ~!humans_upgrade_warcraft3footman
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage.
 	Armament:
@@ -3106,16 +3106,16 @@ wc2_human_footman:
 	DamageMultiplier@WC2HShieldUpg2:
 		Modifier: 70
 	ActorStatValues:
-		Upgrades: wc2_h_str_sword, wc2_h_str_sword2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_swordstrength, humans_upgrade_swordstrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_footman2:
+humans_warcraft3footman:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_h_str_sword
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2SwordUpg: ^humans_upgrade_swordstrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Warcraft 3 Footman
 	Valued:
@@ -3130,7 +3130,7 @@ wc2_human_footman2:
 		Speed: 85
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_upgrade_footman
+		Prerequisites: ~humans_upgrade_warcraft3footman
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage.
 	Armament:
@@ -3161,20 +3161,20 @@ wc2_human_footman2:
 	DamageMultiplier@WC2HShieldUpg2:
 		Modifier: 70
 	ActorStatValues:
-		Upgrades: wc2_h_str_sword, wc2_h_str_sword2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_swordstrength, humans_upgrade_swordstrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
 # Arhcer also has built-in ranger stuff so that ranger's upgrades and spells will be applied to already-built archers, just as in WC2.
-wc2_human_elven_archer:
+humans_elvenarcher:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
-	Inherits@WC2ArrowUpg: ^wc2_h_str_arrow
-	Inherits@RLongBowUpg: ^wc2_h_ranger_longbow
-	Inherits@RScoutUpg: ^wc2_h_ranger_scouting
-	Inherits@RMarksmanUpg: ^wc2_h_ranger_marksman
-	Inherits@RangerUpg: ^wc2_h_rangerupg
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
+	Inherits@WC2ArrowUpg: ^humans_upgrade_arrowstrength
+	Inherits@RLongBowUpg: ^humans_upgrade_rangerlongbow
+	Inherits@RScoutUpg: ^humans_upgrade_rangerscouting
+	Inherits@RMarksmanUpg: ^humans_upgrade_rangermarksman
+	Inherits@RangerUpg: ^humans_upgrade_ranger
 	Tooltip:
 		Name: Elven Archer
 	Valued:
@@ -3189,7 +3189,7 @@ wc2_human_elven_archer:
 		Speed: 75
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_human_elven_lumber_mill, ~!wc2_h_rangerupg, ~!wc2_upgrade_high_elf_archer
+		Prerequisites: ~humans_elvenlumbermill, ~!humans_upgrade_ranger, ~!humans_upgrade_highelvenarcher
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry. Not as durable as Footman.\nCan attack air.
 	Armament:
@@ -3214,18 +3214,18 @@ wc2_human_elven_archer:
 		DefaultAttackSequence: shoot-ranger
 		RequiresCondition: ranger_upg
 	ActorStatValues:
-		Upgrades: wc2_h_str_arrow, wc2_h_str_arrow2, wc2_h_str_shield, wc2_h_str_shield2, wc2_h_rangerupg, wc2_h_ranger_longbow, wc2_h_ranger_scouting
+		Upgrades: humans_upgrade_arrowstrength, humans_upgrade_arrowstrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii, humans_upgrade_ranger, humans_upgrade_rangerlongbow, humans_upgrade_rangerscouting
 
 # Separate actor for ranger because otherwise we can't change the build icon (cameo) or tooltip.
-wc2_human_elven_ranger:
-	Inherits@wc2_human_elven_archer: wc2_human_elven_archer
+humans_elvenranger:
+	Inherits@humans_elvenarcher: humans_elvenarcher
 	Tooltip:
 		Name: Elven Ranger
 	Buildable:
-		Prerequisites: ~wc2_h_rangerupg, wc2_human_elven_lumber_mill
+		Prerequisites: ~humans_upgrade_ranger, humans_elvenlumbermill
 		Description: Elite ranged infantry. Not as durable as Footman.\nCan attack air.
 	Selectable:
-		Class: wc2_human_elven_archer
+		Class: humans_elvenarcher
 	-WithInfantryBody@Ranger:
 	WithInfantryBody:
 		-RequiresCondition:
@@ -3233,18 +3233,18 @@ wc2_human_elven_ranger:
 	GrantCondition@Ranger:
 		Condition: ranger_upg
 
-wc2_human_high_elf_archer:
+humans_highelvenarcher:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
-	Inherits@WC2ArrowUpg: ^wc2_h_str_arrow
-	Inherits@RLongBowUpg: ^wc2_h_ranger_longbow
-	Inherits@RScoutUpg: ^wc2_h_ranger_scouting
-	Inherits@RMarksmanUpg: ^wc2_h_ranger_marksman
-	Inherits@RangerUpg: ^wc2_h_rangerupg
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
+	Inherits@WC2ArrowUpg: ^humans_upgrade_arrowstrength
+	Inherits@RLongBowUpg: ^humans_upgrade_rangerlongbow
+	Inherits@RScoutUpg: ^humans_upgrade_rangerscouting
+	Inherits@RMarksmanUpg: ^humans_upgrade_rangermarksman
+	Inherits@RangerUpg: ^humans_upgrade_ranger
 	Tooltip:
 		Name: High Elven Archer
 	Valued:
@@ -3259,7 +3259,7 @@ wc2_human_high_elf_archer:
 		Speed: 85
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_upgrade_high_elf_archer
+		Prerequisites: ~humans_upgrade_highelvenarcher
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry. Not as durable as Footman.\nCan attack air.
 	Armament:
@@ -3284,15 +3284,15 @@ wc2_human_high_elf_archer:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: wc2_h_str_arrow, wc2_h_str_arrow2, wc2_h_str_shield, wc2_h_str_shield2, wc2_h_rangerupg, wc2_h_ranger_longbow, wc2_h_ranger_scouting
+		Upgrades: humans_upgrade_arrowstrength, humans_upgrade_arrowstrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii, humans_upgrade_ranger, humans_upgrade_rangerlongbow, humans_upgrade_rangerscouting
 
-wc2_human_rifleman:
+humans_dwarvenrifleman:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@BallUpg: ^wc2_h_str_ballista
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@BallUpg: ^humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Dwarven Rifleman
 	Valued:
@@ -3307,7 +3307,7 @@ wc2_human_rifleman:
 		Speed: 64
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_human_blacksmith
+		Prerequisites: ~humans_blacksmith
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry. Not as durable as Footman.\nCan attack air.
 	Armament:
@@ -3346,18 +3346,18 @@ wc2_human_rifleman:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: wc2_h_str_ballista, wc2_h_str_ballista2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_ballistastrength, humans_upgrade_ballistastrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
 # Knight also has built-in paladin stuff so that paladin's upgrades and spells will be applied to already-built knights, just as in WC2.
-wc2_human_knight:
+humans_knight:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_h_str_sword
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2SwordUpg: ^humans_upgrade_swordstrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
-	Inherits@PalUpg: ^wc2_h_paladinupg
+	Inherits@PalUpg: ^humans_upgrade_paladin
 	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
 	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
 	Tooltip:
@@ -3378,7 +3378,7 @@ wc2_human_knight:
 		Locomotor: tracked
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_human_stables, ~!wc2_h_paladinupg
+		Prerequisites: ~humans_stables, ~!humans_upgrade_paladin
 		Queue: Infantry, RAInfantry
 		Description: Mounted infantry. Fast and durable.
 	Voiced:
@@ -3408,20 +3408,20 @@ wc2_human_knight:
 	#Weapons
 	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
 	ActorStatValues:
-		Upgrades: wc2_h_str_sword, wc2_h_str_sword2, wc2_h_str_shield, wc2_h_str_shield2, wc2_h_paladinupg, wc2_h_healingupg, wc2_h_exorcismupg
+		Upgrades: humans_upgrade_swordstrength, humans_upgrade_swordstrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii, humans_upgrade_paladin, humans_upgrade_healing, humans_upgrade_exorcism
 
 # Separate actor for paladin because otherwise we can't change the build icon (cameo) or tooltip.
-wc2_human_paladin:
-	Inherits@wc2_human_knight: wc2_human_knight
+humans_paladin:
+	Inherits@humans_knight: humans_knight
 	Tooltip:
 		Name: Paladin
 	Buildable:
-		Prerequisites: ~wc2_h_paladinupg, wc2_human_church, wc2_human_stables, ~!wc2_upgrade_paladin2
+		Prerequisites: ~humans_upgrade_paladin, humans_church, humans_stables, ~!humans_upgrade_warcraft3knightwip
 		Description: Mounted holy infantry. Very fast and quite durable.\nCan cast healing magicks.
 	Voiced:
 		VoiceSet: wc2voicehumanpaladin
 	Selectable:
-		Class: wc2_human_knight
+		Class: humans_knight
 	-WithInfantryBody@Paladin:
 	WithInfantryBody:
 		-RequiresCondition:
@@ -3431,16 +3431,16 @@ wc2_human_paladin:
 	#Weapons
 	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
 
-wc2_human_knight2:
+humans_warcraft3knight:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2SwordUpg: ^wc2_h_str_sword
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2SwordUpg: ^humans_upgrade_swordstrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
-	Inherits@PalUpg: ^wc2_h_paladinupg
+	Inherits@PalUpg: ^humans_upgrade_paladin
 	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
 	Inherits@paladin_exorcism_upgrade: ^wc2_h_paladin_exorcism
 	Tooltip:
@@ -3461,7 +3461,7 @@ wc2_human_knight2:
 		Locomotor: tracked
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_upgrade_paladin2
+		Prerequisites: ~humans_upgrade_warcraft3knightwip
 		Queue: Infantry, RAInfantry
 		Description: Mounted infantry. Fast and durable.
 	Voiced:
@@ -3475,7 +3475,7 @@ wc2_human_knight2:
 	#Weapons
 	Inherits@attacks_and_spells: ^wc2_knight_paladin_attacks_spells
 	ActorStatValues:
-		Upgrades: wc2_h_str_sword, wc2_h_str_sword2, wc2_h_str_shield, wc2_h_str_shield2, wc2_h_paladinupg, wc2_h_healingupg, wc2_h_exorcismupg
+		Upgrades: humans_upgrade_swordstrength, humans_upgrade_swordstrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii, humans_upgrade_paladin, humans_upgrade_healing, humans_upgrade_exorcism
 
 ^wc2_knight_paladin_attacks_spells:
 	# Only the knight upgraded to a paladin, or the separate paladin actor should be able to deploy.
@@ -3594,13 +3594,13 @@ wc2_human_knight2:
 		RequiresSelection: True
 		PipCount: 10
 
-wc2_human_ballista:
+humans_ballista:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@BallUpg: ^wc2_h_str_ballista
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@BallUpg: ^humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Ballista
 	Valued:
@@ -3616,7 +3616,7 @@ wc2_human_ballista:
 		TurnSpeed: 18
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_human_blacksmith
+		Prerequisites: ~humans_blacksmith
 		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	AttackFrontal:
@@ -3639,15 +3639,15 @@ wc2_human_ballista:
 	Mobile:
 		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
 	ActorStatValues:
-		Upgrades: wc2_h_str_ballista, wc2_h_str_ballista2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_ballistastrength, humans_upgrade_ballistastrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_siege_engine:
+humans_siegeengine:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@BallUpg: ^wc2_h_str_ballista
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@BallUpg: ^humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Siege Engine
 	Valued:
@@ -3665,7 +3665,7 @@ wc2_human_siege_engine:
 		TurnSpeed: 28
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_human_townhall, wc2_human_castle, wc2_human_blacksmith
+		Prerequisites: ~humans_townhall, humans_castle, humans_blacksmith
 		Queue: Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	-AttackFrontal:
@@ -3703,17 +3703,17 @@ wc2_human_siege_engine:
 		Weapon: wc2visualexplode
 		EmptyWeapon: wc2visualexplode
 	ActorStatValues:
-		Upgrades: wc2_h_str_ballista, wc2_h_str_ballista2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_ballistastrength, humans_upgrade_ballistastrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_demolitionsquad:
+humans_demolitionsquad:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_demolitioner
-	Inherits@BallUpg: ^wc2_h_str_ballista
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@BallUpg: ^humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Demolition Squad
 	Buildable:
-		Prerequisites: ~wc2_human_gnomish_inventor
+		Prerequisites: ~humans_gnomishinventor
 		Queue: Vehicle, RAVehicle
 		Description: Explosive suicide infantry. Can attack normally.
 	#Weapons and demolition
@@ -3742,15 +3742,15 @@ wc2_human_demolitionsquad:
 	Voiced:
 		VoiceSet: wc2voicehumandemolitionsquad
 	ActorStatValues:
-		Upgrades: wc2_h_str_ballista, wc2_h_str_ballista2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_ballistastrength, humans_upgrade_ballistastrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_mortarteam2:
+humans_mortarteam:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^MortarInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@BallUpg: ^wc2_h_str_ballista
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@BallUpg: ^humans_upgrade_ballistastrength
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Mortar Team
 	Valued:
@@ -3765,7 +3765,7 @@ wc2_human_mortarteam2:
 		Speed: 80
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_human_gnomish_inventor, wc2_human_blacksmith
+		Prerequisites: ~humans_gnomishinventor, humans_blacksmith
 		Queue: Infantry, RAInfantry
 		Description: Mortar Team that deals a lot of splash damage over high range.
 	Armament:
@@ -3788,19 +3788,19 @@ wc2_human_mortarteam2:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: wc2_h_str_ballista, wc2_h_str_ballista2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_ballistastrength, humans_upgrade_ballistastrengthii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_mage:
+humans_mage:
 	Inherits@WC2Infantry: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
 	Inherits@wc2_h_mage_polymorph: ^wc2_h_mage_polymorph
 	Inherits@wc2_h_mage_blizzard: ^wc2_h_mage_blizzard
 	Tooltip:
 		Name: Mage
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~humans_magetower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -3896,7 +3896,7 @@ wc2_human_mage:
 		Count: -25
 		RequiresCondition: cond_blizzard_drain
 	ActorStatValues:
-		Upgrades: wc2_h_str_shield, wc2_h_str_shield2, wc2_h_slowupg, wc2_h_polymorphupg, wc2_h_blizzardupg
+		Upgrades: humans_upgrade_armorstrength, humans_upgrade_armorstrengthii, humans_upgrade_slow, humans_upgrade_polymorph, humans_upgrade_blizzard
 
 	### Visual indicator of mode ###
 	WithDecoration@Mode_Fireball:
@@ -3928,17 +3928,17 @@ wc2_human_mage:
 		Position: BottomRight
 		RequiresCondition: FSD_cond_4 && !mageblizzard_upg
 
-wc2_human_archmage:
+humans_archmage:
 	Inherits@WC2Infantry: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
 	Inherits@wc2_h_mage_polymorph: ^wc2_h_mage_polymorph
 	Inherits@wc2_h_mage_blizzard: ^wc2_h_mage_blizzard
 	Tooltip:
 		Name: Archmage
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~humans_magetower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -4068,10 +4068,10 @@ wc2_human_archmage:
 		Position: BottomRight
 		RequiresCondition: FSD_cond_4 && !mageblizzard_upg
 
-wc2_human_high_elf_priest:
+humans_highelfpriest:
 	Inherits@WC2Infantry: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
@@ -4079,7 +4079,7 @@ wc2_human_high_elf_priest:
 	Tooltip:
 		Name: High Elf priest
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~humans_magetower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -4182,10 +4182,10 @@ wc2_human_high_elf_priest:
 		RequiresSelection: True
 		PipCount: 10
 
-wc2_human_high_elf_sorceress:
+humans_highelfsorceress:
 	Inherits@WC2Infantry: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Inherits@wc2_h_mage_slow: ^wc2_h_mage_slow
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@paladin_healing_upgrade: ^wc2_h_paladin_healing
@@ -4193,7 +4193,7 @@ wc2_human_high_elf_sorceress:
 	Tooltip:
 		Name: High Elf Sorceress
 	Buildable:
-		Prerequisites: ~wc2_human_mage_tower
+		Prerequisites: ~humans_magetower
 		Queue: Infantry, RAInfantry
 		Description: Wise, old, grumpy spell caster.\nCan attack air.\nDetector.
 	Voiced:
@@ -4318,7 +4318,7 @@ wc2_human_oil_tanker:
 wc2_human_elven_destroyer:
 	Inherits@WC2SHIP: ^WC2Ship
 	Inherits@WC2Template: ^wc2_destroyer
-	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Inherits@HCannonUpg: ^humans_upgrade_cannondamage
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
 		Prerequisites: ~wc2_human_shipyard
@@ -4339,7 +4339,7 @@ wc2_human_elven_destroyer:
 	Voiced:
 		VoiceSet: wc2voicehumanship
 	ActorStatValues:
-		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_navyshield, wc2_h_str_navyshield2
+		Upgrades: humans_upgrade_cannondamage, humans_upgrade_cannondamageii, wc2_h_str_navyshield, wc2_h_str_navyshield2
 
 wc2_human_transport:
 	Inherits@WC2Ship: ^WC2Ship
@@ -4359,10 +4359,10 @@ wc2_human_transport:
 wc2_human_battleship:
 	Inherits@WC2Ship: ^WC2Ship
 	Inherits@WC2Template: ^wc2_battleship
-	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Inherits@HCannonUpg: ^humans_upgrade_cannondamage
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_human_foundry, ~wc2_human_blacksmith ##once keep/castle are fixed, prereq will be wc2_human_keep, wc2_human_foundry
+		Prerequisites: ~wc2_human_foundry, ~humans_blacksmith ##once keep/castle are fixed, prereq will be humans_keep, wc2_human_foundry
 		Queue: Naval, RANaval
 		Description: Heavy artillery ship.
 	Tooltip:
@@ -4380,15 +4380,15 @@ wc2_human_battleship:
 	Voiced:
 		VoiceSet: wc2voicehumanship
 	ActorStatValues:
-		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_navyshield, wc2_h_str_navyshield2
+		Upgrades: humans_upgrade_cannondamage, humans_upgrade_cannondamageii, wc2_h_str_navyshield, wc2_h_str_navyshield2
 
 wc2_human_gnomish_submarine:
 	Inherits@WC2Ship: ^WC2Ship
 	Inherits@WC2Template: ^wc2_submarine
-	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Inherits@HCannonUpg: ^humans_upgrade_cannondamage
 	Inherits@HNavySUpg: ^wc2_h_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_human_foundry, ~wc2_human_gnomish_inventor
+		Prerequisites: ~wc2_human_foundry, ~humans_gnomishinventor
 		Queue: Naval, RANaval
 		Description: Stealthed attack vessel.
 	Tooltip:
@@ -4409,46 +4409,46 @@ wc2_human_gnomish_submarine:
 	WithDeathAnimation@Bubbles:
 		Delay: 0
 	ActorStatValues:
-		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_navyshield, wc2_h_str_navyshield2
+		Upgrades: humans_upgrade_cannondamage, humans_upgrade_cannondamageii, wc2_h_str_navyshield, wc2_h_str_navyshield2
 
 ####################################################################################################
 # WC2 HUMAN AIR UNITS
 ####################################################################################################
 
-wc2_human_gnomish_flying_machine:
+humans_flyingmachine:
 	Inherits@WC2AirUnit: ^WC2AirUnit
 	Inherits@WC2Template: ^wc2_airscout
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
 	Tooltip:
 		Name: Flying Machine
 	Buildable:
-		Prerequisites: ~wc2_human_gnomish_inventor
+		Prerequisites: ~humans_gnomishinventor
 		Queue: Vehicle, RAVehicle
 		Description: Flying scout unit. He's got a flying machine!\nDetector.
 	Voiced:
 		VoiceSet: wc2voicehumanflyingmachine
 	ActorStatValues:
-		Upgrades: wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
-wc2_human_gyrocopter2:
+humans_gyrocoptermachine:
 	Inherits@WC2AirUnit: ^WC2AirUnit
 	Inherits@WC2Template: ^wc2_airscout
 	Tooltip:
 		Name: Gyrocopter Machine
 	Buildable:
-		Prerequisites: ~wc2_human_gnomish_inventor
+		Prerequisites: ~humans_gnomishinventor
 		Queue: Vehicle, RAVehicle
 		Description: Flying scout unit. He's got a flying machine!\nDetector.
 	Voiced:
 		VoiceSet: wc2voicehumanflyingmachine
 
-wc2_human_gryphon_rider:
+humans_gryphonrider:
 	Inherits@WC2AirUnit: ^WC2AirUnit
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2HShieldUpg: ^wc2_h_str_shield
-	Inherits@HCannonUpg: ^wc2_h_str_cannon
+	Inherits@WC2HShieldUpg: ^humans_upgrade_armorstrength
+	Inherits@HCannonUpg: ^humans_upgrade_cannondamage
 	Tooltip:
 		Name: Gryphon Rider
 	Valued:
@@ -4470,7 +4470,7 @@ wc2_human_gryphon_rider:
 		TargetTypes: Heal
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_human_gryphon_aviary
+		Prerequisites: ~humans_gryphonaviary
 		Queue: Aircraft, RAAircraft
 		Description: Flying attacker unit.\nMagical hammer can hit multiple targets in a line.\nStrong vs air units.
 	Armament@VISIBLE:
@@ -4506,13 +4506,13 @@ wc2_human_gryphon_rider:
 		Sequence: idle-slow
 		RequiresCondition: wc2_cond_slow && !wc2_cond_haste
 	ActorStatValues:
-		Upgrades: wc2_h_str_cannon, wc2_h_str_cannon2, wc2_h_str_shield, wc2_h_str_shield2
+		Upgrades: humans_upgrade_cannondamage, humans_upgrade_cannondamageii, humans_upgrade_armorstrength, humans_upgrade_armorstrengthii
 
 ####################################################################################################
 # WC2 ORC BUILDINGS
 ####################################################################################################
 
-wc2_orc_greathall:
+orcs_greathall:
 	Inherits: ^BaseBuilding
 	Inherits@ref: ^Refinery
 	Inherits@shape: ^3x2Shape
@@ -4520,13 +4520,13 @@ wc2_orc_greathall:
 	Inherits@conyard: ^Conyard
 	Tooltip:
 		Name: Great Hall
-		RequiresCondition: !wc2_orc_stronghold && !wc2_orc_fortress
+		RequiresCondition: !orcs_stronghold && !orcs_fortress
 	Tooltip@2:
 		Name: Stronghold
-		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress
+		RequiresCondition: orcs_stronghold && !orcs_fortress
 	Tooltip@3:
 		Name: Fortress
-		RequiresCondition: wc2_orc_fortress
+		RequiresCondition: orcs_fortress
 	Production@INFANTRY:
 		Produces: Infantry
 		PauseOnCondition: disabled
@@ -4560,40 +4560,40 @@ wc2_orc_greathall:
 	Selectable:
 		Bounds: 3072, 2048
 	ProvidesPrerequisite@buildingname:
-	ProvidesPrerequisite@wc2_orc_stronghold:
-		Prerequisite: wc2_orc_stronghold
-		RequiresCondition: wc2_orc_stronghold
-	ProvidesPrerequisite@wc2_orc_fortress:
-		Prerequisite: wc2_orc_fortress
-		RequiresCondition: wc2_orc_fortress
+	ProvidesPrerequisite@orcs_stronghold:
+		Prerequisite: orcs_stronghold
+		RequiresCondition: orcs_stronghold
+	ProvidesPrerequisite@orcs_fortress:
+		Prerequisite: orcs_fortress
+		RequiresCondition: orcs_fortress
 	ProvidesPrerequisite@strongholdupgradeavailable:
 		Prerequisite: strongholdupgradeavailable
-		RequiresCondition: !wc2_orc_stronghold
+		RequiresCondition: !orcs_stronghold
 	ProvidesPrerequisite@fortressupgradeavailable:
 		Prerequisite: fortressupgradeavailable
-		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress
+		RequiresCondition: orcs_stronghold && !orcs_fortress
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			wc2_orc_greathall: wc2_orc_stronghold
+			orcs_greathall: orcs_stronghold
 		Requirements:
-			wc2_orc_greathall: !wc2_orc_stronghold
+			orcs_greathall: !orcs_stronghold
 	Pluggable@2:
 		Offset: 0,0
 		Conditions:
-			wc2_orc_stronghold: wc2_orc_fortress
+			orcs_stronghold: orcs_fortress
 		Requirements:
-			wc2_orc_stronghold: wc2_orc_stronghold && !wc2_orc_fortress
+			orcs_stronghold: orcs_stronghold && !orcs_fortress
 	WithSpriteBody:
-		RequiresCondition: !wc2_orc_stronghold && !wc2_orc_fortress
+		RequiresCondition: !orcs_stronghold && !orcs_fortress
 	WithSpriteBody@keep:
-		Sequence: wc2_orc_stronghold
+		Sequence: orcs_stronghold
 		Name: stronghold
-		RequiresCondition: wc2_orc_stronghold && !wc2_orc_fortress
+		RequiresCondition: orcs_stronghold && !orcs_fortress
 	WithSpriteBody@castle:
-		Sequence: wc2_orc_fortress
+		Sequence: orcs_fortress
 		Name: fortress
-		RequiresCondition: wc2_orc_fortress
+		RequiresCondition: orcs_fortress
 	Building:
 		Footprint: xxx xxx ===
 		Dimensions: 3,3
@@ -4602,10 +4602,10 @@ wc2_orc_greathall:
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune,ZergSoil ##########
 	DamageMultiplier@keep:
 		Modifier: 75
-		RequiresCondition: wc2_orc_greathall && !wc2_orc_fortress
+		RequiresCondition: orcs_greathall && !orcs_fortress
 	DamageMultiplier@castle:
 		Modifier: 50
-		RequiresCondition: wc2_orc_fortress
+		RequiresCondition: orcs_fortress
 	GrantConditionOnPowerState@supply:
 		Condition: lowpower
 		ValidPowerStates: Low, Critical
@@ -4653,9 +4653,9 @@ wc2_orc_greathall:
 		PipCount: 10
 		FullSequence: pip-yellow
 	Transforms:
-		IntoActor: wc2_orc_mcv
+		IntoActor: orcs_mobileconstructionvehicleorc
 
-wc2_orc_stronghold:
+orcs_stronghold:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Stronghold
@@ -4664,12 +4664,12 @@ wc2_orc_stronghold:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites:  ~wc2_orc_greathall, strongholdupgradeavailable, wc2_orc_blacksmith
+		Prerequisites:  ~orcs_greathall, strongholdupgradeavailable, orcs_blacksmith
 		Description: Unlocks more advanced buildings.
 	Plug:
-		Type: wc2_orc_greathall
+		Type: orcs_greathall
 
-wc2_orc_fortress:
+orcs_fortress:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Fortress
@@ -4678,12 +4678,12 @@ wc2_orc_fortress:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold, fortressupgradeavailable, wc2_orc_goblin_alchemist, wc2_orc_ogre_mound
+		Prerequisites: ~orcs_greathall, orcs_stronghold, fortressupgradeavailable, orcs_golbinalchemist, orcs_ogremound
 		Description: Unlocks more advanced buildings.
 	Plug:
-		Type: wc2_orc_stronghold
+		Type: orcs_stronghold
 
-wc2_orc_pigfarm:
+orcs_pigfarm:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_farm: ^wc2_farm
 	Tooltip:
@@ -4697,50 +4697,50 @@ wc2_orc_pigfarm:
 	Health:
 		HP: 250000
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall
+		Prerequisites: ~orcs_greathall
 		Queue: Building, RABuilding
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: wc2orcfarmvoice
 	### Upgrade stuff ###
 	# Un upgraded sprite
 	WithSpriteBody:
-		RequiresCondition: !wc2_orc_betterfarm && !wc2_orc_bestfarm
+		RequiresCondition: !orcs_upgrade_betterfarm && !orcs_upgrade_bestfarm
 
 	# Better Farm Upgrade
 	GrantConditionOnPrerequisite@betterfarm:
-		Condition: wc2_orc_betterfarm
-		Prerequisites: wc2_orc_betterfarm
+		Condition: orcs_upgrade_betterfarm
+		Prerequisites: orcs_upgrade_betterfarm
 	WithSpriteBody@betterfarm:
-		Sequence: wc2_orc_betterfarm
-		RequiresCondition: wc2_orc_betterfarm && !wc2_orc_bestfarm
+		Sequence: orcs_upgrade_betterfarm
+		RequiresCondition: orcs_upgrade_betterfarm && !orcs_upgrade_bestfarm
 	PowerMultiplier@betterfarm:
 		Modifier: 150
-		RequiresCondition: wc2_orc_betterfarm && !wc2_orc_bestfarm
+		RequiresCondition: orcs_upgrade_betterfarm && !orcs_upgrade_bestfarm
 	DamageMultiplier@betterfarm:
 		Modifier: 66
-		RequiresCondition: wc2_orc_betterfarm && !wc2_orc_bestfarm
+		RequiresCondition: orcs_upgrade_betterfarm && !orcs_upgrade_bestfarm
 
 	# Best Farm Upgrade
 	GrantConditionOnPrerequisite@bestfarm:
-		Condition: wc2_orc_bestfarm
-		Prerequisites: wc2_orc_bestfarm
+		Condition: orcs_upgrade_bestfarm
+		Prerequisites: orcs_upgrade_bestfarm
 	WithSpriteBody@bestfarm:
-		Sequence: wc2_orc_bestfarm
-		RequiresCondition: wc2_orc_bestfarm
+		Sequence: orcs_upgrade_bestfarm
+		RequiresCondition: orcs_upgrade_bestfarm
 	PowerMultiplier@bestfarm:
 		Modifier: 200
-		RequiresCondition: wc2_orc_bestfarm
+		RequiresCondition: orcs_upgrade_bestfarm
 	DamageMultiplier@bestfarm:
 		Modifier: 50
-		RequiresCondition: wc2_orc_bestfarm
+		RequiresCondition: orcs_upgrade_bestfarm
 	SpawnActorsOnSell@bestfarm:
 		ActorTypes: wc2_critter_boar
 		ValuePercent: 4
-		RequiresCondition: wc2_orc_bestfarm
+		RequiresCondition: orcs_upgrade_bestfarm
 
-wc2_orc_betterfarm:
+orcs_upgrade_betterfarm:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Better Farm
@@ -4748,14 +4748,14 @@ wc2_orc_betterfarm:
 		Cost: 2500
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~!wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_stronghold
+		Prerequisites: ~!orcs_upgrade_betterfarm, ~orcs_pigfarm, orcs_stronghold
 		Queue: Research
 		Description: Gives Farms +50% Supply and HP (150% total)
 		Icon: icon
 	RenderSprites:
 	ProvidesPrerequisite:
 
-wc2_orc_bestfarm:
+orcs_upgrade_bestfarm:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Best Farm
@@ -4763,14 +4763,14 @@ wc2_orc_bestfarm:
 		Cost: 5000
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_orc_betterfarm, ~wc2_orc_pigfarm, wc2_orc_fortress
+		Prerequisites: ~orcs_upgrade_betterfarm, ~orcs_pigfarm, orcs_fortress
 		Queue: Research
 		Description: Gives Farms +100% Supply and HP (200% total)
 		Icon: icon
 	RenderSprites:
 	ProvidesPrerequisite:
 
-wc2_orc_barracks:
+orcs_barracks:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_barracks: ^wc2_barracks
 	Tooltip:
@@ -4778,27 +4778,27 @@ wc2_orc_barracks:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Warriors of the Horde live and train here.\nProduces many Orcish units.
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_pigfarm
+		Prerequisites: ~orcs_greathall, orcs_pigfarm
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: orcbarracksvoice
 
-wc2_orc_troll_lumber_mill:
+orcs_trolllumbermill:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_lumber_mill: ^wc2_lumber_mill
 	Tooltip:
 		Name: Troll Lumbermill
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_pigfarm
+		Prerequisites: ~orcs_greathall, orcs_pigfarm
 		Queue: Building, RABuilding
 		Description: Dropoff point for gold. (Tiberium)\nCan store up to 1000 resource\nProduces axes enabling Axethrowers.\nProvides upgrades for Axethrowers.\nUnlocks Guard Tower upgrade.
 	FreeActor@1:
-		Actor: wc2_orc_peon
+		Actor: orcs_peon
 	FreeActor@2:
-		Actor: wc2_orc_peon
+		Actor: orcs_peon
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_troll_axethrower
+		ActorTypes: orcs_trollaxethrower
 	Refinery:
 	DockHost:
 		Type: Unload
@@ -4818,60 +4818,60 @@ wc2_orc_troll_lumber_mill:
 	Voiced:
 		VoiceSet: wc2orclumbermillvoice
 
-wc2_orc_blacksmith:
+orcs_blacksmith:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_blacksmith: ^wc2_blacksmith
 	Inherits@addon: ^BuildingPlugProducer
 	Tooltip:
 		Name: Blacksmith
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_barracks
+		Prerequisites: ~orcs_greathall, orcs_barracks
 		Queue: Building, RABuilding
 		Description: Enables Catapults and upgrading Scout Towers to Cannon Towers.\nEnables upgrades to units.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: wc2orcblacksmithvoice
 
-wc2_orc_goblin_alchemist:
+orcs_golbinalchemist:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_inventor: ^wc2_inventor
 	Tooltip:
 		Name: Golbin Alchemist
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold
+		Prerequisites: ~orcs_greathall, orcs_stronghold
 		Queue: Building, RABuilding
 		Description: Ingenious goblins dabble in alchemy and invention.\nProvides Radar.\nTrains Sappers & Zeppelins.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: wc2orcgoblinalchemist
 
-wc2_orc_ogre_mound:
+orcs_ogremound:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_stables: ^wc2_stables
 	Tooltip:
 		Name: Ogre Mound
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold
+		Prerequisites: ~orcs_greathall, orcs_stronghold
 		Queue: Building, RABuilding
 		Description: Unlocks production of Ogres.\nThis place smells bad!
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: wc2orcogremound
 
-wc2_orc_altar_of_storms:
+orcs_altarofstorms:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_church: ^wc2_church
 	Tooltip:
 		Name: Altar of Storms
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_fortress
+		Prerequisites: ~orcs_greathall, orcs_fortress
 		Queue: Building, RABuilding
 		Description: Teaches Ogres how to read and cast dark magicks.\nUnlocks Ogre Mage upgrade for Ogres.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: wc2orcaltarofstorms
 	# Support powers
@@ -4879,7 +4879,7 @@ wc2_orc_altar_of_storms:
 	AirstrikePower@SPYOFKILROGG:
 		OrderName: wc2_spy_of_kilrogg
 		# Prerequisites:
-		# 	1: wc2_orc_altar_of_storms
+		# 	1: orcs_altarofstorms
 		# Icons:
 		# 	1: kilrogg
 		Icon: kilrogg
@@ -4913,7 +4913,7 @@ wc2_orc_altar_of_storms:
 		OrderName: wc2_bloodlust
 		#PauseOnCondition: lowpower
 		# Prerequisites:
-		# 	1: wc2_orc_altar_of_storms
+		# 	1: orcs_altarofstorms
 		# Icons:
 		# 	1: bloodlust
 		Icon: bloodlust
@@ -4971,17 +4971,17 @@ wc2_orc_altar_of_storms:
 		Effect: wc2_effect_sparkle
 		EffectSequence: idle-longer
 
-wc2_orc_temple_of_the_damned:
+orcs_templeofthedamned:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_temple: ^wc2_temple
 	Tooltip:
 		Name: Temple of the Damned
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_fortress
+		Prerequisites: ~orcs_greathall, orcs_fortress
 		Queue: Building, RABuilding
 		Description: Terrible rituals are performed here.\nTrains Death Knights and raise Skeletons.\nUnlocks Death & Decay superweapon.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: wc2orctempleofthedamnedvoice
 	# Support powers
@@ -4990,7 +4990,7 @@ wc2_orc_temple_of_the_damned:
 		OrderName: wc2_haste
 		#PauseOnCondition: lowpower
 		# Prerequisites:
-		# 	1: wc2_orc_temple_of_the_damned
+		# 	1: orcs_templeofthedamned
 		# Icons:
 		# 	1: haste
 		Icon: haste
@@ -5047,17 +5047,17 @@ wc2_orc_temple_of_the_damned:
 		Effect: wc2_effect_death_and_decay
 		EffectSequence: idle
 
-wc2_orc_dragon_roost:
+orcs_dragonroost:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_nest: ^wc2_nest
 	Tooltip:
 		Name: Dragon Roost
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_fortress
+		Prerequisites: ~orcs_greathall, orcs_fortress
 		Queue: Building, RABuilding
 		Description: A captured dragon is forced to lay eggs for the Horde.\nTrains mighty Dragons.
 	SpawnActorsOnSell:
-		ActorTypes: wc2_orc_grunt
+		ActorTypes: orcs_grunt
 	Voiced:
 		VoiceSet: wc2orcdragonroost
 
@@ -5067,7 +5067,7 @@ wc2_orc_shipyard:
 	Tooltip:
 		Name: Shipyard
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill, ~globalnaval
+		Prerequisites: ~orcs_greathall, orcs_trolllumbermill, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Produces and repairs ships.
 	Voiced:
@@ -5079,7 +5079,7 @@ wc2_orc_foundry:
 	Tooltip:
 		Name: Foundry
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_shipyard, ~globalnaval
+		Prerequisites: ~orcs_greathall, wc2_orc_shipyard, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Unlocks production of the Transport and the Juggernaught.\nProvides upgrades for naval units.
 	Voiced:
@@ -5091,7 +5091,7 @@ wc2_orc_oil_refinery:
 	Tooltip:
 		Name: Oil Refinery
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_shipyard, ~globalnaval
+		Prerequisites: ~orcs_greathall, wc2_orc_shipyard, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Unlocks the construction of Oil Platforms for passive income.
 	Voiced:
@@ -5103,13 +5103,13 @@ wc2_orc_oil_platform:
 	Tooltip:
 		Name: Oil Platform
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_oil_refinery, ~globalnaval
+		Prerequisites: ~orcs_greathall, wc2_orc_oil_refinery, ~globalnaval
 		Queue: Building, RABuilding
 		Description: Provides passive income.\nOil tankers can drill here for further income boost.
 	Voiced:
 		VoiceSet: wc2orcoilplatformvoice
 
-wc2_orc_watch_tower:
+orcs_orcwatchtower:
 	Inherits: ^Defense
 	Inherits@Template: ^BasicDefenseTemplate
 	-WithTurretSearchlight:
@@ -5117,7 +5117,7 @@ wc2_orc_watch_tower:
 	Inherits@shape: ^2x2Shape
 	Inherits@AUTOTARGET: ^AutoTargetAll
 	Inherits@EXPERIENCE: ^GainsExperienceBuildings
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Inherits: ^BuildingPlugProducer
 	Tooltip:
 		Name: Orc Watch Tower
@@ -5137,7 +5137,7 @@ wc2_orc_watch_tower:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_barracks
+		Prerequisites: ~orcs_greathall, orcs_barracks
 		Queue: Defence, RADefence
 		Description: Can be upgraded to Guard or Cannon Tower.
 	Building:
@@ -5222,10 +5222,10 @@ wc2_orc_watch_tower:
 		Bounds: 2048, 2048
 	GrantConditionOnPrerequisite@TAxeUpg:
 		Condition: throwaxe_upg
-		Prerequisites: wc2_o_str_throwaxe
+		Prerequisites: orcs_upgrade_throwingaxestrength
 	GrantConditionOnPrerequisite@TAxeUpg2:
 		Condition: throwaxe_upg2
-		Prerequisites: wc2_o_str_throwaxe2
+		Prerequisites: orcs_upgrade_throwingaxestrengthii
 	FirepowerMultiplier@TAxeUpg:
 		Modifier: 125
 		RequiresCondition: throwaxe_upg && guard
@@ -5234,10 +5234,10 @@ wc2_orc_watch_tower:
 		RequiresCondition: throwaxe_upg2 && guard
 	GrantConditionOnPrerequisite@OCannonUpg:
 		Condition: ocannon_upg
-		Prerequisites: wc2_o_str_cannon
+		Prerequisites: orcs_upgrade_cannondamage
 	GrantConditionOnPrerequisite@OCannonUpg2:
 		Condition: ocannon_upg2
-		Prerequisites: wc2_o_str_cannon2
+		Prerequisites: orcs_upgrade_cannondamageii
 	FirepowerMultiplier@OCannonUpg:
 		Modifier: 125
 		RequiresCondition: ocannon_upg && cannon
@@ -5245,9 +5245,9 @@ wc2_orc_watch_tower:
 		Modifier: 125
 		RequiresCondition: ocannon_upg2 && cannon
 	ActorStatValues:
-		Upgrades: wc2_o_str_throwaxe, wc2_o_str_throwaxe2, wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_throwingaxestrength, orcs_upgrade_throwingaxestrengthii, orcs_upgrade_cannondamage, orcs_upgrade_cannondamageii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
-wcorcguardtowerupgrade:
+orcs_guardtower_2:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Guard Tower
@@ -5255,14 +5255,14 @@ wcorcguardtowerupgrade:
 		Cost: 600
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill, scouttowerupgradeavailable
+		Prerequisites: ~orcs_greathall, orcs_trolllumbermill, scouttowerupgradeavailable
 		Description: Ground base defense.
 	Plug:
 		Type: wcscouttower
 	RenderSprites:
-		Image: wc2_orc_guard_tower
+		Image: orcs_guardtower
 
-wcorccannontowerupgrade:
+orcs_cannontower_2:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Upgraded Cannon Tower
@@ -5270,48 +5270,48 @@ wcorccannontowerupgrade:
 		Cost: 600
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith, scouttowerupgradeavailable
+		Prerequisites: ~orcs_greathall, orcs_blacksmith, scouttowerupgradeavailable
 		Description: Anti-aircraft base defense.
 	Plug:
 		Type: wcscouttower2
 	RenderSprites:
-		Image: wc2_orc_cannon_tower
+		Image: orcs_cannontower
 
-wc2_orc_guard_tower:
-	Inherits: wc2_orc_watch_tower
+orcs_guardtower:
+	Inherits: orcs_orcwatchtower
 	-ProductionCostMultiplier@guardtower:
 	Tooltip:
 		Name: Guard Tower
 	Valued:
 		Cost: 1600
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill
+		Prerequisites: ~orcs_greathall, orcs_trolllumbermill
 		Description: Guard tower, attacks land, sea, and air with fast arrows.
 	GrantCondition:
 		Condition: guard
 	Selectable:
-		Class: wc2_orc_watch_tower
+		Class: orcs_orcwatchtower
 	RenderSprites:
-		Image: wc2_orc_guard_tower
+		Image: orcs_guardtower
 
-wc2_orc_cannon_tower:
-	Inherits: wc2_orc_watch_tower
+orcs_cannontower:
+	Inherits: orcs_orcwatchtower
 	-ProductionCostMultiplier@guardtower:
 	Tooltip:
 		Name: Cannon Tower
 	Valued:
 		Cost: 1600
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith
+		Prerequisites: ~orcs_greathall, orcs_blacksmith
 		Description: Cannon tower, attacks land. Has huge splash damage.
 	GrantCondition:
 		Condition: cannon
 	Selectable:
-		Class: wc2_orc_watch_tower
+		Class: orcs_orcwatchtower
 	RenderSprites:
-		Image: wc2_orc_cannon_tower
+		Image: orcs_cannontower
 
-# wc2_orc_watch_tower:
+# orcs_orcwatchtower:
 # 	Inherits@WC2BUILDING: ^WC2OrcDefense
 # 	Inherits@wc2_watch_tower: ^wc2_watch_tower
 # 	# Don't declare AutoTarget stuff before AttackBase stuff or an annoying bug with WithSpriteBody will occur.
@@ -5319,7 +5319,7 @@ wc2_orc_cannon_tower:
 # 	Tooltip:
 # 		Name: Watch Tower
 # 	Buildable:
-# 		Prerequisites: ~wc2_orc_barracks
+# 		Prerequisites: ~orcs_barracks
 # 		Queue: Defence, RADefence
 # 		Description: Upgradable defense building\nDetector
 # 	Voiced:
@@ -5352,17 +5352,17 @@ wc2_orc_cannon_tower:
 # 		ItemLimit: 1
 # 	GrantConditionOnProduction@guardtower:
 # 		Condition: orcguardtowerupg
-# 		Actors: wc2_orc_guard_tower
+# 		Actors: orcs_guardtower
 # 	GrantConditionOnProduction@cannontower:
 # 		Condition: orccannontowerupg
-# 		Actors: wc2_orc_cannon_tower
+# 		Actors: orcs_cannontower
 # 	WithSpriteBody:
 # 		RequiresCondition: !orcguardtowerupg && !orccannontowerupg
 # 	WithSpriteBody@guardtower:
-# 		Sequence: wc2_orc_guard_tower
+# 		Sequence: orcs_guardtower
 # 		RequiresCondition: orcguardtowerupg
 # 	WithSpriteBody@cannontower:
-# 		Sequence: wc2_orc_cannon_tower
+# 		Sequence: orcs_cannontower
 # 		RequiresCondition: orccannontowerupg
 # 	DamageMultiplier@guardtower:
 # 		Modifier: 75
@@ -5371,12 +5371,12 @@ wc2_orc_cannon_tower:
 # 		Modifier: 67
 # 		RequiresCondition: orccannontowerupg
 
-# wc2_orc_guard_tower:
+# orcs_guardtower:
 # 	Tooltip:
 # 		Name: Guard Tower
 # 	Buildable:
 # 		BuildPaletteOrder: 1
-# 		Prerequisites: ~wc2_orc_troll_lumber_mill
+# 		Prerequisites: ~orcs_trolllumbermill
 # 		Queue: Towerupgrade.orc2
 # 		BuildDuration: 3500
 # 		BuildDurationModifier: 15
@@ -5389,12 +5389,12 @@ wc2_orc_cannon_tower:
 # 		RemoveInstead: true
 # 	RenderSprites:
 
-# wc2_orc_cannon_tower:
+# orcs_cannontower:
 # 	Tooltip:
 # 		Name: Cannon Tower
 # 	Buildable:
 # 		BuildPaletteOrder: 1
-# 		Prerequisites: ~wc2_orc_blacksmith
+# 		Prerequisites: ~orcs_blacksmith
 # 		Queue: Towerupgrade.orc2
 # 		BuildDuration: 4750
 # 		BuildDurationModifier: 15
@@ -5407,22 +5407,22 @@ wc2_orc_cannon_tower:
 # 		RemoveInstead: true
 # 	RenderSprites:
 
-wc2_orc_wall:
-	Inherits: wc2_human_wall
+orcs_wall:
+	Inherits: humans_wall
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_orc_greathall
+		Prerequisites: ~orcs_greathall
 		Queue: Defence, RADefence
 	LineBuild:
-		NodeTypes: wc2_orc_wall
+		NodeTypes: orcs_wall
 	LineBuildNode:
-		Types: wc2_orc_wall
+		Types: orcs_wall
 	WithWallSpriteBody:
-		Type: wc2_orc_wall
+		Type: orcs_wall
 	RenderSprites:
 		Palette: player
 
-wc2_orc_goldmine:
+orcs_orcgoldmine:
 	Inherits@WC2BUILDING: ^WC2OrcBuilding
 	Inherits@wc2_goldmine: ^wc2_goldmine
 	Tooltip:
@@ -5430,37 +5430,37 @@ wc2_orc_goldmine:
 	Buildable:
 		Queue: Building, RABuilding
 		Description: Send workers inside to provide passive income.\nMiners progressively get experience and work more efficiently.
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith, derricklimit
+		Prerequisites: ~orcs_greathall, orcs_blacksmith, derricklimit
 	Voiced:
 		VoiceSet: neutralgoldminevoice
 	RenderSprites:
-		Image: wc2_orc_goldmine
+		Image: orcs_orcgoldmine
 
-wc2_orc_goldmine.bot:
-	Inherits@WC2BUILDING: wc2_orc_goldmine
+orcs_orcgoldmine_2:
+	Inherits@WC2BUILDING: orcs_orcgoldmine
 	Valued:
 		Cost: 15000
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_blacksmith, derricklimit, ~botplayer
+		Prerequisites: ~orcs_greathall, orcs_blacksmith, derricklimit, ~botplayer
 	Cargo:
-		InitialUnits: wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon, wc2_orc_peon
+		InitialUnits: orcs_peon, orcs_peon, orcs_peon, orcs_peon, orcs_peon, orcs_peon, orcs_peon, orcs_peon, orcs_peon, orcs_peon
 	RenderSprites:
-		Image: wc2_orc_goldmine
+		Image: orcs_orcgoldmine
 
 ####################################################################################################
 # WC2 ORC UNITS
 ####################################################################################################
 
-wc2_orc_mcv:
+orcs_mobileconstructionvehicleorc:
 	Inherits@WC2INFANTRY: ^WC2Vehicle
 	Inherits@WC2Template: ^wc2_mcv
 	Buildable:
-		Prerequisites: ~wc2_orc_blacksmith
+		Prerequisites: ~orcs_blacksmith
 		Description: Transforms into a Great Hall.
 	Tooltip:
 		Name: Mobile Construction Vehicle (Orc)
 	Transforms:
-		IntoActor: wc2_orc_greathall
+		IntoActor: orcs_greathall
 		Offset: -1,-1
 		Facing: 432
 		TransformSounds:
@@ -5476,36 +5476,36 @@ wc2_orc_mcv:
 		StandSequences: idle
 		MoveSequence: run
 
-wc2_orc_peon:
+orcs_peon:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_peasant
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Peon
 	Buildable:
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_troll_lumber_mill
+		Prerequisites: ~orcs_greathall, orcs_trolllumbermill
 		Description: Harvester. Zug zug!
 	Armament:
 		Weapon: wc2peasantsmack
 		FireDelay: 7
 	-WithInfantryBody:
 	WithHarvesterSpriteBody:
-		ImageByFullness: wc2_orc_peon, wc2_orc_peon_full
+		ImageByFullness: orcs_peon, wc2_orc_peon_full
 	WithMoveAnimation:
 		MoveSequence: run
 	Voiced:
 		VoiceSet: wc2voiceorcpeongrunt
 	-DamagedByTerrain:
 	ActorStatValues:
-		Upgrades: wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
-wc2_orc_grunt:
+orcs_grunt:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2AxeUpg: ^wc2_o_str_axe
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@WC2AxeUpg: ^orcs_upgrade_axestrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Grunt
 	Valued:
@@ -5520,7 +5520,7 @@ wc2_orc_grunt:
 		Speed: 65
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_orc_barracks, ~!wc2_upgrade_grunt
+		Prerequisites: ~orcs_barracks, ~!orcs_upgrade_warcraft3grunt
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage. Lok'tar!
 	Armament:
@@ -5539,16 +5539,16 @@ wc2_orc_grunt:
 	DamageMultiplier@WC2OShieldUpg2:
 		Modifier: 70
 	ActorStatValues:
-		Upgrades: wc2_o_str_axe, wc2_o_str_axe2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_axestrength, orcs_upgrade_axestrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
-wc2_orc_grunt2:
+orcs_warcraft3grunt:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@WC2AxeUpg: ^wc2_o_str_axe
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@WC2AxeUpg: ^orcs_upgrade_axestrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Warcraft 3 Grunt
 	Valued:
@@ -5563,7 +5563,7 @@ wc2_orc_grunt2:
 		Speed: 70
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~wc2_upgrade_grunt
+		Prerequisites: ~orcs_upgrade_warcraft3grunt
 		Queue: Infantry, RAInfantry
 		Description: Basic melee infantry. Slow but can take some damage. Lok'tar!
 	Armament:
@@ -5586,20 +5586,20 @@ wc2_orc_grunt2:
 	DamageMultiplier@WC2OShieldUpg2:
 		Modifier: 70
 	ActorStatValues:
-		Upgrades: wc2_o_str_axe, wc2_o_str_axe2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_axestrength, orcs_upgrade_axestrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
 # Axethrower also has built-in berserker stuff so that berserker's upgrades and spells will be applied to already-built axethrwoers, just as in WC2.
-wc2_orc_troll_axethrower:
+orcs_trollaxethrower:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@TAxeUpg: ^wc2_o_str_throwaxe
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
-	Inherits@BLighterUpg: ^wc2_o_berserker_lighteraxes
-	Inherits@BScoutUpg: ^wc2_o_berserker_scouting
-	Inherits@BRegenUpg: ^wc2_o_berserker_regen
-	Inherits@BerserkerUpg: ^wc2_o_berserkerupg
+	Inherits@TAxeUpg: ^orcs_upgrade_throwingaxestrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
+	Inherits@BLighterUpg: ^orcs_upgrade_berserkerlightaxes
+	Inherits@BScoutUpg: ^orcs_upgrade_berserkerscouting
+	Inherits@BRegenUpg: ^orcs_upgrade_berserkerregeneration
+	Inherits@BerserkerUpg: ^orcs_upgrade_berserker
 	Tooltip:
 		Name: Troll Axethrower
 	Valued:
@@ -5614,7 +5614,7 @@ wc2_orc_troll_axethrower:
 		Speed: 60
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_orc_troll_lumber_mill, ~!wc2_o_berserkerupg
+		Prerequisites: ~orcs_trolllumbermill, ~!orcs_upgrade_berserker
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
 	Armament:
@@ -5637,18 +5637,18 @@ wc2_orc_troll_axethrower:
 		DefaultAttackSequence: shoot-berserker
 		RequiresCondition: berserker_upg
 	ActorStatValues:
-		Upgrades: wc2_o_str_throwaxe, wc2_o_str_throwaxe2, wc2_o_str_shield, wc2_o_str_shield2, wc2_o_berserkerupg, wc2_o_berserker_lighteraxes, wc2_o_berserker_scouting
+		Upgrades: orcs_upgrade_throwingaxestrength, orcs_upgrade_throwingaxestrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii, orcs_upgrade_berserker, orcs_upgrade_berserkerlightaxes, orcs_upgrade_berserkerscouting
 
 # Separate actor for berserker because otherwise we can't change the build icon (cameo) or tooltip.
-wc2_orc_troll_berserker:
-	Inherits@wc2_orc_troll_axethrower: wc2_orc_troll_axethrower
+orcs_trollberserker:
+	Inherits@orcs_trollaxethrower: orcs_trollaxethrower
 	Tooltip:
 		Name: Troll Berserker
 	Buildable:
-		Prerequisites: ~wc2_orc_troll_lumber_mill, ~wc2_o_berserkerupg, ~!wc2_upgrade_troll_spearthrower
+		Prerequisites: ~orcs_trolllumbermill, ~orcs_upgrade_berserker, ~!orcs_upgrade_trollheadhunter
 		Description: Elite ranged infantry.\nNot as durable as Grunt.\nCan attack air.
 	Selectable:
-		Class: wc2_orc_troll_axethrower
+		Class: orcs_trollaxethrower
 	-WithInfantryBody@Berserker:
 	WithInfantryBody:
 		-RequiresCondition:
@@ -5656,18 +5656,18 @@ wc2_orc_troll_berserker:
 	GrantCondition@Berserker:
 		Condition: berserker_upg
 
-wc2_orc_troll_spearthrower:
+orcs_trollheadhunter:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@TAxeUpg: ^wc2_o_str_throwaxe
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
-	Inherits@BLighterUpg: ^wc2_o_berserker_lighteraxes
-	Inherits@BScoutUpg: ^wc2_o_berserker_scouting
-	Inherits@BRegenUpg: ^wc2_o_berserker_regen
-	Inherits@BerserkerUpg: ^wc2_o_berserkerupg
+	Inherits@TAxeUpg: ^orcs_upgrade_throwingaxestrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
+	Inherits@BLighterUpg: ^orcs_upgrade_berserkerlightaxes
+	Inherits@BScoutUpg: ^orcs_upgrade_berserkerscouting
+	Inherits@BRegenUpg: ^orcs_upgrade_berserkerregeneration
+	Inherits@BerserkerUpg: ^orcs_upgrade_berserker
 	Tooltip:
 		Name: Troll Headhunter
 	Valued:
@@ -5682,7 +5682,7 @@ wc2_orc_troll_spearthrower:
 		Speed: 75
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_upgrade_troll_spearthrower
+		Prerequisites: ~orcs_upgrade_trollheadhunter
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
 	Armament:
@@ -5700,17 +5700,17 @@ wc2_orc_troll_spearthrower:
 		PlayerPalette: player_rgba
 
 # Axethrower also has built-in berserker stuff so that berserker's upgrades and spells will be applied to already-built axethrwoers, just as in WC2.
-wc2_orc_kodo_beast:
+orcs_kodobeast:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@TAxeUpg: ^wc2_o_str_throwaxe
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
-	Inherits@BLighterUpg: ^wc2_o_berserker_lighteraxes
-	Inherits@BScoutUpg: ^wc2_o_berserker_scouting
-	Inherits@BRegenUpg: ^wc2_o_berserker_regen
-	Inherits@BerserkerUpg: ^wc2_o_berserkerupg
+	Inherits@TAxeUpg: ^orcs_upgrade_throwingaxestrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
+	Inherits@BLighterUpg: ^orcs_upgrade_berserkerlightaxes
+	Inherits@BScoutUpg: ^orcs_upgrade_berserkerscouting
+	Inherits@BRegenUpg: ^orcs_upgrade_berserkerregeneration
+	Inherits@BerserkerUpg: ^orcs_upgrade_berserker
 	-ExternalCondition@PropagandaEffect:
 	Tooltip:
 		Name: Kodo Beast
@@ -5726,7 +5726,7 @@ wc2_orc_kodo_beast:
 		Speed: 60
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_orc_troll_lumber_mill
+		Prerequisites: ~orcs_trolllumbermill
 		Queue: Infantry, RAInfantry
 		Description: Basic ranged infantry.\nNot as durable as Grunt.\nCan attack air.
 	ProximityExternalCondition@PropagandaEffect:
@@ -5751,18 +5751,18 @@ wc2_orc_kodo_beast:
 	WithDeathAnimation:
 		DeathSequencePalette: player_rgba
 	ActorStatValues:
-		Upgrades: wc2_o_str_throwaxe, wc2_o_str_throwaxe2, wc2_o_str_shield, wc2_o_str_shield2, wc2_o_berserkerupg, wc2_o_berserker_lighteraxes, wc2_o_berserker_scouting
+		Upgrades: orcs_upgrade_throwingaxestrength, orcs_upgrade_throwingaxestrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii, orcs_upgrade_berserker, orcs_upgrade_berserkerlightaxes, orcs_upgrade_berserkerscouting
 
 # Ogre also has built-in ogremage stuff so that ogremage's upgrades and spells will be applied to already-built ogres, just as in WC2.
-wc2_orc_ogre:
+orcs_ogre:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2AxeUpg: ^wc2_o_str_axe
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@WC2AxeUpg: ^orcs_upgrade_axestrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Inherits@FOURSTATEDEPLOY: ^WC2FourStateDeploy
-	Inherits@OgremageUpg: ^wc2_o_ogremageupg
+	Inherits@OgremageUpg: ^orcs_upgrade_ogremage
 	Inherits@ogremage_bloodlust_upgrade: ^wc2_o_ogremage_bloodlust
 	Inherits@ogremage_runes_upgrade: ^wc2_o_ogremage_runes
 	Tooltip:
@@ -5781,7 +5781,7 @@ wc2_orc_ogre:
 		Locomotor: tracked
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~wc2_orc_ogre_mound, ~!wc2_o_ogremageupg
+		Prerequisites: ~orcs_ogremound, ~!orcs_upgrade_ogremage
 		Queue: Infantry, RAInfantry
 		Description: Improved melee infantry.\nStinky, fast, dumb and dangerous!
 	Voiced:
@@ -5818,20 +5818,20 @@ wc2_orc_ogre:
 	#Weapons
 	Inherits@attacks_and_spells: ^wc2_ogre_ogremage_attacks_spells
 	ActorStatValues:
-		Upgrades: wc2_o_str_axe, wc2_o_str_axe2, wc2_o_str_shield, wc2_o_str_shield2, wc2_o_ogremageupg, wc2_o_bloodlustupg, wc2_o_runesupg
+		Upgrades: orcs_upgrade_axestrength, orcs_upgrade_axestrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii, orcs_upgrade_ogremage, orcs_upgrade_bloodlust, orcs_upgrade_runes
 
 # Separate actor for ogremage because otherwise we can't change the build icon (cameo) or tooltip.
-wc2_orc_ogremage:
-	Inherits@wc2_orc_ogre: wc2_orc_ogre
+orcs_ogremage:
+	Inherits@orcs_ogre: orcs_ogre
 	Tooltip:
 		Name: Ogre-Mage
 	Buildable:
-		Prerequisites: ~wc2_o_ogremageupg, wc2_orc_ogre_mound, wc2_orc_altar_of_storms
+		Prerequisites: ~orcs_upgrade_ogremage, orcs_ogremound, orcs_altarofstorms
 		Description: Improved magickal melee infantry.\nStinky, very fast, smart, and dangerous!
 	Voiced:
 		VoiceSet: wc2voiceorcogremage
 	Selectable:
-		Class: wc2_orc_ogre
+		Class: orcs_ogre
 	-WithInfantryBody@Ogremage:
 	WithInfantryBody:
 		-RequiresCondition:
@@ -5998,13 +5998,13 @@ wc2_runes:
 	DamageMultiplier@Runes:
 		Modifier: 0
 
-wc2_orc_catapult:
+orcs_catapult:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CatUpg: ^wc2_o_str_catapult
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@CatUpg: ^orcs_upgrade_catapultstrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Catapult
 	Valued:
@@ -6020,7 +6020,7 @@ wc2_orc_catapult:
 		TurnSpeed: 16
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_orc_blacksmith
+		Prerequisites: ~orcs_blacksmith
 		Queue: Infantry, RAInfantry, Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	AttackFrontal:
@@ -6047,15 +6047,15 @@ wc2_orc_catapult:
 	Mobile:
 		PauseOnCondition: cond_catapult_cooldown || disabled || notmobile
 	ActorStatValues:
-		Upgrades: wc2_o_str_catapult, wc2_o_str_catapult2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_catapultstrength, orcs_upgrade_catapultstrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
-wc2_orc_siege_engine:
+orcs_siegeengine:
 	Inherits@WC2VEHICLE: ^WC2Vehicle
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@CatUpg: ^wc2_o_str_catapult
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@CatUpg: ^orcs_upgrade_catapultstrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Siege Engine
 	Valued:
@@ -6073,7 +6073,7 @@ wc2_orc_siege_engine:
 		TurnSpeed: 28
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~wc2_orc_greathall, wc2_orc_stronghold, wc2_orc_blacksmith
+		Prerequisites: ~orcs_greathall, orcs_stronghold, orcs_blacksmith
 		Queue: Vehicle, RAVehicle
 		Description: Powerful long range siege unit.
 	-AttackFrontal:
@@ -6111,17 +6111,17 @@ wc2_orc_siege_engine:
 		Weapon: wc2visualexplode
 		EmptyWeapon: wc2visualexplode
 	ActorStatValues:
-		Upgrades: wc2_o_str_catapult, wc2_o_str_catapult2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_catapultstrength, orcs_upgrade_catapultstrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
-wc2_orc_goblin_sappers:
+orcs_goblinsappers:
 	Inherits@WC2INFANTRY: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_demolitioner
-	Inherits@CatUpg: ^wc2_o_str_catapult
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@CatUpg: ^orcs_upgrade_catapultstrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Goblin Sappers
 	Buildable:
-		Prerequisites: ~wc2_orc_goblin_alchemist
+		Prerequisites: ~orcs_golbinalchemist
 		Queue: Vehicle, RAVehicle
 		Description: Explosive suicide infantry. Can attack normally.
 	#Weapons and demolition
@@ -6150,19 +6150,19 @@ wc2_orc_goblin_sappers:
 	Voiced:
 		VoiceSet: wc2voiceorcgoblinsappers
 	ActorStatValues:
-		Upgrades: wc2_o_str_catapult, wc2_o_str_catapult2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_catapultstrength, orcs_upgrade_catapultstrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
-wc2_orc_deathknight:
+orcs_deathknight:
 	Inherits@WC2Infantry: ^WC2Infantry
 	Inherits@WC2Template: ^wc2_mage
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Inherits@wc2_o_deathknight_haste: ^wc2_o_deathknight_haste
 	Inherits@wc2_o_deathknight_deathanddecay: ^wc2_o_deathknight_deathanddecay
 	Inherits@wc2_o_deathknight_raisedead: ^wc2_o_deathknight_raisedead
 	Tooltip:
 		Name: Death Knight
 	Buildable:
-		Prerequisites: ~wc2_orc_temple_of_the_damned
+		Prerequisites: ~orcs_templeofthedamned
 		Queue: Infantry, RAInfantry
 		Description: Powerful undead spell caster.\nCan attack Air.\nDetector
 	Voiced:
@@ -6275,7 +6275,7 @@ wc2_orc_deathknight:
 		Count: -50
 		RequiresCondition: cond_raisedead_drain
 	ActorStatValues:
-		Upgrades: wc2_o_str_shield, wc2_o_str_shield2, wc2_o_hasteupg, wc2_o_deathanddecayupg, wc2_o_raisedeadupg
+		Upgrades: orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii, orcs_upgrade_haste, orcs_upgrade_deathanddecay, orcs_upgrade_raisedead
 
 	### Visual indicator of mode ###
 	WithDecoration@Mode_Deathcoil:
@@ -6329,9 +6329,9 @@ wc2_orc_deathknight:
 		PipCount: 10
 
 wc2_orc_skeleton:
-	Inherits@wc2_orc_grunt: wc2_orc_grunt
-	Inherits@WC2AxeUpg: ^wc2_o_str_axe
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@orcs_grunt: orcs_grunt
+	Inherits@WC2AxeUpg: ^orcs_upgrade_axestrength
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Skeleton
 	Buildable:
@@ -6359,7 +6359,7 @@ wc2_orc_skeleton:
 	Targetable@UNDEAD:
 		TargetTypes: undeadtarget
 	ActorStatValues:
-		Upgrades: wc2_o_str_axe, wc2_o_str_axe2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_axestrength, orcs_upgrade_axestrengthii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
 ####################################################################################################
 # WC2 ORC SHIPS
@@ -6383,7 +6383,7 @@ wc2_orc_oil_tanker:
 wc2_orc_trolldestroyer:
 	Inherits@WC2SHIP: ^WC2Ship
 	Inherits@WC2Template: ^wc2_destroyer
-	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Inherits@OCannonUpg: ^orcs_upgrade_cannondamage
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
 		Prerequisites: ~wc2_orc_shipyard
@@ -6404,7 +6404,7 @@ wc2_orc_trolldestroyer:
 	Voiced:
 		VoiceSet: wc2voiceorcship
 	ActorStatValues:
-		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_navyshield, wc2_o_str_navyshield2
+		Upgrades: orcs_upgrade_cannondamage, orcs_upgrade_cannondamageii, wc2_o_str_navyshield, wc2_o_str_navyshield2
 
 wc2_orc_transport:
 	Inherits@WC2Ship: ^WC2Ship
@@ -6424,10 +6424,10 @@ wc2_orc_transport:
 wc2_orc_ogre_juggernaught:
 	Inherits@WC2Ship: ^WC2Ship
 	Inherits@WC2Template: ^wc2_battleship
-	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Inherits@OCannonUpg: ^orcs_upgrade_cannondamage
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_orc_foundry, ~wc2_orc_blacksmith ##once stronghold/fortress are fixed, prereq will be wc2_orc_stronghold, wc2_orc_foundry
+		Prerequisites: ~wc2_orc_foundry, ~orcs_blacksmith ##once stronghold/fortress are fixed, prereq will be orcs_stronghold, wc2_orc_foundry
 		Queue: Naval, RANaval
 		Description: Heavy artillery ship.
 	Tooltip:
@@ -6445,15 +6445,15 @@ wc2_orc_ogre_juggernaught:
 	Voiced:
 		VoiceSet: wc2voiceorcship
 	ActorStatValues:
-		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_navyshield, wc2_o_str_navyshield2
+		Upgrades: orcs_upgrade_cannondamage, orcs_upgrade_cannondamageii, wc2_o_str_navyshield, wc2_o_str_navyshield2
 
 wc2_orc_giant_turtle:
 	Inherits@WC2Ship: ^WC2Ship
 	Inherits@WC2Template: ^wc2_submarine
-	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Inherits@OCannonUpg: ^orcs_upgrade_cannondamage
 	Inherits@ONavySUpg: ^wc2_o_str_navyshield
 	Buildable:
-		Prerequisites: ~wc2_orc_foundry, ~wc2_orc_goblin_alchemist
+		Prerequisites: ~wc2_orc_foundry, ~orcs_golbinalchemist
 		Queue: Naval, RANaval
 		Description: Turtle go grrr.\nStealthed attack submarine.
 	Tooltip:
@@ -6474,34 +6474,34 @@ wc2_orc_giant_turtle:
 	WithDeathAnimation@Bubbles:
 		Delay: 0
 	ActorStatValues:
-		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_navyshield, wc2_o_str_navyshield2
+		Upgrades: orcs_upgrade_cannondamage, orcs_upgrade_cannondamageii, wc2_o_str_navyshield, wc2_o_str_navyshield2
 
 ####################################################################################################
 # WC2 ORC AIR UNITS
 ####################################################################################################
 
-wc2_orc_goblin_zeppelin:
+orcs_goblinzeppelin:
 	Inherits@WC2AirUnit: ^WC2AirUnit
 	Inherits@WC2Template: ^wc2_airscout
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
 	Tooltip:
 		Name: Goblin Zeppelin
 	Buildable:
-		Prerequisites: ~wc2_orc_goblin_alchemist
+		Prerequisites: ~orcs_golbinalchemist
 		Queue: Vehicle, RAVehicle
 		Description: Flying scout unit. He can see your house!\nDetector.
 	Voiced:
 		VoiceSet: wc2voiceorcgoblinzeppelin
 	ActorStatValues:
-		Upgrades: wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
-wc2_orc_dragon:
+orcs_dragon:
 	Inherits@WC2AirUnit: ^WC2AirUnit
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@EXP: ^GainsExperienceTD
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
-	Inherits@WC2OShieldUpg: ^wc2_o_str_shield
-	Inherits@OCannonUpg: ^wc2_o_str_cannon
+	Inherits@WC2OShieldUpg: ^orcs_upgrade_armorstrength
+	Inherits@OCannonUpg: ^orcs_upgrade_cannondamage
 	Tooltip:
 		Name: Dragon
 	Valued:
@@ -6523,7 +6523,7 @@ wc2_orc_dragon:
 		TargetTypes: Heal
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~wc2_orc_dragon_roost
+		Prerequisites: ~orcs_dragonroost
 		Queue: Aircraft, RAAircraft
 		Description: Flying ranged attacker.\nFire breath can hit multiple targets in a line.\nStrong vs Aircraft
 	Armament@VISIBLE:
@@ -6565,7 +6565,7 @@ wc2_orc_dragon:
 		Sequence: idle-slow
 		RequiresCondition: wc2_cond_slow && !wc2_cond_haste
 	ActorStatValues:
-		Upgrades: wc2_o_str_cannon, wc2_o_str_cannon2, wc2_o_str_shield, wc2_o_str_shield2
+		Upgrades: orcs_upgrade_cannondamage, orcs_upgrade_cannondamageii, orcs_upgrade_armorstrength, orcs_upgrade_armorstrengthii
 
 wc2_orc_eye_of_kilrogg:
 	Inherits: ^WC2AirUnit
@@ -6731,7 +6731,7 @@ wc2_neutral_daemon:
 # WC2 HUMAN UPGRADES
 ####################################################################################################
 
-wc2_h_str_sword:
+humans_upgrade_swordstrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Sword Strength
@@ -6739,14 +6739,14 @@ wc2_h_str_sword:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 15%. Double Effect for Footmen.
-		Prerequisites: ~!wc2_h_str_sword, ~wc2_human_blacksmith
+		Prerequisites: ~!humans_upgrade_swordstrength, ~humans_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_str_sword
+		Image: humans_upgrade_swordstrength
 	ProvidesPrerequisite:
 
-wc2_h_str_sword2:
+humans_upgrade_swordstrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Sword Strength II
@@ -6754,14 +6754,14 @@ wc2_h_str_sword2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 35%. Double Effect for Footmen.
-		Prerequisites: !wc2_h_str_sword2, ~wc2_h_str_sword, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: !humans_upgrade_swordstrengthii, ~humans_upgrade_swordstrength, ~humans_blacksmith, humans_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_h_str_sword2
+		Image: humans_upgrade_swordstrengthii
 	ProvidesPrerequisite:
 
-wc2_h_str_shield:
+humans_upgrade_armorstrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Armor Strength
@@ -6769,14 +6769,14 @@ wc2_h_str_shield:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 10%. Footmen have 15% damage resistance instead.
-		Prerequisites: ~!wc2_h_str_shield, ~wc2_human_blacksmith
+		Prerequisites: ~!humans_upgrade_armorstrength, ~humans_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_str_shield
+		Image: humans_upgrade_armorstrength
 	ProvidesPrerequisite:
 
-wc2_h_str_shield2:
+humans_upgrade_armorstrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Armor Strength II
@@ -6784,14 +6784,14 @@ wc2_h_str_shield2:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 20%. Footmen have 30% damage resistance instead.
-		Prerequisites: !wc2_h_str_shield2, ~wc2_h_str_shield, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: !humans_upgrade_armorstrengthii, ~humans_upgrade_armorstrength, ~humans_blacksmith, humans_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_h_str_shield2
+		Image: humans_upgrade_armorstrengthii
 	ProvidesPrerequisite:
 
-wc2_h_str_arrow:
+humans_upgrade_arrowstrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Arrow Strength
@@ -6799,14 +6799,14 @@ wc2_h_str_arrow:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases arrow damage dealt by Archers and Guard Towers by 15%.
-		Prerequisites: ~!wc2_h_str_arrow, ~wc2_human_blacksmith
+		Prerequisites: ~!humans_upgrade_arrowstrength, ~humans_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_str_arrow
+		Image: humans_upgrade_arrowstrength
 	ProvidesPrerequisite:
 
-wc2_h_str_arrow2:
+humans_upgrade_arrowstrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Arrow Strength II
@@ -6814,25 +6814,25 @@ wc2_h_str_arrow2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases arrow damage by Archers and Guard Towers by 35%.
-		Prerequisites: !wc2_h_str_arrow2, ~wc2_h_str_arrow, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: !humans_upgrade_arrowstrengthii, ~humans_upgrade_arrowstrength, ~humans_blacksmith, humans_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_h_str_arrow2
+		Image: humans_upgrade_arrowstrengthii
 	ProvidesPrerequisite:
 
-wc2_upgrade_footman:
+humans_upgrade_warcraft3footman:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name:  Warcraft 3 Footman
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Footman into the Warcraft 3 Footman
-		Prerequisites: ~!wc2_upgrade_footman, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~!humans_upgrade_warcraft3footman, ~humans_blacksmith, humans_castle
 	RenderSprites:
-		Image: wc2_human_footman2
+		Image: humans_warcraft3footman
 
-wc2_h_rangerupg:
+humans_upgrade_ranger:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ranger
@@ -6840,25 +6840,25 @@ wc2_h_rangerupg:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Intense training is given to Elven Archers.\nIncreases damage resistance by 20% and unlocks upgrades for the Ranger.
-		Prerequisites: ~!wc2_h_rangerupg, ~wc2_human_blacksmith ## when keep/castle are fixed, will require Castle
+		Prerequisites: ~!humans_upgrade_ranger, ~humans_blacksmith ## when keep/castle are fixed, will require Castle
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_rangerupg
+		Image: humans_upgrade_ranger
 	ProvidesPrerequisite:
 
-wc2_upgrade_high_elf_archer:
+humans_upgrade_highelvenarcher:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: High Elven Archer
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Elven Ranger into the High Elven Archer
-		Prerequisites: ~!wc2_upgrade_high_elf_archer, ~wc2_human_blacksmith, wc2_h_rangerupg, wc2_human_castle
+		Prerequisites: ~!humans_upgrade_highelvenarcher, ~humans_blacksmith, humans_upgrade_ranger, humans_castle
 	RenderSprites:
-		Image: wc2_human_high_elf_archer
+		Image: humans_highelvenarcher
 
-wc2_h_ranger_longbow:
+humans_upgrade_rangerlongbow:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ranger Longbow
@@ -6866,14 +6866,14 @@ wc2_h_ranger_longbow:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases range of Rangers by 20%.
-		Prerequisites: ~!wc2_h_ranger_longbow, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: ~!humans_upgrade_rangerlongbow, ~humans_upgrade_ranger, ~humans_blacksmith, humans_castle
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_ranger_longbow
+		Image: humans_upgrade_rangerlongbow
 	ProvidesPrerequisite:
 
-wc2_h_ranger_scouting:
+humans_upgrade_rangerscouting:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ranger Scouting
@@ -6881,14 +6881,14 @@ wc2_h_ranger_scouting:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases vision range of Rangers by 20%.
-		Prerequisites: ~!wc2_h_ranger_scouting, ~wc2_h_rangerupg, ~wc2_human_blacksmith
+		Prerequisites: ~!humans_upgrade_rangerscouting, ~humans_upgrade_ranger, ~humans_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_ranger_scouting
+		Image: humans_upgrade_rangerscouting
 	ProvidesPrerequisite:
 
-wc2_h_ranger_marksman:
+humans_upgrade_rangermarksman:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ranger Marksman
@@ -6896,14 +6896,14 @@ wc2_h_ranger_marksman:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases arrow damage of Rangers by 25%.
-		Prerequisites: ~!wc2_h_ranger_marksman, ~wc2_h_rangerupg, ~wc2_human_blacksmith, wc2_human_keep
+		Prerequisites: ~!humans_upgrade_rangermarksman, ~humans_upgrade_ranger, ~humans_blacksmith, humans_keep
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_ranger_marksman
+		Image: humans_upgrade_rangermarksman
 	ProvidesPrerequisite:
 
-wc2_h_str_ballista:
+humans_upgrade_ballistastrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ballista Strength
@@ -6911,14 +6911,14 @@ wc2_h_str_ballista:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases ballista damage dealt by Ballista by 15%
-		Prerequisites: ~!wc2_h_str_ballista, ~wc2_human_blacksmith
+		Prerequisites: ~!humans_upgrade_ballistastrength, ~humans_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_str_ballista
+		Image: humans_upgrade_ballistastrength
 	ProvidesPrerequisite:
 
-wc2_h_str_ballista2:
+humans_upgrade_ballistastrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ballista Strength II
@@ -6926,14 +6926,14 @@ wc2_h_str_ballista2:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases ballista damage dealt by Ballista by 35%
-		Prerequisites: !wc2_h_str_ballista2, ~wc2_h_str_ballista, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: !humans_upgrade_ballistastrengthii, ~humans_upgrade_ballistastrength, ~humans_blacksmith, humans_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_h_str_ballista2
+		Image: humans_upgrade_ballistastrengthii
 	ProvidesPrerequisite:
 
-wc2_h_str_cannon:
+humans_upgrade_cannondamage:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cannon Damage
@@ -6941,14 +6941,14 @@ wc2_h_str_cannon:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 15%
-		Prerequisites: ~!wc2_h_str_cannon, ~wc2_human_blacksmith
+		Prerequisites: ~!humans_upgrade_cannondamage, ~humans_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_str_cannon
+		Image: humans_upgrade_cannondamage
 	ProvidesPrerequisite:
 
-wc2_h_str_cannon2:
+humans_upgrade_cannondamageii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cannon Damage II
@@ -6956,11 +6956,11 @@ wc2_h_str_cannon2:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases Cannon Damage dealt by Naval Vessels and Cannon Towers by 35%
-		Prerequisites: !wc2_h_str_cannon2, ~wc2_h_str_cannon, ~wc2_human_blacksmith, wc2_human_castle
+		Prerequisites: !humans_upgrade_cannondamageii, ~humans_upgrade_cannondamage, ~humans_blacksmith, humans_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_h_str_cannon2
+		Image: humans_upgrade_cannondamageii
 	ProvidesPrerequisite:
 
 wc2_h_str_navyshield:
@@ -6971,7 +6971,7 @@ wc2_h_str_navyshield:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 10%
-		Prerequisites: ~!wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard
+		Prerequisites: ~!wc2_h_str_navyshield, ~humans_blacksmith, ~wc2_human_shipyard
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -6986,14 +6986,14 @@ wc2_h_str_navyshield2:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 20%
-		Prerequisites: !wc2_h_str_navyshield2, ~wc2_h_str_navyshield, ~wc2_human_blacksmith, ~wc2_human_shipyard, wc2_human_castle
+		Prerequisites: !wc2_h_str_navyshield2, ~wc2_h_str_navyshield, ~humans_blacksmith, ~wc2_human_shipyard, humans_castle
 	Valued:
 		Cost: 5000
 	RenderSprites:
 		Image: wc2_h_str_navyshield2
 	ProvidesPrerequisite:
 
-wc2_h_paladinupg:
+humans_upgrade_paladin:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Paladin
@@ -7001,25 +7001,25 @@ wc2_h_paladinupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Perform holy rituals to turn your noble Knights into righteous Paladins!\nPaladins are more powerful and can cast Heal.\nIncreases damage resistance, melee damage and speed by 25%.
-		Prerequisites: ~!wc2_h_paladinupg, ~wc2_human_blacksmith, wc2_human_church
+		Prerequisites: ~!humans_upgrade_paladin, ~humans_blacksmith, humans_church
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_paladinupg
+		Image: humans_upgrade_paladin
 	ProvidesPrerequisite:
 
-wc2_upgrade_paladin2:
+humans_upgrade_warcraft3knightwip:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Warcraft 3 Knight (WIP)
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Paladin into the Warcraft 3 Knight (WIP)
-		Prerequisites: ~!wc2_upgrade_paladin2, ~wc2_human_blacksmith, wc2_h_paladinupg, wc2_human_church
+		Prerequisites: ~!humans_upgrade_warcraft3knightwip, ~humans_blacksmith, humans_upgrade_paladin, humans_church
 	RenderSprites:
-		Image: wc2_human_knight2
+		Image: humans_warcraft3knight
 
-wc2_h_healingupg:
+humans_upgrade_healing:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Healing
@@ -7027,14 +7027,14 @@ wc2_h_healingupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Paladins can now heal.\nToggle Paladin's modes by deploying them.\nHealing uses mana.
-		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_healingupg, ~wc2_human_blacksmith, wc2_human_church
+		Prerequisites: ~humans_upgrade_paladin, ~!humans_upgrade_healing, ~humans_blacksmith, humans_church
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_healingupg
+		Image: humans_upgrade_healing
 	ProvidesPrerequisite:
 
-wc2_h_exorcismupg:
+humans_upgrade_exorcism:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Exorcism
@@ -7042,14 +7042,14 @@ wc2_h_exorcismupg:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Paladins can now exorcise.\nToggle Paladin's modes by deploying them.\nExorcism only affects undead units.\nGood vs Orc Death Knight and Skeleton.
-		Prerequisites: ~wc2_h_paladinupg, ~!wc2_h_exorcismupg, ~wc2_human_blacksmith, wc2_human_church
+		Prerequisites: ~humans_upgrade_paladin, ~!humans_upgrade_exorcism, ~humans_blacksmith, humans_church
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_exorcismupg
+		Image: humans_upgrade_exorcism
 	ProvidesPrerequisite:
 
-wc2_h_slowupg:
+humans_upgrade_slow:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Slow
@@ -7057,14 +7057,14 @@ wc2_h_slowupg:
 		BuildPaletteOrder: 20
 		Queue: Research
 		Description: Allows Mages to cast Slow.\nToggle Mage's modes by deploying them.\nSlows down affected target.\nAffects movement and attack speed.\nUses 50 mana.
-		Prerequisites: ~!wc2_h_slowupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+		Prerequisites: ~!humans_upgrade_slow, ~humans_blacksmith, humans_magetower
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_slowupg
+		Image: humans_upgrade_slow
 	ProvidesPrerequisite:
 
-wc2_h_polymorphupg:
+humans_upgrade_polymorph:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Polymorph
@@ -7072,14 +7072,14 @@ wc2_h_polymorphupg:
 		BuildPaletteOrder: 30
 		Queue: Research
 		Description: Allows Mages to cast Polymorph.\nToggle Mage's modes by deploying them.\nTurns target into a\nharmless critter.\nUses 200 mana.
-		Prerequisites: ~!wc2_h_polymorphupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+		Prerequisites: ~!humans_upgrade_polymorph, ~humans_blacksmith, humans_magetower
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_polymorphupg
+		Image: humans_upgrade_polymorph
 	ProvidesPrerequisite:
 
-wc2_h_blizzardupg:
+humans_upgrade_blizzard:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Blizzard
@@ -7087,18 +7087,18 @@ wc2_h_blizzardupg:
 		BuildPaletteOrder: 40
 		Queue: Research
 		Description: Allows Mages to cast Blizzard.\nToggle Mage's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
-		Prerequisites: ~!wc2_h_blizzardupg, ~wc2_human_blacksmith, wc2_human_mage_tower
+		Prerequisites: ~!humans_upgrade_blizzard, ~humans_blacksmith, humans_magetower
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_h_blizzardupg
+		Image: humans_upgrade_blizzard
 	ProvidesPrerequisite:
 
 ####################################################################################################
 # WC2 ORC UPGRADES
 ####################################################################################################
 
-wc2_o_str_axe:
+orcs_upgrade_axestrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Axe Strength
@@ -7106,14 +7106,14 @@ wc2_o_str_axe:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 15%. Double Effect for Grunts.
-		Prerequisites: ~!wc2_o_str_axe, ~wc2_orc_blacksmith
+		Prerequisites: ~!orcs_upgrade_axestrength, ~orcs_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_str_axe
+		Image: orcs_upgrade_axestrength
 	ProvidesPrerequisite:
 
-wc2_o_str_axe2:
+orcs_upgrade_axestrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Axe Strength II
@@ -7121,14 +7121,14 @@ wc2_o_str_axe2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases melee damage by 35%. Double Effect for Grunts.
-		Prerequisites: !wc2_o_str_axe2, ~wc2_o_str_axe, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: !orcs_upgrade_axestrengthii, ~orcs_upgrade_axestrength, ~orcs_blacksmith, orcs_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_o_str_axe2
+		Image: orcs_upgrade_axestrengthii
 	ProvidesPrerequisite:
 
-wc2_o_str_shield:
+orcs_upgrade_armorstrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Armor Strength
@@ -7136,14 +7136,14 @@ wc2_o_str_shield:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 10%. Grunts have 15% damage resistance instead.
-		Prerequisites: ~!wc2_o_str_shield, ~wc2_orc_blacksmith
+		Prerequisites: ~!orcs_upgrade_armorstrength, ~orcs_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_str_shield
+		Image: orcs_upgrade_armorstrength
 	ProvidesPrerequisite:
 
-wc2_o_str_shield2:
+orcs_upgrade_armorstrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Armor Strength II
@@ -7151,14 +7151,14 @@ wc2_o_str_shield2:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases damage resistance of all land units by 20%. Grunts have 30% damage resistance instead.
-		Prerequisites: !wc2_o_str_shield2, ~wc2_o_str_shield, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: !orcs_upgrade_armorstrengthii, ~orcs_upgrade_armorstrength, ~orcs_blacksmith, orcs_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_o_str_shield2
+		Image: orcs_upgrade_armorstrengthii
 	ProvidesPrerequisite:
 
-wc2_o_str_throwaxe:
+orcs_upgrade_throwingaxestrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Throwing Axe Strength
@@ -7166,14 +7166,14 @@ wc2_o_str_throwaxe:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases ranged damage dealt by Axethrowers and Guard Towers by 15%.
-		Prerequisites: ~!wc2_o_str_throwaxe, ~wc2_orc_blacksmith
+		Prerequisites: ~!orcs_upgrade_throwingaxestrength, ~orcs_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_str_throwaxe
+		Image: orcs_upgrade_throwingaxestrength
 	ProvidesPrerequisite:
 
-wc2_o_str_throwaxe2:
+orcs_upgrade_throwingaxestrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Throwing Axe Strength II
@@ -7181,25 +7181,25 @@ wc2_o_str_throwaxe2:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Increases ranged damage by Axethrowers and Guard Towers by 35%
-		Prerequisites: !wc2_o_str_throwaxe2, ~wc2_o_str_throwaxe, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: !orcs_upgrade_throwingaxestrengthii, ~orcs_upgrade_throwingaxestrength, ~orcs_blacksmith, orcs_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_o_str_throwaxe2
+		Image: orcs_upgrade_throwingaxestrengthii
 	ProvidesPrerequisite:
 
-wc2_upgrade_grunt:
+orcs_upgrade_warcraft3grunt:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name:  Warcraft 3 Grunt
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Grunt into the Warcraft 3 Grunt
-		Prerequisites: ~!wc2_upgrade_grunt, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~!orcs_upgrade_warcraft3grunt, ~orcs_blacksmith, orcs_fortress
 	RenderSprites:
-		Image: wc2_orc_grunt2
+		Image: orcs_warcraft3grunt
 
-wc2_o_berserkerupg:
+orcs_upgrade_berserker:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Berserker
@@ -7207,25 +7207,25 @@ wc2_o_berserkerupg:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Troll Axethrowers are driven into a mad frenzy.\nIncreases damage resistance by 20% and unlocks upgrades for the Berserker.
-		Prerequisites: ~!wc2_o_berserkerupg, ~wc2_orc_blacksmith
+		Prerequisites: ~!orcs_upgrade_berserker, ~orcs_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_berserkerupg
+		Image: orcs_upgrade_berserker
 	ProvidesPrerequisite:
 
-wc2_upgrade_troll_spearthrower:
+orcs_upgrade_trollheadhunter:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Troll Headhunter
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Troll Berserker into the Troll Headhunter
-		Prerequisites: ~!wc2_upgrade_troll_spearthrower, ~wc2_orc_blacksmith, wc2_o_berserkerupg, wc2_orc_fortress
+		Prerequisites: ~!orcs_upgrade_trollheadhunter, ~orcs_blacksmith, orcs_upgrade_berserker, orcs_fortress
 	RenderSprites:
-		Image: wc2_orc_troll_spearthrower
+		Image: orcs_trollheadhunter
 
-wc2_o_berserker_lighteraxes:
+orcs_upgrade_berserkerlightaxes:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Berserker Light Axes
@@ -7233,14 +7233,14 @@ wc2_o_berserker_lighteraxes:
 		BuildPaletteOrder: 2
 		Queue: Research
 		Description: Increases throwing range of Berserker axes by 20%.
-		Prerequisites: ~!wc2_o_berserker_lighteraxes, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: ~!orcs_upgrade_berserkerlightaxes, ~orcs_upgrade_berserker, ~orcs_blacksmith, orcs_fortress
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_berserker_lighteraxes
+		Image: orcs_upgrade_berserkerlightaxes
 	ProvidesPrerequisite:
 
-wc2_o_berserker_scouting:
+orcs_upgrade_berserkerscouting:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Berserker Scouting
@@ -7248,14 +7248,14 @@ wc2_o_berserker_scouting:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases vision range of Berserkers by 20%.
-		Prerequisites: ~!wc2_o_berserker_scouting, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith
+		Prerequisites: ~!orcs_upgrade_berserkerscouting, ~orcs_upgrade_berserker, ~orcs_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_berserker_scouting
+		Image: orcs_upgrade_berserkerscouting
 	ProvidesPrerequisite:
 
-wc2_o_berserker_regen:
+orcs_upgrade_berserkerregeneration:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Berserker Regeneration
@@ -7263,14 +7263,14 @@ wc2_o_berserker_regen:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Berserkers heal over time (5% HP each second) and take 20% less damage.
-		Prerequisites: ~!wc2_o_berserker_regen, ~wc2_o_berserkerupg, ~wc2_orc_blacksmith, wc2_orc_stronghold
+		Prerequisites: ~!orcs_upgrade_berserkerregeneration, ~orcs_upgrade_berserker, ~orcs_blacksmith, orcs_stronghold
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_berserker_regen
+		Image: orcs_upgrade_berserkerregeneration
 	ProvidesPrerequisite:
 
-wc2_o_str_catapult:
+orcs_upgrade_catapultstrength:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Catapult Strength
@@ -7278,14 +7278,14 @@ wc2_o_str_catapult:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases Catapult damage by 15%
-		Prerequisites: ~!wc2_o_str_catapult, ~wc2_orc_blacksmith
+		Prerequisites: ~!orcs_upgrade_catapultstrength, ~orcs_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_str_catapult
+		Image: orcs_upgrade_catapultstrength
 	ProvidesPrerequisite:
 
-wc2_o_str_catapult2:
+orcs_upgrade_catapultstrengthii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Catapult Strength II
@@ -7293,14 +7293,14 @@ wc2_o_str_catapult2:
 		BuildPaletteOrder: 3
 		Queue: Research
 		Description: Increases Catapult damage by 35%
-		Prerequisites: !wc2_o_str_catapult2, ~wc2_o_str_catapult, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: !orcs_upgrade_catapultstrengthii, ~orcs_upgrade_catapultstrength, ~orcs_blacksmith, orcs_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_o_str_catapult2
+		Image: orcs_upgrade_catapultstrengthii
 	ProvidesPrerequisite:
 
-wc2_o_str_cannon:
+orcs_upgrade_cannondamage:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cannon Damage
@@ -7309,14 +7309,14 @@ wc2_o_str_cannon:
 		BuildLimit: 1
 		Queue: Research
 		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 15%
-		Prerequisites: ~!wc2_o_str_cannon, ~wc2_orc_blacksmith
+		Prerequisites: ~!orcs_upgrade_cannondamage, ~orcs_blacksmith
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_str_cannon
+		Image: orcs_upgrade_cannondamage
 	ProvidesPrerequisite:
 
-wc2_o_str_cannon2:
+orcs_upgrade_cannondamageii:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cannon Damage II
@@ -7324,11 +7324,11 @@ wc2_o_str_cannon2:
 		BuildPaletteOrder: 4
 		Queue: Research
 		Description: Increases cannon damage dealt by Naval Vessels and Cannon Towers by 35%
-		Prerequisites: !wc2_o_str_cannon2, ~wc2_o_str_cannon, ~wc2_orc_blacksmith, wc2_orc_fortress
+		Prerequisites: !orcs_upgrade_cannondamageii, ~orcs_upgrade_cannondamage, ~orcs_blacksmith, orcs_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
-		Image: wc2_o_str_cannon2
+		Image: orcs_upgrade_cannondamageii
 	ProvidesPrerequisite:
 
 wc2_o_str_navyshield:
@@ -7339,7 +7339,7 @@ wc2_o_str_navyshield:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 10%.
-		Prerequisites: ~!wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard
+		Prerequisites: ~!wc2_o_str_navyshield, ~orcs_blacksmith, ~wc2_orc_shipyard
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -7354,14 +7354,14 @@ wc2_o_str_navyshield2:
 		BuildPaletteOrder: 5
 		Queue: Research
 		Description: Increases damage resistance of all Naval Vessels by 20%.
-		Prerequisites: !wc2_o_str_navyshield2, ~wc2_o_str_navyshield, ~wc2_orc_blacksmith, ~wc2_orc_shipyard, wc2_orc_fortress
+		Prerequisites: !wc2_o_str_navyshield2, ~wc2_o_str_navyshield, ~orcs_blacksmith, ~wc2_orc_shipyard, orcs_fortress
 	Valued:
 		Cost: 5000
 	RenderSprites:
 		Image: wc2_o_str_navyshield2
 	ProvidesPrerequisite:
 
-wc2_o_ogremageupg:
+orcs_upgrade_ogremage:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ogre-Mage
@@ -7369,14 +7369,14 @@ wc2_o_ogremageupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Perform mysterious rituals to transform your Ogres into Ogre-Magi!\nOgre-Magi are more powerful and can cast Bloodlust.\nBloodlust makes your units hit harder for a short time.\nIncreases damage resistance by 20%.\nIncreases melee damage by 25%.
-		Prerequisites: ~!wc2_o_ogremageupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+		Prerequisites: ~!orcs_upgrade_ogremage, ~orcs_blacksmith, orcs_altarofstorms
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_ogremageupg
+		Image: orcs_upgrade_ogremage
 	ProvidesPrerequisite:
 
-wc2_o_bloodlustupg:
+orcs_upgrade_bloodlust:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Bloodlust
@@ -7384,14 +7384,14 @@ wc2_o_bloodlustupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Allows Ogre-Magi to cast bloodlust.\nToggle Oger-Mage's modes by deploying them.\nTriples damage output of affected unit.\nUses 50 mana.
-		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_bloodlustupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+		Prerequisites: ~orcs_upgrade_ogremage, ~!orcs_upgrade_bloodlust, ~orcs_blacksmith, orcs_altarofstorms
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_bloodlustupg
+		Image: orcs_upgrade_bloodlust
 	ProvidesPrerequisite:
 
-wc2_o_runesupg:
+orcs_upgrade_runes:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Runes
@@ -7399,14 +7399,14 @@ wc2_o_runesupg:
 		BuildPaletteOrder: 1
 		Queue: Research
 		Description: Allows Ogre-Magi to cast runes.\nToggle Oger-Mage's modes by deploying them.\nDeploys five land mines in a + shape.\nUses 200 mana.
-		Prerequisites: ~wc2_o_ogremageupg, ~!wc2_o_runesupg, ~wc2_orc_blacksmith, wc2_orc_altar_of_storms
+		Prerequisites: ~orcs_upgrade_ogremage, ~!orcs_upgrade_runes, ~orcs_blacksmith, orcs_altarofstorms
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_runesupg
+		Image: orcs_upgrade_runes
 	ProvidesPrerequisite:
 
-wc2_o_hasteupg:
+orcs_upgrade_haste:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Haste
@@ -7414,14 +7414,14 @@ wc2_o_hasteupg:
 		BuildPaletteOrder: 20
 		Queue: Research
 		Description: Allows Death Knights to cast haste.\nToggle Death Knight's modes by deploying them.\nSpeeds up affected target.\nAffects movement and attack speed.\nUses 50 mana.
-		Prerequisites: ~!wc2_o_hasteupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+		Prerequisites: ~!orcs_upgrade_haste, ~orcs_blacksmith, orcs_templeofthedamned
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_hasteupg
+		Image: orcs_upgrade_haste
 	ProvidesPrerequisite:
 
-wc2_o_deathanddecayupg:
+orcs_upgrade_deathanddecay:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Death and Decay
@@ -7429,14 +7429,14 @@ wc2_o_deathanddecayupg:
 		BuildPaletteOrder: 30
 		Queue: Research
 		Description: Allows Death Knights to cast death and decay.\nToggle Death Knight's modes by deploying them.\nAOE damage spell.\nUses 25 mana.
-		Prerequisites: ~!wc2_o_deathanddecayupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+		Prerequisites: ~!orcs_upgrade_deathanddecay, ~orcs_blacksmith, orcs_templeofthedamned
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_deathanddecayupg
+		Image: orcs_upgrade_deathanddecay
 	ProvidesPrerequisite:
 
-wc2_o_raisedeadupg:
+orcs_upgrade_raisedead:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Raise Dead
@@ -7444,9 +7444,9 @@ wc2_o_raisedeadupg:
 		BuildPaletteOrder: 40
 		Queue: Research
 		Description: Allows Death Knights to cast raise dead.\nToggle Death Knight's modes by deploying them.\nSummons a skeleton.\nUses 50 mana.
-		Prerequisites: ~!wc2_o_raisedeadupg, ~wc2_orc_blacksmith, wc2_orc_temple_of_the_damned
+		Prerequisites: ~!orcs_upgrade_raisedead, ~orcs_blacksmith, orcs_templeofthedamned
 	Valued:
 		Cost: 2500
 	RenderSprites:
-		Image: wc2_o_raisedeadupg
+		Image: orcs_upgrade_raisedead
 	ProvidesPrerequisite:
