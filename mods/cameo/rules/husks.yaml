@@ -19,9 +19,9 @@ HARV.Husk:
 APC.Husk:
 	Inherits: ^LightHusk
 	Tooltip:
-		Name: APC (Destroyed)
+		Name: td_gdi_apc (Destroyed)
 	TransformOnCapture:
-		IntoActor: apc
+		IntoActor: td_gdi_apc
 	RenderSprites:
 		Image: apc.destroyed
 
@@ -66,7 +66,7 @@ JEEP.Husk:
 	Tooltip:
 		Name: Hum-Vee (Destroyed)
 	TransformOnCapture:
-		IntoActor: jeep
+		IntoActor: td_gdi_humvee
 	RenderSprites:
 		Image: jeep.destroyed
 
@@ -88,7 +88,7 @@ MTNK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: mtnk
+		IntoActor: td_gdi_battletank
 	RenderSprites:
 		Image: mtnk.destroyed
 
@@ -99,7 +99,7 @@ HTNK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: htnk
+		IntoActor: td_gdi_mammothtank
 	RenderSprites:
 		Image: htnk.destroyed
 
@@ -121,7 +121,7 @@ MLRS.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: mlrs
+		IntoActor: td_gdi_mlrs
 	RenderSprites:
 		Image: mlrs.destroyed
 

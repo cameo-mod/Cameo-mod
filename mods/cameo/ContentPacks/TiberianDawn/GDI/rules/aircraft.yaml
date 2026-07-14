@@ -1,4 +1,4 @@
-tran.gdi:
+td_gdi_chinooktransport:
 	Inherits: TRAN
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@HeavyAircraftArmorPlating: ^HeavyAircraftArmorPlating
@@ -8,23 +8,23 @@ tran.gdi:
 		Name: GDI Chinook Transport
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~hpad.gdi
+		Prerequisites: ~td_gdi_helipad
 		Queue: Aircraft, RAAircraft
 		Description: actor_tran.description
 	Buildable:
-		Prerequisites: ~hpad.gdi
+		Prerequisites: ~td_gdi_helipad
 		Queue: Aircraft, RAAircraft
 	EjectOnDeath:
-		PilotActor: e1.gdi
+		PilotActor: td_gdi_minigunner
 	Cargo:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
-		InitialUnits: e1.gdi, e2, e3.gdi, gdimissilesoldier, gdiempgrenadier, gdishotgunner, gdiofficer, gdisniper
+		InitialUnits: td_gdi_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier, td_gdi_sonicmissilesoldier, td_gdi_empgrenadier, td_gdi_shotgunner, td_gdi_officer, td_gdi_heavysniper
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_heavyaircraftarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_heavyaircraftarmorplating
 
-ORCA:
+td_gdi_orca:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -43,10 +43,10 @@ ORCA:
 	Valued:
 		Cost: 1700
 	Tooltip:
-		Name: Orca
+		Name: td_gdi_orca
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~hpad.gdi
+		Prerequisites: ~td_gdi_helipad
 		Queue: Aircraft, RAAircraft
 		Description: actor_orca.description
 	Aircraft:
@@ -64,20 +64,20 @@ ORCA:
 		LocalOffset: 427,-171,-213, 427,171,-213
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Weapon: OrcaMissilesAMT
 		LocalOffset: 427,-171,-213, 427,171,-213
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
 	SpawnActorOnDeath:
 		Actor: ORCA.Husk
 	EjectOnDeath:
-		PilotActor: gdishotgunner
+		PilotActor: td_gdi_shotgunner
 	WithMoveAnimation:
 		MoveSequence: move
 	WithMuzzleOverlay:
@@ -95,7 +95,7 @@ ORCA:
 		RequiresSelection: True
 		PipCount: 8
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_advancedmissiletargeting, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_unlocka10airstrike, td_gdi_upgrade_heavyaircraftarmorplating, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
 A10:
 	Inherits: ^AirstrikePlane
@@ -139,17 +139,17 @@ A10:
 		Experience: 2500
 	RejectsOrders:
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_armorpiercingbullets
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_unlocka10airstrike, td_gdi_upgrade_heavyaircraftarmorplating, td_gdi_upgrade_armorpiercingbullets
 
 ORCA.Husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: Orca
+		Name: td_gdi_orca
 	Aircraft:
 		TurnSpeed: 16
 		Speed: 186
 	RenderSprites:
-		Image: orca
+		Image: td_gdi_orca
 
 A10Carrier:
 	Inherits: ^RANeutralPlane
@@ -237,9 +237,9 @@ A10Carrier:
 		PlayerPalette: player
 		Image: a10carrier
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_unlocka10airstrike, td_gdi_upgrade_heavyaircraftarmorplating, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
 
-gdifirehawk:
+td_gdi_firehawk:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -261,7 +261,7 @@ gdifirehawk:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 50
-		Prerequisites: ~hpad.gdi, eye, upgdifirehawk
+		Prerequisites: ~td_gdi_helipad, td_gdi_advancedcommunicationscenter, td_gdi_promotion_unlockfirehawk
 		Description: actor_firehawk.description
 	Health:
 		HP: 180000
@@ -276,22 +276,22 @@ gdifirehawk:
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: !ammo
-	Armament@up_advancedmissiletargeting:
+	Armament@td_gdi_upgrade_advancedmissiletargeting:
 		Weapon: FirehawkMissiles
 		LocalOffset: 0,960,0, 0,-960,0, 0,480,0, 0,-480,0
 		LocalYaw: 50, -50, 25, -25
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: !ammo
-		RequiresCondition: up_cuttingedgeequipment
+		RequiresCondition: td_gdi_upgrade_cuttingedgeequipment
 	Armament@BOMBS:
 		Weapon: FirehawkBomb
 		LocalOffset: 0,-256,-64, 0,256,-64
 		AmmoUsage: 2
 		PauseOnCondition: !ammo
-	GrantConditionOnPrerequisite@up_advancedmissiletargeting:
-		Condition: up_advancedmissiletargeting
-		Prerequisites: up_advancedmissiletargeting
+	GrantConditionOnPrerequisite@td_gdi_upgrade_advancedmissiletargeting:
+		Condition: td_gdi_upgrade_advancedmissiletargeting
+		Prerequisites: td_gdi_upgrade_advancedmissiletargeting
 	AttackAircraft:
 		FacingTolerance: 80
 		StrafeRunLength: 2500
@@ -310,7 +310,7 @@ gdifirehawk:
 	SpawnActorOnDeath:
 		Actor: gdifirehawk.Husk
 	EjectOnDeath:
-		PilotActor: gdiofficer
+		PilotActor: td_gdi_officer
 	LeavesTrails:
 		Offsets: -853,0,171
 		MovingInterval: 2
@@ -332,18 +332,18 @@ gdifirehawk:
 		PipCount: 4
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
-	DamageMultiplier@up_heavyaircraftarmorplating:
+	DamageMultiplier@td_gdi_upgrade_heavyaircraftarmorplating:
 		Modifier: 75
-	FirepowerMultiplier@up_cuttingedgeequipment:
+	FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 120
-	ReloadDelayMultiplier@up_cuttingedgeequipment:
+	ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
-	ReloadAmmoDelayMultiplier@up_cuttingedgeequipment:
+	ReloadAmmoDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
-	DamageMultiplier@up_cuttingedgeequipment:
+	DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_a10airstrike, up_heavyaircraftarmorplating, up_advancedmissiletargeting, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_unlocka10airstrike, td_gdi_upgrade_heavyaircraftarmorplating, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
 gdifirehawk.Husk:
 	Inherits: ^PlaneHusk
@@ -365,7 +365,7 @@ gdifirehawk.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: gdifirehawk
+		Image: td_gdi_firehawk
 
 gdirigdrone:
 	Inherits: ^RANeutralPlane

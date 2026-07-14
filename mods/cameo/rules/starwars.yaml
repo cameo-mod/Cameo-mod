@@ -4952,7 +4952,7 @@ swvice:
 		VoiceSet: SWProbotVoice
 
 swe2:
-	Inherits: E2
+	Inherits: td_gdi_grenadier
 	Inherits@infup: ^SWInfantryUpgrades
 	Valued:
 		Cost: 180
@@ -4970,7 +4970,7 @@ swe2:
 		Name: garrisoned
 		Weapon: SWGrenade
 	RenderSprites:
-		Image: e2
+		Image: td_gdi_grenadier
 
 swe3:
 	Inherits: ^Soldier
@@ -8060,7 +8060,7 @@ swtran.e2:
 		RequiresCondition: !loaded && botmicro
 		Delay: 200
 	EditorOnlyTooltip:
-		Name: Loaded Lambda (E2)
+		Name: Loaded Lambda (td_gdi_grenadier)
 
 swtran.e1:
 	Inherits: swtran

@@ -457,10 +457,10 @@ taguardian:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Guardian APC
+		Name: Guardian td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites:
@@ -499,7 +499,7 @@ taguardian:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: taguardian
 	Voiced:
@@ -530,7 +530,7 @@ tapitbull:
 		Name: Pitbull
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites:
@@ -4963,7 +4963,7 @@ tanodeyeofkane:
 	Valued:
 		Cost: 1500 #500
 	Tooltip:
-		Name: Eye of Kane
+		Name: td_gdi_advancedcommunicationscenter of Kane
 	Building:
 		Footprint: xxx xxx ___
 		Dimensions: 3,3
@@ -5003,7 +5003,7 @@ tanodeyeofkane:
 		Cursor: attackmove
 		Icon: glscudstorm
 		ChargeInterval: 6000
-		Name: Eye of Kane AA Launcher
+		Name: td_gdi_advancedcommunicationscenter of Kane AA Launcher
 		Description: Fires 9 Scud Missiles at the target.
 		EndChargeSpeechNotification:
 		SelectTargetSpeechNotification:

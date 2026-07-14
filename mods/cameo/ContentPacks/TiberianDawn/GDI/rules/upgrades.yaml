@@ -17,112 +17,112 @@
 		Palette: greyscale
 
 ^LongRangeSensors:
-	RevealsShroudMultiplier@up_longrangesensors:
-		RequiresCondition: up_longrangesensors
+	RevealsShroudMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
 		Modifier: 125
-	DetectCloakedMultiplier@up_longrangesensors:
-		RequiresCondition: up_longrangesensors
+	DetectCloakedMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
 		Modifier: 125
-	InaccuracyMultiplier@up_longrangesensors:
-		RequiresCondition: up_longrangesensors
+	InaccuracyMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
 		Modifier: 75
-	FirepowerMultiplier@up_longrangesensors:
-		RequiresCondition: up_longrangesensors
+	FirepowerMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
 		Modifier: 105
-	RangeMultiplier@up_longrangesensors:
-		RequiresCondition: up_longrangesensors
+	RangeMultiplier@td_gdi_upgrade_longrangesensors:
+		RequiresCondition: td_gdi_upgrade_longrangesensors
 		Modifier: 105
-	GrantConditionOnPrerequisite@up_longrangesensors:
-		Condition: up_longrangesensors
-		Prerequisites: up_longrangesensors
+	GrantConditionOnPrerequisite@td_gdi_upgrade_longrangesensors:
+		Condition: td_gdi_upgrade_longrangesensors
+		Prerequisites: td_gdi_upgrade_longrangesensors
 	ActorStatValues:
-		Upgrades: up_longrangesensors
+		Upgrades: td_gdi_upgrade_longrangesensors
 
 ^HeavyAircraftArmorPlating:
-	DamageMultiplier@up_heavyaircraftarmorplating:
-		RequiresCondition: up_heavyaircraftarmorplating
+	DamageMultiplier@td_gdi_upgrade_heavyaircraftarmorplating:
+		RequiresCondition: td_gdi_upgrade_heavyaircraftarmorplating
 		Modifier: 50
-	FirepowerMultiplier@up_a10airstrike:
-		RequiresCondition: up_a10airstrike
+	FirepowerMultiplier@td_gdi_upgrade_unlocka10airstrike:
+		RequiresCondition: td_gdi_upgrade_unlocka10airstrike
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_heavyaircraftarmorplating:
-		Condition: up_heavyaircraftarmorplating
-		Prerequisites: up_heavyaircraftarmorplating
-	GrantConditionOnPrerequisite@up_a10airstrike:
-		Condition: up_a10airstrike
-		Prerequisites: up_a10airstrike
+	GrantConditionOnPrerequisite@td_gdi_upgrade_heavyaircraftarmorplating:
+		Condition: td_gdi_upgrade_heavyaircraftarmorplating
+		Prerequisites: td_gdi_upgrade_heavyaircraftarmorplating
+	GrantConditionOnPrerequisite@td_gdi_upgrade_unlocka10airstrike:
+		Condition: td_gdi_upgrade_unlocka10airstrike
+		Prerequisites: td_gdi_upgrade_unlocka10airstrike
 	ActorStatValues:
-		Upgrades: up_heavyaircraftarmorplating
+		Upgrades: td_gdi_upgrade_heavyaircraftarmorplating
 
 ^AdvancedMissileTargeting:
-	RangeMultiplier@up_advancedmissiletargeting:
-		RequiresCondition: up_advancedmissiletargeting
+	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 		Modifier: 115
-	FirepowerMultiplier@up_advancedmissiletargeting:
-		RequiresCondition: up_advancedmissiletargeting
+	FirepowerMultiplier@td_gdi_upgrade_advancedmissiletargeting:
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_advancedmissiletargeting:
-		Condition: up_advancedmissiletargeting
-		Prerequisites: up_advancedmissiletargeting
+	GrantConditionOnPrerequisite@td_gdi_upgrade_advancedmissiletargeting:
+		Condition: td_gdi_upgrade_advancedmissiletargeting
+		Prerequisites: td_gdi_upgrade_advancedmissiletargeting
 	ActorStatValues:
-		Upgrades: up_advancedmissiletargeting
+		Upgrades: td_gdi_upgrade_advancedmissiletargeting
 
 ^ArmorPiercingBullets:
-	FirepowerMultiplier@up_armorpiercingbullets:
-		RequiresCondition: up_armorpiercingbullets
+	FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets:
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 		Modifier: 133
-	GrantConditionOnPrerequisite@up_armorpiercingbullets:
-		Condition: up_armorpiercingbullets
-		Prerequisites: up_armorpiercingbullets
+	GrantConditionOnPrerequisite@td_gdi_upgrade_armorpiercingbullets:
+		Condition: td_gdi_upgrade_armorpiercingbullets
+		Prerequisites: td_gdi_upgrade_armorpiercingbullets
 	ActorStatValues:
-		Upgrades: up_armorpiercingbullets
+		Upgrades: td_gdi_upgrade_armorpiercingbullets
 
 ^CuttingEdgeEquipment:
-	FirepowerMultiplier@up_cuttingedgeequipment:
-		RequiresCondition: up_cuttingedgeequipment
+	FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment:
+		RequiresCondition: td_gdi_upgrade_cuttingedgeequipment
 		Modifier: 110
-	ReloadDelayMultiplier@up_cuttingedgeequipment:
-		RequiresCondition: up_cuttingedgeequipment
+	ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
+		RequiresCondition: td_gdi_upgrade_cuttingedgeequipment
 		Modifier: 90
-	ReloadAmmoDelayMultiplier@up_cuttingedgeequipment:
-		RequiresCondition: up_cuttingedgeequipment
+	ReloadAmmoDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
+		RequiresCondition: td_gdi_upgrade_cuttingedgeequipment
 		Modifier: 90
-	DamageMultiplier@up_cuttingedgeequipment:
-		RequiresCondition: up_cuttingedgeequipment
+	DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment:
+		RequiresCondition: td_gdi_upgrade_cuttingedgeequipment
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_cuttingedgeequipment:
-		Condition: up_cuttingedgeequipment
-		Prerequisites: up_cuttingedgeequipment
+	GrantConditionOnPrerequisite@td_gdi_upgrade_cuttingedgeequipment:
+		Condition: td_gdi_upgrade_cuttingedgeequipment
+		Prerequisites: td_gdi_upgrade_cuttingedgeequipment
 	ActorStatValues:
-		Upgrades: up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_cuttingedgeequipment
 
 ^HighVelocityCannons:
-	FirepowerMultiplier@up_highvelocitycannons:
-		RequiresCondition: up_highvelocitycannons
+	FirepowerMultiplier@td_gdi_upgrade_highvelocitycannons:
+		RequiresCondition: td_gdi_upgrade_highvelocitycannons
 		Modifier: 115
-	RangeMultiplier@up_highvelocitycannons:
-		RequiresCondition: up_highvelocitycannons
+	RangeMultiplier@td_gdi_upgrade_highvelocitycannons:
+		RequiresCondition: td_gdi_upgrade_highvelocitycannons
 		Modifier: 115
-	GrantConditionOnPrerequisite@up_highvelocitycannons:
-		Condition: up_highvelocitycannons
-		Prerequisites: up_highvelocitycannons
+	GrantConditionOnPrerequisite@td_gdi_upgrade_highvelocitycannons:
+		Condition: td_gdi_upgrade_highvelocitycannons
+		Prerequisites: td_gdi_upgrade_highvelocitycannons
 	ActorStatValues:
-		Upgrades: up_highvelocitycannons
+		Upgrades: td_gdi_upgrade_highvelocitycannons
 
 ^LightWeightArmorPlating:
-	DamageMultiplier@up_lightweightarmorplating:
-		RequiresCondition: up_lightweightarmorplating
+	DamageMultiplier@td_gdi_upgrade_lightweightarmorplating:
+		RequiresCondition: td_gdi_upgrade_lightweightarmorplating
 		Modifier: 80
-	SpeedMultiplier@up_lightweightarmorplating:
-		RequiresCondition: up_lightweightarmorplating
+	SpeedMultiplier@td_gdi_upgrade_lightweightarmorplating:
+		RequiresCondition: td_gdi_upgrade_lightweightarmorplating
 		Modifier: 110
-	GrantConditionOnPrerequisite@up_lightweightarmorplating:
-		Condition: up_lightweightarmorplating
-		Prerequisites: up_lightweightarmorplating
+	GrantConditionOnPrerequisite@td_gdi_upgrade_lightweightarmorplating:
+		Condition: td_gdi_upgrade_lightweightarmorplating
+		Prerequisites: td_gdi_upgrade_lightweightarmorplating
 	ActorStatValues:
-		Upgrades: up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_lightweightarmorplating
 
-up_longrangesensors:
+td_gdi_upgrade_longrangesensors:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Long Range Sensors
@@ -132,12 +132,12 @@ up_longrangesensors:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_longrangesensors.description
-		Prerequisites: ~hq.gdi, !up_longrangesensors
+		Prerequisites: ~td_gdi_communicationscenter, !td_gdi_upgrade_longrangesensors
 	RenderSprites:
 		Image: longrangesensorsicon
 	ProvidesPrerequisite:
 
-up_armorpiercingbullets:
+td_gdi_upgrade_armorpiercingbullets:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Armor Piercing Bullets
@@ -147,12 +147,12 @@ up_armorpiercingbullets:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_armorpiercingbullets.description
-		Prerequisites: ~hq.gdi, !up_armorpiercingbullets
+		Prerequisites: ~td_gdi_communicationscenter, !td_gdi_upgrade_armorpiercingbullets
 	RenderSprites:
 		Image: armorpiercingbulletsicon
 	ProvidesPrerequisite:
 
-up_a10airstrike:
+td_gdi_upgrade_unlocka10airstrike:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Unlock A10 Airstrike
@@ -162,12 +162,12 @@ up_a10airstrike:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_a10airstrike.description
-		Prerequisites: ~hq.gdi, !up_a10airstrike
+		Prerequisites: ~td_gdi_communicationscenter, !td_gdi_upgrade_unlocka10airstrike
 	RenderSprites:
 		Image: a10
 	ProvidesPrerequisite:
 
-up_heavyaircraftarmorplating:
+td_gdi_upgrade_heavyaircraftarmorplating:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Heavy Aircraft Armor Plating
@@ -177,12 +177,12 @@ up_heavyaircraftarmorplating:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_heavyaircraftarmorplating.description
-		Prerequisites: ~eye, !up_heavyaircraftarmorplating
+		Prerequisites: ~td_gdi_advancedcommunicationscenter, !td_gdi_upgrade_heavyaircraftarmorplating
 	RenderSprites:
 		Image: aircraftarmorplatingicon
 	ProvidesPrerequisite:
 
-up_advancedmissiletargeting:
+td_gdi_upgrade_advancedmissiletargeting:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Advanced Missile Targeting
@@ -192,12 +192,12 @@ up_advancedmissiletargeting:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_advancedmissiletargeting.description
-		Prerequisites: ~eye, !up_advancedmissiletargeting
+		Prerequisites: ~td_gdi_advancedcommunicationscenter, !td_gdi_upgrade_advancedmissiletargeting
 	RenderSprites:
 		Image: advancedmissiletargetingicon
 	ProvidesPrerequisite:
 
-up_cuttingedgeequipment:
+td_gdi_upgrade_cuttingedgeequipment:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cutting Edge Equipment
@@ -207,12 +207,12 @@ up_cuttingedgeequipment:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_cuttingedgeequipment.description
-		Prerequisites: ~eye, !up_cuttingedgeequipment
+		Prerequisites: ~td_gdi_advancedcommunicationscenter, !td_gdi_upgrade_cuttingedgeequipment
 	RenderSprites:
 		Image: cuttingedgeequipmenticon
 	ProvidesPrerequisite:
 
-up_highvelocitycannons:
+td_gdi_upgrade_highvelocitycannons:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: High Velocity Cannons
@@ -222,12 +222,12 @@ up_highvelocitycannons:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_highvelocitycannons.description
-		Prerequisites: ~eye, !up_highvelocitycannons
+		Prerequisites: ~td_gdi_advancedcommunicationscenter, !td_gdi_upgrade_highvelocitycannons
 	RenderSprites:
 		Image: highvelocitycannonsicon
 	ProvidesPrerequisite:
 
-up_lightweightarmorplating:
+td_gdi_upgrade_lightweightarmorplating:
 	Inherits: ^upgrade.template
 	Tooltip:
 		Name: Lightweight Armor Plating
@@ -237,7 +237,7 @@ up_lightweightarmorplating:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_lightweightarmorplating.description
-		Prerequisites: ~eye, !up_lightweightarmorplating
+		Prerequisites: ~td_gdi_advancedcommunicationscenter, !td_gdi_upgrade_lightweightarmorplating
 	RenderSprites:
 		Image: lightweightarmorplatingicon
 	ProvidesTeamProxyActor:
@@ -247,7 +247,7 @@ up_lightweightarmorplating:
 team_upgrade.up_lightweightarmorplating:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_lightweightarmorplating
+		Prerequisite: td_gdi_upgrade_lightweightarmorplating
 	RenderSprites:
 		Image: lightweightarmorplatingicon
 	Tooltip:

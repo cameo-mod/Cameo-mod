@@ -3698,7 +3698,7 @@ RAAPC:
 	Valued:
 		Cost: 1300
 	Tooltip:
-		Name: Allied APC
+		Name: Allied td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
@@ -8019,7 +8019,7 @@ ra1_allies_alliedwarfactory:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RASpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@ReinforcedStructures: ^ReinforcedStructures
 	Buildable:
 		Queue: Building, RABuilding
@@ -8055,7 +8055,7 @@ ra1_soviet_warfactory:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@sell: ^RASovietSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
 		Queue: Building, RABuilding
 		Prerequisites: ~ra1_soviet_constructionyard, ra1_soviet_orerefinery, ~!ra1_soviet_doctrine_industrialefficiencydoctrine

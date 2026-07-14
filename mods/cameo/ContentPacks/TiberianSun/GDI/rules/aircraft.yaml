@@ -10,7 +10,7 @@ ts_gdi_orcafighter:
 	Inherits@MechanicalReliability: ^MechanicalReliability
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Tooltip:
-		Name: Orca Fighter
+		Name: td_gdi_orca Fighter
 	Valued:
 		Cost: 2200
 	UpdatesPlayerStatistics:
@@ -84,7 +84,7 @@ ts_gdi_zoneorcafighter:
 	Inherits@SonicWeaponry: ^SonicWeaponry
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Tooltip:
-		Name: Zone Orca Fighter
+		Name: Zone td_gdi_orca Fighter
 	Valued:
 		Cost: 3000
 	UpdatesPlayerStatistics:
@@ -256,7 +256,7 @@ ts_gdi_orcabomber:
 	Valued:
 		Cost: 1900
 	Tooltip:
-		Name: Orca Bomber
+		Name: td_gdi_orca Bomber
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

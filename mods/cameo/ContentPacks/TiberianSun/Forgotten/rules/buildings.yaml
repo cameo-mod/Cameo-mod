@@ -231,7 +231,7 @@ forgotten_warfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TSSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle

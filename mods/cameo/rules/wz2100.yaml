@@ -463,7 +463,7 @@ Player:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -626,7 +626,7 @@ Player:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -896,7 +896,7 @@ Player:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -1821,7 +1821,7 @@ psc2100factory2:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -1949,7 +1949,7 @@ psc2100factory2:
 	Inherits: ^BaseBuilding
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@AP: ^2100BuildingArmorUpgrades
 	HitShape:
 		UseTargetableCellsOffsets: true
@@ -5335,7 +5335,7 @@ psc2100chopshop2:
 2100CJEEP:
 	Inherits: 2100JEEP
 	Tooltip:
-		Name: BabaMG Jeep Wheels
+		Name: BabaMG td_gdi_humvee Wheels
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Infantry, RAInfantry
@@ -5354,7 +5354,7 @@ psc2100chopshop2:
 2100CJEEPMSL:
 	Inherits: 2100JEEPMSL
 	Tooltip:
-		Name: BabaRK Jeep Wheels
+		Name: BabaRK td_gdi_humvee Wheels
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Infantry, RAInfantry
@@ -6984,7 +6984,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: PK-105 Jeep Barbarian MG
+		Name: PK-105 td_gdi_humvee Barbarian MG
 	Buildable:
 		BuildPaletteOrder: 40
 		Queue: Vehicle, RAVehicle
@@ -7009,7 +7009,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 350
 	Tooltip:
-		Name: PK-105 Jeep Rocket Array
+		Name: PK-105 td_gdi_humvee Rocket Array
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Vehicle, RAVehicle

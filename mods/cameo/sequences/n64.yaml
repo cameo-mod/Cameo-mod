@@ -162,11 +162,11 @@ n64hand:
 
 n64pyle:
 	idle: n64barracks
-	damaged-idle: pyle
+	damaged-idle: td_gdi_barracks
 		Start: 10
 		Length: 10
 		Tick: 100
-	dead: pyle
+	dead: td_gdi_barracks
 		Start: 20
 		Tick: 800
 	make: pylemake
@@ -218,7 +218,7 @@ n64weap:
 	damaged-idle:
 		Start: 1
 		ZOffset: -511
-	dead: weap
+	dead: td_gdi_weaponsfactory
 		Start: 2
 		Tick: 800
 	build-top: weap2
@@ -466,11 +466,11 @@ n64fixnod:
 
 n64eye:
 	idle: n64advcomm
-	damaged-idle: eye
+	damaged-idle: td_gdi_advancedcommunicationscenter
 		Start: 16
 		Length: 16
 		Tick: 100
-	dead: eye
+	dead: td_gdi_advancedcommunicationscenter
 		Start: 32
 		Tick: 800
 	make: eyemake
@@ -621,12 +621,12 @@ n64obli:
 
 n64gtwr:
 	idle: n64guard
-	damaged-idle: gtwr
+	damaged-idle: td_gdi_guardtower
 		Start: 1
-	dead: gtwr
+	dead: td_gdi_guardtower
 		Start: 2
 		Tick: 800
-	make: gtwr
+	make: td_gdi_guardtower
 		Combine:
 			gtwrmake:
 				Length: 17
@@ -653,9 +653,9 @@ n64atwr:
 	Defaults:
 		Offset: 0,-13
 	idle: n64advguard
-	damaged-idle: atwr
+	damaged-idle: td_gdi_advancedguardtower
 		Start: 1
-	dead: atwr
+	dead: td_gdi_advancedguardtower
 		Start: 2
 		Tick: 800
 	make: atwrmake
@@ -924,87 +924,87 @@ n64e1nod:
 
 n64e2:
 	Inherits: ^InfantryOverlays
-	stand: e2
+	stand: td_gdi_grenadier
 		Facings: 8
-	stand2: e2
+	stand2: td_gdi_grenadier
 		Start: 8
 		Facings: 8
-	run: e2
+	run: td_gdi_grenadier
 		Start: 16
 		Length: 6
 		Facings: 8
 		Tick: 100
-	throw: e2
+	throw: td_gdi_grenadier
 		Start: 64
 		Length: 20
 		Facings: 8
 	# stand -> prone transition
-	liedown: e2
+	liedown: td_gdi_grenadier
 		Start: 224
 		Length: 2
 		Facings: 8
 	# prone -> stand transition
-	standup: e2
+	standup: td_gdi_grenadier
 		Start: 272
 		Length: 2
 		Facings: 8
-	prone-stand: e2
+	prone-stand: td_gdi_grenadier
 		Start: 240
 		Stride: 4
 		Facings: 8
-	prone-stand2: e2
+	prone-stand2: td_gdi_grenadier
 		Start: 240
 		Stride: 4
 		Facings: 8
-	prone-run: e2
+	prone-run: td_gdi_grenadier
 		Start: 240
 		Length: 4
 		Facings: 8
 		Tick: 100
-	prone-throw: e2
+	prone-throw: td_gdi_grenadier
 		Start: 288
 		Length: 12
 		Facings: 8
-	idle1: e2
+	idle1: td_gdi_grenadier
 		Start: 384
 		Length: 16
 		Tick: 120
-	idle2: e2
+	idle2: td_gdi_grenadier
 		Start: 400
 		Length: 13
 		Tick: 120
-	cheer: e2
+	cheer: td_gdi_grenadier
 		Start: 588
 		Length: 3
 		Facings: 8
 		Tick: 120
 	# Shot
-	die1: e2
+	die1: td_gdi_grenadier
 		Start: 509
 		Length: 9
 		Tick: 80
 	# Explode
-	die2: e2
+	die2: td_gdi_grenadier
 		Start: 518
 		Length: 8
 		Tick: 80
 	# Fly and explode in air
-	die3: e2
+	die3: td_gdi_grenadier
 		Start: 526
 		Length: 8
 		Tick: 80
 	# Fly through air squish on ground
-	die4: e2
+	die4: td_gdi_grenadier
 		Start: 534
 		Length: 12
 		Tick: 80
 	# Burn
-	die5: e2
+	die5: td_gdi_grenadier
 		Start: 546
 		Length: 18
 		Tick: 80
 	# Tib
-	die6: e2
+	die6: td_gdi_grenadier
 		Start: 494
 		Length: 11
 		Tick: 80
@@ -1529,7 +1529,7 @@ n64harvgdi:
 	icon: chromen64_harvester_gdi
 
 n64apc:
-	idle: apc
+	idle: td_gdi_apc
 		Facings: 32
 		UseClassicFacings: True
 	turret: apctur
@@ -1546,10 +1546,10 @@ n64apc:
 	icon: chromen64_apc
 
 n64jeep:
-	idle: jeep
+	idle: td_gdi_humvee
 		Facings: 32
 		UseClassicFacings: True
-	turret: jeep
+	turret: td_gdi_humvee
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1559,10 +1559,10 @@ n64jeep:
 	icon: chromen64_humvee
 
 n64mtnk:
-	idle: mtnk
+	idle: td_gdi_battletank
 		Facings: 32
 		UseClassicFacings: True
-	turret: mtnk
+	turret: td_gdi_battletank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1571,10 +1571,10 @@ n64mtnk:
 	icon: chromen64_heavytank
 
 n64htnk:
-	idle: htnk
+	idle: td_gdi_mammothtank
 		Facings: 32
 		UseClassicFacings: True
-	turret: htnk
+	turret: td_gdi_mammothtank
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -1716,10 +1716,10 @@ mcv.n64nod:
 ####################################################################################################
 
 n64orca:
-	idle: orca
+	idle: td_gdi_orca
 		Facings: 32
 		UseClassicFacings: True
-	move: orca
+	move: td_gdi_orca
 		Start: 32
 		Facings: 32
 	icon: chromen64_orca

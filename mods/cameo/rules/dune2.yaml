@@ -1932,7 +1932,7 @@ dunespaceport:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Selectable:
 		Bounds: 4096, 2048
 	HitShape:

@@ -14,7 +14,7 @@ gdicarrier:
 		Name: GDI Super Carrier
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cncsyrd, eye
+		Prerequisites: ~cncsyrd, td_gdi_advancedcommunicationscenter
 		Queue: Naval, RANaval
 		Description: actor_japancarrier.description
 	Selectable:
@@ -48,7 +48,7 @@ gdicarrier:
 	RenderSprites:
 		PlayerPalette: player
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
 CNCPT:
 	Inherits: ^BoatUnit
@@ -86,11 +86,11 @@ CNCPT:
 	Armament@Ground:
 		Weapon: GunboatMissile
 		LocalOffset: 100,-100,0, 100,100,0
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Weapon: GunboatMissileAMT
 		LocalOffset: 100,-100,0, 100,100,0
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@DC1:
 		Weapon: DepthCharge
 		LocalOffset: 100,-100,0, 100,100,0
@@ -110,7 +110,7 @@ CNCPT:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
 CNCCA:
 	Inherits: ^BoatUnit
@@ -129,7 +129,7 @@ CNCCA:
 		Name: Railgun Battleship
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cncsyrd, hq.gdi
+		Prerequisites: ~cncsyrd, td_gdi_communicationscenter
 		Queue: Naval, RANaval
 		Description: actor_ca.description
 	Mobile:
@@ -203,7 +203,7 @@ CNCCA:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_highvelocitycannons, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
 LST:
 	Inherits: ^BoatUnit

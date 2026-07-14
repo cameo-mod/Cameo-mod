@@ -1,32 +1,32 @@
-MCV.GDI:
+td_gdi_mobileconstructionvehicle:
 	Inherits@mcv: ^TDMCV
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Tooltip:
 		Name: GDI Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~weap, fix.gdi
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_repairfacility
 	Transforms:
-		IntoActor: fact.gdi
+		IntoActor: td_gdi_constructionyard
 	RenderSprites:
 		Image: mcv
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_lightweightarmorplating
 
-HARV.GDI:
+td_gdi_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Buildable:
-		Prerequisites: ~weap, proc.gdi
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_tiberiumrefinery
 		Queue: Vehicle, RAVehicle
 		Description: template_harvester.description
 	Tooltip:
 		Name: GDI Tiberium Harvester
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_lightweightarmorplating
 
-APC:
+td_gdi_apc:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -42,13 +42,13 @@ APC:
 	Inherits@LightWeightArmorPlating: ^LightWeightArmorPlating
 	Inherits@decoration: ^GDIRankDecoration
 	Tooltip:
-		Name: GDI APC
-		OverrideActor: apc
+		Name: GDI td_gdi_apc
+		OverrideActor: td_gdi_apc
 	Valued:
 		Cost: 1200
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~weap, pyle, ~!upgdiassaultapc
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_barracks, ~!td_gdi_promotion_unlockassaultapc
 		Queue: Vehicle, RAVehicle
 		Description: actor_apc.description
 	Mobile:
@@ -81,7 +81,7 @@ APC:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Cargo:
-		InitialUnits: e1.gdi, e1.gdi, e1.gdi, e1.gdi, e2, e2, e3.gdi, e3.gdi
+		InitialUnits: td_gdi_minigunner, td_gdi_minigunner, td_gdi_minigunner, td_gdi_minigunner, td_gdi_grenadier, td_gdi_grenadier, td_gdi_rocketsoldier, td_gdi_rocketsoldier
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 	FireWarheadsOnDeath:
@@ -91,13 +91,13 @@ APC:
 	#	OwnerType: InternalName
 	#	EffectiveOwnerFromOwner: true
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
-		Image: apc
+		Image: td_gdi_apc
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-JEEP:
+td_gdi_humvee:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -115,7 +115,7 @@ JEEP:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~weap, ~!upgdihumvee
+		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_unlockhumveemkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Mobile:
@@ -134,21 +134,21 @@ JEEP:
 		Weapon: MachineGunH
 		LocalOffset: 171,0,85
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
 		Weapon: MachineGunAPH
 		LocalOffset: 171,0,85
 		MuzzleSequence: muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-MTNK:
+td_gdi_battletank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -168,7 +168,7 @@ MTNK:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~weap, ~!upgdipredator
+		Prerequisites: ~td_gdi_weaponsfactory, ~!td_gdi_promotion_unlockpredatortank
 		Queue: Vehicle, RAVehicle
 		Description: actor_mtnk.description
 	Mobile:
@@ -190,14 +190,14 @@ MTNK:
 		RecoilRecovery: 26
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_highvelocitycannons
+		RequiresCondition: !td_gdi_upgrade_highvelocitycannons
 	Armament@HV:
 		Weapon: 120mmHV
 		Recoil: 128
 		RecoilRecovery: 26
 		LocalOffset: 768,0,90
 		MuzzleSequence: muzzle
-		RequiresCondition: up_highvelocitycannons
+		RequiresCondition: td_gdi_upgrade_highvelocitycannons
 	Armament@Missile:
 		Weapon: M1A1Missiles
 		Recoil: 64
@@ -205,7 +205,7 @@ MTNK:
 		LocalOffset: 512,256,128
 		MuzzleSequence: muzzle
 		FireDelay: 10
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Weapon: M1A1MissilesAMT
 		Recoil: 64
@@ -213,13 +213,13 @@ MTNK:
 		LocalOffset: 512,256,128
 		MuzzleSequence: muzzle
 		FireDelay: 10
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@MachineGun:
 		Weapon: M1A1MachineGun
 		LocalOffset: 512,-128,128
 		MuzzleSequence: muzzle2
 		FireDelay: 4
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -232,14 +232,14 @@ MTNK:
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1280
-	RangeMultiplier@up_advancedmissiletargeting:
+	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
 		Modifier: 105
-	FirepowerMultiplier@up_armorpiercingbullets:
+	FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets:
 		Modifier: 105
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_advancedmissiletargeting, up_highvelocitycannons, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_lightweightarmorplating
 
-HTNK:
+td_gdi_mammothtank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -259,7 +259,7 @@ HTNK:
 		Cost: 1600
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap, eye, ~!upgdimammoth3
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_unlockmammothtankmk3
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:
@@ -285,14 +285,14 @@ HTNK:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_highvelocitycannons
+		RequiresCondition: !td_gdi_upgrade_highvelocitycannons
 	Armament@HV:
 		Weapon: 120mmDualHV
 		LocalOffset: 900,180,340, 900,-180,340
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_highvelocitycannons
+		RequiresCondition: td_gdi_upgrade_highvelocitycannons
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: MammothMissiles
@@ -301,7 +301,7 @@ HTNK:
 		Recoil: 40
 		RecoilRecovery: 20
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Name: secondary
 		Weapon: MammothMissilesAMT
@@ -310,7 +310,7 @@ HTNK:
 		Recoil: 40
 		RecoilRecovery: 20
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	AttackTurreted:
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
@@ -322,10 +322,10 @@ HTNK:
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1536, 1536, 0, -128
-	RangeMultiplier@up_advancedmissiletargeting:
+	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
 		Modifier: 105
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_highvelocitycannons, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
 td_gdi_boxer:
 	Inherits: ^Vehicle
@@ -347,7 +347,7 @@ td_gdi_boxer:
 		Cost: 1550
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~weap, hq.gdi
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_communicationscenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_heavyaatank.description
 	UpdatesPlayerStatistics:
@@ -393,9 +393,9 @@ td_gdi_boxer:
 	KeepsDistance:
 	RenderRangeCircle:
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment
 
-MLRS:
+td_gdi_mlrs:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -412,12 +412,12 @@ MLRS:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Tooltip:
-		Name: GDI MLRS
+		Name: GDI td_gdi_mlrs
 	Valued:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~weap, hq.gdi
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_communicationscenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_mlrs.description
 	Mobile:
@@ -438,12 +438,12 @@ MLRS:
 		Weapon: 227mm
 		LocalOffset: 213,128,0, 213,-128,0
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Weapon: 227mmAMT
 		LocalOffset: 213,128,0, 213,-128,0
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	AttackTurreted:
 	WithSpriteTurret:
 	WithMuzzleOverlay:
@@ -467,9 +467,9 @@ MLRS:
 		RequiresCondition: firing
 		Modifier: 50
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
-gdiarcher:
+td_gdi_archerartillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -485,7 +485,7 @@ gdiarcher:
 		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~weap, eye
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_mlrs.description
 	Mobile:
@@ -513,7 +513,7 @@ gdiarcher:
 		Weapon: ArcherArtilleryShell
 	RenderRangeCircle:
 	RenderSprites:
-		Image: gdiarcher
+		Image: td_gdi_archerartillery
 		PlayerPalette: player_rgba
 	GrantConditionOnAttack:
 		Condition: firing
@@ -528,9 +528,9 @@ gdiarcher:
 		RequiresCondition: firing
 		Modifier: 50
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_highvelocitycannons, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment
 
-gdiassaultapc:
+td_gdi_assaultapc:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -546,11 +546,11 @@ gdiassaultapc:
 	Valued:
 		Cost: 4500
 	Tooltip:
-		Name: Assault APC
+		Name: Assault td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~weap, eye, ~upgdiassaultapc
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockassaultapc
 		Description: template_opentopped.description
 	Mobile:
 		Speed: 100
@@ -564,7 +564,7 @@ gdiassaultapc:
 	Armor:
 		Type: Heavy
 	RenderSprites:
-		Image: gdiassaultapc
+		Image: td_gdi_assaultapc
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -575,7 +575,7 @@ gdiassaultapc:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
-		InitialUnits: e1.gdi,e2,e3.gdi,gdimissilesoldier,gdiempgrenadier,gdishotgunner,gdiofficer,gdisniper
+		InitialUnits: td_gdi_minigunner,td_gdi_grenadier,td_gdi_rocketsoldier,td_gdi_sonicmissilesoldier,td_gdi_empgrenadier,td_gdi_shotgunner,td_gdi_officer,td_gdi_heavysniper
 		ExclusiveDeploy: true
 		DeployType: Battlefortress
 	AttackOpenTopped:
@@ -589,22 +589,22 @@ gdiassaultapc:
 		Weapon: MachineGunHumvee2
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@AA:
 		Weapon: MachineGunHumvee2AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
 		Weapon: MachineGunHumvee2AP
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeAA:
 		Weapon: MachineGunHumvee2APAA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	RenderRangeCircle:
 	Voiced:
 		VoiceSet: BattleFortressVoice
@@ -613,10 +613,10 @@ gdiassaultapc:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeBig
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-gdihumvee:
-	Inherits: JEEP
+td_gdi_humveemkii:
+	Inherits: td_gdi_humvee
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@cargo: ^CargoVehicle
@@ -633,7 +633,7 @@ gdihumvee:
 		Name: Humvee Mk. II
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~weap, ~upgdihumvee
+		Prerequisites: ~td_gdi_weaponsfactory, ~td_gdi_promotion_unlockhumveemkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_jeep.description
 	Valued:
@@ -654,58 +654,58 @@ gdihumvee:
 		Weapon: MachineGunHumvee2
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@AA:
 		Weapon: MachineGunHumvee2AA
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
 		Weapon: MachineGunHumvee2AP
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeAA:
 		Weapon: MachineGunHumvee2APAA
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@Rockets:
 		Weapon: RocketsHumvee2
 		LocalOffset: 150,50,50
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@RocketsAA:
 		Weapon: RocketsHumvee2AA
 		LocalOffset: 150,50,50
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Weapon: RocketsHumvee2AMT
 		LocalOffset: 150,50,50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargetingAA:
 		Weapon: RocketsHumvee2AMTAA
 		LocalOffset: 150,50,50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	FirepowerMultiplier@Upgrade:
 		Modifier: 50
-	RangeMultiplier@up_advancedmissiletargeting:
+	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
 		Modifier: 105
 	RenderSprites:
 		Image: newhumvee
 	Cargo:
-		InitialUnits: e1.gdi, e1.gdi, e2, e3.gdi
+		InitialUnits: td_gdi_minigunner, td_gdi_minigunner, td_gdi_grenadier, td_gdi_rocketsoldier
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_advancedmissiletargeting, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-gdipredator:
+td_gdi_predatortank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -726,7 +726,7 @@ gdipredator:
 		Name: Predator Tank
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap, ~upgdipredator
+		Prerequisites: ~td_gdi_weaponsfactory, ~td_gdi_promotion_unlockpredatortank
 		Queue: Vehicle, RAVehicle
 		Description: actor_gdipredator.description
 	Mobile:
@@ -752,14 +752,14 @@ gdipredator:
 		Recoil: 175
 		RecoilRecovery: 50
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_highvelocitycannons
+		RequiresCondition: !td_gdi_upgrade_highvelocitycannons
 	Armament@Upgrade:
 		Weapon: GDIPredatorTankCannonHV
 		LocalOffset: 1000,0,300
 		Recoil: 175
 		RecoilRecovery: 50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_highvelocitycannons
+		RequiresCondition: td_gdi_upgrade_highvelocitycannons
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: GDIPredatorTankMissiles
@@ -768,7 +768,7 @@ gdipredator:
 		Recoil: 10
 		MuzzleSequence: muzzle
 		FireDelay: 10
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Name: secondary
 		Weapon: GDIPredatorTankMissilesAMT
@@ -777,13 +777,13 @@ gdipredator:
 		Recoil: 10
 		MuzzleSequence: muzzle
 		FireDelay: 10
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@MachineGun:
 		Weapon: GDIPredatorMachineGun
 		LocalOffset: 0,-10,350
 		MuzzleSequence: muzzle2
 		FireDelay: 4
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@Lights:
 		Weapon: GDIPredatorBlueLaser
 		LocalOffset: -75,300,300
@@ -795,17 +795,17 @@ gdipredator:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: gdipredator
+		Image: td_gdi_predatortank
 	Voiced:
 		VoiceSet: TSVehicle
-	RangeMultiplier@up_advancedmissiletargeting:
+	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
 		Modifier: 105
-	FirepowerMultiplier@up_armorpiercingbullets:
+	FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets:
 		Modifier: 105
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_advancedmissiletargeting, up_highvelocitycannons, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_lightweightarmorplating
 
-gdimammoth3:
+td_gdi_mammothtankmkiii:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -826,7 +826,7 @@ gdimammoth3:
 		Name: Mammoth Tank Mk. III
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap, eye, ~upgdimammoth3
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockmammothtankmk3
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:
@@ -852,14 +852,14 @@ gdimammoth3:
 		Recoil: 175
 		RecoilRecovery: 50
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_highvelocitycannons
+		RequiresCondition: !td_gdi_upgrade_highvelocitycannons
 	Armament@HV:
 		Weapon: MammothTank3CannonsHV
 		LocalOffset: 1200,200,150, 1200,-200,150
 		Recoil: 175
 		RecoilRecovery: 50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_highvelocitycannons
+		RequiresCondition: td_gdi_upgrade_highvelocitycannons
 	Armament@SECONDARY:
 		Name: secondary
 		Weapon: MammothTank3Missiles
@@ -867,7 +867,7 @@ gdimammoth3:
 		LocalYaw: -75, 75
 		Recoil: 10
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Name: secondary
 		Weapon: MammothTank3MissilesAMT
@@ -875,7 +875,7 @@ gdimammoth3:
 		LocalYaw: -50, 50
 		Recoil: 10
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	AttackTurreted:
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
@@ -884,15 +884,15 @@ gdimammoth3:
 	Selectable:
 		DecorationBounds: 1536, 1536
 	RenderSprites:
-		Image: gdimammoth3
+		Image: td_gdi_mammothtankmkiii
 	Voiced:
 		VoiceSet: TSVehicle
-	RangeMultiplier@up_advancedmissiletargeting:
+	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
 		Modifier: 105
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_highvelocitycannons, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-gdiexosuit:
+td_gdi_exosuit:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -914,7 +914,7 @@ gdiexosuit:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
-		Prerequisites: ~weap, eye, ~upgdihavoc
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockhavocandexosuit
 		Description: actor_exosuit.description
 	Mobile:
 		TurnSpeed: 40
@@ -958,16 +958,16 @@ gdiexosuit:
 		Bounds: 1280, 1280
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeMech
-	FirepowerMultiplier@up_cuttingedgeequipment:
+	FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 120
-	ReloadDelayMultiplier@up_cuttingedgeequipment:
+	ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
-	DamageMultiplier@up_cuttingedgeequipment:
+	DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_highvelocitycannons, up_cuttingedgeequipment, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment, td_gdi_upgrade_lightweightarmorplating
 
-gdirig:
+td_gdi_defenserig:
 	Inherits: ^Tank
 	Inherits@Template: ^EpicVehicleTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
@@ -992,7 +992,7 @@ gdirig:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 60
-		Prerequisites: ~weap, eye, upgdidefenserig
+		Prerequisites: ~td_gdi_weaponsfactory, td_gdi_advancedcommunicationscenter, td_gdi_promotion_unlockgdidefenserig
 		Queue: Vehicle, RAVehicle
 		Description: actor_htnk.description
 	Mobile:
@@ -1130,7 +1130,7 @@ gdirig:
 		RecoilRecovery: 32
 		MuzzleSequence: muzzle
 		ForceTargetRelationships: Enemy, Neutral
-		RequiresCondition: !up_advancedmissiletargeting && deployed
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting && deployed
 	Armament@AdvancedMissileTargeting:
 		Turret: missilepod
 		Weapon: GDIRigMissilePodAMT
@@ -1139,7 +1139,7 @@ gdirig:
 		RecoilRecovery: 32
 		MuzzleSequence: muzzle
 		ForceTargetRelationships: Enemy, Neutral
-		RequiresCondition: up_advancedmissiletargeting && deployed
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting && deployed
 	FirepowerMultiplier@deployed:
 		Modifier: 33
 		RequiresCondition: deployed
@@ -1246,4 +1246,4 @@ gdirig:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_advancedmissiletargeting, up_lightweightarmorplating
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_lightweightarmorplating

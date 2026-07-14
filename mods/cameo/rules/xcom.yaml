@@ -157,7 +157,7 @@ xcomassaultranger:
 	Power:
 		Amount: -1
 	RenderSprites:
-		Image: gdishotgunner
+		Image: td_gdi_shotgunner
 ShotgunUpgrade:
 	Tooltip:
 		Name: Shotgun Upgrade
@@ -169,7 +169,7 @@ ShotgunUpgrade:
 	Valued:
 		Cost: 700
 	RenderSprites:
-		Image: gdishotgunner
+		Image: td_gdi_shotgunner
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: ShotgunUpgrade
@@ -243,7 +243,7 @@ GrenadeUpgrade:
 	Valued:
 		Cost: 1800
 	RenderSprites:
-		Image: e2
+		Image: td_gdi_grenadier
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: GrenadeUpgrade
@@ -412,7 +412,7 @@ RocketLauncherUpgrade:
 	Valued:
 		Cost: 2600
 	RenderSprites:
-		Image: gdimissilesoldier
+		Image: td_gdi_sonicmissilesoldier
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: RocketLauncherUpgrade

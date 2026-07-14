@@ -910,7 +910,7 @@ AFLD.ANSWER:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Selectable:
 		Bounds: 4096, 2048
 	HitShape:
@@ -990,7 +990,7 @@ WEAP.TOMORROW:
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1057,14 +1057,14 @@ WEAP.TOMORROW:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTUSA:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1131,14 +1131,14 @@ WEAP.DTUSA:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTRUSSIA:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1205,14 +1205,14 @@ WEAP.DTRUSSIA:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 WEAP.DTJAPAN:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -1279,7 +1279,7 @@ WEAP.DTJAPAN:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: WEAP
+		Image: td_gdi_weaponsfactory
 DTNUKE:
 	Inherits: NUKE
 	RenderSprites:
@@ -2134,12 +2134,12 @@ SAM.TOMORROW:
 	RenderSprites:
 		Image: td_nod_samsite
 GTWR.ANSWER:
-	Inherits: GTWR
+	Inherits: td_gdi_guardtower
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: GTWR
+		Image: td_gdi_guardtower
 	Armament:
 		Weapon: DTHighV
 	RangeMultiplier@LongRangeGun:
@@ -2866,10 +2866,10 @@ dtapc:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Rocket APC
+		Name: Rocket td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks
@@ -2915,7 +2915,7 @@ dtapc:
 		Weapon: UnitExplodeBig
 		EmptyWeapon: UnitExplodeBig
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtapc
 	WithCargoPipsDecoration:
@@ -2931,9 +2931,9 @@ ftnk.tomorrow:
 	-MapEditorData:
 
 mtnk.tomorrow:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	RenderSprites:
-		Image: MTNK
+		Image: td_gdi_battletank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 	-MapEditorData:
@@ -3203,7 +3203,7 @@ dtorca.husk:
 apc.answer:
 	Inherits: RAAPC
 	RenderSprites:
-		Image: APC
+		Image: td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: barracks
@@ -3297,7 +3297,7 @@ dtltnk2:
 		Prerequisites: dtshop
 		InitialLevels: 1
 jeep.dtusa:
-	Inherits: JEEP
+	Inherits: td_gdi_humvee
 	RenderSprites:
 		Image: JEEP.dtusa
 	Buildable:
@@ -3318,7 +3318,7 @@ jeep.dtusa:
 apc.dtusa:
 	Inherits: RAAPC
 	RenderSprites:
-		Image: APC
+		Image: td_gdi_apc
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: barracks, dtshop
@@ -3443,7 +3443,7 @@ dtstnk:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtstnk
 	WithCargoPipsDecoration:
@@ -3459,7 +3459,7 @@ mssm.dtrussia:
 		Description: Long-range rocket artillery.\n  Strong vs Buildings\n  Weak vs Aircraft
 		Icon: icon
 dthtnk:
-	Inherits: HTNK
+	Inherits: td_gdi_mammothtank
 	Tooltip:
 		Name: Russian Tank
 	UpdatesPlayerStatistics:
@@ -3496,7 +3496,7 @@ dtstnk.dtrussia.e2:
 	Buildable:
 		Prerequisites: barracks, ~botplayer
 	Cargo:
-		InitialUnits: e1, e1, e2, e2, e3
+		InitialUnits: e1, e1, td_gdi_grenadier, td_gdi_grenadier, e3
 	ProductionCostMultiplier:
 		Multiplier: 150
 	AutoDeployer:
@@ -3523,7 +3523,7 @@ tran.dtrussia.e2:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: barracks, ~botplayer
 	Cargo:
-		InitialUnits: e2, e2, e2, e2, e3, e3, e2, e2, e1, e1
+		InitialUnits: td_gdi_grenadier, td_gdi_grenadier, td_gdi_grenadier, td_gdi_grenadier, e3, e3, td_gdi_grenadier, td_gdi_grenadier, e1, e1
 	ProductionCostMultiplier:
 		Multiplier: 300
 
@@ -3592,10 +3592,10 @@ dtapc2:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Tear Gas APC
+		Name: Tear Gas td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks
@@ -3633,7 +3633,7 @@ dtapc2:
 		Weapon: UnitExplodeBig
 		EmptyWeapon: UnitExplodeBig
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	RenderSprites:
 		Image: dtapc2
 	WithCargoPipsDecoration:

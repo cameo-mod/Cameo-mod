@@ -364,7 +364,7 @@ op2_commonore_beacon_3bar:
 ^op2base_factory_vehicle:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x3Shape
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@STATUS: ^OP2Building
 	# Selectable:
 	# 	Bounds: 4096,3072

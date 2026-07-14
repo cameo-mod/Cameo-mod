@@ -1125,7 +1125,7 @@ SCFACTORY:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Tooltip:
 		Name: Weapons Factory
 	Power:
@@ -1828,7 +1828,7 @@ SCROBOTICSFACILITY:
 	Inherits: ^BaseBuildingProtoss
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@explode: ^BuildingExplodeProtoss
 	Inherits@shieldgenerator: ^ProtossPersonalShield
 	Tooltip:
@@ -3266,7 +3266,7 @@ SCINFESTEDCOMMANDCENTER:
 	Inherits: ^BaseBuildingZerg
 	Inherits@shape: ^2x2Shape
 	Inherits@supply: ^SCUnitProduction
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Tooltip:
 		Name: Infested Command Center
 	Building:

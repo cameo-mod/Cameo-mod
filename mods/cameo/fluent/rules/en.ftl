@@ -1106,7 +1106,7 @@ actor_forgotten_tiberiumharvester =
       Unarmed
 
 actor_forgotten_apctruck =
-   .name = APC Truck
+   .name = td_gdi_apc Truck
    .description = Armored transport truck for six infantry.
       Its cannon reaches ground and air targets.
       Strong vs Infantry
@@ -1116,7 +1116,7 @@ actor_forgotten_missilevan =
    .name = Missile Van
    .description = Fragile van hurling missiles from extreme range.
       Chemical Weapons research loads chemical missiles.
-      Replaced by the MLRS after that promotion.
+      Replaced by the td_gdi_mlrs after that promotion.
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
@@ -1145,10 +1145,10 @@ actor_forgotten_scoopertank =
       Weak vs Aircraft
 
 actor_forgotten_mlrs =
-   .name = Forgotten MLRS
+   .name = Forgotten td_gdi_mlrs
    .description = Mutant rocket artillery.
       Chemical Weapons research loads chemical rockets.
-      Requires the MLRS promotion and replaces the Missile Van.
+      Requires the td_gdi_mlrs promotion and replaces the Missile Van.
       Strong vs Infantry, Buildings
       Weak vs Tanks, Aircraft
 
@@ -1434,16 +1434,16 @@ actor_forgotten_promotion_scoopertank =
       Follows the Warrior Tank promotion.
 
 actor_forgotten_promotion_mlrs =
-   .name = Unlock MLRS
+   .name = Unlock td_gdi_mlrs
    .description = Promotion Upgrade (Only affects units of own faction)
-      Allows construction of the Forgotten MLRS rocket artillery, replacing the Missile Van.
+      Allows construction of the Forgotten td_gdi_mlrs rocket artillery, replacing the Missile Van.
       Follows the Scooper Tank promotion.
 
 actor_forgotten_promotion_experimentalmammothtank =
    .name = Unlock Experimental Mammoth Tank
    .description = Promotion Upgrade (Only affects units of own faction)
       Allows construction of the Experimental Mammoth Tank, a colossal mammoth prototype.
-      Follows the MLRS promotion.
+      Follows the td_gdi_mlrs promotion.
 
 actor_ts_nod_missilesilo =
    .name = Missile Silo
@@ -2001,7 +2001,7 @@ upgrade_sonicweaponry =
 upgrade_tsprojectileimprovements =
    .name = Projectile Improvements
    .description = Tech Upgrade (Only affects units of own faction)
-      Increases Damage and Range of Enforcers, Pitbulls, Hover MLRS and td_nod_samsite Towers by 20%
+      Increases Damage and Range of Enforcers, Pitbulls, Hover td_gdi_mlrs and td_nod_samsite Towers by 20%
 
 upgrade_mechengineering =
    .name = ra1_allies_mechanic Engineering

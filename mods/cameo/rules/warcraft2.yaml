@@ -35,7 +35,7 @@ World:
 		InternalName: orc2
 		Game: Warcraft 2
 		Side: Warcraft 2
-		Description: Orc\nLeaders of the Horde\nBrutish and crafty.\nSupport Powers: Eye of Kilrogg, Death and Decay
+		Description: Orc\nLeaders of the Horde\nBrutish and crafty.\nSupport Powers: td_gdi_advancedcommunicationscenter of Kilrogg, Death and Decay
 		Selectable: True
 	FactionCA@RandomWC2:
 		Name: Random WC2
@@ -1096,7 +1096,7 @@ Player:
 	Inherits@shape: ^3x3Shape
 	Inherits@exits: ^WC2Exits_3x3
 	Inherits@wcprod: ^WCUnitProduction
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
 		BuildPaletteOrder: 16
 	Building:
@@ -6574,7 +6574,7 @@ wc2_orc_eye_of_kilrogg:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Eye of Kilrogg
+		Name: td_gdi_advancedcommunicationscenter of Kilrogg
 	Buildable:
 		BuildPaletteOrder: 20
 		Prerequisites: ~disabled
@@ -6615,7 +6615,7 @@ wc2_support_orc_eye_of_kilrogg:
 	Health:
 		HP: 200000
 	Tooltip:
-		Name: Eye of Kilrogg
+		Name: td_gdi_advancedcommunicationscenter of Kilrogg
 	Aircraft:
 		CruiseAltitude: 2560
 		TurnSpeed: 28

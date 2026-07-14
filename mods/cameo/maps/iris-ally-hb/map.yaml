@@ -493,10 +493,10 @@ Actors:
 	Actor408: brik
 		Owner: Neutral
 		Location: 22,74
-	Actor409: gtwr
+	Actor409: td_gdi_guardtower
 		Owner: NewHopeOne
 		Location: 18,73
-	Actor410: gtwr
+	Actor410: td_gdi_guardtower
 		Owner: NewHopeOne
 		Location: 22,73
 	Actor412: brik
@@ -536,7 +536,7 @@ Actors:
 	Actor435: tc02
 		Owner: Neutral
 		Location: 81,73
-	Actor438: fix.gdi
+	Actor438: td_gdi_repairfacility
 		Owner: NewHopeOne
 		Location: 6,80
 	Actor439: brik
@@ -583,7 +583,7 @@ Actors:
 	Actor456: brik
 		Owner: Neutral
 		Location: 39,81
-	Actor457: gtwr
+	Actor457: td_gdi_guardtower
 		Owner: NewHopeTwo
 		Location: 39,80
 	Actor459: ra1_allies_alliedartillery
@@ -618,14 +618,14 @@ Actors:
 	Actor467: brik
 		Owner: Neutral
 		Location: 42,81
-	Actor468: gtwr
+	Actor468: td_gdi_guardtower
 		Owner: NewHopeTwo
 		Location: 45,82
-	Actor469: mtnk
+	Actor469: td_gdi_battletank
 		Owner: NewHopeTwo
 		Facing: 896
 		Location: 43,80
-	Actor470: htnk
+	Actor470: td_gdi_mammothtank
 		Owner: NewHopeTwo
 		Facing: 880
 		Location: 46,82
@@ -656,10 +656,10 @@ Actors:
 	Actor476: brik
 		Owner: Neutral
 		Location: 48,84
-	Actor477: gtwr
+	Actor477: td_gdi_guardtower
 		Owner: NewHopeTwo
 		Location: 49,84
-	Actor478: mtnk
+	Actor478: td_gdi_battletank
 		Owner: NewHopeTwo
 		Facing: 888
 		Location: 50,84
@@ -713,7 +713,7 @@ Actors:
 	Actor491: mine
 		Owner: Neutral
 		Location: 6,90
-	Actor493: pyle
+	Actor493: td_gdi_barracks
 		Owner: NewHopeOne
 		Location: 22,85
 	Actor494: brik
@@ -731,7 +731,7 @@ Actors:
 	Actor498: brik
 		Owner: Neutral
 		Location: 22,88
-	Actor499: weap
+	Actor499: td_gdi_weaponsfactory
 		Owner: NewHopeOne
 		Location: 25,85
 	Actor500: brik
@@ -776,7 +776,7 @@ Actors:
 	Actor513: brik
 		Owner: Neutral
 		Location: 38,90
-	Actor514: atwr
+	Actor514: td_gdi_advancedguardtower
 		Owner: NewHopeTwo
 		Location: 45,85
 	Actor515: brik
@@ -806,7 +806,7 @@ Actors:
 	Actor523: brik
 		Owner: Neutral
 		Location: 48,85
-	Actor525: atwr
+	Actor525: td_gdi_advancedguardtower
 		Owner: NewHopeTwo
 		Location: 57,88
 	Actor526: ra1_allies_alliedartillery
@@ -831,7 +831,7 @@ Actors:
 	Actor533: mine
 		Owner: Neutral
 		Location: 84,86
-	Actor534: hpad.gdi
+	Actor534: td_gdi_helipad
 		Owner: NewHopeOne
 		Location: 4,95
 	Actor535: brik
@@ -849,7 +849,7 @@ Actors:
 	Actor539: brik
 		Owner: Neutral
 		Location: 3,96
-	Actor540: hpad.gdi
+	Actor540: td_gdi_helipad
 		Location: 7,95
 		Owner: NewHopeTwo
 	Actor541: brik
@@ -870,21 +870,21 @@ Actors:
 	Actor546: brik
 		Owner: Neutral
 		Location: 7,94
-	Actor547: hq.gdi
+	Actor547: td_gdi_communicationscenter
 		Owner: NewHopeOne
 		Location: 17,91
-	Actor548: proc.gdi
+	Actor548: td_gdi_tiberiumrefinery
 		Owner: NewHopeOne
 		Location: 12,93
-	Actor549: mlrs
+	Actor549: td_gdi_mlrs
 		Owner: NewHopeOne
 		Facing: 515
 		Location: 23,91
-	Actor550: mtnk
+	Actor550: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 22,92
-	Actor551: mtnk
+	Actor551: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 20,92
@@ -948,23 +948,23 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 23,93
-	Actor564: htnk
+	Actor564: td_gdi_mammothtank
 		Owner: NewHopeOne
 		Location: 21,91
 		Facing: 525
-	Actor565: mlrs
+	Actor565: td_gdi_mlrs
 		Owner: NewHopeOne
 		Location: 25,91
 		Facing: 515
-	Actor566: mtnk
+	Actor566: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 28,92
-	Actor567: mtnk
+	Actor567: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 26,92
-	Actor568: mtnk
+	Actor568: td_gdi_battletank
 		Owner: NewHopeOne
 		Facing: 507
 		Location: 24,92
@@ -1028,11 +1028,11 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 27,93
-	Actor582: htnk
+	Actor582: td_gdi_mammothtank
 		Owner: NewHopeOne
 		Location: 27,91
 		Facing: 525
-	Actor583: weap
+	Actor583: td_gdi_weaponsfactory
 		Owner: NewHopeTwo
 		Location: 32,91
 	Actor584: brik
@@ -1050,7 +1050,7 @@ Actors:
 	Actor588: brik
 		Owner: Neutral
 		Location: 31,91
-	Actor589: pyle
+	Actor589: td_gdi_barracks
 		Owner: NewHopeTwo
 		Location: 36,91
 	Actor590: brik
@@ -1072,7 +1072,7 @@ Actors:
 		Owner: Neutral
 		Health: 10
 		Location: 41,96
-	Actor600: proc.gdi
+	Actor600: td_gdi_tiberiumrefinery
 		Owner: NewHopeTwo
 		Location: 57,95
 	Actor601: mine
@@ -1129,23 +1129,23 @@ Actors:
 	Actor621: nuk2
 		Owner: NewHopeOne
 		Location: 25,99
-	Actor622: mlrs
+	Actor622: td_gdi_mlrs
 		Facing: 515
 		Owner: NewHopeTwo
 		Location: 33,97
-	Actor623: mlrs
+	Actor623: td_gdi_mlrs
 		Facing: 515
 		Owner: NewHopeTwo
 		Location: 35,97
-	Actor624: mtnk
+	Actor624: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 30,98
-	Actor625: mtnk
+	Actor625: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 32,98
-	Actor626: mtnk
+	Actor626: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 34,98
@@ -1239,7 +1239,7 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 33,98
-	Actor645: htnk
+	Actor645: td_gdi_mammothtank
 		Owner: NewHopeTwo
 		Location: 31,97
 		Facing: 525
@@ -1249,11 +1249,11 @@ Actors:
 	Actor647: nuk2
 		Owner: NewHopeTwo
 		Location: 38,102
-	Actor648: mtnk
+	Actor648: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 36,98
-	Actor649: mtnk
+	Actor649: td_gdi_battletank
 		Facing: 507
 		Owner: NewHopeTwo
 		Location: 38,98
@@ -1287,7 +1287,7 @@ Actors:
 		Facing: 384
 		SubCell: 2
 		Location: 37,99
-	Actor656: htnk
+	Actor656: td_gdi_mammothtank
 		Owner: NewHopeTwo
 		Location: 37,97
 		Facing: 525
@@ -2281,7 +2281,7 @@ Actors:
 	Actor901: brik
 		Owner: Neutral
 		Location: 32,4
-	PlayerOneMCV: fact.gdi
+	PlayerOneMCV: td_gdi_constructionyard
 		Faction: Random
 		Owner: NewHopeOne
 		Location: 15,88
@@ -2349,30 +2349,30 @@ Actors:
 	SpawnSeven: waypoint
 		Owner: Neutral
 		Location: 58,131
-	PlayerTwoMCV: fact.gdi
+	PlayerTwoMCV: td_gdi_constructionyard
 		Faction: Random
 		Owner: NewHopeTwo
 		Location: 43,94
-	Actor598: hq.gdi
+	Actor598: td_gdi_communicationscenter
 		Owner: NewHopeTwo
 		Location: 46,99
-	Actor946: mlrs
+	Actor946: td_gdi_mlrs
 		Owner: NewHopeOne
 		Location: 20,76
 		Facing: 0
-	Actor947: harv.gdi
+	Actor947: td_gdi_tiberiumharvester
 		Owner: NewHopeOne
 		Facing: 384
 		Location: 5,86
-	Actor948: harv.gdi
+	Actor948: td_gdi_tiberiumharvester
 		Owner: NewHopeOne
 		Facing: 384
 		Location: 10,91
-	Actor949: harv.gdi
+	Actor949: td_gdi_tiberiumharvester
 		Facing: 384
 		Owner: NewHopeTwo
 		Location: 64,94
-	Actor950: harv.gdi
+	Actor950: td_gdi_tiberiumharvester
 		Facing: 384
 		Owner: NewHopeTwo
 		Location: 69,99
@@ -2380,16 +2380,16 @@ Actors:
 		Owner: Nitro
 		Facing: 384
 		Location: 51,78
-	Actor952: atwr
+	Actor952: td_gdi_advancedguardtower
 		Owner: NewHopeTwo
 		Location: 41,83
-	Actor953: atwr
+	Actor953: td_gdi_advancedguardtower
 		Owner: NewHopeOne
 		Location: 18,75
-	Actor954: atwr
+	Actor954: td_gdi_advancedguardtower
 		Owner: NewHopeOne
 		Location: 22,75
-	Actor955: mlrs
+	Actor955: td_gdi_mlrs
 		Owner: NewHopeOne
 		Location: 24,90
 		Facing: 525
@@ -2442,14 +2442,14 @@ Actors:
 	Actor1012: mammothbunker
 		Owner: NewHopeTwo
 		Location: 45,91
-	Actor1013: fix.gdi
+	Actor1013: td_gdi_repairfacility
 		Owner: NewHopeTwo
 		Location: 48,94
-	Actor1014: mlrs
+	Actor1014: td_gdi_mlrs
 		Owner: NewHopeTwo
 		Location: 34,96
 		Facing: 518
-	Actor1015: mlrs
+	Actor1015: td_gdi_mlrs
 		Owner: NewHopeTwo
 		Location: 43,84
 		Facing: 900
@@ -2473,11 +2473,11 @@ Actors:
 		Owner: Neutral
 		Location: 19,95
 		Health: 21
-	Actor956: mtnk
+	Actor956: td_gdi_battletank
 		Owner: NewHopeOne
 		Location: 17,73
 		Facing: 0
-	Actor965: mtnk
+	Actor965: td_gdi_battletank
 		Owner: NewHopeOne
 		Location: 23,73
 		Facing: 0

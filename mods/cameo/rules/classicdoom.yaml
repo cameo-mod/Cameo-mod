@@ -541,7 +541,7 @@ WOLFWEAP:
 	Inherits@shape: ^3x2Shape
 	Inherits@CPQWP: ^CPQConditionWithPrimary
 	Inherits@prod: ^ProducesUnits
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 80

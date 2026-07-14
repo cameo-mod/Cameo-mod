@@ -3988,7 +3988,7 @@ wh40ksentinel:
 			leange1: ifv-mg
 			wh40kguard: ifv-mg
 			wh40kkars: ifv-mg
-			e2: ifv-cannon
+			td_gdi_grenadier: ifv-cannon
 			ra1_soviet_grenadier: ifv-cannon
 			ts_gdi_discthrower: ifv-cannon
 			tse2para: ifv-cannon
@@ -6525,7 +6525,7 @@ wh40krhino:
 	Power:
 		Amount: -25
 	Tooltip:
-		Name: Rhino APC
+		Name: Rhino td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -10913,7 +10913,7 @@ wh40kchaosrhino:
 	Power:
 		Amount: -25
 	Tooltip:
-		Name: Rhino APC
+		Name: Rhino td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

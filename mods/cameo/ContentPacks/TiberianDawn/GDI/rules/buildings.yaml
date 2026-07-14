@@ -1,30 +1,30 @@
-FACT.GDI:
+td_gdi_constructionyard:
 	Inherits: ^FACT
 	Tooltip:
 		Name: GDI Construction Yard
 	Transforms:
-		IntoActor: mcv.gdi
+		IntoActor: td_gdi_mobileconstructionvehicle
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: fact
-	ProvidesPrerequisite@fact.gdi:
-		Prerequisite: fact.gdi
+	ProvidesPrerequisite@td_gdi_constructionyard:
+		Prerequisite: td_gdi_constructionyard
 	ProvidesPrerequisite@sandbagbarrier:
 		Prerequisite: sandbagbarrier
 	RenderSprites:
 		Image: gdifact
 
-PROC.GDI:
+td_gdi_tiberiumrefinery:
 	Inherits: ^TDPROC
 	Tooltip:
 		Name: GDI Tiberium Refinery
 	Buildable:
-		Prerequisites: ~fact.gdi, nuke
+		Prerequisites: ~td_gdi_constructionyard, nuke
 	FreeActor@Normal:
-		Actor: HARV.GDI
+		Actor: td_gdi_tiberiumharvester
 		SpawnOffset: 1,2
 		Facing: 256
 
-PYLE:
+td_gdi_barracks:
 	Inherits: ^TDBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@ra1_soviet_barracks: ^IsBarrack
@@ -34,7 +34,7 @@ PYLE:
 	ProvidesPrerequisite:
 		Prerequisite: barracks
 	Buildable:
-		Prerequisites: ~fact.gdi, nuke
+		Prerequisites: ~td_gdi_constructionyard, nuke
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -51,11 +51,11 @@ PYLE:
 	ProvidesPrerequisite:
 		Prerequisite: cncbarracks
 
-WEAP:
+td_gdi_weaponsfactory:
 	Inherits: ^TDBuilding
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^TDSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,1024,0, 0,-1024,0
 		Type: Rectangle
@@ -68,7 +68,7 @@ WEAP:
 	ProvidesPrerequisite:
 		Prerequisite: vehicleproduction
 	Buildable:
-		Prerequisites: ~fact.gdi, proc.gdi
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_tiberiumrefinery
 	Building:
 		Footprint: xxx === ===
 		Dimensions: 3,3
@@ -87,7 +87,7 @@ WEAP:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 
-HPAD.GDI:
+td_gdi_helipad:
 	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -95,7 +95,7 @@ HPAD.GDI:
 	Tooltip:
 		Name: GDI Helipad
 	Buildable:
-		Prerequisites: ~fact.gdi, hq.gdi
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_communicationscenter
 	Building:
 		Footprint: xx xx ==
 		Dimensions: 2,3
@@ -112,7 +112,7 @@ HPAD.GDI:
 	RenderSprites:
 		Image: hpad
 
-HQ.GDI:
+td_gdi_communicationscenter:
 	Inherits: ^TDBuilding
 	Inherits@radar: ^RadarBuilding
 	# Inherits@tech: ^IsTechnoBuilding
@@ -132,7 +132,7 @@ HQ.GDI:
 	Tooltip:
 		Name: GDI Communications Center
 	Buildable:
-		Prerequisites: ~fact.gdi, proc.gdi
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_tiberiumrefinery
 		Description: actor_hq_gdi.description
 	ProvidesPrerequisite@anytdhq:
 		Prerequisite: anytdhq
@@ -140,7 +140,7 @@ HQ.GDI:
 	AirstrikePower:
 		PauseOnCondition: disabled
 		Prerequisites:
-			1: up_a10airstrike
+			1: td_gdi_upgrade_unlocka10airstrike
 		Icons:
 			1: airstrike
 		ChargeInterval: 7500
@@ -176,7 +176,7 @@ HQ.GDI:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-FIX.GDI:
+td_gdi_repairfacility:
 	Inherits: ^TDBuilding
 	Inherits@sell: ^TDSpawnActorsOnSell
 	Inherits@shape: ^3x3Shape
@@ -187,7 +187,7 @@ FIX.GDI:
 		Type: Polygon
 			Points: -1536,-256, -341,-940, 341,-940, 1536,-256, 1536,341, 341,1110, -341,1110, -1536,341
 	Buildable:
-		Prerequisites: ~fact.gdi, weap
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_weaponsfactory
 	Building:
 		Footprint: _+_ +++ _+_
 		Dimensions: 3,3
@@ -205,9 +205,9 @@ FIX.GDI:
 	Tooltip:
 		Name: GDI Repair Facility
 	ProvidesPrerequisite:
-		Prerequisite: fix.gdi
+		Prerequisite: td_gdi_repairfacility
 
-EYE:
+td_gdi_advancedcommunicationscenter:
 	Inherits: ^TDBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^TDSpawnActorsOnSell
@@ -224,7 +224,7 @@ EYE:
 	Buildable:
 		-BuildLimit:
 		BuildPaletteOrder: 100
-		Prerequisites: ~fact.gdi, hq.gdi
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_communicationscenter
 		Queue: Building, RABuilding
 		Description: actor_eye.description
 	Building:
@@ -287,11 +287,11 @@ EYE:
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			eye: ionc
+			td_gdi_advancedcommunicationscenter: ionc
 		Requirements:
-			eye: !build-incomplete && !ionc
+			td_gdi_advancedcommunicationscenter: !build-incomplete && !ionc
 
-eye.ionc:
+td_gdi_ioncannonuplink:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Ion Cannon Uplink
@@ -302,16 +302,16 @@ eye.ionc:
 		BuildPaletteOrder: 100
 		BuildDuration: 1500
 		BuildDurationModifier: 100
-		Prerequisites: ~fact.gdi, eye, !ionc, ~techlevel.superweapons
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_advancedcommunicationscenter, !ionc, ~techlevel.superweapons
 		Description: actor_eye.ionc-description
 	Power:
 		Amount: -100
 	Plug:
-		Type: eye
+		Type: td_gdi_advancedcommunicationscenter
 	RenderSprites:
-		Image: eye.ionc
+		Image: td_gdi_ioncannonuplink
 
-GTWR:
+td_gdi_guardtower:
 	Inherits: ^TDDefense
 	Inherits@Template: ^BasicDefenseTemplate
 	Inherits@muzzleglow: ^MuzzleGlowCannon
@@ -330,7 +330,7 @@ GTWR:
 		Name: GDI Guard Tower
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~fact.gdi, pyle
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_barracks
 		Queue: Defence, RADefence
 		Description: template_anti_infantry_defense.description
 	Building:
@@ -342,12 +342,12 @@ GTWR:
 		Weapon: HighV
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
 		Weapon: HighVAP
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 	BodyOrientation:
@@ -360,7 +360,7 @@ GTWR:
 	RevealsShroud:
 		Range: 6720
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
 
 td_gdi_skyshield:
 	Inherits: ^Defense
@@ -380,7 +380,7 @@ td_gdi_skyshield:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 50
-		Prerequisites: ~fact.gdi, hq.gdi
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_communicationscenter
 		Description: actor_agun.description
 	Selectable:
 		Bounds: 1280, 1440, 0, -240
@@ -414,9 +414,9 @@ td_gdi_skyshield:
 	DetectCloaked:
 		Range: 6900
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_highvelocitycannons, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_highvelocitycannons, td_gdi_upgrade_cuttingedgeequipment
 
-ATWR:
+td_gdi_advancedguardtower:
 	Inherits: ^TDDefense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
@@ -436,7 +436,7 @@ ATWR:
 		Name: Advanced Guard Tower
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~fact.gdi, eye
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_advancedcommunicationscenter
 		Queue: Defence, RADefence
 		Description: actor_atwr.description
 	Selectable:
@@ -454,13 +454,13 @@ ATWR:
 		LocalOffset: 256,128,0, 256,-128,0
 		LocalYaw: -100,100
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting:
 		Weapon: TowerMissileAMT
 		LocalOffset: 256,128,0, 256,-128,0
 		LocalYaw: -50,50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	AttackTurreted:
 		RequiresCondition: !build-incomplete
 		PauseOnCondition: lowpower || disabled
@@ -474,14 +474,14 @@ ATWR:
 	DetectCloaked:
 		Range: 4386
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
 CNCSYRD:
 	Inherits: RA1SYRD
 	Tooltip:
 		Name: GDI Naval Yard
 	Buildable:
-		Prerequisites: ~fact.gdi, proc.gdi, ~globalnaval
+		Prerequisites: ~td_gdi_constructionyard, td_gdi_tiberiumrefinery, ~globalnaval
 	ProvidesPrerequisite@buildingname:
 	GivesBuildableArea: ##########
 		AreaTypes: building, cityi

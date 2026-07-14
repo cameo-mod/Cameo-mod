@@ -16,13 +16,13 @@ World:
 		ClassName: Light Support
 		Factions: camea
 		BaseActor: mcv.camea
-		SupportActors: e1,e1,e1,e1,e1,e3,e3,jeep
+		SupportActors: e1,e1,e1,e1,e1,e3,e3,td_gdi_humvee
 	StartingUnits@heavycamea:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: camea
 		BaseActor: mcv.camea
-		SupportActors: e1,e1,e1,e1,e3,e3,jeep,mtnk,mtnk
+		SupportActors: e1,e1,e1,e1,e3,e3,td_gdi_humvee,td_gdi_battletank,td_gdi_battletank
 
 Player:
 	ExternalCondition@BuildingsOwned:
@@ -37,7 +37,7 @@ Player:
 ##############################################
 
 mcv.camea:
-	Inherits@MCV: MCV.GDI
+	Inherits@MCV: td_gdi_mobileconstructionvehicle
 	Valued:
 		Cost: 2000
 	Transforms:
@@ -708,13 +708,13 @@ HOSP.camea:
 	-WithDeathAnimation:
 
 ATWR.camea:
-	Inherits: ATWR
+	Inherits: td_gdi_advancedguardtower
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: vehicleproduction, ~techlevel.high
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: ATWR
+		Image: td_gdi_advancedguardtower
 
 OBLI.camea:
 	Inherits: td_nod_obeliskoflight
@@ -865,12 +865,12 @@ MECH.camea:
 		Image: ra1_allies_mechanic
 
 JEEP.camea:
-	Inherits: JEEP
+	Inherits: td_gdi_humvee
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: JEEP
+		Image: td_gdi_humvee
 
 BIKE.camea:
 	Inherits: td_nod_reconbike
@@ -889,12 +889,12 @@ BIKE.camea:
 		Image: ra1_allies_alliedlighttank
 
 MTNK.camea:
-	Inherits: MTNK
+	Inherits: td_gdi_battletank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: MTNK
+		Image: td_gdi_battletank
 
 3TNK.camea:
 	Inherits: ra1_soviet_heavytank
@@ -921,12 +921,12 @@ FTNK.camea:
 		Image: td_nod_flametank
 
 HTNK.camea:
-	Inherits: HTNK
+	Inherits: td_gdi_mammothtank
 	Buildable:
 		Prerequisites: stek.camea
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: HTNK
+		Image: td_gdi_mammothtank
 
 STNK.camea:
 	Inherits: td_nod_stealthtank
@@ -995,7 +995,7 @@ MSSM.camea:
 		Queue: Vehicle, RAVehicle
 		Icon: icon
 	RenderSprites:
-		Image: mlrs
+		Image: td_gdi_mlrs
 
 RAHELI.camea:
 	Inherits: ra1_allies_longbow
@@ -1014,12 +1014,12 @@ HIND.camea:
 		Image: ra1_soviet_hindattackhelicopter
 
 ORCA.camea:
-	Inherits: ORCA
+	Inherits: td_gdi_orca
 	Buildable:
 		Prerequisites: ~techlevel.medium
 		Queue: Aircraft, RAAircraft
 	RenderSprites:
-		Image: ORCA
+		Image: td_gdi_orca
 
 YAK.camea:
 	Inherits: ra1_soviet_yakscoutplane
@@ -1045,7 +1045,7 @@ TRAN.camea:
 		Queue: Aircraft, RAAircraft
 		Description: Fast Infantry Transport Helicopter.\nAlready with 12 crewmen on board\n  Unarmed
 	Cargo:
-		InitialUnits: e1, e1, e2, e2, td_nod_flamethrower, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalwarrior, ra1_soviet_flamethrower, ra1_soviet_flamethrower, ra1_soviet_shocktrooper, ra1_soviet_shocktrooper
+		InitialUnits: e1, e1, td_gdi_grenadier, td_gdi_grenadier, td_nod_flamethrower, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalwarrior, ra1_soviet_flamethrower, ra1_soviet_flamethrower, ra1_soviet_shocktrooper, ra1_soviet_shocktrooper
 		LoadedCondition: loaded
 	Armament:
 		Weapon: deploytargeting.5c0

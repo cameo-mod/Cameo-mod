@@ -1602,7 +1602,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^3x3Shape
-# 	Inherits@weap: ^IsWeaponFactory
+# 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 # 	Buildable:
 # 		Prerequisites: ~wip
 # 		Description: Produces heavy vehicles.
@@ -1687,7 +1687,7 @@
 # 	Inherits@D2KSprite: ^D2KPaletteRender
 # 	Inherits@Prereqs: ^D2KPrereqs
 # 	Inherits@shape: ^3x3Shape
-# 	Inherits@weap: ^IsWeaponFactory
+# 	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 # 	Buildable:
 # 		Prerequisites: ~wip
 # 		Description: Produces heavy vehicles.
@@ -5956,7 +5956,7 @@
 # 	AutoDeployer:
 # 		DeployChance: 100
 # 	Selectable:
-# 		Class: apc
+# 		Class: td_gdi_apc
 # 	Mobile:
 # 		TurnSpeed: 48
 # 		Speed: 110
@@ -6071,7 +6071,7 @@
 # 	Valued:
 # 		Cost: 2100
 # 	Tooltip:
-# 		Name: Ordos APC
+# 		Name: Ordos td_gdi_apc
 # 	UpdatesPlayerStatistics:
 # 		AddToArmyValue: true
 # 	Health:
@@ -6408,7 +6408,7 @@
 # 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 # 	Inherits@ContrabandUpgradeOrdos: ^ContrabandUpgradeOrdos
 # 	Tooltip:
-# 		Name: Eye In The Sky
+# 		Name: td_gdi_advancedcommunicationscenter In The Sky
 # 	Valued:
 # 		Cost: 2500
 # 	Buildable:
@@ -6970,7 +6970,7 @@
 # eye_husk.ordos:
 # 	Inherits: ^PlaneHusk
 # 	Tooltip:
-# 		Name: Eye on the Sky
+# 		Name: td_gdi_advancedcommunicationscenter on the Sky
 # 	Aircraft:
 # 		TurnSpeed: 8
 # 		Speed: 65

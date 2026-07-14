@@ -119,7 +119,7 @@ ts_gdi_amphibiousapc:
 	Valued:
 		Cost: 1640
 	Tooltip:
-		Name: Amphibious APC
+		Name: Amphibious td_gdi_apc
 	UpdatesPlayerStatistics:
 		OverrideActor: ts_gdi_amphibiousapc
 	Buildable:
@@ -561,7 +561,7 @@ ts_gdi_hovermlrs:
 	Valued:
 		Cost: 900
 	Tooltip:
-		Name: Hover MLRS
+		Name: Hover td_gdi_mlrs
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~ts_gdi_warfactory, ts_gdi_radar

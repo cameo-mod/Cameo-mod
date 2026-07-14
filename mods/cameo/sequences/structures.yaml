@@ -122,7 +122,7 @@ td_nod_handofnod:
 	icon: handicnh.tem
 		Offset: 0,0
 
-pyle:
+td_gdi_barracks:
 	idle:
 		Length: 10
 		Tick: 100
@@ -140,7 +140,7 @@ pyle:
 		Length: *
 	icon: pyleicnh.tem
 
-weap:
+td_gdi_weaponsfactory:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -301,7 +301,7 @@ fix:
 		Offset: 0,-9
 	icon: fixicnh.tem
 
-eye:
+td_gdi_advancedcommunicationscenter:
 	idle:
 		Length: 16
 		Tick: 100
@@ -489,7 +489,7 @@ td_nod_samsite:
 		Facings: 8
 	icon: samicnh.tem
 
-gtwr:
+td_gdi_guardtower:
 	idle:
 	damaged-idle:
 		Start: 1
@@ -518,7 +518,7 @@ gtwr:
 		Offset: 0,-2
 	icon: gtwricnh.tem
 
-atwr:
+td_gdi_advancedguardtower:
 	Defaults:
 		Offset: 0,-13
 	idle:
@@ -842,10 +842,10 @@ xftur:
 xgtwr:
 	Defaults:
 		ZOffset: 3072
-	idle: gtwr
-	damaged-idle: gtwr
+	idle: td_gdi_guardtower
+	damaged-idle: td_gdi_guardtower
 		Start: 1
-	dead: gtwr
+	dead: td_gdi_guardtower
 		Start: 2
 		Tick: 800
 	muzzle: minigun
@@ -873,10 +873,10 @@ xatwr:
 	Defaults:
 		ZOffset: 3072
 		Offset: 0,-13
-	idle: atwr
-	damaged-idle: atwr
+	idle: td_gdi_advancedguardtower
+	damaged-idle: td_gdi_advancedguardtower
 		Start: 1
-	dead: atwr
+	dead: td_gdi_advancedguardtower
 		Start: 2
 		Tick: 800
 	make: atwrmake

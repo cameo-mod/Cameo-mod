@@ -21,19 +21,19 @@ World:
 		ClassName: Light Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e1,e3,e3,jeep
+		SupportActors: e1,e1,e1,e1,e1,e3,e3,td_gdi_humvee
 	StartingUnits@heavyn64gdia:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e3,e3,jeep,mtnk,mtnk
+		SupportActors: e1,e1,e1,e1,e3,e3,td_gdi_humvee,td_gdi_battletank,td_gdi_battletank
 	StartingUnits@heavyn64gdib:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64gdi
 		BaseActor: mcv.n64gdi
-		SupportActors: e1,e1,e1,e1,e1,e2,e2,e2,e3,e3,apc,mtnk
+		SupportActors: e1,e1,e1,e1,e1,td_gdi_grenadier,td_gdi_grenadier,td_gdi_grenadier,e3,e3,td_gdi_apc,td_gdi_battletank
 	StartingUnits@mcvonlyn64nod:
 		Class: none
 		ClassName: MCV Only
@@ -2311,10 +2311,10 @@ N64APC:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: APC
+		Name: td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: apc
+		OverrideActor: td_gdi_apc
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: n64pyle
@@ -2365,7 +2365,7 @@ N64APC:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: vehicle ##########
 	Selectable:
-		Class: apc
+		Class: td_gdi_apc
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
@@ -2727,7 +2727,7 @@ N64ORCA:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: Orca
+		Name: td_gdi_orca
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

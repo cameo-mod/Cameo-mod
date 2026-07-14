@@ -219,10 +219,10 @@ xftur:
 xgtwr:
 	Defaults:
 		ZOffset: 3072
-	idle: gtwr
-	damaged-idle: gtwr
+	idle: td_gdi_guardtower
+	damaged-idle: td_gdi_guardtower
 		Start: 1
-	dead: gtwr
+	dead: td_gdi_guardtower
 		Start: 2
 		Tick: 800
 	muzzle: minigun
@@ -251,10 +251,10 @@ xatwr:
 	Defaults:
 		ZOffset: 3072
 		Offset: 0,-13
-	idle: atwr
-	damaged-idle: atwr
+	idle: td_gdi_advancedguardtower
+	damaged-idle: td_gdi_advancedguardtower
 		Start: 1
-	dead: atwr
+	dead: td_gdi_advancedguardtower
 		Start: 2
 		Tick: 800
 	make: atwrmake

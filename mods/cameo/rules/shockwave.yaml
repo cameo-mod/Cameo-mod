@@ -3888,7 +3888,7 @@ susalockdownmlrs:
 	Valued:
 		Cost: 1600
 	Tooltip:
-		Name: Lockdown MLRS
+		Name: Lockdown td_gdi_mlrs
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -8912,7 +8912,7 @@ sglkrait:
 		BuildPaletteOrder: 30
 		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
-		Description: APC armed with toxin td_nod_gunturret and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: td_gdi_apc armed with toxin td_nod_gunturret and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Mobile:
 		Speed: 125
@@ -10982,14 +10982,14 @@ sgltarantula:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Tarantula APC
+		Name: Tarantula td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: sglweap, ~techlevel.medium, ~sgla_toxin
 		Queue: Vehicle, RAVehicle
-		Description: APC armed with toxins.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: td_gdi_apc armed with toxins.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Mobile:
 		Speed: 140
@@ -12297,7 +12297,7 @@ eglrajeep:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 20
 		Prerequisites: sglweap, ~techlevel.low, ~eglatechnic
-		Description: Jeep GLA Variant.\nDelete carry because has a grenadier in the back.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
+		Description: td_gdi_humvee GLA Variant.\nDelete carry because has a grenadier in the back.\n  Strong vs Infantry\n  Weak vs Vehicles, Aircraft
 	Valued:
 		Cost: 750
 	Tooltip:
@@ -14751,7 +14751,7 @@ schberzerkermlrs:
 	Valued:
 		Cost: 1600
 	Tooltip:
-		Name: Berzerker MLRS
+		Name: Berzerker td_gdi_mlrs
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -14833,11 +14833,11 @@ schberzerkermlrs:
 upschberzerkermlrs:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Berzerker MLRS
+		Name: Berzerker td_gdi_mlrs
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Promotions.CHINA
-		Description: Allows production of the Berzerker MLRS
+		Description: Allows production of the Berzerker td_gdi_mlrs
 		Prerequisites: !upschberzerkermlrs, ~techlevel.high, ~schina_inf, rank1
 		IconPalette: ra2
 	RenderSprites:
@@ -14857,14 +14857,14 @@ schgattlingapc:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: Gattling APC
+		Name: Gattling td_gdi_apc
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: ~techlevel.low, ~schina_inf
 		Queue: Vehicle, RAVehicle
-		Description: APC armed with Gattling gun.\nCan be mounted with infantry\n  Strong vs Infantry, Aircraft\n  Weak vs Tanks
+		Description: td_gdi_apc armed with Gattling gun.\nCan be mounted with infantry\n  Strong vs Infantry, Aircraft\n  Weak vs Tanks
 		IconPalette: ra2
 	Mobile:
 		Speed: 124

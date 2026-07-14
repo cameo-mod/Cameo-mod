@@ -48,9 +48,9 @@ MCVMARKET:
 		AreaTypes: building, cityi
 
 MM1MCV:
-	Inherits@MCV: MCV.GDI
+	Inherits@MCV: td_gdi_mobileconstructionvehicle
 	Transforms:
-		IntoActor: fact.gdi
+		IntoActor: td_gdi_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (GDI)
 	Buildable:

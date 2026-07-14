@@ -131,7 +131,7 @@ actor_cabal_tarantula =
       Weak vs Infantry, Aircraft
 
 actor_cabal_scarabapc =
-   .name = Scarab APC
+   .name = Scarab td_gdi_apc
    .description = Hover troop transport that comes pre-loaded with infantry.
       Can move over water.
       Unarmed.

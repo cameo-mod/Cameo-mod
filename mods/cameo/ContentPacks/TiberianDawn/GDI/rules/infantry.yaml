@@ -1,4 +1,4 @@
-E1.GDI:
+td_gdi_minigunner:
 	Inherits: ^E1
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
@@ -8,37 +8,37 @@ E1.GDI:
 		Name: GDI Minigunner
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~pyle
+		Prerequisites: ~td_gdi_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_e1.description
 	Armament@PRIMARY: ##########
 		Weapon: M16
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: M16
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade: ##########
 		Weapon: M16AP
 		LocalOffset: 128,0,256
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: M16AP
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
 
 E1: #map import compatibility
-	Inherits: E1.GDI
+	Inherits: td_gdi_minigunner
 	Buildable:
 		-Queue:
 	Selectable:
-		Class: e1.gdi
+		Class: td_gdi_minigunner
 
-E2:
+td_gdi_grenadier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^GrenadierInfantryTemplate
@@ -56,7 +56,7 @@ E2:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~pyle, ~!upgdiempgrenadier
+		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_unlockempgrenadier
 		Queue: Infantry, RAInfantry
 		Description: actor_e2.description
 	Mobile:
@@ -87,11 +87,11 @@ E2:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_cuttingedgeequipment
 	GrantExternalConditionToTransport:
 		Condition: ifv-cannon
 
-E3.GDI:
+td_gdi_rocketsoldier:
 	Inherits: ^E3
 	Tooltip:
 		Name: GDI Rocket Soldier
@@ -100,36 +100,36 @@ E3.GDI:
 	Inherits@CuttingEdge: ^CuttingEdgeEquipment
 	Inherits@decoration: ^GDIRankDecoration
 	Buildable:
-		Prerequisites: ~pyle, ~!upgdimissilesoldier
+		Prerequisites: ~td_gdi_barracks, ~!td_gdi_promotion_unlockmissilesoldier
 	Armament@PRIMARY: ##########
 		Weapon: Rockets
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: Rockets
-		RequiresCondition: !up_advancedmissiletargeting
+		RequiresCondition: !td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargeting: ##########
 		Weapon: RocketsAMT
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	Armament@AdvancedMissileTargetingGARRISONED: ##########
 		Name: garrisoned
 		Weapon: RocketsAMT
-		RequiresCondition: up_advancedmissiletargeting
+		RequiresCondition: td_gdi_upgrade_advancedmissiletargeting
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
 E3: #map import compatibility
-	Inherits: E3.GDI
+	Inherits: td_gdi_rocketsoldier
 	Buildable:
 		-Queue:
 	Selectable:
-		Class: e1.gdi
+		Class: td_gdi_minigunner
 
-RMBO.GDI:
+td_gdi_commando:
 	Inherits: ^RMBO
 	Inherits@LongRangeSensors: ^LongRangeSensors
 	Inherits@ArmorPiercingBullets: ^ArmorPiercingBullets
@@ -138,27 +138,27 @@ RMBO.GDI:
 	Tooltip:
 		Name: GDI Commando
 	Buildable:
-		Prerequisites: ~pyle, eye, ~!upgdihavoc
+		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~!td_gdi_promotion_unlockhavocandexosuit
 	Armament:
 		Weapon: ra1_allies_alliedsniper
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: ra1_allies_alliedsniper
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade: ##########
 		Weapon: SniperAP
 		LocalOffset: 128,0,256
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: SniperAP
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
 
-gdiempgrenadier:
+td_gdi_empgrenadier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^GrenadierInfantryTemplate
@@ -177,7 +177,7 @@ gdiempgrenadier:
 		Name: EMP Grenadier
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~pyle, ~upgdiempgrenadier
+		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_unlockempgrenadier
 		Queue: Infantry, RAInfantry
 		Description: actor_empgrenadier.description
 	Mobile:
@@ -193,11 +193,11 @@ gdiempgrenadier:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: EMPGrenade
-	FirepowerMultiplier@up_cuttingedgeequipment:
+	FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 120
-	ReloadDelayMultiplier@up_cuttingedgeequipment:
+	ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
-	DamageMultiplier@up_cuttingedgeequipment:
+	DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
 	TakeCover:
 		ProneOffset: 300,0,-227
@@ -208,11 +208,11 @@ gdiempgrenadier:
 	Voiced:
 		VoiceSet: TSInfantry
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_cuttingedgeequipment
 	GrantExternalConditionToTransport:
 		Condition: ifv-cannon
 
-gdimissilesoldier:
+td_gdi_sonicmissilesoldier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -233,7 +233,7 @@ gdimissilesoldier:
 		Name: Sonic Missile Soldier
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~pyle, ~upgdimissilesoldier
+		Prerequisites: ~td_gdi_barracks, ~td_gdi_promotion_unlockmissilesoldier
 		Queue: Infantry, RAInfantry
 		Description: actor_e3.description
 	Mobile:
@@ -256,9 +256,9 @@ gdimissilesoldier:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_cuttingedgeequipment
 
-gdisniper:
+td_gdi_heavysniper:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^SniperInfantryTemplate
@@ -277,7 +277,7 @@ gdisniper:
 		Name: GDI Heavy ra1_allies_alliedsniper
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~pyle, hq.gdi, upgdisniper
+		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, td_gdi_promotion_unlocksniper
 		Queue: Infantry, RAInfantry
 		Description: actor_gdisniper.description
 	Mobile:
@@ -299,9 +299,9 @@ gdisniper:
 	Voiced:
 		VoiceSet: TSUmagon
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
 
-gdishotgunner:
+td_gdi_shotgunner:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -319,7 +319,7 @@ gdishotgunner:
 		Name: Shotgunner
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~pyle, upgdishotgunner
+		Prerequisites: ~td_gdi_barracks, td_gdi_promotion_unlockshotgunner
 		Queue: Infantry, RAInfantry
 		Description: template_scout_infantry.description
 	Mobile:
@@ -335,16 +335,16 @@ gdishotgunner:
 		Name: garrisoned
 		Weapon: TDShotgun
 		MuzzleSequence: garrison-muzzle
-	FirepowerMultiplier@up_armorpiercingbullets:
+	FirepowerMultiplier@td_gdi_upgrade_armorpiercingbullets:
 		Modifier: 200
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 	RenderSprites:
-		Image: gdishotgunner
+		Image: td_gdi_shotgunner
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
 
-gdiofficer:
+td_gdi_officer:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -370,26 +370,26 @@ gdiofficer:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Buildable:
-		Prerequisites: ~pyle, hq.gdi, upgdiofficer
+		Prerequisites: ~td_gdi_barracks, td_gdi_communicationscenter, td_gdi_promotion_unlockgdiofficer
 		Queue: Infantry, RAInfantry
 		Description: actor_gdiofficer.description
 	Armament@PRIMARY:
 		Weapon: OfficerMachineGun
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: OfficerMachineGun
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
 		Weapon: OfficerMachineGunAP
 		LocalOffset: 128,0,256
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: OfficerMachineGunAP
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	ProducibleWithLevel:
 		InitialLevels: 1
 	ProximityExternalCondition@PropagandaEffect:
@@ -410,11 +410,11 @@ gdiofficer:
 	AcceptsDeliveredExperience: ##########
 		ValidTypes: infantry ##########
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment
 	GrantExternalConditionToTransport:
 		Condition: ifv-healer
 
-gdihavoc:
+td_gdi_havoc:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2InfantryDeathAnimations
 	Inherits@Template: ^HeroInfantryTemplate
@@ -441,7 +441,7 @@ gdihavoc:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~pyle, eye, ~upgdihavoc
+		Prerequisites: ~td_gdi_barracks, td_gdi_advancedcommunicationscenter, ~td_gdi_promotion_unlockhavocandexosuit
 		Queue: Infantry, RAInfantry
 		Description: actor_havoc.description
 	RenderSprites:
@@ -521,15 +521,15 @@ gdihavoc:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
-	RangeMultiplier@up_advancedmissiletargeting:
+	RangeMultiplier@td_gdi_upgrade_advancedmissiletargeting:
 		Modifier: 105
-	FirepowerMultiplier@up_cuttingedgeequipment:
+	FirepowerMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 120
-	ReloadDelayMultiplier@up_cuttingedgeequipment:
+	ReloadDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
-	ReloadAmmoDelayMultiplier@up_cuttingedgeequipment:
+	ReloadAmmoDelayMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
-	DamageMultiplier@up_cuttingedgeequipment:
+	DamageMultiplier@td_gdi_upgrade_cuttingedgeequipment:
 		Modifier: 80
 	ActorStatValues:
-		Upgrades: up_longrangesensors, up_advancedmissiletargeting, up_armorpiercingbullets, up_cuttingedgeequipment
+		Upgrades: td_gdi_upgrade_longrangesensors, td_gdi_upgrade_advancedmissiletargeting, td_gdi_upgrade_armorpiercingbullets, td_gdi_upgrade_cuttingedgeequipment

@@ -2871,7 +2871,7 @@
 			cgpile.latin: biggarrisoned
 			cgup.latin: biggarrisoned
 			ngbunk2.latin: biggarrisoned
-			gdiassaultapc: battlefortresspassenger
+			td_gdi_assaultapc: battlefortresspassenger
 			yrbfrt: battlefortresspassenger
 			dragonfly.asian: battlefortresspassenger
 			wtrt.asian: battlefortresspassenger
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,hpad.gdi,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,launchpad.ixian,ra2gaairc,ra2naairf,cgairf.asian,conpad.steel,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: fix.gdi, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: fix.gdi, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2nadept, ra2gadept, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -7797,7 +7797,7 @@ CPQDEBUGDUMMY:
 		Prerequisites: 4weap
 
 ^IsVehicleDropzone:
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	-Production@NORMAL:
 	-Production@CLASSICPRODUCTIONQUEUES:
 	# ProductionAirdropCA@NORMAL:
@@ -8082,7 +8082,7 @@ CPQDEBUGDUMMY:
 	# (ClassicProductionQueue.BuildTimeSpeedReduction), so a faction must have exactly
 	# ONE Upgrades producer. Buildings that also inherit ^RadarBuilding but would be a
 	# 2nd producer (tech centers, main bases, secondary radars) must remove it via
-	# -Production@Upgrades: / -ProductionBar@Upgrades: — see EYE, td_nod_templeofnod,
+	# -Production@Upgrades: / -ProductionBar@Upgrades: — see td_gdi_advancedcommunicationscenter, td_nod_templeofnod,
 	# td_nod_templeprime, SCCOMMANDCENTER, SCNEXUS, ra2gaspysat.
 	Production@Upgrades:
 		Produces: Upgrades
@@ -8844,7 +8844,7 @@ CPQDEBUGDUMMY:
 			# sglcamorebel: ifv-mg
 			# sgldemorebel: ifv-mg
 			# japrif.asian: ifv-mg
-			# e2: ifv-cannon
+			# td_gdi_grenadier: ifv-cannon
 			# ra1_soviet_grenadier: ifv-cannon
 			# ts_gdi_discthrower: ifv-cannon
 			# tse2para: ifv-cannon
@@ -9230,7 +9230,7 @@ CPQDEBUGDUMMY:
 		DisguisedCondition: disguise
 		DisguisedAsConditions:
 			rmbo: hero
-			gdihavoc: hero
+			td_gdi_havoc: hero
 			td_nod_lasercommando: hero
 			ra1_allies_tanya: hero
 			ra1_soviet_volkov: hero

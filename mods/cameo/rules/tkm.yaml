@@ -514,7 +514,7 @@ tkmbarracks:
 tkmfactory:
 	Inherits: ^BaseBuilding
 	Inherits@sell: ^TKMSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
 	Inherits@shape: ^3x3Shape
 	Valued:
 		Cost: 2000
@@ -688,12 +688,12 @@ tkmbunker:
 		Weapon: tkmbunkmg
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_armorpiercingbullets
+		RequiresCondition: !td_gdi_upgrade_armorpiercingbullets
 	Armament@Upgrade:
 		Weapon: HighVAP
 		LocalOffset: 256,0,256
 		MuzzleSequence: muzzle
-		RequiresCondition: up_armorpiercingbullets
+		RequiresCondition: td_gdi_upgrade_armorpiercingbullets
 	AttackOpenTopped:
 		Armaments: garrisoned
 		PortOffsets: 300,400,200, -400,500,200, 300,-400,200, -400,-500,200

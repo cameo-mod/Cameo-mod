@@ -62,7 +62,7 @@ bggy.destroyed:
 
 mtnk.destroyed:
 	Defaults:
-		Filename: mtnk.shp
+		Filename: td_gdi_battletank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -88,7 +88,7 @@ ltnk.destroyed:
 
 htnk.destroyed:
 	Defaults:
-		Filename: htnk.shp
+		Filename: td_gdi_mammothtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -101,7 +101,7 @@ htnk.destroyed:
 
 jeep.destroyed:
 	Defaults:
-		Filename: jeep.shp
+		Filename: td_gdi_promotion_unlockassaultapc_jeep.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -159,7 +159,7 @@ arty.destroyed:
 
 apc.destroyed:
 	Defaults:
-		Filename: apc.shp
+		Filename: td_gdi_apc.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1446,7 +1446,7 @@ explosion:
 
 gdirigtower:
 	Defaults:
-		Filename: GDIRigTower.png
+		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigtower.png
 		# Scale: 1.25
 		# Offset: 0,8
 	idle:
@@ -1458,16 +1458,16 @@ gdirigtower:
 		# Start: 71
 		# Length: 4
 	dead:
-		Filename: GDIRigMobile.png
+		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
 		Start: 70
 		Tick: 800
 	make:
-		Filename: GDIRigMobile.png
+		Filename: td_gdi_promotion_unlockgdidefenserig_gdirigmobile.png
 		Start: 64
 		Length: 11
 		Tick: 110
 	# turret:
-	# 	Filename: GDIRigPhalanx.png
+	# 	Filename: td_gdi_promotion_unlockgdidefenserig_gdirigphalanx.png
 	# 	Facings: 64
 	# 	Scale: 1.25
 	# 	Offset: 0,32
@@ -1488,5 +1488,5 @@ gdirigtower:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: atwricnh.shp
+		Filename: td_gdi_advancedguardtower_icon.shp
 		Offset: 0,0

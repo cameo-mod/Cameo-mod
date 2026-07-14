@@ -6,8 +6,8 @@ actor_e2 =
 actor_apc =
    .description = Armed infantry transport.
         Can attack Aircraft.
-   .tdname = GDI APC
-   .raname = Allied APC
+   .tdname = GDI td_gdi_apc
+   .raname = Allied td_gdi_apc
 
 actor_jeep =
    .description = Scout vehicle armed with a machine gun.
@@ -41,7 +41,7 @@ actor_mlrs =
 actor_orca =
    .description = Aircraft armed with missiles.
       Strong vs Buildings, Vehicles
-   .name = Orca
+   .name = td_gdi_orca
 
 actor_hq_gdi =
    .description = Provides radar, advanced technologies,

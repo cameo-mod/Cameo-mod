@@ -7,7 +7,7 @@ td_nod_constructionyard:
 		IntoActor: td_nod_mobileconstructionvehicle
 	ProvidesPrerequisite@buildingname:
 		Prerequisite: fact
-	ProvidesPrerequisite@fact.gdi:
+	ProvidesPrerequisite@td_gdi_constructionyard:
 		Prerequisite: td_nod_constructionyard
 	ProvidesPrerequisite@wirefence:
 		Prerequisite: wirefence
@@ -65,8 +65,8 @@ td_nod_handofnod:
 td_nod_airstrip:
 	Inherits: ^TDBuilding
 	Inherits@sell: ^TDNodSpawnActorsOnSell
-	Inherits@weap: ^IsWeaponFactory
-	# Inherits@weap: ^IsVehicleDropzone
+	Inherits@td_gdi_weaponsfactory: ^IsWeaponFactory
+	# Inherits@td_gdi_weaponsfactory: ^IsVehicleDropzone
 	Inherits@shape: ^4x2Shape
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,-512,256, 0,-1451,384, 0,512,128, 0,1536,85

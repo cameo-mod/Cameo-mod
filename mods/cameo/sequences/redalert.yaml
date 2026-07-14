@@ -503,7 +503,7 @@ rae1:
 		Filename: ra1_soviet_rifleinfantry_icon.png
 
 ra1_soviet_grenadier:
-	Inherits: e2
+	Inherits: td_gdi_grenadier
 	icon:
 		Filename: ra1_soviet_grenadier_icon.png
 
@@ -2077,7 +2077,7 @@ ra1_allies_minelayer:
 
 raapc:
 	Defaults:
-		Filename: apc.shp
+		Filename: td_gdi_apc.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
