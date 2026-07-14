@@ -279,9 +279,9 @@ cabal_devout:
 		Speed: 40
 		PauseOnCondition: disabled
 	Health:
-		HP: 60000
+		HP: 80000
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 80
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -290,7 +290,7 @@ cabal_devout:
 		MaxPercentageStrength: 100
 		DamageRegenDelay: 125
 		RegenInterval: 1
-		RegenAmount: 120
+		RegenAmount: 160
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
 		LocalOffset: 128,-256,256, 128,256,256
@@ -384,9 +384,9 @@ cabal_ascended:
 		Speed: 40
 		PauseOnCondition: disabled
 	Health:
-		HP: 60000
+		HP: 70000
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 70
 	Shielded:
 		RequiresCondition: armored
 		ShieldsUpCondition: armored
@@ -395,7 +395,7 @@ cabal_ascended:
 		MaxPercentageStrength: 100
 		DamageRegenDelay: 125
 		RegenInterval: 1
-		RegenAmount: 120
+		RegenAmount: 140
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
 		LocalOffset: 128,-256,256, 128,256,256

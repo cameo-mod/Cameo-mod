@@ -1055,20 +1055,53 @@ CabalWaspLaserStriker:
 CabalAscendedRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
-	Inherits@3: ^CabalMissile
+	Inherits@3: ^HeavyMissile
+	Inherits@4: ^TankDestroyerCannon
+	Inherits@5: ^FlakWeapon
+	Inherits@6: ^HeavyAAWeapon
+	Inherits@7: ^CabalMissile
 	Burst: 2
 	BurstDelays: 8
 	Report: rketinf1.aud
-	ReloadDelay: 42
-	Range: 6349
+	ReloadDelay: 60
+	Range: 9000
+	ValidTargets: Ground, Water, Air
 	Warhead@LightMissile: SpreadDamage
-		Damage: 12000
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 6
+		ValidTargets: Ground, Water, Air
+		Damage: 3
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 12000
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 6
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+	Warhead@TankDestroyerCannon: SpreadDamage
+		ValidTargets: Ground, Water
+		Damage: 6000
+	Warhead@TankDestroyerCannonPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water
+		Damage: 3
+	Warhead@FlakWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+	Warhead@FlakWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
+	Warhead@HeavyAAWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 6000
+	Warhead@HeavyAAWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 3
 
 CabalRavagerPlasma:
 	Inherits: ^MediumChemicalWeapon
