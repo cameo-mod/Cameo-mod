@@ -219,17 +219,22 @@ factions, everything through the balance workbook._
 - [x] **Rename Ordos "Armor-Piercing Rounds" → "Rapid Fire Armor-Piercing
   Belts"** (actor id, template, condition, sequence, icon — full rename)
   (`b180aef36`).
-- [ ] No-hyphen naming scheme across all dune factions.
+- [x] No-hyphen naming scheme across all dune factions.
+  Verified 2026-07-14: no hyphenated actor IDs, weapon IDs, or asset
+  references in any D2k ContentPack yaml. All hyphens found are
+  engine-defined conditions/sequence names (build-incomplete, damaged-idle,
+  etc.) which are engine-owned and stay as-is per DESIGN.md §1.
 - Note: 7 Ordos armor-rework files are the maintainer's live WIP — leave.
 
 ---
 
 ## Content-pack folder restructure (P2/P3, L)
 
-- [ ] Every content pack: `content.yaml` at root + one **`yaml`** folder
+- [x] Every content pack: `content.yaml` at root + one **`yaml`** folder
   (rules+weapons+sequences merged) + an empty **`files`** folder. Shared
-  assets → per-GAME `Shared/files/`. NOW: only make the yaml folder + move
-  yaml in + empty files/; asset migration later. Runbook: docs/MIGRATION.md.
+  assets → per-GAME `Shared/files/`. DONE 2026-07-14: all packs
+  restructured, boot-tested, committed. Asset migration into `files/`
+  is the next phase.
 
 ## Cross-faction shared-effect independence (LONG-TERM, L)
 
