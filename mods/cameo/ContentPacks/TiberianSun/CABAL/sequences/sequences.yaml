@@ -713,6 +713,7 @@ cabal_cyborgfactory:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Offset: -12, -15, 30
+		Scale: 1.25
 	idle:
 		Filename: cabal_cyborgfactory_ybbar.shp
 		ShadowStart: 3
@@ -859,6 +860,7 @@ cabal_radar:
 	dead:
 		Filename: cabal_radar.shp
 		Start: 1
+		Length: 1
 		ShadowStart: 3
 		Tick: 400
 	idle-dish:
@@ -1671,27 +1673,39 @@ cabal_hunterkillermk1:
 	icon:
 		Filename: cabal_hunterkillermk1_icon.png
 
-cabal_hunterkillermk2:
+cabal_hunter_drone_carrier:
 	idle:
-		Filename: cabal_hunterkillermk2.png
+		Filename: cabal_hunter_drone_carrier.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: cabal_hunterkillermk2_icon.png
+		Filename: cabal_hunter_drone_carrier_icon.png
 
-cabal_hunterkillermk2_drone:
+cabal_hunter_drone:
 	idle:
 		Filename: cabal_hunterkillermk2_drone.png
 		Facings: 32
 		Scale: 0.5
+	icon:
+		Filename: cabal_hunter_drone_carrier_icon.png
 
-cabal_overkillcarryall:
+cabal_repair_drone:
+	Defaults:
+		Filename: cabal_repair_drone.png
+		Scale: 1
+		Tick: 80
 	idle:
-		Filename: cabal_overkillcarryall.png
+		Facings: 64
+	icon:
+		Filename: cabal_hunter_drone_carrier_icon.png
+
+cabal_overkill_gunship:
+	idle:
+		Filename: cabal_overkill_gunship.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: cabal_overkillcarryall_icon.png
+		Filename: cabal_overkill_gunship_icon.png
 
 cabal_mothership:
 	idle:
@@ -1704,10 +1718,40 @@ cabal_mothership:
 	icon:
 		Filename: cabal_mothership_icon.png
 
-cabal_wasp:
+cabal_orb_drone:
 	Defaults:
-		Filename: cabal_wasp.shp
-		Scale: 0.8
+		Filename: cabal_orb_drone.png
+		FrameSize: 64, 64
+		Scale: 1
+		Tick: 200
+	stand:
+		Facings: 64
+		Length: 1
+	run:
+		Facings: 64
+		Length: 1
+	flying:
+		Facings: 64
+		Length: 1
+	idle:
+		Facings: 64
+		Length: 1
+	idle1:
+		Facings: 64
+		Length: 1
+	idle2:
+		Facings: 64
+		Length: 1
+	attack:
+		Facings: 64
+		Length: 1
+	icon:
+		Filename: cabal_wasp_icon.png
+
+cabal_cyborg_assassin:
+	Defaults:
+		Filename: cabal_cyborg_assassin.shp
+		Scale: 1
 		Tick: 200
 		Offset: 0, 0, 16
 	stand:
@@ -1804,12 +1848,7 @@ cabal_wasp:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: cabal_wasp_icon.png
-
-cabal_wasp_striker:
-	Inherits: cabal_wasp
-	icon:
-		Filename: cabal_wasp_icon.png
+		Filename: cabal_assassin_icon.png
 
 cabal_obeliskofdarkness:
 	Defaults:
@@ -1872,6 +1911,12 @@ cabal_dissolver:
 		Facings: -8
 		Length: 4
 		Tick: 110
+	idle1:
+		Filename: cabal_dissolver.shp
+		Facings: -8
+	idle2:
+		Filename: cabal_dissolver.shp
+		Facings: -8
 	crippled-run:
 		Filename: cabal_dissolver.shp
 		Start: 8

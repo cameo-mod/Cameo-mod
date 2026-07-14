@@ -172,11 +172,17 @@
 
 ^cabal_upgrade_cyberneticplating:
 	GrantConditionOnPrerequisite@cabal_upgrade_cyberneticplating:
-		Condition: cabal_upgrade_cyberneticplating
+		Condition: armored
 		Prerequisites: cabal_upgrade_cyberneticplating
 	DamageMultiplier@cabal_upgrade_cyberneticplating:
-		RequiresCondition: cabal_upgrade_cyberneticplating
+		RequiresCondition: armored
 		Modifier: 75
+	DamageMultiplier@Secondary:
+		RequiresCondition: !armored
+		Modifier: 200
+	Armor@Shielded:
+		Type: Shield
+		RequiresCondition: armored
 	ActorStatValues:
 		Upgrades: cabal_upgrade_cyberneticplating
 
@@ -240,3 +246,8 @@
 		RequiresCondition: cabal_upgrade_reclamationprotocols
 	ActorStatValues:
 		Upgrades: cabal_upgrade_reclamationprotocols
+
+^CABALSpawnActorsOnSell:
+	Inherits: ^TSSpawnActorsOnSell
+	SpawnActorsOnSell:
+		ActorTypes: cabal_cyborginfantry

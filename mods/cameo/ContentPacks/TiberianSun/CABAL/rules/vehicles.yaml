@@ -1,7 +1,7 @@
 cabal_constructionyard:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@conyard: ^Conyard
@@ -145,7 +145,7 @@ cabal_cyborgreaper:
 	Armament@AA:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
-		Weapon: TSReaperTrap
+		Weapon: CabalReaperTrap
 	Voiced:
 		VoiceSet: TSReaper
 	Tooltip:
@@ -174,7 +174,7 @@ cabal_cyborgreaper:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_tiberiumharvester:
@@ -372,7 +372,7 @@ cabal_manticore:
 	Armament@AA:
 		Weapon: CabalManticoreMissilesAA
 	Armament@TRAP:
-		Weapon: TSReaperTrap
+		Weapon: CabalManticoreTrap
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
@@ -397,6 +397,7 @@ cabal_artilleryspider:
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
 	Inherits@EMP: ^FrontalEMP
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 	Inherits@vo: ^AttackFrontalVoice
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
@@ -423,14 +424,14 @@ cabal_artilleryspider:
 		Step: 20
 	Armament@PRIMARY:
 		Weapon: CabalArtilleryWalkerShell
-		LocalOffset: -125,1,250, -125,1,250
+		LocalOffset: -500,0,250, -500,0,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
-		Weapon: TS155mm_bluenuke
-		LocalOffset: -125,1,250, -125,1,250
+		Weapon: CabalArtilleryWalkerShellUpgraded
+		LocalOffset: -500,0,250, -500,0,250
 		Recoil: 128
 		RecoilRecovery: 26
 		MuzzleSequence: muzzle
@@ -493,14 +494,14 @@ cabal_tarantula:
 		Weapon: CabalTarantulaCannon
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: 800, 300, 700
+		LocalOffset: -700, 0, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
 	Armament@Upgraded:
 		Weapon: TS120mm_bluenuke
 		Recoil: 128
 		RecoilRecovery: 32
-		LocalOffset: 800, 300, 700
+		LocalOffset: -700, 0, 700
 		MuzzleSequence: muzzle
 		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
 	AttackTurreted:
@@ -556,6 +557,8 @@ cabal_scarabapc:
 	Hovers:
 	Health:
 		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 12
 	Repairable:
 		HpPerStep: 1500
 	Armor:
@@ -619,11 +622,11 @@ cabal_berserker:
 	Health:
 		HP: 800000
 	ChangesHealth@SelfHealing:
-		Step: 400
+		Step: 800
 		Delay: 1
 		StartIfBelow: 100
 	Shielded:
-		RegenAmount: 500
+		RegenAmount: 1600
 	Armament@PRIMARY:
 		Weapon: CabalBerserkerBlades
 	WithInfantryBody:
@@ -759,7 +762,7 @@ cabal_spidercnc4:
 	ChangesHealth@SelfHealing:
 		Step: 16
 	Armament@PRIMARY:
-		Weapon: CabalSpiderLaser
+		Weapon: CabalSpiderCnc4Laser
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26
@@ -819,7 +822,7 @@ cabal_heavyreaper:
 	Armament@AA:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
-		Weapon: TSReaperTrap
+		Weapon: CabalHeavyReaperTrap
 	Voiced:
 		VoiceSet: TSReaper
 	UpdatesPlayerStatistics:
@@ -846,7 +849,7 @@ cabal_heavyreaper:
 		Image: cabal_cyborgreaper
 		PlayerPalette: player_rgba
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: player_rgba
 		CrushedSequencePalette: ra2effect
 
 cabal_avatar:
@@ -869,14 +872,17 @@ cabal_avatar:
 		Description: actor_cabal_avatar.description
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 14
+		TurnSpeed: 28
 		Speed: 70
 	Health:
 		HP: 80000
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Armament@PRIMARY:
-		Weapon: CabalRavagerPlasma
+		Weapon: CabalAvatarPlasma
+	AttackFrontal:
+		FacingTolerance: 0
+		Voice: Attack
 	RenderSprites:
 		Image: cabal_manticore
 		PlayerPalette: player_rgba
@@ -909,7 +915,10 @@ cabal_widow:
 	ChangesHealth@SelfHealing:
 		Step: 32
 	Armament@PRIMARY:
-		Weapon: CabalRavagerPlasma
+		Weapon: CabalWidowPlasma
+	AttackFrontal:
+		FacingTolerance: 0
+		Voice: Attack
 	RenderSprites:
 		Image: cabal_manticore
 		PlayerPalette: player_rgba
@@ -977,14 +986,14 @@ cabal_coredefender:
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
-		Cost: 12500
+		Cost: 15000
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 140
 		BuildLimit: 1
-		Prerequisites: ~cabal_mechfactory, cabal_core
+		Prerequisites: ~cabal_mechfactory, cabal_core, cabal_promotion_coredefender
 		Description: actor_cabal_coredefender.description
 	Mobile:
 		TurnSpeed: 20
@@ -993,10 +1002,10 @@ cabal_coredefender:
 		Range: 6c0
 	Armament:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1300,-750,1600, 1300,750,1600
-	Armament@LASER3:
+		LocalOffset: 0,-500,1100
+	Armament@RIGHT:
 		Weapon: CabalCoreDefenderLaser
-		LocalOffset: 1300,750,1600, 1300,-750,1600
+		LocalOffset: 0,500,1100
 	AttackFrontal:
 		FacingTolerance: 12
 	Voiced:
@@ -1006,9 +1015,9 @@ cabal_coredefender:
 	Tooltip:
 		Name: Core Defender
 	Health:
-		HP: 1500000
+		HP: 2000000
 	ChangesHealth@SelfHealing:
-		Step: 600
+		Step: 800
 		Delay: 1
 		StartIfBelow: 100
 	ChangesHealth@1:
@@ -1051,3 +1060,59 @@ cabal_coredefender:
 		MoveSequence: run
 		ValidMovementTypes: Horizontal, Turn
 	DeathSounds:
+
+cabal_ravager:
+	Inherits: ^Walker
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
+	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
+	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Armor:
+		Type: Plate
+		-RequiresCondition:
+	Armor@Secondary:
+		Type: Superheavy
+	Valued:
+		Cost: 1500
+	Tooltip:
+		Name: Ravager
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 15
+		Prerequisites: ~cabal_mechfactory
+		Queue: Vehicle, RAVehicle
+		Description: actor_cabal_ravager.description
+	Mobile:
+		TurnSpeed: 16
+		Speed: 40
+	Health:
+		HP: 70000
+	ChangesHealth@SelfHealing:
+		Step: 70
+	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		RegenAmount: 140
+	Armament@PRIMARY:
+		Weapon: CabalRavagerPlasma
+		LocalOffset: 128,0,256
+		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
+	Armament@Upgraded:
+		Weapon: CabalRavagerPlasmaNeutron
+		LocalOffset: 128,0,256
+		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
+	Voiced:
+		VoiceSet: TSCobra
+	RenderSprites:
+		PlayerPalette: playerra2

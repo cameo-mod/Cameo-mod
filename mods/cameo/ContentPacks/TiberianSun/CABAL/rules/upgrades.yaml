@@ -94,7 +94,7 @@ cabal_upgrade_handof:
 	Tooltip:
 		Name: Hand of CABAL
 	Valued:
-		Cost: 10000
+		Cost: 12500
 	Buildable:
 		BuildPaletteOrder: 90
 		Queue: Research
@@ -219,3 +219,19 @@ cabal_upgrade_fullassimilation:
 		Image: cabal_upgrade_dataworm
 	ProvidesPrerequisite:
 		Prerequisite: cabal_upgrade_fullassimilation
+
+cabal_upgrade_cyberneticplating:
+	Inherits: ^researched_upgrade.template
+	Tooltip:
+		Name: Cybernetic Plating
+	Valued:
+		Cost: 5000
+	Buildable:
+		BuildPaletteOrder: 90
+		Queue: Research
+		Prerequisites: ~cabal_techcenter, !cabal_upgrade_cyberneticplating
+		Description: actor_cabal_upgrade_cyberneticplating.description
+	RenderSprites:
+		Image: cabal_upgrade_cyberneticplating
+	ProvidesPrerequisite:
+		Prerequisite: cabal_upgrade_cyberneticplating

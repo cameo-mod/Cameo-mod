@@ -14,8 +14,6 @@ cabal_engineer:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Scout
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Buildable:
 		Queue: Infantry, RAInfantry
 		Prerequisites: ~cabal_cyborgfactory
@@ -39,6 +37,13 @@ cabal_engineer:
 	ChangesHealth@SelfHealing:
 		Step: 20
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 40
 	Armament@REPAIRBEAM:
 		Name: primary
@@ -57,6 +62,10 @@ cabal_engineer:
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
+	Captures:
+		CaptureTypes: building, tech
+		PlayerExperience: 500
+		ConsumedByCapture: False
 
 cabal_cyborginfantry:
 	Inherits: ^Soldier
@@ -75,8 +84,6 @@ cabal_cyborginfantry:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Medium
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 500
 	Tooltip:
@@ -89,7 +96,7 @@ cabal_cyborginfantry:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_cyborginfantry.description
 	Mobile:
-		TurnSpeed: 12
+		TurnSpeed: 16
 		# TurnSpeed: 10
 		Speed: 40
 		PauseOnCondition: disabled
@@ -98,6 +105,13 @@ cabal_cyborginfantry:
 	ChangesHealth@SelfHealing:
 		Step: 45
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 90
 	Armament@PRIMARY:
 		Weapon: CabalCyborgChaingun
@@ -119,64 +133,9 @@ cabal_cyborginfantry:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
-cabal_ravager:
-	Inherits: ^Soldier
-	Inherits@Template: ^LineBreakerTemplate
-	Inherits@EXPERIENCE: ^GainsExperienceTD
-	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
-	Inherits@vo: ^AttackFrontalVoice
-	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
-	Inherits@RECLAMATION: ^cabal_upgrade_reclamationprotocols
-	Inherits@CATALYST: ^cabal_upgrade_neutronnuclearcatalyst
-	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
-	Armor:
-		Type: Plate
-		-RequiresCondition:
-	Armor@Secondary:
-		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
-	Valued:
-		Cost: 1500
-	Tooltip:
-		Name: Ravager
-	UpdatesPlayerStatistics:
-		AddToArmyValue: true
-	Buildable:
-		BuildPaletteOrder: 15
-		Prerequisites: ~cabal_mechfactory
-		Queue: Vehicle, RAVehicle
-		Description: actor_cabal_ravager.description
-	Mobile:
-		TurnSpeed: 12
-		Speed: 40
-	Health:
-		HP: 70000
-	ChangesHealth@SelfHealing:
-		Step: 70
-	Shielded:
-		RegenAmount: 140
-	Armament@PRIMARY:
-		Weapon: CabalRavagerPlasma
-		LocalOffset: 128,0,256
-		RequiresCondition: !cabal_upgrade_neutronnuclearcatalyst
-	Armament@Upgraded:
-		Weapon: CabalRavagerPlasmaNeutron
-		LocalOffset: 128,0,256
-		RequiresCondition: cabal_upgrade_neutronnuclearcatalyst
-	Armament@GARRISONED: ##########
-		Name: garrisoned
-		Weapon: CabalRavagerPlasma
-	Voiced:
-		VoiceSet: TSCobra
-	-TakeCover:
-	RenderSprites:
-		PlayerPalette: playerra2
 
 cabal_rocketcyborg:
 	Inherits: ^Soldier
@@ -199,8 +158,6 @@ cabal_rocketcyborg:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Light
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 650
 	Tooltip:
@@ -213,7 +170,7 @@ cabal_rocketcyborg:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_rocketcyborg.description
 	Mobile:
-		TurnSpeed: 12
+		TurnSpeed: 16
 		Speed: 40
 		PauseOnCondition: disabled
 	Health:
@@ -221,6 +178,13 @@ cabal_rocketcyborg:
 	ChangesHealth@SelfHealing:
 		Step: 45
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 90
 	Armament@PRIMARY:
 		Weapon: CabalRocketCyborgRockets
@@ -274,7 +238,7 @@ cabal_rocketcyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_devout:
@@ -299,10 +263,8 @@ cabal_devout:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Heavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
-		Cost: 750
+		Cost: 1400
 	Tooltip:
 		Name: Devout
 	UpdatesPlayerStatistics:
@@ -313,15 +275,22 @@ cabal_devout:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_devout.description
 	Mobile:
-		TurnSpeed: 12
+		TurnSpeed: 16
 		Speed: 40
 		PauseOnCondition: disabled
 	Health:
-		HP: 60000
+		HP: 80000
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 80
 	Shielded:
-		RegenAmount: 120
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		RegenAmount: 160
 	Armament@PRIMARY:
 		Weapon: TSDevoutChainguns
 		LocalOffset: 128,-256,256, 128,256,256
@@ -374,7 +343,7 @@ cabal_devout:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_ascended:
@@ -399,8 +368,6 @@ cabal_ascended:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Medium
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 900
 	Tooltip:
@@ -413,15 +380,22 @@ cabal_ascended:
 		Queue: Infantry, RAInfantry
 		Description: actor_cabal_ascended.description
 	Mobile:
-		TurnSpeed: 12
+		TurnSpeed: 16
 		Speed: 40
 		PauseOnCondition: disabled
 	Health:
-		HP: 60000
+		HP: 70000
 	ChangesHealth@SelfHealing:
-		Step: 60
+		Step: 70
 	Shielded:
-		RegenAmount: 120
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
+		RegenAmount: 140
 	Armament@PRIMARY:
 		Weapon: CabalAscendedRockets
 		LocalOffset: 128,-256,256, 128,256,256
@@ -477,7 +451,7 @@ cabal_ascended:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_hackercyborg:
@@ -501,8 +475,6 @@ cabal_hackercyborg:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Scout
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -523,6 +495,13 @@ cabal_hackercyborg:
 	ChangesHealth@SelfHealing:
 		Step: 30
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 60
 	Armament@Anim:
 		Weapon: TSCABALempdisable.anim
@@ -532,6 +511,13 @@ cabal_hackercyborg:
 		Weapon: TSCABALempdisable.end
 		RequiresCondition: end_disable >= 1
 		LocalOffset: -128,0,256
+	GrantConditionOnAttack@End:
+		Condition: end_disable
+		RequiredShotsPerInstance: 25
+		MaximumInstances: 1
+		RevokeDelay: 5
+		RevokeAll: false
+		IsCyclic: false
 	# Armament@PRIMARY:
 	# 	Weapon: TSRobotHackingControl
 	# 	LocalOffset: 0,0,90
@@ -584,7 +570,7 @@ cabal_hackercyborg:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 	MindControllerCA:
 		ArmamentNames: primary
@@ -600,7 +586,7 @@ cabal_hackercyborg:
 		Color: 663399b0
 	SpeedMultiplier@cabal_upgrade_handof:
 		RequiresCondition: cabal_upgrade_handof
-		Modifier: 125
+		Modifier: 115
 
 cabal_cyborgcommando:
 	Inherits: ^Soldier
@@ -622,8 +608,6 @@ cabal_cyborgcommando:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 5000
 	Tooltip:
@@ -637,7 +621,7 @@ cabal_cyborgcommando:
 		BuildLimit: 1
 		Description: actor_cabal_cyborgcommando.description
 	Mobile:
-		TurnSpeed: 12
+		TurnSpeed: 16
 		# TurnSpeed: 10
 		Speed: 40
 		PauseOnCondition: disabled
@@ -646,6 +630,13 @@ cabal_cyborgcommando:
 	ChangesHealth@SelfHealing:
 		Step: 250
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 500
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasma
@@ -671,7 +662,7 @@ cabal_cyborgcommando:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_cyborgcommandov2:
@@ -695,8 +686,6 @@ cabal_cyborgcommandov2:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 10000
 	Tooltip:
@@ -710,7 +699,7 @@ cabal_cyborgcommandov2:
 		BuildLimit: 1
 		Description: actor_cabal_cyborgcommandov2.description
 	Mobile:
-		TurnSpeed: 12
+		TurnSpeed: 16
 		# TurnSpeed: 10
 		Speed: 40
 		PauseOnCondition: disabled
@@ -719,6 +708,13 @@ cabal_cyborgcommandov2:
 	ChangesHealth@SelfHealing:
 		Step: 400
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 800
 	Armament@PRIMARY:
 		Weapon: CabalCommandoPlasmaMk2
@@ -744,7 +740,7 @@ cabal_cyborgcommandov2:
 	RenderSprites:
 		PlayerPalette: playerra2
 	WithDeathAnimation:
-		DeathSequencePalette: ra2player
+		PlayerPalette: playerra2
 		CrushedSequencePalette: ra2effect
 
 cabal_eliminator800:
@@ -765,8 +761,6 @@ cabal_eliminator800:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Heavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 1250
 	Tooltip:
@@ -781,9 +775,16 @@ cabal_eliminator800:
 	ChangesHealth@SelfHealing:
 		Step: 85
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 170
 	Mobile:
-		TurnSpeed: 12
+		TurnSpeed: 16
 		Speed: 40
 		Voice: Move
 	Guard:
@@ -797,15 +798,9 @@ cabal_eliminator800:
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
 		LocalOffset: 544,100,256
-	Armament@AA:
-		Name: aa
-		Weapon: CabalEliminatorGatlingAA
-		MuzzleSequence: muzzle
-		MuzzlePalette: d2keffect
-		LocalOffset: 544,100,256
 	Armament@GARRISONED:
 		Name: garrisoned
-		Weapon: RA2DoublePistols
+		Weapon: CabalEliminatorGatling
 	WithMuzzleOverlay:
 	AttackFrontal:
 		FacingTolerance: 0
@@ -859,8 +854,6 @@ cabal_dissolver:
 		-RequiresCondition:
 	Armor@Secondary:
 		Type: Superheavy
-	DamageMultiplier@Secondary:
-		Modifier: 200
 	Valued:
 		Cost: 725
 	Tooltip:
@@ -872,15 +865,22 @@ cabal_dissolver:
 		Description: actor_cabal_dissolver.description
 	Mobile:
 		Speed: 40
-		TurnSpeed: 12
+		TurnSpeed: 16
 	Health:
 		HP: 50000
 	ChangesHealth@SelfHealing:
 		Step: 50
 	Shielded:
+		RequiresCondition: armored
+		ShieldsUpCondition: armored
+		SelectionBarColor: FFFF88FF
+		InitialPercentageStrength: 100
+		MaxPercentageStrength: 100
+		DamageRegenDelay: 125
+		RegenInterval: 1
 		RegenAmount: 100
 	Turreted:
-		TurnSpeed: 10
+		TurnSpeed: 16
 		Offset: 0,0,25
 	Armament:
 		Weapon: CabalDissolverSpray

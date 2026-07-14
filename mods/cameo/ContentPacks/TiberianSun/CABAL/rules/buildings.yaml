@@ -1,6 +1,6 @@
 cabal_refinery:
 	Inherits: ^BaseBuilding
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@ref: ^Refinery
 	HitShape:
 		Type: Rectangle
@@ -54,7 +54,7 @@ cabal_refinery:
 cabal_powerplant:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@power: ^PowerPlant
 	Tooltip:
 		Name: CABAL Power Plant
@@ -98,7 +98,7 @@ cabal_powerplant:
 
 cabal_cyborgfactory:
 	Inherits: ^BaseBuilding
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@shape: ^2x2Shape
 	Inherits@barr: ^IsBarrack
 	HitShape:
@@ -148,7 +148,7 @@ cabal_cyborgfactory:
 
 cabal_mechfactory:
 	Inherits: ^BaseBuilding
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@shape: ^3x2Shape
 	Inherits@weap: ^IsWeaponFactory
 	HitShape:
@@ -200,7 +200,7 @@ cabal_mechfactory:
 cabal_servicedepot:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@repair: ^RepairsUnits
 	Inherits@repair: ^RepairFacility
 	Valued:
@@ -251,7 +251,7 @@ cabal_servicedepot:
 cabal_helipad:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@hpad: ^IsAircraftFactory
 	Valued:
 		Cost: 1000
@@ -294,7 +294,7 @@ cabal_radar:
 	Inherits: ^BaseBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@spy: ^InfiltrateForSupportPowerReset
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	HitShape:
 		TargetableOffsets: 0,0,0, 0,512,0, 420,-598,256
 		Type: Rectangle
@@ -358,7 +358,7 @@ cabal_radar:
 
 cabal_techcenter:
 	Inherits: ^BaseBuilding
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
 	Selectable:
@@ -421,7 +421,7 @@ cabal_techcenter:
 		Produces: Hackers
 # tsnttmpl:
 # 	Inherits: ^BaseBuilding
-# 	Inherits@sell: ^TSSpawnActorsOnSell
+# 	Inherits@sell: ^CABALSpawnActorsOnSell
 # 	Inherits@tech: ^IsTechnoBuilding
 # 	Inherits@shape: ^3x2Shape
 # 	# Inherits@hunterseeker: ^HunterSeekersPower
@@ -458,7 +458,7 @@ cabal_techcenter:
 
 cabal_core:
 	Inherits: ^BaseBuilding
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@tech: ^IsTechnoBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@hunterseeker: ^HunterSeekersPower

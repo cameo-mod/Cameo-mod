@@ -71,6 +71,10 @@ factions, everything through the balance workbook._
   - small → TS120mm_bluenuke (Tarantula, ~24k), CabalRavagerPlasma (~32k)
   - med   → Commando plasma (~50k), TS155mm_bluenuke (Artillery, ~60k)
   - **magicnuke (biggest) → the new CABAL superweapon ONLY** (below).
+- [x] **Artillery Spider projectile rework** (`901a9018f`): Archer/Specter-style
+  ballistic shell with visible blue contrail; upgraded version uses CABAL
+  purple → dark-blue thicker contrail and adds Tesla/Magic/Railgun/Chemical
+  warheads. Spreadsheet synced.
 
 ### N2. CABAL superweapon (biggest magicnuke) (`1f8b58820`)
 - [x] New nuke support power, **same values as the Ixian EMP Nuke**
@@ -163,12 +167,19 @@ factions, everything through the balance workbook._
 - [x] **Template role audit**: fixed Engineer→^MechanicTemplate,
   Eliminator 800→^HeavyInfantryTemplate, Carryall→^UnarmedTransportHelicopterTemplate,
   Scarab APC→^SupportVehicleTemplate + ^CargoVehicle (`81bad88d2`).
-- [ ] **Open question**: Overkill Fortress vs Overkill Carrier final name.
+- [x] **Balance formula audit**: all 30 CABAL units [OK] — 0 ABSURD, 0 HIGH,
+  0 formula-broken. Fixed 7 problem units (Legion, Mothership, RocketCyborg,
+  Wasp, WaspStriker, Ascended, Beholder) + dissolver crash (missing crippled
+  sequences + wrong icon palette) (`50f3db5e4`); fixed 3 formula-broken
+  workbook rows 27-29 (`160a6491a`).
+- [x] **Repair Drone** added as buildable support aircraft (`94a58b2a7`);
+  spreadsheet row added, icon uses carrier icon placeholder.
+- [x] **Open question**: Overkill Fortress vs Overkill Carrier final name.
 
 ### N10. Upgrades audit
 - [x] Reviewed every CABAL upgrade for meaningful consumption. Removed the
-  meaningless `cabal_upgrade_clusterwarhead` (no actor, building, or
-  template consumed it; also removed its Fluent description and AI entry).
+  meaningless `cabal_upgrade_clusterwarhead` (no actor, building, or template
+  consumed it; also removed its Fluent description and AI entry).
   All other upgrades are wired: conditions granted by templates are
   inherited and used by at least one actor or support power. Kept the
   neutron-shell twins untouched.

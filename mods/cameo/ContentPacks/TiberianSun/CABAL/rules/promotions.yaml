@@ -5,7 +5,7 @@ cabal_promotion_devout:
 	Buildable:
 		BuildPaletteOrder: 1
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_devout, rank1
+		Prerequisites: !cabal_promotion_devout, rank1
 		Description: actor_cabal_promotion_devout.description
 	RenderSprites:
 		Image: cabal_devout
@@ -18,7 +18,7 @@ cabal_promotion_ascended:
 	Buildable:
 		BuildPaletteOrder: 4
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_ascended, cabal_promotion_devout, rank2
+		Prerequisites: !cabal_promotion_ascended, cabal_promotion_devout, rank1
 		Description: actor_cabal_promotion_ascended.description
 	RenderSprites:
 		Image: cabal_ascended
@@ -31,7 +31,7 @@ cabal_promotion_beholder:
 	Buildable:
 		BuildPaletteOrder: 7
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_beholder, cabal_promotion_ascended, cabal_techcenter, rank3
+		Prerequisites: !cabal_promotion_beholder, cabal_promotion_ascended, rank1
 		Description: actor_cabal_promotion_beholder.description
 	RenderSprites:
 		Image: cabal_beholder
@@ -44,43 +44,46 @@ cabal_promotion_cyborgcommandov2:
 	Buildable:
 		BuildPaletteOrder: 10
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_cyborgcommandov2, cabal_promotion_beholder, cabal_core, rank4
+		Prerequisites: !cabal_promotion_cyborgcommandov2, cabal_promotion_beholder, rank1
 		Description: actor_cabal_promotion_cyborgcommandov2.description
 	RenderSprites:
 		Image: cabal_cyborgcommandov2
 	ProvidesPrerequisite:
 
-cabal_promotion_spidercnc4:	Inherits: ^promotion_upgrade.template
+cabal_promotion_spidercnc4:
+	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Spider CNC4
 	Buildable:
 		BuildPaletteOrder: 2
 		Queue: Promotions
-		Prerequisites: ~cabal_mechfactory, !cabal_promotion_spidercnc4, rank1
+		Prerequisites: !cabal_promotion_spidercnc4, rank1
 		Description: actor_cabal_promotion_spidercnc4.description
 	RenderSprites:
 		Image: cabal_laserspider
 	ProvidesPrerequisite:
 
-cabal_promotion_heavyreaper:	Inherits: ^promotion_upgrade.template
+cabal_promotion_heavyreaper:
+	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Heavy Reaper
 	Buildable:
 		BuildPaletteOrder: 5
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_heavyreaper, cabal_promotion_spidercnc4, rank2
+		Prerequisites: !cabal_promotion_heavyreaper, cabal_promotion_spidercnc4, rank1
 		Description: actor_cabal_promotion_heavyreaper.description
 	RenderSprites:
 		Image: cabal_cyborgreaper
 	ProvidesPrerequisite:
 
-cabal_promotion_widow:	Inherits: ^promotion_upgrade.template
+cabal_promotion_widow:
+	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Widow
 	Buildable:
 		BuildPaletteOrder: 8
 		Queue: Promotions
-		Prerequisites: ~cabal_mechfactory, !cabal_promotion_widow, cabal_promotion_heavyreaper, rank3
+		Prerequisites: !cabal_promotion_widow, cabal_promotion_heavyreaper, rank1
 		Description: actor_cabal_promotion_widow.description
 	RenderSprites:
 		Image: cabal_manticore
@@ -93,33 +96,61 @@ cabal_promotion_coredefender:
 	Buildable:
 		BuildPaletteOrder: 11
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, !cabal_promotion_coredefender, cabal_core, cabal_promotion_widow, rank4
+		Prerequisites: !cabal_promotion_coredefender, cabal_promotion_widow, rank1
 		Description: actor_cabal_promotion_coredefender.description
 	RenderSprites:
 		Image: cabal_coredefender
 	ProvidesPrerequisite:
 
-cabal_promotion_waspstriker:	Inherits: ^promotion_upgrade.template
+cabal_promotion_cyborgassassin:
+	Inherits: ^promotion_upgrade.template
 	Tooltip:
-		Name: Unlock Wasp Striker
+		Name: Unlock Cyborg Assassin
 	Buildable:
 		BuildPaletteOrder: 3
 		Queue: Promotions
-		Prerequisites: ~cabal_cyborgfactory, cabal_radar, !cabal_promotion_waspstriker, rank1
-		Description: actor_cabal_promotion_waspstriker.description
+		Prerequisites: !cabal_promotion_cyborgassassin, rank1
+		Description: actor_cabal_promotion_cyborgassassin.description
 	RenderSprites:
-		Image: cabal_wasp
+		Image: cabal_cyborg_assassin
 	ProvidesPrerequisite:
 
-cabal_promotion_hunterkillermk1elite:	Inherits: ^promotion_upgrade.template
+cabal_promotion_hunterkillermk1elite:
+	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Super Hunter Killer
 	Buildable:
 		BuildPaletteOrder: 6
 		Queue: Promotions
-		Prerequisites: ~cabal_helipad, !cabal_promotion_hunterkillermk1elite, cabal_promotion_waspstriker, rank2
+		Prerequisites: !cabal_promotion_hunterkillermk1elite, cabal_promotion_cyborgassassin, rank1
 		Description: actor_cabal_promotion_hunterkillermk1elite.description
 	RenderSprites:
 		Image: cabal_hunterkillermk1
+	ProvidesPrerequisite:
+
+cabal_promotion_overkillgunship:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Overkill Gunship
+	Buildable:
+		BuildPaletteOrder: 9
+		Queue: Promotions
+		Prerequisites: !cabal_promotion_overkillgunship, cabal_promotion_hunterkillermk1elite, rank1
+		Description: actor_cabal_promotion_overkillgunship.description
+	RenderSprites:
+		Image: cabal_overkill_gunship
+	ProvidesPrerequisite:
+
+cabal_promotion_mothership:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mothership
+	Buildable:
+		BuildPaletteOrder: 12
+		Queue: Promotions
+		Prerequisites: !cabal_promotion_mothership, cabal_promotion_overkillgunship, rank1
+		Description: actor_cabal_promotion_mothership.description
+	RenderSprites:
+		Image: cabal_mothership
 	ProvidesPrerequisite:
 

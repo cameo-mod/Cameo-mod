@@ -1,7 +1,7 @@
 cabal_silo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Selectable:
 		Bounds: 2048, 2048
 	Valued:
@@ -67,7 +67,7 @@ cabal_missilesilo:
 		Image: tsgtsilo.cabal
 cabal_stealthgenerator:
 	Inherits: ^BaseBuilding
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Inherits@SHAPE: ^3x2Shape
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@cloakanim: ^TiberiumCloakAnimation
@@ -117,7 +117,7 @@ cabal_heavycabalobelisk:
 	Inherits@shape: ^2x2Shape
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetGround
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Valued:
 		Cost: 2400
 	Tooltip:
@@ -173,7 +173,7 @@ cabal_obeliskofdarkness:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
-	Inherits@sell: ^TSSpawnActorsOnSell
+	Inherits@sell: ^CABALSpawnActorsOnSell
 	Valued:
 		Cost: 1200
 	Tooltip:

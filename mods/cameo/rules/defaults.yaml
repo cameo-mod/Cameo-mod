@@ -8630,6 +8630,8 @@ CPQDEBUGDUMMY:
 	Inherits: ^upgrade.template
 	Buildable:
 		Queue: Promotions
+	Selectable:
+		DecorationBounds: 1024, 1024
 	PromotionUpgrade:
 
 ^Cargo:
