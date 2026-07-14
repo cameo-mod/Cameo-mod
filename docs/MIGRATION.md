@@ -38,6 +38,11 @@ folder, move the yaml, keep `content.yaml` at root, update the
 migration into `files/` comes later. Research one already-split pack and
 apply the identical structure everywhere.
 
+**YAML-folder restructure COMPLETE (2026-07-14):** All ContentPacks now
+use the `yaml/` + `files/` structure. The old `rules/`, `weapons/`, and
+`sequences/` subdirectories have been removed. `translations/` stays
+separate (not MiniYaml). Next step: asset migration into `files/`.
+
 **Cross-faction shared effects — long-term de-sharing.** Factions now
 cross-reference each other's effect sprites/weapons heavily. The
 end-state needs each faction's effects to be its own, or at minimum
