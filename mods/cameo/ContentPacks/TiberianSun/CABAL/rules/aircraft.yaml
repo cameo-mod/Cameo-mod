@@ -31,9 +31,21 @@ cabal_overkill_gunship:
 		HP: 47500
 	ChangesHealth@SelfHealing:
 		Step: 19
-	Armament@PRIMARY:
+	Armament@LEFT:
 		Weapon: CabalOverkillGunshipLaser
-		LocalOffset: 0,0,0
+		LocalOffset: 0,-512,0
+		PauseOnCondition: !ammo
+	Armament@RIGHT:
+		Weapon: CabalOverkillGunshipLaser
+		LocalOffset: 0,512,0
+		PauseOnCondition: !ammo
+	AmmoPool:
+		Ammo: 6
+		AmmoCondition: ammo
+		ReloadCount: 6
+	ReloadAmmoPool:
+		Delay: 80
+		Count: 6
 	AttackAircraft:
 		FacingTolerance: 80
 		PersistentTargeting: false
