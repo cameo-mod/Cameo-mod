@@ -64,13 +64,13 @@ World:
 		ClassName: Light Support
 		Factions: tanod
 		BaseActor: mcv.tanod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,tsttnk
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,ts_nod_ticktank
 	StartingUnits@heavytanod:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tanod
 		BaseActor: mcv.tanod
-		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,tsttnk,tsttnk,tsttnk,tsttnk
+		SupportActors: tse1,tse1,tse1,tse3,tse3,ts_nod_attackbuggy,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank
 	StartingUnits@mcvonlyrataforgotten:
 		Class: none
 		ClassName: MCV Only

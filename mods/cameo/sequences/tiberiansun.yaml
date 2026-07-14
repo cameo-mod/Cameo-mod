@@ -95,7 +95,7 @@ tsengineer:
 altengi:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: altengi.shp
+		Filename: ts_nod_engineer_altengi.shp
 	icon:
 		Filename: ts_gdi_engineer_icon.shp
 
@@ -103,9 +103,9 @@ tse3:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: alte3.shp
+		Filename: ts_nod_rocketinfantry_alte3.shp
 	icon:
-		Filename: tse3icon.png
+		Filename: ts_nod_rocketinfantry_icon.png
 
 tstratos:
 	Inherits: ^TSBasicInfantry
@@ -118,7 +118,7 @@ tse3mut:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: alte3.shp
+		Filename: ts_nod_rocketinfantry_alte3.shp
 	icon:
 		Filename: forgotten_rocketinfantry_icon.png
 
@@ -199,40 +199,40 @@ tsldrone:
 # 		Start: 41
 # 	icon: jmin
 
-tsbike:
+ts_nod_attackcycle:
 	Defaults:
-		Filename: tsbike.shp
+		Filename: ts_nod_attackcycle.shp
 		Scale: 1.25
 	idle:
-		Filename: tsbike.shp
+		Filename: ts_nod_attackcycle.shp
 		Facings: 32
 		UseClassicFacings: True
 	icon:
-		Filename: tsbikeicon.shp
+		Filename: ts_nod_attackcycle_icon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 
-tsttnk:
+ts_nod_ticktank:
 	Defaults:
 		Scale: 1.25
 	idle:
 		Filename: invisibleitem.shp
 	deploy-idle:
-		Filename: tsgttick.shp
+		Filename: ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 		ShadowStart: 3
 	make:
-		Filename: tsgttickmk.shp
+		Filename: ts_nod_ticktank_tsgttickmk.shp
 		Length: 24
 		ShadowStart: 25
 		Offset: 0, -10, 0
 		Tick: 10
 	dead:
-		Filename: tsgttick.shp
+		Filename: ts_nod_ticktank_tsgttick.shp
 		Offset: 0, -20, 0
 	icon:
-		Filename: tstickicon.png
+		Filename: ts_nod_ticktank_icon.png
 		Offset: 0,0
 	muzzle:
 		Filename: gunfire2.shp
@@ -477,7 +477,7 @@ tsnthpadmut:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: tsnthpadbb.shp
+		Filename: ts_nod_helipad_tsnthpadbb.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
@@ -505,7 +505,7 @@ tsnthpadmut:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: tsnthpadmk.shp
+		Filename: ts_nod_helipad_tsnthpadmk.shp
 	icon:
 		Filename: forgotten_helipad_icon.png
 		Offset: 0, 0
@@ -514,7 +514,7 @@ tsnthpadmut:
 tsgtsilo.gdi:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Scale: 1.25
 		Offset: 4, -24, 24
 	idle:
@@ -530,16 +530,16 @@ tsgtsilo.gdi:
 		Start: 4
 		Length: 4
 	idle-underlay:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		ShadowStart: 3
 		ZOffset: -512
 	damaged-idle-underlay:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -512
 	dead:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -512
@@ -554,7 +554,7 @@ tsgtsilo.gdi:
 		Length: 16
 		Tick: 120
 	make:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 	icon:
 		Filename: tssilo2icon.shp
 		Offset: 0, 0
@@ -565,7 +565,7 @@ tsgtsilo.gdi:
 tsgtsilo.nod:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: tsgtsilo.shp
+		Filename: ts_nod_silo_tsgtsilo.shp
 		Scale: 1.25
 		Offset: 4, -24, 24
 	idle:
@@ -734,7 +734,7 @@ tsapache:
 	idle:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: tsharpyicon.shp
+		Filename: ts_nod_harpy_icon.shp
 	rotor:
 		Filename: lrotor.shp
 		Length: 4

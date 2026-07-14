@@ -63,13 +63,13 @@ World:
 		ClassName: Light Support
 		Factions: tsnod
 		BaseActor: ts_nod_mobileconstructionvehicle
-		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,tsttnk
+		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,ts_nod_ticktank
 	StartingUnits@heavytsnod:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: tsnod
 		BaseActor: ts_nod_mobileconstructionvehicle
-		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,tsttnk,tsttnk,tsttnk,tsttnk
+		SupportActors: tse1,tse1,tse1,ts_nod_rocketinfantry,ts_nod_rocketinfantry,ts_nod_attackbuggy,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank,ts_nod_ticktank
 	StartingUnits@mcvonlyraforgotten:
 		Class: none
 		ClassName: MCV Only
@@ -1030,7 +1030,7 @@ tsaegis:
 # TS Nod Vehicles
 #######################################
 
-TSBIKE:
+ts_nod_attackcycle:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD
@@ -1087,7 +1087,7 @@ TSBIKE:
 	ActorStatValues:
 		Upgrades: ts_nod_upgrade_mobilityspecialization, ts_nod_upgrade_tiberiumcoremissiles, ts_nod_upgrade_advancedtiberiumrefinement
 
-TSTTNK:
+ts_nod_ticktank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTD

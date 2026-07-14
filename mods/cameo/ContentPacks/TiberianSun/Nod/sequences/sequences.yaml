@@ -2,14 +2,14 @@ ts_nod_lightinfantry:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: altnode1.shp
+		Filename: ts_nod_lightinfantry_altnode1.shp
 	icon:
 		Filename: ts_gdi_lightinfantry_icon.png
 
 ts_nod_chameleonspy:
 	Inherits: ^TSBasicInfantry
 	Defaults:
-		Filename: tschamspy.shp
+		Filename: ts_nod_chameleonspy_tschamspy.shp
 	icon:
 		Filename: ts_nod_chameleonspy_icon.shp
 
@@ -361,7 +361,7 @@ ts_nod_handof:
 	make:
 		Filename: ts_nod_handof_nthandmk.shp
 	icon:
-		Filename: tshandicon.png
+		Filename: ts_nod_handof_icon.png
 		Offset: 0, 0
 		UseTilesetCode: false
 	iconcabal:
@@ -597,16 +597,16 @@ ts_nod_helipad:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: tsnthpadbb.shp
+		Filename: ts_nod_helipad_tsnthpadbb.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Filename: tsnthpadbb.shp
+		Filename: ts_nod_helipad_tsnthpadbb.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
-		Filename: tsnthpadbb.shp
+		Filename: ts_nod_helipad_tsnthpadbb.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c511
@@ -633,7 +633,7 @@ ts_nod_helipad:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: tsnthpadmk.shp
+		Filename: ts_nod_helipad_tsnthpadmk.shp
 	icon:
 		Filename: ts_nod_helipad_icon.shp
 		Offset: 0, 0
@@ -705,35 +705,35 @@ ts_nod_tiberiumwastefacility:
 ts_nod_missilesilo:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
 		Scale: 1.25
 		Offset: -4, -8, 24
 	idle:
-		Filename: cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
 	damaged-idle:
-		Filename: cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
 		Start: 1
 	dead:
-		Filename: cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
 		Start: 2
 		Tick: 400
 	idle-lights:
-		Filename: cabal_missilesilo_b.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo_b.shp
 		Length: 10
 		Tick: 120
 	damaged-idle-lights:
-		Filename: cabal_missilesilo_b.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo_b.shp
 		Start: 10
 		Length: 10
 		Tick: 120
 	make:
-		Filename: cabal_missilesilo_mk.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo_mk.shp
 	active:
-		Filename: cabal_missilesilo_a.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo_a.shp
 		Length: 10
 		Tick: 80
 	damaged-active:
-		Filename: cabal_missilesilo_a.shp
+		Filename: ts_nod_missilesilo_cabal_missilesilo_a.shp
 		Start: 10
 		Length: 10
 		Tick: 80
@@ -744,7 +744,7 @@ ts_nod_missilesilo:
 	down:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: cabal_missilesilo_icon.shp
+		Filename: ts_nod_missilesilo_icon.shp
 		Offset: 0, 0
 
 ts_nod_bansheefighter:
