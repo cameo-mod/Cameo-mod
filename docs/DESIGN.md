@@ -408,29 +408,47 @@ cheapest provider wins).
 
 ## 9. Operating rules for agents
 
-1. Read this document, then `docs/audit/SUMMARY.md` for current state.
-2. Run the relevant audit before and after your change
+1. **Read the ENTIRE DESIGN.md into your context before touching ANY yaml
+   file.** Not a grep, not a search, not a summary — the full file, every
+   session, every time. This is non-negotiable. Skipping this step causes
+   violations of stat rules (Speed steps of 5, HP steps, TurnSpeed formulas,
+   price quantization) that are all documented here. If you find yourself
+   about to edit a yaml file and you have not read this document in full
+   this session, STOP and read it first.
+2. Read this document, then `docs/audit/SUMMARY.md` for current state.
+3. **Changing ANY unit stat (HP, Speed, Damage, ReloadDelay, Range, Cost)
+   requires a FULL REBALANCE of that unit using the balance formula (§12).**
+   You cannot change one stat in isolation — the formula ties all stats
+   together, so changing Speed changes the unit's power, which changes the
+   correct price or requires adjusting other stats to hold the price. The
+   rebalance MUST land in BOTH the spreadsheet
+   (`docs/design/cameo_armor_system.xlsx`) AND the yaml in the same pass.
+   Never change a stat without updating the spreadsheet and verifying the
+   formula still holds. If the range is beautiful (6.000, 7.500), adjust
+   HP/Damage instead of Range. If the new Range would violate promotion
+   superiority, adjust HP or Price instead.
+4. Run the relevant audit before and after your change
    (`tools/audit/run_all.sh`, or a single `audit_*.py`).
-3. Classify bugs as B1–B12 (MASTER_REPORT §4); if the class detector
+5. Classify bugs as B1–B12 (MASTER_REPORT §4); if the class detector
    missed your bug, improve the detector in the same change.
-4. Small typo-class fixes (wrong condition name, weapon-as-voice, swapped
+6. Small typo-class fixes (wrong condition name, weapon-as-voice, swapped
    tooltips): **fix immediately and report it** so design knows.
-5. Display-name changes and balance-affecting decisions: propose options,
+7. Display-name changes and balance-affecting decisions: propose options,
    let design choose first.
-6. Renames/refactors are proven behavior-preserving with resolved-diff
+8. Renames/refactors are proven behavior-preserving with resolved-diff
    snapshots; balance changes are never mixed into them.
-7. Clean commits, one concern each; commit when design says so.
-8. Every new unit ships with: naming-compliant id + `_icon`, Fluent keys,
+9. Clean commits, one concern each; commit when design says so.
+10. Every new unit ships with: naming-compliant id + `_icon`, Fluent keys,
    ai.yaml wiring, roster-wide upgrade hooks, class template, sequences
    that resolve, and a changelog line (Definition of Done,
    MASTER_REPORT Appendix D).
-9. **Always separate top-level elements with a single blank line** —
+11. **Always separate top-level elements with a single blank line** —
    every actor, weapon, template, and sequence block is followed by an
    empty line before the next one, so it is easy to see where one ends
    and the next begins. A comment block stays attached (no blank line)
    to the element it documents. Scripted edits must preserve the blank
    line (a common bug: a block-replace that drops the trailing blank).
-10. **All icons carry the `_icon` suffix** (§1/§8), including upgrade
+12. **All icons carry the `_icon` suffix** (§1/§8), including upgrade
    research icons: `ordos_upgrade_hoverdrive_icon.png`, never
    `ordos_upgrade_hoverdrive.png`.
 

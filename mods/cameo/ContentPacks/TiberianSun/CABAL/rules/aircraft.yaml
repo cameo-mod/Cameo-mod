@@ -28,9 +28,9 @@ cabal_overkill_gunship:
 		TakeOffOnResupply: true
 		CanSlide: false
 	Health:
-		HP: 47500
+		HP: 45000
 	ChangesHealth@SelfHealing:
-		Step: 19
+		Step: 18
 	Armament@LEFT:
 		Weapon: CabalOverkillGunshipLaser
 		LocalOffset: 0,-512,0
@@ -418,7 +418,7 @@ cabal_hunterkillermk1_elite:
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Valued:
-		Cost: 2250
+		Cost: 3000
 	Tooltip:
 		Name: Super Hunter Killer
 	UpdatesPlayerStatistics:
