@@ -428,33 +428,33 @@ CabalReaperMissiles:
 	ReloadDelay: 32
 	Burst: 2
 	BurstDelays: 4
-	Range: 5153
+	Range: 5785
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
 	Warhead@LightMissile: SpreadDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 4
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 4
 	Warhead@Grenade: SpreadDamage
-		Damage: 4000
+		Damage: 8000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
-		Damage: 2000
-	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 2
-	Warhead@ShrapnelWeapon: SpreadDamage
 		Damage: 4000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
 	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
-		Damage: 2
+		Damage: 4
 
 CabalReaperMissilesAA:
 	Inherits: CabalReaperMissiles
-	Range: 7730
+	Range: 8680
 	ValidTargets: Air
 	Warhead@LightMissile: SpreadDamage
 		ValidTargets: Air
@@ -463,6 +463,62 @@ CabalReaperMissilesAA:
 	Warhead@MediumMissile: SpreadDamage
 		ValidTargets: Air
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@Grenade: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		ValidTargets: Air
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@ShrapnelWeapon: SpreadDamage
+		ValidTargets: Air
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		ValidTargets: Air
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Air
+
+CabalHeavyReaperMissiles:
+	Inherits: ^Grenade
+	Inherits@2: ^ShrapnelWeapon
+	Inherits@3: ^MediumMissile
+	Inherits@4: ^HeavyMissile
+	Inherits@5: ^CabalMissile
+	ReloadDelay: 30
+	Range: 6085
+	ValidTargets: Ground, Water
+	Report: samshot1.aud
+	Warhead@MediumMissile: SpreadDamage
+		Damage: 12000
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@HeavyMissile: SpreadDamage
+		Damage: 12000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@Grenade: SpreadDamage
+		Damage: 12000
+	Warhead@GrenadeFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 6
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 12000
+	Warhead@ShrapnelWeaponFriendlyFire: SpreadDamage
+		Damage: 6000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 6
+
+CabalHeavyReaperMissilesAA:
+	Inherits: CabalHeavyReaperMissiles
+	Range: 9130
+	ValidTargets: Air
+	Warhead@MediumMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@MediumMissilePercentage: HealthPercentageDamage
+		ValidTargets: Air
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Air
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Air
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Air

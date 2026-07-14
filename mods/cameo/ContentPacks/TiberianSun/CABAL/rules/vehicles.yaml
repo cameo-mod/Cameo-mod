@@ -142,7 +142,7 @@ cabal_cyborgreaper:
 	Armament:
 		Weapon: CabalReaperMissiles
 		LocalOffset: 128,-200,350, 128,200,350
-	Armament@AA:
+	Armament@SECONDARY:
 		Weapon: CabalReaperMissilesAA
 	Armament@TRAP:
 		Weapon: CabalReaperTrap
@@ -810,17 +810,17 @@ cabal_heavyreaper:
 		Prerequisites: ~cabal_cyborgfactory, cabal_promotion_heavyreaper
 		Description: actor_cabal_heavyreaper.description
 	Health:
-		HP: 70000
+		HP: 75000
 	ChangesHealth@SelfHealing:
-		Step: 28
+		Step: 30
 	Mobile:
 		TurnSpeed: 26
 		Speed: 65
 	Armament:
-		Weapon: CabalReaperMissiles
+		Weapon: CabalHeavyReaperMissiles
 		LocalOffset: 128,-200,350, 128,200,350
-	Armament@AA:
-		Weapon: CabalReaperMissilesAA
+	Armament@SECONDARY:
+		Weapon: CabalHeavyReaperMissilesAA
 	Armament@TRAP:
 		Weapon: CabalHeavyReaperTrap
 	Voiced:
