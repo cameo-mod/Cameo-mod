@@ -28,9 +28,9 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 1. **`casinocrate` fires nonexistent `TSChemTacticalMissile`** — crash on crate pickup (misc.yaml).
 2. **`fiendspawner` warhead spawns unpositionable `tsdoggiew`** — crash when it resolves.
 3. **StartingUnits reference 5 missing actors** (`tsbike2`, `tsttnk2`, `steel_qtank`, `steel_qutnk`, `technicaltank`) — broken starting-unit options.
-4. **`tsarnd` muzzle sequence undefined** — CABAL Eliminator 800, crash-risk/cosmetic.
+4. **`tsarnd` muzzle sequence undefined** — STALE: unit renamed to `cabal_eliminator800`, muzzle sequence exists at sequences.yaml:2040.
 5. **RA2 Allies hero-infantry stack measures 36×** fresh-self power (Assault Squad + Vanguard + Infiltrators + Chromium/Prismatic lines) — worst in game; Yuri 30× behind it.
-6. **ai.yaml: 200 references defined nowhere** — incl. `tsgtcnstcabalb`, `tsntpulscabal` (live CABAL), `ra2naclon`, `nax2_chrono`.
+6. **ai.yaml: 200 references defined nowhere** — incl. `ra2naclon`, `nax2_chrono` (CABAL refs `tsgtcnstcabalb`/`tsntpulscabal` already removed).
 7. **Stale "BuildingFractions Dune Universe" block** uses pre-ContentPacks names — entire section steers nothing.
 8. **`raider.ordos` not in any AI build list** — the freshly reworked Ordos Raider is never built by bots (also `runner.steel`, `orion.futu`, `yrrobo.futu`, 5 Naxis units).
 9. **`ra_doctrine_teslatech` doubles reload (Modifier 200) on 2 actors** — suspected Dark-Armament-class inversion; verify.
@@ -43,7 +43,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 16. **3 player-visible raw Fluent keys** (`SCvoidray`, `upvoidray`, `up_blitzkrieg.nax` descriptions).
 17. **`wc2_orc_eye_of_kilrogg` TurnSpeed 2048** (median 20) — stale-scale value; bounds screen otherwise clean.
 18. **345 orphan weapons + 542 orphan sequence images** — RAM/load-time dead weight.
-19. **CABAL absent from Random AND Tournament pools**, still titled "(WIP)" — oversight or intentional? (Forgotten was just added to both.)
+19. **CABAL absent from Random AND Tournament pools, still titled "(WIP)"** — FIXED: CABAL added to both pools, WIP label removed.
 20. **CABAL post-TB23 full stack = 3.9×** — over the 2.0 budget but sane; trim one Research multiplier or cap rank scaling.
 
 ## Recommended fix order (per MASTER_REPORT §4)
