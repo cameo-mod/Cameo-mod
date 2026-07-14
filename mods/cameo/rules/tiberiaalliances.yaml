@@ -5267,7 +5267,7 @@ tatacitus:
 		InsufficientPowerSpeechNotification: InsufficientPower
 		LaunchSpeechNotification: NuclearWeaponLaunched
 		IncomingSpeechNotification: NuclearWarheadApproaching
-		MissileWeapon: TSChemTacticalMissile
+		MissileWeapon: TSTacticalChemMissile
 		MissileDelay: 5
 		MissilePalette: tseffect
 		FlightDelay: 100
@@ -5282,7 +5282,7 @@ tatacitus:
 		ArrowSequence: arrow
 		ClockSequence: clocklarge
 		CircleSequence: circles
-		MissileImage: TSChemTacticalMissile
+		MissileImage: tsnodmmsil
 	NukePower:
 		AllowMultiple: True
 		PauseOnCondition: lowpower
