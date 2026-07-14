@@ -2707,7 +2707,7 @@ ra1_soviet_barracks:
 		Length: 10
 		Offset: 0,-12
 	make:
-		Filename: ra1_soviet_barracks_barrmake.shp
+		Filename: ra1_soviet_barracks_make.shp
 		Length: *
 		Offset: 0,-12
 	dead:
@@ -2776,7 +2776,7 @@ dome:
 		Start: 1
 		Offset: 0,-8
 	make:
-		Filename: ra1_allies_alliedradardome_domemake.shp
+		Filename: ra1_allies_alliedradardome_make.shp
 		Length: *
 		Offset: 0,-8
 	dead:
@@ -2901,7 +2901,7 @@ ra1_allies_alliedhelipad:
 		Length: 6
 		ZOffset: -1023
 	make:
-		Filename: ra1_allies_alliedhelipad_rahpadmake.shp
+		Filename: ra1_allies_alliedhelipad_make.shp
 		Length: *
 	dead:
 	bib:
@@ -2936,7 +2936,7 @@ ra1_soviet_airfield:
 		ZOffset: -1023
 		Offset: 0,-6
 	make:
-		Filename: ra1_soviet_airfield_raafldmake.shp
+		Filename: ra1_soviet_airfield_make.shp
 		Length: *
 		Offset: 0,-6
 	dead:
@@ -3044,7 +3044,7 @@ ra1_allies_alliedgunturret:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: ra1_allies_alliedgunturret_ragunmake.shp
+		Filename: ra1_allies_alliedgunturret_make.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -3072,7 +3072,7 @@ ra1_allies_alliedaagun:
 		Start: 32
 		Facings: 32
 	make:
-		Filename: ra1_allies_alliedaagun_agunmake.shp
+		Filename: ra1_allies_alliedaagun_make.shp
 		Length: *
 	damaged-idle:
 		Start: 64
@@ -3145,7 +3145,7 @@ ra1_soviet_teslacoil:
 	damaged-idle:
 		Start: 10
 	make:
-		Filename: ra1_soviet_teslacoil_tslamake.shp
+		Filename: ra1_soviet_teslacoil_make.shp
 		Length: *
 	active:
 		Start: 1
@@ -3170,7 +3170,7 @@ ra1_allies_pillbox:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: ra1_allies_pillbox_pboxmake.shp
+		Filename: ra1_allies_pillbox_make.shp
 		Length: *
 	dead:
 	muzzle:
@@ -3244,7 +3244,7 @@ ra1_allies_gapgenerator:
 		Offset: 0,-28
 	dead:
 	make:
-		Filename: ra1_allies_gapgenerator_gapmake.shp
+		Filename: ra1_allies_gapgenerator_make.shp
 		Length: *
 		Offset: 0,-28
 	gapfield:
@@ -3277,7 +3277,7 @@ ra1_soviet_ironcurtain:
 		Offset: 0,-0
 	dead:
 	make:
-		Filename: ra1_soviet_ironcurtain_ironmake.shp
+		Filename: ra1_soviet_ironcurtain_make.shp
 		Length: *
 		Offset: 0,-0
 	bib:
@@ -3325,7 +3325,7 @@ ra1_soviet_missilesilo:
 	damaged-idle:
 		Start: 8
 	make:
-		Filename: ra1_soviet_missilesilo_mslomake.tem
+		Filename: ra1_soviet_missilesilo_make.tem
 		TilesetFilenames:
 			WINTER: mslomake.win
 			SNOW: mslomake.sno
@@ -5033,7 +5033,7 @@ japan_waveforceturret:
 		Facings: 64
 		Start: 64
 	make:
-		Filename: japan_waveforceturret_waveturretmake.shp
+		Filename: japan_waveforceturret_make.shp
 		Length: *
 	dead:
 	muzzle:

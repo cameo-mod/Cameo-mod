@@ -1420,7 +1420,7 @@ tascrapbus:
 	RevealsShroud:
 		Range: 5c0
 	Armament:
-		Weapon: ZSU-23
+		Weapon: zsu_23
 		LocalOffset: 384,0,128, 224,-341,128, -224,-341,128, -384,0,128, -224,341,128, 224,341,128
 	AttackTurreted:
 	Turreted:
@@ -5508,7 +5508,7 @@ taflakb:
 		Offset: 0,0,900
 	WithSpriteBody:
 	Armament:
-		Weapon: ZSU-23
+		Weapon: zsu_23
 		LocalOffset: 410,0,700
 	GrantConditionOnPrerequisite@taupguidedmiss:
 		Condition: taupguidedmiss
@@ -5891,7 +5891,7 @@ tamutflak:
 		Offset: 0,0,900
 	WithSpriteBody:
 	Armament:
-		Weapon: ZSU-23
+		Weapon: zsu_23
 		LocalOffset: 410,0,700
 	AttackTurreted:
 	WithVoxelBarrel:

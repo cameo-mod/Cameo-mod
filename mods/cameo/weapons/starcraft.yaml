@@ -3305,7 +3305,7 @@ GlaveCanon:
 		ValidTargets: Ground, Water
 		Damage: 4
 
-Psi-blades:
+psi_blades:
 	Inherits: ^SwordWeapon
 	Report: pzehit00.aud
 	SoundVolume: 3
@@ -3322,7 +3322,7 @@ Psi-blades:
 	Warhead@Effect: CreateEffect
 		ImpactSounds: zulhit00.aud,zulhit01.aud
 
-Psi-spear:
+psi_spear:
 	Inherits: ^SwordWeapon
 	Report: pzehit00.aud
 	SoundVolume: 3

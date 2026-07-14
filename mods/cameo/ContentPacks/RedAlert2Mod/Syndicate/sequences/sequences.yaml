@@ -9,7 +9,7 @@ latin_syndicate_syndicateconstructionyard:
 		Start: 1
 		Tick: 150
 	make:
-		Filename: latin_syndicate_syndicateconstructionyard_cgcnstmk.shp
+		Filename: latin_syndicate_syndicateconstructionyard_make.shp
 		Length: 24
 		ShadowStart: 24
 	idle-top:
@@ -81,7 +81,7 @@ latin_syndicate_powerstation:
 		Length: 11
 		Tick: 150
 	make:
-		Filename: latin_syndicate_powerstation_cgpowmk.shp
+		Filename: latin_syndicate_powerstation_make.shp
 		Length: 20
 		ShadowStart: 20
 	dead:
@@ -130,7 +130,7 @@ latin_syndicate_combatbarracks:
 		Length: 7
 		Tick: 200
 	make:
-		Filename: latin_syndicate_combatbarracks_cgpilemk.shp
+		Filename: latin_syndicate_combatbarracks_make.shp
 		Length: 23
 		ShadowStart: 23
 	dead:
@@ -215,7 +215,7 @@ latin_syndicate_syndicatefactory:
 		Tick: 150
 		ZOffset: -1012
 	make:
-		Filename: latin_syndicate_syndicatefactory_cgweapmk.shp
+		Filename: latin_syndicate_syndicatefactory_make.shp
 		Length: 25
 		ShadowStart: 25
 	icon:
@@ -233,7 +233,7 @@ latin_syndicate_recyclingrefinery:
 		Start: 1
 		ShadowStart: 3
 	make:
-		Filename: latin_syndicate_recyclingrefinery_cgautomk.shp
+		Filename: latin_syndicate_recyclingrefinery_make.shp
 		Length: 48
 		ShadowStart: 48
 	idle-drill:
@@ -307,7 +307,7 @@ latin_syndicate_defensebureau:
 		Length: 4
 		Tick: 250
 	make:
-		Filename: latin_syndicate_defensebureau_cgupmk.shp
+		Filename: latin_syndicate_defensebureau_make.shp
 		Length: 42
 		ShadowStart: 42
 	bib:
@@ -341,7 +341,7 @@ latin_syndicate_spycenter:
 		Filename: latin_syndicate_spycenter_cgspy_cd.shp
 		Length: 9
 	make:
-		Filename: latin_syndicate_spycenter_cgspymk.shp
+		Filename: latin_syndicate_spycenter_make.shp
 		Length: 15
 		ShadowStart: 15
 	dead:
@@ -409,7 +409,7 @@ latin_syndicate_recyclingcenter:
 		Length: 12
 		Start: 12
 	make:
-		Filename: latin_syndicate_recyclingcenter_cgtemk.shp
+		Filename: latin_syndicate_recyclingcenter_make.shp
 		Length: 22
 		ShadowStart: 22
 	dead:
@@ -460,7 +460,7 @@ latin_syndicate_airstation:
 		Tick: 120
 		ZOffset: -1c512
 	make:
-		Filename: latin_syndicate_airstation_cgairmk.shp
+		Filename: latin_syndicate_airstation_make.shp
 		Length: 35
 		ShadowStart: 35
 	dead:
@@ -487,7 +487,7 @@ latin_syndicate_bunkertower:
 		Start: 3
 		ShadowStart: 7
 	make:
-		Filename: latin_syndicate_doctrine_lightposts_naguardmk.shp
+		Filename: latin_syndicate_doctrine_lightposts_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
@@ -575,7 +575,7 @@ latin_syndicate_topolsilo:
 		Length: 91
 		Tick: 110
 	make:
-		Filename: latin_syndicate_topolsilo_ca12hitmk.shp
+		Filename: latin_syndicate_topolsilo_make.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
@@ -618,11 +618,11 @@ latin_syndicate_syndicateservicedepot:
 		ShadowStart: 3
 		ZOffset: -512
 	make:
-		Filename: latin_syndicate_syndicateservicedepot_cgdeptmk.shp
+		Filename: latin_syndicate_syndicateservicedepot_make.shp
 		Length: 20
 		ShadowStart: 20
 	dead:
-		Filename: latin_syndicate_syndicateservicedepot_cgdeptmk.shp
+		Filename: latin_syndicate_syndicateservicedepot_make.shp
 		Start: 19
 	repair:
 		Filename: latin_syndicate_syndicateservicedepot_cgdept_c.shp
@@ -649,7 +649,7 @@ latin_syndicate_smlturret:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: latin_syndicate_smlturret_smlmk.shp
+		Filename: latin_syndicate_smlturret_make.shp
 		Length: 17
 	dead:
 		Filename: invisibleitem.shp
@@ -680,7 +680,7 @@ latin_syndicate_latinsentrygun:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: latin_syndicate_latinsentrygun_ngdshkmk.shp
+		Filename: latin_syndicate_latinsentrygun_make.shp
 		Length: 20
 		ShadowStart: 20
 	dead:
@@ -704,7 +704,7 @@ latin_syndicate_latinaadefender:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: latin_syndicate_latinaadefender_aamk.shp
+		Filename: latin_syndicate_latinaadefender_make.shp
 		Length: 29
 		ShadowStart: 29
 	dead:

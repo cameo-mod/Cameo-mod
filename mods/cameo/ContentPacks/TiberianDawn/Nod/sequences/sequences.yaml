@@ -179,7 +179,7 @@ td_nod_handofnod:
 		Start: 2
 		Tick: 800
 	make:
-		Filename: td_nod_handofnod_handmake.shp
+		Filename: td_nod_handofnod_make.shp
 		Length: *
 		Tick: 80
 	icon:
@@ -249,7 +249,7 @@ td_nod_templeofnod:
 		Start: 66
 		Tick: 800
 	make:
-		Filename: td_nod_templeofnod_tmplmake.shp
+		Filename: td_nod_templeofnod_make.shp
 		Length: *
 		Tick: 60
 	bib:
@@ -307,7 +307,7 @@ td_nod_obeliskoflight:
 		Start: 8
 		Tick: 800
 	make:
-		Filename: td_nod_obeliskoflight_oblimake.shp
+		Filename: td_nod_obeliskoflight_make.shp
 		Length: 13
 		Tick: 80
 	bib:
@@ -332,7 +332,7 @@ td_nod_gunturret:
 		Start: 96
 		Facings: 32
 	make:
-		Filename: td_nod_gunturret_gunmake.shp
+		Filename: td_nod_gunturret_make.shp
 		Length: *
 		Tick: 80
 	muzzle:
@@ -399,7 +399,7 @@ td_nod_samsite:
 	place:
 		Start: 0
 	make:
-		Filename: td_nod_samsite_sammake.shp
+		Filename: td_nod_samsite_make.shp
 		Length: 20
 		Tick: 30
 	muzzle:

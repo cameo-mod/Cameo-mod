@@ -223,7 +223,7 @@ ts_nod_ticktank:
 		Offset: 0, -20, 0
 		ShadowStart: 3
 	make:
-		Filename: ts_nod_ticktank_tsgttickmk.shp
+		Filename: ts_nod_ticktank_make.shp
 		Length: 24
 		ShadowStart: 25
 		Offset: 0, -10, 0
@@ -334,7 +334,7 @@ tsgtcnst:
 		ShadowStart: 5
 		Tick: 400
 	make:
-		Filename: ts_gdi_constructionyard_cabal_mk.shp
+		Filename: ts_gdi_constructionyard_cabal_make.shp
 		Length: 24
 		ShadowStart: 24
 	crane-overlay:
@@ -505,7 +505,7 @@ tsnthpadmut:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: ts_nod_helipad_mk.shp
+		Filename: ts_nod_helipad_make.shp
 	icon:
 		Filename: forgotten_helipad_icon.png
 		Offset: 0, 0
@@ -610,7 +610,7 @@ tsgtsilo.nod:
 		Length: 3
 		Tick: 120
 	make:
-		Filename: ts_nod_silo_mk.shp
+		Filename: ts_nod_silo_make.shp
 	icon:
 		Filename: ts_nod_silo_icon.png
 		Offset: 0, 0
@@ -710,7 +710,7 @@ tsgtdept:
 		Start: 2
 		ZOffset: -1c511
 	make:
-		Filename: ts_gdi_servicedepot_cabal_mk.shp
+		Filename: ts_gdi_servicedepot_cabal_make.shp
 	icon:
 		Filename: ts_gdi_servicedepot_icon.png
 		Offset: 0, 0

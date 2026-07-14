@@ -55,6 +55,16 @@ tech item id     :=  [game_]faction_(upgrade|promotion|doctrine)_nameinonegroup
   suffix (`forgotten_warfactory_door.png`). Shared sprite archives
   (DATA.R16-style) and files shared between images are never renamed after
   one unit.
+- **Asset suffix words are ALWAYS full words, never abbreviations**
+  (design 2026-07-14): construction animations use `_make` (never `_mk`,
+  never compressed old-name + `mk` like `ntcnstmk`); building bib overlays
+  use `_bib` (never `_bb`); damaged/idle/active/dead sequences use their
+  full names. When migrating old assets, strip any compressed old-name
+  prefix from the suffix and replace short forms with full words:
+  `ra2_soviets_constructionyard_ntcnstmk.shp` →
+  `ra2_soviets_constructionyard_make.shp`. The only exception is `_mk2`/
+  `_mk3` as unit variant markers (Mark II/III), which are part of the
+  actor name, not a sequence suffix.
 - **Cross-actor namespaces are sacred**: voice sets, notifications, shared
   art are NEVER renamed with a unit. `tools/rename/apply.py` protects
   audio files and `VoiceSet:` lines structurally.

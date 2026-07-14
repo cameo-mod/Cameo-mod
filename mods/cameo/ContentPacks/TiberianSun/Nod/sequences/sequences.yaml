@@ -163,7 +163,7 @@ ts_nod_laserfence:
 		Start: 2
 		Tick: 400
 	make:
-		Filename: ts_nod_laserfence_tspostmk.shp
+		Filename: ts_nod_laserfence_make.shp
 		Start: 0
 		Length: 2
 		Tick: 160
@@ -283,7 +283,7 @@ ts_nod_powerplant:
 		Length: 9
 		Tick: 200
 	make:
-		Filename: ts_nod_powerplant_mk.shp
+		Filename: ts_nod_powerplant_make.shp
 	icon:
 		Filename: ts_nod_powerplant_icon.png
 		Offset: 0, 0, 25
@@ -315,7 +315,7 @@ ts_nod_advancedpowerplant:
 		Length: 9
 		Tick: 200
 	make:
-		Filename: ts_nod_advancedpowerplant_mk.shp
+		Filename: ts_nod_advancedpowerplant_make.shp
 	icon:
 		Filename: ts_nod_advancedpowerplant_icon.png
 		Offset: 0, 0
@@ -359,7 +359,7 @@ ts_nod_handof:
 		Length: 12
 		Tick: 200
 	make:
-		Filename: ts_nod_handof_nthandmk.shp
+		Filename: ts_nod_handof_make.shp
 	icon:
 		Filename: ts_nod_handof_icon.png
 		Offset: 0, 0
@@ -421,7 +421,7 @@ ts_nod_warfactory:
 		ShadowStart: 20
 		ZOffset: 512
 	make:
-		Filename: ts_nod_warfactory_mk.shp
+		Filename: ts_nod_warfactory_make.shp
 	bib2:
 		Filename: ts_nod_warfactory_bb.shp
 		ZOffset: -1024
@@ -471,7 +471,7 @@ ts_nod_radar:
 		Length: 24
 		Tick: 120
 	make:
-		Filename: ts_nod_radar_mk.shp
+		Filename: ts_nod_radar_make.shp
 	icon:
 		Filename: ts_nod_radar_icon.shp
 		Offset: 0, 0
@@ -503,7 +503,7 @@ ts_nod_techcenter:
 		Length: 9
 		Tick: 120
 	make:
-		Filename: ts_nod_techcenter_mk.shp
+		Filename: ts_nod_techcenter_make.shp
 	icon:
 		Filename: ts_nod_techcenter_icon.png
 		Offset: 0, 0
@@ -535,7 +535,7 @@ ts_nod_obeliskoflight:
 		Length: 12
 		Tick: 80
 	make:
-		Filename: ts_nod_obeliskoflight_mk.shp
+		Filename: ts_nod_obeliskoflight_make.shp
 	icon:
 		Filename: ts_nod_obeliskoflight_icon.png
 		Offset: 0,0
@@ -633,7 +633,7 @@ ts_nod_helipad:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: ts_nod_helipad_mk.shp
+		Filename: ts_nod_helipad_make.shp
 	icon:
 		Filename: ts_nod_helipad_icon.shp
 		Offset: 0, 0
@@ -727,7 +727,7 @@ ts_nod_missilesilo:
 		Length: 10
 		Tick: 120
 	make:
-		Filename: ts_nod_missilesilo_cabal_mk.shp
+		Filename: ts_nod_missilesilo_cabal_make.shp
 	active:
 		Filename: ts_nod_missilesilo_cabal_a.shp
 		Length: 10
