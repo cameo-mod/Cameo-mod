@@ -1,4 +1,4 @@
-mili.latin:
+latin_syndicate_latinmilitia:
 	Inherits: ^Soldier
 	Inherits@Template: ^ScoutInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -14,7 +14,7 @@ mili.latin:
 		Cost: 130
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~cgpile.latin
+		Prerequisites: ~latin_syndicate_combatbarracks
 		Queue: Infantry, RAInfantry
 		Description: actor_latin_mili.description
 	Mobile:
@@ -31,10 +31,10 @@ mili.latin:
 		RequiresCondition: rank-elite
 	Armament@Molotov:
 		Weapon: RA2Molotov
-		RequiresCondition: up_mili.latin && !rank-elite
+		RequiresCondition: latin_syndicate_doctrine_eliteguerillas && !rank-elite
 	Armament@MolotovELITE:
 		Weapon: RA2MolotovE
-		RequiresCondition: up_mili.latin && rank-elite
+		RequiresCondition: latin_syndicate_doctrine_eliteguerillas && rank-elite
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: RA2MiliAK47
@@ -50,34 +50,34 @@ mili.latin:
 	Armament@MolotovGARRISONED:
 		Name: garrisoned
 		Weapon: RA2Molotov
-		RequiresCondition: up_mili.latin && !rank-elite
+		RequiresCondition: latin_syndicate_doctrine_eliteguerillas && !rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	Armament@MolotovGARRISONEDELITE:
 		Name: garrisoned
 		Weapon: RA2MolotovE
-		RequiresCondition: up_mili.latin && rank-elite
+		RequiresCondition: latin_syndicate_doctrine_eliteguerillas && rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: LatinSoldierVoice
-	DamageMultiplier@up_mili.latin:
+	DamageMultiplier@latin_syndicate_doctrine_eliteguerillas:
 		Modifier: 50
-	FirepowerMultiplier@up_mili.latin:
+	FirepowerMultiplier@latin_syndicate_doctrine_eliteguerillas:
 		Modifier: 150
 	ActorStatValues:
-		Upgrades: up_mili.latin, up_chaingun.latin
+		Upgrades: latin_syndicate_doctrine_eliteguerillas, latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && up_chaingun.latin
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && up_chaingun.latin
-	GrantConditionOnPrerequisite@up_chaingun.latin:
-		Condition: up_chaingun.latin
-		Prerequisites: up_chaingun.latin
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
 
-tkiller.latin:
+latin_syndicate_latintankkiller:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -92,7 +92,7 @@ tkiller.latin:
 		Cost: 270
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgpile.latin
+		Prerequisites: ~latin_syndicate_combatbarracks
 		Queue: Infantry, RAInfantry
 		Description: template_antitank_antiair_infantry.description
 	Mobile:
@@ -126,7 +126,7 @@ tkiller.latin:
 	RenderSprites:
 		Image: asian_alliance_asiantankkiller
 
-monkey.latin:
+latin_syndicate_grenademonkey:
 	Inherits: ^DefaultInfantry
 	Inherits@2: ^AffectedByTiberium
 	Inherits@Template: ^GrenadierInfantryTemplate
@@ -143,7 +143,7 @@ monkey.latin:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgpile.latin
+		Prerequisites: ~latin_syndicate_combatbarracks
 		Queue: Infantry, RAInfantry
 		Description: actor_latin_monkey.description
 	Mobile:
@@ -155,27 +155,27 @@ monkey.latin:
 	Armament@PRIMARY:
 		Weapon: LatinMonkeyGrenade1
 		LocalOffset: 128,0,256
-		RequiresCondition: (!up_hotfire.latin && !rank-elite)
+		RequiresCondition: (!latin_syndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)
 	Armament@SECONDARY:
 		Weapon: LatinMonkeyGrenade2
 		LocalOffset: 128,0,256
-		RequiresCondition: (up_hotfire.latin && !rank-elite) || (!up_hotfire.latin && rank-elite)
+		RequiresCondition: (latin_syndicate_upgrade_asianalliancestolentechhotfire && !rank-elite) || (!latin_syndicate_upgrade_asianalliancestolentechhotfire && rank-elite)
 	Armament@ELITE:
 		Weapon: LatinMonkeyGrenade3
 		LocalOffset: 128,0,256
-		RequiresCondition: (up_hotfire.latin && rank-elite)
+		RequiresCondition: (latin_syndicate_upgrade_asianalliancestolentechhotfire && rank-elite)
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: LatinMonkeyGrenade1
-		RequiresCondition: (!up_hotfire.latin && !rank-elite)
+		RequiresCondition: (!latin_syndicate_upgrade_asianalliancestolentechhotfire && !rank-elite)
 	Armament@GARRISONEDSECONDARY:
 		Name: garrisoned
 		Weapon: LatinMonkeyGrenade2
-		RequiresCondition: (up_hotfire.latin && !rank-elite) || (!up_hotfire.latin && rank-elite)
+		RequiresCondition: (latin_syndicate_upgrade_asianalliancestolentechhotfire && !rank-elite) || (!latin_syndicate_upgrade_asianalliancestolentechhotfire && rank-elite)
 	Armament@GARRISONEDELITE:
 		Name: garrisoned
 		Weapon: LatinMonkeyGrenade3
-		RequiresCondition: (up_hotfire.latin && rank-elite)
+		RequiresCondition: (latin_syndicate_upgrade_asianalliancestolentechhotfire && rank-elite)
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
@@ -206,9 +206,9 @@ monkey.latin:
 	FireWarheadsOnDeath:
 		Weapon: LatinMonkeyGrenadeExplode
 	ActorStatValues:
-		Upgrades: up_mili.latin, up_hotfire.latin
+		Upgrades: latin_syndicate_doctrine_eliteguerillas, latin_syndicate_upgrade_asianalliancestolentechhotfire
 
-fthrow.latin:
+latin_syndicate_latinflametrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@FireInfantry: ^FireInfantry
@@ -225,7 +225,7 @@ fthrow.latin:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cgpile.latin, cgspy.latin
+		Prerequisites: ~latin_syndicate_combatbarracks, latin_syndicate_spycenter
 		Queue: Infantry, RAInfantry
 		Description: actor_latin_fthrow.description
 	Mobile:
@@ -254,25 +254,25 @@ fthrow.latin:
 		RequiresCondition: rank-elite
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
-	FirepowerMultiplier@up_hotfire.latin:
+	FirepowerMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 200
-		RequiresCondition: up_hotfire.latin
-	RangeMultiplier@up_hotfire.latin:
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	RangeMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 110
-		RequiresCondition: up_hotfire.latin
-	SpeedMultiplier@up_hotfire.latin:
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	SpeedMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 120
-		RequiresCondition: up_hotfire.latin
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
 	FireWarheadsOnDeath:
 		Weapon: SyndicateFireballLauncherExplode
 	ActorStatValues:
-		Upgrades: up_mili.latin, up_hotfire.latin
+		Upgrades: latin_syndicate_doctrine_eliteguerillas, latin_syndicate_upgrade_asianalliancestolentechhotfire
 	AttackFrontal:
 		FacingTolerance: 0
 	Voiced:
 		VoiceSet: LatinSoldierVoice
 
-narco.latin:
+latin_syndicate_narco:
 	Inherits: ^Soldier
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -290,7 +290,7 @@ narco.latin:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~cgpile.latin, up_narco.latin, radar.latin
+		Prerequisites: ~latin_syndicate_combatbarracks, latin_syndicate_promotion_unlocknarcos, latin_syndicate_latinempradar
 		Queue: Infantry, RAInfantry
 		Description: actor_latin_narco.description
 	Mobile:
@@ -369,16 +369,16 @@ narco.latin:
 	FireWarheadsOnDeath:
 		Weapon: LatinMonkeyGrenadeExplode
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && up_chaingun.latin
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && up_chaingun.latin
-	GrantConditionOnPrerequisite@up_chaingun.latin:
-		Condition: up_chaingun.latin
-		Prerequisites: up_chaingun.latin
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
 	ActorStatValues:
-		Upgrades: up_mili.latin, up_chaingun.latin, up_hotfire.latin
+		Upgrades: latin_syndicate_doctrine_eliteguerillas, latin_syndicate_upgrade_yuristolentechchainguns, latin_syndicate_upgrade_asianalliancestolentechhotfire
 
-fftr.latin:
+latin_syndicate_freedomfighter:
 	Inherits: ^Soldier
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceRA2
@@ -396,7 +396,7 @@ fftr.latin:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgpile.latin, cgspy.latin
+		Prerequisites: ~latin_syndicate_combatbarracks, latin_syndicate_spycenter
 		BuildLimit: 1
 		Description: actor_latin_fftr.description
 	Mobile:
@@ -454,11 +454,11 @@ fftr.latin:
 		RequiresCondition: !tree
 	Voiced:
 		VoiceSet: LatinRamboVoice
-	GrantConditionOnPrerequisite@up_alliedstolentech.latin:
-		Condition: up_alliedstolentech.latin
-		Prerequisites: up_alliedstolentech.latin
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		Condition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		Prerequisites: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
 	Mirage:
-		RequiresCondition: !disabled && up_alliedstolentech.latin
+		RequiresCondition: !disabled && latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
 		InitialDelay: 25
 		RevealDelay: 25
 		RevealOn: Attack, Move, Damage, SelfHeal
@@ -466,23 +466,23 @@ fftr.latin:
 		DefaultTargetTypes: t08, t10, t03, t02
 	WithMirageSpriteBody:
 		Name: tree
-		RequiresCondition: tree && up_alliedstolentech.latin
+		RequiresCondition: tree && latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
 		IsPlayerPalette: false
 		Palette: ra_temperat
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && up_chaingun.latin
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && up_chaingun.latin
-	GrantConditionOnPrerequisite@up_chaingun.latin:
-		Condition: up_chaingun.latin
-		Prerequisites: up_chaingun.latin
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
 	ActorStatValues:
-		Upgrades: up_mili.latin, up_chaingun.latin, up_alliedstolentech.latin, up_hotfire.latin
+		Upgrades: latin_syndicate_doctrine_eliteguerillas, latin_syndicate_upgrade_yuristolentechchainguns, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_asianalliancestolentechhotfire
 
-ra2engineer.latin:
+latin_syndicate_engineer:
 	Inherits: ra2_allies_engineer
 	Buildable:
-		Prerequisites: ~cgpile.latin
+		Prerequisites: ~latin_syndicate_combatbarracks
 		Queue: Infantry, RAInfantry
 	Voiced:
 		VoiceSet: LatinEngVoice
@@ -493,7 +493,7 @@ ra2engineer.latin:
 	Captures@REUSABLE:
 		Voice: Attack
 
-ra2terror.latin:
+latin_syndicate_terrorist:
 	Inherits: ^Soldier
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -509,7 +509,7 @@ ra2terror.latin:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~cgpile.latin, up_ra2terror.latin
+		Prerequisites: ~latin_syndicate_combatbarracks, latin_syndicate_promotion_unlockterrorists
 		Queue: Infantry, RAInfantry
 		Description: actor_terror.description
 	Mobile:
@@ -522,7 +522,7 @@ ra2terror.latin:
 		Weapon: RA2Terrorist
 		EmptyWeapon: RA2Terrorist
 		RequiresCondition: !disabled
-	FirepowerMultiplier@up_hotfire.latin:
+	FirepowerMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 200
 	AttackFrontal:
 		FacingTolerance: 512
@@ -545,7 +545,7 @@ ra2terror.latin:
 		ConsumedByCapture: True
 		EnterCursor: c4
 	ActorStatValues:
-		Upgrades: up_mili.latin, up_hotfire.latin
+		Upgrades: latin_syndicate_doctrine_eliteguerillas, latin_syndicate_upgrade_asianalliancestolentechhotfire
 	RenderSprites:
 		Image: ra2terror #placeholder
 	GrantExternalConditionToTransport:

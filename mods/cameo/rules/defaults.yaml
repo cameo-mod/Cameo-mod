@@ -2196,7 +2196,7 @@
 		Prerequisites: ra2_soviets_industrialplant
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: up_industrial.latin
+		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
 	ProductionCostMultiplier@ShockwaveIndustrial:
 		Multiplier: 90
 		Prerequisites: schindustrialplant
@@ -2220,7 +2220,7 @@
 		RequiresCondition: cashrecover
 	GrantConditionOnPrerequisite@CashRecover:
 		Condition: cashrecover
-		Prerequisites: up_cashrecover.latin
+		Prerequisites: latin_syndicate_upgrade_cashrecovery
 	EdibleByLeap:
 	Crushable:
 		WarnProbability: 0
@@ -2485,7 +2485,7 @@
 		Prerequisites: ra1_soviet_upgrade_massproduction
 	ProductionCostMultiplier@LatinIndustrialMethods:
 		Multiplier: 80
-		Prerequisites: up_industrial.latin
+		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
 	ProductionCostMultiplier@DuneFactoryUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_hightech
@@ -2868,15 +2868,15 @@
 			ra2_soviets_battlebunker: garrisoned
 			naxis_naxibunker: garrisoned
 			terran_bunker: garrisoned
-			cgpile.latin: biggarrisoned
-			cgup.latin: biggarrisoned
-			ngbunk2.latin: biggarrisoned
+			latin_syndicate_combatbarracks: biggarrisoned
+			latin_syndicate_defensebureau: biggarrisoned
+			latin_syndicate_bunkertower: biggarrisoned
 			td_gdi_assaultapc: battlefortresspassenger
 			ra2_allies_battlefortress: battlefortresspassenger
 			asian_alliance_dragonfly: battlefortresspassenger
 			asian_alliance_warturtle: battlefortresspassenger
-			humvee.latin: battlefortresspassenger
-			cartel.latin: battlefortresspassenger
+			latin_syndicate_narcohummer: battlefortresspassenger
+			latin_syndicate_carteltruck: battlefortresspassenger
 			scrapcar_driveby.latin: battlefortresspassenger
 			scrapcar2_driveby.latin: battlefortresspassenger
 			naxis_oldtank: battlefortresspassenger
@@ -2908,10 +2908,10 @@
 		RequiresCondition: garrisoned
 	RangeMultiplier@BigGarrison:
 		Modifier: 130
-		RequiresCondition: biggarrisoned && up_ngbunk2.latin
+		RequiresCondition: biggarrisoned && latin_syndicate_doctrine_lightposts
 	GrantConditionOnPrerequisite@ngbunk2:
-		Condition: up_ngbunk2.latin
-		Prerequisites: up_ngbunk2.latin
+		Condition: latin_syndicate_doctrine_lightposts
+		Prerequisites: latin_syndicate_doctrine_lightposts
 	ProductionCostMultiplier@DuneBarracksUpgrade:
 		Multiplier: 90
 		Prerequisites: upgrade_barracks
@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,cgair.latin,naxis_airfield,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,asian_alliance_asianairforcecommand,steel_consortium_consortiumairpad,latin_syndicate_airstation,naxis_airfield,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latin_syndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, asian_alliance_asianservicedepot, latin_syndicate_syndicateservicedepot, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld

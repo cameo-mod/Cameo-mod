@@ -45,35 +45,35 @@ triton.latin:
 	AttackFrontal:
 		Voice: Attack
 		FacingTolerance: 0
-	GrantConditionOnPrerequisite@up_chaingun.latin:
-		Condition: up_chaingun.latin
-		Prerequisites: up_chaingun.latin
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
 	ReloadDelayMultiplier@gat1:
 		Modifier: 50
-		RequiresCondition: gatling == 1 && up_chaingun.latin
+		RequiresCondition: gatling == 1 && latin_syndicate_upgrade_yuristolentechchainguns
 	ReloadDelayMultiplier@gat2:
 		Modifier: 25
-		RequiresCondition: gatling > 1 && up_chaingun.latin
+		RequiresCondition: gatling > 1 && latin_syndicate_upgrade_yuristolentechchainguns
 	RangeMultiplier@gat1:
 		Modifier: 111
-		RequiresCondition: gatling == 1 && up_chaingun.latin
+		RequiresCondition: gatling == 1 && latin_syndicate_upgrade_yuristolentechchainguns
 	RangeMultiplier@gat2:
 		Modifier: 123
-		RequiresCondition: gatling > 1 && up_chaingun.latin
+		RequiresCondition: gatling > 1 && latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@gatling:
 		Condition: gatling
 		RequiredShotsPerInstance: 3, 8
-		RequiresCondition: !rank-elite && up_chaingun.latin
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
 		Condition: gatling
 		RequiredShotsPerInstance: 2, 4
-		RequiresCondition: rank-elite && up_chaingun.latin
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
 	Selectable:
 		DecorationBounds: 1024, 1024
 	Voiced:
 		VoiceSet: LatinSoldierVoice
 	ActorStatValues:
-		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -95,7 +95,7 @@ sub.latin:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~cgyard.latin, cgspy.latin
+		Prerequisites: ~cgyard.latin, latin_syndicate_spycenter
 		Queue: Naval, RANaval
 		Description: actor_ra2sub.description
 	Mobile:
@@ -113,7 +113,7 @@ sub.latin:
 	Armament@ARTILLERY:
 		Weapon: RA2AkulaRockets
 		LocalOffset: 800,320,250, 800,-320,250, 600,320,250, 600,-320,250, 400,320,250, 400,-320,250, 200,320,250, 200,-320,250
-	FirepowerMultiplier@up_hotfire.latin:
+	FirepowerMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 200
 	Targetable:
 		TargetTypes: Ground, Water, Ship, Submarine
@@ -132,7 +132,7 @@ sub.latin:
 	Voiced:
 		VoiceSet: TyphoonSubVoice
 	ActorStatValues:
-		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_hotfire.latin
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_asianalliancestolentechhotfire
 	RenderSprites:
 		PlayerPalette: playerra2
 
@@ -188,7 +188,7 @@ rammax.latin:
 	Voiced:
 		VoiceSet: LatinSoldierVoice
 	ActorStatValues:
-		Upgrades: up_cashrecover.latin, up_industrial.latin
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods
 	RenderSprites:
 		PlayerPalette: playerra2
 

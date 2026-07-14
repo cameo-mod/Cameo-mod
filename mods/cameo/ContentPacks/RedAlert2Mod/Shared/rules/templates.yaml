@@ -259,84 +259,84 @@
 
 ^SyndicateSpawnActorsOnSell:
 	SpawnActorsOnSell:
-		ActorTypes: ra2engineer.latin, mili.latin, mili.latin, monkey.latin
+		ActorTypes: latin_syndicate_engineer, latin_syndicate_latinmilitia, latin_syndicate_latinmilitia, latin_syndicate_grenademonkey
 
 ^LatinEliteGuerillas:
-	DamageMultiplier@up_mili.latin:
+	DamageMultiplier@latin_syndicate_doctrine_eliteguerillas:
 		Modifier: 75
-		RequiresCondition: up_mili.latin
-	FirepowerMultiplier@up_mili.latin:
+		RequiresCondition: latin_syndicate_doctrine_eliteguerillas
+	FirepowerMultiplier@latin_syndicate_doctrine_eliteguerillas:
 		Modifier: 125
-		RequiresCondition: up_mili.latin
-	ChangesHealth@up_mili.latin:
+		RequiresCondition: latin_syndicate_doctrine_eliteguerillas
+	ChangesHealth@latin_syndicate_doctrine_eliteguerillas:
 		Step: 10
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_mili.latin
-	GrantConditionOnPrerequisite@up_mili.latin:
-		Condition: up_mili.latin
-		Prerequisites: up_mili.latin
+		RequiresCondition: latin_syndicate_doctrine_eliteguerillas
+	GrantConditionOnPrerequisite@latin_syndicate_doctrine_eliteguerillas:
+		Condition: latin_syndicate_doctrine_eliteguerillas
+		Prerequisites: latin_syndicate_doctrine_eliteguerillas
 	ActorStatValues:
-		Upgrades: up_mili.latin
+		Upgrades: latin_syndicate_doctrine_eliteguerillas
 
 ^CartelRocketsUpgrade:
-	RangeMultiplier@up_cartelrockets.latin:
+	RangeMultiplier@latin_syndicate_doctrine_cartelrockets:
 		Modifier: 125
-		RequiresCondition: up_cartelrockets.latin
-	FirepowerMultiplier@up_cartelrockets.latin:
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets
+	FirepowerMultiplier@latin_syndicate_doctrine_cartelrockets:
 		Modifier: 125
-		RequiresCondition: up_cartelrockets.latin
-	GrantConditionOnPrerequisite@up_cartelrockets.latin:
-		Condition: up_cartelrockets.latin
-		Prerequisites: up_cartelrockets.latin
+		RequiresCondition: latin_syndicate_doctrine_cartelrockets
+	GrantConditionOnPrerequisite@latin_syndicate_doctrine_cartelrockets:
+		Condition: latin_syndicate_doctrine_cartelrockets
+		Prerequisites: latin_syndicate_doctrine_cartelrockets
 	ActorStatValues:
-		Upgrades: up_cartelrockets.latin
+		Upgrades: latin_syndicate_doctrine_cartelrockets
 
 ^LightPosts:
-	DamageMultiplier@up_ngbunk2.latin:
+	DamageMultiplier@latin_syndicate_doctrine_lightposts:
 		Modifier: 70
-		RequiresCondition: up_ngbunk2.latin
-	RevealsShroudMultiplier@up_ngbunk2.latin:
+		RequiresCondition: latin_syndicate_doctrine_lightposts
+	RevealsShroudMultiplier@latin_syndicate_doctrine_lightposts:
 		Modifier: 130
-		RequiresCondition: up_ngbunk2.latin
-	GrantConditionOnPrerequisite@up_ngbunk2.latin:
-		Condition: up_ngbunk2.latin
-		Prerequisites: up_ngbunk2.latin
+		RequiresCondition: latin_syndicate_doctrine_lightposts
+	GrantConditionOnPrerequisite@latin_syndicate_doctrine_lightposts:
+		Condition: latin_syndicate_doctrine_lightposts
+		Prerequisites: latin_syndicate_doctrine_lightposts
 	ActorStatValues:
-		Upgrades: up_ngbunk2.latin
+		Upgrades: latin_syndicate_doctrine_lightposts
 
 ^LatinFlameUpgrades:
-	FirepowerMultiplier@up_hotfire.latin:
+	FirepowerMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 125
-		RequiresCondition: up_hotfire.latin
-	ReloadDelayMultiplier@up_hotfire.latin:
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	ReloadDelayMultiplier@latin_syndicate_upgrade_asianalliancestolentechhotfire:
 		Modifier: 75
-		RequiresCondition: up_hotfire.latin
-	GrantConditionOnPrerequisite@up_hotfire.latin:
-		Condition: up_hotfire.latin
-		Prerequisites: up_hotfire.latin
+		RequiresCondition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_asianalliancestolentechhotfire:
+		Condition: latin_syndicate_upgrade_asianalliancestolentechhotfire
+		Prerequisites: latin_syndicate_upgrade_asianalliancestolentechhotfire
 	ActorStatValues:
-		Upgrades: up_hotfire.latin
+		Upgrades: latin_syndicate_upgrade_asianalliancestolentechhotfire
 
 ^LatinCashrecover:
-	DamageMultiplier@up_industrial.latin:
+	DamageMultiplier@latin_syndicate_upgrade_sovietstolentechindustrialmethods:
 		Modifier: 80
-		RequiresCondition: up_industrial.latin
-	SpeedMultiplier@up_alliedstolentech.latin:
+		RequiresCondition: latin_syndicate_upgrade_sovietstolentechindustrialmethods
+	SpeedMultiplier@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
 		Modifier: 125
-		RequiresCondition: up_alliedstolentech.latin
-	RangeMultiplier@up_alliedstolentech.latin:
+		RequiresCondition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+	RangeMultiplier@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
 		Modifier: 105
-		RequiresCondition: up_alliedstolentech.latin
-	GrantConditionOnPrerequisite@up_industrial.latin:
-		Condition: up_industrial.latin
-		Prerequisites: up_industrial.latin
-	GrantConditionOnPrerequisite@up_alliedstolentech.latin:
-		Condition: up_alliedstolentech.latin
-		Prerequisites: up_alliedstolentech.latin
+		RequiresCondition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_sovietstolentechindustrialmethods:
+		Condition: latin_syndicate_upgrade_sovietstolentechindustrialmethods
+		Prerequisites: latin_syndicate_upgrade_sovietstolentechindustrialmethods
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging:
+		Condition: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
+		Prerequisites: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
 	ActorStatValues:
-		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging
 
 ##############################################
 #   Red Alert 2 Consortium Structure

@@ -1,4 +1,4 @@
-ra2hind.latin:
+latin_syndicate_hindtransport:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@cargo: ^CargoAircraft
@@ -12,7 +12,7 @@ ra2hind.latin:
 		Name: ra1_soviet_hindattackhelicopter Transport
 	Buildable:
 		BuildPaletteOrder: 97
-		Prerequisites: ~cgair.latin
+		Prerequisites: ~latin_syndicate_airstation
 		Queue: Aircraft, RAAircraft
 		IconPalette: ra2cameo
 		Description: actor_ra2hind.description
@@ -34,12 +34,12 @@ ra2hind.latin:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && up_chaingun.latin
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && up_chaingun.latin
-	GrantConditionOnPrerequisite@up_chaingun.latin:
-		Condition: up_chaingun.latin
-		Prerequisites: up_chaingun.latin
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
 	WithMuzzleOverlay:
 	AttackAircraft:
 		FacingTolerance: 80
@@ -68,7 +68,7 @@ ra2hind.latin:
 	FirepowerMultiplier@FirerateCompensation:
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
 
 ra2hind_husk.latin:
 	Inherits: ^LargeHelicopterHusk
@@ -81,7 +81,7 @@ ra2hind_husk.latin:
 		Image: ra2hind
 		PlayerPalette: playerra2
 
-yakolev.latin:
+latin_syndicate_yakovlev:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -96,7 +96,7 @@ yakolev.latin:
 		Cost: 900
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~cgair.latin
+		Prerequisites: ~latin_syndicate_airstation
 		Queue: Aircraft, RAAircraft
 		Description: actor_latin_yakovlev.description
 	Health:
@@ -123,7 +123,7 @@ yakolev.latin:
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
-		RequiresCondition: !rank-elite && !up_chaingun.latin
+		RequiresCondition: !rank-elite && !latin_syndicate_upgrade_yuristolentechchainguns
 	Armament@ELITE:
 		Name: primary
 		Weapon: YakovlevCannonE
@@ -131,28 +131,28 @@ yakolev.latin:
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
 		RequiresCondition: rank-elite
-	Armament@up_chaingun.latin:
+	Armament@latin_syndicate_upgrade_yuristolentechchainguns:
 		Name: primary
 		Weapon: YakovlevCannonE
 		LocalOffset: 425,-250,-225, 425,250,-225, 425,-150,-225, 425,150,-225
 		LocalYaw: 50, -50, 25, -25
 		PauseOnCondition: !ammo
-		RequiresCondition: up_chaingun.latin
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@gatling:
-		RequiresCondition: !rank-elite && up_chaingun.latin
+		RequiresCondition: !rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
 	GrantConditionOnAttack@elitegatling:
-		RequiresCondition: rank-elite && up_chaingun.latin
-	GrantConditionOnPrerequisite@up_chaingun.latin:
-		Condition: up_chaingun.latin
-		Prerequisites: up_chaingun.latin
+		RequiresCondition: rank-elite && latin_syndicate_upgrade_yuristolentechchainguns
+	GrantConditionOnPrerequisite@latin_syndicate_upgrade_yuristolentechchainguns:
+		Condition: latin_syndicate_upgrade_yuristolentechchainguns
+		Prerequisites: latin_syndicate_upgrade_yuristolentechchainguns
 	AmmoPool:
 		Ammo: 8
 		AmmoCondition: ammo
 	ReloadAmmoPool:
 		Delay: 40
 		Count: 1
-	ReloadAmmoDelayMultiplier@up_chaingun.latin:
-		RequiresCondition: up_chaingun.latin
+	ReloadAmmoDelayMultiplier@latin_syndicate_upgrade_yuristolentechchainguns:
+		RequiresCondition: latin_syndicate_upgrade_yuristolentechchainguns
 		Modifier: 50
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
@@ -165,9 +165,9 @@ yakolev.latin:
 	SpawnActorOnDeath:
 		Actor: yakolev_husk.latin
 	ActorStatValues:
-		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_chaingun.latin
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_upgrade_yuristolentechchainguns
 	RenderSprites:
-		Image: yakolev.latin
+		Image: latin_syndicate_yakovlev
 		PlayerPalette: playerra2
 
 yakolev_husk.latin:
@@ -186,10 +186,10 @@ yakolev_husk.latin:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: yakolev.latin
+		Image: latin_syndicate_yakovlev
 		PlayerPalette: playerra2
 
-mig.latin:
+latin_syndicate_mig21:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -206,7 +206,7 @@ mig.latin:
 		Cost: 1000
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~cgair.latin, cgspy.latin
+		Prerequisites: ~latin_syndicate_airstation, latin_syndicate_spycenter
 		Queue: Aircraft, RAAircraft
 		Description: actor_bpln.description
 	Health:
@@ -274,10 +274,10 @@ mig.latin:
 	SpawnActorOnDeath:
 		Actor: mig_husk.latin
 	RenderSprites:
-		Image: mig.latin
+		Image: latin_syndicate_mig21
 		PlayerPalette: playerra2
 	ActorStatValues:
-		Upgrades: up_cashrecover.latin, up_industrial.latin, up_alliedstolentech.latin, up_cartelrockets.latin, up_hotfire.latin
+		Upgrades: latin_syndicate_upgrade_cashrecovery, latin_syndicate_upgrade_sovietstolentechindustrialmethods, latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging, latin_syndicate_doctrine_cartelrockets, latin_syndicate_upgrade_asianalliancestolentechhotfire
 
 mig_husk.latin:
 	Inherits: ^PlaneHusk
@@ -295,5 +295,5 @@ mig_husk.latin:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: mig.latin
+		Image: latin_syndicate_mig21
 		PlayerPalette: playerra2

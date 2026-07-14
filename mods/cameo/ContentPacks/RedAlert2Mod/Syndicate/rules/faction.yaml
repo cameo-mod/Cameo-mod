@@ -9,16 +9,16 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: syndicate
-		BaseActor: mcv.latin
+		BaseActor: latin_syndicate_syndicatemobileconstructionvehicle
 	StartingUnits@defaultsyndicate:
 		Class: light
 		ClassName: Light Support
 		Factions: syndicate
-		BaseActor: mcv.latin
-		SupportActors: mili.latin,mili.latin,mili.latin,fftr.latin,fftr.latin,wirbelwind.nax,tiger.nax
+		BaseActor: latin_syndicate_syndicatemobileconstructionvehicle
+		SupportActors: latin_syndicate_latinmilitia,latin_syndicate_latinmilitia,latin_syndicate_latinmilitia,latin_syndicate_freedomfighter,latin_syndicate_freedomfighter,wirbelwind.nax,tiger.nax
 	StartingUnits@heavysyndicate:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: syndicate
-		BaseActor: mcv.latin
-		SupportActors: mili.latin,mili.latin,mili.latin,fftr.latin,fftr.latin,wirbelwind.nax,tiger.nax,tiger.nax,tiger.nax,ptnk.asian,wirbelwind.nax
+		BaseActor: latin_syndicate_syndicatemobileconstructionvehicle
+		SupportActors: latin_syndicate_latinmilitia,latin_syndicate_latinmilitia,latin_syndicate_latinmilitia,latin_syndicate_freedomfighter,latin_syndicate_freedomfighter,wirbelwind.nax,tiger.nax,tiger.nax,tiger.nax,ptnk.asian,wirbelwind.nax

@@ -1,281 +1,281 @@
-cgcnst.latin:
+latin_syndicate_syndicateconstructionyard:
 	Defaults:
 		Offset: 2,-26
 	idle:
-		Filename: latin_cgcnst_c.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_c.shp
 		Tick: 150
 	damaged-idle:
-		Filename: latin_cgcnst_c.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_c.shp
 		Start: 1
 		Tick: 150
 	make:
-		Filename: latin_cgcnstmk.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnstmk.shp
 		Length: 24
 		ShadowStart: 24
 	idle-top:
-		Filename: latin_cgcnst_a.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_a.shp
 		Length: 17
 		Tick: 150
 	damaged-idle-top:
-		Filename: latin_cgcnst_a.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_a.shp
 		Length: 17
 		Tick: 150
 	idle-normal:
-		Filename: latin_cgcnst.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst.shp
 		ZOffset: -1024
 		ShadowStart: 2
 	damaged-idle-normal:
-		Filename: latin_cgcnst.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst.shp
 		Start: 1
 		ZOffset: -1024
 		ShadowStart: 3
 	idle-fans:
-		Filename: latin_cgcnst_d.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_d.shp
 		Length: 10
 		Tick: 150
 	damaged-idle-fans:
-		Filename: latin_cgcnst_d.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_d.shp
 		Length: 10
 		Tick: 150
 	build:
-		Filename: latin_cgcnst_b.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_b.shp
 		Length: 17
 		Tick: 150
 	damaged-build:
-		Filename: latin_cgcnst_b.shp
+		Filename: latin_syndicate_syndicateconstructionyard_latin_cgcnst_b.shp
 		Start: 17
 		Length: 17
 		Tick: 150
 	dead:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latinconyardicon.png
+		Filename: latin_syndicate_syndicateconstructionyard_icon.png
 		Offset: 0,0
 
-cgpow.latin:
+latin_syndicate_powerstation:
 	Defaults:
 		Offset: -5,-30
 	idle:
-		Filename: latin_cgpow.shp
+		Filename: latin_syndicate_powerstation_latin_cgpow.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: latin_cgpow.shp
+		Filename: latin_syndicate_powerstation_latin_cgpow.shp
 		Start: 1
 		ShadowStart: 3
 	critical-idle:
-		Filename: latin_cgpow.shp
+		Filename: latin_syndicate_powerstation_latin_cgpow.shp
 		Start: 1
 		ShadowStart: 3
 	idle-lights:
-		Filename: latin_cgpow_a.shp
+		Filename: latin_syndicate_powerstation_latin_cgpow_a.shp
 		Length: 11
 		Tick: 150
 	damaged-idle-lights:
-		Filename: latin_cgpow_a.shp
+		Filename: latin_syndicate_powerstation_latin_cgpow_a.shp
 		Start: 11
 		Length: 11
 		Tick: 150
 	critical-idle-lights:
-		Filename: latin_cgpow_a.shp
+		Filename: latin_syndicate_powerstation_latin_cgpow_a.shp
 		Start: 11
 		Length: 11
 		Tick: 150
 	make:
-		Filename: latin_cgpowmk.shp
+		Filename: latin_syndicate_powerstation_latin_cgpowmk.shp
 		Length: 20
 		ShadowStart: 20
 	dead:
-		Filename: latin_cgpow.shp
+		Filename: latin_syndicate_powerstation_latin_cgpow.shp
 		Start: 1
 		ShadowStart: 3
 	icon:
-		Filename: latin_powericon.shp
+		Filename: latin_syndicate_powerstation_icon.shp
 		Offset: 0,0
 
-cgpile.latin:
+latin_syndicate_combatbarracks:
 	Defaults:
 		Offset: -16,0
 	build:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: latin_cgpile.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile.shp
 		ShadowStart: 4
 	damaged-idle:
-		Filename: latin_cgpile.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile.shp
 		Start: 1
 		ShadowStart: 5
 	idle-bunkered:
-		Filename: latin_cgpile.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile.shp
 		Start: 2
 		ShadowStart: 6
 	damaged-idle-bunkered:
-		Filename: latin_cgpile.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile.shp
 		Start: 3
 		ShadowStart: 7
 	idle-flag:
-		Filename: latin_cgpile_a.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile_a.shp
 		Length: 6
 		Tick: 200
 	damaged-idle-flag:
-		Filename: latin_cgpile_a.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile_a.shp
 		Start: 6
 		Length: 6
 		Tick: 200
 	idle-antenna:
-		Filename: latin_cgpile_b.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile_b.shp
 		Length: 7
 		Tick: 200
 	damaged-idle-antenna:
-		Filename: latin_cgpile_b.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpile_b.shp
 		Length: 7
 		Tick: 200
 	make:
-		Filename: latin_cgpilemk.shp
+		Filename: latin_syndicate_combatbarracks_latin_cgpilemk.shp
 		Length: 23
 		ShadowStart: 23
 	dead:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_barricon.shp
+		Filename: latin_syndicate_combatbarracks_icon.shp
 		Offset: 0,0
 
-cgweap.latin:
+latin_syndicate_syndicatefactory:
 	Defaults:
 		Offset: -20,-26
 	idle:
-		Filename: latin_cgweap.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap.shp
 		ZOffset: -1536
 		ShadowStart: 2
 	damaged-idle:
-		Filename: latin_cgweap.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1536
 	dead:
-		Filename: latin_cgweap.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1536
 	build-door:
-		Filename: latin_cgweap_w1.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w1.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-build-door:
-		Filename: latin_cgweap_w1.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w1.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
 	build-top:
-		Filename: latin_cgweap_w2.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w2.shp
 		ZOffset: 1024
 		ShadowStart: 2
 	damaged-build-top:
-		Filename: latin_cgweap_w2.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w2.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: 1024
 	# TODO: ngweap_3 and ngweap_4 are used for producing flying actors
 	build-air-open:
-		Filename: latin_cgweap_w3.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w3.shp
 		ShadowStart: 2
 	damaged-air-open:
-		Filename: latin_cgweap_w3.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w3.shp
 		Start: 1
 		ShadowStart: 3
 	build-air-inside:
-		Filename: latin_cgweap_w4.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w4.shp
 		ShadowStart: 2
 	damaged-air-inside:
-		Filename: latin_cgweap_w4.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_w4.shp
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: latin_cgweapbb.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweapbb.shp
 		ZOffset: -1024
 	damaged-bib:
-		Filename: latin_cgweapbb.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweapbb.shp
 		Start: 1
 		ZOffset: -1024
 	idle-lights:
-		Filename: latin_cgweap_b.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_b.shp
 		Length: 13
 		Tick: 150
 	damaged-idle-lights:
-		Filename: latin_cgweap_b.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_b.shp
 		Length: 13
 		Tick: 150
 	idle-lights2:
-		Filename: latin_cgweap_b.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_b.shp
 		Length: 14
 		Tick: 150
 		ZOffset: -1012
 	damaged-idle-lights2:
-		Filename: latin_cgweap_b.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweap_b.shp
 		Length: 14
 		Tick: 150
 		ZOffset: -1012
 	make:
-		Filename: latin_cgweapmk.shp
+		Filename: latin_syndicate_syndicatefactory_latin_cgweapmk.shp
 		Length: 25
 		ShadowStart: 25
 	icon:
-		Filename: latin_weapicon.shp
+		Filename: latin_syndicate_syndicatefactory_icon.shp
 		Offset: 0,0
 
-cgauto.latin:
+latin_syndicate_recyclingrefinery:
 	Defaults:
 		Offset: -20,-26
 	idle:
-		Filename: latin_cgauto.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgauto.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: latin_cgauto.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgauto.shp
 		Start: 1
 		ShadowStart: 3
 	make:
-		Filename: latin_cgautomk.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgautomk.shp
 		Length: 48
 		ShadowStart: 48
 	idle-drill:
-		Filename: latin_cgauto_a.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgauto_a.shp
 		Length: 64
 		Tick: 45
 	idle-bib:
-		Filename: latin_cgautobb.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgautobb.shp
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: latin_cgautobb.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgautobb.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -512
 	docking-overlay:
-		Filename: latin_cgauto_a.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgauto_a.shp
 		Length: 64
 		Tick: 45
 	dead:
-		Filename: latin_cgauto.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgauto.shp
 		Start: 1
 		ShadowStart: 3
 	resources:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_autoicon.shp
+		Filename: latin_syndicate_recyclingrefinery_icon.shp
 		Offset: 0,0
 	idle-lights:
-		Filename: latin_cgauto_b.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgauto_b.shp
 		Length: 14
 		Tick: 150
 		ZOffset: -511
 	damaged-idle-lights:
-		Filename: latin_cgauto_bd.shp
+		Filename: latin_syndicate_recyclingrefinery_latin_cgauto_bd.shp
 		Length: 14
 		Tick: 150
 		ZOffset: -511
 
-cgup.latin:
+latin_syndicate_defensebureau:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: latin_cgup.shp
+		Filename: latin_syndicate_defensebureau_latin_cgup.shp
 		Offset: 0, 0
 	idle:
 		ShadowStart: 4
@@ -283,31 +283,31 @@ cgup.latin:
 		Start: 1
 		ShadowStart: 5
 	idle-bunkered:
-		Filename: latin_cgup.shp
+		Filename: latin_syndicate_defensebureau_latin_cgup.shp
 		Start: 2
 		ShadowStart: 6
 	damaged-idle-bunkered:
-		Filename: latin_cgup.shp
+		Filename: latin_syndicate_defensebureau_latin_cgup.shp
 		Start: 3
 		ShadowStart: 7
 	idle-pump:
-		Filename: latin_cgup_b.shp
+		Filename: latin_syndicate_defensebureau_latin_cgup_b.shp
 		Length: 4
 		Tick: 250
 	damaged-idle-pump:
-		Filename: latin_cgup_b.shp
+		Filename: latin_syndicate_defensebureau_latin_cgup_b.shp
 		Length: 4
 		Tick: 250
 	idle-pump2:
-		Filename: latin_cgup_b.shp
+		Filename: latin_syndicate_defensebureau_latin_cgup_b.shp
 		Length: 4
 		Tick: 250
 	damaged-idle-pump2:
-		Filename: latin_cgup_b.shp
+		Filename: latin_syndicate_defensebureau_latin_cgup_b.shp
 		Length: 4
 		Tick: 250
 	make:
-		Filename: latin_cgupmk.shp
+		Filename: latin_syndicate_defensebureau_latin_cgupmk.shp
 		Length: 42
 		ShadowStart: 42
 	bib:
@@ -315,215 +315,215 @@ cgup.latin:
 	dead:
 		Start: 1
 	icon:
-		Filename: latin_upicon.shp
+		Filename: latin_syndicate_defensebureau_icon.shp
 		Offset: 0, 0
 
-cgspy.latin:
+latin_syndicate_spycenter:
 	Defaults:
 		Offset: -8,-14
 	idle:
-		Filename: latin_cgspy.shp
+		Filename: latin_syndicate_spycenter_latin_cgspy.shp
 		ShadowStart: 4
 	damaged-idle:
-		Filename: latin_cgspy.shp
+		Filename: latin_syndicate_spycenter_latin_cgspy.shp
 		Start: 1
 		ShadowStart: 5
 	idle-lights:
-		Filename: latin_cgspy_a.shp
+		Filename: latin_syndicate_spycenter_latin_cgspy_a.shp
 		Length: 5
 	damaged-idle-lights:
-		Filename: latin_cgspy_a.shp
+		Filename: latin_syndicate_spycenter_latin_cgspy_a.shp
 		Length: 5
 	idle-lights2:
-		Filename: latin_cgspy_c.shp
+		Filename: latin_syndicate_spycenter_latin_cgspy_c.shp
 		Length: 9
 	damaged-idle-lights2:
-		Filename: latin_cgspy_cd.shp
+		Filename: latin_syndicate_spycenter_latin_cgspy_cd.shp
 		Length: 9
 	make:
-		Filename: latin_cgspymk.shp
+		Filename: latin_syndicate_spycenter_latin_cgspymk.shp
 		Length: 15
 		ShadowStart: 15
 	dead:
-		Filename: latin_cgspy.shp
+		Filename: latin_syndicate_spycenter_latin_cgspy.shp
 		Start: 1
 		ShadowStart: 5
 	icon:
-		Filename: latin_spyicon.shp
+		Filename: latin_syndicate_spycenter_icon.shp
 		Offset: 0,0
 	icon2:
-		Filename: latin_p_traitors.shp
+		Filename: latin_syndicate_spycenter_latin_p_traitors.shp
 		Offset: 0,0
 
-radar.latin:
+latin_syndicate_latinempradar:
 	Defaults:
 		Offset: -8,-14
 	idle:
-		Filename: latin_radar_idle.shp
+		Filename: latin_syndicate_latinempradar_latin_radar_idle.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: latin_radar_idle.shp
+		Filename: latin_syndicate_latinempradar_latin_radar_idle.shp
 		Start: 1
 		ShadowStart: 3
 	idle-radar:
-		Filename: latin_radar_dish.shp
+		Filename: latin_syndicate_latinempradar_latin_radar_dish.shp
 		Length: 91
 		ShadowStart: 91
 	damaged-idle-radar:
-		Filename: latin_radar_dish_damaged.shp
+		Filename: latin_syndicate_latinempradar_latin_radar_dish_damaged.shp
 		Length: 151
 		ShadowStart: 151
 	make:
-		Filename: latin_radar_make.shp
+		Filename: latin_syndicate_latinempradar_latin_radar_make.shp
 		Length: 27
 		ShadowStart: 27
 	dead:
-		Filename: latin_radar_idle.shp
+		Filename: latin_syndicate_latinempradar_latin_radar_idle.shp
 		Start: 1
 		ShadowStart: 3
 	icon:
-		Filename: latin_radar_icon.png
+		Filename: latin_syndicate_latinempradar_icon.png
 		Offset: 0,0
 
-cgte.latin:
+latin_syndicate_recyclingcenter:
 	Defaults:
 		Offset: -8,-14
 	idle:
-		Filename: latin_cgte.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgte.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: latin_cgte.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgte.shp
 		Start: 1
 		ShadowStart: 3
 	idle-lights:
-		Filename: latin_cgte_a.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgte_a.shp
 		Length: 10
 	damaged-idle-lights:
-		Filename: latin_cgte_a.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgte_a.shp
 		Length: 5
 	idle-lights2:
-		Filename: latin_cgte_c.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgte_c.shp
 		Length: 12
 	damaged-idle-lights2:
-		Filename: latin_cgte_c.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgte_c.shp
 		Length: 12
 		Start: 12
 	make:
-		Filename: latin_cgtemk.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgtemk.shp
 		Length: 22
 		ShadowStart: 22
 	dead:
-		Filename: latin_cgte.shp
+		Filename: latin_syndicate_recyclingcenter_latin_cgte.shp
 		Start: 1
 		ShadowStart: 3
 	icon:
-		Filename: latin_teicon.shp
+		Filename: latin_syndicate_recyclingcenter_icon.shp
 		Offset: 0,0
 
-cgair.latin:
+latin_syndicate_airstation:
 	Defaults:
 		Offset: -12,-22 #12
 	idle:
-		Filename: latin_cgair.shp
+		Filename: latin_syndicate_airstation_latin_cgair.shp
 	damaged-idle:
-		Filename: latin_cgair.shp
+		Filename: latin_syndicate_airstation_latin_cgair.shp
 		Start: 1
 	idle-top:
-		Filename: latin_cgair_a.shp
+		Filename: latin_syndicate_airstation_latin_cgair_a.shp
 		Length: 4
 		Tick: 150
 	idle-bottom:
-		Filename: latin_cgairbb.shp
+		Filename: latin_syndicate_airstation_latin_cgairbb.shp
 		ZOffset: -1c512
 	damage-idle-bottom:
-		Filename: latin_cgairbb.shp
+		Filename: latin_syndicate_airstation_latin_cgairbb.shp
 		Start: 1
 		ZOffset: -1c512
 	idle-dish:
-		Filename: latin_cgair_b.shp
+		Filename: latin_syndicate_airstation_latin_cgair_b.shp
 		Length: 12
 		Tick: 120
 		ZOffset: -512
 	damaged-idle-dish:
-		Filename: latin_cgair_b.shp
+		Filename: latin_syndicate_airstation_latin_cgair_b.shp
 		Length: 12
 		Tick: 120
 		ZOffset: -512
 	idle-mid:
-		Filename: latin_cgair_c.shp
+		Filename: latin_syndicate_airstation_latin_cgair_c.shp
 		Length: 6
 		Tick: 120
 		ZOffset: -1c512
 	damage-idle-mid:
-		Filename: latin_cgair_cd.shp
+		Filename: latin_syndicate_airstation_latin_cgair_cd.shp
 		Length: 6
 		Tick: 120
 		ZOffset: -1c512
 	make:
-		Filename: latin_cgairmk.shp
+		Filename: latin_syndicate_airstation_latin_cgairmk.shp
 		Length: 35
 		ShadowStart: 35
 	dead:
-		Filename: latin_cgair.shp
+		Filename: latin_syndicate_airstation_latin_cgair.shp
 		Start: 1
 	icon:
-		Filename: latin_airicon.shp
+		Filename: latin_syndicate_airstation_icon.shp
 		Offset: 0,0
 
-ngbunk2.latin:
+latin_syndicate_bunkertower:
 	idle:
-		Filename: latin_nagaurd.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_nagaurd.shp
 		ShadowStart: 4
 	damaged-idle:
-		Filename: latin_nagaurd.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_nagaurd.shp
 		Start: 1
 		ShadowStart: 5
 	idle-bunkered:
-		Filename: latin_nagaurd.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_nagaurd.shp
 		Start: 2
 		ShadowStart: 6
 	damaged-idle-bunkered:
-		Filename: latin_nagaurd.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_nagaurd.shp
 		Start: 3
 		ShadowStart: 7
 	make:
-		Filename: latin_naguardmk.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_naguardmk.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: latin_nagaurd.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_nagaurd.shp
 		Start: 1
 		ShadowStart: 5
 	icon:
-		Filename: latin_bunker_tower_icon.shp
+		Filename: latin_syndicate_doctrine_lightposts_icon.shp
 		Offset: 0,0
 	idle-top:
-		Filename: latin_nagaurd_a.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_nagaurd_a.shp
 		Length: 32
 		Tick: 150
 	damage-idle-top:
-		Filename: latin_nagaurd_a.shp
+		Filename: latin_syndicate_doctrine_lightposts_latin_nagaurd_a.shp
 		Length: 32
 		Tick: 150
 
-ca12hit.latin:
+latin_syndicate_topolsilo:
 	Defaults:
 		Offset: 0,-10
 	idle:
-		Filename: latin_cg12hit_f.shp
+		Filename: latin_syndicate_topolsilo_latin_cg12hit_f.shp
 	damaged-idle:
-		Filename: latin_cg12hit_f.shp
+		Filename: latin_syndicate_topolsilo_latin_cg12hit_f.shp
 	bib:
-		Filename: latin_ca12hit.shp
+		Filename: latin_syndicate_topolsilo_latin_ca12hit.shp
 		ShadowStart: 2
 		ZOffset: -512
 	damaged-bib:
-		Filename: latin_ca12hit.shp
+		Filename: latin_syndicate_topolsilo_latin_ca12hit.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -512
 	critical-idle:
-		Filename: latin_cg12hit_f.shp
+		Filename: latin_syndicate_topolsilo_latin_cg12hit_f.shp
 	up:
 		Filename: invisibleitem.shp
 	# TODO: ngmisl_f is actually the open sequence
@@ -539,7 +539,7 @@ ca12hit.latin:
 	active:
 		Combine:
 			latin_cg12hit_f:
-				Filename: latin_cg12hit_f.shp
+				Filename: latin_syndicate_topolsilo_latin_cg12hit_f.shp
 				Length: 16
 			latin_cg12hit_h1:
 				Filename: latin_cg12hit_h1.shp
@@ -558,7 +558,7 @@ ca12hit.latin:
 	damaged-active:
 		Combine:
 			latin_cg12hit_f:
-				Filename: latin_cg12hit_f.shp
+				Filename: latin_syndicate_topolsilo_latin_cg12hit_f.shp
 				Length: 16
 			latin_cg12hit_h1:
 				Filename: latin_cg12hit_h1.shp
@@ -575,62 +575,62 @@ ca12hit.latin:
 		Length: 91
 		Tick: 110
 	make:
-		Filename: latin_ca12hitmk.shp
+		Filename: latin_syndicate_topolsilo_latin_ca12hitmk.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
 		Filename: invisibleitem.shp
 	critical-idle:
-		Filename: latin_cg12hit_f.shp
+		Filename: latin_syndicate_topolsilo_latin_cg12hit_f.shp
 	icon:
 		Filename: ra2_soviets_nuclearmissilesilo_icon.shp
 		Offset: 0,0
 
-cgdept.latin:
+latin_syndicate_syndicateservicedepot:
 	Defaults:
 		Offset: -12,-36
 	idle:
-		Filename: latin_cgdept_b.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdept_b.shp
 		Length: 10
 		ShadowStart: 20
 		Tick: 180
 		#ZOffset: 512
 	damaged-idle:
-		Filename: latin_cgdept_b.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdept_b.shp
 		Start: 10
 		Length: 10
 		ShadowStart: 29
 		ZOffset: 512
 	idle-normal:
-		Filename: latin_cgdept.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdept.shp
 		ShadowStart: 2
 	damaged-idle-normal:
-		Filename: latin_cgdept.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdept.shp
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: latin_cgdeptbb.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdeptbb.shp
 		ShadowStart: 2
 		ZOffset: -512
 	damaged-bib:
-		Filename: latin_cgdeptbb.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdeptbb.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -512
 	make:
-		Filename: latin_cgdeptmk.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdeptmk.shp
 		Length: 20
 		ShadowStart: 20
 	dead:
-		Filename: latin_cgdeptmk.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdeptmk.shp
 		Start: 19
 	repair:
-		Filename: latin_cgdept_c.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdept_c.shp
 		Length: 50
 		ShadowStart: 100
 		Tick: 120
 	damaged-repair:
-		Filename: latin_cgdept_c.shp
+		Filename: latin_syndicate_syndicateservicedepot_latin_cgdept_c.shp
 		Start: 50
 		Length: 50
 		ShadowStart: 150
@@ -639,7 +639,7 @@ cgdept.latin:
 		Filename: ra2_soviets_servicedepot_icon.shp
 		Offset: 0,0
 
-sml.latin:
+latin_syndicate_smlturret:
 	Defaults:
 		Offset: 0,-4
 	idle:
@@ -649,12 +649,12 @@ sml.latin:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: latin_smlmk.shp
+		Filename: latin_syndicate_smlturret_latin_smlmk.shp
 		Length: 17
 	dead:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: latin_sml.shp
+		Filename: latin_syndicate_smlturret_latin_sml.shp
 		Facings: 32
 		ShadowStart: 32
 	muzzle:
@@ -666,10 +666,10 @@ sml.latin:
 		BlendMode: Additive
 		Offset: 0,0
 	icon:
-		Filename: latin_sml_icon.shp
+		Filename: latin_syndicate_smlturret_icon.shp
 		Offset: 0,0
 
-ngdshktur.latin:
+latin_syndicate_latinsentrygun:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,-8
@@ -680,20 +680,20 @@ ngdshktur.latin:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: latin_ngdshkmk.shp
+		Filename: latin_syndicate_latinsentrygun_latin_ngdshkmk.shp
 		Length: 20
 		ShadowStart: 20
 	dead:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: latin_ngdshktur.shp
+		Filename: latin_syndicate_latinsentrygun_latin_ngdshktur.shp
 		Facings: 32
 		ShadowStart: 32
 	icon:
-		Filename: latin_sentrygun2_icon.shp
+		Filename: latin_syndicate_latinsentrygun_icon.shp
 		Offset: 0,0
 
-aatur.latin:
+latin_syndicate_latinaadefender:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
 		Offset: 0,8
@@ -704,17 +704,17 @@ aatur.latin:
 	critical-idle:
 		Filename: invisibleitem.shp
 	make:
-		Filename: latin_aamk.shp
+		Filename: latin_syndicate_latinaadefender_latin_aamk.shp
 		Length: 29
 		ShadowStart: 29
 	dead:
 		Filename: invisibleitem.shp
 	turret:
-		Filename: latin_aatur.shp
+		Filename: latin_syndicate_latinaadefender_latin_aatur.shp
 		Facings: 32
 		ShadowStart: 32
 	icon:
-		Filename: latinaadefendericon.png
+		Filename: latin_syndicate_latinaadefender_icon.png
 		Offset: 0,0
 
 cgyard.latin:
@@ -779,10 +779,10 @@ cgyard.latin:
 #   Red Alert 2 Units Buildings
 ##############################################
 
-ltnk.latin:
+latin_syndicate_rushertank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: latin_ltnk.shp
+		Filename: latin_syndicate_rushertank_latin_ltnk.shp
 		Scale: 0.5
 	idle:
 		Facings: 64
@@ -792,7 +792,7 @@ ltnk.latin:
 		Facings: 64
 		Offset: 0,5
 	icon:
-		Filename: latin_ltnk_icon.shp
+		Filename: latin_syndicate_rushertank_icon.shp
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -800,23 +800,23 @@ ltnk.latin:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-tortuga.latin:
+latin_syndicate_tortugatank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
 		Scale: 0.8
 	idle:
 		Scale: 1
-		Filename: latin_tortuga.png
+		Filename: latin_syndicate_tortugatank_latin_tortuga.png
 		Start: 64
 		Facings: 64
 		Offset: 0,4
 	turret:
 		Scale: 1
-		Filename: latin_tortuga.png
+		Filename: latin_syndicate_tortugatank_latin_tortuga.png
 		Facings: 64
 		Offset: 0,4
 	icon:
-		Filename: latin_tortuga_icon.png
+		Filename: latin_syndicate_tortugatank_icon.png
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -824,10 +824,10 @@ tortuga.latin:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-mtnk.latin:
+latin_syndicate_smokertank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: latin_mtnk.shp
+		Filename: latin_syndicate_promotion_unlocksmokertanks_latin_mtnk.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -835,7 +835,7 @@ mtnk.latin:
 		Start: 64
 		Facings: 64
 	icon:
-		Filename: latin_mtnk_icon.shp
+		Filename: latin_syndicate_promotion_unlocksmokertanks_icon.shp
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -843,10 +843,10 @@ mtnk.latin:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-diablo.latin:
+latin_syndicate_diablo:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: latin_diablo.shp
+		Filename: latin_syndicate_diablo_latin_diablo.shp
 		Scale: 0.65
 	idle:
 		Facings: 64
@@ -856,7 +856,7 @@ diablo.latin:
 		Facings: 64
 		Offset: 0,6
 	icon:
-		Filename: latin_diablo_icon.shp
+		Filename: latin_syndicate_diablo_icon.shp
 	muzzle:
 		Filename: ra2_gunfire.shp
 		Length: *
@@ -864,10 +864,10 @@ diablo.latin:
 		Filename: ra2_vtmuzzle.shp
 		Length: *
 
-buggy.latin:
+latin_syndicate_raiderbuggy:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_buggy.shp
+		Filename: latin_syndicate_promotion_unlockraiderbuggy_latin_buggy.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -877,7 +877,7 @@ buggy.latin:
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_buggy_icon.shp
+		Filename: latin_syndicate_promotion_unlockraiderbuggy_icon.shp
 
 scrapcar.latin:
 	Inherits: ^RA2GatlingMuzzle
@@ -892,7 +892,7 @@ scrapcar.latin:
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_buggy_icon.shp
+		Filename: latin_syndicate_promotion_unlockraiderbuggy_icon.shp
 
 scrapcar2.latin:
 	Inherits: ^RA2GatlingMuzzle
@@ -907,12 +907,12 @@ scrapcar2.latin:
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_buggy_icon.shp
+		Filename: latin_syndicate_promotion_unlockraiderbuggy_icon.shp
 
-apc.latin:
+latin_syndicate_latinapc:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_apc.shp
+		Filename: latin_syndicate_promotion_unlocklatinapc_latin_apc.shp
 		Scale: 0.65
 	idle:
 		Facings: 64
@@ -922,18 +922,18 @@ apc.latin:
 		Facings: 64
 		Offset: 0,-9
 	turret-up:
-		Filename: latin_apctur2.shp
+		Filename: latin_syndicate_promotion_unlocklatinapc_latin_apctur2.shp
 		Facings: 64
 		Offset: 0,-9
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_apc_icon.shp
+		Filename: latin_syndicate_promotion_unlocklatinapc_icon.shp
 
-humvee.latin:
+latin_syndicate_narcohummer:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_humvee.shp
+		Filename: latin_syndicate_narcohummer_latin_humvee.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -942,12 +942,12 @@ humvee.latin:
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_humvee_icon.shp
+		Filename: latin_syndicate_narcohummer_icon.shp
 
-cartel.latin:
+latin_syndicate_carteltruck:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_cartel.shp
+		Filename: latin_syndicate_promotion_unlockcarteltrucks_latin_cartel.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -956,22 +956,22 @@ cartel.latin:
 	barrel:
 		Filename: invisibleitem.shp
 	icon:
-		Filename: latin_cartel_icon.shp
+		Filename: latin_syndicate_promotion_unlockcarteltrucks_icon.shp
 
-nuketruk.latin:
+latin_syndicate_nuketruck:
 	Defaults:
-		Filename: latin_nuketruk.shp
+		Filename: latin_syndicate_promotion_unlocknuketrucks_latin_nuketruk.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
 		Offset: 0,-4
 	icon:
-		Filename: latin_nuketrukicon.shp
+		Filename: latin_syndicate_promotion_unlocknuketrucks_icon.shp
 
-rtruck.latin:
+latin_syndicate_missiletruck:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_rtruck.shp
+		Filename: latin_syndicate_missiletruck_latin_rtruck.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -981,12 +981,12 @@ rtruck.latin:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: latin_missiletruck_icon.shp
+		Filename: latin_syndicate_missiletruck_icon.shp
 
-burrito.latin:
+latin_syndicate_burrito:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_burrito.shp
+		Filename: latin_syndicate_promotion_unlockburritos_latin_burrito.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -996,23 +996,23 @@ burrito.latin:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: latin_burrito_icon.shp
+		Filename: latin_syndicate_promotion_unlockburritos_icon.shp
 
-mortarbike.latin:
+latin_syndicate_mortarbike:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_mortarbike.shp
+		Filename: latin_syndicate_promotion_unlockmortarbikes_latin_mortarbike.shp
 		Scale: 1
 	idle:
 		Facings: 8
 		InterpolatedFacings: 32
 	icon:
-		Filename: latin_quad_icon.shp
+		Filename: latin_syndicate_promotion_unlockmortarbikes_icon.shp
 
-topol.latin:
+latin_syndicate_topolm:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_scud.shp
+		Filename: latin_syndicate_promotion_unlocktopolm_latin_scud.shp
 		Scale: 0.9
 	idle:
 		Facings: 64
@@ -1032,12 +1032,12 @@ topol.latin:
 		Start: 256
 		Facings: 64
 	icon:
-		Filename: latin_topol_icon.shp
+		Filename: latin_syndicate_promotion_unlocktopolm_icon.shp
 
-lars.latin:
+latin_syndicate_lars:
 	Inherits: ^RA2GatlingMuzzle
 	Defaults:
-		Filename: latin_lars.shp
+		Filename: latin_syndicate_promotion_unlocklars_latin_lars.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -1047,12 +1047,12 @@ lars.latin:
 		Facings: 64
 		Offset: 0,20
 	icon:
-		Filename: latin_lars_icon.shp
+		Filename: latin_syndicate_promotion_unlocklars_icon.shp
 
-harv.latin:
+latin_syndicate_collectiontruck:
 	Inherits: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latin_harv.shp
+		Filename: latin_syndicate_collectiontruck_latin_harv.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -1061,53 +1061,53 @@ harv.latin:
 	dock-loop:
 		Facings: 64
 	icon:
-		Filename: latin_harv_icon.shp
+		Filename: latin_syndicate_collectiontruck_icon.shp
 	harvesting:
 		Filename: ra2_oregath.shp
 		Length: 15
 		Facings: 8
 
-mig.latin:
+latin_syndicate_mig21:
 	idle:
-		Filename: latin_mig.shp
+		Filename: latin_syndicate_mig21_latin_mig.shp
 		Facings: 64
 	move:
-		Filename: latin_mig.shp
+		Filename: latin_syndicate_mig21_latin_mig.shp
 		Facings: 64
 	move-l:
-		Filename: latin_mig.shp
+		Filename: latin_syndicate_mig21_latin_mig.shp
 		Facings: 64
 		Start: 128
 	move-r:
-		Filename: latin_mig.shp
+		Filename: latin_syndicate_mig21_latin_mig.shp
 		Facings: 64
 		Start: 192
 	icon:
-		Filename: latin_mig_icon.shp
+		Filename: latin_syndicate_mig21_icon.shp
 
-yakolev.latin:
+latin_syndicate_yakovlev:
 	idle:
-		Filename: latin_yak.shp
+		Filename: latin_syndicate_yakovlev_latin_yak.shp
 		Facings: 64
 	move:
-		Filename: latin_yak.shp
+		Filename: latin_syndicate_yakovlev_latin_yak.shp
 		Facings: 64
 	move-l:
-		Filename: latin_yak.shp
+		Filename: latin_syndicate_yakovlev_latin_yak.shp
 		Facings: 64
 		Start: 64
 	move-r:
-		Filename: latin_yak.shp
+		Filename: latin_syndicate_yakovlev_latin_yak.shp
 		Facings: 64
 		Start: 64
 	icon:
-		Filename: latin_yak_icon.shp
+		Filename: latin_syndicate_yakovlev_icon.shp
 
-mili.latin:
+latin_syndicate_latinmilitia:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latin_mili.shp
+		Filename: latin_syndicate_doctrine_eliteguerillas_latin_mili.shp
 	run:
 		Tick: 120
 		ShadowStart: 285
@@ -1132,13 +1132,13 @@ mili.latin:
 	paradrop:
 		Start: 292
 	icon:
-		Filename: latin_miliicon.shp
+		Filename: latin_syndicate_doctrine_eliteguerillas_icon.shp
 
-fftr.latin:
+latin_syndicate_freedomfighter:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latin_fftr.shp
+		Filename: latin_syndicate_freedomfighter_latin_fftr.shp
 	run:
 		Tick: 120
 		ShadowStart: 349
@@ -1179,13 +1179,13 @@ fftr.latin:
 	paradrop:
 		Start: 292
 	icon:
-		Filename: latin_fftr_icon.shp
+		Filename: latin_syndicate_freedomfighter_icon.shp
 
-narco.latin:
+latin_syndicate_narco:
 	Inherits: ^RA2ArmedCivilian
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latin_narco.shp
+		Filename: latin_syndicate_promotion_unlocknarcos_latin_narco.shp
 	idle2:
 		Start: 56
 		Length: 15
@@ -1213,13 +1213,13 @@ narco.latin:
 		InterpolatedFacings: 32
 		Tick: 100
 	icon:
-		Filename: latin_narco_icon.shp
+		Filename: latin_syndicate_promotion_unlocknarcos_icon.shp
 
-fthrow.latin:
+latin_syndicate_latinflametrooper:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: latin_fthrow.shp
+		Filename: latin_syndicate_latinflametrooper_latin_fthrow.shp
 	run:
 		Tick: 120
 	paradrop:
@@ -1237,7 +1237,7 @@ fthrow.latin:
 		InterpolatedFacings: 32
 		Tick: 80
 	icon:
-		Filename: latin_flamicon.shp
+		Filename: latin_syndicate_latinflametrooper_icon.shp
 
 triton.latin:
 	idle:
@@ -1272,34 +1272,34 @@ rammax.latin:
 	icon:
 		Filename: latin_rammax_icon.png
 
-up_cartelrockets.latin:
+latin_syndicate_doctrine_cartelrockets:
 	icon:
-		Filename: latin_cartelrockets_icon.png
+		Filename: latin_syndicate_doctrine_cartelrockets_icon.png
 
 latin_up_tech2:
 	icon:
-		Filename: latin_up_tech2.shp
+		Filename: latin_syndicate_upgrade_cashrecovery_icon.shp
 
-up_chaingun.latin:
+latin_syndicate_upgrade_yuristolentechchainguns:
 	icon:
-		Filename: latin_up_chaingun.shp
+		Filename: latin_syndicate_upgrade_yuristolentechchainguns_icon.shp
 
-up_industrial.latin:
+latin_syndicate_upgrade_sovietstolentechindustrialmethods:
 	icon:
-		Filename: latin_up_industrial.shp
+		Filename: latin_syndicate_upgrade_sovietstolentechindustrialmethods_icon.shp
 
 latin_up_miraging:
 	icon:
-		Filename: latin_up_miraging.shp
+		Filename: latin_syndicate_upgrade_alliedstolentechextramissilesandmiraging_icon.shp
 
-up_hotfire.latin:
+latin_syndicate_upgrade_asianalliancestolentechhotfire:
 	icon:
-		Filename: latin_up_hotfire.shp
+		Filename: latin_syndicate_upgrade_asianalliancestolentechhotfire_icon.shp
 
-monkey.latin:
+latin_syndicate_grenademonkey:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
-		Filename: latin_monkey.shp
+		Filename: latin_syndicate_grenademonkey_latin_monkey.shp
 	stand:
 		#ShadowStart: 164
 	run:
@@ -1326,7 +1326,7 @@ monkey.latin:
 		Start: 101
 		#ShadowStart: 265
 	icon:
-		Filename: grenademonkeyicon.png
+		Filename: latin_syndicate_grenademonkey_icon.png
 
 ##############################################
 #   Red Alert 2 Consortium Buildings
