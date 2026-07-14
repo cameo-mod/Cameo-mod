@@ -18,7 +18,7 @@ cabal_refinery:
 		BuildPaletteOrder: 20
 		Prerequisites: ~cabal_constructionyard, cabal_powerplant
 		Queue: Building, RABuilding
-		Description: Processes raw Tiberium\ninto useable resources
+		Description: actor_cabal_refinery.description
 	Building:
 		Footprint: _x_ xxx === ===
 		Dimensions: 3,4

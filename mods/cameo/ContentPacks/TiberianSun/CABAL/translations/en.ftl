@@ -371,6 +371,14 @@ actor_cabal_techcenter =
    .description = CABAL Tech Center.
       Required for advanced units and upgrades.
 
+actor_cabal_refinery =
+   .description = Processes raw Tiberium into useable resources.
+
+actor_cabal_mobileconstructionvehicle =
+   .description = Deploys into a Construction Yard.
+      Strong vs Nothing
+      Weak vs Everything
+
 actor_cabal_overkill_gunship =
    .name = Overkill Gunship
    .description = Twin laser gunship with heavy side-mounted cannons.
