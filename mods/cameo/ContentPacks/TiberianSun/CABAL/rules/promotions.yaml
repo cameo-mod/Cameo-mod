@@ -123,3 +123,6 @@ cabal_promotion_hunterkillermk1elite:	Inherits: ^promotion_upgrade.template
 		Image: cabal_hunterkillermk1
 	ProvidesPrerequisite:
 
+# Deprecated alias kept for old saves / replays that still reference the old name
+cabal_promotion_waspstriker:	Inherits: cabal_promotion_cyborgassassin
+
