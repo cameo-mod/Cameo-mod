@@ -22,13 +22,16 @@ TEMPLATE_CLASS = {
     '^LightMissile': 0.75, '^MediumMissile': 1.0, '^HeavyMissile': 1.25,
     '^MediumCannon': 1.0, '^HeavyCannon': 1.25,
     '^LaserWeapon': 1.0,
-    '^TeslaWeapon': 1.25,
+    '^TeslaWeapon': 1.25, '^TeslaChargedWeapon': 1.25,
     '^SwordWeapon': 0.75,
     '^LightFlameWeapon': 0.75, '^MediumFlameWeapon': 1.0, '^HeavyFlameWeapon': 1.25,
     '^LightChemicalWeapon': 0.75, '^MediumChemicalWeapon': 1.0, '^HeavyChemicalWeapon': 1.25,
     '^RailgunWeapon': 1.25,
     '^MagicWeapon': 1.25,
-    '^HeavyMG': 0.75, '^LightMG': 0.75,
+    '^HeavyMG': 0.75, '^LightMG': 0.75, '^TSMG': 0.75,
+    '^Grenade': 1.0, '^ArrowWeapon': 1.0, '^ShrapnelWeapon': 1.0,
+    '^TankDestroyerCannon': 1.0, '^BallisticWeapon': 1.0,
+    '^RepairWeapon': 1.5,
 }
 
 # ============================================================
