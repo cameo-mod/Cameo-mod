@@ -888,9 +888,9 @@ cabal_dissolver:
 		Weapon: CabalDissolverSpray
 		LocalOffset: 200,0,0
 	ChangesHealth@AttackHeal:
-		Step: 500
-		Delay: 15
-		StartIfBelow: 150
+		Step: 100
+		Delay: 1
+		StartIfBelow: 100
 		RequiresCondition: attack
 	GrantConditionOnAttack:
 		Condition: attack
