@@ -141,9 +141,9 @@ TSCABALObeliskLaserFire:
 	ReloadDelay: 90
 	Inherits: ^TankDestroyerCannon
 	Inherits@LASER: ^LaserWeapon
-	Inherits@EFFECT: ^TSLaserEffect
 	Inherits@FLAME: ^MediumFlameWeapon
 	Inherits@CHEM: ^MediumChemicalWeapon
+	Inherits@EFFECT: ^TSLaserEffect
 	ValidTargets: Ground, Water
 	Report: obelmod1.aud
 	Projectile:
@@ -558,8 +558,8 @@ CabalArtilleryWalkerShell:
 	Inherits: ^HeavyCannon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
-	Range: 11582
-	MinRange: 2315
+	Range: 11580
+	MinRange: 2316
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 280
@@ -604,8 +604,8 @@ CabalArtilleryWalkerShellUpgraded:
 	Inherits: ^RailgunWeapon
 	Report: tnkfire2.aud
 	ReloadDelay: 64
-	Range: 11582
-	MinRange: 2315
+	Range: 11580
+	MinRange: 2316
 	TargetActorCenter: true
 	Projectile: Bullet
 		Speed: 280
