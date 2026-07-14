@@ -312,7 +312,7 @@ power.ordos:
 		Start: 3092
 		Offset: -32,64
 	idle-zaps:
-		Filename: ordos_windtrap_power_ordos_zaps.png
+		Filename: ordos_windtrap_power_zaps.png
 		Length: 10
 		Scale: 1
 		Offset: 6,-5
@@ -1117,7 +1117,7 @@ ordos_antiairtrooper:
 		Scale: 1
 	Defaults:
 		Scale: 0.76
-		Filename: ordos_upgrade_antiairtrooper_ordos_aatrooper.png
+		Filename: ordos_upgrade_antiairtrooper_aatrooper.png
 	run:
 		Scale: 1
 		Tick: 100
@@ -1642,12 +1642,12 @@ ordos_heavycombattank:
 	Defaults:
 		Scale: 1.5
 	idle:
-		Filename: ordos_upgrade_heavycombattank_d2k_ordos_heavycombattank_chassis.png
+		Filename: ordos_upgrade_heavycombattank_d2k_chassis.png
 		Facings: -32
 		InterpolatedFacings: 64
 		Offset: 0, 4
 	turret:
-		Filename: ordos_upgrade_heavycombattank_d2k_ordos_heavycombattank_turret.png
+		Filename: ordos_upgrade_heavycombattank_d2k_turret.png
 		Facings: -32
 		InterpolatedFacings: 64
 		Offset: 0, -2

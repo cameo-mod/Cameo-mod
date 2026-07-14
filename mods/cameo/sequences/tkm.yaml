@@ -83,23 +83,23 @@ tkm_powerplant:
 
 tkm_orerefinery:
 	Defaults:
-		Filename: tkm_supportlabor_tkmsupplycenter.png
+		Filename: tkm_supportlabor_supplycenter.png
 		Scale: 0.4
 	idle:
 		Scale: 1
-		Filename: tkm_supportlabor_tkmsupplycenter.png
+		Filename: tkm_supportlabor_supplycenter.png
 		Length: *
 	damaged-idle:
 		Scale: 1
-		Filename: tkm_supportlabor_tkmsupplycenter.png
+		Filename: tkm_supportlabor_supplycenter.png
 		Length: *
 	dead:
 		Scale: 1
-		Filename: tkm_supportlabor_tkmsupplycenter.png
+		Filename: tkm_supportlabor_supplycenter.png
 		Length: 1
 	make:
 		Scale: 1
-		Filename: tkm_supportlabor_tkmsupplycentermake.png
+		Filename: tkm_supportlabor_supplycentermake.png
 		Length: 20
 	resources:
 		Filename: invisibleitem.shp
@@ -333,7 +333,7 @@ tkm_quadturretbunker:
 		Length: *
 		Offset: -1,-2
 	turret:
-		Filename: tkm_quadtruck_tkmquadtruckturret.png
+		Filename: tkm_quadtruck_turret.png
 		Facings: -32
 		Scale: 1
 	icon:
@@ -883,11 +883,11 @@ tkmharvfull:
 
 tkmt72:
 	idle:
-		Filename: tkm_t72m_tkmt72body.png
+		Filename: tkm_t72m_body.png
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: tkm_t72m_tkmt72tur.png
+		Filename: tkm_t72m_tur.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -915,11 +915,11 @@ tkmt30:
 
 tkm_abrams:
 	idle:
-		Filename: tkm_abrams_tkmabramsbody.png
+		Filename: tkm_abrams_body.png
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: tkm_abrams_tkmabramstur.png
+		Filename: tkm_abrams_tur.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -938,7 +938,7 @@ tkmtechnicaltruck:
 		Facings: -32
 	turret:
 		Scale: 1
-		Filename: tkm_quadtruck_tkmquadtruckturret.png
+		Filename: tkm_quadtruck_turret.png
 		Facings: -32
 	muzzle:
 		Filename: minigun.shp
@@ -949,12 +949,12 @@ tkmtechnicaltruck:
 
 tkm_stryker:
 	Defaults:
-		Filename: tkm_stryker_tkmstrykerbody.png
+		Filename: tkm_stryker_body.png
 	idle:
 		Facings: -32
 		Scale: 1
 	turret:
-		Filename: tkm_stryker_tkmstrykerturret.png
+		Filename: tkm_stryker_turret.png
 		Facings: -32
 		Scale: 1
 	muzzle:
@@ -1206,7 +1206,7 @@ tkm_trenchtank:
 
 tkmtrenchtankdeployed:
 	Defaults:
-		Filename: tkm_trenchtruckdeployed_tkmtrenchtankdeployed.png
+		Filename: tkm_trenchtruckdeployed_deployed.png
 		Scale: 0.2
 	idle:
 		Scale: 1

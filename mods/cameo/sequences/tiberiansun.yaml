@@ -319,22 +319,22 @@ tsgtcnst:
 		Scale: 1.25
 		Offset: -8, -20, 20
 	idle:
-		Filename: ts_gdi_constructionyard_cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	build:
-		Filename: ts_gdi_constructionyard_cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ts_gdi_constructionyard_cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		Start: 1
 		ShadowStart: 4
 	dead:
-		Filename: ts_gdi_constructionyard_cabal_constructionyard.shp
+		Filename: ts_gdi_constructionyard_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 	make:
-		Filename: ts_gdi_constructionyard_cabal_constructionyard_mk.shp
+		Filename: ts_gdi_constructionyard_cabal_mk.shp
 		Length: 24
 		ShadowStart: 24
 	crane-overlay:
@@ -477,7 +477,7 @@ tsnthpadmut:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: ts_nod_helipad_tsnthpadbb.shp
+		Filename: ts_nod_helipad_bb.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
@@ -505,7 +505,7 @@ tsnthpadmut:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: ts_nod_helipad_tsnthpadmk.shp
+		Filename: ts_nod_helipad_mk.shp
 	icon:
 		Filename: forgotten_helipad_icon.png
 		Offset: 0, 0
@@ -620,97 +620,97 @@ tsgtsilo.nod:
 
 tsgtdept:
 	Defaults:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Scale: 1.25
 		Offset: 8, -32, 1
 	idle:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		ShadowStart: 3
 		# Offset: 0, -16, 12
 	damaged-idle:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Start: 1
 		ShadowStart: 4
 		# Offset: 0, -16, 12
 	dead:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot.shp
+		Filename: ts_gdi_servicedepot_cabal.shp
 		Start: 2
 		ShadowStart: 5
 		Tick: 400
 		# Offset: 0, -16, 12
 	ground:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_bb.shp
+		Filename: ts_gdi_servicedepot_cabal_bb.shp
 		ShadowStart: 3
 		ZOffset: -1c611
 	damaged-ground:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_bb.shp
+		Filename: ts_gdi_servicedepot_cabal_bb.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c611
 	dead-ground:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_bb.shp
+		Filename: ts_gdi_servicedepot_cabal_bb.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c611
 		Tick: 400
 	idle-light:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_b.shp
+		Filename: ts_gdi_servicedepot_cabal_b.shp
 		Length: 7
 		Tick: 120
 	damaged-idle-light:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_b.shp
+		Filename: ts_gdi_servicedepot_cabal_b.shp
 		Start: 7
 		Length: 7
 		Tick: 120
 	circuits:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_a.shp
+		Filename: ts_gdi_servicedepot_cabal_a.shp
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	damaged-circuits:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_a.shp
+		Filename: ts_gdi_servicedepot_cabal_a.shp
 		Start: 5
 		Length: 5
 		ZOffset: -1c511
 		Tick: 120
 	crane-start:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-loop:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	active:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	damaged-active:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 6
 		Length: 5
 		# Offset: 0, -16, 12
 		Tick: 60
 	crane-end:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_c.shp
+		Filename: ts_gdi_servicedepot_cabal_c.shp
 		Start: 10
 		Length: 6
 		# Offset: 0, -16, 12
 		Tick: 60
 	platform:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_d.shp
+		Filename: ts_gdi_servicedepot_cabal_d.shp
 		ZOffset: -1c511
 	damaged-platform:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_d.shp
+		Filename: ts_gdi_servicedepot_cabal_d.shp
 		Start: 2
 		ZOffset: -1c511
 	make:
-		Filename: ts_gdi_servicedepot_cabal_servicedepot_mk.shp
+		Filename: ts_gdi_servicedepot_cabal_mk.shp
 	icon:
 		Filename: ts_gdi_servicedepot_icon.png
 		Offset: 0, 0

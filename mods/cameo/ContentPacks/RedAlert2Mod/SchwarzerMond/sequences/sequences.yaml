@@ -155,18 +155,18 @@ schwarzer_mond_radar:
 	Defaults:
 		Offset: 6,12
 	idle:
-		Filename: schwarzer_mond_radar_nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: schwarzer_mond_radar_nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: schwarzer_mond_radar_nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2.shp
 		Length: 16
 	dead:
-		Filename: schwarzer_mond_radar_nax2_radar.shp
+		Filename: schwarzer_mond_radar_nax2.shp
 		Start: 32
 	icon:
 		Filename: schwarzer_mond_radar_icon.png
@@ -176,18 +176,18 @@ schwarzer_mond_airfield:
 	Defaults:
 		Offset: 2, 8
 	idle:
-		Filename: schwarzer_mond_airfield_nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2.shp
 		Start: 16
 		Length: 16
 	damaged-idle:
-		Filename: schwarzer_mond_airfield_nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2.shp
 		Start: 32
 		Length: 16
 	make:
-		Filename: schwarzer_mond_airfield_nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2.shp
 		Length: 16
 	dead:
-		Filename: schwarzer_mond_airfield_nax2_airfield.shp
+		Filename: schwarzer_mond_airfield_nax2.shp
 		Start: 32
 	icon:
 		Filename: schwarzer_mond_airfield_icon.png
@@ -375,7 +375,7 @@ schwarzer_mond_parzival:
 
 schwarzer_mond_dalek:
 	Defaults:
-		Filename: schwarzer_mond_dalek_nax2_dalek.png
+		Filename: schwarzer_mond_dalek_nax2.png
 	idle:
 		Facings: 64
 		Offset: 0, 24
@@ -578,7 +578,7 @@ schwarzer_mond_haunebuiii:
 
 schwarzer_mond_dieglocke:
 	Defaults:
-		Filename: schwarzer_mond_dieglocke_nax_dieglocke.shp
+		Filename: schwarzer_mond_dieglocke_nax.shp
 	idle:
 		Length: 64
 		Tick: 20

@@ -597,16 +597,16 @@ ts_nod_helipad:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: ts_nod_helipad_tsnthpadbb.shp
+		Filename: ts_nod_helipad_bb.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Filename: ts_nod_helipad_tsnthpadbb.shp
+		Filename: ts_nod_helipad_bb.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
-		Filename: ts_nod_helipad_tsnthpadbb.shp
+		Filename: ts_nod_helipad_bb.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c511
@@ -633,7 +633,7 @@ ts_nod_helipad:
 		Tick: 100
 		ZOffset: -1c511
 	make:
-		Filename: ts_nod_helipad_tsnthpadmk.shp
+		Filename: ts_nod_helipad_mk.shp
 	icon:
 		Filename: ts_nod_helipad_icon.shp
 		Offset: 0, 0
@@ -705,35 +705,35 @@ ts_nod_tiberiumwastefacility:
 ts_nod_missilesilo:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal.shp
 		Scale: 1.25
 		Offset: -4, -8, 24
 	idle:
-		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal.shp
 	damaged-idle:
-		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal.shp
 		Start: 1
 	dead:
-		Filename: ts_nod_missilesilo_cabal_missilesilo.shp
+		Filename: ts_nod_missilesilo_cabal.shp
 		Start: 2
 		Tick: 400
 	idle-lights:
-		Filename: ts_nod_missilesilo_cabal_missilesilo_b.shp
+		Filename: ts_nod_missilesilo_cabal_b.shp
 		Length: 10
 		Tick: 120
 	damaged-idle-lights:
-		Filename: ts_nod_missilesilo_cabal_missilesilo_b.shp
+		Filename: ts_nod_missilesilo_cabal_b.shp
 		Start: 10
 		Length: 10
 		Tick: 120
 	make:
-		Filename: ts_nod_missilesilo_cabal_missilesilo_mk.shp
+		Filename: ts_nod_missilesilo_cabal_mk.shp
 	active:
-		Filename: ts_nod_missilesilo_cabal_missilesilo_a.shp
+		Filename: ts_nod_missilesilo_cabal_a.shp
 		Length: 10
 		Tick: 80
 	damaged-active:
-		Filename: ts_nod_missilesilo_cabal_missilesilo_a.shp
+		Filename: ts_nod_missilesilo_cabal_a.shp
 		Start: 10
 		Length: 10
 		Tick: 80

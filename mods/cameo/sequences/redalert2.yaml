@@ -43,71 +43,71 @@ ra2_soviets_warfactory:
 	Defaults:
 		Offset: -20,-26
 	idle:
-		Filename: ra2_soviets_warfactory_ra2_ngweap.shp
+		Filename: ra2_soviets_warfactory_ngweap.shp
 		ZOffset: -1536
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_warfactory_ra2_ngweap.shp
+		Filename: ra2_soviets_warfactory_ngweap.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1536
 	dead:
-		Filename: ra2_soviets_warfactory_ra2_ngweap.shp
+		Filename: ra2_soviets_warfactory_ngweap.shp
 		Start: 1
 		ZOffset: -1536
 	build-door:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_1.shp
+		Filename: ra2_soviets_warfactory_ngweap_1.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-build-door:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_1.shp
+		Filename: ra2_soviets_warfactory_ngweap_1.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
 	build-top:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_2.shp
+		Filename: ra2_soviets_warfactory_ngweap_2.shp
 		ZOffset: 1024
 		ShadowStart: 2
 	damaged-build-top:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_2.shp
+		Filename: ra2_soviets_warfactory_ngweap_2.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: 1024
 	# TODO: ngweap_3 and ngweap_4 are used for producing flying actors
 	build-air-open:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_3.shp
+		Filename: ra2_soviets_warfactory_ngweap_3.shp
 		ShadowStart: 2
 	damaged-air-open:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_3.shp
+		Filename: ra2_soviets_warfactory_ngweap_3.shp
 		Start: 1
 		ShadowStart: 3
 	build-air-inside:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_4.shp
+		Filename: ra2_soviets_warfactory_ngweap_4.shp
 		ShadowStart: 2
 	damaged-air-inside:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_4.shp
+		Filename: ra2_soviets_warfactory_ngweap_4.shp
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: ra2_soviets_warfactory_ra2_ngweapbb.shp
+		Filename: ra2_soviets_warfactory_ngweapbb.shp
 		ShadowStart: 3
 		ZOffset: -1024
 	damaged-bib:
-		Filename: ra2_soviets_warfactory_ra2_ngweapbb.shp
+		Filename: ra2_soviets_warfactory_ngweapbb.shp
 		Start: 1
 		ZOffset: -1024
 	idle-lights:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_a.shp
+		Filename: ra2_soviets_warfactory_ngweap_a.shp
 		Length: 13
 		ShadowStart: 13
 		Tick: 150
 	damaged-idle-lights:
-		Filename: ra2_soviets_warfactory_ra2_ngweap_a.shp
+		Filename: ra2_soviets_warfactory_ngweap_a.shp
 		Length: 13
 		ShadowStart: 13
 		Tick: 150
 	make:
-		Filename: ra2_soviets_warfactory_ra2_ntweapmk.shp
+		Filename: ra2_soviets_warfactory_ntweapmk.shp
 		Length: 25
 		ShadowStart: 25
 	icon:
@@ -175,47 +175,47 @@ ra2_soviets_constructionyard:
 	Defaults:
 		Offset: 2,-26
 	idle:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst_c.shp
+		Filename: ra2_soviets_constructionyard_ngcnst_c.shp
 		Length: 1
 		ShadowStart: 4
 		Tick: 150
 	damaged-idle:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst_c.shp
+		Filename: ra2_soviets_constructionyard_ngcnst_c.shp
 		Start: 1
 		ShadowStart: 5
 		Length: 1
 		Tick: 150
 	make:
-		Filename: ra2_soviets_constructionyard_ra2_ntcnstmk.shp
+		Filename: ra2_soviets_constructionyard_ntcnstmk.shp
 		Length: 31
 		ShadowStart: 31
 	idle-top:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst_a.shp
+		Filename: ra2_soviets_constructionyard_ngcnst_a.shp
 		Length: 11
 		Tick: 200
 	damaged-idle-top:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst_a.shp
+		Filename: ra2_soviets_constructionyard_ngcnst_a.shp
 		Start: 11
 		Length: 11
 		Tick: 150
 	idle-normal:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst.shp
+		Filename: ra2_soviets_constructionyard_ngcnst.shp
 		ZOffset: -1024
 	damaged-idle-normal:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst.shp
+		Filename: ra2_soviets_constructionyard_ngcnst.shp
 		Start: 1
 		ZOffset: -1024
 	build:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst_b.shp
+		Filename: ra2_soviets_constructionyard_ngcnst_b.shp
 		Length: 21
 		Tick: 150
 	damaged-build:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnst_b.shp
+		Filename: ra2_soviets_constructionyard_ngcnst_b.shp
 		Start: 21
 		Length: 21
 		Tick: 150
 	dead:
-		Filename: ra2_soviets_constructionyard_ra2_ngcnstdm.shp
+		Filename: ra2_soviets_constructionyard_ngcnstdm.shp
 		Length: 25
 		ShadowStart: 25
 		Tick: 75
@@ -227,35 +227,35 @@ ra2_soviets_teslareactor:
 	Defaults:
 		Offset: -9,-12
 	idle:
-		Filename: ra2_soviets_teslareactor_ra2_ngpowr.shp
+		Filename: ra2_soviets_teslareactor_ngpowr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_teslareactor_ra2_ngpowr.shp
+		Filename: ra2_soviets_teslareactor_ngpowr.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: ra2_soviets_teslareactor_ra2_ngpowr.shp
+		Filename: ra2_soviets_teslareactor_ngpowr.shp
 		Start: 2
 	idle-lights:
-		Filename: ra2_soviets_teslareactor_ra2_ngpowr_a.shp
+		Filename: ra2_soviets_teslareactor_ngpowr_a.shp
 		Length: 19
 		Tick: 150
 	damaged-idle-lights:
-		Filename: ra2_soviets_teslareactor_ra2_ngpowr_a.shp
+		Filename: ra2_soviets_teslareactor_ngpowr_a.shp
 		Start: 19
 		Length: 19
 		Tick: 150
 	critical-idle-lights:
-		Filename: ra2_soviets_teslareactor_ra2_ngpowr_a.shp
+		Filename: ra2_soviets_teslareactor_ngpowr_a.shp
 		Start: 19
 		Length: 19
 		Tick: 150
 	make:
-		Filename: ra2_soviets_teslareactor_ra2_ntpowrmk.shp
+		Filename: ra2_soviets_teslareactor_ntpowrmk.shp
 		Length: 26
 		ShadowStart: 26
 	dead:
-		Filename: ra2_soviets_teslareactor_ra2_ngpowr.shp
+		Filename: ra2_soviets_teslareactor_ngpowr.shp
 		Start: 1
 	icon:
 		Filename: ra2_soviets_teslareactor_icon.shp
@@ -265,21 +265,21 @@ ra2_soviets_barracks:
 	Defaults:
 		Offset: 0,-4
 	idle:
-		Filename: ra2_soviets_barracks_ra2_nghand.shp
+		Filename: ra2_soviets_barracks_nghand.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_barracks_ra2_nghand.shp
+		Filename: ra2_soviets_barracks_nghand.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: ra2_soviets_barracks_ra2_nghand.shp
+		Filename: ra2_soviets_barracks_nghand.shp
 		Start: 2
 	make:
-		Filename: ra2_soviets_barracks_ra2_nthandmk.shp
+		Filename: ra2_soviets_barracks_nthandmk.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_soviets_barracks_ra2_nghand.shp
+		Filename: ra2_soviets_barracks_nghand.shp
 		Start: 1
 	bib:
 		Filename: ra2_soviets_barracks_bib3.tem
@@ -300,33 +300,33 @@ ra2_soviets_orerefinery:
 	Defaults:
 		Offset: 1,-12
 	idle:
-		Filename: ra2_soviets_orerefinery_ra2_ngrefn.shp
+		Filename: ra2_soviets_orerefinery_ngrefn.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_orerefinery_ra2_ngrefn.shp
+		Filename: ra2_soviets_orerefinery_ngrefn.shp
 		Start: 1
 		ShadowStart: 4
 	make:
-		Filename: ra2_soviets_orerefinery_ra2_ntrefnmk.shp
+		Filename: ra2_soviets_orerefinery_ntrefnmk.shp
 		Length: 26
 		ShadowStart: 26
 	idle-drill:
-		Filename: ra2_soviets_orerefinery_ra2_ngrefnl1.shp
+		Filename: ra2_soviets_orerefinery_ngrefnl1.shp
 		Length: 3
 		Tick: 1500
 	idle-bib:
-		Filename: ra2_soviets_orerefinery_ra2_ngrefnbb.shp
+		Filename: ra2_soviets_orerefinery_ngrefnbb.shp
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: ra2_soviets_orerefinery_ra2_ngrefnbb.shp
+		Filename: ra2_soviets_orerefinery_ngrefnbb.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -512
 	docking-overlay:
-		Filename: ra2_soviets_orerefinery_ra2_ngrefnor.shp
+		Filename: ra2_soviets_orerefinery_ngrefnor.shp
 		Length: 20
 	dead:
-		Filename: ra2_soviets_orerefinery_ra2_ngrefn.shp
+		Filename: ra2_soviets_orerefinery_ngrefn.shp
 		Start: 1
 	resources:
 		Filename: invisibleitem.shp
@@ -877,32 +877,32 @@ ra2_soviets_radar:
 	Defaults:
 		Offset: 0,-8
 	idle:
-		Filename: ra2_soviets_radar_ra2_ngradr.shp
+		Filename: ra2_soviets_radar_ngradr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_radar_ra2_ngradr.shp
+		Filename: ra2_soviets_radar_ngradr.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: ra2_soviets_radar_ra2_ngradr.shp
+		Filename: ra2_soviets_radar_ngradr.shp
 		Start: 2
 	idle-dish:
-		Filename: ra2_soviets_radar_ra2_ngradr_a.shp
+		Filename: ra2_soviets_radar_ngradr_a.shp
 		ShadowStart: 92
 		Length: 45
 		Tick: 150
 	damaged-idle-dish:
-		Filename: ra2_soviets_radar_ra2_ngradr_a.shp
+		Filename: ra2_soviets_radar_ngradr_a.shp
 		Start: 46
 		ShadowStart: 138
 		Length: 45
 		Tick: 150
 	make:
-		Filename: ra2_soviets_radar_ra2_ntradrmk.shp
+		Filename: ra2_soviets_radar_ntradrmk.shp
 		Length: 30
 		ShadowStart: 30
 	dead:
-		Filename: ra2_soviets_radar_ra2_ngradr.shp
+		Filename: ra2_soviets_radar_ngradr.shp
 		Start: 1
 	icon:
 		Filename: ra2_soviets_radar_icon.shp
@@ -1031,48 +1031,48 @@ ra2_soviets_servicedepot:
 	Defaults:
 		Offset: -12,-36
 	idle:
-		Filename: ra2_soviets_servicedepot_ra2_ngdept_b.shp
+		Filename: ra2_soviets_servicedepot_ngdept_b.shp
 		Length: 10
 		ShadowStart: 20
 		Tick: 180
 		#ZOffset: 512
 	damaged-idle:
-		Filename: ra2_soviets_servicedepot_ra2_ngdept_b.shp
+		Filename: ra2_soviets_servicedepot_ngdept_b.shp
 		Start: 10
 		Length: 10
 		ShadowStart: 29
 		ZOffset: 512
 	idle-normal:
-		Filename: ra2_soviets_servicedepot_ra2_ngdept.shp
+		Filename: ra2_soviets_servicedepot_ngdept.shp
 		ShadowStart: 3
 	damaged-idle-normal:
-		Filename: ra2_soviets_servicedepot_ra2_ngdept.shp
+		Filename: ra2_soviets_servicedepot_ngdept.shp
 		Start: 2
 		ShadowStart: 4
 	bib:
-		Filename: ra2_soviets_servicedepot_ra2_ngdeptbb.shp
+		Filename: ra2_soviets_servicedepot_ngdeptbb.shp
 		ShadowStart: 3
 		ZOffset: -512
 	damaged-bib:
-		Filename: ra2_soviets_servicedepot_ra2_ngdeptbb.shp
+		Filename: ra2_soviets_servicedepot_ngdeptbb.shp
 		Start: 1
 		ShadowStart: 2
 	make:
-		Filename: ra2_soviets_servicedepot_ra2_ntdeptmk.shp
+		Filename: ra2_soviets_servicedepot_ntdeptmk.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_soviets_servicedepot_ra2_ngdept_b.shp
+		Filename: ra2_soviets_servicedepot_ngdept_b.shp
 		Start: 10
 		Length: 10
 		#ZOffset: 512
 	repair:
-		Filename: ra2_soviets_servicedepot_ra2_ngdept_c.shp
+		Filename: ra2_soviets_servicedepot_ngdept_c.shp
 		Length: 50
 		ShadowStart: 100
 		Tick: 120
 	damaged-repair:
-		Filename: ra2_soviets_servicedepot_ra2_ngdept_c.shp
+		Filename: ra2_soviets_servicedepot_ngdept_c.shp
 		Start: 50
 		Length: 50
 		ShadowStart: 150
@@ -1133,19 +1133,19 @@ ra2_soviets_sentrygun:
 	Defaults:
 		Offset: 0,4
 	idle:
-		Filename: ra2_soviets_sentrygun_ra2_nglasr.shp
+		Filename: ra2_soviets_sentrygun_nglasr.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_sentrygun_ra2_nglasr.shp
+		Filename: ra2_soviets_sentrygun_nglasr.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: ra2_soviets_sentrygun_ra2_nglasr.shp
+		Filename: ra2_soviets_sentrygun_nglasr.shp
 		Start: 2
 	make:
 		Filename: invisibleitem.shp
 	dead:
-		Filename: ra2_soviets_sentrygun_ra2_nglasr.shp
+		Filename: ra2_soviets_sentrygun_nglasr.shp
 		Start: 1
 	icon:
 		Filename: ra2_soviets_sentrygun_icon.shp
@@ -1155,42 +1155,42 @@ ra2_soviets_teslacoil:
 	Defaults:
 		Offset: 0,-3
 	idle:
-		Filename: ra2_soviets_teslacoil_ra2_ngtsla.shp
+		Filename: ra2_soviets_teslacoil_ngtsla.shp
 		Length: 1
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_teslacoil_ra2_ngtsla.shp
+		Filename: ra2_soviets_teslacoil_ngtsla.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 4
 	idle-powered:
-		Filename: ra2_soviets_teslacoil_ra2_ngtsla_a.shp
+		Filename: ra2_soviets_teslacoil_ngtsla_a.shp
 		Length: 10
 		ShadowStart: 20
 	damaged-idle-powered:
-		Filename: ra2_soviets_teslacoil_ra2_ngtsla_a.shp
+		Filename: ra2_soviets_teslacoil_ngtsla_a.shp
 		Start: 10
 		Length: 10
 		ShadowStart: 30
 	active:
-		Filename: ra2_soviets_teslacoil_ra2_ngtsla_b.shp
+		Filename: ra2_soviets_teslacoil_ngtsla_b.shp
 		Length: 10
 		ShadowStart: 20
 		Tick: 100
 		ZOffset: 10
 	damaged-active:
-		Filename: ra2_soviets_teslacoil_ra2_ngtsla_b.shp
+		Filename: ra2_soviets_teslacoil_ngtsla_b.shp
 		Start: 10
 		ShadowStart: 20
 		Length: 10
 		Tick: 100
 		ZOffset: 10
 	make:
-		Filename: ra2_soviets_teslacoil_ra2_nttslamk.shp
+		Filename: ra2_soviets_teslacoil_nttslamk.shp
 		ShadowStart: 25
 		Length: 25
 	dead:
-		Filename: ra2_soviets_teslacoil_ra2_ngtsladm.shp
+		Filename: ra2_soviets_teslacoil_ngtsladm.shp
 		Length: 20
 		ShadowStart: 20
 		Tick: 60
@@ -1381,20 +1381,20 @@ ra2_soviets_flakcannon:
 	Defaults:
 		Offset: 0,4
 	idle:
-		Filename: ra2_soviets_flakcannon_ra2_ngflak.shp
+		Filename: ra2_soviets_flakcannon_ngflak.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_flakcannon_ra2_ngflak.shp
+		Filename: ra2_soviets_flakcannon_ngflak.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: ra2_soviets_flakcannon_ra2_ngflak.shp
+		Filename: ra2_soviets_flakcannon_ngflak.shp
 	make:
-		Filename: ra2_soviets_flakcannon_ra2_ntflakmk.shp
+		Filename: ra2_soviets_flakcannon_ntflakmk.shp
 		Length: 9
 		ShadowStart: 9
 	dead:
-		Filename: ra2_soviets_flakcannon_ra2_ngflak.shp
+		Filename: ra2_soviets_flakcannon_ngflak.shp
 		Start: 1
 	muzzle:
 		Filename: ra2_gunfire.shp
@@ -1407,36 +1407,36 @@ ra2_soviets_nuclearreactor:
 	Defaults:
 		Offset: -10,-15
 	idle:
-		Filename: ra2_soviets_nuclearreactor_ra2_ngnrct.shp
+		Filename: ra2_soviets_nuclearreactor_ngnrct.shp
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_soviets_nuclearreactor_ra2_ngnrct.shp
+		Filename: ra2_soviets_nuclearreactor_ngnrct.shp
 		Start: 1
 		ShadowStart: 4
 	critical-idle:
-		Filename: ra2_soviets_nuclearreactor_ra2_ngnrct.shp
+		Filename: ra2_soviets_nuclearreactor_ngnrct.shp
 		Start: 2
 		ShadowStart: 5
 	idle-lights:
-		Filename: ra2_soviets_nuclearreactor_ra2_ngnrct_a.shp
+		Filename: ra2_soviets_nuclearreactor_ngnrct_a.shp
 		Length: 11
 		Tick: 150
 	damaged-idle-lights:
-		Filename: ra2_soviets_nuclearreactor_ra2_ngnrct_a.shp
+		Filename: ra2_soviets_nuclearreactor_ngnrct_a.shp
 		Start: 11
 		Length: 11
 		Tick: 150
 	critical-idle-lights:
-		Filename: ra2_soviets_nuclearreactor_ra2_ngnrct_a.shp
+		Filename: ra2_soviets_nuclearreactor_ngnrct_a.shp
 		Start: 11
 		Length: 11
 		Tick: 150
 	make:
-		Filename: ra2_soviets_nuclearreactor_ra2_ntnrctmk.shp
+		Filename: ra2_soviets_nuclearreactor_ntnrctmk.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_soviets_nuclearreactor_ra2_ngnrct.shp
+		Filename: ra2_soviets_nuclearreactor_ngnrct.shp
 		Start: 1
 	icon:
 		Filename: ra2_soviets_nuclearreactor_icon.shp
@@ -1446,19 +1446,19 @@ ra2_soviets_battlelab:
 	Defaults:
 		Offset: 0,-12
 	idle:
-		Filename: ra2_soviets_battlelab_ra2_ngtech.shp
+		Filename: ra2_soviets_battlelab_ngtech.shp
 	damaged-idle:
-		Filename: ra2_soviets_battlelab_ra2_ngtech.shp
+		Filename: ra2_soviets_battlelab_ngtech.shp
 		Start: 1
 	critical-idle:
-		Filename: ra2_soviets_battlelab_ra2_ngtech.shp
+		Filename: ra2_soviets_battlelab_ngtech.shp
 		Start: 2
 	make:
-		Filename: ra2_soviets_battlelab_ra2_nttechmk.shp
+		Filename: ra2_soviets_battlelab_nttechmk.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_soviets_battlelab_ra2_ngtech.shp
+		Filename: ra2_soviets_battlelab_ngtech.shp
 		Start: 1
 	icon:
 		Filename: ra2_soviets_battlelab_icon.shp
@@ -1863,14 +1863,14 @@ ra2_soviets_nuclearmissilesilo:
 	Defaults:
 		Offset: 0,-10
 	idle:
-		Filename: ra2_soviets_nuclearmissilesilo_ra2_ngmisl_e.shp
+		Filename: ra2_soviets_nuclearmissilesilo_ngmisl_e.shp
 		ShadowStart: 2
 	damaged-idle:
-		Filename: ra2_soviets_nuclearmissilesilo_ra2_ngmisl_e.shp
+		Filename: ra2_soviets_nuclearmissilesilo_ngmisl_e.shp
 		Start: 1
 		ShadowStart: 3
 	critical-idle:
-		Filename: ra2_soviets_nuclearmissilesilo_ra2_ngmisl_e.shp
+		Filename: ra2_soviets_nuclearmissilesilo_ngmisl_e.shp
 		Start: 1
 		ShadowStart: 3
 	# TODO: ngmisl_f is actually the open sequence
@@ -1918,53 +1918,53 @@ ra2_soviets_nuclearmissilesilo:
 		Length: 32
 		Tick: 120
 	make:
-		Filename: ra2_soviets_nuclearmissilesilo_ra2_ntmislmk.shp
+		Filename: ra2_soviets_nuclearmissilesilo_ntmislmk.shp
 		Length: 26
 		ShadowStart: 26
 	dead:
-		Filename: ra2_soviets_nuclearmissilesilo_ra2_ngmisl_e.shp
+		Filename: ra2_soviets_nuclearmissilesilo_ngmisl_e.shp
 		Start: 1
 	icon:
 		Filename: ra2_soviets_nuclearmissilesilo_icon.shp
 		Offset: 0,0
 	icon2:
-		Filename: ra2_soviets_nuclearmissilesilo_ra2_p_nukeicon.shp
+		Filename: ra2_soviets_nuclearmissilesilo_p_nukeicon.shp
 		Offset: 0,0
 
 ra2_soviets_ironcurtain:
 	Defaults:
 		Offset: 0,-14
 	idle:
-		Filename: ra2_soviets_ironcurtain_ra2_ngiron_a.shp
+		Filename: ra2_soviets_ironcurtain_ngiron_a.shp
 		Length: 11
 		ShadowStart: 22
 	damaged-idle:
-		Filename: ra2_soviets_ironcurtain_ra2_ngiron_a.shp
+		Filename: ra2_soviets_ironcurtain_ngiron_a.shp
 		Start: 11
 		Length: 11
 		ShadowStart: 33
 	active:
-		Filename: ra2_soviets_ironcurtain_ra2_ngiron_h.shp
+		Filename: ra2_soviets_ironcurtain_ngiron_h.shp
 		Length: 12
 		ShadowStart: 24
 	damaged-active:
-		Filename: ra2_soviets_ironcurtain_ra2_ngiron_h.shp
+		Filename: ra2_soviets_ironcurtain_ngiron_h.shp
 		Start: 12
 		Length: 12
 		ShadowStart: 36
 	make:
-		Filename: ra2_soviets_ironcurtain_ra2_ntironmk.shp
+		Filename: ra2_soviets_ironcurtain_ntironmk.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
-		Filename: ra2_soviets_ironcurtain_ra2_ngiron_a.shp
+		Filename: ra2_soviets_ironcurtain_ngiron_a.shp
 		Start: 11
 		Length: 11
 	icon:
 		Filename: ra2_soviets_ironcurtain_icon.shp
 		Offset: 0,0
 	icon2:
-		Filename: ra2_soviets_ironcurtain_ra2_p_ironcurtainicon.shp
+		Filename: ra2_soviets_ironcurtain_p_ironcurtainicon.shp
 		Offset: 0,0
 yuri_psychicdominator:
 	Defaults:
@@ -5577,7 +5577,7 @@ ra2_soviets_conscript:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: ra2_soviets_conscript_ra2_cons.shp
+		Filename: ra2_soviets_conscript_cons.shp
 	run:
 		Tick: 120
 	paradrop:
@@ -5638,7 +5638,7 @@ ra2terror:
 ra2_soviets_flaktrooper:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: ra2_soviets_flaktrooper_ra2_flakt.shp
+		Filename: ra2_soviets_flaktrooper_flakt.shp
 	run:
 		Tick: 120
 	shoot:
@@ -5682,7 +5682,7 @@ ra2sidewind:
 ra2_soviets_desolator:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: ra2_soviets_desolator_ra2_deso.shp
+		Filename: ra2_soviets_desolator_deso.shp
 	dot:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
@@ -5706,7 +5706,7 @@ ra2_soviets_desolator:
 ra2_soviets_crazyivan:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: ra2_soviets_crazyivan_ra2_ivan.shp
+		Filename: ra2_soviets_crazyivan_ivan.shp
 	run:
 		Tick: 120
 	liedown:
@@ -5726,7 +5726,7 @@ ra2_soviets_crazyivan:
 ra2_soviets_teslatrooper:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: ra2_soviets_teslatrooper_ra2_shk.shp
+		Filename: ra2_soviets_teslatrooper_shk.shp
 	idle:
 	run:
 		Tick: 120
@@ -5873,7 +5873,7 @@ yrslav:
 yuri_brute:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
-		Filename: yuri_brute_yr_brute.shp
+		Filename: yuri_brute_yr.shp
 	run:
 		Tick: 120
 	shoot:
@@ -5894,7 +5894,7 @@ yuri_brute:
 yuri_virus:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: yuri_virus_yr_virus.shp
+		Filename: yuri_virus_yr.shp
 	run:
 		Tick: 120
 	shoot:
@@ -5915,7 +5915,7 @@ yuri_virus:
 ra2yuri:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: yuri_clone_ra2_yuri.shp
+		Filename: yuri_clone_ra2.shp
 	deploy:
 		Start: 292
 		Length: 7
@@ -5968,16 +5968,16 @@ ra2_allies_attackdog:
 ra2_soviets_attackdog:
 	Inherits: ra2_allies_attackdog
 	Defaults:
-		Filename: ra2_soviets_attackdog_ra2_dog.shp
+		Filename: ra2_soviets_attackdog_dog.shp
 	shoot:
-		Filename: ra2_soviets_attackdog_ra2_dogp.shp
+		Filename: ra2_soviets_attackdog_dogp.shp
 	icon:
 		Filename: ra2_soviets_attackdog_icon.shp
 
 yuri_yurix:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: yuri_yurix_yr_yurix.shp
+		Filename: yuri_yurix_yr.shp
 	idle1:
 		Start: 56
 	idle2:
@@ -6094,7 +6094,7 @@ ra2_allies_chronolegionnaire:
 ra2_soviets_boris:
 	Inherits: ^RA2ArmedInfantry
 	Defaults:
-		Filename: ra2_soviets_boris_yr_boris.shp
+		Filename: ra2_soviets_boris_yr.shp
 	run:
 		Tick: 120
 	prone:
@@ -6222,7 +6222,7 @@ yuri_biotrooper:
 ra2_soviets_rhinoheavytank:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: ra2_soviets_rhinoheavytank_ra2_rhino.shp
+		Filename: ra2_soviets_rhinoheavytank_rhino.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -6242,7 +6242,7 @@ ra2_soviets_rhinoheavytank:
 
 ra2_soviets_flaktrack:
 	Defaults:
-		Filename: ra2_soviets_flaktrack_ra2_htrack.shp
+		Filename: ra2_soviets_flaktrack_htrack.shp
 	idle:
 		Facings: 64
 	turret:
@@ -6256,7 +6256,7 @@ ra2_soviets_flaktrack:
 
 ra2_soviets_apocalypsetank:
 	Defaults:
-		Filename: ra2_soviets_apocalypsetank_ra2_apoc.shp
+		Filename: ra2_soviets_apocalypsetank_apoc.shp
 	idle:
 		Facings: 64
 	turret:
@@ -6265,7 +6265,7 @@ ra2_soviets_apocalypsetank:
 	icon:
 		Filename: ra2apocicon.shp
 	muzzle:
-		Filename: ra2_soviets_apocalypsetank_ra2_apmuzzle.shp
+		Filename: ra2_soviets_apocalypsetank_apmuzzle.shp
 		Length: *
 	muzzle-2:
 		Filename: ra2_vtmuzzle.shp
@@ -6295,7 +6295,7 @@ ra2v3rocket:
 
 ra2_soviets_teslatank:
 	Defaults:
-		Filename: ra2_soviets_teslatank_ra2_teslatank.shp
+		Filename: ra2_soviets_teslatank.shp
 		Scale: 0.5
 	idle:
 		Facings: 64
@@ -6558,7 +6558,7 @@ ra2_allies_prismtank:
 
 ra2_soviets_terrordrone:
 	Defaults:
-		Filename: ra2_soviets_terrordrone_ra2_dron.shp
+		Filename: ra2_soviets_terrordrone_dron.shp
 	stand:
 		Start: 48
 		ShadowStart: 136
@@ -6575,7 +6575,7 @@ ra2_soviets_terrordrone:
 		Length: 4
 		Facings: -8
 	shoot:
-		Filename: ra2_soviets_terrordrone_ra2_dronp.shp
+		Filename: ra2_soviets_terrordrone_dronp.shp
 		Length: 1
 		Facings: 32
 	icon:
@@ -6646,7 +6646,7 @@ yuri_chaosdrone:
 yuri_mastermind:
 	Defaults:
 	idle:
-		Filename: yuri_mastermind_ra2_mastermind.shp
+		Filename: yuri_mastermind_ra2.shp
 		Facings: 64
 		Scale: 0.75
 	icon:
@@ -6677,7 +6677,7 @@ yuri_slaveminer:
 
 ra2_soviets_mobileconstructionvehicle:
 	Defaults:
-		Filename: ra2_soviets_mobileconstructionvehicle_ra2_smcv.shp
+		Filename: ra2_soviets_mobileconstructionvehicle_smcv.shp
 		Scale: 1
 	idle:
 		Facings: 64
@@ -6873,7 +6873,7 @@ ra2dlph:
 
 ra2_soviets_seascorpion:
 	idle:
-		Filename: ra2_soviets_seascorpion_ra2_seascorpion.shp
+		Filename: ra2_soviets_seascorpion.shp
 		Scale: 0.75
 		Facings: 64
 	muzzle:
@@ -7139,7 +7139,7 @@ ra2_c_abram:
 
 ra2_soviets_kirovairship:
 	Defaults:
-		Filename: ra2_soviets_kirovairship_ra2_kirov.shp
+		Filename: ra2_soviets_kirovairship_kirov.shp
 		Scale: 0.75
 	idle:
 		Facings: 64
@@ -7453,17 +7453,17 @@ ra2cplanesov:
 
 yrbpln:
 	idle:
-		Filename: ra2_soviets_migbomber_ra2_mig.shp
+		Filename: ra2_soviets_migbomber_mig.shp
 		Facings: 64
 	move:
-		Filename: ra2_soviets_migbomber_ra2_mig.shp
+		Filename: ra2_soviets_migbomber_mig.shp
 		Facings: 64
 	move-l:
-		Filename: ra2_soviets_migbomber_ra2_mig.shp
+		Filename: ra2_soviets_migbomber_mig.shp
 		Facings: 64
 		Start: 64
 	move-r:
-		Filename: ra2_soviets_migbomber_ra2_mig.shp
+		Filename: ra2_soviets_migbomber_mig.shp
 		Facings: 64
 		Start: 128
 	icon:
@@ -7880,7 +7880,7 @@ ra2uniontank:
 	icon:
 		Filename: ra2apocicon.shp
 	muzzle:
-		Filename: ra2_soviets_apocalypsetank_ra2_apmuzzle.shp
+		Filename: ra2_soviets_apocalypsetank_apmuzzle.shp
 		Length: *
 	muzzle-2:
 		Filename: ra2_vtmuzzle.shp
@@ -7899,7 +7899,7 @@ ra2superapocalypse:
 	icon:
 		Filename: ra2apocicon.shp
 	muzzle:
-		Filename: ra2_soviets_apocalypsetank_ra2_apmuzzle.shp
+		Filename: ra2_soviets_apocalypsetank_apmuzzle.shp
 		Length: *
 	muzzle-2:
 		Filename: ra2_vtmuzzle.shp

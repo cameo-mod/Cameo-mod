@@ -1081,7 +1081,7 @@ asian_alliance_veteranarcher:
 asian_alliance_shinobi:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: asian_alliance_shinobi_aa_shinobi.shp
+		Filename: asian_alliance_shinobi_aa.shp
 		Scale: 0.9
 	stand:
 		ShadowStart: 829
@@ -1295,7 +1295,7 @@ asian_alliance_quasar:
 
 asian_alliance_viper:
 	Defaults:
-		Filename: asian_alliance_viper_aa_viper.shp
+		Filename: asian_alliance_viper_aa.shp
 	idle:
 		Facings: 64
 		Scale: 0.75
@@ -1493,18 +1493,18 @@ asian_alliance_pulverizermecha:
 
 asian_alliance_phoenix:
 	idle:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 	move:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 		Start: 64
 	move-l:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 		Start: 128
 	move-r:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 		Start: 192
 	icon:
@@ -1512,18 +1512,18 @@ asian_alliance_phoenix:
 
 aa_bomber:
 	idle:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 	move:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 		Start: 64
 	move-l:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 		Start: 128
 	move-r:
-		Filename: asian_alliance_phoenix_aa_phoenix.shp
+		Filename: asian_alliance_phoenix_aa.shp
 		Facings: 64
 		Start: 192
 	icon:
@@ -1552,7 +1552,7 @@ asian_alliance_heavyrailguntank:
 asian_alliance_dragonfly:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: asian_alliance_dragonfly_aa_dragonfly.shp
+		Filename: asian_alliance_dragonfly_aa.shp
 	idle:
 		Facings: 64
 		Scale: 0.75
@@ -1572,7 +1572,7 @@ asian_alliance_asianflametank:
 asian_alliance_alligator:
 	Inherits: ^RA2BasicInfantry
 	Defaults:
-		Filename: asian_alliance_alligator_aa_alligator.shp
+		Filename: asian_alliance_alligator_aa.shp
 	stand:
 		#ShadowStart: 164
 	run:
@@ -1632,17 +1632,17 @@ asian_alliance_alligator:
 asian_alliance_pelican:
 	Inherits: ^RA2CannonMuzzle
 	Defaults:
-		Filename: asian_alliance_pelican_aa_pelican.shp
+		Filename: asian_alliance_pelican_aa.shp
 	idle:
 		Facings: 64
 		Scale: 1
 	rotor:
-		Filename: asian_alliance_pelican_aa_pelican.shp
+		Filename: asian_alliance_pelican_aa.shp
 		Length: 64
 		Tick: 6
 		Start: 64
 	slow-rotor:
-		Filename: asian_alliance_pelican_aa_pelican.shp
+		Filename: asian_alliance_pelican_aa.shp
 		Length: 64
 		Tick: 24
 		Start: 64
