@@ -7,7 +7,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 
 | class | what | count (live tree) | severity profile |
 |---|---|---|---|
-| B8 | crash-class content | **3** distinct (warhead spawn, 5 StartingUnits ids, tsarnd muzzle) | crash |
+| B8 | crash-class content | **2** distinct (5 StartingUnits ids, tsarnd muzzle) | crash |
 | B1 | cross-faction leaks | 10 L1 + 13 L3 (+1,106 shared needing owners) | balance |
 | B2 | illegal inherits | **328** concrete→concrete, 24 cross-faction, 0 dangling | balance-risk |
 | B5 | AI wiring | **200** ids defined nowhere, 620 unloaded refs, 26 factions with unwired units | balance |
@@ -26,7 +26,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 ## Top 20 findings
 
 1. **`tatacitus` NukePower fires nonexistent `TSChemTacticalMissile`** — FIXED: changed to existing `TSTacticalChemMissile` with valid `tsnodmmsil` image (tiberiaalliances.yaml).
-2. **`fiendspawner` warhead spawns unpositionable `tsdoggiew`** — crash when it resolves.
+2. **`fiendspawner` warhead spawns unpositionable `tsdoggiew`** — STALE: weapon now spawns valid `forgotten_tiberianfiend_wild` (positionable infantry).
 3. **StartingUnits reference 5 missing actors** (`tsbike2`, `tsttnk2`, `steel_qtank`, `steel_qutnk`, `technicaltank`) — broken starting-unit options.
 4. **`tsarnd` muzzle sequence undefined** — STALE: unit renamed to `cabal_eliminator800`, muzzle sequence exists at sequences.yaml:2040.
 5. **RA2 Allies hero-infantry stack measures 36×** fresh-self power (Assault Squad + Vanguard + Infiltrators + Chromium/Prismatic lines) — worst in game; Yuri 30× behind it.
