@@ -41,7 +41,7 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 14. **WC2 tower upgrade names** (guard↔cannon swap) — FIXED; remaining 24 duplicate-tooltip groups still under review.
 15. **Dead-wiring families on 1,042 actors each** (`usabombardament`, `usaholdtheline`, `usasearchndestroy`, `upsubliminal(2)`) + `upra2deso` on 302 — Generals-era hooks granted by nothing.
 16. **3 player-visible raw Fluent keys** — STALE/RESOLVED: current `audit_fluent.py` F1 shows 0 unresolved refs.
-17. **`wc2_orc_eye_of_kilrogg` TurnSpeed 2048** (median 20) — stale-scale value; bounds screen otherwise clean.
+17. **`wc2_orc_eye_of_kilrogg` TurnSpeed 2048** — FIXED: reduced to 28 (bounds screen still clean; high vision range remains by design as scout).
 18. **345 orphan weapons + 542 orphan sequence images** — RAM/load-time dead weight.
 19. **CABAL absent from Random AND Tournament pools, still titled "(WIP)"** — FIXED: CABAL added to both pools, WIP label removed.
 20. **CABAL post-TB23 full stack = 3.9×** — over the 2.0 budget but sane; trim one Research multiplier or cap rank scaling.
