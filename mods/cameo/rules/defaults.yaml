@@ -5551,10 +5551,10 @@
 		Prerequisites: global_conscription_buff
 	# ProvidesPrerequisite@global_conscription_buff:
 	# 	Prerequisite: global_conscription_buff
-	# 	RequiresCondition: ra1_soviet_doctrine_conscriptiondoctrine || ra2_soviet_doctrine_conscription || ra2_yuri_upgrade_psioniclegion
-	# GrantConditionOnPrerequisite@ra1_soviet_doctrine_conscriptiondoctrine:
-	# 	Condition: ra1_soviet_doctrine_conscriptiondoctrine
-	# 	Prerequisites: ra1_soviet_doctrine_conscriptiondoctrine
+	# 	RequiresCondition: ra1_soviet_doctrine_conscription || ra2_soviet_doctrine_conscription || ra2_yuri_upgrade_psioniclegion
+	# GrantConditionOnPrerequisite@ra1_soviet_doctrine_conscription:
+	# 	Condition: ra1_soviet_doctrine_conscription
+	# 	Prerequisites: ra1_soviet_doctrine_conscription
 	# GrantConditionOnPrerequisite@ra2_soviet_doctrine_conscription:
 	# 	Condition: ra2_soviet_doctrine_conscription
 	# 	Prerequisites: ra2_soviet_doctrine_conscription

@@ -1117,7 +1117,7 @@ ordos_antiairtrooper:
 		Scale: 1
 	Defaults:
 		Scale: 0.76
-		Filename: ordos_upgrade_antiairtrooperupgrade_ordos_aatrooper.png
+		Filename: ordos_upgrade_antiairtrooper_ordos_aatrooper.png
 	run:
 		Scale: 1
 		Tick: 100
@@ -1161,7 +1161,7 @@ ordos_antiairtrooper:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ordos_upgrade_antiairtrooperupgrade_icon.png
+		Filename: ordos_upgrade_antiairtrooper_icon.png
 
 ordos_mortartrooper:
 	Inherits: ^RA2ArmedInfantry
@@ -1592,7 +1592,7 @@ ordos_dustdrone:
 
 ordos_heavyautoguntank:
 	idle:
-		Filename: ordos_upgrade_heavyautoguntankupgrade_d2k_autogun_tank.shp
+		Filename: ordos_upgrade_heavyautoguntank_d2k_autogun_tank.shp
 		Facings: -32
 		Scale: 1.75
 	muzzle:
@@ -1603,7 +1603,7 @@ ordos_heavyautoguntank:
 		Length: 3
 		BlendMode: Additive
 	icon:
-		Filename: ordos_upgrade_heavyautoguntankupgrade_icon.png
+		Filename: ordos_upgrade_heavyautoguntank_icon.png
 
 ordos_deviatorartillery:
 	Defaults:
@@ -1642,12 +1642,12 @@ ordos_heavycombattank:
 	Defaults:
 		Scale: 1.5
 	idle:
-		Filename: ordos_upgrade_heavycombattankupgrade_d2k_ordos_heavycombattank_chassis.png
+		Filename: ordos_upgrade_heavycombattank_d2k_ordos_heavycombattank_chassis.png
 		Facings: -32
 		InterpolatedFacings: 64
 		Offset: 0, 4
 	turret:
-		Filename: ordos_upgrade_heavycombattankupgrade_d2k_ordos_heavycombattank_turret.png
+		Filename: ordos_upgrade_heavycombattank_d2k_ordos_heavycombattank_turret.png
 		Facings: -32
 		InterpolatedFacings: 64
 		Offset: 0, -2
@@ -1660,7 +1660,7 @@ ordos_heavycombattank:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: ordos_upgrade_heavycombattankupgrade_icon.png
+		Filename: ordos_upgrade_heavycombattank_icon.png
 
 ordos_upgrade_biologicalwarfare:
 	icon:
@@ -1693,6 +1693,6 @@ ordos_upgrade_para:
 		Filename: ordos_upgrade_contraband_icon.png
 		Offset: 0,0
 
-ordos_upgrade_heavycombattankrocketsupgrade:
+ordos_upgrade_heavycombattankrockets:
 	icon:
-		Filename: ordos_upgrade_heavycombattankrocketsupgrade_icon.png
+		Filename: ordos_upgrade_heavycombattankrockets_icon.png

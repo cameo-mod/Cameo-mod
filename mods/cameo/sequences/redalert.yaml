@@ -4916,36 +4916,36 @@ ra1_soviet_hammertank:
 		Scale: 0.5
 	idle:
 		Scale: 1
-		Filename: ra1_soviet_upgrade_hammertankupgrade_soviethammertankchassis.png
+		Filename: ra1_soviet_upgrade_hammertank_soviethammertankchassis.png
 		Facings: 32
 	turret:
 		Scale: 1
-		Filename: ra1_soviet_upgrade_hammertankupgrade_soviethammertankturret.png
+		Filename: ra1_soviet_upgrade_hammertank_soviethammertankturret.png
 		Facings: 32
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 		Scale: 1.25
 	icon:
-		Filename: ra1_soviet_upgrade_hammertankupgrade_icon.png
+		Filename: ra1_soviet_upgrade_hammertank_icon.png
 
 ra1_soviet_kotinnucleartank:
 	Defaults:
 		Scale: 0.9
 	idle:
 		Scale: 1
-		Filename: ra1_soviet_upgrade_kotinnucleartankupgrade_kotinchassisspritesheet.png
+		Filename: ra1_soviet_upgrade_kotinnucleartank_kotinchassisspritesheet.png
 		Facings: 64
 	turret:
 		Scale: 1
-		Filename: ra1_soviet_upgrade_kotinnucleartankupgrade_kotinturret2spritesheet.png
+		Filename: ra1_soviet_upgrade_kotinnucleartank_kotinturret2spritesheet.png
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 		Scale: 1.25
 	icon:
-		Filename: ra1_soviet_upgrade_kotinnucleartankupgrade_icon.png
+		Filename: ra1_soviet_upgrade_kotinnucleartank_icon.png
 
 jmgnest:
 	Inherits: ^WithBuildingBibFtur
@@ -5564,29 +5564,29 @@ nanotechrepairsicon:
 #	Doctrines and Upgrades	#
 #############################
 
-ra1_soviet_doctrine_conscriptiondoctrine:
+ra1_soviet_doctrine_conscription:
 	icon:
-		Filename: ra1_soviet_doctrine_conscriptiondoctrine_icon.png
+		Filename: ra1_soviet_doctrine_conscription_icon.png
 
-ra1_soviet_doctrine_industrialefficiencydoctrine:
+ra1_soviet_doctrine_industrialefficiency:
 	icon:
-		Filename: ra1_soviet_doctrine_industrialefficiencydoctrine_icon.png
+		Filename: ra1_soviet_doctrine_industrialefficiency_icon.png
 
-ra1_soviet_doctrine_infernodoctrine:
+ra1_soviet_doctrine_inferno:
 	icon:
-		Filename: ra1_soviet_doctrine_infernodoctrine_icon.png
+		Filename: ra1_soviet_doctrine_inferno_icon.png
 
-ra1_soviet_doctrine_teslaandexperimentaltechdoctrine:
+ra1_soviet_doctrine_teslaandexperimentaltech:
 	icon:
-		Filename: ra1_soviet_doctrine_teslaandexperimentaltechdoctrine_icon.png
+		Filename: ra1_soviet_doctrine_teslaandexperimentaltech_icon.png
 
-ra1_soviet_doctrine_heavyarmordoctrine:
+ra1_soviet_doctrine_heavyarmor:
 	icon:
-		Filename: ra1_soviet_doctrine_heavyarmordoctrine_icon.png
+		Filename: ra1_soviet_doctrine_heavyarmor_icon.png
 
-ra1_soviet_doctrine_nuclearwardoctrine:
+ra1_soviet_doctrine_nuclearwar:
 	icon:
-		Filename: ra1_soviet_doctrine_nuclearwardoctrine_icon.png
+		Filename: ra1_soviet_doctrine_nuclearwar_icon.png
 
 #############################
 
@@ -5650,9 +5650,9 @@ ra1_soviet_upgrade_nucleartankshells:
 	icon:
 		Filename: ra1_soviet_upgrade_nucleartankshells_icon.png
 
-ra1_soviet_upgrade_shtoradefensesystemupgrade:
+ra1_soviet_upgrade_shtoradefensesystem:
 	icon:
-		Filename: ra1_soviet_upgrade_shtoradefensesystemupgrade_icon.png
+		Filename: ra1_soviet_upgrade_shtoradefensesystem_icon.png
 
 ra1_soviet_upgrade_hazmatsuits:
 	icon:

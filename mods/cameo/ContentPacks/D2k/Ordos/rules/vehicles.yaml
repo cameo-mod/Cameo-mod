@@ -354,7 +354,7 @@ ordos_spiceharvester:
 # 	Inherits@AntiVeh: ^PrioritizeVehicle
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~!faction.tleilaxu, ~!faction.smugglers, ~!faction.guild, ~!faction.corrino, ~!faction.emperor, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactory, ~!faction.tleilaxu, ~!faction.smugglers, ~!faction.guild, ~!faction.corrino, ~!faction.emperor, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 210
 # 		BuildDurationModifier: 100
@@ -453,7 +453,7 @@ ordos_spiceharvester:
 # 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactoryupgrade, ~techlevel.low
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
@@ -507,7 +507,7 @@ ordos_spiceharvester:
 # d2k_transport_buggy.bot1:
 # 	Inherits: d2k_transport_buggy
 # 	Buildable:
-# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactoryupgrade, ~techlevel.low, ~botplayer
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.low, ~botplayer
 # 	Valued:
 # 		Cost: 2500
 # 	Cargo:
@@ -554,7 +554,7 @@ ordos_spiceharvester:
 # 	Inherits@AntiVeh: ^PrioritizeVehicle
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~faction.smugglers, ordos_upgrade_lightfactoryupgrade, ~techlevel.low
+# 		Prerequisites: ~faction.smugglers, ordos_upgrade_lightfactory, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 225
 # 		BuildDurationModifier: 100
@@ -609,7 +609,7 @@ ordos_spiceharvester:
 # 	Inherits@EMP: ^FrontalEMP
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~autogun_prereq, research_centre, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactory, ~autogun_prereq, research_centre, ~techlevel.low
 # 		BuildPaletteOrder: 50
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
@@ -702,7 +702,7 @@ ordos_spiceharvester:
 # 		Multiplier: 125
 # 		Prerequisites: faction.guild
 # 	Buildable:
-# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~faction.guild, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactory, ~faction.guild, ~techlevel.low
 
 # mg_quad:
 # 	Inherits: quad
@@ -1633,7 +1633,7 @@ ordos_combattank:
 		BuildPaletteOrder: 40
 		Description: template_mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~ordos_heavyfactory, ~!ordos_upgrade_heavycombattankupgrade
+		Prerequisites: ~ordos_heavyfactory, ~!ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1691,7 +1691,7 @@ ordos_heavycombattank:
 		BuildPaletteOrder: 40
 		Description: template_mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavycombattankupgrade
+		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavycombattank
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1720,10 +1720,10 @@ ordos_heavycombattank:
 		Weapon: HeavyOrdosCombatTankRockets
 		LocalOffset: 200,-200,200, 200,200,200
 		LocalYaw: 40, -40
-		RequiresCondition: ordos_upgrade_heavycombattankrocketsupgrade
-	GrantConditionOnPrerequisite@ordos_upgrade_heavycombattankrocketsupgrade:
-		Condition: ordos_upgrade_heavycombattankrocketsupgrade
-		Prerequisites: ordos_upgrade_heavycombattankrocketsupgrade
+		RequiresCondition: ordos_upgrade_heavycombattankrockets
+	GrantConditionOnPrerequisite@ordos_upgrade_heavycombattankrockets:
+		Condition: ordos_upgrade_heavycombattankrockets
+		Prerequisites: ordos_upgrade_heavycombattankrockets
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -1737,7 +1737,7 @@ ordos_heavycombattank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_heavycombattankrocketsupgrade
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_heavycombattankrockets
 
 ordos_combatautoguntank:
 	Inherits@D2KT: ^D2KTank
@@ -1757,7 +1757,7 @@ ordos_combatautoguntank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_upgrade_heavyautoguntankupgrade
+		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_upgrade_heavyautoguntank
 		Description: Combat Anti-Infantry and Anti-Air Vehicle
 		IconPalette: ra2
 	Armament:
@@ -1812,7 +1812,7 @@ ordos_heavyautoguntank:
 		Cost: 2800
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavyautoguntankupgrade
+		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavyautoguntank
 		BuildPaletteOrder: 50
 		Description: Heavy Anti-Infantry Tank\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks
 	UpdatesPlayerStatistics:

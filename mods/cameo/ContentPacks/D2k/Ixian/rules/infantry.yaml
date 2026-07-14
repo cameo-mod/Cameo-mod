@@ -73,7 +73,7 @@ ixian_rockettrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~ixian_barracks, ~!ixian_upgrade_twinbazookaupgrade
+		Prerequisites: ~ixian_barracks, ~!ixian_upgrade_twinbazooka
 		Description: actor_ixian_rockettrooper.description
 		IconPalette: d2kunit
 	Valued:
@@ -120,7 +120,7 @@ ixian_twinrockettrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~ixian_barracks, ~ixian_upgrade_twinbazookaupgrade
+		Prerequisites: ~ixian_barracks, ~ixian_upgrade_twinbazooka
 		Description: template_antitank_antiair_infantry.description
 		IconPalette: d2kunit
 	Valued:

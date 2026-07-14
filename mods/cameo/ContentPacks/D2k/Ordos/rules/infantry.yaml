@@ -15,7 +15,7 @@ ordos_antiairtrooper:
 		Name: Anti Air Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~ordos_barracks, ~ordos_upgrade_antiairtrooperupgrade
+		Prerequisites: ~ordos_barracks, ~ordos_upgrade_antiairtrooper
 		Queue: Infantry, RAInfantry
 		Description: template_antitank_antiair_infantry.description
 	Health:
@@ -115,7 +115,7 @@ ordos_rockettrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~ordos_barracks, ~!ordos_upgrade_antiairtrooperupgrade
+		Prerequisites: ~ordos_barracks, ~!ordos_upgrade_antiairtrooper
 		Description: actor_ordos_rockettrooper.description
 		IconPalette: d2kunit
 	Valued:
@@ -1382,7 +1382,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactoryupgrade, ~techlevel.low
+# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactory, ~techlevel.low
 # 		Description: Light Carrier vehicle with light cannon and missile launcher\nCan carry 3 passengers\n Strong vs Vehicles, Tanks\n Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -1465,7 +1465,7 @@ ordos_leech:
 # 		Queue: VVehicle, RAVehicle
 # 		BuildPaletteOrder: 150
 # 		BuildDurationModifier: 50
-# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactoryupgrade, ~techlevel.medium
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactory, ~techlevel.medium
 # 		Description: Ultimate Transport Vehicle\nCan carry 12 passengers quickly\nLimit: 1
 # 		BuildLimit: 1
 # 	Cargo:
@@ -1495,7 +1495,7 @@ ordos_leech:
 # d2k_light_tank.bot1:
 # 	Inherits: d2k_light_tank
 # 	Buildable:
-# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactoryupgrade, ~techlevel.low, ~botplayer
+# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactory, ~techlevel.low, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 133
 # 	Cargo:
@@ -1707,7 +1707,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 110
 # 		BuildDuration: 300
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~techlevel.low, ~light.harkonnen, ordos_upgrade_lightfactoryupgrade, ~faction.corrino
+# 		Prerequisites: ~techlevel.low, ~light.harkonnen, ordos_upgrade_lightfactory, ~faction.corrino
 # 		Description: Suicidal remote vehicle armed with high explosives\nHas very weak armor \n\n Requires a Light Factory in order to move.
 # 		IconPalette: d2kunit
 # 	WithColoredOverlay:
@@ -1883,7 +1883,7 @@ ordos_leech:
 # 		BuildPaletteOrder: 40
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos
+# 		Prerequisites: ordos_upgrade_lightfactory, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos
 # 		Description: Hit and Run Vehicle with small cannon and missile launcher\nCan carry 3 passengers
 # 		IconPalette: d2kunit
 # 	AutoDeployer:
@@ -1948,7 +1948,7 @@ ordos_leech:
 # d2k_apc.bot1:
 # 	Inherits: d2k_apc
 # 	Buildable:
-# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos, ~botplayer
+# 		Prerequisites: ordos_upgrade_lightfactory, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 133
 # 	Cargo:

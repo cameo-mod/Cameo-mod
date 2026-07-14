@@ -214,8 +214,8 @@ light_factory:
 	ProvidesPrerequisite@light_factory:
 		Prerequisite: light_factory
 	GrantConditionOnPrerequisite@UPGRADEABLE:
-		Condition: ordos_upgrade_lightfactoryupgrade
-		Prerequisites: ordos_upgrade_lightfactoryupgrade
+		Condition: ordos_upgrade_lightfactory
+		Prerequisites: ordos_upgrade_lightfactory
 	-WithDeathAnimation:
 
 ixian_concretewall:

@@ -1,14 +1,14 @@
-ixian_upgrade_twinbazookaupgrade:
+ixian_upgrade_twinbazooka:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Twin Bazooka Upgrade
 	Buildable:
 		Queue: Upgrades
 		Description: upgrade_ixian_twin_rocket_trooper.description
-		Prerequisites: ~ixian_outpost, !ixian_upgrade_twinbazookaupgrade
-		# Prerequisites: ~outpost.d2k, !ixian_upgrade_twinbazookaupgrade
+		Prerequisites: ~ixian_outpost, !ixian_upgrade_twinbazooka
+		# Prerequisites: ~outpost.d2k, !ixian_upgrade_twinbazooka
 	RenderSprites:
-		Image: ixian_upgrade_twinbazookaupgrade
+		Image: ixian_upgrade_twinbazooka
 
 ixian_upgrade_tungstenneedleguns:
 	Inherits: ^researched_upgrade.template
