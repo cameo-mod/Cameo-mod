@@ -100,10 +100,10 @@ TSCABALEMPDisable.anim:
 	Projectile: LaserZap
 		Width: 60
 		Duration: 6
-		Color: 9922CCDD
+		Color: 00FF0070
 		SecondaryBeam: true
 		SecondaryBeamWidth: 90
-		SecondaryBeamColor: 222244CC
+		SecondaryBeamColor: FF000035
 	Warhead@Damage: TargetDamage
 		ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
 		Damage: 1
@@ -118,10 +118,10 @@ TSCABALEMPDisable.end:
 	Projectile: LaserZap
 		Width: 64
 		Duration: 8
-		Color: AA22BBEE
+		Color: 4444FF88
 		SecondaryBeam: true
 		SecondaryBeamWidth: 96
-		SecondaryBeamColor: 2A2A55DD
+		SecondaryBeamColor: FFFF8844
 	Warhead@TeslaChargedWeapon: TargetDamage
 		Damage: 2000
 	Warhead@TeslaChargedExtraDamage: SpreadDamage
