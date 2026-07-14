@@ -1,10 +1,10 @@
-up_light.ordos:
+ordos_upgrade_lightfactoryupgrade:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Light Factory Upgrade
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~light_factory, research_centre, !up_light.ordos
+		Prerequisites: ~light_factory, research_centre, !ordos_upgrade_lightfactoryupgrade
 		Queue: Upgrades
 		BuildLimit: 1
 		BuildDuration: 1500
@@ -16,85 +16,85 @@ up_light.ordos:
 	RenderSprites:
 		Image: light.ordos
 
-up_aatrooper.ordos:
+ordos_upgrade_antiairtrooperupgrade:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Anti Air Trooper Upgrade
 	Buildable:
 		Queue: Upgrades
 		Description: upgrade_ordos_aatrooper.description
-		Prerequisites: ~outpost.ordos, !up_aatrooper.ordos
+		Prerequisites: ~ordos_outpost, !ordos_upgrade_antiairtrooperupgrade
 	RenderSprites:
-		Image: aatrooper.ordos
+		Image: ordos_antiairtrooper
 
-up_heavycombattank.ordos:
+ordos_upgrade_heavycombattankupgrade:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Heavy Combat Tank Upgrade
 	Buildable:
 		Queue: Upgrades
 		Description: Upgrades the Ordos Combat Tank to the Heavy Combat Tank
-		Prerequisites: ~outpost.ordos, !up_heavycombattank.ordos
+		Prerequisites: ~ordos_outpost, !ordos_upgrade_heavycombattankupgrade
 		IconPalette: ra2
 	RenderSprites:
-		Image: heavycombattank.ordos
+		Image: ordos_heavycombattank
 
-up_heavycombattank_rockets.ordos:
+ordos_upgrade_heavycombattankrocketsupgrade:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Heavy Combat Tank Rockets Upgrade
 	Buildable:
 		Queue: Upgrades
 		Description: Upgrades the Heavy Combat Tank with Rocket Launchers.
-		Prerequisites: ~outpost.ordos, research_centre.ordos, up_heavycombattank.ordos, !up_heavycombattank_rockets.ordos
+		Prerequisites: ~ordos_outpost, ordos_ixresearchcenter, ordos_upgrade_heavycombattankupgrade, !ordos_upgrade_heavycombattankrocketsupgrade
 	RenderSprites:
-		Image: up_heavycombattank_rockets.ordos
+		Image: ordos_upgrade_heavycombattankrocketsupgrade
 
-up_heavy_autogun_tank.ordos:
+ordos_upgrade_heavyautoguntankupgrade:
 	Inherits: ^unit_upgrade_template
 	Tooltip:
 		Name: Heavy Autogun Tank Upgrade
 	Buildable:
 		Queue: Research
 		Description: Upgrades the Autogun Tank to the Heavy Autogun Tank
-		Prerequisites: ~research_centre.ordos, up_heavycombattank.ordos, !up_heavy_autogun_tank.ordos
+		Prerequisites: ~ordos_ixresearchcenter, ordos_upgrade_heavycombattankupgrade, !ordos_upgrade_heavyautoguntankupgrade
 	RenderSprites:
-		Image: autogun_tank.ordos
+		Image: ordos_heavyautoguntank
 
-up_shield.ordos:
+ordos_upgrade_shields:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Ordos Shields
 	Buildable:
 		Description: ordos_upgrade_shield.description
-		Prerequisites: ~research_centre.ordos, !up_shield.ordos
+		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_shields
 		IconPalette: d2kunit
 	RenderSprites:
-		Image: up_shield.ordos
+		Image: ordos_upgrade_shields
 
-up_toxin.ordos:
+ordos_upgrade_biologicalwarfare:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Biological Warfare
 	Buildable:
 		Description: ordos_upgrade_toxin.description
-		Prerequisites: ~research_centre.ordos, !up_toxin.ordos
+		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_biologicalwarfare
 		IconPalette: d2kunit
 	RenderSprites:
-		Image: up_toxin.ordos
+		Image: ordos_upgrade_biologicalwarfare
 
-up_contraband.ordos:
+ordos_upgrade_contraband:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Contraband
 	Buildable:
 		Description: ordos_upgrade_contraband.description
-		Prerequisites: ~research_centre.ordos, !up_contraband.ordos
+		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_contraband
 		IconPalette: d2kunit
 	RenderSprites:
 		Image: ordos_upgrade_para
 
-up_laserguns.ordos:
+ordos_upgrade_lasercartridges:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Laser Cartridges
@@ -103,29 +103,29 @@ up_laserguns.ordos:
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Upgrades
-		Prerequisites: ~outpost.ordos, !up_laserguns.ordos
+		Prerequisites: ~ordos_outpost, !ordos_upgrade_lasercartridges
 		Description: All Ordos bullet weapons fire a supplementary laser, using Laser Tank technology.
 	RenderSprites:
-		Image: up_laserguns.ordos
+		Image: ordos_upgrade_lasercartridges
 
-up_rapidfirearmorpiercingbelts.ordos:
+ordos_upgrade_rapidfirearmorpiercingbelts:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Rapid Fire Armor-Piercing Belts
 	Buildable:
 		Queue: Research
 		Description: upgrade_ordos_rapidfirearmorpiercingbelts.description
-		Prerequisites: ~research_centre.ordos, !up_rapidfirearmorpiercingbelts.ordos
+		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_rapidfirearmorpiercingbelts
 	RenderSprites:
-		Image: up_rapidfirearmorpiercingbelts.ordos
+		Image: ordos_upgrade_rapidfirearmorpiercingbelts
 
-up_hoverdrive.ordos:
+ordos_upgrade_hoverdrive:
 	Inherits: ^tech_upgrade_template
 	Tooltip:
 		Name: Hover Drive
 	Buildable:
 		Queue: Research
 		Description: All Ordos hovercraft gain +20% movement speed and turn rate and +10% damage resistance.
-		Prerequisites: ~research_centre.ordos, !up_hoverdrive.ordos
+		Prerequisites: ~ordos_ixresearchcenter, !ordos_upgrade_hoverdrive
 	RenderSprites:
-		Image: up_hoverdrive.ordos
+		Image: ordos_upgrade_hoverdrive

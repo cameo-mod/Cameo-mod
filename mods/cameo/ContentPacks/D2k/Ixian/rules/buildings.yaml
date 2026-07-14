@@ -220,14 +220,14 @@ d2k_munitions.ixian:
 # 	ProvidesPrerequisite@trike:
 # 		Prerequisite: light.trike
 # 		Factions: atreides, fremen, harkonnen, corrino, mercenary, ixian
-# 	ProvidesPrerequisite@raider.ordos:
+# 	ProvidesPrerequisite@ordos_raider:
 # 		Prerequisite: light.raider
 # 		Factions: ordos, smugglers
 # 	ProvidesPrerequisite@buildingname:
 # 	Power:
 # 		Amount: -125
 # 	GrantConditionOnPrerequisite@UPGRADEABLE:
-# 		Prerequisites: up_light.ordos
+# 		Prerequisites: ordos_upgrade_lightfactoryupgrade
 # 	-WithDeathAnimation:
 # 	ThrowsShrapnel:
 # 		Weapons: Debris2, Debris3
@@ -878,7 +878,7 @@ large_gun_turret.ixian:
 # 	RevealsShroud:
 # 		Range: 4c768
 # 	RenderSprites:
-# 		Image: palace.ordos
+# 		Image: ordos_palace
 # 		FactionImages:
 # 			atreides: palace.atreides
 # 			fremen: palace.atreides
@@ -1010,11 +1010,11 @@ large_gun_turret.ixian:
 # 		DisplayTimerRelationships: Ally, Neutral, Enemy
 # 		CameraActor: camera
 # 		CameraRemoveDelay: 100
-# 	ProduceActorPower@saboteur.ordos:
+# 	ProduceActorPower@ordos_saboteur:
 # 		Prerequisites:
 # 			1: ~techlevel.superweapons
 # 		Icons:
-# 			1: saboteur.ordos
+# 			1: ordos_saboteur
 # 		Names:
 # 			1: Recruit Saboteur
 # 		Descriptions:
@@ -1025,7 +1025,7 @@ large_gun_turret.ixian:
 # 		IconPalette: d2kunit
 # 		PauseOnCondition: disabled
 # 		AutoFire: true
-# 		Actors: saboteur.ordos
+# 		Actors: ordos_saboteur
 # 		Type: Saboteur
 # 		ChargeInterval: 2250
 # 		OrderName: callsaboteur

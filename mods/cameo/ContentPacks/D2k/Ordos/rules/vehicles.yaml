@@ -1,4 +1,4 @@
-apc.ordos:
+ordos_apc:
 	Inherits: ^D2KTank
 	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^SupportVehicleTemplate
@@ -12,7 +12,7 @@ apc.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~!up_tleilax_labcrawl.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_promotion_unlocklaboratorycrawler
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -53,15 +53,15 @@ apc.ordos:
 	Voiced:
 		VoiceSet: EBFDOAPC
 	Cargo:
-		InitialUnits: ordos_lightinfantry, ordos_lightinfantry, ordos_lightinfantry, ordos_lightinfantry, ordos_rockettrooper, ordos_rockettrooper, aatrooper.ordos, aatrooper.ordos
+		InitialUnits: ordos_lightinfantry, ordos_lightinfantry, ordos_lightinfantry, ordos_lightinfantry, ordos_rockettrooper, ordos_rockettrooper, ordos_antiairtrooper, ordos_antiairtrooper
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_hoverdrive.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_hoverdrive
 
-tleilax_labcrawl.ordos:
+ordos_laboratorycrawler:
 	Inherits: ^D2KTank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -75,7 +75,7 @@ tleilax_labcrawl.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~heavy_factory.ordos, research_centre.ordos, ~up_tleilax_labcrawl.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_ixresearchcenter, ~ordos_promotion_unlocklaboratorycrawler
 		Description: Tleilaxu Mobile Laboratory. Can contaminate enemy infantry and heal friendlies. Equipped with AA Rockets.
 		IconPalette: windows256
 	Valued:
@@ -106,8 +106,8 @@ tleilax_labcrawl.ordos:
 	Armament@aa2:
 		Weapon: D2K_APC_Rocket_AA
 		LocalOffset: 256,-256,256
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	AttackFrontal:
 	FireWarheadsOnDeath:
@@ -118,22 +118,22 @@ tleilax_labcrawl.ordos:
 	Voiced:
 		VoiceSet: EBFDOAPC
 	Cargo:
-		InitialUnits: contaminator.ordos, contaminator.ordos, chem_troop.ordos, chem_troop.ordos, mortar.ordos, mortar.ordos, aatrooper.ordos, aatrooper.ordos, ordos_rockettrooper, ordos_rockettrooper
+		InitialUnits: ordos_contaminator, ordos_contaminator, ordos_chemicaltrooper, ordos_chemicaltrooper, ordos_mortartrooper, ordos_mortartrooper, ordos_antiairtrooper, ordos_antiairtrooper, ordos_rockettrooper, ordos_rockettrooper
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 10
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_toxin.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-d2k_mcv.ordos:
+ordos_mobileconstructionvehicle:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@mcv: ^MCV
 	Buildable:
-		Prerequisites: ~heavy_factory.ordos, repair_pad.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_repairpad
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ordos Mobile Construction Vehicle
@@ -141,7 +141,7 @@ d2k_mcv.ordos:
 		Weapon: D2KUnitExplodeLarge
 		EmptyWeapon: D2KUnitExplodeLarge
 	Transforms:
-		IntoActor: construction_yard.ordos
+		IntoActor: ordos_constructionyard
 		Offset: -1,-1
 		TransformSounds: BUILD1.WAV
 		Facing: 64
@@ -176,7 +176,7 @@ d2k_mcv.ordos:
 # 	RenderSprites:
 # 		Image: d2k_projector.husk
 
-harv.ordos:
+ordos_spiceharvester:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -185,7 +185,7 @@ harv.ordos:
 	Inherits@VehicleShieldsUpgradeOrdos: ^VehicleShieldsUpgradeOrdos
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~spice_refinery, ~heavy_factory.ordos
+		Prerequisites: ~spice_refinery, ~ordos_heavyfactory
 		BuildPaletteOrder: 10
 		Description: template_harvester.description
 		IconPalette: d2kunit
@@ -232,7 +232,7 @@ harv.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos
+		Upgrades: ordos_upgrade_shields
 
 # trike:
 # 	Inherits@D2KV: ^D2KVehicle
@@ -354,7 +354,7 @@ harv.ordos:
 # 	Inherits@AntiVeh: ^PrioritizeVehicle
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: up_light.ordos, ~!faction.tleilaxu, ~!faction.smugglers, ~!faction.guild, ~!faction.corrino, ~!faction.emperor, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~!faction.tleilaxu, ~!faction.smugglers, ~!faction.guild, ~!faction.corrino, ~!faction.emperor, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 210
 # 		BuildDurationModifier: 100
@@ -453,7 +453,7 @@ harv.ordos:
 # 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~faction.corrino, up_light.ordos, ~techlevel.low
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactoryupgrade, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 280
 # 		BuildDurationModifier: 100
@@ -507,7 +507,7 @@ harv.ordos:
 # d2k_transport_buggy.bot1:
 # 	Inherits: d2k_transport_buggy
 # 	Buildable:
-# 		Prerequisites: ~faction.corrino, up_light.ordos, ~techlevel.low, ~botplayer
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactoryupgrade, ~techlevel.low, ~botplayer
 # 	Valued:
 # 		Cost: 2500
 # 	Cargo:
@@ -554,7 +554,7 @@ harv.ordos:
 # 	Inherits@AntiVeh: ^PrioritizeVehicle
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: ~faction.smugglers, up_light.ordos, ~techlevel.low
+# 		Prerequisites: ~faction.smugglers, ordos_upgrade_lightfactoryupgrade, ~techlevel.low
 # 		BuildPaletteOrder: 20
 # 		BuildDuration: 225
 # 		BuildDurationModifier: 100
@@ -609,7 +609,7 @@ harv.ordos:
 # 	Inherits@EMP: ^FrontalEMP
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
-# 		Prerequisites: up_light.ordos, ~autogun_prereq, research_centre, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~autogun_prereq, research_centre, ~techlevel.low
 # 		BuildPaletteOrder: 50
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
@@ -702,7 +702,7 @@ harv.ordos:
 # 		Multiplier: 125
 # 		Prerequisites: faction.guild
 # 	Buildable:
-# 		Prerequisites: up_light.ordos, ~faction.guild, ~techlevel.low
+# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~faction.guild, ~techlevel.low
 
 # mg_quad:
 # 	Inherits: quad
@@ -781,9 +781,9 @@ harv.ordos:
 # 	ProductionCostMultiplier:
 # 		Multiplier: 110
 # 	Cargo:
-# 		InitialUnits: face_dancer.ordos, face_dancer.ordos, face_dancer.ordos
+# 		InitialUnits: ordos_facedancer, ordos_facedancer, ordos_facedancer
 
-cobra.ordos:
+ordos_cobratank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -800,7 +800,7 @@ cobra.ordos:
 		Cost: 1500
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~!up_python.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_promotion_unlockpython
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -886,9 +886,9 @@ cobra.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-python.ordos:
+ordos_pythontank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -907,7 +907,7 @@ python.ordos:
 		Cost: 2500
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~up_python.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~ordos_promotion_unlockpython
 		BuildPaletteOrder: 50
 		Description: Siege Artillery\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -985,9 +985,9 @@ python.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-laser_tank.ordos:
+ordos_lasertank:
 	Inherits: ^D2KTank
 	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^HighTechTankTemplate
@@ -1001,7 +1001,7 @@ laser_tank.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~heavy_factory.ordos, up_laser_tank.ordos, research_centre.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_promotion_unlocklasertank, ordos_ixresearchcenter
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	Valued:
@@ -1029,7 +1029,7 @@ laser_tank.ordos:
 		TurnSpeed: 21
 		Offset: -100,20,1
 	Armament:
-		Weapon: laser_tank.ordos
+		Weapon: ordos_lasertank
 		LocalOffset: 550,110,125
 	AttackTurreted:
 	Hovers:
@@ -1047,9 +1047,9 @@ laser_tank.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_hoverdrive.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_hoverdrive
 
-deviatormk2.ordos:
+ordos_deviatortank:
 	Inherits: ^D2KTank
 	Inherits@HoverDrive: ^Ordos_HoverDrive
 	Inherits@Template: ^HighTechTankTemplate
@@ -1067,7 +1067,7 @@ deviatormk2.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 100
-		Prerequisites: ~heavy_factory.ordos, up_deviatormk2.ordos, palace.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_promotion_unlockdeviatortank, ordos_palace
 		Description: Ordos Universal Battle Tank\nHighly Mobile Hover unit\nFires laser beams\nWeak durability\n  Strong vs Everything
 		IconPalette: windows256
 	UpdatesPlayerStatistics:
@@ -1093,8 +1093,8 @@ deviatormk2.ordos:
 	Armament:
 		Weapon: DeviatorMissile
 		LocalOffset: 275,-125,0
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	AttackTurreted:
 	Hovers:
@@ -1112,7 +1112,7 @@ deviatormk2.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_toxin.ordos, up_hoverdrive.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare, ordos_upgrade_hoverdrive
 
 # d2k_qafza:
 # 	Inherits: ^D2KTank
@@ -1385,7 +1385,7 @@ deviatormk2.ordos:
 # 	RenderSprites:
 # 		Image: d2k_tyrant
 
-raider.ordos:
+ordos_raider:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^ScoutVehicleTemplate
@@ -1403,7 +1403,7 @@ raider.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~light_factory.ordos, ~!up_stealth_raider.ordos
+		Prerequisites: ~ordos_lightfactory, ~!ordos_promotion_unlockstealthraider
 		Description: Improved Scout\nCan carry a passenger\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -1425,13 +1425,13 @@ raider.ordos:
 		LocalOffset: 140,90,50, 140,-90,50
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_laserguns.ordos
+		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@damageLaser:
 		Weapon: HMGo_upgrade
 		LocalOffset: 140,90,50, 140,-90,50
 		MuzzlePalette: d2keffect
 		MuzzleSequence: muzzle
-		RequiresCondition: up_laserguns.ordos
+		RequiresCondition: ordos_upgrade_lasercartridges
 	AttackFrontal:
 		FacingTolerance: 0
 	FireWarheadsOnDeath:
@@ -1444,10 +1444,10 @@ raider.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_laserguns.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_lasercartridges
 
-stealth_raider.ordos:
-	Inherits: raider.ordos
+ordos_stealthraider:
+	Inherits: ordos_raider
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@CLOAK: ^CloakedVehicle
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1457,7 +1457,7 @@ stealth_raider.ordos:
 	Valued:
 		Cost: 1300
 	Buildable:
-		Prerequisites: ~light_factory.ordos, ~up_stealth_raider.ordos
+		Prerequisites: ~ordos_lightfactory, ~ordos_promotion_unlockstealthraider
 		BuildPaletteOrder: 30
 		Description: Invisible Raider Trike\n  Strong vs Infantry, Light Vehicles\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -1472,19 +1472,19 @@ stealth_raider.ordos:
 		InitialStanceAI: ReturnFire
 	Armament@damage:
 		Weapon: HMGstealth
-		RequiresCondition: !up_laserguns.ordos
+		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@damageLaser:
 		Weapon: HMGstealth_upgrade
-		RequiresCondition: up_laserguns.ordos
+		RequiresCondition: ordos_upgrade_lasercartridges
 	-MustBeDestroyed:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
-		InitialUnits: ordos_lightinfantry, chem_troop.ordos, ordos_rockettrooper, aatrooper.ordos
+		InitialUnits: ordos_lightinfantry, ordos_chemicaltrooper, ordos_rockettrooper, ordos_antiairtrooper
 		LoadingCondition: notmobile
 	ActorStatValues:
-		Upgrades: up_laserguns.ordos
-scoutdrone.ordos:
+		Upgrades: ordos_upgrade_lasercartridges
+ordos_dustdrone:
 	Inherits@D2KV: ^D2KVehicle
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1504,7 +1504,7 @@ scoutdrone.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 10
-		Prerequisites: ~light_factory.ordos, up_scoutdrone.ordos
+		Prerequisites: ~ordos_lightfactory, ordos_promotion_unlockdustdrone
 		Description: Improved Scout\n  Strong vs Vehicles\n  Weak vs Infantry
 		IconPalette: d2kunit
 	UpdatesPlayerStatistics:
@@ -1541,10 +1541,10 @@ scoutdrone.ordos:
 	WithMoveAnimation:
 		MoveSequence: move
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
 # raider.bot:
-# 	Inherits: raider.ordos
+# 	Inherits: ordos_raider
 # 	Buildable:
 # 		Prerequisites: ~faction.ordos, ~botplayer
 # 	ProductionCostMultiplier:
@@ -1552,9 +1552,9 @@ scoutdrone.ordos:
 # 	Cargo:
 # 		InitialUnits: trooper
 # 	RenderSprites:
-# 		Image: raider.ordos
+# 		Image: ordos_raider
 
-deviator.ordos:
+ordos_deviatorartillery:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@GAINSEXPERIENCE: ^GainsExperience
@@ -1573,7 +1573,7 @@ deviator.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~heavy_factory.ordos, palace.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_palace
 		Description: Fires a warhead which changes\nthe allegiance of enemy vehicles
 		IconPalette: d2kunit
 	Health:
@@ -1592,12 +1592,12 @@ deviator.ordos:
 	Armament:
 		Weapon: DeviatorMissile_Artillery
 		LocalOffset: -299,0,85
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
-	GrantConditionOnPrerequisite@up_toxin.ordos:
-		Condition: up_toxin.ordos
-		Prerequisites: up_toxin.ordos
+	GrantConditionOnPrerequisite@ordos_upgrade_biologicalwarfare:
+		Condition: ordos_upgrade_biologicalwarfare
+		Prerequisites: ordos_upgrade_biologicalwarfare
 	AttackFrontal:
 		FacingTolerance: 0
 	AutoTarget:
@@ -1612,9 +1612,9 @@ deviator.ordos:
 	Voiced:
 		VoiceSet: D2KDeviator
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_toxin.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-combat_tank.ordos:
+ordos_combattank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -1633,7 +1633,7 @@ combat_tank.ordos:
 		BuildPaletteOrder: 40
 		Description: template_mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~heavy_factory.ordos, ~!up_heavycombattank.ordos
+		Prerequisites: ~ordos_heavyfactory, ~!ordos_upgrade_heavycombattankupgrade
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1669,9 +1669,9 @@ combat_tank.ordos:
 	Voiced:
 		VoiceSet: D2KCombatTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-heavycombattank.ordos:
+ordos_heavycombattank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1691,7 +1691,7 @@ heavycombattank.ordos:
 		BuildPaletteOrder: 40
 		Description: template_mbt.description
 		IconPalette: d2kunit
-		Prerequisites: ~heavy_factory.ordos, ~up_heavycombattank.ordos
+		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavycombattankupgrade
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Health:
@@ -1720,10 +1720,10 @@ heavycombattank.ordos:
 		Weapon: HeavyOrdosCombatTankRockets
 		LocalOffset: 200,-200,200, 200,200,200
 		LocalYaw: 40, -40
-		RequiresCondition: up_heavycombattank_rockets.ordos
-	GrantConditionOnPrerequisite@up_heavycombattank_rockets.ordos:
-		Condition: up_heavycombattank_rockets.ordos
-		Prerequisites: up_heavycombattank_rockets.ordos
+		RequiresCondition: ordos_upgrade_heavycombattankrocketsupgrade
+	GrantConditionOnPrerequisite@ordos_upgrade_heavycombattankrocketsupgrade:
+		Condition: ordos_upgrade_heavycombattankrocketsupgrade
+		Prerequisites: ordos_upgrade_heavycombattankrocketsupgrade
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -1737,9 +1737,9 @@ heavycombattank.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_heavycombattank_rockets.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_heavycombattankrocketsupgrade
 
-autogun_tank_small.ordos:
+ordos_combatautoguntank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -1757,7 +1757,7 @@ autogun_tank_small.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~heavy_factory.ordos, outpost.ordos, ~!up_heavy_autogun_tank.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_outpost, ~!ordos_upgrade_heavyautoguntankupgrade
 		Description: Combat Anti-Infantry and Anti-Air Vehicle
 		IconPalette: ra2
 	Armament:
@@ -1793,9 +1793,9 @@ autogun_tank_small.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_rapidfirearmorpiercingbelts.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_rapidfirearmorpiercingbelts
 
-autogun_tank.ordos:
+ordos_heavyautoguntank:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -1812,7 +1812,7 @@ autogun_tank.ordos:
 		Cost: 2800
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~heavy_factory.ordos, ~up_heavy_autogun_tank.ordos
+		Prerequisites: ~ordos_heavyfactory, ~ordos_upgrade_heavyautoguntankupgrade
 		BuildPaletteOrder: 50
 		Description: Heavy Anti-Infantry Tank\n  Strong vs Infantry, Vehicles\n  Weak vs Tanks
 	UpdatesPlayerStatistics:
@@ -1854,9 +1854,9 @@ autogun_tank.ordos:
 	Voiced:
 		VoiceSet: D2KAutoGunTank
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_rapidfirearmorpiercingbelts.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_rapidfirearmorpiercingbelts
 
-combat_tank_stealth.ordos:
+ordos_tankdestroyer:
 	Inherits@D2KT: ^D2KTank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -1874,7 +1874,7 @@ combat_tank_stealth.ordos:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 40
-		Prerequisites: ~heavy_factory.ordos, research_centre.ordos
+		Prerequisites: ~ordos_heavyfactory, ordos_ixresearchcenter
 		Description: Fast stealth tank with powerful long range cannon\n  Strong vs Tanks\n  Weak vs Infantry
 		IconPalette: windows256
 	Armor:
@@ -1911,7 +1911,7 @@ combat_tank_stealth.ordos:
 	Cloak@TDcloak:
 		Palette: d2kcloak
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
 deviator_husk.ordos:
 	Inherits: ^D2KVehicleHusk
@@ -1920,12 +1920,12 @@ deviator_husk.ordos:
 	Tooltip:
 		Name: Deviator (Destroyed)
 	TransformOnCapture:
-		IntoActor: deviator.ordos
+		IntoActor: ordos_deviatorartillery
 
 combat_tank_husk.ordos:
 	Inherits: ^combat_tank.husk
 	TransformOnCapture:
-		IntoActor: combat_tank.ordos
+		IntoActor: ordos_combattank
 
 ##################################
 #       PROMOTIONS
@@ -2567,7 +2567,7 @@ combat_tank_husk.ordos:
 # 		Prerequisites: quad_vordel_2, ~botplayer
 # 		Queue: Infantry, RAInfantry
 # combat_tank_vordel:
-# 	Inherits: combat_tank.ordos
+# 	Inherits: ordos_combattank
 # 	Inherits@vordelproxy: ^D2KVordelProxyUnit
 # 	Inherits@MC: ^MCImmune
 # 	Inherits@snipe: ^DriverKillImmune
@@ -2578,7 +2578,7 @@ combat_tank_husk.ordos:
 # 		-Prerequisites:
 # 		Queue: Infantry, RAInfantry
 # 	RenderSprites:
-# 		Image: combat_tank.ordos
+# 		Image: ordos_combattank
 # 		Palette: cloak
 # 	Voiced:
 # 		VoiceSet: D2KVordelVoice

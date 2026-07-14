@@ -1,4 +1,4 @@
-artillery_platform.ordos:
+ordos_artilleryplatform:
 	Defaults:
 	invisible:
 		Filename: DATA.R16
@@ -35,7 +35,7 @@ artillery_platform.ordos:
 		Length: 7
 		Offset: -16,16
 	turret:
-		Filename: artillery_platform_turret.shp
+		Filename: ordos_artilleryplatform_artillery_platform_turret.shp
 		Facings: -32
 		Offset: 0,-16
 		Scale: 1.5
@@ -47,10 +47,10 @@ artillery_platform.ordos:
 		Length: 3
 		BlendMode: Additive
 	icon:
-		Filename: artillery_platformicon.shp
+		Filename: ordos_artilleryplatform_icon.shp
 		Offset: 0,-1
 
-autogun_turret.ordos:
+ordos_autogunturret:
 	Defaults:
 	invisible:
 		Filename: DATA.R16
@@ -87,7 +87,7 @@ autogun_turret.ordos:
 		Length: 7
 		Offset: -16,16
 	turret:
-		Filename: d2k_autogun_turret.shp
+		Filename: ordos_autogunturret_d2k_autogun_turret.shp
 		Facings: -32
 		Offset: 0,-16
 		Scale: 1.5
@@ -99,9 +99,9 @@ autogun_turret.ordos:
 		Length: 3
 		BlendMode: Additive
 	icon:
-		Filename: d2k_autogun_turret_icon.shp
+		Filename: ordos_autogunturret_icon.shp
 
-repair_pad.ordos:
+ordos_repairpad:
 	Defaults:
 	make:
 		Filename: DATA.R16
@@ -212,7 +212,7 @@ research.ordos:
 		Start: 4365
 		Offset: -30,-24
 
-starport.ordos:
+ordos_starport:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -312,7 +312,7 @@ power.ordos:
 		Start: 3092
 		Offset: -32,64
 	idle-zaps:
-		Filename: power_ordos_zaps.png
+		Filename: ordos_windtrap_power_ordos_zaps.png
 		Length: 10
 		Scale: 1
 		Offset: 6,-5
@@ -342,7 +342,7 @@ power.ordos:
 		Start: 4322
 		Offset: -30,-24
 
-outpost.ordos:
+ordos_outpost:
 	Defaults:
 		Scale: 1.5
 	idle:
@@ -392,7 +392,7 @@ outpost.ordos:
 		Start: 4338
 		Offset: -30,-24
 
-refinery.ordos:
+ordos_refineryordos:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -572,7 +572,7 @@ hightech.ordos:
 	active:
 		Filename: invisibleitem.shp
 
-palace.ordos:
+ordos_palace:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -699,7 +699,7 @@ light.ordos:
 chemtrooper:
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: chemtrooper.shp
+		Filename: ordos_promotion_unlockchemicaltrooper_chemtrooper.shp
 		Scale: 1.5
 	stand:
 		Facings: 8
@@ -781,10 +781,10 @@ chemtrooper:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: chemtroopericon.shp
+		Filename: ordos_promotion_unlockchemicaltrooper_icon.shp
 		Offset: 0,-1
 
-saboteur.ordos:
+ordos_saboteur:
 	Defaults:
 	stand:
 		Filename: DATA.R16
@@ -895,111 +895,111 @@ saboteur.ordos:
 		Start: 4295
 		Offset: -30,-24
 
-leech.ordos:
+ordos_leech:
 	stand:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	run:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Length: 8
 		Facings: 8
 		Tick: 35
 		Scale: 1
 	jump:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Length: 8
 		Facings: 8
 		# Tick: 45
 		Scale: 1
 	shoot:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 128
 		Length: 8
 		Facings: 8
 		Scale: 1
 	idle1:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Length: 8
 		Facings: 8
 		Tick: 45
 		Scale: 1
 	idle2:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 128
 		Length: 8
 		Facings: 8
 		Scale: 1
 	die:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die1:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die2:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die3:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die4:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die5:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die6:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die7:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die4:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	die-crushed:
-		Filename: tleilax_leech.png
+		Filename: ordos_promotion_unlockleecher_tleilax_leech.png
 		Start: 192
 		Tick: 70
 		Length: 8
 		Scale: 1
 	icon:
-		Filename: leechicon.shp
+		Filename: ordos_promotion_unlockleecher_icon.shp
 		Offset: 0,0
 
-face_dancer.ordos:
+ordos_facedancer:
 	Inherits: ^InfantryOverlays
 	Defaults:
 		Scale: 1.47
-		Filename: facedancer.shp
+		Filename: ordos_facedancer_facedancer.shp
 	invisible:
 		Filename: DATA.R16
 		Scale: 1.4
@@ -1070,13 +1070,13 @@ face_dancer.ordos:
 		Length: 7
 		Scale: 0.7
 	icon:
-		Filename: facedancericon.shp
+		Filename: ordos_facedancer_icon.shp
 
-contaminator.ordos:
+ordos_contaminator:
 	Inherits: ^RA2ArmedInfantry
 	Inherits@2: ^RA2MachineGunMuzzle
 	Defaults:
-		Filename: tleilax_contaminator.png
+		Filename: ordos_promotion_unlockcontaminator_tleilax_contaminator.png
 	run:
 		Tick: 100
 		Start: 8
@@ -1108,16 +1108,16 @@ contaminator.ordos:
 	paradrop:
 		Start: 324
 	icon:
-		Filename: contaminatoricon.shp
+		Filename: ordos_promotion_unlockcontaminator_icon.shp
 
-aatrooper.ordos:
+ordos_antiairtrooper:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.76
-		Filename: ordos_aatrooper.png
+		Filename: ordos_upgrade_antiairtrooperupgrade_ordos_aatrooper.png
 	run:
 		Scale: 1
 		Tick: 100
@@ -1161,16 +1161,16 @@ aatrooper.ordos:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ordos_aatrooper_icon.png
+		Filename: ordos_upgrade_antiairtrooperupgrade_icon.png
 
-mortar.ordos:
+ordos_mortartrooper:
 	Inherits: ^RA2ArmedInfantry
 		Scale: 1
 	Inherits@2: ^RA2MachineGunMuzzle
 		Scale: 1
 	Defaults:
 		Scale: 0.71
-		Filename: ordos_mortar.png
+		Filename: ordos_promotion_unlockmortartroopers_ordos_mortar.png
 	run:
 		Scale: 1
 		Tick: 100
@@ -1214,12 +1214,12 @@ mortar.ordos:
 		Scale: 1
 		Start: 324
 	icon:
-		Filename: ordos_mortar_icon.png
+		Filename: ordos_promotion_unlockmortartroopers_icon.png
 
-swarmer.ordos:
+ordos_swarmerdrone:
 	Defaults:
 	idle:
-		Filename: ordos_swarmer.png
+		Filename: ordos_swarmerdrone_ordos_swarmer.png
 		Facings: 64
 		Scale: 1
 		Offset: 0,24
@@ -1229,16 +1229,16 @@ swarmer.ordos:
 		Facings: 8
 		Scale: 0.7
 	icon:
-		Filename: ordos_swarmer_icon.png
+		Filename: ordos_swarmerdrone_icon.png
 
-banshee.ordos:
+ordos_banshee:
 	Defaults:
 	idle:
-		Filename: ordos_banshee.png
+		Filename: ordos_promotion_unlockbanshees_ordos_banshee.png
 		Facings: 64
 		Scale: 1
 	move:
-		Filename: ordos_banshee.png
+		Filename: ordos_promotion_unlockbanshees_ordos_banshee.png
 		Facings: 64
 		Start: 64
 		Scale: 1
@@ -1248,11 +1248,11 @@ banshee.ordos:
 		Facings: 8
 		Scale: 0.7
 	icon:
-		Filename: ordos_banshee_icon.png
+		Filename: ordos_promotion_unlockbanshees_icon.png
 
-wraith.ordos:
+ordos_wraith:
 	Defaults:
-		Filename: ordos_wraith.png
+		Filename: ordos_promotion_unlockwraith_ordos_wraith.png
 	idle:
 		Length: 64
 		Tick: 64
@@ -1266,12 +1266,12 @@ wraith.ordos:
 		Length: 4
 		Tick: 100
 	icon:
-		Filename: ordos_wraith_icon.png
+		Filename: ordos_promotion_unlockwraith_icon.png
 
-eye.ordos:
+ordos_eyeinthesky:
 	Defaults:
 	idle:
-		Filename: ordos_eye.png
+		Filename: ordos_eyeinthesky_ordos_eye.png
 		Facings: 64
 		Scale: 1
 	muzzle:
@@ -1280,7 +1280,7 @@ eye.ordos:
 		Facings: 8
 		Scale: 0.7
 	icon:
-		Filename: ordos_eye_icon.png
+		Filename: ordos_eyeinthesky_icon.png
 
 swarmer_husk.ordos:
 	Defaults:
@@ -1290,15 +1290,15 @@ swarmer_husk.ordos:
 		Facings: 32
 		Scale: 1.2
 
-harv.ordos:
+ordos_spiceharvester:
 	Defaults:
 	idle:
-		Filename: ordos_harv.png
+		Filename: ordos_spiceharvester_ordos_harv.png
 		Scale: 1
 		Start: 64
 		Facings: 64
 	move:
-		Filename: ordos_harv.png
+		Filename: ordos_spiceharvester_ordos_harv.png
 		Length: 8
 		Facings: 8
 		Scale: 1
@@ -1313,22 +1313,22 @@ harv.ordos:
 		ZOffset: 1
 		BlendMode: Multiply
 	dock:
-		Filename: ordos_harv.png
+		Filename: ordos_spiceharvester_ordos_harv.png
 		Scale: 1
 		Start: 168
 		Facings: 1
 		Length: 6
 	dock-loop:
-		Filename: ordos_harv.png
+		Filename: ordos_spiceharvester_ordos_harv.png
 		Scale: 1
 		Start: 170
 		Facings: 1
 	icon:
-		Filename: ordos_harv_icon.png
+		Filename: ordos_spiceharvester_icon.png
 
-cobra.ordos:
+ordos_cobratank:
 	Defaults:
-		Filename: ordos_cobra.png
+		Filename: ordos_cobratank_ordos_cobra.png
 	idle:
 		Start: 64
 		Facings: 64
@@ -1343,7 +1343,7 @@ cobra.ordos:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	icon:
-		Filename: ordos_cobra_icon.png
+		Filename: ordos_cobratank_icon.png
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -1352,9 +1352,9 @@ cobra.ordos:
 		Length: 3
 		BlendMode: Additive
 
-python.ordos:
+ordos_pythontank:
 	Defaults:
-		Filename: ordos_python.png
+		Filename: ordos_promotion_unlockpython_ordos_python.png
 	idle:
 		Start: 64
 		Facings: 64
@@ -1369,7 +1369,7 @@ python.ordos:
 		Filename: invisibleitem.shp
 		ZOffset: -9999
 	icon:
-		Filename: ordos_python_icon.png
+		Filename: ordos_promotion_unlockpython_icon.png
 	muzzle:
 		Filename: DATA.R16
 		Scale: 1.5
@@ -1378,35 +1378,35 @@ python.ordos:
 		Length: 3
 		BlendMode: Additive
 
-laser_tank.ordos:
+ordos_lasertank:
 	idle:
-		Filename: ordos_lasertank.png
+		Filename: ordos_promotion_unlocklasertank_ordos_lasertank.png
 		Start: 0
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ordos_lasertank.png
+		Filename: ordos_promotion_unlocklasertank_ordos_lasertank.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: ordos_lasertank_icon.png
+		Filename: ordos_promotion_unlocklasertank_icon.png
 
-deviatormk2.ordos:
+ordos_deviatortank:
 	idle:
-		Filename: ordos_deviatormk2.png
+		Filename: ordos_promotion_unlockdeviatortank_ordos_deviatormk2.png
 		Start: 0
 		Facings: 64
 		Scale: 1
 	turret:
-		Filename: ordos_deviatormk2.png
+		Filename: ordos_promotion_unlockdeviatortank_ordos_deviatormk2.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: ordos_deviatormk2_icon.png
+		Filename: ordos_promotion_unlockdeviatortank_icon.png
 
-apc.ordos:
+ordos_apc:
 	idle:
 		Filename: ordos_apc.png
 		Start: 0
@@ -1420,23 +1420,23 @@ apc.ordos:
 	icon:
 		Filename: ordos_apc_icon.png
 
-tleilax_labcrawl.ordos:
+ordos_laboratorycrawler:
 	idle:
-		Filename: tleilax_labcrawl.png
+		Filename: ordos_promotion_unlocklaboratorycrawler_tleilax_labcrawl.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: tleilax_labcrawl_icon.png
+		Filename: ordos_promotion_unlocklaboratorycrawler_icon.png
 
-aa_mine.ordos:
+ordos_airmine:
 	idle:
-		Filename: ordos_aamine.png
+		Filename: ordos_airmine_ordos_aamine.png
 		Facings: 64
 		Scale: 1
 	icon:
-		Filename: d2k_aa_mine_icon.shp
+		Filename: ordos_airmine_icon.shp
 
-combat_tank.ordos:
+ordos_combattank:
 	Inherits: vordel_effect
 	Defaults:
 	idle:
@@ -1466,13 +1466,13 @@ combat_tank.ordos:
 		Start: 4283
 		Offset: -30,-24
 
-autogun_tank_small.ordos:
+ordos_combatautoguntank:
 	idle:
-		Filename: d2k_ct_striped.shp
+		Filename: ordos_combatautoguntank_d2k_ct_striped.shp
 		Facings: -32
 		Scale: 1.5
 	turret:
-		Filename: d2k_autogun_turret.shp
+		Filename: ordos_autogunturret_d2k_autogun_turret.shp
 		Facings: -32
 		Offset: 0,-16
 		Scale: 1.5
@@ -1484,7 +1484,7 @@ autogun_tank_small.ordos:
 		Length: 3
 		BlendMode: Additive
 	icon:
-		Filename: combatautoguntankicon.shp
+		Filename: ordos_combatautoguntank_icon.shp
 
 combat_tank_husk.ordos:
 	Defaults:
@@ -1505,7 +1505,7 @@ combat_tank_husk.ordos:
 
 d2k_ordos_stealth_tank:
 	idle:
-		Filename: ordos_tnkd.png
+		Filename: ordos_tankdestroyer_ordos_tnkd.png
 		Scale: 1.25
 		Facings: 64
 	muzzle:
@@ -1517,9 +1517,9 @@ d2k_ordos_stealth_tank:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: ordos_tnkd_icon.png
+		Filename: ordos_tankdestroyer_icon.png
 
-raider.ordos:
+ordos_raider:
 	Defaults:
 	idle:
 		Filename: ordos_raider_buggy.png
@@ -1535,9 +1535,9 @@ raider.ordos:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: ordos_raider_buggy_icon.png
+		Filename: ordos_raider_icon.png
 
-stealth_raider.ordos:
+ordos_stealthraider:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1567,15 +1567,15 @@ stealth_raider.ordos:
 		Start: 4298
 		Offset: -30,-24
 
-scoutdrone.ordos:
+ordos_dustdrone:
 	Defaults:
 	idle:
-		Filename: ordos_scoutdrone.png
+		Filename: ordos_promotion_unlockdustdrone_ordos_scoutdrone.png
 		Start: 64
 		Facings: 64
 		Scale: 1
 	move:
-		Filename: ordos_scoutdrone.png
+		Filename: ordos_promotion_unlockdustdrone_ordos_scoutdrone.png
 		Length: 8
 		Facings: 8
 		Scale: 1
@@ -1588,11 +1588,11 @@ scoutdrone.ordos:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: ordos_scoutdrone_icon.png
+		Filename: ordos_promotion_unlockdustdrone_icon.png
 
-autogun_tank.ordos:
+ordos_heavyautoguntank:
 	idle:
-		Filename: d2k_autogun_tank.shp
+		Filename: ordos_upgrade_heavyautoguntankupgrade_d2k_autogun_tank.shp
 		Facings: -32
 		Scale: 1.75
 	muzzle:
@@ -1603,9 +1603,9 @@ autogun_tank.ordos:
 		Length: 3
 		BlendMode: Additive
 	icon:
-		Filename: d2k_heavyautoguntankicon.png
+		Filename: ordos_upgrade_heavyautoguntankupgrade_icon.png
 
-deviator.ordos:
+ordos_deviatorartillery:
 	Defaults:
 	idle:
 		Filename: DATA.R16
@@ -1630,24 +1630,24 @@ deviator_husk.ordos:
 		Facings: -32
 		ZOffset: -512
 
-carryall.ordos:
+ordos_advancedcarryall:
 	Defaults:
 	idle:
-		Filename: ordos_carryall.png
+		Filename: ordos_advancedcarryall_ordos_carryall.png
 		Facings: 64
 	icon:
-		Filename: ordos_carryall_icon.png
+		Filename: ordos_advancedcarryall_icon.png
 
-heavycombattank.ordos:
+ordos_heavycombattank:
 	Defaults:
 		Scale: 1.5
 	idle:
-		Filename: d2k_ordos_heavycombattank_chassis.png
+		Filename: ordos_upgrade_heavycombattankupgrade_d2k_ordos_heavycombattank_chassis.png
 		Facings: -32
 		InterpolatedFacings: 64
 		Offset: 0, 4
 	turret:
-		Filename: d2k_ordos_heavycombattank_turret.png
+		Filename: ordos_upgrade_heavycombattankupgrade_d2k_ordos_heavycombattank_turret.png
 		Facings: -32
 		InterpolatedFacings: 64
 		Offset: 0, -2
@@ -1660,29 +1660,29 @@ heavycombattank.ordos:
 		Facings: -32
 		BlendMode: Additive
 	icon:
-		Filename: d2k_ordos_heavycombattank_icon.png
+		Filename: ordos_upgrade_heavycombattankupgrade_icon.png
 
-up_toxin.ordos:
+ordos_upgrade_biologicalwarfare:
 	icon:
-		Filename: ordos_upgrade_toxin.png
+		Filename: ordos_upgrade_biologicalwarfare_icon.png
 		Offset: 0,0
 
-up_shield.ordos:
+ordos_upgrade_shields:
 	icon:
-		Filename: ordos_upgrade_shield.png
+		Filename: ordos_upgrade_shields_icon.png
 		Offset: 0,0
 
-up_rapidfirearmorpiercingbelts.ordos:
+ordos_upgrade_rapidfirearmorpiercingbelts:
 	icon:
-		Filename: ordos_upgrade_armorpiercing_icon.png
+		Filename: ordos_upgrade_rapidfirearmorpiercingbelts_icon.png
 		Offset: 0,0
 
-up_hoverdrive.ordos:
+ordos_upgrade_hoverdrive:
 	icon:
 		Filename: ordos_upgrade_hoverdrive_icon.png
 		Offset: 0,0
 
-up_laserguns.ordos:
+ordos_upgrade_lasercartridges:
 	icon:
 		Filename: ordos_upgrade_lasercartridges_icon.png
 		Offset: 0,0
@@ -1690,9 +1690,9 @@ up_laserguns.ordos:
 
 ordos_upgrade_para:
 	icon:
-		Filename: ordos_upgrade_para.png
+		Filename: ordos_upgrade_contraband_icon.png
 		Offset: 0,0
 
-up_heavycombattank_rockets.ordos:
+ordos_upgrade_heavycombattankrocketsupgrade:
 	icon:
-		Filename: d2k_ordos_upgrade_heavycombattank_rockets_icon.png
+		Filename: ordos_upgrade_heavycombattankrocketsupgrade_icon.png

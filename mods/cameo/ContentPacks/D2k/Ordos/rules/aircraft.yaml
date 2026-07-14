@@ -1,4 +1,4 @@
-swarmer.ordos:
+ordos_swarmerdrone:
 	Inherits: ^RANeutralPlane
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@Template: ^FighterTemplate
@@ -16,7 +16,7 @@ swarmer.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~high_tech_factory.ordos
+		Prerequisites: ~ordos_hightechfactory
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
@@ -36,14 +36,14 @@ swarmer.ordos:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_laserguns.ordos
+		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@PRIMARYLaser:
 		Weapon: d2kChainGun_upgrade
 		LocalOffset: 256,-213,0, 256,213,0
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: !ammo
-		RequiresCondition: up_laserguns.ordos
+		RequiresCondition: ordos_upgrade_lasercartridges
 	Aircraft:
 		CruiseAltitude: 1920
 		Speed: 260
@@ -74,9 +74,9 @@ swarmer.ordos:
 		RequiresSelection: True
 		PipCount: 10
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos, up_laserguns.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband, ordos_upgrade_lasercartridges
 
-aa_mine.ordos:
+ordos_airmine:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAir
@@ -91,7 +91,7 @@ aa_mine.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~high_tech_factory.ordos
+		Prerequisites: ~ordos_hightechfactory
 		Description: Slowly Flying Mine that hurls missiles upon contact with enemy airplane before exploding\nIn higher numbers can take down entire squadron
 	Tooltip:
 		Name: Air Mine
@@ -120,7 +120,7 @@ aa_mine.ordos:
 	AttackAircraft:
 		FacingTolerance: 512
 	Armament@PRIMARY:
-		Weapon: aa_mine.ordos
+		Weapon: ordos_airmine
 		LocalOffset: -250,-300,300, -250,300,300
 		LocalYaw: -100,100
 	Aircraft:
@@ -148,9 +148,9 @@ aa_mine.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_contraband.ordos
+		Upgrades: ordos_upgrade_contraband
 
-eye.ordos:
+ordos_eyeinthesky:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^BomberTemplate
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
@@ -166,7 +166,7 @@ eye.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~high_tech_factory.ordos, research_centre.ordos
+		Prerequisites: ~ordos_hightechfactory, ordos_ixresearchcenter
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	Health:
 		HP: 150000
@@ -203,9 +203,9 @@ eye.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_contraband
 
-banshee.ordos:
+ordos_banshee:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -222,7 +222,7 @@ banshee.ordos:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~high_tech_factory.ordos, up_banshee.ordos, research_centre.ordos
+		Prerequisites: ~ordos_hightechfactory, ordos_promotion_unlockbanshees, ordos_ixresearchcenter
 		Description: Light plane armed with dual machine guns. \nCan attack air.\n Strong vs Infantry and Air
 	Health:
 		HP: 37500
@@ -253,8 +253,8 @@ banshee.ordos:
 		MuzzleSequence: muzzle
 		MuzzlePalette: ra2effect
 		PauseOnCondition: !ammo
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	Aircraft:
 		Speed: 165
@@ -287,9 +287,9 @@ banshee.ordos:
 	WithMoveAnimation:
 		MoveSequence: move
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_toxin.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
-wraith.ordos:
+ordos_wraith:
 	Inherits: ^Helicopter
 	Inherits@Template: ^SpaceshipTemplate
 	Inherits@Epic: ^EpicAirUnitTemplate
@@ -306,7 +306,7 @@ wraith.ordos:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 120
-		Prerequisites: ~high_tech_factory.ordos, up_wraith.ordos, palace.ordos
+		Prerequisites: ~ordos_hightechfactory, ordos_promotion_unlockwraith, ordos_palace
 		BuildLimit: 1
 		Queue: Aircraft, RAAircraft
 		Description: actor_nax_dieglocke.description
@@ -327,8 +327,8 @@ wraith.ordos:
 		Name: primary
 		Weapon: Wraith_ToxinMissiles
 		LocalOffset: 800,0,0, 0,800,0, -800,0,0, 0,-800,0
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	AttackAircraft:
 		Voice: Attack
@@ -351,7 +351,7 @@ wraith.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_shield.ordos, up_toxin.ordos
+		Upgrades: ordos_upgrade_shields, ordos_upgrade_biologicalwarfare
 
 wraith_husk.ordos:
 	Inherits: ^LargeHelicopterHusk
@@ -361,7 +361,7 @@ wraith_husk.ordos:
 		TurnSpeed: 16
 		Speed: 100
 	RenderSprites:
-		Image: wraith.ordos
+		Image: ordos_wraith
 		PlayerPalette: player_rgba
 
 # ^Ornithopter_Missiles:
@@ -527,7 +527,7 @@ swarmer_husk.ordos:
 		Explosion: D2KUnitExplodeSmall
 	RenderSprites:
 		PlayerPalette: player_rgba
-		Image: swarmer.ordos
+		Image: ordos_swarmerdrone
 
 banshee_husk.ordos:
 	Inherits: ^PlaneHusk
@@ -541,7 +541,7 @@ banshee_husk.ordos:
 		Explosion: D2KUnitExplodeSmall
 	RenderSprites:
 		PlayerPalette: player_rgba
-		Image: banshee.ordos
+		Image: ordos_banshee
 
 eye_husk.ordos:
 	Inherits: ^PlaneHusk
@@ -555,7 +555,7 @@ eye_husk.ordos:
 		Explosion: D2KUnitExplodeMed
 	RenderSprites:
 		PlayerPalette: player_rgba
-		Image: eye.ordos
+		Image: ordos_eyeinthesky
 
 # phoenix.husk:
 # 	Inherits: ^PlaneHusk
@@ -777,28 +777,28 @@ carryall_reinforce.ordos:
 		Actor: carryall_huskvtol.ordos
 		RequiresCondition: !cruising
 	RenderSprites:
-		Image: carryall.ordos
+		Image: ordos_advancedcarryall
 		PlayerPalette: player_rgba
 	AttackAircraft:
 		FacingTolerance: 10
 	Armament@PRIMARY:
 		Weapon: d2kCarryallChainGun
 		LocalOffset: 128,-213,-85, 128,213,-85
-		RequiresCondition: !up_laserguns.ordos
+		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@PRIMARYLaser:
 		Weapon: d2kCarryallChainGun_upgrade
 		LocalOffset: 128,-213,-85, 128,213,-85
-		RequiresCondition: up_laserguns.ordos
+		RequiresCondition: ordos_upgrade_lasercartridges
 	ActorStatValues:
-		Upgrades: up_laserguns.ordos
-carryall.ordos:
+		Upgrades: ordos_upgrade_lasercartridges
+ordos_advancedcarryall:
 	Inherits: carryall
 	Inherits@LaserGuns: ^Ordos_LaserGuns
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 120
-		Prerequisites: ~high_tech_factory.ordos
+		Prerequisites: ~ordos_hightechfactory
 	Tooltip:
 		Name: Advanced Carryall
 	SpawnActorOnDeath@CRUISING:
@@ -808,20 +808,20 @@ carryall.ordos:
 		Actor: carryall_huskvtol.ordos
 		RequiresCondition: !cruising
 	RenderSprites:
-		Image: carryall.ordos
+		Image: ordos_advancedcarryall
 		PlayerPalette: player_rgba
 	AttackAircraft:
 		FacingTolerance: 10
 	Armament@PRIMARY:
 		Weapon: d2kCarryallChainGun
 		LocalOffset: 128,-213,-85, 128,213,-85
-		RequiresCondition: !up_laserguns.ordos
+		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@PRIMARYLaser:
 		Weapon: d2kCarryallChainGun_upgrade
 		LocalOffset: 128,-213,-85, 128,213,-85
-		RequiresCondition: up_laserguns.ordos
+		RequiresCondition: ordos_upgrade_lasercartridges
 	ActorStatValues:
-		Upgrades: up_laserguns.ordos
+		Upgrades: ordos_upgrade_lasercartridges
 carryall_husk.ordos:
 	Inherits: ^PlaneHusk
 	Tooltip:
@@ -832,7 +832,7 @@ carryall_husk.ordos:
 		CanSlide: True
 		VTOL: true
 	RenderSprites:
-		Image: carryall.ordos
+		Image: ordos_advancedcarryall
 		PlayerPalette: player_rgba
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
@@ -849,7 +849,7 @@ carryall_huskvtol.ordos:
 		CanSlide: True
 		VTOL: true
 	RenderSprites:
-		Image: carryall.ordos
+		Image: ordos_advancedcarryall
 		PlayerPalette: player_rgba
 	FallsToEarth:
 		Explosion: D2KUnitExplodeLarge
@@ -1001,7 +1001,7 @@ carryall_huskvtol.ordos:
 # 		OverrideActor: devastator
 
 # deviator.starport:
-# 	Inherits: deviator.ordos
+# 	Inherits: ordos_deviatorartillery
 # 	Buildable:
 # 		Queue: Vehicle, RAVehicle
 # 		Prerequisites: ~starport_smuggler
@@ -1009,9 +1009,9 @@ carryall_huskvtol.ordos:
 # 		Multiplier: 150
 # 	-MapEditorData:
 # 	RenderSprites:
-# 		Image: deviator.ordos
+# 		Image: ordos_deviatorartillery
 # 	UpdatesPlayerStatistics:
-# 		OverrideActor: deviator.ordos
+# 		OverrideActor: ordos_deviatorartillery
 
 # sonic_tank.starport:
 # 	Inherits: sonic_tank

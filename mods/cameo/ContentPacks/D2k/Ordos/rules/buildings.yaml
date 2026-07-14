@@ -1,19 +1,19 @@
-construction_yard.ordos:
+ordos_constructionyard:
 	Inherits: ^construction_yard
 	Tooltip:
 		Name: Ordos Construction Yard
 	Transforms:
-		IntoActor: d2k_mcv.ordos
+		IntoActor: ordos_mobileconstructionvehicle
 	RenderSprites:
 		Image: conyard.ordos
 
 # Generic wind trap template. Common traits live here; each faction actor below
 # only sets its own build prerequisite (owning construction yard) and sprite image.
 
-wind_trap.ordos:
+ordos_windtrap:
 	Inherits: ^wind_trap
 	Buildable:
-		Prerequisites: ~construction_yard.ordos
+		Prerequisites: ~ordos_constructionyard
 	RenderSprites:
 		Image: power.ordos
 
@@ -76,7 +76,7 @@ wind_trap.ordos:
 # 	ProvidesPrerequisite@windtrap:
 # 		Prerequisite: wind_trap
 
-d2k_barracks.ordos:
+ordos_barracks:
 	Inherits: ^D2KBuilding
 	Inherits@UPGRADEABLE: ^D2kUpgradeable
 	Inherits@D2KSprite: ^D2KPaletteRender
@@ -84,7 +84,7 @@ d2k_barracks.ordos:
 	Inherits@Prereqs: ^D2KPrereqs
 	Inherits@shape: ^2x2Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_windtrap
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ordos Barracks
@@ -188,13 +188,13 @@ d2k_barracks.ordos:
 # 	-WithDeathAnimation:
 # 	-WithMakeAnimation:
 # 	SpawnActorOnDeath@death1:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death2:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death3:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death4:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	ThrowsShrapnel:
 # 		Weapons: Debris2, Debris3
 # 		Pieces: 1, 2
@@ -247,13 +247,13 @@ d2k_barracks.ordos:
 # 		SupportPowerPaletteOrder: 10
 # 		EffectSequence: idle
 # 	SpawnActorOnDeath@death1:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death2:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death3:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	SpawnActorOnDeath@death4:
-# 		Actor: face_dancer.ordos
+# 		Actor: ordos_facedancer
 # 	ProvidesPrerequisite@swlimit:
 # 		Prerequisite: swpalace
 # 	ProvidesPrerequisite@buildingname:
@@ -263,69 +263,69 @@ d2k_barracks.ordos:
 # Generic spice refinery template. Common traits here; each faction actor below sets
 # its build prerequisite, its harvester.ixian/delivery actors, and its sprite image.
 
-refinery.ordos:
+ordos_refineryordos:
 	Inherits: ^refinery
 	Tooltip:
 		Name: Refinery
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, wind_trap.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_windtrap
 	FreeActor:
-		Actor: harv.ordos
+		Actor: ordos_spiceharvester
 		SpawnOffset: 0,2
 		Facing: 160
 	FreeActorWithDelivery@1:
-		Actor: harv.ordos
+		Actor: ordos_spiceharvester
 		DeliveryOffset: 2,2
 		DeliveringActor: carryall_reinforce.ordos
 		Facing: 160
 	# FreeActorWithDelivery@2:
-	# 	Actor: harv.ordos
+	# 	Actor: ordos_spiceharvester
 	# 	DeliveryOffset: 0,2
 	# 	DeliveringActor: carryall_reinforce.ordos
 	# 	Facing: 160
 	RenderSprites:
-		Image: refinery.ordos
+		Image: ordos_refineryordos
 
 # Generic storage silo template. Common traits here; each faction actor below sets
 # its build prerequisite and sprite image.
 
-d2k_silo.ordos:
+ordos_storagesilo:
 	Inherits: ^d2k_silo
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, refinery.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 	RenderSprites:
 		Image: silo.ordos
 
-light_factory.ordos:
+ordos_lightfactory:
 	Inherits: light_factory
 	Tooltip:
 		Name: Ordos Light Factory
 	RenderSprites:
 		Image: light.ordos
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, refinery.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: template_factory.description
 		IconPalette: player
 
-heavy_factory.ordos:
+ordos_heavyfactory:
 	Inherits: heavy_factory
 	Tooltip:
 		Name: Ordos Heavy Factory
 	RenderSprites:
 		Image: heavy.ordos
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, refinery.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		Description: template_factory.description
 		IconPalette: player
 
-repair_pad.ordos:
+ordos_repairpad:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Inherits@repair: ^RepairsUnits
 	Inherits@repair: ^RepairFacility
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, heavy_factory.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_heavyfactory
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ordos Repair Pad
@@ -343,7 +343,7 @@ repair_pad.ordos:
 	Reservable:
 	RallyPoint:
 	RenderSprites:
-		Image: repair_pad.ordos
+		Image: ordos_repairpad
 	WithRepairOverlay:
 		RequiresCondition: !build-incomplete
 		Palette: effect75alpha
@@ -357,15 +357,15 @@ repair_pad.ordos:
 	SpawnActorOnDeath@death2:
 		Actor: light_inf
 	ProvidesPrerequisite@repair_pad:
-		Prerequisite: repair_pad.ordos
+		Prerequisite: ordos_repairpad
 
-outpost.ordos:
+ordos_outpost:
 	Inherits: ^D2KBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@shape: ^3x3Shape
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, refinery.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_refineryordos
 		IconPalette: d2kunit
 	Tooltip:
 		Name: Ordos Outpost
@@ -374,7 +374,7 @@ outpost.ordos:
 		Dimensions: 3,3
 		LocalCenterOffset: 0,-512,0
 	RenderSprites:
-		Image: outpost.ordos
+		Image: ordos_outpost
 	WithIdleOverlay@DISH:
 		RequiresCondition: !build-incomplete && !severe-damaged
 		Sequence: idle-dish
@@ -410,7 +410,7 @@ outpost.ordos:
 		Descriptions:
 			1: power_paratroopers.description
 		DropItems:
-			1: stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos, stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos, stealth_raider.ordos, stealth_raider.ordos, deviator.ordos, deviator.ordos, deviator.ordos
+			1: ordos_stealthraider, ordos_stealthraider, ordos_deviatorartillery, ordos_deviatorartillery, ordos_deviatorartillery, ordos_stealthraider, ordos_stealthraider, ordos_deviatorartillery, ordos_deviatorartillery, ordos_deviatorartillery, ordos_stealthraider, ordos_stealthraider, ordos_deviatorartillery, ordos_deviatorartillery, ordos_deviatorartillery
 		SelectTargetSpeechNotification: SelectTarget
 		AllowImpassableCells: false
 		QuantizedFacings: 16
@@ -429,34 +429,34 @@ outpost.ordos:
 			1: 3
 		SquadOffset: 1792,1792,0
 
-high_tech_factory.ordos:
+ordos_hightechfactory:
 	Inherits: ^high_tech_factory
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, outpost.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_outpost
 	RenderSprites:
 		Image: hightech.ordos
 
 # Generic research centre. Common traits here; each faction actor sets its build
 # prerequisite and sprite image.
 
-research_centre.ordos:
+ordos_ixresearchcenter:
 	Inherits: ^research_centre
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, outpost.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_outpost
 	RenderSprites:
 		Image: research.ordos
 
 # Generic high tech (aircraft) factory. Common traits here; each faction actor sets
 # its build prerequisite and sprite image.
 
-starport.ordos:
+ordos_starport:
 	Inherits: ^starport
 	Buildable:
-		Prerequisites: ~construction_yard.ordos, research_centre.ordos, derricklimit
+		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, derricklimit
 	RenderSprites:
-		Image: starport.ordos
+		Image: ordos_starport
 
-artillery_platform.ordos:
+ordos_artilleryplatform:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -475,7 +475,7 @@ artillery_platform.ordos:
 		Cost: 1200
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ordos, d2k_barracks.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_barracks
 		BuildPaletteOrder: 550
 		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
 		IconPalette: d2kunit
@@ -517,7 +517,7 @@ artillery_platform.ordos:
 	SpawnActorOnDeath@death1:
 		Actor: light_inf
 	RenderSprites:
-		Image: artillery_platform.ordos
+		Image: ordos_artilleryplatform
 	Power:
 		Amount: -60
 	RevealsShroud:
@@ -525,9 +525,9 @@ artillery_platform.ordos:
 	DetectCloaked:
 		Range: 5000
 	ActorStatValues:
-		Upgrades: up_contraband.ordos
+		Upgrades: ordos_upgrade_contraband
 
-autogun_turret.ordos:
+ordos_autogunturret:
 	Inherits: ^D2KDefense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^AdvancedDefenseTemplate
@@ -548,14 +548,14 @@ autogun_turret.ordos:
 		Cost: 1100
 	Buildable:
 		Queue: Defence, RADefence
-		Prerequisites: ~construction_yard.ordos, d2k_barracks.ordos
+		Prerequisites: ~ordos_constructionyard, ordos_barracks
 		BuildPaletteOrder: 510
 		Description: Defensive structure.\n  Strong vs Infantry, Vehicles, Buildings\n  Weak vs Tanks
 		IconPalette: cameo
 	Health:
 		HP: 75000
 	Armament:
-		Weapon: autogun_turret.ordos
+		Weapon: ordos_autogunturret
 		LocalOffset: 500,-150,400, 500,150,400
 		MuzzleSequence: muzzle
 		MuzzlePalette: d2keffect
@@ -584,7 +584,7 @@ autogun_turret.ordos:
 	WithWallSpriteBody:
 		RequiresCondition: !build-incomplete
 	RenderSprites:
-		Image: autogun_turret.ordos
+		Image: ordos_autogunturret
 	FireProjectilesOnDeath:
 		Weapons: Debris2, Debris3
 		Pieces: 2, 4
@@ -598,7 +598,7 @@ autogun_turret.ordos:
 	DetectCloaked:
 		Range: 3855
 	ActorStatValues:
-		Upgrades: up_contraband.ordos, up_rapidfirearmorpiercingbelts.ordos
+		Upgrades: ordos_upgrade_contraband, ordos_upgrade_rapidfirearmorpiercingbelts
 
 # flame_turret:
 # 	Inherits: medium_gun_turret.ixian
@@ -621,7 +621,7 @@ autogun_turret.ordos:
 # 	Armament:
 # 		Weapon: d2kFlameTurret
 
-palace.ordos:
+ordos_palace:
 	Inherits: ^D2KBuilding
 	Inherits@D2KSprite: ^D2KPaletteRender
 	Inherits@CPQ: ^CPQCondition
@@ -629,7 +629,7 @@ palace.ordos:
 	Inherits@SW: ^PrimarySuperweapon
 	Buildable:
 		Queue: Building, RABuilding
-		Prerequisites: ~construction_yard.ordos, research_centre.ordos, !opalace, ~techlevel.superweapons
+		Prerequisites: ~ordos_constructionyard, ordos_ixresearchcenter, !opalace, ~techlevel.superweapons
 		Description: This structure unlocks support powers.
 		IconPalette: d2kunit
 	Tooltip:
@@ -649,7 +649,7 @@ palace.ordos:
 			TopLeft: -512, -1536
 			BottomRight: 512, -512
 	RenderSprites:
-		Image: palace.ordos
+		Image: ordos_palace
 	ProvidesPrerequisite@palace:
 		Prerequisite: palace
 	-WithDeathAnimation:
@@ -717,16 +717,16 @@ palace.ordos:
 			1: Produces saboteurs
 		Icons:
 			1: icon
-		IconImage: saboteur.ordos
+		IconImage: ordos_saboteur
 		AllowMultiple: True
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: palace
-		Actors: trooper, trooper, saboteur.ordos, saboteur.ordos
+		Actors: trooper, trooper, ordos_saboteur, ordos_saboteur
 		Type: Saboteurs
 		ChargeInterval: 1500
 		AutoFire: true
-		OrderName: saboteur.ordos
+		OrderName: ordos_saboteur
 		SupportPowerPaletteOrder: 20
 		RequiresCondition: palace_saboteurs
 	RallyPoint:
@@ -971,7 +971,7 @@ palace.ordos:
 # 		DropItems:
 # 			1: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper
 # 			2: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trike, trike, quad
-# 			3: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trooper, trooper, submachinegunner, submachinegunner, trooper, trike, trike, trike, quad, quad, combat_tank.ordos, combat_tank.ordos, siege_tank
+# 			3: submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, submachinegunner, trooper, trooper, trooper, trooper, submachinegunner, submachinegunner, trooper, trike, trike, trike, quad, quad, ordos_combattank, ordos_combattank, siege_tank
 # 		Prerequisites:
 # 			1:
 # 			2: d2k_striketeam2
@@ -1090,7 +1090,7 @@ palace.ordos:
 # 	Tooltip:
 # 		Name: Ordos Palace
 # 	RenderSprites:
-# 		Image: palace.ordos
+# 		Image: ordos_palace
 # 		-FactionImages:
 # 	-WithSupportPowerActivationOverlay:
 # 	Power:

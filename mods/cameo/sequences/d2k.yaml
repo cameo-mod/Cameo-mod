@@ -3978,7 +3978,7 @@ d2k_leech_s:
 		Facings: -32
 		Scale: 0.64
 	icon:
-		Filename: leechicon.shp
+		Filename: ordos_promotion_unlockleecher_icon.shp
 		Offset: 0,-1
 
 rocketeer:
@@ -4240,7 +4240,7 @@ d2k_hijacker:
 		Offset: 0,-1
 
 facedancer_harv:
-	Inherits: face_dancer.ordos
+	Inherits: ordos_facedancer
 	icon:
 		Filename: facedancerworkericon.shp
 
@@ -5242,7 +5242,7 @@ sonic_tank:
 combat_tank_corrino:
 	Defaults:
 	idle:
-		Filename: d2k_ct_striped.shp
+		Filename: ordos_combatautoguntank_d2k_ct_striped.shp
 		Facings: -32
 	turret:
 		Filename: d2k_lion_king.shp
@@ -5266,7 +5266,7 @@ combat_tank_corrino:
 combat_tank_fremen:
 	Defaults:
 	idle:
-		Filename: d2k_ct_striped.shp
+		Filename: ordos_combatautoguntank_d2k_ct_striped.shp
 		Facings: -32
 	turret:
 		Filename: DATA.R16
@@ -5352,7 +5352,7 @@ d2k_tyrant.husk:
 
 d2k_autogun_tank.husk:
 	idle:
-		Filename: d2k_autogun_tank.shp
+		Filename: ordos_upgrade_heavyautoguntankupgrade_d2k_autogun_tank.shp
 		Facings: -32
 
 carryall:

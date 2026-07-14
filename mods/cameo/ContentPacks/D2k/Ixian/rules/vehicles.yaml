@@ -418,11 +418,11 @@ missile_tank.ixian:
 # 		Image: sonic_tank
 
 # emperor_deviator:
-# 	Inherits: deviator.ordos
+# 	Inherits: ordos_deviatorartillery
 # 	Buildable:
 # 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
 # 	RenderSprites:
-# 		Image: deviator.ordos
+# 		Image: ordos_deviatorartillery
 
 # emperor_devastator:
 # 	Inherits: devastator
@@ -587,7 +587,7 @@ shock_raider.ixian:
 	Voiced:
 		VoiceSet: D2KShockRaider
 	RenderSprites:
-		Image: stealth_raider.ordos
+		Image: ordos_stealthraider
 	ActorStatValues:
 		Upgrades: up_general_purpose_armor.ixian, up_advanced_ixian_technology.ixian
 

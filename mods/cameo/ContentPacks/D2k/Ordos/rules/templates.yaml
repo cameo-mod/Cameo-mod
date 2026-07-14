@@ -3,86 +3,86 @@
 ## prerequisite that flips the condition on.
 
 ^VehicleShieldsUpgradeOrdos:
-	GrantConditionOnPrerequisite@up_shield.ordos:
-		Condition: up_shield.ordos
-		Prerequisites: up_shield.ordos
+	GrantConditionOnPrerequisite@ordos_upgrade_shields:
+		Condition: ordos_upgrade_shields
+		Prerequisites: ordos_upgrade_shields
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
-		RequiresCondition: up_shield.ordos
+		RequiresCondition: ordos_upgrade_shields
 	Shielded:
 		DamageRegenDelay: 125
 		RegenAmount: 10
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
 		SelectionBarColor: 8888FFFF
-		RequiresCondition: !disabled && (up_shield.ordos || shieldgen || shielded)
+		RequiresCondition: !disabled && (ordos_upgrade_shields || shieldgen || shielded)
 	ChangesShield@shielddischarge:
 		Delay: 10
 	ActorStatValues:
-		Upgrades: up_shield.ordos
+		Upgrades: ordos_upgrade_shields
 	Armor@shielded:
 		Type: Shield
 		RequiresCondition: shielded
 
 ^BiologicalWarfareUpgradeOrdos:
-	ReloadDelayMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	ReloadDelayMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 90
-	SpeedMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	SpeedMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 110
-	DamageMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	DamageMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_toxin.ordos:
-		Condition: up_toxin.ordos
-		Prerequisites: up_toxin.ordos
+	GrantConditionOnPrerequisite@ordos_upgrade_biologicalwarfare:
+		Condition: ordos_upgrade_biologicalwarfare
+		Prerequisites: ordos_upgrade_biologicalwarfare
 	ActorStatValues:
-		Upgrades: up_toxin.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare
 
 ^ContrabandUpgradeOrdos:
-	FirepowerMultiplier@up_contraband.ordos:
-		RequiresCondition: up_contraband.ordos
+	FirepowerMultiplier@ordos_upgrade_contraband:
+		RequiresCondition: ordos_upgrade_contraband
 		Modifier: 125
-	GrantConditionOnPrerequisite@up_contraband.ordos:
-		Condition: up_contraband.ordos
-		Prerequisites: up_contraband.ordos
+	GrantConditionOnPrerequisite@ordos_upgrade_contraband:
+		Condition: ordos_upgrade_contraband
+		Prerequisites: ordos_upgrade_contraband
 	ActorStatValues:
-		Upgrades: up_contraband.ordos
+		Upgrades: ordos_upgrade_contraband
 
 ^Ordos_LaserGuns:
-	GrantConditionOnPrerequisite@up_laserguns.ordos:
-		Condition: up_laserguns.ordos
-		Prerequisites: up_laserguns.ordos
+	GrantConditionOnPrerequisite@ordos_upgrade_lasercartridges:
+		Condition: ordos_upgrade_lasercartridges
+		Prerequisites: ordos_upgrade_lasercartridges
 
 ^Ordos_RapidFireArmorPiercingBelts:
-	GrantConditionOnPrerequisite@up_rapidfirearmorpiercingbelts.ordos:
-		Condition: up_rapidfirearmorpiercingbelts.ordos
-		Prerequisites: up_rapidfirearmorpiercingbelts.ordos
-	FirepowerMultiplier@up_rapidfirearmorpiercingbelts.ordos:
+	GrantConditionOnPrerequisite@ordos_upgrade_rapidfirearmorpiercingbelts:
+		Condition: ordos_upgrade_rapidfirearmorpiercingbelts
+		Prerequisites: ordos_upgrade_rapidfirearmorpiercingbelts
+	FirepowerMultiplier@ordos_upgrade_rapidfirearmorpiercingbelts:
 		Modifier: 110
-		RequiresCondition: up_rapidfirearmorpiercingbelts.ordos
-	ReloadDelayMultiplier@up_rapidfirearmorpiercingbelts.ordos:
+		RequiresCondition: ordos_upgrade_rapidfirearmorpiercingbelts
+	ReloadDelayMultiplier@ordos_upgrade_rapidfirearmorpiercingbelts:
 		Modifier: 90
-		RequiresCondition: up_rapidfirearmorpiercingbelts.ordos
-	RangeMultiplier@up_rapidfirearmorpiercingbelts.ordos:
+		RequiresCondition: ordos_upgrade_rapidfirearmorpiercingbelts
+	RangeMultiplier@ordos_upgrade_rapidfirearmorpiercingbelts:
 		Modifier: 105
-		RequiresCondition: up_rapidfirearmorpiercingbelts.ordos
+		RequiresCondition: ordos_upgrade_rapidfirearmorpiercingbelts
 	ActorStatValues:
-		Upgrades: up_rapidfirearmorpiercingbelts.ordos
+		Upgrades: ordos_upgrade_rapidfirearmorpiercingbelts
 
 ^Ordos_HoverDrive:
-	DamageMultiplier@up_hoverdrive.ordos:
-		RequiresCondition: up_hoverdrive.ordos
+	DamageMultiplier@ordos_upgrade_hoverdrive:
+		RequiresCondition: ordos_upgrade_hoverdrive
 		Modifier: 90
-	TurnSpeedMultiplier@up_hoverdrive.ordos:
-		RequiresCondition: up_hoverdrive.ordos
+	TurnSpeedMultiplier@ordos_upgrade_hoverdrive:
+		RequiresCondition: ordos_upgrade_hoverdrive
 		Modifier: 120
-	SpeedMultiplier@up_hoverdrive.ordos:
-		RequiresCondition: up_hoverdrive.ordos
+	SpeedMultiplier@ordos_upgrade_hoverdrive:
+		RequiresCondition: ordos_upgrade_hoverdrive
 		Modifier: 120
-	GrantConditionOnPrerequisite@up_hoverdrive.ordos:
-		Condition: up_hoverdrive.ordos
-		Prerequisites: up_hoverdrive.ordos
+	GrantConditionOnPrerequisite@ordos_upgrade_hoverdrive:
+		Condition: ordos_upgrade_hoverdrive
+		Prerequisites: ordos_upgrade_hoverdrive
 	ActorStatValues:
-		Upgrades: up_hoverdrive.ordos
+		Upgrades: ordos_upgrade_hoverdrive

@@ -1,4 +1,4 @@
-aatrooper.ordos:
+ordos_antiairtrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -15,7 +15,7 @@ aatrooper.ordos:
 		Name: Anti Air Trooper
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks.ordos, ~up_aatrooper.ordos
+		Prerequisites: ~ordos_barracks, ~ordos_upgrade_antiairtrooperupgrade
 		Queue: Infantry, RAInfantry
 		Description: template_antitank_antiair_infantry.description
 	Health:
@@ -45,7 +45,7 @@ aatrooper.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_toxin.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
 ordos_lightinfantry:
 	Inherits: ^D2KInfantry
@@ -67,7 +67,7 @@ ordos_lightinfantry:
 		Queue: Infantry, RAInfantry
 		Description: actor_ordos_lightinfantry.description
 		IconPalette: d2kunit
-		Prerequisites: ~d2k_barracks.ordos
+		Prerequisites: ~ordos_barracks
 	Health:
 		HP: 18000
 	ChangesHealth@SelfHealing:
@@ -77,23 +77,23 @@ ordos_lightinfantry:
 	Armament@PRIMARY: ##########
 		Weapon: LMG
 		LocalOffset: 128,0,256
-		RequiresCondition: !up_laserguns.ordos
+		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@Upgrade: ##########
 		Weapon: LMG_ordos_upgrade
 		LocalOffset: 128,0,256
-		RequiresCondition: up_laserguns.ordos
+		RequiresCondition: ordos_upgrade_lasercartridges
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: LMG
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: !up_laserguns.ordos
+		RequiresCondition: !ordos_upgrade_lasercartridges
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: LMG_ordos_upgrade
 		MuzzleSequence: garrison-muzzle
 		MuzzlePalette: d2keffect
-		RequiresCondition: up_laserguns.ordos
+		RequiresCondition: ordos_upgrade_lasercartridges
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 		DefaultAttackSequence: shoot
@@ -101,7 +101,7 @@ ordos_lightinfantry:
 	RenderSprites:
 		Image: light_inf
 	ActorStatValues:
-		Upgrades: up_toxin.ordos, up_contraband.ordos, up_laserguns.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband, ordos_upgrade_lasercartridges
 
 ordos_rockettrooper:
 	Inherits: ^D2KInfantry
@@ -115,7 +115,7 @@ ordos_rockettrooper:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks.ordos, ~!up_aatrooper.ordos
+		Prerequisites: ~ordos_barracks, ~!ordos_upgrade_antiairtrooperupgrade
 		Description: actor_ordos_rockettrooper.description
 		IconPalette: d2kunit
 	Valued:
@@ -143,9 +143,9 @@ ordos_rockettrooper:
 	RenderSprites:
 		Image: trooper
 	ActorStatValues:
-		Upgrades: up_toxin.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
-chem_troop.ordos:
+ordos_chemicaltrooper:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -165,7 +165,7 @@ chem_troop.ordos:
 		BuildPaletteOrder: 10
 		Queue: Infantry, RAInfantry
 		Description: General-purpose infantry equipped with chemical weapon.\nCannot attack buildings\n  Strong vs Infantry\n  Weak vs Vehicles
-		Prerequisites: ~d2k_barracks.ordos, up_chem_troop.ordos
+		Prerequisites: ~ordos_barracks, ordos_promotion_unlockchemicaltrooper
 		IconPalette: player
 	Health:
 		HP: 30000
@@ -183,8 +183,8 @@ chem_troop.ordos:
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: d2k_chemgun
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	RenderSprites:
 		Image: chemtrooper
@@ -196,9 +196,9 @@ chem_troop.ordos:
 		CrushedSequencePalette: raplayer
 		CrushedPaletteIsPlayerPalette: True
 	ActorStatValues:
-		Upgrades: up_toxin.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare
 
-mortar.ordos:
+ordos_mortartrooper:
 	Inherits: ^Soldier
 	Inherits@Template: ^MortarInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -215,7 +215,7 @@ mortar.ordos:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~d2k_barracks.ordos, up_mortar.ordos
+		Prerequisites: ~ordos_barracks, ordos_promotion_unlockmortartroopers
 		Queue: Infantry, RAInfantry
 		Description: template_antitank_antiair_infantry.description
 	Health:
@@ -239,7 +239,7 @@ mortar.ordos:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_toxin.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
 # thumper:
 # 	Inherits: ^D2KInfantry
@@ -364,7 +364,7 @@ mortar.ordos:
 # 	RenderSprites:
 # 		Image: fremen
 
-face_dancer.ordos:
+ordos_facedancer:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -381,7 +381,7 @@ face_dancer.ordos:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 20
 		BuildLimit: 1
-		Prerequisites: ~d2k_barracks.ordos, palace.ordos
+		Prerequisites: ~ordos_barracks, ordos_palace
 		Description: Genetically modified humanoid armed with a powerful rocket launcher. Can cloak. Does not lie down when attacked. Immune to Tiberium
 	Health:
 		HP: 90000
@@ -397,8 +397,8 @@ face_dancer.ordos:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: facedancer_grenade
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	Voiced:
 		VoiceSet: D2KInfantryVoice
@@ -407,12 +407,12 @@ face_dancer.ordos:
 	-TakeCover:
 	-DamagedByTerrain:
 	RenderSprites:
-		Image: face_dancer.ordos
+		Image: ordos_facedancer
 	ActorStatValues:
-		Upgrades: up_toxin.ordos, up_contraband.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare, ordos_upgrade_contraband
 
 # facedancer_ghola:
-# 	Inherits: face_dancer.ordos
+# 	Inherits: ordos_facedancer
 # 	Valued:
 # 		Cost: 150
 # 	Tooltip:
@@ -421,10 +421,10 @@ face_dancer.ordos:
 # 	Health:
 # 		HP: 2500
 # 	RenderSprites:
-# 		Image: face_dancer.ordos
+# 		Image: ordos_facedancer
 # 	-Explodes@ghola:
 
-contaminator.ordos:
+ordos_contaminator:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -440,7 +440,7 @@ contaminator.ordos:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 10
-		Prerequisites: ~d2k_barracks.ordos, up_contaminator.ordos
+		Prerequisites: ~ordos_barracks, ordos_promotion_unlockcontaminator
 		Description: The Contaminator is a genetically engineered organism\nthat infects a target organic unit to create another Contaminator\nwhen the target dies. They are quite\nresilient to gunfire.\n  Strong vs Buildings, Infantry, Air, Vehicles\n  Weak vs Siege
 	Health:
 		HP: 75000
@@ -458,8 +458,8 @@ contaminator.ordos:
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: contaminator_attack
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	Voiced:
 		VoiceSet: EBFDContaminator
@@ -469,10 +469,10 @@ contaminator.ordos:
 	Targetable@ra1_soviet_attackdog:
 		TargetTypes: DogImmune
 	ActorStatValues:
-		Upgrades: up_toxin.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare
 
 # contaminator_s:
-# 	Inherits: contaminator.ordos
+# 	Inherits: ordos_contaminator
 # 	DamageMultiplier:
 # 		Modifier: 150
 # 	Power:
@@ -481,7 +481,7 @@ contaminator.ordos:
 # 		WarnProbability: 0
 # 		CrushSound: squish2.aud
 # 	RenderSprites:
-# 		Image: contaminator.ordos
+# 		Image: ordos_contaminator
 # 	-Buildable:
 
 # grenadier:
@@ -756,7 +756,7 @@ contaminator.ordos:
 # 		Color: 0000FF80
 # 	-ProductionCostMultiplier@discountsardaukar:
 
-leech.ordos:
+ordos_leech:
 	Inherits: ^D2KInfantry
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -767,7 +767,7 @@ leech.ordos:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 130
-		Prerequisites: ~d2k_barracks.ordos, up_leech.ordos
+		Prerequisites: ~ordos_barracks, ordos_promotion_unlockleecher
 		Description: Stealth creature that can attack infantry and infect vehicles.
 		IconPalette: player
 	Selectable:
@@ -788,8 +788,8 @@ leech.ordos:
 	Armament@PRIMARY:
 		Weapon: LeechJump
 		LocalOffset: 0,0,200
-	FirepowerMultiplier@up_toxin.ordos:
-		RequiresCondition: up_toxin.ordos
+	FirepowerMultiplier@ordos_upgrade_biologicalwarfare:
+		RequiresCondition: ordos_upgrade_biologicalwarfare
 		Modifier: 150
 	WithInfantryBody:
 		DefaultAttackSequence: jump
@@ -839,7 +839,7 @@ leech.ordos:
 		TargetTypes: DogImmune
 	-TemporaryOwnerManager:
 	ActorStatValues:
-		Upgrades: up_toxin.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare
 
 # rocketeer:
 # 	Inherits: ^D2KInfantry
@@ -1382,7 +1382,7 @@ leech.ordos:
 # 		BuildPaletteOrder: 80
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~d2k_ifv_prereq, up_light.ordos, ~techlevel.low
+# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactoryupgrade, ~techlevel.low
 # 		Description: Light Carrier vehicle with light cannon and missile launcher\nCan carry 3 passengers\n Strong vs Vehicles, Tanks\n Weak vs Infantry
 # 		IconPalette: d2kunit
 # 	Valued:
@@ -1465,7 +1465,7 @@ leech.ordos:
 # 		Queue: VVehicle, RAVehicle
 # 		BuildPaletteOrder: 150
 # 		BuildDurationModifier: 50
-# 		Prerequisites: ~faction.corrino, up_light.ordos, ~techlevel.medium
+# 		Prerequisites: ~faction.corrino, ordos_upgrade_lightfactoryupgrade, ~techlevel.medium
 # 		Description: Ultimate Transport Vehicle\nCan carry 12 passengers quickly\nLimit: 1
 # 		BuildLimit: 1
 # 	Cargo:
@@ -1495,7 +1495,7 @@ leech.ordos:
 # d2k_light_tank.bot1:
 # 	Inherits: d2k_light_tank
 # 	Buildable:
-# 		Prerequisites: ~d2k_ifv_prereq, up_light.ordos, ~techlevel.low, ~botplayer
+# 		Prerequisites: ~d2k_ifv_prereq, ordos_upgrade_lightfactoryupgrade, ~techlevel.low, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 133
 # 	Cargo:
@@ -1707,7 +1707,7 @@ leech.ordos:
 # 		BuildPaletteOrder: 110
 # 		BuildDuration: 300
 # 		BuildDurationModifier: 100
-# 		Prerequisites: ~techlevel.low, ~light.harkonnen, up_light.ordos, ~faction.corrino
+# 		Prerequisites: ~techlevel.low, ~light.harkonnen, ordos_upgrade_lightfactoryupgrade, ~faction.corrino
 # 		Description: Suicidal remote vehicle armed with high explosives\nHas very weak armor \n\n Requires a Light Factory in order to move.
 # 		IconPalette: d2kunit
 # 	WithColoredOverlay:
@@ -1883,7 +1883,7 @@ leech.ordos:
 # 		BuildPaletteOrder: 40
 # 		BuildDuration: 325
 # 		BuildDurationModifier: 100
-# 		Prerequisites: up_light.ordos, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos
+# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos
 # 		Description: Hit and Run Vehicle with small cannon and missile launcher\nCan carry 3 passengers
 # 		IconPalette: d2kunit
 # 	AutoDeployer:
@@ -1948,7 +1948,7 @@ leech.ordos:
 # d2k_apc.bot1:
 # 	Inherits: d2k_apc
 # 	Buildable:
-# 		Prerequisites: up_light.ordos, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos, ~botplayer
+# 		Prerequisites: ordos_upgrade_lightfactoryupgrade, ~light.ordos, ~techlevel.low, ~!faction.tleilaxu, ~!faction.ordos, ~botplayer
 # 	ProductionCostMultiplier:
 # 		Multiplier: 133
 # 	Cargo:
@@ -1985,7 +1985,7 @@ leech.ordos:
 # 	RenderSprites:
 # 		PlayerPalette: raplayer
 
-saboteur.ordos:
+ordos_saboteur:
 	Inherits: ^D2KInfantry
 	Inherits@anim: ^D2KPaletteRenderInfantry
 	Inherits@CLOAK: ^CloakedVehicle
@@ -2029,7 +2029,7 @@ saboteur.ordos:
 	DetectCloaked:
 		Range: 4c0
 	ActorStatValues:
-		Upgrades: up_toxin.ordos
+		Upgrades: ordos_upgrade_biologicalwarfare
 
 # nsfremen:
 # 	Inherits: fremen

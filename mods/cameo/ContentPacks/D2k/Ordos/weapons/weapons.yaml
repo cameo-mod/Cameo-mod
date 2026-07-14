@@ -1011,7 +1011,7 @@ HMGstealth:
 		ValidTargets: Ground, Water, Air
 		Damage: 1
 
-autogun_turret.ordos:
+ordos_autogunturret:
 	Inherits: ^HeavyCannon
 	Inherits: ^SmallArms
 	Inherits: ^Chaingun
@@ -1132,7 +1132,7 @@ d2kCarryallChainGun:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		Damage: 2
 
-aa_mine.ordos:
+ordos_airmine:
 	Inherits: air_drone.ixian
 	Burst: 15
 	Range: 2048
@@ -1159,7 +1159,7 @@ aa_mine.ordos:
 		Spread: 0c768
 		Damage: 10000
 
-laser_tank.ordos:
+ordos_lasertank:
 	Inherits: ^FlakWeapon
 	Inherits: ^MediumMissile
 	Inherits: ^RailgunWeapon

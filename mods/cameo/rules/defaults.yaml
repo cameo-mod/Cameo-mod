@@ -753,7 +753,7 @@
 
 ^LeechEggLayable:
 	SpawnActorOnDeath@Leech2:
-		Actor: leech.ordos
+		Actor: ordos_leech
 		Probability: 100
 		OwnerType: Killer
 		DeathType: LeechTankInfect
@@ -773,7 +773,7 @@
 #		TargetTypes: LeechEggKill
 #		RequiresCondition: LeechEggLaid && LeechEggKill
 #	SpawnActorOnDeath@Leech:
-#		Actor: leech.ordos
+#		Actor: ordos_leech
 #		Probability: 100
 #		InternalOwner: Creeps
 #		RequiresCondition: LeechEggLaid && !LeechEggKill
@@ -3095,7 +3095,7 @@
 		EmptyWeapon: MutateEffect
 		DeathTypes: QuestionMutate
 	SpawnActorOnDeath@Contaminator:
-		Actor: contaminator.ordos
+		Actor: ordos_contaminator
 		OwnerType: Killer
 		DeathType: ContaminatorMutate
 	SpawnActorOnDeath@Assimilator:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, repair_pad.ordos, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviet_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, repair_pad.ixian, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -8950,12 +8950,12 @@ CPQDEBUGDUMMY:
 			# swgreedo: ifv-hero
 			# swrmbo.hutt: ifv-medlaser
 			# light_inf: ifv-mg
-			# chem_troop.ordos: ifv-chem
+			# ordos_chemicaltrooper: ifv-chem
 			# engineer: ifv-repair
 			# trooper: ifv-miss
 			# fremen: ifv-fremen
-			# face_dancer.ordos: ifv-cannon
-			# contaminator.ordos: ifv-chem
+			# ordos_facedancer: ifv-cannon
+			# ordos_contaminator: ifv-chem
 			# grenadier: ifv-cannon
 			# sardaukar: ifv-mg
 			# mpsardaukar: ifv-mg
