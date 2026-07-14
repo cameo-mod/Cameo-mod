@@ -407,7 +407,7 @@ sow_ht_special:
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
 		ValidTargets: Ground, Ship
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		
 sow_mech_avenger:
@@ -519,7 +519,7 @@ sow_mech_kodiak_mk2:
 			Medium: 99
 			Heavy: 88
 			Concrete: 55
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Delay: 5
 		Explosions: small_napalm
 		ImpactSounds: building2_explode.aud
@@ -832,7 +832,7 @@ sow_abc_nuke:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	#Warhead@2Res_impact: DestroyResource
 	#	Size: 1
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke
 		ImpactSounds: sow_abc_nuke.aud
 		ImpactActors: false
@@ -851,7 +851,7 @@ sow_abc_nuke:
 	#Warhead@5Res_areanuke1: DestroyResource
 	#	Size: 2
 	#	Delay: 5
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: sow_abc_nuke.aud, sow_bomb.aud
 		Delay: 35
 		ImpactActors: false
@@ -938,7 +938,7 @@ sow_aircraft_husk:
 			Concrete: 50
 		AffectsParent: true
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke
 		ImpactSounds: sow_abc_nuke.aud, sow_bomb.aud
 		Delay: 5
@@ -966,7 +966,7 @@ sow_fighter_husk:
 			Concrete: 50
 		AffectsParent: true
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke
 		ImpactSounds: sow_abc_nuke.aud, sow_bomb.aud
 		Delay: 5
@@ -985,7 +985,7 @@ sowasteroid:
 		Velocity: 0, 0, -230
 		Acceleration: 0, 0, -40
 		Shadow: true
-	Warhead@1Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: large_explosion
 		ImpactSounds: Meteor.aud
 		ImpactActors: false
@@ -1174,7 +1174,7 @@ sowtripler:
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
 		ValidTargets: Ground, Ship
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 	
 ###############
@@ -1286,7 +1286,7 @@ sow_plasma_tower:
 		Explosions: ex_big_flash
 		ImpactSounds: sowtriplerboom.aud
 		ValidTargets: Ground, Ship
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 
 sow_minigun_tower:

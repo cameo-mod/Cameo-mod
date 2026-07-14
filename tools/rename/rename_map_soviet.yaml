@@ -6,7 +6,7 @@ actors:
 	5tnk: ra1_soviet_siegemammothtank
 	barr: ra1_soviet_barracks
 	cyberdog: ra1_soviet_cyberdog
-	dog: ra1_soviet_dog
+	dog: ra1_soviet_attackdog
 	dome.soviet: ra1_soviet_radardome
 	dtrk: ra1_soviet_nukedemotruck
 	e3flamer: ra1_soviet_firerocketsoldier
@@ -86,6 +86,8 @@ actors:
 	rasam: ra1_soviet_samsite
 	raweap: ra1_soviet_warfactory
 	shok: ra1_soviet_shocktrooper
+	sovgorynych: ra1_soviet_gorynychtank
+	sovstalinfist: ra1_soviet_stalinfist
 	stek: ra1_soviet_techcenter
 	su57: ra1_soviet_su57attackbomber
 	tsla: ra1_soviet_teslacoil
@@ -138,9 +140,9 @@ files:
 	conscriptiondoctrineicon.png: ra1_soviet_doctrine_conscriptiondoctrine_icon.png
 	cyberdog.shp: ra1_soviet_promotion_unlockcyberdog_cyberdog.shp
 	cyberdogicon.png: ra1_soviet_promotion_unlockcyberdog_icon.png
-	dog.shp: ra1_soviet_dog.shp
-	dogbullt.shp: ra1_soviet_dog_dogbullt.shp
-	dogicon.shp: ra1_soviet_dog_icon.shp
+	dog.shp: ra1_soviet_attackdog.shp
+	dogbullt.shp: ra1_soviet_attackdog_dogbullt.shp
+	dogicon.shp: ra1_soviet_attackdog_icon.shp
 	dome.shp: ra1_soviet_radardome_dome.shp
 	domeicon.png: ra1_soviet_radardome_icon.png
 	domemake.shp: ra1_soviet_radardome_domemake.shp
@@ -152,7 +154,7 @@ files:
 	e3flamer.shp: ra1_soviet_firerocketsoldier.shp
 	e3icon.png: ra1_soviet_rocketsoldier_icon.png
 	e4icon.png: ra1_soviet_flamethrower_icon.png
-	electdog.shp: ra1_soviet_dog_electdog.shp
+	electdog.shp: ra1_soviet_attackdog_electdog.shp
 	ftrk.shp: ra1_soviet_flaktruck.shp
 	ftrkicon.shp: ra1_soviet_flaktruck_icon.shp
 	ftur.shp: ra1_soviet_flametower.shp
@@ -255,6 +257,10 @@ files:
 	shok.shp: ra1_soviet_shocktrooper.shp
 	shokicon.shp: ra1_soviet_shocktrooper_icon.shp
 	shtoradefensesystemicon.png: ra1_soviet_upgrade_shtoradefensesystemupgrade_icon.png
+	sovgorynych.png: ra1_soviet_gorynychtank.png
+	sovgorynychicon.png: ra1_soviet_gorynychtank_icon.png
+	sovstalinfist.png: ra1_soviet_stalinfist.png
+	sovstalinfisticon.png: ra1_soviet_stalinfist_icon.png
 	staliniumicon.png: ra1_soviet_upgrade_stalinium_icon.png
 	stek.shp: ra1_soviet_techcenter.shp
 	stekicon.png: ra1_soviet_techcenter_icon.png

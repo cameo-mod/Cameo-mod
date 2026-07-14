@@ -445,7 +445,7 @@ PeashooterGun:
 			Heavy: 88
 	Warhead@3Eff: CreateEffect
 		ImpactSounds: pvzsplat1.wav, pvzsplat2.wav, pvzsplat3.wav
-	Warhead@TankEff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: pvzshieldhit1.wav, pvzshieldhit2.wav
 		ValidTargets: Vehicle
 PeashooterGunx2:
@@ -493,7 +493,7 @@ CabaggePult:
 		ImpactSounds: pvzsplat1.wav, pvzsplat2.wav, pvzsplat3.wav
 	Warhead@4EffWater: CreateEffect
 		Explosions: med_splash
-	Warhead@TankEff: CreateEffect
+	Warhead@EffectAir: CreateEffect
 		ImpactSounds: pvzshieldhit1.wav, pvzshieldhit2.wav
 		ValidTargets: Vehicle, Air
 KernelPult:

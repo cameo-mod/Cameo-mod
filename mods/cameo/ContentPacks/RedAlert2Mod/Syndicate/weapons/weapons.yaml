@@ -1242,7 +1242,7 @@ RA2TOPOLCuba:
 		ValidTargets: Ground, Water, Air
 		Damage: 10
 		Falloff: 100, 85, 70, 55, 40, 25, 10
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav

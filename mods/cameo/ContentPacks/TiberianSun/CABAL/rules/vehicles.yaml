@@ -530,13 +530,15 @@ cabal_tarantula:
 
 cabal_scarabapc:
 	Inherits: ^Tank
+	Inherits@Template: ^SupportVehicleTemplate
+	Inherits@cargo: ^CargoVehicle
+	Inherits@bot: ^BotAutoDeployTransport
 	Inherits@EXPERIENCE: ^GainsExperienceTD
 	Inherits@decoration: ^CABALRankDecoration
-	Inherits@cargo: ^CargoVehicle
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
-		Cost: 2600
+		Cost: 4775
 	Tooltip:
 		Name: Scarab APC
 	UpdatesPlayerStatistics:
@@ -567,8 +569,10 @@ cabal_scarabapc:
 		Payload: 400
 	Cargo:
 		Types: Infantry, Hacker, Fremen
-		MaxWeight: 10
-		InitialUnits: cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_cyborginfantry, cabal_rocketcyborg, cabal_devout, cabal_ascended, cabal_ascended, cabal_hackercyborg, cabal_hackercyborg
+		MaxWeight: 6
+		InitialUnits: cabal_cyborginfantry, cabal_rocketcyborg, cabal_devout, cabal_dissolver, cabal_ascended, cabal_eliminator800
+		ExclusiveDeploy: false
+		DeployType: vehicle
 	Targetable@garrisoned:
 		RequiresCondition: loaded && !submerged
 	WithCargoPipsDecoration:
@@ -581,45 +585,47 @@ cabal_scarabapc:
 		Image: cabal_scarabapc
 
 cabal_berserker:
-	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
 	Inherits: ^Soldier
 	Inherits@Template: ^LineBreakerTemplate
+	Inherits@Template: ^HeroInfantryTemplate
 	Inherits@DualArmor: ^TSCyborgDualArmorHeavy
+	Inherits@Cyborg: ^TSCyborgs
 	Inherits@decoration: ^CABALRankDecoration
-	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
-	Inherits@MC: ^MCImmune
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
 	Inherits@DECORATIONS: ^InfantryExperienceHospitalHazmatOverrides
 	Inherits@anim: ^TSInfantry
 	Inherits@vo: ^AttackFrontalVoice
-	Inherits@EMPfrontal: ^FrontalEMP
-	Inherits@EMP: ^UnitDisable
+	Inherits@tibheal: ^TibHealable
 	Inherits@DarkArmament: ^cabal_upgrade_darkarmament
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
 	Selectable:
 		Bounds: 600, 600, 0, 0
 	Valued:
-		Cost: 5000
+		Cost: 10000
 	Tooltip:
 		Name: Berserker
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		BuildPaletteOrder: 40
-		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, !cabal_promotion_t1000
+		BuildPaletteOrder: 90
+		Prerequisites: ~cabal_cyborgfactory, cabal_core
 		Queue: Infantry, RAInfantry
 		BuildLimit: 1
 		Description: actor_cabal_berserker.description
 	Mobile:
-		Speed: 80
+		Speed: 60
+		TurnSpeed: 12
 		PauseOnCondition: disabled
 	Health:
-		HP: 250000
+		HP: 800000
 	ChangesHealth@SelfHealing:
-		Step: 100
+		Step: 400
+		Delay: 1
+		StartIfBelow: 100
 	Shielded:
-		RegenAmount: 200
+		RegenAmount: 500
 	Armament@PRIMARY:
-		Weapon: Eliminator-Blades
+		Weapon: CabalBerserkerBlades
 	WithInfantryBody:
 		DefaultAttackSequence: attack
 		RequiresCondition: !cydamaged
@@ -636,16 +642,11 @@ cabal_berserker:
 		RequiresCondition: cydamaged
 	-DamagedByTerrain:
 	-SpawnActorOnDeath:
-	ExternalCondition@EMP:
-		TotalCap: 1
-		Condition: empdisable
-	TimedConditionBar@EMP:
-		Condition: empdisable
-		Color: FFFFFF
-	GrantCondition@disable:
-		RequiresCondition: ReaperTrap || chronobeamed || leaflet || empdisable
-	WithColoredOverlay@leaflet:
-		RequiresCondition: leaflet || empdisable
+	Voiced:
+		VoiceSet: TSCyborg
+	-TakeCover:
+	Crushable:
+		CrushClasses: vehicle
 	Targetable@HEAL:
 		TargetTypes: Heal, Repair, Healing
 	Targetable:
@@ -653,21 +654,77 @@ cabal_berserker:
 	GrantConditionOnPrerequisite@MACHINESHOP:
 		Condition: hospital
 		Prerequisites: machshop
-	Voiced:
-		VoiceSet: TSCyborg
-	-TakeCover:
-	Crushable:
-		CrushClasses: vehicle
-	Armament@GARRISONED: ##########
-		Name: garrisoned
-		Weapon: TSVulcanTower
-	ChangesHealth:
-		Step: 500
-		Delay: 1
-		StartIfBelow: 100
-		DamageCooldown: 1
+	DeathSounds:
+		VolumeMultiplier: 2
 	RenderSprites:
 		Image: cabal_berserker
+		PlayerPalette: player_rgba
+
+cabal_beholder:
+	Inherits: ^Tank
+	Inherits@Template: ^LineBreakerTemplate
+	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
+	Inherits@EXPERIENCE: ^GainsExperienceVehicle
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMoveMelee
+	Inherits@vo: ^AttackFrontalVoice
+	Inherits@EMP: ^FrontalEMP
+	Inherits@MC: ^MCImmune
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
+	Inherits@CyberneticPlating: ^cabal_upgrade_cyberneticplating
+	Valued:
+		Cost: 2500
+	Tooltip:
+		Name: Beholder
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 27
+		Prerequisites: ~cabal_cyborgfactory, cabal_techcenter, cabal_promotion_beholder
+		Queue: Infantry, RAInfantry
+		Description: actor_cabal_beholder.description
+	Mobile:
+		Locomotor: hover
+		Speed: 125
+		TurnSpeed: 50
+		PauseOnCondition: disabled
+	Hovers:
+		Ticks: 10
+		BobDistance: -64
+		InitialHeight: 384
+	Targetable@Hover:
+		TargetTypes: Water, Ship
+	Health:
+		HP: 125000
+	Repairable:
+		HpPerStep: 6250
+	ChangesHealth@SelfHealing:
+		Step: 50
+	Armor:
+		Type: Heavy
+	Armament@PRIMARY:
+		Weapon: CabalBeholderLaser
+		LocalOffset: 777,-222,-333, 777,222,-333
+	AttackFrontal:
+		FacingTolerance: 10
+	WithInfantryBody:
+		IdleSequences: idle
+		MinIdleDelay: 1
+		MaxIdleDelay: 2
+		DefaultAttackSequence: shoot
+	BodyOrientation:
+		QuantizedFacings: 32
+	-QuantizeFacingsFromSequence:
+	Passenger:
+		Weight: 4
+	Selectable:
+		Bounds: 1536, 1536
+	Voiced:
+		VoiceSet: TSScrin
+	RenderSprites:
+		Image: cabal_beholder
+		PlayerPalette: player_rgba
+
 
 cabal_spidercnc4:
 	Inherits: ^Vehicle
@@ -885,7 +942,7 @@ cabal_legion:
 	ChangesHealth@SelfHealing:
 		Step: 48
 	Armament@PRIMARY:
-		Weapon: CabalMantisGun
+		Weapon: CabalLegionGun
 		LocalOffset: 350,-30,250, 350,30,250
 		Recoil: 128
 		RecoilRecovery: 26

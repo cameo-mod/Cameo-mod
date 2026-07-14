@@ -119,9 +119,13 @@ factions, everything through the balance workbook._
   damage), applied to ALL laser weapons; each needs a new sound.
 
 ### N6. New CABAL effects + sounds
-- [ ] **New explosion effect for ALL CABAL missiles** (+ new sound).
-- [ ] Laser impact effects (N5) + green plasma impact (N1) each need a
-  paired new sound (DESIGN: effect + sound always defined together).
+- [x] Audio audit: all CABAL weapons have Report + ImpactSounds (via
+  inheritance or direct). Only CabalOverkillDroneLauncher was missing
+  a Report — fixed (`5437d4f63`).
+- [x] Effect-warhead naming: CABAL had 1 violation (CabalBerserkerBlades
+  @3Eff -> @Effect) — fixed (`63c859fde`).
+- [ ] New explosion effect for ALL CABAL missiles (+ new sound) — needs
+  custom art/audio from maintainer.
 - [ ] Plasma-weapon sounds: prefer NEW/unique; cross-check Shattered
   Paradise references. (Cannot synthesize quality .wav here — assign
   unique existing mod sounds and flag any that truly need new custom
@@ -131,27 +135,35 @@ factions, everything through the balance workbook._
 - [x] **Ascended + Devout**: increase the **second (Y) value** of each
   triple offset ~**2×** so their weapons sit further left/right.
 
-### N8. Armor combo (was CC; still pending, sheet-coupled)
-- [ ] Give every CABAL infantry the **FutureTech-droid dual-armor combo**:
-  base infantry `Armor:` (`-RequiresCondition:` to stay on) + a second
-  vehicle-class `Armor@X:` + `DamageMultiplier@X: 200` (damage ×2). Pick
-  the vehicle class per unit by role. Doubling incoming damage halves
-  effective HP → must be re-priced with the formula (couple with N9).
-  Reference: Cannon/Missile/Scout/Shotgun Droid in FutureTech infantry.yaml.
+### N8. Armor combo (was CC; DONE)
+- [x] Cyborg Commando + V2: Heroic/Superheavy dual-armor applied.
+- [x] Eliminator 800: Flak/Heavy dual-armor applied.
+- [x] Berserker: Heroic/Superheavy via `^HeroInfantryTemplate` + `^TSCyborgDualArmorHeavy`.
+- [x] All 11 CABAL infantry verified: every unit has Armor@Secondary +
+  DamageMultiplier@Secondary: 200 (some via `^TSCyborgDualArmor*` templates).
 
-### N9. Role + tier + promotion rebalance (L, sheet-first)
-- [ ] **Every CABAL unit maps to exactly ONE template role** from
-  `defaults.yaml` (^ScoutVehicleTemplate, ^FireSupportTemplate,
-  ^MainBattleTankTemplate, ^HeavyInfantryTemplate, etc.). Assign the role,
-  set stats from the workbook, apply the number (sheet-first dual-write).
-- [ ] **Tech tiers**: better units = higher tier; **fill every tier
-  evenly, none empty**. Promotions increase in tech level; **promotion
-  trees make sense and are grouped thematically** (see design screenshot;
-  left = infantry column, middle = vehicles).
-- [ ] Missing units to slot into the tiers/promotions: cnc4 Spider
-  (fire-support laser → Widow), Widow (carrier boosted by ≤4 spiders),
-  T1000 (promo of Eliminator 800), Commando V2 wiring, Avatar, Core
-  Defender promo. Stats from 333ggg's cabal.xlsx rows.
+### N9. Role + tier + promotion rebalance (L, sheet-first) — MOSTLY DONE
+- [x] **3×4 promotion grid fully populated**: Devout, Ascended, Beholder,
+  CCV2 (infantry); Spider CNC4, Heavy Reaper, Widow, Core Defender
+  (vehicles); Wasp Striker, Super Hunter Killer, Overkill Fortress,
+  Mothership (aircraft).
+- [x] **T1000 removed**; Beholder moved from Consortium to CABAL.
+- [x] **All Omega variants removed** (HK2 Omega, Mothership Omega).
+- [x] **Berserker refactored** to hero infantry (`^HeroInfantryTemplate`),
+  T4, HP 800k, DPS 7500, cost 10000, from Cyborg Factory, requires Core.
+- [x] **Overkill Fortress rebuilt** as Farasha-style carrier with drones.
+- [x] **HK1 + Super Hunter Killer**: dual rockets + dual lasers.
+- [x] **Carryall renamed**, unarmed transport.
+- [x] **Spreadsheet synced**: 35 rows, all TechTier/UnitClass/Special
+  values legal per DESIGN.md (1.0/0.75/0.5, epic=1.0/0.3), obsolete rows
+  deleted, missing units added, names updated.
+- [x] **Husk names fixed** (Carryall, Hunter Killer, Overkill Fortress,
+  Overkill Drone).
+- [x] **Design doc updated** (CABAL_FACTION_DESIGN.md reflects all changes).
+- [x] **Template role audit**: fixed Engineer→^MechanicTemplate,
+  Eliminator 800→^HeavyInfantryTemplate, Carryall→^UnarmedTransportHelicopterTemplate,
+  Scarab APC→^SupportVehicleTemplate + ^CargoVehicle (`81bad88d2`).
+- [ ] **Open question**: Overkill Fortress vs Overkill Carrier final name.
 
 ### N10. Upgrades audit
 - [x] Reviewed every CABAL upgrade for meaningful consumption. Removed the
@@ -162,15 +174,17 @@ factions, everything through the balance workbook._
   neutron-shell twins untouched.
 
 ### N11. Descriptions + AI
-- [ ] Fluent descriptions for all CABAL units (DESIGN description scheme);
-  AI wiring (squads, upgrades, promotions).
+- [x] All CABAL units have Fluent descriptions (converted 8 inline \n
+  descriptions to Fluent keys per DESIGN.md §7, `1f580f6e0`).
+- [x] AI wiring: all CABAL units in UnitsToBuild list with weights.
 
 ### CE (carried). Effect-warhead naming sweep, mod-wide
-- [ ] Beyond CABAL: rename stray `CreateEffect` warheads to the
-  per-surface canonical set (`@Effect` / `@EffectAir` / `@EffectWater` /
-  `@ShieldHitEffect`). NOTE: a child that overrides its template's own
-  effect-warhead name (e.g. `@3Eff` from `^TSCannonEffect`) is CORRECT,
-  not a violation. DESIGN §8.
+- [x] CABAL: 1 violation fixed (CabalBerserkerBlades @3Eff -> @Effect,
+  `63c859fde`). CABAL is fully compliant.
+- [x] Mod-wide: 202 renames across 40 files via scripted sweep
+  (`2ad0f35e1`). Audit: `tools/audit/audit_effect_warhead_names.py`
+  (0 violations). Template override names preserved; suffixed variants
+  (@Effect2, @EffectAir2, etc.) recognized as canonical.
 
 ---
 

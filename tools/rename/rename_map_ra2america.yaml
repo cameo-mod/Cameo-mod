@@ -3,7 +3,7 @@
 actors:
 	ra2_awall: ra2_allies_concretebarrier
 	ra2adog: ra2_allies_attackdog
-	ra2aegis: ra2_allies_aegis
+	ra2aegis: ra2_allies_aegiscruiser
 	ra2amcv: ra2_allies_alliedmobileconstructionvehicle
 	ra2atesla: ra2_allies_prismtower
 	ra2beag: ra2_allies_blackeagle
@@ -12,12 +12,12 @@ actors:
 	ra2e1: ra2_allies_gi
 	ra2engineer: ra2_allies_engineer
 	ra2falc: ra2_allies_harrier
-	ra2fv: ra2_allies_fv
-	ra2fvbotchrono: ra2_allies_fv_2
-	ra2fvbothmg: ra2_allies_fv_3
-	ra2fvbotmg: ra2_allies_fv_4
-	ra2fvbotmiss: ra2_allies_fv_5
-	ra2fvbotrep: ra2_allies_fv_6
+	ra2fv: ra2_allies_ifv
+	ra2fvbotchrono: ra2_allies_ifv_chrono
+	ra2fvbothmg: ra2_allies_ifv_hmg
+	ra2fvbotmg: ra2_allies_ifv_mg
+	ra2fvbotmiss: ra2_allies_ifv_missile
+	ra2fvbotrep: ra2_allies_ifv_repair
 	ra2gaairc: ra2_allies_airforcecommandhq
 	ra2gacnst: ra2_allies_alliedconstructionyard
 	ra2gacsph: ra2_allies_chronosphere
@@ -168,7 +168,7 @@ files:
 	ra2_tany.shp: ra2_allies_tanyaii_ra2_tany.shp
 	ra2abrk.shp: ra2_allies_alliedbarracks_icon.shp
 	ra2adogicon.shp: ra2_allies_attackdog_icon.shp
-	ra2aegisicon.shp: ra2_allies_aegis_icon.shp
+	ra2aegisicon.shp: ra2_allies_aegiscruiser_icon.shp
 	ra2afacticon.shp: ra2_allies_alliedwarfactory_icon.shp
 	ra2ahqicon.shp: ra2_allies_airforcecommandhq_icon.shp
 	ra2amcvicon.shp: ra2_allies_alliedmobileconstructionvehicle_icon.shp
@@ -192,8 +192,8 @@ files:
 	ra2ggicon.shp: ra2_allies_guardiangi_icon.shp
 	ra2grizzly.shp: ra2_allies_grizzlytank_ra2grizzly.shp
 	ra2harriericon.shp: ra2_allies_harrier_icon.shp
-	ra2ifv.shp: ra2_allies_fv_6_ra2ifv.shp
-	ra2ifvicon.shp: ra2_allies_fv_6_icon.shp
+	ra2ifv.shp: ra2_allies_ifv_repair_ra2ifv.shp
+	ra2ifvicon.shp: ra2_allies_ifv_repair_icon.shp
 	ra2mcv.shp: ra2_allies_alliedmobileconstructionvehicle_ra2mcv.shp
 	ra2mirage.shp: ra2_allies_miragetank_ra2mirage.shp
 	ra2mirageicon.shp: ra2_allies_miragetank_icon.shp

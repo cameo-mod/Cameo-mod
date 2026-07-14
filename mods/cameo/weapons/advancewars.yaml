@@ -20,7 +20,7 @@ AWOoziumExplode:
 		Delay: 25
 		Explosions: awexplosion
 		ImpactSounds: AWExplosion2.wav
-	Warhead@6Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: corpse
 		ImpactSounds: AWSLIME3.wav
 
@@ -619,7 +619,7 @@ AWBuggyGrenade:
 AWVolcanoLavaSpawner:
 	Projectile: InstantExplode
 	Warhead@Dam: TargetDamage
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		AudibleThroughFog: true
 		ImpactSounds: AWEruption.wav
 	Warhead@1: FireShrapnel
@@ -1084,7 +1084,7 @@ AWMeteor:
 	Inherits: Atomic
 AWBlackBombExplode:
 	Inherits: MiniNuke
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: awblackbombfx
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false

@@ -1,6 +1,3 @@
-actor_steel_beholder =
-   .description = Armed with powerful anti-ground lasers.
-
 actor_steel_board_inf =
    .description = Armed with anti-vehicle grenades.
 

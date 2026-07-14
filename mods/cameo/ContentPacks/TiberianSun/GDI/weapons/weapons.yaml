@@ -1158,7 +1158,7 @@ TSIonCannon: ### THIS ONE GENERATES THE MAIN ION BEAM DUMMY
 		SmudgeType: Scorch
 		Size: 3,2
 		AirThreshold: 8c0
-	Warhead@3Effect: CreateEffect
+	Warhead@Effect: CreateEffect
 		Delay: 110
 		Image: tsioncannon
 		Explosions: ionring

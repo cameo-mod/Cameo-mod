@@ -4152,7 +4152,7 @@ RemovableDebuffDummy:
 		Count: 1
 
 BuildingExplodeProtoss:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: blue_building, blue_building_napalm, blue_med_frag, blue_poof, blue_small_building
 		Delay: 1
 		ImpactActors: false
@@ -4161,7 +4161,7 @@ BuildingExplodeProtoss:
 		Delay: 1
 
 HeliExplodeProtoss:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ValidTargets: Ground, Air
 		Explosions: blue_small_building
 		ImpactSounds: xplos.aud

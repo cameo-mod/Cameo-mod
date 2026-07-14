@@ -452,18 +452,18 @@ CuteKirovBomb:
 		Explosions: large_splash
 		ImpactSounds: gexpwasa.wav
 		ValidTargets: Water, Underwater
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: poof
 		ImpactSounds: siege_impact.aud
 		ImpactActors: false
 		ValidTargets: Ground, Ship
-	Warhead@Yuri_effect: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: spsydom.wav
 		ImpactActors: false
 		Explosions: yuriface
 		ExplosionPalette: ra2effect
 		Delay: 15
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect3: CreateEffect
 		ImpactSounds: iyurat2a.wav
 		ImpactActors: false
 		Explosions: controlwave

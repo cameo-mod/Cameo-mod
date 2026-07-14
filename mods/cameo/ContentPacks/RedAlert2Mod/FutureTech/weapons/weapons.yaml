@@ -416,38 +416,38 @@ AthenaLaser:
 		ValidTargets: Ground, Water, Air
 		Damage: 16
 		ValidRelationships: Neutral, Enemy
-	Warhead@4Effect: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ionbeam
 		ExplosionPalette: ra2unit
 		ImpactSounds: ion1.aud
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	Warhead@5Effect: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: ionbeam2
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	Warhead@6Effect: CreateEffect
+	Warhead@Effect3: CreateEffect
 		Explosions: ionbeam3
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	Warhead@7Effect: CreateEffect
+	Warhead@Effect4: CreateEffect
 		Explosions: ionbeam4
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	Warhead@8Effect: CreateEffect
+	Warhead@Effect5: CreateEffect
 		Explosions: ionbeam5
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	Warhead@9Effect: CreateEffect
+	Warhead@Effect6: CreateEffect
 		Explosions: ionbeam6
 		ExplosionPalette: ra2unit
 		ImpactActors: false
 		ValidTargets: Ground, Water, Air
-	Warhead@10Effect: CreateEffect
+	Warhead@Effect7: CreateEffect
 		Explosions: steel_ionexplosionsmall
 		ExplosionPalette: ra2effect
 		ImpactSounds: ion1.aud

@@ -1593,7 +1593,7 @@ RA2TRIPODPLAZMA:
 		DamageTypes: Prone75Percent, TriggerProne, ElectricityDeath
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 
@@ -1619,7 +1619,7 @@ RA2REVENANT:
 			Concrete: 30
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
@@ -1649,7 +1649,7 @@ RA2REVENANTAA:
 			Medium: 70
 			Heavy: 100
 			Concrete: 50
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
@@ -3103,7 +3103,7 @@ RA2DroneSparks:
 	Range: 1
 	ReloadDelay: 25
 	Projectile: InstantExplode
-	Warhead@Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2_emp_fx
 		ExplosionPalette: ra2effect
 
@@ -3437,14 +3437,14 @@ RA2PSIAtomic:
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 11c0
 		ImpactActors: false
-	Warhead@Yuri_effect: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: spsydom.wav
 		Explosions: yuriface
 		ExplosionPalette: ra2effect
 		AirThreshold: 11c0
 		ImpactActors: false
 		Delay: 10
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: iyurat2a.wav
 		Explosions: controlwave
 		AirThreshold: 11c0
@@ -5043,14 +5043,14 @@ RA2Mutate:
 		InvalidTargets: Vehicle, Structure, Wall, Husk, TerrorDrone, Hero, MCImmune
 		AffectsParent: True
 		DamageTypes: BruteMutate
-	Warhead@2eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: controlwave
 		ExplosionPalette: ra2effect
 		ImpactSounds: sgenon.wav
 		ImpactActors: false
 
 MutateEffect:
-	Warhead@1eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: mutate
 		ExplosionPalette: playerra2
 		UsePlayerPalette: true
@@ -5154,7 +5154,7 @@ RA2Atomic:
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
 	Warhead@11Dam_areanuke3: SpreadDamage
 		DamageTypes: Prone75Percent, TriggerProne, RadiationDeath, Incendiary
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -5328,12 +5328,12 @@ LightningBolt:
 		Falloff: 100, 67, 33, 0
 		Spread: 3333
 		Damage: 66666
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: wclbolt1,wclbolt2,wclbolt3
 		ExplosionPalette: ra2effect
 		ImpactSounds: sweastra.wav,sweastrb.wav,sweastrc.wav,sweastrd.wav
 		ValidTargets: Ground, Air, Water
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: large_explosion
 		ValidTargets: Ground, Air, Water
 	Warhead@6Eff: LeaveSmudge
@@ -5350,7 +5350,7 @@ psireveal:
 		ForceGround: true
 		Range: 1
 		ValidTargets: Ground, Water, Air
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: scan
 		ExplosionPalette: tseffect
 		ImpactSounds: spsyreve.wav

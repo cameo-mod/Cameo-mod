@@ -1359,7 +1359,7 @@ SteelInspectorIonCannon:
 	ReloadDelay: 25
 	TargetActorCenter: true
 	Projectile: InstantExplode
-	Warhead@Beam: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: steel_empressstationbeam
 		ImpactSounds: ion1.aud
 		ValidTargets: Ground, Water, Air
@@ -1777,49 +1777,6 @@ WhiteRabbitGatling:
 	Warhead@ChaingunPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Air, Water
 		Damage: 2
-
-SteelBeholderLaser:
-	Inherits: ^HeavyCannon
-	Inherits: ^TeslaWeapon
-	Inherits: ^RailgunWeapon
-	Inherits: ^LaserWeapon
-	ReloadDelay: 50
-	Range: 2500
-	Burst: 2
-	BurstDelays: 5
-	Report: bpriat1a.wav
-	Warhead@HeavyCannon: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@HeavyCannonPercentage: HealthPercentageDamage
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeapon: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaExtraDamage: SpreadDamage
-		Damage: 5000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeapon: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeapon: SpreadDamage
-		Damage: 10000
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 5
-		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
-
-SteelBeholderLaserE:
-	Inherits: SteelBeholderLaser
-	Range: 3333
-	Burst: 4
 
 HammerheadTankCannon:
 	Inherits: ^RA2MediumCannon

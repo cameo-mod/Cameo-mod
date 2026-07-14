@@ -1,7 +1,7 @@
 cabal_overkillcarryall_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Overkill Carryall
+		Name: Carryall
 	Aircraft:
 		TurnSpeed: 80
 		Speed: 149
@@ -15,7 +15,7 @@ cabal_overkillcarryall_husk:
 cabal_hunterkillermk2_husk:
 	Inherits: ^PlaneHusk
 	Tooltip:
-		Name: Hunter Killer MK2
+		Name: Overkill Fortress
 	Aircraft:
 		TurnSpeed: 80
 		Speed: 168
@@ -26,10 +26,21 @@ cabal_hunterkillermk2_husk:
 		Image: cabal_hunterkillermk2
 		PlayerPalette: player_rgba
 
+cabal_hunterkillermk2_drone_husk:
+	Inherits: ^PlaneHusk
+	Tooltip:
+		Name: Overkill Drone
+	Aircraft:
+		TurnSpeed: 80
+		Speed: 150
+	RenderSprites:
+		Image: cabal_hunterkillermk2_drone
+		PlayerPalette: player_rgba
+
 cabal_hunterkillermk1_husk:
 	Inherits: ^HelicopterHusk
 	Tooltip:
-		Name: Harpy
+		Name: Hunter Killer
 	Aircraft:
 		TurnSpeed: 80
 		Speed: 150

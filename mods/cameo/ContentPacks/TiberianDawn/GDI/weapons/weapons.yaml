@@ -1711,7 +1711,7 @@ TDIonCannon:
 		ValidTargets: Ground, Water, Air
 		AirThreshold: 99c0
 		Delay: 9
-	Warhead@2Effect: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: tsioncannon
 		Explosions: ionring
 		ExplosionPalette: tseffect
@@ -1723,7 +1723,7 @@ TDIonCannon:
 		GlowFadeFrames: 300
 		GlowFadeInFrames: 5
 		Delay: 11
-	Warhead@3Effect: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Image: ionsfx
 		Explosions: explode
 		ExplosionPalette: tseffect
