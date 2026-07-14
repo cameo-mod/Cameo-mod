@@ -732,6 +732,33 @@ CabalMantisGun:
 		Explosions: idle
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+CabalLegionGun:
+	Inherits: ^SmallArms
+	Inherits@2: ^LaserWeapon
+	ReloadDelay: 40
+	Report: lastur1.aud
+	Range: 6813
+	Projectile: LaserZap
+		Width: 80
+		ZOffset: 2047
+		Color: 66CC22BB
+		SecondaryBeam: true
+		SecondaryBeamWidth: 40
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 222244CC
+	Warhead@SmallArms: SpreadDamage
+		Damage: 60000
+	Warhead@SmallArmsPercentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 60000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 30
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_s
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
 CabalManticoreMissiles:
 	Inherits: ^Grenade
 	Inherits@2: ^ShrapnelWeapon
@@ -792,11 +819,11 @@ CabalRocketCyborgRockets:
 	Inherits: ^LightMissile
 	Inherits@2: ^MediumMissile
 	Inherits@3: ^CabalMissile
-	Burst: 1
+	Burst: 3
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 52
-	Range: 7438
+	Range: 8753
 	Warhead@LightMissile: SpreadDamage
 		Damage: 6000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
@@ -820,7 +847,7 @@ CabalMothershipRockets:
 	ReloadDelay: 34
 	Burst: 4
 	BurstDelays: 2
-	Range: 4600
+	Range: 5846
 	MinRange: 920
 	Report: rketinf1.aud
 	Projectile: Missile
@@ -845,54 +872,54 @@ CabalMothershipRockets:
 		ContrailEndColor: FFFFFF
 	Warhead@TeslaWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
 	Warhead@TeslaExtraDamage: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1000
+		Damage: 5000
 	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 5
 	Warhead@HeavyMissile: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
 	Warhead@HeavyMissilePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 5
 	Warhead@MediumChemicalWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
 	Warhead@MediumChemicalWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1000
+		Damage: 5000
 	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 5
 	Warhead@MediumFlameWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
 	Warhead@MediumFlameWeaponFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1000
+		Damage: 5000
 	Warhead@MediumFlameWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 5
 	Warhead@Grenade: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
 	Warhead@GrenadeFriendlyFire: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1000
+		Damage: 5000
 	Warhead@GrenadePercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 5
 	Warhead@ArrowWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 2000
+		Damage: 10000
 	Warhead@ArrowWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
-		Damage: 1
+		Damage: 5
 	Warhead@EMPUnit: AffectsIntegrity
-		Damage: 6000
+		Damage: 30000
 		Spread: 600
 	Warhead@Effect: CreateEffect
 		Image: cabal_missileexplosion
@@ -908,7 +935,7 @@ CabalWaspLaser:
 	Inherits: ^LaserWeapon
 	Report: cygun1.aud
 	ReloadDelay: 20
-	Range: 4600
+	Range: 6420
 	Projectile: LaserZap
 		Width: 36
 		Duration: 5
@@ -920,13 +947,13 @@ CabalWaspLaser:
 		SecondaryBeamColor: 444488FF
 	ValidTargets: Ground, Water, Air
 	Warhead@LaserWeapon: SpreadDamage
-		Damage: 2000
+		Damage: 4000
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
-		Damage: 1
+		Damage: 2
 		ValidTargets: Ground, Water, Air
 	Warhead@LaserExtraDamage: SpreadDamage
-		Damage: 1000
+		Damage: 2000
 		ValidTargets: Ground, Water, Air
 	Warhead@Effect: CreateEffect
 		Image: cabal_laserimpact_s
@@ -937,7 +964,7 @@ CabalWaspLaser:
 CabalWaspLaserStriker:
 	Inherits: CabalWaspLaser
 	ReloadDelay: 18
-	Range: 5000
+	Range: 6309
 	Burst: 2
 	BurstDelays: 3
 
@@ -949,15 +976,15 @@ CabalAscendedRockets:
 	BurstDelays: 8
 	Report: rketinf1.aud
 	ReloadDelay: 42
-	Range: 8468
+	Range: 6349
 	Warhead@LightMissile: SpreadDamage
-		Damage: 6000
+		Damage: 12000
 	Warhead@LightMissilePercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 6
 	Warhead@MediumMissile: SpreadDamage
-		Damage: 6000
+		Damage: 12000
 	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		Damage: 3
+		Damage: 6
 
 CabalRavagerPlasma:
 	Inherits: ^MediumChemicalWeapon
@@ -1619,6 +1646,9 @@ CabalRavagerPlasmaNeutron:
 		ImpactSounds: expnew12.aud
 
 CabalBeholderLaser:
+	Inherits: ^HeavyCannon
+	Inherits: ^TeslaWeapon
+	Inherits: ^RailgunWeapon
 	Inherits: ^LaserWeapon
 	Report: obelcor3.aud
 	ReloadDelay: 50
@@ -1632,6 +1662,27 @@ CabalBeholderLaser:
 		SecondaryBeam: true
 		SecondaryBeamWidth: 30
 		SecondaryBeamZOffset: 2047
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeapon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaExtraDamage: SpreadDamage
+		Damage: 5000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@TeslaWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 10000
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 5
+		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
 	Warhead@LaserWeapon: SpreadDamage
 		Damage: 10000
 		DamageTypes: Prone100Percent, TriggerProne, ElectricityDeath, Tesla
