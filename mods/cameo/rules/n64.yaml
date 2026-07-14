@@ -44,19 +44,19 @@ World:
 		ClassName: Light Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e1,e1,e3,e3,bggy
+		SupportActors: e1,e1,e1,e1,e1,e1,e3,e3,td_nod_buggy
 	StartingUnits@heavyn64noda:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e3,e3,ltnk,ltnk,ftnk
+		SupportActors: e1,e1,e1,e1,e3,e3,td_nod_lighttank,td_nod_lighttank,td_nod_flametank
 	StartingUnits@heavyn64nodb:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: n64nod
 		BaseActor: mcv.n64nod
-		SupportActors: e1,e1,e1,e1,e1,e3,e3,e3,ftnk,ftnk
+		SupportActors: e1,e1,e1,e1,e1,e3,e3,e3,td_nod_flametank,td_nod_flametank
 
 ####################################################################################################
 #		N64 - STRUCTURES
@@ -539,7 +539,7 @@ N64HAND:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Hand of Nod
+		Name: td_nod_handofnod of Nod
 	ProvidesPrerequisite:
 		Prerequisite: barracks
 	Buildable:
@@ -1405,7 +1405,7 @@ N64SAM:
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: SAM site
+		Name: td_nod_samsite site
 	Buildable:
 		BuildPaletteOrder: 50
 		Queue: Defence, RADefence
@@ -2122,7 +2122,7 @@ N64BIKE:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Recon Bike
+		Name: Recon td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

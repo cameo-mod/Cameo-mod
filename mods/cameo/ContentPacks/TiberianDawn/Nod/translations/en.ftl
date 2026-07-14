@@ -32,7 +32,7 @@ actor_bike =
    .description = Scout vehicle armed with rockets.
       Can attack aircraft.
         Strong vs Vehicles
-   .name = Recon Bike
+   .name = Recon td_nod_reconbike
 
 actor_ltnk =
    .description = Fast, light tank.
@@ -82,8 +82,8 @@ actor_tmpl =
    .nuke-name = Nuclear Missile Silo
 
 actor_gun =
-   .tdname = Nod Gun Turret
-   .raname = Allied Gun Turret
+   .tdname = Nod td_nod_gunturret Turret
+   .raname = Allied td_nod_gunturret Turret
    .description = Anti-tank base defense.
         Strong vs Vehicles
 
@@ -94,8 +94,8 @@ actor_nalasr =
         Strong vs Infantry
 
 actor_sam =
-   .tdname = Nod SAM Site
-   .raname = Soviet SAM Site
+   .tdname = Nod td_nod_samsite Site
+   .raname = Soviet td_nod_samsite Site
    .ra2name = Patriot Missile System
    .description = Anti-aircraft defense.
       Requires power to operate.
@@ -133,7 +133,7 @@ actor_blackhandlaser =
         Strong vs ground targets
 
 actor_blackhandflamer =
-   .name = Black Hand Flamer
+   .name = Black td_nod_handofnod Flamer
    .description = Elite stealth flamethrower.
         Strong vs Infantry, Buildings
 
@@ -192,7 +192,7 @@ upgrade_tiberiuminfusion =
 
 upgrade_improvedartilleries =
    .description = Increases Firepower and Range of all Artilleries by 25%.
-      Increases Range of Gun Turrets and the SSM by 10%.
+      Increases Range of td_nod_gunturret Turrets and the SSM by 10%.
 
 upgrade_elementalwarfare =
    .description = Increases damage of all flame and chemical weapons by 25%.
@@ -212,11 +212,11 @@ upgrade_blackmarketupgrades =
    .description = Gives certain units new or additional weapons:
       Minigunner: Gets a Laser Rifle.
       Buggy Mk1 and Mk2: Adds a Flamethrower.
-      Recon Bike: Adds a Point Defense Laser.
+      Recon td_nod_reconbike: Adds a Point Defense Laser.
       Light Tank Mk1 and Mk2: Adds a Missile Launcher.
       Apache: Adds Missile Launchers.
       Artillery and Specter: Increases damage and spread of the warhead makes it more effective against vehicles.
-      Gun Turret and Attack Submarine: Increases damage and spread of the warhead.
+      td_nod_gunturret Turret and Attack Submarine: Increases damage and spread of the warhead.
 
 upgrade_advancedguerillatactics =
    .description = TEAM UPGRADE

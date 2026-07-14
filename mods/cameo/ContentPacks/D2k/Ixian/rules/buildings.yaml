@@ -546,7 +546,7 @@ machine_gun_turret.ixian:
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Machine Gun Turret
+		Name: Machine td_nod_gunturret Turret
 	Health:
 		HP: 75000
 	BodyOrientation:
@@ -610,7 +610,7 @@ medium_gun_turret.ixian:
 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 	Inherits@Barrel: ^D2K_ReinforcedBarrel
 	Tooltip:
-		Name: Gun Turret
+		Name: td_nod_gunturret Turret
 	Valued:
 		Cost: 1000
 	Buildable:
@@ -907,9 +907,9 @@ large_gun_turret.ixian:
 # 		Icons:
 # 			1: deathhand
 # 		Names:
-# 			1: Death Hand
+# 			1: Death td_nod_handofnod
 # 		Descriptions:
-# 			1: Launches a death hand missile at a target location
+# 			1: Launches a death td_nod_handofnod missile at a target location
 # 		MissileWeapons:
 # 			1: deathhand
 # 		BeaconPosters:

@@ -9456,7 +9456,7 @@ ra1_allies_alliedgunturret:
 	Valued:
 		Cost: 800
 	Tooltip:
-		Name: Allied Gun Turret
+		Name: Allied td_nod_gunturret Turret
 	Building:
 		BuildSounds: placbldg.aud, build5.aud
 	Health:
@@ -9504,7 +9504,7 @@ ra1_allies_alliedaagun:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Allied AA Gun
+		Name: Allied AA td_nod_gunturret
 	Selectable:
 		Bounds: 1024, 1440, 0, -240
 	SelectionDecorations:
@@ -9685,7 +9685,7 @@ ra1_soviet_samsite:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: Soviet SAM Site
+		Name: Soviet td_nod_samsite Site
 	Building:
 		Footprint: xx
 		Dimensions: 2,1

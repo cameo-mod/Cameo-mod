@@ -1,7 +1,7 @@
 NODWEAP:
 	Inherits: WEAP
 	Tooltip:
-		Name: Black Hand Factory
+		Name: Black td_nod_handofnod Factory
 	-Buildable:
 	Production@NORMAL:
 		Produces: Vehicle
@@ -43,18 +43,18 @@ NODWEAP:
 		String: Biohazard
 
 RNBGGY:
-	Inherits: BGGY
+	Inherits: td_nod_buggy
 	RenderSprites:
-		Image: BGGY
+		Image: td_nod_buggy
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 
 RNBIKE:
-	Inherits: BIKE
+	Inherits: td_nod_reconbike
 	RenderSprites:
-		Image: BIKE
+		Image: td_nod_reconbike
 	Buildable:
 		Queue: Vehicle
 		Prerequisites: vehicleproduction
@@ -79,7 +79,7 @@ RNAPC.Husk:
 		Image: rnapc
 
 RNLTNK:
-	Inherits: LTNK
+	Inherits: td_nod_lighttank
 	Valued:
 		Cost: 670
 	Tooltip:
@@ -107,7 +107,7 @@ RNLTNK.Husk:
 		Image: rnltnk
 
 RNFTNK:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	Valued:
 		Cost: 600
 	Tooltip:
@@ -140,7 +140,7 @@ RNFTNK.Husk:
 NODBIO:
 	Inherits: bio
 	Tooltip:
-		Name: Black Hand Biological Lab
+		Name: Black td_nod_handofnod Biological Lab
 	TooltipDescription@ally:
 		Description: Produces special infantry units.
 	TooltipDescription@other:
@@ -160,21 +160,21 @@ NODBIO:
 NODBIO.Husk:
 	Inherits: bio.Husk
 	Tooltip:
-		Name: Black Hand Biological Lab (Destroyed)
+		Name: Black td_nod_handofnod Biological Lab (Destroyed)
 
 RNE4:
-	Inherits: E4
+	Inherits: td_nod_flamethrower
 	RenderSprites:
-		Image: E4
+		Image: td_nod_flamethrower
 	Buildable:
 		Prerequisites: nodbio
 		Queue: Biolab.TECHNOD
 	-MapEditorData:
 
 RNE5:
-	Inherits: E5
+	Inherits: td_nod_chemicalwarrior
 	RenderSprites:
-		Image: E5
+		Image: td_nod_chemicalwarrior
 	Buildable:
 		Prerequisites: nodbio
 		Queue: Biolab.TECHNOD
@@ -577,7 +577,7 @@ aoecobra:
 		ValidTypes: vehicle ##########
 	RenderSprites:
 ###########################################################################################
-## Black Hand Custom
+## Black td_nod_handofnod Custom
 ###########################################################################################
 
 BHFACT:
@@ -609,7 +609,7 @@ BHFACT:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: mcv.nod
+		IntoActor: td_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -727,7 +727,7 @@ BHSILO:
 	RenderSprites:
 		Image: silo
 BHHAND:
-	Inherits: HAND
+	Inherits: td_nod_handofnod
 	Tooltip:
 		Name: Biolab
 	Buildable:
@@ -855,7 +855,7 @@ BHMIG:
 	Tooltip:
 		Name: Black Plane
 	Armament@GUNS:
-		Name: gun
+		Name: td_nod_gunturret
 		Weapon: TSTurretLaserFire
 		LocalOffset: 1024,0,-85
 	Armament@BOMBS:
@@ -890,7 +890,7 @@ BHEYE:
 		Image: eye
 
 BHTMPL:
-	Inherits: TMPL
+	Inherits: td_nod_templeofnod
 	Inherits@IDISABLE: ^DisabledOverlay
 	Inherits@shape: ^3x2Shape
 	HitShape:
@@ -909,10 +909,10 @@ BHTMPL:
 		Description: Provides Nuclear Strike support power.\nUnlocks Stealth Tank, Chem. Warrior and Obelisk of Light.\nRequires power to operate.
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
-		Image: tmpl
+		Image: td_nod_templeofnod
 
 BHGUN:
-	Inherits: GUN
+	Inherits: td_nod_gunturret
 	Valued:
 		Cost: 800
 	Tooltip:
@@ -928,25 +928,25 @@ BHGUN:
 	Power:
 		Amount: -30
 	RenderSprites:
-		Image: gun
+		Image: td_nod_gunturret
 
 BHSAM:
-	Inherits: SAM
+	Inherits: td_nod_samsite
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: hand
+		Prerequisites: td_nod_handofnod
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: sam
+		Image: td_nod_samsite
 
 BHOBLI:
-	Inherits: OBLI
+	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: bhtmpl, ~techlevel.high
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: obli
+		Image: td_nod_obeliskoflight
 
 BHGTWR:
 	Inherits: GTWR
@@ -984,9 +984,9 @@ BHBRIK:
 		Type: Heavy
 
 BHBIKE:
-	Inherits: BIKE
+	Inherits: td_nod_reconbike
 	Tooltip:
-		Name: Black Bike
+		Name: Black td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

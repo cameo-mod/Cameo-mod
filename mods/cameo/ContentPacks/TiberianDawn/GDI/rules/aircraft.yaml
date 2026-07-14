@@ -116,10 +116,10 @@ A10:
 		Speed: 250
 		Repulsable: False
 	AttackBomber:
-		Armaments: gun, bombs
+		Armaments: td_nod_gunturret, bombs
 		FacingTolerance: 32
 	Armament@GUNS:
-		Name: gun
+		Name: td_nod_gunturret
 		Weapon: Vulcan
 		LocalOffset: 1024,0,-85
 	WithMuzzleOverlay:

@@ -1,4 +1,4 @@
-tran.nod:
+td_nod_chinooktransport:
 	Inherits: TRAN
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
@@ -8,20 +8,20 @@ tran.nod:
 		Name: Nod Chinook Transport
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~hpad.nod
+		Prerequisites: ~td_nod_helipad
 		Queue: Aircraft, RAAircraft
 		Description: actor_tran.description
 	EjectOnDeath:
-		PilotActor: e1.nod
+		PilotActor: td_nod_minigunner
 	Cargo:
 		UnloadVoice: Move
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 8
-		InitialUnits: e1.nod, e3.nod, e4, e5, cheme3, tsblackhandlaser, tsstealthsoldier, tsblackhandflamer
+		InitialUnits: td_nod_minigunner, td_nod_rocketsoldier, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalrocketsoldier, td_nod_lasertrooper, td_nod_stealthsoldier, td_nod_blackhandflamer
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
 
-HELI:
+td_nod_apacheattackhelicopter:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -40,7 +40,7 @@ HELI:
 		Name: Apache Attack Helicopter
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~hpad.nod
+		Prerequisites: ~td_nod_helipad
 		Queue: Aircraft, RAAircraft
 		Description: actor_heli.description
 	Aircraft:
@@ -63,7 +63,7 @@ HELI:
 		LocalOffset: 100,-250,-100, 100,250,-100
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	AttackAircraft:
 		FacingTolerance: 10
 		AttackType: Hover
@@ -81,7 +81,7 @@ HELI:
 	SpawnActorOnDeath:
 		Actor: HELI.Husk
 	EjectOnDeath:
-		PilotActor: e5
+		PilotActor: td_nod_chemicalwarrior
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -91,15 +91,15 @@ HELI:
 	ReloadAmmoPool:
 		Delay: 8
 		Count: 1
-	ReloadAmmoDelayMultiplier@up_blackmarketupgrades:
-		RequiresCondition: up_blackmarketupgrades
+	ReloadAmmoDelayMultiplier@td_nod_upgrade_blackmarketupgrades:
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 		Modifier: 50
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
 		PipCount: 4
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
 HELI.Husk:
 	Inherits: ^HelicopterHusk
@@ -112,9 +112,9 @@ HELI.Husk:
 		Offset: 0,0,85
 		Sequence: rotor
 	RenderSprites:
-		Image: heli
+		Image: td_nod_apacheattackhelicopter
 
-nodvenom:
+td_nod_venom:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -137,7 +137,7 @@ nodvenom:
 		Name: Venom
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~hpad.nod, td_nod_templeprime, ~upnodvenom
+		Prerequisites: ~td_nod_helipad, td_nod_templeprime, ~td_nod_promotion_upgradeupnodvenomname
 		Queue: Aircraft, RAAircraft
 		Description: actor_venom.description
 	Aircraft:
@@ -161,18 +161,18 @@ nodvenom:
 	SpawnActorOnDeath:
 		Actor: nodvenom.husk
 	EjectOnDeath:
-		PilotActor: tsstealthsoldier
+		PilotActor: td_nod_stealthsoldier
 	SelectionDecorations:
-	ReloadAmmoDelayMultiplier@up_elitecapacitors:
+	ReloadAmmoDelayMultiplier@td_nod_upgrade_elitecapacitors:
 		Modifier: 85
-		RequiresCondition: up_elitecapacitors
+		RequiresCondition: td_nod_upgrade_elitecapacitors
 	GrantCondition@gatling:
 		Condition: cloak-force-disabled
 		RequiresCondition: gatling
 	Selectable:
 		DecorationBounds: 1280, 1024
 	RenderSprites:
-		Image: nodvenom
+		Image: td_nod_venom
 	AmmoPool:
 		Ammo: 7
 		AmmoCondition: ammo
@@ -186,7 +186,7 @@ nodvenom:
 	Cloak:
 		UncloakOn: Attack, Damage
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elitecapacitors
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elitecapacitors
 
 nodvenom.husk:
 	Inherits: ^SmallHelicopterHusk
@@ -196,4 +196,4 @@ nodvenom.husk:
 		TurnSpeed: 16
 		Speed: 186
 	RenderSprites:
-		Image: nodvenom
+		Image: td_nod_venom

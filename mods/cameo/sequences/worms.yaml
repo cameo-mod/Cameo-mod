@@ -767,7 +767,7 @@ worms_mole:
 wormbuggy:
 	idle: worms_taxi
 		Facings: -8
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -796,7 +796,7 @@ wormbuggy:
 worms_moai:
 	idle: worms_moai
 		Facings: 8
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -824,11 +824,11 @@ worms_moai:
 	#	AddExtension: False
 
 wormbuggy.destroyed:
-	idle: bggy
+	idle: td_nod_buggy
 		Facings: 32
 		UseClassicFacings: True
 		ZOffset: -512
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True

@@ -1399,7 +1399,7 @@ CITYSTATION:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 80
-		Description: Provides Railway Gun support power.
+		Description: Provides Railway td_nod_gunturret support power.
 		Prerequisites: Fire Department, Police Department, Industrial, cityharbor, ~techlevel.superweapons
 	Building:
 		Footprint: xx xx
@@ -1428,7 +1428,7 @@ CITYSTATION:
 		Cursor: attackmove
 		Icon: emp
 		ChargeInterval: 1500
-		Name: Railway Gun
+		Name: Railway td_nod_gunturret
 		Description: An unseen underground bullet train\nfires heavy artillery at the target.
 		EndChargeSpeechNotification:
 		SelectTargetSpeechNotification:
@@ -1706,7 +1706,7 @@ CITYPOLICEOFFICER:
 		BuildDuration: 55
 		BuildDurationModifier: 100
 		Queue: Vehicle, RAVehicle
-		Description: Law enforcement armed with a pistol.\nCan be upgraded to have pistol replaced with Submachine gun\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
+		Description: Law enforcement armed with a pistol.\nCan be upgraded to have pistol replaced with Submachine td_nod_gunturret\n Strong vs Infantry\n Weak vs Vehicles, Aircraft
 	Mobile:
 		Speed: 56
 	Health:

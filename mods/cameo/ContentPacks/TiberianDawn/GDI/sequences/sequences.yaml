@@ -111,7 +111,7 @@ gdiarcher:
 
 mlrs:
 	Defaults:
-		Filename: mlrs.shp
+		Filename: td_nod_ssmlauncher_mlrs.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -131,7 +131,7 @@ mlrs:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: mlrsicnh.shp
+		Filename: td_nod_ssmlauncher_icon.shp
 
 apc:
 	Defaults:
@@ -228,7 +228,7 @@ gdifact:
 		Length: *
 		Tick: 80
 	icon:
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 
@@ -498,7 +498,7 @@ e1:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: e1icnh.shp
+		Filename: td_nod_minigunner_icon.shp
 
 e2:
 	Inherits: ^InfantryOverlays
@@ -595,7 +595,7 @@ e2:
 e3:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e3.shp
+		Filename: td_nod_rocketsoldier_e3.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -682,13 +682,13 @@ e3:
 		Filename: electro.shp
 		Length: *
 	die-crushed:
-		Filename: e3rot.shp
+		Filename: td_nod_rocketsoldier_e3rot.shp
 		Start: 16
 		Length: 4
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: e3icnh.shp
+		Filename: td_nod_rocketsoldier_icon.shp
 
 cncpt:
 	Defaults:

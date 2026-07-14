@@ -1083,12 +1083,12 @@ arty.steel:
 		InterpolatedFacings: 32
 		Tick: 80
 		ShadowStart: 256
-	stand-arty:
+	stand-td_nod_artillery:
 		Facings: -8
 		InterpolatedFacings: 32
 		ShadowStart: 168
 		Filename: steel_qtankart.shp
-	run-arty:
+	run-td_nod_artillery:
 		Start: 8
 		Length: 10
 		Facings: -8
@@ -1096,7 +1096,7 @@ arty.steel:
 		Tick: 80
 		ShadowStart: 176
 		Filename: steel_qtankart.shp
-	attack-arty:
+	attack-td_nod_artillery:
 		Start: 88
 		Length: 10
 		Facings: -8

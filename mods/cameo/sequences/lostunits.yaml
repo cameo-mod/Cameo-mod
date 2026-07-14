@@ -67,7 +67,7 @@ rnltnk:
 rnapc:
 	idle:
 		Facings: 16
-	turret: bggy
+	turret: td_nod_buggy
 		Start: 32
 		Facings: 32
 		UseClassicFacings: True
@@ -375,7 +375,7 @@ techrctiger:
 		AddExtension: False
 
 315weichafe:
-	Inherits: e4
+	Inherits: td_nod_flamethrower
 	icon: e2icnh.tem
 		AddExtension: False
 
@@ -737,7 +737,7 @@ bhreddragonemp:
 		ZOffset: 1023
 		
 bhbike:
-	Inherits: bike
+	Inherits: td_nod_reconbike
 
 bhweap:
 	Defaults: nodweap

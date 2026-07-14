@@ -32,11 +32,11 @@ CNCSS:
 	Armament@PRIMARY:
 		Weapon: NodTorpTube
 		LocalOffset: 256,128,0, 256,-128,0
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
 		Weapon: NodTorpTubeBlackMarket
 		LocalOffset: 256,128,0, 256,-128,0
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	RenderRangeCircle:
 	Targetable:
 		TargetTypes: Ground, Water, Ship, Submarine
@@ -53,7 +53,7 @@ CNCSS:
 		Image: cncss
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
 ssmsub:
 	Inherits: ^BoatUnit
@@ -73,7 +73,7 @@ ssmsub:
 		Name: Ballistic Missile Submarine
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cncspen, hq.nod
+		Prerequisites: ~cncspen, td_nod_communicationscenter
 		Queue: Naval, RANaval
 		Description: actor_msub.description
 	Mobile:
@@ -124,7 +124,7 @@ ssmsub:
 	RenderSprites:
 		Image: ssmsub
 	ActorStatValues:
-		Upgrades: up_elementalwarfare, up_improvedartilleries, up_guerillatactics, up_advancedguerillatactics
+		Upgrades: td_nod_upgrade_elementalwarfare, td_nod_upgrade_improvedartilleries, td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
 
 nodlasercorvette:
 	Inherits: ^BoatUnit
@@ -139,7 +139,7 @@ nodlasercorvette:
 		Name: Nod Laser Corvette
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~cncspen, tmpl
+		Prerequisites: ~cncspen, td_nod_templeofnod
 		Queue: Naval, RANaval
 		Description: actor_nodlasercorvette.description
 	Mobile:

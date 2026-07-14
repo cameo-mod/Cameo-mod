@@ -82,7 +82,7 @@ ts_nod_upgrade_tiberiumcoremissiles:
 	Buildable:
 		BuildPaletteOrder: 100
 		Queue: Research
-		Description: Procure tiberium core missile technology to Rocket Soldier, SAM Site, Attack Cycle and Stealth Tank, increasing their firepower.
+		Description: Procure tiberium core missile technology to Rocket Soldier, td_nod_samsite Site, Attack Cycle and Stealth Tank, increasing their firepower.
 		Prerequisites: ~ts_nod_techcenter, !ts_nod_upgrade_tiberiumcoremissiles
 	RenderSprites:
 		Image: tstiberiumcoremissilesicon

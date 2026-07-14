@@ -1343,13 +1343,13 @@ arty.steel:
 		PauseOnCondition: disabled
 		Voice: Move
 		SkipMakeAnimation: True
-	WithInfantryBody@arty:
+	WithInfantryBody@td_nod_artillery:
 		IdleSequences: idle
-		MoveSequence: run-arty
-		StandSequences: stand-arty
+		MoveSequence: run-td_nod_artillery
+		StandSequences: stand-td_nod_artillery
 		MinIdleDelay: 1
 		MaxIdleDelay: 2
-		DefaultAttackSequence: attack-arty
+		DefaultAttackSequence: attack-td_nod_artillery
 		RequiresCondition: deployed
 	BodyOrientation:
 		QuantizedFacings: 32

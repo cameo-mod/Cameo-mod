@@ -194,7 +194,7 @@ mindclass_turret_2:
 		Prerequisites: mindclass_drill1
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin gun defense.\n  Uses stone munition
+		Description: Twin td_nod_gunturret defense.\n  Uses stone munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -328,7 +328,7 @@ mindclass_turret_4:
 		Prerequisites: mindclass_drill2
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin gun defense.\n  Uses ra1_soviet_ironcurtain munition
+		Description: Twin td_nod_gunturret defense.\n  Uses ra1_soviet_ironcurtain munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -395,7 +395,7 @@ mindclass_turret_5:
 		Prerequisites: mindclass_drill3, mindclass_furnace
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin gun defense.\n  Uses coal munition
+		Description: Twin td_nod_gunturret defense.\n  Uses coal munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8
@@ -459,7 +459,7 @@ mindclass_turret_6:
 		Prerequisites: mindclass_furnace
 		Queue: Defence.MindustryClassic, RADefence.MindustryClassic
 		BuildDurationModifier: 40
-		Description: Twin gun defense.\n  Uses steel munition
+		Description: Twin td_nod_gunturret defense.\n  Uses steel munition
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 8

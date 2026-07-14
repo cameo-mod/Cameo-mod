@@ -129,7 +129,7 @@ upgrade_armorpiercingbullets =
       while also making them more effective against tank armor.
       Increases Minigunner and Shotgunner damage by 100%.
       Increases GDI ra1_allies_alliedsniper and A10 damage by 10%.
-      Also adds a machine gun to the Battle and Predator Tank and increases damage by 5%.
+      Also adds a machine td_nod_gunturret to the Battle and Predator Tank and increases damage by 5%.
 
 upgrade_heavyaircraftarmorplating =
    .description = Increases armor of Orcas, Firehawks, Chinooks and A10s by 50%.

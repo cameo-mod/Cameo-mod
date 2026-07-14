@@ -10,7 +10,7 @@
 	# 	InternalName: harkonnen
 	# 	Game: Dune Universe
 	# 	Side: Dune
-	# 	Description: House Harkonnen\nThe evil Harkonnen of the planet Giedi Prime\nwill stop at nothing to gain control of the spice.\nThey rely on brute force and atomic weapons to achieve their goals:\nwealth, and the destruction of House Atreides.\nTheir Specialities are Devastators and Annihilators.\nBonus: Explosions are more powerful\nSupport Power: Death Hand Missile
+	# 	Description: House Harkonnen\nThe evil Harkonnen of the planet Giedi Prime\nwill stop at nothing to gain control of the spice.\nThey rely on brute force and atomic weapons to achieve their goals:\nwealth, and the destruction of House Atreides.\nTheir Specialities are Devastators and Annihilators.\nBonus: Explosions are more powerful\nSupport Power: Death td_nod_handofnod Missile
 # 	FactionCA@Ordos:
 # 		Name: Ordos DU
 # 		InternalName: ordos
@@ -2479,7 +2479,7 @@
 # 	Valued:
 # 		Cost: 600
 # 	Tooltip:
-# 		Name: Machine Gun Turret
+# 		Name: Machine td_nod_gunturret Turret
 # 	Health:
 # 		HP: 75000
 # 	BodyOrientation:
@@ -2542,7 +2542,7 @@
 # 	Inherits@Armor: ^D2K_GeneralPurposeArmor
 # 	Inherits@Barrel: ^D2K_ReinforcedBarrel
 # 	Tooltip:
-# 		Name: Gun Turret
+# 		Name: td_nod_gunturret Turret
 # 	Valued:
 # 		Cost: 1000
 # 	Buildable:
@@ -3001,9 +3001,9 @@
 # 		Icons:
 # 			1: deathhand
 # 		Names:
-# 			1: Death Hand
+# 			1: Death td_nod_handofnod
 # 		Descriptions:
-# 			1: Launches a death hand missile at a target location
+# 			1: Launches a death td_nod_handofnod missile at a target location
 # 		MissileWeapons:
 # 			1: deathhand
 # 		BeaconPosters:
@@ -3601,7 +3601,7 @@
 # 	Inherits: palace
 # 	Buildable:
 # 		Prerequisites: research_centre, ~techlevel.high, ~faction.emperor
-# 		Description: Enables Death Hand Missile
+# 		Description: Enables Death td_nod_handofnod Missile
 # 		BuildLimit: 1
 # 	Valued:
 # 		Cost: 2000
@@ -5598,7 +5598,7 @@
 # 		BuildDuration: 375
 # 		BuildDurationModifier: 100
 # 		Prerequisites: ~faction.atreides, upgrade_heavy, ~techlevel.medium
-# 		Description: Stealth Heavy Carrier vehicle with machine gun\nCan carry 12 passengers\nDue to its giant size its very attractive to worms
+# 		Description: Stealth Heavy Carrier vehicle with machine td_nod_gunturret\nCan carry 12 passengers\nDue to its giant size its very attractive to worms
 # 		IconPalette: windows256
 # 	Valued:
 # 		Cost: 1000

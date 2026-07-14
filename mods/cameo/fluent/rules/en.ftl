@@ -332,7 +332,7 @@ actor_hbox =
 actor_agun =
    .description = Anti-air base defense.
     Requires power to operate.
-   .name = AA Gun
+   .name = AA td_nod_gunturret
 
 actor_gap =
    .name = ra1_allies_gapgenerator Generator
@@ -999,7 +999,7 @@ actor_forgotten_mutantmortarman =
 
 actor_forgotten_mutantsergeant =
    .name = Mutant Sergeant
-   .description = Elite mutant officer whose gun also reaches aircraft.
+   .description = Elite mutant officer whose td_nod_gunturret also reaches aircraft.
       Propaganda aura: nearby friendly units gain 10% firepower and speed, take 10% less damage, reload 10% faster, slowly heal and cannot be mind-controlled.
       Strong vs Infantry
       Weak vs Tanks
@@ -1053,7 +1053,7 @@ actor_forgotten_ghoststalker =
 
 actor_forgotten_raidercar =
    .name = Raider Car
-   .description = Fast scout car whose machine gun can also strafe aircraft.
+   .description = Fast scout car whose machine td_nod_gunturret can also strafe aircraft.
       Replaced by the Bowler after that promotion.
       Strong vs Infantry
       Weak vs Tanks
@@ -1179,7 +1179,7 @@ actor_forgotten_thumperbus =
 actor_forgotten_nomadbarracks =
    .name = Nomad Barracks
    .description = Rolling barracks that trains infantry anywhere on the map.
-      Nine garrisoned infantry fire from inside; its own gun covers the approaches.
+      Nine garrisoned infantry fire from inside; its own td_nod_gunturret covers the approaches.
       Maximum 1 can be built.
 
 actor_forgotten_mobileconstructionvehicle =
@@ -1297,7 +1297,7 @@ actor_forgotten_veinhole =
 
 actor_forgotten_machineguntower =
    .name = Machinegun Tower
-   .description = Scrap-built machine gun tower.
+   .description = Scrap-built machine td_nod_gunturret tower.
       Detects nearby cloaked enemies.
       Strong vs Infantry, Light vehicles
       Weak vs Tanks, Aircraft
@@ -1460,7 +1460,7 @@ actor_ts_nod_laserturret =
    Cannot attack Aircraft.
 
 actor_ts_nod_samsite =
-   .name = SAM Site
+   .name = td_nod_samsite Site
    .description = Anti-aircraft missile battery.
    Requires power to operate.
    Strong vs Aircraft.
@@ -1632,7 +1632,7 @@ upgrade_rocketenhancements =
    V1 Truck: 25%
    V2 Launcher: 20%
    Nuclear V2 Launcher, ra1_soviet_migattackbomber and Su-57: 15%
-   Missile Submarine, SAM Site and ra1_soviet_hindattackhelicopter: 10%
+   Missile Submarine, td_nod_samsite Site and ra1_soviet_hindattackhelicopter: 10%
    Mammoth Tank, Monster Tank and ra1_soviet_volkov: 5%
 
 upgrade_advancedthermobarics =
@@ -1739,8 +1739,8 @@ upgrade_personal_shield =
    .description = Gives personal shield generators to all infantry units.
 
 upgrade_d2k_siege_range_upgrade =
-   .description = All Tanks, Gun Turrets and Artillery gain increased range and damage.
-   Gun Turret, Ix Combat Tanks and Duelist Tanks: 10% higher range and 25% more damage.
+   .description = All Tanks, td_nod_gunturret Turrets and Artillery gain increased range and damage.
+   td_nod_gunturret Turret, Ix Combat Tanks and Duelist Tanks: 10% higher range and 25% more damage.
    Ix Siege Tank: 25% higher range and 50% more damage.
    Ix Combat Siege: 50% higher range and 100% more damage.
 
@@ -2001,7 +2001,7 @@ upgrade_sonicweaponry =
 upgrade_tsprojectileimprovements =
    .name = Projectile Improvements
    .description = Tech Upgrade (Only affects units of own faction)
-      Increases Damage and Range of Enforcers, Pitbulls, Hover MLRS and SAM Towers by 20%
+      Increases Damage and Range of Enforcers, Pitbulls, Hover MLRS and td_nod_samsite Towers by 20%
 
 upgrade_mechengineering =
    .name = ra1_allies_mechanic Engineering
@@ -2054,7 +2054,7 @@ template_advpower =
 template_barracks =
    .description = Trains infantry.
    .td-gdi = GDI Barracks
-   .td-nod = Hand of Nod
+   .td-nod = td_nod_handofnod of Nod
    .ra-soviet = Soviet Barracks
    .ra-allies = Allied Barracks
    .ra-japan = Japanese Barracks

@@ -1,4 +1,4 @@
-E1.NOD:
+td_nod_minigunner:
 	Inherits: ^E1
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
@@ -10,31 +10,31 @@ E1.NOD:
 		Name: Nod Minigunner
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~hand
+		Prerequisites: ~td_nod_handofnod
 		Queue: Infantry, RAInfantry
 		Description: actor_e1.description
 	Armament@PRIMARY: ##########
 		Weapon: M16
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: M16
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade: ##########
 		Weapon: M16Laser
 		LocalOffset: 300,0,200
 		FireDelay: 5
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: M16Laser
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-E3.Nod:
+td_nod_rocketsoldier:
 	Inherits: ^E3
 	Tooltip:
 		Name: Nod Rocket Soldier
@@ -44,11 +44,11 @@ E3.Nod:
 	Inherits@CyberneticModifications: ^CyberneticModifications
 	Inherits@decoration: ^NodRankDecoration
 	Buildable:
-		Prerequisites: ~hand, ~!upchemicalrocket
+		Prerequisites: ~td_nod_handofnod, ~!td_nod_promotion_unlockchemicalrocketsoldier
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-E4:
+td_nod_flamethrower:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -69,7 +69,7 @@ E4:
 		Cost: 200
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~hand, hq.nod, ~!upblackhandflamer
+		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~!td_nod_promotion_unlockblackhandflamer
 		Queue: Infantry, RAInfantry
 		Description: actor_e4.description
 	Mobile:
@@ -103,9 +103,9 @@ E4:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-E5:
+td_nod_chemicalwarrior:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -124,7 +124,7 @@ E5:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~hand, tmpl
+		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod
 		Queue: Infantry, RAInfantry
 		Description: actor_e5.description
 	Mobile:
@@ -159,11 +159,11 @@ E5:
 	RenderSprites:
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 	GrantExternalConditionToTransport:
 		Condition: ifv-chem
 
-RMBO.NOD:
+td_nod_commando:
 	Inherits: ^RMBO
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
@@ -173,11 +173,11 @@ RMBO.NOD:
 	Tooltip:
 		Name: Nod Commando
 	Buildable:
-		Prerequisites: ~hand, tmpl, ~!upnodvenom
+		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod, ~!td_nod_promotion_upgradeupnodvenomname
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-cheme3:
+td_nod_chemicalrocketsoldier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -207,7 +207,7 @@ cheme3:
 		Locomotor: chem
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~hand, ~upchemicalrocket
+		Prerequisites: ~td_nod_handofnod, ~td_nod_promotion_unlockchemicalrocketsoldier
 		Queue: Infantry, RAInfantry
 		Description: actor_cheme3.description
 	Armament@PRIMARY: ##########
@@ -235,9 +235,9 @@ cheme3:
 		Image: e3chem
 		PlayerPalette: raplayer
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-tsblackhandlaser:
+td_nod_lasertrooper:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -257,7 +257,7 @@ tsblackhandlaser:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~hand, td_nod_templeprime, upblackhandlaser
+		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, td_nod_promotion_unlocklasertrooper
 		Description: actor_blackhandlaser.description
 	Valued:
 		Cost: 700
@@ -285,9 +285,9 @@ tsblackhandlaser:
 	-WithInfantryBody:
 	RenderSprites:
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elitecapacitors, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elitecapacitors, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-tsblackhandflamer:
+td_nod_blackhandflamer:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -307,12 +307,12 @@ tsblackhandflamer:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~hand, hq.nod, ~upblackhandflamer
+		Prerequisites: ~td_nod_handofnod, td_nod_communicationscenter, ~td_nod_promotion_unlockblackhandflamer
 		Description: actor_blackhandflamer.description
 	Valued:
 		Cost: 600
 	Tooltip:
-		Name: Black Hand Flamer
+		Name: Black td_nod_handofnod Flamer
 	Health:
 		HP: 36000
 	ChangesHealth@SelfHealing:
@@ -344,9 +344,9 @@ tsblackhandflamer:
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-tsstealthsoldier:
+td_nod_stealthsoldier:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -364,7 +364,7 @@ tsstealthsoldier:
 	Buildable:
 		Queue: Infantry, RAInfantry
 		BuildPaletteOrder: 100
-		Prerequisites: ~hand, tmpl, ~upstealthsoldier
+		Prerequisites: ~td_nod_handofnod, td_nod_templeofnod, ~td_nod_promotion_upgradeupnodstealthname
 		Description: actor_stealthsoldier.description
 	Valued:
 		Cost: 500
@@ -397,9 +397,9 @@ tsstealthsoldier:
 		CloakSound: trans1.aud
 		UncloakSound: trans1.aud
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
-nodlasercommando:
+td_nod_lasercommando:
 	Inherits: ^Soldier
 	Inherits@deathanim: ^RA2InfantryDeathAnimations
 	Inherits@Template: ^HeroInfantryTemplate
@@ -430,7 +430,7 @@ nodlasercommando:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 50
-		Prerequisites: ~hand, td_nod_templeprime, ~upnodvenom
+		Prerequisites: ~td_nod_handofnod, td_nod_templeprime, ~td_nod_promotion_upgradeupnodvenomname
 		Queue: Infantry, RAInfantry
 		Description: actor_lasercommando.description
 	RenderSprites:
@@ -492,14 +492,14 @@ nodlasercommando:
 		RequiresSelection: true
 		FullSequence: pip-red
 		PipCount: 8
-	ReloadAmmoDelayMultiplier@up_elitecapacitors:
+	ReloadAmmoDelayMultiplier@td_nod_upgrade_elitecapacitors:
 		Modifier: 85
-		RequiresCondition: up_elitecapacitors
+		RequiresCondition: td_nod_upgrade_elitecapacitors
 	GrantCondition@gatling:
 		Condition: cloak-force-disabled
 		RequiresCondition: gatling
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elitecapacitors, up_tiberiuminfusion, up_cyberneticmodifications
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elitecapacitors, td_nod_upgrade_tiberiuminfusion, td_nod_upgrade_cyberneticmodifications
 
 	####################################################################################################
 	#		Upgrades GDI

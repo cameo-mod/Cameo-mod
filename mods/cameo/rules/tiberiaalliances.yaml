@@ -250,12 +250,12 @@ TABLACKHAND:
 	Valued:
 		Cost: 250
 	Tooltip:
-		Name: Black Hand
+		Name: Black td_nod_handofnod
 	Buildable:
 		BuildPaletteOrder: 30
 		Prerequisites: barracks, Addonshand2
 		Queue: Infantry, RAInfantry
-		Description: The Black Hand is a step up from the Rocket Squad, being a better-armoured anti-tank unit. Equipped with flamethrowers, they will cook a tank until it bursts, allowing the rest of your units to pass.
+		Description: The Black td_nod_handofnod is a step up from the Rocket Squad, being a better-armoured anti-tank unit. Equipped with flamethrowers, they will cook a tank until it bursts, allowing the rest of your units to pass.
 	Health:
 		HP: 14000
 	Armament@PRIMARY:
@@ -1382,14 +1382,14 @@ tagdiharv:
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
 		Image: tagdiharv
-tanodharv:
+td_nod_stealthharvester:
 	Inherits: HARV
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: vehicleproduction
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: tanodharv
+		Image: td_nod_stealthharvester
 
 tascrapbus:
 	Inherits: ^Tank
@@ -1821,7 +1821,7 @@ taupshield1:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: Upgrade the Armor of Attack Bike
+		Description: Upgrade the Armor of Attack td_nod_reconbike
 		Prerequisites: ~!taupshield1, vehicleproduction
 	Valued:
 		Cost: 1500
@@ -1982,7 +1982,7 @@ taupguidedmiss:
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: GDI Flak Bunker, adds a little SAM Launcher
+		Description: GDI Flak Bunker, adds a little td_nod_samsite Launcher
 		Prerequisites: ~!taupguidedmiss, tagdihq2
 	Valued:
 		Cost: 2000
@@ -3097,7 +3097,7 @@ Addonssam1:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
-		Name: SAM lvl 5
+		Name: td_nod_samsite lvl 5
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: ~tanodhq2, ~!Addonssam1
@@ -3116,7 +3116,7 @@ Addonssam2:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
-		Name: SAM lvl 10
+		Name: td_nod_samsite lvl 10
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~Addonssam1, ~!Addonssam2
@@ -3135,7 +3135,7 @@ Addonssam3:
 	Interactable:
 	ScriptTriggers:
 	Tooltip:
-		Name: SAM lvl 20
+		Name: td_nod_samsite lvl 20
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: ~Addonssam2, ~!Addonssam3
@@ -3952,7 +3952,7 @@ tanodhand:
 	Valued:
 		Cost: 500 #500
 	Tooltip:
-		Name: Nod Hand
+		Name: Nod td_nod_handofnod
 	Production@NORMAL:
 		Produces: Infantry
 	Production@CLASSICPRODUCTIONQUEUES:
@@ -4171,7 +4171,7 @@ tanodref:
 		BuildPaletteOrder: 110
 		Prerequisites: anypower
 	FreeActor:
-		Actor: tanodharv
+		Actor: td_nod_stealthharvester
 tamutref:
 	Inherits: tagdiref
 	Buildable:
@@ -5374,7 +5374,7 @@ tamgnest:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	Tooltip:
-		Name: Machine Gun Nest
+		Name: Machine td_nod_gunturret Nest
 	GrantConditionOnPrerequisite@levelupgrade1:
 		Condition: levelupgrade1
 		Prerequisites: upgrade.tamgnest1
@@ -5564,7 +5564,7 @@ tamgnod:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	Tooltip:
-		Name: Shredder Machine Gun
+		Name: Shredder Machine td_nod_gunturret
 	Armament:
 		Weapon: TSVulcanTower
 		LocalOffset: 300,60,600
@@ -5816,7 +5816,7 @@ tareapercann:
 	Valued:
 		Cost: 900
 	Tooltip:
-		Name: Reaper Machine Gun
+		Name: Reaper Machine td_nod_gunturret
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks, vehicleproduction

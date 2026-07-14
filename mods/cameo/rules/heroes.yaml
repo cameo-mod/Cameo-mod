@@ -974,7 +974,7 @@ TSNASHWA:
 		Queue: Heroes
 		BuildPaletteOrder: 120
 		Prerequisites: !1hero, ~anynod
-		Description: Permanently Stealthed until her weapon is fully charged up\nCan call Nod Bike
+		Description: Permanently Stealthed until her weapon is fully charged up\nCan call Nod td_nod_reconbike
 		IconPalette: ra2
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1075,7 +1075,7 @@ TSNASHWABIKE:
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: NashwaBike.TSNod
-		Description: Autonomous Bike that helps Nashwa get over long distances\nShoots flame rockets
+		Description: Autonomous td_nod_reconbike that helps Nashwa get over long distances\nShoots flame rockets
 		Prerequisites: ~!TSNASHWABIKE
 		BuildLimit: 1
 		IconPalette: ra2
@@ -1091,7 +1091,7 @@ TSNASHWABIKE:
 	Health:
 		HP: 40000
 	Tooltip:
-		Name: Nod Bike
+		Name: Nod td_nod_reconbike
 	RenderSprites:
 		Image: tsnashwabike
 	WithFacingSpriteBody:
@@ -1138,7 +1138,7 @@ TSNASHWABIKE.cd:
 	ProvidesPrerequisite@nashwabike:
 		Prerequisite: TSNASHWABIKE
 	Tooltip:
-		Name: Nod Bike (Destroyed)
+		Name: Nod td_nod_reconbike (Destroyed)
 	RenderSprites:
 		Image: TSNASHWABIKE
 	KillsSelf:
@@ -1329,7 +1329,7 @@ mutantseverus:
 		Queue: Heroes
 		BuildPaletteOrder: 120
 		Prerequisites: !1hero, ~faction.forgotten
-		Description: Unable to use his left hand and full of hatred - he is equipped with Tiberium Flachette SMG and\npowerful aura that spreads radiation which hurts enemies but heals allies
+		Description: Unable to use his left td_nod_handofnod and full of hatred - he is equipped with Tiberium Flachette SMG and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		IconPalette: ra2
 		BuildDuration: 500
 		BuildDurationModifier: 100
@@ -1416,7 +1416,7 @@ severuscabal:
 		Queue: Heroes
 		BuildPaletteOrder: 120
 		Prerequisites: !1hero, ~faction.cabal
-		Description: Unable to use his left hand and full of hatred - he is equipped with Super Shotgun and\npowerful aura that spreads radiation which hurts enemies but heals allies
+		Description: Unable to use his left td_nod_handofnod and full of hatred - he is equipped with Super Shotgun and\npowerful aura that spreads radiation which hurts enemies but heals allies
 		BuildDuration: 500
 		BuildDurationModifier: 100
 	Valued:
@@ -2854,7 +2854,7 @@ Rockets:
 Spreader:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Multi-direction photon gun
+		Name: Multi-direction photon td_nod_gunturret
 	Buildable:
 		BuildPaletteOrder: 20
 		Queue: Upgrade.Contestant
@@ -2918,11 +2918,11 @@ Speedboost:
 Orb:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Machine gun firing remote
+		Name: Machine td_nod_gunturret firing remote
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Upgrade.Contestant
-		Description: Machine gun firing remote.\n Increases attack range by 1 tile.
+		Description: Machine td_nod_gunturret firing remote.\n Increases attack range by 1 tile.
 		Prerequisites: ~1hero
 	Valued:
 		Cost: 1000

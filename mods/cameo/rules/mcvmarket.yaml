@@ -63,9 +63,9 @@ MM1MCV:
 		Image: mm1mcv
 
 MM2MCV:
-	Inherits@MCV: MCV.NOD
+	Inherits@MCV: td_nod_mobileconstructionvehicle
 	Transforms:
-		IntoActor: fact.nod
+		IntoActor: td_nod_constructionyard
 	Tooltip:
 		Name: Mobile Construction Vehicle (Nod)
 	Buildable:
@@ -504,7 +504,7 @@ mmmcv.imperium:
 mmmcv.shadowhand:
 	Inherits@MCV: mcv.shadowhand
 	Tooltip:
-		Name: Construction Rig (Shadow Hand)
+		Name: Construction Rig (Shadow td_nod_handofnod)
 	Buildable:
 		BuildPaletteOrder: 310
 		-Description:
@@ -549,7 +549,7 @@ mmmcv.xenite:
 mmmcv.togran:
 	Inherits@MCV: mcv.togran
 	Tooltip:
-		Name: Construction Rig (Shadow Hand)
+		Name: Construction Rig (Shadow td_nod_handofnod)
 	Buildable:
 		BuildPaletteOrder: 310
 		-Description:

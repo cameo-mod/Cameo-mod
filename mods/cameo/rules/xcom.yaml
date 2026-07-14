@@ -197,12 +197,12 @@ ShotgunUpgrade:
 		Range: 1c0
 ShardgunUpgrade:
 	Tooltip:
-		Name: Shard Gun Upgrade
+		Name: Shard td_nod_gunturret Upgrade
 	Buildable:
 		Prerequisites: ~xcomhq
 		BuildPaletteOrder: 1
 		Queue: Addons
-		Description: Upgrades the Shotgun to the Shard Gun
+		Description: Upgrades the Shotgun to the Shard td_nod_gunturret
 	Valued:
 		Cost: 2500
 	RenderSprites:
@@ -219,9 +219,9 @@ ShardgunUpgrade:
 		ChargeInterval: 0
 		StartFullyCharged: true
 		Names:
-			1: Shard Gun Upgrade
+			1: Shard td_nod_gunturret Upgrade
 		Descriptions:
-			1: Upgrades the Shotgun to the Shard Gun
+			1: Upgrades the Shotgun to the Shard td_nod_gunturret
 		Condition: ShardgunUpgrade
 		Duration: 0
 		SelectTargetSpeechNotification: SelectTarget
@@ -280,7 +280,7 @@ CarapaceArmorUpgrade:
 	Valued:
 		Cost: 1000
 	RenderSprites:
-		Image: tsblackhandlaser
+		Image: td_nod_lasertrooper
 	Interactable:
 	GrantExternalConditionPowerCA@IRONCURTAIN:
 		OrderName: CarapaceArmorUpgrade
@@ -450,7 +450,7 @@ RocketLauncherUpgrade:
 # 	Valued:
 # 		Cost: 2000
 # 	RenderSprites:
-# 		Image: tsblackhandlaser
+# 		Image: td_nod_lasertrooper
 # 	Interactable:
 # 	AlwaysVisible:
 # 	GrantExternalConditionPowerCA@IRONCURTAIN:
@@ -880,7 +880,7 @@ medium_gun_turret.xcom:
 	Valued:
 		Cost: 2000
 	Tooltip:
-		Name: Gun Turret
+		Name: td_nod_gunturret Turret
 	Selectable:
 		Priority: 4
 		DecorationBounds: 1536, 1536

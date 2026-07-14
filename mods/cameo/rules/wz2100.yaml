@@ -2089,7 +2089,7 @@ psc2100factory2:
 		SquadSize: 3
 		QuantizedFacings: 8
 		Name: Air Strike
-		Description: Gun Choppers attack enemies along a line\nwith chainguns.
+		Description: td_nod_gunturret Choppers attack enemies along a line\nwith chainguns.
 		EndChargeSpeechNotification: AirstrikeReady
 		SelectTargetSpeechNotification: SelectTarget
 		InsufficientPowerSpeechNotification: InsufficientPower
@@ -4400,7 +4400,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1500
 	Tooltip:
-		Name: Needle Gun Cobra Half-tracks
+		Name: Needle td_nod_gunturret Cobra Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upcobra1, ~techlevel.medium
@@ -4473,7 +4473,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1450
 	Tooltip:
-		Name: Twin Assault Gun Python Tracks
+		Name: Twin Assault td_nod_gunturret Python Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100uptwinassaultmg1
@@ -4485,7 +4485,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1350
 	Tooltip:
-		Name: Assault Gun Python Tracks
+		Name: Assault td_nod_gunturret Python Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uptracks1, ~up2100upassaultmg1
@@ -4607,7 +4607,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1650
 	Tooltip:
-		Name: Twin Assault Gun Python Hovercraft
+		Name: Twin Assault td_nod_gunturret Python Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uppython1, ~up2100uphover1, ~up2100uptwinassaultmg1
@@ -5114,7 +5114,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1450
 	Tooltip:
-		Name: Needle Gun Scorpion Half-tracks
+		Name: Needle td_nod_gunturret Scorpion Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upscorpion1, ~techlevel.medium
@@ -5151,7 +5151,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1350
 	Tooltip:
-		Name: Twin Assault Gun Mantis Tracks
+		Name: Twin Assault td_nod_gunturret Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100uptwinassaultmg1
@@ -5163,7 +5163,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1150
 	Tooltip:
-		Name: Assault Gun Mantis Tracks
+		Name: Assault td_nod_gunturret Mantis Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uptracks1, ~up2100upassaultmg1
@@ -5274,7 +5274,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1550
 	Tooltip:
-		Name: Twin Assault Gun Mantis Hovercraft
+		Name: Twin Assault td_nod_gunturret Mantis Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upmantis1, ~up2100uphover1, ~up2100uptwinassaultmg1
@@ -5666,7 +5666,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1600
 	Tooltip:
-		Name: Needle Gun Panther Half-tracks
+		Name: Needle td_nod_gunturret Panther Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100uppanther1, ~techlevel.medium
@@ -5703,7 +5703,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1550
 	Tooltip:
-		Name: Twin Assault Gun Tiger Tracks
+		Name: Twin Assault td_nod_gunturret Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100uptwinassaultmg1
@@ -5715,7 +5715,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1350
 	Tooltip:
-		Name: Assault Gun Tiger Tracks
+		Name: Assault td_nod_gunturret Tiger Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: 2100CRC, ~techlevel.high, ~up2100uptiger1, ~up2100uptracks1, ~up2100upassaultmg1
@@ -5813,7 +5813,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1650
 	Tooltip:
-		Name: Twin Assault Gun Tiger Hovercraft
+		Name: Twin Assault td_nod_gunturret Tiger Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100uptiger1, ~up2100uphover1, ~up2100uptwinassaultmg1
@@ -6101,7 +6101,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1700
 	Tooltip:
-		Name: Needle Gun Retribution Half-tracks
+		Name: Needle td_nod_gunturret Retribution Half-tracks
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: 2100fy2, ~up2100upneedle, ~up2100upretribution1, ~techlevel.medium
@@ -6126,7 +6126,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 2050
 	Tooltip:
-		Name: Twin Assault Gun Vengeance Tracks
+		Name: Twin Assault td_nod_gunturret Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100uptwinassaultmg1
@@ -6138,7 +6138,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1850
 	Tooltip:
-		Name: Assault Gun Vengeance Tracks
+		Name: Assault td_nod_gunturret Vengeance Tracks
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uptracks1, ~up2100upassaultmg1
@@ -6261,7 +6261,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 2300
 	Tooltip:
-		Name: Twin Assault Gun Vengeance Hovercraft
+		Name: Twin Assault td_nod_gunturret Vengeance Hovercraft
 	Buildable:
 		BuildPaletteOrder: 80
 		Prerequisites: ~2100fy3, ~techlevel.high, ~up2100upvengeance1, ~up2100uphover1, ~up2100uptwinassaultmg1
@@ -7118,7 +7118,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 700
 	Tooltip:
-		Name: B-155 Camper Needle Gun
+		Name: B-155 Camper Needle td_nod_gunturret
 	Buildable:
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
@@ -7861,7 +7861,7 @@ psc2100chopshop2:
 	Valued:
 		Cost: 1100
 	Tooltip:
-		Name: Bp-200 Gun Chopper
+		Name: Bp-200 td_nod_gunturret Chopper
 	Buildable:
 		BuildPaletteOrder: 10
 		Prerequisites: 2100ChopShop, 2100RF, ~techlevel.medium
@@ -7941,10 +7941,10 @@ psc2100chopshop2:
 		Speed: 160
 		Repulsable: False
 	AttackBomber:
-		Armaments: gun
+		Armaments: td_nod_gunturret
 		FacingTolerance: 32
 	Armament@GUNS:
-		Name: gun
+		Name: td_nod_gunturret
 		Weapon: ScavVulcan
 		LocalOffset: 1024,0,-85
 	WithMuzzleOverlay:
@@ -8093,10 +8093,10 @@ psc2100chopshop2:
 		Speed: 170
 		Repulsable: False
 	AttackBomber:
-		Armaments: gun
+		Armaments: td_nod_gunturret
 		FacingTolerance: 32
 	Armament@GUNS:
-		Name: gun
+		Name: td_nod_gunturret
 		Weapon: ScavAGM
 		LocalOffset: 1024,0,-85
 	WithMuzzleOverlay:
@@ -9424,11 +9424,11 @@ up2100uphycannon:
 up2100upneedle:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Needle Gun Research
+		Name: Needle td_nod_gunturret Research
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
-		Description: Unlock Needle Gun Weapon
+		Description: Unlock Needle td_nod_gunturret Weapon
 		Prerequisites: ~!up2100upneedle, ~up2100uplcannon6, ~up2100upsypnaticdata4
 	Valued:
 		Cost: 1000

@@ -166,18 +166,18 @@ xbio:
 xgun:
 	Defaults:
 		ZOffset: 3072
-	idle: gun
+	idle: td_nod_gunturret
 		Facings: 32
 		UseClassicFacingFudge: True
-	recoil: gun
+	recoil: td_nod_gunturret
 		Start: 32
 		Facings: 32
 		UseClassicFacingFudge: True
-	damaged-idle: gun
+	damaged-idle: td_nod_gunturret
 		Start: 64
 		Facings: 32
 		UseClassicFacingFudge: True
-	damaged-recoil: gun
+	damaged-recoil: td_nod_gunturret
 		Start: 96
 		Facings: 32
 		UseClassicFacingFudge: True
@@ -280,17 +280,17 @@ xobli:
 	Defaults:
 		ZOffset: 3072
 		Offset: 0,-12
-	idle: obli
-	damaged-idle: obli
+	idle: td_nod_obeliskoflight
+	damaged-idle: td_nod_obeliskoflight
 		Start: 4
-	active: obli
+	active: td_nod_obeliskoflight
 		Length: 4
 		Tick: 680
-	damaged-active: obli
+	damaged-active: td_nod_obeliskoflight
 		Start: 4
 		Length: 4
 		Tick: 680
-	dead: obli
+	dead: td_nod_obeliskoflight
 		Start: 8
 		Tick: 800
 	make: oblimake

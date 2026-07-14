@@ -39,7 +39,7 @@ factiok:
 			JUNGLE: bib2.jun
 			BARREN: bib2.bar
 	icon:
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 	box-overlay:
@@ -129,7 +129,7 @@ iokbarracks:
 
 iokproc:
 	Defaults:
-		Filename: proc.shp
+		Filename: td_nod_tiberiumrefinery_proc.shp
 	idle:
 		Length: 6
 		Tick: 120
@@ -147,7 +147,7 @@ iokproc:
 		Length: *
 		Tick: 80
 		Offset: 2,4
-		Filename: procmake.shp
+		Filename: td_nod_tiberiumrefinery_procmake.shp
 	resources:
 		Length: 6
 		Offset: -30,-17
@@ -182,7 +182,7 @@ iokproc:
 
 iokafld:
 	Defaults:
-		Filename: afld.shp
+		Filename: td_nod_airstrip.shp
 	idle:
 		Tick: 120
 		ZOffset: -1023
@@ -202,12 +202,12 @@ iokafld:
 	idle-dish:
 		Length: 16
 		Tick: 160
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 	damaged-idle-dish:
 		Start: 16
 		Length: 16
 		Tick: 160
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 	dead:
 		Start: 32
 		ZOffset: -1023
@@ -215,7 +215,7 @@ iokafld:
 	make:
 		Length: *
 		Tick: 80
-		Filename: afldmake.shp
+		Filename: td_nod_airstrip_afldmake.shp
 	bib:
 		UseTilesetExtension: true
 		Length: *
@@ -437,7 +437,7 @@ iokscudtemple:
 		Offset: 0,0
 		AddExtension: False
 		Scale: 0.92
-		Filename: tmpl.shp
+		Filename: td_nod_templeofnod.shp
 
 ####################################################################################################
 #		IOK - VEHICLES

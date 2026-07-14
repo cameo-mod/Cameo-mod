@@ -63,7 +63,7 @@ actor_cabal_cyborgcommandov2 =
 
 actor_cabal_eliminator800 =
    .name = Eliminator 800
-   .description = Heavy cybernetic infantry armed with a gatling gun and anti-air missiles.
+   .description = Heavy cybernetic infantry armed with a gatling td_nod_gunturret and anti-air missiles.
       Can detect cloaked and hijacker units.
       Strong vs Infantry, Light armor, Aircraft
       Weak vs Vehicles
@@ -253,7 +253,7 @@ actor_cabal_upgrade_backupsystems =
       The husk reactivates if it is not destroyed.
 
 actor_cabal_upgrade_handof =
-   .name = Hand of CABAL
+   .name = td_nod_handofnod of CABAL
    .description = Tech Upgrade (Only affects units of own faction)
       Periodically spawns free Hacker Cyborgs from the Tech Center.
       Increases Hacker Cyborg speed by 25%.

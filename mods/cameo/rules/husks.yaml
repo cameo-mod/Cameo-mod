@@ -30,7 +30,7 @@ FTNK.Husk:
 	Tooltip:
 		Name: Flame Tank (Destroyed)
 	TransformOnCapture:
-		IntoActor: ftnk
+		IntoActor: td_nod_flametank
 	RenderSprites:
 		Image: ftnk.destroyed
 
@@ -39,7 +39,7 @@ ARTY.Husk:
 	Tooltip:
 		Name: Artillery (Destroyed)
 	TransformOnCapture:
-		IntoActor: arty
+		IntoActor: td_nod_artillery
 	RenderSprites:
 		Image: arty.destroyed
 
@@ -48,16 +48,16 @@ BGGY.Husk:
 	Tooltip:
 		Name: Nod Buggy (Destroyed)
 	TransformOnCapture:
-		IntoActor: bggy
+		IntoActor: td_nod_buggy
 	RenderSprites:
 		Image: bggy.destroyed
 
 BIKE.Husk:
 	Inherits: ^LightHusk
 	Tooltip:
-		Name: Recon Bike (Destroyed)
+		Name: Recon td_nod_reconbike (Destroyed)
 	TransformOnCapture:
-		IntoActor: bike
+		IntoActor: td_nod_reconbike
 	RenderSprites:
 		Image: bike.destroyed
 
@@ -77,7 +77,7 @@ LTNK.Husk:
 	ThrowsParticle@turret:
 		Anim: turret
 	TransformOnCapture:
-		IntoActor: ltnk
+		IntoActor: td_nod_lighttank
 	RenderSprites:
 		Image: ltnk.destroyed
 
@@ -130,7 +130,7 @@ STNK.Husk:
 	Tooltip:
 		Name: Stealth Tank (Destroyed)
 	TransformOnCapture:
-		IntoActor: stnk
+		IntoActor: td_nod_stealthtank
 	RenderSprites:
 		Image: stnk.destroyed
 
@@ -411,7 +411,7 @@ HELI.Husk:
 		TrailWhileStationary: True
 		Type: CenterPosition
 	RenderSprites:
-		Image: heli
+		Image: td_nod_apacheattackhelicopter
 
 HIND.Husk:
 	Inherits: ^LargeHelicopterHusk

@@ -3868,7 +3868,7 @@ SWSAM:
 	Valued:
 		Cost: 650
 	Tooltip:
-		Name: SAM Site
+		Name: td_nod_samsite Site
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks
@@ -3903,7 +3903,7 @@ SWSAM:
 	SequencePlaceBuildingPreview:
 		Sequence: place
 	RenderSprites:
-		Image: sam
+		Image: td_nod_samsite
 SWOBLI:
 	Inherits: ^Defense
 	Inherits@IDISABLE: ^DisabledOverlay
@@ -3949,7 +3949,7 @@ SWOBLI:
 	Power:
 		Amount: -75
 	RenderSprites:
-		Image: obli
+		Image: td_nod_obeliskoflight
 SWGTWR:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetGround
@@ -5132,7 +5132,7 @@ swe3droid:
 		RequiresCondition: upswe1droid
 		Modifier: 85
 swe4:
-	Inherits: E4
+	Inherits: td_nod_flamethrower
 	Inherits@infup: ^SWInfantryUpgrades
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Valued:
@@ -5144,7 +5144,7 @@ swe4:
 		Queue: Infantry, RAInfantry
 		Description: Advanced Anti-infantry unit.\n  Strong vs Infantry, Buildings\n  Weak vs Tanks
 	RenderSprites:
-		Image: e4
+		Image: td_nod_flamethrower
 swe6:
 	Inherits: E6
 	Inherits@AUTOTARGET: ^AutoTargetGroundAssaultMove
@@ -5253,7 +5253,7 @@ swbike:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Speeder Bike
+		Name: Speeder td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -5583,7 +5583,7 @@ swhtnk:
 		RequiresSelection: true
 		PipCount: 5
 swarty:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	Inherits@SHADOWS: ^Shadows
 	Tooltip:
 		Name: Mobile Artillery
@@ -5636,7 +5636,7 @@ swarty2:
 	Valued:
 		Cost: 1000
 swarty3:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	Inherits@SHADOWS: ^Shadows
 	Tooltip:
 		Name: Wheeled Artillery
@@ -7803,7 +7803,7 @@ sw1tnkre:
 		Condition: scrap_create_bonus
 		TotalCap: 2
 swftnk:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	Inherits@EXPERIENCE: ^GainsExperienceMelee
 	Valued:
 		Cost: 600
@@ -8499,7 +8499,7 @@ swrandom.generator:
 		Weapon: SWRandomCarbon
 		EmptyWeapon: SWRandomCarbon
 	RenderSprites:
-		Image: ftnk
+		Image: td_nod_flametank
 	Buildable:
 		BuildLimit: 10
 		Queue: false

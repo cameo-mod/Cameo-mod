@@ -228,7 +228,7 @@ plymouth_convec_structure_factory =
    Unarmed
 
 plymouth_scout =
-  .description = Fast scout armed with a machine gun
+  .description = Fast scout armed with a machine td_nod_gunturret
 
 plymouth_lynx_microwave =
   .description = Fast microwave vehicle
@@ -277,7 +277,7 @@ eden_convec_structure_factory =
    Unarmed
 
 eden_scout =
-  .description = Fast scout armed with a machine gun
+  .description = Fast scout armed with a machine td_nod_gunturret
 
 eden_lynx_laser =
   .description = Fast laser vehicle

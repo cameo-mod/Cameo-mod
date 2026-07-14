@@ -4031,11 +4031,11 @@ wh40ksentinel:
 			wh40kguardplasma: ifv-tesla
 			wh40kkarsplasma: ifv-tesla
 			wh40kpsyker: ifv-tesla
-			e4: ifv-fire
+			td_nod_flamethrower: ifv-fire
 			ra1_soviet_flamethrower: ifv-fire
 			yrinit: ifv-fire
 			scfirebat: ifv-fire
-			e5: ifv-chem
+			td_nod_chemicalwarrior: ifv-chem
 			ra2deso: ifv-chem
 			forgotten_chemsprayinfantry: ifv-chem
 			gle1toxin: ifv-chem
@@ -6081,7 +6081,7 @@ wh40kterminator3:
 	Power:
 		Amount: -30
 	Tooltip:
-		Name: Assault Gun Terminator Marine
+		Name: Assault td_nod_gunturret Terminator Marine
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
@@ -11436,7 +11436,7 @@ wh40kcultistplasma:
 	Power:
 		Amount: -15
 	Tooltip:
-		Name: Plasma Gun Cultist
+		Name: Plasma td_nod_gunturret Cultist
 	Buildable:
 		BuildPaletteOrder: 64
 		Prerequisites: barracks, wh40karmoryc

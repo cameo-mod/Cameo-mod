@@ -1,6 +1,6 @@
-bggy:
+td_nod_buggy:
 	Defaults:
-		Filename: bggy.shp
+		Filename: td_nod_promotion_unlockbuggymkii_bggy.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -13,11 +13,11 @@ bggy:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: bggyicnh.shp
+		Filename: td_nod_buggy_icon.shp
 
-ltnk:
+td_nod_lighttank:
 	Defaults:
-		Filename: ltnk.shp
+		Filename: td_nod_lighttank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -29,11 +29,11 @@ ltnk:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ltnkicnh.shp
+		Filename: td_nod_lighttank_icon.shp
 
-bike:
+td_nod_reconbike:
 	Defaults:
-		Filename: bike.shp
+		Filename: td_nod_reconbike.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -41,11 +41,11 @@ bike:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: bikeicnh.shp
+		Filename: td_nod_reconbike_icon.shp
 
-ftnk:
+td_nod_flametank:
 	Defaults:
-		Filename: ftnk.shp
+		Filename: td_nod_flametank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -87,11 +87,11 @@ ftnk:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: ftnkicnh.shp
+		Filename: td_nod_flametank_icon.shp
 
-stnk:
+td_nod_stealthtank:
 	Defaults:
-		Filename: stnk.shp
+		Filename: td_nod_stealthtank.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -99,11 +99,11 @@ stnk:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: stnkicnh.shp
+		Filename: td_nod_stealthtank_icon.shp
 
-arty:
+td_nod_artillery:
 	Defaults:
-		Filename: arty.shp
+		Filename: td_nod_artillery.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -111,11 +111,11 @@ arty:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: artyicnh.shp
+		Filename: td_nod_artillery_icon.shp
 
-heli:
+td_nod_apacheattackhelicopter:
 	Defaults:
-		Filename: heli.shp
+		Filename: td_nod_apacheattackhelicopter.shp
 	idle:
 		Facings: 32
 		InterpolatedFacings: 64
@@ -133,12 +133,12 @@ heli:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: heliicnh.shp
+		Filename: td_nod_apacheattackhelicopter_icon.shp
 
 nodfact:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: nodfact.shp
+		Filename: td_nod_constructionyard_nodfact.shp
 	build:
 		Start: 4
 		Length: 20
@@ -158,19 +158,19 @@ nodfact:
 		Start: 48
 		Tick: 800
 	make:
-		Filename: nodfactmake.shp
+		Filename: td_nod_constructionyard_nodfactmake.shp
 		Length: *
 		Tick: 80
 		Offset: 0,-2
 	icon:
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay:
 		Filename: customoverlay.shp
 
-hand:
+td_nod_handofnod:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: hand.shp
+		Filename: td_nod_handofnod.shp
 		Offset: 0,-0
 	idle:
 	damaged-idle:
@@ -179,17 +179,17 @@ hand:
 		Start: 2
 		Tick: 800
 	make:
-		Filename: handmake.shp
+		Filename: td_nod_handofnod_handmake.shp
 		Length: *
 		Tick: 80
 	icon:
-		Filename: handicnh.shp
+		Filename: td_nod_handofnod_icon.shp
 		Offset: 0,0
 
-afld:
+td_nod_airstrip:
 	Inherits: ^WithBuildingBib1
 	Defaults:
-		Filename: afld.shp
+		Filename: td_nod_airstrip.shp
 	idle:
 		Tick: 120
 		ZOffset: -1023
@@ -207,11 +207,11 @@ afld:
 		Tick: 120
 		ZOffset: -1023
 	idle-dish:
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 		Length: 16
 		Tick: 160
 	damaged-idle-dish:
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 		Start: 16
 		Length: 16
 		Tick: 160
@@ -220,16 +220,16 @@ afld:
 		ZOffset: -1023
 		Tick: 800
 	make:
-		Filename: afldmake.shp
+		Filename: td_nod_airstrip_afldmake.shp
 		Length: *
 		Tick: 80
 	icon:
-		Filename: afldicnh.shp
+		Filename: td_nod_airstrip_icon.shp
 
-tmpl:
+td_nod_templeofnod:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: tmpl.shp
+		Filename: td_nod_templeofnod.shp
 		Offset: 0,-24
 	idle:
 	damaged-idle:
@@ -238,7 +238,7 @@ tmpl:
 		Length: 33
 		Tick: 200
 	smoke:
-		Filename: atomdoor.shp
+		Filename: td_nod_templeofnod_atomdoor.shp
 		Length: *
 		Offset: -2,-94
 	damaged-active:
@@ -249,18 +249,18 @@ tmpl:
 		Start: 66
 		Tick: 800
 	make:
-		Filename: tmplmake.shp
+		Filename: td_nod_templeofnod_tmplmake.shp
 		Length: *
 		Tick: 60
 	bib:
 		Offset: 0,0
 	icon:
-		Filename: tmplicnh.shp
+		Filename: td_nod_templeofnod_icon.shp
 		Offset: 0,0
 
-tmpl.nuke:
+td_nod_nuclearmissilesilo:
 	icon:
-		Filename: addon_nuketemple_icon.png
+		Filename: td_nod_nuclearmissilesilo_icon.png
 		Offset: 0,0
 
 td_nod_templeprime:
@@ -288,10 +288,10 @@ td_nod_templeprime:
 		Filename: td_nod_templeprime_icon.png
 		Offset: 0,0
 
-obli:
+td_nod_obeliskoflight:
 	Inherits: ^WithBuildingBibTsla
 	Defaults:
-		Filename: obli.shp
+		Filename: td_nod_obeliskoflight.shp
 		Offset: 0,-24
 	idle:
 	damaged-idle:
@@ -307,19 +307,19 @@ obli:
 		Start: 8
 		Tick: 800
 	make:
-		Filename: oblimake.shp
+		Filename: td_nod_obeliskoflight_oblimake.shp
 		Length: 13
 		Tick: 80
 	bib:
 		Offset: -5,-10
 	icon:
-		Filename: obliicnh.shp
+		Filename: td_nod_obeliskoflight_icon.shp
 		Offset: 0,0
 
-gun:
+td_nod_gunturret:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: gun.shp
+		Filename: td_nod_gunturret.shp
 	idle:
 		Facings: 32
 	recoil:
@@ -332,7 +332,7 @@ gun:
 		Start: 96
 		Facings: 32
 	make:
-		Filename: gunmake.shp
+		Filename: td_nod_gunturret_gunmake.shp
 		Length: *
 		Tick: 80
 	muzzle:
@@ -341,17 +341,17 @@ gun:
 	bib:
 		Offset: -1,-1
 	icon:
-		Filename: gunicnh.shp
+		Filename: td_nod_gunturret_icon.shp
 
-nodlaserturret:
+td_nod_laserturret:
 	Inherits: ^WithBuildingBibGun
 	Defaults:
-		Filename: NodTurretBuildupFiring.png
+		Filename: td_nod_laserturret_nodturretbuildupfiring.png
 	idle:
 		Start: 6
 		Facings: 64
 	damaged-idle:
-		Filename: NodTurretDamagedFiring.png
+		Filename: td_nod_laserturret_nodturretdamagedfiring.png
 		Facings: 64
 	make:
 		Length: 7
@@ -362,11 +362,11 @@ nodlaserturret:
 	bib:
 		Offset: -1,-1
 	icon:
-		Filename: NodLaserTurretIcon.png
+		Filename: td_nod_laserturret_icon.png
 
-sam:
+td_nod_samsite:
 	Defaults:
-		Filename: sam.shp
+		Filename: td_nod_samsite.shp
 	closed-idle:
 		Start: 0
 	opening:
@@ -399,7 +399,7 @@ sam:
 	place:
 		Start: 0
 	make:
-		Filename: sammake.shp
+		Filename: td_nod_samsite_sammake.shp
 		Length: 20
 		Tick: 30
 	muzzle:
@@ -410,10 +410,10 @@ sam:
 	icon:
 		Filename: ra1_soviet_samsite_icon.png
 
-e4:
+td_nod_flamethrower:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: e4.shp
+		Filename: td_nod_flamethrower.shp
 	stand:
 		Facings: 8
 	stand2:
@@ -500,7 +500,7 @@ e4:
 		Filename: electro.shp
 		Length: *
 	die-crushed:
-		Filename: e4rot.shp
+		Filename: td_nod_chemicalwarrior_e4rot.shp
 		Start: 16
 		Length: 4
 		Tick: 1600
@@ -543,11 +543,11 @@ e4:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: e4icnh.shp
+		Filename: td_nod_flamethrower_icon.shp
 
-e5:
+td_nod_chemicalwarrior:
 	Defaults:
-		Filename: e5.shp
+		Filename: td_nod_chemicalwarrior.shp
 		Scale: 0.75
 	stand:
 		Facings: 8
@@ -641,7 +641,7 @@ e5:
 		Filename: electro.shp
 		Length: *
 	die-crushed:
-		Filename: e4rot.shp
+		Filename: td_nod_chemicalwarrior_e4rot.shp
 		Start: 16
 		Length: 4
 		Tick: 1600
@@ -683,26 +683,26 @@ e5:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: e5icnh.shp
+		Filename: td_nod_chemicalwarrior_icon.shp
 		Scale: 1
 
-tsblackhandflamer:
+td_nod_blackhandflamer:
 	Inherits: ^BasicInfantryTibsun
 	Inherits: ^InfantryOverlays
 	Inherits@attack: ^BasicInfantryAttackTibsun
 	Defaults:
-		Filename: tsblackhandflamer.shp
+		Filename: td_nod_promotion_unlockblackhandflamer_tsblackhandflamer.shp
 		Scale: 1.1
 	icon:
-		Filename: tsblackhandflamericon.shp
+		Filename: td_nod_promotion_unlockblackhandflamer_icon.shp
 
 stealthtech:
 	icon:
-		Filename: stealth_tech_icon.shp
+		Filename: td_nod_promotion_upgradeupnodstealthname_icon.shp
 
-tsstealthsoldier:
+td_nod_stealthsoldier:
 	Defaults:
-		Filename: nodstealthsoldier.shp
+		Filename: td_nod_stealthsoldier_nodstealthsoldier.shp
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
@@ -813,11 +813,11 @@ tsstealthsoldier:
 		Facings: 8
 		Scale: 1.0
 	icon:
-		Filename: tsstealthsoldiericon.shp
+		Filename: td_nod_stealthsoldier_icon.shp
 
-tsblackhandlaser:
+td_nod_lasertrooper:
 	Defaults:
-		Filename: tdlasertroop.shp
+		Filename: td_nod_promotion_unlocklasertrooper_tdlasertroop.shp
 		Scale: 0.92
 	Inherits: ^InfantryOverlays
 	stand:
@@ -928,7 +928,7 @@ tsblackhandlaser:
 		Facings: 8
 		Scale: 1.0
 	icon:
-		Filename: tsblackhandlasericon.shp
+		Filename: td_nod_promotion_unlocklasertrooper_icon.shp
 
 cncrss:
 	Defaults:
@@ -963,26 +963,26 @@ ssmsub:
 e3chem:
 	Inherits: e3
 	Defaults:
-		Filename: e3chem.shp
+		Filename: td_nod_promotion_unlockchemicalrocketsoldier_e3chem.shp
 	icon:
-		Filename: e3chemicon.shp
+		Filename: td_nod_promotion_unlockchemicalrocketsoldier_icon.shp
 
-chembike:
+td_nod_chemicalattackbike:
 	Defaults:
-		Filename: chembike.shp
+		Filename: td_nod_promotion_unlockchemicalattackbike_chembike.shp
 	idle:
 		Facings: -32
 		Scale: 0.55
 	muzzle:
-		Filename: chemball2.shp
+		Filename: td_nod_promotion_unlockchemicalattackbike_chemball2.shp
 		Length: *
 		Scale: 0.25
 	icon:
-		Filename: chembikeicon.shp
+		Filename: td_nod_promotion_unlockchemicalattackbike_icon.shp
 
-nodspecter:
+td_nod_specterartillery:
 	Defaults:
-		Filename: nodspecter.shp
+		Filename: td_nod_promotion_unlockspecter_nodspecter.shp
 	idle:
 		Facings: -32
 		Scale: 0.55
@@ -990,39 +990,39 @@ nodspecter:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: nodspectericon.shp
+		Filename: td_nod_promotion_unlockspecter_icon.shp
 
-nodvenom:
+td_nod_venom:
 	Defaults:
-		Filename: nodvenom.shp
+		Filename: td_nod_venom.shp
 	idle:
 		Facings: -32
 		Scale: 0.68
 	icon:
-		Filename: nodvenomicon.shp
+		Filename: td_nod_venom_icon.shp
 
 nodvenomlaser:
 	icon:
-		Filename: venom_laser_icon.shp
+		Filename: td_nod_promotion_upgradeupnodvenomname_icon.shp
 
-chemstnk:
+td_nod_chemicalstealthtank:
 	Defaults:
-		Filename: newstnk.shp
+		Filename: td_nod_promotion_unlockchemicalstealthtank_newstnk.shp
 	idle:
 		Facings: -32
 	turret:
-		Filename: newstnktur.shp
+		Filename: td_nod_promotion_unlockchemicalstealthtank_newstnktur.shp
 		Facings: -32
 	muzzle:
 		Filename: chemball.shp
 		Length: *
 		Scale: 0.75
 	icon:
-		Filename: chemstnkicon.shp
+		Filename: td_nod_promotion_unlockchemicalstealthtank_icon.shp
 
-chemssm:
+td_nod_chemicalssmlauncher:
 	Defaults:
-		Filename: chemssm.shp
+		Filename: td_nod_promotion_unlockchemicalssmlauncher_chemssm.shp
 	idle:
 		Start: 32
 		Facings: 32
@@ -1034,17 +1034,17 @@ chemssm:
 		Filename: chemball.shp
 		Length: *
 	icon:
-		Filename: chemssmicon.shp
+		Filename: td_nod_promotion_unlockchemicalssmlauncher_icon.shp
 
-nodbuggy2:
+td_nod_buggymkii:
 	Defaults:
-		Filename: nodbuggy2.shp
+		Filename: td_nod_promotion_unlockbuggymkii_nodbuggy2.shp
 	idle:
 		Facings: -64
 		Scale: 0.35
 		Offset: 0,-12
 	turret:
-		Filename: bggy.shp
+		Filename: td_nod_promotion_unlockbuggymkii_bggy.shp
 		Start: 32
 		Facings: 32
 		InterpolatedFacings: 64
@@ -1053,16 +1053,16 @@ nodbuggy2:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: nodbuggy2icon.shp
+		Filename: td_nod_promotion_unlockbuggymkii_icon.shp
 
-nodltnk2:
+td_nod_lighttankmkii:
 	Defaults:
-		Filename: renegade_ltnk.shp
+		Filename: td_nod_promotion_unlocklighttankmkii_renegade_ltnk.shp
 	idle:
 		Facings: 64
 		Scale: 0.5
 	turret:
-		Filename: renegade_ltnk.shp
+		Filename: td_nod_promotion_unlocklighttankmkii_renegade_ltnk.shp
 		Facings: 64
 		Start: 64
 		Scale: 0.5
@@ -1070,15 +1070,15 @@ nodltnk2:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: nodltnk2icon.shp
+		Filename: td_nod_promotion_unlocklighttankmkii_icon.shp
 
-nodftnk2:
+td_nod_flametankmkii:
 	Defaults:
-		Filename: renegadeflamer.shp
+		Filename: td_nod_promotion_unlockflametankmkii_renegadeflamer.shp
 	idle:
 		Facings: 64
 	turret:
-		Filename: renegadeflamer.shp
+		Filename: td_nod_promotion_unlockflametankmkii_renegadeflamer.shp
 		Start: 64
 		Facings: 64
 	muzzle:
@@ -1120,11 +1120,11 @@ nodftnk2:
 		Facings: 8
 		Length: 13
 	icon:
-		Filename: nodftnk2icon.shp
+		Filename: td_nod_promotion_unlockflametankmkii_icon.shp
 
-tanodharv:
+td_nod_stealthharvester:
 	Defaults:
-		Filename: tanodharv.shp
+		Filename: td_nod_stealthharvester.shp
 		Scale: 0.4
 	idle:
 		Facings: -64
@@ -1140,13 +1140,13 @@ tanodharv:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: StealthHarvesterIcon.shp
+		Filename: td_nod_stealthharvester_icon.shp
 
-nodlasercommando:
+td_nod_lasercommando:
 	Inherits: ^InfantryOverlays
 	Inherits@2: ^RA2InfantryDeaths
 	Defaults:
-		Filename: nodlasercommando.shp
+		Filename: td_nod_lasercommando.shp
 		Scale: 0.79
 	stand:
 		Facings: 8
@@ -1254,7 +1254,7 @@ nodlasercommando:
 		Tick: 1600
 		ZOffset: -511
 	icon:
-		Filename: tanodcommandoicon.shp
+		Filename: td_nod_lasercommando_icon.shp
 
 cncss:
 	Defaults:
@@ -1298,32 +1298,32 @@ cncspen:
 
 guerillatacticsicon:
 	icon:
-		Filename: guerillatacticsicon.png
+		Filename: td_nod_upgrade_guerillatactics_icon.png
 
 tiberiuminfusionicon:
 	icon:
-		Filename: tiberiuminfusionicon.png
+		Filename: td_nod_upgrade_tiberiuminfusion_icon.png
 
 improvedartilleriesicon:
 	icon:
-		Filename: improvedartilleriesicon.png
+		Filename: td_nod_upgrade_improvedartilleries_icon.png
 
 elementalwarfareicon:
 	icon:
-		Filename: elementalwarfareicon.png
+		Filename: td_nod_upgrade_elementalwarfare_icon.png
 
 elitecapacitorsicon:
 	icon:
-		Filename: elitecapacitorsicon.png
+		Filename: td_nod_upgrade_elitecapacitors_icon.png
 
 cyberneticmodificationsicon:
 	icon:
-		Filename: cyberneticmodificationsicon.png
+		Filename: td_nod_upgrade_cyberneticmodifications_icon.png
 
 blackmarketupgradesicon:
 	icon:
-		Filename: blackmarketupgradesicon.png
+		Filename: td_nod_upgrade_blackmarketupgrades_icon.png
 
 advancedguerillatacticsicon:
 	icon:
-		Filename: advancedguerillatacticsicon.png
+		Filename: td_nod_upgrade_advancedguerillatactics_icon.png

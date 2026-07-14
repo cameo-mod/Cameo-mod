@@ -232,7 +232,7 @@ HAND.camea:
 	ProvidesPrerequisite@buildingname:
 	SelectionDecorations:
 	RenderSprites:
-		Image: HAND
+		Image: td_nod_handofnod
 
 RAPROC.camea:
 	Inherits: RAPROC
@@ -717,13 +717,13 @@ ATWR.camea:
 		Image: ATWR
 
 OBLI.camea:
-	Inherits: OBLI
+	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: vehicleproduction, ~techlevel.high
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: OBLI
+		Image: td_nod_obeliskoflight
 
 TSLA.camea:
 	Inherits: ra1_soviet_teslacoil
@@ -873,12 +873,12 @@ JEEP.camea:
 		Image: JEEP
 
 BIKE.camea:
-	Inherits: BIKE
+	Inherits: td_nod_reconbike
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: ~techlevel.medium
 	RenderSprites:
-		Image: BIKE
+		Image: td_nod_reconbike
 
 1TNK.camea:
 	Inherits: ra1_allies_alliedlighttank
@@ -913,12 +913,12 @@ V2RL.camea:
 		Image: ra1_soviet_v2rocketlauncher
 
 FTNK.camea:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	Buildable:
 		Prerequisites: ~techlevel.medium
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: FTNK
+		Image: td_nod_flametank
 
 HTNK.camea:
 	Inherits: HTNK
@@ -929,12 +929,12 @@ HTNK.camea:
 		Image: HTNK
 
 STNK.camea:
-	Inherits: STNK
+	Inherits: td_nod_stealthtank
 	Buildable:
 		Prerequisites: stek.camea
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: STNK
+		Image: td_nod_stealthtank
 
 TTNK.camea:
 	Inherits: ra1_soviet_teslatank
@@ -989,7 +989,7 @@ RAARTY.camea:
 		Image: ra1_allies_alliedartillery
 
 MSSM.camea:
-	Inherits: MSSM
+	Inherits: td_nod_ssmlauncher
 	Buildable:
 		Prerequisites: stek.camea
 		Queue: Vehicle, RAVehicle
@@ -1045,7 +1045,7 @@ TRAN.camea:
 		Queue: Aircraft, RAAircraft
 		Description: Fast Infantry Transport Helicopter.\nAlready with 12 crewmen on board\n  Unarmed
 	Cargo:
-		InitialUnits: e1, e1, e2, e2, e4, e4, e5, e5, ra1_soviet_flamethrower, ra1_soviet_flamethrower, ra1_soviet_shocktrooper, ra1_soviet_shocktrooper
+		InitialUnits: e1, e1, e2, e2, td_nod_flamethrower, td_nod_flamethrower, td_nod_chemicalwarrior, td_nod_chemicalwarrior, ra1_soviet_flamethrower, ra1_soviet_flamethrower, ra1_soviet_shocktrooper, ra1_soviet_shocktrooper
 		LoadedCondition: loaded
 	Armament:
 		Weapon: deploytargeting.5c0

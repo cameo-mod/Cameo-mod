@@ -104,7 +104,7 @@ silo:
 		Offset: 0,1
 	icon: siloicnh.tem
 
-hand:
+td_nod_handofnod:
 	Defaults:
 		Offset: 0,-8
 	idle:
@@ -174,7 +174,7 @@ weap:
 	icon: weapicnh.tem
 		Offset: 0,0
 
-afld:
+td_nod_airstrip:
 	idle:
 		Tick: 120
 		ZOffset: -1023
@@ -319,7 +319,7 @@ eye:
 		Length: *
 	icon: eyeicnh.tem
 
-tmpl:
+td_nod_templeofnod:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -346,7 +346,7 @@ tmpl:
 	icon: tmplicnh.tem
 		Offset: 0,0
 
-obli:
+td_nod_obeliskoflight:
 	Defaults:
 		Offset: 0,-12
 	idle:
@@ -415,7 +415,7 @@ wood:
 		Start: 16
 		Length: 16
 
-gun:
+td_nod_gunturret:
 	idle:
 		Facings: 32
 		UseClassicFacingFudge: True
@@ -447,7 +447,7 @@ gun:
 		Offset: -1,-1
 	icon: forgotten_veinhole_icon.tem
 	chemicon: modchemturreticon
-sam:
+td_nod_samsite:
 	closed-idle:
 		Start: 0
 	opening:
@@ -792,18 +792,18 @@ xbio:
 xgun:
 	Defaults:
 		ZOffset: 3072
-	idle: gun
+	idle: td_nod_gunturret
 		Facings: 32
 		UseClassicFacingFudge: True
-	recoil: gun
+	recoil: td_nod_gunturret
 		Start: 32
 		Facings: 32
 		UseClassicFacingFudge: True
-	damaged-idle: gun
+	damaged-idle: td_nod_gunturret
 		Start: 64
 		Facings: 32
 		UseClassicFacingFudge: True
-	damaged-recoil: gun
+	damaged-recoil: td_nod_gunturret
 		Start: 96
 		Facings: 32
 		UseClassicFacingFudge: True
@@ -900,17 +900,17 @@ xobli:
 	Defaults:
 		ZOffset: 3072
 		Offset: 0,-12
-	idle: obli
-	damaged-idle: obli
+	idle: td_nod_obeliskoflight
+	damaged-idle: td_nod_obeliskoflight
 		Start: 4
-	active: obli
+	active: td_nod_obeliskoflight
 		Length: 4
 		Tick: 680
-	damaged-active: obli
+	damaged-active: td_nod_obeliskoflight
 		Start: 4
 		Length: 4
 		Tick: 680
-	dead: obli
+	dead: td_nod_obeliskoflight
 		Start: 8
 		Tick: 800
 	make: oblimake

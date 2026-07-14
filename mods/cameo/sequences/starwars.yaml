@@ -17,7 +17,7 @@ swfact:
 		UseTilesetExtension: true
 		Length: *
 	icon: 
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay: 
 		Filename: customoverlay.shp
 
@@ -43,7 +43,7 @@ swifact:
 		UseTilesetExtension: true
 		Length: *
 	icon: 
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay: 
 		Filename: customoverlay.shp
 
@@ -69,7 +69,7 @@ swrfact:
 		UseTilesetExtension: true
 		Length: *
 	icon: 
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay: 
 		Filename: customoverlay.shp
 swrefact:
@@ -94,7 +94,7 @@ swrefact:
 		UseTilesetExtension: true
 		Length: *
 	icon: 
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay: 
 		Filename: customoverlay.shp
 swibarr:
@@ -183,7 +183,7 @@ swdfact:
 		UseTilesetExtension: true
 		Length: *
 	icon: 
-		Filename: facticnh.shp
+		Filename: td_nod_constructionyard_icon.shp
 	idle-overlay: 
 		Filename: customoverlay.shp
 
@@ -756,11 +756,11 @@ swafld:
 		Tick: 120
 		ZOffset: -1023
 	idle-dish: 
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 		Length: 16
 		Tick: 160
 	damaged-idle-dish: 
-		Filename: afld_d.shp
+		Filename: td_nod_airstrip_afld_d.shp
 		Start: 16
 		Length: 16
 		Tick: 160
@@ -1152,7 +1152,7 @@ swtmpl:
 	active: 
 		Filename: swresearchre.shp
 	smoke: 
-		Filename: atomdoor.shp
+		Filename: td_nod_templeofnod_atomdoor.shp
 		Length: *
 		Offset: -1,-47
 	damaged-active: 
@@ -1183,7 +1183,7 @@ swdtmpl:
 	active: 
 		Filename: swresearchd.shp
 	smoke: 
-		Filename: atomdoor.shp
+		Filename: td_nod_templeofnod_atomdoor.shp
 		Length: *
 		Offset: -1,-47
 	damaged-active: 
@@ -1213,7 +1213,7 @@ swpalace:
 	active:
 		Start: 23
 	smoke: 
-		Filename: atomdoor.shp
+		Filename: td_nod_templeofnod_atomdoor.shp
 		Length: *
 		Offset: -1,-47
 	damaged-active:
@@ -1252,7 +1252,7 @@ swsite:
 		Filename: gunfire2.shp
 		Length: *
 	turret: 
-		Filename: e3.shp
+		Filename: td_nod_rocketsoldier_e3.shp
 		Start: 8
 		Facings: 8
 	bib: 
@@ -2126,7 +2126,7 @@ swrmbo:
 		AddExtension: False
 
 swe1droid:
-	Inherits: e4
+	Inherits: td_nod_flamethrower
 	Defaults:
 		Filename:  swe1droid.shp
 	icon: 

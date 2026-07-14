@@ -4991,7 +4991,7 @@ awtalon:
 	Valued:
 		Cost: 3000
 	Tooltip:
-		Name: Talon Gun
+		Name: Talon td_nod_gunturret
 	Buildable:
 		BuildPaletteOrder: 45
 		Prerequisites: awlab
@@ -7562,11 +7562,11 @@ awifv:
 			ra2flakt: ifv-flak
 			ra1_soviet_shocktrooper: ifv-tesla
 			ra2shk: ifv-tesla
-			e4: ifv-fire
+			td_nod_flamethrower: ifv-fire
 			ra1_soviet_flamethrower: ifv-fire
 			yrinit: ifv-fire
 			scfirebat: ifv-fire
-			e5: ifv-chem
+			td_nod_chemicalwarrior: ifv-chem
 			ra2deso: ifv-chem
 			forgotten_chemsprayinfantry: ifv-chem
 			gle1toxin: ifv-chem
@@ -7740,7 +7740,7 @@ awbike:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Bike
+		Name: td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: True
 	Buildable:

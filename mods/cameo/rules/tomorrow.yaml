@@ -983,7 +983,7 @@ AFLD.ANSWER:
 		Amount: -40
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
-		Image: AFLD
+		Image: td_nod_airstrip
 WEAP.TOMORROW:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
@@ -2126,13 +2126,13 @@ HPAD.DTJAPAN:
 	RenderSprites:
 		Image: hpad
 SAM.TOMORROW:
-	Inherits: SAM
+	Inherits: td_nod_samsite
 	Buildable:
 		BuildPaletteOrder: 50
 		Prerequisites: barracks
 		Queue: Defence, RADefence
 	RenderSprites:
-		Image: SAM
+		Image: td_nod_samsite
 GTWR.ANSWER:
 	Inherits: GTWR
 	Buildable:
@@ -2155,9 +2155,9 @@ PBOX.TOMORROW:
 		Prerequisites: barracks, ~disabled
 	-MapEditorData:
 GUN.TOMORROW:
-	Inherits: GUN
+	Inherits: td_nod_gunturret
 	RenderSprites:
-		Image: GUN
+		Image: td_nod_gunturret
 	Buildable:
 		Queue: Defence, RADefence
 		Prerequisites: barracks
@@ -2922,9 +2922,9 @@ dtapc:
 		Position: BottomLeft
 		RequiresSelection: true
 ftnk.tomorrow:
-	Inherits: FTNK
+	Inherits: td_nod_flametank
 	RenderSprites:
-		Image: FTNK
+		Image: td_nod_flametank
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: dtpropaganda
@@ -3001,9 +3001,9 @@ v2rl.tomorrow:
 		Image: dtv2rl
 
 heli.tomorrow:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3125,9 +3125,9 @@ rajeep.answer:
 		Prerequisites: vehicleproduction
 	-MapEditorData:
 heli.answer:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: anyhq
@@ -3218,7 +3218,7 @@ mrj.answer:
 		Prerequisites: atek.answer, anyhq
 	-MapEditorData:
 arty.answer:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	RenderSprites:
 		Image: dtarty
 	Buildable:
@@ -3272,7 +3272,7 @@ dtltnk2.answer:
 #                   UNITS USA
 ###############################################
 dtltnk2:
-	Inherits: LTNK
+	Inherits: td_nod_lighttank
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Valued:
 		Cost: 650
@@ -3340,7 +3340,7 @@ apc.dtusa.e2:
 		DeployTicks: 0
 
 arty.dtusa:
-	Inherits: ARTY
+	Inherits: td_nod_artillery
 	RenderSprites:
 		Image: dtarty
 	Buildable:
@@ -3351,9 +3351,9 @@ arty.dtusa:
 		Prerequisites: dtshop
 		InitialLevels: 1
 heli.dtusa:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
-		Image: HELI
+		Image: td_nod_apacheattackhelicopter
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		Prerequisites: dtpropaganda
@@ -3369,7 +3369,7 @@ heli.dtusa:
 #                   UNITS Russia
 ###############################################
 hind.dtrussia:
-	Inherits: HELI
+	Inherits: td_nod_apacheattackhelicopter
 	RenderSprites:
 		Image: ra1_soviet_hindattackhelicopter
 	Tooltip:
@@ -3451,7 +3451,7 @@ dtstnk:
 		RequiresSelection: true
 
 mssm.dtrussia:
-	Inherits: MSSM
+	Inherits: td_nod_ssmlauncher
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: anyhq, atek.answer
@@ -3735,7 +3735,7 @@ dtfbik:
 	Valued:
 		Cost: 300
 	Tooltip:
-		Name: Flame Bike
+		Name: Flame td_nod_reconbike
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:

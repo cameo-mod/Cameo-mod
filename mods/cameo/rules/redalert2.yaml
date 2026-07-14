@@ -2118,7 +2118,7 @@ ra2nalasr:
 	Valued:
 		Cost: 500
 	Tooltip:
-		Name: Sentry Gun
+		Name: Sentry td_nod_gunturret
 	Building:
 		Footprint: x
 		Dimensions: 1,1
@@ -5894,10 +5894,10 @@ RA2FV:
 		RequiresCondition: ifv-demo
 	###############
 	Tooltip@MG:
-		Name: Machine Gun IFV
+		Name: Machine td_nod_gunturret IFV
 		RequiresCondition: ifv-mg || ifv-thief
 	Tooltip@HMG:
-		Name: Heavy Machine Gun IFV
+		Name: Heavy Machine td_nod_gunturret IFV
 		RequiresCondition: ifv-hmg
 	Tooltip@MISS:
 		Name: Missile IFV

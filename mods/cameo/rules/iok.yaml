@@ -305,7 +305,7 @@ FACTIOK:
 	Transforms:
 		RequiresCondition: factundeploy
 		PauseOnCondition: being-demolished || build-incomplete
-		IntoActor: mcv.nod
+		IntoActor: td_nod_mobileconstructionvehicle
 		Offset: 1,1
 		Facing: 432
 	TransformsIntoMobile:
@@ -1092,12 +1092,12 @@ IOKGUN:
 	Power:
 		Amount: -20
 	RenderSprites:
-		Image: gun
+		Image: td_nod_gunturret
 	SpawnActorOnDeath@hole:
 		Actor: iokhole.iokgun
 
 IOKOBLI:
-	Inherits: OBLI
+	Inherits: td_nod_obeliskoflight
 	Buildable:
 		BuildPaletteOrder: 60
 		Prerequisites: iokblackmarket

@@ -10,25 +10,25 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: nod
-		BaseActor: mcv.nod
+		BaseActor: td_nod_mobileconstructionvehicle
 
 	StartingUnits@defaultnoda:
 		Class: light
 		ClassName: Light Support
 		Factions: nod
-		BaseActor: mcv.nod
-		SupportActors: e1.nod,e1.nod,e1.nod,e1.nod,e1.nod,e1.nod,e3,e3,bggy
+		BaseActor: td_nod_mobileconstructionvehicle
+		SupportActors: td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,e3,e3,td_nod_buggy
 
 	StartingUnits@heavynoda:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: nod
-		BaseActor: mcv.nod
-		SupportActors: e1.nod,e1.nod,e1.nod,e1.nod,e3,e3,ltnk,ltnk,ftnk
+		BaseActor: td_nod_mobileconstructionvehicle
+		SupportActors: td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,e3,e3,td_nod_lighttank,td_nod_lighttank,td_nod_flametank
 
 	StartingUnits@heavynodb:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: nod
-		BaseActor: mcv.nod
-		SupportActors: e1.nod,e1.nod,e1.nod,e1.nod,e1.nod,e3,e3,e3,ftnk,ftnk
+		BaseActor: td_nod_mobileconstructionvehicle
+		SupportActors: td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,td_nod_minigunner,e3,e3,e3,td_nod_flametank,td_nod_flametank

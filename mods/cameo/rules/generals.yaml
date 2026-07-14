@@ -6436,7 +6436,7 @@ chinternetcenter:
 		LoadedCondition: cond_loaded
 	RevealActorsPower@SATHACK:
 		CameraActor: camera.sathack
-		TargetActors: fact.gdi, fact.nod, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
+		TargetActors: fact.gdi, td_nod_constructionyard, ra1_allies_alliedconstructionyard, ra1_soviet_constructionyard, ra2nacnst, ra2gacnst, yrnacnst, ts_gdi_constructionyard, ts_nod_constructionyard, forgotten_constructionyard, cabal_constructionyard, 2100hq.alpha, 2100hq.scavenger, sccommandcenter, scnexus, schatchery, citymayor, cfact, xfact, glcommand, chcommand, usacommand, leangcommand
 		LifeTime: 500
 		OrderName: satellitehack1
 		Icon: sathack1
@@ -9421,7 +9421,7 @@ chasub:
 	Armament@PRIMARY:
 		Weapon: CHAtomicTorpTube
 		LocalOffset: 208,0,48
-	Armament@Arty:
+	Armament@td_nod_artillery:
 		Weapon: CHSubMortarShell
 		LocalOffset: 0,-100,28, 0,100,28, 50,-100,28, 50,100,28, -50,-100,28, -50,100,28
 	Targetable:
@@ -11600,7 +11600,7 @@ usahook.husk:
 
 usacombathook:
 	Inherits: usahook
-	Inherits@heli: ^Helicopter
+	Inherits@td_nod_apacheattackhelicopter: ^Helicopter
 	Tooltip:
 		Name: Combat Chinook
 	Valued:
@@ -12981,7 +12981,7 @@ usauptowmiss:
 usaupdronegun:
 	Inherits: ^upgrade.template
 	Tooltip:
-		Name: Sentry Drone Gun
+		Name: Sentry Drone td_nod_gunturret
 	Buildable:
 		BuildPaletteOrder: 200
 		Queue: Research
@@ -13493,7 +13493,7 @@ usauwusupply:
 		Queue: Vehicle, RAVehicle
 		Prerequisites: usasupply
 		BuildPaletteOrder: 120
-		Description: Transports cash other players.\n Armed with self-defense machine gun
+		Description: Transports cash other players.\n Armed with self-defense machine td_nod_gunturret
 	Turreted:
 		Offset: -10,0,150
 	Armament:

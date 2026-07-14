@@ -6793,7 +6793,7 @@ susaf16:
 		Actor: susaf16xl.Husk
 	-AttackBomber:
 	AttackBomberCA:
-		Armaments: gun, bombs
+		Armaments: td_nod_gunturret, bombs
 		FacingTolerance: 128
 	Aircraft:
 		TurnSpeed: 16
@@ -8069,7 +8069,7 @@ sglaquadbike:
 	Valued:
 		Cost: 400 #1100
 	Tooltip:
-		Name: Quad Bike
+		Name: Quad td_nod_reconbike
 	Health:
 		HP: 20000
 	Armor:
@@ -8521,7 +8521,7 @@ sglsa2samsite:
 	Valued:
 		Cost: 1200
 	Tooltip:
-		Name: SA2 SAM Site
+		Name: SA2 td_nod_samsite Site
 	Buildable:
 		BuildPaletteOrder: 40
 		Prerequisites: sglbarracks, ~techlevel.low, ~sgla_scrap
@@ -8912,7 +8912,7 @@ sglkrait:
 		BuildPaletteOrder: 30
 		Prerequisites: sglweap, ~techlevel.medium, ~sgla_scrap
 		Queue: Vehicle, RAVehicle
-		Description: APC armed with toxin gun and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
+		Description: APC armed with toxin td_nod_gunturret and phosphorus rockets.\nCan carry 2 passengers.\n  Strong vs Infantry\n  Weak vs Vehicles
 		IconPalette: ra2
 	Mobile:
 		Speed: 125
@@ -16062,7 +16062,7 @@ CHE4:
 		Prerequisites: barracks, ~schina_leang
 		Queue: Infantry, RAInfantry
 	RenderSprites:
-		Image: E4
+		Image: td_nod_flamethrower
 
 schhammercannon:
 	Inherits: ^Tank

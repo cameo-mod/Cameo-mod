@@ -43,15 +43,15 @@ ra2nalasr:
 ra2lcrf: #Allies transport
 	idle:
 
-ra2caoutp: #Tech outpost sam
+ra2caoutp: #Tech outpost td_nod_samsite
 	turret: ra2outp
 
 ra2pdplane: #Paradrop plane
 	idle:
 
 ra2nasam:
-	idle: sam
-	turret: sam
+	idle: td_nod_samsite
+	turret: td_nod_samsite
 
 ra2sapc:
 	idle:
@@ -66,7 +66,7 @@ ra2subt: #Sub Torpedo needs voxel projectiles
 	idle:
 
 ra2nasam:
-	turret: sam
+	turret: td_nod_samsite
 
 #
 # Yuri's Revenge

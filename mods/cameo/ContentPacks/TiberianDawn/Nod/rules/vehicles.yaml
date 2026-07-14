@@ -1,4 +1,4 @@
-nodspecter:
+td_nod_specterartillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -18,7 +18,7 @@ nodspecter:
 	Tooltip:
 		Name: Specter Artillery
 	Buildable:
-		Prerequisites: ~afld, hq.nod, ~upnodspecter
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~td_nod_promotion_unlockspecter
 		BuildPaletteOrder: 60
 		Queue: Vehicle, RAVehicle
 		Description: actor_specter.description
@@ -37,21 +37,21 @@ nodspecter:
 		Weapon: SpecterArtilleryShell
 		LocalOffset: 500,0,500
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
 		Weapon: SpecterArtilleryShellUpgrade
 		LocalOffset: 500,0,500
 		MuzzleSequence: muzzle
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	WithMuzzleOverlay:
 	AutoTarget:
 		InitialStanceAI: Defend
 	FireWarheadsOnDeath:
 		Weapon: SpecterArtilleryShell
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: SpecterArtilleryShellUpgrade
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	GrantCondition@gatling:
 		Condition: cloak-force-disabled
 		RequiresCondition: gatling
@@ -70,43 +70,43 @@ nodspecter:
 		RequiresSelection: True
 		PipCount: 10
 	RenderSprites:
-		Image: nodspecter
+		Image: td_nod_specterartillery
 	Voiced:
 		VoiceSet: TSVehicle
 	Cloak:
 		UncloakOn: Attack, Damage
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_improvedartilleries, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_improvedartilleries, td_nod_upgrade_blackmarketupgrades
 
-MCV.NOD:
+td_nod_mobileconstructionvehicle:
 	Inherits@mcv: ^TDMCV
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Tooltip:
 		Name: Nod Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~afld, fix.nod
+		Prerequisites: ~td_nod_airstrip, td_nod_repairfacility
 	Transforms:
-		IntoActor: fact.nod
+		IntoActor: td_nod_constructionyard
 	RenderSprites:
 		Image: mcv
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
 
-HARV.NOD:
+td_nod_tiberiumharvester:
 	Inherits: ^TDHARV
 	Inherits@GuerillaTactics: ^GuerillaTactics
 	Inherits@AdvancedGuerillaTactics: ^AdvancedGuerillaTactics
 	Buildable:
-		Prerequisites: ~afld, proc.nod, ~!upstealthsoldier
+		Prerequisites: ~td_nod_airstrip, td_nod_tiberiumrefinery, ~!td_nod_promotion_upgradeupnodstealthname
 		Queue: Vehicle, RAVehicle
 		Description: template_harvester.description
 	Tooltip:
 		Name: Nod Tiberium Harvester
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
 
-ARTY:
+td_nod_artillery:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -121,7 +121,7 @@ ARTY:
 		Cost: 400
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~afld, hq.nod, ~!upnodspecter
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_unlockspecter
 		Queue: Vehicle, RAVehicle
 		Description: actor_arty.description
 	Mobile:
@@ -140,12 +140,12 @@ ARTY:
 		Weapon: ArtilleryShell
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
 		Weapon: ArtilleryShellUpgrade
 		LocalOffset: 624,0,208
 		MuzzleSequence: muzzle
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	WithMuzzleOverlay:
 	AutoTarget:
 		InitialStanceAI: Defend
@@ -155,14 +155,14 @@ ARTY:
 	#	EffectiveOwnerFromOwner: true
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryShell
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: ArtilleryShellUpgrade
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	ActorStatValues:
-		Upgrades: up_improvedartilleries, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_improvedartilleries, td_nod_upgrade_blackmarketupgrades
 
-FTNK:
+td_nod_flametank:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@FireActor: ^FireActor
@@ -181,7 +181,7 @@ FTNK:
 		Cost: 800
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~afld, hq.nod, ~!upnodftnk2
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~!td_nod_promotion_unlockflametankmkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_ftnk.description
 	Mobile:
@@ -206,9 +206,9 @@ FTNK:
 	FireWarheadsOnDeath:
 		Weapon: FlametankExplode
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare
 
-BGGY:
+td_nod_buggy:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -225,7 +225,7 @@ BGGY:
 		Cost: 300
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~afld, ~!upnodbuggy2
+		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_unlockbuggymkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_bggy.description
 	Mobile:
@@ -248,16 +248,16 @@ BGGY:
 		Weapon: FireballLauncherBuggy
 		LocalOffset: 175,0,50
 		MuzzleSequence: muzzle
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
-BIKE:
+td_nod_reconbike:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -271,12 +271,12 @@ BIKE:
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
 	Tooltip:
-		Name: Recon Bike
+		Name: Recon td_nod_reconbike
 	Valued:
 		Cost: 500
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~afld, ~!upchemicalbike
+		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_unlockchemicalattackbike
 		Queue: Vehicle, RAVehicle
 		Description: actor_bike.description
 	Mobile:
@@ -294,13 +294,13 @@ BIKE:
 		LocalYaw: 100, -100
 		MuzzleSequence: muzzle
 	AmmoPool@pld:
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	WithAmmoPipsDecoration:
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Armament@pointdefense:
 		Weapon: PDLaserBike
 		Turret: pointdefense
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Turreted:
 		Turret: pointdefense
 		TurnSpeed: 80
@@ -313,9 +313,9 @@ BIKE:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
-LTNK:
+td_nod_lighttank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -332,7 +332,7 @@ LTNK:
 		Cost: 600
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~afld, ~!upnodltnk2
+		Prerequisites: ~td_nod_airstrip, ~!td_nod_promotion_unlocklighttankmkii
 		Queue: Vehicle, RAVehicle
 		Description: actor_ltnk.description
 	Mobile:
@@ -361,7 +361,7 @@ LTNK:
 		LocalOffset: 250,125,125
 		MuzzleSequence: muzzle
 		FireDelay: 10
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -374,9 +374,9 @@ LTNK:
 	Selectable:
 		DecorationBounds: 786, 786, 0, 0
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
-MSSM:
+td_nod_ssmlauncher:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -393,7 +393,7 @@ MSSM:
 		Name: SSM Launcher
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~afld, tmpl, ~!upchemicalssmlauncher
+		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~!td_nod_promotion_unlockchemicalssmlauncher
 		Queue: Vehicle, RAVehicle
 		Description: actor_mssm.description
 		Icon: icon
@@ -441,14 +441,14 @@ MSSM:
 		RangeCircleType: vehicle
 	KeepsDistance:
 		Distance: 8
-	RangeMultiplier@up_improvedartilleries:
+	RangeMultiplier@td_nod_upgrade_improvedartilleries:
 		Modifier: 110
-	RevealsShroudMultiplier@up_improvedartilleries:
+	RevealsShroudMultiplier@td_nod_upgrade_improvedartilleries:
 		Modifier: 120
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_improvedartilleries, up_advancedguerillatactics, up_elementalwarfare
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_improvedartilleries, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare
 
-STNK:
+td_nod_stealthtank:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -469,7 +469,7 @@ STNK:
 		Name: Stealth Tank
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~afld, tmpl, ~!upchemicalstealthtank
+		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~!td_nod_promotion_unlockchemicalstealthtank
 		Queue: Vehicle, RAVehicle
 		Description: actor_stnk.description
 	Mobile:
@@ -493,12 +493,12 @@ STNK:
 		Weapon: StealthTankMissiles
 		LocalOffset: 213,43,128, 213,-43,128
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_blackmarketupgrades
+		RequiresCondition: !td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
 		Weapon: StealthTankMissilesBlackMarket
 		LocalOffset: 213,43,128, 213,-43,128
 		MuzzleSequence: muzzle
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	AttackFrontal:
 	# 	FacingTolerance: 0
 	# AutoTarget:
@@ -512,30 +512,30 @@ STNK:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	-MustBeDestroyed:
-	FirepowerMultiplier@up_guerillatactics:
+	FirepowerMultiplier@td_nod_upgrade_guerillatactics:
 		Modifier: 130
-	SpeedMultiplier@up_guerillatactics:
+	SpeedMultiplier@td_nod_upgrade_guerillatactics:
 		Modifier: 120
-	RangeMultiplier@up_guerillatactics:
+	RangeMultiplier@td_nod_upgrade_guerillatactics:
 		Modifier: 110
-	RevealsShroudMultiplier@up_guerillatactics:
+	RevealsShroudMultiplier@td_nod_upgrade_guerillatactics:
 		Modifier: 110
-	DetectCloakedMultiplier@up_guerillatactics:
+	DetectCloakedMultiplier@td_nod_upgrade_guerillatactics:
 		Modifier: 110
-	FirepowerMultiplier@up_advancedguerillatactics:
+	FirepowerMultiplier@td_nod_upgrade_advancedguerillatactics:
 		Modifier: 130
-	SpeedMultiplier@up_advancedguerillatactics:
+	SpeedMultiplier@td_nod_upgrade_advancedguerillatactics:
 		Modifier: 120
-	RangeMultiplier@up_advancedguerillatactics:
+	RangeMultiplier@td_nod_upgrade_advancedguerillatactics:
 		Modifier: 110
-	RevealsShroudMultiplier@up_advancedguerillatactics:
+	RevealsShroudMultiplier@td_nod_upgrade_advancedguerillatactics:
 		Modifier: 110
-	DetectCloakedMultiplier@up_advancedguerillatactics:
+	DetectCloakedMultiplier@td_nod_upgrade_advancedguerillatactics:
 		Modifier: 110
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
-chembike:
+td_nod_chemicalattackbike:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -552,12 +552,12 @@ chembike:
 	Inherits@BlackMarketUpgrades: ^BlackMarketUpgrades
 	Inherits@decoration: ^NodRankDecoration
 	Tooltip:
-		Name: Chemical Attack Bike
+		Name: Chemical Attack td_nod_reconbike
 	Valued:
 		Cost: 750
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~afld, ~upchemicalbike
+		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_unlockchemicalattackbike
 		Queue: Vehicle, RAVehicle
 		Description: actor_bike.description
 	Mobile:
@@ -575,13 +575,13 @@ chembike:
 		LocalYaw: 100, -100
 		MuzzleSequence: muzzle
 	AmmoPool@pld:
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	WithAmmoPipsDecoration:
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Armament@pointdefense:
 		Weapon: PDLaserBike
 		Turret: pointdefense
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Turreted:
 		Turret: pointdefense
 		TurnSpeed: 70
@@ -592,15 +592,15 @@ chembike:
 		PauseOnCondition: disabled
 	WithMuzzleOverlay:
 	RenderSprites:
-		Image: chembike
+		Image: td_nod_chemicalattackbike
 	Voiced:
 		VoiceSet: TSVehicle
 	FireWarheadsOnDeath:
 		Weapon: ChemicalBikeRocketsExplosion
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_blackmarketupgrades
 
-chemstnk:
+td_nod_chemicalstealthtank:
 	Inherits: ^Vehicle
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@EXP: ^GainsExperienceTD
@@ -634,7 +634,7 @@ chemstnk:
 		Type: Medium
 	Buildable:
 		BuildPaletteOrder: 100
-		Prerequisites: ~afld, tmpl, ~upchemicalstealthtank
+		Prerequisites: ~td_nod_airstrip, td_nod_templeofnod, ~td_nod_promotion_unlockchemicalstealthtank
 		Queue: Vehicle, RAVehicle
 		Description: actor_stnk.description
 	Armament:
@@ -642,7 +642,7 @@ chemstnk:
 		LocalOffset: -128,0,256
 		MuzzleSequence: muzzle
 	RenderSprites:
-		Image: chemstnk
+		Image: td_nod_chemicalstealthtank
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: ChemicalStealthTankExplosion
@@ -657,9 +657,9 @@ chemstnk:
 		CloakDelay: 75
 	-MustBeDestroyed:
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare
 
-chemssm:
+td_nod_chemicalssmlauncher:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -678,7 +678,7 @@ chemssm:
 		BuildPaletteOrder: 100
 		Queue: Vehicle, RAVehicle
 		Description: actor_mssm.description
-		Prerequisites: ~afld, td_nod_templeprime, ~upchemicalssmlauncher
+		Prerequisites: ~td_nod_airstrip, td_nod_templeprime, ~td_nod_promotion_unlockchemicalssmlauncher
 	Valued:
 		Cost: 1200
 	Tooltip:
@@ -711,15 +711,15 @@ chemssm:
 	Selectable:
 		DecorationBounds: 1280, 1280
 	RenderSprites:
-		Image: chemssm
+		Image: td_nod_chemicalssmlauncher
 	FireWarheadsOnDeath:
 		Weapon: BigTiberiumExplosion
 		EmptyWeapon: TiberiumExplosion
 	ActorStatValues:
-		Upgrades: up_elementalwarfare, up_improvedartilleries
+		Upgrades: td_nod_upgrade_elementalwarfare, td_nod_upgrade_improvedartilleries
 
-nodbuggy2:
-	Inherits: BGGY
+td_nod_buggymkii:
+	Inherits: td_nod_buggy
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@cargo: ^CargoVehicle
@@ -735,7 +735,7 @@ nodbuggy2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~afld, ~upnodbuggy2
+		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_unlockbuggymkii
 	Valued:
 		Cost: 500
 	Mobile:
@@ -748,7 +748,7 @@ nodbuggy2:
 	ChangesHealth@SelfHealing:
 		Step: 10
 	RenderSprites:
-		Image: nodbuggy2
+		Image: td_nod_buggymkii
 	Turreted:
 		TurnSpeed: 48
 	Armament:
@@ -769,14 +769,14 @@ nodbuggy2:
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 3
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Armament@LaserAA:
 		Weapon: LaserBuggy2AA
 		LocalOffset: 171,0,43
 		MuzzleSequence: muzzle
 		AmmoUsage: 0
 		PauseOnCondition: ammo < 3
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Armament@Upgrade:
 		Weapon: FireballLauncherBuggy2
 		LocalOffset: 175,0,50
@@ -784,11 +784,11 @@ nodbuggy2:
 		AmmoUsage: 1
 		#FireDelay: 1
 		PauseOnCondition: ammo < 3
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	FirepowerMultiplier@Upgrade:
 		Modifier: 50
 	Cargo:
-		InitialUnits: e1.nod, e3.nod, e4
+		InitialUnits: td_nod_minigunner, td_nod_rocketsoldier, td_nod_flamethrower
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 3
 	AmmoPool:
@@ -801,9 +801,9 @@ nodbuggy2:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_blackmarketupgrades
 
-nodltnk2:
+td_nod_lighttankmkii:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceTD
@@ -826,7 +826,7 @@ nodltnk2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~afld, ~upnodltnk2
+		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_unlocklighttankmkii
 		Description: actor_ltnk2.description
 	Mobile:
 		Speed: 100
@@ -855,11 +855,11 @@ nodltnk2:
 		LocalOffset: 250,125,125
 		MuzzleSequence: muzzle
 		FireDelay: 10
-		RequiresCondition: up_blackmarketupgrades
+		RequiresCondition: td_nod_upgrade_blackmarketupgrades
 	Armament@pointdefense:
 		Weapon: PDLaserLTNK2
 	RenderSprites:
-		Image: nodltnk2
+		Image: td_nod_lighttankmkii
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	#SpawnActorOnDeath:
@@ -869,9 +869,9 @@ nodltnk2:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare, up_elitecapacitors, up_blackmarketupgrades
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare, td_nod_upgrade_elitecapacitors, td_nod_upgrade_blackmarketupgrades
 
-nodftnk2:
+td_nod_flametankmkii:
 	Inherits: ^Tank
 	Inherits@Template: ^LineBreakerTemplate
 	Inherits@FireActor: ^FireActor
@@ -892,7 +892,7 @@ nodftnk2:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~afld, hq.nod, ~upnodftnk2
+		Prerequisites: ~td_nod_airstrip, td_nod_communicationscenter, ~td_nod_promotion_unlockflametankmkii
 		Description: actor_ftnk.description
 	Mobile:
 		Speed: 75
@@ -914,16 +914,16 @@ nodftnk2:
 		LocalOffset: 600,250,250, 600,-250,250
 		MuzzleSequence: muzzle
 	RenderSprites:
-		Image: nodftnk2
+		Image: td_nod_flametankmkii
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	FireWarheadsOnDeath:
 		Weapon: FlametankExplode2
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics, up_elementalwarfare
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics, td_nod_upgrade_elementalwarfare
 
-tanodharv:
+td_nod_stealthharvester:
 	Inherits: ^TDHARV
 	Inherits@cloak: ^CloakedVehicle
 	Inherits@cloakanim: ^TiberiumCloakAnimation
@@ -950,9 +950,9 @@ tanodharv:
 		Sequence: harvesting
 		Palette: ra2effect
 	Buildable:
-		Prerequisites: ~afld, ~upstealthsoldier
+		Prerequisites: ~td_nod_airstrip, ~td_nod_promotion_upgradeupnodstealthname
 		Queue: Vehicle, RAVehicle
 	RenderSprites:
-		Image: tanodharv
+		Image: td_nod_stealthharvester
 	ActorStatValues:
-		Upgrades: up_guerillatactics, up_advancedguerillatactics
+		Upgrades: td_nod_upgrade_guerillatactics, td_nod_upgrade_advancedguerillatactics
