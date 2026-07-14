@@ -72,19 +72,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: modjapan
-		BaseActor: ramcv.japan
+		BaseActor: japan_japanesemobileconstructionvehicle
 	StartingUnits@defaultmodjapan:
 		Class: light
 		ClassName: Light Support
 		Factions: modjapan
-		BaseActor: ramcv.japan
-		SupportActors: rae1,rae1,rae1,rae3,rae3,modkubel,modtypej
+		BaseActor: japan_japanesemobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,japan_scoutcar,japan_igomediumtank
 	StartingUnits@heavymodjapan:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: modjapan
-		BaseActor: ramcv.japan
-		SupportActors: rae1,rae1,rae1,rae3,rae3,modkubel,modtypej,modbggy,modbggy,modtypej,modhover
+		BaseActor: japan_japanesemobileconstructionvehicle
+		SupportActors: rae1,rae1,rae1,rae3,rae3,japan_scoutcar,japan_igomediumtank,japan_grenadebuggy,japan_grenadebuggy,japan_igomediumtank,japan_hovercrafttransport
 
 ####################################################################################################
 #		Experience
@@ -378,83 +378,83 @@ World:
 ^JapanSpawnActorsOnSell:
 	Inherits: ^RASpawnActorsOnSell
 	SpawnActorsOnSell:
-		ActorTypes: rae6,raje1,raje1,raje1
+		ActorTypes: rae6,japan_imperialscoutsman,japan_imperialscoutsman,japan_imperialscoutsman
 
 ^BushidoDiscipline:
-	DamageMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	DamageMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 90
-	FirepowerMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	FirepowerMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 110
-	ReloadDelayMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	ReloadDelayMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 90
-	SpeedMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	SpeedMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 110
-	RangeMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	RangeMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 110
-	RevealsShroudMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	RevealsShroudMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 110
-	DetectCloakedMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	DetectCloakedMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 110
-	InaccuracyMultiplier@up_bushidodiscipline:
-		RequiresCondition: up_bushidodiscipline
+	InaccuracyMultiplier@japan_upgrade_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
 		Modifier: 90
-	ChangesHealth@up_bushidodiscipline:
+	ChangesHealth@japan_upgrade_bushidodiscipline:
 		Step: 10
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline
-	ChangesShield@up_bushidodiscipline:
+		RequiresCondition: japan_upgrade_bushidodiscipline
+	ChangesShield@japan_upgrade_bushidodiscipline:
 		Step: 20
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline
+		RequiresCondition: japan_upgrade_bushidodiscipline
 	GrantConditionOnDamageState@wounded:
 		Condition: wounded
 	DamageMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 80
 	FirepowerMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 120
 	ReloadDelayMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 80
 	SpeedMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 120
 	RangeMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 120
 	RevealsShroudMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 120
 	DetectCloakedMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 120
 	InaccuracyMultiplier@wounded:
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 		Modifier: 80
 	ChangesHealth@wounded:
 		Step: 20
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 	ChangesShield@wounded:
 		Step: 40
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_bushidodiscipline && wounded
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
 	WithDecoration@wounded:
 		Image: bushido_icon
 		Sequence: idle
@@ -462,89 +462,89 @@ World:
 		Position: TopRight
 		BlinkInterval: 1
 		BlinkPattern: On, Off, On, Off
-		RequiresCondition: up_bushidodiscipline && wounded
-	GrantConditionOnPrerequisite@up_bushidodiscipline:
-		Condition: up_bushidodiscipline
-		Prerequisites: up_bushidodiscipline
+		RequiresCondition: japan_upgrade_bushidodiscipline && wounded
+	GrantConditionOnPrerequisite@japan_upgrade_bushidodiscipline:
+		Condition: japan_upgrade_bushidodiscipline
+		Prerequisites: japan_upgrade_bushidodiscipline
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline
+		Upgrades: japan_upgrade_bushidodiscipline
 
 ^WaveforceBullets:
-	FirepowerMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	FirepowerMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
 		Modifier: 110
-	ReloadDelayMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	ReloadDelayMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
 		Modifier: 90
-	RangeMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	RangeMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
 		Modifier: 110
-	RevealsShroudMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	RevealsShroudMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
 		Modifier: 110
-	DetectCloakedMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	DetectCloakedMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
 		Modifier: 110
-	InaccuracyMultiplier@up_waveforcebullets:
-		RequiresCondition: up_waveforcebullets
+	InaccuracyMultiplier@japan_upgrade_waveforcebullets:
+		RequiresCondition: japan_upgrade_waveforcebullets
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_waveforcebullets:
-		Condition: up_waveforcebullets
-		Prerequisites: up_waveforcebullets
+	GrantConditionOnPrerequisite@japan_upgrade_waveforcebullets:
+		Condition: japan_upgrade_waveforcebullets
+		Prerequisites: japan_upgrade_waveforcebullets
 	ActorStatValues:
-		Upgrades: up_waveforcebullets
+		Upgrades: japan_upgrade_waveforcebullets
 
 ^DivineWindProtocol:
-	DamageMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	DamageMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
 		Modifier: 90
-	FirepowerMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	FirepowerMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
 		Modifier: 110
-	ReloadDelayMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	ReloadDelayMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
 		Modifier: 90
-	ReloadAmmoDelayMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	ReloadAmmoDelayMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
 		Modifier: 90
-	SpeedMultiplier@up_divinewindprotocol:
-		RequiresCondition: up_divinewindprotocol
+	SpeedMultiplier@japan_upgrade_divinewindprotocol:
+		RequiresCondition: japan_upgrade_divinewindprotocol
 		Modifier: 110
-	GrantConditionOnPrerequisite@up_divinewindprotocol:
-		Condition: up_divinewindprotocol
-		Prerequisites: up_divinewindprotocol
+	GrantConditionOnPrerequisite@japan_upgrade_divinewindprotocol:
+		Condition: japan_upgrade_divinewindprotocol
+		Prerequisites: japan_upgrade_divinewindprotocol
 	ActorStatValues:
-		Upgrades: up_divinewindprotocol
+		Upgrades: japan_upgrade_divinewindprotocol
 
 ^StealthSuitIntegration:
-	Cloak@up_stealthsuitintegration:
+	Cloak@japan_upgrade_stealthsuitintegration:
 		InitialDelay: 125
 		CloakDelay: 75
 		CloakSound: appear1.aud
 		UncloakSound: trans1.aud
 		UncloakOn: Attack, Move, Damage, Heal, SelfHeal
-		RequiresCondition: up_stealthsuitintegration
-	SpeedMultiplier@up_stealthsuitintegration:
-		RequiresCondition: up_stealthsuitintegration
+		RequiresCondition: japan_upgrade_stealthsuitintegration
+	SpeedMultiplier@japan_upgrade_stealthsuitintegration:
+		RequiresCondition: japan_upgrade_stealthsuitintegration
 		Modifier: 110
-	DamageMultiplier@up_stealthsuitintegration:
-		RequiresCondition: up_stealthsuitintegration
+	DamageMultiplier@japan_upgrade_stealthsuitintegration:
+		RequiresCondition: japan_upgrade_stealthsuitintegration
 		Modifier: 90
 	Shielded:
 		DamageRegenDelay: 125
 		RegenInterval: 1
 		ShieldsUpCondition: shielded
-		RequiresCondition: !disabled && (up_stealthsuitintegration || shieldgen || shielded)
+		RequiresCondition: !disabled && (japan_upgrade_stealthsuitintegration || shieldgen || shielded)
 		SelectionBarColor: 8888FFFF
 	GrantCondition@shieldpermanent:
 		Condition: shieldpermanent
-		RequiresCondition: up_stealthsuitintegration
+		RequiresCondition: japan_upgrade_stealthsuitintegration
 	ChangesShield@personal_shield:
 		Step: 30
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 125
-		RequiresCondition: up_stealthsuitintegration
+		RequiresCondition: japan_upgrade_stealthsuitintegration
 	Armor:
 		RequiresCondition: !shielded
 	Armor@shielded:
@@ -555,62 +555,62 @@ World:
 		Modifier: 90
 	ChangesShield@shielddischarge:
 		Delay: 10
-	GrantConditionOnPrerequisite@up_stealthsuitintegration:
-		Condition: up_stealthsuitintegration
-		Prerequisites: up_stealthsuitintegration
+	GrantConditionOnPrerequisite@japan_upgrade_stealthsuitintegration:
+		Condition: japan_upgrade_stealthsuitintegration
+		Prerequisites: japan_upgrade_stealthsuitintegration
 	ActorStatValues:
-		Upgrades: up_stealthsuitintegration:
+		Upgrades: japan_upgrade_stealthsuitintegration:
 
 ^EnergizedArrows:
-	FirepowerMultiplier@up_energizedarrows:
-		RequiresCondition: up_energizedarrows
+	FirepowerMultiplier@japan_upgrade_energizedarrows:
+		RequiresCondition: japan_upgrade_energizedarrows
 		Modifier: 125
-	GrantConditionOnPrerequisite@up_energizedarrows:
-		Condition: up_energizedarrows
-		Prerequisites: up_energizedarrows
+	GrantConditionOnPrerequisite@japan_upgrade_energizedarrows:
+		Condition: japan_upgrade_energizedarrows
+		Prerequisites: japan_upgrade_energizedarrows
 	ActorStatValues:
-		Upgrades: up_energizedarrows
+		Upgrades: japan_upgrade_energizedarrows
 
 ^SuperiorWarEngines:
-	SpeedMultiplier@up_superiorwarengines:
-		RequiresCondition: up_superiorwarengines
+	SpeedMultiplier@japan_upgrade_superiorwarengines:
+		RequiresCondition: japan_upgrade_superiorwarengines
 		Modifier: 120
-	ReloadDelayMultiplier@up_superiorwarengines:
-		RequiresCondition: up_superiorwarengines
+	ReloadDelayMultiplier@japan_upgrade_superiorwarengines:
+		RequiresCondition: japan_upgrade_superiorwarengines
 		Modifier: 80
-	DamageMultiplier@up_superiorwarengines:
-		RequiresCondition: up_superiorwarengines
+	DamageMultiplier@japan_upgrade_superiorwarengines:
+		RequiresCondition: japan_upgrade_superiorwarengines
 		Modifier: 80
-	GrantConditionOnPrerequisite@up_superiorwarengines:
-		Condition: up_superiorwarengines
-		Prerequisites: up_superiorwarengines
+	GrantConditionOnPrerequisite@japan_upgrade_superiorwarengines:
+		Condition: japan_upgrade_superiorwarengines
+		Prerequisites: japan_upgrade_superiorwarengines
 	ActorStatValues:
-		Upgrades: up_superiorwarengines
+		Upgrades: japan_upgrade_superiorwarengines
 
 ^AdvancedPlasmaWeapons:
-	FirepowerMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	FirepowerMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 		Modifier: 110
-	ReloadDelayMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	ReloadDelayMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 		Modifier: 90
-	RangeMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	RangeMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 		Modifier: 110
-	RevealsShroudMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	RevealsShroudMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 		Modifier: 110
-	DetectCloakedMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	DetectCloakedMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 		Modifier: 110
-	InaccuracyMultiplier@up_advancedplasmaweapons:
-		RequiresCondition: up_advancedplasmaweapons
+	InaccuracyMultiplier@japan_upgrade_advancedplasmaweapons:
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_advancedplasmaweapons:
-		Condition: up_advancedplasmaweapons
-		Prerequisites: up_advancedplasmaweapons
+	GrantConditionOnPrerequisite@japan_upgrade_advancedplasmaweapons:
+		Condition: japan_upgrade_advancedplasmaweapons
+		Prerequisites: japan_upgrade_advancedplasmaweapons
 	ActorStatValues:
-		Upgrades: up_advancedplasmaweapons
+		Upgrades: japan_upgrade_advancedplasmaweapons
 
 ^NanoTechRepairs:
 	ChangesHealth@up_nanotechrepairs1:
@@ -618,21 +618,21 @@ World:
 		Delay: 100
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: japan_upgrade_nanotechrepairs
 	ChangesHealth@up_nanotechrepairs2:
 		Step: 20
 		Delay: 1
 		StartIfBelow: 100
 		DamageCooldown: 1
-		RequiresCondition: up_nanotechrepairs
-	DamageMultiplier@up_nanotechrepairs:
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: japan_upgrade_nanotechrepairs
+	DamageMultiplier@japan_upgrade_nanotechrepairs:
+		RequiresCondition: japan_upgrade_nanotechrepairs
 		Modifier: 90
-	GrantConditionOnPrerequisite@up_nanotechrepairs:
-		Condition: up_nanotechrepairs
-		Prerequisites: up_nanotechrepairs
+	GrantConditionOnPrerequisite@japan_upgrade_nanotechrepairs:
+		Condition: japan_upgrade_nanotechrepairs
+		Prerequisites: japan_upgrade_nanotechrepairs
 	ActorStatValues:
-		Upgrades: up_nanotechrepairs
+		Upgrades: japan_upgrade_nanotechrepairs
 
 ^NanoTechExtraRepairs:
 	WithColoredOverlay@nanotechrepairsdamage:
@@ -665,7 +665,7 @@ World:
 		Condition: nanotechrepairsdamagecooldown
 		Duration: 5
 	GrantConditionOnDamage@nanotechrepairsdamage:
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: japan_upgrade_nanotechrepairs
 		Condition: nanotechrepairsdamage
 		Duration: 10
 		PlayerRelationship: Ally, Neutral, Enemy
@@ -699,7 +699,7 @@ World:
 		Condition: extrananotechrepairsdamagecooldown
 		Duration: 10
 	GrantConditionOnDamage@extrananotechrepairsdamage:
-		RequiresCondition: up_nanotechrepairs
+		RequiresCondition: japan_upgrade_nanotechrepairs
 		Condition: extrananotechrepairsdamage
 		Duration: 20
 		PlayerRelationship: Ally, Neutral, Enemy
@@ -972,14 +972,14 @@ ra1_soviet_ak47conscript:
 	ActorStatValues:
 		Upgrades: ra1_soviet_promotion_infantrysuperoptics, ra1_soviet_doctrine_conscription, ra1_soviet_upgrade_vengeance, ra1_soviet_upgrade_menofsteel
 
-RAJE1:
+japan_imperialscoutsman:
 	Inherits: ^RAE1
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@BushidoDiscipline: ^BushidoDiscipline
 	Inherits@StealthSuitIntegration: ^StealthSuitIntegration
 	Inherits@WaveforceBullets: ^WaveforceBullets
 	Buildable:
-		Prerequisites: ~modtentj
+		Prerequisites: ~japan_japanesebarracks
 		Queue: Infantry, RAInfantry
 		Description: actor_e1.description-jp
 	Tooltip:
@@ -1001,22 +1001,22 @@ RAJE1:
 		VoiceSet: JapaneseVoice
 	Armament@PRIMARY: ##########
 		Weapon: CHGuardRifle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: CHGuardRifle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
 		Weapon: CHGuardRifleWaveforce
 		LocalOffset: 128,0,256
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: CHGuardRifleWaveforce
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_waveforcebullets
+		Upgrades: japan_upgrade_bushidodiscipline, japan_upgrade_stealthsuitintegration, japan_upgrade_waveforcebullets
 
 ra1_soviet_grenadier:
 	Inherits: ^Soldier
@@ -1414,7 +1414,7 @@ ra1_soviet_firerocketsoldier:
 	ActorStatValues:
 		Upgrades: ra1_soviet_promotion_infantrysuperoptics, ra1_soviet_upgrade_scorchedearth, ra1_soviet_upgrade_menofsteel
 
-RAJE3:
+japan_tankbuster:
 	Inherits: ^Soldier
 	Inherits@anim: ^RA2Infantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -1434,7 +1434,7 @@ RAJE3:
 		BuildPaletteOrder: 20
 		Queue: Infantry, RAInfantry
 		Description: actor_e3.description
-		Prerequisites: ~modtentj, dome.japan
+		Prerequisites: ~japan_japanesebarracks, japan_japaneseradararray
 	Mobile:
 		Speed: 48
 	Health:
@@ -1452,14 +1452,14 @@ RAJE3:
 		Weapon: TankBusterBeamCannonCharged
 		LocalOffset: 256,43,341
 		FireDelay: 5
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: TankBusterBeamCannonCharged
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	FirepowerMultiplier@DualBeam:
 		Modifier: 50
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	TakeCover:
 		ProneOffset: 180,0,-200
 	AttackFrontal:
@@ -1470,7 +1470,7 @@ RAJE3:
 		StandSequences: parachute
 		RequiresCondition: parachute
 	RenderSprites:
-		Image: raje3
+		Image: japan_tankbuster
 		PlayerPalette: ra2cyborgplayer
 	WithDeathAnimation:
 		DeathSequencePalette: ra2cyborgplayer
@@ -1479,7 +1479,7 @@ RAJE3:
 	Voiced:
 		VoiceSet: JapaneseVoice
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+		Upgrades: japan_upgrade_bushidodiscipline, japan_upgrade_stealthsuitintegration, japan_upgrade_advancedplasmaweapons
 	GrantExternalConditionToTransport:
 		Condition: ifv-miss
 
@@ -1554,7 +1554,7 @@ ra1_soviet_flamethrower:
 	ActorStatValues:
 		Upgrades: ra1_soviet_promotion_infantrysuperoptics, ra1_soviet_doctrine_conscription, ra1_soviet_doctrine_inferno, ra1_soviet_upgrade_scorchedearth, ra1_soviet_upgrade_menofsteel
 
-RAJE4:
+japan_japaneseflamethrower:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -1572,7 +1572,7 @@ RAJE4:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 45
-		Prerequisites: ~modtentj
+		Prerequisites: ~japan_japanesebarracks
 		Queue: Infantry, RAInfantry
 		Description: actor_e4.description
 	Valued:
@@ -1587,20 +1587,20 @@ RAJE4:
 		Weapon: Flamer
 		LocalOffset: 700,0,500
 		FireDelay: 8
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@GARRISONED:
 		Name: garrisoned
 		Weapon: Flamer
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: PlasmaFlamer
 		LocalOffset: 700,0,500
 		FireDelay: 8
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeGARRISONED:
 		Name: garrisoned
 		Weapon: PlasmaFlamer
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	WithInfantryBody:
 		DefaultAttackSequence: shoot
 		RequiresCondition: !parachute
@@ -1622,7 +1622,7 @@ RAJE4:
 	Voiced:
 		VoiceSet: JapaneseVoice
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration
+		Upgrades: japan_upgrade_bushidodiscipline, japan_upgrade_stealthsuitintegration
 
 ra1_soviet_shocktrooper:
 	Inherits: ^Soldier
@@ -3544,13 +3544,13 @@ ra1_soviet_heavyindustrialminer:
 		Image: ra1_soviet_heavyindustrialminer
 		PlayerPalette: player_rgba
 
-RAHARV.JAPAN:
+japan_japaneseoretruck:
 	Inherits: ^RAHARV
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Tooltip:
 		Name: Japanese Ore Truck
 	Buildable:
-		Prerequisites: ~jproc
+		Prerequisites: ~japan_japaneseorerefinery
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	Harvester:
@@ -3623,15 +3623,15 @@ ra1_soviet_mobileconstructionvehicle:
 	ActorStatValues:
 		Upgrades: ra1_soviet_doctrine_heavyarmor, ra1_soviet_upgrade_stalinium
 
-RAMCV.JAPAN:
+japan_japanesemobileconstructionvehicle:
 	Inherits: ^RAMCV
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Tooltip:
 		Name: Japanese Mobile Construction Vehicle
 	Buildable:
-		Prerequisites: ~modraweapj, rafix.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot
 	Transforms:
-		IntoActor: rafact.japan
+		IntoActor: japan_japaneseconstructionyard
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 
@@ -4456,7 +4456,7 @@ BADR.Japan:
 	SpawnActorOnDeath:
 		Actor: C17.Husk
 	ActorStatValues:
-		Upgrades: up_divinewindprotocol, up_nanotechrepairs
+		Upgrades: japan_upgrade_divinewindprotocol, japan_upgrade_nanotechrepairs
 
 C17.Bomber:
 	Inherits: BADR.Bomber
@@ -4929,7 +4929,7 @@ ra1_soviet_nuclearyak:
 	ActorStatValues:
 		Upgrades: ra1_soviet_doctrine_nuclearwar, ra1_soviet_upgrade_incendiarybullets, ra1_soviet_upgrade_stalinium
 
-MODKAMI:
+japan_zerofighter:
 	Inherits: ^RANeutralPlane
 	Inherits@Template: ^FighterTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -4944,7 +4944,7 @@ MODKAMI:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~modraafld
+		Prerequisites: ~japan_japaneseairfield
 		Description: actor_yak.description
 	Valued:
 		Cost: 1200
@@ -4964,26 +4964,26 @@ MODKAMI:
 		MuzzleSequence: muzzle
 		AmmoUsage: 6
 		PauseOnCondition: ammo < 6
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !japan_upgrade_energizedarrows
 	Armament@MissilesUpgrade:
 		Weapon: ZeroFighterArrowsEnergized
 		LocalOffset: 85,-300,-85, 85,300,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 6
 		PauseOnCondition: ammo < 6
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	Armament@PRIMARY:
 		Weapon: ZeroFighterChainGun
 		LocalOffset: 256,213,0, 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 6
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 256,213,0, 256,-213,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: ammo < 6
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	FirepowerMultiplier@DualWeapon:
 		Modifier: 50
 	AttackAircraft:
@@ -4998,7 +4998,7 @@ MODKAMI:
 	SpawnActorOnDeath:
 		Actor: modkami.Husk
 	EjectOnDeath:
-		PilotActor: RAJE1
+		PilotActor: japan_imperialscoutsman
 	LeavesTrails:
 		Offsets: -1000,0,250
 		MovingInterval: 2
@@ -5013,7 +5013,7 @@ MODKAMI:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	RenderSprites:
-		Image: modkami
+		Image: japan_zerofighter
 	AmmoPool:
 		Ammo: 24
 		AmmoCondition: ammo
@@ -5027,9 +5027,9 @@ MODKAMI:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_divinewindprotocol, up_energizedarrows, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_divinewindprotocol, japan_upgrade_energizedarrows, japan_upgrade_nanotechrepairs
 
-MODBOMBER:
+japan_japanesebomber:
 	Inherits: ^RANeutralPlane
 	Inherits@reload: ^RearmableAircraft
 	Inherits@Template: ^BomberTemplate
@@ -5045,7 +5045,7 @@ MODBOMBER:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 30
-		Prerequisites: ~modraafld, modjtek
+		Prerequisites: ~japan_japaneseairfield, japan_japanesetechcenter
 		Description: actor_jpbomber.description
 	Valued:
 		Cost: 1500
@@ -5070,24 +5070,24 @@ MODBOMBER:
 		LocalOffset: 0,128,0, 0,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@UpgradeGuns:
 		Name: secondary
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 0,128,0, 0,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@Bombs:
 		Name: primary
 		Weapon: JapaneseHeavyBomb
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeBombs: ##########
 		Name: primary
 		Weapon: JapanesePlasmaBomb
 		PauseOnCondition: !ammo
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	RangeMultiplier@Chaingun:
 		Modifier: 70
 	Aircraft:
@@ -5111,7 +5111,7 @@ MODBOMBER:
 	SpawnActorOnDeath:
 		Actor: modbomber.Husk
 	EjectOnDeath:
-		PilotActor: RASAMURAI
+		PilotActor: japan_samurai
 	LeavesTrails:
 		Offsets: -500,0,200
 		MovingInterval: 2
@@ -5126,7 +5126,7 @@ MODBOMBER:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	RenderSprites:
-		Image: modbomber
+		Image: japan_japanesebomber
 	WithAmmoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: True
@@ -5134,7 +5134,7 @@ MODBOMBER:
 	GrantConditionOnDamageState@SmokeTrail:
 		Condition: enable-smoke
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_advancedplasmaweapons, up_divinewindprotocol, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_advancedplasmaweapons, japan_upgrade_divinewindprotocol, japan_upgrade_nanotechrepairs
 
 ra1_soviet_migattackbomber:
 	Inherits: ^RANeutralPlane
@@ -5967,7 +5967,7 @@ ra1_allies_longbow:
 	ActorStatValues:
 		Upgrades: ra1_allies_upgrade_advancedradarsystems, ra1_allies_upgrade_lasertargetingsystems, ra1_allies_upgrade_cryomissiles, ra1_allies_upgrade_airsuperioritydoctrine, ra1_allies_upgrade_gpssatellitesupport
 
-JHIND:
+japan_skyhawk:
 	Inherits: ^Helicopter
 	Inherits@Template: ^HelicopterTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -5984,7 +5984,7 @@ JHIND:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 20
-		Prerequisites: ~modraafld, modjtek
+		Prerequisites: ~japan_japaneseairfield, japan_japanesetechcenter
 		Description: actor_hind.description
 	Valued:
 		Cost: 2000
@@ -6004,42 +6004,42 @@ JHIND:
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !japan_upgrade_energizedarrows
 	Armament@MissilesUpgrade:
 		Weapon: JHindArrowsEnergized
 		LocalOffset: 85,-300,-85, 85,300,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 4
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	Armament@Cannon:
 		Weapon: JHindCannon
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@CannonUpgrade:
 		Weapon: JHindPlasmaCannon
 		LocalOffset: 85,250,-85, 85,-250,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 2
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@ChainGun:
 		Weapon: JHindChainGun
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@ChainGunUpgrade:
 		Weapon: JHindChainGunWaveforce
 		LocalOffset: 85,-200,-85, 85,200,-85
 		MuzzleSequence: muzzle
 		AmmoUsage: 1
 		PauseOnCondition: ammo < 4
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	AttackAircraft:
 		FacingTolerance: 40
 		AttackType: Hover
@@ -6051,7 +6051,7 @@ JHIND:
 	SpawnActorOnDeath:
 		Actor: JHIND.Husk
 	EjectOnDeath:
-		PilotActor: RAJE3
+		PilotActor: japan_tankbuster
 	LeavesTrails:
 		Offsets: -250,0,0
 		Image: smokey
@@ -6088,7 +6088,7 @@ JHIND:
 		UncloakSound: appear1.aud
 		UncloakOn: Unload, Infiltrate, Demolish, Dock, Damage, Heal, Attack
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_divinewindprotocol, up_energizedarrows, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_divinewindprotocol, japan_upgrade_energizedarrows, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
 ra1_allies_alliedchinooktransport:
 	Inherits: ^Helicopter
@@ -6268,7 +6268,7 @@ modhip.husk:
 #		Modded RA Japan
 ####################################################################################################
 
-MODKUBEL:
+japan_scoutcar:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -6281,7 +6281,7 @@ MODKUBEL:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 30
-		Prerequisites: ~modraweapj, ~!uparmoredcarr, ~!upgrenadebuggy
+		Prerequisites: ~japan_japanesewarfactory, ~!japan_promotion_unlockarmoredcar, ~!japan_promotion_unlockgrenadebuggy
 		Description: actor_jeep.description
 	Valued:
 		Cost: 300
@@ -6305,12 +6305,12 @@ MODKUBEL:
 		Weapon: M60mgJapan
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
 		Weapon: M60mgWaveforce
 		MuzzleSequence: muzzle
 		LocalOffset: 128,0,43
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -6319,9 +6319,9 @@ MODKUBEL:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
-MODTYPEJ:
+japan_igomediumtank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -6336,7 +6336,7 @@ MODTYPEJ:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, ~!upchiha
+		Prerequisites: ~japan_japanesewarfactory, ~!japan_promotion_unlockheavychihaheavytank
 		Description: template_mbt.description
 	Valued:
 		Cost: 800
@@ -6364,14 +6364,14 @@ MODTYPEJ:
 		RecoilRecovery: 38
 		LocalOffset: 720,0,240
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: Type89PlasmaCannon
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -6383,9 +6383,9 @@ MODTYPEJ:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-MODNANO:
+japan_nanodronebuggy:
 	Inherits: ^Vehicle
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -6401,7 +6401,7 @@ MODNANO:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 70
-		Prerequisites: ~modraweapj, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray
 		Description: actor_nanobggy.description
 	Valued:
 		Cost: 1200
@@ -6441,11 +6441,11 @@ MODNANO:
 	FireWarheadsOnDeath:
 		Weapon: NanoArtilleryAG
 	RenderSprites:
-		Image: modnano
+		Image: japan_nanodronebuggy
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-jballista:
+japan_ballista:
 	Inherits: ^Tank
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -6456,7 +6456,7 @@ jballista:
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~modraweapj, modjtek
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter
 		BuildPaletteOrder: 70
 		Description: actor_arty.description
 	Valued:
@@ -6484,18 +6484,18 @@ jballista:
 		Weapon: BallistaMultiShotEnergized
 		LocalOffset: 624,0,208
 		FireDelay: 3
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	WithMuzzleOverlay:
 	FireWarheadsOnDeath:
 		Weapon: ArtilleryExplode
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
-	FirepowerMultiplier@up_energizedarrows:
+	FirepowerMultiplier@japan_upgrade_energizedarrows:
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_energizedarrows, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: japan_upgrade_energizedarrows, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
-modoitank:
+japan_oitank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -6512,7 +6512,7 @@ modoitank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
-		Prerequisites: ~modraweapj, modjtek
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter
 		Description: actor_oitank.description
 	Valued:
 		Cost: 7000
@@ -6560,7 +6560,7 @@ modoitank:
 		Recoil: 350
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Turret: main
 		Weapon: OIBigPlasmaCannon
@@ -6568,7 +6568,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@PRIMARY:
 		Turret: primary
 		Weapon: OISmallCannon
@@ -6576,7 +6576,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@SECONDARY:
 		Turret: secondary
 		Weapon: OISmallCannon
@@ -6584,7 +6584,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Back:
 		Turret: back
 		Weapon: OISmallCannon
@@ -6592,7 +6592,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@UpgradePRIMARY:
 		Turret: primary
 		Weapon: OISmallPlasmaCannon
@@ -6600,7 +6600,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeSECONDARY:
 		Turret: secondary
 		Weapon: OISmallPlasmaCannon
@@ -6608,7 +6608,7 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeBack:
 		Turret: back
 		Weapon: OISmallPlasmaCannon
@@ -6616,33 +6616,33 @@ modoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@PRIMARYFlame:
 		Turret: primary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@SECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@UpgradePRIMARYFlame:
 		Turret: primary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeSECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	AttackTurreted:
 		Turrets: primary, secondary, main, back
 	WithMuzzleOverlay:
@@ -6670,9 +6670,9 @@ modoitank:
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-MODCORE:
+japan_corewarfactory:
 	Inherits: ^Vehicle
 	Inherits@selection: ^SelectableSupportUnit
 	Inherits@mcv: ^MCV
@@ -6680,7 +6680,7 @@ MODCORE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		BuildDurationModifier: 25
 		Description: actor_jpcore.description-factory
 	Valued:
@@ -6705,7 +6705,7 @@ MODCORE:
 	RevealsShroud:
 		Range: 7c0 #4c0
 	Transforms:
-		IntoActor: modraweapj
+		IntoActor: japan_japanesewarfactory
 		Offset: -1,-1
 		Facing: 384
 		TransformSounds: placbldg.aud, build5.aud
@@ -6716,18 +6716,18 @@ MODCORE:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	RenderSprites:
-		Image: modcore
+		Image: japan_corewarfactory
 	WithTextDecoration:
 		Text: Factory
 	Passenger:
 		Weight: 4
 
-MODCORE1:
-	Inherits: MODCORE
+japan_corerefinery:
+	Inherits: japan_corewarfactory
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		Description: actor_jpcore.description-refinery
 		Icon: icon1
 	Valued:
@@ -6735,18 +6735,18 @@ MODCORE1:
 	Tooltip:
 		Name: Core (Refinery)
 	Transforms:
-		IntoActor: jproc
+		IntoActor: japan_japaneseorerefinery
 	WithTextDecoration:
 		Text: Refinery
 	Passenger:
 		Weight: 4
 
-MODCORE2:
-	Inherits: MODCORE
+japan_corepowerplant:
+	Inherits: japan_corewarfactory
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		Description: actor_jpcore.description-power
 		Icon: icon2
 	Valued:
@@ -6754,18 +6754,18 @@ MODCORE2:
 	Tooltip:
 		Name: Core (Power Plant)
 	Transforms:
-		IntoActor: jpwr
+		IntoActor: japan_waveforcereactor
 	WithTextDecoration:
 		Text: Power Plant
 	Passenger:
 		Weight: 3
 
-MODCORE3:
-	Inherits: MODCORE
+japan_corebarracks:
+	Inherits: japan_corewarfactory
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		Description: actor_jpcore.description-barracks
 		Icon: icon3
 	Valued:
@@ -6773,18 +6773,18 @@ MODCORE3:
 	Tooltip:
 		Name: Core (Barracks)
 	Transforms:
-		IntoActor: modtentj
+		IntoActor: japan_japanesebarracks
 	WithTextDecoration:
 		Text: Barracks
 	Passenger:
 		Weight: 3
 
-MODCORE4:
-	Inherits: MODCORE
+japan_coreradar:
+	Inherits: japan_corewarfactory
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		Description: actor_jpcore.description-radar
 		Icon: icon4
 	Valued:
@@ -6792,18 +6792,18 @@ MODCORE4:
 	Tooltip:
 		Name: Core (Radar)
 	Transforms:
-		IntoActor: dome.japan
+		IntoActor: japan_japaneseradararray
 	WithTextDecoration:
 		Text: Radar
 	Passenger:
 		Weight: 4
 
-MODCORE5:
-	Inherits: MODCORE
+japan_coreairfield:
+	Inherits: japan_corewarfactory
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		Description: actor_jpcore.description-airfield
 		Icon: icon5
 	Valued:
@@ -6811,18 +6811,18 @@ MODCORE5:
 	Tooltip:
 		Name: Core (Airfield)
 	Transforms:
-		IntoActor: modraafld
+		IntoActor: japan_japaneseairfield
 	WithTextDecoration:
 		Text: Airfield
 	Passenger:
 		Weight: 4
 
-MODCORE6:
-	Inherits: MODCORE
+japan_coreservicedepot:
+	Inherits: japan_corewarfactory
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		Description: actor_jpcore.description-service-depot
 		Icon: icon6
 	Valued:
@@ -6830,18 +6830,18 @@ MODCORE6:
 	Tooltip:
 		Name: Core (Service Depot)
 	Transforms:
-		IntoActor: rafix.japan
+		IntoActor: japan_japaneseservicedepot
 	WithTextDecoration:
 		Text: Service Depot
 	Passenger:
 		Weight: 4
 
-MODCORE7:
-	Inherits: MODCORE
+japan_coretechcenter:
+	Inherits: japan_corewarfactory
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 210
-		Prerequisites: ~modraweapj, rafix.japan, dome.japan
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseservicedepot, japan_japaneseradararray
 		Description: actor_jpcore.description-tech-center
 		Icon: icon7
 	Valued:
@@ -6849,7 +6849,7 @@ MODCORE7:
 	Tooltip:
 		Name: Core (Tech Center)
 	Transforms:
-		IntoActor: modjtek
+		IntoActor: japan_japanesetechcenter
 	WithTextDecoration:
 		Text: Tech Center
 	Passenger:
@@ -7101,13 +7101,13 @@ japanspeedboat:
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade:
 		Weapon: JapanSpeedBoatGunWaveforce
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@DC1:
 		Weapon: DepthCharge
 		LocalOffset: 100,-100,0, 100,100,0
@@ -7148,7 +7148,7 @@ japanspeedboat:
 		RequiresCondition: gatling
 		Modifier: 125
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
 yamatobattleship:
 	Inherits: ^BoatUnit
@@ -7166,7 +7166,7 @@ yamatobattleship:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~ra1jsyrd, dome.japan
+		Prerequisites: ~ra1jsyrd, japan_japaneseradararray
 		Queue: Naval, RANaval
 		Description: actor_yamatobattleship.description
 	Mobile:
@@ -7234,7 +7234,7 @@ yamatobattleship:
 		Image: yamatobattleship
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_nanotechrepairs
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
 japancarrier:
 	Inherits: ^BoatUnit
@@ -7252,7 +7252,7 @@ japancarrier:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~ra1jsyrd, modjtek
+		Prerequisites: ~ra1jsyrd, japan_japanesetechcenter
 		Queue: Naval, RANaval
 		Description: Japanese Aircraft Carrier
 	Selectable:
@@ -7287,7 +7287,7 @@ japancarrier:
 	RenderSprites:
 		PlayerPalette: player
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_nanotechrepairs
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
 zerofighter:
 	Inherits: ^RANeutralPlane
@@ -7317,25 +7317,25 @@ zerofighter:
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@SECONDARY:
 		Weapon: ZeroFighterChainGun
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@UpgradeSECONDARY:
 		Weapon: ZeroFighterChainGunWaveforce
 		LocalOffset: 128,128,0, 128,-128,0
 		MuzzleSequence: muzzle
 		PauseOnCondition: !ammo
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	FirepowerMultiplier@doublecannons:
 		Modifier: 50
 	Armament:
@@ -7383,7 +7383,7 @@ zerofighter:
 		PlayerPalette: player
 		Image: modkamimini
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_divinewindprotocol
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_divinewindprotocol
 
 SS:
 	Inherits: ^BoatUnit
@@ -7605,14 +7605,14 @@ ra1_soviet_constructionyard:
 	ProvidesPrerequisite@wirefence:
 		Prerequisite: wirefence
 
-RAFACT.Japan:
+japan_japaneseconstructionyard:
 	Inherits: ^RAFACT
 	Inherits@sell: ^JapanSpawnActorsOnSell
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Tooltip:
 		Name: Japanese Construction Yard
 	Transforms:
-		IntoActor: ramcv.japan
+		IntoActor: japan_japanesemobileconstructionvehicle
 	-ProvidesPrerequisite@rafact:
 	WithDeathAnimation:
 		DeathSequencePalette: player
@@ -7707,7 +7707,7 @@ APWR:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-JPWR:
+japan_waveforcereactor:
 	Inherits: ^BaseBuilding
 	Inherits@power: ^PowerPlant
 	Inherits@sell: ^JapanSpawnActorsOnSell
@@ -7719,7 +7719,7 @@ JPWR:
 	Buildable:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 10
-		Prerequisites: ~rafact.japan
+		Prerequisites: ~japan_japaneseconstructionyard
 		Description: actor_nuke.description
 	Valued:
 		Cost: 750
@@ -7841,14 +7841,14 @@ ra1_allies_alliedbarracks:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-MODTENTJ:
+japan_japanesebarracks:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@sell: ^JapanSpawnActorsOnSell
 	Inherits@ra1_soviet_barracks: ^IsBarrack
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Buildable:
-		Prerequisites: ~rafact.japan, jpwr
+		Prerequisites: ~japan_japaneseconstructionyard, japan_waveforcereactor
 	Tooltip:
 		Name: Japanese Barracks
 	Building:
@@ -7959,18 +7959,18 @@ ra1_soviet_orerefinery:
 	ActorStatValues:
 		Upgrades: ra1_soviet_doctrine_industrialefficiency, ra1_soviet_upgrade_wareconomy
 
-JPROC:
+japan_japaneseorerefinery:
 	Inherits: ^RAPROC
 	Inherits@sell: ^JapanSpawnActorsOnSell
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	FreeActor:
-		Actor: RAHARV.JAPAN
+		Actor: japan_japaneseoretruck
 		SpawnOffset: 1,2
 		Facing: 256
 	Tooltip:
 		Name: Japanese Ore Refinery
 	Buildable:
-		Prerequisites: ~rafact.japan, jpwr
+		Prerequisites: ~japan_japaneseconstructionyard, japan_waveforcereactor
 	-WithIdleOverlay@TOP:
 	ProvidesPrerequisite@buildingname:
 	RenderSprites:
@@ -8124,14 +8124,14 @@ ra1_soviet_largefactory:
 	ProvidesPrerequisite@inherits:
 		Prerequisite: ra1_soviet_warfactory
 
-MODRAWEAPJ:
+japan_japanesewarfactory:
 	Inherits: ra1_soviet_warfactory
 	Inherits@sell: ^JapanSpawnActorsOnSell
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Tooltip:
 		Name: Japanese War Factory
 	Buildable:
-		Prerequisites: ~rafact.japan, jproc
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery
 	RenderSprites:
 		Image: jweap
 		PlayerPalette: player
@@ -8207,7 +8207,7 @@ ra1_soviet_radardome:
 	ProductionBar@Upgrades:
 		ProductionType: Upgrades
 
-DOME.Japan:
+japan_japaneseradararray:
 	Inherits: ^BaseBuilding
 	Inherits@radar: ^RadarBuilding
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
@@ -8216,7 +8216,7 @@ DOME.Japan:
 	Tooltip:
 		Name: Japanese Radar Array
 	Buildable:
-		Prerequisites: ~rafact.japan, jproc
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery
 	RenderSprites:
 		Image: jdome
 		PlayerPalette: player_rgba
@@ -8688,20 +8688,20 @@ ra1_soviet_largesovietairfield:
 	RenderSprites:
 		PlayerPalette: raplayer
 
-MODRAAFLD:
+japan_japaneseairfield:
 	Inherits: ra1_soviet_airfield
 	Inherits@sell: ^JapanSpawnActorsOnSell
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Tooltip:
 		Name: Japanese Airfield
 	Buildable:
-		Prerequisites: ~rafact.japan, dome.japan
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
 	-AirstrikePower@spyplane:
 	-AirstrikePower@parabombs:
 	AirstrikePower@JapanSuperBomber:
 		OrderName: JapanSuperBomber
 		Prerequisites:
-			1: ~techlevel.superweapons, up_divinewindprotocol
+			1: ~techlevel.superweapons, japan_upgrade_divinewindprotocol
 		Icons:
 			1: airstrike
 		ChargeInterval: 7500
@@ -8731,9 +8731,9 @@ MODRAAFLD:
 	ParatroopersPower@paratroopers:
 		OrderName: japanparatroopers
 		Prerequisites:
-			1: up_bushidodiscipline
-			2: up_bushidodiscipline, upsamurai
-			3: up_bushidodiscipline, uparchermaiden
+			1: japan_upgrade_bushidodiscipline
+			2: japan_upgrade_bushidodiscipline, japan_promotion_unlocksamurai
+			3: japan_upgrade_bushidodiscipline, japan_promotion_unlockarchermaiden
 			4: ~wip
 		Icons:
 			1: paratroopers
@@ -8749,9 +8749,9 @@ MODRAAFLD:
 			2: power_paratroopers.description
 			3: power_paratroopers.description
 		DropItems:
-			1: raje1, raje3, raje4, raje1, raje3, raje4, raje1, raje3, raje4
-			2: raje1, raje3, raje4, rasamurai, raje1, raje3, raje4, rasamurai, raje1, raje3, raje4, rasamurai
-			3: raje1, raje3, raje4, ramaid, rasamurai, raje1, raje3, raje4, ramaid, rasamurai, raje1, raje3, raje4, ramaid, rasamurai
+			1: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower
+			2: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_samurai
+			3: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai, japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai
 		UnitTypes:
 			1: badr.japan
 			2: badr.japan
@@ -8840,7 +8840,7 @@ ra1_soviet_techcenter:
 	WithDeathAnimation:
 		DeathSequencePalette: raplayer
 
-MODJTEK:
+japan_japanesetechcenter:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x3Shape
 	Inherits@sell: ^JapanSpawnActorsOnSell
@@ -8849,7 +8849,7 @@ MODJTEK:
 	HitShape:
 		TargetableOffsets: 420,-768,0, 420,768,0, -770,-768,0, -770,768,0
 	Buildable:
-		Prerequisites: ~rafact.japan, dome.japan
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
 	Tooltip:
 		Name: Japanese Tech Center
 	Building:
@@ -8862,7 +8862,7 @@ MODJTEK:
 	ProvidesPrerequisite@techcenter:
 		Prerequisite: techcenter
 
-JSHRINE:
+japan_japaneseshrine:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@SW: ^PrimarySuperweapon
@@ -8871,7 +8871,7 @@ JSHRINE:
 	Tooltip:
 		Name: Japanese Shrine
 	Buildable:
-		Prerequisites: ~modjtek, ~techlevel.superweapons, !jshrine
+		Prerequisites: ~japan_japanesetechcenter, ~techlevel.superweapons, !japan_japaneseshrine
 		Description: actor_mslo.description
 	Building:
 		Footprint: xxx xxx ===
@@ -8883,7 +8883,7 @@ JSHRINE:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: jshrine
+		IconImage: japan_japaneseshrine
 		Icons:
 			1: japanspellcard
 		Cursor: ability
@@ -8926,9 +8926,9 @@ JSHRINE:
 		CameraRange: 10000
 	SupportPowerChargeBar:
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: jshrine
+		Prerequisite: japan_japaneseshrine
 	RenderSprites:
-		Image: jshrine
+		Image: japan_japaneseshrine
 
 ^RAFIX:
 	Inherits: ^BaseBuilding
@@ -8987,14 +8987,14 @@ ra1_soviet_servicedepot:
 	RenderSprites:
 		Image: rafixs
 
-RAFIX.Japan:
+japan_japaneseservicedepot:
 	Inherits: ^RAFIX
 	Inherits@sell: ^JapanSpawnActorsOnSell
 	Inherits@NanoTechRepairs: ^NanoTechRepairs
 	Tooltip:
 		Name: Japanese Service Depot
 	Buildable:
-		Prerequisites: ~rafact.japan, modraweapj
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japanesewarfactory
 	RenderSprites:
 		Image: rafixj
 
@@ -9032,7 +9032,7 @@ RA1JSYRD:
 	Tooltip:
 		Name: Japanese Naval Yard
 	Buildable:
-		Prerequisites: ~rafact.japan, jproc, ~globalnaval
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseorerefinery, ~globalnaval
 	Building:
 		Footprint: =+= +++ =+=
 		Dimensions: 3,3
@@ -9729,7 +9729,7 @@ ra1_soviet_samsite:
 	ActorStatValues:
 		Upgrades: ra1_soviet_upgrade_highexplosiverockets, ra1_soviet_upgrade_stalinium
 
-jmgnest:
+japan_japanesemgnest:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@Template: ^BasicDefenseTemplate
@@ -9747,7 +9747,7 @@ jmgnest:
 		Name: Japanese MG Nest
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~rafact.japan, modtentj
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japanesebarracks
 		Queue: Defence, RADefence
 		Description: actor_mgnest.description
 	Building:
@@ -9760,13 +9760,13 @@ jmgnest:
 		Weapon: JHighV
 		LocalOffset: 768,0,512
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgrade: ##########
 		Name: primary
 		Weapon: JHighVWaveforce
 		LocalOffset: 768,0,512
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	-RenderRangeCircle:
 	RenderRangeCircleCA:
 		Armaments: primary
@@ -9786,9 +9786,9 @@ jmgnest:
 	DetectCloaked:
 		Range: 3348
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_nanotechrepairs
 
-jballistat:
+japan_ballistatower:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@selection: ^AdvancedDefenseTemplate
@@ -9806,7 +9806,7 @@ jballistat:
 		Name: Ballista Tower
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~rafact.japan, dome.japan
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japaneseradararray
 		Queue: Defence, RADefence
 		Description: actor_mgnest.description
 	Building:
@@ -9827,16 +9827,16 @@ jballistat:
 		Weapon: BallistaTowerMultiShotEnergized
 		LocalOffset: 624,0,208
 		PauseOnCondition: ammo < 5
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	Armament@UpgradeAIR: ##########
 		Weapon: BallistaSingleShotAirEnergized
 		LocalOffset: 624,0,208
 		AmmoUsage: 5
 		PauseOnCondition: ammo < 5
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	ReloadDelayMultiplier@DualWeapon:
 		Modifier: 125
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	AmmoPool:
 		Ammo: 5
 		AmmoCondition: ammo
@@ -9867,12 +9867,12 @@ jballistat:
 		Range: 9214
 	DetectCloaked:
 		Range: 4607
-	FirepowerMultiplier@up_energizedarrows:
+	FirepowerMultiplier@japan_upgrade_energizedarrows:
 		Modifier: 75
 	ActorStatValues:
-		Upgrades: up_energizedarrows, up_nanotechrepairs
+		Upgrades: japan_upgrade_energizedarrows, japan_upgrade_nanotechrepairs
 
-modpillboxfort:
+japan_waveforceturret:
 	Inherits: ^Defense
 	Inherits@exp: ^GainsExperienceRABuilding
 	Inherits@selection: ^AdvancedDefenseTemplate
@@ -9887,7 +9887,7 @@ modpillboxfort:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 90
-		Prerequisites: ~rafact.japan, modjtek
+		Prerequisites: ~japan_japaneseconstructionyard, japan_japanesetechcenter
 		Description: actor_waveforceturret.description
 	Valued:
 		Cost: 3200
@@ -9914,7 +9914,7 @@ modpillboxfort:
 	-WithSpriteBody:
 	WithEmbeddedTurretSpriteBody:
 	RenderSprites:
-		Image: modpillboxfort
+		Image: japan_waveforceturret
 	FireWarheadsOnDeath:
 		Weapon: WaveTurretImpact
 	DamageMultiplier@2x2Shape:
@@ -9926,7 +9926,7 @@ modpillboxfort:
 	DetectCloaked:
 		Range: 4912
 	ActorStatValues:
-		Upgrades: up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
 	####################################################################################################
 	#		Upgrades Allies
@@ -13014,7 +13014,7 @@ ra1_soviet_supersonicnuclearbomber:
 	#		Upgrades Japan
 	####################################################################################################
 
-up_bushidodiscipline:
+japan_upgrade_bushidodiscipline:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Bushido Discipline
@@ -13024,12 +13024,12 @@ up_bushidodiscipline:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_bushidodiscipline.description
-		Prerequisites: ~dome.japan, !up_bushidodiscipline
+		Prerequisites: ~japan_japaneseradararray, !japan_upgrade_bushidodiscipline
 	RenderSprites:
 		Image: bushidodisciplineicon
 	ProvidesPrerequisite:
 
-up_waveforcebullets:
+japan_upgrade_waveforcebullets:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Waveforce Bullets
@@ -13039,12 +13039,12 @@ up_waveforcebullets:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_waveforcebullets.description
-		Prerequisites: ~dome.japan, !up_waveforcebullets
+		Prerequisites: ~japan_japaneseradararray, !japan_upgrade_waveforcebullets
 	RenderSprites:
 		Image: waveforcebulletsicon
 	ProvidesPrerequisite:
 
-up_divinewindprotocol:
+japan_upgrade_divinewindprotocol:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Divine Wind Protocol
@@ -13054,12 +13054,12 @@ up_divinewindprotocol:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: upgrade_divinewindprotocol.description
-		Prerequisites: ~dome.japan, !up_divinewindprotocol
+		Prerequisites: ~japan_japaneseradararray, !japan_upgrade_divinewindprotocol
 	RenderSprites:
 		Image: divinewindprotocol
 	ProvidesPrerequisite:
 
-up_stealthsuitintegration:
+japan_upgrade_stealthsuitintegration:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Stealth Suit Integration
@@ -13069,12 +13069,12 @@ up_stealthsuitintegration:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_stealthsuitintegration.description
-		Prerequisites: ~modjtek, !up_stealthsuitintegration
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_stealthsuitintegration
 	RenderSprites:
 		Image: stealthsuitintegrationicon
 	ProvidesPrerequisite:
 
-up_energizedarrows:
+japan_upgrade_energizedarrows:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Energized Arrows
@@ -13084,12 +13084,12 @@ up_energizedarrows:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_energizedarrows.description
-		Prerequisites: ~modjtek, !up_energizedarrows
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_energizedarrows
 	RenderSprites:
 		Image: energizedarrowsicon
 	ProvidesPrerequisite:
 
-up_superiorwarengines:
+japan_upgrade_superiorwarengines:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Superior War Engines
@@ -13099,12 +13099,12 @@ up_superiorwarengines:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_superiorwarengines.description
-		Prerequisites: ~modjtek, !up_superiorwarengines
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_superiorwarengines
 	RenderSprites:
 		Image: superiorwarenginesicon
 	ProvidesPrerequisite:
 
-up_advancedplasmaweapons:
+japan_upgrade_advancedplasmaweapons:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Advanced Plasma Weapons
@@ -13114,12 +13114,12 @@ up_advancedplasmaweapons:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_advancedplasmaweapons.description
-		Prerequisites: ~modjtek, !up_advancedplasmaweapons
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_advancedplasmaweapons
 	RenderSprites:
 		Image: advancedplasmaweaponsicon
 	ProvidesPrerequisite:
 
-up_nanotechrepairs:
+japan_upgrade_nanotechrepairs:
 	Inherits: ^upgrade.template
 	Tooltip:
 		Name: Nanotech Repairs
@@ -13129,7 +13129,7 @@ up_nanotechrepairs:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: upgrade_nanotechrepairs.description
-		Prerequisites: ~modjtek, !up_nanotechrepairs
+		Prerequisites: ~japan_japanesetechcenter, !japan_upgrade_nanotechrepairs
 	RenderSprites:
 		Image: nanotechrepairsicon
 	#ProvidesPrerequisite:
@@ -13139,7 +13139,7 @@ up_nanotechrepairs:
 team_upgrade.up_nanotechrepairs:
 	Inherits: ^researched_upgrade.template
 	ProvidesPrerequisite:
-		Prerequisite: up_nanotechrepairs
+		Prerequisite: japan_upgrade_nanotechrepairs
 	RenderSprites:
 		Image: nanotechrepairsicon
 	Tooltip:
@@ -13152,7 +13152,7 @@ team_upgrade.up_nanotechrepairs:
 	#		Promotions Japan
 	####################################################################################################
 
-upsamurai:
+japan_promotion_unlocksamurai:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Samurai
@@ -13160,13 +13160,13 @@ upsamurai:
 		BuildPaletteOrder: 49
 		Queue: Promotions
 		Description: Allows training of Samurai.
-		Prerequisites: ~rafact.japan, !upsamurai, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlocksamurai, rank1
 	RenderSprites:
-		Image: rasamurai
+		Image: japan_samurai
 	ProvidesPrerequisite:
-		Prerequisite: upsamurai
+		Prerequisite: japan_promotion_unlocksamurai
 
-uparchermaiden:
+japan_promotion_unlockarchermaiden:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Archer Maiden
@@ -13174,13 +13174,13 @@ uparchermaiden:
 		BuildPaletteOrder: 52
 		Queue: Promotions
 		Description: Allows training of Archer Maidens.
-		Prerequisites: ~rafact.japan, !uparchermaiden, upsamurai, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockarchermaiden, japan_promotion_unlocksamurai, rank1
 	RenderSprites:
-		Image: ramaid
+		Image: japan_archermaiden
 	ProvidesPrerequisite:
-		Prerequisite: uparchermaiden
+		Prerequisite: japan_promotion_unlockarchermaiden
 
-uprocketangel:
+japan_promotion_unlockrocketangel:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Rocket Angel
@@ -13188,13 +13188,13 @@ uprocketangel:
 		BuildPaletteOrder: 55
 		Queue: Promotions
 		Description: Allows training of Rocket Angels.
-		Prerequisites: ~rafact.japan, !uprocketangel, uparchermaiden, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockrocketangel, japan_promotion_unlockarchermaiden, rank1
 	RenderSprites:
-		Image: rocketangel
+		Image: japan_rocketangel
 	ProvidesPrerequisite:
-		Prerequisite: uprocketangel
+		Prerequisite: japan_promotion_unlockrocketangel
 
-uphakurei:
+japan_promotion_unlockexorcist:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Exorcist
@@ -13202,13 +13202,13 @@ uphakurei:
 		BuildPaletteOrder: 58
 		Queue: Promotions
 		Description: Allows training of the Exorcist.
-		Prerequisites: ~rafact.japan, !uphakurei, uprocketangel, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockexorcist, japan_promotion_unlockrocketangel, rank1
 	RenderSprites:
-		Image: hakurei
+		Image: japan_exorcist
 	ProvidesPrerequisite:
-		Prerequisite: uphakurei
+		Prerequisite: japan_promotion_unlockexorcist
 
-uparmoredcarr:
+japan_promotion_unlockarmoredcar:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Armored Car
@@ -13216,13 +13216,13 @@ uparmoredcarr:
 		BuildPaletteOrder: 50
 		Queue: Promotions
 		Description: Allows construction of the Armored Car.
-		Prerequisites: ~rafact.japan, !uparmoredcarr, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockarmoredcar, rank1
 	RenderSprites:
-		Image: modcarr
+		Image: japan_armoredcar
 	ProvidesPrerequisite:
-		Prerequisite: uparmoredcarr
+		Prerequisite: japan_promotion_unlockarmoredcar
 
-upchiha:
+japan_promotion_unlockheavychihaheavytank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Heavy Chi-Ha Heavy Tank
@@ -13230,13 +13230,13 @@ upchiha:
 		BuildPaletteOrder: 53
 		Queue: Promotions
 		Description: Allows construction of the Chi-Ha Heavy Tank.
-		Prerequisites: ~rafact.japan, !upchiha, uparmoredcarr, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockheavychihaheavytank, japan_promotion_unlockarmoredcar, rank1
 	RenderSprites:
-		Image: typechiha
+		Image: japan_chihaheavytank
 	ProvidesPrerequisite:
-		Prerequisite: upchiha
+		Prerequisite: japan_promotion_unlockheavychihaheavytank
 
-upflamehovertank:
+japan_promotion_unlockhovercraftflametank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Hovercraft Flametank
@@ -13244,13 +13244,13 @@ upflamehovertank:
 		BuildPaletteOrder: 56
 		Queue: Promotions
 		Description: Allows construction of the Hovercraft Flametank.
-		Prerequisites: ~rafact.japan, !upflamehovertank, upchiha, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockhovercraftflametank, japan_promotion_unlockheavychihaheavytank, rank1
 	RenderSprites:
-		Image: modhovert
+		Image: japan_hovercraftflametank
 	ProvidesPrerequisite:
-		Prerequisite: upflamehovertank
+		Prerequisite: japan_promotion_unlockhovercraftflametank
 
-upshogunexecutioner:
+japan_promotion_unlockshogunexecutioner:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Shogun Executioner
@@ -13258,13 +13258,13 @@ upshogunexecutioner:
 		BuildPaletteOrder: 59
 		Queue: Promotions
 		Description: Allows construction of the Shogun Executioner.
-		Prerequisites: ~rafact.japan, !upshogunexecutioner, upflamehovertank, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockshogunexecutioner, japan_promotion_unlockhovercraftflametank, rank1
 	RenderSprites:
-		Image: shogunexecutioner
+		Image: japan_shogunexecutioner
 	ProvidesPrerequisite:
-		Prerequisite: upshogunexecutioner
+		Prerequisite: japan_promotion_unlockshogunexecutioner
 
-upgrenadebuggy:
+japan_promotion_unlockgrenadebuggy:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Grenade Buggy
@@ -13272,13 +13272,13 @@ upgrenadebuggy:
 		BuildPaletteOrder: 51
 		Queue: Promotions
 		Description: Allows construction of the Grenade Buggy.
-		Prerequisites: ~rafact.japan, !upgrenadebuggy, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockgrenadebuggy, rank1
 	RenderSprites:
-		Image: modbggy
+		Image: japan_grenadebuggy
 	ProvidesPrerequisite:
-		Prerequisite: upgrenadebuggy
+		Prerequisite: japan_promotion_unlockgrenadebuggy
 
-upjapanshrinetank:
+japan_promotion_unlockshrinetank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Shrine Tank
@@ -13286,13 +13286,13 @@ upjapanshrinetank:
 		BuildPaletteOrder: 54
 		Queue: Promotions
 		Description: Allows construction of the Shrine Tank.
-		Prerequisites: ~rafact.japan, !upjapanshrinetank, upgrenadebuggy, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockshrinetank, japan_promotion_unlockgrenadebuggy, rank1
 	RenderSprites:
 		Image: japan_shrine_minitank
 	ProvidesPrerequisite:
-		Prerequisite: upjapanshrinetank
+		Prerequisite: japan_promotion_unlockshrinetank
 
-upwaveforcetank:
+japan_promotion_unlockwaveforcetank:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Waveforce Tank
@@ -13300,13 +13300,13 @@ upwaveforcetank:
 		BuildPaletteOrder: 57
 		Queue: Promotions
 		Description: Allows construction of the Waveforce Tank.
-		Prerequisites: ~rafact.japan, !upwaveforcetank, upjapanshrinetank, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockwaveforcetank, japan_promotion_unlockshrinetank, rank1
 	RenderSprites:
-		Image: waveforcetank
+		Image: japan_waveforcetank
 	ProvidesPrerequisite:
-		Prerequisite: upwaveforcetank
+		Prerequisite: japan_promotion_unlockwaveforcetank
 
-upwaveforceartillery:
+japan_promotion_unlockwaveforceartillery:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Waveforce Artillery
@@ -13314,17 +13314,17 @@ upwaveforceartillery:
 		BuildPaletteOrder: 60
 		Queue: Promotions
 		Description: Allows construction of the Waveforce Artillery.
-		Prerequisites: ~rafact.japan, !upwaveforceartillery, upwaveforcetank, rank1
+		Prerequisites: ~japan_japaneseconstructionyard, !japan_promotion_unlockwaveforceartillery, japan_promotion_unlockwaveforcetank, rank1
 	RenderSprites:
-		Image: modwave
+		Image: japan_waveforceartillery
 	ProvidesPrerequisite:
-		Prerequisite: upwaveforceartillery
+		Prerequisite: japan_promotion_unlockwaveforceartillery
 
 	####################################################################################################
 	#		Promotion Units Japan
 	####################################################################################################
 
-RASAMURAI:
+japan_samurai:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -13343,7 +13343,7 @@ RASAMURAI:
 		Name: Samurai
 	Buildable:
 		BuildPaletteOrder: 10
-		Prerequisites: ~modtentj, upsamurai
+		Prerequisites: ~japan_japanesebarracks, japan_promotion_unlocksamurai
 		Queue: Infantry, RAInfantry
 		Description: actor_rasamurai.description
 	Mobile:
@@ -13354,34 +13354,34 @@ RASAMURAI:
 		Step: 35
 	Armament@PRIMARY: ##########
 		Weapon: SamuraiBlade
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: SamuraiBlade
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: SamuraiBladeCharged
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: SamuraiBladeCharged
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	-TakeCover:
 	AttackFrontal:
 		FacingTolerance: 0
 	WithInfantryBody:
 		IdleSequences: idle1,idle2,idle3,idle4
 	RenderSprites:
-		Image: rasamurai
+		Image: japan_samurai
 	Voiced:
 		VoiceSet: SamuraiVoice
 		Volume: 3
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+		Upgrades: japan_upgrade_bushidodiscipline, japan_upgrade_stealthsuitintegration, japan_upgrade_advancedplasmaweapons
 
-RAMAID:
-	Inherits: RAJE3
+japan_archermaiden:
+	Inherits: japan_tankbuster
 	Inherits@Template: ^SniperInfantryTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
 	Inherits@vo: ^AttackFrontalVoice
@@ -13396,7 +13396,7 @@ RAMAID:
 		Name: Archer Maiden
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~modtentj, dome.japan, uparchermaiden
+		Prerequisites: ~japan_japanesebarracks, japan_japaneseradararray, japan_promotion_unlockarchermaiden
 		Queue: Infantry, RAInfantry
 		Description: actor_ramaid.description
 	Mobile:
@@ -13407,23 +13407,23 @@ RAMAID:
 		Step: 20
 	Armament@PRIMARY: ##########
 		Weapon: JapanMaidenBow
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !japan_upgrade_energizedarrows
 	Armament@GARRISONED: ##########
 		Name: garrisoned
 		Weapon: JapanMaidenBow
-		RequiresCondition: !up_energizedarrows
+		RequiresCondition: !japan_upgrade_energizedarrows
 	Armament@Upgrade: ##########
 		Weapon: JapanMaidenBowEnergized
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	Armament@UpgradeGARRISONED: ##########
 		Name: garrisoned
 		Weapon: JapanMaidenBowEnergized
 		MuzzleSequence: garrison-muzzle
-		RequiresCondition: up_energizedarrows
+		RequiresCondition: japan_upgrade_energizedarrows
 	Voiced:
 		VoiceSet: JapaneseArcherVoice
 	RenderSprites:
-		Image: ramaid
+		Image: japan_archermaiden
 		PlayerPalette: player
 	WithDeathAnimation:
 		DeathSequencePalette: player
@@ -13431,9 +13431,9 @@ RAMAID:
 		DeathSequencePalette: player
 		DeathPaletteIsPlayerPalette: true
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_energizedarrows
+		Upgrades: japan_upgrade_bushidodiscipline, japan_upgrade_stealthsuitintegration, japan_upgrade_energizedarrows
 
-MODHOVER:
+japan_hovercrafttransport:
 	Inherits: ^Tank
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -13452,7 +13452,7 @@ MODHOVER:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 120
-		Prerequisites: ~modraweapj, dome.japan, uparchermaiden
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, japan_promotion_unlockarchermaiden
 		Description: actor_jphover.description
 	Valued:
 		Cost: 1500
@@ -13477,32 +13477,32 @@ MODHOVER:
 		Weapon: HovercraftCannon
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: HovercraftPlasmaCannon
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@flak:
 		Weapon: JapaneseHovercraftFlak
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@Upgradeflak:
 		Weapon: JapaneseHovercraftFlakWaveforce
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@AA:
 		Weapon: JapaneseHovercraftFlakAA
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@UpgradeAA:
 		Weapon: JapaneseHovercraftFlakAAkWaveforce
 		LocalOffset: 500,0,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	FirepowerMultiplier@doublecannonsandbombs:
 		Modifier: 50
 	Turreted:
@@ -13513,19 +13513,19 @@ MODHOVER:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 5
-		InitialUnits: raje1, raje3, raje4, ramaid, rasamurai
+		InitialUnits: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower, japan_archermaiden, japan_samurai
 	RenderSprites:
-		Image: modhover
+		Image: japan_hovercrafttransport
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	FireWarheadsOnDeath:
 		Weapon: UnitExplode
 	Selectable:
-		Class: modhover
+		Class: japan_hovercrafttransport
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-ROCKETANGEL:
+japan_rocketangel:
 	Inherits: ^JumpjetInfantry
 	Inherits@Template: ^FlyingInfantryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -13549,7 +13549,7 @@ ROCKETANGEL:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~modtentj, modjtek, uprocketangel
+		Prerequisites: ~japan_japanesebarracks, japan_japanesetechcenter, japan_promotion_unlockrocketangel
 		Queue: Infantry, RAInfantry, Aircraft, RAAircraft
 		Description: actor_rocketangel.description
 	Aircraft:
@@ -13566,7 +13566,7 @@ ROCKETANGEL:
 		LocalOffset: 512,-512,512, 512,512,512, 512,-512,512, 512,512,512
 		LocalYaw: -128, 128, -64, 64
 		FireDelay: 10
-	FirepowerMultiplier@rocketangel:
+	FirepowerMultiplier@japan_rocketangel:
 		Modifier: 50
 	GrantConditionOnAttack@firing1:
 		Condition: firing1
@@ -13652,12 +13652,12 @@ ROCKETANGEL:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 	RenderSprites:
-		Image: rocketangel
+		Image: japan_rocketangel
 		PlayerPalette: playerra2
 	ProducibleWithLevel@spyinfantry:
 		Prerequisites: infantry.upgraded
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons, up_divinewindprotocol
+		Upgrades: japan_upgrade_bushidodiscipline, japan_upgrade_stealthsuitintegration, japan_upgrade_advancedplasmaweapons, japan_upgrade_divinewindprotocol
 
 ROCKETANGEL.husk:
 	Inherits: ^SmallHelicopterHusk
@@ -13672,10 +13672,10 @@ ROCKETANGEL.husk:
 	WithFacingSpriteBody:
 		Sequence: die-falling
 	RenderSprites:
-		Image: rocketangel
+		Image: japan_rocketangel
 		PlayerPalette: playerra2
 
-hakurei:
+japan_exorcist:
 	Inherits: ^Soldier
 	Inherits@anim: ^TDRAInfantry
 	Inherits@Template: ^HeroInfantryTemplate
@@ -13708,7 +13708,7 @@ hakurei:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 10
-		Prerequisites: ~modtentj, modjtek, uphakurei, !hasexorcist
+		Prerequisites: ~japan_japanesebarracks, japan_japanesetechcenter, japan_promotion_unlockexorcist, !hasexorcist
 		Queue: Infantry, RAInfantry
 		Description: actor_hakurei.description
 	Mobile:
@@ -13749,9 +13749,9 @@ hakurei:
 		PauseOnCondition: disabled
 		ExclusiveDeploy: true
 		DeployType: Detonate
-	DamageMultiplier@up_stealthsuitintegration:
+	DamageMultiplier@japan_upgrade_stealthsuitintegration:
 		Modifier: 75
-		RequiresCondition: spellcard && up_stealthsuitintegration
+		RequiresCondition: spellcard && japan_upgrade_stealthsuitintegration
 	DamageMultiplier@SpellCard:
 		Modifier: 50
 		RequiresCondition: spellcard
@@ -13777,9 +13777,9 @@ hakurei:
 	ProvidesPrerequisite@exorcist:
 		Prerequisite: hasexorcist
 	ActorStatValues:
-		Upgrades: up_bushidodiscipline, up_stealthsuitintegration, up_advancedplasmaweapons
+		Upgrades: japan_upgrade_bushidodiscipline, japan_upgrade_stealthsuitintegration, japan_upgrade_advancedplasmaweapons
 
-MODCARR:
+japan_armoredcar:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -13797,7 +13797,7 @@ MODCARR:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 60
-		Prerequisites: ~modraweapj, ~uparmoredcarr
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockarmoredcar
 		Description: actor_gtnk.description
 	Valued:
 		Cost: 700
@@ -13824,32 +13824,32 @@ MODCARR:
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@AA:
 		Weapon: ArmoredCarMGAA
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_waveforcebullets
+		RequiresCondition: !japan_upgrade_waveforcebullets
 	Armament@UpgradeAG:
 		Weapon: ArmoredCarMGWaveforce
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	Armament@UpgradeAA:
 		Weapon: ArmoredCarMGAAWaveforce
 		Recoil: 85
 		LocalOffset: 400,-100,300, 400,100,300
 		MuzzleSequence: muzzle
-		RequiresCondition: up_waveforcebullets
+		RequiresCondition: japan_upgrade_waveforcebullets
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 3
-		InitialUnits: raje1, raje3, raje4
+		InitialUnits: japan_imperialscoutsman, japan_tankbuster, japan_japaneseflamethrower
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1280
@@ -13858,7 +13858,7 @@ MODCARR:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeSmall
 	RenderSprites:
-		Image: modcarr
+		Image: japan_armoredcar
 	AmmoPool:
 		Ammo: 12
 		AmmoCondition: ammo
@@ -13866,9 +13866,9 @@ MODCARR:
 		Delay: 12
 		Count: 1
 		ResetOnFire: True
-	FirepowerMultiplier@up_waveforcebullets:
+	FirepowerMultiplier@japan_upgrade_waveforcebullets:
 		Modifier: 125
-	RangeMultiplier@up_waveforcebullets:
+	RangeMultiplier@japan_upgrade_waveforcebullets:
 		Modifier: 105
 	FirepowerMultiplier@GattlingSpeed:
 		Modifier: 10
@@ -13891,9 +13891,9 @@ MODCARR:
 		RequiresCondition: ammo <= 1
 		Modifier: 105
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_nanotechrepairs
 
-typechiha:
+japan_chihaheavytank:
 	Inherits: ^Tank
 	Inherits@Template: ^MainBattleTankTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -13910,7 +13910,7 @@ typechiha:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, ~upchiha
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockheavychihaheavytank
 		Description: template_mbt.description
 	Valued:
 		Cost: 1200
@@ -13938,14 +13938,14 @@ typechiha:
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: Type97PlasmaCannon
 		Recoil: 128
 		RecoilRecovery: 38
 		LocalOffset: 720,0,320
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	ProximityExternalCondition@PropagandaEffect:
 		Range: 5000
 		ValidRelationships: Ally
@@ -13970,9 +13970,9 @@ typechiha:
 	FireWarheadsOnDeath:
 		Weapon: UnitExplodeBig
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-modhovert:
+japan_hovercraftflametank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@FireActor: ^FireActor
@@ -13986,7 +13986,7 @@ modhovert:
 	Inherits@NanoTechExtraRepairs: ^NanoTechExtraRepairs
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~modraweapj, dome.japan, upflamehovertank
+		Prerequisites: ~japan_japanesewarfactory, japan_japaneseradararray, japan_promotion_unlockhovercraftflametank
 		BuildPaletteOrder: 120
 		Description: actor_jphovert.description
 	Valued:
@@ -14018,14 +14018,14 @@ modhovert:
 		RecoilRecovery: 36
 		LocalOffset: 800,-120,160, 800,120,160
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: HeavyPlasmaFlamer
 		Recoil: 160
 		RecoilRecovery: 36
 		LocalOffset: 800,-120,160, 800,120,160
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	FireWarheadsOnDeath:
 		Weapon: FlametankExplode
 	AttackTurreted:
@@ -14039,9 +14039,9 @@ modhovert:
 	Voiced:
 		VoiceSet: RAVehicleVoice
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-shogunexecutioner:
+japan_shogunexecutioner:
 	Inherits: ^Walker
 	Inherits@GAINSEXPERIENCE: ^EpicVehicleTemplate
 	Inherits@PromotionUnitBuff: ^PromotionUnitBuff
@@ -14066,7 +14066,7 @@ shogunexecutioner:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 75
-		Prerequisites: ~modraweapj, upshogunexecutioner, modjtek
+		Prerequisites: ~japan_japanesewarfactory, japan_promotion_unlockshogunexecutioner, japan_japanesetechcenter
 		Queue: Vehicle, RAVehicle
 		Description: actor_aamecha.description
 	Mobile:
@@ -14118,11 +14118,11 @@ shogunexecutioner:
 	WithIdleOverlay@extrananotechrepairsdamage:
 		Image: nanodrone_overlay_big
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 	RenderSprites:
 		PlayerPalette: playerra2
 
-MODBGGY:
+japan_grenadebuggy:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ScoutVehicleTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -14144,7 +14144,7 @@ MODBGGY:
 	Buildable:
 		BuildPaletteOrder: 30
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~modraweapj, ~upgrenadebuggy
+		Prerequisites: ~japan_japanesewarfactory, ~japan_promotion_unlockgrenadebuggy
 		Description: actor_jpbggy.description
 	Mobile:
 		Speed: 120
@@ -14162,28 +14162,28 @@ MODBGGY:
 		Weapon: BuggyGrenade
 		LocalOffset: 333,0,333
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade: ##########
 		Weapon: BuggyPlasmaGrenade
 		LocalOffset: 333,0,333
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	FireWarheadsOnDeath:
 		Weapon: BuggyGrenade
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	FireWarheadsOnDeath@Upgrade:
 		Weapon: BuggyPlasmaGrenade
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
 	RenderSprites:
-		Image: modbggy
+		Image: japan_grenadebuggy
 		PlayerPalette: raplayer
 	Voiced:
 		VoiceSet: JapaneseVehicleVoice
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
 japan_shrine_minitank:
 	Inherits: ^Tank
@@ -14201,7 +14201,7 @@ japan_shrine_minitank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, upjapanshrinetank
+		Prerequisites: ~japan_japanesewarfactory, japan_promotion_unlockshrinetank
 		Description: template_mbt.description
 	Valued:
 		Cost: 1600
@@ -14241,9 +14241,9 @@ japan_shrine_minitank:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-waveforcetank:
+japan_waveforcetank:
 	Inherits: ^Tank
 	Inherits@Template: ^FireSupportTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -14258,7 +14258,7 @@ waveforcetank:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 50
-		Prerequisites: ~modraweapj, modjtek, upwaveforcetank
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockwaveforcetank
 		Description: actor_waveforcetank.description
 	Valued:
 		Cost: 1800
@@ -14286,14 +14286,14 @@ waveforcetank:
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade1: ##########
 		Weapon: WaveforceCannonChargedLaser
 		Recoil: 256
 		RecoilRecovery: 32
 		LocalOffset: 1024,0,360
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade2: ##########
 		Weapon: WaveforceCannonDistortedBeam1
 		Recoil: 256
@@ -14301,7 +14301,7 @@ waveforcetank:
 		LocalOffset: 1024,0,360
 		FireDelay: 1
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@Upgrade3: ##########
 		Weapon: WaveforceCannonDistortedBeam2
 		Recoil: 256
@@ -14309,10 +14309,10 @@ waveforcetank:
 		LocalOffset: 1024,0,360
 		FireDelay: 2
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	FirepowerMultiplier@TripleBeam:
 		Modifier: 66
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	AttackTurreted:
 	WithMuzzleOverlay:
 	WithSpriteTurret:
@@ -14335,9 +14335,9 @@ waveforcetank:
 		RequiresCondition: firing
 		Modifier: 50
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-MODWAVE:
+japan_waveforceartillery:
 	Inherits: ^Vehicle
 	Inherits@Template: ^ArtilleryTemplate
 	Inherits@exp: ^GainsExperienceRA
@@ -14356,7 +14356,7 @@ MODWAVE:
 	Buildable:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 75
-		Prerequisites: ~modraweapj, modjtek, upwaveforceartillery
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockwaveforceartillery
 		Description: actor_waveforcearty.description
 	Valued:
 		Cost: 2500
@@ -14396,11 +14396,11 @@ MODWAVE:
 	FireWarheadsOnDeath:
 		Weapon: WaveTurretImpact
 	RenderSprites:
-		Image: modwave
+		Image: japan_waveforceartillery
 	ActorStatValues:
-		Upgrades: up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs
 
-exorcistoitank:
+japan_exorcistoitank:
 	Inherits: ^Tank
 	Inherits@Template: ^HighTechTankTemplate
 	Inherits@GAINSEXPERIENCE: ^EpicVehicleTemplate
@@ -14426,7 +14426,7 @@ exorcistoitank:
 		Queue: Vehicle, RAVehicle
 		BuildPaletteOrder: 180
 		BuildLimit: 1
-		Prerequisites: ~modraweapj, modjtek, uphakurei, !hasexorcist
+		Prerequisites: ~japan_japanesewarfactory, japan_japanesetechcenter, japan_promotion_unlockexorcist, !hasexorcist
 		Description: actor_oitank.description-exorcist
 	Valued:
 		Cost: 10000
@@ -14487,7 +14487,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@SECONDARY:
 		Turret: secondary
 		Weapon: OISmallCannon
@@ -14495,7 +14495,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@Back:
 		Turret: back
 		Weapon: OISmallCannon
@@ -14503,7 +14503,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@UpgradePRIMARY:
 		Turret: primary
 		Weapon: OISmallPlasmaCannon
@@ -14511,7 +14511,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeSECONDARY:
 		Turret: secondary
 		Weapon: OISmallPlasmaCannon
@@ -14519,7 +14519,7 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeBack:
 		Turret: back
 		Weapon: OISmallPlasmaCannon
@@ -14527,33 +14527,33 @@ exorcistoitank:
 		Recoil: 175
 		RecoilRecovery: 35
 		MuzzleSequence: muzzle
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@PRIMARYFlame:
 		Turret: primary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@SECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: !up_advancedplasmaweapons
+		RequiresCondition: !japan_upgrade_advancedplasmaweapons
 	Armament@UpgradePRIMARYFlame:
 		Turret: primary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 12
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	Armament@UpgradeSECONDARYFlame:
 		Name: secondary
 		Turret: secondary
 		Weapon: OIPlasmaFlamer
 		LocalOffset: 500,0,500
 		FireDelay: 8
-		RequiresCondition: up_advancedplasmaweapons
+		RequiresCondition: japan_upgrade_advancedplasmaweapons
 	AttackTurreted:
 		Turrets: primary, secondary, main, back
 	WithMuzzleOverlay:
@@ -14596,4 +14596,4 @@ exorcistoitank:
 	WithIdleOverlay@extrananotechrepairsdamage:
 		Image: nanodrone_overlay_big
 	ActorStatValues:
-		Upgrades: up_waveforcebullets, up_superiorwarengines, up_advancedplasmaweapons, up_nanotechrepairs
+		Upgrades: japan_upgrade_waveforcebullets, japan_upgrade_superiorwarengines, japan_upgrade_advancedplasmaweapons, japan_upgrade_nanotechrepairs

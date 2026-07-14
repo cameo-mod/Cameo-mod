@@ -6538,7 +6538,7 @@ CPQDEBUGDUMMY:
 
 ^RearmableAircraft:
 	Rearmable:
-		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,modraafld,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,cgairf.asian,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
+		RearmActors: dummy_dock,td_gdi_helipad,td_nod_helipad,ra1_allies_alliedhelipad,ra1_soviet_airfield,ra1_soviet_largesovietairfield,japan_japaneseairfield,ixian_launchpad,ra2_allies_airforcecommandhq,ra2_soviets_airfield,cgairf.asian,steel_consortium_consortiumairpad,cgair.latin,airfield.nax,tkmairpad,ts_gdi_helipad,forgotten_helipad,ts_nod_helipad,cabal_helipad
 	AutoTarget:
 		InitialStance: HoldFire
 	DamageMultiplier@RearmableAircraft:
@@ -6558,11 +6558,11 @@ CPQDEBUGDUMMY:
 
 ^Repairable:
 	Repairable:
-		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RepairActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^RearmAtServiceDepot:
 	Rearmable:
-		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, rafix.japan, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
+		RearmActors: td_gdi_repairfacility, td_nod_repairfacility, ra1_allies_alliedservicedepot, ra1_soviet_servicedepot, japan_japaneseservicedepot, ra2_soviets_servicedepot, ra2_allies_alliedservicedepot, cgdept.asian, cgdept.latin, ixian_repairpad, ordos_repairpad, ra2_ctoutp, ts_gdi_servicedepot, ts_nod_servicedepot, forgotten_servicedepot, cabal_servicedepot, plymouth_garage, eden_garage
 
 ^ShootableMissile:
 	Inherits@1: ^ExistsInWorld
@@ -8890,7 +8890,7 @@ CPQDEBUGDUMMY:
 			# ra2_soviets_teslatrooper: ifv-tesla
 			# td_nod_flamethrower: ifv-fire
 			# ra1_soviet_flamethrower: ifv-fire
-			# raje4: ifv-fire
+			# japan_japaneseflamethrower: ifv-fire
 			# yuri_initiate: ifv-fire
 			# flam.asian: ifv-fire
 			# terran_firebat: ifv-fire
@@ -9065,9 +9065,9 @@ CPQDEBUGDUMMY:
 			# wh40kchaoslord: ifv-hero
 			# wh40kberserk: ifv-hvmg
 			# wh40kchaosmarinechamp: ifv-hero
-			# raje1: ifv-mg
-			# raje3: ifv-miss
-			# ramaid: ifv-archermaiden
+			# japan_imperialscoutsman: ifv-mg
+			# japan_tankbuster: ifv-miss
+			# japan_archermaiden: ifv-archermaiden
 			# archer.asian: ifv-archermaiden
 			# ra1_allies_alliedsniper: ifv-ra1_allies_alliedsniper
 			# wc_h_footman: ifv-archer
@@ -9234,7 +9234,7 @@ CPQDEBUGDUMMY:
 			td_nod_lasercommando: hero
 			ra1_allies_tanya: hero
 			ra1_soviet_volkov: hero
-			hakurei: hero
+			japan_exorcist: hero
 			ra2_allies_tanyaii: hero
 			ra2_soviets_boris: hero
 			yuri_yurix: hero

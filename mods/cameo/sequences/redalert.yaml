@@ -5,7 +5,7 @@
 redguard:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: redguard.shp
+		Filename: japan_imperialscoutsman_redguard.shp
 		Scale: 1.38
 	stand:
 		Facings: 8
@@ -102,7 +102,7 @@ redguard:
 japanesesoldier:
 	Inherits: ^InfantryOverlays
 	Defaults:
-		Filename: redguard.shp
+		Filename: japan_imperialscoutsman_redguard.shp
 		Scale: 1.38
 	stand:
 		Facings: 8
@@ -194,7 +194,7 @@ japanesesoldier:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: japanesesoldier.png
+		Filename: japan_imperialscoutsman_icon.png
 
 e1sniper:
 	Inherits: ^InfantryOverlays
@@ -512,10 +512,10 @@ rae3:
 	icon:
 		Filename: ra1_soviet_rocketsoldier_icon.png
 
-raje3:
+japan_tankbuster:
 	Inherits: ^RA2ArmedInfantryNoProneAnimation
 	Defaults:
-		Filename: scybgm.shp
+		Filename: japan_tankbuster_scybgm.shp
 		Scale: 0.69
 	stand:
 		Start: 160
@@ -587,7 +587,7 @@ raje3:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: tankbustericon.png
+		Filename: japan_tankbuster_icon.png
 
 ra1_soviet_firerocketsoldier:
 	Inherits: e3
@@ -1496,9 +1496,9 @@ rachan:
 		Tick: 1600
 		ZOffset: -511
 
-rasamurai:
+japan_samurai:
 	Defaults:
-		Filename: rasamurai.shp
+		Filename: japan_promotion_unlocksamurai_rasamurai.shp
 		Scale: 0.5
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1605,11 +1605,11 @@ rasamurai:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: rasamuraiicon.shp
+		Filename: japan_promotion_unlocksamurai_icon.shp
 
-ramaid:
+japan_archermaiden:
 	Defaults:
-		Filename: ramaid.shp
+		Filename: japan_promotion_unlockarchermaiden_ramaid.shp
 		Scale: 0.58
 	Inherits: ^InfantryOverlays
 	stand:
@@ -1716,16 +1716,16 @@ ramaid:
 		Stride: 6
 		Facings: 8
 	icon:
-		Filename: modmaidicon.shp
+		Filename: japan_promotion_unlockarchermaiden_icon.shp
 
 ####################################################################################################
 #		VEHICLES
 ####################################################################################################
 
-shogunexecutioner:
+japan_shogunexecutioner:
 	Inherits: ^SCSmallShadow
 	Defaults:
-		Filename: executioner.shp
+		Filename: japan_promotion_unlockshogunexecutioner_executioner.shp
 		Scale: 2
 		Offset: 0, 18
 	idle:
@@ -1748,7 +1748,7 @@ shogunexecutioner:
 		Length: 9
 		Tick: 60
 	icon:
-		Filename: executioner.png
+		Filename: japan_promotion_unlockshogunexecutioner_icon.png
 		Offset: 0,0
 
 ramcv:
@@ -2353,9 +2353,9 @@ ra1_allies_sheridanassaulttank:
 	icon:
 		Filename: ra1_allies_promotion_unlocksheridan_icon.shp
 
-modkubel:
+japan_scoutcar:
 	Defaults:
-		Filename: jkubelwagen.shp
+		Filename: japan_scoutcar_jkubelwagen.shp
 	idle:
 		Facings: 64
 	turret:
@@ -2368,11 +2368,11 @@ modkubel:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: jkubelicon.shp
+		Filename: japan_scoutcar_icon.shp
 
-modbggy:
+japan_grenadebuggy:
 	Defaults:
-		Filename: jbuggy.shp
+		Filename: japan_promotion_unlockgrenadebuggy_jbuggy.shp
 	idle:
 		Facings: 64
 	turret:
@@ -2383,11 +2383,11 @@ modbggy:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: jbuggyicon.shp
+		Filename: japan_promotion_unlockgrenadebuggy_icon.shp
 
-modhover:
+japan_hovercrafttransport:
 	Defaults:
-		Filename: modhover_new.shp
+		Filename: japan_hovercrafttransport_modhover_new.shp
 		Scale: 0.4
 	idle:
 		Facings: 64
@@ -2400,11 +2400,11 @@ modhover:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modhovericon.shp
+		Filename: japan_hovercrafttransport_icon.shp
 
-modhovert:
+japan_hovercraftflametank:
 	Defaults:
-		Filename: modhovert.shp
+		Filename: japan_promotion_unlockhovercraftflametank_modhovert.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2417,11 +2417,11 @@ modhovert:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modhoverticon.shp
+		Filename: japan_promotion_unlockhovercraftflametank_icon.shp
 
-modoitank:
+japan_oitank:
 	Defaults:
-		Filename: oitank.shp
+		Filename: japan_oitank_oitank.shp
 		Offset: 0,12
 	idle:
 		Facings: 64
@@ -2435,15 +2435,15 @@ modoitank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modoitankicon.shp
+		Filename: japan_oitank_icon.shp
 		Offset: 0,0
 
-exorcistoitank:
+japan_exorcistoitank:
 	Defaults:
-		Filename: oitank.shp
+		Filename: japan_oitank_oitank.shp
 		Offset: 0,12
 	idle:
-		Filename: exorcistoitank.shp
+		Filename: japan_exorcistoitank.shp
 		Facings: 64
 	turret:
 		Facings: 64
@@ -2455,12 +2455,12 @@ exorcistoitank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: exorcistoitankicon.shp
+		Filename: japan_exorcistoitank_icon.shp
 		Offset: 0,0
 
-modcore:
+japan_corewarfactory:
 	Defaults:
-		Filename: modcore.shp
+		Filename: japan_coretechcenter_modcore.shp
 		Scale: 2
 	idle:
 		Facings: -32
@@ -2469,21 +2469,21 @@ modcore:
 	icon1:
 		Filename: ra1_allies_alliedorerefinery_icon.png
 	icon2:
-		Filename: JapPowerplanIcon.shp
+		Filename: japan_coretechcenter_jappowerplanicon.shp
 	icon3:
-		Filename: modjbarricon.shp
+		Filename: japan_japanesebarracks_icon.shp
 	icon4:
-		Filename: jradardomeicon.png
+		Filename: japan_coretechcenter_jradardomeicon.png
 	icon5:
-		Filename: JapFlagAirfieldIcon.shp
+		Filename: japan_japaneseairfield_icon.shp
 	icon6:
-		Filename: rafixicon.png
+		Filename: japan_coretechcenter_rafixicon.png
 	icon7:
-		Filename: modjtekicon.shp
+		Filename: japan_japanesetechcenter_icon.shp
 
-modwave:
+japan_waveforceartillery:
 	Defaults:
-		Filename: modwave.shp
+		Filename: japan_promotion_unlockwaveforceartillery_modwave.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2493,10 +2493,10 @@ modwave:
 		Facings: 64
 		Offset: 0,8
 	muzzle:
-		Filename: blueartexp.shp
+		Filename: japan_promotion_unlockwaveforceartillery_blueartexp.shp
 		Length: *
 	icon:
-		Filename: modwaveicon.shp
+		Filename: japan_promotion_unlockwaveforceartillery_icon.shp
 
 mod4tnkgirl:
 	Defaults:
@@ -2516,7 +2516,7 @@ mod4tnkgirl:
 		Filename: ra1_soviet_mammothtank_icon.shp
 jharv:
 	Defaults:
-		Filename: jharv.shp
+		Filename: japan_japaneseoretruck_jharv.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2530,13 +2530,13 @@ jharv:
 		Facings: 64
 	icon:
 		Start: 0
-		Filename: jharvicon.shp
+		Filename: japan_japaneseoretruck_jharvicon.shp
 	cityicon:
-		Filename: jharvicon.shp
+		Filename: japan_japaneseoretruck_jharvicon.shp
 
-jballista:
+japan_ballista:
 	Defaults:
-		Filename: jballista.shp
+		Filename: japan_ballista.shp
 		Scale: 0.8
 	idle:
 		Facings: 64
@@ -2544,7 +2544,7 @@ jballista:
 		Filename: gunfire2.shp
 		Length: 5
 	icon:
-		Filename: jballistaicon.shp
+		Filename: japan_ballista_icon.shp
 
 ####################################################################################################
 #		BUILDINGS
@@ -2576,12 +2576,12 @@ rafact:
 rafactj:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: rafactj.shp
+		Filename: japan_japaneseconstructionyard_rafactj.shp
 	idle:
 		Start: 32
 		Length: 15
 	make:
-		Filename: rafactj.shp
+		Filename: japan_japaneseconstructionyard_rafactj.shp
 		Length: 32
 	build:
 		Start: 64
@@ -2597,7 +2597,7 @@ rafactj:
 		Tick: 800
 	bib:
 	icon:
-		Filename: rafactjicon.shp
+		Filename: japan_japaneseconstructionyard_icon.shp
 
 rafactcolor:
 	Defaults:
@@ -3017,7 +3017,7 @@ rafix:
 	bib:
 		Offset: 0,-2
 	icon:
-		Filename: rafixicon.png
+		Filename: japan_coretechcenter_rafixicon.png
 
 rafixa:
 	Inherits: rafix
@@ -3032,7 +3032,7 @@ rafixs:
 rafixj:
 	Inherits: rafix
 	Defaults:
-		Filename: rafixj.shp
+		Filename: japan_japaneseservicedepot_rafixj.shp
 
 ra1_allies_alliedgunturret:
 	Inherits: ^WithBuildingBibGun
@@ -3382,34 +3382,34 @@ ra1_allies_reinforcementpad:
 		Filename: ra1_allies_promotion_unlockreinforcementpad_icon.shp
 		Offset: 0,0
 
-jpwr:
+japan_waveforcereactor:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 	idle:
-		Filename: JapReactorUndamagedIdle.png
+		Filename: japan_waveforcereactor_japreactorundamagedidle.png
 		Length: *
 		Scale: 1
 	damaged-idle:
-		Filename: JapReactorDamagedIdle.png
+		Filename: japan_waveforcereactor_japreactordamagedidle.png
 		Length: *
 		Scale: 1
 	make:
-		Filename: JapReactorBuildup.png
+		Filename: japan_waveforcereactor_japreactorbuildup.png
 		Length: *
 		Scale: 1
 	dead:
-		Filename: JapReactorDamagedIdle.png
+		Filename: japan_waveforcereactor_japreactordamagedidle.png
 		Length: *
 		Tick: 13
 		Scale: 1
 	bib:
 	icon:
-		Filename: JapPowerplanIcon.shp
+		Filename: japan_coretechcenter_jappowerplanicon.shp
 
-jproc:
+japan_japaneseorerefinery:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: jproc.shp
+		Filename: japan_japaneseorerefinery.shp
 	idle:
 		ZOffset: -1c512
 		Offset: 0, 14
@@ -3418,21 +3418,21 @@ jproc:
 		Offset: 0, 14
 		Start: 1
 	make:
-		Filename: jprocmake.shp
+		Filename: japan_japaneseorerefinery_jprocmake.shp
 		Length: *
 	dead:
-		Filename: jproc.shp
+		Filename: japan_japaneseorerefinery.shp
 		Start: 1
 	bib:
 		ZOffset: -1c512
 	icon:
-		Filename: japan_refinery_icon.png
+		Filename: japan_japaneseorerefinery_icon.png
 
 
 modjbarr:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: modjdojo2.shp
+		Filename: japan_japanesebarracks_modjdojo2.shp
 	idle:
 		Start: 32
 		Length: 15
@@ -3442,38 +3442,38 @@ modjbarr:
 		Length: 15
 		#Offset: 0,-6
 	make:
-		Filename: modjdojo2.shp
+		Filename: japan_japanesebarracks_modjdojo2.shp
 		Length: 32
 		#Offset: 0,-6
 	dead:
 		Start: 48
 	bib:
 	icon:
-		Filename: modjbarricon.shp
+		Filename: japan_japanesebarracks_icon.shp
 
 jweap:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: jweap_bottom.shp
+		Filename: japan_japanesewarfactory_jweap_bottom.shp
 		Offset: 0,8
 	idle:
 	damaged-idle:
 		Start: 1
 	make:
-		Filename: jweap_make.shp
+		Filename: japan_japanesewarfactory_jweap_make.shp
 		Length: *
 	build-top:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Length: 5
 	damaged-build-top:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Start: 5
 		Length: 5
 	customhack:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Length: 1
 	damaged-customhack:
-		Filename: jweap_roof.shp
+		Filename: japan_japanesewarfactory_jweap_roof.shp
 		Start: 5
 		Length: 1
 	dead:
@@ -3481,12 +3481,12 @@ jweap:
 		Scale: 1
 		Offset: 0,0
 	icon:
-		Filename: jweapicon.shp
+		Filename: japan_japanesewarfactory_icon.shp
 		Offset: 0,0
 
 jraafld:
 	Defaults:
-		Filename: JapFlagAirfield.shp
+		Filename: japan_japaneseairfield_japflagairfield.shp
 	idle:
 		Start: 32
 		Length: 15
@@ -3498,27 +3498,27 @@ jraafld:
 		ZOffset: -1023
 		Offset: 0,2
 	make:
-		Filename: JapFlagAirfield.shp
+		Filename: japan_japaneseairfield_japflagairfield.shp
 		Length: 32
 		Offset: 0,2
 	dead:
 		Start: 48
 	icon:
-		Filename: JapFlagAirfieldIcon.shp
+		Filename: japan_japaneseairfield_icon.shp
 
 jdome:
 	Inherits: ^WithBuildingBib3
 	Defaults:
-		Filename: jradardome.png
+		Filename: japan_japaneseradararray_jradardome.png
 	idle:
 		Length: *
 		Offset: 0,10
 	damaged-idle:
-		Filename: jradardomedamaged.png
+		Filename: japan_japaneseradararray_jradardomedamaged.png
 		Length: *
 		Offset: 0,10
 	make:
-		Filename: jradardomebuildup.png
+		Filename: japan_japaneseradararray_jradardomebuildup.png
 		Length: *
 		Offset: 0,10
 		Tick: 150
@@ -3526,12 +3526,12 @@ jdome:
 		Scale: 2
 	bib:
 	icon:
-		Filename: jradardomeicon.png
+		Filename: japan_coretechcenter_jradardomeicon.png
 
-modjtek:
+japan_japanesetechcenter:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: modjtek2.shp
+		Filename: japan_japanesetechcenter_modjtek2.shp
 		Scale: 1
 	idle:
 		Start: 32
@@ -3542,7 +3542,7 @@ modjtek:
 		Length: 15
 		#Offset: 0,-6
 	make:
-		Filename: modjtek2.shp
+		Filename: japan_japanesetechcenter_modjtek2.shp
 		Length: 32
 		#Offset: 0,-6
 	dead:
@@ -3550,12 +3550,12 @@ modjtek:
 	bib:
 		Scale: 1
 	icon:
-		Filename: modjtekicon.shp
+		Filename: japan_japanesetechcenter_icon.shp
 
-jshrine:
+japan_japaneseshrine:
 	Inherits: ^WithBuildingBib2
 	Defaults:
-		Filename: modjtek.shp
+		Filename: japan_japaneseshrine_modjtek.shp
 		Scale: 3
 	idle:
 		Start: 0
@@ -3566,7 +3566,7 @@ jshrine:
 		Length: 1
 		#Offset: 0,-6
 	make:
-		Filename: modjtekmake.shp
+		Filename: japan_japaneseshrine_modjtekmake.shp
 		Length: *
 		#Offset: 0,-6
 	dead:
@@ -3574,9 +3574,9 @@ jshrine:
 	bib:
 		Scale: 1
 	icon:
-		Filename: jshrineicon.png
+		Filename: japan_japaneseshrine_icon.png
 	japanspellcard:
-		Filename: japanspellcardicon.png
+		Filename: japan_japaneseshrine_japanspellcardicon.png
 
 ####################################################################################################
 #		RA TECH
@@ -3872,9 +3872,9 @@ ra1_soviet_hiptransport:
 	pscchhip3:
 		Filename: ra1_soviet_hiptransport_glhipmissx8.shp
 
-jhind:
+japan_skyhawk:
 	Defaults:
-		Filename: wuzhia.shp
+		Filename: japan_skyhawk_wuzhia.shp
 	idle:
 		Facings: -32
 		Length: 21
@@ -3883,7 +3883,7 @@ jhind:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: skyhawkicon.png
+		Filename: japan_skyhawk_icon.png
 
 ra1_allies_alliedchinooktransport:
 	Defaults:
@@ -4909,7 +4909,7 @@ ralst:
 je4:
 	Inherits: td_nod_flamethrower
 	icon:
-		Filename: je4icon.shp
+		Filename: japan_japaneseflamethrower_icon.shp
 
 ra1_soviet_hammertank:
 	Defaults:
@@ -4947,15 +4947,15 @@ ra1_soviet_kotinnucleartank:
 	icon:
 		Filename: ra1_soviet_upgrade_kotinnucleartank_icon.png
 
-jmgnest:
+japan_japanesemgnest:
 	Inherits: ^WithBuildingBibFtur
 	Defaults:
-		Filename: jmgnest_idle.shp
+		Filename: japan_japanesemgnest_jmgnest_idle.shp
 	idle:
 		Offset: 0,-2
 		Facings: 64
 	make:
-		Filename: jmgnest_make.shp
+		Filename: japan_japanesemgnest_jmgnest_make.shp
 		Length: *
 		Offset: 0,-2
 	muzzle:
@@ -4966,18 +4966,18 @@ jmgnest:
 	bib:
 		Offset: 0,-5
 	icon:
-		Filename: jmgnesticon.shp
+		Filename: japan_japanesemgnest_icon.shp
 
-jballistat:
+japan_ballistatower:
 	Inherits: ^WithBuildingBibFtur
 	Defaults:
-		Filename: jballistat.shp
+		Filename: japan_ballistatower.shp
 		Scale: 0.8
 	idle:
 		Offset: 0,-2
 		Facings: 64
 	make:
-		Filename: jballistat.shp
+		Filename: japan_ballistatower.shp
 		Start: 64
 		Length: 12
 		Offset: 0,-2
@@ -4989,7 +4989,7 @@ jballistat:
 	bib:
 		Offset: 0,-5
 	icon:
-		Filename: jballistaticon.shp
+		Filename: japan_ballistatower_icon.shp
 
 ra1_allies_bastionartillerybunker:
 	Inherits: ^WithBuildingBib3
@@ -5022,10 +5022,10 @@ ra1_allies_bastionartillerybunker:
 	icon:
 		Filename: ra1_allies_promotion_unlockbastion_icon.shp
 
-modpillboxfort:
+japan_waveforceturret:
 	Inherits: ^WithBuildingBibIron
 	Defaults:
-		Filename: waveturret.shp
+		Filename: japan_waveforceturret_waveturret.shp
 		Offset: 0, 30
 	idle:
 		Facings: 64
@@ -5033,22 +5033,22 @@ modpillboxfort:
 		Facings: 64
 		Start: 64
 	make:
-		Filename: waveturretmake.shp
+		Filename: japan_waveforceturret_waveturretmake.shp
 		Length: *
 	dead:
 	muzzle:
-		Filename: blueartexp.shp
+		Filename: japan_promotion_unlockwaveforceartillery_blueartexp.shp
 		Length: *
 		Offset: 0, 0
 	bib:
 		Offset: 0, 25
 	icon:
-		Filename: modwaveforticon.shp
+		Filename: japan_waveforceturret_icon.shp
 		Offset: 0, 0
 
-modcarr:
+japan_armoredcar:
 	Defaults:
-		Filename: jarmoredcar.shp
+		Filename: japan_promotion_unlockarmoredcar_jarmoredcar.shp
 	idle:
 		Facings: 64
 	turret:
@@ -5060,11 +5060,11 @@ modcarr:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: jarmoredcaricon.shp
+		Filename: japan_promotion_unlockarmoredcar_icon.shp
 
-modkami:
+japan_zerofighter:
 	Defaults:
-		Filename: zerofighter.shp
+		Filename: japan_zerofighter_zerofighter.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5072,11 +5072,11 @@ modkami:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: modkamiicon.shp
+		Filename: japan_zerofighter_icon.shp
 
-modbomber:
+japan_japanesebomber:
 	Defaults:
-		Filename: japanesebomber.shp
+		Filename: japan_japanesebomber_japanesebomber.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5084,7 +5084,7 @@ modbomber:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: modbombericon.shp
+		Filename: japan_japanesebomber_icon.shp
 
 jsuperbomber:
 	idle:
@@ -5092,12 +5092,12 @@ jsuperbomber:
 		Scale: 2
 		Facings: 64
 	icon:
-		Filename: modbombericon.shp
+		Filename: japan_japanesebomber_icon.shp
 
 modkamimini:
 	Defaults:
 		Scale: 0.5
-		Filename: zerofighter.shp
+		Filename: japan_zerofighter_zerofighter.shp
 	idle:
 		Facings: 64
 	muzzle:
@@ -5105,11 +5105,11 @@ modkamimini:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: modkamiicon.shp
+		Filename: japan_zerofighter_icon.shp
 
-modnano:
+japan_nanodronebuggy:
 	Defaults:
-		Filename: jnanoarty.shp
+		Filename: japan_nanodronebuggy_jnanoarty.shp
 	idle:
 		Facings: 64
 	turret:
@@ -5119,7 +5119,7 @@ modnano:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modnanoicon.shp
+		Filename: japan_nanodronebuggy_icon.shp
 
 ra1_allies_rapierjumpjet:
 	Defaults:
@@ -5134,9 +5134,9 @@ ra1_allies_rapierjumpjet:
 	icon:
 		Filename: ra1_allies_promotion_unlockrapierjumpjet_icon.shp
 
-hakurei:
+japan_exorcist:
 	Defaults:
-		Filename: hakurei.shp
+		Filename: japan_promotion_unlockexorcist_hakurei.shp
 		Scale: 0.96
 	Inherits: ^InfantryOverlays
 	stand:
@@ -5247,11 +5247,11 @@ hakurei:
 		Facings: 8
 		Scale: 1
 	icon:
-		Filename: hakureiicon.shp
+		Filename: japan_promotion_unlockexorcist_icon.shp
 
-modtypej:
+japan_igomediumtank:
 	Defaults:
-		Filename: type89igo.shp
+		Filename: japan_igomediumtank_type89igo.shp
 	idle:
 		Facings: 64
 		Offset: 0, 5
@@ -5263,26 +5263,26 @@ modtypej:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: modtypejicon.shp
+		Filename: japan_igomediumtank_icon.shp
 
-typechiha:
+japan_chihaheavytank:
 	Defaults:
 		Scale: 1.2
 	idle:
-		Filename: ChiHaChass.shp
+		Filename: japan_promotion_unlockheavychihaheavytank_chihachass.shp
 		Facings: 64
 	turret:
-		Filename: ChiHaTurret.shp
+		Filename: japan_promotion_unlockheavychihaheavytank_chihaturret.shp
 		Facings: 64
 	muzzle:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: ChiHaIcon.shp
+		Filename: japan_promotion_unlockheavychihaheavytank_icon.shp
 
 japan_shrine_minitank:
 	Defaults:
-		Filename: japan_shrine_minitank.png
+		Filename: japan_promotion_unlockshrinetank_japan_shrine_minitank.png
 		Offset: 0, -8
 	idle:
 		Facings: 64
@@ -5293,12 +5293,12 @@ japan_shrine_minitank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: japan_shrine_minitank_icon.png
+		Filename: japan_promotion_unlockshrinetank_icon.png
 		Offset: 0, 0
 
-waveforcetank:
+japan_waveforcetank:
 	Defaults:
-		Filename: waveforcetank.shp
+		Filename: japan_waveforcetank.shp
 		Offset: 0,8
 	idle:
 		Facings: 64
@@ -5309,7 +5309,7 @@ waveforcetank:
 		Filename: gunfire2.shp
 		Length: *
 	icon:
-		Filename: waveforcetankicon.png
+		Filename: japan_waveforcetank_icon.png
 		Offset: 0,0
 
 ra1_soviet_monstertank:
@@ -5356,9 +5356,9 @@ ra1_soviet_gorynychtank:
 	icon:
 		Filename: ra1_soviet_gorynychtank_icon.png
 		
-rocketangel:
+japan_rocketangel:
 	Defaults:
-		Filename: rocketangel.shp
+		Filename: japan_promotion_unlockrocketangel_rocketangel.shp
 		Scale: 0.8
 		Tick: 200
 		Offset: 0, 0, 16
@@ -5459,7 +5459,7 @@ rocketangel:
 		Facings: 8
 	# Fly through air squish on ground
 	icon:
-		Filename: rocketangel.png
+		Filename: japan_promotion_unlockrocketangel_icon.png
 
 bushido_icon:
 	Defaults:
@@ -5530,35 +5530,35 @@ staliniumsteelicon:
 
 bushidodisciplineicon:
 	icon:
-		Filename: bushidodisciplineicon.png
+		Filename: japan_upgrade_bushidodiscipline_icon.png
 
 waveforcebulletsicon:
 	icon:
-		Filename: waveforcebulletsicon.png
+		Filename: japan_upgrade_waveforcebullets_icon.png
 
 divinewindprotocol:
 	icon:
-		Filename: divinewindprotocol.png
+		Filename: japan_upgrade_divinewindprotocol_icon.png
 
 stealthsuitintegrationicon:
 	icon:
-		Filename: stealthsuitintegrationicon.png
+		Filename: japan_upgrade_stealthsuitintegration_icon.png
 
 energizedarrowsicon:
 	icon:
-		Filename: energizedarrowsicon.png
+		Filename: japan_upgrade_energizedarrows_icon.png
 
 advancedplasmaweaponsicon:
 	icon:
-		Filename: advancedplasmaweaponsicon.png
+		Filename: japan_upgrade_advancedplasmaweapons_icon.png
 
 superiorwarenginesicon:
 	icon:
-		Filename: superiorwarenginesicon.png
+		Filename: japan_upgrade_superiorwarengines_icon.png
 
 nanotechrepairsicon:
 	icon:
-		Filename: nanotechrepairsicon.png
+		Filename: japan_upgrade_nanotechrepairs_icon.png
 
 #############################
 #	Doctrines and Upgrades	#
