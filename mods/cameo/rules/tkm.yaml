@@ -287,10 +287,10 @@ tkminfantryupgrade:
 		Prerequisite: tkminfantryupgrade
 
 ^tkminfantryupgrade:
-	DamageMultiplier@upinfweapon:
+	DamageMultiplier@terran_upgrade_infantryweaponslevel1:
 		Modifier: 70
 		RequiresCondition: tkminfantryupgrade
-	FirepowerMultiplier@upinfweapon:
+	FirepowerMultiplier@terran_upgrade_infantryweaponslevel1:
 		Modifier: 125
 		RequiresCondition: tkminfantryupgrade
 	GrantConditionOnPrerequisite@tkminfantryupgrade:
@@ -2980,10 +2980,10 @@ tkmsuicidedrone:
 	AttackAircraft:
 		FacingTolerance: 40
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:

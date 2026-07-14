@@ -2867,7 +2867,7 @@
 			ra2_allies_pillbox: garrisoned
 			ra2_soviets_battlebunker: garrisoned
 			bunk.nax: garrisoned
-			scbunker: garrisoned
+			terran_bunker: garrisoned
 			cgpile.latin: biggarrisoned
 			cgup.latin: biggarrisoned
 			ngbunk2.latin: biggarrisoned
@@ -2882,7 +2882,7 @@
 			zombietank.nax: battlefortresspassenger
 			shoe.nax: battlefortresspassenger
 			steel_consortium_poseidontank: battlefortresspassenger
-			scpythean: battlefortresspassenger
+			terran_pythean: battlefortresspassenger
 			scbehemoth: battlefortresspassenger
 			forgotten_m113adats: battlefortresspassenger
 			tkmbattlebus: battlefortresspassenger
@@ -8083,7 +8083,7 @@ CPQDEBUGDUMMY:
 	# ONE Upgrades producer. Buildings that also inherit ^RadarBuilding but would be a
 	# 2nd producer (tech centers, main bases, secondary radars) must remove it via
 	# -Production@Upgrades: / -ProductionBar@Upgrades: — see td_gdi_advancedcommunicationscenter, td_nod_templeofnod,
-	# td_nod_templeprime, SCCOMMANDCENTER, SCNEXUS, ra2gaspysat.
+	# td_nod_templeprime, terran_commandcenter, SCNEXUS, ra2gaspysat.
 	Production@Upgrades:
 		Produces: Upgrades
 	ProductionBar@Upgrades:
@@ -8825,7 +8825,7 @@ CPQDEBUGDUMMY:
 			# gren.asian: ifv-mg
 			# 2100scav: ifv-mg
 			# 2100scav2: ifv-mg
-			# scmarine: ifv-mg
+			# terran_marine: ifv-mg
 			# tse1: ifv-mg
 			# ts_nod_lightinfantry: ifv-mg
 			# tse1para: ifv-mg
@@ -8856,7 +8856,7 @@ CPQDEBUGDUMMY:
 			# rae6: ifv-repair
 			# ra1_allies_medic: ifv-healer
 			# ra1_allies_mechanic: ifv-repair
-			# scscv: ifv-repair
+			# terran_scv: ifv-repair
 			# ra2_allies_engineer: ifv-repair
 			# ra2_soviets_engineer: ifv-repair
 			# ra2engineer.yuri: ifv-repair
@@ -8893,7 +8893,7 @@ CPQDEBUGDUMMY:
 			# raje4: ifv-fire
 			# yrinit: ifv-fire
 			# flam.asian: ifv-fire
-			# scfirebat: ifv-fire
+			# terran_firebat: ifv-fire
 			# td_nod_chemicalwarrior: ifv-chem
 			# ra2_soviets_desolator: ifv-chem
 			# forgotten_chemsprayinfantry: ifv-chem
@@ -8911,7 +8911,7 @@ CPQDEBUGDUMMY:
 			# usaburton: ifv-hero
 			# susaburton: ifv-hero
 			# leangburton: ifv-hero
-			# scghost: ifv-ra1_allies_alliedsniper
+			# terran_ghost: ifv-ra1_allies_alliedsniper
 			# ra2_allies_sniper: ifv-ra1_allies_alliedsniper
 			# yrvirus: ifv-ra1_allies_alliedsniper
 			# ra1_allies_raspy: ifv-spy

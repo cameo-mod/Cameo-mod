@@ -181,13 +181,13 @@ MM22100MCV:
 		Image: mm22100mcv
 
 MMSCTMCV:
-	Inherits@MCV: SCTMCV
+	Inherits@MCV: terran_mobilecommandcenter
 	Buildable:
 		Icon: mmicon
 	RenderSprites:
-		Image: SCTMCV
+		Image: terran_mobilecommandcenter
 	Transforms:
-		IntoActor: sccommandcenter
+		IntoActor: terran_commandcenter
 	Buildable:
 		BuildPaletteOrder: 100
 		Prerequisites: !mmterran

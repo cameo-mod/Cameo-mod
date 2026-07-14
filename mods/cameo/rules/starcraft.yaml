@@ -31,19 +31,19 @@ World:
 		Class: none
 		ClassName: MCV Only
 		Factions: terran
-		BaseActor: sctmcv
+		BaseActor: terran_mobilecommandcenter
 	StartingUnits@defaultterran:
 		Class: light
 		ClassName: Light Support
 		Factions: terran
-		BaseActor: sctmcv
-		SupportActors: scmarine,scmarine,scmarine,scfirebat,scmedic,scvulture
+		BaseActor: terran_mobilecommandcenter
+		SupportActors: terran_marine,terran_marine,terran_marine,terran_firebat,terran_medic,terran_vulture
 	StartingUnits@heavyterran:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: terran
-		BaseActor: sctmcv
-		SupportActors: scmarine,scmarine,scfirebat,scmedic,scvulture,scsiegetank,scsiegetank
+		BaseActor: terran_mobilecommandcenter
+		SupportActors: terran_marine,terran_marine,terran_firebat,terran_medic,terran_vulture,terran_siegetank,terran_siegetank
 	####################################################################################################
 	#		SC PROTOSS
 	####################################################################################################
@@ -183,7 +183,7 @@ World:
 		CooldownTicks: 550
 		DeployedTicks: 275
 		PauseOnCondition: disabled || nostim
-		RequiresCondition: upstimpack
+		RequiresCondition: terran_upgrade_stimpack
 		StartsFullyCharged: true
 	SpeedMultiplier@stim:
 		Modifier: 150
@@ -211,118 +211,118 @@ World:
 		OrderTrigger: Attack
 		OrderChance: 50
 		OrderInterval: 550
-		RequiresCondition: upstimpack && !nostim && botmicro
+		RequiresCondition: terran_upgrade_stimpack && !nostim && botmicro
 	GrantConditionOnPrerequisite@stim:
-		Condition: upstimpack
-		Prerequisites: upstimpack
+		Condition: terran_upgrade_stimpack
+		Prerequisites: terran_upgrade_stimpack
 	ActorStatValues:
-		Upgrades: upstimpack
+		Upgrades: terran_upgrade_stimpack
 
 ^UraniumShellsUpgrade:
-	RangeMultiplier@upmarinerange:
-		RequiresCondition: upmarinerange
+	RangeMultiplier@terran_upgrade_u238shells:
+		RequiresCondition: terran_upgrade_u238shells
 		Modifier: 120
-	GrantConditionOnPrerequisite@upmarinerange:
-		Condition: upmarinerange
-		Prerequisites: upmarinerange
+	GrantConditionOnPrerequisite@terran_upgrade_u238shells:
+		Condition: terran_upgrade_u238shells
+		Prerequisites: terran_upgrade_u238shells
 	ActorStatValues:
-		Upgrades: upmarinerange
+		Upgrades: terran_upgrade_u238shells
 
 ^TerranInfantryWeaponUpgrades:
-	FirepowerMultiplier@upinfweapon:
+	FirepowerMultiplier@terran_upgrade_infantryweaponslevel1:
 		Modifier: 115
-		RequiresCondition: upinfweapon && !upinfweapon2
-	GrantConditionOnPrerequisite@upinfweapon:
-		Condition: upinfweapon
-		Prerequisites: upinfweapon
-	FirepowerMultiplier@upinfweapon2:
+		RequiresCondition: terran_upgrade_infantryweaponslevel1 && !terran_upgrade_infantryweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryweaponslevel1:
+		Condition: terran_upgrade_infantryweaponslevel1
+		Prerequisites: terran_upgrade_infantryweaponslevel1
+	FirepowerMultiplier@terran_upgrade_infantryweaponslevel2:
 		Modifier: 135
-		RequiresCondition: upinfweapon2
-	GrantConditionOnPrerequisite@upinfweapon2:
-		Condition: upinfweapon2
-		Prerequisites: upinfweapon2
+		RequiresCondition: terran_upgrade_infantryweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryweaponslevel2:
+		Condition: terran_upgrade_infantryweaponslevel2
+		Prerequisites: terran_upgrade_infantryweaponslevel2
 	ActorStatValues:
-		Upgrades: upinfweapon
+		Upgrades: terran_upgrade_infantryweaponslevel1
 
 ^TerranInfantryArmorUpgrades:
-	DamageMultiplier@upinfarmor:
+	DamageMultiplier@terran_upgrade_infantryarmorlevel1:
 		Modifier: 90
-		RequiresCondition: upinfarmor && !upinfarmor2
-	GrantConditionOnPrerequisite@upinfarmor:
-		Condition: upinfarmor
-		Prerequisites: upinfarmor
-	DamageMultiplier@upinfarmor2:
+		RequiresCondition: terran_upgrade_infantryarmorlevel1 && !terran_upgrade_infantryarmorlevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryarmorlevel1:
+		Condition: terran_upgrade_infantryarmorlevel1
+		Prerequisites: terran_upgrade_infantryarmorlevel1
+	DamageMultiplier@terran_upgrade_infantryarmorlevel2:
 		Modifier: 80
-		RequiresCondition: upinfarmor2
-	GrantConditionOnPrerequisite@upinfarmor2:
-		Condition: upinfarmor2
-		Prerequisites: upinfarmor2
+		RequiresCondition: terran_upgrade_infantryarmorlevel2
+	GrantConditionOnPrerequisite@terran_upgrade_infantryarmorlevel2:
+		Condition: terran_upgrade_infantryarmorlevel2
+		Prerequisites: terran_upgrade_infantryarmorlevel2
 	ActorStatValues:
-		Upgrades: upinfarmor
+		Upgrades: terran_upgrade_infantryarmorlevel1
 
 ^TerranVehiclesWeaponUpgrades:
-	FirepowerMultiplier@upmechweapon:
+	FirepowerMultiplier@terran_upgrade_vehicleweaponslevel1:
 		Modifier: 115
-		RequiresCondition: upmechweapon && !upmechweapon2
-	GrantConditionOnPrerequisite@upmechweapon:
-		Condition: upmechweapon
-		Prerequisites: upmechweapon
-	FirepowerMultiplier@upmechweapon2:
+		RequiresCondition: terran_upgrade_vehicleweaponslevel1 && !terran_upgrade_vehicleweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_vehicleweaponslevel1:
+		Condition: terran_upgrade_vehicleweaponslevel1
+		Prerequisites: terran_upgrade_vehicleweaponslevel1
+	FirepowerMultiplier@terran_upgrade_vehicleweaponslevel2:
 		Modifier: 135
-		RequiresCondition: upmechweapon2
-	GrantConditionOnPrerequisite@upmechweapon2:
-		Condition: upmechweapon2
-		Prerequisites: upmechweapon2
+		RequiresCondition: terran_upgrade_vehicleweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_vehicleweaponslevel2:
+		Condition: terran_upgrade_vehicleweaponslevel2
+		Prerequisites: terran_upgrade_vehicleweaponslevel2
 	ActorStatValues:
-		Upgrades: upmechweapon
+		Upgrades: terran_upgrade_vehicleweaponslevel1
 
 ^TerranVehicleArmorUpgrades:
-	DamageMultiplier@upmecharmor:
+	DamageMultiplier@terran_upgrade_vehicleplatinglevel1:
 		Modifier: 90
-		RequiresCondition: upmecharmor && !upmecharmor2
-	GrantConditionOnPrerequisite@upmecharmor:
-		Condition: upmecharmor
-		Prerequisites: upmecharmor
-	DamageMultiplier@upmecharmor2:
+		RequiresCondition: terran_upgrade_vehicleplatinglevel1 && !terran_upgrade_vehicleplatinglevel2
+	GrantConditionOnPrerequisite@terran_upgrade_vehicleplatinglevel1:
+		Condition: terran_upgrade_vehicleplatinglevel1
+		Prerequisites: terran_upgrade_vehicleplatinglevel1
+	DamageMultiplier@terran_upgrade_vehicleplatinglevel2:
 		Modifier: 80
-		RequiresCondition: upmecharmor2
-	GrantConditionOnPrerequisite@upmecharmor2:
-		Condition: upmecharmor2
-		Prerequisites: upmecharmor2
+		RequiresCondition: terran_upgrade_vehicleplatinglevel2
+	GrantConditionOnPrerequisite@terran_upgrade_vehicleplatinglevel2:
+		Condition: terran_upgrade_vehicleplatinglevel2
+		Prerequisites: terran_upgrade_vehicleplatinglevel2
 	ActorStatValues:
-		Upgrades: upmecharmor
+		Upgrades: terran_upgrade_vehicleplatinglevel1
 
 ^TerranShipWeaponUpgrades:
-	FirepowerMultiplier@upshipweapon:
+	FirepowerMultiplier@terran_upgrade_shipweaponslevel1:
 		Modifier: 115
-		RequiresCondition: upshipweapon && !upshipweapon2
-	GrantConditionOnPrerequisite@upshipweapon:
-		Condition: upshipweapon
-		Prerequisites: upshipweapon
-	FirepowerMultiplier@upshipweapon2:
+		RequiresCondition: terran_upgrade_shipweaponslevel1 && !terran_upgrade_shipweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_shipweaponslevel1:
+		Condition: terran_upgrade_shipweaponslevel1
+		Prerequisites: terran_upgrade_shipweaponslevel1
+	FirepowerMultiplier@terran_upgrade_shipweaponslevel2:
 		Modifier: 135
-		RequiresCondition: upshipweapon2
-	GrantConditionOnPrerequisite@upshipweapon2:
-		Condition: upshipweapon2
-		Prerequisites: upshipweapon2
+		RequiresCondition: terran_upgrade_shipweaponslevel2
+	GrantConditionOnPrerequisite@terran_upgrade_shipweaponslevel2:
+		Condition: terran_upgrade_shipweaponslevel2
+		Prerequisites: terran_upgrade_shipweaponslevel2
 	ActorStatValues:
-		Upgrades: upshipweapon
+		Upgrades: terran_upgrade_shipweaponslevel1
 
 ^TerranShipArmorUpgrades:
-	DamageMultiplier@upshiparmor:
+	DamageMultiplier@terran_upgrade_shipplatinglevel1:
 		Modifier: 90
-		RequiresCondition: upshiparmor && !upshiparmor2
-	GrantConditionOnPrerequisite@upshiparmor:
-		Condition: upshiparmor
-		Prerequisites: upshiparmor
-	DamageMultiplier@upshiparmor2:
+		RequiresCondition: terran_upgrade_shipplatinglevel1 && !terran_upgrade_shipplatinglevel2
+	GrantConditionOnPrerequisite@terran_upgrade_shipplatinglevel1:
+		Condition: terran_upgrade_shipplatinglevel1
+		Prerequisites: terran_upgrade_shipplatinglevel1
+	DamageMultiplier@terran_upgrade_shipplatinglevel2:
 		Modifier: 80
-		RequiresCondition: upshiparmor2
-	GrantConditionOnPrerequisite@upshiparmor2:
-		Condition: upshiparmor2
-		Prerequisites: upshiparmor2
+		RequiresCondition: terran_upgrade_shipplatinglevel2
+	GrantConditionOnPrerequisite@terran_upgrade_shipplatinglevel2:
+		Condition: terran_upgrade_shipplatinglevel2
+		Prerequisites: terran_upgrade_shipplatinglevel2
 	ActorStatValues:
-		Upgrades: upshiparmor
+		Upgrades: terran_upgrade_shipplatinglevel1
 
 ####################################################################################################
 #		Protoss Upgrade Inherits
@@ -532,7 +532,7 @@ World:
 #		BUILDING TERRAN
 ####################################################################################################
 
-SCCOMMANDCENTER:
+terran_commandcenter:
 	Inherits: ^BaseBuilding
 	Inherits@ref: ^SCRefineryCommon
 	Inherits@shape: ^3x2Shape
@@ -613,7 +613,7 @@ SCCOMMANDCENTER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSUPPLYDEPOT:
+terran_supplydepot:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@power: ^PowerPlant
@@ -627,7 +627,7 @@ SCSUPPLYDEPOT:
 		Amount: 200
 	ProvidesPrerequisite@buildingname:
 	Buildable:
-		Prerequisites: ~sccommandcenter
+		Prerequisites: ~terran_commandcenter
 		Queue: Building, RABuilding
 		Description: actor_scsupplydepot.description
 	Building:
@@ -655,18 +655,18 @@ SCSUPPLYDEPOT:
 	StoresPlayerResources@supplydepotupg:
 		Capacity: 4000
 		RequiresCondition: supplydepotupg
-	GrantConditionOnPrerequisite@upsupplydepot1:
-		Condition: upsupplydepot1
-		Prerequisites: upsupplydepot1
-	PowerMultiplier@upsupplydepot1:
+	GrantConditionOnPrerequisite@terran_upgrade_upgradesupplydepotlevel1:
+		Condition: terran_upgrade_upgradesupplydepotlevel1
+		Prerequisites: terran_upgrade_upgradesupplydepotlevel1
+	PowerMultiplier@terran_upgrade_upgradesupplydepotlevel1:
 		Modifier: 150
-		RequiresCondition: upsupplydepot1 && !upsupplydepot2
-	GrantConditionOnPrerequisite@upsupplydepot2:
-		Condition: upsupplydepot2
-		Prerequisites: upsupplydepot2
-	PowerMultiplier@upsupplydepot2:
+		RequiresCondition: terran_upgrade_upgradesupplydepotlevel1 && !terran_upgrade_upgradesupplydepotlevel2
+	GrantConditionOnPrerequisite@terran_upgrade_upgradesupplydepotlevel2:
+		Condition: terran_upgrade_upgradesupplydepotlevel2
+		Prerequisites: terran_upgrade_upgradesupplydepotlevel2
+	PowerMultiplier@terran_upgrade_upgradesupplydepotlevel2:
 		Modifier: 200
-		RequiresCondition: upsupplydepot2
+		RequiresCondition: terran_upgrade_upgradesupplydepotlevel2
 	ProvidesPrerequisite:
 		Prerequisite: supplydepotupgradeavailable
 		RequiresCondition: !supplydepotupg
@@ -676,18 +676,18 @@ SCSUPPLYDEPOT:
 	Pluggable:
 		Offset: 0,0
 		Conditions:
-			scsupplydepot: supplydepotupg
+			terran_supplydepot: supplydepotupg
 		Requirements:
-			scsupplydepot: !build-incomplete && !supplydepotupg
+			terran_supplydepot: !build-incomplete && !supplydepotupg
 	WithBuildingBib:
 	Voiced:
 		VoiceSet: SCSupplyCenterVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upsupplydepot1, upsupplydepot2
+		Upgrades: terran_upgrade_upgradesupplydepotlevel1, terran_upgrade_upgradesupplydepotlevel2
 
-supplydepotexpand:
+terran_expandedstorage:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Expanded Storage
@@ -696,14 +696,14 @@ supplydepotexpand:
 	Buildable:
 		BuildPaletteOrder: 80
 		Queue: BuildingAddons
-		Prerequisites: ~sccommandcenter, supplydepotupgradeavailable
+		Prerequisites: ~terran_commandcenter, supplydepotupgradeavailable
 		Description: actor_supplydepotexpand.description
 	Plug:
-		Type: scsupplydepot
+		Type: terran_supplydepot
 	RenderSprites:
-		Image: scsupplydepot
+		Image: terran_supplydepot
 
-SCREFINERY:
+terran_refinery:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@ref: ^SCRefineryCommon
@@ -713,7 +713,7 @@ SCREFINERY:
 	Power:
 		Amount: 0
 	Buildable:
-		Prerequisites: ~sccommandcenter
+		Prerequisites: ~terran_commandcenter
 		BuildPaletteOrder: 20
 		Queue: Building, RABuilding
 		Description: actor_screfinery.description
@@ -723,11 +723,11 @@ SCREFINERY:
 		Dimensions: 3,3
 	WithBuildingBib:
 	FreeActor@1:
-		Actor: scscv
+		Actor: terran_scv
 		SpawnOffset: 0,2
 		Facing: 540
 	FreeActor@2:
-		Actor: scscv
+		Actor: terran_scv
 		SpawnOffset: 0,2
 		Facing: 540
 	SelectionDecorations:
@@ -754,17 +754,17 @@ SCREFINERY:
 	Pluggable:
 		Offset: 1,0
 		Conditions:
-			screfinery: refineryupg
+			terran_refinery: refineryupg
 		Requirements:
-			screfinery: !build-incomplete && !refineryupg
+			terran_refinery: !build-incomplete && !refineryupg
 	Voiced:
 		VoiceSet: SCRefineryVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: sctvespenegascollector
+		Upgrades: terran_vespenegascollector
 
-sctvespenegascollector:
+terran_vespenegascollector:
 	Inherits: ^BuildingPlug
 	Tooltip:
 		Name: Vespene Gas Collector
@@ -772,14 +772,14 @@ sctvespenegascollector:
 		Cost: 2500
 	Buildable:
 		Queue: BuildingAddons
-		Prerequisites: ~sccommandcenter, sctrefineryupgradeavailable
+		Prerequisites: ~terran_commandcenter, sctrefineryupgradeavailable
 		Description: actor_sctvespenegascollector.description
 	Plug:
-		Type: screfinery
+		Type: terran_refinery
 	RenderSprites:
 		Image: upscrefinery1
 
-SCBARRACKS:
+terran_barracks:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
@@ -790,7 +790,7 @@ SCBARRACKS:
 		Amount: 0
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~sccommandcenter
+		Prerequisites: ~terran_commandcenter
 		Queue: Building, RABuilding
 		Description: actor_scbarracks.description
 	Building:
@@ -826,7 +826,7 @@ SCBARRACKS:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCACADEMY:
+terran_academy:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -844,7 +844,7 @@ SCACADEMY:
 		BuildPaletteOrder: 40
 		BuildDuration: 500
 		BuildDurationModifier: 100
-		Prerequisites: ~sccommandcenter, scbarracks
+		Prerequisites: ~terran_commandcenter, terran_barracks
 		Queue: Building, RABuilding
 		Description: actor_scacademy.description
 	Building:
@@ -870,7 +870,7 @@ SCACADEMY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCENGINEERINGBAY:
+terran_engineeringbay:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Tooltip:
@@ -884,7 +884,7 @@ SCENGINEERINGBAY:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 50
-		Prerequisites: ~sccommandcenter, scbarracks
+		Prerequisites: ~terran_commandcenter, terran_barracks
 		Queue: Building, RABuilding
 		BuildDuration: 625
 		BuildDurationModifier: 100
@@ -916,7 +916,7 @@ SCENGINEERINGBAY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCBUNKER:
+terran_bunker:
 	Inherits: ^Defense
 	Inherits@Template: ^BunkerTemplate
 	Inherits@exp: ^GainsExperienceTDBuilding
@@ -938,7 +938,7 @@ SCBUNKER:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~sccommandcenter, scbarracks
+		Prerequisites: ~terran_commandcenter, terran_barracks
 		Description: actor_scbunker.description
 	Valued:
 		Cost: 1200
@@ -952,7 +952,7 @@ SCBUNKER:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 4
 		EjectOnDeath: false
-		# InitialUnits: scmarine, scfirebat, scmarauder, scmarine
+		# InitialUnits: terran_marine, terran_firebat, terran_marauder, terran_marine
 	WithCargoSounds:
 		EnterSounds: tdrtra00.wav
 		ExitSounds: tdrtra00.wav
@@ -975,9 +975,9 @@ SCBUNKER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
-SCMISSILETURRET:
+terran_missileturret:
 	Inherits: ^Defense
 	Inherits@Template: ^AntiAirDefenseTemplate
 	-WithTurretSearchlight:
@@ -993,7 +993,7 @@ SCMISSILETURRET:
 		Name: Missile Turret
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~sccommandcenter, scengineeringbay
+		Prerequisites: ~terran_commandcenter, terran_engineeringbay
 		Queue: Defence, RADefence
 		Description: actor_scmissileturret.description
 	Building:
@@ -1033,9 +1033,9 @@ SCMISSILETURRET:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
-SCSENTINEL:
+terran_sentinel:
 	Inherits: ^Defense
 	Inherits@Template: ^AdvancedDefenseTemplate
 	Inherits@EXPERIENCE: ^GainsExperienceTDBuilding
@@ -1048,7 +1048,7 @@ SCSENTINEL:
 	Buildable:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
-		Prerequisites: ~sccommandcenter, scbarracks
+		Prerequisites: ~terran_commandcenter, terran_barracks
 		Description: template_anti_infantry_defense.description
 	Valued:
 		Cost: 800
@@ -1094,7 +1094,7 @@ SCSENTINEL:
 		PlayerPalette: player_rgba
 	ProvidesPrerequisite@buildingname:
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
 SCSENTINELM:
 	Inherits: SCCOMMANDCENTERM
@@ -1112,16 +1112,16 @@ SCSENTINELM:
 	Armor:
 		Type: Steel
 	Transforms:
-		IntoActor: scsentinel
+		IntoActor: terran_sentinel
 		Offset: 0,0
 	RenderSprites:
 		Image: scsentinelm
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
-SCFACTORY:
+terran_weaponsfactory:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
@@ -1132,7 +1132,7 @@ SCFACTORY:
 		Amount: 0
 	Buildable:
 		BuildPaletteOrder: 60
-		Prerequisites: ~sccommandcenter, scbarracks
+		Prerequisites: ~terran_commandcenter, terran_barracks
 		Queue: Building, RABuilding
 		Description: actor_scfactory.description
 	Building:
@@ -1169,7 +1169,7 @@ SCFACTORY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCARMORY:
+terran_armory:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Tooltip:
@@ -1185,7 +1185,7 @@ SCARMORY:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 70
-		Prerequisites: ~sccommandcenter, scfactory
+		Prerequisites: ~terran_commandcenter, terran_weaponsfactory
 		Queue: Building, RABuilding
 		Description: actor_scarmory.description
 	Building:
@@ -1211,7 +1211,7 @@ SCARMORY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSTARPORT:
+terran_starport:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@supply: ^SCUnitProduction
@@ -1222,7 +1222,7 @@ SCSTARPORT:
 		Amount: 0
 	Buildable:
 		BuildPaletteOrder: 80
-		Prerequisites: ~sccommandcenter, scfactory
+		Prerequisites: ~terran_commandcenter, terran_weaponsfactory
 		Queue: Building, RABuilding
 		Description: actor_scstarport.description
 	Building:
@@ -1252,7 +1252,7 @@ SCSTARPORT:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCSCIENCEFACILITY:
+terran_sciencefacility:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^3x2Shape
 	Inherits@tech: ^IsTechnoBuilding
@@ -1263,7 +1263,7 @@ SCSCIENCEFACILITY:
 	ProvidesPrerequisite@buildingname:
 	Buildable:
 		BuildPaletteOrder: 90
-		Prerequisites: ~sccommandcenter, scfactory, scstarport
+		Prerequisites: ~terran_commandcenter, terran_weaponsfactory, terran_starport
 		Queue: Building, RABuilding
 		Description: actor_scsciencefacility.description
 	Building:
@@ -1287,7 +1287,7 @@ SCSCIENCEFACILITY:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCTerranMSLO:
+terran_missilesilo:
 	Inherits: ^BaseBuilding
 	Inherits@shape: ^2x2Shape
 	Inherits@SW: ^PrimarySuperweapon
@@ -1297,7 +1297,7 @@ SCTerranMSLO:
 	Power:
 		Amount: 0
 	Buildable:
-		Prerequisites: ~sccommandcenter, scsciencefacility, ~techlevel.superweapons, !SCTerranMSLO
+		Prerequisites: ~terran_commandcenter, terran_sciencefacility, ~techlevel.superweapons, !terran_missilesilo
 		Description: actor_mslo.description
 	Building:
 		Footprint: xx xx
@@ -1350,7 +1350,7 @@ SCTerranMSLO:
 	# WithSupportPowerActivationAnimation:
 	# 	RequiresCondition: !build-incomplete
 	ProvidesPrerequisite@swlimit:
-		Prerequisite: SCTerranMSLO
+		Prerequisite: terran_missilesilo
 	Voiced:
 		VoiceSet: SCNuclearSiloVoice
 	RenderSprites:
@@ -3326,7 +3326,7 @@ SCINFESTEDCOMMANDCENTER:
 	Power:
 		Amount: -10
 
-SCSCV:
+terran_scv:
 	Inherits: ^Vehicle
 	Inherits@Template: ^HarvesterTemplate
 	Inherits@selection: ^SelectableEconomicUnit
@@ -3347,7 +3347,7 @@ SCSCV:
 	Tooltip:
 		Name: SCV
 	Buildable:
-		Prerequisites: ~screfinery
+		Prerequisites: ~terran_refinery
 		Description: actor_scscv.description
 	Armament:
 		Weapon: SCVAttack
@@ -3377,7 +3377,7 @@ SCSCV:
 	Targetable@aihack:
 		TargetTypes: SCV
 	WithHarvesterSpriteBody:
-		ImageByFullness: scscv, scscvfull
+		ImageByFullness: terran_scv, scscvfull
 	-WithFacingSpriteBody:
 	WithShadow:
 		Offset: 64, 128, 0
@@ -3385,7 +3385,7 @@ SCSCV:
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCMARINE:
+terran_marine:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -3404,7 +3404,7 @@ SCMARINE:
 	Power:
 		Amount: -10
 	Buildable:
-		Prerequisites: ~scbarracks, ~!upmadcap
+		Prerequisites: ~terran_barracks, ~!terran_promotion_unlockmadcap
 		Queue: Infantry, RAInfantry
 		Description: actor_scmarine.description
 	Mobile:
@@ -3430,15 +3430,15 @@ SCMARINE:
 	WithMuzzleOverlay:
 	# ProductionTimeMultiplier@speedup:
 	# 	Multiplier: 50
-	# 	Prerequisites: scacademy
+	# 	Prerequisites: terran_academy
 	Voiced:
 		VoiceSet: SCMarineVoice
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upmarinerange, upstimpack
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_u238shells, terran_upgrade_stimpack
 
-SCREAPER:
+terran_reaper:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SniperInfantryTemplate
@@ -3456,7 +3456,7 @@ SCREAPER:
 	Power:
 		Amount: -30
 	Buildable:
-		Prerequisites: ~scbarracks
+		Prerequisites: ~terran_barracks
 		Queue: Infantry, RAInfantry
 		Description: actor_screaper.description
 	Mobile:
@@ -3499,7 +3499,7 @@ SCREAPER:
 	WithMuzzleOverlay:
 	# ProductionTimeMultiplier@speedup:
 	# 	Multiplier: 50
-	# 	Prerequisites: scacademy
+	# 	Prerequisites: terran_academy
 	Voiced:
 		VoiceSet: SCMarineVoice
 	WithDeathAnimation:
@@ -3507,9 +3507,9 @@ SCREAPER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2
 
-SCMADCAP:
+terran_madcap:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^AntiTankAntiAirInfantryTemplate
@@ -3530,7 +3530,7 @@ SCMADCAP:
 	Power:
 		Amount: -15
 	Buildable:
-		Prerequisites: ~scbarracks, ~upmadcap
+		Prerequisites: ~terran_barracks, ~terran_promotion_unlockmadcap
 		Queue: Infantry, RAInfantry
 		Description: actor_scmadcap.description
 	Mobile:
@@ -3553,7 +3553,7 @@ SCMADCAP:
 	WithMuzzleOverlay:
 	# ProductionTimeMultiplier@speedup:
 	# 	Multiplier: 50
-	# 	Prerequisites: scacademy
+	# 	Prerequisites: terran_academy
 	Voiced:
 		VoiceSet: SCMarineVoice
 	WithDeathAnimation:
@@ -3561,9 +3561,9 @@ SCMADCAP:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upmarinerange, upstimpack
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_u238shells, terran_upgrade_stimpack
 
-SCFIREBAT:
+terran_firebat:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -3581,7 +3581,7 @@ SCFIREBAT:
 	Power:
 		Amount: -25
 	Buildable:
-		Prerequisites: ~scacademy, ~!upharakan
+		Prerequisites: ~terran_academy, ~!terran_promotion_unlockharakan
 		Queue: Infantry, RAInfantry
 		Description: actor_scfirebat.description
 	Mobile:
@@ -3625,9 +3625,9 @@ SCFIREBAT:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upstimpack
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_stimpack
 
-SCHARAKAN:
+terran_harakan:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^MeleeInfantryTemplate
@@ -3646,7 +3646,7 @@ SCHARAKAN:
 	Tooltip:
 		Name: Harakan
 	Buildable:
-		Prerequisites: ~scacademy, ~upharakan
+		Prerequisites: ~terran_academy, ~terran_promotion_unlockharakan
 		Queue: Infantry, RAInfantry
 		Description: actor_scharakan.description
 	Mobile:
@@ -3690,9 +3690,9 @@ SCHARAKAN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upstimpack
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_stimpack
 
-scmarauder:
+terran_marauder:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeavyInfantryTemplate
@@ -3709,7 +3709,7 @@ scmarauder:
 	Power:
 		Amount: -50
 	Buildable:
-		Prerequisites: ~scacademy
+		Prerequisites: ~terran_academy
 		Queue: Infantry, RAInfantry
 		Description: actor_scmarauder.description
 	Mobile:
@@ -3731,7 +3731,7 @@ scmarauder:
 	Voiced:
 		VoiceSet: SCMarauderVoice
 	RenderSprites:
-		Image: scmarauder
+		Image: terran_marauder
 	# Selectable:
 	# 	DecorationBounds: 1280, 1280
 	WithDeathAnimation:
@@ -3739,9 +3739,9 @@ scmarauder:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upstimpack
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_stimpack
 
-SCGHOST:
+terran_ghost:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SniperInfantryTemplate
@@ -3760,7 +3760,7 @@ SCGHOST:
 		Amount: -35
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~scsciencefacility, ~!upsilvertongue
+		Prerequisites: ~terran_sciencefacility, ~!terran_promotion_unlockspectreandmedivac
 		Description: actor_scghost.description
 	Mobile:
 		Speed: 75
@@ -3793,10 +3793,10 @@ SCGHOST:
 		RequiresSelection: True
 		PipCount: 6
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	WithMuzzleOverlay:
 	GrantConditionOnDamageState@UNCLOAK:
@@ -3809,9 +3809,9 @@ SCGHOST:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upghostcloak
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_cloakupgrade
 
-SCSILVERTONGUE:
+terran_specter:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SniperInfantryTemplate
@@ -3831,7 +3831,7 @@ SCSILVERTONGUE:
 		Amount: -45
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~scsciencefacility, ~upsilvertongue
+		Prerequisites: ~terran_sciencefacility, ~terran_promotion_unlockspectreandmedivac
 		Description: actor_scsilvertongue.description
 	Mobile:
 		Speed: 80
@@ -3864,10 +3864,10 @@ SCSILVERTONGUE:
 		RequiresSelection: True
 		PipCount: 6
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	WithMuzzleOverlay:
 	GrantConditionOnDamageState@UNCLOAK:
@@ -3880,9 +3880,9 @@ SCSILVERTONGUE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upghostcloak
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_cloakupgrade
 
-SCMEDIC:
+terran_medic:
 	Inherits: ^SCTINFANTRY
 	Inherits@Template: ^MedicTemplate
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -3894,7 +3894,7 @@ SCMEDIC:
 	Inherits@Heal: ^PrioritizeHeal
 	Buildable:
 		Queue: Infantry, RAInfantry
-		Prerequisites: ~scacademy
+		Prerequisites: ~terran_academy
 		Description: actor_scmedic.description
 	Tooltip:
 		Name: Medic
@@ -3944,9 +3944,9 @@ SCMEDIC:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2
 
-SCJIMRAYNOR:
+terran_jimraynor:
 	Inherits: ^SCTINFANTRY
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HeroInfantryTemplate
@@ -3969,7 +3969,7 @@ SCJIMRAYNOR:
 		Description: actor_scjimraynor.description
 		IconPalette: ra2
 		BuildLimit: 1
-		Prerequisites: ~scsciencefacility
+		Prerequisites: ~terran_sciencefacility
 	Mobile:
 		Speed: 65
 	Health:
@@ -3994,7 +3994,7 @@ SCJIMRAYNOR:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upinfarmor, upinfarmor2, upmarinerange, upstimpack
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_infantryarmorlevel1, terran_upgrade_infantryarmorlevel2, terran_upgrade_u238shells, terran_upgrade_stimpack
 
 ^SCTVEHICLE:
 	Inherits@EXPERIENCE: ^GainsExperience
@@ -4006,7 +4006,7 @@ SCJIMRAYNOR:
 	Power:
 		Amount: -20
 
-SCVULTURE:
+terran_vulture:
 	Inherits: ^Vehicle
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -4026,7 +4026,7 @@ SCVULTURE:
 	Power:
 		Amount: -45
 	Buildable:
-		Prerequisites: ~scfactory
+		Prerequisites: ~terran_weaponsfactory
 		Description: actor_scvulture.description
 	Mobile:
 		Speed: 125
@@ -4079,7 +4079,7 @@ SCVULTURE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
 SCSPIDERMINE:
 	Inherits: ^Walker
@@ -4161,7 +4161,7 @@ SCSPIDERMINE:
 		PauseOnCondition: cloak-force-disabled || base-reveal || disabled || unborrow
 	-TemporaryOwnerManager:
 
-SCSIEGETANK:
+terran_siegetank:
 	Inherits: ^Tank
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -4183,7 +4183,7 @@ SCSIEGETANK:
 		Amount: -140
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scengineeringbay
+		Prerequisites: ~terran_engineeringbay
 		Description: actor_scsiegetank.description
 	Mobile:
 		Speed: 75
@@ -4229,15 +4229,15 @@ SCSIEGETANK:
 	RevealsShroudMultiplier@deployed:
 		Modifier: 150
 		RequiresCondition: deployed
-	RevealsShroudMultiplier@upsiegemode:
+	RevealsShroudMultiplier@terran_upgrade_advancedsiegemode:
 		Modifier: 120
-		RequiresCondition: deployed && upsiegemode
-	RangeMultiplier@upsiegemode:
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	RangeMultiplier@terran_upgrade_advancedsiegemode:
 		Modifier: 110
-		RequiresCondition: deployed && upsiegemode
-	GrantConditionOnPrerequisite@upsiegemode:
-		Condition: upsiegemode
-		Prerequisites: upsiegemode
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	GrantConditionOnPrerequisite@terran_upgrade_advancedsiegemode:
+		Condition: terran_upgrade_advancedsiegemode
+		Prerequisites: terran_upgrade_advancedsiegemode
 	AttackTurretedCharged:
 		Turrets: primary,deployed
 		Armaments: primary,deployed
@@ -4281,9 +4281,9 @@ SCSIEGETANK:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2, upsiegemode
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_advancedsiegemode
 
-SCMATADOR:
+terran_matador:
 	Inherits: ^Tank
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -4308,7 +4308,7 @@ SCMATADOR:
 		Amount: -85
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scfactory, upmatador
+		Prerequisites: ~terran_weaponsfactory, terran_promotion_unlockmatador
 		Description: actor_scmatador.description
 	Mobile:
 		Speed: 100
@@ -4354,15 +4354,15 @@ SCMATADOR:
 	RevealsShroudMultiplier@deployed:
 		Modifier: 125
 		RequiresCondition: deployed
-	RevealsShroudMultiplier@upsiegemode:
+	RevealsShroudMultiplier@terran_upgrade_advancedsiegemode:
 		Modifier: 120
-		RequiresCondition: deployed && upsiegemode
-	RangeMultiplier@upsiegemode:
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	RangeMultiplier@terran_upgrade_advancedsiegemode:
 		Modifier: 110
-		RequiresCondition: deployed && upsiegemode
-	GrantConditionOnPrerequisite@upsiegemode:
-		Condition: upsiegemode
-		Prerequisites: upsiegemode
+		RequiresCondition: deployed && terran_upgrade_advancedsiegemode
+	GrantConditionOnPrerequisite@terran_upgrade_advancedsiegemode:
+		Condition: terran_upgrade_advancedsiegemode
+		Prerequisites: terran_upgrade_advancedsiegemode
 	AttackTurreted:
 		Turrets: primary,deployed
 		Armaments: primary,deployed
@@ -4398,9 +4398,9 @@ SCMATADOR:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2, upsiegemode
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_advancedsiegemode
 
-SCCYCLONE:
+terran_cyclone:
 	Inherits: ^Tank
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -4420,7 +4420,7 @@ SCCYCLONE:
 		Amount: -115
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~scengineeringbay, upsccyclone
+		Prerequisites: ~terran_engineeringbay, terran_promotion_unlockcyclone
 		Description: actor_sccyclone.description
 	Mobile:
 		Speed: 115
@@ -4476,9 +4476,9 @@ SCCYCLONE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
-SCGOLIATH:
+terran_goliath:
 	Inherits: ^Walker
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -4500,7 +4500,7 @@ SCGOLIATH:
 		Amount: -80
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scarmory, ~!upgoliathmk2
+		Prerequisites: ~terran_armory, ~!terran_promotion_unlockgoliathmk2
 		Description: actor_scgoliath.description
 	Mobile:
 		Speed: 90
@@ -4548,9 +4548,9 @@ SCGOLIATH:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
-SCGOLIATH2:
+terran_goliathmk2:
 	Inherits: ^Walker
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -4573,7 +4573,7 @@ SCGOLIATH2:
 		Amount: -120
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scarmory, ~upgoliathmk2
+		Prerequisites: ~terran_armory, ~terran_promotion_unlockgoliathmk2
 		Description: actor_scgoliath2.description
 	Mobile:
 		Speed: 75
@@ -4621,9 +4621,9 @@ SCGOLIATH2:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
-scwarhound:
+terran_warhound:
 	Inherits: ^Vehicle
 	Inherits@SC: ^SCTVEHICLE
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
@@ -4643,7 +4643,7 @@ scwarhound:
 		Amount: -225
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scsciencefacility, ~upwarhound
+		Prerequisites: ~terran_sciencefacility, ~terran_promotion_unlockwarhound
 		Description: actor_scwarhound.description
 	Mobile:
 		Speed: 45
@@ -4747,9 +4747,9 @@ scwarhound:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmechweapon, upmechweapon2, upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleweaponslevel1, terran_upgrade_vehicleweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
-SCWRAITH:
+terran_wraith:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -4771,7 +4771,7 @@ SCWRAITH:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, ~!upsundog
+		Prerequisites: ~terran_starport, ~!terran_promotion_unlocksundog
 		Queue: Aircraft, RAAircraft
 		Description: actor_scwraith.description
 	Aircraft:
@@ -4801,17 +4801,17 @@ SCWRAITH:
 		FacingTolerance: 40
 		AttackType: Hover
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scghost
+		PilotActor: terran_ghost
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 786, 786, 0, 0
@@ -4831,9 +4831,9 @@ SCWRAITH:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2, upghostcloak
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
 
-SCSUNDOG:
+terran_sundog:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -4856,7 +4856,7 @@ SCSUNDOG:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, ~upsundog
+		Prerequisites: ~terran_starport, ~terran_promotion_unlocksundog
 		Queue: Aircraft, RAAircraft
 		Description: actor_scsundog.description
 	Aircraft:
@@ -4898,17 +4898,17 @@ SCSUNDOG:
 		FacingTolerance: 40
 		AttackType: Hover
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scsilvertongue
+		PilotActor: terran_specter
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 786, 786, 0, 0
@@ -4918,9 +4918,9 @@ SCSUNDOG:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2, upghostcloak
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
 
-SCVALKYRIE:
+terran_valkyrie:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -4938,7 +4938,7 @@ SCVALKYRIE:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, scarmory, ~!upwyvern
+		Prerequisites: ~terran_starport, terran_armory, ~!terran_promotion_unlockwyvern
 		Queue: Aircraft, RAAircraft
 		Description: actor_scvalkyrie.description
 	Aircraft:
@@ -4967,7 +4967,7 @@ SCVALKYRIE:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scmarauder
+		PilotActor: terran_marauder
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -4978,9 +4978,9 @@ SCVALKYRIE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 
-SCWYVERN:
+terran_wyvern:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -4999,7 +4999,7 @@ SCWYVERN:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, scarmory, ~upwyvern
+		Prerequisites: ~terran_starport, terran_armory, ~terran_promotion_unlockwyvern
 		Queue: Aircraft, RAAircraft
 		Description: actor_scwyvern.description
 	Aircraft:
@@ -5026,7 +5026,7 @@ SCWYVERN:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scmadcap
+		PilotActor: terran_madcap
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1280, 1024
@@ -5037,9 +5037,9 @@ SCWYVERN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 
-SCRAVEN:
+terran_raven:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -5059,7 +5059,7 @@ SCRAVEN:
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
 	Buildable:
-		Prerequisites: ~scstarport, upraven
+		Prerequisites: ~terran_starport, terran_promotion_unlockraven
 		Queue: Aircraft, RAAircraft
 		Description: actor_scraven.description
 	Aircraft:
@@ -5097,17 +5097,17 @@ SCRAVEN:
 		FacingTolerance: 40
 		AttackType: Hover
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scghost
+		PilotActor: terran_ghost
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 786, 786, 0, 0
@@ -5117,9 +5117,9 @@ SCRAVEN:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2, upghostcloak
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
 
-SCDROPSHIP:
+terran_dropship:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^UnarmedTransportHelicopterTemplate
@@ -5136,10 +5136,10 @@ SCDROPSHIP:
 		Amount: -180
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: scdropship
+		OverrideActor: terran_dropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstarport, ~!upsilvertongue
+		Prerequisites: ~terran_starport, ~!terran_promotion_unlockspectreandmedivac
 		Queue: Aircraft, RAAircraft
 		Description: actor_scdropship.description
 	Aircraft:
@@ -5159,33 +5159,33 @@ SCDROPSHIP:
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 0
 		LoadedCondition: loaded
-		InitialUnits: scmarine, scmarine, scmarine, scmarine, scfirebat, scmarauder, scghost, scmedic
+		InitialUnits: terran_marine, terran_marine, terran_marine, terran_marine, terran_firebat, terran_marauder, terran_ghost, terran_medic
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scmarine
+		PilotActor: terran_marine
 	Selectable:
-		Class: scdropship
+		Class: terran_dropship
 		DecorationBounds: 1280, 1280, 0, 0
 	Voiced:
 		VoiceSet: SCDropshipVoice
 	DeathSounds:
 	RenderSprites:
-		Image: scdropship
+		Image: terran_dropship
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshiparmor, upshiparmor2
+		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 	WithCargoSounds:
 		EnterSounds: tdrtra00.wav
 		ExitSounds: tdrtra00.wav
 
-SCPYTHEAN:
+terran_pythean:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
@@ -5208,10 +5208,10 @@ SCPYTHEAN:
 		Amount: -275
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: scdropship
+		OverrideActor: terran_dropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstarport, uppythean
+		Prerequisites: ~terran_starport, terran_promotion_unlockpythean
 		Queue: Aircraft, RAAircraft
 		BuildLimit: 1
 		Description: actor_scpythean.description
@@ -5235,7 +5235,7 @@ SCPYTHEAN:
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 0
 		LoadedCondition: loaded
-		InitialUnits: scmarine, scmadcap, scfirebat, scharakan, scmarauder, scghost, scsilvertongue, screaper, scmedic
+		InitialUnits: terran_marine, terran_madcap, terran_firebat, terran_harakan, terran_marauder, terran_ghost, terran_specter, terran_reaper, terran_medic
 	AttackOpenTopped:
 		Voice: Attack
 		Armaments: garrisoned
@@ -5248,33 +5248,33 @@ SCPYTHEAN:
 	RangeMultiplier@Pythean:
 		Modifier: 85
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scharakan
+		PilotActor: terran_harakan
 	-SpawnActorOnDeath:
 		Actor: SCPYTHEAN.Husk
 	Selectable:
-		Class: scdropship
+		Class: terran_dropship
 		DecorationBounds: 1280, 1280, 0, 0
 	Voiced:
 		VoiceSet: SCDropshipVoice
 	DeathSounds:
 	RenderSprites:
-		Image: scpythean
+		Image: terran_pythean
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upinfweapon, upinfweapon2, upmecharmor, upmecharmor2, upshiparmor, upshiparmor2, upghostcloak
+		Upgrades: terran_upgrade_infantryweaponslevel1, terran_upgrade_infantryweaponslevel2, terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
 	WithCargoSounds:
 		EnterSounds: tdrtra00.wav
 		ExitSounds: tdrtra00.wav
@@ -5301,10 +5301,10 @@ SCPYTHEAN.Husk:
 		Explosion: SiegeTankSiegeCannon
 	WithShadow:
 	RenderSprites:
-		Image: SCPYTHEAN
+		Image: terran_pythean
 		PlayerPalette: player_rgba
 
-SCMEDIVAC:
+terran_medivac:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^UnarmedTransportHelicopterTemplate
@@ -5322,10 +5322,10 @@ SCMEDIVAC:
 		Amount: -250
 	UpdatesPlayerStatistics:
 		AddToArmyValue: true
-		OverrideActor: scdropship
+		OverrideActor: terran_dropship
 	Buildable:
 		BuildPaletteOrder: 20
-		Prerequisites: ~scstarport, ~upsilvertongue
+		Prerequisites: ~terran_starport, ~terran_promotion_unlockspectreandmedivac
 		Queue: Aircraft, RAAircraft
 		Description: actor_scmedivac.description
 	Aircraft:
@@ -5354,33 +5354,33 @@ SCMEDIVAC:
 		BeforeUnloadDelay: 0
 		AfterUnloadDelay: 0
 		LoadedCondition: loaded
-		InitialUnits: scmarine, scmadcap, scfirebat, scharakan, scmarauder, scghost, scsilvertongue, scmedic
+		InitialUnits: terran_marine, terran_madcap, terran_firebat, terran_harakan, terran_marauder, terran_ghost, terran_specter, terran_medic
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scmedic
+		PilotActor: terran_medic
 	Selectable:
-		Class: scdropship
+		Class: terran_dropship
 		DecorationBounds: 1280, 1280, 0, 0
 	Voiced:
 		VoiceSet: SCDropshipVoice
 	DeathSounds:
 	RenderSprites:
-		Image: scmedivac
+		Image: terran_medivac
 	WithCargoPipsDecoration:
 		Position: BottomLeft
 		RequiresSelection: true
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshiparmor, upshiparmor2
+		Upgrades: terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 	WithCargoSounds:
 		EnterSounds: tdrtra00.wav
 		ExitSounds: tdrtra00.wav
 
-SCBATTLECRUISER:
+terran_battlecruiser:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
@@ -5399,7 +5399,7 @@ SCBATTLECRUISER:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~scstarport, scsciencefacility
+		Prerequisites: ~terran_starport, terran_sciencefacility
 		Queue: Aircraft, RAAircraft
 		Description: actor_scbattlecruiser.description
 	Aircraft:
@@ -5425,22 +5425,22 @@ SCBATTLECRUISER:
 		Name: secondary
 		Weapon: BCYamatoCannon
 		LocalOffset: 800,0,200
-		RequiresCondition: upyamatocannon
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
 		PauseOnCondition: ammo < 100 || tacticaljump
 		AmmoUsage: 100
-	RangeMultiplier@upyamatocannon:
-		RequiresCondition: upyamatocannon
+	RangeMultiplier@terran_upgrade_yamatocannonandtacticaljumpupgrade:
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
 		Modifier: 115
-	GrantConditionOnPrerequisite@upyamatocannon:
-		Condition: upyamatocannon
-		Prerequisites: upyamatocannon
+	GrantConditionOnPrerequisite@terran_upgrade_yamatocannonandtacticaljumpupgrade:
+		Condition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+		Prerequisites: terran_upgrade_yamatocannonandtacticaljumpupgrade
 	RA2PortableChrono:
 		TeleportType: PortableChrono
 		ChargeDelay: 1500
 		MaxTeleportDistance: -1
 		ChronoshiftSound: chrono2.aud
 		PauseOnCondition: disabled
-		RequiresCondition: upyamatocannon
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
 	GrantTimedConditionOnTeleport@Portable:
 		TeleportTypes: PortableChrono
 		Condition: tacticaljump
@@ -5452,7 +5452,7 @@ SCBATTLECRUISER:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scghost
+		PilotActor: terran_ghost
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 2048, 2048
@@ -5508,7 +5508,7 @@ SCBATTLECRUISER:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2, upyamatocannon
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_yamatocannonandtacticaljumpupgrade
 
 SCBATTLECRUISER.Husk:
 	Inherits: ^PlaneHusk
@@ -5532,10 +5532,10 @@ SCBATTLECRUISER.Husk:
 		Explosion: BCLaser
 	WithShadow:
 	RenderSprites:
-		Image: SCBATTLECRUISER
+		Image: terran_battlecruiser
 		PlayerPalette: player_rgba
 
-SCPHOBOS:
+terran_phobos:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^SpaceshipTemplate
@@ -5557,7 +5557,7 @@ SCPHOBOS:
 	Buildable:
 		BuildLimit: 1
 		BuildPaletteOrder: 40
-		Prerequisites: ~scstarport, scsciencefacility, upphobos
+		Prerequisites: ~terran_starport, terran_sciencefacility, terran_promotion_unlockphobos
 		Queue: Aircraft, RAAircraft
 		Description: actor_scphobos.description
 	Aircraft:
@@ -5586,7 +5586,7 @@ SCPHOBOS:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scsilvertongue
+		PilotActor: terran_specter
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 2048, 2048
@@ -5604,19 +5604,19 @@ SCPHOBOS:
 		Name: secondary
 		Weapon: BCYamatoCannon
 		LocalOffset: 800,0,200
-		RequiresCondition: upyamatocannon
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
 		PauseOnCondition: ammo < 100 || tacticaljump
 		AmmoUsage: 100
-	GrantConditionOnPrerequisite@upyamatocannon:
-		Condition: upyamatocannon
-		Prerequisites: upyamatocannon
+	GrantConditionOnPrerequisite@terran_upgrade_yamatocannonandtacticaljumpupgrade:
+		Condition: terran_upgrade_yamatocannonandtacticaljumpupgrade
+		Prerequisites: terran_upgrade_yamatocannonandtacticaljumpupgrade
 	RA2PortableChrono:
 		TeleportType: PortableChrono
 		ChargeDelay: 1500
 		MaxTeleportDistance: -1
 		ChronoshiftSound: chrono2.aud
 		PauseOnCondition: disabled
-		RequiresCondition: upyamatocannon
+		RequiresCondition: terran_upgrade_yamatocannonandtacticaljumpupgrade
 	GrantTimedConditionOnTeleport@Portable:
 		TeleportTypes: PortableChrono
 		Condition: tacticaljump
@@ -5668,7 +5668,7 @@ SCPHOBOS:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2, upyamatocannon
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_yamatocannonandtacticaljumpupgrade
 
 SCPHOBOS.Husk:
 	Inherits: ^PlaneHusk
@@ -5692,7 +5692,7 @@ SCPHOBOS.Husk:
 		Explosion: BCYamatoCannon
 	WithShadow:
 	RenderSprites:
-		Image: SCPHOBOS
+		Image: terran_phobos
 		PlayerPalette: player_rgba
 
 SCWRAITHDRONE:
@@ -5738,10 +5738,10 @@ SCWRAITHDRONE:
 	AttackAircraft:
 		FacingTolerance: 40
 	GrantConditionOnPrerequisite@cloakon:
-		Condition: upghostcloak
-		Prerequisites: upghostcloak
+		Condition: terran_upgrade_cloakupgrade
+		Prerequisites: terran_upgrade_cloakupgrade
 	Cloak:
-		RequiresCondition: upghostcloak
+		RequiresCondition: terran_upgrade_cloakupgrade
 		CloakStyle: Alpha
 	-SpawnActorOnDeath:
 	FireWarheadsOnDeath:
@@ -5756,9 +5756,9 @@ SCWRAITHDRONE:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2, upghostcloak
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2, terran_upgrade_cloakupgrade
 
-SCSCIENCEVESSEL:
+terran_sciencevessel:
 	Inherits: ^Helicopter
 	Inherits@speedup: ^SCUnitProductionSpeedBoost
 	Inherits@Template: ^HelicopterTemplate
@@ -5779,7 +5779,7 @@ SCSCIENCEVESSEL:
 		AddToArmyValue: true
 	Buildable:
 		BuildPaletteOrder: 40
-		Prerequisites: ~scsciencefacility
+		Prerequisites: ~terran_sciencefacility
 		Queue: Aircraft, RAAircraft
 		Description: actor_scsciencevessel.description
 	Aircraft:
@@ -5832,7 +5832,7 @@ SCSCIENCEVESSEL:
 		Weapon: HeliExplode
 		EmptyWeapon: HeliExplode
 	EjectOnDeath:
-		PilotActor: scfirebat
+		PilotActor: terran_firebat
 	SelectionDecorations:
 	Selectable:
 		DecorationBounds: 1536, 1536
@@ -5842,7 +5842,7 @@ SCSCIENCEVESSEL:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshipweapon, upshipweapon2, upshiparmor, upshiparmor2
+		Upgrades: terran_upgrade_shipweaponslevel1, terran_upgrade_shipweaponslevel2, terran_upgrade_shipplatinglevel1, terran_upgrade_shipplatinglevel2
 
 SCCOMMANDCENTERM:
 	Inherits: ^Helicopter
@@ -5859,7 +5859,7 @@ SCCOMMANDCENTERM:
 	Armor:
 		Type: Concrete
 	Transforms:
-		IntoActor: sccommandcenter
+		IntoActor: terran_commandcenter
 		Offset: -1,-1
 		NoTransformNotification: BuildingCannotPlaceAudio
 	MustBeDestroyed:
@@ -5880,7 +5880,7 @@ SCCOMMANDCENTERM:
 	ProvidesPrerequisite@conyard:
 		Prerequisite: conyard
 	RenderSprites:
-		Image: sccommandcenter
+		Image: terran_commandcenter
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -5895,9 +5895,9 @@ SCBARRACKSM:
 	Armor:
 		Type: Wood
 	Transforms:
-		IntoActor: scbarracks
+		IntoActor: terran_barracks
 	RenderSprites:
-		Image: scbarracks
+		Image: terran_barracks
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -5912,9 +5912,9 @@ SCENGINEERINGBAYM:
 	Armor:
 		Type: Wood
 	Transforms:
-		IntoActor: scengineeringbay
+		IntoActor: terran_engineeringbay
 	RenderSprites:
-		Image: scengineeringbay
+		Image: terran_engineeringbay
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -5929,9 +5929,9 @@ SCFACTORYM:
 	Armor:
 		Type: Concrete
 	Transforms:
-		IntoActor: scfactory
+		IntoActor: terran_weaponsfactory
 	RenderSprites:
-		Image: scfactory
+		Image: terran_weaponsfactory
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -5946,9 +5946,9 @@ SCSTARPORTM:
 	Armor:
 		Type: Wood
 	Transforms:
-		IntoActor: scstarport
+		IntoActor: terran_starport
 	RenderSprites:
-		Image: scstarport
+		Image: terran_starport
 	RenderSprites:
 		PlayerPalette: player_rgba
 
@@ -5963,13 +5963,13 @@ SCSCIENCEFACILITYM:
 	Armor:
 		Type: Concrete
 	Transforms:
-		IntoActor: scsciencefacility
+		IntoActor: terran_sciencefacility
 	RenderSprites:
-		Image: scsciencefacility
+		Image: terran_sciencefacility
 	RenderSprites:
 		PlayerPalette: player_rgba
 
-SCTMCV:
+terran_mobilecommandcenter:
 	Inherits: ^Vehicle
 	Inherits@Template: ^SupportVehicleTemplate
 	Inherits@selection: ^SelectableSupportUnit
@@ -5978,12 +5978,12 @@ SCTMCV:
 	Inherits@weapon: ^TerranVehicleArmorUpgrades
 	Buildable:
 		Queue: Vehicle, RAVehicle
-		Prerequisites: ~scengineeringbay
+		Prerequisites: ~terran_engineeringbay
 		Description: actor_sctmcv.description
 	Tooltip:
 		Name: Terran Mobile Command Center
 	Transforms:
-		IntoActor: sccommandcenter
+		IntoActor: terran_commandcenter
 		Offset: -1,-1
 		Facing: 432
 		TransformSounds: tscupd00.aud
@@ -5997,12 +5997,12 @@ SCTMCV:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upmecharmor, upmecharmor2
+		Upgrades: terran_upgrade_vehicleplatinglevel1, terran_upgrade_vehicleplatinglevel2
 
 ## Terran Promotions
 ### Infantry Tree
 
-upmadcap:
+terran_promotion_unlockmadcap:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Madcap
@@ -6010,12 +6010,12 @@ upmadcap:
 		BuildPaletteOrder: 8033
 		Queue: Promotions
 		Description: actor_upmadcap.description
-		Prerequisites: ~sccommandcenter, !upmadcap, rank1
+		Prerequisites: ~terran_commandcenter, !terran_promotion_unlockmadcap, rank1
 	RenderSprites:
-		Image: scmadcap
+		Image: terran_madcap
 	ProvidesPrerequisite:
 
-upharakan:
+terran_promotion_unlockharakan:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Harakan
@@ -6023,12 +6023,12 @@ upharakan:
 		BuildPaletteOrder: 8036
 		Queue: Promotions
 		Description: actor_upharakan.description
-		Prerequisites: ~sccommandcenter, upmadcap, !upharakan, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockmadcap, !terran_promotion_unlockharakan, rank1
 	RenderSprites:
-		Image: scharakan
+		Image: terran_harakan
 	ProvidesPrerequisite:
 
-upsilvertongue:
+terran_promotion_unlockspectreandmedivac:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Spectre and Medivac
@@ -6036,12 +6036,12 @@ upsilvertongue:
 		BuildPaletteOrder: 8039
 		Queue: Promotions
 		Description: actor_upsilvertongue.description
-		Prerequisites: ~sccommandcenter, upharakan, !upsilvertongue, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockharakan, !terran_promotion_unlockspectreandmedivac, rank1
 	RenderSprites:
-		Image: scsilvertongue
+		Image: terran_specter
 	ProvidesPrerequisite:
 
-uppythean:
+terran_promotion_unlockpythean:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Pythean
@@ -6049,14 +6049,14 @@ uppythean:
 		BuildPaletteOrder: 8042
 		Queue: Promotions
 		Description: actor_uppythean.description
-		Prerequisites: ~sccommandcenter, upsilvertongue, !uppythean, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockspectreandmedivac, !terran_promotion_unlockpythean, rank1
 	RenderSprites:
-		Image: scpythean
+		Image: terran_pythean
 	ProvidesPrerequisite:
 
 ### ra1_allies_mechanic Tree
 
-upmatador:
+terran_promotion_unlockmatador:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Matador
@@ -6064,12 +6064,12 @@ upmatador:
 		BuildPaletteOrder: 8034
 		Queue: Promotions
 		Description: actor_upmatador.description
-		Prerequisites: ~sccommandcenter, !upmatador, rank1
+		Prerequisites: ~terran_commandcenter, !terran_promotion_unlockmatador, rank1
 	RenderSprites:
-		Image: scmatador
+		Image: terran_matador
 	ProvidesPrerequisite:
 
-upsccyclone:
+terran_promotion_unlockcyclone:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Cyclone
@@ -6077,12 +6077,12 @@ upsccyclone:
 		BuildPaletteOrder: 8037
 		Queue: Promotions
 		Description: actor_upsccyclone.description
-		Prerequisites: ~sccommandcenter, upmatador, !upsccyclone, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockmatador, !terran_promotion_unlockcyclone, rank1
 	RenderSprites:
-		Image: sccyclone
+		Image: terran_cyclone
 	ProvidesPrerequisite:
 
-upgoliathmk2:
+terran_promotion_unlockgoliathmk2:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Goliath Mk2
@@ -6090,12 +6090,12 @@ upgoliathmk2:
 		BuildPaletteOrder: 8040
 		Queue: Promotions
 		Description: actor_upgoliathmk2.description
-		Prerequisites: ~sccommandcenter, upsccyclone, !upgoliathmk2, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockcyclone, !terran_promotion_unlockgoliathmk2, rank1
 	RenderSprites:
-		Image: scgoliath2
+		Image: terran_goliathmk2
 	ProvidesPrerequisite:
 
-upwarhound:
+terran_promotion_unlockwarhound:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Warhound
@@ -6103,14 +6103,14 @@ upwarhound:
 		BuildPaletteOrder: 8043
 		Queue: Promotions
 		Description: actor_upwarhound.description
-		Prerequisites: ~sccommandcenter, upgoliathmk2, !upwarhound, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockgoliathmk2, !terran_promotion_unlockwarhound, rank1
 	RenderSprites:
-		Image: scwarhound
+		Image: terran_warhound
 	ProvidesPrerequisite:
 
 ### Ship Tree
 
-upsundog:
+terran_promotion_unlocksundog:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Sundog
@@ -6118,12 +6118,12 @@ upsundog:
 		BuildPaletteOrder: 8035
 		Queue: Promotions
 		Description: actor_upsundog.description
-		Prerequisites: ~sccommandcenter, !upsundog, rank1
+		Prerequisites: ~terran_commandcenter, !terran_promotion_unlocksundog, rank1
 	RenderSprites:
-		Image: scsundog
+		Image: terran_sundog
 	ProvidesPrerequisite:
 
-upraven:
+terran_promotion_unlockraven:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Raven
@@ -6131,12 +6131,12 @@ upraven:
 		BuildPaletteOrder: 8038
 		Queue: Promotions
 		Description: actor_upraven.description
-		Prerequisites: ~sccommandcenter, upsundog, !upraven, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlocksundog, !terran_promotion_unlockraven, rank1
 	RenderSprites:
-		Image: scraven
+		Image: terran_raven
 	ProvidesPrerequisite:
 
-upwyvern:
+terran_promotion_unlockwyvern:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Wyvern
@@ -6144,12 +6144,12 @@ upwyvern:
 		BuildPaletteOrder: 8041
 		Queue: Promotions
 		Description: actor_upwyvern.description
-		Prerequisites: ~sccommandcenter, upraven, !upwyvern, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockraven, !terran_promotion_unlockwyvern, rank1
 	RenderSprites:
-		Image: scwyvern
+		Image: terran_wyvern
 	ProvidesPrerequisite:
 
-upphobos:
+terran_promotion_unlockphobos:
 	Inherits: ^promotion_upgrade.template
 	Tooltip:
 		Name: Unlock Phobos
@@ -6157,9 +6157,9 @@ upphobos:
 		BuildPaletteOrder: 8044
 		Queue: Promotions
 		Description: actor_upphobos.description
-		Prerequisites: ~sccommandcenter, upwyvern, !upphobos, rank1
+		Prerequisites: ~terran_commandcenter, terran_promotion_unlockwyvern, !terran_promotion_unlockphobos, rank1
 	RenderSprites:
-		Image: scphobos
+		Image: terran_phobos
 	ProvidesPrerequisite:
 
 ####################################################################################################
@@ -7132,7 +7132,7 @@ SCSHUTTLE:
 	EjectOnDeath:
 		PilotActor: scdarktemplar
 	Selectable:
-		Class: scdropship
+		Class: terran_dropship
 		DecorationBounds: 1280, 1280, 0, 0
 	Voiced:
 		VoiceSet: SCShuttleVoice
@@ -10602,7 +10602,7 @@ SCBEHEMOTH:
 	SpawnActorOnDeath:
 		Actor: SCBEHEMOTH.Husk
 	Selectable:
-		Class: scdropship
+		Class: terran_dropship
 		DecorationBounds: 2048, 2048, 0, 0
 	Voiced:
 		VoiceSet: SCOverlordVoice
@@ -10615,7 +10615,7 @@ SCBEHEMOTH:
 	RenderSprites:
 		PlayerPalette: player_rgba
 	ActorStatValues:
-		Upgrades: upshiparmor
+		Upgrades: terran_upgrade_shipplatinglevel1
 	WithCargoSounds:
 		EnterSounds: scoverlordgetin.wav
 		ExitSounds: scoverlordgetout.wav
@@ -10919,7 +10919,7 @@ upairarmor2:
 	#		Upgrades Terrans
 	####################################################################################################
 
-upstimpack:
+terran_upgrade_stimpack:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Stim Pack
@@ -10929,12 +10929,12 @@ upstimpack:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upstimpack.description
-		Prerequisites: ~scacademy, ~!upstimpack
+		Prerequisites: ~terran_academy, ~!terran_upgrade_stimpack
 	RenderSprites:
-		Image: upstimpack
+		Image: terran_upgrade_stimpack
 	ProvidesPrerequisite:
 
-upmarinerange:
+terran_upgrade_u238shells:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: U-238 Shells
@@ -10944,12 +10944,12 @@ upmarinerange:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upmarinerange.description
-		Prerequisites: ~scacademy, ~!upmarinerange
+		Prerequisites: ~terran_academy, ~!terran_upgrade_u238shells
 	RenderSprites:
-		Image: upmarinerange
+		Image: terran_upgrade_u238shells
 	ProvidesPrerequisite:
 
-upsupplydepot1:
+terran_upgrade_upgradesupplydepotlevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Upgrade Supply Depot Level 1
@@ -10959,12 +10959,12 @@ upsupplydepot1:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upsupplydepot1.description
-		Prerequisites: ~scengineeringbay, ~!upsupplydepot1
+		Prerequisites: ~terran_engineeringbay, ~!terran_upgrade_upgradesupplydepotlevel1
 	RenderSprites:
-		Image: scsupplydepot
+		Image: terran_supplydepot
 	ProvidesPrerequisite:
 
-upsupplydepot2:
+terran_upgrade_upgradesupplydepotlevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Upgrade Supply Depot Level 2
@@ -10974,12 +10974,12 @@ upsupplydepot2:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upsupplydepot2.description
-		Prerequisites: ~scarmory, upsupplydepot1, ~!upsupplydepot2
+		Prerequisites: ~terran_armory, terran_upgrade_upgradesupplydepotlevel1, ~!terran_upgrade_upgradesupplydepotlevel2
 	RenderSprites:
-		Image: scsupplydepot
+		Image: terran_supplydepot
 	ProvidesPrerequisite:
 
-upghostcloak:
+terran_upgrade_cloakupgrade:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Cloak Upgrade
@@ -10989,12 +10989,12 @@ upghostcloak:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upghostcloak.description
-		Prerequisites: ~scsciencefacility, ~!upghostcloak
+		Prerequisites: ~terran_sciencefacility, ~!terran_upgrade_cloakupgrade
 	RenderSprites:
 		Image: sccloak
 	ProvidesPrerequisite:
 
-upsiegemode:
+terran_upgrade_advancedsiegemode:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Advanced Siege Mode
@@ -11004,12 +11004,12 @@ upsiegemode:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upsiegemode.description
-		Prerequisites: ~scsciencefacility, ~!upsiegemode
+		Prerequisites: ~terran_sciencefacility, ~!terran_upgrade_advancedsiegemode
 	RenderSprites:
 		Image: scsiegemode
 	ProvidesPrerequisite:
 
-upyamatocannon:
+terran_upgrade_yamatocannonandtacticaljumpupgrade:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Yamato Cannon and Tactical Jump Upgrade
@@ -11019,12 +11019,12 @@ upyamatocannon:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upyamatocannon.description
-		Prerequisites: ~scsciencefacility, ~!upyamatocannon
+		Prerequisites: ~terran_sciencefacility, ~!terran_upgrade_yamatocannonandtacticaljumpupgrade
 	RenderSprites:
 		Image: scyamatocannon
 	ProvidesPrerequisite:
 
-upinfweapon:
+terran_upgrade_infantryweaponslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Infantry Weapons Level 1
@@ -11034,13 +11034,13 @@ upinfweapon:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upinfweapon.description
-		Prerequisites: ~scengineeringbay, ~!upinfweapon
+		Prerequisites: ~terran_engineeringbay, ~!terran_upgrade_infantryweaponslevel1
 	RenderSprites:
-		Image: upinfweapon
+		Image: terran_upgrade_infantryweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: upinfweapon
+		Prerequisite: terran_upgrade_infantryweaponslevel1
 
-upinfweapon2:
+terran_upgrade_infantryweaponslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Infantry Weapons Level 2
@@ -11050,13 +11050,13 @@ upinfweapon2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upinfweapon2.description
-		Prerequisites: ~scsciencefacility, ~upinfweapon, ~!upinfweapon2
+		Prerequisites: ~terran_sciencefacility, ~terran_upgrade_infantryweaponslevel1, ~!terran_upgrade_infantryweaponslevel2
 	RenderSprites:
-		Image: upinfweapon
+		Image: terran_upgrade_infantryweaponslevel1
 	ProvidesPrerequisite:
-		Prerequisite: upinfweapon
+		Prerequisite: terran_upgrade_infantryweaponslevel1
 
-upinfarmor:
+terran_upgrade_infantryarmorlevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Infantry Armor Level 1
@@ -11066,13 +11066,13 @@ upinfarmor:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upinfarmor.description
-		Prerequisites: ~scengineeringbay, ~!upinfarmor
+		Prerequisites: ~terran_engineeringbay, ~!terran_upgrade_infantryarmorlevel1
 	RenderSprites:
-		Image: upinfarmor
+		Image: terran_upgrade_infantryarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: upinfarmor
+		Prerequisite: terran_upgrade_infantryarmorlevel1
 
-upinfarmor2:
+terran_upgrade_infantryarmorlevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Infantry Armor Level 2
@@ -11082,13 +11082,13 @@ upinfarmor2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upinfarmor2.description
-		Prerequisites: ~scsciencefacility, ~upinfarmor, ~!upinfarmor2
+		Prerequisites: ~terran_sciencefacility, ~terran_upgrade_infantryarmorlevel1, ~!terran_upgrade_infantryarmorlevel2
 	RenderSprites:
-		Image: upinfarmor
+		Image: terran_upgrade_infantryarmorlevel1
 	ProvidesPrerequisite:
-		Prerequisite: upinfarmor
+		Prerequisite: terran_upgrade_infantryarmorlevel1
 
-upmechweapon:
+terran_upgrade_vehicleweaponslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Vehicle Weapons Level 1
@@ -11098,12 +11098,12 @@ upmechweapon:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upmechweapon.description
-		Prerequisites: ~scarmory, ~!upmechweapon
+		Prerequisites: ~terran_armory, ~!terran_upgrade_vehicleweaponslevel1
 	RenderSprites:
-		Image: upmechweapon
+		Image: terran_upgrade_vehicleweaponslevel1
 	ProvidesPrerequisite:
 
-upmechweapon2:
+terran_upgrade_vehicleweaponslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Vehicle Weapons Level 2
@@ -11113,12 +11113,12 @@ upmechweapon2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upmechweapon2.description
-		Prerequisites: ~scsciencefacility, ~upmechweapon, ~!upmechweapon2
+		Prerequisites: ~terran_sciencefacility, ~terran_upgrade_vehicleweaponslevel1, ~!terran_upgrade_vehicleweaponslevel2
 	RenderSprites:
-		Image: upmechweapon
+		Image: terran_upgrade_vehicleweaponslevel1
 	ProvidesPrerequisite:
 
-upmecharmor:
+terran_upgrade_vehicleplatinglevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Vehicle Plating Level 1
@@ -11128,12 +11128,12 @@ upmecharmor:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upmecharmor.description
-		Prerequisites: ~scarmory, ~!upmecharmor
+		Prerequisites: ~terran_armory, ~!terran_upgrade_vehicleplatinglevel1
 	RenderSprites:
-		Image: upmecharmor
+		Image: terran_upgrade_vehicleplatinglevel1
 	ProvidesPrerequisite:
 
-upmecharmor2:
+terran_upgrade_vehicleplatinglevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Vehicle Plating Level 2
@@ -11143,12 +11143,12 @@ upmecharmor2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upmecharmor2.description
-		Prerequisites: ~scsciencefacility, ~upmecharmor, ~!upmecharmor2
+		Prerequisites: ~terran_sciencefacility, ~terran_upgrade_vehicleplatinglevel1, ~!terran_upgrade_vehicleplatinglevel2
 	RenderSprites:
-		Image: upmecharmor
+		Image: terran_upgrade_vehicleplatinglevel1
 	ProvidesPrerequisite:
 
-upshipweapon:
+terran_upgrade_shipweaponslevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ship Weapons Level 1
@@ -11158,12 +11158,12 @@ upshipweapon:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upshipweapon.description
-		Prerequisites: ~scarmory, ~!upshipweapon
+		Prerequisites: ~terran_armory, ~!terran_upgrade_shipweaponslevel1
 	RenderSprites:
-		Image: upshipweapon
+		Image: terran_upgrade_shipweaponslevel1
 	ProvidesPrerequisite:
 
-upshipweapon2:
+terran_upgrade_shipweaponslevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ship Weapons Level 2
@@ -11173,12 +11173,12 @@ upshipweapon2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upshipweapon2.description
-		Prerequisites: ~scsciencefacility, ~upshipweapon, ~!upshipweapon2
+		Prerequisites: ~terran_sciencefacility, ~terran_upgrade_shipweaponslevel1, ~!terran_upgrade_shipweaponslevel2
 	RenderSprites:
-		Image: upshipweapon
+		Image: terran_upgrade_shipweaponslevel1
 	ProvidesPrerequisite:
 
-upshiparmor:
+terran_upgrade_shipplatinglevel1:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ship Plating Level 1
@@ -11188,12 +11188,12 @@ upshiparmor:
 		BuildPaletteOrder: 80
 		Queue: Upgrades
 		Description: actor_upshiparmor.description
-		Prerequisites: ~scarmory, ~!upshiparmor
+		Prerequisites: ~terran_armory, ~!terran_upgrade_shipplatinglevel1
 	RenderSprites:
-		Image: upshiparmor
+		Image: terran_upgrade_shipplatinglevel1
 	ProvidesPrerequisite:
 
-upshiparmor2:
+terran_upgrade_shipplatinglevel2:
 	Inherits: ^researched_upgrade.template
 	Tooltip:
 		Name: Ship Plating Level 2
@@ -11203,9 +11203,9 @@ upshiparmor2:
 		BuildPaletteOrder: 80
 		Queue: Research
 		Description: actor_upshiparmor2.description
-		Prerequisites: ~scsciencefacility, ~upshiparmor, ~!upshiparmor2
+		Prerequisites: ~terran_sciencefacility, ~terran_upgrade_shipplatinglevel1, ~!terran_upgrade_shipplatinglevel2
 	RenderSprites:
-		Image: upshiparmor
+		Image: terran_upgrade_shipplatinglevel1
 	ProvidesPrerequisite:
 
 	####################################################################################################

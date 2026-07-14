@@ -1156,7 +1156,7 @@ TSNASHWABIKE.cd:
 		StartIfBelow: 101
 		Delay: 8
 SCDVA:
-	Inherits: SCGOLIATH
+	Inherits: terran_goliath
 	Valued:
 		Cost: 2500
 	Tooltip:
@@ -1204,7 +1204,7 @@ SCDVA:
 		RequiresCondition: overload
 		GrantsCondition: meltdown
 	FreeActor@soldier:
-		Actor: scmedic
+		Actor: terran_medic
 		SpawnOffset: 0,0
 		RequiresCondition: overload
 ancientvisceroid:
