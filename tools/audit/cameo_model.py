@@ -300,9 +300,14 @@ class Model:
         node = self.rs.actor(actor_name)
         if node is None or actor_name.lower() in _seen:
             return None
+        root = self.rs.resolve(actor_name) if not _seen else None
+        has_inf_body = root is not None and root.child("WithInfantryBody") is not None
         for _, target in self.rs.inherits_of(node):
-            cat = self.TEMPLATE_CATEGORY.get(target.lstrip("^").lower())
-            if cat:
+            tname = target.lstrip("^").lower()
+            cat = self.TEMPLATE_CATEGORY.get(tname)
+            # LineBreakerTemplate is used by both vehicles and infantry;
+            # actors with an infantry body should fall back to structural inf.
+            if cat and not (tname == "linebreakertemplate" and cat == "veh" and has_inf_body):
                 return cat
         for _, target in self.rs.inherits_of(node):
             cat = self.template_category(target, _seen | {actor_name.lower()})

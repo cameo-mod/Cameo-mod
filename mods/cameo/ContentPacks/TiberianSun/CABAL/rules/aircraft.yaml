@@ -496,13 +496,13 @@ cabal_repair_drone:
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_repair_drone.description
 	Aircraft:
-		TurnSpeed: 36
+		TurnSpeed: 28
 		Speed: 140
 		CruiseAltitude: 1200
 	Health:
 		HP: 25000
 	ChangesHealth@SelfHealing:
-		Step: 20
+		Step: 10
 	Armament@PRIMARY:
 		Weapon: CabalEngineerRepairBeam
 		LocalOffset: 0,0,0

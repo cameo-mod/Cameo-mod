@@ -557,6 +557,8 @@ cabal_scarabapc:
 	Hovers:
 	Health:
 		HP: 30000
+	ChangesHealth@SelfHealing:
+		Step: 12
 	Repairable:
 		HpPerStep: 1500
 	Armor:
@@ -620,11 +622,11 @@ cabal_berserker:
 	Health:
 		HP: 800000
 	ChangesHealth@SelfHealing:
-		Step: 400
+		Step: 800
 		Delay: 1
 		StartIfBelow: 100
 	Shielded:
-		RegenAmount: 500
+		RegenAmount: 1600
 	Armament@PRIMARY:
 		Weapon: CabalBerserkerBlades
 	WithInfantryBody:
@@ -870,7 +872,7 @@ cabal_avatar:
 		Description: actor_cabal_avatar.description
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 14
+		TurnSpeed: 28
 		Speed: 70
 	Health:
 		HP: 80000
@@ -1015,7 +1017,7 @@ cabal_coredefender:
 	Health:
 		HP: 2000000
 	ChangesHealth@SelfHealing:
-		Step: 600
+		Step: 800
 		Delay: 1
 		StartIfBelow: 100
 	ChangesHealth@1:
