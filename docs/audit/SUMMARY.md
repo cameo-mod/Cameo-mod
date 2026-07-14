@@ -14,11 +14,11 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 | B3 | upgrade direction | 12 anti-buff combos (2 suspicious, 1 verify, rest intended drawbacks), 4 dead upgrades, 5 dead-wiring families on 300–1,042 actors each | balance |
 | B4 | upgrade coverage | 15 tracked upgrades, ~40 real uncovered combat slots | balance |
 | B6 | art/sequence refs | 11 missing images, 11 missing sequences, 542 orphan images | cosmetic→crash-risk |
-| B7 | metadata rot | 31 duplicate-tooltip groups (incl. swapped WC2 tower names), 5 missing tooltips | cosmetic |
+| B7 | metadata rot | 24 duplicate-tooltip groups, 5 missing tooltips | cosmetic |
 | B9 | numeric drift | bounds screen **clean** (TB23 fix held); 163 outlier leads | balance-minor |
 | B10 | dead content | 345 orphan weapons, 542 orphan images, 16 dead conditions | hygiene |
 | B11 | asset norms | 3,632 / 8,776 WAVs off-norm (mono/16-bit/22050 Hz); 131 PNGs over budget | hygiene |
-| B12 | localization | 3 player-visible raw keys, 233 orphaned messages, ≤10% Fluent coverage | cosmetic |
+| B12 | localization | 0 unresolved Fluent refs, 233 orphaned messages, ≤10% Fluent coverage | cosmetic |
 | R2 | stacked multipliers | **757** units over the 2.0× budget; worst 36× (RA2 Allies) | balance |
 | W | weapon uniqueness (DESIGN §10) | 36 same-faction + 42 cross-faction shared weapons; 95 carrier-only (IFV borrow, informational) | design/identity |
 | G | garrison weapons (DESIGN §11) | **clean** (G1/G2/G3 = 0 after 2026-07-10 fixes; 30 design exceptions) | crash-free/balance |
@@ -38,9 +38,9 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 11. **328 concrete→concrete inherits** — the Slave-Miner bug factory; Phase-1 queue, full grouped list in FINDINGS.
 12. **13 L3 leaks**: CABAL/Forgotten/TS-Nod buildings inherit GDI/Nod concrete actors (tscabaltech→tsgttech etc.).
 13. **Modern Fire Control Systems covers 15/33 of TS GDI** — all aircraft + half the infantry lack the roster-wide hook.
-14. **WC2 tower upgrade names are swapped** (guard↔cannon) plus 30 more duplicate-tooltip groups.
+14. **WC2 tower upgrade names** (guard↔cannon swap) — FIXED; remaining 24 duplicate-tooltip groups still under review.
 15. **Dead-wiring families on 1,042 actors each** (`usabombardament`, `usaholdtheline`, `usasearchndestroy`, `upsubliminal(2)`) + `upra2deso` on 302 — Generals-era hooks granted by nothing.
-16. **3 player-visible raw Fluent keys** (`SCvoidray`, `upvoidray`, `up_blitzkrieg.nax` descriptions).
+16. **3 player-visible raw Fluent keys** — STALE/RESOLVED: current `audit_fluent.py` F1 shows 0 unresolved refs.
 17. **`wc2_orc_eye_of_kilrogg` TurnSpeed 2048** (median 20) — stale-scale value; bounds screen otherwise clean.
 18. **345 orphan weapons + 542 orphan sequence images** — RAM/load-time dead weight.
 19. **CABAL absent from Random AND Tournament pools, still titled "(WIP)"** — FIXED: CABAL added to both pools, WIP label removed.
