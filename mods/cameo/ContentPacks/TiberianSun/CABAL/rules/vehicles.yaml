@@ -878,6 +878,9 @@ cabal_avatar:
 		Step: 32
 	Armament@PRIMARY:
 		Weapon: CabalAvatarPlasma
+	AttackFrontal:
+		FacingTolerance: 0
+		Voice: Attack
 	RenderSprites:
 		Image: cabal_manticore
 		PlayerPalette: player_rgba
@@ -911,6 +914,9 @@ cabal_widow:
 		Step: 32
 	Armament@PRIMARY:
 		Weapon: CabalWidowPlasma
+	AttackFrontal:
+		FacingTolerance: 0
+		Voice: Attack
 	RenderSprites:
 		Image: cabal_manticore
 		PlayerPalette: player_rgba
