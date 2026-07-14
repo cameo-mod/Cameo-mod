@@ -17,7 +17,7 @@ cabal_overkill_gunship:
 	Buildable:
 		Queue: Aircraft, RAAircraft
 		BuildPaletteOrder: 60
-		Prerequisites: ~cabal_helipad
+		Prerequisites: ~cabal_helipad, cabal_promotion_overkillgunship
 		Description: actor_cabal_overkill_gunship.description
 	Aircraft:
 		TurnSpeed: 29
@@ -382,7 +382,7 @@ cabal_mothership:
 		Name: Mothership
 	Buildable:
 		BuildPaletteOrder: 30
-		Prerequisites: ~cabal_helipad, cabal_core
+		Prerequisites: ~cabal_helipad, cabal_core, cabal_promotion_mothership
 		Queue: Aircraft, RAAircraft
 		Description: actor_cabal_mothership.description
 	Health:

@@ -128,7 +128,29 @@ cabal_promotion_hunterkillermk1elite:
 		Image: cabal_hunterkillermk1
 	ProvidesPrerequisite:
 
-# Deprecated alias kept for old saves / replays that still reference the old name
-cabal_promotion_waspstriker:
-	Inherits: cabal_promotion_cyborgassassin
+cabal_promotion_overkillgunship:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Overkill Gunship
+	Buildable:
+		BuildPaletteOrder: 9
+		Queue: Promotions
+		Prerequisites: ~cabal_helipad, !cabal_promotion_overkillgunship, cabal_promotion_hunterkillermk1elite, rank3
+		Description: actor_cabal_promotion_overkillgunship.description
+	RenderSprites:
+		Image: cabal_overkill_gunship
+	ProvidesPrerequisite:
+
+cabal_promotion_mothership:
+	Inherits: ^promotion_upgrade.template
+	Tooltip:
+		Name: Unlock Mothership
+	Buildable:
+		BuildPaletteOrder: 12
+		Queue: Promotions
+		Prerequisites: ~cabal_helipad, !cabal_promotion_mothership, cabal_promotion_overkillgunship, cabal_core, rank4
+		Description: actor_cabal_promotion_mothership.description
+	RenderSprites:
+		Image: cabal_mothership
+	ProvidesPrerequisite:
 

@@ -348,6 +348,16 @@ actor_cabal_promotion_hunterkillermk1elite =
    .description = Promotion
       Unlocks the promoted unit for production.
 
+actor_cabal_promotion_overkillgunship =
+   .name = Unlock Overkill Gunship
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
+actor_cabal_promotion_mothership =
+   .name = Unlock Mothership
+   .description = Promotion
+      Unlocks the promoted unit for production.
+
 actor-cabal_core =
    .description = CABAL Core.
       Unlocks Tier 4 units and the CABAL superweapon.
