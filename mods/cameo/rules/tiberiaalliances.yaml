@@ -3437,7 +3437,7 @@ tagdiyard:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviet_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -5364,12 +5364,12 @@ tabarb:
 		Condition: levelupgrade3
 		Prerequisites: upgrade.tabarb3
 tamgnest:
-	Inherits: ra2_soviet_sentrygun
+	Inherits: ra2_soviets_sentrygun
 	Inherits@Levels: ^TALevelUpgradeableWidthAttack
 	RenderSprites:
 		Image: tamgnest
 	RenderVoxels:
-		Image: ra2_soviet_sentrygun
+		Image: ra2_soviets_sentrygun
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
@@ -5389,7 +5389,7 @@ tamgnest2:
 	RenderSprites:
 		Image: tamgnest
 	RenderVoxels:
-		Image: ra2_soviet_sentrygun
+		Image: ra2_soviets_sentrygun
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
@@ -5559,7 +5559,7 @@ tamgnod:
 	RenderSprites:
 		Image: tamgnod
 	RenderVoxels:
-		Image: ra2_soviet_sentrygun
+		Image: ra2_soviets_sentrygun
 	Buildable:
 		Prerequisites: barracks
 		Queue: Defence, RADefence
@@ -5852,7 +5852,7 @@ tareapercann:
 	-WithVoxelBody:
 	RenderSprites:
 	RenderVoxels:
-		Image: ra2_soviet_sentrygun
+		Image: ra2_soviets_sentrygun
 		Scale: 7.5
 		NormalsPalette: normals
 		PlayerPalette: playerra2

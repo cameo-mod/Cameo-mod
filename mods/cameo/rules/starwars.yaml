@@ -475,7 +475,7 @@ swfact.empire:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviet_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -1319,7 +1319,7 @@ swfact.rebels:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviet_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -1770,7 +1770,7 @@ swfact.republic:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviet_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -2221,7 +2221,7 @@ swfact.separatist:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviet_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -2739,7 +2739,7 @@ swfact.hutt:
 		RequiresForceMove: true
 	TransformsIntoRepairable:
 		RequiresCondition: factundeploy
-		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviet_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
+		RepairActors: fix,rafix,2100rr,scshieldbattery,ra2_soviets_servicedepot,ra2_allies_alliedservicedepot,c1fix,c2fix,c1rafix,c2rafix,c12100rr,c22100rr,cscshieldbattery,cra2nadept,cra2gadept ##########
 		RequiresForceMove: true
 	TransferTimedExternalConditionOnTransform:
 		Condition: invulnerability
@@ -4340,9 +4340,9 @@ swindustrialplant:
 	WithIdleOverlay@lights:
 		Sequence: idle-lights
 	RenderSprites:
-		Image: ra2_soviet_industrialplant
+		Image: ra2_soviets_industrialplant
 	ProvidesPrerequisite:
-		Prerequisite: ra2_soviet_industrialplant
+		Prerequisite: ra2_soviets_industrialplant
 swaatower:
 	Inherits: ^Defense
 	Inherits@AUTOTARGET: ^AutoTargetAll
@@ -4654,7 +4654,7 @@ swe1droid:
 	-SpawnActorOnDeath:
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: ra2_soviet_industrialplant
+		Prerequisites: ra2_soviets_industrialplant
 	GrantConditionOnPrerequisite@upswe1droid:
 		Condition: upswe1droid
 		Prerequisites: upswe1droid
@@ -4720,7 +4720,7 @@ swddroid:
 		Prerequisites: machshop
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: ra2_soviet_industrialplant
+		Prerequisites: ra2_soviets_industrialplant
 	RenderSprites:
 
 swdroidb2:
@@ -4749,7 +4749,7 @@ swdroidb2:
 		VoiceSet: SWBigDroidVoice
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: ra2_soviet_industrialplant
+		Prerequisites: ra2_soviets_industrialplant
 
 swe1droidmob:
 	Inherits@1: ^ExistsInWorld
@@ -5124,7 +5124,7 @@ swe3droid:
 	-SpawnActorOnDeath:
 	ProductionCostMultiplier@Industrial:
 		Multiplier: 75
-		Prerequisites: ra2_soviet_industrialplant
+		Prerequisites: ra2_soviets_industrialplant
 	GrantConditionOnPrerequisite@upswe1droid:
 		Condition: upswe1droid
 		Prerequisites: upswe1droid

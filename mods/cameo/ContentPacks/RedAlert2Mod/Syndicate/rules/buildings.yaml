@@ -465,7 +465,7 @@ ca12hit.latin:
 		PauseOnCondition: disabled
 		Prerequisites:
 			1: ~techlevel.superweapons
-		IconImage: ra2_soviet_nuclearmissilesilo
+		IconImage: ra2_soviets_nuclearmissilesilo
 		Icons:
 			1: icon2
 		Cursor: ability
@@ -640,7 +640,7 @@ ngbunk2.latin:
 	Cargo:
 		Types: Infantry, Hacker, Fremen
 		MaxWeight: 3
-		#InitialUnits: ra2_soviet_conscript
+		#InitialUnits: ra2_soviets_conscript
 	WithSpriteBody:
 	WithIdleOverlay@Bunkered:
 		Sequence: idle-bunkered
