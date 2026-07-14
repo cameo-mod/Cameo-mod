@@ -452,7 +452,7 @@ ts_gdi_radar:
 		BuildPaletteOrder: 70
 		Prerequisites:  ~ts_gdi_constructionyard, ts_gdi_tiberiumrefinery
 		Queue: Building, RABuilding
-		Description: actor-tsgtradr.description
+		Description: actor_ts_gdi_radar.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2

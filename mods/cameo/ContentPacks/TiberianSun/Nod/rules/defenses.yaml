@@ -18,7 +18,7 @@ ts_nod_missilesilo:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 140
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter, !ts_nod_missilesilo, ~techlevel.superweapons
-		Description: actor-tsntmisl.description
+		Description: actor_ts_nod_missilesilo.description
 	Tooltip:
 		Name: Missile Silo
 	Building:
@@ -166,7 +166,7 @@ ts_nod_laserturret:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 20
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_handof
-		Description: actor-tsntlasr.description
+		Description: actor_ts_nod_laserturret.description
 	Valued:
 		Cost: 800
 	Power:
@@ -222,7 +222,7 @@ ts_nod_samsite:
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_radar
 		Queue: Defence, RADefence
 		BuildDurationModifier: 40
-		Description: actor-tsntsam.description
+		Description: actor_ts_nod_samsite.description
 	RequiresBuildableArea:
 		AreaTypes: building
 	Selectable:
@@ -273,7 +273,7 @@ ts_nod_stealthgenerator:
 		Queue: Defence, RADefence
 		BuildPaletteOrder: 170
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter
-		Description: actor-tsntstlh.description
+		Description: actor_ts_nod_stealthgenerator.description
 	Building:
 		Footprint: xxx xxx
 		Dimensions: 3,2

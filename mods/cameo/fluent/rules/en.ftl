@@ -936,6 +936,13 @@ actor_ts_nod_shadowteam =
       Strong vs Infantry, Buildings
       Weak vs Vehicles, Aircraft
 
+actor_ts_nod_artillery =
+   .name = Artillery
+   .description = Long-range artillery piece.
+      Must deploy to fire.
+      Strong vs Buildings, Ground units
+      Weak vs Aircraft, close-range units
+
 ra_upgrade_shtoradefensesystem =
    .name = Shtora Defense System
    .description = Tech Upgrade (Only affects units of own faction)

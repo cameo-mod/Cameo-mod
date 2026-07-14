@@ -103,7 +103,7 @@ ts_nod_tiberiumwastefacility:
 		BuildLimit: 1
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_techcenter, ts_nod_upgrade_advancedtiberiumrefinement
 		Queue: Building, RABuilding
-		Description: actor-tsntwast.description
+		Description: actor_ts_nod_tiberiumwastefacility.description
 	Building:
 		Footprint: xx= xx=
 		Dimensions: 3,2
@@ -389,7 +389,7 @@ ts_nod_radar:
 		BuildPaletteOrder: 70
 		Prerequisites: ~ts_nod_constructionyard, ts_nod_tiberiumrefinery
 		Queue: Building, RABuilding
-		Description: actor-tsntradr.description
+		Description: actor_ts_nod_radar.description
 	Building:
 		Footprint: xx xx
 		Dimensions: 2,2

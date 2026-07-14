@@ -222,7 +222,7 @@ stalker.steel:
 		BuildPaletteOrder: 75
 		Prerequisites: ~qaweap.steel, up_stalker.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor_steel_beholder.description
+		Description: actor_steel_stalker.description
 	Mobile:
 		Locomotor: hover
 		Speed: 80
@@ -317,7 +317,7 @@ white_rabbit.steel:
 		BuildPaletteOrder: 75
 		Prerequisites: ~qaweap.steel, up_white_rabbit.steel, qatech.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor_steel_beholder.description
+		Description: actor_steel_white_rabbit.description
 	Mobile:
 		Locomotor: hover
 		Speed: 50
@@ -1273,7 +1273,7 @@ arty.steel:
 		BuildPaletteOrder: 50
 		Prerequisites: ~qaweap.steel, qtradr.steel
 		Queue: Vehicle, RAVehicle
-		Description: actor-steel_arty.description
+		Description: actor_steel_arty.description
 	Mobile:
 		Locomotor: hover
 		Speed: 100

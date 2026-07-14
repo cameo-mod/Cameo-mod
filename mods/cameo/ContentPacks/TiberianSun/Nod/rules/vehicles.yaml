@@ -351,7 +351,7 @@ ts_nod_artillery:
 		BuildPaletteOrder: 60
 		Prerequisites: ~ts_nod_warfactory, ts_nod_radar
 		Queue: Vehicle, RAVehicle
-		Description: actor-ts_nod_artillery.description
+		Description: actor_ts_nod_artillery.description
 	Mobile:
 		Locomotor: tracked
 		Speed: 60
