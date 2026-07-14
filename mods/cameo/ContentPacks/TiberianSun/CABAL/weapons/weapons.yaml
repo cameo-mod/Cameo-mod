@@ -745,10 +745,30 @@ CabalSpiderLaser:
 		Explosions: idle
 		ImpactSounds: drtelectro.wav
 		ValidTargets: Ground, Ship
+
 CabalSpiderCnc4Laser:
-	Inherits: CabalSpiderLaser
+	Inherits: ^LaserWeapon
+	Report: obelmod1.aud
 	ReloadDelay: 80
 	Range: 7000
+	Projectile: LaserZap
+		Width: 100
+		ZOffset: 2047
+		Color: 99DD22EE
+		SecondaryBeam: true
+		SecondaryBeamWidth: 42
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 3D3D77FF
+	Warhead@LaserWeapon: SpreadDamage
+		Damage: 44000
+	Warhead@LaserWeaponPercentage: HealthPercentageDamage
+		Damage: 22
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_l
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Ship
+
 CabalDissolverSpray:
 	Inherits: ^LightChemicalWeapon
 	Inherits@TANKDESTROYER: ^TankDestroyerCannon
