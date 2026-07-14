@@ -363,6 +363,12 @@ actor_cabal_overkill_gunship =
       Strong vs Vehicles, Buildings
       Weak vs Infantry, Aircraft
 
+actor_cabal_repair_drone =
+   .name = Repair Drone
+   .description = Flying support drone that repairs nearby mechanical units and aircraft.
+      Strong vs Nothing
+      Weak vs Everything
+
 actor_cabal_hunterkillermk1 =
    .name = Hunter Killer
    .description = Support gunship armed with dual rockets and small dual lasers.

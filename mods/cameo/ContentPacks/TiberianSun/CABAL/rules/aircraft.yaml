@@ -476,3 +476,43 @@ cabal_hunterkillermk1_elite:
 		Image: cabal_hunterkillermk1
 		PlayerPalette: player_rgba
 
+
+cabal_repair_drone:
+	Inherits: ^Helicopter
+	Inherits@Template: ^HelicopterTemplate
+	Inherits@EXPERIENCE: ^GainsExperienceTD
+	Inherits@decoration: ^CABALRankDecoration
+	Inherits@repair: ^PrioritizeRepair
+	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos
+	Valued:
+		Cost: 1000
+	Tooltip:
+		Name: Repair Drone
+	UpdatesPlayerStatistics:
+		AddToArmyValue: true
+	Buildable:
+		BuildPaletteOrder: 25
+		Prerequisites: ~cabal_helipad, cabal_radar
+		Queue: Aircraft, RAAircraft
+		Description: actor_cabal_repair_drone.description
+	Aircraft:
+		TurnSpeed: 36
+		Speed: 140
+		CruiseAltitude: 1200
+	Health:
+		HP: 25000
+	ChangesHealth@SelfHealing:
+		Step: 20
+	Armament@PRIMARY:
+		Weapon: CabalEngineerRepairBeam
+		LocalOffset: 0,0,0
+	AttackAircraft:
+		FacingTolerance: 10
+		AttackType: Hover
+		PersistentTargeting: false
+	-SpawnActorOnDeath:
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_repair_drone
+		PlayerPalette: player_rgba

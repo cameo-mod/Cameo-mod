@@ -1689,6 +1689,16 @@ cabal_hunter_drone:
 	icon:
 		Filename: cabal_hunter_drone_carrier_icon.png
 
+cabal_repair_drone:
+	Defaults:
+		Filename: cabal_repair_drone.png
+		Scale: 1
+		Tick: 80
+	idle:
+		Facings: 64
+	icon:
+		Filename: cabal_hunter_drone_carrier_icon.png
+
 cabal_overkill_gunship:
 	idle:
 		Filename: cabal_overkill_gunship.png
