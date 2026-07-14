@@ -110,10 +110,8 @@ actor_cabal_mantis =
 actor_cabal_manticore =
    .name = Manticore
    .description = Heavy line-breaker walker armed with laser and missile weapons.
-      Can immobilize infantry with trap nets.
       Backup Systems leaves a repairable husk when destroyed.
       Strong vs Vehicles, Aircraft
-      Can immobilize Infantry
 
 actor_cabal_artilleryspider =
    .name = Artillery Spider
