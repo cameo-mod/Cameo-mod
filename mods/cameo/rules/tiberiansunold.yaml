@@ -95,13 +95,13 @@ World:
 		ClassName: Light Support
 		Factions: cabal
 		BaseActor: cabal_mobileconstructionvehicle
-		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,tsbike2,tsttnk2
+		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,TSBIKE2,TSTTNK2
 	StartingUnits@heavycabal:
 		Class: heavy
 		ClassName: Heavy Support
 		Factions: cabal
 		BaseActor: cabal_mobileconstructionvehicle
-		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,tsbike2,tsbike2,tsttnk2,tsttnk2,tsttnk2
+		SupportActors: cabal_cyborginfantry,cabal_cyborginfantry,cabal_cyborginfantry,TSBIKE2,TSBIKE2,TSTTNK2,TSTTNK2,TSTTNK2
 
 Player:
 	ExternalCondition@PassiveIncomeBuildingsOwned:
