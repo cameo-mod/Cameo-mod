@@ -164,11 +164,11 @@ futuretech_warpgate:
 	damaged-air-inside:
 		Filename: futuretech_warpgate_egweap2_2.shp
 	bib:
-		Filename: futuretech_warpgate_egweap2bb.shp
+		Filename: futuretech_warpgate_bib.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-bib:
-		Filename: futuretech_warpgate_egweap2bb.shp
+		Filename: futuretech_warpgate_bib.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	idle-flag:
@@ -246,12 +246,12 @@ futuretech_launchpad:
 	# 	ShadowStart: 16
 	# 	Tick: 150
 	idle-bottom:
-		Filename: futuretech_launchpad_ggaircbb.shp
+		Filename: futuretech_launchpad_bib.shp
 		Length: 1
 		ShadowStart: 2
 		ZOffset: -1c512
 	damaged-idle-bottom:
-		Filename: futuretech_launchpad_ggaircbb.shp
+		Filename: futuretech_launchpad_bib.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 3
@@ -358,10 +358,10 @@ futuretech_refinery:
 		Length: 15
 		ZOffset: -512
 	idle-bib:
-		Filename: futuretech_refinery_egrefnbb.shp
+		Filename: futuretech_refinery_bib.shp
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: futuretech_refinery_egrefnbb.shp
+		Filename: futuretech_refinery_bib.shp
 		Start: 1
 		ZOffset: -512
 	idle-chim:

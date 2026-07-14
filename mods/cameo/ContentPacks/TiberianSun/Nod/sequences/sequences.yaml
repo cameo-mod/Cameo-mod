@@ -423,16 +423,16 @@ ts_nod_warfactory:
 	make:
 		Filename: ts_nod_warfactory_make.shp
 	bib2:
-		Filename: ts_nod_warfactory_bb.shp
+		Filename: ts_nod_warfactory_bib.shp
 		ZOffset: -1024
 		# Offset: -12, -21, 1
 	damaged-bib2:
-		Filename: ts_nod_warfactory_bb.shp
+		Filename: ts_nod_warfactory_bib.shp
 		Start: 1
 		ZOffset: -1024
 		# Offset: -12, -21, 1
 	dead-bib2:
-		Filename: ts_nod_warfactory_bb.shp
+		Filename: ts_nod_warfactory_bib.shp
 		Start: 2
 		ZOffset: -1024
 		# Offset: -12, -21, 1
@@ -597,16 +597,16 @@ ts_nod_helipad:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: ts_nod_helipad_bb.shp
+		Filename: ts_nod_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Filename: ts_nod_helipad_bb.shp
+		Filename: ts_nod_helipad_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
-		Filename: ts_nod_helipad_bb.shp
+		Filename: ts_nod_helipad_bib.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c511
@@ -682,16 +682,16 @@ ts_nod_tiberiumwastefacility:
 		Length: 16
 		Tick: 120
 	bibb:
-		Filename: ts_nod_tiberiumwastefacility_bb.shp
+		Filename: ts_nod_tiberiumwastefacility_bib.shp
 		ZOffset: -1024
 		# Offset: 0, -36, 3
 	damaged-bibb:
-		Filename: ts_nod_tiberiumwastefacility_bb.shp
+		Filename: ts_nod_tiberiumwastefacility_bib.shp
 		Start: 1
 		ZOffset: -1024
 		# Offset: 0, -36, 3
 	dead-bibb:
-		Filename: ts_nod_tiberiumwastefacility_bb.shp
+		Filename: ts_nod_tiberiumwastefacility_bib.shp
 		Start: 2
 		ZOffset: -1024
 		# Offset: 0, -36, 3

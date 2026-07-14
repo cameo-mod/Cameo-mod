@@ -759,20 +759,20 @@ ts_gdi_warfactory:
 	make:
 		Filename: ts_gdi_warfactory_make.shp
 	bib2:
-		Filename: ts_gdi_warfactory_bb.shp
+		Filename: ts_gdi_warfactory_bib.shp
 		Length: 1
 		ZOffset: -1024
 		Offset: -4, -21, 0
 		ZRamp: 1
 	damaged-bib2:
-		Filename: ts_gdi_warfactory_bb.shp
+		Filename: ts_gdi_warfactory_bib.shp
 		Start: 1
 		Length: 1
 		ZOffset: -1024
 		Offset: -4, -21, 0
 		ZRamp: 1
 	dead-bib2:
-		Filename: ts_gdi_warfactory_bb.shp
+		Filename: ts_gdi_warfactory_bib.shp
 		Start: 2
 		Length: 1
 		ZOffset: -1024
@@ -877,16 +877,16 @@ ts_gdi_helipad:
 		Tick: 400
 		Offset: 0, -24, 8
 	idle-platform:
-		Filename: ts_gdi_helipad_bb.shp
+		Filename: ts_gdi_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Filename: ts_gdi_helipad_bb.shp
+		Filename: ts_gdi_helipad_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
-		Filename: ts_gdi_helipad_bb.shp
+		Filename: ts_gdi_helipad_bib.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c511
@@ -952,19 +952,19 @@ ts_gdi_tiberiumrefinery:
 		Length: 16
 		Tick: 120
 	bib2:
-		Filename: ts_gdi_tiberiumrefinery_bb.shp
+		Filename: ts_gdi_tiberiumrefinery_bib.shp
 		Length: 1
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 		ZRamp: 1
 	damaged-bib2:
-		Filename: ts_gdi_tiberiumrefinery_bb.shp
+		Filename: ts_gdi_tiberiumrefinery_bib.shp
 		Start: 1
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 		ZRamp: 1
 	dead-bib2:
-		Filename: ts_gdi_tiberiumrefinery_bb.shp
+		Filename: ts_gdi_tiberiumrefinery_bib.shp
 		Start: 2
 		ZOffset: -1024
 		# Offset: 0, 0, 5

@@ -89,11 +89,11 @@ ra2_soviets_warfactory:
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: ra2_soviets_warfactory_ngweapbb.shp
+		Filename: ra2_soviets_warfactory_bib.shp
 		ShadowStart: 3
 		ZOffset: -1024
 	damaged-bib:
-		Filename: ra2_soviets_warfactory_ngweapbb.shp
+		Filename: ra2_soviets_warfactory_bib.shp
 		Start: 1
 		ZOffset: -1024
 	idle-lights:
@@ -139,13 +139,13 @@ ra2_soviets_airfield:
 		ShadowStart: -1
 		Tick: 64
 	idle-bottom:
-		Filename: ra2_soviets_airfield_ngairfbb.shp
+		Filename: ra2_soviets_airfield_bib.shp
 		Start: 0
 		Length: 1
 		ShadowStart: 3
 		ZOffset: -1c512
 	damaged-idle-bottom:
-		Filename: ra2_soviets_airfield_ngairfbb.shp
+		Filename: ra2_soviets_airfield_bib.shp
 		Start: 1
 		ShadowStart: 4
 		Length: 2
@@ -315,10 +315,10 @@ ra2_soviets_orerefinery:
 		Length: 3
 		Tick: 1500
 	idle-bib:
-		Filename: ra2_soviets_orerefinery_ngrefnbb.shp
+		Filename: ra2_soviets_orerefinery_bib.shp
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: ra2_soviets_orerefinery_ngrefnbb.shp
+		Filename: ra2_soviets_orerefinery_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -512
@@ -467,11 +467,11 @@ ra2_allies_alliedorerefinery:
 		Length: 6
 		Tick: 1500
 	idle-bib:
-		Filename: ra2_allies_alliedorerefinery_ggrefnbb.shp
+		Filename: ra2_allies_alliedorerefinery_bib.shp
 		ShadowStart: 2
 		ZOffset: -512
 	damaged-idle-bib:
-		Filename: ra2_allies_alliedorerefinery_ggrefnbb.shp
+		Filename: ra2_allies_alliedorerefinery_bib.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -512
@@ -499,11 +499,11 @@ ra2_allies_airforcecommandhq:
 		ShadowStart: 16
 		Tick: 150
 	idle-bottom:
-		Filename: ra2_allies_airforcecommandhq_ggaircbb.shp
+		Filename: ra2_allies_airforcecommandhq_bib.shp
 		Length: 1
 		ZOffset: -1c512
 	damaged-idle-bottom:
-		Filename: ra2_allies_airforcecommandhq_ggaircbb.shp
+		Filename: ra2_allies_airforcecommandhq_bib.shp
 		Start: 1
 		Length: 1
 		ZOffset: -1c512
@@ -734,11 +734,11 @@ yuri_warfactory:
 		Filename: yuri_warfactory_yr_ygweap_4.shp
 		Start: 1
 	bib:
-		Filename: yuri_warfactory_yr_ygweapbb.shp
+		Filename: yuri_warfactory_yr_bib.shp
 		ShadowStart: 3
 		ZOffset: -1024
 	damaged-bib:
-		Filename: yuri_warfactory_yr_ygweapbb.shp
+		Filename: yuri_warfactory_yr_bib.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
@@ -808,11 +808,11 @@ ra2_allies_alliedwarfactory:
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: ra2_allies_alliedwarfactory_ggweapbb.shp
+		Filename: ra2_allies_alliedwarfactory_bib.shp
 		ShadowStart: 2
 		ZOffset: -1024
 	damaged-bib:
-		Filename: ra2_allies_alliedwarfactory_ggweapbb.shp
+		Filename: ra2_allies_alliedwarfactory_bib.shp
 		Start: 1
 		ShadowStart: 3
 		ZOffset: -1024
@@ -912,11 +912,11 @@ yuri_tankbunker:
 	Defaults:
 		Offset: 0,-28
 	idle:
-		Filename: yuri_tankbunker_yr_ngtbnkbb.shp
+		Filename: yuri_tankbunker_yr_bib.shp
 		Length: 1
 		ShadowStart: 3
 	damaged-idle:
-		Filename: yuri_tankbunker_yr_ngtbnkbb.shp
+		Filename: yuri_tankbunker_yr_bib.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 4
@@ -952,7 +952,7 @@ yuri_tankbunker:
 	make:
 		Filename: invisibleitem.shp
 	dead:
-		Filename: yuri_tankbunker_yr_ngtbnkbb.shp
+		Filename: yuri_tankbunker_yr_bib.shp
 		Start: 1
 		Length: 1
 	icon:
@@ -978,7 +978,7 @@ ra2_allies_alliedservicedepot:
 		Length: 2
 		ShadowStart: 4
 	bib:
-		Filename: ra2_allies_alliedservicedepot_ggdeptbb.shp
+		Filename: ra2_allies_alliedservicedepot_bib.shp
 		ShadowStart: 3
 		ZOffset: -512
 	make:
@@ -1050,11 +1050,11 @@ ra2_soviets_servicedepot:
 		Start: 2
 		ShadowStart: 4
 	bib:
-		Filename: ra2_soviets_servicedepot_ngdeptbb.shp
+		Filename: ra2_soviets_servicedepot_bib.shp
 		ShadowStart: 3
 		ZOffset: -512
 	damaged-bib:
-		Filename: ra2_soviets_servicedepot_ngdeptbb.shp
+		Filename: ra2_soviets_servicedepot_bib.shp
 		Start: 1
 		ShadowStart: 2
 	make:

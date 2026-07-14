@@ -826,16 +826,16 @@ cabal_mechfactory:
 		Filename: cabal_mechfactory_make.shp
 		Length: 25
 	bib2:
-		Filename: cabal_mechfactory_bb.shp
+		Filename: cabal_mechfactory_bib.shp
 		ZOffset: -1024
 		Offset: -12, -21, 1
 	damaged-bib2:
-		Filename: cabal_mechfactory_bb.shp
+		Filename: cabal_mechfactory_bib.shp
 		Start: 1
 		ZOffset: -1024
 		Offset: -12, -21, 1
 	dead-bib2:
-		Filename: cabal_mechfactory_bb.shp
+		Filename: cabal_mechfactory_bib.shp
 		Start: 2
 		ZOffset: -1024
 		Offset: -12, -21, 1
@@ -1599,16 +1599,16 @@ tsnthpadcabal:
 		Tick: 400
 		# Offset: 0, -24, 3
 	idle-platform:
-		Filename: cabal_helipad_bb.shp
+		Filename: cabal_helipad_bib.shp
 		ShadowStart: 3
 		ZOffset: -1c511
 	damaged-idle-platform:
-		Filename: cabal_helipad_bb.shp
+		Filename: cabal_helipad_bib.shp
 		Start: 1
 		ShadowStart: 4
 		ZOffset: -1c511
 	dead-platform:
-		Filename: cabal_helipad_bb.shp
+		Filename: cabal_helipad_bib.shp
 		Start: 2
 		ShadowStart: 5
 		ZOffset: -1c511
