@@ -42,14 +42,26 @@ TSReaperTrap:
 		Explosions: poof
 		ImpactSounds: methit1.aud
 		ValidTargets: Ground, Water
+
 CabalReaperTrap:
-	Inherits: TSReaperTrap
-CabalHeavyReaperTrap:
-	Inherits: TSReaperTrap
-	ReloadDelay: 200
-CabalManticoreTrap:
-	Inherits: TSReaperTrap
-	ReloadDelay: 300
+	Report: fireweb1.aud
+	ReloadDelay: 250
+	Range: 2048
+	ValidTargets: snareable
+	TargetActorCenter: true
+	Projectile: Missile
+		Speed: 800
+		Image: DRAGON
+	Warhead@Snare: GrantExternalCondition
+		Condition: snared
+		Duration: 100
+		Range: 1024
+		ValidTargets: snareable
+		ValidRelationships: Enemy
+	Warhead@Effect: CreateEffect
+		Explosions: poof
+		ImpactSounds: methit1.aud
+		ValidTargets: Ground, Water
 
 DarkObeliskLaser:
 	Inherits: ^LaserWeapon
@@ -82,7 +94,7 @@ DarkObeliskLaser:
 
 TSCABALEMPDisable.anim:
 	ReloadDelay: 6
-	Range: 20000
+	Range: 8000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
 	TargetActorCenter: true
 	Projectile: LaserZap
@@ -99,7 +111,7 @@ TSCABALEMPDisable.anim:
 TSCABALEMPDisable.end:
 	Inherits: ^TeslaChargedWeapon
 	ReloadDelay: 8
-	Range: 10359
+	Range: 8000
 	ValidTargets: Vehicle, Ship, Building, Defense, NavalYard
 	TargetActorCenter: true
 	Report: 2100rotlsr.wav
@@ -277,7 +289,7 @@ TSHellfireTwin:
 TSRobotHackingControl:
 	ReloadDelay: 50
 	Report: tsrobothacking.wav
-	Range: 9500
+	Range: 8000
 	TargetActorCenter: true
 	ValidTargets: HackableRobot, Cyborg
 	InvalidTargets: Hero

@@ -371,8 +371,6 @@ cabal_manticore:
 		LocalOffset: 128,-350,350, 128,350,350
 	Armament@SECONDARY:
 		Weapon: CabalManticoreMissilesAA
-	Armament@TRAP:
-		Weapon: CabalManticoreTrap
 	WithMuzzleOverlay:
 	AttackFollow:
 		FacingTolerance: 512
@@ -821,8 +819,6 @@ cabal_heavyreaper:
 		LocalOffset: 128,-200,350, 128,200,350
 	Armament@SECONDARY:
 		Weapon: CabalHeavyReaperMissilesAA
-	Armament@TRAP:
-		Weapon: CabalHeavyReaperTrap
 	Voiced:
 		VoiceSet: TSReaper
 	UpdatesPlayerStatistics:
