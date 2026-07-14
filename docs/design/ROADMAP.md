@@ -56,36 +56,33 @@ factions, everything through the balance workbook._
   tooling documented in `docs/backlog_weapon_rename.md` for future
   continuation.
 
-### P0 — In progress (2026-07-14 session)
+### P0 — Completed (2026-07-14 session)
 
-- [ ] **CABAL Backup Systems upgrade coverage (legion, avatar)**:
-  - `cabal_legion` inherits `^cabal_upgrade_backupsystems` but had no
-    `SpawnActorOnDeath@backup` trait — **ADDED** (not yet committed).
-  - `cabal_avatar` was missing both the `Inherits@BACKUP` and the
-    `SpawnActorOnDeath@backup` trait — **ADDED** both (not yet committed).
-  - **STILL NEEDED**: `cabal_legion_backup` and `cabal_avatar_backup`
-    actor definitions in `rules/tiberiansun.yaml` (follow the pattern of
-    `cabal_manticore_backup` at line 1270: inherit the base actor, set
-    Speed/TurnSpeed to 0, high HP, `-SpawnActorOnDeath@backup`,
-    `GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`
-    to reanimate, `WithColoredOverlay@backup`).
-  - **STILL NEEDED**: Boot test and commit.
-- [ ] **Backup husk repair/reanimate (artillery/tarantula)**: The backup
-  actors for `cabal_artilleryspider_backup` and `cabal_tarantula_backup`
-  exist (tiberiansun.yaml lines 1315, 1354) but may have issues with
-  repair/reanimate. Investigate whether `Repairable` trait is missing on
-  artillery spider backup (it's present on manticore and tarantula but
-  NOT on artilleryspider_backup). Also verify the `TransformOnCondition`
-  reanimation actually works in-game.
-- [ ] **Cyborg hacker death palette break**: When `cabal_hackercyborg`
-  dies, the death animation uses the wrong palette. Investigate the
-  `WithDeathAnimation` trait or `RenderSprites` palette on the hacker.
-- [ ] **Rocket cyborg death palette break**: Same issue as hacker —
-  `cabal_rocketcyborg` (formerly `cabal_platedarmorcyborg`) death
-  animation palette mismatch.
-- [ ] **TS GDI building death palette break**: TS GDI buildings show
-  wrong palette on death animation. Check `WithDeathAnimation` or
-  building `dead:` sequence palette references.
+- [x] **CABAL Backup Systems upgrade coverage (legion, avatar)**
+  (`d4be72f8f`): Added `SpawnActorOnDeath@backup` to `cabal_legion` and
+  `cabal_avatar`; added `Inherits@BACKUP` to `cabal_avatar`; created
+  `cabal_legion_backup` and `cabal_avatar_backup` actors in
+  `rules/tiberiansun.yaml`; added `Repairable` trait to
+  `cabal_artilleryspider_backup`.
+- [x] **Backup husk repair/reanimate** (`d4be72f8f`): `Repairable` trait
+  added to `cabal_artilleryspider_backup` (was missing — present on
+  manticore and tarantula backups already).
+- [x] **CABAL infantry death palette break** (`a2b4de333`): All 8 CABAL
+  infantry actors and the `^TSInfantry` template had `WithDeathAnimation`
+  with `PlayerPalette: playerra2` but no `DeathSequencePalette`. The
+  `DeathSequencePalette` field controls which palette the death sequence
+  frames render with; without it, the engine defaults to a non-player
+  palette, causing visible color breakage on death. Fixed by adding
+  `DeathSequencePalette: ra2player` to `^TSInfantry` template and all 8
+  CABAL infantry overrides (cyborginfantry, rocketcyborg, devout,
+  ascended, hackercyborg, cyborgcommando, cyborgcommandov2,
+  eliminator800).
+- [x] **TS GDI building death palette break** (`b417c6f96`): The
+  `^BaseBuilding` template in `defaults.yaml` had `WithDeathAnimation`
+  with `DeathSequence: dead` but no `DeathSequencePalette` — same root
+  cause as the infantry palette bug. Fixed by adding
+  `DeathSequencePalette: ra2player` to `^BaseBuilding` and to the
+  `WithDeathAnimation@BIB` overrides on GDI and CABAL service depots.
 
 ---
 
