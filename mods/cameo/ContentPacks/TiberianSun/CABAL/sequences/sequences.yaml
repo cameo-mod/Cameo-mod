@@ -713,6 +713,7 @@ cabal_cyborgfactory:
 	Inherits: ^WithBuildingBib3
 	Defaults:
 		Offset: -12, -15, 30
+		Scale: 1.25
 	idle:
 		Filename: cabal_cyborgfactory_ybbar.shp
 		ShadowStart: 3
