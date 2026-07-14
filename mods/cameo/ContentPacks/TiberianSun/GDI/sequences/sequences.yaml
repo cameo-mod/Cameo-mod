@@ -2,9 +2,9 @@ ts_gdi_lightinfantry:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: tse1.shp
+		Filename: ts_gdi_lightinfantry_tse1.shp
 	icon:
-		Filename: tse1gicon.png
+		Filename: ts_gdi_lightinfantry_icon.png
 
 ts_gdi_medic:
 	Defaults:
@@ -89,7 +89,7 @@ ts_gdi_discthrower:
 	Inherits: ^TSBasicInfantry
 	Inherits@attack: ^TSBasicInfantryAttack
 	Defaults:
-		Filename: alte2.shp
+		Filename: ts_gdi_discthrower_alte2.shp
 	icon:
 		Filename: ts_gdi_discthrower_icon.png
 
@@ -185,7 +185,7 @@ ts_gdi_falconenforcer:
 
 ts_gdi_zonetrooper:
 	Defaults:
-		Filename: ts_gdi_zonetrooper.png
+		Filename: ts_gdi_promotion_unlockzonetrooper_ts_gdi_zonetrooper.png
 		Scale: 0.6
 		Offset: 0,-24
 	stand:
@@ -254,7 +254,7 @@ ts_gdi_zonetrooper:
 		Length: 6
 		Facings: 8
 	icon:
-		Filename: ts_gdi_zonetrooper_icon.png
+		Filename: ts_gdi_promotion_unlockzonetrooper_icon.png
 		Offset: 0, 0
 
 ts_gdi_riottrooper:
@@ -284,7 +284,7 @@ ts_gdi_titan:
 		ShadowStart: 152
 		Offset: 0, 0, 12
 	icon:
-		Filename: tstitanicon.shp
+		Filename: ts_gdi_upgrade_mechengineering_icon.shp
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
@@ -309,50 +309,50 @@ ts_gdi_titan:
 
 ts_gdi_titanmkii:
 	idle:
-		Filename: ts_gdi_titanmkii.png
+		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii.png
 		Facings: 32
 		Scale: 1
 	icon:
-		Filename: ts_gdi_titanmkii_icon.png
+		Filename: ts_gdi_promotion_unlocktitanmkii_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: ts_gdi_titanmkii.png
+		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii.png
 		Facings: 32
 		Scale: 1
 	walk:
-		Filename: ts_gdi_titanmkii_run.png
+		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii_run.png
 		Length: 14
 		Facings: 32
 		Tick: 60
 		Scale: 1
 	turret:
-		Filename: ts_gdi_titanmkii_tur.png
+		Filename: ts_gdi_promotion_unlocktitanmkii_ts_gdi_titanmkii_tur.png
 		Facings: 32
 		Scale: 1
 
 ts_gdi_juggernautmkii:
 	idle:
-		Filename: ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
 		Facings: -8
 		Scale: 0.8
 	icon:
-		Filename: ts_gdi_juggernautmkii_icon.png
+		Filename: ts_gdi_promotion_unlockjuggernautmkii_icon.png
 	muzzle:
 		Filename: gunfire2.shp
 		Length: 5
 	stand:
-		Filename: ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
 		Facings: -8
 	walk:
-		Filename: ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
 		Length: 17
 		Start: 8
 		Facings: -8
 		# Tick: 60
 	shoot:
-		Filename: ts_gdi_juggernautmkii.shp
+		Filename: ts_gdi_promotion_unlockjuggernautmkii_ts_gdi_juggernautmkii.shp
 		Facings: -8
 		Start: 144
 		Length: 7
@@ -373,18 +373,18 @@ ts_gdi_tiberiumharvester:
 		Length: 15
 		Facings: 8
 	icon:
-		Filename: tsharvestericon.shp
+		Filename: ts_gdi_tiberiumharvester_icon.shp
 
 ts_gdi_kodiakcommandship:
 	Defaults:
-		Filename: ts_gdi_kodiakcommandship.shp
+		Filename: ts_gdi_promotion_unlockkodiak_ts_gdi_kodiakcommandship.shp
 		Scale: 1.25
 		Offset: 0,0,64
 		ZRamp: 1
 	idle:
 		Facings: -32
 	icon:
-		Filename: ts_gdi_kodiakcommandship_icon.png
+		Filename: ts_gdi_promotion_unlockkodiak_icon.png
 
 ts_gdi_amphibiousapc:
 	idle:
@@ -470,19 +470,19 @@ ts_gdi_wolverinemkii:
 	idle:
 		Filename: invisibleitem.shp
 	Defaults:
-		Filename: ts_gdi_wolverinemkii.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii.png
 	stand:
-		Filename: ts_gdi_wolverinemkii.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii.png
 		Facings: 64
 	walk:
-		Filename: ts_gdi_wolverinemkii_run.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii_run.png
 		Facings: 64
 		Length: 8
 	shoot:
-		Filename: ts_gdi_wolverinemkii.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii_ts_gdi_wolverinemkii.png
 		Facings: 64
 	icon:
-		Filename: ts_gdi_wolverinemkii_icon.png
+		Filename: ts_gdi_promotion_unlockwolverinemkii_icon.png
 
 ts_gdi_mammothprototype:
 	idle:
@@ -490,7 +490,7 @@ ts_gdi_mammothprototype:
 	icon:
 		Filename: ts_gdi_mammothprototype_icon.shp
 	muzzle2:
-		Filename: lightbluelasermuzzle.shp
+		Filename: ts_gdi_promotion_unlockmammothmkii_lightbluelasermuzzle.shp
 		Length: 3
 	muzzle1:
 		Filename: gunfire2.shp
@@ -500,20 +500,20 @@ ts_gdi_mammothmkii:
 	Defaults:
 		Filename: invisibleitem.shp
 	idle:
-		Filename: ts_gdi_mammothmkii_idle.png
+		Filename: ts_gdi_promotion_unlockmammothmkii_ts_gdi_mammothmkii_idle.png
 		Facings: -32
 	walk:
-		Filename: ts_gdi_mammothmkii_walk.png
+		Filename: ts_gdi_promotion_unlockmammothmkii_ts_gdi_mammothmkii_walk.png
 		Length: 20
 		Facings: -8
 	shoot:
-		Filename: ts_gdi_mammothmkii_atk.png
+		Filename: ts_gdi_promotion_unlockmammothmkii_ts_gdi_mammothmkii_atk.png
 		Length: 3
 		Facings: -32
 	icon:
-		Filename: ts_gdi_mammothmkii_icon.png
+		Filename: ts_gdi_promotion_unlockmammothmkii_icon.png
 	muzzle2:
-		Filename: lightbluelasermuzzle.shp
+		Filename: ts_gdi_promotion_unlockmammothmkii_lightbluelasermuzzle.shp
 		Length: 3
 	muzzle1:
 		Filename: gunfire2.shp
@@ -817,7 +817,7 @@ ts_gdi_radar:
 		Length: 20
 		ShadowStart: 20
 	icon:
-		Filename: tsgdiradaricon.shp
+		Filename: ts_gdi_radar_icon.shp
 		Offset: 0, 0
 
 ts_gdi_techcenter:
@@ -850,7 +850,7 @@ ts_gdi_techcenter:
 	make:
 		Filename: ts_gdi_techcenter_mk.shp
 	icon:
-		Filename:  tstechicon.png
+		Filename:  ts_gdi_techcenter_icon.png
 		Offset: 0, 0
 
 ts_gdi_helipad:
@@ -969,7 +969,7 @@ ts_gdi_tiberiumrefinery:
 		ZOffset: -1024
 		# Offset: 0, 0, 5
 	icon:
-		Filename: tsrefineryicon.shp
+		Filename: ts_gdi_tiberiumrefinery_icon.shp
 		Offset: 0, 0
 
 ts_gdi_upgradecenter:
@@ -1053,14 +1053,14 @@ ts_gdi_orcafighter:
 
 ts_gdi_zoneorcafighter:
 	idle:
-		Filename: ts_gdi_zoneorcafighter.png
+		Filename: ts_gdi_promotion_unlockzoneorca_ts_gdi_zoneorcafighter.png
 		Facings: 64
 	icon:
-		Filename: ts_gdi_zoneorcafighter_icon.png
+		Filename: ts_gdi_promotion_unlockzoneorca_icon.png
 
 ts_gdi_hammerhead:
 	idle:
-		Filename: ts_gdi_hammerhead.png
+		Filename: ts_gdi_promotion_unlockhammerhead_ts_gdi_hammerhead.png
 		Facings: 64
 	lrotor: lrotor
 		Filename: lrotor.shp
@@ -1077,7 +1077,7 @@ ts_gdi_hammerhead:
 		Start: 4
 		Length: 8
 	icon:
-		Filename: ts_gdi_hammerhead_icon.png
+		Filename: ts_gdi_promotion_unlockhammerhead_icon.png
 
 ts_gdi_orcabomber:
 	idle:
@@ -1093,15 +1093,15 @@ ts_gdi_carryall:
 
 ts_gdi_vulcantower:
 	Defaults:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Scale: 1.25
 	idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	damaged-idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Start: 1
 	critical-idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Start: 2
 	turret:
 		Filename: ts_gdi_vulcantower.shp
@@ -1109,7 +1109,7 @@ ts_gdi_vulcantower:
 		UseClassicFacings: True
 		Offset: 0,0
 	make:
-		Filename: tsgtctwrmk.shp
+		Filename: ts_gdi_vulcantower_tsgtctwrmk.shp
 		Length: 11
 		ShadowStart: 11
 	dead:
@@ -1124,15 +1124,15 @@ ts_gdi_vulcantower:
 
 ts_gdi_rpgtower:
 	Defaults:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Scale: 1.25
 	idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	damaged-idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Start: 1
 	critical-idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Start: 2
 	turret:
 		Filename: ts_gdi_rpgtower.shp
@@ -1140,7 +1140,7 @@ ts_gdi_rpgtower:
 		UseClassicFacings: True
 		Offset: 0,0
 	make:
-		Filename: tsgtctwrmk.shp
+		Filename: ts_gdi_vulcantower_tsgtctwrmk.shp
 		Length: 11
 		ShadowStart: 11
 	dead:
@@ -1155,23 +1155,23 @@ ts_gdi_rpgtower:
 
 ts_gdi_samtower:
 	Defaults:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Scale: 1.25
 	idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 	damaged-idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Start: 1
 	critical-idle:
-		Filename: tsgtctwr.shp
+		Filename: ts_gdi_vulcantower_tsgtctwr.shp
 		Start: 2
 	turret:
-		Filename: tsgtctwr_d.shp
+		Filename: ts_gdi_samtower_tsgtctwr_d.shp
 		Facings: 32
 		UseClassicFacings: True
 		Offset: 0,0
 	make:
-		Filename: tsgtctwrmk.shp
+		Filename: ts_gdi_vulcantower_tsgtctwrmk.shp
 		Length: 11
 		ShadowStart: 11
 	dead:

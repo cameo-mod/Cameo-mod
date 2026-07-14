@@ -4,7 +4,7 @@ ts_nod_lightinfantry:
 	Defaults:
 		Filename: altnode1.shp
 	icon:
-		Filename: tse1gicon.png
+		Filename: ts_gdi_lightinfantry_icon.png
 
 ts_nod_chameleonspy:
 	Inherits: ^TSBasicInfantry
@@ -786,7 +786,7 @@ ts_nod_samsite:
 		Filename: ts_nod_samsite.shp
 		Start: 2
 	turret:
-		Filename: tsgtctwr_d.shp
+		Filename: ts_gdi_samtower_tsgtctwr_d.shp
 		Facings: 32
 		UseClassicFacings: True
 		Offset: 0,16
