@@ -24,6 +24,68 @@ factions, everything through the balance workbook._
 - [x] Voice-set rename crashes (`1616a26d2`); pink menu (`e956d2280`);
   boot crashes crab-junk/shadowteam/stale-DLL (`28ae47612`). LAW:
   launch-game.cmd to menu before EVERY commit (CLAUDE.md gate).
+- [x] **ts_nod_ticktank voxel sequence crash** (`4bfd1bcaf`): `ts_nod_ticktank`
+  and `ts_nod_attackcycle` had no `idle:` sequence filename — the voxel files
+  are `tsttnk.vxl` and `tsbike.vxl` (old TS names), but the sequence entries
+  only had `idle:` with no filename. Fixed by adding `idle: tsttnk` and
+  `idle: tsbike` respectively in `voxels.yaml`.
+- [x] **magicnuke sequence crash** (`4bfd1bcaf`): CABAL neutron weapons
+  (`CabalCommandoPlasmaNeutron`, `CabalCommandoPlasmaMk2Neutron`,
+  `CabalRavagerPlasmaNeutron`) had `Image: magicnuke` in their
+  `CreateEffect` warheads. The `magicnuke` image has sequences `magicnuke`,
+  `magicnuke_med`, `magicnuke_small`, `magicnuke_micro` — but `Image:
+  magicnuke` makes the engine look for a sequence named `magicnuke_med`
+  inside image `magicnuke`, which doesn't exist (the sequences are defined
+  under the `magicnuke` image key with those names). Removing `Image:
+  magicnuke` lets the engine use the `Explosions:` field directly against
+  the sequence set. The `CabalMagicNuke` weapon (line ~1847) already
+  worked correctly because it only had `Explosions: magicnuke` without
+  `Image:`.
+- [x] **ra2_cgtbnkbb.shp not found crash** (`4bfd1bcaf`): Asset was renamed
+  to `ra2_cgtbnkbib.shp` (bb→bib convention) but YAML references in
+  `redalert2.yaml` were not updated. Fixed all 3 references.
+- [x] **ra2_ctoutpbb.shp not found** (`4bfd1bcaf`): Renamed to
+  `ra2_ctoutp_bib.shp`, updated 4 YAML references in `redalert2.yaml`.
+- [x] **tamrefbb.shp reference** (`4bfd1bcaf`): Renamed to `tamref_bib.shp`,
+  updated reference in Forgotten `sequences.yaml`.
+- [x] **mk→make asset renames** (`4bfd1bcaf`): 8 construction animation
+  files renamed from `_mk.shp` to `_make.shp` (ra2_cgoildmk, ra2_ntyardmk,
+  tambarmk, tampowrmk, tamradrmk, tamrefmk, tamtechmk, tsnttmplmk) with
+  all YAML references updated.
+- [x] **Weapon rename task backlogged** (`4bfd1bcaf`): Full research and
+  tooling documented in `docs/backlog_weapon_rename.md` for future
+  continuation.
+
+### P0 — In progress (2026-07-14 session)
+
+- [ ] **CABAL Backup Systems upgrade coverage (legion, avatar)**:
+  - `cabal_legion` inherits `^cabal_upgrade_backupsystems` but had no
+    `SpawnActorOnDeath@backup` trait — **ADDED** (not yet committed).
+  - `cabal_avatar` was missing both the `Inherits@BACKUP` and the
+    `SpawnActorOnDeath@backup` trait — **ADDED** both (not yet committed).
+  - **STILL NEEDED**: `cabal_legion_backup` and `cabal_avatar_backup`
+    actor definitions in `rules/tiberiansun.yaml` (follow the pattern of
+    `cabal_manticore_backup` at line 1270: inherit the base actor, set
+    Speed/TurnSpeed to 0, high HP, `-SpawnActorOnDeath@backup`,
+    `GrantPeriodicCondition@rebuild` + `TransformOnCondition@buildingrebirth`
+    to reanimate, `WithColoredOverlay@backup`).
+  - **STILL NEEDED**: Boot test and commit.
+- [ ] **Backup husk repair/reanimate (artillery/tarantula)**: The backup
+  actors for `cabal_artilleryspider_backup` and `cabal_tarantula_backup`
+  exist (tiberiansun.yaml lines 1315, 1354) but may have issues with
+  repair/reanimate. Investigate whether `Repairable` trait is missing on
+  artillery spider backup (it's present on manticore and tarantula but
+  NOT on artilleryspider_backup). Also verify the `TransformOnCondition`
+  reanimation actually works in-game.
+- [ ] **Cyborg hacker death palette break**: When `cabal_hackercyborg`
+  dies, the death animation uses the wrong palette. Investigate the
+  `WithDeathAnimation` trait or `RenderSprites` palette on the hacker.
+- [ ] **Rocket cyborg death palette break**: Same issue as hacker —
+  `cabal_rocketcyborg` (formerly `cabal_platedarmorcyborg`) death
+  animation palette mismatch.
+- [ ] **TS GDI building death palette break**: TS GDI buildings show
+  wrong palette on death animation. Check `WithDeathAnimation` or
+  building `dead:` sequence palette references.
 
 ---
 

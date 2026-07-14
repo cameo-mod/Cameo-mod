@@ -7,12 +7,12 @@ faction map: [../factions/MATRIX.md](../factions/MATRIX.md)._
 
 | class | what | count (live tree) | severity profile |
 |---|---|---|---|
-| B8 | crash-class content | **0** distinct | crash |
+| B8 | crash-class content | **0** distinct (was 3+ — fixed 2026-07-14: ts_nod_ticktank voxel, magicnuke sequence, ra2_cgtbnkbb/ctoutpbb missing assets) | crash |
 | B1 | cross-faction leaks | 10 L1 + 13 L3 (+1,106 shared needing owners) | balance |
 | B2 | illegal inherits | **328** concrete→concrete, 24 cross-faction, 0 dangling | balance-risk |
 | B5 | AI wiring | **200** ids defined nowhere, 620 unloaded refs, 26 factions with unwired units | balance |
 | B3 | upgrade direction | 12 anti-buff combos (2 suspicious, 1 verify, rest intended drawbacks), 4 dead upgrades, 5 dead-wiring families on 300–1,042 actors each | balance |
-| B4 | upgrade coverage | 15 tracked upgrades, ~40 real uncovered combat slots | balance |
+| B4 | upgrade coverage | 15 tracked upgrades, ~40 real uncovered combat slots (CABAL backup systems: legion+avatar fixed but backup actors still needed) | balance |
 | B6 | art/sequence refs | 11 missing images, 11 missing sequences, 542 orphan images | cosmetic→crash-risk |
 | B7 | metadata rot | 24 duplicate-tooltip groups, 0 missing tooltips | cosmetic |
 | B9 | numeric drift | bounds screen **clean** (TB23 fix held); 163 outlier leads | balance-minor |

@@ -858,6 +858,7 @@ cabal_avatar:
 	Inherits@AUTOTARGET: ^AutoTargetAllAssaultMove
 	Inherits@MOBIMATRIX: ^cabal_upgrade_mobilitymatrix
 	Inherits@REINFORCED: ^cabal_upgrade_reinforcedchassis
+	Inherits@BACKUP: ^cabal_upgrade_backupsystems
 	Inherits@OVERCHARGE: ^cabal_upgrade_overchargedservos_vehicle
 	Valued:
 		Cost: 2250
@@ -884,6 +885,9 @@ cabal_avatar:
 	RenderSprites:
 		Image: cabal_manticore
 		PlayerPalette: player_rgba
+	SpawnActorOnDeath@backup:
+		Actor: cabal_avatar_backup
+		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_widow:
 	Inherits: ^Vehicle
@@ -967,6 +971,9 @@ cabal_legion:
 	WithMoveAnimation:
 		MoveSequence: walk
 		ValidMovementTypes: Horizontal, Turn
+	SpawnActorOnDeath@backup:
+		Actor: cabal_legion_backup
+		RequiresCondition: cabal_upgrade_backupsystems
 
 cabal_coredefender:
 	Inherits: ^Vehicle

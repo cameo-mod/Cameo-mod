@@ -1329,6 +1329,8 @@ cabal_artilleryspider_backup:
 		TurnSpeed: 0
 	Health:
 		HP: 100000
+	Repairable:
+		HpPerStep: 5000
 	Voiced:
 		VoiceSet: TSCABALVehicles
 	RenderSprites:
@@ -1391,6 +1393,88 @@ cabal_tarantula_backup:
 	TransformOnCondition@buildingrebirth:
 		RequiresCondition: buildingrebirth
 		IntoActor: cabal_tarantula
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_legion_backup:
+	Inherits: cabal_legion
+	Valued:
+		Cost: 3500
+	Tooltip:
+		Name: Legion (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 40
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 300000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: tstnkspid
+		PlayerPalette: player_rgba
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1500
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_legion
+		SkipMakeAnims: true
+	WithColoredOverlay@backup:
+		Color: 000000b4
+
+cabal_avatar_backup:
+	Inherits: cabal_avatar
+	Valued:
+		Cost: 2250
+	Tooltip:
+		Name: Avatar (Backup Mode)
+	Buildable:
+		BuildPaletteOrder: 30
+		Prerequisites: ~cabal_mechfactory, ~disabled
+		Queue: Disabled
+		Description: HuskMode
+	Mobile:
+		Locomotor: wheeled
+		TurnSpeed: 0
+		Speed: 0
+	Health:
+		HP: 200000
+	Repairable:
+		HpPerStep: 5000
+	Voiced:
+		VoiceSet: TSCABALVehicles
+	RenderSprites:
+		Image: cabal_manticore
+		PlayerPalette: player_rgba
+	WithFacingSpriteBody:
+		Sequence: stand
+	WithMoveAnimation:
+		MoveSequence: walk
+		ValidMovementTypes: Horizontal, Turn
+	-SpawnActorOnDeath@backup:
+	GrantPeriodicCondition@rebuild:
+		Condition: buildingrebirth
+		CooldownDuration: 1200
+		PauseOnCondition: chronobeamed
+	TransformOnCondition@buildingrebirth:
+		RequiresCondition: buildingrebirth
+		IntoActor: cabal_avatar
 		SkipMakeAnims: true
 	WithColoredOverlay@backup:
 		Color: 000000b4
