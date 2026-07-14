@@ -496,6 +496,8 @@ CabalHeavyReaperMissiles:
 	Inherits@4: ^HeavyMissile
 	Inherits@5: ^CabalMissile
 	ReloadDelay: 30
+	Burst: 2
+	BurstDelays: 12
 	Range: 6085
 	ValidTargets: Ground, Water
 	Report: samshot1.aud
@@ -544,6 +546,10 @@ CabalHeavyReaperMissilesAA:
 		ValidTargets: Air
 	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Air
+
+CabalHeavyReaperTrap:
+	Inherits: CabalReaperTrap
+	Range: 6085
 
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
