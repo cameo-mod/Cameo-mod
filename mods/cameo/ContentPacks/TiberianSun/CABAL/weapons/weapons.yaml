@@ -495,20 +495,98 @@ CabalReaperMissilesAA:
 
 CabalArtilleryWalkerShell:
 	Inherits: ^Grenade
-	Report: orcamis1.aud
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumCannon
+	Report: tnkfire2.aud
 	ReloadDelay: 64
 	Range: 11582
+	MinRange: 2000
+	TargetActorCenter: true
 	Projectile: Bullet
-		Image: BOMB
-		Speed: 300
-		LaunchAngle: 62
-		ContrailLength: 12
-		ContrailStartWidth: 128
-		ContrailEndWidth: 44
+		Speed: 280
+		Inaccuracy: 700
+		LaunchAngle: 70
+		ContrailLength: 28
+		ContrailStartWidth: 140
+		ContrailEndWidth: 28
+		ContrailStartColor: 0088FFFF
+		ContrailEndColor: 000040FF
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
 	Warhead@Grenade: SpreadDamage
-		Damage: 48000
+		Damage: 8000
 	Warhead@GrenadePercentage: HealthPercentageDamage
-		Damage: 24
+		Damage: 4
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 4
+
+CabalArtilleryWalkerShellUpgraded:
+	Inherits: ^Grenade
+	Inherits: ^ShrapnelWeapon
+	Inherits: ^MediumCannon
+	Inherits: ^HeavyCannon
+	Inherits: ^MediumChemicalWeapon
+	Inherits: ^TeslaChargedWeapon
+	Inherits: ^MagicWeapon
+	Inherits: ^RailgunWeapon
+	Report: tnkfire2.aud
+	ReloadDelay: 64
+	Range: 11582
+	MinRange: 2000
+	TargetActorCenter: true
+	Projectile: Bullet
+		Speed: 280
+		Inaccuracy: 700
+		LaunchAngle: 70
+		ContrailLength: 28
+		ContrailStartWidth: 160
+		ContrailEndWidth: 36
+		ContrailStartColor: FF663399
+		ContrailEndColor: FF000080
+		TrailImage: black_smokey
+		TrailPalette: effect75alpha
+	Warhead@Grenade: SpreadDamage
+		Damage: 8000
+	Warhead@GrenadePercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@ShrapnelWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@ShrapnelWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumCannon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@HeavyCannon: SpreadDamage
+		Damage: 8000
+	Warhead@HeavyCannonPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MediumChemicalWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@MediumChemicalWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@TeslaChargedWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@TeslaChargedWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@MagicWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@MagicWeaponPercentage: HealthPercentageDamage
+		Damage: 4
+	Warhead@RailgunWeapon: SpreadDamage
+		Damage: 8000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		Damage: 4
 
 CabalHunterKillerLasers:
 	Inherits: ^SmallArms
