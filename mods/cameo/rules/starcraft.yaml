@@ -1019,6 +1019,7 @@ SCMISSILETURRET:
 		PauseOnCondition: disabled
 	-ActorPreviewPlaceBuildingPreview:
 	SequencePlaceBuildingPreview:
+		Palette: ra_temperat
 		Sequence: place
 	DamageMultiplier@2x2Shape:
 		Modifier: 50
@@ -8052,6 +8053,7 @@ SCARBITER:
 	WithRangeCircle:
 		Range: 5000
 	RecallPower:
+		TargetOverlayPalette: ra_temperat
 		StartFullyCharged: true
 		OrderName: Recall
 		Prerequisites:

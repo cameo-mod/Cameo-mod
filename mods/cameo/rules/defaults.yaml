@@ -3492,6 +3492,9 @@
 		Dimensions: 1,1
 		Footprint: x
 	ActorPreviewPlaceBuildingPreview:
+		# trans.icn is authored for the RA Temperate palette.  Using the active
+		# terrain palette corrupts the white/red footprint on custom tilesets.
+		Palette: ra_temperat
 	SoundOnDamageTransition:
 		DamagedSounds: xplobig4.aud
 		DestroyedSounds: crumble.aud, xplobig4.aud
@@ -4111,6 +4114,7 @@
 		BuildSounds: hvydoor1.aud
 		TerrainTypes: Clear,ClearTemperat,ClearWinter,ClearJungle,ClearSnow,ClearDesert,Road,Concrete,ClearDune ##########
 	FootprintPlaceBuildingPreview:
+		Palette: ra_temperat
 	RequiresBuildableArea:
 		AreaTypes: building
 		Adjacent: 5
@@ -9259,6 +9263,7 @@ CPQDEBUGDUMMY:
 	Interactable:
 	Building:
 	FootprintPlaceBuildingPreview:
+		Palette: ra_temperat
 	KillsSelf:
 		RemoveInstead: true
 	RenderSprites:
