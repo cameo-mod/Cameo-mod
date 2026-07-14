@@ -3528,7 +3528,7 @@ RockExplode:
 	-Warhead@Grenade:
 	-Warhead@GrenadeFriendlyFire:
 	-Warhead@GrenadePercentage:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: d2k_building, d2k_self_destruct, d2k_large_explosion
 		ImpactActors: false
 		ExplosionPalette: effect75alpha
@@ -4038,7 +4038,7 @@ Atomic:
 		ValidTargets: Ground, Water, Air
 		AffectsParent: true
 		DamageTypes: Prone75Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -4095,7 +4095,7 @@ Atomic:
 		InvalidTargets: Vehicle, Structure, Wall
 		Size: 5
 		Delay: 3
-	Warhead@6Eff_areanukea: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: xplobig4.aud
 		Delay: 3
 		ImpactActors: false
@@ -5643,7 +5643,7 @@ RA2IMP:
 			Concrete: 50
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 
@@ -5671,7 +5671,7 @@ PlasmaPuff:
 			Concrete: 50
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 

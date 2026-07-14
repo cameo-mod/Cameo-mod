@@ -795,7 +795,7 @@ WH40KDemonFire:
 			Concrete: 30
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 DefilerQuadcannon:
@@ -1041,7 +1041,7 @@ Wh40kDeepStrikeE1:
 		RandomClusterCount: 1
 		Dimensions: 1,1
 		Footprint: x
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: meteor1.aud, meteor2.aud
 		ValidTargets: Ground, Air, Water
 
@@ -1061,12 +1061,12 @@ Wh40kDeepStrikeE1Units:
 		Explosions: small_frag
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: tspodring
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Image: wh40kcapsule
 		Explosions: idle
 		ExplosionPalette: tseffect

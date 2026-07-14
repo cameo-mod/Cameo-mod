@@ -776,7 +776,7 @@ Fireball:
 			Concrete: 30
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
@@ -806,7 +806,7 @@ FireballAA:
             Medium: 70
 			Heavy: 100
 			Concrete: 50
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: dsfirxpl.aud
 
@@ -834,7 +834,7 @@ PlasmaPuff:
 			Concrete: 50
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 
@@ -894,22 +894,22 @@ PlasmaBurst:
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 2
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: smallfire
 		ImpactSounds: firebl3.aud
-	Warhead@8Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 5
-	Warhead@9Eff_areanuke1: CreateEffect		##########
+	Warhead@Effect3: CreateEffect		##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 10
-	Warhead@10Eff_areanuke1: CreateEffect		##########
+	Warhead@Effect4: CreateEffect		##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 15
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect5: CreateEffect
 		Explosions: plasmaburst_puff
 		ImpactSounds: dsfirxpl.aud
     
@@ -940,18 +940,18 @@ Flamethrower2:
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
 		Size: 1
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: smallfire
 		ImpactSounds: firebl3.aud
-	Warhead@8Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 5
-	Warhead@9Eff_areanuke1: CreateEffect		##########
+	Warhead@Effect3: CreateEffect		##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 10
-	Warhead@10Eff_areanuke1: CreateEffect		##########
+	Warhead@Effect4: CreateEffect		##########
 		Explosions: smallfire
 		ImpactSounds:
 		Delay: 15
@@ -1130,7 +1130,7 @@ TripodPlasmaPuff:
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath
 	Warhead@3Smu_impact: LeaveSmudge
 		SmudgeType: Scorch
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: small_napalm
 		ImpactSounds: firebl3.aud
 
@@ -1159,7 +1159,7 @@ TripodPlasmaballAA:
             Medium: 70
 			Heavy: 100
 			Concrete: 50
-	Warhead@4Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: plasma_puff
 		ImpactSounds: dsfirxpl.aud
 
@@ -1174,7 +1174,7 @@ MothershipExplosion:
 			Concrete: 25
 		AffectsParent: false
 		DamageTypes: Prone50Percent, TriggerProne, ElectricityDeath, Incendiary
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: plasmaburst_puff
 		ImpactSounds: kaboom1.aud
 	Warhead@11Dam_areanuke3: SpreadDamage

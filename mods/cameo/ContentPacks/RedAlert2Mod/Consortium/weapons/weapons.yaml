@@ -1359,7 +1359,7 @@ SteelInspectorIonCannon:
 	ReloadDelay: 25
 	TargetActorCenter: true
 	Projectile: InstantExplode
-	Warhead@Beam: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: steel_empressstationbeam
 		ImpactSounds: ion1.aud
 		ValidTargets: Ground, Water, Air

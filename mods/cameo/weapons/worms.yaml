@@ -38,7 +38,7 @@ SheepExplode:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Res_impact: DestroyResource
 		Size: 1
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
@@ -56,7 +56,7 @@ SheepExplode:
 	Warhead@5Res_areanuke1: DestroyResource
 		Size: 2
 		Delay: 5
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: kaboom22.aud
 		Delay: 5
 		ImpactActors: false
@@ -145,7 +145,7 @@ WormsRockets:
 	Projectile: MissileCA
 		Image: wormrocket
 		ContrailLength: 1
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormexplode.wav, wormexplode2.wav
 		Explosions: wormexp2
 	Warhead@2DamExtra: SpreadDamage
@@ -162,7 +162,7 @@ WormsGrenade:
 	Inherits: Grenade
 	Projectile: Bullet
 		Image: wormgrenadeshp
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormexplode.wav, wormexplode2.wav
 		Explosions: wormexp2
 	Warhead@2DamExtra: SpreadDamage
@@ -202,7 +202,7 @@ SheepExplode:
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
 	Warhead@2Res_impact: DestroyResource
 		Size: 1
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: kaboom1.aud
 		ImpactActors: false
@@ -220,7 +220,7 @@ SheepExplode:
 	Warhead@5Res_areanuke1: DestroyResource
 		Size: 2
 		Delay: 5
-	Warhead@6Eff_areanuke1: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: kaboom22.aud
 		Delay: 5
 		ImpactActors: false
@@ -306,7 +306,7 @@ Atomicdonkey:
 			Light: 60
 			Heavy: 50
 		DamageTypes: Prone50Percent, TriggerProne, FireDeath, Incendiary
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: nuke_explosion
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -331,7 +331,7 @@ Atomicdonkey:
 		InvalidTargets: Vehicle, Structure, Wall
 		Size: 3
 		Delay: 3
-	Warhead@6Eff_areanukea: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: xplobig4.aud
 		Delay: 3
 		ImpactActors: false
@@ -386,7 +386,7 @@ Worms227mm:
 	Projectile: Bullet
 		Image: wormsmissile
 		ContrailLength: 1
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormexplode.wav, wormexplode2.wav
 		Explosions: wormexp2
 	Warhead@2DamExtra: SpreadDamage
@@ -431,7 +431,7 @@ WormsUZI:
 	Report: wormsuzi.wav
 	Warhead@2Eff: CreateEffect
 		Explosions: wormspiff
-	Warhead@Ricochet: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsricochet.wav
 		ImpactSoundChance: 25
 		Delay: 2
@@ -440,7 +440,7 @@ WormsVulcan:
 	Report: wormsuzi.wav
 	Warhead@2Eff: CreateEffect
 		Explosions: wormspiff
-	Warhead@Ricochet: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsricochet.wav
 		ImpactSoundChance: 10
 		Delay: 2
@@ -466,10 +466,10 @@ WormsShotGun:
 			Light: 70
 	Warhead@2Eff: CreateEffect
 		Explosions: wormspiff
-	Warhead@Reload: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: wormsshotgunr.wav
 		Delay: 10
-	Warhead@Ricochet: CreateEffect
+	Warhead@Effect2: CreateEffect
 		ImpactSounds: wormsricochet.wav
 		ImpactSoundChance: 50
 		Delay: 2

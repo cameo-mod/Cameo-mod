@@ -46,7 +46,7 @@ HeliCrash:
 		Damage: 10000
 
 HeliExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@EffectAir: CreateEffect
 		ValidTargets: Air
 		Explosions: tsexplomed
 		ExplosionPalette: tseffect
@@ -54,7 +54,7 @@ HeliExplode:
 
 LargeHeliExplode:
 	Inherits: HeliExplode
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: tsexplolrg
 
 UnitExplode:
@@ -122,7 +122,7 @@ GrenadierExplode:
 		ImpactSounds: xplosml2.aud
 
 BuildingExplode:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: building, building_napalm, med_frag, poof, small_building
 		Delay: 1
 		ImpactActors: false

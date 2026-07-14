@@ -200,7 +200,7 @@ DTMutate:
 		InvalidTargets: Vehicle, Structure, Wall, Husk, TerrorDrone
 		AffectsParent: True
 		DamageTypes: QuestionMutate
-	Warhead@2eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: controlwave
 		ExplosionPalette: ra2effect
 		ImpactSounds: sgenon.wav
@@ -209,7 +209,7 @@ DTMutate:
 DTAtomic:
 	Inherits: Atomic
 	Report: nukemisl.aud
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: dt_nuke_explosion
 	Warhead@Cluster: FireFragment
 		Weapon: GLToxinExplodeClust1

@@ -33,7 +33,7 @@ HookNullWeapon:
 	Warhead@1Dam: TargetDamage
 
 CHRadiationYellow:
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: yellow_toxins
 	Warhead@2Radiation: CreateTintedCells
 		Spread: 1c0
@@ -431,7 +431,7 @@ CHNeutronMineExplosive:
 		ValidTargets: DriverKill
 		ValidRelationships: Enemy
 		InvalidTargets: LoadedVehicle, DriverKillImmune
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: artillery_explosion
 		ImpactSounds: gexpmina.wav, gexpminb.wav
 
@@ -837,7 +837,7 @@ CHHelixNuke:
 CHBigAtomicWeapon:
 	Inherits: Atomic
 	Report: bneutlau.wav
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: sneutexp.wav
 	Warhead@14Radiation: CreateTintedCells
 		Spread: 2c512
@@ -1395,7 +1395,7 @@ CHBarrageSpawner:
 	ValidTargets: Ground, Water, Air
 	Projectile: InstantExplode
 	Warhead@Dam: TargetDamage
-	Warhead@1Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: sartweaa.wav
 	Warhead@1: FireShrapnel
 		InvalidTargets: FireImmune

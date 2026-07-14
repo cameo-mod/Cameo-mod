@@ -832,7 +832,7 @@ SCHGrinderCannon:
 	Warhead@3Eff: CreateEffect
 		Explosions: chflachetteshrapnels
 		Delay: 25
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: chgrindercannonimpact
 		Delay: 50
 		
@@ -840,7 +840,7 @@ SCHGrinderCannonMine:
 	Inherits: SCHGrinderCannon
 	ReloadDelay: 250
 	-Warhead@1Dam: SpreadDamage
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		-Explosions:
 	Warhead@mines: FireCluster
 		Delay: 50
@@ -1320,7 +1320,7 @@ SUSAPrecisionBomb:
 SUSARodsFromGods:
 	ReloadDelay: 0
 	Range: 5120
-	Warhead@1Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: rodsfromgod
 		ImpactActors: false
 	Warhead@1Dam: SpreadDamage
@@ -1351,7 +1351,7 @@ SUSARodsFromGods2:
 	Warhead@13Shake: ShakeScreen
 		Duration: 18
 		Intensity: 3
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: rodsfromgod
 		ImpactActors: false
 		Delay: 3
@@ -1364,7 +1364,7 @@ SUSARodsFromGods3:
 	Warhead@13Shake: ShakeScreen
 		Duration: 24
 		Intensity: 4
-	Warhead@3Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: rodsfromgod
 		ImpactActors: false
 		Delay: 5
@@ -1372,7 +1372,7 @@ SUSARodsFromGods3:
 SUSAHyperSonicMissile:
 	ReloadDelay: 0
 	Range: 5120
-	Warhead@1Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		ImpactActors: false
 	Warhead@1Dam: SpreadDamage
@@ -2311,7 +2311,7 @@ SGLASCUDPOWER:
 sglatomic:
 	Inherits: Atomic
 	Report: snuklaun.wav
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: ra2nuke
 		ExplosionPalette: ra2effect
 		ImpactSounds: snukexpl.wav
@@ -2761,7 +2761,7 @@ RADTankDropBarrels:
 		LayerName: genradiation
 	Warhead@3Eff: CreateEffect
 		Explosions: radbarreldrop
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		Delay: 40
 		
@@ -2911,49 +2911,49 @@ SCHHammerCannonSeismic:
 		Delay: 50
 		Spread: 1c512
 		Damage: 2500
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Delay: 50
 		Explosions: susaseismiceffects
 	Warhead@4Dam: SpreadDamage
 		Delay: 75
 		Spread: 1c512
 		Damage: 2500
-	Warhead@6Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Delay: 75
 		Explosions: susaseismiceffects
 	Warhead@5Dam: SpreadDamage
 		Delay: 100
 		Spread: 1c512
 		Damage: 2500
-	Warhead@7Eff: CreateEffect
+	Warhead@Effect3: CreateEffect
 		Delay: 100
 		Explosions: susaseismiceffects
 	Warhead@6Dam: SpreadDamage
 		Delay: 125
 		Spread: 3c512
 		Damage: 10000
-	Warhead@8Eff: CreateEffect
+	Warhead@Effect4: CreateEffect
 		Delay: 125
 		Explosions: susaseismiceffects
 	Warhead@7Dam: SpreadDamage
 		Delay: 150
 		Spread: 3c512
 		Damage: 10000
-	Warhead@9Eff: CreateEffect
+	Warhead@Effect5: CreateEffect
 		Delay: 150
 		Explosions: susaseismiceffects
 	Warhead@8Dam: SpreadDamage
 		Delay: 175
 		Spread: 3c512
 		Damage: 10000
-	Warhead@10Eff: CreateEffect
+	Warhead@Effect6: CreateEffect
 		Delay: 175
 		Explosions: susaseismiceffects
 	Warhead@9Dam: SpreadDamage
 		Delay: 200
 		Spread: 3c512
 		Damage: 10000
-	Warhead@11Eff: CreateEffect
+	Warhead@Effect7: CreateEffect
 		Delay: 200
 		Explosions: susaseismiceffects
 	Warhead@Con: GrantExternalCondition
@@ -3064,7 +3064,7 @@ SCHAnvilTank:
 	Warhead@3Dam: SpreadDamage
 		Spread: 3c0
 		Damage: 5000
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: susaseismiceffects
 	Warhead@1Shake: ShakeScreen
 		Duration: 20
@@ -3171,7 +3171,7 @@ SCHIronDragon:
 		InvalidTargets: FireImmune
 		Weapon: CHInfernoCannonC
 		Amount: 8
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: napalm
 		ImpactSounds: firebl3.aud
 	Warhead@3Eff: CreateEffect

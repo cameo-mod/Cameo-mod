@@ -544,7 +544,7 @@ angellightning:
 		Delay: 92
 		SmudgeType: Scorch
 		InvalidTargets: Vehicle, Structure, Wall
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: angellightning
 		ImpactSounds: angellightning.aud
 
@@ -788,7 +788,7 @@ McNealMechDrop:
 		RandomClusterCount: 1
 		Dimensions: 5,5
 		Footprint: _____ x____ x____ x____ _xxx_
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: meteor1.aud, meteor2.aud
 		ValidTargets: Ground, Air, Water
 
@@ -807,12 +807,12 @@ McNealMechDrop1:
 		Explosions: small_frag
 		ImpactSounds: expnew12.aud
 		ValidTargets: Ground, Air, Water
-	Warhead@4Eff: CreateEffect
+	Warhead@Effect: CreateEffect
 		Image: tspodring
 		Explosions: idle
 		ExplosionPalette: tseffect
 		ValidTargets: Ground, Air, Water
-	Warhead@5Eff: CreateEffect
+	Warhead@Effect2: CreateEffect
 		Image: tsmcnealmechdrop
 		Explosions: idle
 		ValidTargets: Ground, Air, Water

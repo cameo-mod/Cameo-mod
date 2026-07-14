@@ -887,7 +887,7 @@ SWNapalm3:
 SWAtomic:
 	Inherits: Atomic
 	Report: swnukemisl.aud
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		Explosions: swatomsfx
 		ImpactSounds: nukexplo.aud
 		ImpactActors: false
@@ -897,7 +897,7 @@ SWDeathStar:
 	Warhead@1Dam_impact: SpreadDamage
 		Range: 1c1, 3c1, 4c1, 5c1
 		Damage: 15000
-	Warhead@2Eff_impact: CreateEffect
+	Warhead@Effect: CreateEffect
 		ImpactSounds: nukexplo.aud
 SWLAATMissile:
 	Inherits: ^MissileWeapon
