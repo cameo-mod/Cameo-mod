@@ -553,7 +553,7 @@ cabal_scarabapc:
 		Speed: 75
 		Locomotor: hover
 		RequiresCondition: !notmobile && !disabled
-		TurnSpeed: 15
+		TurnSpeed: 30
 	Hovers:
 	Health:
 		HP: 30000
@@ -617,7 +617,7 @@ cabal_berserker:
 		Description: actor_cabal_berserker.description
 	Mobile:
 		Speed: 60
-		TurnSpeed: 12
+		TurnSpeed: 24
 		PauseOnCondition: disabled
 	Health:
 		HP: 800000
@@ -908,7 +908,7 @@ cabal_widow:
 		Description: actor_cabal_widow.description
 	Mobile:
 		Locomotor: wheeled
-		TurnSpeed: 14
+		TurnSpeed: 28
 		Speed: 70
 	Health:
 		HP: 80000

@@ -20,7 +20,7 @@ cabal_overkill_gunship:
 		Prerequisites: ~cabal_helipad, cabal_promotion_overkillgunship
 		Description: actor_cabal_overkill_gunship.description
 	Aircraft:
-		TurnSpeed: 29
+		TurnSpeed: 30
 		Speed: 149
 		InitialFacing: 0
 		TakeoffSounds: dropup1.aud
@@ -430,7 +430,7 @@ cabal_hunterkillermk1_elite:
 		Description: actor_cabal_hunterkillermk1_elite.description
 	Aircraft:
 		Speed: 168
-		TurnSpeed: 32
+		TurnSpeed: 34
 		TakeoffSounds: orcaup1.aud
 		LandingSounds: orcadwn1.aud
 		AltitudeVelocity: 128

@@ -606,21 +606,44 @@ CabalHunterKillerLasers:
 		ValidTargets: Ground, Water, Air
 
 CabalHunterKillerLasersElite:
-	Inherits: CabalHunterKillerLasers
+	Inherits: ^LaserWeapon
+	Inherits@2: ^RailgunWeapon
+	Inherits@3: ^HeavyMissile
 	ReloadDelay: 20
 	Range: 6000
-	Warhead@MediumMissile: SpreadDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 10000
-	Warhead@MediumMissilePercentage: HealthPercentageDamage
-		ValidTargets: Ground, Water, Air
-		Damage: 5
+	ValidTargets: Ground, Water, Air
+	Projectile: LaserZap
+		Width: 60
+		ZOffset: 2047
+		Color: 77DD22CC
+		SecondaryBeam: true
+		SecondaryBeamWidth: 28
+		SecondaryBeamZOffset: 2047
+		SecondaryBeamColor: 2A2A55DD
+	Report: lastur1.aud
 	Warhead@LaserWeapon: SpreadDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 10000
 	Warhead@LaserWeaponPercentage: HealthPercentageDamage
 		ValidTargets: Ground, Water, Air
 		Damage: 5
+	Warhead@RailgunWeapon: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@HeavyMissile: SpreadDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 10000
+	Warhead@HeavyMissilePercentage: HealthPercentageDamage
+		ValidTargets: Ground, Water, Air
+		Damage: 5
+	Warhead@Effect: CreateEffect
+		Image: cabal_laserimpact_m
+		Explosions: idle
+		ImpactSounds: drtelectro.wav
+		ValidTargets: Ground, Water, Air
 
 CabalHunterKillerHeavyLaser:
 	Inherits: ^LaserWeapon

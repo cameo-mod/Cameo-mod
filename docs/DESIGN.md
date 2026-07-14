@@ -568,8 +568,8 @@ steps so the house formulas stay integral:
   turreted units turn at **`TurnSpeed = Speed / 5`**. Infantry normally turns
   instantly, but CABAL cyborg infantry use the vehicle fixed-weapon rule
   because they carry forward-facing weapons.
-- **TurnSpeed (aircraft):** helicopters use **`Speed / 5`**; spaceships use
-  **`2 × Speed / 5`**.
+- **TurnSpeed (aircraft):** helicopters and spaceships both use
+  **`Speed / 5`**.
 - ReloadDelay: any integer.
 - **Beautiful ranges are kept**: if Range is exactly 6.000 or 7.500,
   adjust the other stats, not the range.
