@@ -833,7 +833,7 @@ forgotten_crystalpowerextractor:
 		Length: 31
 		Tick: 200
 	make:
-		Filename: tampowrmk.shp
+		Filename: tampowrmake.shp
 	icon:
 		Filename: tsnpwricon.shp
 		Offset: 0, 0, 25
@@ -875,7 +875,7 @@ forgotten_barracks:
 		Length: *
 		Tick: 200
 	make:
-		Filename: tambarmk.shp
+		Filename: tambarmake.shp
 	icon:
 		Filename: ts_nod_handof_icon.png
 		Offset: 0, 0
@@ -907,7 +907,7 @@ forgotten_radar:
 		Length: *
 		Tick: 240
 	make:
-		Filename: tamradrmk.shp
+		Filename: tamradrmake.shp
 		Length: 17
 	icon:
 		Filename: ts_gdi_radar_icon.shp
@@ -938,7 +938,7 @@ forgotten_church:
 		Length: *
 		Tick: 240
 	make:
-		Filename: tamtechmk.shp
+		Filename: tamtechmake.shp
 	icon:
 		Filename:  ts_gdi_techcenter_icon.png
 		Offset: 0, 0
@@ -959,9 +959,9 @@ forgotten_refinery:
 		ShadowStart: 5
 		Tick: 400
 	make:
-		Filename: tamrefmk.shp
+		Filename: tamrefmake.shp
 	unload-overlay:
-		Filename: tamrefbb.shp
+		Filename: tamref_bib.shp
 		Length: *
 		ZOffset: 1024
 	idle-redlights:

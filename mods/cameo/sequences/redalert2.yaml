@@ -2079,7 +2079,7 @@ ra2nayard:
 		Length: 18
 		ShadowStart: 54
 	make:
-		Filename: ra2_ntyardmk.shp
+		Filename: ra2_ntyardmake.shp
 		Length: 25
 		ShadowStart: 25
 	dead:
@@ -2308,7 +2308,7 @@ ra2caoild.husk:
 		Filename: ra2_ctoild_f.shp
 		Length: 8
 	make:
-		Filename: ra2_cgoildmk.shp
+		Filename: ra2_cgoildmake.shp
 		Length: 14
 		ShadowStart: 14
 	bib:
@@ -2552,11 +2552,11 @@ ra2_cgtbnk:
 	Defaults:
 		Offset: 0,-28
 	idle:
-		Filename: ra2_cgtbnkbb.shp
+		Filename: ra2_cgtbnkbib.shp
 		Length: 1
 		ShadowStart: 3
 	damaged-idle:
-		Filename: ra2_cgtbnkbb.shp
+		Filename: ra2_cgtbnkbib.shp
 		Start: 1
 		Length: 1
 		ShadowStart: 4
@@ -2592,7 +2592,7 @@ ra2_cgtbnk:
 	make:
 		Filename: invisibleitem.shp
 	dead:
-		Filename: ra2_cgtbnkbb.shp
+		Filename: ra2_cgtbnkbib.shp
 		Start: 1
 		Length: 1
 	icon:
@@ -2618,10 +2618,10 @@ ra2_ctoutp:
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: ra2_ctoutpbb.shp
+		Filename: ra2_ctoutp_bib.shp
 		ZOffset: -512
 	damaged-bib:
-		Filename: ra2_ctoutpbb.shp
+		Filename: ra2_ctoutp_bib.shp
 		ZOffset: -512
 	make:
 		Filename: ra2_allies_alliedservicedepot_make.shp
@@ -2668,10 +2668,10 @@ ra2_ctoutp.husk:
 		Start: 1
 		ShadowStart: 3
 	bib:
-		Filename: ra2_ctoutpbb.shp
+		Filename: ra2_ctoutp_bib.shp
 		ZOffset: -512
 	damaged-bib:
-		Filename: ra2_ctoutpbb.shp
+		Filename: ra2_ctoutp_bib.shp
 		ZOffset: -512
 	make:
 		Filename: ra2_allies_alliedservicedepot_make.shp
@@ -8234,7 +8234,7 @@ ra2caoild:
 		Filename: ra2_ctoild_f.shp
 		Length: 8
 	make:
-		Filename: ra2_cgoildmk.shp
+		Filename: ra2_cgoildmake.shp
 		Length: 14
 		ShadowStart: 14
 	bib:

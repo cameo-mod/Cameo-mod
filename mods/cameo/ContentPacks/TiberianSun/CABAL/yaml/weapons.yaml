@@ -1872,7 +1872,6 @@ CabalCommandoPlasmaNeutron:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@Effect: CreateEffect
-		Image: magicnuke
 		Explosions: magicnuke_med
 		ImpactSounds: expnew12.aud
 
@@ -1899,7 +1898,6 @@ CabalCommandoPlasmaMk2Neutron:
 	Warhead@RailgunWeaponPercentage: HealthPercentageDamage
 		Damage: 25
 	Warhead@Effect: CreateEffect
-		Image: magicnuke
 		Explosions: magicnuke_med
 		ImpactSounds: expnew12.aud
 
@@ -1911,7 +1909,6 @@ CabalRavagerPlasmaNeutron:
 		Shadow: false
 		Image: cabal_plasmabullet
 	Warhead@Effect: CreateEffect
-		Image: magicnuke
 		Explosions: magicnuke_small
 		ImpactSounds: expnew12.aud
 
