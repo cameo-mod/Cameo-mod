@@ -362,12 +362,12 @@ actor_cabal_promotion_mothership =
    .description = Promotion
       Unlocks the promoted unit for production.
 
-actor-cabal_core =
+actor_cabal_core =
    .description = CABAL Core.
       Unlocks Tier 4 units and the CABAL superweapon.
       Generates income and counts as a captured tech structure.
 
-actor-cabal_techcenter =
+actor_cabal_techcenter =
    .description = CABAL Tech Center.
       Required for advanced units and upgrades.
 

@@ -369,7 +369,7 @@ cabal_techcenter:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
 		Prerequisites: ~cabal_constructionyard, cabal_radar
-		Description: actor-cabal_techcenter.description
+		Description: actor_cabal_techcenter.description
 		BuildLimit: 1
 	Tooltip:
 		Name: CABAL Tech Center
@@ -474,7 +474,7 @@ cabal_core:
 		Queue: Building, RABuilding
 		BuildPaletteOrder: 150
 		Prerequisites: ~cabal_constructionyard, cabal_techcenter
-		Description: actor-cabal_core.description
+		Description: actor_cabal_core.description
 	Tooltip:
 		Name: CABAL Core
 	Building:
